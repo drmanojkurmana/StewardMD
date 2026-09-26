@@ -424,6 +424,46 @@ test("OPS-13/F13: an UNSUPPORTED-type entry gets a real 400 response entry, neve
   assert.ok(r.entry.some((e) => e.response.status === "409 Conflict" && /conflict-encounter-mismatch/.test(e.response.outcome.issue[0].diagnostics)), "OBS-BAD is still held, not silently dropped either");
 });
 
+test("OPS-13/F13 round 2: written, conflict, precondition-failed and unsupported entries land at their true request index, SHUFFLED", async () => {
+  seed(); await grant("lab-a");
+  await localPatient("pat-1", "MRN-1", "First Patient");
+  await localPatient("pat-2", "MRN-2", "Second Patient");
+  await push(bundle("MRN-2", [{ resourceType: "Encounter", id: "EXT-ENC-9", status: "in-progress", class: { code: "IMP" }, subject: { reference: "Patient/EXT-1" } }], { id: "b-admit" }));
+
+  // Before round 2, only unsupported entries carried their real request index; a written, conflict,
+  // or precondition-failed entry kept whatever order it happened to RESOLVE in - Patient always
+  // first (byDependency), then conflicts, then preconditions, in bundle-grouping order, never the
+  // sender's own order. Every category is deliberately placed OUT of that resolution order here, so
+  // a test that just checked "the right response.status values are all present somewhere" (as the
+  // round-1 test above does) could not catch this: response.entry[i] must equal request.entry[i].
+  //
+  // The Patient below is a NEW one (MRN-3 matches no local patient), so it is written and gets its
+  // OWN response entry too - every one of the 5 request entries below produces exactly one response
+  // entry, so positional correspondence can be checked across the whole bundle.
+  const tx = {
+    resourceType: "Bundle", type: "collection", id: "b-shuffled",
+    entry: [
+      { resource: { resourceType: "Procedure", id: "PROC-1", status: "completed", subject: { reference: "Patient/EXT-1" } } },   // 0: unsupported
+      { resource: obs("OBS-PRECOND"), request: { method: "PUT", url: "Observation/OBS-PRECOND", ifMatch: 'W/"5"' } },            // 1: precondition-failed (never existed; If-Match names version 5)
+      { resource: { resourceType: "Patient", id: "EXT-1", identifier: [{ system: "urn:test:mrn", type: { coding: [{ code: "MR" }] }, value: "MRN-3" }], name: [{ family: "Testcase", given: ["Shuffled"] }], birthDate: "1980-01-01", gender: "female" } }, // 2: written (new patient)
+      { resource: obs("OBS-BAD", { encounter: "EXT-ENC-9" }) },                                                                  // 3: conflict (another patient's visit)
+      { resource: obs("OBS-GOOD") },                                                                                             // 4: written
+    ],
+  };
+  const r = await push(tx);
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.equal(r.entry.length, 5, "every request entry gets exactly one response entry");
+  assert.equal(r.entry[0].response.status, "400 Bad Request", "0: PROC-1, unsupported");
+  assert.match(r.entry[0].response.outcome.issue[0].diagnostics, /Procedure/);
+  assert.equal(r.entry[1].response.status, "412 Precondition Failed", "1: OBS-PRECOND, If-Match names a version that never existed");
+  assert.equal(r.entry[2].response.status, "201 Created", "2: the new Patient");
+  assert.match(r.entry[2].response.location, /^https:\/\/x\/api\/queue\/ward\/fhir\/Patient\//, JSON.stringify(r.entry[2]));
+  assert.equal(r.entry[3].response.status, "409 Conflict", "3: OBS-BAD, another patient's visit");
+  assert.match(r.entry[3].response.outcome.issue[0].diagnostics, /conflict-encounter-mismatch/);
+  assert.equal(r.entry[4].response.status, "201 Created", "4: OBS-GOOD");
+  assert.match(r.entry[4].response.location, /Observation\/fhir-lab-a-obs-obs-good/);
+});
+
 /* ---- 9. replay ------------------------------------------------------------------------------ */
 
 test("9. REPLAY: the identical message twice writes once; a CHANGED message is judged on its own merits", async () => {
