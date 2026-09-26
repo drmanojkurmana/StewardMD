@@ -61,10 +61,10 @@ function plans(env) {
        * this ladder depends on, so don't "tidy" them:
        *  - Every annual is 10x the monthly (two months free). 8x was tested and drops Physician below
        *    the 50% margin floor once the included FollowCare/Scribe quotas are paid for.
-       *  - `regular` is the price actually charged until 2026-09-17, which is what makes the
-       *    strike-through on the paywall a true comparison rather than invented urgency. */
-      physician: { months: 1, amount: P("PHYSICIAN_PRICE_MONTHLY", 74900), annual: P("PHYSICIAN_PRICE_ANNUAL", 749900), regular: P("PHYSICIAN_REGULAR", 149900), label: "Physician" },
-      physicianpro: { months: 1, amount: P("PHYSICIANPRO_PRICE_MONTHLY", 89900), annual: P("PHYSICIANPRO_PRICE_ANNUAL", 899900), regular: P("PHYSICIANPRO_REGULAR", 249900), label: "Physician Pro", premium: true },
+       *  - `regular` is the struck-through anchor. Owner 2026-09-26: Physician (Clinician) Rs 3,499 and
+       *    Physician Pro (Clinician Pro) Rs 4,999. See vault/Role-Tiers.md section 10. */
+      physician: { months: 1, amount: P("PHYSICIAN_PRICE_MONTHLY", 74900), annual: P("PHYSICIAN_PRICE_ANNUAL", 749900), regular: P("PHYSICIAN_REGULAR", 349900), label: "Physician" },
+      physicianpro: { months: 1, amount: P("PHYSICIANPRO_PRICE_MONTHLY", 89900), annual: P("PHYSICIANPRO_PRICE_ANNUAL", 899900), regular: P("PHYSICIANPRO_REGULAR", 499900), label: "Physician Pro", premium: true },
     },
     addons: {
       onco: { amount: P("ONCO_ADDON_MONTHLY", 8900), label: "Physician Onco" },

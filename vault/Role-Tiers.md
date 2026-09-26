@@ -285,6 +285,12 @@ cannot transcribe and `voice.js` sends the audio to `/api/ai/transcribe`: 300 s 
 **Assumed, not measured:** platform overhead Rs 8/user/month, OPD infra Rs 10, hosted clinic Rs 50.
 Recalibrate every number from AI Control Center actuals after 30 days of real use.
 
+**Owner, 2026-09-26 (later):** struck-through `regular` for Clinician Rs 3,499 and Clinician Pro
+Rs 4,999 (set in `plans()` defaults and `wrangler.toml`). Cloud dictation fallback locked behind its
+own monthly credit: Free Rs 10, Pro accounts Rs 50, Clinician / Clinician Pro Rs 100 (BUILT, see
+[[MaiK Scribe]] and [[Flags]]). Trainee and Co-Resident are treated as "Pro accounts" (Rs 50);
+Ultimate as Clinician (Rs 100).
+
 Allowances from 2026-12-26 (sized so full use keeps 80% on iOS; prices unchanged):
 
 | Plan | Price / month | Annual | Included per month | Cost at full use | Margin iOS | Margin web |

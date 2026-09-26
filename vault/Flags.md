@@ -122,6 +122,11 @@ On the NATIVE app there is no address bar, so the query param is unreachable —
 A reinstall clears `localStorage`, so an override does NOT survive one: after a reinstall the
 default (ON) is what you get.
 
+## Cloud dictation fallback credit (server env), ON since 2026-09-26
+| Switch | Def | Why |
+|---|---|---|
+| `STT_FALLBACK_CREDITS_ON` | **ON** (`"0"` = off) | Owner: the cloud speech-to-text fallback (`/api/ai/transcribe`, used only when the phone cannot transcribe) is cut from its own monthly rupee wallet: Free Rs 10, Pro accounts Rs 50, Clinician / Clinician Pro Rs 100. `functions/_stt_fallback.js`. Sizes: `STT_FALLBACK_PAISE_FREE/PRO/CLINICIAN`. Settable in env or KV `billing:cfg.flags`. |
+
 ## Everything, by module
 
 ### CliniX  <sub>5 ON · 2 OFF</sub>

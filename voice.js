@@ -281,7 +281,7 @@
     } catch (e) {}
     // 3) AI STT fallback — record mic, transcribe on stop via /api/ai/transcribe.
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder) {
-      var chunks = [], mr = null, stream = null, stopped = false;
+      var chunks = [], mr = null, stream = null, stopped = false, recT0 = 0;
       _active = { engine: "AI", mode: "record", stop: function () { if (stopped) return; stopped = true; try { if (mr && mr.state !== "inactive") mr.stop(); } catch (e) {} } };
       navigator.mediaDevices.getUserMedia({ audio: true }).then(function (s) {
         stream = s; mr = new MediaRecorder(s);
@@ -291,14 +291,14 @@
           var blob = new Blob(chunks, { type: mr.mimeType || "audio/webm" });
           if (opts.onState) opts.onState("transcribing", "AI");
           blobToDataURL(blob).then(function (dataUrl) {
-            (window.SMD_AI && window.SMD_AI.transcribe ? window.SMD_AI.transcribe(dataUrl) : Promise.resolve({ error: "no-ai" })).then(function (res) {
+            (window.SMD_AI && window.SMD_AI.transcribe ? window.SMD_AI.transcribe(dataUrl, { durationMs: recT0 ? Date.now() - recT0 : 0 }) : Promise.resolve({ error: "no-ai" })).then(function (res) {
               if (res && res.transcript != null && !res.error) { if (opts.onFinal) opts.onFinal(String(res.transcript)); }
               else if (opts.onError) opts.onError((res && res.error) || "transcription-failed");
               if (opts.onState) opts.onState("idle", "AI");
             });
           });
         };
-        mr.start();
+        mr.start(); recT0 = Date.now();
         if (opts.onState) opts.onState("recording", "AI");
       }).catch(function () { if (opts.onError) opts.onError("mic-denied"); if (opts.onState) opts.onState("idle", "AI"); });
       return _active;
@@ -553,6 +553,7 @@
             err === "stt-unavailable" ? "Dictation isn't available on this build of the app." :
             // Local answer engine selected: audio may not go to a cloud transcriber (2026-09-11).
             err === "stt-unavailable-local" ? "Cloud dictation is off while the on-device answer engine is selected. Use Clinical dictation (on the phone), or switch the answer engine to MaiK Cloud in Settings." :
+            err === "stt-fallback-exhausted" ? "This month's cloud dictation credit is used up. Use Clinical dictation (on the phone): it is free and unlimited." :
             err === "stt-unavailable-offline" ? "No connection for cloud dictation. Use Clinical dictation (on the phone) until the network is back." :
             "Couldn't capture audio — tap to try again.");
         },

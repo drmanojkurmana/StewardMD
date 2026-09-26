@@ -5,6 +5,17 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-26 · Cloud dictation fallback gets its own monthly credit; Clinician struck prices
+
+**Decision (owner).** The cloud speech-to-text fallback (audio sent to `/api/ai/transcribe` only when
+the phone cannot transcribe, about Rs 6 per 5-minute consult) is cut from a separate monthly rupee
+wallet: Free Rs 10, Pro accounts Rs 50, Clinician / Clinician Pro Rs 100. On-device dictation stays
+free and unlimited. Struck-through anchors: Clinician Rs 3,499, Clinician Pro Rs 4,999.
+**Why.** The fallback is the only dictation path that costs real money per second; a wallet caps it
+without touching the free on-device path. **Trade-off.** A doctor whose phone cannot run Whisper
+runs out mid-month and is told to use on-device dictation. **Status.** Built behind
+`STT_FALLBACK_CREDITS_ON` (default ON, `"0"` off); live only after merge to main.
+
 ## 2026-09-26 · Role-based plans: Co-Resident = two logins, one Trainee price, existing Pro becomes Ultimate
 
 **Decision (owner).** (1) Co-Resident is one subscription with two logins, one device each, not one
