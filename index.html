@@ -72,7 +72,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/queue.css?v=q13-profilescroll-prio1-fr1">
 <link rel="stylesheet" href="/ward.css?v=ward36-rcm-fr1">
 <link rel="stylesheet" href="/discharge.css?v=dis4-clinforms-fr1">
-<link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2-icdsug1-scribe18-proto3-kits2-fr1">
+<link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2-icdsug1-scribe18-proto3-kits2-fr1-assign1">
 <link rel="stylesheet" href="/atlas.css?v=atlas6">
 <link rel="stylesheet" href="/atlas3d.css?v=a3d5-fr1">
 <link rel="stylesheet" href="/onco-home.css?v=op8-qafit3-fr1">
@@ -2263,7 +2263,7 @@ window.openExternal = function (u) {
 <link rel="stylesheet" href="/reasoning-workspace.css?v=kbbrand2-fr1">
 <link rel="stylesheet" href="/knowledge-library.css?v=klall6-kbbrand2">
 <link rel="stylesheet" href="/kb-protocols.css?v=kbp3">
-<link rel="stylesheet" href="/specialty-kits.css?v=kits3">
+<link rel="stylesheet" href="/specialty-kits.css?v=kits4">
 <link rel="stylesheet" href="/clinical-docs.css?v=docs2">
 <script src="/icu-monitor-parser.js?v=hardlocal3" defer></script>
 <script src="/phi-india.js?v=phiindia1" defer></script>
@@ -2271,8 +2271,8 @@ window.openExternal = function (u) {
 <!-- Knowledge Library Protocols tab: clinical protocols across specialties (kb/clinical-protocols/).
      Flag smd_kb_protocols (default ON, ?kbproto=0 hides it). The kb-protocols.js ?v= token is kept in
      step with the content hash by scripts/build-clinical-protocols.mjs. -->
-<script src="/kb-protocols-flags.js?v=kbpf1" defer></script>
-<script src="/kb-protocols.js?v=kbp3.01580d845968" defer></script>
+<script src="/kb-protocols-flags.js?v=kbpf2" defer></script>
+<script src="/kb-protocols.js?v=kbp4.01580d845968" defer></script>
 <!-- Clinical documents (certificates, consent forms, handouts, MLC, MCCD draft). Flag smd_clinical_docs
      (default ON, ?docs=0). Token kept in step with kb/documents/documents.json by scripts/build-documents.mjs. -->
 <script src="/clinical-docs.js?v=docs3.598e7e3c41bc" defer></script>
@@ -2287,7 +2287,7 @@ window.openExternal = function (u) {
      specialty-kits.js ?v= token is kept in step with the kit + WHO growth data hashes by
      scripts/build-specialty-kits.mjs. -->
 <script src="/specialty-kits-flags.js?v=kitsf1" defer></script>
-<script src="/specialty-kits.js?v=kits5.286fc2ed2b" defer></script>
+<script src="/specialty-kits.js?v=kits6.286fc2ed2b" defer></script>
 <script src="/renal-dose.js?v=rd1" defer></script>
 <!-- Privacy PR-A: SMD_PRIVACY config (version constants) + consent gate / versioned Privacy Notice
      (SMD_CONSENT). Loads after reasoning.js so it can guard SMD_AI. Reversible via localStorage
@@ -2726,7 +2726,7 @@ window.openExternal = function (u) {
 <script src="/onco-protocol-report.js?v=onco1" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=hardlocal3-opdcols1-imm1-r6-1-scribe18-sid1-nerdx1-nodash1-proto3-kits3" defer></script>
+<script src="/opd-emr.js?v=hardlocal3-opdcols1-imm1-r6-1-scribe18-sid1-nerdx1-nodash1-proto3-kits3-assign1" defer></script>
 <!-- My Clinic — on-device EMR for personal clinics (reuses opd-emr's form; flag smd_personal_clinic). -->
 <script src="/personal-clinic.js?v=gold6" defer></script>
 <!-- Shared Clinic — multi-device encrypted EMR for clinics/small hospitals with no EMR (flag
@@ -2785,7 +2785,7 @@ window.openExternal = function (u) {
 <script src="/assets/vendor/motion.min.js?v=motion10" defer></script>
 <script src="/oncotree-engine.js?v=ot5" defer></script>
 <script src="/oncotree-recommend.js?v=ot5" defer></script>
-<script src="/oncotree.js?v=nccn-nav9-ci1" defer></script>
+<script src="/oncotree.js?v=nccn-nav9-ci1-handoff1" defer></script>
 <script src="/protocol-sheet.js?v=ps6-fr1" defer></script>
 <script src="/protocol-maker.js?v=pm2" defer></script>
 <!-- StewardMD ID · the account's permanent SMD-XXXXXX handle. The ID itself is

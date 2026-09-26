@@ -245,6 +245,102 @@
       (meta ? '<div class="kbp-metas">' + meta + "</div>" : "") + '<p class="kbp-summary">' + esc(p.summary) + "</p></header>" +
       statusHTML(p) + twin + '<nav class="kbp-toc" aria-label="Jump to section">' + toc.join("") + "</nav>" + secs + drugs + sources + "</div>";
   }
+  /* ---- assign: a protocol as case-sheet instructions (flag smd_protocol_assign) ------------------
+   * Everything here is PURE (no DOM, no state, unit-tested): the host owns the patient record.
+   *
+   * assignLines(p)      one tickable line per instruction, each carrying the case-sheet field it
+   *                     belongs in and whether it starts ticked. Recognise / special situations /
+   *                     pitfalls and the drug doses start UNticked: they are reading matter or need a
+   *                     deliberate choice, not a default order.
+   * assignText(p, ids)  the blocks to append, per field, in case-sheet format (numbered, grouped by
+   *                     the protocol's own section headings, with the sources named).
+   * Nothing is prescribed or ordered: the doctor ticks each line, edits the text in the form, and the
+   * normal Save writes it, exactly as the specialty kit's "Add to ..." works.
+   */
+  var PLAN_FIELD = "management_plan", ADVICE_FIELD = "diet_lifestyle_advice";
+  // kind -> [case-sheet field, ticked by default]
+  var ASSIGN_KIND = {
+    immediate: [PLAN_FIELD, true], treatment: [PLAN_FIELD, true], investigations: [PLAN_FIELD, true],
+    monitoring: [PLAN_FIELD, true], escalate: [PLAN_FIELD, true], disposition: [PLAN_FIELD, true],
+    prevention: [ADVICE_FIELD, true], recognise: [PLAN_FIELD, false], special: [PLAN_FIELD, false],
+    pitfalls: [PLAN_FIELD, false]
+  };
+  var FIELD_LABEL = {}; FIELD_LABEL[PLAN_FIELD] = "Management plan"; FIELD_LABEL[ADVICE_FIELD] = "Diet & lifestyle advice";
+  function assignLines(p) {
+    var out = [];
+    ((p && p.sections) || []).forEach(function (s, si) {
+      var rule = ASSIGN_KIND[s.kind] || [PLAN_FIELD, false];
+      (s.items || []).forEach(function (it, ii) {
+        out.push({ id: "s" + si + "-" + ii, kind: s.kind, kindLabel: KINDS[s.kind] || s.kind,
+          group: s.title || KINDS[s.kind] || s.kind, text: String(it), field: rule[0], on: rule[1] });
+      });
+    });
+    ((p && p.drugs) || []).forEach(function (d, di) {
+      var t = [d.name, d.dose].filter(Boolean).join(": ");
+      if (d.notes) t += (/[.!?]$/.test(t) ? " " : ". ") + d.notes;
+      out.push({ id: "d" + di, kind: "drugs", kindLabel: "Drugs", group: "Key drugs and doses",
+        text: t, field: PLAN_FIELD, on: false });
+    });
+    return out;
+  }
+  /** ids: array (or map) of the line ids the doctor ticked. Returns { blocks:[{field,label,text}], count }. */
+  function assignText(p, ids) {
+    var want = {};
+    if (ids && ids.length != null) { for (var i = 0; i < ids.length; i++) want[ids[i]] = true; }
+    else { for (var k in (ids || {})) if (ids[k]) want[k] = true; }
+    var lines = assignLines(p).filter(function (l) { return want[l.id]; });
+    if (!lines.length) return { blocks: [], count: 0 };
+    var src = ((p && p.sources) || []).slice(0, 2).map(function (x) {
+      return x.title + " (" + [x.org, x.year].filter(Boolean).join(", ") + ")";
+    }).join("; ");
+    var order = [PLAN_FIELD, ADVICE_FIELD], blocks = [];
+    order.forEach(function (field) {
+      var mine = lines.filter(function (l) { return l.field === field; });
+      if (!mine.length) return;
+      var head = "Protocol: " + (p.title || p.id) + (BASIS[p.basis] ? " (" + BASIS[p.basis] + " guidelines)" : "");
+      var body = [], n = 0, last = "";
+      mine.forEach(function (l) {
+        if (l.group !== last) { body.push(l.group + ":"); last = l.group; }
+        n++; body.push(n + ". " + l.text);
+      });
+      var foot = field === PLAN_FIELD
+        ? "Verify every dose and threshold against the source and your local protocol." + (src ? " Source: " + src + "." : "")
+        : "";
+      blocks.push({ field: field, label: FIELD_LABEL[field] || field, count: mine.length,
+        text: [head].concat(body).concat(foot ? [foot] : []).join("\n") });
+    });
+    return { blocks: blocks, count: lines.length };
+  }
+  /** The tick list. opts: { act(cmd) -> the host's action attribute, disabled, note }. */
+  function assignHTML(p, sel, opts) {
+    opts = opts || {}; sel = sel || {};
+    var act = opts.act || function (cmd) { return 'data-kbp-act="' + esc(cmd) + '"'; };
+    var lines = assignLines(p), n = 0, last = "", rows = "";
+    lines.forEach(function (l) {
+      if (l.group !== last) { rows += '<div class="kbp-as-grp"><span class="kbp-kind">' + esc(l.kindLabel) + "</span>" + esc(l.group) + "</div>"; last = l.group; }
+      var on = sel[l.id] !== undefined ? !!sel[l.id] : l.on;
+      if (on) n++;
+      rows += '<label class="kbp-as-row' + (on ? " on" : "") + '"><input type="checkbox"' + (on ? " checked" : "") + " " + act("proto-as-line:" + l.id) +
+        ' aria-label="' + esc(l.text.slice(0, 80)) + '"><span>' + esc(l.text) + "</span>" +
+        (l.field === ADVICE_FIELD ? '<em class="kbp-as-to">advice</em>' : "") + "</label>";
+    });
+    var counts = assignText(p, Object.keys(lines.reduce(function (m, l) {
+      var on = sel[l.id] !== undefined ? !!sel[l.id] : l.on; if (on) m[l.id] = 1; return m;
+    }, {})));
+    var where = counts.blocks.map(function (b) { return b.count + " to " + b.label; }).join(" · ");
+    return '<div class="kbp-assign">' +
+      '<div class="kbp-as-head"><strong>Add to this patient\'s case sheet</strong>' +
+      '<p>Tick the instructions that apply. They are appended to the case sheet as text you can edit; nothing is saved until you save the assessment, and nothing is prescribed or ordered.</p>' +
+      '<div class="kbp-as-bulk"><button type="button" class="kbp-as-b" ' + act("proto-as-all") + ">Select all</button>" +
+      '<button type="button" class="kbp-as-b" ' + act("proto-as-none") + ">Clear</button>" +
+      '<button type="button" class="kbp-as-b" ' + act("proto-as-reset") + ">Reset</button></div></div>" +
+      rows +
+      '<div class="kbp-as-foot"><span class="kbp-as-n">' + (n ? n + " instruction" + (n === 1 ? "" : "s") + (where ? " · " + esc(where) : "") : "Nothing ticked yet") + "</span>" +
+      '<div class="kbp-as-acts"><button type="button" class="kbp-as-cancel" ' + act("proto-as-cancel") + ">Cancel</button>" +
+      '<button type="button" class="kbp-as-add"' + (n && !opts.disabled ? "" : " disabled") + " " + act("proto-as-apply") + ">" + (opts.addLabel || "Add to case sheet") + "</button></div>" +
+      (opts.note ? '<p class="kbp-as-note">' + esc(opts.note) + "</p>" : "") + "</div></div>";
+  }
+
   function renderReader(p) {
     st.view = "reader"; st.openId = p.id;
     shell(readerHTML(p, { idPrefix: "kbp", back: true, brand: true }));
@@ -349,7 +445,7 @@
     var n = 0, iv = setInterval(function () { if (wrapOpenRef() || ++n > 120) clearInterval(iv); }, 250);
   }
 
-  var API = { open: open, search: function (q, subject, basis) { return searchIndex(st.index, q, subject || "all", basis || "all"); }, BASIS: BASIS, loadIndex: loadIndex, loadProtocol: loadProtocol, readerHTML: readerHTML, subjectLabel: subjectLabel, index: function () { return st.index; }, CONTENT_V: CONTENT_V, _searchIndex: searchIndex, _rank: rank, _kinds: KINDS, _state: st };
+  var API = { open: open, search: function (q, subject, basis) { return searchIndex(st.index, q, subject || "all", basis || "all"); }, BASIS: BASIS, loadIndex: loadIndex, loadProtocol: loadProtocol, readerHTML: readerHTML, assignLines: assignLines, assignText: assignText, assignHTML: assignHTML, ASSIGN_FIELDS: { plan: PLAN_FIELD, advice: ADVICE_FIELD }, subjectLabel: subjectLabel, index: function () { return st.index; }, CONTENT_V: CONTENT_V, _searchIndex: searchIndex, _rank: rank, _kinds: KINDS, _state: st };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_KBPROTO = API;
   if (D && D.addEventListener) {
