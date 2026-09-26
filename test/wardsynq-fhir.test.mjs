@@ -143,7 +143,7 @@ test("an allergy keeps 'unable-to-assess' rather than being upgraded to a certai
 test("a type with no honest mapping is not exported at all", () => {
   // Better absent than approximated: a ShiftHandover rendered as some nearby FHIR resource would be
   // read downstream as a clinical document it is not.
-  for (const t of ["ShiftHandover", "CriticalResultLoop", "BreakGlassGrant", "MedicationVerification"]) {
+  for (const t of ["ShiftHandover", "CriticalResultLoop", "BreakGlassGrant", "MedicationVerification", "CarePlan"]) {
     assert.equal(toFhir({ resourceType: t, id: "x" }), null, t);
     assert.equal(FHIR_TYPE[t], undefined, `${t} is not advertised either`);
   }
@@ -151,35 +151,6 @@ test("a type with no honest mapping is not exported at all", () => {
   assert.equal(toFhir({ resourceType: "Nonsense", id: "x" }), null);
   // And the map round-trips for everything that IS exported.
   for (const [ours, theirs] of Object.entries(FHIR_TYPE)) assert.equal(CANONICAL_TYPE[theirs], ours);
-});
-
-/* TASK 7 STEP 4.6: CarePlan, real. Goals become CarePlan.activity - not a second resource type
- * invented to hold one string. */
-test("fhirCarePlan: goals become activity.detail, a review date becomes period.end, status maps honestly", () => {
-  const plan = {
-    resourceType: "CarePlan", id: "cp-1", patientId: "p1", encounterId: "e1",
-    state: "active", title: "Post-op mobility plan", authorId: "cfa:nurse1", reviewBy: "2026-09-10",
-    goals: [{ title: "Walk to bathroom unassisted", measure: "by day 3", state: "active" }, { title: "Off oxygen", state: "met" }],
-    meta: { recordedAt: "2026-09-07T10:00:00Z" },
-  };
-  const f = toFhir(plan);
-  assert.equal(f.resourceType, "CarePlan");
-  assert.equal(f.status, "active");
-  assert.equal(f.intent, "plan");
-  assert.equal(f.title, "Post-op mobility plan");
-  assert.deepEqual(f.subject, { reference: "Patient/p1" });
-  assert.deepEqual(f.encounter, { reference: "Encounter/e1" });
-  assert.equal(f.author.display, "cfa:nurse1");
-  assert.equal(f.period.end, "2026-09-10");
-  assert.equal(f.activity.length, 2);
-  assert.equal(f.activity[0].detail.status, "in-progress");
-  assert.match(f.activity[0].detail.description, /Walk to bathroom unassisted/);
-  assert.equal(f.activity[1].detail.status, "completed");
-
-  // An unrecognised status is "unknown", never guessed as something more reassuring.
-  assert.equal(toFhir({ resourceType: "CarePlan", id: "cp-2", patientId: "p1", authorId: "a", state: "nonsense" }).status, "unknown");
-  // No goals: no activity array at all, not an empty one masquerading as "we checked".
-  assert.equal(toFhir({ resourceType: "CarePlan", id: "cp-3", patientId: "p1", authorId: "a", state: "active" }).activity, undefined);
 });
 
 test("THE CAPABILITY STATEMENT DOES NOT OVERSTATE", () => {
@@ -194,22 +165,11 @@ test("THE CAPABILITY STATEMENT DOES NOT OVERSTATE", () => {
   for (const bad of ["create", "update", "delete", "patch"]) assert.ok(!codes.has(bad), `must not advertise ${bad}`);
   // And it says outright that this is not profile-validated, where a machine and a human both see
   // it - because a CapabilityStatement that overstates is how a receiver trusts what it should not.
-  assert.match(c.implementation.description, /no implementation guide is carried/);
-  assert.match(c.implementation.description, /conformance to US Core or a national profile is neither claimed nor checked/);
+  assert.match(c.implementation.description, /Not profile-validated/);
+  assert.match(c.implementation.description, /no claim of conformance to US Core/);
   assert.match(c.implementation.description, /never as a guessed code/);
-  /* Every mapped type, plus the three DERIVED ones: Provenance (from each version's own stamp), and
-   * TASK 7.11's Practitioner and Organization (from the actor id on a row and from the org record).
-   * None of the three is a stored canonical type, and each declares only what it can actually do -
-   * the two identity types are read-only and say outright that this server is not a directory. */
-  assert.equal(c.rest[0].resource.length, Object.keys(FHIR_TYPE).length + 3, "it advertises exactly what it maps, plus the three derived types");
-  const derived = c.rest[0].resource.filter((r) => ["Provenance", "Practitioner", "Organization"].includes(r.type));
-  assert.equal(derived.length, 3);
-  for (const r of derived.filter((x) => x.type !== "Provenance")) {
-    assert.deepEqual(r.interaction.map((i) => i.code), ["read"], r.type + " is read-only");
-    assert.ok(!r.searchParam, r.type + " declares no search: there is no directory to search");
-    assert.match(r.documentation, /Derived, read-only/);
-  }
-  assert.match(derived.find((r) => r.type === "Practitioner").documentation, /never a name inferred from an account/);
+  // Every mapped type, plus Provenance, which is derived from each of them rather than mapped from a stored one.
+  assert.equal(c.rest[0].resource.length, Object.keys(FHIR_TYPE).length + 1, "it advertises exactly what it maps, plus derived Provenance");
   assert.ok(c.rest[0].resource.some((r) => r.type === "Provenance"));
 });
 

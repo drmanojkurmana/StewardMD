@@ -32,12 +32,11 @@ import { Encounter, ClinicalNote } from "../../wardsynq/wardsynq-model.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { resolveClinicalActor } from "./actor.js";
-import { RecordService, isExternalRecord } from "./service.js";
+import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { VITAL_CODES } from "./migrate-vitals.js";
 import { problemsForSummary } from "./migrate-problem.js";
 import { reconciliationIdFor, reconciliationForSummary } from "./med-reconciliation.js";
-import { ADMISSION_CLASSES, freeMasterBed } from "./migrate-inpatient.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const NOT_RECORDED = "Not recorded.";
@@ -211,12 +210,7 @@ async function draftDischargeSummary(request, env, ctx) {
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
   }
 
-  // Only this admission's activity belongs in this admission's summary, and only native records
-  // (a fed-in external Medication* / ServiceRequest record must never appear as ours).
-  const native = (rows) => (rows || []).filter((r) => r && !isExternalRecord(r));
-  orders = native(orders);
-  administrations = native(administrations);
-  serviceRequests = native(serviceRequests);
+  // Only this admission's activity belongs in this admission's summary.
   const mine = (rows) => (rows || []).filter((x) => x && (x.encounterId === encounterId || x.id === encounterId));
   const assembled = assembleDischargeSummary({
     encounter, patient,
@@ -351,7 +345,7 @@ async function dischargePatient(request, env, ctx) {
   try { current = await svc.get("Encounter", encounterId); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
   if (!current) return { ...base, ok: false, status: 404, error: "encounter_not_found", encounterId };
-  if (!ADMISSION_CLASSES.includes(current.class)) return { ...base, ok: false, status: 409, error: "not_an_admission", detail: "only an inpatient or ICU stay is discharged here", encounterId };
+  if (current.class !== "IPD") return { ...base, ok: false, status: 409, error: "not_an_admission", detail: "only an inpatient stay is discharged here", encounterId };
   if (current.status === "finished") {
     return { ...base, ok: true, written: 0, skipped: "already_discharged", encounterId, dischargedAt: current.periodEnd, version: current.version };
   }
@@ -360,9 +354,8 @@ async function dischargePatient(request, env, ctx) {
   let inFlight = [];
   try {
     const orders = (await svc.byPatient("MedicationOrder", current.patientId).catch(() => []))
-      .filter((o) => o && !isExternalRecord(o) && o.encounterId === encounterId);
-    const admins = (await svc.byPatient("MedicationAdministration", current.patientId).catch(() => []))
-      .filter((a) => a && !isExternalRecord(a));
+      .filter((o) => o && o.encounterId === encounterId);
+    const admins = await svc.byPatient("MedicationAdministration", current.patientId).catch(() => []);
     inFlight = (admins || [])
       .filter((a) => a && orders.some((o) => o.id === a.orderId))
       .filter((a) => ["ordered", "verified", "dispensed", "scanned", "held"].includes(a.status))
@@ -383,11 +376,6 @@ async function dischargePatient(request, env, ctx) {
 
   try {
     const out = await svc.put(candidate, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
-    // TASK 4.2: a discharge vacates the bed it leaves. Best-effort, against the real Ward/Bed
-    // master data from TASK 4.1 when the org has any - the Encounter's own status stays the
-    // authoritative record of the discharge either way.
-    const loc = current.location || {};
-    if (ctx.orgId && loc.ward && loc.bed) await freeMasterBed(env, ctx.orgId, loc.ward, loc.bed, resolved.actor.id);
     return { ...base, ok: true, written: 1, encounterId, patientId: current.patientId, status: "finished", dischargedAt, dosesInFlight: inFlight, version: out.record.version, actor: resolved.actor.id, role: resolved.role };
   } catch (e) {
     return { ...base, ...writeFailure(e, { encounterId, written: 0, actor: resolved.actor.id }) };
@@ -458,9 +446,6 @@ async function readDischargeSummary(request, env, ctx) {
       svc.get("MedicationReconciliation", reconciliationIdFor(encounterId, "admission")).catch(() => null),
       svc.get("ClinicalNote", dischargeSummaryIdFor(encounterId)).catch(() => null),
     ]);
-    orders = (orders || []).filter((r) => r && !isExternalRecord(r));
-    administrations = (administrations || []).filter((r) => r && !isExternalRecord(r));
-    serviceRequests = (serviceRequests || []).filter((r) => r && !isExternalRecord(r));
   } catch (e) {
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) };
   }

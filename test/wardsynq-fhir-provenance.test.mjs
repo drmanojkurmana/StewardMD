@@ -75,23 +75,21 @@ test("IDENTIFIERS carry a system a receiver can match on, and a type they can fi
   assert.equal(identifier("mrn", ""), undefined);
 
   const p = toFhir({ resourceType: "Patient", id: "p1", version: 1, mrn: "MRN-001", name: "T", dob: "1980-01-01", identifiers: [{ system: "ABHA", value: "1" }], meta: {}, writtenBy: { at: "2026-09-08T00:00:00.000Z" } });
-  assert.equal(p.identifier.length, 3, "MRN, ABHA, and the canonical record id");
+  assert.equal(p.identifier.length, 2);
   assert.equal(p.identifier[0].type.coding[0].code, "MR");
   assert.equal(p.identifier[1].type.coding[0].code, "NI");
-  assert.deepEqual(p.identifier[2], { system: "urn:stewardmd:record-id", value: "p1" });
 });
 
 test("PROVENANCE is derived from the stamp on every version and never makes an AI look like its clinician", () => {
   const human = { resourceType: "Observation", id: "o1", version: 1, patientId: "p", meta: { recordedAt: "2026-09-08T10:00:00.000Z", source: { system: "wardsynq-native" } }, writtenBy: { id: "fb:dr-a", kind: "human", tier: "execute", at: "2026-09-08T10:00:00.500Z" } };
   const pr = fhirProvenance(human);
   assert.equal(pr.resourceType, "Provenance");
-  assert.equal(pr.id, "ob-o1-v1", "a type code, so a Provenance id fits R4's 64 characters on top of any resource id");
+  assert.equal(pr.id, "Observation-o1-v1");
   assert.deepEqual(pr.target, [{ reference: "Observation/o1/_history/1" }], "a VERSIONED reference: provenance is per version");
   assert.equal(pr.recorded, "2026-09-08T10:00:00.500Z");
   assert.equal(pr.activity.coding[0].code, "CREATE");
   assert.equal(pr.agent[0].type.coding[0].code, "author");
   assert.equal(pr.agent[0].who.display, "fb:dr-a");
-  assert.deepEqual(pr.agent[0].who.identifier, { system: "urn:stewardmd:actor", value: "fb:dr-a" }, "a human writer is identified, not just displayed");
   assert.equal(pr.agent[0].onBehalfOf, undefined);
   assert.equal(pr.entity, undefined, "a native record has no source entity");
 
@@ -100,11 +98,7 @@ test("PROVENANCE is derived from the stamp on every version and never makes an A
   assert.equal(pa.activity.coding[0].code, "UPDATE");
   assert.equal(pa.agent[0].type.coding[0].code, "assembler", "an AI ASSEMBLED it; it did not author it");
   assert.equal(pa.agent[0].who.display, "ai:maik");
-  /* TASK 7.11: the party acted for is a person, so it carries the same logical identifier every
-   * other clinician reference now does - which is what lets a receiver match this human against the
-   * notes they signed themselves. The display it always had is unchanged. */
-  assert.deepEqual(pa.agent[0].onBehalfOf, { identifier: { system: "urn:stewardmd:actor", value: "fb:dr-a" }, display: "fb:dr-a" }, "the human is the party acted for, never the author");
-  assert.equal(pa.agent[0].who.identifier, undefined, "and the AI that wrote it is NOT given a practitioner identity");
+  assert.deepEqual(pa.agent[0].onBehalfOf, { display: "fb:dr-a" }, "the human is the party acted for, never the author");
 
   const imported = { ...human, meta: { recordedAt: "2026-09-08T10:00:00.000Z", source: { system: "ghis", sourceId: "lab-77" } }, writtenBy: { id: "adapter:ghis", kind: "adapter", at: "2026-09-08T10:00:00.000Z" } };
   const pi = fhirProvenance(imported);
@@ -114,32 +108,10 @@ test("PROVENANCE is derived from the stamp on every version and never makes an A
   assert.equal(pi.entity[0].what.identifier.value, "lab-77");
 
   // The id round-trips, and one for a type we do not export is nothing.
-  assert.deepEqual(parseProvenanceId("ob-o1-v1"), { fhirType: "Observation", fhirId: "o1", version: 1 });
-  assert.deepEqual(parseProvenanceId("mr-wsq-rx-1-v3"), { fhirType: "MedicationRequest", fhirId: "wsq-rx-1", version: 3 });
-  assert.equal(parseProvenanceId("zz-x-v1"), null);
-  assert.equal(parseProvenanceId("Observation-o1-v1"), null, "the old long form is gone: it could not fit in 64 characters");
+  assert.deepEqual(parseProvenanceId("Observation-o1-v1"), { fhirType: "Observation", canonical: "Observation", id: "o1", version: 1 });
+  assert.deepEqual(parseProvenanceId("MedicationRequest-wsq-rx-1-v3"), { fhirType: "MedicationRequest", canonical: "MedicationOrder", id: "wsq-rx-1", version: 3 });
+  assert.equal(parseProvenanceId("Practitioner-x-v1"), null);
   assert.equal(fhirProvenance({ resourceType: "Claim", id: "c" }), null);
-});
-
-/* TASK 7 STEP 4.3: which encounter a fact belongs to, on Provenance itself - real R4 has no
- * dedicated element for it, so it rides in entity[] the same way "transformation" already does
- * (entity.role="source" naming what this record was derived from/belongs to). */
-test("PROVENANCE names the encounter, alongside the external source when both apply, in neither's absence", () => {
-  const native = { resourceType: "Observation", id: "o2", encounterId: "enc-1", version: 1, patientId: "p", meta: { recordedAt: "2026-09-08T10:00:00.000Z", source: { system: "wardsynq-native" } }, writtenBy: { id: "fb:dr-a", kind: "human", at: "2026-09-08T10:00:00.000Z" } };
-  const pn = fhirProvenance(native);
-  assert.equal(pn.entity.length, 1, "no external source, but the encounter is still real");
-  assert.equal(pn.entity[0].role, "source");
-  assert.deepEqual(pn.entity[0].what, { reference: "Encounter/enc-1" });
-
-  const importedWithEncounter = { resourceType: "Observation", id: "o3", encounterId: "enc-2", version: 1, patientId: "p", meta: { recordedAt: "2026-09-08T10:00:00.000Z", source: { system: "hl7v2", sourceId: "msg-1" } }, writtenBy: { id: "adapter:hl7v2", kind: "adapter", at: "2026-09-08T10:00:00.000Z" } };
-  const pw = fhirProvenance(importedWithEncounter);
-  assert.equal(pw.entity.length, 2, "both the external source and the encounter ride in entity[]");
-  assert.equal(pw.entity[0].role, "source");
-  assert.equal(pw.entity[0].what.identifier.value, "msg-1", "the source entry is unchanged - external source still comes first");
-  assert.deepEqual(pw.entity[1].what, { reference: "Encounter/enc-2" });
-
-  const noEncounterNative = { resourceType: "Observation", id: "o4", version: 1, patientId: "p", meta: { recordedAt: "2026-09-08T10:00:00.000Z", source: { system: "wardsynq-native" } }, writtenBy: { id: "fb:dr-a", kind: "human", at: "2026-09-08T10:00:00.000Z" } };
-  assert.equal(fhirProvenance(noEncounterNative).entity, undefined, "no source and no encounter: entity[] is absent, not an empty array pretending to have checked");
 });
 
 test("CONSENT: a refusal is rejected with a deny provision, never an active consent whose fine print says no", () => {
@@ -186,8 +158,8 @@ test("the CapabilityStatement declares Provenance and Consent exactly as impleme
   assert.equal(parseSearch("Provenance", "target=Encounter/e1").problems.length, 0);
   assert.deepEqual(parseSearch("Provenance", "target=Encounter/e1").query.target, { type: "Encounter", id: "e1" });
   assert.equal(parseSearch("Provenance", "target=nonsense").problems[0].reason, "target must be Type/id");
-  assert.match(parseSearch("Observation", "target=Encounter/e1").problems[0].reason, /not a search parameter/);
-  assert.deepEqual(parseSearch("Observation", "_revinclude=Provenance:target").query.revInclude.map((r) => r.key), ["Provenance:target"]);
+  assert.match(parseSearch("Observation", "target=Encounter/e1").problems[0].reason, /has no target/);
+  assert.deepEqual(parseSearch("Observation", "_revinclude=Provenance:target").query.revInclude, ["Provenance:target"]);
   assert.equal(parseSearch("Provenance", "_revinclude=Provenance:target").problems.length, 1, "not on itself");
   assert.ok(declaredSearch("Consent").params.some((p) => p.name === "patient"));
 });

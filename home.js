@@ -538,7 +538,7 @@
     try { if (window.closeDrawer) window.closeDrawer(); } catch (e) {}
     // 2) Backstop — force-hide EVERY overlay/drawer/modal so nothing keeps running underneath.
     //    open-class overlays: just remove their show-class (do NOT add .hidden, or they can't reopen).
-    ["aspOverlay", "csOverlay", "eceOverlay", "infOverlay", "mcOverlay", "dxOverlay", "dbOverlay",
+    ["aspOverlay", "csOverlay", "eceOverlay", "infOverlay", "mcOverlay", "mdOverlay", "dxOverlay", "dbOverlay",
       "myCasesPanel", "smdSearchPanel", "sbrefOverlay", "ghisPanel", "dbDrawer", "dbScrim", "sbDrawer", "sbBackdrop",
       "abgOverlay", "hvSheet", "hvScrim", "swShell", "swSheet", "swScrim"].forEach(function (id) {
       var el = document.getElementById(id); if (el) el.classList.remove("open", "on", "active", "visible", "show");
@@ -777,9 +777,6 @@
     icu: function () { if (window.ICU && ICU.open) ICU.open(); else if (window.INF && INF.openDashboard) INF.openDashboard(); else if (window.INF && INF.open) INF.open(); else toast("ICU loading…"); },
     ward: function () { if (window.openGHIS) window.openGHIS(); else if (window.GHIS && GHIS.open) GHIS.open(); else toast("Ward Sync loading…"); },
     queue: function () { if (window.QUEUE && QUEUE.open) QUEUE.open(); else toast("OPD Queue loading…"); },
-    // The WardSynQ inpatient ward (window.WARD, ward.js). Distinct from `ward` above, which is the
-    // older Ward Sync / GHIS import screen - this is the native admission-to-discharge record.
-    wardsynq: function () { if (window.WARD && WARD.open) WARD.open(); else toast("Inpatient ward loading…"); },
     // Onco Home: clinician-facing oncology reference workbench (search + tool grid over the
     // existing MEDCALC/KB/drugs — not the patient treatment-plan engine). Flag-gated inside SMD_ONCOHOME.open().
     atlas: function () { if (window.ATLAS && ATLAS.open) ATLAS.open(); else toast("RadioAnatome loading…"); },
@@ -974,6 +971,7 @@
     { sel: "#icuRoot.on", act: "icu" },
     { sel: "#ghisPanel.open", act: "ward" },
     { sel: "#mcOverlay.on", act: "calculators" },
+    { sel: "#mdOverlay.on", act: "drugs" },
     { sel: "#miOverlay.on", act: "interactions" },
     { sel: "#abgOverlay.on", act: "antibiogram" },
     { sel: "#eceOverlay.on", act: "electrolytes" }
@@ -1475,15 +1473,6 @@
               else if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) qon = SMD_QUEUE_FLAGS.on();
               else qon = (localStorage.getItem("smd_opd_queue") === "1");
               return qon ? tileV4("queue", "ward", "OPD Queue", "Smart patient queue") : "";
-            } catch (e) { return ""; }
-          })() +
-          (function () {   // WardSynQ inpatient ward tile (flag smd_wardsynq, DEFAULT OFF). Same fallback
-            try {          // shape as the OPD tile above: query param, then the flag registry, then localStorage.
-              var won, w = (location.search.match(/[?&]wardsynq=([^&]+)/) || [])[1];
-              if (w != null) won = (w === "1" || w === "on" || w === "true");
-              else if (window.SMD_WARDSYNQ_FLAGS && SMD_WARDSYNQ_FLAGS.get) won = SMD_WARDSYNQ_FLAGS.get("smd_wardsynq");
-              else won = (localStorage.getItem("smd_wardsynq") === "1");
-              return won ? tileV4("wardsynq", "ward", "Inpatient Ward", "Admission to discharge") : "";
             } catch (e) { return ""; }
           })() +
         '</div>' +
@@ -6519,6 +6508,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         setTimeout(function () {
           try {
             if (window.MEDDB && MEDDB.openComposition && dn) MEDDB.openComposition(dn);
+            else if (window.MEDDRUGS && MEDDRUGS.openList) MEDDRUGS.openList();
             else if (window.MEDDB && MEDDB.openList) MEDDB.openList();
             else if (window.toast) toast("Drug Index loading…");
           } catch (e) {}

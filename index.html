@@ -70,7 +70,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432">
 <link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7">
 <link rel="stylesheet" href="/queue.css?v=q10-staffadmin">
-<link rel="stylesheet" href="/ward.css?v=ward20-maik">
+<link rel="stylesheet" href="/ward.css?v=ward16-pcopy">
 <link rel="stylesheet" href="/discharge.css?v=dis1">
 <link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2-icdsug1">
 <link rel="stylesheet" href="/atlas.css?v=atlas2">
@@ -260,20 +260,13 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
 
 
 <body>
-<!-- ===== PREMIUM BOOT SPLASH ===== instant-paint, three-second loading sequence on every open.
-     Native first hands off from an unbranded launch surface; only then does the logo motion begin,
-     so no animation is consumed off-screen. Sits above every app overlay while initialization runs. -->
+<!-- ===== PREMIUM BOOT SPLASH ===== instant-paint logo screen covering the ~3s JS-load window on
+     EVERY open (fixes the blank white screen). No framework dependency; fades on window 'load'
+     (min 1.6s, hard-cap 3.6s) then self-removes. Sits above every app overlay. -->
 <div id="smdBootSplash" role="status" aria-label="Loading StewardMD">
   <div class="sbs-center">
-    <div class="sbs-logo-stage">
-      <img class="sbs-logo" src="/logo.png" alt="StewardMD logo" width="107" height="107">
-      <span class="sbs-mark" aria-hidden="true"></span>
-      <svg class="sbs-logo-trace" viewBox="0 0 368 368" aria-hidden="true" focusable="false">
-        <path pathLength="1" style="--sbs-trace-duration:.468s;--sbs-trace-delay:0s" d="M143 53 Q143 53 145.4 53.45 L156.6 55.55 Q159 56 161.25 57.05 L171.75 61.95 Q174 63 179.4 68.25 L204.6 92.75 Q210 98 210 98.45 L210 100.55 Q210 101 208.05 102.5 L198.95 109.5 Q197 111 196.4 111 L193.6 111 Q193 111 188.95 106.8 L170.05 87.2 Q166 83 163.45 81.8 L151.55 76.2 Q149 75 145.85 75 L131.15 75 Q128 75 125.6 76.05 L114.4 80.95 Q112 82 110.2 83.8 L101.8 92.2 Q100 94 99.25 95.5 L95.75 102.5 Q95 104 94.7 104.9 L93.3 109.1 Q93 110 93 113.15 L93 127.85 Q93 131 94.5 133.85 L101.5 147.15 Q103 150 107.05 153.9 L125.95 172.1 Q130 176 127.75 177.95 L117.25 187.05 Q115 189 109.9 183.9 L86.1 160.1 Q81 155 79.65 151.1 L73.35 132.9 Q72 129 72.15 125.55 L72.85 109.45 Q73 106 74.2 103 L79.8 89 Q81 86 83.7 83 L96.3 69 Q99 66 102.45 64.35 L118.55 56.65 Q122 55 125.15 54.7 L139.85 53.3 Q143 53 143 53 Z"></path>
-        <path pathLength="1" style="--sbs-trace-duration:.468s;--sbs-trace-delay:.468s" d="M186 171 Q186 171 176.85 178.95 L134.15 216.05 Q125 224 122.75 225.35 L112.25 231.65 Q110 233 108.05 233.45 L98.95 235.55 Q97 236 95.05 235.85 L85.95 235.15 Q84 235 82.5 234.55 L75.5 232.45 Q74 232 72.2 230.8 L63.8 225.2 Q62 224 62 223.7 L62 222.3 Q62 222 64.25 220.35 L74.75 212.65 Q77 211 78.35 211.6 L84.65 214.4 Q86 215 89 214.7 L103 213.3 Q106 213 122.05 199.65 L196.95 137.35 Q213 124 216.3 123.1 L231.7 118.9 Q235 118 238.15 118.3 L252.85 119.7 Q256 120 258.7 121.35 L271.3 127.65 Q274 129 275.5 130.35 L282.5 136.65 Q284 138 284 138.45 L284 140.55 Q284 141 282.05 142.5 L272.95 149.5 Q271 151 270.55 151 L268.45 151 Q268 151 266.65 149.8 L260.35 144.2 Q259 143 257.5 142.4 L250.5 139.6 Q249 139 246.15 139 L232.85 139 Q230 139 227.9 140.05 L218.1 144.95 Q216 146 211.5 149.75 L190.5 167.25 Q186 171 186 171 Z"></path>
-        <path pathLength="1" style="--sbs-trace-duration:.624s;--sbs-trace-delay:.936s" d="M180 201 Q180 201 180.75 200.4 L184.25 197.6 Q185 197 185.6 197 L188.4 197 Q189 197 190.65 198.95 L198.35 208.05 Q200 210 194.75 214.35 L170.25 234.65 Q165 239 164.85 239.45 L164.15 241.55 Q164 242 169.1 247.1 L192.9 270.9 Q198 276 199.05 276.75 L203.95 280.25 Q205 281 207.25 281.6 L217.75 284.4 Q220 285 223 284.55 L237 282.45 Q240 282 242.25 280.2 L252.75 271.8 Q255 270 256.2 267.75 L261.8 257.25 Q263 255 263.15 252.6 L263.85 241.4 Q264 239 262.8 236 L257.2 222 Q256 219 249.4 212.4 L218.6 181.6 Q212 175 213.95 173.2 L223.05 164.8 Q225 163 225.45 163 L227.55 163 Q228 163 234.6 169.45 L265.4 199.55 Q272 206 273.05 207.65 L277.95 215.35 Q279 217 279.75 219.25 L283.25 229.75 Q284 232 284 235.45 L284 251.55 Q284 255 282.8 258.15 L277.2 272.85 Q276 276 274.2 278.25 L265.8 288.75 Q264 291 262.2 292.2 L253.8 297.8 Q252 299 249.6 299.9 L238.4 304.1 Q236 305 233.9 305.15 L224.1 305.85 Q222 306 219 305.4 L205 302.6 Q202 302 199.45 300.5 L187.55 293.5 Q185 292 177.5 284.5 L142.5 249.5 Q135 242 135.15 241.55 L135.85 239.45 Q136 239 137.05 238.4 L141.95 235.6 Q143 235 148.55 229.9 L174.45 206.1 Q180 201 180 201 Z"></path>
-      </svg>
-    </div>
+    <img class="sbs-logo" src="/logo.png" alt="StewardMD logo" width="97" height="97">
+    <span class="sbs-mark" aria-hidden="true"></span>
     <div class="sbs-word">Steward<span>MD</span></div>
     <div class="sbs-tag">Built by clinicians, for clinicians</div>
     <!-- Returning, signed-in clinicians get their own face + name here instead of the generic
@@ -321,14 +314,15 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   dp.textContent=(label.replace(/^dr\.?\s+/i,"").charAt(0)||"S").toUpperCase();
   host.hidden=false;s.classList.add("sbs-personal");
   /* SEQUENCE: the classic frame holds a beat, then crossfades into the personalised phase 2
-     (avatar, name, glass foot), which stays within the boot script's three-second total and
+     (avatar, name, glass foot), which holds until the boot script's constant 3s is up and
      Face ID / PIN fires by itself. Both screens are passive: no button, no hold. */
-  var BEAT=1560,XF=220,rm=false,t0=Date.now();
+  var BEAT=1200,XF=220,rm=false,t0=Date.now();
   try{rm=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);}catch(e){}
   function live(){return !!s.parentNode&&!s.classList.contains("sbs-hide");}
-  /* Do not consume the beat behind the native launch surface. native-bridge starts this clock at
-     the exact handoff, so the drawing motion is visible instead of completing off-screen. */
-  function seen(){try{if(!s.classList.contains("sbs-visible"))return 0;return Date.now()-(window.__smdSplashShownAt||t0);}catch(e){return Date.now()-t0;}}
+  /* the beat counts from when the frame is actually SEEN (native-bridge stamps __smdSplashShownAt
+     when it lifts the native splash), the same clock the boot script's hold below uses. Screen 1
+     for BEAT, then screen 2 for the rest of that hold (3s: MIN is 4500 for a personalised boot). */
+  function seen(){try{return Date.now()-(window.__smdSplashShownAt||t0);}catch(e){return Date.now()-t0;}}
   (function beat(){
     if(!live())return;
     if(seen()<BEAT){setTimeout(beat,100);return;}
@@ -344,12 +338,7 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   #smdBootSplash{position:fixed;inset:0;z-index:2147483000;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:1;transition:opacity .45s ease;-webkit-font-smoothing:antialiased;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif}
   #smdBootSplash.sbs-hide{opacity:0;pointer-events:none}
   #smdBootSplash .sbs-center{display:flex;flex-direction:column;align-items:center;gap:16px;transform:translateY(-3%)}
-  #smdBootSplash .sbs-logo-stage{position:relative;width:107px;height:107px;flex:0 0 auto}
-  #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark,#smdBootSplash .sbs-logo-trace{position:absolute;inset:0;width:100%;height:100%}
-  #smdBootSplash .sbs-logo{object-fit:contain;opacity:0;animation:sbsLogoFill .35s cubic-bezier(.4,0,.2,1) .84s both;animation-play-state:paused}
-  #smdBootSplash .sbs-logo-trace{display:block;overflow:visible;color:#0e6e63;filter:drop-shadow(0 0 7px rgba(14,110,99,.22))}
-  #smdBootSplash .sbs-logo-trace path{fill:none;stroke:currentColor;stroke-width:5.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:sbsLogoTrace var(--sbs-trace-duration) cubic-bezier(.4,0,.2,1) var(--sbs-trace-delay) forwards;animation-play-state:paused}
-  #smdBootSplash.sbs-visible .sbs-logo,#smdBootSplash.sbs-visible .sbs-mark,#smdBootSplash.sbs-visible .sbs-logo-trace path{animation-play-state:running}
+  #smdBootSplash .sbs-logo{width:107px;height:107px;object-fit:contain}
   #smdBootSplash .sbs-word{font-size:30px;font-weight:800;letter-spacing:-.02em;color:#0f172a}
   #smdBootSplash .sbs-word span{color:#0e6e63}
   #smdBootSplash .sbs-bar{width:132px;height:3px;border-radius:999px;background:#e6efee;overflow:hidden;margin-top:4px}
@@ -360,13 +349,12 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   /* tagline */
   #smdBootSplash .sbs-tag{font-size:13.5px;font-weight:600;letter-spacing:.005em;color:#5a7184;margin-top:-4px}
   /* white-masked mark (used in the dark Style-B splash) */
-  #smdBootSplash .sbs-mark{display:none;background:#fff;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;opacity:0;animation:sbsLogoFill .35s cubic-bezier(.4,0,.2,1) .84s both;animation-play-state:paused}
+  #smdBootSplash .sbs-mark{width:107px;height:107px;display:none;background:#fff;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat}
   #smdBootSplash .sbs-maik-dark{display:none}
   /* ── Style B: premium dark teal (iOS dark mode · Android night) ── */
   #smdBootSplash.sbs-dark{background:radial-gradient(125% 90% at 50% 18%,#0d5049 0%,#08302b 55%,#061f1c 100%)}
   #smdBootSplash.sbs-dark .sbs-logo{display:none}
   #smdBootSplash.sbs-dark .sbs-mark{display:block}
-  #smdBootSplash.sbs-dark .sbs-logo-trace{color:#fff;filter:drop-shadow(0 0 8px rgba(79,214,194,.42))}
   #smdBootSplash.sbs-dark .sbs-word{color:#fff}
   #smdBootSplash.sbs-dark .sbs-word span{color:#4fd6c2}
   #smdBootSplash.sbs-dark .sbs-tag{color:#8fd8cf}
@@ -376,20 +364,7 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   #smdBootSplash.sbs-dark .sbs-maik-light{display:none}
   #smdBootSplash.sbs-dark .sbs-maik-dark{display:inline-block}
   @keyframes sbsBar{0%{transform:translateX(-130%)}100%{transform:translateX(340%)}}
-  @keyframes sbsLogoTrace{to{stroke-dashoffset:0}}
-  /* Outline finish: one restrained halo, with the original contour always crisp on top. */
-  #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark{animation:none;opacity:0!important}
-  #smdBootSplash .sbs-logo-trace{--sbs-halo:rgba(14,110,99,.28);filter:drop-shadow(0 0 0 transparent);animation:sbsOutlineHalo 1.43s ease-in-out 1.56s both;animation-play-state:paused;shape-rendering:geometricPrecision}
-  #smdBootSplash.sbs-dark .sbs-logo-trace{--sbs-halo:rgba(79,214,194,.4);filter:drop-shadow(0 0 0 transparent)}
-  #smdBootSplash.sbs-visible .sbs-logo-trace{animation-play-state:running}
-  #smdBootSplash .sbs-logo-trace path{stroke-width:4.4}
-  @keyframes sbsOutlineHalo{0%,100%{filter:drop-shadow(0 0 0 transparent)}45%{filter:drop-shadow(0 0 7px var(--sbs-halo))}}
-  @media (prefers-reduced-motion:reduce){
-    #smdBootSplash .sbs-bar>span{animation-duration:2.2s}
-    #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark{animation:none;opacity:1}
-    #smdBootSplash .sbs-logo-trace{display:block;animation:none;filter:none}
-    #smdBootSplash .sbs-logo-trace path{animation:none;stroke-dashoffset:0}
-  }
+  @media (prefers-reduced-motion:reduce){#smdBootSplash .sbs-bar>span{animation-duration:2.2s}}
   /* ── v2 (html.smd-splash-v2) · Direction C: gradient depth, glass cards, bold type ──
      THE BOOT SPLASH IS A SEQUENCE OF TWO PASSIVE SCREENS (no button, no hold; the boot script
      holds a constant 3s and then Face ID / PIN fires by itself). Phase 1 (no .smd-boot-phase2) is the
@@ -427,7 +402,6 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   /* the mark is the hero here: bigger, with its own shadow, so the screen is a brand moment */
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-logo,
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-mark{width:126px;height:126px}
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-logo-stage{width:126px;height:126px}
   /* the glow goes ONLY on .sbs-mark, which is a CSS mask and therefore genuinely transparent.
      .sbs-logo is /logo.png, whose bitmap is opaque to its edges, so a drop-shadow on it renders
      as a square halo around the artwork instead of following the mark. */
@@ -450,7 +424,6 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   /* ── personalised state (phase 2 only) ── */
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-personal .sbs-logo,
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-personal .sbs-mark{width:92px;height:92px}
-  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-personal .sbs-logo-stage{width:92px;height:92px}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-personal .sbs-word{display:none}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-personal .sbs-tag{display:none}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-hello[hidden]{display:none}
@@ -543,26 +516,21 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-bar::after{color:rgba(246,247,245,.72)}
 </style>
 <script>(function(){var s=document.getElementById("smdBootSplash");if(!s)return;var t0=Date.now(),done=false,
-/* One fast three-second sequence for everyone: draw first, then (for returning clinicians) show
-   Loading your workspace inside the same window. CAP is a short fail-open, never a stuck splash. */
-MIN=3000,CAP=6000;
+/* seen-time hold: guests see screen 1 for 3s; a signed-in clinician (.sbs-personal, set by the script above) sees
+   screen 1 for 1.2s, a 220ms crossfade, then screen 2 for a full 3s */
+MIN=s.classList.contains("sbs-personal")?4500:3000,CAP=15000;
 /* Native handoff: once this white splash has actually PAINTED (two rAFs after it is in the
    DOM), signal native-bridge to lift the native splash. Hiding only on this signal — never on
    a timer — guarantees the native splash covers the WebView-init gap, so there is no black
    flash; the user goes native-splash → this white branded splash (with motion) → home. */
-try{requestAnimationFrame(function(){requestAnimationFrame(function(){window.__smdBootPainted=1;try{window.dispatchEvent(new Event("smd-boot-painted"));}catch(e){}
-  /* Web has no native launch surface, so begin as soon as the first frame is painted. Native is
-     started by native-bridge at the actual handoff. */
-  var C=window.Capacitor,native=!!(C&&(typeof C.isNativePlatform==="function"?C.isNativePlatform():(C.platform&&C.platform!=="web")));
-  if(!native){window.__smdSplashShownAt=Date.now();s.classList.add("sbs-visible");}
-});});}catch(e){s.classList.add("sbs-visible");}
+try{requestAnimationFrame(function(){requestAnimationFrame(function(){window.__smdBootPainted=1;try{window.dispatchEvent(new Event("smd-boot-painted"));}catch(e){}});});}catch(e){}
 var returning=false;try{returning=!!(localStorage.getItem("stewardmd_account")||localStorage.getItem("stewardmd_guest_used"));}catch(e){}
 function vis(id){var el=document.getElementById(id);if(!el)return false;var cs=getComputedStyle(el);return cs.display!=="none"&&cs.visibility!=="hidden"&&el.offsetHeight>1&&parseFloat(cs.opacity||"1")>0.01;}
 function ready(){try{
   var h=document.getElementById("homeV2");if(h&&h.classList.contains("on")&&getComputedStyle(h).display!=="none")return true;
   // Unverified/relaunched users land on the verify gate (or the account gate on any launch) — those
   // are real "boot finished" states, so lift the white splash immediately instead of sitting on it
-  // until the fail-open cap. Without this an unverified email/Google user saw a long blank splash → looked
+  // until the 15s cap. Without this an unverified email/Google user saw a long blank splash → looked
   // stuck and "never reached anything".
   if(vis("verifyGate")||vis("accountGate"))return true;
   if(!returning){ if(vis("introPoster")||vis("splash"))return true; }
@@ -588,7 +556,7 @@ function finish(){if(done)return;
 /* MIN is 3s of the frame actually being SEEN: native-bridge stamps __smdSplashShownAt when it lifts
    the native splash (which covers this frame until the page has painted), so the hold counts from
    that moment, not from script start. On the web (no native splash) it is script start. */
-function shownAt(){try{return s.classList.contains("sbs-visible")?(window.__smdSplashShownAt||t0):Date.now();}catch(e){return t0;}}
+function shownAt(){try{return window.__smdSplashShownAt||t0;}catch(e){return t0;}}
 function tick(){if(done)return;var el=Date.now()-shownAt();
   if((ready()&&el>=MIN)||el>=CAP){finish();return;}setTimeout(tick,120);}
 tick();})();</script>
@@ -2050,7 +2018,7 @@ window.openExternal = function (u) {
   </div>
 </div>
 
-<script src="/native-bridge.js?v=nb-splashat2" defer></script>
+<script src="/native-bridge.js?v=nb-splashat" defer></script>
 <!-- Server-driven fleet controls: force-upgrade floor, maintenance mode, remote banners, feature flags.
      Loads after native-bridge so /api/config routes correctly on native. Fail-open. -->
 <script src="/remote-config.js?v=rc1" defer></script>
@@ -2101,7 +2069,7 @@ window.openExternal = function (u) {
      update" row in Settings (home.js) + a proactive banner. Inert (no-op) until the owner adds
      @capgo/capacitor-updater via `npm install && npx cap sync` and rebuilds natively — see
      vault/modules/OTA Updates.md. Must load AFTER native-bridge.js (needs window.SMD_IS_NATIVE). -->
-<script src="/native-ota.js?v=ota5-dlretry2" defer></script>
+<script src="/native-ota.js?v=ota3-noleak-gate1" defer></script>
 <!-- Email sign-up/sign-in + Resend OTP verification + doctor profile (hospital/state/city).
      Additive over Firebase Auth; smd-geo.js is the India states/cities + curated hospital list. -->
 <script src="/smd-geo.js?v=gold472" defer></script>
@@ -2112,13 +2080,13 @@ window.openExternal = function (u) {
 <script src="/calculators.js?v=gold1051-r1d-rail1" defer></script>
 <script src="/calc-links.js?v=gold400" defer></script>
 <script src="/icu-autoscores.js?v=gold403" defer></script>
-<script src="/drugs.js?v=gold978-sheet1-universal1" defer></script>
+<script src="/drugs.js?v=gold978" defer></script>
 <!-- lazy loaded: interaction-rules -->
 <script defer src="/kb/ai/drug-fuzzy.js?v=gold1047"></script>
 <script defer src="/medlist.js?v=gold1049-scan-choose-brands1"></script>
 <script defer src="/ghis-meds.js?v=gold363"></script>
 <script defer src="/interactions.js"></script>
-<script src="/api.js?v=gold465-azclass-sheet4" defer></script>
+<script src="/api.js?v=gold465-azclass" defer></script>
 <!-- Offline drug database (native + Pro only; no-op on web). Loads after api.js so it can
      route MEDAPI drug searches to the local SQLite copy when offline. -->
 <script src="/fflate.min.js" defer></script>
@@ -2134,7 +2102,7 @@ window.openExternal = function (u) {
 <script src="/id-token.js?v=idtok2" defer></script>
 <link rel="stylesheet" href="/reasoning-workspace.css?v=dxfit8">
 <link rel="stylesheet" href="/knowledge-library.css?v=klall5">
-<script src="/reasoning.js?v=nstream1-clinix3-rail1-dxux3-klall9" defer></script>
+<script src="/reasoning.js?v=nstream1-clinix3-rail1-dxux3-klall6" defer></script>
 <script src="/renal-dose.js?v=rd1" defer></script>
 <!-- Privacy PR-A: SMD_PRIVACY config (version constants) + consent gate / versioned Privacy Notice
      (SMD_CONSENT). Loads after reasoning.js so it can guard SMD_AI. Reversible via localStorage
@@ -2172,7 +2140,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
 <script src="/electrolytes.js?v=bug808-nodupe-focus1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1-profile2-rxtile-glyphs-maikart2-pglog1-ack1-otasay-oncqis-sync1-prompt1-about1-icons1-rxv1-applock3-afoptin-gsrename1-icdtile1-hvtilealign1-sknx16-wsqtile1-universal1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1-profile2-rxtile-glyphs-maikart2-pglog1-ack1-otasay-oncqis-sync1-prompt1-about1-icons1-rxv1-applock3-afoptin-gsrename1-icdtile1-hvtilealign1-sknx16" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -2471,13 +2439,10 @@ window.openExternal = function (u) {
 <link rel="stylesheet" href="/patient-register.css?v=preg1">
 <script src="/patient-register.js?v=preg1" defer></script>
 <script src="/queue.js?v=fdesk1-addpt1" defer></script>
-<!-- WardSynQ inpatient ward (window.WARD): admission (bed board), the doctor/nurse chart,
-     medication ordering + eMAR, investigation ordering + results, the vitals flowsheet, and
-     discharge - the whole golden path, through the same server-authoritative routes as before.
-     Self-mounting overlay. Reached from the home screen's "Inpatient Ward" tile (flag
-     smd_wardsynq, DEFAULT OFF - see home.js) or directly via WARD.open({orgId}); with no orgId
-     given it falls back to the workplace queue.js already remembers ("wardsynq:<hospitalId>"). -->
-<script src="/ward.js?v=ward20-maik" defer></script>
+<!-- WardSynQ inpatient ward (window.WARD). The admission/ward/eMAR/discharge routes have been
+     server-authoritative and tested for a while with nothing in the app calling them; this is the
+     screen. Self-mounting overlay, no nav coupling yet - opened via WARD.open({orgId}). -->
+<script src="/ward.js?v=ward16-pcopy" defer></script>
 <!-- Discharge summary workstation (window.DISCHARGE). Reads the assembled summary, lets a treating
      clinician correct it section by section, and signs it into an immutable version. Opened from a
      discharged patient on the ward screen: DISCHARGE.open({orgId, encounterId}). -->

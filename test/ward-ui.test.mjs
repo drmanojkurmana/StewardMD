@@ -168,13 +168,7 @@ test("IT NEVER DECIDES A DOSE IS SAFE: there is no client-side safety rule anywh
   // Comments are stripped first: the file explains at length why it has no safety logic, and
   // scanning the prose would fail on the very sentences that promise the code is not there.
   const code = SRC.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
-  /* `interaction` was on this list as a proxy for drug-drug interaction logic, and it stopped being a
-   * usable one when TASK 8.5 put MaiK on the chart: a MaiKInteraction is a RECORD OF ASKING A MODEL
-   * something, and the screen reads `r.interaction` off that response. The narrowing is the same move
-   * this test already made for the word "allergy" a few lines below, and for the same reason - the
-   * property being defended is that the screen never RUNS a clinical rule, not that it never contains
-   * a clinical word. Drug-interaction logic remains forbidden by name. */
-  assert.ok(!/drug.?interaction|interactionCheck|checkInteraction|contraindicat|maxdose|ceiling|cross.?react/i.test(code), "no clinical rule logic in the UI");
+  assert.ok(!/interaction|contraindicat|maxdose|ceiling|cross.?react/i.test(code), "no clinical rule logic in the UI");
   /* The word "allergy" used to be on that list as a proxy, and it stopped being a usable one when the
    * downtime pack began DISPLAYING an allergy list the server assembled. Displaying is not deciding,
    * and the property this test defends is that the screen never decides. So the check now tests the
@@ -194,14 +188,7 @@ test("IT NEVER DECIDES A DOSE IS SAFE: there is no client-side safety rule anywh
   );
   // The distinction it IS allowed to make, because printing them the same way is the hazard.
   assert.match(code, /p\.allergies === null/, "a failed read and an empty list stay distinguishable");
-  /* `rulePack` was an unanchored substring, and TASK 8.9 made it stop being a usable proxy: the
-   * verdict card now PRINTS `rulePackVersion` - the version string the server reported, so a
-   * clinician can see which content produced the findings in front of them. Displaying which pack
-   * ran is not reaching for the engine, and it is the same narrowing this test already made for
-   * "allergy" and "interaction" above. `\brulePack\b` still forbids touching a pack itself, and
-   * getRulePack/compileRulePack remain forbidden by name. */
-  assert.ok(!/wardsynq-safety|SafetyEngine|resolveGeneric|\brulePack\b|getRulePack|compileRulePack/i.test(code),
-    "the UI does not reach for the safety engine");
+  assert.ok(!/wardsynq-safety|SafetyEngine|resolveGeneric|rulePack/i.test(code), "the UI does not reach for the safety engine");
   // It must not decide the five rights itself either: the scans go to the server untouched, and the
   // server compares them against the order. The UI only collects and forwards.
   assert.ok(!/scan\.patient\s*[=!]==|scan\.drug\s*[=!]==/.test(code), "the UI never compares a scan itself");
@@ -663,127 +650,4 @@ test("the patient copy never renders a stale patient, and the handover is its ow
   assert.match(html, /working diagnosis/);
   // Recording the handover is a separate, deliberate act with its own button.
   assert.match(html, /data-w-act="pcopyGive"/);
-});
-
-/* ---- Held from other systems (2026-09-08): the exchange exception queue ------------------------ */
-
-const held = (over = {}) => ({
-  id: "wsq-xchg-1", source: "fhir-partner-his", reason: "identity-probable-duplicate", detail: "no identifier matched, but a local patient resembles this one closely enough that a person must decide",
-  patientId: null, raisedAt: "2026-09-08T10:00:00.000Z", entityRefs: ["Patient/HIS-PAT-77", "Observation/HIS-OBS-1"],
-  candidates: [{ id: "wsq-pat-1", mrn: "SMD-WARD01-00001", score: 0.91, band: "probable" }, { id: "wsq-pat-2", mrn: "SMD-WARD01-00002", score: 0.62, band: "possible" }],
-  conflict: null, ...over,
-});
-
-test("HELD FROM OTHER SYSTEMS: every held message is listed with its reason verbatim, in plain words, and only the decisions that fit it", () => {
-  const html = load()._render(Object.assign({}, base, { xchg: { ok: true, open: [held(), held({ id: "wsq-xchg-2", reason: "conflict-local-authoritative", candidates: null, conflict: { resourceType: "Observation", id: "wsq-obs-9", version: 3, source: "wardsynq-native" } }), held({ id: "wsq-xchg-3", reason: "conflict-patient-mismatch", candidates: null, conflict: { resourceType: "Observation", id: "wsq-obs-8", version: 1, source: "fhir-partner-his" } })] } }));
-  assert.match(html, /Held from other systems &middot; 3/);
-  assert.match(html, /identity-probable-duplicate/, "the reason code, verbatim");
-  assert.match(html, /a patient here looks like this person/, "and in plain words");
-  assert.match(html, /2 records held/);
-  // Candidates are offered as the choice for a link, with the MRN and the band the matcher gave -
-  // but NONE is preselected: an identity decision this clinician never touched is not one they made.
-  assert.match(html, /name="wxP-wsq-xchg-1" value="wsq-pat-1"[^>]*>/);
-  assert.doesNotMatch(html, /name="wxP-wsq-xchg-1"[^>]*checked/, "no candidate is checked by default");
-  assert.match(html, /SMD-WARD01-00002/);
-  assert.match(html, /probable 0\.91/);
-  // Only the decisions that fit, and the decision dropdown itself starts on an unchosen placeholder:
-  // identity gets link/create/reject; an ownership conflict gets accept-feed/keep-local; a
-  // patient-mismatch conflict gets REJECT ONLY, because it can never be accepted or kept as ours.
-  const sel = (id) => (new RegExp(`<select id="wxR-${id}">([\\s\\S]*?)</select>`).exec(html) || [])[1] || "";
-  assert.deepEqual([...sel("wsq-xchg-1").matchAll(/value="([^"]*)"/g)].map((m) => m[1]), ["", "link", "create", "reject"]);
-  assert.deepEqual([...sel("wsq-xchg-2").matchAll(/value="([^"]*)"/g)].map((m) => m[1]), ["", "accept-feed", "keep-local"]);
-  assert.deepEqual([...sel("wsq-xchg-3").matchAll(/value="([^"]*)"/g)].map((m) => m[1]), ["", "reject"]);
-  assert.match(html, /ours: Observation\/wsq-obs-9 v3 \(wardsynq-native\)/, "the conflicting record of ours is named");
-  assert.match(html, /Why \(required\)/);
-  assert.match(html, /data-w-act="xchg:wsq-xchg-1"/);
-  assert.match(html, /Nothing here is on a chart yet/);
-  assert.ok(!/—/.test(html), "no em-dash");
-});
-
-test("an empty exchange queue says so; an UNREADABLE one never looks empty", () => {
-  const W = load();
-  assert.match(W._render(Object.assign({}, base, { xchg: { ok: true, open: [] } })), /Nothing is held from another system\./);
-  assert.match(W._render(Object.assign({}, base, { xchg: null })), /Loading the exchange queue/);
-  const err = W._render(Object.assign({}, base, { xchg: null, xchgErr: "Could not load the exchange queue: permission" }));
-  assert.match(err, /Could not load the exchange queue: permission/);
-  assert.ok(!/Nothing is held/.test(err), "an error is not an empty list");
-});
-
-test("a held message whose reason has no candidates still lets a person name the patient for a link, and text is escaped", () => {
-  const html = load()._render(Object.assign({}, base, { xchg: { ok: true, open: [held({ candidates: [], detail: "<b>x</b>", source: "his<script>" })] } }));
-  assert.match(html, /id="wxPid-wsq-xchg-1"/, "a free-text local patient id for the link");
-  assert.match(html, /&lt;b&gt;x&lt;\/b&gt;/);
-  assert.match(html, /his&lt;script&gt;/);
-  assert.ok(!/<script/.test(html));
-});
-
-/* ---- the golden path additions: bed board + admission, medication ordering, investigation
- * ordering + results, and the flowsheet. Pure-render assertions; the interactive behaviour (a
- * click, a request body, the eMAR state machine, cross-viewport layout) is proven for real in
- * test/run-ward-golden-path.mjs against a real headless browser. */
-
-test("BED BOARD: occupied and free beds are both shown, no bed is preselected, and picking one opens the admit panel for exactly that bed", () => {
-  const W = load();
-  const board = Object.assign({}, base, { view: "board", board: { ok: true, bedsConfigured: true, wards: [
-    { ward: "Medical A", bedsKnown: true, occupied: [{ encounterId: "e1", patientId: "opd-pat-1", bed: "07" }], free: ["08", "09"], unplaced: [] },
-  ] } });
-  const html = W._render(board);
-  assert.match(html, /Medical A/);
-  assert.match(html, /opd-pat-1/, "the occupant is shown");
-  assert.match(html, /data-w-act="pickbed:Medical A\|08"/);
-  assert.match(html, /data-w-act="pickbed:Medical A\|09"/);
-  assert.ok(!html.includes("picked"), "nothing is preselected until a person clicks a bed");
-  assert.ok(!html.includes('data-w-act="admitnew"'), "no admit panel until a bed is picked");
-
-  const picked = W._render(Object.assign({}, board, { admitTarget: { ward: "Medical A", bed: "08" } }));
-  assert.match(picked, /Admit to Medical A, bed 08/);
-  assert.match(picked, /data-w-act="admitnew"/);
-  assert.match(picked, /data-w-act="mrnlookup"/);
-  assert.ok(!picked.includes('data-w-act="admitconfirm"'), "no confirm button until an MRN lookup actually found somebody");
-
-  const found = W._render(Object.assign({}, board, { admitTarget: { ward: "Medical A", bed: "08" }, mrnLookup: { mrn: "SMD-1", name: "Real Patient" } }));
-  assert.match(found, /Real Patient/);
-  assert.match(found, /data-w-act="admitconfirm"/);
-});
-
-test("a bed board with no configured bed list says so, rather than reporting zero free beds", () => {
-  const html = load()._render(Object.assign({}, base, { view: "board", board: { ok: true, bedsConfigured: false, wards: [
-    { ward: "Medical A", bedsKnown: false, occupied: [], free: [], unplaced: [] },
-  ] } }));
-  assert.match(html, /Bed list not configured/);
-  assert.ok(!/0 free/.test(html));
-});
-
-test("MEDICATION ORDER: the form asks for drug, dose and unit; nothing is preselected or computed", () => {
-  const html = load()._render(chart);
-  assert.match(html, /id="wMoDrug"/);
-  assert.match(html, /id="wMoValue"/);
-  assert.match(html, /id="wMoUnit"/);
-  assert.match(html, /data-w-act="medorder"/);
-  assert.match(html, /Every safety and formulary check happens on the server/);
-});
-
-test("INVESTIGATIONS: an order in flight is shown apart from a resulted one, and a result's conclusion is never invented", () => {
-  const html = load()._render(Object.assign({}, chart, {
-    investigations: { requests: [{ serviceRequestId: "sr1", display: "Chest X-ray", category: "imaging", priority: "urgent", collection: { state: "ordered" } }] },
-    results: [{ display: "Chest X-ray", status: "final", conclusion: "Clear.", reportedAt: "2026-09-08T10:00:00.000Z" }],
-  }));
-  assert.match(html, /Chest X-ray/);
-  assert.match(html, /URGENT/);
-  assert.match(html, /Clear\./);
-  assert.match(html, /On order/);
-  assert.match(html, /Results/);
-});
-
-test("FLOWSHEET: an empty hour is a plain dash, never a value that looks recorded, and NEWS2 states plainly when it could not be scored", () => {
-  const html = load()._render(Object.assign({}, chart, {
-    flowsheet: { hours: ["2026-09-08T08:00:00Z", "2026-09-08T09:00:00Z"], rows: [
-      { code: "8480-6", label: "Systolic BP", cells: [{ hour: "2026-09-08T08:00:00Z", empty: true }, { hour: "2026-09-08T09:00:00Z", empty: false, value: 118, unit: "mmHg" }] },
-    ] },
-    news2: { ok: true, tool: "NEWS2", score: { scorable: false, reason: "Not enough recorded to score." } },
-  }));
-  assert.match(html, /Systolic BP/);
-  assert.match(html, /118 mmHg/);
-  assert.match(html, /Not enough recorded to score\./);
-  assert.match(html, /This is a score, not an escalation/);
 });

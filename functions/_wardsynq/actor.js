@@ -79,17 +79,7 @@ const ORDER_TYPES = Object.freeze(["MedicationOrder", "ServiceRequest"]);
 /* SpecimenCollection joined on 2026-09-07: taking a sample is nursing work, the same authority as
  * recording a vital. It records that a sample was TAKEN and never what it showed - the result is the
  * laboratory's own authority, so this grants nothing towards one. */
-/* DeviceAssociation joined 2026-09-08 (Task 2.2, ICU): scanning a patient's wristband and a
- * monitor's asset tag onto each other is a bedside act, the same authority as recording a vital -
- * not a device-inventory decision, which would belong somewhere administrative instead. */
-/* BloodLossRecord joined 2026-09-08 (Task 2.4): weighing swabs and drapes (or estimating, when that
- * is all that's possible) is the midwife's own bedside quantification, the same authority as
- * charting fluid balance - not a diagnosis, and not gated behind emr.treat the way starting the PPH
- * bundle itself is. */
-const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord",
-  // TASK 6.14: PatientTag - assigning/replacing/ending a wristband is the same bedside act as
-  // DeviceAssociation, above, and the same capability governs both.
-  "PatientTag"]);
+const VITALS_TYPES = Object.freeze(["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead"]);
 const PATIENT_TYPE = "Patient";
 // Added 2026-09-06 (the Encounter migration), alongside PATIENT_TYPE and for the identical reason:
 // checking a patient in for today's visit is the SAME administrative act QUEUE_ADD already covers
@@ -122,19 +112,9 @@ function grantForCaps(caps) {
      * constraint existed the type-level scope let her: `Observation` is one resource type carrying
      * four unrelated clinical meanings, and the critical-value loop believes anything categorised
      * `laboratory`. */
-    /* "device" joined 2026-09-08 (Task 2.2, ICU): a device reading reaches the chart through
-     * migrate-device.js's rehydrated DeviceGateway, called by the SAME nurse action as charting a
-     * vital - scanning a wristband and an asset tag onto each other. Without this category a device
-     * observation is refused by the exact CATEGORY_DENIED rule this comment already describes. */
-    /* "labour" joined 2026-09-08 (Task 2.4): a partogram's raw data - cervical dilation, contraction
-     * frequency, fetal heart rate, a stated labour status - is the midwife's own bedside charting,
-     * the same authority as a vital sign, through migrate-maternity.js's recordLabourObservation(). */
-    /* "neonatal" joined 2026-09-08 (Task 2.5): respiratory-support/device-settings readings on a
-     * NICU cot are the same bedside charting act, through migrate-pediatrics.js's
-     * recordNeonatalObservation(). */
     grant = {
       tier: TIER.EXECUTE, read: has(CAPS.EMR_VIEW) ? null : [...VITALS_TYPES], write: [...VITALS_TYPES],
-      writeCategories: { Observation: ["vital-signs", "fluid-balance", "device", "labour", "neonatal"] },
+      writeCategories: { Observation: ["vital-signs", "fluid-balance"] },
       basis: CAPS.EMR_VITALS,
     };
   }
@@ -153,9 +133,7 @@ function grantForCaps(caps) {
      * in the first place - the front desk's work, not a clinical decision. An AppointmentRequest is
      * NOT here: promising that a patient needs to be seen again is clinical, and it is granted by
      * EMR_TREAT, which carries unrestricted write. */
-    // Blackout joined 2026-09-09 (TASK 4.5): blocking a clinician's diary or a resource for a period
-    // is the SAME administrative scheduling act as booking or cancelling one, not a clinical decision.
-    const added = [PATIENT_TYPE, ENCOUNTER_TYPE, "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout"];
+    const added = [PATIENT_TYPE, ENCOUNTER_TYPE, "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking"];
     if (!grant) grant = { tier: TIER.EXECUTE, read: null, write: added, basis: CAPS.QUEUE_ADD };
     else grant = {
       tier: TIER.EXECUTE, read: grant.read,
@@ -305,16 +283,10 @@ function grantForCaps(caps) {
      * the containment is that the write scope below did not move. A site wanting tighter separation
      * should hold BILLING_CHARGE for coders and leave the cashier on BILLING_VIEW. */
     const CAPTURE_TYPES = ["MedicationAdministration", "DiagnosticReport", "SpecimenCollection", "MedicationDispense"];
-    // Invoice joined 2026-09-09 (TASK 4.6): the ledger charge-capture.js's priced proposal becomes
-    // once a person raises it. Read for BOTH billing.view and billing.charge - a cashier reading a
-    // balance is not a coding act, it is the whole reason billing.view exists (see the Cashier task
-    // this grant is written to anticipate, TASK 4.7). Write is billing.charge only: raising an
-    // invoice and posting a payment against it is the SAME financial-record authority as coding a
-    // claim, not a clinical one.
     const canRead = has(CAPS.BILLING_CHARGE)
-      ? ["Condition", "Claim", "PreAuthorisation", "Invoice", ...CAPTURE_TYPES]
-      : ["Claim", "PreAuthorisation", "Invoice"];
-    const canWrite = has(CAPS.BILLING_CHARGE) ? ["Claim", "PreAuthorisation", "Invoice"] : [];
+      ? ["Condition", "Claim", "PreAuthorisation", ...CAPTURE_TYPES]
+      : ["Claim", "PreAuthorisation"];
+    const canWrite = has(CAPS.BILLING_CHARGE) ? ["Claim", "PreAuthorisation"] : [];
     if (!grant) grant = { tier: canWrite.length ? TIER.EXECUTE : TIER.READ, read: canRead, write: canWrite, basis: has(CAPS.BILLING_CHARGE) ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW };
     else grant = {
       // Raised, never lowered - the same union rule as every branch above. A cashier who also holds
@@ -325,92 +297,6 @@ function grantForCaps(caps) {
       write: grant.write === null ? null : [...new Set([...grant.write, ...canWrite])],
       writeCategories: grant.writeCategories,
       basis: grant.basis + "+" + (has(CAPS.BILLING_CHARGE) ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW),
-    };
-  }
-
-  /* TASK 4.9 (HIM/ROI), 2026-09-09, NARROWED by TASK 4.13, 2026-09-09. staff.admin was considered
-   * and rejected then, for the same reason it is still rejected: `hr` holds staff.admin and this
-   * file's own test suite guarantees "HR: a hospital member with no business on the chart" -
-   * widening staff.admin here would silently break that guarantee for a capability whose job is
-   * staff->role management, not records custody. HIM_ROI is a NEW, narrow capability instead,
-   * granted to nobody by default and to the new `him` role alone (functions/_queue_roles.js) - `hr`
-   * does not hold it and gains nothing from this branch.
-   *
-   * WRITE IS ROIRequest ONLY. A HIM officer decides and records a release; this grant confers no
-   * power to write a clinical note, an order or anything else - releasing a record is not treating
-   * a patient. READ comes from the SAME role also holding EMR_VIEW (see the `him` role definition) -
-   * this branch does not itself widen read, because "may release records" and "may read the chart
-   * to decide what to release" are two different authorities the role composes explicitly, not one
-   * this branch assumes. The route-level gate (functions/api/queue/[[path]].js) still requires
-   * staff.admin OR him.roi as an alternative org-authorization check, so both layers must agree. */
-  if (has(CAPS.HIM_ROI)) {
-    const added = ["ROIRequest"];
-    if (!grant) grant = { tier: TIER.EXECUTE, read: added, write: added, basis: CAPS.HIM_ROI };
-    else grant = {
-      tier: TIER.EXECUTE,
-      read: grant.read === null ? null : [...new Set([...grant.read, ...added])],
-      write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
-      writeCategories: grant.writeCategories,
-      basis: grant.basis + "+" + CAPS.HIM_ROI,
-    };
-  }
-
-  /* TASK 4.13. migrate-transfusion.js's own header states this exact gap: "role separation between
-   * blood-bank crossmatch/issue authority and ward-side bedside/administration authority is NOT
-   * implemented... every route is gated on the same emr.treat capability every other clinical-
-   * commitment resource uses." TRANSFUSION_ISSUE is that separation - a narrow authority over
-   * TransfusionEpisode alone, plus enough read (Patient, Encounter) to identify whose episode it is,
-   * granted to the new `blood_bank` role. EMR_TREAT still reaches TransfusionEpisode too (it is
-   * unrestricted, unchanged) - this is an ALTERNATIVE authority for a role that should hold nothing
-   * else clinical, never a narrowing of what a doctor can already do. */
-  if (has(CAPS.TRANSFUSION_ISSUE)) {
-    const added = ["TransfusionEpisode"];
-    const canRead = [...added, "Patient", "Encounter"];
-    if (!grant) grant = { tier: TIER.EXECUTE, read: canRead, write: added, basis: CAPS.TRANSFUSION_ISSUE };
-    else grant = {
-      tier: TIER.EXECUTE,
-      read: grant.read === null ? null : [...new Set([...grant.read, ...canRead])],
-      write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
-      writeCategories: grant.writeCategories,
-      basis: grant.basis + "+" + CAPS.TRANSFUSION_ISSUE,
-    };
-  }
-
-  /* TASK 4.15. Declaring/deactivating EmergencyActivation is its own narrow authority - see
-   * emergency-mode.js's own header for why this grants nothing beyond the declaration record
-   * itself: EMERGENCY_DECLARE is a governance capability, not a clinical one, and reading/writing
-   * this ONE type is all it ever confers. Admin already holds EMR_TREAT (unrestricted) so this adds
-   * nothing new for that role in practice - it exists for a site that wants to grant emergency
-   * declaration WITHOUT full clinical treat authority, the same reasoning TRANSFUSION_ISSUE/HIM_ROI
-   * already establish. */
-  if (has(CAPS.EMERGENCY_DECLARE)) {
-    const added = ["EmergencyActivation"];
-    if (!grant) grant = { tier: TIER.EXECUTE, read: added, write: added, basis: CAPS.EMERGENCY_DECLARE };
-    else grant = {
-      tier: TIER.EXECUTE,
-      read: grant.read === null ? null : [...new Set([...grant.read, ...added])],
-      write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
-      writeCategories: grant.writeCategories,
-      basis: grant.basis + "+" + CAPS.EMERGENCY_DECLARE,
-    };
-  }
-
-  /* TASK 5.14. Filing (INCIDENT_REPORT) and investigating (INCIDENT_INVESTIGATE) are DISTINCT
-   * capabilities in _queue_roles.js - see incidents.js's own header for why - but both resolve to
-   * the SAME resource-type scope here: which lifecycle action a request may actually perform
-   * (report vs triage/RCA/CAPA/close) is enforced at the route, exactly as EMERGENCY_DECLARE's
-   * declare/deactivate both resolve to one EmergencyActivation scope above. A role holding either
-   * capability can read and write IncidentReport; a role holding neither cannot reach it at all. */
-  if (has(CAPS.INCIDENT_REPORT) || has(CAPS.INCIDENT_INVESTIGATE)) {
-    const added = ["IncidentReport"];
-    const basis = has(CAPS.INCIDENT_INVESTIGATE) ? CAPS.INCIDENT_INVESTIGATE : CAPS.INCIDENT_REPORT;
-    if (!grant) grant = { tier: TIER.EXECUTE, read: added, write: added, basis };
-    else grant = {
-      tier: TIER.EXECUTE,
-      read: grant.read === null ? null : [...new Set([...grant.read, ...added])],
-      write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
-      writeCategories: grant.writeCategories,
-      basis: grant.basis + "+" + basis,
     };
   }
 
@@ -514,49 +400,19 @@ const staffEnabled = (env) => !!(env && env.QUEUE_STAFF_ENABLED === "1");
  * org-bound by _opd_auth.js) when the deployment has staff sign-in on. A session proves identity
  * only; authority is decided below, from membership, as everywhere else in the product.
  */
-/* TASK 4.14: a session reference for the audit trail - never the raw token, a short hash of it,
- * so two requests on the same staff login correlate without the audit event ever holding a bearer
- * credential. Firebase identities have no per-session token surfaced this far in, so sessionRef is
- * null for them - stated honestly as "not available", never fabricated. */
-async function sessionRefOf(tok) {
-  if (!tok || !crypto.subtle) return null;
-  const bytes = new TextEncoder().encode(tok);
-  const digest = await crypto.subtle.digest("SHA-256", bytes);
-  return [...new Uint8Array(digest)].slice(0, 8).map((b) => b.toString(16).padStart(2, "0")).join("");
-}
-
 async function resolveIdentity(request, env, deps) {
   const who = await deps.identifyFn(request, env);
   if (who && !who.guest && who.id) {
-    return { kind: "firebase", id: who.id, email: who.email ? String(who.email).toLowerCase() : null, name: who.name || null, orgId: null, sessionRef: null };
+    return { kind: "firebase", id: who.id, email: who.email ? String(who.email).toLowerCase() : null, name: who.name || null, orgId: null };
   }
   if (staffEnabled(env) && deps.staffSession) {
     const tok = request.headers.get("X-Staff-Token") || (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
     if (tok) {
       const ss = await deps.staffSession(env, tok, Date.now());
-      if (ss && ss.identity && ss.orgId) return { kind: "staff", id: String(ss.identity), email: null, name: String(ss.identity), orgId: String(ss.orgId), sessionRef: await sessionRefOf(tok) };
+      if (ss && ss.identity && ss.orgId) return { kind: "staff", id: String(ss.identity), email: null, name: String(ss.identity), orgId: String(ss.orgId) };
     }
   }
   throw new AuthError("authenticated actor required");
-}
-
-/* TASK 4.14 (Audit/Financial Integrity): the plan's own minimum-audit list names "correlation ID"
- * and "source/device/session" as required fields; this codebase's audit event (service.js's
- * _audit()) already fully covers actor/action/object/before-after/timestamp/tenant - these three
- * did not exist anywhere. Computed ONCE per request, here, at the one place every write and read
- * already passes through - not threaded through the twenty-odd per-file open() helpers, which would
- * have meant editing every bridge file for three fields three of them do not otherwise need to know
- * about. Folded into the audit event's existing free-form `scope` blob in service.js's _audit()
- * (see there) rather than a new column - `connect_audit_event` is a live, shared table with ABDM,
- * and a schema migration for three optional fields is a bigger, riskier change than this task's own
- * "smallest set of new code" instruction, when the existing scope blob already carries exactly this
- * kind of metadata for free. */
-function requestContextOf(request, identity) {
-  return {
-    correlationId: request.headers.get("X-Correlation-Id") || (crypto.randomUUID ? crypto.randomUUID() : null),
-    deviceId: request.headers.get("X-Device-Id") || null,
-    sessionId: (identity && identity.sessionRef) || null,
-  };
 }
 
 /**
@@ -588,9 +444,7 @@ async function resolveClinicalActor(request, env, tenantId, need, deps) {
       if (!grant) throw new PermissionError(`role '${az.role}' has no clinical actor`);
       const actor = actorFromOpdRole({ identity, role: az.role, claims });
       if (need === "record:write" && !actorCan(actor, TIER.DRAFT)) throw new PermissionError(`role '${az.role}' may not write the clinical record`);
-      // actorFromOpdRole's object is frozen, like every actor this file hands out - a new object
-      // carries the request context rather than mutating a frozen one.
-      return { identity, tenant, role: az.role, source: "opd", org: { id: org.id, name: org.name || null }, grant, actor: { ...actor, requestContext: requestContextOf(request, identity) } };
+      return { identity, tenant, role: az.role, source: "opd", org: { id: org.id, name: org.name || null }, grant, actor };
     }
     // Not a member of the linked organisation. Fall through: a Connect clinician may still be one.
   }
@@ -603,8 +457,7 @@ async function resolveClinicalActor(request, env, tenantId, need, deps) {
   if (!connectCan(membership.role, need)) throw new PermissionError(`role '${membership.role}' may not perform '${need}'`);
   const actor = actorFromConnectRole({ identity, role: membership.role, claims });
   if (!actor) throw new PermissionError(`role '${membership.role}' has no clinical actor`);
-  const actorWithContext = { ...actor, requestContext: requestContextOf(request, identity) };
-  return { identity, tenant: membership.tenant, role: membership.role, source: "connect", org: null, grant: { tier: actor.tier, read: actor.scope.read, write: actor.scope.write, basis: "connect:" + membership.role }, actor: actorWithContext };
+  return { identity, tenant: membership.tenant, role: membership.role, source: "connect", org: null, grant: { tier: actor.tier, read: actor.scope.read, write: actor.scope.write, basis: "connect:" + membership.role }, actor };
 }
 
 export {
@@ -612,5 +465,4 @@ export {
   grantForCaps, grantForRole, roleMapping,
   actorFromOpdRole, actorFromConnectRole, aiActorFor, isAiOrigin,
   resolveIdentity, resolveClinicalActor,
-  sessionRefOf, requestContextOf,
 };

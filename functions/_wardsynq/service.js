@@ -62,13 +62,6 @@ const RESOURCE_TYPES = Object.freeze([
    * stored here precisely so it is append-only: a break-glass grant somebody could delete afterwards
    * would defeat the entire mechanism, whose only value is being legible later. */
   "BreakGlassGrant",
-  /* TASK 4.15: a hospital-wide emergency declaration - mass casualty, disaster, evacuation, surge,
-   * network outage. The same reasoning as BreakGlassGrant, at hospital scale: the record OF the
-   * declaration, append-only, never the source of any capability itself. Nothing in actor.js's
-   * grant logic reads this type; declaring one widens no role's read/write scope automatically -
-   * see emergency-mode.js's own header for why "do not create an unrestricted admin bypass" means
-   * this file grants nothing by existing. */
-  "EmergencyActivation",
   /* Medicines reconciliation. A record of DECISIONS about medicines taken before admission - not a
    * prescription and deliberately not modelled as one: deciding to continue a home medicine records
    * the decision, and the inpatient order is still written through the ordering path with its own
@@ -128,11 +121,6 @@ const RESOURCE_TYPES = Object.freeze([
    * and which stays visibly outstanding until a human books it - auto-booking would make the
    * promise look kept when nobody had spoken to the patient. */
   "Appointment", "AppointmentRequest",
-  // TASK 4.5: a clinician/resource is deliberately unavailable for a whole period (leave, a theatre
-  // closure) - a REFUSAL, never an override, unlike an appointment clash which a human may
-  // deliberately overbook. See blackout.js's own header for why this is never the same record as
-  // an Appointment/ResourceBooking clash.
-  "Blackout",
   /* A scored nursing risk assessment. The score selects the ACTIONS, which are the only part that
    * changes anything for the patient - so the actions and what was done about them live on the
    * record beside the number. */
@@ -151,17 +139,6 @@ const RESOURCE_TYPES = Object.freeze([
    * one - a refused pre-auth means the payer will not pay, and it does not mean the treatment is
    * not indicated. Kept apart from the chart so nothing clinical can ever read it as an answer. */
   "PreAuthorisation",
-  /* TASK 4.6: the charge-to-reconciliation ledger. Every discount/deposit/payment/refund/
-   * adjustment/write-off is an append to the SAME invoice record, never a mutation of its charge
-   * lines - "what was billed" and "what happened to the bill since" are different facts. A
-   * financial record, like Claim/PreAuthorisation, and never read to decide anything clinical. */
-  "Invoice",
-  /* TASK 4.9: a third-party request for a copy of a patient's record (HIM/ROI), distinct from the
-   * patient's own copy (PatientCopy is a receipt of a bedside handout; this is a tracked
-   * authorization + disclosure log for an attorney/other-provider/insurer/government-agency
-   * request). Append-only, one version per phase transition, the disclosure log counts what was
-   * sent and never re-stores the values. */
-  "ROIRequest",
   /* That a patient was given their own copy of the record, by a named clinician, at a time. A
    * RECEIPT and never a copy: it holds which results went and how many diagnoses, and none of their
    * values - a frozen second copy of clinical data that no correction ever reaches is a liability,
@@ -194,21 +171,12 @@ const RESOURCE_TYPES = Object.freeze([
    * against the request VERSION, so a later change to the request cannot make it look as though the
    * protocol was decided for a study nobody protocolled. */
   "ImagingProtocol",
-  /* TASK 7.7: that a study EXISTS in a PACS, and what it is. Metadata only and deliberately so -
-   * there is no url, no instance list and no pixel data on the row, because a field holding a
-   * retrieve URL becomes the thing every viewer, cache and log copies a patient's images through.
-   * What the chart needs is that the scan happened, when, of what, and the accession number that
-   * finds it in the viewer the radiologist already has. Its value is the ORDER LINK: matched to the
-   * ServiceRequest sharing its accession number, so a request and its scan stop being two unrelated
-   * rows. Before this, imaging studies reaching the SCCM adapter were counted and DROPPED. */
-  "ImagingStudy",
   /* Something another system sent that WardSynQ would not write silently: a patient who might be
    * one of two people here, a probable duplicate, a record that would overwrite one this hospital
    * authored, a resource type nothing maps. Held HERE, with the payload, rather than dropped or
    * guessed at - because the failure mode of every interface is the message that vanished and the
    * clinician who never knew it had been sent. Append-only, and resolved by a person. */
   "ExchangeException",
-  "ExchangeMessage",
   /* A person's decision that a patient in ANOTHER system is (or is not) a patient here. Recorded
    * once, by name, and consulted before any probabilistic matching on every later message from that
    * system for that patient - so the same look-alike is not held and decided again, and so the
@@ -219,179 +187,12 @@ const RESOURCE_TYPES = Object.freeze([
    * stolen table cannot be replayed as a token. Expiry is the record's, revocation is a new version
    * that cannot be deleted, and every one names the person or system it acts as. */
   "SmartGrant",
-  /* A time-critical resuscitation bundle (Code Sepsis / Code Blue / Code STEMI), the persisted state
-   * of wardsynq-emergency.js's EmergencyBundle. Its own type, not a CarePlan: a CarePlan is a plan a
-   * clinician wrote, and a bundle's elements, targets and time zero are the hospital's SEEDED,
-   * UNAPPROVED protocol content, never invented by a clinician on the screen. No grant change
-   * accompanies this: EMR_TREAT's unrestricted write already covers starting/marking a bundle (a
-   * "clinical commitment", per that file's own words - never started by a screen result alone), and
-   * EMR_VIEW's unrestricted read covers seeing one running. */
-  "ResusBundle",
-  /* A patient-device binding (HAZ-DEV-01, Task 2.2), the persisted state of wardsynq-iomt.js's
-   * DeviceGateway - keyed by deviceId, one open association at a time. Its own type, not folded
-   * into Observation: the association is the CLAIM that a monitor belongs to a patient, and the
-   * device readings it authorises are Observations in their own right, written separately, exactly
-   * like ResusBundle's elements are distinct from the bundle that governs them. Granted by
-   * EMR_VITALS (VITALS_TYPES in actor.js) - scanning a wristband and a device tag onto a patient is
-   * the nurse's own bedside act, the same authority as charting a vital. */
-  "DeviceAssociation",
-  /* The WHO Surgical Safety Checklist gate, the persisted state of wardsynq-surgical.js's
-   * SurgicalCase (Task 2.3). Its own type, not a CarePlan or a ClinicalNote: the checklist state,
-   * signatures and laterality chain are a safety-gate ledger, not a plan or a document. No grant
-   * change accompanies this: EMR_TREAT's unrestricted write already covers booking/checklisting a
-   * case (the same "clinical commitment" reasoning ResusBundle's own comment gives), and EMR_VIEW's
-   * unrestricted read covers seeing one. */
-  "SurgicalCase",
-  /* An anaesthesia record for one surgical case: induction/maintenance/emergence and the drugs
-   * actually given. Not a MedicationAdministration - those are for ordered ward medicines going
-   * through the five-rights eMAR; an anaesthetic is given directly by the anaesthetist inside a
-   * theatre already gated by the checklist above, a different authority and a different record. */
-  "AnesthesiaRecord",
-  /* Implant/prosthesis traceability (device, lot, serial, site) - explicitly absent before Task 2.3
-   * (wardsynq-surgical.js's own header names it as not modelled). A recall notice is only actionable
-   * against a hospital that can answer "which patients got lot X", so this is append-only and keyed
-   * to the case it was placed in. */
-  "ImplantRecord",
-  /* Antenatal history and gestation (Task 2.4): gravida, para, LMP/EDD, risk factors. One current
-   * episode per patient, versioned like everything else - a delivery is the fact that changes para,
-   * recorded through migrate-maternity.js's recordDelivery(), never edited by hand elsewhere. */
-  "PregnancyEpisode",
-  /* What actually happened at delivery: mode, when, complications. Its own type, not a ClinicalNote -
-   * a delivery is a discrete clinical EVENT with a machine-readable mode, not free prose, and it is
-   * what maternityView() reads to resolve the real wardsynq-obstetrics.js obstetricState() (the
-   * postpartum/puerperium window) from the actual record rather than a caller's claim. */
-  "DeliveryRecord",
-  /* Blood loss, obstetric. Its own type because pphThresholdReached()'s quantitative-vs-visual
-   * distinction (wardsynq-obstetrics.js) is load-bearing: an Observation of value+unit alone loses
-   * the "how was this established" fact a PPH threshold decision refuses to answer without. */
-  "BloodLossRecord",
-  /* A clinical relationship between two DIFFERENT patients - mother and newborn, first user (Task
-   * 2.4). Never PatientLink: that type asserts "these two records are one person", which is exactly
-   * the wrong claim for two people. No grant change accompanies any of the four types above:
-   * EMR_TREAT's unrestricted write already covers them (the same "clinical commitment" reasoning
-   * ResusBundle and SurgicalCase's own comments already give), and EMR_VIEW's unrestricted read
-   * covers seeing one. */
-  "FamilyLink",
-  /* A line, catheter or drain: site, type, when placed, when removed (Task 2.5). A placement log,
-   * not a protocol - it carries no judgement about when a line is indicated or how to care for it,
-   * the same restraint migrate-surgery.js's ImplantRecord already keeps for a prosthesis. No grant
-   * change accompanies this: EMR_TREAT's unrestricted write already covers it, matching
-   * ImplantRecord's own precedent - placing a line is a clinical commitment, not routine charting. */
-  "LineRecord",
-  /* The ONCqis bridge (Task 2.6). ONCqis (onco-*.js, functions/_onco_store.js) is a separate,
-   * owner-approved production oncology product with its own plan/cycle store, scoped only by
-   * hospitalId + a bare ghisPatientId - never linked to a canonical WardSynQ patient before this.
-   * OncologyLink names that join; it duplicates none of ONCqis's own staging/dosing/protocol
-   * content, only the identifying facts needed to resolve one system's plan against this record's
-   * patient. No grant change accompanies any of the three types below: EMR_TREAT's unrestricted
-   * write already covers them, the same "clinical commitment" reasoning ResusBundle/SurgicalCase/
-   * DeliveryRecord already establish - and deliberately NOT the oncqis_* roles, which
-   * functions/_wardsynq/actor.js still fences from every clinical capability; see that file's own
-   * comment on this task before changing it. */
-  "OncologyLink",
-  /* A CTCAE-graded adverse event. The grade is asserted here, never computed - onco-ctcae.js's own
-   * catalog and grading logic remain the sole authority for what a grade means. */
-  "AdverseEventRecord",
-  /* One cycle's chemotherapy administration, documented with the fields the audit for this task
-   * found nowhere else carries: dose lineage (BSA), premedication sequence, a structured
-   * extravasation field. It does not re-run wardsynq-meds.js's five-rights state machine - that
-   * machine is reused unchanged, through the existing /ward/mar door, for the bedside act itself. */
-  "ChemoAdministrationRecord",
-  /* The KardiQ X bridge (Task 2.7). KardiQ X (kardiox*.js) is an AI ECG-photo interpreter -
-   * self-declared "clinically unvalidated, regulatory-pending" (docs/ecg-engine-roadmap.md), unlike
-   * ONCqis's owner-approved production status. Its ECG records are local-only, encrypted, with no
-   * patientId and no server-side store at all - a genuinely disconnected record, the same failure
-   * mode OncologyLink closes for ONCqis. CardiologyLink names the join; it asserts no clinical
-   * identity beyond the caller-supplied identifying facts. No grant change: EMR_TREAT's unrestricted
-   * write covers it, the same precedent as OncologyLink. */
-  "CardiologyLink",
-  /* A resolved ECG: the AI verdict/HEART-TIMI score KardiQ X already computed, referenced here, not
-   * recomputed. Recorded with an explicit unvalidated:true provenance flag reflecting KardiQ X's own
-   * regulatory status - never presented as a validated clinical finding. */
-  "ECGReference",
-  /* TASK 3.5: the blood-bank bridge into wardsynq-transfusion.js (HAZ-BLD-01, safety-case verified).
-   * That module already implements ABO/RhD compatibility, crossmatch binding, and the two-person
-   * bedside check - it has no persistence of its own. Every phase transition
-   * (request/crossmatch/issue/bedside-check/start/observe/reaction/complete) is one version of ONE
-   * TransfusionEpisode record, the same append-only shape test/wardsynq-transfusion.test.mjs already
-   * proves against a bare store. No grant change: EMR_TREAT's unrestricted write covers it, the SAME
-   * precedent as ResusBundle/SurgicalCase/DeliveryRecord - role separation between blood-bank
-   * crossmatch/issue authority and ward-side bedside/administration authority is a real
-   * authorization decision this task states explicitly rather than making unilaterally, the same
-   * restraint migrate-oncology.js's header keeps about the oncqis_* role fence. */
-  "TransfusionEpisode",
-  /* TASK 5.14: a clinical incident, the persisted state of wardsynq-incidents.js's report/triage/
-   * RCA/CAPA/close lifecycle. Its own type: an incident is a report ABOUT the system, not a
-   * clinical fact about the patient it may name, and folding it into ClinicalNote would let a
-   * role with note-write silently author or edit an investigation's own conclusions. Its own
-   * capabilities (INCIDENT_REPORT to file, INCIDENT_INVESTIGATE to triage/RCA/CAPA/close) rather
-   * than EMR_TREAT, so filing a report never requires - or implies - clinical treatment
-   * authority, matching the "own authority" precedent ORDER_VERIFY/LAB_RESULT/TRANSFUSION_ISSUE
-   * already set. Append-only, one version per lifecycle transition, so an investigation's earlier
-   * conclusions cannot be edited away after the fact - the same property Claim's coding history
-   * and TransfusionEpisode's traceability already depend on. */
-  "IncidentReport",
-  /* TASK 6.14: a wristband/QR/NFC tag's own lifecycle - the persisted state of
-   * wardsynq-identity-tag.js's assign/verify/replace/deactivate/lost engine. Its own type, not a
-   * field mutation on Patient: wristbandBarcode has been comparable since early in this build, but a
-   * comparator that trusts whatever code is currently on the field is only as safe as the process
-   * that put it there. Multiple records ACCUMULATE per patient (one per tag ever issued), never
-   * overwritten - "which code named this patient, when, and what happened to the last one" is
-   * exactly the chain a wrong-patient investigation needs and a mutated field cannot answer.
-   * Granted by EMR_VITALS (VITALS_TYPES in actor.js), the same capability DeviceAssociation already
-   * uses - scanning a wristband onto a patient is the same kind of bedside act. */
-  "PatientTag",
-  /* TASK 7 STEP 1: a durable, admin-issued authorization saying "actor X may push data claiming to
-   * be source system Y". Closes a real vulnerability where any clinician holding emr.treat could
-   * declare an X-Source-System header naming ANY registered partner and every downstream
-   * ownership/provenance/MPI decision would believe it. Its own type, append-only like everything
-   * else - who may claim which external identity is exactly the kind of fact that must never be
-   * silently edited away. Granted no scope of its own: only `admin`'s pre-existing unrestricted
-   * write reaches it, so issuing a grant stays an administrative act by construction, not by a
-   * capability that could be widened by accident. See fhir-inbound.js's own header for the full
-   * design. */
-  "SourceSystemGrant",
-  /* TASK 7.4: where this hospital may send, and what it has sent. Two types, both append-only.
-   * OutboundDestination is the ALLOWLIST ITSELF - the only way a URL can be posted to is that an
-   * administrator wrote it down here, so no request can ever talk this server into exfiltrating a
-   * chart to an address of the caller's choosing. OutboundDelivery is the QUEUE: a delivery must
-   * outlive the isolate that created it, or an outage loses a discharge summary, and its history of
-   * attempts is the only honest answer to "did the other hospital actually receive it". Neither is
-   * granted a clinical scope: like SourceSystemGrant, only `admin`'s unrestricted write reaches
-   * them, so deciding where patient data leaves the building stays an administrative act by
-   * construction. See fhir-outbound.js's header. */
-  "OutboundDestination",
-  "OutboundDelivery",
-  /* TASK 8: one AI action, written down. Its own governed type because it is a fact ABOUT the record
-   * rather than a clinical finding in it - what a model was asked, which model answered, which row
-   * versions it was shown, what it said, and what a clinician then decided. A log line would have
-   * needed tenant isolation, an append-only history, an audit row and the patient compartment all
-   * inventing again; a record inherits them. Readable by exactly the people who may read the patient
-   * it is about, which is why patientId is on it. See maik-interaction.js. */
-  "MaiKInteraction",
-  /* TASK 10.17: the same governed-AI-action discipline as MaiKInteraction, for a question about the
-   * HOSPITAL rather than one patient's chart - no patientId, because there is no one patient. Readable
-   * under the same hospital-wide EMR_VIEW capability every other operational aggregate already uses
-   * (EMR_VIEW grants read:null, every type), never patient-compartmented since it carries no patient.
-   * See twin-copilot.js. */
-  "TwinInteraction",
 ]);
 
 const MODE = Object.freeze({ SYSTEM_OF_RECORD: "system-of-record", INTEGRATION: "integration" });
 
 /** Provenance value the model stamps on records WardSynQ itself originated. */
 const NATIVE_SYSTEM = "wardsynq-native";
-
-/**
- * PURE. Whether a record was imported from another system (a feed, a connector, an exchange partner)
- * rather than authored here. THE ONE QUESTION every ward workflow must ask before acting on a row:
- * a dose another hospital gave is not one this hospital bills, an order another hospital placed is
- * not one this ward's phlebotomist collects, a result matched to a stranger's order is a wrong chart.
- */
-function isExternalRecord(record) {
-  const sys = record && record.meta && record.meta.source && record.meta.source.system;
-  return !!sys && sys !== NATIVE_SYSTEM;
-}
 
 class AuthorityError extends Error {
   constructor(message, code, detail) {
@@ -521,16 +322,10 @@ class RecordService {
 
   async _audit(action, fields) {
     const patientId = fields && fields.patientId;
-    // TASK 4.14: correlationId/deviceId/sessionId - the plan's minimum-audit fields this codebase
-    // had nowhere to put. Folded into the existing free-form `scope` blob under its own `request`
-    // key rather than a new column (see actor.js's requestContextOf() for why), so every audit
-    // event this file already writes carries them with no change to any of this file's callers.
-    const rc = this.actor && this.actor.requestContext;
-    const scope = (fields && fields.scope) || null;
     const event = {
       ts: this.now(), actor: this.actor.id, connectorId: "wardsynq", action,
       resourceCounts: (fields && fields.resourceCounts) || null,
-      scope: rc ? { ...(scope || {}), request: rc } : scope,
+      scope: (fields && fields.scope) || null,
       patientRefHash: patientId ? await this.pseudonym(patientId) : null,
       outcome: (fields && fields.outcome) || "ok",
     };
@@ -724,37 +519,12 @@ class RecordService {
           throw err;
         }
       },
-      /**
-       * Every entity in ONE append: one audit event naming them all, the idempotency key landing with
-       * them, and nothing landing unless everything does. The governed store authorises each first.
-       */
-      putMany: async (adapterActor, entities) => {
-        const list = Array.isArray(entities) ? entities : [];
-        if (!list.length) return [];
-        const counts = {};
-        for (const e of list) counts[e.resourceType] = (counts[e.resourceType] || 0) + 1;
-        const patients = new Set(list.map((e) => (e.resourceType === "Patient" ? e.id : e.patientId)).filter(Boolean));
-        const auditEvent = await self._audit("record.ingest", {
-          scope: { transaction: true, entities: list.map((e) => ({ resourceType: e.resourceType, id: e.id, system: e.meta && e.meta.source && e.meta.source.system })) },
-          resourceCounts: counts, patientId: patients.size === 1 ? [...patients][0] : null,
-        });
-        auditEvent.actor = adapterActor.id;
-        self.backend.withWriteContext({ audit: auditEvent, idempotencyKey: pendingKey });
-        try {
-          const saved = await self.governed.putMany(adapterActor, list);
-          pendingKey = null;
-          return saved;
-        } catch (err) {
-          self.backend.withWriteContext(null);
-          throw err;
-        }
-      },
     };
   }
 }
 
 export {
-  RESOURCE_TYPES, MODE, NATIVE_SYSTEM, isExternalRecord,
+  RESOURCE_TYPES, MODE, NATIVE_SYSTEM,
   AuthorityError, RecordRequestError,
   TenantBackend, RecordService, recordPolicy, actorForMembership, externallyOwned,
 };

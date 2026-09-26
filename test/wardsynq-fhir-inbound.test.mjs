@@ -6,93 +6,12 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import {
-  REASON, RESOLUTION, INBOUND_TYPES, inboundEnabled, bodySourceOf, splitBundle, evaluateIfNoneExist, markTerminology,
+  REASON, RESOLUTION, INBOUND_TYPES, inboundEnabled, sourceSystemOf, splitBundle, markTerminology,
   reconcileIdentity, rebind, partitionConflicts, ExchangeException, ExchangeIdentityDecision, priorDecision, EXCEPTION_TYPE, DECISION_TYPE,
-  GRANT_TYPE, SourceSystemGrant, grantIdFor, authorizedSourceSystem,
 } from "../functions/_wardsynq/fhir-inbound.js";
 import { RESOURCE_TYPES, NATIVE_SYSTEM } from "../functions/_wardsynq/service.js";
-import { normalizeFhir } from "../functions/_connect/connectors/fhir-r4/normalize.js";
-import { validateBundle } from "../functions/_connect/canonical/validate.js";
-import { mapSccmBundle } from "../wardsynq/adapters/wardsynq-sccm-adapter.js";
 
 const SRC = readFileSync(new URL("../functions/_wardsynq/fhir-inbound.js", import.meta.url), "utf8");
-
-test("SCCM 1.1: administrations, service requests and consents travel through the SAME normaliser and adapter, honestly bounded", () => {
-  const raw = {
-    patient: { id: "P1", name: [{ text: "A" }] },
-    resources: [
-      { resourceType: "MedicationRequest", id: "RX1", status: "active", intent: "order", medicationCodeableConcept: { text: "Metformin" }, subject: { reference: "Patient/P1" } },
-      { resourceType: "MedicationAdministration", id: "MA1", status: "completed", medicationCodeableConcept: { coding: [{ system: "http://www.nlm.nih.gov/research/umls/rxnorm", code: "6809", display: "Metformin" }] }, subject: { reference: "Patient/P1" }, effectiveDateTime: "2026-08-02T08:00:00Z", performer: [{ actor: { display: "Nurse Elsewhere" } }], request: { reference: "MedicationRequest/RX1" }, dosage: { text: "500 mg", dose: { value: 500, unit: "mg" }, route: { text: "oral" } } },
-      { resourceType: "MedicationAdministration", id: "MA2", status: "in-progress", medicationCodeableConcept: { text: "Insulin" }, subject: { reference: "Patient/P1" }, effectiveDateTime: "2026-08-02T09:00:00Z" },
-      { resourceType: "MedicationAdministration", id: "MA3", status: "not-done", medicationCodeableConcept: { text: "Aspirin" }, subject: { reference: "Patient/P1" }, effectiveDateTime: "2026-08-02T10:00:00Z", statusReason: [{ text: "Patient refused" }] },
-      { resourceType: "ServiceRequest", id: "SR1", status: "active", intent: "order", code: { text: "Chest X-ray" }, category: [{ coding: [{ code: "363679005", display: "Imaging" }] }], priority: "asap", subject: { reference: "Patient/P1" }, authoredOn: "2026-08-01T09:00:00Z", requester: { display: "Dr Elsewhere" } },
-      { resourceType: "DiagnosticReport", id: "DR1", status: "final", code: { text: "Chest X-ray report" }, subject: { reference: "Patient/P1" }, basedOn: [{ reference: "ServiceRequest/SR1" }], conclusion: "Clear." },
-      { resourceType: "Consent", id: "C1", status: "active", scope: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/consentscope", code: "treatment" }] }, category: [{ text: "General consent" }], patient: { reference: "Patient/P1" }, dateTime: "2026-08-01T08:00:00Z", performer: [{ display: "The patient" }], provision: { type: "permit" } },
-      { resourceType: "Consent", id: "C2", status: "rejected", scope: { coding: [{ code: "patient-privacy" }], text: "Sharing with the registry" }, category: [{ text: "Data sharing" }], patient: { reference: "Patient/P1" } },
-      { resourceType: "Consent", id: "C3", status: "proposed", scope: { text: "research" }, category: [{ text: "Research" }], patient: { reference: "Patient/P1" } },
-    ],
-  };
-  const sccm = normalizeFhir({ tenant: { id: "t" }, now: () => new Date("2026-09-08T00:00:00Z") }, raw);
-  assert.equal(sccm.sccmVersion, "1.1");
-  assert.equal(sccm.administrations.length, 3);
-  assert.deepEqual(sccm.administrations[0].request, { type: "MedicationStatement", id: "RX1" });
-  assert.equal(sccm.administrations[0].performer, "Nurse Elsewhere");
-  assert.equal(sccm.serviceRequests.length, 1);
-  assert.deepEqual(sccm.diagnosticReports[0].basedOn, { type: "ServiceRequest", id: "SR1" });
-  assert.deepEqual(sccm.consents.map((c) => c.decision), ["permit", "deny", null], "permit, deny, and undecided is null - never guessed");
-  assert.equal(validateBundle(sccm).ok, true, JSON.stringify(validateBundle(sccm).errors));
-
-  sccm.meta.sourceConnector = "fhir-his";
-  const m = mapSccmBundle(sccm);
-  const by = (t) => m.entities.filter((e) => e.resourceType === t);
-  const mars = by("MedicationAdministration");
-  assert.equal(mars.length, 2, "completed and not-done are dose events; in-progress is not and is named");
-  assert.ok(m.issues.some((i) => i.code === "SCCM_ADMIN_STATE" && /MA2/.test(i.message)));
-  const given = mars.find((x) => x.id === "fhir-his-mar-ma1");
-  assert.equal(given.status, "administered");
-  assert.equal(given.orderId, "fhir-his-rx-rx1", "the source's OWN order, under its own id");
-  assert.equal(given.administeredBy, "external:fhir-his:Nurse Elsewhere", "never a clinician here");
-  assert.equal(given.drugCodeSystem, "http://www.nlm.nih.gov/research/umls/rxnorm");
-  assert.deepEqual(given.dose, { value: 500, unit: "mg" });
-  assert.equal(given.meta.source.system, "fhir-his");
-  const refused = mars.find((x) => x.id === "fhir-his-mar-ma3");
-  assert.equal(refused.status, "cancelled");
-  assert.equal(refused.orderId, "external:fhir-his:unreferenced", "no order is invented to hang a dose on");
-  assert.equal(refused.holdReason, "Patient refused");
-  const sr = by("ServiceRequest")[0];
-  assert.equal(sr.id, "fhir-his-sr-sr1");
-  assert.equal(sr.status, "draft", "never active: nothing here collects or bills from another hospital's order");
-  assert.equal(sr.requesterId, "external:fhir-his");
-  assert.equal(sr.category, "imaging");
-  assert.equal(sr.priority, "urgent", "asap has no home in the closed list and becomes urgent, not stat");
-  assert.equal(sr.externalStatus, "active");
-  assert.equal(by("DiagnosticReport")[0].serviceRequestId, "fhir-his-sr-sr1", "the report answers the source's order");
-  assert.equal(by("PatientConsent").length, 0, "consent is a governance record: the adapter does not build it, fhir-inbound.js does");
-});
-
-test("TRANSACTION AND BATCH: the entry's request is carried, only POST and PUT are done, If-None-Exist is a search with three answers", () => {
-  const b = { resourceType: "Bundle", type: "transaction", entry: [
-    { resource: { resourceType: "Patient", id: "p1" }, request: { method: "POST", url: "Patient", ifNoneExist: "identifier=urn:his:mrn|M1" } },
-    { resource: { resourceType: "Observation", id: "o1" }, request: { method: "PUT", url: "Observation/o1", ifMatch: 'W/"2"' } },
-    { resource: { resourceType: "Observation", id: "o2" }, request: { method: "DELETE", url: "Observation/o2" } },
-  ] };
-  const s = splitBundle(b);
-  assert.equal(s.bundleType, "transaction"); assert.equal(s.atomic, true);
-  assert.deepEqual(s.requests.get("Patient/p1"), { method: "POST", ifNoneExist: "identifier=urn:his:mrn|M1", ifMatch: null, url: "Patient" });
-  assert.equal(s.requests.get("Observation/o1").ifMatch, 'W/"2"');
-  assert.ok(s.problems.some((p) => p.reason === REASON.INVALID && /DELETE is not supported/.test(p.detail)), "a delete is named, never done as the nearest thing");
-  assert.equal(splitBundle({ ...b, type: "batch" }).atomic, false);
-  assert.equal(splitBundle({ ...b, type: "collection" }).atomic, false, "a collection is processed entry by entry, as before");
-
-  const rows = [
-    { resourceType: "Observation", id: "a", meta: { versionId: "1", lastUpdated: "2026-08-02T00:00:00Z" }, code: { coding: [{ system: "http://loinc.org", code: "2160-0" }] }, effectiveDateTime: "2026-08-02T06:00:00Z" },
-    { resourceType: "Observation", id: "b", meta: { versionId: "1", lastUpdated: "2026-08-02T00:00:00Z" }, code: { coding: [{ system: "http://loinc.org", code: "2160-0" }] }, effectiveDateTime: "2026-08-03T06:00:00Z" },
-  ];
-  assert.equal(evaluateIfNoneExist("Observation", "code=http://loinc.org|2160-0&date=2026-08-02", rows).outcome, "exists");
-  assert.equal(evaluateIfNoneExist("Observation", "code=http://loinc.org|2160-0", rows).outcome, "ambiguous");
-  assert.equal(evaluateIfNoneExist("Observation", "code=http://loinc.org|2345-7", rows).outcome, "create");
-  assert.equal(evaluateIfNoneExist("Observation", "bogus=1", rows).outcome, "invalid", "an unknown parameter is not silently dropped from a precondition either");
-});
 
 test("OFF UNLESS THE HOSPITAL TURNS IT ON, and a feed must name itself", () => {
   assert.equal(inboundEnabled(null), false);
@@ -100,44 +19,10 @@ test("OFF UNLESS THE HOSPITAL TURNS IT ON, and a feed must name itself", () => {
   assert.equal(inboundEnabled({ inbound: { enabled: "true" } }), false, "only a real true");
   assert.equal(inboundEnabled({ inbound: { enabled: true } }), true);
 
-  // bodySourceOf is BUNDLE-LEVEL ONLY (TASK 7 STEP 1): a single resource's own meta.source/
-  // identifier describe THAT RESOURCE, not who is sending the request - reading them as a sender
-  // claim would refuse a legitimate update-conflict PUT that echoes back our own "wardsynq-native"
-  // resource. Only a Bundle's top-level fields are a self-declaration.
-  assert.equal(bodySourceOf({ resourceType: "Bundle", meta: { source: "urn:stewardmd:source:ghis" } }), "ghis");
-  assert.equal(bodySourceOf({ resourceType: "Bundle", identifier: { system: "http://partner.example/bundles" } }), "http-partner-example-bundles");
-  assert.equal(bodySourceOf({ resourceType: "Bundle" }), "", "no name: refused upstream, never defaulted");
-  assert.equal(bodySourceOf({ resourceType: "Observation", meta: { source: "urn:stewardmd:source:ghis" } }), "", "a single resource's own meta is NOT a sender claim");
-});
-
-test("SOURCE-SYSTEM AUTHORIZATION: header/body must agree, a claim is required, and only a GRANTED actor is trusted - never the caller's own say-so", async () => {
-  const grants = [SourceSystemGrant({ id: grantIdFor("cfa:doc1", "epic"), actorId: "cfa:doc1", sourceSystem: "epic", active: true, grantedBy: "cfa:admin", grantedAt: "2026-01-01T00:00:00.000Z" })];
-  const svc = { list: async () => grants };
-  const doc1 = { actor: { id: "cfa:doc1" } };
-  const doc2 = { actor: { id: "cfa:doc2" } };
-
-  // 1. a granted actor claiming its own granted system succeeds.
-  const ok = await authorizedSourceSystem(svc, doc1, "epic", "");
-  assert.equal(ok.system, "epic");
-  // 2. the SAME actor claiming a DIFFERENT (unregistered) system is refused, not silently allowed
-  //    because it already holds SOME grant.
-  const other = await authorizedSourceSystem(svc, doc1, "oracle-health", "");
-  assert.equal(other.error.code, "source_unauthorized");
-  // 3. a DIFFERENT actor - even authenticated, even in the same tenant - claiming a system it was
-  //    never granted is refused. This is the exact vulnerability: an authenticated session with no
-  //    grant of its own must never be trusted on its say-so.
-  const impersonator = await authorizedSourceSystem(svc, doc2, "epic", "");
-  assert.equal(impersonator.error.code, "source_unauthorized");
-  assert.match(impersonator.error.detail, /cfa:doc2 is not registered to push data as "epic"/);
-  // 4. header and body disagreeing is refused before any grant is even consulted.
-  const mismatch = await authorizedSourceSystem(svc, doc1, "epic", "oracle-health");
-  assert.equal(mismatch.error.code, "source_mismatch");
-  // 5. no claim at all is refused.
-  const none = await authorizedSourceSystem(svc, doc1, "", "");
-  assert.equal(none.error.code, "source_required");
-  // 6. claiming to be this hospital's own name is refused, even with an (impossible) grant for it.
-  const native = await authorizedSourceSystem(svc, doc1, "wardsynq-native", "");
-  assert.equal(native.error.code, "source_native");
+  assert.equal(sourceSystemOf("His Hospital HIS", {}), "his-hospital-his", "the header wins and is slugged");
+  assert.equal(sourceSystemOf("", { meta: { source: "urn:stewardmd:source:ghis" } }), "ghis");
+  assert.equal(sourceSystemOf("", { identifier: { system: "http://partner.example/bundles" } }), "http-partner-example-bundles");
+  assert.equal(sourceSystemOf("", {}), "", "no name: refused upstream, never defaulted");
 });
 
 test("A BUNDLE IS SPLIT, AND AN UNSUPPORTED TYPE IS A NAMED PROBLEM, never a silent omission", () => {

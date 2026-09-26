@@ -91,20 +91,7 @@
         p.addListener("download", function (ev) { try { onProgress(Math.round((ev && ev.percent) || 0)); } catch (e) {} }).then(function (h) { offDl = h; });
       }
     } catch (e) {}
-    // One automatic retry on a transport-class download failure. The plugin verifies the
-    // sha256 NATIVELY after fetching, so a connection that drops mid-file surfaces as
-    // "Checksum failed", not as a network error — retrying network-only would miss the most
-    // common ward-connection failure. The GET is idempotent with the checksum verified on
-    // every attempt, so one retry is safe; storage and auth failures still fail fast.
-    function tryDownload(retriesLeft) {
-      return p.download({ url: pending.zipUrl, version: String(pending.version), checksum: pending.zipHash || undefined })
-        .then(null, function (e) {
-          var code = otaCode(e, "download-failed");
-          if (retriesLeft > 0 && (code === "network" || code === "checksum")) return tryDownload(retriesLeft - 1);
-          throw e;
-        });
-    }
-    return tryDownload(1)
+    return p.download({ url: pending.zipUrl, version: String(pending.version), checksum: pending.zipHash || undefined })
       .then(function (bundle) {
         cleanup();
         var applied = (immediate === false) ? p.next({ id: bundle.id }) : p.set({ id: bundle.id });
@@ -193,18 +180,8 @@
       _bannerEl.querySelector(".go").addEventListener("click", function () {
         var btn = _bannerEl.querySelector(".go"); btn.textContent = "Updating…"; btn.disabled = true;
         // set() itself reloads the WebView on success — nothing left to do here but handle failure.
-        // Phrase it from the failure CODE (same vocabulary as the Settings screen): a connection
-        // drop and a full disk need different actions, and a bare "try again" never says which.
         install(_bannerPending, null, true).then(function (res) {
-          if (!res.ok) {
-            btn.textContent = "Update now"; btn.disabled = false;
-            var code = res && res.error;
-            toast(code === "network" ? "Download failed — check connection and try again" :
-              code === "storage" ? "Not enough space to download the update" :
-              code === "checksum" ? "Update didn't verify — try again later" :
-              code === "missing" ? "That update is no longer available" :
-              "Couldn't apply the update — try again later");
-          }
+          if (!res.ok) { btn.textContent = "Update now"; btn.disabled = false; toast("Couldn't apply the update — try again later"); }
         });
       });
     }

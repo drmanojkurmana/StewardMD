@@ -46,9 +46,8 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
 import {
   CLAIM_STATE, PREAUTH_STATE, SUPPORT, BillingError,
   mayProceedClinically, supportFor, codeClaim, detectUpcoding,
-  submit, deny, resubmit, recordAdjudication, preAuthorisation, upcodingWatchlist,
+  submit, deny, resubmit, preAuthorisation, upcodingWatchlist,
 } from "../../wardsynq/wardsynq-billing.js";
-import { submitViaAdapter } from "../../wardsynq/wardsynq-tpa-adapter.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -144,7 +143,7 @@ async function codeClaimForEncounter(request, env, ctx) {
 
   let claim;
   try {
-    claim = codeClaim({ encounterId, patientId, record: view, codes, codedBy: resolved.actor.id, now, invoiceId: str(ctx.invoiceId) || null });
+    claim = codeClaim({ encounterId, patientId, record: view, codes, codedBy: resolved.actor.id, now });
   } catch (e) {
     if (!(e instanceof BillingError)) throw e;
     /* The refusal names every code and what the record says about each, so the coder can see which
@@ -186,7 +185,7 @@ async function codeClaimForEncounter(request, env, ctx) {
   }
 }
 
-const ACTIONS = Object.freeze(["submit", "deny", "resubmit", "adjudicate"]);
+const ACTIONS = Object.freeze(["submit", "deny", "resubmit"]);
 
 /**
  * Moves a claim through its lifecycle.
@@ -230,11 +229,11 @@ async function claimAction(request, env, ctx) {
 
   let next;
   try {
-    if (action === "submit") next = submit(claim, { by, now, submittedAmount: ctx.submittedAmount });
+    if (action === "submit") next = submit(claim, { by, now });
     else if (action === "deny") {
       if (!reason) return { ...base, ok: false, status: 422, error: "reason_required", detail: "a denial carries the payer's reason", claim: null };
-      next = deny(claim, { reason, by, now, deniedAmount: ctx.deniedAmount });
-    } else if (action === "resubmit") {
+      next = deny(claim, { reason, by, now });
+    } else {
       if (!reason) return { ...base, ok: false, status: 422, error: "reason_required", detail: "a resubmission names why", claim: null };
       /* Re-coding on resubmission is re-checked against the CHART AS IT IS NOW, not against the view
        * taken when the claim was first coded. If a diagnosis appeared between the denial and this
@@ -247,11 +246,7 @@ async function claimAction(request, env, ctx) {
         catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), claim: null }; }
         view = clinicalView(conditions);
       }
-      next = resubmit(claim, { codes: ctx.codes || null, record: view, by, reason, now, submittedAmount: ctx.submittedAmount });
-    } else {
-      // adjudicate: records what the payer said it will pay. Never moves claim.state - that stays
-      // submit/deny/resubmit's job alone.
-      next = recordAdjudication(claim, { approvedAmount: ctx.approvedAmount, deniedAmount: ctx.deniedAmount, by, now, reason });
+      next = resubmit(claim, { codes: ctx.codes || null, record: view, by, reason, now });
     }
     /* Only when there was actually something to explain. A reason recorded against a clean claim
      * would put the words "unsupported severity" into the history of a claim that had none. */
@@ -261,16 +256,6 @@ async function claimAction(request, env, ctx) {
   } catch (e) {
     if (e instanceof BillingError) return { ...base, ok: false, status: 422, error: "billing_refused", code: e.code, detail: e.message, claim: null };
     throw e;
-  }
-
-  /* THE ADAPTER BOUNDARY (master plan section 2.3). submit/resubmit are the only actions that mean
-   * "send this to the payer" - deny/adjudicate record a fact ARRIVING, not one going out. No real
-   * adapter is configured anywhere in this codebase (ctx.tpaAdapter, if a site ever wires one in),
-   * so this defaults to NullAdapter() and the claim is honestly recorded as queued for the
-   * hospital's own existing out-of-band process - never claimed as sent to a payer that was never
-   * actually contacted. */
-  if (action === "submit" || action === "resubmit") {
-    next.adapter = await submitViaAdapter(next, ctx.tpaAdapter || null);
   }
 
   try {
@@ -314,7 +299,6 @@ async function recordPreAuth(request, env, ctx) {
     auth = preAuthorisation({
       patientId, treatment, state, decidedAt,
       scheme: str(ctx.scheme) || null, reason: str(ctx.reason) || null, requestedBy: resolved.actor.id,
-      invoiceId: str(ctx.invoiceId) || null, authorizedAmount: ctx.authorizedAmount,
     });
   } catch (e) {
     if (e instanceof BillingError) return { ...base, ok: false, status: 422, error: "preauth_refused", code: e.code, detail: e.message, preAuth: null };

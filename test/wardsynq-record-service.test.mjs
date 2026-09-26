@@ -307,12 +307,7 @@ test("every read and write leaves a PHI-free audit row; the write's row lands at
     assert.equal(a.actor, "fb:dr-menon");
   }
   const w = h.repository.audit.find((a) => a.action === "record.write");
-  // TASK 4.14: correlationId/deviceId/sessionId now ride along under scope.request - the plan's own
-  // "correlation ID"/"source, device, session" minimum-audit fields, folded into the existing
-  // free-form scope blob rather than a schema change. Still no PHI: asserted above already.
-  const { request: rc, ...rest } = w.scope;
-  assert.deepEqual(rest, { resourceType: "Patient", id: "pat-10", version: 1, mode: "system-of-record", idempotent: true });
-  assert.ok(rc && rc.correlationId, "a correlation id is stamped on every write: " + JSON.stringify(rc));
+  assert.deepEqual(w.scope, { resourceType: "Patient", id: "pat-10", version: 1, mode: "system-of-record", idempotent: true });
 });
 
 /* ------------------------------------------------------------------ the two modes and the connector boundary */
@@ -363,51 +358,6 @@ test("integration mode: an external EMR's records cannot be overwritten natively
   assert.equal((await pc.governed.get(pc.actor, "Patient", "fhir-r4-pat-epic-77")).name, "Epic Patient");
 });
 
-/* TASK 7 STEP 4.1: "GHIS patientId MUST NOT bypass governed MPI identity resolution" - the plan's
- * own words. /ingest/sccm now runs every incoming Patient through the SAME reconcileIdentity()
- * fhir-inbound.js uses, real end-to-end through the actual route - never a bare helper call. */
-test("ingest/sccm: an incoming patient matching a local one by MRN is LINKED, never a duplicate Patient", async () => {
-  const h = hospital();
-  const pc = await client(h, "fb:dr-menon");
-  const local = await pc.session("pat-link-1").put(Patient({ id: "pat-link-1", mrn: "LNK-1", name: "Local Patient", dob: "1970-01-01" }));
-  assert.equal(local.version, 1);
-
-  const b = sccmBundle({
-    sourceConnector: "hl7v2", generatedAt: "2026-09-06T12:00:00Z",
-    patient: sccmPatient({ id: "EXT-9", name: "Local Patient (as sent)", identifiers: [{ system: "urn:mrn", type: "MRN", value: "LNK-1" }] }),
-    observations: [sccmObservation({ id: "OBS-LNK", category: "laboratory", code: { coding: [{ code: "2823-3" }], text: "Potassium" }, value: { value: 4.2, unit: "mmol/L" } })],
-  });
-  const res = await (await h.fetchAs("fb:dr-menon")("https://x/api/wardsynq/gimsr/ingest/sccm", { method: "POST", body: JSON.stringify(b) })).json();
-  assert.equal(res.ok, true, JSON.stringify(res));
-
-  // No second Patient was created under the feed's own id.
-  assert.equal(await pc.governed.get(pc.actor, "Patient", "hl7v2-pat-ext-9"), null, "linked, not created - the feed's own patient id never lands as a record");
-  // The observation was REBOUND onto the LOCAL patient, not the feed's.
-  const obs = await pc.governed.get(pc.actor, "Observation", "hl7v2-obs-obs-lnk");
-  assert.equal(obs.patientId, "pat-link-1", "rebound onto the existing local chart");
-  assert.equal((await pc.governed.get(pc.actor, "Patient", "pat-link-1")).version, 1, "the local patient's OWN record is untouched by the link - identity, not a merge");
-});
-
-test("ingest/sccm: an MRN matching MORE THAN ONE local patient is held ambiguous, and NOTHING is written - never a guess", async () => {
-  const h = hospital();
-  const pc = await client(h, "fb:dr-menon");
-  // An artificial but real ambiguity: two local patients that happen to carry the same MRN value
-  // (a data-quality reality this reconciler must survive, not assume away).
-  await pc.session("pat-amb-a").put(Patient({ id: "pat-amb-a", mrn: "AMB-1", name: "Patient A", dob: "1970-01-01" }));
-  await pc.session("pat-amb-b").put(Patient({ id: "pat-amb-b", mrn: "AMB-1", name: "Patient B", dob: "1980-02-02" }));
-
-  const b = sccmBundle({
-    sourceConnector: "hl7v2", generatedAt: "2026-09-06T13:00:00Z",
-    patient: sccmPatient({ id: "EXT-AMB", name: "Ambiguous Feed Patient", identifiers: [{ system: "urn:mrn", type: "MRN", value: "AMB-1" }] }),
-    observations: [sccmObservation({ id: "OBS-AMB", category: "laboratory", code: { coding: [{ code: "2823-3" }], text: "Potassium" }, value: { value: 5.5, unit: "mmol/L" } })],
-  });
-  const res = await (await h.fetchAs("fb:dr-menon")("https://x/api/wardsynq/gimsr/ingest/sccm", { method: "POST", body: JSON.stringify(b) })).json();
-  assert.equal(res.ok, false, JSON.stringify(res));
-  assert.equal(res.reason, "identity-ambiguous");
-  assert.equal(await pc.governed.get(pc.actor, "Patient", "hl7v2-pat-ext-amb"), null, "the feed's own patient was never created");
-  assert.equal(await pc.governed.get(pc.actor, "Observation", "hl7v2-obs-obs-amb"), null, "nor was the observation that would have landed under a guessed identity");
-});
-
 test("system-of-record mode still protects feed-owned records (a LIS result is corrected by the LIS)", async () => {
   const h = hospital();
   const pc = await client(h, "fb:dr-menon");
@@ -423,7 +373,7 @@ test("system-of-record mode still protects feed-owned records (a LIS result is c
   assert.equal((await pc.session("pat-12").put({ ...p, name: "Native 2" })).version, 2);
 });
 
-test("SCCM adapter: stable ids, provenance stamped, nothing invented, imaging now MAPPED rather than dropped", () => {
+test("SCCM adapter: stable ids, provenance stamped, nothing invented, imaging reported not dropped silently", () => {
   const b = sccmBundle({ sourceConnector: "dicomweb", patient: sccmPatient({ id: "P/1" }), imagingStudies: [{ id: "S1", modality: "CT" }] });
   const m = mapSccmBundle(b);
   assert.equal(m.patient.id, "dicomweb-pat-p-1");
@@ -431,16 +381,7 @@ test("SCCM adapter: stable ids, provenance stamped, nothing invented, imaging no
   assert.equal(m.patient.dobIsUnknown, true);
   assert.equal(m.patient.nameIsUnknown, true);
   assert.equal(m.patient.meta.source.system, "dicomweb");
-  /* TASK 7.7 changed this line, and the change is the point: this assertion used to end in
-   * SCCM_IMAGING_NOT_MAPPED, an issue that said "this study has no WardSynQ resource and was not
-   * written". It now has one. The full inbound path is proven in test/wardsynq-dicom-imaging.test.mjs
-   * against a real DICOMweb server. */
-  assert.deepEqual(m.issues.map((i) => i.code), ["SCCM_PATIENT_NO_MRN", "SCCM_PATIENT_NO_NAME", "SCCM_PATIENT_NO_DOB"]);
-  const study = m.entities.find((e) => e.resourceType === "ImagingStudy");
-  assert.ok(study, "the study is an entity now");
-  assert.equal(study.id, "dicomweb-img-s1");
-  assert.equal(study.modality, "CT");
-  assert.equal(study.serviceRequestId, null, "no order in this bundle, so no order link is invented");
+  assert.deepEqual(m.issues.map((i) => i.code), ["SCCM_PATIENT_NO_MRN", "SCCM_PATIENT_NO_NAME", "SCCM_PATIENT_NO_DOB", "SCCM_IMAGING_NOT_MAPPED"]);
   assert.equal(mapSccmBundle(b).patient.id, m.patient.id, "same source, same id");
   assert.equal(sccmAdapter().claims({ sccmVersion: "1.0", patient: { id: "x" } }), true);
   assert.equal(sccmAdapter().claims({ patientId: 1, labs: [] }), false, "a GHIS bundle is not claimed");
@@ -546,32 +487,12 @@ test("role mapping: every operational role resolves to exactly the grant its cap
    * is exactly why it got its OWN type rather than being written as a ClinicalNote. Putting it
    * there would have forced this scope open to every clinical document, and the two assertions
    * below would have had to be deleted rather than kept. */
-  // TASK 5.14: INCIDENT_REPORT joined nurse's caps (filing an incident is broad, per
-  // wardsynq-incidents.js's own header on silence being the real failure mode) and adds exactly
-  // one type - IncidentReport - to the write scope, nothing else.
-  assert.deepEqual(write("nurse"), ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord", "PatientTag", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "MedicationAdministration", "InfusionRate", "IncidentReport"]);
+  assert.deepEqual(write("nurse"), ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "MedicationAdministration", "InfusionRate"]);
   assert.equal(read("nurse"), null);
   assert.ok(!write("nurse").includes("MedicationOrder"), "a nurse who can give a dose still cannot write the order for it");
   assert.ok(!write("nurse").includes("ClinicalNote"), "nor an assessment, nor a discharge summary");
-  // intern/resident hold INCIDENT_REPORT too; pg_resident does not (a PG resident's caps are
-  // enumerated separately in ROLE_CAPS and were not touched by TASK 5.14).
-  for (const r of ["intern", "resident"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord", "PatientTag", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "IncidentReport"], r); assert.equal(read(r), null, r); }
-  assert.equal(tier("pg_resident"), TIER.EXECUTE);
-  assert.deepEqual(write("pg_resident"), ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord", "PatientTag", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout"]);
-  assert.equal(read("pg_resident"), null);
-  // supervisor gained INCIDENT_REPORT; reception did not (see ROLE_CAPS) - no longer the same list.
-  assert.equal(tier("supervisor"), TIER.EXECUTE);
-  assert.deepEqual(write("supervisor"), ["Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "IncidentReport"]);
-  assert.equal(read("supervisor"), null);
-  assert.equal(tier("reception"), TIER.EXECUTE);
-  assert.deepEqual(write("reception"), ["Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout"]);
-  assert.equal(read("reception"), null);
-  // safety_officer (TASK 5.14/23): its own narrow authority - INCIDENT_REPORT + INCIDENT_INVESTIGATE
-  // and nothing clinical, EMR_VIEW only for reading the chart an incident references.
-  assert.equal(tier("safety_officer"), TIER.EXECUTE);
-  assert.deepEqual(write("safety_officer"), ["IncidentReport"]);
-  // EMR_VIEW's read is UNRESTRICTED (null = every type), same as every other EMR_VIEW-holding role.
-  assert.equal(read("safety_officer"), null);
+  for (const r of ["intern", "resident", "pg_resident"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking"], r); assert.equal(read(r), null, r); }
+  for (const r of ["supervisor", "reception"]) { assert.equal(tier(r), TIER.EXECUTE, r); assert.deepEqual(write(r), ["Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking"], r); assert.equal(read(r), null, r); }
   /* 2026-09-08: the cashier gained BILLING_CHARGE's claim grant, and it is narrow BY ENUMERATION.
    *
    * The entire safety thesis of wardsynq-billing.js is that the money reads the chart and never
@@ -586,7 +507,7 @@ test("role mapping: every operational role resolves to exactly the grant its cap
    * drug chart. In this build one role is both cashier and coder; a hospital that separates them
    * should hold BILLING_CHARGE for coders only. */
   assert.equal(tier("cashier"), TIER.EXECUTE, "it writes its own claim, so it is not READ-only any more");
-  assert.deepEqual(write("cashier"), ["Claim", "PreAuthorisation", "Invoice"]);
+  assert.deepEqual(write("cashier"), ["Claim", "PreAuthorisation"]);
   assert.ok(!write("cashier").includes("Condition"), "billing can never write the diagnosis that would justify its own charge");
   assert.ok(!write("cashier").includes("Observation"), "nor any other clinical fact");
   /* 2026-09-08, charge capture (#942): four "what was DONE" types joined the READ list and NOTHING
@@ -594,7 +515,7 @@ test("role mapping: every operational role resolves to exactly the grant its cap
    * the reports released, the samples taken, the medicine issued. Billing from ORDERS instead would
    * need none of this and would bill for doses the patient refused. It is a real widening and the
    * containment is the line above: the write scope did not move. */
-  assert.deepEqual(read("cashier"), ["MedicationOrder", "ServiceRequest", "Condition", "Claim", "PreAuthorisation", "Invoice",
+  assert.deepEqual(read("cashier"), ["MedicationOrder", "ServiceRequest", "Condition", "Claim", "PreAuthorisation",
     "MedicationAdministration", "DiagnosticReport", "SpecimenCollection", "MedicationDispense"]);
   assert.ok(!read("cashier").includes("ClinicalNote"), "a coder is not given the whole chart to answer one question");
   assert.ok(!read("cashier").includes("Observation"), "nor the vitals and the laboratory values");
@@ -662,7 +583,7 @@ test("OPD roles at the door: doctor writes and signs, nurse records vitals and n
   const nurse = await client(h, "fb:sister-anu");
   assert.equal(nurse.descriptor.role, "nurse");
   assert.equal(nurse.descriptor.actor.tier, "execute");
-  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord", "PatientTag", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "MedicationAdministration", "InfusionRate", "IncidentReport"]);
+  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "MedicationAdministration", "InfusionRate"]);
   assert.equal(nurse.descriptor.actor.canSign, false);
   const bp = await nurse.session("pat-20").put(Observation({ id: "obs-20", patientId: "pat-20", code: "85354-9", value: "142/91", category: "vital-signs" }));
   assert.equal(bp.writtenBy.id, "fb:sister-anu");
@@ -683,7 +604,7 @@ test("OPD roles at the door: doctor writes and signs, nurse records vitals and n
    * patient in, and resolving two records that turned out to be one person, are the SAME
    * administrative act as registering them - the front desk's work, not a clinical decision. It is
    * still four enumerated types and nothing clinical: no Observation, no order, no note. */
-  assert.deepEqual(desk.descriptor.actor.writable, ["Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout"]);
+  assert.deepEqual(desk.descriptor.actor.writable, ["Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking"]);
   assert.ok(!desk.descriptor.actor.writable.includes("Observation"), "reception records no clinical finding");
   assert.ok(!desk.descriptor.actor.writable.includes("AppointmentRequest"), "nor decides a patient needs to be seen again");
   assert.equal((await desk.governed.get(desk.actor, "MedicationOrder", "rx-20")).drug, "Amoxicillin");
@@ -733,7 +654,7 @@ test("staff sessions: a nurse signed in with email+PIN on a hospital PC reaches 
   const nurse = await (async () => { const b = new RemoteBackend({ tenantId: "gimsr", baseUrl: "https://x", fetch: asStaff(nurseTok) }); await b.open(); return b; })();
   assert.equal(nurse.descriptor.actor.id, "nurse.anu");
   assert.equal(nurse.descriptor.role, "nurse");
-  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord", "PatientTag", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "MedicationAdministration", "InfusionRate", "IncidentReport"]);
+  assert.deepEqual(nurse.descriptor.actor.writable, ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "MedicationAdministration", "InfusionRate"]);
   // Staff sessions are off unless the deployment says so, and org-bound.
   assert.equal((await handle(new Request("https://x/api/wardsynq/gimsr", { headers: { "X-Staff-Token": nurseTok } }), ENV, h.deps)).status, 401);
   assert.equal((await asStaff(otherOrgTok)("https://x/api/wardsynq/gimsr")).status, 403);
@@ -786,7 +707,7 @@ test("AI drafts: written by the AI actor on the clinician's behalf, never author
   // Pure: the AI actor is DRAFT whatever it asks, and its scope is the human's.
   const human = actorFromOpdRole({ identity: { id: "fb:n" }, role: "nurse" });
   const bot = aiActorFor(human, { id: "maik" });
-  assert.equal(bot.tier, "draft"); assert.deepEqual([...bot.scope.write], ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "DeviceAssociation", "BloodLossRecord", "PatientTag", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "Blackout", "MedicationAdministration", "InfusionRate", "IncidentReport"]); assert.equal(bot.onBehalfOf, "fb:n");
+  assert.equal(bot.tier, "draft"); assert.deepEqual([...bot.scope.write], ["Observation", "ShiftHandover", "BreakGlassGrant", "MedicationReconciliation", "PatientConsent", "CarePlan", "RiskAssessment", "SpecimenCollection", "WoundAssessment", "ClinicalRead", "Patient", "Encounter", "Appointment", "PatientLink", "PrescriptionTransmission", "AdmissionRequest", "ResourceBooking", "MedicationAdministration", "InfusionRate"]); assert.equal(bot.onBehalfOf, "fb:n");
 
   /* 7. AND IT STILL MAY NOT SAY A PRESCRIPTION ARRIVED. The scope above includes
    * PrescriptionTransmission, because the nurse it drafts for legitimately writes one. But that
@@ -1124,11 +1045,8 @@ test("THE PROOF: nurse enters vitals -> record stores Observations -> doctor ope
    * assertion used to stringify the whole row and failed roughly once in a thousand runs for that
    * reason alone - a flake that had nothing to do with PHI and would have eroded trust in a real
    * safety assertion. What it means is "no recorded observation value leaked", so it now looks at
-   * everything except the clock. TASK 4.14's scope.request.correlationId is the same kind of
-   * incidental digit noise (a fresh random UUID every run) and is excluded for the same reason -
-   * it is request-tracing metadata, never a clinical value, and its own coverage lives in
-   * test/wardsynq-audit-context-4-14.test.mjs. */
-  const auditBody = JSON.stringify(reads.map(({ ts, scope, ...rest }) => ({ ...rest, scope: scope && { ...scope, request: undefined } })));
+   * everything except the clock. */
+  const auditBody = JSON.stringify(reads.map(({ ts, ...rest }) => rest));
   assert.ok(!auditBody.includes("138"), "no values in the audit: " + auditBody.slice(0, 400));
   assert.ok(!auditBody.includes("96"), "nor any other reading");
 });

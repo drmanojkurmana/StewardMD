@@ -36,12 +36,6 @@
  * transports; ICD or procedure code validity, which needs a real code set; DRG grouping logic;
  * refunds, write-offs and ledgers.
  *
- * TASK 4.16 (Downtime/Business Continuity) POLICY: CONTINUE SAFELY on a payer-system outage -
- * stated here explicitly because there is no live payer transport in this file to fail yet. submit/
- * resubmit only record a local state transition; a future real payer-transport integration must
- * queue an unsent submission rather than silently mark a claim SUBMITTED before the payer actually
- * has it. See vault/decisions/Decisions.md, 2026-09-09, for the full 6-mode matrix.
- *
  * STATUS: IMPLEMENTED and TESTED. Not a billing system and not certified for any payer.
  *
  * node --test test/wardsynq-billing.test.mjs
@@ -138,7 +132,7 @@ function supportFor(code, record) {
  * Unsupported codes are REFUSED rather than queried, because a queried code sits in a work list
  * until somebody makes it go away, and the cheapest way to make it go away is to add the diagnosis.
  */
-function codeClaim({ encounterId, patientId, record, codes, codedBy, now, invoiceId } = {}) {
+function codeClaim({ encounterId, patientId, record, codes, codedBy, now } = {}) {
   if (!encounterId || !patientId) throw new BillingError("a claim belongs to an encounter and a patient", "NO_ENCOUNTER");
   if (!codedBy) throw new BillingError("coding must name the coder", "NO_ACTOR");
   if (!codes || !codes.length) throw new BillingError("a claim needs at least one code", "NO_CODES");
@@ -159,10 +153,6 @@ function codeClaim({ encounterId, patientId, record, codes, codedBy, now, invoic
   return {
     id: `claim-${encounterId}-${Date.parse(at)}`,
     encounterId, patientId, codedBy, at,
-    // TASK 4.8: which invoice this claim reconciles against, when the hospital raised one. A plain
-    // reference, never a computed match - two records that already existed, made findable from
-    // each other, nothing more.
-    invoiceId: invoiceId || null,
     state: CLAIM_STATE.CODED,
     codes: assessed,
     // Surfaced rather than silently accepted. An inferred code is a question for a clinician.
@@ -214,46 +204,20 @@ function detectUpcoding(claim, record) {
   };
 }
 
-function submit(claim, { by, now, submittedAmount } = {}) {
+function submit(claim, { by, now } = {}) {
   if (!by) throw new BillingError("submission names who submitted it", "NO_ACTOR");
   claim.state = CLAIM_STATE.SUBMITTED;
   claim.submittedAt = now || new Date().toISOString();
-  // TASK 4.8: what the hospital is asking the payer for. A plain number the caller supplies, never
-  // computed here - this module invents no tariff and adjudicates nothing.
-  if (Number.isFinite(Number(submittedAmount))) claim.submittedAmount = Number(submittedAmount);
   claim.submissions = (claim.submissions || []).concat([{ at: claim.submittedAt, by, fingerprint: claim.clinicalFingerprint }]);
   claim.history.push({ at: claim.submittedAt, event: "submitted", by });
   return claim;
 }
 
-function deny(claim, { reason, by, now, deniedAmount } = {}) {
+function deny(claim, { reason, by, now } = {}) {
   if (!reason) throw new BillingError("a denial carries the payer's reason", "NO_REASON");
   claim.state = CLAIM_STATE.DENIED;
   claim.denialReason = reason;
-  if (Number.isFinite(Number(deniedAmount))) claim.deniedAmount = Number(deniedAmount);
   claim.history.push({ at: now || new Date().toISOString(), event: "denied", by: by || "payer", detail: reason });
-  return claim;
-}
-
-/**
- * TASK 4.8: records what the payer said it will pay - a fact arriving from outside, never a
- * computation this module performs. Separate from submit/deny on purpose: a payer's adjudicated
- * amount can arrive alongside a query, a partial approval, or a denial, and forcing it through one
- * state transition would either invent a state nobody asked for or hide the amount inside a reason
- * string. This never changes claim.state - state is still only submit/deny/resubmit's to move.
- */
-function recordAdjudication(claim, { approvedAmount, deniedAmount, by, now, reason } = {}) {
-  if (!by) throw new BillingError("an adjudication names who recorded it", "NO_ACTOR");
-  const hasApproved = Number.isFinite(Number(approvedAmount));
-  const hasDenied = Number.isFinite(Number(deniedAmount));
-  if (!hasApproved && !hasDenied) throw new BillingError("an adjudication needs an approved or a denied amount", "NO_AMOUNT");
-  const at = now || new Date().toISOString();
-  if (hasApproved) claim.approvedAmount = Number(approvedAmount);
-  if (hasDenied) claim.deniedAmount = Number(deniedAmount);
-  claim.history.push({
-    at, event: "adjudicated", by,
-    detail: [hasApproved ? `approved ${claim.approvedAmount}` : null, hasDenied ? `denied ${claim.deniedAmount}` : null, reason || null].filter(Boolean).join(", "),
-  });
   return claim;
 }
 
@@ -265,7 +229,7 @@ function recordAdjudication(claim, { approvedAmount, deniedAmount, by, now, reas
  * of real upcoding, and the point is not to block it, because a genuine correction happens too. The
  * point is that it can never happen invisibly.
  */
-function resubmit(claim, { codes, record, by, reason, now, submittedAmount } = {}) {
+function resubmit(claim, { codes, record, by, reason, now } = {}) {
   if (claim.state !== CLAIM_STATE.DENIED && claim.state !== CLAIM_STATE.QUERIED) {
     throw new BillingError("only a denied or queried claim is resubmitted", "NOT_DENIED");
   }
@@ -291,7 +255,6 @@ function resubmit(claim, { codes, record, by, reason, now, submittedAmount } = {
   }
 
   claim.state = CLAIM_STATE.SUBMITTED;
-  if (Number.isFinite(Number(submittedAmount))) claim.submittedAmount = Number(submittedAmount);
   claim.submissions = (claim.submissions || []).concat([{ at, by, fingerprint: newFingerprint, resubmission: true, reason }]);
   claim.history.push({ at, event: "resubmitted", by, detail: reason });
 
@@ -311,18 +274,13 @@ function resubmit(claim, { codes, record, by, reason, now, submittedAmount } = {
 /**
  * A pre-authorisation. A funding decision, recorded as one.
  */
-function preAuthorisation({ patientId, scheme, treatment, state, decidedAt, reason, requestedBy, invoiceId, authorizedAmount } = {}) {
+function preAuthorisation({ patientId, scheme, treatment, state, decidedAt, reason, requestedBy } = {}) {
   if (!patientId || !treatment) throw new BillingError("a pre-auth names the patient and the treatment", "NO_TREATMENT");
   if (!Object.values(PREAUTH_STATE).includes(state)) throw new BillingError("a pre-auth needs a state", "NO_STATE");
 
   return {
     patientId, scheme: scheme || null, treatment, state, reason: reason || null,
     requestedBy: requestedBy || null, decidedAt: decidedAt || new Date().toISOString(),
-    // TASK 4.8: the same plain, uncomputed reference and amount fields the plan asks a
-    // pre-authorisation to carry - "authorization number" is this record's own id; the amount is
-    // whatever the payer actually authorized, supplied by the caller, never estimated here.
-    invoiceId: invoiceId || null,
-    authorizedAmount: Number.isFinite(Number(authorizedAmount)) ? Number(authorizedAmount) : null,
     // The distinction this record exists to preserve.
     isClinicalDecision: false,
     note: state === PREAUTH_STATE.REFUSED
@@ -346,5 +304,5 @@ function upcodingWatchlist(claims) {
 export {
   CLAIM_STATE, PREAUTH_STATE, SUPPORT, BillingError,
   mayProceedClinically, supportFor, codeClaim, detectUpcoding,
-  submit, deny, resubmit, recordAdjudication, preAuthorisation, upcodingWatchlist,
+  submit, deny, resubmit, preAuthorisation, upcodingWatchlist,
 };

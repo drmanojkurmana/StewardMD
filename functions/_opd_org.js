@@ -66,18 +66,9 @@ export function org(o = {}) {
 function wardsynqConfig(w) {
   if (!w || typeof w !== "object" || Array.isArray(w)) return null;
   const pick = {};
-  /* ai joined 2026-09-09 (TASK 8): whether this hospital has AI on at all, and - the part that
-   * matters - which model providers it has a data agreement with (phiApproved). That is a legal fact
-   * about this hospital, not something a source file can know, so it lives here with the rest of the
-   * hospital-owned clinical content and defaults to NONE approved. */
-  // dicom joined 2026-09-09 (TASK 7.7): the hospital's own order-code to DICOM modality map. It is
-  // hospital-owned clinical content for the same reason the rest of this list is - only this
-  // hospital knows that its order code "CT-ABDO" means a CT scanner - and functions/_wardsynq/dicom.js
-  // refuses to guess a modality from an order's words, so an unlisted key here means the worklist
-  // goes out without a modality rather than with an invented one.
   // deltaLimits and autoVerify joined 2026-09-07. Both are clinical content the HOSPITAL owns: what
   // counts as an implausible change in an analyte, and which analytes may be released unread.
-  for (const k of ["criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "riskTools", "utcOffsetMinutes", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir", "terminology", "hl7", "chartCompletion", "dicom", "maik"]) {
+  for (const k of ["criticalLimits", "criticalEscalation", "marTimes", "marGraceMinutes", "beds", "highAlertDrugs", "orderSets", "noteTemplates", "riskTools", "utcOffsetMinutes", "deltaLimits", "autoVerify", "formulary", "requireReasonOffFormulary", "advisories", "registries", "resources", "flowsheetRows", "neverRelease", "rpoMinutes", "tariff", "reorderLevels", "mpiThresholds", "transmitEndpoints", "patientAccess", "fhir"]) {
     if (w[k] !== undefined && w[k] !== null) pick[k] = w[k];
   }
   return Object.keys(pick).length ? pick : null;
@@ -91,13 +82,8 @@ export function genSmdCode(prefix, n) {   // uses CSPRNG; prefix e.g. "SMD-" or 
   let out = ""; for (let i = 0; i < bytes.length; i++) out += SMD_ALPHABET[bytes[i] % SMD_ALPHABET.length];
   return (prefix || "SMD-") + out;
 }
-// TASK 4.1: `type` and `active` joined 2026-09-09 - both were already required by every unit this
-// hierarchy needs to hold (a "Laboratory" department is not the same TYPE of thing as "Billing"),
-// and a department once opened had no way to be retired without deleting its history. Additive:
-// omitted on every call this file already had, so no existing document changes meaning - type
-// falls back to the free-text "general" it always effectively was, and active defaults true.
-export function department(o = {}) { requireId(o); return { id: s(o.id), orgId: s(o.orgId), name: s(o.name), code: s(o.code), type: s(o.type) || "general", active: o.active !== false }; }
-export function opd(o = {}) { requireId(o); return { id: s(o.id), orgId: s(o.orgId), departmentId: orNull(o.departmentId), name: s(o.name), active: o.active !== false }; }
+export function department(o = {}) { requireId(o); return { id: s(o.id), orgId: s(o.orgId), name: s(o.name), code: s(o.code) }; }
+export function opd(o = {}) { requireId(o); return { id: s(o.id), orgId: s(o.orgId), departmentId: orNull(o.departmentId), name: s(o.name) }; }
 
 export const ROOM_ASSIGN_MODES = ["primary", "multiple", "rotating", "unassigned"];
 export function room(o = {}) {
@@ -106,36 +92,8 @@ export function room(o = {}) {
   const mode = ROOM_ASSIGN_MODES.indexOf(a.mode) > -1 ? a.mode : "unassigned";
   return {
     id: s(o.id), orgId: s(o.orgId), departmentId: orNull(o.departmentId), opdId: orNull(o.opdId),
-    name: s(o.name), number: s(o.number), active: o.active !== false,
+    name: s(o.name), number: s(o.number),
     assignment: { mode, doctors: arr(a.doctors), primary: orNull(a.primary) }
-  };
-}
-
-// ---- ward / bed (TASK 4.1: Enterprise -> Hospital -> Campus -> Building -> Floor -> Ward -> Room ->
-// Bed). Only Ward and Bed are new entities here - nothing in this task family (4.1-4.18) references
-// Campus/Building/Floor, so they are not built speculatively; `parentId`/`parentType` are generic
-// enough that inserting them later is a data change, not a schema migration. A ward is a distinct
-// unit from a `department` (department is a SERVICE - "Laboratory"; ward is a PLACE - "Medical A") so
-// this does not fold into department, matching the plan's own Enterprise->...->Ward->Bed distinction. */
-// "reserved" joined 2026-09-09 (TASK 4.3) - holding a bed for an incoming admission is a real,
-// named requirement distinct from "assignment" (occupied happens once the patient is actually
-// there). A reserved bed is not available (admission's own bed_not_available refusal already
-// applies to it, unchanged) and is never inferred - only a human reserving it sets this state.
-export const BED_STATES = Object.freeze(["available", "reserved", "occupied", "blocked", "cleaning", "maintenance"]);
-export function ward(o = {}) {
-  requireId(o);
-  return { id: s(o.id), orgId: s(o.orgId), departmentId: orNull(o.departmentId), name: s(o.name), code: s(o.code), type: s(o.type) || "general", active: o.active !== false };
-}
-export function bed(o = {}) {
-  requireId(o);
-  return {
-    id: s(o.id), orgId: s(o.orgId), wardId: s(o.wardId), name: s(o.name),
-    state: BED_STATES.includes(o.state) ? o.state : "available",
-    // What this bed may hold - never a clinical rule engine, only a stated restriction a human
-    // configured (a bay's own gender policy, an isolation-only room), read verbatim, never inferred.
-    genderRestriction: o.genderRestriction === "male" || o.genderRestriction === "female" ? o.genderRestriction : null,
-    isolation: !!o.isolation,
-    active: o.active !== false,
   };
 }
 // The doctor "on" a room right now (pure). Rooms are never permanently one doctor's.
