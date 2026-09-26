@@ -1,0 +1,261 @@
+{
+ "id": "KONASEEMA_GNB",
+ "kind": "study",
+ "inst": "KIMS_AMALAPURAM",
+ "institution": "Konaseema Institute of Medical Sciences",
+ "short": "KIMS Amalapuram",
+ "city": "Amalapuram",
+ "state": "Andhra Pradesh",
+ "region": "south",
+ "sector": "private",
+ "year": 2024,
+ "period": "June 2023 to July 2024",
+ "citation": "Bioinformation 2025;21(6):1475-1480",
+ "doi": null,
+ "url": null,
+ "reporting": "%S",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Reading method: Text-extractable PDF (PyMuPDF), 6 pages. Method: The band table is Table 3 (page 4); isolate numbers are the Table 2 ICU totals per genus. The 'cephalosporins (1st to 3rd generation)' band is recorded under ceftazidime and ceftriaxone. Where Table 3 and the text disagree, Table 3 was followed (E. coli cefoperazone-sulbactam under 60% in the table, 60 to 80% in the text; Klebsiella nitrofurantoin effective in the table, low in the text). Nitrofurantoin and norfloxacin, listed as effective for Pseudomonas and Acinetobacter in Table 3 but inadequate in the page 3 text, were left out. Enterobacter (n=15) and single Stenotrophomonas and Burkholderia isolates had no per-drug results."
+ },
+ "notes": "Padmaja et al. (Bioinformation 2025) studied Gram-negative isolates from the ICUs (MICU, SICU and CCIU) of Konaseema Institute of Medical Sciences, Amalapuram, June 2023 to July 2024. The paper gives no exact percentages, only bands for urinary isolates: 80% or more, 60 to 80%, and under 60%. A figure of 70 marks the 60 to 80% band, not a measured value; under-60% results carry no number; P. aeruginosa meropenem 80 comes from the text. The only exact figure is Acinetobacter tobramycin, 96%. Isolate numbers (K. pneumoniae 277, E. coli 244, P. aeruginosa 148, A. baumannii 93, Proteus 13) count all ICU isolates, not urinary ones, and the paper names only genera, shown here as the main species. Carbapenem results are for meropenem, the only carbapenem tested. The paper contradicts itself on some urinary agents, for example nitrofurantoin for Klebsiella.",
+ "issues": [
+  "This is a banded/qualitative antibiogram, not numeric. Table 3 gives ranges (>=80% highly, 60-80% moderately, <60% poorly). The extraction represents the 60-80% band as s=70 (midpoint) and flags approx=true; the 80% cell (Pseudomonas carbapenems) as s=80; and <60% cells as s=null. This is a defensible modeling choice but no exact percentages exist in the source except Tobramycin/Acinetobacter (96%",
+  "SOURCE INTERNAL CONFLICT (E. coli, cefoperazone-sulbactam): Table 3 lists cefoperazone-sulbactam under E. coli's <60% (poorly sensitive) column, but the page-3 narrative states 'cefoperazone-sulbactam, other reserved agents such as carbapenems and minocycline exhibited moderate sensitivity (60-80%)' for E. coli. The extraction followed Table 3 (s=null, <60%), which is the correct primary tabular s",
+  "SOURCE INTERNAL CONFLICT (Klebsiella, nitrofurantoin): Table 3 lists Nitrofurantoin as the effective urinary drug for Klebsiella, but page-3 narrative says 'nitrofurantoin showed low sensitivity.' Extraction followed Table 3 (effective) and explicitly documents the conflict. Acceptable.",
+  "SOURCE INTERNAL CONFLICT (Pseudomonas & Acinetobacter urinary agents): Table 3 lists Nitrofurantoin+Norfloxacin as effective urinary drugs for both Pseudomonas and Acinetobacter, and page-4 narrative agrees ('effective against Pseudomonas and Acinetobacter'), yet page-3 narrative says these agents 'showed inadequate sensitivity'/'demonstrated limited efficacy' for these organisms. Extraction omitt",
+  "MINOR over-specification: the paper names organisms only at genus level for the ICU cohort (Klebsiella, Pseudomonas, Acinetobacter, Proteus). The extraction assigns species (K. pneumoniae, P. aeruginosa, A. baumannii, P. mirabilis). These are reasonable inferences (species named elsewhere in discussion) but are not stated for the antibiogram itself. No susceptibility impact.",
+  "All n values, band assignments, and drug mappings verified correct against Table 2 and Table 3. Meropenem <60% for Acinetobacter (explicit in Table 3 poorly-sensitive column), Tobramycin 96% for Acinetobacter, and Pseudomonas carbapenems 80% are all accurately captured. No hallucinated cells and no %R<->%S direction errors."
+ ],
+ "rows": [
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 244,
+   "specimen_as_printed": "urine (Table 3 titled 'urinary isolates'); ICU",
+   "s": {
+    "meropenem": 70,
+    "minocycline": 70
+   },
+   "approx": [
+    "meropenem",
+    "minocycline"
+   ],
+   "q": {
+    "amoxiclav": "<60% (poorly sensitive)",
+    "ampsulbactam": "<60% (poorly sensitive)",
+    "ceftazidime": "<60% (poorly sensitive)",
+    "ceftriaxone": "<60% (poorly sensitive)",
+    "levofloxacin": "<60% (poorly sensitive)",
+    "gentamicin": "<60% (poorly sensitive)",
+    "cotrimoxazole": "<60% (poorly sensitive)",
+    "piptazo": "<60% (poorly sensitive)",
+    "ceftazidime_avibactam": "<60% (poorly sensitive)",
+    "cefoperazone_sulbactam": "<60% (poorly sensitive)",
+    "nitrofurantoin": "effective (listed effective urinary drug)"
+   },
+   "notes": {
+    "meropenem": "reported as class 'carbapenems' in 60-80% band; meropenem was the carbapenem tested",
+    "minocycline": "60-80% band",
+    "ceftazidime": "band covers 1st-3rd gen cephalosporins",
+    "ceftriaxone": "band covers 1st-3rd gen cephalosporins",
+    "nitrofurantoin": "no % given; described as retaining efficacy vs E. coli"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 277,
+   "specimen_as_printed": "urine (Table 3 titled 'urinary isolates'); ICU",
+   "s": {
+    "gentamicin": 70,
+    "cefoperazone_sulbactam": 70,
+    "meropenem": 70,
+    "minocycline": 70
+   },
+   "approx": [
+    "gentamicin",
+    "cefoperazone_sulbactam",
+    "meropenem",
+    "minocycline"
+   ],
+   "q": {
+    "amoxiclav": "<60% (poorly sensitive)",
+    "ampsulbactam": "<60% (poorly sensitive)",
+    "ceftazidime": "<60% (poorly sensitive)",
+    "ceftriaxone": "<60% (poorly sensitive)",
+    "levofloxacin": "<60% (poorly sensitive)",
+    "cotrimoxazole": "<60% (poorly sensitive)",
+    "piptazo": "<60% (poorly sensitive)",
+    "ceftazidime_avibactam": "<60% (poorly sensitive)",
+    "nitrofurantoin": "effective (listed effective urinary drug)"
+   },
+   "notes": {
+    "gentamicin": "60-80% band",
+    "cefoperazone_sulbactam": "60-80% band",
+    "meropenem": "narrative: carbapenems moderate 60-80%; not shown in Table 3 moderate column",
+    "minocycline": "narrative: minocycline moderate 60-80%; not shown in Table 3 moderate column",
+    "ceftazidime": "band covers 1st-3rd gen cephalosporins",
+    "ceftriaxone": "band covers 1st-3rd gen cephalosporins",
+    "nitrofurantoin": "Table 3 & discussion list it effective for Klebsiella; page-3 narrative conflictingly says 'low sensitivity'"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 148,
+   "specimen_as_printed": "urine (Table 3 titled 'urinary isolates'); ICU",
+   "s": {
+    "meropenem": 80,
+    "gentamicin": 70,
+    "piptazo": 70,
+    "tobramycin": 70
+   },
+   "approx": [
+    "meropenem",
+    "gentamicin",
+    "piptazo",
+    "tobramycin"
+   ],
+   "q": {
+    "amoxiclav": "<60% (poorly sensitive)",
+    "ampsulbactam": "<60% (poorly sensitive)",
+    "ceftazidime": "<60% (poorly sensitive)",
+    "ceftriaxone": "<60% (poorly sensitive)",
+    "levofloxacin": "<60% (poorly sensitive)",
+    "cotrimoxazole": "<60% (poorly sensitive)",
+    "tetracycline": "<60% (poorly sensitive)",
+    "ceftazidime_avibactam": "<60% (poorly sensitive)",
+    "cefoperazone_sulbactam": "<60% (poorly sensitive)"
+   },
+   "notes": {
+    "meropenem": "narrative: carbapenems 'strong sensitivity (80%)'",
+    "gentamicin": "60-80% band",
+    "piptazo": "60-80% band",
+    "tobramycin": "60-80% band",
+    "ceftazidime": "band covers 1st-3rd gen cephalosporins",
+    "ceftriaxone": "band covers 1st-3rd gen cephalosporins"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 93,
+   "specimen_as_printed": "urine (Table 3 titled 'urinary isolates'); ICU",
+   "s": {
+    "tobramycin": 96,
+    "gentamicin": 70,
+    "minocycline": 70
+   },
+   "approx": [
+    "gentamicin",
+    "minocycline"
+   ],
+   "q": {
+    "meropenem": "<60% (poorly sensitive)",
+    "amoxiclav": "<60% (poorly sensitive)",
+    "ampsulbactam": "<60% (poorly sensitive)",
+    "ceftazidime": "<60% (poorly sensitive)",
+    "ceftriaxone": "<60% (poorly sensitive)",
+    "levofloxacin": "<60% (poorly sensitive)",
+    "cotrimoxazole": "<60% (poorly sensitive)",
+    "tetracycline": "<60% (poorly sensitive)",
+    "piptazo": "<60% (poorly sensitive)",
+    "ceftazidime_avibactam": "<60% (poorly sensitive)",
+    "cefoperazone_sulbactam": "<60% (poorly sensitive)"
+   },
+   "notes": {
+    "tobramycin": "highly sensitive, exact 96% printed",
+    "gentamicin": "60-80% band",
+    "minocycline": "60-80% band",
+    "meropenem": "Table 3 explicitly lists meropenem in <60% band for Acinetobacter",
+    "ceftazidime": "band covers 1st-3rd gen cephalosporins",
+    "ceftriaxone": "band covers 1st-3rd gen cephalosporins"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 13,
+   "specimen_as_printed": "urine (Table 3 titled 'urinary isolates'); ICU",
+   "s": {
+    "piptazo": 70,
+    "ceftazidime_avibactam": 70,
+    "cefoperazone_sulbactam": 70,
+    "meropenem": 70
+   },
+   "approx": [
+    "piptazo",
+    "ceftazidime_avibactam",
+    "cefoperazone_sulbactam",
+    "meropenem"
+   ],
+   "q": {
+    "amoxiclav": "<60% (poorly sensitive)",
+    "ampsulbactam": "<60% (poorly sensitive)",
+    "ceftazidime": "<60% (poorly sensitive)",
+    "ceftriaxone": "<60% (poorly sensitive)",
+    "levofloxacin": "<60% (poorly sensitive)",
+    "gentamicin": "<60% (poorly sensitive)",
+    "cotrimoxazole": "<60% (poorly sensitive)",
+    "minocycline": "<60% (poorly sensitive)",
+    "nitrofurantoin": "<60% / ineffective",
+    "norfloxacin": "<60% / ineffective"
+   },
+   "notes": {
+    "piptazo": "60-80% band",
+    "ceftazidime_avibactam": "60-80% band",
+    "cefoperazone_sulbactam": "60-80% band",
+    "meropenem": "narrative: carbapenems intermediate 60-80%",
+    "ceftazidime": "band covers 1st-3rd gen cephalosporins",
+    "ceftriaxone": "band covers 1st-3rd gen cephalosporins",
+    "nitrofurantoin": "narrative: nitrofurantoin & norfloxacin 'proved ineffective'; no effective urinary drug for Proteus",
+    "norfloxacin": "narrative: ineffective"
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 244
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "n": 277
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 148
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "n": 93
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Proteus mirabilis",
+   "n": 13
+  }
+ ],
+ "excluded": [],
+ "focus": "Gram-negative urinary isolates from the ICUs (MICU, SICU and CCIU)"
+}

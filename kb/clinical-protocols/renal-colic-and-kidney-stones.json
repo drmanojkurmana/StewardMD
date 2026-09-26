@@ -6,7 +6,7 @@
  "basis": "international",
  "setting": "Emergency department, urology, primary care",
  "aliases": ["renal colic", "ureteric colic", "ureteral stone", "kidney stone", "urolithiasis", "nephrolithiasis", "CT KUB", "NCCT KUB", "medical expulsive therapy", "MET", "obstructed infected kidney", "pyonephrosis", "infected hydronephrosis", "stone prevention"],
- "summary": "Give an NSAID first for renal colic, confirm with low-dose non-contrast CT (ultrasound in pregnancy and children), offer an alpha-blocker for distal ureteric stones 5 to 10 mm, and treat an obstructed infected kidney as an emergency needing immediate antibiotics and urgent decompression by stent or nephrostomy.",
+ "summary": "Give an NSAID first for renal colic, confirm with low-dose non-contrast CT (ultrasound in pregnancy and children), offer an alpha-blocker for distal ureteric stones over 5 mm (up to 10 mm), and treat an obstructed infected kidney as an emergency needing immediate antibiotics and urgent decompression by stent or nephrostomy.",
  "sections": [
   {
    "kind": "recognise",
@@ -21,7 +21,7 @@
    "kind": "immediate",
    "title": "Analgesia and first steps",
    "items": [
-    "First line: an NSAID by any route (for example diclofenac 75 mg IM); NSAIDs relieve colic better than opioids. Take care with CKD, cardiovascular disease, GI bleeding risk and dehydration.",
+    "First line: an NSAID by any route (for example diclofenac 75 mg IM, or ketorolac 30 mg IV or IM); NSAIDs relieve colic better than opioids. Take care with CKD, cardiovascular disease, GI bleeding risk and dehydration.",
     "If NSAIDs are contraindicated or not enough: IV paracetamol (NICE). If both fail or are contraindicated: an opioid other than pethidine; ketamine is an alternative in the acute setting (EAU).",
     "Do not give antispasmodics (such as hyoscine or drotaverine); they add nothing to NSAIDs (NICE).",
     "Give an antiemetic as needed. Pain not controlled by drugs: urgent urology for decompression (stent or nephrostomy) or ureteroscopic stone removal."
@@ -42,7 +42,7 @@
    "title": "Ureteric stones: observation and medical expulsive therapy",
    "items": [
     "Small uncomplicated ureteric stones with controlled pain: observe with periodic review. About 75% of stones under 5 mm pass, taking on average about 17 days (range 6 to 29).",
-    "Offer an alpha-blocker (tamsulosin 400 micrograms daily, off-label) as MET for distal ureteric stones 5 to 10 mm (EAU). AUA offers MET for distal stones 10 mm or smaller for about 30 days and may offer it for mid and proximal stones.",
+    "Offer an alpha-blocker (tamsulosin 400 micrograms daily, off-label) as MET for distal ureteric stones over 5 mm, up to 10 mm (EAU). AUA offers MET for distal stones 10 mm or smaller for about 30 days and may offer it for mid and proximal stones.",
     "In patients expected to pass the stone, a regular NSAID for 3 to 10 days (for example diclofenac 100 to 150 mg a day) reduces recurrent colic.",
     "Stop MET and refer if infection, refractory pain or declining renal function develops. Confirm passage with imaging if it is uncertain.",
     "Uric acid (radiolucent) stones: oral alkalinisation with alkaline citrate or sodium bicarbonate to urine pH 7.0 to 7.2, combined with tamsulosin for ureteric stones."
@@ -92,10 +92,11 @@
  ],
  "drugs": [
   { "name": "Diclofenac", "dose": "75 mg deep IM once for acute colic; then 100 to 150 mg a day orally or rectally in divided doses for 3 to 10 days (maximum 150 mg a day)", "notes": "Avoid in CKD, heart failure, ischaemic heart disease, GI bleeding risk and late pregnancy." },
+  { "name": "Ketorolac", "dose": "30 mg IV or IM once (15 mg if 65 or over, under 50 kg or reduced renal function)", "notes": "Parenteral NSAID alternative to diclofenac; same cautions. Short-term use only." },
   { "name": "Ibuprofen", "dose": "400 to 600 mg orally every 6 to 8 hours (maximum 2.4 g a day)", "notes": "Oral NSAID alternative; same cautions." },
   { "name": "Paracetamol (IV)", "dose": "1 g IV every 6 hours if over 50 kg; 15 mg/kg if 50 kg or less (maximum 4 g a day, or 60 mg/kg a day)", "notes": "When NSAIDs are contraindicated or insufficient." },
   { "name": "Morphine", "dose": "IV in small titrated increments (about 0.05 to 0.1 mg/kg) to effect", "notes": "Only after NSAIDs and IV paracetamol fail or are contraindicated. Avoid pethidine. Reduce dose in the elderly and in CKD." },
-  { "name": "Tamsulosin (MET)", "dose": "400 micrograms orally once daily for up to about 4 weeks", "notes": "Off-label. Distal ureteric stones 5 to 10 mm. Postural hypotension." },
+  { "name": "Tamsulosin (MET)", "dose": "400 micrograms orally once daily for up to about 4 weeks", "notes": "Off-label. Distal ureteric stones over 5 mm, up to 10 mm. Postural hypotension." },
   { "name": "Alkaline citrate (potassium citrate)", "dose": "3.25 to 9.75 g a day (10 to 30 mmol a day) orally, titrated to urine pH", "notes": "Hypocitraturia, uric acid dissolution and prevention. Caution with hyperkalaemia and CKD." },
   { "name": "Hydrochlorothiazide", "dose": "25 to 50 mg orally once daily", "notes": "Hypercalciuria. Hypokalaemia, hyperuricaemia; advise regular skin checks (skin cancer risk)." },
   { "name": "Allopurinol", "dose": "100 to 300 mg orally once daily", "notes": "Hyperuricosuria. Adjust for renal function." }

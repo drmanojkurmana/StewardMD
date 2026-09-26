@@ -1,0 +1,1542 @@
+{
+ "id": "GMC_SRINAGAR_2024_H1",
+ "kind": "institution",
+ "inst": "GMC_SRINAGAR",
+ "institution": "Government Medical College Srinagar",
+ "short": "GMC Srinagar",
+ "city": "Srinagar",
+ "state": "Jammu and Kashmir",
+ "region": "north",
+ "sector": "government",
+ "year": 2024,
+ "end": "2024-06",
+ "period": "January to June 2024",
+ "published": "2024",
+ "url": "https://www.gmcs.ac.in/Photos/10-04-2404-00-40-GMC-final%20antibiogram_094930.pdf",
+ "page": "https://www.gmcs.ac.in/InnerPagelevel1.aspx?assid=L1iEAVQeY3I=&pid=ivhnyo1RApo=",
+ "retrieved": "2026-09-26",
+ "citation": "Department of Microbiology, Government Medical College Srinagar. Antibiogram, January 2024 to June 2024. Srinagar: Government Medical College; 2024.",
+ "reporting": "Percent susceptible. Overall Gram-negative and Gram-positive tables (all specimens and locations) with the number of isolates and a split by location (inpatients, OPD, ICU); blood and urine tables by location (IPD, OPD, ICU) with n per location; ICU tracheal aspirate tables (Gram-negative and S. aureus) with n.",
+ "method": "CLSI M100, 34th edition (2024). The report states that organisms with fewer than 30 isolates were excluded (applied to the overall tables); vancomycin for S. aureus was not tested (no MIC method available).",
+ "breakpoints": "CLSI M100, 34th edition (2024)",
+ "measure": "S",
+ "verification": {
+  "status": "double-checked",
+  "note": "All tables parsed from the PDF text layer (words rebuilt from character positions, because the scaled glyphs defeat pdfplumber word extraction, and assigned to columns by the table ruling lines or header positions); every value, n and location label then compared by eye with the rendered pages (scale 2.5 whole pages; pages 2, 4 and 6 again at scale 3.2 in two halves each), 2026-09-26."
+ },
+ "notes": "Half-yearly antibiogram (January to June 2024) of the Department of Microbiology, GMC Srinagar. IPD (inpatient wards) is recorded as ward; ICU is separate. The overall tables are recorded as all specimens, all settings; the ICU tracheal aspirate tables as respiratory, ICU. The overall Gram-negative table prints genus-level rows (Acinetobacter sp. n=30, Klebsiella sp. n=56, Pseudomonas sp. n=44) beside the species rows, and the blood table a Pseudomonas spp. row beside P. aeruginosa; the app has one key per genus, so only the species rows are recorded (see excluded). Many location and tracheal aspirate cells print a value where the overall table prints \"-\" (not tested) for the same organism and drug (e.g. E. coli ampicillin-sulbactam, Klebsiella tobramycin); these are marked as conflicts. Counts: the inpatients, OPD and ICU columns of the overall tables are recorded as all specimens by location (species rows only); for every organism they sum to fewer than the table's printed number of isolates (e.g. E. coli 548 of 575), and their ICU figures are smaller than the ICU isolates of the tracheal aspirate table alone for A. baumannii (42 against 52, or 76 with the 24 blood ICU isolates), K. pneumoniae (13 against 41) and E. coli (17 against 18), and smaller than the blood, urine and tracheal aspirate ICU rows together for P. aeruginosa (35 against 20, 1 and 26) and S. aureus (9 against 7 and 6); B. cepacia has 25 ICU isolates in the overall table but 28 in the blood ICU row. So the location columns do not agree with the specimen tables. Zero-isolate strata of the blood and urine tables are recorded as 0 counts. Many blood, urine and tracheal aspirate strata have fewer than 30 isolates, and several printed percentages are not possible for the printed n (marked with a caution). Vancomycin was not tested for S. aureus. P. aeruginosa overall cefepime (100%) contradicts the blood and urine tables and is marked as a conflict.",
+ "issues": [
+  "Second reader 2026-09-26: all 386 cells (seeded sample 96), all 46 row n, organisms and settings, and all 34 counts re-read against the page images (whole pages at scale 2.5, table crops at scale 3 to 4) before comparing with the file; 0 transcription errors and no IPD/OPD/ICU swaps (page 7 prints vancomycin before linezolid, page 5 after it; both mapped correctly; the blood IPD K. pneumoniae and tracheal aspirate K. pneumoniae ceftazidime cells are blank on the page and correctly left out).",
+  "The 19 conflicts are confirmed as printed: 18 cells where the overall table (page 2) prints \"-\" (not tested) but a location or tracheal aspirate table prints a value (E. coli ampicillin-sulbactam 0 in blood IPD and ICU, urine IPD and ICU and tracheal aspirates; K. pneumoniae ampicillin-sulbactam 0 in blood IPD, urine IPD and ICU and tracheal aspirates, and tobramycin 18.8, 33.3 and 33.3 in urine IPD, OPD and ICU; A. baumannii ceftriaxone 0 in blood IPD and ICU and tracheal aspirates, and Acinetobacter spp. urine IPD; E. coli urine IPD aztreonam 100 and tobramycin 66.7), and overall P. aeruginosa cefepime 100 against 24% and 30% (blood IPD and ICU) and 71.4% (urine OPD). The only other such cell, urine IPD K. pneumoniae ampicillin 0 (overall IR), is already marked intrinsic.",
+  "Cautions for percentages no whole number of isolates gives are confirmed as printed: blood ICU A. baumannii imipenem 24.3 (n=24), urine ICU K. pneumoniae piperacillin-tazobactam 50 (n=1), tracheal aspirate E. coli (5 figures, n=18) and P. aeruginosa (3 figures, n=26); blood ICU E. coli imipenem 50 and meropenem 100 (n=4) are as printed.",
+  "ICU counts: the row and file notes are correct that the overall table's ICU column is smaller than the tracheal aspirate ICU isolates for A. baumannii (42 against 52), K. pneumoniae (13 against 41) and E. coli (17 against 18), but only the A. baumannii tracheal aspirate row had a note. The ICU column is also smaller than the blood, urine and tracheal aspirate ICU rows together for P. aeruginosa (35 against 47) and S. aureus (9 against 13), and than the blood ICU row alone for B. cepacia (25 against 28). Added these to notes and a note to each of those rows. The overall table's location columns sum to less than its printed n for every organism, as the row notes say.",
+  "Against the full-year 2024 report (GMC_SRINAGAR_2024): several full-year figures are impossible if this report's isolates are part of the full-year strata (e.g. blood Burkholderia, urine ICU E. coli carbapenems, blood ICU Pseudomonas); these are marked in that file. Blood OPD A. baumannii has 2 isolates here but the full-year blood table has none.",
+  "Lead 2026-09-26: the full-year 2024 report contradicts some of these figures (listed as conflicts in GMC_SRINAGAR_2024); these half-year figures are kept as printed."
+ ],
+ "rows": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 240,
+   "page": 2,
+   "table": "Gram-negative organisms, January to June 2024",
+   "s": {
+    "amikacin": 39.7,
+    "ampsulbactam": 2.4,
+    "cefepime": 40.1,
+    "ceftazidime": 11.6,
+    "ciprofloxacin": 20.3,
+    "gentamicin": 39.7,
+    "imipenem": 24.5,
+    "meropenem": 28.2,
+    "piptazo": 20.9,
+    "tetracycline": 33.3,
+    "cotrimoxazole": 10
+   },
+   "note": "The location columns of this table give inpatients 168, OPD 15, ICU 42 (together 225) of the 240 isolates printed; the report does not say where the other 15 were from.",
+   "printed": {
+    "ampsulbactam": "Ampicilin/Sulbactam",
+    "gentamicin": "Gentamycin",
+    "imipenem": "Imepenam",
+    "meropenem": "Meropenam",
+    "piptazo": "piperacilin/Tazobactam",
+    "cotrimoxazole": "Co-Trimoxazole"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 575,
+   "page": 2,
+   "table": "Gram-negative organisms, January to June 2024",
+   "s": {
+    "amikacin": 79.7,
+    "ampicillin": 0,
+    "amoxiclav": 5.7,
+    "cefepime": 19.4,
+    "cefixime": 20,
+    "ceftriaxone": 18.3,
+    "ciprofloxacin": 20.9,
+    "fosfomycin": 94.3,
+    "gentamicin": 61.8,
+    "imipenem": 57.7,
+    "meropenem": 60.3,
+    "piptazo": 73.4,
+    "tetracycline": 75,
+    "cotrimoxazole": 42.9
+   },
+   "note": "The location columns of this table give inpatients 415, OPD 116, ICU 17 (together 548) of the 575 isolates printed; the report does not say where the other 27 were from.",
+   "printed": {
+    "ampicillin": "Ampicilin",
+    "amoxiclav": "Amoxicilin/clavulanic acid",
+    "gentamicin": "Gentamycin",
+    "imipenem": "Imepenam",
+    "meropenem": "Meropenam",
+    "piptazo": "piperacilin/Tazobactam",
+    "cotrimoxazole": "Co-Trimoxazole"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 360,
+   "page": 2,
+   "table": "Gram-negative organisms, January to June 2024",
+   "s": {
+    "amikacin": 32.7,
+    "amoxiclav": 2,
+    "cefepime": 18,
+    "ceftriaxone": 8.8,
+    "ciprofloxacin": 7.7,
+    "gentamicin": 22.3,
+    "imipenem": 36.1,
+    "meropenem": 40,
+    "piptazo": 43.3,
+    "tetracycline": 0,
+    "cotrimoxazole": 25
+   },
+   "note": "Printed as \"Klebsiella pneumoniae ss. pneumoniae\". The location columns of this table give inpatients 245, OPD 36, ICU 13 (together 294) of the 360 isolates printed; the report does not say where the other 66 were from.",
+   "printed": {
+    "amoxiclav": "Amoxicilin/clavulanic acid",
+    "gentamicin": "Gentamycin",
+    "imipenem": "Imepenam",
+    "meropenem": "Meropenam",
+    "piptazo": "piperacilin/Tazobactam",
+    "cotrimoxazole": "Co-Trimoxazole"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 261,
+   "page": 2,
+   "table": "Gram-negative organisms, January to June 2024",
+   "s": {
+    "amikacin": 56.6,
+    "aztreonam": 73.2,
+    "cefepime": 100,
+    "ceftazidime": 50,
+    "ciprofloxacin": 36.4,
+    "gentamicin": 37.8,
+    "imipenem": 59.3,
+    "meropenem": 64.2,
+    "piptazo": 77.9,
+    "tobramycin": 50
+   },
+   "note": "The location columns of this table give inpatients 184, OPD 23, ICU 35 (together 242) of the 261 isolates printed; the report does not say where the other 19 were from.",
+   "conflict": {
+    "cefepime": "printed 100 for 261 isolates, but the blood table prints cefepime 24% (IPD, n=52) and 30% (ICU, n=20) and the urine table 71.4% (OPD, n=7) for the same organism, so the overall figure cannot be 100%"
+   },
+   "printed": {
+    "gentamicin": "Gentamycin",
+    "imipenem": "Imepenam",
+    "meropenem": "Meropenam",
+    "piptazo": "piperacilin/Tazobactam"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Burkholderia cepacia",
+   "pheno": null,
+   "n": 72,
+   "page": 2,
+   "table": "Gram-negative organisms, January to June 2024",
+   "s": {
+    "ceftazidime": 55.5,
+    "ciprofloxacin": 40,
+    "imipenem": 70.1,
+    "meropenem": 67.4,
+    "cotrimoxazole": 55.6
+   },
+   "note": "The location columns of this table give inpatients 38, OPD 1, ICU 25 (together 64) of the 72 isolates printed; the report does not say where the other 8 were from.",
+   "printed": {
+    "imipenem": "Imepenam",
+    "meropenem": "Meropenam",
+    "cotrimoxazole": "Co-Trimoxazole"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 37,
+   "page": 2,
+   "table": "Gram-negative organisms, January to June 2024",
+   "s": {
+    "amikacin": 69.2,
+    "amoxiclav": 50,
+    "cefepime": 70.2,
+    "ceftriaxone": 60,
+    "ciprofloxacin": 53.2,
+    "gentamicin": 70.2,
+    "imipenem": 76,
+    "meropenem": 78.2,
+    "piptazo": 95.7
+   },
+   "note": "The location columns of this table give inpatients 19, OPD 2, ICU 1 (together 22) of the 37 isolates printed; the report does not say where the other 15 were from.",
+   "printed": {
+    "amoxiclav": "Amoxicilin/clavulanic acid",
+    "gentamicin": "Gentamycin",
+    "imipenem": "Imepenam",
+    "meropenem": "Meropenam",
+    "piptazo": "piperacilin/Tazobactam"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 233,
+   "page": 3,
+   "table": "Gram-positive organisms, January to June 2024",
+   "s": {
+    "penicillin": 42,
+    "ampicillin": 54.0,
+    "ciprofloxacin": 13.4,
+    "fosfomycin": 90.7,
+    "gentamicin_hl": 59.2,
+    "linezolid": 87.6,
+    "tetracycline": 0.0,
+    "vancomycin": 80.3
+   },
+   "note": "Printed as \"Enterococcus sp.\". The location columns of this table give inpatients 172, OPD 43, ICU 5 (together 220) of the 233 isolates printed; the report does not say where the other 13 were from.",
+   "printed": {
+    "penicillin": "Penicilin",
+    "ampicillin": "Ampicilin",
+    "gentamicin_hl": "High Level gentamycin"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 461,
+   "page": 3,
+   "table": "Gram-positive organisms, January to June 2024",
+   "s": {
+    "penicillin": 5.0,
+    "cefoxitin": 44.3,
+    "ciprofloxacin": 18.1,
+    "clindamycin": 69.5,
+    "erythromycin": 36.7,
+    "gentamicin": 85.1,
+    "linezolid": 99.6,
+    "tetracycline": 66.7,
+    "cotrimoxazole": 70.0
+   },
+   "note": "Printed as \"Staphylococcus aureus ss. aureus\". The location columns of this table give inpatients 351, OPD 85, ICU 9 (together 445) of the 461 isolates printed; the report does not say where the other 16 were from.",
+   "printed": {
+    "penicillin": "Penicilin",
+    "gentamicin": "Gentamycin",
+    "cotrimoxazole": "Co-Trimoxazole"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 34,
+   "page": 4,
+   "table": "Gram-negative isolates by location (BLOOD)",
+   "s": {
+    "amikacin": 50,
+    "ampsulbactam": 4.5,
+    "ceftazidime": 12.5,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 27.3,
+    "gentamicin": 52.4,
+    "imipenem": 20.5,
+    "meropenem": 23.5,
+    "piptazo": 23.5,
+    "tetracycline": 0
+   },
+   "note": "Printed as \"Acinetobacter baumanii\".",
+   "conflict": {
+    "ceftriaxone": "the overall table (page 2) prints \"-\" (not tested) for this organism and drug, but this table prints 0"
+   },
+   "printed": {
+    "ampsulbactam": "Ampicilin/sulbactam",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 2,
+   "page": 4,
+   "table": "Gram-negative isolates by location (BLOOD)",
+   "s": {
+    "amikacin": 0,
+    "ampsulbactam": 0,
+    "ceftazidime": 0,
+    "ciprofloxacin": 0,
+    "gentamicin": 0,
+    "imipenem": 50,
+    "meropenem": 50,
+    "piptazo": 0
+   },
+   "note": "Printed as \"Acinetobacter baumanii\".",
+   "printed": {
+    "ampsulbactam": "Ampicilin/sulbactam",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 24,
+   "page": 4,
+   "table": "Gram-negative isolates by location (BLOOD)",
+   "s": {
+    "amikacin": 0,
+    "ampsulbactam": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 28.6,
+    "gentamicin": 23.5,
+    "imipenem": 24.3,
+    "meropenem": 20,
+    "piptazo": 0,
+    "tetracycline": 0
+   },
+   "note": "Printed as \"Acinetobacter baumanii\".",
+   "notes": {
+    "imipenem": "Printed 24.3% for 24 isolates, which no whole number of isolates gives; checked on the page, kept as printed."
+   },
+   "conflict": {
+    "ceftriaxone": "the overall table (page 2) prints \"-\" (not tested) for this organism and drug, but this table prints 0"
+   },
+   "printed": {
+    "ampsulbactam": "Ampicilin/sulbactam",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 14,
+   "page": 4,
+   "table": "Gram-negative isolates by location (BLOOD)",
+   "s": {
+    "amikacin": 88.9,
+    "ampsulbactam": 0,
+    "amoxiclav": 0,
+    "cefepime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "gentamicin": 60,
+    "imipenem": 50,
+    "meropenem": 57.1,
+    "piptazo": 23.1,
+    "tetracycline": 0
+   },
+   "conflict": {
+    "ampsulbactam": "the overall table (page 2) prints \"-\" (not tested) for this organism and drug, but this table prints 0"
+   },
+   "printed": {
+    "ampsulbactam": "Ampicilin/sulbactam",
+    "amoxiclav": "Amoxicillin/Clavulanate",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 4,
+   "page": 4,
+   "table": "Gram-negative isolates by location (BLOOD)",
+   "s": {
+    "ampsulbactam": 0,
+    "amoxiclav": 0,
+    "cefepime": 100,
+    "ceftriaxone": 100,
+    "ciprofloxacin": 0,
+    "gentamicin": 66.7,
+    "imipenem": 50,
+    "meropenem": 100,
+    "piptazo": 100
+   },
+   "note": "Imipenem 50% and meropenem 100% (4 isolates) are printed as recorded.",
+   "conflict": {
+    "ampsulbactam": "the overall table (page 2) prints \"-\" (not tested) for this organism and drug, but this table prints 0"
+   },
+   "printed": {
+    "ampsulbactam": "Ampicilin/sulbactam",
+    "amoxiclav": "Amoxicillin/Clavulanate",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 19,
+   "page": 4,
+   "table": "Gram-negative isolates by location (BLOOD)",
+   "s": {
+    "amikacin": 0,
+    "ampsulbactam": 0,
+    "amoxiclav": 0,
+    "cefepime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "gentamicin": 14.3,
+    "imipenem": 14.3,
+    "meropenem": 28.6,
+    "piptazo": 11.1,
+    "tetracycline": 0
+   },
+   "note": "Printed as \"kliebsiella pneumoniae\".",
+   "conflict": {
+    "ampsulbactam": "the overall table (page 2) prints \"-\" (not tested) for this organism and drug, but this table prints 0"
+   },
+   "printed": {
+    "ampsulbactam": "Ampicilin/sulbactam",
+    "amoxiclav": "Amoxicillin/Clavulanate",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 1,
+   "page": 4,
+   "table": "Gram-negative isolates by location (BLOOD)",
+   "s": {
+    "amoxiclav": 0,
+    "cefepime": 0,
+    "ceftriaxone": 0,
+    "imipenem": 0
+   },
+   "note": "Printed as \"kliebsiella pneumoniae\".",
+   "printed": {
+    "amoxiclav": "Amoxicillin/Clavulanate"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 52,
+   "page": 4,
+   "table": "Gram-negative isolates by location (BLOOD)",
+   "s": {
+    "amikacin": 50,
+    "aztreonam": 42.9,
+    "cefepime": 24,
+    "ceftazidime": 26.7,
+    "ciprofloxacin": 41.7,
+    "gentamicin": 46.7,
+    "imipenem": 37.5,
+    "meropenem": 43.6,
+    "piptazo": 73.8,
+    "tobramycin": 100
+   },
+   "printed": {
+    "piptazo": "Piperacillin/Tazobactam",
+    "tobramycin": "Tobramycine"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 20,
+   "page": 4,
+   "table": "Gram-negative isolates by location (BLOOD)",
+   "s": {
+    "amikacin": 33.3,
+    "aztreonam": 85.7,
+    "cefepime": 30,
+    "ceftazidime": 37.5,
+    "ciprofloxacin": 100,
+    "gentamicin": 47.4,
+    "imipenem": 63.6,
+    "meropenem": 44.4,
+    "piptazo": 88.9
+   },
+   "printed": {
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Burkholderia cepacia",
+   "pheno": null,
+   "n": 38,
+   "page": 4,
+   "table": "Gram-negative isolates by location (BLOOD)",
+   "s": {
+    "ceftazidime": 18.5,
+    "ciprofloxacin": 25,
+    "meropenem": 66.7
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Burkholderia cepacia",
+   "pheno": null,
+   "n": 28,
+   "page": 4,
+   "table": "Gram-negative isolates by location (BLOOD)",
+   "s": {
+    "ceftazidime": 41.7,
+    "ciprofloxacin": 25,
+    "meropenem": 63.6
+   },
+   "note": "The overall table counts 25 ICU B. cepacia isolates (all specimens), fewer than the 28 blood ICU isolates here (source inconsistency)."
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 30,
+   "page": 5,
+   "table": "Gram-positive isolates by location (BLOOD)",
+   "s": {
+    "ampicillin": 55,
+    "penicillin": 46.6,
+    "gentamicin_hl": 55.2,
+    "linezolid": 93.3,
+    "vancomycin": 96.6
+   },
+   "printed": {
+    "ampicillin": "Ampicilin",
+    "penicillin": "penicilin",
+    "gentamicin_hl": "High-level Gentamycin"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 1,
+   "page": 5,
+   "table": "Gram-positive isolates by location (BLOOD)",
+   "s": {
+    "ampicillin": 100,
+    "penicillin": 0,
+    "gentamicin_hl": 100,
+    "linezolid": 100,
+    "vancomycin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicilin",
+    "penicillin": "penicilin",
+    "gentamicin_hl": "High-level Gentamycin"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 1,
+   "page": 5,
+   "table": "Gram-positive isolates by location (BLOOD)",
+   "s": {
+    "ampicillin": 0,
+    "penicillin": 0,
+    "gentamicin_hl": 100,
+    "linezolid": 100,
+    "vancomycin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicilin",
+    "penicillin": "penicilin",
+    "gentamicin_hl": "High-level Gentamycin"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 33,
+   "page": 5,
+   "table": "Gram-positive isolates by location (BLOOD)",
+   "s": {
+    "penicillin": 0,
+    "cefoxitin": 41.4,
+    "ciprofloxacin": 6.7,
+    "clindamycin": 50,
+    "erythromycin": 21.9,
+    "gentamicin": 84.2,
+    "linezolid": 96.7,
+    "tetracycline": 100
+   },
+   "printed": {
+    "penicillin": "penicilin",
+    "gentamicin": "Gentamycin"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 7,
+   "page": 5,
+   "table": "Gram-positive isolates by location (BLOOD)",
+   "s": {
+    "penicillin": 0,
+    "cefoxitin": 14.3,
+    "ciprofloxacin": 33.3,
+    "clindamycin": 42.9,
+    "erythromycin": 14.3,
+    "gentamicin": 100,
+    "linezolid": 100
+   },
+   "printed": {
+    "penicillin": "penicilin",
+    "gentamicin": "Gentamycin"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 5,
+   "page": 6,
+   "table": "Gram-negative isolates by location (URINE)",
+   "s": {
+    "amikacin": 100,
+    "ampsulbactam": 0,
+    "ceftazidime": 33.3,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "imipenem": 40,
+    "meropenem": 60,
+    "piptazo": 40
+   },
+   "conflict": {
+    "ceftriaxone": "the overall table (page 2) prints \"-\" (not tested) for this organism and drug, but this table prints 0"
+   },
+   "printed": {
+    "ampsulbactam": "Ampicilin/sulbactam",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 183,
+   "page": 6,
+   "table": "Gram-negative isolates by location (URINE)",
+   "s": {
+    "amikacin": 81.1,
+    "ampicillin": 0,
+    "ampsulbactam": 0,
+    "amoxiclav": 8,
+    "aztreonam": 100,
+    "cefepime": 11.5,
+    "ceftriaxone": 4.8,
+    "ciprofloxacin": 10.3,
+    "gentamicin": 80.4,
+    "imipenem": 21.8,
+    "meropenem": 27.3,
+    "piptazo": 71.1,
+    "tobramycin": 66.7,
+    "fosfomycin": 95.8
+   },
+   "conflict": {
+    "ampsulbactam": "the overall table (page 2) prints \"-\" (not tested) for this organism and drug, but this table prints 0",
+    "aztreonam": "the overall table (page 2) prints \"-\" (not tested) for this organism and drug, but this table prints 100",
+    "tobramycin": "the overall table (page 2) prints \"-\" (not tested) for this organism and drug, but this table prints 66.7"
+   },
+   "printed": {
+    "ampicillin": "Ampicilin",
+    "ampsulbactam": "Ampicilin/sulbactam",
+    "amoxiclav": "Amoxicillin/Clavulanate",
+    "piptazo": "Piperacillin/Tazobactam",
+    "tobramycin": "Tobramycine"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 73,
+   "page": 6,
+   "table": "Gram-negative isolates by location (URINE)",
+   "s": {
+    "amikacin": 86.2,
+    "ampicillin": 0,
+    "amoxiclav": 10.3,
+    "cefepime": 14.7,
+    "ceftriaxone": 12.3,
+    "ciprofloxacin": 0,
+    "gentamicin": 100,
+    "imipenem": 41,
+    "meropenem": 47.1,
+    "piptazo": 78.5,
+    "fosfomycin": 89.5
+   },
+   "printed": {
+    "ampicillin": "Ampicilin",
+    "amoxiclav": "Amoxicillin/Clavulanate",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 4,
+   "page": 6,
+   "table": "Gram-negative isolates by location (URINE)",
+   "s": {
+    "amikacin": 75,
+    "ampsulbactam": 0,
+    "amoxiclav": 0,
+    "cefepime": 0,
+    "ceftriaxone": 0,
+    "gentamicin": 0,
+    "imipenem": 75,
+    "meropenem": 75,
+    "piptazo": 50,
+    "fosfomycin": 100
+   },
+   "conflict": {
+    "ampsulbactam": "the overall table (page 2) prints \"-\" (not tested) for this organism and drug, but this table prints 0"
+   },
+   "printed": {
+    "ampsulbactam": "Ampicilin/sulbactam",
+    "amoxiclav": "Amoxicillin/Clavulanate",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 41,
+   "page": 6,
+   "table": "Gram-negative isolates by location (URINE)",
+   "s": {
+    "amikacin": 36.7,
+    "ampicillin": 0,
+    "ampsulbactam": 0,
+    "amoxiclav": 0,
+    "cefepime": 14.6,
+    "ceftriaxone": 12.1,
+    "ciprofloxacin": 22.2,
+    "gentamicin": 14.3,
+    "imipenem": 4.5,
+    "meropenem": 9.7,
+    "piptazo": 31.4,
+    "tobramycin": 18.8
+   },
+   "note": "Printed as \"kliebsiella pneumoniae\".",
+   "conflict": {
+    "ampsulbactam": "the overall table (page 2) prints \"-\" (not tested) for this organism and drug, but this table prints 0",
+    "tobramycin": "the overall table (page 2) prints \"-\" (not tested) for this organism and drug, but this table prints 18.8"
+   },
+   "printed": {
+    "ampicillin": "Ampicilin",
+    "ampsulbactam": "Ampicilin/sulbactam",
+    "amoxiclav": "Amoxicillin/Clavulanate",
+    "piptazo": "Piperacillin/Tazobactam",
+    "tobramycin": "Tobramycine"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 15,
+   "page": 6,
+   "table": "Gram-negative isolates by location (URINE)",
+   "s": {
+    "amikacin": 53.3,
+    "amoxiclav": 0,
+    "cefepime": 26.6,
+    "ceftriaxone": 25,
+    "ciprofloxacin": 0,
+    "gentamicin": 0,
+    "imipenem": 20,
+    "meropenem": 14.3,
+    "piptazo": 71.4,
+    "tobramycin": 33.3
+   },
+   "note": "Printed as \"kliebsiella pneumoniae\".",
+   "conflict": {
+    "tobramycin": "the overall table (page 2) prints \"-\" (not tested) for this organism and drug, but this table prints 33.3"
+   },
+   "printed": {
+    "amoxiclav": "Amoxicillin/Clavulanate",
+    "piptazo": "Piperacillin/Tazobactam",
+    "tobramycin": "Tobramycine"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 1,
+   "page": 6,
+   "table": "Gram-negative isolates by location (URINE)",
+   "s": {
+    "amikacin": 0,
+    "ampsulbactam": 0,
+    "amoxiclav": 0,
+    "cefepime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "gentamicin": 0,
+    "imipenem": 0,
+    "meropenem": 0,
+    "piptazo": 50,
+    "tobramycin": 33.3
+   },
+   "note": "Printed as \"kliebsiella pneumoniae\". Piperacillin-tazobactam 50% and tobramycin 33.3% are printed for a single isolate (not possible; source error, kept as printed).",
+   "conflict": {
+    "ampsulbactam": "the overall table (page 2) prints \"-\" (not tested) for this organism and drug, but this table prints 0",
+    "tobramycin": "the overall table (page 2) prints \"-\" (not tested) for this organism and drug, but this table prints 33.3"
+   },
+   "printed": {
+    "ampsulbactam": "Ampicilin/sulbactam",
+    "amoxiclav": "Amoxicillin/Clavulanate",
+    "piptazo": "Piperacillin/Tazobactam",
+    "tobramycin": "Tobramycine"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 33,
+   "page": 6,
+   "table": "Gram-negative isolates by location (URINE)",
+   "s": {
+    "amikacin": 26.7,
+    "aztreonam": 68.8,
+    "cefepime": 100,
+    "ceftazidime": 84.2,
+    "ciprofloxacin": 25,
+    "gentamicin": 20,
+    "imipenem": 45.4,
+    "meropenem": 66.7,
+    "piptazo": 83.3,
+    "tobramycin": 0
+   },
+   "printed": {
+    "piptazo": "Piperacillin/Tazobactam",
+    "tobramycin": "Tobramycine"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 7,
+   "page": 6,
+   "table": "Gram-negative isolates by location (URINE)",
+   "s": {
+    "amikacin": 57.1,
+    "aztreonam": 75,
+    "cefepime": 71.4,
+    "ceftazidime": 80,
+    "imipenem": 57.1,
+    "meropenem": 66.7,
+    "piptazo": 100
+   },
+   "printed": {
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 1,
+   "page": 6,
+   "table": "Gram-negative isolates by location (URINE)",
+   "s": {
+    "amikacin": 0,
+    "cefepime": 100,
+    "ceftazidime": 100,
+    "gentamicin": 0,
+    "imipenem": 100,
+    "meropenem": 100
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 3,
+   "page": 6,
+   "table": "Gram-negative isolates by location (URINE)",
+   "s": {
+    "amikacin": 100,
+    "amoxiclav": 0,
+    "ceftriaxone": 50,
+    "gentamicin": 0,
+    "imipenem": 100,
+    "meropenem": 100,
+    "piptazo": 50
+   },
+   "printed": {
+    "amoxiclav": "Amoxicillin/Clavulanate",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 1,
+   "page": 6,
+   "table": "Gram-negative isolates by location (URINE)",
+   "s": {
+    "amikacin": 100,
+    "ceftriaxone": 100,
+    "meropenem": 100,
+    "piptazo": 100
+   },
+   "printed": {
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 119,
+   "page": 7,
+   "table": "Gram-positive isolates by location (URINE)",
+   "s": {
+    "ampicillin": 54.6,
+    "penicillin": 64.7,
+    "ciprofloxacin": 11.9,
+    "gentamicin_hl": 53.6,
+    "vancomycin": 97.4,
+    "linezolid": 89.7,
+    "tetracycline": 0
+   },
+   "printed": {
+    "ampicillin": "Ampicilin",
+    "penicillin": "Penicilin",
+    "gentamicin_hl": "High-level Gentamycin"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 37,
+   "page": 7,
+   "table": "Gram-positive isolates by location (URINE)",
+   "s": {
+    "ampicillin": 59.4,
+    "penicillin": 64.8,
+    "ciprofloxacin": 20,
+    "gentamicin_hl": 63.6,
+    "vancomycin": 100,
+    "linezolid": 94.3
+   },
+   "printed": {
+    "ampicillin": "Ampicilin",
+    "penicillin": "Penicilin",
+    "gentamicin_hl": "High-level Gentamycin"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 3,
+   "page": 7,
+   "table": "Gram-positive isolates by location (URINE)",
+   "s": {
+    "ampicillin": 33.3,
+    "penicillin": 33.3,
+    "ciprofloxacin": 33.3,
+    "gentamicin_hl": 66.7,
+    "vancomycin": 100,
+    "linezolid": 100,
+    "tetracycline": 0
+   },
+   "printed": {
+    "ampicillin": "Ampicilin",
+    "penicillin": "Penicilin",
+    "gentamicin_hl": "High-level Gentamycin"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 17,
+   "page": 7,
+   "table": "Gram-positive isolates by location (URINE)",
+   "s": {
+    "penicillin": 0,
+    "cefoxitin": 52.9,
+    "ciprofloxacin": 10,
+    "clindamycin": 64.7,
+    "erythromycin": 35.2,
+    "gentamicin": 92.9,
+    "linezolid": 100,
+    "tetracycline": 33.3
+   },
+   "printed": {
+    "penicillin": "Penicilin",
+    "gentamicin": "Gentamycin"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 3,
+   "page": 7,
+   "table": "Gram-positive isolates by location (URINE)",
+   "s": {
+    "penicillin": 0,
+    "cefoxitin": 33.3,
+    "ciprofloxacin": 100,
+    "clindamycin": 66.6,
+    "erythromycin": 33,
+    "gentamicin": 100,
+    "linezolid": 100
+   },
+   "printed": {
+    "penicillin": "Penicilin",
+    "gentamicin": "Gentamycin"
+   }
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 52,
+   "page": 8,
+   "table": "Gram-negative isolates from ICUs (tracheal aspirates)",
+   "s": {
+    "amikacin": 18,
+    "ampsulbactam": 4.4,
+    "cefepime": 0,
+    "ceftazidime": 12.2,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 5.1,
+    "gentamicin": 13,
+    "imipenem": 24,
+    "meropenem": 28,
+    "piptazo": 31.9,
+    "tetracycline": 45.1
+   },
+   "note": "Printed as \"Acinetobacter baumanii\". The overall table counts 42 ICU A. baumannii isolates (all specimens), fewer than the 52 ICU tracheal aspirate isolates here (source inconsistency). With the 24 blood ICU isolates the specimen tables give 76 ICU A. baumannii.",
+   "specimen_as_printed": "Tracheal aspirates, ICU",
+   "conflict": {
+    "ceftriaxone": "the overall table (page 2) prints \"-\" (not tested) for this organism and drug, but this table prints 0"
+   },
+   "printed": {
+    "ampsulbactam": "Ampicilin/sulbactam",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 18,
+   "page": 8,
+   "table": "Gram-negative isolates from ICUs (tracheal aspirates)",
+   "s": {
+    "ampsulbactam": 0,
+    "amoxiclav": 0,
+    "cefepime": 31.1,
+    "ceftriaxone": 20,
+    "ciprofloxacin": 14.1,
+    "gentamicin": 12.9,
+    "imipenem": 33.3,
+    "meropenem": 43.2,
+    "piptazo": 52.1,
+    "tetracycline": 75
+   },
+   "specimen_as_printed": "Tracheal aspirates, ICU",
+   "note": "Five of the nine percentages printed for 18 isolates (cefepime 31.1, ciprofloxacin 14.1, gentamicin 12.9, meropenem 43.2, piperacillin-tazobactam 52.1) are not possible for 18 or fewer isolates tested; checked on the page, kept as printed (source error). The overall table counts 17 ICU E. coli isolates (all specimens), fewer than the 18 ICU tracheal aspirate isolates here (26 with the 4 blood and 4 urine ICU isolates; source inconsistency).",
+   "conflict": {
+    "ampsulbactam": "the overall table (page 2) prints \"-\" (not tested) for this organism and drug, but this table prints 0"
+   },
+   "printed": {
+    "ampsulbactam": "Ampicilin/sulbactam",
+    "amoxiclav": "Amoxicillin/Clavulanate",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 41,
+   "page": 8,
+   "table": "Gram-negative isolates from ICUs (tracheal aspirates)",
+   "s": {
+    "amikacin": 3.2,
+    "ampsulbactam": 0,
+    "amoxiclav": 3.6,
+    "cefepime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 4.1,
+    "gentamicin": 0,
+    "imipenem": 36,
+    "meropenem": 43.2,
+    "piptazo": 41.6
+   },
+   "note": "Printed as \"kliebsiella pneumoniae\". The overall table counts 13 ICU K. pneumoniae isolates (all specimens), fewer than the 41 ICU tracheal aspirate isolates here (source inconsistency).",
+   "specimen_as_printed": "Tracheal aspirates, ICU",
+   "conflict": {
+    "ampsulbactam": "the overall table (page 2) prints \"-\" (not tested) for this organism and drug, but this table prints 0"
+   },
+   "printed": {
+    "ampsulbactam": "Ampicilin/sulbactam",
+    "amoxiclav": "Amoxicillin/Clavulanate",
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 26,
+   "page": 8,
+   "table": "Gram-negative isolates from ICUs (tracheal aspirates)",
+   "s": {
+    "amikacin": 59.9,
+    "aztreonam": 70.9,
+    "ceftazidime": 43.5,
+    "ciprofloxacin": 32.4,
+    "gentamicin": 24.6,
+    "imipenem": 76.9,
+    "meropenem": 80.2,
+    "piptazo": 61.2
+   },
+   "specimen_as_printed": "Tracheal aspirates, ICU",
+   "note": "Ciprofloxacin 32.4, gentamicin 24.6 and meropenem 80.2 are not possible for 26 or fewer isolates tested; checked on the page, kept as printed. The overall table counts 35 ICU P. aeruginosa isolates (all specimens), fewer than these 26 tracheal aspirate isolates with the 20 blood and 1 urine ICU isolates (47; source inconsistency).",
+   "printed": {
+    "piptazo": "Piperacillin/Tazobactam"
+   }
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 6,
+   "page": 8,
+   "table": "Gram-positive isolates from ICUs (tracheal aspirates)",
+   "s": {
+    "penicillin": 0,
+    "cefoxitin": 50,
+    "ciprofloxacin": 0,
+    "clindamycin": 66.7,
+    "erythromycin": 16.7,
+    "gentamicin": 66.7,
+    "linezolid": 100
+   },
+   "specimen_as_printed": "Tracheal aspirates, ICU",
+   "printed": {
+    "penicillin": "Penicilin",
+    "cefoxitin": "Cifoxitin",
+    "gentamicin": "Gentamycin"
+   },
+   "note": "The overall table counts 9 ICU S. aureus isolates (all specimens), fewer than these 6 tracheal aspirate isolates with the 7 blood ICU isolates (13; source inconsistency)."
+  }
+ ],
+ "counts": [
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Acinetobacter baumannii",
+   "n": 168,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Acinetobacter baumannii",
+   "n": 15,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "n": 42,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "n": 415,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 116,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 17,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Klebsiella pneumoniae",
+   "n": 245,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "n": 36,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "n": 13,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "n": 184,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 23,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 35,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Burkholderia cepacia",
+   "n": 38,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Burkholderia cepacia",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Burkholderia cepacia",
+   "n": 25,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Proteus mirabilis",
+   "n": 19,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Proteus mirabilis",
+   "n": 2,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Proteus mirabilis",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "n": 172,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "n": 43,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "n": 5,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 351,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 85,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 9,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 0,
+   "page": 4
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "n": 0,
+   "page": 4
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 0,
+   "page": 4
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Pseudomonas spp.",
+   "n": 0,
+   "page": 4
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Burkholderia cepacia",
+   "n": 0,
+   "page": 4
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 0,
+   "page": 5
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "n": 0,
+   "page": 6
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "n": 0,
+   "page": 6
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Proteus mirabilis",
+   "n": 0,
+   "page": 6
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 0,
+   "page": 7
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Page 2: \"Acinetobacter sp.\" row (n=30; inpatients 25, OPD 2, ICU 3)",
+   "org": "Acinetobacter sp.",
+   "why": "isolates identified only to genus, printed as a separate row; the app has one organism key for Acinetobacter spp. and this stratum already holds the \"Acinetobacter baumannii\" row, so only the species row (and its location counts) is recorded"
+  },
+  {
+   "what": "Page 2: \"Klebsiella sp.\" row (n=56; inpatients 42, OPD 7, ICU 4)",
+   "org": "Klebsiella sp.",
+   "why": "isolates identified only to genus, printed as a separate row; the app has one organism key for Klebsiella spp. and this stratum already holds the \"Klebsiella pneumoniae ss. pneumoniae\" row, so only the species row (and its location counts) is recorded"
+  },
+  {
+   "what": "Page 2: \"Pseudomonas sp.\" row (n=44; inpatients 30, OPD 11, ICU 1)",
+   "org": "Pseudomonas sp.",
+   "why": "isolates identified only to genus, printed as a separate row; the app has one organism key for Pseudomonas spp. and this stratum already holds the \"Pseudomonas aeruginosa\" row, so only the species row (and its location counts) is recorded"
+  },
+  {
+   "what": "Page 4: Escherichia coli OPD row (n=0)",
+   "org": "Escherichia coli",
+   "why": "no isolates in this stratum (cells printed \"-\", or \"IR\" for intrinsic resistance)"
+  },
+  {
+   "what": "Page 4: kliebsiella pneumoniae OPD row (n=0)",
+   "org": "kliebsiella pneumoniae",
+   "why": "no isolates in this stratum (cells printed \"-\", or \"IR\" for intrinsic resistance)"
+  },
+  {
+   "what": "Page 4: Pseudomonas aeruginosa OPD row (n=0)",
+   "org": "Pseudomonas aeruginosa",
+   "why": "no isolates in this stratum (cells printed \"-\", or \"IR\" for intrinsic resistance)"
+  },
+  {
+   "what": "Page 4: \"Pseudomonas spp.\" IPD row (n=23)",
+   "org": "Pseudomonas spp.",
+   "why": "isolates identified only to genus; the app has one organism key for Pseudomonas and this stratum already holds the Pseudomonas aeruginosa row"
+  },
+  {
+   "what": "Page 4: \"Pseudomonas spp.\" OPD row (n=0)",
+   "org": "Pseudomonas spp.",
+   "why": "isolates identified only to genus; the app has one organism key for Pseudomonas and this stratum already holds the Pseudomonas aeruginosa row"
+  },
+  {
+   "what": "Page 4: \"Pseudomonas spp.\" ICU row (n=1)",
+   "org": "Pseudomonas spp.",
+   "why": "isolates identified only to genus; the app has one organism key for Pseudomonas and this stratum already holds the Pseudomonas aeruginosa row"
+  },
+  {
+   "what": "Page 4: Burkholderia cepacia OPD row (n=0)",
+   "org": "Burkholderia cepacia",
+   "why": "no isolates in this stratum (cells printed \"-\", or \"IR\" for intrinsic resistance)"
+  },
+  {
+   "what": "Page 5: Staphylococcus aureus OPD row (n=0)",
+   "org": "Staphylococcus aureus",
+   "why": "no isolates in this stratum (cells printed \"-\", or \"IR\" for intrinsic resistance)"
+  },
+  {
+   "what": "Page 6: Acinetobacter spp. OPD row (n=0)",
+   "org": "Acinetobacter spp.",
+   "why": "no isolates in this stratum (cells printed \"-\", or \"IR\" for intrinsic resistance)"
+  },
+  {
+   "what": "Page 6: Acinetobacter spp. ICU row (n=0)",
+   "org": "Acinetobacter spp.",
+   "why": "no isolates in this stratum (cells printed \"-\", or \"IR\" for intrinsic resistance)"
+  },
+  {
+   "what": "Page 6: Proteus mirabilis ICU row (n=0)",
+   "org": "Proteus mirabilis",
+   "why": "no isolates in this stratum (cells printed \"-\", or \"IR\" for intrinsic resistance)"
+  },
+  {
+   "what": "Page 7: Staphylococcus aureus ICU row (n=0)",
+   "org": "Staphylococcus aureus",
+   "why": "no isolates in this stratum (cells printed \"-\", or \"IR\" for intrinsic resistance)"
+  },
+  {
+   "what": "Page 1: total samples received by specimen (blood, tracheal aspirates, urine: total, sterile, contaminated, yeast, clinically significant bacteria)",
+   "why": "sample-level totals, not organism counts or susceptibility"
+  }
+ ]
+}

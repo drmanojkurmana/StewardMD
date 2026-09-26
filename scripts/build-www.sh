@@ -148,6 +148,8 @@ done
 [ -f kb/growth/who-growth.json ] && mkdir -p "$WWW/kb/growth" && cp kb/growth/who-growth.json "$WWW/kb/growth/"
 # Clinical documents (clinical-docs.js): consent templates + handout translations. scripts/build-documents.mjs.
 [ -f kb/documents/documents.json ] && mkdir -p "$WWW/kb/documents" && cp kb/documents/documents.json "$WWW/kb/documents/"
+# Antibiogram bundle (antibiogram-store.js): every source validated by scripts/build-antibiogram.mjs.
+[ -f kb/antibiogram/antibiogram.json ] && mkdir -p "$WWW/kb/antibiogram" && cp kb/antibiogram/antibiogram.json "$WWW/kb/antibiogram/"
 # ONCOTREE navigator graphs (static JSON; same trust tier as kb/protocols).
 [ -d kb/oncotree ] && mkdir -p "$WWW/kb/oncotree" && cp -R kb/oncotree/. "$WWW/kb/oncotree/"
 # Oncology reference catalogs: AJCC/TNM staging index, CTCAE catalog, irAE (IO toxicity) catalog -

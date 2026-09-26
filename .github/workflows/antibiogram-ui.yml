@@ -1,0 +1,30 @@
+name: Antibiogram UI
+on:
+  pull_request:
+    branches: [main]
+    paths: ['antibiogram*.js', 'asp-region.js', 'policy.js', 'reasoning.js', 'index.html', 'kb/antibiogram/**', 'data/antibiogram/**', 'test/run-antibiogram-ui.mjs', '.github/workflows/antibiogram-ui.yml']
+  push:
+    branches: [main]
+    paths: ['antibiogram*.js', 'asp-region.js', 'policy.js', 'reasoning.js', 'index.html', 'kb/antibiogram/**', 'data/antibiogram/**', 'test/run-antibiogram-ui.mjs', '.github/workflows/antibiogram-ui.yml']
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CHROME: /usr/bin/google-chrome
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Register and bundle are fresh
+        run: node scripts/abg-register.mjs --check && node scripts/build-antibiogram.mjs --check
+      - name: Antibiogram screen, console, reasoning, profiles, import, flag off (real app, 390 px)
+        run: node test/run-antibiogram-ui.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: antibiogram-screenshots
+          path: /tmp/stewardmd-abg/*.png

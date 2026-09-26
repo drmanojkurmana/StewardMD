@@ -1,0 +1,334 @@
+{
+ "id": "KARSNET_PATHANAMTHITTA_2024",
+ "kind": "network",
+ "inst": "KARSNET_PATHANAMTHITTA",
+ "institution": "Pathanamthitta district AMR laboratory (Regional Public Health Laboratory, Pathanamthitta; District Hospital Kozhencherry, District TB Centre and 9 other institutions), KARS-Net district antibiogram, Department of Health Services, Kerala",
+ "short": "KARS-NET Pathanamthitta",
+ "city": "Pathanamthitta",
+ "state": "Kerala",
+ "region": "south",
+ "sector": "government",
+ "year": 2024,
+ "end": "2024-12",
+ "period": "01/01/2023-31/12/2024(2 YEARS)",
+ "url": "https://health.kerala.gov.in/assets/backend/uploads/articles/1782710542_0.pdf",
+ "page": "https://health.kerala.gov.in/thematic-docs",
+ "retrieved": "2026-09-26",
+ "citation": "Kerala Antimicrobial Resistance Strategic Action Plan (KARSAP), Department of Health Services, Kerala. District Antibiogram: Alappuzha, Kottayam, Pathanamthitta, Thrissur and Thiruvananthapuram. Chapter: District Antibiogram Pathanamthitta, Regional Public Health Laboratory Pathanamthitta (01/01/2023 to 31/12/2024), compiled by Dr Lakshmi Balaraman, District Clinical Microbiologist. Thiruvananthapuram: Department of Health Services, Kerala.",
+ "measure": "R",
+ "reporting": "Percent resistant with number tested and number resistant, by organism and specimen (blood, pus aspirate, urine), all locations pooled; percentages given only where at least 30 isolates (E. coli and Klebsiella from urine).",
+ "verification": {
+  "status": "double-checked",
+  "note": "Tables 3, 7 and 8 read from the PDF text layer and compared value by value with the pages rendered at scale 2.2 (percentages printed across two lines, e.g. 1.6/7 = 1.67, read from the image); every printed percentage recomputed from its printed counts. Page numbers are 1-based PDF pages of the five-district compilation."
+ },
+ "notes": "District antibiogram of secondary and primary care facilities: Regional Public Health Laboratory Pathanamthitta (a standalone laboratory in the District Hospital compound), samples mainly from District Hospital Kozhencherry and the District TB Centre plus 9 other institutions, 1 January 2023 to 31 December 2024, from the KARSAP compilation of five district antibiograms. All figures are percent resistant. 63% of isolates were from outpatients, 35% inpatients and 2% ICU; tables pool all locations. The chapter's totals disagree: Table 1 lists 589 priority-pathogen isolates (E. coli 250, Klebsiella 136, Pseudomonas 90, S. aureus 55, Acinetobacter 34, Enterococcus 24), the location table 605, and the specimen table (Table 3, recorded as counts) 435 (it gives no specimen for Acinetobacter).",
+ "issues": [
+  "Second reader 2026-09-26: all 24 cells (the whole file is the sample), their numbers tested, both row n values and all 29 counts (Table 3, page 66) read blind from the page images (scale 2.5; tables continue onto pages 73 and 75) and compared: 0 transcription errors; organism, specimen and n correct.",
+  "Confirmed as printed: E. coli urine imipenem and meropenem 1.67 (printed on two lines as 1.6 and 7; Figure 8 rounds to 1.7), doxycycline 20.6 in a grey-shaded cell, amikacin 2.8 (6 of 230 = 2.6) and ciprofloxacin and co-trimoxazole 43.7 (100 of 230 = 43.5); Klebsiella urine percentages that differ from their counts by up to 0.9 points (for example piperacillin-tazobactam 6.5 against 4 of 71 = 5.6). The chapter totals (589, 605 and 435 isolates) are quoted correctly in notes."
+ ],
+ "rows": [
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 230,
+   "page": 72,
+   "table": "Table 7",
+   "r": {
+    "ampicillin": 97,
+    "amoxiclav": 8.3,
+    "piptazo": 1.8,
+    "ceftriaxone": 46,
+    "cefotaxime": 46,
+    "imipenem": 1.67,
+    "meropenem": 1.67,
+    "amikacin": 2.8,
+    "gentamicin": 22,
+    "ciprofloxacin": 43.7,
+    "cotrimoxazole": 43.7,
+    "doxycycline": 20.6,
+    "nitrofurantoin": 5.2
+   },
+   "nt": {
+    "ampicillin": 230,
+    "amoxiclav": 145,
+    "piptazo": 230,
+    "ceftriaxone": 230,
+    "cefotaxime": 230,
+    "imipenem": 180,
+    "meropenem": 180,
+    "amikacin": 230,
+    "gentamicin": 230,
+    "ciprofloxacin": 230,
+    "cotrimoxazole": 230,
+    "doxycycline": 150,
+    "nitrofurantoin": 230
+   },
+   "notes": {
+    "doxycycline": "printed in a grey-shaded cell (150 tested, 31 resistant, 20.6%); Figure 8 also shows 20.6%",
+    "amikacin": "printed 2.8%; 6 of 230 is 2.6%",
+    "ciprofloxacin": "printed 43.7%; 100 of 230 is 43.5%",
+    "cotrimoxazole": "printed 43.7%; 100 of 230 is 43.5%"
+   },
+   "note": "Regional Public Health Laboratory Pathanamthitta; 85% of isolates from District Hospital Kozhencherry and the District TB Centre, the rest from 9 other institutions; all locations pooled. Table 7 continues on page 73; Figure 8 charts the same percentages.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "n": 71,
+   "page": 74,
+   "table": "Table 8",
+   "r": {
+    "amoxiclav": 14.3,
+    "piptazo": 6.5,
+    "ceftriaxone": 38.1,
+    "cefotaxime": 38.1,
+    "imipenem": 2.4,
+    "meropenem": 2.4,
+    "amikacin": 5.4,
+    "gentamicin": 12.5,
+    "ciprofloxacin": 26.2,
+    "cotrimoxazole": 28.7,
+    "nitrofurantoin": 54.2
+   },
+   "nt": {
+    "amoxiclav": 65,
+    "piptazo": 71,
+    "ceftriaxone": 71,
+    "cefotaxime": 71,
+    "imipenem": 65,
+    "meropenem": 65,
+    "amikacin": 71,
+    "gentamicin": 71,
+    "ciprofloxacin": 71,
+    "cotrimoxazole": 71,
+    "nitrofurantoin": 71
+   },
+   "note": "Regional Public Health Laboratory Pathanamthitta; 85% of isolates from District Hospital Kozhencherry and the District TB Centre, the rest from 9 other institutions; all locations pooled. Printed as Klebsiella species. Table 8 continues on page 75. Most printed percentages differ by up to 0.9 points from the printed resistant/tested counts (for example piperacillin-tazobactam 4 of 71 is 5.6% against 6.5% printed; imipenem 2 of 65 is 3.1% against 2.4%); percentages recorded as printed.",
+   "specimen_as_printed": "Urine"
+  }
+ ],
+ "counts": [
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 6,
+   "page": 66
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 6,
+   "page": 66
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 0,
+   "page": 66
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 230,
+   "page": 66
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 0,
+   "page": 66
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella spp.",
+   "n": 2,
+   "page": 66
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Klebsiella spp.",
+   "n": 9,
+   "page": 66
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Klebsiella spp.",
+   "n": 0,
+   "page": 66
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella spp.",
+   "n": 71,
+   "page": 66
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Klebsiella spp.",
+   "n": 0,
+   "page": 66
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Salmonella Typhi and Paratyphi",
+   "n": 0,
+   "page": 66
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Salmonella Typhi and Paratyphi",
+   "n": 0,
+   "page": 66
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Shigella spp.",
+   "n": 0,
+   "page": 66
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Shigella spp.",
+   "n": 0,
+   "page": 66
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Pseudomonas spp.",
+   "n": 3,
+   "page": 66
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Pseudomonas spp.",
+   "n": 22,
+   "page": 66
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Pseudomonas spp.",
+   "n": 0,
+   "page": 66
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Pseudomonas spp.",
+   "n": 21,
+   "page": 66
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Pseudomonas spp.",
+   "n": 0,
+   "page": 66
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "n": 0,
+   "page": 66
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "n": 0,
+   "page": 66
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 12,
+   "page": 66
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 29,
+   "page": 66
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 0,
+   "page": 66
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 0,
+   "page": 66
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "n": 14,
+   "page": 66
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "n": 0,
+   "page": 66
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "n": 10,
+   "page": 66
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "n": 0,
+   "page": 66
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Table 5 S. aureus (blood 12, pus aspirate 29), Table 6 Enterococcus (pus aspirate 14, urine 10), Table 10 Pseudomonas (blood 3, pus aspirate 22, urine 21), E. coli and Klebsiella blood and pus aspirate (2 to 9 isolates)",
+   "why": "fewer than 30 isolates; counts only, no percentages"
+  },
+  {
+   "what": "Figures 8 and 9",
+   "why": "charts of the same percentages as Tables 7 and 8"
+  },
+  {
+   "what": "Table 1 (organism totals) and Table 4 (location totals)",
+   "why": "totals disagree with the specimen table (see notes); Table 4 is not by organism"
+  }
+ ]
+}

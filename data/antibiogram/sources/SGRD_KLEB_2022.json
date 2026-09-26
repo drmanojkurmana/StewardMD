@@ -1,0 +1,69 @@
+{
+ "id": "SGRD_KLEB_2022",
+ "kind": "study",
+ "inst": "SGRD_AMRITSAR",
+ "institution": "Sri Guru Ram Das Institute of Medical Sciences and Research",
+ "short": "SGRD Amritsar",
+ "city": "Amritsar",
+ "state": "Punjab",
+ "region": "north",
+ "sector": "private",
+ "year": 2022,
+ "period": "Jan-Jun 2022",
+ "citation": "Cureus 2023 (PMC10106535)",
+ "doi": null,
+ "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10106535/",
+ "reporting": "%S",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Method: Figures come from Table 2 (page 3), printed as n (%) sensitive, and were checked against the page 4 text. Piperacillin-tazobactam is printed as '1 (3%)' and colistin as '12 (28%)'. MDR and XDR counts in Table 3 are not per drug."
+ },
+ "notes": "Sharma et al. (Cureus 2023) studied Klebsiella pneumoniae from endotracheal aspirates of mechanically ventilated ICU patients with ventilator-associated pneumonia at Sri Guru Ram Das Institute of Medical Sciences and Research, Amritsar. This entry is the January to June 2022 cohort (42 isolates); a separate entry holds January to June 2018 (40). Figures are % susceptible as printed. The paper's headline finding is the fall in colistin susceptibility from 92% in 2018 to 28% in 2022; meropenem fell from 15% to 2.5%, minocycline rose from 67% to 100% and XDR strains rose from 62.5% to 71%. Ampicillin, 100% resistant in both periods by the text, is not in the table and is not shown. No ESBL rate is reported. Cotrimoxazole (50%) is printed without an isolate count.",
+ "issues": [
+  "Lead 2026-09-26: rows tagged cohort \"hai\" (VAP patients' endotracheal aspirates), so they are not read as all ICU respiratory isolates."
+ ],
+ "rows": [
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 42,
+   "specimen_as_printed": "endotracheal aspirate, ICU mechanically ventilated (VAP)",
+   "s": {
+    "tigecycline": 100,
+    "colistin": 28,
+    "cotrimoxazole": 50,
+    "minocycline": 100,
+    "amoxicillin": 0,
+    "ceftriaxone": 0,
+    "piptazo": 3,
+    "cefoperazone_sulbactam": 5,
+    "cefuroxime": 5,
+    "imipenem": 7.5,
+    "meropenem": 2.5,
+    "amikacin": 12.5,
+    "gentamicin": 5,
+    "nalidixic_acid": 5,
+    "ciprofloxacin": 0
+   },
+   "notes": {
+    "colistin": "12 (28%); marked decline from 92% in 2018",
+    "cotrimoxazole": "table shows 50% (no count printed)",
+    "piptazo": "1 (3%)"
+   },
+   "cohort": "hai",
+   "note": "Endotracheal aspirates of mechanically ventilated ICU patients with ventilator-associated pneumonia: kept with the ICU device-associated cohort, so they answer VAP only."
+  }
+ ],
+ "counts": [
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "n": 42
+  }
+ ],
+ "excluded": [],
+ "focus": "Klebsiella pneumoniae from endotracheal aspirates of ICU patients with ventilator-associated pneumonia (January to June 2022)"
+}

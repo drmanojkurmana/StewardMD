@@ -1,0 +1,303 @@
+{
+ "id": "KIMS_STERILE",
+ "kind": "study",
+ "inst": "KIMS_BHUBANESWAR_STERILE",
+ "institution": "Kalinga Institute of Medical Sciences",
+ "short": "KIMS Bhubaneswar",
+ "city": "Bhubaneswar",
+ "state": "Odisha",
+ "region": "east",
+ "sector": "private",
+ "year": 2022,
+ "period": "January 2021 to December 2022",
+ "citation": "Cureus 2026;18(3):e104772",
+ "doi": "10.7759/cureus.104772",
+ "url": "https://doi.org/10.7759/cureus.104772",
+ "reporting": "%S",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Reading method: Method: rendered figure pages with PyMuPDF at 6x, calibrated the y-axis from detected tick-label centers (Fig 2: 0%=y1383, 100%=y368; Fig 1 baseline y1504), then extracted each bar's top and mid-bar color programmatically. Method: Values were measured off Figures 1 and 2 by calibrating the chart axis and matching bar colours to drugs; the colour-to-drug map was checked against figures quoted in the text (for example Acinetobacter imipenem 41.9 vs the text's 41%, P. aeruginosa ceftazidime 20.9 vs 21%). Bars that could not be detected (P. aeruginosa ampicillin, amoxiclav and imipenem; Acinetobacter ampicillin, amoxiclav and ceftriaxone) were left out. The Staphylococcus spp. figures from the text were assigned to S. aureus because they match its bars. Pseudomonas spp. is shown as P. aeruginosa and Acinetobacter spp. as A. baumannii. Enterococcal gentamicin is high-level gentamicin (86%, from the text). CoNS (n=43) and Streptococcus spp. (n=3) were not included. Gram-negative MDR, XDR and PDR rates: 21.6%, 14.2% and 3%."
+ },
+ "notes": "Poddar et al. (Cureus 2026) studied sterile body fluids (CSF, pleural, ascitic and synovial) at Kalinga Institute of Medical Sciences, Bhubaneswar, January 2021 to December 2022: 2,307 samples, 291 isolates (12.6% positive). It covers S. aureus (92), K. pneumoniae (40), E. coli (27), Acinetobacter (24), Pseudomonas (19) and Enterococcus (15). Susceptibility appears only as unlabelled bar charts and text, so all Gram-negative figures (accurate to about 1 to 2%) and the lower Gram-positive ones are approximate chart readings. The high staphylococcal figures (vancomycin, teicoplanin, linezolid, daptomycin, tigecycline) are stated for Staphylococcus spp. as a whole. S. aureus cloxacillin is 100 minus the 48.9% MRSA rate. K. pneumoniae ampicillin (41.9%) is implausible (intrinsic resistance), and P. aeruginosa amikacin reads below meropenem although the text ranks amikacin highest.",
+ "issues": [
+  "Staph aureus text-derived cells (linezolid 95.65, dapto 95, TGC 92, VA/TEI 90.21): the paper states these for 'Staphylococcus spp.' collectively (Fig 1 has separate S. aureus and CoNS bar groups). Assigning them specifically to S. aureus is a reasonable but not certain mapping; the 95.65% 'highest' value could belong to either Staph group.",
+  "Pseudomonas amikacin s=20.9 is read as LOWER than meropenem/cefepime (25.9), but the text explicitly says Pseudomonas showed 'highest sensitivity to amikacin, followed by carbapenems', i.e., amikacin should exceed the carbapenems. Bar-read ordering is inconsistent with the text; value is approximate so not force-corrected, but flag for review.",
+  "Klebsiella ampicillin s=41.9 (bar read) is clinically implausible since K. pneumoniae is intrinsically ampicillin-resistant (expected ~0%); cannot confirm from the rendered bar chart. Possible misread of the AMP bar.",
+  "Oxacillin s=51.1 is a valid 100-R conversion from MRSA 48.9% (45/92); direction correct.",
+  "All remaining Gram-negative per-drug numbers are pixel reads off Figure 2 bar chart and cannot be independently confirmed to the stated decimal precision; they are appropriately flagged approx and are broadly consistent with the text ranges (amikacin 41-63%, carbapenems 40-60%, E. coli cipro ~10%).",
+  "Lead 2026-09-26: its own institution key (KIMS_BHUBANESWAR_STERILE, was KIMS_BHUBANESWAR): a different study from the same hospital is not an earlier edition of this one."
+ ],
+ "rows": [
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 92,
+   "specimen_as_printed": "sterile body fluids (CSF/pleural/ascitic/synovial)",
+   "s": {
+    "cloxacillin": 51.1,
+    "linezolid": 95.7,
+    "daptomycin": 95,
+    "tigecycline": 92,
+    "vancomycin": 90.2,
+    "teicoplanin": 90.2,
+    "gentamicin": 68,
+    "cotrimoxazole": 70,
+    "clindamycin": 43,
+    "ciprofloxacin": 35,
+    "erythromycin": 15,
+    "penicillin": 14
+   },
+   "approx": [
+    "gentamicin",
+    "cotrimoxazole",
+    "clindamycin",
+    "ciprofloxacin",
+    "erythromycin",
+    "penicillin"
+   ],
+   "notes": {
+    "cloxacillin": "Derived from MRSA prevalence 48.9% (methicillin resistance); s=100-48.9",
+    "linezolid": "stated in text (Fig 1)",
+    "daptomycin": "stated in text",
+    "tigecycline": "stated in text",
+    "vancomycin": "stated in text (90.21% each VA/TEI)",
+    "teicoplanin": "stated in text",
+    "gentamicin": "read from Fig 1 bar chart",
+    "cotrimoxazole": "read from bar chart",
+    "clindamycin": "read from bar chart",
+    "ciprofloxacin": "read from bar chart",
+    "erythromycin": "read from bar chart",
+    "penicillin": "read from bar chart"
+   }
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Enterococcus",
+   "pheno": null,
+   "n": 15,
+   "specimen_as_printed": "sterile body fluids (CSF/pleural/ascitic/synovial)",
+   "s": {
+    "tigecycline": 100,
+    "daptomycin": 93,
+    "linezolid": 93,
+    "vancomycin": 86,
+    "teicoplanin": 86,
+    "ciprofloxacin": 46,
+    "clindamycin": 33,
+    "penicillin": 26,
+    "cotrimoxazole": 60,
+    "erythromycin": 6,
+    "gentamicin_hl": 86
+   },
+   "approx": [
+    "ciprofloxacin",
+    "clindamycin",
+    "penicillin",
+    "cotrimoxazole",
+    "erythromycin"
+   ],
+   "notes": {
+    "tigecycline": "stated in text",
+    "daptomycin": "stated in text (DAP/LZ 93% each)",
+    "linezolid": "stated in text",
+    "vancomycin": "stated in text (VA/TEI/HLG 86% each)",
+    "teicoplanin": "stated in text",
+    "ciprofloxacin": "read from bar chart",
+    "clindamycin": "read from bar chart",
+    "penicillin": "read from bar chart",
+    "cotrimoxazole": "read from bar chart",
+    "erythromycin": "read from bar chart",
+    "gentamicin_hl": "stated in text; high-level gentamicin"
+   }
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 40,
+   "specimen_as_printed": "sterile body fluids (CSF/pleural/ascitic/synovial)",
+   "s": {
+    "amikacin": 59.9,
+    "amoxiclav": 54.8,
+    "cotrimoxazole": 54.8,
+    "ceftriaxone": 51.8,
+    "ceftazidime": 46.8,
+    "cefepime": 44.9,
+    "ampicillin": 41.9,
+    "meropenem": 39.9,
+    "imipenem": 39.9,
+    "piptazo": 36.9,
+    "ciprofloxacin": 29.9,
+    "gentamicin": 26.9
+   },
+   "approx": [
+    "amikacin",
+    "amoxiclav",
+    "cotrimoxazole",
+    "ceftriaxone",
+    "ceftazidime",
+    "cefepime",
+    "ampicillin",
+    "meropenem",
+    "imipenem",
+    "piptazo",
+    "ciprofloxacin",
+    "gentamicin"
+   ]
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 27,
+   "specimen_as_printed": "sterile body fluids (CSF/pleural/ascitic/synovial)",
+   "s": {
+    "amikacin": 61.9,
+    "gentamicin": 58.9,
+    "imipenem": 58.9,
+    "meropenem": 47.9,
+    "ceftazidime": 43.8,
+    "ampicillin": 43.8,
+    "ceftriaxone": 40.9,
+    "amoxiclav": 39.9,
+    "cotrimoxazole": 32.8,
+    "piptazo": 29.9,
+    "cefepime": 28.9,
+    "ciprofloxacin": 10.8
+   },
+   "approx": [
+    "amikacin",
+    "gentamicin",
+    "imipenem",
+    "meropenem",
+    "ceftazidime",
+    "ampicillin",
+    "ceftriaxone",
+    "amoxiclav",
+    "cotrimoxazole",
+    "piptazo",
+    "cefepime",
+    "ciprofloxacin"
+   ],
+   "notes": {
+    "ciprofloxacin": "consistent with text 'ciprofloxacin resistance high (90%)'"
+   }
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 19,
+   "specimen_as_printed": "sterile body fluids (CSF/pleural/ascitic/synovial)",
+   "s": {
+    "meropenem": 25.9,
+    "cefepime": 25.9,
+    "amikacin": 20.9,
+    "gentamicin": 20.9,
+    "ceftazidime": 20.9,
+    "piptazo": 20.9,
+    "cotrimoxazole": 15.9,
+    "ciprofloxacin": 9.9,
+    "ceftriaxone": 4.9
+   },
+   "approx": [
+    "meropenem",
+    "cefepime",
+    "amikacin",
+    "gentamicin",
+    "ceftazidime",
+    "piptazo",
+    "cotrimoxazole",
+    "ciprofloxacin",
+    "ceftriaxone"
+   ],
+   "notes": {
+    "ceftazidime": "text states ceftazidime 21%",
+    "piptazo": "text states pip-tazo range 21-37%",
+    "ciprofloxacin": "text states ciprofloxacin 10-11%"
+   }
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 24,
+   "specimen_as_printed": "sterile body fluids (CSF/pleural/ascitic/synovial)",
+   "s": {
+    "imipenem": 41.9,
+    "gentamicin": 41.5,
+    "amikacin": 37.9,
+    "ciprofloxacin": 36.8,
+    "cotrimoxazole": 36.8,
+    "piptazo": 32.8,
+    "meropenem": 28.9,
+    "cefepime": 28.9,
+    "ceftazidime": 28.9
+   },
+   "approx": [
+    "imipenem",
+    "gentamicin",
+    "amikacin",
+    "ciprofloxacin",
+    "cotrimoxazole",
+    "piptazo",
+    "meropenem",
+    "cefepime",
+    "ceftazidime"
+   ],
+   "notes": {
+    "imipenem": "text states imipenem 41%",
+    "gentamicin": "text states aminoglycosides 41%",
+    "ciprofloxacin": "text states ciprofloxacin 38%",
+    "cotrimoxazole": "text states cotrimoxazole 37.5%"
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 92
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Enterococcus",
+   "n": 15
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "n": 40
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 27
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "n": 24
+  }
+ ],
+ "excluded": [],
+ "focus": "sterile body fluids (CSF, pleural, ascitic and synovial fluid)"
+}

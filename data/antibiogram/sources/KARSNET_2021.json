@@ -1,0 +1,1661 @@
+{
+ "id": "KARSNET_2021",
+ "kind": "network",
+ "inst": "KARSNET",
+ "institution": "Kerala Antimicrobial Resistance Surveillance Network (KARS-NET), Department of Health Services, Kerala",
+ "short": "KARS-NET",
+ "city": "Thiruvananthapuram",
+ "state": "Kerala",
+ "region": "south",
+ "sector": "network",
+ "year": 2021,
+ "end": "2021-12",
+ "isolates": 14353,
+ "period": "1 January to 31 December 2021",
+ "published": "2022",
+ "url": "https://health.kerala.gov.in/assets/backend/uploads/articles/1782712261_0.pdf",
+ "page": "https://health.kerala.gov.in/thematic-docs",
+ "retrieved": "2026-09-26",
+ "citation": "Kerala Antimicrobial Resistance Surveillance Network (KARS-Net). Annual Report (Reporting period 01/01/2021 to 31/12/2021). Thiruvananthapuram: Department of Microbiology, Government Medical College, Thiruvananthapuram (state nodal centre), Kerala Antimicrobial Resistance Strategic Action Plan (KARSAP); 2022.",
+ "reporting": "Percent resistant by pathogen and specimen (blood; pus aspirate and other sterile body fluids together; urine), all location types pooled, with number tested and number resistant; overall (all specimens) charts with numbers resistant and tested; location-type (IN, OUT, ICU) charts with printed data labels, for all specimens together (E. coli, Klebsiella, Pseudomonas, Acinetobacter) or for blood with PA+OSBF and for urine (Enterococcus); MRSA and VRE trend chart.",
+ "method": "WHONET collation and analysis; conventional or automated identification; AST by disc diffusion, broth microdilution or automated systems; first isolate per patient, specimen type and pathogen (21,765 isolates reported, 14,353 unique-patient isolates). Vancomycin results for S. aureus and colistin results for Gram-negative bacilli were not included because testing methods were not uniform. No rule against percentages from fewer than 30 isolates is stated.",
+ "measure": "R",
+ "verification": {
+  "status": "double-checked",
+  "note": "Tables 6, 7, 8, 9, 11 and 12 parsed from the PDF text layer (pdfplumber words assigned to columns by x position; the column order differs between tables and was checked on each page) and every value compared by eye with the pages rendered at scale 2.2; every printed percentage recomputed from its printed counts (no disagreement). The overall charts (Figures 10, 13, 15, 17, 19) were read from the text layer and checked on the rendered pages; each number resistant and tested equals the sum of its specimen table and each percentage its counts. Location charts (Figures 11, 12, 14, 16, 18, 20): data labels from the text layer, each matched to its bar by a script comparing the bar colour on the page rendered at scale 4 with the legend marker colours, labels without a bar (0) placed by their position in the group, then every label checked by eye on the rendered chart; the text statements for Pseudomonas imipenem, Klebsiella ICU and Acinetobacter imipenem and ICU values match. MRSA and VRE trend labels read from the rendered chart. Count Tables 3 and 5 checked against the images and their printed totals. Page numbers are 1-based PDF pages."
+ },
+ "notes": "First Kerala state antibiogram (KARS-Net annual report for 2021; the report is undated, its PDF was created in November 2022): 18 laboratories in 9 districts, seven priority pathogens. All figures are percent resistant (intermediate counted as not resistant). In 2021 pus aspirate and other sterile body fluids were reported together (PA+OSBF, shown under deep infections). The specimen tables pool all location types (set all); the location charts pool all specimens (recorded as all specimens by location) except for Enterococcus, charted for blood with PA+OSBF (recorded as all specimens except urine) and for urine; the overall charts give all specimens and locations (recorded as all specimens, all settings) and the all-specimen S. aureus (cefoxitin) and Enterococcus (vancomycin) rows carry the MRSA and VRE trends. Location type was unknown for 877 isolates. The report prints percentages even for fewer than 30 isolates tested; those cells keep their number tested and a note.",
+ "issues": [
+  "Second reader 2026-09-26: every cell re-read blind against the page images before comparing (all 394 cells, including the seeded sample of 98, plus all 41 row n and all 40 counts; tables at scale 2.5, charts zoomed at scale 4): 0 transcription errors, nothing corrected.",
+  "Second reader: all 171 location-chart cells (Figures 11, 12, 14, 16, 18 and 20) also checked by a script against each figure's own legend marker colours (IN grey, OUT orange, ICU blue, except Figure 14: OUT grey, IN orange, ICU blue) and the colour of the bar behind each data label: drug, location and value agree for every cell. Every figure of the overall charts (Figures 10, 13, 15, 17, 19) equals the sum of its specimen table columns.",
+  "Second reader: the two hidden cells are printed: Table 9 gives nitrofurantoin for Klebsiella from PA+OSBF (63 tested, 51 resistant, 81%) and from blood (19 tested, 8 resistant, 42%).",
+  "Second reader: count differences confirmed as printed. Figure 7 (page 19) gives 877 isolates (6%) with unknown location and Table 5 totals 13,476 (14,353 less 877); the shortfalls of the Table 5 location counts against the Table 3 organism totals add up to exactly 877, which is why the six overall rows exceed the location sums. The chart legend N differ from Table 5 as printed: E. coli OUT 2943 against 2944, IN 2112 against 2116; Klebsiella ICU 473 against 476.",
+  "Second reader: data year confirmed as 2021. The cover prints the reporting period 01/01/2021 to 31/12/2021, and pages 8, 9 and 12 say the data run from 1 January to 31 December 2021 (18 sites, 9 districts). The report prints no publication date; published 2022 rests on the PDF creation date (7 November 2022).",
+  "Second reader: every printed percentage of Tables 6 to 12 recomputed from its printed counts; no disagreement.",
+  "Second reader: added as counts (all specimens, all settings) the isolate totals per organism printed in the Total column of Table 3, page 17 (sum 14,353); the overall rows now check exactly against them.",
+  "Lead 2026-09-26: \"pus aspirate\" (reported together with other sterile body fluids in 2021) filed under specimen \"deep\" (deep infections, aspirates), as for the other NCDC-protocol networks; 6 rows and 6 counts moved from \"pus\". The \"Blood + PA+OSBF\" column (every specimen except urine and stool) is filed as \"all specimens except urine\" (1 row)."
+ ],
+ "rows": [
+  {
+   "spec": "nonurine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 1720,
+   "page": 22,
+   "table": "Table 6",
+   "r": {
+    "cefoxitin": 20,
+    "amikacin": 12,
+    "gentamicin": 19,
+    "ciprofloxacin": 43,
+    "cotrimoxazole": 17,
+    "clindamycin": 19,
+    "erythromycin": 54,
+    "linezolid": 0,
+    "doxycycline": 4
+   },
+   "nt": {
+    "cefoxitin": 1176,
+    "amikacin": 789,
+    "gentamicin": 1435,
+    "ciprofloxacin": 1162,
+    "cotrimoxazole": 1514,
+    "clindamycin": 1300,
+    "erythromycin": 1550,
+    "linezolid": 1346,
+    "doxycycline": 617
+   },
+   "specimen_as_printed": "Blood + PA+OSBF",
+   "notes": {
+    "linezolid": "printed 0% (5 of 1,346 tested resistant); the text (page 21) says a few centres reported linezolid-resistant S. aureus but none was confirmed by broth microdilution"
+   },
+   "trend": {
+    "cefoxitin": [
+     [
+      2018,
+      36.67
+     ],
+     [
+      2019,
+      38.95
+     ],
+     [
+      2021,
+      20
+     ]
+    ]
+   },
+   "note": "Table 6 \"Blood + PA+OSBF\" column: every S. aureus isolate of the year (S. aureus is not collected from urine or stool, Table 2), recorded as all specimens. Cefoxitin is the MRSA marker; the MRSA trend (2018 36.67%, 2019 38.95%, 2021 20%) is from the MRSA and VRE trend chart (Figure 23, page 39; no 2020 data). The report attributes the 2021 dip to incomplete pandemic-year reporting. Table 5 counts only isolates with a known location type (13,476 of 14,353), so its location counts add up to less than this n."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 342,
+   "page": 22,
+   "table": "Table 6",
+   "r": {
+    "cefoxitin": 22,
+    "amikacin": 4,
+    "gentamicin": 18,
+    "ciprofloxacin": 40,
+    "cotrimoxazole": 21,
+    "clindamycin": 26,
+    "erythromycin": 64,
+    "linezolid": 0,
+    "doxycycline": 3
+   },
+   "nt": {
+    "cefoxitin": 258,
+    "amikacin": 93,
+    "gentamicin": 282,
+    "ciprofloxacin": 184,
+    "cotrimoxazole": 234,
+    "clindamycin": 233,
+    "erythromycin": 251,
+    "linezolid": 284,
+    "doxycycline": 67
+   },
+   "specimen_as_printed": "Blood",
+   "notes": {
+    "linezolid": "printed 0% (1 of 284 tested resistant); the text (page 21) says a few centres reported linezolid-resistant S. aureus but none was confirmed by broth microdilution"
+   }
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 1378,
+   "page": 22,
+   "table": "Table 6",
+   "r": {
+    "cefoxitin": 19,
+    "amikacin": 13,
+    "gentamicin": 19,
+    "ciprofloxacin": 44,
+    "cotrimoxazole": 16,
+    "clindamycin": 18,
+    "erythromycin": 53,
+    "linezolid": 0,
+    "doxycycline": 4
+   },
+   "nt": {
+    "cefoxitin": 918,
+    "amikacin": 696,
+    "gentamicin": 1153,
+    "ciprofloxacin": 978,
+    "cotrimoxazole": 1280,
+    "clindamycin": 1067,
+    "erythromycin": 1299,
+    "linezolid": 1062,
+    "doxycycline": 550
+   },
+   "specimen_as_printed": "PA+OSBF (pus aspirate and other sterile body fluids together)",
+   "notes": {
+    "linezolid": "printed 0% (4 of 1,062 tested resistant); the text (page 21) says a few centres reported linezolid-resistant S. aureus but none was confirmed by broth microdilution"
+   },
+   "note": "PA+OSBF (pus aspirate and other sterile body fluids, reported together in 2021) shown under deep infections."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "n": 996,
+   "page": 23,
+   "table": "Figure 10",
+   "r": {
+    "tetracycline": 69,
+    "doxycycline": 57,
+    "vancomycin": 5,
+    "linezolid": 2,
+    "erythromycin": 75,
+    "ciprofloxacin": 63,
+    "gentamicin_hl": 35,
+    "ampicillin": 33
+   },
+   "nt": {
+    "tetracycline": 313,
+    "doxycycline": 193,
+    "vancomycin": 882,
+    "linezolid": 824,
+    "erythromycin": 626,
+    "ciprofloxacin": 451,
+    "gentamicin_hl": 620,
+    "ampicillin": 724
+   },
+   "note": "Figure 10, all specimens and location types together (N=996 in the caption): bar chart printing the number resistant with its percentage and the number tested for each drug (text layer, checked on the rendered page); every figure equals the sum of the specimen table's columns. Gentamicin-High = high-level gentamicin. Printed as Enterococcus species. Vancomycin carries the VRE trend (2018 0.62%, 2019 0.26%, 2021 5%) from the MRSA and VRE trend chart (Figure 23, page 39; no 2020 data). The text gives 2.4% for linezolid (20 of 824). Table 5 counts only isolates with a known location type (13,476 of 14,353), so its location counts add up to less than this n.",
+   "specimen_as_printed": "overall (blood, pus aspirate and other sterile body fluids, urine)",
+   "trend": {
+    "vancomycin": [
+     [
+      2018,
+      0.62
+     ],
+     [
+      2019,
+      0.26
+     ],
+     [
+      2021,
+      5
+     ]
+    ]
+   }
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "n": 388,
+   "page": 24,
+   "table": "Table 7",
+   "r": {
+    "ampicillin": 22,
+    "gentamicin_hl": 23,
+    "ciprofloxacin": 42,
+    "erythromycin": 72,
+    "linezolid": 2,
+    "vancomycin": 3,
+    "doxycycline": 57,
+    "tetracycline": 59
+   },
+   "nt": {
+    "ampicillin": 322,
+    "gentamicin_hl": 303,
+    "ciprofloxacin": 84,
+    "erythromycin": 338,
+    "linezolid": 352,
+    "vancomycin": 346,
+    "doxycycline": 112,
+    "tetracycline": 44
+   },
+   "specimen_as_printed": "PA+OSBF (pus aspirate and other sterile body fluids together)",
+   "notes": {
+    "gentamicin_hl": "printed as Gentamicin-High (high-level gentamicin)"
+   },
+   "note": "Printed as Enterococcus species. PA+OSBF (pus aspirate and other sterile body fluids, reported together in 2021) shown under deep infections."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "n": 159,
+   "page": 24,
+   "table": "Table 7",
+   "r": {
+    "ampicillin": 60,
+    "gentamicin_hl": 52,
+    "ciprofloxacin": 58,
+    "erythromycin": 82,
+    "linezolid": 2,
+    "vancomycin": 6,
+    "doxycycline": 65,
+    "tetracycline": 81
+   },
+   "nt": {
+    "ampicillin": 122,
+    "gentamicin_hl": 115,
+    "ciprofloxacin": 50,
+    "erythromycin": 137,
+    "linezolid": 135,
+    "vancomycin": 140,
+    "doxycycline": 57,
+    "tetracycline": 27
+   },
+   "specimen_as_printed": "Blood",
+   "notes": {
+    "tetracycline": "printed although fewer than 30 were tested (27)",
+    "gentamicin_hl": "printed as Gentamicin-High (high-level gentamicin)"
+   },
+   "note": "Printed as Enterococcus species."
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "n": 449,
+   "page": 24,
+   "table": "Table 7",
+   "r": {
+    "ampicillin": 34,
+    "gentamicin_hl": 41,
+    "ciprofloxacin": 69,
+    "erythromycin": 73,
+    "linezolid": 3,
+    "vancomycin": 6,
+    "doxycycline": 38,
+    "tetracycline": 70
+   },
+   "nt": {
+    "ampicillin": 280,
+    "gentamicin_hl": 202,
+    "ciprofloxacin": 317,
+    "erythromycin": 151,
+    "linezolid": 337,
+    "vancomycin": 396,
+    "doxycycline": 24,
+    "tetracycline": 242
+   },
+   "specimen_as_printed": "Urine",
+   "notes": {
+    "doxycycline": "printed although fewer than 30 were tested (24)",
+    "gentamicin_hl": "printed as Gentamicin-High (high-level gentamicin)"
+   },
+   "note": "Printed as Enterococcus species."
+  },
+  {
+   "spec": "nonurine",
+   "set": "opd",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "n": 147,
+   "page": 24,
+   "table": "Figure 11",
+   "r": {
+    "tetracycline": 35,
+    "doxycycline": 44,
+    "vancomycin": 4,
+    "linezolid": 3,
+    "erythromycin": 61,
+    "ciprofloxacin": 29,
+    "gentamicin_hl": 19,
+    "ampicillin": 10
+   },
+   "note": "Figure 11, isolates from blood and PA & OSBF (all specimens except urine) from OPD patients (legend \"% Resistance OUT(N=147)\"): bar chart with printed data labels; each label was matched to its bar by the bar colour of the legend (IN grey, OUT orange, ICU blue; IN = IPD, OUT = OPD) on the rendered page, labels without a bar (0) by their place in the group. Gentamicin-High = high-level gentamicin. Printed as Enterococcus species.",
+   "specimen_as_printed": "blood and PA & OSBF",
+   "notes": {
+    "tetracycline": "only 71 blood and PA+OSBF isolates were tested for tetracycline across all location types (Table 7: 44 + 27); the number behind this figure is not printed"
+   }
+  },
+  {
+   "spec": "nonurine",
+   "set": "ward",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "n": 289,
+   "page": 24,
+   "table": "Figure 11",
+   "r": {
+    "tetracycline": 75,
+    "doxycycline": 62,
+    "vancomycin": 3,
+    "linezolid": 1,
+    "erythromycin": 78,
+    "ciprofloxacin": 49,
+    "gentamicin_hl": 32,
+    "ampicillin": 36
+   },
+   "note": "Figure 11, isolates from blood and PA & OSBF (all specimens except urine) from IPD patients (legend \"% Resistance IN(N=289)\"): bar chart with printed data labels; each label was matched to its bar by the bar colour of the legend (IN grey, OUT orange, ICU blue; IN = IPD, OUT = OPD) on the rendered page, labels without a bar (0) by their place in the group. Gentamicin-High = high-level gentamicin. Printed as Enterococcus species.",
+   "specimen_as_printed": "blood and PA & OSBF",
+   "notes": {
+    "tetracycline": "only 71 blood and PA+OSBF isolates were tested for tetracycline across all location types (Table 7: 44 + 27); the number behind this figure is not printed"
+   }
+  },
+  {
+   "spec": "nonurine",
+   "set": "icu",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "n": 90,
+   "page": 24,
+   "table": "Figure 11",
+   "r": {
+    "tetracycline": 89,
+    "doxycycline": 68,
+    "vancomycin": 5,
+    "linezolid": 4,
+    "erythromycin": 85,
+    "ciprofloxacin": 72,
+    "gentamicin_hl": 51,
+    "ampicillin": 61
+   },
+   "note": "Figure 11, isolates from blood and PA & OSBF (all specimens except urine) from ICU patients (legend \"% Resistance ICU(N=90)\"): bar chart with printed data labels; each label was matched to its bar by the bar colour of the legend (IN grey, OUT orange, ICU blue; IN = IPD, OUT = OPD) on the rendered page, labels without a bar (0) by their place in the group. Gentamicin-High = high-level gentamicin. Printed as Enterococcus species.",
+   "specimen_as_printed": "blood and PA & OSBF",
+   "notes": {
+    "tetracycline": "only 71 blood and PA+OSBF isolates were tested for tetracycline across all location types (Table 7: 44 + 27); the number behind this figure is not printed"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "n": 154,
+   "page": 25,
+   "table": "Figure 12",
+   "r": {
+    "tetracycline": 67,
+    "doxycycline": 80,
+    "vancomycin": 9,
+    "linezolid": 7,
+    "ciprofloxacin": 55,
+    "gentamicin_hl": 30,
+    "ampicillin": 20
+   },
+   "note": "Figure 12, urine isolates from OPD patients (legend \"% Resistance OUT(N=154)\"): bar chart with printed data labels; each label was matched to its bar by the bar colour of the legend (IN grey, OUT orange, ICU blue; IN = IPD, OUT = OPD) on the rendered page, labels without a bar (0) by their place in the group. Gentamicin-High = high-level gentamicin. Printed as Enterococcus species.",
+   "specimen_as_printed": "urine",
+   "notes": {
+    "doxycycline": "only 24 urine isolates were tested for doxycycline across all location types (Table 7), so this figure rests on fewer than 30 isolates"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "n": 210,
+   "page": 25,
+   "table": "Figure 12",
+   "r": {
+    "tetracycline": 68,
+    "doxycycline": 29,
+    "vancomycin": 3,
+    "linezolid": 1,
+    "ciprofloxacin": 71,
+    "gentamicin_hl": 39,
+    "ampicillin": 36
+   },
+   "note": "Figure 12, urine isolates from IPD patients (legend \"% Resistance IN(N=210)\"): bar chart with printed data labels; each label was matched to its bar by the bar colour of the legend (IN grey, OUT orange, ICU blue; IN = IPD, OUT = OPD) on the rendered page, labels without a bar (0) by their place in the group. Gentamicin-High = high-level gentamicin. Printed as Enterococcus species.",
+   "specimen_as_printed": "urine",
+   "notes": {
+    "doxycycline": "only 24 urine isolates were tested for doxycycline across all location types (Table 7), so this figure rests on fewer than 30 isolates"
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "n": 66,
+   "page": 25,
+   "table": "Figure 12",
+   "r": {
+    "tetracycline": 78,
+    "doxycycline": 0,
+    "vancomycin": 8,
+    "linezolid": 2,
+    "ciprofloxacin": 85,
+    "gentamicin_hl": 62,
+    "ampicillin": 48
+   },
+   "note": "Figure 12, urine isolates from ICU patients (legend \"% Resistance ICU(N=66)\"): bar chart with printed data labels; each label was matched to its bar by the bar colour of the legend (IN grey, OUT orange, ICU blue; IN = IPD, OUT = OPD) on the rendered page, labels without a bar (0) by their place in the group. Gentamicin-High = high-level gentamicin. Printed as Enterococcus species.",
+   "specimen_as_printed": "urine",
+   "notes": {
+    "doxycycline": "only 24 urine isolates were tested for doxycycline across all location types (Table 7), so this figure rests on fewer than 30 isolates"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 5718,
+   "page": 27,
+   "table": "Figure 13",
+   "r": {
+    "nitrofurantoin": 11,
+    "fosfomycin": 7,
+    "cotrimoxazole": 53,
+    "ciprofloxacin": 61,
+    "gentamicin": 28,
+    "amikacin": 15,
+    "meropenem": 9,
+    "imipenem": 10,
+    "cefepime": 48,
+    "cefotaxime": 62,
+    "piptazo": 18,
+    "cefoperazone_sulbactam": 8,
+    "ampicillin": 83
+   },
+   "nt": {
+    "nitrofurantoin": 4378,
+    "fosfomycin": 571,
+    "cotrimoxazole": 5008,
+    "ciprofloxacin": 4980,
+    "gentamicin": 4899,
+    "amikacin": 5011,
+    "meropenem": 2791,
+    "imipenem": 3213,
+    "cefepime": 2966,
+    "cefotaxime": 2574,
+    "piptazo": 4462,
+    "cefoperazone_sulbactam": 2610,
+    "ampicillin": 4924
+   },
+   "note": "Figure 13, all specimens and location types together (N=5718 in the caption): bar chart printing the number resistant with its percentage and the number tested for each drug (text layer, checked on the rendered page); every figure equals the sum of the specimen table's columns. Fosfomycin and nitrofurantoin were tested in urine isolates only. Table 5 counts only isolates with a known location type (13,476 of 14,353), so its location counts add up to less than this n.",
+   "specimen_as_printed": "overall (blood, pus aspirate and other sterile body fluids, urine)"
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 913,
+   "page": 27,
+   "table": "Table 8",
+   "r": {
+    "ampicillin": 84,
+    "cefoperazone_sulbactam": 5,
+    "piptazo": 20,
+    "cefotaxime": 58,
+    "cefepime": 46,
+    "imipenem": 9,
+    "meropenem": 10,
+    "amikacin": 16,
+    "gentamicin": 31,
+    "ciprofloxacin": 62,
+    "cotrimoxazole": 52
+   },
+   "nt": {
+    "ampicillin": 881,
+    "cefoperazone_sulbactam": 617,
+    "piptazo": 858,
+    "cefotaxime": 420,
+    "cefepime": 582,
+    "imipenem": 599,
+    "meropenem": 708,
+    "amikacin": 852,
+    "gentamicin": 863,
+    "ciprofloxacin": 884,
+    "cotrimoxazole": 702
+   },
+   "specimen_as_printed": "PA+OSBF (pus aspirate and other sterile body fluids together)",
+   "note": "PA+OSBF (pus aspirate and other sterile body fluids, reported together in 2021) shown under deep infections."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 287,
+   "page": 27,
+   "table": "Table 8",
+   "r": {
+    "ampicillin": 84,
+    "cefoperazone_sulbactam": 9,
+    "piptazo": 24,
+    "cefotaxime": 66,
+    "cefepime": 48,
+    "imipenem": 10,
+    "meropenem": 10,
+    "amikacin": 19,
+    "gentamicin": 33,
+    "ciprofloxacin": 64,
+    "cotrimoxazole": 56
+   },
+   "nt": {
+    "ampicillin": 267,
+    "cefoperazone_sulbactam": 183,
+    "piptazo": 235,
+    "cefotaxime": 125,
+    "cefepime": 195,
+    "imipenem": 196,
+    "meropenem": 210,
+    "amikacin": 265,
+    "gentamicin": 239,
+    "ciprofloxacin": 247,
+    "cotrimoxazole": 239
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 4518,
+   "page": 27,
+   "table": "Table 8",
+   "r": {
+    "ampicillin": 82,
+    "cefoperazone_sulbactam": 8,
+    "piptazo": 17,
+    "cefotaxime": 62,
+    "cefepime": 48,
+    "imipenem": 10,
+    "meropenem": 8,
+    "amikacin": 15,
+    "gentamicin": 27,
+    "ciprofloxacin": 61,
+    "cotrimoxazole": 53,
+    "fosfomycin": 7,
+    "nitrofurantoin": 11
+   },
+   "nt": {
+    "ampicillin": 3776,
+    "cefoperazone_sulbactam": 1810,
+    "piptazo": 3369,
+    "cefotaxime": 2029,
+    "cefepime": 2189,
+    "imipenem": 2418,
+    "meropenem": 1873,
+    "amikacin": 3894,
+    "gentamicin": 3797,
+    "ciprofloxacin": 3849,
+    "cotrimoxazole": 4067,
+    "fosfomycin": 571,
+    "nitrofurantoin": 4378
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 2943,
+   "page": 28,
+   "table": "Figure 14",
+   "r": {
+    "nitrofurantoin": 12,
+    "fosfomycin": 8,
+    "cotrimoxazole": 55,
+    "ciprofloxacin": 58,
+    "gentamicin": 25,
+    "amikacin": 13,
+    "meropenem": 5,
+    "imipenem": 8,
+    "ertapenem": 5,
+    "cefotaxime": 60,
+    "piptazo": 15,
+    "cefoperazone_sulbactam": 3,
+    "ampicillin": 80
+   },
+   "note": "Figure 14, isolates from blood, urine, PA & OSBF (all specimens) from OPD patients (legend \"% Resistance OUT(N=2943)\"): bar chart with printed data labels; each label was matched to its bar by the bar colour of the legend (OUT grey, IN orange, ICU blue; IN = IPD, OUT = OPD) on the rendered page, labels without a bar (0) by their place in the group. Ertapenem is charted although Table 8 has no ertapenem row. The legend N (2943) differs from Table 5 (2944 E. coli from OPD); printed as it is.",
+   "specimen_as_printed": "blood, urine, PA & OSBF"
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 2112,
+   "page": 28,
+   "table": "Figure 14",
+   "r": {
+    "nitrofurantoin": 12,
+    "fosfomycin": 1,
+    "cotrimoxazole": 51,
+    "ciprofloxacin": 64,
+    "gentamicin": 31,
+    "amikacin": 16,
+    "meropenem": 10,
+    "imipenem": 11,
+    "ertapenem": 7,
+    "cefotaxime": 64,
+    "piptazo": 21,
+    "cefoperazone_sulbactam": 8,
+    "ampicillin": 84
+   },
+   "note": "Figure 14, isolates from blood, urine, PA & OSBF (all specimens) from IPD patients (legend \"% Resistance IN(N=2112)\"): bar chart with printed data labels; each label was matched to its bar by the bar colour of the legend (OUT grey, IN orange, ICU blue; IN = IPD, OUT = OPD) on the rendered page, labels without a bar (0) by their place in the group. Ertapenem is charted although Table 8 has no ertapenem row. The legend N (2112) differs from Table 5 (2116 E. coli from IPD); printed as it is.",
+   "specimen_as_printed": "blood, urine, PA & OSBF"
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 315,
+   "page": 28,
+   "table": "Figure 14",
+   "r": {
+    "nitrofurantoin": 7,
+    "fosfomycin": 0,
+    "cotrimoxazole": 59,
+    "ciprofloxacin": 68,
+    "gentamicin": 33,
+    "amikacin": 18,
+    "meropenem": 19,
+    "imipenem": 16,
+    "ertapenem": 15,
+    "cefotaxime": 71,
+    "piptazo": 27,
+    "cefoperazone_sulbactam": 12,
+    "ampicillin": 89
+   },
+   "note": "Figure 14, isolates from blood, urine, PA & OSBF (all specimens) from ICU patients (legend \"% Resistance ICU(N=315)\"): bar chart with printed data labels; each label was matched to its bar by the bar colour of the legend (OUT grey, IN orange, ICU blue; IN = IPD, OUT = OPD) on the rendered page, labels without a bar (0) by their place in the group. Ertapenem is charted although Table 8 has no ertapenem row.",
+   "specimen_as_printed": "blood, urine, PA & OSBF"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "n": 3441,
+   "page": 30,
+   "table": "Figure 15",
+   "r": {
+    "nitrofurantoin": 48,
+    "cotrimoxazole": 52,
+    "ciprofloxacin": 60,
+    "gentamicin": 39,
+    "amikacin": 30,
+    "meropenem": 32,
+    "imipenem": 26,
+    "cefepime": 55,
+    "cefotaxime": 63,
+    "piptazo": 42,
+    "cefoperazone_sulbactam": 24
+   },
+   "nt": {
+    "nitrofurantoin": 1735,
+    "cotrimoxazole": 2926,
+    "ciprofloxacin": 3239,
+    "gentamicin": 3155,
+    "amikacin": 3084,
+    "meropenem": 2343,
+    "imipenem": 2347,
+    "cefepime": 2243,
+    "cefotaxime": 1631,
+    "piptazo": 3119,
+    "cefoperazone_sulbactam": 2177
+   },
+   "note": "Figure 15, all specimens and location types together (N=3441 in the caption): bar chart printing the number resistant with its percentage and the number tested for each drug (text layer, checked on the rendered page); every figure equals the sum of the specimen table's columns. Printed as Klebsiella species. Nitrofurantoin includes the few non-urinary isolates Table 9 reports. Table 5 counts only isolates with a known location type (13,476 of 14,353), so its location counts add up to less than this n.",
+   "specimen_as_printed": "overall (blood, pus aspirate and other sterile body fluids, urine)"
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "n": 1167,
+   "page": 30,
+   "table": "Table 9",
+   "r": {
+    "cefoperazone_sulbactam": 20,
+    "piptazo": 47,
+    "cefotaxime": 65,
+    "cefepime": 59,
+    "imipenem": 24,
+    "meropenem": 32,
+    "amikacin": 32,
+    "gentamicin": 43,
+    "ciprofloxacin": 64,
+    "cotrimoxazole": 57,
+    "nitrofurantoin": 81
+   },
+   "nt": {
+    "cefoperazone_sulbactam": 882,
+    "piptazo": 1119,
+    "cefotaxime": 511,
+    "cefepime": 773,
+    "imipenem": 800,
+    "meropenem": 955,
+    "amikacin": 1078,
+    "gentamicin": 1103,
+    "ciprofloxacin": 1133,
+    "cotrimoxazole": 908,
+    "nitrofurantoin": 63
+   },
+   "specimen_as_printed": "PA+OSBF (pus aspirate and other sterile body fluids together)",
+   "notes": {
+    "nitrofurantoin": "printed for PA+OSBF isolates (63 tested); nitrofurantoin is a urinary agent"
+   },
+   "note": "Printed as Klebsiella species. PA+OSBF (pus aspirate and other sterile body fluids, reported together in 2021) shown under deep infections."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "n": 533,
+   "page": 30,
+   "table": "Table 9",
+   "r": {
+    "cefoperazone_sulbactam": 30,
+    "piptazo": 59,
+    "cefotaxime": 67,
+    "cefepime": 65,
+    "imipenem": 43,
+    "meropenem": 47,
+    "amikacin": 43,
+    "gentamicin": 50,
+    "ciprofloxacin": 68,
+    "cotrimoxazole": 58,
+    "nitrofurantoin": 42
+   },
+   "nt": {
+    "cefoperazone_sulbactam": 406,
+    "piptazo": 518,
+    "cefotaxime": 224,
+    "cefepime": 405,
+    "imipenem": 383,
+    "meropenem": 462,
+    "amikacin": 509,
+    "gentamicin": 485,
+    "ciprofloxacin": 511,
+    "cotrimoxazole": 451,
+    "nitrofurantoin": 19
+   },
+   "specimen_as_printed": "Blood",
+   "notes": {
+    "nitrofurantoin": "printed although fewer than 30 were tested (19); nitrofurantoin is printed for blood isolates"
+   },
+   "note": "Printed as Klebsiella species."
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "n": 1741,
+   "page": 30,
+   "table": "Table 9",
+   "r": {
+    "cefoperazone_sulbactam": 26,
+    "piptazo": 33,
+    "cefotaxime": 61,
+    "cefepime": 48,
+    "imipenem": 21,
+    "meropenem": 26,
+    "amikacin": 24,
+    "gentamicin": 32,
+    "ciprofloxacin": 55,
+    "cotrimoxazole": 47,
+    "nitrofurantoin": 47
+   },
+   "nt": {
+    "cefoperazone_sulbactam": 889,
+    "piptazo": 1482,
+    "cefotaxime": 896,
+    "cefepime": 1065,
+    "imipenem": 1164,
+    "meropenem": 926,
+    "amikacin": 1497,
+    "gentamicin": 1567,
+    "ciprofloxacin": 1595,
+    "cotrimoxazole": 1567,
+    "nitrofurantoin": 1653
+   },
+   "specimen_as_printed": "Urine",
+   "note": "Printed as Klebsiella species."
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "n": 1172,
+   "page": 31,
+   "table": "Figure 16",
+   "r": {
+    "nitrofurantoin": 44,
+    "cotrimoxazole": 43,
+    "ciprofloxacin": 49,
+    "gentamicin": 28,
+    "amikacin": 18,
+    "meropenem": 19,
+    "imipenem": 16,
+    "cefepime": 41,
+    "cefotaxime": 53,
+    "piptazo": 28,
+    "cefoperazone_sulbactam": 15
+   },
+   "note": "Figure 16, isolates from blood, urine, PA & OSBF (all specimens) from OPD patients (legend \"% Resistance OUT(N=1172)\"): bar chart with printed data labels; each label was matched to its bar by the bar colour of the legend (IN grey, OUT orange, ICU blue; IN = IPD, OUT = OPD) on the rendered page, labels without a bar (0) by their place in the group. The text statement for ICU (cefotaxime 75%, cefepime 70%, imipenem 39%, meropenem 47%) matches the chart. Printed as Klebsiella species.",
+   "specimen_as_printed": "blood, urine, PA & OSBF"
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "n": 1614,
+   "page": 31,
+   "table": "Figure 16",
+   "r": {
+    "nitrofurantoin": 54,
+    "cotrimoxazole": 58,
+    "ciprofloxacin": 66,
+    "gentamicin": 45,
+    "amikacin": 35,
+    "meropenem": 35,
+    "imipenem": 31,
+    "cefepime": 62,
+    "cefotaxime": 69,
+    "piptazo": 48,
+    "cefoperazone_sulbactam": 28
+   },
+   "note": "Figure 16, isolates from blood, urine, PA & OSBF (all specimens) from IPD patients (legend \"% Resistance IN(N=1614)\"): bar chart with printed data labels; each label was matched to its bar by the bar colour of the legend (IN grey, OUT orange, ICU blue; IN = IPD, OUT = OPD) on the rendered page, labels without a bar (0) by their place in the group. The text statement for ICU (cefotaxime 75%, cefepime 70%, imipenem 39%, meropenem 47%) matches the chart. Printed as Klebsiella species.",
+   "specimen_as_printed": "blood, urine, PA & OSBF"
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "n": 473,
+   "page": 31,
+   "table": "Figure 16",
+   "r": {
+    "nitrofurantoin": 52,
+    "cotrimoxazole": 59,
+    "ciprofloxacin": 69,
+    "gentamicin": 48,
+    "amikacin": 43,
+    "meropenem": 47,
+    "imipenem": 39,
+    "cefepime": 70,
+    "cefotaxime": 75,
+    "piptazo": 60,
+    "cefoperazone_sulbactam": 29
+   },
+   "note": "Figure 16, isolates from blood, urine, PA & OSBF (all specimens) from ICU patients (legend \"% Resistance ICU(N=473)\"): bar chart with printed data labels; each label was matched to its bar by the bar colour of the legend (IN grey, OUT orange, ICU blue; IN = IPD, OUT = OPD) on the rendered page, labels without a bar (0) by their place in the group. The text statement for ICU (cefotaxime 75%, cefepime 70%, imipenem 39%, meropenem 47%) matches the chart. Printed as Klebsiella species. The legend N (473) differs from Table 5 (476 Klebsiella from ICU); printed as it is.",
+   "specimen_as_printed": "blood, urine, PA & OSBF"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas species",
+   "pheno": null,
+   "n": 1556,
+   "page": 34,
+   "table": "Figure 17",
+   "r": {
+    "ciprofloxacin": 29,
+    "gentamicin": 21,
+    "amikacin": 18,
+    "meropenem": 16,
+    "imipenem": 14,
+    "ceftazidime": 28,
+    "piptazo": 13
+   },
+   "nt": {
+    "ciprofloxacin": 1395,
+    "gentamicin": 1343,
+    "amikacin": 1382,
+    "meropenem": 1054,
+    "imipenem": 1138,
+    "ceftazidime": 1359,
+    "piptazo": 1390
+   },
+   "note": "Figure 17, all specimens and location types together (N=1556 in the caption): bar chart printing the number resistant with its percentage and the number tested for each drug (text layer, checked on the rendered page); every figure equals the sum of the specimen table's columns. Printed as Pseudomonas species. Table 5 counts only isolates with a known location type (13,476 of 14,353), so its location counts add up to less than this n.",
+   "specimen_as_printed": "overall (blood, pus aspirate and other sterile body fluids, urine)"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Pseudomonas species",
+   "pheno": null,
+   "n": 212,
+   "page": 33,
+   "table": "Table 11",
+   "r": {
+    "piptazo": 10,
+    "ceftazidime": 21,
+    "imipenem": 17,
+    "meropenem": 17,
+    "amikacin": 14,
+    "gentamicin": 16,
+    "ciprofloxacin": 18
+   },
+   "nt": {
+    "piptazo": 202,
+    "ceftazidime": 191,
+    "imipenem": 148,
+    "meropenem": 175,
+    "amikacin": 208,
+    "gentamicin": 187,
+    "ciprofloxacin": 207
+   },
+   "specimen_as_printed": "Blood",
+   "note": "Printed as Pseudomonas species."
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Pseudomonas species",
+   "pheno": null,
+   "n": 887,
+   "page": 33,
+   "table": "Table 11",
+   "r": {
+    "piptazo": 14,
+    "ceftazidime": 30,
+    "imipenem": 12,
+    "meropenem": 16,
+    "amikacin": 19,
+    "gentamicin": 23,
+    "ciprofloxacin": 30
+   },
+   "nt": {
+    "piptazo": 810,
+    "ceftazidime": 796,
+    "imipenem": 672,
+    "meropenem": 556,
+    "amikacin": 793,
+    "gentamicin": 763,
+    "ciprofloxacin": 796
+   },
+   "specimen_as_printed": "PA+OSBF (pus aspirate and other sterile body fluids together)",
+   "note": "Printed as Pseudomonas species. PA+OSBF (pus aspirate and other sterile body fluids, reported together in 2021) shown under deep infections."
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Pseudomonas species",
+   "pheno": null,
+   "n": 457,
+   "page": 33,
+   "table": "Table 11",
+   "r": {
+    "piptazo": 13,
+    "ceftazidime": 30,
+    "imipenem": 19,
+    "meropenem": 15,
+    "amikacin": 19,
+    "gentamicin": 21,
+    "ciprofloxacin": 30
+   },
+   "nt": {
+    "piptazo": 378,
+    "ceftazidime": 372,
+    "imipenem": 318,
+    "meropenem": 323,
+    "amikacin": 381,
+    "gentamicin": 393,
+    "ciprofloxacin": 392
+   },
+   "specimen_as_printed": "Urine",
+   "note": "Printed as Pseudomonas species."
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Pseudomonas species",
+   "pheno": null,
+   "n": 560,
+   "page": 34,
+   "table": "Figure 18",
+   "r": {
+    "ciprofloxacin": 27,
+    "gentamicin": 19,
+    "amikacin": 16,
+    "meropenem": 12,
+    "imipenem": 12,
+    "ceftazidime": 24,
+    "piptazo": 9
+   },
+   "note": "Figure 18, isolates from blood, urine, PA+OSBF (all specimens) from OPD patients (legend \"% Resistance OUT(N=560)\"): bar chart with printed data labels; each label was matched to its bar by the bar colour of the legend (IN grey, OUT orange, ICU blue; IN = IPD, OUT = OPD) on the rendered page, labels without a bar (0) by their place in the group. The text statement for imipenem (ICU 21%, IPD 15%, OPD 12%) matches the chart. Printed as Pseudomonas species.",
+   "specimen_as_printed": "blood, urine, PA+OSBF"
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Pseudomonas species",
+   "pheno": null,
+   "n": 757,
+   "page": 34,
+   "table": "Figure 18",
+   "r": {
+    "ciprofloxacin": 30,
+    "gentamicin": 23,
+    "amikacin": 19,
+    "meropenem": 17,
+    "imipenem": 15,
+    "ceftazidime": 30,
+    "piptazo": 15
+   },
+   "note": "Figure 18, isolates from blood, urine, PA+OSBF (all specimens) from IPD patients (legend \"% Resistance IN(N=757)\"): bar chart with printed data labels; each label was matched to its bar by the bar colour of the legend (IN grey, OUT orange, ICU blue; IN = IPD, OUT = OPD) on the rendered page, labels without a bar (0) by their place in the group. The text statement for imipenem (ICU 21%, IPD 15%, OPD 12%) matches the chart. Printed as Pseudomonas species.",
+   "specimen_as_printed": "blood, urine, PA+OSBF"
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Pseudomonas species",
+   "pheno": null,
+   "n": 171,
+   "page": 34,
+   "table": "Figure 18",
+   "r": {
+    "ciprofloxacin": 32,
+    "gentamicin": 26,
+    "amikacin": 21,
+    "meropenem": 21,
+    "imipenem": 21,
+    "ceftazidime": 40,
+    "piptazo": 20
+   },
+   "note": "Figure 18, isolates from blood, urine, PA+OSBF (all specimens) from ICU patients (legend \"% Resistance ICU(N=171)\"): bar chart with printed data labels; each label was matched to its bar by the bar colour of the legend (IN grey, OUT orange, ICU blue; IN = IPD, OUT = OPD) on the rendered page, labels without a bar (0) by their place in the group. The text statement for imipenem (ICU 21%, IPD 15%, OPD 12%) matches the chart. Printed as Pseudomonas species.",
+   "specimen_as_printed": "blood, urine, PA+OSBF"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "pheno": null,
+   "n": 910,
+   "page": 35,
+   "table": "Figure 19",
+   "r": {
+    "minocycline": 38,
+    "cotrimoxazole": 42,
+    "ciprofloxacin": 57,
+    "gentamicin": 51,
+    "amikacin": 49,
+    "meropenem": 54,
+    "imipenem": 54,
+    "cefepime": 64,
+    "ceftazidime": 67,
+    "piptazo": 50,
+    "cefoperazone_sulbactam": 11
+   },
+   "nt": {
+    "minocycline": 241,
+    "cotrimoxazole": 681,
+    "ciprofloxacin": 790,
+    "gentamicin": 841,
+    "amikacin": 784,
+    "meropenem": 660,
+    "imipenem": 643,
+    "cefepime": 495,
+    "ceftazidime": 487,
+    "piptazo": 818,
+    "cefoperazone_sulbactam": 522
+   },
+   "note": "Figure 19, all specimens and location types together (N=910 in the caption): bar chart printing the number resistant with its percentage and the number tested for each drug (text layer, checked on the rendered page); every figure equals the sum of the specimen table's columns. Printed as Acinetobacter species. Table 5 counts only isolates with a known location type (13,476 of 14,353), so its location counts add up to less than this n.",
+   "specimen_as_printed": "overall (blood, pus aspirate and other sterile body fluids, urine)"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "pheno": null,
+   "n": 358,
+   "page": 36,
+   "table": "Table 12",
+   "r": {
+    "cefoperazone_sulbactam": 8,
+    "piptazo": 49,
+    "ceftazidime": 63,
+    "cefepime": 66,
+    "imipenem": 56,
+    "meropenem": 52,
+    "amikacin": 52,
+    "gentamicin": 55,
+    "ciprofloxacin": 55,
+    "cotrimoxazole": 43,
+    "minocycline": 34
+   },
+   "nt": {
+    "cefoperazone_sulbactam": 244,
+    "piptazo": 344,
+    "ceftazidime": 225,
+    "cefepime": 225,
+    "imipenem": 263,
+    "meropenem": 269,
+    "amikacin": 336,
+    "gentamicin": 322,
+    "ciprofloxacin": 322,
+    "cotrimoxazole": 281,
+    "minocycline": 138
+   },
+   "specimen_as_printed": "Blood",
+   "note": "Printed as Acinetobacter species."
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "pheno": null,
+   "n": 357,
+   "page": 36,
+   "table": "Table 12",
+   "r": {
+    "cefoperazone_sulbactam": 14,
+    "piptazo": 66,
+    "ceftazidime": 78,
+    "cefepime": 72,
+    "imipenem": 67,
+    "meropenem": 66,
+    "amikacin": 59,
+    "gentamicin": 61,
+    "ciprofloxacin": 73,
+    "cotrimoxazole": 52,
+    "minocycline": 40
+   },
+   "nt": {
+    "cefoperazone_sulbactam": 199,
+    "piptazo": 323,
+    "ceftazidime": 190,
+    "cefepime": 199,
+    "imipenem": 259,
+    "meropenem": 286,
+    "amikacin": 301,
+    "gentamicin": 341,
+    "ciprofloxacin": 315,
+    "cotrimoxazole": 252,
+    "minocycline": 88
+   },
+   "specimen_as_printed": "PA+OSBF (pus aspirate and other sterile body fluids together)",
+   "note": "Printed as Acinetobacter species. PA+OSBF (pus aspirate and other sterile body fluids, reported together in 2021) shown under deep infections."
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "pheno": null,
+   "n": 195,
+   "page": 36,
+   "table": "Table 12",
+   "r": {
+    "cefoperazone_sulbactam": 11,
+    "piptazo": 21,
+    "ceftazidime": 51,
+    "cefepime": 34,
+    "imipenem": 25,
+    "meropenem": 28,
+    "amikacin": 23,
+    "gentamicin": 25,
+    "ciprofloxacin": 30,
+    "cotrimoxazole": 25,
+    "minocycline": 60
+   },
+   "nt": {
+    "cefoperazone_sulbactam": 79,
+    "piptazo": 151,
+    "ceftazidime": 72,
+    "cefepime": 71,
+    "imipenem": 121,
+    "meropenem": 105,
+    "amikacin": 147,
+    "gentamicin": 178,
+    "ciprofloxacin": 153,
+    "cotrimoxazole": 148,
+    "minocycline": 15
+   },
+   "specimen_as_printed": "Urine",
+   "notes": {
+    "minocycline": "printed although fewer than 30 were tested (15)"
+   },
+   "note": "Printed as Acinetobacter species."
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Acinetobacter species",
+   "pheno": null,
+   "n": 157,
+   "page": 37,
+   "table": "Figure 20",
+   "r": {
+    "minocycline": 35,
+    "cotrimoxazole": 32,
+    "ciprofloxacin": 35,
+    "gentamicin": 26,
+    "amikacin": 26,
+    "meropenem": 35,
+    "imipenem": 30,
+    "cefepime": 39,
+    "ceftazidime": 52,
+    "piptazo": 27,
+    "cefoperazone_sulbactam": 1
+   },
+   "note": "Figure 20, isolates from blood, urine, PA+OSBF (all specimens) from OPD patients (legend \"% Resistance OUT(N=157)\"): bar chart with printed data labels; each label was matched to its bar by the bar colour of the legend (IN grey, OUT orange, ICU blue; IN = IPD, OUT = OPD) on the rendered page, labels without a bar (0) by their place in the group. The text statements for ICU (ceftazidime 81%, ciprofloxacin 71%, piperacillin-tazobactam 69%, imipenem 76%) and for imipenem by location (ICU 76%, IPD 53%, OPD 30%) match the chart. Printed as Acinetobacter species.",
+   "specimen_as_printed": "blood, urine, PA+OSBF"
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Acinetobacter species",
+   "pheno": null,
+   "n": 416,
+   "page": 37,
+   "table": "Figure 20",
+   "r": {
+    "minocycline": 36,
+    "cotrimoxazole": 42,
+    "ciprofloxacin": 56,
+    "gentamicin": 50,
+    "amikacin": 47,
+    "meropenem": 50,
+    "imipenem": 53,
+    "cefepime": 57,
+    "ceftazidime": 62,
+    "piptazo": 50,
+    "cefoperazone_sulbactam": 15
+   },
+   "note": "Figure 20, isolates from blood, urine, PA+OSBF (all specimens) from IPD patients (legend \"% Resistance IN(N=416)\"): bar chart with printed data labels; each label was matched to its bar by the bar colour of the legend (IN grey, OUT orange, ICU blue; IN = IPD, OUT = OPD) on the rendered page, labels without a bar (0) by their place in the group. The text statements for ICU (ceftazidime 81%, ciprofloxacin 71%, piperacillin-tazobactam 69%, imipenem 76%) and for imipenem by location (ICU 76%, IPD 53%, OPD 30%) match the chart. Printed as Acinetobacter species.",
+   "specimen_as_printed": "blood, urine, PA+OSBF"
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Acinetobacter species",
+   "pheno": null,
+   "n": 272,
+   "page": 37,
+   "table": "Figure 20",
+   "r": {
+    "minocycline": 39,
+    "cotrimoxazole": 49,
+    "ciprofloxacin": 71,
+    "gentamicin": 70,
+    "amikacin": 66,
+    "meropenem": 69,
+    "imipenem": 76,
+    "cefepime": 84,
+    "ceftazidime": 81,
+    "piptazo": 69,
+    "cefoperazone_sulbactam": 9
+   },
+   "note": "Figure 20, isolates from blood, urine, PA+OSBF (all specimens) from ICU patients (legend \"% Resistance ICU(N=272)\"): bar chart with printed data labels; each label was matched to its bar by the bar colour of the legend (IN grey, OUT orange, ICU blue; IN = IPD, OUT = OPD) on the rendered page, labels without a bar (0) by their place in the group. The text statements for ICU (ceftazidime 81%, ciprofloxacin 71%, piperacillin-tazobactam 69%, imipenem 76%) and for imipenem by location (ICU 76%, IPD 53%, OPD 30%) match the chart. Printed as Acinetobacter species.",
+   "specimen_as_printed": "blood, urine, PA+OSBF"
+  }
+ ],
+ "counts": [
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 287,
+   "page": 17
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 913,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 4518,
+   "page": 17
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella species",
+   "n": 533,
+   "page": 17
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Klebsiella species",
+   "n": 1167,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella species",
+   "n": 1741,
+   "page": 17
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Salmonella Typhi and Paratyphi",
+   "n": 7,
+   "page": 17
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Salmonella Typhi and Paratyphi",
+   "n": 5,
+   "page": 17
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Pseudomonas species",
+   "n": 212,
+   "page": 17
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Pseudomonas species",
+   "n": 887,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Pseudomonas species",
+   "n": 457,
+   "page": 17
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "n": 358,
+   "page": 17
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "n": 357,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "n": 195,
+   "page": 17
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 342,
+   "page": 17
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 1378,
+   "page": 17
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus species",
+   "n": 159,
+   "page": 17
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Enterococcus species",
+   "n": 388,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus species",
+   "n": 449,
+   "page": 17
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 315,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "n": 2116,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 2944,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Klebsiella species",
+   "n": 476,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Klebsiella species",
+   "n": 1614,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Klebsiella species",
+   "n": 1172,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Salmonella Typhi and Paratyphi",
+   "n": 1,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Salmonella Typhi and Paratyphi",
+   "n": 7,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Salmonella Typhi and Paratyphi",
+   "n": 1,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Pseudomonas species",
+   "n": 171,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Pseudomonas species",
+   "n": 757,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Pseudomonas species",
+   "n": 560,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Acinetobacter species",
+   "n": 272,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Acinetobacter species",
+   "n": 416,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Acinetobacter species",
+   "n": 157,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 103,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 719,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 719,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Enterococcus species",
+   "n": 156,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Enterococcus species",
+   "n": 499,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Enterococcus species",
+   "n": 301,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 5718,
+   "page": 17
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella species",
+   "n": 3441,
+   "page": 17
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Salmonella Typhi and Paratyphi",
+   "n": 12,
+   "page": 17
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas species",
+   "n": 1556,
+   "page": 17
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "n": 910,
+   "page": 17
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 1720,
+   "page": 17
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus species",
+   "n": 996,
+   "page": 17
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Figure 9 (S. aureus by location type), page 22",
+   "why": "captioned as blood culture isolates, but its legend N (IN 723, OUT 721, ICU 106) match all S. aureus by location (Table 5: 719, 719, 103), not the 342 blood isolates, and its erythromycin values (56, 48, 56) cannot average to the blood figure (64%); the stratum is uncertain, so not recorded"
+  },
+  {
+   "what": "Table 10 Salmonella Typhi (8), Paratyphi A (2) and Paratyphi B (2), page 32",
+   "why": "counts only, no percentages, fewer than 30 isolates"
+  },
+  {
+   "what": "Figure 21 (ESBL trend) and Figure 22 (carbapenem resistance trend), pages 38 and 39",
+   "why": "phenotype and drug-class rates (ESBL production, carbapenem resistance) with no single canonical drug; not recorded"
+  },
+  {
+   "what": "Figures 2 to 8 and Table 4 (isolate distributions, demography)",
+   "why": "duplicate Tables 3 and 5 or give demography; not susceptibility data"
+  }
+ ]
+}

@@ -1,0 +1,2249 @@
+{
+ "id": "RMLIMS_LUCKNOW_2018",
+ "kind": "institution",
+ "inst": "RMLIMS_LUCKNOW",
+ "institution": "Dr. Ram Manohar Lohia Institute of Medical Sciences, Lucknow",
+ "short": "RMLIMS Lucknow",
+ "city": "Lucknow",
+ "state": "Uttar Pradesh",
+ "region": "north",
+ "sector": "government",
+ "year": 2018,
+ "end": "2018-12",
+ "period": "January to December 2018",
+ "published": "2019-03",
+ "url": "https://www.drrmlims.ac.in/data/RML%20Microbiology%20newsletter%202019_compressed.pdf",
+ "retrieved": "2026-09-26",
+ "citation": "Department of Microbiology, Dr. Ram Manohar Lohia Institute of Medical Sciences, Lucknow. News Letter, Issue 6 (published March 2019): antibiograms, January to December 2018. Lucknow: Dr. RMLIMS; 2019.",
+ "reporting": "Percent susceptible with the number of isolates, by specimen and organism or organism group; each row is one location (OPD, IPD, ICU or SRCLI) shown by the row colour. Organism isolation bar charts (with printed data labels) per specimen and location.",
+ "method": "AST method and breakpoint edition not stated for the antibiograms. The colistin and vancomycin MIC tables are from VITEK 2 Compact (bioMerieux).",
+ "measure": "S",
+ "verification": {
+  "status": "double-checked",
+  "note": "The PDF has a broken cross-reference table (pdfplumber cannot open it; pypdf and pdfium can); it was re-saved with pypdf for parsing and every page image was rendered from the original file. Tables (PDF pages 6 to 11): cell text parsed from the text layer with pdfplumber, the location of each row from its background colour sampled on the rendered page (legend: OPD pink, IPD blue, ICU yellow, SRCLI purple). Recorded rows (pages 10 and 11) were compared value by value with the rendered pages by overlaying the parsed text on the page image (scale 3): no differences. Organism charts (pages 6 to 10) are vector graphics: each bar was matched to its legend entry by identical fill colour (bar order equals legend order in every box; five bars drawn with pattern fills were matched by that order) and to its data label by position; every box was compared with the page image. Every recorded row n agrees with the chart counts (for example urine OPD E. coli 976, E. faecalis 218, E. faecium 208; Klebsiella spps 94 = K. pneumoniae 85 + K. oxytoca 9). Page numbers are PDF page numbers."
+ },
+ "notes": "Dr. RMLIMS Lucknow Microbiology News Letter, Issue 6 (March 2019), antibiograms for January to December 2018 by specimen, each organism row belonging to one location (OPD, IPD recorded as wards, ICU, or SRCLI) shown only by the row colour. SRCLI (State Referral Centre for Laboratory Investigation, as the report defines it) is a separate location category and is not recorded. To reach 30 isolates the report groups organisms: \"Lactose fermenters\" (E. coli, Citrobacter, Klebsiella, Proteus and Providencia spp.), \"Non lactose fermenters\" (Pseudomonas and Acinetobacter spp.) and \"Staphylococcus spps\" (S. aureus and CoNS); these rows have no organism key and are not recorded, so this edition contributes only urine rows (E. coli, Klebsiella, Citrobacter and Enterobacter spp., E. faecium and E. faecalis). Specimens as printed: blood; \"Body fluids\" = sterile body fluids including CSF (recorded as sterile body fluids); \"Respiratory specimen\" = sputum, BAL, throat swab, nasal swab, bronchial aspirate, endotracheal aspirate; \"Pus and other samples\" = pus, pus swab, catheter tip, CVP line, shunt, tissue, bone marrow, vaginal fluid, semen, ear discharge, ear swab, endometrial discharge, vaginal swab, stool, urethral swab (recorded as pus); urine. The report notes that samples without clinical details were excluded from the antibiogram analysis (samples analysed are fewer than received). Organism counts are the OPD, IPD and ICU chart labels; the build adds \"Pseudomonas species\" to P. aeruginosa, \"Acinetobacter species\" to A. baumannii and \"Citrobacter diversus\" to C. koseri, as its organism keys do. The live URL returns 404; the PDF was downloaded from the Internet Archive copy of the same URL.",
+ "issues": [
+  "Second reader 2026-09-26: all 162 cells (the seeded sample of 40 included), all 10 row n values and all 10 row locations re-read against the page images (PDF pages 10 and 11, rendered at scale 4); 0 errors, nothing corrected.",
+  "Row locations from the row fill colours in the PDF vector content against the page legend (OPD pink, IPD blue, ICU yellow, SRCLI purple): all 10 agree.",
+  "Counts: all 242 re-derived independently from the vector bar charts (PDF pages 6 to 10, from a copy of the original re-saved with pdfium): each bar matched to its legend entry by identical fill colour (pattern-filled bars to the single pattern legend square of their box; bar order equals legend order in every box), its value taken from the data label and cross-checked against bar height over the chart unit. 242 of 242 agree in organism and value.",
+  "115 of the counts (blood ICU; respiratory IPD and ICU; pus OPD and IPD; urine OPD) were also read by eye on the charts rendered at scale 6: no differences.",
+  "Intrinsic cells confirmed as printed: urine OPD Enterobacter spp. (n 43) AS 23, CZ 19, CX 33.",
+  "Chart bars left out as the excluded list says were confirmed at the listed values: urine OPD K. pneumoniae 85 (the OPD table row is Klebsiella spps 94 = 85 + K. oxytoca 9) and every Acinetobacter lwoffii and Chryseobacterium indologenes bar. The build reports no count-table mismatch."
+ ],
+ "rows": [
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 208,
+   "page": 10,
+   "table": "Urine (January-December 2018), percentage sensitivity: Enterococcus faecium and Enterococcus faecalis",
+   "s": {
+    "penicillin": 22,
+    "ciprofloxacin": 4,
+    "norfloxacin": 4,
+    "doxycycline": 37,
+    "tetracycline": 18,
+    "teicoplanin": 80,
+    "nitrofurantoin": 68,
+    "vancomycin": 81,
+    "linezolid": 98,
+    "levofloxacin": 10,
+    "gentamicin_hl": 32,
+    "fosfomycin": 77
+   },
+   "printed": {
+    "penicillin": "PENI",
+    "ciprofloxacin": "CIPRO",
+    "norfloxacin": "NX",
+    "doxycycline": "DOX",
+    "tetracycline": "TET",
+    "teicoplanin": "TEICO",
+    "nitrofurantoin": "NF",
+    "vancomycin": "VA",
+    "linezolid": "LZ",
+    "levofloxacin": "LEVO",
+    "gentamicin_hl": "HLG",
+    "fosfomycin": "FOS"
+   },
+   "note": "OPD row (location shown by the row colour).",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 92,
+   "page": 10,
+   "table": "Urine (January-December 2018), percentage sensitivity: Enterococcus faecium and Enterococcus faecalis",
+   "s": {
+    "penicillin": 5,
+    "ciprofloxacin": 2,
+    "norfloxacin": 1,
+    "doxycycline": 47,
+    "tetracycline": 25,
+    "teicoplanin": 75,
+    "nitrofurantoin": 42,
+    "vancomycin": 72,
+    "linezolid": 90,
+    "levofloxacin": 3,
+    "gentamicin_hl": 21,
+    "fosfomycin": 49
+   },
+   "printed": {
+    "penicillin": "PENI",
+    "ciprofloxacin": "CIPRO",
+    "norfloxacin": "NX",
+    "doxycycline": "DOX",
+    "tetracycline": "TET",
+    "teicoplanin": "TEICO",
+    "nitrofurantoin": "NF",
+    "vancomycin": "VA",
+    "linezolid": "LZ",
+    "levofloxacin": "LEVO",
+    "gentamicin_hl": "HLG",
+    "fosfomycin": "FOS"
+   },
+   "note": "IPD row (location shown by the row colour).",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 218,
+   "page": 10,
+   "table": "Urine (January-December 2018), percentage sensitivity: Enterococcus faecium and Enterococcus faecalis",
+   "s": {
+    "penicillin": 53,
+    "ciprofloxacin": 10,
+    "norfloxacin": 8,
+    "doxycycline": 24,
+    "tetracycline": 10,
+    "teicoplanin": 90,
+    "nitrofurantoin": 88,
+    "vancomycin": 90,
+    "linezolid": 95,
+    "levofloxacin": 17,
+    "gentamicin_hl": 47,
+    "fosfomycin": 90
+   },
+   "printed": {
+    "penicillin": "PENI",
+    "ciprofloxacin": "CIPRO",
+    "norfloxacin": "NX",
+    "doxycycline": "DOX",
+    "tetracycline": "TET",
+    "teicoplanin": "TEICO",
+    "nitrofurantoin": "NF",
+    "vancomycin": "VA",
+    "linezolid": "LZ",
+    "levofloxacin": "LEVO",
+    "gentamicin_hl": "HLG",
+    "fosfomycin": "FOS"
+   },
+   "note": "OPD row (location shown by the row colour).",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 42,
+   "page": 10,
+   "table": "Urine (January-December 2018), percentage sensitivity: Enterococcus faecium and Enterococcus faecalis",
+   "s": {
+    "penicillin": 26,
+    "ciprofloxacin": 7,
+    "norfloxacin": 7,
+    "doxycycline": 26,
+    "tetracycline": 19,
+    "teicoplanin": 79,
+    "nitrofurantoin": 81,
+    "vancomycin": 79,
+    "linezolid": 95,
+    "levofloxacin": 20,
+    "gentamicin_hl": 38,
+    "fosfomycin": 76
+   },
+   "printed": {
+    "penicillin": "PENI",
+    "ciprofloxacin": "CIPRO",
+    "norfloxacin": "NX",
+    "doxycycline": "DOX",
+    "tetracycline": "TET",
+    "teicoplanin": "TEICO",
+    "nitrofurantoin": "NF",
+    "vancomycin": "VA",
+    "linezolid": "LZ",
+    "levofloxacin": "LEVO",
+    "gentamicin_hl": "HLG",
+    "fosfomycin": "FOS"
+   },
+   "note": "IPD row (location shown by the row colour).",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 976,
+   "page": 11,
+   "table": "Urine antibiogram, continued (p11): Escherichia coli, Klebsiella, Citrobacter and Enterobacter",
+   "s": {
+    "ampsulbactam": 21,
+    "aztreonam": 21,
+    "norfloxacin": 14,
+    "tetracycline": 25,
+    "doxycycline": 27,
+    "piptazo": 58,
+    "gentamicin": 49,
+    "meropenem": 75,
+    "imipenem": 74,
+    "tobramycin": 34,
+    "cefepime": 22,
+    "cefoperazone_sulbactam": 51,
+    "amikacin": 58,
+    "cefotaxime": 18,
+    "cefazolin": 15,
+    "cefoxitin": 53,
+    "nitrofurantoin": 69,
+    "ertapenem": 64,
+    "fosfomycin": 84
+   },
+   "printed": {
+    "ampsulbactam": "AS",
+    "aztreonam": "AT",
+    "norfloxacin": "NX",
+    "tetracycline": "TET",
+    "doxycycline": "DOX",
+    "piptazo": "PIT",
+    "gentamicin": "GENTA",
+    "meropenem": "MERO",
+    "imipenem": "IMI",
+    "tobramycin": "TOB",
+    "cefepime": "CPM",
+    "cefoperazone_sulbactam": "CFS",
+    "amikacin": "AMIKA",
+    "cefotaxime": "CTX",
+    "cefazolin": "CZ",
+    "cefoxitin": "CX",
+    "nitrofurantoin": "NF",
+    "ertapenem": "ETP",
+    "fosfomycin": "FOS"
+   },
+   "note": "OPD row (location shown by the row colour). CZ is not in this edition's abbreviation list; it is read as cefazolin, as the 2020 to 2022 editions define it.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 143,
+   "page": 11,
+   "table": "Urine antibiogram, continued (p11): Escherichia coli, Klebsiella, Citrobacter and Enterobacter",
+   "s": {
+    "ampsulbactam": 13,
+    "aztreonam": 10,
+    "norfloxacin": 8,
+    "tetracycline": 25,
+    "doxycycline": 21,
+    "piptazo": 39,
+    "gentamicin": 39,
+    "meropenem": 52,
+    "imipenem": 51,
+    "tobramycin": 22,
+    "cefepime": 11,
+    "cefoperazone_sulbactam": 31,
+    "amikacin": 39,
+    "cefotaxime": 3,
+    "cefazolin": 6,
+    "cefoxitin": 33,
+    "nitrofurantoin": 53,
+    "ertapenem": 46,
+    "fosfomycin": 77
+   },
+   "printed": {
+    "ampsulbactam": "AS",
+    "aztreonam": "AT",
+    "norfloxacin": "NX",
+    "tetracycline": "TET",
+    "doxycycline": "DOX",
+    "piptazo": "PIT",
+    "gentamicin": "GENTA",
+    "meropenem": "MERO",
+    "imipenem": "IMI",
+    "tobramycin": "TOB",
+    "cefepime": "CPM",
+    "cefoperazone_sulbactam": "CFS",
+    "amikacin": "AMIKA",
+    "cefotaxime": "CTX",
+    "cefazolin": "CZ",
+    "cefoxitin": "CX",
+    "nitrofurantoin": "NF",
+    "ertapenem": "ETP",
+    "fosfomycin": "FOS"
+   },
+   "note": "IPD row (location shown by the row colour). CZ is not in this edition's abbreviation list; it is read as cefazolin, as the 2020 to 2022 editions define it.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 31,
+   "page": 11,
+   "table": "Urine antibiogram, continued (p11): Escherichia coli, Klebsiella, Citrobacter and Enterobacter",
+   "s": {
+    "ampsulbactam": 46,
+    "aztreonam": 32,
+    "norfloxacin": 32,
+    "tetracycline": 36,
+    "doxycycline": 42,
+    "piptazo": 77,
+    "gentamicin": 61,
+    "meropenem": 93,
+    "imipenem": 87,
+    "tobramycin": 45,
+    "cefepime": 32,
+    "cefoperazone_sulbactam": 68,
+    "amikacin": 87,
+    "cefotaxime": 36,
+    "cefazolin": 29,
+    "cefoxitin": 58,
+    "nitrofurantoin": 97,
+    "ertapenem": 81,
+    "fosfomycin": 95
+   },
+   "printed": {
+    "ampsulbactam": "AS",
+    "aztreonam": "AT",
+    "norfloxacin": "NX",
+    "tetracycline": "TET",
+    "doxycycline": "DOX",
+    "piptazo": "PIT",
+    "gentamicin": "GENTA",
+    "meropenem": "MERO",
+    "imipenem": "IMI",
+    "tobramycin": "TOB",
+    "cefepime": "CPM",
+    "cefoperazone_sulbactam": "CFS",
+    "amikacin": "AMIKA",
+    "cefotaxime": "CTX",
+    "cefazolin": "CZ",
+    "cefoxitin": "CX",
+    "nitrofurantoin": "NF",
+    "ertapenem": "ETP",
+    "fosfomycin": "FOS"
+   },
+   "note": "ICU row (location shown by the row colour). CZ is not in this edition's abbreviation list; it is read as cefazolin, as the 2020 to 2022 editions define it.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 94,
+   "page": 11,
+   "table": "Urine antibiogram, continued (p11): Escherichia coli, Klebsiella, Citrobacter and Enterobacter",
+   "s": {
+    "ampsulbactam": 27,
+    "aztreonam": 40,
+    "norfloxacin": 35,
+    "tetracycline": 56,
+    "doxycycline": 48,
+    "piptazo": 48,
+    "gentamicin": 45,
+    "meropenem": 55,
+    "imipenem": 56,
+    "tobramycin": 38,
+    "cefepime": 36,
+    "cefoperazone_sulbactam": 44,
+    "amikacin": 49,
+    "cefotaxime": 3,
+    "cefazolin": 22,
+    "cefoxitin": 38,
+    "nitrofurantoin": 32,
+    "ertapenem": 48,
+    "fosfomycin": 55
+   },
+   "printed": {
+    "ampsulbactam": "AS",
+    "aztreonam": "AT",
+    "norfloxacin": "NX",
+    "tetracycline": "TET",
+    "doxycycline": "DOX",
+    "piptazo": "PIT",
+    "gentamicin": "GENTA",
+    "meropenem": "MERO",
+    "imipenem": "IMI",
+    "tobramycin": "TOB",
+    "cefepime": "CPM",
+    "cefoperazone_sulbactam": "CFS",
+    "amikacin": "AMIKA",
+    "cefotaxime": "CTX",
+    "cefazolin": "CZ",
+    "cefoxitin": "CX",
+    "nitrofurantoin": "NF",
+    "ertapenem": "ETP",
+    "fosfomycin": "FOS"
+   },
+   "note": "OPD row (location shown by the row colour). CZ is not in this edition's abbreviation list; it is read as cefazolin, as the 2020 to 2022 editions define it. Printed as 'Klebsiella spps'. The OPD urine organism chart (p10) counts Klebsiella pneumoniae 85 and Klebsiella oxytoca 9 separately; this genus row (94) is their sum.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Citrobacter spp.",
+   "pheno": null,
+   "n": 33,
+   "page": 11,
+   "table": "Urine antibiogram, continued (p11): Escherichia coli, Klebsiella, Citrobacter and Enterobacter",
+   "s": {
+    "ampsulbactam": 36,
+    "aztreonam": 33,
+    "norfloxacin": 39,
+    "tetracycline": 63,
+    "doxycycline": 58,
+    "piptazo": 52,
+    "gentamicin": 49,
+    "meropenem": 55,
+    "imipenem": 52,
+    "tobramycin": 39,
+    "cefepime": 46,
+    "cefoperazone_sulbactam": 39,
+    "amikacin": 39,
+    "cefotaxime": 12,
+    "cefazolin": 18,
+    "cefoxitin": 30,
+    "nitrofurantoin": 24,
+    "ertapenem": 46,
+    "fosfomycin": 73
+   },
+   "printed": {
+    "ampsulbactam": "AS",
+    "aztreonam": "AT",
+    "norfloxacin": "NX",
+    "tetracycline": "TET",
+    "doxycycline": "DOX",
+    "piptazo": "PIT",
+    "gentamicin": "GENTA",
+    "meropenem": "MERO",
+    "imipenem": "IMI",
+    "tobramycin": "TOB",
+    "cefepime": "CPM",
+    "cefoperazone_sulbactam": "CFS",
+    "amikacin": "AMIKA",
+    "cefotaxime": "CTX",
+    "cefazolin": "CZ",
+    "cefoxitin": "CX",
+    "nitrofurantoin": "NF",
+    "ertapenem": "ETP",
+    "fosfomycin": "FOS"
+   },
+   "note": "OPD row (location shown by the row colour). CZ is not in this edition's abbreviation list; it is read as cefazolin, as the 2020 to 2022 editions define it. Printed as 'Citrobacter spps'. The OPD urine chart counts Citrobacter freundii 20 and Citrobacter koseri 13 (sum 33, the row n).",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "n": 43,
+   "page": 11,
+   "table": "Urine antibiogram, continued (p11): Escherichia coli, Klebsiella, Citrobacter and Enterobacter",
+   "s": {
+    "ampsulbactam": 23,
+    "aztreonam": 35,
+    "norfloxacin": 33,
+    "tetracycline": 49,
+    "doxycycline": 44,
+    "piptazo": 51,
+    "gentamicin": 47,
+    "meropenem": 65,
+    "imipenem": 63,
+    "tobramycin": 37,
+    "cefepime": 40,
+    "cefoperazone_sulbactam": 49,
+    "amikacin": 44,
+    "cefotaxime": 29,
+    "cefazolin": 19,
+    "cefoxitin": 33,
+    "nitrofurantoin": 21,
+    "ertapenem": 53,
+    "fosfomycin": 72
+   },
+   "printed": {
+    "ampsulbactam": "AS",
+    "aztreonam": "AT",
+    "norfloxacin": "NX",
+    "tetracycline": "TET",
+    "doxycycline": "DOX",
+    "piptazo": "PIT",
+    "gentamicin": "GENTA",
+    "meropenem": "MERO",
+    "imipenem": "IMI",
+    "tobramycin": "TOB",
+    "cefepime": "CPM",
+    "cefoperazone_sulbactam": "CFS",
+    "amikacin": "AMIKA",
+    "cefotaxime": "CTX",
+    "cefazolin": "CZ",
+    "cefoxitin": "CX",
+    "nitrofurantoin": "NF",
+    "ertapenem": "ETP",
+    "fosfomycin": "FOS"
+   },
+   "note": "OPD row (location shown by the row colour). CZ is not in this edition's abbreviation list; it is read as cefazolin, as the 2020 to 2022 editions define it. Printed as 'Enterobacter spps'. The OPD urine chart counts Enterobacter aerogenes 23 and Enterobacter cloacae 20 (sum 43, the row n). AS 23, CZ 19 and CX 33 are printed as such (checked on the page image); the build shows them as intrinsic resistance.",
+   "specimen_as_printed": "Urine"
+  }
+ ],
+ "counts": [
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Coagulase-negative staphylococci",
+   "n": 17,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 9,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Acinetobacter baumannii",
+   "n": 8,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Enterococcus faecalis",
+   "n": 6,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Enterococcus faecium",
+   "n": 4,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 4,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "n": 3,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Enterobacter aerogenes",
+   "n": 2,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "n": 2,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Citrobacter freundii",
+   "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Enterobacter cloacae",
+   "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Proteus mirabilis",
+   "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Providencia rettgeri",
+   "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Coagulase-negative staphylococci",
+   "n": 14,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "n": 11,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 6,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterococcus faecium",
+   "n": 5,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Klebsiella pneumoniae",
+   "n": 5,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "n": 4,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Citrobacter freundii",
+   "n": 3,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterobacter aerogenes",
+   "n": 3,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterococcus faecalis",
+   "n": 2,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Acinetobacter baumannii",
+   "n": 2,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Providencia rettgeri",
+   "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "n": 22,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "n": 17,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 15,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Coagulase-negative staphylococci",
+   "n": 12,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterobacter cloacae",
+   "n": 12,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus faecium",
+   "n": 10,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 5,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 5,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Citrobacter koseri",
+   "n": 4,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus faecalis",
+   "n": 3,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterobacter aerogenes",
+   "n": 3,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Citrobacter freundii",
+   "n": 2,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Providencia rettgeri",
+   "n": 2,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Providencia stuartii",
+   "n": 2,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 2,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Proteus mirabilis",
+   "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Serratia marcescens",
+   "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Providencia spp.",
+   "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 14,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Coagulase-negative staphylococci",
+   "n": 9,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Citrobacter koseri",
+   "n": 4,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Enterococcus faecium",
+   "n": 2,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "n": 2,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Enterobacter cloacae",
+   "n": 2,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Proteus mirabilis",
+   "n": 2,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Citrobacter freundii",
+   "n": 1,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Enterobacter aerogenes",
+   "n": 1,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Enterococcus faecalis",
+   "n": 1,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 1,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Acinetobacter baumannii",
+   "n": 1,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Morganella morganii",
+   "n": 1,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "n": 75,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "n": 21,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Enterococcus faecium",
+   "n": 13,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Klebsiella pneumoniae",
+   "n": 13,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Citrobacter koseri",
+   "n": 11,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Acinetobacter baumannii",
+   "n": 8,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Citrobacter freundii",
+   "n": 8,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Enterobacter aerogenes",
+   "n": 5,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Proteus mirabilis",
+   "n": 5,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "n": 4,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Coagulase-negative staphylococci",
+   "n": 3,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Enterobacter cloacae",
+   "n": 3,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 2,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Klebsiella oxytoca",
+   "n": 2,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Enterococcus faecalis",
+   "n": 1,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Proteus vulgaris",
+   "n": 1,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Providencia rettgeri",
+   "n": 1,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Citrobacter diversus",
+   "n": 1,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 3,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Coagulase-negative staphylococci",
+   "n": 2,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "n": 2,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Enterococcus faecium",
+   "n": 1,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "n": 1,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 1,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Citrobacter freundii",
+   "n": 1,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Citrobacter koseri",
+   "n": 1,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Enterobacter cloacae",
+   "n": 1,
+   "page": 7
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Providencia stuartii",
+   "n": 1,
+   "page": 7
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 19,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 17,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "n": 12,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Acinetobacter baumannii",
+   "n": 8,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Coagulase-negative staphylococci",
+   "n": 7,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Enterobacter aerogenes",
+   "n": 7,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 6,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Beta-haemolytic streptococci",
+   "n": 6,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Citrobacter koseri",
+   "n": 3,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Enterobacter cloacae",
+   "n": 3,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Enterococcus faecium",
+   "n": 1,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Citrobacter freundii",
+   "n": 1,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Proteus mirabilis",
+   "n": 1,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Providencia stuartii",
+   "n": 1,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "n": 24,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "n": 20,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Klebsiella pneumoniae",
+   "n": 13,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Citrobacter freundii",
+   "n": 11,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Enterobacter cloacae",
+   "n": 11,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 7,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Acinetobacter baumannii",
+   "n": 7,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Citrobacter koseri",
+   "n": 5,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Enterobacter aerogenes",
+   "n": 5,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Coagulase-negative staphylococci",
+   "n": 4,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Klebsiella oxytoca",
+   "n": 1,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Morganella morganii",
+   "n": 1,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Proteus mirabilis",
+   "n": 1,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Beta-haemolytic streptococci",
+   "n": 1,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 112,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "n": 77,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "n": 67,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 57,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Enterobacter cloacae",
+   "n": 22,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Citrobacter freundii",
+   "n": 17,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Providencia stuartii",
+   "n": 17,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Proteus mirabilis",
+   "n": 16,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 15,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Coagulase-negative staphylococci",
+   "n": 11,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella oxytoca",
+   "n": 11,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Enterobacter aerogenes",
+   "n": 11,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Citrobacter koseri",
+   "n": 8,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Pseudomonas species",
+   "n": 7,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Proteus vulgaris",
+   "n": 4,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Providencia rettgeri",
+   "n": 4,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Morganella morganii",
+   "n": 3,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Serratia marcescens",
+   "n": 3,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Elizabethkingia meningoseptica",
+   "n": 3,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Enterococcus faecium",
+   "n": 2,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Beta-haemolytic streptococci",
+   "n": 2,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 1,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Sphingomonas paucimobilis",
+   "n": 1,
+   "page": 8
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 49,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 40,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Coagulase-negative staphylococci",
+   "n": 26,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 18,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "n": 6,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterobacter aerogenes",
+   "n": 6,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterococcus faecalis",
+   "n": 4,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Citrobacter freundii",
+   "n": 4,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterobacter cloacae",
+   "n": 4,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Proteus mirabilis",
+   "n": 3,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterococcus faecium",
+   "n": 2,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Proteus vulgaris",
+   "n": 2,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Klebsiella oxytoca",
+   "n": 1,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Pseudomonas species",
+   "n": 1,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Acinetobacter baumannii",
+   "n": 1,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Citrobacter koseri",
+   "n": 1,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "n": 1,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Beta-haemolytic streptococci",
+   "n": 1,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "n": 142,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 59,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Coagulase-negative staphylococci",
+   "n": 51,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "n": 46,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Klebsiella pneumoniae",
+   "n": 17,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Citrobacter freundii",
+   "n": 16,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Enterobacter cloacae",
+   "n": 16,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Enterococcus faecium",
+   "n": 14,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Proteus mirabilis",
+   "n": 12,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Enterobacter aerogenes",
+   "n": 11,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Acinetobacter baumannii",
+   "n": 10,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Citrobacter koseri",
+   "n": 9,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Enterococcus faecalis",
+   "n": 5,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Proteus vulgaris",
+   "n": 4,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Klebsiella oxytoca",
+   "n": 2,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Morganella morganii",
+   "n": 2,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Providencia rettgeri",
+   "n": 2,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Pseudomonas species",
+   "n": 1,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Acinetobacter species",
+   "n": 1,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "n": 1,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Providencia stuartii",
+   "n": 1,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Beta-haemolytic streptococci",
+   "n": 1,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 15,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "n": 9,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Coagulase-negative staphylococci",
+   "n": 6,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 5,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Providencia stuartii",
+   "n": 4,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 3,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Citrobacter koseri",
+   "n": 3,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterobacter cloacae",
+   "n": 3,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterococcus faecium",
+   "n": 2,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Klebsiella oxytoca",
+   "n": 2,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterobacter aerogenes",
+   "n": 2,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Proteus mirabilis",
+   "n": 2,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterococcus faecalis",
+   "n": 1,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "n": 1,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Citrobacter freundii",
+   "n": 1,
+   "page": 9
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Proteus vulgaris",
+   "n": 1,
+   "page": 9
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 976,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus faecalis",
+   "n": 218,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus faecium",
+   "n": 208,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Coagulase-negative staphylococci",
+   "n": 90,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 89,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "n": 39,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 27,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterobacter aerogenes",
+   "n": 23,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Citrobacter freundii",
+   "n": 20,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterobacter cloacae",
+   "n": 20,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Citrobacter koseri",
+   "n": 13,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Proteus mirabilis",
+   "n": 12,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Acinetobacter baumannii",
+   "n": 10,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Klebsiella oxytoca",
+   "n": 9,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Morganella morganii",
+   "n": 6,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Proteus vulgaris",
+   "n": 5,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Providencia rettgeri",
+   "n": 5,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Pseudomonas species",
+   "n": 3,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Acinetobacter species",
+   "n": 1,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Providencia stuartii",
+   "n": 1,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "n": 143,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus faecium",
+   "n": 92,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus faecalis",
+   "n": 42,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "n": 31,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Klebsiella pneumoniae",
+   "n": 26,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Citrobacter freundii",
+   "n": 10,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterobacter cloacae",
+   "n": 10,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Coagulase-negative staphylococci",
+   "n": 8,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Pseudomonas species",
+   "n": 5,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "n": 5,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Klebsiella oxytoca",
+   "n": 3,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Acinetobacter baumannii",
+   "n": 3,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Providencia rettgeri",
+   "n": 3,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 2,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterobacter aerogenes",
+   "n": 2,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Proteus mirabilis",
+   "n": 2,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Citrobacter koseri",
+   "n": 1,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 31,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 14,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus faecium",
+   "n": 13,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "n": 10,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterobacter cloacae",
+   "n": 6,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Providencia rettgeri",
+   "n": 5,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus faecalis",
+   "n": 4,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Citrobacter koseri",
+   "n": 3,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterobacter aerogenes",
+   "n": 3,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Proteus mirabilis",
+   "n": 3,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Citrobacter freundii",
+   "n": 2,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Proteus vulgaris",
+   "n": 2,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Coagulase-negative staphylococci",
+   "n": 1,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "n": 1,
+   "page": 10
+  }
+ ],
+ "excluded": [
+  {
+   "what": "SRCLI rows: Enterococcus faecium 194, Enterococcus faecalis 333, Escherichia coli 854, Klebsiella spps 63, Citrobacter spps 30, Enterobacter spps 69 (urine, pp10 to 11); blood S. aureus 47, CoNS 190, Enterococcus spps 54, Lactose fermenters 52 (p6); pus Staphylococcus spps 343, Lactose fermenters 202, Non-lactose fermenters 138 (p9); urine Staphylococcus spps 108, Non-lactose fermenters 83 (p10); and the SRCLI boxes of the organism charts (pp6 to 10)",
+   "why": "SRCLI (State Referral Centre for Laboratory Investigation) is a separate location category, not OPD, ward or ICU"
+  },
+  {
+   "what": "Lactose fermenters rows: blood ICU 54 (p6); body fluids OPD 27, IPD 125 (p7); respiratory OPD 45, IPD 72, ICU 237 (p8); pus OPD 76, IPD 234, ICU 42 (p9)",
+   "why": "organism group (E. coli, Citrobacter, Klebsiella, Proteus and Providencia spp. per the report) with no organism key; recording it under one species would mislabel the figures"
+  },
+  {
+   "what": "Non-lactose fermenters rows: blood ICU 36 (p6); body fluids IPD 36 (p7); respiratory IPD 35, ICU 206 (p8); pus IPD 61 (p9); urine OPD 119, IPD 45 (p10)",
+   "why": "organism group (Pseudomonas and Acinetobacter spp.) with no organism key"
+  },
+  {
+   "what": "Staphylococcus spps rows: pus OPD 66, IPD 110 (p9); urine OPD 117 (p10)",
+   "why": "organism group (S. aureus and coagulase-negative staphylococci) with no organism key"
+  },
+  {
+   "what": "Urine OPD organism chart count Klebsiella pneumoniae 85 (p10)",
+   "org": "Klebsiella pneumoniae",
+   "why": "the urine OPD antibiogram row is the genus \"Klebsiella spps\" (94 = K. pneumoniae 85 + K. oxytoca 9 in the same chart), and K. pneumoniae shares its organism key with Klebsiella spp., so the build would compare 94 with 85 and report a count mismatch the source does not have; the K. oxytoca count (9) is kept"
+  },
+  {
+   "what": "Organism chart counts without an organism key: blood OPD Acinetobacter lwoffii 1; blood OPD Chryseobacterium indologenes 1; blood ICU Acinetobacter lwoffii 4; blood ICU Chryseobacterium indologenes 3; sterile IPD Acinetobacter lwoffii 7; respiratory OPD Acinetobacter lwoffii 1; respiratory IPD Acinetobacter lwoffii 6; respiratory ICU Acinetobacter lwoffii 10; respiratory ICU Chryseobacterium indologenes 2; pus OPD Acinetobacter lwoffii 1; pus IPD Acinetobacter lwoffii 3; pus ICU Acinetobacter lwoffii 2; urine OPD Acinetobacter lwoffii 16; urine OPD Chryseobacterium indologenes 1; urine IPD Acinetobacter lwoffii 6; urine ICU Acinetobacter lwoffii 1",
+   "why": "Acinetobacter lwoffii and Chryseobacterium indologenes have no organism key"
+  },
+  {
+   "what": "Sample totals per location (Specimen, Sterile, Culture positive, Growth, Contamination, NSG, NPG, Gram stain)",
+   "why": "numbers of samples, not isolates of an organism"
+  },
+  {
+   "what": "Vancomycin MIC distribution of CoNS and S. aureus (p11) and colistin MIC distribution of Gram-negative isolates (p12), VITEK 2",
+   "why": "MIC distributions, not percent susceptible"
+  },
+  {
+   "what": "Antifungal susceptibility table for Candida species (p12)",
+   "why": "the table prints numbers of isolates per agent (for example C. tropicalis respiratory 11 isolates: FLC 7, VRC 5, CAS 5), not percentages, for 1 to 11 isolates tested on request; no percentage was computed"
+  },
+  {
+   "what": "Mycology isolation charts (p12)",
+   "why": "Candida counts by specimen without location; the species C. ciferri, C. pelliculosa, C. guilliermondii and C. lusitaniae have no organism key"
+  }
+ ]
+}

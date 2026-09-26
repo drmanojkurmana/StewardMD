@@ -1,0 +1,159 @@
+{
+ "id": "RML_ICU",
+ "kind": "study",
+ "inst": "RML_LUCKNOW",
+ "institution": "Dr Ram Manohar Lohia Institute of Medical Sciences",
+ "short": "RML Lucknow",
+ "city": "Lucknow",
+ "state": "Uttar Pradesh",
+ "region": "north",
+ "sector": "government",
+ "year": 2023,
+ "period": "June 2022 to June 2023",
+ "citation": "Cureus 2024;16(3):e57356",
+ "doi": "10.7759/cureus.57356",
+ "url": "https://doi.org/10.7759/cureus.57356",
+ "reporting": "%S",
+ "breakpoints": "CLSI M100 2022",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Reading method: Susceptibility data is in bar-chart figures (Figure 1 gram-positive, Figure 2 gram-negative), NOT text tables; extracted the printed data-labels from the embedded chart images (rendered via pymupdf). Method: Figures are the data labels printed on Figure 1 (Gram-positive) and Figure 2 (Gram-negative); there are no susceptibility tables. The Enterococcus clindamycin bar had no printed value and was left out. Methicillin-resistant CoNS 66%; metallo-beta-lactamase producers among E. coli 60%."
+ },
+ "notes": "A 2024 Cureus study of ICU blood cultures at Dr Ram Manohar Lohia Institute of Medical Sciences, Lucknow, June 2022 to June 2023: 213 of 669 samples (31.8%) grew. Testing was by VITEK 2 with CLSI M100 2022 breakpoints. It covers K. pneumoniae (41), Acinetobacter (38, shown as A. baumannii), S. aureus (20), P. aeruginosa (19) and Enterococcus (9, not speciated), all small numbers. Figures are % susceptible as printed on the paper's bar charts. MRSA was 77.6%; metallo-beta-lactamase producers were 64.3% of Gram-negative isolates (Acinetobacter 71%, P. aeruginosa 68.4%, K. pneumoniae 65.9%) and ESBL producers 19.6% (K. pneumoniae 26.8%). The enterococcal gentamicin figure matches the text's 77.8% high-level gentamicin resistance. Coagulase-negative staphylococci (46 isolates), the commonest isolate, are not included.",
+ "issues": [],
+ "rows": [
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 20,
+   "specimen_as_printed": "ICU blood culture",
+   "s": {
+    "cefoxitin": 22.4,
+    "erythromycin": 40,
+    "clindamycin": 35,
+    "tetracycline": 40,
+    "ciprofloxacin": 15,
+    "chloramphenicol": 60,
+    "vancomycin": 100,
+    "linezolid": 100,
+    "gentamicin": 26.1,
+    "teicoplanin": 67.4
+   },
+   "notes": {
+    "cefoxitin": "consistent with MRSA 77.6%"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus",
+   "pheno": null,
+   "n": 9,
+   "specimen_as_printed": "ICU blood culture",
+   "s": {
+    "cefoxitin": 0,
+    "erythromycin": 12.8,
+    "tetracycline": 33.3,
+    "ciprofloxacin": 16,
+    "chloramphenicol": 77.8,
+    "vancomycin": 84.1,
+    "linezolid": 100,
+    "teicoplanin": 62.4,
+    "gentamicin_hl": 22.2
+   },
+   "notes": {
+    "gentamicin_hl": "text: 77.8% high-level gentamicin-resistant"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 41,
+   "specimen_as_printed": "ICU blood culture",
+   "s": {
+    "ampsulbactam": 0,
+    "ceftazidime": 2.4,
+    "imipenem": 19.5,
+    "tetracycline": 39,
+    "piptazo": 9.8,
+    "ciprofloxacin": 2.5,
+    "gentamicin": 3.2,
+    "amikacin": 14.6
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 38,
+   "specimen_as_printed": "ICU blood culture",
+   "s": {
+    "ampsulbactam": 7.9,
+    "ceftazidime": 23.7,
+    "imipenem": 18.4,
+    "tetracycline": 23.7,
+    "piptazo": 26.3,
+    "ciprofloxacin": 10.5,
+    "gentamicin": 11,
+    "amikacin": 26.3
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 19,
+   "specimen_as_printed": "ICU blood culture",
+   "s": {
+    "ampsulbactam": 10.5,
+    "ceftazidime": 26.3,
+    "imipenem": 26.1,
+    "tetracycline": 57.9,
+    "piptazo": 5.3,
+    "ciprofloxacin": 15.8,
+    "gentamicin": 10.5,
+    "amikacin": 11.1
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 20
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus",
+   "n": 9
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "n": 41
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "n": 38
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 19
+  }
+ ],
+ "excluded": [],
+ "focus": "blood cultures from ICU patients"
+}

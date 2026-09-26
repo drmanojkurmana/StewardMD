@@ -1,0 +1,844 @@
+{
+ "kind": "institution",
+ "inst": "GMC_SRINAGAR",
+ "institution": "Government Medical College Srinagar",
+ "short": "GMC Srinagar",
+ "city": "Srinagar",
+ "state": "Jammu and Kashmir",
+ "region": "north",
+ "sector": "government",
+ "page": "https://www.gmcs.ac.in/InnerPagelevel1.aspx?assid=L1iEAVQeY3I=&pid=ivhnyo1RApo=",
+ "retrieved": "2026-09-26",
+ "measure": "S",
+ "id": "GMC_SRINAGAR_2021",
+ "year": 2021,
+ "end": "2021-07",
+ "period": "July 2020 to July 2021 (pus and body fluids: July 2020 to June 2021)",
+ "published": "2021",
+ "url": "https://www.gmcs.ac.in/Photos/03-26-2411-39-48-GMC-12-08-2102-54-26-GMC-Antibiogram.pdf",
+ "citation": "Postgraduate Department of Microbiology, Government Medical College Srinagar. Antibiogram for the year July 2020 to 2021 (blood; pus and body fluids; urine). Srinagar: Government Medical College; 2021.",
+ "reporting": "Percent susceptible. Blood: organism counts for NICU and for IPD and ICU, one Gram-negative table with the number of isolates (IPD, ICU and NICU together) and a Candida antifungal table. Pus and body fluids: one list of percentages per organism with its isolate number. Urine: one list of percentages per organism with its share of isolates only.",
+ "method": "Not stated.",
+ "verification": {
+  "status": "double-checked",
+  "note": "Scanned PDF, read from page images (scanned PDF). Two separate readings of every table: pass 1 from whole pages rendered at scale 2.5, pass 2 from crops at scale 2.6 to 3 (landscape pages in halves). The two readings were compared by script: 256 of 256 values, isolate numbers and counts agreed; page 6 is a second scan of page 5 with the same values. No cell was unreadable."
+ },
+ "notes": "Antibiogram of the Postgraduate Department of Microbiology, GMC Srinagar, for July 2020 to July 2021 (cover letter dated 25 November 2021; the pus and body fluid section covers July 2020 to June 2021). Blood: the organism counts are printed separately for the NICU and for \"IPD and ICU\"; both are recorded as inpatient counts (NICU patients are inpatients), which the app adds up. The Gram-negative table's isolate numbers equal NICU plus IPD and ICU for E. coli (30), Klebsiella (89), Pseudomonas (39) and Acinetobacter (158), so it covers all blood cultures (IPD, ICU and NICU) and is recorded as all inpatients; Burkholderia is printed as 37 there but 32 in the counts. The Candida antifungal table (110 isolates, 39.4%) matches the NICU count (Candida 110) and the NICU chart (279 positive specimens; 110/279 = 39.4%), and the IPD and ICU counts list no Candida, so it is recorded as ICU (NICU). C. albicans 32 (29%), non-albicans 78 (71%); the report attributes the flucytosine resistance to C. krusei. The blood table's \"Quinolones\" column (a drug class) and the \"Ceftazidime/tazobactam\" and \"Ticarcillin\" entries of the pus lists have no drug key and are not recorded. Urine rows have no n (only each organism's share of isolates: E. coli 70%, Klebsiella 12%, Enterococcus 8%, P. aeruginosa 6%, S. aureus 2% with MRSA 30% and MSSA 70%, Acinetobacter 1%, Proteus 1%). Several pus Enterococcus percentages (11 isolates: vancomycin 93, ampicillin 48, penicillin 47) cannot be produced by 11 or fewer isolates (source error, recorded as printed).",
+ "issues": [
+  "Second reader 2026-09-26: all 184 cells (including the seeded 40% sample of 74), all 23 row n values and all 21 counts were read blind from the page images (scale 3 to 4.5, landscape pages in parts) and compared with the file by script: 0 differences, nothing corrected; page 6 re-read as a second scan of page 5 with the same values.",
+  "Blood Gram-negative table recorded as inpatient: supported. Its n equal the NICU plus the IPD and ICU counts of page 3 (E. coli 8 + 22 = 30, Klebsiella 19 + 70 = 89, Pseudomonas 0 + 39 = 39, Acinetobacter 34 + 124 = 158), and the whole-blood block of page 3 (3520 samples) is exactly IPD and ICU (3060) plus NICU (460), with no OPD block.",
+  "Candida antifungal row recorded as icu (NICU): supported. Its 110 isolates (39.4%) equal the NICU Candida count (110) and 110 of the 279 NICU positive specimens of the page 4 chart, and the IPD and ICU block lists no Candida.",
+  "Burkholderia count mismatch confirmed as printed: 37 isolates in the Gram-negative table (page 5 and its second scan, page 6) against 32 in the IPD and ICU counts (page 3) and the IPD chart (page 4), none in the NICU (a source inconsistency, already in the row note).",
+  "Cells not kept, re-read on page 9: pus Enterococcus (n=11) vancomycin 93, ampicillin 48, penicillin 47 (cautions) and gentamicin 52 (printed as plain \"Gentamycin\", intrinsic) are printed that way (source, not transcription). Pus, urine settings \"all\" (no location split) and specimens confirmed."
+ ],
+ "rows": [
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 30,
+   "page": 5,
+   "table": "Blood: percentage sensitivity of Gram-negative bacilli",
+   "s": {
+    "cefuroxime": 15,
+    "ceftriaxone": 21,
+    "cefepime": 27,
+    "piptazo": 38,
+    "cefoperazone_sulbactam": 53,
+    "gentamicin": 30,
+    "amikacin": 40,
+    "imipenem": 72,
+    "colistin": 99
+   },
+   "printed": {
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum"
+   },
+   "note": "Printed as \"E.coli\". IPD, ICU and NICU blood cultures together (the isolate number equals the NICU plus the IPD and ICU counts of page 3).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 89,
+   "page": 5,
+   "table": "Blood: percentage sensitivity of Gram-negative bacilli",
+   "s": {
+    "cefuroxime": 14,
+    "ceftriaxone": 16,
+    "cefepime": 23,
+    "piptazo": 31,
+    "cefoperazone_sulbactam": 34,
+    "gentamicin": 32,
+    "amikacin": 42,
+    "imipenem": 52,
+    "colistin": 92
+   },
+   "printed": {
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum"
+   },
+   "note": "Printed as \"Klebsiella\". IPD, ICU and NICU blood cultures together (the isolate number equals the NICU plus the IPD and ICU counts of page 3).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Pseudomonas spp.",
+   "pheno": null,
+   "n": 39,
+   "page": 5,
+   "table": "Blood: percentage sensitivity of Gram-negative bacilli",
+   "s": {
+    "ceftazidime": 61,
+    "cefepime": 62,
+    "piptazo": 58,
+    "cefoperazone_sulbactam": 55,
+    "gentamicin": 70,
+    "amikacin": 41,
+    "imipenem": 75,
+    "colistin": 100
+   },
+   "printed": {
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum"
+   },
+   "note": "Printed as \"Pseudomonas\". IPD, ICU and NICU blood cultures together (the isolate number equals the NICU plus the IPD and ICU counts of page 3).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 158,
+   "page": 5,
+   "table": "Blood: percentage sensitivity of Gram-negative bacilli",
+   "s": {
+    "ceftriaxone": 2,
+    "cefepime": 5,
+    "ampsulbactam": 28,
+    "cefoperazone_sulbactam": 17,
+    "gentamicin": 52,
+    "imipenem": 66,
+    "colistin": 98
+   },
+   "printed": {
+    "ampsulbactam": "Ampicillin + Sulbactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum"
+   },
+   "note": "Printed as \"Acinetobacter\". IPD, ICU and NICU blood cultures together (the isolate number equals the NICU plus the IPD and ICU counts of page 3).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Burkholderia spp.",
+   "pheno": null,
+   "n": 37,
+   "page": 5,
+   "table": "Blood: percentage sensitivity of Gram-negative bacilli",
+   "s": {
+    "piptazo": 88,
+    "imipenem": 70
+   },
+   "printed": {
+    "piptazo": "Piperacillin + Tazobactum"
+   },
+   "note": "Printed as \"Burkholderia\". Source inconsistency: 37 isolates here, but the page 3 counts list 32 Burkholderia (IPD and ICU) and none in the NICU.",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Candida spp.",
+   "pheno": null,
+   "n": 110,
+   "page": 5,
+   "table": "Blood: percentage sensitivity of Candida spp. 110 (39.4%)",
+   "s": {
+    "amphotericin_b": 95,
+    "micafungin": 86,
+    "voriconazole": 76,
+    "caspofungin": 65,
+    "flucytosine": 33
+   },
+   "note": "NICU (neonatal ICU): the table names no location, but its 110 isolates (39.4%) match the NICU counts (Candida 110) and the NICU chart (279 positive specimens), and the IPD and ICU counts list no Candida. C. albicans 32 (29%), C. non-albicans 78 (71%); the report attributes the flucytosine resistance to C. krusei among the non-albicans isolates.",
+   "specimen_as_printed": "Blood (NICU)"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 447,
+   "page": 8,
+   "table": "Pus and body fluids: organism wise sensitivity pattern",
+   "s": {
+    "colistin": 97,
+    "meropenem": 68,
+    "imipenem": 65,
+    "piperacillin": 56,
+    "tobramycin": 45,
+    "gentamicin": 33,
+    "levofloxacin": 30,
+    "ciprofloxacin": 29,
+    "amikacin": 27
+   },
+   "printed": {
+    "gentamicin": "Gentamycin"
+   },
+   "note": "Printed as \"Pseudomonas aeroginosa 447 (23%)\".",
+   "specimen_as_printed": "Pus and body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "pheno": null,
+   "n": 311,
+   "page": 8,
+   "table": "Pus and body fluids: organism wise sensitivity pattern",
+   "s": {
+    "colistin": 96,
+    "tigecycline": 79,
+    "piptazo": 33,
+    "levofloxacin": 28,
+    "ampsulbactam": 26,
+    "ciprofloxacin": 26,
+    "imipenem": 23,
+    "meropenem": 23,
+    "gentamicin": 21,
+    "amikacin": 18,
+    "tobramycin": 16,
+    "ceftriaxone": 13,
+    "cotrimoxazole": 13
+   },
+   "printed": {
+    "piptazo": "Piperacillin/tazobactam",
+    "ampsulbactam": "Ampicillin/sulbactam",
+    "gentamicin": "Gentamycin"
+   },
+   "note": "Printed as \"Acinetobacter species 311 (16%)\".",
+   "specimen_as_printed": "Pus and body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Proteus species",
+   "pheno": null,
+   "n": 116,
+   "page": 8,
+   "table": "Pus and body fluids: organism wise sensitivity pattern",
+   "s": {
+    "meropenem": 96,
+    "imipenem": 94,
+    "ciprofloxacin": 38,
+    "piperacillin": 33,
+    "levofloxacin": 28,
+    "gentamicin": 27,
+    "amikacin": 27,
+    "cotrimoxazole": 1.07
+   },
+   "printed": {
+    "gentamicin": "Gentamycin"
+   },
+   "note": "Printed as \"Proteus species 116 (6%)\".",
+   "specimen_as_printed": "Pus and body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterobacter species",
+   "pheno": null,
+   "n": 38,
+   "page": 8,
+   "table": "Pus and body fluids: organism wise sensitivity pattern",
+   "s": {
+    "colistin": 98,
+    "tigecycline": 98,
+    "imipenem": 70,
+    "amikacin": 66,
+    "piptazo": 66,
+    "ciprofloxacin": 66,
+    "gentamicin": 50,
+    "meropenem": 40
+   },
+   "printed": {
+    "piptazo": "Piperacillin/tazobactam",
+    "gentamicin": "Gentamycin"
+   },
+   "note": "Printed as \"Enterobacter species 38 (2%)\".",
+   "specimen_as_printed": "Pus and body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MRSA",
+   "n": 449,
+   "page": 9,
+   "table": "Pus and body fluids: organism wise sensitivity pattern",
+   "s": {
+    "linezolid": 100,
+    "vancomycin": 100,
+    "gentamicin": 92,
+    "clindamycin": 63,
+    "ciprofloxacin": 47,
+    "levofloxacin": 43,
+    "cotrimoxazole": 32,
+    "amikacin": 27,
+    "erythromycin": 20
+   },
+   "printed": {
+    "gentamicin": "Gentamycin"
+   },
+   "note": "Printed as \"Methicillin Resistant Staphylococcus aureus (MRSA) 449 (40%)\".",
+   "specimen_as_printed": "Pus and body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MSSA",
+   "n": 663,
+   "page": 9,
+   "table": "Pus and body fluids: organism wise sensitivity pattern",
+   "s": {
+    "vancomycin": 100,
+    "linezolid": 100,
+    "gentamicin": 100,
+    "erythromycin": 70,
+    "amikacin": 68,
+    "clindamycin": 61,
+    "ciprofloxacin": 61,
+    "levofloxacin": 59,
+    "cotrimoxazole": 30
+   },
+   "printed": {
+    "gentamicin": "Gentamycin"
+   },
+   "note": "Printed as \"Methicillin Sensitive Staphylococcus aureus (MSSA) 663 (59%)\".",
+   "specimen_as_printed": "Pus and body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 11,
+   "page": 9,
+   "table": "Pus and body fluids: organism wise sensitivity pattern",
+   "s": {
+    "linezolid": 100,
+    "vancomycin": 93,
+    "gentamicin": 52,
+    "ciprofloxacin": 50,
+    "levofloxacin": 49,
+    "ampicillin": 48,
+    "penicillin": 47
+   },
+   "printed": {
+    "gentamicin": "Gentamycin"
+   },
+   "note": "Printed as \"Enterococcus species 11 (1%)\". Vancomycin 93, gentamicin 52, levofloxacin 49, ampicillin 48 and penicillin 47 cannot be produced by 11 or fewer isolates (source error, recorded as printed); gentamicin is not stated to be high-level.",
+   "specimen_as_printed": "Pus and body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 525,
+   "page": 9,
+   "table": "Pus and body fluids: organism wise sensitivity pattern",
+   "s": {
+    "tigecycline": 98,
+    "colistin": 98,
+    "amikacin": 73,
+    "gentamicin": 69,
+    "tobramycin": 57,
+    "cefotaxime": 49,
+    "imipenem": 48,
+    "meropenem": 46,
+    "ceftriaxone": 45,
+    "cotrimoxazole": 43,
+    "cefoperazone_sulbactam": 37,
+    "ciprofloxacin": 33,
+    "cefepime": 30,
+    "ampicillin": 23,
+    "piperacillin": 16,
+    "ampsulbactam": 13
+   },
+   "printed": {
+    "gentamicin": "Gentamycin",
+    "cefoperazone_sulbactam": "Cefoperazone/sulbactam",
+    "ampicillin": "Ampicilline",
+    "ampsulbactam": "Ampicillin/sulbactam"
+   },
+   "note": "Printed as \"Escherichia coli 525 (27%)\". Ampicillin printed as \"Ampicilline\".",
+   "specimen_as_printed": "Pus and body fluids"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 505,
+   "page": 9,
+   "table": "Pus and body fluids: organism wise sensitivity pattern",
+   "s": {
+    "colistin": 100,
+    "tigecycline": 86,
+    "cefoperazone_sulbactam": 50,
+    "meropenem": 48,
+    "imipenem": 47,
+    "ceftriaxone": 44,
+    "cefotaxime": 41,
+    "tobramycin": 30,
+    "ciprofloxacin": 26,
+    "cotrimoxazole": 23,
+    "levofloxacin": 20,
+    "gentamicin": 18,
+    "amikacin": 14,
+    "piperacillin": 10,
+    "ampsulbactam": 7
+   },
+   "printed": {
+    "cefoperazone_sulbactam": "Cefoperazone/sulbactam",
+    "gentamicin": "Gentamycin",
+    "ampsulbactam": "Ampicillin/sulbactam"
+   },
+   "note": "Printed as \"Klebsiella Pneumonia 505 (26%)\".",
+   "specimen_as_printed": "Pus and body fluids"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Urine: organism wise sensitivity pattern",
+   "s": {
+    "nitrofurantoin": 86,
+    "fosfomycin": 85,
+    "meropenem": 85,
+    "amikacin": 81,
+    "piptazo": 78,
+    "ampsulbactam": 77,
+    "cotrimoxazole": 70,
+    "ceftriaxone": 45
+   },
+   "printed": {
+    "piptazo": "Piperacillin+ tazobactum",
+    "ampsulbactam": "Ampicillin+ Salbactum"
+   },
+   "note": "Printed as \"Escherichia Coli\". Percentage isolation printed as 70%; no isolate number.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Urine: organism wise sensitivity pattern",
+   "s": {
+    "amikacin": 90,
+    "meropenem": 71,
+    "nitrofurantoin": 58,
+    "fosfomycin": 53,
+    "ceftriaxone": 45,
+    "ampsulbactam": 30
+   },
+   "printed": {
+    "ampsulbactam": "Ampicillin + Salbactum"
+   },
+   "note": "Printed as \"Klebsiella Pneumonia\"; percentage isolation 12%; no isolate number.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": null,
+   "page": 10,
+   "table": "Urine: organism wise sensitivity pattern",
+   "s": {
+    "linezolid": 100,
+    "vancomycin": 96,
+    "nitrofurantoin": 79,
+    "fosfomycin": 70,
+    "ampicillin": 45,
+    "penicillin": 19,
+    "ciprofloxacin": 5
+   },
+   "note": "Printed as \"Entercoccus Spp\"; percentage isolation 8%; no isolate number.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": null,
+   "page": 11,
+   "table": "Urine: organism wise sensitivity pattern",
+   "s": {
+    "ceftazidime": 93,
+    "piptazo": 82,
+    "amikacin": 66,
+    "tobramycin": 60,
+    "meropenem": 49,
+    "levofloxacin": 44
+   },
+   "printed": {
+    "piptazo": "Piperacillin+ Tazobactum"
+   },
+   "note": "Percentage isolation 6%; no isolate number.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MRSA",
+   "n": null,
+   "page": 11,
+   "table": "Urine: organism wise sensitivity pattern",
+   "s": {
+    "nitrofurantoin": 100,
+    "vancomycin": 100,
+    "linezolid": 100,
+    "gentamicin": 87,
+    "cotrimoxazole": 79,
+    "levofloxacin": 41
+   },
+   "note": "Printed as \"Methicillin Resistant Staphylococcus aureus (MRSA)\". S. aureus percentage isolation 2%, of which MRSA 30%; no isolate number.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MSSA",
+   "n": null,
+   "page": 11,
+   "table": "Urine: organism wise sensitivity pattern",
+   "s": {
+    "vancomycin": 100,
+    "linezolid": 100,
+    "nitrofurantoin": 90,
+    "gentamicin": 70,
+    "cotrimoxazole": 60,
+    "levofloxacin": 40
+   },
+   "note": "Printed as \"Methicillin Sensitive Staphylococcus aureus (MSSA)\". S. aureus percentage isolation 2%, of which MSSA 70%; no isolate number.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": null,
+   "page": 11,
+   "table": "Urine: organism wise sensitivity pattern",
+   "s": {
+    "ceftazidime": 88,
+    "amikacin": 78,
+    "piptazo": 66,
+    "gentamicin": 56,
+    "ciprofloxacin": 43
+   },
+   "printed": {
+    "piptazo": "Piperacillin+ Tazobactum"
+   },
+   "note": "Printed as \"Acinetobacter Spp\". Percentage isolation 1%; no isolate number.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "n": null,
+   "page": 11,
+   "table": "Urine: organism wise sensitivity pattern",
+   "s": {
+    "piptazo": 100,
+    "amikacin": 75,
+    "meropenem": 75,
+    "gentamicin": 50,
+    "cotrimoxazole": 25,
+    "ciprofloxacin": 25
+   },
+   "printed": {
+    "piptazo": "Piperacillin Tazobactum"
+   },
+   "note": "Printed as \"Proteus Spp\". Percentage isolation 1%; no isolate number.",
+   "specimen_as_printed": "Urine"
+  }
+ ],
+ "counts": [
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Candida spp.",
+   "n": 110,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "MRSA",
+   "n": 60,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "MSSA",
+   "n": 58,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "MRCONS",
+   "n": 35,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "MS-CONS",
+   "n": 30,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Acinetobacter",
+   "n": 34,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Klebsiella",
+   "n": 19,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Enterococcus",
+   "n": 8,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "E.coli",
+   "n": 8,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "MRSA",
+   "n": 192,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "MSSA",
+   "n": 194,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "MRCONS",
+   "n": 137,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "MS-CONS",
+   "n": 98,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Acinetobacter",
+   "n": 124,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Klebsiella",
+   "n": 70,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Enterococcus",
+   "n": 59,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Pseudomonas",
+   "n": 39,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Burkholderia",
+   "n": 32,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "E.coli",
+   "n": 22,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Citrobacter",
+   "n": 12,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Proteus spp.",
+   "n": 5,
+   "page": 3
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Blood: percentage sensitivity of Gram-negative bacilli, page 5: E.coli Quinolones",
+   "org": "E.coli",
+   "drug": "Quinolones",
+   "value": "6",
+   "why": "a drug class, not a drug (\"Quinolones\"); not recorded"
+  },
+  {
+   "what": "Blood: percentage sensitivity of Gram-negative bacilli, page 5: Klebsiella Quinolones",
+   "org": "Klebsiella",
+   "drug": "Quinolones",
+   "value": "17",
+   "why": "a drug class, not a drug (\"Quinolones\"); not recorded"
+  },
+  {
+   "what": "Blood: percentage sensitivity of Gram-negative bacilli, page 5: Pseudomonas Quinolones",
+   "org": "Pseudomonas",
+   "drug": "Quinolones",
+   "value": "66",
+   "why": "a drug class, not a drug (\"Quinolones\"); not recorded"
+  },
+  {
+   "what": "Blood: percentage sensitivity of Gram-negative bacilli, page 5: Acinetobacter Quinolones",
+   "org": "Acinetobacter",
+   "drug": "Quinolones",
+   "value": "12",
+   "why": "a drug class, not a drug (\"Quinolones\"); not recorded"
+  },
+  {
+   "what": "Blood: percentage sensitivity of Gram-negative bacilli, page 5: Burkholderia Quinolones",
+   "org": "Burkholderia",
+   "drug": "Quinolones",
+   "value": "60",
+   "why": "a drug class, not a drug (\"Quinolones\"); not recorded"
+  },
+  {
+   "what": "Pus and body fluids: organism wise sensitivity pattern, page 8: Pseudomonas aeruginosa Ceftazidime/tazobactam",
+   "org": "Pseudomonas aeruginosa",
+   "drug": "Ceftazidime/tazobactam",
+   "value": "49%",
+   "why": "no canonical drug key: \"ceftazidime/tazobactam\" is not an identifiable product (possibly ceftolozane-tazobactam or ceftazidime-avibactam); not recorded"
+  },
+  {
+   "what": "Pus and body fluids: organism wise sensitivity pattern, page 8: Pseudomonas aeruginosa Ticarcillin",
+   "org": "Pseudomonas aeruginosa",
+   "drug": "Ticarcillin",
+   "value": "24%",
+   "why": "no canonical drug key for ticarcillin; not recorded"
+  },
+  {
+   "what": "Pus and body fluids: organism wise sensitivity pattern, page 8: Acinetobacter species Ceftazidine/tazobactam",
+   "org": "Acinetobacter species",
+   "drug": "Ceftazidine/tazobactam",
+   "value": "12%",
+   "why": "no canonical drug key: \"ceftazidine/tazobactam\" is not an identifiable product; not recorded"
+  },
+  {
+   "what": "Pus and body fluids: organism wise sensitivity pattern, page 8: Proteus species Ticarcillin",
+   "org": "Proteus species",
+   "drug": "Ticarcillin",
+   "value": "33%",
+   "why": "no canonical drug key for ticarcillin; not recorded"
+  },
+  {
+   "what": "Pus and body fluids: organism wise sensitivity pattern, page 8: Enterobacter species Ceftazidine/tazobactam",
+   "org": "Enterobacter species",
+   "drug": "Ceftazidine/tazobactam",
+   "value": "33%",
+   "why": "no canonical drug key: \"ceftazidine/tazobactam\" is not an identifiable product; not recorded"
+  },
+  {
+   "what": "Pus and body fluids: organism wise sensitivity pattern, page 9: Escherichia coli Ceftazidime/tazobactam",
+   "org": "Escherichia coli",
+   "drug": "Ceftazidime/tazobactam",
+   "value": "48%",
+   "why": "no canonical drug key: \"ceftazidime/tazobactam\" is not an identifiable product (possibly ceftolozane-tazobactam or ceftazidime-avibactam); not recorded"
+  },
+  {
+   "what": "Pus and body fluids: organism wise sensitivity pattern, page 9: Klebsiella pneumoniae Ceftazidime/tazobactam",
+   "org": "Klebsiella pneumoniae",
+   "drug": "Ceftazidime/tazobactam",
+   "value": "45%",
+   "why": "no canonical drug key: \"ceftazidime/tazobactam\" is not an identifiable product (possibly ceftolozane-tazobactam or ceftazidime-avibactam); not recorded"
+  },
+  {
+   "what": "Pages 1 and 2: cover letter and title page",
+   "why": "no data"
+  },
+  {
+   "what": "Page 3: sample totals (whole, NICU, IPD and ICU: total samples, positive and negative specimens)",
+   "why": "sample-level totals, not organism counts"
+  },
+  {
+   "what": "Page 4: IPD and NICU bar charts",
+   "why": "charts duplicating the page 3 counts (the IPD chart also shows Stenotrophomonas 4 and 696 isolates, the NICU chart 279 positive specimens, not in the table)"
+  },
+  {
+   "what": "Page 6",
+   "why": "second scan of page 5 (same values)"
+  },
+  {
+   "what": "Page 7: pus and body fluid totals (4266 samples, 3068 isolates, 1945 Gram-negative bacilli, 1123 Gram-positive cocci)",
+   "why": "totals only; the organism isolate numbers are the n of the page 8 and 9 rows"
+  }
+ ]
+}

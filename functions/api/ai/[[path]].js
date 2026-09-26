@@ -1750,8 +1750,14 @@ export async function onRequest(context) {
           if (body && body.tier === 2) { /* the tier-2 OUTPUT MODE below sets the shape */ }
           else if (body && body.depth === "brief") sysA = sysA + "\n\nLENGTH: SHORT. This overrides the TWO-TIER / @@MORE@@ and structure guidance above. Answer the question directly in 3 to 6 sentences or a handful of bullets. No sections, no background, no restating the question; keep only safety-critical caveats.";
           else if (body && body.depth === "detailed") sysA = sysA + "\n\nLENGTH: DETAILED. Cover everything relevant to THIS question in clear sections, using only the parts that bear on it (for example mechanism, diagnosis, management, pitfalls); do not stop until every relevant aspect of the question is covered.";
-          if (pkg.evidenceBundle && Array.isArray(pkg.evidenceBundle.claims) && pkg.evidenceBundle.claims.length) {
-            const ebLines = pkg.evidenceBundle.claims.slice(0, 20).map((c, i) => (i + 1) + ". [" + (c.tier ? "tier " + c.tier : "kb") + "] " + String(c.text || "").slice(0, 320)).join("\n");
+          // The Knowledge Base text goes out ONCE (2026-09-26). The client cuts most claims out of the same
+          // grounding notes that renderGroundedPrompt sends under YOUR REFERENCE NOTES, so listing a claim
+          // whose every source is "kb" repeated 1.0k to 1.9k chars per grounded question. Only claims the
+          // notes do not carry (guideline recommendations) are ranked here; none left, no ranked block.
+          const _claims = (pkg.evidenceBundle && Array.isArray(pkg.evidenceBundle.claims) ? pkg.evidenceBundle.claims : [])
+            .filter((c) => c && !(Array.isArray(c.sources) && c.sources.length && c.sources.every((s) => s && s.source === "kb")));
+          if (_claims.length) {
+            const ebLines = _claims.slice(0, 20).map((c, i) => (i + 1) + ". [" + (c.tier ? "tier " + c.tier : "kb") + "] " + String(c.text || "").slice(0, 320)).join("\n");
             grounded = ("RANKED REFERENCE NOTES (private, like the notes below; StewardMD-validated first, then national → international guidelines). Synthesize ONE coherent answer from the items that fit the question and silently skip the rest; do not copy any item verbatim; merge overlapping points; if items conflict, state the clinical disagreement and the higher-authority position:\n" + ebLines + "\n\n");
             grounded = grounded + renderGroundedPrompt(pkg, Math.max(2000, MAX_IN_CHARS - grounded.length));   // the package keeps its own budget (T35)
           }

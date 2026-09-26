@@ -2367,6 +2367,7 @@
   // composite + its studies, then Hospitals — mirrors the Antibiogram source dropdown so both
   // views share one profile system (data-driven from HOSPITAL.list).
   function hospOptions(cur) {
+    if (window.HOSPITAL && typeof window.HOSPITAL.optionsHTML === "function") return window.HOSPITAL.optionsHTML(cur);
     var list = (window.HOSPITAL && window.HOSPITAL.list) || [];
     function opt(id, label, extra) { return '<option value="' + id + '"' + (id === cur ? " selected" : "") + '>' + esc(label) + (extra || "") + '</option>'; }
     function studiesOf(rg) { return list.filter(function (x) { return x.type === "study" && x.region === rg; }).sort(function (a, b) { return (a.credibility || 9) - (b.credibility || 9); }); }
@@ -2389,39 +2390,75 @@
     return h;
   }
 
-  // Additive, data-driven regional resistance snapshot for the lead syndrome's likely
-  // organisms — shown ALONGSIDE (never replacing) ICMR national guidance. Only genuine local
-  // cells from the active profile are shown (national fallbacks omitted; the national baseline
-  // is already present). Every value carries its source. % resistant = 100 − %susceptible.
-  var RSHORT = { piptazo: "Pip-tazo", cefotaxime: "Cefotaxime", ceftriaxone: "Ceftriaxone", ceftazidime: "Ceftazidime", cefepime: "Cefepime", meropenem: "Meropenem", imipenem: "Imipenem", ertapenem: "Ertapenem", ciprofloxacin: "Cipro", levofloxacin: "Levo", amikacin: "Amikacin", gentamicin: "Gentamicin", colistin: "Colistin", cotrimoxazole: "Co-trimox", nitrofurantoin: "Nitrofur", fosfomycin: "Fosfomycin", cefoxitin: "Cefoxitin(MR)", vancomycin: "Vancomycin", linezolid: "Linezolid", teicoplanin: "Teicoplanin" };
-  var RPANEL = ["piptazo", "cefotaxime", "ceftriaxone", "cefepime", "meropenem", "imipenem", "ciprofloxacin", "amikacin", "colistin", "cotrimoxazole", "nitrofurantoin", "cefoxitin", "vancomycin", "linezolid"];
+  // Additive, data-driven resistance snapshot for the lead syndrome's likely organisms from the
+  // active profile, shown ALONGSIDE (never replacing) ICMR national guidance. The specimen and
+  // setting follow the syndrome (urine for a UTI, blood for sepsis, respiratory and ICU for
+  // VAP); only figures from at least 30 isolates are shown, each with its isolate number, and
+  // the national fallback is omitted (the national baseline is already on the page).
+  // % resistant = 100 - % susceptible.
+  var RSHORT = { piptazo: "Pip-tazo", cefotaxime: "Cefotaxime", ceftriaxone: "Ceftriaxone", ceftazidime: "Ceftazidime", cefepime: "Cefepime", meropenem: "Meropenem", imipenem: "Imipenem", ertapenem: "Ertapenem", ciprofloxacin: "Cipro", levofloxacin: "Levo", amikacin: "Amikacin", gentamicin: "Gentamicin", colistin: "Colistin", cotrimoxazole: "Co-trimox", nitrofurantoin: "Nitrofur", fosfomycin: "Fosfomycin", cefoxitin: "Cefoxitin (MRSA)", oxacillin: "Oxacillin (MRSA)", vancomycin: "Vancomycin", linezolid: "Linezolid", teicoplanin: "Teicoplanin", ampicillin: "Ampicillin", penicillin: "Penicillin", azithromycin: "Azithro" };
+  var RPANEL = ["ampicillin", "piptazo", "cefotaxime", "ceftriaxone", "cefepime", "meropenem", "imipenem", "ciprofloxacin", "amikacin", "colistin", "cotrimoxazole", "nitrofurantoin", "cefoxitin", "vancomycin", "linezolid", "azithromycin"];
   function rColor(R) { return R >= 70 ? "#B91C1C" : R >= 50 ? "#EA580C" : R >= 25 ? "#D97706" : R >= 10 ? "#65a30d" : "#047857"; }
+  var R_SPEC = { blood: "blood", urine: "urine", respiratory: "respiratory", pus: "pus and wounds", sterile: "sterile fluids", stool: "stool", all: "all specimens" };
+  var R_SET = { opd: "outpatients", ward: "wards", icu: "ICU", inpatient: "inpatients", all: "all settings" };
   function regionSuscHTML(lead) {
     try {
       if (!(window.HOSPITAL && window.HOSPITAL.getSusceptibility)) return "";
       var hp = window.HOSPITAL.current();
-      if (!hp || !(hp.abg || hp.type === "region" || hp.type === "study")) return "";   // only profiles with a real antibiogram
+      if (!hp || !(hp.abgScope || hp.abg)) return "";                // only profiles with a real antibiogram
       var syn = lead && lead._syn, pth = syn && syn.pathogens;
       var orgs = pth ? [].concat(pth.veryLikely || [], pth.likely || []) : [];
       if (!orgs.length) return "";
+      var S = window.ABG_STORE, RL = window.ABG_RULES;
+      if (S && !S.loaded()) { S.load().then(function () { try { if (window.DX && window.DX._onHospitalChange) window.DX._onHospitalChange(); } catch (e) {} }).catch(function () {}); return ""; }
+      var ctx = S ? S.synCtx(lead.id) : {};
       var seen = {}, rows = [];
       orgs.forEach(function (orgName) {
         if (rows.length >= 5 || seen[orgName]) return; seen[orgName] = 1;
-        var cells = [];
+        var cells = [], n = 0, k = 0, combined = null, used = null, shownKey = {};
         RPANEL.forEach(function (dk) {
-          var r = window.HOSPITAL.getSusceptibility(orgName, dk);
-          if (!r || r.national || r.s == null) return;   // genuine local values only
+          if (S && S.synDrug && S.synDrug(lead.id, dk)) return;          // e.g. no nitrofurantoin for pyelonephritis
+          var r = window.HOSPITAL.getSusceptibility(orgName, dk, ctx);
+          if (!r || r.national || r.s == null) return;                   // genuine profile values only
+          // A report that tests cefotaxime answers for ceftriaxone too (same breakpoints): one chip,
+          // named for the agent actually tested.
+          var key = r.asKey || dk;
+          if (shownKey[key]) return; shownKey[key] = 1;
+          if (r.intrinsic) {
+            // Only surprising intrinsic resistance is worth a chip (e.g. Enterococcus and
+            // cephalosporins, Klebsiella and ampicillin), not Gram-positive agents for Gram-negatives.
+            var o = RL && RL.canonOrg(orgName), okey = o && o.key;
+            if (!RL || !okey || !(RL.ORG_INTRINSIC[okey] || []).some(function (d) { return d === dk; })) return;
+            cells.push('<span title="' + esc(r.why || "intrinsic resistance") + '" style="display:inline-block;font:700 10.5px var(--sans,system-ui);color:var(--ink,#0F172A);background:var(--line,#E2E8F0);padding:2px 7px;border-radius:999px;margin:3px 4px 0 0">' + esc(RSHORT[dk] || dk) + ' intrinsic R</span>');
+            return;
+          }
+          if (r.n != null && r.n > n) n = r.n;
+          if (r.k) k = Math.max(k, r.k);
+          if (r.combined) combined = r.combined;
+          if (!used && r.spec) used = r;          // same organism: same stratum for every drug
           var R = Math.round(100 - r.s);
-          cells.push('<span style="display:inline-block;font:700 10.5px var(--sans,system-ui);color:#fff;background:' + rColor(R) + ';padding:2px 7px;border-radius:999px;margin:3px 4px 0 0">' + esc(RSHORT[dk] || dk) + ' ' + R + '%R</span>');
+          cells.push('<span style="display:inline-block;font:700 10.5px var(--sans,system-ui);color:#fff;background:' + rColor(R) + ';padding:2px 7px;border-radius:999px;margin:3px 4px 0 0">' + esc(RSHORT[key] || key) + ' ' + R + '%R</span>');
         });
-        if (cells.length) rows.push('<div style="margin-top:6px"><span style="font:700 12px var(--sans,system-ui);font-style:italic">' + esc(orgName) + '</span> ' + cells.join("") + '</div>');
+        if (!cells.length) return;
+        // Each organism carries its own stratum: reports print organism groups at different
+        // granularity, so the specimen used can differ between organisms.
+        var meta = [];
+        if (used) meta.push((R_SPEC[used.spec] || used.spec) + ", " + (R_SET[used.set] || used.set) + (used.cohort === "hai" ? " (ICU device infections)" : ""));
+        if (n) meta.push(n.toLocaleString("en-IN") + " isolates");
+        if (used && used.pooled) meta.push(k === 1 ? "1 institution" : k + " institutions");   // a "pooled" figure can be one hospital
+        else if (k > 1) meta.push(k + " institutions");
+        if (combined) meta.push(combined.join(" + "));
+        if (used && used.specMatch === false && ctx.spec && ctx.spec.length) meta.push("no " + (R_SPEC[ctx.spec[0]] || ctx.spec[0]) + " figures here");
+        rows.push('<div style="margin-top:6px"><span style="font:700 12px var(--sans,system-ui);font-style:italic">' + esc(orgName) + '</span>' +
+          (meta.length ? ' <span style="font:600 10.5px var(--sans,system-ui);color:var(--slate-soft,#64748B)">' + esc(meta.join(", ")) + '</span>' : '') + ' ' + cells.join("") + '</div>');
       });
       if (!rows.length) return "";
-      var nm = hp.name || hp.short || "regional";
-      return '<div class="dx-region-abg" style="margin-top:10px;padding:10px 12px;border:1px solid var(--line,#E2E8F0);border-radius:12px;background:var(--panel,#fff)">' +
-        '<div style="font:800 12px var(--sans,system-ui);color:var(--ink,#0F172A)">📊 Local resistance — ' + esc(nm) + ' <span style="font-weight:600;color:var(--slate-soft,#64748B)">(% resistant · decision support)</span></div>' +
+      var nm = hp.label || hp.name || hp.short || "regional";
+      return '<div class="dx-region-abg smd-books-keep" style="margin-top:10px;padding:10px 12px;border:1px solid var(--line,#E2E8F0);border-radius:12px;background:var(--panel,#fff)">' +
+        '<div style="font:800 12px var(--sans,system-ui);color:var(--ink,#0F172A)">Resistance: ' + esc(nm) + ' <span style="font-weight:600;color:var(--slate-soft,#64748B)">(% resistant, specimen chosen for ' + esc(lead.name || "this syndrome") + ')</span></div>' +
         rows.join("") +
-        '<div style="margin-top:8px;font:500 10.5px/1.4 var(--sans,system-ui);color:var(--slate-soft,#64748B)">Regional susceptibility for the active profile; ICMR national guidance remains the baseline. Verify against your own local antibiogram before prescribing.</div></div>';
+        '<div style="margin-top:8px;font:500 10.5px/1.4 var(--sans,system-ui);color:var(--slate-soft,#64748B)">Decision support from the active antibiogram profile. Figures from fewer than 30 isolates, and figures that failed a data check, are left out (CLSI M39). ICMR national guidance remains the baseline; check your own hospital antibiogram before prescribing.</div>' +
+        '<button type="button" class="dx-abg-open" style="margin-top:6px;border:0;background:none;padding:0;font:700 11px var(--sans,system-ui);color:var(--tl,#0f766e);cursor:pointer">Open the full antibiogram</button></div>';
     } catch (e) { return ""; }
   }
 
@@ -2443,7 +2480,7 @@
   function requestAntibiogram(id) {
     try {
       var h = null; ((window.HOSPITAL && window.HOSPITAL.list) || []).forEach(function (x) { if (x.id === id) h = x; });
-      if (!h || h.hasPolicy || h.abg || h.type === "region" || h.type === "study" || h.id === "ICMR") return;
+      if (!h || h.hasPolicy || h.abg || h.abgScope || h.type === "region" || h.type === "study" || h.type === "network" || h.type === "local" || h.id === "ICMR") return;
       var name = h.name || h.short || "my hospital";
       var go = window.confirm("StewardMD doesn't yet hold the local antimicrobial policy / antibiogram for " + name + ".\n\nWould you like to email it so we can add your hospital? This opens your mail app addressed to Support@StewardMD.in — attach your latest antibiogram PDF before sending.");
       if (!go) return;
@@ -2513,6 +2550,10 @@
     el.innerHTML = html;
     var b = el.querySelector(".dx-select");
     if (b) b.addEventListener("click", function () { selectDx(lead.id); });
+    var ab = el.querySelector(".dx-abg-open");
+    if (ab) ab.addEventListener("click", function () {
+      try { var hp = window.HOSPITAL.current(); if (window.ABG && window.ABG.open) window.ABG.open({ tab: "resistance", scope: hp.abgScope || null }); } catch (e) {}
+    });
   }
 
   function toggleCompare(id) {

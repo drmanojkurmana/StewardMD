@@ -178,14 +178,14 @@
   /* ── 6. Auscultation sites (interactive, and it plays the sound) ─────────── */
 
   var AUSC = [
-    { id: "a1", cx: 120, cy: 44, n: 1, label: "Right apex", sound: "vesicular", note: "Vesicular. Compare immediately with the left apex." },
-    { id: "a2", cx: 200, cy: 44, n: 2, label: "Left apex", sound: "vesicular", note: "Vesicular, and equal to the right." },
-    { id: "a3", cx: 112, cy: 92, n: 3, label: "Right upper", sound: "reduced", note: "In COPD, symmetrically REDUCED with a prolonged expiratory phase." },
-    { id: "a4", cx: 208, cy: 92, n: 4, label: "Left upper", sound: "reduced", note: "Reduced, matching the right. Symmetry is the point." },
-    { id: "a5", cx: 108, cy: 136, n: 5, label: "Right mid", sound: "wheeze", note: "Polyphonic expiratory wheeze: many notes at once, diffuse airflow obstruction." },
-    { id: "a6", cx: 212, cy: 136, n: 6, label: "Left mid", sound: "wheeze", note: "Wheeze here too. Diffuse, not localised." },
-    { id: "a7", cx: 114, cy: 176, n: 7, label: "Right base", sound: "coarse", note: "Early COARSE crackles from secretions. Ask for a cough and listen again." },
-    { id: "a8", cx: 206, cy: 176, n: 8, label: "Left base", sound: "coarse", note: "Coarse crackles, shifting after a cough. That shift is what makes them secretions." }
+    { id: "a1", cx: 120, cy: 44, n: 1, label: "Right apex", sound: "vesicular", note: "Vesicular. Compare immediately with the left apex.", ytVid: "xddT24a5XYc", ytStart: 31 },
+    { id: "a2", cx: 200, cy: 44, n: 2, label: "Left apex", sound: "vesicular", note: "Vesicular, and equal to the right.", ytVid: "xddT24a5XYc", ytStart: 31 },
+    { id: "a3", cx: 112, cy: 92, n: 3, label: "Right upper", sound: "reduced", note: "In COPD, symmetrically REDUCED with a prolonged expiratory phase.", ytVid: "xddT24a5XYc", ytStart: 31 },
+    { id: "a4", cx: 208, cy: 92, n: 4, label: "Left upper", sound: "reduced", note: "Reduced, matching the right. Symmetry is the point.", ytVid: "xddT24a5XYc", ytStart: 31 },
+    { id: "a5", cx: 108, cy: 136, n: 5, label: "Right mid", sound: "wheeze", note: "Polyphonic expiratory wheeze: many notes at once, diffuse airflow obstruction.", ytVid: "xddT24a5XYc", ytStart: 40 },
+    { id: "a6", cx: 212, cy: 136, n: 6, label: "Left mid", sound: "wheeze", note: "Wheeze here too. Diffuse, not localised.", ytVid: "xddT24a5XYc", ytStart: 40 },
+    { id: "a7", cx: 114, cy: 176, n: 7, label: "Right base", sound: "coarse", note: "Early COARSE crackles from secretions. Ask for a cough and listen again.", ytVid: "xddT24a5XYc", ytStart: 51 },
+    { id: "a8", cx: 206, cy: 176, n: 8, label: "Left base", sound: "coarse", note: "Coarse crackles, shifting after a cough. That shift is what makes them secretions.", ytVid: "xddT24a5XYc", ytStart: 51 }
   ];
 
   function auscultationMap(o) {
@@ -204,7 +204,8 @@
     var chosen = null;
     for (i = 0; i < AUSC.length; i++) if (AUSC[i].id === sel) chosen = AUSC[i];
     html += '<div class="cx-dia-note">' + (chosen
-      ? "<b>" + esc(chosen.label) + "</b> " + esc(chosen.note) + '<span class="cx-dia-playing">playing: ' + esc(chosen.sound) + "</span>"
+      ? "<b>" + esc(chosen.label) + "</b> " + esc(chosen.note) + '<span class="cx-dia-playing">playing: ' + esc(chosen.sound) + "</span>" +
+        (chosen.ytVid ? '<button type="button" class="cx-btn cx-btn--ghost" style="margin-left:8px;padding:3px 8px;font-size:11.5px;color:#c00;border-color:rgba(204,0,0,0.3);display:inline-flex;align-items:center;gap:4px;" data-act="cx-watch-sound" data-vid="' + esc(chosen.ytVid) + '" data-start="' + (chosen.ytStart || 0) + '">' + ic("smart_display") + ' Real (YouTube)</button>' : '')
       : "Tap a site to HEAR what you would find in this patient. Work side to side at matched levels, exactly as with percussion.") + "</div>";
     return html;
   }
@@ -1507,7 +1508,97 @@
     "diagram.sensorylevel":  { title: "Spinal cord sensory levels & dermatomes", render: sensoryLevel, interactive: true }
   };
 
+  var ATLAS_IMAGES = {
+    "diagram.liverpalp": {
+      src: "clinix-liver-palpation.jpg",
+      title: "Liver Palpation: Authentic Bedside Technique",
+      desc: "Left hand lifting right posterior 10th-11th ribs forward; right hand placed flat in RIF advancing toward costal margin on expiration."
+    },
+    "diagram.facialpalsy": {
+      src: "clinix-facialpalsy1.jpg",
+      title: "Facial Palsy: Clinical Bedside Verification",
+      desc: "Authentic clinical photos: Complete unilateral hemifacial paralysis in LMN Bell's palsy vs forehead wrinkling preserved in UMN stroke."
+    },
+    "diagram.cngaze": {
+      src: "clinix-gazepositions.jpg",
+      title: "Six Cardinal Gaze Positions: Clinical Motility",
+      desc: "Authentic patient motility series isolating extraocular recti and obliques (CN III, IV, VI)."
+    },
+    "diagram.barrel": {
+      src: "clinix-barrelchest.jpg",
+      title: "Barrel Chest in Emphysematous COPD",
+      desc: "Authentic clinical photograph demonstrating increased anteroposterior thoracic diameter (AP ratio 1:1)."
+    },
+    "diagram.percussion.technique": {
+      src: "clinix-resp-technique-panel.jpg",
+      title: "Bedside Percussion & Palpation Technique",
+      desc: "Authentic clinical panel showing pleximeter finger placement in intercostal space and loose-wrist percussion stroke."
+    },
+    "diagram.expansion": {
+      src: "clinix-resp-technique-panel.jpg",
+      title: "Thoracic Chest Expansion Assessment",
+      desc: "Authentic clinical panel demonstrating hands placed firmly with floating thumbs measuring symmetric 5cm excursion."
+    },
+    "diagram.shiftingdullness": {
+      src: "clinix-ascites2.jpg",
+      title: "Ascites: Shifting Dullness Technique",
+      desc: "Authentic clinical photo: Flank dullness shifting gravitationally when patient turns 45° to lateral decubitus."
+    },
+    "diagram.precordium": {
+      src: "clinix-precordium-inspection.jpg",
+      title: "Precordial Surface Anatomy & Inspection",
+      desc: "Authentic clinical photograph of anterior thoracic landmarks and cardiac auscultation areas."
+    },
+    "diagram.auscultareas": {
+      src: "clinix-apexbeat1.jpg",
+      title: "Locating Apex Beat & Auscultation Areas",
+      desc: "Authentic clinical palpation locating the 5th intercostal space midclavicular line."
+    },
+    "diagram.cn5": {
+      src: "clinix-cn5-motor-corneal.jpg",
+      title: "Trigeminal Nerve (CN V): Motor & Corneal Reflex",
+      desc: "Authentic bedside examination of temporalis/masseter clench and afferent corneal reflex."
+    },
+    "diagram.kidney": {
+      src: "clinix-kidney-ballottement.jpg",
+      title: "Renal Ballottement Technique",
+      desc: "Authentic bimanual examination of the renal angle: posterior hand flicking kidney anteriorly onto resting anterior hand."
+    },
+    "diagram.abdausc": {
+      src: "clinix-abdomen-auscultation.jpg",
+      title: "Abdominal Auscultation & Bowel Sounds",
+      desc: "Authentic clinical stethoscope placement for peristaltic bowel sounds and renal artery bruits."
+    },
+    "diagram.heartfailure": {
+      src: "clinix-heartfailure-signs.jpg",
+      title: "Congestive Heart Failure Bedside Triad",
+      desc: "Authentic clinical signs: Elevated jugular venous pulse (JVP), bilateral pitting pedal edema, and hepatomegaly."
+    },
+    "diagram.consolidation": {
+      src: "clinix-consolidation-triad.jpg",
+      title: "Lobar Consolidation Physical Signs",
+      desc: "Authentic clinical signs: Dull percussion note, bronchial breath sounds, increased tactile fremitus and whispered pectoriloquy."
+    },
+    "diagram.pallor": {
+      src: "clinix-pallor.jpg",
+      title: "General Examination: Conjunctival Pallor",
+      desc: "Authentic clinical photo showing severe paleness of lower palpebral conjunctiva in anemia (Hb < 7 g/dL)."
+    },
+    "diagram.bpcuff": {
+      src: "clinix-bpcuff.jpg",
+      title: "Blood Pressure Measurement & Cuff Placement",
+      desc: "Authentic clinical method: Bladder center over brachial artery, lower edge 2.5 cm above antecubital fossa."
+    },
+    "diagram.handhygiene": {
+      src: "clinix-handhygiene.jpg",
+      title: "WHO 6-Step Hand Hygiene Technique",
+      desc: "Authentic bedside infection control: Palm to palm, interlaced fingers, back of fingers, thumb rotation, and fingertips."
+    }
+  };
+
   function has(id) { return Object.prototype.hasOwnProperty.call(DIAGRAMS, id); }
+  function hasAtlas(id) { return Object.prototype.hasOwnProperty.call(ATLAS_IMAGES, id); }
+  function getAtlas(id) { return ATLAS_IMAGES[id] || null; }
   function render(id, opts) {
     if (!has(id)) return "";
     try { return DIAGRAMS[id].render(opts || {}); } catch (e) { return ""; }
@@ -1522,6 +1613,7 @@
 
   var API = {
     DIAGRAMS: DIAGRAMS,
+    ATLAS_IMAGES: ATLAS_IMAGES,
     ZONES: ZONES,
     AUSC: AUSC,
     PRECORDIAL: PRECORDIAL,
@@ -1531,6 +1623,8 @@
     DERMATOMES: DERMATOMES,
     SENSORY_LEVELS: SENSORY_LEVELS,
     has: has,
+    hasAtlas: hasAtlas,
+    getAtlas: getAtlas,
     render: render,
     titleOf: titleOf,
     soundFor: soundFor
