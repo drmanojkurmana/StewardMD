@@ -81,12 +81,20 @@ async function safetyFacts(svc, order) {
   const patientId = order && order.patientId;
   // No catch: an unreadable allergy list or medication list is not an empty one. The callers turn the
   // throw into "the check could not run" instead of a clean check against no allergies.
-  const [allergies, orders] = await Promise.all([
+  const [allergies, orders, encounters] = await Promise.all([
     svc.byPatient("AllergyIntolerance", patientId),
     svc.byPatient("MedicationOrder", patientId),
+    // Which stays are over, read under the service as in roundOrders(): only used to leave their orders out.
+    svc.repository ? svc.repository.byPatient(svc.tenantId, "Encounter", patientId) : svc.byPatient("Encounter", patientId),
   ]);
+  /* CLIN-04: the checks read the orders of THIS stay, plus the patient's home medicines. An order left active on
+   * another stay (a past admission, before discharge stopped them) is not a medicine given on this one, and a
+   * months-old inpatient course must not raise a duplicate or a cumulative-dose block on a new admission. There is
+   * no home/long-term flag on an order: the OPD prescriptions are the home medicines, and every active one is still
+   * read, as before. An order whose stay cannot be found is read too; leaving it out is the unsafe direction. */
+  const otherStays = new Set((encounters || []).filter((e) => e && e.class !== "OPD" && e.id !== (order && order.encounterId)).map((e) => e.id));
   const activeMeds = (orders || [])
-    .filter((o) => o && o.status === "active" && o.id !== (order && order.id))
+    .filter((o) => o && o.status === "active" && o.id !== (order && order.id) && !otherStays.has(o.encounterId))
     .map((o) => ({ drug: o.drug, drugCode: o.genericName || o.drugCode, dose: o.dose || null, frequency: o.frequency || null }));
   /* The patient's OWN recorded weight, from the ward vitals, because a weight-based ceiling
    * cannot be checked without one — the engine blocks with DOSE_WEIGHT_MISSING, which is the

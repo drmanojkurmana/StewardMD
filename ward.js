@@ -2739,6 +2739,8 @@
       "<label class=\"w-f\"><span>" + wTH("ward.unit", "Unit") + "</span><input id=\"wMoUnit\" type=\"text\" autocomplete=\"off\" placeholder=\"mg\" value=\"" + esc(o.unit || "") + '"></label>' +
       "<label class=\"w-f\"><span>" + wTH("ward.route", "Route") + "</span><input id=\"wMoRoute\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.oral-iv", "oral / IV") + "\" value=\"" + esc(o.route || "") + '"></label>' +
       "<label class=\"w-f\"><span>" + wTH("ward.frequency", "Frequency") + "</span><input id=\"wMoFreq\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.e-g-bd-8th-hourly", "e.g. BD, 8th hourly") + "\" value=\"" + esc(o.frequency || "") + '"></label>' +
+      // CLIN-04: how long the course runs. Given, the order stops itself on the round when it ends.
+      "<label class=\"w-f\"><span>" + wTH("ward.course-days", "Course, days (optional)") + "</span><input id=\"wMoDays\" type=\"number\" min=\"1\" max=\"365\" inputmode=\"numeric\"></label>" +
       "</div>" + instructionPicker("wMoInstr", []) +
       '<div class="w-sub" style="margin-top:10px;"><h4>' + ms("water_drop") + wTH("ward.iv-infusion-diluent-builder-optional", "IV Infusion / Diluent Builder (optional)") + "</h4>" +
       '<div class="w-grid">' +
@@ -12579,7 +12581,8 @@
   function medOrderFromForm() {
     var s = st.sel; if (!s) return null;
     var drug = val("wMoDrug"), value = val("wMoValue"), unit = val("wMoUnit"), route = val("wMoRoute"), frequency = val("wMoFreq");
-    var diluent = val("wMoDiluentVal"), duration = val("wMoInfDuration"), instr = checkedInstructions("wMoInstr");
+    var diluent = val("wMoDiluentVal"), duration = val("wMoInfDuration"), instr = checkedInstructions("wMoInstr"), days = val("wMoDays");
+    if (days && !/^\d{1,3}$/.test(days)) return { err: wT("ward.course-days-whole-number", "Give the course as a whole number of days, or leave it blank.") };
     if (!drug || !value || !unit) return { err: wT("ward.drug-dose-and-unit-are-required", "Drug, dose and unit are required.") };
     /* BUG-MU06HOBO-488C: the carrier and duration ride on the route as written ("IV infusion in 100 mL D25
      * over 3 hrs"). How often it is given is only ever what the prescriber typed: a blank frequency used to
@@ -12589,7 +12592,7 @@
       var infNote = " in " + (diluent || "diluent") + (duration ? " over " + duration : "");
       route = route ? (route + " (IV infusion" + infNote + ")") : ("IV infusion" + infNote);
     }
-    return { order: { patientId: s.patientId, encounterId: s.encounterId, drug: drug, dose: { value: value, unit: unit }, route: route || undefined, frequency: frequency || undefined, patientInstructions: instr.length ? instr : undefined } };
+    return { order: { patientId: s.patientId, encounterId: s.encounterId, drug: drug, dose: { value: value, unit: unit }, route: route || undefined, frequency: frequency || undefined, patientInstructions: instr.length ? instr : undefined, durationDays: days ? Number(days) : undefined } };
   }
   /* Prescribing writes a MedicationOrder through the SAME door the round already reads from. LT-14: the
    * server's safety check is asked first (checkOnly, nothing written); an order it finds nothing against
@@ -12657,7 +12660,7 @@
     apiPost("/ward/medication-order", { orgId: st.orgId, order: order, overrideReason: reason || undefined }).then(function (r) {
       if (settle(r, r && r.written ? wT("ward.prescribed", "Prescribed {drug}.", { drug: order.drug }) : null)) {
         st.moReview = null;
-        ["wMoDrug", "wMoValue", "wMoUnit", "wMoRoute", "wMoFreq", "wMoDiluentVal", "wMoInfDuration"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+        ["wMoDrug", "wMoValue", "wMoUnit", "wMoRoute", "wMoFreq", "wMoDiluentVal", "wMoInfDuration", "wMoDays"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
         Array.prototype.forEach.call(document.querySelectorAll(".wMoInstr"), function (b) { b.checked = false; });
         var dEl = document.getElementById("wMoDiluent"); if (dEl) dEl.value = "";
         // LT-20: the active medicines on the chart and the round both show the new order at once.

@@ -612,6 +612,9 @@ function orderFromWardRequest(input) {
    * course stops has to be there before a schedule is allowed to assert anything is due. */
   const stopAt = str(input.stopAt);
   if (stopAt && Number.isFinite(Date.parse(stopAt))) order.stopAt = new Date(Date.parse(stopAt)).toISOString();
+  /* CLIN-04: or as a course length, counted on the server's clock from now: the Prescribe form's "Course, days". */
+  const days = Number(input.durationDays);
+  if (!order.stopAt && Number.isInteger(days) && days >= 1 && days <= 365) { order.stopAt = new Date(Date.now() + days * 86400000).toISOString(); order.courseDays = days; }
   /* Patient instructions, bolted on the same way: CODES from a closed list, never words. Their English and
    * every translation come from the i18n catalog (wardsynq/site/i18n.js "rx.instr.<code>"), so a printout
    * in the patient's language can carry them without translating anything a clinician typed. Unknown
@@ -666,6 +669,13 @@ async function createWardMedicationOrder(request, env, ctx) {
 
   const candidate = orderFromWardRequest({ ...(ctx.order || {}), prescriberId: resolved.actor.id });
   if (!candidate) return { ...base, ok: false, status: 422, error: "order_incomplete", detail: "drug, patientId, encounterId and a numeric dose {value, unit} are all required", written: 0 };
+  const askedDays = ctx.order && ctx.order.durationDays;
+  if (askedDays !== undefined && askedDays !== null && askedDays !== "" && !candidate.courseDays && !candidate.stopAt) {
+    return { ...base, ok: false, status: 422, error: "bad_course_days", detail: "A course is a whole number of days from 1 to 365. Nothing was prescribed.", written: 0 };
+  }
+  if (candidate.stopAt && Date.parse(candidate.stopAt) <= Date.now()) {
+    return { ...base, ok: false, status: 422, error: "stop_in_the_past", detail: "The course would already have ended. Nothing was prescribed.", written: 0 };
+  }
 
   /* THE FORMULARY, and it is NOT the safety engine. It answers "does this hospital stock this, and
    * does it want a word first" - a stewardship control the hospital owns. Off-formulary never blocks:
@@ -833,6 +843,14 @@ async function createWardMedicationOrder(request, env, ctx) {
  *
  * ctx: { migration, orderId, reason, expectedVersion?, idempotencyKey?, actorDeps, recordDeps }
  */
+/** The stop itself, shared by the chart's Stop and by discharge (migrate-discharge.js). Throws what svc.put throws. */
+async function stopOrderVersion(svc, order, actorId, reason, at, idempotencyKey) {
+  const next = { ...order, status: "stopped", signedBy: actorId, stoppedAt: at, stoppedBy: actorId, stopReason: reason };
+  delete next.version; delete next.meta; delete next.writtenBy;
+  const out = await svc.put(next, { expectedVersion: order.version, idempotencyKey: idempotencyKey || null });
+  return { out, next };
+}
+
 async function stopWardMedicationOrder(request, env, ctx) {
   const mig = ctx.migration;
   const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
@@ -851,10 +869,8 @@ async function stopWardMedicationOrder(request, env, ctx) {
   if (ctx.expectedVersion != null && ctx.expectedVersion !== "" && Number(ctx.expectedVersion) !== Number(order.version)) {
     return { ...base, ok: false, status: 409, error: "order_changed", detail: "this order changed since it was shown; nothing was stopped", orderId, currentVersion: order.version, written: 0 };
   }
-  const next = { ...order, status: "stopped", signedBy: resolved.actor.id, stoppedAt: new Date().toISOString(), stoppedBy: resolved.actor.id, stopReason: reason };
-  delete next.version; delete next.meta; delete next.writtenBy;
   try {
-    const out = await svc.put(next, { expectedVersion: order.version, idempotencyKey: ctx.idempotencyKey || null });
+    const { out, next } = await stopOrderVersion(svc, order, resolved.actor.id, reason, new Date().toISOString(), ctx.idempotencyKey || null);
     return { ...base, ok: true, written: 1, orderId, status: "stopped", drug: order.drug, version: out.record.version, stoppedAt: next.stoppedAt, actor: resolved.actor.id, role: resolved.role };
   } catch (e) {
     return { ...base, ...writeFailure(e, { orderId, written: 0, actor: resolved.actor.id }) };
@@ -1503,7 +1519,7 @@ async function patientTimeline(request, env, ctx) {
 export {
   IPD, ICU, MATERNITY, PEDIATRICS, NICU, ADMISSION_CLASSES, OPEN, patientsFor,
   encounterFromAdmission, sameAdmission, admitPatient, listWard,
-  recordWardVitals, orderFromWardRequest, createWardMedicationOrder, stopWardMedicationOrder, PATIENT_INSTRUCTIONS, patientInstructionsRefusal,
+  recordWardVitals, orderFromWardRequest, createWardMedicationOrder, stopWardMedicationOrder, stopOrderVersion, PATIENT_INSTRUCTIONS, patientInstructionsRefusal,
   sameBed, transferPatient, bedBoard,
   freeMasterBed,   // TASK 4.2: discharge reuses this to release the vacated bed - see migrate-discharge.js
   EMERGENCY_BED_RELAXATION, ADMIN_RELAXABLE_STATES, checkMasterBed,
