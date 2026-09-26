@@ -123,8 +123,9 @@ test("choices are per theme, persist, and default returns the exact original pal
 });
 
 test("index.html busts the cache for every changed file", () => {
-  assert.match(I, /maik-polish\.css\?v=[^"]*mkclose1"/);
-  assert.match(I, /maik-atmosphere\.css\?v=[^"]*mkbg1"/);
-  assert.match(I, /maik-atmosphere\.js\?v=[^"]*mkbg1"/);
-  assert.match(I, /\/home\.js\?v=[^"]*mkclose1"/);
+  // Contains the marker: a later change to the same file adds its own suffix after it.
+  assert.match(I, /maik-polish\.css\?v=[^"]*mkclose1[^"]*"/);
+  assert.match(I, /maik-atmosphere\.css\?v=[^"]*mkbg1[^"]*"/);
+  assert.match(I, /maik-atmosphere\.js\?v=[^"]*mkbg1[^"]*"/);
+  assert.match(I, /\/home\.js\?v=[^"]*mkclose1[^"]*"/);
 });
