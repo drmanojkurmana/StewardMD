@@ -15552,12 +15552,13 @@
       .catch(function () { st.tpaChecks = false; paint(); });
   }
   function claimCodeAction() {
-    if (!st.sel || !st.sel.patientId || !st.sel.encounterId) return;
+    // A second tap while the first is in flight is not a second claim (BILL-18).
+    if (!st.sel || !st.sel.patientId || !st.sel.encounterId || st.busy) return;
     var codes = val("wTpaCodes").split(",").map(function (s) { return s.trim(); }).filter(Boolean);
     if (!codes.length) { st.err = wT("ward.enter-at-least-one-code-to", "Enter at least one code to claim."); paint(); return; }
     st.busy = true; paint();
     apiPost("/ward/claim", { orgId: st.orgId, patientId: st.sel.patientId, encounterId: st.sel.encounterId, codes: codes, payerId: val("wTpaPayer") || undefined, policyNumber: val("wTpaPolicy") || undefined })
-      .then(function (r) { if (settle(r, wT("ward.coded", "Coded."))) loadTpa(); else paint(); })
+      .then(function (r) { if (settle(r, r && r.existing ? wT("ward.claim-already-open", "This stay already has an open claim. It is shown below, unchanged.") : wT("ward.coded", "Coded."))) loadTpa(); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-code-that-claim", "Could not code that claim."); paint(); });
   }
   function claimActionCall(claimId, action, extra) {
@@ -15573,7 +15574,8 @@
             function (v) { claimActionCall(claimId, action, Object.assign({}, extra || {}, { overrideReason: v.why })); });
           return;
         }
-        if (settle(r, wT("ward.done", "Done."))) loadTpa(); else paint();
+        // A claim that was not sent (BILL-10) or reached the payer but was not recorded (BILL-09) changed: reload it.
+        if (settle(r, wT("ward.done", "Done."))) loadTpa(); else if (r && (r.error === "claim_not_sent" || r.sent)) loadTpa(); else paint();
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-update-that-claim", "Could not update that claim."); paint(); });
   }
@@ -15657,7 +15659,9 @@
   function claimSubmitAction(claimId) {
     var amount = window.prompt(wTD("ward.amount-submitted-to-the-payer", "Amount submitted to the payer:"));
     if (amount == null) return;
-    claimActionCall(claimId, "submit", { submittedAmount: Number(amount) || undefined });
+    /* A claim refused for want of a policy number stays coded (BILL-10): the policy field on this screen is sent with it. */
+    var c = rcmClaim(claimId), policy = c && !c.policyNumber ? val("wTpaPolicy") : "";
+    claimActionCall(claimId, "submit", { submittedAmount: Number(amount) || undefined, policyNumber: policy || undefined });
   }
   function claimDenyAction(claimId) {
     var reason = window.prompt(wTD("ward.the-payer-s-reason-for-denying", "The payer's reason for denying this claim:"));
@@ -15715,7 +15719,7 @@
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-prepare-that-estimate", "Could not prepare that estimate."); paint(); });
   }
   function preAuthAction() {
-    if (!st.sel || !st.sel.patientId) return;
+    if (!st.sel || !st.sel.patientId || st.busy) return;   // one request to the payer per tap (BILL-18)
     var treatment = val("wTpaTreatment"), state = val("wTpaAuthState"), reason = val("wTpaAuthReason");
     var scheme = val("wTpaScheme"), amountStr = val("wTpaAuthAmount");
     if (!treatment) { st.err = wT("ward.enter-the-treatment-this-pre-authorisation", "Enter the treatment this pre-authorisation is for."); paint(); return; }

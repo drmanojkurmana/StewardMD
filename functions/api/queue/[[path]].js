@@ -3893,7 +3893,7 @@ export async function onRequest(context) {
       if (sub === "claim-state" && method === "POST") {
         let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
         const r = await claimAction(request, env, { ...deps, claimId: body.claimId, action: body.action, reason: body.reason, codes: body.codes || null, now: body.now, submittedAmount: body.submittedAmount, approvedAmount: body.approvedAmount, deniedAmount: body.deniedAmount,
-          payerId: body.payerId, payerReference: body.payerReference, paidAmount: body.paidAmount, disallowances: body.disallowances, shortPaymentReason: body.shortPaymentReason, amount: body.amount,
+          payerId: body.payerId, policyNumber: body.policyNumber, payerReference: body.payerReference, paidAmount: body.paidAmount, disallowances: body.disallowances, shortPaymentReason: body.shortPaymentReason, amount: body.amount,
           overrideReason: body.overrideReason, text: body.text, receivedAt: body.receivedAt, documents: body.documents, denialCode: body.denialCode, rootCause: body.rootCause, rcm: rcmSettings(wsqCfg),
           payers, fetchImpl: env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null });
         return json(r, r.ok ? 200 : (r.status || 502), request);

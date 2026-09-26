@@ -38,9 +38,9 @@
  *
  * TASK 4.16 (Downtime/Business Continuity) POLICY: CONTINUE SAFELY on a payer-system outage -
  * stated here explicitly because there is no live payer transport in this file to fail yet. submit/
- * resubmit only record a local state transition; a future real payer-transport integration must
- * queue an unsent submission rather than silently mark a claim SUBMITTED before the payer actually
- * has it. See vault/decisions/Decisions.md, 2026-09-09, for the full 6-mode matrix.
+ * resubmit only record a local state transition; the caller (functions/_wardsynq/billing.js) applies it
+ * only once the payer adapter reports the claim sent, acknowledged or queued, and otherwise keeps the
+ * claim where it was with the failed attempt recorded. See vault/decisions/Decisions.md, 2026-09-09.
  *
  * STATUS: IMPLEMENTED and TESTED. Not a billing system and not certified for any payer.
  *
@@ -138,7 +138,7 @@ function supportFor(code, record) {
  * Unsupported codes are REFUSED rather than queried, because a queried code sits in a work list
  * until somebody makes it go away, and the cheapest way to make it go away is to add the diagnosis.
  */
-function codeClaim({ encounterId, patientId, record, codes, codedBy, now, invoiceId } = {}) {
+function codeClaim({ encounterId, patientId, record, codes, codedBy, now, invoiceId, dischargedAt } = {}) {
   if (!encounterId || !patientId) throw new BillingError("a claim belongs to an encounter and a patient", "NO_ENCOUNTER");
   if (!codedBy) throw new BillingError("coding must name the coder", "NO_ACTOR");
   if (!codes || !codes.length) throw new BillingError("a claim needs at least one code", "NO_CODES");
@@ -163,6 +163,8 @@ function codeClaim({ encounterId, patientId, record, codes, codedBy, now, invoic
     // reference, never a computed match - two records that already existed, made findable from
     // each other, nothing more.
     invoiceId: invoiceId || null,
+    // The stay's end as the encounter records it. Timely filing and the payer's diagnosis type count from it.
+    ...(dischargedAt ? { dischargedAt } : {}),
     state: CLAIM_STATE.CODED,
     codes: assessed,
     // Surfaced rather than silently accepted. An inferred code is a question for a clinician.
@@ -216,6 +218,8 @@ function detectUpcoding(claim, record) {
 
 function submit(claim, { by, now, submittedAmount } = {}) {
   if (!by) throw new BillingError("submission names who submitted it", "NO_ACTOR");
+  // A stale screen must not send a claim twice or reopen a paid one. A denied or queried claim goes back through resubmit.
+  if (claim.state !== CLAIM_STATE.CODED) throw new BillingError(`only a coded claim is submitted; this one is ${claim.state}`, "NOT_CODED");
   claim.state = CLAIM_STATE.SUBMITTED;
   claim.submittedAt = now || new Date().toISOString();
   // TASK 4.8: what the hospital is asking the payer for. A plain number the caller supplies, never
@@ -228,6 +232,7 @@ function submit(claim, { by, now, submittedAmount } = {}) {
 
 function deny(claim, { reason, by, now, deniedAmount } = {}) {
   if (!reason) throw new BillingError("a denial carries the payer's reason", "NO_REASON");
+  if (claim.state !== CLAIM_STATE.SUBMITTED && claim.state !== CLAIM_STATE.QUERIED) throw new BillingError(`only a submitted or queried claim is denied; this one is ${claim.state}`, "NOT_SUBMITTED");
   claim.state = CLAIM_STATE.DENIED;
   claim.denialReason = reason;
   if (Number.isFinite(Number(deniedAmount))) claim.deniedAmount = Number(deniedAmount);
@@ -312,7 +317,9 @@ function moveBalanceToPatient(claim, { amount, reason, by, now } = {}) {
   const amt = Number(amount);
   const max = claim.settlement.outstandingAmount;
   if (!Number.isFinite(amt) || amt <= 0) throw new BillingError("name the amount being moved to the patient", "NO_AMOUNT");
-  if (max != null && amt > max) throw new BillingError(`${amt} is more than the ${max} outstanding on this claim`, "OVER_BALANCE");
+  // No submitted amount means no known balance, and an unknown balance has no ceiling to check against.
+  if (max == null) throw new BillingError("this claim carries no submitted amount, so its outstanding balance is unknown and none of it can be moved to the patient", "NO_OUTSTANDING");
+  if (amt > max) throw new BillingError(`${amt} is more than the ${max} outstanding on this claim`, "OVER_BALANCE");
   const at = now || new Date().toISOString();
   claim.settlement.balanceWith = "patient";
   claim.settlement.patientBalance = { amount: amt, reason, by, at };

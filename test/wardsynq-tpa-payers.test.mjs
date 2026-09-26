@@ -308,11 +308,13 @@ test("a payer with no credential configured is not_configured, the mock is never
   const adm = await admitWithProblem();
   const claim = await as(CASHIER, "/ward/claim", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, codes: ["I10"], payerId: "nokey" });
   const submitted = await as(CASHIER, "/ward/claim-state", "POST", { orgId: ORG, claimId: claim.claimId, action: "submit", submittedAmount: 15000 });
-  assert.equal(submitted.__status, 200, JSON.stringify(submitted));
+  // BILL-10: a configured payer channel that sent nothing leaves the claim coded, with the attempt recorded.
+  assert.equal(submitted.__status, 502, JSON.stringify(submitted));
+  assert.equal(submitted.error, "claim_not_sent");
   assert.equal(submitted.claim.adapter.state, "not_configured");
   assert.match(submitted.claim.adapter.note, /credentials missing/);
   assert.equal(tpaCalls.length, 0, "the payer transport was never called");
-  assert.equal(submitted.claim.state, "submitted", "the LOCAL claim state moved");
+  assert.equal(submitted.claim.state, "coded", "never marked submitted");
   assert.notEqual(submitted.claim.state, "acknowledged");
 });
 
@@ -322,6 +324,8 @@ test("a manual payer queues, and an unknown payer is not_configured", async () =
   const paperClaim = await as(CASHIER, "/ward/claim", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, codes: ["I10"], payerId: "paper" });
   const paperSubmit = await as(CASHIER, "/ward/claim-state", "POST", { orgId: ORG, claimId: paperClaim.claimId, action: "submit", submittedAmount: 5000 });
   assert.equal(paperSubmit.claim.adapter.state, "queued");
+  // BILL-18: a stay has one open claim, so the first is closed before the next is coded for the same stay.
+  await as(CASHIER, "/ward/claim-state", "POST", { orgId: ORG, claimId: paperClaim.claimId, action: "deny", reason: "wrong payer" });
 
   const ghostClaim = await as(CASHIER, "/ward/claim", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, codes: ["I10"], payerId: "ghost" });
   const ghostSubmit = await as(CASHIER, "/ward/claim-state", "POST", { orgId: ORG, claimId: ghostClaim.claimId, action: "submit", submittedAmount: 5000 });
