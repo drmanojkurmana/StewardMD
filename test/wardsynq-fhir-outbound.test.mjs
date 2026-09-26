@@ -103,7 +103,7 @@ mock.module("../functions/_wardsynq/deps.js", {
 });
 
 const { onRequest } = await import("../functions/api/queue/[[path]].js");
-const { DELIVERY_STATE, MAX_ATTEMPTS, backoffMs } = await import("../functions/_wardsynq/fhir-outbound.js");
+const { DELIVERY_STATE, MAX_ATTEMPTS, backoffMs, destinationBindingPrefix, DESTINATION_TYPE } = await import("../functions/_wardsynq/fhir-outbound.js");
 
 const ORG_A = "org-a", ORG_B = "org-b";
 const sanitize = (x) => String(x == null ? "" : x).replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 80);
@@ -433,17 +433,17 @@ test("11. a credential is named, never stored, never returned, and a missing one
   const bad = await register(ORG_A, { auth: { kind: "bearer" } });
   assert.equal(bad.__status, 422, "a bearer destination must name where its token lives");
 
-  await register(ORG_A, { auth: { kind: "bearer", secretBinding: "FHIR_DEST_PARTNER_TOKEN" } });
+  await register(ORG_A, { auth: { kind: "bearer", secretBinding: "FHIR_DEST_ORG_2DA__PARTNER_TOKEN" } });
   await sendOut(ORG_A, pid);
 
   // The binding is not configured: a failed attempt, and NOT an unauthenticated send of a chart.
   const d1 = await dispatch(ORG_A, T0);
   assert.equal(d1.results[0].state, DELIVERY_STATE.FAILED);
   assert.equal(received.length, 0, "clinical data was not sent without the credential");
-  assert.match(d1.results[0].detail, /FHIR_DEST_PARTNER_TOKEN/);
+  assert.match(d1.results[0].detail, /FHIR_DEST_ORG_2DA__PARTNER_TOKEN/);
 
   // Configure it, and the far end really receives the Authorization header.
-  ENV.FHIR_DEST_PARTNER_TOKEN = "s3cret-partner-token";
+  ENV.FHIR_DEST_ORG_2DA__PARTNER_TOKEN = "s3cret-partner-token";
   try {
     const d2 = await dispatch(ORG_A, at(24 * 3600_000));
     assert.equal(d2.results[0].state, DELIVERY_STATE.DELIVERED);
@@ -452,9 +452,9 @@ test("11. a credential is named, never stored, never returned, and a missing one
     const list = await as(ADMIN, `/ward/outbound-destinations?orgId=${ORG_A}`, "GET");
     const body = JSON.stringify(list);
     assert.ok(!body.includes("s3cret-partner-token"), "the token never comes back out of the API");
-    assert.equal(list.destinations[0].auth.secretBinding, "FHIR_DEST_PARTNER_TOKEN");
+    assert.equal(list.destinations[0].auth.secretBinding, "FHIR_DEST_ORG_2DA__PARTNER_TOKEN");
     assert.equal(list.destinations[0].auth.configured, true);
-  } finally { delete ENV.FHIR_DEST_PARTNER_TOKEN; }
+  } finally { delete ENV.FHIR_DEST_ORG_2DA__PARTNER_TOKEN; }
 });
 
 /* ---- 12: tenant isolation ------------------------------------------------------------------------ */
@@ -522,7 +522,7 @@ test("14. nothing is queued blind: a resource this chart does not hold is refuse
 test("15. SEC-03: a hospital admin cannot name a platform secret as the bearer binding", async () => {
   seedHospitals();
   const pid = await seedPatient(ORG_A, "MRN-15");
-  for (const binding of ["QUEUE_TOKEN_SECRET", "FOLLOWCARE_PHI_KEY", "CONNECT_MASTER_KEY", "FHIR_DEST_"]) {
+  for (const binding of ["QUEUE_TOKEN_SECRET", "FOLLOWCARE_PHI_KEY", "CONNECT_MASTER_KEY", "FHIR_DEST_", "FHIR_DEST_PARTNER_TOKEN", "FHIR_DEST_ORG_2DA__"]) {
     const reg = await register(ORG_A, { auth: { kind: "bearer", secretBinding: binding } });
     assert.equal(reg.__status, 422, `${binding} is refused`);
     assert.equal(reg.error, "bad_secret_binding");
@@ -533,4 +533,52 @@ test("15. SEC-03: a hospital admin cannot name a platform secret as the bearer b
   await dispatch(ORG_A, T0);
   assert.equal(received.length, 0);
   assert.ok(!received.some((r) => String(r.headers.authorization || "").includes(ENV.QUEUE_TOKEN_SECRET)));
+});
+
+/* ---- 16: SEC-03, a binding belongs to the hospital that registered it ------------------------------- */
+
+test("16. SEC-03: the binding prefix is one-to-one per org, and hospital A cannot name hospital B's variable", async () => {
+  // The encoding: digits stay, lower-case letters go upper case, everything else is _ + two hex digits.
+  assert.equal(destinationBindingPrefix("org-a"), "FHIR_DEST_ORG_2DA__");
+  assert.equal(destinationBindingPrefix("3f9a"), "FHIR_DEST_3F9A__");
+  const ids = ["org-a", "org_a", "ORG-A", "orga", "org-b", "a-b", "a_b", "ab", "Ab", "AB", "a", "a__b", "a_5F"];
+  const prefixes = ids.map(destinationBindingPrefix);
+  assert.equal(new Set(prefixes).size, ids.length, "no two org ids share a prefix");
+  for (const p of prefixes) for (const q of prefixes) if (p !== q) assert.ok(!q.startsWith(p), `${p} is the start of ${q}`);
+  assert.equal(destinationBindingPrefix(""), "", "no org, no binding");
+
+  seedHospitals();
+  const pid = await seedPatient(ORG_A, "MRN-16");
+  ENV.FHIR_DEST_ORG_2DB__PARTNER_TOKEN = "hospital-b-partner-secret";
+  try {
+    const stolen = await register(ORG_A, { auth: { kind: "bearer", secretBinding: "FHIR_DEST_ORG_2DB__PARTNER_TOKEN" } });
+    assert.equal(stolen.__status, 422, JSON.stringify(stolen));
+    assert.equal(stolen.error, "bad_secret_binding");
+    assert.match(stolen.detail, /FHIR_DEST_ORG_2DA__<NAME>/, "the refusal names the variable this hospital must create");
+    assert.equal(stolen.requiredPrefix, "FHIR_DEST_ORG_2DA__");
+    await sendOut(ORG_A, pid);
+    await dispatch(ORG_A, T0);
+    assert.ok(!received.some((r) => String(r.headers.authorization || "").includes("hospital-b-partner-secret")));
+
+    // A record that already names another hospital's variable (written before this rule) fails closed at send.
+    const ok = await register(ORG_A, { auth: { kind: "bearer", secretBinding: "FHIR_DEST_ORG_2DA__PARTNER_TOKEN" } });
+    assert.equal(ok.__status, 200, JSON.stringify(ok));
+    const [dest] = await RECORD.latestByType(TENANT_A.id, DESTINATION_TYPE, 10);
+    const { meta, ...rest } = dest;
+    await RECORD.append(TENANT_A.id, [{ ...rest, auth: { kind: "bearer", secretBinding: "FHIR_DEST_ORG_2DB__PARTNER_TOKEN" }, version: dest.version + 1 }]);
+    const aList = await as(ADMIN, `/ward/outbound-destinations?orgId=${ORG_A}`, "GET");
+    assert.equal(aList.destinations[0].auth.configured, false, "B's variable never counts as configured for A");
+    const q = await sendOut(ORG_A, pid);
+    assert.equal(q.__status, 200, JSON.stringify(q));
+    const sent = await dispatch(ORG_A, T0);
+    assert.equal(received.length, 0, "nothing went out: " + JSON.stringify(sent.results));
+    assert.ok(sent.results.some((r) => /cannot be used/.test(String(r.detail || ""))), JSON.stringify(sent.results));
+
+    // The same name registered by B itself is fine, and B's own list says it is configured.
+    const own = await as(ADMIN, `/ward/outbound-destination?orgId=${ORG_B}`, "POST", { name: "partner-hospital", url: PARTNER, resourceTypes: ["Patient"], auth: { kind: "bearer", secretBinding: "FHIR_DEST_ORG_2DB__PARTNER_TOKEN" } });
+    assert.equal(own.__status, 200, JSON.stringify(own));
+    const list = await as(ADMIN, `/ward/outbound-destinations?orgId=${ORG_B}`, "GET");
+    assert.equal(list.requiredBindingPrefix, "FHIR_DEST_ORG_2DB__");
+    assert.equal(list.destinations[0].auth.configured, true);
+  } finally { delete ENV.FHIR_DEST_ORG_2DB__PARTNER_TOKEN; }
 });

@@ -65,12 +65,33 @@ const DELIVERY_STATE = Object.freeze({
 
 /** How a destination proves who it is. The SECRET never lives in the record - only its binding name. */
 const AUTH_KINDS = Object.freeze(["none", "bearer"]);
-/* A bearer binding may name ONLY an environment variable the platform set aside for outbound
- * destinations. Any other name (QUEUE_TOKEN_SECRET, FOLLOWCARE_PHI_KEY, CONNECT_MASTER_KEY) is a
- * platform secret, and a hospital admin who could name it would receive it at a URL they chose. */
-const BINDING_PREFIX = "FHIR_DEST_";
-const bindingAllowed = (b) => /^FHIR_DEST_[A-Z0-9_]+$/.test(str(b));
-const bindingValue = (env, b) => (bindingAllowed(b) ? str(env && env[str(b)]) : "");
+/* SEC-03: a bearer binding may name ONLY an environment variable the platform set aside for THIS
+ * hospital's outbound destinations: FHIR_DEST_<ORG>__<NAME>. Any other name is either a platform
+ * secret (QUEUE_TOKEN_SECRET, FOLLOWCARE_PHI_KEY, CONNECT_MASTER_KEY) or another hospital's partner
+ * credential, and an admin who could name it would receive it at a URL they chose.
+ *
+ * <ORG> is the org id encoded ONE-TO-ONE into [A-Z0-9_]: a digit stays, a lower-case letter becomes
+ * upper case, and every other character (an upper-case letter, "-", "_") becomes "_" plus its two hex
+ * digits ("org-a" -> "ORG_2DA", "Org" -> "_4FRG"). So two org ids never share an encoding, an encoding
+ * never contains "__" and never ends in "_", and the "__" after it is where it ends: no org's prefix
+ * can be the start of another org's variable name. */
+function orgBindingPart(orgId) {
+  return [...str(orgId)].map((c) => (/[0-9]/.test(c) ? c : /[a-z]/.test(c) ? c.toUpperCase()
+    : "_" + c.charCodeAt(0).toString(16).toUpperCase().padStart(2, "0").slice(-2))).join("");
+}
+/** The prefix every bearer binding of this org must start with, or "" when there is no org (refused). */
+function destinationBindingPrefix(orgId) {
+  // Only ASCII ids encode in two hex digits; anything else has no safe name, so no binding is allowed.
+  return str(orgId) && /^[\x21-\x7e]+$/.test(str(orgId)) ? `FHIR_DEST_${orgBindingPart(orgId)}__` : "";
+}
+const bindingAllowed = (orgId, b) => {
+  const prefix = destinationBindingPrefix(orgId), name = str(b);
+  return !!prefix && name.startsWith(prefix) && /^[A-Z0-9_]+$/.test(name.slice(prefix.length));
+};
+const bindingValue = (env, orgId, b) => (bindingAllowed(orgId, b) ? str(env && env[str(b)]) : "");
+const bindingRule = (orgId) => (destinationBindingPrefix(orgId)
+  ? `this hospital's destination credentials live in environment variables named ${destinationBindingPrefix(orgId)}<NAME> (NAME in A-Z, 0-9 and _), for example ${destinationBindingPrefix(orgId)}PARTNER_TOKEN`
+  : "this request names no hospital, so no credential binding can be accepted");
 
 const MAX_ATTEMPTS = 5;
 const BASE_BACKOFF_MS = 30_000;          // 30s, 1m, 2m, 4m ... deliberately not sub-second: a far end
@@ -179,7 +200,7 @@ async function registerDestination(request, env, ctx) {
   if (!AUTH_KINDS.includes(authKind)) return { ...base, ok: false, status: 422, error: "bad_auth_kind", detail: `auth.kind must be one of ${AUTH_KINDS.join(", ")}`, written: 0 };
   const binding = str(ctx.auth && ctx.auth.secretBinding);
   if (authKind === "bearer" && !binding) return { ...base, ok: false, status: 422, error: "secret_binding_required", detail: "name the environment binding the token lives in; the token itself is never stored on the record", written: 0 };
-  if (binding && !bindingAllowed(binding)) return { ...base, ok: false, status: 422, error: "bad_secret_binding", detail: `a binding name is an environment variable name starting ${BINDING_PREFIX}`, written: 0 };
+  if (binding && !bindingAllowed(ctx.orgId, binding)) return { ...base, ok: false, status: 422, error: "bad_secret_binding", detail: `${binding} cannot be used: ${bindingRule(ctx.orgId)}`, requiredPrefix: destinationBindingPrefix(ctx.orgId) || null, written: 0 };
 
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
@@ -230,11 +251,11 @@ async function listDestinations(request, env, ctx) {
   let rows;
   try { rows = await svc.list(DESTINATION_TYPE, 200); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), destinations: [] }; }
-  return { ...base, ok: true, destinations: (rows || []).filter(Boolean).map((d) => ({
+  return { ...base, ok: true, requiredBindingPrefix: destinationBindingPrefix(ctx.orgId) || null, destinations: (rows || []).filter(Boolean).map((d) => ({
     id: d.id, name: d.name, url: d.url, resourceTypes: d.resourceTypes, active: d.active !== false,
     // The console needs to know a credential EXISTS and is resolvable, never what it is.
     auth: { kind: d.auth && d.auth.kind, secretBinding: (d.auth && d.auth.secretBinding) || null,
-      configured: !(d.auth && d.auth.kind === "bearer") || !!bindingValue(env, d.auth && d.auth.secretBinding) },
+      configured: !(d.auth && d.auth.kind === "bearer") || !!bindingValue(env, ctx.orgId, d.auth && d.auth.secretBinding) },
     createdAt: d.createdAt, revokedAt: d.revokedAt || null, revokedReason: d.revokedReason || null, version: d.version,
   })) };
 }
@@ -408,12 +429,12 @@ async function dispatchOutbound(request, env, ctx) {
       catch (e) { return { ok: false, status: 0, detail: `destination url is no longer acceptable: ${str(e && e.message)}` }; }
       const headers = { "Content-Type": "application/fhir+json", Accept: "application/fhir+json" };
       if (dest.auth && dest.auth.kind === "bearer") {
-        const token = bindingValue(env, dest.auth.secretBinding);
+        const token = bindingValue(env, ctx.orgId, dest.auth.secretBinding);
         // A destination whose credential is not configured is a FAILED attempt with a plain reason,
         // never an unauthenticated send of clinical data.
-        if (!token) return { ok: false, status: 0, detail: bindingAllowed(dest.auth.secretBinding)
+        if (!token) return { ok: false, status: 0, detail: bindingAllowed(ctx.orgId, dest.auth.secretBinding)
           ? `no credential in binding ${str(dest.auth.secretBinding)}; nothing was sent`
-          : `binding ${str(dest.auth.secretBinding)} is not a ${BINDING_PREFIX} name; re-register the destination; nothing was sent` };
+          : `binding ${str(dest.auth.secretBinding)} cannot be used (${bindingRule(ctx.orgId)}); re-register the destination; nothing was sent` };
         headers.Authorization = `Bearer ${token}`;
       }
       const controller = typeof AbortController === "function" ? new AbortController() : null;
@@ -498,5 +519,5 @@ async function replayDelivery(request, env, ctx) {
 export {
   DESTINATION_TYPE, DELIVERY_TYPE, DELIVERY_STATE, AUTH_KINDS, MAX_ATTEMPTS, BASE_BACKOFF_MS, MAX_BACKOFF_MS,
   OutboundDestination, OutboundDelivery, destinationIdFor, deliveryIdFor, backoffMs, isDue, attemptDelivery,
-  registerDestination, revokeDestination, listDestinations, queueDelivery, dispatchOutbound, listDeliveries, replayDelivery,
+  registerDestination, revokeDestination, listDestinations, destinationBindingPrefix, queueDelivery, dispatchOutbound, listDeliveries, replayDelivery,
 };
