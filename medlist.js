@@ -713,8 +713,8 @@
 
   // Empty-state action grid: Search Drug Index / Type · Paste / Scan / Ward Sync.
   // No raw input is shown until an action is tapped.
-  function renderActionGrid(container) {
-    var grid = el("div", { cls: "ml-action-grid" });
+  function renderActionGrid(container, compact) {
+    var grid = el("div", { cls: "ml-action-grid" + (compact ? " ml-action-grid-compact" : "") });
     function card(cls, ic, t, d, attrs, onClick) {
       var c = el("button", { cls: "ml-action-card " + cls, attrs: Object.assign({ type: "button" }, attrs || {}) });
       c.appendChild(el("span", { cls: "ml-action-ic", html: ic }));
@@ -1401,7 +1401,7 @@
       // "Import more" surfaces the action grid again beneath the list.
       var moreLabel = el("div", { cls: "ml-search-label", text: "Add more" });
       main.appendChild(moreLabel);
-      renderActionGrid(main);
+      renderActionGrid(main, true);
     }
 
     renderReviewAside(aside);
@@ -1653,7 +1653,7 @@
 
     // ---- strong summary panel: title + reviewed count + severity count chips ----
     var panel = el("div", { cls: "mlr-summary-panel" });
-    panel.appendChild(el("div", { cls: "mlr-summary-title", text: "Interaction review" }));
+    panel.appendChild(el("div", { cls: "mlr-summary-title", text: "Review before prescribing" }));
     var checkedN = cov.reviewedCount, submittedN = cov.submittedCount || res.reviewedCount;
     panel.appendChild(el("div", { cls: "mlr-summary-sub",
       text: "Limited rule screen: " + submittedN + " medicine" + (submittedN !== 1 ? "s" : "") + " submitted" }));
@@ -1972,7 +1972,29 @@
 ".ml-scan-footer{display:flex;gap:10px}.ml-scan-footer .ml-sheet-cancel{min-height:48px}.ml-scan-footer .ml-check-btn{flex:1;min-height:48px}",
 /* headings kept for scan/list titles */
 ".ml-header{flex:0 0 auto;padding:14px 16px 6px}.ml-title{margin:0;font:800 17px var(--sans)}.ml-subtitle{margin:2px 0 0;font:500 12.5px var(--sans);color:var(--slate,#2d4356)}.ml-advisory{font:600 11.5px var(--sans);color:var(--slate,#2d4356);margin-top:8px}",
-".ml-body{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 16px}"
+".ml-body{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 16px}",
+/* Clinical Ledger: theme-derived, list-first entry and action-first findings. */
+".ddi-overlay{--ddi-on-accent:#fff}.ddi-head{padding:calc(11px + env(safe-area-inset-top)) 20px 11px}.ddi-back{border:0;background:none;border-radius:0;width:32px;color:var(--teal)}.ddi-head-title{font-size:16px;font-weight:750}.ddi-head-sub{font-size:11px;font-weight:500}.ddi-patient{border:0;background:var(--teal-soft);color:var(--teal)}",
+"body.dark .ddi-overlay,body.v3-dark .ddi-overlay{--ddi-on-accent:#0b1814}",
+".ddi-advisory{border:0;background:var(--paper);padding:10px 20px 0;color:var(--slate-soft);font-weight:500}",
+".ml-work{max-width:1020px;padding:22px 24px 28px;gap:34px;grid-template-columns:minmax(0,1fr)}@media(min-width:900px){.ml-work{grid-template-columns:minmax(0,1.75fr) minmax(230px,.82fr);padding:30px 28px 32px;gap:38px}}",
+".ml-empty-head{margin:0 0 18px}.ml-empty-title{font-size:29px;line-height:1.15;letter-spacing:-.035em;font-weight:750}.ml-empty-sub{font-size:13px;margin-top:8px;max-width:45ch}",
+".ml-list-head{margin:0 0 15px;align-items:end}.ml-list-count{font-size:25px;line-height:1.2;letter-spacing:-.03em;font-weight:750}.ml-list-updated{font-weight:500}",
+".ml-list-actions{margin:0 0 15px}.ml-mini-btn{border-radius:8px;background:transparent;min-height:38px}.ml-mini-btn-primary{color:var(--teal);background:var(--teal-soft);border-color:transparent}",
+".ml-rows{gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.ml-row,.ml-row-grouped{background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:12px 2px}.ml-rows>.ml-row:last-child,.ml-rows>.ml-row-grouped:last-child{border-bottom:0}",
+".ml-row-grouped{padding:0}.ml-row-group-header{border:0;border-radius:0;background:transparent;padding:12px 2px 3px}.ml-row-group-sublist{padding-bottom:8px}.ml-sub-row{border:0;padding:4px 2px}.ml-row-title{font-size:15px}.ml-source-badge{border:0;background:var(--teal-soft);color:var(--teal)}",
+".ml-action-grid{gap:8px}.ml-action-card{min-height:83px;border-radius:10px;padding:12px;background:var(--panel);box-shadow:none}.ml-action-card:hover{box-shadow:none;border-color:var(--teal)}.ml-action-primary{background:var(--teal-soft);border-color:transparent}.ml-action-ic svg{width:19px;height:19px}.ml-action-t{font-size:13px}.ml-action-d{font-size:11px}",
+".ml-action-grid-compact{display:flex;flex-wrap:wrap;gap:7px}.ml-action-grid-compact .ml-action-card{min-height:40px;display:inline-flex;flex:0 1 auto;align-items:center;gap:6px;padding:8px 11px;border-radius:8px}.ml-action-grid-compact .ml-action-d{display:none}.ml-action-grid-compact .ml-action-ic svg{width:15px;height:15px}",
+".ml-aside-card{border:0;background:var(--teal-soft);border-radius:13px;padding:17px}.ml-aside-title{color:var(--ink);font-size:12px;letter-spacing:0;text-transform:none}.ml-review-list{display:block}.ml-review-chip{display:block;border:0;border-bottom:1px solid var(--line);border-radius:0;background:none;padding:7px 0;font-weight:550}.ml-aside-note{margin-top:15px}",
+".ml-ward-card{border-radius:9px}.ml-footer{box-shadow:none}.ml-footer-inner{max-width:964px}.ml-check-btn{border-radius:10px;background:var(--teal);color:var(--ddi-on-accent);font-weight:750;letter-spacing:0}.ddi-overlay .ml-ward-btn,.ddi-overlay .ml-index-add,.ddi-overlay .mlr-whatnow-btn,.ddi-overlay .ml-chip.on{color:var(--ddi-on-accent)}",
+".mlr-summary-panel{background:transparent;border:0;border-radius:0;padding:0;margin:0 0 17px}.mlr-summary-title{font-size:29px;line-height:1.15;letter-spacing:-.035em;font-weight:750}.mlr-summary-sub{font-size:13px;margin-top:8px;font-weight:500}",
+".mlr-chips{display:flex;gap:0;flex-wrap:wrap;margin-top:18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.mlr-chip,.mlr-chip-critical,.mlr-chip-major,.mlr-chip-monitor,.mlr-chip-duplicate{display:flex;align-items:baseline;flex-direction:column;gap:1px;min-width:96px;flex:1;background:transparent;color:var(--ink);border:0;border-radius:0;padding:10px 13px 10px 0;font-weight:550}.mlr-chip-num{font-size:20px;color:var(--ink)}.mlr-chip-zero{opacity:1}.mlr-chip-zero .mlr-chip-num{color:var(--slate-soft)}",
+".mlr-summary-panel .ml-aside-note{max-width:66ch;line-height:1.5}.mlr-dataset-note{opacity:1}.mlr-filters{margin:14px 0 22px}.mlr-filter-btn{border-radius:8px;background:transparent}.mlr-back-btn{border-color:transparent;padding-left:0}",
+".mlr-section{margin:0 0 25px}.mlr-section-h{border-bottom:1px solid var(--line);padding-bottom:9px;margin-bottom:0;gap:10px}.mlr-section-title{font-size:14px;letter-spacing:0;text-transform:none;color:var(--ink)}.mlr-section-count{background:transparent;border:0;border-radius:0;padding:0;color:var(--slate-soft)}",
+".mlr-card,.mlr-card-critical,.mlr-card-major,.mlr-card-moderate,.mlr-card-monitor,.mlr-card-minor{background:var(--panel);box-shadow:none;border:1px solid var(--line);border-radius:11px;padding:16px;margin:12px 0 0}.mlr-card-pair{font-size:17px;letter-spacing:-.02em}.mlr-consequence{font-size:13px;font-weight:500}.mlr-detail{display:grid;grid-template-columns:60px minmax(0,1fr);gap:9px;border-top:1px solid var(--line);padding-top:11px;margin-top:12px}.mlr-detail-label{text-transform:none;letter-spacing:0;font-size:12px;color:var(--teal)}.mlr-detail-val{font-size:13px}",
+".mlr-coverage-warn{border-radius:10px;margin:0 0 17px}.mlr-none{border-radius:10px}.mlr-explain-btn{background:none;border:0;border-radius:0;padding:8px 0;min-height:40px}.mlr-whatnow{box-shadow:none}.mlr-explain-out{box-shadow:none}",
+"@media(max-width:899px){.ml-work{gap:20px}.ml-aside{order:2}.ml-aside-card{padding:15px}.ml-review-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 12px}}",
+"@media(max-width:500px){.ddi-head{padding-left:14px;padding-right:14px}.ddi-advisory{padding-left:16px;padding-right:16px}.ml-work{padding:19px 16px 28px}.ml-empty-title,.mlr-summary-title{font-size:25px}.ml-list-count{font-size:22px}.ml-review-list{grid-template-columns:1fr}.ml-action-grid-compact .ml-action-card{flex:1 1 44%}.mlr-chip{min-width:70px;padding-right:6px}.mlr-chip-num{font-size:18px}}"
 ].join("");
     var st = document.createElement("style");
     st.id = "ml-styles"; st.textContent = css;

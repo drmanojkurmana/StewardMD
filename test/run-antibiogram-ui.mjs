@@ -137,8 +137,17 @@ try {
   ok(await ev(`ABG_STORE.sourceById('SKIMS_2023').bp==='CLSI M100, 33rd edition'&&!ABG_STORE.sourceById('SKIMS_2025').bp`), 'the edition is recorded as each document states it (SKIMS 2023: CLSI M100 33rd; 2025: not stated)');
   // A sheet opened again after another closed must fill the screen (dialog-motion once left scale(0.97) on it).
   ok(await until(`(()=>{const o=document.querySelector('#abgV2Sheet'),s=o.querySelector('.v2-sh');return getComputedStyle(o).transform==='none'&&Math.abs(s.getBoundingClientRect().bottom-innerHeight)<2})()`), 'the reopened sheet is not scaled and reaches the bottom of the screen');
+  // Review round 2: the sheet shows a short summary and the checking status; the long extraction
+  // detail loads (from antibiogram-detail.json) into a collapsed section, and no script name shows.
+  ok(await until(`/How the figures were read|Nothing further is recorded/.test(document.querySelector('#abgV2Sheet .v2-det')?.innerHTML||'')`), 'the collapsed detail loads on demand');
+  ok(await ev(`!document.querySelector('#abgV2Sheet .v2-more').open`), 'the detail starts collapsed');
+  ok(!/\.py\b|\.cjs\b|scratchpad/.test(await ev(`document.querySelector('#abgV2Sheet').textContent`)), 'no script or file names on the source sheet');
+  ok(/Checking: read from the source and re-read by a second, independent reader/.test(await text('#abgV2Sheet')), 'the checking line is a plain statement');
   await shot('abg-source-sheet');
   await click('#abgV2Sheet [data-v2="sheet-close"]');
+  // A pooled figure from fewer than 3 institutions is a caution that names them.
+  ok(await ev(`(()=>{const t=ABG_STORE.table('india','blood','all');return t.orgs.some(o=>Object.values(o.cells).some(c=>c.act==='caution'&&/a pooled figure needs at least 3/.test(c.why||'')))})()`), 'a one- or two-institution pooled figure is a caution');
+  ok(await ev(`!ABG_STORE.scopes().some(x=>x.id==='region:south'||x.id==='region:east')`), 'regions with fewer than 3 institutions have no pooled view');
 
   /* ---- My hospital: import, check, save, use, remove ---- */
   await click('#abgOverlay .abg-tab[data-tab="mine"]');
