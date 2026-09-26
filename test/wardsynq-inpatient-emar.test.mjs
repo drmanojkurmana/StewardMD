@@ -182,17 +182,25 @@ async function as(email, path, method, body) {
   return j;
 }
 
-const DUE = "2026-09-07T09:00:00.000Z";
+/* CLIN-11: the eMAR charts a dose only at a time the order schedules. The fixture's orders are written at the admission
+ * (ADMITTED, 13:30 IST), so a TID order's first real slot on the default round is 14:00 IST, and that is DUE. */
+const ADMITTED = "2026-09-07T08:00:00.000Z";
+const DUE = "2026-09-07T08:30:00.000Z";
+/** Runs `fn` with the clock at the admission, so what it writes (an order) is effective then, as if written on the ward. */
+async function atAdmission(fn) {
+  mock.timers.enable({ apis: ["Date"], now: Date.parse(ADMITTED) });
+  try { return await fn(); } finally { mock.timers.reset(); }
+}
 const MRN = "SMD-WARD01-00001";
 
 /** Registers, admits, and writes the order. Returns everything the bedside needs. */
 async function admittedPatientOnDrug(drug = "Paracetamol 500mg") {
   const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Ward Testcase", mobile: "9876500011", gender: "female", ageYears: 54 });
   const adm = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg.mrn, ward: "Medical A", bed: "12", admittedAt: "2026-09-07T08:00:00.000Z" });
-  const ord = await as(DOCTOR, "/ward/medication-order", "POST", {
+  const ord = await atAdmission(() => as(DOCTOR, "/ward/medication-order", "POST", {
     orgId: ORG,
     order: { patientId: adm.patientId, encounterId: adm.encounterId, drug, dose: { value: 500, unit: "mg" }, route: "oral", frequency: "TID" },
-  });
+  }));
   // The ward weighs the patient. Paracetamol carries an mg/kg ceiling, and the safety engine
   // correctly refuses a weight-based drug for a patient with no recorded weight.
   await as(NURSE, "/ward/vitals", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, vitals: { weight: "68" } });
@@ -566,7 +574,7 @@ test("HOLD, ROUTE LEVEL: a dose cannot be held with no reason, through the real 
 test("REFUSE/CANCEL, ROUTE LEVEL: a missing reason does not throw - refuse defaults to 'patient declined', cancel to no reason, and both are on the record as such", async () => {
   seedHospital();
   const { adm, ord: ord1 } = await admittedPatientOnDrug("Paracetamol 500mg");
-  const ord2 = await as(DOCTOR, "/ward/medication-order", "POST", { orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Ibuprofen 400mg", dose: { value: 400, unit: "mg" }, route: "oral", frequency: "TID" } });
+  const ord2 = await atAdmission(() => as(DOCTOR, "/ward/medication-order", "POST", { orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Ibuprofen 400mg", dose: { value: 400, unit: "mg" }, route: "oral", frequency: "TID" } }));
   const patient = { id: adm.patientId, mrn: adm.patientId.replace("opd-pat-", "").toUpperCase(), wristbandBarcode: adm.patientId.replace("opd-pat-", "").toUpperCase() };
 
   // refuse() is only a legal transition from dispensed/scanned/held (wardsynq-meds.js) - a patient
@@ -4660,12 +4668,15 @@ test("A HIGH-ALERT DRUG NEEDS A SECOND NURSE, and the LIST is the hospital's", a
   org.fields.wardsynq = { ...org.fields.wardsynq, highAlertDrugs: ["INSULIN"] };
 
   const { adm, patient, ord: plain, scan: plainScan } = await admittedPatientOnDrug();
-  const ord = await as(DOCTOR, "/ward/medication-order", "POST", {
+  const ord = await atAdmission(() => as(DOCTOR, "/ward/medication-order", "POST", {
     orgId: ORG,
     order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Insulin glargine", dose: { value: 10, unit: "unit" }, route: "subcutaneous", frequency: "OD" },
-  });
+  }));
   assert.equal(ord.__status, 200, JSON.stringify(ord));
-  const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: DUE, patient, ...(x || {}) });
+  // CLIN-11: the insulin's own first OD slot, from the round, not the TID fixture's time.
+  const sched = await as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}&from=${ADMITTED}&to=${new Date(Date.parse(ADMITTED) + 86400000).toISOString()}`);
+  const insulinDue = sched.due.find((d) => d.orderId === ord.orderId).dueAt;
+  const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: insulinDue, patient, ...(x || {}) });
   await step("verify"); await step("dispense");
   const scanned = await step("scan", { scan: { patientBarcode: patient.mrn, drugBarcode: "Insulin glargine", dose: { value: 10, unit: "unit" }, route: "subcutaneous" } });
   assert.equal(scanned.to, "scanned", JSON.stringify(scanned));
@@ -4681,8 +4692,13 @@ test("A HIGH-ALERT DRUG NEEDS A SECOND NURSE, and the LIST is the hospital's", a
   assert.deepEqual(self.reasons.map((r) => r.code), ["WITNESS_NOT_INDEPENDENT"]);
 
   // CLIN-18: the witness is checked as the controlled-drug witness is, an active member who dispenses, gives
-  // medicines or keeps the NDPS register; the pharmacist is one, the prescribing doctor alone is not.
-  const given = await step("administer", { witnessId: idFor(PHARM) });
+  // medicines or keeps the NDPS register; the pharmacist is one, the prescribing doctor alone is not. And the witness
+  // enters their own staff PIN: the identifier alone is refused.
+  const { genSalt, hashSecret } = await import("../functions/_opd_auth.js");
+  const pk = `q_members/${sanitize(ORG)}__${sanitize(idFor(PHARM))}`, salt = genSalt();
+  docs.set(pk, { ...docs.get(pk), fields: { ...docs.get(pk).fields, pinSalt: salt, pinHash: await hashSecret("4821", salt) } });
+  assert.deepEqual((await step("administer", { witnessId: idFor(PHARM) })).reasons.map((r) => r.code), ["WITNESS_PIN_REQUIRED"]);
+  const given = await step("administer", { witnessId: idFor(PHARM), witnessPin: "4821" });
   assert.equal(given.__status, 200, JSON.stringify(given));
   assert.equal(given.to, "administered");
   // Both names are on the record: who gave it and who watched.
@@ -7302,7 +7318,8 @@ test("LT-14 / LT-20: a chart order a pharmacist verified is on the nurse's round
   const from = new Date().toISOString(), to = new Date(Date.now() + 86400000).toISOString();
   const s = await as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}&from=${from}&to=${to}`);
   assert.equal(s.__status, 200, JSON.stringify(s));
-  assert.equal(s.due.filter((d) => d.orderId === ord.orderId).length, 3, "TID: three doses in any 24 hours from now");
+  // CLIN-17: the fixture's order dates from the admission, so the doses it missed since are on the round too, marked.
+  assert.equal(s.due.filter((d) => d.orderId === ord.orderId && !d.beforeWindow).length, 3, "TID: three doses in any 24 hours from now");
 });
 
 test("LT-20: POST /api/queue/ward/verify-order refuses the prescriber verifying their own order (403, audited, nothing written); the pharmacist may; 401 and a nurse refused", async () => {

@@ -2710,6 +2710,8 @@
        * shown only for drugs the browser thinks are high-alert: that would be a second copy of the
        * formulary living in the UI. */
       "<label class=\"w-f\"><span>" + wTH("ward.second-nurse", "Second nurse") + " <i>" + wTH("ward.high-alert-drugs-only", "high-alert drugs only") + "</i></span><input id=\"wWitness\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.witness-id", "Witness ID") + "\"></label>" +
+      // CLIN-18: the witness types their OWN staff PIN here; the server checks it as a sign-in would. Never kept.
+      "<label class=\"w-f\"><span>" + wTH("ward.witness-pin", "Witness's own PIN") + "</span><input id=\"wWitnessPin\" type=\"password\" inputmode=\"numeric\" autocomplete=\"off\"></label>" +
       /* CLIN-10: the dose and route the server checks are the ones on the row's order, sent only when the nurse
        * says the prepared dose and route were checked against it. The wristband and drug are real scans. */
       "<label class=\"w-f w-check\"><input id=\"wScanChecked\" type=\"checkbox\"> <span>" + wTH("ward.dose-route-checked", "I have checked the prepared dose and route against the order") + "</span></label></div></div>" +
@@ -15998,7 +16000,16 @@
     /* Passed through untouched, and only ever passed. The screen does not decide whether a witness is
      * needed - the hospital's high-alert list does, on the server - and it never compares the witness
      * to the nurse. `WITNESS_NOT_INDEPENDENT` is the server's refusal to make. */
-    if (action === "administer") { var w = val("wWitness"); if (w) body.witnessId = w; }
+    if (action === "administer") {
+      var w = val("wWitness"), wp = val("wWitnessPin"), wpEl = document.getElementById("wWitnessPin");
+      if (wpEl) wpEl.value = "";
+      if (w) body.witnessId = w;
+      if (wp) {
+        /* A PIN is checked while the witness stands there. It is never put in this device's offline queue. */
+        if (!isOnline()) { st.err = wT("ward.witness-needs-connection", "A witnessed dose needs a connection, so the witness's PIN can be checked now. Nothing was recorded."); paint(); return; }
+        body.witnessPin = wp;
+      }
+    }
     if ((action === "hold" || action === "refuse" || action === "cancel") && !body.reason) {
       askReason(wTH("ward.reason-for", "Reason for {action}:", { action: esc(marWord(action)) }, "", 1), wT("ward.a-reason-is-required-to-a", "A reason is required to {action} a dose.", { action: marWord(action) }), null,
         function (why) { return marSend(action, s, d, Object.assign(body, { reason: why })); }, { icon: "medication", danger: true });

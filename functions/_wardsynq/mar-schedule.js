@@ -334,6 +334,26 @@ async function openService(request, env, ctx, need) {
 }
 
 /**
+ * CLIN-11: PURE. Why this dose time is not one the order schedules, or null when it is. A dose is charted against a
+ * time the round itself would list (the same scheduleSlots(), with the ward's own round times and clock), so an extra
+ * dose, or one at a time nobody prescribed, cannot be recorded against the order. An as-needed or unscheduled order has
+ * no slots: its dose is charted at the minute it is given (CLIN-13), and may not start more than `windowMinutes` ahead.
+ * sched: { marTimes?, offsetMinutes?, timeZone? } as the round is given them.
+ */
+function doseTimeRefusal(order, dueAt, sched, nowMs, windowMinutes) {
+  const t = Date.parse(str(dueAt));
+  if (!Number.isFinite(t)) return "the dose time is not a time";
+  const spec = parseFrequency(order && order.frequency);
+  if (!spec || spec.kind === "prn") {
+    const ahead = t - (Number.isFinite(nowMs) ? nowMs : Date.now());
+    return ahead > (Number.isFinite(windowMinutes) ? windowMinutes : 60) * 60000 ? "an as-needed or unscheduled dose is charted when it is given, not ahead of time" : null;
+  }
+  const s = sched || {};
+  const slots = scheduleSlots(order, { from: new Date(t).toISOString(), to: new Date(t + 1).toISOString(), times: s.marTimes, offsetMinutes: s.offsetMinutes, timeZone: s.timeZone });
+  return slots.due.includes(t) ? null : "this is not a time the order schedules a dose; chart the dose from the round";
+}
+
+/**
  * CLIN-04: the orders a round is made of. Active is not enough: every active order the patient has ever
  * had, from any encounter, used to be scheduled, so an OPD course from three months ago showed as overdue
  * on a new admission. An order belongs on the round when its stay is still open and is not an OPD visit.
@@ -468,4 +488,4 @@ async function marSchedule(request, env, ctx) {
   };
 }
 
-export { DEFAULT_MAR_TIMES, ALIASES, MAX_SLOTS, MAX_WINDOW_DAYS, SPRING_FORWARD, parseFrequency, timesFor, zoneOffsetAt, zonedSlotInstant, scheduleSlots, isOverdue, roundOrders, marSchedule };
+export { DEFAULT_MAR_TIMES, ALIASES, MAX_SLOTS, MAX_WINDOW_DAYS, SPRING_FORWARD, parseFrequency, timesFor, zoneOffsetAt, zonedSlotInstant, scheduleSlots, isOverdue, roundOrders, doseTimeRefusal, marSchedule };

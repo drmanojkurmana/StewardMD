@@ -39,7 +39,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { medicationAdministrationIdFor } from "./opd-identity.js";
-import { roundOrders } from "./mar-schedule.js";
+import { roundOrders, doseTimeRefusal } from "./mar-schedule.js";
 import { witnessOrRefusal } from "./controlled-drugs.js";
 import { readPregnancyLactation } from "./migrate-maternity.js";
 
@@ -353,6 +353,9 @@ async function administerStep(request, env, ctx) {
 
   let record = existing;
   if (!record) {
+    // CLIN-11: a new dose record only at a time the order schedules (the round's own slots), never an arbitrary one.
+    const off = doseTimeRefusal(order, dueAt, ctx.schedule, Date.now(), 60);
+    if (off) return { ...base, ok: false, status: 409, error: "not_a_scheduled_dose", detail: off, orderId, dueAt, written: 0 };
     if (action !== "verify" && action !== "cancel" && action !== "hold") {
       // A dose has to start at the beginning. Refusing here is what stops an "administer" call on an
       // order that nobody verified or dispensed from quietly creating a record already at the end.
@@ -376,8 +379,26 @@ async function administerStep(request, env, ctx) {
   /* CLIN-18: a HIGH-ALERT dose's witness is checked the same way when one is named (the machine below refuses
    * one that is missing or is the nurse); before, any string other than the nurse's own id passed. */
   const controlledDose = typeof ctx.isControlled === "function" && ctx.isControlled(order.drug, order.drugCode) === true;
-  if (action === "administer" && (controlledDose || (emar.isHighAlert(order) && str(ctx.witnessId)))) {
-    const w = await witnessOrRefusal(ctx, resolved.actor.id);
+  let witnessId = str(ctx.witnessId) || null;
+  /* CLIN-18: a bedside witness (high-alert or controlled) AUTHENTICATES: they enter their own staff PIN on this device
+   * and it is verified before anything is recorded (witness-auth.js). A typed identifier alone is refused. */
+  // The nurse naming herself is refused below as not independent, before anyone's PIN is tried.
+  if (action === "administer" && witnessId && (controlledDose || emar.isHighAlert(order)) && witnessId.toLowerCase() !== str(resolved.actor.id).toLowerCase()) {
+    if (typeof ctx.witnessPinCheck !== "function") {
+      return { ...base, ok: false, status: 502, error: "witness_check_unavailable", detail: "The witness could not be checked, so nothing was recorded.", orderId, administrationId: marId, written: 0 };
+    }
+    let pinR;
+    try { pinR = await ctx.witnessPinCheck(witnessId, ctx.witnessPin); }
+    catch (e) { return { ...base, ok: false, status: 502, error: "witness_check_failed", detail: "The witness could not be checked, so nothing was recorded.", orderId, administrationId: marId, written: 0 }; }
+    if (!pinR || !pinR.ok) {
+      return { ...base, ok: false, status: 409, error: "refused", action, from: existing ? existing.status : null, orderId, administrationId: marId, actor: resolved.actor.id, written: 0,
+        reasons: [{ code: String((pinR && pinR.error) || "witness_pin_wrong").toUpperCase(), message: (pinR && pinR.detail) || "The witness's PIN is not right." }],
+        detail: (pinR && pinR.detail) || "The witness's PIN is not right.", ...(pinR && pinR.attemptsLeft != null ? { attemptsLeft: pinR.attemptsLeft } : {}) };
+    }
+    witnessId = pinR.identity;
+  }
+  if (action === "administer" && (controlledDose || (emar.isHighAlert(order) && witnessId))) {
+    const w = await witnessOrRefusal({ ...ctx, witnessId }, resolved.actor.id);
     if (w.error) {
       return { ...base, ok: false, status: w.error.status === 502 ? 502 : 409, error: w.error.status === 502 ? w.error.error : "refused", action, from: before,
         reasons: [{ code: String(w.error.error).toUpperCase(), message: w.error.detail }], detail: w.error.detail, orderId, administrationId: marId, actor: resolved.actor.id, written: 0 };
@@ -389,7 +410,7 @@ async function administerStep(request, env, ctx) {
     else if (action === "scan") await emar.scan(record, { order, patient: bedsidePatient, nurseId: resolved.actor.id,
       // The due time and the moment of the scan are the server's, never the device's.
       scan: { ...(ctx.scan || {}), scheduledAt: dueAt, at: new Date().toISOString() } });
-    else if (action === "administer") await emar.administer(record, { order, nurseId: resolved.actor.id, witnessId: str(ctx.witnessId) || null });
+    else if (action === "administer") await emar.administer(record, { order, nurseId: resolved.actor.id, witnessId });
     else if (action === "hold") await emar.hold(record, resolved.actor.id, str(ctx.reason));
     else if (action === "refuse") await emar.refuse(record, resolved.actor.id, str(ctx.reason));
     else if (action === "cancel") await emar.cancel(record, resolved.actor.id, str(ctx.reason));

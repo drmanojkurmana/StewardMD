@@ -136,17 +136,49 @@ test("CLIN-17: a dose nobody gave stays on the round and the worklist as overdue
   } finally { t.mock.timers.reset(); }
 });
 
-test("CLIN-18: a high-alert dose witnessed by a name that is not staff is refused", async () => {
+test("CLIN-18: a high-alert witness authenticates with their own staff PIN; a typed name alone is refused", async () => {
   seed({ highAlertDrugs: ["INSULIN"] });
+  const { genSalt, hashSecret, PIN_MAX_ATTEMPTS } = await import("../functions/_opd_auth.js");
+  const key = `q_members/${sanitize(ORG)}__nurse1`, salt = genSalt();
+  docs.set(key, { ...docs.get(key), fields: { ...docs.get(key).fields, pinSalt: salt, pinHash: await hashSecret("2468", salt) } });
   const p = await admittedPatient();
   const { d } = await statDose(p, "Insulin regular", 6, "unit", "SC");
   await ready(p, d);
   assert.equal((await wardScan(p, d, p.mrn, "Insulin regular")).__status, 200);
-  const fake = await mar(p, d, "administer", { witnessId: "nobody-at-all" });
-  assert.equal(fake.__status, 409, JSON.stringify(fake));
-  assert.deepEqual(fake.reasons.map((r) => r.code), ["WITNESS_NOT_STAFF"]);
-  const real = await mar(p, d, "administer", { witnessId: idFor(PHARM) });
-  assert.equal(real.__status, 200, JSON.stringify(real));
+  const code = async (extra) => { const r = await mar(p, d, "administer", extra); return r.__status === 200 ? "given" : (r.reasons || []).map((x) => x.code).join(",") || r.error; };
+
+  assert.equal(await code({ witnessId: "nurse1" }), "WITNESS_PIN_REQUIRED", "an identifier alone is not a witness");
+  assert.equal(await code({ witnessId: "nobody-at-all", witnessPin: "2468" }), "WITNESS_PIN_UNAVAILABLE");
+  assert.equal(await code({ witnessId: "nurse1", witnessPin: "1111" }), "WITNESS_PIN_WRONG");
+  assert.equal(docs.get(key).fields.pinAttempts, 1, "a wrong PIN counts against the witness, as at sign-in");
+  const given = await mar(p, d, "administer", { witnessId: "nurse1", witnessPin: "2468" });
+  assert.equal(given.__status, 200, JSON.stringify(given));
+  const rec = await H.RECORD.latest("tenant-wsq", "MedicationAdministration", given.administrationId);
+  assert.equal(rec.witnessedBy, "nurse1");
+  assert.equal(docs.get(key).fields.pinAttempts, 0, "the right PIN resets the count");
+
+  // Five wrong PINs lock the witness out, as a sign-in does.
+  const two = await statDose(p, "Insulin glargine", 8, "unit", "SC");
+  await ready(p, two.d);
+  assert.equal((await wardScan(p, two.d, p.mrn, "Insulin glargine")).__status, 200);
+  for (let i = 0; i < PIN_MAX_ATTEMPTS; i++) await mar(p, two.d, "administer", { witnessId: "nurse1", witnessPin: "0000" });
+  const locked = await mar(p, two.d, "administer", { witnessId: "nurse1", witnessPin: "2468" });
+  assert.deepEqual(locked.reasons.map((x) => x.code), ["WITNESS_PIN_LOCKED"]);
+  assert.match(readFileSync(new URL("../ward.js", import.meta.url), "utf8"), /body\.witnessPin = /, "the ward screen sends the witness's PIN");
+});
+
+test("CLIN-11: a dose is charted only at a time the order schedules", async () => {
+  seed();
+  const p = await admittedPatient();
+  const bd = await prescribe(p, "Pantoprazole", 40, "mg", "IV", "BD");
+  const slot = (await schedule(p, 0, 30)).due.find((x) => x.orderId === bd.orderId);
+  const off = await mar(p, { ...slot, dueAt: new Date(Date.parse(slot.dueAt) + 60000).toISOString() }, "verify");
+  assert.equal(off.__status, 409, JSON.stringify(off));
+  assert.equal(off.error, "not_a_scheduled_dose");
+  assert.equal((await mar(p, slot, "verify")).__status, 200, "the round's own slot is accepted");
+  const prn = await prescribe(p, "Ondansetron", 4, "mg", "IV", "PRN");
+  const ahead = await mar(p, { orderId: prn.orderId, dueAt: new Date(Date.now() + 3 * 3600e3).toISOString() }, "verify");
+  assert.equal(ahead.error, "not_a_scheduled_dose", "an as-needed dose is not charted hours ahead");
 });
 
 test("CLIN-19: a bedside check that could not run comes back as a warning, and the ward screen shows it", async () => {

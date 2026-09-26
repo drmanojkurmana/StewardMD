@@ -300,6 +300,7 @@ import { feedbackDashboard, updateRecovery } from "../../_wardsynq/patient-feedb
 import { extract as analyticsExtract } from "../../_wardsynq/analytics-extract.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
 import { recordAllergiesFromAssessment, recordWardAllergy } from "../../_wardsynq/migrate-allergy.js";
+import { verifyWitnessPin } from "../../_wardsynq/witness-auth.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
 // status change, checkout) passes the ticket in whatever state it is NOW; recordEncounterSync reads
@@ -5703,8 +5704,15 @@ export async function onRequest(context) {
         const r = await administerStep(request, env, {
           ...deps, action: body.action, orderId: body.orderId, dueAt: body.dueAt, expectedOrderVersion: body.expectedOrderVersion,
           patient: body.patient, scan: body.scan, reason: body.reason, witnessId: body.witnessId,
+          // CLIN-18: the witness's own staff PIN, checked like a PIN sign-in (same hash, lockout and audit), never stored.
+          witnessPinCheck: (id, pin) => verifyWitnessPin({ getMemberAuth: (x) => ORG.getMemberAuth(env, wOrgId, x),
+            recordAttempt: (a, nx) => ORG.recordMemberPinAttempt(env, wOrgId, a.identity, nx),
+            audit: (who, action, detail) => ORG.auditLogin(env, wOrgId, who, action, [detail, deviceLabel(request.headers.get("user-agent"))].filter(Boolean).join(" · ")) }, id, pin),
+          witnessPin: body.witnessPin,
           rulePack: getRulePack(), highAlertDrugs: (wsqCfg && wsqCfg.highAlertDrugs) || [],
           idempotencyKey: body.idempotencyKey || null, isControlled, witnessCheck,
+          // CLIN-11: the ward's own round times and clock, exactly as /ward/schedule is given them.
+          schedule: { marTimes: (wsqCfg && wsqCfg.marTimes) || null, offsetMinutes: Number.isFinite(wsqCfg && wsqCfg.utcOffsetMinutes) ? wsqCfg.utcOffsetMinutes : undefined, timeZone: (wsqCfg && wsqCfg.timeZone) || undefined },
         });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }

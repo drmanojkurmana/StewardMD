@@ -72,7 +72,11 @@ try {
   ok(vitalsBody && vitalsBody.vitals && vitalsBody.vitals.sbp === "118", "vitals recorded exactly what was typed: " + JSON.stringify(vitalsBody));
 
   // ---- 4. Medication order -> the SAME order appears on the eMAR round. --------------------------
-  await ev(`document.getElementById('wMoDrug').value='Paracetamol 500mg'; document.getElementById('wMoValue').value='500'; document.getElementById('wMoUnit').value='mg'; document.getElementById('wMoRoute').value='oral'; document.getElementById('wMoFreq').value='BD'; document.querySelector('[data-w-act="medorder"]').click(); return true;`);
+  await ev(`document.getElementById('wMoDrug').value='Paracetamol 500mg'; document.getElementById('wMoValue').value='500'; document.getElementById('wMoUnit').value='mg'; document.getElementById('wMoRoute').value='oral'; document.getElementById('wMoFreq').value='BD'; document.getElementById('wMoDays').value='5'; document.querySelector('[data-w-act="medorder"]').click(); return true;`);
+  // CLIN-04: the course length goes with the order, so it stops itself on the round.
+  for (let i = 0; i < 20; i++) { await sleep(100); if (await calls("/ward/medication-order")) break; }
+  const mo = await lastBody("/ward/medication-order");
+  ok(mo && mo.order && mo.order.durationDays === 5, "the Prescribe form sends the course length: " + JSON.stringify(mo && mo.order));
   for (let i = 0; i < 30; i++) { await sleep(100); if (await ev(`return document.body.textContent.indexOf('Paracetamol 500mg') >= 0 && !!document.querySelector('[data-w-act^="mar:verify"]');`)) break; }
   ok(await ev(`return !!document.querySelector('[data-w-act^="mar:verify"]');`), "the newly prescribed order appeared on the medication round, ready to verify");
 
@@ -107,6 +111,7 @@ try {
   const alg = await lastBody("/ward/allergy");
   ok(alg && alg.substance === "Penicillin" && alg.reaction === "anaphylaxis" && alg.severity === "severe" && !!alg.patientId, "recording an allergy sends what was typed for this patient: " + JSON.stringify(alg));
 
+  ok(await ev(`var p=document.getElementById('wWitnessPin'); return !!p && p.type === 'password';`), "the round asks the witness for their own PIN, hidden as it is typed (CLIN-18)");
   ok(await ev(`return !!document.querySelector('[data-w-act^="medstop:"]');`), "an active medicine has a Stop button");
   await ev(`document.querySelector('[data-w-act^="medstop:"]').click(); return true;`);
   for (let i = 0; i < 20; i++) { await sleep(100); if (await ev(`return !!document.getElementById('wAsk_reason');`)) break; }
