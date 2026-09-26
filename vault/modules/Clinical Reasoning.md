@@ -29,3 +29,11 @@ Clinical scoring, thresholds, treatment content, patient import and AI transport
 1. Explicit present/absent/unknown states, with validated engine semantics and backward-compatible saved cases.
 2. Review extracted findings before accepting them, including original narrative evidence and edits.
 3. Structured onset, duration and trajectory, incorporated only after clinical validation; do not infer a calibrated probability from current ranking scores.
+
+## Accuracy audit (2026-09-26)
+
+Full report: `kb/validation/AUDIT-2026-09-26.md`. Harness: `test/run-dx-audit.mjs` (+ `test/dx-heldout.json`).
+Curated keys: 69% top-1 / 92% top-3 (491 gold cases). Same cases as chart text: 22% / 41%. Held-out
+doctor text: 40% / 55%. The text extraction layer is the bottleneck, not the ranker. The infection
+gate ignores `antibioticRelevant`, so viral cases (dengue, URTI, viral meningitis) show
+"empiric antimicrobial therapy is appropriate". `baseline.json` is stale (18 false "regressions").
