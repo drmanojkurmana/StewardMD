@@ -562,6 +562,11 @@ async function recordWardVitals(request, env, ctx) {
       if (f.status === 403) return { ...base, ...f, written, observations: results };
     }
   }
+  /* DATA-04: nothing written and a reading failed is a failure, not ok:true. The offline outbox dropped such an
+   * answer as sent and the vitals were lost. A resend is safe: each reading has its own id and key. */
+  if (!written && results.some((x) => x.error)) {
+    return { ...base, ok: false, status: 502, error: "record_write_failed", detail: "no reading was saved", written, encounterId, patientId, observations: results, actor: resolved.actor.id };
+  }
   return { ...base, ok: true, written, encounterId, patientId, observations: results, actor: resolved.actor.id, role: resolved.role };
 }
 
