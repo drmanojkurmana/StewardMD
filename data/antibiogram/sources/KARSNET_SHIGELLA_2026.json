@@ -1,0 +1,147 @@
+{
+ "id": "KARSNET_SHIGELLA_2026",
+ "kind": "network",
+ "inst": "KARSNET_SHIGELLA",
+ "institution": "Kerala Antimicrobial Resistance Surveillance Network (KARS-NET), Department of Health Services, Kerala",
+ "short": "KARS-NET Shigella",
+ "city": "Thiruvananthapuram",
+ "state": "Kerala",
+ "region": "south",
+ "sector": "network",
+ "year": 2026,
+ "end": "2026-05",
+ "isolates": 44,
+ "period": "January to May 2026 (printed \"2026 till MAY\"), with yearly comparison for 2023 to 2025",
+ "published": "2026",
+ "url": "https://health.kerala.gov.in/assets/backend/uploads/articles/1782713587_0.pdf",
+ "page": "https://health.kerala.gov.in/thematic-docs",
+ "retrieved": "2026-09-26",
+ "citation": "Kerala Health Team. Antimicrobial resistance profile of Shigella isolates based on KARSNET data. Thiruvananthapuram: Department of Health Services, Government of Kerala; 2026.",
+ "reporting": "Percent resistant of Shigella isolates to six antibiotics by year (2023, 2024, 2025 and 2026 up to May) from KARS-Net data, with the number of isolates per year; a line chart with a data table (image). Antibiotic-year combinations with fewer than 30 isolates tested are named in a footnote.",
+ "method": "KARS-Net laboratory surveillance data; the note does not describe testing methods or breakpoints.",
+ "measure": "R",
+ "verification": {
+  "status": "double-checked",
+  "note": "The chart and its data table are an embedded image with no text layer: values read from page images (the image extracted at its native 1014 x 824 px and the table zoomed), every 2026 value checked against the chart's line labels, and the 2023 to 2025 columns checked against the KARS-Net annual reports for those years (same values). The small-numbers footnote is in the text layer."
+ },
+ "notes": "Outbreak report, not a cumulative antibiogram: a 3-page Kerala Health note on the 2026 Shigella outbreak in Kerala (226 laboratory-confirmed cases and 7 deaths reported by 22 June 2026, more than the 133 cases of all of 2025), giving KARS-Net resistance figures for the 44 Shigella isolates of January to May 2026 and for the three previous years. The 2026 figures are part-year, outbreak-period data from few isolates (ampicillin 29 tested, chloramphenicol fewer than 30); they come from the outbreak period and may differ from sporadic shigellosis. All figures are percent resistant. The note's treatment advice (ciprofloxacin no longer suitable empirically; carbapenem first for shock or multi-organ dysfunction, ceftriaxone for other inpatients, cefixime or azithromycin, or co-trimoxazole or doxycycline, for outpatients) is not recorded as data.",
+ "issues": [
+  "Second reader 2026-09-26: all 5 cells, n (44), the ampicillin number tested (29) and every trend point re-read blind from the chart's data table (embedded image extracted at 1014 x 824 px) and checked against the line labels: 0 errors, nothing corrected. The 2023 column agrees with KARS-Net 2023 Table 9 (ampicillin 42%, ciprofloxacin 91%, azithromycin 25%, co-trimoxazole 25%).",
+  "Second reader: added the printed isolate total (2026 till May, N=44) as a count, under the row's specimen (stool).",
+  "Lead 2026-09-26: an outbreak series, not a cumulative antibiogram: given a focus (shown, never pooled, never a profile) and its own institution key."
+ ],
+ "rows": [
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Shigella species",
+   "pheno": null,
+   "n": 44,
+   "page": 1,
+   "table": "Chart \"Resistance profile of Shigella based on KARSNET data\" (data table, column \"2026 till MAY (N=44) R%\")",
+   "r": {
+    "ampicillin": 24,
+    "ceftriaxone": 35,
+    "ciprofloxacin": 96,
+    "azithromycin": 26,
+    "cotrimoxazole": 16
+   },
+   "nt": {
+    "ampicillin": 29
+   },
+   "notes": {
+    "ampicillin": "the note gives n=29 for ampicillin in 2026 and says fewer than 30 isolates were tested"
+   },
+   "trend": {
+    "ampicillin": [
+     [
+      2023,
+      42
+     ],
+     [
+      2025,
+      57
+     ]
+    ],
+    "ceftriaxone": [
+     [
+      2025,
+      25
+     ],
+     [
+      2026,
+      35
+     ]
+    ],
+    "ciprofloxacin": [
+     [
+      2023,
+      91
+     ],
+     [
+      2024,
+      84
+     ],
+     [
+      2025,
+      93
+     ],
+     [
+      2026,
+      96
+     ]
+    ],
+    "azithromycin": [
+     [
+      2023,
+      25
+     ],
+     [
+      2025,
+      14
+     ],
+     [
+      2026,
+      26
+     ]
+    ],
+    "cotrimoxazole": [
+     [
+      2023,
+      25
+     ],
+     [
+      2025,
+      47
+     ],
+     [
+      2026,
+      16
+     ]
+    ]
+   },
+   "note": "Shigella isolates in KARS-Net data from January to May 2026 (printed \"2026 till MAY (N=44)\"), during the 2026 outbreak; the note does not split by specimen or location (KARS-Net collects Shigella from stool). The yearly series (2023 N=46, 2024 N=32, 2025 N=73) is the same KARS-Net data as the annual reports; trend points are kept only where the note says at least 30 isolates were tested (it names ceftriaxone and chloramphenicol in 2023, ampicillin, ceftriaxone, azithromycin, co-trimoxazole and chloramphenicol in 2024, and ampicillin and chloramphenicol in 2026 as below 30).",
+   "specimen_as_printed": "not stated (KARS-Net collects Shigella from stool)"
+  }
+ ],
+ "counts": [
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Shigella species",
+   "n": 44,
+   "page": 1
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Chloramphenicol 2026 (printed 18%)",
+   "why": "the note says fewer than 30 isolates were tested and does not print the number; left out"
+  },
+  {
+   "what": "Trend points for antibiotic-year combinations named in the footnote as tested in fewer than 30 isolates",
+   "why": "not statistically meaningful per the note; the 2023 to 2025 figures are in the KARS-Net annual report files"
+  }
+ ],
+ "focus": "Shigella isolates from an outbreak investigation (January to May 2026)"
+}

@@ -7157,7 +7157,7 @@
       var pa=a<=29?0:a<=39?1:a<=49?2:a<=59?3:4;
       var w=v.sex==="f"?(v.waist<=80?0:v.waist<=90?1:2):(v.waist<=90?0:v.waist<=100?1:2);
       var s=pa+(Number(v.tob)||0)+(Number(v.alc)||0)+w+(Number(v.pa)||0)+(Number(v.fh)||0);
-      var b=s>4?"<b>Score above 4</b>: the person may be at higher risk of NCDs and is prioritised for the weekly NCD screening day.":"Score 4 or less: not in the programme's higher-risk group on Part A.";
+      var b=s>4?"<b>Score above 4</b>: the person may be at higher risk of NCDs and is prioritised for the weekly NCD screening day.":"Score 4 or less: not in the programme's higher-risk group on Part A (national MoHFW wording; some state documents treat a score of 4 as high risk, so follow your state's version).";
       return { v:s, u:"/10", i:b+" Points: age "+pa+", waist "+w+" (women: 80 cm or less 0, 81 to 90 cm 1, above 90 cm 2; men: 90 cm or less 0, 91 to 100 cm 1, above 100 cm 2). The form states that every individual is screened irrespective of score. Ref: MoHFW, National Health Mission, revised Community Based Assessment Checklist (CBAC), 9 Oct 2020 (NHSRC)." };
     } },
 

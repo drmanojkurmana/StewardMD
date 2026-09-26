@@ -14,7 +14,7 @@
    "title": "Classify (FOGSI-Gestosis-ICOG)",
    "items": [
     "Gestational hypertension: BP 140/90 mmHg or more after 20 weeks, normal by day 42 postpartum, without features of pre-eclampsia. Chronic hypertension: known, or detected before 20 weeks.",
-    "Pre-eclampsia: new hypertension of 140/90 or more after 20 weeks with significant proteinuria, or atypical pre-eclampsia with neurological, haematological, hepatic or renal involvement or fetal growth restriction without proteinuria. Superimposed pre-eclampsia: pre-eclampsia on chronic hypertension. Reconfirm BP after 4 to 6 hours before classifying.",
+    "Pre-eclampsia: new hypertension of 140/90 or more after 20 weeks with significant proteinuria, or atypical pre-eclampsia with neurological, haematological, hepatic or renal involvement or fetal growth restriction without proteinuria. Superimposed pre-eclampsia: pre-eclampsia on chronic hypertension. Reconfirm BP after 4 to 6 hours before classifying, but never delay treatment of a severe-range reading (160 systolic and/or 110 diastolic): recheck within 15 minutes and treat within 1 hour.",
     "Severe pre-eclampsia: BP above 160/110, or BP 140/90 or more with premonitory symptoms (headache, blurred vision, vomiting, right upper quadrant pain, sudden weight gain, severe oedema) and/or abnormal HDP laboratory tests (low platelets, raised liver enzymes or creatinine, abnormal coagulation).",
     "Early-onset pre-eclampsia begins before 34 weeks (more maternal complications, growth restriction and iatrogenic prematurity); late-onset after 34 weeks.",
     "Significant proteinuria: more than 300 mg in 24 hours, dipstick 2+ or more, or urine protein to creatinine ratio 30 mg/mmol or more. Once established, repeated quantification is not needed.",
@@ -47,9 +47,9 @@
    "items": [
     "Use 50% w/v ampoules (1 g per 2 mL ampoule). Continue for 24 hours after delivery or the last convulsion, whichever is later. Routine serum magnesium is not needed.",
     "Pritchard (preferred) loading, 14 g total: 4 g IV as 20 mL of 20% solution (4 ampoules of 50% plus 12 mL distilled water) at 1 g per minute, plus 5 g of 50% deep IM into each buttock (with 0.5 mL of 2% lignocaine).",
-    "Pritchard maintenance: 5 g of 50% deep IM into alternate buttocks every 4 hours, only if respiratory rate is above 16/min, patellar reflexes are present and urine output was more than 100 mL in the last 4 hours.",
+    "Pritchard maintenance: 5 g of 50% deep IM into alternate buttocks every 4 hours, only if patellar reflexes are present, respiratory rate is 16/min or more and urine output is 30 mL/h or more (more than 100 mL in the last 4 hours). On the Zuspan infusion, check the same hourly.",
     "Zuspan (IV) regimen: 4 g IV loading as above, then 1 g/h infusion (5 g in 500 mL Ringer lactate at 100 mL/h, preferably by infusion pump).",
-    "Toxicity: stop magnesium, give oxygen, intubate if needed, and give 10 mL of 10% calcium gluconate slow IV over 10 minutes with ECG monitoring."
+    "Keep 10% calcium gluconate at the bedside whenever magnesium is given. Toxicity: stop magnesium, give oxygen, intubate if needed, and give 10 mL of 10% calcium gluconate slow IV over 10 minutes with ECG monitoring."
    ]
   },
   {
@@ -57,11 +57,11 @@
    "title": "Antihypertensives",
    "items": [
     "Treat BP of 140 systolic and/or 90 diastolic or more; target 140/90 or below and avoid hypotension. In severe hypertension lower BP promptly but gradually.",
-    "Severe: nifedipine 10 to 30 mg orally (never sublingual), repeat in 30 to 45 minutes if needed, maximum total 120 mg, then switch to slow-release. Avoid in heart failure and AV or SA nodal disease.",
+    "Severe: nifedipine 10 to 30 mg orally, swallowed whole (never sublingual, bitten or crushed), repeat in 30 to 45 minutes if needed, maximum total 120 mg, then switch to slow-release. Avoid in heart failure and AV or SA nodal disease.",
     "Severe: labetalol 10 to 20 mg slow IV, then 20 to 80 mg every 20 to 30 minutes to a maximum total of 300 mg, or an infusion of 1 to 2 mg/min after the first dose; 200 mg orally if conscious.",
     "Alternatives: hydralazine 5 mg IV or IM, then 5 to 10 mg every 20 to 40 minutes (infusion 0.5 to 10 mg/h); change drug if no response after 20 mg IV or 30 mg IM. Nicardipine infusion from 1.5 mg/h up to 6 mg/h.",
     "Maintenance (non-severe): labetalol 200 to 1200 mg/day in 2 divided doses (first line, preferred if pulse above 100/min); slow-release nifedipine 20 to 120 mg/day in 2 to 3 divided doses (preferred if pulse below 100/min); methyldopa 500 to 2000 mg/day in 2 to 3 divided doses (stop after delivery because of postpartum depression).",
-    "Labetalol is contraindicated in asthma, heart failure and bradycardia (FOGSI also lists diabetes). ACE inhibitors, ARBs and diuretics are contraindicated in pregnancy."
+    "Labetalol is contraindicated in asthma, heart failure and bradycardia. FOGSI also lists diabetes as a contraindication; NICE and the 2025 AHA/ACC guideline do not, so treat diabetes as a caution (beta-blockade can mask hypoglycaemia) rather than a bar to labetalol. ACE inhibitors, ARBs and diuretics are contraindicated in pregnancy."
    ]
   },
   {
@@ -100,7 +100,7 @@
    "kind": "pitfalls",
    "title": "Pitfalls",
    "items": [
-    "Sublingual nifedipine or rapid BP falls that compromise placental flow.",
+    "Sublingual, bitten or crushed nifedipine, or rapid BP falls that compromise placental flow.",
     "Missing atypical pre-eclampsia because proteinuria is absent.",
     "Giving liberal IV fluids, causing pulmonary oedema.",
     "Omitting the magnesium loading dose before referral, or giving maintenance doses without checking reflexes, respiration and urine output.",
@@ -109,11 +109,11 @@
   }
  ],
  "drugs": [
-  { "name": "Magnesium sulphate (Pritchard)", "dose": "Loading 4 g IV (20% solution, 1 g/min) plus 5 g deep IM (50%) into each buttock; maintenance 5 g IM into alternate buttocks 4-hourly", "notes": "Maintenance only if RR above 16/min, knee jerks present, urine above 100 mL in 4 hours. Continue 24 hours after delivery or last fit." },
+  { "name": "Magnesium sulphate (Pritchard)", "dose": "Loading 4 g IV (20% solution, 1 g/min) plus 5 g deep IM (50%) into each buttock; maintenance 5 g IM into alternate buttocks 4-hourly", "notes": "Maintenance only if knee jerks present, RR 16/min or more, urine 30 mL/h or more (above 100 mL in 4 hours). Continue 24 hours after delivery or last fit." },
   { "name": "Magnesium sulphate (Zuspan)", "dose": "4 g IV loading, then 1 g/h IV infusion", "notes": "5 g in 500 mL RL at 100 mL/h by pump." },
-  { "name": "Calcium gluconate 10%", "dose": "10 mL slow IV over 10 minutes", "notes": "Magnesium toxicity; ECG monitoring." },
-  { "name": "Nifedipine", "dose": "Severe: 10 to 30 mg orally, repeat in 30 to 45 minutes, maximum 120 mg. Maintenance: slow-release 20 to 120 mg/day in 2 to 3 doses", "notes": "Never sublingual." },
-  { "name": "Labetalol", "dose": "Severe: 10 to 20 mg IV, then 20 to 80 mg every 20 to 30 minutes, maximum 300 mg (or 1 to 2 mg/min infusion). Maintenance: 200 to 1200 mg/day orally in 2 doses", "notes": "Avoid in asthma, heart failure, bradycardia." },
+  { "name": "Calcium gluconate 10%", "dose": "10 mL slow IV over 10 minutes", "notes": "Magnesium toxicity; keep at the bedside during magnesium therapy; ECG monitoring." },
+  { "name": "Nifedipine", "dose": "Severe: 10 to 30 mg orally, repeat in 30 to 45 minutes, maximum 120 mg. Maintenance: slow-release 20 to 120 mg/day in 2 to 3 doses", "notes": "Swallow whole; never sublingual, bitten or crushed." },
+  { "name": "Labetalol", "dose": "Severe: 10 to 20 mg IV, then 20 to 80 mg every 20 to 30 minutes, maximum 300 mg (or 1 to 2 mg/min infusion). Maintenance: 200 to 1200 mg/day orally in 2 doses", "notes": "Avoid in asthma, heart failure, bradycardia. Diabetes: caution (FOGSI lists it as a contraindication; NICE and AHA/ACC do not)." },
   { "name": "Hydralazine", "dose": "5 mg IV or IM, then 5 to 10 mg every 20 to 40 minutes; infusion 0.5 to 10 mg/h", "notes": "Switch drug if no response after 20 mg IV or 30 mg IM." },
   { "name": "Methyldopa", "dose": "500 to 2000 mg/day orally in 2 to 3 divided doses", "notes": "Stop postpartum." },
   { "name": "Aspirin (prophylaxis)", "dose": "75 to 150 mg orally daily", "notes": "HDP-Gestosis score 3 or more; start early, stop 2 days before delivery." },

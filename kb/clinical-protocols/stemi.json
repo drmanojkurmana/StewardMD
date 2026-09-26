@@ -47,8 +47,9 @@
    "items": [
     "Absolute contraindications: prior intracranial haemorrhage or stroke of unknown origin, ischaemic stroke in the last 6 months, CNS neoplasm or AV malformation, major trauma, surgery or head injury in the last month, GI bleeding in the last month, known bleeding disorder, aortic dissection, non-compressible puncture in the last 24 hours (liver biopsy, lumbar puncture).",
     "Relative contraindications: TIA in the last 6 months, oral anticoagulant therapy, pregnancy or within 1 week postpartum, refractory hypertension (SBP above 180 or DBP above 110 mmHg), advanced liver disease, infective endocarditis, active peptic ulcer, prolonged or traumatic CPR.",
-    "Prefer a fibrin-specific agent: tenecteplase (single weight-based bolus, half dose at age 75 or older), reteplase or alteplase. Streptokinase is acceptable where it is the only agent available; never give it a second time.",
-    "Co-therapy: aspirin, clopidogrel 300 mg (75 mg if older than 75 years) then 75 mg daily, and an anticoagulant (enoxaparin preferred over UFH) until revascularisation or for the hospital stay up to 8 days.",
+    "Prefer a fibrin-specific agent: tenecteplase (single weight-banded bolus: under 60 kg 30 mg, 60 to under 70 kg 35 mg, 70 to under 80 kg 40 mg, 80 to under 90 kg 45 mg, 90 kg or more 50 mg; half dose at age 75 or older), reteplase or alteplase. Streptokinase is acceptable where it is the only agent available; never give it a second time.",
+    "The STEMI tenecteplase dose is different from the stroke dose (0.25 mg/kg, max 25 mg). Never interchange them; check the vial strength and the indication before drawing up.",
+    "Co-therapy: aspirin, clopidogrel 300 mg loading dose if under 75 years; at 75 years or older, 75 mg with no loading dose (ACC/AHA 2025; ESC 2023 says older than 75); then 75 mg daily, and an anticoagulant (enoxaparin preferred over UFH) until revascularisation or for the hospital stay up to 8 days. Do not use ticagrelor or prasugrel as the P2Y12 inhibitor with fibrinolysis.",
     "Transfer every lysed patient to a PCI centre. Assess at 60 to 90 minutes: less than 50% ST-segment resolution, persisting pain, or haemodynamic or electrical instability means failed fibrinolysis: do immediate rescue PCI.",
     "After successful fibrinolysis, do angiography and PCI of the infarct artery 2 to 24 hours after the bolus; emergency angiography for recurrent ischaemia, reocclusion, heart failure or shock."
    ]
@@ -82,6 +83,7 @@
     "Delaying reperfusion for troponin, echocardiography or transfer paperwork.",
     "Lysing aortic dissection, pericarditis or benign early repolarisation; check for dissection features before any fibrinolytic.",
     "Full-dose tenecteplase at age 75 or older: halve the dose to reduce intracranial haemorrhage.",
+    "Mixing up tenecteplase doses: STEMI uses the weight bands (30 to 50 mg); the stroke dose (0.25 mg/kg, max 25 mg) is different.",
     "Stopping after successful fibrinolysis: the pharmacoinvasive strategy requires angiography within 24 hours.",
     "Missing posterior and right ventricular infarction, or giving nitrates to a hypotensive RV infarction."
    ]
@@ -90,12 +92,12 @@
  "drugs": [
   { "name": "Aspirin", "dose": "150 to 300 mg orally chewed (or 75 to 250 mg IV), then 75 to 100 mg once daily", "notes": "Give at first medical contact." },
   { "name": "Ticagrelor", "dose": "180 mg orally loading, then 90 mg twice daily", "notes": "With primary PCI. Avoid after intracranial haemorrhage and with strong CYP3A4 inhibitors. Not recommended with fibrinolysis." },
-  { "name": "Prasugrel", "dose": "60 mg orally loading, then 10 mg once daily; 5 mg daily if 75 years or older or weight under 60 kg", "notes": "Contraindicated after previous stroke or TIA. Use with primary PCI." },
-  { "name": "Clopidogrel", "dose": "Primary PCI: 600 mg orally, then 75 mg daily. With fibrinolysis: 300 mg (75 mg if older than 75 years), then 75 mg daily", "notes": "The P2Y12 inhibitor to use with fibrinolysis, and when prasugrel or ticagrelor is unavailable or contraindicated." },
-  { "name": "Tenecteplase", "dose": "Single IV bolus by weight: under 60 kg 30 mg; 60 to under 70 kg 35 mg; 70 to under 80 kg 40 mg; 80 to under 90 kg 45 mg; 90 kg or more 50 mg", "notes": "Half dose at age 75 or older. Give with aspirin, clopidogrel and enoxaparin or UFH." },
+  { "name": "Prasugrel", "dose": "60 mg orally loading, then 10 mg once daily; 5 mg daily if 75 years or older or weight under 60 kg", "notes": "Contraindicated after previous stroke or TIA. Use with primary PCI; not with fibrinolysis." },
+  { "name": "Clopidogrel", "dose": "Primary PCI: 600 mg orally, then 75 mg daily. With fibrinolysis: 300 mg loading dose if under 75 years; 75 mg with no loading dose at 75 years or older (ACC/AHA 2025), then 75 mg daily", "notes": "The P2Y12 inhibitor to use with fibrinolysis, and when prasugrel or ticagrelor is unavailable or contraindicated." },
+  { "name": "Tenecteplase", "dose": "Single IV bolus by weight: under 60 kg 30 mg; 60 to under 70 kg 35 mg; 70 to under 80 kg 40 mg; 80 to under 90 kg 45 mg; 90 kg or more 50 mg", "notes": "STEMI dose. Half dose at age 75 or older (ESC 2023). Give with aspirin, clopidogrel and enoxaparin or UFH. The stroke dose is different (0.25 mg/kg, max 25 mg): never interchange." },
   { "name": "Streptokinase", "dose": "1.5 million units IV over 30 to 60 minutes", "notes": "Not fibrin-specific. Hypotension during infusion: slow or pause and give fluid. Never repeat after previous exposure. With streptokinase, fondaparinux 2.5 mg IV bolus then 2.5 mg SC daily (up to 8 days) is an anticoagulant option." },
   { "name": "Alteplase or reteplase", "dose": "Alteplase: 15 mg IV bolus, then 0.75 mg/kg over 30 minutes (max 50 mg), then 0.5 mg/kg over 60 minutes (max 35 mg). Reteplase: 10 units IV bolus, repeated after 30 minutes", "notes": "Fibrin-specific alternatives to tenecteplase." },
-  { "name": "Enoxaparin", "dose": "With fibrinolysis, under 75 years: 30 mg IV bolus, then 15 minutes later 1 mg/kg SC every 12 hours (first 2 doses max 100 mg each). 75 years or older: no bolus, 0.75 mg/kg SC every 12 hours (first 2 doses max 75 mg each). Primary PCI: 0.5 mg/kg IV bolus", "notes": "eGFR below 30: give the SC dose once every 24 hours. Continue until revascularisation or up to 8 days." },
+  { "name": "Enoxaparin", "dose": "With fibrinolysis, under 75 years: 30 mg IV bolus, then 15 minutes later 1 mg/kg SC every 12 hours (first 2 doses max 100 mg each). 75 years or older: no bolus, 0.75 mg/kg SC every 12 hours (first 2 doses max 75 mg each). Primary PCI: 0.5 mg/kg IV bolus", "notes": "CrCl below 30 mL/min (any age): 1 mg/kg SC once every 24 hours. Continue until revascularisation or up to 8 days." },
   { "name": "Unfractionated heparin (UFH)", "dose": "Primary PCI: 70 to 100 IU/kg IV bolus (50 to 70 IU/kg with a GP IIb/IIIa inhibitor), ACT-guided. With fibrinolysis: 60 IU/kg IV bolus (max 4000 IU), then 12 IU/kg/h (max 1000 IU/h) for 24 to 48 hours", "notes": "With fibrinolysis, target aPTT 50 to 70 seconds (1.5 to 2 times control), checked at 3, 6, 12 and 24 hours." }
  ],
  "sources": [

@@ -1,0 +1,2079 @@
+{
+ "id": "BVDU_PUNE_2024",
+ "kind": "institution",
+ "inst": "BVDU_PUNE",
+ "institution": "Bharati Vidyapeeth (Deemed to be University) Medical College and Hospital, Pune",
+ "short": "Bharati Hospital Pune",
+ "city": "Pune",
+ "state": "Maharashtra",
+ "region": "west",
+ "sector": "private",
+ "year": 2024,
+ "end": "2024-12",
+ "period": "Year 2024 (printed as \"antibiogram for the year 2024\"; months not stated, read as the calendar year)",
+ "published": "2025-04",
+ "url": "https://mcpune.bharatividyapeeth.edu/media/pdfs/Antimicrobial_Policy_2025-26_Ver11_020725.pdf",
+ "retrieved": "2026-09-26",
+ "citation": "Bharati Vidyapeeth (Deemed to be University) Medical College Hospital and Research Centre, Pune. Antimicrobial Policy and Antimicrobial Stewardship Program 2025-2026, Version 11.0 (released 01.04.2025), section 5: organisms commonly isolated and their antibiogram for the year 2024, pp. 11 to 36. Pune: Bharati Hospital; 2025.",
+ "reporting": "Percent susceptible (whole numbers, one value printed as 7.7) by organism, with the number of patients per organism row. Overall hospital table (all locations and specimens pooled); OPD, ICU and ward-department tables by specimen (blood, pus, tissue, urine, respiratory); Candida tables with antifungals. Top-10 isolate bar charts with data labels by setting and specimen. Colour bands mark usefulness; grey cells are not tested.",
+ "method": "Not stated in the report (no AST method, breakpoint standard or duplicate-isolate rule given).",
+ "measure": "S",
+ "verification": {
+  "status": "double-checked",
+  "note": "Tables on pp12, 13, 18, 19 and 20 were parsed from the PDF text layer (pdfplumber; rotated drug headers decoded) and then compared value by value, all cells and all n, against the pages rendered at scale 3.5 and cropped into two column groups. The OPD tables on pp15 and 16 have no text layer (embedded pictures): read from page images in two passes, pass 1 from the embedded images upscaled 1.6 to 2x, pass 2 from the pages rendered at scale 4 and split at different columns; both passes agreed on every cell. Chart counts (pp11, 14, 17) were read from the data labels (the p17 labels are also in the text layer) with the organism names read on the rendered charts. Specimen groups were assigned from the rendered pages because the merged specimen cells sit mid-group in the text layer."
+ },
+ "notes": "Antibiogram section (pages 11 to 36) of the Bharati Hospital Pune antimicrobial policy version 11.0 (2025-2026). Rows kept: the overall hospital table (p12, set all, specimen all), the overall Candida table by specimen (p13, set all), the OPD Gram-negative and Gram-positive tables (pp15 to 16), and the ICU (\"Critical care\") Gram-negative, Gram-positive and Candida tables (pp18 to 20). Ward departments (Medicine, Surgery, Obstetrics and Gynaecology, Orthopaedics, Paediatrics) and the neonatal and paediatric ICUs have their own tables only, with no combined ward table, so they are listed in excluded; the report does not say whether the ICU tables include the NICU or PICU. Because no ward rows exist, a combination of the OPD and ICU rows is not a hospital-wide figure. The report prints \"Number of patients\" per organism row, used as n; it warns that organisms with fewer than 30 isolates are not statistically significant. Counts are the data labels of the top-10 isolate charts (overall p11, OPD pus and urine p14, ICU blood, urine, pus and respiratory p17); they cover only the charted organisms. Two chart labels are cut off: ICU urine \"Pseudomonas...\" (6) is recorded as Pseudomonas spp. and ICU respiratory \"Stenotrophomonas...\" (3) as S. maltophilia. Specimen totals printed beside the charts: OPD pus 451, urine 601; ICU blood 290, pus 142, respiratory 89, urine 140. The pus charts give more isolates than the pus antibiogram rows (OPD: E. coli 70 vs 39, K. pneumoniae 49 vs 26, P. aeruginosa 75 vs 51, S. aureus 134 vs 125, S. epidermidis 19 vs 12; ICU: E. coli 43 vs 17, K. pneumoniae 24 vs 12); urine, blood and respiratory counts match the tables. The report does not explain the difference. Several printed cells are implausible for the organism (for example K. pneumoniae daptomycin 0 and erythromycin 67 overall, P. aeruginosa cefuroxime 100 and co-trimoxazole 50 in OPD pus, P. aeruginosa amoxicillin-clavulanate 100 in ICU respiratory, E. coli ceftazidime 100 with ceftriaxone 12 in ICU urine); they are recorded as printed.",
+ "issues": [
+  "Second reader 2026-09-26: every cell of the seven kept tables was read from the page images before comparing with the file: all 702 cells and all 63 row n. Text-layer tables (pp12, 13, 18, 19, 20) were rendered at scale 4 to 5 and cropped by column group; the OPD tables (pp15, 16), embedded pictures with no text layer, were read in full (not only the 40% asked) from the embedded images upscaled 1.4 to 2.8x. The seeded sample of 176 cells (sample_cells.py) is part of this. 0 transcription errors, nothing corrected. Specimen group and setting confirmed for every row (overall p12 and Candida p13 as set all, OPD pp15 to 16, ICU pp18 to 20); Tissue filed as deep, Fluid and Pleural fluid as sterile, Issatchenkia orientalis as C. krusei.",
+  "Second reader: all 67 chart counts (p11, the p14 embedded charts, p17) re-read: 0 errors. The 7 count-table mismatches are printed that way (source inconsistency; the row notes give the right figures): OPD pus E. coli 70 in the chart vs 39 in the table, K. pneumoniae 49 vs 26, P. aeruginosa 75 vs 51, S. aureus 134 vs 125, S. epidermidis 19 vs 12; ICU pus E. coli 43 vs 17, K. pneumoniae 24 vs 12.",
+  "Second reader: the 37 cells the validator does not keep (5 caution, 26 intrinsic, 6 hidden) are all printed as recorded, including E. cloacae overall cefotaxime 0 with ceftriaxone 63 and tetracycline 100 with minocycline 0, S. pyogenes overall ampicillin 90 (penicillin 100), K. pneumoniae overall daptomycin 0 and erythromycin 67, P. aeruginosa OPD pus cefuroxime 100, co-trimoxazole 50 and minocycline 100, and P. aeruginosa ICU respiratory amoxicillin-clavulanate 100 and co-trimoxazole 0.",
+  "Second reader: CoNS species rows checked cell by cell and on the right rows: S. epidermidis overall (n=62) and OPD pus (n=12), S. haemolyticus overall (n=34). The 2024 tables print no S. hominis or Other CoNS row. Excluded values re-read and correct: the cefuroxime axetil columns (pp12, 15, 18), the Meyerozyma guilliermondii rows (p20), the p17 Candida and S. anginosus chart bars."
+ ],
+ "rows": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 953,
+   "page": 12,
+   "table": "Overall hospital: Susceptibility Percentage of All Organism 2024 (p12)",
+   "s": {
+    "nitrofurantoin": 84,
+    "penicillin": 0,
+    "ampicillin": 22,
+    "levofloxacin": 0,
+    "ciprofloxacin": 11,
+    "norfloxacin": 45,
+    "ofloxacin": 46,
+    "cotrimoxazole": 49,
+    "amoxiclav": 50,
+    "cefuroxime": 15,
+    "ceftazidime": 54,
+    "ceftriaxone": 22,
+    "cefotaxime": 6,
+    "cefepime": 29,
+    "cefoperazone_sulbactam": 62,
+    "piptazo": 71,
+    "amikacin": 87,
+    "gentamicin": 76,
+    "tetracycline": 88,
+    "ertapenem": 83,
+    "meropenem": 85,
+    "imipenem": 84,
+    "tigecycline": 99,
+    "fosfomycin": 99,
+    "minocycline": 100,
+    "colistin": 100
+   },
+   "note": "Overall hospital table: all locations and all specimens together. n is the printed \"Number of patients\".",
+   "specimen_as_printed": "all specimens (overall hospital table)"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 401,
+   "page": 12,
+   "table": "Overall hospital: Susceptibility Percentage of All Organism 2024 (p12)",
+   "s": {
+    "nitrofurantoin": 28,
+    "penicillin": 0,
+    "levofloxacin": 0,
+    "ciprofloxacin": 37,
+    "norfloxacin": 78,
+    "ofloxacin": 78,
+    "cotrimoxazole": 51,
+    "amoxiclav": 48,
+    "cefuroxime": 35,
+    "ceftazidime": 69,
+    "ceftriaxone": 40,
+    "cefotaxime": 29,
+    "cefepime": 43,
+    "cefoperazone_sulbactam": 51,
+    "piptazo": 51,
+    "amikacin": 65,
+    "gentamicin": 66,
+    "gentamicin_hl": 0,
+    "erythromycin": 67,
+    "tetracycline": 100,
+    "ertapenem": 60,
+    "meropenem": 58,
+    "imipenem": 56,
+    "tigecycline": 91,
+    "daptomycin": 0,
+    "fosfomycin": 0,
+    "minocycline": 100,
+    "colistin": 100
+   },
+   "note": "Overall hospital table: all locations and all specimens together. n is the printed \"Number of patients\".",
+   "specimen_as_printed": "all specimens (overall hospital table)"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 243,
+   "page": 12,
+   "table": "Overall hospital: Susceptibility Percentage of All Organism 2024 (p12)",
+   "s": {
+    "levofloxacin": 64,
+    "ciprofloxacin": 65,
+    "norfloxacin": 100,
+    "ofloxacin": 100,
+    "cotrimoxazole": 67,
+    "ceftazidime": 77,
+    "cefepime": 78,
+    "piptazo": 84,
+    "amikacin": 74,
+    "gentamicin": 71,
+    "meropenem": 72,
+    "imipenem": 71,
+    "tigecycline": 0,
+    "minocycline": 100,
+    "colistin": 100
+   },
+   "note": "Overall hospital table: all locations and all specimens together. n is the printed \"Number of patients\".",
+   "specimen_as_printed": "all specimens (overall hospital table)"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 138,
+   "page": 12,
+   "table": "Overall hospital: Susceptibility Percentage of All Organism 2024 (p12)",
+   "s": {
+    "levofloxacin": 100,
+    "ciprofloxacin": 15,
+    "cotrimoxazole": 30,
+    "ceftazidime": 0,
+    "ceftriaxone": 15,
+    "cefepime": 12,
+    "piptazo": 13,
+    "amikacin": 13,
+    "gentamicin": 19,
+    "ertapenem": 0,
+    "meropenem": 11,
+    "imipenem": 10,
+    "minocycline": 100,
+    "colistin": 99
+   },
+   "note": "Overall hospital table: all locations and all specimens together. n is the printed \"Number of patients\".",
+   "specimen_as_printed": "all specimens (overall hospital table)"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterobacter cloacae",
+   "pheno": null,
+   "n": 70,
+   "page": 12,
+   "table": "Overall hospital: Susceptibility Percentage of All Organism 2024 (p12)",
+   "s": {
+    "nitrofurantoin": 0,
+    "ciprofloxacin": 69,
+    "norfloxacin": 75,
+    "ofloxacin": 50,
+    "cotrimoxazole": 79,
+    "amoxiclav": 3,
+    "cefuroxime": 42,
+    "ceftazidime": 80,
+    "ceftriaxone": 63,
+    "cefotaxime": 0,
+    "cefepime": 79,
+    "cefoperazone_sulbactam": 84,
+    "piptazo": 83,
+    "amikacin": 91,
+    "gentamicin": 80,
+    "erythromycin": 100,
+    "tetracycline": 100,
+    "ertapenem": 85,
+    "meropenem": 89,
+    "imipenem": 87,
+    "tigecycline": 93,
+    "fosfomycin": 0,
+    "minocycline": 0
+   },
+   "note": "Overall hospital table: all locations and all specimens together. n is the printed \"Number of patients\".",
+   "specimen_as_printed": "all specimens (overall hospital table)"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Burkholderia cepacia",
+   "pheno": null,
+   "n": 41,
+   "page": 12,
+   "table": "Overall hospital: Susceptibility Percentage of All Organism 2024 (p12)",
+   "s": {
+    "levofloxacin": 62,
+    "ciprofloxacin": 0,
+    "cotrimoxazole": 80,
+    "ceftazidime": 92,
+    "ceftriaxone": 0,
+    "cefepime": 4,
+    "cefoperazone_sulbactam": 37,
+    "piptazo": 5,
+    "amikacin": 12,
+    "gentamicin": 8,
+    "meropenem": 92,
+    "minocycline": 76
+   },
+   "note": "Overall hospital table: all locations and all specimens together. n is the printed \"Number of patients\".",
+   "specimen_as_printed": "all specimens (overall hospital table)"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 374,
+   "page": 12,
+   "table": "Overall hospital: Susceptibility Percentage of All Organism 2024 (p12)",
+   "s": {
+    "nitrofurantoin": 100,
+    "penicillin": 7,
+    "oxacillin": 45,
+    "levofloxacin": 8,
+    "ciprofloxacin": 8,
+    "ofloxacin": 0,
+    "cotrimoxazole": 46,
+    "gentamicin": 74,
+    "gentamicin_hl": 100,
+    "clindamycin": 90,
+    "erythromycin": 44,
+    "tetracycline": 93,
+    "ertapenem": 0,
+    "tigecycline": 100,
+    "daptomycin": 97,
+    "linezolid": 100,
+    "teicoplanin": 100,
+    "vancomycin": 99
+   },
+   "note": "Overall hospital table: all locations and all specimens together. n is the printed \"Number of patients\".",
+   "specimen_as_printed": "all specimens (overall hospital table)"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 85,
+   "page": 12,
+   "table": "Overall hospital: Susceptibility Percentage of All Organism 2024 (p12)",
+   "s": {
+    "nitrofurantoin": 95,
+    "penicillin": 93,
+    "levofloxacin": 28,
+    "ciprofloxacin": 28,
+    "gentamicin_hl": 0,
+    "clindamycin": 0,
+    "erythromycin": 4,
+    "tetracycline": 11,
+    "tigecycline": 100,
+    "daptomycin": 68,
+    "linezolid": 99,
+    "teicoplanin": 99,
+    "vancomycin": 99
+   },
+   "note": "Overall hospital table: all locations and all specimens together. n is the printed \"Number of patients\".",
+   "specimen_as_printed": "all specimens (overall hospital table)"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 75,
+   "page": 12,
+   "table": "Overall hospital: Susceptibility Percentage of All Organism 2024 (p12)",
+   "s": {
+    "nitrofurantoin": 8,
+    "penicillin": 6,
+    "levofloxacin": 5,
+    "ciprofloxacin": 5,
+    "cotrimoxazole": 0,
+    "erythromycin": 3,
+    "tetracycline": 9,
+    "tigecycline": 0,
+    "linezolid": 95,
+    "teicoplanin": 81,
+    "vancomycin": 89
+   },
+   "note": "Overall hospital table: all locations and all specimens together. n is the printed \"Number of patients\".",
+   "specimen_as_printed": "all specimens (overall hospital table)"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus epidermidis",
+   "pheno": null,
+   "n": 62,
+   "page": 12,
+   "table": "Overall hospital: Susceptibility Percentage of All Organism 2024 (p12)",
+   "s": {
+    "nitrofurantoin": 100,
+    "penicillin": 13,
+    "oxacillin": 22,
+    "levofloxacin": 48,
+    "ciprofloxacin": 49,
+    "cotrimoxazole": 48,
+    "gentamicin": 80,
+    "gentamicin_hl": 100,
+    "clindamycin": 73,
+    "erythromycin": 25,
+    "tetracycline": 80,
+    "tigecycline": 0,
+    "daptomycin": 100,
+    "linezolid": 100,
+    "teicoplanin": 88,
+    "vancomycin": 100
+   },
+   "note": "Overall hospital table: all locations and all specimens together. n is the printed \"Number of patients\".",
+   "specimen_as_printed": "all specimens (overall hospital table)"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Streptococcus pneumoniae",
+   "pheno": null,
+   "n": 42,
+   "page": 12,
+   "table": "Overall hospital: Susceptibility Percentage of All Organism 2024 (p12)",
+   "s": {
+    "penicillin": 100,
+    "ampicillin": 0,
+    "levofloxacin": 92,
+    "ciprofloxacin": 0,
+    "cotrimoxazole": 56,
+    "amoxiclav": 0,
+    "cefuroxime": 0,
+    "ceftriaxone": 92,
+    "cefotaxime": 100,
+    "cefepime": 0,
+    "cefoperazone_sulbactam": 0,
+    "piptazo": 100,
+    "amikacin": 100,
+    "gentamicin": 100,
+    "clindamycin": 47,
+    "erythromycin": 11,
+    "tetracycline": 31,
+    "meropenem": 100,
+    "tigecycline": 97,
+    "linezolid": 97,
+    "vancomycin": 97
+   },
+   "note": "Overall hospital table: all locations and all specimens together. n is the printed \"Number of patients\".",
+   "specimen_as_printed": "all specimens (overall hospital table)"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus haemolyticus",
+   "pheno": null,
+   "n": 34,
+   "page": 12,
+   "table": "Overall hospital: Susceptibility Percentage of All Organism 2024 (p12)",
+   "s": {
+    "nitrofurantoin": 100,
+    "penicillin": 12,
+    "oxacillin": 10,
+    "levofloxacin": 4,
+    "ciprofloxacin": 9,
+    "cotrimoxazole": 35,
+    "gentamicin": 27,
+    "clindamycin": 18,
+    "erythromycin": 0,
+    "tetracycline": 71,
+    "tigecycline": 0,
+    "daptomycin": 100,
+    "linezolid": 100,
+    "teicoplanin": 100,
+    "vancomycin": 100
+   },
+   "note": "Overall hospital table: all locations and all specimens together. n is the printed \"Number of patients\".",
+   "specimen_as_printed": "all specimens (overall hospital table)"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Stenotrophomonas maltophilia",
+   "pheno": null,
+   "n": 32,
+   "page": 12,
+   "table": "Overall hospital: Susceptibility Percentage of All Organism 2024 (p12)",
+   "s": {
+    "levofloxacin": 87,
+    "cotrimoxazole": 65,
+    "ceftazidime": 0,
+    "minocycline": 67
+   },
+   "note": "Overall hospital table: all locations and all specimens together. n is the printed \"Number of patients\".",
+   "specimen_as_printed": "all specimens (overall hospital table)"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Streptococcus pyogenes",
+   "pheno": null,
+   "n": 32,
+   "page": 12,
+   "table": "Overall hospital: Susceptibility Percentage of All Organism 2024 (p12)",
+   "s": {
+    "penicillin": 100,
+    "ampicillin": 90,
+    "levofloxacin": 57,
+    "ciprofloxacin": 0,
+    "ceftazidime": 100,
+    "ceftriaxone": 96,
+    "cefotaxime": 100,
+    "clindamycin": 96,
+    "erythromycin": 39,
+    "tetracycline": 65,
+    "tigecycline": 100,
+    "linezolid": 100,
+    "vancomycin": 100
+   },
+   "note": "Overall hospital table: all locations and all specimens together. n is the printed \"Number of patients\".",
+   "specimen_as_printed": "all specimens (overall hospital table)"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida albicans",
+   "pheno": null,
+   "n": 12,
+   "page": 13,
+   "table": "Overall hospital: Candida Isolated in all location 2024 (p13)",
+   "s": {
+    "fluconazole": 91,
+    "voriconazole": 100,
+    "amphotericin_b": 33,
+    "caspofungin": 100,
+    "micafungin": 92
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida auris",
+   "pheno": null,
+   "n": 13,
+   "page": 13,
+   "table": "Overall hospital: Candida Isolated in all location 2024 (p13)",
+   "s": {
+    "fluconazole": 0,
+    "voriconazole": 0,
+    "amphotericin_b": 100,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "n": 3,
+   "page": 13,
+   "table": "Overall hospital: Candida Isolated in all location 2024 (p13)",
+   "s": {
+    "voriconazole": 0,
+    "amphotericin_b": 67,
+    "caspofungin": 33,
+    "micafungin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida parapsilosis",
+   "pheno": null,
+   "n": 21,
+   "page": 13,
+   "table": "Overall hospital: Candida Isolated in all location 2024 (p13)",
+   "s": {
+    "fluconazole": 76,
+    "voriconazole": 95,
+    "amphotericin_b": 85,
+    "caspofungin": 95,
+    "micafungin": 95
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida tropicalis",
+   "pheno": null,
+   "n": 8,
+   "page": 13,
+   "table": "Overall hospital: Candida Isolated in all location 2024 (p13)",
+   "s": {
+    "fluconazole": 88,
+    "voriconazole": 100,
+    "amphotericin_b": 100,
+    "caspofungin": 100,
+    "micafungin": 88
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Candida parapsilosis",
+   "pheno": null,
+   "n": 1,
+   "page": 13,
+   "table": "Overall hospital: Candida Isolated in all location 2024 (p13)",
+   "s": {
+    "fluconazole": 100,
+    "voriconazole": 100,
+    "amphotericin_b": 100,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "Specimen printed as \"Fluid\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Fluid"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Candida albicans",
+   "pheno": null,
+   "n": 2,
+   "page": 13,
+   "table": "Overall hospital: Candida Isolated in all location 2024 (p13)",
+   "s": {
+    "fluconazole": 100,
+    "voriconazole": 50,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Candida parapsilosis",
+   "pheno": null,
+   "n": 2,
+   "page": 13,
+   "table": "Overall hospital: Candida Isolated in all location 2024 (p13)",
+   "s": {
+    "fluconazole": 100,
+    "voriconazole": 100,
+    "amphotericin_b": 100,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Candida tropicalis",
+   "pheno": null,
+   "n": 2,
+   "page": 13,
+   "table": "Overall hospital: Candida Isolated in all location 2024 (p13)",
+   "s": {
+    "fluconazole": 100,
+    "voriconazole": 100,
+    "amphotericin_b": 100,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Candida albicans",
+   "pheno": null,
+   "n": 5,
+   "page": 13,
+   "table": "Overall hospital: Candida Isolated in all location 2024 (p13)",
+   "s": {
+    "fluconazole": 100,
+    "voriconazole": 100,
+    "amphotericin_b": 20,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Candida parapsilosis",
+   "pheno": null,
+   "n": 2,
+   "page": 13,
+   "table": "Overall hospital: Candida Isolated in all location 2024 (p13)",
+   "s": {
+    "fluconazole": 50,
+    "voriconazole": 100,
+    "amphotericin_b": 100,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Candida tropicalis",
+   "pheno": null,
+   "n": 3,
+   "page": 13,
+   "table": "Overall hospital: Candida Isolated in all location 2024 (p13)",
+   "s": {
+    "fluconazole": 67,
+    "voriconazole": 100,
+    "amphotericin_b": 100,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 39,
+   "page": 15,
+   "table": "OPD: Percentage Susceptibility Gram Negative Organism 2024 (p15)",
+   "s": {
+    "ciprofloxacin": 7.7,
+    "cotrimoxazole": 49,
+    "amoxiclav": 54,
+    "cefuroxime": 18,
+    "ceftriaxone": 26,
+    "cefepime": 28,
+    "cefoperazone_sulbactam": 74,
+    "piptazo": 82,
+    "amikacin": 81,
+    "gentamicin": 74,
+    "ertapenem": 90,
+    "meropenem": 86,
+    "imipenem": 85,
+    "tigecycline": 100,
+    "colistin": 100
+   },
+   "note": "Read from the page image (the OPD tables are embedded pictures with no text layer). n is the printed \"Number of patients\". The OPD pus top-10 chart (p14) shows 70 isolates of this organism; the table prints 39 patients (source inconsistency, not explained).",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 26,
+   "page": 15,
+   "table": "OPD: Percentage Susceptibility Gram Negative Organism 2024 (p15)",
+   "s": {
+    "ciprofloxacin": 39,
+    "cotrimoxazole": 54,
+    "amoxiclav": 46,
+    "cefuroxime": 46,
+    "ceftriaxone": 50,
+    "cefepime": 50,
+    "cefoperazone_sulbactam": 58,
+    "piptazo": 56,
+    "amikacin": 58,
+    "gentamicin": 68,
+    "ertapenem": 62,
+    "meropenem": 59,
+    "imipenem": 65,
+    "tigecycline": 100,
+    "colistin": 100
+   },
+   "note": "Read from the page image (the OPD tables are embedded pictures with no text layer). n is the printed \"Number of patients\". The OPD pus top-10 chart (p14) shows 49 isolates of this organism; the table prints 26 patients (source inconsistency, not explained).",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 51,
+   "page": 15,
+   "table": "OPD: Percentage Susceptibility Gram Negative Organism 2024 (p15)",
+   "s": {
+    "levofloxacin": 63,
+    "ciprofloxacin": 67,
+    "cotrimoxazole": 50,
+    "cefuroxime": 100,
+    "ceftazidime": 90,
+    "cefepime": 94,
+    "cefoperazone_sulbactam": 79,
+    "piptazo": 89,
+    "amikacin": 90,
+    "gentamicin": 80,
+    "meropenem": 89,
+    "imipenem": 84,
+    "minocycline": 100,
+    "colistin": 100
+   },
+   "note": "Read from the page image (the OPD tables are embedded pictures with no text layer). n is the printed \"Number of patients\". The OPD pus top-10 chart (p14) shows 75 isolates of this organism; the table prints 51 patients (source inconsistency, not explained).",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 358,
+   "page": 15,
+   "table": "OPD: Percentage Susceptibility Gram Negative Organism 2024 (p15)",
+   "s": {
+    "nitrofurantoin": 85,
+    "levofloxacin": 0,
+    "ciprofloxacin": 15,
+    "cotrimoxazole": 50,
+    "amoxiclav": 52,
+    "cefuroxime": 20,
+    "ceftazidime": 59,
+    "ceftriaxone": 28,
+    "cefotaxime": 14,
+    "cefepime": 35,
+    "cefoperazone_sulbactam": 69,
+    "piptazo": 75,
+    "amikacin": 86,
+    "gentamicin": 75,
+    "ertapenem": 90,
+    "meropenem": 88,
+    "imipenem": 88,
+    "tigecycline": 99,
+    "fosfomycin": 99,
+    "minocycline": 100,
+    "colistin": 100
+   },
+   "note": "Read from the page image (the OPD tables are embedded pictures with no text layer). n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 105,
+   "page": 15,
+   "table": "OPD: Percentage Susceptibility Gram Negative Organism 2024 (p15)",
+   "s": {
+    "ciprofloxacin": 38,
+    "cotrimoxazole": 48,
+    "amoxiclav": 47,
+    "cefuroxime": 33,
+    "ceftazidime": 73,
+    "ceftriaxone": 40,
+    "cefotaxime": 43,
+    "cefepime": 42,
+    "cefoperazone_sulbactam": 46,
+    "piptazo": 51,
+    "amikacin": 67,
+    "gentamicin": 64,
+    "ertapenem": 63,
+    "meropenem": 54,
+    "imipenem": 50,
+    "tigecycline": 88,
+    "colistin": 100
+   },
+   "note": "Read from the page image (the OPD tables are embedded pictures with no text layer). n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 34,
+   "page": 15,
+   "table": "OPD: Percentage Susceptibility Gram Negative Organism 2024 (p15)",
+   "s": {
+    "levofloxacin": 26,
+    "ciprofloxacin": 33,
+    "ceftazidime": 46,
+    "cefepime": 47,
+    "cefoperazone_sulbactam": 35,
+    "piptazo": 80,
+    "amikacin": 58,
+    "gentamicin": 46,
+    "meropenem": 37,
+    "imipenem": 40,
+    "tigecycline": 0,
+    "colistin": 100
+   },
+   "note": "Read from the page image (the OPD tables are embedded pictures with no text layer). n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterobacter cloacae",
+   "pheno": null,
+   "n": 13,
+   "page": 15,
+   "table": "OPD: Percentage Susceptibility Gram Negative Organism 2024 (p15)",
+   "s": {
+    "ciprofloxacin": 85,
+    "cotrimoxazole": 85,
+    "amoxiclav": 8,
+    "cefuroxime": 60,
+    "ceftazidime": 67,
+    "ceftriaxone": 62,
+    "cefepime": 100,
+    "cefoperazone_sulbactam": 100,
+    "piptazo": 85,
+    "amikacin": 92,
+    "gentamicin": 92,
+    "ertapenem": 85,
+    "meropenem": 100,
+    "imipenem": 100,
+    "tigecycline": 100,
+    "colistin": 100
+   },
+   "note": "Read from the page image (the OPD tables are embedded pictures with no text layer). n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 125,
+   "page": 16,
+   "table": "OPD: Percentage susceptibility Gram Positive organism 2024 (p16)",
+   "s": {
+    "oxacillin": 45,
+    "penicillin": 6,
+    "ciprofloxacin": 9,
+    "levofloxacin": 10,
+    "clindamycin": 89,
+    "gentamicin": 73,
+    "gentamicin_hl": 100,
+    "erythromycin": 30,
+    "tetracycline": 91,
+    "cotrimoxazole": 45,
+    "tigecycline": 100,
+    "daptomycin": 99,
+    "linezolid": 100,
+    "teicoplanin": 100,
+    "vancomycin": 100
+   },
+   "note": "Read from the page image (the OPD tables are embedded pictures with no text layer). n is the printed \"Number of patients\". The OPD pus top-10 chart (p14) shows 134 isolates of this organism; the table prints 125 patients (source inconsistency, not explained).",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Staphylococcus epidermidis",
+   "pheno": null,
+   "n": 12,
+   "page": 16,
+   "table": "OPD: Percentage susceptibility Gram Positive organism 2024 (p16)",
+   "s": {
+    "oxacillin": 27,
+    "ciprofloxacin": 75,
+    "levofloxacin": 78,
+    "clindamycin": 67,
+    "gentamicin": 82,
+    "erythromycin": 33,
+    "tetracycline": 73,
+    "cotrimoxazole": 58,
+    "tigecycline": 0,
+    "daptomycin": 100,
+    "linezolid": 100,
+    "teicoplanin": 100,
+    "vancomycin": 100
+   },
+   "note": "Read from the page image (the OPD tables are embedded pictures with no text layer). n is the printed \"Number of patients\". The OPD pus top-10 chart (p14) shows 19 isolates of this organism; the table prints 12 patients (source inconsistency, not explained).",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 23,
+   "page": 16,
+   "table": "OPD: Percentage susceptibility Gram Positive organism 2024 (p16)",
+   "s": {
+    "nitrofurantoin": 86,
+    "penicillin": 100,
+    "ciprofloxacin": 17,
+    "levofloxacin": 11,
+    "linezolid": 100,
+    "teicoplanin": 100,
+    "vancomycin": 100
+   },
+   "note": "Read from the page image (the OPD tables are embedded pictures with no text layer). n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 50,
+   "page": 18,
+   "table": "Intensive care unit: Percentage Susceptibility Gram Negative Organism 2024 (p18)",
+   "s": {
+    "levofloxacin": 0,
+    "ciprofloxacin": 6,
+    "cotrimoxazole": 47,
+    "amoxiclav": 59,
+    "cefuroxime": 14,
+    "ceftriaxone": 22,
+    "cefepime": 32,
+    "cefoperazone_sulbactam": 69,
+    "piptazo": 80,
+    "amikacin": 83,
+    "gentamicin": 80,
+    "ertapenem": 84,
+    "meropenem": 84,
+    "imipenem": 86,
+    "tigecycline": 100,
+    "colistin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 41,
+   "page": 18,
+   "table": "Intensive care unit: Percentage Susceptibility Gram Negative Organism 2024 (p18)",
+   "s": {
+    "ciprofloxacin": 27,
+    "cotrimoxazole": 48,
+    "amoxiclav": 36,
+    "cefuroxime": 24,
+    "ceftriaxone": 29,
+    "cefepime": 32,
+    "cefoperazone_sulbactam": 32,
+    "piptazo": 39,
+    "amikacin": 51,
+    "gentamicin": 61,
+    "ertapenem": 35,
+    "meropenem": 42,
+    "imipenem": 38,
+    "tigecycline": 90,
+    "colistin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 30,
+   "page": 18,
+   "table": "Intensive care unit: Percentage Susceptibility Gram Negative Organism 2024 (p18)",
+   "s": {
+    "ciprofloxacin": 7,
+    "cotrimoxazole": 37,
+    "amoxiclav": 0,
+    "cefuroxime": 0,
+    "ceftriaxone": 8,
+    "cefepime": 7,
+    "cefoperazone_sulbactam": 7,
+    "piptazo": 7,
+    "amikacin": 3,
+    "gentamicin": 11,
+    "meropenem": 3,
+    "imipenem": 3,
+    "colistin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 17,
+   "page": 18,
+   "table": "Intensive care unit: Percentage Susceptibility Gram Negative Organism 2024 (p18)",
+   "s": {
+    "ciprofloxacin": 12,
+    "cotrimoxazole": 47,
+    "amoxiclav": 41,
+    "cefuroxime": 12,
+    "ceftriaxone": 12,
+    "cefepime": 24,
+    "cefoperazone_sulbactam": 59,
+    "piptazo": 59,
+    "amikacin": 71,
+    "gentamicin": 53,
+    "ertapenem": 69,
+    "meropenem": 81,
+    "imipenem": 69,
+    "tigecycline": 94,
+    "colistin": 100
+   },
+   "note": "n is the printed \"Number of patients\". The ICU pus top-10 chart (p17) shows 43 isolates of this organism; the table prints 17 patients (source inconsistency, not explained).",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 12,
+   "page": 18,
+   "table": "Intensive care unit: Percentage Susceptibility Gram Negative Organism 2024 (p18)",
+   "s": {
+    "ciprofloxacin": 17,
+    "cotrimoxazole": 42,
+    "amoxiclav": 18,
+    "cefuroxime": 18,
+    "ceftriaxone": 17,
+    "cefepime": 17,
+    "cefoperazone_sulbactam": 17,
+    "piptazo": 17,
+    "amikacin": 25,
+    "gentamicin": 50,
+    "ertapenem": 20,
+    "meropenem": 27,
+    "imipenem": 33,
+    "tigecycline": 80,
+    "colistin": 100
+   },
+   "note": "n is the printed \"Number of patients\". The ICU pus top-10 chart (p17) shows 24 isolates of this organism; the table prints 12 patients (source inconsistency, not explained).",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "deep",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 15,
+   "page": 18,
+   "table": "Intensive care unit: Percentage Susceptibility Gram Negative Organism 2024 (p18)",
+   "s": {
+    "ciprofloxacin": 13,
+    "cotrimoxazole": 53,
+    "amoxiclav": 31,
+    "cefuroxime": 14,
+    "ceftriaxone": 13,
+    "cefepime": 27,
+    "cefoperazone_sulbactam": 40,
+    "piptazo": 40,
+    "amikacin": 62,
+    "gentamicin": 47,
+    "ertapenem": 58,
+    "meropenem": 64,
+    "imipenem": 69,
+    "tigecycline": 100,
+    "colistin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Tissue"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 71,
+   "page": 18,
+   "table": "Intensive care unit: Percentage Susceptibility Gram Negative Organism 2024 (p18)",
+   "s": {
+    "ciprofloxacin": 9,
+    "cotrimoxazole": 48,
+    "amoxiclav": 47,
+    "cefuroxime": 12,
+    "ceftazidime": 100,
+    "ceftriaxone": 12,
+    "cefepime": 26,
+    "cefoperazone_sulbactam": 55,
+    "piptazo": 60,
+    "amikacin": 89,
+    "gentamicin": 80,
+    "ertapenem": 71,
+    "meropenem": 76,
+    "imipenem": 76,
+    "tigecycline": 100,
+    "fosfomycin": 99,
+    "colistin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 25,
+   "page": 18,
+   "table": "Intensive care unit: Percentage Susceptibility Gram Negative Organism 2024 (p18)",
+   "s": {
+    "ciprofloxacin": 25,
+    "cotrimoxazole": 28,
+    "amoxiclav": 36,
+    "cefuroxime": 16,
+    "ceftriaxone": 16,
+    "cefepime": 21,
+    "cefoperazone_sulbactam": 36,
+    "piptazo": 33,
+    "amikacin": 60,
+    "gentamicin": 56,
+    "ertapenem": 46,
+    "meropenem": 44,
+    "imipenem": 39,
+    "tigecycline": 83,
+    "colistin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 20,
+   "page": 18,
+   "table": "Intensive care unit: Percentage Susceptibility Gram Negative Organism 2024 (p18)",
+   "s": {
+    "ciprofloxacin": 5,
+    "cotrimoxazole": 20,
+    "ceftriaxone": 6,
+    "cefepime": 5,
+    "cefoperazone_sulbactam": 0,
+    "piptazo": 5,
+    "amikacin": 5,
+    "gentamicin": 10,
+    "meropenem": 5,
+    "imipenem": 5,
+    "colistin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Respiratory"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 20,
+   "page": 18,
+   "table": "Intensive care unit: Percentage Susceptibility Gram Negative Organism 2024 (p18)",
+   "s": {
+    "ciprofloxacin": 11,
+    "cotrimoxazole": 32,
+    "amoxiclav": 29,
+    "cefuroxime": 5,
+    "ceftriaxone": 5,
+    "cefepime": 11,
+    "cefoperazone_sulbactam": 0,
+    "piptazo": 26,
+    "amikacin": 40,
+    "gentamicin": 45,
+    "ertapenem": 33,
+    "meropenem": 35,
+    "imipenem": 31,
+    "tigecycline": 87,
+    "colistin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Respiratory"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 14,
+   "page": 18,
+   "table": "Intensive care unit: Percentage Susceptibility Gram Negative Organism 2024 (p18)",
+   "s": {
+    "levofloxacin": 85,
+    "ciprofloxacin": 79,
+    "cotrimoxazole": 0,
+    "amoxiclav": 100,
+    "ceftazidime": 85,
+    "cefepime": 85,
+    "cefoperazone_sulbactam": 0,
+    "piptazo": 90,
+    "amikacin": 86,
+    "gentamicin": 100,
+    "meropenem": 58,
+    "imipenem": 58,
+    "colistin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Respiratory"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 24,
+   "page": 19,
+   "table": "Intensive care unit: Percentage susceptibility gram positive organism 2024 (p19)",
+   "s": {
+    "oxacillin": 57,
+    "penicillin": 17,
+    "ciprofloxacin": 17,
+    "levofloxacin": 21,
+    "clindamycin": 95,
+    "gentamicin": 48,
+    "erythromycin": 48,
+    "tetracycline": 96,
+    "cotrimoxazole": 48,
+    "tigecycline": 100,
+    "daptomycin": 95,
+    "linezolid": 100,
+    "teicoplanin": 100,
+    "vancomycin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Streptococcus pneumoniae",
+   "pheno": null,
+   "n": 14,
+   "page": 19,
+   "table": "Intensive care unit: Percentage susceptibility gram positive organism 2024 (p19)",
+   "s": {
+    "penicillin": 100,
+    "levofloxacin": 82,
+    "moxifloxacin": 90,
+    "clindamycin": 67,
+    "erythromycin": 9,
+    "tetracycline": 23,
+    "cotrimoxazole": 31,
+    "tigecycline": 100,
+    "linezolid": 100,
+    "vancomycin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 30,
+   "page": 19,
+   "table": "Intensive care unit: Percentage susceptibility gram positive organism 2024 (p19)",
+   "s": {
+    "oxacillin": 48,
+    "penicillin": 14,
+    "ciprofloxacin": 3,
+    "levofloxacin": 3,
+    "clindamycin": 94,
+    "gentamicin": 76,
+    "erythromycin": 44,
+    "tetracycline": 94,
+    "cotrimoxazole": 64,
+    "tigecycline": 100,
+    "daptomycin": 96,
+    "linezolid": 100,
+    "teicoplanin": 100,
+    "vancomycin": 97
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 11,
+   "page": 19,
+   "table": "Intensive care unit: Percentage susceptibility gram positive organism 2024 (p19)",
+   "s": {
+    "oxacillin": 30,
+    "penicillin": 0,
+    "ciprofloxacin": 10,
+    "levofloxacin": 10,
+    "clindamycin": 100,
+    "gentamicin": 73,
+    "erythromycin": 50,
+    "tetracycline": 91,
+    "cotrimoxazole": 46,
+    "tigecycline": 100,
+    "daptomycin": 89,
+    "linezolid": 100,
+    "teicoplanin": 100,
+    "vancomycin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Respiratory"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Candida albicans",
+   "pheno": null,
+   "n": 6,
+   "page": 20,
+   "table": "Intensive care unit: Candida Isolated in ICU (p20)",
+   "s": {
+    "fluconazole": 100,
+    "voriconazole": 100,
+    "amphotericin_b": 0,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "n": 2,
+   "page": 20,
+   "table": "Intensive care unit: Candida Isolated in ICU (p20)",
+   "s": {
+    "voriconazole": 0,
+    "amphotericin_b": 50,
+    "caspofungin": 50,
+    "micafungin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Candida krusei",
+   "pheno": null,
+   "n": 1,
+   "page": 20,
+   "table": "Intensive care unit: Candida Isolated in ICU (p20)",
+   "s": {
+    "fluconazole": 0,
+    "voriconazole": 100,
+    "amphotericin_b": 0,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "Printed as Issatchenkia orientalis (the teleomorph name of Candida krusei, Pichia kudriavzevii). n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Candida parapsilosis",
+   "pheno": null,
+   "n": 8,
+   "page": 20,
+   "table": "Intensive care unit: Candida Isolated in ICU (p20)",
+   "s": {
+    "fluconazole": 63,
+    "voriconazole": 100,
+    "amphotericin_b": 75,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Candida auris",
+   "pheno": null,
+   "n": 8,
+   "page": 20,
+   "table": "Intensive care unit: Candida Isolated in ICU (p20)",
+   "s": {
+    "fluconazole": 0,
+    "voriconazole": 0,
+    "amphotericin_b": 100,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Candida tropicalis",
+   "pheno": null,
+   "n": 4,
+   "page": 20,
+   "table": "Intensive care unit: Candida Isolated in ICU (p20)",
+   "s": {
+    "fluconazole": 75,
+    "voriconazole": 100,
+    "amphotericin_b": 100,
+    "caspofungin": 100,
+    "micafungin": 75
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Candida krusei",
+   "pheno": null,
+   "n": 1,
+   "page": 20,
+   "table": "Intensive care unit: Candida Isolated in ICU (p20)",
+   "s": {
+    "fluconazole": 0,
+    "voriconazole": 100,
+    "amphotericin_b": 0,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "Printed as Issatchenkia orientalis (the teleomorph name of Candida krusei, Pichia kudriavzevii). Specimen printed as \"Fluid\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Fluid"
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "n": 1,
+   "page": 20,
+   "table": "Intensive care unit: Candida Isolated in ICU (p20)",
+   "s": {
+    "voriconazole": 0,
+    "amphotericin_b": 100,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "Specimen printed as \"Pleural fluid\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Pleural fluid"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Candida tropicalis",
+   "pheno": null,
+   "n": 1,
+   "page": 20,
+   "table": "Intensive care unit: Candida Isolated in ICU (p20)",
+   "s": {
+    "fluconazole": 100,
+    "voriconazole": 100,
+    "amphotericin_b": 100,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Candida albicans",
+   "pheno": null,
+   "n": 2,
+   "page": 20,
+   "table": "Intensive care unit: Candida Isolated in ICU (p20)",
+   "s": {
+    "fluconazole": 100,
+    "voriconazole": 100,
+    "amphotericin_b": 0,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Candida parapsilosis",
+   "pheno": null,
+   "n": 2,
+   "page": 20,
+   "table": "Intensive care unit: Candida Isolated in ICU (p20)",
+   "s": {
+    "fluconazole": 50,
+    "voriconazole": 100,
+    "amphotericin_b": 100,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Candida tropicalis",
+   "pheno": null,
+   "n": 1,
+   "page": 20,
+   "table": "Intensive care unit: Candida Isolated in ICU (p20)",
+   "s": {
+    "fluconazole": 100,
+    "voriconazole": 100,
+    "amphotericin_b": 100,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  }
+ ],
+ "counts": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 953,
+   "page": 11
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "n": 401,
+   "page": 11
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 374,
+   "page": 11
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 243,
+   "page": 11
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "n": 138,
+   "page": 11
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "n": 85,
+   "page": 11
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "n": 75,
+   "page": 11
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterobacter cloacae",
+   "n": 70,
+   "page": 11
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus epidermidis",
+   "n": 62,
+   "page": 11
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus haemolyticus",
+   "n": 34,
+   "page": 11
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Streptococcus pneumoniae",
+   "n": 42,
+   "page": 11
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Burkholderia cepacia",
+   "n": 41,
+   "page": 11
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 32,
+   "page": 11
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Streptococcus pyogenes",
+   "n": 32,
+   "page": 11
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 134,
+   "page": 14
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 75,
+   "page": 14
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 70,
+   "page": 14
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "n": 49,
+   "page": 14
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Staphylococcus epidermidis",
+   "n": 19,
+   "page": 14
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterococcus faecalis",
+   "n": 12,
+   "page": 14
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterobacter cloacae",
+   "n": 11,
+   "page": 14
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Streptococcus pyogenes",
+   "n": 9,
+   "page": 14
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Staphylococcus haemolyticus",
+   "n": 8,
+   "page": 14
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Acinetobacter baumannii",
+   "n": 7,
+   "page": 14
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 358,
+   "page": 14
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "n": 105,
+   "page": 14
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 34,
+   "page": 14
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus faecalis",
+   "n": 23,
+   "page": 14
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterobacter cloacae",
+   "n": 13,
+   "page": 14
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 8,
+   "page": 14
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Citrobacter koseri",
+   "n": 7,
+   "page": 14
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus faecium",
+   "n": 7,
+   "page": 14
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Proteus mirabilis",
+   "n": 6,
+   "page": 14
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Acinetobacter baumannii",
+   "n": 5,
+   "page": 14
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 50,
+   "page": 17
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "n": 41,
+   "page": 17
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "n": 30,
+   "page": 17
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 24,
+   "page": 17
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Streptococcus pneumoniae",
+   "n": 14,
+   "page": 17
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus faecium",
+   "n": 9,
+   "page": 17
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 9,
+   "page": 17
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus epidermidis",
+   "n": 9,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 71,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "n": 25,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus faecium",
+   "n": 9,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Pseudomonas spp.",
+   "n": 6,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus faecalis",
+   "n": 5,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Klebsiella aerogenes",
+   "n": 3,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Proteus mirabilis",
+   "n": 3,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 3,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Citrobacter koseri",
+   "n": 2,
+   "page": 17
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 43,
+   "page": 17
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 30,
+   "page": 17
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "n": 24,
+   "page": 17
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 10,
+   "page": 17
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "n": 8,
+   "page": 17
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Streptococcus pyogenes",
+   "n": 8,
+   "page": 17
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterococcus faecium",
+   "n": 6,
+   "page": 17
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterococcus faecalis",
+   "n": 2,
+   "page": 17
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "n": 20,
+   "page": 17
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "n": 20,
+   "page": 17
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 14,
+   "page": 17
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 11,
+   "page": 17
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 8,
+   "page": 17
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Streptococcus pneumoniae",
+   "n": 4,
+   "page": 17
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Stenotrophomonas",
+   "n": 3,
+   "page": 17
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Serratia marcescens",
+   "n": 3,
+   "page": 17
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Cefuroxime axetil column (pp12, 15, 18): p12 Escherichia coli 15, Klebsiella pneumoniae 36, Enterobacter cloacae 33; p15 Pus Escherichia coli 21, Pus Klebsiella pneumoniae 47, Urine Escherichia coli 18, Urine Klebsiella pneumoniae 32, Urine Enterobacter cloacae 50; p18 Blood Escherichia coli 14, Blood Klebsiella pneumoniae 25, Blood Acinetobacter baumannii 0, Pus Escherichia coli 13, Pus Klebsiella pneumoniae 11, Tissue Escherichia coli 18, Urine Escherichia coli 14, Urine Klebsiella pneumoniae 17, Respiratory Klebsiella pneumoniae 0",
+   "drug": "Cefuroxime axetil",
+   "why": "oral cefuroxime (axetil) breakpoints printed next to parenteral cefuroxime; both map to the one drug key cefuroxime, so the parenteral Cefuroxime column is kept"
+  },
+  {
+   "what": "p20 ICU Candida rows for Meyerozyma guilliermondii (Candida guilliermondii): blood n=2; urine n=1",
+   "org": "Meyerozyma guilliermondii",
+   "why": "no organism key of its own; filing it under the genus group would make this one species stand in for all Candida of the stratum (a genus query uses the genus row before combining the species rows)"
+  },
+  {
+   "what": "Medicine (MED) pp21 to 23: top-10 isolate charts (blood, urine, pus), Gram-negative antibiogram (blood, urine), Gram-positive antibiogram (blood, urine), Candida (blood, pus, urine)",
+   "why": "single ward department; the report gives no combined ward table and the schema holds one ward row per stratum"
+  },
+  {
+   "what": "Surgery pp24 to 26: top-10 isolate charts (blood, pus, urine), Gram-negative antibiogram (pus, tissue, urine), Gram-positive antibiogram, Candida (blood, fluid, pus, urine)",
+   "why": "single ward department; no combined ward table"
+  },
+  {
+   "what": "Neonatal ICU pp27 to 29: top-10 isolate charts (blood, pus, urine), all-organism NICU antibiogram (specimens pooled), Gram-negative blood antibiogram, Candida (blood, urine)",
+   "why": "neonatal unit reported separately from the ICU tables; not merged into the ICU stratum"
+  },
+  {
+   "what": "Obstetrics and Gynaecology pp30 to 31: top-10 isolate charts (pus, urine), all-organism antibiogram (specimens pooled)",
+   "why": "single ward department; no combined ward table"
+  },
+  {
+   "what": "Orthopaedics pp32 to 33: top-10 pus isolate chart (n=60), Gram-negative (pus, urine) and Gram-positive (pus) antibiograms",
+   "why": "single ward department; no combined ward table"
+  },
+  {
+   "what": "Paediatrics pp34 to 35: top-10 isolate charts (blood, pus, urine), all-organism paediatric antibiogram (specimens pooled)",
+   "why": "single ward department; no combined ward table"
+  },
+  {
+   "what": "Paediatric ICU p36: all-organism PICU antibiogram (specimens pooled)",
+   "why": "paediatric ICU reported separately from the ICU tables; not merged into the ICU stratum"
+  },
+  {
+   "what": "Counts: Candida bars of the p17 ICU charts (blood C. parapsilosis 8, C. auris 8; urine C. albicans 2)",
+   "why": "the same numbers are the n of the ICU Candida rows (p20); as the only blood and urine counts outside the OPD they would be read as hospital totals against the all-location Candida table (p13), so they are carried by the rows only"
+  },
+  {
+   "what": "Counts: p17 ICU pus Streptococcus anginosus (2)",
+   "org": "Streptococcus anginosus",
+   "why": "no organism key"
+  },
+  {
+   "what": "p13 chart: skin flora or collection contamination in blood culture, 2022 to 2024 (total, ICU, Medicine, other departments)",
+   "why": "contamination counts, not an antibiogram"
+  }
+ ]
+}

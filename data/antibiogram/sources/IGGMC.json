@@ -1,0 +1,303 @@
+{
+ "id": "IGGMC",
+ "kind": "study",
+ "inst": "IGGMC_NAGPUR",
+ "institution": "Indira Gandhi Government Medical College",
+ "short": "IGGMC Nagpur",
+ "city": "Nagpur",
+ "state": "Maharashtra",
+ "region": "west",
+ "sector": "government",
+ "year": 2025,
+ "period": "May 2024 to April 2025",
+ "citation": "Cureus 2026",
+ "doi": "10.7759/cureus.100797",
+ "url": "https://doi.org/10.7759/cureus.100797",
+ "reporting": "%R in the source, converted to %S",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Method: Figures come from Tables 2 to 4 (pages 6 to 8), converted as 100 minus %R. Results marked IR (intrinsic resistance), NR (not recommended by CLSI), NT (not tested), MIC (MIC only) or U (urinary isolates only) were left out or marked. Salmonella Typhi resistance from the page 7 text: ampicillin 78%, cefotaxime 49%, azithromycin 64%, levofloxacin 64%, cotrimoxazole 46%."
+ },
+ "notes": "Mohod et al. (Cureus 2026) report a hospital-wide antibiogram of 4,603 culture-positive isolates from all specimens at Indira Gandhi Government Medical College, Nagpur, May 2024 to April 2025. It covers E. coli (1,321), K. pneumoniae (1,051), P. aeruginosa (785), Acinetobacter (479, shown as A. baumannii), S. aureus (664), E. faecalis (98), E. faecium (54) and Salmonella Typhi (11). The tables print % resistant, so figures are 100 minus %R and intermediate counts as susceptible. Colistin, tested by MIC, showed no resistance in any Gram-negative organism. Nitrofurantoin and fosfomycin were tested on urinary isolates only, and the enterococcal gentamicin figure is high-level gentamicin. MRSA was 48.72%, inducible clindamycin resistance 21.97% and VRE 0.77%. Salmonella Typhi figures come from the paper's text, not a table, and rest on 11 isolates.",
+ "issues": [],
+ "rows": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 1321,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "ampicillin": 2,
+    "cefazolin": 12,
+    "cefuroxime": 14,
+    "cefoxitin": 22,
+    "ceftriaxone": 24,
+    "cefotaxime": 27,
+    "cefixime": 23,
+    "ceftazidime": 28,
+    "cefepime": 44,
+    "imipenem": 48,
+    "meropenem": 56,
+    "aztreonam": 82,
+    "amoxiclav": 12,
+    "piptazo": 47,
+    "ampsulbactam": 42,
+    "gentamicin": 68,
+    "amikacin": 65,
+    "tetracycline": 67,
+    "ciprofloxacin": 52,
+    "levofloxacin": 46,
+    "cotrimoxazole": 57,
+    "nitrofurantoin": 84,
+    "fosfomycin": 90,
+    "colistin": 100
+   },
+   "notes": {
+    "nitrofurantoin": "urinary isolates only",
+    "fosfomycin": "urinary isolates only"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 1051,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "cefazolin": 11,
+    "cefuroxime": 12,
+    "cefoxitin": 20,
+    "ceftriaxone": 22,
+    "cefotaxime": 24,
+    "cefixime": 23,
+    "ceftazidime": 27,
+    "cefepime": 45,
+    "imipenem": 49,
+    "meropenem": 49,
+    "aztreonam": 35,
+    "amoxiclav": 11,
+    "piptazo": 48,
+    "ampsulbactam": 44,
+    "gentamicin": 64,
+    "amikacin": 67,
+    "tetracycline": 66,
+    "ciprofloxacin": 56,
+    "levofloxacin": 49,
+    "cotrimoxazole": 59,
+    "nitrofurantoin": 76,
+    "colistin": 100
+   },
+   "notes": {
+    "nitrofurantoin": "urinary isolates only"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 785,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "ceftazidime": 21,
+    "cefepime": 72,
+    "imipenem": 55,
+    "meropenem": 59,
+    "aztreonam": 44,
+    "piptazo": 66,
+    "ciprofloxacin": 75,
+    "levofloxacin": 80,
+    "colistin": 100
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 479,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "ceftriaxone": 22,
+    "cefotaxime": 24,
+    "ceftazidime": 32,
+    "cefepime": 48,
+    "imipenem": 34,
+    "meropenem": 45,
+    "piptazo": 57,
+    "ampsulbactam": 28,
+    "gentamicin": 74,
+    "amikacin": 76,
+    "ciprofloxacin": 58,
+    "levofloxacin": 62,
+    "cotrimoxazole": 72,
+    "colistin": 100
+   },
+   "notes": {
+    "ceftriaxone": "reported as Acinetobacter spp."
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 664,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "penicillin": 4,
+    "cefoxitin": 52,
+    "clindamycin": 78,
+    "erythromycin": 66,
+    "doxycycline": 75,
+    "tetracycline": 73,
+    "ciprofloxacin": 79,
+    "levofloxacin": 77,
+    "gentamicin": 88,
+    "cotrimoxazole": 81,
+    "chloramphenicol": 25,
+    "vancomycin": 100,
+    "linezolid": 92,
+    "azithromycin": 12,
+    "nitrofurantoin": 82,
+    "fosfomycin": 88
+   },
+   "notes": {
+    "cefoxitin": "MRSA 48.72%",
+    "clindamycin": "inducible clinda resistance 21.97%",
+    "nitrofurantoin": "urinary isolates only",
+    "fosfomycin": "urinary isolates only"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 98,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "penicillin": 2,
+    "ampicillin": 10,
+    "erythromycin": 54,
+    "doxycycline": 58,
+    "tetracycline": 53,
+    "ciprofloxacin": 68,
+    "levofloxacin": 75,
+    "gentamicin_hl": 68,
+    "chloramphenicol": 35,
+    "vancomycin": 97,
+    "teicoplanin": 64,
+    "linezolid": 92,
+    "nitrofurantoin": 78,
+    "fosfomycin": 84
+   },
+   "notes": {
+    "nitrofurantoin": "urinary isolates only",
+    "fosfomycin": "urinary isolates only"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 54,
+   "specimen_as_printed": "all clinical",
+   "s": {
+    "penicillin": 2,
+    "ampicillin": 8,
+    "erythromycin": 59,
+    "doxycycline": 64,
+    "tetracycline": 58,
+    "ciprofloxacin": 65,
+    "levofloxacin": 68,
+    "gentamicin_hl": 74,
+    "chloramphenicol": 39,
+    "vancomycin": 95,
+    "teicoplanin": 70,
+    "linezolid": 88,
+    "nitrofurantoin": 76
+   },
+   "notes": {
+    "nitrofurantoin": "urinary isolates only"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Salmonella Typhi",
+   "pheno": null,
+   "n": 11,
+   "specimen_as_printed": "intestinal and extra-intestinal",
+   "s": {
+    "ampicillin": 22,
+    "cefotaxime": 51,
+    "azithromycin": 36,
+    "levofloxacin": 36,
+    "cotrimoxazole": 54
+   },
+   "notes": {
+    "ampicillin": "from narrative text, not tabulated",
+    "cefotaxime": "from narrative text",
+    "azithromycin": "from narrative text",
+    "levofloxacin": "from narrative text",
+    "cotrimoxazole": "from narrative text"
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 1321
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "n": 1051
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 785
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "n": 479
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 664
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "n": 98
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "n": 54
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Salmonella Typhi",
+   "n": 11
+  }
+ ],
+ "excluded": []
+}

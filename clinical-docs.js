@@ -15,7 +15,9 @@
 (function (root) {
   "use strict";
   var G = root, D = root.document;
-  var DOCS_V = "fa0f388bfcd3";
+  var DOCS_V = "598e7e3c41bc";
+  // Heading for the doctor's own procedure-specific risks on a consent form (the template covers the general ones).
+  var RISKS_H = { en: "Other risks discussed for this procedure", te: "ఈ ప్రక్రియకు సంబంధించి వివరించిన ఇతర ప్రమాదాలు", hi: "इस प्रक्रिया के लिए बताए गए अन्य जोखिम" };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
   function ms(n) { return '<span class="material-symbols-outlined kit-ic" aria-hidden="true">' + n + "</span>"; }
@@ -49,7 +51,7 @@
     referral: [["name", "Patient name", "text"], ["age", "Age", "text"], ["sex", "Sex", "select", ["Male", "Female", "Other"]], ["to", "Referred to (doctor, department or hospital)", "text"],
       ["urgency", "Urgency", "select", ["Routine", "Soon (within 2 weeks)", "Urgent (within 24 hours)", "Emergency (now)"]], ["reason", "Reason for referral", "textarea"],
       ["history", "History and findings", "textarea"], ["investigations", "Investigations so far", "textarea"], ["treatment", "Treatment given", "textarea"], ["question", "Question for the specialist", "textarea"]],
-    consent: [["name", "Patient name", "text"], ["age", "Age", "text"], ["guardian", "Guardian (if the patient is a minor or cannot consent)", "text"], ["operation", "Procedure details (side, site, surgeon)", "textarea"]],
+    consent: [["name", "Patient name", "text"], ["age", "Age", "text"], ["guardian", "Guardian (if the patient is a minor or cannot consent)", "text"], ["operation", "Procedure details (side, site, surgeon)", "textarea"], ["risks", "Risks specific to this procedure, as discussed", "textarea"]],
     handout: [["name", "Patient name (optional)", "text"]],
     mlc: [["ps", "Police station", "text"], ["mlcno", "MLC number", "text"], ["name", "Patient name", "text"], ["age", "Age", "text"], ["sex", "Sex", "select", ["Male", "Female", "Other"]],
       ["address", "Address", "text"], ["broughtBy", "Brought by", "text"], ["when", "Date and time of arrival", "text"], ["history", "Alleged history (as told, with who told it)", "textarea"],
@@ -89,7 +91,7 @@
       return '<p class="dl-proc"><b>' + esc(t(c.procedure)) + "</b>" + (v.operation ? "<br>" + esc(v.operation) : "") + "</p>" + line("Patient", who(v)) + line("Guardian", v.guardian) +
         (c.sections || []).map(function (s) {
           return "<h3>" + esc(t(s.heading)) + "</h3>" + (s.text ? para(t(s.text)) : "") + (s.items ? "<ul>" + ((s.items[L] || s.items.en) || []).map(function (i) { return "<li>" + esc(i) + "</li>"; }).join("") + "</ul>" : "");
-        }).join("") + '<div class="dl-decl">' + para(t(c.declaration)) + "</div>" +
+        }).join("") + (v.risks ? "<h3>" + esc(t(RISKS_H)) + "</h3>" + para(v.risks) : "") + '<div class="dl-decl">' + para(t(c.declaration)) + "</div>" +
         '<table class="dl-sign"><tr><td>Patient or guardian<br><br>Signature ______________________<br>Name and relation ______________________</td><td>Witness<br><br>Signature ______________________<br>Name ______________________</td></tr></table>';
     }
     if (type === "handout") {
@@ -341,7 +343,7 @@
   }
 
   var API = { open: open, close: close, on: flagOn, load: load, TYPES: TYPES, FORMS: FORMS, DOCS_V: DOCS_V,
-    _bodyHtml: bodyHtml, _documentHtml: documentHtml, _setBundle: function (b) { BUNDLE = b; }, _setKits: function (b) { KITB = b; }, _state: function () { return S; }, _prefill: prefill };
+    _bodyHtml: bodyHtml, _documentHtml: documentHtml, _forms: FORMS, _setBundle: function (b) { BUNDLE = b; }, _setKits: function (b) { KITB = b; }, _state: function () { return S; }, _prefill: prefill };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_DOCS = API;
 })(typeof window !== "undefined" ? window : globalThis);

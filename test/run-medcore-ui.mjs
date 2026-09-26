@@ -1,10 +1,13 @@
 /* test/run-medcore-ui.mjs — the Medical Core panel in a real browser, both ways round.
  *
  * Two properties, and the first one matters more:
- *   1. FLAG OFF IS A COMPLETE NO-OP. No panel, no window.SMD_MEDCORE, and nothing fetched. This is
- *      the default state in which the app ships, so it is the state that is asserted first.
- *   2. FLAG ON renders the two deterministic lists over the ICU state the app already holds, and
- *      nothing else: no probability, no alert, no notification, no network call carrying a value.
+ *   1. `?medcore=0` IS A COMPLETE NO-OP. No panel, no window.SMD_MEDCORE, and nothing fetched.
+ *      The flag now ships ON, so this is the escape hatch rather than the default, which makes it
+ *      MORE important to assert, not less: it is the only way back if the panel misbehaves in the
+ *      field, and it has to work without a rebuild.
+ *   2. THE SHIPPED DEFAULT renders the two deterministic lists over the ICU state the app already
+ *      holds, and nothing else: no probability, no alert, no notification, no network call
+ *      carrying a value. It is labelled BETA.
  *
  * It drives the real dashboard through ICU.ingestMonitor / savePatient / open, the same way the
  * other ICU browser tests do, because a unit test cannot tell you the panel is actually painted.
@@ -90,8 +93,8 @@ try {
   sessionId = sid;
   await call("Runtime.enable", {});
 
-  /* ---------------------------------------------------------------- 1. the shipped default */
-  ok(await boot("?tour=0"), "app loads with Medical Core off (the shipped default)");
+  /* ---------------------------------------------------------------- 1. the escape hatch */
+  ok(await boot("?tour=0&medcore=0"), "app loads with Medical Core forced off via ?medcore=0");
   ok(await openWorkspace(), "the patient workspace opens");
   const off = await J(`
     return JSON.stringify({
@@ -101,14 +104,14 @@ try {
       panels: document.querySelectorAll(".icu-mc-sub").length,
       vitalTiles: document.querySelectorAll(".icu-vitals").length
     });`);
-  ok(off && off.flag === false, "smd_medcore reads false by default");
-  ok(off && off.shadow === false, "smd_medcore_shadow reads false by default");
+  ok(off && off.flag === false, "?medcore=0 overrides the default-on master flag");
+  ok(off && off.shadow === false, "smd_medcore_shadow reads false");
   ok(off && off.api === false, "window.SMD_MEDCORE is not defined when the flag is off");
   ok(off && off.panels === 0, "no Medical Core panel is painted when the flag is off");
   ok(off && off.vitalTiles > 0, "the rest of the ICU dashboard still renders normally");
 
-  /* ---------------------------------------------------------------- 2. flag on */
-  ok(await boot("?tour=0&medcore=1"), "app loads with ?medcore=1");
+  /* ---------------------------------------------------------------- 2. the shipped default */
+  ok(await boot("?tour=0"), "app loads with no medcore param at all (the shipped default)");
   await ev(`return 1;`);
   let api = false;
   for (let i = 0; i < 40; i++) { if (await ev(`return !!window.SMD_MEDCORE`) === true) { api = true; break; } await sleep(250); }
@@ -121,8 +124,15 @@ try {
     return JSON.stringify({
       subs: subs, rows: rows,
       packs: window.SMD_MEDCORE.packs(),
-      foot: (document.querySelector(".icu-mc-foot")||{}).textContent || ""
+      foot: (document.querySelector(".icu-mc-foot")||{}).textContent || "",
+      heading: [].slice.call(document.querySelectorAll(".icu-sec-lbl"))
+        .map(function(e){return e.textContent.replace(/\\s+/g," ").trim();})
+        .filter(function(t){return /Medical Core/.test(t);}).join(" | ")
     });`);
+  ok(on && /Medical Core/.test(on.heading) && /BETA/.test(on.heading),
+    "the panel is labelled BETA now that it is on by default: " + ((on && on.heading) || "(no heading)"));
+  ok(on && /no model/i.test(on.heading),
+    "the heading says there is no model behind it: " + ((on && on.heading) || ""));
   ok(on && on.subs.indexOf("What changed") !== -1, "the What changed list is painted");
   ok(on && on.subs.indexOf("Missing information") !== -1, "the Missing information list is painted");
   ok(on && on.rows.some((r) => /MAP/.test(r) && /78/.test(r) && /55/.test(r)), "the falling MAP is shown with both ends: " + JSON.stringify((on && on.rows) || []).slice(0, 220));
