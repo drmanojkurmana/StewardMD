@@ -524,7 +524,27 @@ export default {
   // All delegate to Pages Functions with the shared admin token. Best-effort.
   async scheduled(event, env, ctx) {
     if (!env.UPDATES_ADMIN_TOKEN) return;
-    const post = (p) => fetch("https://stewardmd.in" + p, { method: "POST", headers: { "X-Admin-Token": env.UPDATES_ADMIN_TOKEN } }).catch(() => {});
+    // OPS-05/F5: fetch() only rejects on a network-level failure - it resolves normally for a 401 (a
+    // rotated admin token), a 500 (an uncaught exception before the per-org loop), or the handler's own
+    // ok:false body (one or more hospitals' escalation failed, still HTTP 200). The old catch-and-discard
+    // read the response and threw it away, so a broken tick (including the one that escalates unacked
+    // critical lab results every 5 minutes) produced ZERO signal. Now: check the status, log loudly, and
+    // let the failure REJECT the ctx.waitUntil promise - Cloudflare surfaces that as a Worker error
+    // (dashboard Errors tab / Logpush / Tail), the existing alerting path, rather than inventing a new one.
+    const post = async (p) => {
+      let res;
+      try {
+        res = await fetch("https://stewardmd.in" + p, { method: "POST", headers: { "X-Admin-Token": env.UPDATES_ADMIN_TOKEN } });
+      } catch (e) {
+        console.error(`scheduled POST ${p} failed: ${e && e.message}`);
+        throw e;
+      }
+      if (!res.ok) {
+        console.error(`scheduled POST ${p} failed: HTTP ${res.status}`);
+        throw new Error(`scheduled POST ${p} failed: HTTP ${res.status}`);
+      }
+      return res;
+    };
     if (event.cron === "*/5 * * * *") {
       ctx.waitUntil(post("/api/queue/ops/tick-all"));     // WardSynQ: escalation that does not wait for ward traffic
       return;
