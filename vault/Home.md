@@ -14,6 +14,7 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[Medical Knowledge Base]] — the KB / RAG brain + clinical content
 - [[Clinical Protocols]] - the Knowledge Library "Protocols" tab: bedside protocols across every specialty (ai_drafted, pending review)
 - [[Specialty Kits]] - 26 kits for every branch (O&G to Forensic): OPD Specialty tab + Home tile; WHO growth, ACOG dating, LA dose, burns, CKD, DAS28, MCCD, Labour Care Guide, order sets (ai_drafted, pending review)
+- [[Antibiogram]] - validated Indian antibiograms (institutions, ICMR, NARS-Net, state networks, studies) by specimen and setting; pooled India/regions; sources census; own-hospital import; feeds the console and reasoning
 - [[Clinical Documents]] - certificates, referral letter, consent forms (En/Te/Hi), handouts, MLC intimation, MCCD draft, I-PASS handover
 - [[Review Desk]] - clinicians approve AI-drafted content and export decisions; weekly guideline source watch
 - [[Colleagues]] - wave 2 (OFF until the owner turns it on): referrals and handovers between verified doctors, case rooms, a hospital's own kit version, kit history per patient
@@ -50,6 +51,8 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
   PHASE 1 (server-only) built 2026-08-22; a rebuild of a system torn down once before — read it
   before touching this.
 - [[StewardMD ID]] — the universal per-user SMD-XXXXXX handle (units, referrals, entitlements)
+- [[Widgets]] — iOS home-screen and Lock Screen widgets. Ask MaiK ships three surfaces the
+  owner picks in Edit Widget; read the `topCritical` contract gotcha before touching the parser.
 - [[Email and Lifecycle]] — every email the app sends (one premium template), unsubscribe, the promo series, phone OTP
 - [[Infra]] — Cloudflare, Firebase, signing, hosting
 - [[Decisions]] — architectural decision log

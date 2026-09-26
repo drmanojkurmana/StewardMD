@@ -1,7 +1,7 @@
 ---
 tags: [module, ai, imaging]
-status: live for every user (flag ON since 2026-08-26); model clinically unvalidated + regulatory-pending
-flag: smd_kardiox (def:true — ON)
+status: CODE-GATED BETA since 2026-09-25 (owner decision): hidden by default, unlocked per device with a StewardMD access code (SMD_XACCESS, experimental.js + functions/_experimental.js); model clinically unvalidated + regulatory-pending
+flag: smd_kardiox (def:false; SMD_XACCESS sets it to 1 on a successful unlock; ?kardiox=1 for testers). Every open passes SMD_XACCESS.gate("kardiox")
 ---
 # KardiQ X
 

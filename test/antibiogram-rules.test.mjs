@@ -1,0 +1,394 @@
+/* test/antibiogram-rules.test.mjs: the rules that decide whether an antibiogram number may be
+ * shown (antibiogram-rules.js). A wrong answer here puts a misleading percentage in front of a
+ * prescriber, so each rule is pinned with the case that motivated it.
+ *
+ * node --test test/antibiogram-rules.test.mjs
+ */
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { createRequire } from "node:module";
+const require = createRequire(import.meta.url);
+const R = require("../antibiogram-rules.js");
+
+const row = (o) => R.validateRow(Object.assign({ spec: "all", set: "all", n: 200, s: {}, nt: {} }, o));
+
+test("canonical names: laboratory codes, spellings and phenotypes", () => {
+  assert.equal(R.canonDrug("TZP"), "piptazo");
+  assert.equal(R.canonDrug("Piperacillin-tazobactam"), "piptazo");
+  assert.equal(R.canonDrug("AMK"), "amikacin");
+  assert.equal(R.canonDrug("CFS"), "cefoperazone_sulbactam");
+  assert.equal(R.canonDrug("definitely not a drug"), null);
+  assert.deepEqual(R.canonOrg("Klebsiella pneumoniae"), { key: "klebsiella", pheno: null });
+  assert.deepEqual(R.canonOrg("MRSA"), { key: "saureus", pheno: "MRSA" });
+  assert.deepEqual(R.canonOrg("Pichia kudriavzevii"), { key: "ckrusei", pheno: null });
+  assert.deepEqual(R.canonOrg("Kodaemea ohmerii"), { key: "kohmeri", pheno: null });
+  assert.deepEqual(R.canonOrg("Candida pelliculosa"), { key: "cpelliculosa", pheno: null });
+  assert.equal(R.canonOrg("Cryptococcus spp."), null, "a genus is not filed under C. neoformans");
+  assert.equal(R.canonSpecimen("LRT"), "respiratory");
+  assert.equal(R.canonSpecimen("DI"), "deep");
+  assert.equal(R.canonSpecimen("CSF"), "csf");
+  assert.equal(R.canonSetting("IPD"), "ward");
+  assert.equal(R.canonSetting("OPD"), "opd");
+});
+
+test("every drug has a label and a class; every AWaRe group is A, W, R or none", () => {
+  Object.keys(R.DRUGS).forEach((k) => {
+    const d = R.DRUGS[k];
+    assert.ok(d.label && d.cls, k + " label/class");
+    assert.ok([undefined, null, "A", "W", "R"].includes(d.aware), k + " aware " + d.aware);
+  });
+  assert.equal(R.aware("amikacin"), "A");
+  assert.equal(R.aware("meropenem"), "W");
+  assert.equal(R.aware("colistin"), "R");
+});
+
+test("intrinsic resistance is never shown as a number (CLSI M100 Appendix B)", () => {
+  const k = row({ org: "klebsiella", s: { ampicillin: 12, meropenem: 60 } });
+  assert.equal(k.cells.ampicillin.act, "intrinsic");
+  assert.equal(k.cells.meropenem.act, "keep");
+  const e = row({ org: "efaecalis", s: { ceftriaxone: 40, gentamicin: 30, ampicillin: 90 } });
+  assert.equal(e.cells.ceftriaxone.act, "intrinsic", "enterococci and cephalosporins");
+  assert.equal(e.cells.gentamicin.act, "intrinsic", "standard aminoglycoside");
+  assert.equal(e.cells.ampicillin.act, "keep");
+  const p = row({ org: "paeruginosa", s: { ertapenem: 20, ceftriaxone: 10, cotrimoxazole: 5, meropenem: 60 } });
+  ["ertapenem", "ceftriaxone", "cotrimoxazole"].forEach((d) => assert.equal(p.cells[d].act, "intrinsic", d));
+  assert.equal(row({ org: "ecoli", s: { vancomycin: 0 } }).cells.vancomycin.act, "intrinsic");
+  assert.equal(row({ org: "saureus", s: { colistin: 0 } }).cells.colistin.act, "intrinsic");
+  assert.equal(row({ org: "ckrusei", s: { fluconazole: 20 } }).cells.fluconazole.act, "intrinsic");
+  assert.equal(row({ org: "afumigatus", s: { fluconazole: 0, voriconazole: 95 } }).cells.fluconazole.act, "intrinsic");
+  ["cneoformans", "trichosporon"].forEach((o) => {
+    const x = row({ org: o, s: { caspofungin: 0, micafungin: 0, fluconazole: 80 } });
+    assert.equal(x.cells.caspofungin.act, "intrinsic", o); assert.equal(x.cells.micafungin.act, "intrinsic", o);
+    assert.equal(x.cells.fluconazole.act, "keep", o);
+    assert.match(x.cells.caspofungin.why, /fungus/);
+  });
+  assert.equal(row({ org: "calbicans", s: { meropenem: 0 } }).cells.meropenem.act, "intrinsic", "antibacterial vs yeast");
+});
+
+test("Salmonella and Shigella: aminoglycosides and early cephalosporins are not reported as susceptible", () => {
+  const r = row({ org: "salmonella_typhi", s: { gentamicin: 95, cefuroxime: 90, ceftriaxone: 97 } });
+  assert.equal(r.cells.gentamicin.act, "intrinsic");
+  assert.equal(r.cells.cefuroxime.act, "intrinsic");
+  assert.equal(r.cells.ceftriaxone.act, "keep");
+});
+
+test("specimen relevance: nitrofurantoin only for urine, daptomycin never for respiratory", () => {
+  assert.equal(row({ org: "ecoli", spec: "blood", s: { nitrofurantoin: 90 } }).cells.nitrofurantoin.act, "hide");
+  assert.equal(row({ org: "ecoli", spec: "urine", s: { nitrofurantoin: 90 } }).cells.nitrofurantoin.act, "keep");
+  assert.equal(row({ org: "ecoli", spec: "nonurine", s: { nitrofurantoin: 90 } }).cells.nitrofurantoin.act, "hide");
+  assert.equal(row({ org: "saureus", spec: "respiratory", s: { daptomycin: 100 } }).cells.daptomycin.act, "hide");
+  assert.equal(row({ org: "ecoli", spec: "blood", s: { fosfomycin: 95 } }).cells.fosfomycin.act, "caution");
+  // Too little reaches the urine: tigecycline and moxifloxacin are hidden for urinary isolates only.
+  const u = row({ org: "ecoli", spec: "urine", s: { tigecycline: 97, moxifloxacin: 30, ciprofloxacin: 30 } }).cells;
+  assert.equal(u.tigecycline.act, "hide");
+  assert.equal(u.moxifloxacin.act, "hide");
+  assert.equal(u.ciprofloxacin.act, "keep");
+  assert.equal(row({ org: "ecoli", spec: "blood", s: { tigecycline: 97 } }).cells.tigecycline.act, "keep");
+});
+
+test("staphylococcal phenotypes: MRSA rows cannot be beta-lactam susceptible; MSSA rows cannot be cefoxitin resistant", () => {
+  const mr = row({ org: "saureus", pheno: "MRSA", s: { penicillin: 20, amoxiclav: 10, vancomycin: 100, ceftaroline: 95 } });
+  assert.equal(mr.cells.penicillin.act, "suppress");
+  assert.equal(mr.cells.amoxiclav.act, "suppress");
+  assert.equal(mr.cells.vancomycin.act, "keep");
+  assert.equal(mr.cells.ceftaroline.act, "keep", "ceftaroline is the exception");
+  assert.equal(row({ org: "saureus", pheno: "MRSA", s: { penicillin: 0 } }).cells.penicillin.act, "keep", "0% is consistent");
+  assert.equal(row({ org: "saureus", pheno: "MSSA", s: { cefoxitin: 80 } }).cells.cefoxitin.act, "suppress");
+  // Mixed S. aureus row: a beta-lactam cannot beat methicillin susceptibility.
+  const mix = row({ org: "saureus", s: { cefoxitin: 40, amoxiclav: 70, cefazolin: 42 } });
+  assert.equal(mix.cells.amoxiclav.act, "suppress");
+  assert.equal(mix.cells.cefazolin.act, "keep", "within 5 points");
+});
+
+test("arithmetic: a % no whole number of isolates can give is flagged, not hidden", () => {
+  assert.equal(R.achievable(50, 4), true);
+  assert.equal(R.achievable(35, 4), false);
+  assert.equal(R.achievable(33.3, 3), true);
+  assert.equal(R.achievable(26.6, 15), true, "truncated 4/15");
+  assert.equal(R.achievable(12.34, 5000), true, "large n short-circuits");
+  const r = row({ org: "ecoli", n: 4, s: { amikacin: 35 } });
+  assert.equal(r.cells.amikacin.act, "caution");
+  assert.ok(/whole number/.test(r.cells.amikacin.why));
+  assert.equal(row({ org: "ecoli", n: 4, s: { amikacin: 75 } }).cells.amikacin.act, "keep");
+});
+
+test("paired agents must agree: cefotaxime vs ceftriaxone, imipenem vs meropenem", () => {
+  const r = row({ org: "ecoli", s: { cefotaxime: 20, ceftriaxone: 70 } });
+  assert.equal(r.cells.cefotaxime.act, "caution");
+  assert.equal(r.cells.ceftriaxone.act, "caution");
+  const k = row({ org: "klebsiella", s: { imipenem: 80, meropenem: 40 } });
+  assert.equal(k.cells.imipenem.act, "caution");
+  const ok = row({ org: "klebsiella", s: { imipenem: 45, meropenem: 40 } });
+  assert.equal(ok.cells.imipenem.act, "keep");
+});
+
+test("tetracycline cannot be far above doxycycline or minocycline (tetracycline-susceptible means both are susceptible)", () => {
+  const c = row({ org: "ecoli", spec: "blood", s: { tetracycline: 98, doxycycline: 54 } }).cells;
+  assert.equal(c.tetracycline.act, "caution");
+  assert.equal(c.doxycycline.act, "caution");
+  const ok = row({ org: "ecoli", spec: "blood", s: { tetracycline: 40, doxycycline: 70 } }).cells;
+  assert.equal(ok.tetracycline.act, "keep");                    // doxycycline above tetracycline is expected
+});
+
+test("CLSI M39: fewer than 30 isolates is flagged; approximate chart readings are cautions", () => {
+  assert.ok(row({ org: "ecoli", n: 12, s: { amikacin: 75 } }).flags.includes("lowN"));
+  assert.ok(row({ org: "ecoli", n: null, s: { amikacin: 75 } }).flags.includes("noN"));
+  assert.equal(row({ org: "ecoli", s: { amikacin: 75 }, approx: ["amikacin"] }).cells.amikacin.act, "caution");
+});
+
+test("pooling: isolate-weighted, latest edition per institution, only cells and rows that passed", () => {
+  const mk = (src, inst, year, n, s, act) => ({ src, inst, year, n, cells: { meropenem: { s, act: act || "keep", nt: null } } });
+  const p = R.pool([
+    mk("A_2023", "A", 2023, 100, 10),
+    mk("A_2024", "A", 2024, 100, 50),          // latest of A
+    mk("B_2024", "B", 2024, 300, 90),
+    mk("C_2024", "C", 2024, 20, 0),            // under 30: never pooled
+    mk("D_2024", "D", 2024, 500, 5, "caution") // failed a check: never pooled
+  ]);
+  assert.equal(p.meropenem.k, 2);
+  assert.equal(p.meropenem.n, 400);
+  assert.equal(p.meropenem.s, 80, "(100*50 + 300*90) / 400");
+  assert.deepEqual([p.meropenem.min, p.meropenem.max], [50, 90]);
+});
+
+test("WISCA: single agent is weighted by organism frequency; two agents give a range; intrinsic counts as 0", () => {
+  const parts = [
+    { org: "ecoli", n: 60, s: { meropenem: 90, amikacin: 80 }, act: {} },
+    { org: "efaecalis", n: 40, s: { ampicillin: 90, meropenem: 50 }, act: {} }
+  ];
+  const w = R.wisca(parts, ["meropenem"]);
+  assert.equal(w.coverage, 74, "(60*90 + 40*50)/100");
+  assert.equal(w.knownPct, 100);
+  const a = R.wisca(parts, ["amikacin"]);
+  assert.equal(a.coverage, 48, "enterococci are intrinsically resistant to amikacin: 60*80/100");
+  const two = R.wisca(parts, ["meropenem", "amikacin"]);
+  assert.equal(two.low, 74);
+  assert.equal(two.high, 80, "min(100, 90+80) for E. coli, 50+0 for E. faecalis");
+  const none = R.wisca([{ org: "ecoli", n: 10, s: {}, act: {} }], ["colistin"]);
+  assert.equal(none.coverage, null);
+});
+
+test("summary CSV import: codes resolve, bad values are refused with a reason", () => {
+  const r = R.importSummaryCsv("organism,specimen,setting,n,AMK,TZP,Foo\nE. coli,urine,OPD,120,92,76.5,1\nNobody,urine,opd,10,50,50,\nK. pneumoniae,blood,ICU,40,140,30,\n");
+  assert.equal(r.errors.length, 0);
+  assert.ok(r.warnings.some((w) => /Foo/.test(w)));
+  assert.ok(r.warnings.some((w) => /Nobody/.test(w)));
+  assert.ok(r.warnings.some((w) => /140 is outside/.test(w)));
+  assert.equal(r.rows.length, 2);
+  assert.deepEqual(r.rows[0], { org: "ecoli", pheno: null, spec: "urine", set: "opd", n: 120, s: { amikacin: 92, piptazo: 76.5 } });
+  assert.equal(R.importSummaryCsv("x\n").errors.length, 1);
+  assert.ok(R.importSummaryCsv(R.summaryTemplate()).rows.length >= 2, "the template imports cleanly");
+});
+
+test("isolate CSV import: first isolate per patient (CLSI M39), %S = S / tested, IDs never kept", () => {
+  const csv = "patient_id,date,specimen,location,organism,MEM,CIP\n" +
+    "UHID-001,2026-01-01,urine,opd,E. coli,S,R\n" +
+    "UHID-001,2026-01-20,urine,opd,E. coli,R,R\n" +      // repeat isolate: dropped
+    "UHID-002,2026-02-01,urine,opd,E. coli,S,S\n" +
+    "UHID-003,2026-02-03,blood,icu,E. coli,R,I\n";
+  const r = R.importIsolateCsv(csv);
+  assert.equal(r.isolates, 4);
+  assert.equal(r.firstIsolates, 3);
+  const urine = r.rows.find((x) => x.org === "ecoli" && x.spec === "urine" && x.set === "opd");
+  assert.equal(urine.n, 2);
+  assert.equal(urine.s.meropenem, 100);
+  assert.equal(urine.s.ciprofloxacin, 50);
+  const all = r.rows.find((x) => x.org === "ecoli" && x.spec === "all" && x.set === "all");
+  assert.equal(all.n, 3);
+  assert.equal(all.s.ciprofloxacin, 33.3, "intermediate is not susceptible");
+  assert.ok(!JSON.stringify(r).includes("UHID"), "patient identifiers are not in the result");
+});
+
+test("isolate CSV import: MRSA expert rule and phenotype rows", () => {
+  const csv = "patient,organism,FOX,AMC,VAN\nP1,Staphylococcus aureus,R,S,S\nP2,Staphylococcus aureus,S,S,S\nP3,Staphylococcus aureus,R,R,S\n";
+  const r = R.importIsolateCsv(csv);
+  assert.ok(r.warnings.some((w) => /expert rule/.test(w)));
+  const all = r.rows.find((x) => x.org === "saureus" && !x.pheno && x.spec === "all" && x.set === "all");
+  assert.equal(all.n, 3);
+  assert.equal(all.s.amoxiclav, 33.3, "the MRSA isolate's AMC 'S' was set to R");
+  assert.equal(all.s.cefoxitin, 33.3);
+  const mrsa = r.rows.find((x) => x.pheno === "MRSA" && x.spec === "all" && x.set === "all");
+  assert.equal(mrsa.n, 2);
+  assert.equal(mrsa.s.amoxiclav, 0);
+  assert.equal(mrsa.s.vancomycin, 100);
+  const mssa = r.rows.find((x) => x.pheno === "MSSA" && x.spec === "all" && x.set === "all");
+  assert.equal(mssa.n, 1);
+  assert.equal(R.validateRow(Object.assign({}, mrsa)).cells.amoxiclav.act, "keep", "consistent after the rule");
+});
+
+test("phenotype rates come from the marker drug", () => {
+  const p = R.phenoRates({ saureus: { cefoxitin: { s: 45, n: 200 } }, klebsiella: { ceftriaxone: { s: 20, n: 300 }, meropenem: { s: 60, n: 300 } } });
+  const mrsa = p.find((x) => x.label === "MRSA");
+  assert.equal(mrsa.pct, 55);
+  assert.ok(p.find((x) => /Carbapenem-resistant Klebsiella/.test(x.label)).pct === 40);
+});
+
+test("a figure the source contradicts is a caution, never a plain number (ICMR 2024 Table 2.14)", () => {
+  // Printed 8.6% but the printed counts are 121/154 = 78.6%: 8.6 is achievable for some n, so only
+  // the extractor's conflict note can catch it.
+  const r = row({ org: "morganella", spec: "urine", n: 154, s: { amikacin: 8.6 }, nt: { amikacin: 154 }, conflict: { amikacin: "printed 8.6% but 121/154 = 78.6%" } });
+  assert.equal(r.cells.amikacin.act, "caution");
+  assert.match(r.cells.amikacin.why, /contradicts itself/);
+  const ir = row({ org: "morganella", s: { ampicillin: 5 }, conflict: { ampicillin: "x" } });
+  assert.equal(ir.cells.ampicillin.act, "intrinsic", "intrinsic still wins");
+});
+
+test("colistin 0% from a CLSI laboratory is a caution, not 100% resistance", () => {
+  const r = row({ org: "paeruginosa", s: { colistin: 0, polymyxin_b: 0, meropenem: 60 } });
+  assert.equal(r.cells.colistin.act, "caution");
+  assert.match(r.cells.colistin.why, /no susceptible category/);
+  assert.equal(r.cells.polymyxin_b.act, "caution");
+  assert.equal(row({ org: "acinetobacter", s: { colistin: 95 } }).cells.colistin.act, "keep");
+  assert.equal(row({ org: "ecoli", s: { polymyxin_b: 27.4 } }).cells.polymyxin_b.act, "caution", "a low polymyxin figure is not a resistance rate");
+  assert.equal(row({ org: "pmirabilis", s: { colistin: 0 } }).cells.colistin.act, "intrinsic", "Proteus is intrinsically resistant");
+});
+
+test("exceptional resistance is a caution; resistance India really has is not", () => {
+  const c = (org, s) => row({ org, spec: "blood", s }).cells;
+  assert.equal(c("saureus", { vancomycin: 67 }).vancomycin.act, "caution");          // disk-diffusion artefact, not VRSA
+  assert.equal(c("shaemolyticus", { vancomycin: 63 }).vancomycin.act, "caution");
+  assert.equal(c("saureus", { linezolid: 43.4 }).linezolid.act, "caution");
+  assert.equal(c("salmonella_typhi", { meropenem: 65.5 }).meropenem.act, "caution");
+  assert.equal(c("strep_bhs", { penicillin: 87 }).penicillin.act, "caution");
+  assert.equal(c("saureus", { vancomycin: 99.5, linezolid: 99 }).vancomycin.act, "keep");
+  // Documented and rising in Indian surveillance: shown as figures, never hidden behind a caution.
+  assert.equal(c("efaecium", { linezolid: 84.4 }).linezolid.act, "keep");
+  assert.equal(c("shaemolyticus", { linezolid: 70 }).linezolid.act, "keep");
+});
+
+test("species kept apart where their intrinsic resistance differs", () => {
+  assert.equal(R.canonOrg("Klebsiella oxytoca").key, "koxytoca");
+  assert.equal(R.canonOrg("Enterobacter aerogenes").key, "kaerogenes");
+  assert.equal(R.canonOrg("Enterobacter cloacae").key, "ecloacae");
+  assert.equal(R.canonOrg("Enterobacter spp.").key, "enterobacter");
+  assert.equal(R.canonOrg("Providencia stuartii").key, "pstuartii");
+  assert.equal(row({ org: "pstuartii", s: { gentamicin: 50, amikacin: 80 } }).cells.gentamicin.act, "intrinsic", "P. stuartii aac(2')-Ia");
+  assert.equal(row({ org: "prettgeri", s: { gentamicin: 50 } }).cells.gentamicin.act, "keep");
+  assert.equal(row({ org: "kaerogenes", s: { cefoxitin: 30 } }).cells.cefoxitin.act, "intrinsic", "chromosomal AmpC");
+});
+
+test("WHONET export column names resolve to drugs", () => {
+  assert.equal(R.canonDrug("AMK_ND30"), "amikacin");
+  assert.equal(R.canonDrug("MEM_NM"), "meropenem");
+  assert.equal(R.canonDrug("TZP_ND100/10"), "piptazo");
+  assert.equal(R.canonDrug("FOX_ND30"), "cefoxitin");
+  assert.equal(R.canonDrug("XYZ_ND30"), null);
+  const r = R.importIsolateCsv("PATIENT_ID,SPEC_DATE,SPEC_TYPE,WARD,ORGANISM,AMK_ND30,MEM_NM\nA1,2026-01-02,ur,opd,E. coli,S,S\nA2,2026-01-03,ur,opd,E. coli,R,S\n");
+  const all = r.rows.find((x) => x.org === "ecoli" && x.spec === "all" && x.set === "all");
+  assert.equal(all.s.amikacin, 50);
+  assert.equal(all.s.meropenem, 100);
+});
+
+test("hospital import: laboratory specimen and location names are recognised, the rest listed", () => {
+  const r = R.importIsolateCsv("PATIENT_ID,SPEC_TYPE,WARD,ORGANISM,AMK_ND30\nA1,ur,MICU-2,E. coli,S\nA2,Blood culture,Medicine Ward 3,E. coli,R\nA3,xx,OT,E. coli,R\n");
+  assert.ok(r.rows.some((x) => x.spec === "urine" && x.set === "icu"));
+  assert.ok(r.rows.some((x) => x.spec === "blood" && x.set === "ward"));
+  assert.ok(r.warnings.some((w) => /Specimen values not recognised.*xx/.test(w)));
+  assert.ok(r.warnings.some((w) => /Setting values not recognised.*OT/.test(w)));
+});
+
+test("CLSI breakpoint revisions a trend or pool can straddle (fluoroquinolones 2019, polymyxins 2020, pip-tazo 2022/2023, aminoglycosides 2023)", () => {
+  const yrs = (o, d, a, b) => R.bpChanges(o, d, a, b).map((x) => x.year);
+  assert.deepEqual(yrs("ecoli", "amikacin", 2021, 2024), [2023]);
+  assert.deepEqual(yrs("paeruginosa", "tobramycin", 2023, 2025), [2023], "adoption lags the edition: a series starting in 2023 or 2024 can still straddle it");
+  assert.deepEqual(yrs("ecoli", "amikacin", 2017, 2021), [], "a series ending before the edition cannot");
+  assert.deepEqual(yrs("klebsiella", "piptazo", 2020, 2023), [2022]);
+  assert.deepEqual(yrs("paeruginosa", "piptazo", 2020, 2023), [2023]);
+  assert.deepEqual(yrs("ecoli", "ciprofloxacin", 2017, 2020), [2019]);
+  assert.deepEqual(yrs("salmonella_typhi", "ciprofloxacin", 2017, 2024), [], "the 2019 fluoroquinolone revision excluded Salmonella");
+  assert.deepEqual(yrs("acinetobacter", "colistin", 2018, 2021), [2020]);
+  assert.deepEqual(yrs("saureus", "gentamicin", 2017, 2025), [], "staphylococcal aminoglycoside breakpoints were not revised");
+  assert.ok(R.BP_CHANGES.every((c) => !/[\u2013\u2014]/.test(c.text)), "no dashes in app text");
+});
+
+test("summary import: a % resistant file read as % susceptible is caught (intrinsic resistance near 100), and reads correctly as % resistant", () => {
+  const csv = "organism,specimen,setting,n,AMP,CRO,MEM\nKlebsiella pneumoniae,blood,icu,120,100,80,45\nPseudomonas aeruginosa,blood,icu,90,,98,40\n";
+  const asS = R.importSummaryCsv(csv);
+  assert.equal(asS.suggest, "R");
+  assert.match(asS.why, /Klebsiella and ampicillin 100/);
+  const asR = R.importSummaryCsv(csv, { measure: "R" });
+  assert.equal(asR.suggest, null);
+  assert.equal(asR.measure, "R");
+  const k = asR.rows.find((x) => x.org === "klebsiella");
+  assert.equal(k.s.meropenem, 55, "stored as 100 minus % resistant");
+  assert.equal(R.validateRow(k).cells.ampicillin.act, "intrinsic");
+  // A % susceptible file read as % resistant is caught the other way round.
+  assert.equal(R.importSummaryCsv("organism,specimen,setting,n,AMP,CRO\nKlebsiella pneumoniae,blood,icu,120,0,20\nPseudomonas aeruginosa,blood,icu,90,,2\n", { measure: "R" }).suggest, "S");
+  // Columns named with their unit still resolve; a header that says "resistant" prompts the question.
+  const h = R.importSummaryCsv("organism,specimen,setting,n,Meropenem % resistant,AMK (%R)\nEscherichia coli,urine,opd,300,5,10\n");
+  assert.deepEqual(Object.keys(h.rows[0].s).sort(), ["amikacin", "meropenem"]);
+  assert.equal(h.suggest, "R");
+  assert.equal(R.importSummaryCsv("organism,specimen,setting,n,Meropenem %S\nEscherichia coli,urine,opd,300,95\n").suggest, null);
+});
+
+test("review round 2: agents of one class that contradict each other are cautions, when they describe the same isolates", () => {
+  // BVDU Pune 2024 p12: E. coli levofloxacin 0% beside ciprofloxacin 11% (953 isolates).
+  const e = row({ org: "ecoli", n: 953, s: { ciprofloxacin: 11, levofloxacin: 0 } });
+  assert.equal(e.cells.levofloxacin.act, "caution"); assert.match(e.cells.levofloxacin.why, /also levofloxacin-susceptible/);
+  // Acinetobacter levofloxacin 100% beside ciprofloxacin 15%.
+  assert.equal(row({ org: "acinetobacter", s: { ciprofloxacin: 15, levofloxacin: 100 } }).cells.ciprofloxacin.act, "caution");
+  // ICMR: levofloxacin tested on 67 of 318 E. cloacae is a different subset, not a contradiction.
+  assert.equal(row({ org: "ecloacae", n: 318, s: { ciprofloxacin: 56.6, levofloxacin: 25.4 }, nt: { ciprofloxacin: 318, levofloxacin: 67 } }).cells.levofloxacin.act, "keep");
+  // Imipenem vs meropenem: Enterobacterales (not Proteeae), P. aeruginosa and Acinetobacter.
+  assert.equal(row({ org: "enterobacter", s: { imipenem: 20, meropenem: 80 } }).cells.imipenem.act, "caution");
+  assert.equal(row({ org: "pmirabilis", s: { imipenem: 20, meropenem: 95 } }).cells.imipenem.act, "keep", "Proteus: raised imipenem MICs are expected");
+  assert.equal(row({ org: "paeruginosa", s: { imipenem: 0, meropenem: 60 } }).cells.imipenem.act, "caution", "SKNMC Pune urine");
+  assert.equal(row({ org: "paeruginosa", s: { imipenem: 45, meropenem: 70 } }).cells.imipenem.act, "keep", "OprD loss: a moderate gap is real");
+  assert.equal(row({ org: "bcepacia", s: { imipenem: 10, meropenem: 80 } }).cells.imipenem.act, "keep", "imipenem is not a test agent for Burkholderia");
+  // Streptococci: penicillin and ampicillin move together.
+  assert.equal(row({ org: "spneumoniae", s: { penicillin: 100, ampicillin: 0 } }).cells.penicillin.act, "caution");
+  // A beta-lactamase inhibitor cannot lower susceptibility.
+  assert.equal(row({ org: "ecoli", s: { ampicillin: 60, amoxiclav: 30 } }).cells.amoxiclav.act, "caution");
+  assert.equal(row({ org: "ecoli", s: { ampicillin: 20, amoxiclav: 45 } }).cells.amoxiclav.act, "keep");
+});
+
+test("review round 2: exceptional Gram-positive results need confirmation", () => {
+  assert.equal(row({ org: "saureus", s: { teicoplanin: 66.7 } }).cells.teicoplanin.act, "caution", "GMC Srinagar 2024");
+  assert.equal(row({ org: "saureus", s: { teicoplanin: 99 } }).cells.teicoplanin.act, "keep");
+  assert.equal(row({ org: "strep_bhs", s: { vancomycin: 80.8 } }).cells.vancomycin.act, "caution", "AIIMS Bhopal 2024 H2");
+  assert.equal(row({ org: "strep_bhs", s: { linezolid: 90 } }).cells.linezolid.act, "caution");
+  assert.equal(row({ org: "saureus", s: { tigecycline: 0 } }).cells.tigecycline.act, "caution");
+  assert.equal(row({ org: "efaecium", s: { tigecycline: 96 } }).cells.tigecycline.act, "keep");
+});
+
+test("review round 2: an unreliable table, a 0 that means not tested, and high-level gentamicin outside enterococci", () => {
+  const u = row({ org: "klebsiella", s: { tetracycline: 100, meropenem: 40, ampicillin: 0 }, unreliable: "levofloxacin 0% beside ciprofloxacin 37%" });
+  assert.equal(u.cells.tetracycline.act, "caution"); assert.equal(u.cells.meropenem.act, "caution");
+  assert.match(u.cells.meropenem.why, /not internally consistent/);
+  assert.equal(u.cells.ampicillin.act, "intrinsic", "intrinsic resistance is still shown as such");
+  const z = row({ org: "ecoli", s: { cefazolin: 0, meropenem: 90 }, untested: { cefazolin: "0 for every organism in the table" } });
+  assert.equal(z.cells.cefazolin.act, "caution"); assert.match(z.cells.cefazolin.why, /probably means not tested/);
+  assert.equal(z.cells.meropenem.act, "keep");
+  assert.equal(row({ org: "klebsiella", s: { gentamicin_hl: 0 } }).cells.gentamicin_hl.act, "hide");
+  assert.equal(row({ org: "saureus", s: { gentamicin_hl: 90 } }).cells.gentamicin_hl.act, "hide");
+  assert.equal(row({ org: "efaecalis", s: { gentamicin_hl: 60 } }).cells.gentamicin_hl.act, "keep");
+});
+
+test("review round 3: beta-lactam and aminoglycoside hierarchy, imipenem as the outlier, daptomycin", () => {
+  // SKIMS 2024 urine OPD E. coli: meropenem 23% beside ceftriaxone 87%.
+  assert.equal(row({ org: "ecoli", s: { ceftriaxone: 87, meropenem: 23 } }).cells.meropenem.act, "caution");
+  assert.equal(row({ org: "klebsiella", s: { ertapenem: 60, meropenem: 19 } }).cells.meropenem.act, "caution", "ertapenem above meropenem");
+  assert.equal(row({ org: "ecoli", s: { cefuroxime: 50, ceftriaxone: 25 } }).cells.ceftriaxone.act, "caution", "cefuroxime above ceftriaxone");
+  assert.equal(row({ org: "klebsiella", s: { gentamicin: 45, amikacin: 0 } }).cells.amikacin.act, "caution", "gentamicin above amikacin");
+  assert.equal(row({ org: "ecoli", s: { ceftriaxone: 30, meropenem: 85, ertapenem: 80, cefuroxime: 25, gentamicin: 60, amikacin: 90 } }).cells.meropenem.act, "keep", "a normal profile passes");
+  // Imipenem far below meropenem: only imipenem is questioned.
+  const im = row({ org: "paeruginosa", s: { imipenem: 10, meropenem: 60 } });
+  assert.equal(im.cells.imipenem.act, "caution"); assert.equal(im.cells.meropenem.act, "keep");
+  const mi = row({ org: "paeruginosa", s: { imipenem: 70, meropenem: 20 } });
+  assert.equal(mi.cells.imipenem.act, "caution"); assert.equal(mi.cells.meropenem.act, "caution");
+  // Daptomycin: E. faecium has no susceptible category (CLSI 2019+); E. faecalis below 90 is exceptional.
+  assert.match(row({ org: "efaecium", s: { daptomycin: 0 } }).cells.daptomycin.why, /no susceptible category/);
+  assert.equal(row({ org: "efaecalis", s: { daptomycin: 40 } }).cells.daptomycin.act, "caution");
+  // S. aureus: penicillin cannot exceed an oxacillin of 0; a stable beta-lactam cannot sit far below it.
+  assert.equal(row({ org: "saureus", n: 40, s: { oxacillin: 0, penicillin: 4 } }).cells.penicillin.act, "suppress");
+  assert.equal(row({ org: "saureus", s: { oxacillin: 45, ertapenem: 0 } }).cells.ertapenem.act, "caution");
+  assert.equal(row({ org: "saureus", s: { oxacillin: 45, piperacillin: 5 } }).cells.piperacillin.act, "keep", "penicillinase destroys piperacillin alone");
+});
+
+test("review round 3: WISCA counts an intrinsic 0 only when the drug is measured for some organism in the mix", () => {
+  const onlyGN = [{ org: "ecoli", n: 100, s: { meropenem: 80 }, act: {} }, { org: "klebsiella", n: 100, s: { meropenem: 40 }, act: {} }];
+  assert.equal(R.wisca(onlyGN, ["vancomycin"]).coverage, null, "vancomycin with no Gram-positive data is unknown, not 0%");
+  const mixed = onlyGN.concat([{ org: "saureus", n: 50, s: { vancomycin: 100 }, act: {} }]);
+  const w = R.wisca(mixed, ["vancomycin"]);
+  assert.equal(w.coverage, 20, "with S. aureus measured, the Gram-negatives count as 0: 50*100/250");
+});

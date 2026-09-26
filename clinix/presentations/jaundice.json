@@ -1,0 +1,163 @@
+{
+  "_comment": "CliniX 2.0 Presentation Library: Symptom-First Approach to Jaundice and Liver Failure. Reuses shared Skills as atoms and provides tiered clinical reasoning from recognition to discriminators and emergency actions.",
+  "schemaVersion": 1,
+  "id": "jaundice",
+  "title": "Approach to Jaundice and Liver Failure",
+  "subtitle": "Pre-hepatic, hepatocellular, and cholestatic jaundice, acute liver failure triage, and hepatic stigmata",
+  "system": "abdomen",
+  "estMinutes": 45,
+  "review": {
+    "status": "approved",
+    "reviewer": "Clinical Review Team"
+  },
+  "layers": {
+    "recognise": {
+      "redFlags": [
+        "Hepatic Encephalopathy (altered sleep-wake rhythm, confusion, drowsiness, asterixis / flapping tremor)",
+        "Spontaneous bleeding, purpura, hematemesis, or melena with coagulopathy (INR > 1.5)",
+        "Charcot's Triad (Jaundice + High fever with rigors + Severe RUQ abdominal pain) indicating acute ascending cholangitis — life-threatening sepsis",
+        "Reynolds' Pentad (Charcot's triad + Shock + Mental confusion) indicating toxic acute obstructive cholangitis",
+        "Oliguria, rapid rise in serum creatinine, and refractory hyponatremia in advanced cirrhosis (Hepatorenal Syndrome)",
+        "Hypoglycemia in acute liver failure (due to failure of hepatic glycogenolysis and gluconeogenesis)"
+      ],
+      "vitalsPriorities": [
+        "Capillary Blood Glucose: Crucial in acute liver failure; impaired hepatic gluconeogenesis and hyperinsulinemia cause severe, life-threatening hypoglycemia.",
+        "Blood Pressure and Hydration: Cirrhotic patients have hyperdynamic circulation (low SVR, wide pulse pressure). Hypotension with fever suggests spontaneous bacterial peritonitis (SBP) or septic shock.",
+        "Temperature: Fever indicates infection (cholangitis, SBP, viral hepatitis, abscess). Note: advanced cirrhotics can have hypothermia or normal temperature even with severe sepsis."
+      ]
+    },
+    "classify": {
+      "mechanism": {
+        "pre_hepatic_hemolytic": [
+          "Autoimmune Hemolytic Anemia (AIHA)",
+          "Hereditary Spherocytosis, G6PD Deficiency crisis, Sickle Cell Disease",
+          "Thrombotic Microangiopathy (TTP / HUS / HELLP)",
+          "Gilbert's Syndrome (mild unconjugated hyperbilirubinemia triggered by fasting, stress, or febrile illness; normal LFTs and histology)",
+          "Crigler-Najjar Syndrome (Types I and II - severe UDP-glucuronosyltransferase deficiency)"
+        ],
+        "intra_hepatic_hepatocellular": [
+          "Acute Viral Hepatitis (Hepatitis A, B, C, D, E; EBV, CMV)",
+          "Drug-Induced Liver Injury (DILI): Acetaminophen overdose, Antitubercular therapy (Isoniazid, Rifampicin, Pyrazinamide), Amoxicillin-Clavulanate, Statins, Antiepileptics",
+          "Alcoholic Hepatitis (acute jaundice, tender hepatomegaly, AST:ALT > 2:1)",
+          "Autoimmune Hepatitis (AIH)",
+          "Wilson's Disease (acute hemolytic jaundice in a young patient, low ceruloplasmin, Kayser-Fleischer rings)",
+          "Ischemic Hepatitis ('Shock Liver' following cardiac arrest, severe hypotension, or sepsis)"
+        ],
+        "post_hepatic_cholestatic_obstructive": [
+          "Choledocholithiasis (common bile duct stones with intermittent colicky pain)",
+          "Carcinoma of Head of Pancreas (painless progressive jaundice with palpable gallbladder)",
+          "Cholangiocarcinoma (Klatskin tumor at hepatic duct bifurcation)",
+          "Periampullary Carcinoma (fluctuating jaundice, occult GI bleed, silver stools)",
+          "Primary Biliary Cholangitis (PBC) and Primary Sclerosing Cholangitis (PSC)",
+          "Biliary strictures (post-cholecystectomy, chronic pancreatitis)"
+        ]
+      },
+      "tempo": {
+        "hyperacute_hours_to_days": [
+          "Acute Acetaminophen Toxicity",
+          "Acute Ischemic Hepatitis",
+          "Acute Ascending Cholangitis",
+          "Massive Intravascular Hemolysis (mismatched blood transfusion, blackwater fever)"
+        ],
+        "acute_days_to_weeks": [
+          "Acute Viral Hepatitis",
+          "Alcoholic Steatohepatitis",
+          "Acute Choledocholithiasis",
+          "Acute Liver Failure (ALF: within 26 weeks of jaundice in patient without prior cirrhosis)"
+        ],
+        "chronic_months_to_years": [
+          "Decompensated Liver Cirrhosis (chronic alcohol, HBV, HCV, NAFLD/MASH)",
+          "Carcinoma Head of Pancreas / Cholangiocarcinoma",
+          "Primary Biliary Cholangitis (PBC)"
+        ]
+      }
+    },
+    "discriminators": [
+      {
+        "title": "Hemolytic vs Obstructive Jaundice",
+        "finding": "Urine and stool color: In hemolytic jaundice, urine color is normal (acholuric jaundice) because unconjugated bilirubin is water-insoluble; stool color is dark. In obstructive cholestatic jaundice, urine is dark brownish-yellow (water-soluble conjugated bilirubin excreted in urine) and stools are clay-colored/pale (absence of stercobilin).",
+        "highYield": "Acholuric jaundice (jaundice without bilirubin in urine) is the pathognomonic hallmark of unconjugated hyperbilirubinemia (hemolysis or Gilbert's)."
+      },
+      {
+        "title": "Courvoisier's Law (Stone vs Malignant Obstruction)",
+        "finding": "In a jaundiced patient, a palpably enlarged gallbladder is unlikely to be due to gallstones. Chronic cholecystitis from longstanding gallstones causes the gallbladder wall to become fibrotic and shrunken. A distended, palpable, non-tender gallbladder indicates malignant obstruction of the common bile duct distal to the cystic duct (e.g. pancreatic head adenocarcinoma).",
+        "highYield": "Exceptions to Courvoisier's law: Double impaction of stones (cystic duct + CBD), oriental cholangiohepatitis, mucocele of gallbladder with stone in cystic duct."
+      },
+      {
+        "title": "AST:ALT Ratio Interpretation",
+        "finding": "AST:ALT > 2:1 with AST < 400 IU/L strongly indicates Alcoholic Liver Disease (alcohol damages mitochondria releasing AST, and pyridoxal phosphate deficiency suppresses ALT synthesis). Very high transaminases (> 1,000–5,000 IU/L) occur only in three scenarios: Acute viral hepatitis, Acute DILI/toxic necrosis (paracetamol), and Ischemic hepatitis ('shock liver').",
+        "highYield": "Transaminases in the thousands almost never occur in simple alcoholic hepatitis or gallstone disease."
+      },
+      {
+        "title": "Serum-Ascites Albumin Gradient (SAAG)",
+        "finding": "SAAG = Serum Albumin - Ascitic Fluid Albumin. SAAG ≥ 1.1 g/dL indicates High Gradient (Portal Hypertension present: Cirrhosis, Cardiac failure, Budd-Chiari, Constrictive pericarditis). SAAG < 1.1 g/dL indicates Low Gradient (No Portal Hypertension: Peritoneal Carcinomatosis, Peritoneal Tuberculosis, Pancreatic ascites, Nephrotic syndrome).",
+        "highYield": "SAAG > 1.1 g/dL with high ascitic total protein (> 2.5 g/dL) points to cardiac ascites or Budd-Chiari; SAAG > 1.1 with low protein (< 2.5 g/dL) points to uncomplicated cirrhosis."
+      }
+    ],
+    "dontMiss": [
+      {
+        "disease": "Acute Liver Failure (ALF)",
+        "clue": "Jaundice + Coagulopathy (INR ≥ 1.5) + Hepatic Encephalopathy in a patient without underlying cirrhosis within 26 weeks.",
+        "action": "Immediate ICU admission, early administration of N-acetylcysteine (NAC) regardless of etiology, aggressive cerebral edema prevention (head elevated 30 degrees, avoid hypoosmolality, target Na 145-150 mEq/L), urgent liver transplant center contact."
+      },
+      {
+        "disease": "Acute Ascending Cholangitis",
+        "clue": "Charcot's triad (Fever with chills + Jaundice + RUQ abdominal pain).",
+        "action": "MEDICAL & SURGICAL EMERGENCY. Immediate fluid resuscitation, broad-spectrum IV antibiotics (e.g. Piperacillin-Tazobactam or Carbapenem), emergency biliary decompression via ERCP (sphincterotomy / stenting) or Percutaneous Transhepatic Cholangiography (PTC)."
+      },
+      {
+        "disease": "Spontaneous Bacterial Peritonitis (SBP)",
+        "clue": "Cirrhotic with ascites presenting with subtle clinical deterioration: mild abdominal discomfort, worsening encephalopathy, unexplained fever, or acute renal failure.",
+        "action": "Immediate diagnostic paracentesis prior to antibiotic administration. Ascitic fluid absolute neutrophil count (ANC) ≥ 250/µL confirms SBP. Start IV 3rd-generation cephalosporin (Cefotaxime or Ceftriaxone) + IV Albumin (1.5 g/kg on day 1, 1.0 g/kg on day 3 to prevent hepatorenal syndrome)."
+      },
+      {
+        "disease": "Acetaminophen-Induced Hepatotoxicity",
+        "clue": "History of intentional or accidental paracetamol ingestion > 150 mg/kg, right upper quadrant tenderness, skyrocketing AST/ALT.",
+        "action": "Administer IV N-Acetylcysteine (NAC) immediately. Plot serum paracetamol concentration on the Rumack-Matthew nomogram if ingestion was within 4-24 hours."
+      }
+    ],
+    "investigations": {
+      "step1_immediate": [
+        "Bedside Capillary Blood Glucose (detect hepatic hypoglycemia)",
+        "Liver Function Tests (LFT): Total and Direct Bilirubin, AST, ALT, Alkaline Phosphatase, GGT, Total Protein, Albumin",
+        "Coagulation Profile: PT/INR and aPTT (the most sensitive real-time indicator of hepatic synthetic function)",
+        "Abdominal Ultrasound with Hepatic Vascular Doppler (evaluate biliary duct dilation, gallbladder stones/sludge, liver echotexture, splenomegaly, portal/hepatic vein patency)"
+      ],
+      "step2_urgent": [
+        "Diagnostic Abdominal Paracentesis if ascites present (SAAG, cell count, neutrophil count, culture in blood culture bottles)",
+        "Acute Viral Hepatitis Serologies: IgM anti-HAV, HBsAg, IgM anti-HBc, Anti-HCV, IgM anti-HEV",
+        "Serum Acetaminophen level and toxicology screen",
+        "Renal Panel & Electrolytes (monitor for Hepatorenal syndrome: rising creatinine, urine sodium < 10 mEq/L)"
+      ],
+      "step3_confirmatory": [
+        "Magnetic Resonance Cholangiopancreatography (MRCP) or Endoscopic Ultrasound (EUS) for non-invasive biliary tree visualization",
+        "Autoimmune Liver Markers: ANA, ASMA (Anti-Smooth Muscle), Anti-LKM1, quantitative serum IgG",
+        "Metabolic Screen: Serum Ceruloplasmin and 24-hour urinary copper (Wilson's disease), Serum Ferritin and Transferrin Saturation (Hemochromatosis)",
+        "Liver Biopsy (percutaneous or transjugular when coagulopathy is present, for definitive etiology)"
+      ]
+    },
+    "skills": [
+      "skill.gen.jaundice",
+      "skill.gen.stigmata",
+      "skill.exam.abdo.inspection",
+      "skill.exam.abdo.liver",
+      "skill.exam.abdo.spleen",
+      "skill.exam.abdo.ascites",
+      "skill.gen.vitals"
+    ],
+    "examPearls": [
+      {
+        "topic": "Scleral Icterus Detection",
+        "text": "Scleral icterus is best detected under natural daylight by examining the superior bulbar conjunctiva when the patient looks downward. The high elastin content of the sclera has an avid affinity for bilirubin. It becomes clinically apparent when serum bilirubin exceeds 2.5 to 3.0 mg/dL (40-50 µmol/L)."
+      },
+      {
+        "topic": "Peripheral Stigmata of Chronic Liver Disease",
+        "text": "Hyperestrogenism signs: Spider angiomas / nevi (confined to SVC distribution above nipple line), Palmar erythema, Gynecomastia, Loss of secondary sexual hair, Testicular atrophy. Malnutrition/fibrosis signs: Dupuytren's contracture, Leukonychia (Muehrcke's lines / Terry's nails), Parotid enlargement. Portal hypertension signs: Caput medusae, Splenomegaly, Ascites."
+      },
+      {
+        "topic": "Asterixis (Flapping Tremor) Physiology",
+        "text": "Asterixis is NOT a true rhythmic tremor. It is 'negative myoclonus' — a sudden, brief, involuntary lapse of muscle contraction in an outstretched limb held in sustained posture. Test by asking the patient to extend arms forward, spread fingers, and dorsiflex wrists for 30 seconds."
+      }
+    ]
+  }
+}

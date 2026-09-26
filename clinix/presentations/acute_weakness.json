@@ -1,0 +1,174 @@
+{
+  "_comment": "CliniX 2.0 Presentation Library: Symptom-First Approach to Acute Neurological Deficit (Weakness). Reuses shared Skills as atoms and provides tiered clinical reasoning from recognition to neuroaxis localization and emergency actions.",
+  "schemaVersion": 1,
+  "id": "acute_weakness",
+  "title": "Approach to Acute Neurological Deficit (Weakness)",
+  "subtitle": "Acute hemiplegia, paraplegia, quadriplegia, stroke vs mimics, neuroaxis localization, and emergency triage",
+  "system": "neurology",
+  "estMinutes": 50,
+  "review": {
+    "status": "approved",
+    "reviewer": "Clinical Review Team"
+  },
+  "layers": {
+    "recognise": {
+      "redFlags": [
+        "Sudden onset focal neurological deficit (face drooping, arm drift, speech disturbance — BE-FAST / Cincinnati prehospital criteria)",
+        "Fluctuating sensorium or rapid drop in GCS (Glasgow Coma Scale) signaling expanding intracranial hematoma, cerebral edema, or uncal herniation",
+        "Signs of impending brain herniation (Cushing triad: hypertension, bradycardia, irregular respirations; unilateral blown unreactive pupil)",
+        "Acute respiratory muscle weakness with Single Breath Count < 20 or forced vital capacity < 15 mL/kg in acute polyradiculoneuropathy (GBS) or myasthenia",
+        "Sudden back pain followed by rapid bilateral leg weakness, sensory level on trunk, and acute urinary retention (acute spinal cord compression — surgical emergency)",
+        "Fever, severe headache, neck stiffness, and focal deficit (bacterial meningitis, brain abscess, or herpes encephalitis)"
+      ],
+      "vitalsPriorities": [
+        "Capillary Blood Glucose immediately: Every patient with an acute neurological deficit MUST have bedside blood glucose checked immediately to exclude hypoglycemia, the commonest and most easily reversible stroke mimic.",
+        "Blood Pressure Management: In acute ischemic stroke eligible for thrombolysis, maintain BP < 185/110 mmHg. In acute intracerebral hemorrhage, cautiously lower SBP to 140 mmHg. Avoid sudden precipitous drops that compromise penumbral perfusion.",
+        "Airway & Respiratory Assessment: Assess gag reflex, swallowing, and paradoxical diaphragmatic movement; GCS ≤ 8 requires definitive airway control."
+      ]
+    },
+    "classify": {
+      "tempo": {
+        "hyperacute_seconds_to_minutes": [
+          "Acute Ischemic Stroke (thromboembolic occlusion of cerebral artery)",
+          "Intracerebral Hemorrhage (hypertensive parenchymal bleed)",
+          "Subarachnoid Hemorrhage (ruptured berry aneurysm)",
+          "Transient Ischemic Attack (TIA - resolution within 24 hours)",
+          "Todd's Post-Ictal Paresis (focal weakness following epileptic seizure)"
+        ],
+        "acute_hours_to_days": [
+          "Guillain-Barré Syndrome (acute inflammatory demyelinating polyneuropathy)",
+          "Acute Transverse Myelitis (idiopathic, post-infectious, or neuromyelitis optica)",
+          "Hypokalemic / Hyperkalemic Periodic Paralysis",
+          "Myasthenic Crisis",
+          "Acute Spinal Epidural Abscess or Hematoma"
+        ],
+        "subacute_to_chronic_weeks_to_months": [
+          "Intracranial Neoplasm / Brain Metastases with mass effect",
+          "Subdural Hematoma (chronic or subacute, especially in elderly / alcoholic)",
+          "Amyotrophic Lateral Sclerosis (ALS / Motor Neuron Disease)",
+          "Cervical Spondylotic Myelopathy",
+          "Diabetic Amyotrophy / Lumbosacral Radiculoplexus Neuropathy"
+        ]
+      },
+      "neuroaxis": {
+        "cerebral_cortex": [
+          "Contralateral hemiplegia with cortical signs: Aphasia (dominant hemisphere), Neglect / Hemi-inattention (non-dominant hemisphere), Homonymous Hemianopia",
+          "Faciobrachial predominance (Middle Cerebral Artery territory) vs Leg predominance (Anterior Cerebral Artery territory)"
+        ],
+        "internal_capsule_subcortex": [
+          "Pure motor hemiplegia: Dense, uniform weakness equally affecting face, arm, and leg without aphasia, neglect, or sensory loss (classic lacunar infarct)"
+        ],
+        "brainstem": [
+          "Crossed / Alternating Hemiplegia: Ipsilateral cranial nerve palsy + contralateral motor/sensory hemiplegia",
+          "Midbrain: Weber syndrome (CN III palsy + contralateral hemiplegia)",
+          "Pons: Millard-Gubler syndrome (CN VI and VII palsies + contralateral hemiplegia)",
+          "Medulla: Wallenberg syndrome (lateral medullary: dysphagia, hoarseness, Horner's syndrome, ataxia, crossed pain/temp loss)"
+        ],
+        "spinal_cord": [
+          "Paraplegia or Quadriplegia with distinct trunk sensory level, autonomic dysfunction (urinary retention, constipation), bilateral extensor plantars",
+          "Brown-Séquard syndrome (hemicord): Ipsilateral UMN weakness and dorsal column loss, contralateral spinothalamic pain/temp loss"
+        ],
+        "anterior_horn_cell": [
+          "Pure motor weakness without sensory loss, fasciculations, muscle wasting, mixed UMN/LMN signs (ALS / Polio)"
+        ],
+        "peripheral_nerve_plexus": [
+          "Ascending symmetrical flaccid quadriparesis with glove-and-stocking sensory loss, early loss of deep tendon reflexes (GBS, toxic/nutritional neuropathies)"
+        ],
+        "neuromuscular_junction": [
+          "Fluctuating, fatiguable weakness, diurnal variation, ptosis, diplopia, bulbar weakness, no sensory loss, preserved deep tendon reflexes (Myasthenia Gravis, Lambert-Eaton)"
+        ],
+        "muscle": [
+          "Symmetrical proximal limb-girdle weakness (difficulty climbing stairs, rising from squatting, combing hair), normal sensation, normal reflexes until late (Polymyositis, Dermatomyositis, Muscular Dystrophies)"
+        ]
+      }
+    },
+    "discriminators": [
+      {
+        "title": "Cortical vs Subcortical (Lacunar) Stroke",
+        "finding": "Cortical stroke features higher cortical dysfunctions (Aphasia, Apraxia, Agnosia, Spatial Neglect) and unequal weakness (arm > leg in MCA; leg > arm in ACA). Subcortical capsular stroke shows pure motor hemiplegia equally involving face, arm, and leg without any cortical signs.",
+        "highYield": "Presence of aphasia or spatial neglect conclusively confirms cortical localization and excludes a simple lacunar syndrome."
+      },
+      {
+        "title": "UMN vs LMN Facial Nerve Palsy",
+        "finding": "UMN lesion (supranuclear stroke): Forehead wrinkling is preserved because the frontalis muscle receives bilateral corticobulbar innervation; only lower half of face is paralyzed. LMN lesion (nuclear/infranuclear Bell's palsy): Entire ipsilateral side of face is paralyzed, including inability to wrinkle forehead and incomplete eye closure (Bell's phenomenon).",
+        "highYield": "If the patient can wrinkle their forehead when looking up, the facial weakness is UMN (stroke/central) until proven otherwise."
+      },
+      {
+        "title": "Acute Stroke vs Todd's Paresis",
+        "finding": "Todd's paresis is transient focal motor weakness following a seizure. Key clues: witnessed convulsion, tongue biting, urinary incontinence, post-ictal confusion, previous epilepsy. Sensation is often preserved and weakness resolves within 24 hours.",
+        "highYield": "Never diagnose Todd's paresis without brain imaging: a seizure can be the initial presentation of acute ischemic or hemorrhagic stroke."
+      },
+      {
+        "title": "Guillain-Barré Syndrome vs Acute Transverse Myelitis",
+        "finding": "GBS causes flaccid ascending weakness with universal AREFLEXIA (absent ankle and knee jerks early) and no sharp sensory level on the trunk. Transverse Myelitis presents with a sharp spinal sensory level, early urinary retention, and extensor plantar responses (Babinski positive).",
+        "highYield": "Absent deep tendon reflexes in weak legs point to peripheral neuropathy / GBS; hyperreflexia and extensor plantars point to myelopathy."
+      }
+    ],
+    "dontMiss": [
+      {
+        "disease": "Acute Ischemic Stroke (within Thrombolytic / Thrombectomy Window)",
+        "clue": "Sudden onset focal neurological deficit with known time of symptom onset or last seen normal.",
+        "action": "Immediate non-contrast head CT to rule out hemorrhage, calculate NIHSS score, administer IV Alteplase / Tenecteplase if within 4.5 hours and no contraindications; immediate CT Angiography to evaluate for Large Vessel Occlusion (LVO) eligible for Endovascular Mechanical Thrombectomy within 24 hours."
+      },
+      {
+        "disease": "Acute Spinal Cord Compression",
+        "clue": "Bilateral leg weakness, bilateral sensory level on thorax/abdomen, saddle anesthesia, acute urinary retention, fecal incontinence, lax anal tone.",
+        "action": "SURGICAL EMERGENCY. High-dose IV dexamethasone (if neoplastic compression), emergency whole-spine MRI, urgent spine surgery consultation for decompression within 24-48 hours to prevent irreversible paraplegia."
+      },
+      {
+        "disease": "Guillain-Barré Syndrome with Respiratory Failure",
+        "clue": "Ascending quadriparesis, facial diplegia, autonomic instability (fluctuating BP/tachycardia), single breath count < 20.",
+        "action": "Serial FVC monitoring (rule of 20/30/40: FVC < 20 mL/kg, MIP < 30 cmH2O, MEP < 40 cmH2O). Elective ICU transfer and endotracheal intubation before emergency respiratory arrest. Initiate IVIG (0.4 g/kg/day for 5 days) or Plasmapheresis. Corticosteroids are ineffective in GBS."
+      },
+      {
+        "disease": "Acute Intracerebral Hemorrhage with Mass Effect",
+        "clue": "Sudden headache, vomiting, high blood pressure, rapid deterioration of consciousness, focal motor deficit.",
+        "action": "Immediate reversal of anticoagulation if applicable (Idarucizumab, Andexanet alfa, 4-factor PCC, Vitamin K), cautious BP lowering to target SBP 140 mmHg with IV nicardipine/labetalol, urgent neurosurgical evaluation for hematoma evacuation or external ventricular drain."
+      }
+    ],
+    "investigations": {
+      "step1_immediate": [
+        "Bedside Capillary Blood Glucose (rule out hypoglycemia immediately)",
+        "Non-contrast Head Computed Tomography (NCCT Brain: differentiates acute hemorrhage from ischemic stroke)",
+        "NIH Stroke Scale (NIHSS) standardized clinical neurological assessment",
+        "12-Lead ECG (rule out atrial fibrillation, acute myocardial infarction, arrhythmias)"
+      ],
+      "step2_urgent": [
+        "CT Angiography (CTA) of Brain and Neck (assess carotids, basilar artery, and large vessel intracranial occlusions for thrombectomy)",
+        "Magnetic Resonance Imaging (MRI) Brain with DWI / ADC (hyperacute ischemia detection within minutes, posterior circulation stroke)",
+        "Urgent Whole-Spine MRI (if paraplegia, quadriplegia, or sensory level suspected)",
+        "Complete Blood Count, PT/INR, aPTT, Serum Electrolytes, Renal Panel"
+      ],
+      "step3_confirmatory": [
+        "Transthoracic / Transesophageal Echocardiography (assess for left atrial appendage thrombus, PFO, infective endocarditis)",
+        "24-48 Hour Holter Monitoring (detect occult paroxysmal atrial fibrillation)",
+        "Cerebrospinal Fluid (CSF) Analysis (albuminocytological dissociation in GBS, oligoclonal bands in MS, xanthochromia in SAH)",
+        "Nerve Conduction Studies & Electromyography (NCS/EMG: demyelinating vs axonal neuropathy, motor neuron disease)"
+      ]
+    },
+    "skills": [
+      "skill.exam.neuro.cranial_nerves",
+      "skill.exam.neuro.motor_tone",
+      "skill.exam.neuro.motor_power",
+      "skill.exam.neuro.reflexes",
+      "skill.exam.neuro.plantar",
+      "skill.exam.neuro.sensory",
+      "skill.exam.neuro.coordination",
+      "skill.gen.vitals"
+    ],
+    "examPearls": [
+      {
+        "topic": "The Non-Contrast CT Paradox",
+        "text": "In the first 4-6 hours of an acute ischemic stroke, a non-contrast CT head is normal in over 50% of patients. Examiners frequently ask: 'What does a normal CT scan tell you?' The correct answer: 'It rules OUT acute intracerebral hemorrhage, thereby allowing immediate intravenous thrombolysis.'"
+      },
+      {
+        "topic": "MRC Muscle Power Grading",
+        "text": "Grade 0: Complete paralysis (no flicker). Grade 1: Flicker or trace of contraction without joint movement. Grade 2: Active movement with gravity eliminated. Grade 3: Active movement against gravity but not against resistance. Grade 4: Active movement against gravity and some resistance (subdivided into 4-, 4, 4+). Grade 5: Normal power."
+      },
+      {
+        "topic": "Inverted Reflexes (Localizing Spinal Cord Compression)",
+        "text": "An inverted supinator jerk (striking brachioradialis tendon produces finger flexion with absent supinator/biceps response) indicates an LMN lesion at C5-C6 combined with an UMN lesion compressing the spinal cord and disinhibiting C7-C8 flexors below."
+      }
+    ]
+  }
+}

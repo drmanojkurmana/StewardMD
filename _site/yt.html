@@ -81,7 +81,10 @@
     "JZ4F9Z2W0kE": 1,   // Flapping Tremor - Asterixis - Doctor O'Donovan
     "Id5WG38qzG4": 1,   // Abdominal Pain History - Geeky Medics
     "Ak_cB8EfrTU": 1,   // Headache History - Geeky Medics
-    "5_txE56X2-8": 1    // Spine Examination - Geeky Medics
+    "5_txE56X2-8": 1,   // Spine Examination - Geeky Medics
+    "WfkWMfE9VTY": 1,   // Bronchial Breath Sounds - Medzcool
+    "U8byn2NT_lo": 1,   // Abnormal Lung Sounds (Wheeze, Crackles, Stridor, Rub) - RegisteredNurseRN
+    "tjIllL7ng2Q": 1    // Aortic Stenosis Murmur - Clinical Examination
   };
 
   function param(name) {
@@ -100,12 +103,14 @@
   if (!/^[A-Za-z0-9_-]{11}$/.test(v)) { fail("No video requested."); return; }
   if (ALLOW[v] !== 1) { fail("That video is not part of CliniX."); return; }
 
+  var start = parseInt(param("start") || param("t") || "0", 10);
   var f = document.createElement("iframe");
   // enablejsapi so the parent can detect that the player really started, and fall back to a
   // link card if it did not. playsinline keeps it in the lesson on iOS instead of going fullscreen.
   f.src = "https://www.youtube.com/embed/" + v +
-          "?rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=" +
-          encodeURIComponent(location.origin);
+          "?rel=0&modestbranding=1&playsinline=1&enablejsapi=1" +
+          (start > 0 ? "&start=" + start : "") +
+          "&origin=" + encodeURIComponent(location.origin);
   f.setAttribute("allow", "accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen");
   f.setAttribute("allowfullscreen", "");
   f.setAttribute("title", "CliniX teaching video");

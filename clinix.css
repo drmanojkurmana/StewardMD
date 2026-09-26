@@ -328,6 +328,7 @@
 }
 
 #clinixRoot .cx-src { padding: 4px 16px 20px; font-size: 11.5px; color: var(--cx-faint); line-height: 1.5; }
+#clinixRoot .cx-src-badge { display: inline-block; padding: 1px 6px; border-radius: 4px; background: rgba(0, 114, 206, 0.1); color: #0072ce; font-weight: 700; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.04em; margin-right: 6px; vertical-align: middle; }
 #clinixRoot .cx-src-draft { display: block; color: var(--cx-warn); font-weight: 600; margin-bottom: 2px; }
 
 /* ── notices, states ──────────────────────────────────────────────────────── */
@@ -477,6 +478,27 @@ html.cx-lock .ghis-ward-fab { display: none !important; }
    and every accent theme with no duplicate palette. An <img> could not do this. */
 
 #clinixRoot .cx-media--dia { padding: 8px 8px 0; }
+#clinixRoot .cx-media--dual { padding: 8px 8px 0; display: flex; flex-direction: column; }
+#clinixRoot .cx-dia-dual-nav { display: flex; gap: 6px; margin-bottom: 8px; background: var(--cx-subtle); padding: 3px; border-radius: var(--cx-r-ctl); border: 1px solid var(--cx-line); }
+#clinixRoot .cx-dia-dual-btn { flex: 1; padding: 6px 10px; border: none; background: transparent; color: var(--cx-muted); font-family: var(--cx-sans); font-size: 11px; font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 5px; }
+#clinixRoot .cx-dia-dual-btn--on { background: var(--cx-surface); color: var(--cx-primary); box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-weight: 700; }
+#clinixRoot .cx-dia-dual-viewport { width: 100%; overflow: hidden; border-radius: var(--cx-r-card); border: 1px solid var(--cx-line); background: var(--cx-surface); }
+#clinixRoot .cx-dia-dual-track { display: flex; width: 200%; transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
+#clinixRoot .cx-dia-dual-slide { width: 50%; flex-shrink: 0; box-sizing: border-box; padding: 8px; position: relative; }
+#clinixRoot .cx-dia-art-wrap { position: relative; width: 100%; border-radius: 6px; overflow: hidden; background: #000; border: 1px solid var(--cx-line); }
+#clinixRoot .cx-dia-art-img { display: block; width: 100%; max-height: 280px; object-fit: contain; background: #0d1117; }
+#clinixRoot .cx-dia-art-badge, #clinixRoot .cx-dia-svg-badge { position: absolute; top: 8px; left: 8px; display: inline-flex; align-items: center; gap: 5px; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(4px); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.15); pointer-events: none; z-index: 2; }
+#clinixRoot .cx-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #10b981; }
+#clinixRoot .cx-badge-dot--interactive { background: #3b82f6; }
+#clinixRoot .cx-dia-art-meta { margin-top: 6px; padding: 4px 6px; }
+#clinixRoot .cx-dia-art-title { font-size: 12px; font-weight: 700; color: var(--cx-ink); }
+#clinixRoot .cx-dia-art-desc { font-size: 11px; color: var(--cx-muted); margin-top: 2px; line-height: 1.35; }
+#clinixRoot .cx-dia-svg-content { position: relative; width: 100%; }
+#clinixRoot .cx-dia-dual-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; padding: 0 4px; }
+#clinixRoot .cx-dia-dual-dots { display: flex; gap: 4px; }
+#clinixRoot .cx-dia-dual-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cx-line); border: none; padding: 0; cursor: pointer; transition: all 0.2s ease; }
+#clinixRoot .cx-dia-dual-dot--on { background: var(--cx-primary); width: 18px; border-radius: 4px; }
+#clinixRoot .cx-dia-dual-hint { font-size: 9px; color: var(--cx-faint); font-weight: 500; text-align: right; }
 #clinixRoot .cx-dia { display: block; width: 100%; height: auto; }
 #clinixRoot .cx-dia text { font-family: var(--cx-sans); font-size: 9px; fill: var(--cx-muted); }
 #clinixRoot .cx-dia-axis { stroke: var(--cx-line); stroke-width: 1.5; }
@@ -590,6 +612,15 @@ html.cx-lock .ghis-ward-fab { display: none !important; }
 #clinixRoot .cx-snd-wave--on i:nth-child(5) { animation-delay: .48s; }
 @keyframes cx-eq { 0%, 100% { height: 5px; } 50% { height: 20px; } }
 #clinixRoot .cx-snd-hint { padding: 0 16px 12px; font-size: 13.5px; line-height: 1.5; color: var(--cx-muted); }
+#clinixRoot .cx-snd-real-wrap { padding: 0 16px 14px; }
+#clinixRoot .cx-snd-real-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 12.5px; font-weight: 600; padding: 7px 13px; border-radius: 8px;
+  background: var(--cx-surface-2); color: var(--cx-ink); border: 1px solid var(--cx-line);
+  cursor: pointer; font-family: inherit; transition: all .15s ease;
+}
+#clinixRoot .cx-snd-real-btn:active { background: var(--cx-surface-3); transform: scale(.98); }
+#clinixRoot .cx-snd-real-btn .material-symbols-rounded { color: #e50914; font-size: 19px; }
 
 /* ── diagram anatomy (shared) ─────────────────────────────────────────────── */
 
@@ -616,15 +647,22 @@ html.cx-lock .ghis-ward-fab { display: none !important; }
 
 /* chest expansion: the chest widens on inspiration; thumbs separate ONLY when floating */
 #clinixRoot .cx-dia-chest { fill: var(--cx-surface-2); stroke: var(--cx-line); stroke-width: 2; }
-#clinixRoot .cx-dia--anim .cx-dia-chest { transform-origin: 170px 105px; animation: cx-breathe 3.4s ease-in-out infinite; }
+#clinixRoot .cx-dia--anim .cx-dia-chest { transform-origin: 180px 130px; animation: cx-breathe 3.4s ease-in-out infinite; }
 #clinixRoot .cx-dia--float .cx-dia-thumbL { animation: cx-thumbL 3.4s ease-in-out infinite; }
 #clinixRoot .cx-dia--float .cx-dia-thumbR { animation: cx-thumbR 3.4s ease-in-out infinite; }
+#clinixRoot .cx-dia--unilateral .cx-dia-thumbL { animation: cx-thumbL-lag 3.4s ease-in-out infinite; }
+#clinixRoot .cx-dia--unilateral .cx-dia-thumbR { animation: cx-thumbR 3.4s ease-in-out infinite; }
+#clinixRoot .cx-dia--bilateral .cx-dia-thumbL { animation: cx-thumb-restricted-L 3.4s ease-in-out infinite; }
+#clinixRoot .cx-dia--bilateral .cx-dia-thumbR { animation: cx-thumb-restricted-R 3.4s ease-in-out infinite; }
 /* anchored: the thumbs travel WITH the wall, so the gap never opens. That is the whole lesson. */
 #clinixRoot .cx-dia--anchored .cx-dia-thumbL,
 #clinixRoot .cx-dia--anchored .cx-dia-thumbR { animation: none; }
-@keyframes cx-breathe { 0%, 100% { transform: scaleX(1); } 45% { transform: scaleX(1.13); } }
-@keyframes cx-thumbL { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(-15px); } }
-@keyframes cx-thumbR { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(15px); } }
+@keyframes cx-breathe { 0%, 100% { transform: scaleX(1); } 45% { transform: scaleX(1.12); } }
+@keyframes cx-thumbL { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(-16px); } }
+@keyframes cx-thumbR { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(16px); } }
+@keyframes cx-thumbL-lag { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(-3px); } }
+@keyframes cx-thumb-restricted-L { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(-5px); } }
+@keyframes cx-thumb-restricted-R { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(5px); } }
 
 /* auscultation sites */
 #clinixRoot .cx-dia-zone--ausc circle { stroke: var(--cx-teach); }
@@ -653,12 +691,23 @@ html.cx-lock .ghis-ward-fab { display: none !important; }
 #clinixRoot .cx-dia-clav { fill: none; stroke: var(--cx-line); stroke-width: 3; }
 #clinixRoot .cx-dia-arrow-shift { stroke: var(--cx-teach); stroke-width: 2.5; fill: none; }
 
-/* clubbing */
+/* clubbing & Schamroth sign */
 #clinixRoot .cx-dia-finger-s { fill: var(--cx-surface-2); stroke: var(--cx-ink); stroke-width: 2; }
 #clinixRoot .cx-dia-nail { fill: none; stroke: var(--cx-primary); stroke-width: 3; stroke-linecap: round; }
-#clinixRoot .cx-dia-nail--club { stroke: var(--cx-teach); }
+#clinixRoot .cx-dia-nail--club { stroke: var(--cx-teach); stroke-width: 3.5; }
 #clinixRoot .cx-dia-angle { stroke: var(--cx-muted); stroke-width: 1.5; }
 #clinixRoot .cx-dia-window { fill: none; stroke: var(--cx-primary); stroke-width: 2; }
+#clinixRoot .cx-dia-window-light { fill: rgba(245, 158, 11, 0.45); stroke: #f59e0b; stroke-width: 2; animation: cx-window-glow 2.5s ease-in-out infinite; }
+@keyframes cx-window-glow { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+
+/* cranial nerves interactive brainstem map */
+#clinixRoot .cx-dia-cn { cursor: pointer; transition: transform .15s ease, opacity .15s ease; }
+#clinixRoot .cx-dia-cn:hover path, #clinixRoot .cx-dia-cn:hover line, #clinixRoot .cx-dia-cn:hover circle { filter: drop-shadow(0 0 5px var(--cx-primary)); stroke-width: 3.5; }
+#clinixRoot .cx-dia-cn--on path, #clinixRoot .cx-dia-cn--on line, #clinixRoot .cx-dia-cn--on circle { stroke: #f59e0b !important; fill: #f59e0b !important; stroke-width: 3.8 !important; filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.9)); }
+
+/* cerebellar signs animations */
+#clinixRoot .cx-dia-tremor-line { animation: cx-tremor 1.8s ease-in-out infinite; transform-origin: center; }
+@keyframes cx-tremor { 0%, 100% { transform: translate(0, 0); } 20% { transform: translate(-3px, 2px); } 40% { transform: translate(4px, -3px); } 60% { transform: translate(-4px, -2px); } 80% { transform: translate(3px, 3px); } }
 
 /* effusion */
 #clinixRoot .cx-dia-fluid { fill: var(--cx-teach); opacity: .3; stroke: var(--cx-teach); stroke-width: 2; }
@@ -1037,3 +1086,147 @@ html.cx-lock .mc-overlay { z-index: 1300; }
 }
 #clinixRoot .cx-vitals-monitor { margin: 12px 0; }
 #clinixRoot .cx-card-diag { margin: 12px 0; }
+
+/* ── clinical diagrams: JVP, auscultation, gaze, facial, ascites, sensory ── */
+#clinixRoot .cx-dia-wave { fill: none; stroke: var(--cx-primary); stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+#clinixRoot .cx-dia-wave--bad { stroke: var(--cx-teach); stroke-width: 3; }
+#clinixRoot .cx-dia-wave--alert { stroke: var(--cx-bad); stroke-width: 3.2; }
+#clinixRoot .cx-dia-ecg { fill: none; stroke: var(--cx-muted); stroke-width: 1.5; stroke-linejoin: round; }
+#clinixRoot .cx-dia-soundmark { stroke: var(--cx-line); stroke-width: 1.2; stroke-dasharray: 3 3; }
+#clinixRoot .cx-dia-pupil { fill: var(--cx-ink); }
+#clinixRoot .cx-dia-pupil--dilated { fill: var(--cx-teach); }
+#clinixRoot .cx-dia-gaze-box { cursor: pointer; }
+#clinixRoot .cx-dia-gaze-box rect { fill: var(--cx-surface); stroke: var(--cx-line); stroke-width: 1.5; }
+#clinixRoot .cx-dia-gaze-box:hover rect { stroke: var(--cx-primary); }
+#clinixRoot .cx-dia-gaze-box--on rect { fill: var(--cx-teach-soft); stroke: var(--cx-teach); stroke-width: 2; }
+#clinixRoot .cx-dia-cardiac { fill: var(--cx-surface); stroke: var(--cx-line); stroke-width: 1.5; stroke-dasharray: 4 3; }
+#clinixRoot .cx-dia-rad-arrow { fill: none; stroke: var(--cx-teach); stroke-width: 2.5; stroke-dasharray: 4 3; }
+#clinixRoot .cx-dia-rad-arrowhead { fill: var(--cx-teach); }
+#clinixRoot .cx-dia-zone--cardiac circle { stroke-width: 2; }
+#clinixRoot .cx-dia-zone--cardiac:hover circle { fill: var(--cx-teach-soft); }
+#clinixRoot .cx-dia-zone--derm { cursor: pointer; }
+#clinixRoot .cx-dia-zone--derm circle { fill: var(--cx-surface); stroke: var(--cx-primary); stroke-width: 1.5; }
+#clinixRoot .cx-dia-zone--derm text { fill: var(--cx-primary); }
+#clinixRoot .cx-dia-zone--derm:hover circle { fill: var(--cx-teach-soft); }
+#clinixRoot .cx-dia-zone--derm.cx-dia-zone--on circle { fill: var(--cx-primary); stroke: var(--cx-primary); }
+#clinixRoot .cx-dia-zone--derm.cx-dia-zone--on text { fill: #fff; }
+#clinixRoot .cx-dia-bowel { fill: var(--cx-surface); stroke: var(--cx-primary); stroke-width: 1.8; }
+#clinixRoot .cx-dia-fluid--ascites { fill: var(--cx-teach); fill-opacity: .35; stroke: var(--cx-teach); stroke-width: 2; }
+#clinixRoot .cx-dia-damphand { fill: var(--cx-muted); opacity: .7; }
+
+/* ── CliniX 2.0: Mode Switcher (MBBS vs PG) ────────────────────────────────── */
+#clinixRoot .cx-mode-bar {
+  display: flex; gap: 6px; padding: 10px 16px 4px;
+  background: var(--cx-surface); border-bottom: 1px solid var(--cx-line);
+}
+#clinixRoot .cx-mode-btn {
+  flex: 1 1 50%; padding: 8px 10px; font-size: 13px; font-weight: 700;
+  border-radius: var(--cx-r-ctl); border: 1px solid var(--cx-line);
+  background: var(--cx-surface-2); color: var(--cx-muted); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  font-family: inherit; transition: all .15s ease;
+}
+#clinixRoot .cx-mode-btn--active {
+  background: var(--cx-primary); color: #fff; border-color: var(--cx-primary);
+  box-shadow: 0 2px 6px rgba(15,118,110,.25);
+}
+
+/* ── CliniX 2.0: Presentations (Symptom-first approach) ─────────────────────── */
+#clinixRoot .cx-pres-card {
+  padding: 16px; background: var(--cx-surface); border: 1px solid var(--cx-line);
+  border-radius: var(--cx-r); margin-bottom: 12px;
+}
+#clinixRoot .cx-pres-redflag {
+  display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px;
+  background: var(--cx-bad-bg); border-left: 3px solid var(--cx-bad);
+  border-radius: 0 var(--cx-r-ctl) var(--cx-r-ctl) 0; font-size: 13.5px;
+  color: var(--cx-bad); margin-bottom: 8px; line-height: 1.45;
+}
+#clinixRoot .cx-pres-redflag .material-symbols-rounded { flex: 0 0 auto; font-size: 20px; }
+#clinixRoot .cx-pres-badge {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; padding: 2px 7px; border-radius: 4px;
+  background: var(--cx-surface-2); color: var(--cx-muted);
+}
+#clinixRoot .cx-pres-step {
+  padding: 12px 14px; background: var(--cx-surface-2); border-radius: var(--cx-r-ctl);
+  margin-bottom: 8px; font-size: 13.5px;
+}
+#clinixRoot .cx-pres-step-title {
+  font-weight: 700; font-size: 12.5px; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--cx-primary); margin-bottom: 4px;
+}
+
+/* ── CliniX 2.0: Spoken Case Presentation Script ───────────────────────────── */
+#clinixRoot .cx-script-box {
+  background: var(--cx-surface); border: 1px solid var(--cx-line);
+  border-radius: var(--cx-r); padding: 18px; margin: 12px 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.04);
+}
+#clinixRoot .cx-script-sec { margin-bottom: 16px; }
+#clinixRoot .cx-script-h {
+  font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--cx-teach); border-bottom: 1px dashed var(--cx-line); padding-bottom: 4px; margin-bottom: 6px;
+}
+#clinixRoot .cx-script-body {
+  font-size: 14.5px; line-height: 1.6; color: var(--cx-ink); font-style: italic;
+}
+#clinixRoot .cx-script-bar {
+  display: flex; gap: 8px; margin: 12px 16px;
+}
+
+/* ── CliniX 2.0: Interactive Interpretation Lab (ABG Simulator) ─────────────── */
+#clinixRoot .cx-abg-box {
+  padding: 16px; background: var(--cx-surface); border: 1px solid var(--cx-line);
+  border-radius: var(--cx-r); margin: 12px 16px;
+}
+#clinixRoot .cx-abg-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px;
+}
+#clinixRoot .cx-abg-input-wrap {
+  display: flex; flex-direction: column; gap: 4px;
+}
+#clinixRoot .cx-abg-label { font-size: 12px; font-weight: 700; color: var(--cx-muted); }
+#clinixRoot .cx-abg-input {
+  width: 100%; padding: 8px 10px; font-size: 15px; font-weight: 600;
+  border: 1px solid var(--cx-line); border-radius: var(--cx-r-ctl);
+  background: var(--cx-surface); color: var(--cx-ink); font-family: var(--cx-mono);
+}
+#clinixRoot .cx-abg-verdict {
+  padding: 14px; border-radius: var(--cx-r-ctl); background: var(--cx-teach-soft);
+  border: 1px solid rgba(29,78,216,.2); margin-top: 14px;
+}
+#clinixRoot .cx-abg-verdict-title { font-size: 16px; font-weight: 800; color: var(--cx-teach); }
+#clinixRoot .cx-abg-verdict-step { font-size: 13px; color: var(--cx-ink); margin-top: 4px; line-height: 1.45; }
+
+/* ── CliniX 2.0: Clinical Spotter Arena (60-second Timer) ─────────────────── */
+#clinixRoot .cx-spotter-arena {
+  padding: 16px; background: var(--cx-surface); border: 1px solid var(--cx-line);
+  border-radius: var(--cx-r); margin: 12px 16px;
+}
+#clinixRoot .cx-spotter-timer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 14px; background: var(--cx-surface-2); border-radius: var(--cx-r-ctl);
+  font-weight: 800; font-size: 15px; font-family: var(--cx-mono); margin-bottom: 14px;
+}
+#clinixRoot .cx-spotter-timer--urgent { background: var(--cx-bad-bg); color: var(--cx-bad); }
+#clinixRoot .cx-spotter-opt {
+  display: flex; align-items: center; gap: 10px; width: 100%; padding: 12px 14px;
+  background: var(--cx-surface-2); border: 1px solid var(--cx-line); border-radius: var(--cx-r-ctl);
+  font-size: 14.5px; font-weight: 600; text-align: left; cursor: pointer;
+  margin-bottom: 8px; font-family: inherit; color: var(--cx-ink); transition: background .12s ease;
+}
+#clinixRoot .cx-spotter-opt--correct { background: var(--cx-ok-bg); border-color: var(--cx-ok); color: var(--cx-ok); }
+#clinixRoot .cx-spotter-opt--wrong { background: var(--cx-bad-bg); border-color: var(--cx-bad); color: var(--cx-bad); }
+
+/* ── CliniX 2.0: The Chief's Ward Round (Tough Professor Viva) ─────────────── */
+#clinixRoot .cx-chief-banner {
+  padding: 16px; background: linear-gradient(135deg, #111827, #1F2937);
+  color: #fff; border-radius: var(--cx-r); margin: 12px 16px;
+}
+#clinixRoot .cx-chief-title { font-size: 17px; font-weight: 800; letter-spacing: -.01em; }
+#clinixRoot .cx-chief-sub { font-size: 13px; opacity: .85; margin-top: 4px; }
+#clinixRoot .cx-chief-q {
+  padding: 16px; background: var(--cx-surface); border: 2px solid var(--cx-ink);
+  border-radius: var(--cx-r); margin: 12px 16px; font-size: 15.5px; line-height: 1.5; font-weight: 600;
+}

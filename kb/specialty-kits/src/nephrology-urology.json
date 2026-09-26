@@ -16,6 +16,9 @@
    "fields": [
     { "id": "ckd_cause", "label": "Cause of CKD", "type": "select", "opts": ["Diabetic kidney disease", "Hypertensive", "Glomerulonephritis", "Polycystic kidney disease", "Obstructive uropathy or reflux", "Chronic interstitial nephritis (analgesic, herbal)", "Unknown cause", "Other"] },
     { "id": "ckd_known_since", "label": "Known since and baseline creatinine", "type": "text", "hint": "e.g. 2021, creatinine 1.8 mg/dL" },
+    { "id": "ckd_egfr", "label": "Latest eGFR (CKD-EPI 2021, no race term)", "type": "number", "unit": "mL/min/1.73 m2", "hint": "use the CKD stage tool or the CKD-EPI calculator" },
+    { "id": "ckd_uacr", "label": "Urine albumin-creatinine ratio (uACR)", "type": "number", "unit": "mg/g" },
+    { "id": "ckd_albuminuria", "label": "Albuminuria category (KDIGO)", "type": "select", "opts": ["A1: below 30 mg/g (below 3 mg/mmol)", "A2: 30 to 300 mg/g (3 to 30 mg/mmol)", "A3: above 300 mg/g (above 30 mg/mmol)", "Not yet tested"], "hint": "confirm a uACR of 30 mg/g or more on a first-morning urine sample (KDIGO 2024)" },
     { "id": "ckd_bp_control", "label": "Blood pressure control", "type": "select", "opts": ["At target", "Above target", "Low or postural symptoms", "Home readings not available"] },
     { "id": "ckd_oedema", "label": "Oedema", "type": "select", "opts": ["None", "Ankle, pitting", "Up to knees", "Periorbital", "Generalised (anasarca)"] },
     { "id": "uraemic_anorexia", "label": "Anorexia, nausea or vomiting", "type": "check" },
@@ -167,7 +170,7 @@
    "id": "stone-prevention",
    "title": "Preventing kidney stones",
    "target": "diet_lifestyle_advice",
-   "text": "Drink enough fluid, mostly water, spread through the day to pass about 2 to 2.5 litres of urine a day; drink more in hot weather or when you sweat a lot. Keep salt to 4 to 5 g a day and do not eat large amounts of meat, fish or eggs. Do not cut out milk and curd: a normal amount of calcium in the diet is advised. Keep a healthy weight and cut down sugary drinks and alcohol."
+   "text": "Drink enough fluid, mostly water, spread through the day, usually about 2.5 to 3 litres a day, so that you pass at least 2 to 2.5 litres of urine a day and your urine stays pale; drink more in hot weather or when you sweat a lot. If a doctor has told you to limit how much you drink (for example for heart failure or kidney failure), follow that advice instead. Keep salt to 4 to 5 g a day and do not eat large amounts of meat, fish or eggs. Do not cut out milk and curd: a normal amount of calcium in the diet is advised. Keep a healthy weight and cut down sugary drinks and alcohol."
   },
   {
    "id": "urinary-symptoms-self-help",

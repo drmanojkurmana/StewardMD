@@ -2864,20 +2864,47 @@
    * holds at that instant, so a record arriving later would be a PDF with an empty box where the QR
    * should be. Same fail-open contract: rxIssueVerification never rejects, and an out-of-scope or
    * offline prescription still exports, just without a QR (and rxNoQrWhy says which). */
+  /* Load a vendor bundle on demand.
+   *
+   * This used to be `window.smdLazy || function () { return Promise.resolve(); }`, and that fallback
+   * was the bug: lazy-load.js was never referenced from index.html, so smdLazy was undefined and the
+   * fallback RESOLVED WITHOUT LOADING ANYTHING. html2canvas stayed undefined, the call below threw
+   * inside a promise nobody was watching, and Save as JPEG/PDF did nothing at all -- no file, no
+   * error. A fallback that reports success it did not achieve is worse than no fallback.
+   *
+   * index.html now loads lazy-load.js, so smdLazy is normally there. This keeps a REAL loader as the
+   * floor rather than a lie, and rejects when the script genuinely fails so the caller can say so. */
+  function rxLazy(src) {
+    if (window.smdLazy) return window.smdLazy(src);
+    return new Promise(function (resolve, reject) {
+      var s = document.createElement("script");
+      s.src = src;
+      s.onload = resolve;
+      s.onerror = function () { reject(new Error("failed to load " + src)); };
+      (document.head || document.documentElement).appendChild(s);
+    });
+  }
   function exportRx(kind, topic, regNo, signImg){
     var opts = arguments[4] || {};
-    var lazy = window.smdLazy || function () { return Promise.resolve(); };
-    var v1 = window.html2canvas ? Promise.resolve() : lazy('/vendor-html2canvas.js?v=1');
+    var v1 = window.html2canvas ? Promise.resolve() : rxLazy('/vendor-html2canvas.js?v=1');
     var p = kind === "pdf"
-      ? v1.then(function () { return (window.jspdf || window.jsPDF) ? Promise.resolve() : lazy('/vendor-jspdf.js?v=1'); })
+      ? v1.then(function () { return (window.jspdf || window.jsPDF) ? Promise.resolve() : rxLazy('/vendor-jspdf.js?v=1'); })
       : v1;
     p.then(function() {
+      // The engine must exist before anything else runs: without this the failure surfaced as an
+      // unhandled TypeError deep in a nested promise and the doctor saw nothing happen.
+      if (!window.html2canvas) throw new Error("html2canvas unavailable");
       var d=collectRx()||{}, lines=d.lines;
-      rxIssueVerification(lines, d.name).then(function(rxv){
+      // RETURNED, so a failure inside reaches the catch below instead of vanishing as an
+      // unhandled rejection - which is how this stayed silent.
+      return rxIssueVerification(lines, d.name).then(function(rxv){
         if(!rxv){ var why=rxNoQrWhy(lines); if(why) rxToast(why); }
-        exportRxNow(kind, topic, regNo, signImg, rxv, opts);
+        return exportRxNow(kind, topic, regNo, signImg, rxv, opts);
       });
-    }).catch(function(){ rxToast("Export engine failed to load"); });
+    }).catch(function(e){
+      rxToast("Could not build the " + (kind === "pdf" ? "PDF" : "image") + ". Try again, or use Print.");
+      try { console.error("[rx] export failed:", e); } catch (_) {}
+    });
   }
   /* The QR block rasterised on its own, so it can be stamped in PDF units instead of being baked
    * into the page image. Two reasons, both of which bit a long prescription: a page break sliced
@@ -2902,7 +2929,9 @@
     // it is left OUT of the document and stamped onto every page below.
     var node=rxDoc(topic, regNo, signImg, kind==="pdf" ? null : rxv, opts);
     node.style.cssText="position:fixed;left:-9999px;top:0;width:794px;background:#fff;z-index:-1"; document.body.appendChild(node);
-    window.html2canvas(node, { scale:2, backgroundColor:"#ffffff", useCORS:true }).then(function(canvas){
+    // RETURNED so exportRx()'s catch sees a rasterise or PDF failure; unreturned, a failure here
+    // was an unhandled rejection and the doctor saw nothing happen.
+    return window.html2canvas(node, { scale:2, backgroundColor:"#ffffff", useCORS:true }).then(function(canvas){
       node.remove();
       if(kind==="jpeg"){ rxSaveOrShare(canvas.toDataURL("image/jpeg",0.95), "prescription.jpg"); return; }
       var JS=(window.jspdf&&window.jspdf.jsPDF)||window.jsPDF; if(!JS){ rxToast("PDF engine unavailable"); return; }

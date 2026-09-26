@@ -48,6 +48,16 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
 - `functions/api/ai/[[path]].js` — server: `/refine` (router), `/explain` (Gemini), `/research` (web)
 - `kb/ai/steward-ai.browser.js` — client SDK helpers. NOTE: `window.SMD_AI` itself is defined in
   `reasoning.js:3771` and that is its ONLY assignment (verified 2026-08-20) — this file does not set it
+- **KB name gate** (flag `smd_kb_gate`, default ON, "0" = legacy coverage gate; 2026-09-26): a
+  standalone question gets an entry's notes only when it names the entry (name form, `KB_NAMES`
+  synonym, one-word id); otherwise no notes. Add missing synonyms to `KB_NAMES`, then run
+  `test/maik-kb-relevance.test.mjs` (404 labelled questions, must stay at 0 mis-routes) and
+  `node test/run-maik-kb-gate-ui.mjs` (headless Chrome). Decisions 2026-09-26.
+  Recall additions (branch maik-kb-names): "simple" is a qualifier like "acute" ("simple febrile seizure"
+  names Febrile seizure), and `neonatal_jaundice` answers to "jaundice in a newborn" / "newborn jaundice".
+  Benchmark now 409 questions: 315 correct, 94 no-notes, 0 miss, 0 mis-route. KB CONTENT GAPS found by the
+  Lite bench (not routing): no curated regimen for Pre-eclampsia, none for paediatric diarrhoea
+  (dehydration, ORS, zinc), and no general hypertension or thrombocytopenia entry.
 - **Chat skin** (2026-09-04): `body.mkchat`, default ON, `?mkchat=0` off / `?mkchat=1` on (key
   `smd_mkchat`). Presentation-only CSS in home.js (block "MaiK CHAT skin"): unboxed assistant prose,
   no per-answer MAIK label or disclaimer line (the banner is the one disclaimer), 15px text, quiet
@@ -213,3 +223,141 @@ note per shelf and one footer line. Gotcha: `GUIDE_INTRO` is still exported and 
 - `llamaToken` events are batched natively (`TokenBatcher`, 40 ms; first piece immediate; flushed
   before resolve/reject). Payload gains `count` (pieces in the event); JS only appends `text`.
 Pins: `test/maik-native-energy.test.mjs`.
+
+## Close, composer symmetry, backgrounds per theme (2026-09-26, branch maik-ui-close-bg)
+Owner: the composer buttons were not symmetric, many could not find how to close MaiK, and dark mode
+had no background choice.
+- **Close** is a filled, labelled pill ("X Close", `aria-label="Close MaiK"`) at the header's top right,
+  opposite the menu: `.maik-hd-row` is `44px minmax(0,1fr) auto`, `#maikClose` grid column 3, row 1.
+  Ink fill on the page colour, so it reads over any aurora (measured 17.9:1 light, 19.1:1 dark). It is
+  second in the markup, so focus order follows the screen. Every header button draws a 40px round
+  fill inside a 44px target (2px transparent border, `background-clip:padding-box`).
+- **Other ways out:** Escape (`maikOnKey`, document listener removed in `close()`) steps back a sidebar
+  panel, then closes the sidebar, then MaiK, and never fires while a question is typed or when the key
+  belongs to another overlay. Android back already reached `#maikClose` through swipe-back.js
+  (`[aria-label^="Close"]`); it closes the sidebar first. The header swipe-down still works; the
+  full-screen sheet shows no grab handle.
+- **Composer** (`maik-polish.css`): tool row is `auto auto auto auto minmax(8px,1fr) minmax(0,auto) 44px`
+  (mic, research, image, length | spacer | model chip, Send). Spacing is margin, not column gap, so a
+  hidden control leaves no hole; 8px, 4px at <=370px; under 350px the chip's caret hides so the engine
+  name shows. Every control 44px tall and fully round; one surface (`--mk-ctl-bg` / `--mk-ctl-bd`,
+  mixed from `--mk-ink`) for all secondaries, Send alone filled. **Extract findings moved to the text
+  row** (grid row 1, column 7, above Send), so typing no longer reflows the tool row.
+- **Backgrounds:** sidebar row "Background" (`#maikSideBg`, next to MaiK buddy) opens a radiogroup:
+  Tiranga Fusion (default), the four Display presets, Plain. It edits the theme ON SCREEN: dark and
+  light each keep their own choice in `smd_maik_atmo_cfg` (`plain` flag per theme). Dark "default"
+  is `DEFAULT_CONFIG.dark`, byte-identical to the old computed background. Plain hides `.mk-atmo` and
+  runs no rAF loop. API in `maik-atmosphere.js`: `backgrounds / choice / choiceLabel / choose`. The
+  Display sheet's MaiK section now also edits the theme on screen (it used to edit only light, so in
+  dark mode it silently did nothing).
+Pins: `test/maik-close-bg.test.mjs`; browser: `test/run-maik-close-bg-ui.mjs`.
+
+## The Knowledge Base is MaiK's private notes (2026-09-26, branch maik-no-passage-talk)
+Owner: "why is agent tell the passage yu sent is irrelavant?" The cloud user turn heads the KB block
+`=== YOUR REFERENCE NOTES (private ...; the clinician cannot see them ...)` (was `RETRIEVED STEWARDMD
+KNOWLEDGE (PRIMARY SOURCE)`); the prompts say prefer, silently skip off-topic notes, never mention them.
+- **Post-filter** `functions/_maik_metatalk.js`: `scrubMetaTalk(text)` on the whole answer and cache
+  hits, `metaTalkStream()` (line-buffered) on the live stream. Lead-ins are cut and content kept
+  ("Based on the text provided, X" -> "X"); sentences ABOUT the material are dropped with a following
+  "This is not relevant...". Precision-first; pinned by `test/maik-metatalk.test.mjs`.
+- **Gotcha, live stream**: a `pull()` that enqueues nothing is never called again (Streams spec), so
+  `streamGeminiToSSE` now loops inside one pull until it sends something. Before, a network read ending
+  mid-frame could hang the SSE. Pinned by `test/maik-no-passage-talk.test.mjs`.
+- Knowledge questions no longer send empty `DETERMINISTIC ENGINE OUTPUT` / `PATIENT` / notes headers.
+- **MaiK Lite too** (branch maik-lite-metatalk): `maik-local.js` carries an ES5 copy (`METATALK`),
+  run in `answer()` AFTER the NO_COVERAGE check (a "not covered" verdict must still re-ask) and on the
+  settled lines of the live paint. An answer that is ONLY talk about the material is treated as the
+  same retrieval miss and re-asked without it. **Gotcha:** no lookbehind in client code, an older iOS
+  WebView rejects it at parse time and the whole engine fails to load; the copy splits sentences
+  without one. `test/maik-lite-metatalk.test.mjs` pins the copy to the Cloud file on the shared
+  cases in `test/fixtures/maik-metatalk-cases.mjs`.
+- **Fixed in both copies (same branch):** a citation after a KEPT sentence ("... first line. [1]") was
+  deleted as a word-less piece, so Lite's claim-checked lines lost their [n] while painting and Cloud
+  lost post-period citations. Now kept; a citation leading into the sentence after a DROPPED one goes
+  with the dropped one.
+
+## Answer-quality set: 60 cases (2026-09-26, branch maik-eval-cases)
+`test/maik-eval/live-cases.json` grew from 6 to 60 questions across 10 categories (emergency, infection,
+dosing, interaction/pregnancy, labs, chronic disease, obstetrics, paediatrics, shorthand such as "RA factor",
+and 5 decline/hedge cases). Each case lists 3-5 **key points** as concept regexes; every case is
+`certified: false` until a clinician reviews it. A key point checks that a concept is present, NOT that
+the answer is right: the grading sheet is still where a clinician marks correct / incomplete / unsafe.
+- **Run it (costs tokens, never in CI):** `MAIK_EVAL_TOKEN=<Firebase ID token of a TEST clinician account>
+  node scripts/maik-quality-run.mjs --cases test/maik-eval/live-cases.json`. Never the owner's personal
+  Google account. Output: `docs/maik-eval/run-<date>.json` + a grading sheet; `checks.keyPoints` per case.
+  `test/maik-eval/run-live-eval.mjs` scores the same file, including the two-turn L-06.
+- No "must not say" regexes on purpose: a pattern for "ACE inhibitor" cannot tell "give" from "avoid", so
+  it would fail correct answers. Safety stays with the clinician's grade.
+- `test/maik-eval-cases.test.mjs` pins the shape and fails if a vague non-answer ("monitor closely, dose
+  depends on weight, follow local guidelines") passes any clinical case's key points.
+
+## MaiK Lite retrieval bench (2026-09-26, branch maik-lite-retrieval)
+`scripts/bench-maik-lite-retrieval.mjs --book <maik-lite-kb.jsonl> [--router] [--src <copy of maik-local.js>]`
+runs the REAL offline retrieval (`retrieveGrounding`) on the real 42,176-row book for the 54 clinical
+questions in `test/maik-eval/live-cases.json` and counts how many of each case's key points the chosen
+evidence contains. No model runs; the book is downloaded (sha256 must match `maik-lite-kb-store.js`).
+- **Baseline:** 46.9% of key points in the evidence (question only), 50.8% with the router's disease;
+  9 questions grounded on passages with NO key point (STEMI, status epilepticus, acute asthma,
+  organophosphate poisoning, bronchiolitis, acute heart failure, CKD, child paracetamol, tramadol+SSRI).
+- **Shipped:** scaffolding words ("adults", "hour", ...) no longer anchor, and a treatment question
+  prefers passages that talk treatment (`TREAT_TXT`, x1.2): 48.9% / 51.9%, zero-key-point 7 / 6.
+- **Tried, not shipped:** a 10x or 20x wider BM25 pool (no gain alone, costs CPU on the phone); shorthand
+  synonyms (SOB, BNP, ORS, PPH, "RA factor" -> rheumatoid factor): slightly WORSE (46.3%).
+- **The ceiling is structural:** 3 passages x 700 chars of a textbook hold about half of what an answer
+  needs. The bench does not model the router's curated passage (`withCurated`), which the real app adds
+  when the router matches, so real-app coverage is higher than these numbers.
+- **Tried next, no gain:** adding the rows that follow an on-topic heading (the book splits a section
+  across consecutive rows under one flat heading) left coverage at 48.3% / 51.9%. Reason: the book text
+  often LACKS the management content. Its status epilepticus section never names lorazepam, a
+  benzodiazepine or levetiracetam (the regimen was a figure, lost in the text export); only 4 of 42,176
+  rows mention status epilepticus with one of those drugs, under unrelated headings. The curated KB
+  (`kb/diseases/seizure_epilepsy.json`) has it, and reaches Lite only through `withCurated` when the
+  router matches. So the next Lite lever is router accuracy and curated content, not BM25 tuning.
+
+## MaiK Lite: the curated regimen leads a treatment answer's evidence (2026-09-26, branch maik-lite-regimen)
+`--router real` in the Lite bench boots the REAL router (buildPackage over the real KB, lexical path, no
+network) and feeds its package to the REAL `answer()`, so the evidence is exactly what the app sends.
+It showed the curated passage was the right disease but carried no management: `curatedPassages` took
+the first 700 chars of the knowledge PEARLS (definitions, ECG, examination) and ignored `pkg.treatment`,
+the curated regimen MaiK Cloud answers from. Now a treatment question's curated passage is the regimen
+(label, steps, doses; same disease only), ahead of the pearls.
+
+| router | before | + regimen | fully covered |
+|---|---|---|---|
+| main (old gate) | 46.5% | **57.9%** | 8 -> 16 |
+| #1248 name gate | 50.6% | **61.6%** | 10 -> 18 |
+
+Still zero key points: child paracetamol and acute heart failure (router matches nothing), tramadol +
+SSRI, severe pre-eclampsia, acute diarrhoea (the regimen or pearls lack those key points).
+
+## A patient case gets choices, not a redirect (2026-09-27, branch maik-patient-choice)
+Owner transcript: "35 year old male, non-healing leg ulcer, RBS 450, platelets 72K" got the canned
+"Start Dx My Patient or Clinical Reasoning" text three times, "Give me dd" and "???" included. The
+`route.kind === "patient"` branch in `maikSendRest` (home.js) now shows `maikPatientCard`, modelled on the
+drug monograph card: **Start Case** / **Dx My Patient** (existing `data-maik-tool` chips, `ACT.startcase` /
+`ACT.reasoning`), **Answer here** (existing `data-maik-anyway`), **Answer, don't ask again**
+(`smd_maik_ptask=0`). Once per conversation; a message that asks for something (`MAIK_PT_ASK`: dd,
+differential, management, rx, "??") is answered at once. `maikStripIds` drops MRN/UHID/IP/OP/reg numbers
+and emails before a patient case is answered (the redirect used to keep those messages on the phone);
+lab values stay. Tests: `test/maik-patient-card.test.mjs`, `node test/run-maik-patient-card-ui.mjs`
+(headless; sets `window.AI_PROXY = "/api/ai"` because `aiBase()` is "" on plain localhost).
+
+## Answer tables scroll sideways; figures prefer workup flowcharts (2026-09-27, branch maik-patient-choice)
+Owner screenshots: a 5-column differential table squeezed into the bubble with words split mid-word
+("Diagno sis"), and a figure strip of ulcer photographs ("I wanted workup flowcharts; if they are absent
+show this").
+- **Tables** (`maik-polish.css`): the polished bubble's `overflow-wrap:anywhere` let cells shrink below a
+  word and `.maik-tbl{width:100%}` kept tables inside the bubble. Cells now wrap only between words with
+  `min-width:9em` (Chrome honours it on cells) plus a table floor by column count via `:has()` (27/36/45em
+  for 3/4/5+ columns; WebKit does not promise cell min-width). Wide tables scroll in `.maik-tblwrap`;
+  narrow ones still fill the bubble. `node test/run-maik-table-ui.mjs` (Chrome), and verified once in
+  Playwright WebKit 26.6 at iPhone 13 and SE widths. **Gotcha:** the page upgrades insecure requests, and
+  WebKit applies that to `http://localhost`, so every subresource fails; test WebKit over local HTTPS.
+- **Figures** (`functions/_figures.js`): a figure is a DIAGRAM when its alt, title, file name or the caption
+  after it names an algorithm, flowchart, pathway, management, evaluation, criteria, classification or
+  table. Per page the best diagram beats a better-scored photo; across pages only diagrams are shown when
+  any exist, photographs are the fallback. `"<topic> algorithm"` is searched beside the plain topic (each
+  page read once). Real pages: PMC diabetic foot ulcer now shows "Overview of management" (was
+  "Pathophysiology"), PMC acute pancreatitis the Revised Atlanta severity figure. Limit: AAFP's older GIF
+  algorithms are drawn by script and dropped as GIFs, so those pages still show nothing or a photo.
+

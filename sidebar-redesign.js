@@ -69,7 +69,7 @@
     feedback: function () {
       if (window.SMD_openFeedback) return SMD_openFeedback();
       var b = document.querySelector('[data-act="feedback"],#v3FeedbackBtn'); if (b && b !== this) return b.click();
-      try { location.href = "mailto:Support@StewardMD.in?subject=StewardMD%20feedback"; } catch (e) {}
+      try { location.href = "mailto:hello@maiknowledge.com?subject=StewardMD%20feedback"; } catch (e) {}
     },
     ack: function () { if (window.openAbout) openAbout(); else if (window.SB && SB.modal) SB.modal("aboutModal"); else if (window.openAck) openAck(); else toast("Acknowledgements loading…"); },
     offlinedb: function () { if (window.SMD_OFFLINEDB && SMD_OFFLINEDB.open) SMD_OFFLINEDB.open(); else toast("Offline drug database — available in the app"); },
@@ -116,9 +116,9 @@
     { id: "sknx", title: "SknX AI · Dermatology (Beta)", sub: "Skin lesion / rash analysis · reload to apply", def: false, key: "smd_sknx" },
     // def matches clinix-flags.js (both TRUE, owner decisions 2026-08-23/26); a false here only
     // made this switch DISPLAY off while the module was actually on.
-    { id: "clinix", title: "CliniX · Clinical learning (Beta)", sub: "Bedside skills for students · reload to apply", def: true, key: "smd_clinix" },
-    { id: "clinixtutor", title: "MaiK Examiner (Beta)", sub: "AI review inside CliniX Viva, only when the free keyword grade can't judge it", def: true, key: "smd_clinix_tutor" },
-    { id: "surgx", title: "SURGX · Surgical Intelligence (Beta)", sub: "Notes, protocols, procedures, evidence, cases · reload to apply", def: true, key: "smd_surgx" },
+    { id: "clinix", title: "CliniX · Clinical learning", sub: "Bedside skills for students · reload to apply", def: true, key: "smd_clinix" },
+    { id: "clinixtutor", title: "MaiK Examiner", sub: "AI review inside CliniX Viva, only when the free keyword grade can't judge it", def: true, key: "smd_clinix_tutor" },
+    { id: "surgx", title: "SURGX · Surgical Intelligence", sub: "Notes, protocols, procedures, evidence, cases · reload to apply", def: true, key: "smd_surgx" },
     { id: "surgxdraft", title: "SURGX draft content", sub: "Show surgical content that is not yet clinician-approved. Turn OFF before any non-tester release", def: true, key: "smd_surgx_draft" },
     { id: "whisper", title: "Clinical Dictation (Beta)", sub: "On-device Whisper voice→text · native app only", def: false, key: "smd_whisper_clinical_dictation" },
     { id: "oncoprotolib", title: "Oncology Protocol Library (Beta)", sub: "Draft standard protocol library in oncology workbench", def: true, key: "smd_onco_protolib" },
@@ -598,9 +598,9 @@
 
       '<div class="sbr-sec">Clinical Intelligence &amp; Skills</div>' +
       '<div class="sbr-card">' +
-        toggle({ id: "clinix", title: "CliniX · Clinical learning (Beta)", sub: "Bedside skills for students · reload to apply", def: false, key: "smd_clinix" }) +
-        toggle({ id: "clinixtutor", title: "MaiK Examiner (Beta)", sub: "AI review inside CliniX Viva, only when free keyword grade cannot judge", def: false, key: "smd_clinix_tutor" }) +
-        toggle({ id: "surgx", title: "SURGX · Surgical Intelligence (Beta)", sub: "Notes, protocols, procedures, evidence, cases · reload to apply", def: true, key: "smd_surgx" }) +
+        toggle({ id: "clinix", title: "CliniX · Clinical learning", sub: "Bedside skills for students · reload to apply", def: true, key: "smd_clinix" }) +
+        toggle({ id: "clinixtutor", title: "MaiK Examiner", sub: "AI review inside CliniX Viva, only when free keyword grade cannot judge", def: true, key: "smd_clinix_tutor" }) +
+        toggle({ id: "surgx", title: "SURGX · Surgical Intelligence", sub: "Notes, protocols, procedures, evidence, cases · reload to apply", def: true, key: "smd_surgx" }) +
         toggle({ id: "surgxdraft", title: "SURGX draft content", sub: "Show surgical content that is not yet clinician-approved", def: true, key: "smd_surgx_draft" }) +
       '</div>' +
 
@@ -695,8 +695,8 @@
       '<span class="sbr-badge sbr-badge-beta">BETA</span>' +
       '<span class="sbr-chev">▸</span></button>' +
       '<div class="sbr-card">' +
-        toggle({ id: "clinix", title: "CliniX · Clinical learning (Beta)", sub: "Bedside skills for students · reload to apply", def: false, key: "smd_clinix" }) +
-        toggle({ id: "surgx", title: "SURGX · Surgical Intelligence (Beta)", sub: "Notes, protocols, procedures, evidence · reload to apply", def: true, key: "smd_surgx" }) +
+        toggle({ id: "clinix", title: "CliniX · Clinical learning", sub: "Bedside skills for students · reload to apply", def: true, key: "smd_clinix" }) +
+        toggle({ id: "surgx", title: "SURGX · Surgical Intelligence", sub: "Notes, protocols, procedures, evidence · reload to apply", def: true, key: "smd_surgx" }) +
         toggle({ id: "fundx", title: "FundX AI · Retinal (Beta)", sub: "AI-guided fundus imaging · reload to apply", def: false, key: "smd_fundx" }) +
         toggle({ id: "kardiox", title: "KardiQ X AI · ECG (Beta)", sub: "On-device 12-lead ECG interpretation · reload to apply", def: false, key: "smd_kardiox" }) +
       '</div>' +

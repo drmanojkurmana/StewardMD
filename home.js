@@ -1308,6 +1308,21 @@
       var map = { criticallabs: "icu", patients: "icu", tasks: "icu", ward: "ward",
                   askai: "askai", drugs: "drugs", drugmenu: "drugmenu", calculators: "calculators",
                   antibiogram: "antibiogram", home: "home" };
+      // The "Before you delete us" Home Screen quick action lands here. It is not an ACT overlay,
+      // so it is handled before the ACT lookup. SMD_openFeedback is referenced across the app but
+      // defined nowhere, so this mirrors the sidebar's three-step chain (sidebar-redesign.js
+      // feedback:) rather than calling it and silently doing nothing: the global if some build
+      // provides it, then an in-page feedback button, then mailto as the floor. A doctor who taps
+      // this on the way to deleting the app must always land somewhere they can type.
+      if (r === "feedback") {
+        try {
+          if (window.SMD_openFeedback) return SMD_openFeedback();
+          var fb = document.querySelector('[data-act="feedback"],#v3FeedbackBtn');
+          if (fb) return fb.click();
+          location.href = "mailto:hello@maiknowledge.com?subject=StewardMD%20feedback";
+        } catch (e) {}
+        return;
+      }
       var key = map[r] || (ACT[r] ? r : null);
       if (key === "home") { try { closeAllModules && closeAllModules(); } catch (e) {} return; }
       if (key && ACT[key]) { try { ACT[key](); } catch (e) {} }
@@ -1968,7 +1983,7 @@
     { act: "sknx", ic: "dermatology", tt: "SknX AI", sub: "Lesion analysis", feat: true, beta: true, anim: "derm",
       eligible: function () { return expTileOn("smd_sknx", "sknx", "SKNX"); } },
     { act: "clinix", ic: "school", anim: "clinix", tt: "CliniX", sub: "Clinical learning", feat: true,
-      eligible: function () { try { if (window.CLINIX && CLINIX.isOn) return CLINIX.isOn(); var q = (location.search.match(/[?&]clinix=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_clinix") === "1"); } catch (e) { return false; } } },
+      eligible: function () { try { if (window.CLINIX && CLINIX.isOn) return CLINIX.isOn(); var q = (location.search.match(/[?&]clinix=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_clinix") !== "0"); } catch (e) { return true; } } },
     // SURGX (SURGˣ) — Surgical Intelligence. eligible() reads localStorage DIRECTLY rather than
     // SMD_SURGX_FLAGS, because home.js loads at index.html:1587, BEFORE the SURGX block: the flag
     // object does not exist yet at tile-render time. Same fallback pattern as ThoreX/CliniX above.
@@ -2801,12 +2816,19 @@
 
     // ---- wallet: MaiK Tokens left, plus today's free allowance if the cost cap is switched on ----
     var bal = Math.max(0, u.balanceMt | 0), spent = Math.max(0, u.tokensUsedMt | 0);
-    var free = Math.max(0, u.dailyFreeMt | 0), per = u.mtPerInr > 0 ? u.mtPerInr : 2000;
-    var worth = Math.round(bal / per * 10) / 10;   // ₹, one decimal — a wallet of 100 MT is ₹0.1, not "₹0"
+    var free = Math.max(0, u.dailyFreeMt | 0);
+    // What the balance is worth to the doctor: priced at the store's entry pack (App Store / Play /
+    // web all charge the same), NOT at mtPerInr, which is our AI cost and read as half the value.
+    // The server sends the live pack prices; the fallback is the launch price of the Boost pack.
+    var pk = (u.packs || []).filter(function (p) { return p && p.mt > 0 && p.inr > 0; }).sort(function (a, b) { return a.mt - b.mt; })[0] || { mt: 50000, inr: 49 };
+    var worthRaw = bal * pk.inr / pk.mt;
+    var worth = worthRaw >= 10 ? Math.round(worthRaw).toLocaleString("en-IN") : String(Math.round(worthRaw * 10) / 10);   // a wallet of 100 MT is ₹0.1, not "₹0"
+    var plat = "web"; try { var Cap = window.Capacitor; plat = (Cap && (typeof Cap.getPlatform === "function" ? Cap.getPlatform() : Cap.platform)) || "web"; } catch (e) {}
+    var storeName = plat === "ios" ? "App Store" : plat === "android" ? "Google Play" : "store";
     out += '<div class="aiu-h">Your MaiK Tokens</div><div class="aiu-wallet">' +
       '<div class="bal">' + aiuMt(bal) + '</div><div class="bl">Tokens in wallet</div>' +
       '<div class="sub">' + (bal > 0
-        ? 'Worth about &#8377;' + worth + ' of AI. Tokens never expire and work across every AI feature.'
+        ? 'Worth about &#8377;' + worth + ' at the ' + storeName + ' price (&#8377;' + pk.inr.toLocaleString("en-IN") + ' for ' + pk.mt.toLocaleString("en-IN") + ' tokens). Tokens never expire and work across every AI feature.'
         : 'You haven&rsquo;t added any tokens yet. Top up once and spend it on anything — MaiK, imaging, voice, Evidence Review.') +
       (u.pooled ? '<br>Shared pool: this balance is shared with your linked account.' : '') + '</div>' +
       '<button id="aiuBuy" class="aiu-buy" type="button">' + (bal > 0 ? 'Add more tokens' : 'Buy MaiK Tokens') + '</button></div>';
@@ -4993,10 +5015,12 @@
       '<div class="maik-hd"><div class="maik-hd-row">' +
         '<button class="maik-hd-btn" id="maikMenu" type="button" title="Conversations" aria-label="Conversations">' + MK.menu + '</button>' +
         '<div class="maik-logo-wrap"><div class="maik-logo-glow"></div><img class="maik-logo" src="' + MK_LOGO() + '" alt="MaiK"></div>' +
+        // Close: top right, opposite the menu, and it says "Close" (owner, 2026-09-26: many could not
+        // find how to close). Second in the markup so focus order follows the screen.
+        '<button class="maik-hd-btn" id="maikClose" type="button" title="Close MaiK" aria-label="Close MaiK">' + MK.close + '<span class="maik-x-lbl">Close</span></button>' +
         '<div class="maik-nav-actions"><span class="maik-nav-caption">Your clinical assistant</span>' +
         '<button class="maik-hd-btn" id="maikExport" type="button" title="Export conversation" aria-label="Export conversation">' + MK.export + '</button>' +
         '<button class="maik-hd-btn" id="maikNew" type="button" title="New conversation" aria-label="New conversation">' + MK.new + '</button>' +
-        '<button class="maik-hd-btn" id="maikClose" type="button" title="Close" aria-label="Close assistant">' + MK.close + '</button>' +
       '</div></div></div>' +
       '<div class="maik-body" id="maikBody"></div>' +
       // ── Conversation sidebar (slide-in). History is stored ON-DEVICE only (privacy). ──
@@ -5010,6 +5034,8 @@
           '<div class="maik-me" id="maikMe" hidden></div>' +
           '<button class="maik-side-row" id="maikSideBuddy" type="button" aria-controls="maikBuddyPick"><svg class="smd-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5c1 1.2 2.2 1.8 3.5 1.8s2.5-.6 3.5-1.8"/><path d="M9 9.5h.01M15 9.5h.01"/></svg><span>MaiK buddy</span><span class="maik-side-meta" id="maikSideBuddyState"></span></button>' +
           '<div class="maik-me" id="maikBuddyPick" hidden></div>' +
+          '<button class="maik-side-row" id="maikSideBg" type="button" aria-controls="maikBgPick"><svg class="smd-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m3 16 5-5 4 4 3-3 6 6"/><circle cx="15.5" cy="9" r="1.5"/></svg><span>Background</span><span class="maik-side-meta" id="maikSideBgState"></span></button>' +
+          '<div class="maik-me" id="maikBgPick" hidden></div>' +
           '<div class="maik-side-srch">' + MK.search + '<input id="maikSideSearch" type="search" placeholder="Search conversations" autocomplete="off" spellcheck="false"></div>' +
           '<div class="maik-side-lbl">Your conversations</div>' +
           '<div class="maik-side-list" id="maikSideList"></div>' +
@@ -5080,11 +5106,13 @@
       ".maik-side-del{border:0;background:transparent;color:var(--mk-mut,#cbd5e1);padding:8px;cursor:pointer;border-radius:8px;flex:none}" +
       ".maik-side-del:hover{color:#e11d48;background:rgba(225,29,72,.09)}" +
       ".maik-side-empty{padding:18px 16px;font:500 13.5px 'Inter',system-ui;color:var(--mk-mut,#94a3b8);line-height:1.5}" +
-      ".maik-side-priv{display:flex;align-items:center;gap:7px;padding:10px 16px;font:600 11.5px 'Inter',system-ui;color:var(--mk-teal,#0e6e63);border-top:1px solid var(--mk-line,#eef2f7)}" +
+      ".maik-side-priv{display:flex;align-items:center;gap:7px;padding:10px 16px;font:600 11.5px 'Inter',system-ui;color:var(--mk-teal,#0e6e63);border-top:1px solid var(--mk-bd,#eef2f7)}" +
       ".maik-side-acct{display:flex;align-items:center;gap:10px;padding:10px 16px 15px}" +
       ".maik-side-meta{margin-left:auto;font:700 11px 'Inter',system-ui;color:var(--mk-teal,#0e6e63)}" +
-      ".maik-side.me-open .maik-side-srch,.maik-side.me-open .maik-side-lbl,.maik-side.me-open .maik-side-list,.maik-side.me-open #maikSideMe,.maik-side.me-open #maikSideNew,.maik-side.me-open #maikSideBuddy{display:none}" +
-      ".maik-side.bd-open .maik-side-srch,.maik-side.bd-open .maik-side-lbl,.maik-side.bd-open .maik-side-list,.maik-side.bd-open #maikSideMe,.maik-side.bd-open #maikSideNew,.maik-side.bd-open #maikSideBuddy{display:none}" +
+      ".maik-side.me-open .maik-side-srch,.maik-side.me-open .maik-side-lbl,.maik-side.me-open .maik-side-list,.maik-side.me-open #maikSideMe,.maik-side.me-open #maikSideNew,.maik-side.me-open #maikSideBuddy,.maik-side.me-open #maikSideBg{display:none}" +
+      ".maik-side.bd-open .maik-side-srch,.maik-side.bd-open .maik-side-lbl,.maik-side.bd-open .maik-side-list,.maik-side.bd-open #maikSideMe,.maik-side.bd-open #maikSideNew,.maik-side.bd-open #maikSideBuddy,.maik-side.bd-open #maikSideBg{display:none}" +
+      ".maik-side.bg-open .maik-side-srch,.maik-side.bg-open .maik-side-lbl,.maik-side.bg-open .maik-side-list,.maik-side.bg-open #maikSideMe,.maik-side.bg-open #maikSideNew,.maik-side.bg-open #maikSideBuddy,.maik-side.bg-open #maikSideBg{display:none}" +
+      ".maik-bg-sw{display:block;width:40px;height:52px;border-radius:10px;border:1px solid var(--mk-bd);box-sizing:border-box}" +
       ".maik-bd-opt{display:flex;align-items:center;gap:12px;width:100%;min-height:66px;margin:6px 0;padding:8px 12px;border:1.5px solid var(--mk-bd);border-radius:14px;background:transparent;text-align:left;cursor:pointer;color:var(--mk-ink,#0f172a);font:inherit}" +
       ".maik-bd-opt.on{border-color:var(--mk-teal,#0e6e63);background:rgba(14,110,99,.07)}" +
       ".maik-bd-th{flex:0 0 46px;height:54px;display:flex;align-items:flex-end;justify-content:center;overflow:visible}.maik-bd-th svg{display:block;overflow:visible}" +
@@ -5840,6 +5868,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // Unlock: if a request was still in flight (or never settled), the busy guard would otherwise stay
       // true and block send() on reopen — the conversation would appear "stuck" and un-continuable.
       _maikBusy = false;
+      document.removeEventListener("keydown", maikOnKey);
       // Release the on-device model shortly after close (after any in-flight answer finishes; the
       // release never cuts a running generation), so it stops holding memory and heating the phone.
       try { if (window.SMD_MAIK_LOCAL && SMD_MAIK_LOCAL.sheetClosed) SMD_MAIK_LOCAL.sheetClosed(); } catch (e) {}
@@ -7544,6 +7573,33 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         '</div></div>';
       bubble("ai", html); scroll();
     }
+    /* A PATIENT CASE (owner, 2026-09-27). "35 year old male, non-healing leg ulcer, RBS 450, platelets
+     * 72K" got the same canned redirect to Dx My Patient three times, "Give me dd" included. Now it
+     * offers the structured tools the way the drug card offers the monograph, and answers on request.
+     * The card shows once per conversation; a message that asks for something ("dd", "management",
+     * "???") is answered at once, and "Answer, don't ask again" (smd_maik_ptask=0) retires the card. */
+    var MAIK_PT_ASK = /\?\?|\b(dd|ddx|d\/d|differentials?|diagnos\w*|causes?|what could|possibilit\w*|likely|answer|explain|tell me|why|manage\w*|treat\w*|rx|work ?up|investigat\w*|next step)\b/i;
+    function maikPtAskOn() { try { return localStorage.getItem("smd_maik_ptask") !== "0"; } catch (e) { return true; } }
+    // Hospital identifiers and emails only; lab values, ages and doses stay (functions/_deid.js also
+    // drops every 4+ digit run, which would eat "platelets 72000").
+    function maikStripIds(s) {
+      return String(s || "").replace(/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g, " ")
+        .replace(/\b(?:mrn|uhid|cr\s*no|ipd?\s*(?:no|number)|op\s*(?:no|number)|reg(?:istration)?\s*(?:no|number))\b\.?\s*[:#-]?\s*[a-z]*\d[\w\/-]*/gi, " ")
+        .replace(/\s+/g, " ").trim();
+    }
+    function maikPatientCard(question) {
+      var html = '<div class="maik-dosecard maik-drugask maik-ptask">' +
+        '<div class="maik-dose-h">' + MK.spark + '<span>Patient case</span></div>' +
+        '<div class="maik-dose-note">Work it up in a structured tool, or should I answer here?</div>' +
+        '<div class="maik-dose-acts">' +
+          '<button class="maik-fu maik-dose-go" data-maik-tool="startcase">Start Case</button>' +
+          '<button class="maik-fu maik-dose-go" data-maik-tool="reasoning">Dx My Patient</button>' +
+          '<button class="maik-fu" data-maik-anyway="' + maikEscH(question) + '">Answer here</button>' +
+          '<button class="maik-fu maik-drugask-no" data-maik-anyway="' + maikEscH(question) + '" data-maik-ptnoask="1">Answer, don\'t ask again</button>' +
+        '</div></div>';
+      bubble("ai", html); scroll();
+      try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
+    }
     function send() {
       if (_maikBusy) return;
       var q = (qEl.value || "").trim(); if (!q) return; qEl.value = "";
@@ -7618,9 +7674,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         [["Ask a clinical question", function () { qEl.value = "How do we treat DKA?"; try { qEl.focus(); } catch (e) {} }], ["Start Dx My Patient", function () { close(); try { openDxChooser(); } catch (e) {} }]].forEach(function (c) { var b = document.createElement("button"); b.className = "maik-chip"; b.style.margin = "8px 6px 0 0"; b.textContent = c[0]; b.addEventListener("click", c[1]); h.appendChild(b); }); scroll(); return;
       }
       if (route.kind === "patient") {
-        var d = bubble("ai", 'I can help you assess this. Start <b>Dx My Patient</b> or <b>Clinical Reasoning</b> and enter the findings, vitals and labs, and StewardMD’s engine computes the assessment, then MaiK adds commentary on it.');
-        var b = document.createElement("button"); b.className = "maik-chip"; b.style.marginTop = "8px"; b.textContent = "Open Dx My Patient";
-        b.addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} }); d.appendChild(b); scroll(); return;
+        q = maikStripIds(q);   // a hospital ID never reaches the model (the old redirect kept these messages on the phone)
+        if (!fromDrugAsk && !MAIK_PT_ASK.test(q) && !body.querySelector(".maik-ptask") && maikPtAskOn()) { maikPatientCard(q); return; }
       }
       if (route.kind === "clarify") {
         // Mid-conversation, a short unrecognised phrase ("Glasgow-Blatchford", "Rockall", "endoscopy
@@ -7818,7 +7873,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }).join("") : ('<div class="maik-side-empty">' + (q ? "No matching conversations." : "No saved conversations yet. Ask MaiK anything to start.") + '</div>');
       if (e.acct) { var em = maikAcctLabel(); e.acct.innerHTML = em ? ('<div class="maik-side-av">' + maikEscH(em.slice(0, 2).toUpperCase()) + '</div><div class="maik-side-em"><b>' + maikEscH(em) + '</b><span>Signed in &middot; history on this device</span></div>') : '<div class="maik-side-av">?</div><div class="maik-side-em"><b>Guest</b><span>History saved on this device</span></div>'; }
     }
-    function maikOpenSide() { var e = maikSideEls(); if (!e.wrap) return; try { maikMeShow(false); maikBuddyShow(false); } catch (e2) {} maikRenderSide(""); if (e.search) e.search.value = ""; e.wrap.hidden = false; requestAnimationFrame(function () { e.wrap.classList.add("open"); }); }
+    function maikOpenSide() { var e = maikSideEls(); if (!e.wrap) return; try { maikMeShow(false); maikBuddyShow(false); maikBgShow(false); } catch (e2) {} maikRenderSide(""); if (e.search) e.search.value = ""; e.wrap.hidden = false; requestAnimationFrame(function () { e.wrap.classList.add("open"); }); }
     function maikCloseSide() { var e = maikSideEls(); if (!e.wrap) return; e.wrap.classList.remove("open"); setTimeout(function () { try { e.wrap.hidden = true; } catch (x) {} }, 220); }
     function maikOpenConv(id) {
       var rec = maikLoadConvos().filter(function (c) { return c.id === id; })[0]; if (!rec) return;
@@ -7902,6 +7957,38 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       maikBuddyShow(false); maikCloseSide();
     });
     maikBuddyState();
+    /* ---- Background chooser (owner, 2026-09-26: "in dark mode keep existing as one background and give
+     * option to change background even in dark mode"). It edits the theme on screen, so dark and light
+     * each keep their own choice, and each theme's default is the background it already had. The list,
+     * previews and storage live in maik-atmosphere.js; a pick repaints the open sheet at once. ---- */
+    function maikBgTheme() { return (document.body.classList.contains("dark") || document.body.classList.contains("v3-dark")) ? "dark" : "light"; }
+    function maikBgShow(on) {
+      var side = sheet.querySelector("#maikSide"), el = sheet.querySelector("#maikBgPick"), A = window.SMD_MAIK_ATMOSPHERE; if (!side || !el) return;
+      if (!A || !A.backgrounds) on = false;
+      side.classList.toggle("bg-open", !!on); el.hidden = !on;
+      if (!on) { maikBgState(); return; }
+      var th = maikBgTheme(), cur = A.choice(th);
+      el.innerHTML = '<div class="maik-me-hd"><button type="button" class="maik-me-back" id="maikBgBack" aria-label="Back to conversations">&#8249;</button><b>Background</b></div>' +
+        '<p class="maik-me-help">' + (th === "dark" ? "For dark mode. Light mode keeps its own choice." : "For light mode. Dark mode keeps its own choice.") + ' Saved on this device.</p>' +
+        '<div role="radiogroup" aria-label="Choose the MaiK background">' + A.backgrounds(th).map(function (b) {
+          var sel = b.id === cur;
+          return '<button type="button" class="maik-bd-opt' + (sel ? " on" : "") + '" role="radio" aria-checked="' + sel + '" data-bg="' + b.id + '">' +
+            '<span class="maik-bd-th"><span class="maik-bg-sw" style="background:' + b.preview + '"></span></span><span class="maik-bd-tx"><b>' + maikEscH(b.name) + '</b><span>' + maikEscH(b.blurb) + '</span></span><span class="maik-bd-ck" aria-hidden="true"></span></button>';
+        }).join("") + '</div>';
+    }
+    function maikBgState() { var s = sheet.querySelector("#maikSideBgState"), A = window.SMD_MAIK_ATMOSPHERE; if (s) s.textContent = (A && A.choiceLabel) ? A.choiceLabel(maikBgTheme()) : ""; }
+    var _sideBg = sheet.querySelector("#maikSideBg");
+    if (_sideBg) { if (!window.SMD_MAIK_ATMOSPHERE) _sideBg.hidden = true; _sideBg.addEventListener("click", function () { maikBgShow(true); }); }
+    var _bgEl = sheet.querySelector("#maikBgPick");
+    if (_bgEl) _bgEl.addEventListener("click", function (ev) {
+      var t = ev.target && ev.target.closest ? ev.target : null; if (!t) return;
+      if (t.closest("#maikBgBack")) { maikBgShow(false); return; }
+      var o = t.closest(".maik-bd-opt"); if (!o) return;
+      try { SMD_MAIK_ATMOSPHERE.choose(maikBgTheme(), o.getAttribute("data-bg")); } catch (e) {}
+      try { maikHaptic("pick"); } catch (e) {}
+      maikBgShow(false); maikCloseSide();
+    });
+    maikBgState();
     var _meEl = sheet.querySelector("#maikMe");
     if (_meEl) _meEl.addEventListener("input", function () { var er = _meEl.querySelector("#maikMeErr"); if (er) er.textContent = ""; });
     if (_meEl) _meEl.addEventListener("click", function (ev) {
@@ -7963,6 +8050,26 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       });
     })();
     scrim.addEventListener("click", close);
+    /* Escape closes the top MaiK layer: an open sidebar panel steps back to the list, then the sidebar
+     * closes, then MaiK itself. A key aimed at another overlay (a picker, the figure viewer) is left to
+     * it, and Escape never throws away a question being typed. Android back reaches the same controls
+     * through swipe-back.js (it clicks the top "Back" / "Close" control), in the same order. */
+    function maikOnKey(ev) {
+      if (ev.key !== "Escape" && ev.key !== "Esc") return;
+      if (!sheet.isConnected) { document.removeEventListener("keydown", maikOnKey); return; }
+      var t = ev.target;
+      if (ev.defaultPrevented || (t && t.nodeType === 1 && t !== document.body && t !== document.documentElement && !sheet.contains(t))) return;
+      if (t === qEl && String(qEl.value || "").trim()) return;
+      ev.preventDefault();
+      var e = maikSideEls();
+      if (e.wrap && !e.wrap.hidden) {
+        var back = sheet.querySelector("#maikMe:not([hidden]) .maik-me-back,#maikBuddyPick:not([hidden]) .maik-me-back,#maikBgPick:not([hidden]) .maik-me-back");
+        if (back) back.click(); else maikCloseSide();
+        return;
+      }
+      close();
+    }
+    document.addEventListener("keydown", maikOnKey);
     // One button, two jobs: STOP while a turn is in flight, SEND otherwise. Routed here rather than
     // by swapping listeners, so there is no window where the button is bound to the wrong action.
     /* A tap should be FELT, not just seen.
@@ -8289,6 +8396,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (anyway) {
         ev.preventDefault();
         if (_maikBusy) return;
+        if (anyway.hasAttribute("data-maik-ptnoask")) { try { localStorage.setItem("smd_maik_ptask", "0"); toast("MaiK will answer patient cases directly. Start Case and Dx My Patient stay on the home screen."); } catch (e) {} }
         var aq = anyway.getAttribute("data-maik-anyway") || "";
         var acard = anyway.closest(".maik-dosecard"); if (acard) acard.querySelector(".maik-dose-acts").remove();
         runClinical(aq, aq, "concise", maikActiveCase(), maikV2() ? maikCanonTopic(aq) : aq);
@@ -8846,16 +8954,20 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       ds = Object.assign({}, DDEF);
       if (window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.resetConfig) {
         var r = SMD_MAIK_ATMOSPHERE.resetConfig();
-        if (r && r.light) syncAtmoUI(r.light);
+        if (r && r[atmoKey()]) syncAtmoUI(r[atmoKey()]);
       }
       applyD(); refreshD();
     });
     s.querySelectorAll("#hvTheme .hv-th").forEach(function (b) { b.addEventListener("click", function () { ds.theme = b.getAttribute("data-t"); applyD(); refreshD(); }); });
     s.querySelectorAll("#hvAppear button").forEach(function (b) { b.addEventListener("click", function () { ds.appearance = b.getAttribute("data-a"); applyD(); refreshD(); }); });
 
+    // The MaiK section edits the theme on screen: it used to edit only the light palette, so in dark
+    // mode every change here did nothing (2026-09-26). Dark keeps its own background now.
+    function atmoKey() { return (document.body.classList.contains("dark") || document.body.classList.contains("v3-dark")) ? "dark" : "light"; }
+    function atmoSet(o) { var p = {}; p[atmoKey()] = o; var up = window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.setConfig(p); return up ? up[atmoKey()] : null; }
     function getAtmoCfg() {
       if (window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.getConfig) {
-        return SMD_MAIK_ATMOSPHERE.getConfig().light;
+        return SMD_MAIK_ATMOSPHERE.getConfig()[atmoKey()];
       }
       return { color1: '#b4510a', color2: '#035524', color3: '#060351', blend: 0.51, speed: 1.6 };
     }
@@ -8886,17 +8998,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }
       if (sub) sub.textContent = "Blend " + (+cfg.blend).toFixed(2) + " · Speed " + (+cfg.speed).toFixed(1) + "×";
 
-      s.querySelectorAll(".mk-atmo-pre-btn").forEach(function (btn) {
-        var pid = btn.getAttribute("data-pre-id");
-        var presets = (window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.PRESETS) || [];
-        var p = presets.find ? presets.find(function (x) { return x.id === pid; }) : null;
-        if (!p) for (var i = 0; i < presets.length; i++) { if (presets[i].id === pid) { p = presets[i]; break; } }
-        var match = p && p.color1.toLowerCase() === cfg.color1.toLowerCase() &&
-                    p.color2.toLowerCase() === cfg.color2.toLowerCase() &&
-                    p.color3.toLowerCase() === cfg.color3.toLowerCase() &&
-                    Math.abs(p.blend - cfg.blend) < 0.02;
-        btn.classList.toggle("on", !!match);
-      });
+      // Same matching as the MaiK sidebar: "tiranga" is the theme's own default palette.
+      var cur = (window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.choice) ? SMD_MAIK_ATMOSPHERE.choice(atmoKey()) : "";
+      s.querySelectorAll(".mk-atmo-pre-btn").forEach(function (btn) { btn.classList.toggle("on", btn.getAttribute("data-pre-id") === cur); });
     }
 
     var preWrap = s.querySelector("#hvAtmoPresets");
@@ -8914,16 +9018,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
 
       preWrap.querySelectorAll(".mk-atmo-pre-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
-          var pid = btn.getAttribute("data-pre-id");
-          var presets = SMD_MAIK_ATMOSPHERE.PRESETS;
-          var p = null;
-          for (var i = 0; i < presets.length; i++) { if (presets[i].id === pid) { p = presets[i]; break; } }
-          if (p && SMD_MAIK_ATMOSPHERE.setConfig) {
-            var updated = SMD_MAIK_ATMOSPHERE.setConfig({
-              light: { color1: p.color1, color2: p.color2, color3: p.color3, blend: p.blend, speed: p.speed }
-            });
-            syncAtmoUI(updated.light);
-          }
+          var up = SMD_MAIK_ATMOSPHERE.choose ? SMD_MAIK_ATMOSPHERE.choose(atmoKey(), btn.getAttribute("data-pre-id")) : null;
+          if (up) syncAtmoUI(up[atmoKey()]);
         });
       });
     }
@@ -8933,18 +9029,18 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (inp && txt) {
         inp.addEventListener("input", function () {
           txt.value = this.value.toUpperCase();
-          var patch = { light: {} }; patch.light[key] = this.value;
-          var up = window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.setConfig(patch);
-          if (up) syncAtmoUI(up.light);
+          var o = {}; o[key] = this.value;
+          var up = atmoSet(o);
+          if (up) syncAtmoUI(up);
         });
         txt.addEventListener("change", function () {
           var v = this.value.trim();
           if (!/^#?[0-9a-fA-F]{6}$/.test(v)) return;
           if (v.charAt(0) !== "#") v = "#" + v;
           inp.value = v;
-          var patch = { light: {} }; patch.light[key] = v;
-          var up = window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.setConfig(patch);
-          if (up) syncAtmoUI(up.light);
+          var o = {}; o[key] = v;
+          var up = atmoSet(o);
+          if (up) syncAtmoUI(up);
         });
       }
     }
@@ -8955,16 +9051,16 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var bldInp = s.querySelector("#hvAtmoBlend");
     if (bldInp) {
       bldInp.addEventListener("input", function () {
-        var up = window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.setConfig({ light: { blend: +this.value } });
-        if (up) syncAtmoUI(up.light);
+        var up = atmoSet({ blend: +this.value });
+        if (up) syncAtmoUI(up);
       });
     }
 
     var spdInp = s.querySelector("#hvAtmoSpeed");
     if (spdInp) {
       spdInp.addEventListener("input", function () {
-        var up = window.SMD_MAIK_ATMOSPHERE && SMD_MAIK_ATMOSPHERE.setConfig({ light: { speed: +this.value } });
-        if (up) syncAtmoUI(up.light);
+        var up = atmoSet({ speed: +this.value });
+        if (up) syncAtmoUI(up);
       });
     }
 
@@ -9470,6 +9566,25 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         return fetch(NOTIF_API + "/prefs", { method: "POST", headers: h, body: JSON.stringify(p) }).then(function (r) { return r.json().catch(function () { return {}; }); });
       }).then(function (j) {
         syncPushWorkspaces();
+        // REGISTER THE DEVICE, not just the preference.
+        //
+        // This screen used to POST push_enabled:true and stop there. The server then believed push
+        // was on for this account while holding no APNs token for the handset, so it had nothing to
+        // deliver to and said nothing about it: the doctor ticks every category, sees "Saved", and
+        // never receives a notification. Registration only ever happened if they wandered into a
+        // particular ICU or Ward Sync flow.
+        //
+        // Turning notifications on is what this screen is FOR, so it asks the OS here, and reports
+        // what actually happened rather than a blanket "Saved".
+        var setMsg = function (t) { if (msg) msg.textContent = t; };
+        if (window.SMD_enableNativePush) {
+          setMsg("Saving\u2026");
+          window.SMD_enableNativePush().then(function (on) {
+            setMsg(on ? "\u2705 Saved. This phone is registered for alerts."
+                      : "Saved, but iOS has notifications turned off for StewardMD. Enable them in Settings \u203a Notifications \u203a StewardMD.");
+          }, function () { setMsg((j && j.ok) ? "\u2705 Saved" : "Saved on this device"); });
+          return;
+        }
         if (msg) msg.textContent = (j && j.ok) ? "✅ Saved" : "Saved on this device";
         try { toast("Notification preferences saved"); } catch (e) {}
       }).catch(function () { syncPushWorkspaces(); if (msg) msg.textContent = "Saved on this device"; });

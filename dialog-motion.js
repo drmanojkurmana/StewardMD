@@ -55,24 +55,29 @@
   };
 
   var openState = new WeakSet();
+  // The family is measured while the dialog is open: a closed one has no size, so measuring it at
+  // close time would call a full-screen overlay a "modal" and leave scale(0.97) on it for the next
+  // opening (seen on the antibiogram source sheet).
+  var famOf = new WeakMap();
 
   function animateIn(el) {
     // Only run when Motion is READY — otherwise priming to hidden with no animator would leave the
     // dialog invisible. Not ready: let the app's own CSS show this one, and warm Motion for the next.
     if (!(window.Motion && window.Motion.animate)) { withMotion(function () {}); return; }
     var fam = familyOf(el), f = F[fam];
+    famOf.set(el, fam);
     // PRIME (sync, before paint): transition off + hidden start state -> no flash of the open state.
     el.style.transition = "none";
     if (f.start.opacity !== undefined) el.style.opacity = f.start.opacity;
-    if (f.start.transform !== undefined) el.style.transform = f.start.transform;
+    el.style.transform = f.start.transform !== undefined ? f.start.transform : "";
     var ctrl; try { ctrl = window.Motion.animate(el, f.kin, f.oin); } catch (e) {}
-    var settle = function () { try { el.style.opacity = ""; if (fam === "sheet" || fam === "modal") el.style.transform = ""; } catch (e) {} };
+    var settle = function () { try { el.style.opacity = ""; el.style.transform = ""; } catch (e) {} };
     if (ctrl && ctrl.finished && ctrl.finished.then) ctrl.finished.then(settle).catch(settle);
     setTimeout(settle, 700);   // safety: never leave the dialog stuck in its primed/animating state
   }
   function animateOut(el) {
     if (!(window.Motion && window.Motion.animate)) return;   // Motion gone: app's removal handles it
-    var f = F[familyOf(el)];
+    var f = F[famOf.get(el) || familyOf(el)];
     el.style.transition = "none";
     try { window.Motion.animate(el, f.kout, f.oout); } catch (e) {}
   }

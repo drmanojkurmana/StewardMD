@@ -1,7 +1,7 @@
 ---
 tags: [module, surgery, education, documentation]
-status: MVP built (flag ON for testers, content ai_drafted pending R1 clinical sign-off)
-flag: smd_surgx (client, def:true for testers, ?surgx=1) + smd_surgx_draft (def:true, FLIP BEFORE RELEASE) + smd_surgx_notes (def:true, role-gated at runtime) + smd_surgx_mentor (Phase 2, def:false) + smd_surgx_uncleared_media (def:false, NEVER ship on) + smd_surgx_haptics (def:true)
+status: RELEASED to all users 2026-09-25 (owner decision), no longer labelled Beta; MVP built; content still ai_drafted pending R1 clinical sign-off, so every screen keeps its draft line
+flag: smd_surgx (client, def:true for all users, ?surgx=0 hides) + smd_surgx_draft (def:true; stays on while content is ai_drafted) + smd_surgx_notes (def:true, role-gated at runtime) + smd_surgx_mentor (def:false) + smd_surgx_uncleared_media (def:false, NEVER ship on) + smd_surgx_haptics (def:true)
 ---
 # SURGX (SURGˣ · Surgical Intelligence)
 

@@ -36,7 +36,7 @@
    "items": [
     "Azithromycin 20 mg/kg/day orally once daily (adults 1 g/day; maximum 1 g/day). Seven-day courses are the most studied; ICMR advises 10 to 14 days of total typhoid treatment.",
     "Alternative: cefixime 20 mg/kg/day in 2 divided doses (ICMR; IAP 15 to 20 mg/kg/day) for 14 days. Clinical failure is more frequent than with azithromycin.",
-    "Co-trimoxazole (adults 1 double-strength tablet twice daily) or chloramphenicol only when the isolate is proven susceptible.",
+    "Co-trimoxazole 960 mg (1 double-strength tablet) twice daily for 2 weeks is also a first-line oral option in the NCDC 2025 national guideline, which reports low co-trimoxazole resistance; use local or isolate susceptibility where available. Chloramphenicol only when the isolate is proven susceptible.",
     "Avoid empirical fluoroquinolones: in ICMR surveillance only about 13% of S. Typhi and under 1% of S. Paratyphi A were ciprofloxacin-susceptible.",
     "Paracetamol for fever, oral fluids and a normal diet; no food restriction is needed.",
     "Most patients can be treated at home with close follow-up; review at 48 to 72 hours and sooner for danger features."
@@ -46,7 +46,7 @@
    "kind": "treatment",
    "title": "Complicated or severe (IV)",
    "items": [
-    "Ceftriaxone 2 g IV once daily in adults (ICMR); children 50 to 75 mg/kg/day IV in 1 or 2 doses (IAP), not exceeding the adult daily dose. Total treatment 10 to 14 days (switch to an oral agent to complete once afebrile and eating).",
+    "Ceftriaxone 2 g IV once daily in adults (ICMR); children 50 to 75 mg/kg/day IV in 1 or 2 doses (IAP), not exceeding the adult daily dose. Total treatment 10 to 14 days (switch to an oral agent, such as cefixime or co-trimoxazole (NCDC 2025), to complete once afebrile and eating).",
     "No improvement after about 5 days and culture inconclusive: add azithromycin (IAP). Ceftriaxone plus azithromycin is widely used for complicated disease.",
     "Severe typhoid with delirium, obtundation, coma or shock: dexamethasone 3 mg/kg IV over 30 minutes, then 1 mg/kg IV every 6 hours for 8 doses (WHO).",
     "Intestinal perforation: resuscitate, nil by mouth, urgent surgery, and add anaerobic and enteric Gram-negative cover (for example metronidazole) to ceftriaxone.",
@@ -97,11 +97,12 @@
   { "name": "Azithromycin", "dose": "20 mg/kg/day orally or IV once daily, maximum 1 g/day (adults 1 g/day)", "notes": "Preferred oral agent for uncomplicated disease; usually 7 days (ICMR total typhoid treatment 10 to 14 days). Check QTc with interacting drugs." },
   { "name": "Cefixime", "dose": "20 mg/kg/day orally in 2 divided doses for 14 days", "notes": "Alternative oral agent (ICMR; IAP 15 to 20 mg/kg/day). Higher failure rates." },
   { "name": "Ceftriaxone", "dose": "Adults 2 g IV once daily; children 50 to 75 mg/kg/day IV in 1 or 2 doses", "notes": "Complicated or severe disease; total 10 to 14 days. Do not exceed the adult daily dose in children." },
-  { "name": "Co-trimoxazole", "dose": "Adults 1 double-strength tablet (160/800 mg) orally twice daily", "notes": "Only if isolate susceptible." },
+  { "name": "Co-trimoxazole", "dose": "Adults 1 double-strength tablet (160/800 mg) orally twice daily", "notes": "Uncomplicated disease, 2 weeks (NCDC 2025 first-line option alongside azithromycin, cefixime as alternative); also an oral step-down after IV treatment. Tailor to susceptibility where known." },
   { "name": "Meropenem", "dose": "1 g IV 8-hourly", "notes": "Complicated XDR typhoid. Adjust for renal function." },
   { "name": "Dexamethasone", "dose": "3 mg/kg IV over 30 minutes, then 1 mg/kg IV every 6 hours for 8 doses", "notes": "Severe typhoid with encephalopathy or shock." }
  ],
  "sources": [
+  { "org": "NCDC, MoHFW", "title": "National Treatment Guidelines for Antimicrobial Use in Infectious Disease Syndromes 2025", "year": 2025, "url": "https://ncdc.mohfw.gov.in/wp-content/uploads/2025/12/National-Treatment-Guidelines-for-AMU-in-ID-syndromes-2025.pdf" },
   { "org": "ICMR", "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes 2019", "year": 2019, "url": "https://www.icmr.gov.in/icmrobject/custom_data/pdf/resource-guidelines/Treatment_Guidelines_2019_Final.pdf" },
   { "org": "Indian Academy of Pediatrics", "title": "IAP Task Force Report: Management of Enteric Fever in Children", "year": 2006, "url": "https://www.indianpediatrics.net/oct2006/884.pdf" },
   { "org": "CDC", "title": "Typhoid and Paratyphoid Fever, CDC Yellow Book 2026", "year": 2025, "url": "https://www.cdc.gov/yellow-book/hcp/travel-associated-infections-diseases/typhoid-and-paratyphoid-fever.html" }

@@ -214,6 +214,13 @@ try{
  await until(`!!document.querySelector('${R} [data-kit-f="la:strength"] option[value="1%"]')`);
  await setF('la','adr','Plain',R); await setF('la','strength','1%',R);
  ok(await until(`/200 mg/.test((document.querySelector('${R} [data-kit-out="la-dose"]')||{}).textContent||'')&&/20 mL/.test(document.querySelector('${R} [data-kit-out="la-dose"]').textContent)&&/70 kg/.test(document.querySelector('${R} [data-kit-out="la-dose"]').textContent)`),'LA dose: 200 mg ceiling, 20 mL of 1%, worked out for 70 kg');
+ // Audit 2026-09-25: lidocaine with adrenaline 7 mg/kg (70 x 7 = 490 mg, 49 mL of 1%); levobupivacaine is offered and credits its own source.
+ await setF('la','adr','With adrenaline',R); await setF('la','strength','1%',R);
+ ok(await until(`/490 mg/.test(document.querySelector('${R} [data-kit-out="la-dose"]').textContent)&&/49 mL/.test(document.querySelector('${R} [data-kit-out="la-dose"]').textContent)`),'LA dose: lidocaine with adrenaline 7 mg/kg gives 490 mg (49 mL of 1%) at 70 kg');
+ ok(await ev(`[...document.querySelectorAll('${R} [data-kit-f="la:drug"] option')].some(o=>o.value==='Levobupivacaine')`),'LA dose: levobupivacaine is in the drug list');
+ await setF('la','drug','Levobupivacaine',R); await until(`!!document.querySelector('${R} [data-kit-f="la:strength"] option[value="0.5%"]')`);
+ await setF('la','adr','Plain',R); await setF('la','strength','0.5%',R);
+ ok(await until(`/140 mg/.test(document.querySelector('${R} [data-kit-out="la-dose"]').textContent)&&/28 mL/.test(document.querySelector('${R} [data-kit-out="la-dose"]').textContent)&&/BJA Education 2020/.test(document.querySelector('${R} [data-kit-out="la-dose"]').textContent)`),'LA dose: levobupivacaine 2 mg/kg is 140 mg (28 mL of 0.5%) at 70 kg, citing BJA Education 2020');
  // Burns: adult anterior trunk all burnt = 13%; Parkland 4 x 70 x 13 = 3640 mL.
  await pickKit(R,'emergency'); await until(`!!document.querySelector('${R} [data-kit-f="burns:age"]')`);
  await setF('burns','age','Adult',R); await until(`!!document.querySelector('${R} [data-kit-f="burns:r_ant-trunk"]')`);
@@ -242,6 +249,8 @@ try{
  if(await ev(`!!document.querySelector('${R} [data-kit-f="mccd:c0"]')`)){
   await setF('mccd','c0','Cardiac arrest',R);
   ok(await until(`/mode of dying/.test(document.querySelector('${R} [data-kit-out="mccd"]').textContent)`),'MCCD: a mode of dying as the only cause is flagged');
+  await setF('mccd','c0','Cardiorespiratory arrest',R); await setF('mccd','c1','Acute myocardial infarction',R); await setF('mccd','i1','2 hours',R);
+  ok(await until(`/Line \\(a\\) \\(Cardiorespiratory arrest\\) is a mode of dying/.test(document.querySelector('${R} [data-kit-out="mccd"]').textContent)`),'MCCD: an arrest on line (a) is flagged even with a real cause below it');
  }
  await shot('opd-forensic-tools-390');
  // Labour Care Guide: a time point with FHR 170 shows as an alert.
@@ -273,8 +282,10 @@ try{
  await until(`!!document.querySelector('#smdDocs [data-dl-act="lang:te"]')`);
  await click('#smdDocs [data-dl-act="lang:te"]'); await click('#smdDocs [data-dl-act="consent:caesarean-section"]');
  ok(await until(`/native-speaker check of the Telugu/.test(document.querySelector('#smdDocs').textContent)`),'a Telugu consent form says its translation needs a native-speaker check');
+ ok(await ev(`(()=>{const el=document.querySelector('#smdDocs [data-dl-f="risks"], #smdDocs #dl_risks');if(!el)return false;el.value='Placenta accreta risk discussed';el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));return true})()`),'consent form has a box for procedure-specific risks');
  await click('#smdDocs [data-dl-act="preview"]');
  ok(await until(`/[\u0C00-\u0C7F]{4}/.test((document.querySelector('#smdDocs iframe.dl-frame')||{}).srcdoc||'')&&/Kit Patient/.test(document.querySelector('#smdDocs iframe.dl-frame').srcdoc)`),'consent preview is in Telugu with the patient named');
+ ok(await until(`/\u0C08 \u0C2A\u0C4D\u0C30\u0C15\u0C4D\u0C30\u0C3F\u0C2F\u0C15\u0C41 \u0C38\u0C02\u0C2C\u0C02\u0C27\u0C3F\u0C02\u0C1A\u0C3F \u0C35\u0C3F\u0C35\u0C30\u0C3F\u0C02\u0C1A\u0C3F\u0C28 \u0C07\u0C24\u0C30 \u0C2A\u0C4D\u0C30\u0C2E\u0C3E\u0C26\u0C3E\u0C32\u0C41/.test(document.querySelector('#smdDocs iframe.dl-frame').srcdoc)&&/Placenta accreta risk discussed/.test(document.querySelector('#smdDocs iframe.dl-frame').srcdoc)`),'the risks entered print under a Telugu heading in the consent preview');
  await click('#smdDocs [data-dl-act="back"]'); await click('#smdDocs [data-dl-act="type:handout"]');
  await until(`!!document.querySelector('#smdDocs [data-dl-act="lang:hi"]')`);
  await click('#smdDocs [data-dl-act="lang:hi"]');

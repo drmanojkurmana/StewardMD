@@ -168,3 +168,31 @@ test("judgeVivaAnswer() refuses to call out with no question or no answer", asyn
   const noProbe = await T.judgeVivaAnswer(null, "something");
   assert.equal(noProbe.error, "no-input");
 });
+
+/* Patient persona simulation ------------------------------------------------ */
+
+test("buildPatientPrompt grounds patient identity and known clinical history", () => {
+  const cd = {
+    patient: { name: "Ramesh Patil", age: 62, occupation: "Bus mechanic" },
+    opening: "Sitting forward, breathless.",
+    history: {
+      dyspnea: { reply: "I get very short of breath after walking 100 metres." },
+      cough: { reply: "I have coughed up yellow-green phlegm for 5 days." }
+    }
+  };
+  const prompt = T.buildPatientPrompt(cd, "Do you have cough?");
+  assert.match(prompt, /Ramesh Patil/);
+  assert.match(prompt, /62/);
+  assert.match(prompt, /Bus mechanic/);
+  assert.match(prompt, /short of breath after walking 100 metres/);
+  assert.match(prompt, /Do you have cough\?/);
+  assert.match(prompt, /colloquially/i);
+  assert.match(prompt, /NEVER use technical medical jargon/i);
+});
+
+test("answerAsPatient() falls back honestly to case fallback when MaiK is absent", async () => {
+  const cd = { fallback: "I am not sure what you mean, doctor." };
+  const r = await T.answerAsPatient(cd, "Are you allergic?");
+  assert.equal(r.error, "ai-off");
+  assert.equal(r.text, "I am not sure what you mean, doctor.");
+});

@@ -3,7 +3,12 @@
  * NOTE (2026-08-23, owner decision): smd_clinix and smd_clinix_draft both default ON. The app is
  * distributed only to the owner and testers, so gating CliniX behind a flag only cost them time.
  * The per-lesson "Draft, pending clinician review" line and the source citations stay on every
- * screen, so nothing claims to be approved that is not. Flip both to false before wider release.
+ * screen, so nothing claims to be approved that is not.
+ *
+ * RELEASED (2026-09-25, owner decision): CliniX is on for ALL users by default and is no longer
+ * labelled Beta. smd_clinix_draft stays ON because every pathway is still ai_drafted; the per-lesson
+ * "Draft, pending clinician review" line therefore stays until R1 clinical sign-off marks content
+ * approved. Do not remove that line to make the module look finished.
  *
  * Resolution order: ?query param -> localStorage -> default. Persistence is localStorage only.
  * Dual export: module.exports for node tests, window.SMD_CLINIX_FLAGS for the browser.
@@ -25,8 +30,8 @@
   var DEFS = {
     smd_clinix: {
       type: "bool", def: true, query: "clinix",
-      desc: "CliniX clinical-learning module master flag. ON by default: the app ships only to the " +
-        "owner and testers, so CliniX is open to everyone who has it. Owner decision, 2026-08-23."
+      desc: "CliniX clinical-learning module master flag. ON by default for ALL users, no longer " +
+        "Beta (owner decision 2026-09-25; first turned on for testers 2026-08-23)."
     },
     smd_clinix_draft: {
       type: "bool", def: true, query: "clinixdraft",

@@ -12,7 +12,9 @@
  * distributed only to the owner and testers (the same owner decision recorded in clinix-flags.js
  * on 2026-08-23) - gating it off would only cost testers time, and every screen carries its own
  * provenance and draft state, so nothing claims to be approved that is not.
- * FLIP smd_surgx AND smd_surgx_draft TO false BEFORE ANY NON-TESTER RELEASE.
+ * RELEASED (2026-09-25, owner decision): SURGX is on for ALL users by default and is no longer
+ * labelled Beta. smd_surgx_draft stays ON because the authored content is still ai_drafted; every
+ * screen keeps its own draft line and sources until R1 clinical sign-off. Do not remove that line.
  *
  * smd_surgx_draft is the flag that matters for safety: with it OFF, the runtime refuses to render
  * any content object whose review.status is not approved/published. The authored SURGX protocols,
@@ -26,8 +28,8 @@
   var DEFS = {
     smd_surgx: {
       type: "bool", def: true, query: "surgx",
-      desc: "SURGX (Surgical Intelligence) master flag. ON for testers; the app ships only to the " +
-        "owner and testers today. Flag off must be a COMPLETE no-op."
+      desc: "SURGX (Surgical Intelligence) master flag. ON for ALL users, no longer Beta (owner " +
+        "decision 2026-09-25). Flag off must be a COMPLETE no-op."
     },
     smd_surgx_draft: {
       type: "bool", def: true, query: "surgxdraft",

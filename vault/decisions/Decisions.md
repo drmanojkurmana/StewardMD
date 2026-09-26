@@ -9850,3 +9850,223 @@ and `readFileSync` cannot hold a 560 MB extract, so the featurizer now streams.
 **Nothing about this model is clinically usable.** It failed its gates and `medcore-models.js`
 would refuse it. eICU is US ICU data with synthetic dates; StewardMD serves US and Indian wards, and
 site is a gated subgroup precisely so that difference is measured rather than assumed.
+
+## 2026-09-26 - MaiK: Close is labelled and filled, the background choice is per theme
+
+**Decision.** MaiK's Close is a filled pill that says "Close" (ink on the page colour, top right,
+opposite the menu), not a thin X among three look-alike icons; Escape and Android back close the top
+MaiK layer first (sidebar panel, sidebar, then MaiK). The background chooser lives in the MaiK sidebar
+and edits the theme on screen: dark and light each keep their own choice, and each theme's default is
+the background it already had (dark stays byte-identical). The Display sheet's MaiK section follows
+the same rule. Extract findings moved from the tool row to the text row.
+**Why.** Owner, 2026-09-26: many could not find how to close MaiK; dark mode had no background option
+(the Display sheet only ever edited the light palette, so in dark mode it silently did nothing); the
+composer's tool row was unbalanced and shifted when typing.
+**Trade-off.** The Close pill is deliberately the loudest control in the header. At 320px the model
+chip truncates ("MaiK C...") and drops its caret, as it truncated before. Status: PR maik-ui-close-bg,
+browser-verified in headless Chrome, not yet on a device.
+
+## 2026-09-27 - MaiK answers a patient case on request; the structured tools become a choice
+
+**Decision.** A message the router classifies as a patient case gets a card (Start Case, Dx My Patient,
+Answer here, Answer, don't ask again) once per conversation, and a direct answer when it asks for one
+("dd", "management", "??"). Replaces the July router (#188) rule that sent every patient case to the
+engine with no answer.
+**Why.** Owner transcript 2026-09-27: the same redirect three times, "Give me dd" included.
+**Trade-off.** Patient cases now reach the model like any other question; hospital IDs (MRN/UHID/IP/OP/
+reg numbers) and emails are stripped first. Names are not detectable and are not stripped.
+Status: PR maik-patient-choice; unit + headless UI tests, not yet checked on a phone.
+
+## 2026-09-26 - MaiK Lite: the same "no talk about the reference material" filter as Cloud
+
+**Decision.** `maik-local.js` runs an ES5 copy of `functions/_maik_metatalk.js` on the final answer,
+after the NO_COVERAGE check, and on settled lines while painting. An answer that is only talk about
+the material is re-asked without the material, like a "not covered" verdict.
+**Why.** Owner, 2026-09-26: MaiK must never tell the doctor about "the passage you sent". Cloud was
+fixed first; Lite answers from the same kind of retrieved passages and could say the same thing.
+**Trade-off.** The patterns are copied, not shared (ES5 client, ES-module server). A parity test on
+the shared cases catches drift; move both into one kb/ai UMD file if a third caller appears.
+Also fixed in the Cloud file: a citation after a kept sentence ("... first line. [1]") was deleted.
+Status: PR maik-lite-metatalk; unit + answer() tests, not yet checked on a phone.
+
+## 2026-09-26 - MaiK Cloud: the Knowledge Base is MaiK's private notes, never "the passage you sent"
+
+**Decision.** The retrieved Knowledge Base text reaches the model as "YOUR REFERENCE NOTES (private;
+the clinician cannot see them)", not "RETRIEVED STEWARDMD KNOWLEDGE (PRIMARY SOURCE)". KNOWLEDGE_SYS,
+RAG_SYS, TUTOR_SYS, ABSTAIN_RULE and the CITE-OR-ABSTAIN suffix say: prefer the notes where they fit,
+silently set aside the ones that do not, never mention them, and state any abstention about the
+medicine. A server post-filter (`functions/_maik_metatalk.js`) removes remaining sentences about the
+material on every /explain exit (whole answer, SSE, live stream, cache hit). Empty engine/patient/notes
+headers are no longer sent on knowledge questions.
+**Why.** Owner, 2026-09-26: "wont the user think we are using rag or sending rag? why is agent tell the
+passage yu sent is irrelavant?" A lexical mis-route ("RA factor" name-matched Factor XII deficiency)
+was narrated to the doctor as "the provided StewardMD knowledge focuses on ...".
+**Trade-off.** The filter is precision-first: an ambiguous phrase ("the information you provided")
+is kept, so a rare slip can still get through. The mis-route itself is unchanged (a safe relevance gate
+needs a scored check, see Roadmap "MaiK Cloud: relevance gate and input cost"). Live streaming now releases whole lines, not tokens.
+Status: PR maik-no-passage-talk; unit + handler tests, not model-evaluated on live Gemini.
+
+## 2026-09-26 - MaiK: a knowledge question gets the notes of the entry it names, or none
+
+**Decision.** A standalone knowledge question (no case, no differential) is grounded on a Knowledge Base
+entry only when the question NAMES it: a whole name form (a leading qualifier such as "acute" or a
+trailing head noun such as "syndrome" may be left out, never both), a curated synonym (`KB_NAMES` in
+`kb/ai/steward-ai.browser.js`), or the entry's one-word id (DVT, PE, AKI). A real word just before the
+matched words names something else ("heat stroke", "cryptococcal meningitis"); a letter or number just
+after is an identifier ("hepatitis B", "factor 9"). An unnamed question gets no notes and the model
+answers from its own knowledge. A spelling slip is corrected only for a word the KB text never uses
+(`hasTerm()` in `kb/ai/interface.mjs`). Only the named entries' retrieved chunks are sent. Flag
+`smd_kb_gate`, default ON; "0" restores the legacy coverage gate, whose code is unchanged.
+**Why.** The legacy gate treated one shared word as a name. On a 404-question benchmark
+(`test/maik-kb-relevance.test.mjs`) it gave 88 questions the notes of an entry they did not ask about
+("RA factor" -> Factor X deficiency, "panic attack" -> acute coronary syndrome, "capital of France" ->
+slipped capital femoral epiphysis, "svt adenosine dose" -> adenosine deaminase deficiency): 427k chars of
+off-topic text. The name gate: 0 mis-routes, 0 off-topic chars, 312 correct against 280.
+**Trade-off.** It abstains more (92 against 18 of 404). A question that names no entry gets a general
+answer without notes, including some the legacy gate happened to ground well. Recall grows by adding
+synonyms to `KB_NAMES`, not by loosening the rule: the clash rule is what keeps bacterial-meningitis notes
+away from "cryptococcal meningitis".
+**Also.** With `smd_maik_brain` on, the server no longer repeats the notes as RANKED REFERENCE NOTES
+claims (mean 1,196 chars, about 300 tokens, per grounded question over 10 measured); only guideline
+claims the notes lack are ranked. `retrieve()` skips chunks that share no word with the query: identical
+output on the 404 questions, 726 -> 121 ms per question.
+Status: PR maik-kb-relevance; unit, benchmark and headless-Chrome tests; not evaluated on live Gemini.
+
+## 2026-09-25 - CliniX and SURGX released to all users; KardiQ X, ThoreX and FundX go back to code-gated beta
+
+**Decision (owner):** CliniX and SURGX are on for every user by default and no longer labelled Beta.
+KardiQ X, ThoreX and FundX are a code-gated beta: hidden by default, unlocked per device with a
+StewardMD access code through the existing `SMD_XACCESS` framework (one code, one device, server-verified).
+
+**What changed:** `smd_kardiox`, `smd_thorex`, `smd_fundx` default to false (they were true for every
+user since 2026-08-26). The tiles now appear only on an unlocked device (`SMD_XACCESS` sets the flag to
+1 on unlock), on the early-access tier, or with `?kardiox=1` style tester overrides, and every open still
+passes `SMD_XACCESS.gate`. The ICU dashboard's `launch fundx` entry was the one path that opened FundX
+without the gate; it now goes through it. CliniX, MaiK Examiner and SURGX lose "(Beta)" in Settings, and
+the stale Settings switches that displayed CliniX as off now match the real default. The CliniX home tile
+read `smd_clinix === "1"` before clinix.js loaded, so a fresh device never saw it; it now uses the same
+`!== "0"` rule as SURGX.
+
+**Deliberately NOT changed:** `smd_clinix_draft` and `smd_surgx_draft` stay ON. All CliniX and SURGX
+content is still `ai_drafted`; turning the draft flags off makes every pathway read "Awaiting clinical
+review", and removing the per-screen "Draft, pending clinician review" line would present unreviewed
+AI-drafted clinical content as approved. The line stays until R1 clinical sign-off.
+
+**Government Health Schemes and Connect Agent:** already default ON in the client (2026-09-04 and
+2026-09-12); the vault notes that said OFF were stale and are corrected. Connect's server features
+(FHIR/HL7 ingest, onboarding, the agent broker) are gated by Cloudflare Pages env vars and secrets
+(`CONNECT_FLAG`, `CONNECT_ONBOARD_FLAG`, `CONNECT_AGENT_FLAG`, `CONNECT_MASTER_KEY`, ...), which live in
+the dashboard, not the repo; they were not changed here.
+
+**Verification:** unit suites CliniX 360/360, SURGX 227/227, access gate 13/13, KardiQ X 22/22,
+FundX 12/12, flag files 3/3, Connect 2031/2034 (the 3 failures reproduce on the parent commit).
+Headless Chrome against the real app: fresh device shows CliniX and SURGX, hides all three imaging
+tiles; a flag-set device without a token shows the KardiQ X tile and tapping it opens the access gate,
+not the module (15/15; the same check run on the parent commit fails exactly the imaging and CliniX-tile
+rows). Recovery point: parent commit `ed38b5c2`.
+
+## 2026-09-25 - An AI clinical audit is applied as proposals, never as a sign-off
+The owner uploaded an AI-written "master sign-off audit" of the review PDFs (43 review-first items,
+19 protocol packs, kits, consent, translations) and asked for everything to be fixed. Decision: every
+finding was checked against the guideline it names or the file's own cited source. It was applied where
+it matched, declined where it was outdated or wrong, and anything unverifiable was left for a clinician.
+Examples of declined findings: aggressive pancreatitis fluids 5 to 10 mL/kg/h (WATERFALL, ACG 2024);
+epidural second-stage limits in the WHO Labour Care Guide table (not WHO values); a new "5 then 15
+minutes" nosebleed scheme; half-dose alteplase for PE as a recommendation; TTM 32 to 36 C for 72 h;
+KCl 20 to 30 mEq/h and the 2009 HHS glucose target; snakebite notifiable "March 2024" (it was Nov 2024).
+`review.status` stays `ai_drafted` everywhere: the audit names no clinician, and `apply-reviews.mjs`
+needs a named reviewer with a registration number. Before re-applying a later audit, read
+`vault/handoff/2026-09-25-clinical-audit-fixes.md` so declined items are not re-litigated.
+Recovery point: main at `ad26d2523` (before the audit commits).
+
+## 2026-09-26 - Antibiogram rebuilt on one validated file per source document
+The owner rated the old module against SKIMS's published antibiogram (missing) and asked for every Indian
+hospital antibiogram online to be found and integrated, and the module made "10/10". The old data was a
+literature composite: cells spliced from up to five studies under one n, 17 arithmetically impossible
+cells, S. aureus ampicillin 100% susceptible beside 53% MRSA, no specimen or setting strata, no import.
+Decisions:
+- **One file per source document** (`data/antibiogram/sources/<ID>.json`), read from the PDF and compared
+  with the page image; composites are computed, never stored. Each edition is its own file (trends).
+- **Nothing is dropped silently.** Every cell carries an action (keep, intrinsic, hide, suppress,
+  caution) and its reason, shown in the app. Caution cells are grey and never pooled or used by reasoning.
+- **Pooling**: isolate-weighted, latest edition per institution, n >= 30 (CLSI M39), networks never pooled
+  with institutions. Pooled "all settings" = hospital-wide or all-inpatient rows only.
+- **Derived rows only when complete** (count tables consulted); "all specimens except urine" never added
+  to its own subsets.
+- **% resistant reports** are stored as 100 - %R and marked; intermediate counts as susceptible there.
+- **Syndromes get their specimen or nothing**: no urine figures for meningitis; fallback to all specimens
+  is stated on screen.
+- **The hospital's own antibiogram stays on the device** (summary or isolate CSV, first isolate per
+  patient, MRSA expert rule, IDs hashed in memory and never stored).
+- **Census honesty**: "all hospital websites" cannot be crawled exhaustively; the register lists what was
+  searched, found, integrated, and what was not and why.
+Flag `smd_abg_v2` (default ON) restores the previous view; the console and reasoning read the new layer
+either way. See [[Antibiogram]]. Recovery point: branch state before this work, commit `dbc92bad9`.
+
+## 2026-09-26 - Antibiogram integrity rules added during the full census integration
+While integrating about 75 documents (every page double-read by independent agents), the sources themselves
+turned out to be the main risk. Decisions, each implemented in `scripts/build-antibiogram.mjs` or
+`antibiogram-rules.js` with a test:
+- **Documents that restrict reproduction are held, not shipped.** UCMS and GTB Hospital antibiograms (2023,
+  2023-24, 2025) forbid copying or reproduction without the editorial board's permission; CMC Ludhiana 2012
+  and RGGWCH Puducherry 2017 are marked "for internal use only". Extracted, listed in the register with the
+  reason, integrated only if the owner obtains permission. Plain "(c) ... all rights reserved" notices on
+  public surveillance reports (ICMR, KARS-NET, SGPGIMS newsletters) are not treated as a bar to citing their
+  figures. Exception, on the owner's instruction (2026-09-26): the UCMS Antimicrobial Policy 2026-27 is openly
+  published without a restriction notice and is integrated (`UCMS_GTBH_2025`); the owner takes responsibility.
+- **Figures carried over between editions are cautions** (`copyChecks`): 6+ identical figures making up 75%+
+  of those shared, 4+ of them strictly between 0 and 100. NARS-Net 2025 reprints two 2024 series.
+- **Exceptional resistance is a caution** (`unusualReason`): vancomycin in staphylococci under 90%, linezolid
+  in S. aureus under 90%, carbapenems in typhoidal Salmonella under 95%, penicillin in beta-haemolytic
+  streptococci under 95%, vancomycin/linezolid in pneumococci under 95%. Deliberately NOT linezolid in
+  E. faecium or CoNS: ICMR data show that resistance is real in India, and a caution would hide it.
+- **Tetracycline cannot be far above doxycycline or minocycline** (CLSI class equivalence).
+- **n from the source's organism table** when none is printed beside the susceptibility table (exact
+  specimen and setting only, never phenotype or cohort rows); the sheet says so.
+- **Focus reports** (one department, one outbreak, one condition) are shown but never pooled or profiles,
+  and need their own `inst`.
+- **Specimen keys follow what the source grouped**: NCDC-protocol "pus aspirate" (alone or with other
+  sterile fluids) is `deep`; "all except blood and urine" is `other`; "blood + PA + OSBF" is `nonurine`.
+- **Count checks report only real disagreements** (not "other species" genus lines, species without rows,
+  location-less isolates, or n that is the number tested), and a contradicted row is never a part of a
+  combined row, though it still counts as printed.
+- **Profile ids are per institution** (`ABG_<inst>`), so a saved choice survives the next edition.
+
+## 2026-09-26 - Antibiogram review fixes: what decision support may read, and how
+From an early independent review (7/10) of the rebuilt module. Each is implemented with a test; see
+[[Antibiogram]].
+- **Only institutional cumulative antibiograms are pooled or offered as profiles.** Published studies,
+  focus reports, sources with fewer than 3 usable cells and data older than the five most recent years
+  stay out of pools; studies are shown on their own with a "Covers X only" line.
+- **A syndrome never borrows figures from a different world.** Outpatient syndromes never read ICU
+  figures; ICU and ward syndromes fall back to all inpatients before all settings; CNS syndromes never
+  fall back to all-specimen figures; agents that cannot work at the site (urine-only agents outside
+  cystitis, tigecycline for bloodstream or urinary infection, daptomycin for pneumonia, agents that miss
+  the CSF) are left out and named.
+- **Kill switch for decision support** (`smd_abg_data`, default on): off per device, the console,
+  reasoning and antibiotic choice return to the built-in ICMR 2024 national summary. Separate from
+  `smd_abg_v2`, which only changes the screen. The national summary is never shown as a profile's own.
+- **Equivalent agents answer for each other, named**: cefoxitin/oxacillin (staphylococci),
+  cefotaxime/ceftriaxone (identical CLSI and EUCAST breakpoints; not for N. gonorrhoeae, whose
+  breakpoints differ).
+- **Breakpoint revisions are disclosed, not corrected.** Figures are shown as printed; a trend or pool
+  that straddles a CLSI revision (2019 fluoroquinolones, 2020 polymyxins, 2022/2023
+  piperacillin-tazobactam, 2023 aminoglycosides) says a step there can be the breakpoints. Each source
+  records the standard it states (`breakpoints`), or none.
+- **Enterococcal gentamicin is high-level only when the paper says so**; otherwise it stays intrinsic.
+- **Ambiguous cells are left out, not shown with a guess** (RMLIMS 2017 urine Klebsiella/Proteus
+  colistin and ofloxacin: a possible column shift in the source).
+
+## 2026-09-26 - Antibiogram review round 2: contradictory figures and one-hospital "pools" are not decision support
+- **Context**: the second independent review (7.5/10) found figures that cannot be right being pooled and
+  shown (BVDU Pune 2024 levofloxacin 0% beside ciprofloxacin 11% for 953 E. coli; SKNMC Pune imipenem 0% beside
+  meropenem 54 to 73%) and "pooled" figures that were one hospital (India ICU MRSA 98.3% was SKIMS alone).
+- **Decision**: same-class disagreements (fluoroquinolones, carbapenems, penicillin/ampicillin in streptococci,
+  beta-lactamase inhibitors) become cautions when both figures describe the same isolates; a whole table the
+  lead finds self-contradictory is marked `unreliable`; a 0 the source says means "not tested" is marked
+  `untested`. A pooled figure needs at least 3 institutions (by hospital name); fewer is a caution naming
+  them, and a region with fewer than 3 has no pool or profile. Values are never changed: they stay as
+  printed, shown with the reason, and kept out of pools, the console and reasoning.
+- **Why not delete them**: the page is the truth; hiding a printed figure would make the app disagree with
+  the document a clinician can open. The caution explains, the pool and reasoning ignore it.
+- **Reversible**: the checks live in `validateRow` and the store's `POOL_MIN_K`; the row flags are data.

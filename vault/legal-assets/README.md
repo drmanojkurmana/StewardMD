@@ -12,6 +12,8 @@ same as every other file in `vault/` — see `vault/Home.md`). Not referenced by
 | `llp-seal-maiknowledge.png` | MAIKNOWLEDGE LLP round seal ("MAIKNOWLEDGE LLP · LLPIN: ADA-6560 · VISAKHAPATNAM"), 229×225 | Same source document |
 | `MaiKnowledge-LLP-Letterhead.docx` | **Official company letterhead.** Blank body; logo + entity block in a real Word page Header (repeats on every page), footer with LLPIN/PAN/address + page numbers. Open it, type the letter, save as a new file — never edit this file directly. | Built 28 Aug 2026 |
 | `build-letterhead.js` | The docx-js script that generates the letterhead above. Re-run with `node build-letterhead.js` after editing to regenerate it — e.g. if the registered office PIN gets confirmed, or the entity block changes. | — |
+| `maik-india-first-evidence.md` | Evidence for the "India's First Offline & Free Medical AI" marketing claim (ASCI substantiation): dates, code refs, Indian market search | Written 22 Sep 2026 |
+| `maik-offline-airplane-mode-2026-09-22.png` | iPhone screenshot: MaiK Lite answering in airplane mode, "On-device" footer | Supplied by owner, 22 Sep 2026 |
 
 ## Entity facts (safe to reuse in filings)
 

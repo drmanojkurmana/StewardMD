@@ -9,7 +9,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { addTokens, getCredits, inrToMt, mtToInr, tokenPackFor, MT_PER_INR } from "../functions/_credits.js";
+import { addTokens, getCredits, inrToMt, mtToInr, tokenPackFor, MT_PER_INR, tokenPacks, tokenPackList } from "../functions/_credits.js";
 import { modelRate, estCostInr, capsEnforced, rateConfirmed, resolveModel, MODEL_HARD_DEFAULT } from "../functions/_ai_usage.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -44,6 +44,21 @@ test("MT <-> INR is one conversion, both ways", () => {
   assert.equal(inrToMt(mtToInr(750000)), 750000);
   assert.equal(inrToMt(-5), 0);              // never a negative wallet
   assert.equal(inrToMt("nonsense"), 0);
+});
+
+test("the token packs are defined once: the paywall and the wallet quote the same selling prices", () => {
+  const t = tokenPacks({});
+  assert.deepEqual(Object.keys(t), ["boost", "plus", "power"]);
+  assert.deepEqual([t.boost.mt, t.boost.amount], [50000, 4900]);     // App Store: in.stewardmd.tokens.boost, INR 49
+  assert.deepEqual([t.plus.mt, t.plus.amount, t.plus.regular, t.plus.popular], [250000, 19900, 24500, true]);
+  assert.deepEqual([t.power.mt, t.power.amount, t.power.regular], [750000, 49900, 73500]);
+  assert.deepEqual(tokenPackList({}), [{ id: "boost", mt: 50000, inr: 49 }, { id: "plus", mt: 250000, inr: 199 }, { id: "power", mt: 750000, inr: 499 }]);
+  // A live price change reaches both (env here; the KV override goes through the same cfgPrice).
+  assert.equal(tokenPackList({ TOKENS_BOOST: "5900" })[0].inr, 59);
+  assert.equal(tokenPacks({ TOKENS_BOOST: "5900" }).boost.amount, 5900);
+  // The wallet's worth is at the selling price, not the AI cost rate: 20k tokens = Rs 19.6, not Rs 10.
+  assert.equal(Math.round(20000 * 49 / 50000 * 10) / 10, 19.6);
+  assert.equal(20000 / MT_PER_INR, 10);
 });
 
 test("only token packs are fulfilled as tokens; subscriptions still grant Pro", () => {

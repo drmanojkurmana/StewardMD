@@ -57,6 +57,15 @@ for the unverified/pending reasons, so no call site can open the wrong door.
   Android resizes the layout viewport itself, so the same code is a no-op there. Harness:
   `SMD_PHONE_VERIFY._fit({height,offsetTop})` injects a viewport (headless Chrome has no keyboard);
   `_fit(null)` clears it. Covered in `test/run-phone-verify-ui.mjs`.
+- **OTP send budget: 3 per account per day, 2 WhatsApp + 1 SMS (2026-09-26).** Owner: "max 3 otp
+  (wtsapp 2 plus 1 sms) tries per head". `_phone_otp.js` `WA_MAX`/`SMS_MAX`/`SEND_WINDOW`, record
+  `otp:phone:sends:<uid>`, counted on the channel that CARRIED the code (auto that fell back spends
+  the SMS). `auto` narrows to whichever channel has budget; 4th ask -> `send-cap`, 2nd SMS -> `sms-used`.
+  Replies carry `left:{whatsapp,sms}` and the sheet hides spent buttons and shows "Codes left today".
+  Bugs fixed with it: a failed delivery used to start the 30 s throttle, so the "Try SMS instead" it
+  suggested answered `too-soon`; a same-code resend reset the wrong-guess count to 0; the code-step
+  SMS button was live during the countdown (server said `too-soon`). UI harness stub was stale
+  (profile-setup now requires `name`, so the real profile form opened and the sheet waited behind it).
 - **Phone verification is an ask, not a gate (2026-09-19).** `phone-verify.js` opens after the
   profile form saves (`smd:profile-saved`) and waits for `#verifyGate` to hide; the claim is
   `phoneVerified`, the record is `lifecycle:u:<uid>.phoneVerifiedAt`. Server routes live in

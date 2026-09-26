@@ -34,9 +34,9 @@
    "title": "Drugs, access and airway",
    "items": [
     "Access: attempt IV first; use IO if IV fails after 2 attempts or is not feasible. The tracheal route is no longer recommended for drugs.",
-    "Non-shockable rhythm (asystole, PEA): adrenaline 1 mg IV as soon as possible, then every 3 to 5 minutes.",
-    "Shockable rhythm (VF/pVT): adrenaline 1 mg after initial shocks fail (ERC: after the 3rd shock), then every 3 to 5 minutes. Amiodarone 300 mg after 3 shocks and a further 150 mg after 5 shocks; lidocaine is an alternative.",
-    "Refractory VF (persisting after 3 shocks): recheck pad position and consider a vector change to antero-posterior pads. AHA 2025 says double sequential defibrillation may be considered; RCUK does not recommend it routinely.",
+    "Non-shockable rhythm (asystole, PEA): adrenaline 1 mg IV or IO as soon as access is obtained, then every 3 to 5 minutes.",
+    "Shockable rhythm (VF/pVT): adrenaline 1 mg IV or IO after the 3rd shock (ERC/RCUK) or after the 2nd shock (AHA algorithm), then every 3 to 5 minutes. Amiodarone 300 mg after 3 shocks and a further 150 mg after 5 shocks; lidocaine is an alternative when amiodarone is unavailable.",
+    "Refractory VF (persisting after 3 or more failed shocks): recheck pad position and consider changing to anterior-posterior pads (vector change). Double sequential external defibrillation has limited evidence (one RCT, DOSE-VF 2022); use it only where local protocol allows (RCUK 2025 does not recommend routine use).",
     "Airway: start with bag-mask; progress to a supraglottic airway or tracheal tube only if skilled (compression pause under 5 seconds). Confirm tube position with a sustained waveform capnography trace.",
     "Do not give calcium, sodium bicarbonate, magnesium or steroids routinely; reserve them for specific causes (hyperkalaemia, sodium channel blocker toxicity, torsades de pointes)."
    ]
@@ -46,7 +46,7 @@
    "title": "Reversible causes (4 Hs and 4 Ts)",
    "items": [
     "Hypoxia, hypovolaemia, hypo/hyperkalaemia and other metabolic causes (including hypoglycaemia and acidosis), hypothermia; thrombosis (coronary or pulmonary), tension pneumothorax, tamponade, toxins.",
-    "Hyperkalaemic arrest: 10 mL of 10% calcium chloride IV and 50 mmol sodium bicarbonate IV (separate lines or flush between), then insulin-glucose; consider dialysis or ECPR if CPR fails.",
+    "Hyperkalaemic arrest (ERC): calcium chloride 10% 10 mL IV by rapid bolus; soluble insulin 10 units with glucose 25 g (50 mL of 50% glucose) IV by rapid injection, then monitor blood glucose for hypoglycaemia; sodium bicarbonate 8.4% 50 mmol IV if there is severe acidosis or renal failure. Give calcium and bicarbonate through separate lines or flush between them. Consider dialysis or ECPR if CPR fails.",
     "Suspected or confirmed pulmonary embolism: give thrombolysis and continue CPR for 60 to 90 minutes afterwards.",
     "Point-of-care ultrasound can show tamponade, pneumothorax or hypovolaemia but must not lengthen pauses; right ventricular dilatation alone does not diagnose PE.",
     "India: think of poisoning (organophosphates, aluminium phosphide, yellow oleander), snakebite, hyperkalaemia in CKD and electrolyte loss from diarrhoeal illness."
@@ -84,7 +84,7 @@
    "kind": "disposition",
    "title": "After ROSC",
    "items": [
-    "Move to post-cardiac arrest care: ABCDE, 12-lead ECG, SpO2 90 to 98% (ERC 94 to 98%), PaCO2 35 to 45 mmHg, MAP 65 mmHg or more, and a temperature control strategy.",
+    "Move to post-cardiac arrest care: ABCDE, 12-lead ECG, SpO2 90 to 98% (ERC 94 to 98%), PaCO2 35 to 45 mmHg, MAP 65 mmHg or more, and a temperature control strategy (actively prevent fever, keeping 37.5 degrees C or below, in patients who remain comatose).",
     "Emergency coronary angiography for persistent ST elevation or suspected ongoing coronary occlusion; admit to ICU.",
     "Debrief the team and document the event."
    ]
@@ -101,11 +101,12 @@
   }
  ],
  "drugs": [
-  { "name": "Adrenaline (epinephrine)", "dose": "1 mg IV or IO every 3 to 5 minutes (1 mL of 1 mg/mL or 10 mL of 0.1 mg/mL), followed by a 20 mL saline flush", "notes": "Non-shockable: as soon as possible. Shockable: after initial shocks fail (ERC: after the 3rd shock)." },
+  { "name": "Adrenaline (epinephrine)", "dose": "1 mg IV or IO every 3 to 5 minutes (1 mL of 1 mg/mL or 10 mL of 0.1 mg/mL), followed by a 20 mL saline flush", "notes": "Non-shockable: as soon as IV or IO access is obtained. Shockable: after the 3rd shock (ERC/RCUK) or after the 2nd shock (AHA)." },
   { "name": "Amiodarone", "dose": "300 mg IV or IO bolus after the 3rd shock; further 150 mg after the 5th shock", "notes": "Refractory or recurrent VF/pVT. May be diluted to 20 mL with 5% glucose." },
   { "name": "Lidocaine (lignocaine)", "dose": "AHA: 1 to 1.5 mg/kg IV or IO, then 0.5 to 0.75 mg/kg. ERC: 100 mg IV, further 50 mg after the 5th shock", "notes": "Alternative when amiodarone is unavailable or by local policy." },
-  { "name": "Calcium chloride 10%", "dose": "10 mL IV (6.8 mmol calcium)", "notes": "Hyperkalaemia, hypocalcaemia, calcium channel blocker or magnesium toxicity only. Not routine." },
-  { "name": "Sodium bicarbonate 8.4%", "dose": "50 mmol (50 mL) IV", "notes": "Hyperkalaemic arrest, tricyclic or other sodium channel blocker toxicity. Not routine." },
+  { "name": "Calcium chloride 10%", "dose": "10 mL IV by rapid bolus (6.8 mmol calcium)", "notes": "Hyperkalaemia, hypocalcaemia, calcium channel blocker or magnesium toxicity only. Not routine. Do not mix with bicarbonate: separate line or flush between." },
+  { "name": "Soluble (regular) insulin with glucose", "dose": "Insulin 10 units IV with glucose 25 g (50 mL of 50% glucose) IV by rapid injection", "notes": "Hyperkalaemic arrest (ERC). Monitor blood glucose closely for hypoglycaemia." },
+  { "name": "Sodium bicarbonate 8.4%", "dose": "50 mmol (50 mL) IV", "notes": "Hyperkalaemic arrest with severe acidosis or renal failure (ERC), tricyclic or other sodium channel blocker toxicity. Not routine." },
   { "name": "Magnesium sulfate", "dose": "1 to 2 g IV (4 to 8 mmol)", "notes": "Torsades de pointes or suspected hypomagnesaemia." }
  ],
  "sources": [

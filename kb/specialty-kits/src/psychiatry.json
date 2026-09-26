@@ -78,6 +78,21 @@
    ]
   },
   {
+   "id": "cssrs-screen",
+   "title": "Suicide screen (C-SSRS screener)",
+   "target": "management_plan",
+   "alert": "Yes to question 4 or 5, or suicidal behaviour in the past 3 months: do not leave the patient alone, remove means, and arrange same-day psychiatric assessment. Complete the risk assessment below; the screener supports clinical judgement and does not replace it (NICE NG225).",
+   "fields": [
+    { "id": "cssrs_1", "label": "1. Wished to be dead, or to go to sleep and not wake up (past month)", "type": "select", "opts": ["No", "Yes"] },
+    { "id": "cssrs_2", "label": "2. Actual thoughts of killing yourself (past month)", "type": "select", "opts": ["No", "Yes"], "hint": "if no, go straight to question 6" },
+    { "id": "cssrs_3", "label": "3. Thought about how you might do this (past month)", "type": "select", "opts": ["No", "Yes", "Not asked (no to question 2)"] },
+    { "id": "cssrs_4", "label": "4. Had these thoughts with some intention of acting on them (past month)", "type": "select", "opts": ["No", "Yes", "Not asked (no to question 2)"], "hint": "as opposed to: I have the thoughts but I definitely will not do anything about them" },
+    { "id": "cssrs_5", "label": "5. Started to work out or worked out the details of how to kill yourself, and intend to carry out this plan (past month)", "type": "select", "opts": ["No", "Yes", "Not asked (no to question 2)"] },
+    { "id": "cssrs_6", "label": "6. Ever done anything, started to do anything, or prepared to do anything to end your life", "type": "select", "opts": ["No", "Yes, more than 3 months ago", "Yes, within the past 3 months"], "hint": "e.g. collected tablets, wrote a will or suicide note, gave away valuables, or an actual attempt" },
+    { "id": "cssrs_urgent", "label": "Yes to question 4 or 5, or suicidal behaviour in the past 3 months", "type": "check" }
+   ]
+  },
+  {
    "id": "risk-assessment",
    "title": "Risk assessment",
    "target": "management_plan",
@@ -110,6 +125,28 @@
     { "id": "treatment_consent", "label": "Informed consent for treatment given by", "type": "select", "opts": ["Patient", "Patient with support of nominated representative", "Nominated representative, temporarily (section 89(7))", "Nominated representative of a minor (section 87(7))", "Emergency treatment (section 94)"] },
     { "id": "rights_informed", "label": "Right to information given (section 22)", "type": "check", "hint": "provision and criteria for admission, right to apply to the Board for review, nature of illness, treatment and side effects, in a language the person understands" },
     { "id": "board_report", "label": "Report to Mental Health Review Board", "type": "select", "opts": ["Not required", "Due", "Sent"], "hint": "minor admitted: within 72 hours (section 87(9)); supported admission: within 3 days for a woman or minor, 7 days for others (section 89(9))" }
+   ]
+  },
+  {
+   "id": "nms-serotonin",
+   "title": "Fever and rigidity on psychotropics: NMS or serotonin syndrome",
+   "target": "differential_diagnosis",
+   "alert": "Possible NMS or serotonin syndrome: both can be fatal. Stop the suspected drug, check temperature, CK, creatinine and electrolytes, and escalate early. Do not give more antipsychotic to a febrile, rigid, confused patient. Follow the neuroleptic malignant syndrome or serotonin syndrome protocol.",
+   "fields": [
+    { "id": "nms_ss_drug", "label": "Drug exposure", "type": "select", "opts": ["Antipsychotic or other dopamine antagonist started or increased (favours NMS)", "Levodopa or other dopaminergic drug stopped (favours NMS)", "Serotonergic drug started, increased, combined or taken in overdose (favours serotonin syndrome)", "Both kinds of drug", "None identified"] },
+    { "id": "nms_ss_onset", "label": "Onset after the drug change", "type": "select", "opts": ["Within 24 hours, often within hours (favours serotonin syndrome)", "Over 1 to 3 days, usually within 2 weeks of the change (favours NMS)", "Unclear"] },
+    { "id": "nms_rigidity", "label": "Generalised lead-pipe rigidity (favours NMS)", "type": "check" },
+    { "id": "nms_brady", "label": "Bradykinesia with normal or reduced reflexes (favours NMS)", "type": "check" },
+    { "id": "ss_clonus", "label": "Clonus: spontaneous, inducible or ocular (favours serotonin syndrome)", "type": "check" },
+    { "id": "ss_hyperreflexia", "label": "Hyperreflexia and tremor, more marked in the legs (favours serotonin syndrome)", "type": "check" },
+    { "id": "ss_mydriasis", "label": "Dilated pupils (favours serotonin syndrome)", "type": "check" },
+    { "id": "ss_bowel", "label": "Diarrhoea or hyperactive bowel sounds (favours serotonin syndrome)", "type": "check" },
+    { "id": "nms_ss_fever", "label": "Temperature above 38°C (either)", "type": "check" },
+    { "id": "nms_ss_autonomic", "label": "Autonomic instability: tachycardia, labile BP, sweating (either)", "type": "check" },
+    { "id": "nms_ss_mental", "label": "Altered mental state: agitation, confusion, stupor or mutism (either)", "type": "check" },
+    { "id": "nms_ss_ck", "label": "Creatine kinase", "type": "number", "unit": "IU/L", "hint": "raised in NMS, often markedly; can also rise in severe serotonin syndrome" },
+    { "id": "ss_hunter", "label": "Hunter criteria for serotonin toxicity", "type": "select", "opts": ["Met", "Not met", "Not assessed"], "hint": "use the Hunter serotonin toxicity calculator" },
+    { "id": "nms_ss_impression", "label": "Working diagnosis", "type": "select", "opts": ["Neuroleptic malignant syndrome", "Serotonin syndrome", "Unclear: treat supportively and monitor for both", "Another cause"], "hint": "exclude sepsis, meningitis or encephalitis, heat stroke, anticholinergic toxicity, malignant catatonia, and alcohol or sedative withdrawal" }
    ]
   }
  ],
@@ -154,6 +191,7 @@
  "sources": [
   { "org": "Ministry of Law and Justice, Government of India", "title": "The Mental Healthcare Act, 2017 (No. 10 of 2017)", "year": 2017, "url": "https://www.indiacode.nic.in/bitstream/123456789/2249/1/A2017-10.pdf" },
   { "org": "NICE", "title": "NG225 Self-harm: assessment, management and preventing recurrence", "year": 2022, "url": "https://www.nice.org.uk/guidance/ng225" },
+  { "org": "Columbia University (Research Foundation for Mental Hygiene)", "title": "Columbia-Suicide Severity Rating Scale (C-SSRS), Screen Version, Recent", "year": 2008, "url": "https://www.cms.gov/files/document/cssrs-screen-version-instrument.pdf" },
   { "org": "American Psychiatric Association", "title": "Practice guidelines for the psychiatric evaluation of adults, third edition", "year": 2016, "url": "https://psychiatryonline.org/doi/book/10.1176/appi.books.9780890426760" },
   { "org": "Royal College of Psychiatrists", "title": "Antidepressants (patient information)", "year": 2025, "url": "https://www.rcpsych.ac.uk/mental-health/treatments-and-wellbeing/antidepressants" },
   { "org": "DGHS, MoHFW, Government of India", "title": "National Mental Health Programme: Tele MANAS helpline", "year": 2024, "url": "https://dghs.mohfw.gov.in/national-mental-health-programme.php" }

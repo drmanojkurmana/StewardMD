@@ -1,0 +1,169 @@
+{
+  "_comment": "CliniX 2.0 Presentation Library: Symptom-First Approach to the Acute Abdomen. Reuses shared Skills as atoms and provides tiered clinical reasoning from recognition to discriminators and emergency surgical actions.",
+  "schemaVersion": 1,
+  "id": "acute_abdomen",
+  "title": "Approach to the Acute Abdomen",
+  "subtitle": "Peritonitis, hollow viscus perforation, bowel obstruction, acute vascular ischemia, and medical mimics",
+  "system": "abdomen",
+  "estMinutes": 50,
+  "review": {
+    "status": "approved",
+    "reviewer": "Clinical Review Team"
+  },
+  "layers": {
+    "recognise": {
+      "redFlags": [
+        "Involuntary Guarding and 'Board-Like' Rigidity: Involuntary spasm of abdominal wall muscles indicating generalized peritonitis (e.g. perforated peptic ulcer)",
+        "Severe, agonizing abdominal pain completely out of proportion to physical exam findings (pathognomonic of acute mesenteric ischemia)",
+        "Pulsatile, expanding abdominal mass accompanied by hypotension and back pain (ruptured abdominal aortic aneurysm until proven otherwise)",
+        "Absent bowel sounds ('silent abdomen') with progressive abdominal distension (paralytic ileus or advanced generalized peritonitis)",
+        "High-pitched tinkling bowel sounds, visible peristalsis, and obstipation (acute mechanical bowel obstruction)",
+        "Tender, non-reducible swelling in the groin (inguinal or femoral hernia) with signs of strangulation (erythema, extreme tenderness, systemic toxicity)"
+      ],
+      "vitalsPriorities": [
+        "Hydration and Shock Assessment: Tachycardia, narrow pulse pressure, and hypotension indicate septic shock (peritonitis/perforation) or hemorrhagic shock (ruptured ectopic, ruptured AAA).",
+        "Respiratory Pattern: Rapid, shallow respirations occur because diaphragmatic excursion causes severe peritoneal friction pain.",
+        "Urine Pregnancy Test: MANDATORY in all women of childbearing age presenting with lower abdominal or pelvic pain to rule out ruptured ectopic pregnancy."
+      ]
+    },
+    "classify": {
+      "syndromes": {
+        "peritoneal_inflammation_perforation": [
+          "Perforated Peptic Ulcer (gastric or duodenal)",
+          "Perforated Diverticulum (sigmoid diverticulitis)",
+          "Perforated Appendix with generalized peritonitis",
+          "Acute Pancreatitis with retroperitoneal inflammation",
+          "Bacterial or fungal peritonitis (SBP in cirrhotics, peritoneal dialysis peritonitis)"
+        ],
+        "acute_visceral_inflammation": [
+          "Acute Appendicitis (McBurney point tenderness)",
+          "Acute Cholecystitis (Murphy sign positive)",
+          "Acute Diverticulitis (left lower quadrant 'left-sided appendicitis')",
+          "Pelvic Inflammatory Disease (PID / Salpingitis)",
+          "Acute Pyelonephritis (costovertebral angle tenderness)"
+        ],
+        "mechanical_obstruction": [
+          "Small Bowel Obstruction (postoperative adhesions, incarcerated hernias, intussusception)",
+          "Large Bowel Obstruction (colorectal adenocarcinoma, sigmoid or cecal volvulus)",
+          "Biliary Colic (cystic duct stone impaction without inflammation)"
+        ],
+        "vascular_catastrophes": [
+          "Acute Mesenteric Ischemia (SMA thromboembolism, mesenteric venous thrombosis)",
+          "Ruptured Abdominal Aortic Aneurysm (AAA)",
+          "Ischemic Colitis (watershed areas: splenic flexure, rectosigmoid junction)"
+        ],
+        "medical_mimics_of_acute_abdomen": [
+          "Diabetic Ketoacidosis (DKA - ketotic abdominal pain in young diabetics)",
+          "Inferior Wall Myocardial Infarction (epigastric distress, nausea, diaphoresis)",
+          "Basal Pneumonia / Pleurisy (referred lower thoracic / abdominal wall pain)",
+          "Acute Intermittent Porphyria (neurovisceral abdominal pain without peritoneal signs)",
+          "Lead Poisoning, Black Widow Spider Envenomation"
+        ]
+      },
+      "tempo": {
+        "hyperacute_sudden_knife_like": [
+          "Hollow Viscus Perforation",
+          "Ruptured Ectopic Pregnancy",
+          "Ruptured Aortic Aneurysm",
+          "Ovarian or Testicular Torsion"
+        ],
+        "acute_gradual_hours": [
+          "Acute Appendicitis (visceral peri-umbilical shifting to somatic RLQ)",
+          "Acute Cholecystitis",
+          "Acute Pancreatitis",
+          "Acute Diverticulitis"
+        ],
+        "intermittent_colicky": [
+          "Small Bowel Obstruction",
+          "Ureteric / Renal Colic",
+          "Biliary Colic"
+        ]
+      }
+    },
+    "discriminators": [
+      {
+        "title": "Peritonitis vs Biliary/Renal Colic",
+        "finding": "Patient behavior in bed: The patient with generalized peritonitis lies motionless with knees flexed, dreading any movement or bed vibration which aggravates parietal peritoneal irritation. The patient with renal or biliary colic thrashes about and changes positions constantly seeking pain relief.",
+        "highYield": "A patient writhing in bed has colic; a patient lying completely still has peritonitis."
+      },
+      {
+        "title": "Murphy's Sign (Cholecystitis vs Non-inflammatory RUQ Pain)",
+        "finding": "Murphy's sign: Examiner places fingers under right costal margin at the lateral border of rectus abdominis and asks patient to inhale deeply. As the descending inflamed gallbladder touches the examiner's fingers, the patient abruptly catches their breath due to sharp pain (positive Murphy's sign).",
+        "highYield": "Positive Murphy's sign has a sensitivity > 95% for acute cholecystitis when combined with ultrasound demonstration of sonographic Murphy's sign."
+      },
+      {
+        "title": "Appendicitis Physical Signs (McBurney vs Rovsing vs Psoas vs Obturator)",
+        "finding": "McBurney's point: Maximal tenderness 1/3 of the distance from the right anterior superior iliac spine (ASIS) to the umbilicus. Rovsing sign: Deep palpation in LLQ produces pain in RLQ (retrograde peritoneal displacement). Psoas sign: Pain on passive extension of right hip (retrocecal appendix). Obturator sign: Pain on internal rotation of flexed right hip (pelvic appendix).",
+        "highYield": "The shift of pain from periumbilical (T10 visceral afferents) to right iliac fossa (parietal peritoneum) is the single most predictive historical feature of acute appendicitis."
+      },
+      {
+        "title": "Mechanical Bowel Obstruction vs Paralytic Ileus",
+        "finding": "Auscultation: Mechanical obstruction features hyperactive, high-pitched metallic tinkling rushes coincident with colicky cramp-like pains. Paralytic ileus features an entirely silent abdomen without bowel sounds for at least 3-5 minutes.",
+        "highYield": "Bowel sounds must be auscultated for a minimum of 3 continuous minutes before declaring the abdomen truly silent."
+      }
+    ],
+    "dontMiss": [
+      {
+        "disease": "Perforated Viscus (Pneumoperitoneum)",
+        "clue": "Sudden onset severe generalized abdominal pain, board-like abdominal rigidity, loss of liver dullness, subdiaphragmatic crescent of free air on erect chest X-ray.",
+        "action": "SURGICAL EMERGENCY. Aggressive IV fluid resuscitation, broad-spectrum IV antibiotics covering enterics and anaerobes, nasogastric decompression, immediate emergency exploratory laparotomy / laparoscopy."
+      },
+      {
+        "disease": "Acute Mesenteric Ischemia",
+        "clue": "Severe unremitting abdominal pain in an elderly patient or patient with atrial fibrillation, completely out of proportion to relatively soft physical examination findings. Elevated serum lactate.",
+        "action": "TIME IS BOWEL. Immediate IV unfractionated heparin, urgent CT Angiography of mesenteric vessels, urgent vascular/surgical consultation for catheter-directed embolectomy, surgical revascularization, or resection of non-viable bowel."
+      },
+      {
+        "disease": "Ruptured Ectopic Pregnancy",
+        "clue": "Woman of childbearing age with sudden acute unilateral iliac fossa pain, missed menstrual period, vaginal spotting, shoulder tip pain (Kehr sign), and hemorrhagic shock.",
+        "action": "Immediate bedside urine pregnancy test + FAST ultrasound (free fluid in pouch of Douglas). Immediate two large-bore IV lines, activate massive transfusion protocol, emergent gynecological laparoscopy / laparotomy for salpingectomy."
+      },
+      {
+        "disease": "Strangulated Groin Hernia",
+        "clue": "Tender, irreducible lump at inguinal or femoral canal, redness over skin, features of mechanical bowel obstruction.",
+        "action": "NEVER ATTEMPT FORCEFUL MANUAL REDUCTION (risk of reduction en masse or reducing gangrenous bowel into peritoneal cavity). Keep NPO, IV fluid resuscitation, emergent surgical exploration and hernia repair."
+      }
+    ],
+    "investigations": {
+      "step1_immediate": [
+        "Bedside Urine Pregnancy Test (hCG) in all women of reproductive age",
+        "Erect Chest Radiograph (the gold standard for detecting subdiaphragmatic pneumoperitoneum; as little as 1 mL free air is visible)",
+        "Supine Abdominal Radiograph (dilated bowel loops, step-ladder pattern, coffee bean sign of sigmoid volvulus)",
+        "Venous / Arterial Blood Gas with Serum Lactate (elevated lactate indicates intestinal ischemia or tissue hypoperfusion)",
+        "Bedside FAST Ultrasound (Focused Assessment with Sonography for Trauma / acute free fluid in peritoneal cavity)"
+      ],
+      "step2_urgent": [
+        "Contrast-Enhanced CT Abdomen and Pelvis (CECT): The diagnostic cornerstone for acute abdomen; evaluates appendicitis, diverticulitis, pancreatitis, bowel ischemia, and perforation site",
+        "Complete Blood Count with differential (leukocytosis with left shift)",
+        "Serum Lipase and Amylase (lipase > 3x upper limit of normal diagnostic of acute pancreatitis)",
+        "Liver Function Tests, Renal Panel, Electrolytes, Coagulation Screen (PT/INR, aPTT)"
+      ],
+      "step3_confirmatory": [
+        "CT Mesenteric Angiography (for suspected acute arterial or venous mesenteric thrombosis)",
+        "Diagnostic Laparoscopy or Exploratory Laparotomy"
+      ]
+    },
+    "skills": [
+      "skill.exam.abdo.inspection",
+      "skill.exam.abdo.palpation",
+      "skill.exam.abdo.percussion",
+      "skill.exam.abdo.auscultation",
+      "skill.exam.abdo.hernia",
+      "skill.gen.vitals"
+    ],
+    "examPearls": [
+      {
+        "topic": "Analgesia in the Acute Abdomen",
+        "text": "The traditional dogma that 'giving opioids obscures physical signs and delays diagnosis' is false and discredited by modern randomized trials and surgical college guidelines. Early, titrated intravenous analgesia (e.g. fentanyl or morphine) relieves distress without masking signs of peritonitis or altering surgical decisions."
+      },
+      {
+        "topic": "Loss of Liver Dullness",
+        "text": "Percussion of the right midclavicular line over the liver (normally dull from 5th to 10th rib). Obliteration of liver dullness with resonant percussion note indicates free intraperitoneal air from a hollow viscus perforation rising over the anterior surface of the liver in supine posture."
+      },
+      {
+        "topic": "Always Examine the Hernial Orifices",
+        "text": "Never complete an abdominal examination without exposing and examining the groin. A small, strangulated femoral hernia in an obese patient presenting with bowel obstruction is one of the most famous missed diagnoses in clinical medicine."
+      }
+    ]
+  }
+}

@@ -62,7 +62,7 @@ test("when a search returns only homepages, ONE reworded retry runs before givin
   };
   try {
     const r = await findFigures({ TINYFISH_API_KEY: "k" }, "hyperkalemia ECG changes");
-    assert.deepEqual(searches, ["hyperkalemia ECG changes", "hyperkalemia ECG changes review article"]);
+    assert.deepEqual(searches, ["hyperkalemia ECG changes algorithm", "hyperkalemia ECG changes", "hyperkalemia ECG changes review article"]);
     assert.equal(r.length, 1); assert.match(r[0].img, /ECG-Hyperkalaemia-peaked-T\.jpg$/);
   } finally { global.fetch = realFetch; }
 });
@@ -115,4 +115,44 @@ test("LIVE FINDINGS 2026-09-18: beacons and stock photos are never figures, even
   assert.equal(pickFigure('<!--VideoWidgets::figure--> <div class="inlineImage"> <a href="javascript:refImgShow(3)"><img src="//img.medscapestatic.com/pi/global/1x1.png" data-src="//img.medscapestatic.com/pi/meds/ckb/02/44702tn.jpg" alt="Microscopy of urinary sediment. Typical appearance" class="pborder"></a>', "https://emedicine.medscape.com/article/981898-workup", "hematuria workup").img, "https://img.medscapestatic.com/pi/meds/ckb/02/44702tn.jpg");
   // A real figure whose alt is only "Figure 1" still qualifies through the figure hint.
   assert.equal(pickFigure('<figure><img src="https://cdn.ncbi.nlm.nih.gov/pmc/blobs/x/fped-09-780356-g0001.jpg" alt="Figure 1" width="800"></figure>', "https://pmc.ncbi.nlm.nih.gov/articles/PMC8692886/", "melena workup").img, "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/x/fped-09-780356-g0001.jpg");
+});
+
+// Owner, 2026-09-27, over a strip of leg-ulcer photographs: "I wanted workup flowcharts; if they are
+// absent show this". A PMC figure's alt is just "Figure 2"; what it shows is in the caption after it.
+const PHOTO = '<figure><img src="/blobs/ulcer-g0001.jpg" alt="Venous leg ulcer on the medial malleolus" width="800"><figcaption>Venous leg ulcer. Wounds are irregular and shallow.</figcaption></figure>';
+const ALGO = '<figure><img src="/blobs/ulcer-g0002.jpg" alt="Figure 2" width="800"><figcaption>Algorithm for the evaluation of a patient with a chronic leg ulcer.</figcaption></figure>';
+
+test("on one page, a workup flowchart beats a better-scored photograph", () => {
+  const f = pickFigure(PHOTO + ALGO, "https://pmc.ncbi.nlm.nih.gov/articles/PMC9/", "venous leg ulcer");
+  assert.match(f.img, /ulcer-g0002\.jpg$/); assert.equal(f.diagram, true);
+  const only = pickFigure(PHOTO, "https://pmc.ncbi.nlm.nih.gov/articles/PMC9/", "venous leg ulcer");
+  assert.match(only.img, /ulcer-g0001\.jpg$/); assert.equal(only.diagram, false, "no flowchart: the photo is still the pick");
+});
+
+function fakeWeb(pages) {   // url -> html; every search returns every page
+  const reads = [], searches = [];
+  const fetchFn = async (url) => {
+    const u = String(url);
+    if (u.startsWith("https://api.search.tinyfish.ai")) { searches.push(new URL(u).searchParams.get("query")); return { ok: true, json: async () => ({ results: Object.keys(pages).map((url) => ({ title: "t", url, snippet: "s" })) }) }; }
+    reads.push(u);
+    return { ok: true, status: 200, headers: { get: () => "text/html" }, text: async () => pages[u] || "" };
+  };
+  return { fetchFn, reads, searches };
+}
+
+test("across pages: flowcharts only when there are any, photographs as the fallback; each page read once", async () => {
+  const realFetch = global.fetch;
+  try {
+    let w = fakeWeb({ "https://pmc.ncbi.nlm.nih.gov/articles/PMC1/": PHOTO, "https://www.aafp.org/pubs/afp/issues/2019/0901/p1.html": ALGO });
+    global.fetch = w.fetchFn;
+    let r = await findFigures({ TINYFISH_API_KEY: "k" }, "venous leg ulcer");
+    assert.deepEqual(w.searches, ["venous leg ulcer algorithm", "venous leg ulcer"], "the flowchart search runs beside the plain one");
+    assert.equal(w.reads.length, 2, "a page both searches return is read once");
+    assert.deepEqual(r.map((f) => f.img), ["https://www.aafp.org/blobs/ulcer-g0002.jpg"], "the photo is dropped when a flowchart exists");
+    assert.ok(!("diagram" in r[0]) && !("score" in r[0]), "the response shape is unchanged");
+    w = fakeWeb({ "https://pmc.ncbi.nlm.nih.gov/articles/PMC1/": PHOTO });
+    global.fetch = w.fetchFn;
+    r = await findFigures({ TINYFISH_API_KEY: "k" }, "venous leg ulcer");
+    assert.deepEqual(r.map((f) => f.img), ["https://pmc.ncbi.nlm.nih.gov/blobs/ulcer-g0001.jpg"], "no flowchart anywhere: the photo shows");
+  } finally { global.fetch = realFetch; }
 });

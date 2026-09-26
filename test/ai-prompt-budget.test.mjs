@@ -38,7 +38,8 @@ test("over budget: question, dosing, stewardship and SOURCES survive; history is
 test("under budget: everything is kept, KB and treatment come before the conversation", async () => {
   const p = await prompt(big);
   assert.ok(p.indexOf("OLDTURN0") >= 0 && p.indexOf("EARLIER IN THIS CONVERSATION") >= 0);
-  assert.ok(p.indexOf("=== RETRIEVED STEWARDMD KNOWLEDGE") < p.indexOf("=== RECENT CONVERSATION"));
+  assert.ok(p.indexOf("=== YOUR REFERENCE NOTES") >= 0, "the KB section is present (renamed 2026-09-26)");
+  assert.ok(p.indexOf("=== YOUR REFERENCE NOTES") < p.indexOf("=== RECENT CONVERSATION"));
   assert.ok(p.indexOf("=== TREATMENT RESOLUTION") < p.indexOf("=== RECENT CONVERSATION"));
   assert.ok(p.indexOf("=== SOURCES") < p.indexOf("=== RECENT CONVERSATION"));
 });

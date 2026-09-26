@@ -40,6 +40,7 @@
     "Continue oxygen during apnoea: standard nasal cannula at 15 L/min (5 L/min while awake) or HFNO over 30 L/min, with a patent airway.",
     "Give the induction agent and the neuromuscular blocker in rapid succession without waiting to test mask ventilation. Choose and dose the induction agent by physiology: reduce the dose in shock or old age.",
     "Use a neuromuscular blocker routinely: rocuronium 1.2 mg/kg or suxamethonium 1.5 mg/kg per DAS 2025. Either is acceptable when suxamethonium is not contraindicated.",
+    "Use rocuronium 1.2 mg/kg when suxamethonium is contraindicated: hyperkalaemia, burns or crush injury after 24 to 48 hours, denervation or neuromuscular disease, or a personal or family history of malignant hyperthermia. Have sugammadex available.",
     "Cricoid force (10 N awake, 30 N after loss of consciousness) by a trained assistant is optional; release it if the view is poor, if inserting a SAD, if mask ventilation is difficult or if the patient vomits.",
     "Gentle low-pressure mask ventilation is acceptable in patients at risk of rapid desaturation."
    ]
@@ -87,7 +88,7 @@
     "Full-dose propofol in a shocked patient; peri-intubation cardiac arrest is often from hypotension and hypoxaemia, not the airway.",
     "Task fixation with repeated laryngoscopy instead of declaring failure and moving to the next plan.",
     "Trusting chest rise, misting or auscultation instead of waveform capnography to exclude oesophageal intubation.",
-    "Suxamethonium in hyperkalaemia, burns or crush injury after the first day, rhabdomyolysis, denervation or neuromuscular disease, or malignant hyperthermia history."
+    "Suxamethonium in hyperkalaemia, burns or crush injury after 24 to 48 hours, rhabdomyolysis, denervation or neuromuscular disease, or malignant hyperthermia history."
    ]
   }
  ],
@@ -96,9 +97,9 @@
   { "name": "Etomidate", "dose": "0.3 mg/kg IV", "notes": "Haemodynamically stable; single dose causes transient adrenal suppression. SCCM 2023 found no outcome difference versus other agents and suggests against routine steroids after it." },
   { "name": "Propofol", "dose": "1.5 to 2.5 mg/kg IV in fit adults; much lower titrated doses in elderly, shocked or septic patients", "notes": "Most hypotensive of the induction agents." },
   { "name": "Thiopental (thiopentone)", "dose": "3 to 5 mg/kg IV", "notes": "Still used for classic RSI in India; reduce in shock." },
-  { "name": "Rocuronium", "dose": "1.2 mg/kg IV (1 to 1.2 mg/kg range)", "notes": "Intubating conditions in about 60 seconds; lasts 30 to 60 minutes or more, so give post-intubation sedation promptly." },
-  { "name": "Suxamethonium (succinylcholine)", "dose": "1.5 mg/kg IV (1 to 1.5 mg/kg range)", "notes": "Short acting; contraindicated in hyperkalaemia, burns or crush after 24 hours, denervation, myopathy, malignant hyperthermia history." },
-  { "name": "Sugammadex", "dose": "16 mg/kg IV for immediate reversal of rocuronium 1.2 mg/kg", "notes": "Draw up early if planning to wake; not a reliable rescue in CICO." }
+  { "name": "Rocuronium", "dose": "1.2 mg/kg IV (1 to 1.2 mg/kg range)", "notes": "Preferred when suxamethonium is contraindicated. Intubating conditions in about 60 seconds; lasts 30 to 60 minutes or more, so give post-intubation sedation promptly." },
+  { "name": "Suxamethonium (succinylcholine)", "dose": "1.5 mg/kg IV (1 to 1.5 mg/kg range)", "notes": "Short acting; contraindicated in hyperkalaemia, burns or crush after 24 to 48 hours, denervation, myopathy, malignant hyperthermia history. Use rocuronium instead." },
+  { "name": "Sugammadex", "dose": "16 mg/kg IV for immediate reversal of rocuronium 1.2 mg/kg; 2 to 4 mg/kg IV for routine reversal (4 mg/kg for deep block, 2 mg/kg once T2 has reappeared)", "notes": "Draw up early if planning to wake; not a reliable rescue in CICO." }
  ],
  "sources": [
   { "org": "Difficult Airway Society", "title": "Difficult Airway Society 2025 guidelines for management of unanticipated difficult tracheal intubation in adults (Br J Anaesth 2026;136:283-307)", "year": 2025, "url": "https://www.sciencedirect.com/science/article/pii/S0007091225006932" },

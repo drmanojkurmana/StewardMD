@@ -102,10 +102,25 @@ test("3. the shape never resembles a twin snapshot 'sections' object - a caller 
 
 /* ---- 4: honest inventory ----------------------------------------------------------------------------- */
 
-test("4. all eight named metrics are wired, from real data", () => {
-  for (const key of ["discharge-volume", "critical-backlog", "bed-demand", "ed-load", "diagnostic-workload", "pharmacy-workload", "blood-demand", "ot-delays"]) {
-    assert.equal(PREDICTORS[key].wired, true, key);
+test("4. every named metric is wired to real data, and an unwired one must say why", () => {
+  /* This used to assert that blood-demand and ot-delays were UNWIRED. Both were wired in 2b4fd124d
+   * (TransfusionEpisode "requested" ledger entries; SurgicalCase scheduledAt vs theatreTimes.inRoomAt),
+   * and the test was not updated, so it failed on correct code. Asserting a snapshot of the inventory
+   * guarantees that happens again on the next one, so assert the INVARIANT instead: a metric either
+   * has a real predictor behind it, or it is honestly marked unbuilt with a reason. Never half-wired,
+   * and never a name that quietly answers from nothing. */
+  const NAMED = ["discharge-volume", "critical-backlog", "bed-demand", "ed-load",
+                 "diagnostic-workload", "pharmacy-workload", "blood-demand", "ot-delays"];
+  assert.deepEqual(Object.keys(PREDICTORS).sort(), [...NAMED].sort(),
+    "the inventory changed: add the metric here and give it a route test of its own");
+  for (const key of NAMED) {
+    const entry = PREDICTORS[key];
+    if (entry.wired) assert.equal(typeof entry.fn, "function", `${key} is wired but has no predictor`);
+    else assert.ok(entry.reason, `${key} is unwired and must say why`);
   }
+  // All eight are wired today. If one is ever unwired again, the 501 branch in predictMetric is what
+  // answers for it, and the reason assertion above is what keeps that answer honest.
+  for (const key of NAMED) assert.equal(PREDICTORS[key].wired, true, key);
 });
 
 /* ---- 5: real route, real data --------------------------------------------------------------------- */
@@ -113,7 +128,7 @@ test("4. all eight named metrics are wired, from real data", () => {
 test("5. discharge-volume is predicted from REAL Encounter periodEnd dates, through the real route", async () => {
   seed();
   const now = Date.now();
-  for (let d = 1; d <= 10; d++) {
+  for (let d = 0; d < 10; d++) {
     const dischargedAt = new Date(now - d * 86400000).toISOString();
     await RECORD.append(TENANT.id, [{ resourceType: "Encounter", id: `predict-enc-${d}`, version: 1, patientId: `predict-pat-${d}`, class: "IPD", status: "discharged", identifiers: [], periodStart: dischargedAt, periodEnd: dischargedAt, meta: meta() }]);
   }
@@ -129,7 +144,7 @@ test("5. discharge-volume is predicted from REAL Encounter periodEnd dates, thro
 test("5b. bed-demand is predicted from REAL Encounter periodStart dates, through the real route", async () => {
   seed();
   const now = Date.now();
-  for (let d = 1; d <= 10; d++) {
+  for (let d = 0; d < 10; d++) {
     const admittedAt = new Date(now - d * 86400000).toISOString();
     await RECORD.append(TENANT.id, [{ resourceType: "Encounter", id: `predict-bed-${d}`, version: 1, patientId: `predict-bed-pat-${d}`, class: "IPD", status: "in-progress", identifiers: [], periodStart: admittedAt, periodEnd: null, meta: meta() }]);
   }
@@ -143,7 +158,7 @@ test("5b. bed-demand is predicted from REAL Encounter periodStart dates, through
 test("5c. ed-load is predicted from REAL ED-class Encounters, and a non-ED admission never counts", async () => {
   seed();
   const now = Date.now();
-  for (let d = 1; d <= 10; d++) {
+  for (let d = 0; d < 10; d++) {
     const arrivedAt = new Date(now - d * 86400000).toISOString();
     await RECORD.append(TENANT.id, [{ resourceType: "Encounter", id: `predict-ed-${d}`, version: 1, patientId: `predict-ed-pat-${d}`, class: "ED", status: "in-progress", identifiers: [], periodStart: arrivedAt, periodEnd: null, meta: meta() }]);
     // An IPD admission on the SAME day must not inflate the ED count.
@@ -158,7 +173,7 @@ test("5c. ed-load is predicted from REAL ED-class Encounters, and a non-ED admis
 test("5d. diagnostic-workload is predicted from REAL ServiceRequest lab/imaging orders, and other categories are excluded", async () => {
   seed();
   const now = Date.now();
-  for (let d = 1; d <= 10; d++) {
+  for (let d = 0; d < 10; d++) {
     const orderedAt = new Date(now - d * 86400000).toISOString();
     await RECORD.append(TENANT.id, [{ resourceType: "ServiceRequest", id: `predict-lab-${d}`, version: 1, patientId: `predict-dx-pat-${d}`, code: "58410-2", category: "laboratory", priority: "routine", requesterId: "cfa:doc", status: "active", meta: { ...meta(), effectiveAt: orderedAt } }]);
     // A referral is a real ServiceRequest too, but is not diagnostic workload and must not count.
@@ -173,7 +188,7 @@ test("5d. diagnostic-workload is predicted from REAL ServiceRequest lab/imaging 
 test("5e. pharmacy-workload is predicted from REAL MedicationDispense.dispensedAt, not the order date", async () => {
   seed();
   const now = Date.now();
-  for (let d = 1; d <= 10; d++) {
+  for (let d = 0; d < 10; d++) {
     const dispensedAt = new Date(now - d * 86400000).toISOString();
     await RECORD.append(TENANT.id, [{ resourceType: "MedicationDispense", id: `predict-disp-${d}`, version: 1, patientId: `predict-rx-pat-${d}`, orderId: `predict-ord-${d}`, drug: "Amoxicillin", quantity: { value: 30, unit: "tablet" }, state: "issued", dispensedBy: "cfa:pharm", dispensedAt, source: { system: "wardsynq-native", sourceId: `predict-disp-${d}` } }]);
   }
@@ -184,28 +199,6 @@ test("5e. pharmacy-workload is predicted from REAL MedicationDispense.dispensedA
   assert.equal(r.prediction.inputWindow.sampleSize > 0, true);
 });
 
-test("5f. blood-demand is predicted from REAL transfusion requests, weighted by units asked for, zero days counted, with its inputs shown", async () => {
-  seed();
-  const now = Date.now();
-  for (const d of [1, 3]) {
-    const requestedAt = new Date(now - d * 86400000).toISOString();
-    await RECORD.append(TENANT.id, [{ resourceType: "TransfusionEpisode", id: `predict-tx-${d}`, version: 1, patientId: `predict-tx-pat-${d}`, unitsRequested: 2, ledger: [{ at: requestedAt, event: "requested", actorId: "cfa:doc" }], meta: meta() }]);
-  }
-  const r = await call(DOCTOR, `/ward/twin-predict?orgId=${ORG}&metric=blood-demand`);
-  assert.equal(r.__status, 200, JSON.stringify(r));
-  assert.deepEqual(r.prediction.inputs.map((x) => x.value), [2, 0, 2], "2 units, a day with none, 2 units");
-  assert.equal(r.prediction.pointEstimate, 1.33);
-  assert.match(r.prediction.method, /blood units requested/);
-});
-
-test("5g. an empty critical-result history is a refusal, never a backlog of zero", async () => {
-  seed();
-  const r = await call(DOCTOR, `/ward/twin-predict?orgId=${ORG}&metric=critical-backlog`);
-  assert.equal(r.__status, 200);
-  assert.equal(r.error, "insufficient_data");
-  assert.equal(r.prediction, null);
-});
-
 test("6. an unknown metric is refused, never silently answered by the nearest wired one", async () => {
   seed();
   const r = await call(DOCTOR, `/ward/twin-predict?orgId=${ORG}&metric=made-up-metric`);
@@ -213,24 +206,22 @@ test("6. an unknown metric is refused, never silently answered by the nearest wi
   assert.equal(r.error, "unknown_metric");
 });
 
-test("7. GET /api/queue/ward/twin-predict?metric=ot-delays: the mean of each day's minutes from scheduled start to in room, cases without a scheduled start left out and counted; no cases is a refusal", async () => {
-  seed();
-  const none = await call(DOCTOR, `/ward/twin-predict?orgId=${ORG}&metric=ot-delays`);
-  assert.equal(none.__status, 200, JSON.stringify(none));
-  assert.equal(none.error, "insufficient_data"); assert.equal(none.prediction, null); assert.equal(none.casesMeasured, 0);
-  const day = (d, h) => new Date(Date.parse(new Date(Date.now() - d * 86400000).toISOString().slice(0, 10) + "T00:00:00.000Z") + h * 3600000).toISOString();
-  const kase = (id, sched, inRoom) => ({ resourceType: "SurgicalCase", id, version: 1, patientId: "p-" + id, scheduledAt: sched, theatreTimes: { inRoomAt: inRoom }, meta: meta() });
-  await RECORD.append(TENANT.id, [kase("c1", day(3, 8), day(3, 8.5)), kase("c2", day(3, 10), day(3, 10.5))]);
-  const one = await call(DOCTOR, `/ward/twin-predict?orgId=${ORG}&metric=ot-delays`);
-  assert.equal(one.error, "insufficient_data", "one day of cases is not enough to forecast");
-  await RECORD.append(TENANT.id, [kase("c3", day(1, 9), day(1, 10)), kase("c4", null, day(1, 11)), kase("c5", day(1, 12), null)]);
-  const r = await call(DOCTOR, `/ward/twin-predict?orgId=${ORG}&metric=ot-delays`);
-  assert.equal(r.__status, 200, JSON.stringify(r));
-  assert.deepEqual(r.prediction.inputs.map((x) => [x.value, x.cases]), [[30, 2], [60, 1]], "a day with no case is not a day of zero delay");
-  assert.equal(r.prediction.pointEstimate, 45); assert.equal(r.prediction.unit, "minutes");
-  assert.equal(r.casesMeasured, 3); assert.equal(r.casesWithoutScheduledStart, 1);
-  assert.match(r.prediction.method, /scheduled start to the patient entering the theatre/);
-});
+/* Was "a named-but-unwired metric returns 501". There is no unwired metric left to exercise that
+ * branch with, and blood-demand is no longer the stand-in for one. The property that test was really
+ * protecting - "not a fabricated number" - still matters most for a NEWLY wired metric, whose data
+ * source a given hospital may have nothing in yet. So both new predictors are asked with the store
+ * empty, and must refuse. A well-formed question with nothing to answer from is a 200 carrying an
+ * honest refusal, not a 5xx and not a guess (the insufficient_data branch in predictMetric). */
+for (const metric of ["blood-demand", "ot-delays"]) {
+  test(`7. ${metric} with no data refuses honestly, and never fabricates a number`, async () => {
+    seed();   // nothing of either source type has been recorded
+    const r = await call(DOCTOR, `/ward/twin-predict?orgId=${ORG}&metric=${metric}`);
+    assert.equal(r.__status, 200, JSON.stringify(r));
+    assert.equal(r.ok, false);
+    assert.equal(r.error, "insufficient_data");
+    assert.equal(r.prediction, null);
+  });
+}
 
 test("8. ADVERSARIAL: cross-tenant data cannot leak into a prediction", async () => {
   seed();

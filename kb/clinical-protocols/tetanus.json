@@ -6,7 +6,7 @@
  "basis": "international",
  "setting": "Emergency department, ward, ICU",
  "aliases": ["tetanus prophylaxis", "Td", "TT", "tetanus toxoid", "TIG", "HTIG", "tetanus immunoglobulin", "lockjaw", "trismus", "neonatal tetanus", "wound management tetanus"],
- "summary": "Wounds: give Td if fewer than 3 prior doses, unknown history, or last dose 10 years ago (5 years for dirty wounds); add TIG 250 IU for dirty wounds in the incompletely vaccinated or immunodeficient. Established tetanus: human TIG, wound debridement, metronidazole, benzodiazepines and magnesium for spasms, early airway control, then complete vaccination.",
+ "summary": "Wounds: give Td if fewer than 3 prior doses, unknown history, or last dose 10 years ago (5 years for dirty wounds); add TIG 250 IU (500 IU if delayed or heavily contaminated) for dirty wounds in the incompletely vaccinated or immunodeficient. Established tetanus: human TIG, wound debridement, metronidazole, benzodiazepines and magnesium for spasms, early airway control, then complete vaccination.",
  "sections": [
   {
    "kind": "recognise",
@@ -25,7 +25,7 @@
    "items": [
     "Clean, minor wounds: give a tetanus toxoid-containing vaccine if vaccination history is unknown or fewer than 3 doses, or if 10 years or more since the last dose. TIG is never needed.",
     "All other wounds (dirt, soil, faeces or saliva contamination including animal or human bites, puncture or penetrating wounds, burns, crush injuries, compound fractures, devitalised tissue): vaccine if history unknown or fewer than 3 doses, or 5 years or more since the last dose.",
-    "Add human TIG 250 IU IM for these dirty or major wounds if history is unknown or fewer than 3 doses, or the patient has HIV or severe immunodeficiency (regardless of vaccination history).",
+    "Add human TIG 250 IU IM for these dirty or major wounds if history is unknown or fewer than 3 doses, or the patient has HIV or severe immunodeficiency (regardless of vaccination history). Give 500 IU if more than 24 hours have passed since the injury, or with heavy contamination or burns (UKHSA).",
     "Vaccine: Td 0.5 mL IM (Td has replaced TT in India) from 7 years of age; DPT (or DTaP) under 7 years. Give TIG and vaccine with separate syringes at separate sites.",
     "Clean and debride the wound. Antibiotics do not prevent tetanus. Arrange the remaining primary doses for anyone incompletely vaccinated."
    ]
@@ -95,7 +95,7 @@
  ],
  "drugs": [
   { "name": "Td vaccine (tetanus and diphtheria toxoid)", "dose": "0.5 mL IM", "notes": "Age 7 years and over; DPT or DTaP under 7 years. Separate site from TIG." },
-  { "name": "Human tetanus immunoglobulin (prophylaxis)", "dose": "250 IU IM, single dose", "notes": "Dirty or major wounds with unknown or fewer than 3 prior doses, HIV or severe immunodeficiency." },
+  { "name": "Human tetanus immunoglobulin (prophylaxis)", "dose": "250 IU IM, single dose; 500 IU if more than 24 hours since injury, heavy contamination or burns", "notes": "Dirty or major wounds with unknown or fewer than 3 prior doses, HIV or severe immunodeficiency. Separate syringe and site from the vaccine." },
   { "name": "Human tetanus immunoglobulin (treatment)", "dose": "500 IU IM or IV (per preparation), single dose, as early as possible", "notes": "WHO dose; 3000 to 6000 IU IM is also used. Give before wound debridement." },
   { "name": "Metronidazole", "dose": "500 mg IV or orally 6-hourly for 7 to 10 days; children 7.5 mg/kg 6-hourly (maximum 500 mg per dose)", "notes": "Preferred antibiotic." },
   { "name": "Benzylpenicillin (penicillin G)", "dose": "100,000 to 200,000 IU/kg/day IV in 2 to 4 divided doses", "notes": "Alternative to metronidazole." },
@@ -106,6 +106,7 @@
  "sources": [
   { "org": "WHO", "title": "Current recommendations for treatment of tetanus during humanitarian emergencies (WHO technical note)", "year": 2010, "url": "https://iris.who.int/server/api/core/bitstreams/f9f77952-80b0-4a25-92d7-edce3241af13/content" },
   { "org": "CDC", "title": "Clinical Guidance for Wound Management to Prevent Tetanus", "year": 2026, "url": "https://www.cdc.gov/tetanus/hcp/clinical-guidance/index.html" },
+  { "org": "UKHSA", "title": "Guidance on the management of suspected tetanus cases and the assessment and management of tetanus-prone wounds", "year": 2026, "url": "https://www.gov.uk/government/publications/tetanus-advice-for-health-professionals/guidance-on-the-management-of-suspected-tetanus-cases-and-the-assessment-and-management-of-tetanus-prone-wounds" },
   { "org": "WHO", "title": "Tetanus fact sheet", "year": 2026, "url": "https://www.who.int/news-room/fact-sheets/detail/tetanus" }
  ],
  "review": { "status": "ai_drafted", "compiled": "2026-09-25" }

@@ -1,0 +1,365 @@
+{
+ "id": "SVIMS_2018_H2",
+ "kind": "institution",
+ "inst": "SVIMS_TIRUPATI",
+ "institution": "Sri Venkateswara Institute of Medical Sciences, Tirupati",
+ "short": "SVIMS Tirupati",
+ "city": "Tirupati",
+ "state": "Andhra Pradesh",
+ "region": "south",
+ "sector": "government",
+ "year": 2018,
+ "end": "2018-06",
+ "period": "January to June 2018",
+ "url": "http://svimstpt.ap.nic.in/quality_files/feb2019/haidec2018.pdf",
+ "page": "https://svimstpt.ap.nic.in/quality.html",
+ "retrieved": "2026-09-26",
+ "citation": "Sri Venkateswara Institute of Medical Sciences. SVIMS Antimicrobial Stewardship Pocket Guide, 5th edition (Jul 2018 to Dec 2018), with Healthcare Associated Infections report. Tirupati: SVIMS; 2018.",
+ "reporting": "Percent resistant by organism: Gram-negative bacilli with isolate numbers for all locations and for ICUs; S. aureus, CoNS and Enterococcus without isolate numbers; plus a chart of imipenem resistance by organism.",
+ "measure": "R",
+ "verification": {
+  "status": "double-checked",
+  "note": "Tables on pages 19 and 20 read from the rendered pages (scale 2.2) and compared cell by cell with the PDF text layer; the page 22 to 24 charts (data labels mapped to their axis categories by x position in the text layer and checked on the images) agree with the page 19 table except Enterobacter piperacillin-tazobactam; imipenem values from the page 26 chart were read from its printed data labels and checked on the image."
+ },
+ "notes": "Half-yearly SVIMS Antimicrobial Stewardship pocket guide (5th edition). Data period: the index dates the resistance section January to June 2018 and the HAI charts run only to July 2018, so the figures are treated as January to June 2018 although the cover and the census give July to December 2018 (end set to 2018-06). All figures are percent resistant (intermediate therefore counts as not resistant). \"Nil\" is recorded as 0. Column M is taken as meropenem (the text gives the same figures as meropenem susceptibility); Pseudomonas figures printed \"(Imp)\" are imipenem. Imipenem for the other organisms comes from the page 26 chart. Specimen base not stated: rows are recorded as all specimens. Downloaded from the Wayback copy https://web.archive.org/web/20220108030112id_/https://svimstpt.ap.nic.in/quality_files/feb2019/haidec2018.pdf (the live host resets connections).",
+ "issues": [
+  "Second reader 2026-09-26: all 112 cells (the seeded sample of 40 plus every other cell) and all 12 row n values read from the page images (pages 19, 20 and 26, scale 2.5) before comparing with the extraction: 0 transcription errors, no value changed. The charts on pages 22 to 24 agree with the page 19 table except Enterobacter piperacillin-tazobactam (table 42, chart 39), so the recorded conflict is accurate. Column M as meropenem is supported by the page 27 text (meropenem sensitivity E. coli 89, Klebsiella 60, Acinetobacter 53%), and the page 26 imipenem labels (Klebsiella 43, E. coli 15, Pseudomonas 77, Acinetobacter 42, Enterobacter 29) equal the page 27 text.",
+  "Added two conflicts on the Acinetobacter all-locations row: the page 27 key messages give amikacin 67% and co-trimoxazole 54% resistant, against 49 and 67 in both the page 19 table and the page 23 chart; every other organism figure in the key messages agrees with the tables. Period confirmed: the index (page 15) dates the section January to June 2018 and the pocket guide cover (page 11) reads Jul 2018 to Dec 2018, 5th edition.",
+  "Population: the section is titled Trends of Multidrug Resistance, as in the 2020 and 2021 editions whose Gram-negative tables are MDR subsets, but these tables carry no MDR label and their isolate numbers (E. coli 1646 in six months) are far above the 2020 MDR set (E. coli 675); kept as a cumulative antibiogram."
+ ],
+ "rows": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 1646,
+   "page": 19,
+   "table": "Organism wise Anti Microbial Resistance pattern (Gram negative bacilli) (%)",
+   "r": {
+    "amikacin": 16,
+    "cefoperazone_sulbactam": 20,
+    "cefotaxime": 89,
+    "ciprofloxacin": 65,
+    "cotrimoxazole": 64,
+    "gentamicin": 27,
+    "meropenem": 11,
+    "piptazo": 22,
+    "polymyxin_b": 0.4,
+    "imipenem": 15
+   },
+   "notes": {
+    "meropenem": "column M, taken as meropenem: the legend lists only I for imipenem, and the text gives the organism-wise M figures as meropenem",
+    "imipenem": "from the page 26 chart \"Percentage of imipenem resistance among individual isolates\" (printed data label)"
+   },
+   "note": "HAI report and SVIMS Antimicrobial Stewardship pocket guide, 5th edition; section \"Trends of Multidrug Resistance from Jan 2018 to Jun 2018\". Specimen base not stated. All locations (organism-wise table; the ICU table is recorded separately)."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella",
+   "pheno": null,
+   "n": 602,
+   "page": 19,
+   "table": "Organism wise Anti Microbial Resistance pattern (Gram negative bacilli) (%)",
+   "r": {
+    "amikacin": 51,
+    "cefoperazone_sulbactam": 57,
+    "cefotaxime": 94,
+    "ciprofloxacin": 42,
+    "cotrimoxazole": 78,
+    "gentamicin": 55,
+    "meropenem": 40,
+    "piptazo": 55,
+    "polymyxin_b": 2,
+    "imipenem": 43
+   },
+   "notes": {
+    "meropenem": "column M, taken as meropenem: the legend lists only I for imipenem, and the text gives the organism-wise M figures as meropenem",
+    "imipenem": "from the page 26 chart \"Percentage of imipenem resistance among individual isolates\" (printed data label)"
+   },
+   "note": "HAI report and SVIMS Antimicrobial Stewardship pocket guide, 5th edition; section \"Trends of Multidrug Resistance from Jan 2018 to Jun 2018\". Specimen base not stated. All locations (organism-wise table; the ICU table is recorded separately)."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter",
+   "pheno": null,
+   "n": 279,
+   "page": 19,
+   "table": "Organism wise Anti Microbial Resistance pattern (Gram negative bacilli) (%)",
+   "r": {
+    "amikacin": 49,
+    "cefoperazone_sulbactam": 44,
+    "cefotaxime": 92,
+    "ciprofloxacin": 63,
+    "cotrimoxazole": 67,
+    "gentamicin": 53,
+    "meropenem": 47,
+    "piptazo": 68,
+    "polymyxin_b": 1,
+    "imipenem": 42
+   },
+   "notes": {
+    "meropenem": "column M, taken as meropenem: the legend lists only I for imipenem, and the text gives the organism-wise M figures as meropenem",
+    "imipenem": "from the page 26 chart \"Percentage of imipenem resistance among individual isolates\" (printed data label)"
+   },
+   "note": "HAI report and SVIMS Antimicrobial Stewardship pocket guide, 5th edition; section \"Trends of Multidrug Resistance from Jan 2018 to Jun 2018\". Specimen base not stated. All locations (organism-wise table; the ICU table is recorded separately).",
+   "conflict": {
+    "amikacin": "the page 19 table and the page 23 chart print 49% resistant; the key messages on page 27 give 67%",
+    "cotrimoxazole": "the page 19 table and the page 23 chart print 67% resistant; the key messages on page 27 give 54%"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas",
+   "pheno": null,
+   "n": 270,
+   "page": 19,
+   "table": "Organism wise Anti Microbial Resistance pattern (Gram negative bacilli) (%)",
+   "r": {
+    "amikacin": 30,
+    "cefoperazone_sulbactam": 57,
+    "ciprofloxacin": 77,
+    "gentamicin": 51,
+    "imipenem": 77,
+    "piptazo": 46,
+    "polymyxin_b": 0,
+    "ceftazidime": 87
+   },
+   "notes": {
+    "imipenem": "printed \"77(Imp)\" in the M column; the page 26 imipenem chart prints the same 77",
+    "polymyxin_b": "printed \"Nil\""
+   },
+   "note": "HAI report and SVIMS Antimicrobial Stewardship pocket guide, 5th edition; section \"Trends of Multidrug Resistance from Jan 2018 to Jun 2018\". Specimen base not stated. All locations (organism-wise table; the ICU table is recorded separately)."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterobacter spp",
+   "pheno": null,
+   "n": 109,
+   "page": 19,
+   "table": "Organism wise Anti Microbial Resistance pattern (Gram negative bacilli) (%)",
+   "r": {
+    "amikacin": 31,
+    "cefoperazone_sulbactam": 37,
+    "cefotaxime": 83,
+    "ciprofloxacin": 37,
+    "cotrimoxazole": 63,
+    "gentamicin": 39,
+    "meropenem": 18,
+    "piptazo": 42,
+    "polymyxin_b": 2,
+    "imipenem": 29
+   },
+   "conflict": {
+    "piptazo": "the table prints 42% resistant; the Enterobacter chart on page 24 prints 39"
+   },
+   "notes": {
+    "meropenem": "column M, taken as meropenem: the legend lists only I for imipenem, and the text gives the organism-wise M figures as meropenem",
+    "imipenem": "from the page 26 chart \"Percentage of imipenem resistance among individual isolates\" (printed data label)"
+   },
+   "note": "HAI report and SVIMS Antimicrobial Stewardship pocket guide, 5th edition; section \"Trends of Multidrug Resistance from Jan 2018 to Jun 2018\". Specimen base not stated. All locations (organism-wise table; the ICU table is recorded separately)."
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Klebsiella",
+   "pheno": null,
+   "n": 66,
+   "page": 19,
+   "table": "Anti Microbial Resistance (AMR) pattern of Isolates in ICU's (%)",
+   "r": {
+    "amikacin": 55,
+    "cefoperazone_sulbactam": 56,
+    "cefotaxime": 97,
+    "ciprofloxacin": 42,
+    "cotrimoxazole": 89,
+    "gentamicin": 50,
+    "meropenem": 39,
+    "piptazo": 52,
+    "polymyxin_b": 3
+   },
+   "notes": {
+    "meropenem": "column M, taken as meropenem as in the organism-wise table (the legend lists only I for imipenem)"
+   },
+   "note": "HAI report and SVIMS Antimicrobial Stewardship pocket guide, 5th edition; section \"Trends of Multidrug Resistance from Jan 2018 to Jun 2018\". Specimen base not stated."
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Acinetobacter",
+   "pheno": null,
+   "n": 43,
+   "page": 19,
+   "table": "Anti Microbial Resistance (AMR) pattern of Isolates in ICU's (%)",
+   "r": {
+    "amikacin": 67,
+    "cefoperazone_sulbactam": 51,
+    "cefotaxime": 93,
+    "ciprofloxacin": 67,
+    "cotrimoxazole": 72,
+    "gentamicin": 70,
+    "meropenem": 53,
+    "piptazo": 70,
+    "polymyxin_b": 2
+   },
+   "notes": {
+    "meropenem": "column M, taken as meropenem as in the organism-wise table (the legend lists only I for imipenem)"
+   },
+   "note": "HAI report and SVIMS Antimicrobial Stewardship pocket guide, 5th edition; section \"Trends of Multidrug Resistance from Jan 2018 to Jun 2018\". Specimen base not stated."
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Pseudomonas",
+   "pheno": null,
+   "n": 25,
+   "page": 19,
+   "table": "Anti Microbial Resistance (AMR) pattern of Isolates in ICU's (%)",
+   "r": {
+    "amikacin": 56,
+    "cefoperazone_sulbactam": 76,
+    "ciprofloxacin": 84,
+    "gentamicin": 56,
+    "imipenem": 88,
+    "piptazo": 52,
+    "polymyxin_b": 0,
+    "ceftazidime": 92
+   },
+   "notes": {
+    "imipenem": "printed \"88(Imp)\" in the M column",
+    "polymyxin_b": "printed \"Nil\""
+   },
+   "note": "HAI report and SVIMS Antimicrobial Stewardship pocket guide, 5th edition; section \"Trends of Multidrug Resistance from Jan 2018 to Jun 2018\". Specimen base not stated."
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 19,
+   "page": 19,
+   "table": "Anti Microbial Resistance (AMR) pattern of Isolates in ICU's (%)",
+   "r": {
+    "amikacin": 32,
+    "cefoperazone_sulbactam": 53,
+    "cefotaxime": 100,
+    "ciprofloxacin": 32,
+    "cotrimoxazole": 84,
+    "gentamicin": 32,
+    "meropenem": 37,
+    "piptazo": 58,
+    "polymyxin_b": 0
+   },
+   "notes": {
+    "meropenem": "column M, taken as meropenem as in the organism-wise table (the legend lists only I for imipenem)",
+    "polymyxin_b": "printed \"Nil\""
+   },
+   "note": "HAI report and SVIMS Antimicrobial Stewardship pocket guide, 5th edition; section \"Trends of Multidrug Resistance from Jan 2018 to Jun 2018\". Specimen base not stated."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": null,
+   "page": 20,
+   "table": "Anti Microbial Resistance (AMR) spectrum of S.aureus, CoNS and Enterococcus spp (%)",
+   "r": {
+    "ampicillin": 96,
+    "cefoxitin": 66,
+    "ciprofloxacin": 64,
+    "erythromycin": 64,
+    "clindamycin": 46,
+    "cotrimoxazole": 61,
+    "gentamicin": 22,
+    "linezolid": 4,
+    "penicillin": 96,
+    "vancomycin": 1.4,
+    "tetracycline": 13
+   },
+   "notes": {
+    "ampicillin": "printed \"Ampp\""
+   },
+   "note": "HAI report and SVIMS Antimicrobial Stewardship pocket guide, 5th edition; section \"Trends of Multidrug Resistance from Jan 2018 to Jun 2018\". Specimen base not stated. Isolate numbers not printed for Gram-positive organisms."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": null,
+   "n": null,
+   "page": 20,
+   "table": "Anti Microbial Resistance (AMR) spectrum of S.aureus, CoNS and Enterococcus spp (%)",
+   "r": {
+    "ampicillin": 95,
+    "cefoxitin": 71,
+    "ciprofloxacin": 65,
+    "erythromycin": 68,
+    "clindamycin": 47,
+    "cotrimoxazole": 60,
+    "gentamicin": 18,
+    "linezolid": 4,
+    "penicillin": 95,
+    "vancomycin": 1.5,
+    "tetracycline": 17
+   },
+   "notes": {
+    "ampicillin": "printed \"Ampp\""
+   },
+   "note": "HAI report and SVIMS Antimicrobial Stewardship pocket guide, 5th edition; section \"Trends of Multidrug Resistance from Jan 2018 to Jun 2018\". Specimen base not stated. Isolate numbers not printed for Gram-positive organisms."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus spp",
+   "pheno": null,
+   "n": null,
+   "page": 20,
+   "table": "Anti Microbial Resistance (AMR) spectrum of S.aureus, CoNS and Enterococcus spp (%)",
+   "r": {
+    "ampicillin": 83,
+    "ciprofloxacin": 91,
+    "erythromycin": 92,
+    "linezolid": 3,
+    "penicillin": 84,
+    "vancomycin": 5,
+    "tetracycline": 38
+   },
+   "notes": {
+    "ampicillin": "printed \"Ampp\""
+   },
+   "note": "HAI report and SVIMS Antimicrobial Stewardship pocket guide, 5th edition; section \"Trends of Multidrug Resistance from Jan 2018 to Jun 2018\". Specimen base not stated. Isolate numbers not printed for Gram-positive organisms."
+  }
+ ],
+ "counts": [],
+ "excluded": [
+  {
+   "what": "Page 20: Anti Microbial Resistance (AMR) pattern of gram negative Isolates (all Gram-negative bacilli pooled)",
+   "why": "all Gram-negative isolates pooled; no organism key"
+  },
+  {
+   "what": "Pages 22 to 24: per-organism resistance charts (E. coli, Klebsiella, Acinetobacter, Enterobacter, Pseudomonas)",
+   "why": "duplicate the page 19 table (every label equal except Enterobacter piperacillin-tazobactam, 39 on the chart and 42 in the table, recorded as a conflict)"
+  },
+  {
+   "what": "Page 21: Klebsiella pneumoniae carbapenemase (KPC) proportion and department-wise KPC distribution",
+   "why": "phenotype rate and distribution, not organism by drug susceptibility"
+  },
+  {
+   "what": "Page 20 and page 22: MRSA, MRCoNS, VRSA, VRCoNS and VRE percentages",
+   "why": "phenotype rates, not organism by drug susceptibility"
+  },
+  {
+   "what": "Page 25: ward-wise distribution of MRSA and department-wise distribution of imipenem resistance; page 26: contribution of each organism to imipenem-resistant isolates",
+   "why": "distributions, not susceptibility"
+  },
+  {
+   "what": "Page 27: key-message percentages",
+   "why": "narrative restating the tables (some figures differ from the tables, for example Acinetobacter amikacin 67 and cotrimoxazole 54 in the text against 49 and 67 in the table); the tables were used; the two Acinetobacter figures are recorded from the table with a conflict entry"
+  }
+ ]
+}

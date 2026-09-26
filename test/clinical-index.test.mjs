@@ -12,7 +12,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { gunzipSync } from "node:zlib";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -135,6 +135,51 @@ test("a class or a tag finds the molecule, so 'echinocandin' is a usable query",
   // whole tag list is indexed. A wide limit, because a common word legitimately ranks class matches
   // above tag matches and ranking is not what this test is about.
   assert.ok(I.search("reserve", 400).some((r) => r.n === "Cefiderocol"), "tags past the eighth are not indexed");
+});
+
+test("a drug is findable under every name it is known by", () => {
+  // The corpus writes alternates into `generic` in parentheses. They were not indexed, so a drug was
+  // findable under one spelling and invisible under the others.
+  [["Aciclovir", "Acyclovir"], ["Prostaglandin E1", "Alprostadil"], ["SAMe", "Ademetionine"]]
+    .forEach(([typed, want]) => {
+      const hit = I.search(typed, 3)[0];
+      assert.ok(hit, typed + " finds nothing");
+      assert.equal(hit.n, want, typed + " should reach " + want);
+      assert.equal(I.get(typed) && I.get(typed).n, want, "get(" + typed + ") should reach " + want);
+    });
+});
+
+test("an exact synonym never loses to a partial match on a DIFFERENT drug", () => {
+  // The one that matters clinically: "Epinephrine" is adrenaline. Before aliases were indexed the
+  // only thing that matched was a substring of "Norepinephrine" -- a different drug, different
+  // indications -- and it came back as the top hit. An exact alias must outrank any partial match.
+  const hit = I.search("Epinephrine", 5)[0];
+  assert.equal(hit.n, "Adrenaline", "Epinephrine must reach Adrenaline, not " + hit.n);
+  assert.notEqual(hit.n, "Norepinephrine", "returning the wrong catecholamine is a safety defect");
+});
+
+test("every authored monograph is reachable by a name a clinician would type", () => {
+  // Not the full "Abacavir (Abacavir Sulfate)" string, which nobody types: the base name or one of
+  // its parenthetical alternates.
+  const aliasesOf = (name) => {
+    const m = /^([^(]+)\(([^)]*)\)\s*$/.exec(String(name || "").trim());
+    if (!m) return [];
+    return m[2].split(/,|\bor\b/).map((x) => x.replace(/\s+/g, " ").trim())
+      .filter((x) => x && x.split(" ").length <= 4);
+  };
+  const goldDir = join(ROOT, "worker", "data", "gold");
+  const files = readdirSync(goldDir).filter((f) => f.endsWith(".json"));
+  const unreachable = [];
+  for (const f of files) {
+    let g;
+    try { g = JSON.parse(readFileSync(join(goldDir, f), "utf8")); } catch { continue; }
+    const full = String(g.generic || "").trim();
+    if (!full) continue;
+    const names = [full.replace(/\s*\(.*$/, "").trim(), ...aliasesOf(full)].filter(Boolean);
+    if (!names.some((n) => I.get(n) || I.search(n, 3).length)) unreachable.push(full);
+  }
+  assert.ok(files.length > 1500, "only " + files.length + " gold files scanned");
+  assert.deepEqual(unreachable.slice(0, 5), [], unreachable.length + " monographs cannot be found");
 });
 
 test("nonsense returns nothing rather than a loose match", () => {

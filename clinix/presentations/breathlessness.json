@@ -1,0 +1,172 @@
+{
+  "_comment": "CliniX 2.0 Presentation Library: Symptom-First Approach to Breathlessness. Reuses shared Skills as atoms and provides tiered clinical reasoning from recognition to discriminators and emergency actions.",
+  "schemaVersion": 1,
+  "id": "breathlessness",
+  "title": "Approach to the Breathless Patient",
+  "subtitle": "Acute vs chronic dyspnoea, red flags, high-yield discriminators, and step-by-step diagnostic reasoning",
+  "system": "respiratory",
+  "estMinutes": 45,
+  "review": {
+    "status": "approved",
+    "reviewer": "Clinical Review Team"
+  },
+  "layers": {
+    "recognise": {
+      "redFlags": [
+        "Silent chest in an asthmatic or distressed patient (ominous sign of impending respiratory arrest)",
+        "Stridor (harsh high-pitched inspiratory sound indicating laryngeal/upper airway obstruction — surgical emergency)",
+        "Inability to complete a sentence in a single breath due to air hunger",
+        "Central cyanosis or SpO2 < 85% on room air",
+        "Paradoxical abdominal breathing or Hoover sign (diaphragmatic fatigue with impending exhaustion)",
+        "Hypotension and shock (massive pulmonary embolism, tension pneumothorax, cardiac tamponade)",
+        "Drowsiness and asterixis in a hypercapnic patient (carbon dioxide narcosis)"
+      ],
+      "vitalsPriorities": [
+        "Respiratory Rate: RR > 30/min indicates severe ventilatory demand; a falling RR in an exhausted patient signals respiratory arrest, not recovery.",
+        "Oxygen Saturation: 94-98% for most medical patients; strictly 88-92% for patients at risk of hypercapnic respiratory failure (severe COPD, kyphoscoliosis, morbid obesity hypoventilation).",
+        "Blood Pressure: Check for pulsus paradoxus (> 10 mmHg inspiratory drop in systolic BP) in suspected cardiac tamponade or acute severe asthma."
+      ]
+    },
+    "classify": {
+      "tempo": {
+        "acute_minutes_to_hours": [
+          "Pulmonary Embolism",
+          "Tension Pneumothorax",
+          "Acute Severe Asthma",
+          "Acute Cardiogenic Pulmonary Oedema",
+          "Anaphylaxis with Laryngeal Oedema",
+          "Foreign Body Aspiration"
+        ],
+        "subacute_days_to_weeks": [
+          "Community-Acquired Pneumonia",
+          "Pleural Effusion (infective or malignant)",
+          "Acute Exacerbation of COPD",
+          "Subacute Heart Failure",
+          "Pericarditis with Effusion"
+        ],
+        "chronic_months_to_years": [
+          "COPD (Emphysema / Chronic Bronchitis)",
+          "Interstitial Lung Disease (UIP / NSIP / Sarcoidosis)",
+          "Congestive Cardiac Failure (HFrEF / HFpEF)",
+          "Pulmonary Arterial Hypertension (PAH)",
+          "Severe Chronic Anaemia",
+          "Neuromuscular Disease (GBS, Myasthenia Gravis, ALS)"
+        ]
+      },
+      "organSystems": {
+        "pulmonary": [
+          "Airway obstruction: Asthma, COPD, bronchiectasis",
+          "Parenchymal disease: Pneumonia, ARDS, Interstitial lung disease",
+          "Pleural disease: Large pleural effusion, pneumothorax",
+          "Pulmonary vascular: Pulmonary embolism, pulmonary hypertension"
+        ],
+        "cardiac": [
+          "Left ventricular failure / Acute pulmonary oedema",
+          "Valvular heart disease: Mitral stenosis, aortic stenosis, acute mitral regurgitation",
+          "Arrhythmias: Atrial fibrillation with fast ventricular rate, ventricular tachycardia",
+          "Pericardial tamponade / constrictive pericarditis"
+        ],
+        "metabolic": [
+          "Diabetic Ketoacidosis (rapid, deep Kussmaul respirations without lung findings)",
+          "Severe uremic acidosis or lactic acidosis",
+          "Salicylate poisoning (initial respiratory alkalosis then metabolic acidosis)"
+        ],
+        "hematologic": [
+          "Severe anaemia (Hb < 6 g/dL with hyperdynamic circulation)",
+          "Methemoglobinemia or carbon monoxide poisoning (pulse oximeter false readings)"
+        ],
+        "neuromuscular": [
+          "Guillain-Barré Syndrome (ascending paralysis reaching diaphragm)",
+          "Myasthenic Crisis",
+          "Cervical spinal cord compression (C3-C5 phrenic outflow)"
+        ]
+      }
+    },
+    "discriminators": [
+      {
+        "title": "COPD vs Bronchial Asthma",
+        "finding": "Spirometric reversibility (> 12% and > 200 mL increase in FEV1 post-bronchodilator) and diurnal variation favor asthma. Insidious progression, heavy smoking or biomass exposure, and incomplete reversibility favor COPD.",
+        "highYield": "Diurnal peak flow variability > 20% is the hallmark of asthma."
+      },
+      {
+        "title": "Cardiogenic Pulmonary Oedema vs COPD Exacerbation",
+        "finding": "Orthopnoea, paroxysmal nocturnal dyspnoea (PND), elevated JVP, third heart sound (S3 gallop), and bibasal fine inspiratory crackles point to heart failure. Barrel chest, hyperresonance, and polyphonic expiratory wheeze point to COPD.",
+        "highYield": "S3 gallop and elevated JVP have the highest positive likelihood ratio for heart failure."
+      },
+      {
+        "title": "Pleural Effusion vs Consolidation vs Pneumothorax",
+        "finding": "Percussion note: Stony dull in effusion, dull in consolidation, hyperresonant in pneumothorax. Breath sounds: Reduced/absent in effusion and pneumothorax; bronchial breathing with egophony ('E to A') in consolidation.",
+        "highYield": "Tracheal deviation: PUSHED AWAY in large effusion / tension pneumothorax; PULLED TOWARDS in atelectasis / collapse; MIDLINE in consolidation."
+      }
+    ],
+    "dontMiss": [
+      {
+        "disease": "Pulmonary Embolism",
+        "clue": "Sudden onset dyspnoea with pleuritic chest pain, tachycardia > 100/min, tachypnoea, DVT stigmata or immobilisation. Often clean CXR.",
+        "action": "Immediate risk stratification (Wells / Geneva), therapeutic anticoagulation if high suspicion, urgent CTPA."
+      },
+      {
+        "disease": "Tension Pneumothorax",
+        "clue": "Severe acute respiratory distress, unilateral hyperresonance, absent breath sounds, tracheal deviation AWAY from the affected hemithorax, and hypotension.",
+        "action": "DO NOT WAIT FOR A CHEST X-RAY. Perform immediate needle decompression (2nd intercostal space midclavicular line or 5th ICS anterior axillary line) followed by intercostal chest tube drain."
+      },
+      {
+        "disease": "Acute Severe Asthma",
+        "clue": "Silent chest (airflow too low to produce a wheeze), exhaustion, drowsiness, pulsus paradoxus, SpO2 < 92%.",
+        "action": "Continuous high-dose nebulized salbutamol + ipratropium with oxygen, IV hydrocortisone, IV magnesium sulphate, prepare ICU team for non-invasive / invasive ventilation."
+      },
+      {
+        "disease": "Acute Pulmonary Oedema",
+        "clue": "Patient sitting bolt upright, unable to breathe flat, coughing pink frothy sputum, bilateral diffuse wet crackles, gallop rhythm.",
+        "action": "Sit upright with legs dangling, high-flow oxygen, sublingual nitrates if SBP > 110 mmHg, IV furosemide, non-invasive positive pressure ventilation (CPAP/BiPAP)."
+      }
+    ],
+    "investigations": {
+      "step1_immediate": [
+        "Continuous pulse oximetry and ECG monitoring",
+        "Arterial Blood Gas (ABG) to determine PaO2, PaCO2, pH, and anion gap",
+        "Point-of-Care Ultrasound (POCUS: BLUE protocol to rule in pneumothorax, pulmonary edema, or consolidation)"
+      ],
+      "step2_urgent": [
+        "Chest X-Ray PA view (erect)",
+        "Complete Blood Count (CBC) with differential",
+        "Serum Electrolytes, Urea, and Creatinine",
+        "Cardiac Troponin and NT-proBNP if heart failure / ACS suspected",
+        "D-dimer assay if pulmonary embolism suspected with low-intermediate pre-test probability"
+      ],
+      "step3_confirmatory": [
+        "CT Pulmonary Angiography (CTPA) for definitive PE evaluation",
+        "High-Resolution Computed Tomography (HRCT) of thorax for interstitial lung disease",
+        "Transthoracic Echocardiogram (TTE) for ejection fraction, valve lesions, RV systolic pressure",
+        "Post-bronchodilator spirometry (when patient is medically stabilized)"
+      ]
+    },
+    "skills": [
+      "skill.hx.resp.dyspnea",
+      "skill.gen.vitals",
+      "skill.gen.cyanosis",
+      "skill.exam.resp.inspection",
+      "skill.exam.resp.trachea",
+      "skill.exam.resp.expansion",
+      "skill.exam.resp.percussion",
+      "skill.exam.resp.auscultation",
+      "skill.exam.resp.added_sounds",
+      "skill.exam.cvs.jvp",
+      "skill.exam.cvs.heartsounds"
+    ],
+    "examPearls": [
+      {
+        "topic": "MBBS Long Case Presentation Cadence",
+        "text": "When presenting dyspnoea to a university examiner, grade it quantitatively using the mMRC scale (Grade 0 to 4) for respiratory diseases or NYHA functional class (I to IV) for cardiac disease. Always document 6 dimensions: Onset, Duration, Progression, Diurnal variation, Postural variation (orthopnoea / trepopnoea / platypnoea), and Relieving factors."
+      },
+      {
+        "topic": "Platypnoea-Orthodeoxia Syndrome",
+        "text": "Dyspnoea and arterial desaturation accentuated in the upright position and relieved in recumbency. Classic causes: Hepatopulmonary syndrome (cirrhosis with intrapulmonary vascular dilatations), Patent Foramen Ovale (PFO) with right-to-left shunt unmasked by aortic root elongation, or large pulmonary arteriovenous malformations."
+      },
+      {
+        "topic": "Direct Clavicular Percussion",
+        "text": "The medial third of the clavicle overlies the apex of the lung. Direct percussion of the clavicle without an intervening pleximeter finger is the standard physical examination method to detect apical dullness (e.g. tuberculous consolidation or apical Pancoast tumor)."
+      }
+    ]
+  }
+}

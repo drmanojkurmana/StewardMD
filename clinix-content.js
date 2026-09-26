@@ -25,10 +25,11 @@
   function flag(k) { var f = flags(); return !!(f && f.bool(k)); }
   function model() { try { return G.SMD_CLINIX_MODEL || null; } catch (e) { return null; } }
 
-  // Author-mode options, read fresh each call so toggling the flag does not need a reload.
+  // Author-mode options. Released to open by owner decision 2026-09-26: defaults to true unless explicitly false.
   function gateOpts() {
+    var f = flags();
     return {
-      allowDraft: flag("smd_clinix_draft"),
+      allowDraft: f ? f.bool("smd_clinix_draft") : true,
       allowUncleared: flag("smd_clinix_uncleared_media")
     };
   }
@@ -266,6 +267,9 @@
       synth: m.synth === true,
       audioKind: m.audioKind || "",
       videoId: m.videoId || "",
+      ytVideoId: m.ytVideoId || "",
+      ytStart: m.ytStart || 0,
+      ytChannel: m.ytChannel || "",
       title: m.title || "",
       src: ok && m.src ? cxMedia(m.src) : null,
       embeddable: M ? M.isEmbeddable(m) : false,
@@ -345,11 +349,52 @@
     return { total: total, visible: visible, pending: total - visible };
   }
 
-  function reset() { cache = { catalog: null, packs: {}, diseases: {}, media: null, dxVocab: null }; _allCache = null; }
+  /* ── Presentations (Symptom-first clinical approaches) ─────────────────── */
+
+  function loadPresentation(id) {
+    if (cache.presentations && cache.presentations[id]) return Promise.resolve(cache.presentations[id]);
+    if (!cache.presentations) cache.presentations = {};
+    return loadCatalog().then(function (cat) {
+      var entry = null, list = cat.presentations || [];
+      for (var i = 0; i < list.length; i++) if (list[i].id === id) entry = list[i];
+      if (!entry) return null;
+      var jobs = [getJSON(entry.file), loadMedia(), loadAllSkills()];
+      return Promise.all(jobs).then(function (res) {
+        var pres = res[0];
+        var media = res[1] || {};
+        var allSk = res[2] || { skills: {} };
+        if (!pres) return null;
+        var built = {
+          id: pres.id,
+          presentation: pres,
+          skills: allSk.skills || {},
+          media: media
+        };
+        cache.presentations[id] = built;
+        return built;
+      });
+    }).catch(function () { return null; });
+  }
+
+  function loadPresentations() {
+    return loadCatalog().then(function (cat) {
+      var list = (cat && cat.presentations) || [];
+      var M = model(), opts = gateOpts();
+      var out = [];
+      for (var i = 0; i < list.length; i++) {
+        if (!M || M.isRenderable(list[i], opts)) out.push(list[i]);
+      }
+      return out;
+    });
+  }
+
+  function reset() { cache = { catalog: null, packs: {}, diseases: {}, presentations: {}, media: null, dxVocab: null }; _allCache = null; }
 
   var API = {
     loadCatalog: loadCatalog,
     loadDisease: loadDisease,
+    loadPresentation: loadPresentation,
+    loadPresentations: loadPresentations,
     loadMedia: loadMedia,
     loadDxVocab: loadDxVocab,
     pathwayFor: pathwayFor,

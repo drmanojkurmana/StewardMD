@@ -210,12 +210,72 @@
     }).catch(function () { return { error: "server" }; });
   }
 
+  /* ── Patient persona simulation (pure + async) ────────────────────────── */
+
+  function buildPatientPrompt(caseDef, question) {
+    caseDef = caseDef || {};
+    var p = caseDef.patient || {};
+    var lines = [];
+    lines.push("You are simulating a real patient in a medical student clinical examination.");
+    lines.push("Stay strictly in character as the patient. Speak colloquially, plainly, and realistically.");
+    lines.push("NEVER use technical medical jargon. If the doctor uses jargon (e.g. 'orthopnea', 'dyspnea', 'hemoptysis', 'paresthesia'), politely ask what that means.");
+    lines.push("NEVER invent new symptoms, medications, or diseases not present in the patient record below.");
+    lines.push("");
+    lines.push("PATIENT IDENTITY:");
+    if (p.name) lines.push("Name: " + p.name);
+    if (p.age) lines.push("Age: " + p.age);
+    if (p.sex) lines.push("Sex: " + p.sex);
+    if (p.occupation) lines.push("Occupation: " + p.occupation);
+    if (p.residence) lines.push("Residence: " + p.residence);
+    lines.push("");
+    if (caseDef.opening) lines.push("INITIAL PRESENTATION:\n" + caseDef.opening + "\n");
+    lines.push("WHAT YOU KNOW AND FEEL (Clinical Facts):");
+    var hist = caseDef.history || {};
+    for (var k in hist) {
+      if (Object.prototype.hasOwnProperty.call(hist, k) && hist[k] && hist[k].reply) {
+        lines.push("- " + k + ": " + hist[k].reply);
+      }
+    }
+    lines.push("");
+    lines.push("DOCTOR'S QUESTION: " + String(question || "").slice(0, 300));
+    lines.push("");
+    lines.push("Respond in 1 to 2 short sentences as the patient speaking directly to the doctor:");
+    return lines.join("\n");
+  }
+
+  function answerAsPatient(caseDef, question) {
+    widenScope();
+    var fallback = (caseDef && caseDef.fallback) || "I am not sure what you mean, doctor. Can you ask that a different way?";
+    if (!available()) return Promise.resolve({ error: "ai-off", text: fallback });
+    var prompt = buildPatientPrompt(caseDef, question);
+    var call;
+    try {
+      if (G.SMD_AI && G.SMD_AI.explain) {
+        call = G.SMD_AI.explain(prompt, question);
+      } else if (G.SMD_AI && G.SMD_AI.explainGrounded) {
+        call = G.SMD_AI.explainGrounded({ question: prompt }, { depth: "concise", mode: "clinix-tutor" });
+      } else {
+        call = Promise.resolve({ error: "ai-off" });
+      }
+    } catch (e) {
+      call = Promise.resolve({ error: "server" });
+    }
+    return call.then(function (r) {
+      if (!r || r.error) return { error: (r && r.error) || "server", text: fallback };
+      var s = sanitize(r.text || "");
+      return { text: s.text || fallback, blocked: s.blocked };
+    }).catch(function () {
+      return { error: "server", text: fallback };
+    });
+  }
+
   function isStr(x) { return typeof x === "string"; }
   function isArr(x) { return Object.prototype.toString.call(x) === "[object Array]"; }
 
   var API = {
     // pure, node-testable
     buildPrompt: buildPrompt,
+    buildPatientPrompt: buildPatientPrompt,
     looksLikeDose: looksLikeDose,
     stripMarkers: stripMarkers,
     sanitize: sanitize,
@@ -223,6 +283,7 @@
     DOSE_REFUSAL: DOSE_REFUSAL,
     // browser
     answer: answer,
+    answerAsPatient: answerAsPatient,
     judgeVivaAnswer: judgeVivaAnswer,
     vivaAvailable: vivaAvailable,
     available: available,
