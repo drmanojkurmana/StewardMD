@@ -433,17 +433,17 @@ test("11. a credential is named, never stored, never returned, and a missing one
   const bad = await register(ORG_A, { auth: { kind: "bearer" } });
   assert.equal(bad.__status, 422, "a bearer destination must name where its token lives");
 
-  await register(ORG_A, { auth: { kind: "bearer", secretBinding: "PARTNER_TOKEN" } });
+  await register(ORG_A, { auth: { kind: "bearer", secretBinding: "FHIR_DEST_PARTNER_TOKEN" } });
   await sendOut(ORG_A, pid);
 
   // The binding is not configured: a failed attempt, and NOT an unauthenticated send of a chart.
   const d1 = await dispatch(ORG_A, T0);
   assert.equal(d1.results[0].state, DELIVERY_STATE.FAILED);
   assert.equal(received.length, 0, "clinical data was not sent without the credential");
-  assert.match(d1.results[0].detail, /PARTNER_TOKEN/);
+  assert.match(d1.results[0].detail, /FHIR_DEST_PARTNER_TOKEN/);
 
   // Configure it, and the far end really receives the Authorization header.
-  ENV.PARTNER_TOKEN = "s3cret-partner-token";
+  ENV.FHIR_DEST_PARTNER_TOKEN = "s3cret-partner-token";
   try {
     const d2 = await dispatch(ORG_A, at(24 * 3600_000));
     assert.equal(d2.results[0].state, DELIVERY_STATE.DELIVERED);
@@ -452,9 +452,9 @@ test("11. a credential is named, never stored, never returned, and a missing one
     const list = await as(ADMIN, `/ward/outbound-destinations?orgId=${ORG_A}`, "GET");
     const body = JSON.stringify(list);
     assert.ok(!body.includes("s3cret-partner-token"), "the token never comes back out of the API");
-    assert.equal(list.destinations[0].auth.secretBinding, "PARTNER_TOKEN");
+    assert.equal(list.destinations[0].auth.secretBinding, "FHIR_DEST_PARTNER_TOKEN");
     assert.equal(list.destinations[0].auth.configured, true);
-  } finally { delete ENV.PARTNER_TOKEN; }
+  } finally { delete ENV.FHIR_DEST_PARTNER_TOKEN; }
 });
 
 /* ---- 12: tenant isolation ------------------------------------------------------------------------ */
@@ -515,4 +515,22 @@ test("14. nothing is queued blind: a resource this chart does not hold is refuse
   const d = await dispatch(ORG_A, T0);
   assert.equal(d.attempted, 0);
   assert.equal(received.length, 0);
+});
+
+/* ---- 15: SEC-03, a bearer binding cannot name a platform secret --------------------------------- */
+
+test("15. SEC-03: a hospital admin cannot name a platform secret as the bearer binding", async () => {
+  seedHospitals();
+  const pid = await seedPatient(ORG_A, "MRN-15");
+  for (const binding of ["QUEUE_TOKEN_SECRET", "FOLLOWCARE_PHI_KEY", "CONNECT_MASTER_KEY", "FHIR_DEST_"]) {
+    const reg = await register(ORG_A, { auth: { kind: "bearer", secretBinding: binding } });
+    assert.equal(reg.__status, 422, `${binding} is refused`);
+    assert.equal(reg.error, "bad_secret_binding");
+  }
+  const list = await as(ADMIN, `/ward/outbound-destinations?orgId=${ORG_A}`, "GET");
+  assert.equal(list.destinations.length, 0, "nothing was registered");
+  await sendOut(ORG_A, pid);
+  await dispatch(ORG_A, T0);
+  assert.equal(received.length, 0);
+  assert.ok(!received.some((r) => String(r.headers.authorization || "").includes(ENV.QUEUE_TOKEN_SECRET)));
 });
