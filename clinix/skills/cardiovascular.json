@@ -10,6 +10,11 @@
       "title": "Chest pain",
       "oneLine": "Site, character, radiation, and what it does on exertion",
       "why": "Chest pain is the symptom where a careful history outperforms every test you can order in the first ten minutes. The character and the relationship to exertion separate cardiac pain from the many things that mimic it, and getting it wrong in either direction is dangerous.",
+      "calcs": [
+        "heart",
+        "timi_nstemi",
+        "timistemi"
+      ],
       "media": [],
       "asks": [
         {
@@ -556,6 +561,7 @@
       "oneLine": "Right atrial pressure, read off the neck, at 45 degrees",
       "why": "The JVP is the only place you can see right atrial pressure directly, with no equipment. It is also the sign students most often skip, because it takes correct positioning and patience, and because a wrong angle makes it simply invisible rather than obviously wrong.",
       "media": [
+        "media.dia.jvpwave",
         "media.img.jvpwave",
         "media.vid.jvp2",
         "media.dia.jvp"
@@ -770,6 +776,55 @@
             }
           ],
           "note": "You do not need every wave in every patient. Absent a waves, giant v waves and cannon waves are the three that change a diagnosis at the bedside."
+        },
+        {
+          "heading": "Abnormal JVP waveforms: bedside diagnostic matrix",
+          "body": "Recognizing which wave is distorted isolates right-sided pathology before echocardiography.",
+          "table": {
+            "cols": [
+              "Waveform Abnormality",
+              "Hemodynamic Cause",
+              "Classic Differential"
+            ],
+            "rows": [
+              [
+                "Absent a wave",
+                "Loss of coordinated right atrial contraction",
+                "Atrial fibrillation, SA node arrest"
+              ],
+              [
+                "Giant a wave",
+                "RA contracting against high outflow resistance",
+                "Pulmonary hypertension, Pulmonary stenosis, Tricuspid stenosis"
+              ],
+              [
+                "Cannon a wave (irregular)",
+                "AV dissociation (RA contracts against closed tricuspid valve)",
+                "Complete heart block (3rd degree AV block), ventricular ectopics"
+              ],
+              [
+                "Cannon a wave (regular)",
+                "Junctional rhythm with 1:1 retrograde conduction",
+                "AV nodal re-entrant tachycardia (AVNRT), VT"
+              ],
+              [
+                "Giant v wave (Lancisi sign)",
+                "Systolic regurgitant jet filling RA during RV systole",
+                "Severe tricuspid regurgitation (pulsatile liver, systolic neck thrill)"
+              ],
+              [
+                "Steep, deep y descent (Friedreich sign)",
+                "Rapid early diastolic RV filling with sudden rigid arrest",
+                "Constrictive pericarditis (gives M or W contour), severe RV failure"
+              ],
+              [
+                "Slow / blunted y descent",
+                "Impaired early diastolic inflow into the right ventricle",
+                "Cardiac tamponade, Tricuspid stenosis"
+              ]
+            ]
+          },
+          "note": "Notice the difference: in cardiac tamponade the y descent is blunted or absent, whereas in constrictive pericarditis the y descent is exaggerated and steep (Friedreich sign)."
         },
         {
           "heading": "Two extra manoeuvres worth doing",
@@ -2151,6 +2206,7 @@
         }
       ],
       "media": [
+        "media.dia.auscultareas",
         "media.img.auscultareas",
         "media.vid.auscultareas",
         "media.dia.wiggers",
@@ -2447,6 +2503,71 @@
               ]
             ]
           }
+        },
+        {
+          "heading": "Master bedside dynamic manoeuvres matrix",
+          "body": "When murmur timing and location overlap, bedside dynamic manoeuvres separate the underlying pathology with mathematical predictability.",
+          "wideTable": {
+            "cols": [
+              "Murmur Condition",
+              "Valsalva Strain",
+              "Standing (Sudden)",
+              "Squatting (Sudden)",
+              "Handgrip (Sustained)",
+              "Post-PVC Beat"
+            ],
+            "rows": [
+              [
+                "Aortic Stenosis (AS)",
+                "Decreases (reduced preload)",
+                "Decreases (reduced preload)",
+                "Increases (increased preload & LV volume)",
+                "Decreases / Unchanged",
+                "INCREASES significantly"
+              ],
+              [
+                "Hypertrophic Cardiomyopathy (HOCM)",
+                "INCREASES LOUDLY (smaller LV cavity)",
+                "INCREASES LOUDLY (smaller LV cavity)",
+                "DECREASES (larger LV cavity widens LVOT)",
+                "DECREASES (increased afterload widens LVOT)",
+                "Brockenbrough sign (weaker pulse, louder murmur)"
+              ],
+              [
+                "Mitral Regurgitation (MR)",
+                "Decreases",
+                "Decreases",
+                "Increases",
+                "INCREASES markedly (higher afterload)",
+                "Unchanged"
+              ],
+              [
+                "Mitral Valve Prolapse (MVP)",
+                "Click EARLIER, Murmur LONGER",
+                "Click EARLIER, Murmur LONGER",
+                "Click LATER, Murmur SHORTER",
+                "Click LATER, Murmur SHORTER",
+                "Click earlier"
+              ],
+              [
+                "Ventricular Septal Defect (VSD)",
+                "Decreases",
+                "Decreases",
+                "Increases",
+                "INCREASES markedly",
+                "Unchanged"
+              ],
+              [
+                "Aortic Regurgitation (AR)",
+                "Decreases",
+                "Decreases",
+                "Increases",
+                "INCREASES (higher systemic vascular resistance)",
+                "Unchanged"
+              ]
+            ]
+          },
+          "note": "The golden rule of dynamic auscultation: HOCM and MVP are the ONLY two systolic murmurs that get louder or longer with Valsalva and standing. All other valvular murmurs get softer because venous return falls."
         },
         {
           "heading": "Named murmurs worth recognising",
@@ -3803,6 +3924,9 @@
       "title": "Palpitations",
       "oneLine": "Fast or slow, regular or irregular, and what the patient felt at the start and the end",
       "why": "Palpitation is an awareness of the heartbeat, and the arrhythmia has usually gone by the time you see the patient. The history is often the only recording you will ever get, so it has to be taken as if you were reading a rhythm strip.",
+      "calcs": [
+        "chadsvasc"
+      ],
       "asks": [
         {
           "text": "Tap out on the table what your heart was doing. Ask them to actually do it."

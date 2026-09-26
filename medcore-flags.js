@@ -9,16 +9,19 @@
  * no alerting, no escalation, no scoring and no rules, because all of those already exist and stay
  * where they are. Plan: vault/modules/Medical Core.md.
  *
- * WHAT THIS FILE IS TODAY. The registry only, created as step 1 of that plan (the pre-integration
- * step, tag `medcore-pre-integration`). NOTHING reads these flags yet: there is no medcore/
- * runtime, no boot file, no event subscription, no panel, and this file is not loaded by
- * index.html. Turning either flag on today changes nothing anywhere, which is the point - the flag
- * exists before the code it gates so that every later commit lands behind an already-registered
- * switch rather than adding a switch and a clinical path in the same change.
+ * WHAT THIS FILE IS TODAY. The registry for the DETERMINISTIC Medical Core layer, which is built
+ * and shipped: medcore/ (units, patient state, missing information, what changed, features,
+ * outcomes), medcore-boot.js, and the panel in icu.js. `smd_medcore` DEFAULTS ON and the panel
+ * carries a BETA badge; owner decision, recorded in vault/decisions/Decisions.md. Off is still a
+ * COMPLETE no-op: medcore-boot.js checks the flag before its first dynamic import and its first
+ * fetch, so `?medcore=0` removes the feature with no edit to revert.
  *
- * BOTH FLAGS DEFAULT OFF AND MUST STAY OFF until the Definition of Done in the module note is met.
- * There is no model, no artifact and no validated outcome in the repository, so there is nothing
- * either flag could honestly enable. See vault/Flags.md for the register.
+ * WHAT DEFAULT ON DOES NOT INCLUDE: any model. `smd_medcore_shadow` stays DEFAULT OFF and there is
+ * no admitted artifact. Every candidate trained on the available public ICU data was REFUSED by
+ * the admission gates - a measurement-frequency-only probe matched or beat the model, which is the
+ * shortcut hazard HAZ-ML-01 showing up in real data. So there is no probability to display and
+ * nothing that could gate, relax or override a deterministic rule. See vault/modules/Medical
+ * Core.md for the gate results and vault/Flags.md for the register.
  *
  * NO CLINICAL PATH. A Medical Core probability never gates, relaxes or overrides a deterministic
  * rule, score or refusal, and there is no code path from a probability to an order, a dose or a
@@ -30,19 +33,21 @@
   // type: bool. def: default when unset. query: ?alias (or null for no query override).
   var DEFS = {
     smd_medcore: {
-      type: "bool", def: false, query: "medcore",
-      desc: "Medical Core master flag. DEFAULT OFF and nothing reads it yet. When the deterministic " +
-        "feature layer lands (Phase 1: patient state, what changed, missing information, unit and " +
-        "freshness checks) this is what makes it reachable. Off must be a COMPLETE no-op: not " +
-        "loading the medcore files removes the feature entirely, with no edit to revert."
+      type: "bool", def: true, query: "medcore",
+      desc: "Medical Core master flag. DEFAULT ON, labelled BETA in the UI. What it enables is the " +
+        "DETERMINISTIC layer only: patient state, what changed, missing information, unit and " +
+        "freshness checks. No model and no probability - see smd_medcore_shadow. Off must be a " +
+        "COMPLETE no-op: `?medcore=0` stops medcore-boot.js before its first import and its first " +
+        "fetch, removing the feature entirely with no edit to revert."
     },
     smd_medcore_shadow: {
       type: "bool", def: false, query: "medcore_shadow",
       desc: "Evaluate Medical Core decisions alongside the existing deterministic path, for " +
-        "comparison only. DEFAULT OFF. Shadow means the output reaches NOBODY: no panel, no " +
-        "recognition prompt, no notification, no clinician-visible log, exactly as " +
-        "wardsynq-mlops.js requires of a model in shadow. Requires smd_medcore. Nothing reads it " +
-        "yet; when it does, the evaluator is installed from outside the host file so that not " +
+        "comparison only. DEFAULT OFF, and it stays off: no model artifact has passed the " +
+        "admission gates on the available data, so there is nothing to shadow. Shadow means the " +
+        "output reaches NOBODY: no panel, no recognition prompt, no notification, no " +
+        "clinician-visible log, exactly as wardsynq-mlops.js requires of a model in shadow. " +
+        "Requires smd_medcore. The evaluator is installed from outside the host file so that not " +
         "loading it removes the change completely (the wardsynq-shadow.js pattern)."
     }
   };

@@ -5,6 +5,40 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-26 · Medical Core ships its DETERMINISTIC half ON by default as BETA; the model half stays off
+
+**Decision.** `smd_medcore` defaults to `true` in `medcore-flags.js`. Owner's call. What that turns on for every
+user is the deterministic layer only: patient state, "what changed", "missing information", unit and freshness
+checks, rendered as a panel in the ICU workspace labelled **BETA**. `smd_medcore_shadow` stays `false` and no model
+artifact is admitted for any clinical purpose.
+
+**Why the model half is off, and why that is a result rather than a delay.** Every candidate trained on the public
+ICU data we can lawfully use was REFUSED by its own admission gates. The decisive one is `beatsFrequencyProbe`: a
+probe using nothing but *how often observations were taken* scored 0.772 against the model's 0.785 on eICU, and
+0.677 against 0.724 pooled. Pooled across three sources the learned model added nothing over a deterministic
+threshold rule (0.7244 vs 0.7229) and missed MORE events at an equal alert budget (39 vs 37). One hospital scored
+0.248, worse than chance. That is hazard HAZ-ML-01 (measurement-frequency shortcut) appearing in real data exactly
+as the safety case predicted, and no synthetic cohort surfaced it — the synthetic probe scored 0.53–0.59, which is
+why the synthetic run passed all seven gates and the real run failed four. **The pipeline refusing its own model is
+the pipeline working.**
+
+**Why the deterministic half is safe to default on.** It computes nothing a clinician could not compute from the
+same chart. It states what it is not ("no prediction, no alert"), states that its lists are FILTERED ("Not a
+complete list"), and reports its clinical packs as `unapproved` in the UI. `?medcore=0` remains a complete no-op:
+`medcore-boot.js` reads the flag before its first dynamic import and its first fetch, so off removes the feature
+with no edit to revert. Pinned in a real browser by `test/run-medcore-ui.mjs`, both directions.
+
+**Trade-off, stated plainly.** Two things are being accepted, not solved. (1) `medcore/data/change-bands.json` —
+roughly 26 numbers deciding what counts as a change worth showing — has never been read by a clinician, and default
+ON puts them in front of every user. (2) The 2026-09-19 rule in [[Flags]] required a named clinician's approval of
+`outcomes.json` before either flag moved to ON. That approval does not exist; the rule is met by scope (nothing
+with a model shipped) rather than by sign-off. The rule is unchanged for shadow and for artifact admission: a model
+still needs the named clinical sign-off.
+
+**Status.** Shipped to `main`. Not yet in front of any clinician: StewardMD is mobile-only, so this reaches users
+only after `scripts/build-www.sh` → `cap sync` → native rebuild → reinstall, and a reinstall destroys device-local
+SURGX notes. Open: clinician review of `change-bands.json`.
+
 ## 2026-09-25 · Radiology images: PROXIED for an in-app viewer, still never STORED
 
 **Decision.** WardSynQ now shows DICOM images inside the app. The server reads them from the hospital's own
@@ -9831,6 +9865,23 @@ composer's tool row was unbalanced and shifted when typing.
 **Trade-off.** The Close pill is deliberately the loudest control in the header. At 320px the model
 chip truncates ("MaiK C...") and drops its caret, as it truncated before. Status: PR maik-ui-close-bg,
 browser-verified in headless Chrome, not yet on a device.
+
+## 2026-09-26 - MaiK Cloud: the Knowledge Base is MaiK's private notes, never "the passage you sent"
+
+**Decision.** The retrieved Knowledge Base text reaches the model as "YOUR REFERENCE NOTES (private;
+the clinician cannot see them)", not "RETRIEVED STEWARDMD KNOWLEDGE (PRIMARY SOURCE)". KNOWLEDGE_SYS,
+RAG_SYS, TUTOR_SYS, ABSTAIN_RULE and the CITE-OR-ABSTAIN suffix say: prefer the notes where they fit,
+silently set aside the ones that do not, never mention them, and state any abstention about the
+medicine. A server post-filter (`functions/_maik_metatalk.js`) removes remaining sentences about the
+material on every /explain exit (whole answer, SSE, live stream, cache hit). Empty engine/patient/notes
+headers are no longer sent on knowledge questions.
+**Why.** Owner, 2026-09-26: "wont the user think we are using rag or sending rag? why is agent tell the
+passage yu sent is irrelavant?" A lexical mis-route ("RA factor" name-matched Factor XII deficiency)
+was narrated to the doctor as "the provided StewardMD knowledge focuses on ...".
+**Trade-off.** The filter is precision-first: an ambiguous phrase ("the information you provided")
+is kept, so a rare slip can still get through. The mis-route itself is unchanged (a safe relevance gate
+needs a scored check, see Roadmap "MaiK Cloud: relevance gate and input cost"). Live streaming now releases whole lines, not tokens.
+Status: PR maik-no-passage-talk; unit + handler tests, not model-evaluated on live Gemini.
 
 ## 2026-09-25 - CliniX and SURGX released to all users; KardiQ X, ThoreX and FundX go back to code-gated beta
 

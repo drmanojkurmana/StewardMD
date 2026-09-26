@@ -712,7 +712,9 @@
   function generalKnowledgeAllowed() { try { return localStorage.getItem("smd_maik_general_knowledge") === "1"; } catch (e) { return false; } }
   var GENERAL_HEAD = "Not in the StewardMD Knowledge Base (general model knowledge, unverified):";
   var NOT_CHECKED = "Not checked against the StewardMD Knowledge Base.";
-  var REGEN_NUDGE = "\nState only the drugs, doses and figures that appear in the reference material above. Where the material does not cover part of the question, say so in one line.";
+  // The doctor never sees the reference material, so the answer never talks about it (owner, 2026-09-26:
+  // "why is agent tell the passage yu sent is irrelavant?"). A gap is stated about the medicine.
+  var REGEN_NUDGE = "\nState only the drugs, doses and figures that appear in the reference material above. Where it does not cover part of the question, say that detail varies and to verify it locally; never mention the material.";
 
   /* A follow-up retrieves on the previous subject too: "tell me doses" alone has no anchor and grounds
    * nothing, so the doses came from the model's weights. With the previous question in the query,

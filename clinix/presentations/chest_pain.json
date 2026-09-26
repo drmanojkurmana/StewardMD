@@ -1,0 +1,178 @@
+{
+  "_comment": "CliniX 2.0 Presentation Library: Symptom-First Approach to Acute Chest Pain. Reuses shared Skills as atoms and provides tiered clinical reasoning from recognition to discriminators and emergency actions.",
+  "schemaVersion": 1,
+  "id": "chest_pain",
+  "title": "Approach to Acute Chest Pain",
+  "subtitle": "STEMI vs NSTEMI, Aortic Dissection, Pulmonary Embolism, Tension Pneumothorax, and Esophageal Rupture",
+  "system": "cardiovascular",
+  "estMinutes": 50,
+  "review": {
+    "status": "approved",
+    "reviewer": "Clinical Review Team"
+  },
+  "layers": {
+    "recognise": {
+      "redFlags": [
+        "Radiation of pain to both shoulders or both arms (highest likelihood ratio for acute myocardial infarction)",
+        "Tearing, ripping pain radiating to the interscapular back with pulse deficit or BP differential > 20 mmHg between arms (acute aortic dissection)",
+        "Sudden dyspnoea, pleuritic chest pain, tachypnoea > 24/min, and tachycardia with clear lung fields (pulmonary embolism)",
+        "Severe unilateral pleuritic pain, respiratory distress, hyperresonance, absent breath sounds, and tracheal deviation (tension pneumothorax)",
+        "Severe retrosternal pain following forceful vomiting with surgical emphysema in the neck (Boerhaave syndrome / esophageal rupture)",
+        "Hypotension, cold clammy extremities, oliguria, or altered sensorium (cardiogenic shock)",
+        "Syncope or presyncope associated with chest pain (critical aortic stenosis, PE, aortic dissection, or malignant arrhythmia)"
+      ],
+      "vitalsPriorities": [
+        "12-Lead ECG within 10 minutes of medical contact: The single highest-priority triage investigation; look for ST elevation (STEMI), ST depression / T wave inversion (NSTEMI/UA), or new LBBB.",
+        "Bilateral Arm Blood Pressure: Check BP in both upper extremities; a systolic BP difference > 20 mmHg raises high suspicion for Stanford Type A aortic dissection.",
+        "Continuous Pulse Oximetry and Rhythm Monitoring: Hypoxemia warrants immediate supplemental oxygen titration (target 94-98%, or 88-92% in hypercapnic respiratory failure risk)."
+      ]
+    },
+    "classify": {
+      "tempo": {
+        "hyperacute_minutes": [
+          "ST-Elevation Myocardial Infarction (STEMI)",
+          "Acute Aortic Dissection",
+          "Massive Pulmonary Embolism",
+          "Tension Pneumothorax",
+          "Boerhaave Syndrome (Esophageal Rupture)"
+        ],
+        "acute_hours_to_days": [
+          "Non-ST-Elevation Myocardial Infarction (NSTEMI) / Unstable Angina",
+          "Acute Pericarditis / Myopericarditis",
+          "Community-Acquired Pneumonia with Pleurisy",
+          "Acute Cholecystitis / Pancreatitis (referred pain)"
+        ],
+        "chronic_recurrent_weeks_to_months": [
+          "Stable Angina Pectoris (exertional, relieved by rest/nitrates within 5 minutes)",
+          "Gastroesophageal Reflux Disease (GERD) / Esophageal Motility Disorders",
+          "Costochondritis (Tietze Syndrome with localized cartilage swelling)",
+          "Cervical Radiculopathy",
+          "Anxiety Neurosis / Panic Disorder with Hyperventilation"
+        ]
+      },
+      "organSystems": {
+        "cardiovascular": [
+          "Ischemic: STEMI, NSTEMI, Unstable Angina, Microvascular Angina",
+          "Non-ischemic: Acute Pericarditis, Myocarditis, Aortic Valve Stenosis, Hypertrophic Cardiomyopathy (HOCM)"
+        ],
+        "aortic_vascular": [
+          "Stanford Type A Aortic Dissection (involving ascending aorta — surgical emergency)",
+          "Stanford Type B Aortic Dissection (descending aorta — medical management unless complicated)",
+          "Thoracic Aortic Aneurysm expansion or impending rupture"
+        ],
+        "pulmonary_pleural": [
+          "Pulmonary Embolism with pulmonary infarction",
+          "Tension or Primary Spontaneous Pneumothorax",
+          "Pleurisy secondary to pneumonia, tuberculosis, or connective tissue disease",
+          "Malignant pleural mesothelioma or chest wall invasion"
+        ],
+        "gastrointestinal": [
+          "Gastroesophageal reflux disease (reflux esophagitis)",
+          "Esophageal spasm (diffuse esophageal spasm / nutcracker esophagus)",
+          "Boerhaave syndrome (transmural esophageal perforation)",
+          "Peptic ulcer perforation (referred subdiaphragmatic or retrosternal pain)",
+          "Acute pancreatitis, Acute cholecystitis"
+        ],
+        "musculoskeletal_chestwall": [
+          "Costochondritis / Tietze syndrome (tender costochondral junctions)",
+          "Rib fractures, Intercostal muscle strain",
+          "Herpes Zoster (pre-eruptive dermatomal radicular pain prior to vesicular rash)"
+        ]
+      }
+    },
+    "discriminators": [
+      {
+        "title": "STEMI vs Acute Pericarditis",
+        "finding": "ECG: Pericarditis shows widespread, concave-upward ('saddle-shaped') ST elevation in almost all leads with PR depression (except aVR which has PR elevation), without reciprocal ST depressions. STEMI shows localized, convex-upward ('tombstone') ST elevation in specific vascular territories (e.g., II, III, aVF for inferior) with reciprocal ST depression in opposite leads.",
+        "highYield": "PR segment depression in lead II and PR elevation in aVR are the earliest and most specific ECG signs of acute pericarditis."
+      },
+      {
+        "title": "Aortic Dissection vs Acute Myocardial Infarction",
+        "finding": "Pain character: Dissection pain is abrupt and maximal at the very onset, described as tearing or ripping, migrating from the anterior chest to the interscapular back. ACS pain typically builds gradually (crescendo), described as heaviness or pressure.",
+        "highYield": "Aortic dissection can cause STEMI if the dissection flap shears into the right coronary artery ostium (inferior STEMI). Thrombolysis in this scenario is fatal."
+      },
+      {
+        "title": "Angina Pectoris vs Esophageal Spasm",
+        "finding": "Both conditions can be retrosternal, radiate to the jaw/left arm, and respond to sublingual nitroglycerin (which relaxes both coronary and esophageal smooth muscle). Angina is strictly provoked by physical exertion and relieved in 2-5 minutes by rest; esophageal spasm is provoked by hot or cold food and occurs at rest.",
+        "highYield": "Relief with nitroglycerin DOES NOT confirm cardiac origin, as esophageal smooth muscle relaxes equally with nitrates."
+      },
+      {
+        "title": "Pulmonary Embolism vs Musculoskeletal Pain",
+        "finding": "PE pain is pleuritic (sharpened by deep inspiration), accompanied by tachypnoea, unexplained sinus tachycardia, and arterial hypoxemia. Musculoskeletal pain is reproducibly tender on direct point palpation of the chest wall and aggravated by trunk twisting.",
+        "highYield": "Direct palpation tenderness on the chest wall makes cardiac ischemia highly unlikely, but does not completely exclude PE if pulmonary infarction abuts parietal pleura."
+      }
+    ],
+    "dontMiss": [
+      {
+        "disease": "Acute Coronary Syndrome (STEMI / Very High-Risk NSTEMI)",
+        "clue": "Retrosternal pressure radiating to left arm or jaw, diaphoresis, nausea, hemodynamic compromise. Levine's sign.",
+        "action": "Immediate chewable Aspirin 300 mg + P2Y12 inhibitor (Ticagrelor 180 mg or Clopidogrel 300-600 mg), unfractionated heparin, activate primary PCI pathway (< 90 min door-to-balloon) or thrombolytic therapy (< 30 min door-to-needle) if PCI unavailable within 120 minutes."
+      },
+      {
+        "disease": "Acute Aortic Dissection",
+        "clue": "Tearing back pain, pulse deficit, BP asymmetry > 20 mmHg, new aortic regurgitation murmur (early diastolic decrescendo), wide mediastinum on CXR.",
+        "action": "DO NOT GIVE ANTICOAGULANTS OR THROMBOLYTICS. Immediate IV beta-blocker (Esmolol or Labetalol) to lower heart rate < 60 bpm and SBP to 100-120 mmHg, followed by vasodilator if needed. Urgent CT Aortography and emergent cardiothoracic surgical consultation."
+      },
+      {
+        "disease": "Massive Pulmonary Embolism",
+        "clue": "Acute unexplained dyspnoea, pleuritic chest pain, right ventricular strain (S1Q3T3 on ECG, acute RV dilatation on echo), hypotension / syncope.",
+        "action": "Immediate IV resuscitation, therapeutic anticoagulation (unfractionated heparin bolus + infusion), emergency systemic thrombolysis (e.g. Alteplase 100 mg over 2 hours) or catheter-directed embolectomy for hemodynamically unstable PE."
+      },
+      {
+        "disease": "Tension Pneumothorax",
+        "clue": "Acute distress, unilateral hyperresonance, absent breath sounds, contralateral tracheal deviation, neck vein engorgement, shock.",
+        "action": "IMMEDIATE NEEDLE THORACOSTOMY (14G cannula in 2nd ICS midclavicular line or 5th ICS anterior axillary line) without waiting for radiographic confirmation, followed by intercostal tube drainage."
+      },
+      {
+        "disease": "Boerhaave Syndrome (Esophageal Perforation)",
+        "clue": "Violent vomiting followed by excruciating retrosternal and epigastric pain, surgical emphysema in suprasternal notch (subcutaneous crepitus), shock.",
+        "action": "NPO, broad-spectrum IV antibiotics covering oral anaerobes and gram-negatives, aggressive IV resuscitation, urgent water-soluble contrast esophagogram (Gastrografin) or CT chest, emergent surgical repair."
+      }
+    ],
+    "investigations": {
+      "step1_immediate": [
+        "12-Lead ECG within 10 minutes of door presentation (repeat at 15-30 min intervals if initial ECG non-diagnostic but symptoms persist)",
+        "High-sensitivity Cardiac Troponin (hs-cTnI or hs-cTnT) at presentation and 1-2 hours later",
+        "Point-of-Care Ultrasound (POCUS / FOCUS: rule out pericardial tamponade, regional wall motion abnormalities, severe RV strain, aortic root dilation)",
+        "Bedside capillary blood glucose and venous blood gas"
+      ],
+      "step2_urgent": [
+        "Erect Chest Radiograph (evaluate for pneumothorax, widened superior mediastinum > 8 cm, pleural effusion, rib fractures)",
+        "Complete Blood Count, Serum Creatinine, Electrolytes, Coagulation Screen (PT/INR, aPTT)",
+        "D-Dimer assay (only indicated if PE or aortic dissection suspected with low-intermediate pre-test probability; high false-positive rate in elderly/hospitalized)",
+        "Serum Amylase and Lipase (rule out acute pancreatitis)"
+      ],
+      "step3_confirmatory": [
+        "Coronary Angiography (invasive catheterization for definitive revascularization in STEMI/NSTEMI)",
+        "CT Pulmonary Angiography (CTPA) for suspected pulmonary embolism",
+        "CT Aortography (with contrast, from lung apices to iliac bifurcation for aortic dissection)",
+        "Echocardiogram (formal TTE/TEE: valvular morphology, ventricular ejection fraction, pericardial effusion)"
+      ]
+    },
+    "skills": [
+      "skill.hx.cvs.chestpain",
+      "skill.gen.vitals",
+      "skill.exam.cvs.inspection",
+      "skill.exam.cvs.jvp",
+      "skill.exam.cvs.pulse",
+      "skill.exam.cvs.apexbeat",
+      "skill.exam.cvs.heartsounds",
+      "skill.exam.cvs.murmurs",
+      "skill.exam.resp.auscultation"
+    ],
+    "examPearls": [
+      {
+        "topic": "SOCRATES Framework for Pain",
+        "text": "Every university viva examiner insists on structured pain analysis: Site (retrosternal), Onset (sudden vs insidious), Character (pressure, crushing, stabbing, tearing), Radiation (jaw, neck, left arm, interscapular), Associations (diaphoresis, nausea, vomiting, syncope), Timing (duration, episodic vs constant), Exacerbating/relieving factors (exertion, respiration, food, nitrates), Severity (1 to 10 scale)."
+      },
+      {
+        "topic": "Levine's Sign",
+        "text": "The patient describes retrosternal discomfort by holding a clenched fist over the sternum. Highly specific physical sign of ischemic cardiac discomfort (positive likelihood ratio ~ 4.5)."
+      },
+      {
+        "topic": "Wellens' Syndrome and de Winter Sign",
+        "text": "Wellens' Syndrome: Deeply inverted or biphasic T-waves in V2-V3 in a pain-free patient following an episode of chest pain indicates critical proximal LAD stenosis. de Winter Sign: Tall, prominent, symmetric T-waves with 1-3 mm upsloping ST depression at the J-point in precordial leads indicates acute anterior STEMI equivalent."
+      }
+    ]
+  }
+}
