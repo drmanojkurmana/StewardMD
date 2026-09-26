@@ -1217,6 +1217,12 @@
       try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("kardiox", openKardiox); return; } } catch (e) {}
       openKardiox();
     },
+    kxlearn: function () {
+      // Learn ECG: the KardiQ X atlas + quiz with NO AI (audit finding 11, owner decision 2026-09-26).
+      // Deliberately NOT behind SMD_XACCESS or smd_kardiox: KARDIOX.openLearn() checks only its own
+      // kill switch (smd_kardiox_learn) and sign-in, and refuses every AI screen inside.
+      if (window.KARDIOX && KARDIOX.openLearn) KARDIOX.openLearn(); else toast("Learn ECG loading…");
+    },
     thorex: function () {
       // ThoreX AI — opened from its Clinical-Tools tile, sibling of KardiQ X above.
       // Gated by Experimental Access like FundX/KardiQ X; opens directly if the framework isn't loaded.
@@ -1225,10 +1231,13 @@
       openThorex();
     },
     sknx: function () {
-      // SknX AI — dermatology (skin lesion/rash) tile, sibling of KardiQ X/ThoreX above. Unlike those,
-      // SknX is not code-gated via SMD_XACCESS — it's gated internally by SKNX.isOn() (flag + a
-      // non-free entitlement), so open() is already a complete no-op when the gate fails.
-      if (window.SKNX && SKNX.open) SKNX.open(); else toast("SknX AI loading…");
+      // SknX AI — dermatology (skin lesion/rash) tile, sibling of KardiQ X/ThoreX above. Gated inside
+      // SKNX.open() by SKNX.isOn() (flag AND (access code OR early-access plan)); when the flag is on
+      // but access is missing, open() shows the SMD_XACCESS code gate itself. The tile goes through
+      // SMD_XACCESS.gate first, like the other three, so the code gate precedes the beta notice.
+      function openSknx() { if (window.SKNX && SKNX.open) SKNX.open(); else toast("SknX AI loading…"); }
+      try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("sknx", openSknx); return; } } catch (e) {}
+      openSknx();
     },
     clinix: function () {
       // CliniX — clinical learning for medical students. Like SknX, it is not code-gated via
@@ -1953,10 +1962,12 @@
    *   1. the module's own isOn() (the access-code / tester path)   — unchanged
    *   2. ?thorex=1 / ?thorex=0 style query param                   — unchanged, still authoritative
    *   3. localStorage "1" = on, any other explicit value = off     — unchanged, a tester's "0" wins
-   *   4. only when NOTHING above decided: Physician Pro early access (owner decision 2026-09-18).
-   * So a non-physicianpro account with no flag still sees no tile and fetches nothing, and a tester
-   * who deliberately turned a module off keeps it off. */
-  function earlyAccessTier() { try { return !!(window.SMD_PRO && window.SMD_PRO.tierSync) && window.SMD_PRO.tierSync() === "physicianpro"; } catch (e) { return false; } }
+   *   4. only when NOTHING above decided: plan early access (owner decisions 2026-09-18 and
+   *      2026-09-26: Clinician Pro and Ultimate). The tier list lives in ONE helper,
+   *      SMD_PRO.hasEarlyAccess() (account.js); never compare a tier string here.
+   * So an account without early access and with no flag still sees no tile and fetches nothing, and a
+   * tester who deliberately turned a module off keeps it off. */
+  function earlyAccessTier() { try { return !!(window.SMD_PRO && window.SMD_PRO.hasEarlyAccess) && !!window.SMD_PRO.hasEarlyAccess(); } catch (e) { return false; } }
   function expTileOn(lsKey, param, modName) {
     try {
       var mod = modName && window[modName];
@@ -1982,6 +1993,11 @@
       eligible: function () { return expTileOn("smd_thorex", "thorex", "THOREX"); } },
     { act: "sknx", ic: "dermatology", tt: "SknX AI", sub: "Lesion analysis", feat: true, beta: true, anim: "derm",
       eligible: function () { return expTileOn("smd_sknx", "sknx", "SKNX"); } },
+    // Learn ECG (KardiQ X atlas + quiz, no AI). Open to every user without the AI access code (audit
+    // finding 11, owner decision 2026-09-26). eligible() reads the kill switch directly because
+    // home.js loads before kardiox-flags.js: ?kxlearn=0 or localStorage smd_kardiox_learn=0 hides it.
+    { act: "kxlearn", ic: "ecg_heart", tt: "Learn ECG", sub: "ECG atlas & quiz",
+      eligible: function () { try { var q = (location.search.match(/[?&]kxlearn=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_kardiox_learn") !== "0"; } catch (e) { return true; } } },
     { act: "clinix", ic: "school", anim: "clinix", tt: "CliniX", sub: "Clinical learning", feat: true,
       eligible: function () { try { if (window.CLINIX && CLINIX.isOn) return CLINIX.isOn(); var q = (location.search.match(/[?&]clinix=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_clinix") !== "0"); } catch (e) { return true; } } },
     // SURGX (SURGˣ) — Surgical Intelligence. eligible() reads localStorage DIRECTLY rather than
@@ -2068,7 +2084,7 @@
     return out;
   }
   // Universal search reads the same registry the home grid renders, filtered by eligibility.
-  window.SMD_HOME_TOOLS = function () { return HOME_TOOLS.filter(homeToolEligible).map(function (t) { return { act: t.act, tt: t.tt, sub: t.sub || "", ic: t.ic || "" }; }); };
+  window.SMD_HOME_TOOLS = function () { return HOME_TOOLS.filter(function (t) { return homeToolEligible(t) && !roleLocked(t.act); }).map(function (t) { return { act: t.act, tt: t.tt, sub: t.sub || "", ic: t.ic || "" }; }); };
   // Drops `dragEl` into `container` (list or 2D grid) at whichever slot the pointer is over, on
   // every move, and persists the resulting order on release. Shared by the Customize-tools sheet
   // (vertical list) and the home tool grid (2D) - one implementation, no per-surface duplicate.
@@ -2187,20 +2203,44 @@
     // a surgical tile reads wrong.
     surgx: '<img class="ai-brandmark ai-surgx-img" src="/surgx-logo.png" alt="">'
   };
-  function homeToolTile(t) {
+  /* Role box (owner, 2026-09-26): tools outside the user's role stay on Home but locked, after the
+   * open ones, and explain themselves on tap. role-features.js owns the map; this is presentation
+   * only (the real gates are server-side), and with no role chosen nothing is locked. */
+  function roleLocked(act) { try { return !!(window.SMD_ROLE && !SMD_ROLE.allows(act)); } catch (e) { return false; } }
+  function openRoleLock(act) {
+    var t = homeToolByAct(act), R = window.SMD_ROLE, title = (t && t.tt) || "This tool";
+    openSheet('<div class="hv-sh-t">' + smdEsc(title) + ' is locked for your role</div>' +
+      '<p style="font:500 13.5px/1.5 var(--hfont,system-ui);color:var(--hmut,#64748b);margin:6px 2px 14px">' + smdEsc(R ? R.lockReason(act, title) : "") + '</p>' +
+      '<div style="display:flex;gap:8px">' +
+        (R && !R.isVerified() ? '<button type="button" data-rl="change" style="flex:1;border:0;border-radius:12px;padding:12px;font:700 14px var(--hfont,system-ui);background:var(--hp,var(--teal,#12a594));color:#fff;cursor:pointer">Change my role</button>' : '') +
+        '<button type="button" data-rl="close" style="flex:1;border:1px solid var(--hbd,#e2e8f0);border-radius:12px;padding:12px;font:700 14px var(--hfont,system-ui);background:none;color:var(--hink,#0f172a);cursor:pointer">OK</button>' +
+      '</div>');
+    var sh = sheetEl();
+    sh.querySelectorAll("[data-rl]").forEach(function (b) {
+      b.onclick = function () { closeSheet(); if (b.getAttribute("data-rl") === "change") setTimeout(openAccount, 120); };
+    });
+  }
+  try { window.SMD_openRoleLock = openRoleLock; } catch (e) {}
+  function homeToolTile(t, locked) {
     var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : ric(t.ic);
     // A1: the Specialty Kits tile names the doctor's own kit once one is known (profile or chosen).
     if (t.act === "speckit") { var mk = ""; try { mk = (window.SMD_KITS && SMD_KITS.myLabel) ? SMD_KITS.myLabel() : ""; } catch (e) {} if (mk) t = { act: t.act, ic: t.ic, tt: t.tt, sub: "My kit: " + mk, defOn: t.defOn, feat: t.feat }; }
     // BETA chip: these models are clinically unvalidated, so the label rides the tile on EVERY path
     // that renders it (access code, tester flag, Physician Pro early access). Not dismissible.
-    return '<button class="rnav-tile' + (t.feat ? ' feat' : '') + '" data-act="' + t.act + '" aria-label="' + t.tt + (t.beta ? ', beta' : '') + '">' +
+    return '<button class="rnav-tile' + (t.feat && !locked ? ' feat' : '') + (locked ? ' role-locked' : '') + '" data-act="' + t.act + '" aria-label="' + t.tt + (t.beta ? ', beta' : '') + (locked ? ', locked for your role' : '') + '"' + (locked ? ' style="opacity:.5;filter:grayscale(1)"' : '') + '>' +
       '<span class="rnav-badge">' + icon + '</span>' +
       (t.beta ? '<span class="rnav-tile-beta">BETA</span>' : '') +
+      (locked ? '<span class="rnav-tile-lock" aria-hidden="true" style="position:absolute;top:6px;right:6px;display:inline-flex">' + ric("lock") + '</span>' : '') +
       '<span class="rnav-tile-tt">' + t.tt + '</span><span class="rnav-tile-sub">' + t.sub + '</span></button>';
   }
   function renderHomeToolsGrid() {
     var html = "", TOOLS = orderedHomeTools();
-    for (var i = 0; i < TOOLS.length; i++) { var t = TOOLS[i]; if (homeToolEligible(t) && homeToolVisible(t)) html += homeToolTile(t); }
+    var lockedHtml = "";
+    for (var i = 0; i < TOOLS.length; i++) {
+      var t = TOOLS[i]; if (!(homeToolEligible(t) && homeToolVisible(t))) continue;
+      if (roleLocked(t.act)) lockedHtml += homeToolTile(t, true); else html += homeToolTile(t);
+    }
+    html += lockedHtml;
     html += '<button class="rnav-tile addtool" data-act="customizetools" aria-label="Add or customise tools">' +
       '<span class="rnav-badge">' + ric("add") + '</span><span class="rnav-tile-tt">Add Tool</span><span class="rnav-tile-sub">Customize</span></button>';
     return html;
@@ -2208,6 +2248,7 @@
   // The tier verdict arrives from /api/billing/status after first paint, so a Physician Pro on a
   // fresh device would otherwise not see the early-access tiles until the next launch.
   try { window.addEventListener("smd:tier", function () { var g = document.getElementById("rnavToolsGrid"); if (g) g.innerHTML = renderHomeToolsGrid(); }); } catch (e) {}
+  try { document.addEventListener("smd:role-changed", function () { var g = document.getElementById("rnavToolsGrid"); if (g) g.innerHTML = renderHomeToolsGrid(); }); } catch (e) {}
   function openToolsCustomize() {
     var rows = "", TOOLS = orderedHomeTools();
     for (var i = 0; i < TOOLS.length; i++) {
@@ -2520,6 +2561,7 @@
       if (a === "ku") return openKuPanel();
       if (a === "more") return openMore();
       if (a === "home") { window.scrollTo(0, 0); var m = root.querySelector(".v3-main"); if (m) m.scrollTo({ top: 0, behavior: "smooth" }); return; }
+      if (ACT[a] && roleLocked(a)) return openRoleLock(a);
       if (ACT[a]) ACT[a]();
     });
   }
@@ -2693,6 +2735,7 @@
         if (a === "terms") { closeSheet(); if (typeof openModal === "function") openModal("termsModal"); return; }
         closeSheet();
         if (a === "connect") a = "agentconnect";
+        if (ACT[a] && roleLocked(a)) return openRoleLock(a);
         if (ACT[a]) ACT[a]();
       });
     });
@@ -3315,6 +3358,7 @@
 
       '<div class="hv-pf-sec">Professional details</div>' +
       '<div class="hv-pf-card" id="pfPro">' +
+        row("Role", "role", { value: (window.SMD_ROLE && SMD_ROLE.labelOf(SMD_ROLE.current())) || "", placeholder: "Not set", editLabel: "Change" }) +
         row("Medical reg. no", "regno", { value: "", placeholder: "Loading…", edit: false }) +
         row("Hospital / college", "hospital", { value: "", placeholder: "Loading…", edit: false }) +
         row("Degree", "degree", { value: "", placeholder: "Loading…", edit: false }) +
@@ -3542,6 +3586,12 @@
       setRow("regno", d.regNo, { placeholder: pendingCert ? "Awaiting certificate" : "Not set" });
       setRow("hospital", d.hospital, { editLabel: d.hospital ? "Change" : "Choose" });
       setRow("degree", d.degree, { editLabel: d.degree ? "Change" : "Choose" });
+      // Role box (2026-09-26). A VERIFIED role (from the server) is shown and not editable here:
+      // changing it means re-verifying. A declared role is editable.
+      try {
+        var R0 = window.SMD_ROLE;
+        if (R0) setRow("role", R0.labelOf(R0.current() || d.role), R0.isVerified() ? { edit: false } : { editLabel: (R0.current() || d.role) ? "Change" : "Choose" });
+      } catch (e) {}
       setRow("speciality", d.speciality, { editLabel: d.speciality ? "Change" : "Choose" });
       setRow("city", d.city);
       setRow("phone", d.phone);
@@ -3577,6 +3627,19 @@
             }
             // Degree and speciality are CHOICES, not free text: the option lists live in
             // profile-setup.js so the first-run form and this card can never drift apart.
+            if (f === "role") {
+              var RL = window.SMD_ROLE;
+              if (!RL) { if (window.toast) toast("Still loading, try again in a moment"); return; }
+              openChoicePicker("What best describes you?", RL.labels(), function (val) {
+                var k = RL.normalize(val); if (!k) return;
+                RL.set(k);
+                save({ role: k }).then(function () {
+                  if (window.toast) toast("Role updated. Home now shows the tools for a " + RL.labelOf(k) + ".");
+                  openAccount();
+                }).catch(function () { if (window.toast) toast("Saved on this device. It will sync when you are online."); openAccount(); });
+              });
+              return;
+            }
             if (f === "degree" || f === "speciality") {
               var PS = window.SMD_PROFILE_SETUP;
               var opts = PS ? (f === "degree" ? PS.DEGREES : PS.SPECIALITIES) : null;

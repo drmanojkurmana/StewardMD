@@ -81,6 +81,36 @@
     });
   }
 
+  /* ── Learn ECG, no AI (audit finding 11, owner decision 2026-09-26) ─────────────────────────────
+     The atlas + quiz carry no model, so they must not sit behind the KardiQ X AI access code. This
+     opens the same overlay in a LEARN-ONLY mode: the router starts at the library and refuses every
+     AI screen (capture, analysis, report, history, settings), routing those taps to the access-code
+     gate instead. Gated only by smd_kardiox_learn (def ON; ?kxlearn=0 / localStorage "0" kill it)
+     and a signed-in account. Deliberately NOT gated by smd_kardiox. */
+  function learnOn() { var f = flags(); return !!(f && f.bool("smd_kardiox_learn")); }
+  function signedIn() { try { var p = window.SMD_ACCOUNT && SMD_ACCOUNT.profile && SMD_ACCOUNT.profile(); return !!(p && p.signedIn); } catch (e) { return false; } }
+  function say(m) { try { if (window.toast) window.toast(m); } catch (e) {} }
+  function openLearn() {
+    if (!learnOn()) return;                                   // kill switch: complete no-op
+    if (!signedIn()) { say("Sign in to open Learn ECG."); return; }
+    var el = root();
+    el.classList.add("kx-open");
+    document.documentElement.classList.add("kx-lock");
+    haptic("light");
+    var mount = function () {
+      try { if (window.SMD_KARDIOX_ROUTER && SMD_KARDIOX_ROUTER.mountLearn) SMD_KARDIOX_ROUTER.mountLearn(document.getElementById("kxScroll")); } catch (e) {}
+    };
+    var lazy = (typeof smdLazy === "function") ? smdLazy('/kardiox-content-pack.js?v=kxpack1') : Promise.resolve();
+    Promise.resolve(lazy).then(mount, mount);
+  }
+  // From learn-only mode: the ECG AI needs its access code (or an early-access plan). Same gate +
+  // flag write as the home tile, then the full (beta-notice-wrapped) open().
+  function unlockAi() {
+    var go = function () { try { localStorage.setItem("smd_kardiox", "1"); } catch (e) {} if (window.KARDIOX && KARDIOX.open) KARDIOX.open(); };
+    try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("kardiox", go); return; } } catch (e) {}
+    go();
+  }
+
   function close() {
     var el = document.getElementById(ROOT_ID);
     if (el) el.classList.remove("kx-open");
@@ -141,6 +171,6 @@
     else initHome();
   }
 
-  var API = { open: open, close: close, homeCardHtml: homeCardHtml, mountHomeCard: mountHomeCard, isOn: on };
+  var API = { open: open, openLearn: openLearn, learnOn: learnOn, unlockAi: unlockAi, close: close, homeCardHtml: homeCardHtml, mountHomeCard: mountHomeCard, isOn: on };
   if (typeof window !== "undefined") { window.KARDIOX = API; window.SMD_KARDIOX = API; }
 })();

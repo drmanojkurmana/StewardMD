@@ -79,3 +79,19 @@ test("requireFeature: physicianpro granted without a code; a code still works fo
     assert.equal((await requireFeature(env, req, k, bare)).allowed, false, k + " pro without code");
   }
 });
+
+// With EXPERIMENTAL_ENFORCE_<MODULE>="1" (production), each module's betaGate asks planEarlyAccess before the
+// access code, so Clinician Pro / Ultimate are not locked out by the code gate (owner 2026-09-26).
+test("planEarlyAccess: server twin of the plan early access, fails closed", async () => {
+  const { planEarlyAccess } = await import("../functions/_features.js");
+  const req = { headers: { get: () => "Bearer x" } };
+  const dep = (tier) => ({ uid: "u1", getEntitlement: async () => ({ tier, tierExp: null }) });
+  for (const k of ["kardiox", "thorex", "fundx", "sknx"]) {
+    assert.equal(await planEarlyAccess({}, req, k, dep("physicianpro")), true, k);
+    assert.equal(await planEarlyAccess({}, req, k, dep("ultimate")), true, k);
+    assert.equal(await planEarlyAccess({}, req, k, dep("physician")), false, k);
+    assert.equal(await planEarlyAccess({}, req, k, dep(null)), false, k);
+  }
+  assert.equal(await planEarlyAccess({}, req, "kardiox", { verifyFirebaseToken: async () => null }), false);
+  assert.equal(await planEarlyAccess({}, req, "kardiox", { uid: "u1", getEntitlement: async () => { throw new Error("x"); } }), false);
+});

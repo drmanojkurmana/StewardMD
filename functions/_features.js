@@ -137,6 +137,22 @@ export function featureAllowed(env, record, key, role, now) {
   return roles.indexOf(role) >= 0;
 }
 
+/* Server twin of the client's plan early access (owner 2026-09-26): an account on Clinician Pro or
+ * Ultimate passes the beta-imaging gate without an X-XA-Token. Used by each module's betaGate when
+ * EXPERIMENTAL_ENFORCE_<MODULE>="1", so enforcing the access codes can never lock out the plan that was
+ * sold with early access. Grant-only, fails closed (false) on any error. deps: uid, getEntitlement,
+ * verifyFirebaseToken. */
+export async function planEarlyAccess(env, request, key, deps) {
+  deps = deps || {};
+  try {
+    let uid = deps.uid || null;
+    if (!uid) uid = await (deps.verifyFirebaseToken || verifyFirebaseToken)(bearer(request), env);
+    if (!uid) return false;
+    const rec = await (deps.getEntitlement || getEntitlement)(env, uid, deps);
+    return earlyAccessAllows(key, effectiveTierFor(rec));
+  } catch (e) { return false; }
+}
+
 function bearer(request) { try { return (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, ""); } catch (e) { return ""; } }
 
 export async function requireFeature(env, request, key, deps) {

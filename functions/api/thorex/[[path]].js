@@ -31,6 +31,7 @@ import { aiBudgetOn, monthlyCapFor } from "../../_aibudget.js";
 import { proFromRequest } from "../../_entitlement.js";
 import { requireFeature } from "../../_features.js";
 import { checkActive } from "../../_experimental.js";
+import { planEarlyAccess } from "../../_features.js";
 import { ownerOK } from "../../_adminauth.js";
 
 // Experimental Access enforcement (opt-in via EXPERIMENTAL_ENFORCE_THOREX="1"). Default off = ungated
@@ -39,6 +40,8 @@ import { ownerOK } from "../../_adminauth.js";
 async function betaGate(request, env) {
   if (env.EXPERIMENTAL_ENFORCE_THOREX !== "1") return { ok: true };
   try { if (await ownerOK(request, env)) return { ok: true }; } catch (e) {}
+  // Clinician Pro / Ultimate: early access is part of the plan, no code needed (owner 2026-09-26).
+  try { if (await planEarlyAccess(env, request, "thorex")) return { ok: true }; } catch (e) {}
   try { const acc = await checkActive(env, "thorex", request.headers.get("X-XA-Token") || ""); if (acc && acc.active) return { ok: true }; } catch (e) {}
   return { ok: false };
 }
