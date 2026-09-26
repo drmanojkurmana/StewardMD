@@ -1216,7 +1216,8 @@
     st.data.parts.forEach(function (p) { if (p.src === want) present[st.data.regions[p.reg]] = 1; });
     var rs = [""].concat(st.data.regions.filter(function (r) { return r !== "BODY" && present[r]; }));
     el.innerHTML = rs.map(function (r) {
-      return '<button class="atlas-chip' + (st.region === r ? " on" : "") + '" data-a3d-act="region" data-r="' + esc(r) + '">' + esc(r ? regionLabel(r) : "Whole body") + "</button>";
+      // the living body is one patient's scan (lower chest to hips), never a whole body
+      return '<button class="atlas-chip' + (st.region === r ? " on" : "") + '" data-a3d-act="region" data-r="' + esc(r) + '">' + esc(r ? regionLabel(r) : (st.src === "live" ? "Whole scan" : "Whole body")) + "</button>";
     }).join("");
     var sub = G.document.getElementById("a3dSub");
     var srcName = (st.data.sources.filter(function (s) { return s.id === st.src; })[0] || {}).name || "";
@@ -1226,12 +1227,13 @@
     var el = G.document.getElementById("a3dBar"); if (!el || !st.data) return;
     var hidden = userHiddenCount(), faded = fadedCount();
     var pl = st.plane, on = function (b) { return b ? " on" : ""; }, pr = function (b) { return ' aria-pressed="' + (b ? "true" : "false") + '"'; };
-    var sliceRow = pl ? '<div class="a3d-slice"><span>Slice ' + pl.i + "/" + pl.n + '</span><input type="range" min="1" max="' + pl.n + '" value="' + pl.i + '" data-a3d-act="slice" aria-label="CT slice level">' +
+    var sliceRow = pl ? planeSegHtml(pl) + '<div class="a3d-slice"><span>Slice ' + pl.i + "/" + pl.n + '</span><input type="range" min="1" max="' + pl.n + '" value="' + pl.i + '" data-a3d-act="slice" aria-label="CT slice level">' +
       '<button class="a3d-btn sm" data-a3d-act="ct" data-m="' + esc(pl.m) + '" data-s="" data-i="' + pl.i + '">Open CT</button>' +
       '<button class="a3d-btn sm" data-a3d-act="planeoff" aria-label="Hide slice">×</button></div>' : "";
     var xr = Math.round((1 - ghostAlpha(st.sel.length > 0 && !st.isolate, st.xray)) * 100);
     el.innerHTML = sliceRow + clipRowHtml() +
       '<div class="a3d-tools">' +
+        (st.src === "live" && defaultPlaneModule() ? '<button class="a3d-btn' + on(pl) + '" data-a3d-act="ctslice"' + pr(!!pl) + ' aria-label="Show a CT slice through the body">CT slice</button>' : "") +
         (st.hist.length ? '<button class="a3d-btn accent" data-a3d-act="undo" aria-label="Undo the last hide, fade or isolate">Undo</button>' : "") +
         (hidden || faded ? '<button class="a3d-btn" data-a3d-act="unhide" aria-label="Show all hidden and faded structures">Show all ' + (hidden + faded) + "</button>" : "") +
         '<button class="a3d-btn" data-a3d-act="systems" aria-label="Layers and saved views">' + (ico("layers") || "") + "Layers</button>" +
@@ -1247,6 +1249,21 @@
         '<label class="a3d-explode"><span>X-ray</span><input type="range" min="0" max="96" value="' + xr + '" data-a3d-act="xray" aria-label="X-ray: see through everything that is not selected" aria-valuetext="' + xr + ' percent"></label>' +
       "</div>";
   }
+  // Axial / Coronal / Sagittal for the registered CT planes of the module group on show.
+  function planeSegHtml(pl) {
+    var d = st.data, grp = pl.m.replace(/-[a-z]+$/, ""), name = { y: "Axial", z: "Coronal", x: "Sagittal" };
+    var ms = Object.keys(d.planes).filter(function (m) { return m.replace(/-[a-z]+$/, "") === grp; });
+    if (ms.length < 2) return "";
+    return '<div class="a3d-seg a3d-ctseg" role="radiogroup" aria-label="CT slice direction">' + ms.map(function (m) {
+      var on = m === pl.m;
+      return '<button class="a3d-segbtn' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" data-a3d-act="ctplane" data-m="' + esc(m) + '">' + esc(name[(d.planes[m]["1"] || {}).axis] || m) + "</button>";
+    }).join("") + "</div>";
+  }
+  function defaultPlaneModule() {
+    var ks = Object.keys(st.data.planes);
+    return ks.filter(function (m) { return (st.data.planes[m]["1"] || {}).axis === "y"; })[0] || ks[0];
+  }
+  function midSlice(m) { return Math.ceil(Object.keys(st.data.planes[m]).length / 2); }
   function clipRowHtml() {
     var c = st.clip; if (!c) return "";
     return '<div class="a3d-cliprow" role="group" aria-label="Cut plane">' +
@@ -1662,6 +1679,8 @@
     if (act === "tab") { st._tab = t.getAttribute("data-tab"); openSheet(); return; }
     if (act === "view") { cycleView(); return; }
     if (act === "planeoff") { clearPlane(); return; }
+    if (act === "ctslice") { if (st.plane) clearPlane(); else { var m0 = defaultPlaneModule(); setPlane(m0, midSlice(m0)); } return; }
+    if (act === "ctplane") { var m1 = t.getAttribute("data-m"); if (!st.plane || st.plane.m !== m1) setPlane(m1, midSlice(m1)); return; }
     if (!d) return;
     if (act === "retry") { retryFailed(); return; }
     if (act === "fade") { toggleFade(); return; }
