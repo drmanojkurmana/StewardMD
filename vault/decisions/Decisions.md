@@ -13,8 +13,10 @@ share one Trainee price; the verified role decides features. (3) Every account h
 claim today moves to a new never-sold **Ultimate** tier (everything, for friends and testers),
 through a reviewed, reversible migration. (4) Every plan, Free included, is limited to one phone +
 one iPad. (5) The Free AI and imaging allowance unlocks only after mobile-number verification
-(`phoneVerified`), with one number per account. **Open:** prices (80%-margin model proposed), beta imaging AI for Clinician, WardSynQ
-pricing. Full audit, matrix and price model: [[Role-Tiers]]. **Status:** nothing enforced yet.
+(`phoneVerified`), with one number per account. (6) Plan prices stay as live today; the 80%-margin allowance and token/FollowCare
+pack model starts 3 months later (target 2026-12-26), with an Introductory offer at today's terms until
+then. WardSynQ is the only plan newly priced. **Open:** beta imaging AI without a code, strike-through
+anchors, sweep vs phone-verified Free. Full audit, matrix and price model: [[Role-Tiers]]. **Status:** nothing enforced yet.
 
 ## 2026-09-26 · Medical Core ships its DETERMINISTIC half ON by default as BETA; the model half stays off
 

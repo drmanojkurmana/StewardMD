@@ -179,9 +179,9 @@ Verified in code 2026-09-26:
    omits tier `pro`, so a Resident Pro payer would be refused their own logbook.
 6. **`deviceLimit` / `clinicLimit` key on role, not tier.** Role `pro` gets 2 clinics; after the
    relabel that is Resident Pro, which should get 0.
-7. **Three different price tables.** Code defaults Physician 749 / Physician Pro 899;
-   `wrangler.toml` env 1,499 / 2,499; `_pricing.js` 1,499 / 2,499; KV `billing:cfg` unknown. Pick one
-   (server `plans()` is the stated source, Decisions 2026-09-18).
+7. **Stale price defaults in code.** Live `/api/billing/plans` serves Physician 1,499 / Physician Pro
+   2,499 (from `wrangler.toml` env), but the code defaults in `plans()` still say 749 / 899. If the env
+   var is ever dropped, the price silently halves. Align the code defaults to the live prices.
 8. **No admin endpoint sets the purchase `tier`.** Comp / test / institution accounts can only get
    the Pro claim, which the matrix ignores.
 9. **Per-module daily AI caps ignore tier** (`_ai_usage.js`); only the monthly token budget varies.
@@ -222,13 +222,14 @@ Each client phase: headless-browser test of the paywall and gated tiles per plan
 - **D2 Student and Intern: TAKEN.** One Trainee price; the verified role decides the features.
 - **D3 Existing Pro holders: TAKEN.** Every account holding the `pro` claim today moves to a new
   **Ultimate** tier: everything, for the owner's friends and testers. See section 9.
-- **D4 Prices: TAKEN as "owner asked for a price model at 80% margin".** Proposal in section 10.
+- **D4 Prices: TAKEN.** Plan prices stay as live today. The 80%-margin allowance and pack model
+  (section 10) starts 3 months later; until then an Introductory offer at today's terms.
 - **D5 Beta imaging AI without an access code: OPEN** (owner asked what it is; explained in chat).
   ThoreX (chest X-ray), KardiQ X AI (ECG), SknX (skin), FundX (retina): unvalidated models, locked
   behind an access code since 2026-09-25. Today Clinician Pro skips the code. Recommendation:
   Clinician Pro + Ultimate skip the code; everyone else needs one.
 - **D6 Free plan devices: TAKEN.** Phone + iPad, same as paid plans.
-- **D7 WardSynQ: owner asked for a price model at 80% margin.** Proposal in section 11.
+- **D7 WardSynQ: owner asked me to set the price (80% margin).** Section 11.
 - **D8 Free allowance needs phone verification: TAKEN.** The Free cloud AI and imaging allowance
   unlocks on the `phoneVerified` claim (`functions/api/auth/[[path]].js` phone-verify), not on sign-in.
   Today the free AI budget keys on registration `verified` (`_aibudget.js`: unverified 0, verified
@@ -255,7 +256,20 @@ Each client phase: headless-browser test of the paywall and gated tiles per plan
 - Naming clash to fix in the docs: `docs/PRICING_PACKAGING.md` section 6 already uses "Ultimate" for
   a hospital AI plan, and "U" for Physician Pro elsewhere in that doc.
 
-## 10. Price model (PROPOSED): 80% gross margin at FULL use of every allowance
+## 10. Plan prices and the 80%-margin allowance model
+**Owner, 2026-09-26: plan PRICES stay as decided (the live prices below). The allowance and pack
+changes in this section take effect 3 months from now (target 2026-12-26). Until then the app runs
+an Introductory offer at today's prices and today's allowances, showing old (struck) and now prices.**
+
+Live prices, read from `https://stewardmd.in/api/billing/plans` on 2026-09-26 (Rs, monthly / annual,
+struck `regular` price): Trainee 199 / 1,999 (399), Co-Resident 299 / 2,999 (999), Pro 599 / 4,999
+(999), Physician 1,499 / 14,999 (none), Physician Pro 2,499 / 24,999 (none). These do not change.
+
+Strike-through caution: the struck 399 / 999 / 999 have never been charged, and the plan prices do not
+rise after the offer. ASCI / CCPA (2023 dark-patterns guidelines) treat a struck price as a claim that
+it is a real former or future price. Either the struck price is really charged after the offer, or the
+offer is shown as "Introductory offer until <date>" without a strike. Owner to decide.
+
 Method: the included allowance of each plan, burned to 100%, must cost us at most 20% of what we
 keep. What we keep on iOS / Play = price / 1.18 (GST inclusive) x 0.85 (15% store fee); on web
 = price / 1.18 x 0.98 (2% gateway). iOS is the worst channel, so the allowances are sized for it;
@@ -263,32 +277,35 @@ web margins come out 2-3 points higher.
 
 Cost basis (code: `functions/_ai_usage.js` `MODEL_RATES`, `docs/PRICING_PACKAGING.md` section 2):
 MaiK answer Rs 0.04 average (gemini-2.5-flash), imaging read Rs 0.40, on-device dictation Rs 0,
-Scribe consult **Rs 0.50 ASSUMED** (on-device Whisper + cloud structuring; Rs 6 if it falls back to
-cloud audio at Rs 0.02/s), MaiK Ask interview Rs 0.20, FollowCare episode Rs 22 (call + SMS).
+Scribe consult **Rs 0.50 ASSUMED**: speech-to-text runs on the phone (Whisper) at Rs 0, and only the
+cloud tidy-up of the transcript is paid (about Rs 0.03-0.30). Rs 6 is the rare fallback when the phone
+cannot transcribe and `voice.js` sends the audio to `/api/ai/transcribe`: 300 s x Rs 0.02/s
+(`AI_COST_PER_AUDIO_SEC_INR`, itself an estimate, `_ai_usage.js:116`). The Rs 3-5 in
+`docs/PRICING_PACKAGING.md` predates on-device Whisper. MaiK Ask interview Rs 0.20, FollowCare episode Rs 22 (call + SMS).
 **Assumed, not measured:** platform overhead Rs 8/user/month, OPD infra Rs 10, hosted clinic Rs 50.
 Recalibrate every number from AI Control Center actuals after 30 days of real use.
 
-| Plan | Price / month | Annual (web) | Included per month | Cost at full use | Margin iOS | Margin web |
+Allowances from 2026-12-26 (sized so full use keeps 80% on iOS; prices unchanged):
+
+| Plan | Price / month | Annual | Included per month | Cost at full use | Margin iOS | Margin web |
 |---|---|---|---|---|---|---|
 | Free (phone-verified only) | 0 | - | 10,000 MT (~125 answers), 5 imaging reads | Rs 15 (acquisition) | - | - |
-| Trainee (UG Student / Intern) | **199** | 1,990 | 24,000 MT (~300 answers), 15 imaging reads | Rs 26 | 81.9% | 84.3% |
-| Co-Resident (2 logins) | **299** | 2,990 | 40,000 MT shared (~500 answers), 16 imaging reads shared | Rs 42 | 80.3% | 82.9% |
-| Resident Pro | **599** | 5,990 | 72,000 MT (~900 answers), 50 imaging reads, 40 dictated notes | Rs 84 | 80.5% | 83.1% |
-| Clinician | **1,499** | 14,990 | 100,000 MT, 60 imaging, 200 Scribe consults, 50 MaiK Ask | Rs 202 | 81.3% | 83.8% |
-| Clinician Pro | **2,499** | 24,990 | 160,000 MT, 100 imaging, 300 Scribe, 50 MaiK Ask, hosted clinic | Rs 348 | 80.7% | 83.2% |
+| Trainee (UG Student / Intern) | 199 | 1,999 | 24,000 MT (~300 answers), 15 imaging reads | Rs 26 | 81.9% | 84.3% |
+| Co-Resident (2 logins) | 299 | 2,999 | 40,000 MT shared (~500 answers), 16 imaging reads shared | Rs 42 | 80.3% | 82.9% |
+| Resident Pro | 599 | 4,999 | 72,000 MT (~900 answers), 50 imaging reads, 40 dictated notes | Rs 84 | 80.5% | 83.1% |
+| Clinician | 1,499 | 14,999 | 100,000 MT, 60 imaging, 200 Scribe consults, 50 MaiK Ask | Rs 202 | 81.3% | 83.8% |
+| Clinician Pro | 2,499 | 24,999 | 160,000 MT, 100 imaging, 300 Scribe, 50 MaiK Ask, hosted clinic | Rs 348 | 80.7% | 83.2% |
 | Ultimate | not sold | - | 600,000 MT fair use, everything | up to Rs 300 | - | - |
 
-- Annual = 10 x monthly ("2 months free") holds 80% only on web (79.5-81.1%). On iOS offer annual at
-  11 x monthly ("1 month free", about 79.6%), or accept about 77% there. Push annual to web.
-- Clinician and Clinician Pro return to the signed-off v3 prices (Rs 1,499 / 2,499), which also
-  resolves finding 7: the Rs 749 / 899 code defaults cannot carry Scribe + OPD at 80%.
+- Annual prices unchanged. At about 10 x monthly they keep 80% on web and about 77% on iOS; the
+  Resident Pro annual (4,999, about 8.3 x) sits near 72% on iOS and 76% on web. Push annual to web.
 - FollowCare stays **included as a feature** in Clinician and above, but patients are billed as
   packs: at Rs 22 per episode an included quota breaks 80%. See the pack table.
 - Over any allowance: top-up packs or upgrade, never a hard lockout (existing principle).
 
 Packs and add-ons (margin iOS / web):
 
-| Item | Today | Margin today | Proposed | Margin proposed |
+| Item | Today (Introductory, until 2026-12-26) | Margin today | From 2026-12-26 | Margin then |
 |---|---|---|---|---|
 | MaiK Boost | Rs 49 = 50,000 MT | 29% / 39% | Rs 49 = 10,000 MT | 86% / 88% |
 | MaiK Plus | Rs 199 = 250,000 MT | 13% / 24% | Rs 199 = 40,000 MT | 86% / 88% |
