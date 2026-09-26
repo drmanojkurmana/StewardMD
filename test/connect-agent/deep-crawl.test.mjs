@@ -453,8 +453,15 @@ test('exploreDetailOf: opens a row and polls (via awaitDetailRequest), not a fla
 // header table, write-form (#tblmedicines) and calendar exclusion, <li><a> nav controls, and PHI redaction.
 // Skipped when Chrome is not installed (set CHROME to the binary) or DEEP_CRAWL_SKIP_CHROME=1.
 
-const CHROME = process.env.CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const HAVE_CHROME = !process.env.DEEP_CRAWL_SKIP_CHROME && existsSync(CHROME);
+// Same discovery order as test/run-abx-ui.mjs and test/run-medcore-ui.mjs: the Mac path first
+// because that is where this is usually run, then the Linux ones so CI and container sessions get
+// the real-DOM coverage instead of eleven silent skips. CHROME=<binary> overrides.
+const CHROME = process.env.CHROME || [
+  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  '/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
+  '/usr/bin/chromium', '/usr/bin/chromium-browser', '/usr/bin/google-chrome'
+].find((p) => existsSync(p));
+const HAVE_CHROME = !process.env.DEEP_CRAWL_SKIP_CHROME && !!CHROME && existsSync(CHROME);
 
 // The id-less, <th>-less, class-less layout tables under #patient_details_table (as on the live GHIS page)
 // come FIRST in DOM order and carry digit runs: a patient-row finder that accepts them opens nothing.
@@ -504,7 +511,12 @@ function serveHtml(html) {
 async function withChrome(fn, html = ACCORDION_HTML, navUrl = null) {
   const port = 9400 + Math.floor(Math.random() * 400);
   const userDir = join(tmpdir(), 'deep-crawl-chrome-' + process.pid + '-' + port);
-  const proc = spawn(CHROME, ['--headless=new', `--remote-debugging-port=${port}`, `--user-data-dir=${userDir}`, '--no-first-run', '--disable-gpu', '--mute-audio', 'about:blank'], { stdio: 'ignore' });
+  // --no-sandbox matches test/run-medcore-ui.mjs and test/run-abx-ui.mjs. Without it Chrome never
+  // starts as root in a container, so /json/version never answers and every real-DOM test dies on
+  // "chrome did not expose CDP" rather than telling you why. CHROME_FLAGS prepends extras.
+  const proc = spawn(CHROME, [...(process.env.CHROME_FLAGS || '').split(' ').filter(Boolean),
+    '--headless=new', `--remote-debugging-port=${port}`, `--user-data-dir=${userDir}`,
+    '--no-first-run', '--no-sandbox', '--disable-gpu', '--mute-audio', 'about:blank'], { stdio: 'ignore' });
   let ws;
   try {
     let ver;
@@ -794,7 +806,9 @@ test('deepCrawlClinical: real DOM, login form -> login-required', { skip: !HAVE_
   }, LOGIN_HTML);
 });
 
-test('guided ask: the table the doctor taps inside turns green and is the one captured (real DOM)', async () => {
+// This one drives withChrome like the twelve above it and was missing their skip guard, so on any
+// machine without Chrome it failed with a spawn ENOENT instead of skipping.
+test('guided ask: the table the doctor taps inside turns green and is the one captured (real DOM)', { skip: !HAVE_CHROME && 'Chrome not available' }, async () => {
   const html = '<html><body>'
     + '<table id="big"><thead><tr><th>Patient ID</th><th>Patient name</th><th>Age</th><th>Ward</th></tr></thead><tbody>'
     + '<tr><td>A1</td><td>X</td><td>30</td><td>W1</td></tr><tr><td>A2</td><td>Y</td><td>40</td><td>W2</td></tr><tr><td>A3</td><td>Z</td><td>50</td><td>W3</td></tr></tbody></table>'
