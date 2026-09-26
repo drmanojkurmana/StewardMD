@@ -1153,14 +1153,14 @@ test("a PRN drug never appears on the round, and an unreadable frequency is repo
   });
   await order("Morphine", "PRN");
   await order("Enoxaparin", "alternate days after dialysis");
-  await order("Digoxin", "");
+  await order("Pantoprazole", ""); // CLIN-01: 5 mg digoxin is now read against its mcg ceiling and refused
 
   const s = await as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-09T18:30:00.000Z&to=2026-09-10T18:30:00.000Z`);
   assert.equal(s.__status, 200);
   assert.ok(!s.due.some((d) => d.drug === "Morphine"), "an as-needed drug is not due at a time");
   assert.deepEqual(s.prn.map((p) => p.drug), ["Morphine"], "but the ward can still see it and give one deliberately");
   assert.deepEqual(s.unscheduled.map((u) => [u.drug, u.reason]).sort(),
-    [["Digoxin", "no_frequency"], ["Enoxaparin", "frequency_not_understood"]],
+    [["Enoxaparin", "frequency_not_understood"], ["Pantoprazole", "no_frequency"]],
     "named, because a ward that cannot see the order has no way to know a dose is missing");
 });
 
