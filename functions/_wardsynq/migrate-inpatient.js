@@ -819,6 +819,47 @@ async function createWardMedicationOrder(request, env, ctx) {
   };
 }
 
+/**
+ * Stops (discontinues) an active medication order. CLIN-04: until this existed no write path could take
+ * an order out of "active", so heparin stopped for a bleed or a finished course stayed on the round, due
+ * and then overdue, and in every interaction and same-drug check.
+ *
+ * The stop is a new VERSION of the same order (status "stopped", who, when, why), so the version history
+ * is the audit and the governed store writes its audit row as for any write. The stopping clinician signs
+ * the stop; the original prescriber stays on the order. A reason is required. Stopping an order that is
+ * not active is refused rather than silently re-stamped. Prescribing the drug again on the same stay
+ * writes a new active version (createWardMedicationOrder), as before.
+ *
+ * ctx: { migration, orderId, reason, expectedVersion?, idempotencyKey?, actorDeps, recordDeps }
+ */
+async function stopWardMedicationOrder(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
+  const orderId = str(ctx.orderId), reason = str(ctx.reason).slice(0, 500);
+  if (!orderId) return { ...base, ok: false, status: 422, error: "order_required", written: 0 };
+  if (!reason) return { ...base, ok: false, status: 422, error: "reason_required", detail: "Say why this medicine is being stopped. Nothing was changed.", written: 0 };
+
+  const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
+  if (error) return { ...base, ...error, written: 0 };
+  let order;
+  try { order = await svc.get("MedicationOrder", orderId); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+  if (!order) return { ...base, ok: false, status: 404, error: "order_not_found", orderId, written: 0 };
+  if (order.status !== "active") return { ...base, ok: false, status: 409, error: "order_not_active", orderId, orderStatus: order.status || null, written: 0 };
+  if (ctx.expectedVersion != null && ctx.expectedVersion !== "" && Number(ctx.expectedVersion) !== Number(order.version)) {
+    return { ...base, ok: false, status: 409, error: "order_changed", detail: "this order changed since it was shown; nothing was stopped", orderId, currentVersion: order.version, written: 0 };
+  }
+  const next = { ...order, status: "stopped", signedBy: resolved.actor.id, stoppedAt: new Date().toISOString(), stoppedBy: resolved.actor.id, stopReason: reason };
+  delete next.version; delete next.meta; delete next.writtenBy;
+  try {
+    const out = await svc.put(next, { expectedVersion: order.version, idempotencyKey: ctx.idempotencyKey || null });
+    return { ...base, ok: true, written: 1, orderId, status: "stopped", drug: order.drug, version: out.record.version, stoppedAt: next.stoppedAt, actor: resolved.actor.id, role: resolved.role };
+  } catch (e) {
+    return { ...base, ...writeFailure(e, { orderId, written: 0, actor: resolved.actor.id }) };
+  }
+}
+
 /* ---- transfer and the bed board -----------------------------------------------------------------
  *
  * A ward you can admit to and discharge from but not move within is not a ward. Every real stay
@@ -1460,7 +1501,7 @@ async function patientTimeline(request, env, ctx) {
 export {
   IPD, ICU, MATERNITY, PEDIATRICS, NICU, ADMISSION_CLASSES, OPEN, patientsFor,
   encounterFromAdmission, sameAdmission, admitPatient, listWard,
-  recordWardVitals, orderFromWardRequest, createWardMedicationOrder, PATIENT_INSTRUCTIONS, patientInstructionsRefusal,
+  recordWardVitals, orderFromWardRequest, createWardMedicationOrder, stopWardMedicationOrder, PATIENT_INSTRUCTIONS, patientInstructionsRefusal,
   sameBed, transferPatient, bedBoard,
   freeMasterBed,   // TASK 4.2: discharge reuses this to release the vacated bed - see migrate-discharge.js
   EMERGENCY_BED_RELAXATION, ADMIN_RELAXABLE_STATES, checkMasterBed,

@@ -39,6 +39,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { medicationAdministrationIdFor } from "./opd-identity.js";
+import { roundOrders } from "./mar-schedule.js";
 import { witnessOrRefusal } from "./controlled-drugs.js";
 import { readPregnancyLactation } from "./migrate-maternity.js";
 
@@ -197,12 +198,12 @@ async function medicationRound(request, env, ctx) {
   if (error) return { ...base, ...error, due: [] };
 
   let orders;
-  try { orders = await svc.byPatient("MedicationOrder", patientId); }
+  try { orders = await roundOrders(svc, patientId); } // CLIN-04: this stay's orders only
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), due: [] }; }
 
   const due = [];
   let unread = 0;
-  for (const o of (orders || []).filter((x) => x && x.status === "active")) {
+  for (const o of orders) {
     const marId = medicationAdministrationIdFor(o.id, dueAt);
     let mar = null, readFailed = false;
     /* A failed read is NOT "not started". Reporting it as null invited a second dose of something

@@ -282,7 +282,7 @@ function fhirObservation(o) {
 }
 
 function fhirMedicationRequest(m) {
-  const STATUS = { active: "active", draft: "draft", "on-hold": "on-hold", cancelled: "cancelled", completed: "completed" };
+  const STATUS = { active: "active", draft: "draft", "on-hold": "on-hold", cancelled: "cancelled", completed: "completed", stopped: "stopped" };
   return clean({
     resourceType: "MedicationRequest", id: fhirId(m.id),
     status: STATUS[str(m.status)] || "unknown",

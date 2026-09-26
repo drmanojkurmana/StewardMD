@@ -334,6 +334,21 @@ async function openService(request, env, ctx, need) {
 }
 
 /**
+ * CLIN-04: the orders a round is made of. Active is not enough: every active order the patient has ever
+ * had, from any encounter, used to be scheduled, so an OPD course from three months ago showed as overdue
+ * on a new admission. An order belongs on the round when its stay is still open and is not an OPD visit.
+ * Throws when either read fails; the callers already turn that into "could not be read", never "nothing due".
+ */
+async function roundOrders(svc, patientId) {
+  /* The stays are read under the service, not through its grant: only which stays are open is used, nothing
+   * of them is returned, and a pharmacist who may read the orders but not Encounter still gets the round
+   * (the same internal read as the bed-claim holder check in migrate-inpatient.js). */
+  const [orders, encounters] = await Promise.all([svc.byPatient("MedicationOrder", patientId), svc.repository.byPatient(svc.tenantId, "Encounter", patientId)]);
+  const open = new Set((encounters || []).filter((e) => e && e.status === "in-progress" && e.class !== "OPD").map((e) => e.id));
+  return (orders || []).filter((o) => o && o.status === "active" && open.has(o.encounterId));
+}
+
+/**
  * The patient's medication schedule over a window, with each slot's administration state.
  *
  * ctx: { migration, patientId, from, to?, now?, marTimes?, offsetMinutes?, timeZone?, graceMinutes?,
@@ -360,7 +375,7 @@ async function marSchedule(request, env, ctx) {
   if (error) return { ...base, ...error, due: [], prn: [], unscheduled: [] };
 
   let orders;
-  try { orders = await svc.byPatient("MedicationOrder", patientId); }
+  try { orders = await roundOrders(svc, patientId); }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), due: [], prn: [], unscheduled: [] }; }
 
   const nowMs = Date.parse(str(ctx.now)) || Date.now();
@@ -374,7 +389,7 @@ async function marSchedule(request, env, ctx) {
   try { given = new Map(((await svc.byPatient("MedicationAdministration", patientId)) || []).filter(Boolean).map((m) => [m.id, m])); }
   catch { given = null; }
 
-  for (const o of (orders || []).filter((x) => x && x.status === "active")) {
+  for (const o of orders) {
     // orderVersion: the order as the nurse saw it. A dose charted against it is refused if the order changed (G2).
     const card = { orderId: o.id, orderVersion: o.version == null ? null : o.version, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null };
     const spec = parseFrequency(o.frequency);
@@ -422,4 +437,4 @@ async function marSchedule(request, env, ctx) {
   };
 }
 
-export { DEFAULT_MAR_TIMES, ALIASES, MAX_SLOTS, MAX_WINDOW_DAYS, SPRING_FORWARD, parseFrequency, timesFor, zoneOffsetAt, zonedSlotInstant, scheduleSlots, isOverdue, marSchedule };
+export { DEFAULT_MAR_TIMES, ALIASES, MAX_SLOTS, MAX_WINDOW_DAYS, SPRING_FORWARD, parseFrequency, timesFor, zoneOffsetAt, zonedSlotInstant, scheduleSlots, isOverdue, roundOrders, marSchedule };

@@ -67,7 +67,7 @@ import { checkPrescriptionSafety } from "../../_wardsynq/rx-safety.js";
 import { getRulePack } from "../../_wardsynq/rulepack.js";
 // Inpatient ward + eMAR (2026-09-07). Same shape as every OPD migration above: the route resolves
 // the org and the forced wardsynq migration, these do the governed record write.
-import { admitPatient, listWard, recordWardVitals, createWardMedicationOrder, transferPatient, bedBoard, patientTimeline } from "../../_wardsynq/migrate-inpatient.js";
+import { admitPatient, listWard, recordWardVitals, createWardMedicationOrder, stopWardMedicationOrder, transferPatient, bedBoard, patientTimeline } from "../../_wardsynq/migrate-inpatient.js";
 // Emergency department (2026-09-09). Reuses everything above unchanged - vitals, orders, the eMAR,
 // notes, labs, NEWS2, critical results are all encounter-class-agnostic already. This adds only
 // arrival (known or unidentified), triage acuity, and a non-admitted disposition.
@@ -1703,7 +1703,7 @@ export async function onRequest(context) {
         "mortuary-release": CAPS.MORTUARY_MANAGE, "mortuary-board": CAPS.MORTUARY_MANAGE,
         "approval-request": CAPS.EMR_VITALS, approvals: CAPS.EMR_VIEW,
         "approval-decide": CAPS.EMR_TREAT,
-        "medication-order": CAPS.EMR_TREAT, round: CAPS.QUEUE_VIEW, "nurse-worklist": CAPS.EMR_VIEW, mar: CAPS.MED_ADMINISTER,
+        "medication-order": CAPS.EMR_TREAT, "medication-stop": CAPS.EMR_TREAT, round: CAPS.QUEUE_VIEW, "nurse-worklist": CAPS.EMR_VIEW, mar: CAPS.MED_ADMINISTER,
         // Reading what is due is reading the ward, not acting on it: the same view capability the
         // ward list uses. Nothing here writes, so this grants no ability to move a dose.
         schedule: CAPS.QUEUE_VIEW,
@@ -3338,6 +3338,10 @@ export async function onRequest(context) {
           specialty: body.specialty, approvalRef: body.approvalRef, formularyReason: body.formularyReason,
           idempotencyKey: body.idempotencyKey || null,
         });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "medication-stop" && method === "POST") { // CLIN-04: discontinue an active order, with a reason.
+        const r = await stopWardMedicationOrder(request, env, { ...deps, orderId: body.orderId, reason: body.reason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "round" && method === "GET") {

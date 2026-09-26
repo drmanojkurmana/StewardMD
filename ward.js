@@ -1836,6 +1836,8 @@
         // LT-20: an order pharmacy has not checked yet says so (null: this reader cannot see verifications).
         (m.pharmacy && m.pharmacy !== "verified" ? ' <span class="w-st due">' + (m.pharmacy === "unverified" ? wTH("ward.awaiting-pharmacy-verification", "awaiting pharmacy verification")
           : m.pharmacy === "queried" ? wTH("ward.queried-by-pharmacy", "queried by pharmacy") : wTH("ward.changed-since-pharmacy-verified-it", "changed since pharmacy verified it")) + "</span>" : "") +
+        // CLIN-04: the one way an order leaves the round. The server needs a reason and a prescriber's authority.
+        (m.orderId ? ' <button class="w-btn ghost" data-w-act="medstop:' + esc(m.orderId) + '">' + ms("block") + wTH("ward.stop-medication", "Stop") + "</button>" : "") +
         "</li>";
     }).join("");
     return '<div class="w-card"><div class="w-card-h">' + ms("pill") + "<h3>" + wTH("ward.active-medications", "Active medications") + "</h3></div>" +
@@ -12585,6 +12587,16 @@
     }
     placeMedOrder(rv.order, reason);
   }
+  /* CLIN-04: stopping a medicine. A new version of the order (stopped, who, when, why), refused without a reason. */
+  function stopMedication(orderId) {
+    var m = (st.activeMeds || []).filter(function (x) { return x.orderId === orderId; })[0];
+    askReason(wTH("ward.why-is-this-medicine-being-stopped", "Why is {drug} being stopped?", { drug: esc((m && m.drug) || "") }, "drug", 1), wT("ward.stopping-needs-a-reason", "Stopping a medicine needs a reason."), wTH("ward.stop-medication", "Stop"), function (reason) {
+      st.busy = true; paint();
+      return apiPost("/ward/medication-stop", { orgId: st.orgId, orderId: orderId, reason: reason })
+        .then(function (r) { if (settle(r, wT("ward.medication-stopped", "Stopped. It is off the round."))) { loadChart(); loadRound(); } else paint(); })
+        .catch(function () { st.busy = false; st.err = wT("ward.could-not-stop-the-medication", "Could not stop the medicine."); paint(); });
+    }, { danger: true });
+  }
   function placeMedOrder(order, reason) {
     st.busy = true; paint();
     apiPost("/ward/medication-order", { orgId: st.orgId, order: order, overrideReason: reason || undefined }).then(function (r) {
@@ -16531,6 +16543,7 @@
     if (cmd === "balance") { loadBalance(); return; }
     if (cmd === "vitals") { saveVitals(); return; }
     if (cmd === "round") { st.from = val("wFrom") || st.from; st.to = val("wTo") || st.to; loadRound(); return; }
+    if (cmd === "medstop") { stopMedication(arg); return; }
     if (cmd === "mar") { var k = arg.indexOf("|"); if (k > 0) marAction(arg.slice(0, k), Number(arg.slice(k + 1))); return; }
     if (cmd === "outbox") { loadOutbox(); return; }
     if (cmd === "cosigns") { loadCosigns(); return; }
