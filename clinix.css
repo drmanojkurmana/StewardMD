@@ -647,15 +647,22 @@ html.cx-lock .ghis-ward-fab { display: none !important; }
 
 /* chest expansion: the chest widens on inspiration; thumbs separate ONLY when floating */
 #clinixRoot .cx-dia-chest { fill: var(--cx-surface-2); stroke: var(--cx-line); stroke-width: 2; }
-#clinixRoot .cx-dia--anim .cx-dia-chest { transform-origin: 170px 105px; animation: cx-breathe 3.4s ease-in-out infinite; }
+#clinixRoot .cx-dia--anim .cx-dia-chest { transform-origin: 180px 130px; animation: cx-breathe 3.4s ease-in-out infinite; }
 #clinixRoot .cx-dia--float .cx-dia-thumbL { animation: cx-thumbL 3.4s ease-in-out infinite; }
 #clinixRoot .cx-dia--float .cx-dia-thumbR { animation: cx-thumbR 3.4s ease-in-out infinite; }
+#clinixRoot .cx-dia--unilateral .cx-dia-thumbL { animation: cx-thumbL-lag 3.4s ease-in-out infinite; }
+#clinixRoot .cx-dia--unilateral .cx-dia-thumbR { animation: cx-thumbR 3.4s ease-in-out infinite; }
+#clinixRoot .cx-dia--bilateral .cx-dia-thumbL { animation: cx-thumb-restricted-L 3.4s ease-in-out infinite; }
+#clinixRoot .cx-dia--bilateral .cx-dia-thumbR { animation: cx-thumb-restricted-R 3.4s ease-in-out infinite; }
 /* anchored: the thumbs travel WITH the wall, so the gap never opens. That is the whole lesson. */
 #clinixRoot .cx-dia--anchored .cx-dia-thumbL,
 #clinixRoot .cx-dia--anchored .cx-dia-thumbR { animation: none; }
-@keyframes cx-breathe { 0%, 100% { transform: scaleX(1); } 45% { transform: scaleX(1.13); } }
-@keyframes cx-thumbL { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(-15px); } }
-@keyframes cx-thumbR { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(15px); } }
+@keyframes cx-breathe { 0%, 100% { transform: scaleX(1); } 45% { transform: scaleX(1.12); } }
+@keyframes cx-thumbL { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(-16px); } }
+@keyframes cx-thumbR { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(16px); } }
+@keyframes cx-thumbL-lag { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(-3px); } }
+@keyframes cx-thumb-restricted-L { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(-5px); } }
+@keyframes cx-thumb-restricted-R { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(5px); } }
 
 /* auscultation sites */
 #clinixRoot .cx-dia-zone--ausc circle { stroke: var(--cx-teach); }
@@ -684,12 +691,23 @@ html.cx-lock .ghis-ward-fab { display: none !important; }
 #clinixRoot .cx-dia-clav { fill: none; stroke: var(--cx-line); stroke-width: 3; }
 #clinixRoot .cx-dia-arrow-shift { stroke: var(--cx-teach); stroke-width: 2.5; fill: none; }
 
-/* clubbing */
+/* clubbing & Schamroth sign */
 #clinixRoot .cx-dia-finger-s { fill: var(--cx-surface-2); stroke: var(--cx-ink); stroke-width: 2; }
 #clinixRoot .cx-dia-nail { fill: none; stroke: var(--cx-primary); stroke-width: 3; stroke-linecap: round; }
-#clinixRoot .cx-dia-nail--club { stroke: var(--cx-teach); }
+#clinixRoot .cx-dia-nail--club { stroke: var(--cx-teach); stroke-width: 3.5; }
 #clinixRoot .cx-dia-angle { stroke: var(--cx-muted); stroke-width: 1.5; }
 #clinixRoot .cx-dia-window { fill: none; stroke: var(--cx-primary); stroke-width: 2; }
+#clinixRoot .cx-dia-window-light { fill: rgba(245, 158, 11, 0.45); stroke: #f59e0b; stroke-width: 2; animation: cx-window-glow 2.5s ease-in-out infinite; }
+@keyframes cx-window-glow { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+
+/* cranial nerves interactive brainstem map */
+#clinixRoot .cx-dia-cn { cursor: pointer; transition: transform .15s ease, opacity .15s ease; }
+#clinixRoot .cx-dia-cn:hover path, #clinixRoot .cx-dia-cn:hover line, #clinixRoot .cx-dia-cn:hover circle { filter: drop-shadow(0 0 5px var(--cx-primary)); stroke-width: 3.5; }
+#clinixRoot .cx-dia-cn--on path, #clinixRoot .cx-dia-cn--on line, #clinixRoot .cx-dia-cn--on circle { stroke: #f59e0b !important; fill: #f59e0b !important; stroke-width: 3.8 !important; filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.9)); }
+
+/* cerebellar signs animations */
+#clinixRoot .cx-dia-tremor-line { animation: cx-tremor 1.8s ease-in-out infinite; transform-origin: center; }
+@keyframes cx-tremor { 0%, 100% { transform: translate(0, 0); } 20% { transform: translate(-3px, 2px); } 40% { transform: translate(4px, -3px); } 60% { transform: translate(-4px, -2px); } 80% { transform: translate(3px, 3px); } }
 
 /* effusion */
 #clinixRoot .cx-dia-fluid { fill: var(--cx-teach); opacity: .3; stroke: var(--cx-teach); stroke-width: 2; }
