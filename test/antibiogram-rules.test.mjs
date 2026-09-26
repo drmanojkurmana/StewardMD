@@ -229,3 +229,23 @@ test("species kept apart where their intrinsic resistance differs", () => {
   assert.equal(row({ org: "prettgeri", s: { gentamicin: 50 } }).cells.gentamicin.act, "keep");
   assert.equal(row({ org: "kaerogenes", s: { cefoxitin: 30 } }).cells.cefoxitin.act, "intrinsic", "chromosomal AmpC");
 });
+
+test("WHONET export column names resolve to drugs", () => {
+  assert.equal(R.canonDrug("AMK_ND30"), "amikacin");
+  assert.equal(R.canonDrug("MEM_NM"), "meropenem");
+  assert.equal(R.canonDrug("TZP_ND100/10"), "piptazo");
+  assert.equal(R.canonDrug("FOX_ND30"), "cefoxitin");
+  assert.equal(R.canonDrug("XYZ_ND30"), null);
+  const r = R.importIsolateCsv("PATIENT_ID,SPEC_DATE,SPEC_TYPE,WARD,ORGANISM,AMK_ND30,MEM_NM\nA1,2026-01-02,ur,opd,E. coli,S,S\nA2,2026-01-03,ur,opd,E. coli,R,S\n");
+  const all = r.rows.find((x) => x.org === "ecoli" && x.spec === "all" && x.set === "all");
+  assert.equal(all.s.amikacin, 50);
+  assert.equal(all.s.meropenem, 100);
+});
+
+test("hospital import: laboratory specimen and location names are recognised, the rest listed", () => {
+  const r = R.importIsolateCsv("PATIENT_ID,SPEC_TYPE,WARD,ORGANISM,AMK_ND30\nA1,ur,MICU-2,E. coli,S\nA2,Blood culture,Medicine Ward 3,E. coli,R\nA3,xx,OT,E. coli,R\n");
+  assert.ok(r.rows.some((x) => x.spec === "urine" && x.set === "icu"));
+  assert.ok(r.rows.some((x) => x.spec === "blood" && x.set === "ward"));
+  assert.ok(r.warnings.some((w) => /Specimen values not recognised.*xx/.test(w)));
+  assert.ok(r.warnings.some((w) => /Setting values not recognised.*OT/.test(w)));
+});

@@ -322,14 +322,15 @@
       fmtN(D.stats.act.caution) + " figures carry a caution, " + fmtN(D.stats.act.suppress) + " were not shown, " + fmtN(D.stats.act.intrinsic) + " were intrinsic resistance.</p></section>";
     h += '<input type="search" class="v2-q" id="v2SrcQ" placeholder="Find an institution, city or state" value="' + esc(st.srcQ) + '" aria-label="Find a source">';
     var groups = [["national", "National networks"], ["north", "North India"], ["south", "South India"], ["east", "East and North-East India"], ["west", "West and Central India"]];
+    // One entry per institution or network (its latest edition); older editions are listed in its sheet.
     groups.forEach(function (g) {
-      var list = integrated.filter(function (s) { return s.region === g[0] && (!q || (s.name + " " + s.short + " " + (s.city || "") + " " + (s.state || "")).toLowerCase().indexOf(q) >= 0); })
-        .sort(function (a, b) { return a.short < b.short ? -1 : a.short > b.short ? 1 : b.year - a.year; });
+      var list = integrated.filter(function (s) { return s.latest && s.region === g[0] && (!q || (s.name + " " + s.short + " " + (s.city || "") + " " + (s.state || "")).toLowerCase().indexOf(q) >= 0); })
+        .sort(function (a, b) { return a.short < b.short ? -1 : a.short > b.short ? 1 : 0; });
       if (!list.length) return;
       h += '<h3 class="v2-gh">' + g[1] + '</h3><ul class="v2-src">' + list.map(function (s) {
-        var fl = S().flagged(s.id).length;
-        return '<li><button data-v2="src" data-id="' + esc(s.id) + '"><b>' + esc(s.short) + "</b> " + esc(s.year) + ' <span class="v2-kind">' + esc(s.kind === "institution" ? "antibiogram" : s.kind === "network" ? "network" : "study") + "</span>" +
-          '<br><span class="v2-mut">' + esc(s.specs.map(function (x) { return R().SPECIMENS[x].label; }).join(", ")) + " · " + fmtN(s.isolates) + " isolates" + (fl ? " · " + fl + " checks" : "") + (s.verification.status === "transcribed" ? " · transcribed" : "") + "</span></button></li>";
+        var fl = S().flagged(s.id).length, eds = S().editions(s.inst).length;
+        return '<li><button data-v2="src" data-id="' + esc(s.id) + '"><b>' + esc(s.short) + "</b> " + esc(s.edLabel || s.year) + ' <span class="v2-kind">' + esc(s.kind === "institution" ? "antibiogram" : s.kind === "network" ? "network" : "study") + "</span>" +
+          '<br><span class="v2-mut">' + esc(s.specs.map(function (x) { return R().SPECIMENS[x].label; }).join(", ")) + " · " + fmtN(s.isolates) + " isolates" + (eds > 1 ? " · " + eds + " editions" : "") + (fl ? " · " + fl + " checks" : "") + (s.verification.status === "transcribed" ? " · transcribed" : "") + "</span></button></li>";
       }).join("") + "</ul>";
     });
     if (notInt.length) {
@@ -372,7 +373,7 @@
     h += '<section class="v2-card"><h3>' + (loc ? "Replace it" : "Import") + "</h3>" +
       '<div class="v2-seg" role="group" aria-label="File type"><button data-v2="imp-mode" data-v="summary" class="' + (st.impMode === "summary" ? "on" : "") + '">Summary table</button><button data-v2="imp-mode" data-v="isolates" class="' + (st.impMode === "isolates" ? "on" : "") + '">Isolate list</button></div>' +
       '<p class="v2-mut">' + (st.impMode === "summary" ? "A CSV with one row per organism: organism, specimen, setting, n (isolates), then one column per antibiotic holding % susceptible. Antibiotic columns may use names or laboratory codes (AMK, TZP, MEM...)." :
-        "A CSV with one row per isolate: patient ID, date, specimen, location, organism, then one column per antibiotic holding S, I or R (a WHONET or laboratory export saved as CSV works if it has interpretations). StewardMD keeps the first isolate per patient per organism (CLSI M39) and computes % susceptible.") + "</p>" +
+        "A CSV with one row per isolate: patient ID, date, specimen, location, organism, then one column per antibiotic holding S, I or R. A WHONET export saved as CSV with interpretations works (columns such as AMK_ND30 or MEM_NM are recognised). StewardMD keeps the first isolate per patient per organism (CLSI M39), applies the MRSA rule to beta-lactams, and computes % susceptible (intermediate counts as not susceptible).") + "</p>" +
       '<button class="v2-btn" data-v2="template">Download a template</button>' +
       '<label class="v2-lab" for="v2Name">Name</label><input class="v2-in" id="v2Name" value="' + esc((st.imp && st.imp.name) || (loc && loc.name) || "") + '" placeholder="e.g. City Hospital 2025">' +
       '<label class="v2-lab" for="v2Period">Period</label><input class="v2-in" id="v2Period" value="' + esc((st.imp && st.imp.period) || "") + '" placeholder="e.g. January to December 2025">' +

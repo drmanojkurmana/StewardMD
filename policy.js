@@ -138,11 +138,11 @@
     var latest = {};
     var ord = function (x) { return String(x.end || (x.year + "-12")); }, perYear = {};
     I.sources.forEach(function (x) { var k = x.inst + "|" + x.year; perYear[k] = (perYear[k] || 0) + 1; });
-    I.sources.forEach(function (x) { if (x.kind === "network") return; if (!latest[x.inst] || ord(x) > ord(latest[x.inst])) latest[x.inst] = x; });
+    I.sources.forEach(function (x) { if (!latest[x.inst] || ord(x) > ord(latest[x.inst])) latest[x.inst] = x; });
     I.sources.forEach(function (x) {
-      if (icmr && x.id === icmr.id) return;                          // that is the ICMR profile
+      if (x.inst === "ICMR_AMRSN") return;                           // the ICMR profile carries it
       if (x.inst === "GIMSR") return;                                 // the GIMSR profile carries it
-      if (x.kind !== "network" && latest[x.inst] !== x) return;       // older editions live in the Antibiogram screen
+      if (latest[x.inst] !== x) return;                               // older editions live in the Antibiogram screen
       var net = x.kind === "network";
       HOSPITALS.push({ id: "ABG_" + x.id, name: x.name + " (" + x.year + ")", short: x.city || x.short, type: net ? "network" : "study",
         label: x.short + (x.city && x.short.indexOf(x.city) < 0 ? ", " + x.city : "") + " (" + (x.kind === "study" ? "study, " : "") + x.year + (perYear[x.inst + "|" + x.year] > 1 ? (+String(x.end).slice(5, 7) <= 6 ? " H1" : " H2") : "") + ")",

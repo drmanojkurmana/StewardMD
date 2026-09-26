@@ -236,6 +236,10 @@
     var up3 = up.replace(/[^A-Z0-9]/g, "");
     var keys = Object.keys(idx);
     for (var i = 0; i < keys.length; i++) if (keys[i].replace(/[^A-Z0-9]/g, "") === up3) return idx[keys[i]];
+    // WHONET column names: code + test method and guideline, e.g. AMK_ND30, MEM_NM, CIP_EE5,
+    // VAN_NE (N/E = CLSI/EUCAST, D/M/E = disc/MIC/Etest, then disc content).
+    var w = /^([A-Z]{2,4})_[NE][DME]\d*(?:[.\/]\d+)*$/.exec(up);
+    if (w && idx[w[1]]) return idx[w[1]];
     return null;
   }
   function orgIndex() {
@@ -554,8 +558,37 @@
 
   /* Summary antibiogram CSV: organism, specimen, setting, n, then one column per drug with
    * %S (numbers; blank = not tested). Returns {rows:[...], errors:[...], warnings:[...]}. */
+  // Values in the specimen or setting column that are not recognised are counted under "all" and
+  // listed, so the user can rename them (WHONET codes such as "ur" or "bl", local ward names).
+  /* Free-text specimen and setting values from a laboratory export (imports only; source files
+   * must use the exact keys). */
+  function guessSpecimen(v) {
+    var t = String(v || "").toLowerCase();
+    if (!t.trim()) return null;
+    if (/\bcsf\b|cerebro/.test(t)) return "csf";
+    if (/blood|\bbl\b|bact/.test(t)) return "blood";
+    if (/urin|\bur\b/.test(t)) return "urine";
+    if (/sputum|\bbal\b|broncho|trache|\beta\b|resp|\blrt\b|\bsp\b/.test(t)) return "respiratory";
+    if (/stool|faec|fec/.test(t)) return "stool";
+    if (/pleural|ascit|periton|synovial|bile|fluid/.test(t)) return "sterile";
+    if (/pus|wound|swab|tissue|abscess|\bpu\b|\bwd\b/.test(t)) return "pus";
+    return null;
+  }
+  function guessSetting(v) {
+    var t = String(v || "").toLowerCase();
+    if (!t.trim()) return null;
+    if (/icu|intensive|\bccu\b|\bhdu\b|critical/.test(t)) return "icu";
+    if (/\bopd\b|out.?patient|clinic/.test(t)) return "opd";
+    if (/ward|\bipd\b|in.?patient|\bip\b/.test(t)) return "ward";
+    return null;
+  }
+  function unknownWarn(res, unknown) {
+    var sp = Object.keys(unknown.spec).filter(Boolean), se = Object.keys(unknown.set).filter(Boolean);
+    if (sp.length) res.warnings.unshift("Specimen values not recognised, counted under all specimens: " + sp.slice(0, 12).join(", ") + (sp.length > 12 ? " and " + (sp.length - 12) + " more" : "") + ". Use blood, urine, respiratory, pus, sterile fluid, CSF or stool.");
+    if (se.length) res.warnings.unshift("Setting values not recognised, counted under all settings: " + se.slice(0, 12).join(", ") + (se.length > 12 ? " and " + (se.length - 12) + " more" : "") + ". Use OPD, ward or ICU.");
+  }
   function importSummaryCsv(text) {
-    var t = parseCsv(text), res = { rows: [], errors: [], warnings: [] };
+    var t = parseCsv(text), res = { rows: [], errors: [], warnings: [] }, unknown = { spec: {}, set: {} };
     if (t.length < 2) { res.errors.push("The file has no data rows."); return res; }
     var h = t[0], cOrg = findCol(h, ["organism", "organisms", "pathogen", "bacteria", "isolate"]), cSpec = findCol(h, ["specimen", "sample", "specimen type", "sample type"]),
       cSet = findCol(h, ["setting", "location", "ward", "area", "unit"]), cN = findCol(h, ["n", "isolates", "number", "no. of isolates", "count", "total"]);
@@ -567,7 +600,9 @@
     for (var r = 1; r < t.length; r++) {
       var line = t[r], o = canonOrg(line[cOrg]);
       if (!o) { res.warnings.push("Row " + (r + 1) + ": organism '" + line[cOrg] + "' not recognised; skipped."); continue; }
-      var spec = cSpec >= 0 ? (canonSpecimen(line[cSpec]) || "all") : "all", set = cSet >= 0 ? (canonSetting(line[cSet]) || "all") : "all";
+      var spec = cSpec >= 0 ? (canonSpecimen(line[cSpec]) || guessSpecimen(line[cSpec])) : "all", set = cSet >= 0 ? (canonSetting(line[cSet]) || guessSetting(line[cSet])) : "all";
+      if (!spec) { unknown.spec[String(line[cSpec]).trim()] = 1; spec = "all"; }
+      if (!set) { unknown.set[String(line[cSet]).trim()] = 1; set = "all"; }
       var n = cN >= 0 ? parseInt(String(line[cN]).replace(/[^0-9]/g, ""), 10) : null;
       var row = { org: o.key, pheno: o.pheno, spec: spec, set: set, n: n > 0 ? n : null, s: {} };
       drugCols.forEach(function (dc) {
@@ -578,6 +613,7 @@
       });
       res.rows.push(row);
     }
+    unknownWarn(res, unknown);
     return res;
   }
 
@@ -603,7 +639,7 @@
     function hash(s) { var x = 2166136261; s = String(s); for (var i = 0; i < s.length; i++) { x ^= s.charCodeAt(i); x = Math.imul ? Math.imul(x, 16777619) : (x * 16777619) >>> 0; } return (x >>> 0).toString(36); }
     function dt(s) { var m = /^(\d{4})-(\d{1,2})-(\d{1,2})/.exec(s) || null; if (m) return new Date(+m[1], +m[2] - 1, +m[3]).getTime(); m = /^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{2,4})/.exec(s); if (m) { var y = +m[3]; if (y < 100) y += 2000; return new Date(y, +m[2] - 1, +m[1]).getTime(); } return null; }
     var from = opts.from ? dt(opts.from) : null, to = opts.to ? dt(opts.to) : null;
-    var isolates = [], expert = 0;
+    var isolates = [], expert = 0, unknown = { spec: {}, set: {} };
     for (var r = 1; r < t.length; r++) {
       var line = t[r], o = canonOrg(line[cOrg]);
       if (!o) { if (String(line[cOrg] || "").trim()) res.warnings.push("Row " + (r + 1) + ": organism '" + line[cOrg] + "' not recognised; skipped."); continue; }
@@ -621,7 +657,10 @@
         if (mr) STAPH_BL_LABILE.concat(STAPH_BL_STABLE).forEach(function (d) { if (res1[d] && res1[d] !== "R") { res1[d] = "R"; expert++; } });
         if (!pheno && (mr || ms)) pheno = o.key === "saureus" ? (mr ? "MRSA" : "MSSA") : (mr ? "MR" : "MS");
       }
-      isolates.push({ pt: cPt >= 0 ? hash(line[cPt]) : "row" + r, when: when == null ? r : when, org: o.key, pheno: pheno, named: o.pheno, spec: cSpec >= 0 ? (canonSpecimen(line[cSpec]) || "all") : "all", set: cSet >= 0 ? (canonSetting(line[cSet]) || "all") : "all", res: res1 });
+      var sp = cSpec >= 0 ? (canonSpecimen(line[cSpec]) || guessSpecimen(line[cSpec])) : "all", se = cSet >= 0 ? (canonSetting(line[cSet]) || guessSetting(line[cSet])) : "all";
+      if (!sp) { unknown.spec[String(line[cSpec]).trim()] = 1; sp = "all"; }
+      if (!se) { unknown.set[String(line[cSet]).trim()] = 1; se = "all"; }
+      isolates.push({ pt: cPt >= 0 ? hash(line[cPt]) : "row" + r, when: when == null ? r : when, org: o.key, pheno: pheno, named: o.pheno, spec: sp, set: se, res: res1 });
     }
     res.isolates = isolates.length;
     isolates.sort(function (a, b) { return a.when - b.when; });
@@ -629,6 +668,7 @@
     isolates.forEach(function (x) { var k = x.pt + "|" + x.org; if (seen[k]) return; seen[k] = 1; first.push(x); });
     res.firstIsolates = first.length;
     if (expert) res.warnings.push(expert + " beta-lactam results of methicillin-resistant staphylococci were set to resistant (CLSI expert rule).");
+    unknownWarn(res, unknown);
     var groups = {};
     first.forEach(function (x) {
       var combos = [], seenC = {};

@@ -21,7 +21,7 @@
  * ======================================================================================== */
 (function () {
   "use strict";
-  var ABG_V = "d2a804860c0b";
+  var ABG_V = "efe9aecd688e";
   var R = window.ABG_RULES;
   var ACT = { k: "keep", i: "intrinsic", h: "hide", x: "suppress", c: "caution" };
   var LOCAL_KEY = "smd_abg_local";
@@ -40,9 +40,10 @@
     var perYear = {};
     srcs.forEach(function (s) { var k = s.inst + "|" + s.year; perYear[k] = (perYear[k] || 0) + 1; });
     srcs.forEach(function (s) { s.edLabel = String(s.year) + (perYear[s.inst + "|" + s.year] > 1 ? (+String(s.end).slice(5, 7) <= 6 ? " H1" : " H2") : ""); });
+    // Latest edition per institution and per network (older editions stay reachable by "src:<id>").
     var latest = {};
-    srcs.forEach(function (s) { if (s.kind === "network") return; if (!latest[s.inst] || s.ord > latest[s.inst].ord) latest[s.inst] = s; });
-    srcs.forEach(function (s) { s.latest = s.kind === "network" ? true : latest[s.inst] === s; });
+    srcs.forEach(function (s) { if (!latest[s.inst] || s.ord > latest[s.inst].ord) latest[s.inst] = s; });
+    srcs.forEach(function (s) { s.latest = latest[s.inst] === s; });
     var rows = b.rows.map(function (r) {
       var cells = {}, x = r[9] || {}, fromR = x.m === "R";
       Object.keys(r[6]).forEach(function (d) { var c = r[6][d]; cells[d] = { s: c[0], act: ACT[c[1]], nt: c[2], why: c[3] == null ? null : why[c[3]], fromR: fromR }; });
@@ -101,7 +102,7 @@
     ["north", "south", "east", "west"].forEach(function (r) {
       if (B.sources.some(function (s) { return s.region === r && s.kind !== "network" && !s.local && s.latest && recent(s); })) out.push({ id: "region:" + r, label: REGION_LABEL[r] + " (pooled)", group: "Pooled", region: r });
     });
-    B.sources.filter(function (s) { return s.kind === "network"; }).sort(function (a, b) { return (a.region === "national" ? 0 : 1) - (b.region === "national" ? 0 : 1) || b.year - a.year; })
+    B.sources.filter(function (s) { return s.kind === "network" && s.latest; }).sort(function (a, b) { return (a.region === "national" ? 0 : 1) - (b.region === "national" ? 0 : 1) || (a.short < b.short ? -1 : 1); })
       .forEach(function (s) { out.push({ id: "src:" + s.id, label: s.short + " " + (s.edLabel || s.year) + (s.verification.status === "transcribed" ? " (summary, no isolate counts)" : ""), group: "Surveillance networks", src: s }); });
     ["north", "south", "east", "west"].forEach(function (r) {
       B.sources.filter(function (s) { return s.region === r && s.kind !== "network" && s.latest && !s.local; }).sort(function (a, b) { return a.short < b.short ? -1 : 1; })
