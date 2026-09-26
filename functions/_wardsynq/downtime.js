@@ -181,11 +181,14 @@ async function downtimePack(request, env, ctx) {
     // and a ward that needs the trend has the paper chart it has been keeping since the outage began.
     let lastVitals = null;
     if (observations) {
-      const vitals = observations.filter((o) => o && o.category === "vital-signs" && o.recordedAt);
+      /* When it was taken, read as wardsynq-vitals.js reads it: a ward-charted vital carries effectiveAt and
+       * meta.recordedAt, never a top-level recordedAt, so filtering on that showed no vitals at all (DATA-08). */
+      const takenAt = (o) => o.effectiveAt || (o.meta && (o.meta.effectiveAt || o.meta.recordedAt)) || o.recordedAt || "";
+      const vitals = observations.filter((o) => o && o.category === "vital-signs" && Number.isFinite(Date.parse(takenAt(o))));
       if (vitals.length) {
         lastVitals = {};
-        for (const o of vitals.sort((a, b) => String(a.recordedAt).localeCompare(String(b.recordedAt)))) {
-          lastVitals[o.code] = { value: o.value, unit: o.unit || null, at: o.recordedAt };
+        for (const o of vitals.sort((a, b) => Date.parse(takenAt(a)) - Date.parse(takenAt(b)))) {
+          lastVitals[o.code] = { value: o.value, unit: o.unit || null, at: takenAt(o) };
         }
       }
     }

@@ -143,3 +143,20 @@ test("DATA-06: merges stay one hop: no chain (C into B, then B into A) and no cy
   assert.deepEqual([...idB.identity.allIds].sort(), [A, B, C].sort());
   assert.equal(idB.identity.isMerged, false);
 });
+
+test("DATA-08: the downtime sheet shows the newest ward-charted vital of each kind", async () => {
+  seedHospital();
+  const p = await admittedPatient();
+  const t0 = Date.now() - 3 * 3600000;
+  for (const [i, v] of [[0, { sbp: "120", pulse: "80" }], [1, { sbp: "82", pulse: "130" }]]) {
+    const r = await as(NURSE, "/ward/vitals", "POST", { orgId: ORG, encounterId: p.encounterId, patientId: p.patientId, vitals: v, recordedAt: new Date(t0 + i * 3600000).toISOString() });
+    assert.equal(r.__status, 200, JSON.stringify(r));
+  }
+  const d = await as(DOCTOR, `/ward/downtime?orgId=${ORG}`);
+  assert.equal(d.__status, 200, JSON.stringify(d));
+  const page = d.patients.find((x) => x.encounterId === p.encounterId) || d.patients[0];
+  assert.ok(page.lastVitals, JSON.stringify(page));
+  const vals = Object.values(page.lastVitals).map((v) => String(v.value));
+  assert.ok(vals.includes("82") && vals.includes("130"), "the newest reading of each: " + JSON.stringify(page.lastVitals));
+  assert.ok(!vals.includes("120"));
+});
