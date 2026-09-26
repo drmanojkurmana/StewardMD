@@ -135,7 +135,8 @@ function priorityRank(value) {
 }
 
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
-/** PURE. One order per (encounter, test). Asking again is the same order, not a second specimen. */
+/** PURE. The first order of a test on a stay. Asking again while it is OPEN is the same order, not a second
+ * specimen; a repeat after it closed takes the next free id (CLIN-03, see orderInvestigation). */
 function wardOrderIdFor(encounterId, code) {
   const e = slug(encounterId), c = slug(code);
   return e && c ? `wsq-sr-${e}-${c}` : null;
@@ -181,8 +182,8 @@ async function orderInvestigation(request, env, ctx) {
     return { ...base, ok: false, status: 409, error: "encounter_closed", detail: "this stay has ended; order it against the current one", encounterId, written: 0 };
   }
 
-  const id = wardOrderIdFor(encounterId, code);
-  if (!id) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
+  const baseId = wardOrderIdFor(encounterId, code);
+  if (!baseId) return { ...base, ok: false, status: 422, error: "bad_identifiers", written: 0 };
 
   const askedPriority = str(ctx.priority);
   const priority = normalisePriority(askedPriority);
@@ -199,6 +200,20 @@ async function orderInvestigation(request, env, ctx) {
   let standardCoding = null;
   try { const rc = await resolveCoding(svc, mig.tenantId, ctx.coding); if (rc.refuse) return { ...base, ok: false, ...rc.refuse, written: 0 }; standardCoding = rc.coding; }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "The code set could not be read, so nothing was ordered.", written: 0 }; }
+
+  /* CLIN-03: a REPEAT is a new request. The id used to be (stay, test) alone, so a same-day potassium
+   * recheck after the first result closed its order was written over that order: the worklist read the
+   * first order's received specimen and showed the recheck as done, and its result could only be filed
+   * as a "correction" of the first. An OPEN order of the test is still the duplicate guard; a closed one
+   * is history, and the repeat takes the next id in the series (<base>-r2, -r3, ...). */
+  let id = baseId, current = null;
+  for (let n = 1; ; n++) {
+    id = n === 1 ? baseId : `${baseId}-r${n}`;
+    try { current = await svc.get("ServiceRequest", id); }
+    catch { current = null; }
+    if (!current || isOpenOrder(current)) break;
+    if (n >= 500) return { ...base, ok: false, status: 409, error: "too_many_repeats", detail: "this test has been ordered too many times on this stay to number another", written: 0 };
+  }
 
   const sr = ServiceRequest({
     id, patientId: encounter.patientId, encounterId,
@@ -217,9 +232,6 @@ async function orderInvestigation(request, env, ctx) {
   if (entry) sr.catalogue = { code: entry.code, source: entry.source };
   else if (other) sr.other = true;
 
-  let current;
-  try { current = await svc.get("ServiceRequest", id); }
-  catch { current = null; }
   if (current && current.status === "active" && current.priority === priority && str(current.reason) === reason) {
     return { ...base, ok: true, written: 0, skipped: "already_ordered", orderId: id, priority, version: current.version };
   }

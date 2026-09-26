@@ -617,6 +617,9 @@ function orderFromWardRequest(input) {
    * course stops has to be there before a schedule is allowed to assert anything is due. */
   const stopAt = str(input.stopAt);
   if (stopAt && Number.isFinite(Date.parse(stopAt))) order.stopAt = new Date(Date.parse(stopAt)).toISOString();
+  /* CLIN-04: or as a course length, counted on the server's clock from now: the Prescribe form's "Course, days". */
+  const days = Number(input.durationDays);
+  if (!order.stopAt && Number.isInteger(days) && days >= 1 && days <= 365) { order.stopAt = new Date(Date.now() + days * 86400000).toISOString(); order.courseDays = days; }
   /* Patient instructions, bolted on the same way: CODES from a closed list, never words. Their English and
    * every translation come from the i18n catalog (wardsynq/site/i18n.js "rx.instr.<code>"), so a printout
    * in the patient's language can carry them without translating anything a clinician typed. Unknown
@@ -655,7 +658,7 @@ function patientInstructionsRefusal(v) {
  * prescriber's reason for proceeding past overridable findings; it is attributed to the acting actor
  * here, never to anyone a caller names.
  *
- * ctx: { migration, order: {...}, rulePack?, checkOnly?, overrideReason?, lactationWindowDays?, actorDeps, recordDeps }.
+ * ctx: { migration, order: {...}, rulePack?, checkOnly?, overrideReason?, requireSafetyReason?, lactationWindowDays?, actorDeps, recordDeps }.
  */
 async function createWardMedicationOrder(request, env, ctx) {
   const mig = ctx.migration;
@@ -671,6 +674,13 @@ async function createWardMedicationOrder(request, env, ctx) {
 
   const candidate = orderFromWardRequest({ ...(ctx.order || {}), prescriberId: resolved.actor.id });
   if (!candidate) return { ...base, ok: false, status: 422, error: "order_incomplete", detail: "drug, patientId, encounterId and a numeric dose {value, unit} are all required", written: 0 };
+  const askedDays = ctx.order && ctx.order.durationDays;
+  if (askedDays !== undefined && askedDays !== null && askedDays !== "" && !candidate.courseDays && !candidate.stopAt) {
+    return { ...base, ok: false, status: 422, error: "bad_course_days", detail: "A course is a whole number of days from 1 to 365. Nothing was prescribed.", written: 0 };
+  }
+  if (candidate.stopAt && Date.parse(candidate.stopAt) <= Date.now()) {
+    return { ...base, ok: false, status: 422, error: "stop_in_the_past", detail: "The course would already have ended. Nothing was prescribed.", written: 0 };
+  }
 
   /* THE FORMULARY, and it is NOT the safety engine. It answers "does this hospital stock this, and
    * does it want a word first" - a stewardship control the hospital owns. Off-formulary never blocks:
@@ -761,6 +771,14 @@ async function createWardMedicationOrder(request, env, ctx) {
       drug: candidate.drug, safety, ...(replaces ? { replaces } : {}), written: 0, actor: resolved.actor.id, role: resolved.role };
   }
   const overrideReason = str(ctx.overrideReason).slice(0, 500);
+  /* CLIN-02: a writer with no review step of its own (the consultation save) cannot rely on a screen
+   * having asked for a reason first, as the Prescribe form does (checkOnly, then "Prescribe anyway").
+   * requireSafetyReason makes the reason the Prescribe form insists on a server refusal instead. */
+  if (ctx.requireSafetyReason === true && safety.checked && !overrideReason && (safety.blocks.length || safety.overridables.length)) {
+    return { ...base, ok: false, status: 409, error: "safety_reason_required",
+      detail: safety.blocks.concat(safety.overridables).map((f) => f.message).join(" ") + " Give a reason to prescribe past these findings. Nothing was prescribed.",
+      drug: candidate.drug, safety, ...(replaces ? { replaces } : {}), written: 0, actor: resolved.actor.id, role: resolved.role };
+  }
   let overrides = [];
   if (safety.checked && overrideReason && safety.overridables.length) {
     overrides = safety.overridables.map((f) => ({ code: f.code, targetId: f.ruleId || f.allergyId || null, reasonCode: "prescriber-judgement", rationale: overrideReason, actorId: resolved.actor.id }));
@@ -770,7 +788,8 @@ async function createWardMedicationOrder(request, env, ctx) {
    * response, and a finding somebody proceeded past belongs with the prescription it was about. */
   candidate.safetyAtOrder = safety.checked
     ? { checked: true, rulePackVersion: safety.rulePackVersion, checkedAt: new Date().toISOString(),
-        findings: safety.blocks.concat(safety.overridables, safety.warnings).map((f) => ({ code: f.code, disposition: f.disposition, message: f.message, ...(f.overridden ? { overridden: true } : {}) })),
+        // ruleId / allergyId (CLIN-12): the bedside clears exactly the finding the prescriber answered, not its code.
+        findings: safety.blocks.concat(safety.overridables, safety.warnings).map((f) => ({ code: f.code, disposition: f.disposition, message: f.message, ...(f.ruleId ? { ruleId: f.ruleId } : {}), ...(f.allergyId ? { allergyId: f.allergyId } : {}), ...(f.overridden ? { overridden: true } : {}) })),
         unresolvedDrug: !!safety.unresolvedDrug, ...(safety.pregnancyLactation ? { pregnancyLactation: safety.pregnancyLactation } : {}),
         ...(overrideReason ? { reason: overrideReason, acknowledgedBy: resolved.actor.id } : {}) }
     : { checked: false, code: safety.code, checkedAt: new Date().toISOString() };
@@ -814,6 +833,53 @@ async function createWardMedicationOrder(request, env, ctx) {
     ...(overrideRows && (overrideRows.written || overrideRows.error || overrideRows.rejected || overrideRows.fired) ? { overridesRecorded: overrideRows } : {}),
     actor: resolved.actor.id, role: resolved.role,
   };
+}
+
+/**
+ * Stops (discontinues) an active medication order. CLIN-04: until this existed no write path could take
+ * an order out of "active", so heparin stopped for a bleed or a finished course stayed on the round, due
+ * and then overdue, and in every interaction and same-drug check.
+ *
+ * The stop is a new VERSION of the same order (status "stopped", who, when, why), so the version history
+ * is the audit and the governed store writes its audit row as for any write. The stopping clinician signs
+ * the stop; the original prescriber stays on the order. A reason is required. Stopping an order that is
+ * not active is refused rather than silently re-stamped. Prescribing the drug again on the same stay
+ * writes a new active version (createWardMedicationOrder), as before.
+ *
+ * ctx: { migration, orderId, reason, expectedVersion?, idempotencyKey?, actorDeps, recordDeps }
+ */
+/** The stop itself, shared by the chart's Stop and by discharge (migrate-discharge.js). Throws what svc.put throws. */
+async function stopOrderVersion(svc, order, actorId, reason, at, idempotencyKey) {
+  const next = { ...order, status: "stopped", signedBy: actorId, stoppedAt: at, stoppedBy: actorId, stopReason: reason };
+  delete next.version; delete next.meta; delete next.writtenBy;
+  const out = await svc.put(next, { expectedVersion: order.version, idempotencyKey: idempotencyKey || null });
+  return { out, next };
+}
+
+async function stopWardMedicationOrder(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
+  const orderId = str(ctx.orderId), reason = str(ctx.reason).slice(0, 500);
+  if (!orderId) return { ...base, ok: false, status: 422, error: "order_required", written: 0 };
+  if (!reason) return { ...base, ok: false, status: 422, error: "reason_required", detail: "Say why this medicine is being stopped. Nothing was changed.", written: 0 };
+
+  const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
+  if (error) return { ...base, ...error, written: 0 };
+  let order;
+  try { order = await svc.get("MedicationOrder", orderId); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+  if (!order) return { ...base, ok: false, status: 404, error: "order_not_found", orderId, written: 0 };
+  if (order.status !== "active") return { ...base, ok: false, status: 409, error: "order_not_active", orderId, orderStatus: order.status || null, written: 0 };
+  if (ctx.expectedVersion != null && ctx.expectedVersion !== "" && Number(ctx.expectedVersion) !== Number(order.version)) {
+    return { ...base, ok: false, status: 409, error: "order_changed", detail: "this order changed since it was shown; nothing was stopped", orderId, currentVersion: order.version, written: 0 };
+  }
+  try {
+    const { out, next } = await stopOrderVersion(svc, order, resolved.actor.id, reason, new Date().toISOString(), ctx.idempotencyKey || null);
+    return { ...base, ok: true, written: 1, orderId, status: "stopped", drug: order.drug, version: out.record.version, stoppedAt: next.stoppedAt, actor: resolved.actor.id, role: resolved.role };
+  } catch (e) {
+    return { ...base, ...writeFailure(e, { orderId, written: 0, actor: resolved.actor.id }) };
+  }
 }
 
 /* ---- transfer and the bed board -----------------------------------------------------------------
@@ -1256,7 +1322,8 @@ const TIMELINE_LABEL = {
   CarePlan: (r, who) => `Care plan — ${r.status || "draft"}${who ? ` · by ${who}` : ""}`,
   ClinicalNote: (r, who) => `${who ? `${who} wrote` : "Somebody wrote"} a ${r.noteType || "progress"} note${r.signedBy ? ", signed" : r.aiDrafted ? " (drafted by the assistant, unsigned)" : ", unsigned"}`,
   ImagingStudy: (r, who) => `Imaging: ${r.modality || "study"}${r.bodySite ? ` — ${r.bodySite}` : ""} — ${r.status || "available"}${who ? ` · by ${who}` : ""}`,
-  AllergyIntolerance: (r, who) => `${who ? `${who} recorded` : "Recorded"} an allergy: ${r.substance}${r.severity ? ` (${r.severity})` : ""}`,
+  // CLIN-05: a ward entry the pack did not recognise is shown as typed, and its reaction with it.
+  AllergyIntolerance: (r, who) => `${who ? `${who} recorded` : "Recorded"} an allergy: ${r.substance === "unspecified" && r.reportedText ? `${r.reportedText} (not recognised by the checks)` : r.substance}${r.reaction ? `, ${r.reaction}` : ""}${r.severity ? ` (${r.severity})` : ""}`,
   SurgicalCase: (r, who) => `Operation: ${r.procedure || "procedure"}${r.site ? ` — ${r.site}` : ""}${r.laterality && r.laterality !== "not-applicable" ? ` ${r.laterality}` : ""}${r.status ? ` — ${r.status}` : ""}${who ? ` · by ${who}` : ""}`,
   AnesthesiaRecord: (r, who) => `Anaesthetic${r.technique ? `: ${r.technique}` : ""}${who ? ` · by ${who}` : ""}`,
   ImplantRecord: (r, who) => `Implant: ${r.device || r.display || "device"}${r.serialNumber ? ` (${r.serialNumber})` : ""}${who ? ` · by ${who}` : ""}`,
@@ -1457,7 +1524,7 @@ async function patientTimeline(request, env, ctx) {
 export {
   IPD, ICU, MATERNITY, PEDIATRICS, NICU, ADMISSION_CLASSES, OPEN, patientsFor,
   encounterFromAdmission, sameAdmission, admitPatient, listWard,
-  recordWardVitals, orderFromWardRequest, createWardMedicationOrder, PATIENT_INSTRUCTIONS, patientInstructionsRefusal,
+  recordWardVitals, orderFromWardRequest, createWardMedicationOrder, stopWardMedicationOrder, stopOrderVersion, PATIENT_INSTRUCTIONS, patientInstructionsRefusal,
   sameBed, transferPatient, bedBoard,
   freeMasterBed,   // TASK 4.2: discharge reuses this to release the vacated bed - see migrate-discharge.js
   EMERGENCY_BED_RELAXATION, ADMIN_RELAXABLE_STATES, checkMasterBed,

@@ -265,6 +265,13 @@ async function dispenseOrder(request, env, ctx) {
   }
 
   const mine = (verifications || []).filter((v) => v && str(v.orderId) === orderId);
+  /* CLIN-20: a pharmacist's QUERY on the version being issued stops the supply. verificationFor() counts only
+   * "verified" rows, so a query read as no review at all and the drug went out marked merely unverified. */
+  const query = mine.find((v) => v.outcome === "queried" && Number(v.orderVersion) === Number(order.version));
+  if (query) {
+    return { ...base, ok: false, status: 409, error: "verification_queried", orderId, orderVersion: order.version, written: 0,
+      detail: `The pharmacist has queried this order${query.reason ? `: ${query.reason}` : ""}. Resolve it with the prescriber (a new version, or the query answered and verified) before issuing.` };
+  }
   const check = verificationFor(mine, order.version);
   if (check.state === "superseded") {
     /* REFUSED. Issuing now would put "the pharmacist approved this" against a prescription they never

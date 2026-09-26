@@ -16,7 +16,7 @@ window.__calls = [];
 localStorage.setItem("smd_opd_staff_tok", "harness-token");
 
 var PATIENT_ID = null, ENC_ID = null, MRN = "SMD-H1-00099";
-var ORDER_ID = null, DUE_STATUS = "";     // the one MedicationOrder's eMAR status, advanced by /ward/mar
+var ORDER_ID = null, DUE_STATUS = "", STOPPED = false;     // the one MedicationOrder's eMAR status, advanced by /ward/mar
 var SR_ID = null;                          // the one investigation's ServiceRequest id
 var invStage = "ordered";                  // ordered -> collected -> resulted
 
@@ -72,8 +72,16 @@ window.fetch = function (url, opts) {
     return reply({ ok: true, written: 1, orderId: ORDER_ID });
   }
   if (u.indexOf("/ward/schedule") >= 0) {
-    return reply({ ok: true, due: ORDER_ID ? [{ orderId: ORDER_ID, drug: "Paracetamol 500mg", dose: { value: 500, unit: "mg" }, route: "oral", frequency: "BD", status: DUE_STATUS, dueAt: "2026-09-08T09:00:00.000Z", overdue: false }] : [], prn: [], unscheduled: [] });
+    return reply({ ok: true, due: ORDER_ID ? [{ orderId: ORDER_ID, drug: "Paracetamol 500mg", dose: { value: 500, unit: "mg" }, route: "oral", frequency: "BD", status: DUE_STATUS, dueAt: "2026-09-08T09:00:00.000Z", overdue: false }] : [],
+      // CLIN-13: an as-needed order, never given, offered "Give now".
+      prn: ORDER_ID ? [{ orderId: "wsq-rx-prn-ondansetron", orderVersion: 1, drug: "Ondansetron", dose: { value: 4, unit: "mg" }, route: "IV", frequency: "PRN", asNeeded: true }] : [], unscheduled: [] });
   }
+  // CLIN-04 / CLIN-05: the chart's active medicines (with Stop) and the allergy entry.
+  if (u.indexOf("/ward/timeline") >= 0) {
+    return reply({ ok: true, events: [], activeMedications: ORDER_ID && !STOPPED ? [{ orderId: ORDER_ID, drug: "Paracetamol 500mg", dose: { value: 500, unit: "mg" }, route: "oral", frequency: "BD" }] : [] });
+  }
+  if (u.indexOf("/ward/medication-stop") >= 0 && (opts && opts.method) === "POST") { STOPPED = true; return reply({ ok: true, written: 1, status: "stopped" }); }
+  if (u.indexOf("/ward/allergy") >= 0 && (opts && opts.method) === "POST") return reply({ ok: true, written: 1, allergyId: "wsq-alg-x" });
   if (u.indexOf("/ward/mar") >= 0 && (opts && opts.method) === "POST") {
     var NEXT2 = { "": "verified", verified: "dispensed", dispensed: "scanned", scanned: "administered" };
     var from = DUE_STATUS; DUE_STATUS = NEXT2[DUE_STATUS] || DUE_STATUS;
