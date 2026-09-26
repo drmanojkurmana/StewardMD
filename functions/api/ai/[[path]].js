@@ -122,7 +122,8 @@ function withCors(request, resp) {
  * =================================================================== */
 import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor, deviceCheck } from "../../_usage.js";
 import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime, scribeChargeSec, isScribeKind, poolKeyFor, capsEnforced, resolveModel, modelRate, rateConfirmed, estCostInr as aiEstCostInr } from "../../_ai_usage.js";
-import { getCredits, dailyCostCap, costCapOn, inrToMt, MT_PER_INR } from "../../_credits.js";
+import { getCredits, dailyCostCap, costCapOn, inrToMt, MT_PER_INR, tokenPackList } from "../../_credits.js";
+import { warmBillingCfg } from "../../_billingcfg.js";
 import { proFromRequest } from "../../_entitlement.js";
 import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, researchTermFor, researchKeywords, sourceOnTopic, researchTopic } from "../../_research.js";
 import { ownerOK, tokenMatch } from "../../_adminauth.js";
@@ -1387,6 +1388,10 @@ export async function onRequest(context) {
     out.tokensUsedMt = inrToMt(out.estCostInr);
     // Wallet + daily free allowance, in MaiK Tokens (the unit the paywall and rate card use).
     out.mtPerInr = MT_PER_INR;
+    // The packs at their selling price, so the wallet says what the balance is worth to the doctor
+    // (App Store / Play price), not what the AI costs us (mtPerInr).
+    try { await warmBillingCfg(store); } catch (e) {}
+    out.packs = tokenPackList(env);
     out.costCapOn = costCapOn(env);
     try {
       out.balanceMt = inrToMt(await getCredits(store, key));

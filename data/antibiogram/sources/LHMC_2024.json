@@ -25,12 +25,13 @@
  },
  "notes": "Antimicrobial data chapter of the LHMC Antibiotic Policy 2025 for January to December 2024 (Lady Hardinge Medical College and associated hospitals). The susceptibility tables print no n, so every row has n null; isolate counts by organism and specimen (all locations) are recorded from Tables 2 and 4. Totals over all organisms: urine 1971, blood 928, pus 1563, other sterile body fluids 341, LRI samples 529; inpatients 2582, outpatients 1678, ICU 646. The \"PUS + OSBF\" tables combine pus and other sterile body fluids and are mapped to pus (the pus and OSBF counts are recorded separately); LRT/LRI tables are mapped to respiratory; IPD is mapped to wards. Organisms are reported at genus level (Klebsiella spp., Acinetobacter spp., Pseudomonas spp., Enterococcus spp.); Salmonella Typhi and Paratyphi are reported together. Each organism and specimen has an all-locations table and a by-location table; both are kept (different settings).",
  "issues": [
-  "Second reader 2026-09-26: every susceptibility table (Tables 6 and 8 to 25, PDF pp 20 to 33, including the continuations of Tables 12, 14 and 16 on pp 26 to 28) re-read by eye from page renders (scale 2.6 to 3, one crop per table or table half) and written down before comparing with the file: all 682 cells (the seeded 30% sample of 205 cells from sample_cells.py is part of this), the organism, specimen and location of all 50 rows, and all 42 counts (Tables 2 and 4, pp 18 and 19). 0 transcription errors, nothing corrected, so no table needed a re-read under the 2% rule.",
+  "Second reader 2026-09-26: every susceptibility table (Tables 6 and 8 to 25, PDF pp 20 to 33, including the continuations of Tables 12, 14 and 16 on pp 26 to 28) re-read by eye from page renders (scale 2.6 to 3, one crop per table or table half) and written down before comparing with the file: all 682 cells (the seeded 30% sample of 205 cells is part of this), the organism, specimen and location of all 50 rows, and all 42 counts (Tables 2 and 4, pp 18 and 19). 0 transcription errors, nothing corrected, so no table needed a re-read under the 2% rule.",
   "Second reader: location checked on every row against the printed column headers (IPD, OPD, ICU; Table 13 prints only IPD and ICU columns, hence its two rows): no column swap anywhere. IPD as ward fits Table 3, which counts inpatients (2582), outpatients (1678) and ICU (646) as separate groups.",
   "Second reader: no isolate number is printed for any susceptibility table or row (every heading and column header of Tables 6 to 25 re-read, and the text layer of pp 17 to 33 searched); the only isolate numbers are in the isolation Tables 1 to 4, so n null is right on all 50 rows.",
   "Second reader: specimen headings confirmed as printed: Tables 16 to 21 say \"PUS + OSBF\" (pus with other sterile body fluids, mapped to pus; by Table 4, OSBF is 78 of 440 E. coli, 54 of 239 Klebsiella spp., 82 of 230 Acinetobacter spp. and 26 of 556 S. aureus isolates in that pool); Table 22 says \"LRT Sample\" and Tables 23 to 25 say \"LRI\" (Table 1 \"LRI SAMPLES\", Table 4 \"LRT SAMPLE\", text \"Lower Respiratory Tract Samples\"), mapped to respiratory.",
   "Second reader: the 11 intrinsic cells (Acinetobacter spp. ampicillin: blood 24 all, 32 IPD, 0 ICU; pus + OSBF 19 all, 21 IPD, 27 OPD, 0 ICU; LRT 3 all, 3 IPD, 25 OPD, 2 ICU) are printed that way, not misreadings. No count-table mismatch: each organism's five specimen counts in Table 4 add up to its Table 2 total. Blank cells (no dash printed) in Table 10 (Salmonella cefuroxime) and Table 22 (Klebsiella spp. ceftazidime and tetracycline, Pseudomonas spp. ampicillin-sulbactam) are rightly left out.",
-  "Second reader: printed as recorded but worth a look: Table 10 gives E. coli blood tetracycline 98% against doxycycline 54% (tetracycline-susceptible isolates count as doxycycline-susceptible, so one of the two is likely a source error); no validator rule flags it, and it is left as printed."
+  "Second reader: printed as recorded but worth a look: Table 10 gives E. coli blood tetracycline 98% against doxycycline 54% (tetracycline-susceptible isolates count as doxycycline-susceptible, so one of the two is likely a source error); no validator rule flags it, and it is left as printed.",
+  "Lead 2026-09-26 (review round 2): urine E. coli ceftriaxone 30% and cefotaxime 29% carry a conflict: the text on page 20 gives about 30% ESBL producers for the same isolates (Klebsiella, ESBL 50% and ceftriaxone 49%, is consistent)."
  ],
  "rows": [
   {
@@ -60,6 +61,10 @@
     "meropenem": 85,
     "imipenem": 83,
     "ertapenem": 83
+   },
+   "conflict": {
+    "ceftriaxone": "page 20 says almost 30% of urine E. coli were ESBL producers, which leaves about 70% non-ESBL isolates, yet the table prints ceftriaxone 30% susceptible; one of the two figures is wrong",
+    "cefotaxime": "page 20 says almost 30% of urine E. coli were ESBL producers, which leaves about 70% non-ESBL isolates, yet the table prints cefotaxime 29% susceptible; one of the two figures is wrong"
    }
   },
   {

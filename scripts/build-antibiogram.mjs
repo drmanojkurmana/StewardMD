@@ -31,6 +31,9 @@
  *   number isolated in the source's count tables (ICMR 2023 Tables 4.2 and 4.5): not a contradiction.
  *   conflict: {drug: "what disagrees"} marks a figure the source contradicts (a printed % its own
  *   printed counts do not give): shown with a caution, never pooled. isolates?: the report's total.
+ *   untested: {drug: "why"} marks a printed 0 that the source suggests means "not tested" (a caution).
+ *   unreliable: "what is inconsistent" marks a whole table the extraction found self-contradictory:
+ *   every figure in the row is a caution, never pooled or used by the console or reasoning.
  *   Reports that print % resistant (NARS-Net, state networks) give r:{} (or measure "R" with
  *   s:{} holding %R); the build stores 100 - %R and marks the cell (intermediate results then
  *   count as susceptible, which the app says).
@@ -61,6 +64,9 @@ const REGISTER = join(ROOT, "data", "antibiogram", "register.json");
 const CENSUS_SUM = join(ROOT, "data", "antibiogram", "census", "summary.json");
 const OUT_DIR = join(ROOT, "kb", "antibiogram");
 const OUT = join(OUT_DIR, "antibiogram.json");
+// Per-source detail (full notes, how it was read, second-reader notes, what was left out): fetched only
+// when a source sheet opens, so the main bundle stays small.
+const DETAIL = join(OUT_DIR, "antibiogram-detail.json");
 const INDEX_JS = join(ROOT, "antibiogram-data.js");
 const REPORT = join(ROOT, "data", "antibiogram", "validation-report.json");
 const HTML = join(ROOT, "index.html");
@@ -68,7 +74,7 @@ const STORE_JS = join(ROOT, "antibiogram-store.js");
 const RULES_JS = join(ROOT, "antibiogram-rules.js");
 
 const TOP = ["id", "kind", "inst", "institution", "short", "city", "state", "region", "sector", "year", "end", "isolates", "period", "published", "url", "page", "doi", "retrieved", "citation", "reporting", "method", "breakpoints", "measure", "verification", "notes", "issues", "rows", "counts", "excluded", "credibility", "file", "pages", "focus"];
-const ROWK = ["spec", "set", "org", "pheno", "n", "page", "s", "r", "nt", "approx", "conflict", "q", "trend", "notes", "printed", "note", "specimen_as_printed", "table", "cohort", "n_tested"];
+const ROWK = ["spec", "set", "org", "pheno", "n", "page", "s", "r", "nt", "approx", "conflict", "untested", "unreliable", "q", "trend", "notes", "printed", "note", "specimen_as_printed", "table", "cohort", "n_tested"];
 const KINDS = ["institution", "network", "study"], REGIONS = ["north", "south", "east", "west", "national"], SECTORS = ["government", "private", "network"];
 const VSTAT = ["double-checked", "single-checked", "transcribed"];
 const ACT = { keep: "k", intrinsic: "i", hide: "h", suppress: "x", caution: "c" };
@@ -108,6 +114,8 @@ export function validateSource(src, file) {
     if (r.cohort != null && !["hai"].includes(r.cohort)) e.push(`${t}: cohort must be "hai" when given`);
     if (r.n_tested != null && r.n_tested !== true) e.push(`${t}: n_tested must be true when given`);
     Object.keys(r.conflict || {}).forEach((d) => { if (vals[d] == null) e.push(`${t}: conflict names ${d}, which has no value`); if (typeof r.conflict[d] !== "string" || !r.conflict[d].trim()) e.push(`${t}: conflict.${d} must say what disagrees`); });
+    Object.keys(r.untested || {}).forEach((d) => { if (vals[d] !== 0) e.push(`${t}: untested names ${d}, whose value is not 0`); if (typeof r.untested[d] !== "string" || !r.untested[d].trim()) e.push(`${t}: untested.${d} must say why the 0 probably means not tested`); });
+    if (r.unreliable != null && (typeof r.unreliable !== "string" || !r.unreliable.trim())) e.push(`${t}: unreliable must say what is inconsistent`);
     Object.keys(r.trend || {}).forEach((d) => {
       if (!R.DRUGS[d]) e.push(`${t}: trend drug key "${d}" is not canonical`);
       const tr = r.trend[d]; if (!Array.isArray(tr) || tr.some((p) => !Array.isArray(p) || !Number.isInteger(p[0]) || typeof p[1] !== "number" || p[1] < 0 || p[1] > 100)) e.push(`${t}: trend.${d} must be [[year, %], ...]`);
@@ -142,7 +150,7 @@ export function checkRow(src, r, countOf) {
   Object.keys(raw).forEach((d) => { s[d] = isR ? Math.round(10 * (100 - raw[d])) / 10 : raw[d]; });
   let trend = r.trend || null;
   if (trend && isR) { trend = {}; Object.keys(r.trend).forEach((d) => { trend[d] = r.trend[d].map((p) => [p[0], Math.round(10 * (100 - p[1])) / 10]); }); }
-  const v = R.validateRow({ org: o.key, pheno, spec: r.spec, set: r.set, n, s, nt: r.nt || {}, approx: r.approx || [], conflict: r.conflict || {} });
+  const v = R.validateRow({ org: o.key, pheno, spec: r.spec, set: r.set, n, s, nt: r.nt || {}, approx: r.approx || [], conflict: r.conflict || {}, untested: r.untested || {}, unreliable: r.unreliable || null });
   return { src: src.id, inst: src.inst, year: src.year, spec: r.spec, set: r.set, org: o.key, orgAs: r.org, pheno, n, nFrom,
     cells: v.cells, flags: v.flags, q: r.q || null, trend, notes: r.notes || null, page: r.page || null, derived: null,
     measure: isR ? "R" : "S", table: r.table || null, cohort: r.cohort || null, note: r.note || null, specAs: r.specimen_as_printed || null, nTested: r.n_tested === true };
@@ -436,7 +444,7 @@ export function countChecks(src, checked) {
   return out;
 }
 
-function compactRow(r, si, whyIdx) {
+function compactRow(r, si, whyIdx, strIdx) {
   const cells = {};
   Object.keys(r.cells).forEach((d) => {
     const c = r.cells[d];
@@ -447,13 +455,16 @@ function compactRow(r, si, whyIdx) {
   });
   const o = [si, r.spec, r.set, r.org, r.pheno || null, r.n, cells, r.flags.length ? r.flags : null, r.derived ? 1 : 0];
   const extra = {};
-  if (r.orgAs && R.canonOrg(r.orgAs) && R.orgLabel(r.org) !== r.orgAs) extra.as = r.orgAs;
+  if (r.orgAs && R.canonOrg(r.orgAs) && R.orgLabel(r.org) !== r.orgAs) extra.as = strIdx(r.orgAs);
   // The specimen as the source printed it, when it is not simply the key's own name
   // ("Pus aspirate (PA)" under deep infections; "Respiratory/Sterile Body Fluids/Pus/Swab" under pus).
   const sp = R.SPECIMENS[r.spec], spAs = (r.specAs || "").trim();
-  if (spAs && sp && spAs.toLowerCase() !== sp.label.toLowerCase() && (sp.names || []).indexOf(spAs.toLowerCase()) < 0) extra.sp = spAs;
-  if (r.q) extra.q = r.q; if (r.trend) extra.t = r.trend; if (r.notes) extra.no = r.notes; if (r.page) extra.p = r.page; if (r.derived) extra.d = r.derived;
-  if (r.measure === "R") extra.m = "R"; if (r.table) extra.tb = r.table; if (r.cohort) extra.co = r.cohort; if (r.note) extra.nn = r.note;
+  // Long, repeated strings (table names, notes, how a row was combined) are indices into the
+  // bundle's string table (strs); antibiogram-store.js resolves them on load.
+  if (spAs && sp && spAs.toLowerCase() !== sp.label.toLowerCase() && (sp.names || []).indexOf(spAs.toLowerCase()) < 0) extra.sp = strIdx(spAs);
+  if (r.q) extra.q = r.q; if (r.trend) extra.t = r.trend; if (r.page) extra.p = r.page; if (r.derived) extra.d = strIdx(r.derived);
+  if (r.notes) { extra.no = {}; Object.keys(r.notes).forEach((d) => { extra.no[d] = strIdx(r.notes[d]); }); }
+  if (r.measure === "R") extra.m = "R"; if (r.table) extra.tb = strIdx(r.table); if (r.cohort) extra.co = r.cohort; if (r.note) extra.nn = strIdx(r.note);
   if (r.nFrom) extra.nf = 1;
   if (Object.keys(extra).length) o.push(extra);
   return o;
@@ -492,6 +503,9 @@ function isolatesOf(src, checked) {
 export function buildBundle(sources, register, census) {
   const why = [], whyMap = {};
   const whyIdx = (t) => { if (whyMap[t] == null) { whyMap[t] = why.length; why.push(t); } return whyMap[t]; };
+  const strs = [], strMap = {};
+  const strIdx = (t) => { if (strMap[t] == null) { strMap[t] = strs.length; strs.push(t); } return strMap[t]; };
+  const detail = {};
   const metas = [], rows = [], counts = [], report = [], consistency = [];
   const stats = { sources: 0, rows: 0, derivedRows: 0, cells: 0, act: { keep: 0, intrinsic: 0, hide: 0, suppress: 0, caution: 0 }, lowNRows: 0, noNRows: 0, isolates: 0, countMismatches: 0 };
   const sorted = sources.slice().sort((a, b) => (a.region + a.short + (9999 - a.year)).localeCompare(b.region + b.short + (9999 - b.year)));
@@ -505,13 +519,13 @@ export function buildBundle(sources, register, census) {
     const orgs = new Set(checked.map((r) => r.org));
     metas.push({ id: src.id, kind: src.kind, inst: src.inst, name: src.institution, short: src.short, city: src.city || null, state: src.state || null, region: src.region,
       sector: src.sector, year: src.year, end: src.end || src.year + "-12", period: src.period || null, focus: src.focus || null, bp: src.breakpoints || null, url: src.url || null, page: src.page || null, doi: src.doi || null, citation: src.citation,
-      verification: src.verification, notes: src.notes || null, issues: (src.issues || []).length ? src.issues : null, excluded: (src.excluded || []).length ? src.excluded : null,
+      verification: { status: src.verification.status }, summary: summaryOf(src.notes),
       checks: checks.length ? checks.map((c) => c.text) : null, copies: copied.length ? copied.map((c) => c.text) : null,
       specs: Array.from(new Set(checked.map((r) => r.spec))), sets: Array.from(new Set(checked.map((r) => r.set))), orgs: Array.from(orgs), rows: checked.length,
       usable: checked.filter((r) => !r.pheno && !r.cohort && r.n >= R.M39_MIN && Object.keys(r.cells).some((d) => r.cells[d].act === "keep")).length,
       isolates: isolatesOf(src, checked) });
     checked.concat(derived).forEach((r) => {
-      rows.push(compactRow(r, si, whyIdx));
+      rows.push(compactRow(r, si, whyIdx, strIdx));
       if (r.derived) stats.derivedRows++; else stats.rows++;
       if (r.flags.includes("lowN") && !r.derived) stats.lowNRows++;
       if (r.flags.includes("noN") && !r.derived) stats.noNRows++;
@@ -523,6 +537,8 @@ export function buildBundle(sources, register, census) {
     (src.counts || []).forEach((c) => { const o = R.canonOrg(c.org); counts.push([si, c.spec, c.set, o.key, c.n]); });
     checks.concat(copied).forEach((c) => consistency.push(Object.assign({ src: src.id }, c)));
     stats.isolates += metas[si].isolates;
+    detail[src.id] = { notes: src.notes || null, reporting: src.reporting || null, method: src.method || null, checking: src.verification.note || null,
+      issues: (src.issues || []).length ? src.issues : null, excluded: (src.excluded || []).length ? src.excluded : null };
   });
   stats.sources = metas.length;
   stats.countMismatches = consistency.length;
@@ -533,11 +549,22 @@ export function buildBundle(sources, register, census) {
   const reg = (register || []).map((x) => ({ id: x.id, institution: x.institution, short: x.short || null, city: x.city || null, state: x.state || null, region: x.region || null,
     sector: x.sector || null, type: x.type || null, year: x.year || null, url: x.url || null, page: x.page || null, status: x.status || null,
     integrated: x.integrated || null, reason: x.reason || null }));
-  const body = { schema: 2, sources: metas, rows, counts, why, register: reg, census: census || null, stats };
+  const body = { schema: 3, sources: metas, rows, counts, why, strs, register: reg, census: census || null, stats };
   // The version also covers the rules and the store, so a change to either re-busts every cache.
   const code = [RULES_JS, STORE_JS].map((f) => existsSync(f) ? readFileSync(f, "utf8").replace(/var ABG_V = "[^"]*";/, "") : "").join("\n");
-  const version = createHash("sha256").update(JSON.stringify(body)).update(code).digest("hex").slice(0, 12);
-  return { bundle: Object.assign({ version }, body), report, consistency, version };
+  const version = createHash("sha256").update(JSON.stringify(body)).update(JSON.stringify(detail)).update(code).digest("hex").slice(0, 12);
+  return { bundle: Object.assign({ version }, body), detail: { version, sources: detail }, report, consistency, version };
+}
+
+/* The start of a source's notes, for the source sheet (the full notes are in the detail file):
+ * whole sentences, about 320 characters at most. */
+function summaryOf(notes) {
+  if (!notes) return null;
+  const parts = String(notes).match(/[^.!?]+(?:[.!?]+(?=\s|$)|$)/g) || [String(notes)];
+  let out = "";
+  for (const p of parts) { if (out && (out + p).length > 320) break; out += p; }
+  out = out.trim();
+  return out.length < String(notes).trim().length ? out : String(notes).trim();
 }
 
 function indexJs(bundle) {
@@ -598,13 +625,14 @@ function main() {
   const check = process.argv.includes("--check"), validateOnly = process.argv.includes("--validate");
   const { errors, sources, register, census } = loadAll();
   if (errors.length) { console.error(`${errors.length} error(s):\n  ` + errors.join("\n  ")); process.exit(1); }
-  const { bundle, report, consistency, version } = buildBundle(sources, register, census);
+  const { bundle, detail, report, consistency, version } = buildBundle(sources, register, census);
   const s = bundle.stats;
   const summary = `${s.sources} sources, ${s.rows} rows (+${s.derivedRows} derived), ${s.cells} cells: ${s.act.keep} shown, ${s.act.caution} with caution, ${s.act.intrinsic} intrinsic, ${s.act.hide} not relevant to the specimen, ${s.act.suppress} suppressed; ${s.lowNRows} rows under 30 isolates; ${s.noNRows} rows without n; ${s.countMismatches} count-table mismatches`;
   if (validateOnly) { console.log("OK: " + summary); return; }
-  const text = JSON.stringify(bundle) + "\n", idx = indexJs(bundle), rep = JSON.stringify({ version, generated: "build", countMismatches: consistency, actions: report }, null, 1) + "\n";
+  const text = JSON.stringify(bundle) + "\n", dtext = JSON.stringify(detail) + "\n", idx = indexJs(bundle), rep = JSON.stringify({ version, generated: "build", countMismatches: consistency, actions: report }, null, 1) + "\n";
   const drift = [];
   if (!existsSync(OUT) || readFileSync(OUT, "utf8") !== text) drift.push("kb/antibiogram/antibiogram.json");
+  if (!existsSync(DETAIL) || readFileSync(DETAIL, "utf8") !== dtext) drift.push("kb/antibiogram/antibiogram-detail.json");
   if (!existsSync(INDEX_JS) || readFileSync(INDEX_JS, "utf8") !== idx) drift.push("antibiogram-data.js");
   if (!existsSync(REPORT) || readFileSync(REPORT, "utf8") !== rep) drift.push("data/antibiogram/validation-report.json");
   drift.push(...syncTokens(version, !check));
@@ -613,7 +641,7 @@ function main() {
     console.log(`OK: antibiogram v ${version}: ${summary}`); return;
   }
   mkdirSync(OUT_DIR, { recursive: true });
-  writeFileSync(OUT, text); writeFileSync(INDEX_JS, idx); writeFileSync(REPORT, rep);
+  writeFileSync(OUT, text); writeFileSync(DETAIL, dtext); writeFileSync(INDEX_JS, idx); writeFileSync(REPORT, rep);
   console.log(`Wrote kb/antibiogram/antibiogram.json (v ${version}, ${(text.length / 1024).toFixed(0)} KB): ${summary}`);
 }
 

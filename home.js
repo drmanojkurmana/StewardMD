@@ -2816,12 +2816,19 @@
 
     // ---- wallet: MaiK Tokens left, plus today's free allowance if the cost cap is switched on ----
     var bal = Math.max(0, u.balanceMt | 0), spent = Math.max(0, u.tokensUsedMt | 0);
-    var free = Math.max(0, u.dailyFreeMt | 0), per = u.mtPerInr > 0 ? u.mtPerInr : 2000;
-    var worth = Math.round(bal / per * 10) / 10;   // ₹, one decimal — a wallet of 100 MT is ₹0.1, not "₹0"
+    var free = Math.max(0, u.dailyFreeMt | 0);
+    // What the balance is worth to the doctor: priced at the store's entry pack (App Store / Play /
+    // web all charge the same), NOT at mtPerInr, which is our AI cost and read as half the value.
+    // The server sends the live pack prices; the fallback is the launch price of the Boost pack.
+    var pk = (u.packs || []).filter(function (p) { return p && p.mt > 0 && p.inr > 0; }).sort(function (a, b) { return a.mt - b.mt; })[0] || { mt: 50000, inr: 49 };
+    var worthRaw = bal * pk.inr / pk.mt;
+    var worth = worthRaw >= 10 ? Math.round(worthRaw).toLocaleString("en-IN") : String(Math.round(worthRaw * 10) / 10);   // a wallet of 100 MT is ₹0.1, not "₹0"
+    var plat = "web"; try { var Cap = window.Capacitor; plat = (Cap && (typeof Cap.getPlatform === "function" ? Cap.getPlatform() : Cap.platform)) || "web"; } catch (e) {}
+    var storeName = plat === "ios" ? "App Store" : plat === "android" ? "Google Play" : "store";
     out += '<div class="aiu-h">Your MaiK Tokens</div><div class="aiu-wallet">' +
       '<div class="bal">' + aiuMt(bal) + '</div><div class="bl">Tokens in wallet</div>' +
       '<div class="sub">' + (bal > 0
-        ? 'Worth about &#8377;' + worth + ' of AI. Tokens never expire and work across every AI feature.'
+        ? 'Worth about &#8377;' + worth + ' at the ' + storeName + ' price (&#8377;' + pk.inr.toLocaleString("en-IN") + ' for ' + pk.mt.toLocaleString("en-IN") + ' tokens). Tokens never expire and work across every AI feature.'
         : 'You haven&rsquo;t added any tokens yet. Top up once and spend it on anything — MaiK, imaging, voice, Evidence Review.') +
       (u.pooled ? '<br>Shared pool: this balance is shared with your linked account.' : '') + '</div>' +
       '<button id="aiuBuy" class="aiu-buy" type="button">' + (bal > 0 ? 'Add more tokens' : 'Buy MaiK Tokens') + '</button></div>';
