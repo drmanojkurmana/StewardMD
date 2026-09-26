@@ -1,5 +1,5 @@
 {
- "version": "e111d42e9bf4",
+ "version": "c908fb0c07d5",
  "generated": "build",
  "countMismatches": [
   {
@@ -11222,6 +11222,105 @@
    "value": 97,
    "action": "caution",
    "why": "the source contradicts itself: printed 97% for a row of n = 21; no whole number of 21 or fewer tested isolates gives 97%"
+  },
+  {
+   "src": "SGRH_2021",
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "drug": "amoxiclav",
+   "value": 6,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2021",
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "drug": "amoxiclav",
+   "value": 10,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2021",
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "drug": "gentamicin_hl",
+   "value": 6,
+   "action": "caution",
+   "why": "the source contradicts itself: printed 6% for a row of n = 14; no whole number of 14 or fewer tested isolates gives 6%"
+  },
+  {
+   "src": "SGRH_2021",
+   "spec": "pus",
+   "set": "ward",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "drug": "gentamicin_hl",
+   "value": 36,
+   "action": "caution",
+   "why": "the source contradicts itself: printed 36% for a row of n = 10; no whole number of 10 or fewer tested isolates gives 36%"
+  },
+  {
+   "src": "SGRH_2021",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "drug": "ceftriaxone",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2021",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "drug": "ertapenem",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2019",
+   "spec": "urine",
+   "set": "opd",
+   "org": "Proteus spp",
+   "pheno": null,
+   "drug": "colistin",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2019",
+   "spec": "urine",
+   "set": "ward",
+   "org": "Proteus spp",
+   "pheno": null,
+   "drug": "colistin",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2019",
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": null,
+   "drug": "penicillin",
+   "value": 33,
+   "action": "suppress",
+   "why": "Penicillin susceptibility (33%) is higher than methicillin (cefoxitin/oxacillin) susceptibility (0%), which is impossible: methicillin-resistant strains are beta-lactam resistant"
   },
   {
    "src": "SGRH_2017",
