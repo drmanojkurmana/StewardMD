@@ -1035,7 +1035,7 @@
       '.icu-vc-edit{position:absolute;top:5px;right:7px;font-size:10.5px;line-height:1;color:var(--muted);opacity:.5}' +
       '.icu-vc-tap:active .icu-vc-edit,.icu-vc-tap:hover .icu-vc-edit{opacity:.9}' +
       '.icu-vc .vl{font:600 9.5px var(--font);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
-      '.icu-vc .vv{font:600 19px/1.1 var(--mono);margin-top:4px;letter-spacing:-.01em}.icu-vc .vu{font:500 10px var(--font);color:var(--muted);margin-left:3px}' +
+      '.icu-vc .vv{font:600 19px/1.1 var(--mono);margin-top:4px;letter-spacing:-.01em}.icu-vc .vu{font:500 10px var(--font);color:var(--muted);margin-left:3px}.icu-vc .vu-tight{margin-left:0}' +
       '.icu-vc.crit{border-color:var(--danger);background:var(--danger-soft)}.icu-vc.crit .vv{color:var(--danger)}' +
       '.icu-vc.warn{border-color:var(--warn);background:var(--warn-soft)}.icu-vc.warn .vv{color:var(--warn)}' +
       '.icu-vc.ok .vv{color:var(--ok)}' +
@@ -1148,6 +1148,8 @@
       '.icu-mc-row:last-child{border-bottom:0}' +
       '.icu-mc-row b{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}' +
       '.icu-mc-row .w{margin-left:auto;font:600 11px var(--font);color:var(--muted);white-space:nowrap}' +
+      // One flex item, so the row gap never lands between a number and its unit.
+      '.icu-mc-row .icu-mc-val{white-space:nowrap}' +
       '.icu-mc-sub{font:700 10px var(--font);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:10px 0 2px}' +
       '.icu-mc-sub:first-child{margin-top:0}' +
       '.icu-mc-foot{font:400 10.5px/1.5 var(--font);color:var(--muted);margin:9px 0 0}' +
@@ -1632,6 +1634,12 @@
     var d = pts.map(function (p, i) { return (i ? "L" : "M") + (pad + (W - 2 * pad) * (p.ts - minX) / spanX).toFixed(1) + " " + (H - pad - (H - 2 * pad) * (p.v - minY) / spanY).toFixed(1); }).join(" ");
     return '<svg class="icu-spark" viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="none"><path d="' + d + '" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>';
   }
+  /* What goes between a number and its unit. "%" closes up against the number (98%), which is what
+   * every string-built percentage in this file already does and what a reader expects; every other
+   * unit keeps its space (76 bpm, 86 mmHg, 36.9 °C). One rule, so the vitals tiles and the Medical
+   * Core panel cannot drift apart again. */
+  function unitGap(unit) { return unit === "%" ? "" : " "; }
+
   function vitalCard(label, value, unit, status, series, edit) {
     // BUG #17: an empty tile means the value was NOT recorded — say so (visible dash is
     // muted + carries title/aria "not recorded") so "K⁺ —" is never mistaken for a real
@@ -1640,10 +1648,10 @@
     var empty = (value == null || value === "");
     var vv = empty
       ? '<span class="icu-vc-na" title="Not recorded" style="color:var(--muted)">—</span>'
-      : (esc(value) + (unit ? '<span class="vu">' + esc(unit) + "</span>" : ""));
+      : (esc(value) + (unit ? '<span class="vu' + (unitGap(unit) ? "" : " vu-tight") + '">' + esc(unit) + "</span>" : ""));
     // R5 UX#6: severity is announced, not conveyed by colour alone.
     var sev = status === "crit" ? " — critical, verify" : status === "warn" ? " — abnormal" : "";
-    var al = esc(label) + (empty ? ": not recorded" : ": " + esc(String(value)) + (unit ? " " + esc(unit) : "")) + sev;
+    var al = esc(label) + (empty ? ": not recorded" : ": " + esc(String(value)) + (unit ? unitGap(unit) + esc(unit) : "")) + sev;
     var attrs = edit
       ? ' data-icu-act="editvital:' + edit + '" role="button" tabindex="0" aria-label="' + al + ' — tap to edit"'
       : ' role="group" aria-label="' + al + '"';
@@ -1766,8 +1774,12 @@
       out += '<div class="icu-mc-sub">What changed</div>';
       out += changed.map(function (c) {
         var arrow = c.direction === "up" ? "\u2191" : "\u2193";
+        // Value and unit share ONE flex item. Left as siblings they are two, and the row's 8px
+        // flex gap pushes them apart whatever the markup says between them - which is why "91 %"
+        // survived deleting the literal space.
         return '<div class="icu-mc-row">' + arrow + ' ' + esc(label(c.param)) +
-          ' <b>' + esc(c.from) + ' \u2192 ' + esc(c.to) + '</b> ' + esc(c.unit || "") +
+          ' <span class="icu-mc-val"><b>' + esc(c.from) + ' \u2192 ' + esc(c.to) + '</b>' +
+          (c.unit ? unitGap(c.unit) + esc(c.unit) : "") + '</span>' +
           '<span class="w">over ' + esc(fmtMins(c.overMin)) + '</span></div>';
       }).join("");
     }
@@ -1778,7 +1790,7 @@
          * reader could take "96 9" for one number. The value carries its unit and a comma splits
          * it from the age: "last 96 %, 9 h ago". A stale entry with no value stays "last 9 h ago". */
         var why = m.reason === "STALE" ? ("last " + (m.staleValue != null
-            ? m.staleValue + (m.staleUnit ? " " + m.staleUnit : "") + ", " : "") + fmtMins(m.ageMin) + " ago")
+            ? m.staleValue + (m.staleUnit ? unitGap(m.staleUnit) + m.staleUnit : "") + ", " : "") + fmtMins(m.ageMin) + " ago")
           : m.reason === "REFUSED" ? "charted, could not be read"
           : m.reason === "NO_WINDOW" ? "no freshness rule set"
           : "not recorded";
