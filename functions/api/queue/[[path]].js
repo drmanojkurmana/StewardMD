@@ -920,7 +920,7 @@ async function wsqReleaseCriticalCheck(request, env, deps, wOrg, mig, wsqCfg, re
       idempotencyKey: idempotencyKey ? idempotencyKey + ":critical" : null,
     });
     return crit && crit.ok
-      ? { checked: true, opened: crit.opened != null ? crit.opened : (crit.loops || []).length, loops: crit.loops || [] }
+      ? { checked: true, opened: crit.opened != null ? crit.opened : (crit.loops || []).length, loops: crit.loops || [], ...(crit.uncomparable ? { uncomparable: crit.uncomparable } : {}) }
       : { checked: false, error: (crit && (crit.error || crit.detail)) || "critical_check_failed" };
   } catch (e) {
     return { checked: false, error: "critical_check_failed" };

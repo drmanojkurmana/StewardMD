@@ -126,6 +126,24 @@ const LAB_CODE_SEED = Object.freeze({
   haematocrit: { code: "4544-3", display: "Haematocrit" },
   hematocrit: { code: "4544-3", display: "Haematocrit" },
   pcv: { code: "4544-3", display: "Haematocrit" },
+  /* CLIN-06: the exact names ward.js LAB_TEMPLATES puts on a result, each an alias of a concept above, so a
+   * critical potassium released from the ward's own template is coded and checked. Pinned name by name in
+   * test/wardsynq-critical-lab-names.test.mjs. Left local on purpose: "Blood Urea" (urea, not the urea
+   * NITROGEN 3094-0 codes), "Bicarbonate (HCO3-)" and "HCO3-" (see hco3 above), "Neutrophils". */
+  "tlc / total leucocyte count": { code: "6690-2", display: "Leukocytes" },
+  "pcv / packed cell volume": { code: "4544-3", display: "Haematocrit" },
+  "bilirubin (total)": { code: "1975-2", display: "Bilirubin total" },
+  "bilirubin (direct)": { code: "1968-7", display: "Bilirubin direct" },
+  "sgot / ast": { code: "1920-8", display: "AST" },
+  "sgpt / alt": { code: "1742-6", display: "ALT" },
+  "alkaline phosphatase (alp)": { code: "6768-6", display: "Alkaline phosphatase" },
+  "serum albumin": { code: "1751-7", display: "Albumin" },
+  "serum creatinine": { code: "2160-0", display: "Creatinine" },
+  "blood urea nitrogen (bun)": { code: "3094-0", display: "Urea nitrogen" },
+  "sodium (na+)": { code: "2951-2", display: "Sodium" },
+  "potassium (k+)": { code: "2823-3", display: "Potassium" },
+  "chloride (cl-)": { code: "2075-0", display: "Chloride" },
+  "c-reactive protein (crp)": { code: "1988-5", display: "C-reactive protein" },
 });
 
 const norm = (v) => (typeof v === "string" ? v.trim().toLowerCase().replace(/\s+/g, " ") : "");

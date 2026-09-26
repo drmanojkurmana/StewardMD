@@ -1464,6 +1464,8 @@
     "ward.counter": "Counter",
     "ward.create-nobody-here-is-this-patient": "Create - nobody here is this patient; register them from the message",
     "ward.credit": "Credit {creditBalance}",
+    "ward.crit-uncomparable": "{n} value(s) could not be checked against the critical limits because the unit was not recognised. They are on the critical results board for a clinician to review.",
+    "ward.crit-unit-unchecked": "not checked: unit {unit} is not {expected}",
     "ward.critical": "critical",
     "ward.critical-care-icu": "Critical care (ICU)",
     "ward.critical-events": "Critical events",
