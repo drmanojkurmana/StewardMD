@@ -51,6 +51,7 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
   PHASE 1 (server-only) built 2026-08-22; a rebuild of a system torn down once before — read it
   before touching this.
 - [[StewardMD ID]] — the universal per-user SMD-XXXXXX handle (units, referrals, entitlements)
+- [[Role-Tiers]] - PROPOSED role-based plans (UG Student to Clinician Pro, WardSynQ): who gets what, devices, audit bugs, owner decisions
 - [[Email and Lifecycle]] — every email the app sends (one premium template), unsubscribe, the promo series, phone OTP
 - [[Infra]] — Cloudflare, Firebase, signing, hosting
 - [[Decisions]] — architectural decision log
