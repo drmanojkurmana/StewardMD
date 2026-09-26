@@ -1,0 +1,551 @@
+{
+ "id": "SGRH_FUNGAL_2014",
+ "kind": "institution",
+ "inst": "SGRH_DELHI_FUNGAL",
+ "institution": "Sir Ganga Ram Hospital, New Delhi",
+ "short": "Sir Ganga Ram Hospital, fungal",
+ "city": "New Delhi",
+ "state": "Delhi",
+ "region": "north",
+ "sector": "private",
+ "year": 2014,
+ "end": "2014-12",
+ "period": "January to December 2014",
+ "published": "2015-11",
+ "url": null,
+ "page": "https://sgrh.com/en/publications",
+ "retrieved": "2026-09-26",
+ "citation": "Department of Clinical Microbiology and Immunology, Sir Ganga Ram Hospital. Microbiology Newsletter, Vol. 21, No. 2: % sensitivity in yeasts fungi (blood isolates), January to December 2014. New Delhi: Sir Ganga Ram Hospital; published November 2015.",
+ "reporting": "Percent susceptible of yeasts isolated from blood, by species, for the whole hospital (one table, not split by OPD, ward and ICU), with the number of isolates tested per species in parentheses; amphotericin B, flucytosine, fluconazole, voriconazole, caspofungin and micafungin, micafungin with its own number tested (testing started in November 2014).",
+ "method": "Vitek 2 YST antifungal susceptibility cards (bioMerieux, France) and E test, repeat isolates excluded; cumulative antibiogram per CLSI M39-A (printed \"CLSI M-39A Vol. 22, No. 8; 2002 (global consensus guidelines)\"); interpreted as per CLSI M27-S4 (2012), and the C. albicans breakpoints were used where no species-specific breakpoints are available; micafungin tested only from November 2014; amphotericin B is reported as the percentage of isolates with MIC <1 µg/ml.",
+ "breakpoints": "CLSI M27-S4 (2012)",
+ "measure": "S",
+ "verification": {
+  "status": "double-checked",
+  "note": "The page 2 table was parsed from the PDF text layer (pdfplumber word positions; each cell assigned to its drug column by x position, the species label and the number tested read from the label), then every cell and every n was compared by eye with page 2 rendered at scale 4, first as the whole table band and then cut into two halves with the species column kept on both: no differences. Footnote marks and every cell printed with a symbol or text (NA, SDD, \"-\") were read on the image. The other content (charts, filamentous fungi table and antifungal use chart on pages 2 and 3; pages 1 and 4 to 8) was identified from the text layer and the rendered pages only to describe it in excluded. A second reader re-read every cell and n against the page images on 2026-09-26 (see issues)."
+ },
+ "notes": "Microbiology Newsletter of Sir Ganga Ram Hospital, Vol. 21, No. 2 (published November 2015), data January to December 2014, 8 pages. The No. 2 issue of each year carries the mycology, mycobacteriology, virology and serology results (the bacterial antibiogram is in No. 1). Recorded: the page 2 table \"% Sensitivity in Yeasts Fungi* (Blood Isolates 2014)\", one row per species with the number of isolates tested printed in parentheses (used as n, n_tested) and percent susceptible for amphotericin B, flucytosine, fluconazole, voriconazole, caspofungin and micafungin. The table covers blood isolates of all locations together and is not split by OPD, ward and ICU, so every row is set \"all\". Footnotes: \"- = Not done\"; NA \"Guidelines not available\"; C. albicans breakpoints used where no species-specific breakpoints are available (noted on the cells concerned); # C. glabrata has no susceptible category for fluconazole (printed \"0#\", recorded as 0 with a note) and no voriconazole breakpoints (\"NA#\", left out); ## C. glabrata caspofungin 94.7: only one isolate resistant; ### micafungin testing started only in November 2014, so each micafungin figure has its own number tested in parentheses (recorded as nt); * and ** as in earlier editions (Vitek 2 YST cards, E test, repeat isolates excluded, CLSI M39-A 2002; amphotericin B as isolates with MIC <1 µg/ml). Organism names: \"C. guillermondii\" is recorded as Candida guilliermondii and \"Kodamea ohmeri\" as Kodamaea ohmeri. Species without an organism key are listed in excluded with their printed figures: \"C rugosa (2)\", \"Pichia spp. (2)\", \"Geotrichium capitatum (1)\", \"Saccharomyces cerevisiae (1)\", \"Unidentified yeasts (14)\". The paragraph under the table gives the blood cases and share of each species, which can differ from the numbers tested; organism counts from the charts are not recorded (see excluded). The PDF has no direct link: sgrh.com serves the newsletters only by an HTTP POST from the Microbiology Newsletter issue selector on https://sgrh.com/en/publications (issue \"November-2015\"). The fungal issues are recorded as their own series (Sir Ganga Ram Hospital, fungal), so their editions trend with each other and are not taken for editions of the bacterial antibiogram published in the first issue of each volume.",
+ "issues": [
+  "Second reader 2026-09-26: every cell and every row n re-read from page 2 rendered at scale 4 (the table cut into two halves with the species column kept on both, footnotes cropped separately) and written down before comparing with the file; the seeded sample from sample_cells.py is part of this. All 68 cells, 13 n and the 13 micafungin tested numbers (nt) of the recorded rows, plus the 30 figures of the 5 excluded rows (C. rugosa, Pichia spp., Geotrichum capitatum, Saccharomyces cerevisiae, unidentified yeasts): 0 transcription errors, nothing corrected.",
+  "Confirmed: heading \"interpreted as per CLSI M27 S4 Document 2012\" matches breakpoints; footnotes #, ## (C. glabrata caspofungin 94.7, one isolate resistant) and ### (micafungin from November 2014, own n in parentheses) are recorded; C. glabrata voriconazole \"NA#\" and every \"-\" cell (flucytosine of C. auris, C. krusei, Kodamaea ohmeri, Trichosporon; micafungin of Kodamaea, Cryptococcus, Trichosporon; caspofungin of Cryptococcus and Trichosporon) left out with the right notes. C. glabrata fluconazole is printed as a number, \"0#\" (not NA or SDD as in other editions), and is kept as 0 with the # note, as printed.",
+  "Cells not kept, both printed that way: intrinsic C. krusei fluconazole 0; caution Kodamaea ohmeri voriconazole 33.3 with n = 2. Observation: the whole Kodamaea ohmeri row (100, -, 100, 33.3, 100) is identical to the 2013 edition's \"Kodamea ohmeri (3)\" row, where 33.3 is 1 of 3; noted on the row.",
+  "Lead 2026-09-26: C. glabrata fluconazole \"0#\" moved from the row to excluded (no susceptible category for this pair; other editions print NA or SDD and leave it out)."
+ ],
+ "rows": [
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida tropicalis",
+   "pheno": null,
+   "n": 31,
+   "page": 2,
+   "table": "% Sensitivity in Yeasts Fungi (Blood Isolates 2014), page 2",
+   "s": {
+    "amphotericin_b": 100,
+    "flucytosine": 96.7,
+    "fluconazole": 77.4,
+    "voriconazole": 90.32,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "nt": {
+    "micafungin": 14
+   },
+   "printed": {
+    "amphotericin_b": "Amphotericin B**",
+    "flucytosine": "Flucytosine",
+    "fluconazole": "Fluconazole",
+    "voriconazole": "Voriconazole",
+    "caspofungin": "Caspofungin",
+    "micafungin": "Micafungin###"
+   },
+   "notes": {
+    "amphotericin_b": "printed under \"Amphotericin B**\": the footnote defines the figure as isolates with MIC of <1 µg/ml",
+    "micafungin": "printed \"100 (14)\": the number in parentheses is the isolates tested for micafungin (the ### footnote: \"Micafungin sensitivity started only from November 2014\")"
+   },
+   "note": "Printed as \"C tropicalis (31)\". Blood isolates of all locations together (the table is not split by OPD, ward and ICU); n is the number of isolates tested.",
+   "specimen_as_printed": "Blood",
+   "n_tested": true
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida parapsilosis",
+   "pheno": null,
+   "n": 31,
+   "page": 2,
+   "table": "% Sensitivity in Yeasts Fungi (Blood Isolates 2014), page 2",
+   "s": {
+    "amphotericin_b": 100,
+    "flucytosine": 100,
+    "fluconazole": 41.9,
+    "voriconazole": 70,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "nt": {
+    "micafungin": 16
+   },
+   "printed": {
+    "amphotericin_b": "Amphotericin B**",
+    "flucytosine": "Flucytosine",
+    "fluconazole": "Fluconazole",
+    "voriconazole": "Voriconazole",
+    "caspofungin": "Caspofungin",
+    "micafungin": "Micafungin###"
+   },
+   "notes": {
+    "amphotericin_b": "printed under \"Amphotericin B**\": the footnote defines the figure as isolates with MIC of <1 µg/ml",
+    "micafungin": "printed \"100 (16)\": the number in parentheses is the isolates tested for micafungin (the ### footnote: \"Micafungin sensitivity started only from November 2014\")"
+   },
+   "note": "Printed as \"C parapsilosis (31)\". Blood isolates of all locations together (the table is not split by OPD, ward and ICU); n is the number of isolates tested.",
+   "specimen_as_printed": "Blood",
+   "n_tested": true
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida albicans",
+   "pheno": null,
+   "n": 24,
+   "page": 2,
+   "table": "% Sensitivity in Yeasts Fungi (Blood Isolates 2014), page 2",
+   "s": {
+    "amphotericin_b": 100,
+    "flucytosine": 100,
+    "fluconazole": 95.8,
+    "voriconazole": 100,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "nt": {
+    "micafungin": 10
+   },
+   "printed": {
+    "amphotericin_b": "Amphotericin B**",
+    "flucytosine": "Flucytosine",
+    "fluconazole": "Fluconazole",
+    "voriconazole": "Voriconazole",
+    "caspofungin": "Caspofungin",
+    "micafungin": "Micafungin###"
+   },
+   "notes": {
+    "amphotericin_b": "printed under \"Amphotericin B**\": the footnote defines the figure as isolates with MIC of <1 µg/ml",
+    "micafungin": "printed \"100 (10)\": the number in parentheses is the isolates tested for micafungin (the ### footnote: \"Micafungin sensitivity started only from November 2014\")"
+   },
+   "note": "Printed as \"C albicans (24)\". Blood isolates of all locations together (the table is not split by OPD, ward and ICU); n is the number of isolates tested.",
+   "specimen_as_printed": "Blood",
+   "n_tested": true
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "n": 19,
+   "page": 2,
+   "table": "% Sensitivity in Yeasts Fungi (Blood Isolates 2014), page 2",
+   "s": {
+    "amphotericin_b": 100,
+    "flucytosine": 100,
+    "caspofungin": 94.7,
+    "micafungin": 100
+   },
+   "nt": {
+    "micafungin": 8
+   },
+   "printed": {
+    "amphotericin_b": "Amphotericin B**",
+    "flucytosine": "Flucytosine",
+    "caspofungin": "Caspofungin",
+    "micafungin": "Micafungin###"
+   },
+   "notes": {
+    "amphotericin_b": "printed under \"Amphotericin B**\": the footnote defines the figure as isolates with MIC of <1 µg/ml",
+    "fluconazole": "printed \"0#\" and not recorded: the # footnote says that for C. glabrata there is no susceptible category for fluconazole (CLSI M27-S4 gives only susceptible dose dependent and resistant), so the 0 reflects the breakpoints, not resistance of every isolate; other editions print this cell NA or SDD and it is left out there too",
+    "caspofungin": "printed \"94.7##\": the ## footnote says only one isolate was resistant",
+    "micafungin": "printed \"100 (8)\": the number in parentheses is the isolates tested for micafungin (the ### footnote: \"Micafungin sensitivity started only from November 2014\")"
+   },
+   "note": "Printed as \"C glabrata (19)\". Blood isolates of all locations together (the table is not split by OPD, ward and ICU); n is the number of isolates tested. Voriconazole printed \"NA#\" (NA: guidelines not available; # footnote: \"For C. glabrata, there is no sensitive category for fluconazole and for voriconazole, no breakpoints have been given by CLSI\"); left out.",
+   "specimen_as_printed": "Blood",
+   "n_tested": true
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida pelliculosa",
+   "pheno": null,
+   "n": 10,
+   "page": 2,
+   "table": "% Sensitivity in Yeasts Fungi (Blood Isolates 2014), page 2",
+   "s": {
+    "amphotericin_b": 100,
+    "flucytosine": 100,
+    "fluconazole": 50,
+    "voriconazole": 30,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "nt": {
+    "micafungin": 5
+   },
+   "printed": {
+    "amphotericin_b": "Amphotericin B**",
+    "flucytosine": "Flucytosine",
+    "fluconazole": "Fluconazole",
+    "voriconazole": "Voriconazole",
+    "caspofungin": "Caspofungin",
+    "micafungin": "Micafungin###"
+   },
+   "notes": {
+    "amphotericin_b": "printed under \"Amphotericin B**\": the footnote defines the figure as isolates with MIC of <1 µg/ml",
+    "fluconazole": "interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)",
+    "voriconazole": "interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)",
+    "caspofungin": "interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)",
+    "micafungin": "printed \"100 (5)\": the number in parentheses is the isolates tested for micafungin (the ### footnote: \"Micafungin sensitivity started only from November 2014\"); interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)"
+   },
+   "note": "Printed as \"C. pelliculosa (10)\". Blood isolates of all locations together (the table is not split by OPD, ward and ICU); n is the number of isolates tested.",
+   "specimen_as_printed": "Blood",
+   "n_tested": true
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida auris",
+   "pheno": null,
+   "n": 9,
+   "page": 2,
+   "table": "% Sensitivity in Yeasts Fungi (Blood Isolates 2014), page 2",
+   "s": {
+    "amphotericin_b": 0,
+    "fluconazole": 0,
+    "voriconazole": 0,
+    "caspofungin": 44.4,
+    "micafungin": 100
+   },
+   "nt": {
+    "micafungin": 4
+   },
+   "printed": {
+    "amphotericin_b": "Amphotericin B**",
+    "fluconazole": "Fluconazole",
+    "voriconazole": "Voriconazole",
+    "caspofungin": "Caspofungin",
+    "micafungin": "Micafungin###"
+   },
+   "notes": {
+    "amphotericin_b": "printed under \"Amphotericin B**\": the footnote defines the figure as isolates with MIC of <1 µg/ml",
+    "fluconazole": "interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)",
+    "voriconazole": "interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)",
+    "caspofungin": "interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)",
+    "micafungin": "printed \"100 (4)\": the number in parentheses is the isolates tested for micafungin (the ### footnote: \"Micafungin sensitivity started only from November 2014\"); interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)"
+   },
+   "note": "Printed as \"C.auris (9)\". Blood isolates of all locations together (the table is not split by OPD, ward and ICU); n is the number of isolates tested. Flucytosine printed \"-\" (not done); left out.",
+   "specimen_as_printed": "Blood",
+   "n_tested": true
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida krusei",
+   "pheno": null,
+   "n": 8,
+   "page": 2,
+   "table": "% Sensitivity in Yeasts Fungi (Blood Isolates 2014), page 2",
+   "s": {
+    "amphotericin_b": 100,
+    "fluconazole": 0,
+    "voriconazole": 100,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "nt": {
+    "micafungin": 4
+   },
+   "printed": {
+    "amphotericin_b": "Amphotericin B**",
+    "fluconazole": "Fluconazole",
+    "voriconazole": "Voriconazole",
+    "caspofungin": "Caspofungin",
+    "micafungin": "Micafungin###"
+   },
+   "notes": {
+    "amphotericin_b": "printed under \"Amphotericin B**\": the footnote defines the figure as isolates with MIC of <1 µg/ml",
+    "micafungin": "printed \"100 (4)\": the number in parentheses is the isolates tested for micafungin (the ### footnote: \"Micafungin sensitivity started only from November 2014\")",
+    "fluconazole": "printed 0 (confirmed on the page); the build treats this as intrinsic resistance (C. krusei is intrinsically resistant to fluconazole)"
+   },
+   "note": "Printed as \"C krusei (8)\". Blood isolates of all locations together (the table is not split by OPD, ward and ICU); n is the number of isolates tested. Flucytosine printed \"-\" (not done); left out.",
+   "specimen_as_printed": "Blood",
+   "n_tested": true
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida utilis",
+   "pheno": null,
+   "n": 5,
+   "page": 2,
+   "table": "% Sensitivity in Yeasts Fungi (Blood Isolates 2014), page 2",
+   "s": {
+    "amphotericin_b": 100,
+    "flucytosine": 100,
+    "fluconazole": 100,
+    "voriconazole": 100,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "nt": {
+    "micafungin": 2
+   },
+   "printed": {
+    "amphotericin_b": "Amphotericin B**",
+    "flucytosine": "Flucytosine",
+    "fluconazole": "Fluconazole",
+    "voriconazole": "Voriconazole",
+    "caspofungin": "Caspofungin",
+    "micafungin": "Micafungin###"
+   },
+   "notes": {
+    "amphotericin_b": "printed under \"Amphotericin B**\": the footnote defines the figure as isolates with MIC of <1 µg/ml",
+    "fluconazole": "interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)",
+    "voriconazole": "interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)",
+    "caspofungin": "interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)",
+    "micafungin": "printed \"100 (2)\": the number in parentheses is the isolates tested for micafungin (the ### footnote: \"Micafungin sensitivity started only from November 2014\"); interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)"
+   },
+   "note": "Printed as \"C. utilis (5)\". Blood isolates of all locations together (the table is not split by OPD, ward and ICU); n is the number of isolates tested.",
+   "specimen_as_printed": "Blood",
+   "n_tested": true
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida lusitaniae",
+   "pheno": null,
+   "n": 3,
+   "page": 2,
+   "table": "% Sensitivity in Yeasts Fungi (Blood Isolates 2014), page 2",
+   "s": {
+    "amphotericin_b": 66.6,
+    "flucytosine": 66.6,
+    "fluconazole": 66.6,
+    "voriconazole": 66.6,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "nt": {
+    "micafungin": 1
+   },
+   "printed": {
+    "amphotericin_b": "Amphotericin B**",
+    "flucytosine": "Flucytosine",
+    "fluconazole": "Fluconazole",
+    "voriconazole": "Voriconazole",
+    "caspofungin": "Caspofungin",
+    "micafungin": "Micafungin###"
+   },
+   "notes": {
+    "amphotericin_b": "printed under \"Amphotericin B**\": the footnote defines the figure as isolates with MIC of <1 µg/ml",
+    "fluconazole": "interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)",
+    "voriconazole": "interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)",
+    "caspofungin": "interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)",
+    "micafungin": "printed \"100 (1)\": the number in parentheses is the isolates tested for micafungin (the ### footnote: \"Micafungin sensitivity started only from November 2014\"); interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)"
+   },
+   "note": "Printed as \"C. lusitaniae (3)\". Blood isolates of all locations together (the table is not split by OPD, ward and ICU); n is the number of isolates tested.",
+   "specimen_as_printed": "Blood",
+   "n_tested": true
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida guilliermondii",
+   "pheno": null,
+   "n": 1,
+   "page": 2,
+   "table": "% Sensitivity in Yeasts Fungi (Blood Isolates 2014), page 2",
+   "s": {
+    "amphotericin_b": 100,
+    "flucytosine": 100,
+    "fluconazole": 0,
+    "voriconazole": 100,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "nt": {
+    "micafungin": 1
+   },
+   "printed": {
+    "amphotericin_b": "Amphotericin B**",
+    "flucytosine": "Flucytosine",
+    "fluconazole": "Fluconazole",
+    "voriconazole": "Voriconazole",
+    "caspofungin": "Caspofungin",
+    "micafungin": "Micafungin###"
+   },
+   "notes": {
+    "amphotericin_b": "printed under \"Amphotericin B**\": the footnote defines the figure as isolates with MIC of <1 µg/ml",
+    "fluconazole": "interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has C. guilliermondii breakpoints for the echinocandins only)",
+    "voriconazole": "interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has C. guilliermondii breakpoints for the echinocandins only)",
+    "micafungin": "printed \"100 (1)\": the number in parentheses is the isolates tested for micafungin (the ### footnote: \"Micafungin sensitivity started only from November 2014\")"
+   },
+   "note": "Printed as \"C. guillermondii (1)\". Blood isolates of all locations together (the table is not split by OPD, ward and ICU); n is the number of isolates tested.",
+   "specimen_as_printed": "Blood",
+   "n_tested": true
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Kodamaea ohmeri",
+   "pheno": null,
+   "n": 2,
+   "page": 2,
+   "table": "% Sensitivity in Yeasts Fungi (Blood Isolates 2014), page 2",
+   "s": {
+    "amphotericin_b": 100,
+    "fluconazole": 100,
+    "voriconazole": 33.3,
+    "caspofungin": 100
+   },
+   "conflict": {
+    "voriconazole": "printed 33.3% for a row of n = 2; no whole number of 2 or fewer tested isolates gives 33.3%"
+   },
+   "printed": {
+    "amphotericin_b": "Amphotericin B**",
+    "fluconazole": "Fluconazole",
+    "voriconazole": "Voriconazole",
+    "caspofungin": "Caspofungin"
+   },
+   "notes": {
+    "amphotericin_b": "printed under \"Amphotericin B**\": the footnote defines the figure as isolates with MIC of <1 µg/ml",
+    "fluconazole": "interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)",
+    "voriconazole": "interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species); printed 33.3 (confirmed on the page), which no whole number of the row's 2 isolates gives; per-drug tested numbers are not printed",
+    "caspofungin": "interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)"
+   },
+   "note": "Printed as \"Kodamea ohmeri (2)\". Blood isolates of all locations together (the table is not split by OPD, ward and ICU); n is the number of isolates tested. Flucytosine, micafungin printed \"-\" (not done); left out. Second reader: the whole row (100, -, 100, 33.3, 100) is identical to the 2013 edition's \"Kodamea ohmeri (3)\" row, where 33.3 is 1 of 3 isolates; printed so on this page.",
+   "specimen_as_printed": "Blood",
+   "n_tested": true
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Cryptococcus neoformans",
+   "pheno": null,
+   "n": 5,
+   "page": 2,
+   "table": "% Sensitivity in Yeasts Fungi (Blood Isolates 2014), page 2",
+   "s": {
+    "amphotericin_b": 100,
+    "flucytosine": 100,
+    "fluconazole": 100,
+    "voriconazole": 100
+   },
+   "printed": {
+    "amphotericin_b": "Amphotericin B**",
+    "flucytosine": "Flucytosine",
+    "fluconazole": "Fluconazole",
+    "voriconazole": "Voriconazole"
+   },
+   "notes": {
+    "amphotericin_b": "printed under \"Amphotericin B**\": the footnote defines the figure as isolates with MIC of <1 µg/ml",
+    "fluconazole": "interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)",
+    "voriconazole": "interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)"
+   },
+   "note": "Printed as \"Cryptococcus neoformans (5)\". Blood isolates of all locations together (the table is not split by OPD, ward and ICU); n is the number of isolates tested. Caspofungin, micafungin printed \"-\" (not done); left out.",
+   "specimen_as_printed": "Blood",
+   "n_tested": true
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Trichosporon spp.",
+   "pheno": null,
+   "n": 4,
+   "page": 2,
+   "table": "% Sensitivity in Yeasts Fungi (Blood Isolates 2014), page 2",
+   "s": {
+    "amphotericin_b": 25,
+    "fluconazole": 50,
+    "voriconazole": 100
+   },
+   "printed": {
+    "amphotericin_b": "Amphotericin B**",
+    "fluconazole": "Fluconazole",
+    "voriconazole": "Voriconazole"
+   },
+   "notes": {
+    "amphotericin_b": "printed under \"Amphotericin B**\": the footnote defines the figure as isolates with MIC of <1 µg/ml",
+    "fluconazole": "interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)",
+    "voriconazole": "interpreted with the C. albicans breakpoints (table footnote: used where no species-specific breakpoints are available; CLSI M27-S4 has none for this species)"
+   },
+   "note": "Printed as \"Trichosporon spp. (4)\". Blood isolates of all locations together (the table is not split by OPD, ward and ICU); n is the number of isolates tested. Flucytosine, caspofungin, micafungin printed \"-\" (not done); left out.",
+   "specimen_as_printed": "Blood",
+   "n_tested": true
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Page 2 table row \"C rugosa (2)\"",
+   "org": "Candida rugosa",
+   "value": "amphotericin B 100, flucytosine 100, fluconazole 0, voriconazole 100, caspofungin 0, micafungin -",
+   "why": "no organism key for Candida rugosa"
+  },
+  {
+   "what": "Page 2 table row \"Pichia spp. (2)\"",
+   "org": "Pichia spp.",
+   "value": "amphotericin B 100, flucytosine 100, fluconazole 100, voriconazole 100, caspofungin 100, micafungin -",
+   "why": "no organism key for Pichia spp. (a genus spanning several species that have keys of their own, e.g. C. krusei and C. pelliculosa)"
+  },
+  {
+   "what": "Page 2 table row \"Geotrichium capitatum (1)\"",
+   "org": "Geotrichum capitatum",
+   "value": "amphotericin B 100, flucytosine -, fluconazole 0, voriconazole 0, caspofungin -, micafungin -",
+   "why": "no organism key for Geotrichum capitatum (printed \"Geotrichium\")"
+  },
+  {
+   "what": "Page 2 table row \"Saccharomyces cerevisiae (1)\"",
+   "org": "Saccharomyces cerevisiae",
+   "value": "amphotericin B 100, flucytosine -, fluconazole 0, voriconazole 100, caspofungin 100, micafungin -",
+   "why": "no organism key for Saccharomyces cerevisiae"
+  },
+  {
+   "what": "Page 2 table row \"Unidentified yeasts (14)\"",
+   "org": "Unidentified yeasts",
+   "value": "amphotericin B 14.2, flucytosine -, fluconazole 0, voriconazole 14.2, caspofungin 35.7, micafungin -",
+   "why": "yeasts not identified to species; recording them under the Candida spp. key would present unidentified yeasts as Candida"
+  },
+  {
+   "what": "Pages 2 and 3: fungal isolates by OPD, ward and ICU for blood, urine and pus and tissue (page 2) and body fluids and respiratory specimens (page 3), bar charts of species counts with data labels and each panel's sample and isolate totals",
+   "why": "isolation counts, not susceptibility; not recorded as counts because the susceptibility table is hospital-wide and its n is the number of isolates tested, not the number isolated per location"
+  },
+  {
+   "what": "Page 3: filamentous fungi (Aspergillus, Mucorales and other moulds) by species, specimen and location, Total Isolates = 90",
+   "why": "mould isolation counts without susceptibility results"
+  },
+  {
+   "what": "Page 3: antifungal use, prescribed daily doses (PDD) per 100 bed days by agent",
+   "why": "antifungal consumption, not susceptibility"
+  },
+  {
+   "what": "Pages 1 and 8: case report \"Non-tuberculous mycobacteria: old bug, new threat\" (continued on page 8) and departmental news on page 8",
+   "why": "case report and news, no susceptibility data"
+  },
+  {
+   "what": "Page 4: mycobacteriology (AFB culture, molecular rifampicin and isoniazid resistance testing against phenotypic testing, non-tuberculous mycobacteria)",
+   "why": "tuberculosis diagnostics, no organism antibiogram"
+  },
+  {
+   "what": "Pages 5 and 6: virology (molecular tests and serology) and, on page 6, immunology",
+   "why": "virology and immunology results, no organism antibiogram"
+  },
+  {
+   "what": "Page 7: bacterial serology and parasitology",
+   "why": "serology and parasitology results, no antibiogram"
+  },
+  {
+   "what": "C. glabrata fluconazole, printed \"0#\"",
+   "org": "Candida glabrata",
+   "drug": "fluconazole",
+   "value": "0",
+   "why": "no susceptible category exists for fluconazole in C. glabrata under CLSI M27-S4 (the # footnote); shown as 0% susceptible it would read as uniform resistance, whereas the isolates are susceptible dose dependent or resistant"
+  }
+ ]
+}

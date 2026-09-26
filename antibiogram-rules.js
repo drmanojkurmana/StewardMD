@@ -364,7 +364,9 @@
     streptococcus: AMINO_STD.slice(),
     listeria: CEPHS.slice(),
     ckrusei: ["fluconazole"],
-    aspergillus: ["fluconazole"], aflavus: ["fluconazole"], afumigatus: ["fluconazole"], aniger: ["fluconazole"]
+    aspergillus: ["fluconazole"], aflavus: ["fluconazole"], afumigatus: ["fluconazole"], aniger: ["fluconazole"],
+    // Cryptococcus and Trichosporon are not killed by echinocandins.
+    cneoformans: ["caspofungin", "micafungin", "anidulafungin"], trichosporon: ["caspofungin", "micafungin", "anidulafungin"]
   };
   // An "other" group inherits its genus's intrinsic resistance.
   ["enterococcus", "enterobacter", "citrobacter", "streptococcus", "burkholderia", "candida", "providencia", "shigella"].forEach(function (g) {
@@ -387,7 +389,7 @@
     var g = orgGroup(orgKey);
     if (g === "fungi" && DRUGS[drugKey] && DRUGS[drugKey].kind !== "antifungal") return "an antibacterial has no activity against yeasts";
     if (g !== "fungi" && DRUGS[drugKey] && DRUGS[drugKey].kind === "antifungal") return "an antifungal has no activity against bacteria";
-    if ((ORG_INTRINSIC[orgKey] || []).indexOf(drugKey) >= 0) return "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)";
+    if ((ORG_INTRINSIC[orgKey] || []).indexOf(drugKey) >= 0) return g === "fungi" ? "intrinsic resistance of this fungus (an expected resistant phenotype)" : "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)";
     if (orgKey === "hinfluenzae" || orgKey === "mcatarrhalis") { if (drugKey === "penicillin") return null; }
     if ((GROUP_INTRINSIC[g] || []).indexOf(drugKey) >= 0) {
       if (g === "fastid" && (orgKey === "ngonorrhoeae" || orgKey === "nmeningitidis") && drugKey === "penicillin") return null;

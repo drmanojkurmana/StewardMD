@@ -21,6 +21,9 @@ test("canonical names: laboratory codes, spellings and phenotypes", () => {
   assert.deepEqual(R.canonOrg("Klebsiella pneumoniae"), { key: "klebsiella", pheno: null });
   assert.deepEqual(R.canonOrg("MRSA"), { key: "saureus", pheno: "MRSA" });
   assert.deepEqual(R.canonOrg("Pichia kudriavzevii"), { key: "ckrusei", pheno: null });
+  assert.deepEqual(R.canonOrg("Kodaemea ohmerii"), { key: "kohmeri", pheno: null });
+  assert.deepEqual(R.canonOrg("Candida pelliculosa"), { key: "cpelliculosa", pheno: null });
+  assert.equal(R.canonOrg("Cryptococcus spp."), null, "a genus is not filed under C. neoformans");
   assert.equal(R.canonSpecimen("LRT"), "respiratory");
   assert.equal(R.canonSpecimen("DI"), "deep");
   assert.equal(R.canonSpecimen("CSF"), "csf");
@@ -53,6 +56,12 @@ test("intrinsic resistance is never shown as a number (CLSI M100 Appendix B)", (
   assert.equal(row({ org: "saureus", s: { colistin: 0 } }).cells.colistin.act, "intrinsic");
   assert.equal(row({ org: "ckrusei", s: { fluconazole: 20 } }).cells.fluconazole.act, "intrinsic");
   assert.equal(row({ org: "afumigatus", s: { fluconazole: 0, voriconazole: 95 } }).cells.fluconazole.act, "intrinsic");
+  ["cneoformans", "trichosporon"].forEach((o) => {
+    const x = row({ org: o, s: { caspofungin: 0, micafungin: 0, fluconazole: 80 } });
+    assert.equal(x.cells.caspofungin.act, "intrinsic", o); assert.equal(x.cells.micafungin.act, "intrinsic", o);
+    assert.equal(x.cells.fluconazole.act, "keep", o);
+    assert.match(x.cells.caspofungin.why, /fungus/);
+  });
   assert.equal(row({ org: "calbicans", s: { meropenem: 0 } }).cells.meropenem.act, "intrinsic", "antibacterial vs yeast");
 });
 
