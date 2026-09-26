@@ -1,0 +1,2486 @@
+{
+ "id": "RIMS_IMPHAL_2023",
+ "kind": "institution",
+ "inst": "RIMS_IMPHAL",
+ "institution": "Regional Institute of Medical Sciences, Imphal",
+ "short": "RIMS Imphal",
+ "city": "Imphal",
+ "state": "Manipur",
+ "region": "east",
+ "sector": "government",
+ "year": 2023,
+ "isolates": 3524,
+ "end": "2023-06",
+ "period": "July 2022 to June 2023",
+ "published": "2024",
+ "url": "https://rims.edu.in/rimsman/wp-content/uploads/Antibiotic-2024.pdf",
+ "page": "https://rims.edu.in/rimsman/rims-hospital-antibiotic-policy/",
+ "retrieved": "2026-09-26",
+ "citation": "Regional Institute of Medical Sciences, Imphal. RIMS Hospital Antibiotic Policy 2024 (3rd edition), section 3: RIMS Hospital Antibiogram 2022-23 (July 2022 to June 2023). Imphal: RIMS; 2024.",
+ "reporting": "Percent susceptible with isolate numbers: Enterobacteriaceae for all specimens and by specimen (blood, urine, lower respiratory tract, superficial infection); P. aeruginosa and A. baumannii by specimen, A. baumannii by location; S. aureus (MSSA, MRSA) and CoNS from all specimens; E. faecalis and E. faecium by specimen and by location (OPD, ward, ICU).",
+ "method": "Identification and susceptibility testing per the ICMR SOP (conventional biochemical or automated system); data entered in the ICMR AMR surveillance portal, validated by the regional administrator and analysed with the iAMRSN portal.",
+ "measure": "S",
+ "verification": {
+  "status": "double-checked",
+  "note": "Tables 2.1 to 2.5, the P. aeruginosa specimen table and Table 1.2 were parsed from the text layer (rotated column headers matched to values by position) and compared value by value with the rendered pages. The other tables are 72-dpi screenshots embedded in the PDF: each was read twice (the embedded image enlarged 3x, and the page rendered at scale 4 to 6 with different crops and nearest-neighbour zooms) and only values both readings agreed on were kept (one disagreement excluded). They were then checked against each other: the S. aureus column equals the MSSA and MRSA columns weighted by isolates, and the enterococcal Total columns equal the specimen tables weighted by isolates. Tables too blurred to read were left out (see excluded). Page numbers are PDF pages (book page = PDF page minus 14). Checked 2026-09-26."
+ },
+ "notes": "Section 3 'RIMS Hospital Antibiogram 2022-23' of the RIMS Hospital Antibiotic Policy 2024 (3rd edition; book pages 19 to 48, PDF pages 33 to 62), July 2022 to June 2023: 3,524 isolates studied (Table 1.1). The file was downloaded from the Wayback Machine copy (20240709) of the old rims.edu.in/secure URL and opens completely (164 pages). The report counts organisms in two ways: the organism table (Table 1.2) and the Enterobacteriaceae tables agree (E. coli 1,172, K. pneumoniae 545), but the non-fermenter, staphylococcal and enterococcal chapters use larger totals for the same period (A. baumannii 263 against 171, P. aeruginosa 314 against 234, S. aureus 554 against 470, E. faecalis 207 against 177, E. faecium 112 against 90); rows keep their own table's n and the organism counts are Table 1.2's, so these rows show count mismatches (source inconsistency). Some figures are not whole-number fractions of the printed n (for example A. baumannii ward 31.8% of 122), so for some agents fewer isolates were tested than the n shown. Colistin is printed 100 for every Enterobacteriaceae organism tested, including Serratia marcescens (intrinsically resistant). Specimen tables are for all locations; location tables are for all specimens (the enterococcal one except faeces). Gentamicin HL is high-level gentamicin. Where the report prints 0 for an agent in its trend tables it means not tested, so a 0 in rows with few isolates may mean not tested; values are recorded as printed.",
+ "issues": [
+  "Second reader 2026-09-26: all 976 cells, all 83 row n and all 40 counts re-read against the pages (this includes the seeded sample of 244 cells over all 13 tables). Tables 2.1 to 2.5, Table 1.2 and the P. aeruginosa specimen table (p53): my own text-layer parse (780 cells) checked against the rendered pages. The 196 cells of the 72-dpi screenshot tables (p51, p52, p56, p58, p60, p61, p62): read by eye from the embedded images enlarged 4 to 12 times, written down before comparing. 0 corrected. Organism, specimen, setting, phenotype and page agree for all 83 rows.",
+  "Second reader: one first-read disagreement, resolved in favour of the file: p62 E. faecalis OPD penicillin is a single blurred glyph that I first read as 8; the file's 0 is the only value consistent with the Total (1.8) and ward (2.7) columns, so it stays 0.",
+  "Second reader: screenshot values cross-checked against the vector bar charts on the same pages (bar heights measured from the PDF drawing commands): the p52 A. baumannii location chart matches all 23 kept table values within 0.06 points, and the p61 non-urine and urine enterococcal charts match all 34 values within 0.1 points. CoNS and MRSA percentages are whole-number fractions of their n ('Staphylococcus spp.' CoNS as k/59 although n is printed 58), S. aureus equals MSSA and MRSA weighted by n, and the enterococcal location Total columns recombine from the urine and non-urine tables.",
+  "Second reader: all 59 cells the validator does not keep (14 cautions, 45 intrinsic) are in Tables 2.1 to 2.5 and are printed as recorded (text layer and page image agree). The 11 count mismatches are the source's two counting schemes (Table 1.2 against the chapter tables), as the notes say.",
+  "For the lead (not changed): the excluded p52 A. baumannii Total cefepime (image reads 7.5 or 7.6) is resolvable: its vector chart bar measures 7.44 while every other bar in that chart lies within 0.06 of its printed value, so the printed value is 7.5 (also my reading of the image). It could be added as 7.5.",
+  "For the lead (not changed): p61 urine E. faecalis ciprofloxacin reads 11.6 on the image (both readers), as does the p62 Total column (ciprofloxacin is tested only in urine), but its vector chart bar measures 11.52 and 19/165 = 11.5; at 72 dpi the last digit cannot be told apart from 5. Kept as 11.6.",
+  "Lead 2026-09-26: the p52 A. baumannii Total cefepime cell was added as 7.5 on the second reader's evidence (vector bar 7.44; the other bars of the chart within 0.06 of their printed values); p61 urine E. faecalis ciprofloxacin kept at 11.6 as printed in two places."
+ ],
+ "rows": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 1172,
+   "page": 45,
+   "table": "Table 2.1",
+   "s": {
+    "amikacin": 88,
+    "cefazolin": 15,
+    "cefotaxime": 11,
+    "ceftazidime": 12,
+    "ceftriaxone": 16,
+    "ciprofloxacin": 15,
+    "ertapenem": 72,
+    "fosfomycin": 94,
+    "imipenem": 60,
+    "levofloxacin": 24,
+    "meropenem": 74,
+    "minocycline": 84,
+    "colistin": 100,
+    "nitrofurantoin": 93,
+    "piptazo": 17,
+    "cotrimoxazole": 46
+   },
+   "specimen_as_printed": "All specimens",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Citrobacter freundii",
+   "pheno": null,
+   "n": 27,
+   "page": 45,
+   "table": "Table 2.1",
+   "s": {
+    "amikacin": 89,
+    "cefazolin": 0,
+    "cefotaxime": 23,
+    "ceftazidime": 15,
+    "ceftriaxone": 35,
+    "ciprofloxacin": 39,
+    "ertapenem": 89,
+    "fosfomycin": 100,
+    "imipenem": 54,
+    "levofloxacin": 62,
+    "meropenem": 92,
+    "minocycline": 73,
+    "colistin": 100,
+    "nitrofurantoin": 67,
+    "piptazo": 23,
+    "cotrimoxazole": 50
+   },
+   "specimen_as_printed": "All specimens",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Citrobacter koseri",
+   "pheno": null,
+   "n": 50,
+   "page": 45,
+   "table": "Table 2.1",
+   "s": {
+    "amikacin": 85,
+    "cefazolin": 0,
+    "cefotaxime": 15,
+    "ceftazidime": 18,
+    "ceftriaxone": 13,
+    "ciprofloxacin": 24,
+    "ertapenem": 65,
+    "fosfomycin": 63,
+    "imipenem": 56,
+    "levofloxacin": 29,
+    "meropenem": 74,
+    "minocycline": 91,
+    "colistin": 100,
+    "nitrofurantoin": 63,
+    "piptazo": 9,
+    "cotrimoxazole": 33
+   },
+   "specimen_as_printed": "All specimens",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Citrobacter spp.",
+   "pheno": null,
+   "n": 5,
+   "page": 45,
+   "table": "Table 2.1",
+   "s": {
+    "amikacin": 60,
+    "cefazolin": 0,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 25,
+    "ciprofloxacin": 40,
+    "ertapenem": 60,
+    "fosfomycin": 100,
+    "imipenem": 40,
+    "levofloxacin": 40,
+    "meropenem": 80,
+    "minocycline": 100,
+    "colistin": 100,
+    "nitrofurantoin": 0,
+    "piptazo": 40,
+    "cotrimoxazole": 0
+   },
+   "specimen_as_printed": "All specimens",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   },
+   "note": "Cefotaxime and ceftriaxone differ widely in this row as printed in the source."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 545,
+   "page": 45,
+   "table": "Table 2.1",
+   "s": {
+    "amikacin": 75,
+    "cefazolin": 23,
+    "cefotaxime": 19,
+    "ceftazidime": 19,
+    "ceftriaxone": 25,
+    "ciprofloxacin": 22,
+    "ertapenem": 56,
+    "fosfomycin": 78,
+    "imipenem": 49,
+    "levofloxacin": 39,
+    "meropenem": 60,
+    "minocycline": 70,
+    "colistin": 100,
+    "nitrofurantoin": 60,
+    "piptazo": 12,
+    "cotrimoxazole": 54
+   },
+   "specimen_as_printed": "All specimens",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella oxytoca",
+   "pheno": null,
+   "n": 141,
+   "page": 45,
+   "table": "Table 2.1",
+   "s": {
+    "amikacin": 78,
+    "cefazolin": 1,
+    "cefotaxime": 14,
+    "ceftazidime": 16,
+    "ceftriaxone": 15,
+    "ciprofloxacin": 15,
+    "ertapenem": 52,
+    "fosfomycin": 67,
+    "imipenem": 49,
+    "levofloxacin": 26,
+    "meropenem": 53,
+    "minocycline": 74,
+    "colistin": 100,
+    "nitrofurantoin": 68,
+    "piptazo": 7,
+    "cotrimoxazole": 38
+   },
+   "specimen_as_printed": "All specimens",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterobacter aerogenes",
+   "pheno": null,
+   "n": 37,
+   "page": 45,
+   "table": "Table 2.1",
+   "s": {
+    "amikacin": 67,
+    "cefazolin": 0,
+    "cefotaxime": 12,
+    "ceftazidime": 15,
+    "ceftriaxone": 15,
+    "ciprofloxacin": 36,
+    "ertapenem": 55,
+    "fosfomycin": 88,
+    "imipenem": 42,
+    "levofloxacin": 44,
+    "meropenem": 58,
+    "minocycline": 93,
+    "colistin": 100,
+    "nitrofurantoin": 93,
+    "piptazo": 12,
+    "cotrimoxazole": 56
+   },
+   "specimen_as_printed": "All specimens",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterobacter cloacae",
+   "pheno": null,
+   "n": 2,
+   "page": 45,
+   "table": "Table 2.1",
+   "s": {
+    "amikacin": 50,
+    "cefazolin": 0,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "ertapenem": 0,
+    "fosfomycin": 50,
+    "imipenem": 0,
+    "levofloxacin": 0,
+    "meropenem": 0,
+    "minocycline": 0,
+    "colistin": 100,
+    "nitrofurantoin": 100,
+    "piptazo": 0,
+    "cotrimoxazole": 0
+   },
+   "specimen_as_printed": "All specimens",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "n": 5,
+   "page": 45,
+   "table": "Table 2.1",
+   "s": {
+    "amikacin": 75,
+    "cefazolin": 0,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "ertapenem": 50,
+    "fosfomycin": 0,
+    "imipenem": 50,
+    "levofloxacin": 0,
+    "meropenem": 75,
+    "minocycline": 100,
+    "colistin": 100,
+    "nitrofurantoin": 0,
+    "piptazo": 0,
+    "cotrimoxazole": 0
+   },
+   "specimen_as_printed": "All specimens",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "pheno": null,
+   "n": 4,
+   "page": 45,
+   "table": "Table 2.1",
+   "s": {
+    "amikacin": 100,
+    "cefazolin": 100,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 75,
+    "ciprofloxacin": 75,
+    "ertapenem": 75,
+    "fosfomycin": 0,
+    "imipenem": 25,
+    "levofloxacin": 100,
+    "meropenem": 100,
+    "minocycline": 100,
+    "colistin": 100,
+    "nitrofurantoin": 100,
+    "piptazo": 0,
+    "cotrimoxazole": 100
+   },
+   "specimen_as_printed": "All specimens",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   },
+   "note": "Cefotaxime and ceftriaxone differ widely in this row as printed in the source."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 70,
+   "page": 45,
+   "table": "Table 2.1",
+   "s": {
+    "amikacin": 85,
+    "cefazolin": 38,
+    "cefotaxime": 35,
+    "ceftazidime": 31,
+    "ceftriaxone": 47,
+    "ciprofloxacin": 31,
+    "ertapenem": 79,
+    "fosfomycin": 53,
+    "imipenem": 74,
+    "levofloxacin": 47,
+    "meropenem": 85,
+    "minocycline": 16,
+    "nitrofurantoin": 0,
+    "piptazo": 41,
+    "cotrimoxazole": 35
+   },
+   "specimen_as_printed": "All specimens"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Proteus vulgaris",
+   "pheno": null,
+   "n": 24,
+   "page": 45,
+   "table": "Table 2.1",
+   "s": {
+    "amikacin": 86,
+    "cefazolin": 0,
+    "cefotaxime": 14,
+    "ceftazidime": 14,
+    "ceftriaxone": 8,
+    "ciprofloxacin": 29,
+    "ertapenem": 79,
+    "fosfomycin": 38,
+    "imipenem": 50,
+    "levofloxacin": 36,
+    "meropenem": 86,
+    "minocycline": 50,
+    "nitrofurantoin": 0,
+    "piptazo": 14,
+    "cotrimoxazole": 50
+   },
+   "specimen_as_printed": "All specimens"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Morganella morganii",
+   "pheno": null,
+   "n": 12,
+   "page": 45,
+   "table": "Table 2.1",
+   "s": {
+    "amikacin": 80,
+    "cefazolin": 0,
+    "cefotaxime": 10,
+    "ceftazidime": 20,
+    "ceftriaxone": 20,
+    "ciprofloxacin": 30,
+    "ertapenem": 80,
+    "fosfomycin": 20,
+    "imipenem": 40,
+    "levofloxacin": 40,
+    "meropenem": 90,
+    "minocycline": 33,
+    "nitrofurantoin": 0,
+    "piptazo": 33,
+    "cotrimoxazole": 60
+   },
+   "specimen_as_printed": "All specimens"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Providencia rettgeri",
+   "pheno": null,
+   "n": 1,
+   "page": 45,
+   "table": "Table 2.1",
+   "s": {
+    "amikacin": 0,
+    "cefazolin": 0,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 100,
+    "ertapenem": 0,
+    "fosfomycin": 100,
+    "imipenem": 0,
+    "levofloxacin": 100,
+    "meropenem": 0,
+    "minocycline": 0,
+    "nitrofurantoin": 0,
+    "piptazo": 0,
+    "cotrimoxazole": 100
+   },
+   "specimen_as_printed": "All specimens"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Providencia stuartii",
+   "pheno": null,
+   "n": 1,
+   "page": 45,
+   "table": "Table 2.1",
+   "s": {
+    "amikacin": 100,
+    "cefazolin": 0,
+    "cefotaxime": 100,
+    "ceftazidime": 100,
+    "ceftriaxone": 100,
+    "ciprofloxacin": 100,
+    "ertapenem": 100,
+    "fosfomycin": 0,
+    "imipenem": 100,
+    "levofloxacin": 100,
+    "meropenem": 100,
+    "minocycline": 0,
+    "nitrofurantoin": 0,
+    "piptazo": 0,
+    "cotrimoxazole": 0
+   },
+   "specimen_as_printed": "All specimens"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 16,
+   "page": 46,
+   "table": "Table 2.2",
+   "s": {
+    "amikacin": 93.3,
+    "cefotaxime": 6.7,
+    "ceftazidime": 13.3,
+    "ceftriaxone": 26.7,
+    "ciprofloxacin": 26.7,
+    "ertapenem": 73.3,
+    "colistin": 100,
+    "imipenem": 60,
+    "levofloxacin": 33.3,
+    "meropenem": 66.7,
+    "minocycline": 83.3,
+    "piptazo": 6.7
+   },
+   "specimen_as_printed": "Blood",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 7,
+   "page": 46,
+   "table": "Table 2.2",
+   "s": {
+    "amikacin": 57.1,
+    "cefotaxime": 14.3,
+    "ceftazidime": 28.6,
+    "ceftriaxone": 16.7,
+    "ciprofloxacin": 57.1,
+    "ertapenem": 57.1,
+    "colistin": 100,
+    "imipenem": 57.1,
+    "levofloxacin": 57.1,
+    "meropenem": 71.4,
+    "minocycline": 0,
+    "piptazo": 14.3
+   },
+   "specimen_as_printed": "Blood",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Citrobacter freundii",
+   "pheno": null,
+   "n": 1,
+   "page": 46,
+   "table": "Table 2.2",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 100,
+    "ciprofloxacin": 100,
+    "ertapenem": 100,
+    "colistin": 100,
+    "imipenem": 100,
+    "levofloxacin": 100,
+    "meropenem": 100,
+    "minocycline": 0,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "Blood",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   },
+   "note": "Cefotaxime and ceftriaxone differ widely in this row as printed in the source."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Citrobacter koseri",
+   "pheno": null,
+   "n": 1,
+   "page": 46,
+   "table": "Table 2.2",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 100,
+    "ceftazidime": 100,
+    "ceftriaxone": 100,
+    "ciprofloxacin": 0,
+    "ertapenem": 100,
+    "colistin": 100,
+    "imipenem": 100,
+    "levofloxacin": 100,
+    "meropenem": 100,
+    "minocycline": 0,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "Blood",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella oxytoca",
+   "pheno": null,
+   "n": 1,
+   "page": 46,
+   "table": "Table 2.2",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "ertapenem": 100,
+    "colistin": 100,
+    "imipenem": 100,
+    "levofloxacin": 0,
+    "meropenem": 100,
+    "minocycline": 0,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "Blood",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "pheno": null,
+   "n": 1,
+   "page": 46,
+   "table": "Table 2.2",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "ertapenem": 0,
+    "colistin": 100,
+    "imipenem": 100,
+    "levofloxacin": 100,
+    "meropenem": 100,
+    "minocycline": 100,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "Blood",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Providencia stuartii",
+   "pheno": null,
+   "n": 1,
+   "page": 46,
+   "table": "Table 2.2",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 100,
+    "ceftazidime": 100,
+    "ceftriaxone": 100,
+    "ciprofloxacin": 100,
+    "ertapenem": 100,
+    "imipenem": 100,
+    "levofloxacin": 100,
+    "meropenem": 100,
+    "minocycline": 0,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 888,
+   "page": 46,
+   "table": "Table 2.3",
+   "s": {
+    "amikacin": 89,
+    "cefazolin": 15,
+    "cefotaxime": 12,
+    "ceftazidime": 13,
+    "ceftriaxone": 17,
+    "ciprofloxacin": 15,
+    "ertapenem": 75,
+    "fosfomycin": 94,
+    "colistin": 100,
+    "imipenem": 63,
+    "levofloxacin": 25,
+    "meropenem": 77,
+    "minocycline": 83,
+    "nitrofurantoin": 93,
+    "piptazo": 17,
+    "cotrimoxazole": 46
+   },
+   "specimen_as_printed": "Urine",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 203,
+   "page": 46,
+   "table": "Table 2.3",
+   "s": {
+    "amikacin": 74,
+    "cefazolin": 23,
+    "cefotaxime": 20,
+    "ceftazidime": 25,
+    "ceftriaxone": 27,
+    "ciprofloxacin": 19,
+    "ertapenem": 62,
+    "fosfomycin": 78,
+    "colistin": 100,
+    "imipenem": 53,
+    "levofloxacin": 38,
+    "meropenem": 62,
+    "minocycline": 61,
+    "nitrofurantoin": 60,
+    "piptazo": 13,
+    "cotrimoxazole": 54
+   },
+   "specimen_as_printed": "Urine",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella oxytoca",
+   "pheno": null,
+   "n": 78,
+   "page": 46,
+   "table": "Table 2.3",
+   "s": {
+    "amikacin": 84,
+    "cefazolin": 1,
+    "cefotaxime": 13,
+    "ceftazidime": 17,
+    "ceftriaxone": 15,
+    "ciprofloxacin": 16,
+    "ertapenem": 51,
+    "fosfomycin": 67,
+    "colistin": 100,
+    "imipenem": 45,
+    "levofloxacin": 23,
+    "meropenem": 49,
+    "minocycline": 75,
+    "nitrofurantoin": 68,
+    "piptazo": 7,
+    "cotrimoxazole": 38
+   },
+   "specimen_as_printed": "Urine",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 41,
+   "page": 46,
+   "table": "Table 2.3",
+   "s": {
+    "amikacin": 88,
+    "cefazolin": 38,
+    "cefotaxime": 41,
+    "ceftazidime": 38,
+    "ceftriaxone": 52,
+    "ciprofloxacin": 32,
+    "ertapenem": 85,
+    "fosfomycin": 53,
+    "imipenem": 77,
+    "levofloxacin": 47,
+    "meropenem": 85,
+    "minocycline": 5,
+    "nitrofurantoin": 0,
+    "piptazo": 56,
+    "cotrimoxazole": 35
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Citrobacter koseri",
+   "pheno": null,
+   "n": 28,
+   "page": 46,
+   "table": "Table 2.3",
+   "s": {
+    "amikacin": 84,
+    "cefazolin": 0,
+    "cefotaxime": 5,
+    "ceftazidime": 11,
+    "ceftriaxone": 11,
+    "ciprofloxacin": 21,
+    "ertapenem": 68,
+    "fosfomycin": 63,
+    "colistin": 100,
+    "imipenem": 58,
+    "levofloxacin": 16,
+    "meropenem": 79,
+    "minocycline": 86,
+    "nitrofurantoin": 63,
+    "piptazo": 11,
+    "cotrimoxazole": 33
+   },
+   "specimen_as_printed": "Urine",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella aerogenes",
+   "pheno": null,
+   "n": 18,
+   "page": 46,
+   "table": "Table 2.3",
+   "s": {
+    "amikacin": 75,
+    "cefazolin": 0,
+    "cefotaxime": 25,
+    "ceftazidime": 31,
+    "ceftriaxone": 25,
+    "ciprofloxacin": 31,
+    "ertapenem": 56,
+    "fosfomycin": 88,
+    "colistin": 100,
+    "imipenem": 50,
+    "levofloxacin": 40,
+    "meropenem": 63,
+    "minocycline": 89,
+    "nitrofurantoin": 93,
+    "piptazo": 25,
+    "cotrimoxazole": 56
+   },
+   "specimen_as_printed": "Urine",
+   "note": "Printed as Klebsiella (Enterobacter) aerogenes.",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Proteus vulgaris",
+   "pheno": null,
+   "n": 13,
+   "page": 46,
+   "table": "Table 2.3",
+   "s": {
+    "amikacin": 88,
+    "cefazolin": 0,
+    "cefotaxime": 13,
+    "ceftazidime": 0,
+    "ceftriaxone": 13,
+    "ciprofloxacin": 38,
+    "ertapenem": 88,
+    "fosfomycin": 38,
+    "imipenem": 38,
+    "levofloxacin": 50,
+    "meropenem": 75,
+    "minocycline": 40,
+    "nitrofurantoin": 0,
+    "piptazo": 0,
+    "cotrimoxazole": 50
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Citrobacter freundii",
+   "pheno": null,
+   "n": 7,
+   "page": 46,
+   "table": "Table 2.3",
+   "s": {
+    "amikacin": 100,
+    "cefazolin": 0,
+    "cefotaxime": 17,
+    "ceftazidime": 17,
+    "ceftriaxone": 17,
+    "ciprofloxacin": 33,
+    "ertapenem": 100,
+    "fosfomycin": 100,
+    "colistin": 100,
+    "imipenem": 67,
+    "levofloxacin": 50,
+    "meropenem": 100,
+    "minocycline": 50,
+    "nitrofurantoin": 67,
+    "piptazo": 0,
+    "cotrimoxazole": 50
+   },
+   "specimen_as_printed": "Urine",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Morganella morganii",
+   "pheno": null,
+   "n": 7,
+   "page": 46,
+   "table": "Table 2.3",
+   "s": {
+    "amikacin": 67,
+    "cefazolin": 0,
+    "cefotaxime": 17,
+    "ceftazidime": 33,
+    "ceftriaxone": 17,
+    "ciprofloxacin": 17,
+    "ertapenem": 83,
+    "fosfomycin": 20,
+    "imipenem": 33,
+    "levofloxacin": 17,
+    "meropenem": 83,
+    "minocycline": 33,
+    "nitrofurantoin": 0,
+    "piptazo": 20,
+    "cotrimoxazole": 60
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Citrobacter spp.",
+   "pheno": null,
+   "n": 2,
+   "page": 46,
+   "table": "Table 2.3",
+   "s": {
+    "amikacin": 50,
+    "cefazolin": 0,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "ertapenem": 50,
+    "fosfomycin": 100,
+    "colistin": 100,
+    "imipenem": 0,
+    "levofloxacin": 0,
+    "meropenem": 100,
+    "minocycline": 0,
+    "nitrofurantoin": 0,
+    "piptazo": 50,
+    "cotrimoxazole": 0
+   },
+   "specimen_as_printed": "Urine",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterobacter cloacae",
+   "pheno": null,
+   "n": 2,
+   "page": 46,
+   "table": "Table 2.3",
+   "s": {
+    "amikacin": 50,
+    "cefazolin": 0,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "ertapenem": 0,
+    "fosfomycin": 50,
+    "colistin": 100,
+    "imipenem": 0,
+    "levofloxacin": 0,
+    "meropenem": 0,
+    "minocycline": 0,
+    "nitrofurantoin": 100,
+    "piptazo": 0,
+    "cotrimoxazole": 0
+   },
+   "specimen_as_printed": "Urine",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "pheno": null,
+   "n": 1,
+   "page": 46,
+   "table": "Table 2.3",
+   "s": {
+    "amikacin": 100,
+    "cefazolin": 100,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 100,
+    "ciprofloxacin": 100,
+    "ertapenem": 100,
+    "fosfomycin": 0,
+    "colistin": 100,
+    "imipenem": 0,
+    "levofloxacin": 100,
+    "meropenem": 100,
+    "minocycline": 100,
+    "nitrofurantoin": 100,
+    "piptazo": 0,
+    "cotrimoxazole": 100
+   },
+   "specimen_as_printed": "Urine",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   },
+   "note": "Cefotaxime and ceftriaxone differ widely in this row as printed in the source."
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Providencia rettgeri",
+   "pheno": null,
+   "n": 1,
+   "page": 46,
+   "table": "Table 2.3",
+   "s": {
+    "amikacin": 0,
+    "cefazolin": 0,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 100,
+    "ertapenem": 0,
+    "fosfomycin": 100,
+    "imipenem": 0,
+    "levofloxacin": 100,
+    "meropenem": 0,
+    "minocycline": 0,
+    "nitrofurantoin": 0,
+    "piptazo": 0,
+    "cotrimoxazole": 100
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 197,
+   "page": 47,
+   "table": "Table 2.4",
+   "s": {
+    "amikacin": 79.3,
+    "cefotaxime": 21.3,
+    "ceftazidime": 15.2,
+    "ceftriaxone": 27.5,
+    "ciprofloxacin": 25.6,
+    "ertapenem": 56.1,
+    "imipenem": 48.8,
+    "colistin": 100,
+    "levofloxacin": 39,
+    "meropenem": 61,
+    "minocycline": 75,
+    "piptazo": 13.6
+   },
+   "specimen_as_printed": "LRT",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 67,
+   "page": 47,
+   "table": "Table 2.4",
+   "s": {
+    "amikacin": 78,
+    "cefotaxime": 12,
+    "ceftazidime": 8,
+    "ceftriaxone": 16,
+    "ciprofloxacin": 18,
+    "ertapenem": 62,
+    "imipenem": 58,
+    "colistin": 100,
+    "levofloxacin": 20.4,
+    "meropenem": 70,
+    "minocycline": 87,
+    "piptazo": 20
+   },
+   "specimen_as_printed": "LRT",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Klebsiella oxytoca",
+   "pheno": null,
+   "n": 22,
+   "page": 47,
+   "table": "Table 2.4",
+   "s": {
+    "amikacin": 70,
+    "cefotaxime": 15,
+    "ceftazidime": 20,
+    "ceftriaxone": 20,
+    "ciprofloxacin": 20,
+    "ertapenem": 60,
+    "imipenem": 45,
+    "colistin": 100,
+    "levofloxacin": 45,
+    "meropenem": 60,
+    "minocycline": 66.7,
+    "piptazo": 15
+   },
+   "specimen_as_printed": "LRT",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Citrobacter freundii",
+   "pheno": null,
+   "n": 8,
+   "page": 47,
+   "table": "Table 2.4",
+   "s": {
+    "amikacin": 75,
+    "cefotaxime": 12.5,
+    "ceftazidime": 0,
+    "ceftriaxone": 25,
+    "ciprofloxacin": 37.5,
+    "ertapenem": 87.5,
+    "imipenem": 62.5,
+    "colistin": 100,
+    "levofloxacin": 62.5,
+    "meropenem": 87.5,
+    "minocycline": 83.3,
+    "piptazo": 25
+   },
+   "specimen_as_printed": "LRT",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Citrobacter koseri",
+   "pheno": null,
+   "n": 7,
+   "page": 47,
+   "table": "Table 2.4",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "ertapenem": 75,
+    "imipenem": 50,
+    "colistin": 100,
+    "levofloxacin": 25,
+    "meropenem": 75,
+    "minocycline": 100,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "LRT",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 5,
+   "page": 47,
+   "table": "Table 2.4",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 0,
+    "ceftazidime": 40,
+    "ceftriaxone": 20,
+    "ciprofloxacin": 20,
+    "ertapenem": 100,
+    "imipenem": 100,
+    "levofloxacin": 60,
+    "meropenem": 80,
+    "minocycline": 50,
+    "piptazo": 40
+   },
+   "specimen_as_printed": "LRT"
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Klebsiella aerogenes",
+   "pheno": null,
+   "n": 4,
+   "page": 47,
+   "table": "Table 2.4",
+   "s": {
+    "amikacin": 50,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 25,
+    "ertapenem": 50,
+    "imipenem": 50,
+    "colistin": 100,
+    "levofloxacin": 25,
+    "meropenem": 50,
+    "minocycline": 100,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "LRT",
+   "note": "Printed as Klebsiella (Enterobacter) aerogenes.",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Morganella morganii",
+   "pheno": null,
+   "n": 3,
+   "page": 47,
+   "table": "Table 2.4",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 50,
+    "ciprofloxacin": 100,
+    "ertapenem": 100,
+    "imipenem": 100,
+    "levofloxacin": 100,
+    "meropenem": 100,
+    "minocycline": 0,
+    "piptazo": 100
+   },
+   "specimen_as_printed": "LRT",
+   "note": "Cefotaxime and ceftriaxone differ widely in this row as printed in the source."
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Citrobacter spp.",
+   "pheno": null,
+   "n": 2,
+   "page": 47,
+   "table": "Table 2.4",
+   "s": {
+    "amikacin": 50,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 50,
+    "ciprofloxacin": 50,
+    "ertapenem": 50,
+    "imipenem": 50,
+    "colistin": 100,
+    "levofloxacin": 50,
+    "meropenem": 50,
+    "minocycline": 100,
+    "piptazo": 50
+   },
+   "specimen_as_printed": "LRT",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   },
+   "note": "Cefotaxime and ceftriaxone differ widely in this row as printed in the source."
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "pheno": null,
+   "n": 2,
+   "page": 47,
+   "table": "Table 2.4",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 100,
+    "ciprofloxacin": 100,
+    "ertapenem": 100,
+    "imipenem": 0,
+    "colistin": 100,
+    "levofloxacin": 100,
+    "meropenem": 100,
+    "minocycline": 100,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "LRT",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   },
+   "note": "Cefotaxime and ceftriaxone differ widely in this row as printed in the source."
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Proteus vulgaris",
+   "pheno": null,
+   "n": 1,
+   "page": 47,
+   "table": "Table 2.4",
+   "s": {
+    "amikacin": 0,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "ertapenem": 0,
+    "imipenem": 0,
+    "levofloxacin": 0,
+    "meropenem": 0,
+    "minocycline": 0,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "LRT"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 181,
+   "page": 47,
+   "table": "Table 2.5",
+   "s": {
+    "amikacin": 84.8,
+    "cefotaxime": 5.3,
+    "ceftazidime": 6.1,
+    "ceftriaxone": 7,
+    "ciprofloxacin": 14.4,
+    "ertapenem": 59.8,
+    "imipenem": 48.5,
+    "colistin": 100,
+    "levofloxacin": 21.5,
+    "meropenem": 65.9,
+    "minocycline": 87,
+    "piptazo": 15.3
+   },
+   "specimen_as_printed": "Superficial infection",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 111,
+   "page": 47,
+   "table": "Table 2.5",
+   "s": {
+    "amikacin": 68.8,
+    "cefotaxime": 15.1,
+    "ceftazidime": 12.9,
+    "ceftriaxone": 20,
+    "ciprofloxacin": 19.4,
+    "ertapenem": 46.2,
+    "imipenem": 44.1,
+    "colistin": 100,
+    "levofloxacin": 39.8,
+    "meropenem": 57,
+    "minocycline": 83.3,
+    "piptazo": 7.6
+   },
+   "specimen_as_printed": "Superficial infection",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Klebsiella oxytoca",
+   "pheno": null,
+   "n": 34,
+   "page": 47,
+   "table": "Table 2.5",
+   "s": {
+    "amikacin": 69,
+    "cefotaxime": 17.2,
+    "ceftazidime": 13.8,
+    "ceftriaxone": 14.3,
+    "ciprofloxacin": 10.3,
+    "ertapenem": 48.3,
+    "imipenem": 58.6,
+    "colistin": 100,
+    "levofloxacin": 20.7,
+    "meropenem": 55.2,
+    "minocycline": 66.7,
+    "piptazo": 3.4
+   },
+   "specimen_as_printed": "Superficial infection",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 21,
+   "page": 47,
+   "table": "Table 2.5",
+   "s": {
+    "amikacin": 75,
+    "cefotaxime": 31.3,
+    "ceftazidime": 12.5,
+    "ceftriaxone": 50,
+    "ciprofloxacin": 31.3,
+    "ertapenem": 62.5,
+    "imipenem": 62.5,
+    "levofloxacin": 43.8,
+    "meropenem": 87.5,
+    "minocycline": 66.7,
+    "piptazo": 18.8
+   },
+   "specimen_as_printed": "Superficial infection"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Citrobacter koseri",
+   "pheno": null,
+   "n": 12,
+   "page": 47,
+   "table": "Table 2.5",
+   "s": {
+    "amikacin": 77.8,
+    "cefotaxime": 22.2,
+    "ceftazidime": 33.3,
+    "ceftriaxone": 12.5,
+    "ciprofloxacin": 44.4,
+    "ertapenem": 44.4,
+    "imipenem": 44.4,
+    "colistin": 100,
+    "levofloxacin": 55.6,
+    "meropenem": 55.6,
+    "minocycline": 100,
+    "piptazo": 11.1
+   },
+   "specimen_as_printed": "Superficial infection",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Klebsiella aerogenes",
+   "pheno": null,
+   "n": 12,
+   "page": 47,
+   "table": "Table 2.5",
+   "s": {
+    "amikacin": 58.3,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 8.3,
+    "ciprofloxacin": 50,
+    "ertapenem": 50,
+    "imipenem": 33.3,
+    "colistin": 100,
+    "levofloxacin": 50,
+    "meropenem": 58.3,
+    "minocycline": 100,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "Superficial infection",
+   "note": "Printed as Klebsiella (Enterobacter) aerogenes.",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Citrobacter freundii",
+   "pheno": null,
+   "n": 9,
+   "page": 47,
+   "table": "Table 2.5",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 33.3,
+    "ceftazidime": 33.3,
+    "ceftriaxone": 44.4,
+    "ciprofloxacin": 33.3,
+    "ertapenem": 88.9,
+    "imipenem": 33.3,
+    "colistin": 100,
+    "levofloxacin": 55.6,
+    "meropenem": 88.9,
+    "minocycline": 100,
+    "piptazo": 44.4
+   },
+   "specimen_as_printed": "Superficial infection",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Proteus vulgaris",
+   "pheno": null,
+   "n": 9,
+   "page": 47,
+   "table": "Table 2.5",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 20,
+    "ceftazidime": 40,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 20,
+    "ertapenem": 60,
+    "imipenem": 60,
+    "levofloxacin": 20,
+    "meropenem": 100,
+    "minocycline": 0,
+    "piptazo": 40
+   },
+   "specimen_as_printed": "Superficial infection"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "n": 3,
+   "page": 47,
+   "table": "Table 2.5",
+   "s": {
+    "amikacin": 66.7,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "ertapenem": 33.3,
+    "imipenem": 33.3,
+    "colistin": 100,
+    "levofloxacin": 0,
+    "meropenem": 66.7,
+    "minocycline": 100,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "Superficial infection",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Morganella morganii",
+   "pheno": null,
+   "n": 2,
+   "page": 47,
+   "table": "Table 2.5",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "ertapenem": 50,
+    "imipenem": 0,
+    "levofloxacin": 50,
+    "meropenem": 100,
+    "minocycline": 100,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "Superficial infection"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Citrobacter spp.",
+   "pheno": null,
+   "n": 1,
+   "page": 47,
+   "table": "Table 2.5",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 100,
+    "ertapenem": 100,
+    "imipenem": 100,
+    "colistin": 100,
+    "levofloxacin": 100,
+    "meropenem": 100,
+    "minocycline": 0,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "Superficial infection",
+   "notes": {
+    "colistin": "Printed 100 for every Enterobacterales organism tested (Proteus, Morganella and Providencia '-'), including Serratia marcescens, which is intrinsically resistant to colistin; CLSI has no susceptible category for colistin."
+   }
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 103,
+   "page": 53,
+   "table": "Sample-wise susceptible percentage of P. aeruginosa",
+   "s": {
+    "amikacin": 85.4,
+    "cefepime": 30.7,
+    "ceftazidime": 26.2,
+    "imipenem": 54.4,
+    "levofloxacin": 34.3,
+    "meropenem": 63.1,
+    "piptazo": 68.9
+   },
+   "specimen_as_printed": "LRT",
+   "note": "Chapter 3 counts 314 P. aeruginosa (Figure 3.1); the organism table (Table 1.2) lists 234."
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 97,
+   "page": 53,
+   "table": "Sample-wise susceptible percentage of P. aeruginosa",
+   "s": {
+    "amikacin": 90.7,
+    "cefepime": 43.3,
+    "ceftazidime": 38.1,
+    "imipenem": 52.6,
+    "levofloxacin": 32,
+    "meropenem": 79.4,
+    "piptazo": 63.9
+   },
+   "specimen_as_printed": "Superficial infection",
+   "note": "Chapter 3 counts 314 P. aeruginosa (Figure 3.1); the organism table (Table 1.2) lists 234."
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 93,
+   "page": 53,
+   "table": "Sample-wise susceptible percentage of P. aeruginosa",
+   "s": {
+    "amikacin": 81.7,
+    "cefepime": 35.5,
+    "ceftazidime": 25.8,
+    "imipenem": 59.1,
+    "levofloxacin": 29,
+    "meropenem": 69.9,
+    "piptazo": 75.3
+   },
+   "specimen_as_printed": "Urine",
+   "note": "Chapter 3 counts 314 P. aeruginosa (Figure 3.1); the organism table (Table 1.2) lists 234."
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 59,
+   "page": 51,
+   "table": "A. baumannii: susceptible percentages by specimen (except faeces)",
+   "s": {
+    "amikacin": 22,
+    "cefepime": 3.4,
+    "ceftazidime": 1.7,
+    "imipenem": 16.9,
+    "levofloxacin": 16.9,
+    "meropenem": 18.6,
+    "minocycline": 68.6,
+    "piptazo": 27.1
+   },
+   "specimen_as_printed": "LRT"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 42,
+   "page": 51,
+   "table": "A. baumannii: susceptible percentages by specimen (except faeces)",
+   "s": {
+    "amikacin": 26.2,
+    "cefepime": 9.5,
+    "ceftazidime": 2.4,
+    "imipenem": 14.3,
+    "levofloxacin": 19,
+    "meropenem": 16.7,
+    "piptazo": 19
+   },
+   "specimen_as_printed": "Superficial infection"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 26,
+   "page": 51,
+   "table": "A. baumannii: susceptible percentages by specimen (except faeces)",
+   "s": {
+    "amikacin": 46.2,
+    "cefepime": 3.8,
+    "ceftazidime": 3.8,
+    "imipenem": 34.6,
+    "levofloxacin": 42.3,
+    "meropenem": 42.3,
+    "piptazo": 46.2
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 263,
+   "page": 52,
+   "table": "A. baumannii: location-wise susceptible percentage",
+   "s": {
+    "amikacin": 31.3,
+    "cefepime": 7.5,
+    "ceftazidime": 4.8,
+    "imipenem": 21.8,
+    "levofloxacin": 25.9,
+    "meropenem": 26.5,
+    "minocycline": 68.8,
+    "piptazo": 30.6
+   },
+   "notes": {
+    "cefepime": "printed 7.5 in a low-resolution screenshot table (first readings split between 7.5 and 7.6); the page's vector chart bar measures 7.44 while every other bar in that chart lies within 0.06 of its printed value, so the printed value is 7.5 (second reader's reading of the image as well)"
+   },
+   "specimen_as_printed": "All samples (by location)",
+   "note": "Chapter 3 counts 263 A. baumannii (Figure 3.1); the organism table (Table 1.2) lists 171 (OPD 17, ward 76, ICU 78). The OPD column (n=25) is not analysed ('-')."
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 122,
+   "page": 52,
+   "table": "A. baumannii: location-wise susceptible percentage",
+   "s": {
+    "amikacin": 31.8,
+    "cefepime": 1.5,
+    "ceftazidime": 1.5,
+    "imipenem": 22.7,
+    "levofloxacin": 25.8,
+    "meropenem": 25.8,
+    "minocycline": 69.4,
+    "piptazo": 22.7
+   },
+   "specimen_as_printed": "All samples (by location)",
+   "note": "Chapter 3 counts 263 A. baumannii (Figure 3.1); the organism table (Table 1.2) lists 171 (OPD 17, ward 76, ICU 78). The OPD column (n=25) is not analysed ('-')."
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 116,
+   "page": 52,
+   "table": "A. baumannii: location-wise susceptible percentage",
+   "s": {
+    "amikacin": 16.9,
+    "cefepime": 6.2,
+    "ceftazidime": 3.1,
+    "imipenem": 9.2,
+    "levofloxacin": 12.3,
+    "meropenem": 12.3,
+    "minocycline": 65.3,
+    "piptazo": 26.2
+   },
+   "specimen_as_printed": "All samples (by location)",
+   "note": "Chapter 3 counts 263 A. baumannii (Figure 3.1); the organism table (Table 1.2) lists 171 (OPD 17, ward 76, ICU 78). The OPD column (n=25) is not analysed ('-')."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 554,
+   "page": 56,
+   "table": "Table 4.1",
+   "s": {
+    "cefoxitin": 19.1,
+    "ciprofloxacin": 22,
+    "clindamycin": 62,
+    "erythromycin": 10.7,
+    "linezolid": 96.4,
+    "tetracycline": 68.8,
+    "cotrimoxazole": 60.3,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All specimens",
+   "note": "Table 4.1 counts 554 S. aureus (Figure 4.1: 639 staphylococci); the organism table (Table 1.2) lists 470 S. aureus."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MSSA",
+   "n": 107,
+   "page": 56,
+   "table": "Table 4.1",
+   "s": {
+    "cefoxitin": 100,
+    "ciprofloxacin": 42.1,
+    "clindamycin": 70.8,
+    "erythromycin": 25.5,
+    "linezolid": 100,
+    "tetracycline": 80.4,
+    "cotrimoxazole": 69.2,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All specimens",
+   "note": "Table 4.1 counts 554 S. aureus (Figure 4.1: 639 staphylococci); the organism table (Table 1.2) lists 470 S. aureus."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MRSA",
+   "n": 447,
+   "page": 56,
+   "table": "Table 4.1",
+   "s": {
+    "cefoxitin": 0,
+    "ciprofloxacin": 17.2,
+    "clindamycin": 60,
+    "erythromycin": 7.2,
+    "linezolid": 95.5,
+    "tetracycline": 66,
+    "cotrimoxazole": 58.2,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All specimens",
+   "note": "Table 4.1 counts 554 S. aureus (Figure 4.1: 639 staphylococci); the organism table (Table 1.2) lists 470 S. aureus."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": null,
+   "n": 85,
+   "page": 56,
+   "table": "Table 4.1",
+   "s": {
+    "cefoxitin": 2.4,
+    "ciprofloxacin": 25.9,
+    "clindamycin": 37.6,
+    "erythromycin": 5.9,
+    "linezolid": 92.9,
+    "tetracycline": 50.6,
+    "cotrimoxazole": 36.5,
+    "vancomycin": 98.8
+   },
+   "specimen_as_printed": "All specimens"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Other coagulase-negative staphylococci",
+   "pheno": null,
+   "n": 58,
+   "page": 58,
+   "table": "Susceptible percentages of CoNS isolated from all specimen",
+   "s": {
+    "cefoxitin": 1.7,
+    "ciprofloxacin": 30.5,
+    "clindamycin": 33.9,
+    "erythromycin": 6.8,
+    "linezolid": 89.8,
+    "tetracycline": 49.2,
+    "cotrimoxazole": 39,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All specimens",
+   "note": "Printed as 'Staphylococcus spp.' in the CoNS table: coagulase-negative staphylococci not identified to species. Figure 4.1 lists 59."
+  },
+  {
+   "spec": "nonurine",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 42,
+   "page": 60,
+   "table": "Enterococci: susceptible percentages by specimen (except urine)",
+   "s": {
+    "ampicillin": 33.3,
+    "gentamicin_hl": 66.7,
+    "linezolid": 85.7,
+    "penicillin": 3.1,
+    "teicoplanin": 83.3,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All specimens (except urine)"
+  },
+  {
+   "spec": "nonurine",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 31,
+   "page": 60,
+   "table": "Enterococci: susceptible percentages by specimen (except urine)",
+   "s": {
+    "ampicillin": 19.4,
+    "gentamicin_hl": 67.7,
+    "linezolid": 87.1,
+    "penicillin": 3.6,
+    "teicoplanin": 93.5,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All specimens (except urine)"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 27,
+   "page": 60,
+   "table": "Enterococci: susceptible percentages by specimen (except urine)",
+   "s": {
+    "ampicillin": 33.3,
+    "gentamicin_hl": 70.4,
+    "linezolid": 88.9,
+    "penicillin": 4.3,
+    "teicoplanin": 85.2,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "Superficial infection"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 165,
+   "page": 61,
+   "table": "Enterococci isolated from urine specimen",
+   "s": {
+    "ampicillin": 18.8,
+    "ciprofloxacin": 11.6,
+    "gentamicin_hl": 62.4,
+    "linezolid": 86.7,
+    "nitrofurantoin": 73.2,
+    "penicillin": 1.5,
+    "teicoplanin": 87.3,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 81,
+   "page": 61,
+   "table": "Enterococci isolated from urine specimen",
+   "s": {
+    "ampicillin": 18.5,
+    "ciprofloxacin": 7.4,
+    "gentamicin_hl": 53.1,
+    "linezolid": 75.3,
+    "nitrofurantoin": 46.9,
+    "penicillin": 2.9,
+    "teicoplanin": 87.5,
+    "vancomycin": 95.1
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 207,
+   "page": 62,
+   "table": "Enterococci: susceptible pattern by health care area",
+   "s": {
+    "ampicillin": 21.7,
+    "ciprofloxacin": 11.6,
+    "fosfomycin": 61.1,
+    "gentamicin_hl": 63.3,
+    "linezolid": 86.5,
+    "nitrofurantoin": 73.2,
+    "penicillin": 1.8,
+    "teicoplanin": 86.5,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location",
+   "note": "The column sub-headers are printed 'R%', but the table is titled susceptible pattern and its Total columns equal the isolate-weighted combination of the % susceptible specimen tables (for example E. faecalis ampicillin 21.7: 42 isolates at 33.3% and 165 at 18.8%), so the values are recorded as % susceptible. Chapter 5 counts 207 E. faecalis and 112 E. faecium (Figure 5); the organism table (Table 1.2) lists 177 and 90."
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 57,
+   "page": 62,
+   "table": "Enterococci: susceptible pattern by health care area",
+   "s": {
+    "ampicillin": 31.6,
+    "ciprofloxacin": 22.4,
+    "fosfomycin": 68.8,
+    "gentamicin_hl": 78.9,
+    "linezolid": 80.7,
+    "nitrofurantoin": 89.8,
+    "penicillin": 0,
+    "teicoplanin": 78.9,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location",
+   "note": "The column sub-headers are printed 'R%', but the table is titled susceptible pattern and its Total columns equal the isolate-weighted combination of the % susceptible specimen tables (for example E. faecalis ampicillin 21.7: 42 isolates at 33.3% and 165 at 18.8%), so the values are recorded as % susceptible. Chapter 5 counts 207 E. faecalis and 112 E. faecium (Figure 5); the organism table (Table 1.2) lists 177 and 90."
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 129,
+   "page": 62,
+   "table": "Enterococci: susceptible pattern by health care area",
+   "s": {
+    "ampicillin": 16.3,
+    "ciprofloxacin": 6.7,
+    "fosfomycin": 57.7,
+    "gentamicin_hl": 57.4,
+    "linezolid": 89.1,
+    "nitrofurantoin": 67.3,
+    "penicillin": 2.7,
+    "teicoplanin": 89.1,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location",
+   "note": "The column sub-headers are printed 'R%', but the table is titled susceptible pattern and its Total columns equal the isolate-weighted combination of the % susceptible specimen tables (for example E. faecalis ampicillin 21.7: 42 isolates at 33.3% and 165 at 18.8%), so the values are recorded as % susceptible. Chapter 5 counts 207 E. faecalis and 112 E. faecium (Figure 5); the organism table (Table 1.2) lists 177 and 90."
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 21,
+   "page": 62,
+   "table": "Enterococci: susceptible pattern by health care area",
+   "s": {
+    "ampicillin": 28.6,
+    "gentamicin_hl": 57.1,
+    "linezolid": 85.7,
+    "teicoplanin": 90.5,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location",
+   "note": "The column sub-headers are printed 'R%', but the table is titled susceptible pattern and its Total columns equal the isolate-weighted combination of the % susceptible specimen tables (for example E. faecalis ampicillin 21.7: 42 isolates at 33.3% and 165 at 18.8%), so the values are recorded as % susceptible. Chapter 5 counts 207 E. faecalis and 112 E. faecium (Figure 5); the organism table (Table 1.2) lists 177 and 90."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 112,
+   "page": 62,
+   "table": "Enterococci: susceptible pattern by health care area",
+   "s": {
+    "ampicillin": 18.8,
+    "ciprofloxacin": 7.4,
+    "gentamicin_hl": 57.1,
+    "linezolid": 78.6,
+    "nitrofurantoin": 46.9,
+    "penicillin": 3.1,
+    "teicoplanin": 89.2,
+    "vancomycin": 96.4
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location",
+   "note": "The column sub-headers are printed 'R%', but the table is titled susceptible pattern and its Total columns equal the isolate-weighted combination of the % susceptible specimen tables (for example E. faecalis ampicillin 21.7: 42 isolates at 33.3% and 165 at 18.8%), so the values are recorded as % susceptible. Chapter 5 counts 207 E. faecalis and 112 E. faecium (Figure 5); the organism table (Table 1.2) lists 177 and 90."
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 30,
+   "page": 62,
+   "table": "Enterococci: susceptible pattern by health care area",
+   "s": {
+    "ampicillin": 40,
+    "ciprofloxacin": 9.1,
+    "gentamicin_hl": 86.7,
+    "linezolid": 73.3,
+    "nitrofurantoin": 54.5,
+    "penicillin": 3.8,
+    "teicoplanin": 96.7,
+    "vancomycin": 96.7
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location",
+   "note": "The column sub-headers are printed 'R%', but the table is titled susceptible pattern and its Total columns equal the isolate-weighted combination of the % susceptible specimen tables (for example E. faecalis ampicillin 21.7: 42 isolates at 33.3% and 165 at 18.8%), so the values are recorded as % susceptible. Chapter 5 counts 207 E. faecalis and 112 E. faecium (Figure 5); the organism table (Table 1.2) lists 177 and 90."
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 67,
+   "page": 62,
+   "table": "Enterococci: susceptible pattern by health care area",
+   "s": {
+    "ampicillin": 11.9,
+    "ciprofloxacin": 8.3,
+    "gentamicin_hl": 50.7,
+    "linezolid": 80.6,
+    "nitrofurantoin": 47.9,
+    "penicillin": 3.6,
+    "teicoplanin": 86.4,
+    "vancomycin": 95.5
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location",
+   "note": "The column sub-headers are printed 'R%', but the table is titled susceptible pattern and its Total columns equal the isolate-weighted combination of the % susceptible specimen tables (for example E. faecalis ampicillin 21.7: 42 isolates at 33.3% and 165 at 18.8%), so the values are recorded as % susceptible. Chapter 5 counts 207 E. faecalis and 112 E. faecium (Figure 5); the organism table (Table 1.2) lists 177 and 90."
+  }
+ ],
+ "counts": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 1172,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 608,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "n": 473,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 91,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 470,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 259,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 179,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 32,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "n": 545,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "n": 199,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Klebsiella pneumoniae",
+   "n": 209,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "n": 137,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "n": 177,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Enterococcus faecalis",
+   "n": 46,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Enterococcus faecalis",
+   "n": 114,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Enterococcus faecalis",
+   "n": 17,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 234,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 51,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "n": 103,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 80,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "n": 171,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Acinetobacter baumannii",
+   "n": 17,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Acinetobacter baumannii",
+   "n": 76,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "n": 78,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "n": 117,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "n": 28,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "n": 70,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "n": 19,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella oxytoca",
+   "n": 141,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Klebsiella oxytoca",
+   "n": 50,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Klebsiella oxytoca",
+   "n": 63,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Klebsiella oxytoca",
+   "n": 28,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "n": 90,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Enterococcus faecium",
+   "n": 23,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Enterococcus faecium",
+   "n": 54,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Enterococcus faecium",
+   "n": 13,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Diarrhoeagenic Escherichia coli",
+   "n": 43,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Diarrhoeagenic Escherichia coli",
+   "n": 34,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Diarrhoeagenic Escherichia coli",
+   "n": 9,
+   "page": 38
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Diarrhoeagenic Escherichia coli",
+   "n": 0,
+   "page": 38
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Table 2.6 (E. coli by OPD, ward and ICU, p48) and Table 2.7 (K. pneumoniae by OPD, ward and ICU, p49)",
+   "why": "72-dpi screenshots: the decimal digits cannot be read reliably (3, 6, 8 and 9 are indistinguishable); Table 2.7 also prints 697 K. pneumoniae (OPD 249, ward 286, ICU 162) against 545 in Tables 1.2 and 2.1"
+  },
+  {
+   "what": "P. aeruginosa location-wise susceptible percentage (p54) and Figure 4.2 staphylococci by location (p57)",
+   "why": "72-dpi screenshots too small to read reliably"
+  },
+  {
+   "what": "Rows not analysed (every cell '-'): A. baumannii blood (n=*10) and OPD (n=25); P. aeruginosa blood (n=4); S. haemolyticus (n=*10); superficial-infection E. faecium (n=*18); ICU E. faecium (n=*15)",
+   "why": "not analysed in the source"
+  },
+  {
+   "what": "Klebsiella spp. (Table 2.1, n=2) and Klebsiella spp. (others) (Table 2.3, n=2)",
+   "org": "Klebsiella spp.",
+   "why": "unspeciated Klebsiella has the same canonical key as K. pneumoniae; a second row for the same stratum would duplicate the K. pneumoniae row"
+  },
+  {
+   "what": "Tables 1.3, 1.5, 1.6 and 1.7 (specimen-wise distribution of Enterobacteriaceae, staphylococci, NFGNB and enterococci) and Table 1.4 (chart)",
+   "why": "low-resolution images; the counts cannot be read reliably"
+  },
+  {
+   "what": "Figure 3.1, Figure 4.1 and Figure 5 species distributions (A. baumannii 263, P. aeruginosa 314, S. aureus 554, S. epidermidis 6, S. haemolyticus 11, S. hominis 7, S. saprophyticus 2, Staphylococcus spp. 59, E. faecalis 207, E. faecium 112, Enterococcus spp. 153)",
+   "why": "not recorded as counts: the same organisms are counted in Table 1.2 with different totals, and one stratum can hold only one count; quoted in the row notes"
+  },
+  {
+   "what": "Table 1.1 (distribution of major groups of organisms) and the denominator tables (p34)",
+   "why": "organism groups, not organisms"
+  },
+  {
+   "what": "Carbapenem-resistant and carbapenem-susceptible charts (A. baumannii p53, P. aeruginosa p55), MR and MS chart (p57), yearly trend tables for NFGNB (p55), staphylococci (p58) and enterococci (p62), monthly isolation tables (p33, p59) and the yearly and monthly Enterobacteriaceae trend charts (p50)",
+   "why": "charts without legible labels, or organism-group trends in which 0 stands for agents not tested"
+  },
+  {
+   "what": "Charts that repeat tables (Figures 2.6 and 2.7, the A. baumannii and P. aeruginosa location charts, the enterococcal charts on p61)",
+   "why": "duplicate the tables"
+  }
+ ]
+}

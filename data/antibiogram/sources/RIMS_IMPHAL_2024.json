@@ -1,0 +1,2624 @@
+{
+ "id": "RIMS_IMPHAL_2024",
+ "kind": "institution",
+ "inst": "RIMS_IMPHAL",
+ "institution": "Regional Institute of Medical Sciences, Imphal",
+ "short": "RIMS Imphal",
+ "city": "Imphal",
+ "state": "Manipur",
+ "region": "east",
+ "sector": "government",
+ "year": 2024,
+ "isolates": 6407,
+ "end": "2024-06",
+ "period": "July 2023 to June 2024",
+ "url": "https://rims.edu.in/rimsman/wp-content/uploads/RIMSH-Antibiogram-2023-24.pdf",
+ "page": "https://rims.edu.in/rimsman/",
+ "retrieved": "2026-09-26",
+ "citation": "Regional Institute of Medical Sciences Hospital, Imphal. RIMSH Antibiogram 2023-24 (1 July 2023 to 30 June 2024). Imphal: RIMS.",
+ "reporting": "Percent susceptible with isolate numbers: Enterobacterales by specimen (blood, urine, lower respiratory tract, superficial infection); S. aureus (MSSA, MRSA) and CoNS from all samples, with CoNS species; A. baumannii and P. aeruginosa by specimen and by location (OPD, ward, ICU); E. faecalis and E. faecium by specimen and by location.",
+ "method": "Isolate data entered monthly on the AMR portal, validated by the regional administrator and analysed with the iAMRSN portal; the staphylococcal, non-fermenter and enterococcal tables leave groups under 20 isolates unanalysed ('-').",
+ "measure": "S",
+ "verification": {
+  "status": "double-checked",
+  "note": "Read from page images (scanned PDF, no text layer). Every table was read twice from separately rendered and cropped images (pass A at scale 3, pass B at scale 2.5 with different crops) and only values both passes agreed on were kept; isolate numbers were checked against the count tables (Tables 1.2 and 1.3, p14, p19) and every location table's Total column against its OPD, ward and ICU columns weighted by their isolate numbers. Page numbers are PDF pages. Checked 2026-09-26."
+ },
+ "notes": "RIMSH Antibiogram 2023-24 (the file name says 2023; the analysis period is 1 July 2023 to 30 June 2024): 18,917 samples and 6,407 culture-positive isolates. Enterobacterales tables are by specimen for all locations; the A. baumannii, P. aeruginosa and enterococcal location tables cover all specimens except faeces (recorded as all specimens). There is no sterile-site antibiogram; the SS count column is recorded as sterile sites, as the 2026 policy defines SS (fluid from sterile spaces), although this report's text calls SS surgical sites. The report prints 0 for agents not tested in its trend tables, so a 0 in rows with few isolates may mean not tested; values are recorded as printed. Cefazolin is 0 for every organism in the blood table. 'Staphylococcus spp.' in the CoNS table is recorded as other (unspeciated) coagulase-negative staphylococci; the CoNS table prints one isolate fewer for each species than the distribution table (p14). The faeces table (p5) lists 183 diarrhoeagenic E. coli, while Tables 1.2 and 1.3 count 162 as diarrhoeagenic E. coli and 21 as E. coli, so Table 1.2's E. coli total (2,001) includes 21 faecal isolates. Gentamicin HL is high-level gentamicin.",
+ "issues": [
+  "Second reader 2026-09-26: the PDF has no text layer but is not a raster scan: every page is vector outlines, so renders at scale 3 to 4 are sharp. All 809 cells, all 78 row n and all 110 counts re-read from those renders and written down before comparing (this includes the seeded sample of 202 cells over all 13 tables): 0 corrected. Organism, specimen, setting, phenotype and page agree for all 78 rows; the rotated Table 1.3 (p8) was read turned upright.",
+  "Second reader: all 58 cells the validator does not keep (31 cautions, 27 intrinsic) are printed as recorded, including E. coli imipenem 27.8 (blood) and 35.8 (urine) against meropenem 55.6 and 64.4, and E. faecalis vancomycin 100 in the p24 Total column against 97.7 in its ward column (conflict entry kept).",
+  "Second reader: the 7 count mismatches are printed that way: Table 1.3 (p8) prints 10 superficial-infection Enterobacter spp. against 11 in the p11 table; Table 1.2 (p7) prints P. aeruginosa 439 (OPD 94) and E. faecium 196 (ward 123) against 438 (93) on p19 and p21 and 195 (122) on p24; p14 prints Staphylococcus spp. 93 and S. epidermidis 50 against 92 and 49 on p17."
+ ],
+ "rows": [
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 36,
+   "page": 9,
+   "table": "Susceptible pattern (Enterobacterales), blood",
+   "s": {
+    "amikacin": 58.3,
+    "cefazolin": 0,
+    "cefotaxime": 8.3,
+    "ceftazidime": 11.1,
+    "ceftriaxone": 22.2,
+    "ciprofloxacin": 13.9,
+    "ertapenem": 44.4,
+    "imipenem": 27.8,
+    "levofloxacin": 22.2,
+    "meropenem": 55.6,
+    "minocycline": 66.7,
+    "piptazo": 2.8
+   },
+   "specimen_as_printed": "Blood",
+   "note": "Imipenem is printed far lower than meropenem in this row (as printed in the source)."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Citrobacter freundii",
+   "pheno": null,
+   "n": 1,
+   "page": 9,
+   "table": "Susceptible pattern (Enterobacterales), blood",
+   "s": {
+    "amikacin": 100,
+    "cefazolin": 0,
+    "cefotaxime": 100,
+    "ceftazidime": 100,
+    "ceftriaxone": 100,
+    "ciprofloxacin": 0,
+    "ertapenem": 100,
+    "imipenem": 100,
+    "levofloxacin": 100,
+    "meropenem": 100,
+    "minocycline": 100,
+    "piptazo": 100
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Citrobacter spp.",
+   "pheno": null,
+   "n": 1,
+   "page": 9,
+   "table": "Susceptible pattern (Enterobacterales), blood",
+   "s": {
+    "amikacin": 0,
+    "cefazolin": 0,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "ertapenem": 0,
+    "imipenem": 0,
+    "levofloxacin": 100,
+    "meropenem": 0,
+    "minocycline": 100,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 26,
+   "page": 9,
+   "table": "Susceptible pattern (Enterobacterales), blood",
+   "s": {
+    "amikacin": 23.1,
+    "cefazolin": 0,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "ertapenem": 15.4,
+    "imipenem": 11.5,
+    "levofloxacin": 11.5,
+    "meropenem": 23.1,
+    "minocycline": 69.2,
+    "piptazo": 4
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella oxytoca",
+   "pheno": null,
+   "n": 2,
+   "page": 9,
+   "table": "Susceptible pattern (Enterobacterales), blood",
+   "s": {
+    "amikacin": 50,
+    "cefazolin": 0,
+    "cefotaxime": 0,
+    "ceftazidime": 50,
+    "ceftriaxone": 50,
+    "ciprofloxacin": 0,
+    "ertapenem": 100,
+    "imipenem": 100,
+    "levofloxacin": 100,
+    "meropenem": 100,
+    "minocycline": 50,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "Blood",
+   "note": "Cefotaxime and ceftriaxone differ widely in this row as printed in the source."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterobacter cloacae",
+   "pheno": null,
+   "n": 2,
+   "page": 9,
+   "table": "Susceptible pattern (Enterobacterales), blood",
+   "s": {
+    "amikacin": 0,
+    "cefazolin": 0,
+    "cefotaxime": 50,
+    "ceftazidime": 50,
+    "ceftriaxone": 50,
+    "ciprofloxacin": 0,
+    "ertapenem": 50,
+    "imipenem": 50,
+    "levofloxacin": 50,
+    "meropenem": 50,
+    "minocycline": 100,
+    "piptazo": 50
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "n": 3,
+   "page": 9,
+   "table": "Susceptible pattern (Enterobacterales), blood",
+   "s": {
+    "amikacin": 33.3,
+    "cefazolin": 0,
+    "cefotaxime": 33.3,
+    "ceftazidime": 33.3,
+    "ceftriaxone": 33.3,
+    "ciprofloxacin": 33.3,
+    "ertapenem": 100,
+    "imipenem": 33.3,
+    "levofloxacin": 66.7,
+    "meropenem": 100,
+    "minocycline": 66.7,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "pheno": null,
+   "n": 3,
+   "page": 9,
+   "table": "Susceptible pattern (Enterobacterales), blood",
+   "s": {
+    "amikacin": 100,
+    "cefazolin": 0,
+    "cefotaxime": 33.3,
+    "ceftazidime": 0,
+    "ceftriaxone": 33.3,
+    "ciprofloxacin": 66.7,
+    "ertapenem": 33.3,
+    "imipenem": 0,
+    "levofloxacin": 66.7,
+    "meropenem": 66.7,
+    "minocycline": 0,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Morganella morganii",
+   "pheno": null,
+   "n": 3,
+   "page": 9,
+   "table": "Susceptible pattern (Enterobacterales), blood",
+   "s": {
+    "amikacin": 33.3,
+    "cefazolin": 0,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 33.3,
+    "ciprofloxacin": 0,
+    "ertapenem": 33.3,
+    "imipenem": 33.3,
+    "levofloxacin": 33.3,
+    "meropenem": 33.3,
+    "minocycline": 33.3,
+    "piptazo": 33.3
+   },
+   "specimen_as_printed": "Blood",
+   "note": "Cefotaxime and ceftriaxone differ widely in this row as printed in the source."
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 1513,
+   "page": 9,
+   "table": "Susceptible pattern (Enterobacterales), urine",
+   "s": {
+    "amikacin": 52.9,
+    "cefazolin": 4.5,
+    "cefotaxime": 5.3,
+    "ceftazidime": 8.9,
+    "ceftriaxone": 14.6,
+    "ciprofloxacin": 10.4,
+    "ertapenem": 50.8,
+    "fosfomycin": 94.8,
+    "imipenem": 35.8,
+    "levofloxacin": 21.9,
+    "meropenem": 64.4,
+    "minocycline": 68.5,
+    "nitrofurantoin": 72,
+    "piptazo": 11.1,
+    "cotrimoxazole": 47.6
+   },
+   "specimen_as_printed": "Urine",
+   "note": "Imipenem is printed far lower than meropenem in this row (as printed in the source)."
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 524,
+   "page": 9,
+   "table": "Susceptible pattern (Enterobacterales), urine",
+   "s": {
+    "amikacin": 39.1,
+    "cefazolin": 5,
+    "cefotaxime": 6.5,
+    "ceftazidime": 11.6,
+    "ceftriaxone": 15.9,
+    "ciprofloxacin": 10.1,
+    "ertapenem": 31.7,
+    "fosfomycin": 71,
+    "imipenem": 27,
+    "levofloxacin": 22.8,
+    "meropenem": 43.3,
+    "minocycline": 52.7,
+    "nitrofurantoin": 35.3,
+    "piptazo": 7.1,
+    "cotrimoxazole": 44.9
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella oxytoca",
+   "pheno": null,
+   "n": 176,
+   "page": 9,
+   "table": "Susceptible pattern (Enterobacterales), urine",
+   "s": {
+    "amikacin": 40.9,
+    "cefazolin": 1.1,
+    "cefotaxime": 4.5,
+    "ceftazidime": 11.9,
+    "ceftriaxone": 16.6,
+    "ciprofloxacin": 12.5,
+    "ertapenem": 38.6,
+    "fosfomycin": 71,
+    "imipenem": 29.5,
+    "levofloxacin": 30.1,
+    "meropenem": 50.6,
+    "minocycline": 58.5,
+    "nitrofurantoin": 37.5,
+    "piptazo": 8.5,
+    "cotrimoxazole": 49.7
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 58,
+   "page": 9,
+   "table": "Susceptible pattern (Enterobacterales), urine",
+   "s": {
+    "amikacin": 41.4,
+    "cefazolin": 0,
+    "cefotaxime": 20.7,
+    "ceftazidime": 29.3,
+    "ceftriaxone": 48.3,
+    "ciprofloxacin": 17.2,
+    "ertapenem": 48.3,
+    "fosfomycin": 81,
+    "imipenem": 22.4,
+    "levofloxacin": 29.3,
+    "meropenem": 62.1,
+    "minocycline": 15.5,
+    "nitrofurantoin": 0,
+    "piptazo": 29.3,
+    "cotrimoxazole": 55.4
+   },
+   "specimen_as_printed": "Urine",
+   "note": "Cefotaxime and ceftriaxone differ widely in this row as printed in the source."
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Proteus vulgaris",
+   "pheno": null,
+   "n": 24,
+   "page": 9,
+   "table": "Susceptible pattern (Enterobacterales), urine",
+   "s": {
+    "amikacin": 50,
+    "cefazolin": 0,
+    "cefotaxime": 12.5,
+    "ceftazidime": 25,
+    "ceftriaxone": 29.2,
+    "ciprofloxacin": 20.8,
+    "ertapenem": 41.7,
+    "fosfomycin": 41.7,
+    "imipenem": 16.7,
+    "levofloxacin": 45.8,
+    "meropenem": 83.3,
+    "minocycline": 20.8,
+    "nitrofurantoin": 0,
+    "piptazo": 25,
+    "cotrimoxazole": 58.3
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Citrobacter freundii",
+   "pheno": null,
+   "n": 21,
+   "page": 9,
+   "table": "Susceptible pattern (Enterobacterales), urine",
+   "s": {
+    "amikacin": 47.6,
+    "cefazolin": 0,
+    "cefotaxime": 9.5,
+    "ceftazidime": 14.3,
+    "ceftriaxone": 28.6,
+    "ciprofloxacin": 14.3,
+    "ertapenem": 52.4,
+    "fosfomycin": 76.2,
+    "imipenem": 33.3,
+    "levofloxacin": 19,
+    "meropenem": 57.1,
+    "minocycline": 57.1,
+    "nitrofurantoin": 28.6,
+    "piptazo": 9.5,
+    "cotrimoxazole": 57.1
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "n": 14,
+   "page": 9,
+   "table": "Susceptible pattern (Enterobacterales), urine",
+   "s": {
+    "amikacin": 57.1,
+    "cefazolin": 7.1,
+    "cefotaxime": 14.3,
+    "ceftazidime": 28.6,
+    "ceftriaxone": 14.3,
+    "ciprofloxacin": 35.7,
+    "ertapenem": 57.1,
+    "fosfomycin": 71.4,
+    "imipenem": 35.7,
+    "levofloxacin": 64.3,
+    "meropenem": 57.1,
+    "minocycline": 78.6,
+    "nitrofurantoin": 28.6,
+    "piptazo": 7.1,
+    "cotrimoxazole": 57.1
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Citrobacter koseri",
+   "pheno": null,
+   "n": 12,
+   "page": 9,
+   "table": "Susceptible pattern (Enterobacterales), urine",
+   "s": {
+    "amikacin": 41.7,
+    "cefazolin": 16.7,
+    "cefotaxime": 8.3,
+    "ceftazidime": 16.7,
+    "ceftriaxone": 16.7,
+    "ciprofloxacin": 16.7,
+    "ertapenem": 50,
+    "fosfomycin": 66.7,
+    "imipenem": 58.3,
+    "levofloxacin": 33.3,
+    "meropenem": 75,
+    "minocycline": 66.7,
+    "nitrofurantoin": 41.7,
+    "piptazo": 0,
+    "cotrimoxazole": 50
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "pheno": null,
+   "n": 5,
+   "page": 9,
+   "table": "Susceptible pattern (Enterobacterales), urine",
+   "s": {
+    "amikacin": 80,
+    "cefazolin": 0,
+    "cefotaxime": 40,
+    "ceftazidime": 60,
+    "ceftriaxone": 40,
+    "ciprofloxacin": 60,
+    "ertapenem": 60,
+    "fosfomycin": 100,
+    "imipenem": 40,
+    "levofloxacin": 80,
+    "meropenem": 100,
+    "minocycline": 80,
+    "nitrofurantoin": 0,
+    "piptazo": 40,
+    "cotrimoxazole": 100
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Morganella morganii",
+   "pheno": null,
+   "n": 3,
+   "page": 9,
+   "table": "Susceptible pattern (Enterobacterales), urine",
+   "s": {
+    "amikacin": 33.3,
+    "cefazolin": 0,
+    "cefotaxime": 0,
+    "ceftazidime": 33.3,
+    "ceftriaxone": 33.3,
+    "ciprofloxacin": 33.3,
+    "ertapenem": 66.7,
+    "fosfomycin": 33.3,
+    "imipenem": 33.3,
+    "levofloxacin": 0,
+    "meropenem": 66.7,
+    "minocycline": 33.3,
+    "nitrofurantoin": 0,
+    "piptazo": 66.7,
+    "cotrimoxazole": 0
+   },
+   "specimen_as_printed": "Urine",
+   "note": "Cefotaxime and ceftriaxone differ widely in this row as printed in the source."
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Providencia rettgeri",
+   "pheno": null,
+   "n": 1,
+   "page": 9,
+   "table": "Susceptible pattern (Enterobacterales), urine",
+   "s": {
+    "amikacin": 100,
+    "cefazolin": 0,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "ertapenem": 0,
+    "fosfomycin": 0,
+    "imipenem": 0,
+    "levofloxacin": 0,
+    "meropenem": 100,
+    "minocycline": 100,
+    "nitrofurantoin": 0,
+    "piptazo": 100,
+    "cotrimoxazole": 0
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 409,
+   "page": 10,
+   "table": "Susceptible pattern (Enterobacterales), lower respiratory tract",
+   "s": {
+    "amikacin": 38.6,
+    "cefotaxime": 7.2,
+    "ceftazidime": 14.7,
+    "ceftriaxone": 21,
+    "ciprofloxacin": 13.9,
+    "ertapenem": 34.5,
+    "imipenem": 26.7,
+    "levofloxacin": 32.6,
+    "meropenem": 43,
+    "minocycline": 52.5,
+    "piptazo": 8.6
+   },
+   "specimen_as_printed": "Lower respiratory tract"
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 83,
+   "page": 10,
+   "table": "Susceptible pattern (Enterobacterales), lower respiratory tract",
+   "s": {
+    "amikacin": 66.3,
+    "cefotaxime": 15.7,
+    "ceftazidime": 27.7,
+    "ceftriaxone": 31.3,
+    "ciprofloxacin": 18.1,
+    "ertapenem": 54.2,
+    "imipenem": 48.2,
+    "levofloxacin": 33.7,
+    "meropenem": 68.7,
+    "minocycline": 67.5,
+    "piptazo": 26.5
+   },
+   "specimen_as_printed": "Lower respiratory tract"
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Klebsiella oxytoca",
+   "pheno": null,
+   "n": 56,
+   "page": 10,
+   "table": "Susceptible pattern (Enterobacterales), lower respiratory tract",
+   "s": {
+    "amikacin": 33.9,
+    "cefotaxime": 1.8,
+    "ceftazidime": 10.7,
+    "ceftriaxone": 16.1,
+    "ciprofloxacin": 17.9,
+    "ertapenem": 25,
+    "imipenem": 19.6,
+    "levofloxacin": 25.5,
+    "meropenem": 44.6,
+    "minocycline": 56.4,
+    "piptazo": 7.1
+   },
+   "specimen_as_printed": "Lower respiratory tract"
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 8,
+   "page": 10,
+   "table": "Susceptible pattern (Enterobacterales), lower respiratory tract",
+   "s": {
+    "amikacin": 62.5,
+    "cefotaxime": 0,
+    "ceftazidime": 62.5,
+    "ceftriaxone": 62.5,
+    "ciprofloxacin": 50,
+    "ertapenem": 62.5,
+    "imipenem": 50,
+    "levofloxacin": 50,
+    "meropenem": 75,
+    "minocycline": 37.5,
+    "piptazo": 37.5
+   },
+   "specimen_as_printed": "Lower respiratory tract",
+   "note": "Cefotaxime and ceftriaxone differ widely in this row as printed in the source."
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "n": 7,
+   "page": 10,
+   "table": "Susceptible pattern (Enterobacterales), lower respiratory tract",
+   "s": {
+    "amikacin": 57.1,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 42.9,
+    "ciprofloxacin": 14.3,
+    "ertapenem": 14.3,
+    "imipenem": 28.6,
+    "levofloxacin": 42.9,
+    "meropenem": 42.9,
+    "minocycline": 71.4,
+    "piptazo": 14.3
+   },
+   "specimen_as_printed": "Lower respiratory tract",
+   "note": "Cefotaxime and ceftriaxone differ widely in this row as printed in the source."
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Citrobacter freundii",
+   "pheno": null,
+   "n": 5,
+   "page": 10,
+   "table": "Susceptible pattern (Enterobacterales), lower respiratory tract",
+   "s": {
+    "amikacin": 40,
+    "cefotaxime": 40,
+    "ceftazidime": 40,
+    "ceftriaxone": 40,
+    "ciprofloxacin": 40,
+    "ertapenem": 40,
+    "imipenem": 0,
+    "levofloxacin": 40,
+    "meropenem": 80,
+    "minocycline": 40,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "Lower respiratory tract"
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "pheno": null,
+   "n": 4,
+   "page": 10,
+   "table": "Susceptible pattern (Enterobacterales), lower respiratory tract",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 75,
+    "ceftazidime": 100,
+    "ceftriaxone": 100,
+    "ciprofloxacin": 100,
+    "ertapenem": 75,
+    "imipenem": 75,
+    "levofloxacin": 100,
+    "meropenem": 100,
+    "minocycline": 75,
+    "piptazo": 100
+   },
+   "specimen_as_printed": "Lower respiratory tract",
+   "note": "Cefotaxime and ceftriaxone differ widely in this row as printed in the source."
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Proteus vulgaris",
+   "pheno": null,
+   "n": 3,
+   "page": 10,
+   "table": "Susceptible pattern (Enterobacterales), lower respiratory tract",
+   "s": {
+    "amikacin": 33.3,
+    "cefotaxime": 33.3,
+    "ceftazidime": 66.7,
+    "ceftriaxone": 66.7,
+    "ciprofloxacin": 33.3,
+    "ertapenem": 66.7,
+    "imipenem": 33.3,
+    "levofloxacin": 66.7,
+    "meropenem": 66.7,
+    "minocycline": 33.3,
+    "piptazo": 66.7
+   },
+   "specimen_as_printed": "Lower respiratory tract",
+   "note": "Cefotaxime and ceftriaxone differ widely in this row as printed in the source."
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Citrobacter koseri",
+   "pheno": null,
+   "n": 2,
+   "page": 10,
+   "table": "Susceptible pattern (Enterobacterales), lower respiratory tract",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "ertapenem": 50,
+    "imipenem": 50,
+    "levofloxacin": 50,
+    "meropenem": 50,
+    "minocycline": 50,
+    "piptazo": 50
+   },
+   "specimen_as_printed": "Lower respiratory tract"
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Enterobacter cloacae",
+   "pheno": null,
+   "n": 2,
+   "page": 10,
+   "table": "Susceptible pattern (Enterobacterales), lower respiratory tract",
+   "s": {
+    "amikacin": 50,
+    "cefotaxime": 50,
+    "ceftazidime": 50,
+    "ceftriaxone": 50,
+    "ciprofloxacin": 50,
+    "ertapenem": 50,
+    "imipenem": 50,
+    "levofloxacin": 100,
+    "meropenem": 50,
+    "minocycline": 50,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "Lower respiratory tract"
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Morganella morganii",
+   "pheno": null,
+   "n": 1,
+   "page": 10,
+   "table": "Susceptible pattern (Enterobacterales), lower respiratory tract",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "ertapenem": 0,
+    "imipenem": 100,
+    "levofloxacin": 0,
+    "meropenem": 100,
+    "minocycline": 100,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "Lower respiratory tract"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 299,
+   "page": 11,
+   "table": "Susceptible pattern (Enterobacterales), superficial infection",
+   "s": {
+    "amikacin": 62.5,
+    "cefotaxime": 6.4,
+    "ceftazidime": 10.4,
+    "ceftriaxone": 11,
+    "ciprofloxacin": 11,
+    "ertapenem": 41.5,
+    "imipenem": 31.8,
+    "levofloxacin": 20.7,
+    "meropenem": 55.2,
+    "minocycline": 64.2,
+    "piptazo": 9.4
+   },
+   "specimen_as_printed": "Superficial infection"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 259,
+   "page": 11,
+   "table": "Susceptible pattern (Enterobacterales), superficial infection",
+   "s": {
+    "amikacin": 48.6,
+    "cefotaxime": 9.7,
+    "ceftazidime": 13.5,
+    "ceftriaxone": 12.4,
+    "ciprofloxacin": 15.8,
+    "ertapenem": 26.3,
+    "imipenem": 22.4,
+    "levofloxacin": 24.9,
+    "meropenem": 37.1,
+    "minocycline": 49.8,
+    "piptazo": 7.7
+   },
+   "specimen_as_printed": "Superficial infection"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Klebsiella oxytoca",
+   "pheno": null,
+   "n": 57,
+   "page": 11,
+   "table": "Susceptible pattern (Enterobacterales), superficial infection",
+   "s": {
+    "amikacin": 36.8,
+    "cefotaxime": 3.5,
+    "ceftazidime": 14,
+    "ceftriaxone": 8.8,
+    "ciprofloxacin": 14,
+    "ertapenem": 29.8,
+    "imipenem": 19.3,
+    "levofloxacin": 28.1,
+    "meropenem": 38.6,
+    "minocycline": 49.1,
+    "piptazo": 10.5
+   },
+   "specimen_as_printed": "Superficial infection"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 49,
+   "page": 11,
+   "table": "Susceptible pattern (Enterobacterales), superficial infection",
+   "s": {
+    "amikacin": 51,
+    "cefotaxime": 22.4,
+    "ceftazidime": 30.6,
+    "ceftriaxone": 40.8,
+    "ciprofloxacin": 30.6,
+    "ertapenem": 61.2,
+    "imipenem": 22.4,
+    "levofloxacin": 32.7,
+    "meropenem": 61.2,
+    "minocycline": 12.2,
+    "piptazo": 38.8
+   },
+   "specimen_as_printed": "Superficial infection"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Proteus vulgaris",
+   "pheno": null,
+   "n": 38,
+   "page": 11,
+   "table": "Susceptible pattern (Enterobacterales), superficial infection",
+   "s": {
+    "amikacin": 68.4,
+    "cefotaxime": 10.5,
+    "ceftazidime": 42.1,
+    "ceftriaxone": 36.8,
+    "ciprofloxacin": 26.3,
+    "ertapenem": 52.6,
+    "imipenem": 13.5,
+    "levofloxacin": 48.6,
+    "meropenem": 68.4,
+    "minocycline": 42.1,
+    "piptazo": 26.3
+   },
+   "specimen_as_printed": "Superficial infection",
+   "note": "Cefotaxime and ceftriaxone differ widely in this row as printed in the source."
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "n": 11,
+   "page": 11,
+   "table": "Susceptible pattern (Enterobacterales), superficial infection",
+   "s": {
+    "amikacin": 40,
+    "cefotaxime": 0,
+    "ceftazidime": 30,
+    "ceftriaxone": 20,
+    "ciprofloxacin": 20,
+    "ertapenem": 50,
+    "imipenem": 40,
+    "levofloxacin": 77.8,
+    "meropenem": 70,
+    "minocycline": 80,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "Superficial infection",
+   "note": "Table 1.3 gives 10 superficial-infection Enterobacter spp. (and, by difference, 3 E. cloacae); this table prints 11 Enterobacter spp. and 2 E. cloacae (13 in both)."
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Citrobacter freundii",
+   "pheno": null,
+   "n": 8,
+   "page": 11,
+   "table": "Susceptible pattern (Enterobacterales), superficial infection",
+   "s": {
+    "amikacin": 62.5,
+    "cefotaxime": 37.5,
+    "ceftazidime": 25,
+    "ceftriaxone": 25,
+    "ciprofloxacin": 37.5,
+    "ertapenem": 37.5,
+    "imipenem": 12.5,
+    "levofloxacin": 50,
+    "meropenem": 50,
+    "minocycline": 75,
+    "piptazo": 37.5
+   },
+   "specimen_as_printed": "Superficial infection"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Citrobacter koseri",
+   "pheno": null,
+   "n": 6,
+   "page": 11,
+   "table": "Susceptible pattern (Enterobacterales), superficial infection",
+   "s": {
+    "amikacin": 83.3,
+    "cefotaxime": 0,
+    "ceftazidime": 16.7,
+    "ceftriaxone": 33.3,
+    "ciprofloxacin": 33.3,
+    "ertapenem": 50,
+    "imipenem": 50,
+    "levofloxacin": 66.7,
+    "meropenem": 100,
+    "minocycline": 66.7,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "Superficial infection",
+   "note": "Cefotaxime and ceftriaxone differ widely in this row as printed in the source."
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Morganella morganii",
+   "pheno": null,
+   "n": 5,
+   "page": 11,
+   "table": "Susceptible pattern (Enterobacterales), superficial infection",
+   "s": {
+    "amikacin": 80,
+    "cefotaxime": 40,
+    "ceftazidime": 60,
+    "ceftriaxone": 80,
+    "ciprofloxacin": 40,
+    "ertapenem": 80,
+    "imipenem": 40,
+    "levofloxacin": 40,
+    "meropenem": 100,
+    "minocycline": 20,
+    "piptazo": 60
+   },
+   "specimen_as_printed": "Superficial infection",
+   "note": "Cefotaxime and ceftriaxone differ widely in this row as printed in the source."
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterobacter cloacae",
+   "pheno": null,
+   "n": 2,
+   "page": 11,
+   "table": "Susceptible pattern (Enterobacterales), superficial infection",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 50,
+    "ceftazidime": 50,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 100,
+    "ertapenem": 50,
+    "imipenem": 50,
+    "levofloxacin": 100,
+    "meropenem": 100,
+    "minocycline": 100,
+    "piptazo": 50
+   },
+   "specimen_as_printed": "Superficial infection",
+   "note": "Table 1.3 implies 3 superficial-infection E. cloacae (Enterobacter group 13 less 10 Enterobacter spp.); this table prints 2 (and 11 Enterobacter spp.). Cefotaxime and ceftriaxone differ widely in this row as printed in the source."
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Citrobacter spp.",
+   "pheno": null,
+   "n": 1,
+   "page": 11,
+   "table": "Susceptible pattern (Enterobacterales), superficial infection",
+   "s": {
+    "amikacin": 0,
+    "cefotaxime": 0,
+    "ceftazidime": 100,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "ertapenem": 100,
+    "imipenem": 100,
+    "levofloxacin": 100,
+    "meropenem": 100,
+    "minocycline": 100,
+    "piptazo": 100
+   },
+   "specimen_as_printed": "Superficial infection"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Providencia stuartii",
+   "pheno": null,
+   "n": 1,
+   "page": 11,
+   "table": "Susceptible pattern (Enterobacterales), superficial infection",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 0,
+    "ceftazidime": 0,
+    "ceftriaxone": 100,
+    "ciprofloxacin": 0,
+    "ertapenem": 0,
+    "imipenem": 0,
+    "levofloxacin": 0,
+    "meropenem": 100,
+    "minocycline": 0,
+    "piptazo": 0
+   },
+   "specimen_as_printed": "Superficial infection",
+   "note": "Cefotaxime and ceftriaxone differ widely in this row as printed in the source."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 597,
+   "page": 15,
+   "table": "Staphylococcus aureus, CoNS, MRSA, MSSA from all samples",
+   "s": {
+    "cefoxitin": 35.3,
+    "ciprofloxacin": 33.5,
+    "clindamycin": 56.4,
+    "erythromycin": 12.2,
+    "linezolid": 99.7,
+    "tetracycline": 85.3,
+    "tigecycline": 86.3,
+    "cotrimoxazole": 83.8,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All samples"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MSSA",
+   "n": 211,
+   "page": 15,
+   "table": "Staphylococcus aureus, CoNS, MRSA, MSSA from all samples",
+   "s": {
+    "cefoxitin": 100,
+    "ciprofloxacin": 47.9,
+    "clindamycin": 64,
+    "erythromycin": 20.4,
+    "linezolid": 99.5,
+    "tetracycline": 87.7,
+    "tigecycline": 82.3,
+    "cotrimoxazole": 80.6,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All samples"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MRSA",
+   "n": 386,
+   "page": 15,
+   "table": "Staphylococcus aureus, CoNS, MRSA, MSSA from all samples",
+   "s": {
+    "cefoxitin": 0,
+    "ciprofloxacin": 25.6,
+    "clindamycin": 52.3,
+    "erythromycin": 7.8,
+    "linezolid": 99.7,
+    "tetracycline": 83.9,
+    "tigecycline": 88.9,
+    "cotrimoxazole": 85.5,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All samples"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": null,
+   "n": 182,
+   "page": 15,
+   "table": "Staphylococcus aureus, CoNS, MRSA, MSSA from all samples",
+   "s": {
+    "cefoxitin": 6.6,
+    "ciprofloxacin": 45.6,
+    "clindamycin": 43.4,
+    "erythromycin": 7.1,
+    "linezolid": 99.5,
+    "tetracycline": 72.5,
+    "tigecycline": 96.9,
+    "cotrimoxazole": 66.5,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All samples"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Other coagulase-negative staphylococci",
+   "pheno": null,
+   "n": 92,
+   "page": 17,
+   "table": "Susceptible percentages of CoNS isolated from all specimens",
+   "s": {
+    "cefoxitin": 8.6,
+    "ciprofloxacin": 40.9,
+    "clindamycin": 41.9,
+    "erythromycin": 9.7,
+    "linezolid": 98.9,
+    "tetracycline": 75.3,
+    "tigecycline": 94.4,
+    "cotrimoxazole": 67.7,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All specimens",
+   "note": "Printed as 'Staphylococcus spp.' in the CoNS table: coagulase-negative staphylococci not identified to species. The staphylococcal distribution table (p14) lists 93."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus epidermidis",
+   "pheno": null,
+   "n": 49,
+   "page": 17,
+   "table": "Susceptible percentages of CoNS isolated from all specimens",
+   "s": {
+    "cefoxitin": 6,
+    "ciprofloxacin": 62,
+    "clindamycin": 50,
+    "erythromycin": 4,
+    "linezolid": 100,
+    "tetracycline": 80,
+    "tigecycline": 100,
+    "cotrimoxazole": 70,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All specimens",
+   "note": "The staphylococcal distribution table (p14) lists 50."
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 190,
+   "page": 20,
+   "table": "A. baumannii: susceptible percentages by specimen (except faeces)",
+   "s": {
+    "amikacin": 32.6,
+    "cefepime": 5.8,
+    "ceftazidime": 6.3,
+    "imipenem": 11.6,
+    "levofloxacin": 20,
+    "meropenem": 20.5,
+    "minocycline": 32.1,
+    "piptazo": 17.9
+   },
+   "specimen_as_printed": "LRT"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 123,
+   "page": 20,
+   "table": "A. baumannii: susceptible percentages by specimen (except faeces)",
+   "s": {
+    "amikacin": 27.6,
+    "cefepime": 5.7,
+    "ceftazidime": 4.1,
+    "imipenem": 13,
+    "levofloxacin": 18.7,
+    "meropenem": 17.9,
+    "minocycline": 43.9,
+    "piptazo": 12.2
+   },
+   "specimen_as_printed": "Superficial infection"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 67,
+   "page": 20,
+   "table": "A. baumannii: susceptible percentages by specimen (except faeces)",
+   "s": {
+    "amikacin": 55.2,
+    "cefepime": 18.2,
+    "ceftazidime": 13.4,
+    "imipenem": 40.3,
+    "levofloxacin": 50.7,
+    "meropenem": 52.2,
+    "minocycline": 76.1,
+    "piptazo": 40.3
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 422,
+   "page": 20,
+   "table": "A. baumannii: susceptible pattern by health care area",
+   "s": {
+    "amikacin": 35.5,
+    "cefepime": 8.1,
+    "ceftazidime": 7.1,
+    "imipenem": 17.1,
+    "levofloxacin": 25.6,
+    "meropenem": 25.4,
+    "minocycline": 43.6,
+    "piptazo": 20.6
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location"
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 45,
+   "page": 20,
+   "table": "A. baumannii: susceptible pattern by health care area",
+   "s": {
+    "amikacin": 75.6,
+    "cefepime": 22.2,
+    "ceftazidime": 24.4,
+    "imipenem": 44.4,
+    "levofloxacin": 64.4,
+    "meropenem": 68.9,
+    "minocycline": 82.2,
+    "piptazo": 62.2
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location"
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 198,
+   "page": 20,
+   "table": "A. baumannii: susceptible pattern by health care area",
+   "s": {
+    "amikacin": 35.4,
+    "cefepime": 10.2,
+    "ceftazidime": 6.1,
+    "imipenem": 20.7,
+    "levofloxacin": 28.8,
+    "meropenem": 28.8,
+    "minocycline": 51.5,
+    "piptazo": 20.7
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location"
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 179,
+   "page": 20,
+   "table": "A. baumannii: susceptible pattern by health care area",
+   "s": {
+    "amikacin": 25.7,
+    "cefepime": 2.2,
+    "ceftazidime": 3.9,
+    "imipenem": 6.1,
+    "levofloxacin": 12.3,
+    "meropenem": 10.6,
+    "minocycline": 25.1,
+    "piptazo": 10.1
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 32,
+   "page": 21,
+   "table": "P. aeruginosa: susceptible percentages by specimen (except faeces)",
+   "s": {
+    "amikacin": 93.8,
+    "cefepime": 84.4,
+    "ceftazidime": 71.9,
+    "imipenem": 62.5,
+    "levofloxacin": 71.9,
+    "meropenem": 78.1,
+    "piptazo": 81.3
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 112,
+   "page": 21,
+   "table": "P. aeruginosa: susceptible percentages by specimen (except faeces)",
+   "s": {
+    "amikacin": 80.4,
+    "cefepime": 35.1,
+    "ceftazidime": 36.6,
+    "imipenem": 42.9,
+    "levofloxacin": 47.3,
+    "meropenem": 66.1,
+    "piptazo": 69.6
+   },
+   "specimen_as_printed": "LRT"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 164,
+   "page": 21,
+   "table": "P. aeruginosa: susceptible percentages by specimen (except faeces)",
+   "s": {
+    "amikacin": 86.6,
+    "cefepime": 36.6,
+    "ceftazidime": 32.3,
+    "imipenem": 44.5,
+    "levofloxacin": 36.6,
+    "meropenem": 79.9,
+    "piptazo": 67.7
+   },
+   "specimen_as_printed": "Superficial infection"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 109,
+   "page": 21,
+   "table": "P. aeruginosa: susceptible percentages by specimen (except faeces)",
+   "s": {
+    "amikacin": 69.7,
+    "cefepime": 28.7,
+    "ceftazidime": 32.1,
+    "imipenem": 29.4,
+    "levofloxacin": 29.4,
+    "meropenem": 54.1,
+    "piptazo": 56
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 438,
+   "page": 21,
+   "table": "P. aeruginosa: susceptible pattern by health care area",
+   "s": {
+    "amikacin": 81.5,
+    "cefepime": 37.8,
+    "ceftazidime": 36.9,
+    "ciprofloxacin": 43.3,
+    "gentamicin": 82.7,
+    "imipenem": 42.4,
+    "levofloxacin": 40.8,
+    "meropenem": 69.2,
+    "piptazo": 66.3,
+    "tobramycin": 86.7
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location",
+   "note": "Table 1.2 gives 439 P. aeruginosa (OPD 94); this table prints 438 (OPD 93), as does the NFGNB distribution table (p19), while the text under this table says 439."
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 93,
+   "page": 21,
+   "table": "P. aeruginosa: susceptible pattern by health care area",
+   "s": {
+    "amikacin": 89.4,
+    "cefepime": 40.9,
+    "ceftazidime": 42.6,
+    "ciprofloxacin": 52.1,
+    "gentamicin": 88.3,
+    "imipenem": 45.7,
+    "levofloxacin": 52.1,
+    "meropenem": 74.5,
+    "piptazo": 78.7,
+    "tobramycin": 93.6
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location",
+   "note": "Table 1.2 gives 439 P. aeruginosa (OPD 94); this table prints 438 (OPD 93), as does the NFGNB distribution table (p19), while the text under this table says 439."
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 250,
+   "page": 21,
+   "table": "P. aeruginosa: susceptible pattern by health care area",
+   "s": {
+    "amikacin": 82.8,
+    "cefepime": 40.4,
+    "ceftazidime": 36.8,
+    "ciprofloxacin": 43.2,
+    "gentamicin": 84,
+    "imipenem": 43.2,
+    "levofloxacin": 39.2,
+    "meropenem": 75.2,
+    "piptazo": 66,
+    "tobramycin": 88.3
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location"
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 95,
+   "page": 21,
+   "table": "P. aeruginosa: susceptible pattern by health care area",
+   "s": {
+    "amikacin": 70.5,
+    "cefepime": 27.7,
+    "ceftazidime": 31.6,
+    "ciprofloxacin": 34.7,
+    "gentamicin": 73.7,
+    "imipenem": 36.8,
+    "levofloxacin": 33.7,
+    "meropenem": 48.4,
+    "piptazo": 54.7,
+    "tobramycin": 75.8
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location"
+  },
+  {
+   "spec": "nonurine",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 77,
+   "page": 23,
+   "table": "Enterococci: susceptible percentages by specimen (except urine)",
+   "s": {
+    "ampicillin": 54.5,
+    "gentamicin_hl": 81.8,
+    "linezolid": 96.1,
+    "penicillin": 57.1,
+    "teicoplanin": 79.2,
+    "vancomycin": 97.4
+   },
+   "specimen_as_printed": "All specimens (except urine)"
+  },
+  {
+   "spec": "nonurine",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 33,
+   "page": 23,
+   "table": "Enterococci: susceptible percentages by specimen (except urine)",
+   "s": {
+    "ampicillin": 9.1,
+    "gentamicin_hl": 66.7,
+    "linezolid": 100,
+    "penicillin": 9.1,
+    "teicoplanin": 97,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All specimens (except urine)"
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 20,
+   "page": 23,
+   "table": "Enterococci: susceptible percentages by specimen (except urine)",
+   "s": {
+    "ampicillin": 50,
+    "gentamicin_hl": 95,
+    "linezolid": 95,
+    "penicillin": 45,
+    "teicoplanin": 65,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "LRT"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 42,
+   "page": 23,
+   "table": "Enterococci: susceptible percentages by specimen (except urine)",
+   "s": {
+    "ampicillin": 54.8,
+    "gentamicin_hl": 73.8,
+    "linezolid": 97.6,
+    "penicillin": 59.5,
+    "teicoplanin": 81,
+    "vancomycin": 97.6
+   },
+   "specimen_as_printed": "Superficial infection"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 250,
+   "page": 24,
+   "table": "Enterococci isolated from urine",
+   "s": {
+    "ampicillin": 41.2,
+    "ciprofloxacin": 16,
+    "gentamicin_hl": 61,
+    "linezolid": 95.6,
+    "nitrofurantoin": 70.7,
+    "penicillin": 39.6,
+    "teicoplanin": 96.4,
+    "vancomycin": 99.2
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 163,
+   "page": 24,
+   "table": "Enterococci isolated from urine",
+   "s": {
+    "ampicillin": 11.7,
+    "ciprofloxacin": 9.8,
+    "gentamicin_hl": 52.1,
+    "linezolid": 100,
+    "nitrofurantoin": 45.4,
+    "penicillin": 14.1,
+    "teicoplanin": 93.9,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 327,
+   "page": 24,
+   "table": "Enterococci: susceptible pattern by health care area",
+   "s": {
+    "ampicillin": 44.3,
+    "ciprofloxacin": 16,
+    "fosfomycin": 52,
+    "gentamicin_hl": 66,
+    "linezolid": 95.7,
+    "nitrofurantoin": 70.7,
+    "penicillin": 43.7,
+    "teicoplanin": 92.4,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location",
+   "conflict": {
+    "vancomycin": "printed 100% for all 327 E. faecalis, but the ward column of the same table prints 97.7% (n=175, at least 4 resistant isolates), and the urine (99.2%, n=250) and non-urine (97.4%, n=77) tables also show resistant isolates"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 126,
+   "page": 24,
+   "table": "Enterococci: susceptible pattern by health care area",
+   "s": {
+    "ampicillin": 52.4,
+    "ciprofloxacin": 18.6,
+    "fosfomycin": 48.5,
+    "gentamicin_hl": 76.2,
+    "linezolid": 95.2,
+    "nitrofurantoin": 78.4,
+    "penicillin": 51.6,
+    "teicoplanin": 93.7,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location"
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 175,
+   "page": 24,
+   "table": "Enterococci: susceptible pattern by health care area",
+   "s": {
+    "ampicillin": 42.9,
+    "ciprofloxacin": 15.6,
+    "fosfomycin": 51.9,
+    "gentamicin_hl": 60.9,
+    "linezolid": 96.6,
+    "nitrofurantoin": 65.7,
+    "penicillin": 41.7,
+    "teicoplanin": 92.6,
+    "vancomycin": 97.7
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location"
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 26,
+   "page": 24,
+   "table": "Enterococci: susceptible pattern by health care area",
+   "s": {
+    "ampicillin": 15.4,
+    "gentamicin_hl": 50,
+    "linezolid": 92.3,
+    "penicillin": 19.2,
+    "teicoplanin": 84.6,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 195,
+   "page": 24,
+   "table": "Enterococci: susceptible pattern by health care area",
+   "s": {
+    "ampicillin": 11.3,
+    "ciprofloxacin": 9.8,
+    "gentamicin_hl": 54.9,
+    "linezolid": 100,
+    "nitrofurantoin": 45.4,
+    "penicillin": 13.3,
+    "teicoplanin": 94.4,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location",
+   "note": "Table 1.2 gives 196 E. faecium (ward 123); this table excludes faecal samples, and the faeces table (p5) lists one enterococcus: 195 (ward 122)."
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 37,
+   "page": 24,
+   "table": "Enterococci: susceptible pattern by health care area",
+   "s": {
+    "ampicillin": 29.7,
+    "ciprofloxacin": 18.2,
+    "gentamicin_hl": 67.6,
+    "linezolid": 100,
+    "nitrofurantoin": 60.6,
+    "penicillin": 29.7,
+    "teicoplanin": 97.3,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location"
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 122,
+   "page": 24,
+   "table": "Enterococci: susceptible pattern by health care area",
+   "s": {
+    "ampicillin": 9,
+    "ciprofloxacin": 9.6,
+    "gentamicin_hl": 54.9,
+    "linezolid": 100,
+    "nitrofurantoin": 40.4,
+    "penicillin": 11.5,
+    "teicoplanin": 92.6,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location",
+   "note": "Table 1.2 gives 123 ward E. faecium; this table (faecal samples excluded) prints 122."
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 36,
+   "page": 24,
+   "table": "Enterococci: susceptible pattern by health care area",
+   "s": {
+    "ampicillin": 0,
+    "ciprofloxacin": 0,
+    "gentamicin_hl": 41.7,
+    "linezolid": 100,
+    "nitrofurantoin": 46.2,
+    "penicillin": 2.8,
+    "teicoplanin": 97.2,
+    "vancomycin": 100
+   },
+   "specimen_as_printed": "All specimens (except faeces), by location"
+  }
+ ],
+ "counts": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 2001,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 1011,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "n": 855,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 135,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "n": 1295,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "n": 425,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Klebsiella pneumoniae",
+   "n": 605,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "n": 265,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 597,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 353,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 209,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 35,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 439,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 94,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "n": 250,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 95,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "n": 422,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Acinetobacter baumannii",
+   "n": 45,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Acinetobacter baumannii",
+   "n": 198,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "n": 179,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "n": 327,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Enterococcus faecalis",
+   "n": 126,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Enterococcus faecalis",
+   "n": 175,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Enterococcus faecalis",
+   "n": 26,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella oxytoca",
+   "n": 304,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Klebsiella oxytoca",
+   "n": 107,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Klebsiella oxytoca",
+   "n": 151,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Klebsiella oxytoca",
+   "n": 46,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "n": 196,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Enterococcus faecium",
+   "n": 37,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Enterococcus faecium",
+   "n": 123,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Enterococcus faecium",
+   "n": 36,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Diarrhoeagenic Escherichia coli",
+   "n": 162,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Diarrhoeagenic Escherichia coli",
+   "n": 122,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Diarrhoeagenic Escherichia coli",
+   "n": 39,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Diarrhoeagenic Escherichia coli",
+   "n": 1,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Proteus mirabilis",
+   "n": 122,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Proteus mirabilis",
+   "n": 60,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Proteus mirabilis",
+   "n": 52,
+   "page": 7
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Proteus mirabilis",
+   "n": 10,
+   "page": 7
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 36,
+   "page": 8
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 1513,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 83,
+   "page": 8
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 299,
+   "page": 8
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 0,
+   "page": 8
+  },
+  {
+   "spec": "csf",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 0,
+   "page": 8
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 13,
+   "page": 8
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "n": 36,
+   "page": 8
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "n": 3,
+   "page": 8
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "n": 14,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "n": 7,
+   "page": 8
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "n": 10,
+   "page": 8
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "n": 0,
+   "page": 8
+  },
+  {
+   "spec": "csf",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "n": 0,
+   "page": 8
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "n": 1,
+   "page": 8
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "n": 0,
+   "page": 8
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "n": 12,
+   "page": 8
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "n": 3,
+   "page": 8
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "n": 5,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "n": 4,
+   "page": 8
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "n": 0,
+   "page": 8
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "n": 0,
+   "page": 8
+  },
+  {
+   "spec": "csf",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "n": 0,
+   "page": 8
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "n": 0,
+   "page": 8
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "n": 0,
+   "page": 8
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Morganella morganii",
+   "n": 12,
+   "page": 8
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Morganella morganii",
+   "n": 3,
+   "page": 8
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Morganella morganii",
+   "n": 3,
+   "page": 8
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Morganella morganii",
+   "n": 1,
+   "page": 8
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Morganella morganii",
+   "n": 5,
+   "page": 8
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Morganella morganii",
+   "n": 0,
+   "page": 8
+  },
+  {
+   "spec": "csf",
+   "set": "all",
+   "org": "Morganella morganii",
+   "n": 0,
+   "page": 8
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Morganella morganii",
+   "n": 0,
+   "page": 8
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Morganella morganii",
+   "n": 0,
+   "page": 8
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 49,
+   "page": 14
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 42,
+   "page": 14
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 46,
+   "page": 14
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 426,
+   "page": 14
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 7,
+   "page": 14
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Coagulase-negative staphylococci",
+   "n": 105,
+   "page": 14
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Coagulase-negative staphylococci",
+   "n": 21,
+   "page": 14
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Coagulase-negative staphylococci",
+   "n": 5,
+   "page": 14
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Coagulase-negative staphylococci",
+   "n": 46,
+   "page": 14
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Coagulase-negative staphylococci",
+   "n": 2,
+   "page": 14
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Coagulase-negative staphylococci",
+   "n": 182,
+   "page": 14
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Other coagulase-negative staphylococci",
+   "n": 93,
+   "page": 14
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus epidermidis",
+   "n": 50,
+   "page": 14
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus haemolyticus",
+   "n": 19,
+   "page": 14
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus hominis",
+   "n": 19,
+   "page": 14
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 32,
+   "page": 19
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 109,
+   "page": 19
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 112,
+   "page": 19
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 164,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 3,
+   "page": 19
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "n": 12,
+   "page": 19
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "n": 67,
+   "page": 19
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "n": 190,
+   "page": 19
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "n": 123,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Acinetobacter baumannii",
+   "n": 4,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 24,
+   "page": 19
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 13,
+   "page": 19
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 2,
+   "page": 19
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 2,
+   "page": 19
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 6,
+   "page": 19
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 1,
+   "page": 19
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "n": 108,
+   "page": 23
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Diarrhoeagenic Escherichia coli",
+   "n": 183,
+   "page": 5
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Shigella flexneri",
+   "n": 6,
+   "page": 5
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Shigella sonnei",
+   "n": 1,
+   "page": 5
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "n": 1,
+   "page": 5
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Klebsiella spp. rows: lower respiratory tract (n=2) and superficial infection (n=1)",
+   "org": "Klebsiella spp.",
+   "why": "unspeciated Klebsiella has the same canonical key as K. pneumoniae; a second row for the same stratum would duplicate the K. pneumoniae row"
+  },
+  {
+   "what": "Susceptible pattern of Staphylococci by health care area (p16: OPD n=415, ward n=302, ICU n=62)",
+   "why": "S. aureus and CoNS together (779 staphylococci); no canonical organism for the group"
+  },
+  {
+   "what": "CoNS table (p17): S. haemolyticus (n=*18) and S. hominis (n=*18); blood A. baumannii (n=*12); superficial-infection E. faecium (n=*15)",
+   "why": "not analysed: every cell printed '-' (the report does not analyse groups under 20 isolates)"
+  },
+  {
+   "what": "Susceptibility of E. coli and of K. pneumoniae from OPD, ward and ICU (charts, p11 and p12)",
+   "why": "bar charts without printed values"
+  },
+  {
+   "what": "ESBL-producing Enterobacterales and carbapenemase producers (charts, p12)",
+   "why": "phenotype distribution and carbapenemase-producer rates, not susceptibility to a drug"
+  },
+  {
+   "what": "Yearly trend tables: Enterobacterales 2018 to 2023 (p13), staphylococci 2018 to 2023 (p18), NFGNB 2018 to 2024 (p22), enterococci 2018 to 2024 (p25), and the VRE chart (p25)",
+   "why": "organism-group level with no matching row; the report prints 0 in them for years before an agent was tested, and their latest-year isolate numbers (for example enterococci 635) do not match this report's totals (631)"
+  },
+  {
+   "what": "Table 1.3 faeces column, E. coli (21)",
+   "org": "Escherichia coli",
+   "why": "the faeces table (p5) lists 183 diarrhoeagenic E. coli and no other E. coli, while Table 1.2 lists 162 diarrhoeagenic E. coli: these 21 appear to be diarrhoeagenic E. coli counted as E. coli; the faeces table is recorded instead"
+  },
+  {
+   "what": "Table 1.3 genus-group lines (Citrobacter +, Klebsiella +, Enterobacter +, Proteus +, Providencia +)",
+   "why": "group totals across species (for example Klebsiella + includes K. oxytoca), not the canonical organisms"
+  },
+  {
+   "what": "Isolation-rate table (p3) and specimen distribution pie charts (p4 to p6)",
+   "why": "organism groups only"
+  },
+  {
+   "what": "Staphylococcus lugdunensis (1), faecal Shigella dysenteriae (2) and faecal Salmonella spp. (2)",
+   "why": "no canonical organism key"
+  },
+  {
+   "what": "'Others' specimen columns (Table 1.3, p14, p19)",
+   "why": "mixed specimens with no specimen key"
+  }
+ ]
+}
