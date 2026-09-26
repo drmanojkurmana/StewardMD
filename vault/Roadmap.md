@@ -23,6 +23,32 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
 - [ ] X-ray ([[ThoreX]]) daily cap — cap belongs at the IMAGE-analysis entry (on-device), not the text `thorex/llm`
 - [ ] Per-endpoint precise per-module token cost (currently counts requests, rough cost)
 
+## [[Antibiogram]]
+- [ ] **Unfinished (usage limit):** second reading of RIMS Imphal 2022-23 and 2023-24 (extracted, in the session
+      scratchpad `abg/out/`); the gap-state census (WB, Odisha, Bihar, Jharkhand, NE, TN, Karnataka, Gujarat, Mumbai);
+      archived Sumandeep, SVIMS 2020 H1, GIMSR HIC; independent review round 2.
+- [ ] Retry the census from an Indian network: several institute and state health portals refused connections
+      from the cloud proxy (register reason "the website refused the connection from our network").
+- [ ] **Owner decision: held documents.** UCMS & GTB Hospital antibiograms 2023, 2023-24, 2025 (reproduction
+      forbidden without the editorial board's permission) and CMC Ludhiana 2012, RGGWCH Puducherry 2017 ("for
+      internal use only") were extracted but are not in the app. Integrate only with permission.
+- [ ] Ask SKIMS, GMC Srinagar, AIIMS Bhopal, RIMS Imphal about figures the rules flag as exceptional (vancomycin
+      and linezolid in staphylococci, carbapenems in S. Typhi): likely method (disk diffusion) issues. Ask the
+      same laboratories whether their enterococcal "gentamicin" is the high-level (synergy) screen: until they
+      say so it is shown as intrinsic resistance.
+- [ ] Dr. RMLIMS Lucknow 2020 and 2021 print numbers of susceptible isolates under "percentage" headings, without
+      the number tested per drug: percentages could be computed if the lab supplies the denominators.
+- [ ] 50 of 85 sources do not state their breakpoint standard or edition; ask the networks (NARS-Net, KARS-NET,
+      ICMR) to print the M100 edition, since trends across 2022 and 2023 move with the breakpoints.
+- [ ] A clinician read of the 18 journal-study notes and focus lines (rewritten 2026-09-26 from the extraction
+      logs; facts unchanged, wording new).
+- [ ] ICMR AMRSN 2017 to 2022 at stratum level (2023 and 2024 are in; 2024's trend tables give the national
+      2017 to 2024 series).
+- [ ] ICMR regional-centre (RC) tables: per-centre figures, if ICMR's centre list can be tied to institutions.
+- [ ] Knowledge Library Antibiogram tab still reads `ASP_ABG.national` (in minified app.js); point it at `ABG_STORE`
+      (ICMR scope) when app.js is next rebuilt.
+- [ ] Clinical review of the syndrome-to-specimen map (`SYN` in antibiogram-store.js) by a microbiologist.
+
 ## Modules
 - [ ] **[[RadioAnatome 3D]] device run** — browser-verified only (SwiftShader). Run on the iPhone + Pixel:
       load time over cellular for the LOD default (~12 MB of the 19.6 MB LOD set for the default systems, from R2),
@@ -155,15 +181,12 @@ Also pending on people, not code: clinical review of all ai_drafted content (use
 native-speaker check of the Telugu and Hindi consent forms and handouts.
 
 ## MaiK Cloud: relevance gate and input cost (added 2026-09-26, PR maik-no-passage-talk)
-- **Relevance gate** (`kb/ai/steward-ai.browser.js` knowledge-question gate): a lone ambiguous token
-  CONFIDENTLY name-matches a disease ("RA factor ..." -> Factor XII deficiency; "factor 8 deficiency" ->
-  Complement factor I deficiency). Making "factor" generic and short acronyms word-bound was tried and
-  rejected: the "assume" tier then picked other wrong diseases via substring hits. Needs a scored check
-  (the server's bge-reranker score or the /api/retrieve vector score, floor calibrated on test/maik-eval).
-  A mis-routed package costs ~4.5k chars (~1.1k tokens) of off-topic notes per question.
-- **Duplicated KB text**: with `smd_maik_brain` on (default), the grounding is sent twice, once as the
-  RANKED REFERENCE NOTES claims and again in the notes block: +1.0k to 1.9k chars (~260-490 tokens)
-  per grounded question, measured on 4 questions. Send one or the other.
-- **On-device**: the fine-tuned framing ("Reference material ... above") is unchanged and has no meta-talk
-  filter; only `REGEN_NUDGE` stopped asking the model to "say so". Share `_maik_metatalk.js` as a UMD if
-  the owner sees it offline.
+- DONE (PR maik-kb-relevance) **Relevance gate**: replaced by the name gate (flag `smd_kb_gate`,
+  Decisions 2026-09-26). 404-question benchmark `test/maik-kb-relevance.test.mjs`: mis-routes 88 -> 0,
+  off-topic KB text 427k -> 0 chars. Open: it abstains on 92 of 404 (general answer, no notes); grow
+  `KB_NAMES` from those abstains.
+- DONE (PR maik-kb-relevance) **Duplicated KB text**: the server ranks only claims the notes do not
+  carry (guideline recommendations); mean 1,196 chars saved per grounded question.
+- [x] **On-device** (PR #1245, 2026-09-26): `maik-local.js` runs an ES5 copy of the meta-talk filter,
+  pinned to the Cloud file by a parity test. Move both copies into one kb/ai UMD file if a third caller
+  appears. The fine-tuned framing ("Reference material ... above") is unchanged.

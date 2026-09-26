@@ -94,6 +94,9 @@ export function createStewardAI(store, opts) {
     const ddxIntent = /\b(differential\w*|\bddx\b|d\/dx|versus|\bvs\b|distinguish|tell (them )?apart|differentiate|mimics?)\b/i.test(query);
     const qset = {}; q.forEach((t) => (qset[t] = (qset[t] || 0) + 1));
     const scored = bags.map((b) => {
+      // Most chunks share no word with the query and score 0; skip them before building a tf map
+      // (identical results, about 6x faster over the 148k-chunk KB).
+      if (!b.toks.some((t) => qset[t])) return { b, s: 0, nameHits: 0 };
       const tf = {}; b.toks.forEach((t) => (tf[t] = (tf[t] || 0) + 1));
       let s = 0, nameHits = 0;
       for (const t in qset) {
@@ -209,6 +212,7 @@ export function createStewardAI(store, opts) {
   return {
     version: "p4-ai-iface-1", flags, isAIEnabled,
     retrieve, getGroundingContext, resolveTreatment, explain,
+    hasTerm: (t) => Object.prototype.hasOwnProperty.call(df, t),   // is this word anywhere in the KB text?
     stats: { diseases: Object.keys(diseases).length, treatments: Object.keys(treatments).length, policies: Object.keys(policies).length, chunks: chunks.length },
   };
 }

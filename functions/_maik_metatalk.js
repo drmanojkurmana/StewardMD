@@ -80,9 +80,14 @@ function scrubLine(line) {
   const out = [];
   let changed = false, dropped = false, carry = "";
   for (const p0 of body.split(/(?<=[.!?][)"'\]]*)\s+/)) {
-    const p = rewrite(p0);
+    let p = rewrite(p0);
+    // A citation leading into this piece belonged to the sentence just dropped ("... gout. [2] Treat").
+    if (dropped) { const lead = /^(?:\s*\[\d+(?:\s*,\s*\d+)*\])+\s*/.exec(p); if (lead) p = p.slice(lead[0].length); }
     if (p !== p0) changed = true;
-    if (aboutMaterial(p) || (dropped && POINTS_BACK.test(p)) || !p.replace(/\*\*|\[\d+(?:\s*,\s*\d+)*\]|[\s.,;:]/g, "")) {
+    // A piece with no words is dropped only when the scrub emptied it or it trails a dropped sentence:
+    // a citation after a KEPT sentence ("... first line for hypertension. [1]") is its provenance.
+    const bare = !p.replace(/\*\*|\[\d+(?:\s*,\s*\d+)*\]|[\s.,;:]/g, "");
+    if (aboutMaterial(p) || (dropped && POINTS_BACK.test(p)) || (bare && (dropped || p !== p0))) {
       changed = true; dropped = true;
       // keep **bold** balanced: a dropped piece that opened bold hands it on, one that closed it hands it back
       if ((p.match(/\*\*/g) || []).length % 2) { if (/^\s*\*\*/.test(p)) carry = "**"; else if (out.length) out[out.length - 1] += "**"; }

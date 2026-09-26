@@ -1,0 +1,81 @@
+{
+ "id": "JSS_KLEB",
+ "kind": "study",
+ "inst": "JSS_MYSURU",
+ "institution": "JSS Medical College and Hospital",
+ "short": "JSS Mysuru",
+ "city": "Mysuru",
+ "state": "Karnataka",
+ "region": "south",
+ "sector": "private",
+ "year": 2023,
+ "period": "2014 to 2023 (2023 figures)",
+ "citation": "Front Microbiol 2025 (PMC12209295)",
+ "doi": null,
+ "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12209295/",
+ "reporting": "%S",
+ "verification": {
+  "status": "double-checked",
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Method: Figures are 100 minus the 2023 resistance percentages given in the paper's narrative (pages 3 and 8), not read from the mislabelled table columns. The aminoglycoside class result (30.12% susceptible, 69.88% resistant) is not shown because no single agent is named. Per-year figures exist for 2014 to 2023 (for example 2014, n=27: carbapenem resistance 3.70%, ceftriaxone 7.41%). Other uropathogens (E. coli 9,211, P. aeruginosa 1,108, A. baumannii 192, S. aureus 161, enterococci, Proteus) are counted in the paper without susceptibility data."
+ },
+ "notes": "Neelambike Sumana et al. (Front Microbiol 2025) report a retrospective study of Klebsiella pneumoniae from urine at JSS Medical College and Hospital, Mysuru, a 1,800-bed hospital, tested by VITEK 2 with CLSI breakpoints. Of 920 isolates from 2014 to 2023, only the 83 from 2023 are shown. The paper's Tables 3 and 4 have the S and R headers swapped (the column labelled S holds % resistant), as its own text and carbapenem-resistant counts confirm, so figures are 100 minus the resistance figures in the text and intermediate counts as susceptible. Carbapenems are one class figure (61.5%; 38.55% resistant, 32 of 83) shown for ertapenem, imipenem and meropenem alike; the ciprofloxacin figure is the paper's fluoroquinolone row, and the cefuroxime figure is oral cefuroxime axetil. Carbapenem resistance peaked at 66.13% in 2021 and was 41.84% (385 of 920) over the decade.",
+ "issues": [],
+ "rows": [
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 83,
+   "specimen_as_printed": "urine",
+   "s": {
+    "imipenem": 61.5,
+    "meropenem": 61.5,
+    "ertapenem": 61.5,
+    "ciprofloxacin": 59,
+    "amoxiclav": 13.3,
+    "piptazo": 13.3,
+    "cefoperazone_sulbactam": 37.4,
+    "cotrimoxazole": 24.1,
+    "cefepime": 14.5,
+    "ceftriaxone": 10.8,
+    "cefuroxime": 14.5
+   },
+   "notes": {
+    "imipenem": "Pooled carbapenem-class figure (per table footnote). Derived: 100 - 38.55% resistance. Table S/R columns mislabeled/swapped; resistance value confirmed by paper narrative and CRKP counts (32/83).",
+    "meropenem": "Pooled carbapenem-class figure; not species-specific. Derived from 38.55% resistance.",
+    "ertapenem": "Pooled carbapenem-class figure; not species-specific. Derived from 38.55% resistance.",
+    "ciprofloxacin": "Footnote defines fluoroquinolones = ciprofloxacin. Derived: 100 - 40.96% resistance.",
+    "amoxiclav": "Derived: 100 - 86.75% resistance.",
+    "piptazo": "Derived: 100 - 86.75% resistance.",
+    "cefoperazone_sulbactam": "Cefoperazone-sulbactam combination. Derived: 100 - 62.65% resistance.",
+    "cotrimoxazole": "Derived: 100 - 75.90% resistance.",
+    "cefepime": "Derived: 100 - 85.54% resistance.",
+    "ceftriaxone": "Derived: 100 - 89.16% resistance.",
+    "cefuroxime": "Parenteral cefuroxime: 100 minus 85.54% resistant in 2023 (paper narrative)."
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "n": 83
+  }
+ ],
+ "excluded": [
+  {
+   "org": "Klebsiella pneumoniae",
+   "drug": "aminoglycosides",
+   "value": 30.12,
+   "why": "class-level result, not one drug"
+  },
+  {
+   "drug": "Cefuroxime axetil",
+   "value": 8.43,
+   "why": "oral cefuroxime axetil (100 minus 91.57% resistant) printed beside parenteral cefuroxime; both map to one drug key, so the parenteral figure is kept"
+  }
+ ],
+ "focus": "Klebsiella pneumoniae from urine in 2023 (83 of 920 isolates from 2014 to 2023)"
+}

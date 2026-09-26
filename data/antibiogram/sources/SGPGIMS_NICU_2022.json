@@ -1,0 +1,212 @@
+{
+ "kind": "institution",
+ "city": "Lucknow",
+ "state": "Uttar Pradesh",
+ "region": "north",
+ "sector": "government",
+ "page": "https://www.sgpgims.org.in/Home/HA_News_Letter.html",
+ "retrieved": "2026-09-26",
+ "measure": "S",
+ "id": "SGPGIMS_NICU_2022",
+ "inst": "SGPGIMS_NICU",
+ "institution": "Sanjay Gandhi Postgraduate Institute of Medical Sciences, Lucknow (Neonatology)",
+ "short": "SGPGIMS Neonatology",
+ "year": 2022,
+ "end": "2022-06",
+ "period": "January to June 2022",
+ "url": "https://sgpgims.org.in/Home/HA/HA_news_letter_Jan_June_22.pdf",
+ "citation": "SGPGIMS Hospital Infection Control Committee (SHICCOM). Hospital Infection Control Newsletter: Healthcare without infection, Volume 4, January to June 2022. Spotlight, Neonatology: antibiogram of bacterial pathogens recovered in blood cultures of IPD patients (January to June 2022). Lucknow: SGPGIMS.",
+ "reporting": "Percent susceptible for bacterial pathogens from blood cultures of Neonatology IPD patients, with the number of isolates per organism; \"-\" means not tested.",
+ "method": "First isolate from any sample only; diagnostic isolates, not surveillance; drugs routinely tested. AST method and breakpoints not stated.",
+ "verification": {
+  "status": "double-checked",
+  "note": "Both tables and the Fig 2 organism counts on p 1 read from the PDF text layer (word positions per column) and compared value by value with the rendered page image (2026-09-26)."
+ },
+ "notes": "Unit antibiogram of the Department of Neonatology, SGPGIMS Lucknow: blood cultures of IPD patients, January to June 2022 (33 positive blood cultures: 17 Gram positive, 16 Gram negative), from the SHICCOM Hospital Infection Control Newsletter. IPD is mapped to wards as printed; the unit is neonatal, and the document does not separate the NICU. Every organism has fewer than 30 isolates (the newsletter itself notes the 30-isolate minimum).",
+ "issues": [
+  "Second reader 2026-09-26: every cell of Tables 1 and 2 (p 1) re-read by eye from page renders (scale 5, the data rows again at scale 8) and written down before comparing with the file: all 47 cells, all 5 row n (13, 3, 9, 4, 1) with organism, specimen and setting, and all 6 counts (Fig 2 legend). 0 transcription errors, nothing corrected. CoNS levonadifloxacin 61 is printed and rightly listed in excluded (no drug key); \"-\" cells rightly left out.",
+  "Second reader: the 2 intrinsic cells are printed that way: E. faecalis gentamicin 66 and A. baumannii ertapenem 0.",
+  "Second reader: setting as printed: the heading says \"blood cultures of IPD patients (January-June 2022)\" in the Neonatology section; neither NICU nor ICU appears anywhere in that section, and there is no separate ICU column or table, so IPD here is every Neonatology inpatient and does not exclude a NICU. Set left as ward, as the extractor set it; inpatient (IPD and ICU together) would be the stricter reading of the setting keys (lead's decision).",
+  "Lead 2026-09-26: a single-department antibiogram, given a focus (\"Covers the neonatology department (neonatal inpatients) only\"): shown, never pooled with hospital-wide antibiograms, not a profile. \"IPD\" read as all neonatal inpatients (setting inpatient; no NICU column exists), 5 rows."
+ ],
+ "rows": [
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "CONS",
+   "pheno": null,
+   "n": 13,
+   "page": 1,
+   "table": "Table 1. Antibiogram (% susceptible) Gram positive isolates (n=16)",
+   "specimen_as_printed": "Blood cultures, Neonatology IPD patients",
+   "s": {
+    "cefoxitin": 8,
+    "ampicillin": 0,
+    "ampsulbactam": 8,
+    "erythromycin": 15,
+    "clindamycin": 23,
+    "levofloxacin": 15,
+    "doxycycline": 92,
+    "vancomycin": 100,
+    "teicoplanin": 100
+   },
+   "note": "Neonatology IPD patients as printed; the document does not say how many were in the neonatal ICU"
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 3,
+   "page": 1,
+   "table": "Table 1. Antibiogram (% susceptible) Gram positive isolates (n=16)",
+   "specimen_as_printed": "Blood cultures, Neonatology IPD patients",
+   "s": {
+    "ampicillin": 100,
+    "ampsulbactam": 100,
+    "levofloxacin": 0,
+    "gentamicin": 66,
+    "doxycycline": 100,
+    "minocycline": 66,
+    "vancomycin": 100,
+    "teicoplanin": 100,
+    "linezolid": 66
+   },
+   "note": "Neonatology IPD patients as printed; the document does not say how many were in the neonatal ICU",
+   "notes": {
+    "gentamicin": "printed as 66% in the source (re-read on the page image); a figure for an intrinsically resistant pair is a source error, kept as printed"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 9,
+   "page": 1,
+   "table": "Table 2. Antibiogram (% susceptible) Gram negative isolates (n=14)",
+   "specimen_as_printed": "Blood cultures, Neonatology IPD patients",
+   "s": {
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 22,
+    "amikacin": 11,
+    "cefoperazone_sulbactam": 11,
+    "imipenem": 22,
+    "meropenem": 11,
+    "ertapenem": 11,
+    "doxycycline": 22,
+    "cotrimoxazole": 0,
+    "colistin": 89
+   },
+   "note": "Neonatology IPD patients as printed; the document does not say how many were in the neonatal ICU"
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 4,
+   "page": 1,
+   "table": "Table 2. Antibiogram (% susceptible) Gram negative isolates (n=14)",
+   "specimen_as_printed": "Blood cultures, Neonatology IPD patients",
+   "s": {
+    "ceftazidime": 50,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "amikacin": 0,
+    "cefoperazone_sulbactam": 50,
+    "imipenem": 0,
+    "meropenem": 0,
+    "ertapenem": 0,
+    "colistin": 50
+   },
+   "note": "Neonatology IPD patients as printed; the document does not say how many were in the neonatal ICU",
+   "notes": {
+    "ertapenem": "printed as 0% in the source (re-read on the page image); a figure for an intrinsically resistant pair is a source error, kept as printed"
+   }
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 1,
+   "page": 1,
+   "table": "Table 2. Antibiogram (% susceptible) Gram negative isolates (n=14)",
+   "specimen_as_printed": "Blood cultures, Neonatology IPD patients",
+   "s": {
+    "ceftazidime": 0,
+    "ceftriaxone": 0,
+    "ciprofloxacin": 0,
+    "amikacin": 100,
+    "cefoperazone_sulbactam": 0,
+    "imipenem": 0,
+    "meropenem": 0,
+    "ertapenem": 0,
+    "colistin": 100
+   },
+   "note": "Neonatology IPD patients as printed; the document does not say how many were in the neonatal ICU"
+  }
+ ],
+ "counts": [
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "CONS",
+   "n": 13,
+   "page": 1
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Klebsiella pneumoniae",
+   "n": 9,
+   "page": 1
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Acinetobacter baumannii",
+   "n": 4,
+   "page": 1
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Enterococcus faecalis",
+   "n": 3,
+   "page": 1
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Escherichia coli",
+   "n": 1,
+   "page": 1
+  },
+  {
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "Serratia marcescens",
+   "n": 1,
+   "page": 1
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Levonadifloxacin (CoNS 61%)",
+   "drug": "levonadifloxacin",
+   "why": "no canonical drug key"
+  },
+  {
+   "what": "Fig 2 counts for Pantoea dispersa (1) and Micrococcus luteus (1)",
+   "why": "no canonical organism key; no susceptibility rows"
+  },
+  {
+   "what": "\"-\" cells",
+   "why": "not tested (legend)"
+  }
+ ],
+ "focus": "the neonatology department (neonatal inpatients)"
+}

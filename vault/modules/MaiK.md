@@ -48,6 +48,11 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
 - `functions/api/ai/[[path]].js` — server: `/refine` (router), `/explain` (Gemini), `/research` (web)
 - `kb/ai/steward-ai.browser.js` — client SDK helpers. NOTE: `window.SMD_AI` itself is defined in
   `reasoning.js:3771` and that is its ONLY assignment (verified 2026-08-20) — this file does not set it
+- **KB name gate** (flag `smd_kb_gate`, default ON, "0" = legacy coverage gate; 2026-09-26): a
+  standalone question gets an entry's notes only when it names the entry (name form, `KB_NAMES`
+  synonym, one-word id); otherwise no notes. Add missing synonyms to `KB_NAMES`, then run
+  `test/maik-kb-relevance.test.mjs` (404 labelled questions, must stay at 0 mis-routes) and
+  `node test/run-maik-kb-gate-ui.mjs` (headless Chrome). Decisions 2026-09-26.
 - **Chat skin** (2026-09-04): `body.mkchat`, default ON, `?mkchat=0` off / `?mkchat=1` on (key
   `smd_mkchat`). Presentation-only CSS in home.js (block "MaiK CHAT skin"): unboxed assistant prose,
   no per-answer MAIK label or disclaimer line (the banner is the one disclaimer), 15px text, quiet
@@ -254,6 +259,17 @@ KNOWLEDGE (PRIMARY SOURCE)`); the prompts say prefer, silently skip off-topic no
   `streamGeminiToSSE` now loops inside one pull until it sends something. Before, a network read ending
   mid-frame could hang the SSE. Pinned by `test/maik-no-passage-talk.test.mjs`.
 - Knowledge questions no longer send empty `DETERMINISTIC ENGINE OUTPUT` / `PATIENT` / notes headers.
+- **MaiK Lite too** (branch maik-lite-metatalk): `maik-local.js` carries an ES5 copy (`METATALK`),
+  run in `answer()` AFTER the NO_COVERAGE check (a "not covered" verdict must still re-ask) and on the
+  settled lines of the live paint. An answer that is ONLY talk about the material is treated as the
+  same retrieval miss and re-asked without it. **Gotcha:** no lookbehind in client code, an older iOS
+  WebView rejects it at parse time and the whole engine fails to load; the copy splits sentences
+  without one. `test/maik-lite-metatalk.test.mjs` pins the copy to the Cloud file on the shared
+  cases in `test/fixtures/maik-metatalk-cases.mjs`.
+- **Fixed in both copies (same branch):** a citation after a KEPT sentence ("... first line. [1]") was
+  deleted as a word-less piece, so Lite's claim-checked lines lost their [n] while painting and Cloud
+  lost post-period citations. Now kept; a citation leading into the sentence after a DROPPED one goes
+  with the dropped one.
 
 ## Answer-quality set: 60 cases (2026-09-26, branch maik-eval-cases)
 `test/maik-eval/live-cases.json` grew from 6 to 60 questions across 10 categories (emergency, infection,

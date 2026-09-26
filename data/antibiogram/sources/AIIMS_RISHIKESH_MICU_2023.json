@@ -1,0 +1,450 @@
+{
+ "id": "AIIMS_RISHIKESH_MICU_2023",
+ "kind": "institution",
+ "inst": "AIIMS_RISHIKESH_MICU",
+ "institution": "All India Institute of Medical Sciences, Rishikesh",
+ "short": "AIIMS Rishikesh MICU",
+ "city": "Rishikesh",
+ "state": "Uttarakhand",
+ "region": "north",
+ "sector": "government",
+ "year": 2023,
+ "end": "2023-10",
+ "period": "August 2023 to October 2023",
+ "published": "2023-11-18",
+ "url": "https://aiimsrishikesh.edu.in/images/upload_documents/Guidance%20for%20Preparing%20Clinical%20antibiograms.pdf",
+ "retrieved": "2026-09-26",
+ "citation": "Panda PK, Singh V, Kumar S, Chackappen. MICU Clinical Antibiogram (slide deck), Department of General Medicine and AMSP Committee, All India Institute of Medical Sciences, Rishikesh; dated 18 November 2023.",
+ "reporting": "MICU laboratory antibiogram (pocket guide, page 14): percent susceptible with number tested per drug, for isolates from blood, urine and respiratory cultures combined, with the total isolates per organism. MICU clinical antibiogram (page 18): percentage susceptibility for HAP/VAP Acinetobacter baumannii (N=30) that combines laboratory results with clinical response.",
+ "method": "Not stated for the laboratory antibiogram. Clinical antibiogram: culture and sensitivity data plus each patient's clinical response to empirical or culture-guided therapy (method slides 4 to 8).",
+ "measure": "S",
+ "verification": {
+  "status": "double-checked",
+  "note": "Page 14 and page 18 tables parsed from the PDF text layer (pdfplumber extract_tables) and then compared value by value with the pages rendered at scale 4 (page 14 in four crops: Gram-negative and Gram-positive blocks, left and right halves). All cells matched. Each printed percentage was also checked against its printed number tested; nine do not fit. Eight carry a conflict entry (four of them added by the second reader); the ninth, E. coli imipenem 50% of 49, has a per-drug note because it is already cautioned against meropenem. Two figures that differ from the per-pathogen slides (pages 9 and 10) carry a conflict entry too."
+ },
+ "notes": "Unit antibiogram of the medical ICU (Department of General Medicine with the AMSP committee), August to October 2023, from a slide deck on preparing clinical antibiograms dated 18.11.2023; kept apart from the hospital-wide AIIMS Rishikesh antibiogram. The laboratory table pools blood, urine and respiratory cultures, recorded as all specimens (no key exists for that combination). The clinical antibiogram (HAP/VAP, A. baumannii, N=30) is recorded as a respiratory ICU row tagged as a hospital-acquired infection cohort; its figures are clinical-response adjusted, not laboratory percent susceptible. Per-pathogen slides (pages 9 to 13) repeat the laboratory table without numbers tested and give different organism totals for K. pneumoniae (68 against 64) and P. aeruginosa (60 against 66). Slide 8 shows a sample patient-level spreadsheet with identifiable patient data; nothing from it was used.",
+ "rows": [
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 127,
+   "page": 14,
+   "table": "MICU Laboratory Antibiogram (Pocketguide), August 2023 to October 2023",
+   "s": {
+    "piptazo": 0.99,
+    "meropenem": 3.9,
+    "cotrimoxazole": 26.31,
+    "cefepime": 1.9,
+    "amikacin": 1.18,
+    "colistin": 96.36,
+    "ceftriaxone": 0,
+    "imipenem": 5.45,
+    "ceftazidime": 3.7,
+    "gentamicin": 7.3,
+    "ciprofloxacin": 4.1,
+    "levofloxacin": 5.1,
+    "minocycline": 41.8
+   },
+   "nt": {
+    "piptazo": 101,
+    "meropenem": 101,
+    "cotrimoxazole": 95,
+    "cefepime": 101,
+    "amikacin": 110,
+    "colistin": 110,
+    "ceftriaxone": 25,
+    "imipenem": 110,
+    "ceftazidime": 108,
+    "gentamicin": 95,
+    "ciprofloxacin": 96,
+    "levofloxacin": 86,
+    "minocycline": 86
+   },
+   "conflict": {
+    "amikacin": "printed 1.18% of 110 tested, which no whole number gives (1/110 = 0.91%, 2/110 = 1.82%)",
+    "levofloxacin": "printed 5.1% of 86 tested, which no whole number gives (4/86 = 4.65%, 5/86 = 5.81%)",
+    "minocycline": "the per-pathogen slide (page 9) prints 42.8%; this table prints 41.8% of 86 tested (36/86 = 41.86%)"
+   },
+   "note": "Printed as Acinetobacter baumanii. MICU laboratory antibiogram; isolates from blood, urine and respiratory cultures combined (the source gives no split by specimen). Each cell is printed as percent susceptible and number tested. Cells printed N.A. are left out. The per-pathogen slide (page 9) gives the same n (127).",
+   "specimen_as_printed": "Blood, Urine and Respiratory"
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 49,
+   "page": 14,
+   "table": "MICU Laboratory Antibiogram (Pocketguide), August 2023 to October 2023",
+   "s": {
+    "piptazo": 20,
+    "meropenem": 21,
+    "aztreonam": 0,
+    "cotrimoxazole": 14,
+    "amikacin": 68,
+    "colistin": 100,
+    "ceftriaxone": 0,
+    "imipenem": 50,
+    "ceftazidime": 0,
+    "gentamicin": 64,
+    "ciprofloxacin": 0,
+    "levofloxacin": 0,
+    "tigecycline": 100,
+    "minocycline": 100,
+    "fosfomycin": 100
+   },
+   "nt": {
+    "piptazo": 49,
+    "meropenem": 48,
+    "aztreonam": 2,
+    "cotrimoxazole": 49,
+    "amikacin": 49,
+    "colistin": 49,
+    "ceftriaxone": 49,
+    "imipenem": 49,
+    "ceftazidime": 10,
+    "gentamicin": 49,
+    "ciprofloxacin": 49,
+    "levofloxacin": 4,
+    "tigecycline": 5,
+    "minocycline": 4,
+    "fosfomycin": 4
+   },
+   "note": "MICU laboratory antibiogram; isolates from blood, urine and respiratory cultures combined (the source gives no split by specimen). Each cell is printed as percent susceptible and number tested. Cells printed N.A. are left out. Cefepime is printed as '8 (SDD)' of 48 and is left out (see excluded). Imipenem (50%) and meropenem (21%) differ widely in the source; both recorded as printed. The per-pathogen slide (page 12) gives the same n (49).",
+   "specimen_as_printed": "Blood, Urine and Respiratory",
+   "conflict": {
+    "amikacin": "printed 68% of 49 tested, which no whole number gives (33/49 = 67.3%, 34/49 = 69.4%); the per-pathogen slide (page 12) also prints 68%",
+    "gentamicin": "printed 64% of 49 tested, which no whole number gives (31/49 = 63.3%, 32/49 = 65.3%); the per-pathogen slide (page 12) also prints 64%"
+   },
+   "notes": {
+    "imipenem": "printed 50% of 49 tested (24/49 = 49.0%, 25/49 = 51.0%); recorded as printed"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 64,
+   "page": 14,
+   "table": "MICU Laboratory Antibiogram (Pocketguide), August 2023 to October 2023",
+   "s": {
+    "piptazo": 7.8,
+    "meropenem": 6,
+    "aztreonam": 10,
+    "cotrimoxazole": 0,
+    "cefepime": 1.6,
+    "amikacin": 10,
+    "colistin": 97.8,
+    "ceftriaxone": 0,
+    "imipenem": 10,
+    "gentamicin": 9,
+    "ciprofloxacin": 10,
+    "levofloxacin": 0,
+    "tigecycline": 80,
+    "minocycline": 100,
+    "fosfomycin": 0,
+    "ceftazidime_avibactam": 100
+   },
+   "nt": {
+    "piptazo": 64,
+    "meropenem": 64,
+    "aztreonam": 40,
+    "cotrimoxazole": 10,
+    "cefepime": 60,
+    "amikacin": 50,
+    "colistin": 64,
+    "ceftriaxone": 50,
+    "imipenem": 60,
+    "gentamicin": 40,
+    "ciprofloxacin": 40,
+    "levofloxacin": 4,
+    "tigecycline": 5,
+    "minocycline": 1,
+    "fosfomycin": 2,
+    "ceftazidime_avibactam": 1
+   },
+   "conflict": {
+    "colistin": "printed 97.8% of 64 tested, which no whole number gives (62/64 = 96.9%, 63/64 = 98.4%); the per-pathogen slide (page 10) prints 100%",
+    "gentamicin": "printed 9% of 40 tested, which no whole number gives (3/40 = 7.5%, 4/40 = 10%); the per-pathogen slide (page 10) also prints 9%"
+   },
+   "note": "MICU laboratory antibiogram; isolates from blood, urine and respiratory cultures combined (the source gives no split by specimen). Each cell is printed as percent susceptible and number tested. Cells printed N.A. are left out. The per-pathogen slide (page 10) gives n = 68 for K. pneumoniae against 64 in this table.",
+   "notes": {
+    "ceftazidime_avibactam": "printed as Ceftazidime\\avibactam"
+   },
+   "specimen_as_printed": "Blood, Urine and Respiratory"
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 66,
+   "page": 14,
+   "table": "MICU Laboratory Antibiogram (Pocketguide), August 2023 to October 2023",
+   "s": {
+    "piptazo": 40,
+    "meropenem": 33,
+    "aztreonam": 66,
+    "cotrimoxazole": 50,
+    "cefepime": 66,
+    "amikacin": 80,
+    "colistin": 98,
+    "ceftriaxone": 20,
+    "imipenem": 30,
+    "ceftazidime": 50,
+    "ciprofloxacin": 12,
+    "levofloxacin": 30,
+    "fosfomycin": 50,
+    "ceftazidime_avibactam": 50
+   },
+   "nt": {
+    "piptazo": 60,
+    "meropenem": 60,
+    "aztreonam": 30,
+    "cotrimoxazole": 60,
+    "cefepime": 60,
+    "amikacin": 30,
+    "colistin": 60,
+    "ceftriaxone": 60,
+    "imipenem": 60,
+    "ceftazidime": 40,
+    "ciprofloxacin": 60,
+    "levofloxacin": 40,
+    "fosfomycin": 2,
+    "ceftazidime_avibactam": 2
+   },
+   "note": "MICU laboratory antibiogram; isolates from blood, urine and respiratory cultures combined (the source gives no split by specimen). Each cell is printed as percent susceptible and number tested. Cells printed N.A. are left out. The per-pathogen slide (page 11) gives n = 60 for P. aeruginosa against 66 in this table; most drugs were tested on 60.",
+   "notes": {
+    "ceftazidime_avibactam": "printed as Ceftazidime\\avibactam"
+   },
+   "specimen_as_printed": "Blood, Urine and Respiratory"
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": "MR",
+   "n": 48,
+   "page": 14,
+   "table": "MICU Laboratory Antibiogram (Pocketguide), August 2023 to October 2023",
+   "s": {
+    "cotrimoxazole": 35,
+    "linezolid": 80,
+    "ciprofloxacin": 4,
+    "penicillin": 2,
+    "tetracycline": 64,
+    "gentamicin": 65,
+    "tigecycline": 100,
+    "doxycycline": 0,
+    "levofloxacin": 6,
+    "gentamicin_hl": 100,
+    "teicoplanin": 92,
+    "fosfomycin": 0,
+    "cefoxitin": 7,
+    "clindamycin": 15,
+    "chloramphenicol": 100,
+    "nitrofurantoin": 100,
+    "erythromycin": 4,
+    "vancomycin": 100,
+    "daptomycin": 100
+   },
+   "nt": {
+    "cotrimoxazole": 48,
+    "linezolid": 48,
+    "ciprofloxacin": 48,
+    "penicillin": 48,
+    "tetracycline": 48,
+    "gentamicin": 48,
+    "tigecycline": 5,
+    "doxycycline": 5,
+    "levofloxacin": 48,
+    "gentamicin_hl": 3,
+    "teicoplanin": 25,
+    "fosfomycin": 2,
+    "cefoxitin": 38,
+    "clindamycin": 48,
+    "chloramphenicol": 3,
+    "nitrofurantoin": 7,
+    "erythromycin": 48,
+    "vancomycin": 48,
+    "daptomycin": 40
+   },
+   "note": "Printed as MR-CONS (methicillin-resistant coagulase-negative staphylococci). MICU laboratory antibiogram; isolates from blood, urine and respiratory cultures combined (the source gives no split by specimen). Each cell is printed as percent susceptible and number tested. Cells printed N.A. are left out. Penicillin (2%) and cefoxitin (7%) susceptibility are printed for a methicillin-resistant group, which is not possible; recorded as printed. The per-pathogen slide (page 13) gives the same n (48).",
+   "notes": {
+    "gentamicin_hl": "printed as Gentamycin High-dose"
+   },
+   "specimen_as_printed": "Blood, Urine and Respiratory",
+   "conflict": {
+    "linezolid": "printed 80% of 48 tested, which no whole number gives (38/48 = 79.2%, 39/48 = 81.3%); the per-pathogen slide (page 13) also prints 80%"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": "MRSA",
+   "n": 4,
+   "page": 14,
+   "table": "MICU Laboratory Antibiogram (Pocketguide), August 2023 to October 2023",
+   "s": {
+    "cotrimoxazole": 24,
+    "linezolid": 100,
+    "ciprofloxacin": 0,
+    "penicillin": 0,
+    "tetracycline": 100,
+    "gentamicin": 75,
+    "levofloxacin": 0,
+    "cefoxitin": 0,
+    "clindamycin": 25,
+    "nitrofurantoin": 100,
+    "erythromycin": 0,
+    "vancomycin": 100,
+    "daptomycin": 100
+   },
+   "nt": {
+    "cotrimoxazole": 1,
+    "linezolid": 4,
+    "ciprofloxacin": 4,
+    "penicillin": 4,
+    "tetracycline": 4,
+    "gentamicin": 4,
+    "levofloxacin": 4,
+    "cefoxitin": 4,
+    "clindamycin": 4,
+    "nitrofurantoin": 1,
+    "erythromycin": 4,
+    "vancomycin": 4,
+    "daptomycin": 4
+   },
+   "conflict": {
+    "cotrimoxazole": "printed 24% with 1 isolate tested, which is not possible"
+   },
+   "note": "MICU laboratory antibiogram; isolates from blood, urine and respiratory cultures combined (the source gives no split by specimen). Each cell is printed as percent susceptible and number tested. Cells printed N.A. are left out. Only 4 isolates.",
+   "specimen_as_printed": "Blood, Urine and Respiratory"
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 12,
+   "page": 14,
+   "table": "MICU Laboratory Antibiogram (Pocketguide), August 2023 to October 2023",
+   "s": {
+    "linezolid": 50,
+    "ciprofloxacin": 0,
+    "penicillin": 0,
+    "tetracycline": 0,
+    "tigecycline": 100,
+    "levofloxacin": 0,
+    "gentamicin_hl": 0,
+    "teicoplanin": 8,
+    "nitrofurantoin": 0,
+    "erythromycin": 0,
+    "vancomycin": 16,
+    "daptomycin": 100
+   },
+   "nt": {
+    "linezolid": 12,
+    "ciprofloxacin": 12,
+    "penicillin": 12,
+    "tetracycline": 12,
+    "tigecycline": 6,
+    "levofloxacin": 12,
+    "gentamicin_hl": 6,
+    "teicoplanin": 12,
+    "nitrofurantoin": 2,
+    "erythromycin": 12,
+    "vancomycin": 12,
+    "daptomycin": 4
+   },
+   "note": "MICU laboratory antibiogram; isolates from blood, urine and respiratory cultures combined (the source gives no split by specimen). Each cell is printed as percent susceptible and number tested. Cells printed N.A. are left out. Only 12 isolates.",
+   "notes": {
+    "gentamicin_hl": "printed as Gentamycin High-dose"
+   },
+   "specimen_as_printed": "Blood, Urine and Respiratory"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 30,
+   "page": 18,
+   "table": "MICU Clinical Antibiogram (Pocketguide), August 2023 to October 2023, HAP/VAP",
+   "s": {
+    "piptazo": 0,
+    "meropenem": 46.66,
+    "cotrimoxazole": 3.33,
+    "amikacin": 0,
+    "colistin": 46.67,
+    "ceftriaxone": 3,
+    "imipenem": 0,
+    "ceftazidime": 0,
+    "gentamicin": 0,
+    "ertapenem": 0,
+    "ciprofloxacin": 0,
+    "levofloxacin": 6.6
+   },
+   "nt": {
+    "piptazo": 30,
+    "meropenem": 30,
+    "cotrimoxazole": 30,
+    "amikacin": 30,
+    "colistin": 30,
+    "ceftriaxone": 30,
+    "imipenem": 30,
+    "ceftazidime": 30,
+    "gentamicin": 30,
+    "ertapenem": 30,
+    "ciprofloxacin": 30,
+    "levofloxacin": 30
+   },
+   "cohort": "hai",
+   "note": "Printed as Acinetobacter baumanii (MC), N = 30, disease HAP/VAP (the method slides describe ventilator-associated pneumonia patients). Clinical antibiogram: percentage susceptibility combines laboratory results with clinical response (patients who improved on empirical or culture-guided therapy), so it is not a laboratory percent susceptible and differs from the MICU laboratory row. Drugs marked * (meropenem, ceftriaxone) may be given empirically for VAP because patients responded, but only when susceptible drugs are unavailable or contraindicated. Tigecycline and minocycline are printed 'Sensitive but not given' with no figure and are left out.",
+   "notes": {
+    "meropenem": "printed 46.66/30*",
+    "ceftriaxone": "printed 3/30*"
+   },
+   "specimen_as_printed": "HAP/VAP (respiratory, specimen not stated)"
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Pages 9 to 13 per-pathogen slide tables (A. baumannii, K. pneumoniae, P. aeruginosa, E. coli, MR-CoNS)",
+   "why": "same stratum as the page 14 pocket guide, which is kept because it prints numbers tested; not merged. The slides also list ertapenem (K. pneumoniae 10%, P. aeruginosa 10%, E. coli 38%), cefuroxime (K. pneumoniae 0%, P. aeruginosa 8%, E. coli 0%) and doripenem (P. aeruginosa 16%), which the pocket guide does not have. Where the two disagree (A. baumannii minocycline, K. pneumoniae colistin) the row carries a conflict entry"
+  },
+  {
+   "what": "Page 14 E. coli cefepime, printed '8 (SDD)' of 48",
+   "org": "Escherichia coli",
+   "drug": "cefepime",
+   "value": "8 (SDD)",
+   "why": "marked SDD (susceptible-dose dependent); it is not clear whether 8 is the percent susceptible or the percent SDD"
+  },
+  {
+   "what": "Page 14 cells printed N.A.",
+   "why": "not available; no value"
+  },
+  {
+   "what": "Page 18 tigecycline and minocycline for A. baumannii, printed 'Sensitive but not given'",
+   "why": "no figure printed"
+  },
+  {
+   "what": "Pages 15 to 17 pie charts (empirical regimens given for VAP with A. baumannii, patients improving on empirical therapy, patients improving on culture-sensitive antibiotics)",
+   "why": "clinical outcome data, not susceptibility"
+  },
+  {
+   "what": "Page 8 sample spreadsheet",
+   "why": "patient-level data with identifiers, not a summary table; not used"
+  }
+ ],
+ "issues": [
+  "Second reader 2026-09-26: all 114 cells, all 114 numbers tested and all 8 rows (organism, n) re-read against the rendered pages (page 14 at scale 4.5 in four crops, page 18 at scale 3), each value read before it was compared with the extraction; 0 value, number-tested, n or stratum errors. Per-pathogen slides (pages 9 to 13) re-read for the cross-slide conflicts. Page 8 (patient-level spreadsheet) was not rendered, read or used.",
+  "Conflicts already in the file are printed that way, not misreadings: A. baumannii amikacin 1.18 of 110 and levofloxacin 5.1 of 86 (page 9 prints the same 1.18 and 5.1); minocycline 41.8 of 86 on page 14 against 42.8 on page 9; K. pneumoniae colistin 97.8 of 64 on page 14 against 100 on page 10 (page 10 also gives n = 68 against 64); MRSA co-trimoxazole 24 of 1. Page 11 gives P. aeruginosa n = 60 against 66 on page 14, as the row note says.",
+  "Added 4 conflicts the extraction missed (source inconsistencies, values kept as printed; each printed percentage cannot come from its printed number tested): E. coli amikacin 68 of 49 and gentamicin 64 of 49, K. pneumoniae gentamicin 9 of 40, MR-CoNS linezolid 80 of 48. The per-pathogen slides (pages 10, 12, 13) print the same percentages, so these are not misprints in one table only. E. coli imipenem 50 of 49 is impossible too but keeps its per-drug note instead of a conflict: a conflict would switch off the imipenem/meropenem caution and show meropenem 21 without one. verification.note updated to match.",
+  "Other cells not kept, all as printed: MR-CoNS penicillin 2 of 48 and cefoxitin 7 of 38 (suppressed), P. aeruginosa co-trimoxazole 50 of 60 and ceftriaxone 20 of 60 (intrinsic), E. coli imipenem 50 against meropenem 21, clinical antibiogram A. baumannii colistin 46.67 and ertapenem 0 of 30."
+ ]
+}
