@@ -64,3 +64,20 @@ case-paths (`test/run-dx-audit.mjs`).
 **Gotcha for harnesses:** the KB (`kb/dist/*`) is lazy-loaded after first paint by `kb-loader.js`.
 Wait for `window.SMD_KB_READY` before scoring, or early cases run without it and numbers drift.
 
+## Text extraction v2 (`smd_nlp_v2`, default OFF, 2026-09-26)
+
+Phase 2 of `kb/validation/PLAN-DX-ABX-10.md`. The flag is read inside `clinical-nlp.js` (`SMD_NLP._v2`;
+`ctx.v2` overrides it, `?nlpv2=1`, `localStorage smd_nlp_v2=1`), so every `SMD_NLP.extract` caller gets
+it; `reasoning.js` `nlpCtx()` also swaps in `FT_SYN_V2` (substring traps dropped, train-split phrasing
+added) and the numeric-field list. Off: 0 differences across 1,660 case-paths.
+
+- Fixes four shipped defects (see `kb/validation/AUDIT-2026-09-26.md`, Phase 2): vitals negated by any
+  "no" in the note; "N-day history of X" read as past history; substring synonyms ("dm" in
+  "admitted", "spo2" = hypoxia, "on exertion", "weakness", "fall"); first x/y taken as BP.
+- Adds numeric labs (short connectors only), MAP, SOFA-2 organ dysfunction, fever / illness duration,
+  age > 50, fever with urinary symptoms, family-history exclusion.
+- Unseen held-out 2: top-1 33% -> 55%, top-3 48% -> 68%. Unit test `test/clinical-nlp-v2.test.mjs`.
+- Gap: `opd-emr.js` `nlpCtx()` (scribe grounding) passes `syn: {}`, so that path gets no phrasing at all.
+- Tuning rule: mine misses with `SPLITS=train` only; held-out 2 (`test/dx-heldout-2.json`) is read in
+  aggregate only. Held-out 1 is partly in-sample now (its misses shaped a few phrases).
+

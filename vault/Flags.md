@@ -86,13 +86,15 @@ leaving it present:
 - `opd-boot.js`, the bedside mount. Unconfigured it paints an explicitly disabled "not connected to
   a patient record" surface rather than a plausible-looking drug round.
 
-## Clinical Reasoning: `smd_gate_v2` OFF, added 2026-09-26
+## Clinical Reasoning: `smd_gate_v2` and `smd_nlp_v2` OFF, added 2026-09-26
 
-Not in a registry: read inline in `reasoning.js` `gateV2()` like `smd_reason_v2` / `smd_rank_v2`
-(`?gatev2=1|0` -> `localStorage smd_gate_v2` -> OFF). Not in the 2026-08-26 generated count above.
+Not in a registry: read inline like `smd_reason_v2` / `smd_rank_v2` (`reasoning.js` `gateV2()`,
+`clinical-nlp.js` `nlpV2()`; `?gatev2=1|0` / `?nlpv2=1|0` -> localStorage -> OFF). Not in the
+2026-08-26 generated count above. CI (`.github/workflows/dx-accuracy.yml`) checks each flag's floors.
 
 | Flag | State | What turning it on does |
 |---|---|---|
+| `smd_nlp_v2` | OFF | Text extraction v2 (`clinical-nlp.js`, every caller): fixes vitals being negated by any "no" in the note, "3-day history of fever" read as past history, substring synonyms, BP/age parsing; adds numeric labs, durations, SOFA-2 organ dysfunction. Unseen held-out top-1 33% -> 55%. Owner decision; pending clinician review of the thresholds. |
 | `smd_gate_v2` | OFF | The infection gate reads the app's own "Need antibiotics?" data for the lead infection (viral -> no antibiotics; conditional -> criteria; malaria -> specific therapy), keeps antibiotics with a named reason when a modifier or competing bacterial infection is present, and adds SBP / cirrhosis-GI-bleed rules. Rules are ai_drafted, pending clinician review; owner decision to turn on. See [[Clinical Reasoning]] and `kb/validation/AUDIT-2026-09-26.md`. |
 
 ## Medical Core — master ON (BETA) since 2026-09-26, model half OFF

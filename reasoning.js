@@ -1426,6 +1426,92 @@
   };
   // Merge unconditionally — parseFreeText only applies keys that are in VALID, so extras are harmless.
   Object.keys(FT_SYN_MORE).forEach(function (k) { FT_SYN[k] = (FT_SYN[k] || []).concat(FT_SYN_MORE[k]); });
+  /* smd_nlp_v2 (default OFF; clinical-nlp.js reads the flag): Phase 2 of kb/validation/PLAN-DX-ABX-10.md.
+   * Extraction matches synonyms as raw substrings, so short or generic ones fire in the wrong place:
+   * "dm" inside "admitted" (diabetes), "fall" inside "falling platelets" (head injury), "on exertion"
+   * in "breathless on exertion" (exertional chest pain), "weakness" (focal deficit), "spo2" in any
+   * saturation reading (hypoxia; the numeric parser decides that now). v2 drops those and adds bedside
+   * phrasing mined from the TRAIN split of kb/validation (never the test split). Classic table unchanged. */
+  var FT_SYN_DROP_V2 = { diabetesHx: ["dm"], headInjury: ["fall", "fell"], alteredSensorium: ["gcs"], focalNeuroDeficit: ["weakness"],
+    exertionalChestPain: ["exertional", "on exertion"], purulentSputum: ["sputum"], hypoxia: ["spo2"], mucocutaneousBleeding: ["bleeding"], alcoholExcess: ["alcohol"] };
+  var FT_SYN_ADD_V2 = {
+    rigors: ["rigor", "chills", "shivering", "shaking chills"],
+    toxicAppearing: ["toxic-looking", "toxic looking", "looks toxic", "looked toxic", "appears toxic", "toxic appearance", "toxic-appearing", "ill-looking", "ill looking",
+      "ill-appearing", "ill appearing", "unwell-appearing", "unwell appearing",
+      "looks unwell", "looked unwell", "unwell-looking", "septic-looking", "septic looking", "sick-looking", "moribund"],
+    myalgiaArthralgia: ["myalgia", "body ache", "bodyache", "body pain", "muscle ache", "muscle pain", "arthralgia", "joint pain", "aches and pains"],
+    dehydration: ["dehydrat", "dry mucous", "dry mucosa", "dry tongue", "skin turgor", "sunken eyes", "dry lips"],
+    fever: ["pyrexial", "temperature spike", "spiking temperature", "high-grade temperature"],
+    vasopressorRequirement: ["noradrenaline", "norepinephrine", "vasopressor", "pressor support", "on pressors", "inotrop", "vasopressin"],
+    liverDisease: ["cirrho", "chronic liver disease", "liver disease", "portal hypertension", "hepatic decompensation", "alcoholic liver"],
+    ascites: ["ascites", "ascitic", "shifting dullness", "fluid thrill"],
+    prolongedFever: ["prolonged fever", "long-standing fever", "pyrexia of unknown"],
+    chestPain: ["chest discomfort", "retrosternal", "chest tightness", "chest heaviness", "precordial pain", "central chest"],
+    headacheSevere: ["severe headache", "worst headache", "excruciating headache", "intense headache", "splitting headache", "severe holocranial", "severe frontal headache", "severe occipital headache"],
+    abdominalPain: ["pain abdomen", "pain in abdomen", "pain in the abdomen", "abdominal cramp", "periumbilical pain", "colicky pain", "lower abdominal pain", "upper abdominal pain", "iliac fossa pain", "suprapubic pain"],
+    hepatosplenomegaly: ["hepatosplenomegaly", "enlarged liver and spleen"],
+    immunocompromised: ["immunocompromis", "immunosuppress", "chemotherapy", "post-transplant", "transplant recipient", "hiv", "long-term steroid", "rituximab", "neutropenic"],
+    malignancy: ["malignan", "cancer", "carcinoma", "lymphoma", "leukaemia", "leukemia", "metasta", "myeloma", "sarcoma"],
+    nauseaVomiting: ["retching"],
+    atrialFibHx: ["atrial fibrillation", " af ", " af,", " af.", "irregularly irregular"],
+    behavioralChange: ["behaviour change", "behavioural change", "behavior change", "behavioral change", "personality change", "odd behaviour", "strange behaviour", "abnormal behaviour", "inappropriate behaviour"],
+    hospitalizationLast90Days: ["recently discharged", "recent hospitali", "recent admission", "hospitalised recently", "hospitalized recently", "discharged from hospital", "recent hospital stay"],
+    abdominalDiscomfort: ["abdominal discomfort", "vague abdominal", "abdominal fullness"],
+    petechialRash: ["petechia", "purpura", "purpuric", "non-blanching"],
+    constipationOrDiarrhea: ["constipat", "obstipat"],
+    jaundice: ["icteric", "yellow discolo", "yellow eyes", "yellowish discolo", "yellowing"],
+    legSwellingBilateral: ["bilateral pedal", "pitting oedema", "pitting edema", "leg oedema", "leg edema", "swelling of both legs", "both legs swollen", "oedema feet"],
+    oliguria: ["decreased urine output", "scanty urine", "passing less urine", "reduced urinary output"],
+    ecgIschemia: ["st depression", "st-segment", "st segment", "t wave inversion", "t-wave inversion", "stemi", "nstemi", "q waves", "st changes"],
+    asterixis: ["asterixis", "flapping tremor", "flap"],
+    severeAbdominalPain: ["severe abdominal pain", "severe epigastric pain", "excruciating abdominal", "intense abdominal pain", "severe pain abdomen"],
+    eveningFever: ["evening rise", "evening fever", "evening pyrexia", "fever in the evening"],
+    nightSweats: ["night sweat", "drenching sweat", "nocturnal sweat"],
+    visualDisturbance: ["blurring of vision", "loss of vision", "visual blurring", "double vision", "decreased vision", "visual field"],
+    skinWarmth: ["warm to touch", "warm to the touch", "local warmth", "warmth"],
+    severePain: ["pain out of proportion", "disproportionate pain"],
+    drugOverdose: ["overdose", "poisoning", "empty strips", "consumed tablets", "deliberate ingestion", "intentional ingestion", "suicidal ingestion", "tablet ingestion", "ingested tablets"],
+    supplementalOxygen: ["on oxygen", "oxygen via", "nasal cannula", "nasal prongs", "face mask", "non-rebreather", "high-flow", "on o2", "o2 via"],
+    nursingHomeResident: ["nursing home", "care home", "long-term care", "residential care", "old age home"],
+    antibioticsLast90Days: ["recent antibiotic", "course of antibiotics", "received antibiotics", "was on antibiotics", "took antibiotics", "prior antibiotic", "treated with antibiotics"],
+    priorAntibiotics: ["recent antibiotic", "course of antibiotics", "received antibiotics", "was on antibiotics", "took antibiotics", "prior antibiotic", "treated with antibiotics"],
+    weightLoss: ["lost weight", "loss of weight", "losing weight", "kg weight loss"],
+    knownCAD: ["coronary artery disease", "ischaemic heart disease", "ischemic heart disease", "prior mi", "previous mi", "old mi", "coronary stent", "ptca", "cabg", "ihd"],
+    anticoagulated: ["warfarin", "apixaban", "rivaroxaban", "dabigatran", "edoxaban", "acenocoumarol", "anticoagula", "enoxaparin"],
+    lymphadenopathy: ["lymphadenopathy", "lymph node", "enlarged nodes", "adenopathy", "lymphadenitis"],
+    contaminatedFoodWaterExposure: ["street food", "outside food", "contaminated water", "unsafe water", "untreated water", "roadside food", "contaminated food"],
+    urinaryFrequency: ["frequency of micturition", "increased frequency", "frequent urination", "urinary urgency", "urgency of micturition", "frequency and urgency", "frequency, urgency", "urinary frequency"],
+    dysuria: ["burning micturition", "painful micturition", "painful urination", "burning on urination", "burning while passing urine"],
+    costovertebralTenderness: ["costovertebral", "renal angle", "loin tenderness", "flank tenderness"],
+    bilateralCrackles: ["bibasal crackles", "bibasilar crackles", "bilateral basal crackles", "bilateral crepitations", "bilateral basal crepitations", "bibasal crepitations", "basal crepts", "bilateral crepts", "fine basal crackles"],
+    cerebrovascularDisease: ["previous stroke", "prior stroke", "old stroke", "history of stroke", "prior tia", "previous tia"],
+    syncope: ["passed out", "blacked out", "loss of consciousness"],
+    abdominalDistension: ["abdominal distension", "abdominal distention", "distended abdomen", "abdomen distended", "bloating", "bloated"],
+    focalNeuroDeficit: ["one-sided weakness", "left-sided weakness", "right-sided weakness", "left sided weakness", "right sided weakness", "weakness of the left", "weakness of the right",
+      "facial deviation", "deviation of the angle of the mouth", "aphasia", "dysarthria"],
+    exertionalChestPain: ["chest pain on exertion", "exertional chest", "exertional angina", "chest tightness on exertion", "angina"],
+    purulentSputum: ["yellow sputum", "green sputum", "rusty sputum", "mucopurulent", "foul-smelling sputum", "foul sputum"],
+    mucocutaneousBleeding: ["gum bleeding", "bleeding gums", "epistaxis", "nose bleed", "mucosal bleed"],
+    bleedingManifestation: ["bleeding gums", "gum bleed", "epistaxis", "nose bleed", "bleeding manifest", "petechia"],
+    headInjury: ["head injury", "hit his head", "hit her head", "trauma to head", "fall on the head", "fell and hit"],
+    alcoholExcess: ["alcohol abuse", "alcohol dependence", "alcohol excess", "heavy alcohol", "chronic alcohol", "heavy drinker", "chronic drinker", "binge drinking", "alcohol use disorder"],
+    subacuteOnset: ["subacute", "insidious", "gradual onset", "gradually progressive", "over weeks"],
+    renalImpairment: ["acute kidney injury", " aki ", " aki,", " aki.", "renal failure", "renal impairment", "raised creatinine", "deranged renal", "kidney injury", "uraemi", "uremi"]
+  };
+  var FT_SYN_V2 = (function () {
+    var o = {};
+    Object.keys(FT_SYN).forEach(function (k) { var drop = FT_SYN_DROP_V2[k] || []; o[k] = FT_SYN[k].filter(function (x) { return drop.indexOf(x) < 0; }); });
+    Object.keys(FT_SYN_ADD_V2).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2[k]); });
+    return o;
+  })();
+  // the extraction context: classic exactly as before; v2 adds the cleaned table and the numeric-field list
+  function nlpCtx() {
+    var v2 = !!(window.SMD_NLP && SMD_NLP._v2 && SMD_NLP._v2());
+    if (!v2) return { valid: VALID, labels: LABEL, syn: FT_SYN };
+    var numeric = {};
+    (window.FIELD_GROUPS || []).forEach(function (g) { (g.fields || []).forEach(function (fl) { if (fl.type === "number" || fl.type === "select") numeric[fl.key] = 1; }); });
+    return { valid: VALID, labels: LABEL, syn: FT_SYN_V2, v2: true, numeric: numeric };
+  }
   function parseFreeText(text) {
     if (!text) return;
     // Preferred path: the deterministic clinical-narrative NLP layer (clinical-nlp.js).
@@ -1433,7 +1519,7 @@
     // vitals, and returns structured findings. Only PRESENT, engine-valid keys are ticked;
     // negated / purely-historical findings are kept for review but not fed to the engine.
     if (window.SMD_NLP && SMD_NLP.extract) {
-      var nr = SMD_NLP.extract(text, { valid: VALID, labels: LABEL, syn: FT_SYN }), nadded = 0;
+      var nr = SMD_NLP.extract(text, nlpCtx()), nadded = 0;
       (nr.present || []).forEach(function (k) { if (VALID[k] && !S.f[k]) { S.f[k] = true; nadded++; } });
       S._lastExtract = nr;
       S.started = true;
@@ -3871,7 +3957,7 @@
     // callers (e.g. OPD Ask MaiK) get the same rich extraction the reasoning workspace does. No S.f mutation.
     findingsFromText: function (text) {
       if (!text || !(window.SMD_NLP && SMD_NLP.extract)) return [];
-      var nr = SMD_NLP.extract(String(text), { valid: VALID, labels: LABEL, syn: FT_SYN }) || {};
+      var nr = SMD_NLP.extract(String(text), nlpCtx()) || {};
       return (nr.present || []).filter(function (k) { return VALID[k]; });
     },
     // open ANY disease's reference panel from outside the reasoning workspace

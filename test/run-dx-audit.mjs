@@ -4,6 +4,7 @@
  * Two case sets:
  *   gold    - kb/validation/cases.json + cases/*.json (engine keys + chart narrative)
  *   heldout - test/dx-heldout.json (doctor-style text only; independent author)
+ *   heldout2 - test/dx-heldout-2.json (same, written later; only ever read in aggregate)
  * Three input paths per case:
  *   cur - curated engine keys -> SMD_REASON.assess (what a doctor tapping findings gets)
  *   txt - the full chart as text (complaint, history, exam, vitals, labs, imaging, micro)
@@ -43,7 +44,7 @@ const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/M
 const JOB = process.env.CLAUDE_JOB_DIR || "/tmp";
 const FLAGS = (process.env.FLAGS || "").split(",").map((s) => s.trim()).filter(Boolean).map((s) => s.split("="));
 const CONFIG = FLAGS.length ? FLAGS.map((f) => f.join("=")).sort().join(",") : "default";
-const SETS = (process.env.SETS || "gold,heldout").split(",");
+const SETS = (process.env.SETS || "gold,heldout,heldout2").split(",");
 const CHECK = process.argv.includes("--check"), WRITE = process.argv.includes("--write-floors"), MISSES = process.argv.includes("--misses");
 const FLOORS = join(ROOT, "kb", "validation", "dx-floors.json");
 
@@ -60,6 +61,9 @@ if (SETS.includes("gold")) {
   gold.forEach((c) => cases.push({ set: "gold", c }));
 }
 if (SETS.includes("heldout")) JSON.parse(readFileSync(join(ROOT, "test", "dx-heldout.json"), "utf8")).forEach((c) => cases.push({ set: "heldout", c }));
+// heldout2: written after Phase 2 began, never inspected case by case (the first held-out set's misses were
+// printed in the audit and informed a few Phase-2 phrases, so it is no longer fully independent)
+if (SETS.includes("heldout2")) JSON.parse(readFileSync(join(ROOT, "test", "dx-heldout-2.json"), "utf8")).forEach((c) => cases.push({ set: "heldout2", c }));
 
 // start the static server if nothing answers at BASE (same pattern as run-reason-api.mjs)
 let serveProc = null;
@@ -87,11 +91,20 @@ const ready = async () => {
   return false;
 };
 
+// gold labs are stored as keys like platelets_10e3_uL: 98 -> write them as a doctor would:
+// "platelets 98 x10^3/uL" (no real note has underscores, and \b cannot match inside one)
+const UNIT = /^(10e\d+|x10e\d+|mg|g|mmol|umol|ng|pg|u|iu|ml|dl|l|ul|pct|percent|meq|mcg|ug|mm|mmhg|sec|s|per|fl|mm3|hr|min)$/i;
+function labText(k, v) {
+  const parts = String(k).split("_"), i = parts.findIndex((p, j) => j > 0 && UNIT.test(p));
+  if (i < 0) return parts.join(" ") + " " + v;
+  const unit = parts.slice(i).map((p) => /^10e\d+$/i.test(p) ? "x10^" + p.slice(3) : p).join("/").replace(/^(x10\^\d+)\//, "$1/");
+  return parts.slice(0, i).join(" ") + " " + v + " " + unit;
+}
 function chartText(c) {
   if (c.text) return c.text;
   return [c.presentingComplaint || c.chiefComplaint || "", c.history || "", c.examination || "",
     c.vitals ? "Vitals: " + Object.entries(c.vitals).map(([k, v]) => k + " " + v).join(", ") : "",
-    c.labs ? "Labs: " + Object.entries(c.labs).map(([k, v]) => k + " " + v).join("; ") : "",
+    c.labs ? "Labs: " + Object.entries(c.labs).map(([k, v]) => labText(k, v)).join("; ") : "",
     typeof c.imaging === "string" ? c.imaging : "", typeof c.microbiology === "string" ? c.microbiology : ""].join(". ");
 }
 
@@ -106,7 +119,7 @@ try {
   if (!(await ready())) throw new Error("engine did not load at " + BASE);
   // flags are read by the engine at call time from localStorage; set them, then reload so any
   // load-time reader sees them too
-  await ev(`${JSON.stringify(FLAGS)}.forEach(function(kv){localStorage.setItem(kv[0],kv[1]);}); ["smd_gate_v2"].forEach(function(k){ if(!${JSON.stringify(FLAGS.map((f) => f[0]))}.includes(k)) localStorage.removeItem(k); }); return 1`);
+  await ev(`${JSON.stringify(FLAGS)}.forEach(function(kv){localStorage.setItem(kv[0],kv[1]);}); ["smd_gate_v2","smd_nlp_v2"].forEach(function(k){ if(!${JSON.stringify(FLAGS.map((f) => f[0]))}.includes(k)) localStorage.removeItem(k); }); return 1`);
   await call("Page.navigate", { url: BASE });
   if (!(await ready())) throw new Error("engine did not reload");
   await ev(`DX.findingCatalog(); return 1`);
@@ -153,7 +166,7 @@ try {
   for (const set of SETS) {
     for (const path of ["cur", "txt", "pc"]) {
       const S = R.filter((x) => x.set === set && x[path]);
-      if (!S.length || (set === "heldout" && path === "pc")) continue;
+      if (!S.length || (set !== "gold" && path === "pc")) continue;
       const m = {};
       const by = (split) => split === "all" ? S : S.filter((x) => x.split === split);
       for (const sp of ["all", "train", "dev", "test"]) {

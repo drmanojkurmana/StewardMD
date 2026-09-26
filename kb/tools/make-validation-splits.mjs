@@ -5,7 +5,7 @@
  *   train - look at failures and tune freely
  *   dev   - check a change generalises before it lands
  *   test  - phase gates only; do not read individual test failures while tuning
- * test/dx-heldout.json (independent author, doctor-style text) is always test.
+ * test/dx-heldout.json and test/dx-heldout-2.json (independent author, doctor-style text) are always test.
  *
  * HOW: stratified by condition (expected.acceptableIds[0]) so every condition with 3+ cases has
  * one case in test. Order within a condition is sha256(id), so the split is deterministic and does
@@ -26,7 +26,8 @@ const RESET = process.argv.includes("--reset");
 
 const cases = JSON.parse(readFileSync(join(VAL, "cases.json"), "utf8"));
 for (const f of readdirSync(join(VAL, "cases")).filter((x) => x.endsWith(".json")).sort()) cases.push(JSON.parse(readFileSync(join(VAL, "cases", f), "utf8")));
-const heldout = JSON.parse(readFileSync(join(ROOT, "test", "dx-heldout.json"), "utf8"));
+const heldout = JSON.parse(readFileSync(join(ROOT, "test", "dx-heldout.json"), "utf8"))
+  .concat(existsSync(join(ROOT, "test", "dx-heldout-2.json")) ? JSON.parse(readFileSync(join(ROOT, "test", "dx-heldout-2.json"), "utf8")) : []);
 
 const prev = !RESET && existsSync(OUT) ? JSON.parse(readFileSync(OUT, "utf8")).splits || {} : {};
 const splits = {};
