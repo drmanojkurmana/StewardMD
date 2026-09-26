@@ -44,6 +44,55 @@ function ccKey(c) {
   if (typeof c === "object") return c.careContextReference ?? c.reference ?? c.id ?? null;
   return String(c);
 }
+// OPS-02/F2 round 2: EVERY dated resource in the bundle, checked and filtered individually - not
+// just the first one found (a care-context whose FIRST item was in range could still carry
+// out-of-range items after it). One entry per array below: [field name, that resource's own date].
+//
+// `documents` and `medications` are deliberately NOT in this list, for the SAME reason: neither of
+// this codebase's two record-building sources (abdm-hip.js#projectStayRecord for WardSynQ,
+// hip-sources/followcare.js for FollowCare) puts a reliable CLINICAL date on either one.
+// documentReference.date is narrativeDoc()'s `generatedAt` - the EXPORT instant, not a clinical fact
+// - and neither source sets a medicationStatement's `effectivePeriod` (the canonical model's own
+// date field) or `authoredOn` consistently (WardSynQ bolts on `authoredOn`; FollowCare sets neither).
+// Filtering by either would drop a record's own narrative/medications based on an absent or
+// meaningless field, not the encounter/report/immunization the record actually describes - so both
+// simply ride along with whatever the record's OTHER dated resources decide. The record's in-scope
+// window is decided by encounters/diagnosticReports/observations/immunizations, which every real
+// source populates with a genuine clinical date.
+const DATED_ARRAYS = Object.freeze([
+  ["encounters", (e) => (e && e.period && (e.period.end || e.period.start)) || null],
+  ["diagnosticReports", (d) => (d && d.effectiveDateTime) || null],
+  ["observations", (o) => (o && o.effectiveDateTime) || null],
+  ["immunizations", (i) => (i && i.occurrenceDateTime) || null],
+]);
+
+/**
+ * PURE. `record` with every dated resource OUTSIDE [from,to] (or with no date of its own) removed,
+ * one array at a time. Returns { record, hadDated, anyKept }: hadDated is false when the bundle
+ * carried NONE of the dated resource kinds above at all (its date could never be determined, and
+ * the caller must refuse it - F2 round 2's "a record with no determinable date... must be refused",
+ * fail-closed rather than the old "unaffected" default); anyKept is false when every dated resource
+ * present was outside the window (nothing left to serve).
+ */
+export function filterRecordByDateRange(record, from, to) {
+  const out = { ...(record || {}) };
+  let hadDated = false, anyKept = false;
+  for (const [key, dateOf] of DATED_ARRAYS) {
+    const arr = Array.isArray(out[key]) ? out[key] : null;
+    if (!arr) continue;
+    out[key] = arr.filter((item) => {
+      const d = dateOf(item);
+      if (d == null) { hadDated = true; return false; }           // undated item of a dated kind: dropped
+      const ms = Date.parse(d);
+      hadDated = true;
+      const ok = !Number.isNaN(ms) && ms >= from && ms <= to;
+      if (ok) anyKept = true;
+      return ok;
+    });
+  }
+  return { record: out, hadDated, anyKept };
+}
+
 // Injected clock -> ISO string (never Date.now / the wall clock). Mirrors the Stage-5 source's isoOf.
 function isoOf(clock) {
   const d = typeof clock === "function" ? clock() : clock;
@@ -66,9 +115,15 @@ const parseHiTypes = (v) => { if (v == null) return []; if (Array.isArray(v)) re
 const parseJson = (v) => { if (v == null) return null; if (typeof v !== "string") return v; try { return JSON.parse(v); } catch { return v; } };
 
 // ── assertServeAllowed — the R5 cross-patient OVER-SHARE guardrail (Task 5, DUAL-ADVERSARIAL) ───────────────
-// Throws OverShareError (audited `hip.denied`, metadata only) on ANY miss; returns void when the WHOLE transfer
-// is provably in-scope for ONE patient. Enforces R5 in FULL; a single miss refuses the WHOLE transfer — it never
-// drops-and-serves-the-rest. No cross-patient bytes ever reach the seal (this runs BEFORE serialize/seal).
+// Throws OverShareError (audited `hip.denied`, metadata only) on ANY miss; returns { from, to } (the
+// consent's validated dateRange, ms since epoch) when the WHOLE transfer is provably in-scope for ONE
+// patient. Enforces R5 in FULL for subject/careContext/hiType/registration; a single miss there
+// refuses the WHOLE transfer — it never drops-and-serves-the-rest. The dateRange itself is validated
+// here too (a missing/unparseable one refuses the whole transfer: an ABDM consent artefact always
+// carries one, so a broken one means the row is corrupt) — but a single resource dated outside that
+// range is NOT a whole-transfer refusal; per-resource filtering is a separate, later step
+// (filterRecordByDateRange, called from serveTransfer) that drops just that content. No cross-patient
+// bytes ever reach the seal (this runs BEFORE serialize/seal).
 //
 // TRUST MODEL (dual-adversarial FIX): NOTHING here is trusted from the caller except the `consentId` it names.
 // The authoritative consent state is RELOADED FRESH from D1 by that id (getConsentReqByConsentId) — EXACTLY the
@@ -145,6 +200,16 @@ export async function assertServeAllowed(env, deps, { consentId, careContexts, r
       if (rk != null) servableRefs.add(rk);
     }
 
+    // (v) OPS-02/F2 round 2: the consent's OWN dateRange must be present and parseable, for the
+    // per-resource filter (filterRecordByDateRange, called from serveTransfer) to have anything to
+    // compare against. revalidateForRequest's own reval.ok check above ALREADY refuses (consent:
+    // bad-daterange) when permission.dateRange is missing or does not parse - an ABDM consent
+    // artefact always carries one (signed into the JWS payload, consent.js#parseConsent), so a row
+    // with none is corrupt or was never properly persisted. By this point rangeFrom/rangeTo are
+    // therefore guaranteed to parse; computed here only to return to the caller.
+    const grantedRange = (consent.permission && consent.permission.dateRange) || {};
+    const rangeFrom = Date.parse(grantedRange.from), rangeTo = Date.parse(grantedRange.to);
+
     for (const rec of records) {
       if (!rec || typeof rec !== "object") return await deny("bad-record");
       // (i) subject == the reloaded row's patient hash — a SINGLE mismatch refuses the WHOLE transfer (no leak).
@@ -153,12 +218,17 @@ export async function assertServeAllowed(env, deps, { consentId, careContexts, r
       // (ii) explicit careContext membership in the reloaded row's scope.
       const ref = ccKey(rec.careContextRef);
       if (ref == null || !artifactCC.has(ref)) return await deny("carecontext-not-in-artifact");
-      // (iii) hiType subset of the reloaded row's hiTypes.
+      // (iii) hiType subset of the reloaded row's hiTypes - checked per record here (one hiType per
+      // loaded careContext); the PER-RESOURCE date filter (v) below never widens this.
       if (!grantedHi.has(String(rec.hiType))) return await deny("hitype-out-of-scope");
       // (d) the served careContext must be REGISTERED to the consent's patient (D1 subject bind).
       if (!servableRefs.has(ref)) return await deny("carecontext-not-registered-to-patient");
     }
-    // Provably one-patient, in-scope, fresh-D1-consent-bound. Void => allowed.
+    // Provably one-patient, in-scope, fresh-D1-consent-bound (subject/careContext/hiType/registration).
+    // (v) the PER-RESOURCE date filter is a separate, later step (serveTransfer, filterRecordByDateRange):
+    // unlike (i)-(iii)/(d), an out-of-window resource does not refuse the whole transfer - it is
+    // dropped from what is served, and only refuses that ONE careContext if nothing in-range remains.
+    return { from: rangeFrom, to: rangeTo };
   } catch (e) {
     // A secret op going unavailable mid-guard (e.g. an at-rest unseal on the reload) must STILL audit hip.denied —
     // fail-closed AND audited (the adversary's blind-spot: the old hmac recompute threw here unaudited). Any other
@@ -246,8 +316,22 @@ export async function serveTransfer(env, deps, req) {
 
   // (1) R5 GUARD FIRST — refuse the WHOLE transfer on ANY cross-patient / out-of-scope record BEFORE any seal.
   //     Reloads the authoritative consent row FRESH from D1 by consentId. Throws OverShareError (audits
-  //     hip.denied). Nothing below runs on a refused transfer.
-  await assertServeAllowed(env, deps, { consentId: req.consentId, careContexts, records: loaded, tenantId: req.tenantId });
+  //     hip.denied). Nothing below runs on a refused transfer. Returns the consent's validated dateRange.
+  const { from: rangeFrom, to: rangeTo } = await assertServeAllowed(env, deps, { consentId: req.consentId, careContexts, records: loaded, tenantId: req.tenantId });
+
+  // (1b) OPS-02/F2 round 2: PER-RESOURCE date filtering, on the SAME record just loaded (never a
+  //      caller field) - every dated resource outside the consent's dateRange is dropped, and a
+  //      careContext with no determinable date, or none left in range, is refused (dateWarnings
+  //      below), never served unfiltered. Unlike assertServeAllowed's checks, this does NOT refuse
+  //      the WHOLE transfer: the other careContexts in this same transfer are unaffected.
+  const dateWarnings = [];
+  const servable = [];
+  for (const rec of loaded) {
+    const { record: filtered, hadDated, anyKept } = filterRecordByDateRange(rec.record, rangeFrom, rangeTo);
+    if (!hadDated) { dateWarnings.push({ careContextRef: rec.careContextRef, reason: "no-determinable-date" }); continue; }
+    if (!anyKept) { dateWarnings.push({ careContextRef: rec.careContextRef, reason: "daterange-out-of-scope" }); continue; }
+    servable.push({ ...rec, record: filtered });
+  }
 
   // (2) Anti-SSRF: validate the HIU-supplied dataPushUrl BEFORE any seal/POST. A bad URL => nothing is sealed.
   assertPushUrlAllowed(env, req.dataPushUrl);
@@ -256,9 +340,9 @@ export async function serveTransfer(env, deps, req) {
   //     a warning (contributes to PARTIAL) instead of dropping it silently. The NDHM plaintext is request-scoped
   //     and sealed immediately (never persisted/logged). sealEntries is called WITHOUT io (prod CSPRNG path) and
   //     one plaintext at a time => ONE fresh keyMaterial per page (R1, nonce-safe).
-  const warnings = [];
+  const warnings = [...dateWarnings];
   const outbound = [];
-  for (const rec of loaded) {
+  for (const rec of servable) {
     const record = rec.record || {};
     if (!record.profile && (rec.recordType || record.recordType)) record.profile = rec.recordType || record.recordType;
     // hipId + envName drive Composition.attester.party (the HFR facility Organization) - the Main Envelope

@@ -355,35 +355,40 @@ async function redeemCode(request, env, ctx) {
   if (!grantId || !code) return { ...base, ok: false, status: 422, error: "code_required", token: null };
 
   const svc = serviceFor(ctx, accessActor());
-  let grant;
-  try { grant = await svc.get(GRANT_TYPE, grantId); }
-  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", token: null }; }
-  /* A missing grant and a wrong code return the SAME thing. Distinguishing them turns this route
-   * into an oracle for which grant ids exist. */
-  const deny = { ...base, ok: false, status: 401, error: "not_valid", token: null, detail: "That code is not valid." };
-  if (!grant) return deny;
-
+  /* SEC-11: ONE ANSWER FOR EVERY REFUSAL. A missing grant, a wrong code, a used, revoked, expired or
+   * locked grant, and a write that lost a race all return the same 401: anything else is an oracle
+   * for which grant ids exist, or (a correct code that lost its write race answered 502) for the code. */
+  const deny = { ...base, ok: false, status: 401, error: "not_valid", token: null, detail: "That code is not valid, has expired or has been used. Ask the hospital for a new one." };
+  const reread = async () => { try { return await svc.get(GRANT_TYPE, grantId); } catch (_) { return null; } };
+  const RETRIES = 20;
   const now = new Date().toISOString();
-  const usable = redeemable(grant, now, ctx.config && ctx.config.codeTtlMinutes);
-  if (!usable.ok) return { ...base, ok: false, status: 401, error: usable.reason, detail: usable.detail, token: null };
 
-  const supplied = await hashSecret(code, grantId);
-  if (!sameSecret(supplied, grant.codeHash)) {
-    /* The failure is COUNTED and stored. Rate limiting that lives only in a gateway is rate limiting
-     * the next deployment forgets, and a six-digit code that can be tried a million times is not a
-     * code. The count is on the grant, so it survives everything. */
+  /* THE ATTEMPT IS COUNTED BEFORE THE CODE IS LOOKED AT, by a compare-and-swap on the grant's
+   * version, retried on a lost race. Counting after the comparison let a burst of parallel guesses
+   * collide on one version and count as one, so the five-try cap held against one guess at a time
+   * only. Now each code that is compared holds its own increment, and no more than MAX_ATTEMPTS codes
+   * are ever compared, however many arrive at once. */
+  let grant = await reread(), prior = 0;
+  for (let i = 0; ; i++) {
+    if (!grant || !redeemable(grant, now, ctx.config && ctx.config.codeTtlMinutes).ok) return deny;
+    prior = Number(grant.failedAttempts) || 0;
     const { meta, version, ...rest } = grant;
-    try { await svc.put({ ...rest, failedAttempts: (Number(grant.failedAttempts) || 0) + 1 }, { expectedVersion: version }); }
-    catch (_) { /* a racing attempt already counted one; the cap still applies */ }
-    return deny;
+    try { const out = await svc.put({ ...rest, failedAttempts: prior + 1 }, { expectedVersion: version }); grant = { ...rest, failedAttempts: prior + 1, version: out.record.version }; break; }
+    catch (_) { if (i >= RETRIES) return deny; grant = await reread(); }
   }
 
+  const supplied = await hashSecret(code, grantId);
+  if (!sameSecret(supplied, grant.codeHash)) return deny;
+
+  // The right code: the attempt it was counted as is given back, and the grant is spent.
   const token = makeCode() + makeCode() + makeCode() + makeCode();
-  const { meta, version, ...rest } = grant;
-  try {
-    await svc.put({ ...rest, redeemedAt: now, tokenHash: await hashSecret(token, grantId) }, { expectedVersion: version });
-  } catch (e) {
-    return { ...base, ok: false, status: 502, error: "record_write_failed", token: null };
+  for (let i = 0; ; i++) {
+    if (!grant || grant.redeemedAt || grant.revokedAt) return deny;
+    const { meta, version, ...rest } = grant;
+    try {
+      await svc.put({ ...rest, failedAttempts: Math.max(0, (Number(grant.failedAttempts) || 1) - 1), redeemedAt: now, tokenHash: await hashSecret(token, grantId) }, { expectedVersion: version });
+      break;
+    } catch (_) { if (i >= RETRIES) return deny; grant = await reread(); }
   }
 
   return {

@@ -104,34 +104,44 @@ function isUri(v) {
  * a vocabulary, it is knowing the specification. The codes are the R4 value sets in fhir-validate.js
  * plus the handful of v2/v3 codes this server emits, so a partner's `$validate-code` on them, and
  * our own export, get a real answer rather than "unknown system".
+ *
+ * OPS-25/F25: `complete` says whether the codes here ARE the entirety of that value set as HL7/R4
+ * defines it - true for the closed, REQUIRED-bound R4 status/clinical/intent enumerations (the whole
+ * point of a required binding is that R4 fixes the complete list), false for the handful that are a
+ * curated OPERATIONAL SUBSET of a much larger real-world HL7 v2/v3 vocabulary (v3-ActCode has far
+ * more codes than the encounter classes this server maps; v2-0203 far more identifier types than the
+ * ones this server emits). Marking a closed enumeration "fragment" told a conformance client to
+ * re-verify it externally, or to treat this server as non-authoritative for its own base codes.
  */
 const HL7 = Object.freeze({
-  "http://terminology.hl7.org/CodeSystem/condition-clinical": { name: "Condition Clinical Status", codes: VS.conditionClinical },
-  "http://terminology.hl7.org/CodeSystem/condition-ver-status": { name: "Condition Verification Status", codes: VS.conditionVer },
-  "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical": { name: "AllergyIntolerance Clinical Status", codes: VS.allergyClinical },
-  "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification": { name: "AllergyIntolerance Verification Status", codes: VS.allergyVer },
-  "http://terminology.hl7.org/CodeSystem/observation-category": { name: "Observation Category", codes: "social-history|vital-signs|imaging|laboratory|procedure|survey|exam|therapy|activity" },
-  "http://terminology.hl7.org/CodeSystem/consentscope": { name: "Consent Scope", codes: "adr|research|patient-privacy|treatment" },
-  "http://terminology.hl7.org/CodeSystem/consentcategorycodes": { name: "Consent Category", codes: "acd|dnr|emrgonly|hcd|npp|polst|research|rsdid|rsreid" },
-  "http://terminology.hl7.org/CodeSystem/v3-ActCode": { name: "HL7 v3 ActCode", codes: "AMB|EMER|FLD|HH|IMP|ACUTE|NONAC|OBSENC|PRENC|SS|VR" },
-  "http://terminology.hl7.org/CodeSystem/v2-0203": { name: "HL7 v2 Identifier Type", codes: "MR|NI|VN|PI|PN|PPN|DL|SS|TAX|MB|PRN|EN|ACSN|FILL|PLAC|UDI|SNO|MD|RI" },
-  "http://terminology.hl7.org/CodeSystem/v3-DataOperation": { name: "HL7 v3 DataOperation", codes: "CREATE|UPDATE|DELETE|APPEND|NULLIFY|EXECUTE|OPERATE|READ" },
-  "http://terminology.hl7.org/CodeSystem/provenance-participant-type": { name: "Provenance Participant Type", codes: "enterer|performer|author|verifier|legal|attester|informant|custodian|assembler|composer" },
-  "http://terminology.hl7.org/CodeSystem/v3-ObservationValue": { name: "HL7 v3 ObservationValue", codes: "SUBSETTED|REDACTED|SYNTHETIC|MASKED" },
-  "http://terminology.hl7.org/CodeSystem/restful-security-service": { name: "RESTful Security Service", codes: "OAuth|SMART-on-FHIR|NTLM|Basic|Kerberos|Certificates" },
-  "http://terminology.hl7.org/CodeSystem/medication-admin-status": { name: "Medication Administration Status", codes: VS.adminStatus },
-  "http://hl7.org/fhir/observation-status": { name: "Observation Status", codes: VS.observationStatus },
-  "http://hl7.org/fhir/encounter-status": { name: "Encounter Status", codes: VS.encounterStatus },
-  "http://hl7.org/fhir/CodeSystem/medicationrequest-status": { name: "MedicationRequest Status", codes: VS.rxStatus },
-  "http://hl7.org/fhir/CodeSystem/medicationrequest-intent": { name: "MedicationRequest Intent", codes: VS.rxIntent },
-  "http://hl7.org/fhir/request-status": { name: "Request Status", codes: VS.srStatus },
-  "http://hl7.org/fhir/request-intent": { name: "Request Intent", codes: VS.srIntent },
-  "http://hl7.org/fhir/diagnostic-report-status": { name: "DiagnosticReport Status", codes: VS.drStatus },
-  "http://hl7.org/fhir/document-reference-status": { name: "DocumentReference Status", codes: VS.docStatus },
-  "http://hl7.org/fhir/composition-status": { name: "Composition Status", codes: VS.compStatus },
-  "http://hl7.org/fhir/consent-state-codes": { name: "Consent State", codes: VS.consentStatus },
-  "http://hl7.org/fhir/administrative-gender": { name: "Administrative Gender", codes: VS.gender },
-  "http://hl7.org/fhir/allergy-intolerance-criticality": { name: "AllergyIntolerance Criticality", codes: VS.criticality },
+  "http://terminology.hl7.org/CodeSystem/condition-clinical": { name: "Condition Clinical Status", codes: VS.conditionClinical, complete: true },
+  "http://terminology.hl7.org/CodeSystem/condition-ver-status": { name: "Condition Verification Status", codes: VS.conditionVer, complete: true },
+  "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical": { name: "AllergyIntolerance Clinical Status", codes: VS.allergyClinical, complete: true },
+  "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification": { name: "AllergyIntolerance Verification Status", codes: VS.allergyVer, complete: true },
+  "http://terminology.hl7.org/CodeSystem/observation-category": { name: "Observation Category", codes: "social-history|vital-signs|imaging|laboratory|procedure|survey|exam|therapy|activity", complete: true },
+  // The next six are curated subsets of much larger real-world HL7 v2/v3 vocabularies - genuinely
+  // fragments, not this server's base codes.
+  "http://terminology.hl7.org/CodeSystem/consentscope": { name: "Consent Scope", codes: "adr|research|patient-privacy|treatment", complete: false },
+  "http://terminology.hl7.org/CodeSystem/consentcategorycodes": { name: "Consent Category", codes: "acd|dnr|emrgonly|hcd|npp|polst|research|rsdid|rsreid", complete: false },
+  "http://terminology.hl7.org/CodeSystem/v3-ActCode": { name: "HL7 v3 ActCode", codes: "AMB|EMER|FLD|HH|IMP|ACUTE|NONAC|OBSENC|PRENC|SS|VR", complete: false },
+  "http://terminology.hl7.org/CodeSystem/v2-0203": { name: "HL7 v2 Identifier Type", codes: "MR|NI|VN|PI|PN|PPN|DL|SS|TAX|MB|PRN|EN|ACSN|FILL|PLAC|UDI|SNO|MD|RI", complete: false },
+  "http://terminology.hl7.org/CodeSystem/v3-DataOperation": { name: "HL7 v3 DataOperation", codes: "CREATE|UPDATE|DELETE|APPEND|NULLIFY|EXECUTE|OPERATE|READ", complete: false },
+  "http://terminology.hl7.org/CodeSystem/provenance-participant-type": { name: "Provenance Participant Type", codes: "enterer|performer|author|verifier|legal|attester|informant|custodian|assembler|composer", complete: false },
+  "http://terminology.hl7.org/CodeSystem/v3-ObservationValue": { name: "HL7 v3 ObservationValue", codes: "SUBSETTED|REDACTED|SYNTHETIC|MASKED", complete: false },
+  "http://terminology.hl7.org/CodeSystem/restful-security-service": { name: "RESTful Security Service", codes: "OAuth|SMART-on-FHIR|NTLM|Basic|Kerberos|Certificates", complete: false },
+  "http://terminology.hl7.org/CodeSystem/medication-admin-status": { name: "Medication Administration Status", codes: VS.adminStatus, complete: true },
+  "http://hl7.org/fhir/observation-status": { name: "Observation Status", codes: VS.observationStatus, complete: true },
+  "http://hl7.org/fhir/encounter-status": { name: "Encounter Status", codes: VS.encounterStatus, complete: true },
+  "http://hl7.org/fhir/CodeSystem/medicationrequest-status": { name: "MedicationRequest Status", codes: VS.rxStatus, complete: true },
+  "http://hl7.org/fhir/CodeSystem/medicationrequest-intent": { name: "MedicationRequest Intent", codes: VS.rxIntent, complete: true },
+  "http://hl7.org/fhir/request-status": { name: "Request Status", codes: VS.srStatus, complete: true },
+  "http://hl7.org/fhir/request-intent": { name: "Request Intent", codes: VS.srIntent, complete: true },
+  "http://hl7.org/fhir/diagnostic-report-status": { name: "DiagnosticReport Status", codes: VS.drStatus, complete: true },
+  "http://hl7.org/fhir/document-reference-status": { name: "DocumentReference Status", codes: VS.docStatus, complete: true },
+  "http://hl7.org/fhir/composition-status": { name: "Composition Status", codes: VS.compStatus, complete: true },
+  "http://hl7.org/fhir/consent-state-codes": { name: "Consent State", codes: VS.consentStatus, complete: true },
+  "http://hl7.org/fhir/administrative-gender": { name: "Administrative Gender", codes: VS.gender, complete: true },
+  "http://hl7.org/fhir/allergy-intolerance-criticality": { name: "AllergyIntolerance Criticality", codes: VS.criticality, complete: true },
 });
 
 /**

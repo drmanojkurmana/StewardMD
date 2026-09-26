@@ -153,7 +153,7 @@ async function ingestHl7(request, env, ctx) {
   const msg = parseHl7(raw, {});
   const msh = seg(msg, "MSH");
   if (!msh) return { ok: false, status: 400, outcome: operationOutcome("error", "invalid", `not an HL7 v2 message: ${(msg.warnings || []).join("; ") || "no MSH"}`) };
-  const { sccm, kind, zSegments, warnings } = hl7ToSccm(msg, { tenantId: mig.tenantId, now: new Date().toISOString() });
+  const { sccm, kind, zSegments, warnings } = hl7ToSccm(msg, { tenantId: mig.tenantId, now: new Date().toISOString(), clock: ctx.clock || null });
   const ackWith = (code, text, errors, status) => ({ ok: code === "AA", status: status || 200, ack: buildAck(kind, { code, text, errors }, { facility: ctx.facility, now: new Date().toISOString() }), kind });
 
   const problems = validateMessage(msg, kind, profile);

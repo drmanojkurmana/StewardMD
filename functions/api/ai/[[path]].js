@@ -120,7 +120,7 @@ function withCors(request, resp) {
  * Selection via env.AI_PROVIDER; Vertex is primary and fails over to the
  * Developer API. A future provider drops into PROVIDERS.
  * =================================================================== */
-import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor, deviceCheck } from "../../_usage.js";
+import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor, meterEmail, deviceCheck } from "../../_usage.js";
 import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime, scribeChargeSec, isScribeKind, poolKeyFor, capsEnforced, resolveModel, modelRate, rateConfirmed, estCostInr as aiEstCostInr } from "../../_ai_usage.js";
 import { getCredits, dailyCostCap, costCapOn, inrToMt, MT_PER_INR, tokenPackList } from "../../_credits.js";
 import { warmBillingCfg } from "../../_billingcfg.js";
@@ -1395,7 +1395,7 @@ export async function onRequest(context) {
     out.costCapOn = costCapOn(env);
     try {
       out.balanceMt = inrToMt(await getCredits(store, key));
-      out.dailyFreeMt = inrToMt(await dailyCostCap(env, store, who && who.email, null));
+      out.dailyFreeMt = inrToMt(await dailyCostCap(env, store, meterEmail(who), null));
     } catch (e) { out.balanceMt = 0; out.dailyFreeMt = 0; }
     // Rate card: what one unit of AI costs, priced off the SAME cost model that debits the wallet
     // (_ai_usage.estCostInr), so the published rate can never drift from what is actually charged.
@@ -1556,7 +1556,7 @@ export async function onRequest(context) {
     if (_capped) {
       try {
         const _who = await _whoP;
-        const _mq = await gateAndCount(env, _acStore, _mod, usageKeyFor(_who), _who.guest ? "guest" : "unknown", Date.now(), _who.email, context.waitUntil.bind(context), await _ownerP, seg === "explain");
+        const _mq = await gateAndCount(env, _acStore, _mod, usageKeyFor(_who), _who.guest ? "guest" : "unknown", Date.now(), meterEmail(_who), context.waitUntil.bind(context), await _ownerP, seg === "explain");
         if (_mq && typeof _mq.commit === "function") _moduleCommit = _mq.commit;
         try { _hm.gateMs = _mq && _mq._ms; } catch (e) {}
         // Mirror the existing quota response shape so the client's quota handling surfaces it unchanged.
@@ -2151,7 +2151,7 @@ export async function onRequest(context) {
         let usedNow = 0, capNow = 2;
         if (store) {
           const who = await identify(request, env);
-          const mq = await gateAndCount(env, store, "research", usageKeyFor(who), who.guest ? "guest" : "unknown", Date.now(), who.email);
+          const mq = await gateAndCount(env, store, "research", usageKeyFor(who), who.guest ? "guest" : "unknown", Date.now(), meterEmail(who));
           if (!mq.ok) {
             // Over-cap denial must NOT burn a general MaiK slot (no AI work done, and recordUsage's
             // general counter would decrement the shared 60/day allowance). gateAndCount already

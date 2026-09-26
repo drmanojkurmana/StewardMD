@@ -229,12 +229,14 @@ async function resolveRecipients({ orgId, loop, level, policy, nowMs }, readers)
    * every other role on a reached tier is everyone on duty now in the unit with that role. */
   const level2 = LEVELS.indexOf(lv) >= 1 && levels.overdue.roles.includes("nurse");
   const roles = new Set(tiers.flatMap((t, i) => (LEVELS[i] === "overdue" && level2 ? t.roles.filter((r) => r !== "nurse") : t.roles)));
-  let onDuty = [], wardRule = null, statuses = [];
+  let onDuty = [], wardRule = null, statuses = [], rotaPartial = false;
   if ((roles.size || level2 || orderer) && readers.dutyStatuses) statuses = ((await readers.dutyStatuses()) || {}).statuses || [];
   if (roles.size || level2) {
     const members = await readers.members();
     const active = new Map((members || []).filter((m) => m && m.active !== false).map((m) => [str(m.identity), str(m.role)]));
-    const duty = ((await readers.onDuty(unit)) || {}).onDuty || [];
+    const dutyRead = (await readers.onDuty(unit)) || {};
+    const duty = dutyRead.onDuty || [];
+    rotaPartial = dutyRead.partial === true;
     const ctx = { unit, active, duty, statuses, nowMs: now };
     if (!unit) {
       // No ward recorded (owner 2026-09-15): the admitting doctor and the residents on duty, and nobody else on duty.
@@ -265,6 +267,8 @@ async function resolveRecipients({ orgId, loop, level, policy, nowMs }, readers)
     location: { ward: unit || null, bed: str(encounter && encounter.location && encounter.location.bed) || null },
     sources: { orderer: orderer || null, onDuty: onDuty.length, contacts: contacts.length },
     ...(wardRule ? { wardRule } : {}),
+    // CLIN-15: the rota read stopped short, so somebody on duty may be missing from these recipients.
+    ...(rotaPartial ? { rotaPartial: true } : {}),
   };
 }
 

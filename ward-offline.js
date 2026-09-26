@@ -18,8 +18,11 @@
  *    with a reason), edits it, or discards it. ward.js records that decision on the server first
  *    (/ward/offline-resolve); nothing here drops or re-sends an item on a decision the server did not record.
  * 4. PHI STAYS ON THIS DEVICE AND LEAVES WITH THE USER. Queue and read cache live only in this device's
- *    IndexedDB, are owned by the user who wrote them, and are cleared on sign-out or when a different
- *    user is signed in. No credential is ever stored: headers are asked for at send time.
+ *    IndexedDB and are owned by the user who wrote them. Signing out clears that user's own. A different
+ *    user signing in clears the other user's read cache, but NEVER their unsent writes (audit DATA-01: a
+ *    shared tablet at shift change deleted nurse A's unsent dose and vitals when nurse B signed in): those
+ *    stay hidden from B, are never sent as B, send when their owner signs in again, and B is told how many
+ *    are waiting. No credential is ever stored: headers are asked for at send time.
  * 5. CLIENT TIME IS FOR DISPLAY. The device's created-at is sent as X-Offline-Created-At and audited
  *    beside the server's own sync time; it never orders anything on the server.
  */
@@ -141,12 +144,15 @@
   function classify(status, r) {
     if (status === 401 || status === 403 && r && (r.error === "auth" || r.error === "permission" || r.error === "unauthorized" || r.error === "forbidden")) return "auth";
     if (r && (r.error === "auth" || r.error === "unauthorized")) return "auth";
-    if (!r || status >= 500 || status === 0 || r.error === "upstream_unreachable") return "retry";
+    // DATA-12: a rate limit (a long backlog replayed at once) is "later", not a refusal to discard.
+    if (!r || status >= 500 || status === 0 || status === 429 || r.error === "upstream_unreachable") return "retry";
     if (r.error === "version_conflict" || r.error === "order_changed") return "conflict";
     if (r.ok) {
       // ok:true that recorded nothing is not a save.
       if (r.skipped === "no_numeric_values" || r.skipped === "no_entries") return "refused";
       if (r.written === 0 && r.rejected && r.rejected.length) return "refused";
+      // DATA-04: a reading that failed to save is not sent. Resending is safe: a saved reading answers already_recorded.
+      if (Array.isArray(r.observations) && r.observations.some(function (o) { return o && o.error; })) return "retry";
       return "sent";
     }
     return "refused";
@@ -167,10 +173,12 @@
     function sorted() { return items.slice().sort(function (a, b) { return a.seq - b.seq; }); }
     function snapshot() {
       var me = actor(), mine = items.filter(function (i) { return i.actor === me; });
+      // Another user's unsent entries: counted, never shown or sent here (DATA-01).
+      var others = items.length - mine.length;
       var waiting = mine.filter(function (i) { return i.state === "queued"; }).length;
       var conflicts = mine.filter(function (i) { return i.state === "conflict"; }).length;
       var refused = mine.filter(function (i) { return i.state === "refused"; }).length;
-      return { online: !!online(), syncing: syncing, waiting: waiting, conflicts: conflicts, refused: refused, authNeeded: authNeeded, durable: !!store.durable, readFailed: readFailed,
+      return { online: !!online(), syncing: syncing, waiting: waiting, conflicts: conflicts, refused: refused, others: others, authNeeded: authNeeded, durable: !!store.durable, readFailed: readFailed,
         items: mine.filter(function (i) { return i.state !== "queued"; }).map(function (i) {
           return { id: i.id, kind: i.kind, label: i.label, state: i.state, createdAt: iso(i.createdAt), reason: i.reason || "", error: i.error || "", currentVersion: i.currentVersion, expectedVersion: i.expectedVersion,
             patientId: i.patientId, idempotencyKey: i.idempotencyKey, body: copy(i.body), current: i.current ? copy(i.current) : null, editable: !!EDITABLE[i.kind] };
@@ -179,17 +187,23 @@
     }
     function changed() { if (deps.onChange) { try { deps.onChange(snapshot()); } catch (e) {} } }
 
-    /* Loads what a previous page left, and drops anything owned by somebody other than who is signed in. */
+    /* Loads what a previous page left. Another user's unsent writes are KEPT (hidden and unsent until they sign in
+     * again); only their read cache is dropped, because a cached chart is re-read, and an unsent dose is not. */
     function load() {
       if (loaded) return loaded;
       loaded = store.all("outbox").then(function (rows) {
-        var me = actor(), drop = [];
-        items = [];
-        rows.forEach(function (r) { if (me && r.actor !== me) drop.push(r.id); else items.push(r); seq = Math.max(seq, r.seq || 0); });
+        var me = actor();
+        items = rows.slice();
+        rows.forEach(function (r) { seq = Math.max(seq, r.seq || 0); });
         readFailed = false;
-        if (drop.length) return clearAll();
+        if (me && rows.some(function (r) { return r.actor !== me; })) return dropCache(function (c) { return c.actor !== me; });
       }).catch(function () { items = []; readFailed = true; loaded = null; }).then(changed);
       return loaded;
+    }
+    function dropCache(which) {
+      return store.all("cache").then(function (rows) {
+        return Promise.all(rows.filter(which).map(function (c) { return store.del("cache", c.actor + "|" + c.patientId); }));
+      }).catch(function () {});
     }
     function save(item) { return store.put("outbox", item.id, item); }
 
@@ -323,10 +337,21 @@
       }).catch(function () { return null; });
     }
 
-    /* Sign-out. Everything, queue and cache. */
+    /* Sign-out. The signed-in user's queue and cache. Another user's unsent writes stay for them (DATA-01); with
+     * nobody identified, no unsent write can be attributed, so none is deleted and only the read cache goes. */
     function clearAll() {
-      items = []; authNeeded = false;
-      return store.clear().catch(function () {}).then(changed);
+      var me = actor();
+      authNeeded = false;
+      return load().then(function () {
+        // What could not be read is not known to be anybody's: it is left, never cleared blind.
+        if (readFailed) return dropCache(function () { return true; });
+        var gone = items.filter(function (i) { return me && i.actor === me; });
+        items = items.filter(function (i) { return !(me && i.actor === me); });
+        if (!items.length) return store.clear();
+        return Promise.all(gone.map(function (i) { return store.del("outbox", i.id); })).then(function () {
+          return dropCache(function (c) { return !me || c.actor === me; });
+        });
+      }).catch(function () {}).then(changed);
     }
 
     return { enqueue: enqueue, sync: sync, discard: discard, keepMine: keepMine, state: snapshot, list: function () { return load().then(function () { return sorted().map(copy); }); },

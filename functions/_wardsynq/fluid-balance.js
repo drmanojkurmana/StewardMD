@@ -137,7 +137,7 @@ function summariseBalance(observations, opts) {
       return Number.isFinite(t) && (!Number.isFinite(from) || t >= from) && (!Number.isFinite(to) || t < to);
     });
 
-  const byKind = {}, hours = new Map();
+  const byKind = {}, hours = new Map(), inHours = new Set(), outHours = new Set();
   let intake = 0, output = 0;
   for (const r of rows) {
     const dir = directionOf(r.code), v = Number(r.value);
@@ -147,7 +147,7 @@ function summariseBalance(observations, opts) {
     const t = Date.parse((r.meta && r.meta.effectiveAt) || r.effectiveAt);
     const hourKey = new Date(Math.floor(t / 3600000) * 3600000).toISOString();
     const h = hours.get(hourKey) || { hour: hourKey, intake: 0, output: 0 };
-    if (dir === "intake") h.intake += v; else h.output += v;
+    if (dir === "intake") { h.intake += v; inHours.add(hourKey); } else { h.output += v; outHours.add(hourKey); }
     hours.set(hourKey, h);
   }
 
@@ -155,19 +155,27 @@ function summariseBalance(observations, opts) {
    * balance, and the number alone cannot say that. This is the field that stops a tidy total from
    * standing in for an incomplete chart. */
   const gaps = [];
+  let windowHours = [...hours.keys()];
   if (Number.isFinite(from) && Number.isFinite(to)) {
+    windowHours = [];
     const start = Math.floor(from / 3600000) * 3600000;
     for (let t = start; t < to; t += 3600000) {
       const key = new Date(t).toISOString();
+      windowHours.push(key);
       if (!hours.has(key)) gaps.push(key);
     }
   }
+  /* CLIN-24: an hour with intake charted and output blank is not a charted hour. Twelve hours of IV intake
+   * with no urine recorded read as complete because either direction covered the hour. Each direction's
+   * missing hours are named, and complete needs both (wardsynq-flowsheet.js fluidBalance's own rule). */
+  const outputGaps = windowHours.filter((k) => !outHours.has(k)).sort();
+  const intakeGaps = windowHours.filter((k) => !inHours.has(k)).sort();
   const hourList = [...hours.values()].sort((a, b) => a.hour.localeCompare(b.hour));
   return {
     intake, output, balance: intake - output, entries: rows.length,
-    byKind, hours: hourList, gaps,
+    byKind, hours: hourList, gaps, outputGaps, intakeGaps,
     // Said plainly rather than left to be inferred from an empty array.
-    complete: gaps.length === 0 && rows.length > 0,
+    complete: gaps.length === 0 && outputGaps.length === 0 && intakeGaps.length === 0 && rows.length > 0,
     unit: UNIT,
   };
 }

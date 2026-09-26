@@ -250,7 +250,10 @@ function news2(input) {
     return refuse("Scale 2 applies only where it has been prescribed and recorded for this patient; using it otherwise hides real hypoxia", "SCALE_2_NOT_PRESCRIBED");
   }
 
-  const onOxygen = v[PARAM.OXYGEN] === true || v[PARAM.OXYGEN] === "oxygen";
+  /* CLIN-08: migrate-vitals.js stores oxygen as the NUMBER 1, and counting only true or "oxygen" scored
+   * every patient on oxygen 2 points low. Every stored form of "on" counts; anything else is air. */
+  const o2 = v[PARAM.OXYGEN];
+  const onOxygen = o2 === true || o2 === 1 || (typeof o2 === "string" && /^(1|y|yes|true|on|oxygen)$/i.test(o2.trim()));
   const num = (x) => (typeof x === "number" && Number.isFinite(x) ? x : null);
 
   const parameters = {};

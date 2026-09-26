@@ -152,6 +152,10 @@ test("A BUNDLE IS SPLIT, AND AN UNSUPPORTED TYPE IS A NAMED PROBLEM, never a sil
   assert.deepEqual(s.resources.map((r) => r.id), ["o1"]);
   /* A sender that pushed a Procedure and received 200 believes it landed. */
   assert.ok(s.problems.some((p) => p.reason === REASON.UNSUPPORTED && /Procedure/.test(p.detail)));
+  // OPS-13/F13: the unsupported entry's own request position (index 2, after Patient and Observation)
+  // travels with it, so landBundle can give it a real response entry instead of silently dropping it.
+  const proc = s.problems.find((p) => p.reason === REASON.UNSUPPORTED);
+  assert.equal(proc.entryIndex, 2);
   // An id-less resource cannot be attributed or replayed safely, and that is fatal.
   assert.ok(s.problems.some((p) => p.reason === REASON.INVALID && /has no id/.test(p.detail)));
 

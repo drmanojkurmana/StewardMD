@@ -48,6 +48,20 @@ test("fetchPatient pulls Patient + in-scope families incl MedicationRequest; nor
   assert.ok(bundle.medications.some((m) => m.origin === "order"));   // MedicationRequest -> order
 });
 
+test("OPS-16/F16: SMART v2 (.rs) is the default scope syntax", async () => {
+  const mock = makeMockFhir(); const ctx = ctxFor(mock, ["Condition"]);
+  await fhirR4Connector.authenticate(ctx);
+  assert.equal(mock.lastRequestedScope, "system/Condition.rs");
+});
+
+test("OPS-16/F16: smartScopeSyntax: 'v1' on the connection requests .read instead, for a v1-only authorization server", async () => {
+  const mock = makeMockFhir();
+  const ctx = ctxFor(mock, ["Condition"]);
+  ctx.config = { ...ctx.config, smartScopeSyntax: "v1" };
+  await fhirR4Connector.authenticate(ctx);
+  assert.equal(mock.lastRequestedScope, "system/Condition.read", "a partner implementing only SMART v1 scopes now gets a form it can grant");
+});
+
 test("scope excluding Observation -> no Observation fetched (least privilege)", async () => {
   const mock = makeMockFhir(); const ctx = ctxFor(mock, ["Condition"]);
   await fhirR4Connector.fetchPatient(ctx, "P1");

@@ -340,6 +340,10 @@ function splitBundle(body) {
   const problems = [];
   const resources = [];
   const requests = new Map();
+  // OPS-13/F13: request POSITION, by "resourceType/id" - so the response Bundle landBundle builds can
+  // be indexed by request order (the R4 contract for a batch/transaction response), rather than by
+  // the order conflicts/preconditions/writes happened to be resolved in.
+  const entryIndexOf = new Map();
   let patient = null;
   let items = [];
   const bundleType = body && body.resourceType === "Bundle" ? str(body.type) : "";
@@ -348,9 +352,11 @@ function splitBundle(body) {
     // An entry with no resource is named, not skipped: a sender counting entries would believe it landed.
     const empty = entries.filter((e) => !e || !e.resource || typeof e.resource !== "object").length;
     if (empty) problems.push({ reason: REASON.INVALID, detail: `${empty} bundle entr${empty === 1 ? "y has" : "ies have"} no resource` });
-    for (const e of entries) {
-      if (!e || !e.resource || typeof e.resource !== "object") continue;
+    entries.forEach((e, i) => {
+      if (!e || !e.resource || typeof e.resource !== "object") return;
       items.push(e.resource);
+      const key = `${str(e.resource.resourceType)}/${str(e.resource.id)}`;
+      if (!entryIndexOf.has(key)) entryIndexOf.set(key, i);   // a duplicate resourceType/id keeps its FIRST position
       /* A transaction or batch entry says what it wants done. POST creates, PUT updates (with the
        * version it read, when it says); anything else is not something this server does to a record,
        * and is named rather than carried out as the nearest thing. */
@@ -358,24 +364,57 @@ function splitBundle(body) {
       if (req) {
         const method = str(req.method).toUpperCase();
         if (method && method !== "POST" && method !== "PUT") problems.push({ reason: REASON.INVALID, detail: `${str(e.resource.resourceType)}/${str(e.resource.id)}: request.method ${method} is not supported; this server creates and updates only`, resourceType: str(e.resource.resourceType), id: e.resource.id || null });
-        requests.set(`${str(e.resource.resourceType)}/${str(e.resource.id)}`, { method: method || "POST", ifNoneExist: str(req.ifNoneExist) || null, ifMatch: str(req.ifMatch) || null, url: str(req.url) || null });
+        requests.set(key, { method: method || "POST", ifNoneExist: str(req.ifNoneExist) || null, ifMatch: str(req.ifMatch) || null, url: str(req.url) || null });
       }
-    }
+    });
   } else if (body && body.resourceType) {
     items = [body];
+    entryIndexOf.set(`${str(body.resourceType)}/${str(body.id)}`, 0);
   }
   if (!items.length && !problems.length) problems.push({ reason: REASON.INVALID, detail: "no resource in the request" });
   for (const r of items) {
     const t = str(r.resourceType);
+    const entryIndex = entryIndexOf.get(`${t}/${str(r.id)}`);
     if (!t) { problems.push({ reason: REASON.INVALID, detail: "an entry has no resourceType" }); continue; }
-    if (!INBOUND_TYPES.includes(t)) { problems.push({ reason: REASON.UNSUPPORTED, detail: `${t} is not a resource WardSynQ imports`, resourceType: t, id: r.id || null }); continue; }
+    if (!INBOUND_TYPES.includes(t)) { problems.push({ reason: REASON.UNSUPPORTED, detail: `${t} is not a resource WardSynQ imports`, resourceType: t, id: r.id || null, entryIndex }); continue; }
     if (!str(r.id)) { problems.push({ reason: REASON.INVALID, detail: `${t} has no id; an import needs the sender's own id to be attributable and idempotent`, resourceType: t }); continue; }
     if (t === "Patient") {
-      if (patient) { problems.push({ reason: REASON.INVALID, detail: "more than one Patient in one bundle", resourceType: t, id: r.id }); continue; }
+      if (patient) { problems.push({ reason: REASON.INVALID, detail: "more than one Patient in one bundle", resourceType: t, id: r.id, entryIndex }); continue; }
       patient = r;
     } else resources.push(r);
   }
-  return { patient, resources, problems, requests, bundleType, atomic: bundleType === "transaction" };
+  // OPS-13/F13 round 2: `entryIndexOf` returned too, so the caller can derive the ADAPTER's id for
+  // every entry (reqIndexOfDerivedIds, below) and recover its true request position after the
+  // adapter rewrites it - not just for the unsupported-type entries this map already served.
+  return { patient, resources, problems, requests, bundleType, atomic: bundleType === "transaction", entryIndexOf };
+}
+
+/**
+ * PURE. The kind tag wardsynq-sccm-adapter.js#sourceId mints an id under, per FHIR type this server
+ * imports - the exact same table mapSccmBundle()/consentFromSccm() use, kept here because deriving
+ * a request entry's future id needs it before the adapter ever runs.
+ */
+const FHIR_KIND_OF = Object.freeze({
+  Patient: "pat", Encounter: "enc", Condition: "cond", MedicationStatement: "rx", MedicationRequest: "rx",
+  AllergyIntolerance: "alg", Observation: "obs", DiagnosticReport: "dr", MedicationAdministration: "mar",
+  ServiceRequest: "sr", DocumentReference: "note", Consent: "consent",
+});
+
+/**
+ * PURE. OPS-13/F13 round 2: request index, keyed by the id the adapter WILL give that resource's
+ * entity (sourceId(system, kind, r.id) - the identical derivation the adapter itself uses, so no
+ * adapter change is needed to recover it). Once entities are tagged with this after landing, a
+ * response entry - written, conflict, or precondition-failed, not only unsupported - can be placed
+ * at its true request position rather than the order it happened to resolve in.
+ */
+function reqIndexOfDerivedIds(entryIndexOf, system) {
+  const out = new Map();
+  for (const [key, index] of entryIndexOf) {
+    const slash = key.indexOf("/");
+    const kind = FHIR_KIND_OF[key.slice(0, slash)];
+    if (kind) out.set(sourceId(system, kind, key.slice(slash + 1)), index);
+  }
+  return out;
 }
 
 /**
@@ -789,7 +828,10 @@ async function ingestFhir(request, env, ctx) {
   const system = src.system;
   const adapterSystem = `fhir-${system}`;
 
-  const { patient, resources, problems, requests, bundleType, atomic } = splitBundle(ctx.body);
+  const { patient, resources, problems, requests, bundleType, atomic, entryIndexOf } = splitBundle(ctx.body);
+  // OPS-13/F13 round 2: computed here, where `adapterSystem` (the kind-tag's own prefix) is already
+  // known, and carried to landBundle - so it does not have to re-derive or guess it.
+  const reqIndexOf = reqIndexOfDerivedIds(entryIndexOf, adapterSystem);
   const fatal = problems.filter((p) => p.reason === REASON.INVALID);
   if (fatal.length) return { ok: false, status: 400, outcome: { resourceType: "OperationOutcome", issue: fatal.map((p) => ({ severity: "error", code: "invalid", diagnostics: p.detail })) } };
 
@@ -840,7 +882,7 @@ async function ingestFhir(request, env, ctx) {
    * truthful answer: the content-digest idempotency below means a re-send after a real partial
    * failure still lands exactly once. */
   try {
-    return await landBundle(request, env, { ...ctx, svc, resolved, sccm, system, adapterSystem, patient, problems, requests, bundleType, atomic, protocol: "fhir", grantId: src.grantId || null });
+    return await landBundle(request, env, { ...ctx, svc, resolved, sccm, system, adapterSystem, patient, problems, requests, bundleType, atomic, reqIndexOf, protocol: "fhir", grantId: src.grantId || null });
   } catch (e) {
     return { ok: false, status: 503, retryable: true, outcome: operationOutcome("error", "transient",
       `the record could not be read or written to file this message (${str(e && e.message) || "unavailable"}); NOTHING was written, and this message may be sent again - a re-send of an identical message lands once`) };
@@ -885,6 +927,11 @@ async function landBundle(request, env, ctx) {
     if (rec) entities.push(rec);
     else issues.push({ code: "SCCM_CONSENT_UNDECIDED", message: `consent ${c && c.id} carries no decision (status ${c && c.status}) and was not written` });
   }
+  // OPS-13/F13 round 2: every entity here already carries the id the adapter derived from the
+  // sender's own resourceType/id (sourceId(), reqIndexOfDerivedIds() above) - tagged with its real
+  // request position now, before rebind()/partitionConflicts() reshuffle the list, so it rides along
+  // (both only ever spread `e` or leave it as-is) to wherever this entity's response entry is built.
+  if (ctx.reqIndexOf) for (const e of entities) { const idx = ctx.reqIndexOf.get(e.id); if (idx != null) e._reqIndex = idx; }
   /* TASK 7.12: THE AUTHORITY TRAVELS WITH THE DATA. Every row already said which system it came
    * from and who wrote it; none said under WHICH AUTHORISATION it was accepted. That is the fact
    * that changes - a grant is revoked, renewed, or found to have been issued in error - and after
@@ -1127,14 +1174,28 @@ async function landBundle(request, env, ctx) {
    * must still look, and the sender is told where. Governance refusals are decided inside putMany
    * before anything is staged, for the same reason. */
   const entries = [];
+  // OPS-13/F13: an UNSUPPORTED-type entry used to get NO response entry at all (only an `issues`
+  // tag on the bundle's meta) - a sender posting [Patient, Observation, Procedure, Condition] got
+  // back at most 3 entries for 4 requests, and a client that matches response.entry[i] to
+  // request.entry[i] by position (the R4 contract) misattributed every outcome after the drop.
+  // OPS-13/F13 round 2: every entry pushed below - unsupported, conflict, and precondition-failed -
+  // now carries `_reqIndex`, its true request position; unsupported gets it straight from splitBundle
+  // (it was never sent to the adapter), the other two from the entity's OWN `_reqIndex`, stamped
+  // right after landing (reqIndexOfDerivedIds() + the tagging loop above) by deriving the SAME id the
+  // adapter was about to mint, so the rewrite does not lose it. The written entries below (describe())
+  // carry it the same way. The final sort orders EVERY entry by it, not just these three.
+  for (const p of problems) {
+    if (p.reason !== REASON.UNSUPPORTED) continue;
+    entries.push({ response: { status: "400 Bad Request", outcome: operationOutcome("error", "not-supported", p.detail) }, _reqIndex: p.entryIndex });
+  }
   for (const c of conflicts) {
     const exId = await raise(c.reason, { patientId: c.entity.patientId || null, conflict: c.current, entityRefs: [`${c.entity.resourceType}/${c.entity.id}`],
       detail: conflictDetail(c) });
-    entries.push({ response: { status: "409 Conflict", outcome: operationOutcome("error", "conflict", `${c.entity.resourceType}/${c.entity.id}: ${c.reason}; see ExchangeException/${exId}`) } });
+    entries.push({ response: { status: "409 Conflict", outcome: operationOutcome("error", "conflict", `${c.entity.resourceType}/${c.entity.id}: ${c.reason}; see ExchangeException/${exId}`) }, _reqIndex: c.entity._reqIndex });
   }
   for (const p of preconditions) {
-    if (/^200/.test(p.status)) entries.push({ response: { status: p.status, location: p.location, etag: p.etag }, resource: p.existing });
-    else entries.push({ response: { status: p.status, outcome: p.outcome } });
+    if (/^200/.test(p.status)) entries.push({ response: { status: p.status, location: p.location, etag: p.etag }, resource: p.existing, _reqIndex: p.entity._reqIndex });
+    else entries.push({ response: { status: p.status, outcome: p.outcome }, _reqIndex: p.entity._reqIndex });
   }
   const preconditionStatus = failedPreconditions.length ? (failedPreconditions.some((p) => /^400/.test(p.status)) ? 400 : 412) : null;
   if (atomic && (conflicts.length || failedPreconditions.length)) {
@@ -1146,15 +1207,15 @@ async function landBundle(request, env, ctx) {
   const transientFailures = [];   // TASK 7.15: writes that failed for a reason a retry could fix
   const ordered = [...writable].sort(byDependency);
   const describe = (e, rec) => {
-    const { _currentVersion, _acceptedOver, ...entity } = e;
+    const { _currentVersion, _acceptedOver, _reqIndex, ...entity } = e;
     const f = toFhir({ ...entity, ...rec });
     const fhirType = FHIR_TYPE[entity.resourceType] || entity.resourceType;
     const version = rec && rec.version != null ? rec.version : (_currentVersion ? _currentVersion + 1 : 1);
     written.push({ resourceType: entity.resourceType, id: entity.id, version });
-    return { response: { status: _currentVersion ? "200 OK" : "201 Created", location: `${str(ctx.base)}/${fhirType}/${entity.id}/_history/${version}`, etag: `W/"${version}"`, lastModified: now }, ...(f && ctx.prefer !== "minimal" ? { resource: f } : {}) };
+    return { response: { status: _currentVersion ? "200 OK" : "201 Created", location: `${str(ctx.base)}/${fhirType}/${entity.id}/_history/${version}`, etag: `W/"${version}"`, lastModified: now }, _reqIndex, ...(f && ctx.prefer !== "minimal" ? { resource: f } : {}) };
   };
   if (atomic) {
-    const bare = ordered.map(({ _currentVersion, _acceptedOver, ...entity }) => entity);
+    const bare = ordered.map(({ _currentVersion, _acceptedOver, _reqIndex, ...entity }) => entity);
     try {
       const saved = await ingest.putMany(adapterActor, bare);
       ordered.forEach((e, i) => { const s = saved && saved[i]; entries.push(describe(e, s && s.record ? s.record : (s || bare[i]))); });
@@ -1168,7 +1229,7 @@ async function landBundle(request, env, ctx) {
     }
   } else {
     for (const e of ordered) {
-      const { _currentVersion, _acceptedOver, ...entity } = e;
+      const { _currentVersion, _acceptedOver, _reqIndex, ...entity } = e;
       try {
         const saved = await ingest.put(adapterActor, entity);
         entries.push(describe(e, saved && saved.record ? saved.record : (saved || entity)));
@@ -1176,7 +1237,7 @@ async function landBundle(request, env, ctx) {
         const governance = err instanceof GovernanceError;
         const code = governance ? "forbidden" : "exception";
         if (!governance) transientFailures.push({ ref: `${FHIR_TYPE[entity.resourceType] || entity.resourceType}/${entity.id}`, detail: str(err && err.message) });
-        entries.push({ response: { status: governance ? "403 Forbidden" : "500 Internal Server Error", outcome: operationOutcome("error", code, `${entity.resourceType}/${entity.id}: ${str(err && err.message)}`) } });
+        entries.push({ response: { status: governance ? "403 Forbidden" : "500 Internal Server Error", outcome: operationOutcome("error", code, `${entity.resourceType}/${entity.id}: ${str(err && err.message)}`) }, _reqIndex });
       }
     }
   }
@@ -1207,9 +1268,16 @@ async function landBundle(request, env, ctx) {
   const status = ctx.mode === "create" ? (written.length ? 201 : (preconditions.some((p) => /^200/.test(p.status)) ? 200 : (conflicts.length ? 409 : (preconditionStatus || 422))))
     : ctx.mode === "update" ? (written.length ? 200 : 409)
     : 200;
+  // OPS-13/F13 round 2: EVERY entry now carries its real request index (unsupported from splitBundle
+  // directly, written/conflict/precondition-failed from the entity's `_reqIndex`, stamped after
+  // landing from the id the adapter derived for it) - `response.entry[i]` corresponds to
+  // `request.entry[i]` for every i, the R4 contract, not just the relative order among unsupported
+  // entries. Array.sort is stable, so the rare entry with no `_reqIndex` (nothing in ctx.reqIndexOf
+  // could be derived for it) still keeps the order it was resolved in, at the tail.
+  const ordEntries = entries.map((e, i) => [e, i]).sort(([a, ai], [b, bi]) => (a._reqIndex ?? Infinity) - (b._reqIndex ?? Infinity) || ai - bi).map(([e]) => { const { _reqIndex, ...rest } = e; return rest; });
   return {
     ok: true, status, system: adapterSystem, linkedTo, written, conflicts: conflicts.length, issues, preconditions: preconditions.length,
-    bundle: { resourceType: "Bundle", type: bundleType === "batch" ? "batch-response" : "transaction-response", entry: entries,
+    bundle: { resourceType: "Bundle", type: bundleType === "batch" ? "batch-response" : "transaction-response", entry: ordEntries,
       ...(issues.length ? { meta: { tag: issues.map((i) => ({ system: "urn:stewardmd:fhir:issue", code: str(i.code), display: str(i.message) })) } } : {}) },
   };
 }

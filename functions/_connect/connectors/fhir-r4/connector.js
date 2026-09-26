@@ -16,7 +16,14 @@ const FHIR_RES = ["Encounter", "Condition", "MedicationRequest", "MedicationStat
 // engine's post-normalize scope filter keys medications on the SCCM type, so scope stays SCCM-canonical.
 const SCCM_TO_FHIR = { Encounter: ["Encounter"], Condition: ["Condition"], MedicationStatement: ["MedicationRequest", "MedicationStatement"], AllergyIntolerance: ["AllergyIntolerance"], Observation: ["Observation"], DiagnosticReport: ["DiagnosticReport"], DocumentReference: ["DocumentReference"] };
 const fhirTypesFor = (scope) => (scope || []).filter((t) => SCCM_TO_FHIR[t]).flatMap((t) => SCCM_TO_FHIR[t]);
-const scopeToSmart = (scope) => fhirTypesFor(scope).map((f) => "system/" + f + ".rs");   // // VERIFY .rs vs .read
+// OPS-16/F16: SMART v2 (.rs, "read+search") is the default - it is the newer form and what most
+// current authorization servers implement - but a partner authorization server implementing only
+// SMART v1 (.read) refuses the token or grants nothing with no fallback. Per-connection, because the
+// scope syntax a partner's auth server accepts is a fact about THAT partner, not a global choice.
+const scopeToSmart = (scope, config) => {
+  const suffix = config && config.smartScopeSyntax === "v1" ? ".read" : ".rs";
+  return fhirTypesFor(scope).map((f) => "system/" + f + suffix);
+};
 const smartOn = (ctx) => !!(ctx.config && ctx.config.secret_ref);
 // Display name from a FHIR Patient.name[0] (HumanName): prefer .text, else given + family.
 function fhirName(p) {
@@ -29,7 +36,7 @@ function fhirName(p) {
 function authDeps(ctx) {
   return { fetch: ctx.fetch, kv: ctx.kv, secrets: ctx.secrets, envelope: ctx.envelope, now: () => ctx.now().getTime(), logger: ctx.logger, tenantId: ctx.tenant.id, connectorId: (ctx.config && ctx.config.connector_id) || "fhir-r4" };
 }
-const doAuth = (ctx, forceRefresh) => acquireAccessToken(authDeps(ctx), { config: ctx.config, requestedScopes: scopeToSmart(ctx.scope), forceRefresh });
+const doAuth = (ctx, forceRefresh) => acquireAccessToken(authDeps(ctx), { config: ctx.config, requestedScopes: scopeToSmart(ctx.scope, ctx.config), forceRefresh });
 
 async function initialAuthHeader(ctx) {
   if (smartOn(ctx)) return { authorization: "Bearer " + (await doAuth(ctx, false)).accessToken };   // acquireAccessToken returns {accessToken}, NOT {token} — .token was undefined => "Bearer undefined"

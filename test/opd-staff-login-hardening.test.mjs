@@ -52,7 +52,7 @@ test("password sign-in locks after five wrong passwords, and the right password 
   for (let i = 1; i < PIN_MAX_ATTEMPTS; i++) {
     const r = await post("auth/email", { email: "nurse1@clinic.in", password: "wrong-" + i });
     assert.equal(r.status, 401);
-    assert.equal(r.attemptsLeft, PIN_MAX_ATTEMPTS - i);
+    assert.equal(r.attemptsLeft, undefined, "SEC-13: a refusal never says how many tries are left");
   }
   assert.equal((await post("auth/email", { email: "nurse1@clinic.in", password: "wrong-last" })).status, 401);
   const locked = await post("auth/email", { email: "nurse1@clinic.in", password: "Ward7-night-shift" });
