@@ -1,6 +1,6 @@
 ---
 tags: [plan, billing, entitlements, cross-cutting]
-status: PROPOSED (audit 2026-09-26), nothing enforced, owner decisions pending
+status: owner decisions D1 D2 D3 D6 taken 2026-09-26; prices PROPOSED; nothing enforced
 flags: ROLE_GATES_ON (unset), FEATURES_ON (unset), ENTITLEMENTS_ON (unset), DEVICE_LOCK_ON ("0")
 ---
 # Role-based plans: audit and plan
@@ -34,6 +34,7 @@ labels** (App Store / Play product IDs are immutable, and paid users already hol
 | Resident Pro | `pro` (relabel) | `resident` | `in.stewardmd.pro.*` | 599 / 5,999 |
 | Clinician | `physician` (relabel) | `physician` | `in.stewardmd.physician.*` | 749 / 7,499 (see 6.4) |
 | Clinician Pro | `physicianpro` (relabel) | `physician_pro` | `in.stewardmd.physicianpro.*` | 899 / 8,999 (see 6.4) |
+| **Ultimate** (friends and testers, never sold) | `ultimate` (NEW, above physicianpro) | any | none (admin grant only) | 0 |
 | WardSynQ | NOT a user tier: a hospital tenant plan | n/a | none | 299 / month (owner) |
 
 Recommendation: UG Student and Intern stay **one Trainee price**; the verified role decides which
@@ -49,13 +50,13 @@ educational mode only (labelled, no clinical action).
 |---|---|---|---|---|---|---|---|
 | Knowledge Library, Protocols, Antibiogram, Calculators, Drug DB, ICD, Govt Schemes, Search | Y | Y | Y | Y | Y | Y | Y |
 | On-device MaiK (Decisions 2026-09-20: free for all) | Y | Y | Y | Y | Y | Y | Y |
-| MaiK cloud AI (monthly tokens) | 5k | cap (low) | cap (low) | shared pool | 1M | 3M | 3M+ |
+| MaiK cloud AI (MaiK Tokens / month, section 10) | 10k | 24k | 24k | 40k shared | 72k | 100k | 160k |
 | CliniX (history, exam, OSCE, viva) | Respiratory only | Y (MBBS viva) | Y | Y (PG viva) | Y (PG viva) | Y | Y |
 | KardiQ X **Learn** atlas + quiz | sample | Y | Y | Y | Y | Y | Y |
 | RadioAnatome + 3D | Y | Y | Y | Y | Y | Y | Y |
 | SURGX protocols / procedures / cases | Y | Y | Y | Y | Y | Y | Y |
 | Dx My Patient / Start Case | L | L | Y | Y | Y | Y | Y |
-| Imaging AI reads per day (ThoreX, KardiQ X AI, SknX, FundX) | 2 | 4 (L) | 4 (L) | 4 | 10 | 10 | 20 |
+| Imaging AI reads per month (ThoreX, KardiQ X AI, SknX, FundX) | 5 | 15 (L) | 15 (L) | 16 shared | 50 | 60 | 100 |
 | Imaging AI beta without access code | - | - | - | - | - | - | Y |
 
 ### Bedside clinical
@@ -69,7 +70,7 @@ educational mode only (labelled, no clinical action).
 | Prescription pad + RxChoice (needs FULL registration) | - | - | - | Y | Y | Y | Y |
 | SURGX operative notes (PHI) | - | - | Y | Y | Y | Y | Y |
 | Cross-device case sync | - | Y | Y | Y | Y | Y | Y |
-| MaiK Scribe (ward / discharge / OPD dictation) | - | - | - | - | Y | Y (50 credits) | Y (50 credits) |
+| MaiK Scribe (ward / discharge / OPD dictation) | - | - | - | - | 40 notes | 200 consults | 300 consults |
 | Lab Watch (Apple Watch) | - | - | - | - | Y | Y | Y |
 | Oncology (ONCQIS, OncoTree, staging) | Y | Y | Y | Y | Y | Y | Y |
 | Oncology AI extras | add-on | add-on | add-on | add-on | add-on | add-on | add-on |
@@ -87,7 +88,7 @@ educational mode only (labelled, no clinical action).
 | Feature | Free | UG Student | Intern | Co-Resident | Resident Pro | Clinician | Clinician Pro |
 |---|---|---|---|---|---|---|---|
 | OPD Queue + EMR, MaiK Ask, billing, branding | - | - | - | - | - | Y | Y |
-| FollowCare / MAiTRI | - | - | - | - | - | Y (5 care credits) | Y (5 care credits) |
+| FollowCare / MAiTRI | - | - | - | - | - | Y (patient packs) | Y (patient packs) |
 | Clinics included (Rs 139/clinic/mo beyond) | 0 | 0 | 0 | 0 | 0 | 4 | 6 |
 | Clinic data on device + doctor's own Google Drive | - | - | - | - | - | Y | Y |
 | Clinic data on StewardMD cloud (hosted, we hold PHI) | - | - | - | - | - | - | Y |
@@ -106,8 +107,8 @@ Reasoning behind the non-obvious rows:
 ## 3. Devices: one phone + one iPad
 | Plan | Slots | Rule |
 |---|---|---|
-| Free, UG Student, Intern, Resident Pro, Clinician, Clinician Pro | 2 | 1 phone + 1 tablet. A second phone evicts the first phone, never the iPad. |
-| Co-Resident | 2 | any class (two phones allowed), one login per the owner brief |
+| Free, UG Student, Intern, Resident Pro, Clinician, Clinician Pro, Ultimate | 2 | 1 phone + 1 tablet. A second phone evicts the first phone, never the iPad. |
+| Co-Resident | 1 per login | two logins on one subscription, one device each (D1) |
 
 Not counted: Apple Watch (paired through the phone, no sign-in), wardsynq.com staff logins
 (tenant-scoped).
@@ -142,7 +143,7 @@ row but no storage behind it.
 - A **tenant** entitlement (per hospital), not a user tier: `{beds, doctorSeats, planExp}` on the
   WardSynQ tenant, checked by the tenant routes. Owner brief: Rs 299/month per 100 beds with 2
   doctor seats. Nurses, reception, pharmacy, lab etc. sign in with staff email/PIN under the tenant
-  and need no personal plan.
+  and need no personal plan. Price model at 80% margin: section 11.
 - Doctors in a WardSynQ hospital use StewardMD with their own plan; the hospital seat covers the
   WardSynQ record, not the doctor's personal StewardMD features.
 - "Coming soon" = a waitlist tile + form only. All flags stay OFF (`smd_wardsynq`, `_shadow`,
@@ -186,13 +187,13 @@ Verified in code 2026-09-26:
 12. `student` plan `requiresVerify:true` is declared but not enforced.
 
 ## 7. Implementation plan (each phase behind a flag, recovery tag first)
-- **P0 Money and safety bugs (no plan change).** Fix 1, 2, 3, 7. Unit tests in
+- **P0 Money and safety bugs (no plan change).** Fix 1, 2, 3, 7 and 13 (token packs re-sized, section 10). Unit tests in
   `test/*.test.mjs` for `fulfilPurchase` add-on paths and `doApprove` by role.
 - **P1 Role capture.** Verification chooser: student / intern / resident / doctor. Approve and
   auto-verify write `entitlements.role`. Residents: NMC auto-verify for the registration, plus a PG
   admission proof for the `resident` role. Students/interns get a `trainee` claim, never `verified`.
 - **P2 One source of truth.** Pro claim becomes derived from `tier` (any paid tier = `pro:true`).
-  Add admin `set-plan` (tier + expiry). Relabel in paywall + pro-notice + account screens only; keys
+  Add admin `set-plan` (tier + expiry), the `ultimate` tier, and the reviewed Ultimate migration (section 9). Relabel in paywall + pro-notice + account screens only; keys
   and product IDs unchanged. Grandfather current `pro` subscribers who are consultants (D3).
 - **P3 Matrix.** Update `FEATURE_REGISTRY` to section 2; fix `pglog`; add tier-based
   `deviceSlots` / `clinicLimit`. Ship the resolved feature list in `/billing/status` so the client
@@ -204,19 +205,123 @@ Verified in code 2026-09-26:
 - **P7 WardSynQ.** Waitlist tile now; tenant plan record + seat check when the owner releases it.
 Each client phase: headless-browser test of the paywall and gated tiles per plan before build.
 
-## 8. Owner decisions needed
-- **D1 Co-Resident "one login".** Code today = two accounts sharing one AI pool (`seats:2`,
-  `/billing/pool/link`). One shared login breaks identity: the PG logbook is a legal personal record,
-  and verification, Rx and audit trails name ONE doctor. Recommendation: keep two logins on one
-  subscription, one device each (the pair still pays Rs 299 total).
-- **D2 Student vs Intern price.** One Trainee price (recommended) or two.
-- **D3 Existing Pro subscribers.** Grandfather as Clinician features until renewal, or move to
-  Resident Pro.
-- **D4 Final prices.** Resolve finding 7; confirm Resident Pro / Clinician / Clinician Pro amounts.
-- **D5 Beta imaging AI for Clinician.** Clinician Pro only (current) or all Clinician.
-- **D6 Free plan devices.** 1 phone + 1 iPad like paid plans, or phone only.
-- **D7 WardSynQ.** Extra doctor seat price beyond 2; beds rounding (101 beds = 2 x Rs 299?);
-  who holds hospital backups (S1).
+## 8. Owner decisions (2026-09-26)
+- **D1 Co-Resident: TAKEN.** One subscription, two logins (one per resident), one device per
+  login. Keeps the PG logbook, verification and Rx tied to one named doctor. The existing
+  `seats:2` + `/billing/pool/link` design stays.
+- **D2 Student and Intern: TAKEN.** One Trainee price; the verified role decides the features.
+- **D3 Existing Pro holders: TAKEN.** Every account holding the `pro` claim today moves to a new
+  **Ultimate** tier: everything, for the owner's friends and testers. See section 9.
+- **D4 Prices: TAKEN as "owner asked for a price model at 80% margin".** Proposal in section 10.
+- **D5 Beta imaging AI without an access code: OPEN** (owner asked what it is; explained in chat).
+  ThoreX (chest X-ray), KardiQ X AI (ECG), SknX (skin), FundX (retina): unvalidated models, locked
+  behind an access code since 2026-09-25. Today Clinician Pro skips the code. Recommendation:
+  Clinician Pro + Ultimate skip the code; everyone else needs one.
+- **D6 Free plan devices: TAKEN.** Phone + iPad, same as paid plans.
+- **D7 WardSynQ: owner asked for a price model at 80% margin.** Proposal in section 11.
+
+## 9. Ultimate (friends and testers)
+- New tier key `ultimate`, ranked above `physicianpro`. **Never sold**: no product ID, not in
+  `plans()`, not on the paywall. Granted only by the owner through the admin `set-plan` endpoint
+  (finding 8 has to be built first).
+- Gets every feature in section 2 plus beta imaging AI without a code. Legal gates still apply:
+  the Rx pad still needs a full-register match and the PG logbook still needs a verified PG role.
+- Devices: phone + iPad. Clinics: 10.
+- Fair-use AI pool Rs 300/month per account (600,000 MaiK Tokens), may use Deep mode (section 12).
+  Worst case cost = Rs 300 x number of Ultimate accounts per month; it is a marketing budget line.
+- **Migration, reversible:** a script lists every account with `pro:true` and its `source`
+  (owner, admin grant, coupon, subscription) for the owner to review BEFORE writing anything; then
+  writes `tier:"ultimate"` with `tierExp` = the current `proExp` (forever stays forever). The `pro`
+  claim is left in place, so rolling back = deleting the tier field. Real paying IAP subscribers,
+  if any, are flagged separately rather than silently converted.
+- Naming clash to fix in the docs: `docs/PRICING_PACKAGING.md` section 6 already uses "Ultimate" for
+  a hospital AI plan, and "U" for Physician Pro elsewhere in that doc.
+
+## 10. Price model (PROPOSED): 80% gross margin at FULL use of every allowance
+Method: the included allowance of each plan, burned to 100%, must cost us at most 20% of what we
+keep. What we keep on iOS / Play = price / 1.18 (GST inclusive) x 0.85 (15% store fee); on web
+= price / 1.18 x 0.98 (2% gateway). iOS is the worst channel, so the allowances are sized for it;
+web margins come out 2-3 points higher.
+
+Cost basis (code: `functions/_ai_usage.js` `MODEL_RATES`, `docs/PRICING_PACKAGING.md` section 2):
+MaiK answer Rs 0.04 average (gemini-2.5-flash), imaging read Rs 0.40, on-device dictation Rs 0,
+Scribe consult **Rs 0.50 ASSUMED** (on-device Whisper + cloud structuring; Rs 6 if it falls back to
+cloud audio at Rs 0.02/s), MaiK Ask interview Rs 0.20, FollowCare episode Rs 22 (call + SMS).
+**Assumed, not measured:** platform overhead Rs 8/user/month, OPD infra Rs 10, hosted clinic Rs 50.
+Recalibrate every number from AI Control Center actuals after 30 days of real use.
+
+| Plan | Price / month | Annual (web) | Included per month | Cost at full use | Margin iOS | Margin web |
+|---|---|---|---|---|---|---|
+| Free | 0 | - | 10,000 MT (~125 answers), 5 imaging reads | Rs 15 (acquisition) | - | - |
+| Trainee (UG Student / Intern) | **199** | 1,990 | 24,000 MT (~300 answers), 15 imaging reads | Rs 26 | 81.9% | 84.3% |
+| Co-Resident (2 logins) | **299** | 2,990 | 40,000 MT shared (~500 answers), 16 imaging reads shared | Rs 42 | 80.3% | 82.9% |
+| Resident Pro | **599** | 5,990 | 72,000 MT (~900 answers), 50 imaging reads, 40 dictated notes | Rs 84 | 80.5% | 83.1% |
+| Clinician | **1,499** | 14,990 | 100,000 MT, 60 imaging, 200 Scribe consults, 50 MaiK Ask | Rs 202 | 81.3% | 83.8% |
+| Clinician Pro | **2,499** | 24,990 | 160,000 MT, 100 imaging, 300 Scribe, 50 MaiK Ask, hosted clinic | Rs 348 | 80.7% | 83.2% |
+| Ultimate | not sold | - | 600,000 MT fair use, everything | up to Rs 300 | - | - |
+
+- Annual = 10 x monthly ("2 months free") holds 80% only on web (79.5-81.1%). On iOS offer annual at
+  11 x monthly ("1 month free", about 79.6%), or accept about 77% there. Push annual to web.
+- Clinician and Clinician Pro return to the signed-off v3 prices (Rs 1,499 / 2,499), which also
+  resolves finding 7: the Rs 749 / 899 code defaults cannot carry Scribe + OPD at 80%.
+- FollowCare stays **included as a feature** in Clinician and above, but patients are billed as
+  packs: at Rs 22 per episode an included quota breaks 80%. See the pack table.
+- Over any allowance: top-up packs or upgrade, never a hard lockout (existing principle).
+
+Packs and add-ons (margin iOS / web):
+
+| Item | Today | Margin today | Proposed | Margin proposed |
+|---|---|---|---|---|
+| MaiK Boost | Rs 49 = 50,000 MT | 29% / 39% | Rs 49 = 10,000 MT | 86% / 88% |
+| MaiK Plus | Rs 199 = 250,000 MT | 13% / 24% | Rs 199 = 40,000 MT | 86% / 88% |
+| MaiK Power | Rs 499 = 750,000 MT | **-4% (loss) / 10%** | Rs 499 = 100,000 MT | 86% / 88% |
+| FollowCare 25 patients | Rs 2,499 (web 2,199) | 69% / 70% | Rs 3,799 (web 3,299) | 80% / 80% |
+| Onco add-on | Rs 89 | 92% / 93% | keep | |
+| Extra clinic | Rs 139 | 97% | keep | |
+
+- **Finding 13: the MaiK Power pack loses money on iOS** and every token pack is under 40% margin,
+  because packs are sold at 2,000 MT per rupee of price while 2,000 MT is also one rupee of our cost.
+- FollowCare at 80% needs about Rs 150 per patient on iOS. The lever is cost, not price: a
+  WhatsApp-first flow with a voice call only on a red flag would cut the Rs 22 episode sharply
+  (the WhatsApp per-message rate must be confirmed before quoting it).
+- Scribe packs (Rs 999 / 50, Rs 3,999 / 250) are fine if the Rs 0.50 consult cost holds; if the
+  cloud-audio fallback is common they drop to about 72%. Measure before repricing.
+
+## 11. WardSynQ price model (PROPOSED)
+Sold B2B: quoted ex-GST with 18% on the invoice, paid on web (2% gateway), no store fee.
+Cost basis, **all assumed**: Rs 20/hospital/month fixed (backups, monitoring), Rs 0.75/bed/month
+(D1 writes and storage, push), Rs 5/doctor seat/month. Nurses and staff cost about nothing.
+
+| Model | Price | Cost | Margin |
+|---|---|---|---|
+| Owner's brief: Rs 299 / month for 100 beds, 2 doctors | 299 | Rs 105 | 64%, before any support |
+| **Proposed: Rs 299 per block of 25 beds / month, 2 doctor seats per block** | 25 beds 299, 100 beds 1,196, 300 beds 3,588 | 49 / 135 / 365 | 83% / 89% / 90% |
+
+- Headline stays "EMR from Rs 299/month"; a 100-bed hospital pays Rs 1,196 (about Rs 12 per bed).
+- Unlimited nurses, reception, pharmacy, lab and billing staff at no charge (adoption driver).
+- Extra doctor seat Rs 149/month (97%).
+- Hospital MaiK: off by default; Rs 399 per doctor seat per month, with a Rs 78 AI pool (about
+  156,000 MT) per seat to hold 80%.
+- Onboarding self-serve free; assisted onboarding + data migration Rs 4,999 one time; priority
+  support Rs 999/month.
+- Annual prepaid: 2 months free (web, so about 80% holds).
+- "Cheapest EMR" is a comparative claim: ASCI requires it to be substantiated before it is used
+  in advertising. Say "from Rs 299/month" until a documented comparison exists.
+- Still "coming soon": nothing clinically approved, flags OFF (section 5).
+
+## 12. AI model per plan (PROPOSED)
+| Plan | On device | Cloud default | Deep mode |
+|---|---|---|---|
+| Free, Trainee | yes | gemini-2.5-flash (flash-lite once it is verified end to end: it 404s on one route today, `_ai_usage.js:373`) | no |
+| Co-Resident, Resident Pro, Clinician | yes | gemini-2.5-flash | no |
+| Clinician Pro, Ultimate | yes | gemini-2.5-flash | gemini-2.5-pro for deep review / research, debited from the pool at its real rate (about 40x flash per answer) |
+
+- Gemini 3.x rates in `MODEL_RATES` are marked `est: true`; no plan is priced on them until Google
+  publishes the rates and `AI_RATE_*` is set.
+- PHI calls stay on the regional `asia-south1` endpoint for every plan (existing rule).
+- One meter: today there are two (model-token budget in `_aibudget.js`: free 5k, Pro 1M,
+  Physician 3M; and the inert rupee cost cap). The allowances above are rupee pools shown as
+  MaiK Tokens; implementing them means moving the budget to the rupee meter.
 
 Related: [[StewardMD ID]] (access tiers), [[AI Control Center]], [[WardSynQ]], [[NMC Logbook]],
 [[OPD Queue]], [[Decisions]], `docs/PRICING_PACKAGING.md`.

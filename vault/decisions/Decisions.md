@@ -5,6 +5,16 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-26 · Role-based plans: Co-Resident = two logins, one Trainee price, existing Pro becomes Ultimate
+
+**Decision (owner).** (1) Co-Resident is one subscription with two logins, one device each, not one
+shared login: the PG logbook, verification and Rx must name one doctor. (2) UG Student and Intern
+share one Trainee price; the verified role decides features. (3) Every account holding the `pro`
+claim today moves to a new never-sold **Ultimate** tier (everything, for friends and testers),
+through a reviewed, reversible migration. (4) Every plan, Free included, is limited to one phone +
+one iPad. **Open:** prices (80%-margin model proposed), beta imaging AI for Clinician, WardSynQ
+pricing. Full audit, matrix and price model: [[Role-Tiers]]. **Status:** nothing enforced yet.
+
 ## 2026-09-26 · Medical Core ships its DETERMINISTIC half ON by default as BETA; the model half stays off
 
 **Decision.** `smd_medcore` defaults to `true` in `medcore-flags.js`. Owner's call. What that turns on for every
