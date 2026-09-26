@@ -5,6 +5,20 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-26 · eLogbook made easy: HoD may approve joins and assign guides; supervisor falls back to the guide
+
+**Decision (owner: "make it user friendly and easy").** A resident can request to join by institution
+code; an Academic Cell OR the department HoD approves in one tap. The HoD may also assign guides, in
+their department scope only. A blank supervisor routes to the resident's guide, and with no guide the
+entry waits (unassigned) in the HoD queue instead of being refused. Enrolling an email that has not
+signed in yet leaves a pending invite.
+**Why.** NMC requires monthly guide authentication (PGMER 5.2(vii)), not a named supervisor per entry;
+the old chain made authentication unreachable (no guide could be assigned in the app).
+**What did not move.** No self-verification, verified entries immutable, one signature per month by a
+registration-verified signer, the role is never self-declared. **Reversible:** env
+`PGLOG_SUPERVISOR_FALLBACK`, `PGLOG_INVITES`, `PGLOG_JOIN_REQUESTS` ("0" restores) and client
+`smd_pglog_easy`. **Status:** built on the role-plans branch (PR #1272).
+
 ## 2026-09-26 · Role box locks Home tools by role; trainees never hold the prescribing claim
 
 **Decision (owner).** A Role box at sign-up and in Profile (Medical student / Intern / PG Resident /
