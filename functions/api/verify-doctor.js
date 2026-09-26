@@ -22,7 +22,9 @@
 import { verifyFirebaseToken } from "../_fbauth.js";
 import { mergeUserClaims } from "../_fbadmin.js";
 import { emailVerified } from "../_email.js";
-import { markVerified, sendProUpsellOnce } from "../_lifecycle.js";
+import { markVerified, sendProUpsellOnce, getLifecycle } from "../_lifecycle.js";
+import { getUserClaims } from "../_fbadmin.js";
+import { gateTrial, weekPatch, requestSignals, trialOnceMode, firstGrantAt, warmTrialMode } from "../_trial_ledger.js";
 import { clearBudgetCache } from "../_aibudget.js";
 import { reconcileVerifiedClaim } from "../_verify_claim.js";
 import { regCandidates, nmcNameOf, nmcQueriesFor, pickMatch, uniqueNameMatch, autoVerifyOk, normName } from "../_verify_match.js";
@@ -77,10 +79,25 @@ function decodePayload(token) {
 
 // Set the verified custom claim (via the shared Firebase-admin helper). Uses the clobber-safe
 // merge so verifying an already-Pro doctor keeps their pro/proExp claim instead of wiping it.
-async function setVerifiedClaim(env, uid, regNo) {
+async function setVerifiedClaim(env, uid, regNo, signals) {
   // verifiedAt starts the free Pro week (_entitlement.js accessState). Without it the doctor is
   // verified but holds no entitlement, which reads to them as "verification did nothing".
-  await mergeUserClaims(env, uid, { verified: true, verifiedAt: Date.now(), regNo });
+  // With TRIAL_ONCE_ON the week is once per doctor (_trial_ledger.js): an existing verifiedAt is
+  // kept (no restart), and a registration / phone / device that already had a week on another
+  // account gets verified WITHOUT one (trialDenied).
+  if (trialOnceMode(env) === "off") { await mergeUserClaims(env, uid, { verified: true, verifiedAt: Date.now(), regNo }); return; }
+  let claims = {};
+  try { claims = (await getUserClaims(env, uid)) || {}; } catch (e) {}
+  const patch = await weekPatch(env, uid, claims, { regNo, ...(signals || {}) }, { door: "verify" });
+  await mergeUserClaims(env, uid, { verified: true, regNo, ...patch });
+}
+// What this request can prove about who is asking: the OTP-verified phone (lifecycle record), the
+// device id header and the connecting IP. Only read when the one-trial ledger is on.
+async function trialSignals(env, uid, request) {
+  if (trialOnceMode(env) === "off") return {};
+  let phone = "";
+  try { const lc = await getLifecycle(env, uid); if (lc && lc.phoneVerifiedAt) phone = lc.phone || ""; } catch (e) {}
+  return { phone, ...requestSignals(request) };
 }
 
 // ── Gemini — read the certificate ─────────────────────────────────────────────
@@ -293,6 +310,7 @@ async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime
 // ── Entry ─────────────────────────────────────────────────────────────────────
 export async function onRequest(context) {
   const { request, env } = context;
+  try { await warmTrialMode(env); } catch (e) {}   // TRIAL_ONCE_ON is a live KV flag
   if (request.method === "OPTIONS") return new Response(null, { status: 204 });
 
   // GET → the caller's own verification status (for the account panel).
@@ -343,6 +361,8 @@ export async function onRequest(context) {
     if (!tuid) return json({ error: "auth_failed" }, 401);
     let rec = null;
     try { if (store) rec = await store.get(doctorKey(tuid), "json"); } catch (e) {}
+    // Not a Pro door: this is the FREE plan while unverified (no claim is written), so the one-trial
+    // ledger deliberately does not gate it. A second person on a shared phone keeps the free plan.
     const decision = decideTrial(rec, Date.now(), TRIAL_DAYS);
     if (decision.grant && store) {
       const email = decodePayload(idToken).email || (rec && rec.email) || "";
@@ -378,7 +398,7 @@ export async function onRequest(context) {
   let lookupDiag = null;
   const toManual = async (reason) => {
     console.log("[verify] uid", uid, "→ MANUAL:", reason);
-    const provisionalUntil = new Date(Date.now() + PROVISIONAL_DAYS * 86400000).toISOString();
+    let provisionalUntil = new Date(Date.now() + PROVISIONAL_DAYS * 86400000).toISOString();
     // Store the uploaded proof to R2 so the owner's review dashboard can display it. Retained ONLY
     // until the owner approves/rejects (verifications endpoint deletes it then) — bounds sensitive-ID
     // (incl. Aadhaar) retention to the review window.
@@ -393,16 +413,36 @@ export async function onRequest(context) {
     } catch (e) { photoKey = ""; }
     // Owner decision 2026-08-27: full access WHILE PENDING, so review latency is never an outage
     // for someone who did everything right. The claim is what _entitlement.js accessState() reads.
-    try { await mergeUserClaims(env, uid, { provUntil: Date.now() + PROVISIONAL_DAYS * 86400000 }); } catch (e) {}
+    // Once per doctor (TRIAL_ONCE_ON): no pending access for a registration number that already
+    // belongs to another account, nor for a reg / phone / device that already had a free week. The
+    // review still goes to the owner; only the free access while waiting is withheld. A TYPED reg is
+    // checked but never recorded, so nobody can poison the ledger with someone else's number.
+    let trialFps = [], pendingOk = true;
+    if (trialOnceMode(env) !== "off") {
+      if (trialOnceMode(env) === "on" && store && effReg) {
+        try { const owner = await store.get(regKey(effReg)); if (owner && owner !== uid) pendingOk = false; } catch (e) {}
+      }
+      const g = await gateTrial(env, uid, { regNo: effReg, ...(await trialSignals(env, uid, request)) }, { door: "pending", noConsume: ["reg"], consume: pendingOk });
+      trialFps = (g.fps || []).filter((f) => f.kind !== "reg");
+      if (!g.grant) pendingOk = false;
+      // A re-upload must not restart the pending week: it runs from this account's first grant.
+      if (pendingOk && trialOnceMode(env) === "on") {
+        const first = await firstGrantAt(store, uid);
+        if (first) provisionalUntil = new Date(first + PROVISIONAL_DAYS * 86400000).toISOString();
+      }
+    }
+    if (!pendingOk) provisionalUntil = "";
+    if (pendingOk) { try { await mergeUserClaims(env, uid, { provUntil: Date.parse(provisionalUntil) }); } catch (e) {} }
+    else { try { await mergeUserClaims(env, uid, { trialDenied: Date.now(), provUntil: null }); } catch (e) {} }
     try { if (store) await store.put(doctorKey(uid), JSON.stringify({
       uid, email, status: "pending", reason, role,
       extractedRegNo: effReg, extractedName: ex.name, council: ex.council || "",
       confidence: (ex && typeof ex.confidence === "number") ? ex.confidence : null,
       via: idMode ? "id" : "cert", photoKey, photoMime: mime, lookup: lookupDiag,
-      provisionalUntil, updatedAt: new Date().toISOString(),
+      provisionalUntil, trialFps, updatedAt: new Date().toISOString(),
     })); } catch (e) {}
     try { await emailSupport(env, { uid, email, extracted: ex, reason, imageB64, mime, attach: !idMode, regNo: effReg }); } catch (e) {}
-    return json({ status: "pending_review", reason, provisionalUntil, provisionalDays: PROVISIONAL_DAYS });
+    return json({ status: "pending_review", reason, provisionalUntil, provisionalDays: pendingOk ? PROVISIONAL_DAYS : 0, ...(pendingOk ? {} : { trialUsed: true }) });
   };
 
   // Interns/residents & students aren't on the NMC register — an institute/college ID can't be
@@ -452,7 +492,7 @@ export async function onRequest(context) {
   }
 
   // 5. set the verified claim + persist
-  try { await setVerifiedClaim(env, uid, match.registrationNo); }
+  try { await setVerifiedClaim(env, uid, match.registrationNo, await trialSignals(env, uid, request)); }
   catch (e) { try { console.warn("[verify] claim_write_failed"); } catch (x) {} return json({ error: "claim_write_failed" }, 500); }
 
   if (store) {

@@ -117,6 +117,11 @@
    * at the moment the answer changes. Best-effort: sync() never rejects; a failure keeps the last
    * verdict, which is what would have been shown anyway. Called AFTER the forced token refresh so
    * the request carries the new claim. */
+  // Device id header for the once-per-doctor free week (device-id.js). Never blocks a verification.
+  function hwHeaders() {
+    try { if (window.SMD_DEVICE && SMD_DEVICE.hwHeaders) return SMD_DEVICE.hwHeaders(); } catch (e) {}
+    return Promise.resolve({});
+  }
   function resyncPro() { try { if (window.SMD_PRO && typeof window.SMD_PRO.sync === "function") window.SMD_PRO.sync(); } catch (e) {} }
   window.SMD_VERIFY = { isVerified: isVerifiedClaim, openPanel: openPanel, VERIFY_ALLOWLIST: VERIFY_ALLOWLIST };
 
@@ -271,11 +276,11 @@
       ? "Reading your ID and checking the register for " + typedReg + "…"
       : "Reading your certificate and checking the National Medical Register…"));
     try {
-      var parts = await Promise.all([fileToB64(file), u.getIdToken()]);
+      var parts = await Promise.all([fileToB64(file), u.getIdToken(), hwHeaders()]);
       var payloadBody = { idToken: parts[1], image: parts[0].b64, mime: parts[0].mime, role: _role };
       if (typedReg) payloadBody.regNo = typedReg;   // ID-mode: name-match against this reg no
       var res = await fetch("/api/verify-doctor", {
-        method: "POST", headers: { "Content-Type": "application/json" },
+        method: "POST", headers: Object.assign({ "Content-Type": "application/json" }, parts[2]),
         body: JSON.stringify(payloadBody)
       });
       var data = await res.json().catch(function () { return {}; });
@@ -291,6 +296,16 @@
         return;
       }
       // 2) AI unsure / not matched → cert emailed to support; grant PROVISIONAL access.
+      if (data.status === "pending_review" && data.trialUsed) {
+        // Once per doctor: the free week was already used with this registration, number or device.
+        if (mode === "panel") { render("panel", { status: "pending", provisionalUntil: "" }); submitting = false; return; }
+        setStatusMsg("pending",
+          vfIco("check") + " Certificate received and sent to our team for a manual check. " +
+          "The free Pro week has already been used with this registration, mobile number or device, so there is no free access while we review. " +
+          "We'll email you once you're approved.");
+        setTimeout(hideGate, 3200);
+        submitting = false; return;
+      }
       if (data.status === "pending_review") {
         var d = data.provisionalDays || 7;
         if (mode === "panel") { render("panel", { status: "pending", provisionalUntil: data.provisionalUntil }); submitting = false; return; }
