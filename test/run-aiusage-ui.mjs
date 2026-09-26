@@ -43,6 +43,7 @@ const STUB = `
               followcare: 100, kb: 0, clinix: 60, surgx_note: 30, surgx_case: 40, stt: 50, tts: 50, scribe: 0 },
     capsEnforced: false, pooled: false, costCapOn: false,
     tokensUsedMt: 2500, balanceMt: 250000, dailyFreeMt: 0, mtPerInr: 2000,
+    packs: [{ id: "plus", mt: 250000, inr: 199 }, { id: "boost", mt: 50000, inr: 49 }, { id: "power", mt: 750000, inr: 499 }],
     rates: { model: "gemini-2.5-flash", inPer1k: 14, outPer1k: 50, perImage: 700, perAudioSec: 40 }
   };
   window.__usageFail = false;
@@ -104,7 +105,9 @@ try {
   ok(u.sheet === true, "the AI Usage sheet opens and paints");
   ok(u.balance === "250k", `the MaiK Token wallet leads the screen (got "${u.balance}")`);
   ok(u.buy === true, "there is a Buy MaiK Tokens button on it");
-  ok(/Worth about ₹125/.test(u.text || ""), "the wallet says what the balance is worth in rupees");
+  // Priced at the store's entry pack (Boost: ₹49 for 50,000), not at the AI cost rate (mtPerInr gives ₹125).
+  ok(/Worth about ₹245 at the (store|App Store|Google Play) price \(₹49 for 50,000 tokens\)/.test(u.text || ""), `the wallet says what the balance is worth at the store price (${(u.text || "").slice(0, 160)})`);
+  ok(!/₹125/.test(u.text || ""), "the wallet no longer quotes the AI cost rate");
   ok((u.stats || []).join("|") === "7|18k|2,500|2.4s", `today's stats are real: requests, tokens, spend, latency (${(u.stats || []).join("|")})`);
   ok((u.rateCells || []).join("|") === "14 MT|50 MT|700 MT|40 MT", `the rate card prices every unit (${(u.rateCells || []).join("|")})`);
   ok(/gemini-2\.5-flash/.test(u.text || ""), "the rate card names the model it is quoting");

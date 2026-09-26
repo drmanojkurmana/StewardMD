@@ -24,7 +24,7 @@ import { lookupUidByEmail, lookupUserByUid } from "../../_fbadmin.js";
 import { emailProConfirmation } from "../../_email.js";
 import { createCoupon, redeemCoupon, revokeCoupon, listCoupons } from "../../_coupons.js";
 import { identify as usageIdentify, usageKeyFor, usageKv } from "../../_usage.js";
-import { getCredits, dailyCostCap, adminSetCredits, addCredits, setUserCostCap, costCapOn, foundingDailyCap, grantFoundingPool, addTokens, inrToMt, MT_PER_INR, tokenPackFor } from "../../_credits.js";
+import { getCredits, dailyCostCap, adminSetCredits, addCredits, setUserCostCap, costCapOn, foundingDailyCap, grantFoundingPool, addTokens, inrToMt, MT_PER_INR, tokenPackFor, tokenPacks } from "../../_credits.js";
 import { getEntitlement, writeEntitlement, clinicLimit, deviceLimit, recordTierPurchase, effectiveTierFor, oncoAddonActive } from "../../_entitlements.js";
 import { oncoTrialState } from "../../_features.js";
 import { deviceLockOn } from "../../_devices.js";
@@ -74,11 +74,7 @@ function plans(env) {
     // App Store group so they stack on whatever base plan the doctor already holds. Units + product
     // ids live in functions/_quota.js, which is also what meters them.
     msgTiers: msgTiers(env),
-    tokens: {
-      boost: { mt: 50000, amount: P("TOKENS_BOOST", 4900), label: "Boost" },
-      plus: { mt: 250000, amount: P("TOKENS_PLUS", 19900), regular: P("TOKENS_PLUS_REGULAR", 24500), label: "Plus", popular: true },
-      power: { mt: 750000, amount: P("TOKENS_POWER", 49900), regular: P("TOKENS_POWER_REGULAR", 73500), label: "Power" },
-    },
+    tokens: tokenPacks(env),   // MaiK Token packs: defined once in _credits.js (the wallet quotes them too)
     // Per-patient / per-consult top-up packs (functions/_quota.js owns the units + product ids).
     packs: quotaPacks(env),
     founding: { amount: P("FOUNDING_PRICE_YEAR", 39900), months: 12, seats: P("FOUNDING_SEATS", 500), label: "Founding Doctor (year)" },
