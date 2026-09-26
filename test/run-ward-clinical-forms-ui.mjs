@@ -83,14 +83,30 @@ try {
   ok(await waitFor(`return !!document.querySelector('[data-w-act="collectspecimen:sr-1"]') && !!document.getElementById("wv_sbp");`), "the chart opened with an uncollected CBC and the vitals form");
 
   // ---- lab Collect ---------------------------------------------------------------------------------------------
-  await click('[data-w-act="collectspecimen:sr-1"]');
+  // A real press focuses the button before activating it (a bare .click() does not); UI-03 checks focus
+  // returns to exactly this button once the dialog it opens is closed.
+  await ev(`var b = document.querySelector('[data-w-act="collectspecimen:sr-1"]'); b.focus(); b.click(); return true;`);
   ok(await waitFor(`var d = document.querySelector('#smdWard .w-ask [role="dialog"]'); return !!d && d.getBoundingClientRect().width > 0;`), "Collect opens a question on the ward");
   ok(await ev(`return document.activeElement && document.activeElement.id === "wAsk_specimenType";`), "the cursor is in the specimen box");
+
+  // ---- UI-03: keyboard focus cannot escape the reason sheet into the chart underneath -----------------------------
+  ok(await ev(`var d = document.querySelector('#smdWard .w-ask [role="dialog"]'); var f = d.querySelectorAll('button:not([disabled]), input, select, textarea');
+    f[f.length - 1].focus(); return document.activeElement === f[f.length - 1];`), "setup: focus moved to the dialog's last control");
+  await call("Input.dispatchKeyEvent", { type: "keyDown", key: "Tab", code: "Tab" });
+  await call("Input.dispatchKeyEvent", { type: "keyUp", key: "Tab", code: "Tab" });
+  ok(await ev(`var d = document.querySelector('#smdWard .w-ask [role="dialog"]'); var f = d.querySelectorAll('button:not([disabled]), input, select, textarea'); return document.activeElement === f[0];`),
+    "Tab from the dialog's last control wraps to its first, never reaching the chart underneath");
+  await call("Input.dispatchKeyEvent", { type: "keyDown", key: "Tab", code: "Tab", modifiers: 8 });
+  await call("Input.dispatchKeyEvent", { type: "keyUp", key: "Tab", code: "Tab", modifiers: 8 });
+  ok(await ev(`var d = document.querySelector('#smdWard .w-ask [role="dialog"]'); var f = d.querySelectorAll('button:not([disabled]), input, select, textarea'); return document.activeElement === f[f.length - 1];`),
+    "Shift+Tab from the first control wraps back to the last");
+
   await type("wAsk_specimenType", "Serum");
   await ev(`WARD._dispatch("investigations"); return true;`); await sleep(400);
   ok((await value("wAsk_specimenType")) === "Serum", "what was typed in the dialog survives a repaint of the chart");
   await click('[data-w-act="askcancel"]');
   ok(await waitFor(`return !document.querySelector("#smdWard .w-ask");`) && (await posts("/ward/collect")).length === 0, "Cancel closes it and nothing is written");
+  ok(await ev(`return document.activeElement === document.querySelector('[data-w-act="collectspecimen:sr-1"]');`), "UI-03: closing the sheet returns focus to the button that opened it");
 
   await click('[data-w-act="collectspecimen:sr-1"]');
   await waitFor(`return !!document.getElementById("wAsk_specimenType");`);

@@ -3193,6 +3193,7 @@
     "ward.save-frequency": "Save frequency",
     "ward.save-note": "Save note",
     "ward.save-note-instruction": "Save note / instruction",
+    "ward.saving-note": "Saving note...",
     "ward.save-report": "Save report",
     "ward.save-stage": "Save stage",
     "ward.save-the-care-plan": "Save the care plan",
