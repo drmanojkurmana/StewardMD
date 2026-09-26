@@ -292,6 +292,38 @@ export function derive(allRows, src) {
   return out;
 }
 
+/* Figures carried over. A row whose antibiotics repeat, value for value, another row of the same
+ * institution (an earlier edition, or another specimen of the same report with a different isolate
+ * count) is almost certainly copied, not new data: SKIMS 2023 pus S. aureus OPD repeats 2022,
+ * NARS-Net 2025's outpatient and ICU series repeat 2024. The later row's figures (both rows, within
+ * one report) become cautions. Needs 6 shared figures, at least 3 different values, not all 0 or 100. */
+export function copyChecks(sources, checkedBy) {
+  const out = [], byInst = {};
+  const ord = (s) => (s.end || s.year + "-12");
+  sources.forEach((src) => { (byInst[src.inst] ||= []).push(src); });
+  const kept = (r) => { const m = {}; Object.keys(r.cells).forEach((d) => { const c = r.cells[d]; if (c.act === "keep" && typeof c.s === "number") m[d] = c.s; }); return m; };
+  const label = (src, r) => `${src.short} ${src.year} ${R.SPECIMENS[r.spec].label.toLowerCase()}, ${R.SETTINGS[r.set].label.toLowerCase()}, ${R.orgShort(r.org)}${r.pheno ? " (" + r.pheno + ")" : ""}${r.n != null ? " (n=" + r.n + ")" : ""}`;
+  Object.values(byInst).forEach((srcs) => {
+    const all = [];
+    srcs.forEach((src) => checkedBy.get(src.id).forEach((r) => all.push({ src, r, k: kept(r) })));
+    for (let i = 0; i < all.length; i++) for (let j = i + 1; j < all.length; j++) {
+      const a = all[i], b = all[j], same = a.src.id === b.src.id;
+      if (same && (a.r.n == null || b.r.n == null || a.r.n === b.r.n)) continue;   // one table printed twice
+      const ds = Object.keys(a.k).filter((d) => d in b.k);
+      if (ds.length < 6 || ds.some((d) => a.k[d] !== b.k[d])) continue;
+      const vals = new Set(ds.map((d) => a.k[d]));
+      if (vals.size < 3 || ds.every((d) => a.k[d] === 0 || a.k[d] === 100)) continue;
+      const flag = same ? [[a, b], [b, a]] : ord(a.src) < ord(b.src) ? [[b, a]] : ord(b.src) < ord(a.src) ? [[a, b]] : [[a, b], [b, a]];
+      flag.forEach(([x, y]) => {
+        const why = `the ${ds.length} figures repeat, value for value, ${same ? "this report's" : "the"} ${label(y.src, y.r)} row: probably carried over, not new data`;
+        ds.forEach((d) => { const c = x.r.cells[d]; if (c.act === "keep") { c.act = "caution"; c.why = why; } });
+        out.push({ src: x.src.id, spec: x.r.spec, set: x.r.set, org: x.r.org, text: `${R.SPECIMENS[x.r.spec].label}, ${R.SETTINGS[x.r.set].label}: ${R.orgLabel(x.r.org)}${x.r.pheno ? " (" + x.r.pheno + ")" : ""} repeats ${ds.length} figures of ${label(y.src, y.r)} exactly` });
+      });
+    }
+  });
+  return out;
+}
+
 /* Rows against the source's own organism counts: a row whose isolate number differs from the
  * count table (or MRSA + MSSA rows that do not add up to the S. aureus count) is reported. */
 export function countChecks(src, checked) {
@@ -382,16 +414,19 @@ export function buildBundle(sources, register, census) {
   const whyIdx = (t) => { if (whyMap[t] == null) { whyMap[t] = why.length; why.push(t); } return whyMap[t]; };
   const metas = [], rows = [], counts = [], report = [], consistency = [];
   const stats = { sources: 0, rows: 0, derivedRows: 0, cells: 0, act: { keep: 0, intrinsic: 0, hide: 0, suppress: 0, caution: 0 }, lowNRows: 0, noNRows: 0, isolates: 0, countMismatches: 0 };
-  sources.slice().sort((a, b) => (a.region + a.short + (9999 - a.year)).localeCompare(b.region + b.short + (9999 - b.year))).forEach((src) => {
+  const sorted = sources.slice().sort((a, b) => (a.region + a.short + (9999 - a.year)).localeCompare(b.region + b.short + (9999 - b.year)));
+  const checkedBy = new Map(sorted.map((src) => [src.id, (src.rows || []).map((r) => checkRow(src, r))]));
+  const copies = copyChecks(sorted, checkedBy);
+  sorted.forEach((src) => {
     const si = metas.length;
-    const checked = (src.rows || []).map((r) => checkRow(src, r));
+    const checked = checkedBy.get(src.id);
     const derived = derive(checked, src);
-    const checks = countChecks(src, checked);
+    const checks = countChecks(src, checked), copied = copies.filter((c) => c.src === src.id);
     const orgs = new Set(checked.map((r) => r.org));
     metas.push({ id: src.id, kind: src.kind, inst: src.inst, name: src.institution, short: src.short, city: src.city || null, state: src.state || null, region: src.region,
       sector: src.sector, year: src.year, end: src.end || src.year + "-12", period: src.period || null, url: src.url || null, page: src.page || null, doi: src.doi || null, citation: src.citation,
       verification: src.verification, notes: src.notes || null, issues: (src.issues || []).length ? src.issues : null, excluded: (src.excluded || []).length ? src.excluded : null,
-      checks: checks.length ? checks.map((c) => c.text) : null,
+      checks: checks.length ? checks.map((c) => c.text) : null, copies: copied.length ? copied.map((c) => c.text) : null,
       specs: Array.from(new Set(checked.map((r) => r.spec))), sets: Array.from(new Set(checked.map((r) => r.set))), orgs: Array.from(orgs), rows: checked.length,
       isolates: isolatesOf(src, checked) });
     checked.concat(derived).forEach((r) => {
@@ -405,7 +440,7 @@ export function buildBundle(sources, register, census) {
       });
     });
     (src.counts || []).forEach((c) => { const o = R.canonOrg(c.org); counts.push([si, c.spec, c.set, o.key, c.n]); });
-    checks.forEach((c) => consistency.push(Object.assign({ src: src.id }, c)));
+    checks.concat(copied).forEach((c) => consistency.push(Object.assign({ src: src.id }, c)));
     stats.isolates += metas[si].isolates;
   });
   stats.sources = metas.length;

@@ -108,6 +108,7 @@
       (anyR ? '<br><span class="v2-mut">This report prints % resistant. % susceptible is shown as 100 minus % resistant, so intermediate results count as susceptible here.</span>' : "") +
       (hai ? '<br><span class="v2-mut">Rows marked ICU HAI come from ICU device-associated infection surveillance (bloodstream, urinary and ventilator-associated infections), not from all ICU isolates.</span>' : "") +
       (src.checks && src.checks.length ? '<br><span class="v2-mut">The source\'s own tables disagree in ' + src.checks.length + " place" + (src.checks.length === 1 ? "" : "s") + ' (see Sources).</span>' : "") +
+      (src.copies && src.copies.length ? '<br><span class="v2-mut">' + src.copies.length + " row" + (src.copies.length === 1 ? " repeats" : "s repeat") + ' another row\'s figures exactly; those figures are shown with a caution (see Sources).</span>' : "") +
       (src.url ? '<button class="v2-link" data-v2="open-url" data-url="' + esc(src.url) + '">Open the source</button>' : "") +
       (eds.length > 1 ? ' <span class="v2-mut">Editions: ' + eds.map(function (e) { return esc(e.edLabel || e.year); }).join(", ") + " (tap a cell for the trend)</span>" : "") + "</div>";
   }
@@ -318,7 +319,7 @@
         var v = { dc: 0, sc: 0, tr: 0 };
         integrated.forEach(function (x) { var k = x.verification && x.verification.status; if (k === "double-checked") v.dc++; else if (k === "transcribed") v.tr++; else v.sc++; });
         return "Figures were read from each source document: " + v.dc + " sources checked twice against the document" + (v.sc ? ", " + v.sc + " checked once" : "") + (v.tr ? ", " + v.tr + " transcribed summaries without isolate counts" : "") + ". ";
-      })() + 'Every cell then went through automatic checks (intrinsic resistance, impossible percentages for the isolate count, MRSA consistency, paired antibiotics that must agree, specimen relevance, and agreement with the source\'s own isolate-count tables). ' +
+      })() + 'Every cell then went through automatic checks (intrinsic resistance, impossible percentages for the isolate count, MRSA consistency, paired antibiotics that must agree, specimen relevance, agreement with the source\'s own isolate-count tables, and figures repeated value for value from another edition). ' +
       fmtN(D.stats.act.caution) + " figures carry a caution, " + fmtN(D.stats.act.suppress) + " were not shown, " + fmtN(D.stats.act.intrinsic) + " were intrinsic resistance.</p></section>";
     h += '<input type="search" class="v2-q" id="v2SrcQ" placeholder="Find an institution, city or state" value="' + esc(st.srcQ) + '" aria-label="Find a source">';
     var groups = [["national", "National networks"], ["north", "North India"], ["south", "South India"], ["east", "East and North-East India"], ["west", "West and Central India"]];
@@ -352,6 +353,7 @@
       '<button class="v2-btn" data-v2="view-src" data-id="' + esc(s.id) + '">View this antibiogram</button>';
     if (eds.length > 1) h += "<h4>Editions</h4><ul class=\"v2-parts\">" + eds.map(function (e) { return '<li><button class="v2-link" data-v2="view-src" data-id="' + esc(e.id) + '">' + esc(e.edLabel || e.year) + "</button> " + esc(e.period || "") + "</li>"; }).join("") + "</ul>";
     if (s.checks && s.checks.length) h += "<h4>The source's own tables disagree</h4><ul class=\"v2-parts\">" + s.checks.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul><p class=\"v2-mut\">Figures are shown as printed. Isolate numbers in these rows come from the antibiogram table.</p>";
+    if (s.copies && s.copies.length) h += "<h4>Figures repeated from another table or edition</h4><ul class=\"v2-parts\">" + s.copies.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul><p class=\"v2-mut\">Figures that repeat another row value for value are almost certainly copied, not new data; they are shown with a caution and are not pooled or used by reasoning.</p>";
     if (s.issues && s.issues.length) h += "<h4>Notes from the second reader</h4><ul class=\"v2-parts\">" + s.issues.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>";
     if (s.excluded && s.excluded.length) h += "<h4>Left out at extraction</h4><ul class=\"v2-parts\">" + s.excluded.map(function (x) { return "<li>" + esc((x.org || "") + " " + (x.drug || "")) + ": " + esc(x.why) + "</li>"; }).join("") + "</ul>";
     if (fl.length) h += "<h4>Figures with a check (" + fl.length + ")</h4><ul class=\"v2-parts\">" + fl.map(function (x) {

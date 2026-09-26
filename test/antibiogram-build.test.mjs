@@ -11,7 +11,7 @@ import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { validateSource, checkRow, derive, countChecks, buildBundle, loadAll } from "../scripts/build-antibiogram.mjs";
+import { validateSource, checkRow, derive, countChecks, copyChecks, buildBundle, loadAll } from "../scripts/build-antibiogram.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const base = (o) => Object.assign({ id: "T_2025", kind: "institution", inst: "T", institution: "Test Hospital", short: "Test", region: "north", sector: "government", year: 2025,
@@ -130,6 +130,25 @@ test("count checks: a genus line that means 'other species', or covers species w
   const c = base({ counts: [{ spec: "pus", set: "opd", org: "Enterococcus spp.", n: 16 }] });
   const rc = [{ spec: "pus", set: "opd", org: "Enterococcus faecalis", n: 12, s: { vancomycin: 90 } }, { spec: "pus", set: "opd", org: "Enterococcus faecium", n: 8, s: { vancomycin: 60 } }].map((r) => checkRow(c, r));
   assert.match(countChecks(c, rc)[0].text, /16 in the organism table, 20 in the antibiogram table/);
+});
+
+test("figures repeated value for value from an earlier edition become cautions on the later row only", () => {
+  const f = { amikacin: 71, ceftriaxone: 22, meropenem: 64, ciprofloxacin: 32, gentamicin: 58, piptazo: 50 };
+  const e1 = base({ id: "T_2023", year: 2023, rows: [{ spec: "urine", set: "opd", org: "E. coli", n: 400, s: Object.assign({}, f) }] });
+  const e2 = base({ id: "T_2024", year: 2024, rows: [{ spec: "urine", set: "opd", org: "E. coli", n: 500, s: Object.assign({}, f) },
+    { spec: "blood", set: "all", org: "Staphylococcus aureus", n: 90, s: { vancomycin: 100, linezolid: 100, teicoplanin: 100, daptomycin: 100, tigecycline: 100, cefoxitin: 60 } }] });
+  const e3 = base({ id: "T_2025", year: 2025, rows: [{ spec: "blood", set: "all", org: "Staphylococcus aureus", n: 95, s: { vancomycin: 100, linezolid: 100, teicoplanin: 100, daptomycin: 100, tigecycline: 100, cefoxitin: 60 } }] });
+  const by = new Map([e1, e2, e3].map((x) => [x.id, x.rows.map((r) => checkRow(x, r))]));
+  const c = copyChecks([e1, e2, e3], by);
+  assert.equal(c.length, 1);                                       // the S. aureus pair has 2 distinct values only
+  assert.equal(c[0].src, "T_2024");
+  assert.ok(Object.values(by.get("T_2024")[0].cells).every((x) => x.act === "caution" && /carried over/.test(x.why)));
+  assert.ok(Object.values(by.get("T_2023")[0].cells).every((x) => x.act === "keep"));
+  // Within one report, two specimens with different isolate counts printing identical figures: both flagged.
+  const p = { amikacin: 71, ceftazidime: 52, meropenem: 64, ciprofloxacin: 32, gentamicin: 58, piptazo: 50 };
+  const one = base({ rows: [{ spec: "respiratory", set: "all", org: "Pseudomonas aeruginosa", n: 200, s: Object.assign({}, p) }, { spec: "pus", set: "all", org: "Pseudomonas aeruginosa", n: 100, s: Object.assign({}, p) }] });
+  const by2 = new Map([[one.id, one.rows.map((r) => checkRow(one, r))]]);
+  assert.equal(copyChecks([one], by2).length, 2);
 });
 
 test("bundle: deterministic version, compact rows, every cell action counted", () => {
