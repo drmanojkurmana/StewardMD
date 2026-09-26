@@ -16935,7 +16935,7 @@
     } catch (e) {}
     return "";
   }
-  var _probDebounce = null;
+  var _probDebounce = null, _probGen = 0;
   /* The discharge and follow-up forms keep what is typed in state, so a repaint cannot wipe it (LT-17). */
   function keepFormField(t) {
     if (!t || !t.getAttribute) return false;
@@ -16960,13 +16960,19 @@
       if (e.target.id === "wProbText") st.probText = e.target.value; else st.probCode = e.target.value;
       if (_probDebounce) clearTimeout(_probDebounce);
       if (q.length < 2) {
-        st.icd = undefined;
+        st.icd = undefined; _probGen++;   // UI-04: invalidates any search already in flight
         var icdEl0 = document.getElementById("wIcdCandidates");
         if (icdEl0) icdEl0.innerHTML = "";
         return;
       }
+      /* UI-04: two overlapping searches (pause, then keep typing) can have their responses arrive out
+       * of order. The generation this search started with - the same request-ordering guard the DICOM
+       * viewer already uses (`var mine = dv; ... if (dv !== mine) return;`) - is checked when it
+       * answers, so a stale, broader search can never overwrite what a newer one already showed. */
+      var gen = ++_probGen;
       _probDebounce = setTimeout(function () {
         icdSearch(q).then(function (rows) {
+          if (gen !== _probGen) return;
           st.icd = rows;
           var icdEl = document.getElementById("wIcdCandidates");
           if (icdEl) {
@@ -16977,6 +16983,7 @@
             ) : '<p class="w-hint">' + ms("info") + wTH("ward.no-matching-code-record-it-in", "No matching code. Record it in words: an uncoded diagnosis is honest, a guessed code is not.") + "</p>";
           }
         }).catch(function () {
+          if (gen !== _probGen) return;
           st.icd = undefined;
           var icdElF = document.getElementById("wIcdCandidates");
           if (icdElF) icdElF.innerHTML = '<p class="w-hint warn">' + ms("error") + wTH("ward.the-code-search-is-unavailable-record", "The code search is unavailable. Record the diagnosis in words.") + "</p>";
@@ -17096,6 +17103,8 @@
   } catch (e) {}
 
   G.WARD = { filterRoster: filterRoster, open: open, close: close, _render: _render, _st: st, _growthCard: growthCard, _radWorklistRow: radWorklistRow, _offlineChoice: offlineChoice, _bedsideWrite: bedsideWrite, _dispatch: function (a) { dispatch(a); }, _nextFor: nextFor, _problem: problem, _balanceWindow: balanceWindow, _scoreWhyNot: scoreWhyNot, _pathologyCard: pathologyCard, _labTemplateApply: labTemplateApply, _startDictation: startDictation, _chartCats: CHART_CATS, _chartNavHtml: chartNavHtml, _chartNavKey: chartNavKey, _keys: SHORTCUTS, _keyIntent: keyIntent, _onKey: onKey, _runShortcut: runShortcut,
+    // UI-04 regression test (test/ward-icd-search-stale.test.mjs): drives the live-search input directly.
+    _onInput: onInput,
     // The one staff identity rendering, for discharge.js (owner 2026-09-16: name and employee id wherever staff are named).
     _who: staffWho, _whoText: whoText, _whoFetch: whoFetch, _whoInfo: whoInfo,
     // MaiK Scribe for the ward round note (item 16), exposed for testing.
