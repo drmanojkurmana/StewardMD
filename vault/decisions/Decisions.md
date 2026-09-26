@@ -9866,6 +9866,18 @@ composer's tool row was unbalanced and shifted when typing.
 chip truncates ("MaiK C...") and drops its caret, as it truncated before. Status: PR maik-ui-close-bg,
 browser-verified in headless Chrome, not yet on a device.
 
+## 2026-09-26 - MaiK Lite: the same "no talk about the reference material" filter as Cloud
+
+**Decision.** `maik-local.js` runs an ES5 copy of `functions/_maik_metatalk.js` on the final answer,
+after the NO_COVERAGE check, and on settled lines while painting. An answer that is only talk about
+the material is re-asked without the material, like a "not covered" verdict.
+**Why.** Owner, 2026-09-26: MaiK must never tell the doctor about "the passage you sent". Cloud was
+fixed first; Lite answers from the same kind of retrieved passages and could say the same thing.
+**Trade-off.** The patterns are copied, not shared (ES5 client, ES-module server). A parity test on
+the shared cases catches drift; move both into one kb/ai UMD file if a third caller appears.
+Also fixed in the Cloud file: a citation after a kept sentence ("... first line. [1]") was deleted.
+Status: PR maik-lite-metatalk; unit + answer() tests, not yet checked on a phone.
+
 ## 2026-09-26 - MaiK Cloud: the Knowledge Base is MaiK's private notes, never "the passage you sent"
 
 **Decision.** The retrieved Knowledge Base text reaches the model as "YOUR REFERENCE NOTES (private;
