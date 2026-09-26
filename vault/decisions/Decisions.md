@@ -9866,6 +9866,17 @@ composer's tool row was unbalanced and shifted when typing.
 chip truncates ("MaiK C...") and drops its caret, as it truncated before. Status: PR maik-ui-close-bg,
 browser-verified in headless Chrome, not yet on a device.
 
+## 2026-09-27 - MaiK answers a patient case on request; the structured tools become a choice
+
+**Decision.** A message the router classifies as a patient case gets a card (Start Case, Dx My Patient,
+Answer here, Answer, don't ask again) once per conversation, and a direct answer when it asks for one
+("dd", "management", "??"). Replaces the July router (#188) rule that sent every patient case to the
+engine with no answer.
+**Why.** Owner transcript 2026-09-27: the same redirect three times, "Give me dd" included.
+**Trade-off.** Patient cases now reach the model like any other question; hospital IDs (MRN/UHID/IP/OP/
+reg numbers) and emails are stripped first. Names are not detectable and are not stripped.
+Status: PR maik-patient-choice; unit + headless UI tests, not yet checked on a phone.
+
 ## 2026-09-26 - MaiK Lite: the same "no talk about the reference material" filter as Cloud
 
 **Decision.** `maik-local.js` runs an ES5 copy of `functions/_maik_metatalk.js` on the final answer,

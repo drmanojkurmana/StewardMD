@@ -1,3 +1,4 @@
+import "./helpers/trust-cf-access-header.mjs"; // test identity = the Cf-Access email header (production verifies the Access JWT)
 /* test/wardsynq-twin-predict.test.mjs — TASK 10.12: governed predictions, real data, never facts.
  *
  * node --test --experimental-test-module-mocks test/wardsynq-twin-predict.test.mjs
@@ -101,14 +102,25 @@ test("3. the shape never resembles a twin snapshot 'sections' object - a caller 
 
 /* ---- 4: honest inventory ----------------------------------------------------------------------------- */
 
-test("4. five of the seven named metrics are wired, from real data; the remaining two say why honestly", () => {
-  for (const key of ["discharge-volume", "critical-backlog", "bed-demand", "ed-load", "diagnostic-workload", "pharmacy-workload"]) {
-    assert.equal(PREDICTORS[key].wired, true, key);
+test("4. every named metric is wired to real data, and an unwired one must say why", () => {
+  /* This used to assert that blood-demand and ot-delays were UNWIRED. Both were wired in 2b4fd124d
+   * (TransfusionEpisode "requested" ledger entries; SurgicalCase scheduledAt vs theatreTimes.inRoomAt),
+   * and the test was not updated, so it failed on correct code. Asserting a snapshot of the inventory
+   * guarantees that happens again on the next one, so assert the INVARIANT instead: a metric either
+   * has a real predictor behind it, or it is honestly marked unbuilt with a reason. Never half-wired,
+   * and never a name that quietly answers from nothing. */
+  const NAMED = ["discharge-volume", "critical-backlog", "bed-demand", "ed-load",
+                 "diagnostic-workload", "pharmacy-workload", "blood-demand", "ot-delays"];
+  assert.deepEqual(Object.keys(PREDICTORS).sort(), [...NAMED].sort(),
+    "the inventory changed: add the metric here and give it a route test of its own");
+  for (const key of NAMED) {
+    const entry = PREDICTORS[key];
+    if (entry.wired) assert.equal(typeof entry.fn, "function", `${key} is wired but has no predictor`);
+    else assert.ok(entry.reason, `${key} is unwired and must say why`);
   }
-  for (const key of ["blood-demand", "ot-delays"]) {
-    assert.equal(PREDICTORS[key].wired, false, key);
-    assert.ok(PREDICTORS[key].reason, key);
-  }
+  // All eight are wired today. If one is ever unwired again, the 501 branch in predictMetric is what
+  // answers for it, and the reason assertion above is what keeps that answer honest.
+  for (const key of NAMED) assert.equal(PREDICTORS[key].wired, true, key);
 });
 
 /* ---- 5: real route, real data --------------------------------------------------------------------- */
@@ -194,13 +206,22 @@ test("6. an unknown metric is refused, never silently answered by the nearest wi
   assert.equal(r.error, "unknown_metric");
 });
 
-test("7. a named-but-unwired metric returns 501, not a fabricated number", async () => {
-  seed();
-  const r = await call(DOCTOR, `/ward/twin-predict?orgId=${ORG}&metric=blood-demand`);
-  assert.equal(r.__status, 501);
-  assert.equal(r.error, "not_built");
-  assert.match(r.detail, /no blood-inventory data source/);
-});
+/* Was "a named-but-unwired metric returns 501". There is no unwired metric left to exercise that
+ * branch with, and blood-demand is no longer the stand-in for one. The property that test was really
+ * protecting - "not a fabricated number" - still matters most for a NEWLY wired metric, whose data
+ * source a given hospital may have nothing in yet. So both new predictors are asked with the store
+ * empty, and must refuse. A well-formed question with nothing to answer from is a 200 carrying an
+ * honest refusal, not a 5xx and not a guess (the insufficient_data branch in predictMetric). */
+for (const metric of ["blood-demand", "ot-delays"]) {
+  test(`7. ${metric} with no data refuses honestly, and never fabricates a number`, async () => {
+    seed();   // nothing of either source type has been recorded
+    const r = await call(DOCTOR, `/ward/twin-predict?orgId=${ORG}&metric=${metric}`);
+    assert.equal(r.__status, 200, JSON.stringify(r));
+    assert.equal(r.ok, false);
+    assert.equal(r.error, "insufficient_data");
+    assert.equal(r.prediction, null);
+  });
+}
 
 test("8. ADVERSARIAL: cross-tenant data cannot leak into a prediction", async () => {
   seed();
