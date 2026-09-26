@@ -35,8 +35,9 @@
  *   s:{} holding %R); the build stores 100 - %R and marks the cell (intermediate results then
  *   count as susceptible, which the app says).
  *   counts [{spec, set, org, n, page?}], excluded [{org?, drug?, value?, why}]
- *   focus?: what a report covers when it is not a cumulative antibiogram of all isolates (e.g.
- *   "Shigella isolates of an outbreak investigation"): shown with the source, never a profile.
+ *   focus?: the group a report covers when it is not a hospital-wide cumulative antibiogram, written
+ *   to read after "Covers" (e.g. "the urology department", "Shigella isolates from an outbreak
+ *   investigation"): shown with the source, never pooled, never a profile; needs its own inst.
  *
  * Usage:
  *   node scripts/build-antibiogram.mjs            build
