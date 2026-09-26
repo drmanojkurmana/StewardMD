@@ -19,7 +19,9 @@
   "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026)"
  },
  "notes": "Cureus 2024 (16(9):e69525), Sammal et al., Govt Doon Medical College, Dehradun; CSOM middle-ear pus, VITEK-2 / CLSI. Susceptibility tables read from PDF text (Tables 2-4, pages 5-6). Source prints Sensitive/Intermediate/Resistant as counts and %; I extracted %Sensitive only (I% NOT added). Total 129 culture-positive isolates. Only P. aeruginosa (Table 2) and S. aureus (Table 3) had full antibiograms; MRSA had a separate table (Table 4) but maps to the same canonical S. aureus so is listed in unmapped rather than merged. MRSA context: 18 MRSA + 23 S. aureus isolates => MRSA ~43.9% of all S. aureus (13.1% of 137 total cases / of 129 positives). AST denominators vary slightly by drug (e.g. piptazo n=38, ceftazidime n=45, imipenem n=44) but % taken exactly as printed. Amikacin for P. aeruginosa (57.8%) is from Discussion narrative, not Table 2.",
- "issues": [],
+ "issues": [
+  "Lead 2026-09-26: marked with a focus (one condition, ear discharge in CSOM): shown, never pooled into pus and wound figures, not a profile."
+ ],
  "rows": [
   {
    "spec": "pus",
@@ -79,5 +81,6 @@
    "n": 23
   }
  ],
- "excluded": []
+ "excluded": [],
+ "focus": "ear discharge of patients with chronic suppurative otitis media"
 }
