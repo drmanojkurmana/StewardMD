@@ -136,6 +136,16 @@ test("trend across editions of one institution", () => {
   assert.ok(tr[0].year < tr[1].year, "ordered by the end of the data period");
 });
 
+test("trend links an organism across editions that name it differently", () => {
+  const S4 = load([
+    src({ id: "F_2023", inst: "F", institution: "Phi Hospital", short: "Phi", region: "central", year: 2023, rows: [
+      { spec: "urine", set: "all", org: "Proteus spp.", n: 60, s: { amikacin: 70 } }] }),
+    src({ id: "F_2024", inst: "F", institution: "Phi Hospital", short: "Phi", region: "central", year: 2024, rows: [
+      { spec: "urine", set: "all", org: "Proteus mirabilis", n: 50, s: { amikacin: 80 } }] })]);
+  const t = JSON.parse(JSON.stringify(S4.trend("F", "urine", "all", "pmirabilis", null, "amikacin")));
+  assert.deepEqual(t.map((p) => [p.s, p.as]), [[70, "Proteus"], [80, null]]);
+});
+
 test("the hospital's own antibiogram: saved on the device, checked by the same rules, cache refreshed", () => {
   assert.ok(!S.scopes().some((x) => x.id === "local"));
   S.localSave({ name: "My Hospital", rows: [{ org: "ecoli", pheno: null, spec: "urine", set: "all", n: 90, s: { meropenem: 95, vancomycin: 0 } }] });

@@ -21,7 +21,7 @@
  * ======================================================================================== */
 (function () {
   "use strict";
-  var ABG_V = "b72d5955bcb5";
+  var ABG_V = "570df90401c2";
   var R = window.ABG_RULES;
   var ACT = { k: "keep", i: "intrinsic", h: "hide", x: "suppress", c: "caution" };
   var LOCAL_KEY = "smd_abg_local";
@@ -46,7 +46,10 @@
     srcs.forEach(function (s) { s.latest = latest[s.inst] === s; });
     var rows = b.rows.map(function (r) {
       var cells = {}, x = r[9] || {}, fromR = x.m === "R";
-      Object.keys(r[6]).forEach(function (d) { var c = r[6][d]; cells[d] = { s: c[0], act: ACT[c[1]], nt: c[2], why: c[3] == null ? null : why[c[3]], fromR: fromR }; });
+      Object.keys(r[6]).forEach(function (d) {
+        var c = r[6][d];
+        cells[d] = typeof c === "number" ? { s: c, act: "keep", nt: null, why: null, fromR: fromR } : { s: c[0], act: ACT[c[1]], nt: c[2] == null ? null : c[2], why: c[3] == null ? null : why[c[3]], fromR: fromR };
+      });
       return { src: srcs[r[0]], spec: r[1], set: r[2], org: r[3], pheno: r[4], n: r[5], cells: cells, flags: r[7] || [], derived: !!r[8],
         as: x.as || null, q: x.q || null, trend: x.t || null, notes: x.no || null, page: x.p || null, how: x.d || null,
         measure: fromR ? "R" : "S", table: x.tb || null, cohort: x.co || null, note: x.nn || null };
@@ -293,13 +296,24 @@
   /* ----------------------------------------------------------------- trend --- */
   /* A cell across an institution's editions, plus the yearly series its reports print. An
    * edition's own figure wins over a trend-table value for the same year. */
+  // Labs rename rows between editions (Proteus spp. one year, P. mirabilis the next): an edition
+  // without the organism's own row lends its genus row, or its one species row, and the point
+  // says which organism it is ("as").
   function trend(inst, spec, set, org, pheno, drug) {
     if (!B) return [];
-    var rows = B.rows.filter(function (r) { return r.src.inst === inst && r.spec === spec && r.set === set && r.org === org && (r.pheno || null) === (pheno || null) && !r.cohort; });
+    var all = B.rows.filter(function (r) { return r.src.inst === inst && r.spec === spec && r.set === set && (r.pheno || null) === (pheno || null) && !r.cohort; });
+    var bySrc = {}, rows = [];
+    all.forEach(function (r) { (bySrc[r.src.id] = bySrc[r.src.id] || []).push(r); });
+    Object.keys(bySrc).forEach(function (id) {
+      var rs = bySrc[id], hit = rs.filter(function (r) { return r.org === org; });
+      if (!hit.length && PARENT[org]) hit = rs.filter(function (r) { return r.org === PARENT[org]; });
+      if (!hit.length && CHILDREN[org]) { hit = rs.filter(function (r) { return CHILDREN[org].indexOf(r.org) >= 0; }); if (hit.length !== 1) hit = []; }
+      rows = rows.concat(hit);
+    });
     var pts = [];
     rows.forEach(function (r) {
       var c = r.cells[drug];
-      if (c && c.act === "keep" && !pts.some(function (x) { return x.src === r.src.id; })) pts.push({ year: r.src.ord, label: r.src.edLabel, s: c.s, n: c.nt || r.n, src: r.src.id });
+      if (c && c.act === "keep" && !pts.some(function (x) { return x.src === r.src.id; })) pts.push({ year: r.src.ord, label: r.src.edLabel, s: c.s, n: c.nt || r.n, src: r.src.id, as: r.org !== org ? R.orgShort(r.org) : null });
     });
     rows.forEach(function (r) {
       if (!r.trend || !r.trend[drug]) return;

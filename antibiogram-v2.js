@@ -222,7 +222,7 @@
     return '<svg class="v2-spark" viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Trend: ' + pts.map(function (p) { return (p.label || p.year) + " " + num(p.s) + "%"; }).join(", ") + '">' +
       '<polyline fill="none" stroke="currentColor" stroke-width="2" points="' + P.map(function (p) { return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" ") + '"/>' +
       P.map(function (p, i) { return '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="3"/><text x="' + p[0].toFixed(1) + '" y="' + (p[1] - 6).toFixed(1) + '" font-size="9" text-anchor="middle">' + num(pts[i].s) + "</text>"; }).join("") +
-      "</svg>" + '<div class="v2-mut">' + pts.map(function (p) { return (p.label || p.year) + (p.reported ? " (from the report's trend table)" : ""); }).join(", ") + "</div>";
+      "</svg>" + '<div class="v2-mut">' + pts.map(function (p) { return (p.label || p.year) + (p.as ? " (reported as " + esc(p.as) + ")" : "") + (p.reported ? " (from the report's trend table)" : ""); }).join(", ") + "</div>";
   }
   function cellSheet(scope, org, pheno, drug) {
     var R0 = R(), spec = st.spec, set = st.set;

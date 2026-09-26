@@ -338,7 +338,10 @@ function compactRow(r, si, whyIdx) {
   const cells = {};
   Object.keys(r.cells).forEach((d) => {
     const c = r.cells[d];
-    cells[d] = [c.s, ACT[c.act], c.nt == null ? null : c.nt, c.why ? whyIdx(c.why) : null];
+    // A plain kept figure is the bare number; otherwise [s, action, tested, why] without trailing nulls.
+    const a = [c.s, ACT[c.act], c.nt == null ? null : c.nt, c.why ? whyIdx(c.why) : null];
+    while (a.length > 2 && a[a.length - 1] == null) a.pop();
+    cells[d] = a.length === 2 && a[1] === "k" && typeof c.s === "number" ? c.s : a;
   });
   const o = [si, r.spec, r.set, r.org, r.pheno || null, r.n, cells, r.flags.length ? r.flags : null, r.derived ? 1 : 0];
   const extra = {};
