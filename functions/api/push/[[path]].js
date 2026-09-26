@@ -21,7 +21,6 @@
 import { saveSubscription, deleteSubscription, sendPushToAll, pushEnabled } from "../../_webpush.js";
 import { saveNativeToken, deleteNativeToken, sendNativeToAll, nativePushEnabled, listNativeTokens, tokenId, nativeTokensById } from "../../_nativepush.js";
 import { identify as identifyAccount } from "../../_usage.js";
-import { verifyStaffSession, sessionRevoked } from "../../_opd_auth.js";
 import * as ORG from "../../_opd_org_store.js";
 import { CAPS } from "../../_queue_roles.js";
 import { recordDeps } from "../../_wardsynq/deps.js";
@@ -54,11 +53,8 @@ async function hospitalCaller(request, env, orgId, cap) {
   if (who && !who.guest && who.id) actor = { kind: "firebase", id: who.id, email: who.email || "" };
   else if (env.QUEUE_STAFF_ENABLED === "1") {
     const tok = request.headers.get("X-Staff-Token") || "";
-    const ss = tok ? await verifyStaffSession(env, tok, Date.now()) : null;
-    if (ss) {
-      const m = await ORG.getMemberAuth(env, ss.orgId, ss.identity);
-      if (m && !sessionRevoked(ss, m)) actor = { kind: "staff", id: ss.identity, orgId: ss.orgId };
-    }
+    const ss = tok ? await ORG.liveStaffSession(env, tok, Date.now()) : null;   // SEC-10: revoked or owing two-step = no session
+    if (ss && ss.member && !ss.mfaSetupOnly) actor = { kind: "staff", id: ss.identity, orgId: ss.orgId };
   }
   if (!actor) return { status: 401, error: "auth_required" };
   if (!orgId) return { status: 400, error: "org_required" };

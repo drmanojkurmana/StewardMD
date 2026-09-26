@@ -3,7 +3,8 @@
  * Ultimate, 12 Trainee needs verification, 13 token packs re-sized from 2026-12-26. */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { fulfilPurchase, planKeyFromProductId, plans, traineeGate, tokenPacks, packsV2Active } from "../functions/api/billing/[[path]].js";
+import { fulfilPurchase, planKeyFromProductId, plans, traineeGate } from "../functions/api/billing/[[path]].js";
+import { tokenPacks, packsV2Active, tokenPackList } from "../functions/_credits.js";
 import { purchasePatch, tierFromPlanKey, normalizeTier, effectiveTierFor, adminSetPlan, adminUltimateMigration, clinicAddonSlots } from "../functions/_entitlements.js";
 
 const NOW = Date.parse("2026-09-26T10:00:00Z"), DAY = 86400000;
@@ -62,9 +63,9 @@ test("finding 12: Trainee web order needs a reviewed account", async () => {
 });
 
 test("finding 13: token packs keep Introductory sizes until 2026-12-26, then 10k / 40k / 100k", () => {
-  const before = tokenPacks({}, null, Date.parse("2026-12-25T12:00:00+05:30"));
+  const before = tokenPacks({}, Date.parse("2026-12-25T12:00:00+05:30"));
   assert.deepEqual([before.boost.mt, before.plus.mt, before.power.mt], [50000, 250000, 750000]);
-  const after = tokenPacks({}, null, Date.parse("2026-12-26T00:00:01+05:30"));
+  const after = tokenPacks({}, Date.parse("2026-12-26T00:00:01+05:30"));
   assert.deepEqual([after.boost.mt, after.plus.mt, after.power.mt], [10000, 40000, 100000]);
   assert.deepEqual([after.boost.amount, after.plus.amount, after.power.amount], [4900, 19900, 49900]);
   assert.equal(after.plus.regular, undefined);

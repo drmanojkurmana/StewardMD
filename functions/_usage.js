@@ -19,7 +19,7 @@ import { aiBudgetOn, monthlyCapFor } from "./_aibudget.js";
 import { ownerOK } from "./_adminauth.js";
 import { addAiSpend } from "./_ai_usage.js";   // per-user spend rollup (the cost cap + wallet read it)
 import { bump, readDay, mergeCounters, MAIK_GROUPS } from "./_counters.js";
-import { verifiedClaimsFor, cfAccessEmail } from "./_fbauth.js";
+import { verifiedClaimsFor, cfAccessEmail, verifiedEmailOf } from "./_fbauth.js";
 
 
 export function usageKv(env) { return env.MAIK_KV || env.CASES_KV || env.GHIS_KV || env.UPDATES_KV || null; }
@@ -62,7 +62,13 @@ export async function identify(request, env) {
   // Verified claims (memoised per request). Key on the uid ("fb:<uid>"), never the whole object:
   // "fb:" + obj once collapsed EVERY signed-in user onto one shared "fb:[object Object]" bucket.
   const fb = await verifiedClaimsFor(request, env);
-  if (fb && fb.sub) return { id: "fb:" + fb.sub, guest: false, email: typeof fb.email === "string" ? fb.email.toLowerCase() : null, name: typeof fb.name === "string" ? fb.name : null };
+  /* `email` only when verified (SEC-01): it is what matches org membership, ownership and the owner
+   * list, and Firebase signs a token for a self-signed-up address nobody confirmed. `accountEmail` is
+   * the raw address, for METERING keys only (meterEmail): Firebase allows one account per address, so
+   * it cannot collide with another user's meter, and keying it on the verified email would move
+   * every unverified account's credits and caps. Never use accountEmail to grant access. */
+  if (fb && fb.sub) return { id: "fb:" + fb.sub, guest: false, email: verifiedEmailOf(fb),
+    accountEmail: typeof fb.email === "string" && fb.email ? fb.email.toLowerCase() : null, name: typeof fb.name === "string" ? fb.name : null };
   /* GUEST IDENTITY: per DEVICE when we have one, per IP only as a fallback (2026-08-25).
    *
    * It used to be IP-only, which meant everyone behind one public address shared a SINGLE guest
@@ -88,8 +94,9 @@ export async function identify(request, env) {
 // The stable, human-readable usage/limit KEY for a caller: the verified email when signed in
 // (so web + native attribute to the SAME person), else the guest IP bucket. Used by the AI usage
 // pipeline so records land under "em:<email>" and per-user caps resolve off it.
+export function meterEmail(who) { return (who && (who.email || who.accountEmail)) || null; }
 export function usageKeyFor(who) {
-  if (who && who.email) return "em:" + String(who.email).toLowerCase();
+  if (meterEmail(who)) return "em:" + String(meterEmail(who)).toLowerCase();
   return (who && who.id) || "ip:0";
 }
 

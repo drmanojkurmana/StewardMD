@@ -72,7 +72,11 @@ try {
   ok(vitalsBody && vitalsBody.vitals && vitalsBody.vitals.sbp === "118", "vitals recorded exactly what was typed: " + JSON.stringify(vitalsBody));
 
   // ---- 4. Medication order -> the SAME order appears on the eMAR round. --------------------------
-  await ev(`document.getElementById('wMoDrug').value='Paracetamol 500mg'; document.getElementById('wMoValue').value='500'; document.getElementById('wMoUnit').value='mg'; document.getElementById('wMoRoute').value='oral'; document.getElementById('wMoFreq').value='BD'; document.querySelector('[data-w-act="medorder"]').click(); return true;`);
+  await ev(`document.getElementById('wMoDrug').value='Paracetamol 500mg'; document.getElementById('wMoValue').value='500'; document.getElementById('wMoUnit').value='mg'; document.getElementById('wMoRoute').value='oral'; document.getElementById('wMoFreq').value='BD'; document.getElementById('wMoDays').value='5'; document.querySelector('[data-w-act="medorder"]').click(); return true;`);
+  // CLIN-04: the course length goes with the order, so it stops itself on the round.
+  for (let i = 0; i < 20; i++) { await sleep(100); if (await calls("/ward/medication-order")) break; }
+  const mo = await lastBody("/ward/medication-order");
+  ok(mo && mo.order && mo.order.durationDays === 5, "the Prescribe form sends the course length: " + JSON.stringify(mo && mo.order));
   for (let i = 0; i < 30; i++) { await sleep(100); if (await ev(`return document.body.textContent.indexOf('Paracetamol 500mg') >= 0 && !!document.querySelector('[data-w-act^="mar:verify"]');`)) break; }
   ok(await ev(`return !!document.querySelector('[data-w-act^="mar:verify"]');`), "the newly prescribed order appeared on the medication round, ready to verify");
 
@@ -83,11 +87,38 @@ try {
   await ev(`document.querySelector('[data-w-act^="mar:dispense"]').click(); return true;`);
   for (let i = 0; i < 20; i++) { await sleep(100); if (await ev(`return !!document.querySelector('[data-w-act^="mar:scan"]');`)) break; }
   await ev(`document.querySelector('[data-w-act^="mar:scan"]').click(); return true;`);
+  /* CLIN-10: the scan goes out in the server's own field names (wardsynq-meds.js checkFiveRights). */
+  for (let i = 0; i < 20; i++) { await sleep(100); const b = await lastBody("/ward/mar"); if (b && b.action === "scan") break; }
+  const scanBody = await lastBody("/ward/mar");
+  ok(scanBody && scanBody.action === "scan" && scanBody.scan && "patientBarcode" in scanBody.scan && "drugBarcode" in scanBody.scan && !("patient" in scanBody.scan),
+    "the scan is sent as { patientBarcode, drugBarcode }, the fields the server checks: " + JSON.stringify(scanBody && scanBody.scan));
   for (let i = 0; i < 20; i++) { await sleep(100); if (await ev(`return !!document.querySelector('[data-w-act^="mar:administer"]');`)) break; }
   await ev(`document.querySelector('[data-w-act^="mar:administer"]').click(); return true;`);
   for (let i = 0; i < 20; i++) { await sleep(100); if (await ev(`return document.body.textContent.indexOf('administered') >= 0;`)) break; }
   ok(await ev(`return document.body.textContent.indexOf('administered') >= 0;`), "the dose went verify -> dispense -> scan -> administer, one real click per state");
   ok((await calls("/ward/mar")) === 4, "exactly four MAR writes, one per state transition");
+
+  // ---- 5b. The audit's missing ward workflows: Give now (CLIN-13), an allergy (CLIN-05), Stop (CLIN-04). ----
+  ok(await ev(`return !!document.querySelector('[data-w-act="givenow:prn|0"]');`), "an as-needed order offers Give now");
+  await ev(`document.querySelector('[data-w-act="givenow:prn|0"]').click(); return true;`);
+  const prnRow = `return Array.from(document.querySelectorAll('.w-doses li')).some(function(li){return li.textContent.indexOf('Ondansetron')>=0 && !!li.querySelector('[data-w-act^="mar:verify"]');});`;
+  for (let i = 0; i < 20; i++) { await sleep(100); if (await ev(prnRow)) break; }
+  ok(await ev(prnRow), "Give now puts the as-needed dose on the round at this minute, ready to verify");
+
+  ok(await ev(`return !!document.getElementById('wAlgSubst') && !!document.querySelector('[data-w-act="allergynka"]');`), "the chart has an allergy entry, with no known drug allergies as its own answer");
+  await ev(`document.getElementById('wAlgSubst').value='Penicillin'; document.getElementById('wAlgReaction').value='anaphylaxis'; document.getElementById('wAlgSev').value='severe'; document.querySelector('[data-w-act="allergy"]').click(); return true;`);
+  for (let i = 0; i < 20; i++) { await sleep(100); if (await calls("/ward/allergy")) break; }
+  const alg = await lastBody("/ward/allergy");
+  ok(alg && alg.substance === "Penicillin" && alg.reaction === "anaphylaxis" && alg.severity === "severe" && !!alg.patientId, "recording an allergy sends what was typed for this patient: " + JSON.stringify(alg));
+
+  ok(await ev(`var p=document.getElementById('wWitnessPin'); return !!p && p.type === 'password';`), "the round asks the witness for their own PIN, hidden as it is typed (CLIN-18)");
+  ok(await ev(`return !!document.querySelector('[data-w-act^="medstop:"]');`), "an active medicine has a Stop button");
+  await ev(`document.querySelector('[data-w-act^="medstop:"]').click(); return true;`);
+  for (let i = 0; i < 20; i++) { await sleep(100); if (await ev(`return !!document.getElementById('wAsk_reason');`)) break; }
+  await ev(`var t=document.getElementById('wAsk_reason'); t.value='bleeding from the wound'; t.dispatchEvent(new Event('input',{bubbles:true})); document.querySelector('#smdWard .w-ask [data-w-act=askok]').click(); return true;`);
+  for (let i = 0; i < 20; i++) { await sleep(100); if (await calls("/ward/medication-stop")) break; }
+  const stop = await lastBody("/ward/medication-stop");
+  ok(stop && stop.reason === "bleeding from the wound" && !!stop.orderId, "Stop asks why and sends the reason with the order: " + JSON.stringify(stop));
 
   // ---- 6. Investigation order -> pending -> a result appears. ------------------------------------
   await ev(`document.getElementById('wInvCode').value='Chest X-ray'; document.querySelector('[data-w-act="investigation"]').click(); return true;`);

@@ -14,7 +14,7 @@
  * so this changes nothing until the owner flips it (after payment works). Deps-injectable store for tests.
  */
 
-import { cfgFlag } from "./_billingcfg.js";
+import { cfgFlag, cfgPrice } from "./_billingcfg.js";
 function _day(now) { return new Date(now || Date.now()).toISOString().slice(0, 10); }
 function _nextMidnightMs(now) { const d = new Date(now || Date.now()); return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1); }
 function r2(n) { return Math.round(n * 100) / 100; }
@@ -29,6 +29,43 @@ export function creditConversion(env) { const v = Number(cfgFlag(env, "CREDIT_CO
 export const MT_PER_INR = 2000;
 export function inrToMt(inr) { return Math.round(Math.max(0, Number(inr) || 0) * MT_PER_INR); }
 export function mtToInr(mt) { return r2(Math.max(0, Number(mt) || 0) / MT_PER_INR); }
+// The MaiK Token packs as sold. The App Store, Play and web checkouts all charge these prices
+// (docs/IOS-IAP-PRODUCTS.md), amounts in PAISE, live-overridable like every price (cfgPrice). The
+// paywall (billing plans) and the AI Usage wallet both read them here, so "what your tokens are worth"
+// is always quoted at the price the doctor pays, never at our AI cost (MT_PER_INR).
+const TOKEN_PACKS = [
+  { id: "boost", mt: 50000, price: ["TOKENS_BOOST", 4900], label: "Boost" },
+  { id: "plus", mt: 250000, price: ["TOKENS_PLUS", 19900], regular: ["TOKENS_PLUS_REGULAR", 24500], label: "Plus", popular: true },
+  { id: "power", mt: 750000, price: ["TOKENS_POWER", 49900], regular: ["TOKENS_POWER_REGULAR", 73500], label: "Power" },
+];
+/* From PACKS_V2_FROM (default 2026-12-26, 3 months after the owner's 2026-09-26 call) each pack holds
+ * fewer tokens at the same price: the sizes above sold 2,000 MT for Rs 1 while 2,000 MT is also Rs 1 of
+ * our AI cost, so the Power pack lost money after the App Store fee (vault/Role-Tiers.md finding 13).
+ * Introductory sizes until then. Fulfilment reads this same table, so what is shown is what is credited.
+ * Struck anchors are dropped on the new sizes: they are no longer a genuine saving. */
+const TOKEN_PACKS_V2_MT = { boost: 10000, plus: 40000, power: 100000 };
+export const PACKS_V2_FROM_DEFAULT = Date.parse("2026-12-26T00:00:00+05:30");
+export function packsV2Active(env, now) {
+  const raw = env && env.PACKS_V2_FROM;
+  const at = raw == null || raw === "" ? PACKS_V2_FROM_DEFAULT : (/^\d+$/.test(String(raw)) ? +raw : Date.parse(String(raw)));
+  return (now || Date.now()) >= (Number.isFinite(at) ? at : PACKS_V2_FROM_DEFAULT);
+}
+export function tokenPacks(env, now) {
+  const v2 = packsV2Active(env, now);
+  const out = {};
+  TOKEN_PACKS.forEach((k) => {
+    const p = { mt: v2 ? TOKEN_PACKS_V2_MT[k.id] : k.mt, amount: cfgPrice(env, k.price[0], k.price[1]) };
+    if (k.regular && !v2) p.regular = cfgPrice(env, k.regular[0], k.regular[1]);
+    p.label = k.label; if (k.popular) p.popular = true;
+    out[k.id] = p;
+  });
+  return out;
+}
+// The same packs for the wallet screen: [{id, mt, inr}], smallest first.
+export function tokenPackList(env) {
+  const t = tokenPacks(env);
+  return TOKEN_PACKS.map((k) => ({ id: k.id, mt: t[k.id].mt, inr: t[k.id].amount / 100 }));
+}
 // Which purchase is a MaiK Token pack? Payment paths carry a server-issued selection key
 // ("tokens:plus" / "pro:monthly" / "student:annual"). Anything that is not a token pack is a
 // subscription and must still grant Pro — the split lives here so all three payment paths agree.

@@ -160,7 +160,8 @@ async function handle(context) {
     }
     // success
     try { await store.delete(otpKey(who.uid)); } catch (e) {}
-    try { await mergeUserClaims(env, who.uid, { emailVerified: true }); } catch (e) {}   // best-effort; client also flags it in profile
+    // emailVerifiedFor pins the proof to THIS address: _fbauth.js verifiedEmailOf ignores the claim once the account's email differs.
+    try { await mergeUserClaims(env, who.uid, { emailVerified: true, emailVerifiedFor: who.email }); } catch (e) {}   // best-effort; client also flags it in profile
     return json({ ok: true, verified: true });
   }
 

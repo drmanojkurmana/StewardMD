@@ -44,12 +44,29 @@ function esc(value) {
     .replace(/'/g, "&apos;");
 }
 
-/** PURE. YYYYMMDDHHMMSS, the CDA time format. Absent or unparseable is EMPTY, never a guess. */
+/**
+ * PURE. YYYYMMDDHHMMSS+ZZZZ, the CDA TS.FULL time format. Absent or unparseable is EMPTY, never a guess.
+ *
+ * OPS-21/F21: the offset is ALWAYS explicit (+0000: these digits are UTC), never bare - a bare CDA
+ * effectiveTime/time is read by a receiver as ITS OWN local time (same class of defect as hl7v2.js's
+ * ts()), so signing and authoring instants were ambiguous or shifted for a receiver in another zone.
+ * A caller slicing to the date-only portion (birthTime) is unaffected - slice(0, 8) stops before it.
+ */
 function ts(iso) {
   const ms = Date.parse(str(iso).trim());
   if (!Number.isFinite(ms)) return "";
   const d = new Date(ms), p = (n) => String(n).padStart(2, "0");
-  return `${d.getUTCFullYear()}${p(d.getUTCMonth() + 1)}${p(d.getUTCDate())}${p(d.getUTCHours())}${p(d.getUTCMinutes())}${p(d.getUTCSeconds())}`;
+  return `${d.getUTCFullYear()}${p(d.getUTCMonth() + 1)}${p(d.getUTCDate())}${p(d.getUTCHours())}${p(d.getUTCMinutes())}${p(d.getUTCSeconds())}+0000`;
+}
+
+/** PURE. HL7 AdministrativeGender (OID 2.16.840.1.113883.5.1): code + codeSystem + displayName, never
+ *  a raw sex string in displayName alone - a CDA consumer reads @code, and a receiver with no @code
+ *  sees no sex at all (affects reference ranges and dosing downstream). Unmapped is UN (undifferentiated). */
+const ADMIN_GENDER = Object.freeze({ male: { code: "M", display: "Male" }, m: { code: "M", display: "Male" }, female: { code: "F", display: "Female" }, f: { code: "F", display: "Female" } });
+function administrativeGender(sex) {
+  const s = str(sex).trim().toLowerCase();
+  const g = ADMIN_GENDER[s] || { code: "UN", display: "Undifferentiated" };
+  return `code="${g.code}" codeSystem="2.16.840.1.113883.5.1" displayName="${esc(g.display)}"`;
 }
 
 /** PURE. A section's title, humanised from its key only for DISPLAY. The content is never touched. */
@@ -114,7 +131,7 @@ function cdaDocument(input) {
     // A name the record does not hold is an EMPTY element, never a placeholder somebody might read
     // as the patient's actual name.
     `        <name>${esc(p.name || "")}</name>`,
-    ...(p.sex ? [`        <administrativeGenderCode displayName="${esc(p.sex)}"/>`] : []),
+    ...(p.sex ? [`        <administrativeGenderCode ${administrativeGender(p.sex)}/>`] : []),
     ...(ts(p.dob) ? [`        <birthTime value="${ts(p.dob).slice(0, 8)}"/>`] : []),
     "      </patient>",
     "    </patientRole>",
@@ -123,13 +140,17 @@ function cdaDocument(input) {
     `    <time value="${ts(summary.signedAt) || effective}"/>`,
     "    <assignedAuthor>",
     // The clinician who SIGNED it. Not whoever exported it: the document's author is the person
-    // accountable for its contents.
-    `      <id extension="${esc(summary.signedBy)}"/>`,
+    // accountable for its contents. OPS-22/F22: root, or this id is anonymous to any receiver -
+    // the SAME org OID the patient/document ids above already use.
+    `      <id root="${esc(org.oid || "2.25.0")}" extension="${esc(summary.signedBy)}"/>`,
     "    </assignedAuthor>",
     "  </author>",
     "  <custodian>",
     "    <assignedCustodian>",
     "      <representedCustodianOrganization>",
+    // OPS-14/F14: id is required (minOccurs=1) - a document with only <name> fails the CDA R2 schema
+    // and any HIE/partner that schema-validates incoming CDA rejects the whole document.
+    `        <id root="${esc(org.oid || "2.25.0")}"/>`,
     `        <name>${esc(org.name || "")}</name>`,
     "      </representedCustodianOrganization>",
     "    </assignedCustodian>",
@@ -137,7 +158,8 @@ function cdaDocument(input) {
     ...(e && e.id ? [
       "  <componentOf>",
       "    <encompassingEncounter>",
-      `      <id extension="${esc(e.id)}"/>`,
+      // OPS-22/F22: root, for the same reason as the author id above.
+      `      <id root="${esc(org.oid || "2.25.0")}" extension="${esc(e.id)}"/>`,
       `      <effectiveTime><low value="${ts(e.periodStart)}"/><high value="${ts(e.periodEnd)}"/></effectiveTime>`,
       "    </encompassingEncounter>",
       "  </componentOf>",

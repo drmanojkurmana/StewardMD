@@ -112,9 +112,20 @@ network.
 - `wardsynq/adapters/wardsynq-rules-stewardmd.js` — maps StewardMD's existing
   `data/interaction-rules.json` into a WardSynQ rule pack. Adapter, not core.
 - `wardsynq/data/allergy-classes.seed.json` — UNAPPROVED allergy class and cross-reactivity seed.
-- Tests: `node --test test/wardsynq-*.test.mjs` runs every suite. See the table below for the P1
-  modules; `node scripts/wardsynq-assurance.mjs` is the one that cross-references them against the
-  hazard table.
+- Tests: `node --test --experimental-test-module-mocks --experimental-sqlite test/wardsynq-*.test.mjs`
+  runs every suite. **The flags are not optional here** - these suites mock `../functions/_fbfirestore.js`
+  with `mock.module()`, so without `--experimental-test-module-mocks` every one of them dies at import
+  with "mock.module is not a function" and node reports ~148 FILE failures, not assertion failures.
+  That looks exactly like a broken module and is not one. (`npm test` passes the flags; so does CI.)
+  See the table below for the P1 modules; `node scripts/wardsynq-assurance.mjs` is the one that
+  cross-references them against the hazard table.
+- **A new route suite MUST import `./helpers/trust-cf-access-header.mjs` as its FIRST line.** These
+  suites authenticate with a bare `Cf-Access-Authenticated-User-Email` header, and production stopped
+  trusting that header (it is forgeable - `_fbauth.js cfAccessEmail` now requires a verifying
+  `Cf-Access-Jwt-Assertion`). The helper sets the test-only opt-in. Without it `resolveActor` returns
+  null and EVERY authenticated route in the file answers `401 unauthorized`, which reads as a broken
+  auth layer rather than a missing import. 141 suites import it; `wardsynq-twin-predict.test.mjs` was
+  the one that did not, and lost 7 of its 12 tests to it silently.
 
 ## Design rules worth not re-litigating
 

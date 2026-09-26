@@ -100,7 +100,7 @@ test("6. a caller cannot name Gemini to get around approval, because callers nam
 });
 
 test("7. a hospital's own hardware still outranks the cloud when both are approved", () => {
-  const cfg = on({ phiApproved: ["gemini", "local-openai"], localBaseUrl: "https://hospital.internal/v1", localModel: "ward-7b" });
+  const cfg = on({ phiApproved: ["gemini", "local-openai"], localBaseUrl: "https://ai.hospital.example/v1", localModel: "ward-7b" });
   const d = route({ task: TASK.SUMMARISE, phi: true, config: cfg, env: envWithKey, context: { patientId: "p" } });
   assert.equal(d.ok, true);
   assert.equal(d.model.provider, "local-openai", "privacy ranks before latency, and that must not change");

@@ -182,17 +182,25 @@ async function as(email, path, method, body) {
   return j;
 }
 
-const DUE = "2026-09-07T09:00:00.000Z";
+/* CLIN-11: the eMAR charts a dose only at a time the order schedules. The fixture's orders are written at the admission
+ * (ADMITTED, 13:30 IST), so a TID order's first real slot on the default round is 14:00 IST, and that is DUE. */
+const ADMITTED = "2026-09-07T08:00:00.000Z";
+const DUE = "2026-09-07T08:30:00.000Z";
+/** Runs `fn` with the clock at the admission, so what it writes (an order) is effective then, as if written on the ward. */
+async function atAdmission(fn) {
+  mock.timers.enable({ apis: ["Date"], now: Date.parse(ADMITTED) });
+  try { return await fn(); } finally { mock.timers.reset(); }
+}
 const MRN = "SMD-WARD01-00001";
 
 /** Registers, admits, and writes the order. Returns everything the bedside needs. */
 async function admittedPatientOnDrug(drug = "Paracetamol 500mg") {
   const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Ward Testcase", mobile: "9876500011", gender: "female", ageYears: 54 });
   const adm = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg.mrn, ward: "Medical A", bed: "12", admittedAt: "2026-09-07T08:00:00.000Z" });
-  const ord = await as(DOCTOR, "/ward/medication-order", "POST", {
+  const ord = await atAdmission(() => as(DOCTOR, "/ward/medication-order", "POST", {
     orgId: ORG,
     order: { patientId: adm.patientId, encounterId: adm.encounterId, drug, dose: { value: 500, unit: "mg" }, route: "oral", frequency: "TID" },
-  });
+  }));
   // The ward weighs the patient. Paracetamol carries an mg/kg ceiling, and the safety engine
   // correctly refuses a weight-based drug for a patient with no recorded weight.
   await as(NURSE, "/ward/vitals", "POST", { orgId: ORG, encounterId: adm.encounterId, patientId: adm.patientId, vitals: { weight: "68" } });
@@ -566,7 +574,7 @@ test("HOLD, ROUTE LEVEL: a dose cannot be held with no reason, through the real 
 test("REFUSE/CANCEL, ROUTE LEVEL: a missing reason does not throw - refuse defaults to 'patient declined', cancel to no reason, and both are on the record as such", async () => {
   seedHospital();
   const { adm, ord: ord1 } = await admittedPatientOnDrug("Paracetamol 500mg");
-  const ord2 = await as(DOCTOR, "/ward/medication-order", "POST", { orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Ibuprofen 400mg", dose: { value: 400, unit: "mg" }, route: "oral", frequency: "TID" } });
+  const ord2 = await atAdmission(() => as(DOCTOR, "/ward/medication-order", "POST", { orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Ibuprofen 400mg", dose: { value: 400, unit: "mg" }, route: "oral", frequency: "TID" } }));
   const patient = { id: adm.patientId, mrn: adm.patientId.replace("opd-pat-", "").toUpperCase(), wristbandBarcode: adm.patientId.replace("opd-pat-", "").toUpperCase() };
 
   // refuse() is only a legal transition from dispensed/scanned/held (wardsynq-meds.js) - a patient
@@ -1071,7 +1079,7 @@ test("the discharge summary now carries the problem list instead of an empty ass
  * a round time and say out loud that the system was not asserting anything.
  */
 
-test("the round is computed from the frequency the doctor already wrote, and a given dose shows as given", async () => {
+test("the round is computed from the frequency the doctor already wrote, and a given dose shows as given", async (t) => {
   seedHospital();
   const { adm, ord, patient, scan } = await admittedPatientOnDrug();   // TID
 
@@ -1107,8 +1115,12 @@ test("the round is computed from the frequency the doctor already wrote, and a g
   // Give the first one through the real eMAR, then the schedule reports it as given.
   const dueAt = sched.due[0].dueAt;
   const step = (action, extra) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action, orderId: sched.due[0].orderId, dueAt, patient, ...(extra || {}) });
+  /* CLIN-11: the right-time check now runs against the slot's due time, so the dose is given AT its time (the
+   * clock is moved there) rather than up to a day early, which the bedside now refuses. */
+  t.mock.timers.enable({ apis: ["Date"], now: Date.parse(dueAt) + 5 * 60000 });
   await step("verify"); await step("dispense"); await step("scan", { scan });
   const given = await step("administer");
+  t.mock.timers.reset();
   assert.equal(given.__status, 200, JSON.stringify(given));
 
   const after = await round();
@@ -1153,14 +1165,14 @@ test("a PRN drug never appears on the round, and an unreadable frequency is repo
   });
   await order("Morphine", "PRN");
   await order("Enoxaparin", "alternate days after dialysis");
-  await order("Digoxin", "");
+  await order("Pantoprazole", ""); // CLIN-01: 5 mg digoxin is now read against its mcg ceiling and refused
 
   const s = await as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}&from=2026-09-09T18:30:00.000Z&to=2026-09-10T18:30:00.000Z`);
   assert.equal(s.__status, 200);
   assert.ok(!s.due.some((d) => d.drug === "Morphine"), "an as-needed drug is not due at a time");
   assert.deepEqual(s.prn.map((p) => p.drug), ["Morphine"], "but the ward can still see it and give one deliberately");
   assert.deepEqual(s.unscheduled.map((u) => [u.drug, u.reason]).sort(),
-    [["Digoxin", "no_frequency"], ["Enoxaparin", "frequency_not_understood"]],
+    [["Enoxaparin", "frequency_not_understood"], ["Pantoprazole", "no_frequency"]],
     "named, because a ward that cannot see the order has no way to know a dose is missing");
 });
 
@@ -3698,8 +3710,9 @@ test("A DRAFT SUMMARY IS NOT A DOCUMENT, and a signed one is CDA level 1", async
   assert.match(cda.document, /<ClinicalDocument xmlns="urn:hl7-org:v3">/);
   assert.match(cda.document, /code="18842-5"/, "it says it is a discharge summary");
   assert.match(cda.document, /WSQ Ward Hospital/, "and names the custodian");
-  // The author is who SIGNED it, not who exported it.
-  assert.match(cda.document, new RegExp('<id extension="' + idFor(DOCTOR) + '"/>'));
+  // The author is who SIGNED it, not who exported it. OPS-22/F22: an id needs a root too, or the
+  // signer is anonymous to any receiver.
+  assert.match(cda.document, new RegExp('<id root="[^"]+" extension="' + idFor(DOCTOR) + '"/>'));
   assert.match(cda.document, /Community-acquired pneumonia/, "the summary's own words travel");
 
   /* IT CLAIMS LEVEL 1 AND NO MORE. A templateId would assert conformance to a profile this has never
@@ -4656,12 +4669,15 @@ test("A HIGH-ALERT DRUG NEEDS A SECOND NURSE, and the LIST is the hospital's", a
   org.fields.wardsynq = { ...org.fields.wardsynq, highAlertDrugs: ["INSULIN"] };
 
   const { adm, patient, ord: plain, scan: plainScan } = await admittedPatientOnDrug();
-  const ord = await as(DOCTOR, "/ward/medication-order", "POST", {
+  const ord = await atAdmission(() => as(DOCTOR, "/ward/medication-order", "POST", {
     orgId: ORG,
     order: { patientId: adm.patientId, encounterId: adm.encounterId, drug: "Insulin glargine", dose: { value: 10, unit: "unit" }, route: "subcutaneous", frequency: "OD" },
-  });
+  }));
   assert.equal(ord.__status, 200, JSON.stringify(ord));
-  const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: DUE, patient, ...(x || {}) });
+  // CLIN-11: the insulin's own first OD slot, from the round, not the TID fixture's time.
+  const sched = await as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}&from=${ADMITTED}&to=${new Date(Date.parse(ADMITTED) + 86400000).toISOString()}`);
+  const insulinDue = sched.due.find((d) => d.orderId === ord.orderId).dueAt;
+  const step = (a, x) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action: a, orderId: ord.orderId, dueAt: insulinDue, patient, ...(x || {}) });
   await step("verify"); await step("dispense");
   const scanned = await step("scan", { scan: { patientBarcode: patient.mrn, drugBarcode: "Insulin glargine", dose: { value: 10, unit: "unit" }, route: "subcutaneous" } });
   assert.equal(scanned.to, "scanned", JSON.stringify(scanned));
@@ -4676,13 +4692,20 @@ test("A HIGH-ALERT DRUG NEEDS A SECOND NURSE, and the LIST is the hospital's", a
   assert.equal(self.__status, 409);
   assert.deepEqual(self.reasons.map((r) => r.code), ["WITNESS_NOT_INDEPENDENT"]);
 
-  const given = await step("administer", { witnessId: idFor(DOCTOR) });
+  // CLIN-18: the witness is checked as the controlled-drug witness is, an active member who dispenses, gives
+  // medicines or keeps the NDPS register; the pharmacist is one, the prescribing doctor alone is not. And the witness
+  // enters their own staff PIN: the identifier alone is refused.
+  const { genSalt, hashSecret } = await import("../functions/_opd_auth.js");
+  const pk = `q_members/${sanitize(ORG)}__${sanitize(idFor(PHARM))}`, salt = genSalt();
+  docs.set(pk, { ...docs.get(pk), fields: { ...docs.get(pk).fields, pinSalt: salt, pinHash: await hashSecret("4821", salt) } });
+  assert.deepEqual((await step("administer", { witnessId: idFor(PHARM) })).reasons.map((r) => r.code), ["WITNESS_PIN_REQUIRED"]);
+  const given = await step("administer", { witnessId: idFor(PHARM), witnessPin: "4821" });
   assert.equal(given.__status, 200, JSON.stringify(given));
   assert.equal(given.to, "administered");
   // Both names are on the record: who gave it and who watched.
   const rec = await RECORD.latest(TENANT_ROW.id, "MedicationAdministration", given.administrationId);
   assert.equal(rec.administeredBy, idFor(NURSE));
-  assert.equal(rec.witnessedBy, idFor(DOCTOR));
+  assert.equal(rec.witnessedBy, idFor(PHARM));
 
   /* AND A DRUG THE HOSPITAL DID NOT LIST NEEDS NO WITNESS. The list is the whole rule - nothing in
    * the code decides that insulin is high-alert, which is why a hospital can add to it. */
@@ -6330,7 +6353,8 @@ test("HL7 v2: OFF by default; ON, an ADT A01 lands a patient and a visit through
   assert.equal(r.headers.get("x-wardsynq-ack"), "AA");
   const [code, ctl, text] = msa(ack);
   assert.equal(code, "AA"); assert.equal(ctl, "MSG-A01"); assert.match(text, /2 records filed/);
-  assert.match(ack, /^MSH\|\^~\\&\|WardSynQ\|WSQ Ward Hospital\|HIS\|GENHOSP\|\d{14}\|\|ACK\^A01\^ACK\|/, "the ACK is addressed back to the sender");
+  // OPS-03/F3: the timestamp now always carries an explicit offset (+0000: it is UTC), never bare.
+  assert.match(ack, /^MSH\|\^~\\&\|WardSynQ\|WSQ Ward Hospital\|HIS\|GENHOSP\|\d{14}\+0000\|\|ACK\^A01\^ACK\|/, "the ACK is addressed back to the sender");
   const pat = await RECORD.latest(TENANT_ROW.id, "Patient", "hl7v2-his-genhosp-pat-h-77");
   assert.ok(pat, "the patient is on the record under the HL7 feed's own name");
   assert.equal(pat.mrn, "H-77"); assert.equal(pat.meta.source.system, "hl7v2-his-genhosp"); assert.equal(pat.writtenBy.id, "adapter:hl7v2-his-genhosp"); assert.equal(pat.writtenBy.onBehalfOf, idFor(DOCTOR));
@@ -6354,7 +6378,8 @@ test("HL7 v2: OFF by default; ON, an ADT A01 lands a patient and a visit through
   const a03 = await pushHl7(DOCTOR, adt({ event: "A03", controlId: "MSG-A03" }));
   assert.equal(msa(await a03.text())[0], "AA");
   const done = await RECORD.latest(TENANT_ROW.id, "Encounter", "hl7v2-his-genhosp-enc-v-2026-001");
-  assert.equal(done.version, 3); assert.equal(done.status, "finished"); assert.equal(done.periodEnd, "2026-08-10T09:00:00Z");
+  // OPS-03/F3: PV1-45 is bare (no offset) - per HL7 v2.5.1 that is the sender's local time, Asia/Kolkata by default.
+  assert.equal(done.version, 3); assert.equal(done.status, "finished"); assert.equal(done.periodEnd, "2026-08-10T09:00:00+05:30");
   // Exported, the visit is a conformant FHIR Encounter like any other.
   const f = await (await asRaw(DOCTOR, `/ward/fhir/Encounter/hl7v2-his-genhosp-enc-v-2026-001?orgId=${ORG}`)).json();
   assert.equal(f.status, "finished"); assert.equal(f.meta.source, "urn:stewardmd:source:hl7v2-his-genhosp");
@@ -7296,7 +7321,8 @@ test("LT-14 / LT-20: a chart order a pharmacist verified is on the nurse's round
   const from = new Date().toISOString(), to = new Date(Date.now() + 86400000).toISOString();
   const s = await as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}&from=${from}&to=${to}`);
   assert.equal(s.__status, 200, JSON.stringify(s));
-  assert.equal(s.due.filter((d) => d.orderId === ord.orderId).length, 3, "TID: three doses in any 24 hours from now");
+  // CLIN-17: the fixture's order dates from the admission, so the doses it missed since are on the round too, marked.
+  assert.equal(s.due.filter((d) => d.orderId === ord.orderId && !d.beforeWindow).length, 3, "TID: three doses in any 24 hours from now");
 });
 
 test("LT-20: POST /api/queue/ward/verify-order refuses the prescriber verifying their own order (403, audited, nothing written); the pharmacist may; 401 and a nurse refused", async () => {

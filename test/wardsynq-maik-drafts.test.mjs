@@ -91,7 +91,7 @@ const DOCTOR = "doctor@example.test", NURSE = "nurse@example.test";
 /* THE HOSPITAL'S AI CONFIGURATION. `phiApproved` is the whole control: a hospital that has named no
  * provider cannot send patient data anywhere, and that is the shipped default. Here it approves the
  * provider that talks to a model on its OWN hardware. */
-const AI_ON = { enabled: true, phiApproved: ["local-openai"], localBaseUrl: "https://hospital.internal/v1", localModel: "ward-model-7b" };
+const AI_ON = { enabled: true, phiApproved: ["local-openai"], localBaseUrl: "https://ai.hospital.example/v1", localModel: "ward-model-7b" };
 
 /* THE SOCKET, and nothing above it. The REAL local-model adapter runs - it builds the real
  * OpenAI-compatible request and parses the real response shape - and this answers as a model server
@@ -188,7 +188,7 @@ test("the three drafting tasks are the gateway's DRAFT_NOTE task, so routing and
 
 test("each drafting task refuses with the configuration sentence when no provider is approved for patient data, and sends nothing", async () => {
   const s = spy();
-  seed({ enabled: true, phiApproved: [], localBaseUrl: "https://hospital.internal/v1", localModel: "m" }, s);
+  seed({ enabled: true, phiApproved: [], localBaseUrl: "https://ai.hospital.example/v1", localModel: "m" }, s);
   await subjects();
   for (const [task, extra] of TASKS) {
     const r = await ask(DOCTOR, { patientId: "pat-1", task, ...extra });
@@ -203,7 +203,7 @@ test("each drafting task refuses with the configuration sentence when no provide
 
 test("hard Local policy: a draft routed to the hospital's own model never reaches a cloud provider, even when that model is down and Vertex is approved", async () => {
   const s = spy({ down: true });
-  seed({ enabled: true, phiApproved: ["local-openai", "vertex"], localBaseUrl: "https://hospital.internal/v1", localModel: "ward-model-7b" }, s);
+  seed({ enabled: true, phiApproved: ["local-openai", "vertex"], localBaseUrl: "https://ai.hospital.example/v1", localModel: "ward-model-7b" }, s);
   Object.assign(ENV, { GCP_PROJECT: "p", GCP_SA_EMAIL: "sa@p.iam.gserviceaccount.com", GCP_SA_PRIVATE_KEY: "not-a-real-key", GEMINI_API_KEY: "not-a-real-key-either" });
   await subjects();
   for (const [task, extra] of TASKS) {
@@ -212,7 +212,7 @@ test("hard Local policy: a draft routed to the hospital's own model never reache
     assert.equal(r.error, "model_unavailable");
   }
   assert.equal(s.urls.length, TASKS.length, "one attempt per draft, to the hospital's own server");
-  for (const u of s.urls) assert.ok(u.startsWith("https://hospital.internal/"), "never a cloud host: " + u);
+  for (const u of s.urls) assert.ok(u.startsWith("https://ai.hospital.example/"), "never a cloud host: " + u);
   assert.ok(!s.urls.some((u) => /googleapis|generativelanguage|aiplatform/.test(u)));
 });
 

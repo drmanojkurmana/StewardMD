@@ -64,6 +64,10 @@
       var photometric = (ds.string("x00280004") || "MONOCHROME2").trim();
       var frames = parseInt(ds.string("x00280008"), 10) || 1;
       if (!rows || !cols || (spp !== 1 && spp !== 3) || frame >= frames) throw fail("unsupported_image");
+      // OPS-24/F24: PALETTE COLOR (spp=1, each sample an index into a colour lookup table this
+      // viewer does not read) is REFUSED, never drawn as if it were a MONOCHROME intensity - the
+      // one thing this file's own header rule ("never drawn wrongly") exists to prevent.
+      if (photometric === "PALETTE COLOR") throw fail("unsupported_image");
       var slope = fnum(ds, "x00281053"), intercept = fnum(ds, "x00281052");
       slope = slope == null || slope === 0 ? 1 : slope; intercept = intercept || 0;
       var sp = ds.string("x00280030"), spacing = null;
@@ -92,6 +96,19 @@
           if (spp === 1) px[i] = v * slope + intercept;
           else if (planar) { var p = Math.floor(i / n), k = i % n; px[k * 3 + p] = v; }
           else px[i] = v;
+        }
+        // OPS-24/F24: YBR_FULL/YBR_FULL_422 samples are Y/Cb/Cr, not R/G/B - drawn as RGB unchanged
+        // (as `render()` does for every spp===3 image), an ultrasound or nuclear-medicine frame
+        // rendered in the wrong colours. Converted in place, once, right after the raw samples are
+        // read - everything downstream (window/level, render()) then sees true RGB, same as an
+        // uncompressed RGB image always did. BT.601, per PS3.3 C.7.6.3.1.2.
+        if (spp === 3 && /^YBR/.test(photometric)) {
+          for (var yi = 0; yi < n; yi++) {
+            var Y = px[yi * 3], Cb = px[yi * 3 + 1] - 128, Cr = px[yi * 3 + 2] - 128;
+            px[yi * 3] = Y + 1.402 * Cr;
+            px[yi * 3 + 1] = Y - 0.344136 * Cb - 0.714136 * Cr;
+            px[yi * 3 + 2] = Y + 1.772 * Cb;
+          }
         }
         done = Promise.resolve();
       }

@@ -23,8 +23,8 @@ import { verifyPurchase, daysFromExpiry, iapConfigured } from "../../_iap.js";
 import { lookupUidByEmail, lookupUserByUid, getUserClaims } from "../../_fbadmin.js";
 import { emailProConfirmation } from "../../_email.js";
 import { createCoupon, redeemCoupon, revokeCoupon, listCoupons } from "../../_coupons.js";
-import { identify as usageIdentify, usageKeyFor, usageKv } from "../../_usage.js";
-import { getCredits, dailyCostCap, adminSetCredits, addCredits, setUserCostCap, costCapOn, foundingDailyCap, grantFoundingPool, addTokens, inrToMt, MT_PER_INR, tokenPackFor } from "../../_credits.js";
+import { identify as usageIdentify, usageKeyFor, usageKv, meterEmail } from "../../_usage.js";
+import { getCredits, dailyCostCap, adminSetCredits, addCredits, setUserCostCap, costCapOn, foundingDailyCap, grantFoundingPool, addTokens, inrToMt, MT_PER_INR, tokenPackFor, tokenPacks } from "../../_credits.js";
 import { getEntitlement, writeEntitlement, clinicLimit, deviceLimit, recordTierPurchase, effectiveTierFor, oncoAddonActive } from "../../_entitlements.js";
 import { oncoTrialState } from "../../_features.js";
 import { deviceLockOn } from "../../_devices.js";
@@ -75,37 +75,10 @@ export function plans(env) {
     // App Store group so they stack on whatever base plan the doctor already holds. Units + product
     // ids live in functions/_quota.js, which is also what meters them.
     msgTiers: msgTiers(env),
-    tokens: tokenPacks(env, P),
+    tokens: tokenPacks(env),   // MaiK Token packs: defined once in _credits.js (the wallet quotes them too)
     // Per-patient / per-consult top-up packs (functions/_quota.js owns the units + product ids).
     packs: quotaPacks(env),
     founding: { amount: P("FOUNDING_PRICE_YEAR", 39900), months: 12, seats: P("FOUNDING_SEATS", 500), label: "Founding Doctor (year)" },
-  };
-}
-
-/* MaiK Token packs. Until PACKS_V2_FROM (default 2026-12-26, 3 months after the owner's 2026-09-26
- * call) the Introductory sizes stay. From then each pack holds fewer tokens at the same price, because
- * the old sizes sold 2,000 MT for Rs 1 while 2,000 MT is also Rs 1 of our cost: the Power pack lost money
- * after the App Store fee (audit finding 13; vault/Role-Tiers.md section 10). The fulfilment path reads
- * the same table, so what is shown is what is credited. Struck anchors only where genuinely higher. */
-export const PACKS_V2_FROM_DEFAULT = Date.parse("2026-12-26T00:00:00+05:30");
-export function packsV2Active(env, now) {
-  const raw = env && env.PACKS_V2_FROM;
-  const at = raw == null || raw === "" ? PACKS_V2_FROM_DEFAULT : (/^\d+$/.test(String(raw)) ? +raw : Date.parse(String(raw)));
-  return (now || Date.now()) >= (Number.isFinite(at) ? at : PACKS_V2_FROM_DEFAULT);
-}
-export function tokenPacks(env, P, now) {
-  P = P || ((k, d) => cfgPrice(env, k, d));
-  if (!packsV2Active(env, now)) {
-    return {
-      boost: { mt: 50000, amount: P("TOKENS_BOOST", 4900), label: "Boost" },
-      plus: { mt: 250000, amount: P("TOKENS_PLUS", 19900), regular: P("TOKENS_PLUS_REGULAR", 24500), label: "Plus", popular: true },
-      power: { mt: 750000, amount: P("TOKENS_POWER", 49900), regular: P("TOKENS_POWER_REGULAR", 73500), label: "Power" },
-    };
-  }
-  return {
-    boost: { mt: 10000, amount: P("TOKENS_BOOST", 4900), label: "Boost" },
-    plus: { mt: 40000, amount: P("TOKENS_PLUS", 19900), label: "Plus", popular: true },
-    power: { mt: 100000, amount: P("TOKENS_POWER", 49900), label: "Power" },
   };
 }
 
@@ -308,11 +281,11 @@ export async function onRequest(context) {
       let credits = 0, costCap = 0, role = null;
       try {
         const who = await usageIdentify(request, env);
-        if (who && who.email) { const kv = usageKv(env); credits = await getCredits(kv, usageKeyFor(who)); }
+        if (meterEmail(who)) { const kv = usageKv(env); credits = await getCredits(kv, usageKeyFor(who)); }
       } catch (e) {}
       let ent = null;
       try { ent = uid ? await getEntitlement(env, uid) : null; role = ent && ent.role; } catch (e) {}
-      try { const who = await usageIdentify(request, env); if (who && who.email) costCap = await dailyCostCap(env, usageKv(env), who.email, role); } catch (e) {}
+      try { const who = await usageIdentify(request, env); if (meterEmail(who)) costCap = await dailyCostCap(env, usageKv(env), meterEmail(who), role); } catch (e) {}
       // Per-patient quota meters (flagged). Additive: absent entirely when QUOTA_METERS_ON !== "1".
       let quota = null;
       if (quotaOn(env) && uid) {
@@ -559,7 +532,7 @@ export async function onRequest(context) {
         if (r.ok && r.founding && !r.already) {
           try {
             const who = await usageIdentify(request, env);
-            if (who && who.email) { const kv = usageKv(env); await setUserCostCap(kv, who.email, foundingDailyCap(env)); await grantFoundingPool(env, kv, usageKeyFor(who)); }
+            if (meterEmail(who)) { const kv = usageKv(env); await setUserCostCap(kv, meterEmail(who), foundingDailyCap(env)); await grantFoundingPool(env, kv, usageKeyFor(who)); }
           } catch (e) {}
         }
         return json(r, r.ok ? 200 : (r.reason === "signin-required" ? 401 : 404));

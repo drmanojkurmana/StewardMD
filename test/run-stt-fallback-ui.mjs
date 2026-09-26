@@ -20,7 +20,7 @@ let serveProc = null;
 async function ensureServer() { try { await fetch(BASE); return; } catch {} const port = (BASE.match(/:(\d+)/) || [, "8902"])[1]; serveProc = spawn("node", [join(HERE, "serve.mjs"), join(HERE, ".."), port], { stdio: "ignore" }); for (let i = 0; i < 30; i++) { try { await fetch(BASE); return; } catch { await sleep(200); } } }
 await ensureServer();
 const chrome = spawn(CHROME, [...(process.env.CHROME_FLAGS || "").split(" ").filter(Boolean), "--headless=new", `--remote-debugging-port=${PORT}`, `--user-data-dir=${userDir}`, "--no-first-run", "--disable-gpu", "--mute-audio"], { stdio: "ignore" });
-let msgId = 1; const pending = new Map(); let ws, sessionId;
+let msgId = 1; const pending = new Map(); let ws, sessionId, fetchHandler = null;
 const call = (m, p) => { const i = msgId++; return new Promise(r => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return JSON.stringify({__err:String(x&&x.message||x)})}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : null; };
 const J = async (e) => { const v = await ev(e); try { return JSON.parse(v); } catch { return v; } };
@@ -44,7 +44,7 @@ const STUB = `
 try {
   let ver, t = 0; while (t++ < 60) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
   ws = new WebSocket(ver.webSocketDebuggerUrl); await new Promise((res, rej) => { ws.onopen = res; ws.onerror = rej; });
-  ws.onmessage = (e) => { const m = JSON.parse(e.data); if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); } };
+  ws.onmessage = (e) => { const m = JSON.parse(e.data); if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); } else if (m.method === "Fetch.requestPaused" && fetchHandler) fetchHandler(m); };
   const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Page.navigate", { url: BASE });
@@ -56,11 +56,35 @@ try {
   await ev(STUB);
 
   // 1) SMD_AI.transcribe: exhausted wallet -> its own code, durationMs sent.
-  await ev(`window.__sttReply = { status: 402, body: { error: "stt-fallback-exhausted", allowanceInr: 10 } }; window.__x = null; SMD_AI.transcribe("data:audio/webm;base64,AAAA", { durationMs: 4321 }).then(function (r) { window.__x = JSON.stringify(r); }); return 1;`);
+  const DICT_402 = `{ status: 402, body: { error: "quota-exhausted", feature: "dict", remaining: 40, needed: 60, packs: [{ key: "dict.300", feature: "dict", units: 300, amount: 19900, perUnit: 0, label: "300 dictation credits", product: "in.stewardmd.dict.300" }, { key: "dict.1000", feature: "dict", units: 1000, amount: 69900, perUnit: 0, label: "1,000 dictation credits", product: "in.stewardmd.dict.1000", popular: true }], copy: { headline: "Dictation credits", lines: ["Clinical dictation on your phone is always free and unlimited."], price: "Monthly credits come with your plan. Top up any time.", expiry: "Bought credits never expire." } } }`;
+  await ev(`window.__sttReply = ${DICT_402}; window.__x = null; SMD_AI.transcribe("data:audio/webm;base64,AAAA", { durationMs: 4321 }).then(function (r) { window.__x = JSON.stringify(r); }); return 1;`);
   const r1 = JSON.parse(await waitFor(`return window.__x`) || "null");
   ok(r1 && r1.error === "stt-fallback-exhausted", "exhausted wallet maps to stt-fallback-exhausted: " + JSON.stringify(r1));
   const sent1 = await J(`return JSON.stringify(window.__sttSent)`);
   ok(sent1 && sent1.durationMs === 4321, "durationMs is sent to the server: " + (sent1 && sent1.durationMs));
+
+  // 1b) the same 402 opens the top-up sheet through the REAL pro-paywall.js fetch interceptor. The page
+  // stub sits above that wrapper, so restore the real fetch and answer /transcribe at the network layer.
+  await ev(`window.fetch = window.__realFetch; return 1;`);
+  await call("Fetch.enable", { patterns: [{ urlPattern: "*/transcribe*" }] });
+  const dictBody = JSON.parse(DICT_402.replace(/^\{ status: 402, body: /, "").replace(/ \}$/, "").replace(/([{,]\s*)([a-zA-Z_]+):/g, '$1"$2":'));
+  fetchHandler = async (m) => { await call("Fetch.fulfillRequest", { requestId: m.params.requestId, responseCode: 402, responseHeaders: [{ name: "Content-Type", value: "application/json" }], body: Buffer.from(JSON.stringify(dictBody)).toString("base64") }); };
+  await ev(`window.__x = null; SMD_AI.transcribe("data:audio/webm;base64,AAAA", { durationMs: 1000 }).then(function (r) { window.__x = JSON.stringify(r); }); return 1;`);
+  const r1b = JSON.parse(await waitFor(`return window.__x`) || "null");
+  ok(r1b && r1b.error === "stt-fallback-exhausted", "through the real interceptor, still stt-fallback-exhausted");
+  await sleep(700);
+  fetchHandler = null; await call("Fetch.disable", {});
+  await ev(STUB);
+  const sheet = await J(`var t=document.body.innerText; var m=t.indexOf("Dictation credits"); return JSON.stringify({ found: m >= 0, text: m >= 0 ? t.slice(m, m + 600) : "" });`);
+  ok(sheet && sheet.found, "the top-up sheet opens titled 'Dictation credits'");
+  ok(sheet && /300/.test(sheet.text) && /1,?000/.test(sheet.text), "it offers the 300 and 1,000 credit packs");
+  ok(sheet && !/\u20b9\s?\d+(\.\d+)?\s*each/.test(sheet.text), "no rupees-per-credit line");
+  await ev(`document.querySelectorAll("[data-pp=close],.pp-close").forEach(function(b){b.click()}); return 1;`);
+
+  // 1c) no account: sign-in message, not a shop
+  await ev(`window.__sttReply = { status: 402, body: { error: "stt-fallback-signin", message: "Sign in" } }; window.__x = null; SMD_AI.transcribe("data:audio/webm;base64,AAAA").then(function (r) { window.__x = JSON.stringify(r); }); return 1;`);
+  const r1c = JSON.parse(await waitFor(`return window.__x`) || "null");
+  ok(r1c && r1c.error === "stt-fallback-signin", "no account maps to stt-fallback-signin: " + JSON.stringify(r1c));
 
   // 2) A plain 402 still means Pro upsell.
   await ev(`window.__sttReply = { status: 402, body: { error: "quota", needsPro: true } }; window.__x = null; SMD_AI.transcribe("data:audio/webm;base64,AAAA").then(function (r) { window.__x = JSON.stringify(r); }); return 1;`);
@@ -80,7 +104,7 @@ try {
     window.MediaRecorder = function () { var self = this; this.state = "inactive"; this.mimeType = "audio/webm";
       this.start = function () { self.state = "recording"; };
       this.stop = function () { self.state = "inactive"; self.ondataavailable({ data: new Blob([new Uint8Array(64)], { type: "audio/webm" }) }); self.onstop(); }; };
-    window.__sttReply = { status: 402, body: { error: "stt-fallback-exhausted" } };
+    window.__sttReply = ${DICT_402};
     window.__err = null;
     window.__h = SMD_VOICE.listen({ onError: function (c) { window.__err = c; }, onFinal: function () {}, onState: function () {} });
     return window.__h ? window.__h.mode : "none";`);

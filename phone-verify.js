@@ -119,6 +119,8 @@
       "#" + ROOT_ID + " .phv-alt{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:44px;background:none;border:0;color:var(--pv-teal);font:600 14px var(--pv-font);padding:10px 0 0;cursor:pointer}",
       "#" + ROOT_ID + " .phv-alt[disabled]{color:var(--pv-mut);cursor:default}",
       "#" + ROOT_ID + " .phv-alt svg{width:18px;height:18px}",
+      "#" + ROOT_ID + " .phv-left{text-align:center;font:500 12px/1.4 var(--pv-font);color:var(--pv-mut);padding-top:6px}",
+      "#" + ROOT_ID + " .phv-left:empty{display:none}",
       "#" + ROOT_ID + " .phv-alt .phv-cd{--p:0;width:18px;height:18px;border-radius:50%;background:conic-gradient(var(--pv-teal) calc(var(--p)*1%),var(--pv-line) 0);-webkit-mask:radial-gradient(circle 6px,transparent 5.2px,#000 5.6px);mask:radial-gradient(circle 6px,transparent 5.2px,#000 5.6px)}",
       "@media (prefers-reduced-motion:reduce){#" + ROOT_ID + " .phv-card,#" + ROOT_ID + " .phv-slot .phv-ring rect,#" + ROOT_ID + " .phv-slot.filled .phv-d,#" + ROOT_ID + " .phv-slots.bad,#" + ROOT_ID + " .phv-msg .phv-dot,#" + ROOT_ID + " .phv-slot.on .phv-caret{animation:none}#" + ROOT_ID + " .phv-card{transform:none;opacity:1}}"
     ].join("\n");
@@ -209,6 +211,8 @@
     "bad-phone": "Enter a valid mobile number with the country code.",
     "too-soon": "A code was just sent. Wait a moment before asking again.",
     "daily-cap": "Too many codes for this number today. Try again tomorrow.",
+    "send-cap": "You have used all 3 codes for today (2 on WhatsApp, 1 by SMS). Try again tomorrow.",
+    "sms-used": "The SMS code for today is used. Resend on WhatsApp instead.",
     "no-channel": "We cannot send codes right now. Please try again later.",
     "phone-in-use": "This number is already verified on another StewardMD account. Use a different number, or sign in to that account.",
     "send-failed": "The code could not be delivered. Try SMS instead.",
@@ -247,6 +251,30 @@
   }
   function setMsg(kind, html) { var m = document.getElementById("phvMsg"); if (!m) return; m.className = "phv-msg" + (kind === "done" ? " done" : ""); m.innerHTML = '<span class="phv-dot"></span><span>' + html + '</span>'; }
 
+  /* ── send budget: 2 WhatsApp + 1 SMS per account per day (server: _phone_otp.js WA_MAX/SMS_MAX).
+   * state.left is the server's last answer; null until the first send, when everything is shown. */
+  function smsLeft() { return !state.left || state.left.sms > 0; }
+  function waLeft() { return !state.left || state.left.whatsapp > 0; }
+  // Resend goes by the channel that carried the code while it has budget, else the other one.
+  function resendChannel() {
+    if (state.channel === "sms") return smsLeft() ? "sms" : (waLeft() ? "auto" : "");
+    return waLeft() ? "auto" : (smsLeft() ? "sms" : "");
+  }
+  function resendLabel() {
+    var c = resendChannel();
+    if (c === "sms" && state.channel !== "sms") return "Resend by SMS";
+    if (c === "auto" && state.channel === "sms") return "Resend on WhatsApp";
+    return "Resend code";
+  }
+  function leftText() {
+    var l = state.left; if (!l) return "";
+    if (!l.whatsapp && !l.sms) return "No more codes today. Use the one already sent.";
+    var parts = [];
+    if (l.whatsapp) parts.push(l.whatsapp + " on WhatsApp");
+    if (l.sms) parts.push(l.sms + " by SMS");
+    return "Codes left today: " + parts.join(", ") + ".";
+  }
+
   /* ── render ───────────────────────────────────────────────────────────────────────────────── */
   function render() {
     var el = root(); el.classList.add("on"); bindViewport();
@@ -264,13 +292,13 @@
         '<div class="phv-foot">' +
           '<div class="phv-acts"><button type="button" class="phv-btn phv-go" id="phvSend">' + ICO.chat + '<span>Send code on WhatsApp</span></button></div>' +
           '<div class="phv-subacts">' +
-            '<button type="button" class="phv-alt" id="phvSms">' + ICO.sms + '<span>Use SMS instead</span></button>' +
+            (smsLeft() ? '<button type="button" class="phv-alt" id="phvSms">' + ICO.sms + '<span>Use SMS instead</span></button>' : "") +
             '<button type="button" class="phv-alt phv-later" id="phvLater"><span>Later</span></button>' +
           '</div>' +
         '</div></div>';
       el.querySelector("#phvLater").addEventListener("click", snooze);
       el.querySelector("#phvSend").addEventListener("click", function () { send("auto"); });
-      el.querySelector("#phvSms").addEventListener("click", function () { send("sms"); });
+      var s1 = el.querySelector("#phvSms"); if (s1) s1.addEventListener("click", function () { send("sms"); });
       el.querySelector("#phvPhone").addEventListener("input", function (e) { state.phone = e.target.value; });
       return;
     }
@@ -290,14 +318,15 @@
       '<div class="phv-foot">' +
         '<div class="phv-acts"><button type="button" class="phv-btn phv-go" id="phvVerify">' + ICO.check + '<span>Verify</span></button></div>' +
         '<div class="phv-subacts">' +
-          '<button type="button" class="phv-alt" id="phvResend" disabled><span class="phv-cd"></span><span>Resend code</span></button>' +
+          (resendChannel() ? '<button type="button" class="phv-alt" id="phvResend" disabled><span class="phv-cd"></span><span>' + resendLabel() + '</span></button>' : "") +
           '<button type="button" class="phv-alt phv-later" id="phvBack">' + ICO.back + '<span>Number</span></button>' +
         '</div>' +
-        (state.channel !== "sms" ? '<button type="button" class="phv-alt" id="phvSms2">' + ICO.sms + '<span>Send by SMS instead</span></button>' : "") +
+        (state.channel !== "sms" && smsLeft() && resendChannel() !== "sms" ? '<button type="button" class="phv-alt" id="phvSms2" disabled>' + ICO.sms + '<span>Send by SMS instead</span></button>' : "") +
+        '<div class="phv-left" id="phvLeft">' + leftText() + '</div>' +
       '</div></div>';
     el.querySelector("#phvBack").addEventListener("click", function () { abortWebOtp(); state.step = "phone"; render(); });
     el.querySelector("#phvVerify").addEventListener("click", verify);
-    el.querySelector("#phvResend").addEventListener("click", function () { send(state.channel === "sms" ? "sms" : "auto"); });
+    var rs = el.querySelector("#phvResend"); if (rs) rs.addEventListener("click", function () { send(resendChannel()); });
     var s2 = el.querySelector("#phvSms2"); if (s2) s2.addEventListener("click", function () { send("sms"); });
     var code = el.querySelector("#phvCode");
     code.addEventListener("input", function () {
@@ -335,12 +364,19 @@
   function countdown() {
     clearInterval(tick);
     var el = document.getElementById(ROOT_ID);
+    // The server throttles every send for 30 s, so the SMS button waits with Resend instead of
+    // answering "too-soon" when tapped straight after the WhatsApp code.
     function paint() {
-      var b = el && el.querySelector("#phvResend"); if (!b) { clearInterval(tick); return; }
+      var b = el && el.querySelector("#phvResend"), s2 = el && el.querySelector("#phvSms2");
+      if (!b && !s2) { clearInterval(tick); return; }
       var left = RESEND_S - Math.floor((Date.now() - state.sentAt) / 1000);
-      var cd = b.querySelector(".phv-cd"), lab = b.querySelector("span:last-child");
-      if (left > 0) { b.disabled = true; if (lab) lab.textContent = "Resend code in " + left + "s"; if (cd) cd.style.setProperty("--p", String(Math.round((RESEND_S - left) / RESEND_S * 100))); }
-      else { b.disabled = false; if (lab) lab.textContent = "Resend code"; if (cd) cd.style.setProperty("--p", "100"); clearInterval(tick); }
+      if (s2) { s2.disabled = left > 0 || state.busy; var sl = s2.querySelector("span:last-child"); if (sl) sl.textContent = "Send by SMS instead"; }
+      if (b) {
+        var cd = b.querySelector(".phv-cd"), lab = b.querySelector("span:last-child");
+        if (left > 0) { b.disabled = true; if (lab) lab.textContent = resendLabel() + " in " + left + "s"; if (cd) cd.style.setProperty("--p", String(Math.round((RESEND_S - left) / RESEND_S * 100))); }
+        else { b.disabled = state.busy; if (lab) lab.textContent = resendLabel(); if (cd) cd.style.setProperty("--p", "100"); }
+      }
+      if (left <= 0) clearInterval(tick);
     }
     paint(); tick = setInterval(paint, 1000);
   }
@@ -363,14 +399,28 @@
     var digits = String(state.phone || "").replace(/\D/g, "");
     if (digits.length < 10) { showErr(ERR["bad-phone"]); return; }
     showErr("");
-    busy(true, channel === "sms" ? "phvSms" : "phvSend", channel === "sms" ? "Sending SMS..." : "Sending...");
+    var bid = state.step === "phone" ? (channel === "sms" ? "phvSms" : "phvSend") : (channel === "sms" && document.getElementById("phvSms2") ? "phvSms2" : "phvResend");
+    busy(true, bid, channel === "sms" ? "Sending SMS..." : "Sending...");
     api("phone-start", { phone: state.phone, channel: channel }).then(function (r) {
       busy(false);
       if (r && r.error === "off") { close(); return; }
-      if (!r || !r.ok) { if (state.step === "phone") render(); showErr(errText(r)); return; }
+      if (r && r.left) state.left = r.left;
+      if (!r || !r.ok) {
+        if (r && r.error === "too-soon" && typeof r.retryAfter === "number") state.sentAt = Date.now() - (RESEND_S - r.retryAfter) * 1000;
+        failed(errText(r)); return;
+      }
       state.step = "code"; state.channel = r.channel || "whatsapp"; state.to = r.to || ""; state.fellBack = !!r.fellBack; state.sentAt = Date.now();
       render();
-    }).catch(function () { busy(false); render(); showErr("You are offline. Try again once you are connected."); });
+    }).catch(function () { busy(false); failed("You are offline. Try again once you are connected."); });
+  }
+  // A failed send re-renders the phone step, but on the code step keeps what was typed (the earlier
+  // code is still valid) and only repaints the footer with the new budget.
+  function failed(msg) {
+    if (state.step === "phone") { render(); showErr(msg); return; }
+    var inp = document.getElementById("phvCode"), typed = inp ? inp.value : "";
+    render();
+    inp = document.getElementById("phvCode"); if (inp && typed) { inp.value = typed; paintSlots(typed); }
+    showErr(msg);
   }
 
   function verify() {
@@ -386,7 +436,7 @@
         showErr(errText(r));
         if (sl) { sl.classList.remove("bad"); void sl.offsetWidth; sl.classList.add("bad"); }
         if (inp) { inp.value = ""; paintSlots(""); try { inp.focus(); } catch (e) {} }
-        if (r && (r.error === "expired" || r.error === "locked")) { var b = document.getElementById("phvResend"); if (b) { b.disabled = false; var lab = b.querySelector("span:last-child"); if (lab) lab.textContent = "Resend code"; } }
+        if (r && (r.error === "expired" || r.error === "locked")) { var b = document.getElementById("phvResend"); if (b) { b.disabled = false; var lab = b.querySelector("span:last-child"); if (lab) lab.textContent = resendLabel(); } }
         return;
       }
       abortWebOtp();
@@ -429,7 +479,7 @@
       setTimeout(function () { fitViewport(undefined); }, 120); setTimeout(function () { fitViewport(undefined); }, 420);
     }, true);
   } catch (e) {}
-  function open(phone) { state = { phone: phone || state.phone || "", step: "phone", channel: "", to: "", sentAt: 0, busy: false }; render(); }
+  function open(phone) { state = { phone: phone || state.phone || "", step: "phone", channel: "", to: "", sentAt: 0, busy: false, left: state.left || null }; render(); }
 
   var _asked = false;
   function check() {

@@ -83,6 +83,7 @@ function serverPushChannel(deps) {
     // The named level-2 ward rule, the ward it tested, people per role, and the total resolved (owner 2026-09-15); for a patient with
     // no ward, ward null and noWardCover: the admitting doctor (or why skipped) and the residents on duty, by department or hospital.
     if (who.wardRule) notice.wardRule = { ...who.wardRule, recipients: who.recipients.length };
+    if (who.rotaPartial) notice.rotaPartial = true; // CLIN-15: recorded on the loop, never silent
     let result;
     if (!who.recipients.length) {
       notice.reason = "NO_RECIPIENT";

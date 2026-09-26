@@ -68,7 +68,14 @@ bucket_name = "stewardmd-offline"
 # DPDP §8(7) storage limitation: auto-erase a FollowCare episode 7 days after it is
 # recovered/closed (active follow-ups are never touched; see functions/_followcare_dispatch.js).
 [vars]
-MAIK_LIVE_STREAM = "1"
+# OPS-26/F26: OFF by default. functions/api/ai/[[path]].js documents in detail why this must default
+# off (a 2026-08-20 commit silently flipped this fallback to "1", re-enabling an SSE-hang regression;
+# restored to OFF), and docs/MAIK_ARCHITECTURE_AUDIT.md states streaming is effectively off. Cloudflare
+# Pages named environments (production included) do not inherit this bare [vars] block, so production
+# was already unaffected either way - but a preview/branch deploy or `wrangler pages dev` locally with
+# real AI creds in .dev.vars DOES pick this up, which silently re-enabled the exact regression the code
+# says was reverted, in exactly the environment someone would exercise it.
+MAIK_LIVE_STREAM = "0"
 AI_PROVIDER = "vertex"        # Vertex main (VERTEX_API_KEY), Gemini key = fallback (owner, 2026-09-24)
 FOLLOWCARE_RETENTION_DAYS = "7"
 # Admin/owner allowlist (comma-separated Google account emails). The authoritative server gate

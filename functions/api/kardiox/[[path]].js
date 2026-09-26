@@ -15,7 +15,7 @@
  *
  * No PII in logs — correlate by sessionId only.
  */
-import { identify, usageKv, usageKeyFor } from "../../_usage.js";
+import { identify, usageKv, usageKeyFor, meterEmail } from "../../_usage.js";
 import { gateAndCount } from "../../_ai_usage.js"; // AI Control Center per-module daily cap (module "ecg")
 import { checkActive } from "../../_experimental.js";
 import { planEarlyAccess } from "../../_features.js";
@@ -97,7 +97,7 @@ async function handleAnalyze(request, env) {
     const store = usageKv(env);
     if (store) {
       const who = await identify(request, env);
-      const mq = await gateAndCount(env, store, "ecg", usageKeyFor(who), who.guest ? "guest" : "unknown", Date.now(), who.email);
+      const mq = await gateAndCount(env, store, "ecg", usageKeyFor(who), who.guest ? "guest" : "unknown", Date.now(), meterEmail(who));
       if (!mq.ok) return err(429, "daily_limit", "Daily limit reached: " + mq.limit + " ECG uploads per day. This resets at midnight.", "upload");
     }
   } catch (e) { /* fail-open */ }
@@ -155,7 +155,7 @@ async function handleAnalyzeImage(request, env) {
     const store = usageKv(env);
     if (store) {
       const who = await identify(request, env);
-      const mq = await gateAndCount(env, store, "ecg", usageKeyFor(who), who.guest ? "guest" : "unknown", Date.now(), who.email);
+      const mq = await gateAndCount(env, store, "ecg", usageKeyFor(who), who.guest ? "guest" : "unknown", Date.now(), meterEmail(who));
       if (!mq.ok) return err(429, "daily_limit", "Daily limit reached: " + mq.limit + " ECG uploads per day. This resets at midnight.", "upload");
     }
   } catch (e) { /* fail-open */ }

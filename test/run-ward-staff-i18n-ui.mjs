@@ -33,7 +33,8 @@ const shot = async (name) => { const r = await call("Page.captureScreenshot", { 
 
 // What a clinician or the harness recorded: shown verbatim, never as a translation.
 // (the harness server's own answers - a NEWS2 reason, a category, a report status - are recorded data too)
-const RECORDED = ["Harness Testcase", "Medical A", "Paracetamol 500mg", "Chest X-ray", "SMD-H1-00099", "Clear.", "Not enough vitals recorded to score.", "imaging", "final"];
+// "Ondansetron": the harness's as-needed order (CLIN-13).
+const RECORDED = ["Harness Testcase", "Medical A", "Paracetamol 500mg", "Chest X-ray", "SMD-H1-00099", "Clear.", "Not enough vitals recorded to score.", "imaging", "final", "Ondansetron"];
 function translatedAt(html) {
   const depth = new Uint16Array(html.length + 1); let d = 0;
   for (let i = 0; i < html.length; i++) {

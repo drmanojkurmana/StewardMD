@@ -24,9 +24,16 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
 - [ ] Per-endpoint precise per-module token cost (currently counts requests, rough cost)
 
 ## [[Antibiogram]]
-- [ ] **Unfinished (usage limit):** second reading of RIMS Imphal 2022-23 and 2023-24 (extracted, in the session
-      scratchpad `abg/out/`); the gap-state census (WB, Odisha, Bihar, Jharkhand, NE, TN, Karnataka, Gujarat, Mumbai);
-      archived Sumandeep, SVIMS 2020 H1, GIMSR HIC; independent review round 2.
+- [x] RIMS Imphal 2022-23 and 2023-24 second reading and integration; gap-state census (`census/gaps.json`);
+      SGRH 2012 to 2021 bacterial and 2011 to 2021 fungal newsletters (2026-09-26).
+- [ ] Archived-only documents (Sumandeep HIC 2017-18, GIMSR HIC): web.archive.org is unreachable from the cloud
+      network; read them from another network. SVIMS 2020 H1's only archive copy is truncated.
+- [ ] SGRH 2018 bacterial issue (Vol 25 No 1) is not served by sgrh.com; ask the department for it.
+- [ ] Ask BVDU Pune about the 2024 overall table (page 12: levofloxacin 0% beside ciprofloxacin 11 to 37%;
+      tetracycline or minocycline 100% for Klebsiella) and SKNMC Pune about the tested numbers behind its
+      Pseudomonas lists: both are marked unreliable until the laboratories answer.
+- [ ] East and South India have one institution each, so they have no regional pool; any new public
+      antibiogram from those regions matters more than another northern edition.
 - [ ] Retry the census from an Indian network: several institute and state health portals refused connections
       from the cloud proxy (register reason "the website refused the connection from our network").
 - [ ] **Owner decision: held documents.** UCMS & GTB Hospital antibiograms 2023, 2023-24, 2025 (reproduction
@@ -39,7 +46,7 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
       say so it is shown as intrinsic resistance.
 - [ ] Dr. RMLIMS Lucknow 2020 and 2021 print numbers of susceptible isolates under "percentage" headings, without
       the number tested per drug: percentages could be computed if the lab supplies the denominators.
-- [ ] 50 of 85 sources do not state their breakpoint standard or edition; ask the networks (NARS-Net, KARS-NET,
+- [ ] 54 of 108 sources do not state their breakpoint standard or edition; ask the networks (NARS-Net, KARS-NET,
       ICMR) to print the M100 edition, since trends across 2022 and 2023 move with the breakpoints.
 - [ ] A clinician read of the 18 journal-study notes and focus lines (rewritten 2026-09-26 from the extraction
       logs; facts unchanged, wording new).

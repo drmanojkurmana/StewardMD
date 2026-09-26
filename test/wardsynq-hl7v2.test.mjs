@@ -52,7 +52,7 @@ test("A FIELD THE RECORD DOES NOT HAVE IS EMPTY, never a plausible value", () =>
   assert.equal(dt("19720402"), "19720402");
 
   assert.equal(ts("nonsense"), "");
-  assert.equal(ts("2026-09-07T09:00:00.000Z"), "20260907090000");
+  assert.equal(ts("2026-09-07T09:00:00.000Z"), "20260907090000+0000", "OPS-03/F3: an explicit offset always, never a bare timestamp a spec-following receiver reads as ITS OWN local time");
 
   const bare = msg({ patient: { id: "pat-1", mrn: "SMD-2" } });
   const f = seg(bare, "PID").split("|");
@@ -96,7 +96,7 @@ test("the segments carry what a receiver needs to place the patient", () => {
    * it as the prior patient location - the same silent misplacement the escaping rules exist to
    * prevent, reached from the other direction. The segment is built by field number now. */
   assert.equal(pv1[19], "wsq-adm-1", "the visit number is the encounter");
-  assert.equal(pv1[44], "20260907080000", "PV1-44 admit date/time");
+  assert.equal(pv1[44], "20260907080000+0000", "PV1-44 admit date/time");
 
   // A ward with no bed emits an empty bed component, never the ward name repeated into it.
   assert.equal(seg(msg({ encounter: { ...ENC, location: { ward: "Medical A" } } }), "PV1").split("|")[3], "Medical A^^");
@@ -153,6 +153,24 @@ test("a local code stays a local code, and a corrected report says so in every O
   assert.ok(corrected.split("\r").filter((s) => s.startsWith("OBX|")).every((s) => s.split("|")[11] === "C"));
 });
 
+test("OPS-04/F4: OBR-25 carries Result Status, OBR-22 the reported time, OBR-24/26 stay empty", () => {
+  // Field positions checked by INDEX, the way the OBR segment is actually parsed - counting blanks
+  // by eye is exactly how the timestamp and status ended up two fields off in the first place.
+  const f = seg(oru(), "OBR").split("|");
+  assert.equal(f[22], "20260907100000+0000", "OBR-22 Results Rpt/Status Chng - Date/Time");
+  assert.equal(f[24] || "", "", "OBR-24 Diagnostic Serv Sect ID is coded, never a timestamp");
+  assert.equal(f[25], "F", "OBR-25 Result Status");
+  assert.equal(f[26] || "", "", "OBR-26 Parent Result must not carry the status");
+  const prelim = seg(oru({ report: { ...REPORT, status: "preliminary" } }), "OBR").split("|");
+  assert.equal(prelim[25], "P");
+});
+
+test("OPS-07/F7: OBX-14 carries the observation date/time, not OBX-16", () => {
+  const f = obx(oru(), 0);
+  assert.equal(f[14], "20260907100000+0000", "OBX-14 Date/Time of the Observation");
+  assert.equal(f[16] || "", "", "OBX-16 Responsible Observer must not carry the timestamp");
+});
+
 test("ORU escapes exactly as ADT does, and sends nothing when there is nothing", () => {
   const hostile = oru({ observations: [{ ...OBS[1], value: "Grew E|coli^fast" }] });
   const f = obx(hostile, 0);
@@ -171,9 +189,9 @@ test("ORU escapes exactly as ADT does, and sends nothing when there is nothing",
 test("EVN carries the event time from the record, not the time the message was built", () => {
   const admit = seg(msg(), "EVN").split("|");
   assert.equal(admit[1], "A01");
-  assert.equal(admit[2], "20260907090000", "when the message was built");
-  assert.equal(admit[6], "20260907080000", "and when the patient was actually admitted");
+  assert.equal(admit[2], "20260907090000+0000", "when the message was built");
+  assert.equal(admit[6], "20260907080000+0000", "and when the patient was actually admitted");
 
   const disch = seg(msg({ encounter: { ...ENC, status: "finished", periodEnd: "2026-09-09T10:30:00.000Z" } }), "EVN").split("|");
-  assert.equal(disch[6], "20260909103000", "a discharge is timed by its discharge, not its admission");
+  assert.equal(disch[6], "20260909103000+0000", "a discharge is timed by its discharge, not its admission");
 });

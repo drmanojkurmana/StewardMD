@@ -8,7 +8,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   normalizePhone, maskPhone, deliverOtp, phoneStart, phoneVerify, phoneVerifyEnabled, smsAvailable,
-  otpKey, capKey, TTL, MAX_TRIES, DAILY_CAP, RESEND_THROTTLE,
+  otpKey, capKey, sendsKey, TTL, MAX_TRIES, DAILY_CAP, RESEND_THROTTLE, WA_MAX, SMS_MAX, SEND_WINDOW,
 } from "../functions/_phone_otp.js";
 
 function memKV() {
@@ -151,6 +151,10 @@ test("phoneStart: delivery failure is a soft 200 with a reason, and the code sta
   const r = await phoneStart(WHO, { phone: "9876543210" }, deps(store, { ok: false, channel: null, reason: "no_channel" }));
   assert.equal(r.ok, false); assert.equal(r.error, "no-channel"); assert.equal(r.status, undefined);
   assert.ok(await store.get(otpKey("u1"), "json"));
+  assert.equal(await store.get(sendsKey("u1")), null, "a failed send spends no budget");
+  // "Try SMS instead" right after a failed send must not hit the 30 s throttle (nothing arrived).
+  const retry = await phoneStart(WHO, { phone: "9876543210", channel: "sms" }, deps(store, { ok: true, channel: "sms" }));
+  assert.equal(retry.ok, true, "failed send does not throttle the retry");
   const r2 = await phoneStart(WHO, { phone: "9876543210" }, deps(memKV(), { ok: false, channel: null, reason: "sms_failed" }));
   assert.equal(r2.error, "send-failed"); assert.equal(r2.reason, "sms_failed");
 });
@@ -194,4 +198,67 @@ test("the auth route wires phone-start / phone-verify before the email gate and 
   assert.match(src, /phoneVerifyEnabled\(env\)/);
   assert.match(src, /mergeUserClaims\(env, who\.uid, \{ phoneVerified: true \}\)/);
   assert.match(src, /markPhoneVerified\(env, who\.uid, phone\)/);
+});
+
+/* ── per-account budget: 2 WhatsApp + 1 SMS (owner 2026-09-26: "max 3 otp (wtsapp 2 plus 1 sms) tries per head") ── */
+async function age(store, uid) { const rec = await store.get(otpKey(uid), "json"); if (rec) { rec.sentAt -= RESEND_THROTTLE + 1; await store.put(otpKey(uid), JSON.stringify(rec)); } }
+const chan = (ch) => ({ ok: true, channel: ch === "sms" ? "sms" : "whatsapp" });
+
+test("budget: 2 WhatsApp + 1 SMS = 3 codes per account, the 4th is refused before any delivery", async () => {
+  assert.equal(WA_MAX, 2); assert.equal(SMS_MAX, 1); assert.equal(SEND_WINDOW, 86400);
+  const store = memKV(); const d = deps(store, chan);
+  const a = await phoneStart(WHO, { phone: "9876543210" }, d);
+  assert.deepEqual(a.left, { whatsapp: 1, sms: 1 });
+  await age(store, "u1");
+  const b = await phoneStart(WHO, { phone: "9876543210" }, d);
+  assert.equal(b.channel, "whatsapp"); assert.deepEqual(b.left, { whatsapp: 0, sms: 1 });
+  await age(store, "u1");
+  // WhatsApp spent: an "auto" resend goes by SMS without being asked.
+  const c = await phoneStart(WHO, { phone: "9876543210" }, d);
+  assert.equal(d.sent[2].channel, "sms", "auto becomes sms once WhatsApp is spent"); assert.deepEqual(c.left, { whatsapp: 0, sms: 0 });
+  await age(store, "u1");
+  const e = await phoneStart(WHO, { phone: "9876543210" }, d);
+  assert.equal(e.ok, false); assert.equal(e.error, "send-cap"); assert.equal(e.status, 429); assert.ok(e.retryAfter > 0);
+  assert.equal(d.sent.length, 3, "no 4th delivery");
+  const f = await phoneStart(WHO, { phone: "9876543210", channel: "sms" }, d);
+  assert.equal(f.error, "send-cap");
+});
+
+test("budget: the one SMS cannot be asked for twice; auto never falls back to a spent SMS", async () => {
+  const store = memKV(); const d = deps(store, chan);
+  const a = await phoneStart(WHO, { phone: "9876543210", channel: "sms" }, d);
+  assert.equal(a.channel, "sms"); assert.deepEqual(a.left, { whatsapp: 2, sms: 0 });
+  await age(store, "u1");
+  const b = await phoneStart(WHO, { phone: "9876543210", channel: "sms" }, d);
+  assert.equal(b.error, "sms-used"); assert.equal(d.sent.length, 1);
+  const c = await phoneStart(WHO, { phone: "9876543210" }, d);
+  assert.equal(c.ok, true); assert.equal(d.sent[1].channel, "whatsapp", "WhatsApp only: no SMS fallback left to spend");
+});
+
+test("budget: counted on the channel that CARRIED the code (auto that fell back to SMS spends the SMS)", async () => {
+  const store = memKV(); const d = deps(store, { ok: true, channel: "sms", fellBack: true });
+  const a = await phoneStart(WHO, { phone: "9876543210" }, d);
+  assert.equal(d.sent[0].channel, "auto"); assert.deepEqual(a.left, { whatsapp: 2, sms: 0 });
+});
+
+test("budget: per account (another doctor is unaffected), and it resets after the window", async () => {
+  const store = memKV(); const d = deps(store, chan);
+  await store.put(sendsKey("u1"), JSON.stringify({ since: Math.floor(Date.now() / 1000), wa: 2, sms: 1 }));
+  assert.equal((await phoneStart(WHO, { phone: "9876543210" }, d)).error, "send-cap");
+  assert.equal((await phoneStart({ uid: "u2" }, { phone: "9123456789" }, d)).ok, true, "per head, not global");
+  await store.put(sendsKey("u1"), JSON.stringify({ since: Math.floor(Date.now() / 1000) - SEND_WINDOW, wa: 2, sms: 1 }));
+  const r = await phoneStart(WHO, { phone: "9876543210" }, d);
+  assert.equal(r.ok, true); assert.deepEqual(r.left, { whatsapp: 1, sms: 1 });
+});
+
+test("a same-code resend keeps the wrong-guess count (a resend is not 5 fresh guesses)", async () => {
+  const store = memKV(); const d = deps(store, chan);
+  await phoneStart(WHO, { phone: "9876543210" }, d);
+  const code = d.sent[0].code, wrong = code === "000000" ? "111111" : "000000";
+  await phoneVerify(WHO, { code: wrong }, { store }); await phoneVerify(WHO, { code: wrong }, { store });
+  await age(store, "u1");
+  await phoneStart(WHO, { phone: "9876543210", channel: "sms" }, d);
+  assert.equal(d.sent[1].code, code);
+  const r = await phoneVerify(WHO, { code: wrong }, { store });
+  assert.equal(r.triesLeft, MAX_TRIES - 3);
 });

@@ -16,7 +16,7 @@
 // hmacPseudonym (a genuine per-tenant HMAC) to build the persisted hashes, and the REAL mock D1.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { assertServeAllowed, OverShareError } from "../../../functions/_connect/abdm/hip.js";
+import { assertServeAllowed, OverShareError, filterRecordByDateRange } from "../../../functions/_connect/abdm/hip.js";
 import { hmacPseudonym } from "../../../functions/_connect/audit.js";
 import { SecretsUnavailable } from "../../../functions/_connect/secrets.js";
 import { makeAbdmDb } from "../../../functions/_connect/abdm/abdm-testkit.js";
@@ -238,4 +238,104 @@ test("canonicalization: a case-variant record subject hash must NOT falsely matc
     consentId: "consent-1", careContexts: ["cc-A-1"], records: [rec("cc-A-1", HASH_upper)], tenantId: TENANT,
   });
   assert.equal(ok.events.length, 0);
+});
+
+
+// ── OPS-02/F2: assertServeAllowed requires a real, parseable consent dateRange ─────────────────────
+// An ABDM consent artefact ALWAYS carries permission.dateRange (signed into the JWS payload); a
+// reloaded row with none, or one that does not parse, is corrupt or was never properly persisted -
+// refused WHOLE (fail-closed). Caught by revalidateForRequest's own dateRange parse (reval.ok check,
+// (iv) above) before assertServeAllowed's own per-resource date step is ever reached - the reason is
+// prefixed "consent:" because it travels through that existing gate, not a duplicate check here.
+test("OPS-02/F2: a consent row with a missing/unparseable dateRange is refused, whole transfer", async () => {
+  const env = envOf();
+  const HASH_A = await hmacPseudonym(env, TENANT, "A@sbx");
+  const missing = seedDb({ patientAbhaHash: HASH_A, careContexts: ["cc-A-1"], dateRange: {} });
+  const auditMissing = makeAudit();
+  await expectRefuse(env, { db: missing, now: NOW, audit: auditMissing.fn }, {
+    consentId: "consent-1", careContexts: ["cc-A-1"], records: [rec("cc-A-1", HASH_A)], tenantId: TENANT,
+  }, auditMissing);
+  assert.ok(auditMissing.events.some((e) => e.scope && e.scope.reason === "consent:bad-daterange"));
+
+  const garbled = seedDb({ patientAbhaHash: HASH_A, careContexts: ["cc-A-1"], dateRange: { from: "not-a-date", to: "also-not" } });
+  const auditGarbled = makeAudit();
+  await expectRefuse(env, { db: garbled, now: NOW, audit: auditGarbled.fn }, {
+    consentId: "consent-1", careContexts: ["cc-A-1"], records: [rec("cc-A-1", HASH_A)], tenantId: TENANT,
+  }, auditGarbled);
+  assert.ok(auditGarbled.events.some((e) => e.scope && e.scope.reason === "consent:bad-daterange"));
+});
+
+test("OPS-02/F2: a valid dateRange passes assertServeAllowed and its bounds (ms since epoch) are returned", async () => {
+  const env = envOf();
+  const HASH_A = await hmacPseudonym(env, TENANT, "A@sbx");
+  const db = seedDb({ patientAbhaHash: HASH_A, careContexts: ["cc-A-1"], dateRange: { from: "2024-01-01T00:00:00Z", to: "2024-01-31T23:59:59Z" } });
+  const audit = makeAudit();
+  // `now` must itself fall inside the granted dateRange - revalidateForRequest's own (unchanged)
+  // now-vs-dateRange check, not this test's concern.
+  const range = await assertServeAllowed(env, { db, now: () => new Date("2024-01-15T00:00:00Z"), audit: audit.fn }, {
+    consentId: "consent-1", careContexts: ["cc-A-1"], records: [rec("cc-A-1", HASH_A)], tenantId: TENANT,
+  });
+  assert.equal(audit.events.length, 0);
+  assert.deepEqual(range, { from: Date.parse("2024-01-01T00:00:00Z"), to: Date.parse("2024-01-31T23:59:59Z") });
+});
+
+// ── OPS-02/F2 round 2: filterRecordByDateRange - PER-RESOURCE date filtering, not whole-record refusal ──
+// The old fix compared only the record's FIRST dated item to the window and refused (or served) the
+// WHOLE record on that one date. Round 2: every dated resource (encounter/diagnosticReport/
+// observation/immunization) is checked and filtered INDIVIDUALLY, so a care-context whose first item
+// is in range can no longer smuggle out-of-range items in behind it.
+const FROM = Date.parse("2024-01-01T00:00:00Z"), TO = Date.parse("2024-01-31T23:59:59Z");
+const enc = (id, date) => ({ id, period: { start: date, end: date } });
+const dr = (id, date) => ({ id, effectiveDateTime: date });
+
+test("OPS-02/F2 round 2: a mixed in/out bundle serves ONLY the in-range resources", async () => {
+  const record = {
+    encounters: [enc("e-in", "2024-01-10T00:00:00Z"), enc("e-out", "2019-05-01T00:00:00Z")],
+    diagnosticReports: [dr("d-in", "2024-01-15T00:00:00Z"), dr("d-out", "2024-02-01T00:00:00Z")],
+  };
+  const { record: filtered, hadDated, anyKept } = filterRecordByDateRange(record, FROM, TO);
+  assert.equal(hadDated, true);
+  assert.equal(anyKept, true);
+  assert.deepEqual(filtered.encounters.map((e) => e.id), ["e-in"]);
+  assert.deepEqual(filtered.diagnosticReports.map((d) => d.id), ["d-in"]);
+});
+
+test("OPS-02/F2 round 2: an undated item (of a dated kind) is dropped, even alongside in-range items", async () => {
+  const record = { observations: [{ id: "o-in", effectiveDateTime: "2024-01-10T00:00:00Z" }, { id: "o-undated" }] };
+  const { record: filtered, hadDated, anyKept } = filterRecordByDateRange(record, FROM, TO);
+  assert.equal(hadDated, true);
+  assert.equal(anyKept, true);
+  assert.deepEqual(filtered.observations.map((o) => o.id), ["o-in"]);
+});
+
+test("OPS-02/F2 round 2: nothing in range -> anyKept false, the whole careContext is refused", async () => {
+  const record = { encounters: [enc("e-out", "2019-05-01T00:00:00Z")] };
+  const { hadDated, anyKept } = filterRecordByDateRange(record, FROM, TO);
+  assert.equal(hadDated, true);
+  assert.equal(anyKept, false);
+});
+
+test("OPS-02/F2 round 2: a record with NO determinable date at all -> hadDated false, refused (fail-closed, not 'unaffected')", async () => {
+  const record = { conditions: [{ id: "c1" }], documents: [{ id: "doc1", date: "2026-09-01T00:00:00Z" }] };
+  const { hadDated } = filterRecordByDateRange(record, FROM, TO);
+  assert.equal(hadDated, false, "documents/conditions carry no date this filter trusts; nothing left to determine a date from");
+});
+
+test("OPS-02/F2 round 2: dateRange bounds are INCLUSIVE - exactly `from` and exactly `to` are kept", async () => {
+  const record = { encounters: [enc("e-from", "2024-01-01T00:00:00Z"), enc("e-to", "2024-01-31T23:59:59Z"), enc("e-after", "2024-02-01T00:00:00.001Z")] };
+  const { record: filtered, anyKept } = filterRecordByDateRange(record, FROM, TO);
+  assert.equal(anyKept, true);
+  assert.deepEqual(filtered.encounters.map((e) => e.id), ["e-from", "e-to"]);
+});
+
+test("OPS-02/F2 round 2: documents and medications are never individually date-filtered (no reliable clinical date field), and ride along", async () => {
+  const record = {
+    encounters: [enc("e-in", "2024-01-10T00:00:00Z")],
+    documents: [{ id: "narrative", date: "2026-09-01T00:00:00Z" }],   // generatedAt (export time), not clinical
+    medications: [{ id: "m1" }],                                      // neither source dates this field
+  };
+  const { record: filtered, anyKept } = filterRecordByDateRange(record, FROM, TO);
+  assert.equal(anyKept, true);
+  assert.deepEqual(filtered.documents.map((d) => d.id), ["narrative"]);
+  assert.deepEqual(filtered.medications.map((m) => m.id), ["m1"]);
 });
