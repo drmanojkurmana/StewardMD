@@ -16,6 +16,11 @@
  * PHONE_OTP_WA_BODY when set (same {{to}} {{name}} {{link}} {{text}} tokens; the code is {{link}}),
  * else the FollowCare body.
  *
+ * Send budget (owner 2026-09-26): at most 3 codes per account per 24 h, 2 by WhatsApp + 1 by SMS
+ * (WA_MAX / SMS_MAX / SEND_WINDOW, record otp:phone:sends:<uid>). "auto" never falls back to a
+ * spent channel; a 4th ask answers send-cap, a 2nd SMS answers sms-used. A failed delivery spends
+ * nothing and does not start the 30 s throttle. The per-number DAILY_CAP still applies on top.
+ *
  * PHONE_VERIFY_ON (default on): set 0 to make both routes answer { ok:false, error:"off" } without a
  * deploy. The client (phone-verify.js) then never asks.
  *
@@ -29,6 +34,12 @@ export const TTL = 600;              // the code lives 10 minutes
 export const RESEND_THROTTLE = 30;   // seconds between sends to one account
 export const MAX_TRIES = 5;          // wrong guesses before the code is burnt
 export const DAILY_CAP = 6;          // codes per number per day: nobody gets SMS-bombed from our account
+// Per-account send budget (owner 2026-09-26: "max 3 otp (wtsapp 2 plus 1 sms) tries per head"):
+// 2 codes by WhatsApp + 1 by SMS per account per SEND_WINDOW. Counted per DELIVERED code on the
+// channel that actually carried it (an auto send that fell back to SMS spends the SMS one).
+export const WA_MAX = 2;
+export const SMS_MAX = 1;
+export const SEND_WINDOW = 86400;
 
 export function phoneVerifyEnabled(env) {
   const v = env && env.PHONE_VERIFY_ON;
@@ -105,6 +116,8 @@ export async function deliverOtp(env, { phone, code, name, channel }) {
 /* ── the OTP record rules (pure, KV injected) ────────────────────────────────────────────────── */
 export function otpKey(uid) { return "otp:phone:" + uid; }
 export function capKey(phone) { return "otp:phone:cap:" + phone; }
+export function sendsKey(uid) { return "otp:phone:sends:" + uid; }
+function sendsLeft(s) { return { whatsapp: Math.max(0, WA_MAX - ((s && s.wa) || 0)), sms: Math.max(0, SMS_MAX - ((s && s.sms) || 0)) }; }
 function nowS() { return Math.floor(Date.now() / 1000); }
 function gen6() { const a = new Uint32Array(1); crypto.getRandomValues(a); return String(a[0] % 1000000).padStart(6, "0"); }
 
@@ -113,27 +126,44 @@ export async function phoneStart(who, body, deps) {
   const store = deps.store;
   const phone = normalizePhone(body && body.phone, deps.defaultCc);
   if (!phone) return { ok: false, error: "bad-phone", status: 400 };
-  const channel = body && body.channel === "sms" ? "sms" : "auto";
+  const asked = body && body.channel === "sms" ? "sms" : "auto";
   let existing = null;
   try { existing = await store.get(otpKey(who.uid), "json"); } catch (e) {}
   if (existing && existing.sentAt && (nowS() - existing.sentAt) < RESEND_THROTTLE) {
     return { ok: false, error: "too-soon", retryAfter: RESEND_THROTTLE - (nowS() - existing.sentAt), status: 429 };
   }
+  // Per-account budget: 2 WhatsApp + 1 SMS per window. Auto only falls back to a channel with budget left.
+  let sends = null;
+  try { sends = await store.get(sendsKey(who.uid), "json"); } catch (e) {}
+  if (sends && sends.since && nowS() - sends.since >= SEND_WINDOW) sends = null;
+  const left = sendsLeft(sends);
+  if (!left.whatsapp && !left.sms) return { ok: false, error: "send-cap", left, retryAfter: sends ? Math.max(1, sends.since + SEND_WINDOW - nowS()) : 0, status: 429 };
+  if (asked === "sms" && !left.sms) return { ok: false, error: "sms-used", left, status: 429 };
+  const channel = asked === "sms" ? "sms" : (left.whatsapp && left.sms ? "auto" : (left.whatsapp ? "whatsapp" : "sms"));
   // Per-number daily cap, independent of the account asking.
   let cap = 0;
   try { cap = +(await store.get(capKey(phone))) || 0; } catch (e) {}
   if (cap >= DAILY_CAP) return { ok: false, error: "daily-cap", status: 429 };
-  // Same-window re-send keeps the same code (a doctor switching WhatsApp -> SMS must not get two codes).
-  const code = (existing && existing.phone === phone && existing.exp > nowS() && existing.code) ? existing.code : gen6();
-  const rec = { code, phone, exp: nowS() + TTL, tries: 0, sentAt: nowS() };
+  // Same-window re-send keeps the same code (a doctor switching WhatsApp -> SMS must not get two codes),
+  // and keeps its wrong-guess count, so a resend is not a fresh set of guesses at the same code.
+  const reuse = !!(existing && existing.phone === phone && existing.exp > nowS() && existing.code);
+  const code = reuse ? existing.code : gen6();
+  const rec = { code, phone, exp: nowS() + TTL, tries: reuse ? (existing.tries || 0) : 0, sentAt: nowS() };
   try { await store.put(otpKey(who.uid), JSON.stringify(rec), { expirationTtl: TTL }); } catch (e) { return { ok: false, error: "store-failed", status: 500 }; }
   try { await store.put(capKey(phone), String(cap + 1), { expirationTtl: 86400 }); } catch (e) {}
   const d = await deps.deliver(phone, code, who.name || "", channel);
   if (!d || !d.ok) {
+    // Nothing arrived: no 30 s throttle on the retry ("Try SMS instead" must work at once), and the
+    // account budget is not spent. The code stays so a late-arriving message still verifies.
+    rec.sentAt = 0;
+    try { await store.put(otpKey(who.uid), JSON.stringify(rec), { expirationTtl: TTL }); } catch (e) {}
     // Soft-fail with 200 so the client can show Resend / SMS instead. Never a 502 (Cloudflare replaces it).
-    return { ok: false, error: d && d.reason === "no_channel" ? "no-channel" : "send-failed", reason: (d && d.reason) || "" };
+    return { ok: false, error: d && d.reason === "no_channel" ? "no-channel" : "send-failed", reason: (d && d.reason) || "", left };
   }
-  return { ok: true, sent: true, channel: d.channel, fellBack: !!d.fellBack, ttl: TTL, to: maskPhone(phone) };
+  const s2 = sends ? { since: sends.since, wa: sends.wa || 0, sms: sends.sms || 0 } : { since: nowS(), wa: 0, sms: 0 };
+  if (d.channel === "sms") s2.sms++; else s2.wa++;
+  try { await store.put(sendsKey(who.uid), JSON.stringify(s2), { expirationTtl: Math.max(60, s2.since + SEND_WINDOW - nowS()) }); } catch (e) {}
+  return { ok: true, sent: true, channel: d.channel, fellBack: !!d.fellBack, ttl: TTL, to: maskPhone(phone), left: sendsLeft(s2) };
 }
 
 // deps: { store, onVerified(phone) }  -> claim + lifecycle stamp, best-effort
