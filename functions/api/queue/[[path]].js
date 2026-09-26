@@ -491,6 +491,7 @@ async function wsqLinkTenantOrg(env, org) {
   } catch (e) { /* best-effort: a missed reciprocal link never blocks the org update itself */ }
 }
 import { tenantLinkRefusal } from "../../_wardsynq/tenant-link.js";
+import { publicOrg } from "../../_opd_org.js";
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
 import "../../_opd_connect_connector.js";   // side-effect: registers the "connect" OPD connector (any FHIR hospital via Connect EMR)
 import * as ONCO from "../../_onco_store.js";
@@ -5988,14 +5989,14 @@ export async function onRequest(context) {
         const org = await ORG.getOrg(env, actor.orgId);
         if (!org) return json({ ok: true, orgs: [] }, 200, request);
         const az = await ORG.authorizeOrg(env, actor, actor.orgId, null);
-        return json({ ok: true, orgs: [Object.assign({}, org, { memberRole: az.role || "viewer" })] }, 200, request);
+        return json({ ok: true, orgs: [Object.assign({}, publicOrg(org), { memberRole: az.role || "viewer" })] }, 200, request);
       }
       // Owner orgs (an account) + orgs where this identity is an invited MEMBER (q_members, by id or
       // email - see authorizeOrg's own uid-then-email fallback), for any authenticated identity: an
       // account, a Cloudflare Access user or a GHIS employee whose membership spans hospitals. Owner
       // wins on a collision (a member row on an org this account also owns must never demote the
       // doctor's own view of it to their staff role).
-      const owned = actor.kind === "firebase" ? (await ORG.listOrgsForOwner(env, actor.id)).map((o) => Object.assign({}, o, { memberRole: "owner" })) : [];
+      const owned = actor.kind === "firebase" ? (await ORG.listOrgsForOwner(env, actor.id)).map((o) => Object.assign({}, publicOrg(o), { memberRole: "owner" })) : [];
       const member = await ORG.listOrgsForMember(env, [actor.id, actor.email]);
       const byId = new Map();
       for (const o of member) byId.set(o.id, o);
@@ -6584,7 +6585,7 @@ export async function onRequest(context) {
       const orgId = url.searchParams.get("orgId") || "";
       const az = await ORG.authorizeOrg(env, actor, orgId, seg === "members" ? CAPS.STAFF_ADMIN : CAPS.QUEUE_VIEW);
       if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
-      if (seg === "org") return json({ ok: true, org: await ORG.getOrg(env, orgId), departments: await ORG.listDepartments(env, orgId), rooms: await ORG.listRooms(env, orgId), wards: await ORG.listWards(env, orgId) }, 200, request);
+      if (seg === "org") return json({ ok: true, org: publicOrg(await ORG.getOrg(env, orgId)), departments: await ORG.listDepartments(env, orgId), rooms: await ORG.listRooms(env, orgId), wards: await ORG.listWards(env, orgId) }, 200, request);
       if (seg === "rooms") return json({ ok: true, rooms: await ORG.listRooms(env, orgId) }, 200, request);
       if (seg === "wards") return json({ ok: true, wards: await ORG.listWards(env, orgId) }, 200, request);
       if (seg === "beds") return json({ ok: true, beds: await ORG.listBeds(env, orgId, url.searchParams.get("wardId") || "") }, 200, request);
@@ -7021,7 +7022,7 @@ export async function onRequest(context) {
         // Best-effort, only when this update actually set/changed the tenant link - see
         // wsqLinkTenantOrg's own header for why this is a real fix, not a nice-to-have.
         if (body.connectTenantId) await wsqLinkTenantOrg(env, updated);
-        return json({ ok: true, org: updated }, 200, request);
+        return json({ ok: true, org: publicOrg(updated) }, 200, request);
       }
       /* REMOVING A HOSPITAL IS THE OWNER'S ACT (BUG-MU2PHANW). It was any staff admin's, with no typed
        * confirmation. Now: the hospital's owner or the platform owner only, the body must carry

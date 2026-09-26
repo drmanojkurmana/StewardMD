@@ -151,7 +151,7 @@ export async function listOrgsForMember(env, identities) {
       seen.add(orgId);
       const d = await fsGet(env, "q_orgs/" + sanitize(orgId));
       if (!d || (d.fields && d.fields.deleted)) continue;   // dropped/missing org: no dangling membership shown
-      out.push(Object.assign({}, M.org(withId(sanitize(orgId), d.fields)), { memberRole: f.role || "viewer" }));
+      out.push(Object.assign({}, M.publicOrg(M.org(withId(sanitize(orgId), d.fields))), { memberRole: f.role || "viewer" }));
     }
   }
   return out;
@@ -185,6 +185,17 @@ export async function updateOrg(env, orgId, patch, actorId, auditEvent) {
   const merged = Object.assign({}, cur, p, { id: cur.id, ownerUid: cur.ownerUid, createdAt: cur.createdAt }); // ownerUid immutable
   if (p.wardsynq && typeof p.wardsynq === "object" && !Array.isArray(p.wardsynq)) {
     merged.wardsynq = Object.assign({}, (cur && cur.wardsynq) || {}, p.wardsynq);
+    // SEC-04: a screen sending back the redacted projection (tokenSet, no token) keeps the stored token.
+    const te = p.wardsynq.transmitEndpoints, oldTe = (cur && cur.wardsynq && cur.wardsynq.transmitEndpoints) || {};
+    if (te && typeof te === "object") {
+      const kept = {};
+      for (const [k, v] of Object.entries(te)) {
+        const was = oldTe[k];
+        kept[k] = v && typeof v === "object" && v.tokenSet === true && !v.token && was && typeof was === "object" && was.token && was.url === v.url
+          ? (({ tokenSet, ...rest }) => ({ ...rest, token: was.token }))(v) : v;
+      }
+      merged.wardsynq.transmitEndpoints = kept;
+    }
   }
   // Same one-level merge for the region profile: saving a GSTIN must not erase the HFR id.
   if (p.regionProfile && typeof p.regionProfile === "object" && !Array.isArray(p.regionProfile)) {
