@@ -34,7 +34,7 @@ import { AuthError, PermissionError } from "../_connect/permission.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { RUN_TYPE, rpoVerdict } from "./backup-run.js";
 import { span } from "../_roster.js";
-import { verifyAuditChain, checkAnchorStores, anchorStoresOf, auditRetentionSetting } from "./audit-chain.js";
+import { verifyAuditChain, checkAnchorStores, anchorStoresOf, auditRetentionSetting, readSweep } from "./audit-chain.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const DAY = 86400000;
@@ -629,6 +629,16 @@ async function securityReport(request, env, ctx) {
   /* G12: every store handed in (KV and Firestore in production), each compared with the chain and with
    * each other; a disagreement between the copies is its own finding. */
   const stores = anchorStoresOf(ctx.anchorStores || ctx.anchorStore).map((x) => x.store);
+  /* DATA-09: the window above only covers the newest rows. The hourly full walk (ops-tick) re-hashes the
+   * whole chain from the first link; its state is reported, and an open finding from it overrides a
+   * clean newest window, because an old row that was changed is not fixed by newer rows being intact. */
+  const sweep = stores.length ? await readSweep(stores[0], tenantId) : null;
+  retention.fullWalk = sweep
+    ? { status: sweep.finding ? sweep.finding.status : "ok", lastFullAt: sweep.lastFullAt || null, lastRunAt: sweep.lastRunAt || null, nextSeq: sweep.nextSeq || 1, finding: sweep.finding || null, lastFinding: sweep.lastFinding || null }
+    : { status: "not_run", message: "The whole audit chain has not been walked yet; only the newest rows are checked here." };
+  if (sweep && sweep.finding && retention.integrity && retention.integrity.status === "ok") {
+    retention.integrity = { ...sweep.finding, fromWalk: true, message: `${sweep.finding.message} (found by the full walk of the audit chain at ${sweep.finding.foundAt})` };
+  }
   retention.anchors = stores.length
     ? await checkAnchorStores(repository, tenantId, stores)
     : { status: "no-anchors", message: "No anchor store was handed in, so there is nothing outside the database to compare against." };
