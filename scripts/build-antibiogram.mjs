@@ -81,6 +81,7 @@ export function validateSource(src, file) {
   if (!SECTORS.includes(src.sector)) e.push(`${tag}: sector must be one of ${SECTORS.join(", ")}`);
   if (!(Number.isInteger(src.year) && src.year >= 2005 && src.year <= 2030)) e.push(`${tag}: year must be an integer 2005 to 2030`);
   if (src.measure != null && !["S", "R"].includes(src.measure)) e.push(`${tag}: measure must be "S" or "R"`);
+  if (src.focus != null && (typeof src.focus !== "string" || !src.focus.trim())) e.push(`${tag}: focus must be a short description when given`);
   if (src.isolates != null && !(Number.isInteger(src.isolates) && src.isolates > 0)) e.push(`${tag}: isolates must be a positive integer (the report's total)`);
   if (src.end != null && !(/^\d{4}-(0[1-9]|1[0-2])$/.test(src.end) && +src.end.slice(0, 4) === src.year)) e.push(`${tag}: end must be "YYYY-MM" in the data year`);
   if (!src.verification || !VSTAT.includes(src.verification.status)) e.push(`${tag}: verification.status must be one of ${VSTAT.join(", ")}`);
@@ -406,6 +407,11 @@ export function loadAll() {
   readdirSync(SRC_DIR).filter((f) => f.endsWith(".json")).sort().forEach((f) => {
     let j; try { j = JSON.parse(readFileSync(join(SRC_DIR, f), "utf8")); } catch (x) { errors.push(`${f}: invalid JSON (${x.message})`); return; }
     errors.push(...validateSource(j, f)); sources.push(j);
+  });
+  // An outbreak or single-pathogen report must not share an institution key with cumulative
+  // antibiograms: it would become that institution's "latest edition".
+  sources.filter((s) => s.focus).forEach((s) => {
+    if (sources.some((o) => o !== s && !o.focus && o.inst === s.inst)) errors.push(`${s.id}: a source with "focus" needs its own inst (${s.inst} is used by cumulative antibiograms)`);
   });
   let register = [], census = null;
   if (existsSync(REGISTER)) { try { register = JSON.parse(readFileSync(REGISTER, "utf8")); } catch (x) { errors.push(`register.json: invalid JSON (${x.message})`); } }

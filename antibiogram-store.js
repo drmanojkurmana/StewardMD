@@ -21,7 +21,7 @@
  * ======================================================================================== */
 (function () {
   "use strict";
-  var ABG_V = "cb642c10993d";
+  var ABG_V = "08f8aa617628";
   var R = window.ABG_RULES;
   var ACT = { k: "keep", i: "intrinsic", h: "hide", x: "suppress", c: "caution" };
   var LOCAL_KEY = "smd_abg_local";
@@ -122,8 +122,10 @@
   function recent(s) { var f = B && B.stats && B.stats.poolFrom; return !f || s.year >= f; }
   function scopeRows(scope) {
     if (!B) return [];
-    if (scope === "india") return B.rows.filter(function (r) { return r.src.kind !== "network" && !r.src.local && r.src.latest && recent(r.src); });
-    if (/^region:/.test(scope)) { var rg = scope.slice(7); return B.rows.filter(function (r) { return r.src.region === rg && r.src.kind !== "network" && !r.src.local && r.src.latest && recent(r.src); }); }
+    // Pools: each institution's latest antibiogram, recent enough; never networks (the same isolates
+    // twice), the device-local import, or an outbreak / single-pathogen report (focus).
+    if (scope === "india") return B.rows.filter(function (r) { return r.src.kind !== "network" && !r.src.local && !r.src.focus && r.src.latest && recent(r.src); });
+    if (/^region:/.test(scope)) { var rg = scope.slice(7); return B.rows.filter(function (r) { return r.src.region === rg && r.src.kind !== "network" && !r.src.local && !r.src.focus && r.src.latest && recent(r.src); }); }
     if (/^src:/.test(scope)) { var id = scope.slice(4); return B.rows.filter(function (r) { return r.src.id === id; }); }
     if (/^inst:/.test(scope)) { var inst = scope.slice(5); return B.rows.filter(function (r) { return r.src.inst === inst && r.src.latest; }); }
     if (scope === "local") return B.rows.filter(function (r) { return r.src.local; });
