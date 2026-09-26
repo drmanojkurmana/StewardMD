@@ -1,5 +1,5 @@
 {
- "version": "58d33fbc006f",
+ "version": "9c226bed4b85",
  "generated": "build",
  "countMismatches": [
   {
@@ -300,6 +300,33 @@
    "set": "all",
    "org": "paeruginosa",
    "text": "Pus, wounds and body fluids, All settings: Pseudomonas aeruginosa repeats 11 figures of UPUMS Saifai 2024 respiratory, all settings, P. aeruginosa (n=125) exactly"
+  },
+  {
+   "src": "KARSNET_2021",
+   "spec": "all",
+   "set": "opd",
+   "org": "ecoli",
+   "count": 2944,
+   "rows": 2943,
+   "text": "All specimens, Outpatients: Escherichia coli 2944 in the organism table, 2943 in the antibiogram table"
+  },
+  {
+   "src": "KARSNET_2021",
+   "spec": "all",
+   "set": "ward",
+   "org": "ecoli",
+   "count": 2116,
+   "rows": 2112,
+   "text": "All specimens, Wards: Escherichia coli 2116 in the organism table, 2112 in the antibiogram table"
+  },
+  {
+   "src": "KARSNET_2021",
+   "spec": "all",
+   "set": "icu",
+   "org": "klebsiella",
+   "count": 476,
+   "rows": 473,
+   "text": "All specimens, ICU: Klebsiella pneumoniae / spp. 476 in the organism table, 473 in the antibiogram table"
   },
   {
    "src": "TARSNET_2025",
@@ -8018,6 +8045,105 @@
    "value": 43,
    "action": "caution",
    "why": "the source contradicts itself: Table 12 prints 57% resistant, but its own counts (231 resistant of 507 tested) give 46%"
+  },
+  {
+   "src": "KARSNET_2023",
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "drug": "ceftriaxone",
+   "value": 31,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 7 prints 69% resistant, but its own counts (197 resistant of 366 tested, the same counts as the co-amoxiclav row) give 54%"
+  },
+  {
+   "src": "KARSNET_2023",
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "drug": "cefotaxime",
+   "value": 26,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 7 prints 74% resistant (the text also says 74%), but its own counts (143 resistant of 741 tested) give 19%"
+  },
+  {
+   "src": "KARSNET_2023",
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "drug": "cefepime",
+   "value": 36,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 7 prints 64% resistant, but its own counts (480 resistant of 853 tested, the same counts as the piperacillin-tazobactam row) give 56%"
+  },
+  {
+   "src": "KARSNET_2022",
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "drug": "fosfomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 6 prints 0% resistant, but its own counts (18 resistant of 790 tested) give 2.3%"
+  },
+  {
+   "src": "KARSNET_2022",
+   "spec": "urine",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "pheno": null,
+   "drug": "tigecycline",
+   "value": 94,
+   "action": "hide",
+   "why": "Tigecycline reaches too little concentration in urine to treat a urinary infection"
+  },
+  {
+   "src": "KARSNET_2022",
+   "spec": "blood",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "drug": "cefoxitin",
+   "value": 83,
+   "action": "caution",
+   "why": "the source contradicts itself: the text (page 21) says \"MRSA isolated from IPD patients was 40% followed by ICU and OPD patients 17% and 33% respectively\", but the chart's bar colours give OPD 17% and ICU 33%"
+  },
+  {
+   "src": "KARSNET_2022",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "drug": "cefoxitin",
+   "value": 67,
+   "action": "caution",
+   "why": "the source contradicts itself: the text (page 21) says \"MRSA isolated from IPD patients was 40% followed by ICU and OPD patients 17% and 33% respectively\", but the chart's bar colours give OPD 17% and ICU 33%"
+  },
+  {
+   "src": "KARSNET_2021",
+   "spec": "deep",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "drug": "nitrofurantoin",
+   "value": 19,
+   "action": "hide",
+   "why": "Nitrofurantoin is reported for urinary isolates only"
+  },
+  {
+   "src": "KARSNET_2021",
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "drug": "nitrofurantoin",
+   "value": 58,
+   "action": "hide",
+   "why": "Nitrofurantoin is reported for urinary isolates only"
   },
   {
    "src": "KONASEEMA_GNB",
