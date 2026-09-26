@@ -37,7 +37,7 @@ HAZ-ML-02 control is how one of them quietly stops matching. It is one function,
 
 | Step | State | What exists |
 |---|---|---|
-| 1 flags | done | `medcore-flags.js`. `smd_medcore` **default ON (BETA)** since 2026-09-26, `smd_medcore_shadow` OFF. Tag `medcore-pre-integration` (local; the tag push is 403 on this credential) |
+| 1 flags | done | `medcore-flags.js`. `smd_medcore` **default ON (BETA)** since 2026-09-26, `smd_medcore_shadow` OFF. Recovery point: branch `recovery/medcore-pre-integration` on the remote (see note below) |
 | 2 units | done | `medcore/data/units.json` (29 params) + `medcore/medcore-units.js`. HAZ-ML-03 |
 | 3 state | done | `medcore/data/freshness.json` + `medcore/medcore-state.js` (`fromIcuState`). `asOf` leakage control, HAZ-ML-04 |
 | 4 missing | done | `medcore/medcore-missing.js`, unioned with `icu-autoscores.js` `{__missing:[...]}` |
@@ -65,6 +65,22 @@ this work did not touch. Default ON reaches a clinician only after `scripts/buil
 
 **Open before it reaches the ward:** `medcore/data/change-bands.json` (~26 thresholds deciding what
 counts as a change worth showing) has never been read by a clinician.
+
+### The recovery point, and why it is a branch and not a tag
+
+`git reset --hard recovery/medcore-pre-integration` removes every line of Medical Core work.
+
+It was originally the annotated tag `medcore-pre-integration` at `3923a521`. That commit was
+ORPHANED by the `git filter-branch` that purged licensed PhysioNet extracts from the branch
+history, so the tag pointed at nothing reachable and would have been a recovery point that does not
+restore anything. It was re-pointed to `a95dedfb`, which carries the identical tree (`1f0a580a`) on
+the real history.
+
+The tag still exists locally but **cannot be pushed**: this session's GitHub credential is refused
+on `refs/tags/*` with a 403 while `refs/heads/*` pushes fine, and that is a credential scope, not a
+proxy fault. So the remote marker is the BRANCH `recovery/medcore-pre-integration`, which points at
+the same commit and is pushed. If you want the tag on the remote too, push it from your own
+machine: `git push origin refs/tags/medcore-pre-integration`.
 
 **What is NOT true today:** there is no model a clinician may see, no real training data, no
 calibrated probability in the product, no outcome anybody has approved, and no Medical Core signal
