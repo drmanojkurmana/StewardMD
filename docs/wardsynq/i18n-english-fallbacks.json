@@ -1,9 +1,9 @@
 {
-  "note": "Keys that show English in a translated screen. The machine translation pipeline drops a value when it fails a mechanical check (placeholders, digits, entities, a missing negation marker) or when the second-model meaning check flags it, because a wrong clinical translation is worse than English. Every key here is deliberate: test/wardsynq-i18n.test.mjs fails if a catalog is missing a key that is not listed here. Added 2026-09-19: the MaiK Scribe keys for the ward round and discharge summary (ward.scribe-*, ward.dc-scribe-*) are new and not yet through the translation pipeline; both features ship behind flags that are off, so run the pipeline over these before enabling them. Added 2026-09-24: the Ni-Key / StewardID registration keys (ward.reg-read-nfc, ward.reg-hold-tag, ward.reg-carrier-revoked, ward.reg-tag-read, ward.reg-scanned-code, ward.reg-camera-denied, ward.reg-camera-scan-failed, ward.reg-scan-or-type, ward.reg-tag-empty, ward.reg-nfc-denied, ward.reg-nfc-read-error, ward.reg-scan-qr, ward.reg-stewardid), ward.scanned-tag-deactivated and the bedside OPD/IPD episode picker keys (ward.bedside-episode-opd, ward.bedside-episode-ipd, ward.where-do-you-want-to-work, ward.this-patient-has-an-opd-visit-and-an-admission) are new and not yet through the pipeline, like the earlier ward.reg-nfc-* keys.",
+  "note": "Keys that show English in a translated screen. The machine translation pipeline drops a value when it fails a mechanical check (placeholders, digits, entities, a missing negation marker) or when the second-model meaning check flags it, because a wrong clinical translation is worse than English. Every key here is deliberate: test/wardsynq-i18n.test.mjs fails if a catalog is missing a key that is not listed here. Added 2026-09-19: the MaiK Scribe keys for the ward round and discharge summary (ward.scribe-*, ward.dc-scribe-*) are new and not yet through the translation pipeline; both features ship behind flags that are off, so run the pipeline over these before enabling them. Added 2026-09-24: the Ni-Key / StewardID registration keys (ward.reg-read-nfc, ward.reg-hold-tag, ward.reg-carrier-revoked, ward.reg-tag-read, ward.reg-scanned-code, ward.reg-camera-denied, ward.reg-camera-scan-failed, ward.reg-scan-or-type, ward.reg-tag-empty, ward.reg-nfc-denied, ward.reg-nfc-read-error, ward.reg-scan-qr, ward.reg-stewardid), ward.scanned-tag-deactivated and the bedside OPD/IPD episode picker keys (ward.bedside-episode-opd, ward.bedside-episode-ipd, ward.where-do-you-want-to-work, ward.this-patient-has-an-opd-visit-and-an-admission) are new and not yet through the pipeline, like the earlier ward.reg-nfc-* keys. Added 2026-09-27: the payment-link keys from the billing audit (ward.payment-link-closed-bill-no-longer-owes, ward.the-bill-was-already-paid-when-this-payment, ward.claim-already-open) are new and not yet through the pipeline.",
   "generated": "2026-09-19",
   "languages": {
     "es": {
-      "count": 175,
+      "count": 178,
       "keys": [
         "fb.no",
         "intake.no",
@@ -179,11 +179,14 @@
         "site.stores.packs",
         "site.stores.packsHelp",
         "site.stores.packsCol",
-        "site.stores.packsPlaceholder"
+        "site.stores.packsPlaceholder",
+        "ward.payment-link-closed-bill-no-longer-owes",
+        "ward.the-bill-was-already-paid-when-this-payment",
+        "ward.claim-already-open"
       ]
     },
     "te": {
-      "count": 155,
+      "count": 158,
       "keys": [
         "comm.off",
         "comm.whatsapp",
@@ -339,11 +342,14 @@
         "site.stores.packs",
         "site.stores.packsHelp",
         "site.stores.packsCol",
-        "site.stores.packsPlaceholder"
+        "site.stores.packsPlaceholder",
+        "ward.payment-link-closed-bill-no-longer-owes",
+        "ward.the-bill-was-already-paid-when-this-payment",
+        "ward.claim-already-open"
       ]
     },
     "hi": {
-      "count": 90,
+      "count": 93,
       "keys": [
         "comm.whatsapp",
         "privacy.kind.nomination",
@@ -434,11 +440,14 @@
         "site.stores.packs",
         "site.stores.packsHelp",
         "site.stores.packsCol",
-        "site.stores.packsPlaceholder"
+        "site.stores.packsPlaceholder",
+        "ward.payment-link-closed-bill-no-longer-owes",
+        "ward.the-bill-was-already-paid-when-this-payment",
+        "ward.claim-already-open"
       ]
     },
     "bn": {
-      "count": 206,
+      "count": 209,
       "keys": [
         "comm.whatsapp",
         "msg.empty",
@@ -645,11 +654,14 @@
         "site.stores.packs",
         "site.stores.packsHelp",
         "site.stores.packsCol",
-        "site.stores.packsPlaceholder"
+        "site.stores.packsPlaceholder",
+        "ward.payment-link-closed-bill-no-longer-owes",
+        "ward.the-bill-was-already-paid-when-this-payment",
+        "ward.claim-already-open"
       ]
     },
     "kn": {
-      "count": 84,
+      "count": 87,
       "keys": [
         "comm.whatsapp",
         "privacy.kind.nomination",
@@ -734,11 +746,14 @@
         "site.stores.packs",
         "site.stores.packsHelp",
         "site.stores.packsCol",
-        "site.stores.packsPlaceholder"
+        "site.stores.packsPlaceholder",
+        "ward.payment-link-closed-bill-no-longer-owes",
+        "ward.the-bill-was-already-paid-when-this-payment",
+        "ward.claim-already-open"
       ]
     },
     "ta": {
-      "count": 139,
+      "count": 142,
       "keys": [
         "comm.whatsapp",
         "privacy.kind.erasure",
@@ -878,11 +893,14 @@
         "site.stores.packs",
         "site.stores.packsHelp",
         "site.stores.packsCol",
-        "site.stores.packsPlaceholder"
+        "site.stores.packsPlaceholder",
+        "ward.payment-link-closed-bill-no-longer-owes",
+        "ward.the-bill-was-already-paid-when-this-payment",
+        "ward.claim-already-open"
       ]
     },
     "ml": {
-      "count": 110,
+      "count": 113,
       "keys": [
         "comm.whatsapp",
         "site.abdm.notAvailable",
@@ -993,11 +1011,14 @@
         "site.stores.packs",
         "site.stores.packsHelp",
         "site.stores.packsCol",
-        "site.stores.packsPlaceholder"
+        "site.stores.packsPlaceholder",
+        "ward.payment-link-closed-bill-no-longer-owes",
+        "ward.the-bill-was-already-paid-when-this-payment",
+        "ward.claim-already-open"
       ]
     },
     "mr": {
-      "count": 130,
+      "count": 133,
       "keys": [
         "comm.whatsapp",
         "site.admin.ccs.critical.intro",
@@ -1128,7 +1149,10 @@
         "site.stores.packs",
         "site.stores.packsHelp",
         "site.stores.packsCol",
-        "site.stores.packsPlaceholder"
+        "site.stores.packsPlaceholder",
+        "ward.payment-link-closed-bill-no-longer-owes",
+        "ward.the-bill-was-already-paid-when-this-payment",
+        "ward.claim-already-open"
       ]
     }
   }

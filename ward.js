@@ -178,7 +178,12 @@
       // Read as a list, that is "no matching code" when nobody searched at all.
       .then(function (j) { if (!j || j.error || !Array.isArray(j.results)) throw new Error((j && j.error) || "unavailable"); return j.results; });
   }
+  /* A WRITE THAT MOVES MONEY OR STOCK HAPPENS ONCE (BILL-03, BILL-18, audit 2026-09). Its idempotency key is minted
+   * before the first attempt, so fetchRetry's resend of a request whose answer was lost is the same write on the server,
+   * which answers it with the first outcome instead of recording it again. */
+  var ONCE_PATH = /^\/ward\/(invoice|invoice-(payment|deposit|refund|discount|adjustment|writeoff|void|credit-note|debit-note)|claim|preauth|stock-move|stock-reconcile|dispense|dispense-return|goods-receive|purchase-order)$/;
   function apiPost(path, body) {
+    if (ONCE_PATH.test(path) && body && !body.idempotencyKey) body.idempotencyKey = offlineKey();
     return authHeaders().then(function (h) { return fetchRetry(API + path, { method: "POST", headers: h, credentials: "include", body: JSON.stringify(body || {}) }); })
       .then(function (r) { return r.json(); })
       .then(censusAnswer)
@@ -7503,13 +7508,14 @@
       '<p class="w-hint">' + ms("info") + wTH("ward.this-records-what-the-slip-screen", "This records what the slip, screen or drawer says. It is never marked as confirmed by a card machine from here.") + "</p></div>" +
       "</div>";
   }
-  var PAY_LINK_WORDS = { open: "Payment link sent, not paid yet", paid: "Paid online, confirmed by the gateway", flagged: "Online payment needs reconciling" };
+  var PAY_LINK_WORDS = { open: "Payment link sent, not paid yet", paid: "Paid online, confirmed by the gateway", flagged: "Online payment needs reconciling", expired: "Payment link closed: the bill no longer owes what it asked" };
   var PAY_FLAG_WORDS = {
     amount_or_currency_mismatch: "the gateway reported a different amount or currency, so the bill was not marked paid",
     gateway_says_not_paid: "the gateway does not confirm the payment, so the bill was not marked paid",
     second_payment_on_paid_request: "a second payment arrived on an already paid link",
     payment_not_on_gateway_record: "the payment is not on the gateway's record, so the bill was not marked paid",
     invoice_void: "the bill was cancelled before the payment arrived",
+    bill_settled_before_online_payment: "the bill was already paid or reduced when this payment arrived, so it was not posted: refund it",
     invoice_missing: "the bill could not be found when the payment arrived",
   };
   var CASH_METHODS = [["cash", "Cash"], ["upi", "UPI"], ["card", "Card"], ["neft", "NEFT"], ["rtgs", "RTGS"],
@@ -11806,7 +11812,8 @@
       .catch(function () { st.cashier.invoices = []; st.cashier.outstandingBalance = null; st.cashier.invoicesFailed = true; paint(); });
   }
   function cashRaise() {
-    if (!st.cashier || !st.cashier.patientId) return;
+    // One raise at a time: a second tap while the first is in flight does nothing (BILL-02).
+    if (!st.cashier || !st.cashier.patientId || st.busy) return;
     st.cashier.err = ""; st.cashier.raised = null; st.busy = true; paint();
     var stay = cashStayChoice(st.cashier);
     apiPost("/ward/invoice", { orgId: st.orgId, patientId: st.cashier.patientId, encounterId: stay || undefined })
@@ -11839,6 +11846,7 @@
   }
   var CASH_ACTION_ROUTE = { pay: "invoice-payment", deposit: "invoice-deposit", discount: "invoice-discount", refund: "invoice-refund", adjust: "invoice-adjustment", writeoff: "invoice-writeoff" };
   function cashPost(invoiceId, kind) {
+    if (st.busy) return;   // a second tap while the first is in flight is not a second payment (BILL-03)
     var amount = val("wCashAmount"), reason = val("wCashReason"), reference = val("wCashReference");
     if (!amount || Number(amount) <= 0) { st.cashier.err = wT("ward.enter-a-positive-amount", "Enter a positive amount."); paint(); return; }
     var route = CASH_ACTION_ROUTE[kind];

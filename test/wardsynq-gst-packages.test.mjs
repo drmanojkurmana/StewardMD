@@ -287,7 +287,8 @@ test("POST /ward/invoice refusals: a covered room day with no bed tariff, and a 
   assert.equal((await H.RECORD.latestByType(T, "Invoice", 10)).length, 0, "no bill written");
   // An outpatient attendant meal with no rate: taxable, so the bill is refused rather than raised untaxed.
   seed({ tariff: { "ATT-MEAL": ROUTE_TARIFF["ATT-MEAL"] } });
-  await H.RECORD.append(T, [{ resourceType: "MedicationDispense", id: "md-1", version: 1, patientId: "opd-pat-meal", drugCode: "ATT-MEAL", drug: "Attendant meal", state: "issued" }]);
+  // Recorded as given: a dispense is billed only under a supply code now (BILL-01), and this test is about the rate.
+  await H.RECORD.append(T, [{ resourceType: "MedicationAdministration", id: "ma-1", version: 1, patientId: "opd-pat-meal", drugCode: "ATT-MEAL", drug: "Attendant meal", status: "administered" }]);
   const meal = await as(CASHIER, "/ward/invoice", "POST", { orgId: ORG_ID, patientId: "opd-pat-meal" });
   assert.deepEqual([meal.__status, meal.error, meal.codes], [422, "gst_rate_missing", ["ATT-MEAL"]]);
   assert.equal(await H.RECORD.latest(T, "_wardsynq_doc_series", "inv-2627"), null, "no number issued");

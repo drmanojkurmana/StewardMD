@@ -277,7 +277,7 @@ import { securityReport, recordSecurityReview, recordRestoreTest, auditRowsForRe
 import { systemHealthReport } from "../../_wardsynq/system-health.js";
 import { acknowledgeAnchorBreak } from "../../_wardsynq/audit-chain.js";
 import { orgAuditChain, firestoreAnchorStore } from "../../_q_audit_chain.js";
-import { chargesForPatient, tariffTable } from "../../_wardsynq/charge-capture.js";
+import { chargesForPatient, tariffTable, unbilledItems } from "../../_wardsynq/charge-capture.js";
 import { catalogue as investigationCatalogue } from "../../_wardsynq/investigation-catalogue.js";
 import { raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff, voidInvoiceRoute, readInvoice, invoicesForPatient, postNoteRoute, setPartiesRoute } from "../../_wardsynq/invoice.js";
 import { setStayPayer } from "../../_wardsynq/stay-payer.js";
@@ -4026,7 +4026,7 @@ export async function onRequest(context) {
             const onBill = new Set();
             for (const i of invs.invoices) if (i.status !== "void") for (const l of i.lines || []) if (l.sourceType && l.sourceId) onBill.add(`${l.sourceType}:${l.sourceId}`);
             const before = r.priced.length;
-            r.priced = r.priced.filter((it) => !(it.sourceType && it.sourceId && onBill.has(`${it.sourceType}:${it.sourceId}`)));
+            r.priced = unbilledItems(r.priced, invs.invoices);   // BILL-07: a bed day billed for fewer hours keeps the rest
             r.unpriced = (r.unpriced || []).filter((it) => !(it.sourceType && it.sourceId && onBill.has(`${it.sourceType}:${it.sourceId}`)));
             r.alreadyInvoiced = before - r.priced.length;
             r.total = Math.round(r.priced.reduce((n, it) => n + (Number(it.line) || 0), 0) * 100) / 100;

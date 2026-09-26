@@ -58,8 +58,8 @@ const HAPPENED = Object.freeze({
    * bills from its report, which is why both are here and neither stands in for the other. */
   SpecimenCollection: Object.freeze(["collected", "received"]),
   /* Medicine physically issued. Deliberately separate from the administration: a hospital that
-   * charges for supply and a hospital that charges for the dose given are both real, and a site
-   * choosing one puts only that code in its tariff. Nothing here decides which. */
+   * charges for supply and a hospital that charges for the dose given are both real. A dispense is
+   * priced under its own supply code, so the tariff chooses (supplyOrDose below). */
   MedicationDispense: Object.freeze(["dispensed", "issued"]),
   /* An ambulance trip that reached handover (ambulance.js). A cancelled or unfinished trip is not a charge. */
   AmbulanceTrip: Object.freeze(["completed"]),
@@ -74,6 +74,7 @@ const HAPPENED = Object.freeze({
  * site - a second place this could drift silently if left implicit. */
 const STATUS_FIELD = Object.freeze({ MedicationDispense: "state", SpecimenCollection: "state", AmbulanceTrip: "state" });
 
+const SUPPLY = ":supply:";
 /** PURE. The code an item is priced by, and what it is called on a bill. */
 function itemFrom(resourceType, row) {
   const r = row || {};
@@ -87,8 +88,16 @@ function itemFrom(resourceType, row) {
     return { code: str(r.code) || "specimen-collection", display: str(r.display) || "Specimen collection", at: r.collectedAt || r.at || null };
   }
   if (resourceType === "MedicationDispense") {
+    /* BILL-01, BILL-06 (audit 2026-09). Priced under "<drug code>:supply:<unit>", never the drug's own code: under the
+     * same code as the dose it was billed twice and no tariff could choose. The unit is in the code, so a price is
+     * always per the unit that was issued, and the quantity is what was issued, not one. */
+    const drugCode = str(r.drugCode) || str(r.drug);
+    const q = r.quantity && typeof r.quantity === "object" ? r.quantity : null;
+    const value = q ? Number(q.value) : NaN, unit = q ? str(q.unit).toLowerCase() : "";
+    const known = Number.isFinite(value) && value > 0 && !!unit;
     // A take-home supply at discharge says so: GST treats it apart from medicines used in the stay (region adapter).
-    return { code: str(r.drugCode) || str(r.drug), display: str(r.drug) || str(r.drugCode), at: r.dispensedAt || r.at || null, ...(r.takeHome === true ? { takeHome: true } : {}) };
+    return { code: drugCode ? `${drugCode}${SUPPLY}${known ? unit : ""}` : "", drugCode, display: str(r.drug) || str(r.drugCode), at: r.dispensedAt || r.at || null,
+      ...(known ? { supplyQuantity: value } : {}), ...(r.takeHome === true ? { takeHome: true } : {}) };
   }
   if (resourceType === "AmbulanceTrip") {
     return { code: str(r.chargeCode), display: `Ambulance (${str(r.vehicleClass) || "type not recorded"})`, at: (r.times && r.times.handover) || null };
@@ -128,10 +137,59 @@ function capturableFrom(slices) {
         skipped.push({ sourceType: type, sourceId: row.id || null, status, reason: "no_code" });
         continue;
       }
-      items.push({ ...it, sourceType: type, sourceId: row.id || null, patientId: row.patientId || null, quantity: 1 });
+      items.push({ ...it, sourceType: type, sourceId: row.id || null, patientId: row.patientId || null, quantity: it.supplyQuantity || 1 });
     }
   }
   return { items, skipped };
+}
+
+/**
+ * PURE. ONE DRUG IS BILLED ONCE (BILL-01). A drug whose supply the tariff prices ("<code>:supply:<unit>" for any unit) is
+ * billed on the dispense and its doses are not charged; any other drug is billed per dose given and its dispense is not
+ * charged. A take-home supply is never given on the ward, so it is always billed on the dispense. What is not charged
+ * is named with why. A dispense to be billed whose quantity cannot be read is listed unpriced, never billed as one.
+ * Returns `{items, skipped, unpriced}`.
+ */
+function supplyOrDose(items, tariff) {
+  const keys = Object.keys(tariff && typeof tariff === "object" ? tariff : {}).map((k) => str(k).toUpperCase());
+  const bySupply = (code) => !!str(code) && keys.some((k) => k.startsWith(`${str(code).toUpperCase()}${SUPPLY.toUpperCase()}`));
+  const out = { items: [], skipped: [], unpriced: [] };
+  for (const it of items || []) {
+    if (it.sourceType === "MedicationDispense") {
+      if (!it.takeHome && !bySupply(it.drugCode)) { out.skipped.push({ sourceType: it.sourceType, sourceId: it.sourceId, status: null, reason: "billed_per_dose" }); continue; }
+      if (!it.supplyQuantity) { out.unpriced.push({ ...it, reason: "dispense_quantity_unreadable" }); continue; }
+    } else if (it.sourceType === "MedicationAdministration" && (bySupply(it.code) || bySupply(it.display))) {
+      out.skipped.push({ sourceType: it.sourceType, sourceId: it.sourceId, status: null, reason: "billed_on_supply" });
+      continue;
+    }
+    out.items.push(it);
+  }
+  return out;
+}
+
+/**
+ * PURE. What of each priced item is not on a live bill yet (BILL-04, BILL-07). A void bill bills nothing. An item is
+ * billed up to the quantity already on live bills: a bed day of an open stay priced per hour or per shift grows after
+ * an interim bill, and only the units added since are left, as a line of their own with the same source. `invoices`
+ * are Invoice records or their summaries.
+ */
+function unbilledItems(items, invoices) {
+  const billed = new Map();
+  for (const inv of invoices || []) {
+    if (!inv || inv.void || inv.status === "void" || isExternalRecord(inv)) continue;
+    for (const l of inv.lines || []) if (l && l.sourceType && l.sourceId) { const k = `${l.sourceType}:${l.sourceId}`; billed.set(k, (billed.get(k) || 0) + (Number(l.quantity) || 1)); }
+  }
+  const out = [];
+  for (const it of items || []) {
+    const done = it && it.sourceType && it.sourceId ? billed.get(`${it.sourceType}:${it.sourceId}`) || 0 : 0;
+    const q = Number(it && it.quantity) || 1;
+    if (!done) { out.push(it); continue; }
+    if (done >= q) continue;
+    const rest = q - done;
+    // Money in paise: the unit price times the units left, never a float product rounded afterwards.
+    out.push({ ...it, quantity: rest, line: Math.round(Number(it.amount) * 100) * rest / 100, billedBefore: done });
+  }
+  return out;
 }
 
 /**
@@ -335,11 +393,14 @@ async function chargesForPatient(request, env, ctx) {
     if (!versions) wardHistoryUnread += 1;
     items.push(...stayDayItems(e, stayDays(e, versions || null, nowMs), ctx.tariff));
   }
-  const { priced, unpriced, total, currency } = priceWith(items, ctx.tariff);
+  const once = supplyOrDose(items, ctx.tariff);
+  skipped.push(...once.skipped);
+  const { priced, unpriced: unpricedByTariff, total, currency } = priceWith(once.items, ctx.tariff);
+  const unpriced = [...once.unpriced, ...unpricedByTariff];
 
   return {
     ...base, ok: true, patientId, encounterId: encounterId || null,
-    items, priced, unpriced, total, currency,
+    items: once.items, priced, unpriced, total, currency,
     ...(unreadable.length ? { unreadable, unreadableWarning: `Could not read: ${unreadable.join(", ")}. Do not read the charge list as complete.` } : {}),
     ...(wardHistoryUnread ? { wardHistoryWarning: "The ward history of a stay could not be read, so its bed days are charged at the current ward." } : {}),
     /* Said every time. Nothing here is a charge, and the number is a proposal computed from the
@@ -356,4 +417,4 @@ async function chargesForPatient(request, env, ctx) {
   };
 }
 
-export { HAPPENED, DAILY_KINDS, itemFrom, capturableFrom, priceWith, tariffTable, stayDays, stayDayItems, chargesForPatient };
+export { HAPPENED, DAILY_KINDS, itemFrom, capturableFrom, supplyOrDose, unbilledItems, priceWith, tariffTable, stayDays, stayDayItems, chargesForPatient };
