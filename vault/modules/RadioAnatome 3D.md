@@ -140,3 +140,7 @@ CT/MRI slice modules, so a structure links both ways between a 3D mesh and the s
 - **Headless test needs SwiftShader flags** (`--use-angle=swiftshader --enable-unsafe-swiftshader`);
   with `--disable-gpu` alone WebGL is absent and every 3D check fails. A render+pick pass is
   ~600 ms there; that is software GL, not a device number.
+- **A test that writes `st.cam` must wait for `settled()` first.** A glide in flight (`st.camTo`)
+  overwrites `st.cam` every frame, and under SwiftShader a glide outlasts several test steps. The
+  saved-view checks wrote `yaw = 1.1` mid-glide, saved a 0.78 frame instead, and failed on every
+  headless run until 2026-09-26. The app was fine; nobody can save a view inside a glide.
