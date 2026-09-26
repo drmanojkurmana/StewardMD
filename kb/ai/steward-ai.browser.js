@@ -378,7 +378,8 @@
     tricyclic_antidepressant_overdose: "tricyclic poisoning, tca poisoning",
     PHARYNGITIS: "sore throat, strep throat",
     latent_tuberculosis: "latent tb, ltbi",
-    mdr_tuberculosis: "mdr tb"
+    mdr_tuberculosis: "mdr tb",
+    neonatal_jaundice: "newborn jaundice, jaundice in newborn, jaundice in a newborn, neonatal hyperbilirubinemia"
   };
   // One spelling for British/US variants, plurals, poisoning words and Roman numerals, applied to
   // questions and names alike, so "haemophilia A" = "hemophilia a" and "factor VIII" = "factor 8".
@@ -400,7 +401,7 @@
   // of a name ("Acute pancreatitis" = "pancreatitis", "Cushing syndrome" = "cushing"), never both
   // ("Chronic kidney disease" is not "kidney").
   var CONNECT = { of: 1, and: 1, the: 1, "in": 1, "with": 1, due: 1, to: 1, other: 1, or: 1, by: 1, "for": 1, on: 1, at: 1, from: 1, type: 1 };
-  var LEAD_Q = { acute: 1, chronic: 1, severe: 1, mild: 1, moderate: 1, uncomplicated: 1, recurrent: 1, idiopathic: 1, spontaneous: 1, primary: 1, paroxysmal: 1 };
+  var LEAD_Q = { acute: 1, chronic: 1, severe: 1, mild: 1, moderate: 1, uncomplicated: 1, simple: 1, recurrent: 1, idiopathic: 1, spontaneous: 1, primary: 1, paroxysmal: 1 };
   var HEAD_Q = { disease: 1, disorder: 1, syndrome: 1, infection: 1, deficiency: 1, management: 1, treatment: 1, diagnosis: 1, complication: 1, overview: 1, mellitus: 1, pectoris: 1, erythematosus: 1, virus: 1 };
   var Q_STOP = { is: 1, are: 1, was: 1, were: 1, be: 1, a: 1, an: 1, i: 1, me: 1, my: 1, we: 1, it: 1, its: 1, as: 1, "do": 1, did: 1, has: 1, have: 1, had: 1, will: 1, may: 1, vs: 1, per: 1, any: 1, all: 1, not: 1, no: 1, "if": 1, so: 1, but: 1, up: 1 };
   function plainWord(t) { return !!(CONNECT[t] || Q_STOP[t] || GENERIC_TOPIC[t] || LEAD_Q[t] || HEAD_Q[t]) || /^\d+$/.test(t); }
