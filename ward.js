@@ -1846,10 +1846,11 @@
     var meds = state.activeMeds;
     if (meds == null) return "";
     var rows = meds.map(function (m) {
-      return "<li><b>" + esc(m.drug) + "</b>" +
-        (m.dose && m.dose.value != null ? " <span>" + esc(m.dose.value) + esc(m.dose.unit || "") + "</span>" : "") +
-        (m.route ? " <span>" + esc(m.route) + "</span>" : "") +
-        (m.frequency ? " <span>" + esc(m.frequency) + "</span>" : "") +
+      // The order as written is recorded content, marked lang="en" inside a translated screen.
+      return "<li><b lang=\"en\">" + esc(m.drug) + "</b>" +
+        (m.dose && m.dose.value != null ? " <span lang=\"en\">" + esc(m.dose.value) + esc(m.dose.unit || "") + "</span>" : "") +
+        (m.route ? " <span lang=\"en\">" + esc(m.route) + "</span>" : "") +
+        (m.frequency ? " <span lang=\"en\">" + esc(m.frequency) + "</span>" : "") +
         (m.since ? " <small>" + wTH("ward.since", "since {since}", { since: when(m.since) }, "since") + "</small>" : "") +
         (m.prescriberId ? " <small>" + wTH("ward.prescribed-by-who", "prescribed by {who}", { who: staffWho(m.prescriberId, null) }) + "</small>" : "") +
         // LT-20: an order pharmacy has not checked yet says so (null: this reader cannot see verifications).
