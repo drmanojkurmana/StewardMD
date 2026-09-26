@@ -49,7 +49,8 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService, ListCeilingError } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { patientIdForMrn } from "./opd-identity.js";
-import { admitPatient, patientsFor } from "./migrate-inpatient.js";
+import { admitPatient, patientsFor, ADMISSION_CLASSES } from "./migrate-inpatient.js";
+import { sha256Hex } from "./object-store.js";
 
 const ED = "ED";
 const OPEN = "in-progress";
@@ -274,7 +275,13 @@ async function edDisposition(request, env, ctx) {
     if (!str(admission.ward)) return { ...base, ok: false, status: 422, error: "ward_required", detail: "an ED admission needs the ward it is admitting to", written: 0 };
     const mrn = (current.identifiers || []).find((i) => i && i.system === "opd-mrn");
     if (!mrn || !str(mrn.value)) return { ...base, ok: false, status: 502, error: "record_write_failed", detail: "this ED encounter carries no MRN identifier to admit under", written: 0 };
-    const admitResult = await admitPatient(request, env, {
+    /* DATA-05: a disposition recorded again after "admitted_but_ed_not_closed" finds the admission it already
+     * made (open, this patient, begun since the ED arrival) and only closes the ED visit, instead of admitting
+     * a second time into the bed the first admission already holds. */
+    let made;
+    try { made = ((await svc.byPatient("Encounter", current.patientId)) || []).find((e) => e && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN && String(e.periodStart || "") >= String(current.periodStart || "")); }
+    catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+    const admitResult = made ? { ok: true, encounterId: made.id } : await admitPatient(request, env, {
       // class forwarded, TASK 2.9 fix: without it every ED admission silently defaulted to IPD
       // regardless of what was requested, which blocked the master plan's own primary journey
       // (ED -> ICU) - admitPatient()/encounterFromAdmission() already validate it against
@@ -282,9 +289,21 @@ async function edDisposition(request, env, ctx) {
       ...ctx, admission: { mrn: mrn.value, ward: admission.ward, bed: admission.bed || undefined, class: admission.class || undefined, admittedAt: at, reason: str(ctx.reason) || current.reason || undefined },
     });
     if (!admitResult.ok) return admitResult;   // the SAME bed-occupancy refusal an inpatient admit would give
-    const closed = await closeEdEncounter(svc, current, disposition, at, ctx);
-    if (!closed.ok) return closed;
-    return { ...base, ok: true, written: 2, encounterId, disposition, admittedEncounterId: admitResult.encounterId, patientId: current.patientId, version: closed.version, actor: resolved.actor.id };
+    /* DATA-05: the admission has landed. The ED visit is read AGAIN before it is closed: closing it at the
+     * version read before the admission failed on any re-triage made meanwhile, and left the patient open in
+     * the ED and in a ward bed. Its own key, so an idempotency key already spent on the admission is not
+     * replayed as the close. A close that still fails says exactly that. */
+    let fresh = null, closed;
+    try { fresh = await svc.get("Encounter", encounterId); } catch (e) { closed = { ok: false, error: "record_read_failed" }; }
+    if (!closed) closed = !fresh ? { ok: false, error: "encounter_not_found" }
+      : fresh.status !== OPEN ? { ok: true, version: fresh.version }
+      : await closeEdEncounter(svc, fresh, disposition, at, { ...ctx, idempotencyKey: ctx.idempotencyKey ? `${ctx.idempotencyKey}:ed-close` : null });
+    if (!closed.ok) {
+      return { ...base, ok: false, status: closed.status === 409 ? 409 : 502, error: "admitted_but_ed_not_closed", cause: closed.error || null,
+        detail: "The patient was admitted, but the emergency visit could not be closed. Record the disposition again to close it.",
+        encounterId, admittedEncounterId: admitResult.encounterId, patientId: current.patientId, written: 1, actor: resolved.actor.id };
+    }
+    return { ...base, ok: true, written: made ? 1 : 2, encounterId, disposition, admittedEncounterId: admitResult.encounterId, patientId: current.patientId, version: closed.version, actor: resolved.actor.id };
   }
 
   const closed = await closeEdEncounter(svc, current, disposition, at, ctx);
@@ -449,11 +468,14 @@ async function recordEdProcedure(request, env, ctx) {
   if (!enc) return { ...base, ok: false, status: 404, error: "encounter_not_found", encounterId, written: 0 };
   if (enc.class !== ED) return { ...base, ok: false, status: 409, error: "not_an_ed_visit", encounterId, written: 0 };
 
+  /* DATA-11: the id is the procedure itself (visit, time done, name), not a random value, so a double tap or
+   * a resend without an idempotency key lands as a new version of the one record instead of a second one. */
+  const performedAt = new Date(atMs).toISOString();
   const rec = {
-    resourceType: PROCEDURE_TYPE, id: `wsq-edproc-${slug(encounterId)}-${crypto.randomUUID().slice(0, 13)}`,
+    resourceType: PROCEDURE_TYPE, id: `wsq-edproc-${slug(encounterId)}-${(await sha256Hex(performedAt + "|" + str(p.name).toLowerCase())).slice(0, 13)}`,
     patientId: enc.patientId, encounterId,
     name: str(p.name), site: str(p.site) || null, performedBy: str(p.performedBy),
-    performedAt: new Date(atMs).toISOString(), notes: str(p.notes) || null, complications: str(p.complications) || null,
+    performedAt, notes: str(p.notes) || null, complications: str(p.complications) || null,
     recordedBy: resolved.actor.id,
   };
   try {
