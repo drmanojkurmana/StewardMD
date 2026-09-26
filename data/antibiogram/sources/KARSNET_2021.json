@@ -24,7 +24,7 @@
   "status": "double-checked",
   "note": "Tables 6, 7, 8, 9, 11 and 12 parsed from the PDF text layer (pdfplumber words assigned to columns by x position; the column order differs between tables and was checked on each page) and every value compared by eye with the pages rendered at scale 2.2; every printed percentage recomputed from its printed counts (no disagreement). The overall charts (Figures 10, 13, 15, 17, 19) were read from the text layer and checked on the rendered pages; each number resistant and tested equals the sum of its specimen table and each percentage its counts. Location charts (Figures 11, 12, 14, 16, 18, 20): data labels from the text layer, each matched to its bar by a script comparing the bar colour on the page rendered at scale 4 with the legend marker colours, labels without a bar (0) placed by their position in the group, then every label checked by eye on the rendered chart; the text statements for Pseudomonas imipenem, Klebsiella ICU and Acinetobacter imipenem and ICU values match. MRSA and VRE trend labels read from the rendered chart. Count Tables 3 and 5 checked against the images and their printed totals. Page numbers are 1-based PDF pages."
  },
- "notes": "First Kerala state antibiogram (KARS-Net annual report for 2021; the report is undated, its PDF was created in November 2022): 18 laboratories in 9 districts, seven priority pathogens. All figures are percent resistant (intermediate counted as not resistant). In 2021 pus aspirate and other sterile body fluids were reported together (PA+OSBF, recorded as pus). The specimen tables pool all location types (set all); the location charts pool all specimens (recorded as all specimens by location) except for Enterococcus, charted for blood with PA+OSBF (recorded as all specimens except urine) and for urine; the overall charts give all specimens and locations (recorded as all specimens, all settings) and the all-specimen S. aureus (cefoxitin) and Enterococcus (vancomycin) rows carry the MRSA and VRE trends. Location type was unknown for 877 isolates. The report prints percentages even for fewer than 30 isolates tested; those cells keep their number tested and a note.",
+ "notes": "First Kerala state antibiogram (KARS-Net annual report for 2021; the report is undated, its PDF was created in November 2022): 18 laboratories in 9 districts, seven priority pathogens. All figures are percent resistant (intermediate counted as not resistant). In 2021 pus aspirate and other sterile body fluids were reported together (PA+OSBF, shown under deep infections). The specimen tables pool all location types (set all); the location charts pool all specimens (recorded as all specimens by location) except for Enterococcus, charted for blood with PA+OSBF (recorded as all specimens except urine) and for urine; the overall charts give all specimens and locations (recorded as all specimens, all settings) and the all-specimen S. aureus (cefoxitin) and Enterococcus (vancomycin) rows carry the MRSA and VRE trends. Location type was unknown for 877 isolates. The report prints percentages even for fewer than 30 isolates tested; those cells keep their number tested and a note.",
  "issues": [
   "Second reader 2026-09-26: every cell re-read blind against the page images before comparing (all 394 cells, including the seeded sample of 98, plus all 41 row n and all 40 counts; tables at scale 2.5, charts zoomed at scale 4): 0 transcription errors, nothing corrected.",
   "Second reader: all 171 location-chart cells (Figures 11, 12, 14, 16, 18 and 20) also checked by a script against each figure's own legend marker colours (IN grey, OUT orange, ICU blue, except Figure 14: OUT grey, IN orange, ICU blue) and the colour of the bar behind each data label: drug, location and value agree for every cell. Every figure of the overall charts (Figures 10, 13, 15, 17, 19) equals the sum of its specimen table columns.",
@@ -157,7 +157,7 @@
    "notes": {
     "linezolid": "printed 0% (4 of 1,062 tested resistant); the text (page 21) says a few centres reported linezolid-resistant S. aureus but none was confirmed by broth microdilution"
    },
-   "note": "PA+OSBF (pus aspirate and other sterile body fluids, reported together in 2021) recorded as pus."
+   "note": "PA+OSBF (pus aspirate and other sterile body fluids, reported together in 2021) shown under deep infections."
   },
   {
    "spec": "all",
@@ -238,7 +238,7 @@
    "notes": {
     "gentamicin_hl": "printed as Gentamicin-High (high-level gentamicin)"
    },
-   "note": "Printed as Enterococcus species. PA+OSBF (pus aspirate and other sterile body fluids, reported together in 2021) recorded as pus."
+   "note": "Printed as Enterococcus species. PA+OSBF (pus aspirate and other sterile body fluids, reported together in 2021) shown under deep infections."
   },
   {
    "spec": "blood",
@@ -527,7 +527,7 @@
     "cotrimoxazole": 702
    },
    "specimen_as_printed": "PA+OSBF (pus aspirate and other sterile body fluids together)",
-   "note": "PA+OSBF (pus aspirate and other sterile body fluids, reported together in 2021) recorded as pus."
+   "note": "PA+OSBF (pus aspirate and other sterile body fluids, reported together in 2021) shown under deep infections."
   },
   {
    "spec": "blood",
@@ -758,7 +758,7 @@
    "notes": {
     "nitrofurantoin": "printed for PA+OSBF isolates (63 tested); nitrofurantoin is a urinary agent"
    },
-   "note": "Printed as Klebsiella species. PA+OSBF (pus aspirate and other sterile body fluids, reported together in 2021) recorded as pus."
+   "note": "Printed as Klebsiella species. PA+OSBF (pus aspirate and other sterile body fluids, reported together in 2021) shown under deep infections."
   },
   {
    "spec": "blood",
@@ -994,7 +994,7 @@
     "ciprofloxacin": 796
    },
    "specimen_as_printed": "PA+OSBF (pus aspirate and other sterile body fluids together)",
-   "note": "Printed as Pseudomonas species. PA+OSBF (pus aspirate and other sterile body fluids, reported together in 2021) recorded as pus."
+   "note": "Printed as Pseudomonas species. PA+OSBF (pus aspirate and other sterile body fluids, reported together in 2021) shown under deep infections."
   },
   {
    "spec": "urine",
@@ -1194,7 +1194,7 @@
     "minocycline": 88
    },
    "specimen_as_printed": "PA+OSBF (pus aspirate and other sterile body fluids together)",
-   "note": "Printed as Acinetobacter species. PA+OSBF (pus aspirate and other sterile body fluids, reported together in 2021) recorded as pus."
+   "note": "Printed as Acinetobacter species. PA+OSBF (pus aspirate and other sterile body fluids, reported together in 2021) shown under deep infections."
   },
   {
    "spec": "urine",

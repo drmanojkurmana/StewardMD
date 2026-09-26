@@ -16,9 +16,9 @@
  "reporting": "%S",
  "verification": {
   "status": "double-checked",
-  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026)"
+  "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026). Reading method: Data from Table 4 (page 6), text-extracted (machine-readable PDF, not scanned)."
  },
- "notes": "Source: Bhargava et al., Front. Microbiol. 2022;13:965053 (Hayes Memorial Mission Hospital, Prayagraj UP). Data from Table 4 (page 6), text-extracted (machine-readable PDF, not scanned). Table 4 reports % susceptible (confirmed by Results text, e.g. 'amikacin was effective against 77.0% of E. coli'; 'imipenem outperformed meropenem by inhibiting 57.4% E. coli'). All values entered as printed %S; no %R conversion needed (from_R=false throughout). NT = not tested (cell omitted). Specimen = clean-catch midstream urine; study period Nov 2018–Dec 2019; 96.0% of isolates MDR. ESBL context: 40.4% of E. coli were ESBL producers; none of K. pneumoniae were ESBL. n per organism from Table 4 column headers. Proteus sp. mapped to Proteus mirabilis (species not specified in study — note added). Enterococcus not split to species → 'Enterococcus'. 'H-gentamycin' (high-concentration gentamicin, Enterococcus 66.7%) recorded as separate token h-gentamicin. Non-canonical drugs kept with lowercase tokens: novobiocin. S. epidermidis (n=8) reported but not in canonical organism list — see unmapped. No A. baumannii in study.",
+ "notes": "Source: Bhargava et al., Front. Microbiol. 2022;13:965053 (Hayes Memorial Mission Hospital, Prayagraj UP). Table 4 reports % susceptible (confirmed by Results text, e.g. 'amikacin was effective against 77.0% of E. coli'; 'imipenem outperformed meropenem by inhibiting 57.4% E. coli'). All values entered as printed %S; no %R conversion needed (from_R=false throughout). NT = not tested (cell omitted). Specimen = clean-catch midstream urine; study period Nov 2018-Dec 2019; 96.0% of isolates MDR. ESBL context: 40.4% of E. coli were ESBL producers; none of K. pneumoniae were ESBL. n per organism from Table 4 column headers. Proteus sp. is filed under the genus (species not stated). Enterococcus not split to species → 'Enterococcus'. 'H-gentamycin' (high-concentration gentamicin, Enterococcus 66.7%) recorded as separate token h-gentamicin. Non-canonical drugs kept with lowercase tokens: novobiocin. S. epidermidis (n=8) reported but not in canonical organism list, see unmapped. No A. baumannii in study.",
  "issues": [
   "Organism naming over-specification: the extraction labels the second organism 'Proteus mirabilis', but Table 4 and the text report only 'Proteus sp.' (species not identified). All 14 susceptibility values map correctly to the Proteus column; only the top-level name is over-specified. The extraction includes a note acknowledging this, but the displayed name 'Proteus mirabilis' is not supported by t",
   "No %R->%S conversion issues found: Table 4 prints susceptibility (%S) directly (confirmed by narrative on p5, e.g. vancomycin 100% S. aureus, nitrofurantoin 94.4% Enterococcus, chloramphenicol 83.3/75.0/87.5). All from_R:false flags are correct.",
@@ -52,7 +52,7 @@
   {
    "spec": "urine",
    "set": "all",
-   "org": "Proteus mirabilis",
+   "org": "Proteus spp.",
    "pheno": null,
    "n": 23,
    "specimen_as_printed": "urine",
@@ -74,7 +74,8 @@
    },
    "notes": {
     "amikacin": "study reports 'Proteus sp.', species not specified"
-   }
+   },
+   "note": "Printed as \"Proteus sp.\" (species not stated), so filed under the genus."
   },
   {
    "spec": "urine",

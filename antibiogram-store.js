@@ -21,7 +21,7 @@
  * ======================================================================================== */
 (function () {
   "use strict";
-  var ABG_V = "ea98a1f6b02b";
+  var ABG_V = "601eadbeb5fa";
   var R = window.ABG_RULES;
   var ACT = { k: "keep", i: "intrinsic", h: "hide", x: "suppress", c: "caution" };
   var LOCAL_KEY = "smd_abg_local";
@@ -103,7 +103,7 @@
     if (!B) return [];
     var out = [{ id: "india", label: "India: all institutions (pooled)", group: "Pooled" }];
     ["north", "south", "east", "west"].forEach(function (r) {
-      if (B.sources.some(function (s) { return s.region === r && s.kind !== "network" && !s.local && s.latest && recent(s); })) out.push({ id: "region:" + r, label: REGION_LABEL[r] + " (pooled)", group: "Pooled", region: r });
+      if (B.sources.some(function (s) { return poolable(s) && s.region === r; })) out.push({ id: "region:" + r, label: REGION_LABEL[r] + " (pooled)", group: "Pooled", region: r });
     });
     B.sources.filter(function (s) { return s.kind === "network" && s.latest; }).sort(function (a, b) { return (a.region === "national" ? 0 : 1) - (b.region === "national" ? 0 : 1) || (a.short < b.short ? -1 : 1); })
       .forEach(function (s) { out.push({ id: "src:" + s.id, label: s.short + " " + (s.edLabel || s.year) + (s.verification.status === "transcribed" ? " (summary, no isolate counts)" : ""), group: "Surveillance networks", src: s }); });
@@ -120,12 +120,14 @@
   // Pools take each institution's latest antibiogram only if it is recent (stats.poolFrom: the five
   // most recent data years); older ones stay viewable on their own and in trends.
   function recent(s) { var f = B && B.stats && B.stats.poolFrom; return !f || s.year >= f; }
+  // Pools: each institution's own cumulative antibiogram (latest edition, recent enough). Never
+  // networks (the same isolates twice), published studies (often one organism, one unit or a
+  // resistant subset; each is shown on its own), the device-local import, or a focus report.
+  function poolable(s) { return s.kind === "institution" && !s.local && !s.focus && s.latest && recent(s); }
   function scopeRows(scope) {
     if (!B) return [];
-    // Pools: each institution's latest antibiogram, recent enough; never networks (the same isolates
-    // twice), the device-local import, or an outbreak / single-pathogen report (focus).
-    if (scope === "india") return B.rows.filter(function (r) { return r.src.kind !== "network" && !r.src.local && !r.src.focus && r.src.latest && recent(r.src); });
-    if (/^region:/.test(scope)) { var rg = scope.slice(7); return B.rows.filter(function (r) { return r.src.region === rg && r.src.kind !== "network" && !r.src.local && !r.src.focus && r.src.latest && recent(r.src); }); }
+    if (scope === "india") return B.rows.filter(function (r) { return poolable(r.src); });
+    if (/^region:/.test(scope)) { var rg = scope.slice(7); return B.rows.filter(function (r) { return r.src.region === rg && poolable(r.src); }); }
     if (/^src:/.test(scope)) { var id = scope.slice(4); return B.rows.filter(function (r) { return r.src.id === id; }); }
     if (/^inst:/.test(scope)) { var inst = scope.slice(5); return B.rows.filter(function (r) { return r.src.inst === inst && r.src.latest; }); }
     if (scope === "local") return B.rows.filter(function (r) { return r.src.local; });
@@ -140,9 +142,9 @@
   }
 
   /* --------------------------------------------------------------- table --- */
-  var ORG_ORDER = ["ecoli", "klebsiella", "koxytoca", "kaerogenes", "ecloacae", "enterobacter", "citrobacter", "cfreundii", "ckoseri", "entero_other", "pmirabilis", "proteus", "proteus_other", "ppm", "morganella", "providencia", "pstuartii", "prettgeri", "serratia",
+  var ORG_ORDER = ["ecoli", "klebsiella", "koxytoca", "kaerogenes", "ecloacae", "enterobacter", "enterobacter_other", "citrobacter", "cfreundii", "ckoseri", "citrobacter_other", "entero_other", "pmirabilis", "proteus", "proteus_other", "ppm", "morganella", "providencia", "pstuartii", "prettgeri", "providencia_other", "serratia",
     "salmonella_typhi", "salmonella_paratyphi", "salmonella_enteric", "salmonella_nts", "shigella", "shigella_sonnei", "shigella_flexneri", "vcholerae", "ecoli_dec", "aeromonas", "paeruginosa", "acinetobacter", "steno", "burkholderia", "bcepacia", "bpseudomallei",
-    "hinfluenzae", "mcatarrhalis", "ngonorrhoeae", "nmeningitidis", "saureus", "cons", "sepidermidis", "shaemolyticus", "shominis", "cons_other", "ssaprophyticus", "efaecalis", "efaecium", "enterococcus", "spneumoniae", "strep_bhs", "strep_viridans", "streptococcus", "listeria",
+    "hinfluenzae", "mcatarrhalis", "ngonorrhoeae", "nmeningitidis", "saureus", "cons", "sepidermidis", "shaemolyticus", "shominis", "cons_other", "ssaprophyticus", "efaecalis", "efaecium", "enterococcus", "enterococcus_other", "spneumoniae", "strep_bhs", "strep_viridans", "streptococcus", "listeria",
     "candida", "calbicans", "ctropicalis", "cparapsilosis", "cglabrata", "ckrusei", "cauris", "aspergillus", "aflavus", "afumigatus", "aniger"];
   var DRUG_ORDER = ["penicillin", "ampicillin", "amoxicillin", "oxacillin", "cloxacillin", "cefoxitin", "amoxiclav", "ampsulbactam", "piperacillin", "piptazo", "cefazolin", "cephalexin", "cefuroxime", "cefotaxime", "ceftriaxone", "ceftazidime", "cefepime",
     "cefixime", "cefpodoxime", "cefoperazone", "cefoperazone_sulbactam", "ceftazidime_avibactam", "ceftolozane_tazobactam", "ceftaroline", "cefiderocol", "aztreonam", "aztreonam_avibactam", "ertapenem", "imipenem", "meropenem", "doripenem",
@@ -231,7 +233,9 @@
     cfreundii: "citrobacter", ckoseri: "citrobacter", pmirabilis: "proteus", proteus_other: "proteus", shigella_sonnei: "shigella", shigella_flexneri: "shigella",
     bcepacia: "burkholderia", bpseudomallei: "burkholderia", calbicans: "candida", ctropicalis: "candida", cparapsilosis: "candida", cglabrata: "candida", ckrusei: "candida", cauris: "candida",
     aflavus: "aspergillus", afumigatus: "aspergillus", aniger: "aspergillus", ecloacae: "enterobacter", pstuartii: "providencia", prettgeri: "providencia",
-    sepidermidis: "cons", shaemolyticus: "cons", shominis: "cons", cons_other: "cons" };
+    sepidermidis: "cons", shaemolyticus: "cons", shominis: "cons", cons_other: "cons",
+    enterococcus_other: "enterococcus", enterobacter_other: "enterobacter", citrobacter_other: "citrobacter", streptococcus_other: "streptococcus",
+    burkholderia_other: "burkholderia", candida_other: "candida", providencia_other: "providencia", shigella_other: "shigella" };
   function isCoNS(k) { return k === "cons" || PARENT[k] === "cons"; }
   function mix(scope, spec, set, opts) {
     opts = opts || {};
@@ -338,9 +342,9 @@
     CAP: [["respiratory", "other", "nonurine"], "opd"], SINUSITIS: [["respiratory", "other", "nonurine"], "opd"], COPD_EXACERBATION: [["respiratory", "other", "nonurine"], "opd"], BRONCHIECTASIS_EXACERBATION: [["respiratory", "other", "nonurine"], "opd"],
     SEVERE_CAP: [["respiratory", "other", "nonurine"], "icu"], HAP: [["respiratory", "other", "nonurine"], "inpatient"], VAP: [["respiratory", "other", "nonurine"], "icu", { cohort: "hai" }], ASPIRATION_PNEUMONIA: [["respiratory", "other", "nonurine"], "inpatient"], LUNG_ABSCESS: [["respiratory", "other", "nonurine"], "inpatient"],
     CELLULITIS: [["pus", "deep", "other", "nonurine"], "opd"], ERYSIPELAS: [["pus", "deep", "other", "nonurine"], "opd"], DIABETIC_FOOT: [["deep", "pus", "other", "nonurine"], "inpatient"], NECROTIZING_FASCIITIS: [["deep", "pus", "other", "nonurine"], "inpatient"],
-    LIVER_ABSCESS: [["deep", "pus", "other", "blood", "nonurine"], "inpatient"], BRAIN_ABSCESS: [["deep", "pus", "other", "blood", "nonurine"], "inpatient"],
+    LIVER_ABSCESS: [["deep", "pus", "other", "blood", "nonurine"], "inpatient"], BRAIN_ABSCESS: [["deep", "pus", "other", "blood", "nonurine"], "inpatient", { noAll: true }],
     // Pneumococcal susceptibility for meningitis needs meningeal breakpoints: CSF figures or none.
-    MENINGITIS: [["csf", "sterile", "blood", "nonurine"], "inpatient", { only: { spneumoniae: ["csf"] } }], ENCEPHALITIS: [["csf", "sterile", "blood", "nonurine"], "inpatient", { only: { spneumoniae: ["csf"] } }], SBP: [["sterile", "blood", "nonurine"], "inpatient"],
+    MENINGITIS: [["csf", "sterile", "blood", "nonurine"], "inpatient", { only: { spneumoniae: ["csf"] }, noAll: true }], ENCEPHALITIS: [["csf", "sterile", "blood", "nonurine"], "inpatient", { only: { spneumoniae: ["csf"] }, noAll: true }], SBP: [["sterile", "blood", "nonurine"], "inpatient"],
     CHOLANGITIS: [["sterile", "blood", "nonurine"], "inpatient"], CHOLECYSTITIS: [["sterile", "blood", "nonurine"], "inpatient"],
     SEPSIS: [["blood", "nonurine"], "inpatient"], SEPTIC_SHOCK: [["blood", "nonurine"], "icu"], FEBRILE_NEUTROPENIA: [["blood", "nonurine"], "inpatient"], IE: [["blood", "nonurine"], "inpatient"], DEVICE_INFECTION: [["blood", "nonurine"], "icu", { cohort: "hai" }],
     ENTERIC_FEVER: ["blood", "all"], PUO: [["blood", "nonurine"], "all"], GASTROENTERITIS: ["stool", "all"], DYSENTERY: ["stool", "all"]
@@ -349,7 +353,7 @@
     var s = String(synId || "").toUpperCase();
     if (SYN[s]) return SYN[s];
     // Unknown ids: guess from the name (gall bladder before bladder).
-    if (/MENING|CNS/.test(s)) return [["csf", "sterile", "blood", "nonurine"], "inpatient", { only: { spneumoniae: ["csf"] } }];
+    if (/MENING|CNS/.test(s)) return [["csf", "sterile", "blood", "nonurine"], "inpatient", { only: { spneumoniae: ["csf"] }, noAll: true }];
     if (/CHOLE|BILIAR|PERITON|SBP/.test(s)) return [["sterile", "blood", "nonurine"], "inpatient"];
     if (/UTI|CYSTITIS|PYELO|PROSTAT|URINARY/.test(s)) return ["urine", "all"];
     if (/PNEUMONIA|CAP|HAP|VAP|ASPIRATION|RESP|EMPYEMA|LUNG|BRONCH|COPD/.test(s)) return [["respiratory", "other", "nonurine"], "all"];
@@ -366,7 +370,39 @@
    * infections) and used by no other syndrome. only: organisms restricted to some specimens. */
   function synCtx(synId) {
     var e = synEntry(synId), o = (e && e[2]) || {};
-    return { spec: specimenChain(synId), set: settingFor(synId), cohort: o.cohort || null, only: o.only || null };
+    return { spec: specimenChain(synId), set: settingFor(synId), cohort: o.cohort || null, only: o.only || null, noAll: !!o.noAll };
+  }
+  /* Antibiotics a syndrome cannot rely on whatever the laboratory reports, with the reason: urinary
+   * agents do not reach the kidney, blood or tissues; tigecycline reaches low blood and urine levels;
+   * daptomycin is inactivated in the lung; several agents do not cross into the CSF. The console and
+   * reasoning leave them out for that syndrome (and say so); the Antibiogram screen still shows them. */
+  var URINE_ONLY = ["nitrofurantoin", "fosfomycin", "norfloxacin", "nalidixic_acid"];
+  var NOT_URINE = ["tigecycline", "eravacycline", "moxifloxacin"];
+  var LOW_BLOOD = ["tigecycline", "eravacycline"];
+  var NO_CNS = ["cefazolin", "cephalexin", "cefuroxime", "amoxiclav", "clindamycin", "erythromycin", "azithromycin", "clarithromycin", "tetracycline", "doxycycline", "minocycline", "tigecycline", "eravacycline", "daptomycin"];
+  var SYN_KIND = { CYSTITIS: "lowerUti", PYELONEPHRITIS: "upperUti", COMPLICATED_UTI: "upperUti", CA_UTI: "upperUti", PROSTATITIS: "upperUti",
+    CAP: "lung", SEVERE_CAP: "lung", HAP: "lung", VAP: "lung", ASPIRATION_PNEUMONIA: "lung", LUNG_ABSCESS: "lung", COPD_EXACERBATION: "lung", BRONCHIECTASIS_EXACERBATION: "lung",
+    MENINGITIS: "cns", ENCEPHALITIS: "cns", BRAIN_ABSCESS: "cns",
+    SEPSIS: "blood", SEPTIC_SHOCK: "blood", FEBRILE_NEUTROPENIA: "blood", IE: "blood", DEVICE_INFECTION: "blood", ENTERIC_FEVER: "blood", PUO: "blood" };
+  function synKind(synId) {
+    var s = String(synId || "").toUpperCase();
+    if (SYN_KIND[s]) return SYN_KIND[s];
+    if (/MENING|ENCEPHAL|CNS|VENTRICUL/.test(s)) return "cns";
+    if (/PYELO|PROSTAT|UROSEPSIS|UTI|URINARY/.test(s)) return "upperUti";
+    if (/PNEUMONIA|ASPIRATION|LUNG|EMPYEMA|COPD|BRONCH/.test(s)) return "lung";
+    if (/SEPSIS|SEPTIC|BACTER|NEUTROPENI|ENDOCARD|DEVICE|CRBSI|TYPHOID|ENTERIC/.test(s)) return "blood";
+    return "other";
+  }
+  function synDrug(synId, drug) {
+    if (!synId) return null;
+    var k = synKind(synId), L = R.drugLabel(drug);
+    if (k === "lowerUti") return NOT_URINE.indexOf(drug) >= 0 ? L + " reaches too little concentration in urine" : null;
+    if (URINE_ONLY.indexOf(drug) >= 0) return L + " is for lower urinary infection only: it does not reach adequate levels in the " + (k === "upperUti" ? "kidney or blood" : "blood or tissues");
+    if (k === "upperUti" && NOT_URINE.indexOf(drug) >= 0) return L + " reaches too little concentration in urine";
+    if (k === "blood" && LOW_BLOOD.indexOf(drug) >= 0) return L + " reaches low blood concentrations and is not used alone for bloodstream infection";
+    if (k === "lung" && drug === "daptomycin") return "daptomycin is inactivated by lung surfactant";
+    if (k === "cns" && NO_CNS.indexOf(drug) >= 0) return L + " does not reach adequate levels in the cerebrospinal fluid";
+    return null;
   }
   function usableInfo(scope, spec, set) {
     var t = table(scope, spec, set), orgs = 0, maxK = 0;
@@ -382,14 +418,21 @@
    * Specimen matters more than setting, so settings are tried within each specimen. A syndrome
    * that names specimens gets those or all specimens, never a different one (no urine figures for
    * meningitis); with no specimen wanted any stratum will do. */
-  function candidates(scope, spec, set) {
+  function candidates(scope, spec, set, noAll) {
     var wantSp = [].concat(spec || []).filter(Boolean), wantSet = [].concat(set || []).filter(Boolean);
     var st = strata(scope), specs = [], sets = [];
     function addSp(x) { if (x && st.specs[x] && specs.indexOf(x) < 0) specs.push(x); }
     function addSet(x) { if (x && sets.indexOf(x) < 0) sets.push(x); }
-    wantSp.forEach(addSp); addSp("all"); if (!wantSp.length) Object.keys(st.specs).forEach(addSp);
-    wantSet.forEach(function (x) { addSet(x); if (x === "icu" || x === "ward") addSet("inpatient"); if (x === "inpatient") addSet("ward"); });
-    addSet("all"); ["inpatient", "ward", "icu", "opd"].forEach(addSet);
+    wantSp.forEach(addSp); if (!noAll) addSp("all"); if (!wantSp.length) Object.keys(st.specs).forEach(addSp);
+    // Settings: the one asked for, its neighbours, then all settings. An outpatient syndrome never
+    // falls to ward or ICU figures (community pneumonia must not read ICU MRSA rates), nor an ICU
+    // syndrome to outpatient ones; with no setting asked for (or "all"), any will do.
+    var w = wantSet[0];
+    wantSet.forEach(addSet);
+    if (w === "icu" || w === "ward") ["inpatient", "all"].forEach(addSet);
+    else if (w === "inpatient") ["ward", "all", "icu"].forEach(addSet);
+    else if (w === "opd") addSet("all");
+    else { addSet("all"); ["inpatient", "ward", "icu", "opd"].forEach(addSet); }
     var out = [];
     specs.forEach(function (sp) { sets.forEach(function (x) { out.push({ spec: sp, set: x }); }); });
     return { list: out, wantSp: wantSp, wantSet: wantSet, specs: specs };
@@ -421,9 +464,9 @@
   function pickStratumFor(scope, orgName, spec, set, opts) {
     opts = opts || {};
     var oc = R.canonOrg(orgName), only = opts.only && oc && opts.only[oc.key];
-    var key = "po|" + scope + "|" + orgName + "|" + [].concat(spec || []).join(",") + "|" + [].concat(set || []).join(",") + "|" + (opts.cohort || "") + "|" + (only ? only.join(",") : "");
+    var key = "po|" + scope + "|" + orgName + "|" + [].concat(spec || []).join(",") + "|" + [].concat(set || []).join(",") + "|" + (opts.cohort || "") + "|" + (only ? only.join(",") : "") + "|" + (opts.noAll ? 1 : 0);
     if (memo[key]) return memo[key];
-    var c = candidates(scope, only || spec, set), pooled = isPooled(scope), res = null, any = null;
+    var c = candidates(scope, only || spec, set, opts.noAll), pooled = isPooled(scope), res = null, any = null;
     if (only) c.list = c.list.filter(function (x) { return only.indexOf(x.spec) >= 0; });
     // A syndrome that asks for a surveillance cohort tries it first, then the ordinary rows.
     var passes = opts.cohort ? [opts.cohort, null] : [null];
@@ -537,7 +580,7 @@
     load: load, ready: load, onReady: onReady, loaded: function () { return !!B; }, data: function () { return B; },
     scopes: scopes, scopeLabel: scopeLabel, scopeRows: scopeRows, isPooled: isPooled, strata: strata,
     table: table, cell: cell, phenotypes: phenotypes, wisca: wisca, rank: rank, mix: mix, trend: trend,
-    susceptibility: susceptibility, legacyAbg: legacyAbg, specimenFor: specimenFor, specimenChain: specimenChain, settingFor: settingFor, synCtx: synCtx,
+    susceptibility: susceptibility, legacyAbg: legacyAbg, specimenFor: specimenFor, specimenChain: specimenChain, settingFor: settingFor, synCtx: synCtx, synDrug: synDrug,
     pickStratum: pickStratum, pickStratumFor: pickStratumFor, orgRows: orgRows, usable: usable,
     sourceById: sourceById, editions: editions, flagged: flagged, csv: csv, sortDrugs: sortDrugs,
     localGet: localGet, localSave: localSave, localClear: localClear,

@@ -18,7 +18,7 @@
   "status": "double-checked",
   "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026)"
  },
- "notes": "Cureus 2024 (e60542), East Point Hospital & Research Center, Bangalore; prospective 6-month study Jan-Jun 2022, 357 isolates from 345 inpatient samples (urine/blood/sputum/swab/pus). Tables report \"Antibiotic sensitivity percentage (%)\" i.e. %SUSCEPTIBLE (WHONET, CLSI) — no conversion needed (from_R all false). Table 2 (gram-positive, p4) columns: Ampicillin, Amoxiclav, Cefazolin, Gentamycin, Tetracycline, Ciprofloxacin, Cefotaxime, Erythromycin, Clindamycin, Cefoxitin, Cotrimoxazole, Chloramphenicol, Levofloxacin, Nitrofurantoin, Vancomycin, Teicoplanin. Table 3 (gram-negative, p4) columns: Ampicillin, Piperacillin/tazobactam, Aztreonam, Imipenem, Meropenem, Gentamycin, Amikacin, Ciprofloxacin, Ceftriaxone, Cefuroxime, Clindamycin, Cotrimoxazole, Levofloxacin, Nitrofurantoin, Linezolid. NT (not tested) cells omitted. Study lists \"Klebsiella sp.\" (mapped to Klebsiella pneumoniae, the predominant species per text) and \"Acinetobacter sp.\" (mapped to A. baumannii). Enterococcus not split to species -> \"Enterococcus\". Note: some gram-negative cells are microbiologically implausible as printed (E. coli clindamycin 100% & aztreonam 100%, Pseudomonas clindamycin 100% & nitrofurantoin 100%",
+ "notes": "Cureus 2024 (e60542), East Point Hospital & Research Center, Bangalore; prospective 6-month study Jan-Jun 2022, 357 isolates from 345 inpatient samples (urine/blood/sputum/swab/pus). Tables report \"Antibiotic sensitivity percentage (%)\" i.e. %SUSCEPTIBLE (WHONET, CLSI), no conversion needed (from_R all false). Table 2 (gram-positive, p4) columns: Ampicillin, Amoxiclav, Cefazolin, Gentamycin, Tetracycline, Ciprofloxacin, Cefotaxime, Erythromycin, Clindamycin, Cefoxitin, Cotrimoxazole, Chloramphenicol, Levofloxacin, Nitrofurantoin, Vancomycin, Teicoplanin. Table 3 (gram-negative, p4) columns: Ampicillin, Piperacillin/tazobactam, Aztreonam, Imipenem, Meropenem, Gentamycin, Amikacin, Ciprofloxacin, Ceftriaxone, Cefuroxime, Clindamycin, Cotrimoxazole, Levofloxacin, Nitrofurantoin, Linezolid. NT (not tested) cells omitted. Study lists \"Klebsiella sp.\" (mapped to Klebsiella pneumoniae, the predominant species per text) and \"Acinetobacter sp.\" (mapped to A. baumannii). Enterococcus not split to species -> \"Enterococcus\". Note: some gram-negative cells are microbiologically implausible as printed (E. coli clindamycin 100% & aztreonam 100%, Pseudomonas clindamycin 100% & nitrofurantoin 100%",
  "issues": [],
  "rows": [
   {
@@ -317,7 +317,7 @@
    "org": "Staphylococcus aureus",
    "drug": "vancomycin",
    "value": 0,
-   "why": "flagged by the original verifier: 0% as printed — implausible for S. aureus; transcribed exactly from Table 2"
+   "why": "flagged by the original verifier: 0% as printed, implausible for S. aureus; transcribed exactly from Table 2"
   }
  ]
 }

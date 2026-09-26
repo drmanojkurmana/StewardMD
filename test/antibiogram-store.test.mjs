@@ -52,8 +52,11 @@ const S = load();
 
 test("scopes: India, regions with institutions, networks apart, latest edition per institution", () => {
   const ids = S.scopes().map((x) => x.id);
-  ["india", "region:north", "region:south", "src:N_2024", "inst:A", "inst:B", "inst:C"].forEach((id) => assert.ok(ids.includes(id), id));
+  ["india", "region:north", "src:N_2024", "inst:A", "inst:B", "inst:C"].forEach((id) => assert.ok(ids.includes(id), id));
   assert.ok(!ids.includes("region:national"));
+  // A region whose only sources are published studies has no pool: studies are shown on their own.
+  assert.ok(!ids.includes("region:south"), "a study is never pooled");
+  assert.ok(!JSON.parse(JSON.stringify(S.table("india", "urine", "all").orgs)).some((o) => o.rows && o.rows.some((r) => r.src && r.src.id === "C_2024")));
   assert.ok(!ids.includes("src:A_2023"), "older editions are reached from the source list, not the picker");
 });
 
@@ -209,6 +212,31 @@ test("surveillance cohorts answer only their syndromes; pneumococcal meningitis 
   assert.equal(men.lowN, true);
   const mrsa = S3.susceptibility("Staphylococcus aureus", "cefoxitin", ctx("DEVICE_INFECTION"));
   assert.equal(mrsa.s, 33.8, "oxacillin answers a cefoxitin question for staphylococci");
+});
+
+test("antibiotics a syndrome cannot rely on are left out for it, with the reason", () => {
+  assert.equal(S.synDrug("CYSTITIS", "nitrofurantoin"), null);
+  assert.match(S.synDrug("PYELONEPHRITIS", "nitrofurantoin"), /lower urinary infection only/);
+  assert.match(S.synDrug("PYELONEPHRITIS", "fosfomycin"), /kidney or blood/);
+  assert.match(S.synDrug("SEPSIS", "nitrofurantoin"), /blood or tissues/);
+  assert.match(S.synDrug("SEPSIS", "tigecycline"), /low blood concentrations/);
+  assert.match(S.synDrug("HAP", "daptomycin"), /surfactant/);
+  assert.match(S.synDrug("MENINGITIS", "cefazolin"), /cerebrospinal fluid/);
+  assert.equal(S.synDrug("MENINGITIS", "meropenem"), null);
+  assert.equal(S.synDrug("SEPSIS", "meropenem"), null);
+});
+
+test("fallbacks stay within the syndrome's world: no ICU figures for an outpatient syndrome, no all-specimens figures for meningitis", () => {
+  const S5 = load([src({ id: "G_2024", inst: "G", institution: "Gee Hospital", short: "Gee", region: "west", year: 2024, rows: [
+    { spec: "respiratory", set: "icu", org: "Staphylococcus aureus", n: 100, s: { cefoxitin: 2, vancomycin: 100 } },
+    { spec: "all", set: "all", org: "E. coli", n: 300, s: { ceftriaxone: 30, meropenem: 80 } }] })]);
+  const cap = S5.synCtx("CAP");
+  assert.equal(S5.susceptibility("Staphylococcus aureus", "cefoxitin", Object.assign({ scope: "inst:G" }, cap)), null);
+  const hap = S5.synCtx("HAP");
+  assert.ok(S5.susceptibility("Staphylococcus aureus", "cefoxitin", Object.assign({ scope: "inst:G" }, hap)));   // inpatient may read ICU
+  const men = S5.synCtx("MENINGITIS");
+  assert.equal(S5.susceptibility("E. coli", "meropenem", Object.assign({ scope: "inst:G" }, men)), null);
+  assert.ok(S5.susceptibility("E. coli", "meropenem", Object.assign({ scope: "inst:G" }, S5.synCtx("SEPSIS"))));  // labelled all-specimens fallback
 });
 
 test("pools use recent data: an institution's latest antibiogram older than the five most recent data years stays out", () => {

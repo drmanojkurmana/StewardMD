@@ -127,7 +127,7 @@
     HOSPITALS.push({ id: "INDIA_POOLED", name: "India: all institutions (pooled)", short: "India", type: "region", region: "india", hasPolicy: false, abgScope: "india" });
     var poolFrom = I.stats && I.stats.poolFrom;
     ["north", "south", "east", "west"].forEach(function (rg) {
-      if (!I.sources.some(function (x) { return x.region === rg && x.kind !== "network" && (!poolFrom || x.year >= poolFrom); })) return;
+      if (!I.sources.some(function (x) { return x.region === rg && x.kind === "institution" && !x.focus && (!poolFrom || x.year >= poolFrom); })) return;
       HOSPITALS.push({ id: "REGION_" + rg.toUpperCase(), name: RMETA[rg].name, short: RMETA[rg].short, type: "region", region: rg, hasPolicy: false, abgScope: "region:" + rg });
     });
     // The ICMR profile reads the newest ICMR AMRSN report that carries isolate numbers, else
@@ -144,6 +144,7 @@
       if (x.inst === "GIMSR") return;                                 // the GIMSR profile carries it
       if (latest[x.inst] !== x) return;                               // older editions live in the Antibiogram screen
       if (x.focus) return;                                            // an outbreak or single-pathogen report is not a hospital profile
+      if (!(x.usable >= 3)) return;                                   // too little to stand in for a hospital (one organism, all under 30)
       var net = x.kind === "network";
       // The id is the institution, not the edition, so a saved choice survives next year's report.
       HOSPITALS.push({ id: "ABG_" + x.inst, source: x.id, name: x.name + " (" + x.year + ")", short: x.city || x.short, type: net ? "network" : "study",
@@ -235,7 +236,7 @@
     ctx = ctx || {};
     if (h && h.abgScope && S && S.loaded && S.loaded()) {
       try {
-        var r = S.susceptibility(orgName, drugKey, { scope: h.abgScope, spec: ctx.spec, set: ctx.set, cohort: ctx.cohort, only: ctx.only });
+        var r = S.susceptibility(orgName, drugKey, { scope: h.abgScope, spec: ctx.spec, set: ctx.set, cohort: ctx.cohort, only: ctx.only, noAll: ctx.noAll });
         if (r && r.intrinsic) return { s: 0, intrinsic: true, why: r.why, spec: r.spec, set: r.set };
         if (r && !r.lowN) return { s: r.s, n: r.n, k: r.k, src: r.src, spec: r.spec, set: r.set, cohort: r.cohort, specMatch: r.specMatch, pooled: r.pooled, combined: r.combined };
       } catch (e) {}

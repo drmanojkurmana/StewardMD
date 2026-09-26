@@ -136,6 +136,17 @@
     pmirabilis: { label: "Proteus mirabilis", short: "P. mirabilis", group: "entero", names: ["proteus mirabilis", "p. mirabilis", "p mirabilis"] },
     proteus_other: { label: "Proteus vulgaris / penneri", short: "P. vulgaris", group: "entero", names: ["proteus vulgaris", "p. vulgaris", "proteus penneri"] },
     proteus: { label: "Proteus spp.", short: "Proteus", group: "entero", names: ["proteus spp", "proteus spp.", "proteus species", "proteus"] },
+    // "Other" groups: a report that prints species rows AND a genus line in the same table means the
+    // genus line as "the rest" (other or unspeciated), not the total. The build files such a line
+    // here, so a question about the genus combines all of them instead of reading the leftover alone.
+    enterococcus_other: { label: "Other Enterococcus species", short: "Other enterococci", group: "gpc", names: ["other enterococcus sp.", "other enterococcus spp.", "other enterococci"] },
+    enterobacter_other: { label: "Other Enterobacter species", short: "Other Enterobacter", group: "entero", names: ["other enterobacter sp.", "other enterobacter spp."] },
+    citrobacter_other: { label: "Other Citrobacter species", short: "Other Citrobacter", group: "entero", names: ["other citrobacter sp.", "other citrobacter spp."] },
+    streptococcus_other: { label: "Other streptococci", short: "Other streptococci", group: "gpc", strep: true, names: ["other streptococcus sp.", "other streptococci"] },
+    burkholderia_other: { label: "Other Burkholderia species", short: "Other Burkholderia", group: "nonferm", names: ["other burkholderia sp."] },
+    candida_other: { label: "Other Candida species", short: "Other Candida", group: "fungi", names: ["other candida sp.", "other candida spp.", "other candida species"] },
+    providencia_other: { label: "Other Providencia species", short: "Other Providencia", group: "entero", names: ["other providencia sp."] },
+    shigella_other: { label: "Other Shigella species", short: "Other Shigella", group: "entero", names: ["other shigella sp."] },
     entero_other: { label: "Enterobacter and Citrobacter (grouped)", short: "Enterobacter/Citrobacter", group: "entero", names: ["enterobacter spp. / citrobacter spp", "enterobacter/citrobacter", "enterobacter and citrobacter", "other enterobacterales"] },
     ppm: { label: "Proteus, Morganella and Providencia (grouped)", short: "Proteus group", group: "entero", names: ["proteus spp. / morganella / providencia", "proteus/morganella/providencia", "proteus, morganella, providencia", "proteus morganella providencia", "ppm"] },
     morganella: { label: "Morganella morganii", short: "Morganella", group: "entero", names: ["morganella morganii", "morganella", "morganella spp", "morganella spp."] },
@@ -348,6 +359,10 @@
     ckrusei: ["fluconazole"],
     aspergillus: ["fluconazole"], aflavus: ["fluconazole"], afumigatus: ["fluconazole"], aniger: ["fluconazole"]
   };
+  // An "other" group inherits its genus's intrinsic resistance.
+  ["enterococcus", "enterobacter", "citrobacter", "streptococcus", "burkholderia", "candida", "providencia", "shigella"].forEach(function (g) {
+    if (ORG_INTRINSIC[g] && !ORG_INTRINSIC[g + "_other"]) ORG_INTRINSIC[g + "_other"] = ORG_INTRINSIC[g];
+  });
   // Drugs used against bacteria make no sense for yeasts and vice versa (handled by group).
   var SALMONELLA_SHIGELLA = ["salmonella_typhi", "salmonella_paratyphi", "salmonella_enteric", "salmonella_nts", "shigella", "shigella_sonnei", "shigella_flexneri"];
   var NOT_EFFECTIVE_SS = AMINO_STD.concat(["cefazolin", "cephalexin", "cefuroxime", "cefoxitin"]);

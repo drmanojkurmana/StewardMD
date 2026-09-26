@@ -998,7 +998,9 @@
     if (opts && opts.scope && window.ABG_V2) window.ABG_V2.state.scope = opts.scope;
     if (root) { root.classList.add("on"); document.body.style.overflow = "hidden"; enableRotate(); if (opts) render(); return; }
     injectCSS();
-    root = document.createElement("div"); root.className = "abg"; root.id = "abgOverlay";
+    // smd-books-keep: page numbers here are source locators ("page 12"), not textbook citations for
+    // the app-wide book scrub (emoji-icons.js) to remove.
+    root = document.createElement("div"); root.className = "abg smd-books-keep"; root.id = "abgOverlay";
     root.innerHTML = shell();
     document.body.appendChild(root);
     render();
@@ -1625,7 +1627,7 @@
   }
 
   function toast(m) {
-    if (!tEl) { tEl = document.createElement("div"); tEl.className = "abg-toast"; document.body.appendChild(tEl); }
+    if (!tEl) { tEl = document.createElement("div"); tEl.className = "abg-toast smd-books-keep"; tEl.setAttribute("role", "status"); document.body.appendChild(tEl); }
     tEl.textContent = m; tEl.classList.add("on"); clearTimeout(tTimer);
     tTimer = setTimeout(function () { tEl.classList.remove("on"); }, 2400);
   }
@@ -1890,5 +1892,5 @@
     (document.head || document.documentElement).appendChild(s);
   }
 
-  window.ABG = { open: open, close: close, _data: { COVERAGE: COVERAGE, COLS: COLS } };
+  window.ABG = { open: open, close: close, toast: toast, _data: { COVERAGE: COVERAGE, COLS: COLS } };
 })();

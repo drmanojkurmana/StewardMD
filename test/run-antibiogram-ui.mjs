@@ -77,6 +77,7 @@ try {
   ok(await until(`document.querySelector('#abgV2Sheet').classList.contains('on')`), 'tapping a cell opens its sheet');
   const sheet = await text('#abgV2Sheet');
   ok(/SKIMS|Sher-i-Kashmir/i.test(sheet) && /isolates/.test(sheet), 'the sheet names the source and the isolates');
+  ok(!/20\d\d\d+ isolates/.test(sheet), 'the edition year and the isolate count stay apart on screen (no "2025487 isolates")');
   await shot('abg-cell-sheet');
   await click('#abgV2Sheet [data-v2="sheet-close"]');
   const sVal = parseFloat(firstCell.t);
@@ -149,8 +150,9 @@ try {
   await ev(`document.querySelector('.asp-region').scrollIntoView({block:'start'});1`);
   await shot('console-pyelo');
   await ev(`window.__toasts=[];document.querySelector('.asp-region-row[data-drug]')?.click();1`);
-  ok(await until(`window.__toasts.some(t=>/(SKIMS|Sher-i-Kashmir).*page \\d+/i.test(t))`), 'tapping a value names its source and page');
-  console.log('  toast:', await ev('window.__toasts[window.__toasts.length-1]||""'));
+  // Read the toast as it is ON SCREEN: the app-wide citation scrub must not delete "page N".
+  ok(await until(`/(SKIMS|Sher-i-Kashmir).*page \\d+/i.test((document.querySelector('.abg-toast.on')||{}).textContent||'')`), 'tapping a value names its source and page, as shown on screen');
+  console.log('  toast:', await ev(`(document.querySelector('.abg-toast')||{}).textContent||''`));
   await ev(`ASP.open('SEPSIS');1`);
   ok(await until(`/blood/i.test(document.querySelector('#aspRegionBody')?.innerText||'')`), 'sepsis uses blood figures');
 

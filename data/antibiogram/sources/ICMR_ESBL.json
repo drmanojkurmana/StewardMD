@@ -1,13 +1,13 @@
 {
  "id": "ICMR_ESBL",
- "kind": "network",
+ "kind": "study",
  "inst": "ICMR_ESBL",
  "institution": "ICMR multicentric ESBL study (AIIMS Delhi, PGIMER, CMC Vellore, JIPMER)",
  "short": "ICMR ESBL study",
  "city": null,
  "state": null,
  "region": "national",
- "sector": "network",
+ "sector": "government",
  "year": 2016,
  "period": "October 2014 to March 2016",
  "citation": "Indian J Med Res 2019;149:208-215",
@@ -18,8 +18,10 @@
   "status": "double-checked",
   "note": "migrated from data/antibiogram-raw.json: extracted from the source PDF, then re-verified cell by cell by a second reader (2026)"
  },
- "notes": "Source: Gautam et al, Indian J Med Res 2019;149:208-215 (ICMR multi-centric ESBL study, 4 tertiary centres: AIIMS Delhi, PGIMER Chandigarh, CMC Vellore, JIPMER Puducherry; Oct 2014-Mar 2016). Study covers ONLY E. coli (341 isolates) and K. pneumoniae (304 isolates) — no P. aeruginosa, A. baumannii, S. aureus, or Enterococcus. Method: Kirby-Bauer disc diffusion, CLSI. Table II reports % SUSCEPTIBLE by centre; Table III reports % RESISTANT (n/N) split by ESBL-producer vs non-ESBL. I derived OVERALL susceptibility by pooling Table III ESBL + non-ESBL resistant counts per drug (s = 100 - pooled %R, from_R:true for all pooled cells). Colistin values taken directly from the printed overall figures in the Results text (E. coli 99% = 271/274; K. pneumoniae 98% = 229/234), not from R. CAVEAT: Table III denominators (e.g. 167+202=369 for E. coli, 98+126=224 for K. pneumoniae) exceed stated collection totals of 341/304, likely reflecting drug-specific tested subsets/classification; per-drug pooled %R is nevertheless computed directly from printed n/N. Individual per-centre susceptibility values are available in Table II if centre-level breakdown is preferred. ESBL prevalence context: CDT dete",
- "issues": [],
+ "notes": "Source: Gautam et al, Indian J Med Res 2019;149:208-215 (ICMR multi-centric ESBL study, 4 tertiary centres: AIIMS Delhi, PGIMER Chandigarh, CMC Vellore, JIPMER Puducherry; Oct 2014-Mar 2016). Study covers ONLY E. coli (341 isolates) and K. pneumoniae (304 isolates), no P. aeruginosa, A. baumannii, S. aureus, or Enterococcus. Method: Kirby-Bauer disc diffusion, CLSI. Table II reports % SUSCEPTIBLE by centre; Table III reports % RESISTANT (n/N) split by ESBL-producer vs non-ESBL. I derived OVERALL susceptibility by pooling Table III ESBL + non-ESBL resistant counts per drug (s = 100 - pooled %R, from_R:true for all pooled cells). Colistin values taken directly from the printed overall figures in the Results text (E. coli 99% = 271/274; K. pneumoniae 98% = 229/234), not from R. CAVEAT: Table III denominators (e.g. 167+202=369 for E. coli, 98+126=224 for K. pneumoniae) exceed stated collection totals of 341/304, likely reflecting drug-specific tested subsets/classification; per-drug pooled %R is nevertheless computed directly from printed n/N. Individual per-centre susceptibility values are available in Table II if centre-level breakdown is preferred. ESBL prevalence context: CDT dete",
+ "issues": [
+  "Lead 2026-09-26: a multicentre research study, not a surveillance network report: kind \"study\", with a focus (two organisms, 2014 to 2016): shown, never pooled, not a profile."
+ ],
  "rows": [
   {
    "spec": "all",
@@ -116,5 +118,6 @@
    "n": 304
   }
  ],
- "excluded": []
+ "excluded": [],
+ "focus": "E. coli and K. pneumoniae of a four-centre ICMR study (October 2014 to March 2016)"
 }

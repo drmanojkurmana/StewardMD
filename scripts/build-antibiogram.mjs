@@ -154,12 +154,16 @@ function combine(parts, spec, set, pheno, how) {
   if (!(n > 0) || parts.some((p) => !(p.n > 0))) return null;
   const drugs = new Set(); parts.forEach((p) => Object.keys(p.cells).forEach((d) => drugs.add(d)));
   const cells = {};
+  const isMRp = (p) => p.pheno === "MRSA" || p.pheno === "MR";
   drugs.forEach((d) => {
+    // A beta-lactam is imputed 0% for the MRSA part only when every other part reports it: an MSSA
+    // row without penicillin would otherwise leave the "S. aureus" figure as the MRSA subset alone.
+    if (BETA.includes(d) && parts.some(isMRp) && parts.some((p) => !isMRp(p) && !(p.cells[d] && (p.cells[d].act === "keep" || p.cells[d].act === "intrinsic")))) return;
     let sw = 0, w = 0, intrinsic = null;
     for (const p of parts) {
       const c = p.cells[d];
       if (c && c.act === "intrinsic") { intrinsic = c; continue; }
-      if ((p.pheno === "MRSA" || p.pheno === "MR") && BETA.includes(d)) { w += p.n; continue; }
+      if (isMRp(p) && BETA.includes(d)) { w += p.n; continue; }
       if (!c || c.act !== "keep") continue;
       const ww = c.nt != null ? c.nt : p.n; sw += c.s * ww; w += ww;
     }
@@ -321,6 +325,30 @@ export function derive(allRows, src, mismatched) {
   });
 }
 
+/* A genus line printed beside its own species rows in the same table is "the rest" (other or
+ * unspeciated), not the total, when the species rows hold more isolates than it (or it has no n):
+ * ICMR's "Enterobacter spp." (194) beside E. cloacae (1,489); AIIMS Bhopal's "Other Enterococcus
+ * sp." beside E. faecalis and E. faecium. Such a line is filed under the genus's "other" key, so a
+ * question about the genus combines every group instead of reading the leftover alone. */
+const GENUS_KIDS = { enterococcus: ["efaecalis", "efaecium"], enterobacter: ["ecloacae"], citrobacter: ["cfreundii", "ckoseri"],
+  streptococcus: ["spneumoniae", "strep_bhs", "strep_viridans"], burkholderia: ["bcepacia", "bpseudomallei"],
+  candida: ["calbicans", "ctropicalis", "cparapsilosis", "cglabrata", "ckrusei", "cauris"], providencia: ["pstuartii", "prettgeri"],
+  shigella: ["shigella_sonnei", "shigella_flexneri"] };
+export function markOtherGroups(rows) {
+  const k = (r) => [r.spec, r.set, r.pheno || "", r.cohort || ""].join("|");
+  const by = {};
+  rows.forEach((r) => { (by[k(r)] ||= []).push(r); });
+  Object.values(by).forEach((g) => {
+    Object.keys(GENUS_KIDS).forEach((genus) => {
+      const gr = g.filter((r) => r.org === genus), kids = g.filter((r) => GENUS_KIDS[genus].includes(r.org));
+      if (!gr.length || !kids.length) return;
+      const kn = kids.reduce((a, r) => a + (r.n || 0), 0);
+      gr.forEach((r) => { if (r.n == null || kn > r.n) { r.org = genus + "_other"; r.otherGroup = true; } });
+    });
+  });
+  return rows;
+}
+
 /* Figures carried over. A row whose antibiotics repeat, value for value, another row of the same
  * institution (an earlier edition, or another specimen of the same report with a different isolate
  * count) is almost certainly copied, not new data: SKIMS 2023 pus S. aureus OPD repeats 2022,
@@ -464,7 +492,7 @@ export function buildBundle(sources, register, census) {
   const metas = [], rows = [], counts = [], report = [], consistency = [];
   const stats = { sources: 0, rows: 0, derivedRows: 0, cells: 0, act: { keep: 0, intrinsic: 0, hide: 0, suppress: 0, caution: 0 }, lowNRows: 0, noNRows: 0, isolates: 0, countMismatches: 0 };
   const sorted = sources.slice().sort((a, b) => (a.region + a.short + (9999 - a.year)).localeCompare(b.region + b.short + (9999 - b.year)));
-  const checkedBy = new Map(sorted.map((src) => { const cOf = countIndex(src); return [src.id, (src.rows || []).map((r) => checkRow(src, r, cOf))]; }));
+  const checkedBy = new Map(sorted.map((src) => { const cOf = countIndex(src); return [src.id, markOtherGroups((src.rows || []).map((r) => checkRow(src, r, cOf)))]; }));
   const copies = copyChecks(sorted, checkedBy);
   sorted.forEach((src) => {
     const si = metas.length;
@@ -477,6 +505,7 @@ export function buildBundle(sources, register, census) {
       verification: src.verification, notes: src.notes || null, issues: (src.issues || []).length ? src.issues : null, excluded: (src.excluded || []).length ? src.excluded : null,
       checks: checks.length ? checks.map((c) => c.text) : null, copies: copied.length ? copied.map((c) => c.text) : null,
       specs: Array.from(new Set(checked.map((r) => r.spec))), sets: Array.from(new Set(checked.map((r) => r.set))), orgs: Array.from(orgs), rows: checked.length,
+      usable: checked.filter((r) => !r.pheno && !r.cohort && r.n >= R.M39_MIN && Object.keys(r.cells).some((d) => r.cells[d].act === "keep")).length,
       isolates: isolatesOf(src, checked) });
     checked.concat(derived).forEach((r) => {
       rows.push(compactRow(r, si, whyIdx));
@@ -496,7 +525,7 @@ export function buildBundle(sources, register, census) {
   stats.countMismatches = consistency.length;
   // Pools use recent data only: each institution's latest antibiogram counts if it falls within the
   // five most recent data years present (a 2012 pocket policy must not shape today's regional view).
-  const years = metas.filter((m) => m.kind !== "network").map((m) => m.year);
+  const years = metas.filter((m) => m.kind === "institution" && !m.focus).map((m) => m.year);
   stats.poolFrom = years.length ? Math.max.apply(null, years) - 4 : null;
   const reg = (register || []).map((x) => ({ id: x.id, institution: x.institution, short: x.short || null, city: x.city || null, state: x.state || null, region: x.region || null,
     sector: x.sector || null, type: x.type || null, year: x.year || null, url: x.url || null, page: x.page || null, status: x.status || null,
@@ -509,7 +538,7 @@ export function buildBundle(sources, register, census) {
 }
 
 function indexJs(bundle) {
-  const meta = bundle.sources.map((s) => ({ id: s.id, kind: s.kind, inst: s.inst, name: s.name, short: s.short, city: s.city, state: s.state, region: s.region, sector: s.sector, year: s.year, end: s.end, specs: s.specs, orgs: s.orgs.length, verification: s.verification.status, focus: s.focus || undefined }));
+  const meta = bundle.sources.map((s) => ({ id: s.id, kind: s.kind, inst: s.inst, name: s.name, short: s.short, city: s.city, state: s.state, region: s.region, sector: s.sector, year: s.year, end: s.end, specs: s.specs, orgs: s.orgs.length, usable: s.usable, verification: s.verification.status, focus: s.focus || undefined }));
   return `/* StewardMD - antibiogram source index (GENERATED by scripts/build-antibiogram.mjs; do not edit).
  * The data itself is kb/antibiogram/antibiogram.json, fetched by antibiogram-store.js. This file
  * carries only what the app needs at start-up: the bundle version and the list of sources, so
@@ -545,7 +574,7 @@ function checkFile(path) {
   let j; try { j = JSON.parse(readFileSync(path, "utf8")); } catch (x) { console.error(`${path}: invalid JSON (${x.message})`); process.exit(1); }
   const errs = validateSource(j, path.split("/").pop());
   if (errs.length) { console.error(`${errs.length} schema error(s):\n  ` + errs.join("\n  ")); process.exit(1); }
-  const cOf = countIndex(j), checked = j.rows.map((r) => checkRow(j, r, cOf)), checks = countChecks(j, checked);
+  const cOf = countIndex(j), checked = markOtherGroups(j.rows.map((r) => checkRow(j, r, cOf))), checks = countChecks(j, checked);
   const derived = derive(checked, j, new Set(checks.map((c) => c.spec + "|" + c.set + "|" + c.org)));
   const act = { keep: 0, intrinsic: 0, hide: 0, suppress: 0, caution: 0 };
   const lines = [];

@@ -11,7 +11,7 @@ import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { validateSource, checkRow, derive, countChecks, copyChecks, buildBundle, loadAll } from "../scripts/build-antibiogram.mjs";
+import { validateSource, checkRow, derive, countChecks, copyChecks, markOtherGroups, buildBundle, loadAll } from "../scripts/build-antibiogram.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const base = (o) => Object.assign({ id: "T_2025", kind: "institution", inst: "T", institution: "Test Hospital", short: "Test", region: "north", sector: "government", year: 2025,
@@ -60,6 +60,19 @@ test("derived S. aureus row: MRSA + MSSA, and MRSA alone only when the counts sa
   // Without counts, a lone MRSA row is not turned into an S. aureus row.
   const d2 = derive([rows[2]], base({}));
   assert.ok(!d2.some((r) => r.set === "icu" && !r.pheno));
+});
+
+test("an MRSA + MSSA combination gives no beta-lactam figure the MSSA row does not report", () => {
+  const src = base({});
+  const rows = [
+    { spec: "blood", set: "ward", org: "MRSA", n: 30, s: { vancomycin: 100, linezolid: 100 } },
+    { spec: "blood", set: "ward", org: "MSSA", n: 17, s: { vancomycin: 100, linezolid: 100, cefazolin: 100 } }
+  ].map((r) => checkRow(src, r));
+  const d = derive(rows, src).find((r) => r.spec === "blood" && r.set === "ward" && !r.pheno);
+  assert.ok(d);
+  assert.equal(d.cells.penicillin, undefined);                     // MSSA printed no penicillin: no "0%" from MRSA alone
+  assert.equal(d.cells.ampicillin, undefined);
+  assert.equal(d.cells.cefazolin.s, 36.2);                          // 17 of 47 (MRSA resistant by definition)
 });
 
 test("derived all-settings rows need every setting (or a count of 0, or under 10% missing)", () => {
@@ -165,6 +178,19 @@ test("a combined row with more isolates than the source's own count for that str
   assert.equal(derive(rows, src).filter((r) => r.spec === "all").length, 0);
   const ok = base({ counts: [{ spec: "all", set: "icu", org: "E. coli", n: 100 }] });
   assert.equal(derive(rows.map((r) => Object.assign({}, r, { src: ok.id })), ok).filter((r) => r.spec === "all").length, 1);
+});
+
+test("a genus line printed beside larger species rows is 'the rest', filed as the genus's other group", () => {
+  const src = base({});
+  const rows = markOtherGroups([
+    { spec: "all", set: "all", org: "Enterococcus faecalis", n: 73, s: { vancomycin: 95 } },
+    { spec: "all", set: "all", org: "Enterococcus faecium", n: 74, s: { vancomycin: 70 } },
+    { spec: "all", set: "all", org: "Other Enterococcus sp.", n: 17, s: { vancomycin: 100 } },
+    { spec: "urine", set: "all", org: "Enterococcus spp.", n: 400, s: { vancomycin: 85 } },          // a total: kept as the genus
+    { spec: "urine", set: "all", org: "Enterococcus faecalis", n: 250, s: { vancomycin: 95 } }
+  ].map((r) => checkRow(src, r)));
+  assert.equal(rows[2].org, "enterococcus_other");
+  assert.equal(rows[3].org, "enterococcus");
 });
 
 test("figures repeated value for value from an earlier edition become cautions on the later row only", () => {

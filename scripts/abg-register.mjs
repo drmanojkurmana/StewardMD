@@ -47,7 +47,9 @@ function normUrl(u) {
   try { const x = new URL(decodeURI(u.trim())); return (x.hostname.replace(/^www\./, "") + x.pathname.replace(/\/+$/, "") + x.search).toLowerCase(); } catch (e) { return u.trim().toLowerCase(); }
 }
 
+export const missing = new Set();
 export function buildRegister() {
+  missing.clear();
   const files = existsSync(CENSUS) ? readdirSync(CENSUS).filter((f) => f.endsWith(".json") && !/queries|crawled|checked|sites|overrides|summary/.test(f)).sort() : [];
   const over = existsSync(join(CENSUS, "overrides.json")) ? JSON.parse(readFileSync(join(CENSUS, "overrides.json"), "utf8")) : {};
   const have = new Set(existsSync(SOURCES) ? readdirSync(SOURCES).filter((f) => f.endsWith(".json")).map((f) => f.slice(0, -5)) : []);
@@ -59,7 +61,11 @@ export function buildRegister() {
       if (x.duplicate_of) return;                                  // the same document under another slice's id
       const o = over[x.id] || {};
       if (o.duplicate_of) return;
-      const integrated = o.integrated ? [].concat(o.integrated).join(", ") : (have.has(x.id) ? x.id : null);
+      // An override only counts as integrated for source files that exist.
+      const named = o.integrated ? [].concat(o.integrated) : [];
+      named.filter((id) => !have.has(id)).forEach((id) => missing.add(x.id + " -> " + id));
+      const exist = named.filter((id) => have.has(id));
+      const integrated = exist.length ? exist.join(", ") : (have.has(x.id) ? x.id : null);
       let reason = null;
       if (!integrated) reason = o.reason || STATUS_REASON[x.status] || (x.status === "downloaded" ? "downloaded; not yet extracted" : (x.status || "not integrated"));
       const e = {
@@ -127,6 +133,7 @@ export function censusSummary(reg) {
 
 function main() {
   const reg = buildRegister(), text = JSON.stringify(reg, null, 1) + "\n";
+  if (missing.size) { console.error("overrides.json names source files that do not exist:\n  " + Array.from(missing).join("\n  ")); process.exit(1); }
   const sum = JSON.stringify(censusSummary(reg), null, 1) + "\n", SUM = join(CENSUS, "summary.json");
   const stale = !existsSync(OUT) || readFileSync(OUT, "utf8") !== text || !existsSync(SUM) || readFileSync(SUM, "utf8") !== sum;
   const n = reg.length, integ = reg.filter((x) => x.integrated).length;

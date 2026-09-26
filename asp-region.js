@@ -43,7 +43,7 @@
   function panelHTML() {
     var H = window.HOSPITAL, curId = H.current().id;
     var opts = H.optionsHTML ? H.optionsHTML(curId) : '<option value="ICMR" selected>ICMR (National)</option>';
-    var h = '<div class="asp-region" style="border:1px solid var(--line,#e2e8f0);border-radius:12px;padding:12px;margin-bottom:12px;background:var(--panel,#fff)">';
+    var h = '<div class="asp-region smd-books-keep" style="border:1px solid var(--line,#e2e8f0);border-radius:12px;padding:12px;margin-bottom:12px;background:var(--panel,#fff)">';
     h += '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px">' +
       '<label for="aspRegionSel" style="font:800 11px system-ui;text-transform:uppercase;letter-spacing:.05em;color:var(--slate-soft,#64748b)">Antibiogram</label>' +
       '<select id="aspRegionSel" onchange="ASP._abgRegion(this.value)" style="flex:1;min-width:180px;max-width:100%;border:1px solid var(--line,#e2e8f0);border-radius:9px;padding:9px 10px;font:700 13px system-ui;background:var(--panel,#fff);color:var(--ink,#0f172a)">' + opts + '</select></div>';
@@ -95,6 +95,10 @@
     if (o.cohort === "hai") h += '<div style="font:600 11px system-ui;color:var(--slate-soft,#64748b)">ICU device-associated infection surveillance</div>';
     if (low) h += '<div style="font:700 11px system-ui;color:#B45309;margin:2px 0">' + (o.noN ? "Isolate number not reported" : "Fewer than 30 isolates") + ': interpret with caution (CLSI M39).</div>';
     var drugs = st.sortDrugs(Object.keys(o.cells)).filter(function (d) { var c = o.cells[d]; return c.act === "keep" || c.act === "caution" || c.act === "intrinsic"; });
+    // Agents this syndrome cannot rely on (urinary agents for sepsis, daptomycin for pneumonia) are
+    // left out here and named once below.
+    var off = st.synDrug ? drugs.filter(function (d) { return st.synDrug(_syn, d); }) : [];
+    if (off.length) drugs = drugs.filter(function (d) { return off.indexOf(d) < 0; });
     if (!drugs.length) return h + note("No usable figures.") + '</div>';
     drugs.forEach(function (d) {
       var c = o.cells[d], aw = AW[rl.aware(d)];
@@ -115,6 +119,7 @@
         '<div style="height:5px;border-radius:3px;background:var(--line,#eef1f4);margin-top:3px;overflow:hidden"><i style="display:block;height:100%;width:' + Rv + '%;background:' + col + '"></i></div></div>';
     });
     if (drugs.some(function (d) { return o.cells[d].act === "caution"; })) h += '<div style="font:500 10.5px system-ui;color:var(--slate-soft,#64748b)">* grey: failed a data check (tap for the reason); shown for reference, not used in pooled figures or reasoning.</div>';
+    if (off.length) h += '<div style="font:500 10.5px/1.4 system-ui;color:var(--slate-soft,#64748b)">Not shown for this syndrome: ' + esc(off.map(function (d) { return st.synDrug(_syn, d); }).join("; ")) + '.</div>';
     return h + '</div>';
   }
 
@@ -189,7 +194,8 @@
       if (!row) return;
       var msg = null;
       try { msg = provenance(row.getAttribute("data-org"), row.getAttribute("data-pheno"), row.getAttribute("data-drug"), row.getAttribute("data-spec"), row.getAttribute("data-set")); } catch (x) {}
-      if (msg && window.toast) window.toast(msg);
+      // The antibiogram's own toast keeps "page N" (the app-wide toast would scrub it as a citation).
+      if (msg) { if (window.ABG && window.ABG.toast) window.ABG.toast(msg); else if (window.toast) window.toast(msg); }
     });
     // Profile list grows when the store loads (every institution becomes selectable).
     try { document.addEventListener("smd:abg-ready", function () { var sel = document.getElementById("aspRegionSel"); if (sel && window.HOSPITAL.optionsHTML) sel.innerHTML = window.HOSPITAL.optionsHTML(window.HOSPITAL.current().id); refresh(); }); } catch (e) {}
