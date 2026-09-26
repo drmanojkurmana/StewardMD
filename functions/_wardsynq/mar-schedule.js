@@ -389,16 +389,47 @@ async function marSchedule(request, env, ctx) {
   try { given = new Map(((await svc.byPatient("MedicationAdministration", patientId)) || []).filter(Boolean).map((m) => [m.id, m])); }
   catch { given = null; }
 
+  /* CLIN-13: every dose of this order already recorded in the window, for orders the clock does not schedule. */
+  const recordedIn = (o) => (given ? [...given.values()] : []).filter((m) => m && m.orderId === o.id && Number.isFinite(Date.parse(m.dueAt))
+    && Date.parse(m.dueAt) >= fromMs && Date.parse(m.dueAt) < toMs);
+  const lastGiven = (o) => {
+    if (!given) return { lastGivenUnknown: true };
+    const t = [...given.values()].filter((m) => m && m.orderId === o.id && m.administeredAt).map((m) => m.administeredAt).sort().pop();
+    return t ? { lastGivenAt: t } : {};
+  };
+  const recordedRow = (card, m, flag) => ({ ...card, dueAt: m.dueAt, administrationId: m.id, [flag]: true, status: m.status || null,
+    administeredAt: m.administeredAt || null, administeredBy: m.administeredBy || null, witnessedBy: m.witnessedBy || null,
+    statusBy: (m.writtenBy && m.writtenBy.id) || null, overdue: false });
+  /* CLIN-17: a dose due BEFORE the window that nobody gave, held, refused or cancelled is still owed, so it stays on
+   * the round (and on every worklist built from it) as overdue. The window used to drop it after about 12 hours on
+   * the worklist and at local midnight on the chart, with nothing anywhere saying it was missed. Looked back as far
+   * as the widest window allowed; the order's own start and this stay (roundOrders) bound it further. */
+  const lookbackFrom = new Date(fromMs - MAX_WINDOW_DAYS * 86400000).toISOString();
+
   for (const o of orders) {
     // orderVersion: the order as the nurse saw it. A dose charted against it is refused if the order changed (G2).
     const card = { orderId: o.id, orderVersion: o.version == null ? null : o.version, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null };
     const spec = parseFrequency(o.frequency);
     if (!spec) {
       // Named, not omitted. A ward that cannot see this order has no way to know a dose is missing.
-      unscheduled.push({ ...card, reason: o.frequency ? "frequency_not_understood" : "no_frequency" });
+      unscheduled.push({ ...card, reason: o.frequency ? "frequency_not_understood" : "no_frequency", ...lastGiven(o) });
+      for (const m of recordedIn(o)) due.push(recordedRow(card, m, "unscheduled"));
       continue;
     }
-    if (spec.kind === "prn") { prn.push({ ...card, asNeeded: true }); continue; }
+    if (spec.kind === "prn") {
+      prn.push({ ...card, asNeeded: true, ...lastGiven(o) });
+      for (const m of recordedIn(o)) due.push(recordedRow(card, m, "asNeeded"));
+      continue;
+    }
+    if (given) {
+      for (const t of scheduleSlots(o, { ...opts, from: lookbackFrom, to: opts.from }).due) {
+        const dueAt = new Date(t).toISOString(), administrationId = medicationAdministrationIdFor(o.id, dueAt);
+        const mar = (administrationId && given.get(administrationId)) || null;
+        if (!isOverdue(t, mar && mar.status, nowMs, ctx.graceMinutes)) continue;
+        due.push({ ...card, dueAt, administrationId, status: mar ? mar.status : null, administeredAt: null, administeredBy: null,
+          witnessedBy: null, statusBy: (mar && mar.writtenBy && mar.writtenBy.id) || null, overdue: true, beforeWindow: true });
+      }
+    }
 
     const slots = scheduleSlots(o, opts);
     if (slots.truncated) truncated = true;

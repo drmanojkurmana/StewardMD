@@ -773,7 +773,8 @@ async function createWardMedicationOrder(request, env, ctx) {
    * response, and a finding somebody proceeded past belongs with the prescription it was about. */
   candidate.safetyAtOrder = safety.checked
     ? { checked: true, rulePackVersion: safety.rulePackVersion, checkedAt: new Date().toISOString(),
-        findings: safety.blocks.concat(safety.overridables, safety.warnings).map((f) => ({ code: f.code, disposition: f.disposition, message: f.message, ...(f.overridden ? { overridden: true } : {}) })),
+        // ruleId / allergyId (CLIN-12): the bedside clears exactly the finding the prescriber answered, not its code.
+        findings: safety.blocks.concat(safety.overridables, safety.warnings).map((f) => ({ code: f.code, disposition: f.disposition, message: f.message, ...(f.ruleId ? { ruleId: f.ruleId } : {}), ...(f.allergyId ? { allergyId: f.allergyId } : {}), ...(f.overridden ? { overridden: true } : {}) })),
         unresolvedDrug: !!safety.unresolvedDrug, ...(safety.pregnancyLactation ? { pregnancyLactation: safety.pregnancyLactation } : {}),
         ...(overrideReason ? { reason: overrideReason, acknowledgedBy: resolved.actor.id } : {}) }
     : { checked: false, code: safety.code, checkedAt: new Date().toISOString() };

@@ -1071,7 +1071,7 @@ test("the discharge summary now carries the problem list instead of an empty ass
  * a round time and say out loud that the system was not asserting anything.
  */
 
-test("the round is computed from the frequency the doctor already wrote, and a given dose shows as given", async () => {
+test("the round is computed from the frequency the doctor already wrote, and a given dose shows as given", async (t) => {
   seedHospital();
   const { adm, ord, patient, scan } = await admittedPatientOnDrug();   // TID
 
@@ -1107,8 +1107,12 @@ test("the round is computed from the frequency the doctor already wrote, and a g
   // Give the first one through the real eMAR, then the schedule reports it as given.
   const dueAt = sched.due[0].dueAt;
   const step = (action, extra) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action, orderId: sched.due[0].orderId, dueAt, patient, ...(extra || {}) });
+  /* CLIN-11: the right-time check now runs against the slot's due time, so the dose is given AT its time (the
+   * clock is moved there) rather than up to a day early, which the bedside now refuses. */
+  t.mock.timers.enable({ apis: ["Date"], now: Date.parse(dueAt) + 5 * 60000 });
   await step("verify"); await step("dispense"); await step("scan", { scan });
   const given = await step("administer");
+  t.mock.timers.reset();
   assert.equal(given.__status, 200, JSON.stringify(given));
 
   const after = await round();
@@ -4676,13 +4680,15 @@ test("A HIGH-ALERT DRUG NEEDS A SECOND NURSE, and the LIST is the hospital's", a
   assert.equal(self.__status, 409);
   assert.deepEqual(self.reasons.map((r) => r.code), ["WITNESS_NOT_INDEPENDENT"]);
 
-  const given = await step("administer", { witnessId: idFor(DOCTOR) });
+  // CLIN-18: the witness is checked as the controlled-drug witness is, an active member who dispenses, gives
+  // medicines or keeps the NDPS register; the pharmacist is one, the prescribing doctor alone is not.
+  const given = await step("administer", { witnessId: idFor(PHARM) });
   assert.equal(given.__status, 200, JSON.stringify(given));
   assert.equal(given.to, "administered");
   // Both names are on the record: who gave it and who watched.
   const rec = await RECORD.latest(TENANT_ROW.id, "MedicationAdministration", given.administrationId);
   assert.equal(rec.administeredBy, idFor(NURSE));
-  assert.equal(rec.witnessedBy, idFor(DOCTOR));
+  assert.equal(rec.witnessedBy, idFor(PHARM));
 
   /* AND A DRUG THE HOSPITAL DID NOT LIST NEEDS NO WITNESS. The list is the whole rule - nothing in
    * the code decides that insulin is high-alert, which is why a hospital can add to it. */
