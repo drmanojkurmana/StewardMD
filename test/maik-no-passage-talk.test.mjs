@@ -134,3 +134,20 @@ test("cache hit: an answer cached BEFORE the fix is scrubbed on the way out", as
   assert.equal(hit.sent.length, 0, "served from cache");
   assert.equal(hit.text, CLEAN);
 });
+
+/* The Knowledge Base text goes out once (2026-09-26). With smd_maik_brain on, the client cuts ranked
+ * claims out of the same grounding notes the prompt already carries, and both used to be sent. */
+test("send once: a claim made only of the notes is not repeated above them; a guideline claim still is", async () => {
+  const note = OFFTOPIC.grounding[0].knowledge[0].text;
+  const kbClaim = { text: note, tier: 1, sources: [{ source: "kb", tier: 1, ref: "StewardMD KB · Factor XII deficiency" }] };
+  const glClaim = { text: "Line 1: tranexamic acid 1 g IV", tier: 3, sources: [{ source: "guideline", tier: 3, ref: "ISTH (2020)" }] };
+  const both = await explain({}, Object.assign({}, OFFTOPIC, { evidenceBundle: { claims: [kbClaim, glClaim] } }));
+  const user = both.sent[0].contents[0].parts[0].text;
+  assert.equal(user.split(note).length - 1, 1, "the note text appears exactly once");
+  assert.match(user, /RANKED REFERENCE NOTES[^\n]*\n1\. \[tier 3\] Line 1: tranexamic acid 1 g IV\n\n/, "the claim the notes do not carry is still ranked, alone");
+  const kbOnly = await explain({}, Object.assign({}, OFFTOPIC, { evidenceBundle: { claims: [kbClaim] } }));
+  const u2 = kbOnly.sent[0].contents[0].parts[0].text;
+  assert.doesNotMatch(u2, /RANKED REFERENCE NOTES/, "only notes text: no ranked block at all");
+  const plain = await explain({}, OFFTOPIC);
+  assert.equal(u2, plain.sent[0].contents[0].parts[0].text, "the same prompt a client without the brain flag sends");
+});

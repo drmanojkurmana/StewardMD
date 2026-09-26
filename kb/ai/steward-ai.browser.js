@@ -314,6 +314,213 @@
     return (bestId && best >= 1.5) ? { id: bestId, score: best } : null;   // need one exact or one ed-1 fuzzy hit
   }
 
+  // ── Name gate (flag smd_kb_gate: default ON; "0" = the coverage gate in buildPackage) ─────────────
+  // A standalone question gets an entry's notes only when it NAMES the entry: a whole name form
+  // ("Haemophilia A", the "(factor VIII)" gloss, "Acute heart failure" out of "... / pulmonary
+  // edema"), a phrase from KB_NAMES ("heart attack"), or the entry's one-word id ("DVT", "PE").
+  // One shared word is not a name: "RA factor" is not Factor X deficiency and "capital of France" is
+  // not slipped capital femoral epiphysis. A real word just before the matched words names something
+  // else ("heat stroke", "tuberculous meningitis", "respiratory failure"); a letter or number just
+  // after is an identifier ("hepatitis B", "factor 9"). An unnamed question gets no notes, so the
+  // model answers from its own knowledge instead of from the wrong entry. Scored by
+  // test/maik-kb-relevance.test.mjs.
+  function kbGateV2() { try { return localStorage.getItem("smd_kb_gate") !== "0"; } catch (e) { return true; } }
+  // Names a clinician types that the entry's KB name does not contain. Synonyms and abbreviations
+  // only: SMD_ALIASES above also carries feature words ("palpitations", "potassium") that help
+  // retrieval but name nothing. Written singular and in US spelling; foldTok() covers the variants.
+  var KB_NAMES = {
+    acs: "mi, stemi, nstemi, acs, heart attack, myocardial infarction",
+    atrial_fib: "af, afib",
+    acute_infectious_diarrheal_diseases_and: "diarrhea, loose motion, loose stool, watery stool, gastroenteritis",
+    C_DIFF: "c diff, cdiff, c difficile, clostridium, clostridioides, difficile, pseudomembranous colitis",
+    peptic_ulcer: "melena, malena, hematemesis, ugib, upper gi bleed, upper gi bleeding, coffee ground vomitus, black stool, tarry stool",
+    hypoglycemia: "hypo, low sugar, low blood sugar",
+    crystal_arthritis: "gout, podagra",
+    hhs: "honk",
+    MENINGITIS: "meningitis",
+    CHOLANGITIS: "ascending cholangitis",
+    CNS_TB: "tbm, tuberculous meningitis",
+    PULMONARY_TB: "tb, ptb, tuberculosis",
+    organophosphate: "op, op poisoning",
+    ischemic_stroke: "stroke, cva, brain attack",
+    ich: "hemorrhagic stroke",
+    seizure_epilepsy: "convulsion",
+    FEBRILE_NEUTROPENIA: "neutropenic fever",
+    rheumatoid: "ra, rheumatoid",
+    sle_flare: "sle, lupus",
+    adrenal_crisis: "addisonian crisis, addison",
+    opioid_od: "opioid poisoning",
+    anaphylaxis: "anaphylactic",
+    SEPSIS: "septicemia",
+    CAP: "cap, pneumonia",
+    COPD_EXACERBATION: "copd, aecopd",
+    asthma_exac: "asthma",
+    hiv_aids: "hiv",
+    heart_failure: "chf, congestive heart failure, adhf",
+    nephrolithiasis: "kidney stone, renal stone, renal calculi, urolithiasis",
+    biliary_colic: "gallstone, gall stone, gall bladder stone",
+    haemorrhoids: "pile",
+    variceal_bleed: "varices, esophageal varices",
+    varicella_zoster: "herpes zoster, shingles, chickenpox, chicken pox",
+    snake_envenomation: "snake bite, snakebite, anti snake venom",
+    neuroleptic_malignant_syndrome: "nms",
+    sjs_ten: "sjs",
+    acquired_thrombotic_thrombocytopenic_purpura: "ttp",
+    urinary_tract_infections_cystitis_prostati: "uti, urinary tract infection",
+    pernicious_anemia: "intrinsic factor",
+    stable_angina: "angina pectoris",
+    hyperkalemia: "high potassium",
+    hyponatremia: "low sodium",
+    MALARIA: "falciparum malaria, vivax malaria, cerebral malaria, complicated malaria",
+    rabies: "dog bite, animal bite",
+    gastroesophageal_reflux_disease: "gerd, gord, acid reflux",
+    helicobacter_pylori_infection: "h pylori",
+    tricyclic_antidepressant_overdose: "tricyclic poisoning, tca poisoning",
+    PHARYNGITIS: "sore throat, strep throat",
+    latent_tuberculosis: "latent tb, ltbi",
+    mdr_tuberculosis: "mdr tb"
+  };
+  // One spelling for British/US variants, plurals, poisoning words and Roman numerals, applied to
+  // questions and names alike, so "haemophilia A" = "hemophilia a" and "factor VIII" = "factor 8".
+  var ROMAN = { ii: "2", iii: "3", iv: "4", v: "5", vi: "6", vii: "7", viii: "8", ix: "9", x: "10", xi: "11", xii: "12", xiii: "13" };
+  var SAME = { overdose: "poisoning", toxicity: "poisoning", intoxication: "poisoning", ingestion: "poisoning" };
+  function foldTok(t) {
+    t = t.replace(/ae|oe/g, "e").replace(/sulph/g, "sulf");
+    if (t.length > 4 && /ies$/.test(t)) t = t.slice(0, -3) + "y";
+    else if (t.length > 4 && /s$/.test(t) && !/(ss|us|is)$/.test(t)) t = t.slice(0, -1);
+    return SAME[t] || ROMAN[t] || t;
+  }
+  function rawToks(s) {
+    s = String(s == null ? "" : s);
+    try { s = s.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); } catch (e) {}
+    return s.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim().split(" ").filter(function (t) { return t && t !== "s"; });
+  }
+  function foldToks(s) { return rawToks(s).map(foldTok); }   // "Bell's" and "bells" both -> "bell"
+  // Connectives are skipped when matching. Leading qualifiers and trailing head nouns may be left out
+  // of a name ("Acute pancreatitis" = "pancreatitis", "Cushing syndrome" = "cushing"), never both
+  // ("Chronic kidney disease" is not "kidney").
+  var CONNECT = { of: 1, and: 1, the: 1, "in": 1, "with": 1, due: 1, to: 1, other: 1, or: 1, by: 1, "for": 1, on: 1, at: 1, from: 1, type: 1 };
+  var LEAD_Q = { acute: 1, chronic: 1, severe: 1, mild: 1, moderate: 1, uncomplicated: 1, recurrent: 1, idiopathic: 1, spontaneous: 1, primary: 1, paroxysmal: 1 };
+  var HEAD_Q = { disease: 1, disorder: 1, syndrome: 1, infection: 1, deficiency: 1, management: 1, treatment: 1, diagnosis: 1, complication: 1, overview: 1, mellitus: 1, pectoris: 1, erythematosus: 1, virus: 1 };
+  var Q_STOP = { is: 1, are: 1, was: 1, were: 1, be: 1, a: 1, an: 1, i: 1, me: 1, my: 1, we: 1, it: 1, its: 1, as: 1, "do": 1, did: 1, has: 1, have: 1, had: 1, will: 1, may: 1, vs: 1, per: 1, any: 1, all: 1, not: 1, no: 1, "if": 1, so: 1, but: 1, up: 1 };
+  function plainWord(t) { return !!(CONNECT[t] || Q_STOP[t] || GENERIC_TOPIC[t] || LEAD_Q[t] || HEAD_Q[t]) || /^\d+$/.test(t); }
+  // A form must carry identity: a word of 5+ letters that is not a qualifier or a question word
+  // (4+ inside a longer form).
+  function validForm(f) { return f.some(function (w) { return w.length >= (f.length > 1 ? 4 : 5) && !LEAD_Q[w] && !HEAD_Q[w] && !GENERIC_TOPIC[w]; }); }
+  function nameForms(name) {
+    var pieces = [], out = [], seen = {}, raw = String(name || "");
+    // "(Typhoid)" at the end is a synonym; "Giant cell (temporal) arteritis" means "temporal arteritis".
+    raw.replace(/\(([^)]*)\)([^(]*)/g, function (m, p, tail) { pieces.push(/[a-z]/i.test(tail) ? p + " " + tail : p); return m; });
+    var main = raw.replace(/\([^)]*\)/g, " ");
+    pieces.unshift(main);
+    pieces.slice().forEach(function (p) {
+      p = String(p);
+      var sl = p.split("/");
+      if (sl.length === 2 && !/[,;:&]/.test(p) && /^\S+(al|ic|ed|ous|ive|ary|ar)$/i.test(sl[0].trim()) && /\s/.test(sl[1].trim())) {
+        pieces.push(sl[0] + " " + sl[1].trim().split(/\s+/).pop(), sl[1]);   // "Renal / ureteric colic": renal colic, ureteric colic
+        return;
+      }
+      var an = p.split(/ and /i);
+      if (an.length === 2 && !/[\/,;:&]/.test(p) && /\s/.test(an[0].trim()) && !/\s/.test(an[1].trim())) {
+        var mods = an[0].trim().split(/\s+/); mods.pop();
+        pieces.push(an[0], mods.join(" ") + " " + an[1]);   // "... aortic aneurysm and dissection": aortic dissection
+        return;
+      }
+      // "Hyponatraemia and SIADH" is two names; "Hand, foot and mouth disease" is one.
+      p.split(/,/.test(p) ? /[\/,;:&]/ : /[\/;:&]| and /i).forEach(function (x) { pieces.push(x); });
+    });
+    pieces.forEach(function (p) {
+      var t = foldToks(p).filter(function (w) { return !CONNECT[w]; });
+      var lead = t.slice(), head = t.slice();
+      while (lead.length > 1 && LEAD_Q[lead[0]]) lead.shift();
+      while (head.length > 1 && HEAD_Q[head[head.length - 1]]) head.pop();
+      [t, lead, head].forEach(function (f) { var k = f.join(" "); if (f.length && !seen[k] && validForm(f)) { seen[k] = 1; out.push(f); } });
+    });
+    return out;
+  }
+  var _chunkRef = null, _gate = null;
+  function gateIndex() {
+    if (_gate) return _gate;
+    var names = {}, forms = {}, first = {}, own = {}, words = {};
+    (_chunkRef || []).forEach(function (c) { if (c && c.diseaseId && !names[c.diseaseId]) names[c.diseaseId] = c.diseaseName || c.diseaseId; });
+    Object.keys(names).forEach(function (id) {
+      var f = nameForms(names[id]);
+      String(KB_NAMES[id] || "").split(",").forEach(function (p) { var t = foldToks(p).filter(function (w) { return !CONNECT[w]; }); if (t.length) f.push(t); });
+      if (!/_/.test(id)) f.push([foldTok(id.toLowerCase())]);   // "dvt", "pe", "aki", "dengue"
+      var o = {};
+      f.concat([foldToks(names[id]), foldToks(String(id).replace(/_/g, " "))]).forEach(function (t) { t.forEach(function (w) { o[w] = 1; words[w] = 1; }); });
+      forms[id] = f; own[id] = o;
+      f.forEach(function (t) { var l = first[t[0]] || (first[t[0]] = []); if (l.indexOf(id) < 0) l.push(id); });
+    });
+    return (_gate = { forms: forms, first: first, own: own, known: words, words: Object.keys(words).filter(function (w) { return w.length >= 5; }) });
+  }
+  function ownWord(w, own) {
+    if (own[w]) return true;
+    if (w.length < 5) return false;
+    for (var k in own) if (k.length >= 5 && k.slice(0, 5) === w.slice(0, 5)) return true;   // infected ~ infection
+    return false;
+  }
+  function clash(qa, s, e, own, acro) {
+    var p = qa[s - 1], n = qa[e + 1];
+    if (p && (p.length >= 3 || acro[p]) && !plainWord(p) && !ownWord(p, own)) return true;   // "heat" stroke
+    return !!(n && /^([a-z]|\d+)$/.test(n) && !own[n]);                                       // hepatitis "b"
+  }
+  // id -> longest form of that entry the question names (in order, connectives skipped, no clash).
+  function nameHits(qa, acro) {
+    var G = gateIndex(), qs = [], pos = [], hits = {};
+    qa.forEach(function (t, i) { if (!CONNECT[t]) { qs.push(t); pos.push(i); } });
+    qs.forEach(function (t, i) {
+      (G.first[t] || []).forEach(function (id) {
+        G.forms[id].forEach(function (f) {
+          if (f[0] !== t || i + f.length > qs.length) return;
+          for (var k = 1; k < f.length; k++) if (qs[i + k] !== f[k]) return;
+          if (clash(qa, pos[i], pos[i + f.length - 1], G.own[id], acro)) return;
+          if (!(hits[id] >= f.length)) hits[id] = f.length;
+        });
+      });
+    });
+    return hits;
+  }
+  // -> { id, gc, mode: "confident"|"assume", named, topic } or { id: null, topic }
+  function nameGate(question, retrieved) {
+    var acro = {};
+    String(question).replace(/[^a-zA-Z0-9 ]+/g, " ").split(/\s+/).forEach(function (w) { if (w.length >= 2 && w.length <= 5 && /^[A-Z0-9]+$/.test(w) && /[A-Z]/.test(w)) acro[w.toLowerCase()] = 1; });
+    var raw = rawToks(question), qa = raw.map(foldTok), lex = [];
+    (retrieved || []).forEach(function (r) { if (r && r.diseaseId && lex.indexOf(r.diseaseId) < 0) lex.push(r.diseaseId); });
+    var topic = raw.filter(function (t, j) { return (t.length >= 3 || acro[t]) && !plainWord(qa[j]); }).join(" ") || String(question).trim();
+    function best(hits) {   // the longest name wins; a tie goes to the lexical retriever's order
+      var b = null;
+      Object.keys(hits).forEach(function (id) {
+        var r = lex.indexOf(id); r = r < 0 ? 1e9 : r;
+        if (!b || hits[id] > b.s || (hits[id] === b.s && r < b.r)) b = { id: id, s: hits[id], r: r };
+      });
+      return b;
+    }
+    var hits = nameHits(qa, acro), b = best(hits), mode = "confident";
+    if (!b) {
+      // A spelling slip: a word the KB text never uses, one or two letters from a name word with the
+      // same first letter ("malria", "clostridiym"). A real word is never "corrected": "value" is not
+      // "valve", "anion" is not "Anton", "brucella" is not "rubella".
+      var G = gateIndex(), fixed = false;
+      var inKb = function (t) { return !_ai.hasTerm || _ai.hasTerm(t); };
+      var qf = qa.map(function (t, j) {
+        if (t.length < 5 || G.known[t] || plainWord(t) || inKb(raw[j]) || inKb(t)) return t;
+        var thr = fuzzThreshold(t.length), bt = null, be = thr + 1;
+        for (var i = 0; i < G.words.length && be > 1; i++) {
+          var w = G.words[i];
+          if (w === t || w.charAt(0) !== t.charAt(0) || Math.abs(w.length - t.length) > thr) continue;
+          var ed = editWithin(t, w, thr);
+          if (ed < be) { be = ed; bt = w; }
+        }
+        if (bt) { fixed = true; return bt; }
+        return t;
+      });
+      if (fixed) { hits = nameHits(qf, acro); b = best(hits); mode = "assume"; }
+    }
+    var gc = b ? trimGrounding(_ai.getGroundingContext(b.id)) : null;
+    return gc ? { id: b.id, gc: gc, mode: mode, named: hits, topic: topic } : { id: null, topic: topic };
+  }
+
   function init() {
     if (_initP) return _initP;
     _initP = (function () {
@@ -322,7 +529,7 @@
       return kbReady.then(function () {
         return !window.KB_RAG ? loadScript("/kb/dist/kb.rag.js?v=gold117") : Promise.resolve();
       }).then(function () {
-        return import("/kb/ai/interface.mjs?v=gold1010");
+        return import("/kb/ai/interface.mjs?v=gold1035-kbgate");
       }).then(function (mod) {
         var CORE = (window.KB_CORE && (window.KB_CORE.diseases || window.KB_CORE.byId)) || [];
         var diseases = {}; (Array.isArray(CORE) ? CORE : Object.values(CORE)).forEach(function (d) { if (d && d.id) diseases[d.id] = d; });
@@ -334,6 +541,7 @@
           index: { chunks: _chunks }
         };
         _ai = mod.createStewardAI(store, { flags: { ai: true, ragRetrieval: true } });
+        _chunkRef = _chunks; _gate = null;   // the name gate indexes entry names lazily, on first use
         buildNameIndex(_chunks);   // instant nearest-KB resolver index (typo/variant tolerance)
         _rrf = mod.rrf || null;   // hybrid fusion (available when smd_hybrid on)
         return true;
@@ -416,7 +624,23 @@
       // disease — surface topicMatch.matched=false so the caller caveats instead of confidently
       // describing the wrong condition.
       var topicMatch = null;
-      if (!top.length && (opts.question || "").trim()) {
+      var _gateV2 = !top.length && !!(opts.question || "").trim() && kbGateV2();
+      if (_gateV2) {
+        var ng = nameGate(opts.question, retrieved);
+        if (ng.id) {
+          grounding = [ng.gc];
+          lead = { id: ng.id, name: ng.gc.name || ng.id };
+          if (_ai.resolveTreatment) { try { treatment = _ai.resolveTreatment(ng.id, hospitalId); } catch (e) {} }
+          retrieved = retrieved.filter(function (r) { return r && ng.named[r.diseaseId]; });   // notes of named entries only
+          topicMatch = ng.mode === "assume"
+            ? { matched: false, mode: "assume", topic: ng.topic, nearest: ng.gc.name || ng.id, assume: { id: ng.id, name: ng.gc.name || ng.id }, resolver: "fuzzy" }
+            : { matched: true, topic: ng.topic, grounded: ng.gc.name || ng.id };
+        } else {
+          grounding = []; lead = null; treatment = null; retrieved = [];
+          topicMatch = { matched: false, mode: "none", topic: ng.topic, nearest: null };
+        }
+      }
+      if (!_gateV2 && !top.length && (opts.question || "").trim()) {
         var acroSet = {};
         String(opts.question).replace(/[^a-zA-Z0-9 ]+/g, " ").split(/\s+/).forEach(function (w) {
           if (w.length >= 2 && w.length <= 5 && (w === w.toUpperCase() || /^[A-Z0-9]+$/.test(w) || (w.length >= 3 && /^[A-Z][a-zA-Z0-9]+[A-Z]/.test(w)))) {

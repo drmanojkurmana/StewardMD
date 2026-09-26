@@ -9849,6 +9849,32 @@ is kept, so a rare slip can still get through. The mis-route itself is unchanged
 needs a scored check, see Roadmap "MaiK Cloud: relevance gate and input cost"). Live streaming now releases whole lines, not tokens.
 Status: PR maik-no-passage-talk; unit + handler tests, not model-evaluated on live Gemini.
 
+## 2026-09-26 - MaiK: a knowledge question gets the notes of the entry it names, or none
+
+**Decision.** A standalone knowledge question (no case, no differential) is grounded on a Knowledge Base
+entry only when the question NAMES it: a whole name form (a leading qualifier such as "acute" or a
+trailing head noun such as "syndrome" may be left out, never both), a curated synonym (`KB_NAMES` in
+`kb/ai/steward-ai.browser.js`), or the entry's one-word id (DVT, PE, AKI). A real word just before the
+matched words names something else ("heat stroke", "cryptococcal meningitis"); a letter or number just
+after is an identifier ("hepatitis B", "factor 9"). An unnamed question gets no notes and the model
+answers from its own knowledge. A spelling slip is corrected only for a word the KB text never uses
+(`hasTerm()` in `kb/ai/interface.mjs`). Only the named entries' retrieved chunks are sent. Flag
+`smd_kb_gate`, default ON; "0" restores the legacy coverage gate, whose code is unchanged.
+**Why.** The legacy gate treated one shared word as a name. On a 404-question benchmark
+(`test/maik-kb-relevance.test.mjs`) it gave 88 questions the notes of an entry they did not ask about
+("RA factor" -> Factor X deficiency, "panic attack" -> acute coronary syndrome, "capital of France" ->
+slipped capital femoral epiphysis, "svt adenosine dose" -> adenosine deaminase deficiency): 427k chars of
+off-topic text. The name gate: 0 mis-routes, 0 off-topic chars, 312 correct against 280.
+**Trade-off.** It abstains more (92 against 18 of 404). A question that names no entry gets a general
+answer without notes, including some the legacy gate happened to ground well. Recall grows by adding
+synonyms to `KB_NAMES`, not by loosening the rule: the clash rule is what keeps bacterial-meningitis notes
+away from "cryptococcal meningitis".
+**Also.** With `smd_maik_brain` on, the server no longer repeats the notes as RANKED REFERENCE NOTES
+claims (mean 1,196 chars, about 300 tokens, per grounded question over 10 measured); only guideline
+claims the notes lack are ranked. `retrieve()` skips chunks that share no word with the query: identical
+output on the 404 questions, 726 -> 121 ms per question.
+Status: PR maik-kb-relevance; unit, benchmark and headless-Chrome tests; not evaluated on live Gemini.
+
 ## 2026-09-25 - CliniX and SURGX released to all users; KardiQ X, ThoreX and FundX go back to code-gated beta
 
 **Decision (owner):** CliniX and SURGX are on for every user by default and no longer labelled Beta.

@@ -155,15 +155,12 @@ Also pending on people, not code: clinical review of all ai_drafted content (use
 native-speaker check of the Telugu and Hindi consent forms and handouts.
 
 ## MaiK Cloud: relevance gate and input cost (added 2026-09-26, PR maik-no-passage-talk)
-- **Relevance gate** (`kb/ai/steward-ai.browser.js` knowledge-question gate): a lone ambiguous token
-  CONFIDENTLY name-matches a disease ("RA factor ..." -> Factor XII deficiency; "factor 8 deficiency" ->
-  Complement factor I deficiency). Making "factor" generic and short acronyms word-bound was tried and
-  rejected: the "assume" tier then picked other wrong diseases via substring hits. Needs a scored check
-  (the server's bge-reranker score or the /api/retrieve vector score, floor calibrated on test/maik-eval).
-  A mis-routed package costs ~4.5k chars (~1.1k tokens) of off-topic notes per question.
-- **Duplicated KB text**: with `smd_maik_brain` on (default), the grounding is sent twice, once as the
-  RANKED REFERENCE NOTES claims and again in the notes block: +1.0k to 1.9k chars (~260-490 tokens)
-  per grounded question, measured on 4 questions. Send one or the other.
+- DONE (PR maik-kb-relevance) **Relevance gate**: replaced by the name gate (flag `smd_kb_gate`,
+  Decisions 2026-09-26). 404-question benchmark `test/maik-kb-relevance.test.mjs`: mis-routes 88 -> 0,
+  off-topic KB text 427k -> 0 chars. Open: it abstains on 92 of 404 (general answer, no notes); grow
+  `KB_NAMES` from those abstains.
+- DONE (PR maik-kb-relevance) **Duplicated KB text**: the server ranks only claims the notes do not
+  carry (guideline recommendations); mean 1,196 chars saved per grounded question.
 - **On-device**: the fine-tuned framing ("Reference material ... above") is unchanged and has no meta-talk
   filter; only `REGEN_NUDGE` stopped asking the model to "say so". Share `_maik_metatalk.js` as a UMD if
   the owner sees it offline.
