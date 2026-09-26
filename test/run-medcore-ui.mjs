@@ -67,8 +67,22 @@ const chartPatient = `
   if (card) card.click();
   return document.querySelectorAll(".icu-wrap").length;`;
 
-async function openWorkspace() {
-  await ev(chartPatient);
+/* A patient charted once, long ago: the newest SpO2 and HR are real numbers but older than their
+ * freshness window, so they come back as STALE rather than as values. This is the case that used
+ * to render "last 96 9 h ago". */
+const stalePatient = `
+  try { for (var i=localStorage.length-1;i>=0;i--){ var k=localStorage.key(i); if(k&&k.indexOf("stewardmd_icu_patients")===0) localStorage.removeItem(k); } } catch(e){}
+  try { localStorage.setItem("smd_icu_groups","0"); } catch(e){}
+  ICU.reset(); ICU.ingestPatient({ name: "Stale Pt", bed: "3", age: 54, sex: "F", weightKg: 61 });
+  var S = ICU.state();
+  S.vitals.push({ ts: Date.now() - 9*60*60000, hr: 88, spo2: 96 });
+  ICU.savePatient(); ICU.open();
+  var card = document.querySelector('[data-icu-act^="openpt"]');
+  if (card) card.click();
+  return document.querySelectorAll(".icu-wrap").length;`;
+
+async function openWorkspace(script) {
+  await ev(script || chartPatient);
   for (let i = 0; i < 40; i++) {
     if (await ev(`return document.querySelectorAll(".icu-wrap").length`) > 0) return true;
     await sleep(250);
@@ -155,6 +169,21 @@ try {
   ok(inert && inert.alertsUnchanged, "asking Medical Core changes no alert state");
   ok(inert && inert.summaryShape === "asOf,changed,missingInformation,provenance,schema", "the summary carries only the deterministic lists: " + (inert && inert.summaryShape));
   ok(inert && inert.hasProbability === false, "there is no probability anywhere in Phase 1 output");
+
+  /* ------------------------------------ 4. a stale reading must not read as one run-together number */
+  ok(await openWorkspace(stalePatient), "the workspace opens for a patient charted only 9 h ago");
+  const stale = await J(`
+    var rows = [].slice.call(document.querySelectorAll(".icu-mc-row")).map(function(e){return e.textContent.replace(/\\s+/g," ").trim();});
+    return JSON.stringify({ rows: rows, ages: rows.filter(function(r){return /ago/.test(r);}) });`);
+  ok(stale && stale.ages.length > 0, "a stale observation is listed with its age: " + JSON.stringify((stale && stale.rows) || []).slice(0, 200));
+  // The defect this pins: "last 96 9 h ago" put a value and an age side by side with only a space
+  // between them, so "96 9" could be read as one number. Every stale row must separate the two.
+  ok(stale && stale.ages.every((r) => !/\d\s+\d/.test(r)),
+    "no stale row leaves two numbers separated only by a space: " + JSON.stringify((stale && stale.ages) || []));
+  ok(stale && stale.ages.every((r) => /,\s/.test(r)),
+    "the value and the age are separated by a comma: " + JSON.stringify((stale && stale.ages) || []));
+  ok(stale && stale.ages.some((r) => /last 96 %, /.test(r)),
+    "the stale value carries its unit: " + JSON.stringify((stale && stale.ages) || []));
 } catch (e) {
   ok(false, "harness error: " + (e && e.message));
 } finally {
