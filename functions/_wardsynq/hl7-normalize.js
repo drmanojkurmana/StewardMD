@@ -22,6 +22,7 @@
 import { seg, segs, field, comp, rep, decodeEsc } from "../_connect/connectors/hl7v2/parser.js";
 import { coding, codeable, quantity } from "../_connect/canonical/coding.js";
 import { bundle, patient, encounter, condition, allergyIntolerance, observation, diagnosticReport, serviceRequest } from "../_connect/canonical/model.js";
+import { zoneOffsetAt } from "./mar-schedule.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -33,8 +34,21 @@ const str = (v) => (v == null ? "" : String(v).trim());
 // until ICD-10-PCS is registered there too.
 const CODING_SYSTEMS = Object.freeze({ LN: "http://loinc.org", SCT: "http://snomed.info/sct", SNM: "http://snomed.info/sct", I10: "http://hl7.org/fhir/sid/icd-10", ICD10: "http://hl7.org/fhir/sid/icd-10", RXNORM: "http://www.nlm.nih.gov/research/umls/rxnorm", ATC: "http://www.whocc.no/atc", UCUM: "http://unitsofmeasure.org" });
 
-/** PURE. An HL7 TS/DTM (YYYYMMDD[HHMM[SS]][+ZZZZ]) into ISO 8601, or null. Never a default. */
-function hl7Date(v) {
+/** PURE. An offset in minutes as an ISO 8601 zone suffix ("+05:30"). Never negative-zero, never bare. */
+function zoneOffsetStr(minutes) {
+  const m = Number.isFinite(minutes) ? Math.round(minutes) : 330;
+  const sign = m < 0 ? "-" : "+", abs = Math.abs(m);
+  return `${sign}${String(Math.floor(abs / 60)).padStart(2, "0")}:${String(abs % 60).padStart(2, "0")}`;
+}
+
+/**
+ * PURE. An HL7 TS/DTM (YYYYMMDD[HHMM[SS]][+ZZZZ]) into ISO 8601, or null. Never a default value -
+ * but a default ZONE, because HL7 v2.5.1 says a timestamp with no zone is the SENDING FACILITY's
+ * local time, not UTC. clock: { timeZone?, offsetMinutes? } - the hospital's configured zone, from
+ * ctx.clock (see functions/api/queue/[[path]].js); with neither, Asia/Kolkata (+05:30), because every
+ * sender this gateway has seen is an Indian HIS on its own local clock.
+ */
+function hl7Date(v, clock) {
   const s = str(v);
   const m = /^(\d{4})(\d{2})?(\d{2})?(\d{2})?(\d{2})?(\d{2})?(?:\.\d+)?([+-]\d{4})?$/.exec(s);
   if (!m) return null;
@@ -42,7 +56,11 @@ function hl7Date(v) {
   if (!mo) return y;
   if (!d) return `${y}-${mo}`;
   if (!h) return `${y}-${mo}-${d}`;
-  const zone = tz ? `${tz.slice(0, 3)}:${tz.slice(3)}` : "Z";
+  if (tz) return `${y}-${mo}-${d}T${h}:${mi || "00"}:${se || "00"}${tz.slice(0, 3)}:${tz.slice(3)}`;
+  const c = clock || {};
+  const wall = Date.UTC(Number(y), Number(mo) - 1, Number(d), Number(h), Number(mi) || 0, Number(se) || 0);
+  const off = c.timeZone ? zoneOffsetAt(c.timeZone, wall) : null;
+  const zone = zoneOffsetStr(off != null ? off : c.offsetMinutes);
   return `${y}-${mo}-${d}T${h}:${mi || "00"}:${se || "00"}${zone}`;
 }
 
@@ -73,7 +91,9 @@ function identifiersFrom(pid, enc) {
 }
 
 const SEX = Object.freeze({ M: "male", F: "female", O: "other", U: "unknown", A: "other", N: "unknown" });
-const PV1_CLASS = Object.freeze({ I: "IPD", O: "OPD", E: "ED", P: "OPD", R: "OPD", B: "OPD", C: "OPD", N: "OPD", U: "IPD" });
+// U (Unknown, HL7 table 0004) is deliberately absent: a class the sender itself could not say falls
+// through to the null-plus-warning path below rather than being recorded as a real inpatient admission.
+const PV1_CLASS = Object.freeze({ I: "IPD", O: "OPD", E: "ED", P: "OPD", R: "OPD", B: "OPD", C: "OPD", N: "OPD" });
 const OBR_STATUS = Object.freeze({ F: "final", P: "preliminary", C: "corrected", X: "cancelled", A: "preliminary", R: "preliminary", I: "preliminary", S: "preliminary" });
 /* HL7 table 0119 (ORC-1 order control) into a request status. Only the controls whose meaning is
  * unambiguous are here: CA/OC/CR are all "this order is off", DC discontinues one already running,
@@ -92,12 +112,13 @@ const OBX_STATUS = Object.freeze({ F: "final", P: "preliminary", C: "corrected",
  */
 function hl7ToSccm(msg, opts) {
   const o = opts || {};
+  const clock = o.clock || null;
   const enc = msg.encoding;
   const warnings = [...(msg.warnings || [])];
   const msh = seg(msg, "MSH");
   const kind = {
     type: str(comp(msh, 9, 0, enc)).toUpperCase(), event: str(comp(msh, 9, 1, enc)).toUpperCase(), controlId: str(field(msh, 10)),
-    version: str(field(msh, 12)), sendingApp: decodeEsc(str(field(msh, 3)), enc), sendingFacility: decodeEsc(str(field(msh, 4)), enc), at: hl7Date(field(msh, 7)),
+    version: str(field(msh, 12)), sendingApp: decodeEsc(str(field(msh, 3)), enc), sendingFacility: decodeEsc(str(field(msh, 4)), enc), at: hl7Date(field(msh, 7), clock),
     processingId: str(field(msh, 11)),
   };
 
@@ -110,7 +131,7 @@ function hl7ToSccm(msg, opts) {
   const primary = identifiers[0] ? identifiers[0].value : "";
   const family = pid ? decodeEsc(str(comp(pid, 5, 0, enc)), enc) : "", given = pid ? decodeEsc(str(comp(pid, 5, 1, enc)), enc) : "";
   const name = pid && (family || given) ? { text: [given, family].filter(Boolean).join(" "), given: given ? [given] : [], family: family || null } : null;
-  const p = pid ? patient({ id: primary || `msg-${kind.controlId || "unknown"}`, identifiers, name, gender: SEX[str(field(pid, 8)).toUpperCase()] || "unknown", birthDate: hl7Date(field(pid, 7)), deceased: str(field(pid, 30)).toUpperCase() === "Y" ? true : null }) : null;
+  const p = pid ? patient({ id: primary || `msg-${kind.controlId || "unknown"}`, identifiers, name, gender: SEX[str(field(pid, 8)).toUpperCase()] || "unknown", birthDate: hl7Date(field(pid, 7), clock), deceased: str(field(pid, 30)).toUpperCase() === "Y" ? true : null }) : null;
   if (!pid) warnings.push("no PID segment");
   else if (!primary) warnings.push("PID-3 carries no identifier");
 
@@ -122,8 +143,10 @@ function hl7ToSccm(msg, opts) {
   const encId = visitId || (pv1 ? `visit-${kind.controlId}` : "");
   if (pv1) {
     const cls = PV1_CLASS[str(field(pv1, 2)).toUpperCase()] || null;
-    if (!cls) warnings.push(`PV1-2 patient class "${str(field(pv1, 2))}" is not a class this server knows; the adapter records IPD and says so`);
-    const admit = hl7Date(field(pv1, 44)), discharge = hl7Date(field(pv1, 45));
+    // OPS-11/F11: this warning used to claim "the adapter records IPD" while the code actually stored
+    // class: null - the warning text now says what actually happens, never a class that was not filed.
+    if (!cls) warnings.push(`PV1-2 patient class "${str(field(pv1, 2))}" is not a class this server knows; no class was filed`);
+    const admit = hl7Date(field(pv1, 44), clock), discharge = hl7Date(field(pv1, 45), clock);
     /* TASK 7.6. The three cancellations, which say the opposite of what the message body looks like.
      * A11 cancel-admit: the admission did not happen. A13 cancel-discharge: the patient is still
      * here, so the discharge time on the message is the one being TAKEN BACK and must not be filed
@@ -150,7 +173,7 @@ function hl7ToSccm(msg, opts) {
   for (const s of segs(msg, "DG1")) {
     const cc = ccFrom(s, 3, enc, null) || (str(field(s, 4)) ? codeable({ text: decodeEsc(str(field(s, 4)), enc) }) : null);
     if (!cc) { warnings.push(`DG1 ${str(field(s, 1))} carries no diagnosis`); continue; }
-    out.conditions.push(condition({ id: `dg1-${str(field(s, 1)) || out.conditions.length + 1}-${kind.controlId}`, code: cc, clinicalStatus: "active", onset: hl7Date(field(s, 5)), encounter: encRef }));
+    out.conditions.push(condition({ id: `dg1-${str(field(s, 1)) || out.conditions.length + 1}-${kind.controlId}`, code: cc, clinicalStatus: "active", onset: hl7Date(field(s, 5), clock), encounter: encRef }));
   }
   for (const s of segs(msg, "AL1")) {
     const cc = ccFrom(s, 3, enc, null);
@@ -176,8 +199,11 @@ function hl7ToSccm(msg, opts) {
       if (!placer && !filler) warnings.push(`ORC ${i + 1} carries neither a placer nor a filler order number; filed under a message-scoped id that no later message can match`);
       const status = ORC_STATUS[control] || ORC_ORDER_STATUS[str(field(orc, 5)).toUpperCase()] || "unknown";
       if (!ORC_STATUS[control]) warnings.push(`ORC-1 order control "${control || "(empty)"}" is not one this gateway maps; the order's status came from ORC-5 and is "${status}"`);
-      const cc = obr ? ccFrom(obr, 4, enc, null) : ccFrom(orc, 4, enc, null);
-      if (!cc) { warnings.push(`order ${id} names no service (OBR-4/ORC-4 empty) and was not filed`); return; }
+      // OBR-4 only. ORC-4 is the Placer Group Number - a batching id, not what was ordered - so an
+      // ORC-only message with no OBR names no service and is warned-and-skipped, never filed under a
+      // fabricated display built from the group number.
+      const cc = obr ? ccFrom(obr, 4, enc, null) : null;
+      if (!cc) { warnings.push(`order ${id} names no service (OBR-4 empty or missing) and was not filed`); return; }
       /* Priority: ORC-7.6 (quantity/timing priority) if the sender still uses it, else TQ1-9. Never
        * defaulted to routine when the sender said nothing - an absent priority is absent. */
       const tq1 = segs(msg, "TQ1")[i] || segs(msg, "TQ1")[0] || null;
@@ -185,7 +211,7 @@ function hl7ToSccm(msg, opts) {
       out.serviceRequests.push(serviceRequest({
         id, code: cc, status, intent: "order",
         priority: ORDER_PRIORITY[pr] || null,
-        authoredOn: hl7Date(field(orc, 9)) || (obr ? hl7Date(field(obr, 6)) : null),
+        authoredOn: hl7Date(field(orc, 9), clock) || (obr ? hl7Date(field(obr, 6), clock) : null),
         requester: decodeEsc(str(comp(orc, 12, 1, enc)), enc) || (obr ? decodeEsc(str(comp(obr, 16, 1, enc)), enc) : null) || null,
         encounter: encRef,
         identifiers: [placer ? { system: str(comp(orc, 2, 1, enc)) || null, type: "PLAC", value: placer } : null,
@@ -202,8 +228,8 @@ function hl7ToSccm(msg, opts) {
         const rid = filler || placer || `obr-${str(field(s, 1)) || "1"}-${kind.controlId}`;
         const cc = ccFrom(s, 4, enc, "report");
         report = { id: rid, results: [] };
-        if (placer) out.serviceRequests.push(serviceRequest({ id: placer, code: cc, status: "completed", intent: "order", authoredOn: hl7Date(field(s, 6)), requester: decodeEsc(str(comp(s, 16, 1, enc)), enc) || null, encounter: encRef }));
-        out.diagnosticReports.push(diagnosticReport({ id: rid, code: cc, status: OBR_STATUS[str(field(s, 25)).toUpperCase()] || "preliminary", effectiveDateTime: hl7Date(field(s, 7)) || hl7Date(field(s, 22)), results: report.results, basedOn: placer ? { type: "ServiceRequest", id: placer } : null }));
+        if (placer) out.serviceRequests.push(serviceRequest({ id: placer, code: cc, status: "completed", intent: "order", authoredOn: hl7Date(field(s, 6), clock), requester: decodeEsc(str(comp(s, 16, 1, enc)), enc) || null, encounter: encRef }));
+        out.diagnosticReports.push(diagnosticReport({ id: rid, code: cc, status: OBR_STATUS[str(field(s, 25)).toUpperCase()] || "preliminary", effectiveDateTime: hl7Date(field(s, 7), clock) || hl7Date(field(s, 22), clock), results: report.results, basedOn: placer ? { type: "ServiceRequest", id: placer } : null }));
         if (!str(field(s, 25))) warnings.push(`OBR ${rid} carries no result status; recorded as preliminary`);
       } else if (s.id === "OBX") {
         const oid = `${report ? report.id : "obx"}-${str(field(s, 1)) || "x"}`;
@@ -211,7 +237,10 @@ function hl7ToSccm(msg, opts) {
         let value = null;
         if (raw != null && raw !== "") {
           if (type === "NM") { const n = Number(String(raw).trim()); value = Number.isFinite(n) ? quantity({ value: n, unit: str(comp(s, 6, 0, enc)) || null, code: str(comp(s, 6, 0, enc)) || null }) : { text: decodeEsc(String(raw), enc) }; if (!Number.isFinite(n)) warnings.push(`OBX ${oid} is typed NM but carries "${raw}"; kept as text`); }
-          else if (type === "SN") { const m = /^([<>=]*)\^?([-\d.]+)/.exec(String(raw)); const cmp = m && ["<", "<=", ">=", ">"].includes(m[1]) ? m[1] : null; value = m && Number.isFinite(Number(m[2])) ? quantity({ value: Number(m[2]), unit: str(comp(s, 6, 0, enc)) || null, comparator: cmp }) : { text: decodeEsc(String(raw), enc) }; }
+          // SN (comparator ^ num1 [^ separator ^ num2]) is component-separated, and MSH-2 may declare
+          // a component separator other than the default "^" - the regex is built from the message's
+          // OWN separator rather than a hard-coded one, or a sender using a different one is misread.
+          else if (type === "SN") { const sep = (enc.comp || "^").replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); const m = new RegExp(`^([<>=]*)${sep}?([-\\d.]+)`).exec(String(raw)); const cmp = m && ["<", "<=", ">=", ">"].includes(m[1]) ? m[1] : null; value = m && Number.isFinite(Number(m[2])) ? quantity({ value: Number(m[2]), unit: str(comp(s, 6, 0, enc)) || null, comparator: cmp }) : { text: decodeEsc(String(raw), enc) }; }
           else if (type === "CE" || type === "CWE" || type === "CNE") value = ccFrom(s, 5, enc, "coded value");
           else value = { text: decodeEsc(String(raw), enc) };
         }
@@ -222,7 +251,7 @@ function hl7ToSccm(msg, opts) {
           referenceRange: str(field(s, 7)) ? { text: decodeEsc(str(field(s, 7)), enc) } : null,
           // The laboratory's own flag, as sent. Never recomputed here or anywhere downstream.
           interpretation: flag ? codeable({ text: flag }) : null,
-          effectiveDateTime: hl7Date(field(s, 14)) || (report && out.diagnosticReports.length ? out.diagnosticReports[out.diagnosticReports.length - 1].effectiveDateTime : null), status: st }));
+          effectiveDateTime: hl7Date(field(s, 14), clock) || (report && out.diagnosticReports.length ? out.diagnosticReports[out.diagnosticReports.length - 1].effectiveDateTime : null), status: st }));
         if (report) report.results.push({ type: "Observation", id: oid });
         else warnings.push(`OBX ${oid} arrived before any OBR and belongs to no report`);
       }
