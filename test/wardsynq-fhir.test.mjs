@@ -11,7 +11,7 @@ import assert from "node:assert/strict";
 import {
   FHIR_TYPE, CANONICAL_TYPE, systemUriFor, codeable, toFhir, bundle, capabilityStatement,
   fhirPatient, fhirCondition, fhirObservation, fhirMedicationRequest, fhirMedicationAdministration,
-  fhirEncounter, fhirDocumentReference, fhirAllergy,
+  fhirEncounter, fhirDocumentReference, fhirAllergy, fhirImagingStudy,
 } from "../functions/_wardsynq/fhir.js";
 
 test("NEVER INVENT A CODE SYSTEM: an uncoded concept is text, with no coding at all", () => {
@@ -129,6 +129,29 @@ test("an inpatient encounter exports as an inpatient encounter, with its ward", 
   assert.match(e.location[0].location.display, /Medical A, bed 12/);
   assert.equal(fhirEncounter({ id: "e2", patientId: "p", class: "OPD", status: "finished" }).class.code, "AMB");
   assert.equal(fhirEncounter({ id: "e3", patientId: "p", status: "weird" }).status, "unknown");
+});
+
+test("OPS-11/F11: Encounter.class is NEVER omitted, even for a class this file has not mapped (R4 requires it 1..1)", () => {
+  // Before the fix, an unmapped/absent e.class exported no `class` key at all - Encounter.class is
+  // required (1..1) in R4, and validateResource on that output reported it missing; strict partner
+  // validators (ABDM/NRCES, the HL7 validator) reject the whole resource.
+  const noClass = fhirEncounter({ id: "e4", patientId: "p", status: "in-progress" });
+  assert.ok(noClass.class, "class is present");
+  assert.equal(noClass.class.code, "OBSENC", "the closest v3-ActCode catch-all, never a guess at inpatient/ambulatory");
+  assert.equal(noClass.class.system, "http://terminology.hl7.org/CodeSystem/v3-ActCode");
+  const unmapped = fhirEncounter({ id: "e5", patientId: "p", class: "SOMETHING-UNMAPPED", status: "in-progress" });
+  assert.equal(unmapped.class.code, "OBSENC");
+});
+
+test("OPS-23/F23: a multi-modality study (PET/CT) exports one Coding PER modality, not one Coding with a joined code", () => {
+  const s = fhirImagingStudy({ id: "img-1", patientId: "p", modality: "PT,CT", studyUid: "1.2.3" });
+  assert.deepEqual(s.modality, [
+    { system: "http://dicom.nema.org/resources/ontology/DCM", code: "PT" },
+    { system: "http://dicom.nema.org/resources/ontology/DCM", code: "CT" },
+  ]);
+  // A single-modality study (the common case) is unaffected.
+  assert.deepEqual(fhirImagingStudy({ id: "img-2", patientId: "p", modality: "MR" }).modality, [{ system: "http://dicom.nema.org/resources/ontology/DCM", code: "MR" }]);
+  assert.equal(fhirImagingStudy({ id: "img-3", patientId: "p" }).modality, undefined);
 });
 
 test("an allergy keeps 'unable-to-assess' rather than being upgraded to a certainty", () => {

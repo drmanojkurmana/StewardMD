@@ -130,9 +130,15 @@ test("A BALANCE SAYS WHAT IT IS MISSING: the hours nobody charted are named", ()
   assert.deepEqual(thin.hours.map((h) => h.hour), ["2026-09-07T08:00:00.000Z", "2026-09-07T09:00:00.000Z"]);
   assert.deepEqual(thin.hours[0], { hour: "2026-09-07T08:00:00.000Z", intake: 200, output: 0 });
 
-  // A fully charted period says so outright rather than leaving it to be inferred.
+  // A fully charted period says so outright rather than leaving it to be inferred. CLIN-24: fully charted is
+  // BOTH directions every hour; output alone names every hour as missing intake.
   const full = [];
   for (let h = 8; h < 20; h++) full.push(at("output.urine", 50, `2026-09-07T${String(h).padStart(2, "0")}:15:00.000Z`));
+  const outOnly = summariseBalance(full, twelve);
+  assert.equal(outOnly.complete, false);
+  assert.deepEqual(outOnly.gaps, []);
+  assert.equal(outOnly.intakeGaps.length, 12);
+  for (let h = 8; h < 20; h++) full.push(at("intake.oral", 60, `2026-09-07T${String(h).padStart(2, "0")}:20:00.000Z`));
   const complete = summariseBalance(full, twelve);
   assert.equal(complete.complete, true);
   assert.deepEqual(complete.gaps, []);

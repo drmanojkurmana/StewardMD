@@ -766,7 +766,10 @@ function searchBundle({ base, type, q, page, included, outcomes, rawQuery, path 
     link: links,
     entry: [
       ...page.entries.map((r) => ({ fullUrl: `${base}/${r.resourceType}/${r.id}`, resource: cut(r), search: { mode: "match" } })),
-      ...(included || []).map((r) => ({ fullUrl: `${base}/${r.resourceType}/${r.id}`, resource: cut(r), search: { mode: "include" } })),
+      // OPS-17/F17: _elements/_summary is a filter on the SEARCH MATCHES, not on _include/_revinclude
+      // resources - applying cut() here too defeated _include (an included Patient came back stripped
+      // to id/meta and tagged SUBSETTED). An included resource travels unmodified.
+      ...(included || []).map((r) => ({ fullUrl: `${base}/${r.resourceType}/${r.id}`, resource: r, search: { mode: "include" } })),
       ...(outcomes || []).map((o) => ({ resource: o, search: { mode: "outcome" } })),
     ],
   };

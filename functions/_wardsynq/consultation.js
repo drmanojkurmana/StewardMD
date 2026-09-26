@@ -141,7 +141,7 @@ async function saveConsultation(request, env, ctx) {
       }
       const entry = { piece: p.key, index: i, ok: !!(r && r.ok) };
       if (r && r.ok) { written += (typeof r.written === "number" ? r.written : 1); Object.assign(entry, pick(r)); }
-      else { Object.assign(entry, { error: (r && r.error) || "failed", status: (r && r.status) || 502, ...(r && r.detail ? { detail: r.detail } : {}), ...(r && r.reasons ? { reasons: r.reasons } : {}) }); failedHere = true; }
+      else { Object.assign(entry, { error: (r && r.error) || "failed", status: (r && r.status) || 502, ...(r && r.detail ? { detail: r.detail } : {}), ...(r && r.reasons ? { reasons: r.reasons } : {}), ...(r && r.safety ? { safety: r.safety } : {}) }); failedHere = true; }
       results.push(entry);
       if (failedHere) break;
     }
@@ -185,7 +185,8 @@ async function saveConsultation(request, env, ctx) {
 /* The identifiers a screen needs back to render what was just saved, without echoing whole records. */
 function pick(r) {
   const out = {};
-  for (const k of ["noteId", "problemId", "conditionId", "orderId", "medicationOrderId", "serviceRequestId", "observationIds", "version", "patientId"]) {
+  // `safety`: what the medication check found (CLIN-02), so the prescriber sees it on the saved consultation.
+  for (const k of ["noteId", "problemId", "conditionId", "orderId", "medicationOrderId", "serviceRequestId", "observationIds", "version", "patientId", "safety"]) {
     if (r[k] !== undefined) out[k] = r[k];
   }
   return out;

@@ -74,7 +74,7 @@ const { onRequest } = await import("../functions/api/queue/[[path]].js");
 const NOW = Date.parse("2026-09-13T12:00:00.000Z");
 const iso = (ms) => new Date(ms).toISOString();
 const SECRET = "AIza-test-secret-key-000111";
-const LOCAL = "http://10.20.30.40:8080/v1";
+const LOCAL = "https://ai.hospital.example/v1";   // SEC-08: a model server must be https to a public name
 const hang = () => new Promise(() => {});
 
 function healthy(over) {
@@ -125,7 +125,7 @@ for (const [id, downOver, hangOver] of CASES) {
     assert.ok(d.consequence && d.consequence.length > 20, "says what staff will see");
     assert.equal(r.overall, "down", "one down dependency is never an overall green");
     const text = JSON.stringify(r);
-    assert.ok(!text.includes(SECRET) && !text.includes("10.20.30.40") && !text.includes("googleapis"), "no secret or internal URL: " + text);
+    assert.ok(!text.includes(SECRET) && !text.includes("ai.hospital.example") && !text.includes("googleapis"), "no secret or internal URL: " + text);
     assert.ok(!/[—–]/.test(text), "no em or en dash");
   });
   test(`${id}: a probe that does not answer in time is DOWN, never up`, async () => {

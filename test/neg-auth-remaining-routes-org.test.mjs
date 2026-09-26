@@ -70,7 +70,13 @@ mock.module("../functions/_fbfirestore.js", {
 /* CONNECT_DB double: only exercised here by nothing (no onboarding in this file) - present only
  * because the router imports selfCreateTenant at module scope; the reachability suite's own
  * queue-orgs-onboard.test.mjs shows an empty double is enough for the module to load. */
-const connectDb = () => ({ prepare: () => ({ bind: () => ({ first: async () => null, all: async () => ({ results: [] }), run: async () => ({ success: true, meta: {} }) }) }), batch: async () => [] });
+/* SEC-02: /org/from-connect now asks Connect whether the caller owns the tenant, so the double knows one
+ * tenant (tenant-fc-1) and its one owner (new-fc-owner@example.test). */
+const FC_OWNER_EMAIL = "new-fc-owner@example.test";
+const connectDb = () => ({ prepare: (sql) => ({ bind: (...a) => ({
+  first: async () => (/FROM connect_tenant WHERE id=\?/.test(sql) && String(a[0]) === "tenant-fc-1" ? { id: "tenant-fc-1", name: "FC", settings: "{}" } : null),
+  all: async () => ({ results: /FROM connect_membership WHERE user_id=\?/.test(sql) && String(a[0]) === uidFor(FC_OWNER_EMAIL) ? [{ user_id: uidFor(FC_OWNER_EMAIL), tenant_id: "tenant-fc-1", role: "owner" }] : [] }),
+  run: async () => ({ success: true, meta: {} }) }) }), batch: async () => [] });
 
 const { mintStaffSession, totpAt } = await import("../functions/_opd_auth.js");
 const A = await import("../functions/_opd_auth.js");
@@ -386,7 +392,11 @@ test("POST /org/from-connect: no session refused, a staff PIN session cannot sel
   assert.equal(r403.__status, 403, JSON.stringify(r403));
   assert.equal(r403.error, "account_required");
 
-  const rOk = await api("/org/from-connect", "POST", body, asFirebase("new-fc-owner@example.test"));
+  const rNotTheirs = await api("/org/from-connect", "POST", body, asFirebase("someone-else@example.test"));
+  assert.equal(rNotTheirs.__status, 403, "an account that does not own the tenant cannot link it (SEC-02)");
+  assert.equal(rNotTheirs.error, "tenant_not_yours");
+
+  const rOk = await api("/org/from-connect", "POST", body, asFirebase(FC_OWNER_EMAIL));
   assert.equal(rOk.__status, 200, JSON.stringify(rOk));
   assert.equal(rOk.org.mode, "connect");
   assert.equal(rOk.org.connectTenantId, "tenant-fc-1");

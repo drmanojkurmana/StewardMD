@@ -72,6 +72,30 @@ test("the fhir-push connector maps a FHIR Bundle to SCCM (Patient + Observation 
   assert.equal(single.bundle.patient.id, "solo");
 });
 
+test("OPS-18/F18: a Bundle above maxRows is truncated WITH a signal, not silently", async () => {
+  const ctx = { tenant: { id: "t1" }, now: () => new Date("2026-08-01T00:00:00Z"), budget: { maxRows: 2 } };
+  const bigBundle = JSON.stringify({
+    resourceType: "Bundle",
+    entry: [
+      { resource: { resourceType: "Patient", id: "pat-1", gender: "female" } },
+      { resource: { resourceType: "Condition", id: "c1", code: { text: "A" } } },
+      { resource: { resourceType: "Condition", id: "c2", code: { text: "B" } } },
+      { resource: { resourceType: "Condition", id: "c3", code: { text: "C" } } },
+    ],
+  });
+  const { bundle, handle } = await fhirPushConnector.ingest(ctx, { rawBody: bigBundle, headers: new Headers() });
+  assert.equal(handle.truncated, true);
+  assert.equal(handle.dropped, 2, "4 entries, cap 2, Patient always kept aside -> 2 of the 3 non-Patient resources dropped");
+  assert.ok(bundle.meta.warnings.some((w) => /exceeded the 2-row ingest limit/.test(w)), "the sender is told, not left to assume everything landed");
+
+  // Under the cap: no truncation signal at all.
+  const ctxRoomy = { ...ctx, budget: { maxRows: 50000 } };
+  const clean = await fhirPushConnector.ingest(ctxRoomy, { rawBody: bigBundle, headers: new Headers() });
+  assert.equal(clean.handle.truncated, false);
+  assert.equal(clean.handle.dropped, 0);
+  assert.equal(clean.bundle.meta.warnings.some((w) => /ingest limit/.test(w)), false);
+});
+
 test("create persists a connect_feed row the REAL ingest spine accepts (round-trip -> SCCM)", async () => {
   const db = seedDb();
   const res = await createFeed(modDeps(db), req.request, env, "t1", { name: "GIMSR FHIR Push" });

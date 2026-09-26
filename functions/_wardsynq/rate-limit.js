@@ -72,7 +72,24 @@ async function hit(deps, opts) {
   };
 }
 
+/**
+ * SEC-15: a per-client-address limit for the doors that take a secret from an unauthenticated caller
+ * (staff sign-in, the patient portal). Per-account lockouts stop guessing one account; they do nothing
+ * against one address spraying guesses across many accounts. The address is Cloudflare's
+ * CF-Connecting-IP, which the edge sets and a client cannot; it is hashed before it becomes a key.
+ * With no such header (a local runtime, the tests) there is no address to count and this allows.
+ * No WSQ_RL binding here: a binding's limit is its own configuration, sized for ward traffic, not
+ * for sign-in. ponytail: per-isolate memory unless WSQ_RL_KV or MAIK_KV is bound (see header).
+ */
+async function ipHit(env, request, scope, limit, windowMs) {
+  const ip = str(request && request.headers && request.headers.get("CF-Connecting-IP"));
+  if (!ip) return { allowed: true, remaining: -1, retryAfterSeconds: 0, store: "none" };
+  const d = new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode("rl-ip:" + ip)));
+  const h = [...d.slice(0, 12)].map((b) => b.toString(16).padStart(2, "0")).join("");
+  return hit({ kv: env && (env.WSQ_RL_KV || env.MAIK_KV) }, { key: `ip:${scope}:${h}`, limit, windowMs });
+}
+
 /** For tests and for a deployment that wants a clean slate. */
 function resetMemory() { MEMORY.clear(); }
 
-export { hit, memoryStore, kvStore, resetMemory };
+export { hit, ipHit, memoryStore, kvStore, resetMemory };

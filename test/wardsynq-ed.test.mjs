@@ -235,7 +235,10 @@ test("THE ED GOLDEN PATH: arrival, triage, vitals, a doctor's note, a medication
 
   const ord = await as(DOCTOR, "/ward/medication-order", "POST", { orgId: ORG, order: { patientId: arr.patientId, encounterId: arr.encounterId, drug: "Piperacillin-tazobactam", dose: { value: 4.5, unit: "g" }, route: "iv", frequency: "STAT" } });
   assert.equal(ord.__status, 200, JSON.stringify(ord));
-  const mar = (action, extra) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action, orderId: ord.orderId, dueAt: "2026-09-09T08:05:00.000Z", patient: { id: arr.patientId, mrn: reg.mrn, wristbandBarcode: reg.mrn }, ...extra });
+  // CLIN-11: the STAT dose's own time, from the round, not a fixed date the order never scheduled.
+  const win = (h) => encodeURIComponent(new Date(Date.now() + h * 3600e3).toISOString());
+  const edDue = (await as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${arr.patientId}&from=${win(-1)}&to=${win(1)}`)).due.find((d) => d.orderId === ord.orderId).dueAt;
+  const mar = (action, extra) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action, orderId: ord.orderId, dueAt: edDue, patient: { id: arr.patientId, mrn: reg.mrn, wristbandBarcode: reg.mrn }, ...extra });
   await mar("verify"); await mar("dispense");
   const given = await mar("scan", { scan: { patientBarcode: reg.mrn, drugBarcode: "Piperacillin-tazobactam", dose: { value: 4.5, unit: "g" }, route: "iv" } }).then(() => mar("administer"));
   assert.equal(given.to, "administered", JSON.stringify(given));

@@ -54,8 +54,8 @@ test("IT CLAIMS LEVEL 1 AND NO MORE", () => {
 test("the author is who SIGNED it, and nothing is summarised", () => {
   const d = doc();
   // Not whoever exported it: the document's author is the person accountable for its contents.
-  assert.match(d, /<id extension="cfa:dr"\/>/);
-  assert.match(d, /<time value="20260909100000"\/>/, "and the time they signed");
+  assert.match(d, /<id root="2\.25\.1" extension="cfa:dr"\/>/, "OPS-22/F22: root, or the signer is anonymous to any receiver");
+  assert.match(d, /<time value="20260909100000\+0000"\/>/, "and the time they signed, OPS-21/F21 with an explicit offset");
 
   // The sections are the summary's own words, verbatim and in full.
   assert.match(d, /Community-acquired pneumonia/);
@@ -74,7 +74,30 @@ test("a field the record does not have is EMPTY, never a placeholder", () => {
   assert.ok(!bare.includes("administrativeGenderCode"));
   // An unparseable time is empty rather than a plausible instant.
   assert.equal(ts("not a date"), "");
-  assert.equal(ts("2026-09-09T10:00:00.000Z"), "20260909100000");
+  assert.equal(ts("2026-09-09T10:00:00.000Z"), "20260909100000+0000", "OPS-21/F21: always an explicit offset");
   // No encounter means no componentOf, rather than an empty one implying a stay.
   assert.ok(!bare.includes("encompassingEncounter"));
+});
+
+test("OPS-14/F14: the custodian organization has an <id>, required by the CDA R2 schema", () => {
+  const d = doc();
+  assert.match(d, /<representedCustodianOrganization>\s*<id root="2\.25\.1"\/>\s*<name>WSQ Hospital<\/name>/,
+    "id before name, or any HIE/partner that schema-validates incoming CDA rejects the whole document");
+  // No configured org OID falls back to the same "2.25.0" default the patient/document ids use, not
+  // an omitted id (which would still fail the schema).
+  const noOid = cdaDocument({ summary: SUMMARY, patient: PAT, org: { name: "Some Hospital" } });
+  assert.match(noOid, /<id root="2\.25\.0"\/>/);
+});
+
+test("OPS-15/F15: administrativeGenderCode carries a real @code/@codeSystem, not just the raw sex string", () => {
+  assert.match(doc(), /<administrativeGenderCode code="F" codeSystem="2\.16\.840\.1\.113883\.5\.1" displayName="Female"\/>/);
+  const male = doc({ patient: { ...PAT, sex: "M" } });
+  assert.match(male, /code="M".*displayName="Male"/);
+  // An unmapped/unknown sex is UN (undifferentiated), never a code invented for it.
+  const other = doc({ patient: { ...PAT, sex: "other" } });
+  assert.match(other, /code="UN" codeSystem="2\.16\.840\.1\.113883\.5\.1"/);
+});
+
+test("OPS-22/F22: the encounter <id> has a root, or it is unresolvable outside WardSynQ", () => {
+  assert.match(doc(), /<encompassingEncounter>\s*<id root="2\.25\.1" extension="wsq-adm-1"\/>/);
 });
