@@ -9919,3 +9919,31 @@ Decisions:
   searched, found, integrated, and what was not and why.
 Flag `smd_abg_v2` (default ON) restores the previous view; the console and reasoning read the new layer
 either way. See [[Antibiogram]]. Recovery point: branch state before this work, commit `dbc92bad9`.
+
+## 2026-09-26 - Antibiogram integrity rules added during the full census integration
+While integrating about 75 documents (every page double-read by independent agents), the sources themselves
+turned out to be the main risk. Decisions, each implemented in `scripts/build-antibiogram.mjs` or
+`antibiogram-rules.js` with a test:
+- **Documents that restrict reproduction are held, not shipped.** UCMS and GTB Hospital antibiograms (2023,
+  2023-24, 2025) forbid copying or reproduction without the editorial board's permission; CMC Ludhiana 2012
+  and RGGWCH Puducherry 2017 are marked "for internal use only". Extracted, listed in the register with the
+  reason, integrated only if the owner obtains permission. Plain "(c) ... all rights reserved" notices on
+  public surveillance reports (ICMR, KARS-NET, SGPGIMS newsletters) are not treated as a bar to citing their
+  figures.
+- **Figures carried over between editions are cautions** (`copyChecks`): 6+ identical figures making up 75%+
+  of those shared, 4+ of them strictly between 0 and 100. NARS-Net 2025 reprints two 2024 series.
+- **Exceptional resistance is a caution** (`unusualReason`): vancomycin in staphylococci under 90%, linezolid
+  in S. aureus under 90%, carbapenems in typhoidal Salmonella under 95%, penicillin in beta-haemolytic
+  streptococci under 95%, vancomycin/linezolid in pneumococci under 95%. Deliberately NOT linezolid in
+  E. faecium or CoNS: ICMR data show that resistance is real in India, and a caution would hide it.
+- **Tetracycline cannot be far above doxycycline or minocycline** (CLSI class equivalence).
+- **n from the source's organism table** when none is printed beside the susceptibility table (exact
+  specimen and setting only, never phenotype or cohort rows); the sheet says so.
+- **Focus reports** (one department, one outbreak, one condition) are shown but never pooled or profiles,
+  and need their own `inst`.
+- **Specimen keys follow what the source grouped**: NCDC-protocol "pus aspirate" (alone or with other
+  sterile fluids) is `deep`; "all except blood and urine" is `other`; "blood + PA + OSBF" is `nonurine`.
+- **Count checks report only real disagreements** (not "other species" genus lines, species without rows,
+  location-less isolates, or n that is the number tested), and a contradicted row is never a part of a
+  combined row, though it still counts as printed.
+- **Profile ids are per institution** (`ABG_<inst>`), so a saved choice survives the next edition.

@@ -24,10 +24,17 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
 - [ ] Per-endpoint precise per-module token cost (currently counts requests, rough cost)
 
 ## [[Antibiogram]]
-- [ ] Retry the census from an Indian network: AIIMS Bhopal, Jodhpur, Bibinagar, Rajkot, Kalyani and several state
-      health portals refused connections from the cloud proxy (listed in the register with the reason).
-- [ ] Extract remaining downloaded documents marked "downloaded; not yet extracted" in `data/antibiogram/register.json`.
-- [ ] ICMR AMRSN 2017 to 2023 at stratum level (2024's trend tables already give the national 2017 to 2024 series).
+- [ ] Retry the census from an Indian network: several institute and state health portals refused connections
+      from the cloud proxy (register reason "the website refused the connection from our network").
+- [ ] **Owner decision: held documents.** UCMS & GTB Hospital antibiograms 2023, 2023-24, 2025 (reproduction
+      forbidden without the editorial board's permission) and CMC Ludhiana 2012, RGGWCH Puducherry 2017 ("for
+      internal use only") were extracted but are not in the app. Integrate only with permission.
+- [ ] Ask SKIMS, GMC Srinagar, AIIMS Bhopal, RIMS Imphal about figures the rules flag as exceptional (vancomycin
+      and linezolid in staphylococci, carbapenems in S. Typhi): likely method (disk diffusion) issues.
+- [ ] RML Lucknow 2020 and 2021 print numbers of susceptible isolates under "percentage" headings, without the
+      number tested per drug: percentages could be computed if the lab supplies the denominators.
+- [ ] ICMR AMRSN 2017 to 2022 at stratum level (2023 and 2024 are in; 2024's trend tables give the national
+      2017 to 2024 series).
 - [ ] ICMR regional-centre (RC) tables: per-centre figures, if ICMR's centre list can be tied to institutions.
 - [ ] Knowledge Library Antibiogram tab still reads `ASP_ABG.national` (in minified app.js); point it at `ABG_STORE`
       (ICMR scope) when app.js is next rebuilt.
