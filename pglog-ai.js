@@ -39,7 +39,7 @@
   function arr(x) { return Array.isArray(x) ? x : []; }
 
   var AI_URL = "/api/ai/maik";
-  var LABEL = "MaiK suggestion — check before accepting";
+  var LABEL = "MaiK suggestion. Check before accepting";
 
   function headers() {
     var h = { "Content-Type": "application/json" };
@@ -174,7 +174,7 @@
       "a score, do not judge examination eligibility, and do not invent clinical events.\n\n" +
       JSON.stringify(facts);
     return ask(prompt, { maxTokens: 550 }).then(function (t) {
-      return { text: t, advisory: true, label: "Draft — you are the author. Edit before saving.", editable: true };
+      return { text: t, advisory: true, label: "Draft. You are the author: edit before saving.", editable: true };
     });
   }
 
@@ -229,7 +229,7 @@
     });
     arr(ctx.months).forEach(function (mo) {
       if (mo.overdue) out.push({ kind: "attestation_overdue", label: "Guide authentication missing for " + mo.period,
-        dueAt: mo.period, severity: "high", source: "nmc_regulation", clause: "5.2(vi)" });
+        dueAt: mo.period, severity: "high", source: "nmc_regulation", clause: "5.2(vii)" });
     });
     return out.sort(function (a, b) { return (a.severity === "high" ? 0 : 1) - (b.severity === "high" ? 0 : 1) || (a.days || 0) - (b.days || 0); });
   }

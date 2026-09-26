@@ -70,6 +70,18 @@
         "audit information; patient-identifiable case references are withheld from every " +
         "cross-resident report (see requirements doc section 5)."
     },
+    smd_pglog_easy: {
+      type: "bool", def: true, query: "pglogeasy",
+      desc: "Easy mode (residents called the eLogbook 'a very hard, strict framework'). ON: plain-language " +
+        "screens, clause/provenance badges moved behind 'Why is this required?' on home, forms and headers " +
+        "(they stay on Progress, Reports and the certificate), Today/Yesterday date chips, 'Log again', " +
+        "dictation on the full form, the guide's name as the supervisor chip, MD residents not asked for a " +
+        "supervisor, guide-attestation items shown as 'Waiting on your guide', the join-request flow for " +
+        "unlinked residents, batch review for guides, attendance recorded by the institution (hidden from " +
+        "the resident's add picker). Every regulatory rule is unchanged: no self-verify, a verified record " +
+        "is immutable, a month is signed once by a registration-verified signer, the role comes from the " +
+        "membership. \"0\" restores the previous UI."
+    },
     smd_pglog_demo: {
       type: "bool", def: false, query: "pglogdemo",
       desc: "NEVER SHIP ON. Seeds FABRICATED residents, logbook entries and verifications into the " +
