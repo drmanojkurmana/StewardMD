@@ -308,3 +308,20 @@ evidence contains. No model runs; the book is downloaded (sha256 must match `mai
   rows mention status epilepticus with one of those drugs, under unrelated headings. The curated KB
   (`kb/diseases/seizure_epilepsy.json`) has it, and reaches Lite only through `withCurated` when the
   router matches. So the next Lite lever is router accuracy and curated content, not BM25 tuning.
+
+## MaiK Lite: the curated regimen leads a treatment answer's evidence (2026-09-26, branch maik-lite-regimen)
+`--router real` in the Lite bench boots the REAL router (buildPackage over the real KB, lexical path, no
+network) and feeds its package to the REAL `answer()`, so the evidence is exactly what the app sends.
+It showed the curated passage was the right disease but carried no management: `curatedPassages` took
+the first 700 chars of the knowledge PEARLS (definitions, ECG, examination) and ignored `pkg.treatment`,
+the curated regimen MaiK Cloud answers from. Now a treatment question's curated passage is the regimen
+(label, steps, doses; same disease only), ahead of the pearls.
+
+| router | before | + regimen | fully covered |
+|---|---|---|---|
+| main (old gate) | 46.5% | **57.9%** | 8 -> 16 |
+| #1248 name gate | 50.6% | **61.6%** | 10 -> 18 |
+
+Still zero key points: child paracetamol and acute heart failure (router matches nothing), tramadol +
+SSRI, severe pre-eclampsia, acute diarrhoea (the regimen or pearls lack those key points).
+
