@@ -43,10 +43,10 @@ entries of 2026-09-26. Owner items: [[Roadmap]] (Antibiogram section).
   and in most files every cell, every row n and every count, from page images (brief `VERIFY.md` in the
   session scratchpad). 107 of 108 sources are "double-checked"; 1 is the transcribed ICMR 2024 summary (no
   n, never pooled). Where a second reader corrected a value, the fix is logged in the file's `issues`.
-- Bundle: 4,344 rows (+1,889 derived), 44,260 cells: 42,288 shown, 1,059 with a caution, 807 intrinsic
-  resistance, 78 not relevant to the specimen, 28 not shown; 1,475 rows under 30 isolates (shown grey,
-  never pooled); 90 count-table disagreements, each the source's own and listed on its sheet. 3.9 MB
-  (590 KB gzipped), fetched on demand.
+- Bundle: 4,344 rows (+1,889 derived), 44,260 cells: 41,722 shown, 1,617 with a caution, 807 intrinsic
+  resistance, 86 not relevant to the specimen, 28 not shown; 1,475 rows under 30 isolates (shown grey,
+  never pooled); 91 count-table disagreements, each the source's own and listed on its sheet. 2.9 MB
+  (470 KB gzipped) plus a 0.7 MB detail file fetched only when a source sheet opens.
 - RIMS Imphal 2022-23 and 2023-24: second reading done (every cell; no errors; one cell left out while
   two readings disagreed was settled from the vector chart bar), integrated.
 - SGRH 2012 to 2021 (9 bacterial editions, 11 fungal): extracted by three agents plus one for the
@@ -64,8 +64,15 @@ entries of 2026-09-26. Owner items: [[Roadmap]] (Antibiogram section).
   screens, MRSA/MSSA combination, studies in pools, register honesty, per-institution profiles, notes,
   other-species groups, breakpoint revisions, the data kill switch, cefotaxime/ceftriaxone, exports,
   keyboard access, WISCA wording, the % resistant import check.
-- Round 2 was launched but stopped by the account usage limit before it reported. Run it again
-  (brief `REVIEW.md` in the session scratchpad) before calling the module 10/10.
+- Round 2 (2026-09-26): 7.5/10. Data fidelity 9 (66 of 66 cells read blind matched, 36 from the new SGRH and
+  RIMS sources). Must-fix items, all addressed the same day: same-class contradictions (fluoroquinolones,
+  carbapenems, penicillin/ampicillin, beta-lactamase inhibitors) as cautions; whole tables marked unreliable
+  (BVDU Pune 2024 page 12, SKNMC Pune 2024); zeros meaning "not tested"; pools need 3 institutions (South and
+  East lost their pooled views); S. aureus teicoplanin, streptococcal vancomycin/linezolid and Gram-positive
+  tigecycline as exceptional. Nice-to-haves addressed: high-level gentamicin outside enterococci, urinary
+  agents in ranking, short source summaries with collapsed detail, bundle size, console copy, rotate hint,
+  source-watch baseline, page ranges, LHMC conflict. Notes: `scratchpad/abg/review2/REVIEW-NOTES.md`.
+- Round 3: run after the round 2 fixes (brief `REVIEW.md`, output `review3/`).
 
 ## Process slips to know about
 - Early in the census, crawl scripts ran with TLS verification off for about an hour before this was
