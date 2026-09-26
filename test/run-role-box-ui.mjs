@@ -83,7 +83,7 @@ try {
 
   // 6) doctor: practice open, PG logbook locked
   g = await setRole("doctor");
-  ok((g.order.indexOf("queue") < 0 || g.open.indexOf("queue") >= 0) && (g.order.indexOf("pglog") < 0 || g.locked.indexOf("pglog") >= 0), "doctor: OPD open, PG logbook locked");
+  ok(g.locked.length === 0, "doctor: nothing locked, eLogbook included (" + JSON.stringify(g.locked) + ")");
   // 7) resident: logbook open, OPD locked
   g = await setRole("resident");
   ok((g.order.indexOf("pglog") < 0 || g.open.indexOf("pglog") >= 0) && (g.order.indexOf("queue") < 0 || g.locked.indexOf("queue") >= 0), "PG resident: logbook open, OPD locked");

@@ -28,11 +28,12 @@
     student: ["pglog", "dictate", "docs", "review", "kxinbox", "hospital", "icu", "ward", "agentconnect", "dosing", "insulin"].concat(["followcare", "maitri", "queue"]),
     intern: ["pglog", "review", "kxinbox", "ward", "agentconnect", "hospital"].concat(["followcare", "maitri", "queue"]),
     resident: PRACTICE.slice(),
-    doctor: ["pglog"]
+    // Doctors keep the eLogbook (owner, 2026-09-26): guides, co-guides and HODs verify residents' entries in it.
+    doctor: []
   };
   // Who a locked tool IS for, in the explainer.
   var FOR = {
-    pglog: "PG residents (NMC PG logbook)",
+    pglog: "PG residents and doctors (NMC PG logbook)",
     followcare: "practising doctors", maitri: "practising doctors", queue: "practising doctors with a clinic",
     review: "practising doctors (clinical reviewers)", agentconnect: "practising doctors",
     kxinbox: "registered doctors and PG residents", ward: "PG residents and doctors", hospital: "PG residents and doctors",

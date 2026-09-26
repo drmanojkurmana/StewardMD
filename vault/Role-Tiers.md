@@ -226,7 +226,7 @@ lock rest of them".
     AgentConnect, Bedside dosing, Insulin, FollowCare, MAiTRI, OPD Queue.
   - Intern: PG logbook, Review, Colleagues, Ward Sync, AgentConnect, Hospital, FollowCare, MAiTRI, OPD Queue.
   - PG Resident: FollowCare, MAiTRI, OPD Queue, Review, AgentConnect.
-  - Doctor: PG logbook.
+  - Doctor: nothing (the eLogbook stays open: guides and HODs verify residents' entries in it, owner 2026-09-26).
 - **Behaviour:** locked tiles stay on Home, greyed with a lock, after the open ones; a tap explains
   who the tool is for and offers "Change my role"; search leaves them out. No role = nothing locked.
 - **Source of truth:** the server's verified role (`/billing/status` role) beats the declared one and
