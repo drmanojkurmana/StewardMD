@@ -383,7 +383,38 @@ function splitBundle(body) {
       patient = r;
     } else resources.push(r);
   }
-  return { patient, resources, problems, requests, bundleType, atomic: bundleType === "transaction" };
+  // OPS-13/F13 round 2: `entryIndexOf` returned too, so the caller can derive the ADAPTER's id for
+  // every entry (reqIndexOfDerivedIds, below) and recover its true request position after the
+  // adapter rewrites it - not just for the unsupported-type entries this map already served.
+  return { patient, resources, problems, requests, bundleType, atomic: bundleType === "transaction", entryIndexOf };
+}
+
+/**
+ * PURE. The kind tag wardsynq-sccm-adapter.js#sourceId mints an id under, per FHIR type this server
+ * imports - the exact same table mapSccmBundle()/consentFromSccm() use, kept here because deriving
+ * a request entry's future id needs it before the adapter ever runs.
+ */
+const FHIR_KIND_OF = Object.freeze({
+  Patient: "pat", Encounter: "enc", Condition: "cond", MedicationStatement: "rx", MedicationRequest: "rx",
+  AllergyIntolerance: "alg", Observation: "obs", DiagnosticReport: "dr", MedicationAdministration: "mar",
+  ServiceRequest: "sr", DocumentReference: "note", Consent: "consent",
+});
+
+/**
+ * PURE. OPS-13/F13 round 2: request index, keyed by the id the adapter WILL give that resource's
+ * entity (sourceId(system, kind, r.id) - the identical derivation the adapter itself uses, so no
+ * adapter change is needed to recover it). Once entities are tagged with this after landing, a
+ * response entry - written, conflict, or precondition-failed, not only unsupported - can be placed
+ * at its true request position rather than the order it happened to resolve in.
+ */
+function reqIndexOfDerivedIds(entryIndexOf, system) {
+  const out = new Map();
+  for (const [key, index] of entryIndexOf) {
+    const slash = key.indexOf("/");
+    const kind = FHIR_KIND_OF[key.slice(0, slash)];
+    if (kind) out.set(sourceId(system, kind, key.slice(slash + 1)), index);
+  }
+  return out;
 }
 
 /**
@@ -797,7 +828,10 @@ async function ingestFhir(request, env, ctx) {
   const system = src.system;
   const adapterSystem = `fhir-${system}`;
 
-  const { patient, resources, problems, requests, bundleType, atomic } = splitBundle(ctx.body);
+  const { patient, resources, problems, requests, bundleType, atomic, entryIndexOf } = splitBundle(ctx.body);
+  // OPS-13/F13 round 2: computed here, where `adapterSystem` (the kind-tag's own prefix) is already
+  // known, and carried to landBundle - so it does not have to re-derive or guess it.
+  const reqIndexOf = reqIndexOfDerivedIds(entryIndexOf, adapterSystem);
   const fatal = problems.filter((p) => p.reason === REASON.INVALID);
   if (fatal.length) return { ok: false, status: 400, outcome: { resourceType: "OperationOutcome", issue: fatal.map((p) => ({ severity: "error", code: "invalid", diagnostics: p.detail })) } };
 
@@ -848,7 +882,7 @@ async function ingestFhir(request, env, ctx) {
    * truthful answer: the content-digest idempotency below means a re-send after a real partial
    * failure still lands exactly once. */
   try {
-    return await landBundle(request, env, { ...ctx, svc, resolved, sccm, system, adapterSystem, patient, problems, requests, bundleType, atomic, protocol: "fhir", grantId: src.grantId || null });
+    return await landBundle(request, env, { ...ctx, svc, resolved, sccm, system, adapterSystem, patient, problems, requests, bundleType, atomic, reqIndexOf, protocol: "fhir", grantId: src.grantId || null });
   } catch (e) {
     return { ok: false, status: 503, retryable: true, outcome: operationOutcome("error", "transient",
       `the record could not be read or written to file this message (${str(e && e.message) || "unavailable"}); NOTHING was written, and this message may be sent again - a re-send of an identical message lands once`) };
@@ -893,6 +927,11 @@ async function landBundle(request, env, ctx) {
     if (rec) entities.push(rec);
     else issues.push({ code: "SCCM_CONSENT_UNDECIDED", message: `consent ${c && c.id} carries no decision (status ${c && c.status}) and was not written` });
   }
+  // OPS-13/F13 round 2: every entity here already carries the id the adapter derived from the
+  // sender's own resourceType/id (sourceId(), reqIndexOfDerivedIds() above) - tagged with its real
+  // request position now, before rebind()/partitionConflicts() reshuffle the list, so it rides along
+  // (both only ever spread `e` or leave it as-is) to wherever this entity's response entry is built.
+  if (ctx.reqIndexOf) for (const e of entities) { const idx = ctx.reqIndexOf.get(e.id); if (idx != null) e._reqIndex = idx; }
   /* TASK 7.12: THE AUTHORITY TRAVELS WITH THE DATA. Every row already said which system it came
    * from and who wrote it; none said under WHICH AUTHORISATION it was accepted. That is the fact
    * that changes - a grant is revoked, renewed, or found to have been issued in error - and after
@@ -1139,11 +1178,12 @@ async function landBundle(request, env, ctx) {
   // tag on the bundle's meta) - a sender posting [Patient, Observation, Procedure, Condition] got
   // back at most 3 entries for 4 requests, and a client that matches response.entry[i] to
   // request.entry[i] by position (the R4 contract) misattributed every outcome after the drop.
-  // `_reqIndex` (its real request position, from splitBundle) orders these relative to EACH OTHER;
-  // full positional correlation with the written/conflict entries below is not attempted here - the
-  // canonical adapter (wardsynq-sccm-adapter.js#sourceId) rewrites every entity's id, so recovering
-  // the original request index for an already-written entity is a second, separate id-transform this
-  // fix does not reverse. Those keep the order they were resolved in, exactly as before this fix.
+  // OPS-13/F13 round 2: every entry pushed below - unsupported, conflict, and precondition-failed -
+  // now carries `_reqIndex`, its true request position; unsupported gets it straight from splitBundle
+  // (it was never sent to the adapter), the other two from the entity's OWN `_reqIndex`, stamped
+  // right after landing (reqIndexOfDerivedIds() + the tagging loop above) by deriving the SAME id the
+  // adapter was about to mint, so the rewrite does not lose it. The written entries below (describe())
+  // carry it the same way. The final sort orders EVERY entry by it, not just these three.
   for (const p of problems) {
     if (p.reason !== REASON.UNSUPPORTED) continue;
     entries.push({ response: { status: "400 Bad Request", outcome: operationOutcome("error", "not-supported", p.detail) }, _reqIndex: p.entryIndex });
@@ -1151,11 +1191,11 @@ async function landBundle(request, env, ctx) {
   for (const c of conflicts) {
     const exId = await raise(c.reason, { patientId: c.entity.patientId || null, conflict: c.current, entityRefs: [`${c.entity.resourceType}/${c.entity.id}`],
       detail: conflictDetail(c) });
-    entries.push({ response: { status: "409 Conflict", outcome: operationOutcome("error", "conflict", `${c.entity.resourceType}/${c.entity.id}: ${c.reason}; see ExchangeException/${exId}`) } });
+    entries.push({ response: { status: "409 Conflict", outcome: operationOutcome("error", "conflict", `${c.entity.resourceType}/${c.entity.id}: ${c.reason}; see ExchangeException/${exId}`) }, _reqIndex: c.entity._reqIndex });
   }
   for (const p of preconditions) {
-    if (/^200/.test(p.status)) entries.push({ response: { status: p.status, location: p.location, etag: p.etag }, resource: p.existing });
-    else entries.push({ response: { status: p.status, outcome: p.outcome } });
+    if (/^200/.test(p.status)) entries.push({ response: { status: p.status, location: p.location, etag: p.etag }, resource: p.existing, _reqIndex: p.entity._reqIndex });
+    else entries.push({ response: { status: p.status, outcome: p.outcome }, _reqIndex: p.entity._reqIndex });
   }
   const preconditionStatus = failedPreconditions.length ? (failedPreconditions.some((p) => /^400/.test(p.status)) ? 400 : 412) : null;
   if (atomic && (conflicts.length || failedPreconditions.length)) {
@@ -1167,15 +1207,15 @@ async function landBundle(request, env, ctx) {
   const transientFailures = [];   // TASK 7.15: writes that failed for a reason a retry could fix
   const ordered = [...writable].sort(byDependency);
   const describe = (e, rec) => {
-    const { _currentVersion, _acceptedOver, ...entity } = e;
+    const { _currentVersion, _acceptedOver, _reqIndex, ...entity } = e;
     const f = toFhir({ ...entity, ...rec });
     const fhirType = FHIR_TYPE[entity.resourceType] || entity.resourceType;
     const version = rec && rec.version != null ? rec.version : (_currentVersion ? _currentVersion + 1 : 1);
     written.push({ resourceType: entity.resourceType, id: entity.id, version });
-    return { response: { status: _currentVersion ? "200 OK" : "201 Created", location: `${str(ctx.base)}/${fhirType}/${entity.id}/_history/${version}`, etag: `W/"${version}"`, lastModified: now }, ...(f && ctx.prefer !== "minimal" ? { resource: f } : {}) };
+    return { response: { status: _currentVersion ? "200 OK" : "201 Created", location: `${str(ctx.base)}/${fhirType}/${entity.id}/_history/${version}`, etag: `W/"${version}"`, lastModified: now }, _reqIndex, ...(f && ctx.prefer !== "minimal" ? { resource: f } : {}) };
   };
   if (atomic) {
-    const bare = ordered.map(({ _currentVersion, _acceptedOver, ...entity }) => entity);
+    const bare = ordered.map(({ _currentVersion, _acceptedOver, _reqIndex, ...entity }) => entity);
     try {
       const saved = await ingest.putMany(adapterActor, bare);
       ordered.forEach((e, i) => { const s = saved && saved[i]; entries.push(describe(e, s && s.record ? s.record : (s || bare[i]))); });
@@ -1189,7 +1229,7 @@ async function landBundle(request, env, ctx) {
     }
   } else {
     for (const e of ordered) {
-      const { _currentVersion, _acceptedOver, ...entity } = e;
+      const { _currentVersion, _acceptedOver, _reqIndex, ...entity } = e;
       try {
         const saved = await ingest.put(adapterActor, entity);
         entries.push(describe(e, saved && saved.record ? saved.record : (saved || entity)));
@@ -1197,7 +1237,7 @@ async function landBundle(request, env, ctx) {
         const governance = err instanceof GovernanceError;
         const code = governance ? "forbidden" : "exception";
         if (!governance) transientFailures.push({ ref: `${FHIR_TYPE[entity.resourceType] || entity.resourceType}/${entity.id}`, detail: str(err && err.message) });
-        entries.push({ response: { status: governance ? "403 Forbidden" : "500 Internal Server Error", outcome: operationOutcome("error", code, `${entity.resourceType}/${entity.id}: ${str(err && err.message)}`) } });
+        entries.push({ response: { status: governance ? "403 Forbidden" : "500 Internal Server Error", outcome: operationOutcome("error", code, `${entity.resourceType}/${entity.id}: ${str(err && err.message)}`) }, _reqIndex });
       }
     }
   }
@@ -1228,9 +1268,12 @@ async function landBundle(request, env, ctx) {
   const status = ctx.mode === "create" ? (written.length ? 201 : (preconditions.some((p) => /^200/.test(p.status)) ? 200 : (conflicts.length ? 409 : (preconditionStatus || 422))))
     : ctx.mode === "update" ? (written.length ? 200 : 409)
     : 200;
-  // OPS-13/F13: the unsupported-type entries added above carry their real request index and sort by
-  // it (Array.sort is stable, so they keep their relative order among each other); every other entry
-  // has no `_reqIndex` and keeps the order it was resolved in, exactly as before this fix.
+  // OPS-13/F13 round 2: EVERY entry now carries its real request index (unsupported from splitBundle
+  // directly, written/conflict/precondition-failed from the entity's `_reqIndex`, stamped after
+  // landing from the id the adapter derived for it) - `response.entry[i]` corresponds to
+  // `request.entry[i]` for every i, the R4 contract, not just the relative order among unsupported
+  // entries. Array.sort is stable, so the rare entry with no `_reqIndex` (nothing in ctx.reqIndexOf
+  // could be derived for it) still keeps the order it was resolved in, at the tail.
   const ordEntries = entries.map((e, i) => [e, i]).sort(([a, ai], [b, bi]) => (a._reqIndex ?? Infinity) - (b._reqIndex ?? Infinity) || ai - bi).map(([e]) => { const { _reqIndex, ...rest } = e; return rest; });
   return {
     ok: true, status, system: adapterSystem, linkedTo, written, conflicts: conflicts.length, issues, preconditions: preconditions.length,
