@@ -135,9 +135,9 @@ test("package room (review 2.3): ICU days not carved out, published tariff cappe
   assert.deepEqual([ssp.roomValue, ssp.method, ssp.groups[0].ratePerDay], [19780.22, "proportional_split", 9890.11]);
   const unpricedCovered = [...lines, { code: "MYSTERY", sourceType: "MedicationAdministration", sourceId: "x", packageIncluded: true, line: 0 }];
   assert.deepEqual([R.packageRoomComponent(pkg, unpricedCovered, TABLE, { ...DEF, pkgRoomValuation: "proportional_split" }).method, R.packageRoomComponent(pkg, unpricedCovered, TABLE, { ...DEF, pkgRoomValuation: "proportional_split" }).fallback], ["published_tariff", true]);
-  // A payer rate that includes GST: tax = value x 5 / 105, borne by the hospital.
+  // A payer rate that includes GST: tax = value x 5 / 105, borne by the hospital, as two equal halves of 285.71 (BILL-22).
   const inc = R.packageRoomComponent({ ...pkg, priceIncludesGst: true }, lines, TABLE, DEF);
-  assert.deepEqual([inc.tax, inc.taxable, inc.unrecoverableGst, inc.exemptValue], [571.43, 11428.57, 571.43, 33000]);
+  assert.deepEqual([inc.tax, inc.taxable, inc.unrecoverableGst, inc.exemptValue], [571.42, 11428.58, 571.42, 33000]);
   // A covered room day with no bed row: nothing can be worked out.
   assert.deepEqual(R.packageRoomComponent(pkg, [{ code: "BED-DAY", display: "Bed per day, Deluxe", sourceType: "Encounter", sourceId: "e:bed:1", packageIncluded: true }], TABLE, DEF),
     { error: "room_tariff_missing", category: "Bed per day, Deluxe" });
@@ -265,9 +265,9 @@ test("POST /ward/invoice: the package rate includes GST (worked back, borne by t
   const inv = await as(CASHIER, "/ward/invoice", "POST", { orgId: ORG_ID, patientId: PATIENT });
   assert.equal(inv.written, 1, inv.__text);
   const room = inv.lines.find((l) => l.packageRoom), pl = inv.lines.find((l) => l.packageLine);
-  assert.deepEqual([room.line, room.tax, pl.line], [11428.57, 571.43, 33000]);
+  assert.deepEqual([room.line, room.tax, pl.line], [11428.58, 571.42, 33000]);
   assert.equal(inv.charged, 45000 + 20000, "a GST-inclusive rate: the bill total is the package price");
-  assert.deepEqual([inv.package.roomGst.unrecoverableGst, inv.package.roomGst.gstTdsPossible, inv.package.priceIncludesGst], [571.43, true, true]);
+  assert.deepEqual([inv.package.roomGst.unrecoverableGst, inv.package.roomGst.gstTdsPossible, inv.package.priceIncludesGst], [571.42, true, true]);
   const tan = "29BLRA12345B1D", gstin = tan + R.gstinCheckChar(tan);
   assert.equal((await as(ADMIN, "/ward/connector-save", "POST", { orgId: ORG_ID, kind: "payer", provider: "manual", name: "SAST",
     settings: { ref: "sast", payerKind: "government_scheme", legalName: "Suvarna Arogya Suraksha Trust", gstin, address1: "1 Road", location: "Bengaluru", pincode: "560001", stateCode: "29" } })).__status, 200);
