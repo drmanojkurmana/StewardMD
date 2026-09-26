@@ -26,7 +26,9 @@
  *   published?, url?, page?, doi?, retrieved?, citation, reporting, method?, measure? (S|R),
  *   verification {status double-checked|single-checked|transcribed, note}, notes?, issues?,
  *   rows [{spec, set, org, pheno?, n, page?, s:{drug:%S} or r:{drug:%R}, nt?, approx?, conflict?,
- *          q?, trend?, notes?, printed?, note?, specimen_as_printed?, table?, cohort?}],
+ *          q?, trend?, notes?, printed?, note?, specimen_as_printed?, table?, cohort?, n_tested?}],
+ *   n_tested: true when the table's n is the number of isolates tested, which can be below the
+ *   number isolated in the source's count tables (ICMR 2023 Tables 4.2 and 4.5): not a contradiction.
  *   conflict: {drug: "what disagrees"} marks a figure the source contradicts (a printed % its own
  *   printed counts do not give): shown with a caution, never pooled. isolates?: the report's total.
  *   Reports that print % resistant (NARS-Net, state networks) give r:{} (or measure "R" with
@@ -63,7 +65,7 @@ const STORE_JS = join(ROOT, "antibiogram-store.js");
 const RULES_JS = join(ROOT, "antibiogram-rules.js");
 
 const TOP = ["id", "kind", "inst", "institution", "short", "city", "state", "region", "sector", "year", "end", "isolates", "period", "published", "url", "page", "doi", "retrieved", "citation", "reporting", "method", "measure", "verification", "notes", "issues", "rows", "counts", "excluded", "credibility", "file", "pages", "focus"];
-const ROWK = ["spec", "set", "org", "pheno", "n", "page", "s", "r", "nt", "approx", "conflict", "q", "trend", "notes", "printed", "note", "specimen_as_printed", "table", "cohort"];
+const ROWK = ["spec", "set", "org", "pheno", "n", "page", "s", "r", "nt", "approx", "conflict", "q", "trend", "notes", "printed", "note", "specimen_as_printed", "table", "cohort", "n_tested"];
 const KINDS = ["institution", "network", "study"], REGIONS = ["north", "south", "east", "west", "national"], SECTORS = ["government", "private", "network"];
 const VSTAT = ["double-checked", "single-checked", "transcribed"];
 const ACT = { keep: "k", intrinsic: "i", hide: "h", suppress: "x", caution: "c" };
@@ -98,6 +100,7 @@ export function validateSource(src, file) {
     });
     (r.approx || []).forEach((d) => { if (vals[d] == null) e.push(`${t}: approx lists ${d} with no value`); });
     if (r.cohort != null && !["hai"].includes(r.cohort)) e.push(`${t}: cohort must be "hai" when given`);
+    if (r.n_tested != null && r.n_tested !== true) e.push(`${t}: n_tested must be true when given`);
     Object.keys(r.conflict || {}).forEach((d) => { if (vals[d] == null) e.push(`${t}: conflict names ${d}, which has no value`); if (typeof r.conflict[d] !== "string" || !r.conflict[d].trim()) e.push(`${t}: conflict.${d} must say what disagrees`); });
     Object.keys(r.trend || {}).forEach((d) => {
       if (!R.DRUGS[d]) e.push(`${t}: trend drug key "${d}" is not canonical`);
@@ -128,7 +131,7 @@ export function checkRow(src, r) {
   const v = R.validateRow({ org: o.key, pheno, spec: r.spec, set: r.set, n: r.n, s, nt: r.nt || {}, approx: r.approx || [], conflict: r.conflict || {} });
   return { src: src.id, inst: src.inst, year: src.year, spec: r.spec, set: r.set, org: o.key, orgAs: r.org, pheno, n: r.n == null ? null : r.n,
     cells: v.cells, flags: v.flags, q: r.q || null, trend, notes: r.notes || null, page: r.page || null, derived: null,
-    measure: isR ? "R" : "S", table: r.table || null, cohort: r.cohort || null, note: r.note || null, specAs: r.specimen_as_printed || null };
+    measure: isR ? "R" : "S", table: r.table || null, cohort: r.cohort || null, note: r.note || null, specAs: r.specimen_as_printed || null, nTested: r.n_tested === true };
 }
 
 /* Isolate-weighted combination of rows (same source, same organism). A drug counts only the
@@ -366,6 +369,7 @@ export function countChecks(src, checked) {
     const plain = rs.filter((r) => !r.pheno), ph = rs.filter((r) => r.pheno && /^(MRSA|MSSA|MR|MS)$/.test(r.pheno));
     const n = plain.length ? plain[0].n : ph.length >= 2 ? ph.reduce((a, r) => a + r.n, 0) : null;
     if (n == null || n === c) return;
+    if (n < c && rs.some((r) => r.nTested)) return;                  // tested, not isolated: fewer is expected
     // A count summed from the location tables is a floor for "all settings": isolates with no
     // recorded location (KARS-NET 2021: 877) are in the overall row but in no location column.
     if (n > c && !countOf.exact(spec, set, org)) return;

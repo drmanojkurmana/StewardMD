@@ -1,0 +1,379 @@
+{
+ "id": "KARSNET_ALAPPUZHA_2024",
+ "kind": "network",
+ "inst": "KARSNET_ALAPPUZHA",
+ "institution": "Alappuzha district AMR laboratory (District Public Health Laboratory, Alappuzha; hub General Hospital Alappuzha and 24 spoke institutions), KARS-Net district antibiogram, Department of Health Services, Kerala",
+ "short": "KARS-NET Alappuzha",
+ "city": "Alappuzha",
+ "state": "Kerala",
+ "region": "south",
+ "sector": "government",
+ "year": 2024,
+ "end": "2024-12",
+ "period": "Jan 2024- Dec 2024",
+ "url": "https://health.kerala.gov.in/assets/backend/uploads/articles/1782710542_0.pdf",
+ "page": "https://health.kerala.gov.in/thematic-docs",
+ "retrieved": "2026-09-26",
+ "citation": "Kerala Antimicrobial Resistance Strategic Action Plan (KARSAP), Department of Health Services, Kerala. District Antibiogram: Alappuzha, Kottayam, Pathanamthitta, Thrissur and Thiruvananthapuram. Chapter: Alappuzha District Antibiogram (January to December 2024), compiled by Dr Suman Susan Prakash, District Clinical Microbiologist, District Public Health Lab, Alappuzha. Thiruvananthapuram: Department of Health Services, Kerala.",
+ "measure": "R",
+ "reporting": "Percent resistant with number tested and number resistant, by organism and specimen (pus, urine), whole district (hub and 24 spoke institutions), all locations pooled; spoke-only tables printed separately; percentages not computed when fewer than 30 isolates.",
+ "method": "Conventional disc diffusion; WHONET; CLSI 2024 guidelines; one result per patient per specimen type and pathogen (1118 isolates, 946 patients).",
+ "verification": {
+  "status": "double-checked",
+  "note": "Tables 1, 2, 6, 8 and 10 read from the PDF text layer and compared value by value with the pages rendered at scale 2.2; every printed percentage recomputed from its printed counts (all agree). Page numbers are 1-based PDF pages of the five-district compilation."
+ },
+ "notes": "District antibiogram of secondary and primary care facilities: Alappuzha district AMR laboratory (District Public Health Laboratory) with General Hospital Alappuzha as hub and 24 spoke institutions (community and family health centres, primary health centres, taluk and district hospitals), January to December 2024; from the KARSAP compilation of five district antibiograms. All figures are percent resistant. About 87% of isolates were from outpatients, 9% inpatients and 4% ICU; tables pool all locations. Only urine and pus were processed through 2024 (blood and stool from the last quarter of 2024; no Salmonella, Shigella or Vibrio cholerae isolated). The report states 1118 isolates from 946 patients; its specimen table (Table 1) totals 1009 priority-pathogen isolates.",
+ "issues": [
+  "Second reader 2026-09-26: the 40-cell seeded sample was read blind from the page images (scale 2.5), then every one of the 59 cells, its number tested, all 7 row n values and all 12 counts (Table 1, page 17) were re-read and compared: 0 transcription errors; organism and specimen (pus, urine) correct on every row; every printed percentage agrees with its printed counts.",
+  "Cells the checks do not keep, confirmed as printed: Klebsiella ampicillin 93.2% resistant in pus (41 of 44) and 91.3% in urine (157 of 172), page 21 (intrinsic resistance flag). Also as printed and kept: P. aeruginosa pus imipenem 0.0% beside a starred tested count of 22, and percentages printed for fewer than 30 tested (E. coli pus meropenem 4, piperacillin-tazobactam 26; Klebsiella pus meropenem 6, urine meropenem 26); their numbers tested are recorded.",
+  "Table 1 gives 2 Acinetobacter urine isolates while Table 11 is headed Urine (n=0); the count of 2 is from Table 1 as printed."
+ ],
+ "rows": [
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 49,
+   "page": 18,
+   "table": "Table 2",
+   "r": {
+    "cefoxitin": 39.6,
+    "gentamicin": 4.7,
+    "ciprofloxacin": 60.5,
+    "cotrimoxazole": 6.5,
+    "clindamycin": 17.4,
+    "erythromycin": 19.1,
+    "doxycycline": 2.1
+   },
+   "nt": {
+    "cefoxitin": 48,
+    "gentamicin": 43,
+    "ciprofloxacin": 38,
+    "cotrimoxazole": 46,
+    "clindamycin": 46,
+    "erythromycin": 47,
+    "doxycycline": 48
+   },
+   "note": "Whole-district table (hub General Hospital Alappuzha plus 24 spoke institutions), all locations pooled.",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 35,
+   "page": 20,
+   "table": "Table 6",
+   "r": {
+    "ampicillin": 88.2,
+    "piptazo": 46.2,
+    "cefuroxime": 61.3,
+    "cefotaxime": 61.8,
+    "cefixime": 61.8,
+    "meropenem": 0.0,
+    "amikacin": 36.4,
+    "gentamicin": 47.1,
+    "ciprofloxacin": 67.6,
+    "cotrimoxazole": 47.1
+   },
+   "nt": {
+    "ampicillin": 34,
+    "piptazo": 26,
+    "cefuroxime": 31,
+    "cefotaxime": 34,
+    "cefixime": 34,
+    "meropenem": 4,
+    "amikacin": 33,
+    "gentamicin": 34,
+    "ciprofloxacin": 34,
+    "cotrimoxazole": 34
+   },
+   "notes": {
+    "cefuroxime": "printed twice, as Cefuroxime (Parenteral) and Cefuroxime (Oral), with identical figures",
+    "meropenem": "tested in 4 isolates only"
+   },
+   "note": "Whole-district table (hub General Hospital Alappuzha plus 24 spoke institutions), all locations pooled.",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 508,
+   "page": 20,
+   "table": "Table 6",
+   "r": {
+    "ampicillin": 81.4,
+    "piptazo": 18.8,
+    "cefuroxime": 54.7,
+    "cefotaxime": 56.7,
+    "cefixime": 61.4,
+    "meropenem": 0.0,
+    "amikacin": 27.5,
+    "gentamicin": 32.6,
+    "ciprofloxacin": 52.1,
+    "cotrimoxazole": 34.4,
+    "nitrofurantoin": 5.1
+   },
+   "nt": {
+    "ampicillin": 499,
+    "piptazo": 483,
+    "cefuroxime": 212,
+    "cefotaxime": 504,
+    "cefixime": 202,
+    "meropenem": 90,
+    "amikacin": 505,
+    "gentamicin": 506,
+    "ciprofloxacin": 505,
+    "cotrimoxazole": 508,
+    "nitrofurantoin": 506
+   },
+   "notes": {
+    "cefuroxime": "printed twice, as Cefuroxime (Parenteral) and Cefuroxime (Oral), with identical figures"
+   },
+   "note": "Whole-district table (hub General Hospital Alappuzha plus 24 spoke institutions), all locations pooled.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "n": 47,
+   "page": 21,
+   "table": "Table 8",
+   "r": {
+    "ampicillin": 93.2,
+    "piptazo": 39.5,
+    "cefuroxime": 34.8,
+    "cefotaxime": 37.0,
+    "cefixime": 37.8,
+    "meropenem": 33.3,
+    "amikacin": 25.5,
+    "gentamicin": 29.8,
+    "ciprofloxacin": 47.8,
+    "cotrimoxazole": 21.3
+   },
+   "nt": {
+    "ampicillin": 44,
+    "piptazo": 43,
+    "cefuroxime": 46,
+    "cefotaxime": 46,
+    "cefixime": 45,
+    "meropenem": 6,
+    "amikacin": 47,
+    "gentamicin": 47,
+    "ciprofloxacin": 46,
+    "cotrimoxazole": 47
+   },
+   "notes": {
+    "cefuroxime": "printed twice, as Cefuroxime (Parenteral) and Cefuroxime (Oral), with identical figures",
+    "meropenem": "tested in 6 isolates only",
+    "ampicillin": "as printed (41 of 44 resistant); Klebsiella is intrinsically resistant to ampicillin"
+   },
+   "note": "Whole-district table (hub General Hospital Alappuzha plus 24 spoke institutions), all locations pooled. Printed as Klebsiella species.",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "n": 182,
+   "page": 21,
+   "table": "Table 8",
+   "r": {
+    "ampicillin": 91.3,
+    "piptazo": 31.2,
+    "cefuroxime": 23.0,
+    "cefotaxime": 31.1,
+    "cefixime": 25.7,
+    "meropenem": 0.0,
+    "amikacin": 25.6,
+    "gentamicin": 23.3,
+    "ciprofloxacin": 35.4,
+    "cotrimoxazole": 15.4,
+    "nitrofurantoin": 31.9
+   },
+   "nt": {
+    "ampicillin": 172,
+    "piptazo": 170,
+    "cefuroxime": 74,
+    "cefotaxime": 180,
+    "cefixime": 70,
+    "meropenem": 26,
+    "amikacin": 180,
+    "gentamicin": 180,
+    "ciprofloxacin": 181,
+    "cotrimoxazole": 182,
+    "nitrofurantoin": 182
+   },
+   "notes": {
+    "cefuroxime": "printed twice, as Cefuroxime (Parenteral) and Cefuroxime (Oral), with identical figures",
+    "ampicillin": "as printed (157 of 172 resistant); Klebsiella is intrinsically resistant to ampicillin"
+   },
+   "note": "Whole-district table (hub General Hospital Alappuzha plus 24 spoke institutions), all locations pooled. Printed as Klebsiella species.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 88,
+   "page": 23,
+   "table": "Table 10",
+   "r": {
+    "piptazo": 11.0,
+    "ceftazidime": 9.3,
+    "cefepime": 10.6,
+    "aztreonam": 10.3,
+    "imipenem": 0.0,
+    "ciprofloxacin": 10.5
+   },
+   "nt": {
+    "piptazo": 82,
+    "ceftazidime": 86,
+    "cefepime": 85,
+    "aztreonam": 87,
+    "imipenem": 22,
+    "ciprofloxacin": 38
+   },
+   "notes": {
+    "imipenem": "the tested count is starred (fewer than 30, \"percentage not computed\") but 0.0% is printed"
+   },
+   "note": "Whole-district table (hub General Hospital Alappuzha plus 24 spoke institutions), all locations pooled. Meropenem (15 tested, 2 resistant) printed \"--\" without a percentage.",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 31,
+   "page": 23,
+   "table": "Table 10",
+   "r": {
+    "piptazo": 3.2,
+    "ceftazidime": 12.9,
+    "cefepime": 12.9,
+    "amikacin": 3.3
+   },
+   "nt": {
+    "piptazo": 31,
+    "ceftazidime": 31,
+    "cefepime": 31,
+    "amikacin": 30
+   },
+   "note": "Whole-district table (hub General Hospital Alappuzha plus 24 spoke institutions), all locations pooled. Aztreonam (tested printed as 829, 2 resistant) has no percentage; imipenem (4 tested), meropenem (6) and ciprofloxacin (10) are starred with no percentage.",
+   "specimen_as_printed": "Urine"
+  }
+ ],
+ "counts": [
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 508,
+   "page": 17
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 35,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella spp.",
+   "n": 182,
+   "page": 17
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Klebsiella spp.",
+   "n": 47,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 31,
+   "page": 17
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Pseudomonas aeruginosa",
+   "n": 88,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "n": 2,
+   "page": 17
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "n": 11,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "n": 24,
+   "page": 17
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "n": 17,
+   "page": 17
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 15,
+   "page": 17
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 49,
+   "page": 17
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Table 2 S. aureus urine (15 isolates), Table 4 Enterococcus (pus 17, urine 24), Table 11 Acinetobacter (pus 11, urine 0)",
+   "why": "fewer than 30 isolates; the report prints counts only, no percentages"
+  },
+  {
+   "what": "Tables 3, 5, 7 and 9 (spoke samples only: S. aureus pus 6, Enterococcus urine 8, E. coli urine 410, Klebsiella urine 112)",
+   "why": "subsets of the whole-district tables for the same specimens; the whole-district rows are recorded"
+  },
+  {
+   "what": "Figures 7 to 11 (resistance bar charts)",
+   "why": "no printed values; they repeat Tables 6, 8 and 10"
+  },
+  {
+   "what": "Figure 12 (MRSA, spoke 33.3% and whole district 39.6%) and Figure 13 (ESBL E. coli, urine)",
+   "why": "the district MRSA figure equals Table 2 cefoxitin; the spoke figure is a subset; ESBL is a phenotype with no canonical drug"
+  }
+ ]
+}

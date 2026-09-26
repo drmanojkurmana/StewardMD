@@ -26,6 +26,8 @@
     try { return localStorage.getItem("smd_abg_v2") !== "0"; } catch (e) { return true; }
   }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  // Lower-case a label inside a sentence, but keep acronyms ("ICU", "CSF").
+  function lc(t) { t = String(t || ""); return /^[A-Z][a-z]/.test(t) ? t.charAt(0).toLowerCase() + t.slice(1) : t; }
   function num(x) { return x == null ? "" : (Math.round(x * 10) / 10).toString(); }
   function fmtN(n) { return n == null ? "n not given" : String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
 
@@ -104,7 +106,7 @@
     var vs = v.status === "double-checked" ? "Checked twice against the source" : v.status === "transcribed" ? "Transcribed summary: isolate counts not given, figures shown but never pooled" : v.status === "local" ? "Imported on this device" : "Checked once";
     var anyR = t.orgs.some(function (o) { return o.measure === "R"; }), hai = t.orgs.some(function (o) { return o.cohort === "hai"; });
     return '<div class="v2-meta"><b>' + esc(src.name || src.short) + "</b>" + (src.city ? ", " + esc(src.city) : "") + (src.period ? " · " + esc(src.period) : " · " + esc(src.year || "")) +
-      '<br><span class="v2-mut">' + esc(vs) + ". " + (src.citation ? esc(src.citation) + ". " : "") + "</span>" +
+      '<br><span class="v2-mut">' + esc(vs) + ". " + (src.citation ? esc(String(src.citation).replace(/\.+\s*$/, "")) + ". " : "") + "</span>" +
       (src.focus ? '<br><b>Not a cumulative antibiogram: ' + esc(src.focus) + ".</b> Read it as a snapshot of those isolates only." : "") +
       (anyR ? '<br><span class="v2-mut">This report prints % resistant. % susceptible is shown as 100 minus % resistant, so intermediate results count as susceptible here.</span>' : "") +
       (hai ? '<br><span class="v2-mut">Rows marked ICU HAI come from ICU device-associated infection surveillance (bloodstream, urinary and ventilator-associated infections), not from all ICU isolates.</span>' : "") +
@@ -193,7 +195,7 @@
     if (!drugs.length) return "";
     var opt = function (sel) { return '<option value="">' + (sel === "B" ? "None" : "Choose an antibiotic") + "</option>" + drugs.map(function (d) { var v = sel === "A" ? st.drugA : st.drugB; return '<option value="' + d + '"' + (v === d ? " selected" : "") + ">" + esc(R().drugLabel(d)) + " (" + (R().aware(d) || "") + ")</option>"; }).join(""); };
     var h = '<section class="v2-wis" aria-label="Estimated empiric coverage"><h3>Estimated empiric coverage</h3>' +
-      '<p class="v2-mut">For the organisms that grew from ' + esc(R().SPECIMENS[st.spec].label.toLowerCase()) + " specimens (" + esc(R().SETTINGS[st.set].label.toLowerCase()) + ") in this source: the share of isolates a regimen would have covered, weighted by how often each organism grew (weighted-incidence method).</p>" +
+      '<p class="v2-mut">For the organisms that grew from ' + lc(esc(R().SPECIMENS[st.spec].label)) + " specimens (" + lc(esc(R().SETTINGS[st.set].label)) + ") in this source: the share of isolates a regimen would have covered, weighted by how often each organism grew (weighted-incidence method).</p>" +
       '<div class="v2-wrow"><select class="v2-sel" id="v2DrugA" aria-label="First antibiotic">' + opt("A") + '</select><span class="v2-plus">+</span><select class="v2-sel" id="v2DrugB" aria-label="Second antibiotic (optional)">' + opt("B") + "</select></div>" +
       (st.spec === "blood" ? '<label class="v2-chk"><input type="checkbox" id="v2Cons"' + (st.cons ? " checked" : "") + "> Count coagulase-negative staphylococci (often contaminants)</label>" : "");
     if (st.drugA) {
@@ -246,9 +248,9 @@
     }
     var title = R0.orgShort(org) + (pheno ? " (" + pheno + ")" : "") + " and " + R0.drugLabel(drug);
     var h = '<div class="v2-sh"><div class="v2-shh"><b>' + esc(title) + '</b><button class="v2-x" data-v2="sheet-close" aria-label="Close">Close</button></div>';
-    if (!c) return h + '<p class="v2-mut">' + esc(S().scopeLabel(scope)) + " has no figure for this organism and antibiotic in " + esc(R0.SPECIMENS[st.spec].label.toLowerCase()) + ", " + esc(R0.SETTINGS[st.set].label.toLowerCase()) + ".</p></div>";
-    h += '<div class="v2-mut">' + esc(R0.SPECIMENS[spec].label) + ", " + esc(R0.SETTINGS[set].label.toLowerCase()) + " · " + esc(S().scopeLabel(scope)) + " " + awareChip(drug) + "</div>";
-    if (spec !== st.spec || set !== st.set) h += '<div class="v2-note">Shown for ' + esc(R0.SPECIMENS[spec].label.toLowerCase()) + ", " + esc(R0.SETTINGS[set].label.toLowerCase()) + ": " + esc(S().scopeLabel(scope)) + " has no " + esc(R0.SPECIMENS[st.spec].label.toLowerCase()) + ", " + esc(R0.SETTINGS[st.set].label.toLowerCase()) + " figure.</div>";
+    if (!c) return h + '<p class="v2-mut">' + esc(S().scopeLabel(scope)) + " has no figure for this organism and antibiotic in " + lc(esc(R0.SPECIMENS[st.spec].label)) + ", " + lc(esc(R0.SETTINGS[st.set].label)) + ".</p></div>";
+    h += '<div class="v2-mut">' + esc(R0.SPECIMENS[spec].label) + ", " + lc(esc(R0.SETTINGS[set].label)) + " · " + esc(S().scopeLabel(scope)) + " " + awareChip(drug) + "</div>";
+    if (spec !== st.spec || set !== st.set) h += '<div class="v2-note">Shown for ' + lc(esc(R0.SPECIMENS[spec].label)) + ", " + lc(esc(R0.SETTINGS[set].label)) + ": " + esc(S().scopeLabel(scope)) + " has no " + lc(esc(R0.SPECIMENS[st.spec].label)) + ", " + lc(esc(R0.SETTINGS[st.set].label)) + " figure.</div>";
     var cc = c.cell;
     if (cc && cc.act === "keep" && typeof cc.s === "number") {
       h += '<div class="v2-big ' + band(cc.s) + '">' + num(cc.s) + "% susceptible</div>";
@@ -286,7 +288,7 @@
     var ds = Object.keys(o.cells).filter(function (d) { return o.cells[d].act !== "hide"; });
     ds.sort(function (a, b) { var ca = o.cells[a], cb = o.cells[b]; var va = ca.act === "keep" ? ca.s : (ca.act === "intrinsic" ? -2 : -1), vb = cb.act === "keep" ? cb.s : (cb.act === "intrinsic" ? -2 : -1); return vb - va; });
     var h = '<div class="v2-sh"><div class="v2-shh"><b><i>' + esc(R0.orgLabel(org)) + "</i>" + (pheno ? " (" + esc(pheno) + ")" : "") + '</b><button class="v2-x" data-v2="sheet-close" aria-label="Close">Close</button></div>';
-    h += '<div class="v2-mut">' + esc(R0.SPECIMENS[st.spec].label) + ", " + esc(R0.SETTINGS[st.set].label.toLowerCase()) + " · " + (o.n != null ? fmtN(o.n) + " isolates" : "isolates not given") + (t.pooled ? " from " + o.k + " institution" + (o.k === 1 ? "" : "s") : "") + "</div>";
+    h += '<div class="v2-mut">' + esc(R0.SPECIMENS[st.spec].label) + ", " + lc(esc(R0.SETTINGS[st.set].label)) + " · " + (o.n != null ? fmtN(o.n) + " isolates" : "isolates not given") + (t.pooled ? " from " + o.k + " institution" + (o.k === 1 ? "" : "s") : "") + "</div>";
     if (o.as && o.as !== R0.orgLabel(o.org)) h += '<div class="v2-mut">Reported as: ' + esc(o.as) + "</div>";
     if (o.spAs) h += '<div class="v2-mut">Specimen as printed: ' + esc(o.spAs) + "</div>";
     if (o.derived) h += '<div class="v2-note">Combined by StewardMD from the ' + esc(o.how) + ", weighting each by its isolates.</div>";
@@ -302,7 +304,7 @@
   function drugSheet(drug) {
     var t = S().table(st.scope, st.spec, st.set), R0 = R(), rows = t.orgs.filter(function (o) { return o.cells[drug] && o.cells[drug].act !== "hide"; });
     var h = '<div class="v2-sh"><div class="v2-shh"><b>' + esc(R0.drugLabel(drug)) + "</b> " + awareChip(drug) + '<button class="v2-x" data-v2="sheet-close" aria-label="Close">Close</button></div>' +
-      '<div class="v2-mut">' + esc(R0.DRUGS[drug].cls) + " · " + esc(R0.SPECIMENS[st.spec].label) + ", " + esc(R0.SETTINGS[st.set].label.toLowerCase()) + "</div><ul class=\"v2-parts\">";
+      '<div class="v2-mut">' + esc(R0.DRUGS[drug].cls) + " · " + esc(R0.SPECIMENS[st.spec].label) + ", " + lc(esc(R0.SETTINGS[st.set].label)) + "</div><ul class=\"v2-parts\">";
     h += rows.map(function (o) {
       var c = o.cells[drug];
       return '<li><div class="v2-pl"><i>' + esc(orgLabel(o)) + "</i> <span class=\"v2-mut\">" + (o.n != null ? fmtN(c.nt || o.n) + " isolates" : "") + "</span></div>" +
@@ -370,7 +372,7 @@
     if (s.issues && s.issues.length) h += "<h4>Notes from the second reader</h4><ul class=\"v2-parts\">" + s.issues.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>";
     if (s.excluded && s.excluded.length) h += "<h4>Left out at extraction</h4><ul class=\"v2-parts\">" + s.excluded.map(function (x) { return "<li>" + esc((x.org || "") + " " + (x.drug || "")) + ": " + esc(x.why) + "</li>"; }).join("") + "</ul>";
     if (fl.length) h += "<h4>Figures with a check (" + fl.length + ")</h4><ul class=\"v2-parts\">" + fl.map(function (x) {
-      return "<li><i>" + esc(R().orgShort(x.org)) + (x.pheno ? " (" + esc(x.pheno) + ")" : "") + "</i>, " + esc(R().drugLabel(x.drug)) + " " + (typeof x.s === "number" ? num(x.s) + "%" : "") + " (" + esc(R().SPECIMENS[x.spec].label) + ", " + esc(R().SETTINGS[x.set].label.toLowerCase()) + "): <b>" + esc({ intrinsic: "intrinsic", hide: "not relevant", suppress: "not shown", caution: "caution" }[x.act]) + "</b>, " + esc(x.why) + "</li>";
+      return "<li><i>" + esc(R().orgShort(x.org)) + (x.pheno ? " (" + esc(x.pheno) + ")" : "") + "</i>, " + esc(R().drugLabel(x.drug)) + " " + (typeof x.s === "number" ? num(x.s) + "%" : "") + " (" + esc(R().SPECIMENS[x.spec].label) + ", " + lc(esc(R().SETTINGS[x.set].label)) + "): <b>" + esc({ intrinsic: "intrinsic", hide: "not relevant", suppress: "not shown", caution: "caution" }[x.act]) + "</b>, " + esc(x.why) + "</li>";
     }).join("") + "</ul>";
     return h + "</div>";
   }
@@ -437,7 +439,7 @@
       }).join("") + "</tr>";
     }).join("");
     return "<!doctype html><html><head><meta charset=\"utf-8\"><title>Antibiogram</title><style>body{font:11px -apple-system,Segoe UI,Roboto,sans-serif;color:#111;margin:24px}table{border-collapse:collapse;width:100%}th,td{border:1px solid #bbb;padding:3px 4px;text-align:center}th:first-child,td:first-child{text-align:left}h1{font-size:16px}p{color:#444}</style></head><body>" +
-      "<h1>Antibiogram: " + esc(S().scopeLabel(st.scope)) + "</h1><p>" + esc(R0.SPECIMENS[st.spec].label) + ", " + esc(R0.SETTINGS[st.set].label.toLowerCase()) + ". Percent susceptible. IR = intrinsic resistance; * = caution (see the app for the reason); rows under 30 isolates are unstable.</p>" +
+      "<h1>Antibiogram: " + esc(S().scopeLabel(st.scope)) + "</h1><p>" + esc(R0.SPECIMENS[st.spec].label) + ", " + lc(esc(R0.SETTINGS[st.set].label)) + ". Percent susceptible. IR = intrinsic resistance; * = caution (see the app for the reason); rows under 30 isolates are unstable.</p>" +
       "<table><thead>" + head + "</thead><tbody>" + body + "</tbody></table><p>Exported from StewardMD on " + new Date().toISOString().slice(0, 10) + ". Decision support only; verify against the source.</p></body></html>";
   }
 

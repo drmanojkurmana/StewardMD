@@ -1,0 +1,696 @@
+{
+ "id": "KARSNET_KOTTAYAM_2024",
+ "kind": "network",
+ "inst": "KARSNET_KOTTAYAM",
+ "institution": "Kottayam district AMR laboratory (hub General Hospital Kottayam and 26 spoke hospitals), KARS-Net district antibiogram, Department of Health Services, Kerala",
+ "short": "KARS-NET Kottayam",
+ "city": "Kottayam",
+ "state": "Kerala",
+ "region": "south",
+ "sector": "government",
+ "year": 2024,
+ "end": "2024-12",
+ "period": "1 January 2023 to 31 December 2024",
+ "url": "https://health.kerala.gov.in/assets/backend/uploads/articles/1782710542_0.pdf",
+ "page": "https://health.kerala.gov.in/thematic-docs",
+ "retrieved": "2026-09-26",
+ "citation": "Kerala Antimicrobial Resistance Strategic Action Plan (KARSAP), Department of Health Services, Kerala. District Antibiogram: Alappuzha, Kottayam, Pathanamthitta, Thrissur and Thiruvananthapuram. Chapter: District Antibiogram Kottayam, Antibiogram 2023-2024 (1 January 2023 to 31 December 2024), compiled by Dr Anupama Rajani, District Clinical Microbiologist, District AMR Lab, GH Kottayam. Thiruvananthapuram: Department of Health Services, Kerala.",
+ "measure": "R",
+ "isolates": 1343,
+ "reporting": "Percent resistant with number tested and number resistant, by organism and specimen (pus swabs and aspirates, urine), hub plus spokes, all locations pooled; spoke-only tables printed separately; percentages not computed when fewer than 30 isolates.",
+ "method": "Conventional disc diffusion; WHONET; CLSI interpretive criteria; one result per patient per specimen type and pathogen (1343 unique-patient isolates, 2023 to 2024).",
+ "verification": {
+  "status": "double-checked",
+  "note": "Tables 2, 3, 4, 6, 8, 10, 13 and 15 read from the PDF text layer and compared value by value with the pages rendered at scale 2.2 (Table 10 row alignment and the misprinted tested counts checked on the image); every printed percentage recomputed from its printed counts. Page numbers are 1-based PDF pages of the five-district compilation."
+ },
+ "notes": "District antibiogram of secondary and primary care facilities: District AMR Lab at General Hospital Kottayam (hub) and 26 spoke institutions (general and taluk hospitals, community, family and primary health centres), 1 January 2023 to 31 December 2024 (two years), from the KARSAP compilation of five district antibiograms. All figures are percent resistant. 78% of isolates were from outpatients, 21% inpatients and under 1% ICU; tables pool all locations. Pus swabs and aspirates are recorded as pus. Blood yielded 3 priority isolates and stool 1 (counts only).",
+ "issues": [
+  "Second reader 2026-09-26: the 40-cell seeded sample was read blind from the page images (scale 2.5), then all 80 cells, their numbers tested, all 9 row n values and all 49 counts (Table 2 page 42, location table page 44) were re-read and compared: 0 transcription errors; organism and specimen correct on every row; the counts agree across the specimen and location tables.",
+  "Conflicts confirmed accurate: E. coli urine amoxicillin-clavulanate and cefuroxime are both printed as 626 resistant of 616 tested with 53% (checked on a scale-5 crop of page 48; 53% of 616 would be 326). Also confirmed as printed: Klebsiella pus tested counts 2710 (ciprofloxacin) and 2309 (co-trimoxazole), whose number tested is rightly left out; the page 44 narrative (30% methicillin, 68% erythromycin resistance in pus) against Table 4 (24% and 69%), with page 54 also giving 24% MRSA in pus."
+ ],
+ "rows": [
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 155,
+   "page": 45,
+   "table": "Table 4",
+   "r": {
+    "cefoxitin": 24,
+    "gentamicin": 15,
+    "ciprofloxacin": 62,
+    "cotrimoxazole": 6,
+    "clindamycin": 13,
+    "erythromycin": 69,
+    "linezolid": 0,
+    "doxycycline": 6
+   },
+   "nt": {
+    "cefoxitin": 155,
+    "gentamicin": 155,
+    "ciprofloxacin": 155,
+    "cotrimoxazole": 155,
+    "clindamycin": 155,
+    "erythromycin": 155,
+    "linezolid": 155,
+    "doxycycline": 155
+   },
+   "note": "Hub plus spoke table (General Hospital Kottayam and 26 spoke institutions), all locations pooled. The narrative on page 44 says 30% methicillin resistance and 68% erythromycin resistance in pus; the table (24% and 69%) agrees with its own counts and with the analysis on page 54 (24% MRSA in pus).",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "n": 45,
+   "page": 46,
+   "table": "Table 6",
+   "r": {
+    "ampicillin": 49,
+    "gentamicin_hl": 38,
+    "ciprofloxacin": 87,
+    "linezolid": 0,
+    "vancomycin": 0,
+    "tetracycline": 91,
+    "nitrofurantoin": 47
+   },
+   "nt": {
+    "ampicillin": 45,
+    "gentamicin_hl": 45,
+    "ciprofloxacin": 45,
+    "linezolid": 45,
+    "vancomycin": 45,
+    "tetracycline": 45,
+    "nitrofurantoin": 45
+   },
+   "notes": {
+    "gentamicin_hl": "printed as Gentamicin-HLAR (high-level gentamicin)"
+   },
+   "note": "Hub plus spoke table (General Hospital Kottayam and 26 spoke institutions), all locations pooled. Printed as Enterococcus species.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 48,
+   "page": 48,
+   "table": "Table 8",
+   "r": {
+    "ampicillin": 96,
+    "amoxiclav": 63,
+    "piptazo": 23,
+    "cefuroxime": 53,
+    "cefotaxime": 58,
+    "imipenem": 5,
+    "meropenem": 2,
+    "amikacin": 28,
+    "gentamicin": 38,
+    "ciprofloxacin": 56,
+    "cotrimoxazole": 30
+   },
+   "nt": {
+    "ampicillin": 48,
+    "amoxiclav": 48,
+    "piptazo": 48,
+    "cefuroxime": 48,
+    "cefotaxime": 48,
+    "imipenem": 48,
+    "meropenem": 48,
+    "amikacin": 48,
+    "gentamicin": 48,
+    "ciprofloxacin": 48,
+    "cotrimoxazole": 48
+   },
+   "note": "Hub plus spoke table (General Hospital Kottayam and 26 spoke institutions), all locations pooled. The number tested column repeats the column N for every drug; several printed percentages differ by up to 1 point from resistant/N.",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 616,
+   "page": 48,
+   "table": "Table 8",
+   "r": {
+    "ampicillin": 81,
+    "amoxiclav": 53,
+    "piptazo": 23,
+    "cefuroxime": 53,
+    "cefotaxime": 56,
+    "imipenem": 10,
+    "meropenem": 8,
+    "amikacin": 35,
+    "gentamicin": 40,
+    "norfloxacin": 38,
+    "cotrimoxazole": 41,
+    "nitrofurantoin": 15
+   },
+   "nt": {
+    "ampicillin": 616,
+    "amoxiclav": 616,
+    "piptazo": 616,
+    "cefuroxime": 616,
+    "cefotaxime": 616,
+    "imipenem": 616,
+    "meropenem": 616,
+    "amikacin": 616,
+    "gentamicin": 616,
+    "norfloxacin": 616,
+    "cotrimoxazole": 616,
+    "nitrofurantoin": 616
+   },
+   "conflict": {
+    "amoxiclav": "Table 8 prints 626 resistant of 616 tested (more resistant than tested) with 53% resistant",
+    "cefuroxime": "Table 8 prints 626 resistant of 616 tested (more resistant than tested) with 53% resistant"
+   },
+   "note": "Hub plus spoke table (General Hospital Kottayam and 26 spoke institutions), all locations pooled. Ciprofloxacin not reported for urine (norfloxacin instead).",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "n": 54,
+   "page": 50,
+   "table": "Table 10",
+   "r": {
+    "amoxiclav": 56,
+    "piptazo": 30,
+    "cefuroxime": 34,
+    "cefotaxime": 36,
+    "imipenem": 14,
+    "meropenem": 10,
+    "amikacin": 28,
+    "gentamicin": 38,
+    "ciprofloxacin": 59,
+    "cotrimoxazole": 27
+   },
+   "nt": {
+    "amoxiclav": 54,
+    "piptazo": 54,
+    "cefuroxime": 54,
+    "cefotaxime": 54,
+    "imipenem": 54,
+    "meropenem": 54,
+    "amikacin": 54,
+    "gentamicin": 54
+   },
+   "notes": {
+    "ciprofloxacin": "number tested printed as 2710 (more than the 54 isolates); 32 resistant",
+    "cotrimoxazole": "number tested printed as 2309 (more than the 54 isolates); 15 resistant"
+   },
+   "note": "Hub plus spoke table (General Hospital Kottayam and 26 spoke institutions), all locations pooled. Printed as Klebsiella species. The number tested column repeats the column N for every drug; several printed percentages differ by up to 1 point from resistant/N.",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "n": 191,
+   "page": 50,
+   "table": "Table 10",
+   "r": {
+    "amoxiclav": 47,
+    "piptazo": 26,
+    "cefuroxime": 28,
+    "cefotaxime": 38,
+    "imipenem": 5,
+    "meropenem": 3,
+    "amikacin": 28,
+    "gentamicin": 38,
+    "norfloxacin": 19,
+    "cotrimoxazole": 27,
+    "nitrofurantoin": 28
+   },
+   "nt": {
+    "amoxiclav": 191,
+    "piptazo": 191,
+    "cefuroxime": 191,
+    "cefotaxime": 191,
+    "imipenem": 191,
+    "meropenem": 191,
+    "amikacin": 191,
+    "gentamicin": 191,
+    "norfloxacin": 191,
+    "cotrimoxazole": 191,
+    "nitrofurantoin": 191
+   },
+   "note": "Hub plus spoke table (General Hospital Kottayam and 26 spoke institutions), all locations pooled. Printed as Klebsiella species.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Pseudomonas species",
+   "pheno": null,
+   "n": 78,
+   "page": 52,
+   "table": "Table 13",
+   "r": {
+    "piptazo": 19,
+    "ceftazidime": 29,
+    "aztreonam": 8,
+    "imipenem": 16,
+    "meropenem": 8,
+    "ciprofloxacin": 41
+   },
+   "nt": {
+    "piptazo": 78,
+    "ceftazidime": 78,
+    "aztreonam": 78,
+    "imipenem": 78,
+    "meropenem": 78,
+    "ciprofloxacin": 78
+   },
+   "note": "Hub plus spoke table (General Hospital Kottayam and 26 spoke institutions), all locations pooled. Printed as Pseudomonas species. Amikacin not reported for pus (grey).",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Pseudomonas species",
+   "pheno": null,
+   "n": 39,
+   "page": 52,
+   "table": "Table 13",
+   "r": {
+    "piptazo": 18,
+    "ceftazidime": 33,
+    "aztreonam": 17,
+    "imipenem": 11,
+    "meropenem": 11,
+    "amikacin": 23,
+    "ciprofloxacin": 31
+   },
+   "nt": {
+    "piptazo": 39,
+    "ceftazidime": 39,
+    "aztreonam": 39,
+    "imipenem": 39,
+    "meropenem": 39,
+    "amikacin": 39,
+    "ciprofloxacin": 39
+   },
+   "note": "Hub plus spoke table (General Hospital Kottayam and 26 spoke institutions), all locations pooled. Printed as Pseudomonas species. The spoke-only table (Table 14) prints the same urine figures.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "pheno": null,
+   "n": 58,
+   "page": 53,
+   "table": "Table 15",
+   "r": {
+    "piptazo": 50,
+    "ceftazidime": 66,
+    "imipenem": 17,
+    "meropenem": 9,
+    "amikacin": 32,
+    "gentamicin": 60,
+    "ciprofloxacin": 55,
+    "cotrimoxazole": 62
+   },
+   "nt": {
+    "piptazo": 58,
+    "ceftazidime": 58,
+    "imipenem": 58,
+    "meropenem": 58,
+    "amikacin": 58,
+    "gentamicin": 58,
+    "ciprofloxacin": 58,
+    "cotrimoxazole": 58
+   },
+   "note": "Hub plus spoke table (General Hospital Kottayam and 26 spoke institutions), all locations pooled. Printed as Acinetobacter species.",
+   "specimen_as_printed": "Pus"
+  }
+ ],
+ "counts": [
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 0,
+   "page": 42
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 616,
+   "page": 42
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 48,
+   "page": 42
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 0,
+   "page": 42
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella spp.",
+   "n": 0,
+   "page": 42
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella spp.",
+   "n": 191,
+   "page": 42
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Klebsiella spp.",
+   "n": 54,
+   "page": 42
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Klebsiella spp.",
+   "n": 0,
+   "page": 42
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Salmonella spp.",
+   "n": 1,
+   "page": 42
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Salmonella spp.",
+   "n": 0,
+   "page": 42
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Salmonella spp.",
+   "n": 0,
+   "page": 42
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Salmonella spp.",
+   "n": 1,
+   "page": 42
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Pseudomonas spp.",
+   "n": 0,
+   "page": 42
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Pseudomonas spp.",
+   "n": 39,
+   "page": 42
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Pseudomonas spp.",
+   "n": 78,
+   "page": 42
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Pseudomonas spp.",
+   "n": 0,
+   "page": 42
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "n": 0,
+   "page": 42
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "n": 26,
+   "page": 42
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "n": 58,
+   "page": 42
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "n": 0,
+   "page": 42
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 1,
+   "page": 42
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 19,
+   "page": 42
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 155,
+   "page": 42
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 0,
+   "page": 42
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "n": 1,
+   "page": 42
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "n": 45,
+   "page": 42
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "n": 10,
+   "page": 42
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "n": 0,
+   "page": 42
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 2,
+   "page": 44
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "n": 61,
+   "page": 44
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 601,
+   "page": 44
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "n": 3,
+   "page": 44
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "n": 40,
+   "page": 44
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "n": 202,
+   "page": 44
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Salmonella spp.",
+   "n": 0,
+   "page": 44
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Salmonella spp.",
+   "n": 1,
+   "page": 44
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Salmonella spp.",
+   "n": 1,
+   "page": 44
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Pseudomonas spp.",
+   "n": 2,
+   "page": 44
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Pseudomonas spp.",
+   "n": 53,
+   "page": 44
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Pseudomonas spp.",
+   "n": 62,
+   "page": 44
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "n": 0,
+   "page": 44
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "n": 47,
+   "page": 44
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "n": 37,
+   "page": 44
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 1,
+   "page": 44
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 61,
+   "page": 44
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 113,
+   "page": 44
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "n": 1,
+   "page": 44
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "n": 24,
+   "page": 44
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "n": 31,
+   "page": 44
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Table 4 S. aureus blood (1 isolate), Table 6 Enterococcus blood (1) and pus (10), Table 12 Salmonella spp. (1), Table 15 Acinetobacter urine (26)",
+   "why": "fewer than 30 isolates; counts only, no percentages"
+  },
+  {
+   "what": "Tables 5, 7, 9, 11, 14 and 16 (spoke hospitals only)",
+   "why": "subsets of the hub plus spoke tables for the same specimens; the combined rows are recorded"
+  },
+  {
+   "what": "Figures 2 to 5",
+   "why": "distribution charts; not susceptibility data"
+  }
+ ]
+}
