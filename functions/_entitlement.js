@@ -59,7 +59,10 @@ export function verifiedProDays(env) {
 }
 
 /* Who is allowed to hold Pro at all once enforcement is on.
- *   claims.verified === true   a real NMC/SMC register match, or an owner approval
+ *   claims.verified === true   a real NMC/SMC register match, or an owner approval of a doctor or
+ *                              PG resident (full registration)
+ *   claims.traineeVerified     an owner-approved medical student or intern (see mayPrescribe above:
+ *                              allowed here, never on a prescribing surface)
  *   claims.provUntil > now     proof uploaded, MANUAL REVIEW PENDING. Owner decision: full access
  *                              while pending, so the owner's review latency is never a user-facing
  *                              outage for an intern or student who did everything right.
@@ -78,6 +81,66 @@ export function isOwnerClaims(env, claims) {
   return !!e && ownerEmails(env).indexOf(e) > -1;
 }
 
+/* ── Verification role (audit 2026-09-26, vault/Role-Tiers.md section 6, findings 3 and 4) ───────
+ * Two claims, two meanings. Keep them apart everywhere:
+ *   verified:true         a REGISTERED doctor (NMC/SMC full registration: practising doctor or PG
+ *                         resident). The only claim that may prescribe, sign, or print a Reg. No.
+ *   traineeVerified:true  a REVIEWED medical student or intern (owner approved their college or
+ *                         internship ID). A real account: access, the free week, the purge sweep and
+ *                         the AI budget treat it like a verified one. It must NEVER prescribe:
+ *                         students hold no registration and interns only a provisional one.
+ * Readers that ask "is this a registered doctor" use mayPrescribe(); readers that ask "is this a
+ * real, reviewed account" use isReviewedAccount(). */
+export const VERIFY_ROLES = ["doctor", "resident", "intern", "student"];
+export const TRAINEE_VERIFY_ROLES = ["intern", "student"];
+// Verification role (what the chooser sent) -> entitlements/{uid}.role (functions/_entitlements.js ROLES).
+export const VERIFY_ROLE_TO_ENTITLEMENT = { doctor: "physician", resident: "resident", intern: "intern", student: "student" };
+// Unknown or missing -> "doctor": the historical default of /api/verify-doctor, and the role every
+// record written before the chooser existed was verified under.
+export function normalizeVerifyRole(r) {
+  const v = String(r == null ? "" : r).trim().toLowerCase();
+  return VERIFY_ROLES.indexOf(v) >= 0 ? v : "doctor";
+}
+export function isTraineeVerifyRole(r) {
+  return TRAINEE_VERIFY_ROLES.indexOf(String(r == null ? "" : r).trim().toLowerCase()) >= 0;
+}
+export function entitlementRoleFor(verifyRole) { return VERIFY_ROLE_TO_ENTITLEMENT[normalizeVerifyRole(verifyRole)]; }
+export function mayPrescribe(claims) { return !!(claims && claims.verified === true); }
+export function isReviewedAccount(claims) {
+  return !!(claims && (claims.verified === true || claims.traineeVerified === true));
+}
+
+// An entitlement role that is already a paid/admin-set variant of the same person is kept: a doctor
+// the owner set to physician_pro must not drop to physician because they re-verified.
+const ROLE_FAMILY = { physician: ["physician", "physician_pro"], resident: ["resident", "co_resident", "pro"] };
+
+/* Write the verification role into entitlements/{uid}.role. BEST-EFFORT: never throws, so a Firestore
+ * outage can never fail a verification. deps: { getEntitlement, writeEntitlement } (tests inject
+ * them; production loads functions/_entitlements.js lazily, which also keeps this module out of the
+ * _entitlements -> _aibudget -> _usage -> _entitlement import cycle at evaluation time).
+ * Returns { ok, role, skipped?, error? }. */
+export async function recordVerifiedRole(env, uid, verifyRole, deps) {
+  deps = deps || {};
+  const role = entitlementRoleFor(verifyRole);
+  if (!uid) return { ok: false, role, error: "no-uid" };
+  try {
+    let get = deps.getEntitlement, write = deps.writeEntitlement;
+    if (!get || !write) {
+      const m = await import("./_entitlements.js");
+      get = get || m.getEntitlement; write = write || m.writeEntitlement;
+    }
+    let cur = null;
+    try { cur = await get(env, uid, deps); } catch (e) { cur = null; }   // unreadable -> write anyway
+    const have = cur && typeof cur.role === "string" ? cur.role : "";
+    if (have && (ROLE_FAMILY[role] || [role]).indexOf(have) >= 0) return { ok: true, role: have, skipped: "same-family" };
+    await write(env, uid, { role, roleSource: "verification" }, deps);
+    return { ok: true, role };
+  } catch (e) {
+    try { console.warn("[verify] entitlement role write failed", String((e && e.message) || e).slice(0, 120)); } catch (x) {}
+    return { ok: false, role, error: "write-failed" };
+  }
+}
+
 export function accessState(env, claims, now) {
   now = now || Date.now();
   const prov = claims && claims.provUntil ? +claims.provUntil : 0;
@@ -87,7 +150,15 @@ export function accessState(env, claims, now) {
     // No verifiedAt = verified before this feature existed. entitlementFor() backfills it rather
     // than reading 0 here, so a doctor already verified never blinks out of Pro on deploy day.
     const endsAt = at ? at + verifiedProDays(env) * DAY_MS : 0;
-    return { allowed: true, verified: true, pending: false, verifiedAt: at || null, owner,
+    return { allowed: true, verified: true, trainee: false, reviewed: true, pending: false, verifiedAt: at || null, owner,
+             freeProEndsAt: endsAt || null, freeProActive: owner || !!(endsAt && now < endsAt) };
+  }
+  // A reviewed student/intern: the same access and free week as a verified doctor, but `verified`
+  // stays false, because that field is read as "registered doctor" by the prescribing surfaces.
+  if (claims && claims.traineeVerified === true) {
+    const at = claims.verifiedAt ? +claims.verifiedAt : 0;
+    const endsAt = at ? at + verifiedProDays(env) * DAY_MS : 0;
+    return { allowed: true, verified: false, trainee: true, reviewed: true, pending: false, verifiedAt: at || null, owner,
              freeProEndsAt: endsAt || null, freeProActive: owner || !!(endsAt && now < endsAt) };
   }
   if (owner) {
@@ -128,6 +199,7 @@ export function entitlementState(env, claims, now) {
     const a = accessState(env, claims, now);
     const paid = !!(claims && claims.pro === true && (!claims.proExp || +claims.proExp > now));
     const base = { promo: false, trial: false, verified: a.verified, pendingReview: !!a.pending,
+                   traineeVerified: !!a.trainee, reviewed: !!a.reviewed,
                    verifyRequired: true, freeProEndsAt: a.freeProEndsAt || null };
     // Say WHY, not just no. The paywall/verify UI branches on `reason` so an unverified clinician
     // is sent to the certificate upload, not to a payment sheet that cannot help them.
@@ -168,7 +240,7 @@ export async function entitlementFor(env, uid, email) {
   // computes from 0 and they drop to the free tier the instant this deploys - a support wave made
   // of exactly the people who did the right thing. One write, once, each.
   try {
-    if (verifyRequired(env) && claims.verified === true && !claims.verifiedAt) {
+    if (verifyRequired(env) && isReviewedAccount(claims) && !claims.verifiedAt) {
       const va = Date.now();
       await mergeUserClaims(env, uid, { verifiedAt: va });
       claims.verifiedAt = va;

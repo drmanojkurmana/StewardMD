@@ -39,7 +39,12 @@ export async function reconcileVerifiedClaim(env, uid, deps) {
   const status = rec.status || (rec.verified ? "verified" : "unverified");
   out.status = status;
   out.regNo = rec.regNo || rec.extractedRegNo || "";
-  if (status !== "verified") return out;   // pending / trial / rejected never grant the claim
+  if (status !== "verified") return out;   // pending / trial / rejected / trainee_verified never grant the claim
+  // verified:true is the PRESCRIBING claim. A student or intern record never re-asserts it, even one
+  // an older approval marked "verified" (audit 2026-09-26, finding 3): those are for the owner to
+  // review (GET /api/verifications/legacy-trainees), not for a read path to re-grant.
+  const role = String(rec.role || "").trim().toLowerCase();
+  if (role === "student" || role === "intern") return out;
 
   let claims = null;
   try { claims = (deps && deps.getUserClaims ? deps.getUserClaims : getUserClaims)(env, uid); claims = await claims; }

@@ -5,9 +5,11 @@
  * Owner-only management of doctor verifications (the admin/verifications.html UI).
  * Token-gated exactly like functions/api/updates (X-Admin-Token vs a Pages secret).
  *
- *   GET  /api/verifications?status=pending|verified|all   → list doctor records
- *   POST /api/verifications/approve  {uid, regNo}         → set verified claim + mark verified
- *   POST /api/verifications/reject   {uid, reason}        → mark rejected
+ *   GET  /api/verifications?status=pending|verified|trainee_verified|all  → list records
+ *   GET  /api/verifications/legacy-trainees                → DRY RUN: students/interns that an
+ *                                                           older approval gave verified:true
+ *   POST /api/verifications/approve  {uid, regNo, role?}   → approve BY ROLE (see doApprove)
+ *   POST /api/verifications/reject   {uid, reason}         → mark rejected
  *
  * Storage: reuses CASES_KV / GHIS_KV, keys "icu:doctor:<uid>" (written by verify-doctor).
  * Secret:  VERIFY_ADMIN_TOKEN
@@ -15,9 +17,10 @@
  */
 import { mergeUserClaims } from "../../_fbadmin.js";
 import { clearBudgetCache } from "../../_aibudget.js";
-import { emailVerified, emailFailed } from "../../_email.js";
+import { emailVerified, emailTraineeVerified, emailFailed } from "../../_email.js";
 import { markVerified, sendProUpsellOnce } from "../../_lifecycle.js";
 import { verifyFirebaseToken } from "../../_fbauth.js";
+import { normalizeVerifyRole, isTraineeVerifyRole, recordVerifiedRole } from "../../_entitlement.js";
 
 // Owners who may manage verifications (by Google account email). Override via env.OWNER_EMAILS
 // (comma-separated). Kept in sync with the intent of the app's team allowlist.
@@ -83,24 +86,81 @@ async function actionSigOK(env, uid, action, sig) {
   return d === 0;
 }
 
-async function doApprove(store, env, uid, regNo) {
+/* Approve BY ROLE (audit 2026-09-26, vault/Role-Tiers.md section 6, finding 3).
+ *   doctor / resident  full NMC/SMC registration -> claim verified:true (may prescribe) + regNo,
+ *                      the reg index, and the "you are verified, prescriptions unlocked" email.
+ *   intern / student   no full registration      -> claim traineeVerified:true, verified CLEARED,
+ *                      no regNo claim, no reg index (a college ID is not a registration number),
+ *                      and no "prescriptions unlocked" email. Full access and the free week still
+ *                      apply (_entitlement.js accessState), the Rx pad refuses them.
+ * Both: verifiedAt starts the free week, provUntil is cleared (the review is over), and the role is
+ * written to entitlements/{uid}.role (best-effort, never fails the approval).
+ * `roleOverride` lets the owner correct the role on review (a legacy "Intern / Resident" record that
+ * is really a PG resident). deps: { mergeUserClaims, recordVerifiedRole, clearBudgetCache,
+ * emailVerified, markVerified, sendProUpsellOnce, getEntitlement, writeEntitlement }. */
+export async function doApprove(store, env, uid, regNo, deps, roleOverride) {
+  deps = deps || {};
+  const merge = deps.mergeUserClaims || mergeUserClaims;
   const rec = (await store.get(doctorKey(uid), "json")) || { uid };
+  const role = normalizeVerifyRole(roleOverride || rec.role);
+  const trainee = isTraineeVerifyRole(role);
   const reg = String(regNo || rec.regNo || rec.extractedRegNo || "").trim();
-  // verifiedAt starts the free Pro week; provUntil is cleared because the review is over.
-  await mergeUserClaims(env, uid, { verified: true, verifiedAt: Date.now(), provUntil: null, regNo: reg });   // merge: keep any existing pro claim
-  try { await clearBudgetCache(env, uid); } catch (e) {}   // tier changed; the cap is cached ~26h
+  const now = Date.now();
+  if (trainee) {
+    // verified:null DELETES the claim (mergeClaims), which also withdraws it from anyone re-approved
+    // as a trainee after an older approval had wrongly granted it.
+    await merge(env, uid, { verified: null, traineeVerified: true, verifiedAt: now, provUntil: null, regNo: null });
+  } else {
+    await merge(env, uid, { verified: true, traineeVerified: null, verifiedAt: now, provUntil: null, regNo: reg });   // merge: keep any existing pro claim
+  }
+  try { await (deps.clearBudgetCache || clearBudgetCache)(env, uid); } catch (e) {}   // tier changed; the cap is cached ~26h
   try { if (rec.photoKey && env.FOLLOWCARE_R2) await env.FOLLOWCARE_R2.delete(rec.photoKey); } catch (e) {}   // purge the review photo on decision
-  const updated = { ...rec, uid, status: "verified", verified: true, regNo: reg, photoKey: "", approvedBy: "admin", verifiedAt: new Date().toISOString() };
+  const updated = trainee
+    ? { ...rec, uid, role, status: "trainee_verified", verified: false, traineeVerified: true, regNo: "", idNo: reg, photoKey: "", approvedBy: "admin", verifiedAt: new Date(now).toISOString() }
+    : { ...rec, uid, role, status: "verified", verified: true, traineeVerified: false, regNo: reg, photoKey: "", approvedBy: "admin", verifiedAt: new Date(now).toISOString() };
   await store.put(doctorKey(uid), JSON.stringify(updated));
-  if (reg) { try { await store.put(regKey(reg), uid); } catch (e) {} }
-  try { await emailVerified(env, { email: rec.email, name: rec.name || rec.firstName, regNo: reg, council: rec.council }); } catch (e) {}
-  try { await markVerified(env, uid); await sendProUpsellOnce(env, uid, { email: rec.email, name: rec.name || rec.firstName }); } catch (e) {}
+  if (reg && !trainee) { try { await store.put(regKey(reg), uid); } catch (e) {} }
+  updated.roleWrite = await (deps.recordVerifiedRole || recordVerifiedRole)(env, uid, role, deps);   // never throws
+  if (!trainee) {
+    try { await (deps.emailVerified || emailVerified)(env, { email: rec.email, name: rec.name || rec.firstName, regNo: reg, council: rec.council }); } catch (e) {}
+  } else {
+    try { await (deps.emailTraineeVerified || emailTraineeVerified)(env, { email: rec.email, name: rec.name || rec.firstName, role }); } catch (e) {}
+  }
+  try {
+    await (deps.markVerified || markVerified)(env, uid);
+    await (deps.sendProUpsellOnce || sendProUpsellOnce)(env, uid, { email: rec.email, name: rec.name || rec.firstName });
+  } catch (e) {}
   return updated;
+}
+
+/* DRY RUN, owner-only. Approvals before 2026-09-26 gave every role verified:true, so a student or
+ * intern approved then can still prescribe. This LISTS those records for the owner to review; it
+ * writes nothing and changes no claim. Legacy "intern" records came from the old "Intern / Resident"
+ * choice, so some are genuine PG residents: the fix for each is a deliberate re-approval
+ * (POST /approve with role "resident" or "intern"/"student"), never a bulk rewrite. */
+export async function listLegacyTraineeVerified(store) {
+  const out = [];
+  let cursor;
+  do {
+    const page = await store.list({ prefix: DOCTOR_PREFIX, cursor });
+    for (const k of page.keys) {
+      const rec = await store.get(k.name, "json");
+      if (!rec || !isTraineeVerifyRole(rec.role)) continue;
+      const st = rec.status || (rec.verified ? "verified" : "unverified");
+      if (st !== "verified" && rec.verified !== true) continue;
+      out.push({ uid: rec.uid || k.name.slice(DOCTOR_PREFIX.length), email: rec.email || "", role: rec.role,
+                 status: st, regNo: rec.regNo || rec.extractedRegNo || "", approvedBy: rec.approvedBy || "",
+                 verifiedAt: rec.verifiedAt || "", reason: rec.reason || "" });
+    }
+    cursor = page.list_complete ? null : page.cursor;
+  } while (cursor);
+  out.sort((a, b) => String(b.verifiedAt).localeCompare(String(a.verifiedAt)));
+  return out;
 }
 async function doReject(store, env, uid, reason) {
   const rec = (await store.get(doctorKey(uid), "json")) || { uid };
   // Clear the free-week start and any pending grant too, or a rejected account keeps Pro.
-  try { await mergeUserClaims(env, uid, { verified: false, verifiedAt: null, provUntil: null }); } catch (e) {}   // merge: revoke verified only, keep pro
+  try { await mergeUserClaims(env, uid, { verified: false, traineeVerified: null, verifiedAt: null, provUntil: null }); } catch (e) {}   // merge: revoke verified only, keep pro
   try { if (rec.photoKey && env.FOLLOWCARE_R2) await env.FOLLOWCARE_R2.delete(rec.photoKey); } catch (e) {}   // purge the review photo on decision
   // Clear provisional so the client gate forces a fresh upload.
   const updated = { ...rec, uid, status: "rejected", verified: false, provisionalUntil: "", photoKey: "", reason: String(reason || "rejected_by_admin"), updatedAt: new Date().toISOString() };
@@ -152,7 +212,11 @@ export async function onRequest(context) {
     const reg = url.searchParams.get("reg") || "";
     if (!(await actionSigOK(env, uid, doWhat, sig))) return htmlPage("Invalid or expired link", "This action link could not be verified. Open the admin page instead.");
     try {
-      if (doWhat === "approve") { const d = await doApprove(store, env, uid, reg); return htmlPage("✓ Doctor verified", `${d.email || uid} now has full access${d.regNo ? " (" + d.regNo + ")" : ""}. They'll see it on next sign-in.`); }
+      if (doWhat === "approve") {
+        const d = await doApprove(store, env, uid, reg);
+        if (d.status === "trainee_verified") return htmlPage("✓ " + (d.role === "student" ? "Student" : "Intern") + " approved", `${d.email || uid} now has full access. The prescription pad stays locked for a ${d.role}. They'll see it on next sign-in.`);
+        return htmlPage("✓ Doctor verified", `${d.email || uid} now has full access${d.regNo ? " (" + d.regNo + ")" : ""}. They'll see it on next sign-in.`);
+      }
       if (doWhat === "reject")  { await doReject(store, env, uid); return htmlPage("Access blocked", "This account is blocked until the doctor uploads a valid certificate again."); }
       return htmlPage("Unknown action", "Nothing to do.");
     } catch (e) { return htmlPage("Something went wrong", "Please try again in a moment."); }
@@ -179,6 +243,12 @@ export async function onRequest(context) {
       } });
     }
 
+    if (method === "GET" && seg === "legacy-trainees") {
+      const items = await listLegacyTraineeVerified(store);
+      return json({ ok: true, dryRun: true, count: items.length, items,
+        note: "Nothing was changed. Review each account and re-approve it with the correct role (POST /api/verifications/approve {uid, role})." });
+    }
+
     if (method === "GET") {
       const url = new URL(request.url);
       const status = url.searchParams.get("status") || "pending";
@@ -189,7 +259,9 @@ export async function onRequest(context) {
       let body = {}; try { body = await request.json(); } catch (e) {}
       const uid = String(body.uid || "").trim();
       if (!uid) return json({ error: "uid-required" }, 400);
-      return json({ ok: true, doctor: await doApprove(store, env, uid, body.regNo) });
+      const roleOverride = body.role != null && String(body.role).trim() ? String(body.role).trim().toLowerCase() : "";
+      if (roleOverride && ["doctor", "resident", "intern", "student"].indexOf(roleOverride) < 0) return json({ error: "bad-role" }, 400);
+      return json({ ok: true, doctor: await doApprove(store, env, uid, body.regNo, null, roleOverride) });
     }
 
     if (method === "POST" && seg === "reject") {

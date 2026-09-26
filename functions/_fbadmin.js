@@ -90,6 +90,7 @@ export function summarizeUser(u) {
     disabled: !!u.disabled,
     pro: claims.pro === true,
     verified: claims.verified === true,
+    traineeVerified: claims.traineeVerified === true,
     lastLoginAt: Number(u.lastLoginAt) || null,
     createdAt: Number(u.createdAt) || null,
   };

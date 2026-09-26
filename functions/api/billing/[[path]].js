@@ -302,7 +302,7 @@ export async function onRequest(context) {
        * by email at day 5. Verified accounts are skipped - they have no deletion clock to run.
        * Best-effort: /billing/status must never fail because a KV write did. */
       try {
-        if (uid && !state.verified) await markFirstSeen(env, uid, {});
+        if (uid && !state.verified && !state.traineeVerified) await markFirstSeen(env, uid, {});
       } catch (e) {}
       // AI credits + daily cost cap for THIS user (keyed the same as the AI meter: em:<email>).
       let credits = 0, costCap = 0, role = null;
