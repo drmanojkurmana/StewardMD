@@ -94,7 +94,7 @@ places:
 9. **n from the organism table** (`nFrom`): a susceptibility table without its own n takes the exact
    organism count of that stratum, and the screen says so.
 10. **Breakpoints**: `breakpoints` (source key) records the standard as the document states it
-   ("CLSI M100, 33rd edition", "CLSI, edition not stated"); absent = not stated (50 of 85 sources). The source
+   ("CLSI M100, 33rd edition", "CLSI, edition not stated"); absent = not stated (54 of 108 sources). The source
    sheet shows it. `BP_CHANGES` (rules) lists CLSI revisions that move %S without any change in the
    bacteria: fluoroquinolones 2019 (Enterobacterales except Salmonella, P. aeruginosa), polymyxins 2020
    (intermediate and resistant only), piperacillin-tazobactam 2022 (Enterobacterales) and 2023
@@ -128,9 +128,11 @@ and oxacillin answer for each other.
 Specimen preference list + setting per syndrome: UTI urine (OPD for cystitis/pyelonephritis, inpatient for
 complicated/catheter); pneumonia respiratory (ICU for VAP and severe CAP); SSTI pus then deep; meningitis
 CSF, sterile fluids, blood; cholangitis/SBP sterile fluids then blood; sepsis/FN/IE/device blood; enteric
-fever blood; diarrhoea stool; "all specimens except urine" last for non-urinary syndromes. A syndrome never
-gets a different specimen's figures (no urine data for meningitis): the result is empty instead, and the
-panel says which specimen was used when it fell back.
+fever blood; diarrhoea stool; "all specimens except urine" next for non-urinary syndromes, then (except CNS
+syndromes, `noAll`) "all specimens", which includes urine isolates: a source that prints only an
+all-specimen table is still used, and the console says so ("the figures for all specimens are shown instead
+(they include urine isolates)"). A syndrome never gets a different named specimen's figures (no urine data
+for meningitis): the result is empty instead.
 
 Setting fallbacks stay in the syndrome's world (`candidates`): ICU or ward syndromes fall back to all
 inpatients, then all settings; outpatient syndromes to all settings only (never ICU figures); CNS
@@ -197,6 +199,52 @@ it matched, and says so when nothing did.
   point says "reported as". The WISCA "no data" share uses each source's exact setting count.
 - Order when data change: `node scripts/abg-register.mjs` THEN `node scripts/build-antibiogram.mjs`
   (the register goes into the bundle). Commit `antibiogram-store.js` too: the build writes its ABG_V.
+- **Review round 2 checks (2026-09-26)** in `validateRow`, each a caution only when the two figures describe
+  (nearly) the same isolates (tested numbers within 25%; ICMR tests levofloxacin on a subset):
+  ciprofloxacin/levofloxacin gap over 35 (all bacteria), and for Enterobacterales and staphylococci
+  ciprofloxacin or ofloxacin more than 10 above levofloxacin; imipenem/meropenem gap over 25 for
+  Enterobacterales except the Proteeae, over 30 for P. aeruginosa and Acinetobacter (not Burkholderia or
+  Stenotrophomonas); penicillin/ampicillin (or amoxicillin) gap over 25 in streptococci; ampicillin or
+  amoxicillin more than 10 above amoxicillin-clavulanate or ampicillin-sulbactam. `unusualReason` adds
+  S. aureus teicoplanin under 90, beta-haemolytic streptococci vancomycin or linezolid under 95, and
+  Gram-positive tigecycline under 90. High-level gentamicin/streptomycin outside enterococci is hidden.
+- **Review round 3 (2026-09-26)**: Enterobacterales hierarchy cautions (ceftriaxone or cefotaxime more than
+  20 above meropenem or imipenem; ertapenem more than 10 above meropenem; cefuroxime more than 10 above
+  ceftriaxone or cefotaxime; gentamicin more than 20 above amikacin). Imipenem far below meropenem questions
+  imipenem only (unstable disks); the reverse questions both. S. aureus: penicillin above an oxacillin of 0 is
+  suppressed; a penicillinase-stable beta-lactam (not piperacillin alone or ceftazidime) more than 20 below
+  methicillin is a caution; cefoxitin/oxacillin must agree within 20. Daptomycin: E. faecium has no
+  susceptible category (CLSI 2019+), E. faecalis under 90 is exceptional. WISCA counts an intrinsic 0 only
+  when the drug is measured for some organism in the mix. Pooled lookups walk on through the syndrome's
+  strata to the first figure from 3 institutions (`candidatesFor`, `suscAt`); institutions count only if
+  they contribute a usable row, and a region is pooled only if some stratum has a pooled figure (the West
+  had none: AIIMS Bhopal, BVDU and SKNMC rarely report the same stratum). Cells from too few institutions
+  carry `few` and say so ("too few institutions", not "failed a data check").
+- **Row flags from the lead**: `unreliable: "what is inconsistent"` makes every figure of a row a caution
+  (BVDU Pune 2024 page 12 Gram-negative rows; SKNMC Pune 2024 Pseudomonas lists); `untested: {drug: why}`
+  turns a printed 0 that means "not tested" into a caution (RIMS Imphal 2023-24 blood cefazolin).
+- **Pools need 3 institutions** (store `POOL_MIN_K`, counted by hospital name so a hospital's second
+  series is not a second institution): a pooled cell from 1 or 2 is a caution that names them, never used by
+  the console or reasoning; phenotype cards and cell sheets say how many institutions; a region with fewer
+  than 3 has no pooled scope or profile (South and East, 2026-09-26). Urinary agents and fosfomycin rank
+  only for urine.
+- **Bundle layout**: repeated row strings (table names, notes, how a row was combined) are indices into
+  `strs`; per-source notes, reporting, method, how it was read, second-reader notes and exclusions live in
+  `kb/antibiogram/antibiogram-detail.json`, fetched when a source sheet opens (`ABG_STORE.detail(id)`); the
+  sheet shows `summary` (first sentences of the notes) and a plain checking status. build-www copies both.
+- **Fungal series**: an institution whose fungal antibiogram is a separate issue (Sir Ganga Ram Hospital's
+  second newsletter issue each year, `SGRH_FUNGAL_<year>`) gets its own `inst` (`SGRH_DELHI_FUNGAL`,
+  short "Sir Ganga Ram Hospital, fungal"). Under the bacterial `inst` a fungal and a bacterial issue of
+  the same year read as "H1"/"H2" editions and the fungal data never becomes "latest". Candida tables
+  are blood, all settings, n = isolates tested; NA, not done and susceptible-dose-dependent cells are left
+  out (C. glabrata fluconazole "0#" too: no susceptible category exists, 0% would read as resistance).
+  Intrinsic: C. krusei fluconazole, Aspergillus fluconazole, Cryptococcus and Trichosporon echinocandins.
+- **Fungi in bacterial charts**: a named fungal species in an organism chart is recorded as a count
+  unless the same panel also prints an unnamed "Fungal isolates" entry (then it is a partial count and
+  goes to `excluded`). SGRH 2013 labels its fungal bar "Candida spp." (recorded).
+- **Sources with no direct link** (SGRH 2012 to 2021 serve PDFs only by POST from
+  sgrh.com/en/publications): `url` null, `page` set; the screen offers "Open the web page that lists it".
+  The register dedupes by URL, so a shared form URL must never be recorded as the document's `url`.
 - ICMR 2024 Table 9.44 (VAP) is excluded on purpose (identical counts repeated across agents, e.g.
   2/81 five times; A. baumannii tigecycline 2.5% vs 75.8% in the bloodstream table).
 

@@ -10,6 +10,9 @@
  *   node scripts/check-guideline-updates.mjs             check against the baseline, write the report
  *   node scripts/check-guideline-updates.mjs --update    also rewrite the baseline (after the report is read)
  *   node scripts/check-guideline-updates.mjs --limit 20  only the first 20 URLs (quick look)
+ *   node scripts/check-guideline-updates.mjs --kind antibiogram --add-new
+ *                                                        check one kind only, and add baseline entries only
+ *                                                        for URLs that have none (existing ones untouched)
  *
  * Report: vault/handoff/source-watch-report.md (overwritten each run) and, in GitHub Actions, the job
  * summary. Exit code is 0 even when sources changed: a changed page is a prompt to re-read, not a failure.
@@ -46,7 +49,14 @@ export function collectSources(root = ROOT) {
   });
   // Antibiogram sources and the census register: each document and the web page that lists it
   // (a new edition appears there first, so a changed listing page is the prompt to look for one).
-  const firstUrl = (t) => { const m = /https?:\/\/[^\s;,)]+/.exec(String(t || "")); return m ? m[0] : null; };
+  // A URL ends at whitespace, ";" or ","; a ")" ends it only when unbalanced ("(version 2.0).pdf" is kept).
+  const firstUrl = (t) => {
+    const m = /https?:\/\/[^\s;,]+/.exec(String(t || "")); if (!m) return null;
+    let u = m[0];
+    const open = (x) => (x.match(/\(/g) || []).length, close = (x) => (x.match(/\)/g) || []).length;
+    while (/[.)]$/.test(u) && (u.endsWith(".") || close(u) > open(u))) u = u.slice(0, -1);
+    return u;
+  };
   const add = (url, id, title) => { if (!url || !/^https?:\/\//.test(url)) return; if (!map.has(url)) map.set(url, []); map.get(url).push({ kind: "antibiogram", id, title }); };
   const sd = join(root, "data/antibiogram/sources");
   if (existsSync(sd)) readdirSync(sd).filter((f) => f.endsWith(".json")).sort().forEach((f) => {
@@ -127,7 +137,12 @@ export function reportMarkdown(rows, when, total) {
 async function main() {
   const args = process.argv.slice(2), update = args.includes("--update");
   const li = args.indexOf("--limit"), limit = li >= 0 ? parseInt(args[li + 1], 10) : 0;
-  const sources = collectSources(), urls = [...sources.keys()].sort(), todo = limit > 0 ? urls.slice(0, limit) : urls;
+  const ki = args.indexOf("--kind"), kind = ki >= 0 ? args[ki + 1] : null, addNew = args.includes("--add-new");
+  const sources = collectSources(), all = [...sources.keys()].sort();
+  const urls = kind ? all.filter((u) => sources.get(u).some((c) => c.kind === kind)) : all;
+  const bf0 = join(ROOT, BASELINE), base0 = existsSync(bf0) ? JSON.parse(readFileSync(bf0, "utf8")) : { urls: {} };
+  const pool = addNew ? urls.filter((u) => !base0.urls[u]) : urls;
+  const todo = limit > 0 ? pool.slice(0, limit) : pool;
   const bf = join(ROOT, BASELINE), base = existsSync(bf) ? JSON.parse(readFileSync(bf, "utf8")) : { schema: 1, urls: {} };
   const rows = [], conc = 6; let next = 0;
   async function worker() {
@@ -140,11 +155,18 @@ async function main() {
   await Promise.all(Array.from({ length: conc }, worker));
   rows.sort((a, b) => a.url.localeCompare(b.url));
   const when = new Date().toISOString(), md = reportMarkdown(rows, when, urls.length);
-  const rf = join(ROOT, REPORT); mkdirSync(dirname(rf), { recursive: true }); writeFileSync(rf, md);
+  // A --kind run writes its own report, so the full report of the last complete run is kept.
+  const rf = join(ROOT, kind ? REPORT.replace(/\.md$/, "-" + kind + ".md") : REPORT); mkdirSync(dirname(rf), { recursive: true }); writeFileSync(rf, md);
   if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, md.replace(/^---[\s\S]*?---\n/, ""));
   const counts = {}; rows.forEach((r) => { counts[r.cls] = (counts[r.cls] || 0) + 1; });
-  console.log(`Checked ${rows.length}/${urls.length}: ` + Object.keys(counts).sort().map((k) => `${k} ${counts[k]}`).join(", ") + `. Report: ${REPORT}`);
-  if (update) {
+  console.log(`Checked ${rows.length}/${urls.length}: ` + Object.keys(counts).sort().map((k) => `${k} ${counts[k]}`).join(", ") + `. Report: ${rf.slice(ROOT.length + 1)}`);
+  if (addNew) {
+    // Only URLs without a baseline entry are added; every existing entry (and its history) stays.
+    const out = Object.assign({}, base, { urls: Object.assign({}, base.urls) }); let added = 0;
+    rows.forEach((r) => { if (!out.urls[r.url] && r.status) { out.urls[r.url] = { status: r.status, finalUrl: r.finalUrl || "", hash: r.hash || "", lastModified: r.lastModified || "" }; added++; } });
+    writeFileSync(bf, JSON.stringify(out, null, 1) + "\n");
+    console.log(`Baseline: ${added} new entries added to ${BASELINE}`);
+  } else if (update) {
     const out = { schema: 1, checkedAt: when, urls: {} };
     urls.forEach((u) => { const r = rows.find((x) => x.url === u); const keep = r ? { status: r.status, finalUrl: r.finalUrl || "", hash: r.hash || "", lastModified: r.lastModified || "" } : base.urls[u]; if (keep) out.urls[u] = keep; });
     writeFileSync(bf, JSON.stringify(out, null, 1) + "\n");
