@@ -10045,3 +10045,17 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
 - **Enterococcal gentamicin is high-level only when the paper says so**; otherwise it stays intrinsic.
 - **Ambiguous cells are left out, not shown with a guess** (RMLIMS 2017 urine Klebsiella/Proteus
   colistin and ofloxacin: a possible column shift in the source).
+
+## 2026-09-26 - Antibiogram review round 2: contradictory figures and one-hospital "pools" are not decision support
+- **Context**: the second independent review (7.5/10) found figures that cannot be right being pooled and
+  shown (BVDU Pune 2024 levofloxacin 0% beside ciprofloxacin 11% for 953 E. coli; SKNMC Pune imipenem 0% beside
+  meropenem 54 to 73%) and "pooled" figures that were one hospital (India ICU MRSA 98.3% was SKIMS alone).
+- **Decision**: same-class disagreements (fluoroquinolones, carbapenems, penicillin/ampicillin in streptococci,
+  beta-lactamase inhibitors) become cautions when both figures describe the same isolates; a whole table the
+  lead finds self-contradictory is marked `unreliable`; a 0 the source says means "not tested" is marked
+  `untested`. A pooled figure needs at least 3 institutions (by hospital name); fewer is a caution naming
+  them, and a region with fewer than 3 has no pool or profile. Values are never changed: they stay as
+  printed, shown with the reason, and kept out of pools, the console and reasoning.
+- **Why not delete them**: the page is the truth; hiding a printed figure would make the app disagree with
+  the document a clinician can open. The caution explains, the pool and reasoning ignore it.
+- **Reversible**: the checks live in `validateRow` and the store's `POOL_MIN_K`; the row flags are data.

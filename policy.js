@@ -126,8 +126,12 @@
     var I = window.ABG_INDEX; if (!I || !I.sources) return;
     HOSPITALS.push({ id: "INDIA_POOLED", name: "India: all institutions (pooled)", short: "India", type: "region", region: "india", hasPolicy: false, abgScope: "india" });
     var poolFrom = I.stats && I.stats.poolFrom;
+    // A region profile needs at least 3 institutions (by hospital name) with a recent antibiogram:
+    // a "pool" of one or two hospitals is those hospitals, which have their own profiles.
     ["north", "south", "east", "west"].forEach(function (rg) {
-      if (!I.sources.some(function (x) { return x.region === rg && x.kind === "institution" && !x.focus && (!poolFrom || x.year >= poolFrom); })) return;
+      var hosp = {};
+      I.sources.forEach(function (x) { if (x.region === rg && x.kind === "institution" && !x.focus && (!poolFrom || x.year >= poolFrom)) hosp[x.name || x.inst] = 1; });
+      if (Object.keys(hosp).length < 3) return;
       HOSPITALS.push({ id: "REGION_" + rg.toUpperCase(), name: RMETA[rg].name, short: RMETA[rg].short, type: "region", region: rg, hasPolicy: false, abgScope: "region:" + rg });
     });
     // The ICMR profile reads the newest ICMR AMRSN report that carries isolate numbers, else

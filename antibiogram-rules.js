@@ -376,6 +376,9 @@
   var SALMONELLA_SHIGELLA = ["salmonella_typhi", "salmonella_paratyphi", "salmonella_enteric", "salmonella_nts", "shigella", "shigella_sonnei", "shigella_flexneri"];
   var NOT_EFFECTIVE_SS = AMINO_STD.concat(["cefazolin", "cephalexin", "cefuroxime", "cefoxitin"]);
   var URINE_ONLY = ["nitrofurantoin", "norfloxacin"];
+  var HIGH_LEVEL_AG = ["gentamicin_hl", "streptomycin_hl"];
+  var ENTEROCOCCI = ["efaecalis", "efaecium", "enterococcus", "enterococcus_other"];
+  var PROTEEAE = ["proteus", "pmirabilis", "proteus_other", "ppm", "morganella", "providencia", "pstuartii", "prettgeri", "providencia_other"];
   var NOT_RESPIRATORY = ["daptomycin"];
   // Too little reaches the urine to treat a urinary infection (IDSA 2024 AMR guidance advises
   // against tigecycline and eravacycline for UTI; moxifloxacin is not renally excreted).
@@ -428,6 +431,9 @@
     if (org === "saureus" && d === "linezolid" && v < 90) return "linezolid resistance this common in S. aureus is exceptional; a figure this low needs confirmation by MIC";
     if (org === "spneumoniae" && (d === "vancomycin" || d === "linezolid") && v < 95) return "vancomycin- or linezolid-non-susceptible pneumococci are essentially unreported; a figure this low needs confirmation";
     if (org === "strep_bhs" && (d === "penicillin" || d === "ampicillin" || d === "amoxicillin") && v < 95) return "penicillin-non-susceptible beta-haemolytic streptococci are essentially unreported; a figure this low needs confirmation";
+    if (org === "saureus" && d === "teicoplanin" && v < 90) return "teicoplanin-non-susceptible S. aureus is exceptional; a figure this low usually reflects a method or reporting error and needs confirmation by MIC";
+    if (org === "strep_bhs" && (d === "vancomycin" || d === "linezolid") && v < 95) return "vancomycin- or linezolid-non-susceptible beta-haemolytic streptococci are essentially unreported; a figure this low needs confirmation";
+    if (o.group === "gpc" && d === "tigecycline" && v < 90) return "tigecycline resistance this common in Gram-positive cocci is exceptional; a figure this low usually reflects a method or reporting error and needs confirmation by MIC";
     if (TYPHOIDAL[org] && (d === "meropenem" || d === "imipenem" || d === "ertapenem") && v < 95) return "carbapenem resistance in typhoidal Salmonella is exceptional; a figure this low needs confirmation";
     return null;
   }
@@ -438,7 +444,7 @@
    * relevant for this specimen) | "suppress" (impossible or inconsistent; never shown) |
    * "caution" (shown, not pooled). */
   function validateRow(row) {
-    var out = { cells: {}, flags: [] }, s = row.s || {}, nt = row.nt || {}, approx = row.approx || [], conflict = row.conflict || {};
+    var out = { cells: {}, flags: [] }, s = row.s || {}, nt = row.nt || {}, approx = row.approx || [], conflict = row.conflict || {}, untested = row.untested || {};
     var org = row.org, pheno = row.pheno || null, isStaph = ORGS[org] && ORGS[org].staph;
     if (!(row.n > 0)) out.flags.push("noN");
     else if (row.n < M39_MIN) out.flags.push("lowN");
@@ -456,6 +462,12 @@
       // The extractor found the source contradicting itself for this figure (e.g. a printed %
       // that its own printed counts do not give).
       if (conflict[d]) { c.act = "caution"; c.why = "the source contradicts itself: " + conflict[d]; return; }
+      // A table the extraction found internally inconsistent (e.g. levofloxacin 0% beside
+      // ciprofloxacin 11% for 953 isolates): every figure in it is shown with a caution, never pooled.
+      if (row.unreliable) { c.act = "caution"; c.why = "this table of the source is not internally consistent (" + row.unreliable + "), so none of its figures is used"; return; }
+      // A 0 the source itself suggests means "not tested" rather than "all resistant".
+      if (untested[d] && v === 0) { c.act = "caution"; c.why = "printed 0, which here probably means not tested rather than all resistant: " + untested[d]; return; }
+      if (HIGH_LEVEL_AG.indexOf(d) >= 0 && ENTEROCOCCI.indexOf(org) < 0) { c.act = "hide"; c.why = "high-level aminoglycoside screening applies to enterococci only"; return; }
       if (URINE_ONLY.indexOf(d) >= 0 && row.spec && row.spec !== "urine" && row.spec !== "all") { c.act = "hide"; c.why = drugLabel(d) + " is reported for urinary isolates only"; return; }
       if (NOT_RESPIRATORY.indexOf(d) >= 0 && row.spec === "respiratory") { c.act = "hide"; c.why = "daptomycin is inactivated by lung surfactant"; return; }
       if (NOT_URINE.indexOf(d) >= 0 && row.spec === "urine") { c.act = "hide"; c.why = drugLabel(d) + " reaches too little concentration in urine to treat a urinary infection"; return; }
@@ -483,18 +495,46 @@
     // Paired agents that should agree. Cefotaxime and ceftriaxone have the same activity
     // against Enterobacterales, and imipenem and meropenem nearly so for E. coli and
     // Klebsiella; a wide gap means a transcription or testing problem in the source.
+    // Two figures are comparable only when they describe (nearly) the same isolates: a drug tested on
+    // a subset (ICMR: levofloxacin on 67 of 318 E. cloacae) can differ for reasons of sampling alone.
+    function comparable(ca, cb) {
+      var na = ca.nt != null ? ca.nt : row.n, nb = cb.nt != null ? cb.nt : row.n;
+      return !(na > 0 && nb > 0) || Math.abs(na - nb) <= 0.25 * Math.max(na, nb);
+    }
     function pair(a, b, gap, why) {
       var ca = out.cells[a], cb = out.cells[b];
-      if (!ca || !cb || ca.act !== "keep" || cb.act !== "keep") return;
+      if (!ca || !cb || ca.act !== "keep" || cb.act !== "keep" || !comparable(ca, cb)) return;
       if (Math.abs(ca.s - cb.s) > gap) { ca.act = cb.act = "caution"; ca.why = cb.why = why + " (" + drugLabel(a) + " " + ca.s + "%, " + drugLabel(b) + " " + cb.s + "%)"; }
     }
     if (orgGroup(org) === "entero") pair("cefotaxime", "ceftriaxone", 20, "cefotaxime and ceftriaxone should give nearly the same result; the source figures disagree");
-    if (org === "ecoli" || org === "klebsiella") pair("imipenem", "meropenem", 25, "imipenem and meropenem should give similar results for this organism; the source figures disagree");
+    // Imipenem and meropenem: close for Enterobacterales except the Proteeae (Proteus, Morganella,
+    // Providencia have intrinsically raised imipenem MICs); P. aeruginosa can lose imipenem first
+    // (OprD), so it and Acinetobacter get a wider margin. Burkholderia and Stenotrophomonas are
+    // left out (imipenem is not a test agent for them).
+    var grp = orgGroup(org), isStrep = ORGS[org] && ORGS[org].strep;
+    if (grp === "entero" && PROTEEAE.indexOf(org) < 0) pair("imipenem", "meropenem", 25, "imipenem and meropenem should give similar results for this organism; the source figures disagree");
+    if (org === "paeruginosa" || org === "acinetobacter") pair("imipenem", "meropenem", 30, "imipenem and meropenem rarely differ this much for non-fermenters; the source figures disagree");
+    // Fluoroquinolones: ciprofloxacin and levofloxacin give similar results; for Enterobacterales and
+    // staphylococci an isolate susceptible to ciprofloxacin (or ofloxacin) is susceptible to
+    // levofloxacin, so levofloxacin cannot be far below them.
+    if (grp !== "fungi") pair("ciprofloxacin", "levofloxacin", 35, "ciprofloxacin and levofloxacin should give similar results; the source figures disagree");
+    if (grp === "entero" || (ORGS[org] && ORGS[org].staph)) {
+      ["ciprofloxacin", "ofloxacin"].forEach(function (a) { atMost(a, "levofloxacin", 10, "an isolate susceptible to " + drugLabel(a).toLowerCase() + " is also levofloxacin-susceptible, so levofloxacin cannot be this much lower; the source figures disagree"); });
+    }
+    // Streptococci: penicillin and ampicillin (or amoxicillin) move together.
+    if (isStrep) { pair("penicillin", "ampicillin", 25, "penicillin and ampicillin should give similar results for streptococci; the source figures disagree"); pair("penicillin", "amoxicillin", 25, "penicillin and amoxicillin should give similar results for streptococci; the source figures disagree"); }
+    // A beta-lactamase inhibitor only adds activity: an ampicillin-susceptible isolate is also
+    // susceptible to ampicillin-sulbactam and amoxicillin-clavulanate.
+    if (grp !== "fungi") {
+      ["amoxiclav", "ampsulbactam"].forEach(function (b) {
+        ["ampicillin", "amoxicillin"].forEach(function (a) { atMost(a, b, 10, "an isolate susceptible to " + drugLabel(a).toLowerCase() + " is also susceptible to " + drugLabel(b).toLowerCase() + ", so " + drugLabel(b).toLowerCase() + " cannot be this much lower; the source figures disagree"); });
+      });
+    }
     // One direction only: a tetracycline-susceptible isolate is also doxycycline- and
     // minocycline-susceptible (CLSI M100), so tetracycline cannot be far above either.
     function atMost(a, b, gap, why) {
       var ca = out.cells[a], cb = out.cells[b];
-      if (!ca || !cb || ca.act !== "keep" || cb.act !== "keep") return;
+      if (!ca || !cb || ca.act !== "keep" || cb.act !== "keep" || !comparable(ca, cb)) return;
       if (ca.s > cb.s + gap) { ca.act = cb.act = "caution"; ca.why = cb.why = why + " (" + drugLabel(a) + " " + ca.s + "%, " + drugLabel(b) + " " + cb.s + "%)"; }
     }
     ["doxycycline", "minocycline"].forEach(function (b) { atMost("tetracycline", b, 15, "a tetracycline-susceptible isolate is also " + drugLabel(b).toLowerCase() + "-susceptible (CLSI), so tetracycline cannot be this much higher; the source figures disagree"); });
@@ -533,12 +573,12 @@
 
   /* Derived phenotype rates from one row set (per organism). */
   function phenoRates(byOrg) {
-    // byOrg: {orgKey: {drug: {s, n}}} (pooled or single-source), plus optional counts {MRSA:n, MSSA:n}
+    // byOrg: {orgKey: {drug: {s, n, k?}}} (pooled or single-source; k = institutions behind a pooled figure)
     var out = [];
     function r(org, label, drugs, note) {
       var d = byOrg[org]; if (!d) return;
       for (var i = 0; i < drugs.length; i++) if (d[drugs[i]] && typeof d[drugs[i]].s === "number") {
-        out.push({ org: org, label: label, pct: Math.round(10 * (100 - d[drugs[i]].s)) / 10, n: d[drugs[i]].n || null, basis: drugLabel(drugs[i]) + " resistance", note: note || null }); return;
+        out.push({ org: org, label: label, pct: Math.round(10 * (100 - d[drugs[i]].s)) / 10, n: d[drugs[i]].n || null, k: d[drugs[i]].k || null, basis: drugLabel(drugs[i]) + " resistance", note: note || null }); return;
       }
     }
     r("saureus", "MRSA", ["cefoxitin", "oxacillin"]);

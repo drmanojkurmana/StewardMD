@@ -79,8 +79,8 @@
     var head = info.borrowed ? '<div style="font:600 11.5px/1.4 system-ui;color:#B45309;margin-bottom:6px">No antibiogram is held for ' + esc(info.prof.name) + '; ICMR national figures are shown.</div>' : "";
     if (!rows.length) return head + note('<i>' + esc(org) + '</i>: no ' + (strat.only ? esc(strat.only.map(function (x) { return SPEC[x] || x; }).join(" or ")) + ' ' : '') + 'data in <b>' + esc(name) + '</b>' + (strat.only ? ' (for meningitis only CSF figures, read with meningitis breakpoints, apply)' : '') + '. Choose another source above, or open the full antibiogram.');
     var want = ctx.spec[0], fb = "";
-    if (want && !strat.specMatch) fb = "No " + (SPEC[want] || want) + " data in this source, so " + (SPEC[strat.spec] || strat.spec) + " is shown. ";
-    else if (strat.wantSet && strat.wantSet !== "all" && !strat.setMatch) fb = "No " + (SET[strat.wantSet] || strat.wantSet) + " figures here, so " + (SET[strat.set] || strat.set) + " are shown. ";
+    if (want && !strat.specMatch) fb = "This source has no " + (SPEC[want] || want) + " figures; the figures for " + (SPEC[strat.spec] || strat.spec) + " are shown instead" + (strat.spec === "all" ? " (they include urine isolates)" : "") + ". ";
+    else if (strat.wantSet && strat.wantSet !== "all" && !strat.setMatch) fb = "This source has no figures for " + (SET[strat.wantSet] || strat.wantSet) + "; the figures for " + (SET[strat.set] || strat.set) + " are shown instead. ";
     return head + (fb ? '<div style="font:600 11.5px/1.4 system-ui;color:#B45309;margin-bottom:6px">' + esc(fb) + '</div>' : "") + rows.map(function (o) { return orgBlock(t, o, name); }).join("");
   }
 

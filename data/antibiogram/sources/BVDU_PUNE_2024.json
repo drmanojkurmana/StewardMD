@@ -24,10 +24,11 @@
  },
  "notes": "Antibiogram section (pages 11 to 36) of the Bharati Hospital Pune antimicrobial policy version 11.0 (2025-2026). Rows kept: the overall hospital table (p12, set all, specimen all), the overall Candida table by specimen (p13, set all), the OPD Gram-negative and Gram-positive tables (pp15 to 16), and the ICU (\"Critical care\") Gram-negative, Gram-positive and Candida tables (pp18 to 20). Ward departments (Medicine, Surgery, Obstetrics and Gynaecology, Orthopaedics, Paediatrics) and the neonatal and paediatric ICUs have their own tables only, with no combined ward table, so they are listed in excluded; the report does not say whether the ICU tables include the NICU or PICU. Because no ward rows exist, a combination of the OPD and ICU rows is not a hospital-wide figure. The report prints \"Number of patients\" per organism row, used as n; it warns that organisms with fewer than 30 isolates are not statistically significant. Counts are the data labels of the top-10 isolate charts (overall p11, OPD pus and urine p14, ICU blood, urine, pus and respiratory p17); they cover only the charted organisms. Two chart labels are cut off: ICU urine \"Pseudomonas...\" (6) is recorded as Pseudomonas spp. and ICU respiratory \"Stenotrophomonas...\" (3) as S. maltophilia. Specimen totals printed beside the charts: OPD pus 451, urine 601; ICU blood 290, pus 142, respiratory 89, urine 140. The pus charts give more isolates than the pus antibiogram rows (OPD: E. coli 70 vs 39, K. pneumoniae 49 vs 26, P. aeruginosa 75 vs 51, S. aureus 134 vs 125, S. epidermidis 19 vs 12; ICU: E. coli 43 vs 17, K. pneumoniae 24 vs 12); urine, blood and respiratory counts match the tables. The report does not explain the difference. Several printed cells are implausible for the organism (for example K. pneumoniae daptomycin 0 and erythromycin 67 overall, P. aeruginosa cefuroxime 100 and co-trimoxazole 50 in OPD pus, P. aeruginosa amoxicillin-clavulanate 100 in ICU respiratory, E. coli ceftazidime 100 with ceftriaxone 12 in ICU urine); they are recorded as printed.",
  "issues": [
-  "Second reader 2026-09-26: every cell of the seven kept tables was read from the page images before comparing with the file: all 702 cells and all 63 row n. Text-layer tables (pp12, 13, 18, 19, 20) were rendered at scale 4 to 5 and cropped by column group; the OPD tables (pp15, 16), embedded pictures with no text layer, were read in full (not only the 40% asked) from the embedded images upscaled 1.4 to 2.8x. The seeded sample of 176 cells (sample_cells.py) is part of this. 0 transcription errors, nothing corrected. Specimen group and setting confirmed for every row (overall p12 and Candida p13 as set all, OPD pp15 to 16, ICU pp18 to 20); Tissue filed as deep, Fluid and Pleural fluid as sterile, Issatchenkia orientalis as C. krusei.",
+  "Second reader 2026-09-26: every cell of the seven kept tables was read from the page images before comparing with the file: all 702 cells and all 63 row n. Text-layer tables (pp12, 13, 18, 19, 20) were rendered at scale 4 to 5 and cropped by column group; the OPD tables (pp15, 16), embedded pictures with no text layer, were read in full (not only the 40% asked) from the embedded images upscaled 1.4 to 2.8x. The seeded sample of 176 cells is part of this. 0 transcription errors, nothing corrected. Specimen group and setting confirmed for every row (overall p12 and Candida p13 as set all, OPD pp15 to 16, ICU pp18 to 20); Tissue filed as deep, Fluid and Pleural fluid as sterile, Issatchenkia orientalis as C. krusei.",
   "Second reader: all 67 chart counts (p11, the p14 embedded charts, p17) re-read: 0 errors. The 7 count-table mismatches are printed that way (source inconsistency; the row notes give the right figures): OPD pus E. coli 70 in the chart vs 39 in the table, K. pneumoniae 49 vs 26, P. aeruginosa 75 vs 51, S. aureus 134 vs 125, S. epidermidis 19 vs 12; ICU pus E. coli 43 vs 17, K. pneumoniae 24 vs 12.",
   "Second reader: the 37 cells the validator does not keep (5 caution, 26 intrinsic, 6 hidden) are all printed as recorded, including E. cloacae overall cefotaxime 0 with ceftriaxone 63 and tetracycline 100 with minocycline 0, S. pyogenes overall ampicillin 90 (penicillin 100), K. pneumoniae overall daptomycin 0 and erythromycin 67, P. aeruginosa OPD pus cefuroxime 100, co-trimoxazole 50 and minocycline 100, and P. aeruginosa ICU respiratory amoxicillin-clavulanate 100 and co-trimoxazole 0.",
-  "Second reader: CoNS species rows checked cell by cell and on the right rows: S. epidermidis overall (n=62) and OPD pus (n=12), S. haemolyticus overall (n=34). The 2024 tables print no S. hominis or Other CoNS row. Excluded values re-read and correct: the cefuroxime axetil columns (pp12, 15, 18), the Meyerozyma guilliermondii rows (p20), the p17 Candida and S. anginosus chart bars."
+  "Second reader: CoNS species rows checked cell by cell and on the right rows: S. epidermidis overall (n=62) and OPD pus (n=12), S. haemolyticus overall (n=34). The 2024 tables print no S. hominis or Other CoNS row. Excluded values re-read and correct: the cefuroxime axetil columns (pp12, 15, 18), the Meyerozyma guilliermondii rows (p20), the p17 Candida and S. anginosus chart bars.",
+  "Lead 2026-09-26 (review round 2): the 7 Gram-negative rows of the page 12 overall table are marked unreliable (values unchanged, as printed): its Gram-negative rows print levofloxacin 0% beside ciprofloxacin 11% for E. coli (953 isolates) and 37% for K. pneumoniae, levofloxacin 100% beside ciprofloxacin 15% for A. baumannii, and tetracycline or minocycline 100% for K. pneumoniae and E. cloacae (with minocycline 0% beside tetracycline 100% for E. cloacae). They are shown with a caution and never pooled or used by the console or reasoning; the page 15 to 19 location tables are unaffected."
  ],
  "rows": [
   {
@@ -66,6 +67,7 @@
     "minocycline": 100,
     "colistin": 100
    },
+   "unreliable": "its Gram-negative rows print levofloxacin 0% beside ciprofloxacin 11% for E. coli (953 isolates) and 37% for K. pneumoniae, levofloxacin 100% beside ciprofloxacin 15% for A. baumannii, and tetracycline or minocycline 100% for K. pneumoniae and E. cloacae (with minocycline 0% beside tetracycline 100% for E. cloacae)",
    "note": "Overall hospital table: all locations and all specimens together. n is the printed \"Number of patients\".",
    "specimen_as_printed": "all specimens (overall hospital table)"
   },
@@ -107,6 +109,7 @@
     "minocycline": 100,
     "colistin": 100
    },
+   "unreliable": "its Gram-negative rows print levofloxacin 0% beside ciprofloxacin 11% for E. coli (953 isolates) and 37% for K. pneumoniae, levofloxacin 100% beside ciprofloxacin 15% for A. baumannii, and tetracycline or minocycline 100% for K. pneumoniae and E. cloacae (with minocycline 0% beside tetracycline 100% for E. cloacae)",
    "note": "Overall hospital table: all locations and all specimens together. n is the printed \"Number of patients\".",
    "specimen_as_printed": "all specimens (overall hospital table)"
   },
@@ -135,6 +138,7 @@
     "minocycline": 100,
     "colistin": 100
    },
+   "unreliable": "its Gram-negative rows print levofloxacin 0% beside ciprofloxacin 11% for E. coli (953 isolates) and 37% for K. pneumoniae, levofloxacin 100% beside ciprofloxacin 15% for A. baumannii, and tetracycline or minocycline 100% for K. pneumoniae and E. cloacae (with minocycline 0% beside tetracycline 100% for E. cloacae)",
    "note": "Overall hospital table: all locations and all specimens together. n is the printed \"Number of patients\".",
    "specimen_as_printed": "all specimens (overall hospital table)"
   },
@@ -162,6 +166,7 @@
     "minocycline": 100,
     "colistin": 99
    },
+   "unreliable": "its Gram-negative rows print levofloxacin 0% beside ciprofloxacin 11% for E. coli (953 isolates) and 37% for K. pneumoniae, levofloxacin 100% beside ciprofloxacin 15% for A. baumannii, and tetracycline or minocycline 100% for K. pneumoniae and E. cloacae (with minocycline 0% beside tetracycline 100% for E. cloacae)",
    "note": "Overall hospital table: all locations and all specimens together. n is the printed \"Number of patients\".",
    "specimen_as_printed": "all specimens (overall hospital table)"
   },
@@ -198,6 +203,7 @@
     "fosfomycin": 0,
     "minocycline": 0
    },
+   "unreliable": "its Gram-negative rows print levofloxacin 0% beside ciprofloxacin 11% for E. coli (953 isolates) and 37% for K. pneumoniae, levofloxacin 100% beside ciprofloxacin 15% for A. baumannii, and tetracycline or minocycline 100% for K. pneumoniae and E. cloacae (with minocycline 0% beside tetracycline 100% for E. cloacae)",
    "note": "Overall hospital table: all locations and all specimens together. n is the printed \"Number of patients\".",
    "specimen_as_printed": "all specimens (overall hospital table)"
   },
@@ -223,6 +229,7 @@
     "meropenem": 92,
     "minocycline": 76
    },
+   "unreliable": "its Gram-negative rows print levofloxacin 0% beside ciprofloxacin 11% for E. coli (953 isolates) and 37% for K. pneumoniae, levofloxacin 100% beside ciprofloxacin 15% for A. baumannii, and tetracycline or minocycline 100% for K. pneumoniae and E. cloacae (with minocycline 0% beside tetracycline 100% for E. cloacae)",
    "note": "Overall hospital table: all locations and all specimens together. n is the printed \"Number of patients\".",
    "specimen_as_printed": "all specimens (overall hospital table)"
   },
@@ -412,6 +419,7 @@
     "ceftazidime": 0,
     "minocycline": 67
    },
+   "unreliable": "its Gram-negative rows print levofloxacin 0% beside ciprofloxacin 11% for E. coli (953 isolates) and 37% for K. pneumoniae, levofloxacin 100% beside ciprofloxacin 15% for A. baumannii, and tetracycline or minocycline 100% for K. pneumoniae and E. cloacae (with minocycline 0% beside tetracycline 100% for E. cloacae)",
    "note": "Overall hospital table: all locations and all specimens together. n is the printed \"Number of patients\".",
    "specimen_as_printed": "all specimens (overall hospital table)"
   },

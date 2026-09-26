@@ -128,9 +128,11 @@ and oxacillin answer for each other.
 Specimen preference list + setting per syndrome: UTI urine (OPD for cystitis/pyelonephritis, inpatient for
 complicated/catheter); pneumonia respiratory (ICU for VAP and severe CAP); SSTI pus then deep; meningitis
 CSF, sterile fluids, blood; cholangitis/SBP sterile fluids then blood; sepsis/FN/IE/device blood; enteric
-fever blood; diarrhoea stool; "all specimens except urine" last for non-urinary syndromes. A syndrome never
-gets a different specimen's figures (no urine data for meningitis): the result is empty instead, and the
-panel says which specimen was used when it fell back.
+fever blood; diarrhoea stool; "all specimens except urine" next for non-urinary syndromes, then (except CNS
+syndromes, `noAll`) "all specimens", which includes urine isolates: a source that prints only an
+all-specimen table is still used, and the console says so ("the figures for all specimens are shown instead
+(they include urine isolates)"). A syndrome never gets a different named specimen's figures (no urine data
+for meningitis): the result is empty instead.
 
 Setting fallbacks stay in the syndrome's world (`candidates`): ICU or ward syndromes fall back to all
 inpatients, then all settings; outpatient syndromes to all settings only (never ICU figures); CNS
@@ -197,6 +199,27 @@ it matched, and says so when nothing did.
   point says "reported as". The WISCA "no data" share uses each source's exact setting count.
 - Order when data change: `node scripts/abg-register.mjs` THEN `node scripts/build-antibiogram.mjs`
   (the register goes into the bundle). Commit `antibiogram-store.js` too: the build writes its ABG_V.
+- **Review round 2 checks (2026-09-26)** in `validateRow`, each a caution only when the two figures describe
+  (nearly) the same isolates (tested numbers within 25%; ICMR tests levofloxacin on a subset):
+  ciprofloxacin/levofloxacin gap over 35 (all bacteria), and for Enterobacterales and staphylococci
+  ciprofloxacin or ofloxacin more than 10 above levofloxacin; imipenem/meropenem gap over 25 for
+  Enterobacterales except the Proteeae, over 30 for P. aeruginosa and Acinetobacter (not Burkholderia or
+  Stenotrophomonas); penicillin/ampicillin (or amoxicillin) gap over 25 in streptococci; ampicillin or
+  amoxicillin more than 10 above amoxicillin-clavulanate or ampicillin-sulbactam. `unusualReason` adds
+  S. aureus teicoplanin under 90, beta-haemolytic streptococci vancomycin or linezolid under 95, and
+  Gram-positive tigecycline under 90. High-level gentamicin/streptomycin outside enterococci is hidden.
+- **Row flags from the lead**: `unreliable: "what is inconsistent"` makes every figure of a row a caution
+  (BVDU Pune 2024 page 12 Gram-negative rows; SKNMC Pune 2024 Pseudomonas lists); `untested: {drug: why}`
+  turns a printed 0 that means "not tested" into a caution (RIMS Imphal 2023-24 blood cefazolin).
+- **Pools need 3 institutions** (store `POOL_MIN_K`, counted by hospital name so a hospital's second
+  series is not a second institution): a pooled cell from 1 or 2 is a caution that names them, never used by
+  the console or reasoning; phenotype cards and cell sheets say how many institutions; a region with fewer
+  than 3 has no pooled scope or profile (South and East, 2026-09-26). Urinary agents and fosfomycin rank
+  only for urine.
+- **Bundle layout**: repeated row strings (table names, notes, how a row was combined) are indices into
+  `strs`; per-source notes, reporting, method, how it was read, second-reader notes and exclusions live in
+  `kb/antibiogram/antibiogram-detail.json`, fetched when a source sheet opens (`ABG_STORE.detail(id)`); the
+  sheet shows `summary` (first sentences of the notes) and a plain checking status. build-www copies both.
 - **Fungal series**: an institution whose fungal antibiogram is a separate issue (Sir Ganga Ram Hospital's
   second newsletter issue each year, `SGRH_FUNGAL_<year>`) gets its own `inst` (`SGRH_DELHI_FUNGAL`,
   short "Sir Ganga Ram Hospital, fungal"). Under the bacterial `inst` a fungal and a bacterial issue of

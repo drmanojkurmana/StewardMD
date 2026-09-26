@@ -27,7 +27,8 @@
  "issues": [
   "Second reader 2026-09-26: the PDF has no text layer but is not a raster scan: every page is vector outlines, so renders at scale 3 to 4 are sharp. All 809 cells, all 78 row n and all 110 counts re-read from those renders and written down before comparing (this includes the seeded sample of 202 cells over all 13 tables): 0 corrected. Organism, specimen, setting, phenotype and page agree for all 78 rows; the rotated Table 1.3 (p8) was read turned upright.",
   "Second reader: all 58 cells the validator does not keep (31 cautions, 27 intrinsic) are printed as recorded, including E. coli imipenem 27.8 (blood) and 35.8 (urine) against meropenem 55.6 and 64.4, and E. faecalis vancomycin 100 in the p24 Total column against 97.7 in its ward column (conflict entry kept).",
-  "Second reader: the 7 count mismatches are printed that way: Table 1.3 (p8) prints 10 superficial-infection Enterobacter spp. against 11 in the p11 table; Table 1.2 (p7) prints P. aeruginosa 439 (OPD 94) and E. faecium 196 (ward 123) against 438 (93) on p19 and p21 and 195 (122) on p24; p14 prints Staphylococcus spp. 93 and S. epidermidis 50 against 92 and 49 on p17."
+  "Second reader: the 7 count mismatches are printed that way: Table 1.3 (p8) prints 10 superficial-infection Enterobacter spp. against 11 in the p11 table; Table 1.2 (p7) prints P. aeruginosa 439 (OPD 94) and E. faecium 196 (ward 123) against 438 (93) on p19 and p21 and 195 (122) on p24; p14 prints Staphylococcus spp. 93 and S. epidermidis 50 against 92 and 49 on p17.",
+  "Lead 2026-09-26 (review round 2): blood cefazolin 0 (every organism, 9 rows) marked untested: the report prints 0 for agents it did not test, so these are not resistance rates."
  ],
  "rows": [
   {
@@ -51,6 +52,9 @@
     "meropenem": 55.6,
     "minocycline": 66.7,
     "piptazo": 2.8
+   },
+   "untested": {
+    "cefazolin": "the blood table prints cefazolin 0 for every organism, and the report prints 0 for agents it did not test"
    },
    "specimen_as_printed": "Blood",
    "note": "Imipenem is printed far lower than meropenem in this row (as printed in the source)."
@@ -77,6 +81,9 @@
     "minocycline": 100,
     "piptazo": 100
    },
+   "untested": {
+    "cefazolin": "the blood table prints cefazolin 0 for every organism, and the report prints 0 for agents it did not test"
+   },
    "specimen_as_printed": "Blood"
   },
   {
@@ -100,6 +107,9 @@
     "meropenem": 0,
     "minocycline": 100,
     "piptazo": 0
+   },
+   "untested": {
+    "cefazolin": "the blood table prints cefazolin 0 for every organism, and the report prints 0 for agents it did not test"
    },
    "specimen_as_printed": "Blood"
   },
@@ -125,6 +135,9 @@
     "minocycline": 69.2,
     "piptazo": 4
    },
+   "untested": {
+    "cefazolin": "the blood table prints cefazolin 0 for every organism, and the report prints 0 for agents it did not test"
+   },
    "specimen_as_printed": "Blood"
   },
   {
@@ -148,6 +161,9 @@
     "meropenem": 100,
     "minocycline": 50,
     "piptazo": 0
+   },
+   "untested": {
+    "cefazolin": "the blood table prints cefazolin 0 for every organism, and the report prints 0 for agents it did not test"
    },
    "specimen_as_printed": "Blood",
    "note": "Cefotaxime and ceftriaxone differ widely in this row as printed in the source."
@@ -174,6 +190,9 @@
     "minocycline": 100,
     "piptazo": 50
    },
+   "untested": {
+    "cefazolin": "the blood table prints cefazolin 0 for every organism, and the report prints 0 for agents it did not test"
+   },
    "specimen_as_printed": "Blood"
   },
   {
@@ -197,6 +216,9 @@
     "meropenem": 100,
     "minocycline": 66.7,
     "piptazo": 0
+   },
+   "untested": {
+    "cefazolin": "the blood table prints cefazolin 0 for every organism, and the report prints 0 for agents it did not test"
    },
    "specimen_as_printed": "Blood"
   },
@@ -222,6 +244,9 @@
     "minocycline": 0,
     "piptazo": 0
    },
+   "untested": {
+    "cefazolin": "the blood table prints cefazolin 0 for every organism, and the report prints 0 for agents it did not test"
+   },
    "specimen_as_printed": "Blood"
   },
   {
@@ -245,6 +270,9 @@
     "meropenem": 33.3,
     "minocycline": 33.3,
     "piptazo": 33.3
+   },
+   "untested": {
+    "cefazolin": "the blood table prints cefazolin 0 for every organism, and the report prints 0 for agents it did not test"
    },
    "specimen_as_printed": "Blood",
    "note": "Cefotaxime and ceftriaxone differ widely in this row as printed in the source."

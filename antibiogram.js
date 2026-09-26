@@ -1035,6 +1035,8 @@
   var _rotateDismissed = false;  // once dismissed (auto or manual), never re-show until next open()
   function showRotateHint() {
     if (_rotateDismissed || !root || root.querySelector("#abgRotate")) return;
+    // Once per device: a hint that returns on every portrait open only covers the screen.
+    try { if (localStorage.getItem("smd_abg_rotate_seen") === "1") return; localStorage.setItem("smd_abg_rotate_seen", "1"); } catch (e) {}
     var h = document.createElement("div");
     h.className = "abg-rotate"; h.id = "abgRotate";
     h.innerHTML = '<span class="abg-rotate-ic">' + abIco("refresh") + '</span><span class="abg-rotate-tx">Rotate for a wider view</span>';
@@ -1881,7 +1883,7 @@
       ".abg-toast{position:fixed;left:50%;bottom:40px;transform:translateX(-50%) translateY(10px);background:#0F172A;color:#fff;font:600 13px var(--f);padding:11px 18px;border-radius:12px;z-index:970;opacity:0;transition:.2s;pointer-events:none;max-width:88vw;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.3)}",
       ".abg-toast.on{opacity:1;transform:translateX(-50%)}",
       /* Rotate Hint — iOS notification style */
-      ".abg-rotate{position:fixed;left:50%;top:calc(12px + env(safe-area-inset-top));transform:translateX(-50%) translateY(-50px);display:flex;align-items:center;gap:8px;background:rgba(28,28,30,.88);-webkit-backdrop-filter:blur(20px) saturate(1.6);backdrop-filter:blur(20px) saturate(1.6);color:rgba(255,255,255,.92);font:600 13px/1 -apple-system,BlinkMacSystemFont,var(--f);padding:10px 16px;border-radius:100px;z-index:990;opacity:0;transition:opacity .3s ease,transform .35s cubic-bezier(.2,.8,.4,1);box-shadow:0 2px 12px rgba(0,0,0,.18);cursor:pointer;-webkit-tap-highlight-color:transparent}",
+      ".abg-rotate{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(50px);display:flex;align-items:center;gap:8px;background:rgba(28,28,30,.88);-webkit-backdrop-filter:blur(20px) saturate(1.6);backdrop-filter:blur(20px) saturate(1.6);color:rgba(255,255,255,.92);font:600 13px/1 -apple-system,BlinkMacSystemFont,var(--f);padding:10px 16px;border-radius:100px;z-index:990;opacity:0;transition:opacity .3s ease,transform .35s cubic-bezier(.2,.8,.4,1);box-shadow:0 2px 12px rgba(0,0,0,.18);cursor:pointer;-webkit-tap-highlight-color:transparent}",
       ".abg-rotate.on{opacity:1;transform:translateX(-50%) translateY(0)}",
       ".abg-rotate-ic{display:flex;align-items:center}.abg-rotate-ic svg{width:15px;height:15px;opacity:.7}",
       ".abg-rotate-tx{white-space:nowrap;letter-spacing:-.01em}",

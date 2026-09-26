@@ -121,7 +121,7 @@
     if (!p.length) return "";
     return '<div class="v2-ph" role="list" aria-label="Resistance phenotypes">' + p.map(function (x) {
       var cls = x.pct >= 50 ? "hi" : x.pct >= 20 ? "mid" : "lo";
-      return '<div class="v2-phc ' + cls + '" role="listitem"><div class="v2-php">' + num(x.pct) + '%</div><div class="v2-phl">' + esc(x.label) + '</div><div class="v2-phn">' + esc(x.basis) + (x.n ? ", " + fmtN(x.n) + " isolates" : "") + "</div></div>";
+      return '<div class="v2-phc ' + cls + '" role="listitem"><div class="v2-php">' + num(x.pct) + '%</div><div class="v2-phl">' + esc(x.label) + '</div><div class="v2-phn">' + esc(x.basis) + (x.n ? ", " + fmtN(x.n) + " isolates" : "") + (x.k ? ", " + x.k + " institutions" : "") + "</div></div>";
     }).join("") + "</div>";
   }
   function cellHtml(o, d) {
@@ -289,7 +289,7 @@
     var cc = c.cell;
     if (cc && cc.act === "keep" && typeof cc.s === "number") {
       h += '<div class="v2-big ' + band(cc.s) + '">' + num(cc.s) + "% susceptible</div>";
-      h += '<div class="v2-mut">' + (c.pooled ? "Pooled from " + cc.k + " institution" + (cc.k === 1 ? "" : "s") + ", " + fmtN(cc.nt) + " isolates" + (cc.k > 1 ? "; range " + num(cc.min) + " to " + num(cc.max) + "%" : "") : fmtN(cc.nt || c.n) + " isolates tested") + ".</div>";
+      h += '<div class="v2-mut">' + (c.pooled ? "Pooled from " + (cc.kh || cc.k) + " institution" + ((cc.kh || cc.k) === 1 ? "" : "s") + ", " + fmtN(cc.nt) + " isolates" + (cc.k > 1 ? "; range " + num(cc.min) + " to " + num(cc.max) + "%" : "") : fmtN(cc.nt || c.n) + " isolates tested") + ".</div>";
       if (c.pooled) h += bpNote(org, drug, c.parts.filter(function (p) { return p.act === "keep"; }).map(function (p) { return { year: p.src.year, src: p.src }; }), "pool");
       if (cc.fromR) h += '<div class="v2-mut">Reported as ' + num(100 - cc.s) + "% resistant; intermediate results are counted as susceptible here.</div>";
       else if (cc.mixR) h += '<div class="v2-mut">Some institutions report % resistant; for those, intermediate results are counted as susceptible.</div>';
@@ -396,22 +396,44 @@
     }
     return h + "</div>";
   }
+  var CHECKED = {
+    "double-checked": "read from the source and re-read by a second, independent reader against the page images",
+    "single-checked": "read from the source and checked once against the page images",
+    transcribed: "transcribed from a published summary table without isolate numbers; never pooled"
+  };
+  function detailHtml(s, d) {
+    if (!d) return '<p class="v2-mut">The detail could not be loaded. Check the connection and open the sheet again.</p>';
+    var h = "";
+    if (d.notes && d.notes !== s.summary) h += "<h4>About this report</h4><p>" + esc(d.notes) + "</p>";
+    if (d.reporting) h += "<h4>What it reports</h4><p>" + esc(d.reporting) + "</p>";
+    if (d.method) h += "<h4>Method</h4><p>" + esc(d.method) + "</p>";
+    if (d.checking) h += "<h4>How the figures were read</h4><p>" + esc(d.checking) + "</p>";
+    if (d.issues && d.issues.length) h += "<h4>Notes from the second reader</h4><ul class=\"v2-parts\">" + d.issues.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>";
+    if (d.excluded && d.excluded.length) h += "<h4>Left out at extraction</h4><ul class=\"v2-parts\">" + d.excluded.map(function (x) { return "<li>" + esc(((x.org || "") + " " + (x.drug || "")).trim() || x.what || "") + ": " + esc(x.why) + "</li>"; }).join("") + "</ul>";
+    return h || '<p class="v2-mut">Nothing further is recorded for this report.</p>';
+  }
+  function fillDetail(api) {
+    var el = api.root.querySelector("#abgV2Sheet .v2-det"); if (!el) return;
+    var id = el.getAttribute("data-src"), s = S().sourceById(id);
+    S().detail(id).then(function (d) { if (el.isConnected !== false) el.innerHTML = detailHtml(s, d); });
+  }
   function srcSheet(id) {
     var s = S().sourceById(id); if (!s) return "";
     var fl = S().flagged(id), eds = S().editions(s.inst);
     var h = '<div class="v2-sh"><div class="v2-shh"><b>' + esc(s.name) + '</b><button class="v2-x" data-v2="sheet-close" aria-label="Close">Close</button></div>' +
       '<div class="v2-mut">' + esc([s.city, s.state].filter(Boolean).join(", ")) + " · " + esc(s.period || s.year) + " · " + esc(s.sector) + "</div>" +
-      "<p>" + esc(s.citation) + "</p>" + (s.notes ? '<p class="v2-mut">' + esc(s.notes) + "</p>" : "") +
+      "<p>" + esc(s.citation) + "</p>" + (s.summary ? '<p class="v2-mut">' + esc(s.summary) + "</p>" : "") +
       "<p><b>Breakpoints:</b> " + esc(s.bp || "the source does not state its interpretive standard or edition") + "</p>" +
-      "<p><b>Checking:</b> " + esc((s.verification && s.verification.note) || "") + "</p>" +
+      "<p><b>Checking:</b> " + esc(CHECKED[s.verification && s.verification.status] || "") + "</p>" +
       (s.url ? '<button class="v2-btn" data-v2="open-url" data-url="' + esc(s.url) + '">Open the source document</button>' : "") +
       (s.page ? '<button class="v2-btn" data-v2="open-url" data-url="' + esc(s.page) + '">Open the web page that lists it</button>' : "") +
       '<button class="v2-btn" data-v2="view-src" data-id="' + esc(s.id) + '">View this antibiogram</button>';
     if (eds.length > 1) h += "<h4>Editions</h4><ul class=\"v2-parts\">" + eds.map(function (e) { return '<li><button class="v2-link" data-v2="view-src" data-id="' + esc(e.id) + '">' + esc(e.edLabel || e.year) + "</button> " + esc(e.period || "") + "</li>"; }).join("") + "</ul>";
     if (s.checks && s.checks.length) h += "<h4>The source's own tables disagree</h4><ul class=\"v2-parts\">" + s.checks.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul><p class=\"v2-mut\">Figures are shown as printed. Isolate numbers in these rows come from the antibiogram table.</p>";
     if (s.copies && s.copies.length) h += "<h4>Figures repeated from another table or edition</h4><ul class=\"v2-parts\">" + s.copies.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul><p class=\"v2-mut\">Figures that repeat another row value for value are almost certainly copied, not new data; they are shown with a caution and are not pooled or used by reasoning.</p>";
-    if (s.issues && s.issues.length) h += "<h4>Notes from the second reader</h4><ul class=\"v2-parts\">" + s.issues.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>";
-    if (s.excluded && s.excluded.length) h += "<h4>Left out at extraction</h4><ul class=\"v2-parts\">" + s.excluded.map(function (x) { return "<li>" + esc((x.org || "") + " " + (x.drug || "")) + ": " + esc(x.why) + "</li>"; }).join("") + "</ul>";
+    // The full notes, how the report was read and what was left out are long and mostly for
+    // auditors: collapsed, and fetched only when the sheet opens (detailHtml fills it).
+    if (!s.local) h += '<details class="v2-more"><summary>How this report was read, and what was left out</summary><div class="v2-det" data-src="' + esc(s.id) + '">Loading&hellip;</div></details>';
     if (fl.length) h += "<h4>Figures with a check (" + fl.length + ")</h4><ul class=\"v2-parts\">" + fl.map(function (x) {
       return "<li><i>" + esc(R().orgShort(x.org)) + (x.pheno ? " (" + esc(x.pheno) + ")" : "") + "</i>, " + esc(R().drugLabel(x.drug)) + " " + (typeof x.s === "number" ? num(x.s) + "%" : "") + " (" + esc(R().SPECIMENS[x.spec].label) + ", " + lc(esc(R().SETTINGS[x.set].label)) + "): <b>" + esc({ intrinsic: "intrinsic", hide: "not relevant", suppress: "not shown", caution: "caution" }[x.act]) + "</b>, " + esc(x.why) + "</li>";
     }).join("") + "</ul>";
@@ -521,7 +543,7 @@
       else saveText(pdfHtml(), "antibiogram.html", "text/html");
       return true;
     }
-    if (a === "src") { sheet(api, srcSheet(b.getAttribute("data-id"))); return true; }
+    if (a === "src") { sheet(api, srcSheet(b.getAttribute("data-id"))); fillDetail(api); return true; }
     if (a === "view-src") { var s = S().sourceById(b.getAttribute("data-id")); if (s) { st.scope = s.kind === "network" ? "src:" + s.id : (s.latest ? "inst:" + s.inst : "src:" + s.id); st.spec = null; persist(); sheet(api, ""); api.setTab("resistance"); } return true; }
     if (a === "imp-mode") { st.impMode = b.getAttribute("data-v"); st.imp = null; api.render(); return true; }
     if (a === "imp-measure") { st.impMeasure = b.getAttribute("data-v") === "R" ? "R" : "S"; if (b.getAttribute("data-rerun") && st.imp) { rerunImport(api); return true; } st.imp = null; api.render(); return true; }
@@ -638,7 +660,10 @@
     ".v2-parts li.v2-dim{opacity:.62}.v2-pl{font:600 13px var(--f)}.v2-bar2{position:relative;height:18px;background:var(--line);border-radius:6px;margin-top:4px;overflow:hidden}",
     ".v2-bar2 i{position:absolute;left:0;top:0;bottom:0;background:var(--tl)}.v2-bar2 i.b5{background:#15803d}.v2-bar2 i.b4{background:#65a30d}.v2-bar2 i.b3{background:#eab308}.v2-bar2 i.b2{background:#fb923c}.v2-bar2 i.b1{background:#b91c1c}",
     ".v2-bar2 span{position:relative;font:800 11.5px/18px var(--f);padding-left:6px;color:var(--ink);mix-blend-mode:normal}.v2-spark{width:220px;height:60px;color:var(--tl);margin-top:6px}.v2-spark circle{fill:currentColor}.v2-spark text{fill:var(--ink)}",
-    "@media (min-width:760px){.v2-sh{border-radius:18px;margin-bottom:6vh}#abgV2Sheet{align-items:center}}"
+    "@media (min-width:760px){.v2-sh{border-radius:18px;margin-bottom:6vh}#abgV2Sheet{align-items:center}}",
+    // Phones: a narrower organism column leaves room for more drug columns (names wrap to two lines).
+    "@media (max-width:480px){.v2-oh,.v2-o{min-width:96px;max-width:108px}.v2-o button{font-size:12px;padding:7px 6px;white-space:normal;line-height:1.25}.v2-dh{min-width:36px}}",
+    ".v2-more{margin-top:14px;border-top:1px solid var(--line);padding-top:10px}.v2-more>summary{cursor:pointer;font:700 13px var(--f);color:var(--ink);padding:6px 0;list-style-position:inside}.v2-det p{margin:6px 0;color:var(--ink)}"
   ].join("");
 
   window.ABG_V2 = { on: on, render: render, click: click, change: change, input: input, css: css, state: st,

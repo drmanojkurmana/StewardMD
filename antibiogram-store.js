@@ -21,7 +21,7 @@
  * ======================================================================================== */
 (function () {
   "use strict";
-  var ABG_V = "f148dc834706";
+  var ABG_V = "1cecdcb0b9ea";
   var R = window.ABG_RULES;
   var ACT = { k: "keep", i: "intrinsic", h: "hide", x: "suppress", c: "caution" };
   var LOCAL_KEY = "smd_abg_local";
@@ -44,6 +44,8 @@
     var latest = {};
     srcs.forEach(function (s) { if (!latest[s.inst] || s.ord > latest[s.inst].ord) latest[s.inst] = s; });
     srcs.forEach(function (s) { s.latest = latest[s.inst] === s; });
+    // Row extras may be indices into the bundle's string table (schema 3).
+    var strs = b.strs || [], str = function (v) { return v == null ? null : typeof v === "number" ? (strs[v] == null ? null : strs[v]) : v; };
     var rows = b.rows.map(function (r) {
       var cells = {}, x = r[9] || {}, fromR = x.m === "R";
       Object.keys(r[6]).forEach(function (d) {
@@ -51,11 +53,26 @@
         cells[d] = typeof c === "number" ? { s: c, act: "keep", nt: null, why: null, fromR: fromR } : { s: c[0], act: ACT[c[1]], nt: c[2] == null ? null : c[2], why: c[3] == null ? null : why[c[3]], fromR: fromR };
       });
       return { src: srcs[r[0]], spec: r[1], set: r[2], org: r[3], pheno: r[4], n: r[5], cells: cells, flags: r[7] || [], derived: !!r[8],
-        as: x.as || null, q: x.q || null, trend: x.t || null, notes: x.no || null, page: x.p || null, how: x.d || null,
-        measure: fromR ? "R" : "S", table: x.tb || null, cohort: x.co || null, note: x.nn || null, spAs: x.sp || null, nFrom: x.nf ? "counts" : null };
+        as: str(x.as), q: x.q || null, trend: x.t || null, notes: x.no ? notesOf(x.no, str) : null, page: x.p || null, how: str(x.d),
+        measure: fromR ? "R" : "S", table: str(x.tb), cohort: x.co || null, note: str(x.nn), spAs: str(x.sp), nFrom: x.nf ? "counts" : null };
     });
     var counts = (b.counts || []).map(function (c) { return { src: srcs[c[0]], spec: c[1], set: c[2], org: c[3], n: c[4] }; });
     return { version: b.version, sources: srcs, rows: rows, counts: counts, register: b.register || [], census: b.census || null, stats: b.stats || {} };
+  }
+  function notesOf(no, str) { var o = {}; Object.keys(no).forEach(function (d) { o[d] = str(no[d]); }); return o; }
+  /* Per-source detail (full notes, how the report was read, second-reader notes, what was left out),
+   * fetched once, the first time a source sheet asks. Resolves to the source's record or null. */
+  var DETAIL = null, detailLoading = null;
+  function detail(id) {
+    if (DETAIL) return Promise.resolve(DETAIL[id] || null);
+    if (!detailLoading) {
+      if (typeof fetch !== "function") return Promise.resolve(null);
+      detailLoading = fetch("/kb/antibiogram/antibiogram-detail.json?v=" + encodeURIComponent(ABG_V))
+        .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+        .then(function (j) { DETAIL = (j && j.sources) || {}; return DETAIL; })
+        .catch(function () { detailLoading = null; return null; });
+    }
+    return detailLoading.then(function (d) { return d ? (d[id] || null) : null; });
   }
   function load() {
     if (B) return Promise.resolve(B);
@@ -103,9 +120,11 @@
   /* Scope ids: "india", "region:north", "src:<ID>", "inst:<INST>" (latest edition), "local". */
   function scopes() {
     if (!B) return [];
-    var out = [{ id: "india", label: "India: all institutions (pooled)", group: "Pooled" }];
+    var out = [{ id: "india", label: "India, pooled (" + poolInstitutions(null) + " institutions)", group: "Pooled" }];
     ["north", "south", "east", "west"].forEach(function (r) {
-      if (B.sources.some(function (s) { return poolable(s) && s.region === r; })) out.push({ id: "region:" + r, label: REGION_LABEL[r] + " (pooled)", group: "Pooled", region: r });
+      // A region with fewer than 3 institutions has no pool: its hospitals are listed on their own.
+      var nI = poolInstitutions(r);
+      if (nI >= POOL_MIN_K) out.push({ id: "region:" + r, label: REGION_LABEL[r] + ", pooled (" + nI + " institutions)", group: "Pooled", region: r });
     });
     B.sources.filter(function (s) { return s.kind === "network" && s.latest; }).sort(function (a, b) { return (a.region === "national" ? 0 : 1) - (b.region === "national" ? 0 : 1) || (a.short < b.short ? -1 : 1); })
       .forEach(function (s) { out.push({ id: "src:" + s.id, label: s.short + " " + (s.edLabel || s.year) + (s.verification.status === "transcribed" ? " (summary, no isolate counts)" : ""), group: "Surveillance networks", src: s }); });
@@ -136,6 +155,16 @@
     return [];
   }
   function isPooled(scope) { return scope === "india" || /^region:/.test(scope); }
+  // A pooled figure (a cell, a phenotype rate, a region) needs this many institutions behind it.
+  var POOL_MIN_K = 3;
+  // Institutions a pooled scope draws on (distinct inst of poolable sources).
+  // Counted by hospital name: a hospital's separate series (SGRH's fungal issues, AIIMS Rishikesh's
+  // MICU report) are one institution.
+  function poolInstitutions(region) {
+    var seen = {};
+    (B ? B.sources : []).forEach(function (s) { if (poolable(s) && (!region || s.region === region)) seen[s.name || s.inst] = 1; });
+    return Object.keys(seen).length;
+  }
   function strata(scope) {
     var key = "s|" + scope; if (memo[key]) return memo[key];
     var sp = {}, st = {};
@@ -187,6 +216,15 @@
           var p = pooled[d], rs = g.filter(function (r) { return p.parts.some(function (x) { return x.src === r.src.id; }); });
           var nR = rs.filter(function (r) { return r.measure === "R"; }).length;
           cells[d] = { s: p.s, act: "keep", nt: p.n, k: p.k, min: p.min, max: p.max, parts: p.parts, fromR: nR > 0 && nR === rs.length, mixR: nR > 0 && nR < rs.length };
+          // A pool of one or two institutions is those institutions, not a regional or national
+          // figure: shown with a caution that names them, never used by the console or reasoning.
+          var hosp = {}, names = p.parts.map(function (x) { var so = sourceById(x.src); if (so) hosp[so.name || so.inst] = 1; return so ? so.short + " " + (so.edLabel || so.year) : x.src; });
+          var kh = Object.keys(hosp).length || p.k;
+          cells[d].kh = kh;
+          if (kh < POOL_MIN_K) {
+            cells[d].act = "caution";
+            cells[d].why = "from " + (kh === 1 ? "one institution" : kh + " institutions") + " only (" + names.join("; ") + "); a pooled figure needs at least " + POOL_MIN_K;
+          }
           drugs[d] = 1;
         });
         // Intrinsic resistance is a property of the organism: show it even when pooled.
@@ -221,7 +259,7 @@
     t.orgs.forEach(function (o) {
       if (o.pheno) return;
       if (!t.pooled && (o.lowN || o.noN)) return;
-      var d = {}; Object.keys(o.cells).forEach(function (k) { var c = o.cells[k]; if (c.act === "keep" && typeof c.s === "number") d[k] = { s: c.s, n: c.nt || o.n }; });
+      var d = {}; Object.keys(o.cells).forEach(function (k) { var c = o.cells[k]; if (c.act === "keep" && typeof c.s === "number") d[k] = { s: c.s, n: c.nt || o.n, k: t.pooled ? (c.kh || c.k || null) : null }; });
       by[o.org] = d;
     });
     return R.phenoRates(by);
@@ -293,6 +331,9 @@
     t.drugs.forEach(function (d) {
       if (R.DRUGS[d] && R.DRUGS[d].kind === "antifungal") return;
       if (opts.noReserve && R.aware(d) === "R") return;
+      // Urinary agents (nitrofurantoin, norfloxacin; fosfomycin, whose breakpoints are urinary) rank
+      // only for urine: an "all specimens" table would otherwise put fosfomycin first for sepsis.
+      if (spec !== "urine" && (R.URINE_ONLY.indexOf(d) >= 0 || d === "fosfomycin")) return;
       var w = wisca(scope, spec, set, [d], opts);
       if (w.coverage == null || w.knownPct < (opts.minKnown || 50)) return;
       out.push({ drug: d, coverage: w.coverage, knownPct: w.knownPct, aware: R.aware(d) });
@@ -623,7 +664,7 @@
     table: table, cell: cell, phenotypes: phenotypes, wisca: wisca, rank: rank, mix: mix, trend: trend,
     susceptibility: susceptibility, legacyAbg: legacyAbg, specimenFor: specimenFor, specimenChain: specimenChain, settingFor: settingFor, synCtx: synCtx, synDrug: synDrug,
     pickStratum: pickStratum, pickStratumFor: pickStratumFor, orgRows: orgRows, usable: usable,
-    sourceById: sourceById, editions: editions, flagged: flagged, csv: csv, exportInfo: exportInfo, sortDrugs: sortDrugs,
+    sourceById: sourceById, detail: detail, editions: editions, flagged: flagged, csv: csv, exportInfo: exportInfo, sortDrugs: sortDrugs,
     localGet: localGet, localSave: localSave, localClear: localClear,
     REGION_LABEL: REGION_LABEL, _expand: expand, poolFrom: function () { return (B && B.stats && B.stats.poolFrom) || null; },
     _set: function (b) { B = expand(JSON.parse(JSON.stringify(b))); clearMemo(); addLocal(); return B; }

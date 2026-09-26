@@ -31,6 +31,9 @@ const SOURCES = [
   src({ id: "B_2024", inst: "B", institution: "Beta College", short: "Beta", region: "north", year: 2024, rows: [
     { spec: "blood", set: "all", org: "E. coli", n: 300, s: { meropenem: 60, ceftriaxone: 10 } },
     { spec: "blood", set: "all", org: "Klebsiella pneumoniae", n: 20, s: { meropenem: 10 } }] }),
+  // A third institution: a pooled figure needs at least 3 behind it (store POOL_MIN_K).
+  src({ id: "D_2024", inst: "D", institution: "Delta Hospital", short: "Delta", region: "north", year: 2024, rows: [
+    { spec: "blood", set: "all", org: "E. coli", n: 100, s: { meropenem: 70, ceftriaxone: 20 } }] }),
   src({ id: "C_2024", inst: "C", institution: "Gamma Study", short: "Gamma", region: "south", kind: "study", year: 2024, rows: [
     { spec: "urine", set: "all", org: "E. coli", n: 150, s: { ceftriaxone: 50, cefotaxime: 90 } }] }),   // pair check: caution
   src({ id: "N_2024", inst: "N", institution: "National Network", short: "NatNet", region: "national", kind: "network", sector: "network", measure: "R", year: 2024, rows: [
@@ -63,10 +66,15 @@ test("scopes: India, regions with institutions, networks apart, latest edition p
 test("pooled table: latest edition only, rows under 30 left out, networks never mixed in", () => {
   const t = S.table("india", "blood", "all");
   const ec = t.orgs.find((o) => o.org === "ecoli");
-  assert.equal(ec.cells.meropenem.s, 65, "(100*80 + 300*60)/400; A_2023 and the network ignored");
-  assert.equal(ec.cells.meropenem.k, 2);
+  assert.equal(ec.cells.meropenem.s, 66, "(100*80 + 300*60 + 100*70)/500; A_2023 and the network ignored");
+  assert.equal(ec.cells.meropenem.k, 3);
+  assert.equal(ec.cells.meropenem.act, "keep", "three institutions: a pooled figure");
   const kp = t.orgs.find((o) => o.org === "klebsiella");
   assert.equal(kp.cells.meropenem.s, 40, "Beta's 20-isolate row is not pooled");
+  // One institution is not a pool: shown with a caution that names it, never used downstream.
+  assert.equal(kp.cells.meropenem.act, "caution");
+  assert.match(kp.cells.meropenem.why, /from one institution only \(Alpha 2024\); a pooled figure needs at least 3/);
+  assert.equal(S.susceptibility("Klebsiella pneumoniae", "meropenem", { scope: "india", spec: ["blood"] }), null, "a one-institution 'pool' never reaches the console or reasoning");
   assert.equal(kp.cells.ampicillin.act, "intrinsic", "intrinsic shows even when pooled");
 });
 
@@ -109,7 +117,7 @@ test("susceptibility: intrinsic, low n, species for a genus, group for a species
   const typhi = S.susceptibility("S. Typhi", "ciprofloxacin", { scope: "inst:A", spec: ["blood"] });
   assert.equal(typhi.s, 10);
   const ec = S.susceptibility("E. coli", "meropenem", { scope: "india", spec: ["blood"] });
-  assert.equal(ec.s, 65);
+  assert.equal(ec.s, 66);
   assert.equal(ec.pooled, true);
 });
 
@@ -245,7 +253,7 @@ test("pools use recent data: an institution's latest antibiogram older than the 
   const S4 = load(); S4._set(buildBundle(SOURCES.concat(extra), []).bundle);
   assert.equal(S4.poolFrom(), 2020, "newest institution year 2024 minus 4");
   const ec = S4.table("india", "blood", "all").orgs.find((o) => o.org === "ecoli");
-  assert.equal(ec.cells.meropenem.s, 65, "the 2012 antibiogram does not move the pooled figure");
+  assert.equal(ec.cells.meropenem.s, 66, "the 2012 antibiogram does not move the pooled figure");
   assert.ok(S4.scopes().some((x) => x.id === "inst:OLD"), "it is still viewable on its own");
 });
 
@@ -281,4 +289,36 @@ test("CSV export carries the source, period, data version, figures with a cautio
   assert.match(csv, /cefotaxime and ceftriaxone should give nearly the same result/i);
   const info = S7.exportInfo(t, "Lambda");
   assert.equal(info.cautions.length, 2);
+});
+
+test("review round 2: a region pool needs 3 institutions, and says how many", () => {
+  const S7 = load(SOURCES.concat([
+    src({ id: "S1_2024", inst: "S1", institution: "South One", short: "SouthOne", region: "south", year: 2024, rows: [{ spec: "blood", set: "all", org: "E. coli", n: 100, s: { meropenem: 70 } }] }),
+    src({ id: "S2_2024", inst: "S2", institution: "South Two", short: "SouthTwo", region: "south", year: 2024, rows: [{ spec: "blood", set: "all", org: "E. coli", n: 100, s: { meropenem: 60 } }] })]));
+  const sc = S7.scopes(), ids = sc.map((x) => x.id);
+  assert.ok(!ids.includes("region:south"), "two hospitals are not a regional pool");
+  assert.ok(ids.includes("inst:S1") && ids.includes("inst:S2"), "each is still listed on its own");
+  assert.match(sc.find((x) => x.id === "region:north").label, /3 institutions/);
+});
+
+test("review round 2: urinary agents rank only for urine", () => {
+  const S8 = load([
+    src({ id: "U1_2024", inst: "U1", institution: "U One", short: "U1", region: "west", year: 2024, rows: [
+      { spec: "all", set: "all", org: "E. coli", n: 300, s: { fosfomycin: 99, nitrofurantoin: 95, meropenem: 80, amikacin: 85 } }] })]);
+  const all = S8.rank("inst:U1", "all", "all").map((x) => x.drug);
+  assert.ok(!all.includes("fosfomycin") && !all.includes("nitrofurantoin"), "not ranked for all specimens: " + all.join(","));
+  assert.ok(all.includes("meropenem"));
+});
+
+test("review round 2: repeated strings are stored once and restored on load; the detail file is fetched on demand", async () => {
+  const b = buildBundle(SOURCES.concat([src({ id: "T_2024", inst: "T", institution: "Tee", short: "Tee", region: "west", year: 2024, notes: "First sentence. Second one.", rows: [
+    { spec: "blood", set: "all", org: "E. coli", n: 100, table: "Table 3: blood isolates", notes: { meropenem: "printed 80*" }, s: { meropenem: 80 } },
+    { spec: "urine", set: "all", org: "E. coli", n: 100, table: "Table 3: blood isolates", s: { meropenem: 85 } }] })]), []);
+  assert.ok(Array.isArray(b.bundle.strs) && b.bundle.strs.filter((x) => x === "Table 3: blood isolates").length === 1);
+  assert.equal(b.detail.sources.T_2024.notes, "First sentence. Second one.");
+  assert.equal(b.bundle.sources.find((x) => x.id === "T_2024").notes, undefined, "full notes live in the detail file");
+  const S9 = load(); S9._set(b.bundle);
+  const r = S9.table("inst:T", "blood", "all").orgs[0];
+  assert.equal(r.table, "Table 3: blood isolates"); assert.equal(r.notes.meropenem, "printed 80*");
+  assert.equal(await S9.detail("T_2024"), null, "no fetch in this context: resolves to null, never throws");
 });

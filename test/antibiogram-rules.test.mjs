@@ -320,3 +320,46 @@ test("summary import: a % resistant file read as % susceptible is caught (intrin
   assert.equal(h.suggest, "R");
   assert.equal(R.importSummaryCsv("organism,specimen,setting,n,Meropenem %S\nEscherichia coli,urine,opd,300,95\n").suggest, null);
 });
+
+test("review round 2: agents of one class that contradict each other are cautions, when they describe the same isolates", () => {
+  // BVDU Pune 2024 p12: E. coli levofloxacin 0% beside ciprofloxacin 11% (953 isolates).
+  const e = row({ org: "ecoli", n: 953, s: { ciprofloxacin: 11, levofloxacin: 0 } });
+  assert.equal(e.cells.levofloxacin.act, "caution"); assert.match(e.cells.levofloxacin.why, /also levofloxacin-susceptible/);
+  // Acinetobacter levofloxacin 100% beside ciprofloxacin 15%.
+  assert.equal(row({ org: "acinetobacter", s: { ciprofloxacin: 15, levofloxacin: 100 } }).cells.ciprofloxacin.act, "caution");
+  // ICMR: levofloxacin tested on 67 of 318 E. cloacae is a different subset, not a contradiction.
+  assert.equal(row({ org: "ecloacae", n: 318, s: { ciprofloxacin: 56.6, levofloxacin: 25.4 }, nt: { ciprofloxacin: 318, levofloxacin: 67 } }).cells.levofloxacin.act, "keep");
+  // Imipenem vs meropenem: Enterobacterales (not Proteeae), P. aeruginosa and Acinetobacter.
+  assert.equal(row({ org: "enterobacter", s: { imipenem: 20, meropenem: 80 } }).cells.imipenem.act, "caution");
+  assert.equal(row({ org: "pmirabilis", s: { imipenem: 20, meropenem: 95 } }).cells.imipenem.act, "keep", "Proteus: raised imipenem MICs are expected");
+  assert.equal(row({ org: "paeruginosa", s: { imipenem: 0, meropenem: 60 } }).cells.imipenem.act, "caution", "SKNMC Pune urine");
+  assert.equal(row({ org: "paeruginosa", s: { imipenem: 45, meropenem: 70 } }).cells.imipenem.act, "keep", "OprD loss: a moderate gap is real");
+  assert.equal(row({ org: "bcepacia", s: { imipenem: 10, meropenem: 80 } }).cells.imipenem.act, "keep", "imipenem is not a test agent for Burkholderia");
+  // Streptococci: penicillin and ampicillin move together.
+  assert.equal(row({ org: "spneumoniae", s: { penicillin: 100, ampicillin: 0 } }).cells.penicillin.act, "caution");
+  // A beta-lactamase inhibitor cannot lower susceptibility.
+  assert.equal(row({ org: "ecoli", s: { ampicillin: 60, amoxiclav: 30 } }).cells.amoxiclav.act, "caution");
+  assert.equal(row({ org: "ecoli", s: { ampicillin: 20, amoxiclav: 45 } }).cells.amoxiclav.act, "keep");
+});
+
+test("review round 2: exceptional Gram-positive results need confirmation", () => {
+  assert.equal(row({ org: "saureus", s: { teicoplanin: 66.7 } }).cells.teicoplanin.act, "caution", "GMC Srinagar 2024");
+  assert.equal(row({ org: "saureus", s: { teicoplanin: 99 } }).cells.teicoplanin.act, "keep");
+  assert.equal(row({ org: "strep_bhs", s: { vancomycin: 80.8 } }).cells.vancomycin.act, "caution", "AIIMS Bhopal 2024 H2");
+  assert.equal(row({ org: "strep_bhs", s: { linezolid: 90 } }).cells.linezolid.act, "caution");
+  assert.equal(row({ org: "saureus", s: { tigecycline: 0 } }).cells.tigecycline.act, "caution");
+  assert.equal(row({ org: "efaecium", s: { tigecycline: 96 } }).cells.tigecycline.act, "keep");
+});
+
+test("review round 2: an unreliable table, a 0 that means not tested, and high-level gentamicin outside enterococci", () => {
+  const u = row({ org: "klebsiella", s: { tetracycline: 100, meropenem: 40, ampicillin: 0 }, unreliable: "levofloxacin 0% beside ciprofloxacin 37%" });
+  assert.equal(u.cells.tetracycline.act, "caution"); assert.equal(u.cells.meropenem.act, "caution");
+  assert.match(u.cells.meropenem.why, /not internally consistent/);
+  assert.equal(u.cells.ampicillin.act, "intrinsic", "intrinsic resistance is still shown as such");
+  const z = row({ org: "ecoli", s: { cefazolin: 0, meropenem: 90 }, untested: { cefazolin: "0 for every organism in the table" } });
+  assert.equal(z.cells.cefazolin.act, "caution"); assert.match(z.cells.cefazolin.why, /probably means not tested/);
+  assert.equal(z.cells.meropenem.act, "keep");
+  assert.equal(row({ org: "klebsiella", s: { gentamicin_hl: 0 } }).cells.gentamicin_hl.act, "hide");
+  assert.equal(row({ org: "saureus", s: { gentamicin_hl: 90 } }).cells.gentamicin_hl.act, "hide");
+  assert.equal(row({ org: "efaecalis", s: { gentamicin_hl: 60 } }).cells.gentamicin_hl.act, "keep");
+});
