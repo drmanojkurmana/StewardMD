@@ -41,7 +41,8 @@
     { "id": "inj_sample_urine", "label": "Urine sample preserved, sealed and labelled", "type": "check" },
     { "id": "inj_sample_gastric", "label": "Vomitus or gastric aspirate preserved", "type": "check" },
     { "id": "inj_sample_articles", "label": "Clothes, weapon or foreign body sealed and handed over", "type": "check" },
-    { "id": "inj_sample_handover", "label": "Samples handed to (name, number, date and time)", "type": "text", "hint": "chain of custody" }
+    { "id": "inj_sample_custody", "label": "Sealed samples kept until handover by (designated person and place)", "type": "text", "hint": "chain of custody: the doctor or hospital is responsible until the samples reach the police or laboratory" },
+    { "id": "inj_sample_handover", "label": "Samples handed to (name, number, date and time)", "type": "text", "hint": "chain of custody: list each sealed item and get the receiver's signature" }
    ]
   },
   {
@@ -77,7 +78,7 @@
    "id": "sexual-violence-examination",
    "title": "Sexual violence: examination and evidence (MoHFW 2014)",
    "target": "local_examination",
-   "alert": "MoHFW 2014: never do a per-vaginal (two-finger) test to establish sexual violence; a per-vaginal examination is done only in an adult woman when medically indicated. The size of the vaginal introitus and the state of the hymen have no bearing on sexual violence, so document only findings relevant to this assault, such as fresh tears, bleeding or oedema. Do not record past sexual conduct or give any opinion on habituation to sexual intercourse. First aid and treatment are free and must not wait for a police requisition or FIR: inform the police, and give full care even if the survivor does not wish to take part in the investigation.",
+   "alert": "Never do a per-vaginal (two-finger) test to establish sexual violence (MoHFW 2014; Supreme Court 2013 and 2022, which holds anyone who conducts it guilty of misconduct); a per-vaginal examination is done only in an adult woman when medically indicated. The size of the vaginal introitus and the state of the hymen have no bearing on sexual violence, so document only findings relevant to this assault, such as fresh tears, bleeding or oedema. Do not record past sexual conduct or give any opinion on habituation to sexual intercourse. First aid and treatment are free and must not wait for a police requisition or FIR: inform the police, and give full care even if the survivor does not wish to take part in the investigation.",
    "fields": [
     { "id": "sv_consent_recorded", "label": "Written informed consent recorded (of the parent or guardian for a child under 12)", "type": "check" },
     { "id": "sv_female_present", "label": "Examined by a woman doctor, or with a female attendant present", "type": "check" },
@@ -89,7 +90,8 @@
     { "id": "sv_ev_clothes", "label": "Clothes worn at the time collected and sealed", "type": "check" },
     { "id": "sv_ev_blood_urine", "label": "Blood and urine samples collected", "type": "check" },
     { "id": "sv_ev_trace", "label": "Debris, loose hair and nail clippings collected", "type": "check" },
-    { "id": "sv_ev_handover", "label": "Sealed evidence handed to (name, number, date and time)", "type": "text", "hint": "chain of custody" }
+    { "id": "sv_ev_custody", "label": "Sealed evidence kept until handover by (designated person and place)", "type": "text", "hint": "chain of custody: the doctor or hospital is responsible until the evidence reaches the police or laboratory" },
+    { "id": "sv_ev_handover", "label": "Sealed evidence handed to (name, number, date and time)", "type": "text", "hint": "chain of custody: list each sealed item and get the receiver's signature" }
    ]
   },
   {
@@ -163,12 +165,12 @@
    "id": "cause-of-death-certificate",
    "title": "Cause of death certificate (for the family)",
    "target": "follow_up_advice",
-   "text": "The doctor gives the medical certificate of cause of death to the Registrar with the death report, and a copy to the nearest relative. The cause of death is kept confidential and is not shown on the death certificate issued by the Registrar."
+   "text": "If the death happens in hospital, the hospital sends the Medical Certificate of Cause of Death (MCCD, Form 4) to the Registrar and gives a copy to the nearest relative. If the death happens at home or elsewhere and a doctor was treating the person, the doctor gives the MCCD (Form 4A) to the family, who hand it to the local Registrar (municipality or panchayat) when they report the death. The Registrar then issues the death certificate. The cause of death is kept confidential and is not shown on the death certificate."
   }
  ],
  "sources": [
   { "org": "Ministry of Health and Family Welfare, Government of India", "title": "Guidelines and Protocols: Medico-legal care for survivors/victims of sexual violence", "year": 2014, "url": "https://www.mohfw.gov.in/sites/default/files/953522324.pdf" },
-  { "org": "Supreme Court of India", "title": "State of Jharkhand v. Shailendra Kumar Rai (two-finger test; quotes the MoHFW 2014 guidelines)", "year": 2022, "url": "https://indiankanoon.org/doc/196199017/" },
+  { "org": "Supreme Court of India", "title": "State of Jharkhand v. Shailendra Kumar Rai, 31 October 2022 (two-finger test is misconduct, para 68; cites Lillu v. State of Haryana, 2013, and quotes the MoHFW 2014 guidelines)", "year": 2022, "url": "https://indiankanoon.org/doc/196199017/" },
   { "org": "UNFPA India and Government of Maharashtra", "title": "Medical Examination of Survivors / Victims of Sexual Violence: A Handbook for Medical Officers", "year": 2017, "url": "https://india.unfpa.org/sites/default/files/pub-pdf/handbook_final_design.pdf" },
   { "org": "Office of the Registrar General, India", "title": "Physicians' Manual on Medical Certification of Cause of Death, fifth edition", "year": 2012, "url": "https://censusindia.gov.in/2011-Documents/mccd_Report1/Physician's_Manual_MCCD.pdf" },
   { "org": "Office of the Registrar General, India", "title": "Form No. 4 and 4A: Medical Certificate of Cause of Death (Registration of Births and Deaths Act, 1969, amended in 2023)", "year": 2023, "url": "https://dc.crsorgi.gov.in/assets/download/MCCD_Form.pdf" }

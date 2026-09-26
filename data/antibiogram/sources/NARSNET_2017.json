@@ -1,0 +1,934 @@
+{
+ "id": "NARSNET_2017",
+ "kind": "network",
+ "inst": "NARSNET",
+ "institution": "National Centre for Disease Control, National AMR Surveillance Network (NARS-Net)",
+ "short": "NARS-Net",
+ "city": "New Delhi",
+ "state": "Delhi",
+ "region": "national",
+ "sector": "network",
+ "year": 2017,
+ "end": "2017-12",
+ "isolates": 25833,
+ "period": "Year 2017 (as printed: AMR data for year 2017)",
+ "published": "2018",
+ "url": "https://ncdc.mohfw.gov.in/uploads/pdf/amr39.pdf",
+ "page": "https://ncdc.mohfw.gov.in/includes/About/CentresAndDivision/amr.php",
+ "retrieved": "2026-09-26",
+ "citation": "National Centre for Disease Control. National AMR Surveillance Network: AMR Data for year 2017. New Delhi: National Programme for Containment of Antimicrobial Resistance, NCDC; 2018.",
+ "reporting": "Percent resistant (%R, up to one decimal) with number tested, by pathogen for blood, urine, pus aspirates with other sterile body fluids (one combined column) and pooled columns (blood + OSBF + PA, with or without urine), all location types combined. The location-type charts (ICU, IPD, OPD) print no data labels.",
+ "method": "Data from 10 of the 13 network laboratories (tertiary-care medical colleges) in WHONET format per the NCDC data management SOP; 25,833 unique patient isolates after validation. AST method and breakpoint standard not stated. Vancomycin results for S. aureus and Enterococcus were not considered by the report: the text says the test was not done by broth microdilution as per CLSI, and the Table 4 footnote says S. aureus was not tested by the screen agar method.",
+ "measure": "R",
+ "verification": {
+  "status": "double-checked",
+  "note": "Tables 3 to 9 parsed from the PDF text layer (pdfplumber extract_tables, cross-checked with the PyMuPDF text dump) and every value (number tested and %R, all 7 tables) then compared by eye with the pages rendered at scale 2.2 and with zoomed crops of each table at scale 3. Table 2 counts transcribed from the text layer, compared with the page and checked against its row and column totals (25,833). The figures quoted in the report text agree with the tables except the Pseudomonas ceftazidime 50% (table 50.7%, noted). All 12 figures were looked at: none has data labels, so no chart values were taken. Page numbers are PDF page numbers (1-based)."
+ },
+ "notes": "The earliest NARS-Net data summary on the NCDC listing (14 pages): 10 of 13 laboratories (S.no. 1 to 10: two in New Delhi, and Chandigarh, Kanpur, Jaipur, Ahmedabad, Pune, Mysore, Tiruchirappalli and Thiruvananthapuram), seven priority pathogens. All figures are percent resistant. The tables have no separate pus aspirate or other sterile body fluid columns: \"OSBF+PA\" (other sterile body fluids and pus aspirates in one column) is shown here under deep infections; the pooled \"Blood+OSBF+PA\" columns as all specimens except urine (S. aureus, Pseudomonas and Acinetobacter were not collected from urine, so for them this is every specimen under surveillance) and \"Blood+OSBF+PA+Urine\" as all specimens. The E. coli and Klebsiella tables have no OSBF+PA column. All rows combine location types (set all): the location-type bar charts (Figures 4 to 12) print no data labels, so there are no location rows. The pooled columns count slightly fewer isolates than the sum of their specimen columns (numbers tested and N; for example Acinetobacter N=2,160 against 1,008 + 1,187 = 2,195 in Table 2); printed as is. S. Typhi and S. Paratyphi are reported together (Table 9). Page numbers are PDF page numbers (the same as the printed ones).",
+ "issues": [
+  "Second reader 2026-09-26: the seeded sample of 40 of 130 cells was read from the page images before the extracted values were looked at, then every other cell as well: all 130 %R values with their numbers tested, all 19 row n (the column N) and all 21 Table 2 counts (pages rendered at scale 2.5, each table cropped at scale 3.5). 0 transcription errors, nothing corrected.",
+  "Second reader: the validator lists no cells not kept and no count-table mismatches. Organism, specimen column and setting of every row checked against the headers of Tables 3 to 9. The row notes are accurate: the Pseudomonas and Acinetobacter pooled headers print N=1,494 and N=2,160 against 1,498 and 2,195 in Table 2; the pooled Pseudomonas imipenem 29.9% (1,168 tested) is below both specimen columns (311 + 861 = 1,172 tested); the page 12 text gives 50% for Pseudomonas ceftazidime where Table 7 prints 50.7%.",
+  "Second reader: every other figure quoted in the text (pages 5, 7, 12 and 14) matches a cell of the table it cites. The bar charts (Figures 3 to 12) carry no data labels, so no location rows can be taken. Metadata confirmed on pages 1, 2 and 4 (data from 10 of 13 laboratories, S.no. 1 to 10; 25,833 isolates).",
+  "Lead 2026-09-26: the combined \"pus aspirate + other sterile body fluids\" column filed under specimen \"deep\" (deep infections, aspirates), as for the other NCDC-protocol reports; specimen as printed is kept on each row; 3 rows and 7 counts moved from \"pus\"."
+ ],
+ "rows": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "n": 2760,
+   "page": 5,
+   "table": "Table 3",
+   "r": {
+    "ampicillin": 58.1,
+    "erythromycin": 72.3,
+    "gentamicin_hl": 56.1,
+    "ciprofloxacin": 73.4,
+    "linezolid": 5.7,
+    "tetracycline": 44.9
+   },
+   "nt": {
+    "ampicillin": 1719,
+    "erythromycin": 1206,
+    "gentamicin_hl": 2180,
+    "ciprofloxacin": 1178,
+    "linezolid": 2459,
+    "tetracycline": 1068
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "erythromycin": "Erythromycin",
+    "gentamicin_hl": "Gentamicin (High)",
+    "ciprofloxacin": "Ciprofloxacin",
+    "linezolid": "Linezolid",
+    "tetracycline": "Tetracycline*"
+   },
+   "specimen_as_printed": "Blood+OSBF+PA+Urine",
+   "notes": {
+    "tetracycline": "printed \"Tetracycline*\"; the asterisk has no footnote"
+   },
+   "note": "Pooled column of Table 3 (blood, other sterile body fluids, pus aspirates and urine)."
+  },
+  {
+   "spec": "nonurine",
+   "set": "all",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "n": 923,
+   "page": 5,
+   "table": "Table 3",
+   "r": {
+    "ampicillin": 63,
+    "erythromycin": 73.1,
+    "gentamicin_hl": 50.6,
+    "ciprofloxacin": 68.8,
+    "linezolid": 8.6,
+    "tetracycline": 43.5
+   },
+   "nt": {
+    "ampicillin": 571,
+    "erythromycin": 590,
+    "gentamicin_hl": 688,
+    "ciprofloxacin": 754,
+    "linezolid": 754,
+    "tetracycline": 359
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "erythromycin": "Erythromycin",
+    "gentamicin_hl": "Gentamicin (High)",
+    "ciprofloxacin": "Ciprofloxacin",
+    "linezolid": "Linezolid",
+    "tetracycline": "Tetracycline*"
+   },
+   "specimen_as_printed": "Blood+OSBF+PA",
+   "notes": {
+    "tetracycline": "printed \"Tetracycline*\"; the asterisk has no footnote"
+   },
+   "note": "Pooled column of Table 3 (blood, other sterile body fluids and pus aspirates); N=923 = 620 blood + 303 OSBF+PA (Table 2)."
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "n": 1837,
+   "page": 5,
+   "table": "Table 3",
+   "r": {
+    "ampicillin": 55.8,
+    "erythromycin": 71.8,
+    "gentamicin_hl": 59,
+    "ciprofloxacin": 81.3,
+    "linezolid": 4.6,
+    "tetracycline": 45.7
+   },
+   "nt": {
+    "ampicillin": 1170,
+    "erythromycin": 631,
+    "gentamicin_hl": 1514,
+    "ciprofloxacin": 438,
+    "linezolid": 1728,
+    "tetracycline": 722
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "erythromycin": "Erythromycin",
+    "gentamicin_hl": "Gentamicin (High)",
+    "ciprofloxacin": "Ciprofloxacin",
+    "linezolid": "Linezolid",
+    "tetracycline": "Tetracycline*"
+   },
+   "specimen_as_printed": "Urine",
+   "notes": {
+    "tetracycline": "printed \"Tetracycline*\"; the asterisk has no footnote"
+   }
+  },
+  {
+   "spec": "nonurine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 4537,
+   "page": 6,
+   "table": "Table 4",
+   "r": {
+    "cefoxitin": 55.7,
+    "erythromycin": 63.4,
+    "clindamycin": 31.5,
+    "cotrimoxazole": 45.8,
+    "gentamicin": 32,
+    "ciprofloxacin": 55.9,
+    "linezolid": 1.7,
+    "doxycycline": 11.1,
+    "tetracycline": 19.5
+   },
+   "nt": {
+    "cefoxitin": 3732,
+    "erythromycin": 3256,
+    "clindamycin": 2841,
+    "cotrimoxazole": 2825,
+    "gentamicin": 3370,
+    "ciprofloxacin": 3259,
+    "linezolid": 3396,
+    "doxycycline": 695,
+    "tetracycline": 1546
+   },
+   "printed": {
+    "cefoxitin": "Cefoxitin",
+    "erythromycin": "Erythromycin",
+    "clindamycin": "Clindamycin",
+    "cotrimoxazole": "TMP/SMX",
+    "gentamicin": "Gentamycin",
+    "ciprofloxacin": "Ciprofloxacin",
+    "linezolid": "Linezolid",
+    "doxycycline": "Doxycycline",
+    "tetracycline": "Tetracycline"
+   },
+   "specimen_as_printed": "Blood+OSBF+PA",
+   "notes": {
+    "cefoxitin": "cefoxitin resistance is the MRSA proportion (the report calls cefoxitin the surrogate marker for mecA-mediated oxacillin resistance)"
+   },
+   "note": "Pooled column of Table 4: every S. aureus isolate reported (S. aureus was not collected from urine; Table 2 prints 0 urine isolates)."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 2317,
+   "page": 6,
+   "table": "Table 4",
+   "r": {
+    "cefoxitin": 57.1,
+    "erythromycin": 62.9,
+    "clindamycin": 32.7,
+    "cotrimoxazole": 46.2,
+    "gentamicin": 26.3,
+    "ciprofloxacin": 49.4,
+    "linezolid": 1.3,
+    "doxycycline": 7.9,
+    "tetracycline": 14.2
+   },
+   "nt": {
+    "cefoxitin": 2159,
+    "erythromycin": 2180,
+    "clindamycin": 1857,
+    "cotrimoxazole": 1423,
+    "gentamicin": 1834,
+    "ciprofloxacin": 2141,
+    "linezolid": 1885,
+    "doxycycline": 418,
+    "tetracycline": 918
+   },
+   "printed": {
+    "cefoxitin": "Cefoxitin",
+    "erythromycin": "Erythromycin",
+    "clindamycin": "Clindamycin",
+    "cotrimoxazole": "TMP/SMX",
+    "gentamicin": "Gentamycin",
+    "ciprofloxacin": "Ciprofloxacin",
+    "linezolid": "Linezolid",
+    "doxycycline": "Doxycycline",
+    "tetracycline": "Tetracycline"
+   },
+   "specimen_as_printed": "Blood",
+   "notes": {
+    "cefoxitin": "cefoxitin resistance is the MRSA proportion (the report calls cefoxitin the surrogate marker for mecA-mediated oxacillin resistance)"
+   }
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 2220,
+   "page": 6,
+   "table": "Table 4",
+   "r": {
+    "cefoxitin": 53.7,
+    "erythromycin": 64.5,
+    "clindamycin": 29.4,
+    "cotrimoxazole": 45.4,
+    "gentamicin": 38.7,
+    "ciprofloxacin": 68.3,
+    "linezolid": 2.2,
+    "doxycycline": 15.6,
+    "tetracycline": 27.2
+   },
+   "nt": {
+    "cefoxitin": 1590,
+    "erythromycin": 1092,
+    "clindamycin": 999,
+    "cotrimoxazole": 1413,
+    "gentamicin": 1552,
+    "ciprofloxacin": 1134,
+    "linezolid": 1529,
+    "doxycycline": 282,
+    "tetracycline": 633
+   },
+   "printed": {
+    "cefoxitin": "Cefoxitin",
+    "erythromycin": "Erythromycin",
+    "clindamycin": "Clindamycin",
+    "cotrimoxazole": "TMP/SMX",
+    "gentamicin": "Gentamycin",
+    "ciprofloxacin": "Ciprofloxacin",
+    "linezolid": "Linezolid",
+    "doxycycline": "Doxycycline",
+    "tetracycline": "Tetracycline"
+   },
+   "specimen_as_printed": "OSBF+PA (other sterile body fluids + pus aspirates)",
+   "notes": {
+    "cefoxitin": "cefoxitin resistance is the MRSA proportion (the report calls cefoxitin the surrogate marker for mecA-mediated oxacillin resistance)"
+   },
+   "note": "Pus aspirates and other sterile body fluids are one column in this report; they cannot be separated."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 8445,
+   "page": 7,
+   "table": "Table 5",
+   "r": {
+    "ampicillin": 85.1,
+    "cefotaxime": 80.2,
+    "ceftazidime": 66,
+    "cefepime": 72.1,
+    "ertapenem": 30.9,
+    "imipenem": 30.5,
+    "ciprofloxacin": 73.2
+   },
+   "nt": {
+    "ampicillin": 3011,
+    "cefotaxime": 5568,
+    "ceftazidime": 2648,
+    "cefepime": 2427,
+    "ertapenem": 2846,
+    "imipenem": 2147,
+    "ciprofloxacin": 4312
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefotaxime": "Cefotaxime",
+    "ceftazidime": "Ceftazidime",
+    "cefepime": "Cefepime",
+    "ertapenem": "Ertapenem",
+    "imipenem": "Imipenem",
+    "ciprofloxacin": "Ciprofloxacin"
+   },
+   "specimen_as_printed": "Blood+OSBF+PA+Urine",
+   "note": "Pooled column of Table 5 (blood, other sterile body fluids, pus aspirates and urine); the table has no separate OSBF+PA column (1,030 isolates in Table 2)."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 496,
+   "page": 7,
+   "table": "Table 5",
+   "r": {
+    "ampicillin": 85.6,
+    "cefotaxime": 81.4,
+    "ceftazidime": 73,
+    "cefepime": 68.3,
+    "ertapenem": 36.7,
+    "imipenem": 25.2,
+    "ciprofloxacin": 58.1
+   },
+   "nt": {
+    "ampicillin": 222,
+    "cefotaxime": 301,
+    "ceftazidime": 222,
+    "cefepime": 240,
+    "ertapenem": 251,
+    "imipenem": 349,
+    "ciprofloxacin": 453
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefotaxime": "Cefotaxime",
+    "ceftazidime": "Ceftazidime",
+    "cefepime": "Cefepime",
+    "ertapenem": "Ertapenem",
+    "imipenem": "Imipenem",
+    "ciprofloxacin": "Ciprofloxacin"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 6919,
+   "page": 7,
+   "table": "Table 5",
+   "r": {
+    "ampicillin": 84.3,
+    "cefotaxime": 79.3,
+    "ceftazidime": 62.3,
+    "cefepime": 72.3,
+    "ertapenem": 30.8,
+    "imipenem": 34,
+    "ciprofloxacin": 76.1
+   },
+   "nt": {
+    "ampicillin": 2338,
+    "cefotaxime": 4755,
+    "ceftazidime": 2054,
+    "cefepime": 1926,
+    "ertapenem": 2233,
+    "imipenem": 1260,
+    "ciprofloxacin": 3106
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefotaxime": "Cefotaxime",
+    "ceftazidime": "Ceftazidime",
+    "cefepime": "Cefepime",
+    "ertapenem": "Ertapenem",
+    "imipenem": "Imipenem",
+    "ciprofloxacin": "Ciprofloxacin"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "n": 6209,
+   "page": 9,
+   "table": "Table 6",
+   "r": {
+    "cefotaxime": 82.8,
+    "ceftazidime": 68.7,
+    "cefepime": 82.3,
+    "ertapenem": 53,
+    "imipenem": 48.4,
+    "ciprofloxacin": 65.2,
+    "cotrimoxazole": 71.3
+   },
+   "nt": {
+    "cefotaxime": 4371,
+    "ceftazidime": 1437,
+    "cefepime": 2304,
+    "ertapenem": 2969,
+    "imipenem": 2365,
+    "ciprofloxacin": 4039,
+    "cotrimoxazole": 4241
+   },
+   "printed": {
+    "cefotaxime": "Cefotaxime",
+    "ceftazidime": "Ceftazidime",
+    "cefepime": "Cefepime",
+    "ertapenem": "Ertapenem",
+    "imipenem": "Imipenem",
+    "ciprofloxacin": "Cipro",
+    "cotrimoxazole": "TMP/SMX"
+   },
+   "specimen_as_printed": "Blood+OSBF+PA+Urine",
+   "note": "Pooled column of Table 6 (blood, other sterile body fluids, pus aspirates and urine); the table has no separate OSBF+PA column (1,480 isolates in Table 2)."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "n": 1341,
+   "page": 9,
+   "table": "Table 6",
+   "r": {
+    "cefotaxime": 90.2,
+    "ceftazidime": 84.1,
+    "cefepime": 81.6,
+    "ertapenem": 52.2,
+    "imipenem": 43.5,
+    "ciprofloxacin": 54.6,
+    "cotrimoxazole": 84.6
+   },
+   "nt": {
+    "cefotaxime": 971,
+    "ceftazidime": 378,
+    "cefepime": 586,
+    "ertapenem": 734,
+    "imipenem": 749,
+    "ciprofloxacin": 1241,
+    "cotrimoxazole": 623
+   },
+   "printed": {
+    "cefotaxime": "Cefotaxime",
+    "ceftazidime": "Ceftazidime",
+    "cefepime": "Cefepime",
+    "ertapenem": "Ertapenem",
+    "imipenem": "Imipenem",
+    "ciprofloxacin": "Cipro",
+    "cotrimoxazole": "TMP/SMX"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "n": 3388,
+   "page": 9,
+   "table": "Table 6",
+   "r": {
+    "cefotaxime": 79.8,
+    "ceftazidime": 49.7,
+    "cefepime": 84.3,
+    "ertapenem": 55.8,
+    "imipenem": 57.9,
+    "ciprofloxacin": 74.7,
+    "cotrimoxazole": 68.6
+   },
+   "nt": {
+    "cefotaxime": 2628,
+    "ceftazidime": 577,
+    "cefepime": 1264,
+    "ertapenem": 1644,
+    "imipenem": 822,
+    "ciprofloxacin": 1624,
+    "cotrimoxazole": 3148
+   },
+   "printed": {
+    "cefotaxime": "Cefotaxime",
+    "ceftazidime": "Ceftazidime",
+    "cefepime": "Cefepime",
+    "ertapenem": "Ertapenem",
+    "imipenem": "Imipenem",
+    "ciprofloxacin": "Cipro",
+    "cotrimoxazole": "TMP/SMX"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "nonurine",
+   "set": "all",
+   "org": "Pseudomonas species",
+   "pheno": null,
+   "n": 1494,
+   "page": 12,
+   "table": "Table 7",
+   "r": {
+    "piptazo": 31.6,
+    "ceftazidime": 50.7,
+    "imipenem": 29.9,
+    "amikacin": 39.3,
+    "tobramycin": 38.9,
+    "ciprofloxacin": 45.3
+   },
+   "nt": {
+    "piptazo": 1144,
+    "ceftazidime": 1268,
+    "imipenem": 1168,
+    "amikacin": 1240,
+    "tobramycin": 265,
+    "ciprofloxacin": 1301
+   },
+   "printed": {
+    "piptazo": "Piperacillin-tazobactam",
+    "ceftazidime": "Ceftazidime",
+    "imipenem": "Imipenem",
+    "amikacin": "Amikacin",
+    "tobramycin": "Tobramycin",
+    "ciprofloxacin": "Ciprofloxacin"
+   },
+   "specimen_as_printed": "Blood+OSBF+PA",
+   "notes": {
+    "ceftazidime": "the text on page 12 gives 50% for ceftazidime overall; the table prints 50.7%",
+    "imipenem": "the pooled 29.9% is below both specimen columns (blood 30.2%, OSBF+PA 30.1%); the pooled column counts 4 fewer isolates tested (1,168 against 311 + 861 = 1,172)"
+   },
+   "note": "Pooled column of Table 7 (Pseudomonas was not collected from urine). The header prints N=1,494, but Table 2 gives 1,498 Pseudomonas isolates (383 blood + 1,115 OSBF+PA)."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Pseudomonas species",
+   "pheno": null,
+   "n": 383,
+   "page": 12,
+   "table": "Table 7",
+   "r": {
+    "piptazo": 23,
+    "ceftazidime": 47.1,
+    "imipenem": 30.2,
+    "amikacin": 36.4,
+    "tobramycin": 30.3,
+    "ciprofloxacin": 36
+   },
+   "nt": {
+    "piptazo": 304,
+    "ceftazidime": 340,
+    "imipenem": 311,
+    "amikacin": 319,
+    "tobramycin": 76,
+    "ciprofloxacin": 350
+   },
+   "printed": {
+    "piptazo": "Piperacillin-tazobactam",
+    "ceftazidime": "Ceftazidime",
+    "imipenem": "Imipenem",
+    "amikacin": "Amikacin",
+    "tobramycin": "Tobramycin",
+    "ciprofloxacin": "Ciprofloxacin"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Pseudomonas species",
+   "pheno": null,
+   "n": 1115,
+   "page": 12,
+   "table": "Table 7",
+   "r": {
+    "piptazo": 34.9,
+    "ceftazidime": 52.3,
+    "imipenem": 30.1,
+    "amikacin": 40.5,
+    "tobramycin": 42.6,
+    "ciprofloxacin": 48.9
+   },
+   "nt": {
+    "piptazo": 842,
+    "ceftazidime": 932,
+    "imipenem": 861,
+    "amikacin": 925,
+    "tobramycin": 190,
+    "ciprofloxacin": 955
+   },
+   "printed": {
+    "piptazo": "Piperacillin-tazobactam",
+    "ceftazidime": "Ceftazidime",
+    "imipenem": "Imipenem",
+    "amikacin": "Amikacin",
+    "tobramycin": "Tobramycin",
+    "ciprofloxacin": "Ciprofloxacin"
+   },
+   "specimen_as_printed": "OSBF+PA (other sterile body fluids + pus aspirates)",
+   "note": "Pus aspirates and other sterile body fluids are one column in this report; they cannot be separated."
+  },
+  {
+   "spec": "nonurine",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "pheno": null,
+   "n": 2160,
+   "page": 13,
+   "table": "Table 8",
+   "r": {
+    "imipenem": 66.1,
+    "ceftazidime": 79.4,
+    "cefotaxime": 84.1,
+    "amikacin": 65.6,
+    "gentamicin": 59.5,
+    "minocycline": 53
+   },
+   "nt": {
+    "imipenem": 1677,
+    "ceftazidime": 1216,
+    "cefotaxime": 866,
+    "amikacin": 1828,
+    "gentamicin": 1045,
+    "minocycline": 268
+   },
+   "printed": {
+    "imipenem": "Imipenem",
+    "ceftazidime": "Ceftazidime",
+    "cefotaxime": "Cefotaxime",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamycin",
+    "minocycline": "Minocycline"
+   },
+   "specimen_as_printed": "Blood+OSBF+PA",
+   "note": "Pooled column of Table 8 (Acinetobacter was not collected from urine). The header prints N=2,160, but Table 2 gives 2,195 Acinetobacter isolates (1,008 blood + 1,187 OSBF+PA)."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "pheno": null,
+   "n": 1008,
+   "page": 13,
+   "table": "Table 8",
+   "r": {
+    "imipenem": 58.3,
+    "ceftazidime": 73.6,
+    "cefotaxime": 79.2,
+    "amikacin": 57.8,
+    "gentamicin": 51.1,
+    "minocycline": 54
+   },
+   "nt": {
+    "imipenem": 825,
+    "ceftazidime": 655,
+    "cefotaxime": 331,
+    "amikacin": 881,
+    "gentamicin": 509,
+    "minocycline": 137
+   },
+   "printed": {
+    "imipenem": "Imipenem",
+    "ceftazidime": "Ceftazidime",
+    "cefotaxime": "Cefotaxime",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamycin",
+    "minocycline": "Minocycline"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "pheno": null,
+   "n": 1187,
+   "page": 13,
+   "table": "Table 8",
+   "r": {
+    "imipenem": 73.9,
+    "ceftazidime": 85.9,
+    "cefotaxime": 86.9,
+    "amikacin": 73.2,
+    "gentamicin": 67.5,
+    "minocycline": 52.2
+   },
+   "nt": {
+    "imipenem": 886,
+    "ceftazidime": 589,
+    "cefotaxime": 544,
+    "amikacin": 980,
+    "gentamicin": 545,
+    "minocycline": 134
+   },
+   "printed": {
+    "imipenem": "Imipenem",
+    "ceftazidime": "Ceftazidime",
+    "cefotaxime": "Cefotaxime",
+    "amikacin": "Amikacin",
+    "gentamicin": "Gentamycin",
+    "minocycline": "Minocycline"
+   },
+   "specimen_as_printed": "OSBF+PA (other sterile body fluids + pus aspirates)",
+   "note": "Pus aspirates and other sterile body fluids are one column in this report; they cannot be separated."
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Salmonella Typhi and Paratyphi",
+   "pheno": null,
+   "n": 189,
+   "page": 14,
+   "table": "Table 9",
+   "r": {
+    "ampicillin": 18.5,
+    "chloramphenicol": 9.5,
+    "ceftriaxone": 0,
+    "nalidixic_acid": 91.6,
+    "ciprofloxacin": 27.4,
+    "cotrimoxazole": 10.6,
+    "azithromycin": 4.5
+   },
+   "nt": {
+    "ampicillin": 157,
+    "chloramphenicol": 147,
+    "ceftriaxone": 176,
+    "nalidixic_acid": 155,
+    "ciprofloxacin": 175,
+    "cotrimoxazole": 142,
+    "azithromycin": 89
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "chloramphenicol": "Chloramphenicol",
+    "ceftriaxone": "Ceftriaxone",
+    "nalidixic_acid": "Nalidixic acid",
+    "ciprofloxacin": "Ciprofloxacin",
+    "cotrimoxazole": "TMP/SMX",
+    "azithromycin": "Azithromycin"
+   },
+   "specimen_as_printed": "Blood",
+   "notes": {
+    "azithromycin": "tested only for S. Typhi (text, page 14)"
+   },
+   "note": "Table 9 reports S. Typhi and S. Paratyphi together."
+  }
+ ],
+ "counts": [
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 2317,
+   "page": 4
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 0,
+   "page": 4
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 2220,
+   "page": 4
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus species",
+   "n": 620,
+   "page": 4
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus species",
+   "n": 1837,
+   "page": 4
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Enterococcus species",
+   "n": 303,
+   "page": 4
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 496,
+   "page": 4
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 6919,
+   "page": 4
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 1030,
+   "page": 4
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella species",
+   "n": 1341,
+   "page": 4
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella species",
+   "n": 3388,
+   "page": 4
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Klebsiella species",
+   "n": 1480,
+   "page": 4
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Pseudomonas species",
+   "n": 383,
+   "page": 4
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Pseudomonas species",
+   "n": 0,
+   "page": 4
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Pseudomonas species",
+   "n": 1115,
+   "page": 4
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "n": 1008,
+   "page": 4
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "n": 0,
+   "page": 4
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "n": 1187,
+   "page": 4
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Salmonella Typhi and Paratyphi",
+   "n": 189,
+   "page": 4
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Salmonella Typhi and Paratyphi",
+   "n": 0,
+   "page": 4
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Salmonella Typhi and Paratyphi",
+   "n": 0,
+   "page": 4
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Figures 4 to 12 (resistance by location type ICU, IPD and OPD, by specimen within ICU and IPD, and E. coli against Klebsiella by specimen)",
+   "why": "bar charts without data labels; nothing estimated from bar heights"
+  },
+  {
+   "what": "Figures 1 to 3 (share of isolates by specimen and by location type, isolates by pathogen and specimen)",
+   "why": "distribution charts; the Table 2 counts are recorded (Figure 2 gives location shares only: ICU 14%, IPD 65%, OPD 21%)"
+  },
+  {
+   "what": "Vancomycin for S. aureus and Enterococcus",
+   "drug": "vancomycin",
+   "why": "not reported: the report did not consider vancomycin results because they were not tested by broth microdilution"
+  },
+  {
+   "what": "Separate pus aspirate and other sterile body fluid figures",
+   "why": "not printed: the report gives one combined OSBF+PA column (and none for E. coli and Klebsiella)"
+  }
+ ]
+}

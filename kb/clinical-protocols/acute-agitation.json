@@ -34,6 +34,7 @@
    "items": [
     "Psychotic or undifferentiated agitation: olanzapine 5 to 10 mg orally (orodispersible), risperidone 1 to 2 mg orally, or haloperidol 2.5 to 5 mg orally.",
     "Alcohol or benzodiazepine withdrawal, or stimulant intoxication: a benzodiazepine, for example lorazepam 1 to 2 mg orally.",
+    "Promethazine 25 to 50 mg orally is a sedative alternative when a benzodiazepine or antipsychotic is unsuitable.",
     "Delirium: treat the cause; if medication is essential use a low-dose antipsychotic, and avoid benzodiazepines except in alcohol or benzodiazepine withdrawal."
    ]
   },
@@ -44,6 +45,7 @@
     "NICE NG10: use either IM lorazepam alone or IM haloperidol combined with IM promethazine. Use IM lorazepam if there is too little information to guide choice or the patient has not taken antipsychotics before.",
     "IM lorazepam 1 to 2 mg; if the response is partial, consider a further dose after 30 to 60 minutes.",
     "IM haloperidol 5 mg plus IM promethazine 25 to 50 mg; consider a further dose if the response is partial. Avoid if there is cardiovascular disease, a prolonged QTc, or no ECG has been done (use lorazepam instead).",
+    "Do not give IM haloperidol alone: acute dystonia is common without promethazine. Get an ECG before haloperidol wherever possible.",
     "No response to one option: try the other. If both have been used, arrange an urgent senior team review.",
     "Alternatives in emergency settings: IM olanzapine 10 mg (maximum 20 mg/day; no parenteral benzodiazepine within 1 hour), or IM midazolam 5 mg (10 mg if severe) with airway monitoring.",
     "Prescribe each rapid tranquillisation dose singly and do not repeat until the effect of the previous dose has been reviewed (NICE)."
@@ -76,14 +78,14 @@
     "Sedating before excluding hypoglycaemia, hypoxia, head injury or delirium.",
     "Restraint that compresses the chest, neck or abdomen (risk of positional asphyxia).",
     "Repeating doses before the previous dose has taken effect, leading to oversedation.",
-    "IM haloperidol without an ECG in a patient with cardiac disease."
+    "IM haloperidol without an ECG in a patient with cardiac disease, or IM haloperidol without promethazine."
    ]
   }
  ],
  "drugs": [
   { "name": "Lorazepam", "dose": "1 to 2 mg orally or IM; repeat after 30 to 60 minutes if partial response", "notes": "First choice if antipsychotic-naive, no ECG, or cardiac disease." },
-  { "name": "Haloperidol", "dose": "2.5 to 5 mg orally or 5 mg IM (elderly 0.5 to 1 mg)", "notes": "With promethazine IM for rapid tranquillisation; ECG first; risk of dystonia and QTc prolongation." },
-  { "name": "Promethazine", "dose": "25 to 50 mg IM, given with haloperidol", "notes": "Sedative and reduces dystonia risk." },
+  { "name": "Haloperidol", "dose": "2.5 to 5 mg orally or 5 mg IM (elderly 0.5 to 1 mg)", "notes": "IM only with promethazine for rapid tranquillisation, never alone; ECG first; risk of dystonia and QTc prolongation." },
+  { "name": "Promethazine", "dose": "25 to 50 mg orally, or 25 to 50 mg IM given with haloperidol", "notes": "Sedative and reduces dystonia risk; do not give IM haloperidol without it." },
   { "name": "Olanzapine", "dose": "5 to 10 mg orally or 10 mg IM; maximum 20 mg/day", "notes": "No parenteral benzodiazepine within 1 hour of IM olanzapine." },
   { "name": "Midazolam", "dose": "5 mg IM (10 mg if severe)", "notes": "Emergency department use with airway monitoring." },
   { "name": "Risperidone", "dose": "1 to 2 mg orally", "notes": "Oral option for psychotic agitation." }

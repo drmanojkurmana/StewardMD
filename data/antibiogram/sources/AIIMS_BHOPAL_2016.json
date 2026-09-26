@@ -1,0 +1,89 @@
+{
+ "id": "AIIMS_BHOPAL_2016",
+ "kind": "institution",
+ "inst": "AIIMS_BHOPAL",
+ "institution": "All India Institute of Medical Sciences, Bhopal",
+ "short": "AIIMS Bhopal",
+ "city": "Bhopal",
+ "state": "Madhya Pradesh",
+ "region": "west",
+ "sector": "government",
+ "year": 2016,
+ "end": "2016-12",
+ "period": "Year 2016 (2015 and 2016 pooled for organisms with fewer than 30 isolates in 2016)",
+ "published": "2017",
+ "url": "https://aiimsbhopal.edu.in/AIIMSFiles/annexuredImage/antibiogram.pdf",
+ "retrieved": "2026-09-26",
+ "citation": "Department of Microbiology (Biswas D and team), All India Institute of Medical Sciences, Bhopal. Antibiogram 2016. Bhopal: AIIMS Bhopal; 2017.",
+ "reporting": "Percent susceptible bar charts by site of infection (bloodstream, respiratory, skin and soft tissue, urinary), Gram group and location (OPD, IPD, ICU), some with data labels; no isolate numbers printed. Only one chart is organism-specific (Salmonella from outpatient bloodstream infections, 2015 and 2016 pooled).",
+ "method": "Clinical isolates recovered at AIIMS Bhopal Hospital in 2016; for organisms with fewer than 30 isolates in 2016, isolates of 2015 and 2016 pooled (stated as in accordance with CLSI). The antibiotic panel was not the same throughout the period (irregular supply), so isolates were not all tested against an identical panel, as stated.",
+ "measure": "S",
+ "verification": {
+  "status": "double-checked",
+  "note": "Read from page images (the charts are embedded images; the text layer holds only the narrative): the one extracted chart (page 5) was read twice independently, from the page rendered at scale 2.2 and from the embedded chart image at its native 1214 x 632 resolution (with a scale-4 render to check each label sits on its bar), and the two readings agreed on every value, 2026-09-26. The PDF matches the census file (MD5 ada8f7bd564e1008dc5aec7b815b7b2e) and opens completely (11 pages)."
+ },
+ "notes": "Antibiogram 2016 of the Department of Microbiology, AIIMS Bhopal (released February 2017): percent susceptible bar charts by site of infection, Gram group and patient location, with a narrative. Only the chart of Salmonella from outpatient bloodstream infections is organism-specific, so the file has one row (blood, OPD, 2015 and 2016 pooled, n not printed); every other chart pools all Gram-negative or all Gram-positive isolates of a site (several also without data labels) and is listed in excluded. There are no isolate count tables. Also hosted at https://archive.aiimsbhopal.edu.in/news/antibiogram.pdf (identical file, per the census). Archived copy used (the live site could not be reached): http://web.archive.org/web/20220329141224id_/https://www.aiimsbhopal.edu.in/AIIMSFiles/annexuredImage/antibiogram.pdf.",
+ "issues": [
+  "Second reader 2026-09-26: the one row (page 5 chart, Salmonella sps. from bloodstream infections in outpatients, 2015-16) re-read from the page rendered at scale 4 and written down before comparing: all 10 data labels match the file (ceftriaxone 100, piperacillin-tazobactam 100, aztreonam 97, levofloxacin 97, cefepime 95, azithromycin 94, imipenem 93, amoxicillin-clavulanic acid 74, ampicillin 73, co-trimoxazole 73). Each label sits on its bar (bar heights agree) and each bar was matched to its rotated axis label; no isolate number is printed, so n null is right, and no value is approx. 0 errors, no cell corrected.",
+  "Second reader: the pooled period is confirmed on page 3 (General notes): \"for organisms in which < 30 isolates were recovered in 2016; isolates collected over a longer period (i.e. 2015 and 2016) have been considered. This is in accordance with CLSI guidelines.\"; the chart title says (2015-16). Pages 6 to 11 checked: every other chart pools a Gram group or a patient group, as listed in excluded. The excluded entry for pages 9 and 10 was reworded: the chart of OPD male patients over 65 years is titled \"urinary isolates\" (Gram group not stated), not Gram-negative."
+ ],
+ "rows": [
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Salmonella spp.",
+   "n": null,
+   "page": 5,
+   "table": "Chart: Antibiogram of Salmonella sps. isolated from bloodstream infections in outpatients (2015-16)",
+   "s": {
+    "ceftriaxone": 100,
+    "piptazo": 100,
+    "aztreonam": 97,
+    "levofloxacin": 97,
+    "cefepime": 95,
+    "azithromycin": 94,
+    "imipenem": 93,
+    "amoxiclav": 74,
+    "ampicillin": 73,
+    "cotrimoxazole": 73
+   },
+   "note": "Pooled over 2015 and 2016 (chart title \"2015-16\"): the report pools the two years for organisms with fewer than 30 isolates in 2016. Printed as \"Salmonella sps.\" (serovars not stated), bloodstream isolates from outpatients. Values are the data labels printed on the bars; the number of isolates is not printed.",
+   "specimen_as_printed": "Bloodstream infections"
+  }
+ ],
+ "counts": [],
+ "excluded": [
+  {
+   "what": "Page 5 chart: Antibiogram of Gram Negative bloodstream isolates recovered from in-patients (2015-16)",
+   "why": "All Gram-negative bloodstream isolates pooled (Salmonella 16.7%, other Enterobacteriaceae 66.6%, non-fermenters 16.7% as stated); not organism-specific and there is no organism key for a pooled Gram group."
+  },
+  {
+   "what": "Page 6 charts: Gram-negative respiratory isolates from ICU patients in 2016, and the 2015 versus 2016 comparison of ICU respiratory isolates",
+   "why": "All Gram-negative respiratory isolates pooled (Enterobacteriaceae 49%, Acinetobacter 30%, Pseudomonas 21% as stated); not organism-specific. The comparison chart also has no data labels."
+  },
+  {
+   "what": "Page 7 charts: Gram-negative and Gram-positive isolates from skin and soft tissue infections (OPD and IPD bars)",
+   "why": "Pooled by Gram group, not organism-specific; the bars carry no data labels (values could only be estimated from bar heights)."
+  },
+  {
+   "what": "Page 8 table: susceptibility to surgical-prophylaxis antibiotics (cefazolin, amoxicillin-clavulanic acid, 3rd generation cephalosporins, amikacin), overall and for Gram-positive and Gram-negative bacteria",
+   "why": "Pooled by Gram group or overall, not organism-specific; the report says the number of post-operative wound isolates was insufficient."
+  },
+  {
+   "what": "Page 9 chart: Gram-negative isolates from urinary tract infections (OPD, IPD and ICU bars)",
+   "why": "All Gram-negative urinary isolates pooled; not organism-specific; no data labels."
+  },
+  {
+   "what": "Pages 9 and 10 charts: urinary Gram-negative isolates from Obstetrics and Gynaecology OPD and from Paediatrics OPD, and urinary isolates from OPD male patients over 65 years (titled \"urinary isolates\", Gram group not stated)",
+   "why": "All urinary isolates of each patient group pooled (Gram-negative for the first two charts); not organism-specific and there is no organism key for a pooled group."
+  },
+  {
+   "what": "Page 11 chart: Gram-positive isolates from OPD patients with urinary tract infection",
+   "why": "All Gram-positive urinary isolates pooled (organisms not stated); not organism-specific."
+  },
+  {
+   "what": "Narrative figures (pages 4, 5 and 8): 89.5% of Salmonella tested were ciprofloxacin non-susceptible; MRSA 26% (OPD) and 32% (IPD) of staphylococcal skin and soft tissue isolates; penicillin-resistant staphylococci 95% (OPD) and 84% (IPD); oxacillin susceptibility 66% of OPD Gram-positive isolates",
+   "why": "Narrative statements, not antibiogram tables: they would need conversion to percent susceptible, the number tested is not printed, and the staphylococcal figures do not say which species; not recorded."
+  }
+ ]
+}

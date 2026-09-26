@@ -1,10 +1,14 @@
-/* test/medcore-flags.test.mjs — the Medical Core flag registry, and proof that it is inert.
+/* test/medcore-flags.test.mjs — the Medical Core flag registry, and what each default is for.
  *
- * Step 1 of vault/modules/Medical Core.md creates the flags BEFORE the code they gate, so that no
- * later commit has to add a switch and a clinical path in the same change. The interesting
- * assertions here are therefore not "the getter works" but "both flags are off" and "nothing in the
- * app reads them yet". The second one stops being true on purpose, in a named later step; when it
- * does, this test is what forces the change to be deliberate.
+ * Step 1 of vault/modules/Medical Core.md created the flags BEFORE the code they gate, so that no
+ * commit had to add a switch and a clinical path in the same change. Both defaulted off while
+ * there was nothing to enable. The master flag now defaults ON (owner decision, BETA label, see
+ * vault/decisions/Decisions.md) because the DETERMINISTIC layer is built.
+ *
+ * The safety property this file pins is therefore no longer "both flags are off". It is the split:
+ * the deterministic layer is on, and the MODEL half is off and cannot be reached, because no
+ * artifact passed the admission gates. A change that turns smd_medcore_shadow on by default, or
+ * that lets a probability reach a clinician, has to come through this test on purpose.
  */
 import { test } from "node:test";
 import assert from "node:assert";
@@ -25,16 +29,31 @@ test("flags: the registry defines exactly the two pre-integration flags", () => 
   });
 });
 
-test("flags: both default OFF, and that is the whole safety property today", () => {
-  FLAGS.forEach((k) => assert.equal(F.DEFS[k].def, false, k + " must default false"));
-  assert.deepEqual(F.all(), { smd_medcore: false, smd_medcore_shadow: false });
-  FLAGS.forEach((k) => assert.equal(F.bool(k), false));
+test("flags: the master flag defaults ON, the model half defaults OFF", () => {
+  // The deterministic layer ships to everyone, labelled BETA. Changing this line is an owner
+  // decision, not a refactor.
+  assert.equal(F.DEFS.smd_medcore.def, true, "smd_medcore must default true");
+  // The model half stays off. No artifact passed the admission gates on the available data, so
+  // there is nothing to shadow; turning this on by default would be shadowing nothing.
+  assert.equal(F.DEFS.smd_medcore_shadow.def, false, "smd_medcore_shadow must default false");
+  assert.deepEqual(F.all(), { smd_medcore: true, smd_medcore_shadow: false });
+  assert.equal(F.bool("smd_medcore"), true);
+  assert.equal(F.bool("smd_medcore_shadow"), false);
 });
 
-test("flags: shadow is meaningless without the master flag", () => {
-  assert.equal(F.shadowActive(), false);
+test("flags: default ON is still overridable to a complete no-op", () => {
+  // `?medcore=0` is the whole escape hatch, and medcore-boot.js reads it before its first import
+  // and its first fetch. Pin that the registry defines the alias that makes that possible.
+  assert.equal(F.DEFS.smd_medcore.query, "medcore");
+  assert.equal(typeof F.set, "function");
+});
+
+test("flags: shadow is meaningless without an admitted model", () => {
   // shadowActive() reads through get(), which in node has no store and no query string, so this
-  // pins the composition rule rather than a stubbed value: with both defaults false it is false.
+  // pins the composition rule rather than a stubbed value: the master flag is now true, so the
+  // false here comes entirely from the shadow flag. That is the property that matters.
+  assert.equal(F.bool("smd_medcore"), true);
+  assert.equal(F.shadowActive(), false);
   assert.equal(typeof F.shadowActive, "function");
 });
 

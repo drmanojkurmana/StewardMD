@@ -1,0 +1,1719 @@
+{
+ "id": "AIIMS_JODHPUR_2023",
+ "kind": "institution",
+ "inst": "AIIMS_JODHPUR",
+ "institution": "All India Institute of Medical Sciences, Jodhpur",
+ "short": "AIIMS Jodhpur",
+ "city": "Jodhpur",
+ "state": "Rajasthan",
+ "region": "north",
+ "sector": "government",
+ "year": 2023,
+ "period": "2022 to 2023 (printed as 'Institute Antibiogram 2022-2023'; months not stated)",
+ "published": "2024-01",
+ "url": "https://aiimsjodhpur.edu.in/uploads/quick_docs/Antibiotic%20Policy%20LATEST1-27924.pdf",
+ "page": "https://aiimsjodhpur.edu.in/quickdoc.php",
+ "retrieved": "2026-09-26",
+ "citation": "All India Institute of Medical Sciences, Jodhpur. Antimicrobial Policy (January 2024), section 4: Institute Antibiogram 2022-2023, pp. 12 to 17. Jodhpur: AIIMS Jodhpur; 2024.",
+ "reporting": "Percent susceptible. OPD table (p12): %S only, no isolate numbers. Salmonella, IPD Enterobacteriaceae, IPD A. baumannii and P. aeruginosa by specimen, and Gram-positive tables (pp13 to 15): susceptible/tested with %S and n per organism column; cells with fewer than 30 isolates are marked * with no percentage. ICU blood and respiratory tables (pp16 to 17): susceptible, total tested and %S per drug, no n per organism.",
+ "measure": "S",
+ "verification": {
+  "status": "double-checked",
+  "note": "p12 parsed from the PDF text layer and compared value by value with the rendered page. pp13 to 17 have no text layer (tables are embedded images): read from page images in two independent passes, pass 1 from the embedded table images upscaled 2 to 3x, pass 2 from the pages rendered at scale 3 to 5 and cropped into different column and row groups. Only values both passes agreed on are recorded (all agreed). Every susceptible/tested pair was also checked against its printed percentage; five printed percentages disagree with their own counts (ICU blood E. coli aztreonam and imipenem, ICU blood K. pneumoniae ciprofloxacin, ICU respiratory A. baumannii and Pseudomonas amikacin) and are recorded as printed; the four material ones carry a conflict entry and the imipenem slip (61.55% printed, 61.54% by count) a per-drug note. Every cell the validator did not keep was re-read on the page image afterwards and matches the source."
+ },
+ "notes": "Institute Antibiogram 2022-2023 (pages 12 to 17) of the AIIMS Jodhpur Antimicrobial Policy dated January 2024. The data period is printed only as 2022-2023, without months (it may be a calendar or a financial year), so no end month is given. Tables: OPD Gram positives and Gram negatives from various samples (p12, %S only); OPD Salmonella (p13, specimen not stated); IPD Enterobacteriaceae from various samples (p14); IPD A. baumannii and P. aeruginosa by specimen, except faeces (p15); Gram positives from various samples, S. aureus, MSSA, MRSA and Enterococcus (p15, setting not stated, recorded as all settings); ICU blood Gram negatives, MSSA, Enterococcus and Candida, and ICU respiratory Gram negatives (pp16 to 17, isolate numbers not printed). IPD is recorded as wards, 'various samples' and 'All Specimens' as all specimens, LRT as respiratory, superficial infection as pus, deep infection as deep. Cells printed as 0/0 (no isolate tested) and cells marked * with (-) (fewer than 30 tested, no percentage printed) are left out; no percentage was computed from counts. Several ICU percentages are truncated rather than rounded in the source (e.g. 1/29 printed 3.4%); they are recorded as printed. The live AIIMS Jodhpur site was unreachable at retrieval; the PDF was downloaded from the Internet Archive copy of the same URL (snapshot 2025-08-31).",
+ "rows": [
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Antibiogram of Gram positive organisms isolated from various samples in OPD setting",
+   "s": {
+    "cefoxitin": 47.3,
+    "ciprofloxacin": 17.7,
+    "clindamycin": 50.4,
+    "erythromycin": 9.5,
+    "linezolid": 99.5,
+    "teicoplanin": 90,
+    "tetracycline": 81.4,
+    "cotrimoxazole": 76.2,
+    "vancomycin": 100
+   },
+   "note": "OPD, various samples; the table prints %S only (no isolate numbers).",
+   "notes": {
+    "cefoxitin": "printed in a shared 'Cefoxitin/Ampicillin' column (cefoxitin for S. aureus)"
+   },
+   "specimen_as_printed": "various samples"
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Antibiogram of Gram positive organisms isolated from various samples in OPD setting",
+   "s": {
+    "ampicillin": 89.7,
+    "ciprofloxacin": 41.1,
+    "clindamycin": 64.1,
+    "linezolid": 100,
+    "teicoplanin": 95.8,
+    "vancomycin": 95.5,
+    "gentamicin_hl": 56.8
+   },
+   "note": "OPD, various samples; the table prints %S only (no isolate numbers).",
+   "notes": {
+    "ampicillin": "printed in a shared 'Cefoxitin/Ampicillin' column (ampicillin for Enterococcus)",
+    "gentamicin_hl": "printed as High level Gentamicin",
+    "clindamycin": "printed as 64.1% although E. faecalis is intrinsically resistant to clindamycin; recorded as printed"
+   },
+   "specimen_as_printed": "various samples"
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Antibiogram of Gram negative organisms isolated from various samples in OPD setting",
+   "s": {
+    "amikacin": 86,
+    "cefotaxime": 60,
+    "ceftazidime": 50,
+    "ceftriaxone": 24,
+    "ciprofloxacin": 19,
+    "ertapenem": 74,
+    "imipenem": 89,
+    "levofloxacin": 24,
+    "meropenem": 92,
+    "minocycline": 100,
+    "piptazo": 64,
+    "cotrimoxazole": 42,
+    "fosfomycin": 97,
+    "nitrofurantoin": 70
+   },
+   "note": "OPD, various samples; the table prints %S only (no isolate numbers). Cefotaxime (60%) and ceftriaxone (24%) differ widely in the source; both recorded as printed.",
+   "specimen_as_printed": "various samples"
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Antibiogram of Gram negative organisms isolated from various samples in OPD setting",
+   "s": {
+    "amikacin": 58,
+    "cefotaxime": 42,
+    "ceftazidime": 20,
+    "ceftriaxone": 22,
+    "ciprofloxacin": 20,
+    "ertapenem": 62,
+    "imipenem": 67,
+    "levofloxacin": 34,
+    "meropenem": 71,
+    "piptazo": 42,
+    "cotrimoxazole": 41
+   },
+   "note": "OPD, various samples; the table prints %S only (no isolate numbers).",
+   "specimen_as_printed": "various samples"
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Enterobacter aerogenes",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Antibiogram of Gram negative organisms isolated from various samples in OPD setting",
+   "s": {
+    "amikacin": 75,
+    "cefotaxime": 58,
+    "ceftriaxone": 50,
+    "ciprofloxacin": 36,
+    "imipenem": 83,
+    "levofloxacin": 83,
+    "meropenem": 92,
+    "minocycline": 100,
+    "piptazo": 42,
+    "cotrimoxazole": 50
+   },
+   "note": "OPD, various samples; the table prints %S only (no isolate numbers).",
+   "specimen_as_printed": "various samples"
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Antibiogram of Gram negative organisms isolated from various samples in OPD setting",
+   "s": {
+    "amikacin": 67,
+    "cefepime": 71,
+    "ceftazidime": 68,
+    "imipenem": 80,
+    "piptazo": 88
+   },
+   "note": "OPD, various samples; the table prints %S only (no isolate numbers).",
+   "specimen_as_printed": "various samples"
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Salmonella Typhi",
+   "pheno": null,
+   "n": 5,
+   "page": 13,
+   "table": "Antibiogram of Salmonella isolates in OPD setting",
+   "s": {
+    "ampicillin": 100,
+    "azithromycin": 100,
+    "cefixime": 0,
+    "ceftriaxone": 40,
+    "chloramphenicol": 75,
+    "ciprofloxacin": 0,
+    "levofloxacin": 0,
+    "cotrimoxazole": 100
+   },
+   "nt": {
+    "ampicillin": 3,
+    "azithromycin": 5,
+    "cefixime": 1,
+    "ceftriaxone": 5,
+    "chloramphenicol": 4,
+    "ciprofloxacin": 5,
+    "levofloxacin": 1,
+    "cotrimoxazole": 5
+   },
+   "note": "OPD Salmonella isolates; specimen not stated in the source. Cells printed as 0/0 (not tested) are left out.",
+   "notes": {
+    "cotrimoxazole": "printed as Trimethoprim-sulfamethoxazole"
+   },
+   "specimen_as_printed": "not stated (Salmonella isolates in OPD setting)"
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 1589,
+   "page": 14,
+   "table": "Antibiogram of Enterobacteriaceae isolated from various samples in IPD setting",
+   "s": {
+    "amikacin": 77.2,
+    "cefazolin": 0,
+    "cefotaxime": 44.8,
+    "ceftazidime": 29.9,
+    "ceftriaxone": 13,
+    "ciprofloxacin": 11.9,
+    "ertapenem": 48.3,
+    "fosfomycin": 97.8,
+    "imipenem": 78,
+    "levofloxacin": 14.3,
+    "meropenem": 82,
+    "minocycline": 63.6,
+    "nitrofurantoin": 90.6,
+    "piptazo": 45.8,
+    "cotrimoxazole": 36
+   },
+   "nt": {
+    "amikacin": 1414,
+    "cefazolin": 1,
+    "cefotaxime": 1387,
+    "ceftazidime": 67,
+    "ceftriaxone": 354,
+    "ciprofloxacin": 1390,
+    "ertapenem": 147,
+    "fosfomycin": 680,
+    "imipenem": 1412,
+    "levofloxacin": 817,
+    "meropenem": 1426,
+    "minocycline": 11,
+    "nitrofurantoin": 660,
+    "piptazo": 1407,
+    "cotrimoxazole": 636
+   },
+   "note": "IPD, various samples. Cells printed as 0/0 (not tested) are left out. Cefotaxime (621/1387, 44.8%) and ceftriaxone (46/354, 13%) differ widely in the source; both recorded as printed.",
+   "notes": {
+    "cotrimoxazole": "printed as Trimethoprim-sulfamethoxazole"
+   },
+   "specimen_as_printed": "various samples"
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Citrobacter freundii",
+   "pheno": null,
+   "n": 2,
+   "page": 14,
+   "table": "Antibiogram of Enterobacteriaceae isolated from various samples in IPD setting",
+   "s": {
+    "amikacin": 0,
+    "cefotaxime": 100,
+    "ciprofloxacin": 0,
+    "ertapenem": 100,
+    "imipenem": 100,
+    "levofloxacin": 0,
+    "meropenem": 100,
+    "piptazo": 100
+   },
+   "nt": {
+    "amikacin": 1,
+    "cefotaxime": 1,
+    "ciprofloxacin": 1,
+    "ertapenem": 1,
+    "imipenem": 1,
+    "levofloxacin": 1,
+    "meropenem": 1,
+    "piptazo": 1
+   },
+   "note": "IPD, various samples. Cells printed as 0/0 (not tested) are left out.",
+   "specimen_as_printed": "various samples"
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Citrobacter koseri",
+   "pheno": null,
+   "n": 10,
+   "page": 14,
+   "table": "Antibiogram of Enterobacteriaceae isolated from various samples in IPD setting",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 77.8,
+    "ceftazidime": 100,
+    "ceftriaxone": 100,
+    "ciprofloxacin": 37.5,
+    "fosfomycin": 100,
+    "imipenem": 100,
+    "levofloxacin": 83.3,
+    "meropenem": 100,
+    "nitrofurantoin": 100,
+    "piptazo": 88.9,
+    "cotrimoxazole": 100
+   },
+   "nt": {
+    "amikacin": 9,
+    "cefotaxime": 9,
+    "ceftazidime": 1,
+    "ceftriaxone": 3,
+    "ciprofloxacin": 8,
+    "fosfomycin": 7,
+    "imipenem": 9,
+    "levofloxacin": 6,
+    "meropenem": 9,
+    "nitrofurantoin": 7,
+    "piptazo": 9,
+    "cotrimoxazole": 7
+   },
+   "note": "IPD, various samples. Cells printed as 0/0 (not tested) are left out. Cefotaxime and ceftriaxone differ widely in the source (few isolates tested for one of them); both recorded as printed.",
+   "notes": {
+    "cotrimoxazole": "printed as Trimethoprim-sulfamethoxazole"
+   },
+   "specimen_as_printed": "various samples"
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Citrobacter spp.",
+   "pheno": null,
+   "n": 6,
+   "page": 14,
+   "table": "Antibiogram of Enterobacteriaceae isolated from various samples in IPD setting",
+   "s": {
+    "amikacin": 66.7,
+    "cefotaxime": 50,
+    "ceftazidime": 100,
+    "ciprofloxacin": 16.7,
+    "imipenem": 83.3,
+    "levofloxacin": 25,
+    "meropenem": 83.3,
+    "piptazo": 66.7
+   },
+   "nt": {
+    "amikacin": 6,
+    "cefotaxime": 6,
+    "ceftazidime": 1,
+    "ciprofloxacin": 6,
+    "imipenem": 6,
+    "levofloxacin": 4,
+    "meropenem": 6,
+    "piptazo": 6
+   },
+   "note": "IPD, various samples. Cells printed as 0/0 (not tested) are left out.",
+   "specimen_as_printed": "various samples"
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 909,
+   "page": 14,
+   "table": "Antibiogram of Enterobacteriaceae isolated from various samples in IPD setting",
+   "s": {
+    "amikacin": 39.4,
+    "cefazolin": 0,
+    "cefotaxime": 23.6,
+    "ceftazidime": 15.8,
+    "ceftriaxone": 9.3,
+    "ciprofloxacin": 13.2,
+    "ertapenem": 27.9,
+    "fosfomycin": 76.2,
+    "imipenem": 46.5,
+    "levofloxacin": 20.8,
+    "meropenem": 46.4,
+    "minocycline": 21.4,
+    "nitrofurantoin": 27,
+    "piptazo": 25.1,
+    "cotrimoxazole": 30.5
+   },
+   "nt": {
+    "amikacin": 779,
+    "cefazolin": 1,
+    "cefotaxime": 764,
+    "ceftazidime": 76,
+    "ceftriaxone": 236,
+    "ciprofloxacin": 763,
+    "ertapenem": 86,
+    "fosfomycin": 181,
+    "imipenem": 777,
+    "levofloxacin": 506,
+    "meropenem": 797,
+    "minocycline": 14,
+    "nitrofurantoin": 278,
+    "piptazo": 776,
+    "cotrimoxazole": 272
+   },
+   "note": "IPD, various samples. Cells printed as 0/0 (not tested) are left out.",
+   "notes": {
+    "cotrimoxazole": "printed as Trimethoprim-sulfamethoxazole"
+   },
+   "specimen_as_printed": "various samples"
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Klebsiella oxytoca",
+   "pheno": null,
+   "n": 12,
+   "page": 14,
+   "table": "Antibiogram of Enterobacteriaceae isolated from various samples in IPD setting",
+   "s": {
+    "amikacin": 62.5,
+    "cefotaxime": 25,
+    "ceftazidime": 100,
+    "ceftriaxone": 100,
+    "ciprofloxacin": 28.6,
+    "ertapenem": 100,
+    "fosfomycin": 100,
+    "imipenem": 75,
+    "levofloxacin": 33.3,
+    "meropenem": 62.5,
+    "nitrofurantoin": 100,
+    "piptazo": 50,
+    "cotrimoxazole": 100
+   },
+   "nt": {
+    "amikacin": 8,
+    "cefotaxime": 8,
+    "ceftazidime": 2,
+    "ceftriaxone": 2,
+    "ciprofloxacin": 7,
+    "ertapenem": 1,
+    "fosfomycin": 1,
+    "imipenem": 8,
+    "levofloxacin": 3,
+    "meropenem": 8,
+    "nitrofurantoin": 1,
+    "piptazo": 8,
+    "cotrimoxazole": 1
+   },
+   "note": "IPD, various samples. Cells printed as 0/0 (not tested) are left out. Cefotaxime and ceftriaxone differ widely in the source (few isolates tested for one of them); both recorded as printed.",
+   "notes": {
+    "cotrimoxazole": "printed as Trimethoprim-sulfamethoxazole"
+   },
+   "specimen_as_printed": "various samples"
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Klebsiella aerogenes",
+   "pheno": null,
+   "n": 5,
+   "page": 14,
+   "table": "Antibiogram of Enterobacteriaceae isolated from various samples in IPD setting",
+   "s": {
+    "amikacin": 100,
+    "cefotaxime": 100,
+    "ceftriaxone": 100,
+    "ciprofloxacin": 66.7,
+    "fosfomycin": 100,
+    "imipenem": 66.7,
+    "levofloxacin": 66.7,
+    "meropenem": 100,
+    "nitrofurantoin": 50,
+    "piptazo": 100,
+    "cotrimoxazole": 100
+   },
+   "nt": {
+    "amikacin": 3,
+    "cefotaxime": 3,
+    "ceftriaxone": 2,
+    "ciprofloxacin": 3,
+    "fosfomycin": 2,
+    "imipenem": 3,
+    "levofloxacin": 3,
+    "meropenem": 3,
+    "nitrofurantoin": 2,
+    "piptazo": 2,
+    "cotrimoxazole": 2
+   },
+   "note": "Printed as Klebsiella (Enterobacter) aerogenes. IPD, various samples. Cells printed as 0/0 (not tested) are left out.",
+   "notes": {
+    "cotrimoxazole": "printed as Trimethoprim-sulfamethoxazole"
+   },
+   "specimen_as_printed": "various samples"
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Enterobacter cloacae",
+   "pheno": null,
+   "n": 56,
+   "page": 14,
+   "table": "Antibiogram of Enterobacteriaceae isolated from various samples in IPD setting",
+   "s": {
+    "amikacin": 59.1,
+    "cefotaxime": 34.1,
+    "ceftazidime": 45.5,
+    "ceftriaxone": 44.4,
+    "ciprofloxacin": 32.6,
+    "ertapenem": 25,
+    "fosfomycin": 100,
+    "imipenem": 70.5,
+    "levofloxacin": 54.1,
+    "meropenem": 75.6,
+    "minocycline": 33.3,
+    "nitrofurantoin": 50,
+    "piptazo": 59.1,
+    "cotrimoxazole": 75
+   },
+   "nt": {
+    "amikacin": 44,
+    "cefotaxime": 44,
+    "ceftazidime": 11,
+    "ceftriaxone": 18,
+    "ciprofloxacin": 43,
+    "ertapenem": 4,
+    "fosfomycin": 4,
+    "imipenem": 44,
+    "levofloxacin": 37,
+    "meropenem": 45,
+    "minocycline": 3,
+    "nitrofurantoin": 4,
+    "piptazo": 44,
+    "cotrimoxazole": 4
+   },
+   "note": "IPD, various samples. Cells printed as 0/0 (not tested) are left out.",
+   "notes": {
+    "cotrimoxazole": "printed as Trimethoprim-sulfamethoxazole"
+   },
+   "specimen_as_printed": "various samples"
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "n": 38,
+   "page": 14,
+   "table": "Antibiogram of Enterobacteriaceae isolated from various samples in IPD setting",
+   "s": {
+    "amikacin": 62.9,
+    "cefotaxime": 36.7,
+    "ceftazidime": 40,
+    "ceftriaxone": 50,
+    "ciprofloxacin": 29,
+    "ertapenem": 60,
+    "fosfomycin": 75,
+    "imipenem": 57.1,
+    "levofloxacin": 52.2,
+    "meropenem": 77.1,
+    "minocycline": 50,
+    "nitrofurantoin": 14.3,
+    "piptazo": 37.1,
+    "cotrimoxazole": 25
+   },
+   "nt": {
+    "amikacin": 35,
+    "cefotaxime": 30,
+    "ceftazidime": 5,
+    "ceftriaxone": 10,
+    "ciprofloxacin": 31,
+    "ertapenem": 5,
+    "fosfomycin": 4,
+    "imipenem": 35,
+    "levofloxacin": 23,
+    "meropenem": 35,
+    "minocycline": 2,
+    "nitrofurantoin": 7,
+    "piptazo": 35,
+    "cotrimoxazole": 8
+   },
+   "note": "IPD, various samples. Cells printed as 0/0 (not tested) are left out.",
+   "notes": {
+    "cotrimoxazole": "printed as Trimethoprim-sulfamethoxazole"
+   },
+   "specimen_as_printed": "various samples"
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Serratia marcescens",
+   "pheno": null,
+   "n": 41,
+   "page": 14,
+   "table": "Antibiogram of Enterobacteriaceae isolated from various samples in IPD setting",
+   "s": {
+    "amikacin": 82.1,
+    "cefotaxime": 45.2,
+    "ceftazidime": 75,
+    "ceftriaxone": 83.3,
+    "ciprofloxacin": 68.6,
+    "ertapenem": 0,
+    "fosfomycin": 100,
+    "imipenem": 76.9,
+    "levofloxacin": 78.1,
+    "meropenem": 76.3,
+    "minocycline": 0,
+    "nitrofurantoin": 0,
+    "piptazo": 65.6,
+    "cotrimoxazole": 100
+   },
+   "nt": {
+    "amikacin": 39,
+    "cefotaxime": 31,
+    "ceftazidime": 16,
+    "ceftriaxone": 6,
+    "ciprofloxacin": 35,
+    "ertapenem": 1,
+    "fosfomycin": 1,
+    "imipenem": 39,
+    "levofloxacin": 32,
+    "meropenem": 38,
+    "minocycline": 1,
+    "nitrofurantoin": 2,
+    "piptazo": 32,
+    "cotrimoxazole": 2
+   },
+   "note": "IPD, various samples. Cells printed as 0/0 (not tested) are left out. Cefotaxime and ceftriaxone differ widely in the source (few isolates tested for one of them); both recorded as printed.",
+   "notes": {
+    "cotrimoxazole": "printed as Trimethoprim-sulfamethoxazole"
+   },
+   "specimen_as_printed": "various samples"
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 41,
+   "page": 14,
+   "table": "Antibiogram of Enterobacteriaceae isolated from various samples in IPD setting",
+   "s": {
+    "amikacin": 71.1,
+    "cefotaxime": 42.1,
+    "ceftazidime": 0,
+    "ceftriaxone": 50,
+    "ciprofloxacin": 35.1,
+    "fosfomycin": 100,
+    "imipenem": 84.2,
+    "levofloxacin": 37.9,
+    "meropenem": 89.5,
+    "nitrofurantoin": 0,
+    "piptazo": 83.8,
+    "cotrimoxazole": 33.3
+   },
+   "nt": {
+    "amikacin": 38,
+    "cefotaxime": 38,
+    "ceftazidime": 1,
+    "ceftriaxone": 12,
+    "ciprofloxacin": 37,
+    "fosfomycin": 5,
+    "imipenem": 38,
+    "levofloxacin": 29,
+    "meropenem": 38,
+    "nitrofurantoin": 9,
+    "piptazo": 37,
+    "cotrimoxazole": 12
+   },
+   "note": "IPD, various samples. Cells printed as 0/0 (not tested) are left out.",
+   "notes": {
+    "cotrimoxazole": "printed as Trimethoprim-sulfamethoxazole"
+   },
+   "specimen_as_printed": "various samples"
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Morganella morganii",
+   "pheno": null,
+   "n": 33,
+   "page": 14,
+   "table": "Antibiogram of Enterobacteriaceae isolated from various samples in IPD setting",
+   "s": {
+    "amikacin": 96.7,
+    "cefotaxime": 58.6,
+    "ceftazidime": 75,
+    "ceftriaxone": 61.5,
+    "ciprofloxacin": 46.7,
+    "ertapenem": 100,
+    "fosfomycin": 0,
+    "imipenem": 75.9,
+    "levofloxacin": 52.2,
+    "meropenem": 93.1,
+    "nitrofurantoin": 0,
+    "piptazo": 90,
+    "cotrimoxazole": 66.7
+   },
+   "nt": {
+    "amikacin": 30,
+    "cefotaxime": 29,
+    "ceftazidime": 4,
+    "ceftriaxone": 13,
+    "ciprofloxacin": 30,
+    "ertapenem": 4,
+    "fosfomycin": 4,
+    "imipenem": 29,
+    "levofloxacin": 23,
+    "meropenem": 29,
+    "nitrofurantoin": 3,
+    "piptazo": 30,
+    "cotrimoxazole": 9
+   },
+   "note": "IPD, various samples. Cells printed as 0/0 (not tested) are left out.",
+   "notes": {
+    "cotrimoxazole": "printed as Trimethoprim-sulfamethoxazole"
+   },
+   "specimen_as_printed": "various samples"
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Providencia rettgeri",
+   "pheno": null,
+   "n": 11,
+   "page": 14,
+   "table": "Antibiogram of Enterobacteriaceae isolated from various samples in IPD setting",
+   "s": {
+    "amikacin": 60,
+    "cefotaxime": 40,
+    "ceftazidime": 0,
+    "ceftriaxone": 16.7,
+    "ciprofloxacin": 30,
+    "fosfomycin": 75,
+    "imipenem": 50,
+    "levofloxacin": 12.5,
+    "meropenem": 50,
+    "nitrofurantoin": 0,
+    "piptazo": 40,
+    "cotrimoxazole": 28.6
+   },
+   "nt": {
+    "amikacin": 10,
+    "cefotaxime": 10,
+    "ceftazidime": 1,
+    "ceftriaxone": 6,
+    "ciprofloxacin": 10,
+    "fosfomycin": 4,
+    "imipenem": 10,
+    "levofloxacin": 8,
+    "meropenem": 10,
+    "nitrofurantoin": 5,
+    "piptazo": 10,
+    "cotrimoxazole": 7
+   },
+   "note": "IPD, various samples. Cells printed as 0/0 (not tested) are left out. Cefotaxime and ceftriaxone differ widely in the source (few isolates tested for one of them); both recorded as printed.",
+   "notes": {
+    "cotrimoxazole": "printed as Trimethoprim-sulfamethoxazole"
+   },
+   "specimen_as_printed": "various samples"
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Providencia stuartii",
+   "pheno": null,
+   "n": 13,
+   "page": 14,
+   "table": "Antibiogram of Enterobacteriaceae isolated from various samples in IPD setting",
+   "s": {
+    "amikacin": 50,
+    "cefotaxime": 33.3,
+    "ceftazidime": 40,
+    "ceftriaxone": 100,
+    "ciprofloxacin": 45.5,
+    "fosfomycin": 0,
+    "imipenem": 63.6,
+    "levofloxacin": 50,
+    "meropenem": 81.8,
+    "minocycline": 0,
+    "nitrofurantoin": 0,
+    "piptazo": 45.5,
+    "cotrimoxazole": 100
+   },
+   "nt": {
+    "amikacin": 10,
+    "cefotaxime": 9,
+    "ceftazidime": 5,
+    "ceftriaxone": 3,
+    "ciprofloxacin": 11,
+    "fosfomycin": 1,
+    "imipenem": 11,
+    "levofloxacin": 10,
+    "meropenem": 11,
+    "minocycline": 1,
+    "nitrofurantoin": 1,
+    "piptazo": 11,
+    "cotrimoxazole": 1
+   },
+   "note": "IPD, various samples. Cells printed as 0/0 (not tested) are left out. Cefotaxime and ceftriaxone differ widely in the source (few isolates tested for one of them); both recorded as printed.",
+   "notes": {
+    "cotrimoxazole": "printed as Trimethoprim-sulfamethoxazole"
+   },
+   "specimen_as_printed": "various samples"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 76,
+   "page": 15,
+   "table": "Susceptibility percentages of Acinetobacter baumannii isolated from different specimen (except faeces), IPD setting",
+   "s": {
+    "amikacin": 24,
+    "cefepime": 9.2,
+    "ceftazidime": 9.2,
+    "imipenem": 10.5,
+    "levofloxacin": 9.7,
+    "meropenem": 10.5,
+    "minocycline": 46.5,
+    "piptazo": 13.2
+   },
+   "nt": {
+    "amikacin": 75,
+    "cefepime": 76,
+    "ceftazidime": 76,
+    "imipenem": 76,
+    "levofloxacin": 62,
+    "meropenem": 76,
+    "minocycline": 43,
+    "piptazo": 76
+   },
+   "note": "IPD. Polymyxin B cells printed as *0/0 (not tested) are left out.",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 337,
+   "page": 15,
+   "table": "Susceptibility percentages of Acinetobacter baumannii isolated from different specimen (except faeces), IPD setting",
+   "s": {
+    "amikacin": 11.3,
+    "cefepime": 4.8,
+    "ceftazidime": 4.2,
+    "imipenem": 3.9,
+    "levofloxacin": 4.9,
+    "meropenem": 4.7,
+    "minocycline": 39.4,
+    "piptazo": 6.9
+   },
+   "nt": {
+    "amikacin": 337,
+    "cefepime": 330,
+    "ceftazidime": 336,
+    "imipenem": 337,
+    "levofloxacin": 286,
+    "meropenem": 337,
+    "minocycline": 226,
+    "piptazo": 335
+   },
+   "note": "IPD. Polymyxin B cells printed as *0/0 (not tested) are left out.",
+   "specimen_as_printed": "LRT"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 63,
+   "page": 15,
+   "table": "Susceptibility percentages of Acinetobacter baumannii isolated from different specimen (except faeces), IPD setting",
+   "s": {
+    "amikacin": 7.9,
+    "cefepime": 1.6,
+    "ceftazidime": 0,
+    "imipenem": 7.9,
+    "levofloxacin": 8.2,
+    "meropenem": 9.5,
+    "minocycline": 51.4,
+    "piptazo": 3.2
+   },
+   "nt": {
+    "amikacin": 63,
+    "cefepime": 62,
+    "ceftazidime": 63,
+    "imipenem": 63,
+    "levofloxacin": 49,
+    "meropenem": 63,
+    "minocycline": 35,
+    "piptazo": 63
+   },
+   "note": "IPD. Polymyxin B cells printed as *0/0 (not tested) are left out.",
+   "specimen_as_printed": "Superficial Infection"
+  },
+  {
+   "spec": "deep",
+   "set": "ward",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 50,
+   "page": 15,
+   "table": "Susceptibility percentages of Acinetobacter baumannii isolated from different specimen (except faeces), IPD setting",
+   "s": {
+    "amikacin": 6,
+    "cefepime": 4,
+    "ceftazidime": 4,
+    "imipenem": 6,
+    "levofloxacin": 9.3,
+    "meropenem": 8,
+    "minocycline": 57.7,
+    "piptazo": 6
+   },
+   "nt": {
+    "amikacin": 50,
+    "cefepime": 50,
+    "ceftazidime": 50,
+    "imipenem": 50,
+    "levofloxacin": 43,
+    "meropenem": 50,
+    "minocycline": 26,
+    "piptazo": 50
+   },
+   "note": "IPD. Polymyxin B cells printed as *0/0 (not tested) are left out.",
+   "specimen_as_printed": "Deep Infection"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 94,
+   "page": 15,
+   "table": "Susceptibility percentages of Pseudomonas aeruginosa isolated from different specimen (except faeces), IPD setting",
+   "s": {
+    "amikacin": 56.4,
+    "cefepime": 70,
+    "ceftazidime": 60.6,
+    "imipenem": 71.3,
+    "levofloxacin": 47.7,
+    "meropenem": 70.2,
+    "piptazo": 69.1
+   },
+   "nt": {
+    "amikacin": 94,
+    "cefepime": 90,
+    "ceftazidime": 94,
+    "imipenem": 94,
+    "levofloxacin": 88,
+    "meropenem": 94,
+    "piptazo": 94
+   },
+   "note": "IPD. Polymyxin B and minocycline cells printed as *0/0 (not tested) are left out.",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 133,
+   "page": 15,
+   "table": "Susceptibility percentages of Pseudomonas aeruginosa isolated from different specimen (except faeces), IPD setting",
+   "s": {
+    "amikacin": 58.6,
+    "cefepime": 52.5,
+    "ceftazidime": 49.6,
+    "imipenem": 54.1,
+    "levofloxacin": 29.9,
+    "meropenem": 51.9,
+    "piptazo": 60.6
+   },
+   "nt": {
+    "amikacin": 133,
+    "cefepime": 120,
+    "ceftazidime": 133,
+    "imipenem": 133,
+    "levofloxacin": 127,
+    "meropenem": 133,
+    "piptazo": 132
+   },
+   "note": "IPD. Polymyxin B and minocycline cells printed as *0/0 (not tested) are left out.",
+   "specimen_as_printed": "LRT"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 78,
+   "page": 15,
+   "table": "Susceptibility percentages of Pseudomonas aeruginosa isolated from different specimen (except faeces), IPD setting",
+   "s": {
+    "amikacin": 56.4,
+    "cefepime": 56.5,
+    "ceftazidime": 57.7,
+    "imipenem": 73.1,
+    "levofloxacin": 34.3,
+    "meropenem": 69.2,
+    "piptazo": 75.6
+   },
+   "nt": {
+    "amikacin": 78,
+    "cefepime": 69,
+    "ceftazidime": 78,
+    "imipenem": 78,
+    "levofloxacin": 70,
+    "meropenem": 78,
+    "piptazo": 78
+   },
+   "note": "IPD. Polymyxin B and minocycline cells printed as *0/0 (not tested) are left out.",
+   "specimen_as_printed": "Superficial Infection"
+  },
+  {
+   "spec": "deep",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 54,
+   "page": 15,
+   "table": "Susceptibility percentages of Pseudomonas aeruginosa isolated from different specimen (except faeces), IPD setting",
+   "s": {
+    "amikacin": 74.1,
+    "cefepime": 78,
+    "ceftazidime": 74.1,
+    "imipenem": 77.8,
+    "levofloxacin": 46.9,
+    "meropenem": 74.1,
+    "piptazo": 83.3
+   },
+   "nt": {
+    "amikacin": 54,
+    "cefepime": 50,
+    "ceftazidime": 54,
+    "imipenem": 54,
+    "levofloxacin": 49,
+    "meropenem": 54,
+    "piptazo": 54
+   },
+   "note": "IPD. Polymyxin B and minocycline cells printed as *0/0 (not tested) are left out.",
+   "specimen_as_printed": "Deep Infection"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 173,
+   "page": 15,
+   "table": "Susceptibility percentages of Pseudomonas aeruginosa isolated from different specimen (except faeces), IPD setting",
+   "s": {
+    "amikacin": 58.4,
+    "cefepime": 61.2,
+    "ceftazidime": 57.2,
+    "imipenem": 70.5,
+    "levofloxacin": 31.5,
+    "meropenem": 69.9,
+    "piptazo": 83.8
+   },
+   "nt": {
+    "amikacin": 173,
+    "cefepime": 152,
+    "ceftazidime": 173,
+    "imipenem": 173,
+    "levofloxacin": 143,
+    "meropenem": 173,
+    "piptazo": 173
+   },
+   "note": "IPD. Polymyxin B and minocycline cells printed as *0/0 (not tested) are left out.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 477,
+   "page": 15,
+   "table": "Antibiogram of Gram positives isolated from various samples: S. aureus, All Specimens",
+   "s": {
+    "cefoxitin": 42,
+    "ceftaroline": 83.6,
+    "ciprofloxacin": 17.1,
+    "clindamycin": 50.1,
+    "erythromycin": 14.6,
+    "linezolid": 98.9,
+    "teicoplanin": 90,
+    "tetracycline": 81.5,
+    "cotrimoxazole": 77.9,
+    "vancomycin": 98.3
+   },
+   "nt": {
+    "cefoxitin": 443,
+    "ceftaroline": 55,
+    "ciprofloxacin": 451,
+    "clindamycin": 465,
+    "erythromycin": 467,
+    "linezolid": 470,
+    "teicoplanin": 30,
+    "tetracycline": 426,
+    "cotrimoxazole": 467,
+    "vancomycin": 176
+   },
+   "note": "Printed as Sau. Setting not stated in the source (heading: Gram positives isolated from various samples); recorded as all settings. Percentages are printed with a leading minus sign (e.g. 186/443 printed as -42), a formatting artefact; recorded as positive values, which match the printed susceptible/tested counts. Cells marked * with (-) (fewer than 30 tested) have no percentage in the source and are left out.",
+   "notes": {
+    "cotrimoxazole": "printed as Trimethoprim-sulfamethoxazole"
+   },
+   "specimen_as_printed": "All Specimens"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MSSA",
+   "n": 207,
+   "page": 15,
+   "table": "Antibiogram of Gram positives isolated from various samples: S. aureus, All Specimens",
+   "s": {
+    "cefoxitin": 100,
+    "ciprofloxacin": 23,
+    "clindamycin": 64,
+    "erythromycin": 16.7,
+    "linezolid": 98.5,
+    "tetracycline": 84,
+    "cotrimoxazole": 77.7,
+    "vancomycin": 97.1
+   },
+   "nt": {
+    "cefoxitin": 178,
+    "ciprofloxacin": 200,
+    "clindamycin": 200,
+    "erythromycin": 203,
+    "linezolid": 203,
+    "tetracycline": 181,
+    "cotrimoxazole": 202,
+    "vancomycin": 70
+   },
+   "note": "Setting not stated in the source (heading: Gram positives isolated from various samples); recorded as all settings. Percentages are printed with a leading minus sign (e.g. 186/443 printed as -42), a formatting artefact; recorded as positive values, which match the printed susceptible/tested counts. Cells marked * with (-) (fewer than 30 tested) have no percentage in the source and are left out.",
+   "notes": {
+    "cotrimoxazole": "printed as Trimethoprim-sulfamethoxazole"
+   },
+   "specimen_as_printed": "All Specimens"
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MRSA",
+   "n": 270,
+   "page": 15,
+   "table": "Antibiogram of Gram positives isolated from various samples: S. aureus, All Specimens",
+   "s": {
+    "cefoxitin": 3,
+    "ceftaroline": 92.3,
+    "ciprofloxacin": 12.4,
+    "clindamycin": 39.6,
+    "erythromycin": 12.9,
+    "linezolid": 99.3,
+    "tetracycline": 79.6,
+    "cotrimoxazole": 78.1,
+    "vancomycin": 99.1
+   },
+   "nt": {
+    "cefoxitin": 265,
+    "ceftaroline": 39,
+    "ciprofloxacin": 251,
+    "clindamycin": 265,
+    "erythromycin": 264,
+    "linezolid": 267,
+    "tetracycline": 245,
+    "cotrimoxazole": 265,
+    "vancomycin": 106
+   },
+   "note": "The source prints 8/265 (3%) cefoxitin-susceptible among MRSA, which is internally inconsistent; recorded as printed. Setting not stated in the source (heading: Gram positives isolated from various samples); recorded as all settings. Percentages are printed with a leading minus sign (e.g. 186/443 printed as -42), a formatting artefact; recorded as positive values, which match the printed susceptible/tested counts. Cells marked * with (-) (fewer than 30 tested) have no percentage in the source and are left out.",
+   "notes": {
+    "cotrimoxazole": "printed as Trimethoprim-sulfamethoxazole"
+   },
+   "specimen_as_printed": "All Specimens"
+  },
+  {
+   "spec": "nonurine",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 98,
+   "page": 15,
+   "table": "Antibiogram of Gram positives isolated from various samples: Enterococcus",
+   "s": {
+    "ampicillin": 19.3,
+    "gentamicin_hl": 34.9,
+    "linezolid": 94.6,
+    "penicillin": 21.4,
+    "teicoplanin": 68.1,
+    "vancomycin": 75.8
+   },
+   "nt": {
+    "ampicillin": 83,
+    "gentamicin_hl": 83,
+    "linezolid": 93,
+    "penicillin": 28,
+    "teicoplanin": 72,
+    "vancomycin": 95
+   },
+   "note": "Setting not stated in the source (heading: Gram positives isolated from various samples); recorded as all settings. Cells marked * with (-) (fewer than 30 tested) have no percentage in the source and are left out.",
+   "notes": {
+    "gentamicin_hl": "printed as Gentamicin_HL"
+   },
+   "specimen_as_printed": "All Specimens (except urine)"
+  },
+  {
+   "spec": "nonurine",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 34,
+   "page": 15,
+   "table": "Antibiogram of Gram positives isolated from various samples: Enterococcus",
+   "s": {
+    "ampicillin": 87.1,
+    "gentamicin_hl": 71,
+    "linezolid": 97.1,
+    "teicoplanin": 85.2,
+    "vancomycin": 84.4
+   },
+   "nt": {
+    "ampicillin": 31,
+    "gentamicin_hl": 31,
+    "linezolid": 34,
+    "teicoplanin": 27,
+    "vancomycin": 32
+   },
+   "note": "Setting not stated in the source (heading: Gram positives isolated from various samples); recorded as all settings. Cells marked * with (-) (fewer than 30 tested) have no percentage in the source and are left out.",
+   "notes": {
+    "gentamicin_hl": "printed as Gentamicin_HL"
+   },
+   "specimen_as_printed": "All Specimens (except urine)"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 40,
+   "page": 15,
+   "table": "Antibiogram of Gram positives isolated from various samples: Enterococcus",
+   "s": {
+    "ampicillin": 21.4,
+    "gentamicin_hl": 53.6,
+    "linezolid": 94.6,
+    "teicoplanin": 73.7,
+    "vancomycin": 73.7
+   },
+   "nt": {
+    "ampicillin": 28,
+    "gentamicin_hl": 28,
+    "linezolid": 37,
+    "teicoplanin": 38,
+    "vancomycin": 38
+   },
+   "note": "Setting not stated in the source (heading: Gram positives isolated from various samples); recorded as all settings. Cells marked * with (-) (fewer than 30 tested) have no percentage in the source and are left out.",
+   "notes": {
+    "gentamicin_hl": "printed as Gentamicin_HL"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": null,
+   "page": 16,
+   "table": "Antibiogram of ICU of Blood and Respiratory isolates: Blood, E.coli",
+   "s": {
+    "piptazo": 35.71,
+    "ceftriaxone": 3.4,
+    "cefepime": 27.58,
+    "ciprofloxacin": 0,
+    "levofloxacin": 0,
+    "cotrimoxazole": 16.6,
+    "gentamicin": 59.25,
+    "colistin": 100,
+    "amikacin": 74.07,
+    "imipenem": 61.55,
+    "meropenem": 75,
+    "aztreonam": 63
+   },
+   "nt": {
+    "piptazo": 28,
+    "ceftriaxone": 29,
+    "cefepime": 29,
+    "ciprofloxacin": 23,
+    "levofloxacin": 12,
+    "cotrimoxazole": 24,
+    "gentamicin": 27,
+    "colistin": 26,
+    "amikacin": 27,
+    "imipenem": 26,
+    "meropenem": 28,
+    "aztreonam": 9
+   },
+   "conflict": {
+    "aztreonam": "printed 63% but its printed counts are 5/9 = 55.6%"
+   },
+   "note": "ICU. The table gives susceptible and total tested per drug ('Total patients'); the number of isolates of the organism is not printed.",
+   "notes": {
+    "piptazo": "printed as Pip taz",
+    "levofloxacin": "printed as levoflox",
+    "gentamicin": "printed as gentamycin",
+    "imipenem": "printed as 16 susceptible of 26 (61.55%); 16 of 26 is 61.54%, a small arithmetic slip in the source; recorded as printed"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": null,
+   "page": 16,
+   "table": "Antibiogram of ICU of Blood and Respiratory isolates: Blood, Klebsiella pneumoniae",
+   "s": {
+    "cefepime": 9,
+    "ceftriaxone": 4,
+    "piptazo": 5.8,
+    "ciprofloxacin": 3.7,
+    "cotrimoxazole": 28,
+    "gentamicin": 34.28,
+    "amikacin": 64.86,
+    "meropenem": 21.21,
+    "imipenem": 35.29,
+    "colistin": 100
+   },
+   "nt": {
+    "cefepime": 33,
+    "ceftriaxone": 25,
+    "piptazo": 34,
+    "ciprofloxacin": 29,
+    "cotrimoxazole": 32,
+    "gentamicin": 35,
+    "amikacin": 37,
+    "meropenem": 33,
+    "imipenem": 34,
+    "colistin": 32
+   },
+   "conflict": {
+    "ciprofloxacin": "printed 3.7% but its printed counts are 2/29 = 6.9%"
+   },
+   "note": "ICU. The table gives susceptible and total tested per drug ('Total patients'); the number of isolates of the organism is not printed.",
+   "notes": {
+    "piptazo": "printed as Pip tazo",
+    "gentamicin": "printed as gentamycin"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Pseudomonas",
+   "pheno": null,
+   "n": null,
+   "page": 16,
+   "table": "Antibiogram of ICU of Blood and Respiratory isolates: Blood, Pseudomonas",
+   "s": {
+    "colistin": 100,
+    "ceftazidime": 44.44,
+    "ciprofloxacin": 50,
+    "gentamicin": 58.33,
+    "imipenem": 50,
+    "levofloxacin": 54.54,
+    "meropenem": 50,
+    "amikacin": 50,
+    "piptazo": 33.33,
+    "cefepime": 50,
+    "aztreonam": 60
+   },
+   "nt": {
+    "colistin": 11,
+    "ceftazidime": 9,
+    "ciprofloxacin": 10,
+    "gentamicin": 12,
+    "imipenem": 12,
+    "levofloxacin": 11,
+    "meropenem": 12,
+    "amikacin": 12,
+    "piptazo": 12,
+    "cefepime": 10,
+    "aztreonam": 5
+   },
+   "note": "Printed as Pseudomonas (species not given). ICU. The table gives susceptible and total tested per drug ('Total patients'); the number of isolates of the organism is not printed.",
+   "notes": {
+    "levofloxacin": "printed as Levoflox",
+    "piptazo": "printed as Pip tazo"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": null,
+   "page": 16,
+   "table": "Antibiogram of ICU of Blood and Respiratory isolates: Blood, Acinetobacter baumannii",
+   "s": {
+    "ceftazidime": 0,
+    "gentamicin": 2.4,
+    "piptazo": 0,
+    "meropenem": 4.25,
+    "amikacin": 11.36,
+    "cotrimoxazole": 13.33,
+    "colistin": 95.65,
+    "minocycline": 51.16,
+    "levofloxacin": 14.28,
+    "ampsulbactam": 39.13
+   },
+   "nt": {
+    "ceftazidime": 40,
+    "gentamicin": 41,
+    "piptazo": 44,
+    "meropenem": 47,
+    "amikacin": 44,
+    "cotrimoxazole": 45,
+    "colistin": 46,
+    "minocycline": 43,
+    "levofloxacin": 35,
+    "ampsulbactam": 23
+   },
+   "note": "ICU. The table gives susceptible and total tested per drug ('Total isolates'); the number of isolates of the organism is not printed.",
+   "notes": {
+    "ampsulbactam": "printed as Ampi sulbactam",
+    "piptazo": "printed as Pip tazo",
+    "levofloxacin": "printed as levoflox",
+    "gentamicin": "printed as gentamycin"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": "MSSA",
+   "n": null,
+   "page": 16,
+   "table": "Antibiogram of ICU of Blood and Respiratory isolates: Blood, MSSA",
+   "s": {
+    "penicillin": 33.33,
+    "ciprofloxacin": 57.14,
+    "levofloxacin": 62.5,
+    "cefoxitin": 100,
+    "erythromycin": 37.5,
+    "clindamycin": 85.71,
+    "gentamicin": 100,
+    "vancomycin": 100,
+    "linezolid": 100,
+    "teicoplanin": 100,
+    "cotrimoxazole": 87.5
+   },
+   "nt": {
+    "penicillin": 6,
+    "ciprofloxacin": 7,
+    "levofloxacin": 8,
+    "cefoxitin": 8,
+    "erythromycin": 8,
+    "clindamycin": 7,
+    "gentamicin": 8,
+    "vancomycin": 4,
+    "linezolid": 8,
+    "teicoplanin": 8,
+    "cotrimoxazole": 8
+   },
+   "note": "Printed as MSSA. ICU. The table gives susceptible and total tested per drug ('Total patients'); the number of isolates of the organism is not printed.",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus",
+   "pheno": null,
+   "n": null,
+   "page": 16,
+   "table": "Antibiogram of ICU of Blood and Respiratory isolates: Blood, Enterococcus",
+   "s": {
+    "linezolid": 92.1,
+    "teicoplanin": 89.4,
+    "vancomycin": 89.74,
+    "erythromycin": 32.3,
+    "levofloxacin": 21.8,
+    "gentamicin": 21.42,
+    "penicillin": 31.42,
+    "ciprofloxacin": 22.22,
+    "ampicillin": 30.76
+   },
+   "nt": {
+    "linezolid": 38,
+    "teicoplanin": 38,
+    "vancomycin": 39,
+    "erythromycin": 34,
+    "levofloxacin": 32,
+    "gentamicin": 28,
+    "penicillin": 35,
+    "ciprofloxacin": 36,
+    "ampicillin": 13
+   },
+   "note": "ICU. The table gives susceptible and total tested per drug ('Total patients'); the number of isolates of the organism is not printed.",
+   "notes": {
+    "gentamicin": "printed as gentamycin; the table does not say whether this is the high-level (synergy) screen"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Candida",
+   "pheno": null,
+   "n": null,
+   "page": 17,
+   "table": "Antibiogram of ICU of Blood and Respiratory isolates: Blood, Candida",
+   "s": {
+    "amphotericin_b": 90.56,
+    "caspofungin": 86.53,
+    "fluconazole": 76,
+    "voriconazole": 96.15,
+    "micafungin": 92.85
+   },
+   "nt": {
+    "amphotericin_b": 53,
+    "caspofungin": 52,
+    "fluconazole": 50,
+    "voriconazole": 52,
+    "micafungin": 42
+   },
+   "note": "ICU. The table gives susceptible and total tested per drug ('Total patients'); the number of isolates of the organism is not printed.",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": null,
+   "page": 17,
+   "table": "Antibiogram of ICU of Blood and Respiratory isolates: Respiratory, Gram negative isolates, Klebsiella pneumoniae",
+   "s": {
+    "cefepime": 24.07,
+    "ceftriaxone": 11.32,
+    "levofloxacin": 21.62,
+    "ciprofloxacin": 16.66,
+    "gentamicin": 38.46,
+    "cotrimoxazole": 27.45,
+    "aztreonam": 45.45,
+    "amikacin": 54.16,
+    "meropenem": 42.55,
+    "imipenem": 37.2,
+    "colistin": 100,
+    "piptazo": 31.91
+   },
+   "nt": {
+    "cefepime": 54,
+    "ceftriaxone": 53,
+    "levofloxacin": 37,
+    "ciprofloxacin": 24,
+    "gentamicin": 52,
+    "cotrimoxazole": 51,
+    "aztreonam": 22,
+    "amikacin": 48,
+    "meropenem": 47,
+    "imipenem": 43,
+    "colistin": 50,
+    "piptazo": 47
+   },
+   "note": "ICU. The table gives susceptible and total tested per drug ('Total patients'); the number of isolates of the organism is not printed.",
+   "notes": {
+    "levofloxacin": "printed as levoflox",
+    "ciprofloxacin": "printed as ciproflox",
+    "piptazo": "printed as Pip tazo",
+    "gentamicin": "printed as gentamycin"
+   },
+   "specimen_as_printed": "Respiratory"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": null,
+   "page": 17,
+   "table": "Antibiogram of ICU of Blood and Respiratory isolates: Respiratory, Gram negative isolates, Acinetobacter baumannii",
+   "s": {
+    "ceftriaxone": 1.9,
+    "levofloxacin": 12.34,
+    "gentamicin": 6.01,
+    "piptazo": 5.6,
+    "ciprofloxacin": 6.6,
+    "imipenem": 2.6,
+    "cefoperazone_sulbactam": 9.9,
+    "meropenem": 7.02,
+    "amikacin": 5.04,
+    "colistin": 100,
+    "minocycline": 61.2,
+    "cotrimoxazole": 12.94
+   },
+   "nt": {
+    "ceftriaxone": 157,
+    "levofloxacin": 162,
+    "gentamicin": 183,
+    "piptazo": 178,
+    "ciprofloxacin": 135,
+    "imipenem": 149,
+    "cefoperazone_sulbactam": 111,
+    "meropenem": 185,
+    "amikacin": 165,
+    "colistin": 178,
+    "minocycline": 165,
+    "cotrimoxazole": 170
+   },
+   "conflict": {
+    "amikacin": "printed 5.04% but its printed counts are 9/165 = 5.45%"
+   },
+   "note": "ICU. The table gives susceptible and total tested per drug ('Total isolates'); the number of isolates of the organism is not printed.",
+   "notes": {
+    "cefoperazone_sulbactam": "printed as Cefoperazone sulbactum",
+    "levofloxacin": "printed as levoflox",
+    "ciprofloxacin": "printed as ciproflox",
+    "gentamicin": "printed as gentamycin"
+   },
+   "specimen_as_printed": "Respiratory"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Pseudomonas",
+   "pheno": null,
+   "n": null,
+   "page": 17,
+   "table": "Antibiogram of ICU of Blood and Respiratory isolates: Respiratory, Gram negative isolates, Pseudomonas",
+   "s": {
+    "colistin": 100,
+    "ceftazidime": 24,
+    "ciprofloxacin": 30.76,
+    "gentamicin": 46.42,
+    "imipenem": 27.58,
+    "levofloxacin": 24,
+    "meropenem": 32,
+    "amikacin": 44.44,
+    "piptazo": 59.25,
+    "cefepime": 34.48
+   },
+   "nt": {
+    "colistin": 27,
+    "ceftazidime": 25,
+    "ciprofloxacin": 26,
+    "gentamicin": 28,
+    "imipenem": 29,
+    "levofloxacin": 25,
+    "meropenem": 25,
+    "amikacin": 25,
+    "piptazo": 27,
+    "cefepime": 29
+   },
+   "conflict": {
+    "amikacin": "printed 44.44% but its printed counts are 12/25 = 48%"
+   },
+   "note": "Printed as Pseudomonas (species not given). ICU. The table gives susceptible and total tested per drug ('Total patients'); the number of isolates of the organism is not printed.",
+   "notes": {
+    "colistin": "printed as coistin",
+    "ciprofloxacin": "printed as ciprofox",
+    "levofloxacin": "printed as levoflox",
+    "piptazo": "printed as Pip tazo",
+    "gentamicin": "printed as gentamycin"
+   },
+   "specimen_as_printed": "Respiratory"
+  }
+ ],
+ "counts": [],
+ "excluded": [
+  {
+   "what": "p13 Salmonella spp. column (n=13)",
+   "org": "Salmonella spp.",
+   "why": "printed as a separate column next to S. Typhi and S. Paratyphi A without saying whether these are non-typhoidal or unserotyped isolates; the only canonical key for 'Salmonella spp.' means typhoidal Salmonella grouped, so the values would be mislabelled"
+  },
+  {
+   "what": "p13 Salmonella Paratyphi A column",
+   "org": "Salmonella Paratyphi A",
+   "why": "n=0, every cell 0/0"
+  },
+  {
+   "what": "p13 Pefloxacin row (S. Typhi 0/1)",
+   "drug": "Pefloxacin",
+   "why": "no canonical drug key"
+  },
+  {
+   "what": "p14 Klebsiella spp. column (n=11)",
+   "org": "Klebsiella spp.",
+   "why": "maps to the same canonical organism (Klebsiella pneumoniae / spp.) as the Klebsiella pneumoniae column (n=909) in the same stratum; one row per stratum, the K. pneumoniae column is kept"
+  },
+  {
+   "what": "p14 Hafnia alvei (n=0) and Proteus vulgaris (n=1) columns",
+   "why": "no isolate tested for any drug (every cell 0/0)"
+  },
+  {
+   "what": "Cells printed as 0/0 (0) on pp13 to 14 and *0/0 (-) on p15",
+   "why": "no isolate tested; the (0) is not a result"
+  },
+  {
+   "what": "p15 A. baumannii CSF (n=12) and urine (n=19) columns, P. aeruginosa CSF (n=1) column, E. faecalis blood (n=17), E. faecium superficial infection (n=12) and deep infection (n=14) columns",
+   "why": "marked * (fewer than 30 isolates) with no percentage printed, only susceptible/tested counts; percentages were not computed"
+  },
+  {
+   "what": "p15 single cells marked * with (-) in columns of 30 or more isolates (S. aureus oxacillin *3/18, daptomycin *1/1, tigecycline *18/18; MSSA ceftaroline *10/16, oxacillin *3/3, teicoplanin *14/16, tigecycline *8/8; MRSA oxacillin *0/15, teicoplanin *13/14, daptomycin *1/1, tigecycline *10/10; E. faecium penicillin (blood) *5/14; E. faecalis penicillin *8/15; enterococcal daptomycin and fosfomycin cells)",
+   "why": "no percentage printed (fewer than 30 tested); not computed"
+  },
+  {
+   "what": "pp16 to 17 ICU 'sulbactam' rows (blood E. coli 12/24 50%, K. pneumoniae 2/33 6%, A. baumannii 11/40 27.5%; respiratory K. pneumoniae 13/41 31.7%, A. baumannii 'sulbacatam' 47/142 33.09%)",
+   "drug": "sulbactam",
+   "why": "no canonical key for sulbactam alone and no partner drug is stated (the A. baumannii tables list ampicillin-sulbactam or cefoperazone-sulbactam separately)"
+  }
+ ],
+ "issues": [
+  "Second reader 2026-09-26: all 450 cells, all 394 per-drug numbers tested and all 46 rows (organism, specimen, setting, n) re-read against the page images (p12 rendered at scale 3; pp13 to 17 from the embedded table images, upscaled 1.4 to 2.2x and cropped by column group), each value read before it was compared with the extraction; 0 value, number-tested, n or stratum errors.",
+  "The 4 conflicts are printed that way, not misreadings: ICU blood E. coli aztreonam 5 of 9 printed 63%, ICU blood K. pneumoniae ciprofloxacin 2 of 29 printed 3.7%, ICU respiratory A. baumannii amikacin 9 of 165 printed 5.04%, ICU respiratory Pseudomonas amikacin 12 of 25 printed 44.44%. The ICU blood E. coli imipenem slip (16 of 26 printed 61.55%) is also as printed. Every other susceptible/tested pair on pp13 to 17 gives its printed percentage (truncated or rounded).",
+  "All 26 cells the validator does not keep are as printed: 18 cautions (cefotaxime against ceftriaxone for E. coli OPD and IPD, C. koseri, K. oxytoca, S. marcescens, P. rettgeri and P. stuartii; the 4 conflicts), 7 intrinsic (E. faecalis OPD clindamycin 64.1; nitrofurantoin 0 for P. mirabilis, M. morganii, P. rettgeri and P. stuartii; P. stuartii minocycline 0; ICU blood Enterococcus gentamicin 6 of 28), 1 suppressed (MRSA cefoxitin 8 of 265, printed -3).",
+  "Corrected the 4 A. baumannii IPD row notes: they said minocycline was printed *0/0, but minocycline is printed for A. baumannii (blood 20/43, LRT 89/226, superficial 18/35, deep 15/26); only polymyxin B is *0/0. No value changed.",
+  "Stratum note for the lead: the p15 Gram-positive table (S. aureus, MSSA, MRSA, Enterococcus) prints no setting ('Antibiogram of Gram positives isolated from various samples', placed after the IPD Gram-negative tables); kept as all settings as extracted, but it may be inpatients only."
+ ]
+}

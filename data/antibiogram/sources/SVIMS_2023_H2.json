@@ -1,0 +1,390 @@
+{
+ "id": "SVIMS_2023_H2",
+ "kind": "institution",
+ "inst": "SVIMS_TIRUPATI",
+ "institution": "Sri Venkateswara Institute of Medical Sciences, Tirupati",
+ "short": "SVIMS Tirupati",
+ "city": "Tirupati",
+ "state": "Andhra Pradesh",
+ "region": "south",
+ "sector": "government",
+ "year": 2023,
+ "end": "2023-12",
+ "period": "July to December 2023",
+ "url": "https://svimstpt.ap.nic.in/quality_files/dec2023/haidec23.pdf",
+ "page": "https://svimstpt.ap.nic.in/quality.html",
+ "retrieved": "2026-09-26",
+ "citation": "Sri Venkateswara Institute of Medical Sciences. Healthcare Associated Infections report and SVIMS Antimicrobial Stewardship Pocket Guide, 14th edition, July to December 2023. Tirupati: SVIMS; 2023.",
+ "reporting": "Percent resistant by organism, one bar chart per organism with printed data labels: hospital-wide, surgical departments, medical departments and ICUs for Acinetobacter, E. coli, Klebsiella and Pseudomonas; hospital-wide for S. aureus, CoNS, Enterococcus and MRSA. Isolate numbers and specimen types are not printed.",
+ "measure": "R",
+ "verification": {
+  "status": "double-checked",
+  "note": "Data labels read from the PDF text layer (pdfplumber word positions, sorted by x within each chart, y-axis ticks removed); the drug names are rotated axis labels drawn as graphics, so they were read from the pages rendered at scale 2.2. Each label-to-bar assignment was checked on the rendered chart (every label sits over its bar; bars without a label, such as Ceftazidime in Fig 4 and Polymyxin-B in Fig 15, were identified by the gap in the evenly spaced label positions), and every value compared by eye with the image; a script confirmed the hand-read sequences equal the text-layer sequences for all 21 charts."
+ },
+ "notes": "Half-yearly HAI surveillance report with the SVIMS Antimicrobial Stewardship pocket guide (14th edition). All figures are percent resistant; no isolate numbers are printed (n is null). Specimen base not stated: rows are recorded as all specimens. Location strata: the first four Gram-negative charts and the Gram-positive charts carry no department heading and are recorded as all locations; the Medical departments charts are recorded as wards and the ICUs charts as ICU; the Surgical departments charts are not recorded. Downloaded from the Wayback copy https://web.archive.org/web/20240411123758id_/https://svimstpt.ap.nic.in/quality_files/dec2023/haidec23.pdf (the live host resets connections).",
+ "issues": [
+  "Second reader 2026-09-26: all 129 cells of the 16 recorded charts (the seeded sample of 40 plus every other cell) read from the page images (pages 11 to 22, scale 2.5) before comparing with the extraction, and each chart's label sequence (Piperacillin+sulbactam bars included) matched to the text layer: 0 transcription errors, no value changed. Locations confirmed from the section headings (Surgical departments page 13, Medical departments page 15, ICUs page 17; Figs 1 to 4 and 17 to 22 have no department heading). No isolate numbers are printed anywhere in the report, so n stays null. The 3 intrinsic cells (Acinetobacter aztreonam 46.2, 48.2 and 48.9% resistant: all locations, medical wards, ICUs) are printed as recorded.",
+  "Added a conflict: Pseudomonas all-locations meropenem is 23.6% resistant on Fig 4, while the page 10 text gives Pseudomonas carbapenem resistance as 23.3% (its other carbapenem figures equal the meropenem bars). The page 10 Gram-positive figures (MRSA 55.9, MRCoNS 62.6, VRSA nil, VRCoNS 0.5, VRE 8.1) agree with Figs 17 to 19.",
+  "Fig 15 ICU Klebsiella meropenem left out, as the extraction decided: 0 and 0.9 are printed on the Meropenem and Piperacillin+sulbactam bars (both bars drawn near zero) and Polymyxin-B has no bar; the hospital-wide Klebsiella meropenem (44.7) is above the surgical, medical and ICU figures (39.2, 43.4, 0), while for the other Klebsiella drugs the hospital-wide figure lies within the department range, except co-trimoxazole (57.9 against 55.8 to 57.7) and the other suspect bar, piperacillin+sulbactam (45.6 against 0.9 to 44.6). The other Fig 15 values are kept as printed. For the lead: the rules would also allow recording the printed 0 with a conflict."
+ ],
+ "rows": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter spp",
+   "pheno": null,
+   "n": null,
+   "page": 11,
+   "table": "Fig 1 (% resistant bar chart with printed data labels)",
+   "r": {
+    "amikacin": 67.9,
+    "cefoperazone_sulbactam": 39.2,
+    "aztreonam": 46.2,
+    "ceftriaxone": 89.2,
+    "ciprofloxacin": 76,
+    "cotrimoxazole": 78.3,
+    "gentamicin": 73.1,
+    "meropenem": 79.7,
+    "polymyxin_b": 0.5
+   },
+   "note": "HAI report and Antimicrobial Stewardship pocket guide, July to December 2023, Fig 1, no department heading (hospital-wide charts before the department sections; recorded as all locations). Specimen base not stated; isolate numbers not printed. The chart also has a bar labelled Piperacillin+sulbactam, not recorded (see excluded)."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": null,
+   "page": 11,
+   "table": "Fig 2 (% resistant bar chart with printed data labels)",
+   "r": {
+    "amikacin": 20.3,
+    "cefoperazone_sulbactam": 27.1,
+    "aztreonam": 15.7,
+    "ceftriaxone": 68.7,
+    "ciprofloxacin": 75.1,
+    "cotrimoxazole": 59.3,
+    "gentamicin": 32.9,
+    "meropenem": 17.8,
+    "polymyxin_b": 0.4
+   },
+   "note": "HAI report and Antimicrobial Stewardship pocket guide, July to December 2023, Fig 2, no department heading (hospital-wide charts before the department sections; recorded as all locations). Specimen base not stated; isolate numbers not printed. The chart also has a bar labelled Piperacillin+sulbactam, not recorded (see excluded)."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella spp",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Fig 3 (% resistant bar chart with printed data labels)",
+   "r": {
+    "amikacin": 44.9,
+    "cefoperazone_sulbactam": 46.4,
+    "aztreonam": 29.4,
+    "ceftriaxone": 62.9,
+    "ciprofloxacin": 57.5,
+    "cotrimoxazole": 57.9,
+    "gentamicin": 51,
+    "meropenem": 44.7,
+    "polymyxin_b": 0.8
+   },
+   "note": "HAI report and Antimicrobial Stewardship pocket guide, July to December 2023, Fig 3, no department heading (hospital-wide charts before the department sections; recorded as all locations). Specimen base not stated; isolate numbers not printed. The chart also has a bar labelled Piperacillin+sulbactam, not recorded (see excluded)."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas spp",
+   "pheno": null,
+   "n": null,
+   "page": 12,
+   "table": "Fig 4 (% resistant bar chart with printed data labels)",
+   "r": {
+    "cefoperazone_sulbactam": 27.3,
+    "aztreonam": 8.4,
+    "ciprofloxacin": 30.1,
+    "gentamicin": 34.5,
+    "meropenem": 23.6,
+    "polymyxin_b": 0
+   },
+   "note": "HAI report and Antimicrobial Stewardship pocket guide, July to December 2023, Fig 4, no department heading (hospital-wide charts before the department sections; recorded as all locations). Specimen base not stated; isolate numbers not printed. The chart also has a bar labelled Piperacillin+sulbactam, not recorded (see excluded). The Ceftazidime position has no bar and no label.",
+   "conflict": {
+    "meropenem": "Fig 4 prints 23.6% resistant; the text on page 10 gives Pseudomonas carbapenem resistance as 23.3% (its figures for Acinetobacter 79.7%, Klebsiella 44.7% and E. coli 17.8% equal the meropenem bars)"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Acinetobacter spp",
+   "pheno": null,
+   "n": null,
+   "page": 15,
+   "table": "Fig 9 (% resistant bar chart with printed data labels)",
+   "r": {
+    "amikacin": 67.2,
+    "cefoperazone_sulbactam": 31,
+    "aztreonam": 48.2,
+    "ceftriaxone": 86.2,
+    "ciprofloxacin": 69,
+    "cotrimoxazole": 79.3,
+    "gentamicin": 77.5,
+    "meropenem": 79.3,
+    "polymyxin_b": 0
+   },
+   "note": "HAI report and Antimicrobial Stewardship pocket guide, July to December 2023, Fig 9, Medical departments section (the Surgical departments charts are not recorded, see excluded). Specimen base not stated; isolate numbers not printed. The chart also has a bar labelled Piperacillin+sulbactam, not recorded (see excluded)."
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": null,
+   "page": 15,
+   "table": "Fig 10 (% resistant bar chart with printed data labels)",
+   "r": {
+    "amikacin": 20.4,
+    "cefoperazone_sulbactam": 29.2,
+    "aztreonam": 16.3,
+    "ceftriaxone": 68.5,
+    "ciprofloxacin": 75.6,
+    "cotrimoxazole": 58.9,
+    "gentamicin": 30.2,
+    "meropenem": 1.7,
+    "polymyxin_b": 0.7
+   },
+   "note": "HAI report and Antimicrobial Stewardship pocket guide, July to December 2023, Fig 10, Medical departments section (the Surgical departments charts are not recorded, see excluded). Specimen base not stated; isolate numbers not printed. The chart also has a bar labelled Piperacillin+sulbactam, not recorded (see excluded)."
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Klebsiella spp",
+   "pheno": null,
+   "n": null,
+   "page": 16,
+   "table": "Fig 11 (% resistant bar chart with printed data labels)",
+   "r": {
+    "amikacin": 41,
+    "cefoperazone_sulbactam": 43.4,
+    "aztreonam": 22.6,
+    "ceftriaxone": 57.1,
+    "ciprofloxacin": 51.2,
+    "cotrimoxazole": 57.7,
+    "gentamicin": 47.6,
+    "meropenem": 43.4,
+    "polymyxin_b": 0
+   },
+   "note": "HAI report and Antimicrobial Stewardship pocket guide, July to December 2023, Fig 11, Medical departments section (the Surgical departments charts are not recorded, see excluded). Specimen base not stated; isolate numbers not printed. The chart also has a bar labelled Piperacillin+sulbactam, not recorded (see excluded)."
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Pseudomonas spp",
+   "pheno": null,
+   "n": null,
+   "page": 16,
+   "table": "Fig 12 (% resistant bar chart with printed data labels)",
+   "r": {
+    "cefoperazone_sulbactam": 16.5,
+    "aztreonam": 3.5,
+    "ceftazidime": 23.5,
+    "ciprofloxacin": 20.8,
+    "gentamicin": 28.6,
+    "meropenem": 14.7,
+    "polymyxin_b": 0
+   },
+   "note": "HAI report and Antimicrobial Stewardship pocket guide, July to December 2023, Fig 12, Medical departments section (the Surgical departments charts are not recorded, see excluded). Specimen base not stated; isolate numbers not printed. The chart also has a bar labelled Piperacillin+sulbactam, not recorded (see excluded)."
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Acinetobacter spp",
+   "pheno": null,
+   "n": null,
+   "page": 17,
+   "table": "Fig 13 (% resistant bar chart with printed data labels)",
+   "r": {
+    "amikacin": 67.4,
+    "cefoperazone_sulbactam": 42.4,
+    "aztreonam": 48.9,
+    "ceftriaxone": 96.7,
+    "ciprofloxacin": 88,
+    "cotrimoxazole": 82.6,
+    "gentamicin": 72.8,
+    "meropenem": 90.2,
+    "polymyxin_b": 1.1
+   },
+   "note": "HAI report and Antimicrobial Stewardship pocket guide, July to December 2023, Fig 13, ICUs section. Specimen base not stated; isolate numbers not printed. The chart also has a bar labelled Piperacillin+sulbactam, not recorded (see excluded)."
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": null,
+   "page": 17,
+   "table": "Fig 14 (% resistant bar chart with printed data labels)",
+   "r": {
+    "amikacin": 25.2,
+    "cefoperazone_sulbactam": 32.1,
+    "aztreonam": 14.7,
+    "ceftriaxone": 75.2,
+    "ciprofloxacin": 78.9,
+    "cotrimoxazole": 67.9,
+    "gentamicin": 37.6,
+    "meropenem": 20.6,
+    "polymyxin_b": 0.4
+   },
+   "note": "HAI report and Antimicrobial Stewardship pocket guide, July to December 2023, Fig 14, ICUs section. Specimen base not stated; isolate numbers not printed. The chart also has a bar labelled Piperacillin+sulbactam, not recorded (see excluded). Figure caption reads Escherichia spp.; chart title Escherichia coli."
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Klebsiella spp",
+   "pheno": null,
+   "n": null,
+   "page": 18,
+   "table": "Fig 15 (% resistant bar chart with printed data labels)",
+   "r": {
+    "amikacin": 52.1,
+    "cefoperazone_sulbactam": 51.3,
+    "aztreonam": 35.9,
+    "ceftriaxone": 68.4,
+    "ciprofloxacin": 62.4,
+    "cotrimoxazole": 56.4,
+    "gentamicin": 54.7
+   },
+   "note": "HAI report and Antimicrobial Stewardship pocket guide, July to December 2023, Fig 15, ICUs section. Specimen base not stated; isolate numbers not printed. The chart also has a bar labelled Piperacillin+sulbactam, not recorded (see excluded). Meropenem not recorded: the chart prints 0 on the Meropenem bar and 0.9 on the Piperacillin+sulbactam bar and leaves Polymyxin-B empty, which looks like a shifted series and cannot be reconciled with the hospital-wide chart (see excluded)."
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Pseudomonas spp",
+   "pheno": null,
+   "n": null,
+   "page": 18,
+   "table": "Fig 16 (% resistant bar chart with printed data labels)",
+   "r": {
+    "cefoperazone_sulbactam": 38.5,
+    "aztreonam": 15.4,
+    "ceftazidime": 39.7,
+    "ciprofloxacin": 39.7,
+    "gentamicin": 38.5,
+    "meropenem": 33.3,
+    "polymyxin_b": 0
+   },
+   "note": "HAI report and Antimicrobial Stewardship pocket guide, July to December 2023, Fig 16, ICUs section. Specimen base not stated; isolate numbers not printed. The chart also has a bar labelled Piperacillin+sulbactam, not recorded (see excluded)."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": null,
+   "page": 19,
+   "table": "Fig 17 (% resistant bar chart with printed data labels)",
+   "r": {
+    "ampicillin": 82.9,
+    "cefoxitin": 55.9,
+    "ciprofloxacin": 69.7,
+    "clindamycin": 43.7,
+    "cotrimoxazole": 42.7,
+    "erythromycin": 69.9,
+    "linezolid": 0,
+    "vancomycin": 0
+   },
+   "note": "HAI report and Antimicrobial Stewardship pocket guide, July to December 2023, Fig 17, no department heading (hospital-wide charts before the department sections; recorded as all locations). Specimen base not stated; isolate numbers not printed."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "CoNS",
+   "pheno": null,
+   "n": null,
+   "page": 19,
+   "table": "Fig 18 (% resistant bar chart with printed data labels)",
+   "r": {
+    "ampicillin": 81,
+    "cefoxitin": 62.6,
+    "ciprofloxacin": 55.3,
+    "clindamycin": 39.2,
+    "cotrimoxazole": 46.2,
+    "erythromycin": 71.4,
+    "linezolid": 2,
+    "vancomycin": 0.5
+   },
+   "note": "HAI report and Antimicrobial Stewardship pocket guide, July to December 2023, Fig 18, no department heading (hospital-wide charts before the department sections; recorded as all locations). Specimen base not stated; isolate numbers not printed."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus spp",
+   "pheno": null,
+   "n": null,
+   "page": 20,
+   "table": "Fig 19 (% resistant bar chart with printed data labels)",
+   "r": {
+    "amoxiclav": 50.2,
+    "ampicillin": 57.5,
+    "ciprofloxacin": 79.2,
+    "erythromycin": 82,
+    "linezolid": 2.5,
+    "penicillin": 61.8,
+    "tetracycline": 54.5,
+    "vancomycin": 8.1
+   },
+   "notes": {
+    "amoxiclav": "printed \"Amoxyxlav\" on the chart axis"
+   },
+   "note": "HAI report and Antimicrobial Stewardship pocket guide, July to December 2023, Fig 19, no department heading (hospital-wide charts before the department sections; recorded as all locations). Specimen base not stated; isolate numbers not printed."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MRSA",
+   "n": null,
+   "page": 22,
+   "table": "Fig 22 (% resistant bar chart with printed data labels)",
+   "r": {
+    "ciprofloxacin": 86.8,
+    "clindamycin": 55,
+    "cotrimoxazole": 56.4,
+    "erythromycin": 84.1,
+    "linezolid": 0,
+    "vancomycin": 0
+   },
+   "note": "HAI report and Antimicrobial Stewardship pocket guide, July to December 2023, Fig 22, no department heading (hospital-wide charts before the department sections; recorded as all locations). Specimen base not stated; isolate numbers not printed."
+  }
+ ],
+ "counts": [],
+ "excluded": [
+  {
+   "what": "Figs 5 to 8 (pages 13 and 14): Surgical departments charts for Acinetobacter, E. coli, Klebsiella and Pseudomonas",
+   "why": "medical and surgical departments are charted separately with no combined ward chart and no isolate numbers; medical departments kept as the ward stratum, surgical not recorded"
+  },
+  {
+   "what": "Piperacillin+sulbactam bars in every Gram-negative chart (Figs 1 to 16, 20, 21)",
+   "drug": "piperacillin-sulbactam",
+   "why": "printed as Piperacillin+sulbactam, which has no canonical drug key; it may be a mislabel of piperacillin-tazobactam (the text recommends piperacillin+tazobactam) but the chart does not say so"
+  },
+  {
+   "what": "Fig 15 (page 18): ICU Klebsiella spp., Meropenem bar",
+   "org": "Klebsiella spp",
+   "drug": "meropenem",
+   "value": "0",
+   "why": "the chart prints 0 (Meropenem) and 0.9 (Piperacillin+sulbactam) and leaves Polymyxin-B empty, where the other Klebsiella charts show meropenem 39.2 to 44.7% resistant and polymyxin B 0 to 1.6%, and the text gives Klebsiella carbapenem resistance 44.7%; the series looks shifted, so the value is not recorded; also, the hospital-wide Klebsiella meropenem figure (Fig 3, 44.7%) is above all three department charts (surgical 39.2, medical 43.4, ICU 0), which a figure pooled from these departments cannot be, and piperacillin+sulbactam likewise (45.6 against 40.9, 44.6 and 0.9)"
+  },
+  {
+   "what": "Fig 20 (page 20): Carbapenem resistant Enterobacteriaceae (CRE)",
+   "why": "pooled CRE of several species; no organism key"
+  },
+  {
+   "what": "Fig 21 (page 21): Gram Negative Bacilli (GNB)",
+   "why": "all Gram-negative isolates pooled; no organism key"
+  },
+  {
+   "what": "Fig 22 (page 21) and Fig 23 (page 22): department-wise distribution of CRE and of MRSA",
+   "why": "share of isolates by department, not susceptibility"
+  }
+ ]
+}

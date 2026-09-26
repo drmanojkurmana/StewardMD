@@ -259,3 +259,52 @@ KNOWLEDGE (PRIMARY SOURCE)`); the prompts say prefer, silently skip off-topic no
   `streamGeminiToSSE` now loops inside one pull until it sends something. Before, a network read ending
   mid-frame could hang the SSE. Pinned by `test/maik-no-passage-talk.test.mjs`.
 - Knowledge questions no longer send empty `DETERMINISTIC ENGINE OUTPUT` / `PATIENT` / notes headers.
+- **MaiK Lite too** (branch maik-lite-metatalk): `maik-local.js` carries an ES5 copy (`METATALK`),
+  run in `answer()` AFTER the NO_COVERAGE check (a "not covered" verdict must still re-ask) and on the
+  settled lines of the live paint. An answer that is ONLY talk about the material is treated as the
+  same retrieval miss and re-asked without it. **Gotcha:** no lookbehind in client code, an older iOS
+  WebView rejects it at parse time and the whole engine fails to load; the copy splits sentences
+  without one. `test/maik-lite-metatalk.test.mjs` pins the copy to the Cloud file on the shared
+  cases in `test/fixtures/maik-metatalk-cases.mjs`.
+- **Fixed in both copies (same branch):** a citation after a KEPT sentence ("... first line. [1]") was
+  deleted as a word-less piece, so Lite's claim-checked lines lost their [n] while painting and Cloud
+  lost post-period citations. Now kept; a citation leading into the sentence after a DROPPED one goes
+  with the dropped one.
+
+## Answer-quality set: 60 cases (2026-09-26, branch maik-eval-cases)
+`test/maik-eval/live-cases.json` grew from 6 to 60 questions across 10 categories (emergency, infection,
+dosing, interaction/pregnancy, labs, chronic disease, obstetrics, paediatrics, shorthand such as "RA factor",
+and 5 decline/hedge cases). Each case lists 3-5 **key points** as concept regexes; every case is
+`certified: false` until a clinician reviews it. A key point checks that a concept is present, NOT that
+the answer is right: the grading sheet is still where a clinician marks correct / incomplete / unsafe.
+- **Run it (costs tokens, never in CI):** `MAIK_EVAL_TOKEN=<Firebase ID token of a TEST clinician account>
+  node scripts/maik-quality-run.mjs --cases test/maik-eval/live-cases.json`. Never the owner's personal
+  Google account. Output: `docs/maik-eval/run-<date>.json` + a grading sheet; `checks.keyPoints` per case.
+  `test/maik-eval/run-live-eval.mjs` scores the same file, including the two-turn L-06.
+- No "must not say" regexes on purpose: a pattern for "ACE inhibitor" cannot tell "give" from "avoid", so
+  it would fail correct answers. Safety stays with the clinician's grade.
+- `test/maik-eval-cases.test.mjs` pins the shape and fails if a vague non-answer ("monitor closely, dose
+  depends on weight, follow local guidelines") passes any clinical case's key points.
+
+## MaiK Lite retrieval bench (2026-09-26, branch maik-lite-retrieval)
+`scripts/bench-maik-lite-retrieval.mjs --book <maik-lite-kb.jsonl> [--router] [--src <copy of maik-local.js>]`
+runs the REAL offline retrieval (`retrieveGrounding`) on the real 42,176-row book for the 54 clinical
+questions in `test/maik-eval/live-cases.json` and counts how many of each case's key points the chosen
+evidence contains. No model runs; the book is downloaded (sha256 must match `maik-lite-kb-store.js`).
+- **Baseline:** 46.9% of key points in the evidence (question only), 50.8% with the router's disease;
+  9 questions grounded on passages with NO key point (STEMI, status epilepticus, acute asthma,
+  organophosphate poisoning, bronchiolitis, acute heart failure, CKD, child paracetamol, tramadol+SSRI).
+- **Shipped:** scaffolding words ("adults", "hour", ...) no longer anchor, and a treatment question
+  prefers passages that talk treatment (`TREAT_TXT`, x1.2): 48.9% / 51.9%, zero-key-point 7 / 6.
+- **Tried, not shipped:** a 10x or 20x wider BM25 pool (no gain alone, costs CPU on the phone); shorthand
+  synonyms (SOB, BNP, ORS, PPH, "RA factor" -> rheumatoid factor): slightly WORSE (46.3%).
+- **The ceiling is structural:** 3 passages x 700 chars of a textbook hold about half of what an answer
+  needs. The bench does not model the router's curated passage (`withCurated`), which the real app adds
+  when the router matches, so real-app coverage is higher than these numbers.
+- **Tried next, no gain:** adding the rows that follow an on-topic heading (the book splits a section
+  across consecutive rows under one flat heading) left coverage at 48.3% / 51.9%. Reason: the book text
+  often LACKS the management content. Its status epilepticus section never names lorazepam, a
+  benzodiazepine or levetiracetam (the regimen was a figure, lost in the text export); only 4 of 42,176
+  rows mention status epilepticus with one of those drugs, under unrelated headings. The curated KB
+  (`kb/diseases/seizure_epilepsy.json`) has it, and reaches Lite only through `withCurated` when the
+  router matches. So the next Lite lever is router accuracy and curated content, not BM25 tuning.

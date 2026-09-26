@@ -12,6 +12,9 @@
  * Offline parity: after running the same cases on a phone, pass --offline <answers.json> ({id: text}) to
  * compare drug names and dose numbers between the two engines.
  * Output: docs/maik-eval/run-<date>.json and docs/maik-eval/run-<date>-grading.md
+ * --cases test/maik-eval/live-cases.json runs the 60-case answer-quality set instead (2026-09-26): each
+ * case lists its key points as concept regexes, scored as checks.keyPoints (a concept check, NOT a
+ * clinician's grade; every case there is certified:false until reviewed).
  *
  * --latency: a cheap DAILY signal, separate from the WEEKLY gold-set run above. Sends 5 short fixed
  * questions to the streaming endpoint (?stream=1) and times total ms + time-to-first-byte off the wire;
@@ -27,18 +30,24 @@ import { fileURLToPath } from "node:url";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const arg = (k, d) => { const i = process.argv.indexOf(k); return i > 0 ? process.argv[i + 1] : d; };
 const BASE = arg("--base", "https://stewardmd.in"), N = Number(arg("--n", "0")) || 0, OFFLINE = arg("--offline", "");
+const CASES_FILE = arg("--cases", "test/maik-eval/cases.json");
 const TOKEN = process.env.MAIK_EVAL_TOKEN || "";
 
 export function checks(c, text) {
   const t = String(text || ""), low = t.toLowerCase();
-  const topic = String(c.expectedTopic || "").toLowerCase();
-  return {
+  const topic = String(c.expectedTopic || c.topic || "").toLowerCase();
+  const out = {
     answered: t.trim().length > 80,
     onTopic: !topic || topic.split(/\s+/).filter((w) => w.length > 3).some((w) => low.includes(w)),
     notRefusal: !/i can only help with medical|unable to (answer|help)|not (able|allowed) to/i.test(t),
     noObject: !/\[object Object\]/.test(t),
     noProvider: !/\b(gemini|vertex|openai|google ai)\b/i.test(t),
   };
+  // live-cases.json: every key point present. A decline/hedge case is scored on its refusal or hedge,
+  // so "answered at length", "on topic" and "not a refusal" do not apply to it.
+  if (c.requiredElements) out.keyPoints = c.requiredElements.every((e) => new RegExp(e.re, "i").test(t));
+  if ((c.tags || []).includes("decline-hedge")) { delete out.answered; delete out.onTopic; delete out.notRefusal; }
+  return out;
 }
 // Drug-like tokens and dose numbers, for comparing the cloud and offline answers to the same question.
 export function claimsOf(text) {
@@ -117,8 +126,11 @@ async function runLatency() {
 
 async function main() {
   if (!TOKEN) { console.log("MAIK_EVAL_TOKEN not set: nothing sent (this run costs tokens, so it never runs unattended)."); return; }
-  const all = JSON.parse(readFileSync(join(ROOT, "test/maik-eval/cases.json"), "utf8"));
-  const cases = (Array.isArray(all) ? all : all.cases || []).filter((c) => c.reviewerRequired || c.expectedAction === "retrieve_synthesis").slice(0, N || undefined);
+  const all = JSON.parse(readFileSync(join(ROOT, CASES_FILE), "utf8"));
+  // Key-point cases all run; the routing set keeps its reviewer/synthesis filter. A follow-up case
+  // (priorTurns) needs its earlier turn, which this single-shot run does not send: run-live-eval.mjs has it.
+  const cases = (Array.isArray(all) ? all : all.cases || [])
+    .filter((c) => !c.priorTurns && (c.requiredElements || c.reviewerRequired || c.expectedAction === "retrieve_synthesis")).slice(0, N || undefined);
   const off = OFFLINE ? JSON.parse(readFileSync(OFFLINE, "utf8")) : null;
   const rows = [];
   for (const c of cases) {

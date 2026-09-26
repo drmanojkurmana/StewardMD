@@ -1,0 +1,1840 @@
+{
+ "id": "BVDU_PUNE_2023",
+ "kind": "institution",
+ "inst": "BVDU_PUNE",
+ "institution": "Bharati Vidyapeeth (Deemed to be University) Medical College and Hospital, Pune",
+ "short": "Bharati Hospital Pune",
+ "city": "Pune",
+ "state": "Maharashtra",
+ "region": "west",
+ "sector": "private",
+ "year": 2023,
+ "end": "2023-12",
+ "period": "Year 2023 (printed as \"isolate listing and antibiogram for the year 2023\"; the contents page still says 2022; months not stated, read as the calendar year)",
+ "published": "2024-04",
+ "url": "https://mcpune.bharatividyapeeth.edu/media/pdfs/ANTIBIOTIC_POLICY_V_10-0-2024-25_070624.pdf",
+ "retrieved": "2026-09-26",
+ "citation": "Bharati Vidyapeeth (Deemed to be University) Medical College Hospital and Research Centre, Pune. Antimicrobial Policy and Antimicrobial Stewardship Program 2024-2025, Version 10.0 (released 01.04.2024), section 5: organisms commonly isolated and antibiogram, area wise, for the year 2023, pp. 10 to 40. Pune: Bharati Hospital; 2024.",
+ "reporting": "Percent susceptible (whole numbers) by organism and specimen within each area (ICU, ward departments, OPD), with the number of patients per organism row; Candida tables with antifungals; top-10 isolate bar charts with data labels by specimen. Colour bands mark usefulness; grey cells are not tested. No hospital-wide table.",
+ "method": "Not stated in the report (no AST method, breakpoint standard or duplicate-isolate rule given).",
+ "measure": "S",
+ "verification": {
+  "status": "double-checked",
+  "note": "ICU tables (pp11 to 13) and OPD tables (pp38 to 39) were parsed from the PDF text layer by character position (pdfplumber table extraction merged or dropped cells on these pages, so a custom parser assigned each number to the nearest rotated column header and to its row by the Number of patients cell), then compared value by value, all cells and all n, against the pages rendered at scale 3.5 and cropped into column groups. Specimen groups were read from the rendered pages. Chart counts (p10 ICU, p37 OPD) were read from the embedded chart images upscaled 1.7 to 1.8x; the data labels and organism names were checked on the crops."
+ },
+ "notes": "Area-wise antibiogram section (pages 10 to 40) of the Bharati Hospital Pune antimicrobial policy version 10.0 (2024-2025), with data for 2023. The report has no hospital-wide table. Rows kept: the ICU (\"SSICU\") Gram-negative, Gram-positive and Candida tables (pp11 to 13) and the all-OPD Gram-negative and Gram-positive tables (pp38 to 39). OPD blood isolates come from Emergency Department cultures (p37); the OPD tables have no blood rows. Ward departments (Medicine, Surgery, Obstetrics and Gynaecology, Orthopaedics, Oncology), the NICU and the combined Paediatrics and PICU section have their own tables only, with no combined ward table, so they are listed in excluded; the report does not say whether SSICU covers all adult ICUs. Because no ward rows exist, a combination of the OPD and ICU rows is not a hospital-wide figure. Wound specimens (OPD) are filed as pus; \"Fluid\" as sterile body fluid. n is the printed \"Number of patients\"; the report warns that most organisms have fewer than 30 isolates. Counts are the data labels of the top-10 isolate charts (ICU blood, urine, pus, respiratory and CSF on p10; OPD blood, urine and wound on p37) and cover only the charted organisms with a legible, keyed name (labels cut off at the genus are recorded at genus level: Pseudomonas, Serratia, Streptococcus, Candida, Klebsiella); they agree with the n of every matching antibiogram row. The ICU CSF chart gives CoNS as one bar (5). Specimen totals printed beside the charts: ICU blood 442, pus 104, respiratory 108, urine 137, CSF 12; OPD blood 59, wound 362, sputum 12, urine 515. Printed cells that are implausible for the organism (for example P. aeruginosa cefuroxime 100 in ICU CSF) are recorded as printed. The page footers give the release date as 01.04.2025; the cover gives 01.04.2024.",
+ "issues": [
+  "Second reader 2026-09-26: every cell of the five kept tables was read from the page images (pp11, 12, 13, 38, 39 rendered at scale 4.5 to 5 and cropped by column group) before comparing with the file: all 635 cells and all 51 row n. The seeded sample of 159 cells (sample_cells.py) is part of this. 0 transcription errors, nothing corrected. Specimen group and setting confirmed for every row (SSICU pp11 to 13 as icu, All OPD pp38 to 39 as opd); Wound filed as pus, Fluid as sterile, Cerebrospinal fluid as csf.",
+  "Second reader: all 63 chart counts (the p10 and p37 embedded charts) re-read: 0 errors; the validator reports no count-table mismatch. Not caught by the validator and printed that way: the ICU CSF chart gives CoNS 5, while the ICU Gram-positive table lists 4 coagulase-negative CSF isolates (S. haemolyticus 2, S. hominis 1, S. cohnii 1, the last in excluded).",
+  "Second reader: the 28 cells the validator does not keep (10 caution, 7 intrinsic, 11 hidden) are all printed as recorded: the fosfomycin cells of non-urine strata, B. cepacia ICU blood amikacin 40 and gentamicin 20, A. baumannii ICU pus fosfomycin 0, P. aeruginosa ICU CSF cefuroxime 100, E. faecium ICU pus gentamicin 0, nitrofurantoin in non-urine Gram-positive rows, S. aureus ICU respiratory daptomycin 100, E. cloacae OPD amoxicillin-clavulanate 7 (urine) and 10 (wound), K. pneumoniae OPD wound nitrofurantoin 0 and norfloxacin 100.",
+  "Second reader: CoNS species rows checked cell by cell and on the right rows: ICU blood S. haemolyticus (n=40), S. epidermidis (n=25), S. hominis (n=17); ICU CSF S. haemolyticus (n=2), S. hominis (n=1); OPD wound S. epidermidis (n=14). There is no Other CoNS row: S. capitis (ICU blood n=7) and S. cohnii (ICU CSF n=1) are printed as single species and stay in excluded. Excluded values re-read and correct: the Other-specimen rows, the Cronobacter and C. dubliniensis rows, the cefuroxime oral and first fosfomycin columns (p38), the truncated chart labels."
+ ],
+ "rows": [
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 56,
+   "page": 11,
+   "table": "Intensive care unit (SSICU) antibiogram Gram negative: Percentage susceptibility gram negative organism 2023 (p11)",
+   "s": {
+    "levofloxacin": 0,
+    "ciprofloxacin": 27,
+    "cotrimoxazole": 44,
+    "amoxiclav": 29,
+    "cefuroxime": 36,
+    "ceftriaxone": 27,
+    "cefepime": 34,
+    "cefoperazone_sulbactam": 36,
+    "piptazo": 36,
+    "amikacin": 47,
+    "gentamicin": 47,
+    "ertapenem": 44,
+    "meropenem": 46,
+    "imipenem": 47,
+    "fosfomycin": 80,
+    "colistin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 49,
+   "page": 11,
+   "table": "Intensive care unit (SSICU) antibiogram Gram negative: Percentage susceptibility gram negative organism 2023 (p11)",
+   "s": {
+    "ciprofloxacin": 6,
+    "cotrimoxazole": 50,
+    "amoxiclav": 48,
+    "cefuroxime": 63,
+    "ceftriaxone": 25,
+    "cefepime": 42,
+    "cefoperazone_sulbactam": 63,
+    "piptazo": 63,
+    "amikacin": 85,
+    "gentamicin": 77,
+    "ertapenem": 73,
+    "meropenem": 85,
+    "imipenem": 85,
+    "fosfomycin": 98,
+    "colistin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 30,
+   "page": 11,
+   "table": "Intensive care unit (SSICU) antibiogram Gram negative: Percentage susceptibility gram negative organism 2023 (p11)",
+   "s": {
+    "ciprofloxacin": 10,
+    "cotrimoxazole": 33,
+    "cefuroxime": 10,
+    "ceftriaxone": 10,
+    "cefepime": 7,
+    "cefoperazone_sulbactam": 10,
+    "piptazo": 10,
+    "amikacin": 10,
+    "gentamicin": 13,
+    "meropenem": 13,
+    "imipenem": 10,
+    "colistin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Burkholderia cepacia",
+   "pheno": null,
+   "n": 12,
+   "page": 11,
+   "table": "Intensive care unit (SSICU) antibiogram Gram negative: Percentage susceptibility gram negative organism 2023 (p11)",
+   "s": {
+    "levofloxacin": 80,
+    "ciprofloxacin": 0,
+    "cotrimoxazole": 90,
+    "cefuroxime": 20,
+    "ceftazidime": 60,
+    "ceftriaxone": 0,
+    "cefepime": 0,
+    "cefoperazone_sulbactam": 20,
+    "piptazo": 20,
+    "amikacin": 40,
+    "gentamicin": 20,
+    "meropenem": 80,
+    "imipenem": 20,
+    "minocycline": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 50,
+   "page": 11,
+   "table": "Intensive care unit (SSICU) antibiogram Gram negative: Percentage susceptibility gram negative organism 2023 (p11)",
+   "s": {
+    "ciprofloxacin": 4,
+    "cotrimoxazole": 58,
+    "amoxiclav": 38,
+    "cefuroxime": 58,
+    "ceftriaxone": 24,
+    "cefepime": 30,
+    "cefoperazone_sulbactam": 58,
+    "piptazo": 58,
+    "amikacin": 80,
+    "gentamicin": 74,
+    "ertapenem": 74,
+    "meropenem": 78,
+    "imipenem": 76,
+    "fosfomycin": 98,
+    "colistin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 29,
+   "page": 11,
+   "table": "Intensive care unit (SSICU) antibiogram Gram negative: Percentage susceptibility gram negative organism 2023 (p11)",
+   "s": {
+    "ciprofloxacin": 14,
+    "cotrimoxazole": 55,
+    "amoxiclav": 28,
+    "cefuroxime": 28,
+    "ceftriaxone": 21,
+    "cefepime": 28,
+    "cefoperazone_sulbactam": 28,
+    "piptazo": 28,
+    "amikacin": 38,
+    "gentamicin": 45,
+    "ertapenem": 41,
+    "meropenem": 45,
+    "imipenem": 41,
+    "fosfomycin": 79,
+    "colistin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 38,
+   "page": 11,
+   "table": "Intensive care unit (SSICU) antibiogram Gram negative: Percentage susceptibility gram negative organism 2023 (p11)",
+   "s": {
+    "ciprofloxacin": 5,
+    "cotrimoxazole": 29,
+    "cefuroxime": 5,
+    "ceftriaxone": 3,
+    "cefepime": 5,
+    "cefoperazone_sulbactam": 5,
+    "piptazo": 5,
+    "amikacin": 5,
+    "gentamicin": 8,
+    "meropenem": 5,
+    "imipenem": 5,
+    "colistin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Respiratory"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 17,
+   "page": 11,
+   "table": "Intensive care unit (SSICU) antibiogram Gram negative: Percentage susceptibility gram negative organism 2023 (p11)",
+   "s": {
+    "ciprofloxacin": 31,
+    "cotrimoxazole": 56,
+    "amoxiclav": 38,
+    "cefuroxime": 31,
+    "ceftriaxone": 6,
+    "cefepime": 19,
+    "cefoperazone_sulbactam": 31,
+    "piptazo": 31,
+    "amikacin": 38,
+    "gentamicin": 38,
+    "ertapenem": 50,
+    "meropenem": 44,
+    "imipenem": 44,
+    "fosfomycin": 81,
+    "colistin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Respiratory"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 21,
+   "page": 11,
+   "table": "Intensive care unit (SSICU) antibiogram Gram negative: Percentage susceptibility gram negative organism 2023 (p11)",
+   "s": {
+    "ciprofloxacin": 0,
+    "cotrimoxazole": 43,
+    "amoxiclav": 19,
+    "cefuroxime": 0,
+    "ceftriaxone": 5,
+    "cefotaxime": 0,
+    "cefepime": 24,
+    "cefoperazone_sulbactam": 57,
+    "piptazo": 57,
+    "amikacin": 91,
+    "gentamicin": 91,
+    "ertapenem": 62,
+    "meropenem": 71,
+    "imipenem": 71,
+    "fosfomycin": 91,
+    "colistin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 14,
+   "page": 11,
+   "table": "Intensive care unit (SSICU) antibiogram Gram negative: Percentage susceptibility gram negative organism 2023 (p11)",
+   "s": {
+    "ciprofloxacin": 14,
+    "cotrimoxazole": 50,
+    "amoxiclav": 29,
+    "cefuroxime": 14,
+    "ceftriaxone": 14,
+    "cefotaxime": 14,
+    "cefepime": 21,
+    "cefoperazone_sulbactam": 36,
+    "piptazo": 36,
+    "amikacin": 43,
+    "gentamicin": 43,
+    "ertapenem": 36,
+    "meropenem": 36,
+    "imipenem": 36,
+    "tigecycline": 36,
+    "fosfomycin": 43,
+    "colistin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "n": 13,
+   "page": 11,
+   "table": "Intensive care unit (SSICU) antibiogram Gram negative: Percentage susceptibility gram negative organism 2023 (p11)",
+   "s": {
+    "ciprofloxacin": 0,
+    "cotrimoxazole": 8,
+    "ceftriaxone": 0,
+    "cefotaxime": 0,
+    "cefepime": 0,
+    "cefoperazone_sulbactam": 0,
+    "piptazo": 0,
+    "amikacin": 0,
+    "gentamicin": 0,
+    "meropenem": 0,
+    "imipenem": 0,
+    "fosfomycin": 0,
+    "colistin": 92
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 12,
+   "page": 11,
+   "table": "Intensive care unit (SSICU) antibiogram Gram negative: Percentage susceptibility gram negative organism 2023 (p11)",
+   "s": {
+    "ciprofloxacin": 10,
+    "cotrimoxazole": 40,
+    "amoxiclav": 36,
+    "cefuroxime": 67,
+    "ceftriaxone": 20,
+    "cefepime": 58,
+    "cefoperazone_sulbactam": 67,
+    "piptazo": 67,
+    "amikacin": 90,
+    "gentamicin": 80,
+    "ertapenem": 80,
+    "meropenem": 90,
+    "imipenem": 92,
+    "fosfomycin": 91,
+    "colistin": 100
+   },
+   "note": "ICU printed as \"SSICU\". Specimen printed as \"Fluid\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Fluid"
+  },
+  {
+   "spec": "csf",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 2,
+   "page": 11,
+   "table": "Intensive care unit (SSICU) antibiogram Gram negative: Percentage susceptibility gram negative organism 2023 (p11)",
+   "s": {
+    "levofloxacin": 50,
+    "cefuroxime": 100,
+    "cefepime": 100,
+    "cefoperazone_sulbactam": 100,
+    "piptazo": 100,
+    "meropenem": 50,
+    "imipenem": 0,
+    "colistin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Cerebrospinal fluid"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus haemolyticus",
+   "pheno": null,
+   "n": 40,
+   "page": 12,
+   "table": "Intensive care unit (SSICU) antibiogram Gram positive: Percentage susceptibility gram positive organism 2023 (p12)",
+   "s": {
+    "nitrofurantoin": 97,
+    "cefoxitin": 8,
+    "oxacillin": 8,
+    "penicillin": 5,
+    "ciprofloxacin": 8,
+    "levofloxacin": 8,
+    "clindamycin": 40,
+    "gentamicin": 21,
+    "erythromycin": 3,
+    "tetracycline": 68,
+    "cotrimoxazole": 53,
+    "daptomycin": 92,
+    "linezolid": 90,
+    "teicoplanin": 95,
+    "vancomycin": 100
+   },
+   "note": "The report considers staphylococci other than S. aureus from these ICU samples collection contamination or skin flora. ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus epidermidis",
+   "pheno": null,
+   "n": 25,
+   "page": 12,
+   "table": "Intensive care unit (SSICU) antibiogram Gram positive: Percentage susceptibility gram positive organism 2023 (p12)",
+   "s": {
+    "nitrofurantoin": 96,
+    "cefoxitin": 4,
+    "oxacillin": 4,
+    "penicillin": 0,
+    "ciprofloxacin": 24,
+    "levofloxacin": 24,
+    "clindamycin": 52,
+    "gentamicin": 56,
+    "erythromycin": 16,
+    "tetracycline": 64,
+    "cotrimoxazole": 52,
+    "daptomycin": 92,
+    "linezolid": 96,
+    "teicoplanin": 92,
+    "vancomycin": 100
+   },
+   "note": "The report considers staphylococci other than S. aureus from these ICU samples collection contamination or skin flora. ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus hominis",
+   "pheno": null,
+   "n": 17,
+   "page": 12,
+   "table": "Intensive care unit (SSICU) antibiogram Gram positive: Percentage susceptibility gram positive organism 2023 (p12)",
+   "s": {
+    "nitrofurantoin": 87,
+    "cefoxitin": 21,
+    "oxacillin": 20,
+    "penicillin": 13,
+    "ciprofloxacin": 40,
+    "levofloxacin": 40,
+    "clindamycin": 80,
+    "gentamicin": 93,
+    "erythromycin": 7,
+    "tetracycline": 67,
+    "cotrimoxazole": 67,
+    "daptomycin": 93,
+    "linezolid": 93,
+    "teicoplanin": 80,
+    "vancomycin": 100
+   },
+   "note": "The report considers staphylococci other than S. aureus from these ICU samples collection contamination or skin flora. ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 15,
+   "page": 12,
+   "table": "Intensive care unit (SSICU) antibiogram Gram positive: Percentage susceptibility gram positive organism 2023 (p12)",
+   "s": {
+    "nitrofurantoin": 100,
+    "cefoxitin": 43,
+    "oxacillin": 43,
+    "penicillin": 7,
+    "ciprofloxacin": 7,
+    "levofloxacin": 7,
+    "clindamycin": 86,
+    "gentamicin": 57,
+    "erythromycin": 36,
+    "tetracycline": 86,
+    "cotrimoxazole": 43,
+    "daptomycin": 100,
+    "linezolid": 100,
+    "teicoplanin": 100,
+    "vancomycin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 12,
+   "page": 12,
+   "table": "Intensive care unit (SSICU) antibiogram Gram positive: Percentage susceptibility gram positive organism 2023 (p12)",
+   "s": {
+    "nitrofurantoin": 8,
+    "penicillin": 0,
+    "ciprofloxacin": 0,
+    "levofloxacin": 0,
+    "gentamicin_hl": 100,
+    "erythromycin": 0,
+    "tetracycline": 0,
+    "linezolid": 92,
+    "teicoplanin": 75,
+    "vancomycin": 75
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 9,
+   "page": 12,
+   "table": "Intensive care unit (SSICU) antibiogram Gram positive: Percentage susceptibility gram positive organism 2023 (p12)",
+   "s": {
+    "nitrofurantoin": 0,
+    "penicillin": 0,
+    "ciprofloxacin": 0,
+    "levofloxacin": 0,
+    "gentamicin_hl": 100,
+    "erythromycin": 0,
+    "tetracycline": 11,
+    "linezolid": 78,
+    "teicoplanin": 100,
+    "vancomycin": 67
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 9,
+   "page": 12,
+   "table": "Intensive care unit (SSICU) antibiogram Gram positive: Percentage susceptibility gram positive organism 2023 (p12)",
+   "s": {
+    "penicillin": 0,
+    "moxifloxacin": 0,
+    "gentamicin": 0,
+    "erythromycin": 100,
+    "tetracycline": 0,
+    "tigecycline": 100,
+    "teicoplanin": 100,
+    "vancomycin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 8,
+   "page": 12,
+   "table": "Intensive care unit (SSICU) antibiogram Gram positive: Percentage susceptibility gram positive organism 2023 (p12)",
+   "s": {
+    "oxacillin": 38,
+    "penicillin": 0,
+    "moxifloxacin": 100,
+    "clindamycin": 100,
+    "gentamicin": 0,
+    "tetracycline": 100,
+    "cotrimoxazole": 63,
+    "tigecycline": 100,
+    "teicoplanin": 100,
+    "vancomycin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 6,
+   "page": 12,
+   "table": "Intensive care unit (SSICU) antibiogram Gram positive: Percentage susceptibility gram positive organism 2023 (p12)",
+   "s": {
+    "nitrofurantoin": 100,
+    "cefoxitin": 67,
+    "oxacillin": 67,
+    "penicillin": 33,
+    "ciprofloxacin": 0,
+    "levofloxacin": 0,
+    "clindamycin": 100,
+    "gentamicin": 100,
+    "erythromycin": 33,
+    "tetracycline": 83,
+    "cotrimoxazole": 33,
+    "tigecycline": 100,
+    "daptomycin": 100,
+    "linezolid": 100,
+    "teicoplanin": 100,
+    "vancomycin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Respiratory"
+  },
+  {
+   "spec": "csf",
+   "set": "icu",
+   "org": "Staphylococcus haemolyticus",
+   "pheno": null,
+   "n": 2,
+   "page": 12,
+   "table": "Intensive care unit (SSICU) antibiogram Gram positive: Percentage susceptibility gram positive organism 2023 (p12)",
+   "s": {
+    "nitrofurantoin": 100,
+    "cefoxitin": 0,
+    "oxacillin": 0,
+    "penicillin": 0,
+    "ciprofloxacin": 0,
+    "levofloxacin": 0,
+    "clindamycin": 0,
+    "gentamicin": 0,
+    "erythromycin": 0,
+    "tetracycline": 50,
+    "cotrimoxazole": 100,
+    "tigecycline": 100,
+    "daptomycin": 100,
+    "linezolid": 100,
+    "teicoplanin": 100,
+    "vancomycin": 100
+   },
+   "note": "The report considers staphylococci other than S. aureus from these ICU samples collection contamination or skin flora. ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Cerebrospinal fluid"
+  },
+  {
+   "spec": "csf",
+   "set": "icu",
+   "org": "Staphylococcus hominis",
+   "pheno": null,
+   "n": 1,
+   "page": 12,
+   "table": "Intensive care unit (SSICU) antibiogram Gram positive: Percentage susceptibility gram positive organism 2023 (p12)",
+   "s": {
+    "nitrofurantoin": 100,
+    "cefoxitin": 0,
+    "oxacillin": 0,
+    "penicillin": 0,
+    "ciprofloxacin": 0,
+    "levofloxacin": 0,
+    "clindamycin": 0,
+    "gentamicin": 100,
+    "erythromycin": 0,
+    "tetracycline": 0,
+    "cotrimoxazole": 0,
+    "tigecycline": 100,
+    "daptomycin": 100,
+    "linezolid": 100,
+    "teicoplanin": 100,
+    "vancomycin": 100
+   },
+   "note": "The report considers staphylococci other than S. aureus from these ICU samples collection contamination or skin flora. ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Cerebrospinal fluid"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Candida albicans",
+   "pheno": null,
+   "n": 13,
+   "page": 13,
+   "table": "Candida isolated in ICU (SSICU) (p13)",
+   "s": {
+    "fluconazole": 62,
+    "voriconazole": 77,
+    "amphotericin_b": 31,
+    "caspofungin": 100,
+    "micafungin": 92
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Candida parapsilosis",
+   "pheno": null,
+   "n": 8,
+   "page": 13,
+   "table": "Candida isolated in ICU (SSICU) (p13)",
+   "s": {
+    "fluconazole": 43,
+    "voriconazole": 57,
+    "amphotericin_b": 57,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Candida tropicalis",
+   "pheno": null,
+   "n": 8,
+   "page": 13,
+   "table": "Candida isolated in ICU (SSICU) (p13)",
+   "s": {
+    "fluconazole": 29,
+    "voriconazole": 75,
+    "amphotericin_b": 75,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "n": 1,
+   "page": 13,
+   "table": "Candida isolated in ICU (SSICU) (p13)",
+   "s": {
+    "voriconazole": 0,
+    "amphotericin_b": 100,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Candida tropicalis",
+   "pheno": null,
+   "n": 3,
+   "page": 13,
+   "table": "Candida isolated in ICU (SSICU) (p13)",
+   "s": {
+    "fluconazole": 100,
+    "voriconazole": 100,
+    "amphotericin_b": 100,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Candida parapsilosis",
+   "pheno": null,
+   "n": 1,
+   "page": 13,
+   "table": "Candida isolated in ICU (SSICU) (p13)",
+   "s": {
+    "fluconazole": 0,
+    "voriconazole": 0,
+    "amphotericin_b": 100,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Pus"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Candida tropicalis",
+   "pheno": null,
+   "n": 1,
+   "page": 13,
+   "table": "Candida isolated in ICU (SSICU) (p13)",
+   "s": {
+    "fluconazole": 100,
+    "voriconazole": 100,
+    "amphotericin_b": 100,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Respiratory"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Candida tropicalis",
+   "pheno": null,
+   "n": 6,
+   "page": 13,
+   "table": "Candida isolated in ICU (SSICU) (p13)",
+   "s": {
+    "fluconazole": 60,
+    "voriconazole": 80,
+    "amphotericin_b": 80,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Candida parapsilosis",
+   "pheno": null,
+   "n": 1,
+   "page": 13,
+   "table": "Candida isolated in ICU (SSICU) (p13)",
+   "s": {
+    "fluconazole": 0,
+    "voriconazole": 0,
+    "amphotericin_b": 100,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Candida albicans",
+   "pheno": null,
+   "n": 5,
+   "page": 13,
+   "table": "Candida isolated in ICU (SSICU) (p13)",
+   "s": {
+    "fluconazole": 80,
+    "voriconazole": 80,
+    "amphotericin_b": 40,
+    "caspofungin": 100,
+    "micafungin": 100
+   },
+   "note": "ICU printed as \"SSICU\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 286,
+   "page": 38,
+   "table": "All OPD Gram negative: Percentage susceptibility gram negative organism 2023 (p38)",
+   "s": {
+    "cotrimoxazole": 51,
+    "nitrofurantoin": 86,
+    "ofloxacin": 36,
+    "ciprofloxacin": 13,
+    "norfloxacin": 45,
+    "amoxiclav": 55,
+    "cefepime": 37,
+    "cefuroxime": 27,
+    "ceftazidime": 64,
+    "ceftriaxone": 28,
+    "cefoperazone_sulbactam": 78,
+    "piptazo": 78,
+    "amikacin": 81,
+    "gentamicin": 73,
+    "meropenem": 92,
+    "ertapenem": 92,
+    "imipenem": 92,
+    "fosfomycin": 99,
+    "colistin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 87,
+   "page": 38,
+   "table": "All OPD Gram negative: Percentage susceptibility gram negative organism 2023 (p38)",
+   "s": {
+    "cotrimoxazole": 48,
+    "nitrofurantoin": 33,
+    "ofloxacin": 74,
+    "levofloxacin": 0,
+    "ciprofloxacin": 29,
+    "norfloxacin": 74,
+    "amoxiclav": 38,
+    "cefepime": 30,
+    "cefuroxime": 41,
+    "ceftazidime": 63,
+    "ceftriaxone": 39,
+    "cefoperazone_sulbactam": 45,
+    "piptazo": 45,
+    "amikacin": 65,
+    "gentamicin": 64,
+    "meropenem": 55,
+    "ertapenem": 60,
+    "imipenem": 56,
+    "fosfomycin": 76,
+    "colistin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 28,
+   "page": 38,
+   "table": "All OPD Gram negative: Percentage susceptibility gram negative organism 2023 (p38)",
+   "s": {
+    "levofloxacin": 31,
+    "ciprofloxacin": 32,
+    "cefepime": 52,
+    "ceftazidime": 48,
+    "cefoperazone_sulbactam": 46,
+    "piptazo": 46,
+    "amikacin": 52,
+    "gentamicin": 60,
+    "meropenem": 46,
+    "imipenem": 48,
+    "colistin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterobacter cloacae",
+   "pheno": null,
+   "n": 14,
+   "page": 38,
+   "table": "All OPD Gram negative: Percentage susceptibility gram negative organism 2023 (p38)",
+   "s": {
+    "cotrimoxazole": 79,
+    "nitrofurantoin": 33,
+    "ofloxacin": 83,
+    "ciprofloxacin": 57,
+    "norfloxacin": 100,
+    "amoxiclav": 7,
+    "cefepime": 88,
+    "cefuroxime": 50,
+    "ceftazidime": 67,
+    "ceftriaxone": 71,
+    "cefoperazone_sulbactam": 71,
+    "piptazo": 71,
+    "amikacin": 86,
+    "gentamicin": 93,
+    "meropenem": 88,
+    "ertapenem": 93,
+    "imipenem": 88,
+    "fosfomycin": 50,
+    "colistin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 11,
+   "page": 38,
+   "table": "All OPD Gram negative: Percentage susceptibility gram negative organism 2023 (p38)",
+   "s": {
+    "cotrimoxazole": 46,
+    "ofloxacin": 0,
+    "ciprofloxacin": 27,
+    "norfloxacin": 33,
+    "amoxiclav": 82,
+    "cefepime": 88,
+    "cefuroxime": 100,
+    "ceftazidime": 100,
+    "ceftriaxone": 91,
+    "cefoperazone_sulbactam": 100,
+    "piptazo": 100,
+    "amikacin": 82,
+    "gentamicin": 64,
+    "meropenem": 100,
+    "ertapenem": 100,
+    "imipenem": 38,
+    "fosfomycin": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 50,
+   "page": 38,
+   "table": "All OPD Gram negative: Percentage susceptibility gram negative organism 2023 (p38)",
+   "s": {
+    "levofloxacin": 66,
+    "ciprofloxacin": 69,
+    "cefepime": 88,
+    "ceftazidime": 86,
+    "cefoperazone_sulbactam": 79,
+    "piptazo": 79,
+    "amikacin": 82,
+    "gentamicin": 71,
+    "meropenem": 74,
+    "imipenem": 82,
+    "colistin": 100
+   },
+   "note": "Specimen printed as \"Wound\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Wound"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 45,
+   "page": 38,
+   "table": "All OPD Gram negative: Percentage susceptibility gram negative organism 2023 (p38)",
+   "s": {
+    "cotrimoxazole": 71,
+    "ciprofloxacin": 4,
+    "amoxiclav": 44,
+    "cefepime": 49,
+    "ceftriaxone": 29,
+    "cefoperazone_sulbactam": 78,
+    "piptazo": 78,
+    "amikacin": 91,
+    "gentamicin": 76,
+    "meropenem": 93,
+    "ertapenem": 91,
+    "imipenem": 96,
+    "fosfomycin": 100,
+    "colistin": 100
+   },
+   "note": "Specimen printed as \"Wound\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Wound"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "n": 24,
+   "page": 38,
+   "table": "All OPD Gram negative: Percentage susceptibility gram negative organism 2023 (p38)",
+   "s": {
+    "cotrimoxazole": 58,
+    "nitrofurantoin": 0,
+    "ofloxacin": 100,
+    "ciprofloxacin": 42,
+    "norfloxacin": 100,
+    "amoxiclav": 61,
+    "cefepime": 55,
+    "cefuroxime": 100,
+    "ceftazidime": 100,
+    "ceftriaxone": 54,
+    "cefoperazone_sulbactam": 65,
+    "piptazo": 65,
+    "amikacin": 78,
+    "gentamicin": 83,
+    "meropenem": 86,
+    "ertapenem": 71,
+    "imipenem": 77,
+    "tigecycline": 65,
+    "fosfomycin": 87,
+    "colistin": 100
+   },
+   "note": "Specimen printed as \"Wound\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Wound"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterobacter cloacae",
+   "pheno": null,
+   "n": 10,
+   "page": 38,
+   "table": "All OPD Gram negative: Percentage susceptibility gram negative organism 2023 (p38)",
+   "s": {
+    "cotrimoxazole": 90,
+    "ciprofloxacin": 80,
+    "amoxiclav": 10,
+    "cefepime": 90,
+    "ceftriaxone": 60,
+    "cefoperazone_sulbactam": 90,
+    "piptazo": 90,
+    "amikacin": 90,
+    "gentamicin": 100,
+    "meropenem": 90,
+    "ertapenem": 90,
+    "imipenem": 90,
+    "tigecycline": 90,
+    "fosfomycin": 80,
+    "colistin": 100
+   },
+   "note": "Specimen printed as \"Wound\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Wound"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Proteus mirabilis",
+   "pheno": null,
+   "n": 5,
+   "page": 38,
+   "table": "All OPD Gram negative: Percentage susceptibility gram negative organism 2023 (p38)",
+   "s": {
+    "cotrimoxazole": 20,
+    "levofloxacin": 0,
+    "ciprofloxacin": 0,
+    "amoxiclav": 0,
+    "cefepime": 40,
+    "ceftazidime": 0,
+    "ceftriaxone": 50,
+    "cefoperazone_sulbactam": 80,
+    "piptazo": 80,
+    "amikacin": 40,
+    "gentamicin": 40,
+    "meropenem": 80,
+    "ertapenem": 75,
+    "imipenem": 20,
+    "fosfomycin": 100
+   },
+   "note": "Specimen printed as \"Wound\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Wound"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 96,
+   "page": 39,
+   "table": "All OPD Gram positive: Percentage susceptibility gram positive organism 2023 (p39)",
+   "s": {
+    "cefoxitin": 35,
+    "oxacillin": 35,
+    "cotrimoxazole": 61,
+    "rifampicin": 97,
+    "penicillin": 5,
+    "ciprofloxacin": 11,
+    "levofloxacin": 12,
+    "gentamicin": 78,
+    "erythromycin": 48,
+    "clindamycin": 87,
+    "tetracycline": 93,
+    "vancomycin": 100,
+    "teicoplanin": 100,
+    "daptomycin": 95,
+    "linezolid": 99,
+    "tigecycline": 100
+   },
+   "note": "Specimen printed as \"Wound\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Wound"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Staphylococcus epidermidis",
+   "pheno": null,
+   "n": 14,
+   "page": 39,
+   "table": "All OPD Gram positive: Percentage susceptibility gram positive organism 2023 (p39)",
+   "s": {
+    "cefoxitin": 29,
+    "oxacillin": 29,
+    "cotrimoxazole": 71,
+    "rifampicin": 79,
+    "penicillin": 0,
+    "ciprofloxacin": 36,
+    "levofloxacin": 43,
+    "gentamicin": 86,
+    "erythromycin": 14,
+    "clindamycin": 57,
+    "tetracycline": 93,
+    "vancomycin": 100,
+    "teicoplanin": 100,
+    "daptomycin": 93,
+    "linezolid": 93,
+    "tigecycline": 100
+   },
+   "note": "Specimen printed as \"Wound\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Wound"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 10,
+   "page": 39,
+   "table": "All OPD Gram positive: Percentage susceptibility gram positive organism 2023 (p39)",
+   "s": {
+    "penicillin": 100,
+    "ciprofloxacin": 44,
+    "levofloxacin": 44,
+    "gentamicin_hl": 100,
+    "erythromycin": 11,
+    "tetracycline": 0,
+    "vancomycin": 100,
+    "teicoplanin": 100,
+    "daptomycin": 67,
+    "linezolid": 100,
+    "tigecycline": 100
+   },
+   "note": "Specimen printed as \"Wound\". n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Wound"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus faecalis",
+   "pheno": null,
+   "n": 16,
+   "page": 39,
+   "table": "All OPD Gram positive: Percentage susceptibility gram positive organism 2023 (p39)",
+   "s": {
+    "nitrofurantoin": 94,
+    "penicillin": 81,
+    "ciprofloxacin": 6,
+    "levofloxacin": 6,
+    "gentamicin_hl": 100,
+    "erythromycin": 19,
+    "tetracycline": 0,
+    "vancomycin": 94,
+    "teicoplanin": 94,
+    "daptomycin": 69,
+    "linezolid": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "n": 10,
+   "page": 39,
+   "table": "All OPD Gram positive: Percentage susceptibility gram positive organism 2023 (p39)",
+   "s": {
+    "cefoxitin": 50,
+    "oxacillin": 50,
+    "cotrimoxazole": 60,
+    "nitrofurantoin": 100,
+    "rifampicin": 100,
+    "penicillin": 10,
+    "ciprofloxacin": 0,
+    "levofloxacin": 0,
+    "gentamicin": 80,
+    "erythromycin": 40,
+    "clindamycin": 100,
+    "tetracycline": 100,
+    "vancomycin": 100,
+    "teicoplanin": 100,
+    "daptomycin": 100,
+    "linezolid": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus faecium",
+   "pheno": null,
+   "n": 8,
+   "page": 39,
+   "table": "All OPD Gram positive: Percentage susceptibility gram positive organism 2023 (p39)",
+   "s": {
+    "nitrofurantoin": 0,
+    "penicillin": 0,
+    "ciprofloxacin": 0,
+    "levofloxacin": 0,
+    "gentamicin_hl": 100,
+    "erythromycin": 14,
+    "tetracycline": 29,
+    "vancomycin": 57,
+    "teicoplanin": 57,
+    "linezolid": 71
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Staphylococcus saprophyticus",
+   "pheno": null,
+   "n": 5,
+   "page": 39,
+   "table": "All OPD Gram positive: Percentage susceptibility gram positive organism 2023 (p39)",
+   "s": {
+    "cefoxitin": 60,
+    "oxacillin": 60,
+    "cotrimoxazole": 80,
+    "nitrofurantoin": 100,
+    "rifampicin": 100,
+    "penicillin": 0,
+    "ciprofloxacin": 100,
+    "levofloxacin": 100,
+    "gentamicin": 100,
+    "erythromycin": 0,
+    "clindamycin": 20,
+    "tetracycline": 100,
+    "vancomycin": 100,
+    "teicoplanin": 100,
+    "daptomycin": 100,
+    "linezolid": 100
+   },
+   "note": "n is the printed \"Number of patients\".",
+   "specimen_as_printed": "Urine"
+  }
+ ],
+ "counts": [
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "n": 56,
+   "page": 10
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 49,
+   "page": 10
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus haemolyticus",
+   "n": 40,
+   "page": 10
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "n": 30,
+   "page": 10
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus epidermidis",
+   "n": 25,
+   "page": 10
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 19,
+   "page": 10
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus hominis",
+   "n": 17,
+   "page": 10
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 15,
+   "page": 10
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Candida albicans",
+   "n": 13,
+   "page": 10
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus faecium",
+   "n": 12,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 50,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "n": 29,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus faecium",
+   "n": 9,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 9,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Candida tropicalis",
+   "n": 6,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Candida albicans",
+   "n": 5,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus faecalis",
+   "n": 4,
+   "page": 10
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Citrobacter koseri",
+   "n": 2,
+   "page": 10
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 21,
+   "page": 10
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "n": 14,
+   "page": 10
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "n": 13,
+   "page": 10
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 12,
+   "page": 10
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterococcus faecium",
+   "n": 9,
+   "page": 10
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 8,
+   "page": 10
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Candida tropicalis",
+   "n": 3,
+   "page": 10
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterobacter cloacae",
+   "n": 3,
+   "page": 10
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Citrobacter koseri",
+   "n": 2,
+   "page": 10
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterococcus faecalis",
+   "n": 2,
+   "page": 10
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "n": 38,
+   "page": 10
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 19,
+   "page": 10
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "n": 17,
+   "page": 10
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 8,
+   "page": 10
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 6,
+   "page": 10
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Enterobacter cloacae",
+   "n": 2,
+   "page": 10
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Serratia",
+   "n": 2,
+   "page": 10
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Streptococcus spp.",
+   "n": 1,
+   "page": 10
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Candida spp.",
+   "n": 1,
+   "page": 10
+  },
+  {
+   "spec": "csf",
+   "set": "icu",
+   "org": "CoNS",
+   "n": 5,
+   "page": 10
+  },
+  {
+   "spec": "csf",
+   "set": "icu",
+   "org": "Pseudomonas spp.",
+   "n": 2,
+   "page": 10
+  },
+  {
+   "spec": "csf",
+   "set": "icu",
+   "org": "Kocuria",
+   "n": 1,
+   "page": 10
+  },
+  {
+   "spec": "csf",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "n": 1,
+   "page": 10
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Stenotrophomonas",
+   "n": 5,
+   "page": 37
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Burkholderia cepacia",
+   "n": 3,
+   "page": 37
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Candida albicans",
+   "n": 2,
+   "page": 37
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Candida tropicalis",
+   "n": 2,
+   "page": 37
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Enterococcus faecalis",
+   "n": 2,
+   "page": 37
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 286,
+   "page": 37
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "n": 87,
+   "page": 37
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Pseudomonas spp.",
+   "n": 28,
+   "page": 37
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus faecalis",
+   "n": 16,
+   "page": 37
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterobacter cloacae",
+   "n": 14,
+   "page": 37
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Proteus mirabilis",
+   "n": 11,
+   "page": 37
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus faecium",
+   "n": 8,
+   "page": 37
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Candida tropicalis",
+   "n": 4,
+   "page": 37
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 96,
+   "page": 37
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 50,
+   "page": 37
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 45,
+   "page": 37
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "n": 24,
+   "page": 37
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Staphylococcus epidermidis",
+   "n": 14,
+   "page": 37
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterobacter cloacae",
+   "n": 10,
+   "page": 37
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterococcus faecalis",
+   "n": 10,
+   "page": 37
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Staphylococcus haemolyticus",
+   "n": 10,
+   "page": 37
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Acinetobacter baumannii",
+   "n": 6,
+   "page": 37
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Specimen \"Other\" rows: p11 Acinetobacter baumannii (n=10); p11 Klebsiella pneumoniae (n=7); p11 Escherichia coli (n=5); p38 Escherichia coli (n=10)",
+   "why": "specimen type not stated (\"Other\"), so no specimen stratum can be given"
+  },
+  {
+   "what": "p12 ICU rows for staphylococcal species without an organism key: blood Staphylococcus capitis (n=7); cerebrospinal fluid Staphylococcus cohnii (n=1)",
+   "org": "Staphylococcus capitis, Staphylococcus cohnii",
+   "why": "no organism key for these coagulase-negative species"
+  },
+  {
+   "what": "Cefuroxime oral column (p38): urine Escherichia coli 15; urine Klebsiella pneumoniae 18; urine Enterobacter cloacae 13; urine Proteus mirabilis 88; wound Escherichia coli 13; wound Klebsiella pneumoniae 41; wound Enterobacter cloacae 10; wound Proteus mirabilis 50",
+   "drug": "Cefuroxime oral",
+   "why": "oral cefuroxime breakpoints printed next to parenteral cefuroxime; both map to the one drug key cefuroxime, so the parenteral CEFUROXIME column is kept"
+  },
+  {
+   "what": "First FOSFOMYCIN column of p38 (between norfloxacin and amoxicillin-clavulanate): urine E. coli 99, K. pneumoniae 76, E. cloacae 50, P. mirabilis 100",
+   "why": "the table prints fosfomycin twice; the first column has values for urine only and they equal the second (restricted-drug) FOSFOMYCIN column, which is kept"
+  },
+  {
+   "what": "Rows for species without an organism key: p11 cerebrospinal fluid Cronobacter sakazakii (n=1); p13 urine Candida dubliniensis (n=1); the Cronobacter ceftriaxone cell is printed as \"###\" (spreadsheet overflow)",
+   "org": "Cronobacter sakazakii, Candida dubliniensis",
+   "why": "no organism key of its own; filing it under the genus group would make this one species stand in for all Enterobacter or Candida of the stratum (a genus query uses the genus row before combining the species rows)"
+  },
+  {
+   "what": "Medicine pp14 to 17: top-10 isolate charts, Gram-negative antibiogram (embedded picture), Gram-positive antibiogram and Candida table",
+   "why": "single ward department; the report gives no combined ward table and the schema holds one ward row per stratum"
+  },
+  {
+   "what": "Surgery pp18 to 20: top-10 isolate charts, Gram-negative, Gram-positive and Candida tables (pus split into wound and tissue)",
+   "why": "single ward department; no combined ward table"
+  },
+  {
+   "what": "Neonatal ICU pp21 to 23: top-10 isolate charts, Gram-negative, Gram-positive and Candida tables",
+   "why": "neonatal unit reported separately from the ICU (SSICU) tables; not merged into the ICU stratum"
+  },
+  {
+   "what": "Obstetrics and Gynaecology pp24 to 26: top-10 isolate charts, Gram-negative and Gram-positive tables",
+   "why": "single ward department; no combined ward table"
+  },
+  {
+   "what": "Orthopaedics pp27 to 29: top-10 isolate charts, Gram-negative and Gram-positive tables (wound and tissue)",
+   "why": "single ward department; no combined ward table"
+  },
+  {
+   "what": "Paediatrics and PICU pp30 to 32: top-10 isolate charts, Gram-negative and Gram-positive tables, contamination chart",
+   "why": "paediatric ward and paediatric ICU reported together; neither a ward nor an ICU stratum"
+  },
+  {
+   "what": "Oncology pp33 to 36: top-10 isolate charts, Gram-negative and Gram-positive tables, contamination chart",
+   "why": "single ward department; no combined ward table"
+  },
+  {
+   "what": "p40 index of multidrug resistance, 2019 to 2023",
+   "why": "MDR index (drugs resistant over drugs tested), not percent susceptible"
+  },
+  {
+   "what": "p13 and p37 skin flora or collection contamination in blood culture (ICU chart 2022 and 2023; Emergency Department table, 22 isolates)",
+   "why": "contaminant counts, not an antibiogram"
+  },
+  {
+   "what": "Counts with truncated or unkeyed labels: p10 ICU urine \"Kleb pneu ozaenae\" 2, respiratory \"Alcaligenes...\" 2, CSF \"Micrococcus...\" 2 and \"Cronobacter...\" 1; p37 OPD blood \"Staphylococcus...\" 7, 4, 4, 3 and Pantoea sp. 2, urine \"Staphylococcus...\" 10 and 5, wound Streptococcus anginosus 6",
+   "why": "species not legible (label cut off) or no organism key; K. pneumoniae subsp. ozaenae is charted apart from K. pneumoniae and would be added to its count"
+  }
+ ]
+}
