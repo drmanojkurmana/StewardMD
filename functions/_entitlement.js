@@ -141,15 +141,22 @@ export async function recordVerifiedRole(env, uid, verifyRole, deps) {
   }
 }
 
+function trialOnceOn(env) { const v = String(cfgFlag(env, "TRIAL_ONCE_ON") == null ? "" : cfgFlag(env, "TRIAL_ONCE_ON")).trim().toLowerCase(); return v === "1" || v === "true" || v === "on"; }
 export function accessState(env, claims, now) {
   now = now || Date.now();
   const prov = claims && claims.provUntil ? +claims.provUntil : 0;
   const owner = isOwnerClaims(env, claims);
+  // trialDenied: the free week was refused because this doctor/number/device already had one on
+  // another account (_trial_ledger.js). Verified still means verified; there is just no free week.
+  // Honoured only while TRIAL_ONCE_ON is "1", so switching the flag off restores every denied week.
+  const denied = !!(claims && claims.trialDenied) && trialOnceOn(env);
   if (claims && claims.verified === true) {
     const at = claims.verifiedAt ? +claims.verifiedAt : 0;
     // No verifiedAt = verified before this feature existed. entitlementFor() backfills it rather
     // than reading 0 here, so a doctor already verified never blinks out of Pro on deploy day.
     const endsAt = at ? at + verifiedProDays(env) * DAY_MS : 0;
+    if (denied && !owner) return { allowed: true, verified: true, trainee: false, reviewed: true, pending: false, verifiedAt: at || null, owner, trialDenied: true,
+             freeProEndsAt: null, freeProActive: false };
     return { allowed: true, verified: true, trainee: false, reviewed: true, pending: false, verifiedAt: at || null, owner,
              freeProEndsAt: endsAt || null, freeProActive: owner || !!(endsAt && now < endsAt) };
   }
@@ -158,6 +165,8 @@ export function accessState(env, claims, now) {
   if (claims && claims.traineeVerified === true) {
     const at = claims.verifiedAt ? +claims.verifiedAt : 0;
     const endsAt = at ? at + verifiedProDays(env) * DAY_MS : 0;
+    if (denied && !owner) return { allowed: true, verified: false, trainee: true, reviewed: true, pending: false, verifiedAt: at || null, owner, trialDenied: true,
+             freeProEndsAt: null, freeProActive: false };
     return { allowed: true, verified: false, trainee: true, reviewed: true, pending: false, verifiedAt: at || null, owner,
              freeProEndsAt: endsAt || null, freeProActive: owner || !!(endsAt && now < endsAt) };
   }
@@ -165,7 +174,7 @@ export function accessState(env, claims, now) {
     return { allowed: true, verified: false, pending: !!(prov && now < prov), provUntil: prov || null, owner: true,
              freeProEndsAt: null, freeProActive: true };
   }
-  if (prov && now < prov) {
+  if (prov && now < prov && !denied) {
     return { allowed: true, verified: false, pending: true, provUntil: prov,
              freeProEndsAt: prov, freeProActive: true };
   }
@@ -211,7 +220,7 @@ export function entitlementState(env, claims, now) {
                source: a.pending ? "pending-review" : "verified-free-week", trial: true,
                daysLeft: Math.max(0, Math.ceil((a.freeProEndsAt - now) / DAY_MS)) };
     }
-    return { ...base, pro: false, source: "none", until: null, reason: "verified-week-expired" };
+    return { ...base, pro: false, source: "none", until: null, reason: a.trialDenied ? "trial-used" : "verified-week-expired" };
   }
   if (promoActive(env, now)) return { pro: true, source: "launch-promo", until: promoUntil(env), promo: true, trial: !!tr.active, trialEndsAt: tr.endsAt, daysLeft: tr.daysLeft };
   const paid = !!(claims && claims.pro === true && (!claims.proExp || +claims.proExp > now));
@@ -240,7 +249,7 @@ export async function entitlementFor(env, uid, email) {
   // computes from 0 and they drop to the free tier the instant this deploys - a support wave made
   // of exactly the people who did the right thing. One write, once, each.
   try {
-    if (verifyRequired(env) && isReviewedAccount(claims) && !claims.verifiedAt) {
+    if (verifyRequired(env) && isReviewedAccount(claims) && !claims.verifiedAt && !(claims.trialDenied && trialOnceOn(env))) {
       const va = Date.now();
       await mergeUserClaims(env, uid, { verifiedAt: va });
       claims.verifiedAt = va;

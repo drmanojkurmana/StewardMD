@@ -22,7 +22,7 @@
  * and the paywall, which is the old behaviour.
  *
  * API
- *   reason()                  -> "pro" | "unverified" | "phone" | "pending" | "expired" | "none" | "unknown"
+ *   reason()                  -> "pro" | "unverified" | "phone" | "pending" | "expired" | "used" | "none" | "unknown"
  *   explain(feature, srv)     -> { title, body, cta, act }   (pure; testable)
  *   show(feature, srv)        -> render the dialog
  *   handle(payload, feature)  -> true if this WAS a Pro refusal and it has been explained
@@ -68,6 +68,9 @@
     if (r === "phone-unverified") return "phone";
     if (r === "unverified") return "unverified";
     if (r === "verified-week-expired") return "expired";
+    // The free week is once per doctor (server _trial_ledger.js): this registration, number or
+    // device already had it on another account. Sold, not verified: they ARE verified.
+    if (r === "trial-used") return "used";
     if (r === "none") return "none";
     // No reason field at all (an older server, or a payload we did not recognise).
     if (typeof s.verified === "boolean") return s.verified ? "expired" : "unverified";
@@ -125,6 +128,14 @@
         title: name + " needs a verified registration",
         body: serverMsg || "StewardMD is for registered doctors, so this one is locked until your medical registration is verified. It takes about a minute, and verified doctors get Pro free for 7 days. This is not a payment.",
         cta: "Verify my registration", act: "verify"
+      };
+    }
+    if (r === "used") {
+      return {
+        kind: r,
+        title: name + " needs Pro",
+        body: serverMsg || "The free Pro week is once per doctor, and it has already been used with this registration, mobile number or device. Your account and your saved work are untouched. Subscribe to switch this on.",
+        cta: "See Pro plans", act: "paywall"
       };
     }
     if (r === "expired") {

@@ -202,8 +202,9 @@
   function api(path, body) {
     var u = user();
     if (!u || typeof u.getIdToken !== "function") return Promise.reject(new Error("signin-required"));
-    return u.getIdToken().then(function (tok) {
-      return fetch("/api/auth/" + path, { method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify(body || {}) });
+    var hw = (window.SMD_DEVICE && SMD_DEVICE.hwHeaders) ? SMD_DEVICE.hwHeaders() : Promise.resolve({});
+    return Promise.all([u.getIdToken(), hw]).then(function (x) {
+      return fetch("/api/auth/" + path, { method: "POST", headers: Object.assign({ "Content-Type": "application/json", "Authorization": "Bearer " + x[0] }, x[1] || {}), body: JSON.stringify(body || {}) });
     }).then(function (r) { return r.json().catch(function () { return { ok: false, error: "bad-response" }; }); });
   }
 

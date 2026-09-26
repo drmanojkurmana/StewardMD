@@ -199,3 +199,11 @@ test("the phone button opens SMD_PHONE_VERIFY, and falls back to a toast without
   assert.equal(b.acted[0][0], "toast"); assert.match(b.acted[0][1], /mobile number/);
   assert.ok(!/—/.test(b.acted[0][1]));
 });
+
+test("free week already used on another account (trial-used): a VERIFIED doctor is shown the price, never the verify screen", () => {
+  const { N } = load({ pro: false, state: { pro: false, reason: "trial-used", verified: true } });
+  assert.equal(N.reason(), "used");
+  const e = N.explain("cloud-sync");
+  assert.equal(e.act, "paywall", "they are verified; verification cannot unlock anything");
+  assert.match(e.body, /once per doctor/);
+});

@@ -10122,3 +10122,30 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
 - **Why not delete them**: the page is the truth; hiding a printed figure would make the app disagree with
   the document a clinician can open. The caution explains, the pool and reasoning ignore it.
 - **Reversible**: the checks live in `validateRow` and the store's `POOL_MIN_K`; the row flags are data.
+
+## 2026-09-26 - The free Pro week is once per doctor (reg, phone, device), not once per account
+- **Context**: owner: "7 days free trial is one time and once per number verification ... same device id no
+  second trial ... old signout account already pro new sign in again creating pro trial dont activate".
+  Every free-week door was keyed per uid, so a new Google account restarted it; the pending-review grant ran
+  before the one-reg-one-account check; the owner's approve moved a claimed reg silently; reject then
+  re-approve restarted the week.
+- **Decision** (`functions/_trial_ledger.js`, plan `vault/plans/One-Time-Trial.md`): a permanent ledger of
+  peppered HMACs (`trial:used:<kind>:<hash>` -> uid). Hard kinds deny a second account: registration number,
+  OTP-verified phone, native device id (`hw-`, ANDROID_ID / iOS id from @capacitor/device). Soft kinds are
+  recorded, never decisive: the localStorage id (`dev-`, lost on reinstall) and the IP /24 (hospital wifi).
+  A denied account is still VERIFIED (prescription pad works) with claim `trialDenied` and no week;
+  `/billing/status` answers `reason:"trial-used"` and the explainer sells, it never sends them to verify.
+- **Owner picks (2026-09-26, "go with your recommendations")**: IP is a signal only; a phone number blocks
+  the second TRIAL, not a second account; pending review keeps 7 days of access but through the ledger;
+  no DeviceCheck in v1.
+- **Deviation from the plan**: "Skip for now" is NOT gated. It writes no claim; it is the free plan for an
+  unverified account, not Pro. Gating it would lock a second person on a shared phone out of the free plan.
+- **Only an account that held a week can own a fingerprint** (a free-plan account verifying its phone does
+  not reserve the number), and a TYPED reg in the review path is checked but never recorded, so nobody can
+  poison the real doctor's number.
+- **The week never restarts for one account**: `trial:uid:<uid>` keeps the first grant time; a re-upload in
+  review and a reject/re-approve both reuse it. Pending time counts toward the 7 days.
+- **IMEI is impossible** (Android 10+ and iOS do not expose it to apps), so it is not attempted.
+- **Reversible**: `TRIAL_ONCE_ON` off = byte-for-byte the old behaviour (tested). Rollout: set `TRIAL_PEPPER`,
+  run the backfill, a week in `shadow`, then `1`.
+

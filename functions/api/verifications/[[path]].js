@@ -15,10 +15,11 @@
  * Secret:  VERIFY_ADMIN_TOKEN
  * ---------------------------------------------------------------------------
  */
-import { mergeUserClaims } from "../../_fbadmin.js";
+import { mergeUserClaims, getUserClaims } from "../../_fbadmin.js";
+import { weekPatch, trialOnceMode, backfillLedger, warmTrialMode } from "../../_trial_ledger.js";
 import { clearBudgetCache } from "../../_aibudget.js";
 import { emailVerified, emailTraineeVerified, emailFailed } from "../../_email.js";
-import { markVerified, sendProUpsellOnce } from "../../_lifecycle.js";
+import { markVerified, sendProUpsellOnce, getLifecycle } from "../../_lifecycle.js";
 import { verifyFirebaseToken } from "../../_fbauth.js";
 import { normalizeVerifyRole, isTraineeVerifyRole, recordVerifiedRole } from "../../_entitlement.js";
 
@@ -98,7 +99,10 @@ async function actionSigOK(env, uid, action, sig) {
  * `roleOverride` lets the owner correct the role on review (a legacy "Intern / Resident" record that
  * is really a PG resident). deps: { mergeUserClaims, recordVerifiedRole, clearBudgetCache,
  * emailVerified, markVerified, sendProUpsellOnce, getEntitlement, writeEntitlement }. */
-export async function doApprove(store, env, uid, regNo, deps, roleOverride) {
+export class RegClaimedError extends Error { constructor(owner) { super("registration_already_claimed"); this.owner = owner; } }
+
+// opts: { force } transfers a registration another account holds (TRIAL_ONCE_ON, see below).
+export async function doApprove(store, env, uid, regNo, deps, roleOverride, opts) {
   deps = deps || {};
   const merge = deps.mergeUserClaims || mergeUserClaims;
   const rec = (await store.get(doctorKey(uid), "json")) || { uid };
@@ -106,12 +110,28 @@ export async function doApprove(store, env, uid, regNo, deps, roleOverride) {
   const trainee = isTraineeVerifyRole(role);
   const reg = String(regNo || rec.regNo || rec.extractedRegNo || "").trim();
   const now = Date.now();
+  const once = trialOnceMode(env);
+  // One reg no = one account (TRIAL_ONCE_ON). Approving a number another account already holds used to
+  // move it silently and start a second free week; now the owner is told, and must pass force to
+  // transfer (a doctor who lost their old sign-in). Trainees hold a college ID, not a registration.
+  if (!trainee && once === "on" && reg && !(opts && opts.force)) {
+    const owner = await store.get(regKey(reg));
+    if (owner && owner !== uid) throw new RegClaimedError(owner);
+  }
+  // verifiedAt starts the free Pro week; TRIAL_ONCE_ON makes it once per doctor (_trial_ledger.js
+  // weekPatch) and never restarts it for the same account.
+  let week = { verifiedAt: now };
+  if (once !== "off") {
+    let claims = {}; try { claims = (await (deps.getUserClaims || getUserClaims)(env, uid)) || {}; } catch (e) {}
+    let phone = ""; try { const lc = await (deps.getLifecycle || getLifecycle)(env, uid); if (lc && lc.phoneVerifiedAt) phone = lc.phone || ""; } catch (e) {}
+    week = await (deps.weekPatch || weekPatch)(env, uid, claims, { regNo: trainee ? "" : reg, phone }, { door: "approve", store, extraFps: rec.trialFps || [] });
+  }
   if (trainee) {
     // verified:null DELETES the claim (mergeClaims), which also withdraws it from anyone re-approved
     // as a trainee after an older approval had wrongly granted it.
-    await merge(env, uid, { verified: null, traineeVerified: true, verifiedAt: now, provUntil: null, regNo: null });
+    await merge(env, uid, { verified: null, traineeVerified: true, provUntil: null, regNo: null, ...week });
   } else {
-    await merge(env, uid, { verified: true, traineeVerified: null, verifiedAt: now, provUntil: null, regNo: reg });   // merge: keep any existing pro claim
+    await merge(env, uid, { verified: true, traineeVerified: null, provUntil: null, regNo: reg, ...week });   // merge: keep any existing pro claim
   }
   try { await (deps.clearBudgetCache || clearBudgetCache)(env, uid); } catch (e) {}   // tier changed; the cap is cached ~26h
   try { if (rec.photoKey && env.FOLLOWCARE_R2) await env.FOLLOWCARE_R2.delete(rec.photoKey); } catch (e) {}   // purge the review photo on decision
@@ -200,6 +220,7 @@ export async function onRequest(context) {
   const seg = Array.isArray(params.path) ? params.path.join("/") : (params.path || "");
   const method = request.method;
   const store = kv(env);
+  try { await warmTrialMode(env); } catch (e) {}   // TRIAL_ONCE_ON is a live KV flag
   if (method === "OPTIONS") return new Response(null, { status: 204 });
 
   // ── One-click email action links (GET, HMAC-signed — no admin token needed) ──
@@ -213,7 +234,9 @@ export async function onRequest(context) {
     if (!(await actionSigOK(env, uid, doWhat, sig))) return htmlPage("Invalid or expired link", "This action link could not be verified. Open the admin page instead.");
     try {
       if (doWhat === "approve") {
-        const d = await doApprove(store, env, uid, reg);
+        let d;
+        try { d = await doApprove(store, env, uid, reg); }
+        catch (e) { if (e instanceof RegClaimedError) return htmlPage("Registration already in use", "This registration number belongs to another account. Open the admin page to move it."); throw e; }
         if (d.status === "trainee_verified") return htmlPage("✓ " + (d.role === "student" ? "Student" : "Intern") + " approved", `${d.email || uid} now has full access. The prescription pad stays locked for a ${d.role}. They'll see it on next sign-in.`);
         return htmlPage("✓ Doctor verified", `${d.email || uid} now has full access${d.regNo ? " (" + d.regNo + ")" : ""}. They'll see it on next sign-in.`);
       }
@@ -261,7 +284,14 @@ export async function onRequest(context) {
       if (!uid) return json({ error: "uid-required" }, 400);
       const roleOverride = body.role != null && String(body.role).trim() ? String(body.role).trim().toLowerCase() : "";
       if (roleOverride && ["doctor", "resident", "intern", "student"].indexOf(roleOverride) < 0) return json({ error: "bad-role" }, 400);
-      return json({ ok: true, doctor: await doApprove(store, env, uid, body.regNo, null, roleOverride) });
+      try { return json({ ok: true, doctor: await doApprove(store, env, uid, body.regNo, null, roleOverride, { force: body.force === true }) }); }
+      catch (e) { if (e instanceof RegClaimedError) return json({ error: "registration_already_claimed", ownerUid: e.owner, hint: "send force:true to move it to this account" }, 409); throw e; }
+    }
+
+    // One-shot: seed the one-trial ledger from every existing registration and verified phone, so
+    // nobody who already had a week can take another once TRIAL_ONCE_ON is switched on. Idempotent.
+    if (method === "POST" && seg === "trial-backfill") {
+      return json(await backfillLedger(env, { store }));
     }
 
     if (method === "POST" && seg === "reject") {
