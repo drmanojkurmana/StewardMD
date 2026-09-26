@@ -18,14 +18,16 @@ const base = (o) => Object.assign({ id: "T_2025", kind: "institution", inst: "T"
   citation: "Test antibiogram 2025.", verification: { status: "double-checked", note: "test" }, rows: [], counts: [] }, o);
 
 test("schema: unknown keys, bad drugs, bad values and s+r together all fail", () => {
-  assert.deepEqual(validateSource(base({}), "T_2025.json"), []);
+  const one = [{ spec: "blood", set: "all", org: "E. coli", n: 40, s: { amikacin: 90 } }];
+  assert.deepEqual(validateSource(base({ rows: one }), "T_2025.json"), []);
+  assert.ok(validateSource(base({}), "T_2025.json").some((x) => /no rows/.test(x)));          // an empty source belongs in the register
   const e = validateSource(base({ colour: "red", rows: [{ spec: "blood", set: "all", org: "E. coli", n: 40, s: { notadrug: 50, amikacin: 140 } },
     { spec: "urine", set: "all", org: "E. coli", n: 40, s: { amikacin: 90 }, r: { amikacin: 10 } }] }), "T_2025.json");
   assert.ok(e.some((x) => /unknown key "colour"/.test(x)));
   assert.ok(e.some((x) => /"notadrug" is not canonical/.test(x)));
   assert.ok(e.some((x) => /amikacin = 140/.test(x)));
   assert.ok(e.some((x) => /not both/.test(x)));
-  assert.ok(validateSource(base({}), "Other.json").some((x) => /does not match the file name/.test(x)));
+  assert.ok(validateSource(base({ rows: one }), "Other.json").some((x) => /does not match the file name/.test(x)));
   assert.ok(validateSource(base({ rows: [{ spec: "blood", set: "all", org: "E. coli", n: 40, s: {}, trend: { amikacin: [[2024, 120]] } }] }), "T_2025.json").some((x) => /trend/.test(x)));
 });
 
@@ -138,6 +140,15 @@ test("count checks: an all-settings row above its summed location counts is not 
   assert.equal(countChecks(src, up).length, 0);
   const down = [{ spec: "urine", set: "all", org: "E. coli", n: 700, s: { amikacin: 90 } }].map((r) => checkRow(src, r));
   assert.match(countChecks(src, down)[0].text, /800 in the organism table, 700 in the antibiogram table/);
+});
+
+test("a row whose isolate number its own count table contradicts is never combined", () => {
+  const src = base({ counts: [{ spec: "urine", set: "ward", org: "Acinetobacter spp.", n: 33 }, { spec: "urine", set: "opd", org: "Acinetobacter spp.", n: 9 }] });
+  const rows = [{ spec: "urine", set: "ward", org: "Acinetobacter spp.", n: 133, s: { amikacin: 30 } }, { spec: "urine", set: "opd", org: "Acinetobacter spp.", n: 9, s: { amikacin: 55.6 } }].map((r) => checkRow(src, r));
+  const checks = countChecks(src, rows);
+  assert.equal(checks.length, 1);
+  assert.equal(derive(rows, src).filter((r) => r.set === "all").length, 1);                     // unguarded: n = 142
+  assert.equal(derive(rows, src, new Set(checks.map((c) => c.spec + "|" + c.set + "|" + c.org))).filter((r) => r.set === "all").length, 0);
 });
 
 test("figures repeated value for value from an earlier edition become cautions on the later row only", () => {

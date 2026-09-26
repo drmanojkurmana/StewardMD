@@ -204,6 +204,7 @@
     sterile: { label: "Sterile body fluids", names: ["sterile body fluids", "sterile fluids", "sterile sites", "ss", "body fluids", "pleural fluid", "ascitic fluid", "peritoneal fluid", "synovial fluid", "bile"] },
     csf: { label: "CSF", names: ["csf", "cerebrospinal fluid"] },
     stool: { label: "Stool", names: ["stool", "faeces", "feces", "stool culture"] },
+    other: { label: "Other specimens (not blood or urine)", names: ["other samples", "other specimens", "other sample", "respiratory/sterile body fluids/pus/swab"] },
     nonurine: { label: "All specimens except urine and stool", names: ["all specimens except urine", "all samples except urine", "all specimens (except urine and faeces)", "all samples (except faeces and urine)", "non-urinary", "except urine and faeces", "total samples (except faeces & urine)"] },
     all: { label: "All specimens", names: ["all", "all specimens", "all clinical", "overall", "all samples", "mixed", "total", "all samples (except faeces)"] }
   };

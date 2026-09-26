@@ -45,7 +45,7 @@
     try { var h = window.HOSPITAL && window.HOSPITAL.current && window.HOSPITAL.current(); if (h && h.abgScope) return h.abgScope; } catch (e) {}
     return "india";
   }
-  var SPEC_ORDER = ["all", "nonurine", "blood", "urine", "respiratory", "pus", "deep", "sterile", "csf", "stool"];
+  var SPEC_ORDER = ["all", "nonurine", "blood", "urine", "respiratory", "pus", "deep", "sterile", "csf", "other", "stool"];
   // Any listed scope, or an older edition opened from the Sources tab ("src:<id>").
   function validScope(id) {
     if (!id) return false;

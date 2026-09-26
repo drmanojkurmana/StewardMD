@@ -19,7 +19,7 @@
   function drugLabel(k) { var r = R(); return r ? r.drugLabel(k) : k; }
   function rColor(v) { return v >= 70 ? "#B91C1C" : v >= 50 ? "#EA580C" : v >= 25 ? "#D97706" : v >= 10 ? "#65a30d" : "#047857"; }
   function fmtN(n) { return n == null ? "" : Number(n).toLocaleString("en-IN"); }
-  var SPEC = { blood: "blood", urine: "urine", respiratory: "respiratory samples", pus: "pus and wounds", deep: "deep infections", sterile: "sterile fluids", csf: "CSF", stool: "stool", nonurine: "all specimens except urine", all: "all specimens" };
+  var SPEC = { blood: "blood", urine: "urine", respiratory: "respiratory samples", pus: "pus and wounds", deep: "deep infections", sterile: "sterile fluids", csf: "CSF", stool: "stool", other: "other specimens (not blood or urine)", nonurine: "all specimens except urine", all: "all specimens" };
   var SET = { opd: "outpatients", ward: "wards", icu: "ICU", inpatient: "inpatients", all: "all settings" };
   var AW = { A: ["Access", "#047857"], W: ["Watch", "#B45309"], R: ["Reserve", "#B91C1C"] };
 

@@ -82,6 +82,7 @@ export function validateSource(src, file) {
   if (!(Number.isInteger(src.year) && src.year >= 2005 && src.year <= 2030)) e.push(`${tag}: year must be an integer 2005 to 2030`);
   if (src.measure != null && !["S", "R"].includes(src.measure)) e.push(`${tag}: measure must be "S" or "R"`);
   if (src.focus != null && (typeof src.focus !== "string" || !src.focus.trim())) e.push(`${tag}: focus must be a short description when given`);
+  if (!Array.isArray(src.rows) || !src.rows.length) e.push(`${tag}: no rows (a document without organism-level figures belongs in the census register with its reason, not in sources)`);
   if (src.isolates != null && !(Number.isInteger(src.isolates) && src.isolates > 0)) e.push(`${tag}: isolates must be a positive integer (the report's total)`);
   if (src.end != null && !(/^\d{4}-(0[1-9]|1[0-2])$/.test(src.end) && +src.end.slice(0, 4) === src.year)) e.push(`${tag}: end must be "YYYY-MM" in the data year`);
   if (!src.verification || !VSTAT.includes(src.verification.status)) e.push(`${tag}: verification.status must be one of ${VSTAT.join(", ")}`);
@@ -198,11 +199,14 @@ function countIndex(src) {
  * isolates there, or the isolates left out are under 10% of the total (and the row says so).
  * Otherwise the partial figure would misstate the whole (e.g. an "all settings" S. aureus row
  * missing the ICU, where every isolate was MRSA). */
-export function derive(allRows, src) {
+export function derive(allRows, src, mismatched) {
   const out = [];
   // Surveillance cohorts (ICU device-associated infections) are not a sample of the ward or
-  // hospital, so they are never combined with other rows.
-  const rows = allRows.filter((r) => !r.cohort);
+  // hospital, so they are never combined with other rows. Nor is a row whose isolate number
+  // the source's own count table contradicts (SKIMS 2024 urine Acinetobacter printed 133 and 19
+  // under a header of 47): its weight in a combination would be wrong.
+  const bad = mismatched || new Set();
+  const rows = allRows.filter((r) => !r.cohort && !bad.has(r.spec + "|" + r.set + "|" + r.org));
   const countOf = countIndex(src || {});
   const key = (r, ...f) => f.map((x) => r[x] == null ? "" : r[x]).join("|");
   const has = (list, r, spec, set, pheno) => list.some((x) => x.src === r.src && x.org === r.org && x.spec === spec && x.set === set && (x.pheno || null) === (pheno || null));
@@ -442,8 +446,8 @@ export function buildBundle(sources, register, census) {
   sorted.forEach((src) => {
     const si = metas.length;
     const checked = checkedBy.get(src.id);
-    const derived = derive(checked, src);
     const checks = countChecks(src, checked), copied = copies.filter((c) => c.src === src.id);
+    const derived = derive(checked, src, new Set(checks.map((c) => c.spec + "|" + c.set + "|" + c.org)));
     const orgs = new Set(checked.map((r) => r.org));
     metas.push({ id: src.id, kind: src.kind, inst: src.inst, name: src.institution, short: src.short, city: src.city || null, state: src.state || null, region: src.region,
       sector: src.sector, year: src.year, end: src.end || src.year + "-12", period: src.period || null, focus: src.focus || null, url: src.url || null, page: src.page || null, doi: src.doi || null, citation: src.citation,
@@ -518,7 +522,8 @@ function checkFile(path) {
   let j; try { j = JSON.parse(readFileSync(path, "utf8")); } catch (x) { console.error(`${path}: invalid JSON (${x.message})`); process.exit(1); }
   const errs = validateSource(j, path.split("/").pop());
   if (errs.length) { console.error(`${errs.length} schema error(s):\n  ` + errs.join("\n  ")); process.exit(1); }
-  const checked = j.rows.map((r) => checkRow(j, r)), derived = derive(checked, j), checks = countChecks(j, checked);
+  const checked = j.rows.map((r) => checkRow(j, r)), checks = countChecks(j, checked);
+  const derived = derive(checked, j, new Set(checks.map((c) => c.spec + "|" + c.set + "|" + c.org)));
   const act = { keep: 0, intrinsic: 0, hide: 0, suppress: 0, caution: 0 };
   const lines = [];
   checked.forEach((r) => Object.keys(r.cells).forEach((d) => {

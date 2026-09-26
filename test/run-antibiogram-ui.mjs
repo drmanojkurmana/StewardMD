@@ -56,7 +56,9 @@ try {
   const groups = await ev(`HOSPITAL.optionGroups().map(g=>g.label)`);
   ok(groups[0] === 'National' && groups.includes('Pooled') && groups.includes('North India'), 'shared picker groups: ' + groups.join(' | '));
   const skimsId = await ev(`HOSPITAL.profileForScope('inst:SKIMS_SRINAGAR')`);
-  ok(!!skimsId, 'SKIMS has a profile id: ' + skimsId);
+  ok(skimsId === 'ABG_SKIMS_SRINAGAR', 'SKIMS has a stable profile id (the institution, not the edition): ' + skimsId);
+  const oldId = await ev(`(function(){var k='stewardmd_hospital',p=localStorage.getItem(k);localStorage.setItem(k,'ABG_SKIMS_2025');var id=HOSPITAL.current().id;if(p==null)localStorage.removeItem(k);else localStorage.setItem(k,p);return id;})()`);
+  ok(oldId === 'ABG_SKIMS_SRINAGAR', 'an id saved by an older build (one edition) resolves to its institution: ' + oldId);
 
   /* ---- Antibiogram screen, single source ---- */
   await ev(`localStorage.removeItem('smd_abg_view');ABG.open({tab:'resistance',scope:'inst:SKIMS_SRINAGAR'});1`);

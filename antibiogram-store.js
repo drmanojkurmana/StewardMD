@@ -21,7 +21,7 @@
  * ======================================================================================== */
 (function () {
   "use strict";
-  var ABG_V = "08f8aa617628";
+  var ABG_V = "bbbeefbbd794";
   var R = window.ABG_RULES;
   var ACT = { k: "keep", i: "intrinsic", h: "hide", x: "suppress", c: "caution" };
   var LOCAL_KEY = "smd_abg_local";
@@ -335,10 +335,10 @@
   var SYN = {
     CYSTITIS: ["urine", "opd"], PYELONEPHRITIS: ["urine", "opd"], PROSTATITIS: ["urine", "opd"],
     COMPLICATED_UTI: ["urine", "inpatient"], CA_UTI: ["urine", "inpatient", { cohort: "hai" }],
-    CAP: [["respiratory", "nonurine"], "opd"], SINUSITIS: [["respiratory", "nonurine"], "opd"], COPD_EXACERBATION: [["respiratory", "nonurine"], "opd"], BRONCHIECTASIS_EXACERBATION: [["respiratory", "nonurine"], "opd"],
-    SEVERE_CAP: [["respiratory", "nonurine"], "icu"], HAP: [["respiratory", "nonurine"], "inpatient"], VAP: [["respiratory", "nonurine"], "icu", { cohort: "hai" }], ASPIRATION_PNEUMONIA: [["respiratory", "nonurine"], "inpatient"], LUNG_ABSCESS: [["respiratory", "nonurine"], "inpatient"],
-    CELLULITIS: [["pus", "deep", "nonurine"], "opd"], ERYSIPELAS: [["pus", "deep", "nonurine"], "opd"], DIABETIC_FOOT: [["deep", "pus", "nonurine"], "inpatient"], NECROTIZING_FASCIITIS: [["deep", "pus", "nonurine"], "inpatient"],
-    LIVER_ABSCESS: [["deep", "pus", "blood", "nonurine"], "inpatient"], BRAIN_ABSCESS: [["deep", "pus", "blood", "nonurine"], "inpatient"],
+    CAP: [["respiratory", "other", "nonurine"], "opd"], SINUSITIS: [["respiratory", "other", "nonurine"], "opd"], COPD_EXACERBATION: [["respiratory", "other", "nonurine"], "opd"], BRONCHIECTASIS_EXACERBATION: [["respiratory", "other", "nonurine"], "opd"],
+    SEVERE_CAP: [["respiratory", "other", "nonurine"], "icu"], HAP: [["respiratory", "other", "nonurine"], "inpatient"], VAP: [["respiratory", "other", "nonurine"], "icu", { cohort: "hai" }], ASPIRATION_PNEUMONIA: [["respiratory", "other", "nonurine"], "inpatient"], LUNG_ABSCESS: [["respiratory", "other", "nonurine"], "inpatient"],
+    CELLULITIS: [["pus", "deep", "other", "nonurine"], "opd"], ERYSIPELAS: [["pus", "deep", "other", "nonurine"], "opd"], DIABETIC_FOOT: [["deep", "pus", "other", "nonurine"], "inpatient"], NECROTIZING_FASCIITIS: [["deep", "pus", "other", "nonurine"], "inpatient"],
+    LIVER_ABSCESS: [["deep", "pus", "other", "blood", "nonurine"], "inpatient"], BRAIN_ABSCESS: [["deep", "pus", "other", "blood", "nonurine"], "inpatient"],
     // Pneumococcal susceptibility for meningitis needs meningeal breakpoints: CSF figures or none.
     MENINGITIS: [["csf", "sterile", "blood", "nonurine"], "inpatient", { only: { spneumoniae: ["csf"] } }], ENCEPHALITIS: [["csf", "sterile", "blood", "nonurine"], "inpatient", { only: { spneumoniae: ["csf"] } }], SBP: [["sterile", "blood", "nonurine"], "inpatient"],
     CHOLANGITIS: [["sterile", "blood", "nonurine"], "inpatient"], CHOLECYSTITIS: [["sterile", "blood", "nonurine"], "inpatient"],
@@ -352,8 +352,8 @@
     if (/MENING|CNS/.test(s)) return [["csf", "sterile", "blood", "nonurine"], "inpatient", { only: { spneumoniae: ["csf"] } }];
     if (/CHOLE|BILIAR|PERITON|SBP/.test(s)) return [["sterile", "blood", "nonurine"], "inpatient"];
     if (/UTI|CYSTITIS|PYELO|PROSTAT|URINARY/.test(s)) return ["urine", "all"];
-    if (/PNEUMONIA|CAP|HAP|VAP|ASPIRATION|RESP|EMPYEMA|LUNG|BRONCH|COPD/.test(s)) return [["respiratory", "nonurine"], "all"];
-    if (/CELLULITIS|ERYSIPELAS|ABSCESS|NECROTI|WOUND|SSTI|FOOT|OSTEO|ARTHRITIS|BITE/.test(s)) return [["pus", "deep", "nonurine"], "all"];
+    if (/PNEUMONIA|CAP|HAP|VAP|ASPIRATION|RESP|EMPYEMA|LUNG|BRONCH|COPD/.test(s)) return [["respiratory", "other", "nonurine"], "all"];
+    if (/CELLULITIS|ERYSIPELAS|ABSCESS|NECROTI|WOUND|SSTI|FOOT|OSTEO|ARTHRITIS|BITE/.test(s)) return [["pus", "deep", "other", "nonurine"], "all"];
     if (/DIARRH|DYSENTERY|GASTROENTER|CHOLERA/.test(s)) return ["stool", "all"];
     if (/SEPSIS|SEPTIC|BACTER|NEUTROPENI|ENTERIC|TYPHOID|ENDOCARD|CRBSI|LINE|DEVICE/.test(s)) return [["blood", "nonurine"], "all"];
     return null;

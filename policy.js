@@ -145,7 +145,8 @@
       if (latest[x.inst] !== x) return;                               // older editions live in the Antibiogram screen
       if (x.focus) return;                                            // an outbreak or single-pathogen report is not a hospital profile
       var net = x.kind === "network";
-      HOSPITALS.push({ id: "ABG_" + x.id, name: x.name + " (" + x.year + ")", short: x.city || x.short, type: net ? "network" : "study",
+      // The id is the institution, not the edition, so a saved choice survives next year's report.
+      HOSPITALS.push({ id: "ABG_" + x.inst, source: x.id, name: x.name + " (" + x.year + ")", short: x.city || x.short, type: net ? "network" : "study",
         label: x.short + (x.city && x.short.indexOf(x.city) < 0 ? ", " + x.city : "") + " (" + (x.kind === "study" ? "study, " : "") + x.year + (perYear[x.inst + "|" + x.year] > 1 ? (+String(x.end).slice(5, 7) <= 6 ? " H1" : " H2") : "") + ")",
         region: x.region, credibility: net ? 1 : 2, hasPolicy: false, abgScope: net ? "src:" + x.id : "inst:" + x.inst, inst: x.inst });
     });
@@ -164,10 +165,19 @@
   try { document.addEventListener("smd:abg-ready", function () { refreshProfiles(); }); } catch (e) {}
 
   var KEY = "stewardmd_hospital";
+  // Ids saved by older builds: ALIAS, then "ABG_<source id>" (one edition) to that source's
+  // institution profile.
+  function resolve(id) {
+    if (HMAP[id]) return HMAP[id];
+    if (ALIAS[id]) { id = ALIAS[id]; if (HMAP[id]) return HMAP[id]; }
+    var I = window.ABG_INDEX, sid = /^ABG_/.test(String(id)) ? String(id).slice(4) : null;
+    var src = sid && I && I.sources ? I.sources.filter(function (x) { return x.id === sid; })[0] : null;
+    return (src && HMAP["ABG_" + src.inst]) || null;
+  }
   function current() {
     var id = null;
     try { id = localStorage.getItem(KEY); } catch (e) {}
-    return HMAP[id] || HMAP[ALIAS[id]] || HMAP.ICMR;
+    return resolve(id) || HMAP.ICMR;
   }
   function setProfile(id) {
     if (!HMAP[id]) return;
