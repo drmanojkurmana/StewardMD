@@ -91,7 +91,7 @@ async function harness(dbPath) {
 
   docs.set(`q_orgs/${ORG}`, { fields: { id: ORG, code: "TWINP", name: "Persistence Drill", kind: "clinic", mode: "wardsynq",
     connectTenantId: TENANT_ID, ownerUid: "cfa:nobody", createdAt: 1,
-    wardsynq: { maik: { enabled: true, phiApproved: ["local-openai"], localBaseUrl: "https://hospital.internal/v1", localModel: "ward-7b" } } }, updateTime: "t1" });
+    wardsynq: { maik: { enabled: true, phiApproved: ["local-openai"], localBaseUrl: "https://ai.hospital.example/v1", localModel: "ward-7b" } } }, updateTime: "t1" });
   docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(ADMIN))}`, { fields: { orgId: ORG, identity: idFor(ADMIN), role: "admin", active: true }, updateTime: "t1" });
 
   const socketFetch = async (url, init) => {

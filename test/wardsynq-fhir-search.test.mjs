@@ -149,6 +149,17 @@ test("_summary and _elements SUBSET a resource and say so with the SUBSETTED tag
   assert.equal(cb.total, 2);
   assert.equal(cb.entry.length, 0);
 
+  // OPS-17/F17: _elements/_summary is a filter on the search MATCHES only - _include/_revinclude
+  // resources travel whole, or _include is defeated (an included Patient came back stripped to
+  // id/meta and tagged SUBSETTED, as if the search had asked to subset it too).
+  const patient = { resourceType: "Patient", id: "p1", meta: { lastUpdated: "2026-09-08T00:00:00.000Z" }, name: [{ text: "Asha Rao" }], gender: "female", birthDate: "1972-04-02" };
+  const withInclude = searchBundle({ base: "https://h/fhir", type: "Observation", q, page, included: [patient], outcomes: [], rawQuery: "_elements=code,status&_include=Observation:subject" });
+  const includedEntry = withInclude.entry.find((e) => e.search.mode === "include");
+  assert.deepEqual(includedEntry.resource, patient, "unmodified - name/gender/birthDate all still present");
+  assert.equal(includedEntry.resource.meta.tag, undefined, "never tagged SUBSETTED");
+  // The MATCH entries are still subset, exactly as before.
+  assert.deepEqual(Object.keys(withInclude.entry.find((e) => e.search.mode === "match").resource).sort(), ["code", "id", "meta", "resourceType"]);
+
   const none = parseSearch("Observation", "_total=none").query;
   const nb = searchBundle({ base: "https://h/fhir", type: "Observation", q: none, page: paginate(rows, none), included: [], outcomes: [], rawQuery: "_total=none" });
   assert.equal(nb.total, undefined, "_total=none omits the count");

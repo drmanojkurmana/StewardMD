@@ -267,6 +267,19 @@ test("FHIR IDS: R4's 64 characters are honoured by hashing what does not fit, de
   const sixty = "a".repeat(60);
   assert.equal(fhirId(sixty), sixty, "a 60-character id is a fine resource id");
   assert.match(provenanceId("Observation", sixty, 1), /^ob-wsq-[0-9a-f]{48}-v1$/, "but its Provenance id would not fit, so that one is hashed");
+
+  // OPS-12/F12: these 8 FHIR_TYPE values had no TYPE_CODE entry - provenanceId returned null and
+  // fhirProvenance/clean() carried it through as "id": null (clean() strips undefined, never null).
+  for (const t of ["Specimen", "MedicationDispense", "CarePlan", "ImagingStudy", "Procedure", "Appointment", "RiskAssessment", "Immunization"]) {
+    const pid = provenanceId(t, "rec-1", 1);
+    assert.ok(pid, `${t} now has a Provenance id`);
+    assert.deepEqual(parseProvenanceId(pid), { fhirType: t, fhirId: "rec-1", version: 1 });
+  }
+  for (const [rt, ft] of [["SpecimenCollection", "Specimen"], ["MedicationDispense", "MedicationDispense"], ["CarePlan", "CarePlan"], ["ImagingStudy", "ImagingStudy"], ["SurgicalCase", "Procedure"], ["Appointment", "Appointment"], ["RiskAssessment", "RiskAssessment"], ["Immunization", "Immunization"]]) {
+    assert.equal(FHIR_TYPE[rt], ft, `${rt} maps to ${ft}`);
+    const prov = fhirProvenance({ resourceType: rt, id: "x1", version: 1, writtenBy: { id: "u1", kind: "human", at: "2026-09-08T10:00:00.000Z" }, meta: { recordedAt: "2026-09-08T10:00:00.000Z" } });
+    assert.ok(prov && prov.id, `${rt}: Provenance has a real id, never null`);
+  }
   const rec = { resourceType: "Observation", id: long, version: 1, patientId: "p1", code: "2160-0", codeSystem: "loinc", value: 1, meta: { recordedAt: "2026-09-08T10:00:00.000Z" }, writtenBy: { id: "x", kind: "human", at: "2026-09-08T10:00:00.000Z" } };
   const f = toFhir(rec);
   assert.equal(f.id, fhirId(long));

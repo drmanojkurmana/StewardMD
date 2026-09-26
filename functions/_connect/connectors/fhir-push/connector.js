@@ -19,10 +19,14 @@ function toRaw(rawBody, budget) {
   if (doc && doc.resourceType === "Bundle") all = (doc.entry || []).map((e) => e && e.resource).filter(Boolean);
   else if (doc && doc.resourceType) all = [doc];
   const cap = (budget && budget.maxRows) || 50000;
-  if (all.length > cap) all = all.slice(0, cap);
+  // OPS-18/F18: a Bundle above maxRows was silently cut off partway through - a large backfill was
+  // partially ingested and the sender never told. `dropped` rides on the return value so the caller
+  // can record it as an ingest warning instead of discarding the fact along with the rows.
+  const dropped = all.length > cap ? all.length - cap : 0;
+  if (dropped) all = all.slice(0, cap);
   const patient = all.find((r) => r && r.resourceType === "Patient") || {};
   const resources = all.filter((r) => r && r.resourceType !== "Patient");
-  return { patient, resources };
+  return { patient, resources, dropped };
 }
 
 export const fhirPushConnector = {
@@ -33,6 +37,8 @@ export const fhirPushConnector = {
   ingest: async (ctx, rawEvent) => {
     const raw = toRaw((rawEvent && rawEvent.rawBody) || "", ctx.budget);
     const bundle = normalizeFhir(ctx, raw);
-    return { handle: { type: "fhir-push", resources: (raw.resources || []).length }, bundle };
+    // OPS-18/F18: the truncation is now a signal on the bundle and the handle, not silently discarded.
+    if (raw.dropped && bundle && bundle.meta) bundle.meta.warnings = [...(bundle.meta.warnings || []), `Bundle exceeded the ${(ctx.budget && ctx.budget.maxRows) || 50000}-row ingest limit; ${raw.dropped} resource(s) were dropped and not ingested`];
+    return { handle: { type: "fhir-push", resources: (raw.resources || []).length, truncated: raw.dropped > 0, dropped: raw.dropped || 0 }, bundle };
   },
 };

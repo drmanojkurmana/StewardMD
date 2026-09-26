@@ -94,7 +94,9 @@ function normaliseBarcode(value) {
  * @param {object} order MedicationOrder
  * @param {object} scan {patientBarcode, drugBarcode, dose, route, at}
  * @param {object} patient Patient (its `mrn`/wristband barcode is the identity source of truth)
- * @param {{windowMinutes?: number}} [opts] how far from the scheduled time still counts as on time
+ * @param {{windowMinutes?: number, allowLate?: boolean}} [opts] how far from the scheduled time still counts as on
+ *   time. allowLate (CLIN-11): a dose after its window is charted as late rather than refused, because a late dose
+ *   that cannot be recorded reads as not given and invites a second one; only an EARLY dose fails the right.
  * @returns {{passed: boolean, results: Record<string, {ok: boolean, detail: string}>, failed: string[]}}
  */
 function checkFiveRights(order, scan, patient, opts) {
@@ -142,9 +144,11 @@ function checkFiveRights(order, scan, patient, opts) {
     const at = new Date(scan.at || nowIso()).getTime();
     const scheduled = new Date(scan.scheduledAt).getTime();
     const driftMinutes = Math.abs(at - scheduled) / 60000;
+    const lateOk = opts.allowLate === true && at > scheduled;
     results.time = {
-      ok: Number.isFinite(driftMinutes) && driftMinutes <= windowMinutes,
-      detail: `drift ${Number.isFinite(driftMinutes) ? driftMinutes.toFixed(1) : "unknown"} min vs ${windowMinutes} min window`,
+      ok: Number.isFinite(driftMinutes) && (driftMinutes <= windowMinutes || lateOk),
+      detail: `drift ${Number.isFinite(driftMinutes) ? driftMinutes.toFixed(1) : "unknown"} min vs ${windowMinutes} min window`
+        + (lateOk && driftMinutes > windowMinutes ? "; given late" : at < scheduled && driftMinutes > windowMinutes ? "; too early for this dose" : ""),
     };
   }
 
@@ -173,6 +177,7 @@ class MedicationAdministrationRecord {
     this.safetyCheck = deps.safetyCheck || denyWithoutSafetyEngine;
     this.highAlertDrugs = (deps.highAlertDrugs || []).map((d) => String(d).toUpperCase());
     this.windowMinutes = deps.windowMinutes ?? 60;
+    this.allowLate = deps.allowLate === true;
   }
 
   /** Creates a fresh administration record in ORDERED for a given order. */
@@ -251,7 +256,7 @@ class MedicationAdministrationRecord {
       throw new MedicationSafetyError("scan() needs order, patient and nurseId", [{ code: "MISSING_INPUT" }]);
     }
 
-    const rights = checkFiveRights(order, scan, patient, { windowMinutes: this.windowMinutes });
+    const rights = checkFiveRights(order, scan, patient, { windowMinutes: this.windowMinutes, allowLate: this.allowLate });
     if (!rights.passed) {
       const reasons = rights.failed.map((right) => ({
         code: `FIVE_RIGHTS_${right.toUpperCase()}`,

@@ -33,6 +33,7 @@ export function makeMockFhir(opts = {}) {
   const seenJti = new Set(opts.seedJti || []);
   const kv = opts.kv || makeMockKv();
   let patient401Used = false;
+  let lastRequestedScope = "";   // OPS-16/F16: so a test can assert the scope SYNTAX the connector actually sent
 
   async function tokenResponse(init) {
     const body = new URLSearchParams(String(init.body || ""));
@@ -48,6 +49,7 @@ export function makeMockFhir(opts = {}) {
     if (!c.jti || seenJti.has(c.jti) || opts.replayJti) return json({ error: "invalid_client", detail: "jti-replay" }, 400);
     seenJti.add(c.jti);
     const requested = body.get("scope") || "";
+    lastRequestedScope = requested;
     const scope = opts.narrowScope || requested;                       // server may narrow
     return json({ access_token: "mock-access-" + (opts.tokenTag || "1"), token_type: "bearer", expires_in: opts.expireToken || 300, scope });
   }
@@ -96,5 +98,5 @@ export function makeMockFhir(opts = {}) {
     return new Response("not found", { status: 404 });
   }
 
-  return { fetch, kv, calls, tokenEndpoint: TOKEN, base: BASE };
+  return { fetch, kv, calls, tokenEndpoint: TOKEN, base: BASE, get lastRequestedScope() { return lastRequestedScope; } };
 }

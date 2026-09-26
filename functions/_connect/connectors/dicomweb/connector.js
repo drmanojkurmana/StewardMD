@@ -23,6 +23,16 @@ function tagValue(obj, tag) {
   return v == null || v === "" ? undefined : v;
 }
 
+// EVERY value of a multi-valued tag (ModalitiesInStudy, 0008,0061, is one - a PET/CT study reports
+// both PT and CT). tagValue() above kept only Value[0], so a multi-modality study silently recorded
+// only its first modality (OPS-23/F23). Comma-joined into the existing string field (imagingStudy's
+// `modality` is validated as a string everywhere it is read) rather than widening that field to an
+// array across the canonical model/validator/FHIR mapper.
+function tagValues(obj, tag) {
+  const arr = obj && obj[tag] && Array.isArray(obj[tag].Value) ? obj[tag].Value.filter((v) => v != null && v !== "") : [];
+  return arr.length ? arr.map(String) : undefined;
+}
+
 // Resolve the auth header from ctx.secrets("bearer") + an optional custom header name (config.headerName),
 // PLUS the Accept header DICOMweb servers expect for the JSON response model (application/dicom+json). Built
 // fresh on every call (the connector holds no state) — mirrors rest-json's authHeaderFor exactly, plus Accept.
@@ -110,7 +120,8 @@ export const dicomWebConnector = {
       try {
         const uid = tagValue(obj, "0020000D");                         // StudyInstanceUID
         if (uid == null) { warnings.push("study missing StudyInstanceUID (0020000D); skipped"); continue; }
-        const modality = tagValue(obj, "00080061") || tagValue(obj, "00080060");   // ModalitiesInStudy || Modality
+        const modalities = tagValues(obj, "00080061");                  // ModalitiesInStudy (multi-valued)
+        const modality = (modalities && modalities.join(",")) || tagValue(obj, "00080060");   // else Modality (single)
         const studyDate = tagValue(obj, "00080020");                    // StudyDate
         const accessionNumber = tagValue(obj, "00080050");              // AccessionNumber
         const description = tagValue(obj, "00081030");                  // StudyDescription

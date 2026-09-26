@@ -466,3 +466,21 @@ test("LT-35 source: the Hospital tab shows no organisation id, no Connect tenant
   assert.ok(!/esc\(o\.id\b/.test(hospital) && !/o\.connectTenantId/.test(hospital), "no internal id on the Hospital tab");
   assert.ok(!src.includes("site.admin.hospital.alert.ownerDecision") && !/owner decision/i.test(src.replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g, "")), "no owner decision reference in on-screen text");
 });
+
+test("DATA-09: an old audit row changed below the newest window is reported from the full walk, not read as intact", async () => {
+  seedHospital();
+  const { sweepAuditChain } = await import("../functions/_wardsynq/audit-chain.js");
+  const { firestoreAnchorStore } = await import("../functions/_q_audit_chain.js");
+  for (let i = 0; i < 1100; i++) await RECORD.auditOnly(TENANT_ROW.id, { ts: new Date(Date.UTC(2026, 8, 1, 0, i)).toISOString(), actor: "cfa:x", action: "record.read", outcome: "ok" });
+  RECORD.audit[3].actor = "cfa:someone-else";                // below the newest 1000 the review re-hashes
+  const before = await as(ADMIN, `/ward/security-report?orgId=${ORG_ID}`);
+  assert.equal(before.auditRetention.integrity.status, "ok", "the newest window alone cannot see it");
+  assert.equal(before.auditRetention.fullWalk.status, "not_run");
+  const w = await sweepAuditChain(RECORD, TENANT_ROW.id, firestoreAnchorStore(ENV), "2026-09-27T01:00:00.000Z");
+  assert.equal(w.status, "broken");
+  const rep = await as(ADMIN, `/ward/security-report?orgId=${ORG_ID}`);
+  assert.equal(rep.auditRetention.fullWalk.status, "broken");
+  assert.equal(rep.auditRetention.integrity.status, "broken");
+  assert.equal(rep.auditRetention.integrity.atSeq, 4);
+  assert.match(rep.auditRetention.integrity.message, /full walk/);
+});

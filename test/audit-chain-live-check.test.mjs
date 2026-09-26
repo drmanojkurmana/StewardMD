@@ -71,6 +71,16 @@ test("findings: an unlinked row, a link whose row is gone, and a changed row are
     assert.match(r.findings.join(" "), /Broken at chained row 3/); }
 });
 
+test("DATA-09 --full: a row changed below the newest --limit links is found only by the full walk", { skip: SKIP }, async () => {
+  const { db, binding } = await seeded();
+  db.exec("DROP TRIGGER connect_audit_event_no_update");
+  db.prepare("UPDATE connect_audit_event SET actor='cfa:other' WHERE tenant_id=? AND ts=?").run(T, ev(1).ts);
+  assert.equal((await LC.liveCheck(binding, { since: SINCE, limit: 2 })).status, "confirmed", "the newest two links cannot see row 1");
+  const full = await LC.liveCheck(binding, { since: SINCE, limit: 2, full: true });
+  assert.equal(full.status, "findings");
+  assert.match(full.findings.join(" "), /Broken at chained row 1/);
+});
+
 test("nothing written since the timestamp is NOT CONFIRMED, and main() exits 2 on that and on a missing --since", { skip: SKIP }, async () => {
   const { binding } = await seeded();
   const r = await LC.liveCheck(binding, { since: "2027-01-01T00:00:00Z" });

@@ -86,6 +86,11 @@ function isHashedId(id) { return HASHED.test(str(id)); }
 const TYPE_CODE = Object.freeze({
   Patient: "pt", Encounter: "en", Condition: "cn", AllergyIntolerance: "ai", Observation: "ob", MedicationRequest: "mr",
   MedicationAdministration: "ma", ServiceRequest: "sr", DiagnosticReport: "dr", DocumentReference: "dc", Consent: "cs",
+  // OPS-12/F12: the 8 types this table did not cover - Provenance for any of them was emitted with
+  // "id": null (provenanceId returned null, and fhirProvenance/clean() carried it through unchanged),
+  // which HAPI and most typed SDKs fail to deserialize and cannot be referenced by.
+  Specimen: "sp", MedicationDispense: "md", CarePlan: "cp", ImagingStudy: "is",
+  Procedure: "pr", Appointment: "ap", RiskAssessment: "ra", Immunization: "im",
 });
 const CODE_TYPE = Object.freeze(Object.fromEntries(Object.entries(TYPE_CODE).map(([t, c]) => [c, t])));
 
