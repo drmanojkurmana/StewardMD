@@ -56,7 +56,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { norm } from "./formulary.js";
-import { quantityOf, levelsFrom } from "./stock.js";
+import { quantityOf, levelsFrom, issueStoreFor } from "./stock.js";
 import { f, YN, REGISTERS, defineRegister, saveEntry, listEntries, typeOf } from "./registers.js";
 import { registerSettings, rmiStatus, ndpsAnnualClocks, form3hClosureLate } from "./register-settings.js";
 import { hospitalToday } from "./expected-discharge.js";
@@ -374,7 +374,7 @@ const k3 = (code, location, unit) => `${norm(code)}|${norm(location)}|${norm(uni
 /**
  * PURE. The register book: per controlled item (code, location, unit), every event in time order with the running
  * balance, the Form 3H day rows, and what is wrong (unwitnessed, negative, count discrepancies). The balance rules are
- * levelsFrom()'s own: an issue leaves the one store the item was received into, a returned issue is not an issue,
+ * levelsFrom()'s own: an issue leaves the store issueStoreFor() names (stock.js), a returned issue is not an issue,
  * and a count or a dose given on the ward changes nothing in the book. The closing balance is cross-checked against
  * levelsFrom() itself, and a disagreement is reported rather than one of them trusted.
  */
@@ -391,14 +391,7 @@ function registerBook(input) {
   const orders = new Map((i.orders || []).filter(Boolean).map((o) => [o.id, o]));
   const policyWitness = i.requireWitness !== false;
   const events = [];
-  const receivedAt = new Map();
-  for (const m of movements) {
-    const q = quantityOf(m.quantity);
-    if (q && (m.kind === "receipt" || m.kind === "transfer-in")) {
-      const k = `${norm(m.code)}|${norm(q.unit)}`;
-      const s = receivedAt.get(k) || new Set(); s.add(str(m.location) || null); receivedAt.set(k, s);
-    }
-  }
+  const storeOf = issueStoreFor(movements);
   /* A return to the supplier (stock.js returnToSupplier) leaves the book like a transfer out, witnessed like a wastage. */
   const SIGN = { receipt: 1, "transfer-in": 1, adjustment: 1, wastage: -1, "transfer-out": -1, "supplier-return": -1 };
   for (const m of movements) {
@@ -415,8 +408,7 @@ function registerBook(input) {
     const q = quantityOf(d.quantity);
     if (!q) continue;
     const code = str(d.drugCode) || str(d.drug);
-    const src = receivedAt.get(`${norm(code)}|${norm(q.unit)}`);
-    const location = src && src.size === 1 ? [...src][0] : null;
+    const location = storeOf(d, code, q.unit);
     const base = { code, display: str(d.drug) || code, location, unit: q.unit, quantity: q.value, patientId: d.patientId || null, orderId: d.orderId || null, ref: { dispenseId: d.id }, batch: d.batch || null };
     /* Form 3H names the patient's Form 3E registration number against each quantity dispensed. */
     const form3eSerial = i.form3e ? (i.form3e.get(d.patientId) || null) : undefined;

@@ -219,6 +219,10 @@ async function cssdStep(request, env, ctx) {
     try { load = await svc.get(LOAD_TYPE, str(ctx.loadId)); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
     if (!load) return { ...base, ok: false, status: 404, error: "load_not_found", detail: "Start the load first.", written: 0 };
     if (load.state === "failed") return { ...base, ok: false, status: 409, error: "load_failed", written: 0 };
+    /* A set goes into a load only while that load is running and before any indicator is read (BILL-14): one added to
+     * a load that already passed would be released and issued without ever having been in the steriliser. */
+    const resulted = [load.chemicalIndicator, load.biologicalIndicator].some((v) => str(v) && str(v) !== "pending");
+    if (load.state !== "running" || resulted) return { ...base, ok: false, status: 409, error: "load_not_running", detail: "This load has already run and its indicators are being read. Put the set in a new load.", written: 0 };
     next.sterilised = { loadId: load.id, sterilizer: load.sterilizer, loadNumber: load.loadNumber, at, by };
   }
   if (step === "store") {

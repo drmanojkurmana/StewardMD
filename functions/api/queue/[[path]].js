@@ -2668,7 +2668,7 @@ export async function onRequest(context) {
         if (sub === "store-move" && method === "POST") return R(await storeMovement(request, env, { ...deps, kind: body.kind, code: body.code, quantity: body.quantity, unit: body.unit, location: body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, idempotencyKey: key }));
         if (sub === "indent" && method === "POST") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await raiseIndent(request, env, { ...deps, departments: d, authorizeDepartment: inDept(CAPS.DEPT_REQUEST), departmentId: body.departmentId, fromLocation: body.fromLocation, toLocation: body.toLocation, lines: body.lines, note: body.note, idempotencyKey: key })); }
         if (sub === "indent-decide" && method === "POST") return R(await decideIndent(request, env, { ...deps, authorizeDepartment: inDept(CAPS.INDENT_APPROVE), indentId: body.indentId, decision: body.decision, lines: body.lines, reason: body.reason, idempotencyKey: key }));
-        if (sub === "indent-issue" && method === "POST") return R(await issueIndent(request, env, { ...deps, indentId: body.indentId, lines: body.lines }));
+        if (sub === "indent-issue" && method === "POST") return R(await issueIndent(request, env, { ...deps, indentId: body.indentId, lines: body.lines, idempotencyKey: key }));
         if (sub === "indent-acknowledge" && method === "POST") return R(await acknowledgeIndent(request, env, { ...deps, authorizeDepartment: inDept(CAPS.DEPT_REQUEST), indentId: body.indentId, lines: body.lines, note: body.note, idempotencyKey: key }));
         if (sub === "indent-close" && method === "POST") return R(await closeIndent(request, env, { ...deps, indentId: body.indentId, reason: body.reason, idempotencyKey: key }));
         if (sub === "store-consumption" && method === "GET") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await storeConsumption(request, env, { ...deps, departments: d, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" })); }
@@ -5293,7 +5293,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "dispense" && method === "POST") {
-        const r = await dispenseOrder(request, env, { ...deps, orderId: body.orderId, quantity: body.quantity, batch: body.batch, expiry: body.expiry, destination: body.destination, takeHome: body.takeHome === true, at: body.at, idempotencyKey: body.idempotencyKey || null,
+        const r = await dispenseOrder(request, env, { ...deps, orderId: body.orderId, quantity: body.quantity, batch: body.batch, expiry: body.expiry, destination: body.destination, location: body.location, takeHome: body.takeHome === true, at: body.at, idempotencyKey: body.idempotencyKey || null,
           isControlled, witnessId: body.witnessId, witnessCheck, quarantineCheck: (drug, code, batch) => quarantineRefusal(deps, drug, code, batch) });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
