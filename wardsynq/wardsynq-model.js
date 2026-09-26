@@ -202,8 +202,19 @@ function Observation(input) {
     // transit through the store or the bus would be excluded from every automated score forever, and
     // silently, which is exactly the failure the filter exists to prevent.
     scoreEligible: typeof input.scoreEligible === "boolean" ? input.scoreEligible : null,
-    meta: makeMeta(input),
+    meta: observedNoLaterThanReceived(makeMeta(input)),
   };
+}
+
+/* CLIN-22: nothing is observed after WardSynQ receives it. A tablet whose clock runs a few seconds fast sent
+ * an effectiveAt later than the server's recordedAt, and the flowsheet dropped the reading for good. The
+ * observation time is clamped to the receipt time, and what the device said is kept beside it. */
+function observedNoLaterThanReceived(meta) {
+  if (Date.parse(meta.effectiveAt) > Date.parse(meta.recordedAt)) {
+    meta.effectiveAtAsSent = meta.effectiveAt;
+    meta.effectiveAt = meta.recordedAt;
+  }
+  return meta;
 }
 
 /** MedicationOrder: prescription / order for a medication. */

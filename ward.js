@@ -4162,7 +4162,10 @@
         "</div>" +
         (b.complete
           ? '<p class="w-hint">' + ms("check_circle") + wTH("ward.every-hour-of-this-period-has", "Every hour of this period has an entry.") + "</p>"
-          : '<p class="w-hint warn">' + ms("error") + (state.balanceSinceAdmission
+          : '<p class="w-hint warn">' + ms("error") + (!b.gaps.length && b.hours.length
+            /* CLIN-24: every hour has an entry, but not in both directions: say which is missing. */
+            ? wTH("ward.fluid-direction-gaps", "{output} of these {v} hours have no output charted and {intake} have no intake charted. Read this balance as incomplete.", { output: esc((b.outputGaps || []).length), intake: esc((b.intakeGaps || []).length), v: esc(b.hours.length) }, "output intake v")
+            : state.balanceSinceAdmission
             ? wTH("ward.of-the-hours-since-admission-have-nothing", "{length} of the {v} hours since admission have nothing charted. Read this balance as incomplete.", { length: esc(b.gaps.length), v: esc(b.gaps.length + b.hours.length) }, "length v")
             : wTH("ward.of-the-last-hours-have-nothing", "{length} of the last {v} hours have nothing charted. Read this balance as incomplete.", { length: esc(b.gaps.length), v: esc(b.gaps.length + b.hours.length) }, "length v")) + "</p>");
     var curDir = state.fluidDir === "output" ? "output" : "intake";
@@ -5741,6 +5744,12 @@
     ]}
   };
 
+  /* CLIN-07: a value in a unit the critical limits are not in could not be checked. It is on the critical
+   * board for a clinician, and the laboratory is told so rather than seeing a quiet "released". */
+  function labUncheckedMsg(n) {
+    return wT("ward.crit-uncomparable", "{n} value(s) could not be checked against the critical limits because the unit was not recognised. They are on the critical results board for a clinician to review.", { n: n });
+  }
+
   function labIsImaging(order) {
     if (!order) return false;
     var cat = String(order.category || "").toLowerCase();
@@ -6030,6 +6039,7 @@
         var crit = r && r.criticalCheck;
         var critMsg = crit && !crit.checked ? wT("ward.result-saved-but-it-could-not", "Result saved, but it could NOT be checked against the critical limits. Review it for critical values now.")
           : crit && crit.opened ? (crit.opened === 1 ? wT("ward.critical-value-in-this-result-the-one", "{opened} critical value in this result. The critical-result alert has been opened.", { opened: crit.opened }) : wT("ward.critical-value-in-this-result-the-many", "{opened} critical values in this result. The critical-result alert has been opened.", { opened: crit.opened })) : "";
+        if (crit && crit.uncomparable && crit.uncomparable.length) critMsg = (critMsg ? critMsg + " " : "") + labUncheckedMsg(crit.uncomparable.length);
         if (r && r.ok) {
           st.err = critMsg;
           st.note = r.awaitingVerification ? wT("ward.on-the-chart-as-preliminary-another", "On the chart as preliminary. Another member of the laboratory must verify it.") : wT("ward.result-released", "Result released.");
@@ -6455,7 +6465,7 @@
       return '<li class="lvl-' + esc(esc_.level || "due") + '">' +
         '<div class="w-crit-h"><b>' + esc(c.display || c.code) + "</b>" +
         (c.value == null ? "" : '<span class="w-crit-v">' + esc(c.value) + (c.unit ? " " + esc(c.unit) : "") + "</span>") +
-        '<span class="w-crit-b">' + (c.basis === "lab" ? wTH("ward.flagged-by-the-lab", "flagged by the lab") : c.basis === "limit" ? wTH("ward.outside-critical-limit", "outside critical limit", null, "", 1) : esc(c.basis || "")) + "</span></div>" +
+        '<span class="w-crit-b">' + (c.basis === "lab" ? wTH("ward.flagged-by-the-lab", "flagged by the lab") : c.basis === "limit" ? wTH("ward.outside-critical-limit", "outside critical limit", null, "", 1) : c.basis === "unit-mismatch" ? wTH("ward.crit-unit-unchecked", "not checked: unit {unit} is not {expected}", { unit: esc(c.unit || "-"), expected: esc(c.expectedUnit || "") }, "unit expected") : esc(c.basis || "")) + "</span></div>" +
         '<div class="w-crit-m">' + ms("person") + critWho(c) +
         " &middot; " + ms("schedule") + (mins == null ? "" : wTH("ward.min-since-reported", "{mins} min since reported", { mins: mins }, "mins")) +
         (esc_.level === "escalate" ? " &middot; ESCALATE" : esc_.level === "overdue" ? " &middot; " + wTH("ward.overdue2", "overdue") : "") +
@@ -7673,7 +7683,7 @@
         '<p class="w-hint warn">' + ms("warning") + wTH("ward.no-one-click-transfuse-both-checkers2", "NO ONE-CLICK TRANSFUSE. Both checkers and both scans are required; compatibility is re-derived from what is scanned, never trusted from the crossmatch record.") + "</p>" +
         '<div class="w-grid">' +
         "<label class=\"w-f\"><span>" + wTH("ward.first-checker-you", "First checker (you)") + "</span><input id=\"wTxChecker1\" type=\"text\" autocomplete=\"off\"></label>" +
-        "<label class=\"w-f\"><span>" + wTH("ward.second-checker-independent", "Second checker (independent)") + "</span><input id=\"wTxChecker2\" type=\"text\" autocomplete=\"off\"></label>" +
+        "<label class=\"w-f\"><span>" + wTH("ward.second-checker-independent", "Second checker (independent)") + "</span><input id=\"wTxChecker2\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.second-checker-staff-id", "Their staff ID") + "\"></label>" +
         "<label class=\"w-f\"><span>" + wTH("ward.scan-patient-wristband", "Scan: patient wristband") + "</span><input id=\"wTxScanPatient\" type=\"text\" autocomplete=\"off\"></label>" +
         "<label class=\"w-f\"><span>" + wTH("ward.scan-unit-label", "Scan: unit label") + "</span><input id=\"wTxScanUnit\" type=\"text\" autocomplete=\"off\"></label>" +
         "</div>" +
@@ -7714,7 +7724,7 @@
         (c.value == null ? "" : '<span class="w-crit-v">' + esc(c.value) + (c.unit ? " " + esc(c.unit) : "") + "</span>") +
         // Whose call this was. A laboratory's own flag and a configured threshold are never
         // presented as the same thing.
-        '<span class="w-crit-b">' + (c.basis === "lab" ? wTH("ward.flagged-by-the-lab", "flagged by the lab") : c.basis === "limit" ? wTH("ward.outside-critical-limit", "outside critical limit", null, "", 1) : esc(c.basis || "")) + "</span></div>" +
+        '<span class="w-crit-b">' + (c.basis === "lab" ? wTH("ward.flagged-by-the-lab", "flagged by the lab") : c.basis === "limit" ? wTH("ward.outside-critical-limit", "outside critical limit", null, "", 1) : c.basis === "unit-mismatch" ? wTH("ward.crit-unit-unchecked", "not checked: unit {unit} is not {expected}", { unit: esc(c.unit || "-"), expected: esc(c.expectedUnit || "") }, "unit expected") : esc(c.basis || "")) + "</span></div>" +
         '<div class="w-crit-m">' + ms("schedule") + (mins == null ? "" : wTH("ward.min-since-reported", "{mins} min since reported", { mins: mins }, "mins")) +
         (esc_.level === "escalate" ? " &middot; ESCALATE" : esc_.level === "overdue" ? " &middot; " + wTH("ward.overdue2", "overdue") : "") +
         (c.state === "acknowledged" ? " &middot; " + wTH("ward.acknowledged-by", "acknowledged by") + " " + staffWho(c.acknowledgedBy, c.acknowledgedByName) : "") + "</div>" +
@@ -13459,6 +13469,7 @@
         } else if (r && r.ok && r.criticalCheck && r.criticalCheck.opened) {
           st.err = (r.criticalCheck.opened === 1 ? wT("ward.critical-value-in-this-result-the-one", "{opened} critical value in this result. The critical-result alert has been opened.", { opened: r.criticalCheck.opened }) : wT("ward.critical-value-in-this-result-the-many", "{opened} critical values in this result. The critical-result alert has been opened.", { opened: r.criticalCheck.opened }));
         }
+        if (r && r.ok && r.criticalCheck && r.criticalCheck.uncomparable && r.criticalCheck.uncomparable.length) st.err = (st.err ? st.err + " " : "") + labUncheckedMsg(r.criticalCheck.uncomparable.length);
         if (r && r.ok && !(r.rejected && r.rejected.length)) {
           st.labResultFor = null;
           st.note = r.awaitingVerification ? wT("ward.on-the-chart-as-preliminary-another", "On the chart as preliminary. Another member of the laboratory must verify it.") : wT("ward.result-released", "Result released.");
