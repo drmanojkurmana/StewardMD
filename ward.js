@@ -10154,7 +10154,9 @@
       (chosen
         ? '<div class="w-note">' + fields + "</div>" +
           '<p class="w-hint">' + ms("info") + wTH("ward.a-blank-section-is-recorded-as", "A blank section is recorded as not recorded, and the note says so. Nothing here writes text for you.") + "</p>" +
-          '<button class="w-btn" data-w-act="note">' + ms("save") + wTH("ward.save-note", "Save note") + "</button>"
+          (state.noteSaving
+            ? '<button class="w-btn" data-w-act="note" disabled aria-busy="true">' + ms("progress_activity") + wTH("ward.saving-note", "Saving note...") + "</button>"
+            : '<button class="w-btn" data-w-act="note">' + ms("save") + wTH("ward.save-note", "Save note") + "</button>")
         : "<p class=\"w-empty\">" + wTH("ward.the-headings-come-from-this-hospital", "The headings come from this hospital&#39;s own templates.") + "</p>") +
       (r ? '<div class="w-sub"><h4>' + ms("task_alt") + wTH("ward.saved2", "Saved") + "</h4>" +
         '<p class="w-hint' + (r.incomplete ? " warn" : "") + '">' + (r.incomplete
@@ -15058,20 +15060,34 @@
     var tpl = null, i;
     for (i = 0; i < st.templates.length; i++) if (st.templates[i].id === st.noteTemplateId) tpl = st.templates[i];
     if (!tpl) return;
+    /* UI-02: this button had no disabled state and this function no busy guard, unlike saveVitals's
+     * st.vitalsSaving. A double-tap on a slow connection fired two separate POSTs, each with its own
+     * random idempotencyKey (bedsideWrite mints one per call), so the server could not collapse them
+     * into one round note. */
+    if (st.noteSaving) return;
+    st.noteSaving = true;
     var sections = {};
     tpl.sections.forEach(function (sec) { var v = val("wNote_" + sec.key); if (v) sections[sec.key] = v; });
     st.busy = true; paint();
-    var clearNote = function () { tpl.sections.forEach(function (sec) { var el = document.getElementById("wNote_" + sec.key); if (el) el.value = ""; }); };
-    bedsideWrite("note", { orgId: st.orgId, templateId: tpl.id, encounterId: s.encounterId, patientId: s.patientId, sections: sections, at: new Date().toISOString() },
+    /* UI-01: clearNote only clears the DOM of the patient it was built for (s). The note-template
+     * section keys, and so the wNote_<key> ids, are the same for every patient at this hospital - if a
+     * save for patient A completes after the nurse has moved on to patient B's chart, this must not
+     * wipe whatever B has since typed into the same-shaped fields. */
+    var clearNote = function () { if (st.sel !== s) return; tpl.sections.forEach(function (sec) { var el = document.getElementById("wNote_" + sec.key); if (el) el.value = ""; }); };
+    var done = function () { st.noteSaving = false; paint(); };
+    Promise.resolve(bedsideWrite("note", { orgId: st.orgId, templateId: tpl.id, encounterId: s.encounterId, patientId: s.patientId, sections: sections, at: new Date().toISOString() },
       { label: (tpl.name || wT("ward.note2", "Note")), patientId: s.patientId, onKept: clearNote },
       function (r) {
+        // UI-01: the same guard loadChart/saveVitals use - a slow save's answer must never paint a
+        // false "Saved" (or a false failure) over whatever patient is open by the time it arrives.
+        if (st.sel !== s) return;
         if (settle(r, r && r.incomplete ? null : wT("ward.note-saved", "Note saved."))) {
           st.noteResult = r;
           clearNote();
           loadCosigns();
         }
         paint();
-      }, wT("ward.could-not-save-the-note", "Could not save the note."));
+      }, wT("ward.could-not-save-the-note", "Could not save the note."))).then(done, done);
   }
 
   function findCode() {
