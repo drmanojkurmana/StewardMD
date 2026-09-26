@@ -423,9 +423,10 @@
       if (!achievable(v, c.nt != null ? c.nt : row.n)) { c.act = "caution"; c.why = "no whole number of the " + (c.nt != null ? c.nt : row.n) + " isolates gives " + v + "%; check the source"; return; }
       if (d === "fosfomycin" && row.spec && row.spec !== "urine" && row.spec !== "all") { c.act = "caution"; c.why = "fosfomycin breakpoints are for urinary isolates; systemic use needs MIC testing"; return; }
       // CLSI (2020 onward) has no susceptible category for colistin or polymyxin B, only
-      // intermediate and resistant: a 0% "susceptible" from a CLSI laboratory is not 100% resistance.
-      if ((d === "colistin" || d === "polymyxin_b") && v === 0 && (orgGroup(org) === "entero" || orgGroup(org) === "nonferm")) {
-        c.act = "caution"; c.why = "0% for colistin or polymyxin B usually means the laboratory used CLSI breakpoints, which have no susceptible category (only intermediate and resistant); it does not mean every isolate was resistant"; return;
+      // intermediate and resistant, and laboratories report these agents in different ways: a 0%
+      // (or low) "susceptible" is not a resistance rate. MIC by broth microdilution decides.
+      if ((d === "colistin" || d === "polymyxin_b") && v < 50 && (orgGroup(org) === "entero" || orgGroup(org) === "nonferm")) {
+        c.act = "caution"; c.why = (v === 0 ? "0%" : "a low figure") + " for colistin or polymyxin B usually reflects the breakpoint system (CLSI has no susceptible category, only intermediate and resistant) rather than resistance; confirm with a broth microdilution MIC"; return;
       }
     });
     // Paired agents that should agree. Cefotaxime and ceftriaxone have the same activity

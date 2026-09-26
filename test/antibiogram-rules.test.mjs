@@ -216,6 +216,7 @@ test("colistin 0% from a CLSI laboratory is a caution, not 100% resistance", () 
   assert.match(r.cells.colistin.why, /no susceptible category/);
   assert.equal(r.cells.polymyxin_b.act, "caution");
   assert.equal(row({ org: "acinetobacter", s: { colistin: 95 } }).cells.colistin.act, "keep");
+  assert.equal(row({ org: "ecoli", s: { polymyxin_b: 27.4 } }).cells.polymyxin_b.act, "caution", "a low polymyxin figure is not a resistance rate");
   assert.equal(row({ org: "pmirabilis", s: { colistin: 0 } }).cells.colistin.act, "intrinsic", "Proteus is intrinsically resistant");
 });
 
