@@ -14,8 +14,14 @@ The architecture/knowledge lives in the Obsidian vault at **`vault/`** (git-trac
   a file name / flag may have changed. If you find drift, fix the note.
 
 ## Non-negotiable conventions
-- **Test before you build.** Unit tests (`node --test test/*.test.mjs`) AND, for UI/logic, a real
-  headless-browser test (see `test/run-abx-ui.mjs` / the CDP harness) before claiming a fix works.
+- **Test before you build.** Unit tests AND, for UI/logic, a real headless-browser test (see
+  `test/run-abx-ui.mjs` / the CDP harness) before claiming a fix works. Run the unit suite as
+  `npm test`, or spell the flags out:
+  `node --test --experimental-test-module-mocks --experimental-sqlite test/*.test.mjs`.
+  **Bare `node --test test/*.test.mjs` is NOT the suite** - 143 files call `mock.module()`, which
+  without `--experimental-test-module-mocks` throws "mock.module is not a function" and fails the
+  FILE rather than an assertion. That reads as ~200 broken tests across `wardsynq-*` and `opd-*`
+  and sends you hunting a bug that is not there. CI runs the flagged form (`.github/workflows/ci.yml`).
 - **Reversible changes.** Big/risky changes go behind a feature **flag** + a git recovery point
   (tag/branch); made permanent only after the owner approves.
 - **No em-dash** in app-facing text (MaiK AI *output* is exempt).
