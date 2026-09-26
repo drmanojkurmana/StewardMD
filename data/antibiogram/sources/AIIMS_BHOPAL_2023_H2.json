@@ -1,0 +1,2030 @@
+{
+ "id": "AIIMS_BHOPAL_2023_H2",
+ "kind": "institution",
+ "inst": "AIIMS_BHOPAL",
+ "institution": "All India Institute of Medical Sciences, Bhopal",
+ "short": "AIIMS Bhopal",
+ "city": "Bhopal",
+ "state": "Madhya Pradesh",
+ "region": "west",
+ "sector": "government",
+ "year": 2023,
+ "end": "2023-12",
+ "isolates": 3092,
+ "period": "1st July to 31st December 2023",
+ "url": "https://aiimsbhopal.edu.in/AIIMSFiles/annexuredImage/Antibiogram%20AIIMS%20BHopal_Jul_Dec2023.pdf",
+ "page": "https://aiimsbhopal.edu.in/index_controller/test?id=43",
+ "retrieved": "2026-09-26",
+ "citation": "All India Institute of Medical Sciences, Bhopal. Antibiogram-AIIMS, Bhopal (1st July to 31st December 2023). Bhopal: AIIMS Bhopal.",
+ "reporting": "Percent susceptible with the number of isolates tested per drug, by organism, hospital-wide (all specimens and all locations together, Tables 5 and 6); isolate counts by specimen (Tables 1 and 2) and by location (Tables 3 and 4).",
+ "method": "First isolate of each organism per patient in the period; final verified results interpreted by the current CLSI and EUCAST guidelines; organisms with at least 15 isolates included, those with 15 to 30 marked; Burkholderia pseudomallei also included below 15, as stated in the report.",
+ "measure": "S",
+ "verification": {
+  "status": "double-checked",
+  "note": "Tables 1 to 6 parsed from the PDF text layer by word positions (rotated drug headers rebuilt from characters, trend arrows stripped), count tables re-added by row and by column against their printed totals; every value of every extracted table then compared by eye with the rendered page images (full pages at scale 3 and zoomed crops), 2026-09-26. The archived PDF was re-downloaded and matched the census file byte for byte (MD5)."
+ },
+ "notes": "Half-yearly hospital antibiogram of AIIMS Bhopal, 1st July to 31st December 2023: 3092 isolates as printed. Rows are hospital-wide (spec all, set all): Tables 5 and 6 pool all specimens and all locations (OPD, IPD, ICU and Emergency), each cell giving percent susceptible over the number of isolates tested; drugs printed as -, NR, IR or R are left out. Counts: Tables 1 and 2 (by specimen, all locations) and Tables 3 and 4 (by location, all specimens) are two views of the same isolates, recorded as spec x all and all x setting, with each organism's Total from Table 1 or 2 as the all x all count; IPD is recorded as ward. The Emergency column and the Others specimen column have no key and are not recorded, nor are cells printed as \"-\", so the recorded location or specimen counts add up to less than each organism's total. Tables 7 and 8 (percent susceptible by specimen for all Gram-negative or all Gram-positive isolates pooled) are not organism-specific and were not extracted. Up and down arrows (a change of more than 5 points from the previous half-year) are not values and are ignored. 22 printed percentages cannot come from any whole number of the isolates printed as tested and are more than 1 point from the nearest possible value (or rest on a note that contradicts Table 6); they are kept as printed and marked as conflicts. 35 other printed percentages differ by up to 1 point from any whole number of the isolates printed as tested (the percentage and the tested count appear to use slightly different denominators); these are kept as printed. Archived copy used (the live site could not be reached): https://web.archive.org/web/20250216003804id_/https://aiimsbhopal.edu.in/AIIMSFiles/annexuredImage/Antibiogram%20AIIMS%20BHopal_Jul_Dec2023.pdf.",
+ "rows": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter Species",
+   "n": 388,
+   "page": 4,
+   "table": "Table 5",
+   "s": {
+    "cefepime": 8.3,
+    "ceftazidime": 10.0,
+    "meropenem": 10.3,
+    "gentamicin": 12.7,
+    "amikacin": 13.6,
+    "ciprofloxacin": 10.6,
+    "levofloxacin": 12.3,
+    "imipenem": 9.8,
+    "cotrimoxazole": 15.6,
+    "piptazo": 3.8,
+    "cefoperazone_sulbactam": 9.2,
+    "minocycline": 49.8,
+    "tigecycline": 25.0,
+    "cefuroxime": 4.4
+   },
+   "nt": {
+    "cefepime": 350,
+    "ceftazidime": 326,
+    "meropenem": 380,
+    "gentamicin": 370,
+    "amikacin": 380,
+    "ciprofloxacin": 380,
+    "levofloxacin": 368,
+    "imipenem": 376,
+    "cotrimoxazole": 376,
+    "piptazo": 374,
+    "cefoperazone_sulbactam": 367,
+    "minocycline": 303,
+    "tigecycline": 4,
+    "cefuroxime": 115
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Burkholderia cepacia",
+   "n": 12,
+   "page": 4,
+   "table": "Table 5",
+   "s": {
+    "cefepime": 40,
+    "ceftazidime": 66.7,
+    "aztreonam": 0,
+    "meropenem": 62.5,
+    "gentamicin": 20,
+    "amikacin": 16.7,
+    "ciprofloxacin": 0.0,
+    "levofloxacin": 0,
+    "imipenem": 0.0,
+    "cotrimoxazole": 44.4,
+    "piptazo": 20,
+    "cefoperazone_sulbactam": 40,
+    "minocycline": 33.3
+   },
+   "nt": {
+    "cefepime": 8,
+    "ceftazidime": 8,
+    "aztreonam": 1,
+    "meropenem": 9,
+    "gentamicin": 9,
+    "amikacin": 11,
+    "ciprofloxacin": 11,
+    "levofloxacin": 11,
+    "imipenem": 11,
+    "cotrimoxazole": 11,
+    "piptazo": 8,
+    "cefoperazone_sulbactam": 9,
+    "minocycline": 8
+   },
+   "conflict": {
+    "cefepime": "printed 40% of 8 tested, which no whole number of the 8 gives (nearest 3/8 = 37.5%)",
+    "ceftazidime": "printed 66.7% of 8 tested, which no whole number of the 8 gives (nearest 5/8 = 62.5%)",
+    "meropenem": "printed 62.5% of 9 tested, which no whole number of the 9 gives (nearest 6/9 = 66.7%)",
+    "gentamicin": "printed 20% of 9 tested, which no whole number of the 9 gives (nearest 2/9 = 22.2%)",
+    "amikacin": "printed 16.7% of 11 tested, which no whole number of the 11 gives (nearest 2/11 = 18.2%)",
+    "cotrimoxazole": "printed 44.4% of 11 tested, which no whole number of the 11 gives (nearest 5/11 = 45.5%)",
+    "piptazo": "printed 20% of 8 tested, which no whole number of the 8 gives (nearest 2/8 = 25.0%)",
+    "cefoperazone_sulbactam": "printed 40% of 9 tested, which no whole number of the 9 gives (nearest 4/9 = 44.4%)",
+    "minocycline": "printed 33.3% of 8 tested, which no whole number of the 8 gives (nearest 3/8 = 37.5%)"
+   },
+   "note": "Tables 1 to 4 of this edition list this line as \"Burkholderia Species\" with the same number of isolates (12)."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Burkholderia pseudomallei",
+   "n": 11,
+   "page": 4,
+   "table": "Table 5",
+   "s": {
+    "ceftazidime": 83.3,
+    "meropenem": 100,
+    "gentamicin": 0.0,
+    "imipenem": 100.0,
+    "cotrimoxazole": 83.3,
+    "amoxiclav": 100
+   },
+   "nt": {
+    "ceftazidime": 11,
+    "meropenem": 11,
+    "gentamicin": 10,
+    "imipenem": 11,
+    "cotrimoxazole": 11,
+    "amoxiclav": 11
+   },
+   "conflict": {
+    "ceftazidime": "printed 83.3% of 11 tested, which no whole number of the 11 gives (nearest 9/11 = 81.8%)",
+    "cotrimoxazole": "printed 83.3% of 11 tested, which no whole number of the 11 gives (nearest 9/11 = 81.8%)"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Citrobacter Species",
+   "n": 34,
+   "page": 4,
+   "table": "Table 5",
+   "s": {
+    "cefepime": 66.7,
+    "ceftazidime": 31.8,
+    "aztreonam": 20,
+    "ertapenem": 72.7,
+    "meropenem": 78.8,
+    "gentamicin": 67.6,
+    "amikacin": 70.6,
+    "ciprofloxacin": 44.1,
+    "levofloxacin": 56.5,
+    "imipenem": 72.7,
+    "cotrimoxazole": 62.5,
+    "piptazo": 47.1,
+    "cefoperazone_sulbactam": 61.8,
+    "minocycline": 76.2,
+    "tigecycline": 100,
+    "nitrofurantoin": 81.8,
+    "amoxiclav": 75.0
+   },
+   "nt": {
+    "cefepime": 33,
+    "ceftazidime": 22,
+    "aztreonam": 20,
+    "ertapenem": 11,
+    "meropenem": 33,
+    "gentamicin": 34,
+    "amikacin": 34,
+    "ciprofloxacin": 34,
+    "levofloxacin": 23,
+    "imipenem": 33,
+    "cotrimoxazole": 32,
+    "piptazo": 34,
+    "cefoperazone_sulbactam": 34,
+    "minocycline": 21,
+    "tigecycline": 31,
+    "nitrofurantoin": 11,
+    "amoxiclav": 4
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterobacter cloacae",
+   "n": 97,
+   "page": 4,
+   "table": "Table 5",
+   "s": {
+    "cefepime": 59.6,
+    "ceftazidime": 42.6,
+    "aztreonam": 37.9,
+    "ertapenem": 67.9,
+    "meropenem": 66.3,
+    "gentamicin": 61.4,
+    "amikacin": 65.2,
+    "ciprofloxacin": 48.3,
+    "levofloxacin": 57.4,
+    "imipenem": 69.0,
+    "cotrimoxazole": 54.5,
+    "piptazo": 48.3,
+    "cefoperazone_sulbactam": 52.3,
+    "minocycline": 80.6,
+    "tigecycline": 95.3,
+    "cefuroxime": 40,
+    "nitrofurantoin": 26.3
+   },
+   "nt": {
+    "cefepime": 89,
+    "ceftazidime": 61,
+    "aztreonam": 58,
+    "ertapenem": 28,
+    "meropenem": 89,
+    "gentamicin": 88,
+    "amikacin": 89,
+    "ciprofloxacin": 89,
+    "levofloxacin": 61,
+    "imipenem": 87,
+    "cotrimoxazole": 88,
+    "piptazo": 89,
+    "cefoperazone_sulbactam": 88,
+    "minocycline": 62,
+    "tigecycline": 86,
+    "cefuroxime": 35,
+    "nitrofurantoin": 19
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 920,
+   "page": 4,
+   "table": "Table 5",
+   "s": {
+    "cefepime": 22.5,
+    "ceftazidime": 17.3,
+    "aztreonam": 11.3,
+    "ertapenem": 63.9,
+    "meropenem": 65.6,
+    "gentamicin": 62.8,
+    "amikacin": 65.1,
+    "ciprofloxacin": 3.9,
+    "levofloxacin": 2.9,
+    "imipenem": 67.4,
+    "cotrimoxazole": 32.4,
+    "piptazo": 38.7,
+    "cefoperazone_sulbactam": 48.9,
+    "minocycline": 76.4,
+    "tigecycline": 97.3,
+    "cefuroxime": 10.2,
+    "fosfomycin": 99.8,
+    "nitrofurantoin": 80.5,
+    "amoxiclav": 22.8
+   },
+   "nt": {
+    "cefepime": 892,
+    "ceftazidime": 243,
+    "aztreonam": 239,
+    "ertapenem": 565,
+    "meropenem": 900,
+    "gentamicin": 901,
+    "amikacin": 899,
+    "ciprofloxacin": 900,
+    "levofloxacin": 242,
+    "imipenem": 901,
+    "cotrimoxazole": 901,
+    "piptazo": 901,
+    "cefoperazone_sulbactam": 899,
+    "minocycline": 237,
+    "tigecycline": 792,
+    "cefuroxime": 566,
+    "fosfomycin": 451,
+    "nitrofurantoin": 481,
+    "amoxiclav": 567
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella Species",
+   "n": 460,
+   "page": 4,
+   "table": "Table 5",
+   "s": {
+    "cefepime": 32.8,
+    "ceftazidime": 17.3,
+    "aztreonam": 16.1,
+    "ertapenem": 49.5,
+    "meropenem": 43,
+    "gentamicin": 49.4,
+    "amikacin": 47.8,
+    "ciprofloxacin": 24.3,
+    "levofloxacin": 15.5,
+    "imipenem": 41,
+    "cotrimoxazole": 40.8,
+    "piptazo": 36.8,
+    "cefoperazone_sulbactam": 41.7,
+    "minocycline": 46.4,
+    "tigecycline": 72.1,
+    "cefuroxime": 28.5,
+    "nitrofurantoin": 34.0,
+    "amoxiclav": 20.1
+   },
+   "nt": {
+    "cefepime": 456,
+    "ceftazidime": 98,
+    "aztreonam": 93,
+    "ertapenem": 309,
+    "meropenem": 456,
+    "gentamicin": 456,
+    "amikacin": 456,
+    "ciprofloxacin": 456,
+    "levofloxacin": 97,
+    "imipenem": 456,
+    "cotrimoxazole": 456,
+    "piptazo": 456,
+    "cefoperazone_sulbactam": 456,
+    "minocycline": 97,
+    "tigecycline": 423,
+    "cefuroxime": 239,
+    "nitrofurantoin": 156,
+    "amoxiclav": 309
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Morganella morganii",
+   "n": 22,
+   "page": 4,
+   "table": "Table 5",
+   "s": {
+    "ceftazidime": 23.8,
+    "aztreonam": 30.0,
+    "meropenem": 66.7,
+    "gentamicin": 45,
+    "amikacin": 63.2,
+    "ciprofloxacin": 19,
+    "levofloxacin": 19,
+    "imipenem": 4.8,
+    "cotrimoxazole": 28.6,
+    "piptazo": 70.0,
+    "cefoperazone_sulbactam": 30,
+    "minocycline": 15.0
+   },
+   "nt": {
+    "ceftazidime": 21,
+    "aztreonam": 20,
+    "meropenem": 21,
+    "gentamicin": 20,
+    "amikacin": 19,
+    "ciprofloxacin": 21,
+    "levofloxacin": 21,
+    "imipenem": 21,
+    "cotrimoxazole": 21,
+    "piptazo": 20,
+    "cefoperazone_sulbactam": 20,
+    "minocycline": 20
+   },
+   "note": "Printed as \"Morganella morganii ss. Morganii\"."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Proteus mirabilis",
+   "n": 35,
+   "page": 4,
+   "table": "Table 5",
+   "s": {
+    "cefepime": 51.4,
+    "ceftazidime": 38.2,
+    "aztreonam": 30.3,
+    "meropenem": 55.9,
+    "gentamicin": 60,
+    "amikacin": 57.1,
+    "ciprofloxacin": 45.7,
+    "levofloxacin": 44.1,
+    "imipenem": 17.1,
+    "cotrimoxazole": 34.3,
+    "piptazo": 91.4,
+    "cefoperazone_sulbactam": 37.1,
+    "minocycline": 12.1,
+    "cefuroxime": 40,
+    "amoxiclav": 62.5
+   },
+   "nt": {
+    "cefepime": 35,
+    "ceftazidime": 34,
+    "aztreonam": 33,
+    "meropenem": 34,
+    "gentamicin": 35,
+    "amikacin": 35,
+    "ciprofloxacin": 35,
+    "levofloxacin": 34,
+    "imipenem": 35,
+    "cotrimoxazole": 35,
+    "piptazo": 35,
+    "cefoperazone_sulbactam": 35,
+    "minocycline": 33,
+    "cefuroxime": 15,
+    "amoxiclav": 24
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Providencia Species",
+   "n": 21,
+   "page": 4,
+   "table": "Table 5",
+   "s": {
+    "cefepime": 33.3,
+    "ceftazidime": 31.6,
+    "aztreonam": 40,
+    "meropenem": 47.4,
+    "gentamicin": 52.6,
+    "amikacin": 52.6,
+    "ciprofloxacin": 47.4,
+    "levofloxacin": 26.3,
+    "imipenem": 31.6,
+    "cotrimoxazole": 47.4,
+    "piptazo": 44.4,
+    "cefoperazone_sulbactam": 26.3,
+    "minocycline": 0.0
+   },
+   "nt": {
+    "cefepime": 18,
+    "ceftazidime": 19,
+    "aztreonam": 15,
+    "meropenem": 19,
+    "gentamicin": 19,
+    "amikacin": 19,
+    "ciprofloxacin": 19,
+    "levofloxacin": 19,
+    "imipenem": 19,
+    "cotrimoxazole": 19,
+    "piptazo": 18,
+    "cefoperazone_sulbactam": 19,
+    "minocycline": 15
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas Species",
+   "n": 378,
+   "page": 4,
+   "table": "Table 5",
+   "s": {
+    "cefepime": 42.8,
+    "ceftazidime": 42.9,
+    "meropenem": 61.4,
+    "gentamicin": 62.7,
+    "amikacin": 67.6,
+    "ciprofloxacin": 54.4,
+    "levofloxacin": 54.7,
+    "imipenem": 62.2,
+    "piptazo": 38.4,
+    "cefoperazone_sulbactam": 38
+   },
+   "nt": {
+    "cefepime": 360,
+    "ceftazidime": 378,
+    "meropenem": 360,
+    "gentamicin": 378,
+    "amikacin": 378,
+    "ciprofloxacin": 378,
+    "levofloxacin": 378,
+    "imipenem": 378,
+    "piptazo": 345,
+    "cefoperazone_sulbactam": 340
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Typhoidal Salmonella",
+   "n": 41,
+   "page": 4,
+   "table": "Table 5",
+   "s": {
+    "cefepime": 100.0,
+    "ceftazidime": 57.1,
+    "aztreonam": 38.1,
+    "ertapenem": 100,
+    "meropenem": 92.3,
+    "ciprofloxacin": 5.1,
+    "levofloxacin": 9.5,
+    "imipenem": 94.6,
+    "cotrimoxazole": 94.9,
+    "piptazo": 80.6,
+    "cefoperazone_sulbactam": 34.2,
+    "minocycline": 86.4,
+    "tigecycline": 100.0,
+    "cefuroxime": 85,
+    "amoxiclav": 94.4,
+    "chloramphenicol": 97,
+    "azithromycin": 68.6,
+    "ampicillin": 79.4
+   },
+   "nt": {
+    "cefepime": 40,
+    "ceftazidime": 24,
+    "aztreonam": 24,
+    "ertapenem": 21,
+    "meropenem": 41,
+    "ciprofloxacin": 41,
+    "levofloxacin": 24,
+    "imipenem": 40,
+    "cotrimoxazole": 41,
+    "piptazo": 39,
+    "cefoperazone_sulbactam": 41,
+    "minocycline": 25,
+    "tigecycline": 41,
+    "cefuroxime": 24,
+    "amoxiclav": 21,
+    "chloramphenicol": 33,
+    "azithromycin": 35,
+    "ampicillin": 34
+   },
+   "conflict": {
+    "ceftazidime": "printed 57.1% of 24 tested, which no whole number of the 24 gives (nearest 14/24 = 58.3%)",
+    "levofloxacin": "printed 9.5% of 24 tested, which no whole number of the 24 gives (nearest 2/24 = 8.3%)",
+    "piptazo": "printed 80.6% of 39 tested, which no whole number of the 39 gives (nearest 31/39 = 79.5%)",
+    "minocycline": "printed 86.4% of 25 tested, which no whole number of the 25 gives (nearest 22/25 = 88.0%)",
+    "cefuroxime": "printed 85% of 24 tested, which no whole number of the 24 gives (nearest 20/24 = 83.3%)"
+   },
+   "notes": {
+    "cefoperazone_sulbactam": "printed as \"34.2 C\" (a stray letter after the figure)",
+    "chloramphenicol": "from the additional-information note under Table 5",
+    "azithromycin": "from the additional-information note under Table 5",
+    "ampicillin": "from the additional-information note under Table 5"
+   },
+   "note": "Printed as \"Typhoidal Samlmonella\" (misspelt in the source)."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Serratia spp.",
+   "n": 28,
+   "page": 4,
+   "table": "Table 5",
+   "s": {
+    "cefepime": 60.0,
+    "ceftazidime": 50.0,
+    "aztreonam": 68.4,
+    "ertapenem": 57.1,
+    "meropenem": 61.5,
+    "gentamicin": 80.8,
+    "amikacin": 80.8,
+    "ciprofloxacin": 65.4,
+    "levofloxacin": 70.0,
+    "imipenem": 61.5,
+    "cotrimoxazole": 59.3,
+    "piptazo": 60.0,
+    "cefoperazone_sulbactam": 57.7,
+    "minocycline": 85.0
+   },
+   "nt": {
+    "cefepime": 25,
+    "ceftazidime": 20,
+    "aztreonam": 19,
+    "ertapenem": 7,
+    "meropenem": 26,
+    "gentamicin": 26,
+    "amikacin": 26,
+    "ciprofloxacin": 26,
+    "levofloxacin": 20,
+    "imipenem": 26,
+    "cotrimoxazole": 27,
+    "piptazo": 5,
+    "cefoperazone_sulbactam": 26,
+    "minocycline": 20
+   },
+   "note": "Printed as \"Serratia Species\"."
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Sphingomonas paucimobilis",
+   "n": 24,
+   "page": 4,
+   "table": "Table 5",
+   "s": {
+    "cefepime": 33.3,
+    "ceftazidime": 50,
+    "aztreonam": 15.8,
+    "meropenem": 81.8,
+    "gentamicin": 65,
+    "amikacin": 44.4,
+    "ciprofloxacin": 65,
+    "levofloxacin": 78.9,
+    "imipenem": 77.3,
+    "cotrimoxazole": 60,
+    "piptazo": 23.5,
+    "cefoperazone_sulbactam": 45.8,
+    "minocycline": 84.2
+   },
+   "nt": {
+    "cefepime": 18,
+    "ceftazidime": 18,
+    "aztreonam": 19,
+    "meropenem": 22,
+    "gentamicin": 20,
+    "amikacin": 18,
+    "ciprofloxacin": 20,
+    "levofloxacin": 19,
+    "imipenem": 22,
+    "cotrimoxazole": 20,
+    "piptazo": 17,
+    "cefoperazone_sulbactam": 24,
+    "minocycline": 19
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 54,
+   "page": 4,
+   "table": "Table 5",
+   "s": {
+    "cefepime": 0,
+    "ceftazidime": 46.7,
+    "ciprofloxacin": 0.0,
+    "levofloxacin": 94.2,
+    "cotrimoxazole": 32,
+    "cefoperazone_sulbactam": 80,
+    "minocycline": 92.2
+   },
+   "nt": {
+    "cefepime": 6,
+    "ceftazidime": 45,
+    "ciprofloxacin": 5,
+    "levofloxacin": 52,
+    "cotrimoxazole": 50,
+    "cefoperazone_sulbactam": 5,
+    "minocycline": 51
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "CONS",
+   "n": 229,
+   "page": 5,
+   "table": "Table 6",
+   "s": {
+    "ciprofloxacin": 28.8,
+    "levofloxacin": 19.8,
+    "ampicillin": 8.2,
+    "cotrimoxazole": 44.8,
+    "penicillin": 8.6,
+    "teicoplanin": 86.1,
+    "vancomycin": 92.8,
+    "erythromycin": 13.9,
+    "linezolid": 80.1,
+    "nitrofurantoin": 93.6,
+    "tigecycline": 95.2,
+    "daptomycin": 81.6,
+    "doxycycline": 100.0,
+    "tetracycline": 78.9
+   },
+   "nt": {
+    "ciprofloxacin": 228,
+    "levofloxacin": 228,
+    "ampicillin": 170,
+    "cotrimoxazole": 212,
+    "penicillin": 228,
+    "teicoplanin": 209,
+    "vancomycin": 208,
+    "erythromycin": 209,
+    "linezolid": 216,
+    "nitrofurantoin": 94,
+    "tigecycline": 189,
+    "daptomycin": 174,
+    "doxycycline": 127,
+    "tetracycline": 210
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "n": 45,
+   "page": 5,
+   "table": "Table 6",
+   "s": {
+    "ciprofloxacin": 5.3,
+    "levofloxacin": 10.3,
+    "ampicillin": 88.2,
+    "penicillin": 53.8,
+    "teicoplanin": 94.7,
+    "vancomycin": 84.6,
+    "erythromycin": 5.0,
+    "linezolid": 92.1,
+    "nitrofurantoin": 46.4,
+    "tigecycline": 97.2,
+    "daptomycin": 30.3,
+    "doxycycline": 50,
+    "tetracycline": 10.8,
+    "gentamicin_hl": 38.9
+   },
+   "nt": {
+    "ciprofloxacin": 41,
+    "levofloxacin": 42,
+    "ampicillin": 20,
+    "penicillin": 42,
+    "teicoplanin": 41,
+    "vancomycin": 41,
+    "erythromycin": 43,
+    "linezolid": 38,
+    "nitrofurantoin": 28,
+    "tigecycline": 36,
+    "daptomycin": 33,
+    "doxycycline": 7,
+    "tetracycline": 40,
+    "gentamicin_hl": 36
+   },
+   "conflict": {
+    "ampicillin": "printed 88.2% of 20 tested, which no whole number of the 20 gives (nearest 18/20 = 90.0%)",
+    "doxycycline": "printed 50% of 7 tested, which no whole number of the 7 gives (nearest 3/7 = 42.9%)"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "n": 49,
+   "page": 5,
+   "table": "Table 6",
+   "s": {
+    "ciprofloxacin": 0.0,
+    "levofloxacin": 0.0,
+    "ampicillin": 100.0,
+    "penicillin": 6.5,
+    "teicoplanin": 73.9,
+    "vancomycin": 72.7,
+    "erythromycin": 0.0,
+    "linezolid": 84.4,
+    "nitrofurantoin": 6.9,
+    "tigecycline": 83.7,
+    "doxycycline": 100,
+    "tetracycline": 22.2,
+    "gentamicin_hl": 22.2
+   },
+   "nt": {
+    "ciprofloxacin": 45,
+    "levofloxacin": 46,
+    "ampicillin": 2,
+    "penicillin": 46,
+    "teicoplanin": 46,
+    "vancomycin": 44,
+    "erythromycin": 45,
+    "linezolid": 45,
+    "nitrofurantoin": 29,
+    "tigecycline": 43,
+    "doxycycline": 6,
+    "tetracycline": 45,
+    "gentamicin_hl": 45
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MSSA",
+   "n": 133,
+   "page": 5,
+   "table": "Table 6",
+   "s": {
+    "ciprofloxacin": 6.9,
+    "levofloxacin": 7.8,
+    "ampicillin": 6.5,
+    "cotrimoxazole": 50,
+    "penicillin": 6.9,
+    "teicoplanin": 99.1,
+    "vancomycin": 94.7,
+    "erythromycin": 56.9,
+    "linezolid": 83.6,
+    "tigecycline": 100.0,
+    "daptomycin": 77.8,
+    "doxycycline": 100.0,
+    "tetracycline": 93.9,
+    "rifampicin": 100
+   },
+   "nt": {
+    "ciprofloxacin": 133,
+    "levofloxacin": 133,
+    "ampicillin": 120,
+    "cotrimoxazole": 133,
+    "penicillin": 133,
+    "teicoplanin": 133,
+    "vancomycin": 133,
+    "erythromycin": 133,
+    "linezolid": 133,
+    "tigecycline": 133,
+    "daptomycin": 110,
+    "doxycycline": 111,
+    "tetracycline": 128,
+    "rifampicin": 113
+   },
+   "notes": {
+    "rifampicin": "from the additional-information note under Table 6"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MRSA",
+   "n": 96,
+   "page": 5,
+   "table": "Table 6",
+   "s": {
+    "ciprofloxacin": 1.0,
+    "levofloxacin": 1.0,
+    "ampicillin": 0.0,
+    "cotrimoxazole": 20,
+    "penicillin": 0.0,
+    "teicoplanin": 98.9,
+    "vancomycin": 92.2,
+    "erythromycin": 28.1,
+    "linezolid": 72.6,
+    "tigecycline": 98.9,
+    "daptomycin": 61.6,
+    "doxycycline": 100.0,
+    "tetracycline": 94.6,
+    "rifampicin": 95.7
+   },
+   "nt": {
+    "ciprofloxacin": 96,
+    "levofloxacin": 96,
+    "ampicillin": 88,
+    "cotrimoxazole": 95,
+    "penicillin": 95,
+    "teicoplanin": 94,
+    "vancomycin": 90,
+    "erythromycin": 96,
+    "linezolid": 95,
+    "tigecycline": 88,
+    "daptomycin": 73,
+    "doxycycline": 76,
+    "tetracycline": 92,
+    "rifampicin": 93
+   },
+   "notes": {
+    "rifampicin": "from the additional-information note under Table 6"
+   }
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Streptococcus pyogenes",
+   "n": 15,
+   "page": 5,
+   "table": "Table 6",
+   "s": {
+    "ciprofloxacin": 100,
+    "levofloxacin": 58,
+    "ampicillin": 92,
+    "cotrimoxazole": 25,
+    "penicillin": 92,
+    "vancomycin": 100,
+    "erythromycin": 75,
+    "linezolid": 100,
+    "tigecycline": 100,
+    "tetracycline": 58
+   },
+   "nt": {
+    "ciprofloxacin": 13,
+    "levofloxacin": 13,
+    "ampicillin": 13,
+    "cotrimoxazole": 13,
+    "penicillin": 13,
+    "vancomycin": 13,
+    "erythromycin": 13,
+    "linezolid": 13,
+    "tigecycline": 12,
+    "tetracycline": 13
+   },
+   "conflict": {
+    "levofloxacin": "printed 58% of 13 tested, which no whole number of the 13 gives (nearest 8/13 = 61.5%)",
+    "cotrimoxazole": "printed 25% of 13 tested, which no whole number of the 13 gives (nearest 3/13 = 23.1%)",
+    "erythromycin": "printed 75% of 13 tested, which no whole number of the 13 gives (nearest 10/13 = 76.9%)",
+    "tetracycline": "printed 58% of 13 tested, which no whole number of the 13 gives (nearest 8/13 = 61.5%)"
+   }
+  }
+ ],
+ "counts": [
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Acinetobacter Species",
+   "n": 388,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Acinetobacter Species",
+   "n": 76,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Acinetobacter Species",
+   "n": 97,
+   "page": 2
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Acinetobacter Species",
+   "n": 16,
+   "page": 2
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Acinetobacter Species",
+   "n": 114,
+   "page": 2
+  },
+  {
+   "spec": "csf",
+   "set": "all",
+   "org": "Acinetobacter Species",
+   "n": 2,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Burkholderia species",
+   "n": 12,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Burkholderia species",
+   "n": 4,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Burkholderia species",
+   "n": 4,
+   "page": 2
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Burkholderia species",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Burkholderia species",
+   "n": 2,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Burkholderia pseudomallei",
+   "n": 11,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Burkholderia pseudomallei",
+   "n": 3,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Burkholderia pseudomallei",
+   "n": 7,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Citrobacter Species",
+   "n": 34,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Citrobacter Species",
+   "n": 3,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Citrobacter Species",
+   "n": 17,
+   "page": 2
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Citrobacter Species",
+   "n": 11,
+   "page": 2
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Citrobacter Species",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "csf",
+   "set": "all",
+   "org": "Citrobacter Species",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterobacter cloacae",
+   "n": 97,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterobacter cloacae",
+   "n": 21,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterobacter cloacae",
+   "n": 43,
+   "page": 2
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterobacter cloacae",
+   "n": 21,
+   "page": 2
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Enterobacter cloacae",
+   "n": 2,
+   "page": 2
+  },
+  {
+   "spec": "csf",
+   "set": "all",
+   "org": "Enterobacter cloacae",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 920,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 65,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 208,
+   "page": 2
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 528,
+   "page": 2
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 27,
+   "page": 2
+  },
+  {
+   "spec": "csf",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 3,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Klebsiella Species",
+   "n": 460,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella Species",
+   "n": 35,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Klebsiella Species",
+   "n": 131,
+   "page": 2
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella Species",
+   "n": 171,
+   "page": 2
+  },
+  {
+   "spec": "csf",
+   "set": "all",
+   "org": "Klebsiella Species",
+   "n": 3,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Morganella morganii",
+   "n": 22,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Morganella morganii",
+   "n": 15,
+   "page": 2
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Morganella morganii",
+   "n": 5,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Proteus mirabilis",
+   "n": 35,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Proteus mirabilis",
+   "n": 27,
+   "page": 2
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Proteus mirabilis",
+   "n": 5,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Providencia Species",
+   "n": 21,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Providencia Species",
+   "n": 5,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Providencia Species",
+   "n": 7,
+   "page": 2
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Providencia Species",
+   "n": 5,
+   "page": 2
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Providencia Species",
+   "n": 3,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Pseudomonas Species",
+   "n": 378,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Pseudomonas Species",
+   "n": 33,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Pseudomonas Species",
+   "n": 150,
+   "page": 2
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Pseudomonas Species",
+   "n": 49,
+   "page": 2
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Pseudomonas Species",
+   "n": 98,
+   "page": 2
+  },
+  {
+   "spec": "csf",
+   "set": "all",
+   "org": "Pseudomonas Species",
+   "n": 6,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Typhoidal Salmonella",
+   "n": 41,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Typhoidal Salmonella",
+   "n": 36,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Typhoidal Salmonella",
+   "n": 4,
+   "page": 2
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Typhoidal Salmonella",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Serratia spp.",
+   "n": 28,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Serratia spp.",
+   "n": 10,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Serratia spp.",
+   "n": 6,
+   "page": 2
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Serratia spp.",
+   "n": 4,
+   "page": 2
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Serratia spp.",
+   "n": 6,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Sphingomonas paucimobilis",
+   "n": 24,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Sphingomonas paucimobilis",
+   "n": 17,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Sphingomonas paucimobilis",
+   "n": 4,
+   "page": 2
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Sphingomonas paucimobilis",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Sphingomonas paucimobilis",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "csf",
+   "set": "all",
+   "org": "Sphingomonas paucimobilis",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 54,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 24,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 9,
+   "page": 2
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 12,
+   "page": 2
+  },
+  {
+   "spec": "csf",
+   "set": "all",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "CONS",
+   "n": 229,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "CONS",
+   "n": 173,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "CONS",
+   "n": 37,
+   "page": 2
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "CONS",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "CONS",
+   "n": 3,
+   "page": 2
+  },
+  {
+   "spec": "csf",
+   "set": "all",
+   "org": "CONS",
+   "n": 3,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "n": 45,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "n": 6,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "n": 14,
+   "page": 2
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "n": 20,
+   "page": 2
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "csf",
+   "set": "all",
+   "org": "Enterococcus faecalis",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "n": 49,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "n": 14,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "n": 16,
+   "page": 2
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus faecium",
+   "n": 15,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 229,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 19,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 198,
+   "page": 2
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 5,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "all",
+   "org": "Streptococcus pyogenes",
+   "n": 15,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Streptococcus pyogenes",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Streptococcus pyogenes",
+   "n": 14,
+   "page": 2
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Acinetobacter Species",
+   "n": 29,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Acinetobacter Species",
+   "n": 130,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Acinetobacter Species",
+   "n": 205,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Burkholderia species",
+   "n": 2,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Burkholderia species",
+   "n": 6,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Burkholderia species",
+   "n": 2,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Burkholderia pseudomallei",
+   "n": 1,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Burkholderia pseudomallei",
+   "n": 8,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Burkholderia pseudomallei",
+   "n": 1,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Citrobacter Species",
+   "n": 14,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Citrobacter Species",
+   "n": 16,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Citrobacter Species",
+   "n": 3,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Enterobacter cloacae",
+   "n": 39,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Enterobacter cloacae",
+   "n": 42,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Enterobacter cloacae",
+   "n": 13,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "n": 387,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "n": 417,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "n": 86,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Klebsiella Species",
+   "n": 120,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Klebsiella Species",
+   "n": 238,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Klebsiella Species",
+   "n": 88,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Morganella morganii",
+   "n": 10,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Morganella morganii",
+   "n": 8,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Morganella morganii",
+   "n": 3,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Proteus mirabilis",
+   "n": 16,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Proteus mirabilis",
+   "n": 17,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Proteus mirabilis",
+   "n": 1,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Providencia Species",
+   "n": 3,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Providencia Species",
+   "n": 15,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Providencia Species",
+   "n": 3,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Pseudomonas Species",
+   "n": 104,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Pseudomonas Species",
+   "n": 180,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Pseudomonas Species",
+   "n": 81,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Typhoidal Salmonella",
+   "n": 23,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Typhoidal Salmonella",
+   "n": 11,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Typhoidal Salmonella",
+   "n": 1,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Serratia spp.",
+   "n": 3,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Serratia spp.",
+   "n": 14,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Serratia spp.",
+   "n": 9,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Sphingomonas paucimobilis",
+   "n": 5,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Sphingomonas paucimobilis",
+   "n": 8,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Sphingomonas paucimobilis",
+   "n": 9,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 4,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 29,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 14,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "CONS",
+   "n": 33,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "CONS",
+   "n": 77,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "CONS",
+   "n": 102,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Enterococcus faecalis",
+   "n": 22,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Enterococcus faecalis",
+   "n": 15,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Enterococcus faecalis",
+   "n": 7,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Enterococcus faecium",
+   "n": 3,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Enterococcus faecium",
+   "n": 25,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Enterococcus faecium",
+   "n": 19,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 109,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 103,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 10,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "opd",
+   "org": "Streptococcus pyogenes",
+   "n": 5,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "ward",
+   "org": "Streptococcus pyogenes",
+   "n": 6,
+   "page": 3
+  },
+  {
+   "spec": "all",
+   "set": "icu",
+   "org": "Streptococcus pyogenes",
+   "n": 0,
+   "page": 3
+  }
+ ],
+ "excluded": [
+  {
+   "org": "Klebsiella Species",
+   "what": "count, Table 1, Respiratory",
+   "value": "5712.3)",
+   "why": "Klebsiella respiratory count printed as \"5712.3)\", which is not a number (the organism and column totals imply 57); not recorded rather than corrected."
+  },
+  {
+   "what": "Tables 7 and 8 (page 6 and 7)",
+   "why": "Tables 7 and 8 give sample-wise consolidated percent susceptibility for all Gram-negative (Table 7) or all Gram-positive (Table 8) isolates pooled together; they are not organism-specific and there is no organism key for a pooled Gram group, so they were not extracted."
+  },
+  {
+   "what": "Emergency column (Tables 3 and 4) and Others column (Tables 1 and 2)",
+   "why": "Emergency department isolates and the Others specimen group have no setting or specimen key; these count columns are not recorded (the organism totals include them)."
+  }
+ ],
+ "issues": [
+  "Second reader 2026-09-26: every cell of Tables 5 and 6 (285: 206 and 79, including the 5 figures from the notes under the tables) with its printed number tested, all 21 row counts and all 158 count-table entries re-read against page images (crops at scale 3 to 3.5) before comparing; Table 6 was read in full. The seeded sample (71 cells: 47 in Table 5, 24 in Table 6) is part of that. 0 transcription errors.",
+  "Second reader: all 22 conflict cells confirmed as printed (percent and number tested), each 1.05 to 7.1 points from any whole number of those tested: B. cepacia 9 cells, B. pseudomallei ceftazidime and cotrimoxazole, Typhoidal Salmonella ceftazidime, levofloxacin, piperacillin-tazobactam, minocycline and cefuroxime, E. faecalis ampicillin and doxycycline, S. pyogenes levofloxacin, cotrimoxazole, erythromycin and tetracycline. The 7 intrinsic cells (B. cepacia gentamicin 20 and amikacin 16.7, B. pseudomallei gentamicin 0, Morganella minocycline 15, P. mirabilis minocycline 12.1, Providencia minocycline 0, Typhoidal Salmonella cefuroxime 85) confirmed as printed.",
+  "Second reader: the Klebsiella respiratory count is printed as \"5712.3)\" (confirmed at zoom); it reads as 57 (12.3%) with a missing bracket, which the row and column totals also give, but it stays unrecorded as a non-number, as extracted."
+ ]
+}
