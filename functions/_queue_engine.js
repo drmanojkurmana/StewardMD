@@ -316,7 +316,10 @@ export async function recallableNoShows(env, session) {
 export async function revokeTicket(env, session, ticketId, actor) {
   const t = await getTicket(env, ticketId);
   if (!t || t.sessionId !== session.id) throw Object.assign(new Error("not_found"), { status: 404 });
-  await fsCommit(env, [wUpdate(env, "q_tickets/" + ticketId, { tokenVer: (t.tokenVer || 1) + 1, encName: "", encMobile: "", updatedAt: now() })]);
+  // SEC-12: revoking the ticket stops its clinical timeline link too, in the same commit.
+  const tl = await fsGet(env, "q_timeline/" + ticketId);
+  const tlStop = tl ? [wUpdate(env, "q_timeline/" + ticketId, { tokenVer: (Number(tl.fields.tokenVer) || 1) + 1, token: "", updatedAt: now() })] : [];
+  await fsCommit(env, [wUpdate(env, "q_tickets/" + ticketId, { tokenVer: (t.tokenVer || 1) + 1, encName: "", encMobile: "", updatedAt: now() }), ...tlStop]);
   await qAudit(env, { hospitalId: session.hospitalId, ticketId, actor, action: "revoke", meta: "erase" });
   return { ok: true };
 }

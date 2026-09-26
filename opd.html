@@ -1434,10 +1434,12 @@
       if(r.timelineUrl){
         open('<h3>Patient checked out</h3><p style="color:var(--mut)">'+(r.sent?"Timeline sent to the patient on WhatsApp.":"Share this visit summary:")+'</p><div class="link">'+esc(r.timelineUrl)+'</div>'+
           '<p id="lx" style="color:var(--mut)">'+linkUntil(r.linkExpiresAt)+'</p>'+
-          '<div class="row2">'+(can("emr.treat")?'<button class="cancel" id="ext" style="margin:0">Keep open 30 days</button>':'')+'<button class="btn" id="cx" style="margin:0">Done</button></div>');
+          '<div class="row2">'+(can("emr.treat")?'<button class="cancel" id="ext" style="margin:0">Keep open 30 days</button><button class="cancel" id="rvk" style="margin:0">Stop this link</button>':'')+'<button class="btn" id="cx" style="margin:0">Done</button></div>');
         sheet.querySelector("#cx").onclick=close;
         var ext=sheet.querySelector("#ext");
         if(ext) ext.onclick=function(){ extendLink(sid,tid,ext); };
+        var rvk=sheet.querySelector("#rvk");
+        if(rvk) rvk.onclick=function(){ revokeLink(sid,tid,rvk); };
       }
     });
   }
@@ -1451,6 +1453,17 @@
       if(lx) lx.textContent=linkUntil(r.linkExpiresAt);
       btn.textContent="Extended";
     }).catch(function(){ btn.disabled=false; btn.textContent="Keep open 30 days"; toast("Could not extend the link. The old date still applies."); });
+  }
+  // Sent to the wrong number, or the patient asked: every copy of the link stops opening.
+  function revokeLink(sid,tid,btn){
+    if(!confirm("Stop this visit summary link? Nobody will be able to open it again.")) return;
+    btn.disabled=true; btn.textContent="Stopping…";
+    api("timeline/revoke-link",{method:"POST",body:{sessionId:sid,ticketId:tid}}).then(function(r){
+      if(!r||!r.ok){ btn.disabled=false; btn.textContent="Stop this link"; toast(r&&r.error?friendly(r.error):"Could not stop the link. It still works."); return; }
+      var lx=sheet.querySelector("#lx"); if(lx) lx.textContent="This link has been stopped.";
+      var ext=sheet.querySelector("#ext"); if(ext) ext.disabled=true;
+      btn.textContent="Stopped";
+    }).catch(function(){ btn.disabled=false; btn.textContent="Stop this link"; toast("Could not stop the link. It still works."); });
   }
   // ---- audit drawer ----
   function openAudit(sid){

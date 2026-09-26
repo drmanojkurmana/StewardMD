@@ -256,7 +256,7 @@ import { askAboutPatient, reviewInteraction, listInteractions, COPILOT as MAIK_C
 import { patientSurveillance, acknowledgeSignal, RULES as SURVEILLANCE_RULES, NOT_BUILT as SURVEILLANCE_NOT_BUILT } from "../../_wardsynq/surveillance.js";
 import { maikStatus } from "../../_wardsynq/maik-gateway.js";
 import { enrolOnPathway, pathwayProgress, overridePathwayStep, resolveSpecialty } from "../../_wardsynq/pathways.js";
-import { hit as rateHit } from "../../_wardsynq/rate-limit.js";
+import { hit as rateHit, ipHit } from "../../_wardsynq/rate-limit.js";
 import { runTick } from "../../_wardsynq/ops-tick.js";
 // S3 P0: critical results pushed to phones, behind org setting wardsynq.alerts.push.enabled (default off).
 import { notifyDepsFor, directoryFromEnv, smsSetup, staffReaders, commsPorts, alertAdmins, alertsEnabled, pushToIdentities } from "../../_wardsynq/alert-deps.js";
@@ -485,11 +485,15 @@ async function wsqLinkTenantOrg(env, org) {
     let settings = {};
     try { settings = typeof tenant.settings === "string" ? JSON.parse(tenant.settings || "{}") : (tenant.settings || {}); } catch { settings = {}; }
     if (settings.wardsynq && settings.wardsynq.orgId === org.id) return;   // already linked, no write needed
+    if (settings.wardsynq && settings.wardsynq.orgId) return;   // SEC-02: never repoint a tenant another org already owns
     settings.wardsynq = Object.assign({}, settings.wardsynq, { orgId: org.id });
     await env.CONNECT_DB.prepare("UPDATE connect_tenant SET settings=?, updated_at=? WHERE id=?")
       .bind(JSON.stringify(settings), new Date().toISOString(), String(org.connectTenantId)).run();
   } catch (e) { /* best-effort: a missed reciprocal link never blocks the org update itself */ }
 }
+import { tenantLinkRefusal } from "../../_wardsynq/tenant-link.js";
+import { publicOrg } from "../../_opd_org.js";
+import { localUrlProblem } from "../../_wardsynq/maik-gateway.js";
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
 import "../../_opd_connect_connector.js";   // side-effect: registers the "connect" OPD connector (any FHIR hospital via Connect EMR)
 import * as ONCO from "../../_onco_store.js";
@@ -782,7 +786,10 @@ async function requireOrgOrGlobal(env, actor, orgId, cap, resourceOwnerUid) {
     if (resourceOwnerUid !== undefined && resourceOwnerUid !== null && resourceOwnerUid !== "" && !actor.isOwner && String(resourceOwnerUid) !== String(actor.id)) {
       throw Object.assign(new Error("forbidden"), { status: 403 });
     }
-    requireCap(actor.role, cap); return;
+    /* SEC-07: every signed-in account is a global "doctor", which is not membership of a hospital. The
+     * global role covers only a doctor's own practice (no org by that id, e.g. "manual"); a real org
+     * needs ownership or membership, like every other org route. */
+    if (actor.isOwner || !orgId || !(await ORG.getOrg(env, orgId))) { requireCap(actor.role, cap); return; }
   }
   const az = await ORG.authorizeOrg(env, actor, orgId, cap);
   if (!az.ok) throw Object.assign(new Error(az.reason || "forbidden"), { status: az.reason === "org_not_found" ? 404 : 403 });
@@ -1073,6 +1080,10 @@ export async function onRequest(context) {
 
   try {
     // ---- StewardMD-native staff login (email / PIN) — GHIS-INDEPENDENT (Phase 5), pre-auth ----
+    if (method === "POST" && seg === "auth" && (sub === "pin" || sub === "email" || sub === "mfa")) {   // SEC-15: one address, all sign-in doors
+      const ipRl = await ipHit(env, request, "auth", 60, 60000);
+      if (!ipRl.allowed) return json({ ok: false, error: "rate_limited", retryAfterSeconds: ipRl.retryAfterSeconds, message: "Too many sign-in attempts from this network. Wait a minute and try again." }, 429, request, { "Retry-After": String(ipRl.retryAfterSeconds) });
+    }
     if (method === "POST" && seg === "auth" && (sub === "pin" || sub === "email")) {
       // Every sign-in record names the device it came from, so "Recent sign-ins" can show it.
       const loginAudit = (orgId, identity, action, meta) => ORG.auditLogin(env, orgId, identity, action, [meta, deviceLabel(request.headers.get("user-agent"))].filter(Boolean).join(" · "));
@@ -1106,7 +1117,7 @@ export async function onRequest(context) {
         const nx = nextPinState(auth, Date.now(), ok);
         await ORG.recordMemberPinAttempt(env, auth.orgId, auth.identity, nx);
         await loginAudit(auth.orgId, auth.identity, ok ? "login:pin_ok" : nx.pinLockedUntil ? "login:pin_lockout" : "login:pin_failed", ok ? "" : "attempt " + nx.pinAttempts);
-        if (!ok) return json({ ok: false, error: "invalid_login", attemptsLeft: Math.max(0, 5 - nx.pinAttempts) }, 401, request);
+        if (!ok) return json({ ok: false, error: "invalid_login" }, 401, request);   // SEC-13: no attemptsLeft, or a known login answers differently from an unknown one
         if (auth.mfaEnabled) return json({ ok: false, error: "mfa_required", challenge: await mintMfaChallenge(env, auth.orgId, auth.identity, Date.now()), message: "Enter the 6-digit code from your authenticator app." }, 401, request);
         let orgCode = "";
         try { const o = await ORG.getOrg(env, auth.orgId); if (o) orgCode = o.code || ""; } catch (e) {}
@@ -1125,7 +1136,7 @@ export async function onRequest(context) {
       const pNx = nextPassState(m, Date.now(), pOk);
       await ORG.recordMemberPassAttempt(env, m.orgId, m.identity, pNx);
       await loginAudit(m.orgId, m.identity, pOk ? "login:password_ok" : pNx.passLockedUntil ? "login:password_lockout" : "login:password_failed", pOk ? "" : "attempt " + pNx.passAttempts);
-      if (!pOk) return json({ ok: false, error: "invalid_login", attemptsLeft: Math.max(0, 5 - pNx.passAttempts) }, 401, request);
+      if (!pOk) return json({ ok: false, error: "invalid_login" }, 401, request);   // SEC-13: same shape as an unknown email
       if (m.mfaEnabled) return json({ ok: false, error: "mfa_required", challenge: await mintMfaChallenge(env, m.orgId, m.identity, Date.now()), message: "Enter the 6-digit code from your authenticator app." }, 401, request);
       return json({ ok: true, token: await mintStaffSession(env, m.orgId, m.identity, Date.now()), orgId: m.orgId, identity: m.identity }, 200, request);
     }
@@ -6003,14 +6014,14 @@ export async function onRequest(context) {
         const org = await ORG.getOrg(env, actor.orgId);
         if (!org) return json({ ok: true, orgs: [] }, 200, request);
         const az = await ORG.authorizeOrg(env, actor, actor.orgId, null);
-        return json({ ok: true, orgs: [Object.assign({}, org, { memberRole: az.role || "viewer" })] }, 200, request);
+        return json({ ok: true, orgs: [Object.assign({}, publicOrg(org), { memberRole: az.role || "viewer" })] }, 200, request);
       }
       // Owner orgs (an account) + orgs where this identity is an invited MEMBER (q_members, by id or
       // email - see authorizeOrg's own uid-then-email fallback), for any authenticated identity: an
       // account, a Cloudflare Access user or a GHIS employee whose membership spans hospitals. Owner
       // wins on a collision (a member row on an org this account also owns must never demote the
       // doctor's own view of it to their staff role).
-      const owned = actor.kind === "firebase" ? (await ORG.listOrgsForOwner(env, actor.id)).map((o) => Object.assign({}, o, { memberRole: "owner" })) : [];
+      const owned = actor.kind === "firebase" ? (await ORG.listOrgsForOwner(env, actor.id)).map((o) => Object.assign({}, publicOrg(o), { memberRole: "owner" })) : [];
       const member = await ORG.listOrgsForMember(env, [actor.id, actor.email]);
       const byId = new Map();
       for (const o of member) byId.set(o.id, o);
@@ -6599,7 +6610,7 @@ export async function onRequest(context) {
       const orgId = url.searchParams.get("orgId") || "";
       const az = await ORG.authorizeOrg(env, actor, orgId, seg === "members" ? CAPS.STAFF_ADMIN : CAPS.QUEUE_VIEW);
       if (!az.ok) return json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
-      if (seg === "org") return json({ ok: true, org: await ORG.getOrg(env, orgId), departments: await ORG.listDepartments(env, orgId), rooms: await ORG.listRooms(env, orgId), wards: await ORG.listWards(env, orgId) }, 200, request);
+      if (seg === "org") return json({ ok: true, org: publicOrg(await ORG.getOrg(env, orgId)), departments: await ORG.listDepartments(env, orgId), rooms: await ORG.listRooms(env, orgId), wards: await ORG.listWards(env, orgId) }, 200, request);
       if (seg === "rooms") return json({ ok: true, rooms: await ORG.listRooms(env, orgId) }, 200, request);
       if (seg === "wards") return json({ ok: true, wards: await ORG.listWards(env, orgId) }, 200, request);
       if (seg === "beds") return json({ ok: true, beds: await ORG.listBeds(env, orgId, url.searchParams.get("wardId") || "") }, 200, request);
@@ -7030,11 +7041,15 @@ export async function onRequest(context) {
         /* Owner decision 2026-09-15: level 2 tells the on-duty ward team by a named rule; only the rules built may be saved. */
         const wardRuleRefusal = level2WardRuleRefusal(body.wardsynq && body.wardsynq.criticalEscalation);
         if (wardRuleRefusal) return json({ ok: false, error: "level2_ward_rule_not_built", message: wardRuleRefusal }, 422, request);
+        const maikUrlBad = wb && typeof wb === "object" && wb.maik && typeof wb.maik === "object" ? localUrlProblem(wb.maik.localBaseUrl) : null;   // SEC-08
+        if (maikUrlBad) return json({ ok: false, error: "bad_maik_local_url", message: maikUrlBad + ". Nothing was saved." }, 422, request);
+        const linkRefusal = body.connectTenantId ? await tenantLinkRefusal(env, actor, await ORG.getOrg(env, body.orgId), body.connectTenantId) : null;   // SEC-02
+        if (linkRefusal) return json({ ok: false, ...linkRefusal }, linkRefusal.status, request);
         const updated = await ORG.updateOrg(env, body.orgId, body, actor.id);
         // Best-effort, only when this update actually set/changed the tenant link - see
         // wsqLinkTenantOrg's own header for why this is a real fix, not a nice-to-have.
         if (body.connectTenantId) await wsqLinkTenantOrg(env, updated);
-        return json({ ok: true, org: updated }, 200, request);
+        return json({ ok: true, org: publicOrg(updated) }, 200, request);
       }
       /* REMOVING A HOSPITAL IS THE OWNER'S ACT (BUG-MU2PHANW). It was any staff admin's, with no typed
        * confirmation. Now: the hospital's owner or the platform owner only, the body must carry
@@ -7051,6 +7066,8 @@ export async function onRequest(context) {
       if (seg === "org" && sub === "from-connect") {
         if (needAccount()) return json({ ok: false, error: "account_required" }, 403, request);
         if (!body.connectTenantId || !body.connectConnectionId) return json({ ok: false, error: "missing_link" }, 400, request);
+        const fcRefusal = await tenantLinkRefusal(env, actor, null, body.connectTenantId);   // SEC-02
+        if (fcRefusal) return json({ ok: false, ...fcRefusal }, fcRefusal.status, request);
         const o = await ORG.createOrg(env, { name: body.name || "Connected Hospital", mode: "connect", connectorId: "connect" }, actor.id);
         const linked = await ORG.updateOrg(env, o.id, { connectTenantId: body.connectTenantId, connectConnectionId: body.connectConnectionId }, actor.id);
         return json({ ok: true, org: linked }, 200, request);
@@ -7430,6 +7447,15 @@ export async function onRequest(context) {
 
       // Add a clinical entry to the encounter timeline. Vitals => nurse (EMR_VITALS); notes/meds/
       // assessment => doctor (EMR_TREAT). "Add to timeline" for meds writes ONLY here (no pharmacy/EMR).
+      if (seg === "timeline" && sub === "revoke-link") {   // SEC-12: stop the patient's timeline link on its own
+        await requireSessionCap(env, actor, s, CAPS.EMR_TREAT);
+        const t = await Q.getTicket(env, body.ticketId);
+        if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
+        const rv = await QT.revokeTimelineLink(env, t.id);
+        if (rv.error) return json({ ok: false, error: rv.error }, 404, request);
+        await Q.qAudit(env, { hospitalId: s.hospitalId, ticketId: t.id, actor: actor.id, action: "link_revoke", meta: "timeline" });
+        return json({ ok: true }, 200, request);
+      }
       if (seg === "timeline" && sub === "extend") {
         await requireSessionCap(env, actor, s, CAPS.EMR_TREAT);
         const t = await Q.getTicket(env, body.ticketId);

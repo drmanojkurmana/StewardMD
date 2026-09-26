@@ -62,7 +62,7 @@ const DOCTOR = "twincopilot-doctor@example.test", NURSE = "twincopilot-nurse@exa
 const ADMIN = "twincopilot-admin@example.test";
 const sanitize = (x) => String(x == null ? "" : x).replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 80);
 const idFor = (e) => "cfa:" + createHash("sha256").update(e.toLowerCase()).digest("hex").slice(0, 24);
-const MAIK_ON = { enabled: true, phiApproved: ["local-openai"], localBaseUrl: "https://hospital.internal/v1", localModel: "ward-model-7b" };
+const MAIK_ON = { enabled: true, phiApproved: ["local-openai"], localBaseUrl: "https://ai.hospital.example/v1", localModel: "ward-model-7b" };
 
 function socket(reply, opts) {
   const seen = [];

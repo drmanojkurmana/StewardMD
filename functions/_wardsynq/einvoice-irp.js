@@ -174,7 +174,8 @@ async function post(url, headers, body, ctx) {
   const dest = await checkDestination(url, ctx);
   if (!dest.ok) return { ok: false, reason: "url_refused", detail: dest.detail };
   let res;
-  try { res = await (ctx.fetchImpl || fetch)(url, { method: "POST", headers: { "Content-Type": "application/json", ...headers }, body: JSON.stringify(body) }); }
+  // SEC-14: redirect "manual": a 3xx is refused below, never followed with the client secret to an unchecked host.
+  try { res = await (ctx.fetchImpl || fetch)(url, { method: "POST", headers: { "Content-Type": "application/json", ...headers }, body: JSON.stringify(body), redirect: "manual" }); }
   catch (e) { return { ok: false, reason: "unreachable", detail: `The e-invoice portal could not be reached (${str(e && e.message).slice(0, 80)}).` }; }
   const j = await res.json().catch(() => null);
   if (!res.ok || !j || String(j.Status) !== "1") return { ok: false, reason: "refused", httpStatus: res.status, detail: irpError(j, res.status) };

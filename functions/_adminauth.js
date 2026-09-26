@@ -6,7 +6,7 @@
  * OWNER_EMAILS (comma-separated) ADDS to the built-in owner list — the two are UNIONED, so the built-in
  * owners always work even if a stale/partial OWNER_EMAILS env is set in the Cloudflare dashboard.
  */
-import { verifiedClaimsFor } from "./_fbauth.js";
+import { verifiedClaimsFor, verifiedEmailOf } from "./_fbauth.js";
 
 /* stewardmd.in@gmail.com was REMOVED: the owner describes that account as "a medical college who is
  * buying my product", i.e. a customer. Leaving it here made it a platform owner - able to read every
@@ -36,7 +36,7 @@ export function tokenMatch(got, want) {
 export async function ownerOK(request, env) {
   const claims = await verifiedClaimsFor(request, env);   // memoised per request (T52)
   if (claims) {
-    const email = String(claims.email || "").toLowerCase();
+    const email = verifiedEmailOf(claims) || "";   // an unverified address proves nothing (SEC-01)
     if (email && ownerEmails(env).indexOf(email) > -1) return true;
   }
   const tok = request.headers.get("X-Admin-Token") || "";

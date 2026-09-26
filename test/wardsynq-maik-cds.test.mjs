@@ -116,7 +116,7 @@ const sanitize = (x) => String(x == null ? "" : x).replace(/[^A-Za-z0-9_-]/g, "-
 const idFor = (email) => "cfa:" + createHash("sha256").update(email.toLowerCase()).digest("hex").slice(0, 24);
 const DOCTOR = "doctor@example.test", OTHER = "other@example.test", OUTSIDER = "outsider@example.test";
 
-const MAIK_ON = { enabled: true, phiApproved: ["local-openai"], localBaseUrl: "https://hospital.internal/v1", localModel: "ward-model-7b" };
+const MAIK_ON = { enabled: true, phiApproved: ["local-openai"], localBaseUrl: "https://ai.hospital.example/v1", localModel: "ward-model-7b" };
 
 /* The socket, and nothing above it: the real local-model adapter builds the real request and parses
  * the real response. Every call is kept so a test can assert what the model was ACTUALLY SHOWN. */
