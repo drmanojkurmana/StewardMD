@@ -221,7 +221,12 @@ function fhirEncounter(e) {
     class: (e.class === "IPD" || e.class === "ICU" || e.class === "SURGERY" || e.class === "PACU" || e.class === "MATERNITY" || e.class === "PEDIATRICS" || e.class === "NICU") ? { system: "http://terminology.hl7.org/CodeSystem/v3-ActCode", code: "IMP", display: "inpatient encounter" }
       : e.class === "OPD" ? { system: "http://terminology.hl7.org/CodeSystem/v3-ActCode", code: "AMB", display: "ambulatory" }
       : e.class === "ED" ? { system: "http://terminology.hl7.org/CodeSystem/v3-ActCode", code: "EMER", display: "emergency" }
-      : undefined,
+      // OPS-11/F11: class is R4-required (1..1) - omitting it for a class this file has not mapped
+      // (e.class null/unrecognised) exported a resource that fails validateResource/strict partner
+      // validators. OBSENC ("observation encounter") is v3-ActCode's own catch-all for an encounter
+      // that does not fit the specific categories - never a guess at inpatient vs ambulatory, which
+      // would misclassify the stay for a bed/billing consumer reading this resource.
+      : { system: "http://terminology.hl7.org/CodeSystem/v3-ActCode", code: "OBSENC", display: "observation encounter" },
     subject: ref("Patient", e.patientId),
     period: clean({ start: str(e.periodStart) || undefined, end: str(e.periodEnd) || undefined }),
     reasonCode: e.reason ? [{ text: e.reason }] : undefined,
@@ -482,6 +487,12 @@ const PARTICIPANT = Object.freeze({ human: "author", device: "author", ai: "asse
 function fhirProvenance(record) {
   const fhirType = record && FHIR_TYPE[record.resourceType];
   if (!fhirType || !record.id) return null;
+  // OPS-12/F12: TYPE_CODE now covers every FHIR_TYPE value, but a Provenance with "id": null (clean()
+  // strips undefined, never null) is worse than none - HAPI and most typed SDKs fail to deserialize it
+  // and it cannot be referenced. Omit the resource rather than emit an unreferenceable one, so a FUTURE
+  // type added to FHIR_TYPE without a matching TYPE_CODE entry fails safe instead of failing silent.
+  const pid = provenanceId(fhirType, record.id, record.version === undefined || record.version === null ? null : Number(record.version));
+  if (!pid) return null;
   const by = record.writtenBy || {};
   const m = record.meta || {};
   const version = record.version === undefined || record.version === null ? null : Number(record.version);
@@ -492,7 +503,7 @@ function fhirProvenance(record) {
   remember(hashedId(record.id), str(record.id)); // a Provenance id may carry the hashed form even when the resource id did not need it
   return clean({
     resourceType: "Provenance",
-    id: provenanceId(fhirType, record.id, version),
+    id: pid,
     target: [{ reference: version === null ? `${fhirType}/${fid}` : `${fhirType}/${fid}/_history/${version}` }],
     recorded: str(by.at) || str(m.recordedAt) || undefined,
     activity: { coding: [{ system: "http://terminology.hl7.org/CodeSystem/v3-DataOperation", code: version === 1 ? "CREATE" : "UPDATE" }] },
@@ -672,7 +683,10 @@ const IMAGING_STATUS = Object.freeze({ available: "available", registered: "regi
  * needs to file it against the right request.
  */
 function fhirImagingStudy(s) {
-  const modality = str(s.modality);
+  // OPS-23/F23: a study performed with multiple modalities (a PET/CT) is a comma-joined string in
+  // the record (dicomweb's connector.js) - split back out so each gets its own Coding, rather than
+  // one Coding whose code is the literal joined text.
+  const modalities = str(s.modality).split(",").map((m) => m.trim()).filter(Boolean);
   return clean({
     resourceType: "ImagingStudy", id: fhirId(s.id),
     status: IMAGING_STATUS[str(s.status)] || "unknown",
@@ -686,7 +700,7 @@ function fhirImagingStudy(s) {
     basedOn: s.serviceRequestId ? [ref("ServiceRequest", s.serviceRequestId)] : undefined,
     started: str(s.started) || undefined,
     // The source's own modality string, under DICOM's own code system. Never re-coded to another.
-    modality: modality ? [{ system: "http://dicom.nema.org/resources/ontology/DCM", code: modality }] : undefined,
+    modality: modalities.length ? modalities.map((m) => ({ system: "http://dicom.nema.org/resources/ontology/DCM", code: m })) : undefined,
     numberOfSeries: Number.isFinite(Number(s.seriesCount)) && s.seriesCount != null ? Number(s.seriesCount) : undefined,
     numberOfInstances: Number.isFinite(Number(s.instanceCount)) && s.instanceCount != null ? Number(s.instanceCount) : undefined,
     description: str(s.description) || undefined,

@@ -340,6 +340,10 @@ function splitBundle(body) {
   const problems = [];
   const resources = [];
   const requests = new Map();
+  // OPS-13/F13: request POSITION, by "resourceType/id" - so the response Bundle landBundle builds can
+  // be indexed by request order (the R4 contract for a batch/transaction response), rather than by
+  // the order conflicts/preconditions/writes happened to be resolved in.
+  const entryIndexOf = new Map();
   let patient = null;
   let items = [];
   const bundleType = body && body.resourceType === "Bundle" ? str(body.type) : "";
@@ -348,9 +352,11 @@ function splitBundle(body) {
     // An entry with no resource is named, not skipped: a sender counting entries would believe it landed.
     const empty = entries.filter((e) => !e || !e.resource || typeof e.resource !== "object").length;
     if (empty) problems.push({ reason: REASON.INVALID, detail: `${empty} bundle entr${empty === 1 ? "y has" : "ies have"} no resource` });
-    for (const e of entries) {
-      if (!e || !e.resource || typeof e.resource !== "object") continue;
+    entries.forEach((e, i) => {
+      if (!e || !e.resource || typeof e.resource !== "object") return;
       items.push(e.resource);
+      const key = `${str(e.resource.resourceType)}/${str(e.resource.id)}`;
+      if (!entryIndexOf.has(key)) entryIndexOf.set(key, i);   // a duplicate resourceType/id keeps its FIRST position
       /* A transaction or batch entry says what it wants done. POST creates, PUT updates (with the
        * version it read, when it says); anything else is not something this server does to a record,
        * and is named rather than carried out as the nearest thing. */
@@ -358,20 +364,22 @@ function splitBundle(body) {
       if (req) {
         const method = str(req.method).toUpperCase();
         if (method && method !== "POST" && method !== "PUT") problems.push({ reason: REASON.INVALID, detail: `${str(e.resource.resourceType)}/${str(e.resource.id)}: request.method ${method} is not supported; this server creates and updates only`, resourceType: str(e.resource.resourceType), id: e.resource.id || null });
-        requests.set(`${str(e.resource.resourceType)}/${str(e.resource.id)}`, { method: method || "POST", ifNoneExist: str(req.ifNoneExist) || null, ifMatch: str(req.ifMatch) || null, url: str(req.url) || null });
+        requests.set(key, { method: method || "POST", ifNoneExist: str(req.ifNoneExist) || null, ifMatch: str(req.ifMatch) || null, url: str(req.url) || null });
       }
-    }
+    });
   } else if (body && body.resourceType) {
     items = [body];
+    entryIndexOf.set(`${str(body.resourceType)}/${str(body.id)}`, 0);
   }
   if (!items.length && !problems.length) problems.push({ reason: REASON.INVALID, detail: "no resource in the request" });
   for (const r of items) {
     const t = str(r.resourceType);
+    const entryIndex = entryIndexOf.get(`${t}/${str(r.id)}`);
     if (!t) { problems.push({ reason: REASON.INVALID, detail: "an entry has no resourceType" }); continue; }
-    if (!INBOUND_TYPES.includes(t)) { problems.push({ reason: REASON.UNSUPPORTED, detail: `${t} is not a resource WardSynQ imports`, resourceType: t, id: r.id || null }); continue; }
+    if (!INBOUND_TYPES.includes(t)) { problems.push({ reason: REASON.UNSUPPORTED, detail: `${t} is not a resource WardSynQ imports`, resourceType: t, id: r.id || null, entryIndex }); continue; }
     if (!str(r.id)) { problems.push({ reason: REASON.INVALID, detail: `${t} has no id; an import needs the sender's own id to be attributable and idempotent`, resourceType: t }); continue; }
     if (t === "Patient") {
-      if (patient) { problems.push({ reason: REASON.INVALID, detail: "more than one Patient in one bundle", resourceType: t, id: r.id }); continue; }
+      if (patient) { problems.push({ reason: REASON.INVALID, detail: "more than one Patient in one bundle", resourceType: t, id: r.id, entryIndex }); continue; }
       patient = r;
     } else resources.push(r);
   }
@@ -1127,6 +1135,19 @@ async function landBundle(request, env, ctx) {
    * must still look, and the sender is told where. Governance refusals are decided inside putMany
    * before anything is staged, for the same reason. */
   const entries = [];
+  // OPS-13/F13: an UNSUPPORTED-type entry used to get NO response entry at all (only an `issues`
+  // tag on the bundle's meta) - a sender posting [Patient, Observation, Procedure, Condition] got
+  // back at most 3 entries for 4 requests, and a client that matches response.entry[i] to
+  // request.entry[i] by position (the R4 contract) misattributed every outcome after the drop.
+  // `_reqIndex` (its real request position, from splitBundle) orders these relative to EACH OTHER;
+  // full positional correlation with the written/conflict entries below is not attempted here - the
+  // canonical adapter (wardsynq-sccm-adapter.js#sourceId) rewrites every entity's id, so recovering
+  // the original request index for an already-written entity is a second, separate id-transform this
+  // fix does not reverse. Those keep the order they were resolved in, exactly as before this fix.
+  for (const p of problems) {
+    if (p.reason !== REASON.UNSUPPORTED) continue;
+    entries.push({ response: { status: "400 Bad Request", outcome: operationOutcome("error", "not-supported", p.detail) }, _reqIndex: p.entryIndex });
+  }
   for (const c of conflicts) {
     const exId = await raise(c.reason, { patientId: c.entity.patientId || null, conflict: c.current, entityRefs: [`${c.entity.resourceType}/${c.entity.id}`],
       detail: conflictDetail(c) });
@@ -1207,9 +1228,13 @@ async function landBundle(request, env, ctx) {
   const status = ctx.mode === "create" ? (written.length ? 201 : (preconditions.some((p) => /^200/.test(p.status)) ? 200 : (conflicts.length ? 409 : (preconditionStatus || 422))))
     : ctx.mode === "update" ? (written.length ? 200 : 409)
     : 200;
+  // OPS-13/F13: the unsupported-type entries added above carry their real request index and sort by
+  // it (Array.sort is stable, so they keep their relative order among each other); every other entry
+  // has no `_reqIndex` and keeps the order it was resolved in, exactly as before this fix.
+  const ordEntries = entries.map((e, i) => [e, i]).sort(([a, ai], [b, bi]) => (a._reqIndex ?? Infinity) - (b._reqIndex ?? Infinity) || ai - bi).map(([e]) => { const { _reqIndex, ...rest } = e; return rest; });
   return {
     ok: true, status, system: adapterSystem, linkedTo, written, conflicts: conflicts.length, issues, preconditions: preconditions.length,
-    bundle: { resourceType: "Bundle", type: bundleType === "batch" ? "batch-response" : "transaction-response", entry: entries,
+    bundle: { resourceType: "Bundle", type: bundleType === "batch" ? "batch-response" : "transaction-response", entry: ordEntries,
       ...(issues.length ? { meta: { tag: issues.map((i) => ({ system: "urn:stewardmd:fhir:issue", code: str(i.code), display: str(i.message) })) } } : {}) },
   };
 }

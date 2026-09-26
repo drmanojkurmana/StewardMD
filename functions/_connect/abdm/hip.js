@@ -44,6 +44,24 @@ function ccKey(c) {
   if (typeof c === "object") return c.careContextReference ?? c.reference ?? c.id ?? null;
   return String(c);
 }
+// OPS-02/F2: the record's OWN clinical date, read from the already-loaded SCCM bundle (never a
+// caller-supplied field) - the encounter period, else a diagnostic report's, immunization's or
+// document's own date. PURE; returns null when the bundle carries no date this can find, in which
+// case the per-record date check in assertServeAllowed below has nothing to compare and does not
+// refuse (defence-in-depth, not the only gate: subject/careContext/hiType membership still apply).
+function recordDateOf(record) {
+  const r = record || {};
+  const enc = Array.isArray(r.encounters) ? r.encounters[0] : null;
+  if (enc && enc.period && (enc.period.start || enc.period.end)) return enc.period.end || enc.period.start;
+  const dr = Array.isArray(r.diagnosticReports) ? r.diagnosticReports[0] : null;
+  if (dr && dr.effectiveDateTime) return dr.effectiveDateTime;
+  const imm = Array.isArray(r.immunizations) ? r.immunizations[0] : null;
+  if (imm && imm.occurrenceDateTime) return imm.occurrenceDateTime;
+  const doc = Array.isArray(r.documents) ? r.documents[0] : null;
+  if (doc && doc.date) return doc.date;
+  return null;
+}
+
 // Injected clock -> ISO string (never Date.now / the wall clock). Mirrors the Stage-5 source's isoOf.
 function isoOf(clock) {
   const d = typeof clock === "function" ? clock() : clock;
@@ -145,6 +163,17 @@ export async function assertServeAllowed(env, deps, { consentId, careContexts, r
       if (rk != null) servableRefs.add(rk);
     }
 
+    // (v) OPS-02/F2: the record's OWN date, within the reloaded row's permission.dateRange. Neither
+    // (iv) nor (i)-(iii)/(d) above ever compares a record's date to the consent's window - a
+    // care-context whose ref/hiType/subject all check out can still be for a visit the patient never
+    // consented to share (e.g. a 2019 admission under a consent granted for January 2024). Checked
+    // only when BOTH bounds parse and the record carries a date this guard can read (recordDateOf,
+    // computed from the record actually loaded, never a caller field) - a record with no derivable
+    // date is unaffected by this bound (defence-in-depth on top of (i)-(iii)/(d), not the only gate).
+    const grantedRange = (consent.permission && consent.permission.dateRange) || {};
+    const rangeFrom = Date.parse(grantedRange.from), rangeTo = Date.parse(grantedRange.to);
+    const rangeUsable = !Number.isNaN(rangeFrom) && !Number.isNaN(rangeTo);
+
     for (const rec of records) {
       if (!rec || typeof rec !== "object") return await deny("bad-record");
       // (i) subject == the reloaded row's patient hash — a SINGLE mismatch refuses the WHOLE transfer (no leak).
@@ -157,6 +186,12 @@ export async function assertServeAllowed(env, deps, { consentId, careContexts, r
       if (!grantedHi.has(String(rec.hiType))) return await deny("hitype-out-of-scope");
       // (d) the served careContext must be REGISTERED to the consent's patient (D1 subject bind).
       if (!servableRefs.has(ref)) return await deny("carecontext-not-registered-to-patient");
+      // (v) the record's own date, if known, must fall inside the granted window (both ends inclusive,
+      // consistent with revalidateForRequest's boundary semantics).
+      if (rangeUsable && rec.recordDate != null) {
+        const recMs = Date.parse(rec.recordDate);
+        if (!Number.isNaN(recMs) && (recMs < rangeFrom || recMs > rangeTo)) return await deny("daterange-out-of-scope");
+      }
     }
     // Provably one-patient, in-scope, fresh-D1-consent-bound. Void => allowed.
   } catch (e) {
@@ -241,7 +276,9 @@ export async function serveTransfer(env, deps, req) {
   for (const cc of careContexts) {
     const careContextRef = ccKey(cc);
     const rec = await source.loadRecord(env, deps, { tenantId: req.tenantId, careContextRef });
-    loaded.push(Object.assign({ careContextRef }, rec));
+    // OPS-02/F2: the record's own clinical date, read here from the record just loaded (never trusted
+    // from the caller) so assertServeAllowed can refuse one dated outside the consent's dateRange.
+    loaded.push(Object.assign({ careContextRef, recordDate: recordDateOf(rec && rec.record) }, rec));
   }
 
   // (1) R5 GUARD FIRST — refuse the WHOLE transfer on ANY cross-patient / out-of-scope record BEFORE any seal.
