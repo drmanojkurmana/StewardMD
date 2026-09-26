@@ -257,8 +257,18 @@ try {
   ok(await until(`var s=ATLAS3D._state; return s.src==='live' && !!s.hidden[s.data.byId['LIVE_colon']] && !!s.hidden[s.data.byId['LIVE_small_bowel']]`), "living body hides the bowel by default (Layers > Bowel shows it)");
   await ev(`ATLAS3D.selectCanon('COLON'); return 1;`);
   ok(await until(`var s=ATLAS3D._state; return s.sel.length===1 && s.data.parts[s.sel[0]].id==='LIVE_colon'`), "selecting COLON still shows the living colon (selection wins over the default)");
+  // opened straight onto the living body, its CT slices are one tap away (no 2D detour)
+  ok(await ev(`return document.querySelector('#a3dChips .atlas-chip[data-r=""]').textContent;`) === "Whole scan", "the living body's all-regions chip says Whole scan, not Whole body");
+  await ev(`document.querySelector('#a3dBar [data-a3d-act=ctslice]').click(); return 1;`);
+  ok(await until(`var p=ATLAS3D._state.plane; return !!p && p.m==='ct-live-torso-axial' && p.i===Math.ceil(p.n/2) && p.ready===true`, 30000), "CT slice shows the middle axial slice on the living body");
+  ok(await ev(`return document.querySelectorAll('#a3dBar .a3d-ctseg .a3d-segbtn').length===3 && document.querySelector('#a3dBar [data-a3d-act=ctslice]').getAttribute('aria-pressed')==='true';`) === true, "the slice row offers Axial / Coronal / Sagittal and CT slice reads pressed");
+  await ev(`document.querySelector('#a3dBar [data-a3d-act=ctplane][data-m="ct-live-torso-coronal"]').click(); return 1;`);
+  ok(await until(`var p=ATLAS3D._state.plane; return !!p && p.m==='ct-live-torso-coronal' && p.ready===true`, 30000), "Coronal switches the cut to the coronal CT stack");
+  await ev(`document.querySelector('#a3dBar [data-a3d-act=ctslice]').click(); return 1;`);
+  ok(await ev(`return ATLAS3D._state.plane===null && !document.querySelector('#a3dBar .a3d-ctseg');`) === true, "CT slice again hides the slice");
   await ev(`ATLAS3D.setSource('bp3d'); return 1;`);
   ok(await until(`var s=ATLAS3D._state; return !s.err && Object.keys(s.loading).length===0 && Object.keys(s.chunks).length>=10;`, 120000), "reference geometry streamed after switching back");
+  ok(await ev(`return !document.querySelector('#a3dBar [data-a3d-act=ctslice]') && document.querySelector('#a3dChips .atlas-chip[data-r=""]').textContent==='Whole body';`) === true, "the reference body has no CT slice button and keeps Whole body");
   await ev(`ATLAS3D.selectCanon('LIVER'); return 1;`);
   ok(await until(`return ATLAS3D._state.src==='live' && ATLAS3D._state.sel.length===1 && ATLAS3D._state.data.parts[ATLAS3D._state.sel[0]].id==='LIVE_liver'`), "LIVER (no reference surface) auto-switches to the living-CT liver");
   await ev(`document.querySelector('[data-a3d-act=view]').click(); return 1;`);
