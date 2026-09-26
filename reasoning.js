@@ -1589,7 +1589,7 @@
   function medRe() { if (!_medRe) _medRe = new RegExp(MED_RULES.map(function (r) { return "(" + r.re + ")"; }).join("|"), "gi"); return _medRe; }
   function medFormat(text) {
     if (text == null) return "";
-    var s = esc(stripCite(String(text)));
+    var s = esc(String(text));
     return s.replace(medRe(), function () {
       var a = arguments;                       // [match, g1..gN, offset, string]
       for (var i = 0; i < MED_RULES.length; i++) if (a[i + 1] != null) {
@@ -1618,8 +1618,6 @@
   // like "(>45 mg/dL)" or "(meningoencephalitis)" are preserved.
   function stripCite(t) {
     return String(t == null ? "" : t)
-      .replace(/\s*\((?:pp?\.?\s*\d|Harrison)[^)]*\)/gi, "")
-      .replace(/\b(?:pages?\s+|pp?\.\s*)\d+(?:\s*[–-]\s*\d+)?(?:\s*,\s*(?:pp?\.\s*)?\d+(?:\s*[–-]\s*\d+)?)*\b/gi, "")
       .replace(/\s*\((?:Harrison[^)]*|pp?\.?\s*[\dIVXLC][\d,\s–\-]*)\)/g, "")
       .replace(/\s*\bHarrison(?:[’']s)?\s*22e(?:\s*pp?\.?\s*[\d,\s–\-]+)?/g, "")
       .replace(/\s*\bpp?\.\s*\d{2,4}(?:[–\-]\d{2,4})?(?:\s*,\s*\d{2,4}(?:[–\-]\d{2,4})?)*/g, "") // bare "p.818" / "pp. 1118-1125" (dot required → p.o./p53 safe)
@@ -1689,7 +1687,8 @@
     if (e.severityClassification) cp += '<div class="ev-subh">Severity</div><p>' + medFormat(stripCite(e.severityClassification)) + '</p>';
     if (e.prognosis) cp += '<div class="ev-subh">Prognosis</div><p>' + medFormat(stripCite(e.prognosis)) + '</p>';
     if (cp) sections.push({ ic: rIco("trend"), title: "Course & prognosis", html: cp });
-    // Expanded clinical detail uses the same citation-free presentation as the summary.
+    // Original Reference — VERBATIM detail with inline page citations preserved
+    // (distinct from the de-cited summary sections above; citations also in footer).
     var rawUl = function (arr) { return (arr && arr.length) ? '<ul class="ev-ul">' + arr.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ul>' : ""; };
     var full = "";
     full += evSub("Clinical pearls", rawUl(pearls));
@@ -1702,22 +1701,15 @@
     if (e.severityClassification) full += '<div class="ev-subh">Severity</div><p>' + medFormat(e.severityClassification) + '</p>';
     if (e.prognosis) full += '<div class="ev-subh">Prognosis</div><p>' + medFormat(e.prognosis) + '</p>';
     if (!pearls.length && !sections.length) return null;
-    function referenceTitle(value) {
-      return String(value || "").replace(/Harrison(?:[’']s)?(?:\s+Principles of Internal Medicine)?/gi, "Harrison's Principles of Internal Medicine")
-        .replace(/\s*[,;·–-]?\s*\(?\d+(?:e\b|(?:st|nd|rd|th)\s+ed(?:ition)?\.?)[\s\S]*$/i, "")
-        .replace(/\s*\(?\bpp?\.\s*\d[\s\S]*$/i, "").replace(/[,;\s]+$/, "").trim();
-    }
-    var srcName = referenceTitle(e.source);
-    var references = (e.references || []).map(referenceTitle).filter(function (name, i, all) { return name && all.indexOf(name) === i; });
-    if (!references.length && srcName) references.push(srcName);
-    references = references.slice(0, 3);
+    var srcName = e.source ? String(e.source).replace(/,?\s*22e.*$/, "") : "Standard internal-medicine reference";
+    var pages = evPages(e);
     return {
       _id: id, srcKey: "harrison", icon: rIco("book"),
       sourceName: srcName,
-      edition: "", tag: "",
+      edition: "22e", tag: "Primary Reference",
       pages: "",                              // not in the header — references live in the footer
       pearls: pearls, sections: sections, fullHTML: full,
-      cite: references.length ? '<strong>Reference:</strong>' + references.map(function (name) { return '<div>' + esc(name) + '</div>'; }).join("") : ""
+      cite: '<strong>Reference</strong><br>Harrison\'s Principles of Internal Medicine, 22nd Edition<br>Oxford Textbook of Medicine<br>Davidson\'s Principles and Practice of Medicine'
     };
   }
   /* FLAGSHIP CLINICIAN-CURATED BRIEFINGS — hand-authored high-yield blocks for
@@ -1976,9 +1968,6 @@
   function evBodyHTML(src) {
     // the clinician briefing belongs to the disease — show it once, in the primary (Harrison) panel.
     var h = '<div class="ev-body">' + (src.srcKey === "harrison" ? evBriefing(src._id) : "");
-    if (src.srcKey === "harrison" && src.fullHTML) {
-      return h + '<div class="ev-full">' + src.fullHTML + '</div><div class="ev-cite">' + src.cite + '</div></div>';
-    }
     if (src.pearls && src.pearls.length) {
       h += '<div class="ev-pearls"><div class="ev-pearls-h"><span class="ev-tick"></span>' + esc(src.pearlsLabel || "Key clinical pearls") + '</div>' +
         src.pearls.map(function (p) { var k = pearlKind(p); return '<div class="ev-pearl ev-pearl--' + k.a + '"><span class="ev-pearl-ic">' + rIco(k.ic) + '</span><div class="ev-pearl-bd"><span class="ev-pearl-tag ev-tag--' + k.a + '">' + k.label + '</span>' + medFormat(stripCite(p)) + '</div></div>'; }).join("") +
@@ -1991,7 +1980,7 @@
     });
     if (src.fullHTML) {
       h += '<div class="ev-sec ev-full"><button type="button" class="ev-sec-h">' +
-        '<span class="ev-sec-ic">' + rIco("note") + '</span><span class="ev-sec-t">Clinical details</span><span class="ev-chev">⌄</span></button>' +
+        '<span class="ev-sec-ic">' + rIco("note") + '</span><span class="ev-sec-t">Original Reference</span><span class="ev-chev">⌄</span></button>' +
         '<div class="ev-sec-p"><div class="ev-sec-in">' + src.fullHTML + '</div></div></div>';
     }
     h += '<div class="ev-cite">' + src.cite + '</div></div>';
@@ -2001,10 +1990,10 @@
     if (!src) return "";
     opts = opts || {};
     var open = !!opts.expanded;
-    var sub = src.srcKey === "harrison" ? "Clinical details and key points" : [src.edition, src.tag].filter(Boolean).join(" · ");
+    var sub = [src.edition, src.tag].filter(Boolean).join(" · ");
     return '<div class="ev-wrap' + (open ? " ev-open" : "") + '" data-ev="' + src._id + '" data-ev-src="' + (src.srcKey || "harrison") + '">' +
-      '<button type="button" class="ev-top" aria-expanded="' + open + '"><span class="ev-top-ic">' + src.icon + '</span>' +
-        '<span class="ev-top-main"><span class="ev-top-title">' + (src.srcKey === "harrison" ? "Know more" : esc(src.sourceName)) + '</span>' +
+      '<button type="button" class="ev-top"><span class="ev-top-ic">' + src.icon + '</span>' +
+        '<span class="ev-top-main"><span class="ev-top-title">' + esc(src.sourceName) + '</span>' +
         (sub ? '<span class="ev-top-sub">' + esc(sub) + '</span>' : '') + '</span>' +
         '<span class="ev-chev ev-chev-top">⌄</span></button>' +
       '<div class="ev-panel"><div class="ev-panel-in">' + (open ? evBodyHTML(src) : '') + '</div></div></div>';
@@ -2027,7 +2016,7 @@
             if (src) { src.srcKey = k; pin.innerHTML = evBodyHTML(src); }
           } catch (e) {}
         }
-        wrap.classList.toggle("ev-open"); top.setAttribute("aria-expanded", String(wrap.classList.contains("ev-open"))); return;
+        wrap.classList.toggle("ev-open"); return;
       }
       var sh = t.closest(".ev-sec-h");
       if (sh && sh.parentNode) sh.parentNode.classList.toggle("ev-open");
@@ -2235,7 +2224,7 @@
       pearls: g.recs || [], sections: sections, fullHTML: "",
       cite: '<strong>' + rIco("book") + ' ' + esc(g.title) + (g.year ? " (" + g.year + ")" : "") + '</strong>' +
         (g.url ? '<br><a href="' + esc(g.url) + '" target="_blank" rel="noopener noreferrer">' + esc(g.url) + '</a>' : '') +
-        '<br>Consult the full guideline before acting.'
+        '<br>Key recommendations paraphrased for decision support — consult the full guideline before acting.'
     };
   }
   function evSanfordSrc(id) {
@@ -2714,6 +2703,7 @@
         (m && m.dispo ? '<div class="dx-mgmt-sec">Disposition</div><p>' + esc(m.dispo) + '</p>' : '') +
         (red && red.length ? '<div class="dx-mgmt-sec red">Red flags</div><ul class="dx-mgmt-ul">' + red.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '') +
         (m && m.src ? '<div class="dx-mgmt-src">Source: ' + esc(m.src) + '</div>' : '') +
+        '<div class="dx-mgmt-disc">' + rIco("warn") + ' Decision-support only — provisional and aligned to standard guidelines / Harrison\'s 22e. Verify against full guidelines, local protocol and current prescribing references (doses, contraindications, renal/hepatic adjustment, pregnancy) before acting.</div>' +
       '</div>';
     el.innerHTML = html;
     el.classList.add("on");
@@ -2779,7 +2769,7 @@
         '</div><div class="dx-reader-content">' +
         (reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(reason) + '</p>' : '') +
         mgmtHtml +
-        (harrisonRef(id, { expanded: true }) || '<p class="dx-sel-empty">No Harrison reference loaded for this disease.</p>') +
+        (harrisonRef(id, { expanded: true }) || '<p class="dx-sel-empty">No reference loaded for this disease.</p>') +
         (refInf ? '' : '<button class="dx-select ' + (inf ? "inf" : "ni") + '" data-sel="' + id + '">Open full ' + (inf ? "stewardship" : "management") + ' page →</button>') +
         '</div>' +
       '</div>';
@@ -2950,6 +2940,7 @@
       ".dx-mgmt-ul{margin:0;padding-left:18px}",
       ".dx-mgmt-ul li{font:500 13.5px/1.5 var(--sans);color:var(--slate);margin:4px 0}",
       ".dx-mgmt-src{margin-top:18px;font:600 11.5px var(--sans);color:var(--slate-soft)}",
+      ".dx-mgmt-disc{margin-top:14px;padding:11px 13px;background:var(--panel);border:1px solid var(--line);border-radius:10px;font:500 11.5px/1.5 var(--sans);color:var(--slate-soft)}",
       ".dx-chip{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:6px 11px;font:600 12px var(--sans);color:var(--slate);cursor:pointer;transition:all .12s}",
       ".dx-chip:hover{border-color:var(--teal);color:var(--teal)}",
       ".dx-gate{margin:14px 0 8px}",
