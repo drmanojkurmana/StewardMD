@@ -18,6 +18,7 @@
  "measure": "R",
  "reporting": "Percent resistant as typed labels on WHONET bar charts, by organism and specimen (pus, urine), hub laboratory isolates, all locations pooled; number tested not printed. Organisms with fewer than 30 isolates given as resistant/tested counts only.",
  "method": "WHONET (CLSI interpretation; references CLSI M39 5th ed. and M100 33rd and 34th ed.); cefoperazone-sulbactam read by EUCAST; colistin MIC and S. aureus vancomycin MIC not done.",
+ "breakpoints": "CLSI M100, 33rd and 34th editions; EUCAST for cefoperazone-sulbactam",
  "verification": {
   "status": "double-checked",
   "note": "All resistance data are WHONET bar-chart images with percentage labels typed in the text layer. Each label was assigned to a bar by its x position (text layer) and checked on renders at scale 2.2 and scale 4; bar heights were then measured in pixels against the y axis (0 to 100, or 0 to 60 for Chart 4) and compared with the labels: they agree within about 2 points except where a conflict is recorded. Labels that sit between two bars, over duplicate breakpoint bars with different values, or that match no bar were left out (see excluded). Page numbers are 1-based PDF pages of the five-district compilation."

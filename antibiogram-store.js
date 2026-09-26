@@ -21,7 +21,7 @@
  * ======================================================================================== */
 (function () {
   "use strict";
-  var ABG_V = "d945c6e033d9";
+  var ABG_V = "82d3e35f2895";
   var R = window.ABG_RULES;
   var ACT = { k: "keep", i: "intrinsic", h: "hide", x: "suppress", c: "caution" };
   var LOCAL_KEY = "smd_abg_local";
@@ -83,7 +83,9 @@
       latest: true, local: true, method: obj.method || null, stats: obj.stats || null };
     var rows = (obj.rows || []).map(function (r) {
       var v = R.validateRow({ org: r.org, pheno: r.pheno || null, spec: r.spec, set: r.set, n: r.n, s: r.s || {}, nt: r.nt || {} });
-      return { src: src, spec: r.spec, set: r.set, org: r.org, pheno: r.pheno || null, n: r.n, cells: v.cells, flags: v.flags, derived: false, as: null, q: null, trend: null, notes: null, page: null, how: null };
+      // Imported as % resistant: stored as 100 minus, and each figure says so.
+      if (obj.measure === "R") Object.keys(v.cells).forEach(function (d) { v.cells[d].fromR = true; });
+      return { src: src, spec: r.spec, set: r.set, org: r.org, pheno: r.pheno || null, n: r.n, cells: v.cells, flags: v.flags, derived: false, as: null, q: null, trend: null, notes: null, page: null, how: null, measure: obj.measure === "R" ? "R" : "S" };
     });
     return { src: src, rows: rows };
   }
@@ -512,25 +514,27 @@
     var base = { spec: st.spec, set: st.set, cohort: st.cohort || null, specMatch: st.specMatch, setMatch: st.setMatch, pooled: t.pooled, scope: scope };
     var intr = rows.filter(function (o) { return o.cells[d] && o.cells[d].act === "intrinsic"; })[0];
     if (intr && rows.length === 1) return extend(base, { s: 0, intrinsic: true, why: intr.cells[d].why });
-    var parts = rows.filter(function (o) { var c = o.cells[d]; return c && c.act === "keep" && typeof c.s === "number"; });
-    // Cefoxitin and oxacillin are both methicillin markers for staphylococci: a report that
-    // prints one answers a question about the other.
-    if (!parts.length && R.ORGS[rows[0].org] && R.ORGS[rows[0].org].staph && (d === "cefoxitin" || d === "oxacillin")) {
-      d = d === "cefoxitin" ? "oxacillin" : "cefoxitin";
-      parts = rows.filter(function (o) { var c = o.cells[d]; return c && c.act === "keep" && typeof c.s === "number"; });
-    }
+    var kept = function (dk) { return rows.filter(function (o) { var c = o.cells[dk]; return c && c.act === "keep" && typeof c.s === "number"; }); };
+    var parts = kept(d), asKey = null, alt = null;
+    // An equivalent agent answers when the report printed only the other one: cefoxitin and
+    // oxacillin are both methicillin markers for staphylococci, and cefotaxime and ceftriaxone
+    // share their CLSI and EUCAST breakpoints (except for N. gonorrhoeae). The result names it.
+    if (!parts.length && R.ORGS[rows[0].org] && R.ORGS[rows[0].org].staph && (d === "cefoxitin" || d === "oxacillin")) alt = d === "cefoxitin" ? "oxacillin" : "cefoxitin";
+    else if (!parts.length && (d === "cefotaxime" || d === "ceftriaxone") && rows[0].org !== "ngonorrhoeae") alt = d === "cefotaxime" ? "ceftriaxone" : "cefotaxime";
+    if (alt) { parts = kept(alt); if (parts.length) { d = alt; asKey = alt; } }
     if (!parts.length) return null;
+    var asOut = asKey ? { as: R.drugLabel(asKey), asKey: asKey } : {};
     // A figure is low-number when its row is, or when the drug itself was tested on fewer than
     // 30 isolates (e.g. linezolid tested on 5 of 61).
     var cellLow = function (o) { var c = o.cells[d]; return !rowUsable(t, o) || (c.nt != null && c.nt < R.M39_MIN); };
     if (parts.length === 1) {
       var o = parts[0], c = o.cells[d];
-      return extend(base, { s: c.s, n: c.nt || o.n, k: o.k, lowN: cellLow(o), src: t.pooled ? null : o.rows[0].src.id, org: o.org });
+      return extend(extend(base, asOut), { s: c.s, n: c.nt || o.n, k: o.k, lowN: cellLow(o), src: t.pooled ? null : o.rows[0].src.id, org: o.org });
     }
     var num = 0, den = 0, k = 0, low = false;
     parts.forEach(function (o) { var c = o.cells[d], w = c.nt || o.n || 0; num += c.s * w; den += w; k = Math.max(k, o.k || 1); if (cellLow(o)) low = true; });
     if (!den) return null;
-    return extend(base, { s: Math.round(10 * num / den) / 10, n: den, k: k, lowN: low || den < R.M39_MIN, src: t.pooled ? null : parts[0].rows[0].src.id,
+    return extend(extend(base, asOut), { s: Math.round(10 * num / den) / 10, n: den, k: k, lowN: low || den < R.M39_MIN, src: t.pooled ? null : parts[0].rows[0].src.id,
       combined: parts.map(function (o) { return R.orgShort(o.org); }) });
   }
   function extend(a, b) { var o = {}, k; for (k in a) o[k] = a[k]; for (k in b) o[k] = b[k]; return o; }
@@ -559,17 +563,54 @@
   }
 
   /* ------------------------------------------------------------- export --- */
+  /* What an exported table must carry so it can be read away from the app: the source and its
+   * period and citation (or the institutions pooled), the data version, every figure with a
+   * caution and why, and which rows or figures rest on fewer than 30 isolates. */
+  function exportInfo(t, scopeName) {
+    var srcs = {}, cautions = [], lowCells = [];
+    t.orgs.forEach(function (o) {
+      o.rows.forEach(function (r) { if (r.src) srcs[r.src.id] = r.src; });
+      Object.keys(o.cells).forEach(function (d) {
+        var c = o.cells[d], who = R.orgShort(o.org) + (o.pheno ? " (" + o.pheno + ")" : "") + ", " + R.drugLabel(d);
+        if (c.act === "caution" || c.act === "suppress") cautions.push({ org: o.org, pheno: o.pheno || null, drug: d, s: typeof c.s === "number" ? c.s : null, act: c.act, text: who + ": " + (c.act === "suppress" ? "not shown" : "caution") + ", " + (c.why || "failed a data check") });
+        else if (c.act === "keep" && !t.pooled && !(o.lowN || o.noN) && c.nt != null && c.nt < R.M39_MIN) lowCells.push(who + ": tested on " + c.nt + " isolates only");
+      });
+    });
+    var list = Object.keys(srcs).map(function (k) { return srcs[k]; }), one = !t.pooled && list.length === 1 ? list[0] : null;
+    var anyR = t.orgs.some(function (o) { return o.measure === "R" || Object.keys(o.cells).some(function (d) { return o.cells[d].fromR; }); });
+    return {
+      source: scopeName || scopeLabel(t.scope),
+      period: one ? (one.period || String(one.year || "")) : "latest edition of each institution" + (B && B.stats && B.stats.poolFrom ? ", data from " + B.stats.poolFrom + " or later" : ""),
+      citation: one ? (one.citation || "") : (t.pooled ? "Pooled from: " + list.map(function (x) { return x.short + " " + (x.edLabel || x.year); }).sort().join("; ") : list.map(function (x) { return x.citation || x.short; }).join(" | ")),
+      specimen: R.SPECIMENS[t.spec].label, setting: R.SETTINGS[t.set].label,
+      measure: "percent susceptible" + (anyR ? "; reports that print % resistant are shown as 100 minus % resistant, so intermediate results count as susceptible" : ""),
+      version: (B && B.version) || "", exported: new Date().toISOString().slice(0, 10),
+      cautions: cautions, lowCells: lowCells, pooled: !!t.pooled
+    };
+  }
   function csv(t, labels) {
     var q = function (x) { x = x == null ? "" : String(x); return /[",\n]/.test(x) ? '"' + x.replace(/"/g, '""') + '"' : x; };
-    var head = ["Organism", "Phenotype", "Isolates", "Institutions"].concat(t.drugs.map(function (d) { return R.drugLabel(d) + " %S"; }));
-    var lines = [head.map(q).join(",")];
+    var info = exportInfo(t, labels && labels.scope), lines = [];
+    [["Antibiogram exported from StewardMD", "decision support; verify against the source"], ["Source", info.source], ["Period", info.period], ["Citation", info.citation],
+      ["Specimen", info.specimen], ["Setting", info.setting], ["Figures", info.measure], ["Data version", info.version], ["Exported", info.exported],
+      ["Key", "IR = intrinsic resistance; a value ending in * failed a data check and is shown for reference only (see Checks below); blank = not reported, not relevant to the specimen, or not shown"]]
+      .forEach(function (kv) { lines.push(kv.map(q).join(",")); });
+    lines.push("");
+    var head = ["Organism", "Phenotype", "Isolates", "Under 30 isolates", "Combined by StewardMD"].concat(t.pooled ? ["Institutions"] : []).concat(t.drugs.map(function (d) { return R.drugLabel(d) + " %S"; }));
+    lines.push(head.map(q).join(","));
     t.orgs.forEach(function (o) {
-      lines.push([R.orgLabel(o.org), o.pheno || "", o.n == null ? "" : o.n, t.pooled ? o.k : 1].concat(t.drugs.map(function (d) {
-        var c = o.cells[d]; if (!c) return ""; if (c.act === "intrinsic") return "IR"; if (c.act !== "keep") return ""; return c.s;
+      var low = t.pooled ? o.lowOnly : (o.lowN || o.noN);
+      lines.push([R.orgLabel(o.org), o.pheno || "", o.n == null ? "" : o.n, low ? (o.noN ? "yes (no count given)" : "yes") : "", o.derived ? "yes" : ""].concat(t.pooled ? [o.k] : []).concat(t.drugs.map(function (d) {
+        var c = o.cells[d]; if (!c) return ""; if (c.act === "intrinsic") return "IR";
+        if (c.act === "caution" && typeof c.s === "number") return c.s + "*";
+        if (c.act !== "keep") return ""; return c.s;
       })).map(q).join(","));
     });
-    lines.push("");
-    lines.push(q("Source: " + (labels && labels.scope || t.scope) + "; specimen " + R.SPECIMENS[t.spec].label + "; setting " + R.SETTINGS[t.set].label + ". %S = percent susceptible. IR = intrinsic resistance. Blank = not reported or failed a data check. Exported from StewardMD (decision support; verify against the source)."));
+    if (info.cautions.length || info.lowCells.length) {
+      lines.push(""); lines.push(q("Checks"));
+      info.cautions.forEach(function (x) { lines.push(q(x.text)); });
+      info.lowCells.forEach(function (x) { lines.push(q(x)); });
+    }
     return lines.join("\n") + "\n";
   }
 
@@ -582,7 +623,7 @@
     table: table, cell: cell, phenotypes: phenotypes, wisca: wisca, rank: rank, mix: mix, trend: trend,
     susceptibility: susceptibility, legacyAbg: legacyAbg, specimenFor: specimenFor, specimenChain: specimenChain, settingFor: settingFor, synCtx: synCtx, synDrug: synDrug,
     pickStratum: pickStratum, pickStratumFor: pickStratumFor, orgRows: orgRows, usable: usable,
-    sourceById: sourceById, editions: editions, flagged: flagged, csv: csv, sortDrugs: sortDrugs,
+    sourceById: sourceById, editions: editions, flagged: flagged, csv: csv, exportInfo: exportInfo, sortDrugs: sortDrugs,
     localGet: localGet, localSave: localSave, localClear: localClear,
     REGION_LABEL: REGION_LABEL, _expand: expand, poolFrom: function () { return (B && B.stats && B.stats.poolFrom) || null; },
     _set: function (b) { B = expand(JSON.parse(JSON.stringify(b))); clearMemo(); addLocal(); return B; }

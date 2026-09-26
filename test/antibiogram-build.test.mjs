@@ -29,6 +29,10 @@ test("schema: unknown keys, bad drugs, bad values and s+r together all fail", ()
   assert.ok(e.some((x) => /not both/.test(x)));
   assert.ok(validateSource(base({ rows: one }), "Other.json").some((x) => /does not match the file name/.test(x)));
   assert.ok(validateSource(base({ rows: [{ spec: "blood", set: "all", org: "E. coli", n: 40, s: {}, trend: { amikacin: [[2024, 120]] } }] }), "T_2025.json").some((x) => /trend/.test(x)));
+  // The breakpoint standard is recorded as the source states it, and must name one.
+  assert.deepEqual(validateSource(base({ rows: one, breakpoints: "CLSI M100, 33rd edition" }), "T_2025.json"), []);
+  assert.ok(validateSource(base({ rows: one, breakpoints: "the 2023 guidelines" }), "T_2025.json").some((x) => /breakpoints must name the standard/.test(x)));
+  assert.equal(buildBundle([base({ rows: one, breakpoints: "CLSI 2024" })], []).bundle.sources[0].bp, "CLSI 2024");
 });
 
 test("% resistant reports become 100 - %R and are marked", () => {

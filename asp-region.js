@@ -8,6 +8,7 @@
  * sepsis, respiratory and ICU for VAP); every figure shows its isolate number and source,
  * rows under 30 isolates are marked, intrinsic resistance is never shown as a number, and
  * the AWaRe group of each agent is shown. ICMR stays the default; this is decision support.
+ * With the smd_abg_data kill switch off (antibiogram-flags.js) the console is left untouched.
  * ======================================================================== */
 (function () {
   "use strict";
@@ -155,6 +156,8 @@
 
   function enhance(synId) {
     try {
+      // Kill switch (smd_abg_data off): leave the console's own ICMR national block as it was.
+      if (window.HOSPITAL.abgDataOn && !window.HOSPITAL.abgDataOn()) return;
       var body = document.getElementById("aspBody"); if (!body) return;
       var secs = body.querySelectorAll(".asp-sec"), target = null;
       [].forEach.call(secs, function (sec) { var h = sec.querySelector(".asp-sec-h"); if (h && /antibiogram/i.test(h.textContent)) target = sec; });

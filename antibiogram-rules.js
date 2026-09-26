@@ -638,15 +638,26 @@
     if (sp.length) res.warnings.unshift("Specimen values not recognised, counted under all specimens: " + sp.slice(0, 12).join(", ") + (sp.length > 12 ? " and " + (sp.length - 12) + " more" : "") + ". Use blood, urine, respiratory, pus, sterile fluid, CSF or stool.");
     if (se.length) res.warnings.unshift("Setting values not recognised, counted under all settings: " + se.slice(0, 12).join(", ") + (se.length > 12 ? " and " + (se.length - 12) + " more" : "") + ". Use OPD, ward or ICU.");
   }
-  function importSummaryCsv(text) {
-    var t = parseCsv(text), res = { rows: [], errors: [], warnings: [] }, unknown = { spec: {}, set: {} };
+  /* opts.measure "R" reads the antibiotic columns as % resistant and stores 100 minus each (the
+   * default is % susceptible). res.suggest names the other reading when the figures contradict the
+   * chosen one: intrinsic resistance printed near 100 in a "% susceptible" file (Klebsiella and
+   * ampicillin 100) or near 0 in a "% resistant" one, or a header that says "resistant". */
+  function importSummaryCsv(text, opts) {
+    var measure = opts && opts.measure === "R" ? "R" : "S";
+    var t = parseCsv(text), res = { rows: [], errors: [], warnings: [], measure: measure, suggest: null }, unknown = { spec: {}, set: {} }, irRaw = [];
     if (t.length < 2) { res.errors.push("The file has no data rows."); return res; }
     var h = t[0], cOrg = findCol(h, ["organism", "organisms", "pathogen", "bacteria", "isolate"]), cSpec = findCol(h, ["specimen", "sample", "specimen type", "sample type"]),
       cSet = findCol(h, ["setting", "location", "ward", "area", "unit"]), cN = findCol(h, ["n", "isolates", "number", "no. of isolates", "count", "total"]);
     if (cOrg < 0) { res.errors.push("No 'organism' column found."); return res; }
     if (cN < 0) res.warnings.push("No 'n' (isolate count) column: rows cannot be pooled or checked against the 30-isolate rule.");
     var drugCols = [];
-    h.forEach(function (x, i) { if (i === cOrg || i === cSpec || i === cSet || i === cN) return; var d = canonDrug(x); if (d) drugCols.push({ i: i, d: d }); else if (String(x).trim()) res.warnings.push("Column '" + x + "' is not a recognised antibiotic and was ignored."); });
+    // "Meropenem %S", "MEM (%R)", "Amikacin % resistant": the drug is read without the unit.
+    var unit = /\(?\s*%\s*[SR]\b\s*\)?|\(\s*%\s*\)|%|\b(percent\s+)?(susceptible|sensitive|sensitivity|resistant|resistance)\b/gi;
+    h.forEach(function (x, i) {
+      if (i === cOrg || i === cSpec || i === cSet || i === cN) return;
+      var d = canonDrug(x) || canonDrug(String(x || "").replace(unit, " ").replace(/\s+/g, " ").trim());
+      if (d) drugCols.push({ i: i, d: d }); else if (String(x).trim()) res.warnings.push("Column '" + x + "' is not a recognised antibiotic and was ignored.");
+    });
     if (!drugCols.length) { res.errors.push("No antibiotic columns recognised."); return res; }
     for (var r = 1; r < t.length; r++) {
       var line = t[r], o = canonOrg(line[cOrg]);
@@ -660,11 +671,23 @@
         var raw = String(line[dc.i] || "").replace("%", "").trim(); if (raw === "" || raw === "-" || /^n\/?a$/i.test(raw)) return;
         var v = parseFloat(raw); if (isNaN(v)) { res.warnings.push("Row " + (r + 1) + " " + drugLabel(dc.d) + ": '" + raw + "' is not a number; skipped."); return; }
         if (v < 0 || v > 100) { res.warnings.push("Row " + (r + 1) + " " + drugLabel(dc.d) + ": " + v + " is outside 0 to 100; skipped."); return; }
-        row.s[dc.d] = v;
+        if (intrinsicReason(o.key, dc.d)) irRaw.push({ v: v, what: orgShort(o.key) + " and " + drugLabel(dc.d).toLowerCase() + " " + v });
+        row.s[dc.d] = measure === "R" ? Math.round(10 * (100 - v)) / 10 : v;
       });
       res.rows.push(row);
     }
     unknownWarn(res, unknown);
+    // Does the file read the other way? Intrinsic resistance is the tell: near 0 when the figures
+    // are % susceptible, near 100 when they are % resistant.
+    var hiR = irRaw.filter(function (x) { return x.v >= 70; }), loR = irRaw.filter(function (x) { return x.v <= 30; });
+    var hdr = h.map(function (x) { return String(x || ""); }).filter(function (x) { return /resist|%\s*r\b|\br%/i.test(x); })[0];
+    if (measure === "S" && ((irRaw.length >= 2 && hiR.length >= 0.75 * irRaw.length) || (hdr && !(irRaw.length >= 2 && loR.length >= 0.75 * irRaw.length)))) {
+      res.suggest = "R";
+      res.why = hiR.length ? "these look like % resistant figures: " + hiR.slice(0, 3).map(function (x) { return x.what; }).join(", ") + " would be intrinsic resistance read as % susceptible" : "the header mentions resistance ('" + hdr + "')";
+    } else if (measure === "R" && irRaw.length >= 2 && loR.length >= 0.75 * irRaw.length) {
+      res.suggest = "S";
+      res.why = "these look like % susceptible figures: " + loR.slice(0, 3).map(function (x) { return x.what; }).join(", ") + " would be intrinsic resistance read as % resistant";
+    }
     return res;
   }
 
@@ -750,6 +773,39 @@
       "Escherichia coli,urine,opd,120,92,70,48,76,30,32,35,28,45,90,95,95,,,,\n" +
       "Staphylococcus aureus,blood,icu,40,,55,,,,,,20,60,,,,,100,100,45\n";
   }
+  /* CLSI breakpoint revisions that move % susceptible without any change in the bacteria, so a
+   * trend or a pool that spans one can show a step that is not resistance. Years are the M100
+   * edition published (laboratories adopt editions later, at different times). Sources: Van et
+   * al, J Clin Microbiol 2019;57:e02072-18 (fluoroquinolones, M100 29th edition); CLSI M100 30th
+   * edition 2020 and CLSI MR01 (colistin and polymyxin B: intermediate and resistant only); Tamma et al, Clin Infect
+   * Dis 2023;77:1585-90 (piperacillin-tazobactam for Enterobacterales, M100 32nd edition 2022);
+   * Schuetz et al, J Clin Microbiol 2025;63:e0162323 (M100 32nd and 33rd editions: aminoglycosides
+   * for Enterobacterales and P. aeruginosa, piperacillin-tazobactam for P. aeruginosa, 2023);
+   * Aggarwal et al, Indian J Med Microbiol 2024;49:100602 (Indian isolates re-read with the 2023
+   * aminoglycoside breakpoints: gentamicin 14.7 and amikacin 21.7 points lower). */
+  var BP_CHANGES = [
+    { year: 2019, drugs: ["ciprofloxacin", "levofloxacin"], orgs: function (o) { return (orgGroup(o) === "entero" && SALMONELLA_SHIGELLA.indexOf(o) < 0 && o.indexOf("salmonella") !== 0) || o === "paeruginosa"; },
+      text: "CLSI lowered the ciprofloxacin and levofloxacin breakpoints for Enterobacterales and P. aeruginosa in 2019 (M100 29th edition)" },
+    { year: 2020, drugs: ["colistin", "polymyxin_b"], orgs: function (o) { var g = orgGroup(o); return g === "entero" || g === "nonferm"; },
+      text: "Since 2020 (M100 30th edition) CLSI gives colistin and polymyxin B only intermediate and resistant categories, so later figures are the share intermediate, not susceptible" },
+    { year: 2022, drugs: ["piptazo"], orgs: function (o) { return orgGroup(o) === "entero"; },
+      text: "CLSI lowered the piperacillin-tazobactam breakpoints for Enterobacterales in 2022 (M100 32nd edition)" },
+    { year: 2023, drugs: ["piptazo"], orgs: function (o) { return o === "paeruginosa"; },
+      text: "CLSI revised the piperacillin-tazobactam breakpoints for P. aeruginosa in 2023 (M100 33rd edition)" },
+    { year: 2023, drugs: ["gentamicin", "tobramycin", "amikacin"], orgs: function (o) { return orgGroup(o) === "entero" || o === "paeruginosa"; },
+      text: "CLSI lowered the gentamicin, tobramycin and amikacin breakpoints for Enterobacterales and P. aeruginosa in 2023 (M100 33rd edition); re-read with them, Indian Enterobacterales lost about 15 points of gentamicin and 22 of amikacin susceptibility" }
+  ];
+  // Revisions a span of data years [from, to] may straddle: published within it, or up to a year
+  // before its start (adoption lags the edition).
+  function bpChanges(orgKey, drugKey, from, to) {
+    var out = [];
+    BP_CHANGES.forEach(function (c) {
+      if (c.drugs.indexOf(drugKey) < 0 || !c.orgs(orgKey)) return;
+      if (to >= c.year && from <= c.year + 1) out.push({ year: c.year, text: c.text });
+    });
+    return out;
+  }
+
   function isolateTemplate() {
     return "patient_id,date,specimen,location,organism,AMK,CRO,MEM,CIP,SXT,VAN,FOX\n" +
       "P001,2026-01-04,urine,opd,Escherichia coli,S,R,S,R,S,,\n" +
@@ -764,6 +820,6 @@
     intrinsicReason: intrinsicReason, achievable: achievable, validateRow: validateRow,
     latestPerInstitution: latestPerInstitution, pool: pool, phenoRates: phenoRates, wisca: wisca,
     parseCsv: parseCsv, importSummaryCsv: importSummaryCsv, importIsolateCsv: importIsolateCsv,
-    summaryTemplate: summaryTemplate, isolateTemplate: isolateTemplate
+    summaryTemplate: summaryTemplate, isolateTemplate: isolateTemplate, bpChanges: bpChanges, BP_CHANGES: BP_CHANGES
   };
 });

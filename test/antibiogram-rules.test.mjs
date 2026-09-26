@@ -277,3 +277,37 @@ test("hospital import: laboratory specimen and location names are recognised, th
   assert.ok(r.warnings.some((w) => /Specimen values not recognised.*xx/.test(w)));
   assert.ok(r.warnings.some((w) => /Setting values not recognised.*OT/.test(w)));
 });
+
+test("CLSI breakpoint revisions a trend or pool can straddle (fluoroquinolones 2019, polymyxins 2020, pip-tazo 2022/2023, aminoglycosides 2023)", () => {
+  const yrs = (o, d, a, b) => R.bpChanges(o, d, a, b).map((x) => x.year);
+  assert.deepEqual(yrs("ecoli", "amikacin", 2021, 2024), [2023]);
+  assert.deepEqual(yrs("paeruginosa", "tobramycin", 2023, 2025), [2023], "adoption lags the edition: a series starting in 2023 or 2024 can still straddle it");
+  assert.deepEqual(yrs("ecoli", "amikacin", 2017, 2021), [], "a series ending before the edition cannot");
+  assert.deepEqual(yrs("klebsiella", "piptazo", 2020, 2023), [2022]);
+  assert.deepEqual(yrs("paeruginosa", "piptazo", 2020, 2023), [2023]);
+  assert.deepEqual(yrs("ecoli", "ciprofloxacin", 2017, 2020), [2019]);
+  assert.deepEqual(yrs("salmonella_typhi", "ciprofloxacin", 2017, 2024), [], "the 2019 fluoroquinolone revision excluded Salmonella");
+  assert.deepEqual(yrs("acinetobacter", "colistin", 2018, 2021), [2020]);
+  assert.deepEqual(yrs("saureus", "gentamicin", 2017, 2025), [], "staphylococcal aminoglycoside breakpoints were not revised");
+  assert.ok(R.BP_CHANGES.every((c) => !/[\u2013\u2014]/.test(c.text)), "no dashes in app text");
+});
+
+test("summary import: a % resistant file read as % susceptible is caught (intrinsic resistance near 100), and reads correctly as % resistant", () => {
+  const csv = "organism,specimen,setting,n,AMP,CRO,MEM\nKlebsiella pneumoniae,blood,icu,120,100,80,45\nPseudomonas aeruginosa,blood,icu,90,,98,40\n";
+  const asS = R.importSummaryCsv(csv);
+  assert.equal(asS.suggest, "R");
+  assert.match(asS.why, /Klebsiella and ampicillin 100/);
+  const asR = R.importSummaryCsv(csv, { measure: "R" });
+  assert.equal(asR.suggest, null);
+  assert.equal(asR.measure, "R");
+  const k = asR.rows.find((x) => x.org === "klebsiella");
+  assert.equal(k.s.meropenem, 55, "stored as 100 minus % resistant");
+  assert.equal(R.validateRow(k).cells.ampicillin.act, "intrinsic");
+  // A % susceptible file read as % resistant is caught the other way round.
+  assert.equal(R.importSummaryCsv("organism,specimen,setting,n,AMP,CRO\nKlebsiella pneumoniae,blood,icu,120,0,20\nPseudomonas aeruginosa,blood,icu,90,,2\n", { measure: "R" }).suggest, "S");
+  // Columns named with their unit still resolve; a header that says "resistant" prompts the question.
+  const h = R.importSummaryCsv("organism,specimen,setting,n,Meropenem % resistant,AMK (%R)\nEscherichia coli,urine,opd,300,5,10\n");
+  assert.deepEqual(Object.keys(h.rows[0].s).sort(), ["amikacin", "meropenem"]);
+  assert.equal(h.suggest, "R");
+  assert.equal(R.importSummaryCsv("organism,specimen,setting,n,Meropenem %S\nEscherichia coli,urine,opd,300,95\n").suggest, null);
+});

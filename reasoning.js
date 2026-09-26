@@ -2396,7 +2396,7 @@
   // VAP); only figures from at least 30 isolates are shown, each with its isolate number, and
   // the national fallback is omitted (the national baseline is already on the page).
   // % resistant = 100 - % susceptible.
-  var RSHORT = { piptazo: "Pip-tazo", cefotaxime: "Cefotaxime", ceftriaxone: "Ceftriaxone", ceftazidime: "Ceftazidime", cefepime: "Cefepime", meropenem: "Meropenem", imipenem: "Imipenem", ertapenem: "Ertapenem", ciprofloxacin: "Cipro", levofloxacin: "Levo", amikacin: "Amikacin", gentamicin: "Gentamicin", colistin: "Colistin", cotrimoxazole: "Co-trimox", nitrofurantoin: "Nitrofur", fosfomycin: "Fosfomycin", cefoxitin: "Cefoxitin (MRSA)", vancomycin: "Vancomycin", linezolid: "Linezolid", teicoplanin: "Teicoplanin", ampicillin: "Ampicillin", penicillin: "Penicillin", azithromycin: "Azithro" };
+  var RSHORT = { piptazo: "Pip-tazo", cefotaxime: "Cefotaxime", ceftriaxone: "Ceftriaxone", ceftazidime: "Ceftazidime", cefepime: "Cefepime", meropenem: "Meropenem", imipenem: "Imipenem", ertapenem: "Ertapenem", ciprofloxacin: "Cipro", levofloxacin: "Levo", amikacin: "Amikacin", gentamicin: "Gentamicin", colistin: "Colistin", cotrimoxazole: "Co-trimox", nitrofurantoin: "Nitrofur", fosfomycin: "Fosfomycin", cefoxitin: "Cefoxitin (MRSA)", oxacillin: "Oxacillin (MRSA)", vancomycin: "Vancomycin", linezolid: "Linezolid", teicoplanin: "Teicoplanin", ampicillin: "Ampicillin", penicillin: "Penicillin", azithromycin: "Azithro" };
   var RPANEL = ["ampicillin", "piptazo", "cefotaxime", "ceftriaxone", "cefepime", "meropenem", "imipenem", "ciprofloxacin", "amikacin", "colistin", "cotrimoxazole", "nitrofurantoin", "cefoxitin", "vancomycin", "linezolid", "azithromycin"];
   function rColor(R) { return R >= 70 ? "#B91C1C" : R >= 50 ? "#EA580C" : R >= 25 ? "#D97706" : R >= 10 ? "#65a30d" : "#047857"; }
   var R_SPEC = { blood: "blood", urine: "urine", respiratory: "respiratory", pus: "pus and wounds", sterile: "sterile fluids", stool: "stool", all: "all specimens" };
@@ -2415,11 +2415,15 @@
       var seen = {}, rows = [];
       orgs.forEach(function (orgName) {
         if (rows.length >= 5 || seen[orgName]) return; seen[orgName] = 1;
-        var cells = [], n = 0, k = 0, combined = null, used = null;
+        var cells = [], n = 0, k = 0, combined = null, used = null, shownKey = {};
         RPANEL.forEach(function (dk) {
           if (S && S.synDrug && S.synDrug(lead.id, dk)) return;          // e.g. no nitrofurantoin for pyelonephritis
           var r = window.HOSPITAL.getSusceptibility(orgName, dk, ctx);
           if (!r || r.national || r.s == null) return;                   // genuine profile values only
+          // A report that tests cefotaxime answers for ceftriaxone too (same breakpoints): one chip,
+          // named for the agent actually tested.
+          var key = r.asKey || dk;
+          if (shownKey[key]) return; shownKey[key] = 1;
           if (r.intrinsic) {
             // Only surprising intrinsic resistance is worth a chip (e.g. Enterococcus and
             // cephalosporins, Klebsiella and ampicillin), not Gram-positive agents for Gram-negatives.
@@ -2433,7 +2437,7 @@
           if (r.combined) combined = r.combined;
           if (!used && r.spec) used = r;          // same organism: same stratum for every drug
           var R = Math.round(100 - r.s);
-          cells.push('<span style="display:inline-block;font:700 10.5px var(--sans,system-ui);color:#fff;background:' + rColor(R) + ';padding:2px 7px;border-radius:999px;margin:3px 4px 0 0">' + esc(RSHORT[dk] || dk) + ' ' + R + '%R</span>');
+          cells.push('<span style="display:inline-block;font:700 10.5px var(--sans,system-ui);color:#fff;background:' + rColor(R) + ';padding:2px 7px;border-radius:999px;margin:3px 4px 0 0">' + esc(RSHORT[key] || key) + ' ' + R + '%R</span>');
         });
         if (!cells.length) return;
         // Each organism carries its own stratum: reports print organism groups at different

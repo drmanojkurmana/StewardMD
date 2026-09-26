@@ -208,10 +208,18 @@
   };
   function canonOrg(name) { var k = String(name || "").toLowerCase().trim(); return ORG_ALIAS[k] || name; }
   /* ctx (optional): {spec, set} to ask for a specimen (urine for a UTI) and setting. */
+  // Kill switch (antibiogram-flags.js smd_abg_data, default on): off, decision support ignores
+  // the validated store and uses the built-in ICMR 2024 national summary, as before the rebuild.
+  // Read directly when the flag module has not run yet (it loads after this file).
+  function dataOn() {
+    var F = window.SMD_ABG_FLAGS; if (F && F.data) return F.data();
+    try { var q = new URLSearchParams(location.search).get("abgdata"); if (q === "0" || q === "false") return false; if (q === "1" || q === "true") return true; } catch (e) {}
+    try { return localStorage.getItem("smd_abg_data") !== "0"; } catch (e) { return true; }
+  }
   function getAntibiogram(ctx) {
     var h = current(), S = window.ABG_STORE;
     ctx = ctx || {};
-    if (h && h.abgScope && S && S.loaded && S.loaded()) {
+    if (dataOn() && h && h.abgScope && S && S.loaded && S.loaded()) {
       try { var a = S.legacyAbg(h.abgScope, ctx.spec, ctx.set); if (a && a.org && Object.keys(a.org).length) return a; } catch (e) {}
     }
     if (h && h.abg) return h.abg;
@@ -232,19 +240,20 @@
   /* {s, n, k, src, spec, set, pooled, intrinsic} from the active profile (validated, at least
    * 30 isolates), else the ICMR national summary ({..., national:true}), else null. */
   function getSusceptibility(orgName, drugKey, ctx) {
-    var h = current(), S = window.ABG_STORE;
+    var h = current(), S = window.ABG_STORE, useStore = dataOn() && h && h.abgScope && S && S.loaded && S.loaded();
     ctx = ctx || {};
-    if (h && h.abgScope && S && S.loaded && S.loaded()) {
+    if (useStore) {
       try {
         var r = S.susceptibility(orgName, drugKey, { scope: h.abgScope, spec: ctx.spec, set: ctx.set, cohort: ctx.cohort, only: ctx.only, noAll: ctx.noAll });
         if (r && r.intrinsic) return { s: 0, intrinsic: true, why: r.why, spec: r.spec, set: r.set };
-        if (r && !r.lowN) return { s: r.s, n: r.n, k: r.k, src: r.src, spec: r.spec, set: r.set, cohort: r.cohort, specMatch: r.specMatch, pooled: r.pooled, combined: r.combined };
+        // as/asKey: the report printed an equivalent agent (cefotaxime for ceftriaxone, oxacillin for cefoxitin).
+        if (r && !r.lowN) return { s: r.s, n: r.n, k: r.k, src: r.src, spec: r.spec, set: r.set, cohort: r.cohort, specMatch: r.specMatch, pooled: r.pooled, combined: r.combined, as: r.as || null, asKey: r.asKey || null };
       } catch (e) {}
     }
-    var ab = getAntibiogram(ctx);
-    var hit = (h && h.abgScope && S && S.loaded && S.loaded()) ? null : (lookIn(ab, orgName, drugKey) || lookIn(ab, canonOrg(orgName), drugKey));
+    var ab = getAntibiogram(ctx), nat = window.ASP_ABG && window.ASP_ABG.national;
+    // The national summary is never passed off as the profile's own figures.
+    var hit = (useStore || ab === nat) ? null : (lookIn(ab, orgName, drugKey) || lookIn(ab, canonOrg(orgName), drugKey));
     if (hit) return hit;
-    var nat = window.ASP_ABG && window.ASP_ABG.national;
     var nh = lookIn(nat, orgName, drugKey) || lookIn(nat, canonOrg(orgName), drugKey);
     if (nh) { nh.national = true; return nh; }
     return null;
@@ -288,7 +297,7 @@
 
   window.HOSPITAL = {
     list: HOSPITALS, current: current, setProfile: setProfile, getPolicy: getPolicy,
-    getAntibiogram: getAntibiogram, getSusceptibility: getSusceptibility, canonOrg: canonOrg,
+    getAntibiogram: getAntibiogram, getSusceptibility: getSusceptibility, canonOrg: canonOrg, abgDataOn: dataOn,
     profileForScope: profileForScope, refreshProfiles: refreshProfiles, optionGroups: optionGroups, optionsHTML: optionsHTML,
     awareClass: awareClass,
     stewardshipRules: [

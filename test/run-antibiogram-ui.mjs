@@ -7,6 +7,9 @@
 //     isolate numbers, AWaRe, provenance on tap
 //   Syndrome reasoning: the resistance panel for the lead diagnosis, link to the full antibiogram
 //   flag smd_abg_v2 = "0": the previous resistance view still works on the new data
+//   kill switch smd_abg_data = "0": console and reasoning fall back to the built-in national summary
+//   keyboard access to every figure, search feedback, breakpoint notes, CSV contents, print label,
+//   a % resistant import caught before it is saved as % susceptible
 //   no em dash in the new screens
 //   node test/run-antibiogram-ui.mjs      (CHROME=/path/to/chrome to override the browser)
 import { spawn } from 'node:child_process';
@@ -32,6 +35,8 @@ const call = (method, params = {}) => new Promise((resolve) => { const n = ++id;
 const ev = async (expression) => { const r = await call('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true }); if (r.result?.exceptionDetails) throw Error(JSON.stringify(r.result.exceptionDetails).slice(0, 600)); return r.result?.result?.value; };
 const ok = (pass, label) => { console.log(`${pass ? 'PASS' : 'FAIL'} ${label}`); if (!pass) failures++; };
 const until = async (expr, ms = 10000) => { for (let t = 0; t < ms; t += 100) { try { if (await ev(expr)) return true; } catch { /* page busy */ } await sleep(100); } return false; };
+// A real key press through CDP (keyDown with its text fires keypress, which activates a button).
+const key = async (k) => { const vk = k === 'Enter' ? 13 : 32, t = k === 'Enter' ? '\r' : ' '; await call('Input.dispatchKeyEvent', { type: 'keyDown', key: k, code: k === ' ' ? 'Space' : k, windowsVirtualKeyCode: vk, nativeVirtualKeyCode: vk, text: t, unmodifiedText: t }); await call('Input.dispatchKeyEvent', { type: 'keyUp', key: k, code: k === ' ' ? 'Space' : k, windowsVirtualKeyCode: vk, nativeVirtualKeyCode: vk }); };
 const click = (sel) => ev(`(()=>{const b=document.querySelector(${JSON.stringify(sel)});if(!b)return false;b.click();return true})()`);
 const text = (sel) => ev(`(document.querySelector(${JSON.stringify(sel)})||{}).innerText||''`);
 const armToasts = () => ev(`window.__toasts=[];if(!window.toast||!window.toast.__rec){const t0=window.toast;const f=function(m){window.__toasts.push(String(m));try{return t0&&t0.apply(this,arguments)}catch(e){}};f.__rec=1;window.toast=f;}1`);
@@ -71,10 +76,14 @@ try {
   await click('.v2-chips button[data-v2="set"][data-v="icu"]');
   ok(await until(`/ICU/.test(document.querySelector('.v2-t caption').textContent)`), 'table caption follows the stratum');
   await shot('abg-skims-blood-icu');
-  const firstCell = await ev(`(()=>{const c=document.querySelector('.v2-t td.v2-c[data-v2="cell"]:not(.v2-ir):not(.v2-x)');return c?{t:c.textContent,org:c.dataset.org,drug:c.dataset.drug}:null})()`);
+  const CELL = '.v2-t td.v2-c:not(.v2-ir):not(.v2-x):not(.v2-na) button[data-v2="cell"]';
+  const firstCell = await ev(`(()=>{const c=document.querySelector('${CELL}');return c?{t:c.textContent,org:c.dataset.org,drug:c.dataset.drug,label:c.getAttribute('aria-label')}:null})()`);
   ok(!!firstCell, 'a value cell is present: ' + JSON.stringify(firstCell));
-  await ev(`document.querySelector('.v2-t td.v2-c[data-v2="cell"]:not(.v2-ir):not(.v2-x)').click()`);
-  ok(await until(`document.querySelector('#abgV2Sheet').classList.contains('on')`), 'tapping a cell opens its sheet');
+  ok(/, .+: [\d.]+% susceptible/.test(firstCell.label || ''), 'each figure is a button named for screen readers: ' + firstCell.label);
+  ok(await ev(`[...document.querySelectorAll('.v2-t td.v2-c:not(.v2-na)')].filter(td=>td.textContent.trim()).every(td=>td.querySelector('button[data-v2="cell"]'))`), 'every figure in the table is reachable by keyboard');
+  await ev(`document.querySelector('${CELL}').focus();1`);
+  await key('Enter');
+  ok(await until(`document.querySelector('#abgV2Sheet').classList.contains('on')`), 'Enter on a focused figure opens its sheet (keyboard, through real key events)');
   const sheet = await text('#abgV2Sheet');
   ok(/SKIMS|Sher-i-Kashmir/i.test(sheet) && /isolates/.test(sheet), 'the sheet names the source and the isolates');
   ok(!/20\d\d\d+ isolates/.test(sheet), 'the edition year and the isolate count stay apart on screen (no "2025487 isolates")');
@@ -82,9 +91,20 @@ try {
   await click('#abgV2Sheet [data-v2="sheet-close"]');
   const sVal = parseFloat(firstCell.t);
   await click('[data-v2="mode"][data-v="r"]');
-  const rVal = await ev(`parseFloat(document.querySelector('.v2-t td.v2-c[data-org="${firstCell.org}"][data-drug="${firstCell.drug}"]').textContent)`);
+  const rVal = await ev(`parseFloat(document.querySelector('.v2-t button[data-v2="cell"][data-org="${firstCell.org}"][data-drug="${firstCell.drug}"]').textContent)`);
   ok(Math.abs(rVal - (100 - sVal)) < 0.11, `% resistant toggle: ${sVal} susceptible shows as ${rVal} resistant`);
   await click('[data-v2="mode"][data-v="s"]');
+  // Search: says what it matched, and says so when nothing matched instead of silently showing all.
+  const typeQ = (q) => ev(`(()=>{const i=document.querySelector('#v2Q');i.value=${JSON.stringify(q)};i.dispatchEvent(new Event('input',{bubbles:true}));return 1})()`);
+  await typeQ('kleb');
+  ok(await until(`/Showing \\d+ of \\d+ organisms matching "kleb"/.test(document.querySelector('#abgBody').innerText)`), 'search says what it filtered');
+  await typeQ('zzqq');
+  ok(await until(`/Nothing in this table matches "zzqq"/.test(document.querySelector('#abgBody').innerText)`), 'a search that matches nothing says so');
+  await click('[data-v2="q-clear"]');
+  ok(await until(`document.querySelector('#v2Q').value===''&&!/matches "zzqq"/.test(document.querySelector('#abgBody').innerText)`), 'the search can be cleared in one tap');
+  ok(await ev(`[...document.querySelectorAll('.v2-foot .v2-btn')].some(b=>b.textContent==='Print or save as PDF')`), 'on the web the export button says it prints (it does not save an .html file as a PDF)');
+  const csv = await ev(`ABG_STORE.csv(ABG_STORE.table('inst:SKIMS_SRINAGAR','blood','icu'),{scope:'SKIMS'})`);
+  ok(/^Antibiogram exported from StewardMD/.test(csv) && /\nPeriod,/.test(csv) && /\nCitation,/.test(csv) && /\nData version,[0-9a-f]{12}\n/.test(csv) && /Under 30 isolates/.test(csv), 'CSV export carries period, citation, data version and a low-count column');
 
   /* ---- the default national profile: the ICMR AMRSN report ---- */
   const icmrScope = await ev(`(HOSPITAL.list.find(h=>h.id==='ICMR')||{}).abgScope||''`);
@@ -98,6 +118,13 @@ try {
   await ev(`(()=>{const s=document.querySelector('#v2Scope');s.value='india';s.dispatchEvent(new Event('change',{bubbles:true}));})()`);
   ok(await until(`/Pooled from/.test(document.querySelector('.v2-meta')?.innerText||'')`), 'India pooled view explains the pool');
   ok(await ev(`HOSPITAL.current().id==='INDIA_POOLED'`), 'choosing a source moves the app-wide profile');
+  await click('.v2-chips button[data-v2="spec"][data-v="all"]');
+  await until(`!!document.querySelector('.v2-wis')`);
+  const wis = await text('.v2-wis');
+  ok(/grew from any specimen/.test(wis) && !/specimens specimens/.test(await text('#abgBody')), 'coverage wording reads "grew from any specimen"');
+  // A pooled aminoglycoside figure spans the 2023 CLSI revision: the sheet says so.
+  const amk = await ev(`(()=>{ABG_V2.state.spec='all';ABG_V2.state.set='all';const h=ABG_V2._cellSheet('india','ecoli','','amikacin');const d=document.createElement('div');d.innerHTML=h;return d.innerText})()`);
+  ok(/lowered the gentamicin, tobramycin and amikacin breakpoints/.test(amk) && /different CLSI editions/.test(amk), 'a pooled amikacin figure notes the 2023 breakpoint change');
   await shot('abg-india-pooled');
 
   /* ---- Sources ---- */
@@ -106,6 +133,8 @@ try {
   ok(await ev(`/checked twice against the document/.test(document.querySelector('#abgBody').innerText)`), 'verification counts are stated per source');
   await ev(`[...document.querySelectorAll('.v2-src button[data-v2="src"]')].find(b=>/SKIMS/.test(b.textContent))?.click()`);
   ok(await until(`/own tables disagree/i.test(document.querySelector('#abgV2Sheet').innerText)`), "a source's own inconsistencies are shown");
+  ok(/Breakpoints: (CLSI|EUCAST|the source does not state)/.test(await text('#abgV2Sheet')), 'the source sheet says which breakpoints the source used, or that it does not say');
+  ok(await ev(`ABG_STORE.sourceById('SKIMS_2023').bp==='CLSI M100, 33rd edition'&&!ABG_STORE.sourceById('SKIMS_2025').bp`), 'the edition is recorded as each document states it (SKIMS 2023: CLSI M100 33rd; 2025: not stated)');
   // A sheet opened again after another closed must fill the screen (dialog-motion once left scale(0.97) on it).
   ok(await until(`(()=>{const o=document.querySelector('#abgV2Sheet'),s=o.querySelector('.v2-sh');return getComputedStyle(o).transform==='none'&&Math.abs(s.getBoundingClientRect().bottom-innerHeight)<2})()`), 'the reopened sheet is not scaled and reaches the bottom of the screen');
   await shot('abg-source-sheet');
@@ -114,6 +143,13 @@ try {
   /* ---- My hospital: import, check, save, use, remove ---- */
   await click('#abgOverlay .abg-tab[data-tab="mine"]');
   ok(await until(`!!document.querySelector('#v2Paste')`), 'My hospital tab renders');
+  // A % resistant table pasted as % susceptible is caught before it is saved.
+  await ev(`document.querySelector('#v2Paste').value='organism,specimen,setting,n,AMP,CRO,MEM\\nKlebsiella pneumoniae,blood,icu,120,100,80,45\\nPseudomonas aeruginosa,blood,icu,90,,98,40\\n';1`);
+  await click('[data-v2="imp-check"]');
+  ok(await until(`/look like % resistant figures/.test(document.querySelector('#abgBody').innerText)`), 'a % resistant file read as % susceptible is questioned');
+  await click('[data-v2="imp-measure"][data-rerun="1"]');
+  ok(await until(`/rows ready/.test(document.querySelector('#abgBody').innerText)&&!/look like % resistant/.test(document.querySelector('#abgBody').innerText)&&document.querySelector('[data-v2="imp-measure"][data-v="R"]').classList.contains('on')`), 'one tap re-reads it as % resistant');
+  await click('[data-v2="imp-measure"][data-v="S"]');
   await ev(`document.querySelector('#v2Name').value='Test City Hospital';document.querySelector('#v2Paste').value=ABG_RULES.summaryTemplate();1`);
   await click('[data-v2="imp-check"]');
   ok(await until(`/rows ready/.test(document.querySelector('#abgBody').innerText)`), 'the pasted table is checked');
@@ -183,6 +219,19 @@ try {
   ok(await ev(`document.querySelectorAll('#abgBody .abg-oc').length>0`), 'flag off: it still lists organisms');
   await shot('abg-flag-off');
   await ev(`localStorage.removeItem('smd_abg_v2');1`);
+
+  /* ---- kill switch smd_abg_data = 0: decision support uses the built-in national summary ---- */
+  await ev(`localStorage.setItem('smd_abg_data','0');HOSPITAL.setProfile(${JSON.stringify(skimsId)});ABG.close();1`);
+  await call('Page.reload');
+  ok(await until('!!(window.ABG&&window.HOSPITAL&&window.ASP&&window.SMD_ABG_FLAGS)', 30000), 'reloaded with the data kill switch off');
+  await ev(`['introPoster','splash','accountGate','introOverlay','smdBootSplash'].forEach(k=>document.getElementById(k)?.remove());1`);
+  await until('window.ABG_STORE&&ABG_STORE.loaded()', 15000);
+  ok(await ev(`SMD_ABG_FLAGS.data()===false&&HOSPITAL.abgDataOn()===false`), 'the kill switch reads off');
+  const ks = await ev(`JSON.stringify(HOSPITAL.getSusceptibility('Escherichia coli','meropenem'))`);
+  ok(/"national":true/.test(ks || ''), 'figures come from the built-in national summary, marked national: ' + ks);
+  await ev(`ASP.open('SEPSIS');1`); await sleep(800);
+  ok(await ev(`!document.querySelector('.asp-region')`), 'the console keeps its own ICMR block (no rebuilt panel)');
+  await ev(`try{ASP.close&&ASP.close()}catch(e){};localStorage.removeItem('smd_abg_data');HOSPITAL.setProfile('ICMR');1`);
 } catch (e) {
   console.log('ERROR', e.message); failures++;
 } finally {

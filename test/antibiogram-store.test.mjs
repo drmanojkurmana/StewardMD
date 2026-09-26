@@ -248,3 +248,37 @@ test("pools use recent data: an institution's latest antibiogram older than the 
   assert.equal(ec.cells.meropenem.s, 65, "the 2012 antibiogram does not move the pooled figure");
   assert.ok(S4.scopes().some((x) => x.id === "inst:OLD"), "it is still viewable on its own");
 });
+
+test("an equivalent agent answers and is named: cefotaxime for ceftriaxone (same breakpoints), oxacillin for cefoxitin, never for gonococci", () => {
+  const S6 = load([src({ id: "E_2024", inst: "E", institution: "Epsilon Hospital", short: "Epsilon", region: "west", year: 2024, rows: [
+    { spec: "blood", set: "all", org: "E. coli", n: 100, s: { cefotaxime: 30, meropenem: 90 } },
+    { spec: "blood", set: "all", org: "Staphylococcus aureus", n: 80, s: { oxacillin: 60 } },
+    { spec: "all", set: "all", org: "Neisseria gonorrhoeae", n: 40, s: { cefotaxime: 95 } }] })]);
+  const cro = S6.susceptibility("E. coli", "ceftriaxone", { scope: "inst:E", spec: ["blood"] });
+  assert.equal(cro.s, 30);
+  assert.equal(cro.asKey, "cefotaxime");
+  assert.match(cro.as, /Cefotaxime/);
+  assert.equal(S6.susceptibility("E. coli", "cefotaxime", { scope: "inst:E", spec: ["blood"] }).asKey, undefined, "the printed agent is not a substitute");
+  assert.equal(S6.susceptibility("Staphylococcus aureus", "cefoxitin", { scope: "inst:E", spec: ["blood"] }).asKey, "oxacillin");
+  assert.equal(S6.susceptibility("Neisseria gonorrhoeae", "cefotaxime", { scope: "inst:E" }).s, 95);
+  assert.equal(S6.susceptibility("Neisseria gonorrhoeae", "ceftriaxone", { scope: "inst:E" }), null, "gonococcal breakpoints differ");
+});
+
+test("CSV export carries the source, period, data version, figures with a caution (marked *), low-count rows and the checks", () => {
+  const S7 = load(SOURCES.concat([src({ id: "L_2024", inst: "L", institution: "Lambda Hospital", short: "Lambda", region: "north", year: 2024, period: "January to December 2024", rows: [
+    { spec: "urine", set: "all", org: "E. coli", n: 150, s: { ceftriaxone: 50, cefotaxime: 90 } },
+    { spec: "urine", set: "all", org: "Klebsiella pneumoniae", n: 12, s: { meropenem: 70 } }] })]));
+  const t = S7.table("inst:L", "urine", "all");
+  const csv = S7.csv(t, { scope: "Lambda" });
+  assert.match(csv, /^Antibiogram exported from StewardMD,/);
+  assert.match(csv, /\nSource,Lambda\n/);
+  assert.match(csv, /\nPeriod,January to December 2024\n/);
+  assert.match(csv, /\nData version,[0-9a-f]{12}\n/);
+  assert.match(csv, /,(50|90)\*/, "a figure with a caution is exported, marked");
+  const kleb = csv.split("\n").find((l) => /^Klebsiella/.test(l));
+  assert.match(kleb, /,12,yes,/, "the under-30 row says so");
+  assert.match(csv, /\nChecks\n/);
+  assert.match(csv, /cefotaxime and ceftriaxone should give nearly the same result/i);
+  const info = S7.exportInfo(t, "Lambda");
+  assert.equal(info.cautions.length, 2);
+});

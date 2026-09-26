@@ -35,6 +35,8 @@
  *   s:{} holding %R); the build stores 100 - %R and marks the cell (intermediate results then
  *   count as susceptible, which the app says).
  *   counts [{spec, set, org, n, page?}], excluded [{org?, drug?, value?, why}]
+ *   breakpoints?: the interpretive standard as the source states it ("CLSI M100, 33rd edition",
+ *   "CLSI, edition not stated"); absent when the source does not say. Shown with the source.
  *   focus?: the group a report covers when it is not a hospital-wide cumulative antibiogram, written
  *   to read after "Covers" (e.g. "the urology department", "Shigella isolates from an outbreak
  *   investigation"): shown with the source, never pooled, never a profile; needs its own inst.
@@ -65,7 +67,7 @@ const HTML = join(ROOT, "index.html");
 const STORE_JS = join(ROOT, "antibiogram-store.js");
 const RULES_JS = join(ROOT, "antibiogram-rules.js");
 
-const TOP = ["id", "kind", "inst", "institution", "short", "city", "state", "region", "sector", "year", "end", "isolates", "period", "published", "url", "page", "doi", "retrieved", "citation", "reporting", "method", "measure", "verification", "notes", "issues", "rows", "counts", "excluded", "credibility", "file", "pages", "focus"];
+const TOP = ["id", "kind", "inst", "institution", "short", "city", "state", "region", "sector", "year", "end", "isolates", "period", "published", "url", "page", "doi", "retrieved", "citation", "reporting", "method", "breakpoints", "measure", "verification", "notes", "issues", "rows", "counts", "excluded", "credibility", "file", "pages", "focus"];
 const ROWK = ["spec", "set", "org", "pheno", "n", "page", "s", "r", "nt", "approx", "conflict", "q", "trend", "notes", "printed", "note", "specimen_as_printed", "table", "cohort", "n_tested"];
 const KINDS = ["institution", "network", "study"], REGIONS = ["north", "south", "east", "west", "national"], SECTORS = ["government", "private", "network"];
 const VSTAT = ["double-checked", "single-checked", "transcribed"];
@@ -83,6 +85,7 @@ export function validateSource(src, file) {
   if (!(Number.isInteger(src.year) && src.year >= 2005 && src.year <= 2030)) e.push(`${tag}: year must be an integer 2005 to 2030`);
   if (src.measure != null && !["S", "R"].includes(src.measure)) e.push(`${tag}: measure must be "S" or "R"`);
   if (src.focus != null && (typeof src.focus !== "string" || !src.focus.trim())) e.push(`${tag}: focus must be a short description when given`);
+  if (src.breakpoints != null && (typeof src.breakpoints !== "string" || !/CLSI|EUCAST/.test(src.breakpoints))) e.push(`${tag}: breakpoints must name the standard as the source states it (CLSI or EUCAST, with the edition when given)`);
   if (!Array.isArray(src.rows) || !src.rows.length) e.push(`${tag}: no rows (a document without organism-level figures belongs in the census register with its reason, not in sources)`);
   if (src.isolates != null && !(Number.isInteger(src.isolates) && src.isolates > 0)) e.push(`${tag}: isolates must be a positive integer (the report's total)`);
   if (src.end != null && !(/^\d{4}-(0[1-9]|1[0-2])$/.test(src.end) && +src.end.slice(0, 4) === src.year)) e.push(`${tag}: end must be "YYYY-MM" in the data year`);
@@ -501,7 +504,7 @@ export function buildBundle(sources, register, census) {
     const derived = derive(checked, src, new Set(checks.map((c) => c.spec + "|" + c.set + "|" + c.org)));
     const orgs = new Set(checked.map((r) => r.org));
     metas.push({ id: src.id, kind: src.kind, inst: src.inst, name: src.institution, short: src.short, city: src.city || null, state: src.state || null, region: src.region,
-      sector: src.sector, year: src.year, end: src.end || src.year + "-12", period: src.period || null, focus: src.focus || null, url: src.url || null, page: src.page || null, doi: src.doi || null, citation: src.citation,
+      sector: src.sector, year: src.year, end: src.end || src.year + "-12", period: src.period || null, focus: src.focus || null, bp: src.breakpoints || null, url: src.url || null, page: src.page || null, doi: src.doi || null, citation: src.citation,
       verification: src.verification, notes: src.notes || null, issues: (src.issues || []).length ? src.issues : null, excluded: (src.excluded || []).length ? src.excluded : null,
       checks: checks.length ? checks.map((c) => c.text) : null, copies: copied.length ? copied.map((c) => c.text) : null,
       specs: Array.from(new Set(checked.map((r) => r.spec))), sets: Array.from(new Set(checked.map((r) => r.set))), orgs: Array.from(orgs), rows: checked.length,

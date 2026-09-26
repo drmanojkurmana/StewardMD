@@ -17,7 +17,7 @@
   var S = function () { return window.ABG_STORE; };
   var R = function () { return window.ABG_RULES; };
   var VIEW_KEY = "smd_abg_view";
-  var st = { scope: null, spec: null, set: "all", mode: "s", q: "", drugA: "", drugB: "", cons: false, noReserve: true, srcQ: "", imp: null, impMode: "summary" };
+  var st = { scope: null, spec: null, set: "all", mode: "s", q: "", drugA: "", drugB: "", cons: false, noReserve: true, srcQ: "", imp: null, impMode: "summary", impMeasure: "S" };
   try { var saved = JSON.parse(localStorage.getItem(VIEW_KEY) || "{}"); ["scope", "spec", "set", "mode", "noReserve"].forEach(function (k) { if (saved[k] != null) st[k] = saved[k]; }); } catch (e) {}
   function persist() { try { localStorage.setItem(VIEW_KEY, JSON.stringify({ scope: st.scope, spec: st.spec, set: st.set, mode: st.mode, noReserve: st.noReserve })); } catch (e) {} }
 
@@ -126,16 +126,22 @@
   function cellHtml(o, d) {
     var c = o.cells[d];
     if (!c) return '<td class="v2-c v2-na"></td>';
-    var attrs = ' data-v2="cell" data-org="' + o.org + '" data-pheno="' + esc(o.pheno || "") + '" data-drug="' + d + '"';
-    if (c.act === "intrinsic") return '<td class="v2-c v2-ir"' + attrs + ' title="Intrinsic resistance">IR</td>';
-    if (c.act === "hide") return '<td class="v2-c v2-na"' + attrs + ' title="' + esc(c.why) + '"></td>';
-    if (c.act === "suppress") return '<td class="v2-c v2-x"' + attrs + ' title="' + esc(c.why) + '">!</td>';
+    // A real button inside the cell: the table keeps its row and column headers for screen
+    // readers, and every figure is reachable by keyboard (Tab, then Enter or Space).
+    var who = R().orgShort(o.org) + (o.pheno ? " (" + o.pheno + ")" : "") + ", " + R().drugLabel(d) + ": ";
+    var btn = function (cls, label, text, tip) {
+      return '<td class="v2-c ' + cls + '"><button class="v2-cb" data-v2="cell" data-org="' + o.org + '" data-pheno="' + esc(o.pheno || "") + '" data-drug="' + d + '" aria-label="' + esc(who + label) + '"' + (tip ? ' title="' + esc(tip) + '"' : "") + ">" + text + "</button></td>";
+    };
+    if (c.act === "intrinsic") return btn("v2-ir", "intrinsic resistance", "IR", "Intrinsic resistance");
+    if (c.act === "hide") return btn("v2-na", "not relevant here, " + (c.why || ""), "", c.why);
+    if (c.act === "suppress") return btn("v2-x", "not shown, failed a check", "!", c.why);
     var low = !o.pooled && (o.lowN || o.noN || (c.nt != null && c.nt < 30));
     var v = shown(c.s), cls = low ? "v2-low" : (st.mode === "r" ? band(100 - v) : band(v));
-    if (low && !(o.lowN || o.noN)) attrs += ' title="tested on ' + c.nt + ' isolates only"';
+    var word = num(v) + "% " + (st.mode === "r" ? "resistant" : "susceptible");
+    var lowTip = low && !(o.lowN || o.noN) ? "tested on " + c.nt + " isolates only" : "";
     // A figure that failed a check is not coloured like a reliable one.
-    if (c.act === "caution") return '<td class="v2-c v2-cau"' + attrs + ' title="' + esc(c.why) + '">' + num(v) + "*</td>";
-    return '<td class="v2-c ' + cls + '"' + attrs + ">" + num(v) + "</td>";
+    if (c.act === "caution") return btn("v2-cau", word + ", caution: failed a data check", num(v) + "*", c.why);
+    return btn(cls, word + (low ? ", fewer than 30 isolates" : ""), num(v), lowTip);
   }
   function orgLabel(o) {
     var R0 = R(), lab = R0.orgShort(o.org) + (o.pheno ? " (" + o.pheno + ")" : "");
@@ -151,16 +157,22 @@
     var t = S().table(st.scope, st.spec, st.set), q = (st.q || "").toLowerCase().trim();
     var drugs = t.drugs.filter(function (d) { return t.orgs.some(function (o) { var c = o.cells[d]; return c && c.act !== "hide"; }); });
     var orgs = t.orgs;
+    var qNote = "";
     if (q) {
       var dq = drugs.filter(function (d) { return R().drugLabel(d).toLowerCase().indexOf(q) >= 0 || d.indexOf(q) >= 0; });
       var oq = orgs.filter(function (o) { return (R().orgLabel(o.org) + " " + R().orgShort(o.org) + " " + (o.pheno || "")).toLowerCase().indexOf(q) >= 0; });
       if (dq.length) drugs = dq; if (oq.length) orgs = oq;
+      // Say what the search did, including when it matched nothing (the search is kept across sources).
+      var clear = ' <button class="v2-link" data-v2="q-clear">Clear the search</button>';
+      qNote = !dq.length && !oq.length ? '<div class="v2-note" role="status">Nothing in this table matches "' + esc(st.q) + '", so everything is shown.' + clear + "</div>"
+        : '<div class="v2-mut" role="status">Showing ' + [oq.length ? orgs.length + " of " + t.orgs.length + " organisms" : "", dq.length ? drugs.length + " antibiotic" + (drugs.length === 1 ? "" : "s") : ""].filter(Boolean).join(" and ") + ' matching "' + esc(st.q) + '".' + clear + "</div>";
     }
     var h = '<div class="v2">';
     h += '<div class="v2-bar"><label class="v2-lab" for="v2Scope">Source</label>' + scopeSelect() + "</div>";
     h += chips();
     h += '<div class="v2-tools"><input type="search" class="v2-q" id="v2Q" placeholder="Find an organism or antibiotic" value="' + esc(st.q) + '" autocomplete="off" aria-label="Find an organism or antibiotic">' +
       '<div class="v2-seg" role="group" aria-label="Show"><button data-v2="mode" data-v="s" class="' + (st.mode === "s" ? "on" : "") + '" aria-pressed="' + (st.mode === "s") + '">% susceptible</button><button data-v2="mode" data-v="r" class="' + (st.mode === "r" ? "on" : "") + '" aria-pressed="' + (st.mode === "r") + '">% resistant</button></div></div>';
+    h += qNote;
     h += metaLine(t);
     h += phenoStrip();
     if (!orgs.length) {
@@ -183,19 +195,22 @@
         '<span>(% susceptible)</span><span><b>IR</b> intrinsic resistance</span><span><b>*</b> grey: failed a data check, shown for reference (tap)</span><span><b>!</b> not shown: failed a check (tap)</span><span class="v2-mut">Grey rows: under 30 isolates (CLSI M39), not pooled</span></div>';
     }
     h += wiscaHtml(t);
-    h += '<div class="v2-foot"><button class="v2-btn" data-v2="csv">Export CSV</button><button class="v2-btn" data-v2="pdf">Save as PDF</button>' +
+    h += '<div class="v2-foot"><button class="v2-btn" data-v2="csv">Export CSV</button><button class="v2-btn" data-v2="pdf">' + (nativePdf() ? "Save as PDF" : "Print or save as PDF") + "</button>" +
       '<p class="v2-mut">Cumulative antibiograms show how often isolates were susceptible in the past; they do not replace a culture for your patient. Every figure links to its source and the checks it passed. Intrinsic resistance per CLSI M100 Appendix B and EUCAST expected resistant phenotypes; AWaRe per WHO 2023. Decision support only.</p></div>';
     h += "</div>";
     return h;
   }
 
   /* -------------------------------------------------------------------- WISCA --- */
+  // "grew from blood specimens", "grew from any specimen": the phrase for a specimen key.
+  var SPEC_PHRASE = { all: "any specimen", nonurine: "any specimen except urine and stool", other: "specimens other than blood or urine", pus: "pus, wound and body fluid specimens", deep: "deep specimens (tissue, aspirates)", sterile: "sterile body fluids", csf: "CSF", stool: "stool" };
+  function specPhrase(spec) { return SPEC_PHRASE[spec] || lc(R().SPECIMENS[spec].label) + " specimens"; }
   function wiscaHtml(t) {
     var drugs = t.drugs.filter(function (d) { return !R().DRUGS[d].kind && t.orgs.some(function (o) { var c = o.cells[d]; return c && (c.act === "keep"); }); });
     if (!drugs.length) return "";
     var opt = function (sel) { return '<option value="">' + (sel === "B" ? "None" : "Choose an antibiotic") + "</option>" + drugs.map(function (d) { var v = sel === "A" ? st.drugA : st.drugB; return '<option value="' + d + '"' + (v === d ? " selected" : "") + ">" + esc(R().drugLabel(d)) + " (" + (R().aware(d) || "") + ")</option>"; }).join(""); };
     var h = '<section class="v2-wis" aria-label="Estimated empiric coverage"><h3>Estimated empiric coverage</h3>' +
-      '<p class="v2-mut">For the organisms that grew from ' + lc(esc(R().SPECIMENS[st.spec].label)) + " specimens (" + lc(esc(R().SETTINGS[st.set].label)) + ") in this source: the share of isolates a regimen would have covered, weighted by how often each organism grew (weighted-incidence method).</p>" +
+      '<p class="v2-mut">For the organisms that grew from ' + esc(specPhrase(st.spec)) + " (" + lc(esc(R().SETTINGS[st.set].label)) + ") in this source: the share of isolates a regimen would have covered, weighted by how often each organism grew (weighted-incidence method).</p>" +
       '<div class="v2-wrow"><select class="v2-sel" id="v2DrugA" aria-label="First antibiotic">' + opt("A") + '</select><span class="v2-plus">+</span><select class="v2-sel" id="v2DrugB" aria-label="Second antibiotic (optional)">' + opt("B") + "</select></div>" +
       (st.spec === "blood" ? '<label class="v2-chk"><input type="checkbox" id="v2Cons"' + (st.cons ? " checked" : "") + "> Count coagulase-negative staphylococci (often contaminants)</label>" : "");
     if (st.drugA) {
@@ -228,6 +243,25 @@
       P.map(function (p, i) { return '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="3"/><text x="' + p[0].toFixed(1) + '" y="' + (p[1] - 6).toFixed(1) + '" font-size="9" text-anchor="middle">' + num(pts[i].s) + "</text>"; }).join("") +
       "</svg>" + '<div class="v2-mut">' + pts.map(function (p) { return (p.label || p.year) + (p.as ? " (reported as " + esc(p.as) + ")" : "") + (p.reported ? " (from the report's trend table)" : ""); }).join(", ") + "</div>";
   }
+  // CLSI revisions inside a trend or a pool (antibiogram-rules.js BP_CHANGES): a step there can be
+  // the breakpoints, not the bacteria. pts: [{year, src}] with src.bp the standard it states.
+  function bpNote(org, drug, pts, kind) {
+    if (!pts.length || !R().bpChanges) return "";
+    var ys = pts.map(function (p) { return p.year; }), y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys);
+    if (kind === "trend" && y0 === y1) return "";
+    var ch = R().bpChanges(org, drug, y0, y1);
+    if (!ch.length) return "";
+    var seen = {}, withBp = [], without = 0;
+    pts.forEach(function (p) {
+      if (!p.src || seen[p.src.id]) return; seen[p.src.id] = 1;
+      if (p.src.bp) withBp.push((kind === "pool" ? p.src.short + " " : "") + (p.src.edLabel || p.src.year) + ": " + p.src.bp); else without++;
+    });
+    var line = withBp.length ? "Breakpoints stated: " + withBp.sort().join("; ") + (without ? "; " + without + " other" + (without === 1 ? " does" : "s do") + " not state an edition" : "") + "."
+      : (without === 1 ? "The source does not state its breakpoint edition." : "None of these sources states its breakpoint edition.");
+    return '<div class="v2-note">' + esc(ch.map(function (x) { return x.text; }).join(". ")) + ". " +
+      (kind === "trend" ? "Part of a change across these years can come from the breakpoints rather than from resistance." : "The institutions pooled here may read their results with different CLSI editions.") +
+      '<br><span class="v2-mut">' + esc(line) + "</span></div>";
+  }
   // What a percentage cannot tell: breakpoint systems and exposure at the site of infection.
   function drugCaveat(drug, org, spec) {
     var g = R().orgGroup(org), t = "";
@@ -255,6 +289,7 @@
     if (cc && cc.act === "keep" && typeof cc.s === "number") {
       h += '<div class="v2-big ' + band(cc.s) + '">' + num(cc.s) + "% susceptible</div>";
       h += '<div class="v2-mut">' + (c.pooled ? "Pooled from " + cc.k + " institution" + (cc.k === 1 ? "" : "s") + ", " + fmtN(cc.nt) + " isolates" + (cc.k > 1 ? "; range " + num(cc.min) + " to " + num(cc.max) + "%" : "") : fmtN(cc.nt || c.n) + " isolates tested") + ".</div>";
+      if (c.pooled) h += bpNote(org, drug, c.parts.filter(function (p) { return p.act === "keep"; }).map(function (p) { return { year: p.src.year, src: p.src }; }), "pool");
       if (cc.fromR) h += '<div class="v2-mut">Reported as ' + num(100 - cc.s) + "% resistant; intermediate results are counted as susceptible here.</div>";
       else if (cc.mixR) h += '<div class="v2-mut">Some institutions report % resistant; for those, intermediate results are counted as susceptible.</div>';
       h += drugCaveat(drug, org, spec);
@@ -270,6 +305,7 @@
           (p.act === "intrinsic" ? '<div class="v2-mut">intrinsic resistance</div>' : '<div class="v2-bar2"><i style="width:' + w + '%"></i><span>' + (typeof p.s === "number" ? num(p.s) + "%" : "") + "</span></div>") +
           (!ok ? '<div class="v2-mut">' + esc(p.act !== "keep" ? (p.why || p.act) : "fewer than 30 isolates: shown, not pooled") + "</div>" : "") +
           (p.spAs ? '<div class="v2-mut">Specimen as printed: ' + esc(p.spAs) + "</div>" : "") +
+          (p.src.bp ? '<div class="v2-mut">Breakpoints: ' + esc(p.src.bp) + "</div>" : "") +
           (p.nFrom ? '<div class="v2-mut">Isolate number from the source\'s organism table.</div>' : "") +
           (p.note ? '<div class="v2-mut">Source note: ' + esc(p.note) + "</div>" : "") +
           (p.src.url ? '<button class="v2-link" data-v2="open-url" data-url="' + esc(p.src.url) + '">Open source</button>' : "") + "</li>";
@@ -277,7 +313,7 @@
     }
     if (!c.pooled && c.parts[0] && !c.parts[0].src.local) {
       var tr = S().trend(c.parts[0].src.inst, spec, set, org, pheno || null, drug);
-      if (tr.length > 1) h += "<h4>Trend at " + esc(c.parts[0].src.short) + "</h4>" + sparkline(tr);
+      if (tr.length > 1) h += "<h4>Trend at " + esc(c.parts[0].src.short) + "</h4>" + sparkline(tr) + bpNote(org, drug, tr.map(function (p) { return { year: Math.floor(p.year), src: S().sourceById(p.src) }; }), "trend");
       h += '<button class="v2-btn" data-v2="compare" data-org="' + org + '" data-pheno="' + esc(pheno || "") + '" data-drug="' + drug + '">Compare across India</button>';
     }
     h += '<button class="v2-btn" data-v2="druginfo" data-drug="' + drug + '">About ' + esc(R0.drugLabel(drug)) + "</button></div>";
@@ -364,6 +400,7 @@
     var h = '<div class="v2-sh"><div class="v2-shh"><b>' + esc(s.name) + '</b><button class="v2-x" data-v2="sheet-close" aria-label="Close">Close</button></div>' +
       '<div class="v2-mut">' + esc([s.city, s.state].filter(Boolean).join(", ")) + " · " + esc(s.period || s.year) + " · " + esc(s.sector) + "</div>" +
       "<p>" + esc(s.citation) + "</p>" + (s.notes ? '<p class="v2-mut">' + esc(s.notes) + "</p>" : "") +
+      "<p><b>Breakpoints:</b> " + esc(s.bp || "the source does not state its interpretive standard or edition") + "</p>" +
       "<p><b>Checking:</b> " + esc((s.verification && s.verification.note) || "") + "</p>" +
       (s.url ? '<button class="v2-btn" data-v2="open-url" data-url="' + esc(s.url) + '">Open the source document</button>' : "") +
       (s.page ? '<button class="v2-btn" data-v2="open-url" data-url="' + esc(s.page) + '">Open the web page that lists it</button>' : "") +
@@ -391,7 +428,8 @@
     }
     h += '<section class="v2-card"><h3>' + (loc ? "Replace it" : "Import") + "</h3>" +
       '<div class="v2-seg" role="group" aria-label="File type"><button data-v2="imp-mode" data-v="summary" class="' + (st.impMode === "summary" ? "on" : "") + '">Summary table</button><button data-v2="imp-mode" data-v="isolates" class="' + (st.impMode === "isolates" ? "on" : "") + '">Isolate list</button></div>' +
-      '<p class="v2-mut">' + (st.impMode === "summary" ? "A CSV with one row per organism: organism, specimen, setting, n (isolates), then one column per antibiotic holding % susceptible. Antibiotic columns may use names or laboratory codes (AMK, TZP, MEM...)." :
+      (st.impMode === "summary" ? '<div class="v2-seg" role="group" aria-label="Figures in the file" style="margin-top:8px"><button data-v2="imp-measure" data-v="S" class="' + (st.impMeasure === "S" ? "on" : "") + '" aria-pressed="' + (st.impMeasure === "S") + '">% susceptible</button><button data-v2="imp-measure" data-v="R" class="' + (st.impMeasure === "R" ? "on" : "") + '" aria-pressed="' + (st.impMeasure === "R") + '">% resistant</button></div>' : "") +
+      '<p class="v2-mut">' + (st.impMode === "summary" ? "A CSV with one row per organism: organism, specimen, setting, n (isolates), then one column per antibiotic holding " + (st.impMeasure === "R" ? "% resistant (StewardMD stores 100 minus each, so intermediate results count as susceptible)" : "% susceptible") + ". Antibiotic columns may use names or laboratory codes (AMK, TZP, MEM...)." :
         "A CSV with one row per isolate: patient ID, date, specimen, location, organism, then one column per antibiotic holding S, I or R. A WHONET export saved as CSV with interpretations works (columns such as AMK_ND30 or MEM_NM are recognised). StewardMD keeps the first isolate per patient per organism (CLSI M39), applies the MRSA rule to beta-lactams, and computes % susceptible (intermediate counts as not susceptible).") + "</p>" +
       '<button class="v2-btn" data-v2="template">Download a template</button>' +
       '<label class="v2-lab" for="v2Name">Name</label><input class="v2-in" id="v2Name" value="' + esc((st.imp && st.imp.name) || (loc && loc.name) || "") + '" placeholder="e.g. City Hospital 2025">' +
@@ -403,6 +441,8 @@
       var r = st.imp.res;
       h += '<section class="v2-card" aria-live="polite"><h3>Check result</h3>';
       if (r.errors.length) h += '<div class="v2-note">' + r.errors.map(esc).join("<br>") + "</div>";
+      // The file reads the other way round (intrinsic resistance printed near 100 as "% susceptible").
+      if (r.suggest) h += '<div class="v2-note" role="alert"><b>Check the figures:</b> ' + esc(r.why) + '. <button class="v2-link" data-v2="imp-measure" data-v="' + r.suggest + '" data-rerun="1">Read the file as ' + (r.suggest === "R" ? "% resistant" : "% susceptible") + "</button></div>";
       if (st.impMode === "isolates" && r.isolates != null) h += "<p>" + fmtN(r.isolates) + " isolates read, " + fmtN(r.firstIsolates) + " kept as first isolates per patient and organism.</p>";
       if (r.rows.length) {
         var flags = 0, low = 0;
@@ -417,6 +457,7 @@
   }
 
   /* ------------------------------------------------------------------- files --- */
+  function nativePdf() { return !!(window.SMD_NATIVE && window.SMD_NATIVE.sharePdfFromHtml); }
   function saveText(text, name, mime) {
     var P = window.Capacitor && window.Capacitor.Plugins;
     if (window.SMD_IS_NATIVE && P && P.Filesystem && P.Filesystem.writeFile && P.Filesystem.getUri && P.Share && P.Share.share) {
@@ -431,18 +472,23 @@
     return Promise.resolve();
   }
   function pdfHtml() {
-    var t = S().table(st.scope, st.spec, st.set), R0 = R();
+    var t = S().table(st.scope, st.spec, st.set), R0 = R(), info = S().exportInfo(t, S().scopeLabel(st.scope));
     var drugs = t.drugs.filter(function (d) { return t.orgs.some(function (o) { var c = o.cells[d]; return c && c.act !== "hide"; }); });
     var head = "<tr><th>Organism</th><th>Isolates</th>" + drugs.map(function (d) { return "<th>" + esc(R0.drugLabel(d)) + "</th>"; }).join("") + "</tr>";
     var body = t.orgs.map(function (o) {
-      return "<tr><td><i>" + esc(orgLabel(o)) + "</i></td><td>" + (o.n == null ? "" : fmtN(o.n)) + "</td>" + drugs.map(function (d) {
+      var low = t.pooled ? o.lowOnly : (o.lowN || o.noN);
+      return "<tr" + (low ? ' class="low"' : "") + "><td><i>" + esc(orgLabel(o)) + "</i>" + (o.derived ? " (combined)" : "") + "</td><td>" + (o.n == null ? "not given" : fmtN(o.n)) + (low ? " (under 30)" : "") + (t.pooled ? ", " + o.k + " inst." : "") + "</td>" + drugs.map(function (d) {
         var c = o.cells[d]; if (!c) return "<td></td>"; if (c.act === "intrinsic") return "<td>IR</td>"; if (c.act !== "keep" && c.act !== "caution") return "<td></td>";
         return "<td>" + num(c.s) + (c.act === "caution" ? "*" : "") + "</td>";
       }).join("") + "</tr>";
     }).join("");
-    return "<!doctype html><html><head><meta charset=\"utf-8\"><title>Antibiogram</title><style>body{font:11px -apple-system,Segoe UI,Roboto,sans-serif;color:#111;margin:24px}table{border-collapse:collapse;width:100%}th,td{border:1px solid #bbb;padding:3px 4px;text-align:center}th:first-child,td:first-child{text-align:left}h1{font-size:16px}p{color:#444}</style></head><body>" +
-      "<h1>Antibiogram: " + esc(S().scopeLabel(st.scope)) + "</h1><p>" + esc(R0.SPECIMENS[st.spec].label) + ", " + lc(esc(R0.SETTINGS[st.set].label)) + ". Percent susceptible. IR = intrinsic resistance; * = caution (see the app for the reason); rows under 30 isolates are unstable.</p>" +
-      "<table><thead>" + head + "</thead><tbody>" + body + "</tbody></table><p>Exported from StewardMD on " + new Date().toISOString().slice(0, 10) + ". Decision support only; verify against the source.</p></body></html>";
+    var checks = info.cautions.map(function (x) { return x.text; }).concat(info.lowCells);
+    return "<!doctype html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Antibiogram</title><style>body{font:11px -apple-system,Segoe UI,Roboto,sans-serif;color:#111;background:#fff;margin:24px}table{border-collapse:collapse;width:100%}th,td{border:1px solid #bbb;padding:3px 4px;text-align:center}th:first-child,td:first-child{text-align:left}tr.low td{color:#666;font-style:italic}h1{font-size:16px}p,li{color:#333}@media print{body{margin:10mm}}</style></head><body>" +
+      "<h1>Antibiogram: " + esc(info.source) + "</h1><p>" + esc(info.specimen) + ", " + lc(esc(info.setting)) + ". Period: " + esc(info.period) + ".<br>" + esc(info.citation) + "</p>" +
+      "<p>Figures: " + esc(info.measure) + ". IR = intrinsic resistance; * = failed a data check, shown for reference only (listed below); rows in italics rest on fewer than 30 isolates and are unstable (CLSI M39).</p>" +
+      "<table><thead>" + head + "</thead><tbody>" + body + "</tbody></table>" +
+      (checks.length ? "<h2 style=\"font-size:13px\">Checks</h2><ul>" + checks.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : "") +
+      "<p>Exported from StewardMD on " + esc(info.exported) + " (data version " + esc(info.version) + "). Decision support only; verify against the source.</p></body></html>";
   }
 
   /* ------------------------------------------------------------------ events --- */
@@ -454,6 +500,7 @@
     if (a === "spec") { st.spec = b.getAttribute("data-v"); var sets = setsFor(st.scope, st.spec); if (sets.indexOf(st.set) < 0) st.set = sets[0] || "all"; persist(); api.render(); return true; }
     if (a === "set") { st.set = b.getAttribute("data-v"); persist(); api.render(); return true; }
     if (a === "mode") { st.mode = b.getAttribute("data-v"); persist(); api.render(); return true; }
+    if (a === "q-clear") { st.q = ""; api.render(); var qi = api.root.querySelector("#v2Q"); if (qi) qi.focus(); return true; }
     if (a === "cell") { sheet(api, cellSheet(st.scope, b.getAttribute("data-org"), b.getAttribute("data-pheno"), b.getAttribute("data-drug"))); return true; }
     if (a === "compare") { sheet(api, cellSheet("india", b.getAttribute("data-org"), b.getAttribute("data-pheno"), b.getAttribute("data-drug"))); return true; }
     if (a === "org") { sheet(api, orgSheet(b.getAttribute("data-org"), b.getAttribute("data-pheno"))); return true; }
@@ -464,15 +511,23 @@
     if (a === "open-url") { var u = b.getAttribute("data-url"); try { window.open(u, "_blank", "noopener"); } catch (x) {} return true; }
     if (a === "pick-a") { st.drugA = b.getAttribute("data-drug"); api.render(); var w = api.root.querySelector(".v2-wis"); if (w && w.scrollIntoView) w.scrollIntoView({ block: "start" }); return true; }
     if (a === "csv") { var t = S().table(st.scope, st.spec, st.set); saveText(S().csv(t, { scope: S().scopeLabel(st.scope) }), "antibiogram-" + st.scope.replace(/[^a-z0-9]+/gi, "-") + "-" + st.spec + "-" + st.set + ".csv", "text/csv"); return true; }
-    if (a === "pdf") { if (window.SMD_NATIVE && window.SMD_NATIVE.sharePdfFromHtml) window.SMD_NATIVE.sharePdfFromHtml(pdfHtml(), "antibiogram-" + st.spec, "Antibiogram").catch(function () {}); else saveText(pdfHtml(), "antibiogram.html", "text/html"); return true; }
+    if (a === "pdf") {
+      if (nativePdf()) { window.SMD_NATIVE.sharePdfFromHtml(pdfHtml(), "antibiogram-" + st.spec, "Antibiogram").catch(function () {}); return true; }
+      // Web: open the printable page and the print dialog, where "Save as PDF" is offered.
+      var pw = null; try { pw = window.open("", "_blank"); } catch (x) {}
+      if (pw && pw.document) { pw.document.open(); pw.document.write(pdfHtml()); pw.document.close(); setTimeout(function () { try { pw.focus(); pw.print(); } catch (x) {} }, 300); }
+      else saveText(pdfHtml(), "antibiogram.html", "text/html");
+      return true;
+    }
     if (a === "src") { sheet(api, srcSheet(b.getAttribute("data-id"))); return true; }
     if (a === "view-src") { var s = S().sourceById(b.getAttribute("data-id")); if (s) { st.scope = s.kind === "network" ? "src:" + s.id : (s.latest ? "inst:" + s.inst : "src:" + s.id); st.spec = null; persist(); sheet(api, ""); api.setTab("resistance"); } return true; }
     if (a === "imp-mode") { st.impMode = b.getAttribute("data-v"); st.imp = null; api.render(); return true; }
+    if (a === "imp-measure") { st.impMeasure = b.getAttribute("data-v") === "R" ? "R" : "S"; if (b.getAttribute("data-rerun") && st.imp) { rerunImport(api); return true; } st.imp = null; api.render(); return true; }
     if (a === "template") { var R0 = R(); saveText(st.impMode === "summary" ? R0.summaryTemplate() : R0.isolateTemplate(), st.impMode === "summary" ? "antibiogram-summary-template.csv" : "antibiogram-isolates-template.csv", "text/csv"); return true; }
     if (a === "imp-check") { runImport(api); return true; }
     if (a === "imp-save") {
       var r = st.imp && st.imp.res; if (!r || !r.rows.length) return true;
-      var obj = { name: (st.imp.name || "My hospital").slice(0, 80), period: (st.imp.period || "").slice(0, 80), method: st.impMode, imported: new Date().toISOString(), rows: r.rows,
+      var obj = { name: (st.imp.name || "My hospital").slice(0, 80), period: (st.imp.period || "").slice(0, 80), method: st.impMode, measure: st.impMode === "summary" ? (r.measure || "S") : "S", imported: new Date().toISOString(), rows: r.rows,
         stats: { isolates: r.isolates || null, firstIsolates: r.firstIsolates || null } };
       if (S().localSave(obj)) { st.imp = null; st.scope = "local"; st.spec = null; persist(); api.toast && api.toast("Saved on this device"); api.setTab("resistance"); }
       else api.toast && api.toast("Could not save on this device (storage full or blocked)");
@@ -487,8 +542,8 @@
     var root = api.root, name = (root.querySelector("#v2Name") || {}).value || "", period = (root.querySelector("#v2Period") || {}).value || "";
     var file = root.querySelector("#v2File"), paste = (root.querySelector("#v2Paste") || {}).value || "";
     var go = function (text) {
-      var res = st.impMode === "summary" ? R().importSummaryCsv(text) : R().importIsolateCsv(text);
-      st.imp = { name: name.trim(), period: period.trim(), res: res }; api.render();
+      var res = st.impMode === "summary" ? R().importSummaryCsv(text, { measure: st.impMeasure }) : R().importIsolateCsv(text);
+      st.imp = { name: name.trim(), period: period.trim(), res: res, text: text }; api.render();
     };
     if (file && file.files && file.files[0]) {
       var f = file.files[0];
@@ -496,6 +551,11 @@
       var fr = new FileReader(); fr.onload = function () { go(String(fr.result || "")); }; fr.onerror = function () { st.imp = { name: name, period: period, res: { rows: [], errors: ["The file could not be read."], warnings: [] } }; api.render(); }; fr.readAsText(f);
     } else if (paste.trim()) go(paste);
     else { st.imp = { name: name, period: period, res: { rows: [], errors: ["Choose a CSV file or paste the table first."], warnings: [] } }; api.render(); }
+  }
+  // Re-read the text already checked, with the other measure (no need to choose the file again).
+  function rerunImport(api) {
+    var i = st.imp; if (!i || !i.text) { runImport(api); return; }
+    st.imp = { name: i.name, period: i.period, text: i.text, res: R().importSummaryCsv(i.text, { measure: st.impMeasure }) }; api.render();
   }
   function change(e, api) {
     var id = e.target && e.target.id;
@@ -546,10 +606,12 @@
     ".v2-t thead .v2-oh{z-index:4}.v2-o button{border:0;background:none;color:var(--ink);font:700 12.5px var(--f);text-align:left;padding:8px;cursor:pointer;width:100%}",
     ".v2-nh,.v2-n{font:600 11px var(--f);color:var(--mut);padding:6px!important;white-space:nowrap;text-align:right}",
     ".v2-dh{vertical-align:bottom;height:112px;min-width:40px}.v2-dh button{border:0;background:none;color:var(--ink);font:700 11.5px var(--f);writing-mode:vertical-rl;transform:rotate(180deg);padding:6px 4px;cursor:pointer;white-space:nowrap}",
-    ".v2-c{text-align:center;min-width:40px;height:38px;font:800 12.5px var(--f);cursor:pointer;border-left:1px solid var(--line)}",
+    ".v2-c{text-align:center;min-width:40px;height:38px;font:800 12.5px var(--f);border-left:1px solid var(--line)}",
+    ".v2-cb{display:block;width:100%;min-width:40px;height:38px;border:0;margin:0;padding:0 4px;background:transparent;color:inherit;font:inherit;font-style:inherit;text-decoration:inherit;cursor:pointer}",
+    ".v2-cb:focus-visible{outline:2px solid var(--ink);outline-offset:-3px;border-radius:4px}.v2-na .v2-cb{cursor:default}",
     ".v2-c.b5{background:#15803d;color:#fff}.v2-c.b4{background:#65a30d;color:#fff}.v2-c.b3{background:#fde68a;color:#422006}.v2-c.b2{background:#fb923c;color:#1c0a00}.v2-c.b1{background:#b91c1c;color:#fff}",
     ".v2-c.v2-low{background:repeating-linear-gradient(45deg,var(--panel),var(--panel) 4px,var(--line) 4px,var(--line) 5px);color:var(--mut);font-style:italic}",
-    ".v2-c.v2-cau{background:repeating-linear-gradient(135deg,var(--panel),var(--panel) 5px,var(--line) 5px,var(--line) 6px);color:var(--ink);text-decoration:underline dotted}.v2-c.v2-ir{color:var(--mut);font:800 10.5px var(--f)}.v2-c.v2-x{color:#b91c1c}.v2-c.v2-na{cursor:default}",
+    ".v2-c.v2-cau{background:repeating-linear-gradient(135deg,var(--panel),var(--panel) 5px,var(--line) 5px,var(--line) 6px);color:var(--ink);text-decoration:underline dotted}.v2-c.v2-ir{color:var(--mut);font:800 10.5px var(--f)}.v2-c.v2-x{color:#b91c1c}",
     ".v2-lowrow .v2-o button{color:var(--mut)}.v2-der{display:inline-block;margin:0 8px 6px;font:700 10px var(--f);color:var(--mut);border:1px solid var(--line);border-radius:6px;padding:1px 5px}",
     ".v2-aw{display:inline-block;font:800 9.5px var(--f);border-radius:5px;padding:1px 4px;margin:2px;color:#fff}.v2-awA{background:#15803d}.v2-awW{background:#b45309}.v2-awR{background:#7c3aed}",
     ".v2-legend{display:flex;flex-wrap:wrap;gap:6px 12px;font:600 11.5px var(--f);color:var(--ink)}.v2-sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:4px}",
