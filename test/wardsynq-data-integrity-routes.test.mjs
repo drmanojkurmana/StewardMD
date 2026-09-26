@@ -121,3 +121,25 @@ test("DATA-11: the same ED procedure submitted twice without a key is one proced
   await as(DOCTOR, "/ward/ed-procedure", "POST", { orgId: ORG, encounterId, procedure: { ...procedure, name: "Tetanus toxoid" } });
   assert.equal((await as(DOCTOR, `/ward/ed-record?orgId=${ORG}&encounterId=${encounterId}`)).procedures.length, 2);
 });
+
+test("DATA-06: merges stay one hop: no chain (C into B, then B into A) and no cycle (A into B after B into A)", async () => {
+  seedHospital();
+  const reg = async (n, m) => { const r = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: n, mobile: m, gender: "male", ageYears: 40 }); return "opd-pat-" + r.mrn.toLowerCase(); };
+  const A = await reg("Ram Kumar", "9876500711"), B = await reg("Ram Kumaar", "9876500712"), C = await reg("R Kumar", "9876500713");
+  const reason = "same person, verified Aadhaar at desk";
+  assert.equal((await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: B, mergedId: C, reason })).__status, 200);
+  const chain = await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: A, mergedId: B, reason });
+  assert.equal(chain.__status, 409, JSON.stringify(chain));
+  assert.equal(chain.error, "merged_has_absorbed");
+  assert.deepEqual(chain.absorbed, [C]);
+  const onto = await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: C, mergedId: A, reason });
+  assert.equal(onto.__status, 409, JSON.stringify(onto));
+  assert.equal(onto.error, "survivor_is_merged");
+  // The record that absorbed C can still take A directly: one hop, every record reachable.
+  assert.equal((await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: B, mergedId: A, reason })).__status, 200);
+  const cycle = await as(DOCTOR, "/ward/merge", "POST", { orgId: ORG, survivorId: A, mergedId: B, reason });
+  assert.equal(cycle.__status, 409, JSON.stringify(cycle));
+  const idB = await as(DOCTOR, `/ward/identity?orgId=${ORG}&patientId=${B}`);
+  assert.deepEqual([...idB.identity.allIds].sort(), [A, B, C].sort());
+  assert.equal(idB.identity.isMerged, false);
+});
