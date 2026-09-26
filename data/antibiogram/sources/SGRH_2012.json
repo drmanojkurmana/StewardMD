@@ -1,0 +1,5856 @@
+{
+ "id": "SGRH_2012",
+ "kind": "institution",
+ "inst": "SGRH_DELHI",
+ "institution": "Sir Ganga Ram Hospital, New Delhi",
+ "short": "Sir Ganga Ram Hospital",
+ "city": "New Delhi",
+ "state": "Delhi",
+ "region": "north",
+ "sector": "private",
+ "year": 2012,
+ "end": "2012-12",
+ "period": "January to December 2012",
+ "published": "2013-05",
+ "url": null,
+ "page": "https://sgrh.com/en/publications",
+ "retrieved": "2026-09-26",
+ "citation": "Department of Clinical Microbiology and Immunology, Sir Ganga Ram Hospital. Microbiology Newsletter, Vol. 19, No. 1: percentage sensitivity, January to December 2012. New Delhi: Sir Ganga Ram Hospital; published May 2013.",
+ "reporting": "Percent susceptible by specimen (blood, urine, pus wound swab, body fluids, respiratory isolates), organism (Gram-positive and Gram-negative tables) and location (OPD, ward, ICU), with the number of isolates per row; organism counts per specimen and location in pie-chart legends and an \"others\" list.",
+ "method": "MIC testing on Vitek 2, interpreted with CLSI 2011 guidelines; repeat isolates excluded (printed in parentheses).",
+ "breakpoints": "CLSI 2011",
+ "measure": "S",
+ "verification": {
+  "status": "double-checked",
+  "note": "All 10 susceptibility tables (GPC and GNB, pages 2 to 6) were parsed from the PDF text layer (sgrhgrid2.py: pdfplumber word positions, run with the pdfminer inline-image patch; column headers rebuilt from the rotated header text; OPD, ward and ICU from each row's background colour and checked against the row order; organism labels assigned by vertical position; the number pattern was widened so the urine ICU Enterococcus linezolid cell \"98**\", which the first parse dropped, is read), then every cell and every row n was compared by eye with the pages rendered at scale 4 and cropped into left and right halves: no differences. Organism pie charts (no data labels): legend and \"others\" entries were re-parsed from the text layer inside each panel box (the page-thirds split of counts.py cut the first letters of ICU \"others\" names, joined entries that share a line and missed the urine ICU isolates total, printed \"587 (282\" without its closing bracket), checked per panel (legend counts plus Others equal the printed Isolates and the \"others\" entries sum to Others: all 15 panels balance) and every entry was compared by eye with the charts rendered at scale 5. Second reader 2026-09-26: see issues."
+ },
+ "notes": "Microbiology Newsletter of Sir Ganga Ram Hospital, Vol. 19, No. 1 (published May 2013), data January to December 2012, 8 pages; the layout of the 2011 edition (organism pie charts). Pages 2 to 6 give one specimen each (blood; urine; pus wound swab; body fluids; respiratory isolates): organism pie charts for OPD, ward and ICU (samples, positives, isolates, legend counts and an \"others\" list; figures in parentheses are repeat isolates, excluded from the data) and GPC and GNB percentage sensitivity tables with three rows per organism (OPD, ward, ICU, by the colour key) and the number of isolates; \"-\" means not done. Specimens recorded as blood, urine, pus (printed \"Pus wound swab\"), sterile (printed \"Body fluids\") and respiratory. Rows printed \"Staphylococci spp.\" are separate from Staph. aureus and are recorded as coagulase-negative staphylococci (the 2011 edition labels the same row \"Staphylococci spp. (CONS)\"). Combined columns: \"Cefoxitin / Oxacillin\" (every GPC table) is recorded under oxacillin, \"Imipenem / Meropenem\" (every GNB table) under meropenem and \"Glycopeptide\" under vancomycin (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin), each cell noted; the \"Quinolones\" column (no agent named) is not recorded; blood Salmonella also print nalidixic acid and chloramphenicol (recorded). Column order differs between tables (for example the pus and body fluid GNB tables print cefoperazone-sulbactam before piperacillin-tazobactam); every table was mapped by its own headers. Footnotes printed under the tables: blood ICU S. pneumoniae penicillin \"83*\" (\"1 Isolate - moderately sensitive\"); urine Enterococcus linezolid \"99*\" in the ward (\"1 Isolate - Resistant\") and \"98**\" in the ICU (\"1 Isolate - Resistant, 1 Isolate - moderately sensitive\"); each is in the cell note. Every page states: \"All sensitivities reported here are based on MIC testing using Vitek-2 according to 2011 CLSI guidlines\". Isolate numbers: chart and table disagree for coagulase-negative staphylococci in blood OPD (chart \"Staphylococci - 112\", table 111), blood ward (chart 173, table 172) and pus OPD (chart 66, table 62); each of these panels adds up to its printed Isolates total, so the charts are internally consistent; both recorded as printed and noted on the rows. Every other tabulated organism equals its chart entry, and all 15 panels balance (legend plus Others equals Isolates; the \"others\" list sums to Others). Chart text recorded as printed: urine OPD \"Positives 196 (282)\" beside \"Isolates 1288 (313)\"; urine ICU \"Isolates 587 (282\" with no closing bracket; the body fluid OPD \"others\" list prints Corynebacterium spp. twice (3 and 2). Percentages that no whole number of the row's isolates gives (per-drug tested numbers are not printed), kept as printed with a caution and a conflict entry: blood OPD P. aeruginosa gentamicin 70 (n = 7); urine ICU Proteus cefuroxime 44 (n = 7); pus ICU Klebsiella cefuroxime 4 (n = 19); body fluid OPD Enterococcus high-level gentamicin 57 (n = 6) and E. coli ampicillin 5 (n = 13); body fluid ward Acinetobacter cefoperazone-sulbactam and piperacillin-tazobactam 10 (n = 8). Printed values the build treats as intrinsic resistance (noted on the cells): Acinetobacter aztreonam in every specimen, urine Klebsiella ampicillin 0. Organism counts: every legend and \"others\" entry whose organism has a canonical key is recorded, with misspellings mapped to the intended organism (\"Klebseilla\", \"Morganii spp.\" as Morganella spp., \"Serratia marscecens\", \"Elizebethkingia\", \"S. maltophila\"); entries without a key, or that would add to the key of a tabulated organism, are listed in excluded. \"Strept. viridans\" is recorded as viridans group streptococci, \"Salmonella typhimurium\" as non-typhoidal Salmonella, and \"Group A Streptococcus\" and \"Streptococcus pyogenes Group A\" both as S. pyogenes (blood OPD prints both, 1 and 2). S. maltophilia is printed twice in the respiratory ICU panel (legend 33 and \"others\" \"S. maltophila - 2\"); both recorded as printed. Fungal isolates are counted in the charts (\"Fungal isolates data will be published separately in next issue\"); the named fungi Trichosporon asahii (urine OPD 7) and Cryptococcus neoformans (blood ICU 1) are not recorded as counts, since the unnamed \"Fungal isolates\" entries of the same panels hold the rest of the fungi (listed in excluded). Page 1 and 8: case report (ceftriaxone-resistant Salmonella Paratyphi C pneumonia), reflections, publications, faculty and a highlights box; page 7: antimicrobial consumption (DDD per 100 bed days) and the Drug Resistance Index trend 2009 to 2012. Source: https://sgrh.com/en/publications, Microbiology Newsletter selector, issue \"May-2013\"; the site serves the PDF only by an HTTP POST from that selector (downloaded file name mb-may2013.pdf), so no direct PDF URL exists.",
+ "issues": [
+  "Second reader 2026-09-26: all 1,038 cells, all 107 row n values and all 258 organism counts checked against the PDF (pdfplumber run with the SGRH pyfix patch): every table, the seeded 25% sample of 260 cells from sample_cells.py included, was read from the page images and transcribed (tables at scale 3.2 cut into halves with the row labels and n kept; chart panels at scale 5) before comparing with the extraction, and every cell, row n, row fill colour, row label and column header was also compared with an independent parse of the text layer written for this check (values clustered by row and column, rotated header text per column, labels by vertical position, row fill sampled from the rendered page).",
+  "Result: 0 transcription errors, nothing corrected (sample 0 of 260; whole file 0 of 1,038 cells, 0 of 107 n, 0 of 258 counts). OPD, ward and ICU correct on every row (yellow, blue and pink row fills as the colour key, always in OPD, ward, ICU order); the organism label of every row triple is correct; every printed value of a recorded column is in the file; the 10 printed rows not recorded are exactly the 10 rows printed all \"-\", as excluded says. No table reached the 2% threshold.",
+  "Column headers: every table was mapped by its own headers (the pus and body fluid GNB tables print cefoperazone-sulbactam before piperacillin-tazobactam, the urine GPC table prints Linezolid before Glycopeptide). Cefoxitin / Oxacillin (22 cells) under oxacillin, Imipenem / Meropenem (62 cells) under meropenem and Glycopeptide (41 cells) under vancomycin each carry the combined-column cell note; High Dose Gentamicin (9 cells) is under gentamicin_hl; the Quinolones column is left out, as excluded says.",
+  "Footnotes confirmed on the page and in the cell notes: blood ICU S. pneumoniae penicillin \"83*\" (\"* 1 Isolate - moderately sensitive\"), urine ward Enterococcus linezolid \"99*\" (\"* 1 Isolate - Resistant\") and urine ICU \"98**\" (\"** 1 Isolate - Resistant, 1 Isolate - moderately sensitive\").",
+  "Charts: all 15 pie panels re-read from the images; every legend and \"others\" entry agrees with counts or excluded, and every panel balances (legend counts plus Others equal Isolates; the \"others\" list sums to Others). Count mismatches confirmed as printed (source inconsistency, already noted on the rows): coagulase-negative staphylococci blood OPD chart \"Staphylococci - 112\" against table n = 111, blood ward 173 against 172, pus OPD 66 against 62; each of these panels balances with the chart figure. The named fungi (blood ICU Cryptococcus neoformans 1, urine OPD Trichosporon asahii 7) are rightly in excluded, since those panels also print an unnamed \"Fungal isolates\" entry (160 and 89).",
+  "Cells not kept: the 7 caution cells (blood OPD P. aeruginosa gentamicin 70, n = 7; urine ICU Proteus cefuroxime 44, n = 7; pus ICU Klebsiella cefuroxime 4, n = 19; body fluid OPD Enterococcus high-level gentamicin 57, n = 6, and E. coli ampicillin 5, n = 13; body fluid ward Acinetobacter cefoperazone-sulbactam and piperacillin-tazobactam 10, n = 8) and the 15 intrinsic cells (Acinetobacter aztreonam in blood, pus, body fluids and respiratory; urine Klebsiella ampicillin 0) are printed that way, not transcription errors."
+ ],
+ "rows": [
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": null,
+   "n": 111,
+   "page": 2,
+   "table": "Blood: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 3,
+    "oxacillin": 41,
+    "clindamycin": 53,
+    "gentamicin": 80,
+    "vancomycin": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "clindamycin": "Clindamycin",
+    "gentamicin": "Gentamicin",
+    "vancomycin": "Glycopeptide"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Staphylococci spp.\", a row separate from Staph. aureus; recorded as coagulase-negative staphylococci (the 2011 edition of this newsletter labels the same row \"Staphylococci spp. (CONS)\"). Source inconsistency: the organism chart for blood OPD isolates prints 112, the susceptibility table n = 111; both recorded as printed.",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": null,
+   "n": 172,
+   "page": 2,
+   "table": "Blood: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 2,
+    "oxacillin": 22,
+    "clindamycin": 47,
+    "gentamicin": 63,
+    "vancomycin": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "clindamycin": "Clindamycin",
+    "gentamicin": "Gentamicin",
+    "vancomycin": "Glycopeptide"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Staphylococci spp.\", a row separate from Staph. aureus; recorded as coagulase-negative staphylococci (the 2011 edition of this newsletter labels the same row \"Staphylococci spp. (CONS)\"). Source inconsistency: the organism chart for blood ward isolates prints 173, the susceptibility table n = 172; both recorded as printed.",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": null,
+   "n": 190,
+   "page": 2,
+   "table": "Blood: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 0,
+    "oxacillin": 6,
+    "clindamycin": 21,
+    "gentamicin": 27,
+    "vancomycin": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "clindamycin": "Clindamycin",
+    "gentamicin": "Gentamicin",
+    "vancomycin": "Glycopeptide"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Staphylococci spp.\", a row separate from Staph. aureus; recorded as coagulase-negative staphylococci (the 2011 edition of this newsletter labels the same row \"Staphylococci spp. (CONS)\").",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Staph. aureus",
+   "pheno": null,
+   "n": 12,
+   "page": 2,
+   "table": "Blood: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 0,
+    "oxacillin": 75,
+    "clindamycin": 92,
+    "gentamicin": 75,
+    "vancomycin": 100,
+    "daptomycin": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "clindamycin": "Clindamycin",
+    "gentamicin": "Gentamicin",
+    "vancomycin": "Glycopeptide",
+    "daptomycin": "Daptomycin"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Staph. aureus",
+   "pheno": null,
+   "n": 15,
+   "page": 2,
+   "table": "Blood: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 0,
+    "oxacillin": 53,
+    "clindamycin": 67,
+    "gentamicin": 53,
+    "vancomycin": 100,
+    "daptomycin": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "clindamycin": "Clindamycin",
+    "gentamicin": "Gentamicin",
+    "vancomycin": "Glycopeptide",
+    "daptomycin": "Daptomycin"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staph. aureus",
+   "pheno": null,
+   "n": 17,
+   "page": 2,
+   "table": "Blood: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 0,
+    "oxacillin": 47,
+    "clindamycin": 53,
+    "gentamicin": 47,
+    "vancomycin": 100,
+    "daptomycin": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "clindamycin": "Clindamycin",
+    "gentamicin": "Gentamicin",
+    "vancomycin": "Glycopeptide",
+    "daptomycin": "Daptomycin"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 12,
+   "page": 2,
+   "table": "Blood: GPC percentage sensitivity",
+   "s": {
+    "ampicillin": 25,
+    "gentamicin_hl": 17,
+    "vancomycin": 83,
+    "linezolid": 100,
+    "daptomycin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "gentamicin_hl": "High Dose Gentamicin",
+    "vancomycin": "Glycopeptide",
+    "linezolid": "Linezolid",
+    "daptomycin": "Daptomycin"
+   },
+   "notes": {
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Enterococci spp.\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 18,
+   "page": 2,
+   "table": "Blood: GPC percentage sensitivity",
+   "s": {
+    "ampicillin": 22,
+    "gentamicin_hl": 28,
+    "vancomycin": 78,
+    "linezolid": 100,
+    "daptomycin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "gentamicin_hl": "High Dose Gentamicin",
+    "vancomycin": "Glycopeptide",
+    "linezolid": "Linezolid",
+    "daptomycin": "Daptomycin"
+   },
+   "notes": {
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Enterococci spp.\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 42,
+   "page": 2,
+   "table": "Blood: GPC percentage sensitivity",
+   "s": {
+    "ampicillin": 24,
+    "gentamicin_hl": 14,
+    "vancomycin": 76,
+    "linezolid": 100,
+    "daptomycin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "gentamicin_hl": "High Dose Gentamicin",
+    "vancomycin": "Glycopeptide",
+    "linezolid": "Linezolid",
+    "daptomycin": "Daptomycin"
+   },
+   "notes": {
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Enterococci spp.\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Streptococcus pneumoniae",
+   "pheno": null,
+   "n": 11,
+   "page": 2,
+   "table": "Blood: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 100,
+    "ceftriaxone": 100,
+    "clindamycin": 100,
+    "vancomycin": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "ceftriaxone": "Ceftriaxone",
+    "clindamycin": "Clindamycin",
+    "vancomycin": "Glycopeptide"
+   },
+   "notes": {
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Strept. pneumoniae\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Streptococcus pneumoniae",
+   "pheno": null,
+   "n": 2,
+   "page": 2,
+   "table": "Blood: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 100,
+    "ceftriaxone": 100,
+    "clindamycin": 100,
+    "vancomycin": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "ceftriaxone": "Ceftriaxone",
+    "clindamycin": "Clindamycin",
+    "vancomycin": "Glycopeptide"
+   },
+   "notes": {
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Strept. pneumoniae\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Streptococcus pneumoniae",
+   "pheno": null,
+   "n": 6,
+   "page": 2,
+   "table": "Blood: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 83,
+    "ceftriaxone": 100,
+    "clindamycin": 100,
+    "vancomycin": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "ceftriaxone": "Ceftriaxone",
+    "clindamycin": "Clindamycin",
+    "vancomycin": "Glycopeptide"
+   },
+   "notes": {
+    "penicillin": "printed as 83*; the table footnote says 1 isolate was moderately sensitive",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Strept. pneumoniae\".",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Salmonella typhi",
+   "pheno": null,
+   "n": 111,
+   "page": 2,
+   "table": "Blood: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 94,
+    "ceftriaxone": 100,
+    "cotrimoxazole": 91,
+    "chloramphenicol": 95,
+    "nalidixic_acid": 6
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "ceftriaxone": "Ceftriaxone",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "chloramphenicol": "Chloramphenicol",
+    "nalidixic_acid": "Nalidixic Acid"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Salmonella typhi",
+   "pheno": null,
+   "n": 55,
+   "page": 2,
+   "table": "Blood: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 98,
+    "ceftriaxone": 100,
+    "cotrimoxazole": 96,
+    "chloramphenicol": 96,
+    "nalidixic_acid": 4
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "ceftriaxone": "Ceftriaxone",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "chloramphenicol": "Chloramphenicol",
+    "nalidixic_acid": "Nalidixic Acid"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Salmonella paratyphi A",
+   "pheno": null,
+   "n": 47,
+   "page": 2,
+   "table": "Blood: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 89,
+    "ceftriaxone": 100,
+    "cotrimoxazole": 100,
+    "chloramphenicol": 100,
+    "nalidixic_acid": 0
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "ceftriaxone": "Ceftriaxone",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "chloramphenicol": "Chloramphenicol",
+    "nalidixic_acid": "Nalidixic Acid"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Salmonella paratyphi A",
+   "pheno": null,
+   "n": 10,
+   "page": 2,
+   "table": "Blood: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 100,
+    "ceftriaxone": 100,
+    "cotrimoxazole": 100,
+    "chloramphenicol": 100,
+    "nalidixic_acid": 10
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "ceftriaxone": "Ceftriaxone",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "chloramphenicol": "Chloramphenicol",
+    "nalidixic_acid": "Nalidixic Acid"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "E. coli",
+   "pheno": null,
+   "n": 55,
+   "page": 2,
+   "table": "Blood: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 2,
+    "cefuroxime": 30,
+    "ceftriaxone": 35,
+    "cefepime": 35,
+    "aztreonam": 26,
+    "piptazo": 84,
+    "cefoperazone_sulbactam": 85,
+    "gentamicin": 47,
+    "amikacin": 93,
+    "ertapenem": 93,
+    "meropenem": 96,
+    "colistin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "E. coli",
+   "pheno": null,
+   "n": 45,
+   "page": 2,
+   "table": "Blood: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 14,
+    "cefuroxime": 19,
+    "ceftriaxone": 20,
+    "cefepime": 27,
+    "aztreonam": 20,
+    "piptazo": 76,
+    "cefoperazone_sulbactam": 80,
+    "gentamicin": 51,
+    "amikacin": 93,
+    "ertapenem": 89,
+    "meropenem": 93,
+    "colistin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "E. coli",
+   "pheno": null,
+   "n": 55,
+   "page": 2,
+   "table": "Blood: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 5,
+    "cefuroxime": 11,
+    "ceftriaxone": 12,
+    "cefepime": 24,
+    "aztreonam": 13,
+    "piptazo": 60,
+    "cefoperazone_sulbactam": 63,
+    "gentamicin": 40,
+    "amikacin": 82,
+    "ertapenem": 75,
+    "meropenem": 78,
+    "colistin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 16,
+   "page": 2,
+   "table": "Blood: GNB percentage sensitivity",
+   "s": {
+    "cefuroxime": 42,
+    "ceftriaxone": 44,
+    "cefepime": 50,
+    "aztreonam": 44,
+    "piptazo": 50,
+    "cefoperazone_sulbactam": 44,
+    "gentamicin": 56,
+    "amikacin": 69,
+    "ertapenem": 67,
+    "meropenem": 69,
+    "colistin": 100
+   },
+   "printed": {
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 27,
+   "page": 2,
+   "table": "Blood: GNB percentage sensitivity",
+   "s": {
+    "cefuroxime": 13,
+    "ceftriaxone": 15,
+    "cefepime": 26,
+    "aztreonam": 15,
+    "piptazo": 30,
+    "cefoperazone_sulbactam": 30,
+    "gentamicin": 33,
+    "amikacin": 37,
+    "ertapenem": 38,
+    "meropenem": 40,
+    "colistin": 100
+   },
+   "printed": {
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 96,
+   "page": 2,
+   "table": "Blood: GNB percentage sensitivity",
+   "s": {
+    "cefuroxime": 10,
+    "ceftriaxone": 8,
+    "cefepime": 15,
+    "aztreonam": 8,
+    "piptazo": 23,
+    "cefoperazone_sulbactam": 21,
+    "gentamicin": 22,
+    "amikacin": 30,
+    "ertapenem": 29,
+    "meropenem": 30,
+    "colistin": 100
+   },
+   "printed": {
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "n": 7,
+   "page": 2,
+   "table": "Blood: GNB percentage sensitivity",
+   "s": {
+    "cefuroxime": 25,
+    "ceftriaxone": 43,
+    "cefepime": 57,
+    "aztreonam": 57,
+    "piptazo": 71,
+    "cefoperazone_sulbactam": 50,
+    "gentamicin": 43,
+    "amikacin": 71,
+    "ertapenem": 71,
+    "meropenem": 86,
+    "colistin": 100
+   },
+   "printed": {
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "n": 12,
+   "page": 2,
+   "table": "Blood: GNB percentage sensitivity",
+   "s": {
+    "cefuroxime": 11,
+    "ceftriaxone": 17,
+    "cefepime": 25,
+    "aztreonam": 25,
+    "piptazo": 25,
+    "cefoperazone_sulbactam": 33,
+    "gentamicin": 33,
+    "amikacin": 58,
+    "ertapenem": 50,
+    "meropenem": 50,
+    "colistin": 100
+   },
+   "printed": {
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 7,
+   "page": 2,
+   "table": "Blood: GNB percentage sensitivity",
+   "s": {
+    "ceftazidime": 71,
+    "cefepime": 86,
+    "aztreonam": 71,
+    "piptazo": 86,
+    "cefoperazone_sulbactam": 71,
+    "gentamicin": 70,
+    "amikacin": 71,
+    "meropenem": 71,
+    "colistin": 100
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem",
+    "gentamicin": "printed 70 (confirmed on the page), which no whole number of the row's 7 isolates gives; per-drug tested numbers are not printed"
+   },
+   "conflict": {
+    "gentamicin": "printed 70% for a row of n = 7; no whole number of 7 or fewer tested isolates gives 70%"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 4,
+   "page": 2,
+   "table": "Blood: GNB percentage sensitivity",
+   "s": {
+    "ceftazidime": 50,
+    "cefepime": 50,
+    "aztreonam": 25,
+    "piptazo": 67,
+    "cefoperazone_sulbactam": 50,
+    "gentamicin": 50,
+    "amikacin": 50,
+    "meropenem": 50,
+    "colistin": 100
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "pheno": null,
+   "n": 22,
+   "page": 2,
+   "table": "Blood: GNB percentage sensitivity",
+   "s": {
+    "ceftazidime": 32,
+    "cefepime": 32,
+    "aztreonam": 32,
+    "piptazo": 41,
+    "cefoperazone_sulbactam": 36,
+    "gentamicin": 32,
+    "amikacin": 32,
+    "meropenem": 36,
+    "colistin": 100
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 12,
+   "page": 2,
+   "table": "Blood: GNB percentage sensitivity",
+   "s": {
+    "ceftriaxone": 40,
+    "cefepime": 73,
+    "aztreonam": 60,
+    "ampsulbactam": 64,
+    "piptazo": 75,
+    "cefoperazone_sulbactam": 82,
+    "gentamicin": 75,
+    "amikacin": 75,
+    "meropenem": 75,
+    "colistin": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "ampsulbactam": "Ampicillin + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem",
+    "aztreonam": "printed 60 (confirmed on the page); the build treats this as intrinsic resistance"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 18,
+   "page": 2,
+   "table": "Blood: GNB percentage sensitivity",
+   "s": {
+    "ceftriaxone": 50,
+    "cefepime": 33,
+    "aztreonam": 0,
+    "ampsulbactam": 50,
+    "piptazo": 44,
+    "cefoperazone_sulbactam": 50,
+    "gentamicin": 50,
+    "amikacin": 50,
+    "meropenem": 44,
+    "colistin": 94
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "ampsulbactam": "Ampicillin + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem",
+    "aztreonam": "printed 0 (confirmed on the page); the build treats this as intrinsic resistance"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 78,
+   "page": 2,
+   "table": "Blood: GNB percentage sensitivity",
+   "s": {
+    "ceftriaxone": 5,
+    "cefepime": 8,
+    "aztreonam": 5,
+    "ampsulbactam": 7,
+    "piptazo": 8,
+    "cefoperazone_sulbactam": 16,
+    "cotrimoxazole": 0,
+    "gentamicin": 17,
+    "amikacin": 13,
+    "meropenem": 10,
+    "colistin": 99
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "ampsulbactam": "Ampicillin + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem",
+    "aztreonam": "printed 5 (confirmed on the page); the build treats this as intrinsic resistance"
+   },
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": null,
+   "n": 24,
+   "page": 3,
+   "table": "Urine: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 4,
+    "oxacillin": 29,
+    "cotrimoxazole": 54,
+    "gentamicin": 58,
+    "nitrofurantoin": 95,
+    "vancomycin": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "gentamicin": "Gentamicin",
+    "nitrofurantoin": "Nitrofurantoin",
+    "vancomycin": "Glycopeptide"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Staphylococci spp.\", a row separate from Staph. aureus; recorded as coagulase-negative staphylococci (the 2011 edition of this newsletter labels the same row \"Staphylococci spp. (CONS)\").",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": null,
+   "n": 14,
+   "page": 3,
+   "table": "Urine: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 0,
+    "oxacillin": 14,
+    "cotrimoxazole": 29,
+    "gentamicin": 46,
+    "nitrofurantoin": 100,
+    "vancomycin": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "gentamicin": "Gentamicin",
+    "nitrofurantoin": "Nitrofurantoin",
+    "vancomycin": "Glycopeptide"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Staphylococci spp.\", a row separate from Staph. aureus; recorded as coagulase-negative staphylococci (the 2011 edition of this newsletter labels the same row \"Staphylococci spp. (CONS)\").",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 89,
+   "page": 3,
+   "table": "Urine: GPC percentage sensitivity",
+   "s": {
+    "ampicillin": 56,
+    "nitrofurantoin": 56,
+    "linezolid": 100,
+    "vancomycin": 92,
+    "daptomycin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "nitrofurantoin": "Nitrofurantoin",
+    "linezolid": "Linezolid",
+    "vancomycin": "Glycopeptide",
+    "daptomycin": "Daptomycin"
+   },
+   "notes": {
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 147,
+   "page": 3,
+   "table": "Urine: GPC percentage sensitivity",
+   "s": {
+    "ampicillin": 36,
+    "nitrofurantoin": 46,
+    "linezolid": 99,
+    "vancomycin": 84,
+    "daptomycin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "nitrofurantoin": "Nitrofurantoin",
+    "linezolid": "Linezolid",
+    "vancomycin": "Glycopeptide",
+    "daptomycin": "Daptomycin"
+   },
+   "notes": {
+    "linezolid": "printed as 99*; the table footnote says 1 isolate was resistant",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 80,
+   "page": 3,
+   "table": "Urine: GPC percentage sensitivity",
+   "s": {
+    "ampicillin": 6,
+    "nitrofurantoin": 16,
+    "linezolid": 98,
+    "vancomycin": 69,
+    "daptomycin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "nitrofurantoin": "Nitrofurantoin",
+    "linezolid": "Linezolid",
+    "vancomycin": "Glycopeptide",
+    "daptomycin": "Daptomycin"
+   },
+   "notes": {
+    "linezolid": "printed as 98**; the table footnote says 1 isolate was resistant and 1 isolate moderately sensitive",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Staph. aureus",
+   "pheno": null,
+   "n": 7,
+   "page": 3,
+   "table": "Urine: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 0,
+    "oxacillin": 57,
+    "cotrimoxazole": 29,
+    "gentamicin": 86,
+    "nitrofurantoin": 83,
+    "vancomycin": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "gentamicin": "Gentamicin",
+    "nitrofurantoin": "Nitrofurantoin",
+    "vancomycin": "Glycopeptide"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Staph. aureus",
+   "pheno": null,
+   "n": 7,
+   "page": 3,
+   "table": "Urine: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 0,
+    "oxacillin": 43,
+    "cotrimoxazole": 71,
+    "gentamicin": 67,
+    "nitrofurantoin": 80,
+    "vancomycin": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "gentamicin": "Gentamicin",
+    "nitrofurantoin": "Nitrofurantoin",
+    "vancomycin": "Glycopeptide"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "E. coli",
+   "pheno": null,
+   "n": 678,
+   "page": 3,
+   "table": "Urine: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 15,
+    "cefuroxime": 29,
+    "ceftriaxone": 32,
+    "cefepime": 50,
+    "aztreonam": 33,
+    "nitrofurantoin": 65,
+    "piptazo": 82,
+    "cefoperazone_sulbactam": 84,
+    "cotrimoxazole": 34,
+    "gentamicin": 56,
+    "amikacin": 94,
+    "netilmicin": 87,
+    "ertapenem": 92,
+    "meropenem": 95,
+    "colistin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "nitrofurantoin": "Nitrofurantoin",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "E. coli",
+   "pheno": null,
+   "n": 301,
+   "page": 3,
+   "table": "Urine: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 15,
+    "cefuroxime": 26,
+    "ceftriaxone": 26,
+    "cefepime": 42,
+    "aztreonam": 27,
+    "nitrofurantoin": 54,
+    "piptazo": 71,
+    "cefoperazone_sulbactam": 70,
+    "cotrimoxazole": 36,
+    "gentamicin": 49,
+    "amikacin": 84,
+    "netilmicin": 78,
+    "ertapenem": 80,
+    "meropenem": 85,
+    "colistin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "nitrofurantoin": "Nitrofurantoin",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "E. coli",
+   "pheno": null,
+   "n": 88,
+   "page": 3,
+   "table": "Urine: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 9,
+    "cefuroxime": 13,
+    "ceftriaxone": 14,
+    "cefepime": 33,
+    "aztreonam": 15,
+    "nitrofurantoin": 53,
+    "piptazo": 70,
+    "cefoperazone_sulbactam": 68,
+    "cotrimoxazole": 24,
+    "gentamicin": 35,
+    "amikacin": 76,
+    "netilmicin": 72,
+    "ertapenem": 80,
+    "meropenem": 82,
+    "colistin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "nitrofurantoin": "Nitrofurantoin",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 180,
+   "page": 3,
+   "table": "Urine: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 0,
+    "cefuroxime": 19,
+    "ceftriaxone": 22,
+    "cefepime": 39,
+    "aztreonam": 22,
+    "nitrofurantoin": 6,
+    "piptazo": 47,
+    "cefoperazone_sulbactam": 43,
+    "cotrimoxazole": 30,
+    "gentamicin": 39,
+    "amikacin": 56,
+    "netilmicin": 45,
+    "ertapenem": 53,
+    "meropenem": 60,
+    "colistin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "nitrofurantoin": "Nitrofurantoin",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem",
+    "ampicillin": "printed 0 (confirmed on the page); the build treats this as intrinsic resistance"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 127,
+   "page": 3,
+   "table": "Urine: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 0,
+    "cefuroxime": 24,
+    "ceftriaxone": 26,
+    "cefepime": 36,
+    "aztreonam": 26,
+    "nitrofurantoin": 10,
+    "piptazo": 39,
+    "cefoperazone_sulbactam": 39,
+    "cotrimoxazole": 31,
+    "gentamicin": 35,
+    "amikacin": 54,
+    "netilmicin": 43,
+    "ertapenem": 46,
+    "meropenem": 53,
+    "colistin": 98
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "nitrofurantoin": "Nitrofurantoin",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem",
+    "ampicillin": "printed 0 (confirmed on the page); the build treats this as intrinsic resistance"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 39,
+   "page": 3,
+   "table": "Urine: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 0,
+    "cefuroxime": 3,
+    "ceftriaxone": 3,
+    "cefepime": 15,
+    "aztreonam": 3,
+    "nitrofurantoin": 3,
+    "piptazo": 23,
+    "cefoperazone_sulbactam": 21,
+    "cotrimoxazole": 13,
+    "gentamicin": 18,
+    "amikacin": 51,
+    "netilmicin": 23,
+    "ertapenem": 28,
+    "meropenem": 33,
+    "colistin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "nitrofurantoin": "Nitrofurantoin",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem",
+    "ampicillin": "printed 0 (confirmed on the page); the build treats this as intrinsic resistance"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "n": 39,
+   "page": 3,
+   "table": "Urine: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 44,
+    "cefuroxime": 52,
+    "ceftriaxone": 59,
+    "cefepime": 59,
+    "aztreonam": 56,
+    "piptazo": 95,
+    "cefoperazone_sulbactam": 89,
+    "cotrimoxazole": 28,
+    "gentamicin": 54,
+    "amikacin": 85,
+    "netilmicin": 55,
+    "ertapenem": 90,
+    "meropenem": 95
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "n": 20,
+   "page": 3,
+   "table": "Urine: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 40,
+    "cefuroxime": 47,
+    "ceftriaxone": 55,
+    "cefepime": 60,
+    "aztreonam": 55,
+    "piptazo": 95,
+    "cefoperazone_sulbactam": 100,
+    "cotrimoxazole": 26,
+    "gentamicin": 55,
+    "amikacin": 75,
+    "netilmicin": 50,
+    "ertapenem": 100,
+    "meropenem": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "n": 7,
+   "page": 3,
+   "table": "Urine: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 43,
+    "cefuroxime": 44,
+    "ceftriaxone": 67,
+    "cefepime": 71,
+    "aztreonam": 71,
+    "piptazo": 100,
+    "cefoperazone_sulbactam": 100,
+    "cotrimoxazole": 50,
+    "gentamicin": 71,
+    "amikacin": 71,
+    "netilmicin": 57,
+    "ertapenem": 100,
+    "meropenem": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem",
+    "cefuroxime": "printed 44 (confirmed on the page), which no whole number of the row's 7 isolates gives; per-drug tested numbers are not printed"
+   },
+   "conflict": {
+    "cefuroxime": "printed 44% for a row of n = 7; no whole number of 7 or fewer tested isolates gives 44%"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "P. aeruginosa",
+   "pheno": null,
+   "n": 78,
+   "page": 3,
+   "table": "Urine: GNB percentage sensitivity",
+   "s": {
+    "ceftazidime": 43,
+    "cefepime": 42,
+    "aztreonam": 34,
+    "piptazo": 59,
+    "cefoperazone_sulbactam": 49,
+    "gentamicin": 40,
+    "amikacin": 53,
+    "netilmicin": 60,
+    "meropenem": 52,
+    "colistin": 100
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "P. aeruginosa",
+   "pheno": null,
+   "n": 59,
+   "page": 3,
+   "table": "Urine: GNB percentage sensitivity",
+   "s": {
+    "ceftazidime": 22,
+    "cefepime": 29,
+    "aztreonam": 24,
+    "piptazo": 41,
+    "cefoperazone_sulbactam": 25,
+    "gentamicin": 20,
+    "amikacin": 24,
+    "netilmicin": 29,
+    "meropenem": 31,
+    "colistin": 98
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "P. aeruginosa",
+   "pheno": null,
+   "n": 18,
+   "page": 3,
+   "table": "Urine: GNB percentage sensitivity",
+   "s": {
+    "ceftazidime": 33,
+    "cefepime": 39,
+    "aztreonam": 33,
+    "piptazo": 50,
+    "cefoperazone_sulbactam": 39,
+    "gentamicin": 33,
+    "amikacin": 39,
+    "netilmicin": 44,
+    "meropenem": 44,
+    "colistin": 94
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": null,
+   "n": 62,
+   "page": 4,
+   "table": "Pus wound swab: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 2,
+    "oxacillin": 17,
+    "gentamicin": 63,
+    "erythromycin": 19,
+    "clindamycin": 45,
+    "cotrimoxazole": 56,
+    "vancomycin": 100,
+    "tigecycline": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "gentamicin": "Gentamicin",
+    "erythromycin": "Erythromycin",
+    "clindamycin": "Clindamycin",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "vancomycin": "Glycopeptide",
+    "tigecycline": "Tigecycline"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Staphylococci spp.\", a row separate from Staph. aureus; recorded as coagulase-negative staphylococci (the 2011 edition of this newsletter labels the same row \"Staphylococci spp. (CONS)\"). Source inconsistency: the organism chart for pus OPD isolates prints 66, the susceptibility table n = 62; both recorded as printed.",
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": null,
+   "n": 35,
+   "page": 4,
+   "table": "Pus wound swab: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 0,
+    "oxacillin": 12,
+    "gentamicin": 40,
+    "erythromycin": 9,
+    "clindamycin": 40,
+    "cotrimoxazole": 53,
+    "vancomycin": 100,
+    "tigecycline": 100,
+    "daptomycin": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "gentamicin": "Gentamicin",
+    "erythromycin": "Erythromycin",
+    "clindamycin": "Clindamycin",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "vancomycin": "Glycopeptide",
+    "tigecycline": "Tigecycline",
+    "daptomycin": "Daptomycin"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Staphylococci spp.\", a row separate from Staph. aureus; recorded as coagulase-negative staphylococci (the 2011 edition of this newsletter labels the same row \"Staphylococci spp. (CONS)\").",
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": null,
+   "n": 10,
+   "page": 4,
+   "table": "Pus wound swab: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 10,
+    "oxacillin": 10,
+    "gentamicin": 20,
+    "erythromycin": 10,
+    "clindamycin": 20,
+    "cotrimoxazole": 30,
+    "vancomycin": 100,
+    "tigecycline": 100,
+    "daptomycin": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "gentamicin": "Gentamicin",
+    "erythromycin": "Erythromycin",
+    "clindamycin": "Clindamycin",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "vancomycin": "Glycopeptide",
+    "tigecycline": "Tigecycline",
+    "daptomycin": "Daptomycin"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Staphylococci spp.\", a row separate from Staph. aureus; recorded as coagulase-negative staphylococci (the 2011 edition of this newsletter labels the same row \"Staphylococci spp. (CONS)\").",
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Staph. aureus",
+   "pheno": null,
+   "n": 187,
+   "page": 4,
+   "table": "Pus wound swab: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 3,
+    "oxacillin": 68,
+    "gentamicin": 80,
+    "erythromycin": 39,
+    "clindamycin": 79,
+    "cotrimoxazole": 22,
+    "vancomycin": 100,
+    "linezolid": 100,
+    "tigecycline": 100,
+    "daptomycin": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "gentamicin": "Gentamicin",
+    "erythromycin": "Erythromycin",
+    "clindamycin": "Clindamycin",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "vancomycin": "Glycopeptide",
+    "linezolid": "Linezolid",
+    "tigecycline": "Tigecycline",
+    "daptomycin": "Daptomycin"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Staph. aureus",
+   "pheno": null,
+   "n": 89,
+   "page": 4,
+   "table": "Pus wound swab: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 0,
+    "oxacillin": 62,
+    "gentamicin": 70,
+    "erythromycin": 38,
+    "clindamycin": 74,
+    "cotrimoxazole": 27,
+    "vancomycin": 100,
+    "linezolid": 100,
+    "tigecycline": 100,
+    "daptomycin": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "gentamicin": "Gentamicin",
+    "erythromycin": "Erythromycin",
+    "clindamycin": "Clindamycin",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "vancomycin": "Glycopeptide",
+    "linezolid": "Linezolid",
+    "tigecycline": "Tigecycline",
+    "daptomycin": "Daptomycin"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Staph. aureus",
+   "pheno": null,
+   "n": 14,
+   "page": 4,
+   "table": "Pus wound swab: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 0,
+    "oxacillin": 71,
+    "gentamicin": 93,
+    "erythromycin": 21,
+    "clindamycin": 86,
+    "cotrimoxazole": 15,
+    "vancomycin": 100,
+    "linezolid": 100,
+    "tigecycline": 100,
+    "daptomycin": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "gentamicin": "Gentamicin",
+    "erythromycin": "Erythromycin",
+    "clindamycin": "Clindamycin",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "vancomycin": "Glycopeptide",
+    "linezolid": "Linezolid",
+    "tigecycline": "Tigecycline",
+    "daptomycin": "Daptomycin"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 53,
+   "page": 4,
+   "table": "Pus wound swab: GPC percentage sensitivity",
+   "s": {
+    "ampicillin": 60,
+    "gentamicin_hl": 38,
+    "vancomycin": 96,
+    "linezolid": 100,
+    "tigecycline": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "gentamicin_hl": "High Dose Gentamicin",
+    "vancomycin": "Glycopeptide",
+    "linezolid": "Linezolid",
+    "tigecycline": "Tigecycline"
+   },
+   "notes": {
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Enterococci spp.\".",
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 66,
+   "page": 4,
+   "table": "Pus wound swab: GPC percentage sensitivity",
+   "s": {
+    "ampicillin": 42,
+    "gentamicin_hl": 21,
+    "vancomycin": 79,
+    "linezolid": 100,
+    "tigecycline": 100,
+    "daptomycin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "gentamicin_hl": "High Dose Gentamicin",
+    "vancomycin": "Glycopeptide",
+    "linezolid": "Linezolid",
+    "tigecycline": "Tigecycline",
+    "daptomycin": "Daptomycin"
+   },
+   "notes": {
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Enterococci spp.\".",
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 17,
+   "page": 4,
+   "table": "Pus wound swab: GPC percentage sensitivity",
+   "s": {
+    "ampicillin": 29,
+    "gentamicin_hl": 24,
+    "vancomycin": 71,
+    "linezolid": 100,
+    "tigecycline": 100,
+    "daptomycin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "gentamicin_hl": "High Dose Gentamicin",
+    "vancomycin": "Glycopeptide",
+    "linezolid": "Linezolid",
+    "tigecycline": "Tigecycline",
+    "daptomycin": "Daptomycin"
+   },
+   "notes": {
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Enterococci spp.\".",
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "E. coli",
+   "pheno": null,
+   "n": 114,
+   "page": 4,
+   "table": "Pus wound swab: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 12,
+    "cefuroxime": 24,
+    "ceftriaxone": 25,
+    "cefepime": 46,
+    "aztreonam": 25,
+    "cefoperazone_sulbactam": 72,
+    "piptazo": 76,
+    "gentamicin": 55,
+    "amikacin": 89,
+    "netilmicin": 81,
+    "ertapenem": 87,
+    "meropenem": 89,
+    "tigecycline": 100,
+    "colistin": 99
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "E. coli",
+   "pheno": null,
+   "n": 111,
+   "page": 4,
+   "table": "Pus wound swab: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 8,
+    "cefuroxime": 15,
+    "ceftriaxone": 18,
+    "cefepime": 37,
+    "aztreonam": 18,
+    "cefoperazone_sulbactam": 63,
+    "piptazo": 60,
+    "gentamicin": 51,
+    "amikacin": 85,
+    "netilmicin": 73,
+    "ertapenem": 81,
+    "meropenem": 88,
+    "tigecycline": 100,
+    "colistin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "E. coli",
+   "pheno": null,
+   "n": 23,
+   "page": 4,
+   "table": "Pus wound swab: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 0,
+    "cefuroxime": 11,
+    "ceftriaxone": 12,
+    "cefepime": 13,
+    "aztreonam": 9,
+    "cefoperazone_sulbactam": 43,
+    "piptazo": 43,
+    "gentamicin": 33,
+    "amikacin": 65,
+    "netilmicin": 57,
+    "ertapenem": 61,
+    "meropenem": 70,
+    "tigecycline": 96,
+    "colistin": 96
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 54,
+   "page": 4,
+   "table": "Pus wound swab: GNB percentage sensitivity",
+   "s": {
+    "cefuroxime": 32,
+    "ceftriaxone": 33,
+    "cefepime": 48,
+    "aztreonam": 31,
+    "cefoperazone_sulbactam": 58,
+    "piptazo": 63,
+    "gentamicin": 46,
+    "amikacin": 63,
+    "netilmicin": 56,
+    "ertapenem": 67,
+    "meropenem": 72,
+    "tigecycline": 76,
+    "colistin": 100
+   },
+   "printed": {
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 53,
+   "page": 4,
+   "table": "Pus wound swab: GNB percentage sensitivity",
+   "s": {
+    "cefuroxime": 27,
+    "ceftriaxone": 28,
+    "cefepime": 42,
+    "aztreonam": 28,
+    "cefoperazone_sulbactam": 52,
+    "piptazo": 47,
+    "gentamicin": 34,
+    "amikacin": 66,
+    "netilmicin": 41,
+    "ertapenem": 62,
+    "meropenem": 64,
+    "tigecycline": 74,
+    "colistin": 100
+   },
+   "printed": {
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 19,
+   "page": 4,
+   "table": "Pus wound swab: GNB percentage sensitivity",
+   "s": {
+    "cefuroxime": 4,
+    "ceftriaxone": 5,
+    "cefepime": 21,
+    "aztreonam": 0,
+    "cefoperazone_sulbactam": 26,
+    "piptazo": 32,
+    "gentamicin": 16,
+    "amikacin": 39,
+    "netilmicin": 26,
+    "ertapenem": 42,
+    "meropenem": 42,
+    "tigecycline": 74,
+    "colistin": 95
+   },
+   "printed": {
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem",
+    "cefuroxime": "printed 4 (confirmed on the page), which no whole number of the row's 19 isolates gives; per-drug tested numbers are not printed"
+   },
+   "conflict": {
+    "cefuroxime": "printed 4% for a row of n = 19; no whole number of 19 or fewer tested isolates gives 4%"
+   },
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "n": 19,
+   "page": 4,
+   "table": "Pus wound swab: GNB percentage sensitivity",
+   "s": {
+    "cefuroxime": 36,
+    "ceftriaxone": 37,
+    "cefepime": 40,
+    "aztreonam": 37,
+    "cefoperazone_sulbactam": 58,
+    "piptazo": 63,
+    "gentamicin": 42,
+    "amikacin": 63,
+    "netilmicin": 58,
+    "ertapenem": 53,
+    "meropenem": 60,
+    "tigecycline": 89,
+    "colistin": 100
+   },
+   "printed": {
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "n": 23,
+   "page": 4,
+   "table": "Pus wound swab: GNB percentage sensitivity",
+   "s": {
+    "cefuroxime": 33,
+    "ceftriaxone": 36,
+    "cefepime": 42,
+    "aztreonam": 27,
+    "cefoperazone_sulbactam": 43,
+    "piptazo": 42,
+    "gentamicin": 30,
+    "amikacin": 57,
+    "netilmicin": 48,
+    "ertapenem": 40,
+    "meropenem": 52,
+    "tigecycline": 74,
+    "colistin": 100
+   },
+   "printed": {
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "n": 5,
+   "page": 4,
+   "table": "Pus wound swab: GNB percentage sensitivity",
+   "s": {
+    "cefuroxime": 20,
+    "ceftriaxone": 50,
+    "cefepime": 40,
+    "aztreonam": 40,
+    "cefoperazone_sulbactam": 60,
+    "piptazo": 60,
+    "gentamicin": 40,
+    "amikacin": 60,
+    "netilmicin": 60,
+    "ertapenem": 60,
+    "meropenem": 60,
+    "tigecycline": 100,
+    "colistin": 100
+   },
+   "printed": {
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "P. aeruginosa",
+   "pheno": null,
+   "n": 80,
+   "page": 4,
+   "table": "Pus wound swab: GNB percentage sensitivity",
+   "s": {
+    "ceftazidime": 67,
+    "cefepime": 71,
+    "aztreonam": 57,
+    "cefoperazone_sulbactam": 64,
+    "piptazo": 73,
+    "gentamicin": 56,
+    "amikacin": 70,
+    "netilmicin": 69,
+    "meropenem": 75,
+    "colistin": 98
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "P. aeruginosa",
+   "pheno": null,
+   "n": 62,
+   "page": 4,
+   "table": "Pus wound swab: GNB percentage sensitivity",
+   "s": {
+    "ceftazidime": 44,
+    "cefepime": 51,
+    "aztreonam": 42,
+    "cefoperazone_sulbactam": 44,
+    "piptazo": 59,
+    "gentamicin": 45,
+    "amikacin": 52,
+    "netilmicin": 58,
+    "meropenem": 63,
+    "colistin": 100
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "P. aeruginosa",
+   "pheno": null,
+   "n": 14,
+   "page": 4,
+   "table": "Pus wound swab: GNB percentage sensitivity",
+   "s": {
+    "ceftazidime": 43,
+    "cefepime": 50,
+    "aztreonam": 29,
+    "cefoperazone_sulbactam": 36,
+    "piptazo": 57,
+    "gentamicin": 50,
+    "amikacin": 64,
+    "netilmicin": 57,
+    "meropenem": 57,
+    "colistin": 100
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 13,
+   "page": 4,
+   "table": "Pus wound swab: GNB percentage sensitivity",
+   "s": {
+    "ceftriaxone": 15,
+    "cefepime": 8,
+    "aztreonam": 10,
+    "ampsulbactam": 8,
+    "cefoperazone_sulbactam": 15,
+    "piptazo": 8,
+    "gentamicin": 8,
+    "amikacin": 8,
+    "netilmicin": 54,
+    "meropenem": 30,
+    "tigecycline": 92,
+    "colistin": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "ampsulbactam": "Ampicillin + Sulbactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem",
+    "aztreonam": "printed 10 (confirmed on the page); the build treats this as intrinsic resistance"
+   },
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 28,
+   "page": 4,
+   "table": "Pus wound swab: GNB percentage sensitivity",
+   "s": {
+    "ceftriaxone": 13,
+    "cefepime": 11,
+    "aztreonam": 10,
+    "ampsulbactam": 12,
+    "cefoperazone_sulbactam": 32,
+    "piptazo": 18,
+    "gentamicin": 18,
+    "amikacin": 18,
+    "netilmicin": 61,
+    "meropenem": 18,
+    "tigecycline": 57,
+    "colistin": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "ampsulbactam": "Ampicillin + Sulbactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem",
+    "aztreonam": "printed 10 (confirmed on the page); the build treats this as intrinsic resistance"
+   },
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 16,
+   "page": 4,
+   "table": "Pus wound swab: GNB percentage sensitivity",
+   "s": {
+    "ceftriaxone": 14,
+    "cefepime": 16,
+    "aztreonam": 6,
+    "ampsulbactam": 6,
+    "cefoperazone_sulbactam": 13,
+    "piptazo": 13,
+    "gentamicin": 18,
+    "amikacin": 17,
+    "netilmicin": 31,
+    "meropenem": 6,
+    "tigecycline": 75,
+    "colistin": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "ampsulbactam": "Ampicillin + Sulbactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem",
+    "aztreonam": "printed 6 (confirmed on the page); the build treats this as intrinsic resistance"
+   },
+   "specimen_as_printed": "Pus wound swab"
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": null,
+   "n": 25,
+   "page": 5,
+   "table": "Body fluids: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 10,
+    "oxacillin": 53,
+    "erythromycin": 32,
+    "clindamycin": 56,
+    "gentamicin": 64,
+    "cotrimoxazole": 56,
+    "vancomycin": 100,
+    "tigecycline": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "erythromycin": "Erythromycin",
+    "clindamycin": "Clindamycin",
+    "gentamicin": "Gentamicin",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "vancomycin": "Glycopeptide",
+    "tigecycline": "Tigecycline"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Staphylococci spp.\", a row separate from Staph. aureus; recorded as coagulase-negative staphylococci (the 2011 edition of this newsletter labels the same row \"Staphylococci spp. (CONS)\").",
+   "specimen_as_printed": "Body fluids"
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": null,
+   "n": 10,
+   "page": 5,
+   "table": "Body fluids: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 10,
+    "oxacillin": 33,
+    "erythromycin": 30,
+    "clindamycin": 50,
+    "gentamicin": 50,
+    "cotrimoxazole": 50,
+    "vancomycin": 100,
+    "tigecycline": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "erythromycin": "Erythromycin",
+    "clindamycin": "Clindamycin",
+    "gentamicin": "Gentamicin",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "vancomycin": "Glycopeptide",
+    "tigecycline": "Tigecycline"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Staphylococci spp.\", a row separate from Staph. aureus; recorded as coagulase-negative staphylococci (the 2011 edition of this newsletter labels the same row \"Staphylococci spp. (CONS)\").",
+   "specimen_as_printed": "Body fluids"
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": null,
+   "n": 6,
+   "page": 5,
+   "table": "Body fluids: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 0,
+    "oxacillin": 17,
+    "erythromycin": 33,
+    "clindamycin": 17,
+    "gentamicin": 33,
+    "cotrimoxazole": 50,
+    "vancomycin": 100,
+    "tigecycline": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "erythromycin": "Erythromycin",
+    "clindamycin": "Clindamycin",
+    "gentamicin": "Gentamicin",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "vancomycin": "Glycopeptide",
+    "tigecycline": "Tigecycline"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Staphylococci spp.\", a row separate from Staph. aureus; recorded as coagulase-negative staphylococci (the 2011 edition of this newsletter labels the same row \"Staphylococci spp. (CONS)\").",
+   "specimen_as_printed": "Body fluids"
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Staph. aureus",
+   "pheno": null,
+   "n": 6,
+   "page": 5,
+   "table": "Body fluids: GPC percentage sensitivity",
+   "s": {
+    "erythromycin": 33,
+    "clindamycin": 50,
+    "gentamicin": 50,
+    "cotrimoxazole": 50,
+    "vancomycin": 100,
+    "tigecycline": 100,
+    "daptomycin": 100
+   },
+   "printed": {
+    "erythromycin": "Erythromycin",
+    "clindamycin": "Clindamycin",
+    "gentamicin": "Gentamicin",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "vancomycin": "Glycopeptide",
+    "tigecycline": "Tigecycline",
+    "daptomycin": "Daptomycin"
+   },
+   "notes": {
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "specimen_as_printed": "Body fluids"
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 6,
+   "page": 5,
+   "table": "Body fluids: GPC percentage sensitivity",
+   "s": {
+    "ampicillin": 17,
+    "gentamicin_hl": 57,
+    "vancomycin": 83,
+    "linezolid": 100,
+    "tigecycline": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "gentamicin_hl": "High Dose Gentamicin",
+    "vancomycin": "Glycopeptide",
+    "linezolid": "Linezolid",
+    "tigecycline": "Tigecycline"
+   },
+   "notes": {
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin",
+    "gentamicin_hl": "printed 57 (confirmed on the page), which no whole number of the row's 6 isolates gives; per-drug tested numbers are not printed"
+   },
+   "conflict": {
+    "gentamicin_hl": "printed 57% for a row of n = 6; no whole number of 6 or fewer tested isolates gives 57%"
+   },
+   "note": "Printed as \"Enterococci spp.\".",
+   "specimen_as_printed": "Body fluids"
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 26,
+   "page": 5,
+   "table": "Body fluids: GPC percentage sensitivity",
+   "s": {
+    "ampicillin": 4,
+    "gentamicin_hl": 15,
+    "vancomycin": 62,
+    "linezolid": 100,
+    "tigecycline": 100,
+    "daptomycin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "gentamicin_hl": "High Dose Gentamicin",
+    "vancomycin": "Glycopeptide",
+    "linezolid": "Linezolid",
+    "tigecycline": "Tigecycline",
+    "daptomycin": "Daptomycin"
+   },
+   "notes": {
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Enterococci spp.\".",
+   "specimen_as_printed": "Body fluids"
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": 19,
+   "page": 5,
+   "table": "Body fluids: GPC percentage sensitivity",
+   "s": {
+    "ampicillin": 11,
+    "gentamicin_hl": 32,
+    "vancomycin": 84,
+    "linezolid": 100,
+    "tigecycline": 100,
+    "daptomycin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "gentamicin_hl": "High Dose Gentamicin",
+    "vancomycin": "Glycopeptide",
+    "linezolid": "Linezolid",
+    "tigecycline": "Tigecycline",
+    "daptomycin": "Daptomycin"
+   },
+   "notes": {
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Enterococci spp.\".",
+   "specimen_as_printed": "Body fluids"
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "E. coli",
+   "pheno": null,
+   "n": 13,
+   "page": 5,
+   "table": "Body fluids: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 5,
+    "cefuroxime": 11,
+    "ceftriaxone": 12,
+    "cefepime": 31,
+    "aztreonam": 8,
+    "cefoperazone_sulbactam": 69,
+    "piptazo": 69,
+    "gentamicin": 54,
+    "amikacin": 92,
+    "netilmicin": 92,
+    "ertapenem": 85,
+    "meropenem": 92,
+    "tigecycline": 100,
+    "colistin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem",
+    "ampicillin": "printed 5 (confirmed on the page), which no whole number of the row's 13 isolates gives; per-drug tested numbers are not printed"
+   },
+   "conflict": {
+    "ampicillin": "printed 5% for a row of n = 13; no whole number of 13 or fewer tested isolates gives 5%"
+   },
+   "specimen_as_printed": "Body fluids"
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "E. coli",
+   "pheno": null,
+   "n": 25,
+   "page": 5,
+   "table": "Body fluids: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 0,
+    "cefuroxime": 10,
+    "ceftriaxone": 12,
+    "cefepime": 28,
+    "aztreonam": 12,
+    "cefoperazone_sulbactam": 52,
+    "piptazo": 56,
+    "gentamicin": 52,
+    "amikacin": 84,
+    "netilmicin": 72,
+    "ertapenem": 84,
+    "meropenem": 88,
+    "tigecycline": 96,
+    "colistin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Body fluids"
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "E. coli",
+   "pheno": null,
+   "n": 11,
+   "page": 5,
+   "table": "Body fluids: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 0,
+    "cefuroxime": 0,
+    "ceftriaxone": 0,
+    "cefepime": 27,
+    "aztreonam": 0,
+    "cefoperazone_sulbactam": 45,
+    "piptazo": 36,
+    "gentamicin": 27,
+    "amikacin": 64,
+    "netilmicin": 64,
+    "ertapenem": 50,
+    "meropenem": 55,
+    "tigecycline": 100,
+    "colistin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Body fluids"
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 3,
+   "page": 5,
+   "table": "Body fluids: GNB percentage sensitivity",
+   "s": {
+    "cefuroxime": 33,
+    "ceftriaxone": 67,
+    "cefepime": 100,
+    "aztreonam": 67,
+    "cefoperazone_sulbactam": 100,
+    "piptazo": 100,
+    "gentamicin": 100,
+    "amikacin": 100,
+    "netilmicin": 100,
+    "ertapenem": 100,
+    "meropenem": 100,
+    "tigecycline": 100,
+    "colistin": 100
+   },
+   "printed": {
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Body fluids"
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 21,
+   "page": 5,
+   "table": "Body fluids: GNB percentage sensitivity",
+   "s": {
+    "cefuroxime": 11,
+    "ceftriaxone": 12,
+    "cefepime": 14,
+    "aztreonam": 5,
+    "cefoperazone_sulbactam": 14,
+    "piptazo": 24,
+    "gentamicin": 14,
+    "amikacin": 33,
+    "netilmicin": 35,
+    "ertapenem": 29,
+    "meropenem": 38,
+    "tigecycline": 67,
+    "colistin": 100
+   },
+   "printed": {
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Body fluids"
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 13,
+   "page": 5,
+   "table": "Body fluids: GNB percentage sensitivity",
+   "s": {
+    "cefuroxime": 0,
+    "ceftriaxone": 0,
+    "cefepime": 23,
+    "aztreonam": 0,
+    "cefoperazone_sulbactam": 23,
+    "piptazo": 15,
+    "gentamicin": 8,
+    "amikacin": 29,
+    "netilmicin": 17,
+    "ertapenem": 23,
+    "meropenem": 23,
+    "tigecycline": 31,
+    "colistin": 100
+   },
+   "printed": {
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Body fluids"
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "P. aeruginosa",
+   "pheno": null,
+   "n": 13,
+   "page": 5,
+   "table": "Body fluids: GNB percentage sensitivity",
+   "s": {
+    "ceftazidime": 38,
+    "cefepime": 38,
+    "aztreonam": 38,
+    "cefoperazone_sulbactam": 31,
+    "piptazo": 38,
+    "gentamicin": 23,
+    "amikacin": 38,
+    "netilmicin": 38,
+    "meropenem": 36
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "meropenem": "Imipenem/Meropenem"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Body fluids"
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 7,
+   "page": 5,
+   "table": "Body fluids: GNB percentage sensitivity",
+   "s": {
+    "ceftriaxone": 50,
+    "cefepime": 43,
+    "aztreonam": 51,
+    "ampsulbactam": 50,
+    "cefoperazone_sulbactam": 43,
+    "piptazo": 43,
+    "gentamicin": 43,
+    "amikacin": 57,
+    "netilmicin": 67,
+    "meropenem": 43,
+    "tigecycline": 100,
+    "colistin": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "ampsulbactam": "Ampicillin + Sulbactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem",
+    "aztreonam": "printed 51 (confirmed on the page); the build treats this as intrinsic resistance"
+   },
+   "specimen_as_printed": "Body fluids"
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 8,
+   "page": 5,
+   "table": "Body fluids: GNB percentage sensitivity",
+   "s": {
+    "ceftriaxone": 20,
+    "cefepime": 25,
+    "aztreonam": 0,
+    "ampsulbactam": 25,
+    "cefoperazone_sulbactam": 10,
+    "piptazo": 10,
+    "gentamicin": 25,
+    "amikacin": 25,
+    "netilmicin": 29,
+    "meropenem": 20,
+    "tigecycline": 63,
+    "colistin": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "ampsulbactam": "Ampicillin + Sulbactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem",
+    "aztreonam": "printed 0 (confirmed on the page); the build treats this as intrinsic resistance",
+    "cefoperazone_sulbactam": "printed 10 (confirmed on the page), which no whole number of the row's 8 isolates gives; per-drug tested numbers are not printed",
+    "piptazo": "printed 10 (confirmed on the page), which no whole number of the row's 8 isolates gives; per-drug tested numbers are not printed"
+   },
+   "conflict": {
+    "cefoperazone_sulbactam": "printed 10% for a row of n = 8; no whole number of 8 or fewer tested isolates gives 10%",
+    "piptazo": "printed 10% for a row of n = 8; no whole number of 8 or fewer tested isolates gives 10%"
+   },
+   "specimen_as_printed": "Body fluids"
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 10,
+   "page": 5,
+   "table": "Body fluids: GNB percentage sensitivity",
+   "s": {
+    "ceftriaxone": 20,
+    "cefepime": 22,
+    "aztreonam": 0,
+    "ampsulbactam": 10,
+    "cefoperazone_sulbactam": 10,
+    "piptazo": 0,
+    "gentamicin": 10,
+    "amikacin": 10,
+    "netilmicin": 10,
+    "meropenem": 10,
+    "tigecycline": 70,
+    "colistin": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "ampsulbactam": "Ampicillin + Sulbactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem",
+    "aztreonam": "printed 0 (confirmed on the page); the build treats this as intrinsic resistance"
+   },
+   "specimen_as_printed": "Body fluids"
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Staph. aureus",
+   "pheno": null,
+   "n": 12,
+   "page": 6,
+   "table": "Respiratory isolates: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 0,
+    "oxacillin": 42,
+    "erythromycin": 17,
+    "clindamycin": 33,
+    "vancomycin": 100,
+    "cotrimoxazole": 42,
+    "gentamicin": 58,
+    "linezolid": 100,
+    "tigecycline": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "erythromycin": "Erythromycin",
+    "clindamycin": "Clindamycin",
+    "vancomycin": "Glycopeptide",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "gentamicin": "Gentamicin",
+    "linezolid": "Linezolid",
+    "tigecycline": "Tigecycline"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "specimen_as_printed": "Respiratory isolates"
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Staph. aureus",
+   "pheno": null,
+   "n": 18,
+   "page": 6,
+   "table": "Respiratory isolates: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 0,
+    "oxacillin": 22,
+    "erythromycin": 11,
+    "clindamycin": 22,
+    "vancomycin": 100,
+    "cotrimoxazole": 59,
+    "gentamicin": 22,
+    "linezolid": 100,
+    "tigecycline": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "erythromycin": "Erythromycin",
+    "clindamycin": "Clindamycin",
+    "vancomycin": "Glycopeptide",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "gentamicin": "Gentamicin",
+    "linezolid": "Linezolid",
+    "tigecycline": "Tigecycline"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "specimen_as_printed": "Respiratory isolates"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Staph. aureus",
+   "pheno": null,
+   "n": 71,
+   "page": 6,
+   "table": "Respiratory isolates: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 0,
+    "oxacillin": 26,
+    "erythromycin": 17,
+    "clindamycin": 27,
+    "vancomycin": 100,
+    "cotrimoxazole": 73,
+    "gentamicin": 31,
+    "linezolid": 100,
+    "tigecycline": 100
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "oxacillin": "Cefoxitin/Oxacillin",
+    "erythromycin": "Erythromycin",
+    "clindamycin": "Clindamycin",
+    "vancomycin": "Glycopeptide",
+    "cotrimoxazole": "Co-Trimoxazole",
+    "gentamicin": "Gentamicin",
+    "linezolid": "Linezolid",
+    "tigecycline": "Tigecycline"
+   },
+   "notes": {
+    "oxacillin": "printed as one combined Cefoxitin/Oxacillin column (methicillin susceptibility); recorded under oxacillin",
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "specimen_as_printed": "Respiratory isolates"
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Streptococcus pneumoniae",
+   "pheno": null,
+   "n": 3,
+   "page": 6,
+   "table": "Respiratory isolates: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 100,
+    "ceftriaxone": 100,
+    "erythromycin": 100,
+    "clindamycin": 100,
+    "vancomycin": 100,
+    "cotrimoxazole": 0
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "ceftriaxone": "Ceftriaxone",
+    "erythromycin": "Erythromycin",
+    "clindamycin": "Clindamycin",
+    "vancomycin": "Glycopeptide",
+    "cotrimoxazole": "Co-Trimoxazole"
+   },
+   "notes": {
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Strept. pneumoniae\".",
+   "specimen_as_printed": "Respiratory isolates"
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Streptococcus pneumoniae",
+   "pheno": null,
+   "n": 3,
+   "page": 6,
+   "table": "Respiratory isolates: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 100,
+    "ceftriaxone": 100,
+    "erythromycin": 100,
+    "clindamycin": 100,
+    "vancomycin": 100,
+    "cotrimoxazole": 50
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "ceftriaxone": "Ceftriaxone",
+    "erythromycin": "Erythromycin",
+    "clindamycin": "Clindamycin",
+    "vancomycin": "Glycopeptide",
+    "cotrimoxazole": "Co-Trimoxazole"
+   },
+   "notes": {
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Strept. pneumoniae\".",
+   "specimen_as_printed": "Respiratory isolates"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Streptococcus pneumoniae",
+   "pheno": null,
+   "n": 7,
+   "page": 6,
+   "table": "Respiratory isolates: GPC percentage sensitivity",
+   "s": {
+    "penicillin": 100,
+    "ceftriaxone": 100,
+    "erythromycin": 86,
+    "clindamycin": 100,
+    "vancomycin": 100,
+    "cotrimoxazole": 43
+   },
+   "printed": {
+    "penicillin": "Penicillin",
+    "ceftriaxone": "Ceftriaxone",
+    "erythromycin": "Erythromycin",
+    "clindamycin": "Clindamycin",
+    "vancomycin": "Glycopeptide",
+    "cotrimoxazole": "Co-Trimoxazole"
+   },
+   "notes": {
+    "vancomycin": "printed as Glycopeptide (vancomycin and teicoplanin reported as one figure; the 2011 edition heads this column Vancomycin/Teicoplanin); recorded under vancomycin"
+   },
+   "note": "Printed as \"Strept. pneumoniae\".",
+   "specimen_as_printed": "Respiratory isolates"
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "E. coli",
+   "pheno": null,
+   "n": 37,
+   "page": 6,
+   "table": "Respiratory isolates: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 3,
+    "cefuroxime": 4,
+    "ceftriaxone": 6,
+    "cefepime": 14,
+    "aztreonam": 5,
+    "piptazo": 41,
+    "cefoperazone_sulbactam": 41,
+    "gentamicin": 49,
+    "amikacin": 81,
+    "netilmicin": 70,
+    "ertapenem": 73,
+    "meropenem": 86,
+    "tigecycline": 100,
+    "colistin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Respiratory isolates"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "E. coli",
+   "pheno": null,
+   "n": 68,
+   "page": 6,
+   "table": "Respiratory isolates: GNB percentage sensitivity",
+   "s": {
+    "ampicillin": 0,
+    "cefuroxime": 5,
+    "ceftriaxone": 6,
+    "cefepime": 21,
+    "aztreonam": 4,
+    "piptazo": 43,
+    "cefoperazone_sulbactam": 44,
+    "gentamicin": 37,
+    "amikacin": 81,
+    "netilmicin": 76,
+    "ertapenem": 66,
+    "meropenem": 82,
+    "tigecycline": 96,
+    "colistin": 100
+   },
+   "printed": {
+    "ampicillin": "Ampicillin",
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Respiratory isolates"
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 18,
+   "page": 6,
+   "table": "Respiratory isolates: GNB percentage sensitivity",
+   "s": {
+    "cefuroxime": 20,
+    "ceftriaxone": 33,
+    "cefepime": 44,
+    "aztreonam": 39,
+    "piptazo": 50,
+    "cefoperazone_sulbactam": 50,
+    "gentamicin": 50,
+    "amikacin": 72,
+    "netilmicin": 56,
+    "ertapenem": 67,
+    "meropenem": 67,
+    "tigecycline": 83,
+    "colistin": 100
+   },
+   "printed": {
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Respiratory isolates"
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 65,
+   "page": 6,
+   "table": "Respiratory isolates: GNB percentage sensitivity",
+   "s": {
+    "cefuroxime": 14,
+    "ceftriaxone": 20,
+    "cefepime": 45,
+    "aztreonam": 18,
+    "piptazo": 46,
+    "cefoperazone_sulbactam": 45,
+    "gentamicin": 40,
+    "amikacin": 65,
+    "netilmicin": 42,
+    "ertapenem": 60,
+    "meropenem": 68,
+    "tigecycline": 63,
+    "colistin": 98
+   },
+   "printed": {
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Respiratory isolates"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 222,
+   "page": 6,
+   "table": "Respiratory isolates: GNB percentage sensitivity",
+   "s": {
+    "cefuroxime": 4,
+    "ceftriaxone": 7,
+    "cefepime": 21,
+    "aztreonam": 7,
+    "piptazo": 24,
+    "cefoperazone_sulbactam": 23,
+    "gentamicin": 23,
+    "amikacin": 50,
+    "netilmicin": 28,
+    "ertapenem": 30,
+    "meropenem": 37,
+    "tigecycline": 55,
+    "colistin": 99
+   },
+   "printed": {
+    "cefuroxime": "Cefuroxime",
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "ertapenem": "Ertapenem",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Respiratory isolates"
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "P. aeruginosa",
+   "pheno": null,
+   "n": 35,
+   "page": 6,
+   "table": "Respiratory isolates: GNB percentage sensitivity",
+   "s": {
+    "ceftazidime": 59,
+    "cefepime": 63,
+    "aztreonam": 53,
+    "piptazo": 80,
+    "cefoperazone_sulbactam": 60,
+    "gentamicin": 62,
+    "amikacin": 64,
+    "netilmicin": 74,
+    "meropenem": 63,
+    "colistin": 100
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Respiratory isolates"
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "P. aeruginosa",
+   "pheno": null,
+   "n": 53,
+   "page": 6,
+   "table": "Respiratory isolates: GNB percentage sensitivity",
+   "s": {
+    "ceftazidime": 48,
+    "cefepime": 53,
+    "aztreonam": 50,
+    "piptazo": 70,
+    "cefoperazone_sulbactam": 51,
+    "gentamicin": 58,
+    "amikacin": 68,
+    "netilmicin": 68,
+    "meropenem": 60,
+    "colistin": 100
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Respiratory isolates"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "P. aeruginosa",
+   "pheno": null,
+   "n": 166,
+   "page": 6,
+   "table": "Respiratory isolates: GNB percentage sensitivity",
+   "s": {
+    "ceftazidime": 33,
+    "cefepime": 37,
+    "aztreonam": 30,
+    "piptazo": 43,
+    "cefoperazone_sulbactam": 34,
+    "gentamicin": 41,
+    "amikacin": 43,
+    "netilmicin": 44,
+    "meropenem": 37,
+    "colistin": 99
+   },
+   "printed": {
+    "ceftazidime": "Ceftazidime",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "meropenem": "Imipenem/Meropenem",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem"
+   },
+   "specimen_as_printed": "Respiratory isolates"
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 14,
+   "page": 6,
+   "table": "Respiratory isolates: GNB percentage sensitivity",
+   "s": {
+    "ceftriaxone": 10,
+    "cefepime": 21,
+    "aztreonam": 14,
+    "ampsulbactam": 31,
+    "piptazo": 29,
+    "cefoperazone_sulbactam": 36,
+    "gentamicin": 36,
+    "amikacin": 37,
+    "netilmicin": 36,
+    "meropenem": 21,
+    "tigecycline": 64,
+    "colistin": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "ampsulbactam": "Ampicillin + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem",
+    "aztreonam": "printed 14 (confirmed on the page); the build treats this as intrinsic resistance"
+   },
+   "specimen_as_printed": "Respiratory isolates"
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 34,
+   "page": 6,
+   "table": "Respiratory isolates: GNB percentage sensitivity",
+   "s": {
+    "ceftriaxone": 10,
+    "cefepime": 3,
+    "aztreonam": 3,
+    "ampsulbactam": 3,
+    "piptazo": 3,
+    "cefoperazone_sulbactam": 12,
+    "gentamicin": 9,
+    "amikacin": 9,
+    "netilmicin": 21,
+    "meropenem": 6,
+    "tigecycline": 53,
+    "colistin": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "ampsulbactam": "Ampicillin + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem",
+    "aztreonam": "printed 3 (confirmed on the page); the build treats this as intrinsic resistance"
+   },
+   "specimen_as_printed": "Respiratory isolates"
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 267,
+   "page": 6,
+   "table": "Respiratory isolates: GNB percentage sensitivity",
+   "s": {
+    "ceftriaxone": 1,
+    "cefepime": 4,
+    "aztreonam": 2,
+    "ampsulbactam": 6,
+    "piptazo": 4,
+    "cefoperazone_sulbactam": 10,
+    "gentamicin": 8,
+    "amikacin": 9,
+    "netilmicin": 19,
+    "meropenem": 5,
+    "tigecycline": 65,
+    "colistin": 100
+   },
+   "printed": {
+    "ceftriaxone": "Ceftriaxone",
+    "cefepime": "Cefepime",
+    "aztreonam": "Aztreonam",
+    "ampsulbactam": "Ampicillin + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum",
+    "gentamicin": "Gentamicin",
+    "amikacin": "Amikacin",
+    "netilmicin": "Netilmicin",
+    "meropenem": "Imipenem/Meropenem",
+    "tigecycline": "Tigecycline",
+    "colistin": "Colistin"
+   },
+   "notes": {
+    "meropenem": "printed as one combined Imipenem/Meropenem column; recorded under meropenem",
+    "aztreonam": "printed 2 (confirmed on the page); the build treats this as intrinsic resistance"
+   },
+   "specimen_as_printed": "Respiratory isolates"
+  }
+ ],
+ "counts": [
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "n": 12,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "E. coli",
+   "n": 55,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "n": 12,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "n": 16,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Salmonella Paratyphi A",
+   "n": 47,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Salmonella Typhi",
+   "n": 111,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 12,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Coagulase-negative staphylococci",
+   "n": 112,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Streptococcus pneumoniae",
+   "n": 11,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Streptococcus spp.",
+   "n": 14,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Aeromonas spp.",
+   "n": 2,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Burkholderia cepacia",
+   "n": 2,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Citrobacter spp.",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Elizabethkingia meningoseptica",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Enterobacter spp.",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Streptococcus pyogenes",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Morganella spp.",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Proteus spp.",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 7,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Non-typhoidal Salmonella",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Serratia marcescens",
+   "n": 2,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Shigella flexneri",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Sphingomonas paucimobilis",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Streptococcus pyogenes",
+   "n": 2,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "n": 18,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "E. coli",
+   "n": 45,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "n": 18,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "n": 27,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Salmonella Paratyphi A",
+   "n": 10,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Salmonella Typhi",
+   "n": 55,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 15,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Coagulase-negative staphylococci",
+   "n": 173,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Streptococcus spp.",
+   "n": 10,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Aeromonas spp.",
+   "n": 2,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Burkholderia cepacia",
+   "n": 3,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "n": 7,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "n": 4,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Serratia marcescens",
+   "n": 9,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Serratia spp.",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Sphingomonas paucimobilis",
+   "n": 4,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 6,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "ward",
+   "org": "Streptococcus pneumoniae",
+   "n": 2,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "n": 78,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Burkholderia cepacia",
+   "n": 11,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "E. coli",
+   "n": 55,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterobacter spp.",
+   "n": 12,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "n": 42,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "n": 96,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 22,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 17,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Coagulase-negative staphylococci",
+   "n": 190,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 10,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Streptococcus spp.",
+   "n": 10,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Burkholderia pseudomallei",
+   "n": 2,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Citrobacter spp.",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Elizabethkingia meningoseptica",
+   "n": 4,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Morganella spp.",
+   "n": 2,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Proteus spp.",
+   "n": 3,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Salmonella Paratyphi A",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Serratia marcescens",
+   "n": 6,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Sphingomonas paucimobilis",
+   "n": 2,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Streptococcus pneumoniae",
+   "n": 6,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Streptococcus agalactiae",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "icu",
+   "org": "Streptococcus pyogenes",
+   "n": 1,
+   "page": 2
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Citrobacter spp.",
+   "n": 14,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "E. coli",
+   "n": 678,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterobacter spp.",
+   "n": 19,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "n": 89,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "n": 180,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Morganella spp.",
+   "n": 15,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Proteus spp.",
+   "n": 39,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 78,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Coagulase-negative staphylococci",
+   "n": 24,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "n": 9,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Burkholderia cepacia",
+   "n": 2,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Providencia spp.",
+   "n": 4,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Serratia marcescens",
+   "n": 2,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Serratia spp.",
+   "n": 1,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 7,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 7,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Streptococcus agalactiae",
+   "n": 5,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Streptococcus spp.",
+   "n": 5,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "n": 15,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "E. coli",
+   "n": 301,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "n": 11,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "n": 147,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "n": 127,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Proteus spp.",
+   "n": 20,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "n": 59,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Coagulase-negative staphylococci",
+   "n": 14,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Aeromonas spp.",
+   "n": 2,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Citrobacter spp.",
+   "n": 9,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Elizabethkingia meningoseptica",
+   "n": 1,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Morganella spp.",
+   "n": 5,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Providencia spp.",
+   "n": 3,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Serratia spp.",
+   "n": 2,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Sphingomonas paucimobilis",
+   "n": 1,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 7,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 4,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Streptococcus agalactiae",
+   "n": 2,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "ward",
+   "org": "Streptococcus spp.",
+   "n": 3,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "E. coli",
+   "n": 88,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "n": 80,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "n": 39,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 18,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "n": 3,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterobacter spp.",
+   "n": 2,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Morganella spp.",
+   "n": 4,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Proteus spp.",
+   "n": 7,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Providencia spp.",
+   "n": 4,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Coagulase-negative staphylococci",
+   "n": 1,
+   "page": 3
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Streptococcus spp.",
+   "n": 1,
+   "page": 3
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "n": 13,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Citrobacter spp.",
+   "n": 10,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "E. coli",
+   "n": 114,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterobacter spp.",
+   "n": 19,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "n": 53,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "n": 54,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Morganella spp.",
+   "n": 17,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Proteus spp.",
+   "n": 29,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 80,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 187,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Coagulase-negative staphylococci",
+   "n": 66,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Streptococcus spp.",
+   "n": 12,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Aeromonas spp.",
+   "n": 3,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Burkholderia cepacia",
+   "n": 1,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Providencia spp.",
+   "n": 1,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Serratia marcescens",
+   "n": 4,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Serratia spp.",
+   "n": 2,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Sphingomonas paucimobilis",
+   "n": 4,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 1,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Streptococcus agalactiae",
+   "n": 2,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "opd",
+   "org": "Streptococcus pyogenes",
+   "n": 3,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "n": 28,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "E. coli",
+   "n": 111,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "n": 23,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "n": 66,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "n": 53,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Morganella spp.",
+   "n": 13,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Proteus spp.",
+   "n": 19,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "n": 62,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 89,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Coagulase-negative staphylococci",
+   "n": 35,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Aeromonas spp.",
+   "n": 1,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Burkholderia cepacia",
+   "n": 4,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Citrobacter spp.",
+   "n": 5,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Providencia spp.",
+   "n": 6,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Salmonella Typhi",
+   "n": 3,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Serratia marcescens",
+   "n": 4,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Sphingomonas paucimobilis",
+   "n": 2,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 5,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Viridans group streptococci",
+   "n": 1,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Streptococcus agalactiae",
+   "n": 3,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Streptococcus pyogenes",
+   "n": 5,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "ward",
+   "org": "Streptococcus spp.",
+   "n": 4,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "n": 16,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "E. coli",
+   "n": 23,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "n": 17,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "n": 19,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 14,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 14,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Coagulase-negative staphylococci",
+   "n": 10,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Citrobacter spp.",
+   "n": 1,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterobacter spp.",
+   "n": 5,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Morganella spp.",
+   "n": 1,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Proteus spp.",
+   "n": 6,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Streptococcus agalactiae",
+   "n": 1,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Streptococcus pyogenes",
+   "n": 2,
+   "page": 4
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Streptococcus spp.",
+   "n": 2,
+   "page": 4
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "E. coli",
+   "n": 13,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Coagulase-negative staphylococci",
+   "n": 25,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "n": 7,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "n": 6,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "n": 3,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Morganella spp.",
+   "n": 2,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Proteus spp.",
+   "n": 2,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 5,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 4,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 2,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Streptococcus spp.",
+   "n": 3,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "E. coli",
+   "n": 25,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "n": 26,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "n": 21,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "n": 13,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Coagulase-negative staphylococci",
+   "n": 10,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "n": 8,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Burkholderia cepacia",
+   "n": 1,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Citrobacter spp.",
+   "n": 1,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "n": 1,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Proteus spp.",
+   "n": 5,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Providencia spp.",
+   "n": 1,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Salmonella Typhi",
+   "n": 1,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Serratia marcescens",
+   "n": 1,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Sphingomonas paucimobilis",
+   "n": 3,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 6,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 3,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Streptococcus spp.",
+   "n": 1,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "n": 10,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "E. coli",
+   "n": 11,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "n": 19,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "n": 13,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Citrobacter spp.",
+   "n": 2,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Elizabethkingia meningoseptica",
+   "n": 1,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Enterobacter spp.",
+   "n": 1,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Proteus spp.",
+   "n": 1,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 4,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Sphingomonas paucimobilis",
+   "n": 1,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 3,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Coagulase-negative staphylococci",
+   "n": 6,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 2,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Streptococcus pneumoniae",
+   "n": 1,
+   "page": 5
+  },
+  {
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Streptococcus spp.",
+   "n": 1,
+   "page": 5
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Acinetobacter spp.",
+   "n": 14,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Klebsiella spp.",
+   "n": 18,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Pseudomonas aeruginosa",
+   "n": 35,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "n": 12,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Burkholderia cepacia",
+   "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Citrobacter spp.",
+   "n": 2,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "E. coli",
+   "n": 4,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Enterobacter spp.",
+   "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Haemophilus influenzae",
+   "n": 6,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Proteus spp.",
+   "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Serratia marcescens",
+   "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Serratia spp.",
+   "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Streptococcus pneumoniae",
+   "n": 3,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Acinetobacter spp.",
+   "n": 34,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "E. coli",
+   "n": 37,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Klebsiella spp.",
+   "n": 65,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Pseudomonas aeruginosa",
+   "n": 53,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "n": 18,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Burkholderia cepacia",
+   "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Citrobacter spp.",
+   "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Elizabethkingia meningoseptica",
+   "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "n": 4,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Haemophilus influenzae",
+   "n": 2,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Providencia spp.",
+   "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Serratia marcescens",
+   "n": 3,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 4,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Streptococcus pneumoniae",
+   "n": 3,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter spp.",
+   "n": 267,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "E. coli",
+   "n": 68,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Elizabethkingia meningoseptica",
+   "n": 12,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Enterobacter spp.",
+   "n": 20,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "n": 222,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Pseudomonas aeruginosa",
+   "n": 166,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 71,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 33,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Burkholderia cepacia",
+   "n": 3,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Citrobacter spp.",
+   "n": 4,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Haemophilus influenzae",
+   "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Morganella spp.",
+   "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Proteus spp.",
+   "n": 2,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Providencia spp.",
+   "n": 3,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 2,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Serratia marcescens",
+   "n": 5,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Serratia spp.",
+   "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Sphingomonas paucimobilis",
+   "n": 2,
+   "page": 6
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Streptococcus pneumoniae",
+   "n": 7,
+   "page": 6
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Quinolones column of every GPC and GNB table (pages 2 to 6)",
+   "drug": "Quinolones",
+   "why": "drug class with no agent named, no canonical drug key"
+  },
+  {
+   "what": "Rows printed with every drug not done (\"-\") or with no isolates",
+   "why": "no values: blood Salmonella typhi ICU (n=0), Salmonella paratyphi A ICU (n=1), Enterobacter spp. OPD (n=1); urine Staphylococci spp. ICU (n=1), Staph. aureus ICU (n=0); body fluids Staph. aureus OPD (n=4), Staph. aureus ICU (n=3), P. aeruginosa OPD (n=5), P. aeruginosa ICU (n=4); respiratory E. coli OPD (n=4)"
+  },
+  {
+   "what": "Page 7: prescription auditing of antimicrobials (DDD per 100 bed days, 2012) and the Drug Resistance Index chart (2009 to 2012)",
+   "why": "antimicrobial consumption and a composite resistance index, not percent susceptible (the consumption bars carry no data labels)"
+  },
+  {
+   "what": "Page 8: highlight based on blood isolates in IPD, 2012 (AcCo resistance in S. Typhi 3.6%; prevalence of ESBL, CRE, MRSA and VRE 1.5%, 0.80%, 0.13% and 0.11% of blood cultures processed; tigecycline resistance in Enterobacteriaceae 48% to 72% in Klebsiella spp. and 0% in E. coli)",
+   "why": "phenotype summaries without organism-level denominators, not drug-level percent susceptible"
+  },
+  {
+   "what": "Page 1 and 8: case report of ceftriaxone-resistant Salmonella Paratyphi C pneumonia, reflections, publications",
+   "why": "no susceptibility table"
+  },
+  {
+   "what": "Organism count entries with no canonical organism key",
+   "why": "not recordable: Fungal isolates, Achromobacter spp., Alcaligenes faecalis, Chryseobacterium (printed \"Chrysobacterium spp.\"), Corynebacterium spp., Moraxella spp., Myroides spp., Nocardia spp., Ochrobactrum anthropi, Pantoea spp., Pseudomonas putida, Pseudomonas stutzeri, Ralstonia mannitolilytica, Ralstonia pickettii, Raoultella ornithinolytica, Rhizobium radiobacter (printed \"Rhizobium radiobcter\"), Vibrio species"
+  },
+  {
+   "what": "Organism count entries that would add to the key of a tabulated organism",
+   "why": "Pseudomonas spp. (resolves to P. aeruginosa); Salmonella spp. (typhoidal Salmonella group, the parent of the S. Typhi and S. Paratyphi A rows); Salmonella Paratyphi B (printed \"Salmonella paratyphi B\"; same key as the S. Paratyphi A rows): recording them would misstate the tabulated organism's isolate count"
+  },
+  {
+   "what": "Fungal species named in the organism charts: blood icu Cryptococcus neoformans 1; urine opd Trichosporon asahii 7",
+   "why": "a partial count: most fungi on these charts are one \"Fungal isolates\" entry without species, so recording only the named species would understate them (fungal susceptibility is in the fungal issue of the newsletter, SGRH_FUNGAL_2012)"
+  }
+ ]
+}
