@@ -178,14 +178,14 @@
   /* ── 6. Auscultation sites (interactive, and it plays the sound) ─────────── */
 
   var AUSC = [
-    { id: "a1", cx: 120, cy: 44, n: 1, label: "Right apex", sound: "vesicular", note: "Vesicular. Compare immediately with the left apex." },
-    { id: "a2", cx: 200, cy: 44, n: 2, label: "Left apex", sound: "vesicular", note: "Vesicular, and equal to the right." },
-    { id: "a3", cx: 112, cy: 92, n: 3, label: "Right upper", sound: "reduced", note: "In COPD, symmetrically REDUCED with a prolonged expiratory phase." },
-    { id: "a4", cx: 208, cy: 92, n: 4, label: "Left upper", sound: "reduced", note: "Reduced, matching the right. Symmetry is the point." },
-    { id: "a5", cx: 108, cy: 136, n: 5, label: "Right mid", sound: "wheeze", note: "Polyphonic expiratory wheeze: many notes at once, diffuse airflow obstruction." },
-    { id: "a6", cx: 212, cy: 136, n: 6, label: "Left mid", sound: "wheeze", note: "Wheeze here too. Diffuse, not localised." },
-    { id: "a7", cx: 114, cy: 176, n: 7, label: "Right base", sound: "coarse", note: "Early COARSE crackles from secretions. Ask for a cough and listen again." },
-    { id: "a8", cx: 206, cy: 176, n: 8, label: "Left base", sound: "coarse", note: "Coarse crackles, shifting after a cough. That shift is what makes them secretions." }
+    { id: "a1", cx: 120, cy: 44, n: 1, label: "Right apex", sound: "vesicular", note: "Vesicular. Compare immediately with the left apex.", ytVid: "xddT24a5XYc", ytStart: 31 },
+    { id: "a2", cx: 200, cy: 44, n: 2, label: "Left apex", sound: "vesicular", note: "Vesicular, and equal to the right.", ytVid: "xddT24a5XYc", ytStart: 31 },
+    { id: "a3", cx: 112, cy: 92, n: 3, label: "Right upper", sound: "reduced", note: "In COPD, symmetrically REDUCED with a prolonged expiratory phase.", ytVid: "xddT24a5XYc", ytStart: 31 },
+    { id: "a4", cx: 208, cy: 92, n: 4, label: "Left upper", sound: "reduced", note: "Reduced, matching the right. Symmetry is the point.", ytVid: "xddT24a5XYc", ytStart: 31 },
+    { id: "a5", cx: 108, cy: 136, n: 5, label: "Right mid", sound: "wheeze", note: "Polyphonic expiratory wheeze: many notes at once, diffuse airflow obstruction.", ytVid: "xddT24a5XYc", ytStart: 40 },
+    { id: "a6", cx: 212, cy: 136, n: 6, label: "Left mid", sound: "wheeze", note: "Wheeze here too. Diffuse, not localised.", ytVid: "xddT24a5XYc", ytStart: 40 },
+    { id: "a7", cx: 114, cy: 176, n: 7, label: "Right base", sound: "coarse", note: "Early COARSE crackles from secretions. Ask for a cough and listen again.", ytVid: "xddT24a5XYc", ytStart: 51 },
+    { id: "a8", cx: 206, cy: 176, n: 8, label: "Left base", sound: "coarse", note: "Coarse crackles, shifting after a cough. That shift is what makes them secretions.", ytVid: "xddT24a5XYc", ytStart: 51 }
   ];
 
   function auscultationMap(o) {
@@ -204,7 +204,8 @@
     var chosen = null;
     for (i = 0; i < AUSC.length; i++) if (AUSC[i].id === sel) chosen = AUSC[i];
     html += '<div class="cx-dia-note">' + (chosen
-      ? "<b>" + esc(chosen.label) + "</b> " + esc(chosen.note) + '<span class="cx-dia-playing">playing: ' + esc(chosen.sound) + "</span>"
+      ? "<b>" + esc(chosen.label) + "</b> " + esc(chosen.note) + '<span class="cx-dia-playing">playing: ' + esc(chosen.sound) + "</span>" +
+        (chosen.ytVid ? '<button type="button" class="cx-btn cx-btn--ghost" style="margin-left:8px;padding:3px 8px;font-size:11.5px;color:#c00;border-color:rgba(204,0,0,0.3);display:inline-flex;align-items:center;gap:4px;" data-act="cx-watch-sound" data-vid="' + esc(chosen.ytVid) + '" data-start="' + (chosen.ytStart || 0) + '">' + ic("smart_display") + ' Real (YouTube)</button>' : '')
       : "Tap a site to HEAR what you would find in this patient. Work side to side at matched levels, exactly as with percussion.") + "</div>";
     return html;
   }

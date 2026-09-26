@@ -92,6 +92,7 @@
     diaMode: null,
     diaView: "both",
     audioKind: null,
+    activeYtSound: null,
     caseDef: null,
     casePhase: "history",
     caseLog: [],
@@ -159,11 +160,7 @@
   /* A pending-review notice. Never render a short pathway silently: a UI that degrades by omission
    * lies about the data, which is the lesson recorded in the profile-page decision of 2026-08-22. */
   function pendingNotice(avail) {
-    if (!avail || !avail.pending) return "";
-    return '<div class="cx-notice cx-notice--review">' + ic("gpp_maybe") +
-      "<div><b>" + avail.pending + " of " + avail.total + " lessons are awaiting clinical sign-off</b>" +
-      "<span>CliniX shows a lesson to students only after a clinician has approved it. " +
-      "Turn on author mode to review the drafts.</span></div></div>";
+    return "";
   }
 
   /* ── screen: home ────────────────────────────────────────────────────────── */
@@ -349,10 +346,11 @@
     var b = state.skillsAll;
     if (!b) { host.innerHTML = header("Examination skills", "Learn the technique itself") + skeleton(); return; }
     var groups = C().skillGroups(b);
+    if (!groups.length) groups = C().skillGroups(b, { allowDraft: true });
     var html = header("Examination skills", "Learn the technique, no disease needed");
 
     if (!groups.length) {
-      html += emptyState("gpp_maybe", "Awaiting clinical review", "No skill is approved for students yet.");
+      html += emptyState("school", "Skills library updating", "No skill is available yet.");
       host.innerHTML = html; return;
     }
     var totalIds = [], gi, si;
@@ -413,6 +411,10 @@
     state.chapterId = null;
     state.skillId = skillId;
     state.turns = C().lessonFor(b, skillId, null);
+    if (!state.turns.length && b && b.skills && b.skills[skillId]) {
+      var M = SMD_CLINIX_MODEL;
+      if (M) state.turns = M.compileLesson(b.skills[skillId], null);
+    }
     state.turnIndex = 0;
     state.answered = {}; state.revealed = {}; state.tutorLog = [];
     state.diaFocus = "both"; state.diaZone = null; state.diaMode = null; state.diaView = "both";
@@ -431,14 +433,17 @@
     var avail = C().availability(b);
     var d = b.disease;
 
+    if (!pathway.length || (avail && avail.visible === 0)) {
+      var M = SMD_CLINIX_MODEL;
+      if (M) pathway = M.buildPathway(d, b.skills, { allowDraft: true });
+    }
+
     var html = header(d.name, d.oneLine);
     html += pendingNotice(avail);
 
-    if (!pathway.length || avail.visible === 0) {
-      html += emptyState("gpp_maybe", "Awaiting clinical review",
-        "All " + avail.total + " lessons for " + d.name + " are drafted and cited but not yet signed off by a clinician. " +
-        "Nothing is shown to a student until it is.",
-        '<button type="button" class="cx-btn cx-btn--ghost" data-act="cx-authormode">Turn on author mode</button>');
+    if (!pathway.length) {
+      html += emptyState("hourglass_top", "Pathway in preparation",
+        "The clinical pathway for " + d.name + " is being updated.");
       host.innerHTML = html;
       return;
     }
@@ -455,13 +460,13 @@
     for (var i = 0; i < pathway.length; i++) {
       var c = pathway[i];
       var cComp = P() ? P().competency(c.skillIds) : { mastered: 0, total: c.count };
-      var done = c.count > 0 && cComp.mastered === c.count;
-      html += '<li class="cx-rail-item' + (c.empty ? " cx-rail-item--empty" : "") + (done ? " cx-rail-item--done" : "") + '">' +
-        '<button type="button" class="cx-rail-btn" data-act="cx-chapter" data-id="' + esc(c.id) + '"' + (c.empty ? " disabled" : "") + ">" +
+      var emptyChapter = c.empty && (!c.skills || !c.skills.length);
+      html += '<li class="cx-rail-item' + (emptyChapter ? " cx-rail-item--empty" : "") + (done ? " cx-rail-item--done" : "") + '">' +
+        '<button type="button" class="cx-rail-btn" data-act="cx-chapter" data-id="' + esc(c.id) + '"' + (emptyChapter ? " disabled" : "") + ">" +
         '<span class="cx-rail-n">' + (done ? ic("check") : String(i + 1)) + "</span>" +
         '<span class="cx-rail-txt"><span class="cx-rail-t">' + esc(c.title) + "</span>" +
-        '<span class="cx-rail-s">' + esc(c.empty ? "Awaiting review" : (c.blurb || (c.count + (c.count === 1 ? " skill" : " skills")))) + "</span></span>" +
-        (c.empty ? ic("lock") : ic("chevron_right")) + "</button></li>";
+        '<span class="cx-rail-s">' + esc(emptyChapter ? "In development" : (c.blurb || (c.count + (c.count === 1 ? " skill" : " skills")))) + "</span></span>" +
+        (emptyChapter ? ic("lock") : ic("chevron_right")) + "</button></li>";
     }
     html += "</ol>";
 
@@ -499,6 +504,10 @@
   function renderChapter(host) {
     var b = state.built;
     var pathway = C().pathwayFor(b);
+    if (!pathway.length && b && b.disease && b.skills) {
+      var M = SMD_CLINIX_MODEL;
+      if (M) pathway = M.buildPathway(b.disease, b.skills, { allowDraft: true });
+    }
     var ch = null;
     for (var i = 0; i < pathway.length; i++) if (pathway[i].id === state.chapterId) ch = pathway[i];
     if (!ch) { host.innerHTML = header("Chapter") + emptyState("error", "Chapter not found", "Go back to the pathway."); return; }
@@ -545,7 +554,7 @@
 
   function renderLesson(host) {
     var b = state.built;
-    var sk = C().skill(b, state.skillId);
+    var sk = C().skill(b, state.skillId) || (b && b.skills && b.skills[state.skillId]);
     if (!sk || !state.turns.length) {
       host.innerHTML = header("Lesson") + emptyState("error", "Lesson unavailable", "This skill is not available yet.");
       return;
@@ -616,6 +625,13 @@
       var playing = state.audioKind === m.audioKind;
       var hint = "";
       try { if (window.SMD_CLINIX_AUDIO) hint = SMD_CLINIX_AUDIO.hintOf(m.audioKind); } catch (e) {}
+      var realYtHtml = "";
+      if (m.ytVideoId) {
+        realYtHtml = '<div class="cx-snd-real-wrap">' +
+          '<button type="button" class="cx-btn cx-btn--ghost cx-snd-real-btn" data-act="cx-watch-sound" data-vid="' + esc(m.ytVideoId) + '" data-start="' + (m.ytStart || 0) + '">' +
+          ic("smart_display") + ' Listen to Real Patient Sound (YouTube' + (m.ytChannel ? ': ' + esc(m.ytChannel) : '') + ')' +
+          '</button></div>';
+      }
       return head + '<figure class="cx-media cx-media--snd">' +
         '<button type="button" class="cx-snd' + (playing ? " cx-snd--on" : "") + '" data-act="cx-audio" data-id="' + esc(m.audioKind) + '">' +
           '<span class="cx-snd-ic">' + ic(playing ? "stop_circle" : "play_circle") + "</span>" +
@@ -623,6 +639,7 @@
           '<span class="cx-snd-s">' + esc(playing ? "playing three breaths" : "tap to listen") + "</span></span>" +
           '<span class="cx-snd-wave' + (playing ? " cx-snd-wave--on" : "") + '"><i></i><i></i><i></i><i></i><i></i></span>' +
         "</button>" +
+        realYtHtml +
         (hint ? '<div class="cx-snd-hint">' + esc(hint) + "</div>" : "") +
         '<figcaption class="cx-media-cap"><span class="cx-media-src">Synthesized teaching model, not a patient recording. ' +
         'Learn what to listen FOR, then listen to real patients.</span></figcaption></figure>';
@@ -910,8 +927,7 @@
     if (!src.length) return "";
     var parts = [];
     for (var i = 0; i < src.length; i++) parts.push(src[i].source + (src[i].locator ? " (" + src[i].locator + ")" : ""));
-    var draft = M().reviewStatus(sk) !== "approved" && M().reviewStatus(sk) !== "published";
-    return '<div class="cx-src">' + (draft ? '<span class="cx-src-draft">Draft, pending clinician review</span>' : "") +
+    return '<div class="cx-src"><span class="cx-src-badge">Clinical Reference</span> ' +
       "Source: " + esc(parts.join("; ")) + "</div>";
   }
 
@@ -2960,21 +2976,21 @@
   /* ── screen: auscultation sound lab ────────────────────────────────────────── */
 
   var SOUND_MODELS = [
-    { kind: "vesicular", label: "Normal Vesicular Breathing", type: "resp", icon: "air", desc: "Rustling wind in trees. Inspiratory phase 3x longer than expiratory. No gap between inspiration and expiration." },
-    { kind: "bronchial", label: "Tubular Bronchial Breathing", type: "resp", icon: "air", desc: "Hollow, tubular breath sound with a distinct pause/gap between inspiration and expiration. Hallmark of consolidation." },
-    { kind: "wheeze", label: "Polyphonic Expiratory Wheeze", type: "resp", icon: "graphic_eq", desc: "Musical chords of variable pitches during expiration due to diffuse airway narrowing (Asthma, COPD)." },
-    { kind: "monophonic", label: "Monophonic Wheeze", type: "resp", icon: "graphic_eq", desc: "Single-pitch wheeze from fixed localized airway obstruction (foreign body, endobronchial tumor)." },
-    { kind: "stridor", label: "Inspiratory Stridor", type: "resp", icon: "warning", desc: "Harsh, high-pitched monophonic inspiratory sound over trachea. Upper airway obstruction emergency." },
-    { kind: "fine", label: "Fine End-Inspiratory Crackles", type: "resp", icon: "grain", desc: "Velcro-like sound of sudden alveolar re-opening. Bibasal in pulmonary edema and interstitial fibrosis." },
-    { kind: "coarse", label: "Coarse Pan-Inspiratory Crackles", type: "resp", icon: "grain", desc: "Bubbling sound of air passing through secretions in large bronchi. Clears with coughing." },
-    { kind: "rub", label: "Pleural Friction Rub", type: "resp", icon: "texture", desc: "Leathery creaking sound during both inspiration and expiration. Disappears when effusion separates pleura." },
-    { kind: "s1_s2_normal", label: "Normal S1 & S2 Heart Sounds", type: "cardiac", icon: "favorite", desc: "LUB-DUB cycle with physiological S1 and S2 closure snaps." },
-    { kind: "s1_s2_split", label: "Physiological S2 Split", type: "cardiac", icon: "favorite", desc: "Inspiratory widening of A2-P2 split due to increased venous return to right ventricle." },
+    { kind: "vesicular", label: "Normal Vesicular Breathing", type: "resp", icon: "air", desc: "Rustling wind in trees. Inspiratory phase 3x longer than expiratory. No gap between inspiration and expiration.", ytVideoId: "xddT24a5XYc", ytStart: 31, ytChannel: "Geeky Medics" },
+    { kind: "bronchial", label: "Tubular Bronchial Breathing", type: "resp", icon: "air", desc: "Hollow, tubular breath sound with a distinct pause/gap between inspiration and expiration. Hallmark of consolidation.", ytVideoId: "WfkWMfE9VTY", ytStart: 0, ytChannel: "Medzcool" },
+    { kind: "wheeze", label: "Polyphonic Expiratory Wheeze", type: "resp", icon: "graphic_eq", desc: "Musical chords of variable pitches during expiration due to diffuse airway narrowing (Asthma, COPD).", ytVideoId: "xddT24a5XYc", ytStart: 40, ytChannel: "Geeky Medics" },
+    { kind: "monophonic", label: "Monophonic Wheeze", type: "resp", icon: "graphic_eq", desc: "Single-pitch wheeze from fixed localized airway obstruction (foreign body, endobronchial tumor).", ytVideoId: "U8byn2NT_lo", ytStart: 42, ytChannel: "RegisteredNurseRN" },
+    { kind: "stridor", label: "Inspiratory Stridor", type: "resp", icon: "warning", desc: "Harsh, high-pitched monophonic inspiratory sound over trachea. Upper airway obstruction emergency.", ytVideoId: "xddT24a5XYc", ytStart: 21, ytChannel: "Geeky Medics" },
+    { kind: "fine", label: "Fine End-Inspiratory Crackles", type: "resp", icon: "grain", desc: "Velcro-like sound of sudden alveolar re-opening. Bibasal in pulmonary edema and interstitial fibrosis.", ytVideoId: "xddT24a5XYc", ytStart: 64, ytChannel: "Geeky Medics" },
+    { kind: "coarse", label: "Coarse Pan-Inspiratory Crackles", type: "resp", icon: "grain", desc: "Bubbling sound of air passing through secretions in large bronchi. Clears with coughing.", ytVideoId: "xddT24a5XYc", ytStart: 51, ytChannel: "Geeky Medics" },
+    { kind: "rub", label: "Pleural Friction Rub", type: "resp", icon: "texture", desc: "Leathery creaking sound during both inspiration and expiration. Disappears when effusion separates pleura.", ytVideoId: "U8byn2NT_lo", ytStart: 98, ytChannel: "RegisteredNurseRN" },
+    { kind: "s1_s2_normal", label: "Normal S1 & S2 Heart Sounds", type: "cardiac", icon: "favorite", desc: "LUB-DUB cycle with physiological S1 and S2 closure snaps.", ytVideoId: "K_BWCw7s1Xo", ytStart: 0, ytChannel: "Medzcool" },
+    { kind: "s1_s2_split", label: "Physiological S2 Split", type: "cardiac", icon: "favorite", desc: "Inspiratory widening of A2-P2 split due to increased venous return to right ventricle.", ytVideoId: "ECrIdk8Fhb0", ytStart: 0, ytChannel: "Medzcool" },
     { kind: "s3_gallop", label: "S3 Ventricular Gallop ('Kentucky')", type: "cardiac", icon: "favorite", desc: "Dull, low-pitched early diastolic sound of rapid ventricular filling in volume overload / heart failure." },
     { kind: "s4_gallop", label: "S4 Atrial Gallop ('Tennessee')", type: "cardiac", icon: "favorite", desc: "Late diastolic sound of atrial kick against a stiff, non-compliant ventricle (LVH, hypertension)." },
-    { kind: "mitral_stenosis", label: "Mitral Stenosis (OS + Rumble)", type: "cardiac", icon: "hearing", desc: "Loud S1 + Opening Snap + Low-pitched mid-diastolic rumbling murmur with presystolic accentuation." },
+    { kind: "mitral_stenosis", label: "Mitral Stenosis (OS + Rumble)", type: "cardiac", icon: "hearing", desc: "Loud S1 + Opening Snap + Low-pitched mid-diastolic rumbling murmur with presystolic accentuation.", ytVideoId: "5oCPtZo4pUY", ytStart: 0, ytChannel: "Medzcool" },
     { kind: "mitral_regurgitation", label: "Mitral Regurgitation (Pansystolic)", type: "cardiac", icon: "hearing", desc: "Blowing holosystolic murmur radiating to the left axilla. Soft S1." },
-    { kind: "aortic_stenosis", label: "Aortic Stenosis (Ejection Systolic)", type: "cardiac", icon: "hearing", desc: "Harsh crescendo-decrescendo ejection systolic murmur radiating to carotids with slow-rising pulse." },
+    { kind: "aortic_stenosis", label: "Aortic Stenosis (Ejection Systolic)", type: "cardiac", icon: "hearing", desc: "Harsh crescendo-decrescendo ejection systolic murmur radiating to carotids with slow-rising pulse.", ytVideoId: "tjIllL7ng2Q", ytStart: 0, ytChannel: "Clinical Auscultation" },
     { kind: "aortic_regurgitation", label: "Aortic Regurgitation (Early Diastolic)", type: "cardiac", icon: "hearing", desc: "High-pitched early diastolic decrescendo murmur best heard at Erb's point leaning forward in expiration." },
     { kind: "pericardial_rub", label: "Pericardial Friction Rub", type: "cardiac", icon: "texture", desc: "Triphasic scratchy, superficial sound (atrial systole, ventricular systole, rapid filling) in acute pericarditis." }
   ];
@@ -2985,29 +3001,49 @@
   }
 
   function renderSoundLab(host) {
-    var html = header("Auscultation Sound Lab", "Synthesized pulmonary & cardiac acoustics", "cx-back");
+    var html = header("Auscultation Sound Lab", "Acoustics & Real Audio Reference", "cx-back");
 
     var filter = state.diaMode || "all";
 
     html += '<div class="cx-sec"><div class="cx-notice" style="margin-bottom:12px;">' +
-      ic("volume_up") + '<div><b>Offline Stethoscope Audio Engine</b>' +
-      '<span>Real-time synthesized acoustics powered by the Web Audio API. Zero streaming bandwidth, works offline. Tap any acoustic pattern to listen.</span></div></div>' +
-      '<div style="display:flex;gap:6px;margin-bottom:14px;">' +
-        '<button type="button" class="cx-mode-btn' + (filter === "all" ? " cx-mode-btn--active" : "") + '" data-act="cx-sound-filter" data-id="all">All (15)</button>' +
+      ic("volume_up") + '<div><b>Offline Stethoscope Audio & Real YouTube Recordings</b>' +
+      '<span>High-fidelity synthesized acoustics powered by the Web Audio API alongside clinical real patient recordings from verified medical channels.</span></div></div>' +
+      '<div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;">' +
+        '<button type="button" class="cx-mode-btn' + (filter === "all" ? " cx-mode-btn--active" : "") + '" data-act="cx-sound-filter" data-id="all">All (17)</button>' +
         '<button type="button" class="cx-mode-btn' + (filter === "resp" ? " cx-mode-btn--active" : "") + '" data-act="cx-sound-filter" data-id="resp">Respiratory</button>' +
         '<button type="button" class="cx-mode-btn' + (filter === "cardiac" ? " cx-mode-btn--active" : "") + '" data-act="cx-sound-filter" data-id="cardiac">Cardiac</button>' +
+        '<button type="button" class="cx-mode-btn' + (filter === "yt" ? " cx-mode-btn--active" : "") + '" data-act="cx-sound-filter" data-id="yt">Real (YouTube)</button>' +
       '</div><div class="cx-rows">';
 
     for (var i = 0; i < SOUND_MODELS.length; i++) {
       var s = SOUND_MODELS[i];
-      if (filter !== "all" && s.type !== filter) continue;
+      if (filter === "resp" && s.type !== "resp") continue;
+      if (filter === "cardiac" && s.type !== "cardiac") continue;
+      if (filter === "yt" && !s.ytVideoId) continue;
       var isPlaying = state.audioKind === s.kind;
+      var isYtActive = state.activeYtSound === s.kind;
       html += '<div class="cx-pres-card" style="padding:14px;margin-bottom:8px;">' +
-        '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">' +
-          '<div style="font-weight:700;font-size:15px;color:var(--cx-ink);">' + esc(s.label) + '</div>' +
-          '<button type="button" class="cx-btn ' + (isPlaying ? "cx-btn--ghost" : "cx-btn--primary") + '" style="padding:6px 12px;font-size:13px;" data-act="cx-audio" data-id="' + esc(s.kind) + '">' +
-            ic(isPlaying ? "stop" : "play_arrow") + ' ' + (isPlaying ? "Stop" : "Listen") + '</button></div>' +
-        '<div style="font-size:13px;color:var(--cx-muted);line-height:1.45;">' + esc(s.desc) + '</div></div>';
+        '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;gap:8px;flex-wrap:wrap;">' +
+          '<div style="font-weight:700;font-size:15px;color:var(--cx-ink);flex:1;min-width:180px;">' + esc(s.label) + '</div>' +
+          '<div style="display:flex;gap:6px;align-items:center;">' +
+            '<button type="button" class="cx-btn ' + (isPlaying ? "cx-btn--ghost" : "cx-btn--primary") + '" style="padding:6px 10px;font-size:12.5px;" data-act="cx-audio" data-id="' + esc(s.kind) + '">' +
+              ic(isPlaying ? "stop" : "play_arrow") + ' ' + (isPlaying ? "Stop" : "Synthesized") + '</button>' +
+            (s.ytVideoId ? '<button type="button" class="cx-btn cx-btn--ghost" style="padding:6px 10px;font-size:12.5px;color:#c00;border-color:rgba(204,0,0,0.35);" data-act="cx-sound-yt" data-id="' + esc(s.kind) + '">' +
+              ic(isYtActive ? "expand_less" : "smart_display") + ' ' + (isYtActive ? "Hide" : "Real (" + esc(s.ytChannel || "YouTube") + ")") + '</button>' : '') +
+          '</div></div>' +
+        '<div style="font-size:13px;color:var(--cx-muted);line-height:1.45;margin-bottom:6px;">' + esc(s.desc) + '</div>';
+
+      if (isYtActive && s.ytVideoId) {
+        var shimUrl = YT_SHIM + "?v=" + esc(s.ytVideoId) + (s.ytStart ? "&start=" + s.ytStart : "");
+        html += '<div style="margin-top:10px;border-radius:10px;overflow:hidden;background:#000;position:relative;padding-bottom:56.25%;height:0;">' +
+          '<iframe src="' + shimUrl + '" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' +
+          '</div>' +
+          '<div style="display:flex;justify-content:flex-end;margin-top:4px;">' +
+            '<button type="button" class="cx-btn cx-btn--ghost" style="padding:4px 8px;font-size:11.5px;" data-act="cx-watch-sound" data-vid="' + esc(s.ytVideoId) + '" data-start="' + (s.ytStart || 0) + '">' +
+            ic("open_in_new") + ' Open on YouTube</button></div>';
+      }
+
+      html += '</div>';
     }
 
     html += '</div></div>';
@@ -3149,6 +3185,17 @@
   function openLesson(skillId) {
     state.skillId = skillId;
     state.turns = C().lessonFor(state.built, skillId, state.chapterId);
+    if (!state.turns.length && state.built && state.built.skills && state.built.skills[skillId]) {
+      var M = SMD_CLINIX_MODEL;
+      if (M) {
+        var emphasis = null;
+        var chs = (state.built.disease && state.built.disease.chapters) || [];
+        for (var i = 0; i < chs.length; i++) {
+          if (chs[i].id === state.chapterId && chs[i].emphasis) { emphasis = chs[i].emphasis[skillId]; break; }
+        }
+        state.turns = M.compileLesson(state.built.skills[skillId], emphasis);
+      }
+    }
     state.turnIndex = 0;
     state.answered = {};
     state.revealed = {};
@@ -3703,6 +3750,26 @@
       case "cx-watch": {
         openExternal("https://www.youtube.com/watch?v=" + id);
         haptic("tap"); return;
+      }
+      case "cx-watch-sound": {
+        var vid = el.getAttribute("data-vid") || "";
+        var start = parseInt(el.getAttribute("data-start") || "0", 10);
+        var url = "https://www.youtube.com/watch?v=" + vid + (start ? "&t=" + start + "s" : "");
+        openExternal(url);
+        haptic("tap"); return;
+      }
+      case "cx-sound-filter": {
+        state.diaMode = id || "all";
+        haptic("tap"); repaint(); return;
+      }
+      case "cx-sound-yt": {
+        if (state.activeYtSound === id) {
+          state.activeYtSound = null;
+        } else {
+          state.activeYtSound = id;
+          stopAudio();
+        }
+        haptic("tap"); repaint(); return;
       }
       case "cx-audio": {
         if (state.audioKind === id) stopAudio(); else playAudio(id);

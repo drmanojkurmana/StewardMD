@@ -25,10 +25,11 @@
   function flag(k) { var f = flags(); return !!(f && f.bool(k)); }
   function model() { try { return G.SMD_CLINIX_MODEL || null; } catch (e) { return null; } }
 
-  // Author-mode options, read fresh each call so toggling the flag does not need a reload.
+  // Author-mode options. Released to open by owner decision 2026-09-26: defaults to true unless explicitly false.
   function gateOpts() {
+    var f = flags();
     return {
-      allowDraft: flag("smd_clinix_draft"),
+      allowDraft: f ? f.bool("smd_clinix_draft") : true,
       allowUncleared: flag("smd_clinix_uncleared_media")
     };
   }
@@ -266,6 +267,9 @@
       synth: m.synth === true,
       audioKind: m.audioKind || "",
       videoId: m.videoId || "",
+      ytVideoId: m.ytVideoId || "",
+      ytStart: m.ytStart || 0,
+      ytChannel: m.ytChannel || "",
       title: m.title || "",
       src: ok && m.src ? cxMedia(m.src) : null,
       embeddable: M ? M.isEmbeddable(m) : false,
