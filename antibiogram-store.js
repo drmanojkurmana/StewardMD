@@ -21,7 +21,7 @@
  * ======================================================================================== */
 (function () {
   "use strict";
-  var ABG_V = "601eadbeb5fa";
+  var ABG_V = "d945c6e033d9";
   var R = window.ABG_RULES;
   var ACT = { k: "keep", i: "intrinsic", h: "hide", x: "suppress", c: "caution" };
   var LOCAL_KEY = "smd_abg_local";
