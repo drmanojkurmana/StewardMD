@@ -63,7 +63,48 @@ function dicom(slice, sopUid, transferSyntax) {
   return cat([new Uint8Array(128), new TextEncoder().encode("DICM"), meta, ds]);
 }
 
+/* OPS-24/F24: an 8x8, 8-bit, spp=3 uncompressed colour image, every pixel the SAME (Y,Cb,Cr)
+ * triplet - (76, 85, 255), which is pure red (255, 0, 0) run through BT.601 RGB->YCbCr. Drawn
+ * unconverted (the pre-fix bug), the canvas reads back (76, 85, 255); converted, it reads back
+ * (255, 0, 0) - the render() window/level clamp passes an exact primary through unchanged. */
+const CROWS = 8, CCOLS = 8;
+function dicomColor(sopUid, photometric, triplet) {
+  const px = new Uint8Array(CROWS * CCOLS * 3);
+  for (let i = 0; i < CROWS * CCOLS; i++) { px[i * 3] = triplet[0]; px[i * 3 + 1] = triplet[1]; px[i * 3 + 2] = triplet[2]; }
+  const ts = "1.2.840.10008.1.2.1";
+  const metaBody = cat([el(0x0002, 0x0001, "OB", new Uint8Array([0, 1])), el(0x0002, 0x0002, "UI", "1.2.840.10008.5.1.4.1.1.2"),
+    el(0x0002, 0x0003, "UI", sopUid), el(0x0002, 0x0010, "UI", ts)]);
+  const meta = cat([el(0x0002, 0x0000, "UL", metaBody.length), metaBody]);
+  const ds = cat([
+    el(0x0008, 0x0016, "UI", "1.2.840.10008.5.1.4.1.1.2"), el(0x0008, 0x0018, "UI", sopUid), el(0x0008, 0x0060, "CS", "US"),
+    el(0x0020, 0x0013, "IS", "1"),
+    el(0x0028, 0x0002, "US", 3), el(0x0028, 0x0004, "CS", photometric), el(0x0028, 0x0006, "US", 0),
+    el(0x0028, 0x0010, "US", CROWS), el(0x0028, 0x0011, "US", CCOLS),
+    el(0x0028, 0x0100, "US", 8), el(0x0028, 0x0101, "US", 8), el(0x0028, 0x0102, "US", 7), el(0x0028, 0x0103, "US", 0),
+    el(0x7fe0, 0x0010, "OW", px)]);
+  return cat([new Uint8Array(128), new TextEncoder().encode("DICM"), meta, ds]);
+}
+/* OPS-24/F24: PALETTE COLOR (spp=1, samples are lookup-table indices, not intensities) - refused,
+ * never drawn as if it were a grayscale image. */
+function dicomPalette(sopUid) {
+  const px = new Uint8Array(CROWS * CCOLS).fill(1);
+  const ts = "1.2.840.10008.1.2.1";
+  const metaBody = cat([el(0x0002, 0x0001, "OB", new Uint8Array([0, 1])), el(0x0002, 0x0002, "UI", "1.2.840.10008.5.1.4.1.1.2"),
+    el(0x0002, 0x0003, "UI", sopUid), el(0x0002, 0x0010, "UI", ts)]);
+  const meta = cat([el(0x0002, 0x0000, "UL", metaBody.length), metaBody]);
+  const ds = cat([
+    el(0x0008, 0x0016, "UI", "1.2.840.10008.5.1.4.1.1.2"), el(0x0008, 0x0018, "UI", sopUid), el(0x0008, 0x0060, "CS", "OT"),
+    el(0x0020, 0x0013, "IS", "1"),
+    el(0x0028, 0x0002, "US", 1), el(0x0028, 0x0004, "CS", "PALETTE COLOR"),
+    el(0x0028, 0x0010, "US", CROWS), el(0x0028, 0x0011, "US", CCOLS),
+    el(0x0028, 0x0100, "US", 8), el(0x0028, 0x0101, "US", 8), el(0x0028, 0x0102, "US", 7), el(0x0028, 0x0103, "US", 0),
+    el(0x7fe0, 0x0010, "OW", px)]);
+  return cat([new Uint8Array(128), new TextEncoder().encode("DICM"), meta, ds]);
+}
+
 const STUDY_UID = "1.2.826.0.1.3680043.8.498.1", SERIES = "1.2.826.0.1.3680043.8.498.1.1", SERIES_J2K = "1.2.826.0.1.3680043.8.498.1.2";
+const SERIES_YBR = "1.2.826.0.1.3680043.8.498.1.3", SERIES_PALETTE = "1.2.826.0.1.3680043.8.498.1.4";
+const SOP_YBR = "1.2.826.0.1.3680043.8.498.1.3.1", SOP_PALETTE = "1.2.826.0.1.3680043.8.498.1.4.1";
 const sop = (i) => "1.2.826.0.1.3680043.8.498.1.1." + (i + 1);
 const SOP_J2K = "1.2.826.0.1.3680043.8.498.1.2.1";
 const J2K = "1.2.840.10008.1.2.4.90";
@@ -75,6 +116,8 @@ const SERIES_ANSWER = (headerHidden) => ({
   series: [
     { seriesUid: SERIES, number: 1, modality: "CT", description: "Axial phantom", instances: SQUARE.map((_, i) => ({ sopUid: sop(i), number: i + 1, frames: 1 })) },
     { seriesUid: SERIES_J2K, number: 2, modality: "CT", description: "Compressed", instances: [{ sopUid: SOP_J2K, number: 1, frames: 1 }] },
+    { seriesUid: SERIES_YBR, number: 3, modality: "US", description: "YBR colour", instances: [{ sopUid: SOP_YBR, number: 1, frames: 1 }] },
+    { seriesUid: SERIES_PALETTE, number: 4, modality: "OT", description: "Palette colour", instances: [{ sopUid: SOP_PALETTE, number: 1, frames: 1 }] },
   ],
 });
 
@@ -101,6 +144,8 @@ const server = createServer(async (req, res) => {
     if (sub === "imaging-instance") {
       const s = url.searchParams.get("sopUid");
       if (s === SOP_J2K) { const b = dicom(0, SOP_J2K, J2K); res.writeHead(200, { "Content-Type": "application/dicom", "Cache-Control": "private, no-store" }); res.end(b); return; }
+      if (s === SOP_YBR) { const b = dicomColor(SOP_YBR, "YBR_FULL", [76, 85, 255]); res.writeHead(200, { "Content-Type": "application/dicom", "Cache-Control": "private, no-store" }); res.end(b); return; }
+      if (s === SOP_PALETTE) { const b = dicomPalette(SOP_PALETTE); res.writeHead(200, { "Content-Type": "application/dicom", "Cache-Control": "private, no-store" }); res.end(b); return; }
       const i = SQUARE.findIndex((_, k) => sop(k) === s);
       if (i < 0 || url.searchParams.get("seriesUid") !== SERIES) return send({ ok: false, error: "not_in_archive" }, 404);
       res.writeHead(200, { "Content-Type": "application/dicom", "Cache-Control": "private, no-store" }); res.end(dicom(i, s)); return;
@@ -237,6 +282,22 @@ try {
     await ev(`document.querySelector('#wDicom [data-dv-series="1"]').click(); return 1;`);
     const msg = await until(`var m=document.getElementById("wDvMsg"); return m && !m.hidden && /cannot decode/.test(m.innerText) ? m.innerText : null;`, 8000);
     return !!msg && msg.includes(J2K) && (await pixelAt(32, 32)) === 0 || "msg=" + (await message());
+  });
+  const pixelAtC = (ix, iy) => ev(`var c=document.getElementById("wDvCanvas"); var s=Math.min(c.width/${CCOLS}, c.height/${CROWS}); var x0=(c.width-${CCOLS}*s)/2, y0=(c.height-${CROWS}*s)/2;
+  var d=c.getContext("2d").getImageData(Math.floor(x0+(${ix}+0.5)*s), Math.floor(y0+(${iy}+0.5)*s), 1, 1).data; return [d[0],d[1],d[2]];`);
+  await step("OPS-24/F24: a YBR_FULL colour image is drawn as RGB - pure red round-trips through the YCbCr the file stores it as", async () => {
+    await ev(`document.querySelector('#wDicom [data-dv-series="2"]').click(); return 1;`);
+    await until(`var c=document.getElementById("wDvCanvas"); return c && c.width>0 ? 1 : null;`, 8000);
+    await b.sleep(300);
+    const rgb = await pixelAtC(4, 4);
+    // Before the fix, YBR samples were drawn unconverted and this pixel read back (76, 85, 255) -
+    // the file's OWN stored bytes - instead of the red the study actually shows.
+    return (rgb[0] > 240 && rgb[1] < 15 && rgb[2] < 15) || "rgb=" + JSON.stringify(rgb);
+  });
+  await step("OPS-24/F24: PALETTE COLOR is refused, never drawn as a grayscale intensity", async () => {
+    await ev(`document.querySelector('#wDicom [data-dv-series="3"]').click(); return 1;`);
+    const msg = await until(`var m=document.getElementById("wDvMsg"); return m && !m.hidden && /not supported here/.test(m.innerText) ? m.innerText : null;`, 8000);
+    return !!msg || "msg=" + (await message());
   });
   await step("every control is at least 44 px and has an accessible name", async () =>
     (await ev(`var bad=[].slice.call(document.querySelectorAll("#wDicom button")).filter(function(x){var r=x.getBoundingClientRect(); return r.width<44||r.height<44||!(x.getAttribute("aria-label")||x.innerText.trim());}).map(function(x){return x.outerHTML.slice(0,80)}); return bad.length ? bad.join(" ; ") : true;`)));
