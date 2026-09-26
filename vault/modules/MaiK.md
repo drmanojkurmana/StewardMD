@@ -53,6 +53,11 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
   synonym, one-word id); otherwise no notes. Add missing synonyms to `KB_NAMES`, then run
   `test/maik-kb-relevance.test.mjs` (404 labelled questions, must stay at 0 mis-routes) and
   `node test/run-maik-kb-gate-ui.mjs` (headless Chrome). Decisions 2026-09-26.
+  Recall additions (branch maik-kb-names): "simple" is a qualifier like "acute" ("simple febrile seizure"
+  names Febrile seizure), and `neonatal_jaundice` answers to "jaundice in a newborn" / "newborn jaundice".
+  Benchmark now 409 questions: 315 correct, 94 no-notes, 0 miss, 0 mis-route. KB CONTENT GAPS found by the
+  Lite bench (not routing): no curated regimen for Pre-eclampsia, none for paediatric diarrhoea
+  (dehydration, ORS, zinc), and no general hypertension or thrombocytopenia entry.
 - **Chat skin** (2026-09-04): `body.mkchat`, default ON, `?mkchat=0` off / `?mkchat=1` on (key
   `smd_mkchat`). Presentation-only CSS in home.js (block "MaiK CHAT skin"): unboxed assistant prose,
   no per-answer MAIK label or disclaimer line (the banner is the one disclaimer), 15px text, quiet

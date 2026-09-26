@@ -433,6 +433,12 @@ const CASES = [
   ["difference between gram positive and negative", N],
   ["how to read a chest ct", N],
   ["what are the stages of sleep", N],
+  // Set D (2026-09-26, MaiK answer-quality set): a qualifier and a plain-English name, plus look-alikes.
+  ["simple febrile seizure what to tell parents", /febrile seizure/i],
+  ["when to worry about jaundice in a newborn", /neonatal jaundice/i],
+  ["newborn jaundice phototherapy threshold", /neonatal jaundice/i],
+  ["jaundice in an adult with fever", N, 1],
+  ["simple renal cyst follow up", N, 1],
 ];
 
 const LS = { smd_hybrid: "0" };
