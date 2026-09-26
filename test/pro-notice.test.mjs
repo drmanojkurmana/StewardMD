@@ -162,3 +162,11 @@ test("every message is plain and carries no em-dash (app-facing text rule)", () 
     assert.ok(!/\b(402|needsPro|entitlement|claim)\b/.test(e.body), `jargon leaked: ${e.body}`);
   }
 });
+
+test("free week already used on another account (trial-used): a VERIFIED doctor is shown the price, never the verify screen", () => {
+  const { N } = load({ pro: false, state: { pro: false, reason: "trial-used", verified: true } });
+  assert.equal(N.reason(), "used");
+  const e = N.explain("cloud-sync");
+  assert.equal(e.act, "paywall", "they are verified; verification cannot unlock anything");
+  assert.match(e.body, /once per doctor/);
+});

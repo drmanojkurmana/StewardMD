@@ -16,7 +16,9 @@
  * doctor-verification records. No PII beyond the account email is stored, and it self-expires.
  */
 import { verifyFirebaseToken } from "../../_fbauth.js";
-import { mergeUserClaims, lookupUidByEmail, setUserPassword } from "../../_fbadmin.js";
+import { mergeUserClaims, lookupUidByEmail, setUserPassword, getUserClaims } from "../../_fbadmin.js";
+import { phoneTrialPatch, warmTrialMode } from "../../_trial_ledger.js";
+import { isOwnerClaims } from "../../_entitlement.js";
 import { emailOtp, emailResetCode, emailTempPassword } from "../../_email.js";
 import { phoneStart, phoneVerify, deliverOtp, phoneVerifyEnabled } from "../../_phone_otp.js";
 import { markPhoneVerified } from "../../_lifecycle.js";
@@ -106,6 +108,15 @@ async function handle(context) {
       : await phoneVerify(who, pb, { store: store, onVerified: async function (phone) {
           try { await mergeUserClaims(env, who.uid, { phoneVerified: true }); } catch (e) {}
           try { await markPhoneVerified(env, who.uid, phone); } catch (e) {}
+          // One free week per number (_trial_ledger.js): a number that already had a week on
+          // another account ends the one here. TRIAL_ONCE_ON off = nothing happens.
+          if ((await warmTrialMode(env)) !== "off") {
+            try {
+              const c = (await getUserClaims(env, who.uid)) || {};
+              const patch = await phoneTrialPatch(env, who.uid, phone, c, request, { owner: isOwnerClaims(env, { email: who.email }) });
+              if (patch.trialDenied) await mergeUserClaims(env, who.uid, patch);
+            } catch (e) {}
+          }
         } });
     var ps = pr.status || 200; delete pr.status;
     return json(pr, ps);
