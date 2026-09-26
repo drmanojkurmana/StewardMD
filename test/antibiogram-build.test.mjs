@@ -151,6 +151,14 @@ test("a row whose isolate number its own count table contradicts is never combin
   assert.equal(derive(rows, src, new Set(checks.map((c) => c.spec + "|" + c.set + "|" + c.org))).filter((r) => r.set === "all").length, 0);
 });
 
+test("a combined row with more isolates than the source's own count for that stratum is not made", () => {
+  const src = base({ counts: [{ spec: "all", set: "icu", org: "E. coli", n: 50 }] });
+  const rows = [{ spec: "blood", set: "icu", org: "E. coli", n: 40, s: { amikacin: 80 } }, { spec: "respiratory", set: "icu", org: "E. coli", n: 60, s: { amikacin: 50 } }].map((r) => checkRow(src, r));
+  assert.equal(derive(rows, src).filter((r) => r.spec === "all").length, 0);
+  const ok = base({ counts: [{ spec: "all", set: "icu", org: "E. coli", n: 100 }] });
+  assert.equal(derive(rows.map((r) => Object.assign({}, r, { src: ok.id })), ok).filter((r) => r.spec === "all").length, 1);
+});
+
 test("figures repeated value for value from an earlier edition become cautions on the later row only", () => {
   const f = { amikacin: 71, ceftriaxone: 22, meropenem: 64, ciprofloxacin: 32, gentamicin: 58, piptazo: 50 };
   const e1 = base({ id: "T_2023", year: 2023, rows: [{ spec: "urine", set: "opd", org: "E. coli", n: 400, s: Object.assign({}, f) }] });

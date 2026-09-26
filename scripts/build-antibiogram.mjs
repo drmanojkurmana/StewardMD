@@ -302,7 +302,12 @@ export function derive(allRows, src, mismatched) {
     const how = complete(all, g0, parts, missing, "spec", null, g0.set, (p) => (R.SPECIMENS[p.spec || p] || {}).label || p);
     if (how) { const c = combine(parts, "all", g0.set, g0.pheno, how); if (c) out.push(c); }
   });
-  return out;
+  // A combination with more isolates than the source's own printed count for that stratum means
+  // the parts overlap or the tables disagree (GMC Srinagar 2024 H1 ICU): not made.
+  return out.filter((c) => {
+    if (c.pheno || c.n == null || !countOf.exact(c.spec, c.set, c.org)) return true;
+    return c.n <= countOf(c.spec, c.set, c.org) * 1.1 + 1;
+  });
 }
 
 /* Figures carried over. A row whose antibiotics repeat, value for value, another row of the same
