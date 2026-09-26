@@ -3525,6 +3525,7 @@
     "ward.the-rota-could-not-be-read": "The rota could not be read in full; counts may be low.",
     "ward.the-round-could-not-be-loaded": "The round could not be loaded. Do not read this as no doses due.",
     "ward.the-safety-check-could-not-run": "The safety check could not run, so nothing about this order was checked.",
+    "ward.consult-override-reason": "Reason to prescribe past a safety finding (only if asked)",
     "ward.no-pregnancy-lactation-rules-loaded": "No pregnancy or lactation rules are loaded, so this order was not checked for use in pregnancy or breastfeeding.",
     "ward.the-safety-engine-reports-nothing-against": "The safety engine reports nothing against this order.",
     "ward.the-scanned-code-is-not-this": "The scanned code is not this patient's active band.",

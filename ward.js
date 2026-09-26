@@ -7757,9 +7757,19 @@
    * checks the whole lot against what this person may write BEFORE it writes any of it, and if it
    * cannot finish it says exactly which pieces reached the chart and which were never attempted.
    * This screen shows that answer literally rather than reducing it to "saved" or "failed". */
+  /* CLIN-02: what the medication safety check found on a saved consultation (the engine's own words), and
+   * a check that could not run said as such, never left to read as clean. */
+  function consultSafetyView(results) {
+    return (results || []).filter(function (x) { return x.safety; }).map(function (x) {
+      var sf = x.safety;
+      if (sf.checked === false) return '<p class="w-hint warn">' + ms("error") + wTH("ward.the-safety-check-could-not-run", "The safety check could not run, so nothing about this order was checked.", null, "", 1) + "</p>";
+      var f = (sf.findings || []);
+      return f.length ? '<ul class="w-mini">' + f.map(function (g) { return '<li class="w-st due"><b>' + wTH("ward.warning-heading", "Warning") + "</b> <span lang=\"en\">" + esc(g.message || g.code) + "</span></li>"; }).join("") + "</ul>" : "";
+    }).join("");
+  }
   function consultationResultView(r) {
     if (!r) return "";
-    if (r.ok) return "<div class=\"w-sub\"><h4>" + wTH("ward.saved2", "Saved") + "</h4><p>" + (r.written === 1 ? wTH("ward.item-written-to-the-chart-one", "{written} item written to the chart.", { written: esc(r.written) }, "written") : wTH("ward.item-written-to-the-chart-many", "{written} items written to the chart.", { written: esc(r.written) }, "written")) + "</p></div>";
+    if (r.ok) return "<div class=\"w-sub\"><h4>" + wTH("ward.saved2", "Saved") + "</h4><p>" + (r.written === 1 ? wTH("ward.item-written-to-the-chart-one", "{written} item written to the chart.", { written: esc(r.written) }, "written") : wTH("ward.item-written-to-the-chart-many", "{written} items written to the chart.", { written: esc(r.written) }, "written")) + "</p>" + consultSafetyView(r.results) + "</div>";
     if (r.refused && r.refused.length) {
       return "<div class=\"w-sub\"><h4>" + wTH("ward.not-saved-and-nothing-was-written", "Not saved - and nothing was written", null, "", 1) + "</h4>" +
         "<p>" + wTH("ward.this-role-may-not-write-every", "This role may not write every part of this consultation, so none of it was saved. The chart is unchanged.") + "</p><ul class=\"w-mini\">" +
@@ -7789,7 +7799,7 @@
    * outlives its patient is how one patient's findings end up typed into another's chart. close()
    * clears it with everything else. */
   var C_FIELDS = ["wcProbText", "wcProbCode", "wcProbVs", "wcMoDrug", "wcMoValue", "wcMoUnit",
-    "wcMoRoute", "wcMoFreq", "wcInvCode", "wcInvReason", "wcInvPri", "wcNoteTpl", "wcNoteText",
+    "wcMoRoute", "wcMoFreq", "wcMoOverride", "wcInvCode", "wcInvReason", "wcInvPri", "wcNoteTpl", "wcNoteText",
     "wc_o2", "wc_acvpu"];
   function cDraft(d, id) { return (d && d[id]) || ""; }
   /* Options for one of the consultation's dropdowns, with whatever was already chosen marked
@@ -7872,6 +7882,8 @@
       "<input id=\"wcMoRoute\" placeholder=\"" + wTA("ward.route-optional", "Route (optional)") + "\" value=\"" + esc(cDraft(d, "wcMoRoute")) + '">' +
       "<input id=\"wcMoFreq\" placeholder=\"" + wTA("ward.how-often-optional", "How often (optional)") + "\" value=\"" + esc(cDraft(d, "wcMoFreq")) + '">' +
       instructionPicker("wcInstr", (d && d.wcInstr) || []) +
+      // CLIN-02: the server runs the Prescribe form's safety check here too, and asks for this when it finds something.
+      "<input id=\"wcMoOverride\" placeholder=\"" + wTA("ward.consult-override-reason", "Reason to prescribe past a safety finding (only if asked)") + "\" value=\"" + esc(cDraft(d, "wcMoOverride")) + '">' +
       "<p class=\"w-hint\">" + wTH("ward.drug-dose-and-unit-go-together", "Drug, dose and unit go together. Any one of them on its own is not enough to prescribe.") + "</p></div>" +
 
       "<div class=\"w-sub\"><h4>" + wTH("ward.test-to-order", "Test to order") + "</h4>" +
@@ -14972,7 +14984,7 @@
       if (!drug || !dv || !du) { st.err = wT("ward.a-prescription-needs-the-drug-the", "A prescription needs the drug, the dose and the unit. Fill all three, or clear them."); paint(); return; }
       body.medications = [{ patientId: s.patientId, encounterId: s.encounterId, drug: drug,
         dose: { value: dv, unit: du }, route: val("wcMoRoute") || undefined, frequency: val("wcMoFreq") || undefined,
-        patientInstructions: instr.length ? instr : undefined }];
+        patientInstructions: instr.length ? instr : undefined, overrideReason: val("wcMoOverride") || undefined }];
     }
 
     var inv = val("wcInvCode");
@@ -15040,7 +15052,7 @@
     st.cDraft = null; st.cIcd = undefined;
     VITALS.forEach(function (f) { var el = document.getElementById("wc_" + f.k); if (el) el.value = ""; });
     ["wc_o2", "wc_acvpu", "wcProbText", "wcProbCode", "wcProbVs", "wcMoDrug", "wcMoValue", "wcMoUnit",
-      "wcMoRoute", "wcMoFreq", "wcInvCode", "wcInvReason", "wcInvPri", "wcNoteTpl", "wcNoteText"]
+      "wcMoRoute", "wcMoFreq", "wcMoOverride", "wcInvCode", "wcInvReason", "wcInvPri", "wcNoteTpl", "wcNoteText"]
       .forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
     Array.prototype.forEach.call(document.querySelectorAll(".wcInstr"), function (b) { b.checked = false; });
   }

@@ -2815,7 +2815,8 @@ export async function onRequest(context) {
             tempUnit: unitsFor(wOrg && wOrg.region).temp, weightUnit: unitsFor(wOrg && wOrg.region).weight,
             idempotencyKey: idemFor(body.idempotencyKey, "vitals", c.index) }),
           problems: (rq, ev, c) => recordProblem(rq, ev, { ...c, problem: c.item, idempotencyKey: idemFor(body.idempotencyKey, "problem", c.index) }),
-          medications: (rq, ev, c) => createWardMedicationOrder(rq, ev, { ...c, order: c.item, safety: (c.item && c.item.safety) || null,
+          // CLIN-02: the same engine and hard stops as /ward/medication-order, and a reason for any finding.
+          medications: (rq, ev, c) => createWardMedicationOrder(rq, ev, { ...c, order: c.item, rulePack: getRulePack(), overrideReason: c.item && c.item.overrideReason, requireSafetyReason: true,
             formulary: (wsqCfg && wsqCfg.formulary) || null,
             advisories: (wsqCfg && wsqCfg.advisories) || null,
             ageYears: body.ageYears, lactationWindowDays: (wsqCfg && wsqCfg.lactationWindowDays) || null,

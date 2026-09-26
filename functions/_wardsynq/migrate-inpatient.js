@@ -650,7 +650,7 @@ function patientInstructionsRefusal(v) {
  * prescriber's reason for proceeding past overridable findings; it is attributed to the acting actor
  * here, never to anyone a caller names.
  *
- * ctx: { migration, order: {...}, rulePack?, checkOnly?, overrideReason?, lactationWindowDays?, actorDeps, recordDeps }.
+ * ctx: { migration, order: {...}, rulePack?, checkOnly?, overrideReason?, requireSafetyReason?, lactationWindowDays?, actorDeps, recordDeps }.
  */
 async function createWardMedicationOrder(request, env, ctx) {
   const mig = ctx.migration;
@@ -756,6 +756,14 @@ async function createWardMedicationOrder(request, env, ctx) {
       drug: candidate.drug, safety, ...(replaces ? { replaces } : {}), written: 0, actor: resolved.actor.id, role: resolved.role };
   }
   const overrideReason = str(ctx.overrideReason).slice(0, 500);
+  /* CLIN-02: a writer with no review step of its own (the consultation save) cannot rely on a screen
+   * having asked for a reason first, as the Prescribe form does (checkOnly, then "Prescribe anyway").
+   * requireSafetyReason makes the reason the Prescribe form insists on a server refusal instead. */
+  if (ctx.requireSafetyReason === true && safety.checked && !overrideReason && (safety.blocks.length || safety.overridables.length)) {
+    return { ...base, ok: false, status: 409, error: "safety_reason_required",
+      detail: safety.blocks.concat(safety.overridables).map((f) => f.message).join(" ") + " Give a reason to prescribe past these findings. Nothing was prescribed.",
+      drug: candidate.drug, safety, ...(replaces ? { replaces } : {}), written: 0, actor: resolved.actor.id, role: resolved.role };
+  }
   let overrides = [];
   if (safety.checked && overrideReason && safety.overridables.length) {
     overrides = safety.overridables.map((f) => ({ code: f.code, targetId: f.ruleId || f.allergyId || null, reasonCode: "prescriber-judgement", rationale: overrideReason, actorId: resolved.actor.id }));
