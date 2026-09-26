@@ -4883,6 +4883,18 @@
     if (dv.back && dv.back.focus) try { dv.back.focus(); } catch (e) {}
     dv = null;
   }
+  /* UI-03: the ask sheet and the DICOM viewer are both aria-modal="true" but neither trapped Tab, so a
+   * keyboard or switch-access user could tab out of either into the chart underneath - which
+   * aria-modal="true" tells a screen reader is inert. Same wrap-at-the-ends pattern wardsynq-alert-ui.js's
+   * own modal already uses, shared here since both dialogs live in this file. */
+  function focusTrap(container, ev) {
+    if (!container || ev.key !== "Tab") return;
+    var f = container.querySelectorAll('button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (ev.shiftKey && document.activeElement === first) { ev.preventDefault(); last.focus(); }
+    else if (!ev.shiftKey && document.activeElement === last) { ev.preventDefault(); first.focus(); }
+  }
   function dvTool(t, icon, label) {
     return '<button type="button" class="w-dv-b" data-dv-tool="' + t + '" aria-pressed="false" aria-label="' + label + '" title="' + label + '">' + ms(icon) + "</button>";
   }
@@ -4931,6 +4943,7 @@
     document.body.appendChild(el);
     dv = { el: el, studyId: studyId, series: [], seriesIndex: -1, viewer: null, back: document.activeElement, raw: null };
     el.addEventListener("click", dvClick);
+    el.addEventListener("keydown", function (ev) { focusTrap(el, ev); });
     var mine = dv;
     Promise.all([dvEngine(), dvFetch("/ward/imaging-series?orgId=" + encodeURIComponent(st.orgId) + "&studyId=" + encodeURIComponent(studyId))])
       .then(function (r) {
@@ -10268,12 +10281,24 @@
   function askFor(spec, run) {
     var values = {};
     (spec.fields || []).forEach(function (f) { values[f.key] = f.value == null ? "" : String(f.value); });
-    st.ask = { spec: spec, values: values, err: "", busy: false, run: run };
+    /* UI-03: who to give focus back to once this closes - the control that opened it. This has to
+     * survive a repaint (the very paint() two lines down replaces #smdWard's whole subtree, which
+     * detaches whatever DOM node is focused right now), so it is marked the same way G13 already marks
+     * and restores focus across any other repaint - by id, or by data-w-act and position - not held as
+     * a raw element reference. */
+    var opener = focusMark();
+    st.ask = { spec: spec, values: values, err: "", busy: false, run: run, opener: opener };
     paint();
     var first = typeof document !== "undefined" && document.querySelector && document.querySelector("#smdWard .w-ask [data-w-ask], #smdWard .w-ask [data-w-act=askok]");
     if (first) { try { first.focus(); } catch (e) {} }
   }
-  function askCancel() { if (st.ask && !st.ask.busy) { st.ask = null; paint(); } }
+  function askReturnFocus(a) { if (a && a.opener) focusRestore(a.opener); }
+  function askCancel() {
+    if (!st.ask || st.ask.busy) return;
+    var a = st.ask;
+    st.ask = null; paint();
+    askReturnFocus(a);
+  }
   function askSubmit() {
     var a = st.ask; if (!a || a.busy) return;
     var v = {};
@@ -10289,6 +10314,7 @@
       if (why) { a.err = why; st.err = ""; st.refusal = null; }
       else st.ask = null;
       paint();
+      if (!why) askReturnFocus(a);
     };
     var p;
     try { p = a.run(v); } catch (e) { done(wT("ward.could-not-record-that", "Could not record that.")); return; }
@@ -16072,7 +16098,11 @@
     var r = document.getElementById("smdWard");
     if (!r || !r.classList.contains("on")) return;
     // An open question owns the keyboard: Escape cancels it, and no ward shortcut fires behind it.
-    if (st.ask) { if (e.key === "Escape") { e.preventDefault(); askCancel(); } return; }
+    if (st.ask) {
+      if (e.key === "Escape") { e.preventDefault(); askCancel(); return; }
+      focusTrap(document.querySelector("#smdWard .w-ask"), e);
+      return;
+    }
     // The forced acknowledgement screen and the sheets opened over the ward own the keyboard.
     if (document.getElementById("wsq-alert")) return;
     var dc = document.getElementById("smdDischarge"); if (dc && dc.classList.contains("on")) return;

@@ -240,6 +240,20 @@ try {
   });
   await step("every control is at least 44 px and has an accessible name", async () =>
     (await ev(`var bad=[].slice.call(document.querySelectorAll("#wDicom button")).filter(function(x){var r=x.getBoundingClientRect(); return r.width<44||r.height<44||!(x.getAttribute("aria-label")||x.innerText.trim());}).map(function(x){return x.outerHTML.slice(0,80)}); return bad.length ? bad.join(" ; ") : true;`)));
+  await step("UI-03: Tab cannot escape the viewer into the ward chart underneath it", async () => {
+    // The same focusable-elements query focusTrap() itself uses, so "last" here means the same thing
+    // the trap wraps at (the viewer's canvas has tabindex="0" and sits after the toolbar in DOM order).
+    const FOCUSABLE = `document.getElementById("wDicom").querySelectorAll('button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')`;
+    const toLast = await ev(`var f=${FOCUSABLE}; f[f.length-1].focus(); return document.activeElement===f[f.length-1];`);
+    if (!toLast) return "setup: could not focus the viewer's last control";
+    await key("Tab");
+    const wrappedForward = await ev(`var f=${FOCUSABLE}; return document.activeElement===f[0];`);
+    if (!wrappedForward) return "Tab from the last control did not wrap to the first (focus reached the ward underneath)";
+    await call("Input.dispatchKeyEvent", { type: "keyDown", key: "Tab", code: "Tab", modifiers: 8 });
+    await call("Input.dispatchKeyEvent", { type: "keyUp", key: "Tab", code: "Tab", modifiers: 8 });
+    return (await ev(`var f=${FOCUSABLE}; return document.activeElement===f[f.length-1];`)) === true
+      || "Shift+Tab from the first control did not wrap back to the last";
+  });
   await step("a ward repaint while the viewer is open leaves it open", async () => {
     await ev(`WARD._dispatch("radiologyload"); return 1;`);
     await b.sleep(600);
