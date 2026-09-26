@@ -486,6 +486,22 @@ export async function resetMemberAccess(env, orgId, identity, actorId) {
   await audit(env, orgId, actorId, "member:reset_access", m.identity); return { ok: true };
 }
 // Raw auth record for the login path (NEVER returned to a client).
+/* A staff session that is still ALIVE, or null (SEC-10). Signature and expiry are not enough: a reset,
+ * a disable, a new PIN or password ends every session issued before it (sessionRevoked). A member whose
+ * role the hospital requires two-step sign-in for, and who has not set it up, holds a session that can
+ * only set it up: `mfaSetupOnly`. The queue router honours that flag; every other door refuses it. */
+export async function liveStaffSession(env, token, nowMs) {
+  const ss = await A.verifyStaffSession(env, token, nowMs);
+  if (!ss) return null;
+  const member = await getMemberAuth(env, ss.orgId, ss.identity);
+  if (A.sessionRevoked(ss, member)) return null;
+  let mfaSetupOnly = false;
+  if (member && !member.mfaEnabled) {
+    const o = await getOrg(env, ss.orgId);
+    mfaSetupOnly = !!(o && o.security && o.security.requireTwoStepRoles.indexOf(member.role) >= 0);
+  }
+  return { ...ss, member, mfaSetupOnly };
+}
 export async function getMemberAuth(env, orgId, identity) {
   const cleanOrg = sanitize(orgId);
   if (!cleanOrg) return null;
