@@ -181,8 +181,14 @@ function loopIdFor(reportId, code) {
   const r = slugOf(reportId), c = slugOf(code);
   return r && c ? `wsq-crit-${r}-${c}` : null;
 }
-/** PURE. Is this the result the loop was opened for (same value, same unit)? */
-const sameResult = (loop, hit) => str(loop.value) === str(hit.value) && str(loop.unit) === str(hit.unit);
+/** PURE. Is this the result the loop was opened for? A NUMBER that changed (or changed unit) is a different
+ * result. Text is not: a blood culture's growth, then its identification, is one positive culture and one loop
+ * (the culture route relies on it). */
+function sameResult(loop, hit) {
+  const a = numericValue(loop.value), b = numericValue(hit.value);
+  if (a === null || b === null) return true;
+  return a === b && str(loop.unit) === str(hit.unit);
+}
 
 /**
  * PURE. How overdue an open loop is. COMPUTED, never stored: a stored "overdue" becomes a lie the
@@ -321,7 +327,7 @@ async function openCriticalLoops(request, env, ctx) {
     let id = baseId, current;
     try {
       current = await svc.get("CriticalResultLoop", id);
-      /* CLIN-14: a CHANGED value on the same report (a correction) is a new result a clinician has not
+      /* CLIN-14: a CHANGED number on the same report (a correction) is a new result a clinician has not
        * seen, so it gets its own loop, keyed by the value. The same value again is a re-ingest and finds
        * its loop. */
       if (current && !sameResult(current, hit)) {
