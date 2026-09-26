@@ -1818,6 +1818,25 @@
       "</div></div>";
   }
 
+  /* CLIN-05: ALLERGIES, and the ward's way to record one. The list is the timeline's allergy events (the governed
+   * chart read), so an unloaded list says so and never reads as none. Every check at order entry, pharmacy and
+   * the bedside reads what is recorded here. The server decides who may record. */
+  function allergyCard(state) {
+    var rows = (state.timeline || []).filter(function (e) { return e.category === "allergy"; })
+      .map(function (e) { return '<li class="w-ws-alert">' + timelineLabel(e) + "</li>"; }).join("");
+    var sev = [["", wT("ward.allergy-severity-select", "Severity (if known)")], ["mild", wT("ward.severity-mild", "mild")], ["moderate", wT("ward.severity-moderate", "moderate")], ["severe", wT("ward.severity-severe", "severe")]]
+      .map(function (o) { return '<option value="' + esc(o[0]) + '">' + esc(o[1]) + "</option>"; }).join("");
+    return '<div class="w-card"><div class="w-card-h">' + ms("warning") + "<h3>" + wTH("ward.allergies", "Allergies", null, "", 1) + "</h3></div>" +
+      (state.timeline == null ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.not-loaded-do-not-read-this", "Not loaded. Do not read this as empty.", null, "", 1) + "</p>"
+        : rows ? '<ul class="w-mini">' + rows + "</ul>" : '<p class="w-empty">' + wTH("ward.no-allergy-recorded", "No allergy recorded.", null, "", 1) + "</p>") +
+      '<div class="w-sub"><h4>' + ms("add") + wTH("ward.record-an-allergy", "Record an allergy") + "</h4>" +
+      '<input id="wAlgSubst" type="text" autocomplete="off" placeholder="' + wTA("ward.allergy-substance", "Drug or class the patient is allergic to") + '">' +
+      '<input id="wAlgReaction" type="text" autocomplete="off" placeholder="' + wTA("ward.allergy-reaction", "Reaction (for example rash, anaphylaxis)") + '">' +
+      '<select id="wAlgSev">' + sev + "</select>" +
+      '<div class="w-actions"><button class="w-btn" data-w-act="allergy">' + ms("save") + wTH("ward.record2", "Record") + "</button>" +
+      '<button class="w-btn ghost" data-w-act="allergynka">' + ms("check") + wTH("ward.no-known-drug-allergies", "No known drug allergies") + "</button></div></div></div>";
+  }
+
   /* ACTIVE MEDICATIONS. What is running right now, in one place - filtered server-side to
    * status==="active" MedicationOrder (functions/_wardsynq/migrate-inpatient.js timelineFromChart),
    * the same field "New medication order" writes and "Medication round" administers against. This
@@ -3256,7 +3275,7 @@
     return header + registerFlagsCard(state) +
       criticalsCard(state) + (isEd ? (triageCard(state) + edTopCards) : "") + (isMaternity ? pregnancyCard(state) + meowsCard(state) : "") +
       (isPediatric ? ageBandCard(state) + growthCard(state) : "") + (apgarChart(s) ? apgarCard(state) : "") +
-      problemsCard(state) + (isEd ? "" : stayPlanCard(state)) + activeMedsCard(state) + timelineCard(state) + maikCard(state) + standardVitalsAndNote + flowsheetCard(state) +
+      problemsCard(state) + (isEd ? "" : stayPlanCard(state)) + allergyCard(state) + activeMedsCard(state) + timelineCard(state) + maikCard(state) + standardVitalsAndNote + flowsheetCard(state) +
       (isIcu ? icuTrendsCard(state) + icuScoresCard(state) + icuAbgCard(state) + icuVentCard(state) + icuSedationCard(state) + icuPressorCard(state) + icuRoundCard(state) : "") +
       fluidCard(state) +
       (isMaternity ? labourCard() + bloodLossCard(state) : "") +
@@ -12587,6 +12606,25 @@
     }
     placeMedOrder(rv.order, reason);
   }
+  /* CLIN-05: one allergy, or a positive "no known drug allergies". Refusals are the server's, shown as sent. */
+  function recordAllergy(nka) {
+    var s = st.sel; if (!s) return;
+    var body = { orgId: st.orgId, patientId: s.patientId };
+    if (nka) body.noKnownAllergies = true;
+    else {
+      body.substance = val("wAlgSubst"); body.reaction = val("wAlgReaction") || undefined; body.severity = val("wAlgSev") || undefined;
+      if (!body.substance) { st.err = wT("ward.name-the-allergy", "Name what the patient is allergic to, or record no known drug allergies."); paint(); return; }
+    }
+    st.busy = true; paint();
+    apiPost("/ward/allergy", body)
+      .then(function (r) {
+        if (settle(r, r && r.ok ? (r.note ? wT("ward.allergy-recorded-not-recognised", "Recorded as written. The checks do not recognise it, so check orders against it by hand.") : wT("ward.recorded", "Recorded.")) : null)) {
+          ["wAlgSubst", "wAlgReaction", "wAlgSev"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
+          loadChart();
+        } else paint();
+      })
+      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-allergy", "Could not record the allergy."); paint(); });
+  }
   /* CLIN-04: stopping a medicine. A new version of the order (stopped, who, when, why), refused without a reason. */
   function stopMedication(orderId) {
     var m = (st.activeMeds || []).filter(function (x) { return x.orderId === orderId; })[0];
@@ -16544,6 +16582,8 @@
     if (cmd === "vitals") { saveVitals(); return; }
     if (cmd === "round") { st.from = val("wFrom") || st.from; st.to = val("wTo") || st.to; loadRound(); return; }
     if (cmd === "medstop") { stopMedication(arg); return; }
+    if (cmd === "allergy") { recordAllergy(false); return; }
+    if (cmd === "allergynka") { recordAllergy(true); return; }
     if (cmd === "mar") { var k = arg.indexOf("|"); if (k > 0) marAction(arg.slice(0, k), Number(arg.slice(k + 1))); return; }
     if (cmd === "outbox") { loadOutbox(); return; }
     if (cmd === "cosigns") { loadCosigns(); return; }

@@ -1300,7 +1300,8 @@ const TIMELINE_LABEL = {
   CarePlan: (r, who) => `Care plan — ${r.status || "draft"}${who ? ` · by ${who}` : ""}`,
   ClinicalNote: (r, who) => `${who ? `${who} wrote` : "Somebody wrote"} a ${r.noteType || "progress"} note${r.signedBy ? ", signed" : r.aiDrafted ? " (drafted by the assistant, unsigned)" : ", unsigned"}`,
   ImagingStudy: (r, who) => `Imaging: ${r.modality || "study"}${r.bodySite ? ` — ${r.bodySite}` : ""} — ${r.status || "available"}${who ? ` · by ${who}` : ""}`,
-  AllergyIntolerance: (r, who) => `${who ? `${who} recorded` : "Recorded"} an allergy: ${r.substance}${r.severity ? ` (${r.severity})` : ""}`,
+  // CLIN-05: a ward entry the pack did not recognise is shown as typed, and its reaction with it.
+  AllergyIntolerance: (r, who) => `${who ? `${who} recorded` : "Recorded"} an allergy: ${r.substance === "unspecified" && r.reportedText ? `${r.reportedText} (not recognised by the checks)` : r.substance}${r.reaction ? `, ${r.reaction}` : ""}${r.severity ? ` (${r.severity})` : ""}`,
   SurgicalCase: (r, who) => `Operation: ${r.procedure || "procedure"}${r.site ? ` — ${r.site}` : ""}${r.laterality && r.laterality !== "not-applicable" ? ` ${r.laterality}` : ""}${r.status ? ` — ${r.status}` : ""}${who ? ` · by ${who}` : ""}`,
   AnesthesiaRecord: (r, who) => `Anaesthetic${r.technique ? `: ${r.technique}` : ""}${who ? ` · by ${who}` : ""}`,
   ImplantRecord: (r, who) => `Implant: ${r.device || r.display || "device"}${r.serialNumber ? ` (${r.serialNumber})` : ""}${who ? ` · by ${who}` : ""}`,

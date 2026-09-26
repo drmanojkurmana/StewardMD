@@ -299,7 +299,7 @@ import { staffPreference, runPatientMessaging, messageLog, retryMessage, setting
 import { feedbackDashboard, updateRecovery } from "../../_wardsynq/patient-feedback.js";
 import { extract as analyticsExtract } from "../../_wardsynq/analytics-extract.js";
 import { listTools as listRiskTools, recordAssessment as recordRiskAssessment, completeAction as completeRiskAction, listAssessments as listRiskAssessments } from "../../_wardsynq/risk-assessment.js";
-import { recordAllergiesFromAssessment } from "../../_wardsynq/migrate-allergy.js";
+import { recordAllergiesFromAssessment, recordWardAllergy } from "../../_wardsynq/migrate-allergy.js";
 
 // The Encounter migration's one shared call site. Every hook below (ticket add, import, a terminal
 // status change, checkout) passes the ticket in whatever state it is NOW; recordEncounterSync reads
@@ -1703,7 +1703,7 @@ export async function onRequest(context) {
         "mortuary-release": CAPS.MORTUARY_MANAGE, "mortuary-board": CAPS.MORTUARY_MANAGE,
         "approval-request": CAPS.EMR_VITALS, approvals: CAPS.EMR_VIEW,
         "approval-decide": CAPS.EMR_TREAT,
-        "medication-order": CAPS.EMR_TREAT, "medication-stop": CAPS.EMR_TREAT, round: CAPS.QUEUE_VIEW, "nurse-worklist": CAPS.EMR_VIEW, mar: CAPS.MED_ADMINISTER,
+        "medication-order": CAPS.EMR_TREAT, "medication-stop": CAPS.EMR_TREAT, allergy: CAPS.EMR_TREAT, round: CAPS.QUEUE_VIEW, "nurse-worklist": CAPS.EMR_VIEW, mar: CAPS.MED_ADMINISTER,
         // Reading what is due is reading the ward, not acting on it: the same view capability the
         // ward list uses. Nothing here writes, so this grants no ability to move a dose.
         schedule: CAPS.QUEUE_VIEW,
@@ -3342,6 +3342,10 @@ export async function onRequest(context) {
       }
       if (sub === "medication-stop" && method === "POST") { // CLIN-04: discontinue an active order, with a reason.
         const r = await stopWardMedicationOrder(request, env, { ...deps, orderId: body.orderId, reason: body.reason, expectedVersion: body.expectedVersion, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "allergy" && method === "POST") { // CLIN-05: the ward's own allergy entry, read by every allergy check.
+        const r = await recordWardAllergy(request, env, { ...deps, patientId: body.patientId, substance: body.substance, reaction: body.reaction, severity: body.severity, noKnownAllergies: body.noKnownAllergies === true, rulePack: getRulePack(), idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "round" && method === "GET") {
