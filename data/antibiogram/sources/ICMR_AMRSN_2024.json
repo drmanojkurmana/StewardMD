@@ -29,7 +29,8 @@
   "Second reader: the 6 conflict entries were checked on the page and are correct as written (M. morganii urine amikacin 121/154 (8.6); A. baumannii ward colistin 1927/1997 (69.5); S. maltophilia ceftazidime 21/36 (58.3) in Tables 3.7 and 3.9 vs 2/36 (5.6) in Table 3.8; P. aeruginosa BSI netilmicin 25/57 (38.6); Enterococcus spp. UTI vancomycin 18/98 (81.6); S. aureus UTI clindamycin 6/10 (16.0)).",
   "Second reader: the 14 cells the validator does not keep (7 caution, 5 intrinsic, 2 hidden) are all printed that way, none is a transcription error. The E. faecium count mismatches (OPD 569 vs 570, ward 1791 vs 1793) are printed in Tables 6.14 and 1.3 (source inconsistency, already noted on the rows).",
   "Second reader: the dropped trend point (K. pneumoniae urine cefazolin 2021, printed 1970/3560 (55.3), identical to amikacin 2021 on p87) is confirmed; the row note still said 'recorded as printed' and now says it was left out. Added a per-drug note for Table 6.14 E. faecalis ICU vancomycin, printed 287/312 (92) with ICU N=303 (source inconsistency; value unchanged).",
-  "CoNS species rows added 2026-09-26 (antibiogram-rules.js now has species keys): Table 6.10 (p155, 'CoNS isolated from all specimens', no location split; spec all, set all, like its S. saprophyticus row) columns S. haemolyticus (N=1572), S. epidermidis (N=1269) and S. hominis (N=1241), 9 cells each (27 in all) with n/N as printed. First reading from the text layer (pdfplumber words assigned to columns by the table's vertical grid lines), second from the page image (scale 3.2, cropped to the first three species columns, top and bottom halves); the two agreed on all 27 percentages, 27 n/N and 3 N. Every n/N was checked against its printed percentage: all agree except S. epidermidis tetracycline 250/460 printed 54.4 (54.348%, source rounding; per-drug note, recorded as printed). The excluded entry for these columns was removed."
+  "CoNS species rows added 2026-09-26 (antibiogram-rules.js now has species keys): Table 6.10 (p155, 'CoNS isolated from all specimens', no location split; spec all, set all, like its S. saprophyticus row) columns S. haemolyticus (N=1572), S. epidermidis (N=1269) and S. hominis (N=1241), 9 cells each (27 in all) with n/N as printed. First reading from the text layer (pdfplumber words assigned to columns by the table's vertical grid lines), second from the page image (scale 3.2, cropped to the first three species columns, top and bottom halves); the two agreed on all 27 percentages, 27 n/N and 3 N. Every n/N was checked against its printed percentage: all agree except S. epidermidis tetracycline 250/460 printed 54.4 (54.348%, source rounding; per-drug note, recorded as printed). The excluded entry for these columns was removed.",
+  "Enterobacterales species rows added 2026-09-26 (antibiogram-rules.js now has keys koxytoca, kaerogenes, enterobacter and prettgeri): Table 2.1 (p56, nonurine/all) columns K. oxytoca (N=352, 10 cells), K. (Enterobacter) aerogenes (N=62, 8), Enterobacter spp. (N=229, 10) and P. rettgeri (N=88, 7); Table 2.14 (p79, urine/all) columns K. oxytoca (N=211, 13), Enterobacter spp. (N=87, 4) and P. rettgeri (N=33, 3); n/N as printed, cells printed (-) or - left out. Also the Table 2.8 yearly trend (p66, Enterobacter species, 2017 to 2024, 9 drugs, 72 points) on the nonurine Enterobacter spp. row, and the Table 1.5 Enterobacter spp. counts (p20, 8 specimens; urine 87 = the Table 2.14 N, total 316 = 229 + 87). No other susceptibility table of the report has these organisms (text search of all 206 pages, spacing ignored; chapter 9 lists them only in organism distributions). First reading from the text layer (pdfplumber words placed in cells by each table's ruling lines; the same parse reproduced all 177 cells already recorded from the other columns of Tables 2.1 and 2.14), second from page images (scale 4, target columns cropped beside the drug column); the two agreed on all 174 table items (15 N, 159 cells or trend points) and the 8 counts. Printed n/N against printed %: K. oxytoca urine ciprofloxacin 73/211 printed 34.4 (34.6%; re-read at scale 8, per-drug note) and three truncated Table 2.8 points (row note), all recorded as printed. Klebsiella spp. stays excluded (K. pneumoniae key); the excluded entries for Tables 2.1, 2.14 and 2.8 and for the Table 1.5 count rows were updated."
  ],
  "rows": [
   {
@@ -747,6 +748,77 @@
   {
    "spec": "nonurine",
    "set": "all",
+   "org": "Klebsiella oxytoca",
+   "pheno": null,
+   "n": 352,
+   "page": 56,
+   "table": "Table 2.1",
+   "s": {
+    "piptazo": 36.2,
+    "cefotaxime": 32.3,
+    "ceftazidime": 32.1,
+    "ertapenem": 54,
+    "imipenem": 44.1,
+    "meropenem": 61,
+    "colistin": 99.6,
+    "amikacin": 64.5,
+    "ciprofloxacin": 38.4,
+    "levofloxacin": 34.8
+   },
+   "nt": {
+    "piptazo": 345,
+    "cefotaxime": 319,
+    "ceftazidime": 262,
+    "ertapenem": 324,
+    "imipenem": 333,
+    "meropenem": 346,
+    "colistin": 236,
+    "amikacin": 352,
+    "ciprofloxacin": 352,
+    "levofloxacin": 253
+   },
+   "notes": {
+    "colistin": "Report footnote: the colistin figure is the percentage intermediate (CLSI gives colistin no susceptible category)."
+   },
+   "specimen_as_printed": "all specimens except urine and faeces"
+  },
+  {
+   "spec": "nonurine",
+   "set": "all",
+   "org": "Klebsiella aerogenes",
+   "pheno": null,
+   "n": 62,
+   "page": 56,
+   "table": "Table 2.1",
+   "s": {
+    "piptazo": 67.9,
+    "cefotaxime": 68.2,
+    "ertapenem": 87.3,
+    "imipenem": 87.5,
+    "meropenem": 89.5,
+    "colistin": 100.0,
+    "amikacin": 83.9,
+    "ciprofloxacin": 75.8
+   },
+   "nt": {
+    "piptazo": 56,
+    "cefotaxime": 44,
+    "ertapenem": 55,
+    "imipenem": 56,
+    "meropenem": 57,
+    "colistin": 33,
+    "amikacin": 62,
+    "ciprofloxacin": 62
+   },
+   "notes": {
+    "colistin": "Report footnote: the colistin figure is the percentage intermediate (CLSI gives colistin no susceptible category)."
+   },
+   "note": "Printed as 'K. (Enterobacter) aerogenes'.",
+   "specimen_as_printed": "all specimens except urine and faeces"
+  },
+  {
+   "spec": "nonurine",
+   "set": "all",
    "org": "Enterobacter cloacae",
    "pheno": null,
    "n": 1306,
@@ -779,6 +851,352 @@
    "notes": {
     "colistin": "Report footnote: the colistin figure is the percentage intermediate (CLSI gives colistin no susceptible category)."
    },
+   "specimen_as_printed": "all specimens except urine and faeces"
+  },
+  {
+   "spec": "nonurine",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "n": 229,
+   "page": 56,
+   "table": "Table 2.1",
+   "s": {
+    "piptazo": 41.2,
+    "cefotaxime": 23.5,
+    "ceftazidime": 32,
+    "ertapenem": 59,
+    "imipenem": 52.5,
+    "meropenem": 59.7,
+    "colistin": 98.4,
+    "amikacin": 65.9,
+    "ciprofloxacin": 46.5,
+    "levofloxacin": 62.8
+   },
+   "nt": {
+    "piptazo": 199,
+    "cefotaxime": 179,
+    "ceftazidime": 100,
+    "ertapenem": 161,
+    "imipenem": 198,
+    "meropenem": 206,
+    "colistin": 63,
+    "amikacin": 229,
+    "ciprofloxacin": 226,
+    "levofloxacin": 86
+   },
+   "trend": {
+    "piptazo": [
+     [
+      2017,
+      62.5
+     ],
+     [
+      2018,
+      61.3
+     ],
+     [
+      2019,
+      65.7
+     ],
+     [
+      2020,
+      63.8
+     ],
+     [
+      2021,
+      63.4
+     ],
+     [
+      2022,
+      38.2
+     ],
+     [
+      2023,
+      46.6
+     ],
+     [
+      2024,
+      41.2
+     ]
+    ],
+    "cefotaxime": [
+     [
+      2017,
+      28.4
+     ],
+     [
+      2018,
+      31.5
+     ],
+     [
+      2019,
+      36.2
+     ],
+     [
+      2020,
+      35.7
+     ],
+     [
+      2021,
+      26.9
+     ],
+     [
+      2022,
+      25.9
+     ],
+     [
+      2023,
+      13.1
+     ],
+     [
+      2024,
+      23.5
+     ]
+    ],
+    "ceftazidime": [
+     [
+      2017,
+      35.8
+     ],
+     [
+      2018,
+      36.6
+     ],
+     [
+      2019,
+      37.9
+     ],
+     [
+      2020,
+      34.1
+     ],
+     [
+      2021,
+      27.5
+     ],
+     [
+      2022,
+      29.3
+     ],
+     [
+      2023,
+      21.2
+     ],
+     [
+      2024,
+      32
+     ]
+    ],
+    "ertapenem": [
+     [
+      2017,
+      66
+     ],
+     [
+      2018,
+      73.1
+     ],
+     [
+      2019,
+      74.2
+     ],
+     [
+      2020,
+      71.8
+     ],
+     [
+      2021,
+      79.2
+     ],
+     [
+      2022,
+      76.7
+     ],
+     [
+      2023,
+      75.9
+     ],
+     [
+      2024,
+      59.0
+     ]
+    ],
+    "imipenem": [
+     [
+      2017,
+      75.1
+     ],
+     [
+      2018,
+      70.5
+     ],
+     [
+      2019,
+      67.2
+     ],
+     [
+      2020,
+      72
+     ],
+     [
+      2021,
+      68
+     ],
+     [
+      2022,
+      70.6
+     ],
+     [
+      2023,
+      68.0
+     ],
+     [
+      2024,
+      52.5
+     ]
+    ],
+    "meropenem": [
+     [
+      2017,
+      69.9
+     ],
+     [
+      2018,
+      71.1
+     ],
+     [
+      2019,
+      75.2
+     ],
+     [
+      2020,
+      75.8
+     ],
+     [
+      2021,
+      69.3
+     ],
+     [
+      2022,
+      77.7
+     ],
+     [
+      2023,
+      71.3
+     ],
+     [
+      2024,
+      59.7
+     ]
+    ],
+    "amikacin": [
+     [
+      2017,
+      69.3
+     ],
+     [
+      2018,
+      71.2
+     ],
+     [
+      2019,
+      73.6
+     ],
+     [
+      2020,
+      75.8
+     ],
+     [
+      2021,
+      72
+     ],
+     [
+      2022,
+      72.2
+     ],
+     [
+      2023,
+      62.3
+     ],
+     [
+      2024,
+      65.9
+     ]
+    ],
+    "ciprofloxacin": [
+     [
+      2017,
+      53.1
+     ],
+     [
+      2018,
+      61.1
+     ],
+     [
+      2019,
+      62.5
+     ],
+     [
+      2020,
+      64.7
+     ],
+     [
+      2021,
+      69.5
+     ],
+     [
+      2022,
+      52.0
+     ],
+     [
+      2023,
+      50.0
+     ],
+     [
+      2024,
+      46.5
+     ]
+    ],
+    "levofloxacin": [
+     [
+      2017,
+      62
+     ],
+     [
+      2018,
+      52.5
+     ],
+     [
+      2019,
+      61.2
+     ],
+     [
+      2020,
+      60.3
+     ],
+     [
+      2021,
+      66.5
+     ],
+     [
+      2022,
+      59.4
+     ],
+     [
+      2023,
+      62.3
+     ],
+     [
+      2024,
+      62.8
+     ]
+    ]
+   },
+   "notes": {
+    "colistin": "Report footnote: the colistin figure is the percentage intermediate (CLSI gives colistin no susceptible category)."
+   },
+   "note": "Printed as 'Enterobacter spp.' next to a separate E. cloacae column. Trend from Table 2.8 (p66, 'Enterobacter species', all samples except faeces and urine): its 2024 column matches this column (it prints ertapenem 95/161 as 59.0, Table 2.1 as 59) and its 2023 column (N=194) matches the Enterobacter spp. column of the 2023 report (piperacillin-tazobactam 46.6 here, 46.7 there). Trend isolates per year: 2017 1140, 2018 1600, 2019 2071, 2020 1287, 2021 393, 2022 324, 2023 194, 2024 229; the fall from 1287 (2020) to 393 (2021) means the series may not describe one group throughout. Table 2.8 prints three figures truncated rather than rounded (2022 imipenem 188/266 as 70.6, 2022 levofloxacin 69/116 as 59.4, 2023 piperacillin-tazobactam 56/120 as 46.6); recorded as printed. Cefazolin is printed *0/0 (-) in every year.",
    "specimen_as_printed": "all specimens except urine and faeces"
   },
   {
@@ -1316,6 +1734,37 @@
     "amikacin": 186,
     "ciprofloxacin": 179,
     "levofloxacin": 65
+   },
+   "notes": {
+    "imipenem": "The report notes that Proteus, Providencia and Morganella spp. may have raised imipenem MICs by mechanisms other than carbapenemase production."
+   },
+   "specimen_as_printed": "all specimens except urine and faeces"
+  },
+  {
+   "spec": "nonurine",
+   "set": "all",
+   "org": "Providencia rettgeri",
+   "pheno": null,
+   "n": 88,
+   "page": 56,
+   "table": "Table 2.1",
+   "s": {
+    "piptazo": 52.9,
+    "cefotaxime": 37.1,
+    "ertapenem": 55.1,
+    "imipenem": 21.5,
+    "meropenem": 46.9,
+    "amikacin": 68.2,
+    "ciprofloxacin": 44.8
+   },
+   "nt": {
+    "piptazo": 68,
+    "cefotaxime": 62,
+    "ertapenem": 49,
+    "imipenem": 65,
+    "meropenem": 81,
+    "amikacin": 88,
+    "ciprofloxacin": 87
    },
    "notes": {
     "imipenem": "The report notes that Proteus, Providencia and Morganella spp. may have raised imipenem MICs by mechanisms other than carbapenemase production."
@@ -2634,6 +3083,49 @@
   {
    "spec": "urine",
    "set": "all",
+   "org": "Klebsiella oxytoca",
+   "pheno": null,
+   "n": 211,
+   "page": 79,
+   "table": "Table 2.14",
+   "s": {
+    "piptazo": 18.9,
+    "cefazolin": 8.1,
+    "cefotaxime": 25.8,
+    "ceftazidime": 16.9,
+    "ertapenem": 45.7,
+    "imipenem": 27.6,
+    "meropenem": 57,
+    "amikacin": 61.1,
+    "ciprofloxacin": 34.4,
+    "levofloxacin": 35.7,
+    "cotrimoxazole": 56,
+    "fosfomycin": 59.4,
+    "nitrofurantoin": 34.7
+   },
+   "nt": {
+    "piptazo": 185,
+    "cefazolin": 160,
+    "cefotaxime": 178,
+    "ceftazidime": 172,
+    "ertapenem": 184,
+    "imipenem": 170,
+    "meropenem": 193,
+    "amikacin": 211,
+    "ciprofloxacin": 211,
+    "levofloxacin": 168,
+    "cotrimoxazole": 182,
+    "fosfomycin": 175,
+    "nitrofurantoin": 193
+   },
+   "notes": {
+    "ciprofloxacin": "printed 73/211 (34.4); 73/211 is 34.6% (source inconsistency); recorded as printed"
+   },
+   "specimen_as_printed": "urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
    "org": "Enterobacter cloacae",
    "pheno": null,
    "n": 318,
@@ -2667,6 +3159,29 @@
     "fosfomycin": 107,
     "nitrofurantoin": 185
    },
+   "specimen_as_printed": "urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "n": 87,
+   "page": 79,
+   "table": "Table 2.14",
+   "s": {
+    "meropenem": 47.6,
+    "amikacin": 59.8,
+    "ciprofloxacin": 54,
+    "nitrofurantoin": 26.2
+   },
+   "nt": {
+    "meropenem": 42,
+    "amikacin": 87,
+    "ciprofloxacin": 87,
+    "nitrofurantoin": 61
+   },
+   "note": "Printed as 'Enterobacter spp.' next to a separate E. cloacae column.",
    "specimen_as_printed": "urine"
   },
   {
@@ -2825,6 +3340,26 @@
    "conflict": {
     "amikacin": "Table 2.14 prints 8.6% but its counts are 121/154 = 78.6%"
    }
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Providencia rettgeri",
+   "pheno": null,
+   "n": 33,
+   "page": 79,
+   "table": "Table 2.14",
+   "s": {
+    "meropenem": 45.2,
+    "amikacin": 30.3,
+    "ciprofloxacin": 18.2
+   },
+   "nt": {
+    "meropenem": 31,
+    "amikacin": 33,
+    "ciprofloxacin": 33
+   },
+   "specimen_as_printed": "urine"
   },
   {
    "spec": "nonurine",
@@ -11345,6 +11880,62 @@
   {
    "spec": "blood",
    "set": "all",
+   "org": "Enterobacter spp.",
+   "n": 57,
+   "page": 20
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "n": 87,
+   "page": 20
+  },
+  {
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "n": 44,
+   "page": 20
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "n": 45,
+   "page": 20
+  },
+  {
+   "spec": "deep",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "n": 45,
+   "page": 20
+  },
+  {
+   "spec": "csf",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "n": 3,
+   "page": 20
+  },
+  {
+   "spec": "sterile",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "n": 10,
+   "page": 20
+  },
+  {
+   "spec": "stool",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "n": 0,
+   "page": 20
+  },
+  {
+   "spec": "blood",
+   "set": "all",
    "org": "Providencia stuartii",
    "n": 31,
    "page": 20
@@ -11905,20 +12496,16 @@
  ],
  "excluded": [
   {
-   "what": "Table 2.1 columns K. oxytoca (N=352), K. (Enterobacter) aerogenes (N=62), Klebsiella spp. (N=132), Enterobacter spp. (N=229) and P. rettgeri (N=88)",
-   "why": "no separate organism key in antibiogram-rules.js: they resolve to the same key as K. pneumoniae (klebsiella), E. cloacae (enterobacter) or P. stuartii (providencia), and a stratum holds one row per key. Values were read and checked but not recorded."
+   "what": "Table 2.1 column Klebsiella spp. (N=132)",
+   "why": "'Klebsiella spp.' resolves to the same organism key as K. pneumoniae (klebsiella), and a stratum holds one row per key. Values were read and checked but not recorded."
   },
   {
-   "what": "Table 2.14 columns K. oxytoca (N=211), Klebsiella spp. (N=9), Enterobacter spp. (N=87) and P. rettgeri (N=33)",
-   "why": "same organism-key collision as Table 2.1; P. rettgeri is also left out so the Providencia key holds one species (P. stuartii, Table 2.1) and no all-specimen row mixes two species."
+   "what": "Table 2.14 column Klebsiella spp. (N=9)",
+   "why": "same organism-key collision as Table 2.1 (K. pneumoniae key); every percentage in the column is also printed as (-)."
   },
   {
    "what": "Total columns of Tables 2.2 to 2.5",
    "why": "same stratum as Table 2.1 (all specimens except urine and faeces, all locations) with identical values (Table 2.4 prints the amikacin total as 68,1); the Table 2.1 rows are kept."
-  },
-  {
-   "what": "Table 2.8 (yearly trend of Enterobacter species, all samples except faeces and urine)",
-   "why": "its 2024 column is the Table 2.1 'Enterobacter spp.' column (N=229), not E. cloacae, and that group shares the organism key with E. cloacae, so there is no row to attach it to. Its N falls from 1287 (2020) to 393 (2021), so the series may not describe one group throughout."
   },
   {
    "what": "Tables 2.10 to 2.13, 2.15 and 2.16 (RC-wise antimicrobial susceptibility)",
@@ -11945,8 +12532,8 @@
    "why": "count rows carry no phenotype, so the MSSA and MRSA lines would add to the S. aureus count; the CoNS species count lines were left out while the species had no keys (their susceptibility rows are recorded); the S. aureus and CoNS rows are recorded."
   },
   {
-   "what": "Count rows: Enterobacter spp. (Table 1.5), NFGNB group (Table 1.10), Enterococci group total (Table 1.17); the Total and Others columns of Tables 1.5, 1.10 and 1.13",
-   "why": "Enterobacter spp. shares the key with E. cloacae; group totals are not organisms (the Enterococci total equals E. faecalis + E. faecium + Enterococcus spp., which are recorded); 'Others' is not a specimen type."
+   "what": "Count rows: NFGNB group (Table 1.10), Enterococci group total (Table 1.17); the Total and Others columns of Tables 1.5, 1.10 and 1.13",
+   "why": "group totals are not organisms (the Enterococci total equals E. faecalis + E. faecium + Enterococcus spp., which are recorded); 'Others' is not a specimen type."
   },
   {
    "what": "Table 3.1 polymyxin B for P. aeruginosa (total 0/223, ward 0/112, ICU 0/91, all printed 0; OPD 0/20 printed '-')",
