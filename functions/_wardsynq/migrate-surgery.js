@@ -91,6 +91,17 @@ function caseRefusal(base, e, extra) {
   return { ...base, ok: false, status: e && e.code === "PAC_READ_FAILED" ? 502 : e && ["NO_PATIENT", "NO_ACTOR", "NO_PROCEDURE", "NO_LATERALITY", "BAD_TIME", "BAD_KIND", "BAD_VALUE", "REASON_REQUIRED"].includes(e.code) ? 422 : 409, error: "surgical_refused", code: (e && e.code) || null, detail: str(e && e.message), ...extra };
 }
 
+/* A READ THAT FAILED IS NOT "NOT THERE" (audit DATA-03). `.catch(() => null)` turned one failed read into
+ * "the anaesthesia record was never started", and the start that followed wrote a fresh empty record over
+ * the drugs already charted. A failed read now refuses the action; only a read that answered null means none. */
+async function readOr(base, p, extra) {
+  try { return { value: await p }; }
+  catch (e) {
+    if (e instanceof GovernanceError) return { refusal: { ...base, ok: false, status: 403, error: "governance", reasons: (e.reasons || []).map((r) => r.code), ...extra } };
+    return { refusal: { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), ...extra } };
+  }
+}
+
 const engine = new SurgicalCase({});
 async function loadCase(svc, caseId) { return svc.get(CASE_TYPE, caseId); }
 function serializeCase(c) { return { resourceType: CASE_TYPE, ...c }; }
@@ -117,7 +128,9 @@ async function bookSurgicalCase(request, env, ctx) {
   const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
 
-  const current = await loadCase(svc, caseId).catch(() => null);
+  const read = await readOr(base, loadCase(svc, caseId), { caseId, written: 0 });
+  if (read.refusal) return read.refusal;
+  const current = read.value;
   if (current) return { ...base, ok: true, written: 0, skipped: "unchanged", caseId, encounterId: current.encounterId, version: current.version };
   // An optional procedure code, only from the hospital's loaded code set (code-sets.js). The words stay the booking's.
   let procedureCoding = null;
@@ -147,7 +160,7 @@ async function bookSurgicalCase(request, env, ctx) {
   try { await svc.put(enc, { idempotencyKey: ctx.idempotencyKey ? `${ctx.idempotencyKey}:enc` : null }); written += 1; }
   catch (e) { return { ...base, ...writeFailure(e, { written, actor: resolved.actor.id }) }; }
   try {
-    const out = await svc.put(serializeCase(c), { idempotencyKey: ctx.idempotencyKey || null });
+    const out = await svc.put(serializeCase(c), { expectedVersion: 0, idempotencyKey: ctx.idempotencyKey || null });
     written += 1;
     return { ...base, ok: true, written, caseId, encounterId: enc.id, patientId, version: out.record.version, actor: resolved.actor.id, role: resolved.role };
   } catch (e) {
@@ -170,7 +183,9 @@ async function recordCaseConsent(request, env, ctx) {
   const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
 
-  const c = await loadCase(svc, caseId).catch(() => null);
+  const read = await readOr(base, loadCase(svc, caseId), { caseId, written: 0 });
+  if (read.refusal) return read.refusal;
+  const c = read.value;
   if (!c) return { ...base, ok: false, status: 404, error: "case_not_found", caseId, written: 0 };
 
   const consent = ctx.consent || {};
@@ -208,7 +223,9 @@ async function mutateCase(request, env, ctx, apply) {
   const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
 
-  const c = await loadCase(svc, caseId).catch(() => null);
+  const read = await readOr(base, loadCase(svc, caseId), { caseId, written: 0 });
+  if (read.refusal) return read.refusal;
+  const c = read.value;
   if (!c) return { ...base, ok: false, status: 404, error: "case_not_found", caseId, written: 0 };
 
   let updated;
@@ -337,7 +354,9 @@ async function dispositionCase(request, env, ctx) {
   const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
 
-  const c = await loadCase(svc, caseId).catch(() => null);
+  const read = await readOr(base, loadCase(svc, caseId), { caseId, written: 0 });
+  if (read.refusal) return read.refusal;
+  const c = read.value;
   if (!c) return { ...base, ok: false, status: 404, error: "case_not_found", caseId, written: 0 };
   if (c.stage !== "signed-out") return { ...base, ok: false, status: 409, error: "not_signed_out", detail: "disposition happens after sign out", caseId, stage: c.stage, written: 0 };
 
@@ -408,8 +427,8 @@ async function getSurgicalCase(request, env, ctx) {
   const caseId = str(ctx.caseId);
   const { svc, error } = await openService(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, case: null };
-  const c = await loadCase(svc, caseId).catch(() => null);
-  return { ...base, ok: true, case: c };
+  const read = await readOr(base, loadCase(svc, caseId), { case: null });
+  return read.refusal || { ...base, ok: true, case: read.value };
 }
 
 /** ctx: { migration, patientId, actorDeps, recordDeps } */
@@ -448,10 +467,14 @@ async function startAnesthesia(request, env, ctx) {
   if (badTechnique) return badTechnique;
   const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
-  const c = await loadCase(svc, caseId).catch(() => null);
+  const read = await readOr(base, loadCase(svc, caseId), { caseId, written: 0 });
+  if (read.refusal) return read.refusal;
+  const c = read.value;
   if (!c) return { ...base, ok: false, status: 404, error: "case_not_found", caseId, written: 0 };
   const id = anesthesiaIdFor(caseId);
-  const current = await svc.get(ANES_TYPE, id).catch(() => null);
+  const anes = await readOr(base, svc.get(ANES_TYPE, id), { caseId, written: 0 });
+  if (anes.refusal) return anes.refusal;
+  const current = anes.value;
   if (current) return { ...base, ok: true, written: 0, skipped: "already_started", caseId, version: current.version };
   const record = {
     resourceType: ANES_TYPE, id, caseId, patientId: c.patientId, encounterId: c.encounterId,
@@ -460,7 +483,8 @@ async function startAnesthesia(request, env, ctx) {
     asaClass: str(ctx.asaClass) || null, technique: technique || null, events: [], endedAt: null,
   };
   try {
-    const out = await svc.put(record, { idempotencyKey: ctx.idempotencyKey || null });
+    // Create only: a record that appeared since the read above is never overwritten with an empty one.
+    const out = await svc.put(record, { expectedVersion: 0, idempotencyKey: ctx.idempotencyKey || null });
     return { ...base, ok: true, written: 1, caseId, anesthesiaId: id, version: out.record.version, actor: resolved.actor.id };
   } catch (e) { return { ...base, ...writeFailure(e, { caseId, written: 0, actor: resolved.actor.id }) }; }
 }
@@ -474,7 +498,9 @@ async function recordAnesthesiaEvent(request, env, ctx) {
   const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
   const id = anesthesiaIdFor(caseId);
-  const current = await svc.get(ANES_TYPE, id).catch(() => null);
+  const anes = await readOr(base, svc.get(ANES_TYPE, id), { caseId, written: 0 });
+  if (anes.refusal) return anes.refusal;
+  const current = anes.value;
   if (!current) return { ...base, ok: false, status: 404, error: "anesthesia_not_started", caseId, written: 0 };
   if (current.endedAt) return { ...base, ok: false, status: 409, error: "already_ended", caseId, written: 0 };
   const ev = ctx.event || {};
@@ -498,7 +524,9 @@ async function endAnesthesia(request, env, ctx) {
   const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
   const id = anesthesiaIdFor(caseId);
-  const current = await svc.get(ANES_TYPE, id).catch(() => null);
+  const anes = await readOr(base, svc.get(ANES_TYPE, id), { caseId, written: 0 });
+  if (anes.refusal) return anes.refusal;
+  const current = anes.value;
   if (!current) return { ...base, ok: false, status: 404, error: "anesthesia_not_started", caseId, written: 0 };
   if (current.endedAt) return { ...base, ok: true, written: 0, skipped: "already_ended", caseId, version: current.version };
   try {
@@ -517,8 +545,8 @@ async function getAnesthesia(request, env, ctx) {
   if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", record: null };
   const { svc, error } = await openService(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, record: null };
-  const record = await svc.get(ANES_TYPE, anesthesiaIdFor(str(ctx.caseId))).catch(() => null);
-  return { ...base, ok: true, record };
+  const read = await readOr(base, svc.get(ANES_TYPE, anesthesiaIdFor(str(ctx.caseId))), { record: null });
+  return read.refusal || { ...base, ok: true, record: read.value };
 }
 
 /* ---- pre-anaesthetic checkup (PAC) ------------------------------------------------------------- */
@@ -664,7 +692,9 @@ async function recordImplant(request, env, ctx) {
   const caseId = str(ctx.caseId);
   const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
-  const c = await loadCase(svc, caseId).catch(() => null);
+  const read = await readOr(base, loadCase(svc, caseId), { caseId, written: 0 });
+  if (read.refusal) return read.refusal;
+  const c = read.value;
   if (!c) return { ...base, ok: false, status: 404, error: "case_not_found", caseId, written: 0 };
   const i = ctx.implant || {};
   const device = str(i.device);

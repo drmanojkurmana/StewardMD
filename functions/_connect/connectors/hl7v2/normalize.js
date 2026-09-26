@@ -1,7 +1,10 @@
 // functions/_connect/connectors/hl7v2/normalize.js — HL7 v2 (ORU/ADT/MDM) -> SCCM. Warn-don't-drop.
-import { coding, codeable, quantity } from "../../canonical/coding.js";
+import { coding, codeable, quantity, COMPARATORS } from "../../canonical/coding.js";
 import { bundle, patient, encounter, observation, diagnosticReport, documentReference, condition, allergyIntolerance } from "../../canonical/model.js";
 import { seg, segs, field, comp, decodeEsc } from "./parser.js";
+// The full TS/DTM parser (hours/minutes/seconds/offset), not a hand-rolled date-only one - OPS-08/F8:
+// this file used to keep only YYYY-MM-DD, dropping the time of day from every timestamp.
+import { hl7Date } from "../../../_wardsynq/hl7-normalize.js";
 
 const LOINC = "http://loinc.org", SNOMED = "http://snomed.info/sct";
 function hashId(s) { let h = 5381; const str = String(s || ""); for (let i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) >>> 0; return "h" + h.toString(16); }
@@ -12,7 +15,6 @@ function ccFromCE(sg, n, enc, fallback) {
   if (!code && !text) return codeable({ text: fallback || "unknown" });
   return codeable({ coding: [coding({ system, code: code || null, display: text || null, kind })], text: decodeEsc(text, enc) || code || fallback || "unknown" });
 }
-const hl7Date = (v) => { const s = String(v || ""); return /^\d{8}/.test(s) ? s.slice(0, 4) + "-" + s.slice(4, 6) + "-" + s.slice(6, 8) : (s || null); };
 const sex = (v) => ({ M: "male", F: "female", O: "other", U: "unknown" }[String(v || "").toUpperCase()] || "unknown");
 
 function patientFrom(msg, enc, warnings) {
@@ -23,11 +25,25 @@ function patientFrom(msg, enc, warnings) {
     name: { text: decodeEsc([comp(pid, 5, 1, enc), comp(pid, 5, 0, enc)].filter(Boolean).join(" ") || null, enc), given: comp(pid, 5, 1, enc) ? [comp(pid, 5, 1, enc)] : [], family: comp(pid, 5, 0, enc) || null } });
 }
 
-function obxValue(obx, enc) {
+function obxValue(obx, enc, warnings) {
   const type = field(obx, 2), raw = field(obx, 5);
   if (raw == null) return null;
   if (type === "NM") return quantity({ value: Number(raw), unit: comp(obx, 6, 0, enc) || field(obx, 6) || null });
-  if (type === "SN") { const m = String(raw).split("^"); return quantity({ value: Number(m[1] != null ? m[1] : raw), unit: comp(obx, 6, 0, enc) || null, comparator: (m[0] && /[<>]=?/.test(m[0])) ? m[0] : null }); }
+  if (type === "SN") {
+    // Matched on the MESSAGE's OWN component separator (OPS-20/F20), not a hard-coded "^" - a sender
+    // declaring a different one in MSH-2 is otherwise misread. The comparator is checked against the
+    // real Quantity whitelist BEFORE quantity() is called (OPS-09/F9): this connector's contract is
+    // "never throws", and an unusual-but-valid SN value used to reject the WHOLE message with a 500
+    // when quantity() threw on a comparator it did not recognise.
+    const sep = String((enc && enc.comp) || "^").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const m = new RegExp(`^([<>=]*)${sep}?([-\\d.]+)`).exec(String(raw));
+    if (!m || !Number.isFinite(Number(m[2]))) return { text: decodeEsc(String(raw), enc) };
+    if (m[1] && !COMPARATORS.includes(m[1])) {
+      if (warnings) warnings.push(`OBX SN comparator "${m[1]}" is not one this connector recognises; kept as text`);
+      return { text: decodeEsc(String(raw), enc) };
+    }
+    return quantity({ value: Number(m[2]), unit: comp(obx, 6, 0, enc) || null, comparator: m[1] || null });
+  }
   if (type === "CE" || type === "CWE") return ccFromCE(obx, 5, enc, "coded value");
   return { text: decodeEsc(String(raw), enc) };               // ST/TX/FT and unknown -> narrative
 }
@@ -47,7 +63,7 @@ export function normalizeHl7(ctx, msg) {
         out.diagnosticReports.push(diagnosticReport({ id: String(id), code: ccFromCE(s, 4, enc, "report"), status: field(s, 25) || "unknown", effectiveDateTime: hl7Date(field(s, 7)), results: currentReport.results }));
       } else if (s.id === "OBX") {
         const oid = (currentReport ? currentReport.id : "obx") + "-" + (field(s, 1) || comp(s, 3, 0, enc) || "x");
-        out.observations.push(observation({ id: oid, category: "laboratory", code: ccFromCE(s, 3, enc, "observation"), value: obxValue(s, enc),
+        out.observations.push(observation({ id: oid, category: "laboratory", code: ccFromCE(s, 3, enc, "observation"), value: obxValue(s, enc, warnings),
           referenceRange: field(s, 7) ? { text: field(s, 7) } : null, interpretation: field(s, 8) ? codeable({ text: field(s, 8) }) : null, status: field(s, 11) || "unknown", effectiveDateTime: hl7Date(field(s, 14)) }));
         if (currentReport) currentReport.results.push({ type: "Observation", id: oid });
         if (String(field(s, 11)).toUpperCase() === "C") warnings.push("OBX set " + (field(s, 1) || "?") + " is a correction (C); superseding not merged");   // OBX-1 set-id (an in-message ordinal) only; never echo the OBR-3 filler-order/accession id (was in `oid`)

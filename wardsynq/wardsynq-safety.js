@@ -628,13 +628,24 @@ function checkDose(pack, order, clinical) {
     return out;
   }
 
-  const sameUnit = (a, b) => a && b && lower(a.unit) === lower(b.unit);
+  /* CLIN-01: the ceilings used to compare only when the order's unit was the limit's literal unit, so
+   * digoxin 2.5 mg against a limit in mcg, or paracetamol 1.5 g against one in mg, passed with no
+   * finding. Both sides now go through inBase() into mg (mass) or mL (volume) first. A limit this order
+   * cannot be compared with (a tab, a unit the table does not know) is a finding the prescriber sees,
+   * never a silent pass. */
+  const uncheckable = new Set();
+  const over = (q, limit) => {
+    if (!limit) return false;
+    const a = inBase(q.value, q.unit), b = inBase(limit.value, limit.unit);
+    if (!a || !b || a.dim !== b.dim) { uncheckable.add(`${limit.value} ${limit.unit}`); return false; }
+    return a.value > b.value;
+  };
 
-  if (limits.absoluteCeilingSingle && sameUnit(dose, limits.absoluteCeilingSingle) && dose.value > limits.absoluteCeilingSingle.value) {
+  if (over(dose, limits.absoluteCeilingSingle)) {
     out.push(finding("DOSE_ABSOLUTE_CEILING", DISPOSITION.BLOCK, SEVERITY.CONTRAINDICATED,
       `${dose.value} ${dose.unit} exceeds the absolute single-dose ceiling for ${order.drug} (${limits.absoluteCeilingSingle.value} ${limits.absoluteCeilingSingle.unit}).`,
       { generic, limit: limits.absoluteCeilingSingle, given: dose }));
-  } else if (limits.maxSingle && sameUnit(dose, limits.maxSingle) && dose.value > limits.maxSingle.value) {
+  } else if (over(dose, limits.maxSingle)) {
     out.push(finding("DOSE_ABOVE_MAX_SINGLE", DISPOSITION.OVERRIDABLE, SEVERITY.MAJOR,
       `${dose.value} ${dose.unit} exceeds the recommended maximum single dose for ${order.drug} (${limits.maxSingle.value} ${limits.maxSingle.unit}).`,
       { generic, limit: limits.maxSingle, given: dose }));
@@ -647,7 +658,8 @@ function checkDose(pack, order, clinical) {
   const perKg = limits.mgPerKgSingle;
   const weight = typeof clinical.weightKg === "number" ? clinical.weightKg : null;
   const upToKg = typeof limits.mgPerKgUpToKg === "number" ? limits.mgPerKgUpToKg : null;
-  if (perKg && lower(dose.unit) === "mg" && !(upToKg !== null && weight !== null && weight > upToKg)) {
+  const doseMg = inMg(dose.value, dose.unit);
+  if (perKg && !(upToKg !== null && weight !== null && weight > upToKg)) {
     if (weight === null && upToKg !== null && typeof clinical.ageYears === "number" && clinical.ageYears >= 18) {
       // A known adult with no weight: the adult limits above still ran, and the small-adult mg/kg dose
       // is said rather than turned into a stop on every adult order.
@@ -658,15 +670,18 @@ function checkDose(pack, order, clinical) {
       out.push(finding("DOSE_WEIGHT_MISSING", DISPOSITION.BLOCK, SEVERITY.CONTRAINDICATED,
         `${order.drug} is dosed by weight and this patient has no recorded weight, so the mg/kg ceiling cannot be checked.`,
         { generic, mgPerKgSingle: perKg }));
+    } else if (doseMg === null) {
+      uncheckable.add(`${perKg} mg/kg`);
     } else {
       const ceiling = perKg * weight;
       // A paediatric weight-based dose is additionally capped at the adult maximum: mg/kg alone
       // lets a heavy adolescent exceed an adult dose, which is the classic paediatric overdose.
-      const adultCap = limits.absoluteCeilingSingle && lower(limits.absoluteCeilingSingle.unit) === "mg" ? limits.absoluteCeilingSingle.value : Infinity;
+      const capMg = limits.absoluteCeilingSingle ? inMg(limits.absoluteCeilingSingle.value, limits.absoluteCeilingSingle.unit) : null;
+      const adultCap = capMg === null ? Infinity : capMg;
       const effective = Math.min(ceiling, adultCap);
-      if (dose.value > effective) {
+      if (doseMg > effective) {
         out.push(finding("DOSE_ABOVE_MG_PER_KG", DISPOSITION.BLOCK, SEVERITY.CONTRAINDICATED,
-          `${dose.value} mg exceeds the weight-based ceiling for ${order.drug} (${perKg} mg/kg x ${weight} kg = ${ceiling} mg${effective === adultCap ? `, capped at the adult maximum ${adultCap} mg` : ""}).`,
+          `${dose.value} ${dose.unit} exceeds the weight-based ceiling for ${order.drug} (${perKg} mg/kg x ${weight} kg = ${ceiling} mg${effective === adultCap ? `, capped at the adult maximum ${adultCap} mg` : ""}).`,
           { generic, mgPerKgSingle: perKg, weightKg: weight, ceiling: effective, given: dose }));
       }
     }
@@ -678,15 +693,20 @@ function checkDose(pack, order, clinical) {
   const perDay = dosesPerDay(order.frequency);
   if (perDay) {
     const daily = { value: dose.value * perDay, unit: dose.unit };
-    if (limits.absoluteCeilingDaily && sameUnit(daily, limits.absoluteCeilingDaily) && daily.value > limits.absoluteCeilingDaily.value) {
+    if (over(daily, limits.absoluteCeilingDaily)) {
       out.push(finding("DOSE_ABSOLUTE_CEILING_DAILY", DISPOSITION.BLOCK, SEVERITY.CONTRAINDICATED,
         `${dose.value} ${dose.unit} ${order.frequency} is ${daily.value} ${dose.unit} a day, above the daily ceiling for ${order.drug} (${limits.absoluteCeilingDaily.value} ${limits.absoluteCeilingDaily.unit}).`,
         { generic, limit: limits.absoluteCeilingDaily, given: daily, dosesPerDay: perDay }));
-    } else if (limits.maxDaily && sameUnit(daily, limits.maxDaily) && daily.value > limits.maxDaily.value) {
+    } else if (over(daily, limits.maxDaily)) {
       out.push(finding("DOSE_ABOVE_MAX_DAILY", DISPOSITION.OVERRIDABLE, SEVERITY.MAJOR,
         `${dose.value} ${dose.unit} ${order.frequency} is ${daily.value} ${dose.unit} a day, above the recommended daily maximum for ${order.drug} (${limits.maxDaily.value} ${limits.maxDaily.unit}).`,
         { generic, limit: limits.maxDaily, given: daily, dosesPerDay: perDay }));
     }
+  }
+  if (uncheckable.size) {
+    out.push(finding("DOSE_UNIT_UNCHECKED", DISPOSITION.OVERRIDABLE, SEVERITY.MAJOR,
+      `The dose unit "${dose.unit || "(none)"}" cannot be compared with the ceiling for ${order.drug} (${[...uncheckable].join(", ")}), so that check did not run. Write the dose in mg, g or mcg to check it.`,
+      { generic, given: dose, limits: [...uncheckable] }));
   }
   return out;
 }
@@ -711,9 +731,22 @@ function dosesPerDay(freq) {
   return Object.prototype.hasOwnProperty.call(DOSES_PER_DAY, norm) ? DOSES_PER_DAY[norm] : null;
 }
 
-/* Mass units the order forms offer, in mg. A second order written in g must not drop out of a sum in mg. */
-const MG_PER = Object.freeze({ mcg: 0.001, ug: 0.001, mg: 1, g: 1000 });
-const inMg = (value, unit) => (Object.prototype.hasOwnProperty.call(MG_PER, lower(unit)) ? value * MG_PER[lower(unit)] : null);
+/* Units a dose or a ceiling may be written in, as { dim, factor } into mg (mass) or mL (volume). A second
+ * order written in g must not drop out of a sum in mg, and a dose in g must not skip a ceiling in mg. */
+const UNIT_BASE = Object.freeze({
+  ng: ["mass", 1e-6], nanogram: ["mass", 1e-6], nanograms: ["mass", 1e-6],
+  mcg: ["mass", 0.001], ug: ["mass", 0.001], "\u00b5g": ["mass", 0.001], "\u03bcg": ["mass", 0.001], microgram: ["mass", 0.001], micrograms: ["mass", 0.001],
+  mg: ["mass", 1], milligram: ["mass", 1], milligrams: ["mass", 1],
+  g: ["mass", 1000], gm: ["mass", 1000], gms: ["mass", 1000], gram: ["mass", 1000], grams: ["mass", 1000],
+  ml: ["volume", 1], millilitre: ["volume", 1], milliliter: ["volume", 1], millilitres: ["volume", 1], milliliters: ["volume", 1], cc: ["volume", 1],
+  l: ["volume", 1000], litre: ["volume", 1000], liter: ["volume", 1000], litres: ["volume", 1000], liters: ["volume", 1000],
+});
+function inBase(value, unit) {
+  const u = lower(unit).replace(/\.$/, "");
+  if (typeof value !== "number" || !Number.isFinite(value) || !Object.prototype.hasOwnProperty.call(UNIT_BASE, u)) return null;
+  return { dim: UNIT_BASE[u][0], value: value * UNIT_BASE[u][1] };
+}
+const inMg = (value, unit) => { const b = inBase(value, unit); return b && b.dim === "mass" ? b.value : null; };
 
 /**
  * The same drug twice. HAZ-MED-03, across orders (retest 2026-09-16: a second paracetamol 1 g QDS on top of

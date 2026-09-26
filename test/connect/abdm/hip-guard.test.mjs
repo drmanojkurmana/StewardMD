@@ -239,3 +239,86 @@ test("canonicalization: a case-variant record subject hash must NOT falsely matc
   });
   assert.equal(ok.events.length, 0);
 });
+
+// ── OPS-02/F2: the record's OWN date must fall inside the consent's permission.dateRange ──────────────
+// Before the fix, assertServeAllowed never read any date off the record - a careContext could be
+// registered (by mistake, a CM listing all contexts, or an unchecked linkCareContext) for a visit
+// outside the consented window and still be served in full once its ref sat in the signed artifact.
+test("OPS-02/F2: a record dated OUTSIDE the consent's dateRange is refused, even with a matching careContext/hiType/subject", async () => {
+  const env = envOf();
+  const HASH_A = await hmacPseudonym(env, TENANT, "A@sbx");
+  // A consent narrowly scoped to January 2024; the care-context table has BOTH the in-window and the
+  // out-of-window ref registered (a registration mistake, exactly as F2 describes).
+  const db = seedDb({
+    patientAbhaHash: HASH_A,
+    careContexts: ["visit-jan-2024", "visit-2019"],
+    dateRange: { from: "2024-01-01T00:00:00Z", to: "2024-01-31T23:59:59Z" },
+    expiresAt: "2024-06-01T00:00:00Z",
+  });
+  const audit = makeAudit();
+  await expectRefuse(env, { db, now: () => new Date("2024-01-15T00:00:00Z"), audit: audit.fn }, {
+    consentId: "consent-1", careContexts: ["visit-2019"],
+    records: [{ ...rec("visit-2019", HASH_A, "OPConsultation"), recordDate: "2019-05-01T00:00:00Z" }],
+    tenantId: TENANT,
+  }, audit);
+  assert.ok(audit.events.some((e) => e.scope && e.scope.reason === "daterange-out-of-scope"));
+});
+
+test("OPS-02/F2: a record dated INSIDE the consent's dateRange is still served (no over-refusal)", async () => {
+  const env = envOf();
+  const HASH_A = await hmacPseudonym(env, TENANT, "A@sbx");
+  const db = seedDb({
+    patientAbhaHash: HASH_A, careContexts: ["visit-jan-2024"],
+    dateRange: { from: "2024-01-01T00:00:00Z", to: "2024-01-31T23:59:59Z" },
+    expiresAt: "2024-06-01T00:00:00Z",
+  });
+  const audit = makeAudit();
+  await assertServeAllowed(env, { db, now: () => new Date("2024-01-15T00:00:00Z"), audit: audit.fn }, {
+    consentId: "consent-1", careContexts: ["visit-jan-2024"],
+    records: [{ ...rec("visit-jan-2024", HASH_A, "OPConsultation"), recordDate: "2024-01-10T00:00:00Z" }],
+    tenantId: TENANT,
+  });
+  assert.equal(audit.events.length, 0);
+});
+
+test("OPS-02/F2: dateRange bounds are INCLUSIVE - exactly `from` and exactly `to` are honored", async () => {
+  const env = envOf();
+  const HASH_A = await hmacPseudonym(env, TENANT, "A@sbx");
+  const db = seedDb({
+    patientAbhaHash: HASH_A, careContexts: ["visit-jan-2024"],
+    dateRange: { from: "2024-01-01T00:00:00Z", to: "2024-01-31T23:59:59Z" },
+    expiresAt: "2024-06-01T00:00:00Z",
+  });
+  for (const recordDate of ["2024-01-01T00:00:00Z", "2024-01-31T23:59:59Z"]) {
+    const audit = makeAudit();
+    await assertServeAllowed(env, { db, now: () => new Date("2024-01-15T00:00:00Z"), audit: audit.fn }, {
+      consentId: "consent-1", careContexts: ["visit-jan-2024"],
+      records: [{ ...rec("visit-jan-2024", HASH_A, "OPConsultation"), recordDate }],
+      tenantId: TENANT,
+    });
+    assert.equal(audit.events.length, 0, recordDate);
+  }
+  const outAudit = makeAudit();
+  await expectRefuse(env, { db, now: () => new Date("2024-01-15T00:00:00Z"), audit: outAudit.fn }, {
+    consentId: "consent-1", careContexts: ["visit-jan-2024"],
+    records: [{ ...rec("visit-jan-2024", HASH_A, "OPConsultation"), recordDate: "2024-02-01T00:00:00.001Z" }],
+    tenantId: TENANT,
+  }, outAudit);
+});
+
+test("OPS-02/F2: a record with NO derivable date is unaffected (defence-in-depth, not the only gate)", async () => {
+  const env = envOf();
+  const HASH_A = await hmacPseudonym(env, TENANT, "A@sbx");
+  const db = seedDb({
+    patientAbhaHash: HASH_A, careContexts: ["visit-jan-2024"],
+    dateRange: { from: "2024-01-01T00:00:00Z", to: "2024-01-31T23:59:59Z" },
+    expiresAt: "2024-06-01T00:00:00Z",
+  });
+  const audit = makeAudit();
+  await assertServeAllowed(env, { db, now: () => new Date("2024-01-15T00:00:00Z"), audit: audit.fn }, {
+    consentId: "consent-1", careContexts: ["visit-jan-2024"],
+    records: [rec("visit-jan-2024", HASH_A, "OPConsultation")],   // no recordDate at all
+    tenantId: TENANT,
+  });
+  assert.equal(audit.events.length, 0);
+});

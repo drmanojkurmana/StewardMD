@@ -52,6 +52,34 @@ test("OBX correction (status C) adds a warning (no silent merge)", () => {
 
 // B-F4 (PHI-adjacent hygiene): the correction warning must NOT echo the OBR-3 filler-order/accession id (it
 // was baked into `oid`), which structuralWarnings' quoted-substring redaction would NOT scrub.
+test("OPS-08/F8: a full timestamp keeps its time of day, not just the calendar date", () => {
+  const b = norm(["MSH|^~\\&|LAB|H|E|H|20260801||ORU^R01|M7|P|2.5", "PID|1||M1||A^B",
+    "OBR|1||O1|G^Glucose^L|||20260801235959", "OBX|1|NM|G^Glucose^L||110|mg/dL|70-99|H|||F|||20260801235959"].join("\r"));
+  // Before the fix, both timestamps became just "2026-08-01" - a critical glucose drawn at 23:59:59
+  // was indistinguishable from one drawn at midnight, and same-day ordering/turnaround was lost.
+  assert.equal(b.diagnosticReports[0].effectiveDateTime, "2026-08-01T23:59:59+05:30");
+  assert.equal(b.observations[0].effectiveDateTime, "2026-08-01T23:59:59+05:30");
+});
+
+test("OPS-09/F9: an SN value with an unrecognised comparator is kept as text, never a 500", () => {
+  // A comparator this connector does not know (here, a stray "=<") used to reach quantity() unchecked
+  // and throw, which ingest.js turned into a 500 that rejected the WHOLE message.
+  const b = norm(["MSH|^~\\&|LAB|H|E|H|20260801||ORU^R01|M8|P|2.5", "PID|1||M1||A^B",
+    "OBR|1||O1|G^Glucose^L", "OBX|1|SN|G^Glucose^L||=<^5|mg/dL|||||F"].join("\r"));
+  assert.equal(validateBundle(b).ok, true);
+  assert.equal(b.observations[0].value.text, "=<^5");
+  assert.ok(b.meta.warnings.some((w) => w.includes("SN comparator")));
+});
+
+test("OPS-20/F20: an SN value splits on MSH-2's own component separator, not a hard-coded ^", () => {
+  // MSH-2 declares "#" as the component separator; the SN branch used to split on a hard-coded "^"
+  // regardless, turning ">#100" into opaque text instead of a comparator + number.
+  const b = norm(["MSH|#~\\&|LAB|H|E|H|20260801||ORU#R01|M9|P|2.5", "PID|1||M1||A#B",
+    "OBR|1||O1|G#Glucose#L", "OBX|1|SN|G#Glucose#L||>#100|mg/dL|||||F"].join("\r"));
+  assert.equal(b.observations[0].value.comparator, ">");
+  assert.equal(b.observations[0].value.value, 100);
+});
+
 test("correction warning does NOT leak the OBR-3 accession id", () => {
   const b = norm(["MSH|^~\\&|LAB|H|E|H|20260801||ORU^R01|M6|P|2.5", "PID|1||M1||A^B",
     "OBR|1||ACC-SECRET-999|G^Glucose^L", "OBX|1|NM|G^Glucose^L||110|mg/dL|70-99|H|||C"].join("\r"));

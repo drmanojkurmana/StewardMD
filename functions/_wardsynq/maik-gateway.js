@@ -46,6 +46,9 @@
  * happens until then.
  */
 
+import { assertPublicHttpsUrl } from "../_connect/onboard/ssrf.js";
+import { makeSafeFetch } from "../_connect/onboard/net.js";
+
 const str = (v) => (v == null ? "" : String(v).trim());
 
 /** What a caller asks for. A task, never a model - that is the whole point of the indirection. */
@@ -388,6 +391,15 @@ function phiAllowed(m, cfg, env) {
   return cfg.phiApproved.includes(m.provider) || cfg.phiApproved.includes(m.id);
 }
 
+/** PURE. Why a hospital model server address may not carry patient data from here, or null (SEC-08). */
+function localUrlProblem(u) {
+  if (!str(u)) return null;
+  try { assertPublicHttpsUrl(str(u), "the hospital model server address"); return null; }
+  catch (e) { return `${str(e && e.message)}: this server reaches it over the internet, so it must be https to a public name`; }
+}
+/** A fetch that checks the address and refuses to follow a redirect to anywhere else. */
+const localFetch = (f) => makeSafeFetch(f || fetch, { maxHops: 0 });
+
 /** PURE. This hospital's MaiK configuration, with every default fail-closed. */
 function maikConfig(config) {
   const c = (config && typeof config === "object") ? config : {};
@@ -646,16 +658,20 @@ const PROVIDERS = Object.freeze({
       });
     },
   },
-  /* A model on this hospital's own hardware, over the OpenAI-compatible chat API. No key is sent
-   * anywhere off-site because there is no off-site: the base URL is the hospital's own. */
+  /* A model on this hospital's own hardware, over the OpenAI-compatible chat API. SEC-08: this code
+   * runs on Cloudflare, not on the hospital's network, so the request crosses the internet: the base
+   * URL must be https to a public name (localUrlProblem), checked again here on every call, and a
+   * redirect is a failure, never followed (localFetch). */
   "local-openai": {
     generate: async (req) => {
       const cfg = maikConfig(req.config);
+      const problem = localUrlProblem(cfg.localBaseUrl);
+      if (problem) throw new Error(problem);
       const url = `${String(cfg.localBaseUrl).replace(/\/+$/, "")}/chat/completions`;
       const controller = typeof AbortController === "function" ? new AbortController() : null;
       const timer = controller ? setTimeout(() => controller.abort(), cfg.timeoutMs) : null;
       try {
-        const res = await (req.fetchImpl || fetch)(url, {
+        const res = await localFetch(req.fetchImpl)(url, {
           method: "POST", headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ model: cfg.localModel, messages: [
             ...(str(req.system) ? [{ role: "system", content: str(req.system) }] : []),
@@ -759,10 +775,11 @@ async function probeClinicalPath(ctx) {
       res = await f(`${vertexEndpoint(c.env, m).base}:countTokens`, { method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: "health check" }] }] }) });
     } else if (m.provider === "local-openai") {
-      res = await f(`${String(maikConfig(c.config).localBaseUrl).replace(/\/+$/, "")}/models`);
+      if (localUrlProblem(maikConfig(c.config).localBaseUrl)) return { state: "down", model: m.id, label, code: "bad_local_url" };
+      res = await localFetch(c.fetchImpl)(`${String(maikConfig(c.config).localBaseUrl).replace(/\/+$/, "")}/models`);
     } else return { state: "down", model: m.id, label, code: "no_probe" };
   } catch { return { state: "down", model: m.id, label }; }
   return res && res.ok ? { state: "up", model: m.id, label } : { state: "down", model: m.id, label, status: (res && Number(res.status)) || null };
 }
 
-export { TASK, LOCALITY, MODELS, PROVIDERS, PHI_CAPABLE, maikConfig, looksLikePhi, route, invoke, byId, maikStatus, scrubSecret, geminiKey, googleGenerate, vertexProjectMissing, phiAllowed, vertexEndpoint, publicRefusal, probeClinicalPath, SETUP_REFUSALS };
+export { TASK, LOCALITY, MODELS, PROVIDERS, PHI_CAPABLE, maikConfig, looksLikePhi, route, invoke, byId, maikStatus, scrubSecret, geminiKey, googleGenerate, vertexProjectMissing, phiAllowed, vertexEndpoint, publicRefusal, probeClinicalPath, SETUP_REFUSALS, localUrlProblem };

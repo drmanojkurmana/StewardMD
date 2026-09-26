@@ -99,10 +99,10 @@ async function as(email, path) {
   return queue({ request: new Request("https://x/api/queue" + path, { headers: { "Cf-Access-Authenticated-User-Email": email || "" } }), env: ENV });
 }
 const noSession = (path) => queue({ request: new Request("https://x/api/queue" + path), env: ENV });
-async function mintBearer(scopes, tenant) {
+async function mintBearer(scopes, tenant, subjectEmail) {
   const tok = "tok-" + Math.random().toString(36).slice(2);
   const now = Date.now();
-  await RECORD.append(tenant || TENANT, [{ ...SmartGrant({ id: `wsq-smart-token-${await hashSecret(tok, "smart:token")}`, kind: "token", clientId: "viewer", clientKind: "public", subject: idFor(DOCTOR), subjectKind: "human", scopes, readTypes: readTypesFor(scopes), issuedAt: new Date(now).toISOString(), expiresAt: new Date(now + 3600000).toISOString() }), version: 1, ...at(new Date(now).toISOString()) }]);
+  await RECORD.append(tenant || TENANT, [{ ...SmartGrant({ id: `wsq-smart-token-${await hashSecret(tok, "smart:token")}`, kind: "token", clientId: "viewer", clientKind: "public", subject: idFor(subjectEmail || DOCTOR), subjectKind: "human", scopes, readTypes: readTypesFor(scopes), issuedAt: new Date(now).toISOString(), expiresAt: new Date(now + 3600000).toISOString() }), version: 1, ...at(new Date(now).toISOString()) }]);
   return tok;
 }
 const smart = (org, path, tok) => fhirDoor({ request: new Request(`https://x/api/fhir/${org}/${path}`, { headers: tok ? { Authorization: "Bearer " + tok } : {} }), env: ENV, params: { path: [org, ...path.split("?")[0].split("/")] } });
@@ -138,7 +138,8 @@ test("SMART DOOR AUTH on /api/fhir/{org}/ValueSet: no bearer 401, another hospit
   assert.equal(r.status, 200, await r.clone().text());
   assert.equal((await r.json()).expansion.total, 2);
   // Another hospital's own door serves its own (empty) formulary, never this one's.
-  const theirs = await mintBearer(["user/*.read"], "tenant-b");
+  // Its token acts as one of ITS members (SEC-09: a token's person must be a member where it is used).
+  const theirs = await mintBearer(["user/*.read"], "tenant-b", ADMIN_B);
   assert.equal((await (await smart("org-b", "ValueSet/formulary/$expand", theirs)).json()).expansion.total, 0);
 });
 
@@ -200,6 +201,17 @@ test("CODESYSTEM READ: ours are complete, everybody else's are fragments, the al
   const snomed = await (await as(DOCTOR, W("CodeSystem?url=http://snomed.info/sct"))).json();
   assert.equal(snomed.total, 0, "no SNOMED CT content is shipped, so none is described");
   assert.equal((await as(DOCTOR, W("CodeSystem?name=x"))).status, 400, "an unsupported search parameter is refused");
+});
+
+test("OPS-25/F25: a closed, R4-required HL7 enumeration is content 'complete', not 'fragment'", async () => {
+  const gender = await (await as(DOCTOR, W("CodeSystem?url=http://hl7.org/fhir/administrative-gender"))).json();
+  assert.equal(gender.entry[0].resource.content, "complete", "male|female|other|unknown IS the whole R4 AdministrativeGender enum");
+  assert.deepEqual(gender.entry[0].resource.concept.map((c) => c.code).sort(), ["female", "male", "other", "unknown"]);
+  const condClinical = await (await as(DOCTOR, W("CodeSystem?url=http://terminology.hl7.org/CodeSystem/condition-clinical"))).json();
+  assert.equal(condClinical.entry[0].resource.content, "complete");
+  // A curated OPERATIONAL SUBSET of a much larger real-world HL7 v3 vocabulary is still a fragment.
+  const actCode = await (await as(DOCTOR, W("CodeSystem?url=http://terminology.hl7.org/CodeSystem/v3-ActCode"))).json();
+  assert.equal(actCode.entry[0].resource.content, "fragment", "this server maps only the encounter classes it uses, not the whole real-world v3-ActCode");
 });
 
 test("THE CAPABILITYSTATEMENT at /api/fhir/{org}/metadata declares CodeSystem, ValueSet, AuditEvent and $summary", async () => {

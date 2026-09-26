@@ -70,6 +70,24 @@ export async function verifyFirebaseClaims(token, env) {
   return (await signatureOk(jwt, JWK_URL)) ? payload : null;
 }
 
+/* The token's email, lowercased, ONLY when the account has proved it owns that address; null
+ * otherwise (SEC-01). Firebase issues a valid ID token for a self-signed-up email/password account
+ * whose address nobody confirmed, so an unverified email must never match a staff member, an org
+ * owner or a platform owner by address. Proof is Firebase's own email_verified (Google/Apple sign-in,
+ * Firebase link), or the emailVerified claim /api/auth/verify-otp sets after its Resend code; when
+ * that claim names the address it was set for, the token's email must still be that address. */
+export function verifiedEmailOf(claims) {
+  if (!claims || typeof claims.email !== "string" || !claims.email) return null;
+  const email = claims.email.trim().toLowerCase();
+  if (claims.email_verified === true) return email;
+  if (claims.emailVerified === true) {
+    const forAddr = typeof claims.emailVerifiedFor === "string" ? claims.emailVerifiedFor.trim().toLowerCase() : "";
+    // ponytail: a legacy claim with no address is trusted as before; tighten once every claim carries one.
+    if (!forAddr || forAddr === email) return email;
+  }
+  return null;
+}
+
 /* The uid alone — what _features.js, _adminauth.js and _entitlement.js have always wanted. Kept as
  * a string return so those callers are untouched by the split above. */
 export async function verifyFirebaseToken(token, env) {

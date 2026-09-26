@@ -55,6 +55,10 @@ function normaliseArgs(args) {
  * has a caller in repository-d1.js, and one that did not would be untested surface pretending to be
  * compatibility.
  */
+/* D1's limit on bound parameters per statement (developers.cloudflare.com/d1/platform/limits). SQLite
+ * allows 32766, so without this a query that D1 refuses passes every local test (audit DATA-02). */
+const D1_MAX_BOUND = 100;
+
 function d1Binding(db) {
   /* SQLite has no nested transactions, and `BEGIN` inside one throws. D1's batch is atomic and
    * never nests, but an adapter that assumed so and was wrong would ROLL BACK THE OUTER WRITE on an
@@ -64,7 +68,10 @@ function d1Binding(db) {
   function stmt(sql) {
     let args = [];
     const s = {
-      bind(...a) { args = normaliseArgs(a); return s; },
+      bind(...a) {
+        if (a.length > D1_MAX_BOUND) throw new Error(`D1_ERROR: too many SQL variables (${a.length} bound, D1 allows ${D1_MAX_BOUND})`);
+        args = normaliseArgs(a); return s;
+      },
       async first() { return db.prepare(sql).get(...args) ?? null; },
       async all() { return { results: db.prepare(sql).all(...args) }; },
       async run() {
@@ -167,4 +174,4 @@ function openSqlite(deps, options) {
   return { db, binding: d1Binding(db), pragmas };
 }
 
-export { normaliseArgs, d1Binding, PRAGMAS, openSqlite };
+export { normaliseArgs, d1Binding, PRAGMAS, openSqlite, D1_MAX_BOUND };

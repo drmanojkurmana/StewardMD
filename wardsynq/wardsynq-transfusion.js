@@ -148,6 +148,11 @@ function checkCompatibility(patient, unit, opts) {
   if (isRedCells && !RHD.includes(pRh)) {
     reasons.push({ code: "PATIENT_RHD_UNKNOWN", message: "the patient's RhD type is not determined" });
   }
+  // CLIN-21: the unit side of the same rule. A red cell unit with no RhD recorded passed for a D-negative
+  // patient because only a literal "positive" was blocked; unknown is not negative.
+  if (isRedCells && !RHD.includes(uRh)) {
+    reasons.push({ code: "UNIT_RHD_UNKNOWN", message: "the unit's RhD type is not recorded" });
+  }
 
   return { compatible: reasons.length === 0, reasons, abo: `${uAbo || "?"} to ${pAbo || "?"}`, rhd: `${uRh || "?"} to ${pRh || "?"}` };
 }
