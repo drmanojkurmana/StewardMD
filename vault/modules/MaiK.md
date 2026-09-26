@@ -265,3 +265,18 @@ KNOWLEDGE (PRIMARY SOURCE)`); the prompts say prefer, silently skip off-topic no
   deleted as a word-less piece, so Lite's claim-checked lines lost their [n] while painting and Cloud
   lost post-period citations. Now kept; a citation leading into the sentence after a DROPPED one goes
   with the dropped one.
+
+## Answer-quality set: 60 cases (2026-09-26, branch maik-eval-cases)
+`test/maik-eval/live-cases.json` grew from 6 to 60 questions across 10 categories (emergency, infection,
+dosing, interaction/pregnancy, labs, chronic disease, obstetrics, paediatrics, shorthand such as "RA factor",
+and 5 decline/hedge cases). Each case lists 3-5 **key points** as concept regexes; every case is
+`certified: false` until a clinician reviews it. A key point checks that a concept is present, NOT that
+the answer is right: the grading sheet is still where a clinician marks correct / incomplete / unsafe.
+- **Run it (costs tokens, never in CI):** `MAIK_EVAL_TOKEN=<Firebase ID token of a TEST clinician account>
+  node scripts/maik-quality-run.mjs --cases test/maik-eval/live-cases.json`. Never the owner's personal
+  Google account. Output: `docs/maik-eval/run-<date>.json` + a grading sheet; `checks.keyPoints` per case.
+  `test/maik-eval/run-live-eval.mjs` scores the same file, including the two-turn L-06.
+- No "must not say" regexes on purpose: a pattern for "ACE inhibitor" cannot tell "give" from "avoid", so
+  it would fail correct answers. Safety stays with the clinician's grade.
+- `test/maik-eval-cases.test.mjs` pins the shape and fails if a vague non-answer ("monitor closely, dose
+  depends on weight, follow local guidelines") passes any clinical case's key points.
