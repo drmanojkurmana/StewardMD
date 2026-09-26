@@ -7426,6 +7426,15 @@ export async function onRequest(context) {
 
       // Add a clinical entry to the encounter timeline. Vitals => nurse (EMR_VITALS); notes/meds/
       // assessment => doctor (EMR_TREAT). "Add to timeline" for meds writes ONLY here (no pharmacy/EMR).
+      if (seg === "timeline" && sub === "revoke-link") {   // SEC-12: stop the patient's timeline link on its own
+        await requireSessionCap(env, actor, s, CAPS.EMR_TREAT);
+        const t = await Q.getTicket(env, body.ticketId);
+        if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
+        const rv = await QT.revokeTimelineLink(env, t.id);
+        if (rv.error) return json({ ok: false, error: rv.error }, 404, request);
+        await Q.qAudit(env, { hospitalId: s.hospitalId, ticketId: t.id, actor: actor.id, action: "link_revoke", meta: "timeline" });
+        return json({ ok: true }, 200, request);
+      }
       if (seg === "timeline" && sub === "extend") {
         await requireSessionCap(env, actor, s, CAPS.EMR_TREAT);
         const t = await Q.getTicket(env, body.ticketId);
