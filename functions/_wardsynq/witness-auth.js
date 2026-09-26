@@ -1,4 +1,4 @@
-/* functions/_wardsynq/witness-auth.js — the second person at a bedside dose proves who they are (CLIN-18).
+/* functions/_wardsynq/witness-auth.js: the second person at a bedside dose proves who they are (CLIN-18).
  *
  * A witness used to be an identifier typed into a box: any active colleague's name passed, whether or not that
  * colleague was in the room. Now the witness enters their OWN staff PIN on the nurse's device, and it is checked
