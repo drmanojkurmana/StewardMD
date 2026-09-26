@@ -2411,11 +2411,11 @@
       if (!orgs.length) return "";
       var S = window.ABG_STORE, RL = window.ABG_RULES;
       if (S && !S.loaded()) { S.load().then(function () { try { if (window.DX && window.DX._onHospitalChange) window.DX._onHospitalChange(); } catch (e) {} }).catch(function () {}); return ""; }
-      var ctx = S ? { spec: S.specimenChain(lead.id), set: S.settingFor(lead.id) } : {};
-      var seen = {}, rows = [], used = null, anyLow = false;
+      var ctx = S ? S.synCtx(lead.id) : {};
+      var seen = {}, rows = [];
       orgs.forEach(function (orgName) {
         if (rows.length >= 5 || seen[orgName]) return; seen[orgName] = 1;
-        var cells = [], n = 0, k = 0, combined = null;
+        var cells = [], n = 0, k = 0, combined = null, used = null;
         RPANEL.forEach(function (dk) {
           var r = window.HOSPITAL.getSusceptibility(orgName, dk, ctx);
           if (!r || r.national || r.s == null) return;                   // genuine profile values only
@@ -2430,27 +2430,28 @@
           if (r.n != null && r.n > n) n = r.n;
           if (r.k) k = Math.max(k, r.k);
           if (r.combined) combined = r.combined;
-          if (!used && r.spec) used = r;
+          if (!used && r.spec) used = r;          // same organism: same stratum for every drug
           var R = Math.round(100 - r.s);
           cells.push('<span style="display:inline-block;font:700 10.5px var(--sans,system-ui);color:#fff;background:' + rColor(R) + ';padding:2px 7px;border-radius:999px;margin:3px 4px 0 0">' + esc(RSHORT[dk] || dk) + ' ' + R + '%R</span>');
         });
         if (!cells.length) return;
+        // Each organism carries its own stratum: reports print organism groups at different
+        // granularity, so the specimen used can differ between organisms.
         var meta = [];
+        if (used) meta.push((R_SPEC[used.spec] || used.spec) + ", " + (R_SET[used.set] || used.set) + (used.cohort === "hai" ? " (ICU device infections)" : ""));
         if (n) meta.push(n.toLocaleString("en-IN") + " isolates");
         if (k > 1) meta.push(k + " institutions");
         if (combined) meta.push(combined.join(" + "));
+        if (used && used.specMatch === false && ctx.spec && ctx.spec.length) meta.push("no " + (R_SPEC[ctx.spec[0]] || ctx.spec[0]) + " figures here");
         rows.push('<div style="margin-top:6px"><span style="font:700 12px var(--sans,system-ui);font-style:italic">' + esc(orgName) + '</span>' +
           (meta.length ? ' <span style="font:600 10.5px var(--sans,system-ui);color:var(--slate-soft,#64748B)">' + esc(meta.join(", ")) + '</span>' : '') + ' ' + cells.join("") + '</div>');
       });
       if (!rows.length) return "";
       var nm = hp.label || hp.name || hp.short || "regional";
-      var strat = used ? (R_SPEC[used.spec] || used.spec) + ", " + (R_SET[used.set] || used.set) : "";
-      var fallback = used && (!used.specMatch || !used.setMatch) && ctx.spec && ctx.spec.length
-        ? " No " + (R_SPEC[ctx.spec[0]] || ctx.spec[0]) + (ctx.set && ctx.set !== "all" ? " " + (R_SET[ctx.set] || ctx.set) : "") + " data in this source, so " + strat + " is shown." : "";
       return '<div class="dx-region-abg" style="margin-top:10px;padding:10px 12px;border:1px solid var(--line,#E2E8F0);border-radius:12px;background:var(--panel,#fff)">' +
-        '<div style="font:800 12px var(--sans,system-ui);color:var(--ink,#0F172A)">Resistance: ' + esc(nm) + ' <span style="font-weight:600;color:var(--slate-soft,#64748B)">(% resistant' + (strat ? ", " + esc(strat) : "") + ')</span></div>' +
+        '<div style="font:800 12px var(--sans,system-ui);color:var(--ink,#0F172A)">Resistance: ' + esc(nm) + ' <span style="font-weight:600;color:var(--slate-soft,#64748B)">(% resistant, specimen chosen for ' + esc(lead.name || "this syndrome") + ')</span></div>' +
         rows.join("") +
-        '<div style="margin-top:8px;font:500 10.5px/1.4 var(--sans,system-ui);color:var(--slate-soft,#64748B)">Decision support from the active antibiogram profile' + esc(fallback) + ' Figures from fewer than 30 isolates are left out (CLSI M39). ICMR national guidance remains the baseline; check your own hospital antibiogram before prescribing.</div>' +
+        '<div style="margin-top:8px;font:500 10.5px/1.4 var(--sans,system-ui);color:var(--slate-soft,#64748B)">Decision support from the active antibiogram profile. Figures from fewer than 30 isolates, and figures that failed a data check, are left out (CLSI M39). ICMR national guidance remains the baseline; check your own hospital antibiogram before prescribing.</div>' +
         '<button type="button" class="dx-abg-open" style="margin-top:6px;border:0;background:none;padding:0;font:700 11px var(--sans,system-ui);color:var(--tl,#0f766e);cursor:pointer">Open the full antibiogram</button></div>';
     } catch (e) { return ""; }
   }

@@ -155,3 +155,24 @@ test("WISCA and ranking on a stratum", () => {
   assert.ok(rk.length > 0);
   assert.ok(rk.every((x) => x.aware !== "R"));
 });
+
+test("surveillance cohorts answer only their syndromes; pneumococcal meningitis uses CSF figures or none", () => {
+  const extra = [src({ id: "NETX_2024", inst: "NETX", institution: "Test Network", short: "NetX", region: "national", kind: "network", sector: "network", year: 2024, rows: [
+    { spec: "blood", set: "icu", org: "E. coli", n: 200, s: { meropenem: 40 }, cohort: "hai" },
+    { spec: "nonurine", set: "all", org: "E. coli", n: 900, s: { meropenem: 70 } },
+    { spec: "csf", set: "all", org: "Streptococcus pneumoniae", n: 8, s: { penicillin: 25 } },
+    { spec: "blood", set: "all", org: "Streptococcus pneumoniae", n: 53, s: { penicillin: 100 } },
+    { spec: "blood", set: "icu", org: "Staphylococcus aureus", n: 80, s: { oxacillin: 33.8 }, cohort: "hai" }] })];
+  const S3 = load(); S3._set(buildBundle(SOURCES.concat(extra), []).bundle);
+  const ctx = (syn) => Object.assign({ scope: "src:NETX_2024" }, S3.synCtx(syn));
+  const sep = S3.susceptibility("E. coli", "meropenem", ctx("SEPSIS"));
+  assert.equal(sep.s, 70, "general sepsis never reads ICU device-infection surveillance");
+  assert.equal(sep.cohort, null);
+  const dev = S3.susceptibility("E. coli", "meropenem", ctx("DEVICE_INFECTION"));
+  assert.equal(dev.s, 40); assert.equal(dev.cohort, "hai");
+  const men = S3.susceptibility("Streptococcus pneumoniae", "penicillin", ctx("MENINGITIS"));
+  assert.equal(men.spec, "csf", "not the blood figure read with non-meningeal breakpoints");
+  assert.equal(men.lowN, true);
+  const mrsa = S3.susceptibility("Staphylococcus aureus", "cefoxitin", ctx("DEVICE_INFECTION"));
+  assert.equal(mrsa.s, 33.8, "oxacillin answers a cefoxitin question for staphylococci");
+});

@@ -125,8 +125,11 @@
   var ORGS = {
     ecoli: { label: "Escherichia coli", short: "E. coli", group: "entero", names: ["escherichia coli", "e coli", "e. coli", "e.coli", "ecoli"] },
     ecoli_dec: { label: "Diarrhoeagenic E. coli", short: "DEC", group: "entero", names: ["diarrhoeagenic e. coli", "diarrheagenic e. coli", "diarrhoeagenic escherichia coli", "diarrheagenic escherichia coli", "dec"] },
-    klebsiella: { label: "Klebsiella pneumoniae / spp.", short: "Klebsiella", group: "entero", names: ["klebsiella pneumoniae", "k pneumoniae", "k. pneumoniae", "klebsiella spp", "klebsiella species", "klebsiella", "klebsiella spp.", "klebsiella oxytoca", "k. oxytoca", "klebsiella pneumoniae complex"] },
-    enterobacter: { label: "Enterobacter cloacae complex / K. aerogenes", short: "Enterobacter", group: "entero", names: ["enterobacter spp", "enterobacter spp.", "enterobacter species", "enterobacter", "enterobacter cloacae", "enterobacter cloacae complex", "enterobacter aerogenes", "klebsiella aerogenes"] },
+    klebsiella: { label: "Klebsiella pneumoniae / spp.", short: "Klebsiella", group: "entero", names: ["klebsiella pneumoniae", "k pneumoniae", "k. pneumoniae", "klebsiella spp", "klebsiella species", "klebsiella", "klebsiella spp.", "klebsiella pneumoniae complex"] },
+    koxytoca: { label: "Klebsiella oxytoca", short: "K. oxytoca", group: "entero", names: ["klebsiella oxytoca", "k. oxytoca", "k oxytoca"] },
+    kaerogenes: { label: "Klebsiella aerogenes", short: "K. aerogenes", group: "entero", names: ["klebsiella aerogenes", "k. aerogenes", "enterobacter aerogenes", "e. aerogenes"] },
+    ecloacae: { label: "Enterobacter cloacae complex", short: "E. cloacae", group: "entero", names: ["enterobacter cloacae", "enterobacter cloacae complex", "e. cloacae", "e cloacae"] },
+    enterobacter: { label: "Enterobacter spp.", short: "Enterobacter", group: "entero", names: ["enterobacter spp", "enterobacter spp.", "enterobacter species", "enterobacter"] },
     citrobacter: { label: "Citrobacter spp.", short: "Citrobacter", group: "entero", names: ["citrobacter spp", "citrobacter spp.", "citrobacter species", "citrobacter"] },
     cfreundii: { label: "Citrobacter freundii", short: "C. freundii", group: "entero", names: ["citrobacter freundii", "c. freundii", "citrobacter freundii complex"] },
     ckoseri: { label: "Citrobacter koseri", short: "C. koseri", group: "entero", names: ["citrobacter koseri", "c. koseri", "citrobacter diversus"] },
@@ -136,7 +139,9 @@
     entero_other: { label: "Enterobacter and Citrobacter (grouped)", short: "Enterobacter/Citrobacter", group: "entero", names: ["enterobacter spp. / citrobacter spp", "enterobacter/citrobacter", "enterobacter and citrobacter", "other enterobacterales"] },
     ppm: { label: "Proteus, Morganella and Providencia (grouped)", short: "Proteus group", group: "entero", names: ["proteus spp. / morganella / providencia", "proteus/morganella/providencia", "proteus, morganella, providencia", "proteus morganella providencia", "ppm"] },
     morganella: { label: "Morganella morganii", short: "Morganella", group: "entero", names: ["morganella morganii", "morganella", "morganella spp", "morganella spp."] },
-    providencia: { label: "Providencia spp.", short: "Providencia", group: "entero", names: ["providencia spp", "providencia spp.", "providencia", "providencia stuartii", "providencia rettgeri"] },
+    providencia: { label: "Providencia spp.", short: "Providencia", group: "entero", names: ["providencia spp", "providencia spp.", "providencia", "providencia species"] },
+    pstuartii: { label: "Providencia stuartii", short: "P. stuartii", group: "entero", names: ["providencia stuartii", "p. stuartii"] },
+    prettgeri: { label: "Providencia rettgeri", short: "P. rettgeri", group: "entero", names: ["providencia rettgeri", "p. rettgeri"] },
     serratia: { label: "Serratia marcescens", short: "Serratia", group: "entero", names: ["serratia marcescens", "serratia", "serratia spp", "serratia spp."] },
     salmonella_typhi: { label: "Salmonella Typhi", short: "S. Typhi", group: "entero", names: ["salmonella typhi", "s. typhi", "s typhi", "salmonella enterica serovar typhi"] },
     salmonella_paratyphi: { label: "Salmonella Paratyphi", short: "S. Paratyphi", group: "entero", names: ["salmonella paratyphi a", "salmonella paratyphi", "s. paratyphi a", "s. paratyphi", "salmonella paratyphi b"] },
@@ -298,6 +303,9 @@
   };
   var ORG_INTRINSIC = {
     klebsiella: ["ampicillin", "amoxicillin"],
+    koxytoca: ["ampicillin", "amoxicillin"],
+    kaerogenes: ["ampicillin", "amoxicillin", "amoxiclav", "ampsulbactam", "cefazolin", "cephalexin", "cefoxitin"],
+    ecloacae: ["ampicillin", "amoxicillin", "amoxiclav", "ampsulbactam", "cefazolin", "cephalexin", "cefoxitin"],
     enterobacter: ["ampicillin", "amoxicillin", "amoxiclav", "ampsulbactam", "cefazolin", "cephalexin", "cefoxitin"],
     citrobacter: ["ampicillin", "amoxicillin"],
     entero_other: ["ampicillin", "amoxicillin"],
@@ -310,6 +318,9 @@
     ppm: ["nitrofurantoin"].concat(POLYMYXINS, TETRAS),
     morganella: ["ampicillin", "amoxicillin", "amoxiclav", "cefazolin", "cephalexin", "cefuroxime", "nitrofurantoin"].concat(POLYMYXINS, TETRAS),
     providencia: ["ampicillin", "amoxicillin", "amoxiclav", "cefazolin", "cephalexin", "nitrofurantoin"].concat(POLYMYXINS, TETRAS),
+    prettgeri: ["ampicillin", "amoxicillin", "amoxiclav", "cefazolin", "cephalexin", "nitrofurantoin"].concat(POLYMYXINS, TETRAS),
+    // P. stuartii also carries the chromosomal aac(2')-Ia: gentamicin, tobramycin and netilmicin.
+    pstuartii: ["ampicillin", "amoxicillin", "amoxiclav", "cefazolin", "cephalexin", "nitrofurantoin", "gentamicin", "tobramycin", "netilmicin"].concat(POLYMYXINS, TETRAS),
     paeruginosa: ["ampicillin", "amoxicillin", "amoxiclav", "ampsulbactam", "cefazolin", "cephalexin", "cefuroxime", "cefoxitin", "cefotaxime", "ceftriaxone", "cefixime", "cefpodoxime", "ertapenem", "cotrimoxazole", "trimethoprim", "chloramphenicol", "nitrofurantoin", "nalidixic_acid"].concat(TETRAS),
     acinetobacter: ["ampicillin", "amoxicillin", "amoxiclav", "aztreonam", "ertapenem", "trimethoprim", "chloramphenicol", "fosfomycin", "cefazolin", "cephalexin", "nitrofurantoin"],
     steno: ["ampicillin", "amoxicillin", "amoxiclav", "piptazo", "cefazolin", "cephalexin", "cefuroxime", "cefotaxime", "ceftriaxone", "aztreonam", "ertapenem", "imipenem", "meropenem", "doripenem", "fosfomycin", "nitrofurantoin"].concat(AMINO_STD),
@@ -375,7 +386,7 @@
    * relevant for this specimen) | "suppress" (impossible or inconsistent; never shown) |
    * "caution" (shown, not pooled). */
   function validateRow(row) {
-    var out = { cells: {}, flags: [] }, s = row.s || {}, nt = row.nt || {}, approx = row.approx || [];
+    var out = { cells: {}, flags: [] }, s = row.s || {}, nt = row.nt || {}, approx = row.approx || [], conflict = row.conflict || {};
     var org = row.org, pheno = row.pheno || null, isStaph = ORGS[org] && ORGS[org].staph;
     if (!(row.n > 0)) out.flags.push("noN");
     else if (row.n < M39_MIN) out.flags.push("lowN");
@@ -390,6 +401,9 @@
       if (typeof v !== "number" || isNaN(v) || v < 0 || v > 100) { c.act = "suppress"; c.why = "not a percentage between 0 and 100"; return; }
       var ir = intrinsicReason(org, d);
       if (ir) { c.act = "intrinsic"; c.why = ir; return; }
+      // The extractor found the source contradicting itself for this figure (e.g. a printed %
+      // that its own printed counts do not give).
+      if (conflict[d]) { c.act = "caution"; c.why = "the source contradicts itself: " + conflict[d]; return; }
       if (URINE_ONLY.indexOf(d) >= 0 && row.spec && row.spec !== "urine" && row.spec !== "all") { c.act = "hide"; c.why = drugLabel(d) + " is reported for urinary isolates only"; return; }
       if (NOT_RESPIRATORY.indexOf(d) >= 0 && row.spec === "respiratory") { c.act = "hide"; c.why = "daptomycin is inactivated by lung surfactant"; return; }
       if (isStaph && (pheno === "MRSA" || pheno === "MR") && v > 0 && (STAPH_BL_LABILE.indexOf(d) >= 0 || STAPH_BL_STABLE.indexOf(d) >= 0 || d === "cefoxitin")) {
@@ -404,6 +418,11 @@
       if (approx.indexOf(d) >= 0) { c.act = "caution"; c.why = "approximate (read from a chart in the source)"; return; }
       if (!achievable(v, c.nt != null ? c.nt : row.n)) { c.act = "caution"; c.why = "no whole number of the " + (c.nt != null ? c.nt : row.n) + " isolates gives " + v + "%; check the source"; return; }
       if (d === "fosfomycin" && row.spec && row.spec !== "urine" && row.spec !== "all") { c.act = "caution"; c.why = "fosfomycin breakpoints are for urinary isolates; systemic use needs MIC testing"; return; }
+      // CLSI (2020 onward) has no susceptible category for colistin or polymyxin B, only
+      // intermediate and resistant: a 0% "susceptible" from a CLSI laboratory is not 100% resistance.
+      if ((d === "colistin" || d === "polymyxin_b") && v === 0 && (orgGroup(org) === "entero" || orgGroup(org) === "nonferm")) {
+        c.act = "caution"; c.why = "0% for colistin or polymyxin B usually means the laboratory used CLSI breakpoints, which have no susceptible category (only intermediate and resistant); it does not mean every isolate was resistant"; return;
+      }
     });
     // Paired agents that should agree. Cefotaxime and ceftriaxone have the same activity
     // against Enterobacterales, and imipenem and meropenem nearly so for E. coli and

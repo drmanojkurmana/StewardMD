@@ -1,7 +1,25 @@
 {
- "version": "2afdce811400",
+ "version": "edbd545f0b06",
  "generated": "build",
  "countMismatches": [
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "all",
+   "set": "opd",
+   "org": "efaecium",
+   "count": 570,
+   "rows": 569,
+   "text": "All specimens, Outpatients: Enterococcus faecium 570 in the organism table, 569 in the antibiogram table"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "all",
+   "set": "ward",
+   "org": "efaecium",
+   "count": 1793,
+   "rows": 1791,
+   "text": "All specimens, Wards: Enterococcus faecium 1793 in the organism table, 1791 in the antibiogram table"
+  },
   {
    "src": "SKIMS_2025",
    "spec": "respiratory",
@@ -668,103 +686,158 @@
    "why": "approximate (read from a chart in the source)"
   },
   {
-   "src": "ICMR_AMRSN_2024_SUMMARY",
-   "spec": "all",
+   "src": "ICMR_AMRSN_2024",
+   "spec": "urine",
    "set": "all",
-   "org": "Proteus mirabilis",
-   "pheno": null,
-   "drug": "piptazo",
-   "value": 80,
-   "action": "caution",
-   "why": "approximate (read from a chart in the source)"
-  },
-  {
-   "src": "ICMR_AMRSN_2024_SUMMARY",
-   "spec": "all",
-   "set": "all",
-   "org": "Proteus mirabilis",
-   "pheno": null,
-   "drug": "meropenem",
-   "value": 80,
-   "action": "caution",
-   "why": "approximate (read from a chart in the source)"
-  },
-  {
-   "src": "ICMR_AMRSN_2024_SUMMARY",
-   "spec": "all",
-   "set": "all",
-   "org": "Proteus mirabilis",
-   "pheno": null,
-   "drug": "ertapenem",
-   "value": 80,
-   "action": "caution",
-   "why": "approximate (read from a chart in the source)"
-  },
-  {
-   "src": "ICMR_AMRSN_2024_SUMMARY",
-   "spec": "all",
-   "set": "all",
-   "org": "Proteus mirabilis",
+   "org": "Morganella morganii",
    "pheno": null,
    "drug": "amikacin",
-   "value": 78,
+   "value": 8.6,
    "action": "caution",
-   "why": "approximate (read from a chart in the source)"
+   "why": "the source contradicts itself: Table 2.14 prints 8.6% but its counts are 121/154 = 78.6%"
   },
   {
-   "src": "ICMR_AMRSN_2024_SUMMARY",
+   "src": "ICMR_AMRSN_2024",
+   "spec": "nonurine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": "CR",
+   "drug": "nitrofurantoin",
+   "value": 53.8,
+   "action": "hide",
+   "why": "Nitrofurantoin is reported for urinary isolates only"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "nonurine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": "CS",
+   "drug": "nitrofurantoin",
+   "value": 76.1,
+   "action": "hide",
+   "why": "Nitrofurantoin is reported for urinary isolates only"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "all",
+   "set": "ward",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "drug": "colistin",
+   "value": 69.5,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 3.4 prints 69.5% but its counts are 1927/1997 = 96.5%"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
    "spec": "all",
    "set": "all",
+   "org": "Stenotrophomonas maltophilia",
+   "pheno": null,
+   "drug": "ceftazidime",
+   "value": 58.3,
+   "action": "caution",
+   "why": "the source contradicts itself: Tables 3.7 and 3.9 print 21/36 (58.3%) but Table 3.8 prints 2/36 (5.6%)"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "all",
+   "set": "all",
+   "org": "Candida krusei",
+   "pheno": null,
+   "drug": "fluconazole",
+   "value": 17.1,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida krusei",
+   "pheno": null,
+   "drug": "fluconazole",
+   "value": 22.8,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "urine",
+   "set": "all",
+   "org": "Candida parapsilosis",
+   "pheno": null,
+   "drug": "voriconazole",
+   "value": 90.6,
+   "action": "caution",
+   "why": "no whole number of the 21 isolates gives 90.6%; check the source"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "drug": "ampicillin",
+   "value": 1.1,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "drug": "ertapenem",
+   "value": 0,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "blood",
+   "set": "icu",
    "org": "Pseudomonas aeruginosa",
    "pheno": null,
-   "drug": "imipenem",
-   "value": 57,
+   "drug": "netilmicin",
+   "value": 38.6,
    "action": "caution",
-   "why": "approximate (read from a chart in the source)"
+   "why": "the source contradicts itself: Table 9.27 prints 38.6% but its counts are 25/57 = 43.9%"
   },
   {
-   "src": "ICMR_AMRSN_2024_SUMMARY",
-   "spec": "all",
-   "set": "all",
-   "org": "Pseudomonas aeruginosa",
+   "src": "ICMR_AMRSN_2024",
+   "spec": "urine",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
    "pheno": null,
-   "drug": "meropenem",
-   "value": 62,
-   "action": "caution",
-   "why": "approximate (read from a chart in the source)"
+   "drug": "ampicillin",
+   "value": 2.3,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
   },
   {
-   "src": "ICMR_AMRSN_2024_SUMMARY",
-   "spec": "all",
-   "set": "all",
-   "org": "Acinetobacter baumannii",
+   "src": "ICMR_AMRSN_2024",
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus spp.",
    "pheno": null,
-   "drug": "meropenem",
-   "value": 9,
+   "drug": "vancomycin",
+   "value": 81.6,
    "action": "caution",
-   "why": "approximate (read from a chart in the source)"
+   "why": "the source contradicts itself: Table 9.40 prints 81.6% but its counts are 18/98 = 18.4%"
   },
   {
-   "src": "ICMR_AMRSN_2024_SUMMARY",
-   "spec": "all",
-   "set": "all",
-   "org": "Acinetobacter baumannii",
+   "src": "ICMR_AMRSN_2024",
+   "spec": "urine",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
    "pheno": null,
-   "drug": "imipenem",
-   "value": 9,
+   "drug": "clindamycin",
+   "value": 16,
    "action": "caution",
-   "why": "approximate (read from a chart in the source)"
-  },
-  {
-   "src": "ICMR_AMRSN_2024_SUMMARY",
-   "spec": "all",
-   "set": "all",
-   "org": "Acinetobacter baumannii",
-   "pheno": null,
-   "drug": "minocycline",
-   "value": 70,
-   "action": "caution",
-   "why": "approximate (read from a chart in the source)"
+   "why": "the source contradicts itself: Table 9.41 prints 16.0% but its counts are 6/10 = 60%"
   },
   {
    "src": "ICMR_AMRSN_2023",

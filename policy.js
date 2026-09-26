@@ -223,9 +223,9 @@
     ctx = ctx || {};
     if (h && h.abgScope && S && S.loaded && S.loaded()) {
       try {
-        var r = S.susceptibility(orgName, drugKey, { scope: h.abgScope, spec: ctx.spec, set: ctx.set });
-        if (r && r.intrinsic) return { s: 0, intrinsic: true, why: r.why };
-        if (r && !r.lowN) return { s: r.s, n: r.n, k: r.k, src: r.src, spec: r.spec, set: r.set, pooled: r.pooled };
+        var r = S.susceptibility(orgName, drugKey, { scope: h.abgScope, spec: ctx.spec, set: ctx.set, cohort: ctx.cohort, only: ctx.only });
+        if (r && r.intrinsic) return { s: 0, intrinsic: true, why: r.why, spec: r.spec, set: r.set };
+        if (r && !r.lowN) return { s: r.s, n: r.n, k: r.k, src: r.src, spec: r.spec, set: r.set, cohort: r.cohort, specMatch: r.specMatch, pooled: r.pooled, combined: r.combined };
       } catch (e) {}
     }
     var ab = getAntibiogram(ctx);

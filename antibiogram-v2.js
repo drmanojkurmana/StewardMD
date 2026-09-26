@@ -125,8 +125,9 @@
     if (c.act === "intrinsic") return '<td class="v2-c v2-ir"' + attrs + ' title="Intrinsic resistance">IR</td>';
     if (c.act === "hide") return '<td class="v2-c v2-na"' + attrs + ' title="' + esc(c.why) + '"></td>';
     if (c.act === "suppress") return '<td class="v2-c v2-x"' + attrs + ' title="' + esc(c.why) + '">!</td>';
-    var low = !o.pooled && (o.lowN || o.noN);
+    var low = !o.pooled && (o.lowN || o.noN || (c.nt != null && c.nt < 30));
     var v = shown(c.s), cls = low ? "v2-low" : (st.mode === "r" ? band(100 - v) : band(v));
+    if (low && !(o.lowN || o.noN)) attrs += ' title="tested on ' + c.nt + ' isolates only"';
     // A figure that failed a check is not coloured like a reliable one.
     if (c.act === "caution") return '<td class="v2-c v2-cau"' + attrs + ' title="' + esc(c.why) + '">' + num(v) + "*</td>";
     return '<td class="v2-c ' + cls + '"' + attrs + ">" + num(v) + "</td>";
@@ -223,11 +224,19 @@
       "</svg>" + '<div class="v2-mut">' + pts.map(function (p) { return (p.label || p.year) + (p.reported ? " (from the report's trend table)" : ""); }).join(", ") + "</div>";
   }
   function cellSheet(scope, org, pheno, drug) {
-    var c = S().cell(scope, st.spec, st.set, org, pheno || null, drug), R0 = R();
-    if (!c) return "";
+    var R0 = R(), spec = st.spec, set = st.set;
+    var c = S().cell(scope, spec, set, org, pheno || null, drug);
+    // Comparing from a stratum the target scope does not have (e.g. a network's "all specimens
+    // except urine"): use the target's closest stratum and say so.
+    if (!c && scope !== st.scope) {
+      var alt = S().pickStratum(scope, [spec], set);
+      if (!alt.empty) { spec = alt.spec; set = alt.set; c = S().cell(scope, spec, set, org, pheno || null, drug); }
+    }
     var title = R0.orgShort(org) + (pheno ? " (" + pheno + ")" : "") + " and " + R0.drugLabel(drug);
     var h = '<div class="v2-sh"><div class="v2-shh"><b>' + esc(title) + '</b><button class="v2-x" data-v2="sheet-close" aria-label="Close">Close</button></div>';
-    h += '<div class="v2-mut">' + esc(R0.SPECIMENS[st.spec].label) + ", " + esc(R0.SETTINGS[st.set].label.toLowerCase()) + " · " + esc(S().scopeLabel(scope)) + " " + awareChip(drug) + "</div>";
+    if (!c) return h + '<p class="v2-mut">' + esc(S().scopeLabel(scope)) + " has no figure for this organism and antibiotic in " + esc(R0.SPECIMENS[st.spec].label.toLowerCase()) + ", " + esc(R0.SETTINGS[st.set].label.toLowerCase()) + ".</p></div>";
+    h += '<div class="v2-mut">' + esc(R0.SPECIMENS[spec].label) + ", " + esc(R0.SETTINGS[set].label.toLowerCase()) + " · " + esc(S().scopeLabel(scope)) + " " + awareChip(drug) + "</div>";
+    if (spec !== st.spec || set !== st.set) h += '<div class="v2-note">Shown for ' + esc(R0.SPECIMENS[spec].label.toLowerCase()) + ", " + esc(R0.SETTINGS[set].label.toLowerCase()) + ": " + esc(S().scopeLabel(scope)) + " has no " + esc(R0.SPECIMENS[st.spec].label.toLowerCase()) + ", " + esc(R0.SETTINGS[st.set].label.toLowerCase()) + " figure.</div>";
     var cc = c.cell;
     if (cc && cc.act === "keep" && typeof cc.s === "number") {
       h += '<div class="v2-big ' + band(cc.s) + '">' + num(cc.s) + "% susceptible</div>";
@@ -250,7 +259,7 @@
       }).join("") + "</ul>";
     }
     if (!c.pooled && c.parts[0] && !c.parts[0].src.local) {
-      var tr = S().trend(c.parts[0].src.inst, st.spec, st.set, org, pheno || null, drug);
+      var tr = S().trend(c.parts[0].src.inst, spec, set, org, pheno || null, drug);
       if (tr.length > 1) h += "<h4>Trend at " + esc(c.parts[0].src.short) + "</h4>" + sparkline(tr);
       h += '<button class="v2-btn" data-v2="compare" data-org="' + org + '" data-pheno="' + esc(pheno || "") + '" data-drug="' + drug + '">Compare across India</button>';
     }

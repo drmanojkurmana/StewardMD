@@ -40,7 +40,7 @@ const STATUS_REASON = {
 };
 
 export function buildRegister() {
-  const files = existsSync(CENSUS) ? readdirSync(CENSUS).filter((f) => f.endsWith(".json") && !/queries|crawled|overrides/.test(f)).sort() : [];
+  const files = existsSync(CENSUS) ? readdirSync(CENSUS).filter((f) => f.endsWith(".json") && !/queries|crawled|checked|sites|overrides|summary/.test(f)).sort() : [];
   const over = existsSync(join(CENSUS, "overrides.json")) ? JSON.parse(readFileSync(join(CENSUS, "overrides.json"), "utf8")) : {};
   const have = new Set(existsSync(SOURCES) ? readdirSync(SOURCES).filter((f) => f.endsWith(".json")).map((f) => f.slice(0, -5)) : []);
   const seen = new Map();
@@ -81,7 +81,7 @@ export function censusSummary(reg) {
     if (!f.endsWith(".json") || f === "overrides.json" || f === "summary.json") return;
     let j; try { j = JSON.parse(readFileSync(full, "utf8")); } catch (e) { return; }
     if (/crawled/.test(f) && Array.isArray(j)) { j.forEach((x) => { if (x && x.reachable) { const h = host(x.seed); if (h) domains.add(h); pages += x.pages_crawled || 0; } }); return; }
-    if (/checked/.test(f) && Array.isArray(j)) { j.forEach((x) => { const h = x && (x.domain ? host(x.domain) : x.url ? host(x.url) : null); if (h) domains.add(h); }); return; }
+    if (/checked|sites/.test(f) && Array.isArray(j)) { j.forEach((x) => { const h = x && (x.domain ? host(x.domain) : x.url ? host(x.url) : x.site ? host(x.site) : x.seed ? host(x.seed) : null); if (h) domains.add(h); }); return; }
     if (/queries/.test(f)) {
       if (Array.isArray(j)) j.forEach(countLine);
       else if (j && typeof j === "object") Object.keys(j).forEach((k) => {

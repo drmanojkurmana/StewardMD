@@ -199,3 +199,33 @@ test("phenotype rates come from the marker drug", () => {
   assert.equal(mrsa.pct, 55);
   assert.ok(p.find((x) => /Carbapenem-resistant Klebsiella/.test(x.label)).pct === 40);
 });
+
+test("a figure the source contradicts is a caution, never a plain number (ICMR 2024 Table 2.14)", () => {
+  // Printed 8.6% but the printed counts are 121/154 = 78.6%: 8.6 is achievable for some n, so only
+  // the extractor's conflict note can catch it.
+  const r = row({ org: "morganella", spec: "urine", n: 154, s: { amikacin: 8.6 }, nt: { amikacin: 154 }, conflict: { amikacin: "printed 8.6% but 121/154 = 78.6%" } });
+  assert.equal(r.cells.amikacin.act, "caution");
+  assert.match(r.cells.amikacin.why, /contradicts itself/);
+  const ir = row({ org: "morganella", s: { ampicillin: 5 }, conflict: { ampicillin: "x" } });
+  assert.equal(ir.cells.ampicillin.act, "intrinsic", "intrinsic still wins");
+});
+
+test("colistin 0% from a CLSI laboratory is a caution, not 100% resistance", () => {
+  const r = row({ org: "paeruginosa", s: { colistin: 0, polymyxin_b: 0, meropenem: 60 } });
+  assert.equal(r.cells.colistin.act, "caution");
+  assert.match(r.cells.colistin.why, /no susceptible category/);
+  assert.equal(r.cells.polymyxin_b.act, "caution");
+  assert.equal(row({ org: "acinetobacter", s: { colistin: 95 } }).cells.colistin.act, "keep");
+  assert.equal(row({ org: "pmirabilis", s: { colistin: 0 } }).cells.colistin.act, "intrinsic", "Proteus is intrinsically resistant");
+});
+
+test("species kept apart where their intrinsic resistance differs", () => {
+  assert.equal(R.canonOrg("Klebsiella oxytoca").key, "koxytoca");
+  assert.equal(R.canonOrg("Enterobacter aerogenes").key, "kaerogenes");
+  assert.equal(R.canonOrg("Enterobacter cloacae").key, "ecloacae");
+  assert.equal(R.canonOrg("Enterobacter spp.").key, "enterobacter");
+  assert.equal(R.canonOrg("Providencia stuartii").key, "pstuartii");
+  assert.equal(row({ org: "pstuartii", s: { gentamicin: 50, amikacin: 80 } }).cells.gentamicin.act, "intrinsic", "P. stuartii aac(2')-Ia");
+  assert.equal(row({ org: "prettgeri", s: { gentamicin: 50 } }).cells.gentamicin.act, "keep");
+  assert.equal(row({ org: "kaerogenes", s: { cefoxitin: 30 } }).cells.cefoxitin.act, "intrinsic", "chromosomal AmpC");
+});

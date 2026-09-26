@@ -25,8 +25,10 @@
  *   last month of the data period; orders half-yearly editions), period,
  *   published?, url?, page?, doi?, retrieved?, citation, reporting, method?, measure? (S|R),
  *   verification {status double-checked|single-checked|transcribed, note}, notes?, issues?,
- *   rows [{spec, set, org, pheno?, n, page?, s:{drug:%S} or r:{drug:%R}, nt?, approx?, q?,
- *          trend?, notes?, printed?, note?, specimen_as_printed?, table?, cohort?}],
+ *   rows [{spec, set, org, pheno?, n, page?, s:{drug:%S} or r:{drug:%R}, nt?, approx?, conflict?,
+ *          q?, trend?, notes?, printed?, note?, specimen_as_printed?, table?, cohort?}],
+ *   conflict: {drug: "what disagrees"} marks a figure the source contradicts (a printed % its own
+ *   printed counts do not give): shown with a caution, never pooled. isolates?: the report's total.
  *   Reports that print % resistant (NARS-Net, state networks) give r:{} (or measure "R" with
  *   s:{} holding %R); the build stores 100 - %R and marks the cell (intermediate results then
  *   count as susceptible, which the app says).
@@ -58,8 +60,8 @@ const HTML = join(ROOT, "index.html");
 const STORE_JS = join(ROOT, "antibiogram-store.js");
 const RULES_JS = join(ROOT, "antibiogram-rules.js");
 
-const TOP = ["id", "kind", "inst", "institution", "short", "city", "state", "region", "sector", "year", "end", "period", "published", "url", "page", "doi", "retrieved", "citation", "reporting", "method", "measure", "verification", "notes", "issues", "rows", "counts", "excluded", "credibility", "file", "pages"];
-const ROWK = ["spec", "set", "org", "pheno", "n", "page", "s", "r", "nt", "approx", "q", "trend", "notes", "printed", "note", "specimen_as_printed", "table", "cohort"];
+const TOP = ["id", "kind", "inst", "institution", "short", "city", "state", "region", "sector", "year", "end", "isolates", "period", "published", "url", "page", "doi", "retrieved", "citation", "reporting", "method", "measure", "verification", "notes", "issues", "rows", "counts", "excluded", "credibility", "file", "pages"];
+const ROWK = ["spec", "set", "org", "pheno", "n", "page", "s", "r", "nt", "approx", "conflict", "q", "trend", "notes", "printed", "note", "specimen_as_printed", "table", "cohort"];
 const KINDS = ["institution", "network", "study"], REGIONS = ["north", "south", "east", "west", "national"], SECTORS = ["government", "private", "network"];
 const VSTAT = ["double-checked", "single-checked", "transcribed"];
 const ACT = { keep: "k", intrinsic: "i", hide: "h", suppress: "x", caution: "c" };
@@ -75,6 +77,7 @@ export function validateSource(src, file) {
   if (!SECTORS.includes(src.sector)) e.push(`${tag}: sector must be one of ${SECTORS.join(", ")}`);
   if (!(Number.isInteger(src.year) && src.year >= 2005 && src.year <= 2030)) e.push(`${tag}: year must be an integer 2005 to 2030`);
   if (src.measure != null && !["S", "R"].includes(src.measure)) e.push(`${tag}: measure must be "S" or "R"`);
+  if (src.isolates != null && !(Number.isInteger(src.isolates) && src.isolates > 0)) e.push(`${tag}: isolates must be a positive integer (the report's total)`);
   if (src.end != null && !(/^\d{4}-(0[1-9]|1[0-2])$/.test(src.end) && +src.end.slice(0, 4) === src.year)) e.push(`${tag}: end must be "YYYY-MM" in the data year`);
   if (!src.verification || !VSTAT.includes(src.verification.status)) e.push(`${tag}: verification.status must be one of ${VSTAT.join(", ")}`);
   if (!Array.isArray(src.rows)) e.push(`${tag}: rows must be an array`);
@@ -93,6 +96,7 @@ export function validateSource(src, file) {
     });
     (r.approx || []).forEach((d) => { if (vals[d] == null) e.push(`${t}: approx lists ${d} with no value`); });
     if (r.cohort != null && !["hai"].includes(r.cohort)) e.push(`${t}: cohort must be "hai" when given`);
+    Object.keys(r.conflict || {}).forEach((d) => { if (vals[d] == null) e.push(`${t}: conflict names ${d}, which has no value`); if (typeof r.conflict[d] !== "string" || !r.conflict[d].trim()) e.push(`${t}: conflict.${d} must say what disagrees`); });
     Object.keys(r.trend || {}).forEach((d) => {
       if (!R.DRUGS[d]) e.push(`${t}: trend drug key "${d}" is not canonical`);
       const tr = r.trend[d]; if (!Array.isArray(tr) || tr.some((p) => !Array.isArray(p) || !Number.isInteger(p[0]) || typeof p[1] !== "number" || p[1] < 0 || p[1] > 100)) e.push(`${t}: trend.${d} must be [[year, %], ...]`);
@@ -105,7 +109,7 @@ export function validateSource(src, file) {
     if (!(Number.isInteger(c.n) && c.n >= 0)) e.push(`${tag} count ${i + 1}: n must be an integer`);
   });
   const seen = {};
-  (src.rows || []).forEach((r) => { const o = R.canonOrg(r.org); const k = [r.spec, r.set, o && o.key, (r.pheno || (o && o.pheno) || "")].join("|"); if (seen[k]) e.push(`${tag}: duplicate row ${k}`); seen[k] = 1; });
+  (src.rows || []).forEach((r) => { const o = R.canonOrg(r.org); const k = [r.spec, r.set, o && o.key, (r.pheno || (o && o.pheno) || ""), r.cohort || ""].join("|"); if (seen[k]) e.push(`${tag}: duplicate row ${k}`); seen[k] = 1; });
   return e;
 }
 
@@ -119,7 +123,7 @@ export function checkRow(src, r) {
   Object.keys(raw).forEach((d) => { s[d] = isR ? Math.round(10 * (100 - raw[d])) / 10 : raw[d]; });
   let trend = r.trend || null;
   if (trend && isR) { trend = {}; Object.keys(r.trend).forEach((d) => { trend[d] = r.trend[d].map((p) => [p[0], Math.round(10 * (100 - p[1])) / 10]); }); }
-  const v = R.validateRow({ org: o.key, pheno, spec: r.spec, set: r.set, n: r.n, s, nt: r.nt || {}, approx: r.approx || [] });
+  const v = R.validateRow({ org: o.key, pheno, spec: r.spec, set: r.set, n: r.n, s, nt: r.nt || {}, approx: r.approx || [], conflict: r.conflict || {} });
   return { src: src.id, inst: src.inst, year: src.year, spec: r.spec, set: r.set, org: o.key, orgAs: r.org, pheno, n: r.n == null ? null : r.n,
     cells: v.cells, flags: v.flags, q: r.q || null, trend, notes: r.notes || null, page: r.page || null, derived: null,
     measure: isR ? "R" : "S", table: r.table || null, cohort: r.cohort || null, note: r.note || null };
@@ -330,6 +334,18 @@ export function loadAll() {
   return { errors, sources, register, census };
 }
 
+/* Isolates behind a source: the report's own total when given; else its count tables summed
+ * over one dimension only (specimen tables for all settings, else everything); else its rows. */
+function isolatesOf(src, checked) {
+  if (src.isolates) return src.isolates;
+  const cs = src.counts || [];
+  if (cs.length) {
+    const bySpec = cs.filter((c) => c.set === "all" && c.spec !== "all");
+    return (bySpec.length ? bySpec : cs).reduce((a, c) => a + c.n, 0);
+  }
+  return checked.filter((r) => r.n && !r.pheno).reduce((a, r) => a + r.n, 0);
+}
+
 export function buildBundle(sources, register, census) {
   const why = [], whyMap = {};
   const whyIdx = (t) => { if (whyMap[t] == null) { whyMap[t] = why.length; why.push(t); } return whyMap[t]; };
@@ -346,7 +362,7 @@ export function buildBundle(sources, register, census) {
       verification: src.verification, notes: src.notes || null, issues: (src.issues || []).length ? src.issues : null, excluded: (src.excluded || []).length ? src.excluded : null,
       checks: checks.length ? checks.map((c) => c.text) : null,
       specs: Array.from(new Set(checked.map((r) => r.spec))), sets: Array.from(new Set(checked.map((r) => r.set))), orgs: Array.from(orgs), rows: checked.length,
-      isolates: (src.counts || []).length ? (src.counts || []).reduce((a, c) => a + c.n, 0) : checked.filter((r) => r.n).reduce((a, r) => a + r.n, 0) });
+      isolates: isolatesOf(src, checked) });
     checked.concat(derived).forEach((r) => {
       rows.push(compactRow(r, si, whyIdx));
       if (r.derived) stats.derivedRows++; else stats.rows++;

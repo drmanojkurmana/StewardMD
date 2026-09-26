@@ -71,12 +71,13 @@
     }
     var info = scopeInfo();
     if (!info.scope) return legacyBody(org);
-    var strat = st.pickStratum(info.scope, st.specimenChain(_syn), st.settingFor(_syn));
-    var t = st.table(info.scope, strat.spec, strat.set), rows = st.orgRows(t, org);
+    // The stratum is chosen per organism: reports print organism groups at different granularity.
+    var ctx = st.synCtx(_syn), strat = st.pickStratumFor(info.scope, org, ctx.spec, ctx.set, ctx);
+    var t = st.table(info.scope, strat.spec, strat.set), rows = st.orgRows(t, org, strat.cohort);
     var name = info.borrowed ? "ICMR (National)" : (info.prof.label || info.prof.name);
     var head = info.borrowed ? '<div style="font:600 11.5px/1.4 system-ui;color:#B45309;margin-bottom:6px">No antibiogram is held for ' + esc(info.prof.name) + '; ICMR national figures are shown.</div>' : "";
-    if (!rows.length) return head + note('<i>' + esc(org) + '</i>: no data in <b>' + esc(name) + '</b> for ' + esc(SPEC[strat.spec] || strat.spec) + ', ' + esc(SET[strat.set] || strat.set) + '. Choose another source above, or open the full antibiogram.');
-    var want = st.specimenChain(_syn)[0], fb = "";
+    if (!rows.length) return head + note('<i>' + esc(org) + '</i>: no ' + (strat.only ? esc(strat.only.map(function (x) { return SPEC[x] || x; }).join(" or ")) + ' ' : '') + 'data in <b>' + esc(name) + '</b>' + (strat.only ? ' (for meningitis only CSF figures, read with meningitis breakpoints, apply)' : '') + '. Choose another source above, or open the full antibiogram.');
+    var want = ctx.spec[0], fb = "";
     if (want && !strat.specMatch) fb = "No " + (SPEC[want] || want) + " data in this source, so " + (SPEC[strat.spec] || strat.spec) + " is shown. ";
     else if (strat.wantSet && strat.wantSet !== "all" && !strat.setMatch) fb = "No " + (SET[strat.wantSet] || strat.wantSet) + " figures here, so " + (SET[strat.set] || strat.set) + " are shown. ";
     return head + (fb ? '<div style="font:600 11.5px/1.4 system-ui;color:#B45309;margin-bottom:6px">' + esc(fb) + '</div>' : "") + rows.map(function (o) { return orgBlock(t, o, name); }).join("");
@@ -99,13 +100,15 @@
       var c = o.cells[d], aw = AW[rl.aware(d)];
       var awb = aw ? ' <span title="WHO AWaRe: ' + aw[0] + '" style="font:800 9.5px system-ui;color:' + aw[1] + ';border:1px solid ' + aw[1] + ';border-radius:5px;padding:0 4px">' + rl.aware(d) + '</span>' : "";
       if (c.act === "intrinsic") {
-        h += '<div class="asp-region-row" data-drug="' + esc(d) + '" data-org="' + esc(o.org) + '" data-pheno="' + esc(o.pheno || "") + '" style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;font:600 12.5px system-ui;cursor:pointer" title="' + esc(c.why || "") + '">' +
+        h += '<div class="asp-region-row" data-drug="' + esc(d) + '" data-org="' + esc(o.org) + '" data-pheno="' + esc(o.pheno || "") + '" data-spec="' + esc(t.spec) + '" data-set="' + esc(t.set) + '" style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;font:600 12.5px system-ui;cursor:pointer" title="' + esc(c.why || "") + '">' +
           '<span>' + esc(drugLabel(d)) + awb + '</span><span style="font:800 11px system-ui;color:var(--ink,#0f172a);background:var(--line,#e2e8f0);padding:2px 8px;border-radius:999px">Intrinsic R</span></div>';
         return;
       }
-      // A figure that failed a check is shown in grey, never in the reliable colour scale.
-      var Rv = Math.round(100 - c.s), col = c.act === "caution" ? "#94A3B8" : rColor(Rv), n = c.nt || o.n, star = c.act === "caution" ? "*" : "";
-      h += '<div class="asp-region-row" data-drug="' + esc(d) + '" data-org="' + esc(o.org) + '" data-pheno="' + esc(o.pheno || "") + '" style="padding:5px 0;cursor:pointer"' + (c.act === "caution" ? ' title="' + esc(c.why || "") + '"' : "") + '>' +
+      // A figure that failed a check, or that rests on fewer than 30 isolates, is shown in grey,
+      // never in the reliable colour scale.
+      var fewNt = c.nt != null && c.nt < 30;
+      var Rv = Math.round(100 - c.s), col = (c.act === "caution" || fewNt || low) ? "#94A3B8" : rColor(Rv), n = c.nt || o.n, star = c.act === "caution" ? "*" : "";
+      h += '<div class="asp-region-row" data-drug="' + esc(d) + '" data-org="' + esc(o.org) + '" data-pheno="' + esc(o.pheno || "") + '" data-spec="' + esc(t.spec) + '" data-set="' + esc(t.set) + '" style="padding:5px 0;cursor:pointer"' + (c.act === "caution" ? ' title="' + esc(c.why || "") + '"' : (fewNt ? ' title="tested on ' + c.nt + ' isolates only"' : "")) + '>' +
         '<div style="display:flex;justify-content:space-between;align-items:center;font:600 12.5px system-ui;gap:8px">' +
         '<span>' + esc(drugLabel(d)) + awb + (n ? ' <span style="font-weight:600;font-size:10px;color:var(--slate-soft,#64748b)">n ' + fmtN(n) + '</span>' : "") + '</span>' +
         '<span style="font:800 12px system-ui;color:#fff;background:' + col + ';padding:2px 8px;border-radius:999px;min-width:56px;text-align:center">' + Rv + '% R' + star + '</span></div>' +
@@ -131,11 +134,10 @@
   }
 
   /* Provenance for a tapped value. */
-  function provenance(orgKey, pheno, drug) {
+  function provenance(orgKey, pheno, drug, spec, set) {
     var st = S(), rl = R(); if (!st || !st.loaded()) return null;
     var info = scopeInfo(); if (!info.scope) return null;
-    var strat = st.pickStratum(info.scope, st.specimenChain(_syn), st.settingFor(_syn));
-    var cl = st.cell(info.scope, strat.spec, strat.set, orgKey, pheno || null, drug);
+    var cl = st.cell(info.scope, spec, set, orgKey, pheno || null, drug);
     if (!cl || !cl.cell) return null;
     var c = cl.cell, lab = rl.drugLabel(drug) + ", " + rl.orgShort(orgKey) + (pheno ? " " + pheno : "") + ": ";
     if (c.act === "intrinsic") return lab + "intrinsic resistance. " + (c.why || "");
@@ -186,7 +188,7 @@
       var row = e.target.closest && e.target.closest(".asp-region-row[data-drug]");
       if (!row) return;
       var msg = null;
-      try { msg = provenance(row.getAttribute("data-org"), row.getAttribute("data-pheno"), row.getAttribute("data-drug")); } catch (x) {}
+      try { msg = provenance(row.getAttribute("data-org"), row.getAttribute("data-pheno"), row.getAttribute("data-drug"), row.getAttribute("data-spec"), row.getAttribute("data-set")); } catch (x) {}
       if (msg && window.toast) window.toast(msg);
     });
     // Profile list grows when the store loads (every institution becomes selectable).

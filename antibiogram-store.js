@@ -21,7 +21,7 @@
  * ======================================================================================== */
 (function () {
   "use strict";
-  var ABG_V = "2afdce811400";
+  var ABG_V = "edbd545f0b06";
   var R = window.ABG_RULES;
   var ACT = { k: "keep", i: "intrinsic", h: "hide", x: "suppress", c: "caution" };
   var LOCAL_KEY = "smd_abg_local";
@@ -131,7 +131,7 @@
   }
 
   /* --------------------------------------------------------------- table --- */
-  var ORG_ORDER = ["ecoli", "klebsiella", "enterobacter", "citrobacter", "cfreundii", "ckoseri", "entero_other", "pmirabilis", "proteus", "proteus_other", "ppm", "morganella", "providencia", "serratia",
+  var ORG_ORDER = ["ecoli", "klebsiella", "koxytoca", "kaerogenes", "ecloacae", "enterobacter", "citrobacter", "cfreundii", "ckoseri", "entero_other", "pmirabilis", "proteus", "proteus_other", "ppm", "morganella", "providencia", "pstuartii", "prettgeri", "serratia",
     "salmonella_typhi", "salmonella_paratyphi", "salmonella_enteric", "salmonella_nts", "shigella", "shigella_sonnei", "shigella_flexneri", "vcholerae", "ecoli_dec", "aeromonas", "paeruginosa", "acinetobacter", "steno", "burkholderia", "bcepacia", "bpseudomallei",
     "hinfluenzae", "mcatarrhalis", "ngonorrhoeae", "nmeningitidis", "saureus", "cons", "ssaprophyticus", "efaecalis", "efaecium", "enterococcus", "spneumoniae", "strep_bhs", "strep_viridans", "streptococcus", "listeria",
     "candida", "calbicans", "ctropicalis", "cparapsilosis", "cglabrata", "ckrusei", "cauris", "aspergillus", "aflavus", "afumigatus", "aniger"];
@@ -156,7 +156,7 @@
     var rows = scopeRows(scope).filter(function (r) { return r.spec === spec && (r.set === set || (widen && r.set === "inpatient")); });
     var seen = {};
     rows.sort(function (a, b) { return rank(a) - rank(b); });
-    return rows.filter(function (r) { var k = r.src.id + "|" + r.org + "|" + (r.pheno || ""); if (seen[k]) return false; seen[k] = 1; return true; });
+    return rows.filter(function (r) { var k = r.src.id + "|" + r.org + "|" + (r.pheno || "") + "|" + (r.cohort || ""); if (seen[k]) return false; seen[k] = 1; return true; });
   }
   /* The result is shared (memoised): callers must not modify it. */
   function table(scope, spec, set) {
@@ -165,7 +165,7 @@
     var rows = stratumRows(scope, spec, set), out = [], drugs = {};
     if (isPooled(scope)) {
       var byOrg = {};
-      rows.forEach(function (r) { var k = r.org + "|" + (r.pheno || ""); (byOrg[k] = byOrg[k] || []).push(r); });
+      rows.forEach(function (r) { var k = r.org + "|" + (r.pheno || "") + "|" + (r.cohort || ""); (byOrg[k] = byOrg[k] || []).push(r); });
       Object.keys(byOrg).forEach(function (k) {
         var g = byOrg[k], pooled = R.pool(g.map(function (r) { return { src: r.src.id, inst: r.src.inst, year: r.src.ord, n: r.n, cells: r.cells }; }));
         var usable = g.filter(function (r) { return r.n >= R.M39_MIN; });
@@ -178,7 +178,7 @@
         });
         // Intrinsic resistance is a property of the organism: show it even when pooled.
         g.forEach(function (r) { Object.keys(r.cells).forEach(function (d) { if (r.cells[d].act === "intrinsic" && !cells[d]) { cells[d] = { s: null, act: "intrinsic", why: r.cells[d].why }; drugs[d] = 1; } }); });
-        out.push({ org: g[0].org, pheno: g[0].pheno, n: usable.reduce(function (a, r) { return a + r.n; }, 0), k: usable.length, kAll: g.length,
+        out.push({ org: g[0].org, pheno: g[0].pheno, cohort: g[0].cohort || null, n: usable.reduce(function (a, r) { return a + r.n; }, 0), k: usable.length, kAll: g.length,
           lowOnly: !usable.length, cells: cells, rows: g, pooled: true });
       });
     } else {
@@ -221,7 +221,7 @@
   var PARENT = { efaecalis: "enterococcus", efaecium: "enterococcus", salmonella_typhi: "salmonella_enteric", salmonella_paratyphi: "salmonella_enteric",
     cfreundii: "citrobacter", ckoseri: "citrobacter", pmirabilis: "proteus", proteus_other: "proteus", shigella_sonnei: "shigella", shigella_flexneri: "shigella",
     bcepacia: "burkholderia", bpseudomallei: "burkholderia", calbicans: "candida", ctropicalis: "candida", cparapsilosis: "candida", cglabrata: "candida", ckrusei: "candida", cauris: "candida",
-    aflavus: "aspergillus", afumigatus: "aspergillus", aniger: "aspergillus" };
+    aflavus: "aspergillus", afumigatus: "aspergillus", aniger: "aspergillus", ecloacae: "enterobacter", pstuartii: "providencia", prettgeri: "providencia" };
   function mix(scope, spec, set, opts) {
     opts = opts || {};
     var t = table(scope, spec, set), parts = [];
@@ -290,21 +290,22 @@
   // closer to them than an all-specimens figure, which urinary E. coli dominates.
   var SYN = {
     CYSTITIS: ["urine", "opd"], PYELONEPHRITIS: ["urine", "opd"], PROSTATITIS: ["urine", "opd"],
-    COMPLICATED_UTI: ["urine", "inpatient"], CA_UTI: ["urine", "inpatient"],
+    COMPLICATED_UTI: ["urine", "inpatient"], CA_UTI: ["urine", "inpatient", { cohort: "hai" }],
     CAP: [["respiratory", "nonurine"], "opd"], SINUSITIS: [["respiratory", "nonurine"], "opd"], COPD_EXACERBATION: [["respiratory", "nonurine"], "opd"], BRONCHIECTASIS_EXACERBATION: [["respiratory", "nonurine"], "opd"],
-    SEVERE_CAP: [["respiratory", "nonurine"], "icu"], HAP: [["respiratory", "nonurine"], "inpatient"], VAP: [["respiratory", "nonurine"], "icu"], ASPIRATION_PNEUMONIA: [["respiratory", "nonurine"], "inpatient"], LUNG_ABSCESS: [["respiratory", "nonurine"], "inpatient"],
+    SEVERE_CAP: [["respiratory", "nonurine"], "icu"], HAP: [["respiratory", "nonurine"], "inpatient"], VAP: [["respiratory", "nonurine"], "icu", { cohort: "hai" }], ASPIRATION_PNEUMONIA: [["respiratory", "nonurine"], "inpatient"], LUNG_ABSCESS: [["respiratory", "nonurine"], "inpatient"],
     CELLULITIS: [["pus", "deep", "nonurine"], "opd"], ERYSIPELAS: [["pus", "deep", "nonurine"], "opd"], DIABETIC_FOOT: [["deep", "pus", "nonurine"], "inpatient"], NECROTIZING_FASCIITIS: [["deep", "pus", "nonurine"], "inpatient"],
     LIVER_ABSCESS: [["deep", "pus", "blood", "nonurine"], "inpatient"], BRAIN_ABSCESS: [["deep", "pus", "blood", "nonurine"], "inpatient"],
-    MENINGITIS: [["csf", "sterile", "blood", "nonurine"], "inpatient"], ENCEPHALITIS: [["csf", "sterile", "blood", "nonurine"], "inpatient"], SBP: [["sterile", "blood", "nonurine"], "inpatient"],
+    // Pneumococcal susceptibility for meningitis needs meningeal breakpoints: CSF figures or none.
+    MENINGITIS: [["csf", "sterile", "blood", "nonurine"], "inpatient", { only: { spneumoniae: ["csf"] } }], ENCEPHALITIS: [["csf", "sterile", "blood", "nonurine"], "inpatient", { only: { spneumoniae: ["csf"] } }], SBP: [["sterile", "blood", "nonurine"], "inpatient"],
     CHOLANGITIS: [["sterile", "blood", "nonurine"], "inpatient"], CHOLECYSTITIS: [["sterile", "blood", "nonurine"], "inpatient"],
-    SEPSIS: [["blood", "nonurine"], "inpatient"], SEPTIC_SHOCK: [["blood", "nonurine"], "icu"], FEBRILE_NEUTROPENIA: [["blood", "nonurine"], "inpatient"], IE: [["blood", "nonurine"], "inpatient"], DEVICE_INFECTION: [["blood", "nonurine"], "inpatient"],
+    SEPSIS: [["blood", "nonurine"], "inpatient"], SEPTIC_SHOCK: [["blood", "nonurine"], "icu"], FEBRILE_NEUTROPENIA: [["blood", "nonurine"], "inpatient"], IE: [["blood", "nonurine"], "inpatient"], DEVICE_INFECTION: [["blood", "nonurine"], "icu", { cohort: "hai" }],
     ENTERIC_FEVER: ["blood", "all"], PUO: [["blood", "nonurine"], "all"], GASTROENTERITIS: ["stool", "all"], DYSENTERY: ["stool", "all"]
   };
   function synEntry(synId) {
     var s = String(synId || "").toUpperCase();
     if (SYN[s]) return SYN[s];
     // Unknown ids: guess from the name (gall bladder before bladder).
-    if (/MENING|CNS/.test(s)) return [["csf", "sterile", "blood", "nonurine"], "inpatient"];
+    if (/MENING|CNS/.test(s)) return [["csf", "sterile", "blood", "nonurine"], "inpatient", { only: { spneumoniae: ["csf"] } }];
     if (/CHOLE|BILIAR|PERITON|SBP/.test(s)) return [["sterile", "blood", "nonurine"], "inpatient"];
     if (/UTI|CYSTITIS|PYELO|PROSTAT|URINARY/.test(s)) return ["urine", "all"];
     if (/PNEUMONIA|CAP|HAP|VAP|ASPIRATION|RESP|EMPYEMA|LUNG|BRONCH|COPD/.test(s)) return [["respiratory", "nonurine"], "all"];
@@ -316,6 +317,13 @@
   function specimenChain(synId) { var e = synEntry(synId); return e ? [].concat(e[0]) : []; }
   function specimenFor(synId) { return specimenChain(synId)[0] || null; }
   function settingFor(synId) { var e = synEntry(synId); return e ? e[1] : null; }
+  /* Everything a consumer passes for a syndrome: {spec, set, cohort?, only?}. cohort "hai": ICU
+   * device-associated infection surveillance rows are preferred (catheter UTI, VAP, line
+   * infections) and used by no other syndrome. only: organisms restricted to some specimens. */
+  function synCtx(synId) {
+    var e = synEntry(synId), o = (e && e[2]) || {};
+    return { spec: specimenChain(synId), set: settingFor(synId), cohort: o.cohort || null, only: o.only || null };
+  }
   function usableInfo(scope, spec, set) {
     var t = table(scope, spec, set), orgs = 0, maxK = 0;
     t.orgs.forEach(function (o) {
@@ -326,43 +334,77 @@
     return { orgs: orgs, maxK: maxK };
   }
   function usable(scope, spec, set) { return usableInfo(scope, spec, set).orgs; }
-  /* The stratum to use for a wanted specimen (string or preference list) and setting. Specimen
-   * matters more than setting, so settings are tried within each specimen first. A pooled
-   * figure for one setting needs at least 3 institutions behind it; otherwise the pooled
-   * all-settings figure is used, which is more representative. */
-  function pickStratum(scope, spec, set) {
+  /* Candidate strata for a wanted specimen (string or preference list) and setting, best first.
+   * Specimen matters more than setting, so settings are tried within each specimen. A syndrome
+   * that names specimens gets those or all specimens, never a different one (no urine figures for
+   * meningitis); with no specimen wanted any stratum will do. */
+  function candidates(scope, spec, set) {
     var wantSp = [].concat(spec || []).filter(Boolean), wantSet = [].concat(set || []).filter(Boolean);
-    var key = "p|" + scope + "|" + wantSp.join(",") + "|" + wantSet.join(",");
-    if (memo[key]) return memo[key];
-    var st = strata(scope), pooled = isPooled(scope), specs = [], sets = [];
+    var st = strata(scope), specs = [], sets = [];
     function addSp(x) { if (x && st.specs[x] && specs.indexOf(x) < 0) specs.push(x); }
     function addSet(x) { if (x && sets.indexOf(x) < 0) sets.push(x); }
-    // A syndrome that names specimens gets those or all specimens, never a different one
-    // (urine data is not shown for meningitis); with no specimen wanted any stratum will do.
     wantSp.forEach(addSp); addSp("all"); if (!wantSp.length) Object.keys(st.specs).forEach(addSp);
     wantSet.forEach(function (x) { addSet(x); if (x === "icu" || x === "ward") addSet("inpatient"); if (x === "inpatient") addSet("ward"); });
     addSet("all"); ["inpatient", "ward", "icu", "opd"].forEach(addSet);
-    var res = null;
-    for (var i = 0; i < specs.length && !res; i++) {
-      for (var j = 0; j < sets.length && !res; j++) {
-        var u = usableInfo(scope, specs[i], sets[j]);
-        if (u.orgs && (!pooled || sets[j] === "all" || u.maxK >= 3)) res = { spec: specs[i], set: sets[j] };
+    var out = [];
+    specs.forEach(function (sp) { sets.forEach(function (x) { out.push({ spec: sp, set: x }); }); });
+    return { list: out, wantSp: wantSp, wantSet: wantSet, specs: specs };
+  }
+  function finish(res, c) {
+    res.wantSpec = c.wantSp[0] || null; res.wantSet = c.wantSet[0] || null;
+    res.specMatch = !c.wantSp.length || c.wantSp.indexOf(res.spec) >= 0;
+    res.setMatch = !c.wantSet.length || res.set === c.wantSet[0] || (c.wantSet[0] === "all");
+    return res;
+  }
+  /* One stratum for a whole scope (the Antibiogram screen, older consumers). A pooled figure for
+   * one setting needs at least 3 institutions behind it; otherwise the pooled all-settings figure
+   * is used, which is more representative. */
+  function pickStratum(scope, spec, set) {
+    var key = "p|" + scope + "|" + [].concat(spec || []).join(",") + "|" + [].concat(set || []).join(",");
+    if (memo[key]) return memo[key];
+    var c = candidates(scope, spec, set), pooled = isPooled(scope), res = null;
+    for (var i = 0; i < c.list.length && !res; i++) {
+      var u = usableInfo(scope, c.list[i].spec, c.list[i].set);
+      if (u.orgs && (!pooled || c.list[i].set === "all" || u.maxK >= 3)) res = { spec: c.list[i].spec, set: c.list[i].set };
+    }
+    if (!res) res = { spec: c.specs[0] || c.wantSp[0] || "all", set: "all", empty: true };
+    return (memo[key] = finish(res, c));
+  }
+  /* The stratum for one organism. Reports print organism groups at different granularity (ICMR:
+   * Enterobacterales for "all specimens except urine", staphylococci by specimen), so the console
+   * and reasoning choose per organism: the first candidate where it has a usable row, else the
+   * first where it has any row (shown flagged), else empty. */
+  function pickStratumFor(scope, orgName, spec, set, opts) {
+    opts = opts || {};
+    var oc = R.canonOrg(orgName), only = opts.only && oc && opts.only[oc.key];
+    var key = "po|" + scope + "|" + orgName + "|" + [].concat(spec || []).join(",") + "|" + [].concat(set || []).join(",") + "|" + (opts.cohort || "") + "|" + (only ? only.join(",") : "");
+    if (memo[key]) return memo[key];
+    var c = candidates(scope, only || spec, set), pooled = isPooled(scope), res = null, any = null;
+    if (only) c.list = c.list.filter(function (x) { return only.indexOf(x.spec) >= 0; });
+    // A syndrome that asks for a surveillance cohort tries it first, then the ordinary rows.
+    var passes = opts.cohort ? [opts.cohort, null] : [null];
+    for (var p = 0; p < passes.length && !res; p++) {
+      for (var i = 0; i < c.list.length && !res; i++) {
+        var t = table(scope, c.list[i].spec, c.list[i].set), rows = orgRows(t, orgName, passes[p]);
+        if (!rows.length) continue;
+        if (!any) any = { spec: c.list[i].spec, set: c.list[i].set, cohort: passes[p], lowOnly: true };
+        var ok = rows.filter(function (o) { return rowUsable(t, o); });
+        if (ok.length && (!pooled || c.list[i].set === "all" || ok.some(function (o) { return (o.k || 0) >= 3; }))) res = { spec: c.list[i].spec, set: c.list[i].set, cohort: passes[p] };
       }
     }
-    if (!res) res = { spec: specs[0] || wantSp[0] || "all", set: "all", empty: true };
-    res.wantSpec = wantSp[0] || null; res.wantSet = wantSet[0] || null;
-    res.specMatch = !wantSp.length || wantSp.indexOf(res.spec) >= 0;
-    res.setMatch = !wantSet.length || res.set === wantSet[0] || (wantSet[0] === "all");
-    return (memo[key] = res);
+    if (!res) res = any || { spec: (only && only[0]) || c.specs[0] || c.wantSp[0] || "all", set: "all", empty: true, cohort: null };
+    if (only) res.only = only;
+    return (memo[key] = finish(res, c));
   }
   /* Table rows for an organism as a syndrome names it: the organism itself, else its group
    * (Shigella sonnei -> Shigella spp.), else its species (Enterococcus spp. -> E. faecalis and
    * E. faecium). */
   var CHILDREN = {};
   Object.keys(PARENT).forEach(function (c) { (CHILDREN[PARENT[c]] = CHILDREN[PARENT[c]] || []).push(c); });
-  function orgRows(t, name) {
+  function orgRows(t, name, cohort) {
     var o = R.canonOrg(name); if (!o || !t) return [];
-    function find(k) { return t.orgs.filter(function (x) { return x.org === k && (x.pheno || null) === (o.pheno || null); }); }
+    // Surveillance cohorts answer only the syndromes that ask for them.
+    function find(k) { return t.orgs.filter(function (x) { return x.org === k && (x.pheno || null) === (o.pheno || null) && (x.cohort || null) === (cohort || null); }); }
     var hit = find(o.key); if (hit.length) return hit;
     if (PARENT[o.key]) { hit = find(PARENT[o.key]); if (hit.length) return hit; }
     var out = []; (CHILDREN[o.key] || []).forEach(function (c) { out = out.concat(find(c)); });
@@ -377,20 +419,29 @@
     if (!B) return null;
     ctx = ctx || {};
     var d = R.canonDrug(drug); if (!d) return null;
-    var scope = ctx.scope || "india", st = pickStratum(scope, ctx.spec, ctx.set);
-    var t = table(scope, st.spec, st.set), rows = orgRows(t, orgName);
+    var scope = ctx.scope || "india", st = pickStratumFor(scope, orgName, ctx.spec, ctx.set, ctx);
+    var t = table(scope, st.spec, st.set), rows = orgRows(t, orgName, st.cohort);
     if (!rows.length) return null;
-    var base = { spec: st.spec, set: st.set, specMatch: st.specMatch, setMatch: st.setMatch, pooled: t.pooled, scope: scope };
+    var base = { spec: st.spec, set: st.set, cohort: st.cohort || null, specMatch: st.specMatch, setMatch: st.setMatch, pooled: t.pooled, scope: scope };
     var intr = rows.filter(function (o) { return o.cells[d] && o.cells[d].act === "intrinsic"; })[0];
     if (intr && rows.length === 1) return extend(base, { s: 0, intrinsic: true, why: intr.cells[d].why });
     var parts = rows.filter(function (o) { var c = o.cells[d]; return c && c.act === "keep" && typeof c.s === "number"; });
+    // Cefoxitin and oxacillin are both methicillin markers for staphylococci: a report that
+    // prints one answers a question about the other.
+    if (!parts.length && R.ORGS[rows[0].org] && R.ORGS[rows[0].org].staph && (d === "cefoxitin" || d === "oxacillin")) {
+      d = d === "cefoxitin" ? "oxacillin" : "cefoxitin";
+      parts = rows.filter(function (o) { var c = o.cells[d]; return c && c.act === "keep" && typeof c.s === "number"; });
+    }
     if (!parts.length) return null;
+    // A figure is low-number when its row is, or when the drug itself was tested on fewer than
+    // 30 isolates (e.g. linezolid tested on 5 of 61).
+    var cellLow = function (o) { var c = o.cells[d]; return !rowUsable(t, o) || (c.nt != null && c.nt < R.M39_MIN); };
     if (parts.length === 1) {
       var o = parts[0], c = o.cells[d];
-      return extend(base, { s: c.s, n: c.nt || o.n, k: o.k, lowN: !rowUsable(t, o), src: t.pooled ? null : o.rows[0].src.id, org: o.org });
+      return extend(base, { s: c.s, n: c.nt || o.n, k: o.k, lowN: cellLow(o), src: t.pooled ? null : o.rows[0].src.id, org: o.org });
     }
     var num = 0, den = 0, k = 0, low = false;
-    parts.forEach(function (o) { var c = o.cells[d], w = c.nt || o.n || 0; num += c.s * w; den += w; k = Math.max(k, o.k || 1); if (!rowUsable(t, o)) low = true; });
+    parts.forEach(function (o) { var c = o.cells[d], w = c.nt || o.n || 0; num += c.s * w; den += w; k = Math.max(k, o.k || 1); if (cellLow(o)) low = true; });
     if (!den) return null;
     return extend(base, { s: Math.round(10 * num / den) / 10, n: den, k: k, lowN: low || den < R.M39_MIN, src: t.pooled ? null : parts[0].rows[0].src.id,
       combined: parts.map(function (o) { return R.orgShort(o.org); }) });
@@ -442,8 +493,8 @@
     load: load, ready: load, onReady: onReady, loaded: function () { return !!B; }, data: function () { return B; },
     scopes: scopes, scopeLabel: scopeLabel, scopeRows: scopeRows, isPooled: isPooled, strata: strata,
     table: table, cell: cell, phenotypes: phenotypes, wisca: wisca, rank: rank, mix: mix, trend: trend,
-    susceptibility: susceptibility, legacyAbg: legacyAbg, specimenFor: specimenFor, specimenChain: specimenChain, settingFor: settingFor,
-    pickStratum: pickStratum, orgRows: orgRows, usable: usable,
+    susceptibility: susceptibility, legacyAbg: legacyAbg, specimenFor: specimenFor, specimenChain: specimenChain, settingFor: settingFor, synCtx: synCtx,
+    pickStratum: pickStratum, pickStratumFor: pickStratumFor, orgRows: orgRows, usable: usable,
     sourceById: sourceById, editions: editions, flagged: flagged, csv: csv, sortDrugs: sortDrugs,
     localGet: localGet, localSave: localSave, localClear: localClear,
     REGION_LABEL: REGION_LABEL, _expand: expand,
