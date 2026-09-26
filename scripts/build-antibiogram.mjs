@@ -268,10 +268,15 @@ export function derive(allRows, src) {
   // 3. "All specimens" from the specimen rows of the same setting (a hospital-wide view). The
   //    parts must not overlap: a source that prints "all specimens except urine" is combined
   //    with its urine rows only (its blood or pus rows are already inside that figure).
+  // Specimens are checked against every specimen the source reports in ANY setting: a report that
+  // gives pus only for all settings still had ICU pus isolates, so an "all specimens, ICU" row made
+  // from its blood and urine ICU rows alone would misstate the ICU (NARS-Net location charts).
   all = rows.concat(out);
+  const everySpec = new Set();
+  all.forEach((r) => { if (r.spec !== "all") everySpec.add(r.spec); });
+  ((src && src.counts) || []).forEach((c) => { if (c.spec !== "all" && c.n > 0) everySpec.add(c.spec); });
   const srcSpecs = {};
-  all.forEach((r) => { if (r.spec !== "all") (srcSpecs[r.set] ||= new Set()).add(r.spec); });
-  ((src && src.counts) || []).forEach((c) => { if (c.spec !== "all" && c.n > 0) (srcSpecs[c.set] ||= new Set()).add(c.spec); });
+  all.forEach((r) => { srcSpecs[r.set] ||= new Set(everySpec); });
   const g2 = {};
   all.forEach((r) => { if (r.spec !== "all") (g2[key(r, "src", "set", "org", "pheno")] ||= []).push(r); });
   Object.values(g2).forEach((g) => {
@@ -295,6 +300,24 @@ export function countChecks(src, checked) {
   const countOf = countIndex(src);
   const grp = {};
   checked.forEach((r) => { if (r.n != null) (grp[r.spec + "|" + r.set + "|" + r.org] ||= []).push(r); });
+  // A count table that lists the genus while the antibiogram gives species (Enterococcus spp. vs
+  // E. faecalis + E. faecium): compare the species rows' sum with the genus count.
+  const KIDS = { enterococcus: ["efaecalis", "efaecium"], citrobacter: ["cfreundii", "ckoseri"], proteus: ["pmirabilis", "proteus_other"],
+    shigella: ["shigella_sonnei", "shigella_flexneri"], salmonella_enteric: ["salmonella_typhi", "salmonella_paratyphi"], enterobacter: ["ecloacae"], providencia: ["pstuartii", "prettgeri"],
+    candida: ["calbicans", "ctropicalis", "cparapsilosis", "cglabrata", "ckrusei", "cauris"] };
+  const strata = new Set(checked.map((r) => r.spec + "|" + r.set));
+  strata.forEach((ss) => {
+    const [spec, set] = ss.split("|");
+    Object.keys(KIDS).forEach((genus) => {
+      if (grp[ss + "|" + genus]) return;
+      const kids = KIDS[genus].map((k) => grp[ss + "|" + k]).filter(Boolean);
+      if (!kids.length) return;
+      const c = countOf(spec, set, genus); if (c == null) return;
+      const n = kids.reduce((a, rs) => a + (rs.find((r) => !r.pheno) || rs[0]).n, 0);
+      if (n === c) return;
+      out.push({ spec, set, org: genus, count: c, rows: n, text: `${R.SPECIMENS[spec].label}, ${R.SETTINGS[set].label}: ${R.orgLabel(genus)} ${c} in the organism table, ${n} in the antibiogram table (${KIDS[genus].filter((k) => grp[ss + "|" + k]).map((k) => R.orgShort(k)).join(" + ")})` });
+    });
+  });
   Object.keys(grp).forEach((k) => {
     const [spec, set, org] = k.split("|"), rs = grp[k], c = countOf(spec, set, org);
     if (c == null) return;
@@ -379,6 +402,10 @@ export function buildBundle(sources, register, census) {
   });
   stats.sources = metas.length;
   stats.countMismatches = consistency.length;
+  // Pools use recent data only: each institution's latest antibiogram counts if it falls within the
+  // five most recent data years present (a 2012 pocket policy must not shape today's regional view).
+  const years = metas.filter((m) => m.kind !== "network").map((m) => m.year);
+  stats.poolFrom = years.length ? Math.max.apply(null, years) - 4 : null;
   const reg = (register || []).map((x) => ({ id: x.id, institution: x.institution, short: x.short || null, city: x.city || null, state: x.state || null, region: x.region || null,
     sector: x.sector || null, type: x.type || null, year: x.year || null, url: x.url || null, page: x.page || null, status: x.status || null,
     integrated: x.integrated || null, reason: x.reason || null }));

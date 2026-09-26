@@ -92,7 +92,8 @@
       t.orgs.forEach(function (o) { o.rows.forEach(function (r) { if (r.n >= 30) inst[r.src.inst] = r.src; }); });
       var k = Object.keys(inst).length;
       t.orgs.forEach(function (o) { if (!o.pheno) iso += o.n || 0; });
-      return '<div class="v2-meta"><b>Pooled from ' + k + " institution" + (k === 1 ? "" : "s") + "</b> (latest edition of each), " + fmtN(iso) + " isolates in this view. " +
+      var pf = S().poolFrom && S().poolFrom();
+      return '<div class="v2-meta"><b>Pooled from ' + k + " institution" + (k === 1 ? "" : "s") + "</b> (latest edition of each" + (pf ? ", data from " + pf + " or later" : "") + "), " + fmtN(iso) + " isolates in this view. " +
         "Each figure is the isolate-weighted mean of the institutions that reported it; tap a cell to see them. Rows under 30 isolates and figures that failed a check are left out of pools. Surveillance network reports are listed separately so the same isolates are not counted twice.</div>";
     }
     var src = (t.orgs[0] && t.orgs[0].rows[0].src) || null;

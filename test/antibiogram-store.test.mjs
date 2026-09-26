@@ -176,3 +176,13 @@ test("surveillance cohorts answer only their syndromes; pneumococcal meningitis 
   const mrsa = S3.susceptibility("Staphylococcus aureus", "cefoxitin", ctx("DEVICE_INFECTION"));
   assert.equal(mrsa.s, 33.8, "oxacillin answers a cefoxitin question for staphylococci");
 });
+
+test("pools use recent data: an institution's latest antibiogram older than the five most recent data years stays out", () => {
+  const extra = [src({ id: "OLD_2012", inst: "OLD", institution: "Old Hospital", short: "Old", region: "north", year: 2012, rows: [
+    { spec: "blood", set: "all", org: "E. coli", n: 500, s: { meropenem: 100 } }] })];
+  const S4 = load(); S4._set(buildBundle(SOURCES.concat(extra), []).bundle);
+  assert.equal(S4.poolFrom(), 2020, "newest institution year 2024 minus 4");
+  const ec = S4.table("india", "blood", "all").orgs.find((o) => o.org === "ecoli");
+  assert.equal(ec.cells.meropenem.s, 65, "the 2012 antibiogram does not move the pooled figure");
+  assert.ok(S4.scopes().some((x) => x.id === "inst:OLD"), "it is still viewable on its own");
+});

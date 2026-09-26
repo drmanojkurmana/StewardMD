@@ -21,7 +21,7 @@
  * ======================================================================================== */
 (function () {
   "use strict";
-  var ABG_V = "edbd545f0b06";
+  var ABG_V = "d2a804860c0b";
   var R = window.ABG_RULES;
   var ACT = { k: "keep", i: "intrinsic", h: "hide", x: "suppress", c: "caution" };
   var LOCAL_KEY = "smd_abg_local";
@@ -99,7 +99,7 @@
     if (!B) return [];
     var out = [{ id: "india", label: "India: all institutions (pooled)", group: "Pooled" }];
     ["north", "south", "east", "west"].forEach(function (r) {
-      if (B.sources.some(function (s) { return s.region === r && s.kind !== "network" && !s.local; })) out.push({ id: "region:" + r, label: REGION_LABEL[r] + " (pooled)", group: "Pooled", region: r });
+      if (B.sources.some(function (s) { return s.region === r && s.kind !== "network" && !s.local && s.latest && recent(s); })) out.push({ id: "region:" + r, label: REGION_LABEL[r] + " (pooled)", group: "Pooled", region: r });
     });
     B.sources.filter(function (s) { return s.kind === "network"; }).sort(function (a, b) { return (a.region === "national" ? 0 : 1) - (b.region === "national" ? 0 : 1) || b.year - a.year; })
       .forEach(function (s) { out.push({ id: "src:" + s.id, label: s.short + " " + (s.edLabel || s.year) + (s.verification.status === "transcribed" ? " (summary, no isolate counts)" : ""), group: "Surveillance networks", src: s }); });
@@ -113,10 +113,13 @@
   }
   function scopeLabel(id) { var s = scopes().filter(function (x) { return x.id === id; })[0]; return s ? s.label : id; }
   /* Rows in a scope (all strata). For pooled scopes: latest edition of each institution or study. */
+  // Pools take each institution's latest antibiogram only if it is recent (stats.poolFrom: the five
+  // most recent data years); older ones stay viewable on their own and in trends.
+  function recent(s) { var f = B && B.stats && B.stats.poolFrom; return !f || s.year >= f; }
   function scopeRows(scope) {
     if (!B) return [];
-    if (scope === "india") return B.rows.filter(function (r) { return r.src.kind !== "network" && !r.src.local && r.src.latest; });
-    if (/^region:/.test(scope)) { var rg = scope.slice(7); return B.rows.filter(function (r) { return r.src.region === rg && r.src.kind !== "network" && !r.src.local && r.src.latest; }); }
+    if (scope === "india") return B.rows.filter(function (r) { return r.src.kind !== "network" && !r.src.local && r.src.latest && recent(r.src); });
+    if (/^region:/.test(scope)) { var rg = scope.slice(7); return B.rows.filter(function (r) { return r.src.region === rg && r.src.kind !== "network" && !r.src.local && r.src.latest && recent(r.src); }); }
     if (/^src:/.test(scope)) { var id = scope.slice(4); return B.rows.filter(function (r) { return r.src.id === id; }); }
     if (/^inst:/.test(scope)) { var inst = scope.slice(5); return B.rows.filter(function (r) { return r.src.inst === inst && r.src.latest; }); }
     if (scope === "local") return B.rows.filter(function (r) { return r.src.local; });
@@ -268,14 +271,19 @@
   }
 
   /* ----------------------------------------------------------------- trend --- */
+  /* A cell across an institution's editions, plus the yearly series its reports print. An
+   * edition's own figure wins over a trend-table value for the same year. */
   function trend(inst, spec, set, org, pheno, drug) {
     if (!B) return [];
+    var rows = B.rows.filter(function (r) { return r.src.inst === inst && r.spec === spec && r.set === set && r.org === org && (r.pheno || null) === (pheno || null) && !r.cohort; });
     var pts = [];
-    B.rows.forEach(function (r) {
-      if (r.src.inst !== inst || r.spec !== spec || r.set !== set || r.org !== org || (r.pheno || null) !== (pheno || null)) return;
-      var c = r.cells[drug]; if (c && c.act === "keep") pts.push({ year: r.src.ord, label: r.src.edLabel, s: c.s, n: c.nt || r.n, src: r.src.id });
-      if (r.trend && r.trend[drug]) r.trend[drug].forEach(function (p) {
-        // A reported series gives whole years; an edition of the same year wins over it.
+    rows.forEach(function (r) {
+      var c = r.cells[drug];
+      if (c && c.act === "keep" && !pts.some(function (x) { return x.src === r.src.id; })) pts.push({ year: r.src.ord, label: r.src.edLabel, s: c.s, n: c.nt || r.n, src: r.src.id });
+    });
+    rows.forEach(function (r) {
+      if (!r.trend || !r.trend[drug]) return;
+      r.trend[drug].forEach(function (p) {
         if (!pts.some(function (x) { return Math.floor(x.year) === p[0]; })) pts.push({ year: p[0] + 11 / 12, label: String(p[0]), s: p[1], n: null, src: r.src.id, reported: true });
       });
     });
@@ -497,7 +505,7 @@
     pickStratum: pickStratum, pickStratumFor: pickStratumFor, orgRows: orgRows, usable: usable,
     sourceById: sourceById, editions: editions, flagged: flagged, csv: csv, sortDrugs: sortDrugs,
     localGet: localGet, localSave: localSave, localClear: localClear,
-    REGION_LABEL: REGION_LABEL, _expand: expand,
+    REGION_LABEL: REGION_LABEL, _expand: expand, poolFrom: function () { return (B && B.stats && B.stats.poolFrom) || null; },
     _set: function (b) { B = expand(JSON.parse(JSON.stringify(b))); clearMemo(); addLocal(); return B; }
   };
 })();

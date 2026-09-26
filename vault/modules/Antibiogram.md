@@ -40,10 +40,15 @@ places:
    - `hide`: not relevant to the specimen (nitrofurantoin outside urine, daptomycin in respiratory).
    - `suppress`: impossible (an MRSA row that is beta-lactam susceptible; a mixed S. aureus row more
      beta-lactam susceptible than cefoxitin susceptible).
-   - `caution`: shown in grey with `*`, never pooled, never used by reasoning: approximate (read off a
-     chart), arithmetically impossible for n, cefotaxime vs ceftriaxone > 20 points apart
-     (Enterobacterales), imipenem vs meropenem > 25 (E. coli, Klebsiella), fosfomycin outside urine.
-   - Row flags: `lowN` (n < 30, CLSI M39), `noN`.
+   - `caution`: shown in grey with `*`, never pooled, never used by reasoning: approximate (estimated
+     from a bar height; printed chart labels are exact), arithmetically impossible for n, cefotaxime vs
+     ceftriaxone > 20 points apart (Enterobacterales), imipenem vs meropenem > 25 (E. coli, Klebsiella),
+     fosfomycin outside urine, colistin/polymyxin B 0% for Enterobacterales and non-fermenters (CLSI has
+     no susceptible category), and `conflict`: the extractor found the source contradicting itself
+     (ICMR 2024 prints Morganella urine amikacin 8.6% where its counts give 121/154 = 78.6%; the
+     arithmetic check cannot catch that, 8.6% is possible for some n).
+   - Row flags: `lowN` (n < 30, CLSI M39), `noN`. A drug tested on fewer than 30 isolates (`nt`) is
+     treated as low too (ICMR HAI UTI E. faecalis linezolid 1/5), even in a row of 61.
 3. **% resistant reports** (NARS-Net, state networks): `r:{}` or `measure:"R"`; stored as 100 - %R with
    the cell marked `fromR`. Intermediate then counts as susceptible; the cell sheet says so.
 4. **Derived rows** (marked "combined", `how` says from what): S. aureus from MRSA + MSSA (cefoxitin %S
@@ -70,7 +75,14 @@ picker (National, Pooled, each region, My hospital, Other hospitals). Old ids (`
 `getSusceptibility(org, drug, {spec, set})` returns only n >= 30 figures, else the national fallback
 marked `national`.
 
-## Syndrome strata (store `SYN`)
+## Syndrome strata (store `SYN`, `synCtx(synId)`)
+The stratum is chosen **per organism** (`pickStratumFor`): ICMR prints Enterobacterales for "all
+specimens except urine" but staphylococci by specimen, so one stratum per scope would hide E. coli for
+sepsis. Options per syndrome: `cohort:"hai"` (catheter UTI, VAP, device infection read ICU
+device-associated surveillance first; no other syndrome ever does) and `only` (pneumococcal meningitis:
+CSF figures or none, never blood figures read with non-meningeal breakpoints). Staphylococcal cefoxitin
+and oxacillin answer for each other.
+
 Specimen preference list + setting per syndrome: UTI urine (OPD for cystitis/pyelonephritis, inpatient for
 complicated/catheter); pneumonia respiratory (ICU for VAP and severe CAP); SSTI pus then deep; meningitis
 CSF, sterile fluids, blood; cholangitis/SBP sterile fluids then blood; sepsis/FN/IE/device blood; enteric
@@ -95,6 +107,12 @@ only the summary is saved (`smd_abg_local`). It becomes profile `LOCAL`; never p
 - Caution cells render grey on purpose (a failed figure must not look reliable). Do not "fix" to colour.
 - `app.js` still carries `ASP_ABG` (national summary + GIMSR) for the minified console's own block,
   which asp-region.js hides; it is the fallback before the bundle loads.
+- Species keys: K. oxytoca, K. aerogenes (ex Enterobacter aerogenes), E. cloacae complex, P. stuartii
+  (intrinsic gentamicin/tobramycin/netilmicin) and P. rettgeri are separate from the genus groups
+  "Klebsiella pneumoniae / spp.", "Enterobacter spp.", "Providencia spp.".
+- Cohort rows (`cohort:"hai"`) are kept apart everywhere: dedup keys, pooling groups, derivation.
+- ICMR 2024 Table 9.44 (VAP) is excluded on purpose (identical counts repeated across agents, e.g.
+  2/81 five times; A. baumannii tigecycline 2.5% vs 75.8% in the bloodstream table).
 
 ## Tests
 `node --test test/antibiogram-rules.test.mjs test/antibiogram-build.test.mjs test/antibiogram-store.test.mjs`

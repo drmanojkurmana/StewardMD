@@ -125,8 +125,9 @@
     HOSPITALS.length = BASE_COUNT;
     var I = window.ABG_INDEX; if (!I || !I.sources) return;
     HOSPITALS.push({ id: "INDIA_POOLED", name: "India: all institutions (pooled)", short: "India", type: "region", region: "india", hasPolicy: false, abgScope: "india" });
+    var poolFrom = I.stats && I.stats.poolFrom;
     ["north", "south", "east", "west"].forEach(function (rg) {
-      if (!I.sources.some(function (x) { return x.region === rg && x.kind !== "network"; })) return;
+      if (!I.sources.some(function (x) { return x.region === rg && x.kind !== "network" && (!poolFrom || x.year >= poolFrom); })) return;
       HOSPITALS.push({ id: "REGION_" + rg.toUpperCase(), name: RMETA[rg].name, short: RMETA[rg].short, type: "region", region: rg, hasPolicy: false, abgScope: "region:" + rg });
     });
     // The ICMR profile reads the newest ICMR AMRSN report that carries isolate numbers, else

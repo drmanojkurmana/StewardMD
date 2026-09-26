@@ -21,6 +21,14 @@
   "note": "columns parsed from the PDF text layer (pdfplumber grid), every table page then compared by eye with the rendered page (2026-09-26)"
  },
  "notes": "Specimen-wise antibiogram with each organism split by IPD (wards), OPD and ICU. Sterile body fluids, pus and swabs are reported together (shown here as pus, wounds and body fluids). Grey cells in the source (not tested, not applicable or intrinsic resistance) are absent.",
+ "issues": [
+  "Second reader 2026-09-26: all 863 cells (the 216-cell random sample and every other cell), all 82 row n values and all 141 organism counts were read from the page images (scale 3, wide tables cut into halves or quarters with the row labels kept) before being compared with the extraction; a word-position parse of the PDF text layer agreed with that reading in every cell.",
+  "Result: no transcription errors (0 of 863 cells, 0 of 82 n values; organism, specimen and IPD/OPD/ICU setting correct on every row; the 121 non-zero counts correct). Added the 20 zero counts printed in the organism tables (pages 3, 6, 9 and 12) that had been left out, for example S. aureus 0 in urine ICU and CoNS 0 in respiratory IPD.",
+  "Cells the checks do not keep, each confirmed as printed: MRSA blood IPD and OPD penicillin 20 and ampicillin 25 (page 4); P. aeruginosa respiratory ampicillin-sulbactam 20, 18.6 and 0 (page 11); E. faecalis and E. faecium pus gentamicin (page 13, column headed GEN, not HLG); cefotaxime against ceftriaxone for urine E. coli IPD 9.1 and 61.3, OPD 21.8 and 82.3, and Klebsiella ICU 0 and 70 (page 8); and 40 percentages that cannot come from the printed isolate number, for example 98% of 27 (pages 4, 5, 7, 8, 10 and 11).",
+  "E. faecalis pus teicoplanin (page 13): 100 and 94 are printed low in their cells but inside the IPD and OPD cell borders, so they are read as IPD 100 and OPD 94, as extracted (still flagged approximate).",
+  "Organism tables that disagree with the susceptibility tables, printed that way and noted on the rows: respiratory S. aureus IPD 74 and OPD 78 (page 9) against MRSA plus MSSA 78 and 74 (page 10); pus Acinetobacter IPD 269 and ICU 13 (page 12) against 209 and 73 (page 14); pus Enterococcus IPD 20 and OPD 16 (page 12) against E. faecalis plus E. faecium 16 and 20 (page 13).",
+  "Lead 2026-09-26: the E. faecalis pus teicoplanin values are no longer marked approximate, after the second reader confirmed each sits inside its IPD or OPD cell border."
+ ],
  "rows": [
   {
    "spec": "blood",
@@ -1450,7 +1458,8 @@
     "vancomycin": "VAN",
     "linezolid": "LZD",
     "teicoplanin": "TEC"
-   }
+   },
+   "note": "Source inconsistency, recorded as printed: the page 9 organism table counts S. aureus IPD 74 and OPD 78, but the MRSA and MSSA rows of this table add up to IPD 78 (62 + 16) and OPD 74 (62 + 12)."
   },
   {
    "spec": "respiratory",
@@ -1476,7 +1485,8 @@
     "vancomycin": "VAN",
     "linezolid": "LZD",
     "teicoplanin": "TEC"
-   }
+   },
+   "note": "Source inconsistency, recorded as printed: the page 9 organism table counts S. aureus IPD 74 and OPD 78, but the MRSA and MSSA rows of this table add up to IPD 78 (62 + 16) and OPD 74 (62 + 12)."
   },
   {
    "spec": "respiratory",
@@ -1530,7 +1540,8 @@
     "vancomycin": "VAN",
     "linezolid": "LZD",
     "teicoplanin": "TEC"
-   }
+   },
+   "note": "Source inconsistency, recorded as printed: the page 9 organism table counts S. aureus IPD 74 and OPD 78, but the MRSA and MSSA rows of this table add up to IPD 78 (62 + 16) and OPD 74 (62 + 12)."
   },
   {
    "spec": "respiratory",
@@ -1558,7 +1569,8 @@
     "vancomycin": "VAN",
     "linezolid": "LZD",
     "teicoplanin": "TEC"
-   }
+   },
+   "note": "Source inconsistency, recorded as printed: the page 9 organism table counts S. aureus IPD 74 and OPD 78, but the MRSA and MSSA rows of this table add up to IPD 78 (62 + 16) and OPD 74 (62 + 12)."
   },
   {
    "spec": "respiratory",
@@ -2181,12 +2193,10 @@
     "gentamicin": "GEN",
     "teicoplanin": "TEC"
    },
-   "approx": [
-    "teicoplanin"
-   ],
    "notes": {
-    "teicoplanin": "teicoplanin value is printed between the IPD and OPD rows; read as IPD"
-   }
+    "teicoplanin": "printed low in the cell; the second reader confirmed it sits inside this setting's cell border"
+   },
+   "note": "Source inconsistency, recorded as printed: the page 12 organism table counts Enterococcus spp. IPD 20 and OPD 16, but the E. faecalis and E. faecium rows of this table add up to IPD 16 (12 + 4) and OPD 20 (18 + 2); ICU 4 agrees."
   },
   {
    "spec": "pus",
@@ -2213,12 +2223,10 @@
     "gentamicin": "GEN",
     "teicoplanin": "TEC"
    },
-   "approx": [
-    "teicoplanin"
-   ],
    "notes": {
-    "teicoplanin": "teicoplanin value is printed between the OPD and ICU rows; read as OPD"
-   }
+    "teicoplanin": "printed low in the cell; the second reader confirmed it sits inside this setting's cell border"
+   },
+   "note": "Source inconsistency, recorded as printed: the page 12 organism table counts Enterococcus spp. IPD 20 and OPD 16, but the E. faecalis and E. faecium rows of this table add up to IPD 16 (12 + 4) and OPD 20 (18 + 2); ICU 4 agrees."
   },
   {
    "spec": "pus",
@@ -2266,7 +2274,8 @@
     "linezolid": "LZD",
     "gentamicin": "GEN",
     "teicoplanin": "TEC"
-   }
+   },
+   "note": "Source inconsistency, recorded as printed: the page 12 organism table counts Enterococcus spp. IPD 20 and OPD 16, but the E. faecalis and E. faecium rows of this table add up to IPD 16 (12 + 4) and OPD 20 (18 + 2); ICU 4 agrees."
   },
   {
    "spec": "pus",
@@ -2290,7 +2299,8 @@
     "linezolid": "LZD",
     "gentamicin": "GEN",
     "teicoplanin": "TEC"
-   }
+   },
+   "note": "Source inconsistency, recorded as printed: the page 12 organism table counts Enterococcus spp. IPD 20 and OPD 16, but the E. faecalis and E. faecium rows of this table add up to IPD 16 (12 + 4) and OPD 20 (18 + 2); ICU 4 agrees."
   },
   {
    "spec": "pus",
@@ -2600,7 +2610,8 @@
     "imipenem": "IPM",
     "meropenem": "MEM",
     "cotrimoxazole": "SXT"
-   }
+   },
+   "note": "Source inconsistency, recorded as printed: the page 12 organism table counts Acinetobacter spp. IPD 269 and ICU 13, but this table prints IPD n=209 and ICU n=73 (OPD 32 and the total of 314 agree)."
   },
   {
    "spec": "pus",
@@ -2670,7 +2681,8 @@
     "imipenem": "IPM",
     "meropenem": "MEM",
     "cotrimoxazole": "SXT"
-   }
+   },
+   "note": "Source inconsistency, recorded as printed: the page 12 organism table counts Acinetobacter spp. IPD 269 and ICU 13, but this table prints IPD n=209 and ICU n=73 (OPD 32 and the total of 314 agree)."
   },
   {
    "spec": "pus",
@@ -2965,6 +2977,13 @@
   },
   {
    "spec": "blood",
+   "set": "opd",
+   "org": "Kocuria spp.",
+   "n": 0,
+   "page": 3
+  },
+  {
+   "spec": "blood",
    "set": "icu",
    "org": "Kocuria spp.",
    "n": 7,
@@ -3038,6 +3057,13 @@
    "set": "ward",
    "org": "Aerococcus spp.",
    "n": 5,
+   "page": 3
+  },
+  {
+   "spec": "blood",
+   "set": "opd",
+   "org": "Aerococcus spp.",
+   "n": 0,
    "page": 3
   },
   {
@@ -3168,6 +3194,13 @@
   },
   {
    "spec": "urine",
+   "set": "icu",
+   "org": "Proteus spp.",
+   "n": 0,
+   "page": 6
+  },
+  {
+   "spec": "urine",
    "set": "ward",
    "org": "Staphylococcus aureus",
    "n": 6,
@@ -3178,6 +3211,13 @@
    "set": "opd",
    "org": "Staphylococcus aureus",
    "n": 12,
+   "page": 6
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "n": 0,
    "page": 6
   },
   {
@@ -3196,6 +3236,13 @@
   },
   {
    "spec": "urine",
+   "set": "icu",
+   "org": "Citrobacter spp.",
+   "n": 0,
+   "page": 6
+  },
+  {
+   "spec": "urine",
    "set": "ward",
    "org": "Staphylococcus saprophyticus",
    "n": 2,
@@ -3210,9 +3257,30 @@
   },
   {
    "spec": "urine",
+   "set": "icu",
+   "org": "Staphylococcus saprophyticus",
+   "n": 0,
+   "page": 6
+  },
+  {
+   "spec": "urine",
    "set": "ward",
    "org": "Serratia marcescens",
    "n": 1,
+   "page": 6
+  },
+  {
+   "spec": "urine",
+   "set": "opd",
+   "org": "Serratia marcescens",
+   "n": 0,
+   "page": 6
+  },
+  {
+   "spec": "urine",
+   "set": "icu",
+   "org": "Serratia marcescens",
+   "n": 0,
    "page": 6
   },
   {
@@ -3336,6 +3404,13 @@
   },
   {
    "spec": "respiratory",
+   "set": "icu",
+   "org": "Citrobacter spp.",
+   "n": 0,
+   "page": 9
+  },
+  {
+   "spec": "respiratory",
    "set": "ward",
    "org": "Proteus spp.",
    "n": 8,
@@ -3350,6 +3425,13 @@
   },
   {
    "spec": "respiratory",
+   "set": "icu",
+   "org": "Proteus spp.",
+   "n": 0,
+   "page": 9
+  },
+  {
+   "spec": "respiratory",
    "set": "ward",
    "org": "Serratia marcescens",
    "n": 8,
@@ -3360,6 +3442,13 @@
    "set": "opd",
    "org": "Serratia marcescens",
    "n": 2,
+   "page": 9
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Serratia marcescens",
+   "n": 0,
    "page": 9
   },
   {
@@ -3372,8 +3461,43 @@
   {
    "spec": "respiratory",
    "set": "opd",
+   "org": "Enterococcus spp.",
+   "n": 0,
+   "page": 9
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "n": 0,
+   "page": 9
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "CoNS",
+   "n": 0,
+   "page": 9
+  },
+  {
+   "spec": "respiratory",
+   "set": "opd",
    "org": "CoNS",
    "n": 2,
+   "page": 9
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "CoNS",
+   "n": 0,
+   "page": 9
+  },
+  {
+   "spec": "respiratory",
+   "set": "ward",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 0,
    "page": 9
   },
   {
@@ -3381,6 +3505,13 @@
    "set": "opd",
    "org": "Stenotrophomonas maltophilia",
    "n": 1,
+   "page": 9
+  },
+  {
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 0,
    "page": 9
   },
   {
@@ -3567,6 +3698,13 @@
   },
   {
    "spec": "pus",
+   "set": "icu",
+   "org": "Enterobacter spp. / Citrobacter spp.",
+   "n": 0,
+   "page": 12
+  },
+  {
+   "spec": "pus",
    "set": "opd",
    "org": "Stenotrophomonas maltophilia",
    "n": 4,
@@ -3577,6 +3715,13 @@
    "set": "ward",
    "org": "Stenotrophomonas maltophilia",
    "n": 4,
+   "page": 12
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Stenotrophomonas maltophilia",
+   "n": 0,
    "page": 12
   },
   {
@@ -3591,6 +3736,13 @@
    "set": "ward",
    "org": "Serratia marcescens",
    "n": 3,
+   "page": 12
+  },
+  {
+   "spec": "pus",
+   "set": "icu",
+   "org": "Serratia marcescens",
+   "n": 0,
    "page": 12
   }
  ],

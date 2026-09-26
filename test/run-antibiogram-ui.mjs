@@ -83,6 +83,14 @@ try {
   ok(Math.abs(rVal - (100 - sVal)) < 0.11, `% resistant toggle: ${sVal} susceptible shows as ${rVal} resistant`);
   await click('[data-v2="mode"][data-v="s"]');
 
+  /* ---- the default national profile: the ICMR AMRSN report ---- */
+  const icmrScope = await ev(`(HOSPITAL.list.find(h=>h.id==='ICMR')||{}).abgScope||''`);
+  ok(/^src:ICMR_AMRSN_20\d\d$/.test(icmrScope), 'the ICMR profile reads the full ICMR AMRSN report: ' + icmrScope);
+  await ev(`(()=>{const s=document.querySelector('#v2Scope');s.value=${JSON.stringify(icmrScope)};s.dispatchEvent(new Event('change',{bubbles:true}));})()`);
+  ok(await until(`document.querySelectorAll('.v2-t tbody tr').length>5`), 'ICMR table renders with many organisms');
+  const icmrChips = await ev(`[...document.querySelectorAll('.v2-chips button[data-v2="spec"]')].map(b=>b.textContent)`);
+  ok(icmrChips.includes('All specimens except urine and stool') && icmrChips.includes('Urine'), 'ICMR strata include all-except-urine and urine: ' + icmrChips.join(', '));
+  await shot('abg-icmr');
   /* ---- pooled ---- */
   await ev(`(()=>{const s=document.querySelector('#v2Scope');s.value='india';s.dispatchEvent(new Event('change',{bubbles:true}));})()`);
   ok(await until(`/Pooled from/.test(document.querySelector('.v2-meta')?.innerText||'')`), 'India pooled view explains the pool');

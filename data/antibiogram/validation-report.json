@@ -1,7 +1,43 @@
 {
- "version": "edbd545f0b06",
+ "version": "d2a804860c0b",
  "generated": "build",
  "countMismatches": [
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "urine",
+   "set": "all",
+   "org": "enterococcus",
+   "count": 204,
+   "rows": 3234,
+   "text": "Urine, All settings: Enterococcus spp. 204 in the organism table, 3234 in the antibiogram table (E. faecalis + E. faecium)"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "blood",
+   "set": "all",
+   "org": "enterococcus",
+   "count": 48,
+   "rows": 879,
+   "text": "Blood, All settings: Enterococcus spp. 48 in the organism table, 879 in the antibiogram table (E. faecalis + E. faecium)"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "pus",
+   "set": "all",
+   "org": "enterococcus",
+   "count": 121,
+   "rows": 611,
+   "text": "Pus, wounds and body fluids, All settings: Enterococcus spp. 121 in the organism table, 611 in the antibiogram table (E. faecalis + E. faecium)"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "deep",
+   "set": "all",
+   "org": "enterococcus",
+   "count": 174,
+   "rows": 481,
+   "text": "Deep infections (tissue, aspirates), All settings: Enterococcus spp. 174 in the organism table, 481 in the antibiogram table (E. faecalis + E. faecium)"
+  },
   {
    "src": "ICMR_AMRSN_2024",
    "spec": "all",
@@ -19,6 +55,33 @@
    "count": 1793,
    "rows": 1791,
    "text": "All specimens, Wards: Enterococcus faecium 1793 in the organism table, 1791 in the antibiogram table"
+  },
+  {
+   "src": "NARSNET_2023",
+   "spec": "blood",
+   "set": "all",
+   "org": "salmonella_enteric",
+   "count": 623,
+   "rows": 537,
+   "text": "Blood, All settings: Salmonella Typhi and Paratyphi (grouped) 623 in the organism table, 537 in the antibiogram table (S. Typhi)"
+  },
+  {
+   "src": "SKIMS_2025",
+   "spec": "pus",
+   "set": "ward",
+   "org": "enterococcus",
+   "count": 20,
+   "rows": 16,
+   "text": "Pus, wounds and body fluids, Wards: Enterococcus spp. 20 in the organism table, 16 in the antibiogram table (E. faecalis + E. faecium)"
+  },
+  {
+   "src": "SKIMS_2025",
+   "spec": "pus",
+   "set": "opd",
+   "org": "enterococcus",
+   "count": 16,
+   "rows": 20,
+   "text": "Pus, wounds and body fluids, Outpatients: Enterococcus spp. 16 in the organism table, 20 in the antibiogram table (E. faecalis + E. faecium)"
   },
   {
    "src": "SKIMS_2025",
@@ -860,6 +923,237 @@
    "value": 60.5,
    "action": "caution",
    "why": "fosfomycin breakpoints are for urinary isolates; systemic use needs MIC testing"
+  },
+  {
+   "src": "NARSNET_2025",
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "drug": "doxycycline",
+   "value": 50,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 7 prints 50% resistant for all blood isolates, but Figure 9 of the same report prints 29%, 31% and 29% for outpatients, inpatients and ICU; the overall figure cannot lie outside the location figures"
+  },
+  {
+   "src": "NARSNET_2025",
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "drug": "gentamicin_hl",
+   "value": 97,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 7 prints 3% resistant for all blood isolates, but Figure 9 of the same report prints 46%, 49% and 52% for outpatients, inpatients and ICU; the overall figure cannot lie outside the location figures"
+  },
+  {
+   "src": "NARSNET_2025",
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "drug": "vancomycin",
+   "value": 70,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 7 prints 30% resistant for all blood isolates, but Figure 9 of the same report prints 18%, 20% and 20% for outpatients, inpatients and ICU; the overall figure cannot lie outside the location figures"
+  },
+  {
+   "src": "NARSNET_2025",
+   "spec": "blood",
+   "set": "opd",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "drug": "gentamicin_hl",
+   "value": 54,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 7 prints 3% resistant for all blood isolates, but Figure 9 of the same report prints 46%, 49% and 52% for outpatients, inpatients and ICU; the overall figure cannot lie outside the location figures"
+  },
+  {
+   "src": "NARSNET_2025",
+   "spec": "blood",
+   "set": "opd",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "drug": "vancomycin",
+   "value": 82,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 7 prints 30% resistant for all blood isolates, but Figure 9 of the same report prints 18%, 20% and 20% for outpatients, inpatients and ICU; the overall figure cannot lie outside the location figures"
+  },
+  {
+   "src": "NARSNET_2025",
+   "spec": "blood",
+   "set": "opd",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "drug": "doxycycline",
+   "value": 71,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 7 prints 50% resistant for all blood isolates, but Figure 9 of the same report prints 29%, 31% and 29% for outpatients, inpatients and ICU; the overall figure cannot lie outside the location figures"
+  },
+  {
+   "src": "NARSNET_2025",
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "drug": "gentamicin_hl",
+   "value": 51,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 7 prints 3% resistant for all blood isolates, but Figure 9 of the same report prints 46%, 49% and 52% for outpatients, inpatients and ICU; the overall figure cannot lie outside the location figures"
+  },
+  {
+   "src": "NARSNET_2025",
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "drug": "vancomycin",
+   "value": 80,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 7 prints 30% resistant for all blood isolates, but Figure 9 of the same report prints 18%, 20% and 20% for outpatients, inpatients and ICU; the overall figure cannot lie outside the location figures"
+  },
+  {
+   "src": "NARSNET_2025",
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "drug": "doxycycline",
+   "value": 69,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 7 prints 50% resistant for all blood isolates, but Figure 9 of the same report prints 29%, 31% and 29% for outpatients, inpatients and ICU; the overall figure cannot lie outside the location figures"
+  },
+  {
+   "src": "NARSNET_2025",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "drug": "gentamicin_hl",
+   "value": 48,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 7 prints 3% resistant for all blood isolates, but Figure 9 of the same report prints 46%, 49% and 52% for outpatients, inpatients and ICU; the overall figure cannot lie outside the location figures"
+  },
+  {
+   "src": "NARSNET_2025",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "drug": "vancomycin",
+   "value": 80,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 7 prints 30% resistant for all blood isolates, but Figure 9 of the same report prints 18%, 20% and 20% for outpatients, inpatients and ICU; the overall figure cannot lie outside the location figures"
+  },
+  {
+   "src": "NARSNET_2025",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "drug": "doxycycline",
+   "value": 71,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 7 prints 50% resistant for all blood isolates, but Figure 9 of the same report prints 29%, 31% and 29% for outpatients, inpatients and ICU; the overall figure cannot lie outside the location figures"
+  },
+  {
+   "src": "NARSNET_2024",
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "drug": "linezolid",
+   "value": 99.9,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 6 prints 0.06% resistant for all blood isolates, but Figure 7 of the same report prints 1.0%, 0.5% and 1.7% for outpatients, inpatients and ICU; the overall figure cannot lie outside the location figures"
+  },
+  {
+   "src": "NARSNET_2024",
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "drug": "fosfomycin",
+   "value": 80,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 7 prints 20% resistant for all urine isolates, but Figure 10 of the same report prints 27%, 31% and 26% for outpatients, inpatients and ICU; the overall figure cannot lie outside the location figures"
+  },
+  {
+   "src": "NARSNET_2024",
+   "spec": "blood",
+   "set": "opd",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "drug": "linezolid",
+   "value": 99,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 6 prints 0.06% resistant for all blood isolates, but Figure 7 of the same report prints 1.0%, 0.5% and 1.7% for outpatients, inpatients and ICU; the overall figure cannot lie outside the location figures"
+  },
+  {
+   "src": "NARSNET_2024",
+   "spec": "blood",
+   "set": "ward",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "drug": "linezolid",
+   "value": 99.5,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 6 prints 0.06% resistant for all blood isolates, but Figure 7 of the same report prints 1.0%, 0.5% and 1.7% for outpatients, inpatients and ICU; the overall figure cannot lie outside the location figures"
+  },
+  {
+   "src": "NARSNET_2024",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "drug": "linezolid",
+   "value": 98.3,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 6 prints 0.06% resistant for all blood isolates, but Figure 7 of the same report prints 1.0%, 0.5% and 1.7% for outpatients, inpatients and ICU; the overall figure cannot lie outside the location figures"
+  },
+  {
+   "src": "NARSNET_2024",
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "drug": "fosfomycin",
+   "value": 73,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 7 prints 20% resistant for all urine isolates, but Figure 10 of the same report prints 27%, 31% and 26% for outpatients, inpatients and ICU; the overall figure cannot lie outside the location figures"
+  },
+  {
+   "src": "NARSNET_2024",
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "drug": "fosfomycin",
+   "value": 69,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 7 prints 20% resistant for all urine isolates, but Figure 10 of the same report prints 27%, 31% and 26% for outpatients, inpatients and ICU; the overall figure cannot lie outside the location figures"
+  },
+  {
+   "src": "NARSNET_2024",
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus species",
+   "pheno": null,
+   "drug": "fosfomycin",
+   "value": 74,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 7 prints 20% resistant for all urine isolates, but Figure 10 of the same report prints 27%, 31% and 26% for outpatients, inpatients and ICU; the overall figure cannot lie outside the location figures"
+  },
+  {
+   "src": "NARSNET_2023",
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": null,
+   "drug": "linezolid",
+   "value": 100,
+   "action": "caution",
+   "why": "the source contradicts itself: Table 6 prints 0% (with a 95% CI of 0.1 to 0.4) for blood, but Figure 8 and the text give 0.2% for 2023 and Figure 9 prints 0.27% (ICU) and 0.24% (inpatients)"
   },
   {
    "src": "AIIMS_MEDWARDS",
@@ -1788,17 +2082,6 @@
   {
    "src": "SKIMS_2025",
    "spec": "pus",
-   "set": "ward",
-   "org": "Enterococcus faecalis",
-   "pheno": null,
-   "drug": "teicoplanin",
-   "value": 100,
-   "action": "caution",
-   "why": "approximate (read from a chart in the source)"
-  },
-  {
-   "src": "SKIMS_2025",
-   "spec": "pus",
    "set": "opd",
    "org": "Enterococcus faecalis",
    "pheno": null,
@@ -1806,17 +2089,6 @@
    "value": 83,
    "action": "intrinsic",
    "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
-  },
-  {
-   "src": "SKIMS_2025",
-   "spec": "pus",
-   "set": "opd",
-   "org": "Enterococcus faecalis",
-   "pheno": null,
-   "drug": "teicoplanin",
-   "value": 94,
-   "action": "caution",
-   "why": "approximate (read from a chart in the source)"
   },
   {
    "src": "SKIMS_2025",
