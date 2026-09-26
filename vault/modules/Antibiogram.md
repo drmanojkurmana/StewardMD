@@ -37,14 +37,16 @@ places:
 2. **Rules** (`validateRow`), each cell gets an action the app shows:
    - `intrinsic`: never a number (e.g. Klebsiella ampicillin, enterococci and cephalosporins, Salmonella
      aminoglycosides per CLSI).
-   - `hide`: not relevant to the specimen (nitrofurantoin outside urine, daptomycin in respiratory).
+   - `hide`: not relevant to the specimen (nitrofurantoin outside urine, daptomycin in respiratory,
+     tigecycline/eravacycline/moxifloxacin in urine: too little reaches the urine, IDSA 2024).
    - `suppress`: impossible (an MRSA row that is beta-lactam susceptible; a mixed S. aureus row more
      beta-lactam susceptible than cefoxitin susceptible).
    - `caution`: shown in grey with `*`, never pooled, never used by reasoning: approximate (estimated
      from a bar height; printed chart labels are exact), arithmetically impossible for n, cefotaxime vs
      ceftriaxone > 20 points apart (Enterobacterales), imipenem vs meropenem > 25 (E. coli, Klebsiella),
-     fosfomycin outside urine, colistin/polymyxin B 0% for Enterobacterales and non-fermenters (CLSI has
-     no susceptible category), and `conflict`: the extractor found the source contradicting itself
+     fosfomycin outside urine, colistin/polymyxin B under 50% for Enterobacterales and non-fermenters
+     (CLSI has no susceptible category; the cell sheet says a figure is the share intermediate), and
+     `conflict`: the extractor found the source contradicting itself
      (ICMR 2024 prints Morganella urine amikacin 8.6% where its counts give 121/154 = 78.6%; the
      arithmetic check cannot catch that, 8.6% is possible for some n).
    - Row flags: `lowN` (n < 30, CLSI M39), `noN`. A drug tested on fewer than 30 isolates (`nt`) is
@@ -60,7 +62,16 @@ places:
 5. **Count checks**: rows are compared with the source's own organism count tables; mismatches go to
    `validation-report.json` and the source sheet ("The source's own tables disagree"). SKIMS 2025 has 4
    (respiratory S. aureus IPD/OPD swapped between tables; pus Acinetobacter IPD/ICU 60 isolates apart).
-6. **Pooling** (India, regions): isolate-weighted mean of the latest edition per institution, only
+   Not a disagreement: a genus line that means "other species" (the count table also lists the
+   species), species rows adding up to less than a genus count (species without a row), an
+   all-settings row above its summed location counts (isolates without a location), and rows marked
+   `n_tested` (the table's n is isolates tested, e.g. ICMR 2023 Tables 4.2/4.5).
+6. **Carried-over figures** (`copyChecks`): a row that repeats another row of the same institution
+   value for value (6+ shared figures, 3+ distinct values, not all 0/100) is copied, not new data.
+   Across editions the later row's figures become cautions; within one report both rows (when their
+   n differ). Listed on the source sheet under "Figures repeated from another table or edition".
+   Catches NARS-Net 2025 reprinting the 2024 outpatient and ICU urine E. coli series.
+7. **Pooling** (India, regions): isolate-weighted mean of the latest edition per institution, only
    `keep` cells, rows with n >= 30. Networks are never pooled with institutions (same isolates twice).
    Pooled "all settings" takes each institution's all-settings row, else its all-inpatient row; ICU-,
    ward- and OPD-only reports pool under their own setting. A pooled single-setting figure needs 3
@@ -111,6 +122,17 @@ only the summary is saved (`smd_abg_local`). It becomes profile `LOCAL`; never p
   (intrinsic gentamicin/tobramycin/netilmicin) and P. rettgeri are separate from the genus groups
   "Klebsiella pneumoniae / spp.", "Enterobacter spp.", "Providencia spp.".
 - Cohort rows (`cohort:"hai"`) are kept apart everywhere: dedup keys, pooling groups, derivation.
+- CoNS species: S. epidermidis, S. haemolyticus, S. hominis and Other CoNS have keys (parent `cons`);
+  a CoNS query combines them isolate-weighted. All stay out of blood WISCA by default (contaminants).
+- `focus` (source key): an outbreak or single-pathogen report (KARS-NET Shigella 2026). Shown with
+  "Not a cumulative antibiogram", never a profile. Give it its own `inst` so it never becomes a
+  network's "latest edition".
+- `specimen_as_printed` reaches the screen ("Specimen as printed") when the key is broader than
+  what the source printed. NCDC-protocol "Pus aspirate (PA)" is filed as `deep` in every network.
+- Trend links renamed rows across editions (Proteus spp. one year, P. mirabilis the next); such a
+  point says "reported as". The WISCA "no data" share uses each source's exact setting count.
+- Order when data change: `node scripts/abg-register.mjs` THEN `node scripts/build-antibiogram.mjs`
+  (the register goes into the bundle). Commit `antibiogram-store.js` too: the build writes its ABG_V.
 - ICMR 2024 Table 9.44 (VAP) is excluded on purpose (identical counts repeated across agents, e.g.
   2/81 five times; A. baumannii tigecycline 2.5% vs 75.8% in the bloodstream table).
 
