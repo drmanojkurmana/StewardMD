@@ -94,8 +94,8 @@ Registry: `medcore-flags.js` (repo root), read as query param → localStorage �
 Added 2026-09-19 as step 1 of the Medical Core plan (tag `medcore-pre-integration`), deliberately
 BEFORE the code they gate, so that no commit had to add a switch and a clinical path in the same
 change. Both defaulted OFF while there was nothing to enable. On **2026-09-26 the owner turned the
-master flag ON by default, labelled BETA** — see [[Decisions#2026-09-26 Medical Core deterministic
-layer default ON, BETA]].
+master flag ON by default, labelled BETA** — see [[Decisions#2026-09-26 · Medical Core ships its
+DETERMINISTIC half ON by default as BETA; the model half stays off]].
 
 **The two halves are now in different states, and that split is the safety property.**
 
