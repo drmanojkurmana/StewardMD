@@ -1,0 +1,890 @@
+{
+ "kind": "institution",
+ "inst": "GMC_SRINAGAR",
+ "institution": "Government Medical College Srinagar",
+ "short": "GMC Srinagar",
+ "city": "Srinagar",
+ "state": "Jammu and Kashmir",
+ "region": "north",
+ "sector": "government",
+ "page": "https://www.gmcs.ac.in/InnerPagelevel1.aspx?assid=L1iEAVQeY3I=&pid=ivhnyo1RApo=",
+ "retrieved": "2026-09-26",
+ "measure": "S",
+ "id": "GMC_SRINAGAR_2023_H1",
+ "year": 2023,
+ "end": "2023-06",
+ "period": "January to June 2023",
+ "published": "2023",
+ "url": "https://www.gmcs.ac.in/Photos/10-04-2302-46-53-GMC-document%20-%202023-10-04T144403.867.pdf",
+ "citation": "Postgraduate Department of Microbiology, Government Medical College Srinagar. Antibiogram for the period January 2023 to June 2023 (pus, blood and urine). Srinagar: Government Medical College; 2023.",
+ "reporting": "Percent susceptible, all locations together. Pus: one list of percentages per organism (organism counts on page 2, no n in the lists). Blood: Gram-positive (MRSA, MSSA, MR-CoNS, MS-CoNS, Enterococcus) and Gram-negative tables without isolate numbers (organism counts on page 6). Urine: Gram-negative table with the number of isolates; Gram-positive table with each organism's share of isolates only.",
+ "method": "Not stated. The report notes that vancomycin MIC testing (recommended by CLSI for staphylococci) is not done in the laboratory.",
+ "verification": {
+  "status": "double-checked",
+  "note": "Scanned PDF, read from page images (scanned PDF). Two separate readings of every table: pass 1 from whole pages rendered at scale 2.5, pass 2 from crops at scale 3 to 4 (wide tables in halves, column headers from rotated crops, a contrast-enhanced crop for the blurred row labels of page 7). The two readings were compared by script: 365 of 365 values and counts agreed. In the blood Gram-negative table (page 8) the unruled Burkholderia row, which has blank cells, was assigned to columns by measuring each value's position against the column positions of the complete E. coli row (grid overlay and ink-segment positions on the deskewed rows). No cell was unreadable except the Enterococcus share of isolates on page 7 (not needed)."
+ },
+ "notes": "Half-yearly antibiogram (January to June 2023) of the Postgraduate Department of Microbiology, GMC Srinagar (cover letter dated 4 October 2023), with sections for pus, blood and urine; no location split, so every row is all settings. The pus lists and the blood tables print no isolate numbers, so those rows have no n; the organism counts of pages 2 (pus) and 6 (blood) are recorded as counts. The urine Gram-positive table prints only shares (Enterococcus 78.4% and S. aureus 21.5% of 293 Gram-positive growths; MRSA 49.2%, MSSA 50.7% of S. aureus), so its rows have no n. Blood shares printed: MRSA 55.17% and MSSA 44.8% of S. aureus (174), MR-CoNS 52% and MS-CoNS 48% of CoNS (201). The pus lists and blood Gram-negative table include \"Ceftazidime-tazobactam\" / \"Ceftazidime+ Tazobactum\", which has no drug key and is not recorded. The E. coli and Klebsiella pus lists of the July to December 2023 report repeat several of these figures exactly.",
+ "issues": [
+  "Second reader 2026-09-26: all 202 cells (including the seeded 40% sample of 81), all 27 row n values and all 20 counts were read blind from the page images (scale 3 to 5; the unruled tables of pages 7, 8, 10 and 11 at scale 4.5 to 5, with column lines overlaid on pages 7, 8 and 10) and compared with the file by script: 0 differences, nothing corrected.",
+  "Stratum checks: the report has no location split, so set \"all\" is right for every row; specimens (pus samples, blood, urine) and organisms confirmed. Only the urine Gram-negative table prints isolate numbers (278, 69, 65, 8, 5, 6, 1); the other rows have none (n null is right). The blood Gram-negative Burkholderia row (blank cells, no rules) sits under ciprofloxacin 18.1, tigecycline 18.1, levofloxacin 45.4 and cefoperazone-sulbactam 54.5 (printed without a % sign), as recorded.",
+  "Cells not kept, re-read: blood Enterococcus amikacin 7.14 (intrinsic, page 7) and urine Acinetobacter (n=8) ciprofloxacin 52 (caution, page 10) are printed that way (source, not transcription)."
+ ],
+ "rows": [
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": null,
+   "page": 3,
+   "table": "Pus: Escherichia coli sensitivity pattern",
+   "s": {
+    "tigecycline": 97,
+    "levofloxacin": 84,
+    "amikacin": 75,
+    "cefoperazone_sulbactam": 68,
+    "piptazo": 58,
+    "imipenem": 45,
+    "ceftriaxone": 22,
+    "ampsulbactam": 7
+   },
+   "printed": {
+    "cefoperazone_sulbactam": "Cefoperazone-sulbactam",
+    "piptazo": "Pipericillin-tazobactam",
+    "imipenem": "Imipinem",
+    "ampsulbactam": "Ampicillin-sulbactam"
+   },
+   "note": "No isolate number in the list (page 2 counts 424 E. coli). Ampicillin-sulbactam printed as \"07%\".",
+   "specimen_as_printed": "Pus samples"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": null,
+   "page": 3,
+   "table": "Pus: Klebsiella spp sensitivity pattern",
+   "s": {
+    "tigecycline": 94,
+    "levofloxacin": 55,
+    "cefoperazone_sulbactam": 54,
+    "piptazo": 31,
+    "ceftriaxone": 28,
+    "imipenem": 26,
+    "amikacin": 22,
+    "ampsulbactam": 3
+   },
+   "printed": {
+    "cefoperazone_sulbactam": "Cefoperazone-sulbactam",
+    "piptazo": "Pipericillin-tazobactam",
+    "imipenem": "Imipinem",
+    "ampsulbactam": "Ampicillin-sulbactam"
+   },
+   "note": "Printed as \"Klebsiella spp\". No isolate number in the list (page 2 counts 343 Klebsiella). Ampicillin-sulbactam printed as \"03%\".",
+   "specimen_as_printed": "Pus samples"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": null,
+   "page": 4,
+   "table": "Pus: Acinetobacter spp sensitivity pattern",
+   "s": {
+    "tigecycline": 93,
+    "cefoperazone_sulbactam": 71,
+    "levofloxacin": 56,
+    "amikacin": 37,
+    "imipenem": 30,
+    "piptazo": 28,
+    "ceftriaxone": 8
+   },
+   "printed": {
+    "cefoperazone_sulbactam": "Cefoperazone-sulbactam",
+    "piptazo": "Pipericillin-tazobactam"
+   },
+   "note": "Printed as \"Acinetobacter spp\". No isolate number in the list (page 2 counts 280 Acinetobacter). Ceftriaxone printed as \"08%\".",
+   "specimen_as_printed": "Pus samples"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Pseudomonas spp.",
+   "pheno": null,
+   "n": null,
+   "page": 4,
+   "table": "Pus: Pseudomonas spp sensitivity pattern",
+   "s": {
+    "cefepime": 83,
+    "levofloxacin": 77,
+    "piptazo": 72,
+    "tobramycin": 34,
+    "aztreonam": 22,
+    "imipenem": 18
+   },
+   "printed": {
+    "cefepime": "Cefipime",
+    "piptazo": "Pipericillin-tazobactam",
+    "imipenem": "Imipinem"
+   },
+   "note": "Printed as \"Pseudomonas spp\". No isolate number in the list (page 2 counts 237 Pseudomonas).",
+   "specimen_as_printed": "Pus samples"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MRSA",
+   "n": null,
+   "page": 4,
+   "table": "Pus: MRSA sensitivity pattern",
+   "s": {
+    "linezolid": 100,
+    "tetracycline": 86,
+    "levofloxacin": 81,
+    "erythromycin": 27,
+    "clindamycin": 24
+   },
+   "note": "No isolate number in the list (page 2 counts 282 MRSA). Vancomycin MIC testing is not done in the laboratory.",
+   "specimen_as_printed": "Pus samples"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MSSA",
+   "n": null,
+   "page": 5,
+   "table": "Pus: MSSA sensitivity pattern",
+   "s": {
+    "linezolid": 100,
+    "tetracycline": 90,
+    "levofloxacin": 88,
+    "erythromycin": 64,
+    "clindamycin": 69
+   },
+   "note": "No isolate number in the list (page 2 counts 197 MSSA).",
+   "specimen_as_printed": "Pus samples"
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": null,
+   "page": 5,
+   "table": "Pus: Enterococcus spp sensitivity pattern",
+   "s": {
+    "linezolid": 100,
+    "vancomycin": 88,
+    "tetracycline": 50,
+    "levofloxacin": 66,
+    "erythromycin": 64,
+    "gentamicin_hl": 55,
+    "ampicillin": 28,
+    "penicillin": 21
+   },
+   "printed": {
+    "gentamicin_hl": "High Level Gentamycin"
+   },
+   "note": "Printed as \"Enterococcus spp\". No isolate number in the list (page 2 counts 29 Enterococcus).",
+   "specimen_as_printed": "Pus samples"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MRSA",
+   "n": null,
+   "page": 7,
+   "table": "Blood: percentage sensitivity of Gram-positive isolates",
+   "s": {
+    "clindamycin": 15.6,
+    "gentamicin": 21.87,
+    "ciprofloxacin": 6.25,
+    "erythromycin": 21.87,
+    "linezolid": 100,
+    "tetracycline": 59.37,
+    "amikacin": 37.5,
+    "levofloxacin": 31.25
+   },
+   "note": "Printed as \"Methicillin Resistant Staphylococcus aureus (55.17%)\"; no isolate number in this table (page 6 counts 174 S. aureus).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MSSA",
+   "n": null,
+   "page": 7,
+   "table": "Blood: percentage sensitivity of Gram-positive isolates",
+   "s": {
+    "clindamycin": 73,
+    "gentamicin": 38.4,
+    "ciprofloxacin": 7.69,
+    "erythromycin": 38.4,
+    "linezolid": 100,
+    "tetracycline": 61.5,
+    "amikacin": 42.3,
+    "levofloxacin": 19.23
+   },
+   "note": "Printed as \"Methicillin Sensitive Staphylococcus aureus (44.8%)\"; no isolate number in this table (page 6 counts 174 S. aureus).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": "MR",
+   "n": null,
+   "page": 7,
+   "table": "Blood: percentage sensitivity of Gram-positive isolates",
+   "s": {
+    "clindamycin": 28.8,
+    "gentamicin": 15.3,
+    "ciprofloxacin": 5.76,
+    "erythromycin": 17.3,
+    "linezolid": 100,
+    "tetracycline": 50,
+    "amikacin": 44.23,
+    "levofloxacin": 17.3
+   },
+   "note": "Printed as \"Methicillin Resistant Coagulase Negative Staphylococcus (52%)\"; no isolate number in this table (page 6 counts 201 CoNS).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Coagulase-negative staphylococci",
+   "pheno": "MS",
+   "n": null,
+   "page": 7,
+   "table": "Blood: percentage sensitivity of Gram-positive isolates",
+   "s": {
+    "clindamycin": 44.4,
+    "gentamicin": 28.8,
+    "ciprofloxacin": 6.6,
+    "erythromycin": 42.2,
+    "linezolid": 100,
+    "tetracycline": 60,
+    "amikacin": 35.5,
+    "levofloxacin": 40
+   },
+   "note": "Printed as \"Methicillin Sensitive Coagulase Negative Staphylococcus (48%)\"; no isolate number in this table (page 6 counts 201 CoNS).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": null,
+   "page": 7,
+   "table": "Blood: percentage sensitivity of Gram-positive isolates",
+   "s": {
+    "gentamicin_hl": 25,
+    "ciprofloxacin": 7.14,
+    "linezolid": 99,
+    "tetracycline": 28.57,
+    "ampicillin": 21.42,
+    "penicillin": 7.14,
+    "vancomycin": 92,
+    "amikacin": 7.14,
+    "levofloxacin": 25
+   },
+   "printed": {
+    "gentamicin_hl": "High Dose Gentamicin"
+   },
+   "note": "Printed as \"Enterococcus species\" (its share of isolates is illegible); no isolate number in this table (page 6 counts 84 Enterococcus). \"High Dose Gentamicin\" recorded as high-level gentamicin.",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": null,
+   "page": 8,
+   "table": "Blood: percentage sensitivity of Gram-negative isolates",
+   "s": {
+    "ceftriaxone": 12.5,
+    "ampsulbactam": 53.1,
+    "piptazo": 59.3,
+    "ciprofloxacin": 28.1,
+    "gentamicin": 21.8,
+    "amikacin": 46.8,
+    "imipenem": 65.6,
+    "tigecycline": 78.12,
+    "levofloxacin": 25,
+    "cefoperazone_sulbactam": 71.8,
+    "cotrimoxazole": 18.7
+   },
+   "printed": {
+    "ampsulbactam": "Ampicillin + Sulbactum",
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum"
+   },
+   "note": "No isolate number in this table (page 6 counts 32).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "n": null,
+   "page": 8,
+   "table": "Blood: percentage sensitivity of Gram-negative isolates",
+   "s": {
+    "ceftriaxone": 16.1,
+    "cefepime": 35.4,
+    "piptazo": 54.8,
+    "amikacin": 19.3,
+    "imipenem": 12.9,
+    "tigecycline": 61.2,
+    "levofloxacin": 19.3,
+    "cefoperazone_sulbactam": 64.5,
+    "cotrimoxazole": 16.1
+   },
+   "printed": {
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum"
+   },
+   "note": "No isolate number in this table (page 6 counts 31).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Pseudomonas species",
+   "pheno": null,
+   "n": null,
+   "page": 8,
+   "table": "Blood: percentage sensitivity of Gram-negative isolates",
+   "s": {
+    "cefepime": 55.5,
+    "piptazo": 83.3,
+    "ciprofloxacin": 19.4,
+    "gentamicin": 13.8,
+    "amikacin": 27.7,
+    "imipenem": 11.1,
+    "levofloxacin": 44.4,
+    "cefoperazone_sulbactam": 69.4,
+    "tobramycin": 36.1
+   },
+   "printed": {
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum"
+   },
+   "note": "No isolate number in this table (page 6 counts 108).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "pheno": null,
+   "n": null,
+   "page": 8,
+   "table": "Blood: percentage sensitivity of Gram-negative isolates",
+   "s": {
+    "ceftriaxone": 12.5,
+    "cefepime": 10.41,
+    "piptazo": 45.83,
+    "ciprofloxacin": 12.5,
+    "gentamicin": 21.87,
+    "amikacin": 28.12,
+    "imipenem": 43.75,
+    "tigecycline": 60.41,
+    "levofloxacin": 12.5,
+    "cefoperazone_sulbactam": 80.2
+   },
+   "printed": {
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum"
+   },
+   "note": "No isolate number in this table (page 6 counts 96).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Burkholderia species",
+   "pheno": null,
+   "n": null,
+   "page": 8,
+   "table": "Blood: percentage sensitivity of Gram-negative isolates",
+   "s": {
+    "ciprofloxacin": 18.1,
+    "tigecycline": 18.1,
+    "levofloxacin": 45.4,
+    "cefoperazone_sulbactam": 54.5
+   },
+   "printed": {
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum"
+   },
+   "note": "No isolate number in this table (page 6 counts 33).",
+   "specimen_as_printed": "Blood"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "n": 278,
+   "page": 10,
+   "table": "Urine: percentage sensitivity of Gram-negative bacilli",
+   "s": {
+    "fosfomycin": 83,
+    "piptazo": 74,
+    "cefoperazone_sulbactam": 77,
+    "ceftriaxone": 27,
+    "amikacin": 78,
+    "levofloxacin": 70,
+    "cefepime": 15,
+    "cefazolin": 12.5,
+    "ciprofloxacin": 30,
+    "imipenem": 27
+   },
+   "printed": {
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum"
+   },
+   "note": "Printed as \"278(65%)\" isolates.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "n": 69,
+   "page": 10,
+   "table": "Urine: percentage sensitivity of Gram-negative bacilli",
+   "s": {
+    "fosfomycin": 38,
+    "piptazo": 58,
+    "cefoperazone_sulbactam": 64,
+    "ceftriaxone": 19,
+    "amikacin": 33,
+    "levofloxacin": 65,
+    "ciprofloxacin": 32,
+    "imipenem": 23
+   },
+   "printed": {
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum"
+   },
+   "note": "Printed as \"69(16%)\" isolates.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Pseudomonas spp.",
+   "pheno": null,
+   "n": 65,
+   "page": 10,
+   "table": "Urine: percentage sensitivity of Gram-negative bacilli",
+   "s": {
+    "piptazo": 85,
+    "cefoperazone_sulbactam": 68,
+    "amikacin": 32,
+    "levofloxacin": 31,
+    "cefepime": 72,
+    "ciprofloxacin": 70,
+    "imipenem": 6,
+    "aztreonam": 31,
+    "tobramycin": 9
+   },
+   "printed": {
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum"
+   },
+   "note": "Printed as \"65(15%)\" isolates.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "n": 8,
+   "page": 10,
+   "table": "Urine: percentage sensitivity of Gram-negative bacilli",
+   "s": {
+    "piptazo": 88,
+    "cefoperazone_sulbactam": 63,
+    "ceftriaxone": 62.5,
+    "amikacin": 75,
+    "levofloxacin": 50,
+    "cefepime": 50,
+    "ciprofloxacin": 52
+   },
+   "printed": {
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum"
+   },
+   "note": "Printed as \"8(1.8%)\" isolates. Ciprofloxacin 52 cannot be produced by 8 or fewer isolates (source error, recorded as printed).",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "n": 5,
+   "page": 10,
+   "table": "Urine: percentage sensitivity of Gram-negative bacilli",
+   "s": {
+    "fosfomycin": 80,
+    "piptazo": 100,
+    "cefoperazone_sulbactam": 100,
+    "ceftriaxone": 40,
+    "amikacin": 100,
+    "cefepime": 20,
+    "imipenem": 20
+   },
+   "printed": {
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum"
+   },
+   "note": "Printed as \"5(1.16%)\" isolates.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Citrobacter spp.",
+   "pheno": null,
+   "n": 6,
+   "page": 10,
+   "table": "Urine: percentage sensitivity of Gram-negative bacilli",
+   "s": {
+    "fosfomycin": 50,
+    "piptazo": 83,
+    "cefoperazone_sulbactam": 83,
+    "ceftriaxone": 50,
+    "amikacin": 50,
+    "levofloxacin": 83,
+    "imipenem": 33
+   },
+   "printed": {
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum"
+   },
+   "note": "Printed as \"6(1.3%)\" isolates.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "n": 1,
+   "page": 10,
+   "table": "Urine: percentage sensitivity of Gram-negative bacilli",
+   "s": {
+    "fosfomycin": 100,
+    "piptazo": 100,
+    "cefoperazone_sulbactam": 100,
+    "amikacin": 100
+   },
+   "printed": {
+    "piptazo": "Piperacillin + Tazobactum",
+    "cefoperazone_sulbactam": "Cefoperazone + Sulbactum"
+   },
+   "note": "Printed as \"1(0.2%)\" isolates.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "n": null,
+   "page": 11,
+   "table": "Urine: percentage sensitivity of Gram-positive cocci",
+   "s": {
+    "penicillin": 35.6,
+    "vancomycin": 84,
+    "ciprofloxacin": 19,
+    "levofloxacin": 61,
+    "linezolid": 100,
+    "tetracycline": 28,
+    "fosfomycin": 85,
+    "ampicillin": 17,
+    "ofloxacin": 1.3
+   },
+   "note": "Printed as \"ENTEROCOCCUS spp.\". Share of Gram-positive isolates printed as 78.4%; no isolate number (page 9 prints 293 Gram-positive growths).",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MRSA",
+   "n": null,
+   "page": 11,
+   "table": "Urine: percentage sensitivity of Gram-positive cocci",
+   "s": {
+    "ciprofloxacin": 19.3,
+    "levofloxacin": 74,
+    "linezolid": 100,
+    "tetracycline": 68,
+    "amikacin": 77.4
+   },
+   "note": "Printed as \"MRSA*\". Share of S. aureus printed as 49.2% (S. aureus 21.5% of Gram-positive isolates); no isolate number.",
+   "specimen_as_printed": "Urine"
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MSSA",
+   "n": null,
+   "page": 11,
+   "table": "Urine: percentage sensitivity of Gram-positive cocci",
+   "s": {
+    "ciprofloxacin": 40.6,
+    "levofloxacin": 66,
+    "linezolid": 100,
+    "tetracycline": 69,
+    "amikacin": 91
+   },
+   "note": "Share of S. aureus printed as 50.7%; no isolate number.",
+   "specimen_as_printed": "Urine"
+  }
+ ],
+ "counts": [
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "MRSA",
+   "n": 282,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "MSSA",
+   "n": 197,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "n": 29,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 424,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Klebsiella spp.",
+   "n": 343,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "n": 280,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Pseudomonas spp.",
+   "n": 237,
+   "page": 2
+  },
+  {
+   "spec": "pus",
+   "set": "all",
+   "org": "Citrobacter spp.",
+   "n": 56,
+   "page": 2
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "n": 174,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Coagulase Negative Staphylococci",
+   "n": 201,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Pseudomonas species",
+   "n": 108,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella species",
+   "n": 31,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus species",
+   "n": 84,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Burkholderia species",
+   "n": 33,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Escherichia coli",
+   "n": 32,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Proteus spp.",
+   "n": 7,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Acinetobacter species",
+   "n": 96,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Citrobacter spp.",
+   "n": 6,
+   "page": 6
+  },
+  {
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida spp.",
+   "n": 55,
+   "page": 6
+  },
+  {
+   "spec": "urine",
+   "set": "all",
+   "org": "Yeast",
+   "n": 89,
+   "page": 9
+  }
+ ],
+ "excluded": [
+  {
+   "what": "Pus: Escherichia coli sensitivity pattern, page 3: Escherichia coli Ceftazidime-tazobactam",
+   "org": "Escherichia coli",
+   "drug": "Ceftazidime-tazobactam",
+   "value": "32%",
+   "why": "no canonical drug key: \"ceftazidime-tazobactam\" is not an identifiable product (possibly ceftolozane-tazobactam or ceftazidime-avibactam); not recorded"
+  },
+  {
+   "what": "Pus: Klebsiella spp sensitivity pattern, page 3: Klebsiella spp Ceftazidime-tazobactam",
+   "org": "Klebsiella spp",
+   "drug": "Ceftazidime-tazobactam",
+   "value": "28%",
+   "why": "no canonical drug key: \"ceftazidime-tazobactam\" is not an identifiable product (possibly ceftolozane-tazobactam or ceftazidime-avibactam); not recorded"
+  },
+  {
+   "what": "Pus: Acinetobacter spp sensitivity pattern, page 4: Acinetobacter spp Ceftazidime-tazobactam",
+   "org": "Acinetobacter spp",
+   "drug": "Ceftazidime-tazobactam",
+   "value": "05%",
+   "why": "no canonical drug key: \"ceftazidime-tazobactam\" is not an identifiable product (possibly ceftolozane-tazobactam or ceftazidime-avibactam); not recorded"
+  },
+  {
+   "what": "Pus: Pseudomonas spp sensitivity pattern, page 4: Pseudomonas spp Ceftazidime-tazobactam",
+   "org": "Pseudomonas spp",
+   "drug": "Ceftazidime-tazobactam",
+   "value": "57%",
+   "why": "no canonical drug key: \"ceftazidime-tazobactam\" is not an identifiable product (possibly ceftolozane-tazobactam or ceftazidime-avibactam); not recorded"
+  },
+  {
+   "what": "Blood: percentage sensitivity of Gram-negative isolates, page 8: Klebsiella species Ceftazidime+ Tazobactum",
+   "org": "Klebsiella species",
+   "drug": "Ceftazidime+ Tazobactum",
+   "value": "9.6%",
+   "why": "no canonical drug key: \"ceftazidime + tazobactam\" is not an identifiable product (possibly ceftolozane-tazobactam or ceftazidime-avibactam); not recorded"
+  },
+  {
+   "what": "Blood: percentage sensitivity of Gram-negative isolates, page 8: Pseudomonas species Ceftazidime+ Tazobactum",
+   "org": "Pseudomonas species",
+   "drug": "Ceftazidime+ Tazobactum",
+   "value": "27.7%",
+   "why": "no canonical drug key: \"ceftazidime + tazobactam\" is not an identifiable product (possibly ceftolozane-tazobactam or ceftazidime-avibactam); not recorded"
+  },
+  {
+   "what": "Blood: percentage sensitivity of Gram-negative isolates, page 8: Acinetobacter species Ceftazidime+ Tazobactum",
+   "org": "Acinetobacter species",
+   "drug": "Ceftazidime+ Tazobactum",
+   "value": "35.4%",
+   "why": "no canonical drug key: \"ceftazidime + tazobactam\" is not an identifiable product (possibly ceftolozane-tazobactam or ceftazidime-avibactam); not recorded"
+  },
+  {
+   "what": "Blood: percentage sensitivity of Gram-negative isolates, page 8: Burkholderia species Ceftazidime+ Tazobactum",
+   "org": "Burkholderia species",
+   "drug": "Ceftazidime+ Tazobactum",
+   "value": "22.72%",
+   "why": "no canonical drug key: \"ceftazidime + tazobactam\" is not an identifiable product (possibly ceftolozane-tazobactam or ceftazidime-avibactam); not recorded"
+  },
+  {
+   "what": "Page 1: cover letter",
+   "why": "no data"
+  },
+  {
+   "what": "Pages 2, 6 and 9: sample totals (total samples, positives, sterile or negative, contaminated, Gram-positive and Gram-negative totals)",
+   "why": "sample-level totals, not organism counts or susceptibility"
+  },
+  {
+   "what": "Page 2: S. aureus 479 (MRSA 282 + MSSA 197)",
+   "why": "recorded as the MRSA and MSSA counts only, so the isolates are not counted twice"
+  },
+  {
+   "what": "Page 2: pus \"Others (Enterobacter, Proteus, Burkholderia, Stenotrophomonas)\" 73 isolates",
+   "why": "several genera pooled; no organism key"
+  },
+  {
+   "what": "Page 9: urine organism percentages (E. coli 64.5%, Klebsiella 16%, ... Enterococcus 78.4%, S. aureus 21.5%)",
+   "why": "shares only; the Gram-negative isolate numbers are the n of the page 10 rows and no Gram-positive numbers are printed"
+  },
+  {
+   "what": "Page 11: \"STAPYLOCOCCUS AUREUS 21.5%\" row",
+   "why": "share only, no susceptibility values (the MRSA and MSSA rows below it are recorded)"
+  },
+  {
+   "what": "Page 6: blood Candida species 55",
+   "why": "recorded as a count only; no antifungal susceptibility is reported"
+  }
+ ]
+}

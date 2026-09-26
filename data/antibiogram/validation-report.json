@@ -1,5 +1,5 @@
 {
- "version": "9c226bed4b85",
+ "version": "0428a8a3e935",
  "generated": "build",
  "countMismatches": [
   {
@@ -51,6 +51,22 @@
    "set": "icu",
    "org": "ecoli",
    "text": "Urine, ICU: Escherichia coli repeats 17 figures of NARS-Net 2024 urine, icu, E. coli (n=1784) exactly"
+  },
+  {
+   "src": "GMC_SRINAGAR_2023_H2",
+   "spec": "pus",
+   "set": "all",
+   "org": "ecoli",
+   "text": "Pus, wounds and body fluids, All settings: Escherichia coli repeats 6 of 8 figures of GMC Srinagar 2023 pus, wounds and body fluids, all settings, E. coli exactly"
+  },
+  {
+   "src": "GMC_SRINAGAR_2021",
+   "spec": "blood",
+   "set": "inpatient",
+   "org": "burkholderia",
+   "count": 32,
+   "rows": 37,
+   "text": "Blood, All inpatients: Burkholderia spp. 32 in the organism table, 37 in the antibiogram table"
   },
   {
    "src": "SGRH_2024",
@@ -208,13 +224,6 @@
   {
    "src": "SKIMS_2025",
    "spec": "blood",
-   "set": "icu",
-   "org": "saureus",
-   "text": "Blood, ICU: Staphylococcus aureus (MRSA) repeats 6 figures of SKIMS Srinagar 2024 blood, icu, S. aureus (MRSA) (n=10) exactly"
-  },
-  {
-   "src": "SKIMS_2025",
-   "spec": "blood",
    "set": "ward",
    "org": "saureus",
    "text": "Blood, Wards: Staphylococcus aureus (MSSA) repeats 6 of 7 figures of SKIMS Srinagar 2024 blood, wards, S. aureus (MSSA) (n=5) exactly"
@@ -279,6 +288,13 @@
    "set": "ward",
    "org": "ecoli",
    "text": "Blood, Wards: Escherichia coli repeats 6 of 7 figures of SKIMS Srinagar 2020 pus, wounds and body fluids, wards, E. coli exactly"
+  },
+  {
+   "src": "SKIMS_2021",
+   "spec": "blood",
+   "set": "ward",
+   "org": "enterobacter",
+   "text": "Blood, Wards: Enterobacter spp. repeats 6 of 8 figures of SKIMS Srinagar 2020 pus, wounds and body fluids, wards, Enterobacter exactly"
   },
   {
    "src": "SKIMS_2021",
@@ -3031,6 +3047,237 @@
    "why": "a low figure for colistin or polymyxin B usually reflects the breakpoint system (CLSI has no susceptible category, only intermediate and resistant) rather than resistance; confirm with a broth microdilution MIC"
   },
   {
+   "src": "GMC_SRINAGAR_2023_H1",
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "amikacin",
+   "value": 7.14,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "GMC_SRINAGAR_2023_H1",
+   "spec": "urine",
+   "set": "all",
+   "org": "Acinetobacter spp.",
+   "pheno": null,
+   "drug": "ciprofloxacin",
+   "value": 52,
+   "action": "caution",
+   "why": "no whole number of the 8 isolates gives 52%; check the source"
+  },
+  {
+   "src": "GMC_SRINAGAR_2023_H2",
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "amikacin",
+   "value": 45,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "GMC_SRINAGAR_2023_H2",
+   "spec": "urine",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "gentamicin",
+   "value": 50,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "GMC_SRINAGAR_2023_H2",
+   "spec": "urine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MRSA",
+   "drug": "amikacin",
+   "value": 65,
+   "action": "caution",
+   "why": "no whole number of the 4 isolates gives 65%; check the source"
+  },
+  {
+   "src": "GMC_SRINAGAR_2023_H2",
+   "spec": "urine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MRSA",
+   "drug": "levofloxacin",
+   "value": 21,
+   "action": "caution",
+   "why": "no whole number of the 4 isolates gives 21%; check the source"
+  },
+  {
+   "src": "GMC_SRINAGAR_2023_H2",
+   "spec": "urine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MRSA",
+   "drug": "ciprofloxacin",
+   "value": 15,
+   "action": "caution",
+   "why": "no whole number of the 4 isolates gives 15%; check the source"
+  },
+  {
+   "src": "GMC_SRINAGAR_2023_H2",
+   "spec": "urine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MRSA",
+   "drug": "fosfomycin",
+   "value": 93,
+   "action": "caution",
+   "why": "no whole number of the 4 isolates gives 93%; check the source"
+  },
+  {
+   "src": "GMC_SRINAGAR_2023_H2",
+   "spec": "urine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MRSA",
+   "drug": "gentamicin",
+   "value": 57,
+   "action": "caution",
+   "why": "no whole number of the 4 isolates gives 57%; check the source"
+  },
+  {
+   "src": "GMC_SRINAGAR_2023_H2",
+   "spec": "urine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MSSA",
+   "drug": "amikacin",
+   "value": 70,
+   "action": "caution",
+   "why": "no whole number of the 6 isolates gives 70%; check the source"
+  },
+  {
+   "src": "GMC_SRINAGAR_2023_H2",
+   "spec": "urine",
+   "set": "all",
+   "org": "Staphylococcus aureus",
+   "pheno": "MSSA",
+   "drug": "fosfomycin",
+   "value": 95,
+   "action": "caution",
+   "why": "no whole number of the 6 isolates gives 95%; check the source"
+  },
+  {
+   "src": "GMC_SRINAGAR_2023_H2",
+   "spec": "pus",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "drug": "tigecycline",
+   "value": 97,
+   "action": "caution",
+   "why": "6 of its 8 shared figures repeat, value for value, the GMC Srinagar 2023 pus, wounds and body fluids, all settings, E. coli row: probably carried over, not new data"
+  },
+  {
+   "src": "GMC_SRINAGAR_2023_H2",
+   "spec": "pus",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "drug": "amikacin",
+   "value": 75,
+   "action": "caution",
+   "why": "6 of its 8 shared figures repeat, value for value, the GMC Srinagar 2023 pus, wounds and body fluids, all settings, E. coli row: probably carried over, not new data"
+  },
+  {
+   "src": "GMC_SRINAGAR_2023_H2",
+   "spec": "pus",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "drug": "cefoperazone_sulbactam",
+   "value": 68,
+   "action": "caution",
+   "why": "6 of its 8 shared figures repeat, value for value, the GMC Srinagar 2023 pus, wounds and body fluids, all settings, E. coli row: probably carried over, not new data"
+  },
+  {
+   "src": "GMC_SRINAGAR_2023_H2",
+   "spec": "pus",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "drug": "piptazo",
+   "value": 58,
+   "action": "caution",
+   "why": "6 of its 8 shared figures repeat, value for value, the GMC Srinagar 2023 pus, wounds and body fluids, all settings, E. coli row: probably carried over, not new data"
+  },
+  {
+   "src": "GMC_SRINAGAR_2023_H2",
+   "spec": "pus",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "drug": "ceftriaxone",
+   "value": 22,
+   "action": "caution",
+   "why": "6 of its 8 shared figures repeat, value for value, the GMC Srinagar 2023 pus, wounds and body fluids, all settings, E. coli row: probably carried over, not new data"
+  },
+  {
+   "src": "GMC_SRINAGAR_2023_H2",
+   "spec": "pus",
+   "set": "all",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "drug": "ampsulbactam",
+   "value": 7,
+   "action": "caution",
+   "why": "6 of its 8 shared figures repeat, value for value, the GMC Srinagar 2023 pus, wounds and body fluids, all settings, E. coli row: probably carried over, not new data"
+  },
+  {
+   "src": "GMC_SRINAGAR_2021",
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "vancomycin",
+   "value": 93,
+   "action": "caution",
+   "why": "no whole number of the 11 isolates gives 93%; check the source"
+  },
+  {
+   "src": "GMC_SRINAGAR_2021",
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "gentamicin",
+   "value": 52,
+   "action": "intrinsic",
+   "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "GMC_SRINAGAR_2021",
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "ampicillin",
+   "value": 48,
+   "action": "caution",
+   "why": "no whole number of the 11 isolates gives 48%; check the source"
+  },
+  {
+   "src": "GMC_SRINAGAR_2021",
+   "spec": "pus",
+   "set": "all",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "penicillin",
+   "value": 47,
+   "action": "caution",
+   "why": "no whole number of the 11 isolates gives 47%; check the source"
+  },
+  {
    "src": "GMCH_CHANDIGARH_2018",
    "spec": "blood",
    "set": "icu",
@@ -3806,28 +4053,6 @@
    "set": "icu",
    "org": "Staphylococcus aureus",
    "pheno": "MRSA",
-   "drug": "penicillin",
-   "value": 0,
-   "action": "caution",
-   "why": "the 6 figures repeat, value for value, the SKIMS Srinagar 2024 blood, icu, S. aureus (MRSA) (n=10) row: probably carried over, not new data"
-  },
-  {
-   "src": "SKIMS_2025",
-   "spec": "blood",
-   "set": "icu",
-   "org": "Staphylococcus aureus",
-   "pheno": "MRSA",
-   "drug": "ampicillin",
-   "value": 0,
-   "action": "caution",
-   "why": "the 6 figures repeat, value for value, the SKIMS Srinagar 2024 blood, icu, S. aureus (MRSA) (n=10) row: probably carried over, not new data"
-  },
-  {
-   "src": "SKIMS_2025",
-   "spec": "blood",
-   "set": "icu",
-   "org": "Staphylococcus aureus",
-   "pheno": "MRSA",
    "drug": "clindamycin",
    "value": 10,
    "action": "caution",
@@ -3843,50 +4068,6 @@
    "value": 10,
    "action": "caution",
    "why": "no whole number of the 9 isolates gives 10%; check the source"
-  },
-  {
-   "src": "SKIMS_2025",
-   "spec": "blood",
-   "set": "icu",
-   "org": "Staphylococcus aureus",
-   "pheno": "MRSA",
-   "drug": "cotrimoxazole",
-   "value": 60,
-   "action": "caution",
-   "why": "the 6 figures repeat, value for value, the SKIMS Srinagar 2024 blood, icu, S. aureus (MRSA) (n=10) row: probably carried over, not new data"
-  },
-  {
-   "src": "SKIMS_2025",
-   "spec": "blood",
-   "set": "icu",
-   "org": "Staphylococcus aureus",
-   "pheno": "MRSA",
-   "drug": "vancomycin",
-   "value": 100,
-   "action": "caution",
-   "why": "the 6 figures repeat, value for value, the SKIMS Srinagar 2024 blood, icu, S. aureus (MRSA) (n=10) row: probably carried over, not new data"
-  },
-  {
-   "src": "SKIMS_2025",
-   "spec": "blood",
-   "set": "icu",
-   "org": "Staphylococcus aureus",
-   "pheno": "MRSA",
-   "drug": "linezolid",
-   "value": 100,
-   "action": "caution",
-   "why": "the 6 figures repeat, value for value, the SKIMS Srinagar 2024 blood, icu, S. aureus (MRSA) (n=10) row: probably carried over, not new data"
-  },
-  {
-   "src": "SKIMS_2025",
-   "spec": "blood",
-   "set": "icu",
-   "org": "Staphylococcus aureus",
-   "pheno": "MRSA",
-   "drug": "gentamicin",
-   "value": 60,
-   "action": "caution",
-   "why": "the 6 figures repeat, value for value, the SKIMS Srinagar 2024 blood, icu, S. aureus (MRSA) (n=10) row: probably carried over, not new data"
   },
   {
    "src": "SKIMS_2025",
@@ -6131,6 +6312,72 @@
    "value": 55.6,
    "action": "caution",
    "why": "no whole number of the 5 isolates gives 55.6%; check the source"
+  },
+  {
+   "src": "SKIMS_2021",
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "drug": "ceftriaxone",
+   "value": 20,
+   "action": "caution",
+   "why": "6 of its 8 shared figures repeat, value for value, the SKIMS Srinagar 2020 pus, wounds and body fluids, wards, Enterobacter row: probably carried over, not new data"
+  },
+  {
+   "src": "SKIMS_2021",
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "drug": "ceftazidime",
+   "value": 14,
+   "action": "caution",
+   "why": "6 of its 8 shared figures repeat, value for value, the SKIMS Srinagar 2020 pus, wounds and body fluids, wards, Enterobacter row: probably carried over, not new data"
+  },
+  {
+   "src": "SKIMS_2021",
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "drug": "piptazo",
+   "value": 40,
+   "action": "caution",
+   "why": "6 of its 8 shared figures repeat, value for value, the SKIMS Srinagar 2020 pus, wounds and body fluids, wards, Enterobacter row: probably carried over, not new data"
+  },
+  {
+   "src": "SKIMS_2021",
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "drug": "amikacin",
+   "value": 50,
+   "action": "caution",
+   "why": "6 of its 8 shared figures repeat, value for value, the SKIMS Srinagar 2020 pus, wounds and body fluids, wards, Enterobacter row: probably carried over, not new data"
+  },
+  {
+   "src": "SKIMS_2021",
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "drug": "levofloxacin",
+   "value": 30,
+   "action": "caution",
+   "why": "6 of its 8 shared figures repeat, value for value, the SKIMS Srinagar 2020 pus, wounds and body fluids, wards, Enterobacter row: probably carried over, not new data"
+  },
+  {
+   "src": "SKIMS_2021",
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "drug": "meropenem",
+   "value": 40,
+   "action": "caution",
+   "why": "6 of its 8 shared figures repeat, value for value, the SKIMS Srinagar 2020 pus, wounds and body fluids, wards, Enterobacter row: probably carried over, not new data"
   },
   {
    "src": "SKIMS_2021",
