@@ -61,9 +61,19 @@ function newId() {
  * every string is clipped before it is scanned. The clip is VISIBLE - a silently truncated identifier
  * that still looks like an identifier is worse than one that says it was cut. */
 const AUDIT_STRING_MAX = 512;
-/* How many ids ride in one `IN (...)`. The same 200 auditRowsById has used since G11, so the bound
- * parameter count stays inside what this codebase already proves D1 accepts. */
-const ID_CHUNK = 200;
+/* How many ids ride in one `IN (...)`. D1 refuses a statement with more than 100 bound parameters
+ * (developers.cloudflare.com/d1/platform/limits), and local SQLite allows 32766, so a list that
+ * passes every local test can still fail in production (audit DATA-02). 90 leaves room for the fixed
+ * parameters around the list; repository-sqlite.js enforces the same 100 so tests see it. */
+const ID_CHUNK = 90;
+const chunks = (list, n) => { const out = []; for (let i = 0; i < list.length; i += n) out.push(list.slice(i, i + n)); return out; };
+/* A status list is a short vocabulary, not ids: it is bound whole (splitting it would split the
+ * ORDER BY / LIMIT), so a list that could not fit in one statement is refused, never truncated. */
+function statusList(statuses) {
+  const want = [...new Set((Array.isArray(statuses) ? statuses : []).filter((s) => typeof s === "string"))];
+  if (want.length > ID_CHUNK) throw new RangeError(`wardsynq: ${want.length} statuses in one read (at most ${ID_CHUNK})`);
+  return want;
+}
 
 /* SCRUB THE LEAVES, NEVER THE CONTAINER, AND THE REASON IS SPECIFIC.
  *
@@ -173,7 +183,7 @@ class D1Repository {
     const max = rosterLimit(opts && opts.limit), desc = !!(opts && opts.newest);
     const after = Number(opts && opts.afterSeq) || 0;
     const before = Number(opts && opts.beforeSeq) || null;
-    const want = opts && Array.isArray(opts.statuses) ? opts.statuses.filter((s) => typeof s === "string") : null;
+    const want = opts && Array.isArray(opts.statuses) ? statusList(opts.statuses) : null;
     if (want && !want.length) return { records: [], next: null };
     const window = desc ? (before ? " AND r.seq<?" : "") : " AND r.seq>?";
     const windowArgs = desc ? (before ? [before] : []) : [after];
@@ -198,15 +208,14 @@ class D1Repository {
    * list read pays for - measured at 82,000 rows, this answers in a fraction of a millisecond where the
    * whole-type group-by takes 8-18ms, and it replaces one round trip PER ID.
    *
-   * Chunked at the same 200 ids as auditRowsById, so a ward of any size is one or two statements and
-   * the bound-parameter count stays where this codebase already proves D1 accepts it.
+   * Chunked at ID_CHUNK ids, so every statement stays under D1's 100 bound parameters whatever the
+   * size of the ward.
    */
   async latestByIds(tenantId, resourceType, ids) {
     const want = [...new Set((ids || []).map(String).filter(Boolean))];
     if (!want.length) return [];
     const out = [];
-    for (let i = 0; i < want.length; i += ID_CHUNK) {
-      const part = want.slice(i, i + ID_CHUNK);
+    for (const part of chunks(want, ID_CHUNK)) {
       const marks = part.map(() => "?").join(",");
       const r = await this.db
         .prepare(
@@ -254,7 +263,7 @@ class D1Repository {
    * widening it.
    */
   async latestByStatus(tenantId, resourceType, statuses, limit) {
-    const want = (Array.isArray(statuses) ? statuses : []).filter((s) => typeof s === "string");
+    const want = statusList(statuses);
     if (!want.length) return [];
     const max = rosterLimit(limit);
     const r = await this.db
@@ -414,13 +423,16 @@ class D1Repository {
     const out = new Map();
     const list = (keys || []).filter((k) => k && k.systemKey && k.valueNorm);
     if (!list.length) return out;
-    const where = list.map(() => "(system_key=? AND value_norm=?)").join(" OR ");
-    const binds = [tenantId];
-    for (const k of list) binds.push(k.systemKey, k.valueNorm);
-    const r = await this.db
-      .prepare(`SELECT system_key, value_norm, patient_id FROM wardsynq_patient_identifier WHERE tenant_id=? AND (${where})`)
-      .bind(...binds).all();
-    for (const row of r.results || []) out.set(`${row.system_key}|${row.value_norm}`, row.patient_id);
+    // Two parameters per key, so half a chunk of keys per statement.
+    for (const part of chunks(list, Math.floor(ID_CHUNK / 2))) {
+      const where = part.map(() => "(system_key=? AND value_norm=?)").join(" OR ");
+      const binds = [tenantId];
+      for (const k of part) binds.push(k.systemKey, k.valueNorm);
+      const r = await this.db
+        .prepare(`SELECT system_key, value_norm, patient_id FROM wardsynq_patient_identifier WHERE tenant_id=? AND (${where})`)
+        .bind(...binds).all();
+      for (const row of r.results || []) out.set(`${row.system_key}|${row.value_norm}`, row.patient_id);
+    }
     return out;
   }
 
@@ -433,15 +445,7 @@ class D1Repository {
     const owners = await this._identifierOwners(tenantId, keys);
     const ids = [...new Set(owners.values())];
     if (!ids.length) return [];
-    const marks = ids.map(() => "?").join(",");
-    const r = await this.db
-      .prepare(
-        "SELECT r.body FROM wardsynq_record r " +
-        "JOIN (SELECT id, MAX(version) AS v FROM wardsynq_record WHERE tenant_id=? AND resource_type='Patient' AND id IN (" + marks + ") GROUP BY id) m " +
-        "ON m.id = r.id AND m.v = r.version WHERE r.tenant_id=? AND r.resource_type='Patient'"
-      )
-      .bind(tenantId, ...ids, tenantId).all();
-    return (r.results || []).map(parseBody);
+    return this.latestByIds(tenantId, "Patient", ids);
   }
 
   /**
@@ -692,11 +696,15 @@ class D1Repository {
   async auditRowsById(tenantId, ids) {
     const list = [...new Set((ids || []).map(String))].slice(0, 200);
     if (!list.length) return [];
-    const r = await this.db
-      .prepare(`SELECT a.id, a.ts, a.actor, a.action, a.resource_counts, a.scope, a.patient_ref_hash, a.outcome, c.chain_seq FROM connect_audit_event a LEFT JOIN wardsynq_audit_chain c ON c.audit_id=a.id AND c.tenant_id=a.tenant_id WHERE a.tenant_id=? AND a.id IN (${list.map(() => "?").join(",")})`)
-      .bind(tenantId, ...list).all();
+    const rows = [];
+    for (const part of chunks(list, ID_CHUNK)) {
+      const r = await this.db
+        .prepare(`SELECT a.id, a.ts, a.actor, a.action, a.resource_counts, a.scope, a.patient_ref_hash, a.outcome, c.chain_seq FROM connect_audit_event a LEFT JOIN wardsynq_audit_chain c ON c.audit_id=a.id AND c.tenant_id=a.tenant_id WHERE a.tenant_id=? AND a.id IN (${part.map(() => "?").join(",")})`)
+        .bind(tenantId, ...part).all();
+      rows.push(...(r.results || []));
+    }
     const json = (v) => { try { return v == null ? null : JSON.parse(v); } catch { return null; } };
-    return (r.results || []).map((row) => ({ id: row.id, ts: row.ts, actor: row.actor, action: row.action, resourceCounts: json(row.resource_counts),
+    return rows.map((row) => ({ id: row.id, ts: row.ts, actor: row.actor, action: row.action, resourceCounts: json(row.resource_counts),
       scope: json(row.scope), patientRefHash: row.patient_ref_hash, outcome: row.outcome, chainSeq: row.chain_seq == null ? null : Number(row.chain_seq) }));
   }
 }
