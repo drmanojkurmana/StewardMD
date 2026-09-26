@@ -392,6 +392,22 @@
   }
 
   var M39_MIN = 30;
+  /* Resistance that is exceptional: a figure this low is far more often a method or reporting error
+   * than a real rate, so it needs confirmation before it enters an antibiogram (CLSI M39 asks for
+   * unusual results to be verified). Shown with a caution, never pooled or used by reasoning. */
+  // Deliberately not here: linezolid resistance in E. faecium and in coagulase-negative
+  // staphylococci, which Indian surveillance (ICMR AMRSN) documents as a real, rising problem.
+  var TYPHOIDAL = { salmonella_typhi: 1, salmonella_paratyphi: 1, salmonella_enteric: 1 };
+  function unusualReason(org, d, v) {
+    var o = ORGS[org] || {};
+    if (o.staph && d === "vancomycin" && v < 90) return "vancomycin-non-susceptible staphylococci are exceptional; a figure this low usually reflects a method or reporting error (disk diffusion is not valid for vancomycin and staphylococci) and needs confirmation by MIC";
+    if (org === "saureus" && d === "linezolid" && v < 90) return "linezolid resistance this common in S. aureus is exceptional; a figure this low needs confirmation by MIC";
+    if (org === "spneumoniae" && (d === "vancomycin" || d === "linezolid") && v < 95) return "vancomycin- or linezolid-non-susceptible pneumococci are essentially unreported; a figure this low needs confirmation";
+    if (org === "strep_bhs" && (d === "penicillin" || d === "ampicillin" || d === "amoxicillin") && v < 95) return "penicillin-non-susceptible beta-haemolytic streptococci are essentially unreported; a figure this low needs confirmation";
+    if (TYPHOIDAL[org] && (d === "meropenem" || d === "imipenem" || d === "ertapenem") && v < 95) return "carbapenem resistance in typhoidal Salmonella is exceptional; a figure this low needs confirmation";
+    return null;
+  }
+
   /* Validate one antibiogram row. Input: {org (key), pheno, spec, set, n, s:{drug:%S},
    * nt:{drug:tested}, approx:[drug]}. Output: {cells:{drug:{s, nt, act, why}}, flags:[...]}.
    * act: "keep" | "intrinsic" (shown as expected resistance, no number) | "hide" (not
@@ -437,6 +453,8 @@
       if ((d === "colistin" || d === "polymyxin_b") && v < 50 && (orgGroup(org) === "entero" || orgGroup(org) === "nonferm")) {
         c.act = "caution"; c.why = (v === 0 ? "0%" : "a low figure") + " for colistin or polymyxin B usually reflects the breakpoint system (CLSI has no susceptible category, only intermediate and resistant) rather than resistance; confirm with a broth microdilution MIC"; return;
       }
+      var un = unusualReason(org, d, v);
+      if (un) { c.act = "caution"; c.why = un; return; }
     });
     // Paired agents that should agree. Cefotaxime and ceftriaxone have the same activity
     // against Enterobacterales, and imipenem and meropenem nearly so for E. coli and

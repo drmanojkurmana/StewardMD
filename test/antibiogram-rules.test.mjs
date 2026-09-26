@@ -226,6 +226,19 @@ test("colistin 0% from a CLSI laboratory is a caution, not 100% resistance", () 
   assert.equal(row({ org: "pmirabilis", s: { colistin: 0 } }).cells.colistin.act, "intrinsic", "Proteus is intrinsically resistant");
 });
 
+test("exceptional resistance is a caution; resistance India really has is not", () => {
+  const c = (org, s) => row({ org, spec: "blood", s }).cells;
+  assert.equal(c("saureus", { vancomycin: 67 }).vancomycin.act, "caution");          // disk-diffusion artefact, not VRSA
+  assert.equal(c("shaemolyticus", { vancomycin: 63 }).vancomycin.act, "caution");
+  assert.equal(c("saureus", { linezolid: 43.4 }).linezolid.act, "caution");
+  assert.equal(c("salmonella_typhi", { meropenem: 65.5 }).meropenem.act, "caution");
+  assert.equal(c("strep_bhs", { penicillin: 87 }).penicillin.act, "caution");
+  assert.equal(c("saureus", { vancomycin: 99.5, linezolid: 99 }).vancomycin.act, "keep");
+  // Documented and rising in Indian surveillance: shown as figures, never hidden behind a caution.
+  assert.equal(c("efaecium", { linezolid: 84.4 }).linezolid.act, "keep");
+  assert.equal(c("shaemolyticus", { linezolid: 70 }).linezolid.act, "keep");
+});
+
 test("species kept apart where their intrinsic resistance differs", () => {
   assert.equal(R.canonOrg("Klebsiella oxytoca").key, "koxytoca");
   assert.equal(R.canonOrg("Enterobacter aerogenes").key, "kaerogenes");
