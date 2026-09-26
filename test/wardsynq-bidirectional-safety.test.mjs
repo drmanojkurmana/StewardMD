@@ -389,6 +389,41 @@ test("8b. the same entries as a COLLECTION (not a transaction) file entry by ent
   assert.match(JSON.stringify(r.entry), /conflict-encounter-mismatch/);
 });
 
+test("OPS-13/F13: an UNSUPPORTED-type entry gets a real 400 response entry, never silently dropped", async () => {
+  seed(); await grant("lab-a");
+  await localPatient("pat-1", "MRN-1", "First Patient");
+  await localPatient("pat-2", "MRN-2", "Second Patient");
+  await push(bundle("MRN-2", [{ resourceType: "Encounter", id: "EXT-ENC-9", status: "in-progress", class: { code: "IMP" }, subject: { reference: "Patient/EXT-1" } }], { id: "b-admit" }));
+
+  // Two unsupported types (Procedure, MolecularSequence) plus a good and a conflicting Observation.
+  // Before the fix, an UNSUPPORTED entry got NO response entry at all - only a bundle-level `issues`
+  // tag - so a sender posting [Patient, Procedure, Observation, Observation] got back at most 3
+  // entries for 4 requests, and a client matching response.entry[i] to request.entry[i] by position
+  // (the R4 contract) misattributed every outcome after the drop.
+  const tx = {
+    resourceType: "Bundle", type: "collection", id: "b-order",
+    entry: [
+      { resource: { resourceType: "Patient", id: "EXT-1", identifier: [{ system: "urn:test:mrn", type: { coding: [{ code: "MR" }] }, value: "MRN-1" }], name: [{ family: "Testcase", given: ["Feed"] }], birthDate: "1980-01-01", gender: "female" } },
+      { resource: { resourceType: "Procedure", id: "PROC-1", status: "completed", subject: { reference: "Patient/EXT-1" } } },
+      { resource: obs("OBS-GOOD") },
+      { resource: { resourceType: "MolecularSequence", id: "SEQ-1" } },
+      { resource: obs("OBS-BAD", { encounter: "EXT-ENC-9" }) },
+    ],
+  };
+  const r = await push(tx);
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  // Patient is matched/linked to the existing local patient (rebind), so it writes no Patient of its
+  // own and gets no separate entry - unaffected, pre-existing behaviour. The two UNSUPPORTED types
+  // now each get their own entry (used to be zero of them), and in their OWN relative request order.
+  const unsupported = r.entry.filter((e) => e.response.status === "400 Bad Request");
+  assert.equal(unsupported.length, 2, "neither unsupported type was silently dropped");
+  assert.match(unsupported[0].response.outcome.issue[0].diagnostics, /Procedure is not a resource WardSynQ imports/, "Procedure (request position 1) before MolecularSequence (position 3)");
+  assert.match(unsupported[1].response.outcome.issue[0].diagnostics, /MolecularSequence is not a resource WardSynQ imports/);
+  assert.equal(r.entry.length, 4, "2 unsupported + the good write + the conflict");
+  assert.ok(r.entry.some((e) => e.response.status === "201 Created"), "OBS-GOOD still lands");
+  assert.ok(r.entry.some((e) => e.response.status === "409 Conflict" && /conflict-encounter-mismatch/.test(e.response.outcome.issue[0].diagnostics)), "OBS-BAD is still held, not silently dropped either");
+});
+
 /* ---- 9. replay ------------------------------------------------------------------------------ */
 
 test("9. REPLAY: the identical message twice writes once; a CHANGED message is judged on its own merits", async () => {
