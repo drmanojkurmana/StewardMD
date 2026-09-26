@@ -781,7 +781,7 @@
 
   // ---- Edit prices & flags (live KV overrides) ----
   var BC_PRICE=[["PRO_PRICE_MONTHLY","Pro /mo"],["PRO_PRICE_ANNUAL","Pro /yr"],["PHYSICIAN_PRICE_MONTHLY","Physician /mo"],["PHYSICIAN_PRICE_ANNUAL","Physician /yr"],["PHYSICIANPRO_PRICE_MONTHLY","Physician Pro /mo"],["PHYSICIANPRO_PRICE_ANNUAL","Physician Pro /yr"],["STUDENT_PRICE_MONTHLY","Trainee /mo"],["STUDENT_PRICE_ANNUAL","Trainee /yr"],["CORESIDENT_PRICE_MONTHLY","Co-Resident /mo"],["ONCO_ADDON_MONTHLY","Onco add-on /mo"],["CLINIC_ADDON_MONTHLY","Extra clinic /mo"],["FOUNDING_PRICE_YEAR","Founding /yr"],["TOKENS_BOOST","Tokens Boost"],["TOKENS_PLUS","Tokens Plus"],["TOKENS_POWER","Tokens Power"]];
-  var BC_FLAG=[["AI_COST_CAP_ON","AI rupee cost cap"],["DEVICE_LOCK_ON","Device-share lock"],["MAIK_ENFORCE_CAPS","AI per-module caps"],["FEATURES_ON","Feature gating"]];
+  var BC_FLAG=[["AI_COST_CAP_ON","AI rupee cost cap"],["DEVICE_LOCK_ON","Device-share lock"],["MAIK_ENFORCE_CAPS","AI per-module caps"],["FEATURES_ON","Feature gating"],["TRIAL_ONCE_ON","Free week once per doctor (reg, phone, device)"]];
   var _bcEff={};
   function bcFlat(pl){ pl=pl||{}; var t=pl.tiers||{},a=pl.addons||{},tk=pl.tokens||{}; return {
     PRO_PRICE_MONTHLY:t.pro&&t.pro.amount, PRO_PRICE_ANNUAL:t.pro&&t.pro.annual,
@@ -797,7 +797,7 @@
       if(x.s!==200){ $("bcEditor").innerHTML='<div class="hint">'+(x.s===401?"Not an owner.":"Could not load.")+'</div>'; return; }
       var cfg=(x.d&&x.d.cfg)||{flags:{},prices:{}}; _bcEff=bcFlat(x.d&&x.d.effective);
       var flH=BC_FLAG.map(function(f){ var cur=cfg.flags&&cfg.flags[f[0]]; function opt(v,l){ return '<option value="'+v+'"'+(String(cur==null?"":cur)===v?" selected":"")+'>'+l+'</option>'; }
-        return '<div style="display:flex;align-items:center;gap:8px;margin:4px 0"><span style="flex:1;font-size:12.5px">'+f[1]+'</span><select data-fkey="'+f[0]+'" style="padding:6px">'+opt("","Default")+opt("1","On")+opt("0","Off")+'</select></div>'; }).join("");
+        return '<div style="display:flex;align-items:center;gap:8px;margin:4px 0"><span style="flex:1;font-size:12.5px">'+f[1]+'</span><select data-fkey="'+f[0]+'" style="padding:6px">'+opt("","Default")+opt("1","On")+(f[0]==="TRIAL_ONCE_ON"?opt("shadow","Shadow (log only)"):"")+opt("0","Off")+'</select></div>'; }).join("");
       var promoCur=(cfg.flags&&cfg.flags.PRO_FREE_UNTIL)||"";
       flH+='<div style="display:flex;align-items:center;gap:8px;margin:6px 0"><span style="flex:1;font-size:12.5px">Launch promo until (blank = env; past date = end promo now)</span><input id="bcPromo" value="'+esc(promoCur)+'" placeholder="env default" style="width:150px;padding:6px"></div>';
       var prH='<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 14px">'+BC_PRICE.map(function(p){ var eff=_bcEff[p[0]], val=(eff!=null?Math.round(eff/100):""); return '<div style="display:flex;align-items:center;gap:6px"><span style="flex:1;font-size:12px">'+p[1]+'</span>₹<input data-pkey="'+p[0]+'" value="'+val+'" inputmode="numeric" style="width:74px;padding:5px"></div>'; }).join("")+'</div>';

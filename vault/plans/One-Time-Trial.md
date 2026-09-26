@@ -1,7 +1,7 @@
 ---
 tags: [plan, billing, identity, anti-abuse]
-status: PROPOSED (awaiting owner approval) - 2026-09-26
-flag: TRIAL_ONCE_ON (proposed, KV, default OFF until approved)
+status: IMPLEMENTED behind TRIAL_ONCE_ON (default OFF) - 2026-09-26. Owner approved the recommendations; see Decisions 2026-09-26
+flag: TRIAL_ONCE_ON (KV, default OFF; 1 / shadow)
 ---
 # Plan: the 7-day free Pro trial is once per doctor, not once per account
 
@@ -157,3 +157,18 @@ row points at that uid, so nothing changes. This is exactly "old account already
   verification the only door?
 - **D5. iOS DeviceCheck**: worth adding now (needs an Apple DeviceCheck key in the Apple developer
   account), or Keychain UUID only for v1?
+
+## 8. As built (2026-09-26)
+Owner: "go with your recommendations". D1 IP signal only; D2 block the trial, not the account; D3 pending
+keeps 7 days through the ledger; D5 no DeviceCheck in v1. D4 changed on reading the code: "Skip for now"
+writes no claim (it is the free plan, not Pro), so it is NOT gated.
+- Server: `functions/_trial_ledger.js`; doors in `verify-doctor.js` (auto-verify `weekPatch`, pending
+  `gateTrial`), `verifications/[[path]].js` (approve + 409 on a claimed reg unless `force`, `trial-backfill`),
+  `auth/[[path]].js` (phone verified after the week: `phoneTrialPatch`); `_entitlement.js` `trialDenied`;
+  `_verify_claim.js` never heals a denied week.
+- Client: `device-id.js` `getHwId()`/`hwHeaders()` (header `X-SMD-HW`), sent by `verify.js` and
+  `phone-verify.js`; `pro-notice.js` kind `used` -> paywall; admin Billing flag row with a Shadow option.
+- Tests: `test/trial-ledger.test.mjs`, `test/trial-once-routes.test.mjs`, `test/pro-notice.test.mjs`.
+- NOT done here (needs a Mac + phones): add `@capacitor/device` (`npm i @capacitor/device`, `npx cap sync`,
+  rebuild both apps). Until then every device sends the soft `dev-` id and only reg + phone are hard locks.
+  iOS Keychain id (survives reinstall) is a follow-up; the Device plugin id on iOS resets on uninstall.

@@ -57,6 +57,10 @@ for the unverified/pending reasons, so no call site can open the wrong door.
   Android resizes the layout viewport itself, so the same code is a no-op there. Harness:
   `SMD_PHONE_VERIFY._fit({height,offsetTop})` injects a viewport (headless Chrome has no keyboard);
   `_fit(null)` clears it. Covered in `test/run-phone-verify-ui.mjs`.
+- **The free Pro week is once per doctor (2026-09-26, flag `TRIAL_ONCE_ON`, default OFF).** Ledger in
+  `functions/_trial_ledger.js`: reg no, verified phone and native device id that already had a week on
+  another account give the new account `trialDenied` (verified, no week, reason `trial-used`). IP and the
+  localStorage id are soft. "Skip for now" (free plan) is not gated. See [[One-Time-Trial]] and Decisions.
 - **OTP send budget: 3 per account per day, 2 WhatsApp + 1 SMS (2026-09-26).** Owner: "max 3 otp
   (wtsapp 2 plus 1 sms) tries per head". `_phone_otp.js` `WA_MAX`/`SMS_MAX`/`SEND_WINDOW`, record
   `otp:phone:sends:<uid>`, counted on the channel that CARRIED the code (auto that fell back spends
