@@ -77,11 +77,12 @@ test("diagram.facialpalsy illustrates UMN forehead sparing vs LMN Bell's palsy",
   // UMN stroke mode
   const umnHtml = D.render("diagram.facialpalsy", { mode: "umn" });
   assert.ok(umnHtml.includes("FOREHEAD SPARED"), "UMN mode must highlight forehead sparing");
-  assert.ok(umnHtml.includes("bilateral"), "UMN note must explain bilateral cortical innervation");
+  assert.ok(/bilateral/i.test(umnHtml), "UMN note must explain bilateral cortical innervation");   // the note writes it "BILATERAL" for emphasis
 
   // LMN Bell's mode
   const lmnHtml = D.render("diagram.facialpalsy", { mode: "lmn" });
-  assert.ok(lmnHtml.includes("Wrinkles LOST"), "LMN mode must highlight loss of forehead wrinkles");
+  // The label on the paralysed side reads "LOST" (shortened to fit the face); the note names the forehead wrinkles.
+  assert.ok(/>LOST</.test(lmnHtml) && /forehead wrinkles/i.test(lmnHtml), "LMN mode must highlight loss of forehead wrinkles");
   assert.ok(lmnHtml.includes("Bell's phenomenon"), "LMN mode must describe Bell's phenomenon");
 });
 
