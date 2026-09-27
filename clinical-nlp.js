@@ -319,6 +319,13 @@
       if ((m2 = norm.match(/\b(?:bilateral|bibasal|bibasilar|both bases)\b[^.;,]{0,40}?\b(?:crackles|crepitations|creps|crepts|crackle)\b/))) consider("bilateralCrackles", m2.index, "compound", m2[0]);
       // round 10: chest pain or tightness brought on by effort, either order
       if ((m2 = norm.match(/\b(?:chest (?:pain|tightness|heaviness|discomfort)|angina)\b[^.;,]{0,40}?\b(?:exertion|exercise|walking|climbing|stairs|effort)\b|\b(?:on exertion|exertional|while walking|climbing stairs|on climbing)\b[^.;,]{0,40}?\bchest (?:pain|tightness|heaviness|discomfort)\b/))) consider("exertionalChestPain", m2.index, "compound", m2[0]);
+      // round 27: pressure-type ischaemic pain ("crushing central chest pain", "retrosternal pressure radiating to the left arm
+      // and jaw"): the finding is "Exertional / pressure chest pain". Radiation to the back is left to dissection.
+      var pcre = /\b(?:crushing|pressure[- ]like|pressing|squeezing|constricting|vice[- ]like|band[- ]like|heavy)\s+(?:[a-z-]+,?\s+){0,2}?(?:chest|retrosternal|substernal|precordial)\s+(?:pain|discomfort|pressure|heaviness|tightness)\b|\b(?:crushing|pressure[- ]like|squeezing|heavy)\s+(?:pain|discomfort|sensation|feeling|ache)\s+(?:in|over|across|behind)\s+(?:the\s+)?(?:(?:lower|central|left|mid|upper)\s+)?(?:chest|sternum|precordium)\b|\b(?:chest|retrosternal|substernal)\s+(?:heaviness|pressure)\b|\b(?:chest|retrosternal|substernal)\s+(?:pain|discomfort|pressure|heaviness|tightness)\b[^.;]{0,40}?\bradiat\w*\s+(?:in)?to\s+(?:the\s+)?(?:left\s+|both\s+)?(?:arm|arms|jaw)\b/g;
+      while ((m2 = pcre.exec(norm))) consider("exertionalChestPain", m2.index, "compound", m2[0]);
+      // round 27: polymyalgic girdle pain ("bilateral shoulder and hip girdle pain and stiffness")
+      var gdre = /\b(?:shoulder|hip|pelvic)\s+girdles?\b|\b(?:both|bilateral)\s+shoulders?\b[^.;]{0,50}?\b(?:hips?|thighs?)\b/g;
+      while ((m2 = gdre.exec(norm))) consider("polyarthralgia", m2.index, "compound", m2[0]);
       // round 11: severe pain in the abdomen, loin or flank said with words between ("severe, boring epigastric pain")
       if ((m2 = norm.match(/\b(?:severe|excruciating|intense|unbearable|agoni[sz]ing|worst)\b[^.;]{0,25}?\b(?:abdominal|epigastric|loin|flank|periumbilical|umbilical|belly|upper abdominal|lower abdominal)\s+(?:pain|colic)\b/))) consider("severeAbdominalPain", m2.index, "compound", m2[0]);
       // round 11: a swollen joint named ("right knee is markedly swollen", "first MTP joint is swollen")
@@ -326,6 +333,17 @@
       // round 21: an ulcer named on the foot ("ulcer over the right forefoot", "plantar ulcer")
       var fure = /\bulcers?\b[^.;,]{0,30}?\b(?:foot|feet|forefoot|toe|toes|heel|plantar|metatarsal|sole)\b|\b(?:foot|forefoot|toe|heel|plantar)\s+ulcers?\b/g;
       while ((m2 = fure.exec(norm))) consider("diabeticFootUlcer", m2.index, "compound", m2[0]);   // every mention, as for admission days
+      // round 27: one swollen, tender calf said with words between ("right calf is mildly swollen and tender"); every mention
+      var ulre = /\b(?:right|left|one|unilateral)\s+(?:calf|leg|lower limb|lower leg|thigh)\b[^.;,]{0,30}?\b(?:swollen|swelling|oedema|edema|oedematous|edematous)\b/g;
+      while ((m2 = ulre.exec(norm))) consider("legSwellingUnilateral", m2.index, "compound", m2[0]);
+      var ctre = /\bcalf\b[^.;]{0,30}?\btender(?:ness)?\b|\btender(?:ness)?\s+(?:over|in|of)\s+(?:the\s+)?(?:right\s+|left\s+)?calf\b/g;
+      while ((m2 = ctre.exec(norm))) consider("calfTenderness", m2.index, "compound", m2[0]);
+      // round 27: the overdose scene ("found drowsy beside empty blister packs", "possible sedative co-ingestion", "found
+      // unresponsive, a used syringe beside him")
+      var odre = /\b(?:empty|emptied)\s+(?:[a-z-]+\s+){0,3}?(?:blisters?|blister packs?|strips?|packets?|pill bottles?|pills|tablets?|medication|medicines?)\b|\bco-?ingestion\b/g, odn = 0;
+      while ((m2 = odre.exec(norm))) { consider("drugOverdose", m2.index, "compound", m2[0]); odn++; }
+      if (!odn && /\b(?:paraphernalia|syringes?|heroin|fentanyl|opioids?|opiates?)\b/.test(norm)) { var fdre = /\bfound\b[^.;]{0,40}?\b(?:unresponsive|unrousable|unarousable|obtunded|unconscious|slumped|collapsed)\b/g;
+        while ((m2 = fdre.exec(norm))) consider("drugOverdose", m2.index, "compound", m2[0]); }
       // round 10: 48 hours or more into a hospital stay (hospital-acquired territory)
       var hdre = /\b(?:admitted|hospitali[sz]ed|intubated|ventilated)\s+(\d{1,2}|two|three|four|five|six|seven|eight|nine|ten)\s*days?\s*(?:ago|earlier|previously|before)\b|\b(?:hospital|post-?operative|ward|icu)\s+day\s+(\d{1,2})\b|\bday\s+(\d{1,2})\s+of\s+(?:(?:a|an|the|his|her)\s+)?(?:[a-z-]+\s+){0,2}(?:admission|ventilation|hospital stay|stay)\b/g;
       while ((m2 = hdre.exec(norm))) {   // every mention (round 19): the first may be negated or under 48 h
@@ -393,6 +411,9 @@
       else if (v2 && e.method !== "vitals" && STOPPED_BEFORE_V2.test(norm.slice(Math.max(0, e.idx - 30), e.idx))) r.temporality = "resolved";
       // round 8: "fever settled on day 3" reports a finding that has gone
       else if (v2 && e.method !== "vitals" && RESOLVED_AFTER_V2.test(norm.slice(e.idx + (e.srcText || "").length, e.idx + (e.srcText || "").length + 40))) r.temporality = "resolved";
+      // round 27: a leftover sign ("residual basal consolidation, resolving", "crackles from resolving infection") is past
+      else if (v2 && e.method !== "vitals" && (/\b(?:residual|healed)\s+(?:[a-z\/-]+\s+){0,3}$/.test(norm.slice(Math.max(0, e.idx - 40), e.idx)) ||
+          /^[^.;]{0,6}(?:,\s*|\s+(?:from|of|due to)\s+(?:a\s+|the\s+)?)resolving\b/.test(norm.slice(e.idx + (e.srcText || "").length, e.idx + (e.srcText || "").length + 40)))) r.temporality = "resolved";
       return r;
     }
     // engine gets it only if present (or a possible finding to consider) AND either current or a background/chronic condition
@@ -440,6 +461,20 @@
         findings.push({ canonicalFindingId: key, displayLabel: label, polarity: "present", temporality: "current", certainty: "explicit", sourceText: "", confidence: 0.8,
           extractionMethod: "deterministic", requiresConfirmation: false, clinicalPriority: "routine" }); } };
       if (demo.age > 50) addDerived("ageOver50", "Age > 50");
+      // round 27: CURB-65 of 3 or more in a coughing patient is severe pneumonia (confusion, urea > 7 mmol/L, RR >= 30,
+      // SBP < 90 or DBP <= 60, age >= 65). Every part must be stated; a missing value counts as normal. The score is for
+      // pneumonia, so the chest must say so (crackles, consolidation); in known COPD only consolidation or the word counts.
+      var pna = present.indexOf("consolidation") >= 0 || (/\bpneumonia\b/.test(norm) && !/\b(?:no|not|without|exclud\w*|r\/o|rule out|ruled out|against)\b[^.;]{0,25}\bpneumonia\b|\bpneumonia\b[^.;]{0,20}\b(?:excluded|ruled out|unlikely)\b/.test(norm));
+      if (valid.severeCriteria && present.indexOf("cough") >= 0 && (pna || (present.indexOf("crepitations") >= 0 && present.indexOf("knownCOPD") < 0))) {
+        var curb = 0, um = pick(/\b(bun|blood urea nitrogen|(?:blood |serum )?urea)\b(?:\s*(?:level|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-)?\s*(\d{1,3}(?:\.\d)?)\s*(mg|mmol)?/,
+          function (m) { var u = +m[2], mg = m[3] ? /mg/.test(m[3]) : /bun|nitrogen/.test(m[1]) || u > 40; return mg ? (/bun|nitrogen/.test(m[1]) ? u : u / 2.14) / 2.8 : u; }, 1), rrm = pick(RR_RE, V1, 1);
+        if (present.indexOf("alteredSensorium") >= 0) curb++;
+        if (um) { var uu = +um[2], umg = um[3] ? /mg/.test(um[3]) : /bun|nitrogen/.test(um[1]) || uu > 40; if ((umg ? (/bun|nitrogen/.test(um[1]) ? uu : uu / 2.14) / 2.8 : uu) > 7) curb++; }
+        if (rrm && +rrm[1] >= 30) curb++;
+        if (present.indexOf("hypotension") >= 0) curb++;
+        if (demo.age >= 65) curb++;
+        if (curb >= 3) addDerived("severeCriteria", "Severe pneumonia (CURB-65 " + curb + ")");
+      }
       // round 25: with thirst and no burning, "frequent urination" is polyuria (hyperglycaemia), not a bladder symptom
       var fqi = present.indexOf("urinaryFrequency");
       if (fqi >= 0 && valid.polyuriaPolydipsia && present.indexOf("dysuria") < 0 && /\b(?:thirst\w*|polydipsia|polyuria|drinking (?:a lot|large amounts))\b/.test(norm)) {

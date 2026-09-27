@@ -352,3 +352,35 @@ test("a non- prefix negates the fused word", () => {
   assert.ok(!nc.present.includes("purulentSputum"));
   assert.ok(r("a non-blanching rash on the legs").present.includes("petechialRash"));
 });
+
+// round 27: pressure-type chest pain, girdle pain, CURB-65, a swollen tender calf, the overdose scene, leftover signs
+test("round 27 readings", () => {
+  const c27 = { valid: { exertionalChestPain: 1, chestPain: 1, polyarthralgia: 1, severeCriteria: 1, cough: 1, alteredSensorium: 1, hypotension: 1, tachypnea: 1,
+    crepitations: 1, consolidation: 1, knownCOPD: 1, legSwellingUnilateral: 1, calfTenderness: 1, drugOverdose: 1, ageOver50: 1 }, labels: {}, numeric: {}, v2: true,
+    syn: { chestPain: ["chest pain"], cough: ["cough"], alteredSensorium: ["confused", "unresponsive", "drowsy"], crepitations: ["crackles"], consolidation: ["consolidation"],
+      knownCOPD: ["copd"], drugOverdose: ["overdose"] } };
+  const r = (t) => NLP.extract(t, c27);
+  const p = (t) => r(t).present;
+  assert.ok(p("Central crushing chest pain radiating to left arm for 1 hour").includes("exertionalChestPain"));
+  assert.ok(p("retrosternal pressure-like chest pain radiating to the jaw").includes("exertionalChestPain"));
+  assert.ok(p("a dull, heavy discomfort across the lower chest").includes("exertionalChestPain"));
+  assert.ok(!p("heavy smoker, chest clear, chest pain worse on inspiration").includes("exertionalChestPain"));
+  assert.ok(!p("tearing chest pain radiating to the back").includes("exertionalChestPain"));
+  assert.ok(r("no crushing chest pain").absent.includes("exertionalChestPain"));
+  assert.ok(p("severe bilateral shoulder and hip girdle pain and stiffness").includes("polyarthralgia"));
+  // CURB-65 >= 3 needs a pneumonia chest; a clear chest or COPD with crackles alone does not score
+  assert.ok(p("72 year old with cough, crackles, now confused. bp 82/50, rr 34").includes("severeCriteria"));
+  assert.ok(!p("72 year old with cough, now confused, bp 82/50, rr 34. Film clear, excluding pneumonia").includes("severeCriteria"));
+  assert.ok(!p("72 year old with copd, cough, crackles, confused, bp 82/50, rr 34").includes("severeCriteria"));
+  assert.ok(!p("58 year old with cough, crackles. rr 32, bp 120/80, urea 9").includes("severeCriteria"));
+  assert.ok(p("70 year old with cough, consolidation, confused, rr 24, BUN 30 mg/dL").includes("severeCriteria"));
+  const calf = p("Right calf is mildly swollen and tender compared to the left");
+  assert.ok(calf.includes("legSwellingUnilateral") && calf.includes("calfTenderness"));
+  assert.ok(!p("both legs are swollen to the knees").includes("legSwellingUnilateral"));
+  assert.ok(p("Found drowsy at home beside empty medication blister packs").includes("drugOverdose"));
+  assert.ok(p("Found unresponsive. A used syringe was beside him").includes("drugOverdose"));
+  assert.ok(!p("found unresponsive by his wife; on insulin").includes("drugOverdose"));
+  assert.ok(!p("minor residual right basal consolidation, resolving").includes("consolidation"));
+  assert.ok(!p("a few basal crackles from resolving infection").includes("crepitations"));
+  assert.ok(p("right basal crackles, consolidation on CXR").includes("consolidation"));
+});
