@@ -1043,9 +1043,11 @@
     return { inf: inf, ni: ni };
   }
 
-  /* smd_rank_v3 (default OFF): Phase 3 of kb/validation/PLAN-DX-ABX-10.md. ?rankv3=1|0 overrides.
-   * ORDER only: adjusts rankScore, never score, so the infection gate, the antibiotic decision and
-   * every displayed confidence are unchanged. Three parts, fitted on the TRAIN split, checked on dev:
+  /* smd_rank_v3 (default ON since 2026-09-27, owner decision; localStorage "0" or ?rankv3=0 keeps the
+   * classic order): Phase 3 of kb/validation/PLAN-DX-ABX-10.md. ?rankv3=1|0 overrides.
+   * ORDER only: adjusts rankScore, never score, so the gate class and every displayed confidence are
+   * unchanged. Under smd_gate_v2 the leading infection (and so its antibiotic answer) follows this order,
+   * and an excluded rival cannot hold antibiotics on. Three parts, fitted on the TRAIN split, checked on dev:
    *  1. parsimony: + 2 x the specificity (global IDF) of the patient's non-generic findings a
    *     diagnosis explains, capped at 40, so a diagnosis that accounts for the specific picture beats
    *     one that matched only generic findings ("fever, cough" -> CAP over a TB picture);
@@ -1059,8 +1061,8 @@
     try {
       var q = /[?&]rankv3=([01])\b/.exec((window.location && location.search) || "");
       if (q) return q[1] === "1";
-      return localStorage.getItem("smd_rank_v3") === "1";
-    } catch (e) { return false; }
+      return localStorage.getItem("smd_rank_v3") !== "0";
+    } catch (e) { return true; }
   }
   var RANK_V3_DQ = {
     CAP: function (f) { return f.hypotension || f.vasopressorRequirement || f.mechanicalVentilation || f.hospitalDay48 || (f.subacuteOnset && (f.weightLoss || f.nightSweats || f.prolongedCough2Weeks)); },

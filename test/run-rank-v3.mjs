@@ -103,6 +103,16 @@ try {
   ok(on.bleedLowPlt.order[0] === "itp", `on  · bleeding + low platelets alone, afebrile: ITP leads (${on.bleedLowPlt.order.slice(0, 3).join(", ")})`);
   ok(pos("gpaCavity", "vasculitis") < pos("gpaCavity", "LUNG_ABSCESS"), `on  · cavity + haemoptysis + kidney involvement: vasculitis above lung abscess (#${pos("gpaCavity", "vasculitis")} vs #${pos("gpaCavity", "LUNG_ABSCESS")})`);
   ok(pos("focalNow", "ischemic_stroke") < pos("focalNow", "tia"), `on  · a focal deficit still present: stroke above TIA (#${pos("focalNow", "ischemic_stroke")} vs #${pos("focalNow", "tia")})`);
+  // default ON since 2026-09-27 (owner decision); localStorage "0" is the opt-out
+  ok(await load(BASE + "?gatev2=0"), "app + KB load without ?rankv3");
+  ok(await ev(`return DX._rankV3()`) === true, "default · DX._rankV3() is on without any flag");
+  await ev(`localStorage.setItem("smd_rank_v3","0"); return 1`);
+  ok(await load(BASE + "?gatev2=0"), "reload with localStorage smd_rank_v3=0");
+  ok(await ev(`return DX._rankV3()`) === false, "opt-out · localStorage \"0\" turns v3 off");
+  const optOut = await run(CASES.feverOnly);
+  ok(optOut.order[0] === "HLH", `opt-out · classic order again (fever alone leads with ${optOut.order[0]})`);
+  await ev(`localStorage.removeItem("smd_rank_v3"); return 1`);
+  ok(await load(BASE + "?rankv3=1&gatev2=0"), "back to ?rankv3=1");
   const neg = await run(CASES.headache, ["neckStiffness"]);
   // a denied strong finding costs its diagnoses rank (12 each, at most 30), never score; absent neck
   // stiffness does not exclude meningitis (the sign is insensitive), so it lowers rather than removes it

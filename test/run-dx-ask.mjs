@@ -79,7 +79,9 @@ try {
   const gateBtn = `try{DX.openWorkspace();}catch(e){} DX.reset(); DX.addFindings(["fever","headache","neckStiffness"]); var b=document.querySelector('#dxPolicy .dx-select'); if(!b) return 'none'; b.click(); return 'ok';`;
 
   // ---- 2. ON: engine -------------------------------------------------------------------------
-  ok(await load(BASE + "?dxask=1&kbv2=1"), "app + KB load with ?dxask=1&kbv2=1");
+  // the scripted scenarios below were written against the classic order (?rankv3=0); the default
+  // (smd_rank_v3 ON since 2026-09-27) is exercised in section 5
+  ok(await load(BASE + "?dxask=1&kbv2=1&rankv3=0"), "app + KB load with ?dxask=1&kbv2=1&rankv3=0");
   const before = await ev(`return JSON.stringify(SMD_REASON.assess({fever:true,jaundice:true,nauseaVomiting:true}))`);
   const d = await diff("VIRAL_HEPATITIS", HEP);
   const after = await ev(`return JSON.stringify(SMD_REASON.assess({fever:true,jaundice:true,nauseaVomiting:true}))`);
@@ -98,7 +100,7 @@ try {
   // ---- 3. ON: the panel ----------------------------------------------------------------------
   const gb = await ev(gateBtn), pg = await panel();
   ok(gb === "ok" && !pg.on && !pg.ws, `panel · meningitis: the policy card's "Open full stewardship page" opens the page directly, no questions (${gb})`);
-  await load(BASE + "?dxask=1&kbv2=1");
+  await load(BASE + "?dxask=1&kbv2=1&rankv3=0");
   await selectIn(HEP, "VIRAL_HEPATITIS");
   let p = await panel();
   ok(p.on && p.ws && p.chrome && !p.selBtn, "inline · Select opens the questions inside the card; workspace header and tabs stay, Select button is replaced");
@@ -133,6 +135,17 @@ try {
     return JSON.stringify({lab:getComputedStyle(lab).display, labT:getComputedStyle(lab).textTransform, inl:inl?getComputedStyle(inl).display:null, inlT:inl?getComputedStyle(inl).textTransform:null, text:r.innerText.replace(/\\s+/g,' ').slice(0,90)});`));
   // classic view: "Why not higher" (uppercase label); plain view (default): "Why it is not first" (sentence case)
   ok(why.lab === "block" && why.inl === "inline" && why.inlT === "none" && /(Why not higher|Why it is not first)/i.test(why.text || ""), `card · the "why not first" row keeps its heading and the rival's name inline ("${why.text}")`);
+
+  // ---- 5. default order (smd_rank_v3 ON): the same flow, whatever the questions turn out to be ----
+  ok(await load(BASE + "?dxask=1&kbv2=1"), "default · app + KB load without ?rankv3 (v3 order is the default)");
+  ok(await ev(`return DX._rankV3()`) === true, "default · DX._rankV3() is on");
+  ok((await selectIn(HEP, "VIRAL_HEPATITIS")) === "ok", "default · viral hepatitis card opens its questions");
+  p = await panel();
+  ok(p.on && /Question 1 of \d/.test(p.text) && !/\u2014/.test(p.text), "default · one question at a time; no em-dash");
+  k = await answerCur("yes"); p = await panel();
+  ok(k && k !== "missing" && p.f.includes(k) && /Question 2 of/.test(p.text), `default · Yes to ${k} adds it and the next question follows`);
+  await ev(`document.querySelector('#dxAskCancel').click(); return 1`); p = await panel();
+  ok(!p.on && p.selBtn && p.f.includes(k), "default · 'Not now' returns the card to Select with the answer kept");
 
   console.log(fails === 0 ? "\nALL GREEN: differentiating questions" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }

@@ -27,8 +27,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Shipped config (flags at their defaults; smd_gate_v2 is ON since 2026-09-27)
+      - name: Shipped config (flags at their defaults; smd_gate_v2 and smd_rank_v3 are ON since 2026-09-27)
         run: node test/run-dx-audit.mjs --check
+      - name: Classic differential order (smd_rank_v3=0, the opt-out)
+        run: FLAGS=smd_rank_v3=0 node test/run-dx-audit.mjs --check
       - name: Classic antibiotic gate (smd_gate_v2=0, the opt-out)
         run: FLAGS=smd_gate_v2=0 node test/run-dx-audit.mjs --check
       - name: Antibiotic gate v2 (smd_gate_v2, explicit)
@@ -37,7 +39,7 @@ jobs:
         run: FLAGS=smd_nlp_v2=1 node test/run-dx-audit.mjs --check
       - name: Gate + extraction
         run: FLAGS=smd_gate_v2=1,smd_nlp_v2=1 node test/run-dx-audit.mjs --check
-      - name: Differential ordering v3 (smd_rank_v3, default OFF until the owner approves)
+      - name: Differential ordering v3 (smd_rank_v3, explicit)
         run: FLAGS=smd_rank_v3=1 node test/run-dx-audit.mjs --check
       - name: Gate + extraction + ordering
         run: FLAGS=smd_gate_v2=1,smd_nlp_v2=1,smd_rank_v3=1 node test/run-dx-audit.mjs --check

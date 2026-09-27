@@ -10358,3 +10358,17 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
   patient calls, so it must be the clinic that treated them.
 - **Open**: FollowCare's hospital is a free-text id the doctor types (`fc_doctors`), not an OPD clinic, so its
   Post-Visit template still has no callback number or doctor name; FollowCare stays WhatsApp only.
+## 2026-09-27 - `smd_rank_v3` ON by default (owner: "turn on smd_rank_v3")
+- **Decision**: the v3 differential order is the default; localStorage `smd_rank_v3 = "0"` or `?rankv3=0`
+  keeps the classic order. CI checks the classic order as the `smd_rank_v3=0` configuration.
+- **Why**: tapped top-1 train 75 -> 85%, dev 70 -> 76%, test 72 -> 78%; OPD Ask MaiK ordering 358 -> 386.
+- **Live effect beyond order**: under gate v2 the leading infection (and its antibiotic answer) follows
+  this order, and a disqualified or anchor-less rival no longer holds antibiotics on (gc_149: an URTI
+  picture now reads "only if pharyngitis criteria are met" instead of "likely, antibiotics").
+- Tests written against the classic order are pinned to `?rankv3=0` (gate v2 fixtures, the scripted
+  differentiating-questions flow); each suite also asserts the default.
+- **Measured cost (floors re-recorded)**: live config, antibiotics when not needed 37 -> 38 (tapped) and
+  66 -> 69 (chart text, classic extractor: anaphylaxis, pleural effusion, hypoglycaemia notes where an
+  infection now out-ranks the afebrile non-infective lead). Needed antibiotics and time-critical: unchanged.
+  With the prior flag, chart-text top-3 204 -> 199. Everything else equal or better; classic order kept as
+  the `smd_rank_v3=0` configuration.
