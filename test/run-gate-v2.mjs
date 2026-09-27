@@ -171,6 +171,8 @@ try {
   ok(uti.ab === true, `defaults · febrile UTI in a diabetic man: antibiotics (${uti.cls}, ${uti.rule})`);
   const hap = await cm(["hospitalDay48", "fever", "purulentSecretions", "worseningOxygenation", "knownHeartFailure", "orthopnea", "legSwellingBilateral", "bilateralCrackles", "raisedJVP"]);
   ok(hap.ab === true && hap.rule === "hap_criteria", `defaults · HAP criteria met with heart failure leading: antibiotics (${hap.cls}, ${hap.rule})`);
+  const vap = await cm(["hospitalDay48", "mechanicalVentilation", "consolidation", "purulentSecretions", "worseningOxygenation", "focalNeuroDeficit"]);
+  ok(vap.ab === true, `defaults · ventilated, new infiltrate, purulent secretions, no fever: VAP criteria, antibiotics (${vap.cls}, ${vap.rule})`);
   const chole = await cm(["fever", "rightUpperQuadrantPain", "murphySign", "nauseaVomiting"]);
   ok(chole.ab === true, `defaults · fever + RUQ pain + Murphy sign: antibiotics (${chole.cls}, ${chole.rule})`);
   ok((await cm(["rightUpperQuadrantPain", "murphySign", "nauseaVomiting"])).rule !== "cholecystitis_signs", "defaults · the same without fever: the rule stands aside");

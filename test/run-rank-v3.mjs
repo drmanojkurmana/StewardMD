@@ -75,6 +75,8 @@ const CASES = {
   crab: ["backPain", "renalImpairment", "weightLoss", "constipationOrDiarrhea", "polyuriaPolydipsia", "nauseaVomiting"],
   hhsDry: ["polyuriaPolydipsia", "alteredSensorium", "dehydration", "diabetesHx", "tachycardia"],
   slowK: ["renalImpairment", "bradycardia", "oliguria", "hypotension"],
+  // round 17
+  acuteCrackles: ["fever", "cough", "purulentSputum", "bilateralCrackles", "dyspnea", "hypoxia", "tachypnea"],
 };
 
 try {
@@ -119,6 +121,7 @@ try {
   ok(pos("crab", "myeloma") <= 3 && pos("crab", "myeloma") < off.crab.order.indexOf("myeloma") + 1, `on  · bone pain + renal impairment + hypercalcaemic symptoms: myeloma rises into the top three (#${off.crab.order.indexOf("myeloma") + 1} -> #${pos("crab", "myeloma")})`);
   ok(pos("hhsDry", "hhs") < pos("hhsDry", "hypercalcemia"), `on  · a dry, confused diabetic after polyuria, no ketones: HHS above hypercalcaemia (#${pos("hhsDry", "hhs")})`);
   ok(pos("slowK", "hyperkalemia") < pos("slowK", "hypovolemic_shock"), `on  · renal failure with a slow pulse and low BP: hyperkalaemia above volume-loss shock (#${pos("slowK", "hyperkalemia")} vs #${pos("slowK", "hypovolemic_shock")})`);
+  ok(pos("acuteCrackles", "ild") > pos("acuteCrackles", "CAP"), `on  · fever + purulent sputum + bilateral crackles: pneumonia above interstitial lung disease (#${pos("acuteCrackles", "CAP")} vs #${pos("acuteCrackles", "ild")})`);
   // default ON since 2026-09-27 (owner decision); localStorage "0" is the opt-out
   ok(await load(BASE + "?gatev2=0"), "app + KB load without ?rankv3");
   ok(await ev(`return DX._rankV3()`) === true, "default · DX._rankV3() is on without any flag");

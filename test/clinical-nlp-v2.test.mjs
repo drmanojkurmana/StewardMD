@@ -267,3 +267,13 @@ test("ketone results below 3 mmol/L, trace or zero are not ketonaemia; resolutio
   assert.ok(p("weakness that resolved completely with no residual deficit").includes("clinicallyImproving"));
   assert.ok(!NLP.extract("serum ketones 1.2", { ...c15, v2: false }).absent.includes("ketonemia"), "classic unchanged");
 });
+
+// round 17: "aspirated" as a procedure is not an aspiration event (narrow: real aspiration notes mention fluid and effusions)
+test("pus aspirated from an abscess is a procedure; 'vomited and aspirated gastric fluid' is an aspiration event", () => {
+  const c17 = { valid: { aspirationRiskFactor: 1 }, labels: {}, numeric: {}, v2: true, syn: { aspirationRiskFactor: ["aspirated"] } };
+  const p = (t) => NLP.extract(t, c17).present;
+  assert.ok(!p("40 ml of pus was aspirated from the abscess").includes("aspirationRiskFactor"));
+  assert.ok(!p("ultrasound-guided, aspirated anchovy-sauce material").includes("aspirationRiskFactor"));
+  assert.ok(p("he vomited and aspirated gastric fluid").includes("aspirationRiskFactor"));
+  assert.ok(p("aspirated, now with a right pleural effusion").includes("aspirationRiskFactor"));
+});

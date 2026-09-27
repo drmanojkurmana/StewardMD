@@ -326,6 +326,12 @@
         r.polarity = /\b(?:not|no|never|without)\s+(?:[a-z-]+\s+){0,1}$/.test(norm.slice(Math.max(0, e.idx - 20), e.idx)) ? "absent" : "present";
         r.temporality = "current"; r.certainty = "explicit"; r.req = false; return r;
       }
+      // round 17: "aspirated" / "aspiration" as a procedure (pus from an abscess, a joint, marrow, a needle-guided tap)
+      // is not an aspiration event
+      if (v2 && key === "aspirationRiskFactor" && e.method !== "vitals" &&
+          /\b(?:pus|abscess|needle|guided|marrow|syringe|ml of|cc of|fna|biopsy|anchovy)\b/.test(norm.slice(Math.max(0, e.idx - 40), e.idx + (e.srcText || "").length + 40))) {
+        r.polarity = "uncertain"; r.certainty = "explicit"; return r;
+      }
       // round 14: a ketone RESULT below the DKA threshold (3 mmol/L), trace or zero is not ketonaemia
       if (v2 && key === "ketonemia" && e.method !== "vitals") {
         var kv = /^[^.;\d]{0,35}?(\d+(?:\.\d+)?)(\s*\+)?|^[^.;]{0,35}?\b(trace|nil|negative|absent)\b/.exec(norm.slice(e.idx + (e.srcText || "").length));

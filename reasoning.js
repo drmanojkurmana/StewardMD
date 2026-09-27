@@ -1165,6 +1165,9 @@
     PUO: function (f) { return f.prolongedFeverUnexplained ? 20 : 0; },
     // a single abscess in a drinker without biliary disease is amoebic until serology says otherwise
     AMOEBIC_LIVER_ABSCESS: function (f) { return (noneOf(f, FEBRILE) ? -20 : 0) + ((f.singleLesion && f.alcoholExcess && !f.dilatedCBD && !f.knownGallstones) ? 15 : 0); },
+    // round 17 (2026-09-27): interstitial lung disease is subacute and afebrile; bilateral crackles with fever or shock
+    // and no subacute course are pneumonia or oedema (train gc_013, gc_052, gc_308)
+    ild: function (f) { return ((f.fever || f.rigors || f.hypotension || f.lactateElevated) && !f.subacuteOnset) ? -20 : 0; },
     // not here: confirmed mixed malaria over malaria. Leading with the lower-scored of the two widened the
     // gate's "close rival" window and turned antimalarial-only care into "antibiotics" (train gc_135)
   };
@@ -1374,7 +1377,9 @@
     var febrile = f.fever || f.rigors || f.feverGU;
     var cantMiss = febrile && f.newMurmur ? "fever_murmur" :
       f.feverGU ? "febrile_uti" :
-      (f.hospitalDay48 && febrile && (f.purulentSputum || f.purulentSecretions) && (f.worseningOxygenation || f.hypoxia || f.consolidation)) ? "hap_criteria" :
+      // (ventilator-associated: a ventilated patient with a new infiltrate needs no fever, CDC VAE)
+      (f.hospitalDay48 && (febrile || (f.mechanicalVentilation && f.consolidation)) && (f.purulentSputum || f.purulentSecretions || f.worseningOxygenation) &&
+        (f.worseningOxygenation || f.hypoxia || f.consolidation)) ? "hap_criteria" :
       (febrile && f.rightUpperQuadrantPain && (f.murphySign || f.knownGallstones)) ? "cholecystitis_signs" : null;
     if (cantMiss && weak && !gib) { g.cls = "likely"; g.rule = cantMiss; return; }
     if (f.liverDisease && (f.hematemesis || f.melena || f.gibPresentation) && g.cls !== "very_likely" && g.cls !== "likely") {
@@ -2040,6 +2045,11 @@
     skinErythema: ["red swollen", "red, hot", "red and hot", "red hot"],
     urinaryRetention: ["urinary retention", "retention of urine", "unable to pass urine", "unable to void", "not able to pass urine", "acute retention"],
     perinealPain: ["perineal pain", "perineal discomfort", "pain in the perineum", "perineal ache", "pelvic pain", "tender prostate", "boggy prostate", "exquisitely tender prostate"],
+    consolidation: ["infiltrate", "air bronchogram", "lobar opacity", "alveolar opacity", "opacification", "airspace opacity", "air-space opacity", "airspace shadowing"],
+    mechanicalVentilation: ["intubated", "mechanically ventilated", "mechanical ventilation", "on the ventilator", "ventilator support", "ventilator settings", "on ventilator", "ventilated"],
+    icuStay: ["icu patient", "in the icu", "in icu", "intensive care unit", "admitted to icu", "icu admission"],
+    rightUpperQuadrantPain: ["right upper abdominal pain", "right upper abdominal", "right hypochondrial", "right hypochondrium", "right subcostal pain"],
+    singleLesion: ["hypoechoic lesion", "hypodense lesion", "cystic lesion in the", "lesion in the right hepatic", "lesion in the right lobe", "lesion in the left lobe"],
     embolicPhenomena: ["splinter haemorrhage", "splinter hemorrhage", "janeway", "osler node", "osler's node", "roth spot", "conjunctival petechiae", "septic emboli", "embolic"]
   };
   var FT_SYN_V2 = (function () {
