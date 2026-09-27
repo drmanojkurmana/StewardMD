@@ -11,6 +11,8 @@
 //   keyboard access to every figure, search feedback, breakpoint notes, CSV contents, print label,
 //   a % resistant import caught before it is saved as % susceptible
 //   no em dash in the new screens
+//   redesign (flag smd_abg_pro): three one-line tabs, Sources beside the exports with a way back,
+//     plain drug names; flag off restores the previous look
 //   node test/run-antibiogram-ui.mjs      (CHROME=/path/to/chrome to override the browser)
 import { spawn } from 'node:child_process';
 import http from 'node:http';
@@ -127,9 +129,15 @@ try {
   ok(/lowered the gentamicin, tobramycin and amikacin breakpoints/.test(amk) && /different CLSI editions/.test(amk), 'a pooled amikacin figure notes the 2023 breakpoint change');
   await shot('abg-india-pooled');
 
-  /* ---- Sources ---- */
-  await click('#abgOverlay .abg-tab[data-tab="sources"]');
-  ok(await until(`/Where the numbers come from/.test(document.querySelector('#abgBody').innerText)`), 'Sources tab explains the census');
+  /* ---- Sources: in the redesign (flag smd_abg_pro) it opens from the action row, not a tab ---- */
+  ok(await ev(`[...document.querySelectorAll('#abgOverlay .abg-tab')].map(b=>b.dataset.tab).join(',')==='coverage,resistance,mine'`), 'three tabs: Spectrum, Resistance, My hospital');
+  ok(await ev(`(()=>{const t=[...document.querySelectorAll('#abgOverlay .abg-tab')];return t.every(b=>b.scrollWidth<=b.clientWidth+1&&b.getBoundingClientRect().height<44)})()`), 'each tab label fits on one line at 390 px');
+  ok(await ev(`[...document.querySelectorAll('#abgOverlay .v2-foot .v2-btn')].map(b=>b.textContent).join('|')==='Export CSV|Print or save as PDF|Sources'`), 'Sources sits beside the exports');
+  await sleep(2500);   // drug-link decorates asynchronously (5 names here without the no-druglink class)
+  ok(await ev(`!document.querySelector('#abgOverlay .smd-drug')`), 'drug names on this data screen are plain (drug-link leaves the overlay alone)');
+  await click('#abgOverlay .v2-foot [data-tab="sources"]');
+  ok(await until(`/Where the numbers come from/.test(document.querySelector('#abgBody').innerText)`), 'Sources explains the census');
+  ok(await ev(`document.querySelector('#abgOverlay .abg-tab.on')?.dataset.tab==='resistance'&&!!document.querySelector('#abgBody .v2-back')`), 'in Sources the Resistance tab stays selected and a back link is offered');
   ok(await ev(`/checked twice against the document/.test(document.querySelector('#abgBody').innerText)`), 'verification counts are stated per source');
   await ev(`[...document.querySelectorAll('.v2-src button[data-v2="src"]')].find(b=>/SKIMS/.test(b.textContent))?.click()`);
   ok(await until(`/own tables disagree/i.test(document.querySelector('#abgV2Sheet').innerText)`), "a source's own inconsistencies are shown");
@@ -144,6 +152,14 @@ try {
   ok(!/\.py\b|\.cjs\b|scratchpad/.test(await ev(`document.querySelector('#abgV2Sheet').textContent`)), 'no script or file names on the source sheet');
   ok(/Checking: read from the source and re-read by a second, independent reader/.test(await text('#abgV2Sheet')), 'the checking line is a plain statement');
   await shot('abg-source-sheet');
+  await click('#abgV2Sheet [data-v2="sheet-close"]');
+  await click('#abgBody .v2-back');
+  ok(await until(`!!document.querySelector('#abgBody .v2-t')`), 'the back link returns to the resistance table');
+  // The meta panel's "Show them" opens the source's own sheet (its disagreements), not a tab.
+  await ev(`(()=>{const s=document.querySelector('#v2Scope');s.value='inst:SKIMS_SRINAGAR';s.dispatchEvent(new Event('change',{bubbles:true}));})()`);
+  await until(`!!document.querySelector('.v2-meta [data-v2="src"]')`);
+  await click('.v2-meta [data-v2="src"]');
+  ok(await until(`/own tables disagree/i.test(document.querySelector('#abgV2Sheet').innerText)`), '"Show them" opens the source sheet with its disagreements');
   await click('#abgV2Sheet [data-v2="sheet-close"]');
   // A pooled figure from fewer than 3 institutions is a caution that names them.
   ok(await ev(`(()=>{const t=ABG_STORE.table('india','blood','all');return t.orgs.some(o=>Object.values(o.cells).some(c=>c.act==='caution'&&/a pooled figure needs at least 3/.test(c.why||'')))})()`), 'a one- or two-institution pooled figure is a caution');
@@ -174,7 +190,7 @@ try {
 
   /* ---- no em dash on the new screens ---- */
   let dash = false;
-  for (const t of ['resistance', 'sources', 'mine']) { await click(`#abgOverlay .abg-tab[data-tab="${t}"]`); await sleep(200); if (/—/.test(await text('#abgBody'))) dash = true; }
+  for (const t of ['resistance', 'sources', 'mine']) { await click(`#abgOverlay [data-tab="${t}"]`); await sleep(200); if (/—/.test(await text('#abgBody'))) dash = true; }
   ok(!dash, 'no em dash in the resistance, sources and my-hospital screens');
   // Dark mode: the table and sheets stay legible (text colour differs from its background).
   await ev(`document.body.classList.add('dark');1`);
@@ -238,6 +254,17 @@ try {
   ok(await ev(`document.querySelectorAll('#abgBody .abg-oc').length>0`), 'flag off: it still lists organisms');
   await shot('abg-flag-off');
   await ev(`localStorage.removeItem('smd_abg_v2');1`);
+
+  /* ---- redesign flag off (smd_abg_pro = 0): the previous look and its four tabs ---- */
+  await ev(`localStorage.setItem('smd_abg_pro','0');ABG.close();1`);
+  await call('Page.reload');
+  ok(await until('!!(window.ABG&&window.ABG_V2&&window.HOSPITAL)', 30000), 'reloaded with the redesign flag off');
+  await ev(`['introPoster','splash','accountGate','introOverlay','smdBootSplash'].forEach(k=>document.getElementById(k)?.remove());1`);
+  await until('window.ABG_STORE&&ABG_STORE.loaded()', 15000);
+  await ev(`ABG.open({tab:'resistance'});1`);
+  ok(await until(`!!document.querySelector('#abgOverlay .v2-t')`), 'redesign off: the resistance table renders');
+  ok(await ev(`!document.querySelector('#abgOverlay').classList.contains('abg-pro')&&document.querySelectorAll('#abgOverlay .abg-tab').length===4&&!!document.querySelector('#abgOverlay .abg-tab[data-tab="sources"]')&&!document.querySelector('#abgOverlay .v2-foot [data-tab="sources"]')`), 'redesign off: the previous look, with Sources as a tab');
+  await ev(`localStorage.removeItem('smd_abg_pro');ABG.close();1`);
 
   /* ---- kill switch smd_abg_data = 0: decision support uses the built-in national summary ---- */
   await ev(`localStorage.setItem('smd_abg_data','0');HOSPITAL.setProfile(${JSON.stringify(skimsId)});ABG.close();1`);

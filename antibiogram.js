@@ -625,17 +625,17 @@
     var h = '<div class="abg-picker-card">' +
       '<div class="abg-sheet-grabber"></div>' +
       '<div class="abg-picker-head">' +
-        '<div class="abg-picker-title">Select Molecule</div>' +
+        '<div class="abg-picker-title">Choose a drug</div>' +
         '<button class="abg-picker-close" data-act="dismiss-picker" aria-label="Close">' + abIco("close") + '</button>' +
       '</div>' +
-      '<div class="abg-picker-sub">This coverage group includes multiple antimicrobial agents in the Drugs Database:</div>' +
+      '<div class="abg-picker-sub">This row covers more than one drug in the drug database.</div>' +
       '<div class="abg-picker-list">';
     drugs.forEach(function (d) {
       var clean = cleanSingleDrugName(d);
       h += '<button class="abg-picker-item" data-act="pick-abx" data-target-abx="' + esc(clean || d) + '">' +
         '<span class="abg-picker-icon">' + abIco("pills") + '</span>' +
         '<span class="abg-picker-name">' + esc(d) + '</span>' +
-        '<span class="abg-picker-arrow">↗</span>' +
+        '<span class="abg-picker-arrow">›</span>' +
       '</button>';
     });
     h += '</div></div>';
@@ -690,68 +690,68 @@
       '<div class="abg-dossier-head g-drug">' +
         '<div class="abg-dossier-meta">' +
           '<span class="abg-dossier-badge">' + esc(d.cls) + '</span>' +
-          '<span class="abg-dossier-gram">Antimicrobial Agent</span>' +
+          '<span class="abg-dossier-gram">Antibiotic</span>' +
         '</div>' +
         '<div class="abg-dossier-title">' + esc(d.agent) + '</div>' +
         '<button class="abg-dossier-close" data-act="dismiss-drug-modal" aria-label="Close">' + abIco("close") + '</button>' +
       '</div>' +
       '<div class="abg-dossier-body">';
 
-    // HERO CTA: Know More - Open in Drug Database
+    // Primary action: open the drug in the drug database
     h += '<button class="abg-know-more-hero" data-act="open-abx-direct" data-agent="' + esc(clean) + '">' +
-      abIco("pills") + ' <span>Know more: open ' + esc(clean) + ' in Drug Database</span> ↗' +
+      abIco("pills") + ' <span>Open ' + esc(clean) + ' in the drug database</span>' +
     '</button>';
 
     if (multiParts.length > 1) {
       h += '<div class="abg-multi-molecules">' +
-        '<span class="abg-multi-lbl">Specific Molecules in Drug Database:</span>' +
+        '<span class="abg-multi-lbl">Open one drug in the drug database</span>' +
         '<div class="abg-multi-btns">' +
         multiParts.map(function (p) {
           var cp = cleanSingleDrugName(p);
           return '<button class="abg-multi-btn" data-act="open-abx-direct" data-agent="' + esc(cp || p) + '">' +
-            abIco("pills") + ' ' + esc(p) + ' ↗</button>';
+            abIco("pills") + ' ' + esc(p) + '</button>';
         }).join("") +
         '</div></div>';
     }
 
     if (d.note) {
       h += '<div class="abg-dossier-section pearls">' +
-        '<div class="abg-dossier-sec-h">' + abIco("info") + ' Spectrum Highlights &amp; Clinical Note</div>' +
+        '<div class="abg-dossier-sec-h">' + abIco("info") + ' Note</div>' +
         '<div class="abg-dossier-sec-p">' + esc(d.note) + '</div>' +
       '</div>';
     }
 
     // Organisms Covered Section
     h += '<div class="abg-dossier-section">' +
-      '<div class="abg-dossier-sec-h">' + abIco("microbe") + ' Organisms Covered by ' + esc(d.agent) + '</div>' +
-      '<div class="abg-dossier-sec-p" style="margin-bottom:8px">Tap any organism below to inspect complete microbiology, intrinsic resistance, and treatment regimens:</div>';
+      '<div class="abg-dossier-sec-h">' + abIco("microbe") + ' Organisms covered</div>' +
+      '<div class="abg-dossier-sec-p" style="margin-bottom:8px">Tap an organism for its microbiology notes.</div>';
 
     if (relOrgs.length) {
-      h += '<div class="abg-cov-group-lbl"><b>Reliably Active (First-line / High Susceptibility):</b></div>' +
+      h += '<div class="abg-cov-group-lbl"><b>Reliably active</b></div>' +
         '<div class="abg-tags" style="margin-bottom:10px">' +
         relOrgs.map(function (id) {
-          return '<em class="abg-tag-org rel" data-act="dossier-open-org" data-org-id="' + esc(id) + '" title="View complete pathogen dossier">' +
+          return '<em class="abg-tag-org rel" data-act="dossier-open-org" data-org-id="' + esc(id) + '" title="Microbiology notes">' +
             '✓ ' + esc(colLabel(id)) + ' <i class="abg-tag-info">' + abIco("microbe") + '</i></em>';
         }).join("") + '</div>';
     }
 
     if (partOrgs.length) {
-      h += '<div class="abg-cov-group-lbl"><b>Variable / Inducible / Partial Activity:</b></div>' +
+      h += '<div class="abg-cov-group-lbl"><b>Variable, inducible or partial activity</b></div>' +
         '<div class="abg-tags">' +
         partOrgs.map(function (id) {
-          return '<em class="abg-tag-org part" data-act="dossier-open-org" data-org-id="' + esc(id) + '" title="View complete pathogen dossier">' +
+          return '<em class="abg-tag-org part" data-act="dossier-open-org" data-org-id="' + esc(id) + '" title="Microbiology notes">' +
             '◐ ' + esc(colLabel(id)) + ' <i class="abg-tag-info">' + abIco("microbe") + '</i></em>';
         }).join("") + '</div>';
     }
 
     if (!relOrgs.length && !partOrgs.length) {
-      h += '<span class="abg-note-sm">No coverage defined in standard spectrum.</span>';
+      h += '<span class="abg-note-sm">No coverage is defined for this antibiotic in the reference spectrum.</span>';
     }
     h += '</div>';
 
-    // Highlight on Spectrum Grid button + Done button
+    // Show it on the grid, or close
     h += '<div class="abg-dossier-actions">' +
-      '<button class="abg-dossier-btn-isolate" data-act="isolate-drug-from-modal" data-drug-idx="' + di + '">Highlight on Spectrum Grid</button>' +
+      '<button class="abg-dossier-btn-isolate" data-act="isolate-drug-from-modal" data-drug-idx="' + di + '">Show on the grid</button>' +
       '<button class="abg-dossier-btn-done" data-act="dismiss-drug-modal">Done</button>' +
     '</div>';
 
@@ -779,14 +779,14 @@
     var st = (d.cov && d.cov[orgId]) || 0; // 2 = reliable, 1 = variable, 0 = not active
     var statusClass = st === 2 ? "on" : st === 1 ? "part" : "no";
     var statusIcon = st === 2 ? abIco("check") : st === 1 ? "◐" : "✕";
-    var statusText = st === 2 ? "Reliably Active (First-line spectrum)" :
-                     st === 1 ? "Variable / Partial Activity (Verify against local susceptibility)" :
-                     "Not Active (No activity or inherent resistance)";
+    var statusText = st === 2 ? "Reliably active (first-line spectrum)" :
+                     st === 1 ? "Variable or partial activity: check local susceptibility" :
+                     "Not active (no activity, or intrinsic resistance)";
 
     var h = '<div class="abg-cell-action-card">' +
       '<div class="abg-sheet-grabber"></div>' +
       '<div class="abg-cell-action-head">' +
-        '<div class="abg-cell-action-title">' + esc(d.agent) + ' × ' + esc(colLabel(orgId)) + '</div>' +
+        '<div class="abg-cell-action-title">' + esc(d.agent) + ' and ' + esc(colLabel(orgId)) + '</div>' +
         '<button class="abg-picker-close" data-act="dismiss-cell-action" aria-label="Close">' + abIco("close") + '</button>' +
       '</div>' +
       '<div class="abg-cell-banner ' + statusClass + '">' +
@@ -795,10 +795,10 @@
       '</div>' +
       '<div class="abg-cell-actions">' +
         '<button class="abg-cell-btn-dossier" data-act="cell-open-org" data-org-id="' + esc(orgId) + '">' +
-          abIco("microbe") + ' View ' + esc(colLabel(orgId)) + ' Pathogen &amp; AMR Dossier ↗' +
+          abIco("microbe") + ' ' + esc(colLabel(orgId)) + ': microbiology notes' +
         '</button>' +
         '<button class="abg-cell-btn-drug" data-act="cell-open-drug" data-drug-idx="' + di + '">' +
-          abIco("pills") + ' View ' + esc(d.agent) + ' Spectrum &amp; Drug Database ↗' +
+          abIco("pills") + ' ' + esc(d.agent) + ': coverage and drug database' +
         '</button>' +
       '</div>' +
     '</div>';
@@ -839,26 +839,26 @@
 
     if (d.intrinsic) {
       h += '<div class="abg-dossier-alert">' +
-        '<div class="abg-dossier-alert-title">' + abIco("warn") + ' Intrinsic / Inherent Resistance</div>' +
+        '<div class="abg-dossier-alert-title">' + abIco("warn") + ' Intrinsic resistance</div>' +
         '<div class="abg-dossier-alert-text">' + esc(d.intrinsic) + '</div>' +
       '</div>';
     }
 
     h += '<div class="abg-dossier-section">' +
-      '<div class="abg-dossier-sec-h">' + abIco("microbe") + ' Microbiology, Morphology &amp; Virulence</div>' +
+      '<div class="abg-dossier-sec-h">' + abIco("microbe") + ' Microbiology</div>' +
       '<div class="abg-dossier-sec-p">' + esc(d.microbiology) + '</div>' +
     '</div>';
 
     if (d.mechanism) {
       h += '<div class="abg-dossier-section">' +
-        '<div class="abg-dossier-sec-h">' + abIco("flask") + ' AMR Mechanisms &amp; Phenotypes</div>' +
+        '<div class="abg-dossier-sec-h">' + abIco("flask") + ' Resistance mechanisms</div>' +
         '<div class="abg-dossier-sec-p">' + esc(d.mechanism) + '</div>' +
       '</div>';
     }
 
     if (d.regimens && d.regimens.length) {
       h += '<div class="abg-dossier-section">' +
-        '<div class="abg-dossier-sec-h">' + abIco("pills") + ' Clinical Regimens &amp; Targeted Therapy</div>' +
+        '<div class="abg-dossier-sec-h">' + abIco("pills") + ' Targeted therapy</div>' +
         '<div class="abg-dossier-regimens">';
       d.regimens.forEach(function (r) {
         h += '<div class="abg-dossier-reg-item">' +
@@ -872,31 +872,31 @@
 
     if (d.pearls) {
       h += '<div class="abg-dossier-section pearls">' +
-        '<div class="abg-dossier-sec-h">' + abIco("info") + ' Clinical Pearls for Clinicians &amp; Microbiologists</div>' +
+        '<div class="abg-dossier-sec-h">' + abIco("info") + ' Clinical pearls</div>' +
         '<div class="abg-dossier-sec-p">' + esc(d.pearls) + '</div>' +
       '</div>';
     }
 
     if (hits.length) {
       h += '<div class="abg-dossier-section">' +
-        '<div class="abg-dossier-sec-h">' + abIco("pills") + ' Active Antibiotics from Spectrum Grid</div>' +
-        '<div class="abg-dossier-sec-p" style="margin-bottom:8px">Tap any antibiotic to inspect coverage details &amp; open in Drug Database:</div>';
+        '<div class="abg-dossier-sec-h">' + abIco("pills") + ' Antibiotics with activity</div>' +
+        '<div class="abg-dossier-sec-p" style="margin-bottom:8px">Tap an antibiotic for its coverage.</div>';
 
       if (relHits.length) {
-        h += '<div class="abg-cov-group-lbl"><b>Reliably Active (First-line):</b></div>' +
+        h += '<div class="abg-cov-group-lbl"><b>Reliably active</b></div>' +
           '<div class="abg-tags" style="margin-bottom:8px">' +
           relHits.map(function (x) {
-            return '<em class="abg-tag-drug rel" data-act="dossier-open-abx" data-agent="' + esc(x.agent) + '" title="Inspect ' + esc(x.agent) + ' &amp; open in Drug DB">' +
-              '✓ ' + esc(x.agent) + ' <i class="abg-tag-arrow">↗</i></em>';
+            return '<em class="abg-tag-drug rel" data-act="dossier-open-abx" data-agent="' + esc(x.agent) + '" title="Coverage of ' + esc(x.agent) + '">' +
+              '✓ ' + esc(x.agent) + '</em>';
           }).join("") + '</div>';
       }
 
       if (partHits.length) {
-        h += '<div class="abg-cov-group-lbl"><b>Variable / Second-line:</b></div>' +
+        h += '<div class="abg-cov-group-lbl"><b>Variable or second-line</b></div>' +
           '<div class="abg-tags">' +
           partHits.map(function (x) {
-            return '<em class="abg-tag-drug part" data-act="dossier-open-abx" data-agent="' + esc(x.agent) + '" title="Inspect ' + esc(x.agent) + ' &amp; open in Drug DB">' +
-              '◐ ' + esc(x.agent) + ' <i class="abg-tag-arrow">↗</i></em>';
+            return '<em class="abg-tag-drug part" data-act="dossier-open-abx" data-agent="' + esc(x.agent) + '" title="Coverage of ' + esc(x.agent) + '">' +
+              '◐ ' + esc(x.agent) + '</em>';
           }).join("") + '</div>';
       }
 
@@ -904,7 +904,7 @@
     }
 
     h += '<div class="abg-dossier-actions">' +
-      '<button class="abg-dossier-btn-isolate" data-act="isolate-from-dossier" data-org-id="' + esc(orgId) + '">Highlight on Spectrum Grid</button>' +
+      '<button class="abg-dossier-btn-isolate" data-act="isolate-from-dossier" data-org-id="' + esc(orgId) + '">Show on the grid</button>' +
       '<button class="abg-dossier-btn-done" data-act="dismiss-dossier">Done</button>' +
     '</div>';
 
@@ -956,7 +956,7 @@
 
     if (d.intrinsic) {
       h += '<div class="abg-dossier-alert">' +
-        '<div class="abg-dossier-alert-title">' + abIco("warn") + ' Intrinsic / Inherent Resistance</div>' +
+        '<div class="abg-dossier-alert-title">' + abIco("warn") + ' Intrinsic resistance</div>' +
         '<div class="abg-dossier-alert-text">' + esc(d.intrinsic) + '</div>' +
       '</div>';
     }
@@ -975,11 +975,11 @@
 
     if (hits.length) {
       h += '<div class="abg-dossier-section">' +
-        '<div class="abg-dossier-sec-h">' + abIco("pills") + ' Active Antibiotics from Spectrum Grid</div>' +
+        '<div class="abg-dossier-sec-h">' + abIco("pills") + ' Antibiotics with activity</div>' +
         '<div class="abg-tags">' +
         hits.map(function (x) {
-          return '<em class="abg-tag-drug rel" data-act="dossier-open-abx" data-agent="' + esc(x.agent) + '" title="View coverage &amp; Drug DB">' +
-            '✓ ' + esc(x.agent) + ' <i class="abg-tag-arrow">↗</i></em>';
+          return '<em class="abg-tag-drug rel" data-act="dossier-open-abx" data-agent="' + esc(x.agent) + '" title="Coverage of this antibiotic">' +
+            '✓ ' + esc(x.agent) + '</em>';
         }).join("") +
         '</div></div>';
     }
@@ -1000,7 +1000,8 @@
     injectCSS();
     // smd-books-keep: page numbers here are source locators ("page 12"), not textbook citations for
     // the app-wide book scrub (emoji-icons.js) to remove.
-    root = document.createElement("div"); root.className = "abg smd-books-keep"; root.id = "abgOverlay";
+    // no-druglink (pro): drug-link.js leaves names in this data screen plain (no glow, no bold).
+    root = document.createElement("div"); root.className = "abg smd-books-keep" + (pro() ? " abg-pro no-druglink" : ""); root.id = "abgOverlay";
     root.innerHTML = shell();
     document.body.appendChild(root);
     render();
@@ -1061,12 +1062,12 @@
         '<button class="abg-back" data-act="close" aria-label="Back">‹ Back</button>' +
         '<div class="abg-ttl-wrap">' +
           '<div class="abg-ttl">Antibiogram</div>' +
-          '<div class="abg-subttl">Spectrum &amp; Susceptibility Guide</div>' +
+          '<div class="abg-subttl">' + (pro() ? "Spectrum and susceptibility" : "Spectrum &amp; Susceptibility Guide") + '</div>' +
         '</div>' +
         '<button class="abg-reset-btn" data-act="reset-all" title="Reset selections and filters">Reset</button>' +
       '</div>' +
       '<div class="abg-tabs" role="tablist">' +
-        '<button class="abg-tab on" data-tab="coverage" role="tab">Antibiotic coverage</button>' +
+        '<button class="abg-tab on" data-tab="coverage" role="tab">' + (pro() && v2() ? "Spectrum" : "Antibiotic coverage") + '</button>' +
         (v2() ? window.ABG_V2.tabs().map(function (t) { return '<button class="abg-tab" data-tab="' + t[0] + '" role="tab">' + t[1] + '</button>'; }).join("") :
           '<button class="abg-tab" data-tab="resistance" role="tab">Resistance rates</button>') +
       '</div>' +
@@ -1078,6 +1079,8 @@
       '<div id="abgV2Sheet" role="dialog" aria-modal="true"></div>';
   }
   function v2() { return !!(window.ABG_V2 && window.ABG_V2.on() && window.ABG_STORE && window.ABG_RULES); }
+  // The 2026-09-27 redesign (flag smd_abg_pro, default on): quiet theme, three tabs, Sources from the action row.
+  function pro() { try { return window.SMD_ABG_FLAGS && window.SMD_ABG_FLAGS.pro ? window.SMD_ABG_FLAGS.pro() : localStorage.getItem("smd_abg_pro") !== "0"; } catch (e) { return true; } }
   function v2api() {
     return { root: root, render: render, toast: toast,
       setTab: function (t) { tab = t; render(); },
@@ -1087,7 +1090,8 @@
 
   /* ───────────────────────────  RENDER  ─────────────────────────── */
   function render() {
-    [].forEach.call(root.querySelectorAll(".abg-tab"), function (b) { b.classList.toggle("on", b.getAttribute("data-tab") === tab); });
+    var shownTab = (tab === "sources" && !root.querySelector('.abg-tab[data-tab="sources"]')) ? "resistance" : tab;
+    [].forEach.call(root.querySelectorAll(".abg-tab"), function (b) { var on = b.getAttribute("data-tab") === shownTab; b.classList.toggle("on", on); b.setAttribute("aria-selected", on ? "true" : "false"); });
     var body = root.querySelector("#abgBody"), keep = body.scrollTop;
     if (tab !== "coverage" && v2()) body.innerHTML = window.ABG_V2.render(tab, function () { if (root && tab !== "coverage") render(); });
     else body.innerHTML = tab === "coverage" ? coverageView() : resistanceView();
@@ -1099,20 +1103,20 @@
     var h = '<div class="abg-filter-bar">' +
       '<div class="abg-search-box">' +
         '<span class="abg-search-icon">' + abIco("search") + '</span>' +
-        '<input type="search" class="abg-search-input" id="abgSearch" placeholder="Filter antibiotic (e.g. Meropenem) or organism..." value="' + esc(filterQuery) + '" autocomplete="off" autocorrect="off" spellcheck="false" />' +
+        '<input type="search" class="abg-search-input" id="abgSearch" placeholder="Find an antibiotic or organism" value="' + esc(filterQuery) + '" autocomplete="off" autocorrect="off" spellcheck="false" />' +
         (filterQuery ? '<button class="abg-search-clear" data-act="clear-search" aria-label="Clear">' + abIco("close") + '</button>' : '') +
       '</div>' +
       '<div class="abg-filter-pills">' +
-        '<button class="abg-filter-pill' + (filterBand === "all" ? " active" : "") + '" data-act="set-band" data-band="all">All Spectrum</button>' +
-        '<button class="abg-filter-pill' + (filterBand === "gpc" ? " active" : "") + '" data-act="set-band" data-band="gpc"><span class="abg-dot gpc"></span>Gram (+)</button>' +
-        '<button class="abg-filter-pill' + (filterBand === "gneg" ? " active" : "") + '" data-act="set-band" data-band="gneg"><span class="abg-dot entero"></span>Gram (-)</button>' +
-        '<button class="abg-filter-pill' + (filterBand === "nonferm" ? " active" : "") + '" data-act="set-band" data-band="nonferm"><span class="abg-dot nonferm"></span>Non-ferm</button>' +
+        '<button class="abg-filter-pill' + (filterBand === "all" ? " active" : "") + '" data-act="set-band" data-band="all">All</button>' +
+        '<button class="abg-filter-pill' + (filterBand === "gpc" ? " active" : "") + '" data-act="set-band" data-band="gpc"><span class="abg-dot gpc"></span>Gram-positive</button>' +
+        '<button class="abg-filter-pill' + (filterBand === "gneg" ? " active" : "") + '" data-act="set-band" data-band="gneg"><span class="abg-dot entero"></span>Gram-negative</button>' +
+        '<button class="abg-filter-pill' + (filterBand === "nonferm" ? " active" : "") + '" data-act="set-band" data-band="nonferm"><span class="abg-dot nonferm"></span>Non-fermenters</button>' +
         '<button class="abg-filter-pill' + (filterBand === "ana" ? " active" : "") + '" data-act="set-band" data-band="ana"><span class="abg-dot ana"></span>Anaerobes</button>' +
         '<button class="abg-filter-pill' + (filterBand === "aty" ? " active" : "") + '" data-act="set-band" data-band="aty"><span class="abg-dot aty"></span>Atypicals</button>' +
       '</div>' +
     '</div>';
 
-    h += '<div class="abg-note">Spectrum of activity: a qualitative clinical teaching guide. Tap any drug, organism, or cell to inspect coverage &amp; details.</div>';
+    h += '<div class="abg-note">Expected spectrum of activity, for teaching. Tap an antibiotic, organism or cell for details.</div>';
     h += '<div class="abg-sum" id="abgSum">' + coverageSummary() + '</div>';
     h += '<div id="abgGridContainer">' + gridTableHtml() + '</div>';
     return h;
@@ -1166,7 +1170,7 @@
         '<div class="abg-empty-ic">' + abIco("search") + '</div>' +
         '<b>No matching antibiotics or organisms</b>' +
         '<p>No results found for &ldquo;' + esc(filterQuery) + '&rdquo;.</p>' +
-        '<button class="abg-reset-filter-btn" data-act="clear-search">Clear Search Filter</button>' +
+        '<button class="abg-reset-filter-btn" data-act="clear-search">Clear the search</button>' +
       '</div>';
     }
 
@@ -1186,19 +1190,19 @@
     } else {
       h += '<tr class="abg-band"><th class="abg-rowh abg-corner" rowspan="2">Antibiotic</th>' +
         '<th class="abg-gh abg-band-h g-' + filterBand + '" colspan="' + viewCols.length + '">' +
-          esc(filterBand === "gpc" ? "Gram-Positive Organisms" :
-              filterBand === "gneg" ? "Gram-Negative Organisms" :
-              filterBand === "nonferm" ? "Non-Fermenters" :
-              filterBand === "ana" ? "Anaerobic Organisms" :
-              filterBand === "aty" ? "Atypical Organisms" : "Selected Spectrum") +
+          esc(filterBand === "gpc" ? "Gram-positive organisms" :
+              filterBand === "gneg" ? "Gram-negative organisms" :
+              filterBand === "nonferm" ? "Non-fermenters" :
+              filterBand === "ana" ? "Anaerobes" :
+              filterBand === "aty" ? "Atypical organisms" : "Selected organisms") +
         '</th></tr>';
     }
 
     h += '<tr class="abg-orgh">';
     viewCols.forEach(function (c) {
       var on = (covSelType === "org" && covSel === c.id) ? " sel" : "";
-      h += '<th class="abg-ch g-' + c.group + on + '" data-org="' + c.id + '" title="Tap to isolate column or view pathogen details">' +
-        '<button class="abg-ch-btn" data-act="show-org-dossier" data-org-id="' + esc(c.id) + '" title="View complete microbiology dossier">' +
+      h += '<th class="abg-ch g-' + c.group + on + '" data-org="' + c.id + '" title="Details for this organism">' +
+        '<button class="abg-ch-btn" data-act="show-org-dossier" data-org-id="' + esc(c.id) + '" title="Microbiology notes">' +
           esc(c.label) +
         '</button>' +
       '</th>';
@@ -1215,10 +1219,10 @@
       h += '<td class="abg-rowh">' +
         (newCls ? '<span class="abg-cls">' + esc(d.cls) + '</span>' : '') +
         '<div class="abg-agent-wrap">' +
-          '<button class="abg-agent-btn" data-act="open-abx" data-agent="' + esc(d.agent) + '" title="Inspect coverage &amp; open in Drug Database">' +
+          '<button class="abg-agent-btn" data-act="open-abx" data-agent="' + esc(d.agent) + '" title="Coverage of this antibiotic">' +
             esc(d.agent) +
           '</button>' +
-          '<button class="abg-drug-link-btn" data-act="open-abx" data-agent="' + esc(d.agent) + '" title="Open in Drug Database" aria-label="Open in Drug Database">' +
+          '<button class="abg-drug-link-btn" data-act="open-abx" data-agent="' + esc(d.agent) + '" title="Open in the drug database" aria-label="Open ' + esc(d.agent) + ' in the drug database">' +
             abIco("pills") + ' <span class="abg-link-arrow">↗</span>' +
           '</button>' +
         '</div>' +
@@ -1236,12 +1240,13 @@
     });
 
     h += '</tbody></table></div>';
-    h += '<div class="abg-legend"><span><i class="sw on"></i>Reliably active</span><span><i class="sw part"></i>Variable / not first-line</span><span><i class="sw no"></i>Not active</span><span class="abg-src">Spectrum reference, verify against local antibiogram · IDSA / CLSI M100 (2024)</span></div>';
+    h += '<div class="abg-legend"><span><i class="sw on"></i>Reliably active</span><span><i class="sw part"></i>Variable or not first-line</span><span><i class="sw no"></i>Not active</span><span class="abg-src">Reference spectrum (IDSA; CLSI M100, 2024). Check it against your local antibiogram.</span></div>';
     return h;
   }
 
   function coverageSummary() {
-    if (covSel === null) return '<span class="abg-hint">Nothing selected: showing the full spectrum grid. Tap any organism header to inspect pathogen details, or any antibiotic row for coverage &amp; drug database links.</span>';
+    // Redesign: nothing selected needs no box (the note above the grid already says what to tap).
+    if (covSel === null) return pro() ? "" : '<span class="abg-hint">Nothing selected: showing the full spectrum grid. Tap any organism header to inspect pathogen details, or any antibiotic row for coverage &amp; drug database links.</span>';
     if (covSelType === "drug") {
       var d = COVERAGE[covSel];
       var keys = Object.keys(d.cov).sort(function (a, b) { return (d.cov[b] || 0) - (d.cov[a] || 0); });   // reliable (2) first
@@ -1254,16 +1259,16 @@
           '<div class="abg-sum-title-text">' + esc(d.agent) + '</div>' +
         '</div>' +
         '<button class="abg-know-more-hero" data-act="open-abx" data-agent="' + esc(d.agent) + '">' +
-          abIco("pills") + ' <span>Know more: open ' + esc(clean) + ' in Drug Database</span> ↗' +
+          abIco("pills") + ' <span>Open ' + esc(clean) + ' in the drug database</span>' +
         '</button>' +
-        (d.note ? '<div class="abg-sum-note"><span class="abg-sum-note-ic">' + abIco("info") + '</span> <div><b>Spectrum &amp; Clinical Note:</b> ' + esc(d.note) + '</div></div>' : '') +
+        (d.note ? '<div class="abg-sum-note"><span class="abg-sum-note-ic">' + abIco("info") + '</span> <div><b>Note:</b> ' + esc(d.note) + '</div></div>' : '') +
         '<div class="abg-sum-body">' +
-          '<div class="abg-sum-cov-label"><b>Organisms covered</b> (tap any for pathogen details):</div>' +
+          '<div class="abg-sum-cov-label"><b>Organisms covered</b></div>' +
           (keys.length ? '<div class="abg-tags">' + keys.map(function (id) {
             var rel = d.cov[id] === 2;
             return '<em class="abg-tag-org ' + (rel ? "rel" : "part") + '" data-act="select-org-show" data-org-id="' + esc(id) + '" title="View pathogen details for ' + esc(colLabel(id)) + '">' +
               (rel ? "✓ " : "◐ ") + esc(colLabel(id)) + ' <i class="abg-tag-info">' + abIco("microbe") + '</i></em>';
-          }).join("") + '</div>' : '<span class="abg-note-sm">No coverage defined in standard spectrum.</span>') +
+          }).join("") + '</div>' : '<span class="abg-note-sm">No coverage is defined for this antibiotic in the reference spectrum.</span>') +
         '</div>';
       return h;
     }
@@ -1279,18 +1284,18 @@
         '<div class="abg-sum-title-text org">' + esc(d.name) + '</div>' +
       '</div>' +
       '<button class="abg-dossier-hero-btn" data-act="show-org-dossier" data-org-id="' + esc(covSel) + '">' +
-        abIco("microbe") + ' <span>View Complete Pathogen &amp; Microbiology Dossier</span> ↗' +
+        abIco("microbe") + ' <span>Microbiology notes</span>' +
       '</button>' +
       '<div class="abg-sum-pathogen-card">' +
-        '<div class="abg-sum-pathogen-sec"><b>Type &amp; Microbiology:</b> ' + esc(d.microbiology) + '</div>' +
-        (d.intrinsic ? '<div class="abg-sum-pathogen-intrinsic"><span class="abg-sum-alert-ic">' + abIco("warn") + '</span> <div><b>Intrinsic Resistance:</b> ' + esc(d.intrinsic) + '</div></div>' : '') +
+        '<div class="abg-sum-pathogen-sec"><b>Microbiology:</b> ' + esc(d.microbiology) + '</div>' +
+        (d.intrinsic ? '<div class="abg-sum-pathogen-intrinsic"><span class="abg-sum-alert-ic">' + abIco("warn") + '</span> <div><b>Intrinsic resistance:</b> ' + esc(d.intrinsic) + '</div></div>' : '') +
       '</div>' +
       '<div class="abg-sum-body">' +
-        '<div class="abg-sum-cov-label"><b>Antibiotics with activity</b> (tap any to inspect &amp; open in Drug DB):</div>' +
+        '<div class="abg-sum-cov-label"><b>Antibiotics with activity</b></div>' +
         (hits.length ? '<div class="abg-tags">' + hits.map(function (x) {
           var rel = x.cov[covSel] === 2;
           return '<em class="abg-tag-drug ' + (rel ? "rel" : "part") + '" data-act="select-drug-name" data-agent="' + esc(x.agent) + '" title="Inspect ' + esc(x.agent) + '">' +
-            (rel ? "✓ " : "◐ ") + esc(x.agent) + ' <i class="abg-tag-arrow">↗</i></em>';
+            (rel ? "✓ " : "◐ ") + esc(x.agent) + '</em>';
         }).join("") + '</div>' : '<span class="abg-note-sm">No standard antibiotics active against this resistance profile.</span>') +
       '</div>';
     return h;
@@ -1901,7 +1906,78 @@
       ".abg-rotate-tx{white-space:nowrap;letter-spacing:-.01em}",
       /* Drug DB Overlay Integration */
       ".db-overlay{position:fixed;inset:0;z-index:1000!important;background:var(--paper,#f7f7f5);display:none;flex-direction:column;overflow:hidden}",
-      ".db-overlay.on{display:flex!important;z-index:1000!important}"
+      ".db-overlay.on{display:flex!important;z-index:1000!important}",
+      ".abg-sum:empty{display:none}",
+      /* ---- Redesign (flag smd_abg_pro, 2026-09-27): one quiet theme on the app's own tokens
+         (--paper, --panel, --ink, --line, --teal and the status colours), so it follows the chosen
+         theme, light and dark. Hairlines instead of shadows, sentence case, 8-10px radii, no gradients.
+         --panel, --ink and --line are inherited from the page instead of the overlay's own copies. */
+      ".abg.abg-pro,body.dark .abg.abg-pro{--bg:var(--paper,#f6f7f5);--panel:inherit;--ink:inherit;--line:inherit;--mut:var(--slate-soft,#5a7184);--ink2:var(--slate,#2d4356);--tl:var(--teal,#0e6e63);--tls:var(--teal-soft,#e3f1ee);--f:var(--sans,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sans-serif);--track:color-mix(in srgb,var(--ink) 7%,transparent)}",
+      ".abg.abg-pro{--h5b:#d4eedd;--h5f:#13502b;--h5s:#2f8f5b;--h4b:#e7f1cc;--h4f:#3c5a0e;--h4s:#7ea428;--h3b:#fbefc1;--h3f:#664705;--h3s:#d4a21a;--h2b:#fbdcc4;--h2f:#77300c;--h2s:#e07b33;--h1b:#f7cfd3;--h1f:#7c1522;--h1s:#c24141;--on-b:#d6ede5;--on-f:#0f5b45}",
+      "body.dark .abg.abg-pro{--h5b:#123524;--h5f:#8ae0ab;--h5s:#3fae72;--h4b:#25320f;--h4f:#c4e27d;--h4s:#8fb536;--h3b:#3a2f09;--h3f:#f2d36d;--h3s:#d9a92a;--h2b:#3d200d;--h2f:#f6ab74;--h2s:#e58644;--h1b:#43151d;--h1f:#f59ea9;--h1s:#d65a61;--on-b:#10352b;--on-f:#86dcc0}",
+      ".abg-pro{font-family:var(--f)}",
+      ".abg-pro :focus-visible{outline:2px solid var(--tl);outline-offset:2px}.abg-pro button:focus:not(:focus-visible){outline:none}",
+      ".abg-pro .abg-top,body.dark .abg-pro .abg-top{background:var(--panel);-webkit-backdrop-filter:none;backdrop-filter:none;padding:calc(10px + env(safe-area-inset-top)) 12px 10px;gap:8px}",
+      ".abg-pro .abg-back{background:none;color:var(--tl);font:600 15px var(--f);padding:6px 4px;border-radius:6px;min-width:64px;justify-content:flex-start}.abg-pro .abg-back:active{background:none;color:var(--tl);opacity:.6;transform:none}",
+      ".abg-pro .abg-ttl{font:600 16px/1.2 var(--f);letter-spacing:-.01em}.abg-pro .abg-subttl{font:500 11.5px var(--f);text-transform:none;letter-spacing:0;margin-top:2px}",
+      ".abg-pro .abg-reset-btn{background:none;color:var(--tl);font:500 15px var(--f);padding:6px 4px;min-width:64px;text-align:right}.abg-pro .abg-reset-btn:active{background:none;opacity:.6}",
+      ".abg-pro .abg-tabs,body.dark .abg-pro .abg-tabs{margin:10px 16px 2px;padding:2px;gap:2px;background:var(--track);border-radius:9px;box-shadow:none}",
+      ".abg-pro .abg-tab{min-height:32px;padding:6px 8px;border-radius:7px;font:600 13px var(--f);color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:background .15s,color .15s}",
+      ".abg-pro .abg-tab.on{background:var(--panel);color:var(--ink);box-shadow:0 1px 2px rgba(15,23,42,.1),0 0 0 .5px rgba(15,23,42,.05)}",
+      "body.dark .abg-pro .abg-tab.on{background:color-mix(in srgb,var(--ink) 14%,var(--panel));color:var(--ink);box-shadow:none}",
+      ".abg-pro .abg-body{padding:12px 16px calc(32px + env(safe-area-inset-bottom))}",
+      ".abg-pro .abg-search-box{border-radius:8px;padding:9px 11px;box-shadow:none}.abg-pro .abg-search-box:focus-within{box-shadow:0 0 0 3px color-mix(in srgb,var(--tl) 16%,transparent)}",
+      ".abg-pro .abg-search-input{font:500 14px var(--f)}",
+      ".abg-pro .abg-filter-pills{scrollbar-width:none;padding-bottom:0}.abg-pro .abg-filter-pill{border-radius:8px;padding:6px 11px;font:600 12.5px var(--f);color:var(--ink2);min-height:32px}",
+      ".abg-pro .abg-filter-pill.active{background:var(--tls);border-color:color-mix(in srgb,var(--tl) 42%,transparent);color:var(--tl);box-shadow:none}.abg-pro .abg-filter-pill:active{transform:none}",
+      ".abg-pro .abg-note{background:none;border:0;padding:0 2px;margin:2px 0 10px;font:500 12.5px/1.5 var(--f);color:var(--mut)}",
+      ".abg-pro .abg-sum{background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:none;padding:12px 14px}",
+      ".abg-pro .abg-clear{background:var(--track);color:var(--ink)}.abg-pro .abg-cls-badge,body.dark .abg-pro .abg-cls-badge{background:var(--tls);color:var(--tl);border-radius:4px;letter-spacing:.02em}",
+      ".abg-pro .abg-sum-title-text{font:600 16px/1.3 var(--f)}.abg-pro .abg-sum-note,.abg-pro .abg-sum-pathogen-card{border-radius:8px}",
+      ".abg-pro .abg-scroll{border-radius:10px;box-shadow:none}.abg-pro .abg-grid{font:600 11px var(--f)}",
+      ".abg-pro .abg-rowh{box-shadow:none;border-right:1px solid var(--line)}.abg-pro .abg-corner{font:600 11.5px var(--f);text-transform:none;letter-spacing:0}",
+      ".abg-pro .abg-cls{font:600 9.5px var(--f);color:var(--mut);letter-spacing:.04em}.abg-pro .abg-agent-btn{font:600 12.5px/1.25 var(--f)}",
+      ".abg-pro .abg-drug-link-btn{background:none;color:var(--mut)}.abg-pro .abg-drug-link-btn:active{background:var(--track);color:var(--tl);transform:none}.abg-pro .abg-link-arrow{display:none}",
+      ".abg.abg-pro .abg-gh{background:var(--panel);color:var(--ink2);font:600 11px var(--f);text-transform:none;letter-spacing:0;border-top:3px solid var(--gc,var(--line));border-bottom:1px solid var(--line)}",
+      ".abg-pro .g-gpc{--gc:#3867d6}.abg-pro .g-entero{--gc:#c0392b}.abg-pro .g-gneg{--gc:#9b2c2c}.abg-pro .g-nonferm{--gc:#d0661f}.abg-pro .g-fast{--gc:#7d4bc2}.abg-pro .g-ana{--gc:#8d6e2c}.abg-pro .g-aty{--gc:#56657a}",
+      ".abg.abg-pro .abg-ch{background:var(--panel)}.abg-pro .abg-ch-btn{font:600 10px/1.2 var(--f)}.abg-pro .abg-ch-btn:hover,.abg-pro .abg-ch-btn:active{color:var(--tl)}",
+      ".abg-pro .abg-cell:active{transform:none;opacity:.7}",
+      ".abg-pro .abg-cell.on,body.dark .abg-pro .abg-cell.on{background:var(--on-b);color:var(--on-f)}",
+      ".abg-pro .abg-cell.part,body.dark .abg-pro .abg-cell.part{background:var(--h3b);color:var(--h3f)}.abg-pro .abg-cell.part .abg-cell-sym,body.dark .abg-pro .abg-cell.part .abg-cell-sym{color:var(--h3f);font-size:12px}",
+      ".abg-pro .abg-cell.no{background:var(--panel);opacity:1}.abg-pro .abg-cell.no .abg-cell-sym{color:color-mix(in srgb,var(--mut) 55%,transparent);font-size:10px}",
+      ".abg-pro .abg-drow.sel .abg-rowh{background:var(--tls)}.abg-pro .abg-cell.hit{box-shadow:inset 0 0 0 2px var(--tl)}",
+      ".abg-pro .abg-legend{font:500 11.5px var(--f)}.abg-pro .abg-legend .sw.on{background:var(--on-b);border-color:color-mix(in srgb,var(--on-f) 30%,transparent)}.abg-pro .abg-legend .sw.part{background:var(--h3b);border-color:color-mix(in srgb,var(--h3f) 30%,transparent)}",
+      ".abg-pro .abg-src{font:500 11px var(--f);margin-left:0;flex-basis:100%}",
+      ".abg-pro .abg-empty-filter{border-radius:10px}.abg-pro .abg-reset-filter-btn{border-radius:8px;font:600 13px var(--f);padding:8px 14px}",
+      ".abg-pro .abg-modal-sheet{background:rgba(15,23,42,.36);-webkit-backdrop-filter:none;backdrop-filter:none}",
+      ".abg-pro .abg-picker-card,.abg-pro .abg-dossier-card,.abg-pro .abg-cell-action-card{border-radius:16px 16px 0 0;box-shadow:0 -10px 30px rgba(15,23,42,.16)}",
+      ".abg-pro .abg-picker-title,.abg-pro .abg-cell-action-title{font:600 17px var(--f)}.abg-pro .abg-picker-close{background:var(--track)}.abg-pro .abg-picker-item{border-radius:8px;background:var(--panel);font:600 13.5px var(--f)}",
+      ".abg.abg-pro .abg-dossier-head{background:var(--panel);color:var(--ink);border-top:3px solid var(--gc,var(--tl));border-bottom:1px solid var(--line);border-radius:0;margin-top:6px}",
+      ".abg-pro .abg-dossier-badge{background:var(--tls);color:var(--tl);border-radius:4px;letter-spacing:.02em}.abg-pro .abg-dossier-gram{color:var(--mut);opacity:1}",
+      ".abg-pro .abg-dossier-meta{flex-wrap:wrap;padding-right:40px}.abg.abg-pro .abg-dossier-head.g-drug{border-top:0}.abg-pro .abg-dossier-sec-h svg,.abg-pro .abg-tag-info{display:none}",
+      ".abg-pro .abg-dossier-title{font:600 17px/1.3 var(--f)}.abg-pro .abg-dossier-close{background:var(--track);color:var(--ink)}",
+      ".abg-pro .abg-dossier-section,.abg-pro .abg-dossier-section.pearls{background:none;border:0;border-top:1px solid var(--line);border-radius:0;padding:12px 0;margin:0}",
+      ".abg-pro .abg-dossier-sec-h,.abg-pro .abg-dossier-section.pearls .abg-dossier-sec-h{font:600 12.5px var(--f);text-transform:none;letter-spacing:0;color:var(--ink2)}.abg-pro .abg-dossier-sec-h svg{color:var(--mut)}",
+      ".abg-pro .abg-dossier-sec-p{font:500 13px/1.55 var(--f)}.abg-pro .abg-dossier-reg-item{border-radius:8px}.abg-pro .abg-dossier-reg-drug,body.dark .abg-pro .abg-dossier-reg-drug{color:var(--ink)}",
+      ".abg-pro .abg-dossier-alert,body.dark .abg-pro .abg-dossier-alert,.abg-pro .abg-sum-pathogen-intrinsic,body.dark .abg-pro .abg-sum-pathogen-intrinsic{background:var(--red-bg,#fbe7e9);border-color:var(--red-line,#efa9b1);border-radius:8px}",
+      ".abg-pro .abg-dossier-alert-title,body.dark .abg-pro .abg-dossier-alert-title,.abg-pro .abg-sum-pathogen-intrinsic,body.dark .abg-pro .abg-sum-pathogen-intrinsic{color:var(--red,#ab1c2c)}.abg-pro .abg-dossier-alert-text,body.dark .abg-pro .abg-dossier-alert-text{color:var(--ink)}",
+      ".abg-pro .abg-know-more-hero,.abg-pro .abg-dossier-hero-btn,.abg-pro .abg-cell-btn-dossier,.abg-pro .abg-cell-btn-drug{background:var(--panel);color:var(--ink);border:1px solid var(--line);box-shadow:none;border-radius:8px;font:600 13.5px var(--f);min-height:42px}",
+      ".abg-pro .abg-know-more-hero{background:var(--tl);border-color:var(--tl);color:#fff}",
+      ".abg-pro .abg-know-more-hero:active,.abg-pro .abg-dossier-hero-btn:active,.abg-pro .abg-cell-btn-dossier:active,.abg-pro .abg-cell-btn-drug:active{transform:none;filter:none;opacity:.8}",
+      ".abg-pro .abg-dossier-btn-isolate{background:var(--panel);border:1px solid var(--line);color:var(--ink);border-radius:8px;font:600 13.5px var(--f)}.abg-pro .abg-dossier-btn-done{background:var(--tl);border-radius:8px;font:600 13.5px var(--f)}",
+      ".abg-pro .abg-multi-molecules{border-radius:8px}.abg-pro .abg-multi-btn{border-radius:6px;color:var(--ink)}",
+      ".abg-pro .abg-tags em{border-radius:6px;font:600 12px var(--f);background:var(--panel);border-color:var(--line);color:var(--ink)}",
+      ".abg-pro .abg-tags em.rel,body.dark .abg-pro .abg-tags em.rel{background:var(--panel);border-color:var(--green-line,#aedcc1);color:var(--green,#1c7a4a)}",
+      ".abg-pro .abg-tags em.part,body.dark .abg-pro .abg-tags em.part{background:var(--panel);border-color:var(--yellow-line,#f0d49b);color:var(--yellow,#92620a)}",
+      ".abg-pro .abg-cell-banner{border-radius:8px;font:600 13px/1.4 var(--f)}",
+      ".abg-pro .abg-cell-banner.on,body.dark .abg-pro .abg-cell-banner.on{background:var(--green-bg,#e7f5ec);border-color:var(--green-line,#aedcc1);color:var(--green,#1c7a4a)}",
+      ".abg-pro .abg-cell-banner.part,body.dark .abg-pro .abg-cell-banner.part{background:var(--yellow-bg,#fdf2de);border-color:var(--yellow-line,#f0d49b);color:var(--yellow,#92620a)}",
+      ".abg-pro .abg-cell-banner.no,body.dark .abg-pro .abg-cell-banner.no{background:var(--red-bg,#fbe7e9);border-color:var(--red-line,#efa9b1);color:var(--red,#ab1c2c)}",
+      ".abg-pro .abg-toast{border-radius:10px;font:600 13px var(--f)}",
+      /* The app-wide appearance styles (appearance.css, data-appearance) turn every tab into its own glass
+         tile. In the redesign the tabs are one segmented control: only the selected segment is raised. */
+      "html[data-appearance] #abgOverlay.abg-pro:not(#_) .abg-tab:not(.on){background:transparent!important;border-color:transparent!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}",
+      "html[data-appearance] #abgOverlay.abg-pro:not(#_) .abg-note{background:transparent!important;border-color:transparent!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}"
     ].join("") + (window.ABG_V2 ? window.ABG_V2.css : "");
     (document.head || document.documentElement).appendChild(s);
   }
