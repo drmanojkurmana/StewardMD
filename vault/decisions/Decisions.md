@@ -10227,3 +10227,4 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
   users, same posture as RadioAnatome's own un-bundled slice images.
 - **Reversible**: the flag is OFF by default and the source repo remains the source of truth: future
   edits happen there, then get re-synced into this repo's copies, never the other way around.
+- **Update (same day)**: images now hosted in R2 bucket `stewardmd-ophthalmos-img` (APAC) at `https://ophthalmos-img.stewardmd.in`, immutable cache headers; the flag stays OFF until ophthalmologist sign-off.

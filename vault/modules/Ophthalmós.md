@@ -48,3 +48,9 @@ just before it would be forgotten. Interaction modelled the same way as [[RadioA
 - **Teaching points and plans are ai_drafted**, pending ophthalmologist sign-off: same
   status class as CliniX/SURGX content before R1 review. Do not present this content as
   clinically approved.
+
+## Image hosting (done 2026-09-27)
+- R2 bucket `stewardmd-ophthalmos-img` (location APAC), custom domain `https://ophthalmos-img.stewardmd.in` (zone stewardmd.in, min TLS 1.2).
+- 6,266 WebP objects (6,241 images + 25 thumbnails, 134 MB), `Content-Type: image/webp`, `Cache-Control: public, max-age=31536000, immutable`. Paths are immutable: a changed image gets a new key, never rewritten bytes (same rule as RadioAnatome).
+- `ophthalmos.js` defaults to this domain (`IMG_DEFAULT`); `window.SMD_OPHTHALMOS_IMG` overrides it. `_headers` report-only CSP `img-src` lists the domain.
+- Re-upload after a pipeline change: `wrangler r2 object put stewardmd-ophthalmos-img/<key> --file <webp> --content-type image/webp --cache-control "public, max-age=31536000, immutable" --remote` per new file (no bulk command in wrangler 4.141).

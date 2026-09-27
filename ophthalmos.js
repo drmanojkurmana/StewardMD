@@ -30,7 +30,10 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
-  function imgUrl(p) { return (G.SMD_OPHTHALMOS_IMG || "/ophthalmos-img/") + p; }
+  // Images live in R2 bucket stewardmd-ophthalmos-img, served at this custom domain (not bundled:
+  // Cloudflare Pages caps a deploy at 20,000 files). The dev harness overrides it with local files.
+  var IMG_DEFAULT = "https://ophthalmos-img.stewardmd.in/";
+  function imgUrl(p) { return (G.SMD_OPHTHALMOS_IMG || IMG_DEFAULT) + p; }
   function ls() { try { return G.localStorage; } catch (e) { return null; } }
   function save() { D.saveStore(ls(), st.store); }
   function today() { return D.today(Date.now()); }
