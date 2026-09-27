@@ -10326,6 +10326,20 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
 - **Owner accepted (2026-09-27)**: one test-split case (aggregate only) loses a needed antibiotic call on
   the text path in the v2 configs, so their `abxSens` floor is 138 (was 139). Not tuned against the test
   split. `smd_nlp_v2` stays OFF; `sepsis_afebrile` is live with gate v2.
+
+## 2026-09-27 - One Help & Support centre with live chat; replies must reach the doctor
+- **Context**: owner: three places (Feedback, Help & support, Bug Report Centre) for one job, and "I replied
+  immediately but it never reached the user or he received a notification". Two causes: the reply push
+  targeted the uid with its `fb:` namespace stripped (tokens are stored as `fb:<uid>`), so nothing was
+  sent; and the app only re-read tickets on open, from KV, which lags up to 60 s across edge locations.
+- **Decision**: one centre (sidebar `help`, More sheet, every Feedback entry) over the existing support
+  tickets with kinds bug | help | feedback. A D1 event log (`_support_live.js`) is the strongly
+  consistent fast path both sides poll by cursor; KV stays the record. Polling, not websockets: Pages
+  Functions have no socket server here, and a 2.5 s cursor poll against D1 is cheap and simple.
+- **Retention (owner)**: solved conversations expire 30 days after they were solved (KV TTL + index
+  filter); open ones stay; reopening restores the open TTL. Screenshots already go on fix.
+
+
 ## 2026-09-27 - SMS only as our approved DLT templates, and no patient name in any message
 - **Decision**: every patient/doctor SMS is built from one of our approved Vodafone Idea DLT templates
   (header MAIK, `functions/_followcare_sms.js` DLT, text verbatim) and sent through 2Factor's R1 API with

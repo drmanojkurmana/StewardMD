@@ -135,7 +135,8 @@ import { getRemoteConfig, setRemoteConfig } from "../../_remoteconfig.js";
 import { lookupUidByEmail, getUserRecord, setUserDisabled, mergeUserClaims } from "../../_fbadmin.js";
 import { getAnalytics } from "../../_analytics.js";
 import { sseFrames, sseFrameText, sseFrameUsage } from "../../_sse_parse.js";
-import { listTickets as listSupportTickets, getTicket as getSupportTicket, addMessage as addSupportMessage, setStatus as setSupportStatus, shotKey as supportShotKey, shotResponse as supportShotResponse } from "../../_support.js";
+import { listTickets as listSupportTickets, getTicket as getSupportTicket, addMessage as addSupportMessage, setStatus as setSupportStatus, shotKey as supportShotKey, shotResponse as supportShotResponse, markSeenBySupport } from "../../_support.js";
+import { logEvent as logSupportEvent, eventsSince as supportEventsSince, headSeq as supportHeadSeq } from "../../_support_live.js";
 import { sendNativeToAll } from "../../_nativepush.js";
 import { answerCacheKey, getCachedAnswer, putCachedAnswer, getRuntimeCfg as getMaikCfg, setRuntimeCfg as setMaikCfg, cacheEligibleCtx, kbFingerprint } from "../../_maik_cache.js";
 import { scrubMetaTalk, metaTalkStream } from "../../_maik_metatalk.js";   // no "the passage you sent" talk (2026-09-26)
@@ -1199,7 +1200,7 @@ export async function onRequest(context) {
 
   // AI Control Center admin console APIs (owner-gated): model switch, quota editor, global rollup,
   // emergency kill switch, runtime budget, audit log. Every mutation is written to the audit log.
-  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config" || seg === "admin/analytics" || seg === "admin/support" || seg === "admin/support-reply" || seg === "admin/support-shot" || seg === "admin/maik-config" || seg === "admin/maik-feedback") {
+  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config" || seg === "admin/analytics" || seg === "admin/support" || seg === "admin/support-reply" || seg === "admin/support-shot" || seg === "admin/support-live" || seg === "admin/support-seen" || seg === "admin/maik-config" || seg === "admin/maik-feedback") {
     const url = new URL(request.url);
     if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
     const store = usageKv(env);
@@ -1241,6 +1242,22 @@ export async function onRequest(context) {
       if (tid) return json({ ticket: await getSupportTicket(store, tid) });
       return json({ tickets: await listSupportTickets(store, u2.searchParams.get("status") || "") });
     }
+    // Live feed for the Help & Support inbox: every event after ?after=<seq> (D1, strongly consistent).
+    if (seg === "admin/support-live") {
+      const a = new URL(request.url).searchParams.get("after");
+      if (a == null || a === "") return json({ ok: true, live: true, seq: await supportHeadSeq(env, null), events: [] });
+      return json({ ok: true, ...(await supportEventsSince(env, { after: +a })) });
+    }
+    // The developer opened a conversation: clear the inbox dot and tell the doctor it was read.
+    if (seg === "admin/support-seen") {
+      if (request.method !== "POST") return json({ error: "method" }, 405);
+      let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
+      const t = await getSupportTicket(store, String(b.id || ""));
+      if (!t) return json({ ok: false, error: "not-found" }, 404);
+      await markSeenBySupport(store, t.id);
+      await logSupportEvent(env, { ticket: t.id, owner: t.owner, sender: "support", kind: "read", ts: Date.now() });
+      return json({ ok: true });
+    }
     // Bug report screenshot (shake to report). Owner-only, like every admin/* route.
     if (seg === "admin/support-shot") {
       const sid = new URL(request.url).searchParams.get("id") || "";
@@ -1263,10 +1280,17 @@ export async function onRequest(context) {
       if (resolve && t.kind === "bug") { try { await store.delete(supportShotKey(id)); } catch (e) {} }
       // Tell the doctor on their phone. No ticket text in the push (a lock screen is not private):
       // only that a reply exists; the reply itself is read in the Bug Report Centre.
+      // Live chat: the doctor's open chat picks this up within seconds (D1), whatever KV's lag.
+      const nowS = Date.now();
+      if (hasText) await logSupportEvent(env, { ticket: t.id, owner: t.owner, sender: "support", kind: "msg", text: String(b.text).trim(), ts: nowS });
+      if (resolve || reopen || working) await logSupportEvent(env, { ticket: t.id, owner: t.owner, sender: "support", kind: "status:" + t.status, ts: nowS });
+      // BUG (owner, 2026-09-27: "I replied immediately but it never reached the user"): native push
+      // tokens are stored under the NAMESPACED account id ("fb:<uid>", push route identify()), and
+      // this used to strip the "fb:" before filtering, so it matched no device and sent nothing.
       if (hasText && /^fb:/.test(String(t.owner || ""))) {
         const bug = t.kind === "bug";
         const push = sendNativeToAll(env, { title: bug ? (resolve ? "Your bug report is fixed" : "Reply to your bug report") : "Reply from StewardMD support",
-          body: t.id + ": open StewardMD to read it.", tag: "smd-support-" + t.id, url: "https://stewardmd.in/#bugs" }, { uid: String(t.owner).slice(3) }).catch(function () {});
+          body: t.id + ": open StewardMD to read it.", tag: "smd-support-" + t.id, url: "https://stewardmd.in/#help" }, { uid: String(t.owner) }).catch(function () {});
         if (context && typeof context.waitUntil === "function") context.waitUntil(push); else await push;
       }
       await auditRecord(store, "support", id + (hasText ? ":reply" : "") + (resolve ? ":resolved" : reopen ? ":reopened" : working ? ":in-progress" : ""), actorId, Date.now());

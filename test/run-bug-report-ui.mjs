@@ -30,7 +30,13 @@ let fails = 0; const ok = (c, m) => { console.log((c ? "✅ " : "❌ ") + m); if
 
 // A signed-in doctor and an in-page /api/support server that behaves like functions/api/support.js.
 const STUB = `
-  window.__calls = []; window.__tickets = [];
+  window.__calls = []; window.__tickets = []; window.__events = []; window.__seq = 0; window.__errs = [];
+  window.addEventListener("error", function (e) { window.__errs.push(String(e.message)); }); window.addEventListener("unhandledrejection", function (e) { window.__errs.push("rej " + String(e.reason && e.reason.message || e.reason)); });
+  // The developer side of the live log (functions/_support_live.js), for the test to drive.
+  window.__ev = function (e) { e.seq = ++window.__seq; e.ts = e.ts || Date.now(); window.__events.push(e); };
+  window.__devReply = function (id, text) { var t = window.__tickets.filter(function (x) { return x.id === id; })[0]; var now = Date.now();
+    t.messages.push({ from: "support", text: text, ts: now }); t.userUnread = true; t.updatedAt = now; window.__ev({ ticket: id, sender: "support", kind: "msg", text: text, ts: now }); };
+  window.__devSeen = function (id) { window.__ev({ ticket: id, sender: "support", kind: "read" }); };
   window.SMD_AUTH = { currentUser: { uid: "u-doc-1", getIdToken: function () { return Promise.resolve("tok"); }, getIdTokenResult: function () { return Promise.resolve({ claims: { phoneVerified: true } }); } },
     onAuthStateChanged: function (cb) { setTimeout(function () { cb(window.SMD_AUTH.currentUser); }, 0); } };
   var _f = window.fetch;
@@ -40,14 +46,26 @@ const STUB = `
     o = o || {}; var body = {}; try { body = JSON.parse(o.body || "{}"); } catch (e) {}
     window.__calls.push({ method: o.method || "GET", url: u, body: body, auth: o.headers && o.headers.Authorization });
     var reply = function (j, s) { return Promise.resolve({ ok: (s || 200) < 400, status: s || 200, json: function () { return Promise.resolve(j); }, blob: function () { return Promise.resolve(new Blob(["x"], { type: "image/jpeg" })); } }); };
-    if ((o.method || "GET") === "GET") return reply({ ok: true, tickets: window.__tickets });
+    if ((o.method || "GET") === "GET") {
+      if (u.indexOf("live=1") > -1) {
+        var m = /after=(\\d+)/.exec(u);
+        if (!m) return reply({ ok: true, live: true, seq: window.__seq, events: [] });
+        var ev = window.__events.filter(function (e) { return e.seq > +m[1]; });
+        return reply({ ok: true, live: true, seq: ev.length ? ev[ev.length - 1].seq : +m[1], events: ev });
+      }
+      return reply({ ok: true, tickets: JSON.parse(JSON.stringify(window.__tickets)) });
+    }
+    if (body.action === "create") {
+      var n2 = Date.now(), t2 = { id: "SMD-Q" + (window.__tickets.length + 1) + "XYZ", kind: body.kind === "feedback" ? "feedback" : "help", subject: body.text.split("\\n")[0].slice(0, 80), status: "open", createdAt: n2, updatedAt: n2, messages: [{ from: "user", text: body.text, ts: n2 }] };
+      window.__tickets.unshift(t2); return reply({ ok: true, ticket: JSON.parse(JSON.stringify(t2)) });
+    }
     if (body.action === "bug") {
       var now = Date.now(), t = { id: "SMD-ABC123", kind: "bug", subject: "Bug: " + body.text.split("\\n")[0], status: "open", createdAt: now, dueAt: now + 86400000,
         hasShot: !!body.shot, bug: body.bug, messages: [{ from: "user", text: body.text, ts: now }] };
       window.__tickets.unshift(t); return reply({ ok: true, ticket: t });
     }
     if (body.action === "seen") { window.__tickets.forEach(function (t) { if (t.id === body.id) t.userUnread = false; }); return reply({ ok: true }); }
-    if (body.action === "reply") { var tt = window.__tickets.filter(function (t) { return t.id === body.id; })[0]; tt.messages.push({ from: "user", text: body.text, ts: Date.now() }); return reply({ ok: true, ticket: tt }); }
+    if (body.action === "reply") { var tt = window.__tickets.filter(function (t) { return t.id === body.id; })[0]; tt.messages.push({ from: "user", text: body.text, ts: Date.now() }); tt.updatedAt = Date.now(); return reply({ ok: true, ticket: JSON.parse(JSON.stringify(tt)) }); }
     return reply({ error: "bad" }, 400);
   };
   return 1;`;
@@ -150,24 +168,48 @@ try {
   ok(sent.body.bug.screen && sent.body.bug.screen.w === 390, "and the screen size");
   await ev(`document.getElementById("bgDone").click(); return 1;`);
 
-  // ── sidebar: Bug Report Centre in, AgentConnect and My Clinic out ──
+  // ── sidebar: ONE Help & Support (no separate Feedback / Bug Centre); AgentConnect and My Clinic out ──
   await ev(`try{localStorage.setItem("smd_personal_clinic","1")}catch(e){} try { if (window.SB && SB.open) SB.open(); } catch (e) {} return 1;`);
-  ok(await waitFor(`return !!document.querySelector('[data-sbr-act="bugs"]')`), "the sidebar has Bug Report Centre");
+  ok(await waitFor(`return !!document.querySelector('[data-sbr-act="help"]')`), "the sidebar has one Help & Support entry");
+  ok(await ev(`return !document.querySelector('[data-sbr-act="feedback"]') && !document.querySelector('[data-sbr-act="bugs"]');`) === true, "Send Feedback and Bug Report Centre are folded into it");
   ok(await ev(`return !document.querySelector('[data-sbr-act="agentconnect"]') && !document.querySelector('[data-sbr-act="clinic"]');`) === true, "AgentConnect and My Clinic are gone from the sidebar (even with My Clinic switched on)");
-  await ev(`document.querySelector('[data-sbr-act="bugs"]').click(); return 1;`);
-  ok(await waitFor(`var r=document.getElementById("bugcRoot"); return !!(r && r.classList.contains("on") && /SMD-ABC123/.test(r.innerText));`), "the Centre lists the report");
-  ok(/Fix due in 24 h/.test(await text("bugcRoot")), "with the time left on the 24-hour promise");
+  await ev(`document.querySelector('[data-sbr-act="help"]').click(); return 1;`);
+  ok(await waitFor(`var r=document.getElementById("bugcRoot"); return !!(r && r.classList.contains("on") && /How can we help/.test(r.innerText) && /SMD-ABC123|ICU|does nothing/.test(r.innerText));`), "Help & Support opens with the three ways in and the doctor's conversations");
+  ok(await ev(`return document.querySelectorAll('#bugcRoot [data-new]').length === 3 && /Report a problem/.test(document.getElementById("bugcRoot").innerText) && /Ask a question/.test(document.getElementById("bugcRoot").innerText) && /Share feedback/.test(document.getElementById("bugcRoot").innerText);`) === true, "Report a problem, Ask a question, Share feedback");
+  ok(/Fix due in 24 h/.test(await text("bugcRoot")), "the bug shows its 24-hour promise");
 
-  // ── the developer replies: badge, thread, doctor answers back ──
-  await ev(`window.__tickets[0].messages.push({from:"support",text:"Thanks, fixed in the next update.",ts:Date.now()}); window.__tickets[0].userUnread=true; SMD_BUGS.closeCentre(); SMD_BUGS.openCentre(); return 1;`);
-  ok(await waitFor(`return !!document.querySelector("#bugcRoot .bc-dot")`), "a developer reply shows as unread");
+  // ── LIVE: the developer replies while the chat is OPEN; it appears without reopening ──
   await ev(`document.querySelector("#bugcRoot [data-bc]").click(); return 1;`);
-  ok(await waitFor(`return /StewardMD developer/.test(document.getElementById("bugcRoot").innerText) && /fixed in the next update/.test(document.getElementById("bugcRoot").innerText)`), "the thread shows the developer's reply");
-  ok(await ev(`return window.__calls.some(function(c){return c.body.action==="seen"})`) === true, "opening it marks it read");
-  await ev(`document.getElementById("bcTx").value="Thank you"; document.getElementById("bcSend").click(); return 1;`);
-  ok(await waitFor(`return window.__calls.some(function(c){return c.body.action==="reply" && c.body.text==="Thank you"})`), "the doctor can reply back");
-  if (process.env.SHOT) { const s = await call("Page.captureScreenshot", { format: "png" }); (await import("node:fs")).writeFileSync(process.env.SHOT.replace(/\.png$/, "-centre.png"), Buffer.from(s.result.data, "base64")); }
-  ok(await ev(`return !/[\\u{1F300}-\\u{1FAFF}\\u2014]/u.test(document.getElementById("bugcRoot").innerText)`) === true, "no emoji and no em-dash in the Centre");
+  ok(await waitFor(`return /Tapping this does nothing/.test(document.getElementById("bugcRoot").innerText)`), "the conversation opens as a chat");
+  await ev(`window.__devReply("SMD-ABC123", "Thanks, we found it. Fix in the next update."); return 1;`);
+  ok(await waitFor(`return /we found it/.test(document.getElementById("bugcRoot").innerText)`, 6000), "the developer's reply appears in the open chat within seconds, no reopening");
+  ok(await waitFor(`return window.__calls.some(function(c){return c.body.action==="seen" && c.body.id==="SMD-ABC123"})`), "and is marked read at once (the chat is on screen)");
+  await ev(`document.getElementById("bcTx").value="Great, thank you"; document.getElementById("bcTx").dispatchEvent(new Event("input")); document.getElementById("bcSend").click(); return 1;`);
+  ok(await waitFor(`return window.__calls.some(function(c){return c.body.action==="reply" && c.body.text==="Great, thank you"})`), "the doctor replies from the chat composer");
+  ok(await waitFor(`return /Great, thank you[\\s\\S]*Sent/.test(document.getElementById("bugcRoot").innerText)`), "their message shows Sent");
+  await ev(`window.__devSeen("SMD-ABC123"); return 1;`);
+  ok(await waitFor(`return /Great, thank you[\\s\\S]*Seen/.test(document.getElementById("bugcRoot").innerText)`, 6000), "and turns to Seen when the developer opens it");
+  if (process.env.SHOT) { const s2 = await call("Page.captureScreenshot", { format: "png" }); (await import("node:fs")).writeFileSync(process.env.SHOT.replace(/\.png$/, "-chat.png"), Buffer.from(s2.result.data, "base64")); }
+
+  // ── a reply while the doctor is elsewhere in the app: a banner they can tap, plus the badge ──
+  await ev(`SMD_BUGS.closeCentre(); return 1;`);
+  await ev(`window.__devReply("SMD-ABC123", "One more thing: which iOS version?"); return 1;`);
+  ok(await waitFor(`var t=document.getElementById("hsToast"); return !!t && /StewardMD support replied/.test(t.innerText) && /which iOS/.test(t.innerText)`, 35000), "a banner shows the new reply while the doctor is elsewhere in the app");
+  await ev(`document.getElementById("hsToast").click(); return 1;`);
+  ok(await waitFor(`var r=document.getElementById("bugcRoot"); return !!(r && r.classList.contains("on") && /which iOS/.test(r.innerText))`), "tapping it opens straight into that conversation");
+
+  // ── Ask a question: a new chat, created on first send ──
+  await ev(`document.getElementById("bcBack").click(); return 1;`);
+  await waitFor(`return !!document.querySelector('#bugcRoot [data-new="help"]')`);
+  await ev(`document.querySelector('#bugcRoot [data-new="help"]').click(); return 1;`);
+  ok(await waitFor(`return /Ask us anything/.test(document.getElementById("bugcRoot").innerText)`), "Ask a question opens a chat with the team");
+  await ev(`document.getElementById("bcTx").value="How do I export a case as PDF?"; document.getElementById("bcTx").dispatchEvent(new Event("input")); document.getElementById("bcSend").click(); return 1;`);
+  ok(await waitFor(`return window.__calls.some(function(c){return c.body.action==="create" && c.body.kind==="help" && /export a case/.test(c.body.text)})`), "the first message creates the conversation");
+  ok(await waitFor(`return /Question · SMD-Q/.test(document.getElementById("bugcRoot").innerText) && /export a case as PDF/.test(document.getElementById("bugcRoot").innerText)`), "and it continues as a chat");
+  // Feedback lands in the same centre (SMD_openFeedback is what every old Feedback entry calls).
+  await ev(`SMD_BUGS.closeCentre(); window.SMD_openFeedback(); return 1;`);
+  ok(await waitFor(`return /Feedback or an idea/.test(document.getElementById("bugcRoot").innerText)`), "every Feedback entry point opens the same centre, ready to write");
+  ok(await ev(`return !/[\\u{1F300}-\\u{1FAFF}\\u2014]/u.test(document.getElementById("bugcRoot").innerText)`) === true, "no emoji and no em-dash in the centre");
   await ev(`SMD_BUGS.closeCentre(); return 1;`);
 
   // ── switched off: shaking does nothing ──
@@ -175,6 +217,6 @@ try {
   await sleep(4200); await shake(); await sleep(1500);
   ok(await on("bugrRoot") === false, "with Shake to report off, a shake does nothing");
 
-  console.log(fails === 0 ? "\nALL GREEN - shake to report, point at the problem, 24-hour promise, Bug Report Centre with developer replies" : `\n${fails} FAILED`);
+  console.log(fails === 0 ? "\nALL GREEN - shake to report, point at the problem, one Help & Support centre with LIVE chat, banner, Seen" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }

@@ -130,10 +130,10 @@ test("shake detector: three hard swings within a second fire once; a bump, a slo
 
 test("the 24-hour promise reads right on every state", () => {
   const B = loadClient(); const now = 1_000_000_000_000;
-  assert.deepEqual(B._slaText({ status: "open", dueAt: now + 5 * 3600000 }, now), { txt: "Fix due in 5 h", cls: "" });
-  assert.deepEqual(B._slaText({ status: "open", dueAt: now + 20 * 60000 }, now), { txt: "Fix due within the hour", cls: "" });
-  assert.deepEqual(B._slaText({ status: "open", dueAt: now - 1 }, now), { txt: "Overdue, we are on it", cls: "late" });
-  assert.deepEqual(B._slaText({ status: "resolved", dueAt: now - 1 }, now), { txt: "Fixed", cls: "ok" });
+  assert.deepEqual(B._slaText({ kind: "bug", status: "open", dueAt: now + 5 * 3600000 }, now), { txt: "Fix due in 5 h", cls: "" });
+  assert.deepEqual(B._slaText({ kind: "bug", status: "open", dueAt: now + 20 * 60000 }, now), { txt: "Fix due within the hour", cls: "" });
+  assert.deepEqual(B._slaText({ kind: "bug", status: "open", dueAt: now - 1 }, now), { txt: "Overdue, we are on it", cls: "late" });
+  assert.deepEqual(B._slaText({ kind: "bug", status: "resolved", dueAt: now - 1 }, now), { txt: "Fixed", cls: "ok" });
 });
 
 test("the report payload carries the screen, the pointed element and the page, and no em-dash in any user text", () => {
@@ -146,13 +146,15 @@ test("the report payload carries the screen, the pointed element and the page, a
   assert.match(src, /fix it within 24 hours/);
 });
 
-test("sidebar: Bug Report Centre in, AgentConnect and My Clinic out; bug-report.js is loaded", () => {
+test("sidebar: ONE Help & Support row (no separate Feedback / Bug Centre), AgentConnect and My Clinic out; bug-report.js is loaded", () => {
   const sb = readFileSync(new URL("../sidebar-redesign.js", import.meta.url), "utf8");
   const menu = sb.slice(sb.indexOf("function build(menu)"), sb.indexOf("if (menu.__sbrClick) return;"));
-  assert.match(menu, /row\("bugs", "bug", "Bug Report Centre", bugBadge\(\)\)/);
+  assert.match(menu, /row\("help", "chat", "Help &amp; Support", bugBadge\(\)\)/);
+  assert.equal(/row\("feedback"/.test(menu), false, "Send Feedback folded into Help & Support");
+  assert.equal(/row\("bugs"/.test(menu), false, "Bug Report Centre folded into Help & Support");
   assert.equal(/row\("agentconnect"/.test(menu), false);
   assert.equal(/row\("clinic"/.test(menu), false);
-  assert.match(sb, /bugs: function \(\) \{ if \(window\.SMD_BUGS && SMD_BUGS\.openCentre\)/);
+  assert.match(sb, /help: function \(\) \{ if \(window\.SMD_HELP && SMD_HELP\.openCentre\)/);
   const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   assert.match(html, /<script src="\/bug-report\.js\?v=[^"]+" defer><\/script>/);
 });
@@ -174,6 +176,6 @@ test("Bug Centre statuses: 'working on it' is still open work; reopening restart
 
 test("the doctor sees 'Working on it' once the developer picks it up", () => {
   const B = loadClient(); const now = 1_000_000_000_000;
-  assert.deepEqual(B._slaText({ status: "in_progress", dueAt: now + 3 * 3600000 }, now), { txt: "Working on it, due in 3 h", cls: "" });
-  assert.deepEqual(B._slaText({ status: "in_progress", dueAt: now - 1 }, now), { txt: "Overdue, we are on it", cls: "late" });
+  assert.deepEqual(B._slaText({ kind: "bug", status: "in_progress", dueAt: now + 3 * 3600000 }, now), { txt: "Working on it, due in 3 h", cls: "" });
+  assert.deepEqual(B._slaText({ kind: "bug", status: "in_progress", dueAt: now - 1 }, now), { txt: "Overdue, we are on it", cls: "late" });
 });
