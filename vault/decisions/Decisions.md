@@ -10424,3 +10424,44 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
   infection now out-ranks the afebrile non-infective lead). Needed antibiotics and time-critical: unchanged.
   With the prior flag, chart-text top-3 204 -> 199. Everything else equal or better; classic order kept as
   the `smd_rank_v3=0` configuration.
+
+## 2026-09-27 - Marketing site: Apple design layer + the MaiK Offline story
+
+**Decision (owner):** polish stewardmd.in in Apple's design language and add a story about the offline model.
+
+**How:** `_site/index.html` gets one `<style id="apple-ds">` block of overrides only (SF-style Inter display
+type in place of the Newsreader serif, Apple ink/paper neutrals, true-black dark sections, no hairlines
+between sections, frosted nav, pill controls). Deleting that block restores the previous look; no section
+markup or scroll script was rewritten. A new `#offline` section sits directly under the hero, linked first
+in the nav and mobile menu: headline "India's first offline medical AI." (tricolour India), the owner's real
+airplane-mode screen recording (`_site/assets/s/maik-offline-demo.mp4`, 0.8 MB, muted loop, iOS recording
+dot masked), four facts, a four-chapter story and a privacy panel.
+
+**Claims and their sources:** on-device inference (`maik-local.js`), 10 model packs (`maik-models.js`),
+claim-level grounding (`kb/ai/maik-grounding.js`), doses from the drug database (`kb/ai/drug-dose.js`).
+"India's first" is backed by `vault/legal-assets/maik-india-first-evidence.md`. "Free and unlimited" is
+scoped to offline models with the same fine print as the posters.
+
+**Verification:** headless Chromium at 1440 and 390 wide, no horizontal overflow, no page errors; site tests
+67/67. Full CI suite 10847/10849, the one failure (`wardsynq-ed` concurrent provisional MRN) passes 3/3 in
+isolation and is unrelated to this change.
+
+## 2026-09-27 - Preview deployments no longer serve the web app
+
+**Decision (owner):** StewardMD is native-only (iOS, Android, iPad). A branch/PR preview URL
+(`<hash|branch>.stewardmd.pages.dev`) opening the full clinical web app in a browser is not acceptable.
+
+**What changed:** `functions/_middleware.js` had a PREVIEW BYPASS that returned the real app on every
+`*.stewardmd.pages.dev` host "for QA". It is removed: previews now get exactly the stewardmd.in routing
+(marketing site at the root, 404 for the app bundle and kb/). Previews keep `X-Robots-Tag: noindex,
+nofollow` (marketing response and the coming-soon fallback). Production stays indexable.
+
+**Also found:** the `/realapp` secret path still sets the `smd_access` cookie, but nothing reads it any more,
+so it unlocks nothing; the web app on stewardmd.in was already fully blocked. Left as is.
+
+**Testing the app now:** on device, or locally with `test/serve.mjs`. `SITE_ALLOW_WEB=1` (Pages env) remains
+the emergency valve and applies to every host.
+
+**Verification:** `test/site-gate.test.mjs` pins it (preview hosts: /home.js and kb/ are 404, root is the
+marketing site, noindex; production root indexable). The new test fails on the old middleware and passes on
+the new one. Full unit suite 10915/10916 passing, 0 failures.
