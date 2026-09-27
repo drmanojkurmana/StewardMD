@@ -139,13 +139,26 @@ try {
     });
   }
 
+  // ---- the engine (Laya tests option-order robustness): the same findings in another key order must give the
+  // same differential (top 5) and the same antibiotic answer; so must assessing twice
+  const gcases = gold.filter((c) => c.findings && Object.keys(c.findings).length);
+  const eng = JSON.parse(await ev(`var cs = ${lit(gcases.map((c) => ({ id: c.id, open: splits[c.id] === "train" || splits[c.id] === "dev", k: Object.keys(c.findings).filter((k) => c.findings[k]) })))};
+    function run(keys) { var f = {}; keys.forEach(function (k) { f[k] = true; }); var a = SMD_REASON.assess(f);
+      var all = [].concat(a.infectious || [], a.nonInfectious || []).sort(function (x, y) { return ((y.rank != null ? y.rank : y.confidence) - (x.rank != null ? x.rank : x.confidence)) || (y.confidence - x.confidence); });
+      return all.slice(0, 5).map(function (x) { return x.id; }).join(",") + "|" + a.gate.cls; }
+    var out = { order: [], repeat: [] };
+    cs.forEach(function (c) { var a = run(c.k), b = run(c.k.slice().reverse()), r = run(c.k);
+      if (a !== b) out.order.push(c.open ? c.id + ": " + a + " vs " + b : null); if (a !== r) out.repeat.push(c.open ? c.id : null); });
+    return JSON.stringify(out);`));
+  eng.order.forEach((x) => bump("engine.order", x)); eng.repeat.forEach((x) => bump("engine.repeat", x));
+
   for (const k of Object.keys(counts).sort()) {
     console.log(`${k.padEnd(18)} ${counts[k]}`);
     (examples[k] || []).forEach((e) => console.log("    " + e));
   }
   const ceilings = (() => { try { return JSON.parse(readFileSync(CEIL_FILE, "utf8")); } catch { return {}; } })();
   if (WRITE) {
-    const ALL = ["probe.pos", "probe.neg", "probe.list", "probe.spelling", "chart.upper", "chart.spaces", "chart.neutral", "chart.lines", "chart.reversed"];
+    const ALL = ["probe.pos", "probe.neg", "probe.list", "probe.spelling", "chart.upper", "chart.spaces", "chart.neutral", "chart.lines", "chart.reversed", "engine.order", "engine.repeat"];
     const out = {}; for (const k of ALL) out[k] = counts[k] || 0;
     writeFileSync(CEIL_FILE, JSON.stringify(out, null, 2) + "\n"); console.log("ceilings written");
   }
