@@ -243,8 +243,15 @@ async function receiveNhcxCallback(request, env, ctx) {
   try { candidates = (await activeConnectors(repo, tenantId, "payer")).filter((c) => c.provider === "nhcx" && str(c.settings && c.settings.recipientCode) === str(hdr["x-hcx-sender_code"])); }
   catch { return reply(503, hdr, ["unavailable", "Try again."]); }
   if (!candidates.length) return reply(404, hdr, ["unknown_sender", "This hospital has no NHCX payer with that participant code."]);
+  /* One payer code can serve two connectors (a TPA for two insurers), and one gateway certificate verifies for both. The
+   * request this answers names its connector, so that one is the one checked. The name is read before anything is
+   * verified and only chooses which connector to verify against; step 4 still matches the authenticated correlation id. */
+  let named;
+  try { named = str((await repo.latest(tenantId, EXCHANGE_TYPE, exchangeId(hdr["x-hcx-correlation_id"])) || {}).connectorId); }
+  catch { return reply(503, hdr, ["unavailable", "Try again."]); }
+  const pool = candidates.filter((c) => c.id === named);
   let conn = null, secrets = null;
-  for (const c of candidates) {
+  for (const c of pool.length ? pool : candidates) {
     const s = await openConnectorSecrets(env, c);
     if (!s.signingCert) continue;
     if ((await verifyJwtRs256(bearer[1], s.signingCert, ctx.nowMs)).ok) { conn = c; secrets = s; break; }

@@ -26,9 +26,10 @@
  * order with no verification at all can still be dispensed - and the record says `unverified: true`
  * rather than implying a check that never happened.
  *
- * NO INVENTORY. There is no stock level, no reorder and no location. That is a pharmacy management
- * system and it is deliberately out of scope; this records the ISSUE against the order, which is what
- * the clinical record needs and what an audit asks for.
+ * NO INVENTORY. There is no stock level and no reorder here (stock.js counts them from this record).
+ * That is a pharmacy management system and it is deliberately out of scope; this records the ISSUE
+ * against the order, and the store it came from when named, which is what the clinical record needs
+ * and what an audit asks for.
  *
  * NO PACK CONVERSION EITHER, and for the same reason: pack sizes (stock.js: packFactors/toBaseUnit,
  * used when receiving in stores.js and purchasing.js) belong to an item master this file's drugs do
@@ -84,6 +85,9 @@ function MedicationDispense(input) {
     expiry: i.expiry || null,
     state: STATES.includes(i.state) ? i.state : "issued",
     destination: i.destination || null,          // the ward it went to
+    /* The store it was issued FROM, when the pharmacist names one (BILL-11). Absent, stock.js issueStoreFor() takes it
+     * from the item's main pharmacy store, and a later transfer never moves it. */
+    ...(i.location ? { location: i.location } : {}),
     /* A take-home supply given at discharge, said by the pharmacist. GST treats it apart from medicines used in the
      * stay (functions/_region_in.js gstForLines). Absent on everything else. */
     ...(i.takeHome === true ? { takeHome: true } : {}),
@@ -192,7 +196,7 @@ function summary(d) {
   return {
     dispenseId: d.id, orderId: d.orderId, orderVersion: d.orderVersion,
     drug: d.drug || null, quantity: d.quantity || null, batch: d.batch || null, expiry: d.expiry || null, state: d.state,
-    destination: d.destination || null, ...(d.takeHome ? { takeHome: true } : {}), unverified: !!d.unverified, verifiedVersion: d.verifiedVersion,
+    destination: d.destination || null, location: d.location || null, ...(d.takeHome ? { takeHome: true } : {}), unverified: !!d.unverified, verifiedVersion: d.verifiedVersion,
     dispensedBy: d.dispensedBy, dispensedAt: d.dispensedAt,
     returnedBy: d.returnedBy || null, returnedAt: d.returnedAt || null, returnReason: d.returnReason || null,
     ...(d.controlled ? { controlled: true, witnessedBy: d.witnessedBy || null } : {}),
@@ -226,6 +230,19 @@ async function dispenseOrder(request, env, ctx) {
     verifications = order ? await svc.byPatient("MedicationVerification", order.patientId) : [];
   } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
   if (!order) return { ...base, ok: false, status: 404, error: "order_not_found", orderId, written: 0 };
+  /* A RETRY IS ANSWERED WITH WHAT IT ALREADY DID (BILL-03), before the order is judged again. The dispense id carries
+   * the time, so a retry of a lost response minted a new id; asked again after the order was stopped it was refused
+   * although the stock had left. Stock, the NDPS book and the charge all read this one record, so one record is one issue. */
+  if (ctx.idempotencyKey) {
+    let prior;
+    try { prior = await svc.replayFor(ctx.idempotencyKey, TYPE, order.patientId); }
+    catch (e) {
+      if (e instanceof VersionConflictError) return { ...base, ok: false, status: 409, error: "idempotency_conflict", detail: "This request key already recorded something else.", orderId, written: 0 };
+      return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), orderId, written: 0 };
+    }
+    if (prior && prior.record && str(prior.record.orderId) !== orderId) return { ...base, ok: false, status: 409, error: "idempotency_conflict", detail: "This request key already recorded a dispense against another order.", orderId, written: 0 };
+    if (prior && prior.record) return { ...base, ok: true, written: 0, replayed: true, ...summary(prior.record), actor: resolved.actor.id };
+  }
   // A stopped or draft prescription is not supplied. Only a live order gets stock issued against it.
   if (order.status !== "active") return { ...base, ok: false, status: 409, error: "order_not_active", detail: `this order is ${order.status}`, orderId, written: 0 };
 
@@ -299,7 +316,7 @@ async function dispenseOrder(request, env, ctx) {
     id, patientId: order.patientId, encounterId: order.encounterId || null,
     orderId, orderVersion: order.version, drug: order.drug, drugCode: order.drugCode || null,
     quantity, batch: str(ctx.batch) || null, expiry: str(ctx.expiry) || null,
-    state: "issued", destination: str(ctx.destination) || null, takeHome: ctx.takeHome === true,
+    state: "issued", destination: str(ctx.destination) || null, location: str(ctx.location).slice(0, 120) || null, takeHome: ctx.takeHome === true,
     verifiedVersion: check.state === "current" ? check.verifiedVersion : null,
     // Stated on the record rather than left to be inferred from an absent verification.
     unverified: check.state === "none",
@@ -309,6 +326,8 @@ async function dispenseOrder(request, env, ctx) {
 
   try {
     const out = await svc.put(record, { idempotencyKey: ctx.idempotencyKey || null });
+    /* Two copies of one request racing: the second is handed the first's record, not the id it minted. */
+    if (out.replayed) return { ...base, ok: true, written: 0, replayed: true, ...summary(out.record), actor: resolved.actor.id };
     return {
       ...base, ok: true, written: 1, ...summary({ ...record, version: out.record.version }),
       /* Said on every response, because this is the confusion the whole file exists to prevent. */

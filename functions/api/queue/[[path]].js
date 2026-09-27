@@ -277,7 +277,7 @@ import { securityReport, recordSecurityReview, recordRestoreTest, auditRowsForRe
 import { systemHealthReport } from "../../_wardsynq/system-health.js";
 import { acknowledgeAnchorBreak } from "../../_wardsynq/audit-chain.js";
 import { orgAuditChain, firestoreAnchorStore } from "../../_q_audit_chain.js";
-import { chargesForPatient, tariffTable } from "../../_wardsynq/charge-capture.js";
+import { chargesForPatient, tariffTable, unbilledItems } from "../../_wardsynq/charge-capture.js";
 import { catalogue as investigationCatalogue } from "../../_wardsynq/investigation-catalogue.js";
 import { raiseInvoice, postDiscount, postDeposit, postPayment, postRefund, postAdjustment, postWriteOff, voidInvoiceRoute, readInvoice, invoicesForPatient, postNoteRoute, setPartiesRoute } from "../../_wardsynq/invoice.js";
 import { setStayPayer } from "../../_wardsynq/stay-payer.js";
@@ -2680,7 +2680,7 @@ export async function onRequest(context) {
         if (sub === "store-move" && method === "POST") return R(await storeMovement(request, env, { ...deps, kind: body.kind, code: body.code, quantity: body.quantity, unit: body.unit, location: body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, idempotencyKey: key }));
         if (sub === "indent" && method === "POST") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await raiseIndent(request, env, { ...deps, departments: d, authorizeDepartment: inDept(CAPS.DEPT_REQUEST), departmentId: body.departmentId, fromLocation: body.fromLocation, toLocation: body.toLocation, lines: body.lines, note: body.note, idempotencyKey: key })); }
         if (sub === "indent-decide" && method === "POST") return R(await decideIndent(request, env, { ...deps, authorizeDepartment: inDept(CAPS.INDENT_APPROVE), indentId: body.indentId, decision: body.decision, lines: body.lines, reason: body.reason, idempotencyKey: key }));
-        if (sub === "indent-issue" && method === "POST") return R(await issueIndent(request, env, { ...deps, indentId: body.indentId, lines: body.lines }));
+        if (sub === "indent-issue" && method === "POST") return R(await issueIndent(request, env, { ...deps, indentId: body.indentId, lines: body.lines, idempotencyKey: key }));
         if (sub === "indent-acknowledge" && method === "POST") return R(await acknowledgeIndent(request, env, { ...deps, authorizeDepartment: inDept(CAPS.DEPT_REQUEST), indentId: body.indentId, lines: body.lines, note: body.note, idempotencyKey: key }));
         if (sub === "indent-close" && method === "POST") return R(await closeIndent(request, env, { ...deps, indentId: body.indentId, reason: body.reason, idempotencyKey: key }));
         if (sub === "store-consumption" && method === "GET") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await storeConsumption(request, env, { ...deps, departments: d, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" })); }
@@ -3921,7 +3921,7 @@ export async function onRequest(context) {
       if (sub === "claim-state" && method === "POST") {
         let payers; try { payers = await payersNow(); } catch { return json(payersUnread, 502, request); }
         const r = await claimAction(request, env, { ...deps, claimId: body.claimId, action: body.action, reason: body.reason, codes: body.codes || null, now: body.now, submittedAmount: body.submittedAmount, approvedAmount: body.approvedAmount, deniedAmount: body.deniedAmount,
-          payerId: body.payerId, payerReference: body.payerReference, paidAmount: body.paidAmount, disallowances: body.disallowances, shortPaymentReason: body.shortPaymentReason, amount: body.amount,
+          payerId: body.payerId, policyNumber: body.policyNumber, payerReference: body.payerReference, paidAmount: body.paidAmount, disallowances: body.disallowances, shortPaymentReason: body.shortPaymentReason, amount: body.amount,
           overrideReason: body.overrideReason, text: body.text, receivedAt: body.receivedAt, documents: body.documents, denialCode: body.denialCode, rootCause: body.rootCause, rcm: rcmSettings(wsqCfg),
           payers, fetchImpl: env && typeof env.WSQ_TPA_FETCH === "function" ? env.WSQ_TPA_FETCH : null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -4054,7 +4054,7 @@ export async function onRequest(context) {
             const onBill = new Set();
             for (const i of invs.invoices) if (i.status !== "void") for (const l of i.lines || []) if (l.sourceType && l.sourceId) onBill.add(`${l.sourceType}:${l.sourceId}`);
             const before = r.priced.length;
-            r.priced = r.priced.filter((it) => !(it.sourceType && it.sourceId && onBill.has(`${it.sourceType}:${it.sourceId}`)));
+            r.priced = unbilledItems(r.priced, invs.invoices);   // BILL-07: a bed day billed for fewer hours keeps the rest
             r.unpriced = (r.unpriced || []).filter((it) => !(it.sourceType && it.sourceId && onBill.has(`${it.sourceType}:${it.sourceId}`)));
             r.alreadyInvoiced = before - r.priced.length;
             r.total = Math.round(r.priced.reduce((n, it) => n + (Number(it.line) || 0), 0) * 100) / 100;
@@ -5321,7 +5321,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "dispense" && method === "POST") {
-        const r = await dispenseOrder(request, env, { ...deps, orderId: body.orderId, quantity: body.quantity, batch: body.batch, expiry: body.expiry, destination: body.destination, takeHome: body.takeHome === true, at: body.at, idempotencyKey: body.idempotencyKey || null,
+        const r = await dispenseOrder(request, env, { ...deps, orderId: body.orderId, quantity: body.quantity, batch: body.batch, expiry: body.expiry, destination: body.destination, location: body.location, takeHome: body.takeHome === true, at: body.at, idempotencyKey: body.idempotencyKey || null,
           isControlled, witnessId: body.witnessId, witnessCheck, quarantineCheck: (drug, code, batch) => quarantineRefusal(deps, drug, code, batch) });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
