@@ -10586,6 +10586,14 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   the plugin module) and returns iOS's completion handler on `SMDBackgroundURLSessionDone`. A local
   notification says when a model finished while the app was in the background. Uncompiled here:
   build on the Mac and watch a download with the phone locked.
+- **Root cause of damaged MaiK models on iOS (owner follow-up, same day).** `ModelDownloader`
+  special-cased only HTTP 200, so any other reply to a part (403 from an expired signed Hugging Face
+  CDN link, 416, 5xx: an error page) was written into the model at that part's offset and marked
+  committed. Backgrounding the app makes iOS defer and retry parts after those links expire, so the
+  "completed" file had error pages stitched in. Parts are now committed only as a 206 whose
+  Content-Range starts at the part offset with exactly the promised byte count; anything else is
+  re-requested from the original resolve URL (fresh signed link), up to 5 tries per part. The native
+  hash check remains the backstop. Android's DownloadManager fails on HTTP errors and is unaffected.
 - **The grey edge tab (SMD-15) is iOS's Picture-in-Picture stash handle**, not app UI; one report showed
   a live camera feed in the PiP window. `swipe-back.js` now opts every app `<video>` out of PiP, leaves
   PiP on removal or backgrounding, and stops a removed camera preview's stream.
