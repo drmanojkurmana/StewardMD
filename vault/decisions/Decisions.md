@@ -10211,3 +10211,52 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
   the point of use rather than adding a new claim. Held as `DUTY_LINE` in both `kb-protocols.js` and
   `specialty-kits.js` (buildless IIFEs cannot import each other) with a test that keeps the wording
   identical.
+
+## 2026-09-27 - Dx engine: "not enough information" is an answer, and prevalence is ordinal until real counts exist
+- **Context**: fever alone still produced a confident-looking top diagnosis (HLH, then vasculitis), and
+  common diseases did not outrank rare ones. Plan `kb/validation/PLAN-DX-ABX-10.md`, audit Round 4.
+- **Decision 1 (`smd_calib`)**: below a minimum of clinical information the gate returns
+  "Not enough information yet", makes no infection or antibiotic call, and lists the next findings;
+  OPD Ask MaiK then gives no provisional diagnosis and no treatment. A red flag always gets the
+  normal answer, because the answer to possible shock is urgency, not a request for more data.
+- **Decision 2 (`smd_prior_v1`)**: the prior is ordinal tiers (ai_drafted), bounded at +/-8 on the
+  rank and never on the score, with time-critical diagnoses never pushed down. No prevalence number is
+  invented. A hospital's aggregate diagnosis counts replace the tiers; patient rows never enter it.
+- **Why not tune the prior on the gold set**: the gold set is balanced (3 to 4 cases per diagnosis),
+  so it penalises any prior toward the common and tuning on it would be circular. It stays OFF until
+  real frequencies (Phase 6) show it helps.
+- **Decision 3 (`smd_kb_v2`)**: the KB's `feverGU` rules are read as "fever" under the flag rather
+  than renaming the key, so saved cases and the classic path are untouched.
+- **Reversible**: all three are flags, default OFF; flags off is byte-identical (1,660 case-paths).
+
+## 2026-09-27 - Dx workspace: a plain view, behind a flag, instead of rewriting the classic one
+- **Context**: the owner said the Clinical Reasoning module is hard to understand. The classic view
+  was chosen earlier ("direction B, Guided Consult") and other tests and habits depend on it.
+- **Decision**: `smd_dx_simple` layers a plain view over the same engine: one list numbered once,
+  a Most likely card first, plain fit labels and card headings, less shown by default. Clinical
+  logic, scores and the antibiotic gate are untouched; the view is presentation only.
+- **Why a flag and not an edit in place**: reversible per CLAUDE.md; the owner decides the default
+  after using it. Two outright bugs (heading spacing, repeated guideline sentence) were fixed for
+  everyone.
+
+## 2026-09-27 - Dx workspace: the plain view is the default
+- **Decision**: `smd_dx_simple` defaults ON (owner: "yes make it the default"), after the anti-slop
+  pass (tasteskill.dev redesign audit). Presentation only; engine, scores and antibiotic gate are
+  unchanged (asserted in `test/run-dx-simple.mjs`).
+- **Reversible**: `?dxsimple=0`, or localStorage `smd_dx_simple = "0"`, shows the classic view; the
+  code path is intact. Recovery point: commit 9712fdc87 (flag default OFF).
+- **Checked**: every workspace-touching browser suite was run before and after the flip; the only
+  new failure was a test that looked for the classic "Why not higher" label, now covering both views.
+
+## 2026-09-27 - Antibiotic gate v2 is the default
+- **Decision**: `smd_gate_v2` defaults ON (owner: "turn on smd_gate_v2"). Its rules are ai_drafted; the
+  owner, a clinician, approved them for default ahead of a separate clinician review.
+- **Measured effect** (same 491 gold cases, default config, classic -> v2): antibiotics when indicated
+  156 -> 161 (tapped) and 110 -> 111 (text); time-critical flagged 47 -> 49 of 49 (tapped), 31 -> 32
+  (text); viral given antibiotics 13 -> 9 and 10 -> 6; overcall on text 79 -> 72, complaint 19 -> 12.
+  Worse: overcall on tapped findings 48 -> 52; complaint-only abx-when-indicated 42 -> 40; held-out 2
+  abx-when-indicated 9 -> 8 (one case). The overcall is the next target.
+- **Reversible**: `?gatev2=0` or localStorage `smd_gate_v2 = "0"`. The classic gate keeps its own floors
+  (`smd_gate_v2=0`) and CI step; configs that now include the gate implicitly were re-recorded and
+  match the old explicit `smd_gate_v2=1` configs exactly.
+

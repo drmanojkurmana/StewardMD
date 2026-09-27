@@ -115,7 +115,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <script defer src="/abx-redesign.js?v=gold476"></script>
 <!-- 5-step guided wizard (Vitals→Systems→Differential→Decision→Plan): owns #abxWizard, wired to
      the real engine (FIELD_GROUPS + SMD_REASON.assess + DX_MGMT). Start Case opens it. Flag-gated. -->
-<script defer src="/abx-wizard.js?v=gold1057-build7"></script>
+<script defer src="/abx-wizard.js?v=gold1057-build7-gatev2a-calib1"></script>
 <script>
 /* Service worker (offline + instant repeat loads) — WEB ONLY.
    On the NATIVE app (Capacitor) the SW is disabled: its stale-while-revalidate cache pins the
@@ -2258,16 +2258,16 @@ window.openExternal = function (u) {
 <script>window.SMD_KB_ENC=0;/* native-only license lock (Phase 2b): build-www --encrypt-kb flips this to 1 */</script>
 <script src="/kb-loader.js?v=kbl1"></script>
 <script src="/dxmgmt.js?v=gold363" defer></script>
-<script src="/clinical-nlp.js?v=gold363" defer></script>
+<script src="/clinical-nlp.js?v=gold363-nlpv2a-kbv2a" defer></script>
 <script src="/id-token.js?v=idtok2" defer></script>
-<link rel="stylesheet" href="/reasoning-workspace.css?v=kbbrand2-fr1">
+<link rel="stylesheet" href="/reasoning-workspace.css?v=kbbrand2-fr1-dxask2-simple1-taste1">
 <link rel="stylesheet" href="/knowledge-library.css?v=klall6-kbbrand2">
 <link rel="stylesheet" href="/kb-protocols.css?v=kbp3">
 <link rel="stylesheet" href="/specialty-kits.css?v=kits5">
 <link rel="stylesheet" href="/clinical-docs.css?v=docs2">
 <script src="/icu-monitor-parser.js?v=hardlocal3" defer></script>
 <script src="/phi-india.js?v=phiindia1" defer></script>
-<script src="/reasoning.js?v=hardlocal4-clinix1-figs1-tex1-kbchip1-kbexists1-kbopen1-kbopen2-us1-safetyux1-kbtitle1-kbbrand2-phiindia1-ci1-audA-fr1-abg6-sttfb2" defer></script>
+<script src="/reasoning.js?v=hardlocal4-clinix1-figs1-tex1-kbchip1-kbexists1-kbopen1-kbopen2-us1-safetyux1-kbtitle1-kbbrand2-phiindia1-ci1-audA-fr1-abg6-sttfb2-gatev2a-nlpv2a-rankv3a-kbv2a-calib1-prior1-dxask2-why1-simple1-taste1-on1-gate1" defer></script>
 <!-- Knowledge Library Protocols tab: clinical protocols across specialties (kb/clinical-protocols/).
      Flag smd_kb_protocols (default ON, ?kbproto=0 hides it). The kb-protocols.js ?v= token is kept in
      step with the content hash by scripts/build-clinical-protocols.mjs. -->
@@ -2726,7 +2726,7 @@ window.openExternal = function (u) {
 <script src="/onco-protocol-report.js?v=onco1" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=hardlocal3-opdcols1-imm1-r6-1-scribe18-sid1-nerdx1-nodash1-proto3-kits3-sttfb2-assign1-edit1" defer></script>
+<script src="/opd-emr.js?v=hardlocal3-opdcols1-imm1-r6-1-scribe18-sid1-nerdx1-nodash1-proto3-kits3-sttfb2-assign1-edit1-rankv3a-calib1-prior1" defer></script>
 <!-- My Clinic — on-device EMR for personal clinics (reuses opd-emr's form; flag smd_personal_clinic). -->
 <script src="/personal-clinic.js?v=gold6" defer></script>
 <!-- Shared Clinic — multi-device encrypted EMR for clinics/small hospitals with no EMR (flag
