@@ -42,6 +42,9 @@ test("reply pushes to the reporter, with the id only; resolve deletes the screen
   assert.equal(JSON.stringify(PUSHES[0].msg).includes("Fixed in 1.3"), false);
   assert.ok(store._m.has(S.shotKey(t.id)), "an open bug keeps its screenshot");
 
+  const w = await call("admin/support-reply", { method: "POST", body: { id: t.id, status: "in_progress" } });
+  assert.equal(w.status, 200); assert.equal((await S.getTicket(store, t.id)).status, "in_progress");
+  assert.equal(PUSHES.length, 1, "a bare status change sends no push");
   const r2 = await call("admin/support-reply", { method: "POST", body: { id: t.id, text: "Closing", resolve: true } });
   assert.equal(r2.status, 200);
   assert.equal(store._m.has(S.shotKey(t.id)), false, "resolved: screenshot deleted");

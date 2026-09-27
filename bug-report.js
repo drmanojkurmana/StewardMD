@@ -414,6 +414,8 @@
     var left = (t.dueAt || (t.createdAt + 86400000)) - now;
     if (left <= 0) return { txt: "Overdue, we are on it", cls: "late" };
     var h = Math.ceil(left / 3600000);
+    // The developer picked it up from the admin Bug Centre ("Working on it").
+    if (t.status === "in_progress") return { txt: h <= 1 ? "Working on it, due within the hour" : "Working on it, due in " + h + " h", cls: "" };
     return { txt: h <= 1 ? "Fix due within the hour" : "Fix due in " + h + " h", cls: "" };
   }
   function when(ts) { try { return new Date(ts).toLocaleString([], { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } }

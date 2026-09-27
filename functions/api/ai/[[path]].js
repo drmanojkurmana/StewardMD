@@ -1250,11 +1250,12 @@ export async function onRequest(context) {
       if (request.method !== "POST") return json({ error: "method" }, 405);
       let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
       const id = String(b.id || ""); const hasText = !!String(b.text || "").trim();
-      const resolve = b.resolve === true || b.status === "resolved"; const reopen = b.status === "open";
+      const resolve = b.resolve === true || b.status === "resolved"; const reopen = b.status === "open"; const working = b.status === "in_progress";
       let t = null;
-      if (hasText) t = await addSupportMessage(store, id, "support", b.text, Date.now(), resolve ? "resolved" : (reopen ? "open" : undefined));
+      if (hasText) t = await addSupportMessage(store, id, "support", b.text, Date.now(), resolve ? "resolved" : (reopen ? "open" : (working ? "in_progress" : undefined)));
       else if (resolve) t = await setSupportStatus(store, id, "resolved", Date.now());
       else if (reopen) t = await setSupportStatus(store, id, "open", Date.now());
+      else if (working) t = await setSupportStatus(store, id, "in_progress", Date.now());
       else return json({ ok: false, error: "nothing-to-do" }, 400);
       if (!t) return json({ ok: false, error: "not-found" }, 404);
       // A resolved bug drops its screenshot: it can show a patient, and the fix no longer needs it.
@@ -1267,7 +1268,7 @@ export async function onRequest(context) {
           body: t.id + ": open StewardMD to read it.", tag: "smd-support-" + t.id, url: "https://stewardmd.in/#bugs" }, { uid: String(t.owner).slice(3) }).catch(function () {});
         if (context && typeof context.waitUntil === "function") context.waitUntil(push); else await push;
       }
-      await auditRecord(store, "support", id + (hasText ? ":reply" : "") + (resolve ? ":resolved" : reopen ? ":reopened" : ""), actorId, Date.now());
+      await auditRecord(store, "support", id + (hasText ? ":reply" : "") + (resolve ? ":resolved" : reopen ? ":reopened" : working ? ":in-progress" : ""), actorId, Date.now());
       return json({ ok: true, ticket: t });
     }
 

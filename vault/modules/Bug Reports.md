@@ -20,8 +20,14 @@ with replies from the developer. The same request removed AgentConnect and My Cl
   (reporter only).
 - `functions/api/ai/[[path]].js` - `admin/support-shot` (owner), `admin/support-reply` now pushes to the
   reporter (`sendNativeToAll {uid}`; title + id only, never the text) and deletes the screenshot on resolve.
-- `admin/index.html` Support pane - Bugs filter (sorted by due), BUG tag, due/overdue pill, screen,
-  pointed element + selector, screenshot.
+- `admin/index.html` **Bug Centre pane** (`data-p="bugs"`, owner request 2026-09-27 "bug center in admin
+  panel ... to solve"): counts (open, past the 24 h promise, working on it, fixed in 7 d, % fixed within
+  24 h), Open / Overdue / Fixed / All, most urgent first; detail with screenshot, pointed element +
+  selector, screen, device, thread; **Working on it** (status `in_progress`, shown on the doctor's phone),
+  **Reply**, **Mark fixed & notify** (default note if none typed), **Reopen**, **Copy for GitHub** (plain
+  text, no screenshot). The Support pane keeps its Bugs filter too.
+- Statuses: `open`, `in_progress`, `resolved`. `listTickets(store, "open")` means open WORK (anything not
+  resolved). `resolvedAt` is on the ticket and its index row; reopening clears it.
 - `sidebar-redesign.js` - `row("bugs", "bug", "Bug Report Centre", bugBadge())` under Reference & Help.
 
 ## Gotchas
@@ -40,4 +46,5 @@ with replies from the developer. The same request removed AgentConnect and My Cl
 
 ## Tests
 `test/bug-report.test.mjs`, `test/bug-report-admin.test.mjs` (real admin route, push mocked),
-`test/run-bug-report-ui.mjs` (headless: DeviceMotion shake, picker, send, sidebar, Centre, reply).
+`test/run-bug-report-ui.mjs` (headless: DeviceMotion shake, picker, send, sidebar, Centre, reply),
+`test/run-admin-bugs-ui.mjs` (headless admin Bug Centre: counts, order, detail, work/reply/fix/reopen/copy).

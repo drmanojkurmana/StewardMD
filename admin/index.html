@@ -88,6 +88,7 @@
       <nav class="nav" id="nav">
         <a class="on" data-p="overview">📊 Overview</a>
         <div class="grp">Control center</div>
+        <a data-p="bugs">🪲 Bug Centre <span class="b" id="navBugs">0</span></a>
         <a data-p="support">💬 Support tickets <span class="b" id="navSupport">0</span></a>
         <a data-p="userctl">👤 User control</a>
         <a data-p="aictl">🧠 AI control</a>
@@ -488,6 +489,23 @@
           <div id="kxRows" style="margin-top:12px"></div>
         </div>
       </div>
+      <!-- BUG CENTRE: shake-to-report bugs from the app, each promised a fix within 24 hours -->
+      <div class="pane" id="pane-bugs" data-need-auth>
+        <div class="stats">
+          <div class="sc"><div class="n" id="bgOpen">—</div><div class="l">Open bugs</div></div>
+          <div class="sc"><div class="n" id="bgLate" style="color:var(--red)">—</div><div class="l">Past 24 h promise</div></div>
+          <div class="sc"><div class="n" id="bgWork">—</div><div class="l">Working on it</div></div>
+          <div class="sc"><div class="n" id="bgFixed">—</div><div class="l">Fixed, last 7 days</div></div>
+          <div class="sc"><div class="n" id="bgSla">—</div><div class="l">Fixed within 24 h</div></div>
+        </div>
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><b style="flex:1">Bug Centre</b>
+            <div class="filters" id="bgFilters"><button class="pill on" data-bf="open">Open</button><button class="pill" data-bf="late">Overdue</button><button class="pill" data-bf="fixed">Fixed</button><button class="pill" data-bf="all">All</button></div>
+            <button class="ghost" id="bgReload" style="padding:7px 11px">Reload</button></div>
+          <div class="hint" style="margin:6px 0 4px">Doctors shake the phone (or tap Report a bug) to send these. The app promises a fix within 24 hours. "Working on it" shows on their phone; "Mark fixed" replies, notifies them and deletes the screenshot.</div>
+          <div class="msg" id="bgMsg"></div><div id="bgBox" style="margin-top:12px"></div>
+        </div>
+      </div>
       <!-- SUPPORT TICKETS -->
       <div class="pane" id="pane-support" data-need-auth>
         <div class="card">
@@ -603,8 +621,8 @@
   var FB={apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",appId:"1:911280405587:web:d09038e15e98d69dc79aa6"};
   var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
   var vFilter="pending", activePane="overview", _aiStructured=null;
-  var PANES=["audit","overview","support","userctl","aictl","config","crashes","analytics","feedback","notif","sources","logs","verif","pro","ota","push","watch","ai","kardiox","xa","tenants"];
-  var TITLES={audit:"Admin activity",overview:"Overview",support:"Support tickets",userctl:"User control",aictl:"AI control",config:"Remote config",crashes:"Crashes",analytics:"Usage analytics",feedback:"MaiK feedback",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",pro:"Payments & Billing",ota:"App updates (OTA)",push:"Push blast",watch:"Lab-watch",ai:"AI usage",kardiox:"KardiQ X training",xa:"Experimental Features",tenants:"Medical colleges"};
+  var PANES=["audit","overview","bugs","support","userctl","aictl","config","crashes","analytics","feedback","notif","sources","logs","verif","pro","ota","push","watch","ai","kardiox","xa","tenants"];
+  var TITLES={audit:"Admin activity",overview:"Overview",bugs:"Bug Centre",support:"Support tickets",userctl:"User control",aictl:"AI control",config:"Remote config",crashes:"Crashes",analytics:"Usage analytics",feedback:"MaiK feedback",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",pro:"Payments & Billing",ota:"App updates (OTA)",push:"Push blast",watch:"Lab-watch",ai:"AI usage",kardiox:"KardiQ X training",xa:"Experimental Features",tenants:"Medical colleges"};
   var TYPE2CAT={guideline:"guideline",drug_approval:"approval",safety_alert:"safety",trial:"study",general:"general"};
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function when(ts){ if(!ts)return""; if(typeof ts==="number"){var s=Math.floor((Date.now()-ts)/1000); if(s<3600)return Math.floor(s/60)+"m ago"; if(s<86400)return Math.floor(s/3600)+"h ago"; return new Date(ts).toLocaleDateString();} return String(ts).slice(0,16).replace("T"," "); }
@@ -680,6 +698,7 @@
     load("/api/verifications?status=pending",true,["ovVerif"],function(d){var n=(d.doctors||[]).length;setN("ovVerif",n);badge("navVerif",n);});
     load("/api/updates?limit=100",false,["ovNotif"],function(d){setN("ovNotif",(d.items||[]).length);});
     load("/api/ai/admin/support?status=open",true,["ovSupport"],function(d){var n=(d.tickets||[]).length;setN("ovSupport",n);badge("navSupport",n);});
+    load("/api/ai/admin/support",true,[],function(d){ var now=Date.now(); var open=(d.tickets||[]).filter(function(t){return t.kind==="bug"&&t.status!=="resolved";}); bugBadge(open.length); });
     load("/api/ai/admin/clientlog",true,["ovErrors"],function(d){var n=(d.errors||[]).length;setN("ovErrors",n);badge("navCrash",n);});
   }
   $("ovRefresh").onclick=ovLoad;
@@ -1051,6 +1070,91 @@
   var AI="/api/ai/admin";
   function forbid(x,msg){ return x.s===403?"Not an owner.":("Failed: "+(msg&&x.d&&x.d.error||x.s)); }
 
+  // ---- Bug Centre (tickets of kind "bug"; functions/_support.js) ----
+  var bugFilter="open", DAY=86400000;
+  function bugBadge(n){ var b=$("navBugs"); if(b){ b.textContent=n; b.classList.toggle("on",n>0); } }
+  function bugDue(t,now){ now=now||Date.now(); if(t.status==="resolved") return {txt:"Fixed"+(t.resolvedAt&&t.createdAt?" in "+Math.max(1,Math.round((t.resolvedAt-t.createdAt)/3600000))+" h":""),late:false,ok:true};
+    // Time left rounds UP ("Due in 4 h" until it is 3), time overdue rounds DOWN (never overstated).
+    var left=(t.dueAt||(t.createdAt+DAY))-now;
+    return left<=0?{txt:"Overdue "+Math.max(1,Math.floor(-left/3600000))+" h",late:true}:{txt:"Due in "+Math.max(1,Math.ceil(left/3600000))+" h",late:false}; }
+  function bugPill(t){ var d=bugDue(t); var st=t.status==="in_progress"?'<span class="pill" style="pointer-events:none">Working on it</span> ':'';
+    return st+'<span class="pill'+(d.late?' on':'')+'" style="pointer-events:none;white-space:nowrap;'+(d.late?'background:var(--red);border-color:var(--red);color:#fff':(d.ok?'color:var(--tl)':''))+'">'+esc(d.txt)+'</span>'; }
+  function bugStats(all){ var now=Date.now(), open=all.filter(function(t){return t.status!=="resolved";});
+    var late=open.filter(function(t){return (t.dueAt||0)<=now;}).length, work=open.filter(function(t){return t.status==="in_progress";}).length;
+    var fixed=all.filter(function(t){return t.status==="resolved";}), week=fixed.filter(function(t){return (t.resolvedAt||t.updatedAt||0)>now-7*DAY;}).length;
+    var timed=fixed.filter(function(t){return t.resolvedAt&&t.createdAt;}), inSla=timed.filter(function(t){return t.resolvedAt-t.createdAt<=DAY;}).length;
+    $("bgOpen").textContent=open.length; $("bgLate").textContent=late; $("bgWork").textContent=work; $("bgFixed").textContent=week;
+    $("bgSla").textContent=timed.length?Math.round(inSla*100/timed.length)+"%":"—";
+    bugBadge(open.length); }
+  function bugLoad(){
+    say("bgMsg","","Loading…");
+    api(AI+"/support").then(function(x){
+      if(x.s!==200){ say("bgMsg","err",forbid(x)); return; }
+      say("bgMsg","","");
+      var all=((x.d&&x.d.tickets)||[]).filter(function(t){return t.kind==="bug";}); bugStats(all);
+      var now=Date.now(), ts=all.filter(function(t){
+        if(bugFilter==="open") return t.status!=="resolved";
+        if(bugFilter==="late") return t.status!=="resolved"&&(t.dueAt||0)<=now;
+        if(bugFilter==="fixed") return t.status==="resolved";
+        return true; });
+      // Most urgent first: overdue, then soonest due; fixed ones newest first.
+      ts.sort(function(a,b){ var ra=a.status==="resolved", rb=b.status==="resolved"; if(ra!==rb) return ra?1:-1; return ra?((b.resolvedAt||b.updatedAt||0)-(a.resolvedAt||a.updatedAt||0)):((a.dueAt||0)-(b.dueAt||0)); });
+      if(!ts.length){ $("bgBox").innerHTML='<div class="hint">'+(bugFilter==="late"?"Nothing past the 24-hour promise.":"No bugs here.")+'</div>'; return; }
+      $("bgBox").innerHTML=ts.map(function(t){
+        return '<div data-bug="'+esc(t.id)+'" style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer">'+
+          '<div style="flex:1;min-width:0"><b>'+esc(String(t.subject||"").replace(/^Bug:\s*/,""))+'</b>'+(t.unread?' <span style="color:var(--red)">●</span>':'')+
+          '<div class="hint">'+esc(t.id)+' · '+esc(t.email||t.owner||"")+' · '+esc(new Date(t.createdAt).toLocaleString())+'</div></div>'+bugPill(t)+'</div>';
+      }).join("");
+      Array.prototype.forEach.call($("bgBox").querySelectorAll("[data-bug]"),function(el){ el.onclick=function(){ bugOpen(el.getAttribute("data-bug")); }; });
+    }).catch(function(){ say("bgMsg","err","Failed to load."); });
+  }
+  // A plain-text summary to paste into a GitHub issue or a commit. No screenshot, no patient data.
+  function bugSummary(t){ var b=t.bug||{}, e=b.element||{};
+    return ["Bug "+t.id+": "+String(t.subject||"").replace(/^Bug:\s*/,""),
+      "Reported: "+new Date(t.createdAt).toISOString()+" (fix promised by "+new Date(t.dueAt||t.createdAt+DAY).toISOString()+")",
+      "Platform: "+((t.platform||"")+" "+(t.build||"")).trim(), "Screen: "+(b.route||""),
+      "Pointed at: "+(e.label||e.tag||"whole screen")+(e.sel?" ("+e.sel+")":""),
+      b.screen?("Viewport: "+b.screen.w+"x"+b.screen.h+" @"+b.screen.dpr+"x"):"", "UA: "+(b.ua||""), "",
+      "Doctor wrote:", ((t.messages||[])[0]||{}).text||""].filter(function(l){return l!==null;}).join("\n"); }
+  function bugOpen(id){
+    say("bgMsg","","Loading…");
+    api(AI+"/support?id="+encodeURIComponent(id)).then(function(x){
+      var t=x.d&&x.d.ticket; if(x.s!==200||!t){ say("bgMsg","err","Not found."); return; }
+      say("bgMsg","");
+      var b=t.bug||{}, e=b.element||{}, open=t.status!=="resolved";
+      var thread=(t.messages||[]).filter(function(m){return m.text;}).map(function(m){ var mine=m.from==="support";
+        return '<div style="margin:6px 0;padding:9px 12px;border-radius:12px;max-width:85%;'+(mine?"margin-left:auto;background:var(--tl);color:#fff":"background:var(--bg);border:1px solid var(--line)")+'"><div style="font:800 10px var(--f);opacity:.75;margin-bottom:2px">'+(mine?"You (developer)":"Doctor")+' · '+esc(new Date(m.ts).toLocaleString())+'</div><div style="white-space:pre-wrap;font:600 13px var(--f)">'+esc(m.text)+'</div></div>';
+      }).join("");
+      $("bgBox").innerHTML=
+        '<button class="ghost" id="bgBack" style="padding:6px 10px;margin-bottom:10px">← All bugs</button>'+
+        '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><b style="font-size:16px;flex:1">'+esc(String(t.subject||"").replace(/^Bug:\s*/,""))+'</b>'+bugPill(t)+'</div>'+
+        '<div class="hint" style="margin:4px 0 12px">'+esc(t.id)+' · '+esc(t.email||t.owner||"")+' · reported '+esc(new Date(t.createdAt).toLocaleString())+'</div>'+
+        '<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">'+
+          (t.hasShot&&open?'<a id="bgShotA" target="_blank" rel="noopener"><img id="bgShot" alt="Screenshot" style="width:220px;border-radius:12px;border:1px solid var(--line)"></a>':'<div class="hint" style="width:220px">'+(t.hasShot?"Screenshot deleted when fixed.":"No screenshot sent.")+'</div>')+
+          '<div style="flex:1;min-width:240px;font:600 13px/1.6 var(--f)">'+
+            '<div><span class="hint">Pointed at</span><br>'+(e.label||e.tag?'<b>'+esc(e.label||e.tag)+'</b>':'<b>The whole screen</b>')+(e.sel?'<br><code>'+esc(e.sel)+'</code>':'')+'</div>'+
+            '<div style="margin-top:8px"><span class="hint">Screen</span><br><code>'+esc(b.route||"")+'</code></div>'+
+            '<div style="margin-top:8px"><span class="hint">Device</span><br>'+esc(((t.platform||"")+" "+(t.build||"")).trim()||"unknown")+(b.screen?' · '+b.screen.w+'x'+b.screen.h+' @'+b.screen.dpr+'x':'')+'<div class="hint" style="word-break:break-all">'+esc(b.ua||"")+'</div></div>'+
+          '</div></div>'+
+        '<div style="margin-top:14px">'+thread+'</div>'+
+        '<textarea id="bgTx" placeholder="Reply to the doctor (they get a push and read it in their Bug Report Centre)…" style="min-height:80px;margin-top:8px"></textarea>'+
+        '<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">'+
+          (open?(t.status!=="in_progress"?'<button class="ghost" id="bgWorkBtn">Working on it</button>':'')+'<button class="primary" id="bgReplyBtn">Reply</button><button class="approve" id="bgFixBtn" style="border:0;border-radius:10px;padding:9px 14px;font:800 13px var(--f);cursor:pointer">Mark fixed &amp; notify</button>':'<button class="primary" id="bgReplyBtn">Reply</button><button class="ghost" id="bgReopenBtn">Reopen</button>')+
+          '<button class="ghost" id="bgCopyBtn">Copy for GitHub</button></div><div class="msg" id="bgTMsg"></div>';
+      $("bgBack").onclick=bugLoad;
+      var si=$("bgShot"); if(si){ tok().then(function(tk){ return fetch(AI+"/support-shot?id="+encodeURIComponent(id),{headers:{"Authorization":"Bearer "+tk}}); }).then(function(r){ return r.ok?r.blob():null; }).then(function(bl){ if(bl){ var u=URL.createObjectURL(bl); si.src=u; $("bgShotA").href=u; } else si.parentNode.outerHTML='<div class="hint" style="width:220px">Screenshot unavailable.</div>'; },function(){}); }
+      function send(body,okMsg){ say("bgTMsg","","Sending…"); body.id=id;
+        api(AI+"/support-reply",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){ if(r.s===200&&r.d.ok){ say("bgTMsg","ok",okMsg); setTimeout(function(){ bugOpen(id); },500); } else say("bgTMsg","err","Failed: "+(r.d&&r.d.error||r.s)); }); }
+      $("bgReplyBtn").onclick=function(){ var v=($("bgTx").value||"").trim(); if(!v){ say("bgTMsg","err","Write a reply first."); return; } send({text:v},"Sent. The doctor has been notified."); };
+      var wb=$("bgWorkBtn"); if(wb) wb.onclick=function(){ var v=($("bgTx").value||"").trim(); send(v?{text:v,status:"in_progress"}:{status:"in_progress"},"Marked as working on it."); };
+      var fb=$("bgFixBtn"); if(fb) fb.onclick=function(){ var v=($("bgTx").value||"").trim()||"Fixed. It will reach your phone with the next app update. Thank you for reporting it."; send({text:v,resolve:true},"Marked fixed. The doctor has been notified."); };
+      var rb=$("bgReopenBtn"); if(rb) rb.onclick=function(){ send({status:"open"},"Reopened."); };
+      $("bgCopyBtn").onclick=function(){ var txt=bugSummary(t); try{ navigator.clipboard.writeText(txt).then(function(){ say("bgTMsg","ok","Copied."); },function(){ $("bgTx").value=txt; say("bgTMsg","","Copy blocked; the summary is in the box."); }); }catch(ex){ $("bgTx").value=txt; } };
+    }).catch(function(){ say("bgMsg","err","Failed."); });
+  }
+  $("bgFilters").addEventListener("click",function(e){var b=e.target.closest("[data-bf]");if(!b)return;bugFilter=b.getAttribute("data-bf");Array.prototype.forEach.call($("bgFilters").children,function(p){p.classList.toggle("on",p===b);});bugLoad();});
+  $("bgReload").onclick=bugLoad;
+
   // ---- Support tickets ----
   var supFilter="open";
   function supPill(st){ return '<span class="pill'+(st==="resolved"?"":" on")+'" style="pointer-events:none">'+(st==="resolved"?"Resolved":"Open")+'</span>'; }
@@ -1240,7 +1344,7 @@
   $("fbReload").onclick=fbLoad;
   $("fbClear").onclick=function(){ if(!confirm("Clear all MaiK feedback?"))return; api(AI+"/maik-feedback",{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"}).then(function(){ fbLoad(); }); };
 
-  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="audit")auditLoad(); else if(pane==="overview")ovLoad(); else if(pane==="support")supLoad(); else if(pane==="userctl"){ try{ if(!$("ucEmail").value) $("ucEmail").focus(); }catch(e){} } else if(pane==="aictl")aicLoad(); else if(pane==="config")cfgLoad(); else if(pane==="crashes")crLoad(); else if(pane==="analytics")anLoad(); else if(pane==="feedback")fbLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="ota")otaLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="tenants")tnLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} try{ pbLoad(); }catch(e){} try{ bcLoad(); }catch(e){} try{ cpnLoad(); }catch(e){} } }
+  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="audit")auditLoad(); else if(pane==="overview")ovLoad(); else if(pane==="support")supLoad(); else if(pane==="bugs")bugLoad(); else if(pane==="userctl"){ try{ if(!$("ucEmail").value) $("ucEmail").focus(); }catch(e){} } else if(pane==="aictl")aicLoad(); else if(pane==="config")cfgLoad(); else if(pane==="crashes")crLoad(); else if(pane==="analytics")anLoad(); else if(pane==="feedback")fbLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="ota")otaLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="tenants")tnLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} try{ pbLoad(); }catch(e){} try{ bcLoad(); }catch(e){} try{ cpnLoad(); }catch(e){} } }
 
   // ---- Medical colleges (tenant provisioning; owner-gated /api/tenants) ----
   function tnRow(t){

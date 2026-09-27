@@ -32,7 +32,9 @@ export function cleanBugMeta(b) {
   };
 }
 
-const STATUSES = ["open", "resolved"];
+// in_progress: the developer has picked it up (Bug Centre "Working on it"); still counts toward the
+// 24-hour promise. Anything not "resolved" is open work.
+const STATUSES = ["open", "in_progress", "resolved"];
 export function isStatus(s) { return STATUSES.indexOf(s) >= 0; }
 
 function clean(s, max) { return String(s == null ? "" : s).replace(/\s+$/g, "").replace(/^\s+/g, "").slice(0, max); }
@@ -89,7 +91,11 @@ export async function addMessage(store, id, from, text, now, status) {
   if (!t) return null;
   const msg = clean(text, TEXT_MAX);
   if (msg) { t.messages.push({ from: from === "support" ? "support" : "user", text: msg, ts: now }); if (t.messages.length > MSGS_MAX) t.messages = t.messages.slice(-MSGS_MAX); }
-  if (status && isStatus(status)) { if (status === "resolved" && t.status !== "resolved") t.resolvedAt = now; t.status = status; }
+  if (status && isStatus(status)) {
+    if (status === "resolved" && t.status !== "resolved") t.resolvedAt = now;
+    if (status !== "resolved") delete t.resolvedAt;   // reopened: the fix clock is no longer stopped
+    t.status = status;
+  }
   // The doctor's side of the badge: a developer reply is unread for them until they open it.
   if (from === "support" && msg) t.userUnread = true;
   if (from === "user") t.userUnread = false;
@@ -97,7 +103,7 @@ export async function addMessage(store, id, from, text, now, status) {
   await store.put(tKey(id), JSON.stringify(t), { expirationTtl: TTL });
   const idx = await readIndex(store);
   const row = idx.find((r) => r.id === id);
-  if (row) { row.status = t.status; row.updatedAt = now; row.unread = from === "user"; }
+  if (row) { row.status = t.status; row.updatedAt = now; row.unread = from === "user"; if (t.resolvedAt) row.resolvedAt = t.resolvedAt; else delete row.resolvedAt; }
   // bump to front on new activity
   const rest = idx.filter((r) => r.id !== id);
   await writeIndex(store, row ? [row].concat(rest) : idx);
@@ -112,6 +118,8 @@ export async function setStatus(store, id, status, now) {
 // Admin list: summary index (optionally filtered by status). Newest-first.
 export async function listTickets(store, status) {
   const idx = await readIndex(store);
+  // "open" means open WORK: in_progress tickets are still owed an answer, so they stay in the Open list.
+  if (status === "open") return idx.filter((r) => r.status !== "resolved");
   return status && isStatus(status) ? idx.filter((r) => r.status === status) : idx;
 }
 

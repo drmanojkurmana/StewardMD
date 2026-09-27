@@ -156,3 +156,24 @@ test("sidebar: Bug Report Centre in, AgentConnect and My Clinic out; bug-report.
   const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   assert.match(html, /<script src="\/bug-report\.js\?v=[^"]+" defer><\/script>/);
 });
+
+test("Bug Centre statuses: 'working on it' is still open work; reopening restarts the fix clock", async () => {
+  WHO.current = { id: "fb:u9", guest: false };
+  const t = (await post({ action: "bug", text: "list jumps" })).body.ticket;
+  await S.setStatus(STORE, t.id, "in_progress", Date.now());
+  const open = await S.listTickets(STORE, "open");
+  assert.ok(open.some((r) => r.id === t.id && r.status === "in_progress"), "in the Open list, so it is never lost");
+  assert.equal((await S.listTickets(STORE, "resolved")).some((r) => r.id === t.id), false);
+  await S.setStatus(STORE, t.id, "resolved", Date.now());
+  let row = (await S.listTickets(STORE, "resolved")).find((r) => r.id === t.id);
+  assert.ok(row.resolvedAt, "the list carries when it was fixed (for the 'fixed within 24 h' rate)");
+  await S.setStatus(STORE, t.id, "open", Date.now());
+  row = (await S.listTickets(STORE, "open")).find((r) => r.id === t.id);
+  assert.equal(row.resolvedAt, undefined); assert.equal((await S.getTicket(STORE, t.id)).resolvedAt, undefined);
+});
+
+test("the doctor sees 'Working on it' once the developer picks it up", () => {
+  const B = loadClient(); const now = 1_000_000_000_000;
+  assert.deepEqual(B._slaText({ status: "in_progress", dueAt: now + 3 * 3600000 }, now), { txt: "Working on it, due in 3 h", cls: "" });
+  assert.deepEqual(B._slaText({ status: "in_progress", dueAt: now - 1 }, now), { txt: "Overdue, we are on it", cls: "late" });
+});
