@@ -2,6 +2,7 @@
 tags: [module, stewardship, clinical-data]
 status: rebuilt 2026-09-26 (flag ON). Data read from published Indian antibiograms; every number traceable to its page.
 flag: smd_abg_v2 (antibiogram-flags.js, def:true, ?abg2=0 restores the previous resistance view on the same data)
+redesign: smd_abg_pro (def:true, 2026-09-27; ?abgpro=0 or localStorage smd_abg_pro=0 restores the previous look and the four tabs; recovery tag abg-ui-pre-pro)
 kill-switch: smd_abg_data (def:true; ?abgdata=0 or localStorage smd_abg_data=0 makes the console, reasoning and antibiotic choice ignore the store and use the built-in ICMR 2024 national summary in app.js, as before the rebuild)
 ---
 # Antibiogram
@@ -9,8 +10,10 @@ kill-switch: smd_abg_data (def:true; ?abgdata=0 or localStorage smd_abg_data=0 m
 Cumulative antibiograms (percent of isolates susceptible, by organism, antibiotic, specimen and setting)
 from Indian hospitals, surveillance networks and published hospital studies. One data layer feeds four
 places:
-- **Antibiogram screen** (Knowledge Library tab and `window.ABG.open()`): tabs Antibiotic coverage
-  (qualitative spectrum grid, unchanged), **Resistance rates**, **Sources**, **My hospital**.
+- **Antibiogram screen** (Knowledge Library tab and `window.ABG.open()`): tabs **Spectrum** (the qualitative
+  spectrum grid), **Resistance** and **My hospital**. **Sources** opens from the action row under the table
+  (Export CSV, Save as PDF, Sources) and keeps Resistance selected, with a back link. With `smd_abg_pro=0`
+  the previous four tabs (Antibiotic coverage, Resistance rates, Sources, My hospital) return.
 - **Stewardship console** Step 4 (`asp-region.js` augments the minified `window.ASP`): the syndrome's
   organisms for the active profile.
 - **Syndrome reasoning** (`reasoning.js` `regionSuscHTML`): resistance chips for the lead syndrome.
@@ -285,11 +288,34 @@ it matched, and says so when nothing did.
 - ICMR 2024 Table 9.44 (VAP) is excluded on purpose (identical counts repeated across agents, e.g.
   2/81 five times; A. baumannii tigecycline 2.5% vs 75.8% in the bloodstream table).
 
+## Redesign (2026-09-27, flag `smd_abg_pro`)
+Owner: move Sources beside the exports and "make the whole module look professional, no AI slop".
+- **One theme on the app's own tokens.** `.abg.abg-pro` inherits `--panel`, `--ink`, `--line` from the page
+  (`--x: inherit` undoes the overlay's private copies) and maps `--bg` to `--paper`, `--tl` to `--teal`,
+  `--mut` to `--slate-soft`, `--ink2` to `--slate`, so the screen follows the chosen theme in light and dark.
+  All pro rules are scoped `.abg-pro ...` and appended after the base CSS (shell in `antibiogram.js`,
+  screens in `ABG_V2.css`). Base `body.dark .abg-x` rules outrank `.abg-pro .abg-x`: restate them as
+  `.abg-pro .x, body.dark .abg-pro .x`.
+- **Look**: hairline cards, 8 to 10 px radii, no gradients, glass blur or coloured shadows; sentence case (no
+  uppercase tracked labels); one segmented control for the tabs and the % toggles; chips tinted, not filled.
+- **Heat scale**: tinted fills with dark text (`--h5b/--h5f` ... `--h1b/--h1f`, dark variants), contrast 5.7:1
+  or better; the number is always printed. Resistance phenotype tiles carry a severity dot, the figure in ink.
+- **Plain drug names**: the overlay carries `no-druglink`, so drug-link.js does not bold or glow names on this
+  data screen (it did in the meta panel, phenotype tiles and Sources prose).
+- **Appearance styles** (appearance.css, `data-appearance`) make each `.abg-tab` a glass tile; the pro CSS undoes
+  that for unselected tabs and for `.abg-note` with `html[data-appearance] #abgOverlay.abg-pro:not(#_)`.
+- **Copy**: Title Case and arrow labels in the Spectrum sheets became plain sentences ("Microbiology notes",
+  "Show on the grid", "Open X in the drug database"). Sources leads with four figures (websites checked,
+  documents found and integrated, isolates); how figures are checked and why documents are not used are
+  collapsed. The meta panel's "(see Sources)" became "Show them", which opens that source's sheet. WISCA
+  per-organism detail is a table; the single-agent ranking lists value right-aligned with its data share.
+
 ## Tests
 `node --test test/antibiogram-rules.test.mjs test/antibiogram-build.test.mjs test/antibiogram-store.test.mjs`
 (the build test runs `--check`, so a stale bundle fails) and `node test/run-antibiogram-ui.mjs` (real app,
 390 px: screen, keyboard access, search, exports, breakpoint notes, sources, import including the % resistant
-check, console, reasoning, flag off, kill switch off, no em dash). CI: `.github/workflows/antibiogram-ui.yml`.
+check, console, reasoning, flag off, kill switch off, no em dash, the redesign's three one-line tabs, Sources
+beside the exports with a way back, plain drug names, and the redesign flag off). CI: `.github/workflows/antibiogram-ui.yml`.
 
 ## Status and next
 Census and extraction log: `vault/handoff/2026-09-26-antibiogram-rebuild.md`. Pending items in

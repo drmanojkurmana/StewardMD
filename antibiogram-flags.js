@@ -7,6 +7,10 @@
  * localStorage smd_abg_data=0) makes the stewardship console, syndrome reasoning and antibiotic
  * choice ignore the validated store and fall back to the built-in ICMR 2024 national summary,
  * as before the rebuild. The Antibiogram screen keeps reading the store.
+ * smd_abg_pro (DEFAULT ON) is the 2026-09-27 visual redesign of the Antibiogram screen: one quiet
+ * theme (hairline cards, tinted heatmap, sentence-case labels), three tabs with Sources opened from
+ * the action row, and no decorated drug names. Off (?abgpro=0 or localStorage smd_abg_pro=0)
+ * restores the previous look and the four tabs; the data and the checks are the same.
  * Exposes window.SMD_ABG_FLAGS. No PHI, no network. */
 (function () {
   "use strict";
@@ -16,6 +20,7 @@
 
   var DEFS = {
     smd_abg_v2: { type: "bool", def: true, query: "abg2", desc: "Antibiogram screen v2 (validated Indian antibiograms by specimen and setting, pooled views, sources census, own-hospital import). DEFAULT ON. Force off per device with ?abg2=0; the previous view then reads the same validated data." },
+    smd_abg_pro: { type: "bool", def: true, query: "abgpro", desc: "Antibiogram screen redesign (quiet theme, three tabs, Sources beside the exports). DEFAULT ON. Force off per device with ?abgpro=0 for the previous look." },
     smd_abg_data: { type: "bool", def: true, query: "abgdata", desc: "Validated antibiogram data in decision support (stewardship console, syndrome reasoning, antibiotic choice). DEFAULT ON. Force off per device with ?abgdata=0; these then use the built-in ICMR 2024 national summary, as before the rebuild." }
   };
 
@@ -32,9 +37,10 @@
   function set(key, on) { try { LS && LS.setItem(key, on ? "1" : "0"); } catch (e) {} }
   function on() { return bool("smd_abg_v2"); }
   function data() { return bool("smd_abg_data"); }
+  function pro() { return bool("smd_abg_pro"); }
   function defs() { return DEFS; }
 
-  var API = { bool: bool, set: set, on: on, data: data, defs: defs, _version: 2 };
+  var API = { bool: bool, set: set, on: on, data: data, pro: pro, defs: defs, _version: 3 };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_ABG_FLAGS = API;
 })();

@@ -25,6 +25,8 @@
     if (window.SMD_ABG_FLAGS) return window.SMD_ABG_FLAGS.on();
     try { return localStorage.getItem("smd_abg_v2") !== "0"; } catch (e) { return true; }
   }
+  // The 2026-09-27 redesign (flag smd_abg_pro, default on): three tabs, Sources opened from the action row.
+  function pro() { try { return window.SMD_ABG_FLAGS && window.SMD_ABG_FLAGS.pro ? window.SMD_ABG_FLAGS.pro() : localStorage.getItem("smd_abg_pro") !== "0"; } catch (e) { return true; } }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   // Lower-case a label inside a sentence, but keep acronyms ("ICU", "CSF").
   function lc(t) { t = String(t || ""); return /^[A-Z][a-z]/.test(t) ? t.charAt(0).toLowerCase() + t.slice(1) : t; }
@@ -100,8 +102,9 @@
       });
       var k = Object.keys(inst).length;
       var pf = S().poolFrom && S().poolFrom();
-      return '<div class="v2-meta"><b>Pooled from ' + k + " institution" + (k === 1 ? "" : "s") + "</b> (latest edition of each" + (pf ? ", data from " + pf + " or later" : "") + "), " + fmtN(iso) + " isolates in this view. " +
-        "Each figure is the isolate-weighted mean of the institutions that reported it; tap a cell to see them. Rows under 30 isolates and figures that failed a check are left out of pools. Surveillance network reports are listed separately so the same isolates are not counted twice.</div>";
+      return '<div class="v2-meta"><div class="v2-mt">Pooled from ' + k + " institution" + (k === 1 ? "" : "s") + "</div>" +
+        '<div class="v2-ms">Latest edition of each' + (pf ? ", data from " + pf + " or later" : "") + " · " + fmtN(iso) + " isolates in this view</div>" +
+        '<div class="v2-mn v2-mut">Each figure is the isolate-weighted mean of the institutions that reported it (tap a figure to see them). Rows under 30 isolates and figures that failed a check are left out. Surveillance network reports are listed separately, so the same isolates are not counted twice.</div></div>';
     }
     var src = (t.orgs[0] && t.orgs[0].rows[0].src) || null;
     if (!src) { var sc = S().scopes().filter(function (x) { return x.id === st.scope; })[0]; src = sc && sc.src; }
@@ -110,16 +113,23 @@
     var v = src.verification || {};
     var vs = v.status === "double-checked" ? "Checked twice against the source" : v.status === "transcribed" ? "Transcribed summary: isolate counts not given, figures shown but never pooled" : v.status === "local" ? "Imported on this device" : "Checked once";
     var anyR = t.orgs.some(function (o) { return o.measure === "R"; }), hai = t.orgs.some(function (o) { return o.cohort === "hai"; });
-    return '<div class="v2-meta"><b>' + esc(src.name || src.short) + "</b>" + (src.city ? ", " + esc(src.city) : "") + (src.period ? " · " + esc(src.period) : " · " + esc(src.year || "")) +
-      '<br><span class="v2-mut">' + esc(vs) + ". " + (src.citation ? esc(String(src.citation).replace(/\.+\s*$/, "")) + ". " : "") + "</span>" +
-      (src.focus ? '<br><b>Covers ' + esc(src.focus) + " only.</b> It is never pooled with hospital-wide antibiograms or used as a hospital profile." : "") +
-      (anyR ? '<br><span class="v2-mut">This report prints % resistant. % susceptible is shown as 100 minus % resistant, so intermediate results count as susceptible here.</span>' : "") +
-      (hai ? '<br><span class="v2-mut">Rows marked ICU HAI come from ICU device-associated infection surveillance (bloodstream, urinary and ventilator-associated infections), not from all ICU isolates.</span>' : "") +
-      (src.checks && src.checks.length ? '<br><span class="v2-mut">The source\'s own tables disagree in ' + src.checks.length + " place" + (src.checks.length === 1 ? "" : "s") + ' (see Sources).</span>' : "") +
-      (src.copies && src.copies.length ? '<br><span class="v2-mut">' + src.copies.length + " row" + (src.copies.length === 1 ? " repeats" : "s repeat") + ' another row\'s figures exactly; those figures are shown with a caution (see Sources).</span>' : "") +
-      (src.url ? '<br><button class="v2-link" data-v2="open-url" data-url="' + esc(src.url) + '">Open the source</button>' :
-        src.page ? '<br><button class="v2-link" data-v2="open-url" data-url="' + esc(src.page) + '">Open the web page that lists it</button>' : "") +
-      (eds.length > 1 ? ' <span class="v2-mut">Editions: ' + eds.map(function (e) { return esc(e.edLabel || e.year); }).join(", ") + " (tap a cell for the trend)</span>" : "") + "</div>";
+    // "Show them" opens this source's sheet, where the disagreements and repeats are listed.
+    var showSrc = src.local ? "" : ' <button class="v2-link" data-v2="src" data-id="' + esc(src.id) + '">Show them</button>';
+    var notes = [
+      src.focus ? "<b>Covers " + esc(src.focus) + " only.</b> It is never pooled with hospital-wide antibiograms or used as a hospital profile." : "",
+      anyR ? '<span class="v2-mut">This report prints % resistant. % susceptible is shown as 100 minus % resistant, so intermediate results count as susceptible here.</span>' : "",
+      hai ? '<span class="v2-mut">Rows marked ICU HAI come from ICU device-associated infection surveillance (bloodstream, urinary and ventilator-associated infections), not from all ICU isolates.</span>' : "",
+      src.checks && src.checks.length ? '<span class="v2-mut">The source\'s own tables disagree in ' + src.checks.length + " place" + (src.checks.length === 1 ? "" : "s") + ".</span>" + showSrc : "",
+      src.copies && src.copies.length ? '<span class="v2-mut">' + src.copies.length + " row" + (src.copies.length === 1 ? " repeats" : "s repeat") + " another row's figures exactly; those figures carry a caution.</span>" + showSrc : ""
+    ].filter(Boolean);
+    var open = src.url ? '<button class="v2-link" data-v2="open-url" data-url="' + esc(src.url) + '">Open the source</button>' :
+      src.page ? '<button class="v2-link" data-v2="open-url" data-url="' + esc(src.page) + '">Open the web page that lists it</button>' : "";
+    var edl = eds.length > 1 ? '<span class="v2-mut">Editions ' + eds.map(function (e) { return esc(e.edLabel || e.year); }).join(", ") + " (tap a figure for its trend)</span>" : "";
+    return '<div class="v2-meta"><div class="v2-mt">' + esc(src.name || src.short) + "</div>" +
+      '<div class="v2-ms">' + [src.city ? esc(src.city) : "", esc(src.period || src.year || "")].filter(Boolean).join(" · ") + "</div>" +
+      '<div class="v2-mn v2-mut">' + esc(vs) + "." + (src.citation ? " " + esc(String(src.citation).replace(/\.+\s*$/, "")) + "." : "") + "</div>" +
+      notes.map(function (x) { return '<div class="v2-mn2">' + x + "</div>"; }).join("") +
+      (open || edl ? '<div class="v2-ma">' + open + edl + "</div>" : "") + "</div>";
   }
   function phenoStrip() {
     var p = S().phenotypes(st.scope, st.spec, st.set);
@@ -197,12 +207,14 @@
           drugs.map(function (d) { return cellHtml(o, d); }).join("") + "</tr>";
       });
       h += "</tbody></table></div>";
-      h += '<div class="v2-legend"><span><i class="v2-sw b5"></i>90 or more</span><span><i class="v2-sw b4"></i>80 to 89</span><span><i class="v2-sw b3"></i>60 to 79</span><span><i class="v2-sw b2"></i>40 to 59</span><span><i class="v2-sw b1"></i>under 40</span>' +
-        '<span>(% susceptible)</span><span><b>IR</b> intrinsic resistance</span><span><b>*</b> grey: failed a data check' + (t.pooled ? ", or from fewer than 3 institutions" : "") + ', shown for reference (tap)</span><span><b>!</b> not shown: failed a check (tap)</span><span class="v2-mut">Grey rows: under 30 isolates (CLSI M39), not pooled</span></div>';
+      h += '<div class="v2-legend"><div class="v2-lg-row"><span class="v2-lg-t">Colour by % susceptible</span><span><i class="v2-sw b5"></i>90 or more</span><span><i class="v2-sw b4"></i>80 to 89</span><span><i class="v2-sw b3"></i>60 to 79</span><span><i class="v2-sw b2"></i>40 to 59</span><span><i class="v2-sw b1"></i>under 40</span></div>' +
+        '<ul class="v2-lg-keys"><li><b>IR</b> intrinsic resistance</li><li><b>*</b> grey: failed a data check' + (t.pooled ? ", or from fewer than 3 institutions" : "") + ", shown for reference</li><li><b>!</b> not shown: failed a check</li><li>Grey rows: under 30 isolates (CLSI M39), not pooled</li><li>Tap any figure for its source and checks</li></ul></div>";
     }
     h += wiscaHtml(t);
-    h += '<div class="v2-foot"><button class="v2-btn" data-v2="csv">Export CSV</button><button class="v2-btn" data-v2="pdf">' + (nativePdf() ? "Save as PDF" : "Print or save as PDF") + "</button>" +
-      '<p class="v2-mut">Cumulative antibiograms show how often isolates were susceptible in the past; they do not replace a culture for your patient. Every figure links to its source and the checks it passed. Intrinsic resistance per CLSI M100 Appendix B and EUCAST expected resistant phenotypes; AWaRe per WHO 2023. Decision support only.</p></div>';
+    // Redesign: Sources sits beside the exports (it is where every figure on this screen comes from).
+    h += '<div class="v2-foot"><div class="v2-acts"><button class="v2-btn" data-v2="csv">Export CSV</button><button class="v2-btn" data-v2="pdf">' + (nativePdf() ? "Save as PDF" : "Print or save as PDF") + "</button>" +
+      (pro() ? '<button class="v2-btn" data-tab="sources">Sources</button>' : "") + "</div>" +
+      '<p class="v2-mut">Cumulative antibiograms describe past isolates; they do not replace a culture for your patient. Intrinsic resistance per CLSI M100 Appendix B and EUCAST expected resistant phenotypes; AWaRe per WHO 2023. Decision support only.</p></div>';
     h += "</div>";
     return h;
   }
@@ -216,8 +228,8 @@
     if (!drugs.length) return "";
     var opt = function (sel) { return '<option value="">' + (sel === "B" ? "None" : "Choose an antibiotic") + "</option>" + drugs.map(function (d) { var v = sel === "A" ? st.drugA : st.drugB; return '<option value="' + d + '"' + (v === d ? " selected" : "") + ">" + esc(R().drugLabel(d)) + " (" + (R().aware(d) || "") + ")</option>"; }).join(""); };
     var h = '<section class="v2-wis" aria-label="Estimated empiric coverage"><h3>Estimated empiric coverage</h3>' +
-      '<p class="v2-mut">For the bacteria that grew from ' + esc(specPhrase(st.spec)) + " (" + lc(esc(R().SETTINGS[st.set].label)) + ") in this source: the share of isolates a regimen would have covered, weighted by how often each organism grew (weighted-incidence method).</p>" +
-      '<div class="v2-wrow"><select class="v2-sel" id="v2DrugA" aria-label="First antibiotic">' + opt("A") + '</select><span class="v2-plus">+</span><select class="v2-sel" id="v2DrugB" aria-label="Second antibiotic (optional)">' + opt("B") + "</select></div>" +
+      '<p class="v2-mut">The share of isolates a regimen would have covered, weighted by how often each organism grew (weighted-incidence method). Bacteria that grew from ' + esc(specPhrase(st.spec)) + " (" + lc(esc(R().SETTINGS[st.set].label)) + ") in this source.</p>" +
+      '<div class="v2-wrow"><label class="v2-wl"><span>Antibiotic</span><select class="v2-sel" id="v2DrugA" aria-label="First antibiotic">' + opt("A") + '</select></label><label class="v2-wl"><span>With a second antibiotic (optional)</span><select class="v2-sel" id="v2DrugB" aria-label="Second antibiotic (optional)">' + opt("B") + "</select></label></div>" +
       (st.spec === "blood" ? '<label class="v2-chk"><input type="checkbox" id="v2Cons"' + (st.cons ? " checked" : "") + "> Count coagulase-negative staphylococci (often contaminants)</label>" : "");
     if (st.drugA) {
       var reg = [st.drugA].concat(st.drugB && st.drugB !== st.drugA ? [st.drugB] : []);
@@ -227,14 +239,14 @@
         h += '<div class="v2-wres"><div class="v2-wbig">' + (reg.length > 1 && w.high !== w.low ? num(w.low) + " to " + num(w.high) + "%" : num(w.coverage) + "%") + "</div>" +
           '<div>estimated coverage of ' + fmtN(w.known) + " isolates with data (" + num(w.knownPct) + "% of the " + fmtN(w.total) + " isolates" + (w.noData ? "; the rest grew organisms with no susceptibility data" : "") + ")." +
           (reg.length > 1 ? " A cumulative antibiogram cannot say which isolates are covered by both drugs, so a two-drug regimen is shown as a range." : "") + "</div>" +
-          '<ul class="v2-wdet">' + w.detail.map(function (x) { return "<li><i>" + esc(R().orgShort(x.org)) + "</i> " + fmtN(x.n) + " isolates: " + (x.s == null ? '<span class="v2-mut">no data</span>' : num(x.s) + "% covered") + "</li>"; }).join("") + "</ul></div>";
+          '<table class="v2-wtab"><thead><tr><th scope="col">Organism</th><th scope="col">Isolates</th><th scope="col">Covered</th></tr></thead><tbody>' + w.detail.map(function (x) { return "<tr><td><i>" + esc(R().orgShort(x.org)) + "</i></td><td>" + fmtN(x.n) + "</td><td>" + (x.s == null ? '<span class="v2-mut">no data</span>' : num(x.s) + "%") + "</td></tr>"; }).join("") + "</tbody></table></div>";
       }
     }
     var rk = S().rank(st.scope, st.spec, st.set, { noReserve: st.noReserve, excludeCoNS: !st.cons });
     if (rk.length) {
-      h += '<div class="v2-rank"><div class="v2-rankh"><b>Single agents ranked by estimated coverage</b><label class="v2-chk"><input type="checkbox" id="v2NoRes"' + (st.noReserve ? " checked" : "") + "> Hide Reserve antibiotics</label></div><ol>" +
-        rk.slice(0, 10).map(function (x) { return '<li><button data-v2="pick-a" data-drug="' + x.drug + '">' + esc(R().drugLabel(x.drug)) + "</button> " + awareChip(x.drug) + ' <b>' + num(x.coverage) + '%</b> <span class="v2-mut">(data for ' + num(x.knownPct) + "% of isolates)</span></li>"; }).join("") +
-        '</ol><p class="v2-mut">Prefer the narrowest Access or Watch agent that fits the patient. Ranking is not a recommendation: allergies, site of infection, severity, kidney function and local policy decide.</p></div>';
+      h += '<div class="v2-rank"><div class="v2-rankh"><b>Single agents by estimated coverage</b><label class="v2-chk"><input type="checkbox" id="v2NoRes"' + (st.noReserve ? " checked" : "") + "> Hide Reserve antibiotics</label></div><ol class=\"v2-rk\">" +
+        rk.slice(0, 10).map(function (x, i) { return '<li><span class="v2-rk-n">' + (i + 1) + '</span><span class="v2-rk-d"><button data-v2="pick-a" data-drug="' + x.drug + '">' + esc(R().drugLabel(x.drug)) + "</button> " + awareChip(x.drug) + '<span class="v2-rk-k">data for ' + num(x.knownPct) + '% of isolates</span></span><span class="v2-rk-v">' + num(x.coverage) + "%</span></li>"; }).join("") +
+        '</ol><p class="v2-mut">A ranking, not a recommendation. Prefer the narrowest Access or Watch agent that fits the patient; allergies, site of infection, severity, kidney function and local policy decide.</p></div>';
     }
     return h + "</section>";
   }
@@ -308,7 +320,7 @@
       h += '<h4>' + (c.pooled ? "Each institution" : "Source") + "</h4><ul class=\"v2-parts\">" + c.parts.map(function (p) {
         var ok = p.act === "keep" && !(p.n != null && p.n < 30), w = typeof p.s === "number" ? Math.max(2, p.s) : 0;
         return '<li class="' + (ok ? "" : "v2-dim") + '"><div class="v2-pl"><b>' + esc(p.src.short) + "</b> " + esc(p.src.year) + (p.derived ? " (combined)" : "") + '<span class="v2-mut"> · ' + fmtN(p.nt || p.n) + " isolates" + (p.page ? " · page " + p.page : "") + "</span></div>" +
-          (p.act === "intrinsic" ? '<div class="v2-mut">intrinsic resistance</div>' : '<div class="v2-bar2"><i style="width:' + w + '%"></i><span>' + (typeof p.s === "number" ? num(p.s) + "%" : "") + "</span></div>") +
+          (p.act === "intrinsic" ? '<div class="v2-mut">intrinsic resistance</div>' : '<div class="v2-bar2"><span class="v2-trk"><i style="width:' + w + '%"></i></span><span class="v2-bv">' + (typeof p.s === "number" ? num(p.s) + "%" : "") + "</span></div>") +
           (!ok ? '<div class="v2-mut">' + esc(p.act !== "keep" ? (p.why || p.act) : "fewer than 30 isolates: shown, not pooled") + "</div>" : "") +
           (p.spAs ? '<div class="v2-mut">Specimen as printed: ' + esc(p.spAs) + "</div>" : "") +
           (p.src.bp ? '<div class="v2-mut">Breakpoints: ' + esc(p.src.bp) + "</div>" : "") +
@@ -341,7 +353,7 @@
     h += '<ul class="v2-parts">' + ds.map(function (d) {
       var c = o.cells[d];
       return '<li><div class="v2-pl"><button class="v2-link" data-v2="cell" data-org="' + org + '" data-pheno="' + esc(pheno || "") + '" data-drug="' + d + '">' + esc(R0.drugLabel(d)) + "</button> " + awareChip(d) + "</div>" +
-        (c.act === "keep" ? '<div class="v2-bar2"><i class="' + band(c.s) + '" style="width:' + Math.max(2, c.s) + '%"></i><span>' + num(c.s) + "%</span></div>" : '<div class="v2-mut">' + (c.act === "intrinsic" ? "intrinsic resistance" : c.act === "caution" ? num(c.s) + "% with a caution: " + esc(c.why) : "not shown: " + esc(c.why)) + "</div>") + "</li>";
+        (c.act === "keep" ? '<div class="v2-bar2"><span class="v2-trk"><i class="' + band(c.s) + '" style="width:' + Math.max(2, c.s) + '%"></i></span><span class="v2-bv">' + num(c.s) + "%</span></div>" : '<div class="v2-mut">' + (c.act === "intrinsic" ? "intrinsic resistance" : c.act === "caution" ? num(c.s) + "% with a caution: " + esc(c.why) : "not shown: " + esc(c.why)) + "</div>") + "</li>";
     }).join("") + "</ul>";
     h += '<button class="v2-btn" data-v2="dossier" data-org="' + org + '">Microbiology notes</button></div>';
     return h;
@@ -353,7 +365,7 @@
     h += rows.map(function (o) {
       var c = o.cells[drug];
       return '<li><div class="v2-pl"><i>' + esc(orgLabel(o)) + "</i> <span class=\"v2-mut\">" + (o.n != null ? fmtN(c.nt || o.n) + " isolates" : "") + "</span></div>" +
-        (c.act === "keep" ? '<div class="v2-bar2"><i class="' + band(c.s) + '" style="width:' + Math.max(2, c.s) + '%"></i><span>' + num(c.s) + "%</span></div>" : '<div class="v2-mut">' + (c.act === "intrinsic" ? "intrinsic resistance" : esc(c.why)) + "</div>") + "</li>";
+        (c.act === "keep" ? '<div class="v2-bar2"><span class="v2-trk"><i class="' + band(c.s) + '" style="width:' + Math.max(2, c.s) + '%"></i></span><span class="v2-bv">' + num(c.s) + "%</span></div>" : '<div class="v2-mut">' + (c.act === "intrinsic" ? "intrinsic resistance" : esc(c.why)) + "</div>") + "</li>";
     }).join("") + "</ul>" + '<button class="v2-btn" data-v2="druginfo" data-drug="' + drug + '">Dosing and details</button></div>';
     return h;
   }
@@ -367,20 +379,28 @@
     var reasons = {};
     notInt.forEach(function (x) { var r = x.reason || x.status || "not integrated"; reasons[r] = (reasons[r] || 0) + 1; });
     var C = D.census || null;
-    var h = '<div class="v2"><section class="v2-card"><h3>Where the numbers come from</h3>' +
-      "<p>StewardMD searched Indian hospital, medical college and surveillance-network websites for published antibiograms (the census)" +
-      (C && C.websites ? ": at least <b>" + fmtN(C.websites) + "</b> websites checked" + (C.pagesCrawled ? " (" + fmtN(C.pagesCrawled) + " pages crawled)" : "") + (C.searches ? ", " + fmtN(C.searches) + " search queries logged" : "") : "") + ". " +
-      "<b>" + reg.length + "</b> documents found" + (reg.length ? ", <b>" + (reg.length - notInt.length) + "</b> integrated" : "") + ". Integrated sources: <b>" + integrated.length + "</b> (" +
-      integrated.filter(function (s) { return s.kind === "institution"; }).length + " institution antibiograms, " + integrated.filter(function (s) { return s.kind === "network"; }).length + " network reports, " +
-      integrated.filter(function (s) { return s.kind === "study"; }).length + " published hospital studies), " + fmtN(D.stats.isolates) + " isolates.</p>" +
-      (Object.keys(reasons).length ? '<p class="v2-mut">Not integrated: ' + Object.keys(reasons).map(function (r) { return esc(r) + " (" + reasons[r] + ")"; }).join("; ") + ".</p>" : "") +
-      '<p class="v2-mut">Most Indian hospitals do not publish their antibiogram online, and some websites refuse connections from outside India; a hospital missing here may still have one. Your own laboratory\'s antibiogram can be added under My hospital.</p>' +
-      '<p class="v2-mut">' + (function () {
-        var v = { dc: 0, sc: 0, tr: 0 };
-        integrated.forEach(function (x) { var k = x.verification && x.verification.status; if (k === "double-checked") v.dc++; else if (k === "transcribed") v.tr++; else v.sc++; });
-        return "Figures were read from each source document: " + v.dc + " sources checked twice against the document" + (v.sc ? ", " + v.sc + " checked once" : "") + (v.tr ? ", " + v.tr + " transcribed summaries without isolate counts" : "") + ". ";
-      })() + 'Every cell then went through automatic checks (intrinsic resistance, impossible percentages for the isolate count, MRSA consistency, paired antibiotics that must agree, specimen relevance, agreement with the source\'s own isolate-count tables, and figures repeated value for value from another edition). ' +
-      fmtN(D.stats.act.caution) + " figures carry a caution, " + fmtN(D.stats.act.suppress) + " were not shown, " + fmtN(D.stats.act.intrinsic) + " were intrinsic resistance.</p></section>";
+    var kinds = { institution: 0, network: 0, study: 0 }, v = { dc: 0, sc: 0, tr: 0 };
+    integrated.forEach(function (x) {
+      if (kinds[x.kind] != null) kinds[x.kind]++;
+      var k = x.verification && x.verification.status; if (k === "double-checked") v.dc++; else if (k === "transcribed") v.tr++; else v.sc++;
+    });
+    var stat = function (n, what) { return "<div><b>" + n + "</b><span>" + what + "</span></div>"; };
+    // Redesign: Sources opens from the action row, so it carries its own way back.
+    var h = '<div class="v2">' + (pro() ? '<div class="v2-subnav"><button class="v2-back" data-tab="resistance" aria-label="Back to resistance">&lsaquo; Resistance</button></div><h2 class="v2-h2">Sources</h2>' : "") +
+      '<section class="v2-card"><h3>Where the numbers come from</h3>' +
+      "<p>StewardMD searched Indian hospital, medical college and surveillance-network websites for published antibiograms (the census).</p>" +
+      '<div class="v2-stats">' +
+        (C && C.websites ? stat(fmtN(C.websites), "websites checked" + (C.pagesCrawled ? " (" + fmtN(C.pagesCrawled) + " pages)" : "")) : "") +
+        stat(fmtN(reg.length), "documents found") +
+        stat(fmtN(reg.length - notInt.length), "documents integrated") +
+        stat(fmtN(D.stats.isolates), "isolates") +
+      "</div>" +
+      "<p><b>" + integrated.length + "</b> sources in use: " + kinds.institution + " institution antibiograms, " + kinds.network + " network reports and " + kinds.study + " published hospital studies" + (C && C.searches ? ". " + fmtN(C.searches) + " search queries logged" : "") + ".</p>" +
+      '<p class="v2-mut">Figures were read from each source document: ' + v.dc + " sources checked twice against the document" + (v.sc ? ", " + v.sc + " checked once" : "") + (v.tr ? ", " + v.tr + " transcribed summaries without isolate counts" : "") + ".</p>" +
+      '<details class="v2-more"><summary>How every figure is checked</summary><p class="v2-mut">Every cell went through automatic checks: intrinsic resistance, impossible percentages for the isolate count, MRSA consistency, paired antibiotics that must agree, specimen relevance, agreement with the source\'s own isolate-count tables, and figures repeated value for value from another edition. ' +
+        fmtN(D.stats.act.caution) + " figures carry a caution, " + fmtN(D.stats.act.suppress) + " were not shown and " + fmtN(D.stats.act.intrinsic) + " are intrinsic resistance.</p></details>" +
+      (Object.keys(reasons).length ? '<details class="v2-more"><summary>Why ' + notInt.length + " documents are not used</summary><ul class=\"v2-reasons\">" + Object.keys(reasons).sort(function (a, b) { return reasons[b] - reasons[a]; }).map(function (r) { return "<li><span>" + esc(r) + "</span><b>" + reasons[r] + "</b></li>"; }).join("") + "</ul></details>" : "") +
+      '<p class="v2-mut">Most Indian hospitals do not publish their antibiogram online, and some websites refuse connections from outside India, so a hospital missing here may still have one. Your own laboratory\'s antibiogram can be added under My hospital.</p></section>';
     h += '<input type="search" class="v2-q" id="v2SrcQ" placeholder="Find an institution, city or state" value="' + esc(st.srcQ) + '" aria-label="Find a source">';
     var groups = [["national", "National networks"], ["north", "North India"], ["south", "South India"], ["east", "East and North-East India"], ["west", "West and Central India"]];
     // One entry per institution or network (its latest edition); older editions are listed in its sheet.
@@ -449,8 +469,8 @@
   function mine() {
     var loc = S().localGet(), R0 = R();
     var h = '<div class="v2"><section class="v2-card"><h3>Your hospital\'s antibiogram</h3>' +
-      "<p>Load your laboratory's antibiogram and it becomes a source everywhere in StewardMD: this screen, the stewardship console and syndrome reasoning (choose it as the active profile).</p>" +
-      '<p class="v2-mut">The file is read and checked on this device. Nothing is uploaded. Patient identifiers in an isolate list are used only to keep the first isolate per patient and are then discarded; only the summary is saved.</p></section>';
+      "<p>Import your laboratory's antibiogram. It then works like any other source: on this screen, in the stewardship console and in syndrome reasoning once you choose it as the active profile.</p>" +
+      '<p class="v2-mut">The file is read and checked on this device; nothing is uploaded. In an isolate list, patient identifiers are used only to keep the first isolate per patient and are then discarded. Only the summary is saved.</p></section>';
     if (loc) {
       h += '<section class="v2-card"><h3>' + esc(loc.name) + "</h3><p>" + esc(loc.period || "") + " · " + esc(loc.method === "isolates" ? "from an isolate list (" + fmtN(loc.stats && loc.stats.isolates) + " isolates, " + fmtN(loc.stats && loc.stats.firstIsolates) + " first isolates per patient)" : "from a summary table") + " · " + loc.rows.length + " rows · saved " + esc((loc.imported || "").slice(0, 10)) + "</p>" +
         '<button class="v2-btn" data-v2="view-local">View it</button><button class="v2-btn" data-v2="use-local">Use as the active profile</button><button class="v2-btn v2-danger" data-v2="del-local">Remove from this device</button></section>';
@@ -643,14 +663,24 @@
     ".v2-c.v2-cau{background:repeating-linear-gradient(135deg,var(--panel),var(--panel) 5px,var(--line) 5px,var(--line) 6px);color:var(--ink);text-decoration:underline dotted}.v2-c.v2-ir{color:var(--mut);font:800 10.5px var(--f)}.v2-c.v2-x{color:#b91c1c}",
     ".v2-lowrow .v2-o button{color:var(--mut)}.v2-der{display:inline-block;margin:0 8px 6px;font:700 10px var(--f);color:var(--mut);border:1px solid var(--line);border-radius:6px;padding:1px 5px}",
     ".v2-aw{display:inline-block;font:800 9.5px var(--f);border-radius:5px;padding:1px 4px;margin:2px;color:#fff}.v2-awA{background:#15803d}.v2-awW{background:#b45309}.v2-awR{background:#7c3aed}",
-    ".v2-legend{display:flex;flex-wrap:wrap;gap:6px 12px;font:600 11.5px var(--f);color:var(--ink)}.v2-sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:4px}",
+    ".v2-legend{display:flex;flex-direction:column;gap:6px;font:600 11.5px var(--f);color:var(--ink)}.v2-lg-row{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}.v2-lg-t{color:var(--mut)}",
+    ".v2-lg-keys{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 14px;color:var(--mut)}.v2-lg-keys b{color:var(--ink)}.v2-sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:4px}",
+    ".v2-mt{font:700 14px/1.35 var(--f);color:var(--ink)}.v2-ms{font:500 12px/1.4 var(--f);color:var(--mut);margin-top:2px}.v2-mn{margin-top:8px}.v2-mn2{margin-top:4px}.v2-ma{display:flex;flex-wrap:wrap;gap:2px 12px;align-items:baseline;margin-top:6px}",
+    ".v2-acts{display:flex;flex-wrap:wrap;gap:0}.v2-subnav{display:flex;align-items:center}.v2-back{border:0;background:none;color:var(--tl);font:700 14px var(--f);padding:4px 0;cursor:pointer}.v2-h2{margin:0;font:800 20px var(--f);color:var(--ink)}",
+    ".v2-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:10px 0}.v2-stats>div{background:var(--panel);padding:10px 12px}",
+    ".v2-stats b{display:block;font:800 18px var(--f);color:var(--ink);font-variant-numeric:tabular-nums}.v2-stats span{font:500 11.5px/1.3 var(--f);color:var(--mut)}",
+    ".v2-reasons{list-style:none;margin:6px 0 0;padding:0}.v2-reasons li{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-top:1px solid var(--line);font:500 12.5px/1.4 var(--f);color:var(--ink)}.v2-reasons b{flex:none;color:var(--mut);font-variant-numeric:tabular-nums}",
     ".v2-sw.b5{background:#15803d}.v2-sw.b4{background:#65a30d}.v2-sw.b3{background:#fde68a}.v2-sw.b2{background:#fb923c}.v2-sw.b1{background:#b91c1c}",
     ".v2-wis,.v2-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px}.v2-wis h3,.v2-card h3{margin:0 0 6px;font:800 15px var(--f);color:var(--ink)}",
-    ".v2-card p{font:500 13px/1.5 var(--f);color:var(--ink);margin:6px 0}.v2-wrow{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.v2-plus{font:800 16px var(--f);color:var(--mut)}",
+    ".v2-card p{font:500 13px/1.5 var(--f);color:var(--ink);margin:6px 0}.v2-wrow{display:grid;grid-template-columns:1fr;gap:8px;margin-top:8px}.v2-wl{display:flex;flex-direction:column;gap:4px;font:600 12px var(--f);color:var(--mut)}.v2-wl .v2-sel{width:100%;box-sizing:border-box}",
     ".v2-chk{display:flex;gap:8px;align-items:center;font:600 12.5px var(--f);color:var(--ink);margin-top:8px}",
-    ".v2-wres{margin-top:10px;font:500 13px/1.5 var(--f);color:var(--ink)}.v2-wbig{font:800 26px var(--f);color:var(--tl)}.v2-wdet{margin:6px 0 0;padding-left:18px;font:500 12.5px/1.6 var(--f)}",
-    ".v2-rank{margin-top:12px}.v2-rankh{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center;font:600 13px var(--f);color:var(--ink)}.v2-rank ol{padding-left:22px;margin:8px 0;font:500 13px/1.8 var(--f);color:var(--ink)}",
-    ".v2-rank ol button{border:0;background:none;color:var(--tl);font:700 13px var(--f);padding:0;cursor:pointer;text-decoration:underline}",
+    ".v2-wres{margin-top:10px;font:500 13px/1.5 var(--f);color:var(--ink)}.v2-wbig{font:800 26px var(--f);color:var(--tl)}",
+    ".v2-wtab{width:100%;border-collapse:collapse;margin-top:8px;font:500 12.5px var(--f);font-variant-numeric:tabular-nums}.v2-wtab th{font:600 11.5px var(--f);color:var(--mut);text-align:left;padding:6px 0;border-bottom:1px solid var(--line)}",
+    ".v2-wtab td{padding:6px 0;border-bottom:1px solid var(--line);color:var(--ink)}.v2-wtab th+th,.v2-wtab td+td{text-align:right;padding-left:12px;white-space:nowrap}",
+    ".v2-rank{margin-top:14px}.v2-rankh{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center;font:600 13px var(--f);color:var(--ink)}",
+    ".v2-rk{list-style:none;margin:8px 0;padding:0}.v2-rk li{display:grid;grid-template-columns:22px 1fr auto;gap:0 8px;align-items:baseline;padding:8px 0;border-top:1px solid var(--line)}",
+    ".v2-rk-n{font:600 12px var(--f);color:var(--mut);font-variant-numeric:tabular-nums}.v2-rk-d button{border:0;background:none;color:var(--tl);font:600 13.5px var(--f);padding:0;cursor:pointer;text-align:left}",
+    ".v2-rk-k{display:block;font:500 11.5px var(--f);color:var(--mut);margin-top:2px}.v2-rk-v{font:700 14px var(--f);color:var(--ink);font-variant-numeric:tabular-nums;text-align:right}",
     ".v2-btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:10px 14px;font:700 13px var(--f);margin:6px 6px 0 0;min-height:40px;cursor:pointer}.v2-pri{background:var(--tl);border-color:var(--tl);color:#fff}.v2-danger{color:#b91c1c;border-color:#b91c1c}",
     ".v2-foot p{margin-top:10px}.v2-empty{padding:30px 16px;text-align:center;font:600 14px var(--f);color:var(--mut)}.v2-spin{width:26px;height:26px;border:3px solid var(--line);border-top-color:var(--tl);border-radius:50%;margin:0 auto 10px;animation:v2s 1s linear infinite}",
     "@keyframes v2s{to{transform:rotate(360deg)}}@media (prefers-reduced-motion:reduce){.v2-spin{animation:none}}",
@@ -662,16 +692,85 @@
     ".v2-big{display:inline-block;margin:10px 0 4px;padding:6px 12px;border-radius:10px;font:800 20px var(--f)}.v2-big.b5{background:#15803d;color:#fff}.v2-big.b4{background:#65a30d;color:#fff}.v2-big.b3{background:#fde68a;color:#422006}.v2-big.b2{background:#fb923c;color:#1c0a00}.v2-big.b1{background:#b91c1c;color:#fff}",
     ".v2-note{margin:10px 0;padding:10px 12px;border-radius:10px;background:rgba(217,119,6,.12);border:1px solid rgba(217,119,6,.4);font:600 12.5px/1.5 var(--f);color:var(--ink)}",
     ".v2-sh h4{margin:14px 0 6px;font:800 12px var(--f);text-transform:uppercase;letter-spacing:.05em;color:var(--mut)}.v2-parts{list-style:none;padding:0;margin:0}.v2-parts li{padding:8px 0;border-bottom:1px solid var(--line)}",
-    ".v2-parts li.v2-dim{opacity:.62}.v2-pl{font:600 13px var(--f)}.v2-bar2{position:relative;height:18px;background:var(--line);border-radius:6px;margin-top:4px;overflow:hidden}",
-    ".v2-bar2 i{position:absolute;left:0;top:0;bottom:0;background:var(--tl)}.v2-bar2 i.b5{background:#15803d}.v2-bar2 i.b4{background:#65a30d}.v2-bar2 i.b3{background:#eab308}.v2-bar2 i.b2{background:#fb923c}.v2-bar2 i.b1{background:#b91c1c}",
-    ".v2-bar2 span{position:relative;font:800 11.5px/18px var(--f);padding-left:6px;color:var(--ink);mix-blend-mode:normal}.v2-spark{width:220px;height:60px;color:var(--tl);margin-top:6px}.v2-spark circle{fill:currentColor}.v2-spark text{fill:var(--ink)}",
+    ".v2-parts li.v2-dim{opacity:.62}.v2-pl{font:600 13px var(--f)}.v2-bar2{display:flex;align-items:center;gap:8px;margin-top:5px}",
+    ".v2-trk{position:relative;flex:1;height:8px;background:var(--line);border-radius:4px;overflow:hidden}.v2-trk i{position:absolute;left:0;top:0;bottom:0;background:var(--tl)}",
+    ".v2-trk i.b5{background:#15803d}.v2-trk i.b4{background:#65a30d}.v2-trk i.b3{background:#eab308}.v2-trk i.b2{background:#fb923c}.v2-trk i.b1{background:#b91c1c}",
+    ".v2-bv{flex:none;min-width:46px;text-align:right;font:700 12.5px var(--f);color:var(--ink);font-variant-numeric:tabular-nums}.v2-spark{width:220px;height:60px;color:var(--tl);margin-top:6px}.v2-spark circle{fill:currentColor}.v2-spark text{fill:var(--ink)}",
     "@media (min-width:760px){.v2-sh{border-radius:18px;margin-bottom:6vh}#abgV2Sheet{align-items:center}}",
     // Phones: a narrower organism column leaves room for more drug columns (names wrap to two lines).
     "@media (max-width:480px){.v2-oh,.v2-o{min-width:96px;max-width:108px}.v2-o button{font-size:12px;padding:7px 6px;white-space:normal;line-height:1.25}.v2-dh{min-width:36px}}",
     ".v2-more{margin-top:14px;border-top:1px solid var(--line);padding-top:10px}.v2-more>summary{cursor:pointer;font:700 13px var(--f);color:var(--ink);padding:6px 0;list-style-position:inside}.v2-det p{margin:6px 0;color:var(--ink)}"
+  ].join("") + [
+    /* ---- Redesign (flag smd_abg_pro): one quiet theme. Tokens come from the shell (antibiogram.js):
+       --ink2 secondary text, --track control track, --h1b..--h5f the tinted heat scale. Numbers stay
+       printed in every cell; colour is the second channel, never the only one. */
+    ".abg-pro .v2{gap:14px}",
+    ".abg-pro .v2-bar{gap:10px}.abg-pro .v2-lab{font:600 12px var(--f);text-transform:none;letter-spacing:0;color:var(--mut);margin-top:12px}.abg-pro .v2-bar .v2-lab{margin-top:0}",
+    ".abg-pro .v2-sel,.abg-pro .v2-q,.abg-pro .v2-in{border-radius:8px;min-height:40px;padding:9px 11px;font:500 14px var(--f)}.abg-pro .v2-sel{font-weight:600}",
+    ".abg-pro .v2-sel:focus,.abg-pro .v2-q:focus,.abg-pro .v2-in:focus{outline:none;border-color:var(--tl);box-shadow:0 0 0 3px color-mix(in srgb,var(--tl) 16%,transparent)}",
+    ".abg-pro .v2-chips{gap:6px;scrollbar-width:none;padding-bottom:0}.abg-pro .v2-chips::-webkit-scrollbar{display:none}",
+    ".abg-pro .v2-chip{border-radius:8px;min-height:32px;padding:5px 11px;font:600 12.5px var(--f);color:var(--ink2);background:var(--panel);border:1px solid var(--line)}",
+    ".abg-pro .v2-chip.on,.abg-pro .v2-chip2.on{background:var(--tls);border-color:color-mix(in srgb,var(--tl) 42%,transparent);color:var(--tl)}",
+    ".abg-pro .v2-tools{gap:10px}.abg-pro .v2-seg{border:0;background:var(--track);padding:2px;border-radius:9px;gap:2px}",
+    ".abg-pro .v2-seg button{background:transparent;border-radius:7px;min-height:30px;padding:5px 12px;font:600 12.5px var(--f);color:var(--ink2)}",
+    ".abg-pro .v2-seg button.on{background:var(--panel);color:var(--ink);box-shadow:0 1px 2px rgba(15,23,42,.1)}",
+    ".abg-pro .v2-meta,.abg-pro .v2-wis,.abg-pro .v2-card{border-radius:10px;padding:14px;box-shadow:none}.abg-pro .v2-meta{font:500 12.5px/1.5 var(--f)}",
+    ".abg-pro .v2-mt{font:600 14.5px/1.35 var(--f)}.abg-pro .v2-mn{padding-top:8px;border-top:1px solid var(--line)}",
+    ".abg-pro .v2-mut{color:var(--mut)}.abg-pro .v2-link{font:600 12.5px var(--f);text-decoration:none;color:var(--tl);padding:4px 0}",
+    ".abg-pro .v2-ph{gap:8px;scrollbar-width:none}.abg-pro .v2-ph::-webkit-scrollbar{display:none}",
+    ".abg-pro .v2-phc{flex:0 0 156px;border-radius:10px;border:1px solid var(--line);padding:10px 12px}",
+    ".abg-pro .v2-php::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--sev,var(--mut));margin-right:7px;vertical-align:.18em}",
+    ".abg-pro .v2-phc.hi{--sev:#c24141}.abg-pro .v2-phc.mid{--sev:#cf8a1f}.abg-pro .v2-phc.lo{--sev:#2f8f5b}",
+    ".abg-pro .v2-phc .v2-php,body.dark .abg-pro .v2-phc .v2-php{color:var(--ink);font:700 20px var(--f);font-variant-numeric:tabular-nums}",
+    ".abg-pro .v2-phl{font:600 12px/1.35 var(--f);margin-top:2px}.abg-pro .v2-phn{font:500 11px/1.35 var(--f);color:var(--mut)}",
+    ".abg-pro .v2-tw{border-radius:10px}.abg-pro .v2-t{font:600 12.5px var(--f);font-variant-numeric:tabular-nums}",
+    ".abg-pro .v2-oh,.abg-pro .v2-nh{font:600 11.5px var(--f);color:var(--mut);vertical-align:bottom;padding:8px!important}",
+    ".abg-pro .v2-o button{font:600 12.5px var(--f)}.abg-pro .v2-dh button{font:600 11px var(--f);color:var(--ink2)}",
+    ".abg-pro .v2-c{font:600 12.5px var(--f)}.abg-pro .v2-c.v2-ir{font:600 10.5px var(--f)}",
+    ".abg-pro .v2-c.b5,.abg-pro .v2-sw.b5,.abg-pro .v2-big.b5{background:var(--h5b);color:var(--h5f)}.abg-pro .v2-c.b4,.abg-pro .v2-sw.b4,.abg-pro .v2-big.b4{background:var(--h4b);color:var(--h4f)}",
+    ".abg-pro .v2-c.b3,.abg-pro .v2-sw.b3,.abg-pro .v2-big.b3{background:var(--h3b);color:var(--h3f)}.abg-pro .v2-c.b2,.abg-pro .v2-sw.b2,.abg-pro .v2-big.b2{background:var(--h2b);color:var(--h2f)}",
+    ".abg-pro .v2-c.b1,.abg-pro .v2-sw.b1,.abg-pro .v2-big.b1{background:var(--h1b);color:var(--h1f)}",
+    ".abg-pro .v2-sw{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink) 10%,transparent)}",
+    ".abg-pro .v2-trk{height:6px;background:var(--track)}.abg-pro .v2-trk i.b5{background:var(--h5s)}.abg-pro .v2-trk i.b4{background:var(--h4s)}.abg-pro .v2-trk i.b3{background:var(--h3s)}.abg-pro .v2-trk i.b2{background:var(--h2s)}.abg-pro .v2-trk i.b1{background:var(--h1s)}",
+    ".abg-pro .v2-der{border:0;background:var(--track);color:var(--mut);border-radius:4px;font:600 10px var(--f);padding:1px 5px;margin:0 6px 6px}",
+    ".abg-pro .v2-aw{border-radius:4px;font:700 9.5px/1.35 var(--f);padding:0 4px;margin:2px}",
+    ".abg-pro .v2-awA{background:#e2f1e7;color:#1a6a3e}.abg-pro .v2-awW{background:#fbeed6;color:#865208}.abg-pro .v2-awR{background:#eee6fb;color:#5a35a3}",
+    "body.dark .abg-pro .v2-awA{background:#0f2a1b;color:#80d6a1}body.dark .abg-pro .v2-awW{background:#2e2309;color:#f0c160}body.dark .abg-pro .v2-awR{background:#231a3a;color:#c4a9f5}",
+    ".abg-pro .v2-legend{font:500 11.5px var(--f);color:var(--mut)}.abg-pro .v2-lg-row{color:var(--ink2)}",
+    ".abg-pro .v2-wis h3,.abg-pro .v2-card h3{font:600 15px var(--f);margin:0 0 4px}.abg-pro .v2-card p{font:500 13px/1.5 var(--f)}",
+    ".abg-pro .v2-wbig{font:700 26px var(--f);color:var(--ink);font-variant-numeric:tabular-nums}",
+    ".abg-pro .v2-rankh{font:600 13px var(--f)}.abg-pro .v2-chk{font:500 12.5px var(--f);color:var(--ink2)}",
+    ".abg-pro input[type=checkbox]{accent-color:var(--tl);width:16px;height:16px;margin:0}",
+    ".abg-pro .v2-btn{border-radius:8px;min-height:38px;padding:8px 14px;font:600 13px var(--f);color:var(--ink);background:var(--panel);border:1px solid var(--line)}",
+    ".abg-pro .v2-btn:active{background:var(--track)}.abg-pro .v2-pri{background:var(--tl);border-color:var(--tl);color:#fff}.abg-pro .v2-danger{color:var(--red,#ab1c2c);border-color:var(--red-line,#efa9b1)}",
+    ".abg-pro .v2-acts{gap:8px}.abg-pro .v2-acts .v2-btn{margin:0}.abg-pro .v2-foot{padding-top:2px}.abg-pro .v2-foot p{font:500 11.5px/1.5 var(--f);margin-top:12px}",
+    ".abg-pro .v2-note{background:var(--yellow-bg,#fdf2de);border:1px solid var(--yellow-line,#f0d49b);border-radius:8px;font:500 12.5px/1.5 var(--f);color:var(--ink)}",
+    ".abg-pro .v2-subnav{margin-bottom:-6px}.abg-pro .v2-h2{font:700 22px/1.2 var(--f);letter-spacing:-.01em}",
+    ".abg-pro .v2-stats{border-radius:8px}.abg-pro .v2-stats b{font:700 18px var(--f)}.abg-pro .v2-stats span{display:block;margin-top:2px;line-height:1.35}",
+    ".abg-pro .v2-more>summary{font:600 13px var(--f);color:var(--ink);list-style:none;position:relative;padding:8px 0 8px 18px}.abg-pro .v2-more>summary::-webkit-details-marker{display:none}",
+    ".abg-pro .v2-more>summary::before{content:'';position:absolute;left:2px;top:50%;width:6px;height:6px;border-right:1.5px solid var(--mut);border-bottom:1.5px solid var(--mut);transform:translateY(-70%) rotate(-45deg);transition:transform .15s}",
+    ".abg-pro .v2-more[open]>summary::before{transform:translateY(-70%) rotate(45deg)}",
+    ".abg-pro .v2-gh{font:600 12px var(--f);text-transform:none;letter-spacing:0;color:var(--mut);margin:18px 0 6px}",
+    ".abg-pro .v2-src{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}.abg-pro .v2-src li:last-child{border-bottom:0}",
+    ".abg-pro .v2-src button,.abg-pro .v2-src li>div{position:relative;padding:11px 30px 11px 12px;font:600 13.5px/1.4 var(--f)}",
+    ".abg-pro .v2-src button::after{content:'';position:absolute;right:14px;top:50%;width:7px;height:7px;border-top:1.5px solid var(--mut);border-right:1.5px solid var(--mut);transform:translateY(-50%) rotate(45deg)}",
+    ".abg-pro .v2-src button:active{background:var(--track)}.abg-pro .v2-kind{border:0;background:var(--track);border-radius:4px;font:600 10px var(--f);text-transform:none;padding:1px 5px;margin-left:2px}",
+    ".abg-pro #v2File{font:500 13px var(--f);color:var(--mut);margin-top:4px;max-width:100%}",
+    ".abg-pro #v2File::file-selector-button{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:8px 12px;font:600 13px var(--f);margin-right:10px;cursor:pointer}",
+    ".abg-pro #v2File::-webkit-file-upload-button{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:8px 12px;font:600 13px var(--f);margin-right:10px;cursor:pointer}",
+    ".abg-pro textarea.v2-in{min-height:96px;font:500 13px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace}",
+    ".abg-pro #abgV2Sheet{background:rgba(15,23,42,.36)}",
+    ".abg-pro .v2-sh{border-radius:16px 16px 0 0;padding:16px 16px calc(22px + env(safe-area-inset-bottom));box-shadow:0 -10px 30px rgba(15,23,42,.16);font:500 13.5px/1.5 var(--f)}",
+    ".abg-pro .v2-shh{font:600 17px/1.3 var(--f);align-items:center}.abg-pro .v2-x{border:0;background:var(--track);border-radius:8px;padding:7px 12px;font:600 13px var(--f);color:var(--ink)}",
+    ".abg-pro .v2-sh h4{font:600 12px var(--f);text-transform:none;letter-spacing:0;color:var(--mut);margin:18px 0 6px}",
+    ".abg-pro .v2-big{border-radius:8px;padding:6px 12px;font:700 20px var(--f);font-variant-numeric:tabular-nums}",
+    ".abg-pro .v2-parts li{padding:10px 0}.abg-pro .v2-sh .v2-btn{margin:10px 8px 0 0}",
+    "@media (min-width:760px){.abg-pro .v2-sh{border-radius:16px}}"
   ].join("");
 
   window.ABG_V2 = { on: on, render: render, click: click, change: change, input: input, css: css, state: st,
-    tabs: function () { return on() ? [["resistance", "Resistance rates"], ["sources", "Sources"], ["mine", "My hospital"]] : null; },
+    // Redesign: three tabs; Sources opens from the action row under the table.
+    tabs: function () { return !on() ? null : pro() ? [["resistance", "Resistance"], ["mine", "My hospital"]] : [["resistance", "Resistance rates"], ["sources", "Sources"], ["mine", "My hospital"]]; },
+    pro: pro,
     _cellSheet: cellSheet, _pdfHtml: pdfHtml };
 })();

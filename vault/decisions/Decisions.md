@@ -10406,3 +10406,15 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
   infection now out-ranks the afebrile non-infective lead). Needed antibiotics and time-critical: unchanged.
   With the prior flag, chart-text top-3 204 -> 199. Everything else equal or better; classic order kept as
   the `smd_rank_v3=0` configuration.
+
+## 2026-09-27 - Antibiogram redesign behind `smd_abg_pro` (default ON)
+- **Ask** (owner, with a marked screenshot): move Sources out of the tab bar to sit beside Export CSV and
+  Save as PDF, and "make the whole module look professional and no AI slop".
+- **Decision**: three tabs (Spectrum, Resistance, My hospital); Sources opens from the action row, keeps
+  Resistance selected and has a back link. One quiet theme scoped to `.abg-pro` on the app's own tokens
+  (follows light, dark and the chosen theme), tinted heat scale with printed numbers, sentence-case copy,
+  no gradients or glass blur inside the screen, and plain drug names (`no-druglink` on the overlay).
+- **Reversible**: `?abgpro=0` or localStorage `smd_abg_pro = "0"` restores the previous look and the four
+  tabs; git tag `abg-ui-pre-pro` is the pre-redesign main.
+- **Not changed**: data, checks, pooling, exports and every figure's source sheet.
+
