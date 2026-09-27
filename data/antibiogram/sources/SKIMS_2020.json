@@ -335,7 +335,8 @@
     "levofloxacin": "printed 52%, which 2 isolates cannot give: the blood organism table (page 4) lists 2 Enterobacter isolates in all locations",
     "imipenem": "printed 51%, which 2 isolates cannot give: the blood organism table (page 4) lists 2 Enterobacter isolates in all locations"
    },
-   "note": "The blood organism table on page 4 gives only 2 Enterobacter isolates in all locations, so figures other than 0, 50 and 100% cannot be right (marked as conflicts); kept as printed."
+   "note": "The blood organism table on page 4 gives only 2 Enterobacter isolates in all locations, so figures other than 0, 50 and 100% cannot be right (marked as conflicts); kept as printed.",
+   "unreliable": "Page 8 prints blood Enterobacter IPD figures such as ceftazidime 10, piperacillin-tazobactam 42 and levofloxacin 52 while the report's own organism table on page 4 counts only 2 blood Enterobacter isolates for the year, so the row cannot describe real isolates."
   },
   {
    "spec": "blood",
@@ -374,7 +375,8 @@
     "levofloxacin": "printed 18%, which 2 isolates cannot give: the blood organism table (page 4) lists 2 Enterobacter isolates in all locations",
     "imipenem": "printed 25%, which 2 isolates cannot give: the blood organism table (page 4) lists 2 Enterobacter isolates in all locations"
    },
-   "note": "The blood organism table on page 4 gives only 2 Enterobacter isolates in all locations, so figures other than 0, 50 and 100% cannot be right (marked as conflicts); kept as printed."
+   "note": "The blood organism table on page 4 gives only 2 Enterobacter isolates in all locations, so figures other than 0, 50 and 100% cannot be right (marked as conflicts); kept as printed.",
+   "unreliable": "Page 8 prints blood Enterobacter ICU figures such as ceftriaxone 15, piperacillin-tazobactam 18 and levofloxacin 18 while the report's own organism table on page 4 counts only 2 blood Enterobacter isolates for the year, so no figure in the row, its zeros included, can be tied to real isolates."
   },
   {
    "spec": "blood",
@@ -1198,7 +1200,8 @@
     "polymyxin_b": "Polymyxin -B",
     "tetracycline": "Tetracycline"
    },
-   "specimen_as_printed": "Pus & body fluids"
+   "specimen_as_printed": "Pus & body fluids",
+   "unreliable": "Page 10 prints pus Enterobacter ICU imipenem 100 beside meropenem 0 and every other beta-lactam at 0 to 10, which no set of Enterobacter isolates can give, so none of the row's figures, its zeros included, is dependable."
   },
   {
    "spec": "pus",
@@ -1659,7 +1662,8 @@
     "meropenem": "Meropenem",
     "nitrofurantoin": "Nitrofurantoin",
     "polymyxin_b": "Polymyxin -B"
-   }
+   },
+   "unreliable": "Page 12 prints urine E. coli ICU piperacillin-tazobactam 100 and ertapenem 100 beside meropenem 50 and imipenem 50, which cannot all be true of the same isolates, so the row's zeros (ceftriaxone, levofloxacin, norfloxacin) are not dependable either."
   },
   {
    "spec": "urine",
@@ -1859,7 +1863,8 @@
     "imipenem": "Imipenem",
     "ertapenem": "Ertapenam",
     "meropenem": "Meropenem"
-   }
+   },
+   "unreliable": "Page 12 prints urine Proteus OPD cefepime 0 beside ceftriaxone 100 (a ceftriaxone-susceptible isolate is cefepime-susceptible) and ertapenem 100 beside meropenem 83, so the row contradicts itself."
   },
   {
    "spec": "urine",

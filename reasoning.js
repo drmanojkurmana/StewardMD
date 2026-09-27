@@ -947,7 +947,10 @@
   // Bridge generic presenting symptoms to the infection ontology's specific
   // keys so a generic pick still engages the relevant syndromes (infectious
   // scoring only — the non-infectious layer keeps the literal findings).
-  var ALIAS = { headache: ["headacheSevere"], dyspnea: ["hypoxia"], legSwellingUnilateral: ["dvtRisk"], coughRadio: ["cough"], purulentSputum: ["productiveCough"] };
+  // An indwelling urinary catheter is itself a complicating factor (IDSA, EAU): a catheterised
+  // patient with urinary symptoms never has "uncomplicated" cystitis (round 4: catheter, day over 48 h
+  // and dysuria led with uncomplicated cystitis, so the panel showed outpatient urine figures).
+  var ALIAS = { headache: ["headacheSevere"], dyspnea: ["hypoxia"], legSwellingUnilateral: ["dvtRisk"], coughRadio: ["cough"], purulentSputum: ["productiveCough"], indwellingCatheter: ["complicatedUTIRisk"] };
   function infFindings() {
     var e = {};
     for (var k in S.f) { e[k] = true; (ALIAS[k] || []).forEach(function (a) { e[a] = true; }); }
@@ -2949,7 +2952,9 @@
       var seen = {}, rows = [];
       orgs.forEach(function (orgName) {
         if (rows.length >= 5 || seen[orgName]) return; seen[orgName] = 1;
-        var cells = [], n = 0, k = 0, combined = null, used = null, shownKey = {};
+        // A pooled answer can come from a different stratum drug by drug (the walk-on in the store),
+        // so chips are grouped by the stratum they came from, each group with its own isolates.
+        var intr = [], groups = {}, gorder = [], shownKey = {};
         RPANEL.forEach(function (dk) {
           if (S && S.synDrug && S.synDrug(lead.id, dk)) return;          // e.g. no nitrofurantoin for pyelonephritis
           var r = window.HOSPITAL.getSusceptibility(orgName, dk, ctx);
@@ -2963,28 +2968,44 @@
             // cephalosporins, Klebsiella and ampicillin), not Gram-positive agents for Gram-negatives.
             var o = RL && RL.canonOrg(orgName), okey = o && o.key;
             if (!RL || !okey || !(RL.ORG_INTRINSIC[okey] || []).some(function (d) { return d === dk; })) return;
-            cells.push('<span title="' + esc(r.why || "intrinsic resistance") + '" style="display:inline-block;font:700 10.5px var(--sans,system-ui);color:var(--ink,#0F172A);background:var(--line,#E2E8F0);padding:2px 7px;border-radius:999px;margin:3px 4px 0 0">' + esc(RSHORT[dk] || dk) + ' intrinsic R</span>');
+            intr.push('<span title="' + esc(r.why || "intrinsic resistance") + '" style="display:inline-block;font:700 10.5px var(--sans,system-ui);color:var(--ink,#0F172A);background:var(--line,#E2E8F0);padding:2px 7px;border-radius:999px;margin:3px 4px 0 0">' + esc(RSHORT[dk] || dk) + ' intrinsic R</span>');
             return;
           }
-          if (r.n != null && r.n > n) n = r.n;
-          if (r.k) k = Math.max(k, r.k);
-          if (r.combined) combined = r.combined;
-          if (!used && r.spec) used = r;          // same organism: same stratum for every drug
-          var R = Math.round(100 - r.s);
-          cells.push('<span style="display:inline-block;font:700 10.5px var(--sans,system-ui);color:#fff;background:' + rColor(R) + ';padding:2px 7px;border-radius:999px;margin:3px 4px 0 0">' + esc(RSHORT[key] || key) + ' ' + R + '%R</span>');
+          var gk = (r.spec || "") + "|" + (r.set || "") + "|" + (r.cohort || "");
+          var g = groups[gk];
+          if (!g) { g = groups[gk] = { r: r, k: 0, combined: null, chips: [] }; gorder.push(gk); }
+          if (r.k) g.k = Math.max(g.k, r.k);
+          if (r.combined) g.combined = r.combined;
+          g.chips.push({ key: key, R: Math.round(100 - r.s) });
         });
-        if (!cells.length) return;
-        // Each organism carries its own stratum: reports print organism groups at different
-        // granularity, so the specimen used can differ between organisms.
-        var meta = [];
-        if (used) meta.push((R_SPEC[used.spec] || used.spec) + ", " + (R_SET[used.set] || used.set) + (used.cohort === "hai" ? " (ICU device infections)" : ""));
-        if (n) meta.push(n.toLocaleString("en-IN") + " isolates");
-        if (used && used.pooled) meta.push(k === 1 ? "1 institution" : k + " institutions");   // a "pooled" figure can be one hospital
-        else if (k > 1) meta.push(k + " institutions");
-        if (combined) meta.push(combined.join(" + "));
-        if (used && used.specMatch === false && ctx.spec && ctx.spec.length) meta.push("no " + (R_SPEC[ctx.spec[0]] || ctx.spec[0]) + " figures here");
+        if (!gorder.length && !intr.length) return;
+        // The stratum most figures came from leads; figures from any other stratum are marked and
+        // their stratum named under the organism.
+        gorder.sort(function (a, b) { return groups[b].chips.length - groups[a].chips.length; });
+        var marks = ["", "\u00b9", "\u00b2", "\u00b3", "\u2074"];
+        function chip(c, m) { return '<span style="display:inline-block;font:700 10.5px var(--sans,system-ui);color:#fff;background:' + rColor(c.R) + ';padding:2px 7px;border-radius:999px;margin:3px 4px 0 0">' + esc(RSHORT[c.key] || c.key) + ' ' + c.R + '%R' + (m || "") + '</span>'; }
+        // Isolates of the organism in a stratum (not the largest number tested for any one drug).
+        function gMeta(g) {
+          var u = g.r, meta = [], n = 0;
+          if (u.spec) meta.push((R_SPEC[u.spec] || u.spec) + ", " + (R_SET[u.set] || u.set) + (u.cohort === "hai" ? " (ICU device infections)" : ""));
+          try { if (u.spec && hp.abgScope && S && S.table && S.orgRows) S.orgRows(S.table(hp.abgScope, u.spec, u.set), orgName, u.cohort).forEach(function (o) { n += o.n || 0; }); } catch (e) {}
+          if (!n) n = u.n || 0;
+          if (n) meta.push(n.toLocaleString("en-IN") + " isolates");
+          if (u.pooled) meta.push(g.k === 1 ? "1 institution" : g.k + " institutions");   // a "pooled" figure can be one hospital
+          else if (g.k > 1) meta.push(g.k + " institutions");
+          if (g.combined) meta.push(g.combined.join(" + "));
+          return meta;
+        }
+        var first = gorder.length ? groups[gorder[0]] : null, meta = first ? gMeta(first) : [], chipsHtml = [], foot = [];
+        if (first && first.r.specMatch === false && ctx.spec && ctx.spec.length) meta.push("no " + (R_SPEC[ctx.spec[0]] || ctx.spec[0]) + " figures here");
+        gorder.forEach(function (gk, i) {
+          var g = groups[gk], m = i ? (marks[i] || "*") : "";
+          g.chips.forEach(function (c) { chipsHtml.push(chip(c, m)); });
+          if (i) foot.push(m + " " + gMeta(g).join(", "));
+        });
         rows.push('<div style="margin-top:6px"><span style="font:700 12px var(--sans,system-ui);font-style:italic">' + esc(orgName) + '</span>' +
-          (meta.length ? ' <span style="font:600 10.5px var(--sans,system-ui);color:var(--slate-soft,#64748B)">' + esc(meta.join(", ")) + '</span>' : '') + ' ' + cells.join("") + '</div>');
+          (meta.length ? ' <span style="font:600 10.5px var(--sans,system-ui);color:var(--slate-soft,#64748B)">' + esc(meta.join(", ")) + '</span>' : '') + ' ' + chipsHtml.concat(intr).join("") +
+          (foot.length ? '<div style="font:500 10.5px/1.4 var(--sans,system-ui);color:var(--slate-soft,#64748B);margin-top:2px">' + foot.map(esc).join("<br>") + '</div>' : '') + '</div>');
       });
       if (!rows.length) return "";
       var nm = hp.label || hp.name || hp.short || "regional";
@@ -4013,8 +4034,12 @@
     det.innerHTML = '<summary>Antibiotic guidance' + (srcTxt ? ': ' + esc(srcTxt) : '') + '</summary>';
     if (btn) btn.parentNode.removeChild(btn);   // the node keeps its click handler
     if (btn) btn.textContent = btn.textContent.replace(/\s*→\s*$/, "");
+    // The local resistance figures are decision support, not guideline text: they stay in view.
+    var abg = box.querySelector(".dx-region-abg");
+    if (abg) abg.parentNode.removeChild(abg);
     det.appendChild(box);
     el.appendChild(det);
+    if (abg) el.appendChild(abg);
     if (btn) el.appendChild(btn);
   }
   var SIMPLE_ORIG = null;

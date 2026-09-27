@@ -34,6 +34,9 @@
  *   untested: {drug: "why"} marks a printed 0 that the source suggests means "not tested" (a caution).
  *   unreliable: "what is inconsistent" marks a whole table the extraction found self-contradictory:
  *   every figure in the row is a caution, never pooled or used by the console or reasoning.
+ *   clinical: "what the figures combine" marks a clinical antibiogram (laboratory results combined
+ *   with how patients responded to treatment): not a laboratory % susceptible, so every figure is
+ *   a caution and the row never answers a syndrome, a pool or WISCA.
  *   Reports that print % resistant (NARS-Net, state networks) give r:{} (or measure "R" with
  *   s:{} holding %R); the build stores 100 - %R and marks the cell (intermediate results then
  *   count as susceptible, which the app says).
@@ -74,7 +77,7 @@ const STORE_JS = join(ROOT, "antibiogram-store.js");
 const RULES_JS = join(ROOT, "antibiogram-rules.js");
 
 const TOP = ["id", "kind", "inst", "institution", "short", "city", "state", "region", "sector", "year", "end", "isolates", "period", "published", "url", "page", "doi", "retrieved", "citation", "reporting", "method", "breakpoints", "measure", "verification", "notes", "issues", "rows", "counts", "excluded", "credibility", "file", "pages", "focus"];
-const ROWK = ["spec", "set", "org", "pheno", "n", "page", "s", "r", "nt", "approx", "conflict", "untested", "unreliable", "q", "trend", "notes", "printed", "note", "specimen_as_printed", "table", "cohort", "n_tested"];
+const ROWK = ["spec", "set", "org", "pheno", "n", "page", "s", "r", "nt", "approx", "conflict", "untested", "unreliable", "clinical", "q", "trend", "notes", "printed", "note", "specimen_as_printed", "table", "cohort", "n_tested"];
 const KINDS = ["institution", "network", "study"], REGIONS = ["north", "south", "east", "west", "national"], SECTORS = ["government", "private", "network"];
 const VSTAT = ["double-checked", "single-checked", "transcribed"];
 const ACT = { keep: "k", intrinsic: "i", hide: "h", suppress: "x", caution: "c" };
@@ -92,6 +95,13 @@ export function validateSource(src, file) {
   if (src.measure != null && !["S", "R"].includes(src.measure)) e.push(`${tag}: measure must be "S" or "R"`);
   if (src.focus != null && (typeof src.focus !== "string" || !src.focus.trim())) e.push(`${tag}: focus must be a short description when given`);
   if (src.breakpoints != null && (typeof src.breakpoints !== "string" || !/CLSI|EUCAST/.test(src.breakpoints))) e.push(`${tag}: breakpoints must name the standard as the source states it (CLSI or EUCAST, with the edition when given)`);
+  // Every text of a source is shown to clinicians (the detail sheet): no tool or library names.
+  const TOOLS = /pymupdf|poppler|pdfplumber|pypdfium|pdftotext|pdftoppm|pdfminer|extract_tables|\bread tool\b|tesseract/i;
+  (function scan(v, where) {
+    if (typeof v === "string") { const m = TOOLS.exec(v); if (m) e.push(`${tag}: ${where} names a tool ("${m[0]}"); describe the reading method in plain words`); }
+    else if (Array.isArray(v)) v.forEach((x, i) => scan(x, `${where}[${i}]`));
+    else if (v && typeof v === "object") Object.keys(v).forEach((k) => scan(v[k], where ? `${where}.${k}` : k));
+  })(src, "");
   if (!Array.isArray(src.rows) || !src.rows.length) e.push(`${tag}: no rows (a document without organism-level figures belongs in the census register with its reason, not in sources)`);
   if (src.isolates != null && !(Number.isInteger(src.isolates) && src.isolates > 0)) e.push(`${tag}: isolates must be a positive integer (the report's total)`);
   if (src.end != null && !(/^\d{4}-(0[1-9]|1[0-2])$/.test(src.end) && +src.end.slice(0, 4) === src.year)) e.push(`${tag}: end must be "YYYY-MM" in the data year`);
@@ -116,6 +126,7 @@ export function validateSource(src, file) {
     Object.keys(r.conflict || {}).forEach((d) => { if (vals[d] == null) e.push(`${t}: conflict names ${d}, which has no value`); if (typeof r.conflict[d] !== "string" || !r.conflict[d].trim()) e.push(`${t}: conflict.${d} must say what disagrees`); });
     Object.keys(r.untested || {}).forEach((d) => { if (vals[d] !== 0) e.push(`${t}: untested names ${d}, whose value is not 0`); if (typeof r.untested[d] !== "string" || !r.untested[d].trim()) e.push(`${t}: untested.${d} must say why the 0 probably means not tested`); });
     if (r.unreliable != null && (typeof r.unreliable !== "string" || !r.unreliable.trim())) e.push(`${t}: unreliable must say what is inconsistent`);
+    if (r.clinical != null && (typeof r.clinical !== "string" || !r.clinical.trim())) e.push(`${t}: clinical must say what the figures combine`);
     Object.keys(r.trend || {}).forEach((d) => {
       if (!R.DRUGS[d]) e.push(`${t}: trend drug key "${d}" is not canonical`);
       const tr = r.trend[d]; if (!Array.isArray(tr) || tr.some((p) => !Array.isArray(p) || !Number.isInteger(p[0]) || typeof p[1] !== "number" || p[1] < 0 || p[1] > 100)) e.push(`${t}: trend.${d} must be [[year, %], ...]`);
@@ -150,7 +161,7 @@ export function checkRow(src, r, countOf) {
   Object.keys(raw).forEach((d) => { s[d] = isR ? Math.round(10 * (100 - raw[d])) / 10 : raw[d]; });
   let trend = r.trend || null;
   if (trend && isR) { trend = {}; Object.keys(r.trend).forEach((d) => { trend[d] = r.trend[d].map((p) => [p[0], Math.round(10 * (100 - p[1])) / 10]); }); }
-  const v = R.validateRow({ org: o.key, pheno, spec: r.spec, set: r.set, n, s, nt: r.nt || {}, approx: r.approx || [], conflict: r.conflict || {}, untested: r.untested || {}, unreliable: r.unreliable || null });
+  const v = R.validateRow({ org: o.key, pheno, spec: r.spec, set: r.set, n, s, nt: r.nt || {}, approx: r.approx || [], conflict: r.conflict || {}, untested: r.untested || {}, unreliable: r.unreliable || null, clinical: r.clinical || null });
   return { src: src.id, inst: src.inst, year: src.year, spec: r.spec, set: r.set, org: o.key, orgAs: r.org, pheno, n, nFrom,
     cells: v.cells, flags: v.flags, q: r.q || null, trend, notes: r.notes || null, page: r.page || null, derived: null,
     measure: isR ? "R" : "S", table: r.table || null, cohort: r.cohort || null, note: r.note || null, specAs: r.specimen_as_printed || null, nTested: r.n_tested === true };
