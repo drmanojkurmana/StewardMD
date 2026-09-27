@@ -51,7 +51,7 @@ try {
 
   // hub: Today's plan and every section
   await ev(`SMD_showHome(); OPHTHALMOS.open(); return 1;`);
-  ok(await until(`return document.querySelectorAll("#smdOphthalmos .oph-clinic[data-t]").length === 5;`, 20000), "hub lists the five clinics");
+  ok(await until(`return document.querySelectorAll("#smdOphthalmos .oph-clinic[data-t]").length === 6;`, 20000), "hub lists the six clinics (incl. general retina, RFMiD)");
   ok(await ev(`return document.querySelectorAll("#smdOphthalmos .oph-plan-row").length === 3;`) === true, "Today's plan: images, questions, one simulator patient");
   ok(await ev(`return ["Questions","Notes","Simulators","Tools"].every(function(h){return [].some.call(document.querySelectorAll("#smdOphthalmos .oph-h2"), function(e){return e.textContent===h;});});`) === true, "hub sections: Questions, Notes, Simulators, Tools");
   ok(await ev(`return !!document.querySelector("#smdOphthalmos .oph-draft");`) === true, "draft mark on the hub");

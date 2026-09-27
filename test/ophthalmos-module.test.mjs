@@ -11,7 +11,7 @@ let pass = 0, fail = 0;
 const ok = (n, c) => { if (c) pass++; else { fail++; console.log("x FAIL:", n); } };
 
 // Deck item counts, per the source repo's README.
-const DECKS = { oct: 2064, disc: 705, dr: 1392, rop: 2020, cases: 60, mcq: 3035 };
+const DECKS = { oct: 2064, disc: 705, dr: 1392, rop: 2020, cases: 60, mcq: 3035, rfmid: 438 };
 for (const [name, count] of Object.entries(DECKS)) {
   const d = JSON.parse(readFileSync(join(ROOT, "ophthalmos/decks", name + ".json"), "utf8"));
   ok("ophthalmos/decks/" + name + ".json parses as JSON", typeof d === "object" && d !== null);

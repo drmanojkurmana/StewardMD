@@ -365,6 +365,174 @@
     "OUS": "Ocular ultrasound"
    },
    "clinic": "Case conference"
+  },
+  {
+   "id": "rfmid",
+   "deck": "decks/rfmid.json",
+   "title": "General retina screening",
+   "sub": "Normal plus 11 diseases",
+   "modality": "45-degree colour fundus photograph, multi-disease screening",
+   "source": "rfmid",
+   "labels": {
+    "normal": "No disease seen",
+    "CME": "Cystoid macular edema",
+    "CRS": "Chorioretinitis",
+    "CSR": "Central serous retinopathy",
+    "EDN": "Exudation",
+    "MH": "Media haze",
+    "MS": "Macular scar",
+    "MYA": "Myopia",
+    "ODC": "Optic disc cupping",
+    "RD": "Retinal detachment",
+    "RT": "Retinal traction",
+    "TD": "Tilted disc"
+   },
+   "short": {
+    "normal": "Normal",
+    "CME": "CME",
+    "CRS": "Chorioretinitis",
+    "CSR": "CSR",
+    "EDN": "Exudates",
+    "MH": "Media haze",
+    "MS": "Macular scar",
+    "MYA": "Myopia",
+    "ODC": "Disc cupping",
+    "RD": "Detachment",
+    "RT": "Traction",
+    "TD": "Tilted disc"
+   },
+   "teach": {
+    "normal": [
+     "Clear media, sharp disc and vessels, no labelled disease sign on this photo"
+    ],
+    "CME": [
+     "Multiple cyst-like fluid pockets in the macula, often in a petaloid pattern",
+     "Retina looks thickened at the fovea; central vision is blurred",
+     "Common after cataract surgery, uveitis, diabetic macular edema or a vein occlusion"
+    ],
+    "CRS": [
+     "Yellow-white patch of active retinochoroidal inflammation, sometimes beside an old pigmented scar",
+     "Overlying vitreous haze or cells when the lesion is active",
+     "Common causes: toxoplasmosis, tuberculosis, viral retinitis"
+    ],
+    "CSR": [
+     "Shallow, dome-shaped serous detachment of the neurosensory retina at the macula",
+     "Round or oval area of subretinal fluid with a sharp edge",
+     "Typically a young or middle-aged adult, often stressed or on steroids"
+    ],
+    "EDN": [
+     "Yellow-white lipid deposits with sharp, waxy edges",
+     "Often ringed around a leaking vessel or microaneurysm (a circinate pattern)",
+     "A sign of chronic vascular leakage, most often diabetic or hypertensive"
+    ],
+    "MH": [
+     "Reduced clarity of the fundus view from a hazy media rather than a retinal lesion",
+     "Vessels and disc look blurred or veiled, not sharply focused",
+     "Causes: cataract, vitreous haemorrhage, or inflammation of the media"
+    ],
+    "MS": [
+     "Well-defined pale or pigmented flat lesion at the macula from healed inflammation, trauma or neovascularisation",
+     "No active fluid or haemorrhage",
+     "Vision loss is fixed and usually central"
+    ],
+    "MYA": [
+     "Pale, tessellated fundus with visible large choroidal vessels",
+     "Peripapillary crescent beside a tilted or stretched disc",
+     "High myopia can add a posterior staphyloma, lacquer cracks or myopic choroidal neovascularisation"
+    ],
+    "ODC": [
+     "Enlarged cup relative to the disc, with rim thinning that can break the ISNT pattern",
+     "May show a notch or a disc haemorrhage in progressive cases",
+     "The chief fundus-photo red flag for glaucoma"
+    ],
+    "RD": [
+     "Retina lifted off the RPE, looking pale, out of focus and folded, with darker vessels than the surrounding retina",
+     "Wavy or corrugated surface, sometimes with a visible break",
+     "Sight- and eye-threatening; needs urgent referral"
+    ],
+    "RT": [
+     "Retina pulled into peaks or straight folds by fibrovascular or membranous tissue",
+     "Vessels are dragged or distorted along the line of traction",
+     "Seen in proliferative diabetic retinopathy, after trauma, or with vitreomacular traction"
+    ],
+    "TD": [
+     "Oval, obliquely inserted optic disc with an inferior or inferonasal crescent of exposed sclera or choroid",
+     "Often paired with myopia, on a fundus that looks stretched inferiorly",
+     "A benign congenital variant that can mimic a field defect, not glaucoma itself"
+    ]
+   },
+   "pearl": "Each RFMiD photo here carries one label, but real fundi often show more than one of these signs together, so keep scanning the whole photo even after you spot the first one.",
+   "foundation": [
+    {
+     "id": "normal",
+     "label": "Normal",
+     "of": [
+      "normal"
+     ]
+    },
+    {
+     "id": "macular",
+     "label": "Macular or exudative disease",
+     "of": [
+      "CME",
+      "CSR",
+      "EDN",
+      "MS"
+     ]
+    },
+    {
+     "id": "inflammatory",
+     "label": "Chorioretinitis",
+     "of": [
+      "CRS"
+     ]
+    },
+    {
+     "id": "media",
+     "label": "Hazy view (media opacity)",
+     "of": [
+      "MH"
+     ]
+    },
+    {
+     "id": "disc",
+     "label": "Optic disc variant (cupping or tilted)",
+     "of": [
+      "ODC",
+      "TD"
+     ]
+    },
+    {
+     "id": "structural",
+     "label": "Retinal detachment or traction",
+     "of": [
+      "RD",
+      "RT"
+     ]
+    },
+    {
+     "id": "myopia",
+     "label": "Myopic fundus",
+     "of": [
+      "MYA"
+     ]
+    }
+   ],
+   "clinic": "General retina clinic",
+   "plan": {
+    "normal": "No treatment needed. Routine review.",
+    "CME": "Treat the cause: NSAID or steroid drops after surgery, anti-VEGF or steroid for vascular causes; refer to retina if it persists.",
+    "CRS": "Identify the organism where possible (serology, PCR); treat the specific infection first, and add an oral steroid only under antimicrobial cover.",
+    "CSR": "Most resolve spontaneously in 1 to 3 months: stop steroids if possible and observe; photodynamic therapy or a leak-directed laser for chronic or recurrent cases.",
+    "EDN": "Treat the underlying vasculopathy: glycaemic and blood pressure control; refer to retina if exudates threaten or involve the fovea.",
+    "MH": "Find and treat the media opacity itself (cataract surgery, clearing a vitreous haemorrhage); repeat the fundus exam once the view improves.",
+    "MS": "No treatment restores the scar. Correct any residual refractive error and consider low-vision aids if central vision is reduced.",
+    "MYA": "Correct refraction. Screen high myopes yearly for peripheral retinal breaks, staphyloma and myopic choroidal neovascularisation.",
+    "ODC": "Confirm with intraocular pressure, visual fields and OCT nerve fibre layer; start pressure-lowering treatment if glaucoma is confirmed.",
+    "RD": "Urgent vitreoretinal referral: same-day if the macula is still attached, urgent within days if the macula is already detached.",
+    "RT": "Treat the underlying disease (panretinal laser or anti-VEGF for proliferative DR); vitrectomy if traction threatens or involves the macula.",
+    "TD": "No treatment. Document the appearance to avoid mislabelling it as glaucoma, and check refraction and visual fields once to confirm it is stable."
+   }
   }
  ],
  "sources": {
@@ -392,6 +560,11 @@
    "name": "OphthalVQA",
    "license": "CC BY 4.0",
    "cite": "Xu P, Chen X, Zhao Z, Shi D. Unveiling the clinical incapabilities: a benchmarking study of GPT-4V(ision) for ophthalmic multimodal image analysis. Br J Ophthalmol 2024. doi:10.1136/bjo-2023-325054"
+  },
+  "rfmid": {
+   "name": "RFMiD 2.0",
+   "license": "CC BY 4.0",
+   "cite": "Panchal S, Naik A, Kokare M, Pachade S, Naigaonkar R, Phadnis P, Bhange A. Retinal Fundus Multi-Disease Image Dataset (RFMiD) 2.0: A Dataset of Frequently and Rarely Identified Diseases. Data 2023;8(2):29. doi:10.3390/data8020029. Data: doi:10.5281/zenodo.7505822"
   },
   "medmcqa": {
    "name": "MedMCQA",

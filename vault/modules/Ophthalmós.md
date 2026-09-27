@@ -85,8 +85,8 @@ for what loaded.
 - **Tests:** `test/ophthalmos-module.test.mjs` (35 checks) and `test/run-ophthalmos-10x-ui.mjs` (real app,
   16 checks: registries, hub, R2 image, Ask MaiK, bank deck, notes, both simulators, tools, no errors).
   The module repo has 71 unit tests and a 19-step headless UI test.
-- **Not synced yet:** the RFMiD 2.0 general retina clinic (438 images, CC BY 4.0, uploaded to R2) sits
-  on the module repo's local `feat/rfmid-clinic`; its push was blocked by the permission check and
-  waits for the owner.
+- **General retina clinic (RFMiD 2.0, CC BY 4.0):** 438 images in 12 classes (normal, chorioretinitis,
+  retinal traction, media haze, disc cupping, exudation, CSR, RD, macular scar, CME, myopia, tilted disc),
+  `ophthalmos/decks/rfmid.json`, images on R2 (450 keys verified). Module repo PR #13.
 - **Clinical review first:** simulator constants (e.g. sixth-nerve deviation sizes) are uncalibrated;
   MedMCQA answer keys have known noise; notes list their own review items in the module PR #11.
