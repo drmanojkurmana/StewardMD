@@ -53,7 +53,7 @@ const STUB = `
   SMD_VERIFY.isTrainee = function () { return Promise.resolve(false); };
   SMD_VERIFY.openPanel = function () { window.__calls.push("verify"); };
   window.SMD_PHONE_VERIFY = window.SMD_PHONE_VERIFY || {};
-  SMD_PHONE_VERIFY.open = function (n) { window.__calls.push("phone:" + (n || "")); };
+  SMD_PHONE_VERIFY.open = function (n, o) { window.__calls.push("phone:" + (n || "") + (o && o.verified ? ":verified" : "")); };
   return 1;`;
 const open = async () => { await ev(`document.getElementById("hvScrim") && document.getElementById("hvScrim").click(); return 1;`); await sleep(200); await ev(`SMD_openProfile(); return 1;`); await sleep(700); };
 const q = (sel) => ev(`return !!document.querySelector(${JSON.stringify(sel)});`);
@@ -115,8 +115,32 @@ try {
   ok(await txt("#pfPhoneNum") === "Not added" && await txt("#pfPhoneVal") === "Add", "no number: Not added / Add");
   await ev(`window.__pd = { phone: "8897298117", phoneVerifiedNumber: "8897298117", phoneVerifiedAt: 1 }; window.__calls = []; return 1;`); await open(); await sleep(400);
   await ev(`document.querySelector('#hvSheet [data-hub="phone"]').click(); return 1;`); await sleep(300);
-  ok(await ev(`return window.__calls.indexOf("phone:8897298117") >= 0;`) === true, "tapping it opens the code flow for that number (edit = re-verify)");
+  ok(await ev(`return window.__calls.indexOf("phone:8897298117:verified") >= 0;`) === true, "tapping a verified number opens it as verified, not on Send code (2026-09-28)");
+  await ev(`window.__pd = { phone: "9000000001", phoneVerifiedAt: 1, phoneVerifiedNumber: "8897298117" }; window.__calls = []; return 1;`); await open(); await sleep(400);
+  await ev(`document.querySelector('#hvSheet [data-hub="phone"]').click(); return 1;`); await sleep(300);
+  ok(await ev(`return window.__calls.indexOf("phone:9000000001") >= 0;`) === true, "an unverified number opens the code flow for it (edit = re-verify)");
   await ev(`window.__pd = null; return 1;`);
+
+  // ── 2026-09-28: verified, and Profile still said Checking. Both reads fail or hang on the iOS WebView. ──
+  // Both reads FAIL, nothing cached: the row answers from the account's claim instead of Checking for good.
+  await ev(`window.__realGet = window.__realGet || null; window.__rf = window.__rf || window.fetch;
+    window.SMD_DB = { collection: function () { return { doc: function () { return { collection: function () { return { doc: function () { return { get: function () { return Promise.reject({ code: "unavailable" }); }, set: function () { return Promise.resolve(); } }; } }; } }; } }; } };
+    window.fetch = function (u, o) { return /my-profile/.test(String(u)) ? Promise.reject(new Error("offline")) : window.__rf(u, o); };
+    SMD_AUTH.currentUser.getIdTokenResult = function () { return Promise.resolve({ claims: { phoneVerified: true } }); };
+    localStorage.removeItem("smd_profile_cache:u1"); return 1;`);
+  await open(); await sleep(900);
+  ok(await txt("#pfPhoneNum") === "Number not loaded" && await txt("#pfPhoneVal") === "Verified", "both reads failed: the row says Verified from the claim, not Checking (" + await txt("#pfPhoneNum") + " / " + await txt("#pfPhoneVal") + ")");
+  // Both reads HANG: a code just verified still paints Verified, from this device's copy.
+  await ev(`window.SMD_DB = { collection: function () { return { doc: function () { return { collection: function () { return { doc: function () { return { get: function () { return new Promise(function () {}); }, set: function () { return Promise.resolve(); } }; } }; } }; } }; } };
+    window.fetch = function (u, o) { return /my-profile/.test(String(u)) ? new Promise(function () {}) : window.__rf(u, o); };
+    localStorage.removeItem("smd_profile_cache:u1");
+    document.dispatchEvent(new CustomEvent("smd:phone-verified", { detail: { phone: "+91 88972 98117" } })); return 1;`);
+  await open(); await sleep(400);
+  ok(await txt("#pfPhoneNum") === "+91 88972 98117" && await txt("#pfPhoneVal") === "Verified", "just verified, both reads hanging: Profile paints the number as Verified at once");
+  await ev(`window.fetch = window.__rf; localStorage.removeItem("smd_profile_cache:u1"); delete SMD_AUTH.currentUser.getIdTokenResult;
+    window.SMD_DB = { collection: function () { return { doc: function () { return { collection: function () { return { doc: function () { return {
+      get: function () { return Promise.resolve({ exists: true, data: function () { return Object.assign({ hospital: "King George Hospital", degree: "MD", speciality: "Internal Medicine", regNo: "APMC 84213" }, window.__pd || {}); } }); },
+      set: function () { return Promise.resolve(); } }; } }; } }; } }; } }; return 1;`);
 
   // ── every door leads here, and the duplicate doors are gone ───────────────────────────────────
   await ev(`document.getElementById("hvScrim").click(); SMD_openSettings(); return 1;`); await sleep(300);

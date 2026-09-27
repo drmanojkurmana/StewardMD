@@ -10538,6 +10538,21 @@ which used to be all teal). The footer moved from dark (#0B1220) to Apple-light 
 black "Steward" can sit on it; the white MaiK wordmark there is rendered black via
 `filter:brightness(0)` (no dark asset exists).
 
+## 2026-09-28 - Doctor OTP is SMS from MAIK only (no voice fallback); phone-verify stamps the profile server-side
+- **Decision**: `sendDlt` always sends from `DLT_SENDER` ("MAIK", the header every DLT template is registered
+  under); `dltConfigured` needs only FOLLOWCARE_SMS_PROVIDER=twofactor + TWOFACTOR_API_KEY. TWOFACTOR_SENDER now
+  feeds only the legacy TSMS path. A refused DLT send is `console.warn`ed (template + 2Factor's answer, number and
+  key redacted). The doctor OTP no longer falls back to 2Factor's V1 OTP route unless TWOFACTOR_TEMPLATE_OTP names
+  an approved 2Factor OTP SMS template: unnamed, that route rings the doctor (0 OTP templates on 2Factor).
+- **Why**: the owner got the login OTP as a call again after #1294. Production's TWOFACTOR_SENDER was not MAIK
+  (my tests hard-coded MAIK), 2Factor refused each DLT send, and the silent V1 fallback phoned instead.
+- **Decision**: POST /api/auth/phone-verify writes phone, phoneVerifiedNumber ("+" + digits) and phoneVerifiedAt
+  to users/{uid}/profile/self with the admin credential. The app's own Firestore SDK write never lands in the
+  iOS WebView, so Profile stayed "Checking" / "Not verified" after a correct code. Client: the verified number goes
+  into this device's profile cache at once (smd:phone-verified detail), the server read is bounded at 10 s, a
+  Profile whose reads both fail paints the Mobile number row from the phoneVerified claim, and tapping a VERIFIED
+  row opens "Number verified" (Done / Change number) instead of the Send-code step.
+
 ## 2026-09-27 - Marketing site: Apple-style phone layer
 Owner: "make it mobile compatible and best to watch and get same experience like apple website on
 mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_site/index.html`:
