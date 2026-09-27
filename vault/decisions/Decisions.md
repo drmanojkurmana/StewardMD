@@ -10517,3 +10517,13 @@ and colleges "On request". The site is static, so `test/site-pricing.test.mjs` p
 `plans({})` defaults. A live KV price override (/admin) does NOT reach the site: change both.
 Open owner item carried from vault/Role-Tiers.md section 10: the ASCI/CCPA strike-through caution
 applies to the site exactly as to the app.
+
+## 2026-09-27 - Marketing site: one green, and MaiK Cloud beside offline
+Owner: "use same green all over the site the one app has dark green teal. no variations please".
+Every green/teal on `_site/index.html` (about 20 shades, section fills, button gradients, the
+`.grad` text, rgba glows) is now the app's `--teal` #0E6E63; light tint fills use `--teal-soft`
+#E3F1EE, tint borders #0E6E63 at 30% alpha. Left alone: India-flag green in `.tri`, Google logo.
+Owner: "keep maik cloud also (online version) we have both". #offline gains "One MaiK. Two
+engines.": MaiK Cloud (online, paid plans) and MaiK on this phone (offline, free), plus the
+automatic offline hand-off (`maik-engine.js` `smd_maik_offline_local`, default on). Nav link
+MaiK Offline -> MaiK; privacy panel scoped to "Offline, your question stays on your phone".
