@@ -18,6 +18,13 @@
   function ico(n, c) {
     try { if (!G.ICONS || !G.ICONS.get || (G.ICONS.has && !G.ICONS.has(n))) return ""; return G.ICONS.get(n, c); } catch (e) { return ""; }
   }
+  // StewardMD's MaiK, when the host has it. The sheet opens above this overlay with the question typed
+  // in, and the learner sends it: MaiK's own engine choice, quota and local-only policy all apply.
+  function maikBtn(q) {
+    if (!G.SMD_askMaik) return "";
+    return '<button class="oph-btn sec oph-maik" data-act="maik" data-q="' + esc(q) + '">' + ico("ai") + " Ask MaiK</button>";
+  }
+  function maikOpen() { try { return G.document.body.classList.contains("maik-open"); } catch (e) { return false; } }
   function haptic(k) { try { if (G.SMD_HAPTICS && G.SMD_HAPTICS[k]) G.SMD_HAPTICS[k](); } catch (e) {} }
   function isPro() { try { return !!(G.SMD_PRO && G.SMD_PRO.isProSync && G.SMD_PRO.isProSync()); } catch (e) { return false; } }
   function showPro() {
@@ -55,7 +62,7 @@
       st.cfg = cfg;
       return Promise.all(cfg.tracks.map(function (t) {
         return getJSON(t.deck).then(function (d) { st.decks[t.id] = d; });
-      }));
+      }).concat((G.OPHTHALMOS._reads || []).map(function (r) { return r.load && r.load(); }))); // a read's load() never rejects
     }).catch(function (e) { st.err = e; st.loading = null; throw e; });
     return st.loading;
   }
@@ -107,7 +114,11 @@
     paint(top("Close", "Ophthalmós", "Loading tracks…") + '<div class="oph-scroll oph-pad"><p class="oph-mut" aria-busy="true">Loading image decks…</p></div>');
     loadAll().then(renderHub, function () { renderLoadError(); });
   }
+  // Simulators own an animation loop and sometimes an inner layer: st.onLeave stops the loop when
+  // the view is left, st.onBack unwinds the inner layer (return true when it handled back).
+  function leave() { var f = st.onLeave; st.onLeave = null; st.onBack = null; if (f) try { f(); } catch (e) {} }
   function close() {
+    leave();
     var el = $("smdOphthalmos");
     if (el) { el.classList.remove("on"); el.innerHTML = ""; }
     G.document.body.classList.remove("oph-lock");
@@ -121,7 +132,9 @@
   // session mid-way loses nothing.
   function back() {
     if (!isOpen()) return false;
+    if (st.onBack && st.onBack()) return true;
     if (st.view === "hub") { close(); return true; }
+    leave();
     st.session = null; st.caseRun = null; st.view = "hub";
     renderHub();
     return true;
@@ -138,19 +151,29 @@
   // layout section.
 
   /* ---------- statistics ---------- */
-  function renderStats(trackId) {
-    var t = track(trackId || st.statsTrack || "oct");
-    st.statsTrack = t.id; st.view = "stats";
-    var lv = level(), key = D.levelKey(t.id, lv), deck = st.decks[t.id];
+  // Overview tab (first) plus the existing per-clinic tabs, unchanged in behaviour.
+  function renderStats(tab) {
+    st.view = "stats";
+    var lv = level();
+    tab = tab || st.statsTrack || "overview";
+    st.statsTrack = tab;
+    var tabs = '<button data-act="statstab" data-t="overview" aria-pressed="' + (tab === "overview") + '">Overview</button>' +
+      drillTracks().map(function (x) {
+        return '<button data-act="statstab" data-t="' + x.id + '" aria-pressed="' + (x.id === tab) + '">' + esc(x.short ? shortTitle(x) : x.title) + "</button>";
+      }).join("");
+    if (tab === "overview") return renderOverview(tabs, lv);
+    return renderTrackStats(tab, tabs, lv);
+  }
+  function shortTitle(t) { return { oct: "OCT", disc: "Disc", dr: "DR", rop: "ROP" }[t.id] || t.title; }
+
+  function renderTrackStats(trackId, tabs, lv) {
+    var t = track(trackId), key = D.levelKey(t.id, lv), deck = st.decks[t.id];
     var opts = D.optionsFor(t, deck, lv);
     var rows = C.classStats(st.store, key, opts.map(function (o) { return o.id; }));
     var label = {}; opts.forEach(function (o) { label[o.id] = o.label; });
     var total = 0, ok = 0;
     rows.forEach(function (r) { total += r.n; ok += r.ok; });
     var c = C.counts(D.levelDeck(t, deck, lv), st.store, today());
-    var tabs = drillTracks().map(function (x) {
-      return '<button data-act="statstab" data-t="' + x.id + '" aria-pressed="' + (x.id === t.id) + '">' + esc(x.short ? shortTitle(x) : x.title) + "</button>";
-    }).join("");
     var body = rows.map(function (r) {
       var pct = r.acc == null ? null : Math.round(r.acc * 100);
       return '<li class="oph-srow"><div class="oph-srow-h"><span>' + esc(label[r.a]) + "</span><b>" +
@@ -165,7 +188,116 @@
       " · " + fmt(c.seen) + " of " + fmt(c.total) + " images seen · " + fmt(c.due) + " due</p>" +
       '<ul class="oph-slist">' + body + "</ul>" + activityHtml() + "</div>");
   }
-  function shortTitle(t) { return { oct: "OCT", disc: "Disc", dr: "DR", rop: "ROP" }[t.id] || t.title; }
+
+  // Total answers logged in store.days: drills, case ratings and simulator attempts all count a day.
+  function totalAnswers() { var n = 0; Object.keys(st.store.days).forEach(function (d) { n += st.store.days[d]; }); return n; }
+
+  function overviewSummaryLine() {
+    var total = totalAnswers();
+    if (!total) return null;
+    var conf = 0, ok = 0;
+    Object.keys(st.store.conf).forEach(function (dk) {
+      var d = st.store.conf[dk];
+      Object.keys(d).forEach(function (truth) {
+        var row = d[truth];
+        Object.keys(row).forEach(function (chosen) { conf += row[chosen]; if (chosen === truth) ok += row[chosen]; });
+      });
+    });
+    var streakN = C.streak(st.store, today()), daysActive = Object.keys(st.store.days).length;
+    var bits = [];
+    if (streakN) bits.push(streakN + (streakN === 1 ? " day" : " days") + " in a row");
+    bits.push(fmt(total) + (total === 1 ? " answer" : " answers"));
+    if (conf) bits.push(Math.round(ok * 100 / conf) + "% right");
+    bits.push(fmt(daysActive) + (daysActive === 1 ? " day" : " days") + " active");
+    return bits.join(" · ");
+  }
+
+  function memoryNowHtml(lv) {
+    var rows = drillTracks().map(function (t) {
+      var key = D.levelKey(t.id, lv), deck = st.decks[t.id];
+      var c = C.counts(D.levelDeck(t, deck, lv), st.store, today());
+      var rec = C.recall(st.store, key, today());
+      var pct = rec.meanR == null ? null : Math.round(rec.meanR * 100);
+      return '<li><div class="oph-srow-h"><span>' + esc(t.clinic) + "</span><b>" +
+        (pct == null ? '<span class="oph-mut">not started</span>' : pct + "% predicted recall") + "</b></div>" +
+        '<div class="oph-small">' + fmt(c.seen) + " of " + fmt(c.total) + " images seen</div></li>";
+    }).join("");
+    return '<h2 class="oph-h2">Memory now</h2><ul class="oph-slist">' + rows + "</ul>" +
+      '<p class="oph-small">Predicted recall is the memory model’s estimate of how many of the images you have seen you would get right today.</p>';
+  }
+
+  var WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  function forecastHtml() {
+    var days = C.forecast(st.store, today(), 7), w0 = new Date().getDay(), max = 1;
+    days.forEach(function (n) { if (n > max) max = n; });
+    var total = days.reduce(function (a, b) { return a + b; }, 0);
+    var bars = days.map(function (n, i) {
+      return '<div class="oph-fc-col"><i style="height:' + (n ? Math.max(8, Math.round(n * 100 / max)) : 3) + '%"></i><span>' + WEEKDAYS[(w0 + i) % 7] + "</span></div>";
+    }).join("");
+    return '<h2 class="oph-h2">Next 7 days</h2><div class="oph-fc" role="img" aria-label="Reviews due, next 7 days: ' + days.join(", ") + '">' + bars + "</div>" +
+      '<p class="oph-small">' + (total ? fmt(total) + (total === 1 ? " review" : " reviews") + " due, including anything overdue today." : "Nothing due in the next week.") + "</p>";
+  }
+
+  function heatmapLevel(n, max) { if (!n) return 0; var f = n / max; return f > 0.75 ? 4 : f > 0.5 ? 3 : f > 0.25 ? 2 : 1; }
+  function activityHeatmapHtml() {
+    var N = 84, d0 = today(), counts = [], max = 1, i;
+    for (i = N - 1; i >= 0; i--) { var n = st.store.days[d0 - i] || 0; counts.push(n); if (n > max) max = n; }
+    var active = counts.filter(function (n) { return n > 0; }).length;
+    var cells = counts.map(function (n) { return '<i class="oph-hm-' + heatmapLevel(n, max) + '"></i>'; }).join("");
+    return '<h2 class="oph-h2">Last 12 weeks</h2>' +
+      '<div class="oph-hm" role="img" aria-label="Answers per day over the last 12 weeks: ' + fmt(active) + ' active days of 84, busiest day ' + fmt(max) + (max === 1 ? " answer" : " answers") + '.">' + cells + "</div>" +
+      '<div class="oph-hm-legend"><span>Less</span><i class="oph-hm-0"></i><i class="oph-hm-1"></i><i class="oph-hm-2"></i><i class="oph-hm-3"></i><i class="oph-hm-4"></i><span>More</span></div>';
+  }
+
+  // Weak spots (lowest accuracy) and Strengths (highest), any clinic, current level, at least 4 answers.
+  function weakStrengthHtml(lv) {
+    var all = [];
+    drillTracks().forEach(function (t) {
+      var key = D.levelKey(t.id, lv), opts = D.optionsFor(t, st.decks[t.id], lv), label = {};
+      opts.forEach(function (o) { label[o.id] = o.label; });
+      C.classStats(st.store, key, opts.map(function (o) { return o.id; })).forEach(function (r) {
+        if (r.n >= 4) all.push({ t: t, a: r.a, label: label[r.a], acc: r.acc, n: r.n, cw: r.confusedWith, cwLabel: label[r.confusedWith] });
+      });
+    });
+    if (!all.length) return "";
+    function row(x, drillable) {
+      var pct = Math.round(x.acc * 100), b = x.cw || x.a;
+      return '<li><div class="oph-srow-h"><span>' + esc(x.label) + "</span><b>" + pct + "%</b></div>" +
+        '<div class="oph-small">' + esc(x.t.clinic) + " · " + fmt(x.n) + " answers" + (x.cw ? " · most often called " + esc(x.cwLabel || x.cw) : "") + "</div>" +
+        (drillable ? '<button class="oph-btn sec oph-drill" data-act="drill" data-t="' + esc(x.t.id) + '" data-a="' + esc(x.a) + '" data-b="' + esc(b) + '">Drill</button>' : "") + "</li>";
+    }
+    // A weak spot is below 80% right; a strength is 90% or better. Neither list pads itself out.
+    var weak = all.filter(function (x) { return x.acc < 0.8; }).sort(function (x, y) { return x.acc - y.acc; }).slice(0, 3);
+    var strong = all.filter(function (x) { return x.acc >= 0.9; }).sort(function (x, y) { return y.acc - x.acc; }).slice(0, 3);
+    return '<h2 class="oph-h2">Weak spots</h2><ul class="oph-slist oph-ws">' + weak.map(function (x) { return row(x, true); }).join("") + "</ul>" +
+      '<h2 class="oph-h2">Strengths</h2><ul class="oph-slist oph-ws">' + strong.map(function (x) { return row(x, false); }).join("") + "</ul>";
+  }
+
+  function simsStatsHtml() {
+    var sims = G.OPHTHALMOS._sims || [];
+    var rows = sims.map(function (s) {
+      var r = (st.store.sims || {})[s.id];
+      if (!r || !r.n) return "";
+      var errs = s.errs || {};
+      var errRows = Object.keys(r.err || {}).sort(function (a, b) { return r.err[b] - r.err[a]; }).map(function (k) {
+        return "<li>" + esc(errs[k] || k) + ": " + fmt(r.err[k]) + "</li>";
+      }).join("");
+      return '<li><div class="oph-srow-h"><span>' + esc(s.title) + "</span><b>" + fmt(r.ok) + " of " + fmt(r.n) + "</b></div>" +
+        (errRows ? '<ul class="oph-err">' + errRows + "</ul>" : '<p class="oph-small">No errors recorded.</p>') + "</li>";
+    }).join("");
+    if (!rows) return "";
+    return '<h2 class="oph-h2">Simulators</h2><ul class="oph-slist">' + rows + "</ul>";
+  }
+
+  function renderOverview(tabs, lv) {
+    var summary = overviewSummaryLine();
+    var body = summary
+      ? '<p class="oph-stat-line">' + summary + "</p>" + memoryNowHtml(lv) + forecastHtml() + activityHeatmapHtml() + weakStrengthHtml(lv) + simsStatsHtml()
+      : '<div class="oph-today"><p class="oph-today-line">No answers yet. Start a clinic to see your memory, forecast and accuracy build up here.</p>' +
+        '<button class="oph-btn pri oph-wide" data-act="today">' + ico("play") + " Start clinic</button></div>";
+    paint(top("Back", "Your accuracy", esc(st.cfg.levels[lv].label) + " level") +
+      '<div class="oph-scroll oph-pad"><div class="oph-seg oph-tabs" role="group" aria-label="Track">' + tabs + "</div>" + body + "</div>");
+  }
 
   // Last 14 days of answers, as real counts. Bars scale to the busiest day.
   function activityHtml() {
@@ -197,6 +329,7 @@
     if (!b || !root().contains(b)) return;
     var a = b.getAttribute("data-act");
     if (a === "back") return back();
+    if (a === "maik") { try { G.SMD_askMaik(b.getAttribute("data-q")); } catch (x) {} return; }
     if (a === "retry") return open();
     if (a === "sources") return renderSources();
     if (a === "stats") return renderStats();
@@ -211,13 +344,17 @@
 
   if (G.document && G.document.addEventListener)
     G.document.addEventListener("keydown", function (e) {
-      if (e.key !== "Escape" || !isOpen()) return;
+      if (e.key !== "Escape" || !isOpen() || maikOpen()) return; // MaiK above us owns Escape
       e.preventDefault();
       back();
     });
 
   G.OPHTHALMOS = { open: open, close: close, isOpen: isOpen, back: back,
-    _st: st, _internal: { paint: paint, top: top, ico: ico, esc: esc, imgUrl: imgUrl, haptic: haptic, isPro: isPro, showPro: showPro,
+    _sims: [], // simulator files register {id, title, sub, icon, open(), line(rec)?} here
+    _banks: [], // question banks register {id, title, sub, icon, open(), line()} here
+    _tools: [], // calculator files register {id, title, sub, icon, src, open()} here (ophthalmos-tools.js)
+    _reads: [], // reading files register {id, title, sub, icon, open(), line(), load()?, thumbs()?} here
+    _st: st, _internal: { leave: leave, getJSON: getJSON, maikBtn: maikBtn, paint: paint, top: top, ico: ico, esc: esc, imgUrl: imgUrl, haptic: haptic, isPro: isPro, showPro: showPro,
       save: save, ls: ls, today: today, fmt: fmt, track: track, level: level, levelLocked: levelLocked, drillTracks: drillTracks,
       renderStats: renderStats, renderSources: renderSources, shortTitle: shortTitle, ACTIONS: ACTIONS, KEYS: KEYS,
       SESSION_SIZE: SESSION_SIZE, NEW_CAP: NEW_CAP } };

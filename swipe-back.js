@@ -153,8 +153,10 @@
     if (now - _last < 400) return true;                        // debounce: one back per gesture
     // A WardSynQ critical-result alert (wardsynq-alert-ui.js) owns the screen: back does nothing and never exits.
     if (document.getElementById("wsq-alert")) return true;
-    // 0) FundX / Atlas AI full-screen overlay owns back while open.
-    try { if (window.ATLAS && window.ATLAS.isOpen && window.ATLAS.isOpen()) { _last = now; return window.ATLAS.back() !== false; }
+    // 0) FundX / Atlas AI full-screen overlay owns back while open, unless the MaiK sheet sits above it
+    // (Ophthalmós "Ask MaiK" opens MaiK over the overlay): then step 1 below closes MaiK first.
+    var maikOver = false; try { maikOver = document.body.classList.contains("maik-open"); } catch (e) {}
+    if (!maikOver) try { if (window.ATLAS && window.ATLAS.isOpen && window.ATLAS.isOpen()) { _last = now; return window.ATLAS.back() !== false; }
     if (window.OPHTHALMOS && window.OPHTHALMOS.isOpen && window.OPHTHALMOS.isOpen()) { _last = now; return window.OPHTHALMOS.back() !== false; }
     if (window.FUNDX && window.FUNDX.isOpen && window.FUNDX.isOpen()) { _last = now; return window.FUNDX.back() !== false; } } catch (e) {}
     // 0b) home's bottom-sheet system (#hvSheet + #hvScrim): the More sheet, the settings sheets,

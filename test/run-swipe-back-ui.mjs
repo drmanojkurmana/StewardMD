@@ -103,6 +103,21 @@ try {
   await swipe();
   ok(await ev(DRAWER_OPEN) === false, "MaiK sheet: the swipe does NOT open the menu");
 
+  // ── MaiK opened ABOVE a full-screen module (Ophthalmós "Ask MaiK"): back closes MaiK first ──
+  await ev(`document.querySelectorAll('.maik-close,[data-act="close"]').forEach(function(b){try{b.click();}catch(e){}}); return 1;`);
+  await sleep(500);
+  if (await ev(`return !!(window.OPHTHALMOS && window.SMD_askMaik);`)) {
+    await ev(`SMD_showHome(); OPHTHALMOS.open(); return 1;`);
+    for (let i = 0; i < 40 && !(await ev(`return OPHTHALMOS.isOpen() && !!document.querySelector("#smdOphthalmos .oph-clinic");`)); i++) await sleep(250);
+    await ev(`SMD_askMaik("What distinguishes DME from ERM on OCT?"); return 1;`); await sleep(1400);
+    ok(await ev(`return document.body.classList.contains("maik-open");`) === true, "MaiK is open above Ophthalmós");
+    await swipe();
+    ok(await ev(`return document.body.classList.contains("maik-open");`) === false, "MaiK over Ophthalmós: back closes MaiK first");
+    ok(await ev(`return OPHTHALMOS.isOpen();`) === true, "MaiK over Ophthalmós: Ophthalmós is still open underneath");
+    await swipe();
+    ok(await ev(`return OPHTHALMOS.isOpen();`) === false, "then back closes Ophthalmós from its hub");
+  } else { ok(true, "Ophthalmós or MaiK not reachable in this build (skipped)"); }
+
   // ── and back at home the menu still works (the fix must not disable the home gesture) ──
   await ev(`document.querySelectorAll('.maik-close,[data-act="close"]').forEach(function(b){try{b.click();}catch(e){}}); return 1;`);
   await sleep(500);

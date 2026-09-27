@@ -10430,6 +10430,17 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
   With the prior flag, chart-text top-3 204 -> 199. Everything else equal or better; classic order kept as
   the `smd_rank_v3=0` configuration.
 
+## 2026-09-27 - Antibiogram redesign behind `smd_abg_pro` (default ON)
+- **Ask** (owner, with a marked screenshot): move Sources out of the tab bar to sit beside Export CSV and
+  Save as PDF, and "make the whole module look professional and no AI slop".
+- **Decision**: three tabs (Spectrum, Resistance, My hospital); Sources opens from the action row, keeps
+  Resistance selected and has a back link. One quiet theme scoped to `.abg-pro` on the app's own tokens
+  (follows light, dark and the chosen theme), tinted heat scale with printed numbers, sentence-case copy,
+  no gradients or glass blur inside the screen, and plain drug names (`no-druglink` on the overlay).
+- **Reversible**: `?abgpro=0` or localStorage `smd_abg_pro = "0"` restores the previous look and the four
+  tabs; commit `3983aeac6` is the pre-redesign main.
+- **Not changed**: data, checks, pooling, exports and every figure's source sheet.
+
 ## 2026-09-27 - Marketing site: Apple design layer + the MaiK Offline story
 
 **Decision (owner):** polish stewardmd.in in Apple's design language and add a story about the offline model.
@@ -10517,3 +10528,60 @@ the new one. Full unit suite 10915/10916 passing, 0 failures.
 - **Why**: typed needed antibiotics 153 -> 158, time-critical 48 -> 49 (100%), complaint-only 72 -> 78;
   cost one typed overcall (hidden case), pending the owner.
 
+
+
+## 2026-09-28 - Ophthalmós 10x: question bank, notes, simulators, tools, plan, MaiK tutor
+- **Context**: owner: "make it 10x better, don't stop till you make it" against ophthalmo-daily.
+- **Decision**: build each feature as its own file in the module repo, registered through small registries
+  on `OPHTHALMOS` so the hub composes itself; sync into StewardMD as one change. Content only from
+  licence-verified sources (MedMCQA MIT; image datasets CC BY / CC0) or our own cited writing, all marked
+  `ai_drafted` behind the existing "To be verified" draft mark. The tutor is StewardMD's own MaiK (no new
+  AI plumbing). Back closes MaiK before the module under it (`swipe-back.js`).
+- **Reversible**: module kill switch `smd_ophthalmos="0"`; each feature is a separate file and script tag.
+
+## 2026-09-27 - Website pricing mirrors the app price table
+The marketing site (`_site/index.html` #pricing) quoted a stale ladder (Student 129, Intern 199,
+Resident 299, Physician Pro 579, Onco+ 799, invented institution prices, a Quarterly cycle the app
+never sold). It now carries the app's `plans()` table (`functions/api/billing/[[path]].js`,
+`wrangler.toml`): Trainee 199/1,999, Co-Resident 299/2,999, Pro 599/4,999, Physician 1,499/14,999,
+Physician Pro 2,499/24,999, struck `regular` anchors (x12 on annual) and per-day lines computed the
+same way as `pro-paywall.js`; Monthly and Annual only; add-ons Onco 89, Extra clinic 139; hospitals
+and colleges "On request". The site is static, so `test/site-pricing.test.mjs` pins it to
+`plans({})` defaults. A live KV price override (/admin) does NOT reach the site: change both.
+Open owner item carried from vault/Role-Tiers.md section 10: the ASCI/CCPA strike-through caution
+applies to the site exactly as to the app.
+
+## 2026-09-27 - Marketing site: one green, and MaiK Cloud beside offline
+Owner: "use same green all over the site the one app has dark green teal. no variations please".
+Every green/teal on `_site/index.html` (about 20 shades, section fills, button gradients, the
+`.grad` text, rgba glows) is now the app's `--teal` #0E6E63; light tint fills use `--teal-soft`
+#E3F1EE, tint borders #0E6E63 at 30% alpha. Left alone: India-flag green in `.tri`, Google logo.
+Owner: "keep maik cloud also (online version) we have both". #offline gains "One MaiK. Two
+engines.": MaiK Cloud (online, paid plans) and MaiK on this phone (offline, free), plus the
+automatic offline hand-off (`maik-engine.js` `smd_maik_offline_local`, default on). Nav link
+MaiK Offline -> MaiK; privacy panel scoped to "Offline, your question stays on your phone".
+Follow-up same day: the headline "offline medical AI." keeps the poster gradient
+(#5eead4 > #38bdf8 > #a78bfa, owner: "as in poster"), the one exception to the single green. Chips that
+were mint text on a dark-teal fill now read white on #0E6E63 (both had collapsed to teal).
+
+## 2026-09-27 - Wordmark rule on the marketing site: Steward black, MD green
+Owner: "StewardMD steward is black and MD is Green". Every split wordmark on `_site/index.html` is
+now Steward #000 + MD #0E6E63 (nav, Knowledge Base heading, footer, and the hero "open StewardMD."
+which used to be all teal). The footer moved from dark (#0B1220) to Apple-light #f5f5f7 so the
+black "Steward" can sit on it; the white MaiK wordmark there is rendered black via
+`filter:brightness(0)` (no dark asset exists).
+
+## 2026-09-27 - Marketing site: Apple-style phone layer
+Owner: "make it mobile compatible and best to watch and get same experience like apple website on
+mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_site/index.html`:
+- Bar is logo + menu only (Verify pill hidden on phones; it stays in the menu), frosted
+  rgba(251,251,253,.8) blur 20px, safe-area insets (`viewport-fit=cover`).
+- Menu is full screen with 26px links and a stagger; page scroll locks while open. The bar drops
+  its backdrop-filter while the menu is open, because a backdrop-filter on #nav makes it the
+  containing block and would trap the fixed sheet inside the 60px bar.
+- MaiK chapters and the 111 calculator chips become swipeable rails (chapters: cards of
+  100vw-96px so the next one peeks; calculators: 5-row horizontal grid).
+- 11px floor on labels. The selector lists both `font-size:10px` and `font-size: 10px`: once JS
+  touches el.style, the browser re-serialises the style attribute with a space and the
+  no-space selector silently stops matching.
+- Footer links 44px tap height. Checked at 320/375/390/430/820/1024: no horizontal scroll, no errors.
