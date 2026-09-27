@@ -92,6 +92,17 @@ try {
     if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); }
   };
 
+  // CliniX lazy-loads its scripts on the first open (clinix.js SCRIPTS), so wait for the module to
+  // mount rather than trusting a fixed sleep. Not used for the flag-off check, which must stay a no-op.
+  async function openCx() {
+    await ev("window.CLINIX.open()");
+    for (let i = 0; i < 80; i++) {
+      if (await ev("!!(window.SMD_CLINIX_SCREENS && document.querySelector('#clinixRoot .cx-head'))")) return true;
+      await sleep(100);
+    }
+    return false;
+  }
+
   /* ── 1. FLAG OFF: the module must be a complete no-op ──────────────────── */
   console.log("\n--- flag OFF ---");
   await attach(BASE + "?clinix=0");
@@ -101,6 +112,8 @@ try {
   await sleep(200);
   ok((await ev("!!document.getElementById('clinixRoot')")) === false,
     "open() with the flag off creates NO #clinixRoot (it returns before touching the DOM)");
+  ok((await ev("!window.SMD_CLINIX_SCREENS && !window.SMD_CLINIX_MODEL")) === true,
+    "and none of the lazily loaded CliniX scripts is fetched");
   ok((await ev("document.documentElement.classList.contains('cx-lock')")) === false,
     "no cx-lock class is applied");
 
@@ -118,7 +131,7 @@ try {
   await attach(BASE + "?clinix=1&clinixdraft=0");
 
   ok((await ev("window.CLINIX.isOn()")) === true, "CLINIX.isOn() is true with ?clinix=1");
-  await ev("window.CLINIX.open()");
+  await openCx();
   for (let i = 0; i < 40; i++) {
     if (await ev("!!document.querySelector('#clinixRoot .cx-sys')")) break;
     await sleep(250);
@@ -157,7 +170,7 @@ try {
   /* ── 4. AUTHOR MODE: the same content becomes visible ──────────────────── */
   console.log("\n--- flag ON, author mode (review gate OPEN) ---");
   await attach(BASE + "?clinix=1&clinixdraft=1");
-  await ev("window.CLINIX.open()");
+  await openCx();
   await sleep(400);
   await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Respiratory')).click()");
   await sleep(300);
@@ -298,7 +311,7 @@ try {
   // a clean load: at this point the previous section left us deep inside a different lesson, where
   // there are no rail buttons to click.
   await attach(BASE + "?clinix=1&clinixdraft=1");
-  await ev("window.CLINIX.open()");
+  await openCx();
   await sleep(400);
   await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Respiratory')).click()");
   await sleep(300);
@@ -337,7 +350,7 @@ try {
   /* ── 6c. SYSTEM MODULE comes before the diseases ───────────────────────── */
   console.log("\n--- system module ---");
   await attach(BASE + "?clinix=1");
-  await ev("window.CLINIX.open()"); await sleep(600);
+  await openCx(); await sleep(600);
   await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Respiratory')).click()");
   await sleep(500);
   ok((await ev("!!document.querySelector('#clinixRoot .cx-modcard')")) === true,
@@ -365,7 +378,7 @@ try {
   /* ── 7a. TEACHING BEFORE ASKING ───────────────────────────────────────── */
   console.log("\n--- teaching layer ---");
   await attach(BASE + "?clinix=1");
-  await ev("window.CLINIX.open()"); await sleep(600);
+  await openCx(); await sleep(600);
   await ev("(function(){ document.querySelector(\"#clinixRoot [data-act='cx-skills']\").click(); return 1; })()");
   for (let i = 0; i < 40; i++) { if (await ev("document.querySelectorAll('#clinixRoot .cx-row--skill').length > 0")) break; await sleep(250); }
   // Cough and sputum is the skill taught most fully from the book.
@@ -397,7 +410,7 @@ try {
   /* ── 7a2. SHOW ANSWER: available, but it must not count ────────────────── */
   console.log("\n--- show answer ---");
   await attach(BASE + "?clinix=1");
-  await ev("window.CLINIX.open()"); await sleep(600);
+  await openCx(); await sleep(600);
   await ev("(function(){ document.querySelector(\"#clinixRoot [data-act='cx-skills']\").click(); return 1; })()");
   for (let i = 0; i < 40; i++) { if (await ev("document.querySelectorAll('#clinixRoot .cx-row--skill').length > 0")) break; await sleep(250); }
   await ev("(function(){ document.querySelector('#clinixRoot .cx-row--skill').click(); return 1; })()");
@@ -439,7 +452,7 @@ try {
   /* ── 7b. SKILLS LIBRARY: learn a skill with NO disease ─────────────────── */
   console.log("\n--- examination skills library ---");
   await attach(BASE + "?clinix=1");
-  await ev("window.CLINIX.open()"); await sleep(700);
+  await openCx(); await sleep(700);
   ok((await ev("!!document.querySelector(\"#clinixRoot [data-act='cx-skills']\")")) === true,
     "home offers Examination skills above the disease list");
   await ev("(function(){ document.querySelector(\"#clinixRoot [data-act='cx-skills']\").click(); return 1; })()");
@@ -462,7 +475,7 @@ try {
   /* ── 8a. OSCE SCROLL: the timer must not yank you to the top ───────────── */
   console.log("\n--- osce scroll ---");
   await attach(BASE + "?clinix=1");
-  await ev("window.CLINIX.open()"); await sleep(500);
+  await openCx(); await sleep(500);
   await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Respiratory')).click()");
   await sleep(300);
   await ev("document.querySelector('#clinixRoot .cx-row--dz').click()");
@@ -493,7 +506,7 @@ try {
   console.log("\n--- clinical case ---");
   // Back to the disease page (we are currently deep in a lesson).
   await attach(BASE + "?clinix=1&clinixdraft=1");
-  await ev("window.CLINIX.open()");
+  await openCx();
   await sleep(400);
   await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Respiratory')).click()");
   await sleep(300);
@@ -518,8 +531,10 @@ try {
     "a scripted question gets the scripted reply");
 
   // And does NOT improvise when asked something unscripted.
+  // With the AI patient on, an unscripted question goes to /clinix-patient; the local test server has
+  // no such endpoint, so this exercises the failure path: the scripted fallback, marked unmatched.
   await ev("(function(){ document.getElementById('cxCaseQ').value = 'what is your favourite colour'; document.querySelector('#clinixRoot [data-act=\"cx-case-ask\"]').click(); return true; })()");
-  await sleep(250);
+  for (let i = 0; i < 40; i++) { if (await ev("!!document.querySelector('#clinixRoot .cx-pt--unmatched')")) break; await sleep(250); }
   ok((await ev("!!document.querySelector('#clinixRoot .cx-pt--unmatched')")) === true,
     "an unscripted question gets the fallback, never an invented symptom");
 
@@ -593,7 +608,7 @@ try {
     "with smd_clinix_tutor off, a lesson shows NO Ask-MaiK affordance");
 
   await attach(BASE + "?clinix=1&clinixdraft=1&clinixtutor=1");
-  await ev("window.CLINIX.open()");
+  await openCx();
   await sleep(400);
   await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Respiratory')).click()");
   await sleep(300);
@@ -640,7 +655,7 @@ try {
   // for a server that isn't there. Same navigation path the OSCE-scroll test above uses, but for
   // the "cx-viva" entry point instead of "cx-station".
   await attach(BASE + "?clinix=1&clinixdraft=1&clinixtutor=1");
-  await ev("window.CLINIX.open()"); await sleep(500);
+  await openCx(); await sleep(500);
   await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Respiratory')).click()");
   await sleep(300);
   await ev("document.querySelector('#clinixRoot .cx-row--dz').click()");
@@ -694,11 +709,13 @@ try {
   // leave a COPD position in this profile, and an in-flight resume from a reused page can land mid-test.
   async function lockPage(pro, pos) {
     await attach(BASE + "?clinix=1&clinixdraft=1");
-    for (let i = 0; i < 60; i++) { if (await ev("!!(window.SMD_PRO && SMD_PRO.onProChange && window.SMD_CLINIX_PROGRESS && window.SMD_CLINIX_SCREENS)")) break; await sleep(250); }
+    for (let i = 0; i < 60; i++) { if (await ev("!!(window.CLINIX && window.SMD_PRO && SMD_PRO.onProChange)")) break; await sleep(250); }
+    await ev("(window.CLINIX.load(), 1)");   // lazy: the store and screens load on first open
+    for (let i = 0; i < 60; i++) { if (await ev("!!(window.SMD_CLINIX_PROGRESS && window.SMD_CLINIX_SCREENS)")) break; await sleep(250); }
     const set = await ev("(SMD_PRO.isProSync = () => " + (pro ? "true" : "false") + ", " +
       (pos ? "SMD_CLINIX_PROGRESS.savePosition(" + JSON.stringify(pos) + ")" : "SMD_CLINIX_PROGRESS.clearPosition()") + ", SMD_PRO.isProSync())");
     if (set !== pro) console.log("  setup: Pro override did not take", JSON.stringify(set));
-    await ev("window.CLINIX.open()");
+    await openCx();
     for (let i = 0; i < 40; i++) { if (await ev("document.querySelectorAll('#clinixRoot .cx-sys').length >= 5")) break; await sleep(250); }
   }
   const noticeUp = async () => { for (let i = 0; i < 20; i++) { if (await ev("!!document.getElementById('smdProNotice')")) return true; await sleep(150); } return false; };

@@ -1025,6 +1025,8 @@ html.cx-lock .mc-overlay { z-index: 1300; }
 #clinixRoot .cx-mcq-t { flex: 1 1 auto; min-width: 0; }
 #clinixRoot .cx-mcq-opt--right { border-color: var(--cx-primary); }
 #clinixRoot .cx-mcq-opt--harm { border-color: var(--cx-bad); background: var(--cx-bad-bg); }
+#clinixRoot .cx-mcq-opt--wrong { border-color: var(--cx-warn); }
+#clinixRoot .cx-mcq-why { display: block; font-size: 12.5px; color: var(--cx-muted); margin-top: 2px; }
 
 /* ── Physiology sandbox: waveforms, state banner and the reasoning panel ──────
  * The sandbox now separates a derived readout (rewritten on every slider move) from the controls

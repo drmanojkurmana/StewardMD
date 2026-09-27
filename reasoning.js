@@ -5346,6 +5346,20 @@
       // the student staring at "MaiK is examining your answer" forever.
       return raceTimeout(call, 15000, null);
     },
+    // CliniX simulated patient: {persona, opening, facts:[{topic, reply}]} from the authored case plus
+    // the student's question. The server owns the role and the rules (/clinix-patient). Returns
+    // {text} or {error, message} so the caller can fall back to the case's scripted fallback line.
+    clinixPatient: function (payload, question) {
+      var b = aiBase(); if (!b || !aiOn() || !payload || !question) return Promise.resolve({ error: "ai-off" });
+      var call = aiHeaders().then(function (h) {
+        return fetch(b + "/clinix-patient", { method: "POST", headers: h, body: JSON.stringify({
+          persona: payload.persona || {}, opening: payload.opening || "", facts: payload.facts || [],
+          question: String(question).slice(0, 300) }) });
+      }).then(function (r) { return r.json(); })
+        .then(function (j) { return (j && j.text) ? j : (j || { error: "server" }); })
+        .catch(function () { return { error: "server" }; });
+      return raceTimeout(call, 15000, { error: "timeout" });
+    },
     // Grounded RAG explain: send the compact, de-identified, citable package
     // (deterministic reasoning + retrieved StewardMD knowledge + treatment) — the
     // KB is the primary source. Falls back to summary explain if RAG is unavailable.

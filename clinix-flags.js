@@ -47,12 +47,17 @@
         "registry, so the default is the only thing that was holding it back."
     },
     smd_clinix_ai_patient: {
-      type: "bool", def: false, query: "clinixaipatient",
-      desc: "Let MaiK role-play the case patient for a question the script does not match. OFF by " +
-        "default: the documented design is a DETERMINISTIC patient (an unmatched question gets the " +
-        "case fallback plus did-you-mean suggestions, never a generated reply), because a simulated " +
-        "patient that invents a symptom teaches a wrong pattern. It also runs on the doctor's MaiK " +
-        "quota and prompt, not the CliniX bucket. Owner decision needed before turning it on."
+      type: "bool", def: true, query: "clinixaipatient",
+      desc: "Let MaiK role-play the case patient for a question the script does not match. ON by owner " +
+        "decision 2026-09-27, once it ran on its own server endpoint (/clinix-patient: the role and " +
+        "rules live server side, answers only from the case's authored facts, never a new symptom, " +
+        "CliniX quota bucket, cheap model). Scripted matches are still answered deterministically " +
+        "first; ?clinixaipatient=0 restores the scripted fallback plus did-you-mean only."
+    },
+    smd_clinix_lazy: {
+      type: "bool", def: true, query: "clinixlazy",
+      desc: "Load the CliniX scripts on the first open instead of on every app launch (2026-09-27). " +
+        "Off = the old eager load at startup (clinix.js). Either way flag-off CliniX loads nothing."
     },
     smd_clinix_haptics: {
       type: "bool", def: true, query: "clinixhaptics",

@@ -119,3 +119,20 @@ jobs:
             [ -f "$f" ] && node --check "$f" || true
           done
           echo "web preflight ok"
+
+  # CliniX in a real browser. The unit suite cannot see a screen-level ReferenceError: on
+  # 2026-09-27 every CliniX pathway and lesson drew "Something went wrong" (undefined flag(),
+  # a shadowed M(), an undeclared `done`) while all 388 CliniX unit tests were green. These two
+  # harnesses caught it immediately (29 failures), so they run on every PR.
+  clinix-ui:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: CliniX UI harness
+        run: CHROME="$(command -v google-chrome || command -v chromium)" CHROME_FLAGS="--disable-dev-shm-usage" node test/run-clinix-ui.mjs
+      - name: CliniX case/sandbox harness
+        run: CHROME="$(command -v google-chrome || command -v chromium)" CHROME_FLAGS="--disable-dev-shm-usage" node test/run-clinix-case-ui.mjs

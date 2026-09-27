@@ -260,27 +260,40 @@
     return lines.join("\n");
   }
 
-  function answerAsPatient(caseDef, question) {
-    widenScope();
-    var fallback = (caseDef && caseDef.fallback) || "I am not sure what you mean, doctor. Can you ask that a different way?";
-    if (!available()) return Promise.resolve({ error: "ai-off", text: fallback });
-    var prompt = buildPatientPrompt(caseDef, question);
-    var call;
-    try {
-      if (G.SMD_AI && G.SMD_AI.explain) {
-        call = G.SMD_AI.explain(prompt, question);
-      } else if (G.SMD_AI && G.SMD_AI.explainGrounded) {
-        call = G.SMD_AI.explainGrounded({ question: prompt }, { depth: "concise", mode: "clinix-tutor" });
-      } else {
-        call = Promise.resolve({ error: "ai-off" });
-      }
-    } catch (e) {
-      call = Promise.resolve({ error: "server" });
+  /* The case facts, shaped for /clinix-patient. The server owns the role and the rules; the client
+   * only ever sends authored case content plus the student's question. */
+  function patientPayload(caseDef) {
+    caseDef = caseDef || {};
+    var p = caseDef.patient || {}, facts = [], hist = caseDef.history || {};
+    for (var k in hist) {
+      if (Object.prototype.hasOwnProperty.call(hist, k) && hist[k] && hist[k].reply) facts.push({ topic: k, reply: String(hist[k].reply) });
     }
-    return call.then(function (r) {
+    return {
+      persona: { name: p.name || "", age: p.age || "", sex: p.sex || "", occupation: p.occupation || "", residence: p.residence || "" },
+      opening: caseDef.opening || "",
+      facts: facts
+    };
+  }
+
+  function patientAvailable() {
+    try { return !!(G.SMD_AI && G.SMD_AI.clinixPatient); } catch (e) { return false; }
+  }
+
+  function answerAsPatient(caseDef, question) {
+    var fallback = (caseDef && caseDef.fallback) || "I am not sure what you mean, doctor. Can you ask that a different way?";
+    if (!patientAvailable()) return Promise.resolve({ error: "ai-off", text: fallback });
+    var payload = patientPayload(caseDef);
+    if (!payload.facts.length) return Promise.resolve({ error: "no-facts", text: fallback });
+    var call;
+    try { call = G.SMD_AI.clinixPatient(payload, question); }
+    catch (e) { call = Promise.resolve({ error: "server" }); }
+    return Promise.resolve(call).then(function (r) {
       if (!r || r.error) return { error: (r && r.error) || "server", text: fallback };
       var s = sanitize(r.text || "");
-      return { text: s.text || fallback, blocked: s.blocked };
+      // A patient never quotes a dose back; if the model did, fall back to the scripted line
+      // rather than show the teaching refusal in the patient's voice.
+      if (s.blocked) return { text: fallback, blocked: true };
+      return { text: s.text || fallback, blocked: false };
     }).catch(function () {
       return { error: "server", text: fallback };
     });
@@ -301,6 +314,8 @@
     // browser
     answer: answer,
     answerAsPatient: answerAsPatient,
+    patientAvailable: patientAvailable,
+    patientPayload: patientPayload,
     judgeVivaAnswer: judgeVivaAnswer,
     vivaAvailable: vivaAvailable,
     available: available,

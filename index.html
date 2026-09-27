@@ -92,7 +92,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/thorex-screens.css?v=tx13-fr1">
 <link rel="stylesheet" href="/sknx-screens.css?v=sx18-calm-fr1">
 <link rel="stylesheet" href="/insulin.css?v=ins15-fr1">
-<link rel="stylesheet" href="/clinix.css?v=cx19a927-sandbox1-prolock-fr1">
+<link rel="stylesheet" href="/clinix.css?v=cx19b927-sandbox1-prolock-fr1">
 <link rel="stylesheet" href="/surgx.css?v=sg9-bkenc-md1">
 <link rel="stylesheet" href="/pglog.css?v=pgl5-guestbar-quick1-fr1-easy1">
 <link rel="stylesheet" href="/govschemes.css?v=gs2-browse">
@@ -2577,25 +2577,12 @@ window.openExternal = function (u) {
      licence gates), and store before screens (screens read window.SMD_CLINIX_PROGRESS at mount).
      Content itself is NOT bundled here - it is lazily fetched from /clinix/*.json on first open,
      deliberately unlike kardiox-content-pack.js which parses 1.9 MB on every page load. -->
-<script src="/clinix-flags.js?v=cx14r925a927-session" defer></script>
-<!-- The lexicon must be parsed before the model asks for it (the model resolves it lazily off
-     window, so order is for clarity, not correctness). clinix-dx.js holds the differential /
-     diagnosis pickers and the management MCQ; its 365-diagnosis vocabulary is NOT bundled and
-     is fetched from /clinix/dx-vocabulary.json on first use. -->
-<script src="/clinix-lexicon.js?v=cxa927-lex1" defer></script>
-<script src="/clinix-model.js?v=cx21a927-lex1-prolock" defer></script>
-<script src="/clinix-dx.js?v=cxa927-dx1" defer></script>
-<script src="/clinix-content.js?v=cx16a927-dxvocab-prolock" defer></script>
-<script src="/clinix-diagrams.js?v=cx13" defer></script>
-<script src="/clinix-audio.js?v=cx-stridor3-api1-snd1" defer></script>
-<script src="/clinix-store.js?v=cx12a927" defer></script>
-<script src="/clinix-tutor.js?v=cx14a927" defer></script>
-<script src="/clinix-engine.js?v=cx11a927-lex1" defer></script>
-<script src="/clinix-physiology.js?v=cx11a927-sandbox1" defer></script>
-<script src="/clinix-profile.js?v=cx10a927" defer></script>
-<script src="/clinix-examiner.js?v=cx10a927" defer></script>
-<script src="/clinix-screens.js?v=cx26a927-sandbox1-prolock-snd1" defer></script>
-<script src="/clinix.js?v=cx12" defer></script>
+<script src="/clinix-flags.js?v=cx14r925b927-session" defer></script>
+<!-- The other 13 CliniX scripts (lexicon, model, dx, content, diagrams, audio, store, tutor, engine,
+     physiology, profile, examiner, screens; ~590 KB) are NOT tagged here: clinix.js loads them in
+     order on the first open (flag smd_clinix_lazy, default ON). Their ?v= tokens live in clinix.js
+     SCRIPTS - bump the token THERE when you edit one of them. -->
+<script src="/clinix.js?v=cx13-lazy1" defer></script>
 <!-- SURGX (SURGˣ) · Surgical Intelligence (additive, flag-gated smd_surgx; ON for testers, flip to
      false before any non-tester release - see surgx-flags.js). Scoped #surgxRoot + .sgx-* +
      SMD_SURGX_* globals. Flag off = clinix-style total no-op: surgx.js never mounts the root and

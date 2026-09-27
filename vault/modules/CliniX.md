@@ -1,7 +1,7 @@
 ---
 tags: [module, education, respiratory]
 status: RELEASED to all users 2026-09-25 (owner decision), no longer labelled Beta; phases 1-3,5-9 built (22 diseases in 5 systems, 5 presentations, 6 skill packs); content still ai_drafted pending R1 clinical sign-off, so every lesson keeps its "Draft, pending clinician review" line
-flag: smd_clinix (client, def:TRUE for all users since 2026-09-25, ?clinix=0 hides) + smd_clinix_draft (def:TRUE; must stay on while content is ai_drafted, else every pathway reads "Awaiting clinical review") + smd_clinix_tutor (def:TRUE) + smd_clinix_ai_patient (def:false, owner decision needed) + smd_clinix_uncleared_media (def:false, NEVER ship on) + smd_clinix_haptics (def:true) + smd_clinix_viva_voice (def:true)
+flag: smd_clinix (client, def:TRUE for all users since 2026-09-25, ?clinix=0 hides) + smd_clinix_draft (def:TRUE; must stay on while content is ai_drafted, else every pathway reads "Awaiting clinical review") + smd_clinix_tutor (def:TRUE) + smd_clinix_ai_patient (def:TRUE, owner 2026-09-27; server /clinix-patient) + smd_clinix_lazy (def:TRUE) + smd_clinix_uncleared_media (def:false, NEVER ship on) + smd_clinix_haptics (def:true) + smd_clinix_viva_voice (def:true)
 ---
 # CliniX
 
@@ -52,7 +52,7 @@ stony dullness". That indirection is what makes the fourth disease cheap.
   answers only above `ANSWER_AT`; between `SUGGEST_AT` and `ANSWER_AT` it offers a did-you-mean
   instead of guessing. `clinix-model.js` falls back to the original literal-cue matcher when the
   lexicon is absent, so the module is optional.
-- `clinix-dx.js` + `clinix/dx-vocabulary.json` — the 365-diagnosis picker (17 systems, synonyms),
+- `clinix-dx.js` + `clinix/dx-vocabulary.json` — the 393-diagnosis picker (17 systems, synonyms, concept groups),
   the graded hint ladder, differential/diagnosis marking (by CONCEPT, so "heart failure" / "CCF" /
   "cardiac failure" count once) and the management MCQ with its harmful distractors.
 - `clinix-physiology.js` — the sandbox engine. Ventricular-arterial coupling for the cardiovascular
@@ -287,8 +287,23 @@ all 22 cases, physiology presets vs their notes, failed fetches no longer cached
 abdomen system now loads the `general` pack (pallor), typed text survives repaints, Spotter timer
 stopped on navigation. Regression tests: `test/clinix-audit-fixes.test.mjs`, `test/clinix-tutor-stream.test.mjs`.
 
-**Open for the owner:** drug doses in presentation text (e.g. `chest_pain.json` STEMI action) and in the
-hard-coded ward-round scripts (`clinix-screens.js` `generateScriptForPresentation`); the Pro lock is
+### Round 2 (same day)
+- **Lazy loading.** Only `clinix-flags.js` + `clinix.js` are tagged in `index.html`; `clinix.js SCRIPTS`
+  loads the other 13 files in order on first open. **Their `?v=` tokens now live in `clinix.js`, bump
+  them there.** `smd_clinix_lazy=0` restores eager loading. Sign-out before first open is handled by
+  `clinix.js wipeUnloaded()`.
+- **AI patient ON (owner).** `/clinix-patient` (`functions/api/ai/[[path]].js`) owns the role and rules;
+  the client sends only authored case facts (`clinix-tutor.js patientPayload`). `clinix` bucket, cheap
+  model (`CLINIX_PATIENT_MODEL` overrides). Scripted matches are still answered first; a dose in the
+  reply falls back to the case's scripted line.
+- **Diagnosis marking by concept** (`clinix-dx.js resolve/satisfies`), ambiguous abbreviations resolve
+  to nothing, breadth counts ideas, wrong MCQ picks cost marks and are shown with reasons.
+- **Audio** ends on the audio clock after `resume()` settles; finished handles are disconnected.
+- **CI** runs both CliniX browser harnesses (`clinix-ui` job).
+- **Doses in presentation/script text: owner chose to KEEP them (2026-09-27).**
+
+**Open for the owner:** clinician sign-off of the `ai_drafted` content; licence records for the 18 atlas
+photos; whether non-respiratory presentations should be Pro. The Pro lock is
 client-only (content ships in the bundle); any caller can send `mode:"clinix-tutor"` to use the 60/day
 `clinix` bucket (`functions/api/ai/[[path]].js:1567`), which has no role check.
 

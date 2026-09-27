@@ -143,8 +143,13 @@ test("flags: a malformed query escape does not throw", () => {
   }
 });
 
-test("flags: the generated case patient is opt-in (deterministic patient by default)", () => {
-  assert.equal(F.DEFS.smd_clinix_ai_patient.def, false);
+test("flags: the generated case patient runs on its own endpoint (owner turned it on 2026-09-27)", () => {
+  assert.equal(F.DEFS.smd_clinix_ai_patient.def, true);
+  assert.match(read("clinix-tutor.js"), /SMD_AI.clinixPatient/);
+  const srv = read("functions/api/ai/[[path]].js");
+  assert.match(srv, /seg === "clinix-patient"/);
+  assert.match(srv, /"clinix-patient": "clinix"/, "metered in the student bucket");
+  assert.match(srv, /NEVER invent a symptom/);
   assert.match(read("clinix-screens.js"), /flag\("smd_clinix_ai_patient"\)/);
 });
 

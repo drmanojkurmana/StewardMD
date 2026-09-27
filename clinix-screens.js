@@ -1487,6 +1487,16 @@
         }
         html += "</div>";
       }
+      var notIndicated = [];
+      for (var wi = 0; wi < (r.plan.wrong || []).length; wi++) if (!r.plan.wrong[wi].harm) notIndicated.push(r.plan.wrong[wi]);
+      if (notIndicated.length) {
+        html += '<div class="cx-sec-h">Not indicated for this patient</div><div class="cx-mcq">';
+        for (var ni = 0; ni < notIndicated.length; ni++) {
+          html += '<div class="cx-mcq-opt cx-mcq-opt--wrong"><span class="cx-mcq-box">' + ic("block") + '</span><span class="cx-mcq-t">' +
+            esc(notIndicated[ni].text) + (notIndicated[ni].reason ? '<span class="cx-mcq-why">' + esc(notIndicated[ni].reason) + "</span>" : "") + "</span></div>";
+        }
+        html += "</div>";
+      }
       if (r.plan.missed.length) {
         html += '<div class="cx-sec-h">What you left out</div><div class="cx-mcq">';
         for (var pmi = 0; pmi < r.plan.missed.length; pmi++) {
@@ -1584,16 +1594,25 @@
       if (state.caseTaken.asked.indexOf(hit.key) < 0) state.caseTaken.asked.push(hit.key);
       haptic("tap");
       repaint();
-    } else if (flag("smd_clinix_ai_patient") && window.SMD_CLINIX_TUTOR && SMD_CLINIX_TUTOR.available()) {
+    } else if (flag("smd_clinix_ai_patient") && window.SMD_CLINIX_TUTOR && SMD_CLINIX_TUTOR.patientAvailable && SMD_CLINIX_TUTOR.patientAvailable()) {
       var entry = { q: text, a: "Thinking…", pending: true };
       var taken = state.caseTaken;   // captured: a restarted case must not be credited with this reply
       state.caseLog.push(entry);
       haptic("tap");
       repaint();
+      var near = res;   // the lexicon's near misses, offered if MaiK cannot answer
       SMD_CLINIX_TUTOR.answerAsPatient(cd, text).then(function (res) {
         entry.pending = false;
         if (state.caseDef !== cd || state.caseTaken !== taken) return;
-        entry.a = (res && res.text) || M().unmatchedReply(cd);
+        if (!res || res.error || res.blocked) {
+          // No generated reply: behave exactly like the deterministic patient.
+          entry.a = M().unmatchedReply(cd);
+          entry.unmatched = true;
+          if (near && near.suggestions) for (var ns = 0; ns < near.suggestions.length; ns++) state.caseSuggest.push(near.suggestions[ns].key);
+          repaint();
+          return;
+        }
+        entry.a = res.text;
         // If student question matches cues of any uncredited history topic, credit it
         var normQ = M().normalizeAnswer(text);
         var hist = (cd && cd.history) || {};
@@ -1612,6 +1631,7 @@
         repaint();
       }).catch(function () {
         entry.pending = false;
+        if (state.caseDef !== cd || state.caseTaken !== taken) return;
         entry.a = M().unmatchedReply(cd);
         entry.unmatched = true;
         repaint();
@@ -1700,13 +1720,13 @@
       r.dxPick = dx.scoreDiagnosis(state.caseDef, state.caseTaken.dxPick, state.dxVocab);
       // The picker is the authority when it was used: keyword marking of free text cannot see a
       // synonym the vocabulary knows about ("CCF" for congestive cardiac failure).
-      if (r.dxPick.correct) r.diagnosis.correct = true;
+      r.diagnosis.correct = r.dxPick.correct === true;
     }
     if (dx && state.caseTaken.planPicks && state.planOpts) {
       r.plan = dx.scorePlan(state.caseDef, state.caseTaken.planPicks, state.planOpts);
     }
     if (r.ddx && r.ddx.shotgun) r.verdict = r.verdict === "good" ? "right-answer-thin-workup" : r.verdict;
-    if (r.plan && r.plan.harmful.length) r.verdict = "incomplete";
+    if (r.plan && (r.plan.harmful.length || r.plan.correct === false)) r.verdict = "incomplete";
     state.caseResult = r;
     if (P()) {
       // Choosing to examine a relevant finding is a real clinical decision, but tapping to reveal

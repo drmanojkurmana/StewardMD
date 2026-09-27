@@ -125,3 +125,10 @@ test("the lay-language behaviours still hold after the context pass", () => {
   // A known word one edit from "stove" must not become a cooking-fuel exposure.
   assert.ok(L.canon("any gallstones or stones").tokens.indexOf("biomass") < 0);
 });
+
+test("a typo must open like the word it is a typo of, at match time too", () => {
+  // The cue "stone" (gallstones, stone dust) used to fuzzy-match "stony" and "tone".
+  for (const q of ["an effusion should expect stony dullness", "stridor has no tone"]) silentEverywhere(q);
+  assert.equal(ask("tuberculosis", "any stone dust at work"), "occupational_exposure");
+  assert.equal(ask("congestive-cardiac-failure", "breathlessnes on exersion"), "dyspnea_grade");
+});

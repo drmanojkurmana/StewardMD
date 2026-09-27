@@ -548,7 +548,13 @@
     var tol = tolerance(token);
     if (!tol) return 0;
     for (var i = 0; i < qTokens.length; i++) {
-      if (within(token, qTokens[i], tol)) return 0.85;   // a typo is worth slightly less than an exact hit
+      // Same rules as snap(): a typo opens with the same two letters, and a word the vocabulary
+      // already knows is not a typo of a different one. Without them the cue "stone" fuzzy-matched
+      // "tone" and "stony" (percussion) and offered a gallstone or dust-exposure topic.
+      var qt = qTokens[i];
+      if (qt.charAt(0) !== token.charAt(0) || qt.charAt(1) !== token.charAt(1)) continue;
+      if (isConcept(qt)) continue;
+      if (within(token, qt, tol)) return 0.85;   // a typo is worth slightly less than an exact hit
     }
     return 0;
   }

@@ -10610,3 +10610,6 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   the diagram shows alone; `smd_clinix_uncleared_media` previews them. Clearing them = add licence,
   attribution and `commonsVerified` / `ownerProduced` per entry.
 - **Mastery counts days with a CORRECT answer** (`okDays`), not days the skill was merely seen.
+- **Owner, 2026-09-27:** keep drug doses in presentation text and ward-round scripts as authored; turn the
+  AI case patient ON, now on its own `/clinix-patient` endpoint and the `clinix` quota bucket.
+- **CliniX scripts lazy-load on first open** (`clinix.js SCRIPTS`, flag `smd_clinix_lazy`, default on).
