@@ -3893,7 +3893,8 @@
     } catch (e) { return false; }
   }
   // feverGU is "fever with urinary symptoms" by label but plain fever in the KB rules: never ask it
-  /* smd_dx_simple (default OFF): the workspace in plain language. ?dxsimple=1|0. Presentation only:
+  /* smd_dx_simple (default ON since 2026-09-27, owner approved): the workspace in plain language.
+   * ?dxsimple=1|0 overrides; localStorage smd_dx_simple = "0" keeps the classic view. Presentation only:
    * the engine, scores, gate and antibiotic advice are unchanged. The owner asked for the module to be
    * "easier to understand" (2026-09-27); a first-time walkthrough found the answer buried under six
    * boxes, two lists each numbered from 1, a bare "Ranking score 86/100" that reads like a
@@ -3908,8 +3909,8 @@
     try {
       var q = /[?&]dxsimple=([01])\b/.exec((window.location && location.search) || "");
       if (q) return q[1] === "1";
-      return localStorage.getItem("smd_dx_simple") === "1";
-    } catch (e) { return false; }
+      return localStorage.getItem("smd_dx_simple") !== "0";   // default ON; "0" opts out
+    } catch (e) { return true; }
   }
   function fitLabel(sc) { return sc >= 70 ? "Strong fit" : sc >= 40 ? "Possible fit" : "Weak fit"; }
   // feverGU is labelled "fever with urinary symptoms" but the KB means fever: never suggest it on top of fever

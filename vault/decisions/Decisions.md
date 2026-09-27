@@ -10098,3 +10098,12 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
   after using it. Two outright bugs (heading spacing, repeated guideline sentence) were fixed for
   everyone.
 
+## 2026-09-27 - Dx workspace: the plain view is the default
+- **Decision**: `smd_dx_simple` defaults ON (owner: "yes make it the default"), after the anti-slop
+  pass (tasteskill.dev redesign audit). Presentation only; engine, scores and antibiotic gate are
+  unchanged (asserted in `test/run-dx-simple.mjs`).
+- **Reversible**: `?dxsimple=0`, or localStorage `smd_dx_simple = "0"`, shows the classic view; the
+  code path is intact. Recovery point: commit 9712fdc87 (flag default OFF).
+- **Checked**: every workspace-touching browser suite was run before and after the flip; the only
+  new failure was a test that looked for the classic "Why not higher" label, now covering both views.
+

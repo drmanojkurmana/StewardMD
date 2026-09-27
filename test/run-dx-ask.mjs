@@ -124,10 +124,11 @@ try {
   // detail rows: the section label is a block heading; bold names inside the text stay inline
   const why = JSON.parse(await ev(`DX.reset(); DX.addFindings(${JSON.stringify(HEP)});
     var h=document.querySelector('.dx-row-head[data-id="CHOLECYSTITIS"]'); if(!h) return '{}'; h.click();
-    var rows=[].filter.call(document.querySelectorAll('.dx-card.open .dx-d-row'),function(r){return /^Why not higher/i.test((r.firstElementChild||{}).textContent||'');});
-    if(!rows.length) return '{}'; var r=rows[0], lab=r.firstElementChild, inl=r.querySelector('.dx-reason b');
+    var rows=[].filter.call(document.querySelectorAll('.dx-card.open .dx-d-row'),function(r){return /^(Why not higher|Why it is not first)/i.test((r.firstElementChild||{}).textContent||'');});
+    if(!rows.length) return '{}'; var r=rows[0], lab=r.firstElementChild, inl=r.querySelector('.dx-reason b, .dx-reason strong');
     return JSON.stringify({lab:getComputedStyle(lab).display, labT:getComputedStyle(lab).textTransform, inl:inl?getComputedStyle(inl).display:null, inlT:inl?getComputedStyle(inl).textTransform:null, text:r.innerText.replace(/\\s+/g,' ').slice(0,90)});`));
-  ok(why.lab === "block" && why.labT === "uppercase" && why.inl === "inline" && why.inlT === "none", `card · "Why not higher" keeps its heading and the rival's name inline ("${why.text}")`);
+  // classic view: "Why not higher" (uppercase label); plain view (default): "Why it is not first" (sentence case)
+  ok(why.lab === "block" && why.inl === "inline" && why.inlT === "none" && /(Why not higher|Why it is not first)/i.test(why.text || ""), `card · the "why not first" row keeps its heading and the rival's name inline ("${why.text}")`);
 
   console.log(fails === 0 ? "\nALL GREEN: differentiating questions" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }

@@ -1,5 +1,6 @@
 /* StewardMD - plain view of the Dx workspace (smd_dx_simple) real-browser test.
- *   1. flag OFF: the classic workspace (two lists, Region / policy first) plus two bug fixes that
+ *   0. default ON; localStorage smd_dx_simple=0 opts out.
+ *   1. flag OFF (?dxsimple=0): the classic workspace (two lists, Region / policy first) plus two bug fixes that
  *      apply to everyone: the empty-state heading reads "question at a time" and the guideline note
  *      no longer repeats its own sentence.
  *   2. flag ON: "What it could be" leads with a Most likely card; ONE list, best fit first, numbered
@@ -65,6 +66,15 @@ try {
   sessionId = (await call("Target.attachToTarget", { targetId, flatten: true })).result.sessionId;
   await call("Runtime.enable");
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
+
+  // ---- 0. default ON (owner approved 2026-09-27); localStorage "0" keeps the classic view --------
+  ok(await load(BASE), "app + KB load with no flag");
+  await ev(`localStorage.removeItem("smd_dx_simple"); return 1`);
+  ok((await ev(`return DX._simple()`)) === true, "default · plain view is on with no flag set");
+  await ev(`localStorage.setItem("smd_dx_simple","0"); return 1`);
+  ok(await load(BASE), "reload with smd_dx_simple=0");
+  ok((await ev(`return DX._simple()`)) === false, "default · localStorage smd_dx_simple=0 keeps the classic view");
+  await ev(`localStorage.removeItem("smd_dx_simple"); return 1`);
 
   // ---- 1. OFF --------------------------------------------------------------------------------
   ok(await load(BASE + "?dxsimple=0"), "app + KB load with ?dxsimple=0");

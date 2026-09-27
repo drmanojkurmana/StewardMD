@@ -153,7 +153,7 @@ render paths; the Select loop now matches `.dx-select[data-sel]` only, so the in
   re-measured floors.
 - Test `test/run-dx-ask.mjs` (CI).
 
-## Plain view (`smd_dx_simple`, default OFF, 2026-09-27)
+## Plain view (`smd_dx_simple`, default ON since 2026-09-27; `smd_dx_simple=0` = classic)
 
 The owner found the module hard to understand. A first-time walkthrough at 390px found: the answer
 under six boxes (heading, score disclaimer, gate, a guideline box that repeated its own sentence,
