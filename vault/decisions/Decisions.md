@@ -10271,3 +10271,11 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
   (`smd_gate_v2=0`) and CI step; configs that now include the gate implicitly were re-recorded and
   match the old explicit `smd_gate_v2=1` configs exactly.
 
+## 2026-09-27 - Gate v2: afebrile non-infective lead, and "rule out SBP" means tap first
+- **Decision**: (1) with no fever, shock physiology or host modifier, a leading non-infective diagnosis
+  is not "infection likely"; (2) cirrhosis + ascites: fever / rigors / ascitic PMN >= 250 / abdominal pain
+  = suspected SBP (tap and treat); encephalopathy alone = tap first; a GI bleed keeps prophylaxis.
+- **Why**: overcall on tapped findings 52 -> 37 of 318 with no loss of a needed antibiotic call in any
+  split or configuration. The first cut put abdominal pain in "tap first" and lost a time-critical
+  case on the text path; clinical grounds (pain is a cardinal SBP symptom) put it back in "treat".
+

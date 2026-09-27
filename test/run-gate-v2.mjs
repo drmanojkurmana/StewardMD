@@ -17,6 +17,10 @@ import { setTimeout as sleep } from "node:timers/promises";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+// data -> a JS literal safe to splice into code evaluated in the page (CodeQL js/bad-code-sanitization):
+// JSON.stringify leaves <, >, U+2028 and U+2029 raw, so escape them (the pattern CodeQL documents)
+const LIT_ESC = { "<": "\\u003C", ">": "\\u003E", "\b": "\\b", "\f": "\\f", "\n": "\\n", "\r": "\\r", "\t": "\\t", "\0": "\\0", "\u2028": "\\u2028", "\u2029": "\\u2029" };
+const lit = (v) => JSON.stringify(v).replace(/[<>\b\f\n\r\t\0\u2028\u2029]/g, (c) => LIT_ESC[c]);
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const BASE = (process.env.BASE || "http://localhost:8804/").replace(/\/?$/, "/");
@@ -36,7 +40,8 @@ const FIX = [
   ["gc_149", "URTI with pneumonia competitive", "likely", "likely", true, /Community Acquired Pneumonia .* is competitive/],
   ["gc_152", "viral vs bacterial meningitis", "very_likely", "very_likely", true, null],
   ["gc_143", "SBP (fever)", "noninfective", "likely", true, /Can't-miss: spontaneous bacterial peritonitis/],
-  ["gc_036", "hepatic encephalopathy with ascites", "noninfective", "rule_out_sbp", true, /diagnostic paracentesis now/],
+  // 2026-09-27: "rule out SBP" is tap first, antibiotics on the result (EASL 2018 / AASLD 2021)
+  ["gc_036", "hepatic encephalopathy with ascites", "noninfective", "rule_out_sbp", false, /diagnostic paracentesis now/],
   ["gc_238", "variceal bleed in cirrhosis", "noninfective", "abx_prophylaxis", true, /Baveno VII/],
   ["gc_019", "ACS (non-infective)", "noninfective", "noninfective", false, null],
 ];
@@ -69,7 +74,7 @@ async function load(url) {
   }
   return false;
 }
-const assess = async (f) => JSON.parse(await ev(`return JSON.stringify(SMD_REASON.assess(${JSON.stringify(f)}).gate);`));
+const assess = async (f) => JSON.parse(await ev(`return JSON.stringify(SMD_REASON.assess(${lit(f)}).gate);`));
 
 try {
   let ver; for (let t = 0; t < 60; t++) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
@@ -104,6 +109,23 @@ try {
   ok(sp.cls === "likely" && sp.ab === true && /sepsis until proven otherwise/.test(sp.message || ""), `on  · fever + hypotension alone: sepsis until proven otherwise (${sp.cls})`);
   const ac = await assess({ fever: true, hypotension: true, steroidUse: true });
   ok(ac.rule !== "sepsis_phys", `on  · fever + hypotension on long-term steroids: the rule does not override a leading adrenal crisis (${ac.cls})`);
+  // 2026-09-27 overcall round: an afebrile non-infective lead is not "infection likely"
+  const T = (ks) => Object.fromEntries(ks.map((k) => [k, true]));
+  const colic = await assess(T(["flankPain", "severeAbdominalPain", "hematuria", "nauseaVomiting", "costovertebralTenderness", "tachycardia"]));
+  ok(colic.ab === false && colic.rule === "ni_lead_afebrile" && /No fever/.test(colic.message || "") && !/\u2014/.test(colic.message || ""), `on  · afebrile renal colic picture: not an infection call (${colic.cls}, ${colic.rule})`);
+  const colicF = await assess(T(["flankPain", "severeAbdominalPain", "hematuria", "nauseaVomiting", "costovertebralTenderness", "tachycardia", "fever", "rigors"]));
+  ok(colicF.ab === true && colicF.rule !== "ni_lead_afebrile", `on  · the same with fever and rigors: infection kept (${colicF.cls})`);
+  const colicS = await assess(T(["flankPain", "severeAbdominalPain", "hematuria", "costovertebralTenderness", "hypotension", "lactateElevated"]));
+  ok(colicS.rule !== "ni_lead_afebrile", `on  · the same with shock physiology: the rule stands aside (${colicS.cls})`);
+  // SBP: encephalopathy or pain alone = tap first; fever = treat; a GI bleed = prophylaxis regardless
+  const he = await assess(T(["liverDisease", "ascites", "alteredSensorium", "asterixis", "jaundice"]));
+  ok(he.cls === "rule_out_sbp" && he.ab === false && /paracentesis/.test(he.message || ""), `on  · cirrhosis + ascites + encephalopathy: tap first, antibiotics on the result (${he.cls}, ab ${he.ab})`);
+  const heF = await assess(T(["liverDisease", "ascites", "alteredSensorium", "asterixis", "jaundice", "fever"]));
+  ok(heF.ab === true, `on  · the same with fever: treat as SBP (${heF.cls})`);
+  const heP = await assess(T(["liverDisease", "ascites", "abdominalPain", "jaundice"]));
+  ok(heP.ab === true && heP.cls !== "rule_out_sbp", `on  · cirrhosis + ascites + abdominal pain, no fever: suspected SBP, tap and treat (${heP.cls})`);
+  const heB = await assess(T(["liverDisease", "ascites", "alteredSensorium", "hematemesis", "melena"]));
+  ok(heB.ab === true && heB.cls !== "rule_out_sbp", `on  · cirrhosis + ascites + GI bleed: antibiotics kept, never downgraded to 'tap first' (${heB.cls})`);
   const fnOn = await assess(fn);
   ok(fnOn.ab === true && fnOn.cls === fnOff.cls, `on  · fever + "Neutropenia (ANC <500)" unchanged by v2 (${fnOn.cls})`);
 
@@ -121,7 +143,7 @@ try {
 
   // ---- 4. Dx workspace renders the v2 decision ---------------------------------------------
   ok(await load(BASE + "?gatev2=1"), "reload with ?gatev2=1 for the workspace");
-  const ws1 = JSON.parse(await ev(`try{DX.openWorkspace();}catch(e){} DX.reset&&DX.reset(); DX.addFindings(${JSON.stringify(Object.keys(keys("gc_118")))});
+  const ws1 = JSON.parse(await ev(`try{DX.openWorkspace();}catch(e){} DX.reset&&DX.reset(); DX.addFindings(${lit(Object.keys(keys("gc_118")))});
     var g=document.querySelector('#dxGate'), p=document.querySelector('#dxPolicy');
     return JSON.stringify({gate: g?g.innerText:'', policy: p?p.innerText.trim():'', live: Object.keys(DX._state.f).length});`));
   ok(/antibiotics not indicated/i.test(ws1.gate) && /Dengue Fever leads/.test(ws1.gate), `workspace gate card: dengue -> "${ws1.gate.replace(/\s+/g, " ").slice(0, 80)}..."`);
@@ -129,12 +151,12 @@ try {
   const before = await ev(`return JSON.stringify(DX._state.f)`);
   await assess(keys("gc_143"));
   ok((await ev(`return JSON.stringify(DX._state.f)`)) === before, "assess() is pure: live workspace findings untouched");
-  const ws2 = JSON.parse(await ev(`DX.reset&&DX.reset(); DX.addFindings(${JSON.stringify(Object.keys(keys("gc_238")))});
+  const ws2 = JSON.parse(await ev(`DX.reset&&DX.reset(); DX.addFindings(${lit(Object.keys(keys("gc_238")))});
     var g=document.querySelector('#dxGate'), p=document.querySelector('#dxPolicy');
     return JSON.stringify({gate: g?g.innerText:'', policy: p?p.innerText.trim():''});`));
   ok(/Antibiotic prophylaxis indicated/.test(ws2.gate) && /Baveno VII/.test(ws2.gate), "workspace: cirrhosis + GI bleed -> prophylaxis card with the regimen");
   ok(ws2.policy === "", "workspace: prophylaxis does not show an empiric-treatment card for an unrelated infection");
-  const ws3 = JSON.parse(await ev(`DX.reset&&DX.reset(); DX.addFindings(${JSON.stringify(Object.keys(keys("gc_143")))});
+  const ws3 = JSON.parse(await ev(`DX.reset&&DX.reset(); DX.addFindings(${lit(Object.keys(keys("gc_143")))});
     var g=document.querySelector('#dxGate'), p=document.querySelector('#dxPolicy');
     return JSON.stringify({gate: g?g.innerText:'', policy: p?p.innerText:''});`));
   ok(/spontaneous bacterial peritonitis/i.test(ws3.gate), "workspace: SBP rule shown on the gate card");
@@ -142,7 +164,7 @@ try {
   await ev(`DX.reset&&DX.reset(); return 1`);
 
   // ---- 5. wizard severity mapping ----------------------------------------------------------
-  const sev = JSON.parse(await ev(`return JSON.stringify(${JSON.stringify(ALL_CLASSES)}.map(function(c){var s=window.ABX_WIZARD&&ABX_WIZARD._sevOf?ABX_WIZARD._sevOf(c):null;return [c, s&&s.k, s&&s.label];}));`));
+  const sev = JSON.parse(await ev(`return JSON.stringify(${lit(ALL_CLASSES)}.map(function(c){var s=window.ABX_WIZARD&&ABX_WIZARD._sevOf?ABX_WIZARD._sevOf(c):null;return [c, s&&s.k, s&&s.label];}));`));
   sev.forEach(([c, k, label]) => ok(k && k !== "none" && label, `wizard severity for "${c}": ${k} "${label}"`));
   const ins = JSON.parse(await ev(`return JSON.stringify(ABX_WIZARD._sevOf("insufficient"))`));
   ok(ins && ins.label, `wizard severity for "insufficient": ${ins && ins.k} "${ins && ins.label}"`);
