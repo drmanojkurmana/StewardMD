@@ -277,3 +277,19 @@ test("pus aspirated from an abscess is a procedure; 'vomited and aspirated gastr
   assert.ok(p("he vomited and aspirated gastric fluid").includes("aspirationRiskFactor"));
   assert.ok(p("aspirated, now with a right pleural effusion").includes("aspirationRiskFactor"));
 });
+
+// round 18: electrolytes and glucose from the note (the findings exist under smd_kb_v2)
+test("sodium, potassium, calcium and glucose values become findings; units inferred; tumour markers ignored", () => {
+  const keys = ["sodiumLow", "potassiumHigh", "calciumHigh", "glucoseLow", "glucoseHigh", "glucoseVeryHigh"];
+  const c18 = { valid: Object.fromEntries(keys.map((k) => [k, 1])), labels: {}, syn: {}, numeric: {}, v2: true };
+  const p = (t) => NLP.extract(t, c18).present;
+  assert.deepEqual(p("Labs: sodium 118 mmol/l; potassium 7.2 mmol/l").sort(), ["potassiumHigh", "sodiumLow"]);
+  assert.ok(p("corrected calcium 3.4 mmol/l").includes("calciumHigh"));
+  assert.ok(p("calcium 13.2 mg/dl").includes("calciumHigh"));
+  assert.ok(!p("CA 19-9 of 400").includes("calciumHigh"), "a tumour marker is not calcium");
+  assert.ok(p("CBG 42 mg/dl").includes("glucoseLow"));
+  assert.ok(p("glucose 2.1 mmol/l").includes("glucoseLow"));
+  assert.deepEqual(p("RBS 780 mg/dl").sort(), ["glucoseHigh", "glucoseVeryHigh"]);
+  assert.deepEqual(p("blood sugar 110"), []);
+  assert.deepEqual(p("sodium 138, K 4.1"), []);
+});

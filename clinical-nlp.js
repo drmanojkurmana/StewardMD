@@ -246,6 +246,16 @@
         var cr = num(m2[1]), umol = (m2[2] && /mol/.test(m2[2])) || cr > 25;
         if (umol ? cr >= LAB_V2.creatinineUmol : cr >= LAB_V2.creatinineMgDl) vital("renalImpairment", m2[0]);
       }
+      // round 18: electrolytes and glucose (findings exist only under smd_kb_v2). Units inferred from the value.
+      if ((m2 = raw.match(/\b(?:serum\s+)?(?:sodium|na\+?)\b(?:\s*(?:level|value|mmol\/l|meq\/l))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-)?\s*(\d{2,3}(?:\.\d)?)\b/)) &&
+          +m2[1] >= 90 && +m2[1] < 130) vital("sodiumLow", m2[0]);
+      if ((m2 = raw.match(/\b(?:serum\s+)?(?:potassium|k\+?)\b(?:\s*(?:level|value|mmol\/l|meq\/l))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-)?\s*(\d(?:\.\d{1,2})?)\b/)) &&
+          +m2[1] >= 6 && +m2[1] <= 10) vital("potassiumHigh", m2[0]);
+      if ((m2 = raw.match(/\b(?:(?:serum|corrected|adjusted|total)\s+)?(?:calcium|ca\+?)\b(?:\s*(?:level|value|corrected|mmol\/l|mg\/dl))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-)?\s*(\d{1,2}(?:\.\d{1,2})?)\b(?!\s*-\s*\d)/))) {   // not "CA 19-9"
+        var ca = +m2[1]; if (ca > 5 ? ca > 11 && ca < 25 : ca > 2.75 && ca < 5) vital("calciumHigh", m2[0]); }
+      if ((m2 = raw.match(/\b(?:(?:random|capillary|blood|plasma|serum|fasting)\s+)?(?:glucose|sugar|grbs|rbs|cbg|bsl|fbs|glycaemia|glycemia)\b(?:\s*(?:level|value|reading))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-)?\s*(\d{1,4}(?:\.\d{1,2})?)\s*(mg|mmol)?/))) {
+        var gl = +m2[1], mg = m2[2] ? /mg/.test(m2[2]) : gl > 40; if (!mg) gl = gl * 18;
+        if (gl > 0 && gl < 70) vital("glucoseLow", m2[0]); else if (gl > 600 && gl < 3000) { vital("glucoseVeryHigh", m2[0]); vital("glucoseHigh", m2[0]); } else if (gl >= 250 && gl < 3000) vital("glucoseHigh", m2[0]); }
       // liver enzymes and ascitic fluid (the findings exist only under smd_kb_v2; consider() drops invalid keys)
       var CONN = "(?:\\s*(?:count|level|levels|value))?\\s*(?:\\([^)\\d]{0,12}\\))?\\s*(?:of|is|was|at|=|:|-|\\()?\\s*";
       if ((m2 = raw.match(new RegExp("\\b(?:alt|ast|sgpt|sgot|transaminases?)\\b" + CONN + "(\\d+(?:[.,]\\d+)?)"))) && num(m2[1]) >= 1000) vital("transaminasesVeryHigh", m2[0]);

@@ -659,6 +659,7 @@
     var groups = [];
     (EXTRA_GROUPS).forEach(function (g) { groups.push(g); });
     if (kbV2()) groups.push({ group: "Hepatobiliary imaging / labs", fields: KB_V2_FIELDS });   // smd_kb_v2
+    if (kbV2()) groups.push({ group: "Electrolytes / glucose", fields: KB_V2_LAB_FIELDS });   // smd_kb_v2 round 18
     var fg = (window.FIELD_GROUPS || []);
     fg.forEach(function (g) { if (g && g.fields) groups.push({ group: g.group, fields: g.fields }); });
     groups.forEach(function (g) {
@@ -680,6 +681,11 @@
       if (sp.id !== "gastrointestinal" || (sp.groups || []).indexOf("Hepatobiliary imaging / labs") >= 0) return sp;
       var c = {}; for (var k in sp) c[k] = sp[k];
       c.groups = (sp.groups || []).concat(["Hepatobiliary imaging / labs"]); return c;
+    });
+    if (kbV2()) SYSPICK = SYSPICK.map(function (sp) {
+      if (sp.id !== "systemic" || (sp.groups || []).indexOf("Electrolytes / glucose") >= 0) return sp;
+      var c = {}; for (var k in sp) c[k] = sp[k];
+      c.groups = (sp.groups || []).concat(["Electrolytes / glucose"]); return c;
     });
     return ONT;
   }
@@ -869,6 +875,19 @@
     { key: "cholestaticLFT", label: "Cholestatic LFTs (ALP >= 2x normal)" },
     { key: "asciticPMNHigh", label: "Ascitic fluid neutrophils >= 250/mm3" }
   ];
+  // round 18 (2026-09-27): lab values the metabolic emergencies are defined by. The catalog had no electrolyte or
+  // glucose finding at all, so hyponatraemia, hyperkalaemia, hypercalcaemia and hypoglycaemia ranked on symptoms
+  // alone. Thresholds are the treatment thresholds (Na < 130; K >= 6.0; corrected Ca > 2.75 mmol/L or 11 mg/dL;
+  // glucose < 3.9 mmol/L or 70 mg/dL; >= 14 mmol/L or 250 mg/dL; > 33 mmol/L or 600 mg/dL). The note parser
+  // (clinical-nlp.js, v2) fills them from numbers; the picker lists them under Systemic.
+  var KB_V2_LAB_FIELDS = [
+    { key: "sodiumLow", label: "Sodium < 130 mmol/L" },
+    { key: "potassiumHigh", label: "Potassium >= 6.0 mmol/L" },
+    { key: "calciumHigh", label: "Calcium > 2.75 mmol/L (11 mg/dL)" },
+    { key: "glucoseLow", label: "Glucose < 3.9 mmol/L (70 mg/dL)" },
+    { key: "glucoseHigh", label: "Glucose >= 14 mmol/L (250 mg/dL)" },
+    { key: "glucoseVeryHigh", label: "Glucose > 33 mmol/L (600 mg/dL)" }
+  ];
   var KB_V2_PATCH = {
     CHOLANGITIS: {
       rule: { allOf: ["jaundice", { anyOf: ["feverGU", "rigors"] }, { anyOf: ["rightUpperQuadrantPain", "dilatedCBD", "knownGallstones"] }, { not: "singleLesion" }] },
@@ -882,7 +901,16 @@
       add: [{ when: "asciticPMNHigh", add: 25 }] },
     toxic_hepatitis: { find: { transaminasesVeryHigh: 22 } },
     biliary_colic: { find: { knownGallstones: 20, transaminasesVeryHigh: -10 } },
-    pancreatitis: { find: { knownGallstones: 8 } }
+    pancreatitis: { find: { knownGallstones: 8 } },
+    // round 18: the metabolic emergencies read their defining lab value
+    hyponatremia: { find: { sodiumLow: 40 } },
+    hyperkalemia: { find: { potassiumHigh: 40 } },
+    hypercalcemia: { find: { calciumHigh: 40 } },
+    myeloma: { find: { calciumHigh: 12 } },
+    hypoglycemia: { find: { glucoseLow: 45, glucoseHigh: -30, glucoseVeryHigh: -30 } },
+    hhs: { find: { glucoseVeryHigh: 30, glucoseHigh: 10, glucoseLow: -30 } },
+    dka: { find: { glucoseHigh: 12, glucoseVeryHigh: 6, glucoseLow: -30 } },
+    adrenal_crisis: { find: { sodiumLow: 10, potassiumHigh: 10, glucoseLow: 8 } }
   };
   var _kbV2Applied = false;
   function ensureKbV2() {
