@@ -339,3 +339,16 @@ test("frequent urination with thirst is polyuria; with burning it stays a urinar
   assert.ok(p("burning and frequent urination").includes("urinaryFrequency"));
   assert.ok(p("frequent urination at night").includes("urinaryFrequency"));
 });
+
+// round 26: a "non-" prefix negates the word it is fused to ("non-tender", "non-productive")
+test("a non- prefix negates the fused word", () => {
+  const c26 = { valid: { erythema: 1, cough: 1, purulentSputum: 1, petechialRash: 1 }, labels: {}, numeric: {}, v2: true,
+    syn: { erythema: ["erythematous"], cough: ["cough"], purulentSputum: ["productive"], petechialRash: ["non-blanching rash"] } };
+  const r = (t) => NLP.extract(t, c26);
+  assert.ok(r("the wound edge is non-erythematous").absent.includes("erythema"));
+  assert.ok(!r("the wound edge is non-erythematous").present.includes("erythema"));
+  const nc = r("non-productive cough for a week");
+  assert.ok(nc.present.includes("cough"));
+  assert.ok(!nc.present.includes("purulentSputum"));
+  assert.ok(r("a non-blanching rash on the legs").present.includes("petechialRash"));
+});

@@ -2115,6 +2115,14 @@
       "puffy face", "facial puffiness", "puffiness of the face", "face and arm swelling", "facial and arm swelling"],   // not periorbital: that is also orbital cellulitis
     increasedSputumVolume: ["larger in volume", "increase in sputum", "more sputum than usual", "greater volume of sputum"],
     malignancy: ["mediastinal mass", "paratracheal mass", "hilar mass", "lung mass", "pulmonary mass", "space-occupying lesion"],
+    // round 26
+    persistentBacteremia: ["two of two blood culture", "2/2 blood culture", "both blood culture sets", "all blood culture sets", "3/3 blood culture", "three of three blood culture",
+      "all three blood culture", "multiple positive blood cultures", "repeatedly positive blood cultures"],
+    peripheralVascularDisease: ["absent pedal pulses", "absent foot pulses", "impalpable pedal pulses", "absent dorsalis pedis", "intermittent claudication", "claudication",
+      "peripheral arterial disease", "peripheral vascular disease"],
+    boneInvolvement: ["probe-to-bone", "probe to bone", "probes to bone", "reaches bone", "exposed bone", "osteomyelitis", "bone involvement"],
+    deepTissueInvolvement: ["deep infection", "deep space infection", "plantar abscess", "foot abscess", "exposed tendon", "tendon involvement"],
+    calfTenderness: ["tender calves", "calf muscle tenderness", "calf tenderness", "gastrocnemius tenderness", "squeezing both gastrocnemius", "squeezing the gastrocnemius", "tender gastrocnemius"],
     // round 24
     cardiacImplantableDevice: ["pacemaker", "implantable cardioverter", "icd pocket", "icd site", "device pocket", "generator pocket", "crt-d", "crt device"],
     erythemaAtSite: ["redness over the pacemaker", "red, discharging swelling over the", "redness and discharge over", "red swelling over the pacemaker", "erythema at the insertion",

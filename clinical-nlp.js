@@ -360,6 +360,8 @@
       if (v2 && e.method !== "vitals") cl = cl.replace(NEG_IDIOM_V2, " ").replace(RECENT_V2, " ");
       // v2: a measured temperature of 38 or more is fever even if "afebrile" appears elsewhere in the note
       if (hasWord(cl, NEG) || (key === "fever" && !(v2 && e.method === "vitals") && hasWord(norm, AFEBRILE))) r.polarity = "absent";
+      // round 26: "non-erythematous", "non-tender", "non-productive": a "non-" prefix negates the word it is fused to
+      else if (v2 && e.method !== "vitals" && /\bnon[-\s]?$/.test(norm.slice(Math.max(0, e.idx - 4), e.idx))) r.polarity = "absent";
       // round 13: "constipation rather than diarrhoea", "instead of fever": the named alternative is absent
       else if (v2 && e.method !== "vitals" && /\b(?:rather than|instead of)\s+(?:[a-z-]+\s+){0,2}$/.test(norm.slice(Math.max(0, e.idx - 40), e.idx))) r.polarity = "absent";
       else if (v2 && e.method !== "vitals" && (negList(norm, e.idx) || negAfter(norm, e.idx + (e.srcText || "").length))) r.polarity = "absent";
