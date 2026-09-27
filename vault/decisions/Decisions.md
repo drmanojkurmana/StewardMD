@@ -10211,3 +10211,24 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
   the point of use rather than adding a new claim. Held as `DUTY_LINE` in both `kb-protocols.js` and
   `specialty-kits.js` (buildless IIFEs cannot import each other) with a test that keeps the wording
   identical.
+
+## 2026-09-27 - Marketing site: Apple design layer + the MaiK Offline story
+
+**Decision (owner):** polish stewardmd.in in Apple's design language and add a story about the offline model.
+
+**How:** `_site/index.html` gets one `<style id="apple-ds">` block of overrides only (SF-style Inter display
+type in place of the Newsreader serif, Apple ink/paper neutrals, true-black dark sections, no hairlines
+between sections, frosted nav, pill controls). Deleting that block restores the previous look; no section
+markup or scroll script was rewritten. A new `#offline` section sits directly under the hero, linked first
+in the nav and mobile menu: headline "India's first offline medical AI." (tricolour India), the owner's real
+airplane-mode screen recording (`_site/assets/s/maik-offline-demo.mp4`, 0.8 MB, muted loop, iOS recording
+dot masked), four facts, a four-chapter story and a privacy panel.
+
+**Claims and their sources:** on-device inference (`maik-local.js`), 10 model packs (`maik-models.js`),
+claim-level grounding (`kb/ai/maik-grounding.js`), doses from the drug database (`kb/ai/drug-dose.js`).
+"India's first" is backed by `vault/legal-assets/maik-india-first-evidence.md`. "Free and unlimited" is
+scoped to offline models with the same fine print as the posters.
+
+**Verification:** headless Chromium at 1440 and 390 wide, no horizontal overflow, no page errors; site tests
+67/67. Full CI suite 10847/10849, the one failure (`wardsynq-ed` concurrent provisional MRN) passes 3/3 in
+isolation and is unrelated to this change.
