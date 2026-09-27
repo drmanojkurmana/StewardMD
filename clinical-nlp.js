@@ -323,6 +323,9 @@
       if ((m2 = norm.match(/\b(?:severe|excruciating|intense|unbearable|agoni[sz]ing|worst)\b[^.;]{0,25}?\b(?:abdominal|epigastric|loin|flank|periumbilical|umbilical|belly|upper abdominal|lower abdominal)\s+(?:pain|colic)\b/))) consider("severeAbdominalPain", m2.index, "compound", m2[0]);
       // round 11: a swollen joint named ("right knee is markedly swollen", "first MTP joint is swollen")
       if ((m2 = norm.match(/\b(?:joint|knee|ankle|wrist|elbow|mtp|toe|shoulder|hip)\b[^.;,]{0,25}?\b(?:swollen|effusion)\b/))) consider("jointSwelling", m2.index, "compound", m2[0]);
+      // round 21: an ulcer named on the foot ("ulcer over the right forefoot", "plantar ulcer")
+      var fure = /\bulcers?\b[^.;,]{0,30}?\b(?:foot|feet|forefoot|toe|toes|heel|plantar|metatarsal|sole)\b|\b(?:foot|forefoot|toe|heel|plantar)\s+ulcers?\b/g;
+      while ((m2 = fure.exec(norm))) consider("diabeticFootUlcer", m2.index, "compound", m2[0]);   // every mention, as for admission days
       // round 10: 48 hours or more into a hospital stay (hospital-acquired territory)
       var hdre = /\b(?:admitted|hospitali[sz]ed|intubated|ventilated)\s+(\d{1,2}|two|three|four|five|six|seven|eight|nine|ten)\s*days?\s*(?:ago|earlier|previously|before)\b|\b(?:hospital|post-?operative|ward|icu)\s+day\s+(\d{1,2})\b|\bday\s+(\d{1,2})\s+of\s+(?:(?:a|an|the|his|her)\s+)?(?:[a-z-]+\s+){0,2}(?:admission|ventilation|hospital stay|stay)\b/g;
       while ((m2 = hdre.exec(norm))) {   // every mention (round 19): the first may be negated or under 48 h

@@ -1408,7 +1408,9 @@
       // (ventilator-associated: a ventilated patient with a new infiltrate needs no fever, CDC VAE)
       (f.hospitalDay48 && (febrile || (f.mechanicalVentilation && f.consolidation)) && (f.purulentSputum || f.purulentSecretions || f.worseningOxygenation) &&
         (f.worseningOxygenation || f.hypoxia || f.consolidation)) ? "hap_criteria" :
-      (febrile && f.rightUpperQuadrantPain && (f.murphySign || f.knownGallstones)) ? "cholecystitis_signs" : null;
+      (febrile && f.rightUpperQuadrantPain && (f.murphySign || f.knownGallstones)) ? "cholecystitis_signs" :
+      // round 21: fever with bloody diarrhoea is bacillary dysentery until shown otherwise (WHO; India)
+      (febrile && f.bloodyStool && f.diarrhea) ? "febrile_dysentery" : null;
     if (cantMiss && weak && !gib) { g.cls = "likely"; g.rule = cantMiss; return; }
     if (f.liverDisease && (f.hematemesis || f.melena || f.gibPresentation) && g.cls !== "very_likely" && g.cls !== "likely") {
       g.cls = "abx_prophylaxis"; g.rule = "cirrhosis_gib";
@@ -1577,6 +1579,7 @@
     if (g.rule === "fever_murmur") return "Fever with a new murmur: infective endocarditis until proven otherwise. Take three sets of blood cultures before antibiotics, then treat empirically; echocardiography.";
     if (g.rule === "febrile_uti") return "A febrile urinary infection is upper or complicated by definition: send a urine culture and start antibiotics.";
     if (g.rule === "hap_criteria") return "Hospital-acquired pneumonia criteria are met (48 h or more in hospital, fever, purulent secretions, worsening gas exchange or a new infiltrate): cultures, then empiric antibiotics.";
+    if (g.rule === "febrile_dysentery") return "Fever with bloody diarrhoea: bacillary dysentery until shown otherwise. Send a stool culture and start antibiotics; reconsider if a stool test or colonoscopy shows inflammatory bowel disease.";
     if (g.rule === "cholecystitis_signs") return "Fever with right upper quadrant pain and a Murphy sign or gallstones: acute cholecystitis until imaging says otherwise. Antibiotics with source control.";
     if (g.rule === "ni_explains_fever") return g.why + " leads the differential and explains the fever, with no shock signs or immune compromise: antibiotics are not recommended on these findings. Look for a source and reconsider if one appears or the patient deteriorates.";
     if (g.rule === "ni_lead_afebrile") return "No fever, shock signs or immune compromise, and a non-infectious diagnosis leads (" + g.why + "): antibiotics are not recommended on these findings. Reconsider if fever, rigors or a source of infection appears.";
@@ -2080,6 +2083,17 @@
     singleLesion: ["hypoechoic lesion", "hypodense lesion", "cystic lesion in the", "lesion in the right hepatic", "lesion in the right lobe", "lesion in the left lobe"],
     embolicPhenomena: ["splinter haemorrhage", "splinter hemorrhage", "janeway", "osler node", "osler's node", "roth spot", "conjunctival petechiae", "septic emboli", "embolic"]
   };
+  // round 21 (2026-09-27): phrasing behind typed-note misses whose tapped findings were right (train split)
+  var FT_SYN_ADD_V2_R21 = {
+    bloodyStool: ["bloody diarrhoea", "bloody diarrhea", "bloody, mucoid", "bloody mucoid", "blood and mucus", "blood-stained stool", "blood mixed with stool", "stools with blood"],
+    tenesmus: ["tenesmus", "painful straining", "straining at stool", "ineffectual straining", "urge to defecate", "incomplete evacuation"],
+    conjunctivalSuffusion: ["conjunctival suffusion", "conjunctival injection", "red eyes", "red, gritty eyes", "reddening of the eyes", "suffused conjunctiva"],
+    waterExposure: ["wading", "floodwater", "flood water", "flooded", "stagnant water", "sewage", "sewer", "rat urine", "rodent urine", "monsoon flood"],
+    facialSwelling: ["swelling of the face", "swelling of the lips", "swelling of the lip", "swelling of the tongue", "swelling of the lower lip", "swollen lips", "swollen tongue",
+      "puffy face", "facial puffiness", "puffiness of the face", "face and arm swelling", "facial and arm swelling"],   // not periorbital: that is also orbital cellulitis
+    increasedSputumVolume: ["larger in volume", "increase in sputum", "more sputum than usual", "greater volume of sputum"],
+    malignancy: ["mediastinal mass", "paratracheal mass", "hilar mass", "lung mass", "pulmonary mass", "space-occupying lesion"]
+  };
   var FT_SYN_V2 = (function () {
     var o = {};
     Object.keys(FT_SYN).forEach(function (k) { var drop = FT_SYN_DROP_V2[k] || []; o[k] = FT_SYN[k].filter(function (x) { return drop.indexOf(x) < 0; }); });
@@ -2088,6 +2102,7 @@
     Object.keys(FT_SYN_ADD_V2_R10).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R10[k]); });
     Object.keys(FT_SYN_ADD_V2_R11).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R11[k]); });
     Object.keys(FT_SYN_ADD_V2_R16).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R16[k]); });
+    Object.keys(FT_SYN_ADD_V2_R21).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R21[k]); });
     return o;
   })();
   // the extraction context: classic exactly as before; v2 adds the cleaned table and the numeric-field list

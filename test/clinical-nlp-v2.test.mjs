@@ -310,3 +310,13 @@ test("doubled spaces and line breaks read the same; long list items are negated;
   assert.ok(p("Type 2 diabetes for 18 years. 64-year-old man with fever").includes("ageOver50"), "the explicit age, not a duration");
   assert.ok(!NLP.extract("HR 88, later HR 128", { ...c19, v2: false }).present.includes("tachycardia"), "classic reads the first value");
 });
+
+// round 21: an ulcer named on the foot
+test("an ulcer named on the foot is a diabetic foot ulcer finding", () => {
+  const c21 = { valid: { diabeticFootUlcer: 1 }, labels: {}, syn: {}, numeric: {}, v2: true };
+  const p = (t) => NLP.extract(t, c21).present;
+  assert.ok(p("Painful, discharging ulcer over the right forefoot").includes("diabeticFootUlcer"));
+  assert.ok(p("plantar ulcer under the first metatarsal head").includes("diabeticFootUlcer"));
+  assert.ok(!p("peptic ulcer disease").includes("diabeticFootUlcer"));
+  assert.ok(!p("no foot ulcer").includes("diabeticFootUlcer"));
+});
