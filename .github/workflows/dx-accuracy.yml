@@ -27,32 +27,22 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Shipped config (flags at their defaults; smd_gate_v2 and smd_rank_v3 are ON since 2026-09-27)
+      - name: Shipped config (defaults since 2026-09-27; everything ON except the prevalence prior, a user switch)
         run: node test/run-dx-audit.mjs --check
-      - name: Classic differential order (smd_rank_v3=0, the opt-out)
-        run: FLAGS=smd_rank_v3=0 node test/run-dx-audit.mjs --check
-      - name: Classic antibiotic gate (smd_gate_v2=0, the opt-out)
-        run: FLAGS=smd_gate_v2=0 node test/run-dx-audit.mjs --check
-      - name: Antibiotic gate v2 (smd_gate_v2, explicit)
-        run: FLAGS=smd_gate_v2=1 node test/run-dx-audit.mjs --check
-      - name: Text extraction v2 (smd_nlp_v2, default OFF until the owner approves)
-        run: FLAGS=smd_nlp_v2=1 node test/run-dx-audit.mjs --check
-      - name: Gate + extraction
-        run: FLAGS=smd_gate_v2=1,smd_nlp_v2=1 node test/run-dx-audit.mjs --check
-      - name: Differential ordering v3 (smd_rank_v3, explicit)
-        run: FLAGS=smd_rank_v3=1 node test/run-dx-audit.mjs --check
-      - name: Gate + extraction + ordering
-        run: FLAGS=smd_gate_v2=1,smd_nlp_v2=1,smd_rank_v3=1 node test/run-dx-audit.mjs --check
-      - name: Knowledge-base additions (smd_kb_v2, default OFF until the owner approves)
-        run: FLAGS=smd_kb_v2=1 node test/run-dx-audit.mjs --check
-      - name: Not enough information (smd_calib, default OFF until the owner approves)
-        run: FLAGS=smd_calib=1 node test/run-dx-audit.mjs --check
-      - name: Prevalence prior (smd_prior_v1, default OFF; the balanced gold set cannot validate it)
+      - name: Prevalence prior switched on by the user (smd_prior_v1=1)
         run: FLAGS=smd_prior_v1=1 node test/run-dx-audit.mjs --check
-      - name: All five plan flags
-        run: FLAGS=smd_gate_v2=1,smd_nlp_v2=1,smd_rank_v3=1,smd_kb_v2=1,smd_calib=1 node test/run-dx-audit.mjs --check
-      - name: All five plus the prevalence prior
-        run: FLAGS=smd_gate_v2=1,smd_nlp_v2=1,smd_rank_v3=1,smd_kb_v2=1,smd_calib=1,smd_prior_v1=1 node test/run-dx-audit.mjs --check
+      - name: Opt-out, classic antibiotic gate (smd_gate_v2=0)
+        run: FLAGS=smd_gate_v2=0 node test/run-dx-audit.mjs --check
+      - name: Opt-out, classic text extraction (smd_nlp_v2=0)
+        run: FLAGS=smd_nlp_v2=0 node test/run-dx-audit.mjs --check
+      - name: Opt-out, classic differential order (smd_rank_v3=0)
+        run: FLAGS=smd_rank_v3=0 node test/run-dx-audit.mjs --check
+      - name: Opt-out, knowledge base without the v2 additions (smd_kb_v2=0)
+        run: FLAGS=smd_kb_v2=0 node test/run-dx-audit.mjs --check
+      - name: Opt-out, no "not enough information" state (smd_calib=0)
+        run: FLAGS=smd_calib=0 node test/run-dx-audit.mjs --check
+      - name: Everything classic (all plan flags off)
+        run: FLAGS=smd_gate_v2=0,smd_nlp_v2=0,smd_rank_v3=0,smd_kb_v2=0,smd_calib=0 node test/run-dx-audit.mjs --check
       - name: Knowledge-base additions behaviour (cholangitis vs viral hepatitis, SBP, note numbers)
         run: node test/run-kb-v2.mjs
       - name: Not enough information behaviour (engine, red flags, workspace, OPD, wizard)

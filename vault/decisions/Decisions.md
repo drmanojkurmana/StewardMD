@@ -10470,3 +10470,17 @@ the emergency valve and applies to every host.
 **Verification:** `test/site-gate.test.mjs` pins it (preview hosts: /home.js and kb/ are 404, root is the
 marketing site, noindex; production root indexable). The new test fails on the old middleware and passes on
 the new one. Full unit suite 10915/10916 passing, 0 failures.
+## 2026-09-27 - All plan flags ON by default; the prevalence prior is the doctor's switch
+- **Owner**: "TURN ALL ON", then "PREVALENCE BASED ORDER SHOULD BE OPTIONAL FOR USER".
+- **Decision**: `smd_nlp_v2`, `smd_kb_v2`, `smd_calib`, `smd_dx_ask` join `smd_gate_v2`, `smd_rank_v3`, `smd_dx_simple`
+  as defaults (localStorage `"0"` opts each out). `smd_prior_v1` stays OFF by default and gets a switch in the
+  plain view ("Put common diagnoses first", remembered per device). CI checks the default, the prior switched
+  on, each flag's opt-out, and everything classic.
+- **Why**: against the previous live config, chart text correct-first 119 -> 187, antibiotics when needed
+  111 -> 138, time-critical 32 -> 46, antibiotics when not needed 69 -> 63; tapped needed antibiotics
+  161 -> 165. Cost: tapped correct-first 401 -> 398 and not-needed antibiotics 38 -> 39; complaint-only
+  not-needed antibiotics 12 -> 15 (with needed ones 40 -> 65 and time-critical 13 -> 22). The prior
+  costs a further 10 tapped top-1 on the balanced gold set, which cannot show its benefit (real case mix),
+  hence a switch rather than a default.
+- Tests written against the classic defaults pin their flags (`?kbv2=0` in the gate fixtures); the new
+  default is asserted beside them.
