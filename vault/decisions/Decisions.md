@@ -10190,3 +10190,24 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
 - **Why not delete the scribe picker entirely**: "General OPD", "Surgery follow-up" and
   "Pre-anaesthetic check" templates have no kit, so the Specialty tab cannot be the only way to reach
   them; a select keeps every choice in one line.
+
+## 2026-09-27 - A protocol's instructions are editable before they reach the case sheet, and the doctor owns them
+- **Context**: owner, on the protocol assign list: "keep drug doses unticked and editable and protocols
+  editable too. also write legal line in footer its docto responsibity not the stewardmd (very small font
+  less space)".
+- **Decision**: every line in the assign list (section instructions AND the drug doses) can be edited in
+  place before it is added; the doctor's wording replaces the protocol's in the composed block. Drug doses
+  keep starting unticked: editing a line does NOT tick it, so a dose can be corrected and still left out.
+  Undo restores the protocol's own text; Reset clears ticks and edits together.
+- **Why editable here and not only in the form**: the case-sheet block is one textarea by the time it
+  lands, so correcting a single dose there means finding it inside a numbered block. At the tick list the
+  doctor is already reading line by line, which is the moment to change "1 g IV 8 hourly" to local
+  practice.
+- **Keystrokes never repaint**: the textarea stores into `st.protoAssign.edits` on input with no paint
+  (as the oncology override drafts do). A repaint per keystroke closes the phone keyboard.
+- **The legal line**: one sentence, "The treating doctor is responsible for every instruction used or
+  recorded; StewardMD accepts no liability.", at 9.5px under the Add button, in the protocol reader's
+  Sources footer, and at the foot of every specialty kit. It restates disclaimer.html sections 8 and 9 at
+  the point of use rather than adding a new claim. Held as `DUTY_LINE` in both `kb-protocols.js` and
+  `specialty-kits.js` (buildless IIFEs cannot import each other) with a test that keeps the wording
+  identical.

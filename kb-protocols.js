@@ -238,7 +238,7 @@
     toc.push('<button type="button" class="kbp-jump" data-kbp-jump="' + pre + 'Sources">Sources</button>');
     var sources = '<section class="kbp-sec kbp-sources" id="' + pre + 'Sources"><h2><span class="kbp-kind">Evidence</span>Sources</h2><ol>' + (p.sources || []).map(function (s) {
       return '<li><a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.title) + '</a><span>' + esc(s.org) + " · " + esc(s.year) + "</span></li>";
-    }).join("") + '</ol><p class="kbp-foot">Links open the official source. Always consult the current published version. Decision support only: not a substitute for clinical judgement.</p></section>';
+    }).join("") + '</ol><p class="kbp-foot">Links open the official source. Always consult the current published version. Decision support only: not a substitute for clinical judgement. ' + esc(DUTY_LINE) + '</p></section>';
     return '<div class="kbp-reader">' +
       (opts.back ? '<button type="button" class="kbp-back" data-kbp-back aria-label="Back to protocols"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span>All protocols</span></button>' : "") +
       '<header class="kblib-tool-intro kbp-hero">' + (opts.brand ? brandHTML() : "") + '<span class="kblib-tool-kicker">' + esc(subjectLabel(p.subject)) + "</span><h1>" + esc(p.title) + "</h1>" +
@@ -258,6 +258,9 @@
    * normal Save writes it, exactly as the specialty kit's "Add to ..." works.
    */
   var PLAN_FIELD = "management_plan", ADVICE_FIELD = "diet_lifestyle_advice";
+  // One sentence, one place. Shown small under the reader and under the assign list: the doctor owns
+  // what is used or recorded, not StewardMD (mirrors disclaimer.html sections 8 and 9).
+  var DUTY_LINE = "The treating doctor is responsible for every instruction used or recorded; StewardMD accepts no liability.";
   // kind -> [case-sheet field, ticked by default]
   var ASSIGN_KIND = {
     immediate: [PLAN_FIELD, true], treatment: [PLAN_FIELD, true], investigations: [PLAN_FIELD, true],
@@ -283,12 +286,16 @@
     });
     return out;
   }
-  /** ids: array (or map) of the line ids the doctor ticked. Returns { blocks:[{field,label,text}], count }. */
-  function assignText(p, ids) {
+  /** ids: array (or map) of the line ids the doctor ticked; edits: {lineId: the doctor's own wording,
+   *  which wins over the protocol's}. Returns { blocks:[{field,label,text}], count }. */
+  function assignText(p, ids, edits) {
     var want = {};
     if (ids && ids.length != null) { for (var i = 0; i < ids.length; i++) want[ids[i]] = true; }
     else { for (var k in (ids || {})) if (ids[k]) want[k] = true; }
-    var lines = assignLines(p).filter(function (l) { return want[l.id]; });
+    var lines = assignLines(p).filter(function (l) { return want[l.id]; }).map(function (l) {
+      var e = edits && edits[l.id] != null ? String(edits[l.id]).trim() : "";
+      return e ? { id: l.id, kind: l.kind, kindLabel: l.kindLabel, group: l.group, text: e, field: l.field, on: l.on, edited: true } : l;
+    });
     if (!lines.length) return { blocks: [], count: 0 };
     var src = ((p && p.sources) || []).slice(0, 2).map(function (x) {
       return x.title + " (" + [x.org, x.year].filter(Boolean).join(", ") + ")";
@@ -311,26 +318,43 @@
     });
     return { blocks: blocks, count: lines.length };
   }
-  /** The tick list. opts: { act(cmd) -> the host's action attribute, disabled, note }. */
+  /** The tick list. Every line is EDITABLE before it is added (owner, 2026-09-27): a dose, a threshold
+   *  or a wording can be changed to local practice here, not only after it lands in the form. Drug
+   *  doses still start unticked.
+   *  opts: { act(cmd), inp(name) -> the host's input attribute, edits, editing, disabled, note }. */
   function assignHTML(p, sel, opts) {
     opts = opts || {}; sel = sel || {};
     var act = opts.act || function (cmd) { return 'data-kbp-act="' + esc(cmd) + '"'; };
+    var inp = opts.inp || function (name) { return 'data-kbp-inp="' + esc(name) + '"'; };
+    var edits = opts.edits || {}, editing = opts.editing || "";
     var lines = assignLines(p), n = 0, last = "", rows = "";
     lines.forEach(function (l) {
       if (l.group !== last) { rows += '<div class="kbp-as-grp"><span class="kbp-kind">' + esc(l.kindLabel) + "</span>" + esc(l.group) + "</div>"; last = l.group; }
       var on = sel[l.id] !== undefined ? !!sel[l.id] : l.on;
       if (on) n++;
-      rows += '<label class="kbp-as-row' + (on ? " on" : "") + '"><input type="checkbox"' + (on ? " checked" : "") + " " + act("proto-as-line:" + l.id) +
-        ' aria-label="' + esc(l.text.slice(0, 80)) + '"><span>' + esc(l.text) + "</span>" +
-        (l.field === ADVICE_FIELD ? '<em class="kbp-as-to">advice</em>' : "") + "</label>";
+      var mine = edits[l.id] != null ? String(edits[l.id]) : "", txt = mine.trim() ? mine : l.text;
+      var changed = !!mine.trim() && mine.trim() !== l.text;
+      var tick = '<input type="checkbox"' + (on ? " checked" : "") + " " + act("proto-as-line:" + l.id) + ' aria-label="' + esc(txt.slice(0, 80)) + '">';
+      var pencil = '<button type="button" class="kbp-as-ed" ' + act("proto-as-edit:" + l.id) +
+        ' aria-label="' + (editing === l.id ? "Stop editing" : "Edit") + ' this instruction">' + (editing === l.id ? "Done" : "Edit") + "</button>";
+      if (editing === l.id) {
+        rows += '<div class="kbp-as-row edit' + (on ? " on" : "") + '"><label class="kbp-as-tickonly">' + tick + "</label>" +
+          '<textarea class="kbp-as-tx" rows="4" ' + inp("proto-as-txt:" + l.id) + ' aria-label="Instruction text">' + esc(txt) + "</textarea>" +
+          '<span class="kbp-as-side">' + pencil +
+          (changed ? '<button type="button" class="kbp-as-ed" ' + act("proto-as-undo:" + l.id) + ' aria-label="Undo this edit">Undo</button>' : "") + "</span></div>";
+        return;
+      }
+      rows += '<div class="kbp-as-row' + (on ? " on" : "") + '"><label>' + tick + "<span>" + esc(txt) + "</span></label>" +
+        (changed ? '<em class="kbp-as-to edited">edited</em>' : "") +
+        (l.field === ADVICE_FIELD ? '<em class="kbp-as-to">advice</em>' : "") + pencil + "</div>";
     });
     var counts = assignText(p, Object.keys(lines.reduce(function (m, l) {
       var on = sel[l.id] !== undefined ? !!sel[l.id] : l.on; if (on) m[l.id] = 1; return m;
-    }, {})));
+    }, {})), edits);
     var where = counts.blocks.map(function (b) { return b.count + " to " + b.label; }).join(" · ");
     return '<div class="kbp-assign">' +
       '<div class="kbp-as-head"><strong>Add to this patient\'s case sheet</strong>' +
-      '<p>Tick the instructions that apply. They are appended to the case sheet as text you can edit; nothing is saved until you save the assessment, and nothing is prescribed or ordered.</p>' +
+      '<p>Tick the instructions that apply, and tap Edit to change any wording or dose before it goes in. They are appended to the case sheet as text you can edit there too; nothing is saved until you save the assessment, and nothing is prescribed or ordered.</p>' +
       '<div class="kbp-as-bulk"><button type="button" class="kbp-as-b" ' + act("proto-as-all") + ">Select all</button>" +
       '<button type="button" class="kbp-as-b" ' + act("proto-as-none") + ">Clear</button>" +
       '<button type="button" class="kbp-as-b" ' + act("proto-as-reset") + ">Reset</button></div></div>" +
@@ -338,7 +362,8 @@
       '<div class="kbp-as-foot"><span class="kbp-as-n">' + (n ? n + " instruction" + (n === 1 ? "" : "s") + (where ? " · " + esc(where) : "") : "Nothing ticked yet") + "</span>" +
       '<div class="kbp-as-acts"><button type="button" class="kbp-as-cancel" ' + act("proto-as-cancel") + ">Cancel</button>" +
       '<button type="button" class="kbp-as-add"' + (n && !opts.disabled ? "" : " disabled") + " " + act("proto-as-apply") + ">" + (opts.addLabel || "Add to case sheet") + "</button></div>" +
-      (opts.note ? '<p class="kbp-as-note">' + esc(opts.note) + "</p>" : "") + "</div></div>";
+      (opts.note ? '<p class="kbp-as-note">' + esc(opts.note) + "</p>" : "") +
+      '<p class="kbp-as-duty">' + esc(DUTY_LINE) + "</p></div></div>";
   }
 
   function renderReader(p) {
@@ -445,7 +470,7 @@
     var n = 0, iv = setInterval(function () { if (wrapOpenRef() || ++n > 120) clearInterval(iv); }, 250);
   }
 
-  var API = { open: open, search: function (q, subject, basis) { return searchIndex(st.index, q, subject || "all", basis || "all"); }, BASIS: BASIS, loadIndex: loadIndex, loadProtocol: loadProtocol, readerHTML: readerHTML, assignLines: assignLines, assignText: assignText, assignHTML: assignHTML, ASSIGN_FIELDS: { plan: PLAN_FIELD, advice: ADVICE_FIELD }, subjectLabel: subjectLabel, index: function () { return st.index; }, CONTENT_V: CONTENT_V, _searchIndex: searchIndex, _rank: rank, _kinds: KINDS, _state: st };
+  var API = { open: open, search: function (q, subject, basis) { return searchIndex(st.index, q, subject || "all", basis || "all"); }, BASIS: BASIS, loadIndex: loadIndex, loadProtocol: loadProtocol, readerHTML: readerHTML, DUTY_LINE: DUTY_LINE, assignLines: assignLines, assignText: assignText, assignHTML: assignHTML, ASSIGN_FIELDS: { plan: PLAN_FIELD, advice: ADVICE_FIELD }, subjectLabel: subjectLabel, index: function () { return st.index; }, CONTENT_V: CONTENT_V, _searchIndex: searchIndex, _rank: rank, _kinds: KINDS, _state: st };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_KBPROTO = API;
   if (D && D.addEventListener) {
