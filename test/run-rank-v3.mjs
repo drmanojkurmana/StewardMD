@@ -60,6 +60,12 @@ const CASES = {
   shockPneumonia: ["fever", "cough", "purulentSputum", "crepitations", "consolidation", "hypoxia", "hypotension", "alteredSensorium", "tachycardia"],
   tb: ["fever", "cough", "purulentSputum", "crepitations", "weightLoss", "nightSweats", "eveningFever", "subacuteOnset"],
   headache: ["fever", "headacheSevere", "nauseaVomiting", "photophobia"],
+  // round 2 discriminators
+  ruqFever: ["fever", "rigors", "rightUpperQuadrantPain", "murphySign", "nauseaVomiting", "abdominalPain"],
+  copdNoPus: ["knownCOPD", "increasedDyspnea", "wheeze", "increasedSputumVolume", "dyspnea", "hypoxia"],
+  bleedLowPlt: ["petechialRash", "mucocutaneousBleeding", "thrombocytopenia", "bleedingManifestation", "afebrile"],
+  gpaCavity: ["hemoptysis", "cavitatingLesion", "hematuria", "renalImpairment", "polyarthralgia", "fever", "weightLoss"],
+  focalNow: ["focalNeuroDeficit", "ageOver50", "hypertensionHx", "atrialFibHx"],
 };
 
 try {
@@ -91,6 +97,12 @@ try {
   ok(on.urti.order.indexOf("CAP") > on.urti.order.indexOf("URTI"), `on  · fever + cough + coryza without a chest sign: URTI above CAP (URTI #${on.urti.order.indexOf("URTI") + 1}, CAP #${on.urti.order.indexOf("CAP") + 1})`);
   ok(on.shockPneumonia.order.indexOf("SEVERE_CAP") < on.shockPneumonia.order.indexOf("CAP"), `on  · pneumonia with shock: severe CAP above non-severe CAP (#${on.shockPneumonia.order.indexOf("SEVERE_CAP") + 1} vs #${on.shockPneumonia.order.indexOf("CAP") + 1})`);
   ok(on.tb.order.indexOf("PULMONARY_TB") < on.tb.order.indexOf("CAP"), `on  · weeks of cough, weight loss, night sweats: TB above CAP (#${on.tb.order.indexOf("PULMONARY_TB") + 1} vs #${on.tb.order.indexOf("CAP") + 1})`);
+  const pos = (k, id) => on[k].order.indexOf(id) + 1;
+  ok(pos("ruqFever", "CHOLECYSTITIS") < pos("ruqFever", "biliary_colic"), `on  · RUQ pain + Murphy + fever: cholecystitis above biliary colic (#${pos("ruqFever", "CHOLECYSTITIS")} vs #${pos("ruqFever", "biliary_colic")})`);
+  ok(pos("copdNoPus", "copd_exac_ni") < pos("copdNoPus", "COPD_EXACERBATION"), `on  · COPD flare without purulent sputum or fever: non-infective first (#${pos("copdNoPus", "copd_exac_ni")} vs #${pos("copdNoPus", "COPD_EXACERBATION")})`);
+  ok(on.bleedLowPlt.order[0] === "itp", `on  · bleeding + low platelets alone, afebrile: ITP leads (${on.bleedLowPlt.order.slice(0, 3).join(", ")})`);
+  ok(pos("gpaCavity", "vasculitis") < pos("gpaCavity", "LUNG_ABSCESS"), `on  · cavity + haemoptysis + kidney involvement: vasculitis above lung abscess (#${pos("gpaCavity", "vasculitis")} vs #${pos("gpaCavity", "LUNG_ABSCESS")})`);
+  ok(pos("focalNow", "ischemic_stroke") < pos("focalNow", "tia"), `on  · a focal deficit still present: stroke above TIA (#${pos("focalNow", "ischemic_stroke")} vs #${pos("focalNow", "tia")})`);
   const neg = await run(CASES.headache, ["neckStiffness"]);
   // a denied strong finding costs its diagnoses rank (12 each, at most 30), never score; absent neck
   // stiffness does not exclude meningitis (the sign is insensitive), so it lowers rather than removes it

@@ -10312,3 +10312,12 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
 - **Owner accepted (2026-09-27)**: one test-split case (aggregate only) loses a needed antibiotic call on
   the text path in the v2 configs, so their `abxSens` floor is 138 (was 139). Not tuned against the test
   split. `smd_nlp_v2` stays OFF; `sepsis_afebrile` is live with gate v2.
+## 2026-09-27 - Differential ordering v3, round 2 (discriminators between close neighbours)
+- **Decision**: `smd_rank_v3` gains `RANK_V3_R2`, textbook discriminators (afebrile colic, Anthonisen
+  purulence, ITP vs DIC/TTP/leukaemia, GBS vs myasthenia, stroke vs TIA, nephritic / pulmonary-renal /
+  lupus patterns, fever for febrile infections...). Order only; the antibiotic gate never reads them.
+- **Why**: tapped top-1 train 75 -> 85%, dev 70 -> 76%, test 72 -> 78%; OPD ordering 358 -> 386.
+  Tried and dropped: source-over-sepsis, a complicated-UTI bonus, mixed malaria over malaria (see
+  `kb/validation/AUDIT-2026-09-26.md`, Round 7).
+- **Open (owner)**: v3 on the classic extractor, chart-text top-3 208 -> 206 (two classic-extractor misreads).
+  `smd_rank_v3` stays OFF.

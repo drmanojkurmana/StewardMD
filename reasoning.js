@@ -1078,6 +1078,65 @@
     myxedema: ["hypothermia", "bradycardia"],
     dic: ["mucocutaneousBleeding", "bleedingManifestation", "thrombocytopenia", "inr"]
   };
+  // round 2 (2026-09-27): textbook discriminators between close neighbours, mined from TRAIN-split
+  // misses, checked on dev. ORDER only, and unlike the disqualifiers and anchors above the antibiotic
+  // gate never reads them. Each returns a rankScore adjustment. ai_drafted, pending clinician review.
+  var noneOf = function (f, ks) { return !ks.some(function (k) { return f[k]; }); };
+  var FEBRILE = ["fever", "rigors", "prolongedFever", "eveningFever", "paroxysmalFever", "feverGU", "highFeverGI"];
+  var RANK_V3_R2 = {
+    // uncomplicated cystitis is by definition afebrile, without flank pain, in an uncomplicated host
+    CYSTITIS: function (f) { return (f.fever || f.rigors || f.feverGU || f.flankPain || f.costovertebralTenderness || f.complicatedUTIRisk) ? -25 : 0; },
+    // an upper UTI in a complicated host (obstruction, catheter, male, diabetes...) is a complicated UTI
+    PYELONEPHRITIS: function (f) { return f.complicatedUTIRisk ? -15 : 0; },
+    PROSTATITIS: function (f) { return f.perinealPain ? 20 : 0; },
+    // biliary colic is afebrile; fever or rigors with RUQ pain is cholecystitis or cholangitis
+    biliary_colic: function (f) { return (f.fever || f.rigors) ? -25 : 0; },
+    // fever or a raised ascitic count in cirrhosis with ascites: the infection leads, not its encephalopathy
+    SBP: function (f) { return (f.ascites && (f.fever || f.asciticPMNHigh)) ? 25 : 0; },
+    // an upper GI bleed in liver disease is variceal until endoscopy says otherwise
+    peptic_ulcer: function (f) { return (f.liverDisease && (f.hematemesis || f.melena)) ? -15 : 0; },
+    // Anthonisen: sputum purulence (or fever) separates an infective COPD exacerbation
+    COPD_EXACERBATION: function (f) { return (!f.purulentSputum && !f.fever) ? -20 : 0; },
+    copd_exac_ni: function (f) { return (f.purulentSputum || f.fever) ? -20 : 0; },
+    URTI: function (f) { return f.wheeze ? -30 : 0; },                         // wheeze is a lower-airway sign
+    // heart failure with shock physiology is cardiogenic shock
+    heart_failure: function (f) { return (f.hypotension && (f.lactateElevated || f.organDysfunction || f.oliguria || f.alteredSensorium)) ? -20 : 0; },
+    pe: function (f) { return f.purulentSputum ? -15 : 0; },                  // purulent sputum argues infection
+    // a cavity with foul sputum or an aspiration risk is an abscess (a cavity alone is also GPA or TB)
+    LUNG_ABSCESS: function (f) { return (f.cavitatingLesion && (f.foulSmellingSputum || f.aspirationRiskFactor)) ? 30 : 0; },
+    alcohol_withdrawal: function (f) { return f.drugOverdose ? -20 : 0; },   // an ingestion explains the picture
+    // idiopathic thrombocytopenia is the diagnosis when bleeding and a low count stand alone: DIC needs a
+    // trigger, TTP/HUS organ injury (kidney, brain, haemolysis), leukaemia more than a low platelet count
+    dic: function (f) { return noneOf(f, ["fever", "hypotension", "organDysfunction", "malignancy", "inr", "lactateElevated", "toxicAppearing"]) ? -15 : 0; },
+    ttp_hus: function (f) { return noneOf(f, ["alteredSensorium", "renalImpairment", "fever", "darkUrine", "jaundice", "focalNeuroDeficit"]) ? -25 : 0; },
+    acute_leukemia: function (f) { return noneOf(f, ["lymphadenopathy", "hepatosplenomegaly", "splenomegaly", "fever", "weightLoss", "cytopenia"]) ? -25 : 0; },
+    // ascending weakness is GBS; myasthenia is fatigable and descending
+    gbs: function (f) { return f.ascendingWeakness ? 15 : 0; },
+    myasthenic_crisis: function (f) { return f.ascendingWeakness ? -20 : 0; },
+    // a headache diagnosis needs a headache; a febrile infection needs a fever
+    tension_ha: function (f) { return noneOf(f, ["headache", "headacheSevere"]) ? -25 : 0; },
+    migraine: function (f) { return noneOf(f, ["headache", "headacheSevere"]) ? -25 : 0; },
+    LEPTOSPIROSIS: function (f) { return noneOf(f, FEBRILE) ? -20 : 0; },
+    LIVER_ABSCESS: function (f) { return noneOf(f, FEBRILE) ? -20 : 0; },
+    AMOEBIC_LIVER_ABSCESS: function (f) { return noneOf(f, FEBRILE) ? -20 : 0; },
+    CNS_TB: function (f) { return noneOf(f, FEBRILE.concat(["headache", "headacheSevere", "neckStiffness"])) ? -20 : 0; },
+    ENCEPHALITIS: function (f) { return noneOf(f, FEBRILE.concat(["headache", "headacheSevere", "seizure"])) ? -20 : 0; },
+    tia: function (f) { return f.clinicallyImproving ? 0 : -20; },          // a TIA has resolved; a deficit now is a stroke
+    // clinically identical to organophosphate poisoning, which is far commoner; the compound decides
+    carbamate: function () { return -5; },
+    // bilateral fine crackles are interstitial; an effusion is dull with quiet breath sounds
+    pleural_effusion: function (f) { return f.bilateralCrackles ? -15 : 0; },
+    // nephritic syndrome: blood (and protein or cola urine) with a failing or fluid-holding kidney
+    glomerulonephritis: function (f) { return (f.hematuria && (f.proteinuria || f.darkUrine) && (f.oliguria || f.renalImpairment || f.legSwellingBilateral)) ? 20 : 0; },
+    // pulmonary-renal syndrome (lung bleeding with kidney involvement) is vasculitis until shown otherwise
+    vasculitis: function (f) { return (f.hemoptysis && (f.hematuria || f.renalImpairment)) ? 15 : 0; },
+    // lupus: a haematological and a renal criterion together
+    sle_flare: function (f) { return (f.thrombocytopenia && (f.proteinuria || f.hematuria)) ? 15 : 0; },
+    // DKA is defined by ketosis; before the result, vomiting with abdominal pain is the picture to act on
+    dka: function (f) { return (f.ketonemia || (f.nauseaVomiting && f.abdominalPain)) ? 0 : -15; },
+    // not here: confirmed mixed malaria over malaria. Leading with the lower-scored of the two widened the
+    // gate's "close rival" window and turned antimalarial-only care into "antibiotics" (train gc_135)
+  };
   var RANK_V3_NUMERIC = null;
   // v3 knowledge the antibiotic gate may use: a candidate that is disqualified or lacks its anchor
   function rankV3Excluded(r, f) {
@@ -1096,6 +1155,7 @@
     if (RANK_V3_DQ[r.id] && RANK_V3_DQ[r.id](f)) adj -= 35;
     var anc = RANK_V3_ANCHOR[r.id];
     if (anc && !anc.some(function (k) { return f[k]; })) adj -= 25;
+    if (RANK_V3_R2[r.id]) adj += RANK_V3_R2[r.id](f) || 0;
     // 4. pertinent negatives from the note ("no neck stiffness", "chest clear"): each strong finding
     // of this diagnosis the note explicitly denies costs 12, at most 30
     var neg = S.neg || {}, nneg = 0;
@@ -1803,7 +1863,8 @@
     focalNeuroDeficit: ["one-sided weakness", "left-sided weakness", "right-sided weakness", "left sided weakness", "right sided weakness", "weakness of the left", "weakness of the right",
       "facial deviation", "deviation of the angle of the mouth", "aphasia", "dysarthria"],
     exertionalChestPain: ["chest pain on exertion", "exertional chest", "exertional angina", "chest tightness on exertion", "angina"],
-    purulentSputum: ["yellow sputum", "green sputum", "rusty sputum", "mucopurulent", "foul-smelling sputum", "foul sputum"],
+    purulentSputum: ["yellow sputum", "green sputum", "rusty sputum", "mucopurulent", "foul-smelling sputum", "foul sputum",
+      "sputum purulence", "volume and purulence", "change to green", "green colour", "green color", "green-coloured", "green coloured", "purulent sputum"],
     mucocutaneousBleeding: ["gum bleeding", "bleeding gums", "epistaxis", "nose bleed", "mucosal bleed"],
     bleedingManifestation: ["bleeding gums", "gum bleed", "epistaxis", "nose bleed", "bleeding manifest", "petechia"],
     headInjury: ["head injury", "hit his head", "hit her head", "trauma to head", "fall on the head", "fell and hit"],
