@@ -159,3 +159,51 @@ test("'3 weeks ago' dates an event; an onset word makes it the illness tempo", (
   assert.ok(present("Symptoms started 3 weeks ago", true).includes("subacuteOnset"));
   assert.ok(present("cough for 3 weeks", true).includes("subacuteOnset"));
 });
+
+// round 8: typed-note reading (every mention, course idioms, recent time, tests and plans)
+const ctx8 = (v2) => ({
+  valid: { ...ctx2(v2).valid, headache: 1, anticoagulated: 1, alteredSensorium: 1 },
+  labels: {}, v2, numeric: {},
+  syn: { ...ctx2(v2).syn, headache: ["headache"], anticoagulated: ["warfarin"], alteredSensorium: ["confus"] },
+});
+const read8 = (t, v2) => NLP.extract(t, ctx8(v2));
+const present8 = (t, v2) => read8(t, v2).present;
+
+test("a later clean mention wins over a negated first one", () => {
+  const t = "Denies fever at home. Vitals: temp 39.3";
+  assert.ok(!present8(t, false).includes("fever"), "classic read only the first mention");
+  assert.ok(present8(t, true).includes("fever"));
+  assert.ok(present8("No fever at onset. Now high fever and cough", true).includes("fever"));
+  assert.ok(present8("Afebrile on arrival. temp 38.4 at night", true).includes("fever"), "a measured 38.4 is fever");
+  assert.ok(!present8("no fever, no cough", true).includes("fever"), "every mention negated stays absent");
+  assert.ok(read8("no fever, no cough", true).absent.includes("fever"));
+});
+
+test("'not responding / no improvement' describe a course and negate nothing", () => {
+  const t = "Prolonged high fever not responding to antibiotics";
+  assert.ok(!present8(t, false).includes("fever"), "classic: 'not' negated the fever");
+  assert.ok(present8(t, true).includes("fever"));
+  assert.ok(present8("cough with no improvement on inhalers", true).includes("cough"));
+  assert.ok(present8("No improvement, fever and cough", true).includes("cough"), "an idiom head does not start a negated list");
+  assert.ok(present8("fever not settled with paracetamol", true).includes("fever"));
+});
+
+test("recent time is the present illness; 'background of N days of' too", () => {
+  assert.ok(!present8("headache over the past hour", false).includes("headache"), "classic: 'past' made it past history");
+  assert.ok(present8("headache over the past hour", true).includes("headache"));
+  assert.ok(present8("confusion in the last 2 days", true).includes("alteredSensorium"));
+  assert.ok(present8("On a background of 3 days of fever and cough", true).includes("fever"));
+  assert.ok(!present8("past history of cough", true).includes("cough"), "past history stays past");
+  assert.ok(!present8("background of 10 years of cough", true).includes("cough"), "years are background");
+});
+
+test("resolved, stopped, tested or planned is not a current finding", () => {
+  assert.ok(!present8("fever which has since subsided, now cough", true).includes("fever"));
+  assert.ok(!present8("AF, self-discontinued warfarin 6 months ago", true).includes("anticoagulated"));
+  assert.ok(!present8("HIV serology pending", true).includes("immunocompromised"));
+  assert.ok(!present8("HIV non-reactive", true).includes("immunocompromised"));
+  assert.ok(!present8("blood cultures if febrile", true).includes("fever"));
+  assert.ok(present8("fever for 3 days", true).includes("fever"));
+  assert.ok(!present8("No history of ketone-prone diabetes. Serum ketones (bhb) 1.2", true).includes("ketonemia"),
+    "a later lab name with a value is left to the numeric parser");
+});

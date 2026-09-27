@@ -85,6 +85,23 @@
   var PRE_V2 = [[/\bcva\s*(?:angle\s*)?tender(?:ness)?\b/g, "costovertebral angle tenderness"], [/\bcva\s*angle\b/g, "costovertebral angle"]];
   // "a 3-day history of" states the present illness, not past history
   var PRESENT_HX_V2 = /\b(?:\d{1,2}|a|an|one|two|three|four|five|six|seven|eight|nine|ten|few|several)\s*-?\s*(?:d|days?|wks?|weeks?|months?|hours?|hrs?)\s*history\b/;
+  // round 8: "on a background of 3 days of fever" is the present illness too (days/weeks/hours only;
+  // "background of 10 years of diabetes" stays past history)
+  var PRESENT_BG_V2 = /\bbackground of\s*(?:a|an|the)?\s*(?:\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten|few|several|couple of)\s*-?\s*(?:d|days?|wks?|weeks?|hours?|hrs?)\b/;
+  // round 8: "over the past 12 hours", "in the last few days" dates the present illness; "past" there
+  // is not past history. Removed before the temporal cue check.
+  var RECENT_V2 = /\b(?:over|in|during|within|for)?\s*the\s*(?:past|last)\s*(?:\d{1,3}|one|two|three|four|five|six|seven|few|several|couple of)?\s*(?:-\s*)?(?:minutes?|mins?|hours?|hrs?|days?|nights?|weeks?|wks?|months?)\b|\bpast\s*(?:\d{1,3}|few|several|couple of)\s*(?:hours?|hrs?|days?|weeks?)\b/g;
+  // round 8: "not responding to antibiotics", "no improvement" describe a course, they negate nothing
+  var RESOLVED_AFTER_V2 = /^\s*(?:which\s+|that\s+)?(?:has\s+|had\s+|have\s+|was\s+|were\s+)?(?:since\s+|now\s+|then\s+|later\s+|completely\s+|fully\s+|spontaneously\s+)?(?:settled|subsided|resolved|abated|remitted|disappeared|gone|went away)\b/;
+  // round 8: a test named, not a finding: "HIV serology pending / non-reactive", "HIV status unknown"
+  var TEST_AFTER_V2 = /^\s*(?:\d\s*)?(?:serology|status|test(?:ing)?|screen(?:ing)?|antibod(?:y|ies)|antigen|rapid test|elisa|pcr|ab|ag)?\s*(?:is\s+|was\s+|:\s*)?(?:pending|awaited|sent|requested|ordered|unknown|non-?\s?reactive|not reactive)\b/;
+  // round 8: a plan or a condition, not a finding: "blood cultures if febrile", "CXR reserved for hypoxia"
+  var COND_V2 = /\b(?:if|unless|in case of|reserved for|watch for|monitor for|look(?:ing)? for|to exclude)\s+(?:(?:any|new|the|a|an|worsening|persistent|further)\s+)?$/;
+  // round 8: a stopped drug or habit ("self-discontinued warfarin", "stopped alcohol 8 months ago") is past, not current
+  var STOPPED_BEFORE_V2 = /\b(?:discontinued|stopped|stopping|ceased|withheld|held|quit|off)\s+(?:(?:his|her|the|all|regular)\s+)?$/;
+  // round 8: a later mention that is a lab name with its value ("serum ketones (bhb) 1.2") is read by the numeric parser, not here
+  var LAB_VALUE_AFTER_V2 = /^\s*(?:\([^)]{0,30}\)\s*)?(?:level\s*|of\s*|is\s*|was\s*|=|:|-)?\s*\d/;
+  var NEG_IDIOM_V2 = /\b(?:not|no|without)\s+(?:(?:been|yet|fully|much|any)\s+)?(?:responding|responded|response|responsive|improving|improved|improvement|settling|settled|resolving|resolved|resolution|relieved|relief|relieving|subsiding|subsided|better|controlled|reducing|reduced|abating|abated|remitting)\b/g;
   // v2 numeric thresholds (clinical definitions, chosen on the train/dev split: see PLAN-DX-ABX-10.md)
   var LAB_V2 = { lactate: 2, plateletsLow: 150000, creatinineMgDl: 1.5, creatinineUmol: 133 };
   // explicit family-history phrasing only: "mother reports high fever" (a child's note) is the patient's fever
@@ -139,7 +156,7 @@
   function negList(norm, idx) {
     var st = Math.max(norm.lastIndexOf(".", idx - 1), norm.lastIndexOf(";", idx - 1), norm.lastIndexOf(":", idx - 1)) + 1;
     var en = norm.slice(idx).search(/[.,;:]| and | or | nor /), segs = norm.slice(st, en < 0 ? norm.length : idx + en).split(/,| and | or | nor /);
-    if (segs.length < 2 || !/^\s*(?:no|denies|denied|without|nil|negative for|not)\b/.test(segs[0]) || LIST_HEAD_SKIP_V2.test(segs[0])) return false;
+    if (segs.length < 2 || !/^\s*(?:no|denies|denied|without|nil|negative for|not)\b/.test(segs[0]) || LIST_HEAD_SKIP_V2.test(segs[0]) || segs[0].replace(NEG_IDIOM_V2, "") !== segs[0]) return false;
     for (var i = 1; i < segs.length; i++) { var w = segs[i].trim().split(/\s+/).filter(Boolean); if (w.length > 3 || LIST_STOP_V2.test(segs[i])) return false; }
     var rest = norm.slice(idx), se = rest.search(/[.;:]/);
     return !LIST_DUR_V2.test(se < 0 ? rest : rest.slice(0, se));
@@ -156,9 +173,11 @@
     var v2 = nlpV2(ctx), numeric = ctx.numeric || {};
     var norm = normalize(text, v2);
     var byKey = {};  // key → { idx, method, srcText, display }
+    var alts = {};   // v2: key → every mention [{ idx, method, srcText }], read when the first is negated / historical
 
     function consider(key, idx, method, srcText, display) {
       if (!valid[key]) return;
+      if (v2) (alts[key] = alts[key] || []).push({ idx: idx, method: method, srcText: srcText || "" });
       if (byKey[key] && byKey[key].conf >= 0.9) return;
       byKey[key] = { idx: idx, method: method, srcText: srcText || "", display: display || labels[key] || key,
         conf: method === "synonym" ? 0.95 : method === "vitals" ? 0.9 : method === "compound" ? 0.85 : method === "label" ? 0.82 : 0.65 };
@@ -172,7 +191,13 @@
       if (v2 && numeric[key]) return;   // v2: a bare "platelets" / "weight" is a lab name, not a finding
       var hitIdx = -1, hitSrc = "";
       (syn[key] || []).forEach(function (sv) { var i = v2 ? findWord(norm, sv) : norm.indexOf(sv); if (i >= 0 && (hitIdx < 0 || i < hitIdx)) { hitIdx = i; hitSrc = sv; } });
-      if (hitIdx >= 0) { consider(key, hitIdx, "synonym", hitSrc); return; }
+      if (hitIdx >= 0) {
+        consider(key, hitIdx, "synonym", hitSrc);
+        // v2: later mentions of the same finding, so a negated first one does not hide them
+        if (v2) (syn[key] || []).forEach(function (sv) { var from = 0, j, n = 0;
+          while (n++ < 6 && (j = findWord(norm.slice(from), sv)) >= 0) { j += from; if (j !== hitIdx) alts[key].push({ idx: j, method: "synonym", srcText: sv }); from = j + sv.length; } });
+        return;
+      }
       var lab = (labels[key] || "").toLowerCase().replace(/\([^)]*\)/g, " ").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
       if (lab.length >= 5 && lab.length <= 26) { var li = norm.indexOf(" " + lab + " "); if (li < 0) li = norm.indexOf(" " + lab + "s "); if (li >= 0) consider(key, li + 1, "label", lab); }
     });
@@ -255,28 +280,52 @@
 
     // 5) context per match: negation / uncertainty / temporality (clause-scoped)
     var findings = [], present = [], absent = [], redFlags = [];
-    Object.keys(byKey).forEach(function (key) {
+    function readCtx(key, e) {
       // classic scoped a vital's negation to the WHOLE note, so one "no cough" anywhere made every
       // abnormal vital "absent"; v2 scopes it to the vital's own clause like every other finding
-      var e = byKey[key], cl = e.method === "vitals" ? (v2 ? clauseAround(raw, Math.max(0, e.idx)) : raw) : clauseAround(norm, e.idx);
-      var polarity = "present", certainty = "explicit", temporality = "current", req = false;
-      if (hasWord(cl, NEG) || (key === "fever" && hasWord(norm, AFEBRILE))) polarity = "absent";
-      else if (v2 && e.method !== "vitals" && (negList(norm, e.idx) || negAfter(norm, e.idx + (e.srcText || "").length))) polarity = "absent";
-      if (hasWord(cl, EXCLUDE)) { polarity = "uncertain"; certainty = "possible"; req = true; }
-      else if (hasWord(cl, CONSIDER) || cl.indexOf("?") >= 0) { certainty = "possible"; req = true; }
-      if (hasWord(cl, TEMPORAL)) temporality = "historical";
+      var cl = e.method === "vitals" ? (v2 ? clauseAround(raw, Math.max(0, e.idx)) : raw) : clauseAround(norm, e.idx);
+      var r = { polarity: "present", certainty: "explicit", temporality: "current", req: false };
+      if (v2 && e.method !== "vitals") cl = cl.replace(NEG_IDIOM_V2, " ").replace(RECENT_V2, " ");
+      // v2: a measured temperature of 38 or more is fever even if "afebrile" appears elsewhere in the note
+      if (hasWord(cl, NEG) || (key === "fever" && !(v2 && e.method === "vitals") && hasWord(norm, AFEBRILE))) r.polarity = "absent";
+      else if (v2 && e.method !== "vitals" && (negList(norm, e.idx) || negAfter(norm, e.idx + (e.srcText || "").length))) r.polarity = "absent";
+      else if (v2 && e.method !== "vitals" && (TEST_AFTER_V2.test(norm.slice(e.idx + (e.srcText || "").length, e.idx + (e.srcText || "").length + 40)) || COND_V2.test(norm.slice(Math.max(0, e.idx - 40), e.idx)))) r.polarity = "uncertain";
+      if (hasWord(cl, EXCLUDE)) { r.polarity = "uncertain"; r.certainty = "possible"; r.req = true; }
+      else if (hasWord(cl, CONSIDER) || cl.indexOf("?") >= 0) { r.certainty = "possible"; r.req = true; }
+      if (hasWord(cl, TEMPORAL)) r.temporality = "historical";
       // v2: "a 3-day history of fever" is the PRESENT illness; classic read "history of" as past history
       // and dropped everything in that clause
-      if (v2 && temporality === "historical" && PRESENT_HX_V2.test(cl) && !/\b(?:known case of|past|previous|prior|resolved|status post)\b|(?:^|[^-])\bold\b/.test(cl)) temporality = "current";
-      if (v2 && hasWord(cl, FAMILY_V2)) temporality = "family";   // a relative's condition is not the patient's
+      if (v2 && r.temporality === "historical" && (PRESENT_HX_V2.test(cl) || PRESENT_BG_V2.test(cl)) && !/\b(?:known case of|past|previous|prior|resolved|status post)\b|(?:^|[^-])\bold\b/.test(cl)) r.temporality = "current";
+      if (v2 && hasWord(cl, FAMILY_V2)) r.temporality = "family";   // a relative's condition is not the patient's
+      else if (v2 && e.method !== "vitals" && STOPPED_BEFORE_V2.test(norm.slice(Math.max(0, e.idx - 30), e.idx))) r.temporality = "historical";
+      // round 8: "fever settled on day 3" reports a finding that has gone
+      else if (v2 && e.method !== "vitals" && RESOLVED_AFTER_V2.test(norm.slice(e.idx + (e.srcText || "").length, e.idx + (e.srcText || "").length + 40))) r.temporality = "historical";
+      return r;
+    }
+    // engine gets it only if present (or a possible finding to consider) AND either current or a background/chronic condition
+    function engineOkFor(key, r) {
+      return (r.polarity === "present" || (r.polarity === "uncertain" && r.certainty === "possible" && key !== "meningitis")) && (r.temporality !== "historical" || BACKGROUND[key] || (v2 && BACKGROUND_V2[key])) && r.temporality !== "family" && r.polarity !== "absent";
+    }
+    Object.keys(byKey).forEach(function (key) {
+      var e = byKey[key], r = readCtx(key, e);
+      // round 8 (v2): the first mention is not the only one. "Denies fever at home ... temp 39.3" or "no
+      // fever at onset, now high fever": a later clean, current mention wins over a negated or historical first one.
+      if (v2 && !engineOkFor(key, r) && alts[key]) {
+        for (var ai = 0; ai < alts[key].length; ai++) {
+          var alt = alts[key][ai]; if (alt.idx === e.idx && alt.method === e.method) continue;
+          if (alt.method === "synonym" && LAB_VALUE_AFTER_V2.test(norm.slice(alt.idx + alt.srcText.length, alt.idx + alt.srcText.length + 40))) continue;
+          var r2 = readCtx(key, alt);
+          if (r2.polarity === "present" && engineOkFor(key, r2)) { r = r2; e.idx = alt.idx; e.method = alt.method; e.srcText = alt.srcText; break; }
+        }
+      }
+      var polarity = r.polarity, certainty = r.certainty, temporality = r.temporality, req = r.req;
       if (e._fuzzy) req = true;
       var red = !!(RED_FLAG[key] || e._red);
       var f = { canonicalFindingId: key, displayLabel: e.display, polarity: polarity, temporality: temporality,
         certainty: certainty, sourceText: e.srcText, confidence: e.conf, extractionMethod: e.method === "vitals" ? "deterministic" : "deterministic",
         requiresConfirmation: req, clinicalPriority: red ? "red_flag" : "routine" };
       findings.push(f);
-      // engine gets it only if present (or a possible finding to consider) AND either current or a background/chronic condition
-      var engineOk = (polarity === "present" || (polarity === "uncertain" && certainty === "possible" && key !== "meningitis")) && (temporality !== "historical" || BACKGROUND[key] || (v2 && BACKGROUND_V2[key])) && temporality !== "family" && polarity !== "absent";
+      var engineOk = engineOkFor(key, r);
       if (polarity === "absent") absent.push(key);
       else if (engineOk) { present.push(key); if (red) redFlags.push(key); }
     });

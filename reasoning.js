@@ -1808,11 +1808,13 @@
    * in "breathless on exertion" (exertional chest pain), "weakness" (focal deficit), "spo2" in any
    * saturation reading (hypoxia; the numeric parser decides that now). v2 drops those and adds bedside
    * phrasing mined from the TRAIN split of kb/validation (never the test split). Classic table unchanged. */
-  var FT_SYN_DROP_V2 = { diabetesHx: ["dm"], headInjury: ["fall", "fell"], alteredSensorium: ["gcs"], focalNeuroDeficit: ["weakness"],
+  var FT_SYN_DROP_V2 = { diabetesHx: ["dm"], headInjury: ["fall", "fell"], focalNeuroDeficit: ["weakness"],
     exertionalChestPain: ["exertional", "on exertion"], purulentSputum: ["sputum"], hypoxia: ["spo2"], mucocutaneousBleeding: ["bleeding"], alcoholExcess: ["alcohol"],
     // round 2: sweating is not the cholinergic toxidrome, a swollen leg is not a one-sided one, chemo mucositis is not SJS,
     // and neck or abdominal rigidity is not muscle rigidity
-    miosisSecretions: ["diaphoresis", "sweating profusely"], legSwellingUnilateral: ["leg swelling"], mucosalLesions: ["mucositis"], rigidity: ["rigid", "rigidity"] };
+    miosisSecretions: ["diaphoresis", "sweating profusely"], legSwellingUnilateral: ["leg swelling"], mucosalLesions: ["mucositis"], rigidity: ["rigid", "rigidity"],
+    // round 8: "fever not responding to antibiotics" is a treatment failure, not a coma (the R8 table adds the patient-level forms)
+    alteredSensorium: ["gcs", "not responding"] };
   var FT_SYN_ADD_V2 = {
     rigors: ["rigor", "chills", "shivering", "shaking chills"],
     toxicAppearing: ["toxic-looking", "toxic looking", "looks toxic", "looked toxic", "appears toxic", "toxic appearance", "toxic-appearing", "ill-looking", "ill looking",
@@ -1890,10 +1892,30 @@
     legSwellingUnilateral: ["left leg swelling", "right leg swelling", "swollen left leg", "swollen right leg", "left calf swelling", "right calf swelling", "one leg swollen"],
     renalImpairment: ["acute kidney injury", " aki ", " aki,", " aki.", "renal failure", "renal impairment", "raised creatinine", "deranged renal", "kidney injury", "uraemi", "uremi"]
   };
+  // round 8 (2026-09-27): typed-note phrasing mined from the TRAIN split misses (never test). A separate table because
+  // the keys above already exist and a second object literal key would replace, not extend, the list.
+  var FT_SYN_ADD_V2_R8 = {
+    hepatosplenomegaly: ["hepatomegaly", "enlarged liver", "liver enlarged", "palpable liver", "liver palpable", "liver edge palpable"],
+    abdominalPain: ["abdominal ache", "abdominal cramping", "crampy abdominal", "epigastric burning", "epigastric ache", "right upper abdominal ache"],
+    abdominalDiscomfort: ["abdominal cramping", "epigastric discomfort", "quadrant discomfort", "generalised discomfort", "generalized discomfort", "diffuse discomfort"],
+    oliguria: ["urine output has fallen", "urine output fell", "urine output has dropped", "urine output has decreased", "urine output was reduced",
+      "urine output was noticeably reduced", "poor urine output", "fall in urine output", "drop in urine output", "not passed urine", "minimal urine"],
+    alcoholExcess: ["daily alcohol", "alcohol intake", "alcohol use", "drinks alcohol", "beer intake", "standard drinks",
+      "units of alcohol", "alcohol binge", "continues to drink", "arrack", "toddy"],
+    hospitalizationLast90Days: ["last admission", "previous admission", "after discharge", "since discharge", "ward admission", "hospital-treated"],
+    supplementalOxygen: ["home oxygen", "ltot", "supplemental oxygen", "oxygen requirement", "l o2", "l of oxygen", "litres of oxygen", "liters of oxygen", "l/min oxygen", "l/min o2"],
+    headacheSevere: ["worsening headache", "progressive headache", "progressively worsening headache", "unremitting headache", "severe pounding headache"],
+    myalgiaArthralgia: ["polyarthralgia", "generalised aches", "generalized aches", "generalised myalgia", "generalized myalgia"],
+    behavioralChange: ["agitated", "agitation", "apathetic", "more irritable", "increasingly irritable", "became irritable", "more forgetful"],
+    skinWarmth: ["warm, tender", "warm and tender", "warm, red", "warm and red", "warmer than", "warm, swollen"],
+    alteredSensorium: ["not responding to voice", "not responding to pain", "not responding to painful", "not responding to verbal", "not responding to commands",
+      "not responding to call", "not responding to name", "not responding to us"]
+  };
   var FT_SYN_V2 = (function () {
     var o = {};
     Object.keys(FT_SYN).forEach(function (k) { var drop = FT_SYN_DROP_V2[k] || []; o[k] = FT_SYN[k].filter(function (x) { return drop.indexOf(x) < 0; }); });
     Object.keys(FT_SYN_ADD_V2).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2[k]); });
+    Object.keys(FT_SYN_ADD_V2_R8).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R8[k]); });
     return o;
   })();
   // the extraction context: classic exactly as before; v2 adds the cleaned table and the numeric-field list
