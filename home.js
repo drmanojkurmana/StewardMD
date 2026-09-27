@@ -2087,7 +2087,7 @@
     // Ophthalmós (ophthalmos.js): eye-imaging clinic trainer. ON for all (owner decision 2026-09-27);
     // kill switch smd_ophthalmos="0" or ?ophthalmos=0. Images load from R2 (ophthalmos-img.stewardmd.in);
     // content is ai_drafted, so every screen carries a "To be verified · draft" mark until sign-off.
-    { act: "ophthalmos", ic: "eye", tt: "Ophthalmós", sub: "Eye imaging clinic",
+    { act: "ophthalmos", ic: "eye", anim: "ophthalmos", tt: "Ophthalmós", sub: "Eye imaging clinic",
       eligible: function () { try { var q = (location.search.match(/[?&]ophthalmos=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_ophthalmos") !== "0"; } catch (e) { return true; } } },
     { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
     // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).
@@ -2235,6 +2235,20 @@
     ecg: '<svg class="ai-anim ai-ecg" viewBox="0 0 48 24"><path d="M0 12 H11 l2.5 -8 3 16 2.5 -8 H27 l2.5 -7 3 14 2.5 -7 H48"/></svg>',
     derm: '<img class="ai-brandmark ai-sknx-img" src="/sknx-mark.png?v=sx2" alt="SknX AI" width="38" height="38">',
     cxr: '<svg class="ai-anim ai-cxr" viewBox="0 0 24 24"><path d="M12 4v9"/><path d="M12 8c-1-2-3.2-2.4-4.6-1.3C6 8 5 10.2 5 13.2A2.9 2.9 0 0 0 10.8 14"/><path d="M12 8c1-2 3.2-2.4 4.6-1.3C18 8 19 10.2 19 13.2A2.9 2.9 0 0 1 13.2 14"/><rect class="beam" x="2" y="3" width="3.4" height="18"/></svg>',
+    // Ophthalmós (owner, 2026-09-27: "an eye closing and opening"). An almond eye with a gradient iris,
+    // pupil, catchlight and upper lashes; it blinks shut into a real closed-eye arc with lashes (not a
+    // squashed eye), glances left and right, and the pupil tightens like a light reflex.
+    // Motion in redesign-system.css (.ai-ox); static open eye under reduced motion.
+    ophthalmos: '<svg class="ai-anim ai-ox" viewBox="0 0 32 32" aria-hidden="true"><defs>' +
+      '<radialGradient id="oxIris" cx="42%" cy="38%" r="62%"><stop offset="0" stop-color="#c9fff3"/><stop offset=".5" stop-color="#43c4a8"/><stop offset="1" stop-color="#0b5a4c"/></radialGradient>' +
+      '<clipPath id="oxClip"><path d="M3 16C8 7.4 24 7.4 29 16C24 24.6 8 24.6 3 16Z"/></clipPath></defs>' +
+      '<g class="ox-open"><path d="M3 16C8 7.4 24 7.4 29 16C24 24.6 8 24.6 3 16Z" fill="rgba(255,255,255,.13)" stroke="none"/>' +
+      '<g clip-path="url(#oxClip)"><g class="ox-look"><circle cx="16" cy="16" r="6.3" fill="url(#oxIris)" stroke="none"/>' +
+      '<circle class="ox-pupil" cx="16" cy="16" r="2.7" fill="#04201b" stroke="none"/><circle cx="18" cy="13.8" r="1.35" fill="#fff" stroke="none"/></g></g>' +
+      '<path class="ox-rim" d="M3 16C8 7.4 24 7.4 29 16C24 24.6 8 24.6 3 16Z"/>' +
+      '<g stroke-linecap="round"><path fill="none" stroke-width="1.9" d="M9.2 10.7 7.7 8.3"/><path fill="none" stroke-width="1.9" d="M16 9.1V6.4"/><path fill="none" stroke-width="1.9" d="M22.8 10.7 24.3 8.3"/></g></g>' +
+      '<g class="ox-shut" fill="none" stroke-linecap="round"><path d="M3.4 15.2C9 20.6 23 20.6 28.6 15.2"/>' +
+      '<path fill="none" stroke-width="1.9" d="M9.2 18.7 7.9 21.2"/><path fill="none" stroke-width="1.9" d="M16 19.8V22.5"/><path fill="none" stroke-width="1.9" d="M22.8 18.7 24.1 21.2"/></g></svg>',
     oncotree: '<svg class="ai-anim ai-oncotree" viewBox="0 0 24 24"><path class="branch" d="M12 5v4M12 9c0 0-5 1-5 6M12 9c0 0 5 1 5 6"/><circle class="n n0" cx="12" cy="4.5" r="1.9"/><circle class="n n1" cx="7" cy="16" r="1.9"/><circle class="n n2" cx="17" cy="16" r="1.9"/></svg>',
     // Brand marks share .ai-brandmark: ONE optical box in CSS, rather than the 48/38/34px inline
     // sizes these carried, which made three logos sitting side by side three different weights.

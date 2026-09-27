@@ -45,6 +45,7 @@ try {
   const still = r.filter(t => !t.moving && !t.locked);
   ok(r.length >= 6 && still.length === 0, `every unlocked Clinical Tools icon moves (${r.length} tiles; still: ${JSON.stringify(still.map(t => t.a))})`);
   ok(new Set(r.filter(t => t.live).map(t => t.name)).size >= 3, 'the motions differ by kind of tool: ' + [...new Set(r.filter(t => t.live).map(t => t.name))].join(', '));
+  ok(await ev(`(()=>{const t=document.querySelector('#rnavToolsGrid .rnav-tile[data-act="ophthalmos"]');if(!t)return 'absent';const o=t.querySelector('.ai-ox .ox-open'),c=t.querySelector('.ai-ox .ox-shut'),p=t.querySelector('.ai-ox .ox-pupil');return !!o&&!!c&&getComputedStyle(o).animationName==='oxLid'&&getComputedStyle(c).animationName==='oxShut'&&getComputedStyle(p).animationName==='oxPupil'})()`) === true, 'Ophthalmos: an eye that blinks shut into a closed-eye arc, glances and constricts its pupil');
   ok(await ev(`(()=>{const b=document.querySelector('#rnavToolsGrid .rnav-tile[data-act="surgx"] .rnav-badge');if(!b)return 'absent';const a=getComputedStyle(b,'::after'),i=getComputedStyle(b.querySelector('.ai-surgx-img'));return a.animationName==='surgxGlint'&&/surgx-logo/.test(a.maskImage||a.webkitMaskImage)&&i.animationName==='surgxEdge'})()`) === true, 'SURGX shines like a knife: a glint clipped to the blade, and the edge lights up');
   const delays = await ev(`[...document.querySelectorAll('#rnavToolsGrid .ai-live')].map(e=>getComputedStyle(e).animationDelay)`);
   ok(new Set(delays).size > 1, 'tiles are staggered, not in unison');
