@@ -7,11 +7,11 @@ on:
   pull_request:
     branches: [main]
     paths: ['reasoning.js', 'app.js', 'clinical-nlp.js', 'clinical-vocab.js', 'dxmgmt.js', 'opd-emr.js', 'abx-wizard.js',
-      'kb/dist/**', 'kb/validation/**', 'test/run-dx-audit.mjs', 'test/run-gate-v2.mjs', 'test/run-rank-v3.mjs', 'test/run-kb-v2.mjs', 'test/run-calib.mjs', 'test/run-prior.mjs', 'test/dx-heldout.json', 'test/dx-heldout-2.json', 'sw.js', 'index.html', '.github/workflows/dx-accuracy.yml']
+      'kb/dist/**', 'kb/validation/**', 'test/run-dx-audit.mjs', 'test/run-gate-v2.mjs', 'test/run-rank-v3.mjs', 'test/run-kb-v2.mjs', 'test/run-calib.mjs', 'test/run-prior.mjs', 'test/run-dx-ask.mjs', 'test/dx-heldout.json', 'test/dx-heldout-2.json', 'sw.js', 'index.html', '.github/workflows/dx-accuracy.yml']
   push:
     branches: [main]
     paths: ['reasoning.js', 'app.js', 'clinical-nlp.js', 'clinical-vocab.js', 'dxmgmt.js', 'opd-emr.js', 'abx-wizard.js',
-      'kb/dist/**', 'kb/validation/**', 'test/run-dx-audit.mjs', 'test/run-gate-v2.mjs', 'test/run-rank-v3.mjs', 'test/run-kb-v2.mjs', 'test/run-calib.mjs', 'test/run-prior.mjs', 'test/dx-heldout.json', 'test/dx-heldout-2.json', 'sw.js', 'index.html', '.github/workflows/dx-accuracy.yml']
+      'kb/dist/**', 'kb/validation/**', 'test/run-dx-audit.mjs', 'test/run-gate-v2.mjs', 'test/run-rank-v3.mjs', 'test/run-kb-v2.mjs', 'test/run-calib.mjs', 'test/run-prior.mjs', 'test/run-dx-ask.mjs', 'test/dx-heldout.json', 'test/dx-heldout-2.json', 'sw.js', 'index.html', '.github/workflows/dx-accuracy.yml']
 permissions:
   contents: read
 jobs:
@@ -53,6 +53,8 @@ jobs:
         run: node test/run-kb-v2.mjs
       - name: Not enough information behaviour (engine, red flags, workspace, OPD, wizard)
         run: node test/run-calib.mjs
+      - name: Differentiating questions on Select (smd_dx_ask; engine, panel, purity, phone width)
+        run: node test/run-dx-ask.mjs
       - name: Prevalence prior behaviour (order only, tiers, can't-miss guard, hospital counts)
         run: node test/run-prior.mjs
       - name: Differential ordering v3 behaviour (order only, anchors, disqualifiers, negatives, OPD)

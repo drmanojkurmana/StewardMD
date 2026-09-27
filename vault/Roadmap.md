@@ -208,5 +208,7 @@ Plan: `kb/validation/PLAN-DX-ABX-10.md` (baseline audit `kb/validation/AUDIT-202
 - [ ] Phase 4: calibrated confidence (`smd_calib`). "Not enough information" part built (default OFF, 2026-09-27); calibration map and match-strength bands not started
 - [ ] KB content (`smd_kb_v2`, built default OFF 2026-09-27): clinician review of the hepatobiliary rules; re-key the gold viral / biliary cases with the new findings
 - [ ] Prevalence prior (`smd_prior_v1`, mechanism built default OFF 2026-09-27): needs a hospital's aggregate diagnosis counts to validate
+- [ ] Differentiating questions on Select (`smd_dx_ask`, built default OFF 2026-09-27): owner review of the flow; later the same questions in OPD Ask MaiK
+- [ ] Engine: KB `assoc` carries `not`-clause terms, so an excluded finding raises and "supports" the disease (neck stiffness -> chikungunya 41 -> 56). Fix behind a flag, re-measure floors
 - [ ] Phase 5: one drug resolver with host modifiers, adjudicated regimens (`smd_rx_v2`)
 - [ ] Phase 6: shadow-mode validation + clinician sign-off

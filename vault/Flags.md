@@ -86,10 +86,10 @@ leaving it present:
 - `opd-boot.js`, the bedside mount. Unconfigured it paints an explicitly disabled "not connected to
   a patient record" surface rather than a plausible-looking drug round.
 
-## Clinical Reasoning: `smd_gate_v2`, `smd_nlp_v2`, `smd_rank_v3`, `smd_kb_v2`, `smd_calib`, `smd_prior_v1` OFF, added 2026-09-26/27
+## Clinical Reasoning: `smd_gate_v2`, `smd_nlp_v2`, `smd_rank_v3`, `smd_kb_v2`, `smd_calib`, `smd_prior_v1`, `smd_dx_ask` OFF, added 2026-09-26/27
 
 Not in a registry: read inline like `smd_reason_v2` / `smd_rank_v2` (`reasoning.js` `gateV2()`,
-`clinical-nlp.js` `nlpV2()`, `reasoning.js` `rankV3()` / `kbV2()` / `calibOn()` / `priorOn()`; `?gatev2=1|0` / `?nlpv2=1|0` / `?rankv3=1|0` / `?kbv2=1|0` / `?calib=1|0` / `?prior=1|0` -> localStorage -> OFF). Not in the
+`clinical-nlp.js` `nlpV2()`, `reasoning.js` `rankV3()` / `kbV2()` / `calibOn()` / `priorOn()` / `dxAskOn()`; `?gatev2=1|0` / `?nlpv2=1|0` / `?rankv3=1|0` / `?kbv2=1|0` / `?calib=1|0` / `?prior=1|0` / `?dxask=1|0` -> localStorage -> OFF). Not in the
 2026-08-26 generated count above. CI (`.github/workflows/dx-accuracy.yml`) checks each flag's floors.
 
 | Flag | State | What turning it on does |
@@ -99,6 +99,7 @@ Not in a registry: read inline like `smd_reason_v2` / `smd_rank_v2` (`reasoning.
 | `smd_kb_v2` | OFF | Knowledge-base additions: plain "Fever" satisfies the infection rules written against `feverGU` ("fever with urinary symptoms"); new findings gallstones, dilated CBD, ALT/AST > 1000, cholestatic LFTs, ascitic PMN >= 250 and rules separating cholangitis from viral hepatitis; SBP on ascitic neutrophils. Tapped abx-indicated 156 -> 161. Rules ai_drafted, pending clinician review. |
 | `smd_calib` | OFF | "Not enough information yet" gate class when findings are non-diagnostic (fewer than 3 clinical findings, nothing specific, no red flag): no infection or antibiotic call, next-best findings listed; OPD Ask MaiK gives no provisional dx or treatment. Red flags always get the normal answer. |
 | `smd_prior_v1` | OFF | Prevalence prior, ORDER only (+/-8 rank): ai_drafted ordinal tiers, time-critical diagnoses never pushed down; `localStorage smd_prior_counts` (a hospital's aggregate diagnosis counts, no patient rows) overrides. Cannot be validated on the balanced gold set; needs real case-mix data. |
+| `smd_dx_ask` | OFF | "Select this diagnosis" on a differential card first opens "Is it X?": the closest rivals and the unentered findings that separate them (simulated through the engine), each with Yes / No / Not known and which way a yes points; live verdict with Continue / Switch. Yes adds the finding, No is a pertinent negative. No new clinical rules; best with `smd_kb_v2` (viral hepatitis vs cholangitis needs its findings). The policy card's "Open full stewardship page" is unchanged. |
 | `smd_gate_v2` | OFF | The infection gate reads the app's own "Need antibiotics?" data for the lead infection (viral -> no antibiotics; conditional -> criteria; malaria -> specific therapy), keeps antibiotics with a named reason when a modifier or competing bacterial infection is present, and adds SBP / cirrhosis-GI-bleed rules. Rules are ai_drafted, pending clinician review; owner decision to turn on. See [[Clinical Reasoning]] and `kb/validation/AUDIT-2026-09-26.md`. |
 
 ## Medical Core — master ON (BETA) since 2026-09-26, model half OFF

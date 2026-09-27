@@ -3119,7 +3119,8 @@
       h.addEventListener("click", function () { var id = h.getAttribute("data-id"); S.expanded[id] = !S.expanded[id]; renderColsOnly(); });
     });
     root.querySelectorAll(".dx-select").forEach(function (b) {
-      b.addEventListener("click", function (e) { e.stopPropagation(); selectDx(b.getAttribute("data-sel")); });
+      // a diagnosis card's Select may ask first (smd_dx_ask); the gate card's page button is unchanged
+      b.addEventListener("click", function (e) { e.stopPropagation(); var id = b.getAttribute("data-sel"); if (b.closest && b.closest(".dx-card")) pickDx(id); else selectDx(id); });
     });
     root.querySelectorAll(".dx-tool").forEach(function (b) {
       b.addEventListener("click", function (e) { e.stopPropagation(); runTool(b.getAttribute("data-tool")); });
@@ -3162,7 +3163,8 @@
       h.addEventListener("click", function () { var id = h.getAttribute("data-id"); S.expanded[id] = !S.expanded[id]; renderColsOnly(); });
     });
     root.querySelectorAll(".dx-select").forEach(function (b) {
-      b.addEventListener("click", function (e) { e.stopPropagation(); selectDx(b.getAttribute("data-sel")); });
+      // a diagnosis card's Select may ask first (smd_dx_ask); the gate card's page button is unchanged
+      b.addEventListener("click", function (e) { e.stopPropagation(); var id = b.getAttribute("data-sel"); if (b.closest && b.closest(".dx-card")) pickDx(id); else selectDx(id); });
     });
     root.querySelectorAll(".dx-tool").forEach(function (b) {
       b.addEventListener("click", function (e) { e.stopPropagation(); runTool(b.getAttribute("data-tool")); });
@@ -3213,6 +3215,81 @@
     if (c) c.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
+  // smd_dx_ask: "Select this diagnosis" first asks the questions that separate it from its closest
+  // rivals. Off, or nothing to ask: straight to selectDx, exactly as before.
+  function pickDx(id) {
+    if (dxAskOn()) { try { if (openAsk(id)) return; } catch (e) {} }
+    selectDx(id);
+  }
+  function openAsk(id) {
+    var res = differentiate(id, 6);
+    if (!res || !res.rivals.length || !res.questions.length) return false;
+    S.ask = { target: id, rivals: res.rivals.map(function (r) { return r.id; }), qs: res.questions, ans: {} };
+    renderAsk();
+    return true;
+  }
+  function closeAsk() { S.ask = null; var el = root && root.querySelector("#dxAsk"); if (el) el.classList.remove("on"); }
+  function askAnswer(k, v) {
+    var A = S.ask; if (!A) return;
+    var was = A.ans[k];
+    if (was === v) return;
+    A.ans[k] = v;
+    S.neg = S.neg || {};
+    if (v === "no") S.neg[k] = true; else delete S.neg[k];
+    if (v === "yes") { addFinding(k); }
+    else if (was === "yes" && S.f[k]) { delete S.f[k]; recompute(); }
+    else recompute();
+    renderAsk();
+  }
+  function renderAsk() {
+    var A = S.ask; if (!A || !root) return;
+    var el = root.querySelector("#dxAsk");
+    if (!el) { el = document.createElement("div"); el.id = "dxAsk"; el.className = "dx-mgmt dx-ask"; el.setAttribute("role", "dialog"); el.setAttribute("aria-label", "Differentiating questions"); root.appendChild(el); }
+    var st = askStanding(A.target, A.rivals);
+    if (!st) { closeAsk(); return; }
+    var T = st.target, nAns = Object.keys(A.ans).length;
+    var rivalNames = A.rivals.map(function (id) { var r = st.rows.filter(function (x) { return x.id === id; })[0]; return r ? r.name : null; }).filter(Boolean);
+    var qs = A.qs.map(function (q) {
+      var a = A.ans[q.key] || "";
+      function btn(v, t) { return '<button class="dx-chip" type="button" data-ask="' + q.key + '" data-v="' + v + '" aria-pressed="' + (a === v) + '">' + t + '</button>'; }
+      return '<div class="dx-ask-q' + (a ? " done" : "") + '"><div class="dx-ask-l">' + esc(q.label) + '</div>' +
+        '<div class="dx-ask-h">Yes favours <b>' + esc(q.favoursName) + '</b> over ' + esc(q.against) + '</div>' +
+        '<div class="dx-ask-b">' + btn("yes", "Yes") + btn("no", "No") + btn("unk", "Not known") + '</div></div>';
+    }).join("");
+    var verdict;
+    if (st.leader) verdict = '<div class="dx-ask-v warn" role="status"><b>' + esc(st.leader.name) + '</b> now ranks above ' + esc(T.name) + ' (by ' + (-st.leader.gap) + '). Reconsider before committing.</div>';
+    else if (st.rows.length) verdict = '<div class="dx-ask-v" role="status"><b>' + esc(T.name) + '</b> still leads: ' + st.rows.slice(0, 3).map(function (r) { return 'ahead of ' + esc(r.name) + ' by ' + r.gap; }).join(", ") + '.</div>';
+    else verdict = '<div class="dx-ask-v" role="status"><b>' + esc(T.name) + '</b> has no close rival left.</div>';
+    var noes = A.qs.filter(function (q) { return A.ans[q.key] === "no"; });
+    var noteNo = noes.length ? '<p class="dx-ask-n">Recorded as absent: ' + noes.map(function (q) { return esc(q.label) + (q.favours !== T.id ? ' (a yes would have favoured ' + esc(q.favoursName) + ')' : ''); }).join("; ") + '.' +
+      (rankV3() ? '' : ' Absent answers are kept as pertinent negatives; they do not change the scores.') + '</p>' : '';
+    var more = nAns >= A.qs.length ? '<button class="dx-chip" type="button" id="dxAskMore">Ask more questions</button>' : '';
+    el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxAskBack" type="button">‹ Back to differential</button></div>' +
+      '<div class="dx-mgmt-body">' +
+        '<div class="dx-mgmt-badge">Before you commit</div>' +
+        '<h2 class="dx-mgmt-name">Is it ' + esc(T.name) + '?</h2>' +
+        '<p>Closest alternatives on the same findings: <b>' + esc(rivalNames.join(", ")) + '</b>. Answer what you know; each question was chosen because its answer moves ' + esc(T.name) + ' against one of them. Verify before answering.</p>' +
+        '<div class="dx-mgmt-sec">Differentiating questions</div>' + qs + more +
+        '<div class="dx-mgmt-sec">Where it stands</div>' + verdict + noteNo +
+        '<div class="dx-ask-go">' +
+          '<button class="dx-select ' + (window.SYNDROMES && SYNDROMES[T.id] ? "inf" : "ni") + '" type="button" data-askgo="' + T.id + '">Continue with ' + esc(T.name) + ' →</button>' +
+          (st.leader ? '<button class="dx-chip" type="button" data-askgo="' + st.leader.id + '">Switch to ' + esc(st.leader.name) + ' →</button>' : '') +
+        '</div>' +
+      '</div>';
+    el.classList.add("on");
+    el.querySelector("#dxAskBack").addEventListener("click", closeAsk);
+    el.querySelectorAll("[data-ask]").forEach(function (b) { b.addEventListener("click", function () { askAnswer(b.getAttribute("data-ask"), b.getAttribute("data-v")); }); });
+    el.querySelectorAll("[data-askgo]").forEach(function (b) { b.addEventListener("click", function () { var id = b.getAttribute("data-askgo"); closeAsk(); selectDx(id); }); });
+    var mb = el.querySelector("#dxAskMore");
+    if (mb) mb.addEventListener("click", function () {
+      var res = differentiate(A.target, 6), have = {};
+      A.qs.forEach(function (q) { have[q.key] = 1; });
+      var add = res ? res.questions.filter(function (q) { return !have[q.key]; }) : [];
+      if (add.length) { A.qs = A.qs.concat(add); renderAsk(); }
+      else { mb.outerHTML = '<p class="dx-ask-n">No further question separates these diagnoses with the findings the knowledge base has.</p>'; }
+    });
+  }
+
   // Management / treatment panel for a NON-INFECTIVE working diagnosis.
   function openMgmt(r) {
     var m = (window.DX_MGMT && window.DX_MGMT[r.id]) || null;
@@ -3244,7 +3321,7 @@
     var bk = el.querySelector("#dxMgmtBack");
     if (bk) bk.addEventListener("click", function () { el.classList.remove("on"); });
   }
-  function closeMgmt() { var el = root && root.querySelector("#dxMgmt"); if (el) el.classList.remove("on"); }
+  function closeMgmt() { var el = root && root.querySelector("#dxMgmt"); if (el) el.classList.remove("on"); closeAsk(); }
 
   // Full searchable disease directory (all 140) — merges the enrichment manifest
   // (every disease) with the live SYNDROMES / DDX_NI so a name lookup always works.
@@ -3537,6 +3614,18 @@
       ".dx-mgmt-ul{margin:0;padding-left:18px}",
       ".dx-mgmt-ul li{font:500 13.5px/1.5 var(--sans);color:var(--slate);margin:4px 0}",
       ".dx-mgmt-src{margin-top:18px;font:600 11.5px var(--sans);color:var(--slate-soft)}",
+      ".dx-ask-q{border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin:8px 0;background:var(--panel)}",
+      ".dx-ask-q.done{opacity:.86}",
+      ".dx-ask-l{font:700 14px var(--sans);color:var(--ink)}",
+      ".dx-ask-h{font:500 12.5px/1.45 var(--sans);color:var(--slate);margin:3px 0 8px}",
+      ".dx-ask-b{display:flex;gap:6px;flex-wrap:wrap}",
+      ".dx-ask-b .dx-chip{min-height:44px;min-width:72px}",
+      ".dx-ask-b .dx-chip[aria-pressed=true]{background:var(--teal-soft);border-color:var(--teal);color:var(--teal)}",
+      ".dx-ask-v{border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:var(--teal-soft);font:500 13.5px/1.5 var(--sans);color:var(--ink)}",
+      ".dx-ask-v.warn{background:var(--yellow-bg);border-color:var(--yellow-line)}",
+      ".dx-ask-n{font:500 12.5px/1.5 var(--sans)!important;color:var(--slate)!important;margin:8px 0 0!important}",
+      ".dx-ask-go{display:flex;flex-direction:column;gap:8px;margin-top:18px}",
+      ".dx-ask-go .dx-chip{min-height:44px}",
       ".dx-chip{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:6px 11px;font:600 12px var(--sans);color:var(--slate);cursor:pointer;transition:all .12s}",
       ".dx-chip:hover{border-color:var(--teal);color:var(--teal)}",
       ".dx-gate{margin:14px 0 8px}",
@@ -3709,8 +3798,8 @@
     var d; try { d = differential(); } catch (e) { d = { inf: [], ni: [] }; }
     S.f = savedF; S.fInf = savedFInf; S._dom = savedDom;   // restore — purity guarantee
     var m = {};
-    d.inf.forEach(function (r) { m[r.id] = { score: r.score, name: r.name, inf: true }; });
-    d.ni.forEach(function (r) { m[r.id] = { score: r.score, name: r.name, inf: false }; });
+    d.inf.forEach(function (r) { m[r.id] = { score: r.score, name: r.name, inf: true, rank: r.rankScore != null ? r.rankScore : r.score }; });
+    d.ni.forEach(function (r) { m[r.id] = { score: r.score, name: r.name, inf: false, rank: r.rankScore != null ? r.rankScore : r.score }; });
     return { map: m, d: d };
   }
   function nextQuestions(limit) {
@@ -3746,6 +3835,126 @@
     });
     out.sort(function (a, b) { return b.value - a.value; });
     return out.slice(0, limit);
+  }
+
+  /* smd_dx_ask (default OFF): differentiating questions before a diagnosis is selected. ?dxask=1|0.
+   * The doctor picks a diagnosis (e.g. viral hepatitis); the engine names its closest rivals (the
+   * candidates within 25 rank points that explain at least one of the same findings, at most 3) and
+   * the unentered findings that best separate them. Each finding is simulated through the SAME
+   * engine (scoreMapFor, state restored), so a question is only asked when its answer would actually
+   * move the chosen diagnosis against a rival, and the card says which way. No new clinical rules:
+   * the questions are exactly as good as the knowledge base (with smd_kb_v2, gallstones, dilated CBD
+   * and ALT > 1000 separate viral hepatitis from cholangitis). PURE: never changes S. */
+  function dxAskOn() {
+    try {
+      var q = /[?&]dxask=([01])\b/.exec((window.location && location.search) || "");
+      if (q) return q[1] === "1";
+      return localStorage.getItem("smd_dx_ask") === "1";
+    } catch (e) { return false; }
+  }
+  // feverGU is "fever with urinary symptoms" by label but plain fever in the KB rules: never ask it
+  var ASK_SKIP = { age: 1, sex: 1, ageOver50: 1, feverGU: 1 };
+  var ASK_NUMERIC = null;
+  function askable(k) {
+    if (!ASK_NUMERIC) {
+      ASK_NUMERIC = {};
+      (window.FIELD_GROUPS || []).forEach(function (g) { (g.fields || []).forEach(function (fl) { if (fl.type === "number" || fl.type === "select") ASK_NUMERIC[fl.key] = 1; }); });
+    }
+    return !!(k && VALID[k] && LABEL[k] && !ASK_SKIP[k] && !ASK_NUMERIC[k] && !S.f[k] && !(S.neg && S.neg[k]));
+  }
+  function askCandKeys(r) {
+    var keys = (r.missing || []).slice();
+    if (r.inf && r._syn) keys = keys.concat(assocKeys(r._syn));
+    else { var fm = niFind(r.id); for (var k in fm) keys.push(k); }
+    return keys;
+  }
+  function askRk(x) { return x.rankScore != null ? x.rankScore : x.score; }
+  // findings a diagnosis's OWN knowledge names in its favour: KB rule terms outside a "not", score
+  // modifiers that add, or a positive weight. The engine's association list also carries the "not"
+  // terms (chikungunya lists neck stiffness because its rule EXCLUDES it), so "yes favours X" is
+  // only said for a finding in this set.
+  var ASK_POS = {};
+  function askPositive(id, k) {
+    if (!ASK_POS[id]) {
+      var pos = {}, kb = kbDisease(id);
+      var walk = function (n, neg) {
+        if (n == null) return;
+        if (typeof n === "string") { if (!neg) pos[n] = 1; return; }
+        if (n.length != null && typeof n !== "string") { for (var i = 0; i < n.length; i++) walk(n[i], neg); return; }
+        if (n.not != null) walk(n.not, !neg);
+        if (n.allOf) walk(n.allOf, neg);
+        if (n.anyOf) walk(n.anyOf, neg);
+        if (n.key && !neg) pos[n.key] = 1;
+      };
+      if (kb && (kb.rule || kb.score)) {
+        walk(kb.rule, false);
+        ((kb.score && kb.score.modifiers) || []).forEach(function (m) { if (m.add > 0) walk(m.when, false); });
+        if (kb.find) for (var f in kb.find) if (kb.find[f] > 0) pos[f] = 1;
+      } else {
+        var fm = niFind(id), any = false;
+        for (var f2 in fm) { any = true; if (fm[f2] > 0) pos[f2] = 1; }
+        if (!any) pos = null;   // no declarative knowledge to check against: trust the simulation
+      }
+      ASK_POS[id] = pos || { __all: 1 };
+    }
+    return !!(ASK_POS[id].__all || ASK_POS[id][k]);
+  }
+  function askRivals(all, T) {
+    var sup = {}; (T.supporting || []).forEach(function (k) { sup[k] = 1; });
+    return all.filter(function (r) {
+      return r.id !== T.id && r.score > 0 && askRk(r) >= askRk(T) - 25 && (r.supporting || []).some(function (k) { return sup[k]; });
+    }).sort(function (a, b) { return askRk(b) - askRk(a); }).slice(0, 3);
+  }
+  function differentiate(targetId, limit) {
+    buildOntology();
+    limit = limit || 6;
+    var base = scoreMapFor(null), all = base.d.inf.concat(base.d.ni), T = null;
+    all.forEach(function (r) { if (r.id === targetId) T = r; });
+    if (!T) return null;
+    var rivals = askRivals(all, T);
+    var out = { target: { id: T.id, name: T.name, score: T.score },
+      rivals: rivals.map(function (r) { return { id: r.id, name: r.name, score: r.score, gap: Math.round(askRk(T) - askRk(r)) }; }),
+      questions: [] };
+    if (!rivals.length) return out;
+    var seen = {}, keys = [];
+    [T].concat(rivals).forEach(function (r) { askCandKeys(r).forEach(function (k) { if (!seen[k] && askable(k)) { seen[k] = 1; keys.push(k); } }); });
+    var t0 = (base.map[T.id] || {}).rank || 0;
+    keys.forEach(function (k) {
+      var sim = scoreMapFor(k), t1 = (sim.map[T.id] || {}).rank || 0, best = null, sum = 0;
+      rivals.forEach(function (r) {
+        var r0 = (base.map[r.id] || {}).rank || 0, r1 = (sim.map[r.id] || {}).rank || 0;
+        var shift = (t1 - r1) - (t0 - r0);   // > 0: "yes" moves the chosen diagnosis ahead of this rival
+        sum += Math.abs(shift);
+        // "yes favours X" only when a yes RAISES X's own score, not merely lowers the other one (neck
+        // stiffness lowers dengue; it does not favour chikungunya, it points somewhere else). Score,
+        // not rank: the rank's specificity bonus rises with any rare finding.
+        var up = shift > 0 ? ((sim.map[T.id] || {}).score || 0) - T.score : ((sim.map[r.id] || {}).score || 0) - r.score;
+        if (up < 2 || !askPositive(shift > 0 ? T.id : r.id, k)) return;
+        if (!best || Math.abs(shift) > Math.abs(best.shift)) best = { id: r.id, name: r.name, shift: shift };
+      });
+      if (!best || Math.abs(best.shift) < 4) return;
+      var forT = best.shift > 0;
+      out.questions.push({ key: k, label: LABEL[k],
+        favours: forT ? T.id : best.id, favoursName: forT ? T.name : best.name, against: forT ? best.name : T.name,
+        shift: Math.round(Math.abs(best.shift)), value: Math.abs(best.shift) + 0.25 * (sum - Math.abs(best.shift)) });
+    });
+    // lead with the strongest, but keep both directions in view: a question that argues FOR a rival
+    // is the one that rules it in or out
+    out.questions.sort(function (a, b) { return b.value - a.value; });
+    out.questions = out.questions.slice(0, limit);
+    return out;
+  }
+  // where the chosen diagnosis stands now against the rivals it was tested against (and anything
+  // that has overtaken it since)
+  function askStanding(targetId, rivalIds) {
+    var d = differential(), all = d.inf.concat(d.ni), T = null, map = {};
+    all.forEach(function (r) { map[r.id] = r; if (r.id === targetId) T = r; });
+    if (!T) return null;
+    var ids = (rivalIds || []).slice();
+    all.forEach(function (r) { if (r.id !== T.id && askRk(r) > askRk(T) && ids.indexOf(r.id) < 0) ids.push(r.id); });
+    var rows = ids.map(function (id) { var r = map[id]; return r ? { id: id, name: r.name, score: r.score, gap: Math.round(askRk(T) - askRk(r)) } : null; })
+      .filter(Boolean).sort(function (a, b) { return a.gap - b.gap; });
+    return { target: { id: T.id, name: T.name, score: T.score }, rows: rows, leader: rows.length && rows[0].gap < 0 ? rows[0] : null };
   }
 
   /* ---------------------------------------------------------------------- *
@@ -4238,6 +4447,7 @@
 
   window.DX = { open: open, openWorkspace: openWorkspace, close: close, reset: resetAll, importPatient: importPatient, restore: restore, addFindings: addFindings, findingCatalog: findingCatalog, _state: S, _ni: DDX_NI, _differential: differential,
     _nextQuestions: nextQuestions,
+    _differentiate: differentiate, _dxAsk: dxAskOn, _openAsk: openAsk, // smd_dx_ask
     // PURE: free text -> present engine finding keys, using the engine's OWN synonym set (FT_SYN) so
     // callers (e.g. OPD Ask MaiK) get the same rich extraction the reasoning workspace does. No S.f mutation.
     // PURE: free text -> { present, absent } engine keys (absent = explicitly denied in the note)
@@ -4343,6 +4553,18 @@
     },
     // dynamic consultant suggestions = highest-yield next findings given current picks.
     nextFindings: function (limit) { try { return nextQuestions(limit || 6); } catch (e) { return []; } },
+    // PURE: the questions that separate a chosen diagnosis from its closest rivals (smd_dx_ask).
+    // findings: object of present keys (omit to use the live workspace); opts.absent: denied keys.
+    differentiate: function (targetId, findings, opts) {
+      var restore = null, restoreNeg = S.neg, out = null;
+      if (findings && typeof findings === "object") { restore = S.f; S.f = {}; Object.keys(findings).forEach(function (k) { if (findings[k]) S.f[k] = true; }); }
+      if (opts && opts.absent) { S.neg = {}; opts.absent.forEach(function (k) { S.neg[k] = true; }); }
+      else if (restore) S.neg = {};
+      try { out = differentiate(targetId, (opts && opts.limit) || 6); } catch (e) { out = null; }
+      if (restore) S.f = restore;
+      S.neg = restoreNeg;
+      return out;
+    },
     // interface-independent disease search over the KB index (name/synonym/system match) —
     // reused by the ICU "search & select diagnosis". Returns [{id,name,sys,...}].
     search: function (q, limit) { try { return kbSearch(q, limit || 12); } catch (e) { return []; } },

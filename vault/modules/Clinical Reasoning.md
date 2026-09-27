@@ -124,3 +124,24 @@ Results in `kb/validation/AUDIT-2026-09-26.md` (Round 4).
   sufficiency); gold viral cases need re-keying with the new findings; the prior needs real
   case-mix counts.
 
+## Differentiating questions on Select (`smd_dx_ask`, default OFF, 2026-09-27)
+
+`reasoning.js` `differentiate(targetId)` (next to `nextQuestions`), `askStanding()`, `pickDx()` /
+`openAsk()` / `renderAsk()` / `askAnswer()`; pure API `SMD_REASON.differentiate(id, findings?,
+{absent, limit})`; `DX._differentiate`. Rivals: candidates within 25 rank points of the chosen
+diagnosis that share a supporting finding (max 3). Questions: the rivals' and target's missing /
+associated keys, each simulated with `scoreMapFor` (state restored); kept when the answer moves the
+target-vs-rival gap by 4+ AND raises the favoured diagnosis's own score AND the favoured diagnosis's
+knowledge names the finding positively (`askPositive`). Never asks age/sex, number/select fields or
+`feverGU`. Panel reuses the `.dx-mgmt` overlay as `#dxAsk`; `closeMgmt()` also closes it.
+
+- **Gotcha**: only buttons inside `.dx-card` go through `pickDx`. The policy card's "Open full
+  stewardship page" also has class `dx-select` and was already wired twice (its own handler plus the
+  column-wide `.dx-select` loop); a panel opened from it would appear after the page had left.
+- **Engine defect found (not fixed, changes scores)**: a KB disease's `assoc` includes the terms of
+  its `not` clauses (chikungunya, scrub typhus and dengue list neck stiffness because their rules
+  EXCLUDE it). An unmatched syndrome's relevance score counts every present assoc key, so neck
+  stiffness raises chikungunya 41 -> 56 and shows as "supporting", and "missing / would help" can
+  suggest it. `askPositive` keeps it out of the questions; the scoring fix belongs behind a flag with
+  re-measured floors.
+- Test `test/run-dx-ask.mjs` (CI).
