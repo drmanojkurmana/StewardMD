@@ -4,8 +4,25 @@ import assert from "node:assert/strict";
 import {
   org, department, opd, room, membership, thresholds, roomStatus, resolveRoomDoctor,
   isOwnerOfOrg, canAccessOrg, roleInOrg, withinScope, authorizeOrgAccess, ROOM_ASSIGN_MODES,
-  normDocId, roomForActor, ward, bed, BED_STATES
+  normDocId, roomForActor, ward, bed, BED_STATES, clinicPhone
 } from "../functions/_opd_org.js";
+
+test("clinicPhone: the clinic's own number for patient SMS - mobile, landline with STD code, toll-free; nothing else", () => {
+  assert.deepEqual(clinicPhone("98765 43210"), { ok: true, value: "9876543210" });
+  assert.deepEqual(clinicPhone("+91-98765-43210"), { ok: true, value: "9876543210" });
+  assert.deepEqual(clinicPhone("919876543210"), { ok: true, value: "9876543210" });
+  assert.deepEqual(clinicPhone("(040) 2345 6789"), { ok: true, value: "04023456789" });
+  assert.deepEqual(clinicPhone("1800 123 4567"), { ok: true, value: "18001234567" });
+  assert.deepEqual(clinicPhone(""), { ok: true, value: "" }, "empty clears it");
+  assert.deepEqual(clinicPhone(null), { ok: true, value: "" });
+  assert.deepEqual(clinicPhone("1860 500 1666"), { ok: true, value: "18605001666" });
+  assert.deepEqual(clinicPhone("+91 040 2345 6789"), { ok: true, value: "04023456789" });
+  assert.deepEqual(clinicPhone("9123456789"), { ok: true, value: "9123456789" }, "a mobile that starts 91 is not a country code");
+  for (const bad of ["123", "98765", "+1 415 555 0123", "reception", "987654321012", "9876543210x",
+    "1234567890", "5876543210", "12345678901", "4023456789", "910123456789"]) assert.equal(clinicPhone(bad).ok, false, bad);
+  assert.equal(org({ id: "o1", phone: "9876543210" }).phone, "9876543210", "the org whitelist keeps it");
+  assert.equal(org({ id: "o1" }).phone, "", "absent on every existing clinic: no SMS until it is set");
+});
 
 test("org: mode/connector; native default; thresholds normalised", () => {
   const o = org({ id: "org1", name: "GIMSR", mode: "connect", connectorId: "ghis", ownerUid: "u1" });

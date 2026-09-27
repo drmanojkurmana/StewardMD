@@ -77,12 +77,14 @@ function queueChannel(env) {
 }
 /* SMS can only say what an approved DLT template says (functions/_followcare_sms.js DLT), so an SMS is built
  * from its template, never from the WhatsApp body. "Patient", never the name (owner 2026-09-27: PHI); the
- * token, position and everything else are on the linked live page. registered and ahead2 have a template;
- * every other event goes by WhatsApp only. PURE. null = no SMS for this message. */
-export function smsSpec(event, session, ticket, link, nowMs) {
+ * token, position and everything else are on the linked live page. registered and ahead2 have a template,
+ * and so does the checkout "timeline" link when the clinic has saved its own phone (the template's
+ * "contact us at"); every other event goes by WhatsApp only. PURE. null = no SMS for this message. */
+export function smsSpec(event, session, ticket, link, nowMs, clinicPhone) {
   var dr = String((session && session.doctorName) || "").replace(/^\s*dr\b\.?\s*/i, "").trim();
   if (!dr || /^unassigned$/i.test(dr)) return null;   // the templates say "Dr. <name>"; a pool ticket has no doctor yet
   var at = ticket.department || (session && session.department) || "the clinic";
+  if (event === "timeline") return clinicPhone ? { key: "care_plan", slots: ["Patient", dr, at, clinicPhone, link] } : null;
   var eta = ticket.etaStart ? smsTime(ticket.etaStart) : "";
   if (!eta) return null;
   if (event === "registered") return { key: "appt_confirm", slots: ["Patient", dr, at, smsDate(nowMs), eta, link] };
@@ -136,8 +138,9 @@ async function auditNotify(env, session, ticket, event, res, masked) {
 }
 
 // Send the sealed visit-timeline link to the patient at checkout (channel = FOLLOWCARE_MSG_CHANNEL,
-// WhatsApp for now). Best-effort; skips silently when the ticket has no mobile yet.
-export async function notifyTimeline(env, session, ticket, url) {
+// WhatsApp for now). Best-effort; skips silently when the ticket has no mobile yet. clinicPhone (the clinic's
+// saved number) lets the SMS fallback go as the Care Plan template; without it there is no SMS.
+export async function notifyTimeline(env, session, ticket, url, clinicPhone) {
   var mobile = "";
   try { mobile = await decPHI(env, ticket.encMobile); } catch (e) {}
   if (!mobile) return { skipped: true, reason: "no_phone" };
@@ -145,7 +148,7 @@ export async function notifyTimeline(env, session, ticket, url) {
   var doctor = session.doctorName || "your doctor";
   var body = "Your visit summary from " + doctor + " is ready. View it here (private link, valid 7 days): " + url;
   var res;
-  try { res = await send(env, mobile, body, url); } catch (e) { res = { ok: false, reason: "exception" }; }
+  try { res = await send(env, mobile, body, url, smsSpec("timeline", session, ticket, url, Date.now(), clinicPhone)); } catch (e) { res = { ok: false, reason: "exception" }; }
   await auditNotify(env, session, ticket, "timeline", res, mask(mobile));
   return res;
 }

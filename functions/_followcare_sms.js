@@ -86,8 +86,9 @@ export async function sendTwoFactor(env, to, msg) {
 // ---- Our DLT content templates (Vodafone Idea DLT, header MAIK, approved 2026-09-08) ----
 // The operator drops an SMS whose text does not match the registered template, so each text below is the
 // approved text verbatim and every {#..#} slot must be filled, in order. Only the templates a sender uses are
-// listed; the others (FollowCare care plan / post-visit, needing a callback number) wait for that number.
+// listed. {#cbn#} is the clinic's own phone (org.phone), never a StewardMD number.
 export var DLT = {
+  care_plan: { ctid: "1177178791481113659", text: "Dear {#alp#}, please continue your prescribed care plan from Dr. {#alp#} at {#alp#}. For any questions, contact us at {#cbn#}. Details: {#uro#} -StewardMD" },
   otp: { ctid: "1177178791267832947", text: "Your OTP for login to StewardMD is {#num#}. Valid for {#num#} minutes. Do not share this OTP with anyone. -StewardMD" },
   appt_confirm: { ctid: "1177178791454063563", text: "Dear {#alp#}, your appointment with Dr. {#alp#} at {#alp#} is confirmed for {#alp#} at {#alp#}. View details: {#uro#} -StewardMD" },
   checkin_alert: { ctid: "1177178791462158338", text: "Dear {#alp#}, reminder: your appointment with Dr. {#alp#} at {#alp#} is today at {#alp#}. Please check-in at reception 10 mins prior. Details: {#uro#} -StewardMD" },

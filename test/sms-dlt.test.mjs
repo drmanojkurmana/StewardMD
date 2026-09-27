@@ -18,6 +18,13 @@ test("the template texts are the approved DLT texts, verbatim, with their conten
   assert.deepEqual(DLT.checkin_alert, { ctid: "1177178791462158338", text: "Dear {#alp#}, reminder: your appointment with Dr. {#alp#} at {#alp#} is today at {#alp#}. Please check-in at reception 10 mins prior. Details: {#uro#} -StewardMD" });
 });
 
+test("Care Plan - Detailed: verbatim, and its callback slot is filled like any other", () => {
+  assert.deepEqual(DLT.care_plan, { ctid: "1177178791481113659", text: "Dear {#alp#}, please continue your prescribed care plan from Dr. {#alp#} at {#alp#}. For any questions, contact us at {#cbn#}. Details: {#uro#} -StewardMD" });
+  assert.equal(dltText("care_plan", ["Patient", "Rao", "Cardiology", "04023456789", "L"]),
+    "Dear Patient, please continue your prescribed care plan from Dr. Rao at Cardiology. For any questions, contact us at 04023456789. Details: L -StewardMD");
+  assert.equal(dltText("care_plan", ["Patient", "Rao", "Cardiology", "", "L"]), "", "no clinic number: no message");
+});
+
 test("dltText fills every slot in order", () => {
   assert.equal(dltText("otp", ["123456", "10"]), "Your OTP for login to StewardMD is 123456. Valid for 10 minutes. Do not share this OTP with anyone. -StewardMD");
   assert.equal(dltText("appt_confirm", ["Patient", "Rao", "Cardiology", "27.9.2026", "11.40am", "https://stewardmd.in/queue?t=x"]),

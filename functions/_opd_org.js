@@ -148,7 +148,7 @@ export function org(o = {}) {
    * was created without this field and is an Indian one, so not a single record changes meaning.
    * What it actually implies lives in functions/_region.js and nowhere else. */
   const REGION = String(o.region || "").toUpperCase() === "US" ? "US" : "IN";
-  return { id: s(o.id), code: s(o.code), name: s(o.name), doctorName: s(o.doctorName),
+  return { id: s(o.id), code: s(o.code), name: s(o.name), doctorName: s(o.doctorName), phone: s(o.phone),
            opdBillingMode: o.opdBillingMode === "doctor_first" ? "doctor_first" : "pay_first",
            defaultConsultationFee: Math.max(0, Math.round(Number(o.defaultConsultationFee) || 0)),
            kind: o.kind === "institution" ? "institution" : "clinic", region: REGION,
@@ -157,6 +157,18 @@ export function org(o = {}) {
            /* Country-specific identifiers (India: GSTIN, HFR facility id). Shaped by the region adapter,
             * which returns {} for any other region, so the core model never names a national field. */
            regionProfile: orgProfile(o.regionProfile, REGION), createdAt: Number(o.createdAt) || 0 };
+}
+
+/* The number a patient calls, printed in SMS as the DLT callback number (the {#cbn#} slot of "contact us
+ * at ..."). Owner 2026-09-27: each clinic's own number, never a StewardMD one, because a patient whose
+ * symptoms worsen will call it. India only (DLT is Indian): a 10-digit mobile (6-9 first), a landline with
+ * its 0 STD code (11 digits), or an 1800 / 1860 number; +91 / 91 in front is dropped. "" clears it. PURE. */
+export function clinicPhone(raw) {
+  let d = String(raw == null ? "" : raw).replace(/[\s\-().]/g, "");
+  if (!d) return { ok: true, value: "" };
+  d = d.replace(/^\+91/, "");
+  if (/^91[6-9]\d{9}$/.test(d)) d = d.slice(2);
+  return /^(?:[6-9]\d{9}|0\d{10}|18[06]0\d{7})$/.test(d) ? { ok: true, value: d } : { ok: false };
 }
 
 /* Sign-in policy for the hospital's staff accounts. Top-level, not inside wardsynq, because it governs
