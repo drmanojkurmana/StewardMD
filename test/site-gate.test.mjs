@@ -1,5 +1,5 @@
 // test/site-gate.test.mjs — the web-app kill: browsers get marketing/legal/FollowCare only; the app is
-// never served or downloadable in a browser; /api + native are untouched; preview + SITE_ALLOW_WEB escape hatches.
+// never served or downloadable in a browser; /api + native are untouched; previews are gated like production; SITE_ALLOW_WEB escape hatch.
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { onRequest } from "../functions/_middleware.js";
@@ -82,8 +82,22 @@ test("FollowCare portal + its assets + vendor libs + legal pages still served", 
   assert.equal(await text(await onRequest(ctx("/delete-account", { doc: true }))), APP);
 });
 
-test("preview deployment (<hash>.stewardmd.pages.dev) still serves the real app for owner testing", async () => {
-  assert.equal(await text(await onRequest(ctx("/home.js", { host: "abc123.stewardmd.pages.dev" }))), APP);
+test("preview deployments are gated exactly like stewardmd.in: no web app in a browser (owner, 2026-09-27)", async () => {
+  // StewardMD is native-only. A branch/PR preview used to serve the real app with no gate; it must not.
+  for (const host of ["abc123.stewardmd.pages.dev", "claude-some-branch.stewardmd.pages.dev"]) {
+    const js = await onRequest(ctx("/home.js", { host }));
+    assert.equal(js.status, 404, host + " must not serve the app bundle");
+    const kb = await onRequest(ctx("/kb/ai/maik-kb.js", { host }));
+    assert.equal(kb.status, 404, host + " must not serve the knowledge base");
+    const root = ctx("/", { host, doc: true });
+    const r = await onRequest(root);
+    assert.deepEqual(root.served, ["/_site/"], host + " root must be the marketing site");
+    assert.match(r.headers.get("x-robots-tag") || "", /noindex/, host + " preview must stay noindex");
+  }
+  // production root stays indexable
+  const prod = ctx("/", { doc: true });
+  const pr = await onRequest(prod);
+  assert.match(pr.headers.get("x-robots-tag") || "", /^index/);
 });
 
 test("emergency valve SITE_ALLOW_WEB=1 restores the web app instantly", async () => {

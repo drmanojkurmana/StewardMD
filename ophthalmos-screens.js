@@ -65,9 +65,30 @@
       '<div class="oph-levelrow"><div class="oph-seg" role="group" aria-label="Level">' + seg + "</div>" +
       '<span class="oph-small">' + esc(st.cfg.levels[lv].sub) + "</span></div>" +
       '<section class="oph-today" aria-label="Today">' + today + "</section>" +
-      '<h2 class="oph-h2">Clinics</h2><ul class="oph-clinics">' + rows + "</ul>" +
+      '<h2 class="oph-h2">Clinics</h2><ul class="oph-clinics">' + rows + "</ul>" + fundxRow() +
       '<p class="oph-note">Beta: teaching points and plans await review by an ophthalmologist. ' +
       '<button class="oph-link" data-act="sources">Images and sources</button></p></div>');
+  }
+
+  // FundX AI (the host's smartphone fundus module) behind the host's access-code gate
+  // (SMD_XACCESS: one code, one device, server-verified). No row without both, so it never opens ungated.
+  function fundxRow() {
+    var X = G.SMD_XACCESS;
+    if (!(X && X.gate && G.FUNDX)) return "";
+    var on = false; try { on = !!(X.isActiveCached && X.isActiveCached("fundx")); } catch (e) {}
+    return '<h2 class="oph-h2">Your own images</h2><ul class="oph-clinics"><li><button class="oph-clinic" data-act="fundx">' +
+      '<span class="oph-strip" aria-hidden="true"><span class="oph-tile">' + ico("eye") + "</span></span>" +
+      '<span class="oph-clinic-b"><b>FundX AI</b><span>Fundus capture, AI read</span><span class="oph-small">' +
+      (on ? "Unlocked on this device" : '<span class="oph-pro">' + ico("lock") + "Access code</span>") + "</span></span>" +
+      '<span class="oph-chev" aria-hidden="true">' + ico("chev") + "</span></button></li></ul>";
+  }
+  // Same path as the Home tile (home.js retinalscan). Ophthalmós closes first: the access gate and the
+  // FundX overlay are host layers, and swipe-back checks Ophthalmós before FundX.
+  function openFundx() {
+    var X = G.SMD_XACCESS;
+    if (!(X && X.gate)) return;
+    O.close();
+    X.gate("fundx", function () { try { G.localStorage.setItem("smd_fundx", "1"); } catch (e) {} if (G.FUNDX && G.FUNDX.open) G.FUNDX.open(); });
   }
 
   function casesWorked() {
@@ -348,6 +369,7 @@
   A.today = startToday;
   A.clinic = function (b) { startClinic(b.getAttribute("data-t")); };
   A.cases = startCases;
+  A.fundx = openFundx;
   A.ans = function (b) { answer(b.getAttribute("data-id"), false); };
   A.next = next;
   A.skip = function () {

@@ -13,7 +13,9 @@
  */
 import { fsQuery, wUpdate, fsCommit } from "./_fbfirestore.js";
 import { getEpisode, decPHI, linkFor, recordDelivery, audit, eraseEpisode } from "./_followcare.js";
-import { sendSms } from "./_followcare_sms.js";
+import { sendSms, sendDlt, dltConfigured } from "./_followcare_sms.js";
+import { getOrg, resolveOrgId, listOrgsForOwner } from "./_opd_org_store.js";
+import { profileName } from "./_pglog_enrol.js";
 import { sendWhatsApp, waConfigured } from "./_followcare_whatsapp.js";
 import Engine from "../followcare-engine.js";
 import Pathways from "../followcare-pathways.js";
@@ -67,7 +69,21 @@ export async function sendCheckinLink(env, ep, kind) {
   if (!phone) return { ok: false, reason: "no_phone" };
   const link = await linkFor(env, ep);
   const body = messageBody("", link, ep.lang || "en", kind || "send");
-  return sendPatientMessage(env, ep, body, { link: link, phone: phone });
+  return sendPatientMessage(env, ep, body, { link: link, phone: phone, dltKey: kind === "reminder_med" ? "care_plan" : "post_visit" });
+}
+// The DLT slots FollowCare has no field for: the doctor (their profile name) and the clinic with its own
+// call-back phone: the OPD clinic the episode's hospital ID names (an SMD code or org id), else the one OPD
+// clinic the doctor owns (never a guess between several). "" when unknown, and sendDlt then sends nothing
+// rather than a message that cannot match its registered text.
+export async function smsContext(env, ep, opts) {
+  let org = null;
+  try {
+    const id = await resolveOrgId(env, ep.hospitalId); org = id ? await getOrg(env, id) : null;
+    if (!org && ep.doctorUid) { const own = await listOrgsForOwner(env, ep.doctorUid); if (own.length === 1) org = own[0]; }
+  } catch (e) {}
+  let doctor = (opts && opts.doctorName) || "";
+  if (!doctor) { try { doctor = await profileName(env, ep.doctorUid); } catch (e) {} }
+  return { doctor: String(doctor || "").replace(/^\s*dr\b\.?\s*/i, "").trim(), place: (org && org.name) || "", phone: (org && org.phone) || "" };
 }
 // Reusable: send ONE PHI-light message to the episode's patient over the configured channel + log delivery.
 // Used by check-in dispatch AND by the Doctor Action Center (comms notifications). `opts` may pre-supply the
@@ -79,9 +95,16 @@ export async function sendPatientMessage(env, ep, body, opts) {
   if (!phone) return { ok: false, reason: "no_phone" };
   const payload = { toE164: phone, body: body, vars: { var1: "Patient", var2: opts.link || "", name: "Patient", link: opts.link || "", text: body } };
   // Channel: WhatsApp when selected + configured, else SMS. Both fail SAFE (skipped) when unconfigured.
+  // SMS on 2Factor goes only as an approved DLT template (Post-Visit Check-in by default, Care Plan when
+  // opts.dltKey says so); with no link it is that template's no-link twin. Other SMS providers keep sendSms.
   const channel = String(env.FOLLOWCARE_MSG_CHANNEL || "sms").toLowerCase();
   let res, ch;
   if (channel === "whatsapp" && waConfigured(env)) { res = await sendWhatsApp(env, payload); ch = "whatsapp"; }
+  else if (dltConfigured(env)) {
+    const c = await smsContext(env, ep, opts);
+    res = await sendDlt(env, phone, opts.dltKey || "post_visit", ["Patient", c.doctor, c.place, c.phone, opts.link || ""]);
+    ch = "sms";
+  }
   else { res = await sendSms(env, payload); ch = "sms"; }
   await recordDelivery(env, {
     episodeId: ep.episodeId, hospitalId: ep.hospitalId, channel: ch,

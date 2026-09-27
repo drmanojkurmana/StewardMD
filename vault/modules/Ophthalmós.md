@@ -6,6 +6,10 @@ picks would have shown, and the plan. FSRS-6 spaced repetition brings each image
 just before it would be forgotten. Interaction modelled the same way as [[RadioAnatome]].
 
 - **Entry points:** Home tile `ophthalmos` (flag-gated, see below) · `OPHTHALMOS.open()`
+- **FundX AI inside Ophthalmós (owner, 2026-09-27):** the hub's "Your own images" row opens
+  [[FundX]] through the same Experimental Access gate as the Home tile
+  (`SMD_XACCESS.gate("fundx", …)`: one code, one device, server-verified). Ophthalmós closes
+  first, so leaving FundX returns Home. The row only renders when `FUNDX` and `SMD_XACCESS` exist.
 - **Files:** `ophthalmos-core.js` (FSRS-6, ported from ts-fsrs 5.4.2, sessions, stats),
   `ophthalmos-data.js` (levels, access, persistence: localStorage `smd_ophthalmos_v1`),
   `ophthalmos-stage.js` (image stage: pinch, double-tap, wheel zoom), `ophthalmos.js`
