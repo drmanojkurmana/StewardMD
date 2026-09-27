@@ -278,6 +278,8 @@
   }
 
   window.SMD_NATIVE = {
+    // Model table (file, sha256, bytes), read-only use: the first-run resource prompt shows sizes.
+    WHISPER_MODELS: WHISPER_MODELS,
     // Write a data: URL to a device-local temp file and return its path, for native calls (the
     // on-device vision model, ML Kit OCR) that read the image file themselves rather than take
     // base64/data-URL bytes over the JS bridge. Caller must removeTempImage() when done.
