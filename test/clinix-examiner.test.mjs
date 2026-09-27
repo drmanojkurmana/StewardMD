@@ -168,11 +168,22 @@ test("unsafe discharge on the investigation turn is also penalized", () => {
 
 /* final scorecard ----------------------------------------------------------- */
 
+/* This used to answer every turn with the same "thorough safe answer with ECG and monitoring" and
+ * expect 100: it pinned the bug where any non-empty text scored 20 per turn. A flawless viva now
+ * has to actually answer each question. */
+const GOOD_ANSWERS = [
+  "JVP elevated 5 cm above the sternal angle, a regular pulse of normal volume, and a resonant percussion note throughout.",
+  "The raised JVP at 5 cm above the sternal angle supports heart failure; a resonant note throughout both lung zones argues against an effusion.",
+  "Handgrip raises afterload so a mitral regurgitation murmur gets louder; Valsalva cuts preload and softens it; inspiration makes right-sided murmurs louder (Carvallo).",
+  "An urgent ECG and chest x-ray, then troponin and an echocardiogram; ST elevation or a new arrhythmia would change management within the hour.",
+  "Watch for hypotension, falling oxygen saturation, a rising respiratory rate, tachycardia or arrhythmia on telemetry, and poor urine output, and escalate early."
+];
+
 test("flawless viva finalizes with honours", () => {
   const s = makeStateWith({});
   const v = Examiner.createVivaSession(s);
   for (let i = 0; i < 5; i++) {
-    Examiner.evaluateAnswer(v, Examiner.getNextQuestion(v, s), "thorough safe answer with ECG and monitoring");
+    Examiner.evaluateAnswer(v, Examiner.getNextQuestion(v, s), GOOD_ANSWERS[i]);
   }
   const card = Examiner.finalizeViva(v);
   assert.equal(card.totalScore, 100);

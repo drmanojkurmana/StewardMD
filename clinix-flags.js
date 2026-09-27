@@ -46,6 +46,14 @@
         "Turned ON by owner decision 2026-08-26: the feature is complete and read through the " +
         "registry, so the default is the only thing that was holding it back."
     },
+    smd_clinix_ai_patient: {
+      type: "bool", def: false, query: "clinixaipatient",
+      desc: "Let MaiK role-play the case patient for a question the script does not match. OFF by " +
+        "default: the documented design is a DETERMINISTIC patient (an unmatched question gets the " +
+        "case fallback plus did-you-mean suggestions, never a generated reply), because a simulated " +
+        "patient that invents a symptom teaches a wrong pattern. It also runs on the doctor's MaiK " +
+        "quota and prompt, not the CliniX bucket. Owner decision needed before turning it on."
+    },
     smd_clinix_haptics: {
       type: "bool", def: true, query: "clinixhaptics",
       desc: "Haptic feedback on lesson turns and answer checks (iOS native only)."
@@ -65,7 +73,7 @@
       desc: "Spoken viva: MaiK speaks the question aloud (native TTS) and the student answers by " +
         "voice (on-device Whisper via SMD_VOICE, same STT already used by MaiK Ask - falls back to " +
         "the device's default on-device recognizer if Whisper is not built for this platform). " +
-        "Off by default; a student opts in per device."
+        "On by default; a student can turn it off per device."
     }
   };
 
@@ -75,7 +83,9 @@
   function rawQuery(alias) {
     if (!alias) return null;
     var m = search().match(new RegExp("[?&]" + alias + "=([^&]+)"));
-    return m ? decodeURIComponent(m[1]) : null;
+    if (!m) return null;
+    // A malformed escape (?clinix=%E0) must not throw out of every isOn()/bool() call.
+    try { return decodeURIComponent(m[1]); } catch (e) { return null; }
   }
 
   function coerce(def, raw) {

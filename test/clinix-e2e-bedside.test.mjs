@@ -40,6 +40,13 @@ function makeBedsideCase() {
   };
 }
 
+const VIVA_ANSWERS = {
+  findings_summary: "Elevated JVP 5 cm above the sternal angle, bibasal fine crackles, pitting pedal oedema, a regular pulse and an S3 gallop.",
+  differential_rationale: "The raised JVP, S3 and bibasal crackles support congestive cardiac failure; a resonant note argues against effusion, and pneumonia or renal failure are the alternatives to exclude.",
+  dynamic_maneuver: "Handgrip raises afterload so a mitral regurgitation murmur gets louder; Valsalva cuts preload and softens it; inspiration makes right-sided murmurs louder (Carvallo); hepatojugular reflux is positive in right heart failure.",
+  investigation_priority: "An urgent ECG and chest x-ray, then troponin, BNP, renal function and electrolytes, and an echocardiogram for ejection fraction.",
+  red_flags_safety: "Watch for hypotension, falling oxygen saturation, a rising respiratory rate, tachycardia or arrhythmia on telemetry, pulmonary oedema and poor urine output, and escalate early."
+};
 const SAFE_ANSWER = "Findings support cardiac failure; urgent ECG and CXR now, continuous monitoring overnight for pulmonary edema and arrhythmia.";
 
 test("complete bedside chain: history to viva to learner profile", () => {
@@ -107,7 +114,9 @@ test("complete bedside chain: history to viva to learner profile", () => {
     const q = Examiner.getNextQuestion(viva, state);
     assert.ok(q, "expected viva question at turn " + i);
     seenTypes.push(q.type);
-    const r = Examiner.evaluateAnswer(viva, q, SAFE_ANSWER);
+    // One answer per question: the examiner now marks content, so repeating a single generic
+    // answer five times no longer earns honours (it used to score 20 per non-empty turn).
+    const r = Examiner.evaluateAnswer(viva, q, VIVA_ANSWERS[q.type] || SAFE_ANSWER);
     assert.equal(r.isSafe, true);
   }
   assert.deepEqual(seenTypes, [

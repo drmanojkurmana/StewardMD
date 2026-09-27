@@ -43,6 +43,7 @@
   function C() { try { return window.SMD_CLINIX_CONTENT || null; } catch (e) { return null; } }
   function M() { try { return window.SMD_CLINIX_MODEL || null; } catch (e) { return null; } }
   function P() { try { return window.SMD_CLINIX_PROGRESS || null; } catch (e) { return null; } }
+  function flag(k) { try { return !!(window.SMD_CLINIX_FLAGS && SMD_CLINIX_FLAGS.bool(k)); } catch (e) { return false; } }
   function readMode() {
     try {
       if (typeof window !== "undefined" && window.localStorage) {
@@ -55,7 +56,7 @@
   /* Pro lock: one system is free (manifest `free: true`), the rest need Pro. Decided at render and at
    * every door (system card, disease/module open, resume), so a stale screen cannot leak content. */
   function isPro() { try { return !!(window.SMD_PRO && SMD_PRO.isProSync && SMD_PRO.isProSync()); } catch (e) { return false; } }
-  function locked(system) { return M() ? M().systemLocked(system, isPro()) : false; }
+  function locked(system) { return M() ? M().systemLocked(system, isPro()) : !(system && system.free === true); }
   function showLocked() {
     try { if (window.SMD_PRO_NOTICE && SMD_PRO_NOTICE.show) { SMD_PRO_NOTICE.show("clinix"); return; } } catch (e) {}
     try { if (window.SMD_PRO && SMD_PRO.openPaywall) { SMD_PRO.openPaywall("clinix"); return; } } catch (e) {}
@@ -160,7 +161,10 @@
   /* A pending-review notice. Never render a short pathway silently: a UI that degrades by omission
    * lies about the data, which is the lesson recorded in the profile-page decision of 2026-08-22. */
   function pendingNotice(avail) {
-    return "";
+    if (!avail || !avail.pending) return "";
+    return '<div class="cx-notice cx-notice--review">' + ic("gpp_maybe") +
+      "<div><b>" + avail.pending + " of " + avail.total + " lessons are awaiting clinical sign-off</b>" +
+      "<span>CliniX shows a lesson to students only after a clinician has approved it.</span></div></div>";
   }
 
   /* ── screen: home ────────────────────────────────────────────────────────── */
@@ -346,11 +350,10 @@
     var b = state.skillsAll;
     if (!b) { host.innerHTML = header("Examination skills", "Learn the technique itself") + skeleton(); return; }
     var groups = C().skillGroups(b);
-    if (!groups.length) groups = C().skillGroups(b, { allowDraft: true });
     var html = header("Examination skills", "Learn the technique, no disease needed");
 
     if (!groups.length) {
-      html += emptyState("school", "Skills library updating", "No skill is available yet.");
+      html += emptyState("gpp_maybe", "Awaiting clinical review", "No skill is approved for students yet.");
       host.innerHTML = html; return;
     }
     var totalIds = [], gi, si;
@@ -405,16 +408,20 @@
   /* Open a skill on its own: no disease, so no emphasis overlay. */
   function openSkillLesson(skillId) {
     var b = state.skillsAll;
-    if (!b) return;
+    if (!b) {
+      // Reached from a presentation before the Skills library was ever opened: load it, then open.
+      C().loadAllSkills(isPro()).then(function (all) {
+        if (!all) { toast("Could not load the skill library"); return; }
+        state.skillsAll = all;
+        openSkillLesson(skillId);
+      });
+      return;
+    }
     state.built = b;
     state.diseaseId = null;
     state.chapterId = null;
     state.skillId = skillId;
     state.turns = C().lessonFor(b, skillId, null);
-    if (!state.turns.length && b && b.skills && b.skills[skillId]) {
-      var M = SMD_CLINIX_MODEL;
-      if (M) state.turns = M.compileLesson(b.skills[skillId], null);
-    }
     state.turnIndex = 0;
     state.answered = {}; state.revealed = {}; state.tutorLog = [];
     state.diaFocus = "both"; state.diaZone = null; state.diaMode = null; state.diaView = "both";
@@ -433,17 +440,13 @@
     var avail = C().availability(b);
     var d = b.disease;
 
-    if (!pathway.length || (avail && avail.visible === 0)) {
-      var M = SMD_CLINIX_MODEL;
-      if (M) pathway = M.buildPathway(d, b.skills, { allowDraft: true });
-    }
-
     var html = header(d.name, d.oneLine);
     html += pendingNotice(avail);
 
-    if (!pathway.length) {
-      html += emptyState("hourglass_top", "Pathway in preparation",
-        "The clinical pathway for " + d.name + " is being updated.");
+    if (!pathway.length || avail.visible === 0) {
+      html += emptyState("gpp_maybe", "Awaiting clinical review",
+        "All " + avail.total + " lessons for " + d.name + " are drafted and cited but not yet signed off by a clinician. " +
+        "Nothing is shown to a student until it is.");
       host.innerHTML = html;
       return;
     }
@@ -460,6 +463,7 @@
     for (var i = 0; i < pathway.length; i++) {
       var c = pathway[i];
       var cComp = P() ? P().competency(c.skillIds) : { mastered: 0, total: c.count };
+      var done = c.count > 0 && cComp.mastered === c.count;
       var emptyChapter = c.empty && (!c.skills || !c.skills.length);
       html += '<li class="cx-rail-item' + (emptyChapter ? " cx-rail-item--empty" : "") + (done ? " cx-rail-item--done" : "") + '">' +
         '<button type="button" class="cx-rail-btn" data-act="cx-chapter" data-id="' + esc(c.id) + '"' + (emptyChapter ? " disabled" : "") + ">" +
@@ -504,10 +508,6 @@
   function renderChapter(host) {
     var b = state.built;
     var pathway = C().pathwayFor(b);
-    if (!pathway.length && b && b.disease && b.skills) {
-      var M = SMD_CLINIX_MODEL;
-      if (M) pathway = M.buildPathway(b.disease, b.skills, { allowDraft: true });
-    }
     var ch = null;
     for (var i = 0; i < pathway.length; i++) if (pathway[i].id === state.chapterId) ch = pathway[i];
     if (!ch) { host.innerHTML = header("Chapter") + emptyState("error", "Chapter not found", "Go back to the pathway."); return; }
@@ -554,7 +554,7 @@
 
   function renderLesson(host) {
     var b = state.built;
-    var sk = C().skill(b, state.skillId) || (b && b.skills && b.skills[state.skillId]);
+    var sk = C().skill(b, state.skillId);
     if (!sk || !state.turns.length) {
       host.innerHTML = header("Lesson") + emptyState("error", "Lesson unavailable", "This skill is not available yet.");
       return;
@@ -597,6 +597,14 @@
     return "Look first";
   }
 
+  function atlasCleared(a) {
+    if (flag("smd_clinix_uncleared_media")) return true;
+    var md = M();
+    if (!md || !a) return false;
+    return md.mediaRenderable({ kind: "image", cleared: a.cleared === true, src: a.src, licence: a.licence, attribution: a.attribution,
+      sourceUrl: a.sourceUrl, commonsVerified: a.commonsVerified === true, ownerProduced: a.ownerProduced === true }, {});
+  }
+
   function showTurn(t) {
     var m = C().media(state.built, t.media);
     // A secondary media turn sits right after the primary one (both up front, before teaching -
@@ -612,6 +620,12 @@
     // 1. Self-authored inline SVG. Always clearable, inherits the theme, and can be interactive.
     if (m.renderable && m.inline && m.diagramId && window.SMD_CLINIX_DIAGRAMS && SMD_CLINIX_DIAGRAMS.has(m.diagramId)) {
       var atlas = (window.SMD_CLINIX_DIAGRAMS.getAtlas && window.SMD_CLINIX_DIAGRAMS.getAtlas(m.diagramId)) || null;
+      // The companion photo is a hosted third-party FILE, not part of the self-authored diagram, so
+      // it passes the same licence gate as any other image (clinix-model.js mediaRenderable). The
+      // atlas entries name PMC / ResearchGate / StatPearls sources but carry no licence record, so
+      // today they are refused and the diagram shows alone. smd_clinix_uncleared_media (authoring
+      // only, never shipped on) previews them.
+      if (atlas && !atlasCleared(atlas)) atlas = null;
       var svg = SMD_CLINIX_DIAGRAMS.render(m.diagramId, {
         focus: state.diaFocus, selected: state.diaZone, mode: state.diaMode, view: state.diaView
       });
@@ -632,11 +646,12 @@
               '<div class="cx-dia-dual-slide cx-dia-dual-slide--atlas">' +
                 '<div class="cx-dia-art-wrap">' +
                   '<img src="' + esc(atlas.src) + '" alt="' + esc(atlas.title) + '" class="cx-dia-art-img" loading="lazy" />' +
-                  '<div class="cx-dia-art-badge"><span class="cx-badge-dot"></span> Verified Bedside Photo</div>' +
+                  '<div class="cx-dia-art-badge"><span class="cx-badge-dot"></span> Clinical photo</div>' +
                 '</div>' +
                 '<div class="cx-dia-art-meta">' +
                   '<div class="cx-dia-art-title">' + esc(atlas.title) + '</div>' +
                   '<div class="cx-dia-art-desc">' + esc(atlas.desc) + '</div>' +
+                  (atlas.attribution ? '<div class="cx-media-src">' + esc(atlas.attribution) + (atlas.licence ? " \u00b7 " + esc(atlas.licence) : "") + '</div>' : "") +
                 '</div>' +
               '</div>' +
               '<div class="cx-dia-dual-slide cx-dia-dual-slide--svg">' +
@@ -969,7 +984,11 @@
     if (!src.length) return "";
     var parts = [];
     for (var i = 0; i < src.length; i++) parts.push(src[i].source + (src[i].locator ? " (" + src[i].locator + ")" : ""));
-    return '<div class="cx-src"><span class="cx-src-badge">Clinical Reference</span> ' +
+    // Every lesson keeps its draft line until a clinician signs it off (vault/modules/CliniX.md).
+    var rs = M() ? M().reviewStatus(sk) : "draft";
+    var draft = rs !== "approved" && rs !== "published";
+    return '<div class="cx-src">' + (draft ? '<span class="cx-src-draft">Draft, pending clinician review</span>'
+      : '<span class="cx-src-badge">Clinician reviewed</span> ') +
       "Source: " + esc(parts.join("; ")) + "</div>";
   }
 
@@ -1565,24 +1584,26 @@
       if (state.caseTaken.asked.indexOf(hit.key) < 0) state.caseTaken.asked.push(hit.key);
       haptic("tap");
       repaint();
-    } else if (flag("smd_clinix_tutor") && window.SMD_CLINIX_TUTOR && SMD_CLINIX_TUTOR.available()) {
+    } else if (flag("smd_clinix_ai_patient") && window.SMD_CLINIX_TUTOR && SMD_CLINIX_TUTOR.available()) {
       var entry = { q: text, a: "Thinking…", pending: true };
+      var taken = state.caseTaken;   // captured: a restarted case must not be credited with this reply
       state.caseLog.push(entry);
       haptic("tap");
       repaint();
       SMD_CLINIX_TUTOR.answerAsPatient(cd, text).then(function (res) {
         entry.pending = false;
+        if (state.caseDef !== cd || state.caseTaken !== taken) return;
         entry.a = (res && res.text) || M().unmatchedReply(cd);
         // If student question matches cues of any uncredited history topic, credit it
         var normQ = M().normalizeAnswer(text);
         var hist = (cd && cd.history) || {};
         for (var k in hist) {
-          if (hist[k] && state.caseTaken.asked.indexOf(k) < 0) {
+          if (hist[k] && taken.asked.indexOf(k) < 0) {
             var cues = hist[k].cues || [];
             for (var ci = 0; ci < cues.length; ci++) {
               var nc = M().normalizeAnswer(cues[ci]);
               if (nc && (" " + normQ + " ").indexOf(" " + nc + " ") >= 0) {
-                state.caseTaken.asked.push(k);
+                taken.asked.push(k);
                 break;
               }
             }
@@ -2149,10 +2170,16 @@
     state.presentationTab = "redflags";
     state.loading = true;
     go("presentation");
-    C().loadPresentation(id).then(function (built) {
+    state.presentationBuilt = null;
+    C().loadPresentation(id, isPro()).then(function (built) {
       if (state.presentationId !== id) return;
-      state.presentationBuilt = built;
       state.loading = false;
+      if (!built) {
+        toast("Could not load this presentation");
+        if (state.stack[state.stack.length - 1] === "presentation") back();
+        return;
+      }
+      state.presentationBuilt = built;
       repaint();
     });
   }
@@ -2167,7 +2194,7 @@
     var layers = p.layers || {};
     var tab = state.presentationTab || "redflags";
 
-    var html = header(p.title, p.subtitle, "cx-presentations");
+    var html = header(p.title, p.subtitle, "cx-back");
 
     // Action banner: Present Case to Consultant
     html += '<div class="cx-sec"><div class="cx-notice" style="background:var(--cx-teach-soft);border:1px solid rgba(29,78,216,.2);margin-bottom:12px;">' +
@@ -2593,7 +2620,7 @@
     var sd = state.scriptData;
     if (!sd) { host.innerHTML = header("Presentation Script") + emptyState("error", "No script available", "Select a case or presentation first."); return; }
 
-    var html = header(sd.title, "Formal spoken presentation for examiners & ward rounds", "cx-presentation");
+    var html = header(sd.title, "Formal spoken presentation for examiners & ward rounds", "cx-back");
 
     html += '<div class="cx-script-bar">' +
       '<button type="button" class="cx-btn cx-btn--primary" style="flex:1;" data-act="cx-script-copy">' + ic("content_copy") + ' Copy Full Script</button>' +
@@ -2812,6 +2839,7 @@
       state.spotterSeconds--;
       if (state.spotterSeconds <= 0) {
         stopSpotterTimer();
+        if (state.stack[state.stack.length - 1] !== "spotter") return;
         if (state.spotterAnswers[state.spotterIndex] == null) {
           state.spotterAnswers[state.spotterIndex] = -1;
           haptic("fail");
@@ -3178,8 +3206,10 @@
     if (!h || !fn) return;
     var prev = 0;
     try { prev = h.scrollTop || 0; } catch (e) {}
+    var typed = keepScroll && key !== "viva" ? snapshotTyped(h, key) : null;
     try {
       fn(h);
+      if (typed) restoreTyped(h, key, typed);
     } catch (e) {
       // Swallowing this silently left a BLANK screen, which reads as "nothing opens" and sent the
       // owner and me hunting in the wrong place. A screen that fails must say so.
@@ -3195,11 +3225,53 @@
     try { h.scrollTop = keepScroll ? prev : 0; } catch (_) {}
   }
 
+  /* A repaint rewrites the whole screen, which replaces every <input>/<textarea> with a fresh empty
+   * one. Anything that repaints while the student is typing (a streamed tutor reply, a MaiK case
+   * reply, the YouTube fallback timer) used to erase what they had typed. The typed text, focus and
+   * caret are carried across a REPAINT of the same step only: the stamp includes the lesson turn and
+   * case phase, so the next question never inherits the previous answer. A value the renderer
+   * itself filled in (from state) always wins. */
+  // Free-typing composers only. State-driven fields (the diagnosis search, the viva answer, the ABG
+  // inputs) are re-rendered from state on purpose and must not be overridden by a stale DOM value.
+  var KEEP_TYPED = { cxAnswer: 1, cxTutorQ: 1, cxCaseQ: 1, cxCaseText: 1 };
+  function typedStamp(key) {
+    return key + "|" + state.turnIndex + "|" + (state.caseDef && state.caseDef.id || "") + "|" + (state.casePhase || "") + "|" + (state.skillId || "");
+  }
+  function snapshotTyped(h, key) {
+    var out = { stamp: typedStamp(key), fields: [] };
+    try {
+      var els = h.querySelectorAll("textarea[id], input[id]");
+      for (var i = 0; i < els.length; i++) {
+        var el = els[i];
+        if (!KEEP_TYPED[el.id]) continue;
+        var foc = document.activeElement === el;
+        if (!el.value && !foc) continue;
+        var f = { id: el.id, value: el.value, focused: foc, a: null, b: null };
+        try { f.a = el.selectionStart; f.b = el.selectionEnd; } catch (e) {}
+        out.fields.push(f);
+      }
+    } catch (e) {}
+    return out.fields.length ? out : null;
+  }
+  function restoreTyped(h, key, snap) {
+    if (!snap || snap.stamp !== typedStamp(key)) return;
+    for (var i = 0; i < snap.fields.length; i++) {
+      var f = snap.fields[i], el = document.getElementById(f.id);
+      if (!el || !h.contains(el)) continue;
+      if (!el.value && f.value) el.value = f.value;
+      if (f.focused) {
+        try { el.focus({ preventScroll: true }); } catch (e) { try { el.focus(); } catch (_) {} }
+        try { if (f.a != null) el.setSelectionRange(f.a, f.b); } catch (e) {}
+      }
+    }
+  }
+
   function go(key) {
     key = String(key || "");
     if (!SCREENS[key]) return;
     stopAudio();
     vivaStopListening();
+    if (key !== "spotter") stopSpotterTimer();
     if (state.stack[state.stack.length - 1] !== key) state.stack.push(key);
     show(key);
   }
@@ -3209,12 +3281,13 @@
   function back() {
     stopTimer();
     stopAudio();
+    stopSpotterTimer();
     if (state.stack.length <= 1) { haptic("light"); closeMod(); return; }
     state.stack.pop();
     show(state.stack[state.stack.length - 1] || "home");
   }
 
-  function closeMod() { stopAudio(); vivaStopListening(); try { if (window.CLINIX && CLINIX.close) CLINIX.close(); } catch (e) {} }
+  function closeMod() { stopAudio(); vivaStopListening(); stopSpotterTimer(); try { if (window.CLINIX && CLINIX.close) CLINIX.close(); } catch (e) {} }
 
   /* Audio must never outlive the screen that started it. A breath sound still playing after the
    * student has moved on is disorienting and reads as a bug. */
@@ -3294,17 +3367,6 @@
   function openLesson(skillId) {
     state.skillId = skillId;
     state.turns = C().lessonFor(state.built, skillId, state.chapterId);
-    if (!state.turns.length && state.built && state.built.skills && state.built.skills[skillId]) {
-      var M = SMD_CLINIX_MODEL;
-      if (M) {
-        var emphasis = null;
-        var chs = (state.built.disease && state.built.disease.chapters) || [];
-        for (var i = 0; i < chs.length; i++) {
-          if (chs[i].id === state.chapterId && chs[i].emphasis) { emphasis = chs[i].emphasis[skillId]; break; }
-        }
-        state.turns = M.compileLesson(state.built.skills[skillId], emphasis);
-      }
-    }
     state.turnIndex = 0;
     state.answered = {};
     state.revealed = {};
@@ -3862,8 +3924,8 @@
         haptic("tap"); return;
       }
       case "cx-watch-sound": {
-        var vid = el.getAttribute("data-vid") || "";
-        var start = parseInt(el.getAttribute("data-start") || "0", 10);
+        var vid = t.getAttribute("data-vid") || "";
+        var start = parseInt(t.getAttribute("data-start") || "0", 10);
         var url = "https://www.youtube.com/watch?v=" + vid + (start ? "&t=" + start + "s" : "");
         openExternal(url);
         haptic("tap"); return;
@@ -4125,7 +4187,6 @@
       }
       case "cx-chief-retry": openChief(); return;
       case "cx-soundlab": haptic("tap"); openSoundLab(); return;
-      case "cx-sound-filter": state.diaMode = id; haptic("tap"); repaint(); return;
     }
   }
 

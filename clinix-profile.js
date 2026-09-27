@@ -18,11 +18,31 @@
     repeatedVivaMistakes: "Viva Knowledge Gaps Under Challenge"
   };
 
+  /* A profile lives in storage for years; without a cap the encounter log grows forever. Only the
+   * last 6 drive adaptive difficulty, so 200 is generous history. */
+  var MAX_ENCOUNTERS = 200;
+
+  function copySkills(src) {
+    var out = {};
+    if (!src || typeof src !== "object") return out;
+    for (var k in src) {
+      if (Object.prototype.hasOwnProperty.call(src, k)) out[k] = Object.assign({}, src[k]);
+    }
+    return out;
+  }
+
+  function copyEncounters(src) {
+    if (!Array.isArray(src)) return [];
+    return src.slice(-MAX_ENCOUNTERS).map(function (e) { return Object.assign({}, e); });
+  }
+
+  /* Copies, never aliases: a caller's stored object must not change behind its back when the
+   * profile records an encounter. */
   function createSkillProfile(existingData) {
     var p = existingData || {};
     return {
       version: 1,
-      skills: p.skills || {},
+      skills: copySkills(p.skills),
       errorTaxonomy: Object.assign({
         missedJVP: 0,
         incorrectMurmur: 0,
@@ -33,7 +53,7 @@
         safetyOmissions: 0,
         repeatedVivaMistakes: 0
       }, p.errorTaxonomy || {}),
-      encounters: p.encounters || [],
+      encounters: copyEncounters(p.encounters),
       adaptiveLevel: p.adaptiveLevel || 1, // 1 to 5
       lastUpdated: p.lastUpdated || Date.now()
     };
@@ -47,6 +67,9 @@
       verdict: encounter.verdict,
       timestamp: Date.now()
     });
+    if (profile.encounters.length > MAX_ENCOUNTERS) {
+      profile.encounters.splice(0, profile.encounters.length - MAX_ENCOUNTERS);
+    }
 
     // Record error taxonomy updates
     var errors = encounter.errors || [];
@@ -119,13 +142,18 @@
 
   function generatePracticePlan(profile) {
     var weaknesses = detectWeaknesses(profile);
+    /* One shape for every branch. `prescription` is the canonical key; `plan` is kept as an alias
+     * because earlier callers and tests read it from the proficient branch. */
     if (!weaknesses.length) {
+      var steps = [
+        { step: 1, type: "case", title: "Comprehensive Multi-system Bedside Challenge", durationMins: 15 }
+      ];
       return {
         status: "proficient",
+        topWeakness: null,
         recommendedDifficulty: profile ? profile.adaptiveLevel : 3,
-        plan: [
-          { type: "case", title: "Comprehensive Multi-system Bedside Challenge", durationMins: 15 }
-        ]
+        prescription: steps,
+        plan: steps
       };
     }
 
@@ -199,9 +227,11 @@
     }
 
     return {
+      status: "remediation",
       topWeakness: topWeakness,
       recommendedDifficulty: profile ? profile.adaptiveLevel : 1,
-      prescription: plan
+      prescription: plan,
+      plan: plan
     };
   }
 
@@ -232,6 +262,7 @@
 
   var API = {
     ERROR_CATEGORIES: ERROR_CATEGORIES,
+    MAX_ENCOUNTERS: MAX_ENCOUNTERS,
     createSkillProfile: createSkillProfile,
     recordEncounter: recordEncounter,
     detectWeaknesses: detectWeaknesses,

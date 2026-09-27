@@ -180,18 +180,29 @@
       signs.push("Pulsatile, tender liver edge");
     }
 
+    /* An S4 is the atrium kicking blood into a STIFF ventricle, which here means the concentric
+     * hypertrophy of a chronic pressure load: a sustained high afterload on a well-filled ventricle
+     * that is not in shock. The same high resistance as the compensatory vasoconstriction of an
+     * empty, shocked circulation (hypovolaemia) builds no hypertrophy and gives no S4. */
+    var hypertrophied = afterload > 135 && contractility >= 90 && preload >= 80 && map >= 65;
+
     if (soundKind === "s1s2_normal") {
       if (preload > 130 && contractility < 80) {
         soundKind = "s3_gallop";
         signs.push("Third heart sound: a volume-loaded, poorly contracting ventricle");
-      } else if (afterload > 135 && contractility >= 90) {
+      } else if (hypertrophied) {
         soundKind = "s4_gallop";
         signs.push("Fourth heart sound: atrial contraction into a stiff, hypertrophied ventricle");
       }
     }
 
     if (jvp >= 8) signs.push("Raised jugular venous pressure at " + jvp + " cm above the sternal angle");
-    if (map < 65) signs.push("Cool peripheries with delayed capillary refill");
+    /* Peripheries follow resistance, not pressure alone. A collapsed SVR with a high output is warm
+     * and bounding even while hypotensive (early sepsis); a low output held up by vasoconstriction
+     * is cold and clammy. */
+    var lowSvr = afterload < 75 && co >= 5;
+    if (lowSvr && (map < 75 || co > 6.5)) signs.push("Warm, flushed peripheries with a bounding pulse: resistance has collapsed");
+    else if (map < 65 || (co < 3.5 && afterload >= 100)) signs.push("Cool peripheries with delayed capillary refill");
     if (pp > 60 && vType !== "ar") signs.push("Wide pulse pressure");
     if (pp < 25) signs.push("Narrow pulse pressure, a low stroke volume sign");
 
@@ -283,6 +294,8 @@
 
   var P50 = 26.6, HILL = 2.7, HILL_K = Math.pow(P50, HILL);   // 7029, not 26600
   var PATM = 760, PH2O = 47, RQ = 0.8, HB = 15;
+  /* Oxygen-induced hypercapnia, tuned so the COPD preset climbs about 8 to 20 mmHg from 24% to 100%. */
+  var O2CO2 = { deadSpace: 0.16, haldane: 0.10, hypoxicGain: 0.18, blunt: 0.5 };
 
   function satFromPo2(po2) { var p = Math.pow(Math.max(0.5, po2), HILL); return p / (p + HILL_K); }
   function po2FromSat(s) { s = clamp(s, 0.005, 0.9995); return P50 * Math.pow(s / (1 - s), 1 / HILL); }
@@ -345,22 +358,36 @@
       /* Raising the gain alone can never take PaCO2 below the apnoeic threshold, so everything that
        * drives ventilation independently of CO2 (wakefulness, hypoxia, distress) is an offset. */
       var hypoxic = pao2 < 60 ? Math.min(8, (60 - pao2) * 0.30) * clamp(drive / 100, 0, 1.5) : 0;
-      var offset = (drive > 100 ? (drive - 100) * 0.07 : 0) + hypoxic;
-      /* Oxygen given to an obstructed chest releases hypoxic pulmonary vasoconstriction and widens
-       * dead space. This, more than any loss of drive, is why those patients retain CO2. */
-      var vdEff = clamp(vd + (raw > 2 && fio2 > 0.24 ? Math.min(0.12, (fio2 - 0.24) * 0.22) : 0), 0.05, 0.88);
+      /* Oxygen given to an obstructed, CO2-retaining chest raises the CO2 by three routes, and every
+       * one of them needs obstruction to show, so a normal lung ignores FiO2 entirely:
+       *   1. V/Q: oxygen releases hypoxic pulmonary vasoconstriction, blood is redirected to poorly
+       *      ventilated units and effective dead space widens. This is the largest share.
+       *   2. Haldane: fully saturated haemoglobin holds less CO2, so the same CO2 load reads as a
+       *      higher arterial tension that a scattered V/Q lung cannot blow off.
+       *   3. Drive: a chronic retainer (buffered, so a raised base excess) leans on hypoxia to
+       *      breathe. Correct the hypoxia and that part of the drive goes with it. */
+      var obstructed = clamp((raw - 2) / 2, 0, 1);
+      var o2Excess = clamp((fio2 - 0.24) / 0.76, 0, 1);
+      var retainer = clamp((be - 3) / 6, 0, 1) * obstructed;
+      /* A chronic retainer's CSF is buffered too, so each mmHg of CO2 moves central pH less and the
+       * chemoreceptors answer a rising CO2 with less extra breathing. */
+      slope *= 1 - O2CO2.blunt * retainer;
+      var retainerHypoxic = retainer * clamp((72 - pao2) * O2CO2.hypoxicGain, 0, 4);
+      var offset = (drive > 100 ? (drive - 100) * 0.07 : 0) + hypoxic + retainerHypoxic;
+      var vdEff = clamp(vd + obstructed * O2CO2.deadSpace * o2Excess, 0.05, 0.88);
+      var vco2Eff = vco2 * (1 + obstructed * O2CO2.haldane * o2Excess);
 
       if (mvFixed !== null) {
         mv = Math.min(mvFixed, mvMax);
         ventLimited = mvFixed > mvMax + 0.05;
         va = Math.max(0.25, mv * (1 - vdEff));
-        paco2 = clamp(0.863 * vco2 / va, 12, 140);
+        paco2 = clamp(0.863 * vco2Eff / va, 12, 140);
       } else {
         /* MV = slope * (PaCO2 - apnoeic) + offset, VA = MV * (1 - VD/VT), PaCO2 = 0.863 VCO2 / VA.
          * One quadratic in PaCO2. */
         var qa = slope * (1 - vdEff);
         var qb = (1 - vdEff) * (offset - slope * apnoeic);
-        var disc = Math.sqrt(qb * qb + 4 * qa * 0.863 * vco2);
+        var disc = Math.sqrt(qb * qb + 4 * qa * 0.863 * vco2Eff);
         paco2 = (-qb + disc) / (2 * qa);
         if (pass > 0) paco2 = 0.45 * prevPaco2 + 0.55 * paco2;
 
@@ -373,13 +400,13 @@
           if (target < paco2) paco2 = target;
         }
         paco2 = clamp(paco2, 12, 140);
-        va = Math.max(0.25, 0.863 * vco2 / paco2);
+        va = Math.max(0.25, 0.863 * vco2Eff / paco2);
         mv = va / (1 - vdEff);
         ventLimited = mv > mvMax + 0.05;
         if (ventLimited) {
           mv = mvMax;
           va = Math.max(0.25, mv * (1 - vdEff));
-          paco2 = clamp(0.863 * vco2 / va, 12, 140);
+          paco2 = clamp(0.863 * vco2Eff / va, 12, 140);
         }
       }
       vdUsed = vdEff;
@@ -403,13 +430,20 @@
       }
       cvFinal = Math.max(0.5, caO2 - avDiff);
 
-      pao2 = clamp(po2FromContent(caO2), 12, 690);
+      /* Arterial blood can never carry a higher tension than the alveolar gas it came from. The old
+       * 12 mmHg floor broke that at near-zero drive (PAO2 of 5) and read as an A-a gradient of 0. */
+      pao2 = Math.min(clamp(po2FromContent(caO2), 1, 690), pAO2);
       sat = satFromPo2(pao2);
     }
 
     var spo2 = clamp(r0(sat * 100), 30, 100);
     var svo2 = clamp(r0(satFromPo2(po2FromContent(cvFinal)) * 100), 10, 99);
     var aaGrad = Math.max(0, r0(pAO2 - pao2));
+    /* End-tidal CO2 is diluted only by ALVEOLAR dead space. The anatomical share (about 0.25 of a
+     * breath) is exhaled first, before the plateau is read, so a healthy adult shows a gap of 2 to 5
+     * mmHg, not 7. */
+    var alvDead = clamp((vdUsed - 0.25) / 0.75, 0, 0.9);
+    var etco2 = paco2 * (1 - alvDead);
     var pf = r0(pao2 / fio2);
 
     /* Pattern. Stiff lungs are splinted into rapid shallow breaths; obstruction is emptied slowly,
@@ -510,7 +544,7 @@
       pAO2: r0(pAO2),
       aaGradient: aaGrad,
       pfRatio: pf,
-      etCO2: r0(paco2 * (1 - vdUsed * 0.6)),
+      etCO2: r0(etco2),
       deadSpaceUsed: r2(vdUsed),
       pH: r2(ph),
       hco3: r1(hco3),
@@ -731,8 +765,8 @@
       params: { preload: 180, afterload: 125, contractility: 32, heartRate: 104, rhythm: "sinus", valve: "none", severity: "none" },
       note: "Raised JVP, third heart sound, low output. Watch the ejection fraction and end-systolic volume as you wind contractility back up." },
     { id: "cv-htn", mode: "cvs", label: "Hypertensive heart",
-      params: { preload: 105, afterload: 175, contractility: 105, heartRate: 70, rhythm: "sinus", valve: "none", severity: "none" },
-      note: "A stiff, pressure-loaded ventricle with a fourth heart sound. The ejection fraction is preserved and the patient is still symptomatic." },
+      params: { preload: 105, afterload: 150, contractility: 145, heartRate: 70, rhythm: "sinus", valve: "none", severity: "none" },
+      note: "A stiff, pressure-loaded ventricle with a fourth heart sound. Concentric hypertrophy raises its end-systolic elastance, so the ejection fraction is preserved and the patient is still symptomatic." },
     { id: "cv-af", mode: "cvs", label: "Fast atrial fibrillation",
       params: { preload: 110, afterload: 85, contractility: 80, heartRate: 150, rhythm: "afib", valve: "none", severity: "none" },
       note: "No atrial kick and no filling time. Compare the ECG and the arterial trace: some beats never reach the wrist." },

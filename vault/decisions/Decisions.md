@@ -10593,3 +10593,20 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   rather than shrinking type or switching to landscape (the native renderer is fixed portrait).
 - **MaiK start card (SMD-16)** promises citations only when the answering engine gives them
   (`SMD_MAIK_ENGINE.knowSub()`), in the same terms as the footer.
+
+## 2026-09-27 CliniX audit fixes (branch claude/clinix-module-audit-d5n7jp)
+- **Review gate fails closed again.** `clinix-content.js gateOpts()` reads `smd_clinix_draft` (default ON,
+  owner release decision unchanged) instead of defaulting to allow when the flags module is missing, and
+  the four screen fallbacks that rebuilt pathways with a hard-coded `allowDraft: true` are gone. Every
+  draft lesson shows "Draft, pending clinician review" again (60d19c27 had replaced it with a
+  "Clinical Reference" badge).
+- **The five presentations are `ai_drafted`, not `approved`.** 978acba3 had self-declared them approved
+  by a "Clinical Review Team" that never reviewed them. They still render (draft flag), with the draft line.
+- **The LLM case patient is behind `smd_clinix_ai_patient`, default OFF.** The Phase 5 design is a
+  deterministic patient; 978acba3 added a generated reply on the doctor's MaiK quota and prompt without a
+  recorded decision. Owner call to turn it on (and it would want a server `clinix-patient` mode first).
+- **Atlas photos (`clinix-diagrams.js ATLAS_IMAGES`, 18 files) pass the licence gate** like any hosted
+  image. They cite PMC / ResearchGate / StatPearls with no licence record, so they are refused today and
+  the diagram shows alone; `smd_clinix_uncleared_media` previews them. Clearing them = add licence,
+  attribution and `commonsVerified` / `ownerProduced` per entry.
+- **Mastery counts days with a CORRECT answer** (`okDays`), not days the skill was merely seen.

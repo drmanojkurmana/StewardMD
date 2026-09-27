@@ -164,6 +164,9 @@
     ["any surgery", "surgery"], ["operated before", "surgery"], ["past surgery", "surgery"],
     ["family history", "family history"], ["anyone in your family", "family history"],
     ["runs in the family", "family history"], ["anyone at home", "family contact"],
+    ["anybody at home", "family contact"], ["anyone else at home", "family contact"],
+    ["someone at home", "family contact"], ["somebody at home", "family contact"],
+    ["people at home", "family contact"], ["others at home", "family contact"],
     ["what medicines", "medications"], ["which medicines", "medications"], ["what tablets", "medications"],
     ["any medication", "medications"], ["taking any medicine", "medications"], ["on any drugs", "medications"],
     ["regular medicines", "medications"], ["missed your medicines", "adherence"],
@@ -174,7 +177,10 @@
     ["do you smoke", "smoking"], ["smoking history", "smoking"], ["how many cigarettes", "smoking"],
     ["pack years", "smoking"], ["chew tobacco", "tobacco"], ["gutka", "tobacco"], ["khaini", "tobacco"],
     ["do you drink", "alcohol"], ["alcohol intake", "alcohol"], ["how much do you drink", "alcohol"],
-    ["drinking habit", "alcohol"], ["sharab", "alcohol"],
+    ["drinking habit", "alcohol"], ["sharab", "alcohol"], ["daru", "alcohol"], ["whisky", "alcohol"],
+    ["whiskey", "alcohol"], ["beer", "alcohol"], ["arrack", "alcohol"],
+    // "panic attack" is anxiety, not an infarct or an exacerbation; no shipped case authors it.
+    ["panic attack", "panic"], ["panic attacks", "panic"], ["anxiety attack", "panic"], ["anxiety attacks", "panic"],
     ["what do you do", "occupation"], ["your work", "occupation"], ["your job", "occupation"],
     ["what work do you do", "occupation"], ["what is your work", "occupation"],
     ["line of work", "occupation"], ["where do you work", "occupation"],
@@ -268,7 +274,10 @@
     hospitalization: "admission", admitted: "admission", vaccination: "vaccination",
     vaccinated: "vaccination", immunisation: "vaccination", immunization: "vaccination",
     biomass: "biomass", fuel: "biomass", firewood: "biomass", stove: "biomass",
-    kerosene: "biomass", cooking: "biomass", tuberculosis: "tuberculosis", contact: "contact", history: "history",
+    kerosene: "biomass", cooking: "biomass",
+    // Known words that sit one edit from "stove", so the fuzzy snap must not turn a gallstone or
+    // stone dust into a cooking-fuel exposure.
+    stone: "stone", stones: "stone", stony: "stony", tuberculosis: "tuberculosis", contact: "contact", history: "history",
     past: "past", family: "family", pnd: "pnd", dysuria: "dysuria", nocturia: "nocturia",
     melena: "melena", hematemesis: "hematemesis", hematuria: "hematuria", vertigo: "vertigo",
     dizziness: "dizziness", headache: "headache", fatigue: "fatigue", fever: "fever",
@@ -323,8 +332,11 @@
 
   // Ownership words: their presence means the question is about somebody OTHER than the patient,
   // so a habit topic ("do you smoke") must not win over a family topic ("does your father smoke").
+  // "home" is NOT here: it is a place, not a person. "do you smoke at home" and "what fuel do you use
+  // for cooking at home" are about the patient; the people at home ("anyone at home", "somebody at
+  // home") reach the family through the phrase map. See mentionsOther for the one case it still counts.
   var OTHERS = ["father", "mother", "brother", "sister", "parents", "family", "son", "daughter",
-    "wife", "husband", "relative", "relatives", "anyone", "anybody", "home", "household"];
+    "wife", "husband", "relative", "relatives", "anyone", "anybody", "household"];
 
   // Intent tokens: these describe the SHAPE of the question rather than a symptom. A topic whose
   // cues carry the same intent gets a boost; this is what makes "since when" land on a duration
@@ -348,6 +360,68 @@
       out.push(Object.prototype.hasOwnProperty.call(CONTRACTIONS, t) ? CONTRACTIONS[t] : t);
     }
     return out.join(" ");
+  }
+
+  /* Context pass. Runs after contractions and BEFORE the phrase map, on the plain lowercase sentence.
+   * A handful of everyday words carry a clinical meaning only in a clinical frame, and matched bare
+   * they turned bedside small talk into an answered (and credited) history topic:
+   *   "do you drink tea"                -> alcohol      ("drink" with a non-alcoholic object)
+   *   "sugar in your tea"               -> diabetes     ("sugar" as a food, not the disease)
+   *   "let me start the examination"    -> onset        ("start" as the student's own action)
+   *   "long time no see", "since when are you married" -> duration
+   *   "what do you do for fun"          -> occupation
+   *   "please lie down"                 -> orthopnea    (an instruction, not a question)
+   *   "are you fit"                     -> seizure      (fitness, not a fit)
+   *   "has anyone told you you have diabetes" -> family (the ownership guard saw "anyone")
+   * Each rule rewrites ONLY the non-clinical frame, so "do you drink", "do you drink beer", "do you
+   * have sugar", "when did it start", "since when", "can you lie flat" and "any fits" are untouched.
+   * Authored cues go through the same pass, so cue and question stay comparable. */
+  var SOFT_DRINK = "(?:tea|coffee|chai|water|milk|juice|juices|lassi|buttermilk|chaas|coconut water|" +
+    "nimbu pani|lemonade|soda|coke|pepsi|cold drinks?|soft drinks?|fluids?|liquids?|horlicks|bournvita|" +
+    "squash|sherbet|milkshake|shake|smoothie|soup|green tea|black tea)";
+  var HARD_DRINK = /\b(alcohol|alcoholic|beer|beers|daru|sharab|whisky|whiskey|rum|wine|vodka|gin|brandy|toddy|arrack|liquor|peg|pegs|booze|feni|mahua|hadia|spirits)\b/;
+  var RE_DRINK_SOFT = new RegExp("\\bdrink(?:s|ing)? (?:(?:a|any|some|much|lot of|a lot of|lots of|plenty of|enough) )?" + SOFT_DRINK + "\\b", "g");
+  var RE_SOFT_ANY = new RegExp("\\b" + SOFT_DRINK + "\\b");
+  var RE_SUGAR_FOOD = /\b(tea|coffee|chai|milk|sweet|sweets|spoon|spoons|spoonful|teaspoon|teaspoons|cup|cups|dessert|desserts|cake|biscuit|biscuits|mithai|jaggery|gur|eat|eats|eating|add|adds|added)\b/;
+  var RE_SUGAR_DISEASE = /\b(blood|urine|level|levels|high|low|test|tested|tests|report|check|checked|tablet|tablets|insulin|problem|disease|patient|diabetes|diabetic|control|controlled|reading|readings|fasting)\b/;
+  var RE_MARITAL = /\b(married|marriage|wedding|engaged|divorced|widowed|widower)\b/;
+
+  function contextual(s) {
+    s = " " + s + " ";
+    // drink: a non-alcoholic object makes it a beverage question. "how much water do you drink" keeps
+    // its water (fluid intake) and loses only the verb; an alcoholic word anywhere keeps the verb.
+    if (/\bdrink(s|ing)?\b/.test(s) && !HARD_DRINK.test(s)) {
+      s = s.replace(RE_DRINK_SOFT, " beverage ");
+      if (RE_SOFT_ANY.test(s)) s = s.replace(/\bdrink(s|ing)?\b/g, " ");
+    }
+    // sugar: a food frame with no disease frame is the sweetener. The beverage goes with it, so "sugar
+    // in your tea" cannot fall onto a cue like "tea coloured urine" either.
+    if (/\bsugar\b/.test(s) && RE_SUGAR_FOOD.test(s) && !RE_SUGAR_DISEASE.test(s)) {
+      s = s.replace(/\bsugar\b/g, " sweetener ").replace(/\b(tea|coffee|chai|milk)\b/g, " beverage ");
+    }
+    // start / begin as the student's own action, or with the examination as its object.
+    s = s.replace(/\b(let (?:me|us|s)|i will|i ll|i am going to|i want to|i would like to|we will|we ll|shall (?:i|we)|may i|can i|going to)( now| just)? (?:start|begin|commence)\b/g, " $1$2 ")
+         .replace(/\b(?:start|begin|commence)(?:ing)? (?:the |your |with (?:the |your )?)?(examination|exam|check up|checkup|physical|history|interview)\b/g, " $1 ");
+    // greetings and life events carry duration words without asking about the illness.
+    s = s.replace(/\blong time no see\b/g, " ");
+    if (RE_MARITAL.test(s)) {
+      s = s.replace(/\b(since when|since how long|since how many (?:days|weeks|months|years)|for how long|how long|how many (?:days|weeks|months|years))\b/g, " ")
+           .replace(/\b(since|long|years|months)\b/g, " ");
+    }
+    // "what do you do" means the job, except when it is asked about leisure.
+    s = s.replace(/\bwhat do you do (?:for (?:fun|entertainment|enjoyment|relaxation|pleasure|timepass|a hobby|hobbies)|in (?:your |the )?(?:free|spare|leisure) time|on (?:the )?(?:weekends?|holidays?|sundays?)|to (?:relax|unwind))\b/g, " leisure ");
+    // "please lie down" is an examination instruction, not an orthopnoea question.
+    s = s.replace(/^ ((?:ok |okay |now |so |alright |right |sir |madam )*)(?:please |kindly )(?:now |just )?(?:lie|lay)(?: down| flat| back)?\b/, " $1 ")
+         .replace(/^ ((?:ok |okay |now |so |alright |right )*)(?:lie|lay)(?: down| flat| back)? (please|for me|here|now)\b/, " $1 ")
+         .replace(/\b(?:lie|lay)(?: down| flat| back)? on (?:the |this |that |my )?(?:bed|couch|table|examination table|stretcher|cot)\b/g, " ");
+    // "are you fit" / "fit and fine" / "fit for work" is fitness, not a seizure.
+    s = s.replace(/\b(are you|you are|i am|am i|you look|look|looking|feel|feeling|physically|mentally|medically|keep|keeping|stay|staying|quite|very|fully|fairly|perfectly)( now| still| otherwise)? fit\b/g, " $1$2 ")
+         .replace(/\bfit (?:and|n) (?:fine|healthy|well|strong)\b/g, " ")
+         .replace(/\bfit (for|to)\b/g, " $1 ");
+    // "has anyone / any doctor told you ..." is about the patient: the "anyone" is the informant, not
+    // the subject, so the ownership guard must not read it as a family question.
+    s = s.replace(/\b(?:anyone|anybody|someone|somebody|any doctor|a doctor|the doctor|doctors?)( ever)? (?:told|tell|said|say|informed|inform|mentioned|diagnosed)( to)? you\b/g, " you ");
+    return s.replace(/\s+/g, " ").trim();
   }
 
   // Phrase map, longest first so a longer phrase is never eaten by a shorter one inside it.
@@ -408,7 +482,8 @@
   /* Canonical token list for any text: the shape everything downstream compares.
    * Returns { tokens: [..], set: {tok:1}, raw: "normalised string" }. */
   function canon(text) {
-    var s = applyPhrases(expandContractions(text));
+    var pre = contextual(expandContractions(text));
+    var s = applyPhrases(pre);
     var w = s.split(" "), tokens = [], set = {}, i;
     var WM = wordMap();
     for (i = 0; i < w.length; i++) {
@@ -437,7 +512,7 @@
         if (!Object.prototype.hasOwnProperty.call(set, pt)) { set[pt] = 1; tokens.push(pt); }
       }
     }
-    return { tokens: tokens, set: set, raw: s };
+    return { tokens: tokens, set: set, raw: s, pre: pre };
   }
 
   /* ── 1. fuzzy equality (typos) ──────────────────────────────────────────────────────────── */
@@ -543,6 +618,11 @@
 
   function mentionsOther(q) {
     for (var i = 0; i < OTHERS.length; i++) if (Object.prototype.hasOwnProperty.call(q.set, OTHERS[i])) return true;
+    /* A bare "at home" with no second-person subject ("any smoker at home?") still reads as the
+     * household. With "you" in the sentence it is only where the patient does the thing. Cooking fuel
+     * is a household exposure the patient breathes whoever cooks, so it never counts as someone else. */
+    if (Object.prototype.hasOwnProperty.call(q.set, "home") && !/\byou\b/.test(q.pre)
+        && !Object.prototype.hasOwnProperty.call(q.set, "biomass")) return true;
     return false;
   }
 

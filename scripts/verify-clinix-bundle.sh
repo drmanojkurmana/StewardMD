@@ -20,12 +20,14 @@ echo "CliniX bundle check: $WWW"
 
 for f in clinix.js clinix-flags.js clinix-model.js clinix-content.js clinix-store.js \
          clinix-tutor.js clinix-diagrams.js clinix-audio.js clinix-screens.js \
-         clinix-engine.js clinix-physiology.js clinix-profile.js clinix-examiner.js clinix.css; do
+         clinix-engine.js clinix-physiology.js clinix-profile.js clinix-examiner.js \
+         clinix-lexicon.js clinix-dx.js clinix.css; do
   [ -f "$WWW/$f" ] && say "$f" "ok" || bad "$f" "root glob in build-www.sh"
 done
 
 for f in manifest.json skills/core.json skills/respiratory.json \
-         diseases/copd.json diseases/pleural-effusion.json media/manifest.json; do
+         diseases/copd.json diseases/pleural-effusion.json media/manifest.json \
+         dx-vocabulary.json presentations/breathlessness.json; do
   [ -f "$WWW/clinix/$f" ] && say "clinix/$f" "ok" || bad "clinix/$f" "cp -R clinix in build-www.sh"
 done
 

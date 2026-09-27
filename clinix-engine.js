@@ -150,7 +150,7 @@
       finding = generateDefaultFinding(actionType, targetId, rawCase, maneuver);
     } else {
       finding = Object.assign({}, finding);
-      finding.finding = adaptFindingToManeuver(finding.finding || "", actionType, targetId, maneuver);
+      finding.finding = adaptFindingToManeuver(finding.finding || "", actionType, targetId, maneuver, rawCase);
     }
 
     state.examRevealed[examKey] = finding;
@@ -166,10 +166,13 @@
     return finding;
   }
 
-  function adaptFindingToManeuver(baseText, actionType, targetId, maneuver) {
+  var HJR_POSITIVE = " (On sustained abdominojugular compression for 15 seconds, the JVP rises by more than 3 cm and stays elevated: positive hepatojugular reflux.)";
+  var HJR_NEGATIVE = " (On sustained abdominojugular compression, the JVP rises transiently and falls back within a few beats: hepatojugular reflux negative.)";
+
+  function adaptFindingToManeuver(baseText, actionType, targetId, maneuver, rawCase) {
     if (maneuver === "baseline" || !maneuver) return baseText;
     if (actionType === "jvp" && maneuver === "hjr") {
-      return baseText + " (On sustained abdominojugular compression, JVP rises >3 cm and stays elevated — positive hepatojugular reflux).";
+      return baseText + (isHjrPositive(rawCase || {}) ? HJR_POSITIVE : HJR_NEGATIVE);
     }
     if (actionType === "auscultate") {
       if (targetId === "mitral" && maneuver === "handgrip") {
@@ -188,6 +191,74 @@
     return baseText;
   }
 
+  /* ── Case-text readers ──────────────────────────────────────────────────── */
+
+  /* Authored diagnoses are either a plain string or { answer, accept[], minMatch }. */
+  function diagnosisText(rawCase) {
+    var d = (rawCase && (rawCase.correctDiagnosis || rawCase.diagnosis)) || "";
+    if (d && typeof d === "object") return String(d.answer || d.name || d.label || "");
+    return String(d || "");
+  }
+
+  function findingText(entry) {
+    if (!entry) return "";
+    if (typeof entry === "string") return entry;
+    return String(entry.finding || "");
+  }
+
+  /* Every authored exam finding whose key or text matches `re`, joined. */
+  function examTexts(rawCase, keyRe, textRe) {
+    var exam = (rawCase && rawCase.exam) || {};
+    var out = [];
+    for (var k in exam) {
+      if (!Object.prototype.hasOwnProperty.call(exam, k)) continue;
+      var t = findingText(exam[k]);
+      if (!t) continue;
+      if ((keyRe && keyRe.test(k)) || (textRe && textRe.test(t))) out.push(t);
+    }
+    return out;
+  }
+
+  /* Is the JVP raised, per the case's own words? Returns true / false / null (silent). */
+  function jvpRaisedFromText(rawCase) {
+    var texts = examTexts(rawCase, /jvp|jugular/i, /\bJVP\b|jugular venous/i);
+    if (rawCase && rawCase.jvpFinding) texts.push(String(rawCase.jvpFinding));
+    var verdict = null;
+    for (var i = 0; i < texts.length; i++) {
+      /* Only the sentences that are about the JVP: a heart-failure sign list mixes several signs. */
+      var sentences = texts[i].split(/[.;]\s*/);
+      for (var j = 0; j < sentences.length; j++) {
+        var sen = sentences[j];
+        var about = /\bJVP\b|jugular venous|sternal angle|angle of the jaw/i.test(sen) || /jvp|jugular/i.test(sen);
+        if (!about) continue;
+        var low = sen.toLowerCase();
+        if (/\b(not|no|never)\s+(visibly\s+|significantly\s+)?(raised|elevated)/.test(low)) { if (verdict === null) verdict = false; continue; }
+        if (/\b(raised|elevated|distended|angle of the jaw)\b/.test(low)) return true;
+        var cm = /(\d+(?:\.\d+)?)\s*cm/.exec(low);
+        if (cm && /sternal angle/.test(low)) {
+          if (Number(cm[1]) >= 4) return true;
+          if (verdict === null) verdict = false;
+        }
+      }
+    }
+    return verdict;
+  }
+
+  /* HJR is positive only with raised right-sided filling pressures: a raised JVP, a failing
+   * ventricle, cor pulmonale or tricuspid regurgitation. A normal case must not show it. */
+  function isHjrPositive(rawCase) {
+    rawCase = rawCase || {};
+    if (rawCase.hjr === true || rawCase.hjr === "positive") return true;
+    if (rawCase.hjr === false || rawCase.hjr === "negative") return false;
+    var hjrTexts = examTexts(rawCase, null, /hepatojugular|abdominojugular/i).join(" ").toLowerCase();
+    if (/(negative|no|absent)\s+(hepatojugular|abdominojugular)|(hepatojugular|abdominojugular) reflux (is )?(negative|absent)/.test(hjrTexts)) return false;
+    if (/(positive|sustained)\s+(hepatojugular|abdominojugular)|(hepatojugular|abdominojugular) reflux (is )?positive/.test(hjrTexts)) return true;
+    if (typeof rawCase.jvpHeight === "number" && rawCase.jvpHeight >= 4) return true;
+    if (jvpRaisedFromText(rawCase) === true) return true;
+    return /heart failure|cardiac failure|\bccf\b|\bhfref\b|\bhfpef\b|cor pulmonale|right (heart|ventricular|sided) failure|tricuspid regurgitation|constrictive pericarditis/i
+      .test(diagnosisText(rawCase));
+  }
+
   function generateDefaultFinding(actionType, targetId, rawCase, maneuver) {
     switch (actionType) {
       case "pulse":
@@ -198,11 +269,14 @@
         };
       case "jvp":
         if (maneuver === "hjr") {
+          var hjrPos = isHjrPositive(rawCase);
+          var restCm = rawCase.jvpHeight || (hjrPos ? 4 : 2);
           return {
             label: "Jugular Venous Pressure (HJR)",
-            finding: (rawCase.jvpFinding || "JVP elevated 4 cm above sternal angle at 45 degrees.") +
-              " On sustained RUQ pressure, JVP rises further by 4 cm and remains sustained (positive HJR).",
-            heightCm: 8,
+            finding: (rawCase.jvpFinding || (hjrPos ? "JVP elevated 4 cm above the sternal angle at 45 degrees."
+              : "JVP not visibly elevated, waveform normal.")) + (hjrPos ? HJR_POSITIVE : HJR_NEGATIVE),
+            heightCm: hjrPos ? restCm + 4 : restCm,
+            hjrPositive: hjrPos,
             waveMode: rawCase.jvpWaveMode || "normal"
           };
         }
@@ -384,7 +458,6 @@
     var rawCase = state.rawCase;
     var essentialIx = rawCase.essentialInvestigations || [];
     var expectedDiff = rawCase.expectedDifferential || [];
-    var correctDiagnosis = rawCase.correctDiagnosis || rawCase.diagnosis || "";
 
     var feedback = [];
     var score = 100;
@@ -445,11 +518,24 @@
   function generateSynthesis(state) {
     var evalResult = evaluateReasoningChain(state);
     var rawCase = state.rawCase || {};
-    var targetDx = (rawCase.correctDiagnosis || rawCase.diagnosis || "").toLowerCase();
-    var givenDx = (state.finalDiagnosis || "").toLowerCase();
+    var targetLabel = diagnosisText(rawCase);
+    var targetDx = targetLabel.toLowerCase();
+    var givenDx = String(state.finalDiagnosis || "").toLowerCase();
+    var dxObj = (rawCase.diagnosis && typeof rawCase.diagnosis === "object") ? rawCase.diagnosis : null;
+    var accept = (dxObj && Array.isArray(dxObj.accept)) ? dxObj.accept : [];
 
     var isCorrect = false;
-    if (targetDx && givenDx) {
+    if (accept.length && givenDx) {
+      /* The authored accept list is the marking scheme when there is one. */
+      var need = Math.max(1, Number(dxObj.minMatch) || 1);
+      var hits = 0;
+      for (var a = 0; a < accept.length; a++) {
+        var term = String(accept[a] || "").toLowerCase().trim();
+        if (term && givenDx.indexOf(term) >= 0) hits++;
+      }
+      isCorrect = hits >= Math.min(need, accept.length);
+    }
+    if (!isCorrect && targetDx && givenDx) {
       // Check keyword overlap
       var words = targetDx.split(/[^a-z0-9]+/i).filter(function (w) { return w.length > 3; });
       var matchCount = 0;
@@ -461,7 +547,7 @@
 
     var synthesis = {
       isCorrect: isCorrect,
-      correctDiagnosis: rawCase.correctDiagnosis || rawCase.diagnosis || "",
+      correctDiagnosis: targetLabel,
       givenDiagnosis: state.finalDiagnosis,
       score: Math.round(isCorrect ? evalResult.score : Math.min(45, evalResult.score)),
       positiveFindings: rawCase.positiveFindings || [],
@@ -484,6 +570,36 @@
 
   /* ── 6. Apple Watch Structured Pulse Schema ─────────────────────────────── */
 
+  /* Rhythm and character from explicit case fields first, then from the case's own pulse text, so
+   * a case authored only in prose ("irregularly irregular", "collapsing") still drives the watch. */
+  function pulseCharacterOf(rawCase) {
+    rawCase = rawCase || {};
+    var arr = String(rawCase.arrhythmia || "").toLowerCase();
+    var ch = String(rawCase.pulseCharacter || "").toLowerCase().replace(/[\s-]+/g, "_");
+    var lesion = String(rawCase.valveLesion || "").toLowerCase();
+    var out = { afib: false, character: "" };
+
+    if (arr === "afib" || arr === "af" || arr === "atrial_fibrillation" || ch.indexOf("irregularly_irregular") >= 0) out.afib = true;
+    if (ch === "water_hammer" || ch === "collapsing" || lesion.indexOf("aortic_regurgitation") >= 0) out.character = "water_hammer";
+    else if (ch === "parvus_et_tardus" || ch === "slow_rising" || lesion.indexOf("aortic_stenosis") >= 0) out.character = "parvus_et_tardus";
+    else if (ch === "low_volume" || ch === "thready") out.character = "low_volume";
+    if (arr || ch || lesion) {
+      if (out.afib || out.character) return out;
+    }
+
+    var texts = [];
+    if (rawCase.pulseFinding) texts.push(String(rawCase.pulseFinding));
+    texts = texts.concat(examTexts(rawCase, /pulse|vitals/i, null));
+    var t = texts.join(" ").toLowerCase();
+    if (!out.afib && /irregularly irregular|atrial fibrillation/.test(t)) out.afib = true;
+    if (!out.character) {
+      if (/collapsing|water[- ]?hammer|corrigan/.test(t)) out.character = "water_hammer";
+      else if (/slow[- ]?rising|parvus|tardus|anacrotic|plateau pulse/.test(t)) out.character = "parvus_et_tardus";
+      else if (/\b(low|small|poor) volume|thready|feeble/.test(t)) out.character = "low_volume";
+    }
+    return out;
+  }
+
   function getPulseProfile(state) {
     var vitals = (state && state.currentVitals) || { hr: 72, bpSystolic: 120 };
     var rawCase = (state && state.rawCase) || {};
@@ -496,17 +612,19 @@
     var decayTime = 0.22;
     var condition = "normal";
 
-    if (rawCase.arrhythmia === "afib" || (rawCase.pulseCharacter || "").indexOf("irregularly irregular") >= 0) {
+    var pc = pulseCharacterOf(rawCase);
+
+    if (pc.afib) {
       rhythm = "atrial_fibrillation";
       regularity = "irregularly_irregular";
       amplitude = 0.85;
       condition = "afib";
-    } else if (rawCase.pulseCharacter === "water_hammer" || (rawCase.valveLesion || "").indexOf("aortic_regurgitation") >= 0) {
+    } else if (pc.character === "water_hammer") {
       amplitude = 1.6;
       riseTime = 0.04;
       decayTime = 0.12;
       condition = "water_hammer";
-    } else if (rawCase.pulseCharacter === "parvus_et_tardus" || (rawCase.valveLesion || "").indexOf("aortic_stenosis") >= 0) {
+    } else if (pc.character === "parvus_et_tardus") {
       amplitude = 0.65;
       riseTime = 0.16;
       decayTime = 0.28;
@@ -516,6 +634,8 @@
     } else if (hr <= 50) {
       condition = "bradycardia";
     }
+
+    if (pc.character === "low_volume" && condition !== "afib") amplitude = 0.6;
 
     return {
       bpm: hr,

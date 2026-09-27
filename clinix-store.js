@@ -88,7 +88,12 @@
       if (!skillId) return null;
       var all = allSkills();
       var k = keyFor(skillId);
-      var r = all[k] || { seen: 0, correct: 0, days: [], first: null, last: null };
+      var r = all[k];
+      // A stored record is data from a previous build (or a hand edit): repair it rather than throw.
+      if (!r || typeof r !== "object") r = {};
+      if (typeof r.seen !== "number") r.seen = 0;
+      if (typeof r.correct !== "number") r.correct = 0;
+      if (Object.prototype.toString.call(r.days) !== "[object Array]") r.days = [];
       var day = today();
 
       r.seen += 1;
@@ -102,6 +107,16 @@
         r.days.push(day);
         if (r.days.length > MAX_DAYS) r.days = r.days.slice(-MAX_DAYS);
       }
+      // Mastery counts only the days with a CORRECT answer. `days` also holds days a skill was just
+      // seen (a revealed answer, an examined finding in a Case), and counting those let "four right
+      // on Monday, one glance on Tuesday" mint mastery without a second day of success.
+      if (correct === true) {
+        if (Object.prototype.toString.call(r.okDays) !== "[object Array]") r.okDays = [];
+        if (r.okDays.indexOf(day) < 0) {
+          r.okDays.push(day);
+          if (r.okDays.length > MAX_DAYS) r.okDays = r.okDays.slice(-MAX_DAYS);
+        }
+      }
 
       all[k] = r;
       writeJSON(KEY_SKILLS, all);
@@ -114,7 +129,7 @@
      * possible because the wrong answers are kept, not just the score. */
     function logMiss(skillId, meta) {
       var log = readJSON(KEY_LOG, { items: [] });
-      if (!log.items) log.items = [];
+      if (Object.prototype.toString.call(log.items) !== "[object Array]") log.items = [];
       log.items.push({
         skillId: skillId,
         day: today(),
