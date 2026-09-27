@@ -10333,5 +10333,5 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
 - **Why**: tapped top-1 train 75 -> 85%, dev 70 -> 76%, test 72 -> 78%; OPD ordering 358 -> 386.
   Tried and dropped: source-over-sepsis, a complicated-UTI bonus, mixed malaria over malaria (see
   `kb/validation/AUDIT-2026-09-26.md`, Round 7).
-- **Open (owner)**: v3 on the classic extractor, chart-text top-3 208 -> 206 (two classic-extractor misreads).
-  `smd_rank_v3` stays OFF.
+- **Owner accepted (2026-09-27)**: v3 on the classic extractor, chart-text top-3 208 -> 206 (two
+  classic-extractor misreads). `smd_rank_v3` stays OFF.
