@@ -1140,6 +1140,18 @@
     sle_flare: function (f) { return (f.thrombocytopenia && (f.proteinuria || f.hematuria)) ? 15 : 0; },
     // DKA is defined by ketosis; before the result, vomiting with abdominal pain is the picture to act on
     dka: function (f) { return (f.ketonemia || (f.nauseaVomiting && f.abdominalPain)) ? 0 : -15; },
+    // round 12 (2026-09-27, train confusion pairs, checked on dev). A viral prodrome (myalgia, contaminated food or
+    // water) with jaundice and no rigors or biliary obstruction is hepatitis before cholangitis
+    VIRAL_HEPATITIS: function (f) { return (f.jaundice && (f.myalgiaArthralgia || f.contaminatedFoodWaterExposure) && !f.rigors && !f.dilatedCBD && !f.hypotension) ? 15 : 0; },
+    // aseptic meningitis: a viral prodrome and a clear sensorium, no rash, no shock
+    VIRAL_MENINGITIS: function (f) { return ((f.myalgiaArthralgia || f.coryza) && noneOf(f, ["alteredSensorium", "toxicAppearing", "seizure", "petechialRash", "focalNeuroDeficit", "hypotension"])) ? 15 : 0; },
+    // nephrotic syndrome: heavy proteinuria with anasarca (ascites or facial oedema) and a bland sediment
+    nephrotic: function (f) { return (f.proteinuria && (f.ascites || f.facialSwelling) && !f.hematuria) ? 15 : 0; },
+    // an acute fall in urine output with a rising creatinine and a bland urine is acute kidney injury (dark urine is
+    // pigment, rhabdomyolysis or haemolysis, which names the cause: added after dev gc_220, noted in the audit)
+    aki: function (f) { return (f.oliguria && f.renalImpairment && !f.proteinuria && !f.hematuria && !f.darkUrine) ? 12 : 0; },
+    // thyroid storm is decompensated thyrotoxicosis: fever, a changed sensorium or shock
+    thyroid_storm: function (f) { return noneOf(f, ["fever", "alteredSensorium", "hypotension", "toxicAppearing"]) ? -20 : 0; },
     // not here: confirmed mixed malaria over malaria. Leading with the lower-scored of the two widened the
     // gate's "close rival" window and turned antimalarial-only care into "antibiotics" (train gc_135)
   };
@@ -1940,12 +1952,50 @@
       "idiopathic bronchiectasis", "post-tb bronchiectasis", "post-tuberculous bronchiectasis", "bronchiectasis exacerbation"],
     bilateralCrackles: ["bibasal", "bibasilar", "velcro"]
   };
+  // round 11 (2026-09-27): catalog findings that had NO phrasing at all (label-only), low recall on train.
+  // Textbook bedside wording; each list checked on the train split, confirmed on dev.
+  var FT_SYN_ADD_V2_R11 = {
+    coryza: ["coryza", "runny nose", "rhinorrhoea", "rhinorrhea", "running nose", "blocked nose", "nasal discharge"],
+    nasalCongestion: ["nasal congestion", "blocked nose", "stuffy nose", "nasal blockage", "congested nose"],
+    knownCOPD: ["copd", "chronic obstructive", "emphysema", "chronic bronchitis", "gold group", "gold stage"],
+    knownHeartFailure: ["known heart failure", "heart failure with reduced", "hfref", "hfpef", "known lvef", "ejection fraction 3", "ejection fraction 2",
+      "ischaemic cardiomyopathy", "ischemic cardiomyopathy", "dilated cardiomyopathy", "chronic heart failure", "congestive cardiac failure", "on furosemide for"],
+    tbContactHistory: ["tb contact", "contact with tb", "tuberculosis contact", "household contact", "contact of a tb", "treated for tb", "on att", "sputum-positive tb", "sputum positive tb"],
+    newMurmur: ["new murmur", "new systolic murmur", "new diastolic murmur", "new regurgitant murmur", "pansystolic murmur", "early diastolic murmur", "murmur not previously"],
+    steroidUse: ["hydrocortisone", "prednisolone", "prednisone", "dexamethasone", "methylprednisolone", "fludrocortisone", "long-term steroid", "oral steroid",
+      "steroid emergency card", "on steroids", "chronic steroid", "inhaled and oral steroid"],
+    dysphagia: ["dysphagia", "difficulty swallowing", "difficulty in swallowing", "trouble swallowing", "painful swallowing", "odynophagia", "food sticking"],
+    aspirationRiskFactor: ["witnessed aspiration", "aspiration event", "aspiration episode", "aspirated", "choking", "reduced gag", "absent gag", "swallow test", "unsafe swallow", "found down"],
+    cavitatingLesion: ["cavitat", "cavitary", "cavity in the", "cavity with", "walled cavity", "apical cavity", "lobe cavity"],
+    gibPresentation: ["gi bleed", "gastrointestinal bleed", "upper gi bleed", "lower gi bleed", "haematemesis", "coffee-ground", "coffee ground", "fresh blood per rectum", "blood per rectum"],
+    mdrRisk: ["mdr", "multidrug-resistant", "multi-drug resistant", "multidrug resistant", "carbapenem-resistant", "carbapenem resistant", "cre ", "mrsa", "vre", "esbl", "resistant pseudomonas", "resistant klebsiella"],
+    esblHistory: ["esbl"],
+    increasedDyspnea: ["worsening breathlessness", "increasing breathlessness", "increased breathlessness", "worsening shortness of breath", "increasing shortness of breath",
+      "breathlessness has worsened", "more breathless than usual", "progressive breathlessness", "worsening dyspnoea", "worsening dyspnea"],
+    worseningOxygenation: ["worsening oxygenation", "increasing oxygen requirement", "rising oxygen requirement", "oxygen requirement has increased", "escalating oxygen",
+      "fio2 increased", "increasing fio2", "needed oxygen escalated", "oxygen escalated"],
+    increasedSputumVolume: ["increased sputum", "increasing sputum", "more sputum", "sputum volume", "copious sputum", "copious secretions", "increased volume of"],
+    purulentSecretions: ["purulent tracheal", "purulent secretions", "tracheal secretions", "tracheal aspirate", "endotracheal secretions", "thick yellow-green secretions"],
+    rapidlySpreadingErythema: ["rapidly spreading", "rapidly progressive redness", "spreading redness", "spreading erythema", "advancing erythema", "erythema spreading"],
+    skinErythema: ["erythematous", "red and swollen", "red, swollen", "overlying erythema", "dusky erythema", "redness of the skin", "skin redness"],
+    clinicallyImproving: ["fully resolved", "resolved completely", "completely resolved", "back to baseline", "returned to baseline", "returned to normal", "now improving", "clinically improving", "improving on"],
+    symmetricSmallJointInvolvement: ["small joints of the hands", "small joints of both hands", "small-joint", "small joint", "mcps", "mcp joints", "pips", "pip joints", "symmetric polyarthritis", "symmetrical polyarthritis"],
+    ruralExposure: ["farmer", "farm worker", "farm labourer", "agricultural", "paddy", "in the fields", "village", "scrub vegetation", "scrub grass", "scrubland", "forested", "plantation", "cattle", "rural"],
+    purulentDrainage: ["purulent discharge", "pus discharge", "discharging pus", "pus draining", "purulent drainage", "draining pus", "pus from"],
+    persistentBacteremia: ["persistent bacteraemia", "persistent bacteremia", "persistently positive blood cultures", "repeat blood cultures positive"],
+    singleLesion: ["single lesion", "solitary lesion", "single abscess", "solitary abscess", "single cavity", "single hypoechoic", "solitary hypoechoic"],
+    jointSwelling: ["swollen knee", "swollen ankle", "swollen wrist", "swollen elbow", "swollen joints", "joint effusion", "tense effusion", "knee effusion", "hot, swollen"],
+    hematuria: ["cola-coloured urine", "cola coloured urine", "cola-colored urine", "smoky urine", "red urine", "pink urine", "blood in the urine", "frank blood in urine"],
+    legSwellingBilateral: ["pedal oedema", "ankle oedema", "ankle edema", "bilateral ankle", "pretibial", "bilateral pitting", "oedema of both legs", "edema of both legs"],
+    pleuriticChestPain: ["worse on deep inspiration", "worse on inspiration", "worse on breathing", "pain on deep breathing", "pain on inspiration", "worsened by deep inspiration", "sharp chest pain worse"]
+  };
   var FT_SYN_V2 = (function () {
     var o = {};
     Object.keys(FT_SYN).forEach(function (k) { var drop = FT_SYN_DROP_V2[k] || []; o[k] = FT_SYN[k].filter(function (x) { return drop.indexOf(x) < 0; }); });
     Object.keys(FT_SYN_ADD_V2).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2[k]); });
     Object.keys(FT_SYN_ADD_V2_R8).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R8[k]); });
     Object.keys(FT_SYN_ADD_V2_R10).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R10[k]); });
+    Object.keys(FT_SYN_ADD_V2_R11).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R11[k]); });
     return o;
   })();
   // the extraction context: classic exactly as before; v2 adds the cleaned table and the numeric-field list

@@ -90,6 +90,9 @@ added) and the numeric-field list. Off: 0 differences across 1,660 case-paths.
   stopped drugs and settled symptoms (temporality "resolved"), derived cough >= 2 weeks, bilateral crackles,
   exertional chest pain, hospital day >= 2. Phrasing tables `FT_SYN_ADD_V2_R8` / `_R10` in `reasoning.js`.
 - Round 9 (2026-09-27): gate `ni_lead_afebrile` trusts the v3 order when the v2 extractor is on.
+- Round 11 (2026-09-27): `FT_SYN_ADD_V2_R11` phrasing for label-only catalog findings; derived severe
+  abdominal / loin pain and a named swollen joint. Round 12: five `RANK_V3_R2` discriminators (hepatitis,
+  aseptic meningitis, nephrotic, AKI, thyroid storm). To find label-only keys, dump `nlpCtx()` (valid, syn).
 
 ## Differential ordering v3 (`smd_rank_v3`, default ON since 2026-09-27; `"0"` opts out)
 

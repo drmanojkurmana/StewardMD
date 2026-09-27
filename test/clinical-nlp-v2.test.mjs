@@ -227,3 +227,15 @@ test("a cough of two weeks or more; bilateral crackles; exertional chest pain; d
   assert.ok(!p("admitted 1 day ago").includes("hospitalDay48"));
   assert.ok(!NLP.extract("Cough for 6 weeks", { ...c10, v2: false }).present.includes("prolongedCough2Weeks"), "classic unchanged");
 });
+
+// round 11: severe abdominal pain and a swollen joint said with words between
+test("severe abdominal / loin pain with words between; a named swollen joint", () => {
+  const keys = ["severeAbdominalPain", "jointSwelling"];
+  const c11 = { valid: Object.fromEntries(keys.map((k) => [k, 1])), labels: {}, syn: {}, numeric: {}, v2: true };
+  const p = (t) => NLP.extract(t, c11).present;
+  assert.ok(p("Severe, constant epigastric pain radiating to the back").includes("severeAbdominalPain"));
+  assert.ok(p("sudden severe left loin pain").includes("severeAbdominalPain"));
+  assert.ok(!p("no severe abdominal pain").includes("severeAbdominalPain"));
+  assert.ok(p("Right knee is markedly swollen with a tense effusion").includes("jointSwelling"));
+  assert.ok(!p("knee not swollen").includes("jointSwelling"));
+});

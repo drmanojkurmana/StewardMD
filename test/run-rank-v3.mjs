@@ -66,6 +66,11 @@ const CASES = {
   bleedLowPlt: ["petechialRash", "mucocutaneousBleeding", "thrombocytopenia", "bleedingManifestation", "afebrile"],
   gpaCavity: ["hemoptysis", "cavitatingLesion", "hematuria", "renalImpairment", "polyarthralgia", "fever", "weightLoss"],
   focalNow: ["focalNeuroDeficit", "ageOver50", "hypertensionHx", "atrialFibHx"],
+  // round 12 discriminators
+  viralHep: ["fever", "jaundice", "darkUrine", "nauseaVomiting", "rightUpperQuadrantPain", "myalgiaArthralgia", "contaminatedFoodWaterExposure"],
+  viralMen: ["fever", "headacheSevere", "neckStiffness", "photophobia", "myalgiaArthralgia"],
+  anasarca: ["proteinuria", "legSwellingBilateral", "ascites", "oliguria"],
+  thyroCalm: ["tachycardia", "weightLoss", "palpitations", "diarrhea"],
 };
 
 try {
@@ -103,6 +108,10 @@ try {
   ok(on.bleedLowPlt.order[0] === "itp", `on  · bleeding + low platelets alone, afebrile: ITP leads (${on.bleedLowPlt.order.slice(0, 3).join(", ")})`);
   ok(pos("gpaCavity", "vasculitis") < pos("gpaCavity", "LUNG_ABSCESS"), `on  · cavity + haemoptysis + kidney involvement: vasculitis above lung abscess (#${pos("gpaCavity", "vasculitis")} vs #${pos("gpaCavity", "LUNG_ABSCESS")})`);
   ok(pos("focalNow", "ischemic_stroke") < pos("focalNow", "tia"), `on  · a focal deficit still present: stroke above TIA (#${pos("focalNow", "ischemic_stroke")} vs #${pos("focalNow", "tia")})`);
+  ok(pos("viralHep", "VIRAL_HEPATITIS") < pos("viralHep", "CHOLANGITIS"), `on  · jaundice after a viral prodrome, no rigors: hepatitis above cholangitis (#${pos("viralHep", "VIRAL_HEPATITIS")} vs #${pos("viralHep", "CHOLANGITIS")})`);
+  ok(pos("viralMen", "VIRAL_MENINGITIS") < pos("viralMen", "MENINGITIS"), `on  · meningism with myalgia and a clear sensorium: viral above bacterial (#${pos("viralMen", "VIRAL_MENINGITIS")} vs #${pos("viralMen", "MENINGITIS")})`);
+  ok(pos("anasarca", "nephrotic") < pos("anasarca", "ckd"), `on  · proteinuria with ascites, bland urine: nephrotic above CKD (#${pos("anasarca", "nephrotic")} vs #${pos("anasarca", "ckd")})`);
+  ok(pos("thyroCalm", "hyperthyroidism") < pos("thyroCalm", "thyroid_storm"), `on  · thyrotoxic without fever or confusion: not a storm (#${pos("thyroCalm", "hyperthyroidism")} vs #${pos("thyroCalm", "thyroid_storm")})`);
   // default ON since 2026-09-27 (owner decision); localStorage "0" is the opt-out
   ok(await load(BASE + "?gatev2=0"), "app + KB load without ?rankv3");
   ok(await ev(`return DX._rankV3()`) === true, "default · DX._rankV3() is on without any flag");

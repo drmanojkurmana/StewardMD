@@ -10496,3 +10496,11 @@ the new one. Full unit suite 10915/10916 passing, 0 failures.
 - **Pending owner**: accept complaint-only viral-with-antibiotics 4 -> 5 (one hidden case) and small overcall
   rises in the gate-v2-off, rank-v3-off and classic-extractor opt-out configurations
   (`kb/validation/AUDIT-2026-09-26.md`, Rounds 8 to 10).
+
+## 2026-09-27 - Rounds 11 and 12: phrasing for label-only findings, five confusion-pair discriminators
+- **Decision**: every catalog finding the extractor could only match by exact label gets textbook phrasing
+  (`FT_SYN_ADD_V2_R11`); five order-only discriminators (hepatitis vs cholangitis, aseptic vs bacterial
+  meningitis, nephrotic vs CKD, AKI with a bland urine, storm vs uncomplicated thyrotoxicosis).
+- **Why**: typed top-1 213 -> 240, top-3 326 -> 354, needed antibiotics 143 -> 153; tapped top-1 398 -> 406;
+  unseen notes top-1 25 -> 29 and 24 -> 27. Floors raised, none lowered; pending items listed in the audit.
+
