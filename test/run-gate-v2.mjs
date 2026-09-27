@@ -126,6 +126,16 @@ try {
   ok(heP.ab === true && heP.cls !== "rule_out_sbp", `on  · cirrhosis + ascites + abdominal pain, no fever: suspected SBP, tap and treat (${heP.cls})`);
   const heB = await assess(T(["liverDisease", "ascites", "alteredSensorium", "hematemesis", "melena"]));
   ok(heB.ab === true && heB.cls !== "rule_out_sbp", `on  · cirrhosis + ascites + GI bleed: antibiotics kept, never downgraded to 'tap first' (${heB.cls})`);
+  // extraction round 2: afebrile septic shock in a host who may not mount a fever (Sepsis-3)
+  const shockOld = await assess(T(["hypotension", "alteredSensorium", "lactateElevated", "ageOver50", "tachycardia"]));
+  ok(shockOld.ab === true && shockOld.rule === "sepsis_afebrile" && /possible septic shock/i.test(shockOld.message || "") && !/—/.test(shockOld.message || ""),
+    `on  · afebrile, over 50, low BP + lactate + confusion: possible septic shock, antibiotics (${shockOld.cls}, ${shockOld.rule})`);
+  const shockYoung = await assess(T(["hypotension", "alteredSensorium", "lactateElevated", "tachycardia"]));
+  ok(shockYoung.rule !== "sepsis_afebrile", `on  · the same without an at-risk host: the rule stands aside (${shockYoung.cls})`);
+  const shockGib = await assess(T(["hypotension", "alteredSensorium", "lactateElevated", "ageOver50", "tachycardia", "hematemesis", "melena"]));
+  ok(shockGib.rule !== "sepsis_afebrile", `on  · the same with a GI bleed: haemorrhagic shock is not read as sepsis (${shockGib.cls})`);
+  const noShock = await assess(T(["alteredSensorium", "tachypnea", "lactateElevated", "ageOver50"]));
+  ok(noShock.rule !== "sepsis_afebrile", `on  · confusion + fast breathing + lactate without low BP: no override (${noShock.cls})`);
   const fnOn = await assess(fn);
   ok(fnOn.ab === true && fnOn.cls === fnOff.cls, `on  · fever + "Neutropenia (ANC <500)" unchanged by v2 (${fnOn.cls})`);
 
