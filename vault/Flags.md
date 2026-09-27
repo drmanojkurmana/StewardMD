@@ -323,7 +323,7 @@ default (ON) is what you get.
 | `smd_steward_id` | **ON** | Verified-email / Apple-proxy anchor capture UI. ON by owner decision 2026-08-26. The ID itself was already minted on sign-in regardless (smd_steward_i… |
 | `smd_steward_id_mint` | **ON** | Mint the universal StewardMD ID on sign-in. DEFAULT ON. |
 | `smd_phone_verify` | **ON** | Ask every signed-in account to verify its mobile number (WhatsApp code, SMS backup) after the profile form; `phone-verify.js`, 2026-09-19. Set `"0"` to stop asking on this device. Server twin: `PHONE_VERIFY_ON`. |
-| `smd_profile_hub` | **ON** | One Profile page (2026-09-27) instead of three doors: Profile, Settings > Profile & StewardMD ID, and Account & Verification. iOS inset-grouped; verification (mobile number + registration), plan, usage, security and sign-in in one place. `home.js` openAccountPage; Settings shows one row; the drawer no longer injects its own verify row. `"0"` restores the old page and both old doors. Test: `test/run-profile-hub-ui.mjs`. |
+| `smd_profile_hub` | **RETIRED (hardcoded ON)** | Owner 2026-09-27: "hardcode this change". One Profile page, always; the drawer's first row is **Profile** (was Account & Verification, `verify.js injectMenu`); Settings has one Profile row. Setting the key does nothing now. Details load from a saved copy, the Firebase SDK and `POST /api/auth/my-profile` in parallel, so a hung SDK read in the iOS WebView no longer shows "Offline". Tests: `test/run-profile-hub-ui.mjs`, `test/run-profile-page-ui.mjs`, `test/auth-my-profile.test.mjs`. |
 
 ### ThoreX  <sub>5 ON · 4 OFF</sub>
 

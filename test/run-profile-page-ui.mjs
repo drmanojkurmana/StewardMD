@@ -123,6 +123,33 @@ try {
   await ev(`window.__acctL.forEach(function (f) { try { f(); } catch (e) {} }); return 1;`); await sleep(300);
   ok(await isOpen() === true, "and an open Profile stays open through an auth change");
 
+  // ── the details read: the SDK hangs on iOS; the server copy must fill in ──────────────────────
+  // Owner, 2026-09-27: every detail "Offline" while Registration said Verified. The SDK read hung.
+  await closeIt(); await sleep(200);
+  await ev(`try { Object.keys(localStorage).forEach(function(k){ if (k.indexOf("smd_profile_cache:")===0) localStorage.removeItem(k); }); } catch(e){}
+    window.SMD_AUTH = { currentUser: { uid: "u-doc-2", getIdToken: function(){ return Promise.resolve("t"); } }, onAuthStateChanged: function(){ return function(){}; } };
+    window.SMD_DB = { collection: function () { return { doc: function () { return { collection: function () { return { doc: function () { return {
+      get: function () { return new Promise(function () {}); },  set: function () { return Promise.resolve(); } }; } }; } }; } }; } };
+    window.__srvMode = "ok"; var _f = window.__origFetch || window.fetch; window.__origFetch = _f;
+    window.fetch = function (u, o) {
+      if (String(u).indexOf("/api/auth/my-profile") >= 0) {
+        if (window.__srvMode === "fail") return Promise.reject(new Error("offline"));
+        return Promise.resolve({ ok: true, json: function () { return Promise.resolve({ ok: true, exists: true, profile: { hospital: "KGH Server Copy", degree: "MD", speciality: "Internal Medicine", city: "Visakhapatnam", regNo: "APMC 1" } }); } });
+      }
+      return _f.apply(this, arguments);
+    }; return 1;`);
+  await ev(`SMD_openProfile(); return 1;`); await sleep(1200);
+  ok(/KGH Server Copy/.test(await rows()) && !/Offline/.test(await rows()), "SDK read hangs, the server copy fills Profile " + await rows());
+  // Both fail, but it was loaded before: the saved copy stays, no Offline.
+  await closeIt(); await sleep(200);
+  await ev(`window.__srvMode = "fail"; SMD_openProfile(); return 1;`); await sleep(7000);
+  ok(/KGH Server Copy/.test(await rows()) && !/Offline/.test(await rows()), "both sources down: the last good copy is shown, not Offline " + await rows());
+  // Both fail and nothing was ever loaded here: only then, Offline with Retry.
+  await closeIt(); await sleep(200);
+  await ev(`localStorage.removeItem("smd_profile_cache:u-doc-2"); SMD_openProfile(); return 1;`); await sleep(7000);
+  ok(/Offline/.test(await rows()) && await ev(`return !!document.querySelector("#pfPro [data-retry]");`) === true, "only with nothing to show: Offline with Retry " + await rows());
+  await ev(`window.fetch = window.__origFetch; return 1;`);
+
   // ── one entry point ───────────────────────────────────────────────────────────────────────────
   ok(await ev(`return String(window.SMD_openProfile).indexOf("firstRun") < 0;`) === true,
      "SMD_openProfile is home.js's Profile page, not email-auth's setup-form fallback");
