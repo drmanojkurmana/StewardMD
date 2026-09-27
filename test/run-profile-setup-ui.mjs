@@ -85,6 +85,9 @@ async function fillRequired() {
     el.querySelector('[data-k="name"]').value="Dr Manoj"; el.querySelector('[data-k="name"]').dispatchEvent(new Event("input",{bubbles:true}));
     el.querySelector('[data-k="phone"]').value="8897298117"; el.querySelector('[data-k="phone"]').dispatchEvent(new Event("input",{bubbles:true}));
     return 1;`);
+  // "I am a" became a required field (81ee04837, Role box). A practising doctor still answers
+  // degree and speciality; the trainee roles skip them.
+  await pick("role", "Doctor (practising)");
   await pick("degree", "MD");
   await pick("speciality", "Internal Medicine");
   await pick("hospital", "King George Hospital");
