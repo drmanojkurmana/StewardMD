@@ -17,6 +17,10 @@ import { setTimeout as sleep } from "node:timers/promises";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+// data -> a JS literal safe to splice into code evaluated in the page (CodeQL js/bad-code-sanitization):
+// JSON.stringify leaves <, >, U+2028 and U+2029 raw, so escape them (the pattern CodeQL documents)
+const LIT_ESC = { "<": "\\u003C", ">": "\\u003E", "\b": "\\b", "\f": "\\f", "\n": "\\n", "\r": "\\r", "\t": "\\t", "\0": "\\0", "\u2028": "\\u2028", "\u2029": "\\u2029" };
+const lit = (v) => JSON.stringify(v).replace(/[<>\b\f\n\r\t\0\u2028\u2029]/g, (c) => LIT_ESC[c]);
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const BASE = (process.env.BASE || "http://localhost:8804/").replace(/\/?$/, "/");
@@ -70,7 +74,7 @@ async function load(url) {
   }
   return false;
 }
-const assess = async (f) => JSON.parse(await ev(`return JSON.stringify(SMD_REASON.assess(${JSON.stringify(f)}).gate);`));
+const assess = async (f) => JSON.parse(await ev(`return JSON.stringify(SMD_REASON.assess(${lit(f)}).gate);`));
 
 try {
   let ver; for (let t = 0; t < 60; t++) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
@@ -139,7 +143,7 @@ try {
 
   // ---- 4. Dx workspace renders the v2 decision ---------------------------------------------
   ok(await load(BASE + "?gatev2=1"), "reload with ?gatev2=1 for the workspace");
-  const ws1 = JSON.parse(await ev(`try{DX.openWorkspace();}catch(e){} DX.reset&&DX.reset(); DX.addFindings(${JSON.stringify(Object.keys(keys("gc_118")))});
+  const ws1 = JSON.parse(await ev(`try{DX.openWorkspace();}catch(e){} DX.reset&&DX.reset(); DX.addFindings(${lit(Object.keys(keys("gc_118")))});
     var g=document.querySelector('#dxGate'), p=document.querySelector('#dxPolicy');
     return JSON.stringify({gate: g?g.innerText:'', policy: p?p.innerText.trim():'', live: Object.keys(DX._state.f).length});`));
   ok(/antibiotics not indicated/i.test(ws1.gate) && /Dengue Fever leads/.test(ws1.gate), `workspace gate card: dengue -> "${ws1.gate.replace(/\s+/g, " ").slice(0, 80)}..."`);
@@ -147,12 +151,12 @@ try {
   const before = await ev(`return JSON.stringify(DX._state.f)`);
   await assess(keys("gc_143"));
   ok((await ev(`return JSON.stringify(DX._state.f)`)) === before, "assess() is pure: live workspace findings untouched");
-  const ws2 = JSON.parse(await ev(`DX.reset&&DX.reset(); DX.addFindings(${JSON.stringify(Object.keys(keys("gc_238")))});
+  const ws2 = JSON.parse(await ev(`DX.reset&&DX.reset(); DX.addFindings(${lit(Object.keys(keys("gc_238")))});
     var g=document.querySelector('#dxGate'), p=document.querySelector('#dxPolicy');
     return JSON.stringify({gate: g?g.innerText:'', policy: p?p.innerText.trim():''});`));
   ok(/Antibiotic prophylaxis indicated/.test(ws2.gate) && /Baveno VII/.test(ws2.gate), "workspace: cirrhosis + GI bleed -> prophylaxis card with the regimen");
   ok(ws2.policy === "", "workspace: prophylaxis does not show an empiric-treatment card for an unrelated infection");
-  const ws3 = JSON.parse(await ev(`DX.reset&&DX.reset(); DX.addFindings(${JSON.stringify(Object.keys(keys("gc_143")))});
+  const ws3 = JSON.parse(await ev(`DX.reset&&DX.reset(); DX.addFindings(${lit(Object.keys(keys("gc_143")))});
     var g=document.querySelector('#dxGate'), p=document.querySelector('#dxPolicy');
     return JSON.stringify({gate: g?g.innerText:'', policy: p?p.innerText:''});`));
   ok(/spontaneous bacterial peritonitis/i.test(ws3.gate), "workspace: SBP rule shown on the gate card");
@@ -160,7 +164,7 @@ try {
   await ev(`DX.reset&&DX.reset(); return 1`);
 
   // ---- 5. wizard severity mapping ----------------------------------------------------------
-  const sev = JSON.parse(await ev(`return JSON.stringify(${JSON.stringify(ALL_CLASSES)}.map(function(c){var s=window.ABX_WIZARD&&ABX_WIZARD._sevOf?ABX_WIZARD._sevOf(c):null;return [c, s&&s.k, s&&s.label];}));`));
+  const sev = JSON.parse(await ev(`return JSON.stringify(${lit(ALL_CLASSES)}.map(function(c){var s=window.ABX_WIZARD&&ABX_WIZARD._sevOf?ABX_WIZARD._sevOf(c):null;return [c, s&&s.k, s&&s.label];}));`));
   sev.forEach(([c, k, label]) => ok(k && k !== "none" && label, `wizard severity for "${c}": ${k} "${label}"`));
   const ins = JSON.parse(await ev(`return JSON.stringify(ABX_WIZARD._sevOf("insufficient"))`));
   ok(ins && ins.label, `wizard severity for "insufficient": ${ins && ins.k} "${ins && ins.label}"`);

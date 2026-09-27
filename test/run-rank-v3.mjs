@@ -15,6 +15,10 @@ import { spawn } from "node:child_process";
 import { setTimeout as sleep } from "node:timers/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+// data -> a JS literal safe to splice into code evaluated in the page (CodeQL js/bad-code-sanitization):
+// JSON.stringify leaves <, >, U+2028 and U+2029 raw, so escape them (the pattern CodeQL documents)
+const LIT_ESC = { "<": "\\u003C", ">": "\\u003E", "\b": "\\b", "\f": "\\f", "\n": "\\n", "\r": "\\r", "\t": "\\t", "\0": "\\0", "\u2028": "\\u2028", "\u2029": "\\u2029" };
+const lit = (v) => JSON.stringify(v).replace(/[<>\b\f\n\r\t\0\u2028\u2029]/g, (c) => LIT_ESC[c]);
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const BASE = (process.env.BASE || "http://localhost:8804/").replace(/\/?$/, "/");
@@ -44,8 +48,8 @@ async function load(url) {
   return false;
 }
 // ordered candidate list (ids), scores and gate for a finding set
-const run = async (keys, absent) => JSON.parse(await ev(`var f={}; ${JSON.stringify(keys)}.forEach(function(k){f[k]=true;});
-  var a=${absent ? `SMD_REASON.assess(f,{absent:${JSON.stringify(absent)}})` : "SMD_REASON.assess(f)"};
+const run = async (keys, absent) => JSON.parse(await ev(`var f={}; ${lit(keys)}.forEach(function(k){f[k]=true;});
+  var a=${absent ? `SMD_REASON.assess(f,{absent:${lit(absent)}})` : "SMD_REASON.assess(f)"};
   var all=[].concat(a.infectious,a.nonInfectious).sort(function(x,y){return (y.rank-x.rank)||(y.confidence-x.confidence);});
   var sc={}; all.slice().sort(function(x,y){return x.id<y.id?-1:1;}).forEach(function(x){sc[x.id]=x.confidence;});
   return JSON.stringify({order: all.map(function(x){return x.id;}), scores: sc, gate: a.gate.cls, ab: a.gate.ab});`));
@@ -90,7 +94,7 @@ try {
   const neg = await run(CASES.headache, ["neckStiffness"]);
   // a denied strong finding costs its diagnoses rank (12 each, at most 30), never score; absent neck
   // stiffness does not exclude meningitis (the sign is insensitive), so it lowers rather than removes it
-  const rk = JSON.parse(await ev(`var f={}; ${JSON.stringify(CASES.headache)}.forEach(function(k){f[k]=true;});
+  const rk = JSON.parse(await ev(`var f={}; ${lit(CASES.headache)}.forEach(function(k){f[k]=true;});
     function r(a){ return a.infectious.filter(function(x){return x.id==="MENINGITIS";})[0].rank; }
     return JSON.stringify([r(SMD_REASON.assess(f)), r(SMD_REASON.assess(f,{absent:["neckStiffness"]}))]);`));
   ok(Math.round(rk[0] - rk[1]) === 12, `on  · fever + severe headache, "no neck stiffness": meningitis rank ${Math.round(rk[0])} -> ${Math.round(rk[1])} (-12)`);
@@ -106,7 +110,7 @@ try {
   ok(ext.present.includes("fever") && ext.absent.includes("neckStiffness"), `DX.extractText returns present + absent (${ext.present.join(",")} | no ${ext.absent.join(",")})`);
 
   // ---- 4. OPD ordering follows the engine rank ------------------------------------------------
-  const opd = JSON.parse(await ev(`var k=${JSON.stringify(CASES.feverOnly)}; var rr=OPDEMR._clinicalRerank(OPDEMR._differentialFor(k),k); return JSON.stringify(rr.slice(0,3).map(function(x){return x.id;}));`));
+  const opd = JSON.parse(await ev(`var k=${lit(CASES.feverOnly)}; var rr=OPDEMR._clinicalRerank(OPDEMR._differentialFor(k),k); return JSON.stringify(rr.slice(0,3).map(function(x){return x.id;}));`));
   ok(opd[0] !== "HLH", `OPD Ask MaiK ordering under v3: fever alone does not lead with HLH (${opd.join(", ")})`);
 
   console.log(fails === 0 ? "\nALL GREEN: differential ordering v3" : `\n${fails} FAILED`);

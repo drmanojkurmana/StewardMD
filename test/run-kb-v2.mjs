@@ -11,6 +11,10 @@ import { spawn } from "node:child_process";
 import { setTimeout as sleep } from "node:timers/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+// data -> a JS literal safe to splice into code evaluated in the page (CodeQL js/bad-code-sanitization):
+// JSON.stringify leaves <, >, U+2028 and U+2029 raw, so escape them (the pattern CodeQL documents)
+const LIT_ESC = { "<": "\\u003C", ">": "\\u003E", "\b": "\\b", "\f": "\\f", "\n": "\\n", "\r": "\\r", "\t": "\\t", "\0": "\\0", "\u2028": "\\u2028", "\u2029": "\\u2029" };
+const lit = (v) => JSON.stringify(v).replace(/[<>\b\f\n\r\t\0\u2028\u2029]/g, (c) => LIT_ESC[c]);
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const BASE = (process.env.BASE || "http://localhost:8804/").replace(/\/?$/, "/");
@@ -40,11 +44,11 @@ async function load(url) {
   return false;
 }
 // candidate (score, matched), gate and rank position for a finding set
-const q = async (keys, id) => JSON.parse(await ev(`var f={}; ${JSON.stringify(keys)}.forEach(function(k){f[k]=true;}); var a=SMD_REASON.assess(f);
+const q = async (keys, id) => JSON.parse(await ev(`var f={}; ${lit(keys)}.forEach(function(k){f[k]=true;}); var a=SMD_REASON.assess(f);
   var all=[].concat(a.infectious,a.nonInfectious).sort(function(x,y){return (y.rank-x.rank)||(y.confidence-x.confidence);});
-  var c=all.filter(function(x){return x.id===${JSON.stringify(id)};})[0]||{};
+  var c=all.filter(function(x){return x.id===${lit(id)};})[0]||{};
   return JSON.stringify({s:c.confidence||0, m:!!c.matched, pos:all.indexOf(c)+1, gate:a.gate.cls, lead:all[0]&&all[0].id});`));
-const catalogHas = async (k) => (await ev(`return DX.findingCatalog().some(function(f){return f.key===${JSON.stringify(k)};})`)) === true;
+const catalogHas = async (k) => (await ev(`return DX.findingCatalog().some(function(f){return f.key===${lit(k)};})`)) === true;
 
 const CHARCOT = ["fever", "jaundice", "rightUpperQuadrantPain"];
 try {
