@@ -32,6 +32,18 @@ editable text**. Nothing is prescribed, ordered, signed or saved until the asses
 - Case-sheet format: `Protocol: <title> (<basis> guidelines)`, then the protocol's own section heading
   and continuously numbered instructions, then "Verify every dose and threshold against the source"
   and the first two sources.
+- **Every line is EDITABLE before it is added** (owner, 2026-09-27: "keep drug doses unticked and
+  editable and protocols editable too"). Each row has an Edit control that swaps the text for a
+  textarea; the doctor's wording wins over the protocol's (`assignText(p, ids, edits)`), the row is
+  marked "edited", and Undo puts the protocol's own text back. Reset clears ticks AND edits. The
+  textarea is stored SILENTLY on input (`data-oe-inp="proto-as-txt:<lineId>"`, no repaint), the way the
+  oncology override drafts are: a repaint per keystroke closes the phone keyboard. Editing does not
+  tick a line, so a drug dose can be corrected and still left out.
+- **Legal line** (owner, 2026-09-27): "The treating doctor is responsible for every instruction used or
+  recorded; StewardMD accepts no liability." Rendered small (9.5px, `.kbp-as-duty`) under the Add
+  button, and in the reader's own Sources footer. The same sentence is the constant `DUTY_LINE`,
+  duplicated in `specialty-kits.js` because the two buildless IIFEs cannot import each other;
+  `test/kit-tools-docs.test.mjs` asserts they stay word for word the same.
 - In the OPD: Assign beside Open on every clinical row (write mode only), and an "Assign to this
   patient" button in the reader; `opd-emr.js` owns the state (`st.protoAssign = {id, sel}`) and the
   write (`appendPlan`, so the field is marked touched and the scribe never overwrites it), adds a

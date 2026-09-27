@@ -212,3 +212,62 @@ test("ONCQIS: with nothing staged it says so and names where to find a regimen",
   const html = OPDEMR._render(state({ tab: "onco" }));
   assert.match(html, /No active treatment plan for this patient yet/);
 });
+
+/* ---- Every instruction is editable before it is added (owner, 2026-09-27) -------------------------
+ * "keep drug doses unticked and editable and protocols editable too". A dose or a threshold often has
+ * to match local practice, so the wording can be changed in the tick list, not only after it lands in
+ * the form. Drug doses still start unticked.
+ */
+test("assignText: the doctor's own wording wins over the protocol's", () => {
+  const lines = KBP.assignLines(SEPSIS);
+  const edits = { [lines[0].id]: "  Piperacillin-tazobactam 4.5 g IV as per our antibiogram  " };
+  const res = KBP.assignText(SEPSIS, [lines[0].id], edits);
+  assert.match(res.blocks[0].text, /Piperacillin-tazobactam 4\.5 g IV as per our antibiogram/);
+  assert.ok(!res.blocks[0].text.includes(lines[0].text), "the original wording is replaced, not appended");
+  // Blank or whitespace-only edits fall back to the protocol's own text.
+  assert.match(KBP.assignText(SEPSIS, [lines[0].id], { [lines[0].id]: "   " }).blocks[0].text, new RegExp(lines[0].text.slice(0, 25).replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.equal(KBP.assignText(SEPSIS, [], edits).count, 0, "an edit alone adds nothing");
+});
+
+test("assignHTML: an Edit control per line, a textarea for the open one, Undo only once changed", () => {
+  const lines = KBP.assignLines(SEPSIS);
+  let html = KBP.assignHTML(SEPSIS, {}, {});
+  assert.equal((html.match(/proto-as-edit:/g) || []).length, lines.length, "every line can be edited");
+  assert.ok(!html.includes("kbp-as-tx"), "no textarea until one is opened");
+  html = KBP.assignHTML(SEPSIS, {}, { editing: lines[0].id });
+  assert.equal((html.match(/kbp-as-tx/g) || []).length, 1, "only the open line is a textarea");
+  assert.ok(html.includes('data-kbp-inp="proto-as-txt:' + lines[0].id + '"'));
+  assert.ok(!html.includes("proto-as-undo:"), "nothing to undo yet");
+  html = KBP.assignHTML(SEPSIS, {}, { editing: lines[0].id, edits: { [lines[0].id]: "my wording" } });
+  assert.ok(html.includes("proto-as-undo:" + lines[0].id) && html.includes("my wording"));
+  assert.match(KBP.assignHTML(SEPSIS, {}, { edits: { [lines[0].id]: "my wording" } }), /kbp-as-to edited/, "an edited line is marked in the list");
+});
+
+test("the drug doses stay unticked, and are editable like every other line", () => {
+  const drugs = KBP.assignLines(SEPSIS).filter((l) => l.kind === "drugs");
+  assert.ok(drugs.length, "this protocol carries drugs");
+  assert.ok(drugs.every((l) => l.on === false), "never ticked for the doctor");
+  const html = KBP.assignHTML(SEPSIS, {}, { editing: drugs[0].id });
+  assert.ok(html.includes('data-kbp-inp="proto-as-txt:' + drugs[0].id + '"'), "the dose line opens for editing");
+  assert.match(KBP.assignText(SEPSIS, [drugs[0].id], { [drugs[0].id]: "Meropenem 1 g IV 8 hourly" }).blocks[0].text, /Meropenem 1 g IV 8 hourly/);
+});
+
+test("the OPD panel carries the edit state, and Reset clears the edits too", () => {
+  const lines = KBP.assignLines(SEPSIS);
+  const open = { protoOpenId: SEPSIS.id, protoDoc: SEPSIS, assessLoaded: true };
+  const html = render(Object.assign({}, open, {
+    protoAssign: { id: SEPSIS.id, sel: {}, edits: { [lines[0].id]: "local wording" }, editing: lines[0].id }
+  }));
+  assert.ok(html.includes('data-oe-inp="proto-as-txt:' + lines[0].id + '"'), "the textarea uses the OPD input system");
+  assert.ok(html.includes("local wording"));
+  assert.ok(html.includes('data-oe-act="proto-as-reset"'));
+});
+
+/* ---- The legal line (owner, 2026-09-27) ---------------------------------------------------------- */
+test("the assign panel and the reader both name the doctor as responsible, not StewardMD", () => {
+  assert.match(KBP.DUTY_LINE, /treating doctor is responsible/);
+  assert.match(KBP.DUTY_LINE, /StewardMD accepts no liability/);
+  const panel = render({ protoOpenId: SEPSIS.id, protoDoc: SEPSIS, assessLoaded: true, protoAssign: { id: SEPSIS.id, sel: {} } });
+  assert.ok(panel.includes("kbp-as-duty") && panel.includes("StewardMD accepts no liability"));
+  assert.ok(KBP.readerHTML(SEPSIS, {}).includes(KBP.DUTY_LINE), "the reader's own footer carries it");
+});
