@@ -2291,7 +2291,7 @@
     // 1) Launched from a patient's chart -> the OPD-EMR listener stages the dose preview there; just close.
     if (fromPatient) {
       close();
-      try { if (G.toast) G.toast("Protocol sent to the patient's Oncology plan - review the computed doses there."); } catch (e1) {}
+      try { if (G.toast) G.toast("Protocol staged for this patient. Review the computed doses on the Assessment tab and Create & Activate there."); } catch (e1) {}
       return;
     }
     // 2) Standalone with the dose flow available -> open it with the protocol. The flow self-gates on its

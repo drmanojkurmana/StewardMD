@@ -205,6 +205,7 @@ default (ON) is what you get.
 | Flag | Def | Why |
 |---|---|---|
 | `smd_kb_protocols` | **ON** | The Protocols tab in the Knowledge Library + the Protocols category in Universal Search. Additive: off removes the tab, nothing else changes. Content is `ai_drafted` pending clinical review and every screen says so. Force off per device with `?kbproto=0`. See [[Clinical Protocols]]. |
+| `smd_protocol_assign` | **ON** | Assign a clinical protocol to the open patient: tick its instructions and they are appended to the case sheet (Management plan, lifestyle lines to Diet & lifestyle advice) as editable text, with a timeline note. Write-safe: the doctor ticks every line and the normal Save is what keeps it; nothing is prescribed or ordered. Off leaves protocols read-only reference. Force off per device with `?protoassign=0`. See [[Clinical Protocols]]. |
 | `smd_abg_v2` | **ON** | [[Antibiogram]] screen v2: Resistance (validated sources, specimen and setting strata, pooled India and regions, WISCA), Sources (census) and My hospital (device-local import). Off (`?abg2=0` or `smd_abg_v2 = "0"`) restores the previous resistance view, which reads the same validated data; the console and reasoning use the new data either way. Registry: `antibiogram-flags.js`. |
 
 ### Specialty Kits  <sub>1 ON · 0 OFF</sub>  <small>(added 2026-09-25)</small>

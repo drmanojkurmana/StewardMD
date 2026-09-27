@@ -601,7 +601,7 @@
     return id;
   }
   function ks(key) {
-    if (!KS[key]) KS[key] = { kitId: "", vals: {}, tools: {}, picker: false, pickerQ: "" };
+    if (!KS[key]) KS[key] = { kitId: "", vals: {}, tools: {}, picker: false, pickerQ: "", invSel: {} };
     return KS[key];
   }
   // Kit values can be clinical findings: memory only, and dropped when the consult they belong to ends.
@@ -648,6 +648,9 @@
     finish(false);
   }
   function toast(m) { try { (G.toast || G.SMD_toast) && (G.toast || G.SMD_toast)(m); } catch (e) {} }
+  // The one legal line, word for word the same as kb-protocols.js DUTY_LINE (a test keeps them in step):
+  // the doctor owns what is used or recorded, not StewardMD. Shown small at the foot of every kit.
+  var DUTY_LINE = "The treating doctor is responsible for every instruction used or recorded; StewardMD accepts no liability.";
 
   /* ======================================= rendering ======================================= */
   function reviewNote(kit, host) {
@@ -1189,6 +1192,45 @@
       (T.text ? '<div class="kit-row">' + addBtn("tool:" + id, host, host.kind === "opd" ? "Add to " + targetName(host, T.target) : "Copy") + "</div>" : "") + "</section>";
   }
 
+  /* Investigations (owner, 2026-09-26): tick the ones you want, then ONE button puts them on the
+   * patient's Investigations tab (the same queued shelf as a dictated test, with its "Ix:" plan line).
+   * Each is still searched and ordered by the doctor; nothing is ordered here. The magnifier still
+   * opens the search for a single test, and the Home sheet (no queueTests) copies the list instead.
+   * Ticks live with the rest of the kit state: memory only, per consult. */
+  function invSelOf(k) { k.invSel = k.invSel || {}; return k.invSel; }
+  function invPicked(kit, k) {
+    var sel = invSelOf(k);
+    return (kit.investigations || []).filter(function (x, i) { return sel[i]; });
+  }
+  function investigationsHtml(kit, k, host) {
+    var list = kit.investigations || []; if (!list.length) return "";
+    var canQueue = !!host.queueTests, sel = invSelOf(k), n = invPicked(kit, k).length, allOn = n === list.length;
+    var rows = list.map(function (x, i) {
+      var on = !!sel[i];
+      return '<div class="kit-tick' + (on ? " on" : "") + '"><label><input type="checkbox"' + (on ? " checked" : "") +
+        ' data-kit-act="invtick:' + i + '"><span>' + esc(x.label) + "</span></label>" +
+        (host.investigate ? '<button type="button" class="kit-tick-s" data-kit-act="inv:' + i + '" aria-label="Search for ' + esc(x.label) + '">' + ms("search") + "</button>" : "") + "</div>";
+    }).join("");
+    return '<section class="kit-card kit-invs"><h3>' + ms("biotech") + "Investigations</h3>" +
+      '<p class="kit-muted">' + (canQueue ? "Tick what you want and add it to this patient's Investigations tab; you still search and order each one." : "Tick what you want and copy the list.") + "</p>" +
+      '<div class="kit-ticks">' + rows + "</div>" +
+      '<div class="kit-tickbar"><button type="button" class="kit-link" data-kit-act="invall">' + (allOn ? "Clear all" : "Select all " + list.length) + "</button>" +
+      '<button type="button" class="kit-add kit-addq" data-kit-act="invadd"' + (n ? "" : " disabled") + ">" + ms(canQueue ? "playlist_add" : "content_copy") +
+      (canQueue ? "Add " + n + " to investigations" : "Copy " + n + " tests") + "</button></div></section>";
+  }
+  /* Protocols: Open reads it, Assign opens it with its instruction tick list so the ones that apply
+   * land in this patient's case sheet (opd-emr.js protoAssign, flag smd_protocol_assign). */
+  function protocolsHtml(kit, host) {
+    var list = kit.protocols || []; if (!list.length) return "";
+    var canAssign = !!(host.canAssignProtocol && host.canAssignProtocol());
+    return '<section class="kit-card kit-protos"><h3>' + ms("account_tree") + "Protocols</h3>" +
+      (canAssign ? '<p class="kit-muted">Open reads the protocol. Assign ticks its instructions into this patient\'s case sheet, the way an oncology regimen is assigned.</p>' : "") +
+      '<div class="kit-links">' + list.map(function (id) {
+        var open = '<button type="button" class="kit-pill" data-kit-act="proto:' + esc(id) + '">' + esc(protoTitle(id)) + "</button>";
+        return canAssign ? '<span class="kit-protorow">' + open + '<button type="button" class="kit-pill kit-pill-as" data-kit-act="protoas:' + esc(id) + '">' + ms("assignment_turned_in") + "Assign</button></span>" : open;
+      }).join("") + "</div></section>";
+  }
+
   /** The kit body for a host. ctx: { host, key, defaultKit } */
   function kitBody(ctx) {
     var host = ctx.host, k = ks(ctx.key);
@@ -1200,8 +1242,11 @@
     if (!k.kitId) k.kitId = (kitById(ctx.defaultKit) && ctx.defaultKit) || (kitById(mySpecialty()) && mySpecialty()) || (list[0] && list[0].id) || "";
     var kit = kitById(k.kitId);
     var mine = mySpecialty();
-    var chips = chipRow(k, mine) + (k.picker ? pickerHtml(k, mine) : "");
-    if (!kit) return '<div class="kit" data-kit-root data-kit-key="' + esc(ctx.key) + '" data-kit-host="' + host.kind + '">' + chips + '<div class="kit-empty">No kit selected.</div></div>';
+    // The picker lives in a FOOTER bar (owner, 2026-09-26): the kit's own content starts at the top of
+    // the screen, and the specialty is switched from the bar that stays in reach at the bottom. The
+    // "All kits" list opens upwards, above the chips.
+    var chips = '<div class="kit-foot">' + (k.picker ? pickerHtml(k, mine) : "") + chipRow(k, mine) + "</div>";
+    if (!kit) return '<div class="kit" data-kit-root data-kit-key="' + esc(ctx.key) + '" data-kit-host="' + host.kind + '">' + '<div class="kit-empty">No kit selected.</div>' + chips + "</div>";
     var blocked = host.kind === "opd" && !host.canWrite() ? '<div class="kit-status">' + ms("lock") + "<span>" + esc(writeNote(host)) + "</span></div>"
       : host.kind === "opd" && !host.ready() ? '<div class="kit-status">' + ms("hourglass_top") + "<span>" + esc(host.readyNote ? host.readyNote() : "Loading the assessment…") + "</span></div>" : "";
     var head = '<div class="kit-head"><div><span class="kit-kicker">Specialty kit</span><h2>' + esc(kit.label) + "</h2></div>" +
@@ -1216,10 +1261,8 @@
         return '<div class="kit-oset"><div><b>' + esc(o.label) + "</b><p>" + esc(o.tests.join(", ")) + "</p></div>" +
           '<button type="button" class="kit-pill" data-kit-act="oset:' + esc(o.id) + '">' + ms("playlist_add") + "Queue " + o.tests.length + " tests</button></div>";
       }).join("") + "</section>" : "";
-    var inv = (host.investigate && (kit.investigations || []).length) ? '<section class="kit-card"><h3>' + ms("biotech") + "Investigations</h3><p class=\"kit-muted\">Opens the investigation search with the test name filled in.</p><div class=\"kit-links\">" +
-      kit.investigations.map(function (x, i) { return '<button type="button" class="kit-pill" data-kit-act="inv:' + i + '">' + esc(x.label) + "</button>"; }).join("") + "</div></section>" : "";
-    var protos = (kit.protocols || []).length ? '<section class="kit-card"><h3>' + ms("account_tree") + "Protocols</h3><div class=\"kit-links\">" +
-      kit.protocols.map(function (id) { return '<button type="button" class="kit-pill" data-kit-act="proto:' + esc(id) + '">' + esc(protoTitle(id)) + "</button>"; }).join("") + "</div></section>" : "";
+    var inv = investigationsHtml(kit, k, host);
+    var protos = protocolsHtml(kit, host);
     var calcs = (host.calculator && (kit.calculators || []).length) ? '<section class="kit-card"><h3>' + ms("calculate") + "Calculators</h3><div class=\"kit-links\">" +
       kit.calculators.map(function (id) { return '<button type="button" class="kit-pill" data-kit-act="calc:' + esc(id) + '">' + esc(calcTitle(id)) + "</button>"; }).join("") + "</div></section>" : "";
     var adv = (kit.advice || []).length ? '<section class="kit-card"><h3>' + ms("record_voice_over") + "Patient advice</h3>" + kit.advice.map(function (a) {
@@ -1227,10 +1270,11 @@
     }).join("") + "</section>" : "";
     var src = '<section class="kit-card kit-src"><h3>' + ms("menu_book") + "Sources</h3><ol>" + (kit.sources || []).map(function (s) {
       return '<li><a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.title) + "</a><span>" + esc(s.org) + " · " + esc(s.year) + "</span></li>";
-    }).join("") + '</ol><p class="kit-muted">Decision support only. The kit adds text for you to check and edit; it never saves, signs or orders anything.</p></section>';
+    }).join("") + '</ol><p class="kit-muted">Decision support only. The kit adds text for you to check and edit; it never saves, signs or orders anything.</p>' +
+      '<p class="kit-duty">' + esc(DUTY_LINE) + "</p></section>";
     var share = shareHtml(kit, k, host);
     if (share) setTimeout(fillUnits, 0);
-    return '<div class="kit" data-kit-root data-kit-key="' + esc(ctx.key) + '" data-kit-host="' + host.kind + '">' + chips + head + reviewNote(kit, host) + blocked + docs + tools + secs + adv + osets + share + inv + protos + calcs + src + "</div>";
+    return '<div class="kit" data-kit-root data-kit-key="' + esc(ctx.key) + '" data-kit-host="' + host.kind + '">' + head + reviewNote(kit, host) + blocked + docs + tools + secs + adv + osets + share + inv + protos + calcs + src + chips + "</div>";
   }
 
   /* ---- wave 2 (kits-share.js, flag smd_kits_share, default OFF): the hospital's own version of the kit,
@@ -1412,7 +1456,7 @@
     if (cmd === "close") { micStop(); close(); return; }
     var key = keyOf(btn); if (!key) return;
     var host = hostFor(btn), k = ks(key), kit = kitById(k.kitId);
-    if (cmd === "kit") { k.kitId = arg; k.picker = false; k.pickerQ = ""; pushRecent(arg); var kk = kitById(arg); if (kk && kk.scribe && host.setScribe) host.setScribe(kk.scribe); host.repaint(); return; }
+    if (cmd === "kit") { k.kitId = arg; k.picker = false; k.pickerQ = ""; k.invSel = {}; pushRecent(arg); var kk = kitById(arg); if (kk && kk.scribe && host.setScribe) host.setScribe(kk.scribe); host.repaint(); return; }
     if (cmd === "mic") { micStart(btn, arg, host); return; }
     if (cmd === "docs") { if (G.SMD_DOCS) G.SMD_DOCS.open({ ctx: host.patient && host.kind === "opd" && host.consult ? host.consult() : null, kitId: kit.id, kitSummary: host.kind === "opd" ? kitSummary(kit, k) : "" }); return; }
     if (cmd === "picker") { k.picker = !k.picker; host.repaint(); if (k.picker && D) { var qi = D.getElementById("kit_picker_q"); if (qi) try { qi.focus(); } catch (e) {} } return; }
@@ -1435,8 +1479,23 @@
     }
     if (cmd === "adv") { var a = (kit.advice || []).filter(function (x) { return x.id === arg; })[0]; if (a) apply(host, a.target, a.text, {}); return; }
     if (cmd === "inv") { var inv = (kit.investigations || [])[+arg]; if (inv && host.investigate) host.investigate(inv.query); return; }
+    if (cmd === "invtick") { var sel = invSelOf(k); sel[+arg] = !sel[+arg]; host.repaint(); return; }
+    if (cmd === "invall") {
+      var sel2 = invSelOf(k), ivs = kit.investigations || [], everyOn = invPicked(kit, k).length === ivs.length;
+      ivs.forEach(function (x, i) { sel2[i] = !everyOn; });
+      host.repaint(); return;
+    }
+    if (cmd === "invadd") {
+      var chosen = invPicked(kit, k);
+      if (!chosen.length) { toast("Tick a test first."); return; }
+      var names = chosen.map(function (x) { return x.query || x.label; });
+      if (host.queueTests) host.queueTests(names, kit.label + " kit");
+      else copyText(names.join("\n"));
+      return;
+    }
     if (cmd === "oset") { var os = (kit.orderSets || []).filter(function (x) { return x.id === arg; })[0]; if (os && host.queueTests) host.queueTests(os.tests, os.label); return; }
     if (cmd === "proto") { if (host.protocol) host.protocol(arg); return; }
+    if (cmd === "protoas") { if (host.protocol) host.protocol(arg, { assign: true }); return; }
     if (cmd === "calc") { if (host.calculator) host.calculator(arg); return; }
     if (cmd === "imm") { if (host.openTab) host.openTab("immun"); return; }
     if (cmd === "tooth") {
@@ -1514,7 +1573,7 @@
   var API = {
     open: open, close: close, html: kitBody, loadKits: loadKits, loadGrowth: loadGrowth, kits: kitList, kit: kitById,
     mySpecialty: mySpecialty, setMySpecialty: setMySpecialty, myScribe: myScribe, myLabel: myLabel, kitForProfile: kitForProfile, state: ks, forget: forget, on: flagOn, notifiable: notifiable, groups: groupList,
-    KITS_V: KITS_V, GROWTH_V: GROWTH_V, TOOL_IDS: Object.keys(TOOLS), refresh: refresh, _kitSummary: kitSummary, _histHtml: histHtml, _unitHtml: unitHtml,
+    KITS_V: KITS_V, GROWTH_V: GROWTH_V, DUTY_LINE: DUTY_LINE, TOOL_IDS: Object.keys(TOOLS), refresh: refresh, _kitSummary: kitSummary, _histHtml: histHtml, _unitHtml: unitHtml,
     // pure, for tests
     _dating: dating, _acogThreshold: acogThreshold, _growth: growth, _lmsZ: lmsZ, _lmsZAdj: lmsZAdj, _pct: pct,
     _whoVision: whoVision, _logmar: logmar, _whoHearing: whoHearing, _tuningFork: tuningFork, _pasi: pasi, _pasiArea: pasiArea,

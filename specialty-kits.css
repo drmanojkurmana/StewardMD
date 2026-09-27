@@ -198,3 +198,31 @@ html.oe-kit-calc .icd-overlay { z-index: 12015; }
 .kit .kit-share .kit-unit p { margin: 6px 0; font-size: 14px; line-height: 1.45; }
 .kit .kit-share .kit-unit ul { margin: 4px 0 8px 18px; padding: 0; font-size: 13.5px; }
 .kit .kit-share [data-kit-hist] { margin-top: 10px; }
+
+/* ---- Specialty picker as a FOOTER bar (2026-09-26) ---------------------------------------------
+ * The chip row used to sit above the kit, so the first screen of the Specialty tab was a picker
+ * rather than the kit. It now sticks to the bottom of whichever scroller holds the kit (the OPD
+ * canvas, or the standalone sheet body) and the "All kits" list opens upwards, above the chips. */
+.kit .kit-foot { position: sticky; bottom: 0; z-index: 3; margin: 14px -4px 0; padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--outline-variant); background: var(--surface); }
+.kit .kit-foot .kit-picker { margin-bottom: 8px; max-height: 52vh; overflow-y: auto; -webkit-overflow-scrolling: touch; box-shadow: 0 -10px 24px rgba(20, 32, 43, .14); }
+.kit .kit-foot .kit-chips { padding-bottom: 0; }
+body.dark .kit .kit-foot { background: var(--sc-lowest); }
+
+/* ---- Investigations: tick, then one Add (2026-09-26) ------------------------------------------- */
+.kit .kit-ticks { display: flex; flex-direction: column; gap: 2px; margin: 8px 0 4px; }
+.kit .kit-tick { display: flex; align-items: center; gap: 8px; border-radius: 10px; }
+.kit .kit-tick > label { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 6px 8px; cursor: pointer; }
+.kit .kit-tick input { width: 20px; height: 20px; flex: 0 0 auto; accent-color: var(--primary); }
+.kit .kit-tick span { font: 550 14px/1.35 var(--q-sans); color: var(--on-surface); overflow-wrap: anywhere; }
+.kit .kit-tick.on { background: color-mix(in srgb, var(--primary) 8%, transparent); }
+.kit .kit-tick.on span { color: var(--primary); font-weight: 650; }
+.kit .kit-tick-s { flex: 0 0 auto; width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 10px; background: transparent; color: var(--secondary); cursor: pointer; }
+.kit .kit-tickbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-top: 6px; }
+
+/* ---- Protocols: Open + Assign, like an oncology regimen ---------------------------------------- */
+.kit .kit-protorow { display: flex; align-items: stretch; gap: 6px; width: 100%; }
+.kit .kit-protorow .kit-pill:first-child { flex: 1; min-width: 0; }
+.kit .kit-pill-as { flex: 0 0 auto; border-color: var(--primary); color: var(--primary); font-weight: 700; white-space: nowrap; }
+
+/* The legal line at the foot of every kit: smallest readable size, one line of space (2026-09-27). */
+.kit .kit-duty { margin: 6px 0 0; color: var(--on-surface-variant); opacity: .75; font: 500 9.5px/1.35 var(--q-sans); }

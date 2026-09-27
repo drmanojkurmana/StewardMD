@@ -227,7 +227,7 @@ export function gstForLines(lines, tariff, region, opts) {
     const healthSac = rowHsn && /^9993\d{2}$/.test(rowHsn) ? rowHsn : null;
     const exempt = (basis, hsnSac) => out.lines.push({ code, kind, hsnSac: hsnSac || null, taxable, gstRate: null, gstExempt: true, tax: 0, basis });
     const taxed = (rate, basis, hsnSac) => {
-      const tax = round2(taxable * rate / 100);
+      const tax = gstOn(taxable, rate);
       out.lines.push({ code, kind, hsnSac: hsnSac || null, taxable, gstRate: rate, gstExempt: false, tax, basis });
       out.totalTax = round2(out.totalTax + tax);
       if (rate > 0 && !hsnSac) out.missingHsnSac.push(code);
@@ -323,17 +323,33 @@ export function packageRoomComponent(pkg, lines, tariff, settings) {
     if (g) g.days += 1; else groups.push({ name: d.name, days: 1, ratePerDay: d.rate });
   }
   const inclusive = pkg.priceIncludesGst === true;
-  const tax = round2(roomValue * ROOM_GST_RATE / (inclusive ? 100 + ROOM_GST_RATE : 100));
+  const tax = gstOn(roomValue, ROOM_GST_RATE, inclusive);
   return { roomValue, taxable: inclusive ? round2(roomValue - tax) : roomValue, tax, exemptValue: round2(price - roomValue), days: qualifying.length, groups,
     method, fallback, capped, priceIncludesGst: inclusive, unrecoverableGst: inclusive ? tax : 0 };
 }
 
-/** PURE. CGST and SGST (half each) within a state, IGST across states (Section 8 IGST Act); the caller decides which. */
+/**
+ * PURE. THE GST ON A TAXABLE VALUE AT A RATE (BILL-22, audit 2026-09). CGST and SGST are each levied at half the rate
+ * on the same value, so they are equal: each half is computed on its own, in paise, and rounded to the paisa (half
+ * up), and the tax is the two halves added. Splitting a total computed once put an odd paisa on CGST (Rs 250.05 on Rs
+ * 5,001 at 5 percent printed as 125.03 + 125.02). An inter-state bill (IGST) carries the same total.
+ * inclusive: the value already includes the tax, which is taken out of it.
+ */
+export function gstOn(taxable, rate, inclusive) {
+  const paise = Math.round(Number(taxable) * 100), r = Math.round(Number(rate) * 100);   // the rate in hundredths of a percent
+  if (!Number.isFinite(paise) || !Number.isFinite(r)) return 0;
+  const half = Math.round(inclusive ? paise * r / (2 * (10000 + r)) : paise * r / 20000);
+  return (2 * half) / 100;
+}
+
+/** PURE. CGST and SGST (half each) within a state, IGST across states (Section 8 IGST Act); the caller decides which.
+ *  A tax from gstOn is an even number of paise, so the halves are equal. An odd paisa comes only from a bill raised
+ *  before that rule; it stays on CGST so that document still adds up. */
 export function gstSplit(tax, interState) {
   const t = round2(tax);
   if (interState) return { cgst: 0, sgst: 0, igst: t };
-  const c = round2(t / 2);
-  return { cgst: c, sgst: round2(t - c), igst: 0 };
+  const p = Math.round(t * 100), c = Math.ceil(p / 2);
+  return { cgst: c / 100, sgst: (p - c) / 100, igst: 0 };
 }
 
 /** PURE. The calendar date in India (IST, UTC+5:30) of an instant, YYYY-MM-DD, or "" when it is not a time. */

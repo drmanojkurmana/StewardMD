@@ -105,6 +105,8 @@ test("a saved payer connector submits claims with its sealed token, and the clai
     // Turned off: the org entry answers again, and it says it is manual.
     const off = await savePayer(ADMIN, { secrets: undefined, active: false });
     assert.equal(off.__status, 200, off.__text);
+    // BILL-18: a stay has one open claim, so the first is closed before the next is coded for the same stay.
+    await as(CASHIER, "/ward/claim-state", "POST", { orgId: ORG_ID, claimId: claim.claimId, action: "deny", reason: "wrong payer" });
     const claim2 = await as(CASHIER, "/ward/claim", "POST", { orgId: ORG_ID, patientId: adm.patientId, encounterId: adm.encounterId, codes: ["I10"], payerId: "star", now: "2026-09-14T11:00:00Z" });
     const sub2 = await as(CASHIER, "/ward/claim-state", "POST", { orgId: ORG_ID, claimId: claim2.claimId, action: "submit", submittedAmount: 100 });
     assert.equal(sub2.claim.adapter.state, "queued");

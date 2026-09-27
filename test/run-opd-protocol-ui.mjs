@@ -30,7 +30,8 @@ try{
  await call('Page.navigate',{url:'http://localhost:9061/test/opd-protocol-ui-harness.html'});
  ok(await until('window.__ready===true'),'real kb-protocols.js + onco-protocols.js + opd-emr.js loaded');
  await open();
- ok(await until(`document.querySelectorAll('#oe-out-proto .oe-proto-row[data-oe-act^="proto-open:"]').length===${idx.count}`),`all ${idx.count} clinical protocols listed under All`);
+ ok(await until(`document.querySelectorAll('#oe-out-proto [data-oe-act^="proto-open:"]').length===${idx.count}`),`all ${idx.count} clinical protocols listed under All`);
+ ok(await until(`document.querySelectorAll('#oe-out-proto [data-oe-act^="proto-as-open:"]').length===${idx.count}`),`every clinical protocol offers Assign in write mode`);
  ok(await until(`document.querySelectorAll('#oe-out-proto [data-oe-act^="proto-assign:"]').length>100`),'oncology regimens listed with Assign (write mode)');
  const sub=await ev(`document.querySelector('#smdOpdEmr .oe-h3').textContent`);
  ok(!/&amp;/.test(sub)&&!/[–—]/.test(await ev(`document.querySelector('#smdOpdEmr .oe-canvas').innerText`)),'no literal "&amp;" and no em/en dash in the tab');
@@ -93,14 +94,45 @@ try{
  await ev(`document.querySelector('#smdOpdEmr [data-kbp-jump="oeKbpSources"]').click()`);await sleep(700);
  ok(await ev(`document.querySelector('#smdOpdEmr .oe-canvas').scrollTop>0`),'section jump scrolls the OPD canvas');
  await shot('reader-390');
- await ev(`document.querySelector('#smdOpdEmr .oe-proto-back').click()`);
+ // Assign the open protocol into the case sheet (2026-09-26, flag smd_protocol_assign).
+ ok(await ev(`!!document.querySelector('#smdOpdEmr [data-oe-act="proto-as-open:${sepsis.id}"]')`),'the reader offers Assign to this patient');
+ await ev(`document.querySelector('#smdOpdEmr [data-oe-act="proto-as-open:${sepsis.id}"]').click()`);
+ ok(await until(`!!document.querySelector('#smdOpdEmr .kbp-assign')`),'Assign opens the instruction tick list');
+ const allLines=await ev(`document.querySelectorAll('#smdOpdEmr .kbp-as-row').length`);
+ const ticked=await ev(`document.querySelectorAll('#smdOpdEmr .kbp-as-row input:checked').length`);
+ ok(allLines>10&&ticked>0&&ticked<allLines,'the actionable instructions start ticked, the reading matter does not');
+ await ev(`document.querySelector('#smdOpdEmr [data-oe-act="proto-as-none"]').click()`);
+ ok(await until(`document.querySelector('#smdOpdEmr [data-oe-act="proto-as-apply"]').disabled&&/Nothing ticked/.test(document.querySelector('#smdOpdEmr .kbp-as-n').textContent)`),'Clear unticks everything and disables Add');
+ await ev(`document.querySelector('#smdOpdEmr [data-oe-act="proto-as-reset"]').click()`);
+ ok(await until(`document.querySelectorAll('#smdOpdEmr .kbp-as-row input:checked').length===${ticked}`),'Reset restores the defaults');
+
+ // Every line is editable before it goes in (owner, 2026-09-27), drug doses included.
+ const line0=await ev(`document.querySelector('#smdOpdEmr [data-oe-act^="proto-as-edit:"]').getAttribute('data-oe-act').slice(14)`);
+ await ev(`document.querySelector('#smdOpdEmr [data-oe-act="proto-as-edit:${line0}"]').click()`);
+ ok(await until(`!!document.querySelector('#smdOpdEmr .kbp-as-tx')&&document.activeElement===document.querySelector('#smdOpdEmr .kbp-as-tx')`),'Edit opens a textarea on that line and focuses it');
+ const MINE='Local wording: piperacillin-tazobactam 4.5 g IV per our antibiogram';
+ await ev(`(()=>{const t=document.querySelector('#smdOpdEmr .kbp-as-tx');t.value=${JSON.stringify(MINE)};t.dispatchEvent(new Event('input',{bubbles:true}));return 1})()`);
+ ok(await ev(`document.activeElement===document.querySelector('#smdOpdEmr .kbp-as-tx')`),'typing does not repaint the panel away from under the keyboard');
+ await ev(`document.querySelector('#smdOpdEmr [data-oe-act="proto-as-edit:${line0}"]').click()`);
+ ok(await until(`!document.querySelector('#smdOpdEmr .kbp-as-tx')&&/edited/.test(document.querySelector('#smdOpdEmr .kbp-assign').textContent)`),'Done closes the editor and marks the line edited');
+ // Tick the edited line (it is a Recognise line, unticked by default) and add it.
+ await ev(`(()=>{const c=document.querySelector('#smdOpdEmr [data-oe-act="proto-as-line:${line0}"]');if(!c.checked)c.click();return 1})()`);
+ ok(await ev(`[...document.querySelectorAll('#smdOpdEmr .kbp-as-duty')].length===1&&parseFloat(getComputedStyle(document.querySelector('#smdOpdEmr .kbp-as-duty')).fontSize)<=10`),'the legal line is there, in the smallest type');
+
+ await shot('assign-390');
+ ok(await ev(`(()=>{const c=document.querySelector('#smdOpdEmr .oe-canvas');return c.scrollWidth<=c.clientWidth+1})()`),'the tick list fits 390px');
+ await ev(`document.querySelector('#smdOpdEmr [data-oe-act="proto-as-apply"]').click()`);
+ ok(await until(`window.OPDEMR._state().tab==='assess'&&/^Protocol: /m.test(window.OPDEMR._state().assessVals.management_plan||'')`),'Add to case sheet writes the block into the Management plan and returns to Assessment');
+ ok(await ev(`(window.OPDEMR._state().assessVals.management_plan||'').includes(${JSON.stringify("Local wording: piperacillin-tazobactam 4.5 g IV per our antibiogram")})`),'the doctor\'s own wording is what reaches the case sheet, not the protocol\'s');
+ ok(await ev(`(window.OPDEMR._state().assessTouched||{}).management_plan===true`),'the field is marked touched, so the scribe never overwrites it');
+ await open();
  ok(await until(`document.querySelectorAll('#oe-out-proto .oe-proto-row').length>${idx.count}`),'Back returns to the list');
 
  // Read-only: regimens still list (used to hang on "Loading the protocol library..."), rows say view only.
  await open(`window.__flagOff={smd_opd_emr_write:true};`,false);
  ok(await ev(`window.OPDEMR._state().writeOn===false`),'profile really is read-only');
  ok(await until(`document.querySelectorAll('#oe-out-proto .oe-proto-row.static').length>100`),'read-only mode lists regimens (no infinite loading)');
- ok(await ev(`!document.querySelector('#oe-out-proto [data-oe-act^="proto-assign:"]')&&document.querySelector('#oe-out-proto').textContent.includes('view only')`),'read-only rows are view only');
+ ok(await ev(`!document.querySelector('#oe-out-proto [data-oe-act^="proto-assign:"]')&&!document.querySelector('#oe-out-proto [data-oe-act^="proto-as-open:"]')&&document.querySelector('#oe-out-proto').textContent.includes('view only')`),'read-only rows are view only, regimens and protocols alike');
 
  // Oncology flag off: clinical protocols still available, no Oncology chip.
  await open(`window.__flagOff={smd_onco_protocols:true};`);

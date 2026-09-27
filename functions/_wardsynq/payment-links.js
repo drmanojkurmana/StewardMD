@@ -17,6 +17,12 @@
  *   4. The payment posts to the invoice ledger with `capture: "integrated"` (the only path that can
  *      produce it) and the gateway payment id as its reference, then the request is marked paid.
  *
+ * A LINK NEVER COLLECTS MORE THAN IS OWED (BILL-05, audit 2026-09). A link asks for the balance when it was made. Once
+ * the bill is paid, discounted or credited another way, the link is closed: shown as closed on the cashier screen, and
+ * replaced when a new link is asked for. The gateway cannot be told to stop taking it (no cancel call is built), so a
+ * payment that still arrives on a closed link, or for more than the bill now owes, is FLAGGED for a person to refund
+ * and never posted to the bill.
+ *
  * IDEMPOTENT. A retried or duplicated notice finds the payment id already on the invoice (or the request
  * already paid) and writes nothing. If the ledger write succeeded and the request update did not, the
  * gateway's retry completes it. A bad signature writes nothing at all, so the public door cannot be used
@@ -56,10 +62,19 @@ async function openService(request, env, ctx, need) {
   }
 }
 
-/** PURE. What the cashier screen sees of a request. */
-function requestSummary(q) {
-  return { id: q.id, invoiceId: q.invoiceId, provider: q.provider, url: q.status === "open" ? q.url : null, amount: q.amount, currency: q.currency, status: q.status,
+/** PURE. What the cashier screen sees of a request. balanceMinor: the bill's balance now, when known; an open link asking
+ *  for more than that is shown closed (BILL-05). */
+function requestSummary(q, balanceMinor) {
+  const status = q.status === "open" && Number.isFinite(balanceMinor) && balanceMinor < q.amountMinor ? "expired" : q.status;
+  return { id: q.id, invoiceId: q.invoiceId, provider: q.provider, url: status === "open" ? q.url : null, amount: q.amount, currency: q.currency, status,
     createdAt: q.createdAt, paidAt: q.paidAt || null, paymentId: q.paymentId || null, flag: q.flag || null };
+}
+/** PURE. A bill's balance in the minor unit, or null when it cannot be said (a void bill owes nothing). */
+function balanceMinorOf(inv) {
+  if (!inv) return null;
+  if (inv.void) return 0;
+  const { balance, currency } = reconciliationOf(inv);
+  return balance > 0 ? toMinor(balance, currency) : 0;
 }
 
 // ponytail: newest 1000 requests per hospital, filtered here; an index by invoice when a hospital outgrows it.
@@ -83,11 +98,18 @@ async function createPaymentLink(request, env, ctx) {
   } catch { return unread; }
   if (!inv) return { ok: false, status: 404, error: "invoice_not_found" };
   if (inv.void) return { ok: false, status: 409, error: "invoice_void", message: "This bill is cancelled; nothing can be collected against it." };
-  const open = existing.find((q) => q && q.invoiceId === invoiceId && q.status === "open");
-  if (open) return { ok: false, status: 409, error: "payment_link_open", message: "A payment link for this bill is already open. Use it, or wait for it to be paid.", request: requestSummary(open) };
   const { balance, currency } = reconciliationOf(inv);
+  const amountMinor = balance > 0 ? toMinor(balance, currency) : null;
+  const open = existing.find((q) => q && q.invoiceId === invoiceId && q.status === "open");
+  if (open && open.amountMinor === amountMinor) return { ok: false, status: 409, error: "payment_link_open", message: "A payment link for this bill is already open. Use it, or wait for it to be paid.", request: requestSummary(open) };
+  /* The open link asks for a balance the bill no longer has: it is closed here, and a payment that still arrives on it is
+   * flagged, never posted (BILL-05). */
+  if (open) {
+    const at = new Date().toISOString();
+    try { await o.repo.append(o.tenantId, [{ ...open, version: open.version + 1, status: "expired", expiredAt: at, writtenBy: { id: o.actorId, kind: "human", at } }], { audit: auditEvent("payment.link.expire", o.actorId, { requestId: open.id, invoiceId, reason: "balance_changed" }) }); }
+    catch { return { ok: false, status: 409, error: "payment_link_open", message: "The open payment link for this bill could not be closed, so no new one was made. Try again.", request: requestSummary(open) }; }
+  }
   if (!(balance > 0)) return { ok: false, status: 422, error: "nothing_owed", message: "Nothing is owed on this bill." };
-  const amountMinor = toMinor(balance, currency);
   if (amountMinor == null) return { ok: false, status: 422, error: "currency_not_supported", message: `Online payment is not available for ${str(currency) || "this currency"}.` };
 
   const secrets = await openConnectorSecrets(env, conn);
@@ -111,13 +133,15 @@ async function listPaymentRequests(request, env, ctx) {
   if (o.error) return o.error;
   const patientId = str(ctx.patientId);
   if (!patientId) return { ok: false, status: 422, error: "patient_required" };
-  let rows;
+  let rows, invoices;
   try {
     // Reading the invoices first means a caller who may not read this patient's bills learns nothing.
-    await o.svc.byPatient(INVOICE, patientId);
+    invoices = (await o.svc.byPatient(INVOICE, patientId)) || [];
     rows = (await recentRequests(o.repo, o.tenantId)) || [];
   } catch (e) { return e instanceof GovernanceError ? { ok: false, status: 403, error: "permission" } : { ok: false, status: 502, error: "record_read_failed", message: "Payment links could not be read." }; }
-  return { ok: true, patientId, requests: rows.filter((q) => q && q.patientId === patientId).sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt))).map(requestSummary) };
+  const balanceOf = new Map(invoices.filter(Boolean).map((i) => [i.id, balanceMinorOf(i)]));
+  return { ok: true, patientId, requests: rows.filter((q) => q && q.patientId === patientId).sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)))
+    .map((q) => requestSummary(q, balanceOf.has(q.invoiceId) ? balanceOf.get(q.invoiceId) : undefined)) };
 }
 
 const gatewayActor = () => makeActor({ id: "service:payment-gateway", kind: KIND.SERVICE, tier: TIER.DRAFT, display: "Payment gateway notice", scope: { read: [INVOICE], write: [INVOICE] } });
@@ -185,6 +209,10 @@ async function receivePaymentCallback(request, env, ctx) {
   const already = (inv.events || []).some((e) => e && e.kind === "payment" && e.reference === reference);
   if (!already) {
     if (inv.void) return flagWith("invoice_void", got);
+    /* Paid at the counter, discounted or credited since the link was made: the bill no longer owes what the link asked,
+     * so the money is flagged for a refund and nothing is posted (BILL-05). */
+    const owed = balanceMinorOf(inv);
+    if (req.status === "expired" || owed == null || owed < req.amountMinor) return flagWith("bill_settled_before_online_payment", { ...got, balanceMinor: owed });
     const adapter = { adapterId: conn.provider, adapterName: GATEWAYS[conn.provider].label, state: "acknowledged", payerReference: ev.paymentId,
       note: "Confirmed by the gateway: signed notice verified and payment status read back from the gateway.", attemptedAt: at };
     const collection = applyAdapterResult({ method: "online", provider: conn.provider, amount: req.amount, details: { reference: ev.paymentId }, capture: CAPTURE.MANUAL, settlement: "unknown", settles: "batch" },

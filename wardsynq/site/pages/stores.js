@@ -315,6 +315,16 @@
       set("stMsg", '<div class="msg err">' + TS(c, "site.stores.notSaved", "Not saved.") + " " + EN(c, esc((r && (r.detail || r.message || r.error)) || T(c, "site.stores.noResponse", "No response from the server."))) + "</div>");
     };
     var after = function (okText) { return function (r) { if (!r || !r.ok) { msg(r); return; } set("stMsg", ""); c.toast(okText); load(); }; };
+    /* ONE KEY PER SUBMISSION (BILL-03). A write whose answer was lost is sent again with the same idempotencyKey, so the
+     * server replays it instead of issuing or receiving twice; the key is dropped only once the server says ok. A press
+     * while the same form is still in flight sends nothing. */
+    var keys = {}, busy = {};
+    var send = function (slot, path, body, okText) {
+      if (busy[slot]) return;
+      busy[slot] = true;
+      body.idempotencyKey = keys[slot] || (keys[slot] = "st-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10));
+      return c.api(path, body).then(function (r) { busy[slot] = false; if (r && r.ok) delete keys[slot]; after(okText)(r); }, function () { busy[slot] = false; msg(null); });
+    };
     var lines = function (kind, id, field) {
       var out = [], inputs = el.querySelectorAll ? el.querySelectorAll('[data-line="' + kind + '"]') : [];
       for (var i = 0; i < inputs.length; i++) if (inputs[i].getAttribute("data-indent") === id) { var o = { code: inputs[i].getAttribute("data-code") }; o[field] = String(inputs[i].value || "").trim(); out.push(o); }
@@ -324,31 +334,31 @@
     el.onclick = function (ev) {
       var b = ev.target.closest && ev.target.closest("[data-st]"); if (!b) return;
       var act = b.getAttribute("data-st"), id = b.getAttribute("data-id");
-      if (act === "approve") return c.api("/ward/indent-decide", { orgId: org, indentId: id, decision: "approved", lines: lines("approve", id, "approvedQuantity") }).then(after(T(c, "site.stores.approved", "Approved.")));
-      if (act === "reject") return c.api("/ward/indent-decide", { orgId: org, indentId: id, decision: "rejected", reason: val("stRej-" + id) }).then(after(T(c, "site.stores.rejected", "Rejected.")));
-      if (act === "issue") return c.api("/ward/indent-issue", { orgId: org, indentId: id, lines: lines("issue", id, "quantity") }).then(after(T(c, "site.stores.issued", "Issued.")));
-      if (act === "ack") return c.api("/ward/indent-acknowledge", { orgId: org, indentId: id, lines: lines("ack", id, "received") }).then(after(T(c, "site.stores.acknowledged", "Receipt confirmed.")));
-      if (act === "order") return c.api("/ward/store-purchase-order", { orgId: org, indentId: id, vendor: val("stVendor-" + id) }).then(after(T(c, "site.stores.ordered", "Purchase order raised. It still needs approval on the Purchasing screen.")));
-      if (act === "close") return c.api("/ward/indent-close", { orgId: org, indentId: id, reason: val("stClose-" + id) }).then(after(T(c, "site.stores.closed", "Back-order closed.")));
-      if (act === "item") return c.api("/ward/store-item", { orgId: org, code: val("stItCode"), name: val("stItName"), category: val("stItCat"), unit: val("stItUnit"), reorderLevel: val("stItReorder"), packs: parsePacksInput(val("stItPacks")) }).then(after(T(c, "site.stores.itemSaved", "Item saved.")));
-      if (act === "location") return c.api("/ward/store-location", { orgId: org, code: val("stLoCode"), name: val("stLoName"), kind: val("stLoKind"), departmentId: val("stLoDept") }).then(after(T(c, "site.stores.locationSaved", "Location saved.")));
-      if (act === "move") return c.api("/ward/store-move", { orgId: org, kind: val("stMvKind"), code: val("stMvItem"), location: val("stMvLoc"), quantity: val("stMvQty"), unit: val("stMvUnit"), batch: val("stMvBatch"), expiry: val("stMvExpiry"), reason: val("stMvReason") }).then(after(T(c, "site.stores.recorded", "Recorded.")));
+      if (act === "approve") return send("decide:" + id, "/ward/indent-decide", { orgId: org, indentId: id, decision: "approved", lines: lines("approve", id, "approvedQuantity") }, T(c, "site.stores.approved", "Approved."));
+      if (act === "reject") return send("decide:" + id, "/ward/indent-decide", { orgId: org, indentId: id, decision: "rejected", reason: val("stRej-" + id) }, T(c, "site.stores.rejected", "Rejected."));
+      if (act === "issue") return send("issue:" + id, "/ward/indent-issue", { orgId: org, indentId: id, lines: lines("issue", id, "quantity") }, T(c, "site.stores.issued", "Issued."));
+      if (act === "ack") return send("ack:" + id, "/ward/indent-acknowledge", { orgId: org, indentId: id, lines: lines("ack", id, "received") }, T(c, "site.stores.acknowledged", "Receipt confirmed."));
+      if (act === "order") return send("order:" + id, "/ward/store-purchase-order", { orgId: org, indentId: id, vendor: val("stVendor-" + id) }, T(c, "site.stores.ordered", "Purchase order raised. It still needs approval on the Purchasing screen."));
+      if (act === "close") return send("close:" + id, "/ward/indent-close", { orgId: org, indentId: id, reason: val("stClose-" + id) }, T(c, "site.stores.closed", "Back-order closed."));
+      if (act === "item") return send("item", "/ward/store-item", { orgId: org, code: val("stItCode"), name: val("stItName"), category: val("stItCat"), unit: val("stItUnit"), reorderLevel: val("stItReorder"), packs: parsePacksInput(val("stItPacks")) }, T(c, "site.stores.itemSaved", "Item saved."));
+      if (act === "location") return send("location", "/ward/store-location", { orgId: org, code: val("stLoCode"), name: val("stLoName"), kind: val("stLoKind"), departmentId: val("stLoDept") }, T(c, "site.stores.locationSaved", "Location saved."));
+      if (act === "move") return send("move", "/ward/store-move", { orgId: org, kind: val("stMvKind"), code: val("stMvItem"), location: val("stMvLoc"), quantity: val("stMvQty"), unit: val("stMvUnit"), batch: val("stMvBatch"), expiry: val("stMvExpiry"), reason: val("stMvReason") }, T(c, "site.stores.recorded", "Recorded."));
       if (act === "raise") {
         var to = document.getElementById("stRqTo"), opt = to && to.options ? to.options[to.selectedIndex] : null, rl = [];
         for (var n = 0; n < 5; n++) { if (val("stRqItem" + n)) rl.push({ code: val("stRqItem" + n), quantity: val("stRqQty" + n) }); }
-        return c.api("/ward/indent", { orgId: org, departmentId: opt ? opt.getAttribute("data-dept") : "", toLocation: val("stRqTo"), fromLocation: val("stRqFrom"), note: val("stRqNote"), lines: rl }).then(after(T(c, "site.stores.raised", "Indent raised. It waits for your department's in-charge to approve it.")));
+        return send("raise", "/ward/indent", { orgId: org, departmentId: opt ? opt.getAttribute("data-dept") : "", toLocation: val("stRqTo"), fromLocation: val("stRqFrom"), note: val("stRqNote"), lines: rl }, T(c, "site.stores.raised", "Indent raised. It waits for your department's in-charge to approve it."));
       }
       if (act === "bookin") {
         var ln = b.getAttribute("data-po-line");
-        return c.api("/ward/goods-receive", { orgId: org, purchaseOrderId: id, line: ln, item: b.getAttribute("data-item"), unit: val("stPoUnit-" + id + "-" + ln), quantity: val("stPoQty-" + id + "-" + ln), location: val("stPoLoc-" + id + "-" + ln) }).then(after(T(c, "site.stores.bookedIn", "Booked in.")));
+        return send("bookin:" + id + ":" + ln, "/ward/goods-receive", { orgId: org, purchaseOrderId: id, line: ln, item: b.getAttribute("data-item"), unit: val("stPoUnit-" + id + "-" + ln), quantity: val("stPoQty-" + id + "-" + ln), location: val("stPoLoc-" + id + "-" + ln) }, T(c, "site.stores.bookedIn", "Booked in."));
       }
-      if (act === "return") return c.api("/ward/supplier-return", { orgId: org, receiptId: val("stRtReceipt"), quantity: val("stRtQty"), reason: val("stRtReason"), debitNoteNo: val("stRtNote"), supplier: val("stRtSupplier"), witnessId: val("stRtWitness"), controllerApprovalRef: val("stRtCdRef") }).then(after(T(c, "site.stores.sc.returned", "Returned to the supplier.")));
+      if (act === "return") return send("return", "/ward/supplier-return", { orgId: org, receiptId: val("stRtReceipt"), quantity: val("stRtQty"), reason: val("stRtReason"), debitNoteNo: val("stRtNote"), supplier: val("stRtSupplier"), witnessId: val("stRtWitness"), controllerApprovalRef: val("stRtCdRef") }, T(c, "site.stores.sc.returned", "Returned to the supplier."));
       if (act === "contract") {
         /* Rupees on screen, whole paise to the server; anything that is not a plain amount is sent as typed and refused there. */
         var rs = val("stRcPrice"), paise = /^\d+(\.\d{1,2})?$/.test(rs) ? Math.round(Number(rs) * 100) : rs;
-        return c.api("/ward/rate-contract", { orgId: org, vendor: val("stRcVendor"), item: val("stRcItem"), unit: val("stRcUnit"), pricePaise: paise, validFrom: val("stRcFrom"), validTo: val("stRcTo"), reason: val("stRcReason") }).then(after(T(c, "site.stores.sc.contractSaved", "Contract saved.")));
+        return send("contract", "/ward/rate-contract", { orgId: org, vendor: val("stRcVendor"), item: val("stRcItem"), unit: val("stRcUnit"), pricePaise: paise, validFrom: val("stRcFrom"), validTo: val("stRcTo"), reason: val("stRcReason") }, T(c, "site.stores.sc.contractSaved", "Contract saved."));
       }
-      if (act === "policy") return c.api("/org/reorder-policy", { orgId: org, policy: { windowDays: val("stRpWindow"), leadTimeDays: val("stRpLead"), safetyDays: val("stRpSafety"), minDataDays: val("stRpMin") }, reason: val("stRpReason") }).then(after(T(c, "site.stores.sc.policySaved", "Reorder settings saved.")));
+      if (act === "policy") return send("policy", "/org/reorder-policy", { orgId: org, policy: { windowDays: val("stRpWindow"), leadTimeDays: val("stRpLead"), safetyDays: val("stRpSafety"), minDataDays: val("stRpMin") }, reason: val("stRpReason") }, T(c, "site.stores.sc.policySaved", "Reorder settings saved."));
       if (act === "reorder") {
         set("stReorder", reorderHtml(c, "loading"));
         return c.api("/ward/reorder-suggestions" + q).then(function (r) { set("stReorder", reorderHtml(c, r || { ok: false })); }, function () { set("stReorder", reorderHtml(c, { ok: false })); });

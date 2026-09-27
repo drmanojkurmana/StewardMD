@@ -340,3 +340,23 @@ test("source watch: collects cited URLs, fingerprints visible text only, and cla
   assert.equal(SW.classify(ok, { status: 403 }), "blocked");
   assert.equal(SW.classify({ status: 0 }, ok), "recovered");
 });
+
+/* ---- The legal line at the foot of every kit (owner, 2026-09-27) ---------------------------------
+ * "write legal line in footer its doctor responsibility not the stewardmd (very small font less
+ * space)". One sentence, duplicated in two buildless IIFEs that cannot import each other, so this
+ * test is what keeps them word for word the same.
+ */
+test("every kit closes with the same responsibility line as the protocol reader", () => {
+  const KBP = require("../kb-protocols.js");
+  assert.equal(K.DUTY_LINE, KBP.DUTY_LINE, "one sentence, not two wordings");
+  assert.match(K.DUTY_LINE, /treating doctor is responsible/);
+  assert.match(K.DUTY_LINE, /StewardMD accepts no liability/);
+  const host = { kind: "opd", canWrite: () => true, ready: () => true, addLabel: () => "Add", fieldLabel: (n) => n,
+    insert() {}, repaint() {}, protocol() {}, calculator() {}, investigate() {}, queueTests() {}, openTab() {},
+    setScribe() {}, patient: () => ({}), consult: () => ({}) };
+  BUNDLE.kits.forEach((kit, i) => {
+    K.state("duty" + i).kitId = kit.id;
+    const html = K.html({ host, key: "duty" + i });
+    assert.ok(html.includes('<p class="kit-duty">') && html.includes(K.DUTY_LINE), kit.id + " states who is responsible");
+  });
+});

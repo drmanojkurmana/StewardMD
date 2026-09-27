@@ -14,8 +14,41 @@ clinical protocols AND the oncology regimens (`kb/protocols/*.json`, flag `smd_o
 list: branch chips (All / Oncology / each subject), a cancer-type picker under Oncology, and one search
 over titles, aliases, humanised cancer type and regimen drug names. A clinical protocol opens READ-ONLY
 inside the tab via `SMD_KBPROTO.readerHTML(p, { idPrefix: "oeKbp" })` (the Knowledge Library sheet sits
-below the EMR's z-index, so it cannot be opened on top). Only oncology rows have Assign (a draft plan +
-timeline entry); a clinical protocol never writes to the patient record.
+below the EMR's z-index, so it cannot be opened on top).
+
+**Assign, for clinical protocols too (owner, 2026-09-26: "protocols cant be assigned like oncology
+protocols why? fix it").** Flag `smd_protocol_assign` (kb-protocols-flags.js, default ON,
+`?protoassign=0`). An oncology regimen still assigns a server-side DRAFT PLAN (`POST /plan` + timeline);
+a clinical protocol has no plan object, so it is assigned the way a [[Specialty Kits]] kit adds
+findings: **the doctor ticks the instructions that apply and they are appended to the case sheet as
+editable text**. Nothing is prescribed, ordered, signed or saved until the assessment is saved.
+- Pure engine in `kb-protocols.js`: `assignLines(p)` (one tickable line per section item, plus each
+  drug), `assignText(p, ids)` (the blocks, per field), `assignHTML(p, sel, opts)` (the tick list; the
+  host supplies its own action attribute through `opts.act`). Unit-tested in `test/opd-protocol-tab.test.mjs`.
+- Field per section kind: immediate / treatment / investigations / monitoring / escalate / disposition
+  to `management_plan`, prevention to `diet_lifestyle_advice`. **Ticked by default** except
+  `recognise`, `special`, `pitfalls` and the drug doses, which are reading matter or need a deliberate
+  choice.
+- Case-sheet format: `Protocol: <title> (<basis> guidelines)`, then the protocol's own section heading
+  and continuously numbered instructions, then "Verify every dose and threshold against the source"
+  and the first two sources.
+- **Every line is EDITABLE before it is added** (owner, 2026-09-27: "keep drug doses unticked and
+  editable and protocols editable too"). Each row has an Edit control that swaps the text for a
+  textarea; the doctor's wording wins over the protocol's (`assignText(p, ids, edits)`), the row is
+  marked "edited", and Undo puts the protocol's own text back. Reset clears ticks AND edits. The
+  textarea is stored SILENTLY on input (`data-oe-inp="proto-as-txt:<lineId>"`, no repaint), the way the
+  oncology override drafts are: a repaint per keystroke closes the phone keyboard. Editing does not
+  tick a line, so a drug dose can be corrected and still left out.
+- **Legal line** (owner, 2026-09-27): "The treating doctor is responsible for every instruction used or
+  recorded; StewardMD accepts no liability." Rendered small (9.5px, `.kbp-as-duty`) under the Add
+  button, and in the reader's own Sources footer. The same sentence is the constant `DUTY_LINE`,
+  duplicated in `specialty-kits.js` because the two buildless IIFEs cannot import each other;
+  `test/kit-tools-docs.test.mjs` asserts they stay word for word the same.
+- In the OPD: Assign beside Open on every clinical row (write mode only), and an "Assign to this
+  patient" button in the reader; `opd-emr.js` owns the state (`st.protoAssign = {id, sel}`) and the
+  write (`appendPlan`, so the field is marked touched and the scribe never overwrites it), adds a
+  timeline note, and returns to the Assessment tab. A kit's Protocols card has the same Assign
+  (`host.protocol(id, {assign:true})`).
 
 **Guideline basis (owner, 2026-09-25: "I want international guidelines based protocols too").**
 Every protocol declares `basis`: `international` (WHO, NICE, AHA, ESC, IDSA, ADA...) or `india`

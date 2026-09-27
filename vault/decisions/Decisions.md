@@ -10161,3 +10161,53 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
   queue) remain reachable, so nothing is lost. Tour text updated.
 - **Reversible**: `smd_shake_report=0` turns shake off per device; the Centre still has "Report a bug".
 
+## 2026-09-26 - A clinical protocol CAN be assigned, as case-sheet instructions the doctor ticks
+- **Context**: on 2026-09-25 the OPD Protocol tab shipped with "Assign exists only on oncology rows; a
+  clinical protocol never writes to the patient record". The owner's screenshots on 2026-09-26 asked the
+  opposite: "protocols cant be assigned like oncology protocols why? fix it ... with each instruction as
+  case sheet format instructions just like oncology protocols".
+- **Decision**: a clinical protocol is assignable, but NOT as an oncology-style plan object. An oncology
+  regimen carries doses, cycles and administration, so it needs a server-side draft plan, a dose lock and
+  the ONCQIS tab. A clinical protocol is prose guidance, so it is assigned the way a [[Specialty Kits]]
+  kit adds findings: the doctor ticks the instructions that apply and they are appended to the case sheet
+  (`management_plan`, lifestyle lines to `diet_lifestyle_advice`) as **editable text** that the normal
+  Save writes. No new server object, no order, no prescription, no signature.
+- **Safety**: `recognise`, `special situations`, `pitfalls` and the drug-dose lines start UNticked (they
+  are reading matter, or need a deliberate choice); the panel repeats "verify every dose and threshold
+  against the source"; the composed block names the protocol and its sources; write mode, a loaded
+  assessment and an unauthorised assessment are all required, and each failure says which one.
+- **Reversible**: flag `smd_protocol_assign` (default ON, `?protoassign=0`), the composer is pure and
+  unit-tested, and the recovery point is the tag `pre-kit-integration-2026-09-26`.
+
+## 2026-09-26 - One specialty control per screen, and the consult's own tab order
+- **Context**: the owner's screenshots showed the MaiK Scribe card opening with a grid of 20+ specialty
+  chips ("what the fuck is this remove it"), the Specialty tab opening with a kit chip row instead of the
+  kit, and Investigations and Medications sitting before Assessment.
+- **Decision**: the scribe's specialty is a one-line `<select>` on the Scribe card (same templates, same
+  storage key), the kit picker moves to a sticky FOOTER bar so the kit's own content is the first thing on
+  screen, and `tabsNav` runs in consult order: Profile, Assessment, Specialty, Investigations,
+  Medications, [Immunisation], Note, Protocol, ONCQIS.
+- **Why not delete the scribe picker entirely**: "General OPD", "Surgery follow-up" and
+  "Pre-anaesthetic check" templates have no kit, so the Specialty tab cannot be the only way to reach
+  them; a select keeps every choice in one line.
+
+## 2026-09-27 - A protocol's instructions are editable before they reach the case sheet, and the doctor owns them
+- **Context**: owner, on the protocol assign list: "keep drug doses unticked and editable and protocols
+  editable too. also write legal line in footer its docto responsibity not the stewardmd (very small font
+  less space)".
+- **Decision**: every line in the assign list (section instructions AND the drug doses) can be edited in
+  place before it is added; the doctor's wording replaces the protocol's in the composed block. Drug doses
+  keep starting unticked: editing a line does NOT tick it, so a dose can be corrected and still left out.
+  Undo restores the protocol's own text; Reset clears ticks and edits together.
+- **Why editable here and not only in the form**: the case-sheet block is one textarea by the time it
+  lands, so correcting a single dose there means finding it inside a numbered block. At the tick list the
+  doctor is already reading line by line, which is the moment to change "1 g IV 8 hourly" to local
+  practice.
+- **Keystrokes never repaint**: the textarea stores into `st.protoAssign.edits` on input with no paint
+  (as the oncology override drafts do). A repaint per keystroke closes the phone keyboard.
+- **The legal line**: one sentence, "The treating doctor is responsible for every instruction used or
+  recorded; StewardMD accepts no liability.", at 9.5px under the Add button, in the protocol reader's
+  Sources footer, and at the foot of every specialty kit. It restates disclaimer.html sections 8 and 9 at
+  the point of use rather than adding a new claim. Held as `DUTY_LINE` in both `kb-protocols.js` and
+  `specialty-kits.js` (buildless IIFEs cannot import each other) with a test that keeps the wording
+  identical.

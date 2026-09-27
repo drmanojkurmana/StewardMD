@@ -127,9 +127,18 @@ in_consultation; the link dies with the visit via tokenVer). Appointments carry 
 
 ## Protocol tab = clinical protocols + oncology regimens (2026-09-25)
 The EMR Protocol tab is no longer oncology-only: see [[Clinical Protocols]]. Branch chips, a cancer-type
-picker, one search, and an in-tab read-only reader for clinical protocols. Assign exists only on
-oncology rows. The tab needs `smd_kb_protocols` OR `smd_onco_protocols`; with both off it says so.
-Regimens now also load in read-only mode (rows say "view only"); `maybeLoadOncoProtocols(anyMode)`.
+picker, one search, and an in-tab reader for clinical protocols. The tab needs `smd_kb_protocols` OR
+`smd_onco_protocols`; with both off it says so. Regimens now also load in read-only mode (rows say
+"view only"); `maybeLoadOncoProtocols(anyMode)`. **Since 2026-09-26 a clinical protocol has Assign as
+well** (tick its instructions into the case sheet, flag `smd_protocol_assign`; see
+[[Clinical Protocols]]), and the OncoTree launcher also sits in the Oncology branch of this tab.
+
+## Tab order (owner, 2026-09-26)
+`tabsNav` runs in consult order: **Profile, Assessment, Specialty, Investigations, Medications,
+[Immunisation], Note, Protocol, ONCQIS**. Investigations and Medications used to come before
+Assessment, which is the reverse of how a consultation runs (the owner marked it on a screenshot).
+Tabs are pushed in that order rather than spliced by index; the strip still scrolls the active tab
+into view.
 
 ## Specialty tab (2026-09-25)
 A "Specialty" tab after Assessment hosts the [[Specialty Kits]] (O&G, Paediatrics, Ortho, Eye, ENT,

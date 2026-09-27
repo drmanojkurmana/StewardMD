@@ -37,8 +37,14 @@ A kit is:
    - `visual-acuity` (Snellen, logMAR, WHO ICD-11 category from the better eye, IOP > 21 flag),
      `hearing` (WHO 2021 grades, Rinne/Weber interpretation), `pasi`, `odontogram` (FDI chart, DMFT/dmft),
      `immunisation` (OPD only: opens the existing Immunisation tab).
-3. Shortcuts: investigations (fills the OPD investigation search), protocols (opens the reader in the
-   OPD Protocol tab, or the Knowledge Library from Home), calculators (MEDCALC), patient-advice texts.
+3. Shortcuts: **investigations** (a TICK LIST since 2026-09-26: tick what you want, one "Add N to
+   investigations" button queues them on the Investigations tab through `host.queueTests`, same shelf and
+   "Ix:" plan line as an order set; the magnifier beside each still opens the search for one test, and the
+   Home sheet, which has no `queueTests`, copies the names instead. Ticks live in `k.invSel`, memory only,
+   cleared when the kit changes), **protocols** (Open reads it in the OPD Protocol tab or the Knowledge
+   Library from Home; **Assign** opens it with its instruction tick list so the lines that apply land in
+   this patient's case sheet, `host.protocol(id, {assign:true})` -> `opd-emr.js protoAssign`, flag
+   `smd_protocol_assign`, see [[Clinical Protocols]]), calculators (MEDCALC), patient-advice texts.
    - Wave 1 tools: `la-dose` (local anaesthetic maximum dose, Williams and Walker 2014, dosing weight
      capped at 70 kg because ropivacaine and the with-adrenaline rows have no mg ceiling), `burns-chart`
      (Lund and Browder by age column + Parkland), `ckd-grid` (CKD-EPI 2021 race-free + KDIGO G/A heat map),
@@ -55,9 +61,10 @@ A kit is:
 5. **Order sets** (`orderSets`, 2 to 15 tests): "Queue N tests" puts them on the Investigations tab's
    queued shelf (same shelf as dictated tests, with an "Ix:" plan line). Each is still searched and
    ordered by the doctor; nothing is ordered automatically.
-6. **Picker**: the chip row shows the current kit, "my specialty" and recent kits (at most 5), plus
+6. **Picker**: a sticky **footer bar** (`.kit-foot`, moved there 2026-09-26 so the kit itself is the first
+   thing on screen) showing the current kit, "my specialty" and recent kits (at most 5), plus
    "All 26 kits", a grouped list with search that also matches what a kit's tools do ("burns" finds
-   Emergency). Recent kit ids live in `smd_kit_recent` (ids only).
+   Emergency) and which opens UPWARDS above the chips. Recent kit ids live in `smd_kit_recent` (ids only).
 7. **Notifiable-disease reminder** (C6): on the Assessment tab, when the provisional diagnosis names a
    notifiable disease (`data-notifiable.json`, whole-word keywords), a note says how and where to notify
    (Ni-kshay, IDSP/IHIP). Reminder only; nothing is sent.
@@ -100,9 +107,10 @@ A kit is:
 
 ## The host interface (what a new surface must provide)
 `kind, canWrite(), writeNote(), ready(), readyNote(), addLabel(), fieldLabel(name), insert(field, text,
-sets), repaint(), protocol(id), calculator(id)|null, investigate(query)|null, queueTests(tests,
-label)|null, openTab(tab)|null, setScribe(id)|null, patient(), consult()|null, icd()|null,
-canDictate()|null`. `insert` is the only write; the OPD host appends (textarea: new line;
+sets), repaint(), protocol(id, opts), calculator(id)|null, investigate(query)|null, queueTests(tests,
+label)|null, canAssignProtocol()|null, openTab(tab)|null, setScribe(id)|null, patient(), consult()|null,
+icd()|null, canDictate()|null`. `protocol`'s `opts.assign` opens the protocol with its case-sheet tick
+list; `canAssignProtocol()` is what decides whether the kit renders the Assign button at all. `insert` is the only write; the OPD host appends (textarea: new line;
 single-line field: "; "), coerces `sets` through `voiceCoerce` (selects snap to the form's own option or
 set nothing), marks the fields touched (so the scribe never overwrites them) and toasts where it went.
 
@@ -165,6 +173,11 @@ set nothing), marks the fields touched (so the scribe never overwrites them) and
 - Older calculator titles contain em dashes (e.g. "Wells score — PE"); `calcTitle()` strips them for
   kit screens only. The titles themselves were left alone (other screens use them).
 - No em/en dashes (validator + browser test), British spelling.
+
+12. **Legal line** (owner, 2026-09-27): every kit closes with `DUTY_LINE` ("The treating doctor is
+    responsible for every instruction used or recorded; StewardMD accepts no liability.") in `.kit-duty`,
+    9.5px. The same sentence lives in `kb-protocols.js`; `test/kit-tools-docs.test.mjs` keeps the two in
+    step (buildless IIFEs cannot import each other).
 
 Deps: [[OPD Queue]] · [[MaiK Scribe]] · [[Clinical Protocols]] · [[Home Tools]] · [[Knowledge Library]] ·
 [[Clinical Documents]] · [[Review Desk]] · [[Universal Search]].

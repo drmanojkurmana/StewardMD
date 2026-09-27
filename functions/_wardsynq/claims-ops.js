@@ -110,7 +110,7 @@ function checklistOf(payer) {
 /**
  * PURE. The pre-submission check of one claim.
  * facts: each value is the record, null when there is none, or undefined when it could not be read:
- *   { conditions: Condition[], preAuths: PreAuthorisation[], packageAssignment, encounter, dischargeSummary, invoice }
+ *   { conditions: Condition[], preAuths: PreAuthorisation[], packageAssignment, encounter, encounters (the patient's), dischargeSummary, invoice }
  * opts: { payer (registry entry or null), submittedAmount?, now? }
  * Returns { blocking: [{code, text, ...}], warnings: [...], clean }.
  */
@@ -143,11 +143,18 @@ function scrubClaim(claim, facts, opts) {
   if (f.preAuths === undefined) {
     if (why) blocking.push(F("preauth_unchecked", `A pre-authorisation is needed (${why}) and the pre-authorisations could not be read, so it could not be checked.`));
   } else {
-    const mine = (f.preAuths || []).filter((a) => a && (str(a.id) === str(pa && pa.preAuthId) || !str(c.payerId) || !str(a.payerId) || str(a.payerId) === str(c.payerId)));
+    /* This stay's only (BILL-16), as the cashless desk scopes them: the one its package links, else those recorded after the
+     * patient's previous stay ended. An approval from an earlier admission is not this stay's. */
+    const scoped = !str(c.encounterId) || (enc && f.encounters !== undefined);
+    const prevEnd = scoped && enc ? previousStayEnd(f.encounters, enc) : -Infinity;
+    const mine = (f.preAuths || []).filter((a) => a && (str(a.id) === str(pa && pa.preAuthId)
+      || ((!str(c.payerId) || !str(a.payerId) || str(a.payerId) === str(c.payerId)) && (ms(a.decidedAt) == null || ms(a.decidedAt) > prevEnd))));
     const approved = mine.filter((a) => a.state === PREAUTH_STATE.APPROVED);
     const expiredOn = (a) => (str(a.validUntil) && admittedDay && admittedDay > str(a.validUntil) ? str(a.validUntil) : null);
     const valid = approved.filter((a) => !expiredOn(a));
-    if (approved.length && !valid.length) {
+    if (why && valid.length && !scoped) {
+      blocking.push(F("preauth_unchecked", `A pre-authorisation is needed (${why}) and this patient's stays could not be read, so whether the approval belongs to this stay could not be checked.`));
+    } else if (approved.length && !valid.length) {
       const a = approved[0];
       blocking.push(F("preauth_expired", `The approved pre-authorisation for ${str(a.treatment)} was valid until ${expiredOn(a)}, before the admission on ${admittedDay}.`, { preAuthId: a.id || null }));
     } else if (why && !valid.length) {
@@ -204,6 +211,14 @@ function scrubClaim(claim, facts, opts) {
     }
   }
   return { blocking, warnings, clean: !blocking.length };
+}
+
+/** PURE. When the patient's stay before `e` ended (ms), or -Infinity when there was none. A pre-authorisation recorded
+ *  before then belongs to an earlier stay. */
+function previousStayEnd(encounters, e) {
+  const startMs = ms(e.periodStart);
+  return (encounters || []).filter((x) => x && !isExternalRecord(x) && ADMISSION_CLASSES.includes(x.class) && str(x.patientId) === str(e.patientId) && x.id !== e.id
+    && ms(x.periodEnd) != null && (startMs == null || ms(x.periodEnd) <= startMs)).reduce((m, x) => Math.max(m, ms(x.periodEnd)), -Infinity);
 }
 
 /** PURE. The codes a coder may choose from: coded, non-differential, non-refuted conditions on the chart, and nothing else. */
@@ -314,15 +329,16 @@ const readOr = async (fn) => { try { return await fn(); } catch { return undefin
 async function claimFacts(svc, claim, shared) {
   const s = shared || {};
   const enc = str(claim.encounterId), pid = str(claim.patientId);
-  const [conditions, preAuths, packageAssignment, encounter, dischargeSummary, invoice] = await Promise.all([
+  const [conditions, preAuths, packageAssignment, encounter, encounters, dischargeSummary, invoice] = await Promise.all([
     "conditions" in s ? s.conditions : readOr(() => svc.byPatient("Condition", pid)),
     "preAuths" in s ? s.preAuths : readOr(() => svc.byPatient("PreAuthorisation", pid)),
     enc ? readOr(() => svc.get("PackageAssignment", assignmentIdFor(enc))) : null,
     enc ? readOr(() => svc.get("Encounter", enc)) : null,
+    enc ? readOr(() => svc.byPatient("Encounter", pid)) : null,
     enc ? readOr(() => svc.get("ClinicalNote", dischargeSummaryIdFor(enc))) : null,
     str(claim.invoiceId) ? readOr(() => svc.get("Invoice", str(claim.invoiceId))) : null,
   ]);
-  return { conditions, preAuths, packageAssignment, encounter, dischargeSummary, invoice };
+  return { conditions, preAuths, packageAssignment, encounter, encounters, dischargeSummary, invoice };
 }
 
 /* ---- routes ----------------------------------------------------------------------------------------------------- */
@@ -687,9 +703,7 @@ function cashlessWorklist({ rows, unreadable, payers, nowMs, today, bills }) {
 
     /* The stay's pre-authorisation: the one its package links when it names one; else the newest of this patient's for this
      * payer (or the insurer a TPA acts for, or no payer named) recorded after the patient's previous stay ended. */
-    const startMs = ms(e.periodStart);
-    const prevEnd = encs.filter((x) => str(x.patientId) === str(e.patientId) && x.id !== e.id && ms(x.periodEnd) != null && (startMs == null || ms(x.periodEnd) <= startMs))
-      .reduce((m, x) => Math.max(m, ms(x.periodEnd)), -Infinity);
+    const prevEnd = previousStayEnd(encs, e);
     const pa = U.PackageAssignment ? null : (R.PackageAssignment || []).find((a) => a && a.status === "active" && str(a.encounterId) === str(e.id) && str(a.preAuthId));
     const linked = pa ? all.find((a) => str(a.id) === str(pa.preAuthId)) || null : null;
     const mine = linked ? [linked] : all.filter((a) => str(a.patientId) === str(e.patientId)
