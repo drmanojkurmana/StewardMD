@@ -138,24 +138,14 @@ export async function onRequest(context) {
     return next();
   }
 
-  // PREVIEW BYPASS: Cloudflare Pages preview/branch deployments (<hash|branch>.stewardmd.pages.dev)
-  // serve the REAL app unconditionally, so changes can be verified (headless eval harness + manual
-  // QA) without the /realapp cookie. ONLY the production custom domain (stewardmd.in) stays gated;
-  // the production pages.dev alias ("stewardmd.pages.dev", no subdomain) is NOT a preview and is
-  // still gated. Anti-scraping on the public site is unaffected — preview URLs are unlisted hashes.
+  // PREVIEW DEPLOYMENTS ARE GATED LIKE PRODUCTION (owner decision 2026-09-27). Branch/PR previews
+  // (<hash|branch>.stewardmd.pages.dev) used to serve the real web app with no gate "for QA", which put
+  // the clinical app in a browser behind every URL Cloudflare posts on a PR. StewardMD is native-only
+  // (iOS/Android/iPad), so previews now get the same routing as stewardmd.in: the marketing site at the
+  // root and a 404 for the app bundle. Test the app on device, or locally (test/serve.mjs); the
+  // SITE_ALLOW_WEB env valve below still exists for an emergency. Previews stay noindex.
   const host = url.hostname.toLowerCase();
-  if (/\.stewardmd\.pages\.dev$/.test(host) && host !== "stewardmd.pages.dev") {
-    // Preview/branch deploys serve the real app for QA. Stamp noindex/nofollow so a (guessable) preview
-    // URL can never be indexed or surfaced by a search engine - the main real-world exposure of this
-    // convenience. A full lock (Cloudflare Access) is an owner dashboard toggle; this keeps QA
-    // friction-free while removing the discoverability that makes the bypass dangerous.
-    const pr = await next();
-    try {
-      const h = new Headers(pr.headers);
-      h.set("X-Robots-Tag", "noindex, nofollow");
-      return new Response(pr.body, { status: pr.status, statusText: pr.statusText, headers: h });
-    } catch (e) { return pr; }
-  }
+  const isPreviewHost = /\.stewardmd\.pages\.dev$/.test(host) && host !== "stewardmd.pages.dev";
 
   const secretPath = ((env && env.SITE_ACCESS_PATH) || DEFAULT_SECRET_PATH).replace(/^\/+|\/+$/g, "");
   const token = await tokenFor(secretPath);
@@ -310,7 +300,7 @@ export async function onRequest(context) {
   // WEB APP KILLED (native-only). Everything past here IS the clinical app (index.html, the JS bundle, kb/,
   // engine, sw.js, assets). StewardMD runs ONLY in the native iOS/Android apps: they bundle www/ locally and
   // only call /api/*, so a browser may neither RUN nor DOWNLOAD it. Owner testing is on device or on a preview
-  // deployment (the <hash>.stewardmd.pages.dev bypass above), NOT on stewardmd.in.
+  // build served locally (test/serve.mjs). Preview deployments are gated exactly like stewardmd.in.
   // Emergency valve: set SITE_ALLOW_WEB="1" in the Pages env to serve the web app again instantly (no redeploy).
   if (env && env.SITE_ALLOW_WEB === "1") return next();
   // Blocked (this is the app). Decide page vs asset by PATH SHAPE, not by request headers (Sec-Fetch-Dest /
@@ -329,7 +319,7 @@ export async function onRequest(context) {
     const h = new Headers(marketing.headers);
     h.set("content-type", "text/html; charset=utf-8");
     h.set("cache-control", "public, max-age=300");
-    h.set("x-robots-tag", "index, follow, max-image-preview:large");
+    h.set("x-robots-tag", isPreviewHost ? "noindex, nofollow" : "index, follow, max-image-preview:large");
     return new Response(marketing.body, { status: 200, headers: h });
   }
   // Fallback only if the marketing page is somehow unavailable.
@@ -338,7 +328,7 @@ export async function onRequest(context) {
     headers: {
       "content-type": "text/html; charset=utf-8",
       "cache-control": "no-store",
-      "x-robots-tag": "index, follow",
+      "x-robots-tag": isPreviewHost ? "noindex, nofollow" : "index, follow",
     },
   });
 }

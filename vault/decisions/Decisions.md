@@ -10373,6 +10373,24 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
 - **Open**: FollowCare's hospital is a free-text id the doctor types (`fc_doctors`), not an OPD clinic, so its
   Post-Visit template still has no callback number or doctor name; FollowCare stays WhatsApp only.
 
+## 2026-09-27 - DLT SMS goes by 2Factor template name + vars + peid + ctid; all 11 templates wired; FollowCare SMS on DLT
+- **Decision**: `sendDlt` posts R1 TRANS_SMS with the template's 2Factor name (`tpl`; all 11 registered on
+  2Factor > Transactional SMS > Manage Sender Ids with the same text), the slots as var1..varN, our DLT entity id
+  (`DLT_PEID` 1101720950000098192, MAIKNOWLEDGE LLP) and the content-template id. All 11 approved templates live in the `DLT`
+  table; each Detailed one names its no-link twin (`plain`), used when there is no link. FollowCare's single send
+  point (`sendPatientMessage`) sends check-ins, reminders, the enrol welcome and doctor nudges as Post-Visit
+  Check-in, medicine reminders and the green voice recap as Care Plan (recap: no-link twins). Its slots: doctor
+  = profile name (or the Action Center doctor), clinic + call-back phone = the OPD clinic the hospital ID names,
+  else the ONE OPD clinic the doctor owns. Any slot missing: no SMS, the delivery log says `template_mismatch`.
+- **Why**: live tests 2026-09-27 from MAIK: a name without peid/ctid came back DLT-CNT-REJECT; msg + peid + ctid
+  was DELIVERED only when 2Factor's own text matching accepted it (it refused Appointment Confirmation, "Missing
+  templatename value"); name + vars + peid + ctid DELIVERED (Appointment Confirmation, 6 vars). A call-back number
+  that is NOT whitelisted still DELIVERED (Care Plan), so clinic phones need no Vilpower step today. Vilpower CTA whitelist (dynamic): `https://stewardmd.in/queue?` (ACTIVE) and
+  `https://stewardmd.in/followcare?`. If operators start enforcing number CTAs, a clinic phone is whitelisted per
+  exact number on Vilpower (CTA Whitelisting > Number; the Registration APIs cannot do CTAs).
+- **Not wired**: Visit Reminder (+ twin) is ready but no app event has a follow-up visit date yet. ABDM
+  record-link OTP has no approved template (our OTP text says "login to StewardMD"); it needs its own.
+
 ## 2026-09-27 - Ophthalmós integrated as a module, behind a flag default OFF
 - **Context**: Ophthalmós (eye-imaging clinic trainer: OCT, disc, DR grading, ROP, case conference) was
   built end-to-end in its own repo (`github.com/drmanojkurmana/ophthalmos`), not inside StewardMD.
@@ -10418,3 +10436,43 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
   tabs; commit `3983aeac6` is the pre-redesign main.
 - **Not changed**: data, checks, pooling, exports and every figure's source sheet.
 
+## 2026-09-27 - Marketing site: Apple design layer + the MaiK Offline story
+
+**Decision (owner):** polish stewardmd.in in Apple's design language and add a story about the offline model.
+
+**How:** `_site/index.html` gets one `<style id="apple-ds">` block of overrides only (SF-style Inter display
+type in place of the Newsreader serif, Apple ink/paper neutrals, true-black dark sections, no hairlines
+between sections, frosted nav, pill controls). Deleting that block restores the previous look; no section
+markup or scroll script was rewritten. A new `#offline` section sits directly under the hero, linked first
+in the nav and mobile menu: headline "India's first offline medical AI." (tricolour India), the owner's real
+airplane-mode screen recording (`_site/assets/s/maik-offline-demo.mp4`, 0.8 MB, muted loop, iOS recording
+dot masked), four facts, a four-chapter story and a privacy panel.
+
+**Claims and their sources:** on-device inference (`maik-local.js`), 10 model packs (`maik-models.js`),
+claim-level grounding (`kb/ai/maik-grounding.js`), doses from the drug database (`kb/ai/drug-dose.js`).
+"India's first" is backed by `vault/legal-assets/maik-india-first-evidence.md`. "Free and unlimited" is
+scoped to offline models with the same fine print as the posters.
+
+**Verification:** headless Chromium at 1440 and 390 wide, no horizontal overflow, no page errors; site tests
+67/67. Full CI suite 10847/10849, the one failure (`wardsynq-ed` concurrent provisional MRN) passes 3/3 in
+isolation and is unrelated to this change.
+
+## 2026-09-27 - Preview deployments no longer serve the web app
+
+**Decision (owner):** StewardMD is native-only (iOS, Android, iPad). A branch/PR preview URL
+(`<hash|branch>.stewardmd.pages.dev`) opening the full clinical web app in a browser is not acceptable.
+
+**What changed:** `functions/_middleware.js` had a PREVIEW BYPASS that returned the real app on every
+`*.stewardmd.pages.dev` host "for QA". It is removed: previews now get exactly the stewardmd.in routing
+(marketing site at the root, 404 for the app bundle and kb/). Previews keep `X-Robots-Tag: noindex,
+nofollow` (marketing response and the coming-soon fallback). Production stays indexable.
+
+**Also found:** the `/realapp` secret path still sets the `smd_access` cookie, but nothing reads it any more,
+so it unlocks nothing; the web app on stewardmd.in was already fully blocked. Left as is.
+
+**Testing the app now:** on device, or locally with `test/serve.mjs`. `SITE_ALLOW_WEB=1` (Pages env) remains
+the emergency valve and applies to every host.
+
+**Verification:** `test/site-gate.test.mjs` pins it (preview hosts: /home.js and kb/ are 404, root is the
+marketing site, noindex; production root indexable). The new test fails on the old middleware and passes on
+the new one. Full unit suite 10915/10916 passing, 0 failures.
