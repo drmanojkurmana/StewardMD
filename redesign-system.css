@@ -889,21 +889,26 @@ html body.v3-dark #homeV2.rnav .rnav-tab-maik .rds-icon {
 #homeV2.hv-still .ai-anim, #homeV2.hv-still .ai-anim *, #homeV2.hv-still .ai-clinix-img, #homeV2.hv-still .tx-tile-lungs, #homeV2.hv-still .ai-live, #homeV2.hv-still .ai-brandmark,
 #homeV2 .ai-offscreen, #homeV2 .ai-offscreen * { animation-play-state: paused !important; }
 
-/* Ophthalmós eye (owner, 2026-09-27: "an eye closing and opening"). 4.8 s: open and glancing,
- * a quick natural blink (~0.35 s) into the closed-eye arc, open, the pupil tightens and relaxes.
- * transform-box: view-box so the lid squeeze and the pupil scale share the eye's centre. */
-#homeV2.rnav .rnav-badge .ai-ox { width: 36px; height: 36px; }
-#homeV2.rnav .ai-ox .ox-open, #homeV2.rnav .ai-ox .ox-pupil { transform-box: view-box; transform-origin: 16px 16px; }
+/* Ophthalmós eye (owner, 2026-09-27: "an eye closing and opening", "more premium and stylish").
+ * 5.6 s: open and glancing, a natural blink (fast down, softer up) into the closed-lid crescent,
+ * open, the pupil tightens and relaxes; the iris fibres turn slowly the whole time and the glow
+ * breathes. transform-box: view-box so the lid squeeze and the pupil share the eye's centre. */
+#homeV2.rnav .rnav-badge .ai-ox { width: 36px; height: 36px; filter: drop-shadow(0 1px 2px rgba(0,0,0,.28)); }
+#homeV2.rnav .ai-ox .ox-open, #homeV2.rnav .ai-ox .ox-pupil, #homeV2.rnav .ai-ox .ox-fibres, #homeV2.rnav .ai-ox .ox-glow { transform-box: view-box; transform-origin: 16px 16.4px; }
 #homeV2.rnav .ai-ox .ox-shut { opacity: 0; }
 @media (prefers-reduced-motion: no-preference) {
-  #homeV2.rnav .ai-ox .ox-open { animation: oxLid 4.8s ease-in-out infinite; }
-  #homeV2.rnav .ai-ox .ox-shut { animation: oxShut 4.8s ease-in-out infinite; }
-  #homeV2.rnav .ai-ox .ox-look { animation: oxLook 4.8s ease-in-out infinite; }
-  #homeV2.rnav .ai-ox .ox-pupil { animation: oxPupil 4.8s ease-in-out infinite; }
-  @keyframes oxLid { 0%, 42%, 54%, 100% { transform: scaleY(1); opacity: 1; } 44.5%, 49% { transform: scaleY(.06); opacity: 0; } }
-  @keyframes oxShut { 0%, 43.2%, 51.5%, 100% { opacity: 0; } 44.5%, 49% { opacity: 1; } }
-  @keyframes oxLook { 0%, 10%, 38%, 58%, 100% { transform: translateX(0); } 18%, 30% { transform: translateX(-2.6px); } 66%, 80% { transform: translateX(2.6px); } }
-  @keyframes oxPupil { 0%, 56%, 100% { transform: scale(1); } 62%, 70% { transform: scale(.68); } }
+  #homeV2.rnav .ai-ox .ox-open { animation: oxLid 5.6s cubic-bezier(.55,0,.3,1) infinite; }
+  #homeV2.rnav .ai-ox .ox-shut { animation: oxShut 5.6s linear infinite; }
+  #homeV2.rnav .ai-ox .ox-look { animation: oxLook 5.6s ease-in-out infinite; }
+  #homeV2.rnav .ai-ox .ox-pupil { animation: oxPupil 5.6s ease-in-out infinite; }
+  #homeV2.rnav .ai-ox .ox-fibres { animation: oxTurn 16s linear infinite; }
+  #homeV2.rnav .ai-ox .ox-glow { animation: oxGlow 5.6s ease-in-out infinite; }
+  @keyframes oxLid { 0%, 43%, 53.5%, 100% { transform: scaleY(1); opacity: 1; } 45.3%, 50% { transform: scaleY(.05); opacity: 0; } }
+  @keyframes oxShut { 0%, 44.6%, 50.7%, 100% { opacity: 0; } 45.3%, 50% { opacity: 1; } }
+  @keyframes oxLook { 0%, 9%, 39%, 57%, 100% { transform: translateX(0); } 16%, 30% { transform: translateX(-2.4px); } 65%, 80% { transform: translateX(2.4px); } }
+  @keyframes oxPupil { 0%, 55%, 100% { transform: scale(1); } 60%, 68% { transform: scale(.66); } 16%, 30% { transform: scale(1.12); } }
+  @keyframes oxTurn { to { transform: rotate(360deg); } }
+  @keyframes oxGlow { 0%, 100% { transform: scale(.92); opacity: .7; } 50% { transform: scale(1.08); opacity: 1; } }
 }
 
 /* SURGX: "should shine like a sharp knife" (owner, 2026-09-27; replaces the earlier static brief).

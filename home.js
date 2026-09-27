@@ -2235,20 +2235,40 @@
     ecg: '<svg class="ai-anim ai-ecg" viewBox="0 0 48 24"><path d="M0 12 H11 l2.5 -8 3 16 2.5 -8 H27 l2.5 -7 3 14 2.5 -7 H48"/></svg>',
     derm: '<img class="ai-brandmark ai-sknx-img" src="/sknx-mark.png?v=sx2" alt="SknX AI" width="38" height="38">',
     cxr: '<svg class="ai-anim ai-cxr" viewBox="0 0 24 24"><path d="M12 4v9"/><path d="M12 8c-1-2-3.2-2.4-4.6-1.3C6 8 5 10.2 5 13.2A2.9 2.9 0 0 0 10.8 14"/><path d="M12 8c1-2 3.2-2.4 4.6-1.3C18 8 19 10.2 19 13.2A2.9 2.9 0 0 1 13.2 14"/><rect class="beam" x="2" y="3" width="3.4" height="18"/></svg>',
-    // Ophthalmós (owner, 2026-09-27: "an eye closing and opening"). An almond eye with a gradient iris,
-    // pupil, catchlight and upper lashes; it blinks shut into a real closed-eye arc with lashes (not a
-    // squashed eye), glances left and right, and the pupil tightens like a light reflex.
-    // Motion in redesign-system.css (.ai-ox); static open eye under reduced motion.
-    ophthalmos: '<svg class="ai-anim ai-ox" viewBox="0 0 32 32" aria-hidden="true"><defs>' +
-      '<radialGradient id="oxIris" cx="42%" cy="38%" r="62%"><stop offset="0" stop-color="#c9fff3"/><stop offset=".5" stop-color="#43c4a8"/><stop offset="1" stop-color="#0b5a4c"/></radialGradient>' +
-      '<clipPath id="oxClip"><path d="M3 16C8 7.4 24 7.4 29 16C24 24.6 8 24.6 3 16Z"/></clipPath></defs>' +
-      '<g class="ox-open"><path d="M3 16C8 7.4 24 7.4 29 16C24 24.6 8 24.6 3 16Z" fill="rgba(255,255,255,.13)" stroke="none"/>' +
-      '<g clip-path="url(#oxClip)"><g class="ox-look"><circle cx="16" cy="16" r="6.3" fill="url(#oxIris)" stroke="none"/>' +
-      '<circle class="ox-pupil" cx="16" cy="16" r="2.7" fill="#04201b" stroke="none"/><circle cx="18" cy="13.8" r="1.35" fill="#fff" stroke="none"/></g></g>' +
-      '<path class="ox-rim" d="M3 16C8 7.4 24 7.4 29 16C24 24.6 8 24.6 3 16Z"/>' +
-      '<g stroke-linecap="round"><path fill="none" stroke-width="1.9" d="M9.2 10.7 7.7 8.3"/><path fill="none" stroke-width="1.9" d="M16 9.1V6.4"/><path fill="none" stroke-width="1.9" d="M22.8 10.7 24.3 8.3"/></g></g>' +
-      '<g class="ox-shut" fill="none" stroke-linecap="round"><path d="M3.4 15.2C9 20.6 23 20.6 28.6 15.2"/>' +
-      '<path fill="none" stroke-width="1.9" d="M9.2 18.7 7.9 21.2"/><path fill="none" stroke-width="1.9" d="M16 19.8V22.5"/><path fill="none" stroke-width="1.9" d="M22.8 18.7 24.1 21.2"/></g></svg>',
+    // Ophthalmós (owner, 2026-09-27: "an eye closing and opening", then "more premium and stylish").
+    // A fashion-plate eye: the upper lid is a tapered crescent (thick at the centre, vanishing at the
+    // corners), the lower lid a fine line; sclera shaded under the lid; iris with limbal ring, slowly
+    // turning fibres and a soft glow; pupil with a large and a small catchlight; five tapered lashes.
+    // Blinks into a matching closed-lid crescent with lashes swept down. Motion in redesign-system.css
+    // (.ai-ox); a still open eye under reduced motion. Lashes: one tapered shape placed by transform.
+    ophthalmos: (function () {
+      var lash = function (x, y, a, l) { return '<path d="M-.7 0Q-.35 ' + (-l * .5) + ' 0 ' + (-l) + 'Q.35 ' + (-l * .5) + ' .7 0Z" transform="translate(' + x + ' ' + y + ') rotate(' + a + ')" fill="#fff" stroke="none"/>'; };
+      return '<svg class="ai-anim ai-ox" viewBox="0 0 32 32" aria-hidden="true"><defs>' +
+        '<radialGradient id="oxIris" cx="40%" cy="36%" r="64%"><stop offset="0" stop-color="#d6fff6"/><stop offset=".42" stop-color="#4fd1b3"/><stop offset=".8" stop-color="#0f6b5b"/><stop offset="1" stop-color="#083f36"/></radialGradient>' +
+        '<radialGradient id="oxGlow"><stop offset=".55" stop-color="rgba(140,255,230,.4)"/><stop offset="1" stop-color="rgba(140,255,230,0)"/></radialGradient>' +
+        '<clipPath id="oxClip"><path d="M3 16C8 7.4 24 7.4 29 16C24 24.6 8 24.6 3 16Z"/></clipPath></defs>' +
+        '<g class="ox-open">' +
+          '<g clip-path="url(#oxClip)">' +
+            '<path d="M3 16C8 7.4 24 7.4 29 16C24 24.6 8 24.6 3 16Z" fill="rgba(255,255,255,.17)" stroke="none"/>' +
+            '<path d="M3 16C8 7.4 24 7.4 29 16C24 11.4 8 11.4 3 16Z" fill="rgba(0,0,0,.2)" stroke="none"/>' +
+            '<g class="ox-look">' +
+              '<circle class="ox-glow" cx="16" cy="16.4" r="8.6" fill="url(#oxGlow)" stroke="none"/>' +
+              '<circle cx="16" cy="16.4" r="6.4" fill="url(#oxIris)" stroke="none"/>' +
+              '<circle class="ox-fibres" cx="16" cy="16.4" r="4.6" fill="none" stroke="rgba(255,255,255,.34)" stroke-width="2.4" stroke-dasharray=".5 1.15"/>' +
+              '<circle cx="16" cy="16.4" r="6.4" fill="none" stroke="rgba(3,28,24,.9)" stroke-width="1.1"/>' +
+              '<circle class="ox-pupil" cx="16" cy="16.4" r="2.9" fill="#03171a" stroke="none"/>' +
+              '<circle cx="18.2" cy="14.1" r="1.5" fill="#fff" stroke="none"/><circle cx="14.3" cy="18.6" r=".75" fill="rgba(255,255,255,.85)" stroke="none"/>' +
+            '</g>' +
+          '</g>' +
+          '<path d="M3.6 16.7C8.6 23.9 23.4 23.9 28.4 16.7" fill="none" stroke="rgba(255,255,255,.72)" stroke-width="1.3" stroke-linecap="round"/>' +
+          '<path d="M3 16C8 7.2 24 7.2 29 16C24 9.7 8 9.7 3 16Z" fill="#fff" stroke="none"/>' +
+          lash(7.2, 11.3, -40, 3.4) + lash(11.35, 9.6, -19, 2.7) + lash(16, 9, 0, 3.6) + lash(20.65, 9.6, 19, 2.7) + lash(24.8, 11.3, 40, 3.4) +
+        '</g>' +
+        '<g class="ox-shut">' +
+          '<path d="M3.4 15.6C9 21.8 23 21.8 28.6 15.6C23 19.4 9 19.4 3.4 15.6Z" fill="#fff" stroke="none"/>' +
+          lash(7.7, 18.2, 220, 3.2) + lash(11.6, 19.6, 200, 2.5) + lash(16, 20.1, 180, 3.3) + lash(20.4, 19.6, 160, 2.5) + lash(24.3, 18.2, 140, 3.2) +
+        '</g></svg>';
+    })(),
     oncotree: '<svg class="ai-anim ai-oncotree" viewBox="0 0 24 24"><path class="branch" d="M12 5v4M12 9c0 0-5 1-5 6M12 9c0 0 5 1 5 6"/><circle class="n n0" cx="12" cy="4.5" r="1.9"/><circle class="n n1" cx="7" cy="16" r="1.9"/><circle class="n n2" cx="17" cy="16" r="1.9"/></svg>',
     // Brand marks share .ai-brandmark: ONE optical box in CSS, rather than the 48/38/34px inline
     // sizes these carried, which made three logos sitting side by side three different weights.
