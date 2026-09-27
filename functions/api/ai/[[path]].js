@@ -135,7 +135,8 @@ import { getRemoteConfig, setRemoteConfig } from "../../_remoteconfig.js";
 import { lookupUidByEmail, getUserRecord, setUserDisabled, mergeUserClaims } from "../../_fbadmin.js";
 import { getAnalytics } from "../../_analytics.js";
 import { sseFrames, sseFrameText, sseFrameUsage } from "../../_sse_parse.js";
-import { listTickets as listSupportTickets, getTicket as getSupportTicket, addMessage as addSupportMessage, setStatus as setSupportStatus } from "../../_support.js";
+import { listTickets as listSupportTickets, getTicket as getSupportTicket, addMessage as addSupportMessage, setStatus as setSupportStatus, shotKey as supportShotKey, shotResponse as supportShotResponse } from "../../_support.js";
+import { sendNativeToAll } from "../../_nativepush.js";
 import { answerCacheKey, getCachedAnswer, putCachedAnswer, getRuntimeCfg as getMaikCfg, setRuntimeCfg as setMaikCfg, cacheEligibleCtx, kbFingerprint } from "../../_maik_cache.js";
 import { scrubMetaTalk, metaTalkStream } from "../../_maik_metatalk.js";   // no "the passage you sent" talk (2026-09-26)
 import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
@@ -1198,7 +1199,7 @@ export async function onRequest(context) {
 
   // AI Control Center admin console APIs (owner-gated): model switch, quota editor, global rollup,
   // emergency kill switch, runtime budget, audit log. Every mutation is written to the audit log.
-  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config" || seg === "admin/analytics" || seg === "admin/support" || seg === "admin/support-reply" || seg === "admin/maik-config" || seg === "admin/maik-feedback") {
+  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config" || seg === "admin/analytics" || seg === "admin/support" || seg === "admin/support-reply" || seg === "admin/support-shot" || seg === "admin/maik-config" || seg === "admin/maik-feedback") {
     const url = new URL(request.url);
     if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
     const store = usageKv(env);
@@ -1240,18 +1241,35 @@ export async function onRequest(context) {
       if (tid) return json({ ticket: await getSupportTicket(store, tid) });
       return json({ tickets: await listSupportTickets(store, u2.searchParams.get("status") || "") });
     }
+    // Bug report screenshot (shake to report). Owner-only, like every admin/* route.
+    if (seg === "admin/support-shot") {
+      const sid = new URL(request.url).searchParams.get("id") || "";
+      let raw = null; try { raw = await store.get(supportShotKey(sid)); } catch (e) {}
+      return supportShotResponse(raw) || json({ error: "not-found" }, 404);
+    }
     if (seg === "admin/support-reply") {
       if (request.method !== "POST") return json({ error: "method" }, 405);
       let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
       const id = String(b.id || ""); const hasText = !!String(b.text || "").trim();
-      const resolve = b.resolve === true || b.status === "resolved"; const reopen = b.status === "open";
+      const resolve = b.resolve === true || b.status === "resolved"; const reopen = b.status === "open"; const working = b.status === "in_progress";
       let t = null;
-      if (hasText) t = await addSupportMessage(store, id, "support", b.text, Date.now(), resolve ? "resolved" : (reopen ? "open" : undefined));
+      if (hasText) t = await addSupportMessage(store, id, "support", b.text, Date.now(), resolve ? "resolved" : (reopen ? "open" : (working ? "in_progress" : undefined)));
       else if (resolve) t = await setSupportStatus(store, id, "resolved", Date.now());
       else if (reopen) t = await setSupportStatus(store, id, "open", Date.now());
+      else if (working) t = await setSupportStatus(store, id, "in_progress", Date.now());
       else return json({ ok: false, error: "nothing-to-do" }, 400);
       if (!t) return json({ ok: false, error: "not-found" }, 404);
-      await auditRecord(store, "support", id + (hasText ? ":reply" : "") + (resolve ? ":resolved" : reopen ? ":reopened" : ""), actorId, Date.now());
+      // A resolved bug drops its screenshot: it can show a patient, and the fix no longer needs it.
+      if (resolve && t.kind === "bug") { try { await store.delete(supportShotKey(id)); } catch (e) {} }
+      // Tell the doctor on their phone. No ticket text in the push (a lock screen is not private):
+      // only that a reply exists; the reply itself is read in the Bug Report Centre.
+      if (hasText && /^fb:/.test(String(t.owner || ""))) {
+        const bug = t.kind === "bug";
+        const push = sendNativeToAll(env, { title: bug ? (resolve ? "Your bug report is fixed" : "Reply to your bug report") : "Reply from StewardMD support",
+          body: t.id + ": open StewardMD to read it.", tag: "smd-support-" + t.id, url: "https://stewardmd.in/#bugs" }, { uid: String(t.owner).slice(3) }).catch(function () {});
+        if (context && typeof context.waitUntil === "function") context.waitUntil(push); else await push;
+      }
+      await auditRecord(store, "support", id + (hasText ? ":reply" : "") + (resolve ? ":resolved" : reopen ? ":reopened" : working ? ":in-progress" : ""), actorId, Date.now());
       return json({ ok: true, ticket: t });
     }
 

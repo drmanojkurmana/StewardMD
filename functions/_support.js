@@ -11,8 +11,30 @@ const tKey = (id) => "support:t:" + id;
 const INDEX_CAP = 800;                          // ponytail: ring-buffer cap; oldest summaries drop past this (ticket bodies still TTL out)
 const TTL = 180 * 86400;                        // 180d, refreshed on every update
 const SUBJECT_MAX = 200, TEXT_MAX = 4000, MSGS_MAX = 200;
+// Bug reports (shake to report, 2026-09-26) are tickets of kind "bug" with where-it-happened details
+// and a promised fix time. The owner asked for "solved in 24hrs", so dueAt is createdAt + 24 h.
+export const BUG_SLA_MS = 24 * 3600 * 1000;
+export const SHOT_MAX = 900 * 1024;            // base64 JPEG cap for the screenshot
+export const SHOT_TTL = 30 * 86400;            // screenshots can show a patient: kept 30 d at most, dropped on resolve
+export const shotKey = (id) => "support:shot:" + id;
 
-const STATUSES = ["open", "resolved"];
+// Only the shape we render, clipped: never trust client geometry or selectors beyond display.
+export function cleanBugMeta(b) {
+  b = b || {};
+  const n = (v) => { const x = Math.round(+v); return Number.isFinite(x) ? Math.max(-99999, Math.min(99999, x)) : 0; };
+  const el = b.element && typeof b.element === "object" ? b.element : null;
+  return {
+    route: clean(b.route, 200),
+    element: el ? { sel: clean(el.sel, 300), label: clean(el.label, 160), tag: clean(el.tag, 24),
+      rect: el.rect ? { x: n(el.rect.x), y: n(el.rect.y), w: n(el.rect.w), h: n(el.rect.h) } : null } : null,
+    screen: b.screen ? { w: n(b.screen.w), h: n(b.screen.h), dpr: Math.round((+b.screen.dpr || 1) * 100) / 100 } : null,
+    ua: clean(b.ua, 200),
+  };
+}
+
+// in_progress: the developer has picked it up (Bug Centre "Working on it"); still counts toward the
+// 24-hour promise. Anything not "resolved" is open work.
+const STATUSES = ["open", "in_progress", "resolved"];
 export function isStatus(s) { return STATUSES.indexOf(s) >= 0; }
 
 function clean(s, max) { return String(s == null ? "" : s).replace(/\s+$/g, "").replace(/^\s+/g, "").slice(0, max); }
@@ -48,8 +70,12 @@ export async function createTicket(store, who, body, rands, now) {
     createdAt: now, updatedAt: now,
     messages: [{ from: "user", text: text, ts: now }],
   };
+  if (body && body.kind === "bug") {
+    ticket.kind = "bug"; ticket.dueAt = now + BUG_SLA_MS; ticket.bug = cleanBugMeta(body.bug); ticket.hasShot = !!body.hasShot;
+  }
   await store.put(tKey(id), JSON.stringify(ticket), { expirationTtl: TTL });
-  idx.unshift({ id, owner: ticket.owner, email: ticket.email, subject: ticket.subject, status: "open", unread: true, createdAt: now, updatedAt: now });
+  idx.unshift({ id, owner: ticket.owner, email: ticket.email, subject: ticket.subject, status: "open", unread: true, createdAt: now, updatedAt: now,
+    ...(ticket.kind === "bug" ? { kind: "bug", dueAt: ticket.dueAt } : {}) });
   await writeIndex(store, idx);
   return ticket;
 }
@@ -65,12 +91,19 @@ export async function addMessage(store, id, from, text, now, status) {
   if (!t) return null;
   const msg = clean(text, TEXT_MAX);
   if (msg) { t.messages.push({ from: from === "support" ? "support" : "user", text: msg, ts: now }); if (t.messages.length > MSGS_MAX) t.messages = t.messages.slice(-MSGS_MAX); }
-  if (status && isStatus(status)) t.status = status;
+  if (status && isStatus(status)) {
+    if (status === "resolved" && t.status !== "resolved") t.resolvedAt = now;
+    if (status !== "resolved") delete t.resolvedAt;   // reopened: the fix clock is no longer stopped
+    t.status = status;
+  }
+  // The doctor's side of the badge: a developer reply is unread for them until they open it.
+  if (from === "support" && msg) t.userUnread = true;
+  if (from === "user") t.userUnread = false;
   t.updatedAt = now;
   await store.put(tKey(id), JSON.stringify(t), { expirationTtl: TTL });
   const idx = await readIndex(store);
   const row = idx.find((r) => r.id === id);
-  if (row) { row.status = t.status; row.updatedAt = now; row.unread = from === "user"; }
+  if (row) { row.status = t.status; row.updatedAt = now; row.unread = from === "user"; if (t.resolvedAt) row.resolvedAt = t.resolvedAt; else delete row.resolvedAt; }
   // bump to front on new activity
   const rest = idx.filter((r) => r.id !== id);
   await writeIndex(store, row ? [row].concat(rest) : idx);
@@ -85,6 +118,8 @@ export async function setStatus(store, id, status, now) {
 // Admin list: summary index (optionally filtered by status). Newest-first.
 export async function listTickets(store, status) {
   const idx = await readIndex(store);
+  // "open" means open WORK: in_progress tickets are still owed an answer, so they stay in the Open list.
+  if (status === "open") return idx.filter((r) => r.status !== "resolved");
   return status && isStatus(status) ? idx.filter((r) => r.status === status) : idx;
 }
 
@@ -96,6 +131,25 @@ export async function listMine(store, owner) {
   const out = [];
   for (const r of mine) { const t = await getTicket(store, r.id); if (t) out.push(t); }
   return out;
+}
+
+// The stored "jpeg:<base64>" -> an image Response (doctor route and admin route).
+export function shotResponse(raw) {
+  const i = String(raw || "").indexOf(":");
+  if (i < 0) return null;
+  const type = raw.slice(0, i), b64 = raw.slice(i + 1);
+  const bin = atob(b64), bytes = new Uint8Array(bin.length);
+  for (let k = 0; k < bin.length; k++) bytes[k] = bin.charCodeAt(k);
+  return new Response(bytes, { headers: { "Content-Type": "image/" + (type === "png" ? "png" : "jpeg"), "Cache-Control": "private, no-store" } });
+}
+
+// The doctor opened the ticket: clear their unread badge. Owner-checked by the caller.
+export async function markSeen(store, id, now) {
+  const t = await getTicket(store, id);
+  if (!t || !t.userUnread) return t;
+  t.userUnread = false;
+  await store.put(tKey(id), JSON.stringify(t), { expirationTtl: TTL });
+  return t;
 }
 
 export const _internal = { IDX_KEY, tKey, INDEX_CAP, SUBJECT_MAX, TEXT_MAX };

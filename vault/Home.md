@@ -50,6 +50,7 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[OTA Updates]] — push-to-devices update system, self-hosted (Cloudflare R2 + admin console).
   PHASE 1 (server-only) built 2026-08-22; a rebuild of a system torn down once before — read it
   before touching this.
+- [[Bug Reports]] - shake to report a bug, 24-hour fix promise, Bug Report Centre with developer replies
 - [[StewardMD ID]] — the universal per-user SMD-XXXXXX handle (units, referrals, entitlements)
 - [[Push]] — APNs/FCM. Read the "one thing to understand" first: the server can see no further
   than Apple, so "sent but nothing arrived" is the normal shape of a DEVICE-side failure.

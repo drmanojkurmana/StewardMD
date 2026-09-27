@@ -165,9 +165,11 @@ try {
   for (let i = 0; i < 20; i++) { await sleep(250); if (await ev(`return !!document.querySelector('.rnav-tile[data-act="agentconnect"]');`) === true) { tileShown = true; break; } }
   ok(tileShown, "the home tile grid shows a Connect Hospital tile by default");
   await ev(`try { if (window.SB && SB.open) SB.open(); } catch (e) {} return 1;`);
-  let sbRow = false; // the lean sidebar rebuilds #sbMenu 60ms after SB.open
-  for (let i = 0; i < 20; i++) { await sleep(150); if (await ev(`return !!document.querySelector('[data-sbr-act="agentconnect"]');`) === true) { sbRow = true; break; } }
-  ok(sbRow, "the lean sidebar menu offers a Connect Hospital row");
+  // Owner 2026-09-26: AgentConnect left the sidebar (the Bug Report Centre took the slot); the home
+  // tile and the More sheet are its entry points now. Wait for the rebuilt menu, then check.
+  let sbBuilt = false; // the lean sidebar rebuilds #sbMenu 60ms after SB.open
+  for (let i = 0; i < 20; i++) { await sleep(150); if (await ev(`return !!document.querySelector('[data-sbr-act="bugs"]');`) === true) { sbBuilt = true; break; } }
+  ok(sbBuilt && await ev(`return !document.querySelector('[data-sbr-act="agentconnect"]');`) === true, "the lean sidebar no longer lists AgentConnect (it has the Bug Report Centre instead)");
   await ev(`try { if (window.SB && SB.close) SB.close(); } catch (e) {} return 1;`);
 
   // Open the More sheet ONCE - clicking it again toggles it shut, so polling must not re-click.
