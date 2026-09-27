@@ -14,7 +14,7 @@
  * so MaiK never breaks purely because metering storage is absent.
  */
 
-import { proFromRequest, proMessageFor } from "./_entitlement.js";
+import { proFromRequest, proMessageFor, isReviewedAccount } from "./_entitlement.js";
 import { aiBudgetOn, monthlyCapFor } from "./_aibudget.js";
 import { ownerOK } from "./_adminauth.js";
 import { addAiSpend } from "./_ai_usage.js";   // per-user spend rollup (the cost cap + wallet read it)
@@ -173,10 +173,15 @@ export async function checkQuota(env, request, type, opts) {
   // exempt = owner/admin OR the launch "no per-user restrictions" default. Only the per-USER throttles
   // below are skipped; the global daily-cost breaker + metering still run for everyone.
   const exempt = admin || aiUnlimited(env);
-  let isProCaller = true, callerUid = null, callerVerified = false;
-  try { const pr = await _proP; if (pr) { isProCaller = pr.pro; callerUid = pr.uid || null; callerVerified = !!(pr.claims && pr.claims.verified); } } catch (e) {}
+  // callerPhoneVerified keys the Free AI allowance (owner decision D8, 2026-09-26: the free
+  // allowance needs a verified MOBILE NUMBER; registration verification alone no longer grants it).
+  // callerVerified is "a reviewed account" (verified doctor OR an approved student/intern), so an
+  // approved trainee is never told to verify a registration they already had reviewed.
+  let isProCaller = true, callerUid = null, callerVerified = false, callerPhoneVerified = false;
+  try { const pr = await _proP; if (pr) { isProCaller = pr.pro; callerUid = pr.uid || null; callerVerified = isReviewedAccount(pr.claims); callerPhoneVerified = !!(pr.claims && pr.claims.phoneVerified === true); } } catch (e) {}
   const now = _now0, day = _day0, month = _month0;
   const QUOTA_MSG = "MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.";
+  const PHONE_MSG = "Verify your mobile number to unlock your free monthly MaiK allowance. It takes a minute and costs nothing.";
   const PRO_MSG = "You've used your free MaiK allowance for this month. Upgrade to StewardMD Pro for unlimited clinical AI, imaging, and evidence review.";
 
   // global circuit breaker (project-wide daily cost). Hard-stop defaults from env but is ADMIN-EDITABLE
@@ -211,12 +216,17 @@ export async function checkQuota(env, request, type, opts) {
   let budgetApplied = false;
   if (aiBudgetOn(env) && callerUid) {
     try {
-      const cap = await monthlyCapFor(env, callerUid, isProCaller, callerVerified, month, { kv: store });
+      const cap = await monthlyCapFor(env, callerUid, isProCaller, callerPhoneVerified, month, { kv: store });
       if (cap != null) { monthlyCap = cap; budgetApplied = true; }
     } catch (e) { /* fail-open: keep legacy cap */ }
   }
   if (!exempt && m.tokens >= monthlyCap) {
     if (!isProCaller) {
+      // A Free account whose mobile is not verified has a zero allowance under the budget tiers:
+      // the fix is the phone sheet, not a price (pro-notice.js "phone-unverified").
+      if (budgetApplied && !callerPhoneVerified) {
+        return { ok: false, reason: "phone-unverified", needsPro: true, verified: !!callerVerified, phoneVerified: false, message: PHONE_MSG, id };
+      }
       // callerVerified is already resolved above for the budget cap. Reuse it: "upgrade to Pro"
       // is the wrong ask for someone whose registration simply is not verified yet.
       const _r = callerVerified ? "verified-week-expired" : "unverified";

@@ -20,8 +20,9 @@ export async function onRequest(context) {
   if (!uid) return json({ error: "signin-required" }, 401);
   const store = usageKv(env);
   try { await warmBillingCfg(store); } catch (e) {}   // live DEVICE_LOCK_ON override
+  // The limit keys on the purchased tier (Co-Resident 1, everyone else 2), so hand over the record.
   let role = null;
-  try { const e = await getEntitlement(env, uid); role = e && e.role; } catch (e) {}
+  try { const e = await getEntitlement(env, uid); role = e || null; } catch (e) {}
   const enforced = deviceLockOn(env);
 
   if (request.method === "GET") {

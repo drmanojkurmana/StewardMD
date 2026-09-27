@@ -150,8 +150,9 @@ import { opdSuggestPrompt, sanitizeOpdSuggest } from "./_opd-suggest.js";
 import { icdSuggestPrompt, sanitizeIcdSuggest } from "./_icd-suggest.js";
 import * as icdRepo from "../../_icd_repo.js";
 import { surgxNotePrompt, sanitizeSurgxNote } from "./_surgx-note.js";
-import { quotaOn, quotaKv, consumeScribeSession, quotaRefusal } from "../../_quota.js";
-import { getEntitlement } from "../../_entitlements.js";
+import { quotaOn, quotaKv, consumeScribeSession, quotaRefusal, state as quotaState, consume as quotaConsume } from "../../_quota.js";
+import { getEntitlement, effectiveTierFor } from "../../_entitlements.js";
+import { sttFallbackOn, planClass, monthlyCredits, chargeCredits, signinBody } from "../../_stt_fallback.js";
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
 // model by setModelOverride) wins; otherwise the exact prior behaviour (env.GEMINI_MODEL || default).
 // env.__modelOverride is stamped once per request in onRequest from the KV override.
@@ -2493,11 +2494,30 @@ export async function onRequest(context) {
       if (!b64) return json({ error: "no audio" }, 400);
       const gate = await checkQuota(env, request, "ocr");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
+      // Dictation credits for this fallback (owner 2026-09-26): 100 free (mobile verified), 500 Pro,
+      // 1,000 Clinician a month, then bought packs. Checked before the model call, spent only on success.
+      // Owners are exempt; STT_FALLBACK_CREDITS_ON="0" turns the meter off.
+      let fb = null;
+      if (sttFallbackOn(env) && !(await ownerOK(request, env).catch(function () { return false; }))) {
+        let pr = null, rec = null;
+        try { pr = await proFromRequest(env, request); } catch (e) { pr = null; }
+        const fbUid = (pr && pr.uid) || null;
+        if (!fbUid) return json(signinBody(), 402);
+        try { rec = await getEntitlement(env, fbUid); } catch (e) { rec = null; }
+        const phoneOk = !!(pr && pr.claims && pr.claims.phoneVerified === true);
+        const included = monthlyCredits(env, planClass(effectiveTierFor(rec), !!(pr && pr.pro), true, phoneOk));
+        const units = chargeCredits(env, b64.length, body.durationMs);
+        const qkv = quotaKv(env);
+        const st = await quotaState(env, qkv, fbUid, "dict", { included });
+        if (st.meter && st.remaining < units) return json(Object.assign(quotaRefusal(env, "dict"), { needed: units, remaining: st.remaining, phoneVerified: phoneOk }), 402);
+        fb = { qkv, uid: fbUid, units, included };
+      }
       const sys = "Transcribe this clinical dictation audio to plain text, VERBATIM. Return ONLY the transcript text — no preamble, labels, quotes, or commentary. If the audio is empty or inaudible, return an empty string.";
       let text;
       try { text = await gen([{ text: sys }, { inline_data: { mime_type: mime, data: b64 } }], MAX_OUT); }
       catch (e) { await recordUsage(gate, { inTok: 1200, outTok: 0, status: "failed" }); throw e; }
       await recordUsage(gate, { ...tokens(4800, text), status: "success" });
+      if (fb) { try { await quotaConsume(env, fb.qkv, fb.uid, "dict", { units: fb.units, included: fb.included }); } catch (e) {} }
       return json({ transcript: String(text || "").trim(), mode: "ai" });
     }
     return json({ error: "unknown endpoint", seg: seg }, 404);

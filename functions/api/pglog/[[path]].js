@@ -46,23 +46,30 @@
  *   GET    /dashboard/faculty?orgId=           -> pending, overdue, residents needing attention
  *   GET    /dashboard/dept?orgId=&departmentId= -> HOD / Academic Cell oversight
  *   GET    /notifications                      POST /notifications/:id/read
+ *
+ * Onboarding (functions/_pglog_enrol.js; every path goes through ONE enrolOne()):
+ *   POST   /enrol                              { orgId, email, role, programmeId?, guide?, trainingYear?,
+ *                                                startDate?, name? } -> enrolled, or a pending invite
+ *   POST   /enrol-bulk                         { orgId, programmeId, rows:[{ email, guide?, trainingYear? }] }
+ *   GET    /invites?orgId=                     pending invites (Academic Cell)
+ *   POST   /join-request                       { orgCode, programmeHint?, note? }  any signed-in user
+ *   GET    /join-request                       the caller's own request
+ *   GET    /join-requests?orgId=&status=       academic_cell / pg_hod of that org
+ *   POST   /join-requests/:id/approve | /reject
  */
-import { verifyFirebaseToken } from "../../_fbauth.js";
+import { verifiedClaimsFor, verifiedEmailOf } from "../../_fbauth.js";
 import { CAPS, can } from "../../_queue_roles.js";
 import { templateFor } from "../../_pglog_templates.js";
 import * as S from "../../_pglog_store.js";
 import * as V from "../../_pglog_verify.js";
 import * as P from "../../_pglog_public.js";
 import M from "../../../pglog-model.js";
-import { lookupUidByEmail } from "../../_fbadmin.js";
 import * as ORG from "../../_opd_org_store.js";
+import * as E from "../../_pglog_enrol.js";
 
 const json = (obj, status = 200, extra) => new Response(JSON.stringify(obj), {
   status, headers: Object.assign({ "Content-Type": "application/json", "Cache-Control": "no-store" }, extra || {})
 });
-const bearer = (request) => {
-  try { return (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, ""); } catch (e) { return ""; }
-};
 function enabled(env) { return String((env && env.PGLOG_OFF) || "") !== "1"; }
 
 // Errors carry a {status}; anything else is a 500 with no internals leaked to the client.
@@ -112,7 +119,8 @@ function fail(e) {
     // Firestore REST body (document paths, the project id), and for e403 it is the capability name,
     // which maps the permission model for free. `errors` is our own validation output and is safe.
     try { if (e && e.detail) console.warn("[pglog]", e.message, String(e.detail).slice(0, 300)); } catch (_) {}
-    return json({ error: (e && e.message) || "error", message: e && e.userMessage, errors: e && e.errors }, status);
+    return json({ error: (e && e.message) || "error", message: e && e.userMessage, errors: e && e.errors,
+                  email: e && e.email, role: e && e.role }, status);
   }
   try { console.warn("[pglog]", e && e.message, e && e.stack); } catch (_) {}
   return json({ error: "server_error" }, 500);
@@ -121,7 +129,10 @@ function fail(e) {
 
 // Resolve the caller's role in an org once per request.
 async function context(request, env, orgId) {
-  const uid = await verifyFirebaseToken(bearer(request), env);
+  // verifiedClaimsFor() is the same verification verifyFirebaseToken() runs, memoised per request, so
+  // a route that also needs the verified email (/me, /enrol, /join-request) verifies the token once.
+  const claims = await verifiedClaimsFor(request, env);
+  const uid = claims && claims.sub;
   if (!uid) throw Object.assign(new Error("signin_required"), { status: 401 });
   const actorUid = "fb:" + uid;
   if (!orgId) return { uid, actorUid, orgId: "", role: "viewer" };
@@ -188,6 +199,31 @@ export async function canReadResident(env, ctx, resident, entry) {
   throw Object.assign(new Error("forbidden"), { status: 403, detail: "read_resident" });
 }
 
+/* The caller's verification queue: entries naming them (or routed to them as the guide), plus, for a
+ * head of department, the entries nobody is named on in their department(s). */
+async function pendingQueue(env, ctx) {
+  const rows = await S.pendingForFaculty(env, ctx.orgId, ctx.actorUid);
+  if (ctx.role !== "pg_hod") return rows;
+  const seen = {};
+  rows.forEach((e) => { seen[e.id] = 1; });
+  const extra = (await S.pendingUnassigned(env, ctx.orgId, scopeOf(ctx))).filter((e) => !seen[e.id]);
+  return rows.concat(extra).sort((a, b) => (a.submittedAt || 0) - (b.submittedAt || 0));
+}
+// The departments a membership is confined to; [] means whole-org, as everywhere in this app.
+function scopeOf(ctx) { return (ctx && ctx.member && ctx.member.scope && ctx.member.scope.departments) || []; }
+// Who may answer a join request: an Academic Cell (CONFIGURE, institution-wide) or an HoD (confined
+// to the programmes of their own department scope by enrolOne's deptScope).
+function mayDecideJoin(ctx) { return can(ctx.role, CAPS.PGLOG_CONFIGURE) || ctx.role === "pg_hod"; }
+function joinScope(ctx) { return can(ctx.role, CAPS.PGLOG_CONFIGURE) ? [] : scopeOf(ctx); }
+async function callerEmail(request, env) {
+  try { return verifiedEmailOf(await verifiedClaimsFor(request, env)) || ""; } catch (e) { return ""; }
+}
+async function callerName(request, env, uid) {
+  const fromProfile = await E.profileName(env, uid);
+  if (fromProfile) return fromProfile;
+  try { return S.cleanName(((await verifiedClaimsFor(request, env)) || {}).name); } catch (e) { return ""; }
+}
+
 export async function onRequest(context_) {
   const { request, env } = context_;
   const url = new URL(request.url);
@@ -233,8 +269,33 @@ export async function onRequest(context_) {
   try {
     /* ── who am I ───────────────────────────────────────────────────────── */
     if (seg === "me") {
-      const orgId = q("orgId");
-      const ctx = await context(request, env, orgId);
+      let orgId = q("orgId");
+      const who = await context(request, env, "");
+      /* A PENDING INVITE (an Academic Cell enrolled this email before the person had an account) is
+       * resolved here, on their first visit, against the token's VERIFIED email only. The role and
+       * the programme are the inviter's, replayed through enrolOne(); nothing is self-declared. */
+      let invited = [];
+      if (E.invitesOn(env)) {
+        const email = await callerEmail(request, env);
+        if (email) invited = await E.resolveInvites(env, who.actorUid, email);
+      }
+      const jr = E.joinRequestsOn(env) ? await E.myJoinRequest(env, who.actorUid).catch(() => null) : null;
+      const joinRequest = E.publicJoinRequestForSelf(jr);
+      // No institution on this device yet: open the one they were just admitted to, if any.
+      if (!orgId) {
+        if (invited.length) orgId = invited[0].orgId;
+        else if (jr && jr.status === "approved" && jr.orgId) orgId = jr.orgId;
+      }
+      let ctx;
+      try { ctx = await context(request, env, orgId); }
+      catch (e) {
+        // Not a member (yet): say so, and carry the join request so the screen can show "waiting for
+        // <institution>" instead of a dead end. Nothing about the org itself is disclosed.
+        if (e && (e.status === 403 || e.status === 404)) {
+          return json({ error: "forbidden", message: "You are not part of this institution yet.", joinRequest }, 403);
+        }
+        throw e;
+      }
       const resident = ctx.orgId ? await S.residentForUid(env, ctx.orgId, ctx.actorUid) : null;
       const programme = resident ? await S.getProgramme(env, resident.programmeId) : null;
       const rotations = resident ? await S.listRotations(env, resident.id) : [];
@@ -243,9 +304,15 @@ export async function onRequest(context_) {
       // control that fails. Never the gate; the gate is server-side on the write path.
       const signer = can(ctx.role, CAPS.PGLOG_VERIFY) || can(ctx.role, CAPS.PGLOG_ATTEST)
         ? await S.signerStatus(env, ctx.actorUid) : null;
+      // Remember a faculty member's display name for the roster picker (see S.rememberName: the
+      // roster's lower-cased identities cannot reach the case-sensitive profile path themselves).
+      if (signer && !(ctx.member && S.cleanName(ctx.member.displayName))) {
+        try { await S.rememberName(env, ctx.actorUid, await callerName(request, env, ctx.uid)); } catch (e) {}
+      }
       return json({ ok: true, uid: ctx.uid, orgId: ctx.orgId, orgCode: (ctx.org && ctx.org.code) || "",
                     orgName: (ctx.org && ctx.org.name) || "", orgKind: (ctx.org && ctx.org.kind) || "",
-                    role: ctx.role, caps, resident, programme, rotations, signer });
+                    role: ctx.role, caps, resident, programme, rotations, signer, joinRequest,
+                    invitesResolved: invited.length });
     }
 
     /* ── enrol: add a person to this institution ────────────────────────────
@@ -262,47 +329,89 @@ export async function onRequest(context_) {
      *     so widening it is a deliberate act, not a missing check.
      */
     if (seg === "enrol" && method === "POST") {
-      const orgId = String(body.orgId || "");
-      const ctx = await context(request, env, orgId);
-      await S.gate(env, ctx.actorUid, orgId, CAPS.PGLOG_CONFIGURE);
+      // ctx.orgId, not the raw body value: context() accepts an SMD-XXXXXX code, and every write below
+      // must land on the internal id it resolves to.
+      const ctx = await context(request, env, String(body.orgId || ""));
+      await S.gate(env, ctx.actorUid, ctx.orgId, CAPS.PGLOG_CONFIGURE);
 
-      const ASSIGNABLE = ["pg_resident", "pg_faculty", "pg_hod", "academic_cell"];
+      // ASSIGNABLE (pg_* + academic_cell) is enforced again inside enrolOne(); checked here too so a
+      // bad role is refused before any lookup.
       const role = String(body.role || "");
-      if (ASSIGNABLE.indexOf(role) < 0) return json({ error: "role_not_assignable", role }, 400);
+      if (E.ASSIGNABLE.indexOf(role) < 0) return json({ error: "role_not_assignable", role }, 400);
+      if (!String(body.email || "").trim()) return json({ error: "email_required" }, 400);
+      /* ONE path (_pglog_enrol.enrolOne): resolves the email, refuses to re-role the caller
+       * (cannot_assign_self, BEFORE any membership write), validates the guide, writes q_members, and
+       * enrols the resident in the same call. An email with no account yet becomes a PENDING INVITE
+       * (PGLOG_INVITES, default on) instead of no_such_account. */
+      const r = await E.enrolOne(env, {
+        orgId: ctx.orgId, actorUid: ctx.actorUid, actorEmail: await callerEmail(request, env),
+        row: { email: body.email, role, programmeId: body.programmeId, guide: body.guide,
+               trainingYear: body.trainingYear, startDate: body.startDate, name: body.name,
+               departmentId: body.departmentId, unit: body.unit },
+        allowInvite: E.invitesOn(env), via: "enrol"
+      });
+      return json(r);
+    }
 
-      const email = String(body.email || "").trim().toLowerCase();
-      if (!email) return json({ error: "email_required" }, 400);
-      // lookupUidByEmail resolves to { uid, email, name } - NOT a bare uid. Taking the object made
-      // identity "fb:[object Object]", so the enrolment returned 200 while writing a membership
-      // nobody could ever match: the resident would sign in and still be told they are not enrolled.
-      let found = null;
-      try { found = await lookupUidByEmail(env, email); } catch (e) { found = null; }
-      const uid = found && found.uid;
-      // Say WHICH email failed: an Academic Cell typing twenty of them needs to know which one, and
-      // "they have not signed in to StewardMD yet" is the usual cause, not a typo.
-      if (!uid) return json({ error: "no_such_account", email }, 404);
+    /* ── bulk enrol: up to 100 residents into one programme, per-row results ── */
+    if (seg === "enrol-bulk" && method === "POST") {
+      const ctx = await context(request, env, String(body.orgId || ""));
+      await S.gate(env, ctx.actorUid, ctx.orgId, CAPS.PGLOG_CONFIGURE);
+      const rl = await P.rateLimit(env, request, "bulk:" + ctx.uid, 5, 60);
+      if (!rl.ok) return json({ error: "rate_limited", message: "Wait a minute before the next batch." }, 429, { "Retry-After": String(rl.retryAfter) });
+      return json(await E.enrolBulk(env, {
+        orgId: ctx.orgId, actorUid: ctx.actorUid, actorEmail: await callerEmail(request, env),
+        programmeId: body.programmeId, startDate: body.startDate, rows: body.rows
+      }));
+    }
 
-      const identity = "fb:" + uid;
-      /* NOBODY RE-ROLES THEMSELVES HERE. _queue_roles.js deliberately withholds VERIFY/ASSESS/ATTEST
-       * from `admin` and `academic_cell` - "monitoring implementation is not signing a trainee's
-       * clinical record" - but both hold PGLOG_CONFIGURE, and pg_faculty and pg_hod each carry all
-       * three sign-off caps. setMembership() is an upsert on orgId__identity, so an Academic Cell
-       * could POST their OWN email with role:"pg_hod", overwrite their membership row, and walk away
-       * holding the signature powers the separation exists to deny them. Appointing OTHER people is
-       * the whole purpose of this console and stays allowed. */
-      if (M.sameActor(identity, ctx.actorUid)) {
-        return json({ error: "cannot_assign_self", role,
-          message: "You cannot change your own role here. Ask the institution's administrator." }, 403);
+    /* ── pending invites (enrolled by email, not signed in yet) ─────────── */
+    if (seg === "invites" && method === "GET") {
+      const ctx = await context(request, env, q("orgId"));
+      await S.gate(env, ctx.actorUid, ctx.orgId, CAPS.PGLOG_CONFIGURE);
+      return json({ ok: true, invites: await E.listInvites(env, ctx.orgId) });
+    }
+
+    /* ── "request to join" by institution code ──────────────────────────────
+     * Any signed-in user may ASK. The request grants nothing: no membership, no role. It becomes a
+     * pg_resident membership only when an Academic Cell or HoD approves it through enrolOne(). */
+    if (seg === "join-request") {
+      if (!E.joinRequestsOn(env)) return json({ error: "disabled" }, 404);
+      const who = await context(request, env, "");
+      if (method === "GET") {
+        return json({ ok: true, joinRequest: E.publicJoinRequestForSelf(await E.myJoinRequest(env, who.actorUid)) });
       }
-      await ORG.setMembership(env, orgId, identity, { role: role }, ctx.actorUid);
-
-      // A resident is only usable once they are in a programme, so do both in one call rather than
-      // leaving a half-enrolled member who still sees the "not linked yet" screen.
-      let resident = null;
-      if (role === "pg_resident" && body.programmeId) {
-        resident = await S.enrolResident(env, orgId, Object.assign({}, body, { uid: identity }), ctx.actorUid);
+      if (method === "POST") {
+        const rl = await P.rateLimit(env, request, "join:" + who.uid, 5, 3600);
+        if (!rl.ok) return json({ error: "rate_limited", message: "Too many requests. Try again later." }, 429, { "Retry-After": String(rl.retryAfter) });
+        const r = await E.createJoinRequest(env, {
+          actorUid: who.actorUid, email: await callerEmail(request, env), name: await callerName(request, env, who.uid),
+          orgCode: body.orgCode, programmeHint: body.programmeHint, note: body.note
+        });
+        return json({ ok: true, existing: r.existing, joinRequest: E.publicJoinRequestForSelf(r.joinRequest) });
       }
-      return json({ ok: true, identity, role, email, resident });
+    }
+    if (seg === "join-requests") {
+      if (!E.joinRequestsOn(env)) return json({ error: "disabled" }, 404);
+      if (method === "GET" && !id) {
+        const ctx = await context(request, env, q("orgId"));
+        if (!mayDecideJoin(ctx)) return json({ error: "forbidden" }, 403);
+        const list = await E.listJoinRequests(env, ctx.orgId, q("status") || "pending");
+        return json({ ok: true, joinRequests: list.map(E.publicJoinRequestForStaff) });
+      }
+      if (method === "POST" && id && (action === "approve" || action === "reject")) {
+        const jr = await E.getJoinRequest(env, id);
+        if (!jr) return json({ error: "not_found" }, 404);
+        const ctx = await context(request, env, jr.orgId);
+        if (!mayDecideJoin(ctx)) return json({ error: "forbidden" }, 403);
+        if (action === "reject") {
+          const out = await E.rejectJoinRequest(env, { id, orgId: ctx.orgId, actorUid: ctx.actorUid, reason: body.reason });
+          return json({ ok: true, joinRequest: E.publicJoinRequestForStaff(out) });
+        }
+        const r = await E.approveJoinRequest(env, { id, orgId: ctx.orgId, actorUid: ctx.actorUid, body, deptScope: joinScope(ctx) });
+        return json({ ok: true, joinRequest: E.publicJoinRequestForStaff(r.joinRequest), identity: r.identity,
+                      role: r.role, resident: S.publicResident(r.resident, "roster") });
+      }
     }
 
     /* ── programmes ─────────────────────────────────────────────────────── */
@@ -367,8 +476,17 @@ export async function onRequest(context_) {
       }
       if (method === "POST") {
         const ctx = await context(request, env, body.orgId);
-        await S.gate(env, ctx.actorUid, body.orgId, CAPS.PGLOG_CONFIGURE);
-        return json({ ok: true, resident: await S.enrolResident(env, body.orgId, body, ctx.actorUid) });
+        await S.gate(env, ctx.actorUid, ctx.orgId, CAPS.PGLOG_CONFIGURE);
+        // Same guide and training-year rules as /enrol, so this older route is not a way around them.
+        const rb = Object.assign({}, body);
+        if (rb.guide) {
+          if (M.sameActor(ctx.actorUid, rb.guide)) return json({ error: "cannot_assign_self_as_guide",
+            message: "You cannot make yourself this resident's guide. Ask the head of department." }, 403);
+          rb.guide = await E.validateGuide(env, ctx.orgId, rb.guide, { residentIdentity: rb.uid, departmentId: rb.departmentId });
+        }
+        const ty = E.parseTrainingYear(rb.trainingYear);
+        if (!ty.ok) return json({ error: "training_year_invalid", message: "Training year must be 1, 2 or 3." }, 400);
+        return json({ ok: true, resident: await S.enrolResident(env, ctx.orgId, rb, ctx.actorUid) });
       }
       if (method === "PATCH" && id) {
         const cur = await S.getResident(env, id);
@@ -383,7 +501,18 @@ export async function onRequest(context_) {
          * the signer's registration number. */
         const structural = ["programmeId", "startDate", "endDate", "trainingYear", "guide", "coGuides",
                             "active", "departmentId", "name", "smdId", "batch"];
-        if (!own || structural.some((k) => k in body)) await S.gate(env, ctx.actorUid, cur.orgId, CAPS.PGLOG_CONFIGURE);
+        /* ASSIGNING A GUIDE. Nothing could, so the monthly authentication PGMER-2023 5.2(vii) asks
+         * of "the Post-graduate guide" was unreachable for every resident. An Academic Cell does it
+         * through CONFIGURE; a head of department may do it for a resident of THEIR department (and
+         * change nothing else in the same call). The self-appointment refusal below still applies. */
+        const onlyGuideKeys = Object.keys(body).length > 0 &&
+          Object.keys(body).every((k) => k === "guide" || k === "coGuides");
+        const hodScope = scopeOf(ctx);
+        const hodAssigns = ctx.role === "pg_hod" && onlyGuideKeys &&
+          (!hodScope.length || hodScope.indexOf(cur.departmentId) > -1);
+        if ((!own || structural.some((k) => k in body)) && !hodAssigns) {
+          await S.gate(env, ctx.actorUid, cur.orgId, CAPS.PGLOG_CONFIGURE);
+        }
         /* YOU MAY NOT NAME YOURSELF THIS RESIDENT'S GUIDE. Assigning the guide is CONFIGURE-gated,
          * and academic_cell and admin both hold CONFIGURE - while canReadResident() grants a guide
          * the "verifier" audience, which releases caseRef, diagnosis, remarks and reflection bodies.
@@ -397,7 +526,23 @@ export async function onRequest(context_) {
           return json({ error: "cannot_assign_self_as_guide",
             message: "You cannot make yourself this resident's guide. Ask the head of department." }, 403);
         }
-        return json({ ok: true, resident: await S.updateResident(env, id, body, ctx.actorUid) });
+        // A guide must be someone who can actually verify this resident's entries.
+        const patch = Object.assign({}, body);
+        if (patch.guide) {
+          patch.guide = await E.validateGuide(env, cur.orgId, patch.guide, { residentIdentity: cur.uid, departmentId: patch.departmentId || cur.departmentId });
+        }
+        if (Array.isArray(patch.coGuides)) {
+          const out = [];
+          for (const g of patch.coGuides) if (g) out.push(await E.validateGuide(env, cur.orgId, g, { residentIdentity: cur.uid, departmentId: patch.departmentId || cur.departmentId }));
+          patch.coGuides = out;
+        }
+        if ("trainingYear" in patch) {
+          const ty = E.parseTrainingYear(patch.trainingYear);
+          if (!ty.ok || ty.value === undefined) return json({ error: "training_year_invalid", message: "Training year must be 1, 2 or 3." }, 400);
+          patch.trainingYear = ty.value;
+        }
+        const updated = await S.updateResident(env, id, patch, ctx.actorUid);
+        return json({ ok: true, resident: own ? updated : S.publicResident(updated, ctx.role === "pg_hod" ? "hod" : "roster") });
       }
     }
 
@@ -447,7 +592,7 @@ export async function onRequest(context_) {
         const res = await S.getResident(env, e.residentId);
         const ctx = await context(request, env, e.orgId);
         const audience = await canReadResident(env, ctx, res, e);
-        return json({ ok: true, audience, entry: S.publicEntry(e, audience) });
+        return json({ ok: true, audience, entry: Object.assign(S.publicEntry(e, audience), { residentName: S.cleanName(res && res.name) }) });
       }
       if (method === "POST" && !id) {
         const res = await S.getResident(env, body.residentId);
@@ -462,7 +607,10 @@ export async function onRequest(context_) {
         if (!cur) return json({ error: "not_found" }, 404);
         const ctx = await context(request, env, cur.orgId);
         await S.gate(env, ctx.actorUid, cur.orgId, CAPS.PGLOG_SUBMIT_OWN);
-        return json({ ok: true, entry: S.publicEntry(await S.submitEntry(env, id, ctx.actorUid), "self") });
+        const out = await S.submitEntry(env, id, ctx.actorUid);
+        // routing: "supervisor" (named on the entry) | "guide" (defaulted to the resident's guide) |
+        // "unassigned" (no guide yet: waiting for one, or for an HoD).
+        return json({ ok: true, entry: S.publicEntry(out, "self"), routing: out.routing || "supervisor" });
       }
       if (id && action === "withdraw" && method === "POST") {
         const cur = await S.getEntry(env, id);
@@ -507,24 +655,25 @@ export async function onRequest(context_) {
 
     /* ── the faculty roster (so a resident picks a real person, not free text) ── */
     if (seg === "faculty-roster" && method === "GET") {
-      const orgId = q("orgId");
-      const ctx = await context(request, env, orgId);
+      const ctx = await context(request, env, q("orgId"));
       if (!can(ctx.role, CAPS.PGLOG_VIEW_OWN) && !can(ctx.role, CAPS.PGLOG_VIEW_ASSIGNED)) {
         return json({ error: "forbidden" }, 403);
       }
-      // identity + role only. No email: a resident picking a supervisor does not need staff contact
-      // details, and this list is readable by every resident in the org.
-      const roster = await S.facultyRoster(env, orgId);
-      return json({ ok: true, faculty: roster.map((m) => ({ identity: m.identity, role: m.role })) });
+      // identity + role + display NAME (+ department scope, for a guide picker). Never email or
+      // phone: a resident picking a supervisor does not need staff contact details, and this list is
+      // readable by every resident in the org. ctx.orgId: the resolved id, not an SMD code.
+      const roster = await S.facultyRosterNamed(env, ctx.orgId);
+      return json({ ok: true, faculty: roster.map((m) => ({ identity: m.identity, role: m.role, name: m.name, departments: m.departments })) });
     }
 
     /* ── the faculty verification queue ─────────────────────────────────── */
     if (seg === "pending" && method === "GET") {
-      const orgId = q("orgId");
-      const ctx = await context(request, env, orgId);
+      const ctx = await context(request, env, q("orgId"));
       if (!can(ctx.role, CAPS.PGLOG_VERIFY)) return json({ error: "forbidden" }, 403);
-      const rows = await S.pendingForFaculty(env, orgId, ctx.actorUid);
-      return json({ ok: true, entries: rows.map((e) => S.publicEntry(e, "verifier")) });
+      const rows = await pendingQueue(env, ctx);
+      const names = await S.residentNames(env, rows.map((e) => e.residentId));
+      return json({ ok: true, entries: rows.map((e) => Object.assign(S.publicEntry(e, "verifier"),
+        { residentName: names[e.residentId] || "", unassigned: !e.supervisor })) });
     }
 
     /* ── assessments ────────────────────────────────────────────────────── */
@@ -640,22 +789,40 @@ export async function onRequest(context_) {
         });
       }
       if (id === "faculty" && method === "GET") {
-        const orgId = q("orgId");
-        const ctx = await context(request, env, orgId);
+        const ctx = await context(request, env, q("orgId"));
+        const orgId = ctx.orgId;
         if (!can(ctx.role, CAPS.PGLOG_VERIFY) && !can(ctx.role, CAPS.PGLOG_VIEW_ASSIGNED)) return json({ error: "forbidden" }, 403);
-        const pending = await S.pendingForFaculty(env, orgId, ctx.actorUid);
-        const residents = await S.listResidents(env, orgId, { guide: ctx.actorUid });
+        /* A head of department sees EVERY resident of their department(s), not only the ones they
+         * guide: PGMER-2023 lets the HoD authenticate for a guide who has left, and an HoD who could
+         * not see a guideless resident could never assign them one either. Faculty still see only
+         * their own trainees. Rate-limited like the dept view: this is two reads per resident. */
+        const isHod = ctx.role === "pg_hod";
+        if (isHod) {
+          const fl = await P.rateLimit(env, request, "fac:" + ctx.uid, 10, 60);
+          if (!fl.ok) return json({ error: "rate_limited", message: "That view is still loading. Try again in a moment." }, 429, { "Retry-After": String(fl.retryAfter) });
+        }
+        const pending = await pendingQueue(env, ctx);
+        let residents;
+        if (isHod) {
+          const hs = scopeOf(ctx);
+          residents = (await S.listResidents(env, orgId, {})).filter((r) => !hs.length || !r.departmentId || hs.indexOf(r.departmentId) > -1);
+        } else {
+          residents = await S.listResidents(env, orgId, { guide: ctx.actorUid });
+        }
         const today = M.isoDate(Date.now());
+        const pendingNames = await S.residentNames(env, pending.map((e) => e.residentId));
         // Per-resident triage, computed here so the faculty list is ordered by who needs a
         // conversation rather than alphabetically.
         const rows = [];
-        for (const r of residents.slice(0, 60)) {
+        for (const r of residents.slice(0, isHod ? 150 : 60)) {
           const entries = await S.listEntries(env, r.id, {});
           const atts = await S.listAttestations(env, r.id);
           const weekly = M.weeklyCadence(entries, r.startDate, today);
           const months = M.attestationStatus(r, entries, atts, { today });
           rows.push({
-            resident: { id: r.id, name: r.name, smdId: r.smdId, trainingYear: r.trainingYear, unit: r.unit },
+            resident: { id: r.id, name: r.name, smdId: r.smdId, trainingYear: r.trainingYear, unit: r.unit,
+                        programmeId: r.programmeId, departmentId: r.departmentId, guide: r.guide || "",
+                        needsGuide: !r.guide, isMine: S.norm(r.guide) === S.norm(ctx.actorUid) },
             summary: M.summarise(entries), weekly,
             attestationOverdue: months.filter((m) => m.overdue).map((m) => m.period),
             lastEntryAt: entries.length ? entries[0].occurredAt : ""
@@ -664,7 +831,8 @@ export async function onRequest(context_) {
         rows.sort((a, b) => (a.weekly.pct == null ? 101 : a.weekly.pct) - (b.weekly.pct == null ? 101 : b.weekly.pct));
         return json({
           ok: true, role: ctx.role,
-          pending: pending.map((e) => S.publicEntry(e, "verifier")),
+          pending: pending.map((e) => Object.assign(S.publicEntry(e, "verifier"),
+            { residentName: pendingNames[e.residentId] || "", unassigned: !e.supervisor })),
           overdue: M.overdueVerifications(pending, { today, verifySlaDays: 7 }),
           residents: rows
         });

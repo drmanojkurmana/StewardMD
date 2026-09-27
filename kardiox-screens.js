@@ -2769,13 +2769,24 @@
     flashcards: renderFlashcards,
     daily: render12
   };
-  var state = { analysis: null, running: false, lessonId: null, stack: [], quizIntent: null, quizLessonId: null };
+  var state = { analysis: null, running: false, lessonId: null, stack: [], quizIntent: null, quizLessonId: null, learnOnly: false };
+  /* Learn-only mode (audit finding 11, owner decision 2026-09-26; entered via KARDIOX.openLearn()).
+   * Only the no-AI learning screens exist in it. Every other screen (capture, processing, analysis,
+   * report, history, settings, landing with its Analyze CTA) is refused and routed to the ECG AI
+   * access gate (KARDIOX.unlockAi), so the AI interpretation stays behind its code. */
+  var LEARN_SCREENS = { library: 1, lesson: 1, quiz: 1, flashcards: 1, daily: 1, privacy: 1 };
+  var LEARN_ACTS = { "kardiox-close": 1, "kardiox-back": 1, "kxnav:back": 1, "kx-back": 1, "back": 1, "kardiox-learn": 1,
+    "kardiox-daily": 1, "kardiox-quiz": 1, "kxnav:quiz": 1, "kardiox-dailyquiz": 1, "kxnav:lesson": 1, "kxnav:privacy": 1 };
+  function aiLocked() {
+    toast("ECG AI interpretation is a beta that needs an access code. Learn ECG stays open to you.");
+    try { if (window.KARDIOX && KARDIOX.unlockAi) KARDIOX.unlockAi(); } catch (e) {}
+  }
   function providers() { try { return window.SMD_KARDIOX_PROVIDERS && window.SMD_KARDIOX_PROVIDERS.current(); } catch (e) { return null; } }
   function host() { return document.getElementById("kxScroll"); }
   function reduceMotion() { try { return window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
   function ctx() { var id = state.lessonId; return { providers: providers(), analysis: state.analysis, nav: go, close: closeMod, toast: toast, leadCount: 12, leads: 12, reduceMotion: reduceMotion(), lessonId: id, ecgId: id, id: id, quizIntent: state.quizIntent, quizLessonId: state.quizLessonId }; }
   function show(key) { var h = host(), fn = SCREENS[key]; if (!h || !fn) return; try { fn(h, ctx()); } catch (e) { try { console.warn("[KardiQ X] screen " + key, e); } catch (_) {} } try { h.scrollTop = 0; } catch (_) {} }
-  function go(key) { key = String(key || ""); if (key.indexOf("kxnav:") === 0) key = key.slice(6); if (!SCREENS[key]) { deferred(key); return; } if (state.stack[state.stack.length - 1] !== key) state.stack.push(key); show(key); }
+  function go(key) { key = String(key || ""); if (key.indexOf("kxnav:") === 0) key = key.slice(6); if (state.learnOnly && !LEARN_SCREENS[key]) { aiLocked(); return; } if (!SCREENS[key]) { deferred(key); return; } if (state.stack[state.stack.length - 1] !== key) state.stack.push(key); show(key); }
   function back() {
     // At the root of the flow (landing) there is nowhere further back — close the whole module
     // instead of getting stuck re-showing the landing. Otherwise pop one screen and show the previous.
@@ -2784,7 +2795,8 @@
     var prev = state.stack[state.stack.length - 1] || "landing";
     show(prev);
   }
-  function mountLanding(h) { init(); state.stack = ["landing"]; try { SCREENS.landing(h || host(), ctx()); } catch (e) { try { console.warn("[KardiQ X] landing", e); } catch (_) {} } }
+  function mountLearn(h) { init(); state.learnOnly = true; state.analysis = null; state.stack = ["library"]; show("library"); }
+  function mountLanding(h) { init(); state.learnOnly = false; state.stack = ["landing"]; try { SCREENS.landing(h || host(), ctx()); } catch (e) { try { console.warn("[KardiQ X] landing", e); } catch (_) {} } }
   function closeMod() { try { if (window.KARDIOX && KARDIOX.close) KARDIOX.close(); } catch (e) {} }
   function deferred(key) { var m = { tutor: "AI Tutor", storage: "Storage detail" }; toast((m[key] || "That") + " arrives in a later KardiQ X update."); }
 
@@ -2840,6 +2852,7 @@
     return a;
   }
   function runPipeline(image) {
+    if (state.learnOnly) { aiLocked(); return; }
     if (state.running) return; state.running = true;
     var P = providers(); show("processing");
     if (!P || !P.analyzer) { state.running = false; return; }
@@ -2974,6 +2987,7 @@
   function onClick(e) {
     var t = e.target.closest && e.target.closest("[data-act]"); if (!t) return;
     var act = t.getAttribute("data-act") || "";
+    if (state.learnOnly && !LEARN_ACTS[act] && (act.indexOf("kardiox-") === 0 || act.indexOf("kxnav:") === 0 || act === "kx-source" || act.indexOf("kx-toggle-") === 0 || act === "kx-clear-ecgs" || act === "kx-ondevice-ai")) { aiLocked(); return; }
     switch (act) {
       case "kardiox-close": haptic("light"); closeMod(); return;
       case "kardiox-back": case "kxnav:back": case "kx-back": case "back": haptic("light"); back(); return;
@@ -3057,6 +3071,6 @@
    * keep the previous account's data through a sign-out. wireSignout() is idempotent. */
   wireSignout();
 
-  if (typeof window !== "undefined") window.SMD_KARDIOX_ROUTER = { mountLanding: mountLanding, nav: go, runPipeline: runPipeline, wipe: wipe };
+  if (typeof window !== "undefined") window.SMD_KARDIOX_ROUTER = { mountLanding: mountLanding, mountLearn: mountLearn, isLearnOnly: function () { return !!state.learnOnly; }, nav: go, runPipeline: runPipeline, wipe: wipe };
 
 })();

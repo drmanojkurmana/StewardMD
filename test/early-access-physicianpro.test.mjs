@@ -49,9 +49,11 @@ test("a per-user featureFlags:false still denies a physicianpro", () => {
   });
 });
 
-test("ROLE_GATES_ON off = allow exactly as today (early access inert)", () => {
-  // defaultRoles: [] on the module keys means nobody without a code, gate off or on.
-  MODULES.forEach((k) => assert.equal(featureAllowed({}, pp(), k, "physician"), false, k));
+// Owner 2026-09-26: early access is grant-only, so it no longer waits for ROLE_GATES_ON. Lower tiers are
+// unchanged with the gate off: defaultRoles [] on the module keys still means nobody without a code.
+test("ROLE_GATES_ON off: physicianpro still granted; lower tiers still need a code", () => {
+  MODULES.forEach((k) => assert.equal(featureAllowed({}, pp(), k, "physician"), true, k));
+  MODULES.forEach((k) => assert.equal(featureAllowed({}, { tier: "physician", tierExp: null }, k, "physician"), false, k));
 });
 
 test("requireFeature: physicianpro granted without a code; a code still works for a lower tier", async () => {
@@ -76,4 +78,20 @@ test("requireFeature: physicianpro granted without a code; a code still works fo
     const bare = { uid: "u3", getEntitlement: async () => ({ tier: "pro", tierExp: Date.now() + DAY, role: "physician" }) };
     assert.equal((await requireFeature(env, req, k, bare)).allowed, false, k + " pro without code");
   }
+});
+
+// With EXPERIMENTAL_ENFORCE_<MODULE>="1" (production), each module's betaGate asks planEarlyAccess before the
+// access code, so Clinician Pro / Ultimate are not locked out by the code gate (owner 2026-09-26).
+test("planEarlyAccess: server twin of the plan early access, fails closed", async () => {
+  const { planEarlyAccess } = await import("../functions/_features.js");
+  const req = { headers: { get: () => "Bearer x" } };
+  const dep = (tier) => ({ uid: "u1", getEntitlement: async () => ({ tier, tierExp: null }) });
+  for (const k of ["kardiox", "thorex", "fundx", "sknx"]) {
+    assert.equal(await planEarlyAccess({}, req, k, dep("physicianpro")), true, k);
+    assert.equal(await planEarlyAccess({}, req, k, dep("ultimate")), true, k);
+    assert.equal(await planEarlyAccess({}, req, k, dep("physician")), false, k);
+    assert.equal(await planEarlyAccess({}, req, k, dep(null)), false, k);
+  }
+  assert.equal(await planEarlyAccess({}, req, "kardiox", { verifyFirebaseToken: async () => null }), false);
+  assert.equal(await planEarlyAccess({}, req, "kardiox", { uid: "u1", getEntitlement: async () => { throw new Error("x"); } }), false);
 });

@@ -20,6 +20,8 @@ import { emailPromo, PROMO_EDITIONS } from "./_promo.js";
 import { promoActive, promoUntil } from "./_entitlement.js";
 import { getUserClaims } from "./_fbadmin.js";
 import { fsGet, fsCommit, wDelete } from "./_fbfirestore.js";
+import { serviceAccountToken } from "./_fbadmin.js";   // phone index: does the owning account still exist?
+import { phoneHash } from "./_phone_otp.js";           // phone index: hashed key, never the raw number
 
 function lcKv(env) { return env.MAIK_KV || env.GHIS_KV || env.UPDATES_KV || null; }
 const PREFIX = "lifecycle:u:";
@@ -55,12 +57,88 @@ export function isUnsubscribed(rec) { return !!(rec && rec.unsubscribedAt); }
 
 // Phone verified over WhatsApp/SMS OTP (functions/api/auth phone-otp). Stores the number the code
 // was delivered to, so support can see which number is on the account. Not PHI: it is the doctor's.
+// A number this account verified BEFORE (a doctor changing their mobile) is released from the
+// phone index, so it does not stay locked to an account that no longer uses it.
 export async function markPhoneVerified(env, uid, phone) {
   if (!lcKv(env) || !uid) return null;
   const rec = (await getLifecycle(env, uid)) || { firstSeen: Date.now() };
+  const prev = rec.phone ? String(rec.phone) : "";
   rec.phone = String(phone || ""); rec.phoneVerifiedAt = Date.now();
   await putLifecycle(env, uid, rec);
+  if (prev && prev !== rec.phone) { try { await releasePhone(env, uid, prev); } catch (e) {} }
   return rec;
+}
+
+/* ── One mobile number, one account (audit finding 14, 2026-09-26) ─────────────────────────────
+ *   phoneidx:<sha256("smd-phone-v1:+<E.164 digits>")> -> { uid, at }
+ * The key is a hash (functions/_phone_otp.js phoneHash); the raw number is never in a key. Same KV
+ * as the lifecycle record. The owner "holds" the number only while the account is LIVE:
+ *   - lifecycle purgedAt set (the unverified sweep removed it)       -> released
+ *   - the owner has since verified a DIFFERENT number                 -> released (stale entry)
+ *   - the Firebase user is gone (self-deleted, hard-deleted)         -> released
+ * A Firebase lookup that errors counts as live: refusing a re-bind for a minute is recoverable,
+ * handing one number to two accounts is the bug this exists to close.
+ * KV has no transactions: bindPhone() re-checks at verify time, writes, then reads back. */
+const PHONE_IDX = "phoneidx:";
+export async function phoneIndexKey(phone) { return PHONE_IDX + (await phoneHash(phone)); }
+
+// true | false | null (null = could not tell). Distinguishes "no such user" from a failed lookup,
+// which getUserRecord/lookupUserByUid in _fbadmin.js both collapse to null.
+export async function firebaseUserExists(env, uid) {
+  try {
+    const project = env.FIREBASE_PROJECT_ID || "stewardmd-498ec";
+    const saToken = await serviceAccountToken(env);
+    const res = await fetch(`https://identitytoolkit.googleapis.com/v1/projects/${project}/accounts:lookup`, {
+      method: "POST", headers: { "Authorization": `Bearer ${saToken}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ localId: [String(uid || "").trim()] }),
+    });
+    if (!res.ok) return null;
+    const d = await res.json();
+    return !!((d.users || [])[0]);
+  } catch (e) { return null; }
+}
+
+// deps: { kv?, userExists?(env, uid) -> true|false|null }
+async function phoneOwnerLive(env, ownerUid, phone, deps) {
+  const rec = await getLifecycle(env, ownerUid);
+  if (rec && rec.purgedAt) return false;
+  if (rec && rec.phone && String(rec.phone) !== String(phone)) return false;
+  const exists = await ((deps && deps.userExists) || firebaseUserExists)(env, ownerUid);
+  return exists !== false;
+}
+
+// -> { ok:true } | { ok:false, error:"phone-in-use" }. No KV bound -> ok (nothing to enforce against).
+export async function checkPhoneAvailable(env, uid, phone, deps) {
+  const kv = (deps && deps.kv) || lcKv(env);
+  if (!kv || !uid || !phone) return { ok: true };
+  const cur = await kv.get(await phoneIndexKey(phone), "json");   // a KV error throws: the caller fails closed
+  if (!cur || !cur.uid || cur.uid === uid) return { ok: true };
+  if (await phoneOwnerLive(env, cur.uid, phone, deps)) return { ok: false, error: "phone-in-use" };
+  return { ok: true, released: cur.uid };
+}
+
+// Re-check, write, read back. -> { ok:true } | { ok:false, error:"phone-in-use" }
+export async function bindPhone(env, uid, phone, deps) {
+  const kv = (deps && deps.kv) || lcKv(env);
+  if (!kv || !uid || !phone) return { ok: true, indexed: false };
+  const c = await checkPhoneAvailable(env, uid, phone, deps);
+  if (!c.ok) return c;
+  const key = await phoneIndexKey(phone);
+  await kv.put(key, JSON.stringify({ uid, at: Date.now() }));
+  const back = await kv.get(key, "json");
+  if (back && back.uid && back.uid !== uid) return { ok: false, error: "phone-in-use" };
+  return { ok: true, indexed: true };
+}
+
+// Drop the index entry for `phone` only if it still points at `uid`.
+export async function releasePhone(env, uid, phone, deps) {
+  const kv = (deps && deps.kv) || lcKv(env);
+  if (!kv || !uid || !phone) return false;
+  const key = await phoneIndexKey(phone);
+  const cur = await kv.get(key, "json");
+  if (!cur || cur.uid !== uid) return false;
+  await kv.delete(key);
+  return true;
 }
 
 // Record first sign-in (idempotent — never resets firstSeen). Fills email/name if newly known.
@@ -254,6 +332,9 @@ export function decidePurge(env, rec, claims, now) {
 
   // --- reasons a real account is spared, checked against CLAIMS, not the KV metadata ---
   if (c.verified === true) return { action: "skip", reason: "verified", ageDays };
+  // An owner-approved student or intern is a reviewed account, not an unverified one (it holds
+  // traineeVerified instead of verified so it can never prescribe; see _entitlement.js).
+  if (c.traineeVerified === true) return { action: "skip", reason: "trainee-verified", ageDays };
   if (c.provUntil && +c.provUntil > now) return { action: "skip", reason: "pending-review", ageDays };
   // Never remove someone who paid us, verified or not. If that ever happens it is a refund
   // conversation, not a cron job.

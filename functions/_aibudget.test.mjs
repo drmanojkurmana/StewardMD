@@ -2,14 +2,17 @@ import assert from "node:assert";
 import test from "node:test";
 import { aiBudgetOn, budgetTier, roleAllowance, currentMonthGrant, effectiveAllowance, premiumModelAllowed } from "../functions/_aibudget.js";
 
-test("aiBudgetOn default off", () => {
-  assert.equal(aiBudgetOn({}), false);
+// Default flipped ON by owner decision 2026-08-27 (see _aibudget.js aiBudgetOn); this test still said off.
+test("aiBudgetOn default on, 0 switches it off", () => {
+  assert.equal(aiBudgetOn({}), true);
+  assert.equal(aiBudgetOn({ AI_BUDGET_ON: "0" }), false);
   assert.equal(aiBudgetOn({ AI_BUDGET_ON: "1" }), true);
 });
-test("budgetTier: verified-gated free trial", () => {
+// Third arg is phoneVerified since D8 (2026-09-26): the free allowance needs a verified mobile.
+test("budgetTier: phone-verified-gated free allowance", () => {
   assert.equal(budgetTier(false, null, false), "none");
   assert.equal(budgetTier(false, null, true), "free");
-  assert.equal(budgetTier(false, "student", false), "none");   // unverified never gets trial
+  assert.equal(budgetTier(false, "student", false), "none");   // mobile not verified never gets the free allowance
   assert.equal(budgetTier(true, "physician", false), "promax");
   assert.equal(budgetTier(true, "student", true), "pro");
   assert.equal(budgetTier(true, null, true), "pro");           // Pro no-role -> pro

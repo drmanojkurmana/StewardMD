@@ -16,6 +16,7 @@ mock.module("../functions/_fbadmin.js", { namedExports: {
   mergeUserClaims: async () => ({}),
   lookupUidByEmail: async () => null,
   lookupUserByUid: async () => null,
+  listUsersPage: async () => ({ users: [], nextPageToken: null }),   // _entitlements.js (Ultimate migration)
 } });
 const ORG = await import("../functions/_opd_org_store.js");
 const Q = await import("../functions/_queue_engine.js");

@@ -21,7 +21,8 @@ import { phoneTrialPatch, warmTrialMode } from "../../_trial_ledger.js";
 import { isOwnerClaims } from "../../_entitlement.js";
 import { emailOtp, emailResetCode, emailTempPassword } from "../../_email.js";
 import { phoneStart, phoneVerify, deliverOtp, phoneVerifyEnabled } from "../../_phone_otp.js";
-import { markPhoneVerified } from "../../_lifecycle.js";
+import { markPhoneVerified, checkPhoneAvailable, bindPhone } from "../../_lifecycle.js";
+import { clearBudgetCache } from "../../_aibudget.js";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 const TTL = 600;            // 10 minutes
@@ -100,14 +101,24 @@ async function handle(context) {
 
   // Mobile-number verification (2026-09-19): WhatsApp code, SMS as backup. Keyed otp:phone:<uid>.
   // Sits BEFORE the email gate: an Apple "Hide My Email" account has a phone to verify too.
+  // One number, one account (audit finding 14): phone-start refuses "phone-in-use" before any code
+  // is sent when another LIVE account holds the number; phone-verify re-checks and binds it
+  // (functions/_lifecycle.js bindPhone) before the claim is written.
   if (action === "phone-start" || action === "phone-verify") {
     if (!phoneVerifyEnabled(env)) return json({ ok: false, error: "off" });
     var pb = await request.json().catch(function () { return {}; });
     var pr = action === "phone-start"
-      ? await phoneStart(who, pb, { store: store, defaultCc: env.FOLLOWCARE_DEFAULT_CC, deliver: function (phone, code, name, channel) { return deliverOtp(env, { phone: phone, code: code, name: name, channel: channel }); } })
-      : await phoneVerify(who, pb, { store: store, onVerified: async function (phone) {
+      ? await phoneStart(who, pb, { store: store, defaultCc: env.FOLLOWCARE_DEFAULT_CC,
+          checkOwner: function (phone) { return checkPhoneAvailable(env, who.uid, phone); },
+          deliver: function (phone, code, name, channel) { return deliverOtp(env, { phone: phone, code: code, name: name, channel: channel }); } })
+      : await phoneVerify(who, pb, { store: store,
+          bind: function (phone) { return bindPhone(env, who.uid, phone); },
+          onVerified: async function (phone) {
           try { await mergeUserClaims(env, who.uid, { phoneVerified: true }); } catch (e) {}
           try { await markPhoneVerified(env, who.uid, phone); } catch (e) {}
+          // The Free AI allowance follows phoneVerified (D8, 2026-09-26): drop the cached cap so the
+          // new allowance applies on the next call rather than after the ~26 h cache.
+          try { await clearBudgetCache(env, who.uid); } catch (e) {}
           // One free week per number (_trial_ledger.js): a number that already had a week on
           // another account ends the one here. TRIAL_ONCE_ON off = nothing happens.
           if ((await warmTrialMode(env)) !== "off") {

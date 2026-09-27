@@ -38,9 +38,9 @@
   function providerLabel() {
     try { if (window.SMD_ACCOUNT && window.SMD_ACCOUNT.provider) {
       var p = window.SMD_ACCOUNT.provider();
-      return ({ google: "Google", apple: "Apple", email: "Email", phone: "Mobile", tester: "Tester" })[p] || (p || "—");
+      return ({ google: "Google", apple: "Apple", email: "Email", phone: "Mobile", tester: "Tester" })[p] || (p || "Unknown");
     } } catch (e) {}
-    return "—";
+    return "Unknown";
   }
 
   /* isVerified() is the ONE answer the whole app uses for "is this doctor verified?", so it must not
@@ -71,12 +71,49 @@
       .catch(function () { return false; });
   }
   // Minimal, self-contained server check — no claim fallback, so it can never recurse into us.
+  // "verified" here means MAY PRESCRIBE: the server's canPrescribe when it sends one (a student or
+  // intern is never a prescriber), else the doctor-only "verified" status of older servers.
   function _serverSaysVerified(u) {
     return u.getIdToken().then(function (tok) {
       return fetch("/api/verify-doctor", { headers: { "Authorization": "Bearer " + tok } })
         .then(function (r) { return r.ok ? r.json() : null; })
-        .then(function (d) { return !!(d && d.status === "verified"); });
+        .then(function (d) {
+          if (!d || d.status !== "verified") return false;
+          return typeof d.canPrescribe === "boolean" ? d.canPrescribe : true;
+        });
     }).catch(function () { return false; });
+  }
+
+  /* TRAINEES (audit 2026-09-26, finding 3). An owner-approved medical student or intern holds the
+   * claim traineeVerified, NOT verified: a reviewed, real account (no forced gate, free week, never
+   * swept) that must never prescribe. isVerified() above stays "registered doctor / may prescribe";
+   * isTrainee() is the separate "reviewed student or intern" answer, from the claim first and the
+   * server's status second (the claim lags an approval by up to an hour, as for doctors). */
+  var _tCache = { val: null, at: 0, role: "" };
+  function isTrainee(force) {
+    if (allowlisted()) return Promise.resolve(false);
+    var u = fbUser(); if (!u) return Promise.resolve(false);
+    if (!force && _tCache.val === true) return Promise.resolve(true);
+    if (!force && _tCache.val === false && (Date.now() - _tCache.at) < VERIFY_FALSE_TTL) return Promise.resolve(false);
+    return u.getIdTokenResult(!!force).then(function (r) {
+      var c = (r && r.claims) || {};
+      if (c.verified === true) return (_tCache = { val: false, at: Date.now(), role: "" }).val;
+      if (c.traineeVerified === true) return (_tCache = { val: true, at: Date.now(), role: _tCache.role }).val;
+      return u.getIdToken().then(function (tok) {
+        return fetch("/api/verify-doctor", { headers: { "Authorization": "Bearer " + tok } })
+          .then(function (x) { return x.ok ? x.json() : null; })
+          .then(function (d) {
+            var t = !!(d && d.status === "trainee_verified");
+            _tCache = { val: t, at: Date.now(), role: (d && d.role) || "" };
+            return t;
+          });
+      });
+    }).catch(function () { return false; });
+  }
+  function traineeRole() { return _tCache.role || ""; }
+  // "A real, reviewed account": a registered doctor OR an approved student/intern.
+  function isReviewed() {
+    return isVerifiedClaim().then(function (v) { return v ? true : isTrainee(); }, function () { return false; });
   }
   function isVerifiedClaim(force) {
     if (allowlisted()) return Promise.resolve(true);
@@ -85,8 +122,11 @@
     if (!force && _vCache.val === false && (Date.now() - _vCache.at) < VERIFY_FALSE_TTL) return Promise.resolve(false);
     return _claimOf(u, !!force).then(function (ok) {
       if (ok) return _rememberVerified(true);
-      return _claimOf(u, true).then(function (fresh) {          // the token may simply be stale
-        if (fresh) return _rememberVerified(true);
+      return u.getIdTokenResult(true).then(function (r) {       // the token may simply be stale
+        var c = (r && r.claims) || {};
+        if (c.verified === true) return _rememberVerified(true);
+        // A fresh token that says "reviewed trainee" is a settled NO: no server round trip needed.
+        if (c.traineeVerified === true) { _tCache = { val: true, at: Date.now(), role: _tCache.role }; return _rememberVerified(false); }
         return _serverSaysVerified(u).then(function (sv) {       // the server is authoritative
           if (!sv) return _rememberVerified(false);
           // Approved, but the claim has not propagated. Refresh so everything else agrees, and let
@@ -123,7 +163,10 @@
     return Promise.resolve({});
   }
   function resyncPro() { try { if (window.SMD_PRO && typeof window.SMD_PRO.sync === "function") window.SMD_PRO.sync(); } catch (e) {} }
-  window.SMD_VERIFY = { isVerified: isVerifiedClaim, openPanel: openPanel, VERIFY_ALLOWLIST: VERIFY_ALLOWLIST };
+  // isVerified = registered doctor, may prescribe. isTrainee = approved student/intern (never
+  // prescribes). isReviewed = either. prescription.js reads isVerified + isTrainee.
+  window.SMD_VERIFY = { isVerified: isVerifiedClaim, isTrainee: isTrainee, isReviewed: isReviewed, traineeRole: traineeRole,
+    openPanel: openPanel, VERIFY_ALLOWLIST: VERIFY_ALLOWLIST };
 
   // ---- Overlay refs ----
   function $(id) { return document.getElementById(id); }
@@ -136,33 +179,47 @@
   function daysLeft(iso) { var t = Date.parse(iso); return isNaN(t) ? 0 : Math.max(0, Math.ceil((t - Date.now()) / 86400000)); }
 
   // ---- Role chooser: who is verifying → what proof they upload -----------------------------
-  // Registered doctors auto-verify against the NMC register (cert, or reg-no + govt photo ID).
-  // Interns/residents & students aren't on the register → they upload an institute/college ID
-  // which goes to manual review (provisional access, prescription generator stays locked).
+  // Doctors and PG residents hold FULL NMC/SMC registration, so both auto-verify against the
+  // register (cert, or reg-no + govt photo ID) and may prescribe. Interns (provisional registration
+  // only) and students (none) upload an internship or college ID for MANUAL review; approval makes
+  // them a reviewed trainee (full access, prescription generator locked). Order = career ladder.
+  var REG_SUB = "Verify instantly by uploading your <b>NMC / State Medical Council registration certificate</b>, or enter your <b>registration number</b> and upload a <b>government photo ID</b> (we read only your name to match the register; the ID is never stored).";
   var ROLES = {
-    doctor:  { icon: "shield", label: "Registered doctor",
-      sub: "StewardMD is for registered doctors. Verify instantly by uploading your <b>NMC / State Medical Council certificate</b> — or enter your <b>registration number</b> and upload a <b>government photo ID</b> (we read only your name to match the register; the ID is never stored).",
+    student: { icon: "book", label: "Medical student",
+      sub: "Upload your <b>medical college ID card</b>. Our team reviews it and unlocks StewardMD's learning tools. Prescription and clinical-action features stay locked for students.",
+      fileLabel: "Choose your College ID", dropSub: "JPG, PNG or PDF · medical college ID card", reg: false },
+    intern:  { icon: "idcard", label: "Intern",
+      sub: "Upload your <b>internship or hospital ID card</b>. Our team reviews it and unlocks StewardMD. Interns hold provisional registration only, so the prescription generator stays locked until you verify your full registration.",
+      fileLabel: "Choose your internship / hospital ID", dropSub: "JPG, PNG or PDF · internship or hospital ID card", reg: false },
+    resident: { icon: "steth", label: "PG Resident",
+      sub: "PG residents hold full medical registration. " + REG_SUB,
       fileLabel: "Choose your registration certificate", dropSub: "JPG, PNG or PDF · NMC / State Medical Council",
       idFileLabel: "Choose a government photo ID", idDropSub: "Any government photo ID · we read only your name · never stored", reg: true },
-    intern:  { icon: "idcard", label: "Intern / Resident",
-      sub: "Upload your <b>hospital or college ID card</b>. Our team reviews it and unlocks StewardMD — the prescription generator stays locked until your medical registration is verified.",
-      fileLabel: "Choose your hospital / Institute ID", dropSub: "JPG, PNG or PDF · hospital or college ID card", reg: false },
-    student: { icon: "note", label: "Medical student",
-      sub: "Upload your <b>medical college ID card</b>. Our team reviews it and unlocks StewardMD's learning tools — prescription and clinical-action features stay locked for students.",
-      fileLabel: "Choose your College ID", dropSub: "JPG, PNG or PDF · medical college ID card", reg: false }
+    doctor:  { icon: "shield", label: "Doctor (practising)",
+      sub: "StewardMD is for registered doctors. " + REG_SUB,
+      fileLabel: "Choose your registration certificate", dropSub: "JPG, PNG or PDF · NMC / State Medical Council",
+      idFileLabel: "Choose a government photo ID", idDropSub: "Any government photo ID · we read only your name · never stored", reg: true }
   };
+  // A reviewed trainee may still upgrade (an intern who now holds full registration), so the
+  // chooser stays, but only with the roles that can change anything for them.
+  var _hideRoles = {};
   var _role = "doctor";
   var _vstatus = null;   // last-rendered verification status (verify.js has no _state; that's email-auth.js)
   function curRoleCfg() { return ROLES[_role] || ROLES.doctor; }
   function ensureRoles() {
-    var host = $("verifyRoles"); if (!host || host.childNodes.length) return;
-    host.innerHTML = Object.keys(ROLES).map(function (k) {
-      return '<button type="button" class="verify-role' + (k === _role ? " is-on" : "") + '" data-role="' + k + '" role="tab" aria-selected="' + (k === _role) + '"><span class="vr-ic">' + vfIco(ROLES[k].icon) + '</span><span class="vr-l">' + ROLES[k].label + '</span></button>';
-    }).join("");
-    host.addEventListener("click", function (e) { var b = e.target.closest && e.target.closest("[data-role]"); if (b) applyRole(b.getAttribute("data-role")); });
+    var host = $("verifyRoles"); if (!host) return;
+    if (!host.childNodes.length) {
+      // Four roles: a 2 x 2 grid (index.html's .verify-roles is 3 columns, which strands the 4th).
+      host.style.gridTemplateColumns = "repeat(2,1fr)";
+      host.innerHTML = Object.keys(ROLES).map(function (k) {
+        return '<button type="button" class="verify-role' + (k === _role ? " is-on" : "") + '" data-role="' + k + '" role="tab" aria-selected="' + (k === _role) + '"><span class="vr-ic">' + vfIco(ROLES[k].icon) + '</span><span class="vr-l">' + ROLES[k].label + '</span></button>';
+      }).join("");
+      host.addEventListener("click", function (e) { var b = e.target.closest && e.target.closest("[data-role]"); if (b) applyRole(b.getAttribute("data-role")); });
+    }
+    Array.prototype.forEach.call(host.querySelectorAll("[data-role]"), function (b) { b.style.display = _hideRoles[b.getAttribute("data-role")] ? "none" : ""; });
   }
   function applyRole(r) {
-    if (!ROLES[r]) r = "doctor";
+    if (!ROLES[r] || _hideRoles[r]) r = "doctor";
     _role = r;
     var host = $("verifyRoles");
     if (host) Array.prototype.forEach.call(host.querySelectorAll("[data-role]"), function (b) { var on = b.getAttribute("data-role") === r; b.classList.toggle("is-on", on); b.setAttribute("aria-selected", on); });
@@ -180,35 +237,46 @@
               // where evaluate()'s sign-in-gated wire() never ran → ✕ did nothing).
     g.dataset.mode = mode;
     var verified = data && data.status === "verified";
+    var trainee  = data && data.status === "trainee_verified";   // reviewed student/intern: access yes, Rx no
     var trial    = data && data.status === "trial";
     var pending  = data && (data.status === "pending" || trial);   // both = provisional, upload still offered
     var st = (data && data.status) || "unverified";
     _vstatus = st;
+    var tRole = trainee ? ((data && data.role) === "student" ? "student" : "intern") : "";
+    // A trainee can only move UP (intern with full registration); a student/intern re-upload is moot.
+    _hideRoles = trainee ? { student: true, intern: true } : {};
+    if (trainee && (_role === "student" || _role === "intern")) _role = "resident";
+    if (trainee) _tCache = { val: true, at: Date.now(), role: (data && data.role) || "" };   // the server said so
 
     var acc = $("verifyAccount");
     if (acc && st !== "loading") {
       acc.style.display = "";
       var u = fbUser();
-      $("verifyAccEmail").textContent = (u && (u.email || u.displayName)) || "—";
+      $("verifyAccEmail").textContent = (u && (u.email || u.displayName)) || "Unknown";
       $("verifyAccProvider").textContent = providerLabel();
-      $("verifyAccReg").textContent = (data && data.regNo) || (verified ? "—" : "not linked yet");
+      $("verifyAccReg").textContent = (data && data.regNo) || (verified ? "Not on file" : (trainee ? "None (prescription locked)" : "not linked yet"));
       var badge = $("verifyBadge");
-      badge.className = "verify-badge " + (st === "trial" ? "pending" : st);   // reuse pending styling for trial
-      badge.innerHTML = ({ verified: vfIco("check") + " Verified", pending: "Under review", trial: "Free plan", rejected: "Rejected", unverified: "Not verified" })[st] || st;
+      badge.className = "verify-badge " + (st === "trial" ? "pending" : (trainee ? "verified" : st));   // reuse pending styling for trial
+      badge.innerHTML = trainee ? (vfIco("check") + (tRole === "student" ? " Verified student" : " Verified intern"))
+        : (({ verified: vfIco("check") + " Verified", pending: "Under review", trial: "Free plan", rejected: "Rejected", unverified: "Not verified" })[st] || st);
     }
 
-    $("verifyTitle").textContent = verified ? "Your account is verified" : (trial ? "You're on the free plan" : (pending ? "Verification under review" : "Verify you're a registered doctor"));
+    $("verifyTitle").textContent = verified ? "Your account is verified"
+      : (trainee ? (tRole === "student" ? "Your student account is verified" : "Your intern account is verified")
+      : (trial ? "You're on the free plan" : (pending ? "Verification under review" : "Verify you're a registered doctor")));
     var sub = $("verifySubtitle");
     if (sub) sub.textContent = verified
       ? "Your medical registration is linked to this account. Pro is free for your first 7 days as a verified doctor."
+      : (trainee
+        ? "Our team has reviewed your ID and your account is active, with Pro free for your first 7 days. The prescription generator needs full medical registration, so it stays locked. Once you hold full registration, verify it below as a PG Resident or Doctor."
       : (trial
         ? "You're using StewardMD's free tools. Verify your medical registration to unlock Pro free for 7 days and the prescription generator. Upload your certificate below, or enter your registration number with a photo ID. Accounts that are never verified are removed after 7 days."
         : (pending
-          ? "We've received your certificate and our team is reviewing it — we'll email you once it's approved. In the meantime you can upload a clearer certificate below to try instant verification again."
-          : "StewardMD is for registered doctors. Verify instantly by uploading your NMC / State Medical Council registration certificate — or enter your registration number and upload Aadhaar / any government photo ID (we read only your name to match the register; the ID is never stored)."));
+          ? "We've received your certificate and our team is reviewing it. We'll email you once it's approved. In the meantime you can upload a clearer certificate below to try instant verification again."
+          : "StewardMD is for registered doctors. Verify instantly by uploading your NMC / State Medical Council registration certificate, or enter your registration number and upload Aadhaar / any government photo ID (we read only your name to match the register; the ID is never stored).")));
 
-    // Upload box stays available unless FULLY verified — so a doctor under review can
-    // re-submit a clearer certificate and get instant verification without being stuck.
+    // Upload box stays available unless FULLY verified, so a doctor under review can re-submit a
+    // clearer certificate and a reviewed trainee can later verify full registration.
     var up = $("verifyUploadBlock");
     if (up) up.style.display = verified ? "none" : "";
     var rw = $("verifyRoleWrap"); if (rw) rw.style.display = verified ? "none" : "";   // role chooser only while not fully verified
@@ -216,14 +284,14 @@
       var sub2 = $("verifySubmit"); if (sub2) sub2.disabled = false;
       ensureRoles(); applyRole(_role);   // build/refresh the role chooser + role-specific labels
       syncMode();   // sets labels/button for cert-vs-ID mode + file state
-      if (pending) { setStatusMsg("pending", "Under review — we'll email you. Uploading a clearer photo/scan (or reg number + a photo ID) often verifies instantly."); }
+      if (pending) { setStatusMsg("pending", "Under review. We'll email you. Uploading a clearer photo or scan (or reg number + a photo ID) often verifies instantly."); }
       else { clearStatusMsg(); }
     }
 
     var closable = mode !== "forced";
     var x = $("verifyClose"); if (x) x.style.display = "";   // always shown; on the forced gate ✕ continues on the free plan
-    var skip = $("verifySkipBtn"); if (skip) skip.style.display = (mode === "forced" && !verified) ? "" : "none";
-    var done = $("verifyDoneBtn"); if (done) done.style.display = (closable && (verified || pending)) ? "" : "none";
+    var skip = $("verifySkipBtn"); if (skip) skip.style.display = (mode === "forced" && !verified && !trainee) ? "" : "none";
+    var done = $("verifyDoneBtn"); if (done) done.style.display = (closable && (verified || trainee || pending)) ? "" : "none";
 
     // Offline: certificate upload + the trial/register checks all need the network, so the normal
     // "Not verified → verify now" flow is a dead-end. Show an offline-aware state whose primary action
@@ -232,9 +300,9 @@
     var skipBtn = $("verifySkipBtn");
     if (offline && !verified) {
       $("verifyTitle").textContent = "You're offline";
-      if (sub) sub.textContent = "Doctor verification needs an internet connection — certificate upload and register checks can't run offline. Keep using StewardMD's offline tools now; reconnect and reopen this screen to verify and unlock the prescription generator.";
+      if (sub) sub.textContent = "Doctor verification needs an internet connection. Certificate upload and register checks can't run offline. Keep using StewardMD's offline tools now; reconnect and reopen this screen to verify and unlock the prescription generator.";
       if (up) up.style.display = "none";
-      setStatusMsg("info", "Offline mode — verification resumes automatically when you're back online.");
+      setStatusMsg("info", "Offline mode. Verification resumes automatically when you're back online.");
       if (skipBtn) { skipBtn.textContent = "Continue in offline mode"; skipBtn.style.display = ""; }
     } else if (skipBtn) {
       skipBtn.textContent = "Not now, continue on the free plan";   // restore default when online
@@ -268,7 +336,7 @@
     var input = $("verifyFile"); var file = input && input.files && input.files[0];
     // No file yet → the button acts as "Choose certificate": open the picker.
     if (!file) { if (input) input.click(); return; }
-    var u = fbUser(); if (!u) { setStatusMsg("error", "Session expired — please sign in again."); return; }
+    var u = fbUser(); if (!u) { setStatusMsg("error", "Session expired. Please sign in again."); return; }
     var regEl = $("verifyRegNo"); var typedReg = regEl ? regEl.value.trim() : "";
     submitting = true;
     var btn = $("verifySubmit"); if (btn) { btn.disabled = true; btn.textContent = "Verifying…"; }
@@ -288,9 +356,10 @@
 
       // 1) Auto-verified against NMC → big tick + full access (confirmation email sent server-side).
       if (data.status === "verified") {
-        setStatusMsg("success", vfIco("check") + " Verified — Dr. " + (data.name || "") + " (" + (data.regNo || "") + "). A confirmation email is on its way. Opening StewardMD…");
+        setStatusMsg("success", vfIco("check") + " Verified: Dr. " + (data.name || "") + " (" + (data.regNo || "") + "). A confirmation email is on its way. Opening StewardMD…");
         try { await u.getIdToken(true); } catch (e) {}
         _rememberVerified(true);
+        _tCache = { val: false, at: Date.now(), role: "" };   // a trainee who verified full registration is a doctor now
         resyncPro();   // the cached entitlement verdict predates this verification
         setTimeout(hideGate, 1200);
         return;
@@ -309,13 +378,17 @@
       if (data.status === "pending_review") {
         var d = data.provisionalDays || 7;
         if (mode === "panel") { render("panel", { status: "pending", provisionalUntil: data.provisionalUntil }); submitting = false; return; }
+        var tr = (_role === "student" || _role === "intern");
         setStatusMsg("pending",
-          vfIco("check") + " Certificate received. We couldn't auto-verify it instantly, so it's gone to our team for a quick manual check. " +
-          "You have <b>provisional access for " + d + " days</b> while we verify you — the <b>prescription generator stays locked</b> until then. " +
+          vfIco("check") + (tr ? " ID received. It has gone to our team for a quick manual check. "
+                               : " Certificate received. We couldn't auto-verify it instantly, so it's gone to our team for a quick manual check. ") +
+          "You have <b>provisional access for " + d + " days</b> while we review it. " +
+          (tr ? "The <b>prescription generator stays locked</b> for " + (_role === "student" ? "students" : "interns") + ". "
+              : "The <b>prescription generator stays locked</b> until then. ") +
           "We'll email you once you're approved.");
         setTimeout(function () {
           hideGate();
-          try { (window.toast || window.SMD_toast || function () {})("Provisional access — prescription locked until verified"); } catch (e) {}
+          try { (window.toast || window.SMD_toast || function () {})("Provisional access. Prescription locked until verified"); } catch (e) {}
         }, 2600);
         submitting = false; return;
       }
@@ -323,10 +396,10 @@
         setStatusMsg("error", "This registration number is already linked to a different account. Contact support@stewardmd.in.");
         submitting = false; if (btn) { btn.disabled = false; btn.textContent = "Verify & continue"; } return;
       }
-      setStatusMsg("error", (data.detail || data.error || "Verification failed") + " — try another image or contact support@stewardmd.in.");
+      setStatusMsg("error", (data.detail || data.error || "Verification failed") + ". Try another image or contact support@stewardmd.in.");
       submitting = false; if (btn) { btn.disabled = false; btn.textContent = "Verify & continue"; }
     } catch (e) {
-      setStatusMsg("error", "Network error — please try again.");
+      setStatusMsg("error", "Network error. Please try again.");
       submitting = false; if (btn) { btn.disabled = false; btn.textContent = "Verify & continue"; }
     }
   }
@@ -341,10 +414,10 @@
     // screen is never stuck (this path also backs the ✕ on the forced gate and "Continue offline").
     if (typeof navigator !== "undefined" && navigator.onLine === false) {
       hideGate();
-      try { (window.toast || window.SMD_toast || function () {})("Offline — you can verify when you're back online."); } catch (e) {}
+      try { (window.toast || window.SMD_toast || function () {})("Offline. You can verify when you're back online."); } catch (e) {}
       return;
     }
-    var u = fbUser(); if (!u) { setStatusMsg("error", "Session expired — please sign in again."); return; }
+    var u = fbUser(); if (!u) { setStatusMsg("error", "Session expired. Please sign in again."); return; }
     trialing = true;
     var skip = $("verifySkipBtn"); if (skip) skip.disabled = true;
     setStatusMsg("info", progressHtml("Starting your 7-day trial…"));
@@ -361,18 +434,18 @@
         try { (window.toast || window.SMD_toast || function () {})("Free plan · verify within " + n + "d to keep this account and unlock Pro"); } catch (e) {}
         return;
       }
-      if (d && d.status === "verified") {   // already verified — just let them in
+      if (d && d.status === "verified") {   // already verified (or a reviewed trainee): just let them in
         (u.getIdToken ? u.getIdToken(true) : Promise.resolve()).catch(function () {}).then(hideGate);
         return;
       }
       if (d && d.status === "trial_expired") {
-        setStatusMsg("error", "This account has been unverified for 7 days and is due for removal — verify your registration now to keep it.");
+        setStatusMsg("error", "This account has been unverified for 7 days and is due for removal. Verify your registration now to keep it.");
         return;
       }
-      setStatusMsg("error", "Couldn't continue — please try again, or verify your certificate.");
+      setStatusMsg("error", "Couldn't continue. Please try again, or verify your certificate.");
     }).catch(function () {
       trialing = false; if (skip) skip.disabled = false;
-      setStatusMsg("error", "Network error — please try again.");
+      setStatusMsg("error", "Network error. Please try again.");
     });
   }
 
@@ -452,6 +525,17 @@
     }
   }
 
+  // A reviewed student/intern: a real account, never nagged, never a prescriber. Refresh the token so
+  // the traineeVerified claim reaches the server gates, then the cached Pro verdict, then let them in.
+  function admitTrainee(d) {
+    _tCache = { val: true, at: Date.now(), role: (d && d.role) || "" };
+    var u3 = fbUser();
+    (u3 && u3.getIdToken ? u3.getIdToken(true) : Promise.resolve()).catch(function () {}).then(function () {
+      resyncPro();
+      if (gate() && gate().dataset.mode !== "panel") hideGate();
+    });
+  }
+
   // ---- Forced gate: signed-in real accounts must be verified ----
   var _promptedThisOpen = false;   // re-ask once per app open, not once per evaluate() call
   function evaluate() {
@@ -463,6 +547,7 @@
       if (ok) { if (g && g.dataset.mode !== "panel") hideGate(); return; }   // fully verified
       // Cached claim says not-verified — but the server is authoritative. Consult it.
       fetchStatus().then(function (d) {
+        if (d && d.status === "trainee_verified") { admitTrainee(d); return; }   // reviewed student/intern
         // Owner just approved us (email/admin)? The cached ID token doesn't carry the fresh
         // verified:true claim yet — force a token refresh so the claim catches up, then let
         // the doctor straight in. No re-upload, no re-login, no manual admin step.

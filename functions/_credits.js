@@ -38,11 +38,24 @@ const TOKEN_PACKS = [
   { id: "plus", mt: 250000, price: ["TOKENS_PLUS", 19900], regular: ["TOKENS_PLUS_REGULAR", 24500], label: "Plus", popular: true },
   { id: "power", mt: 750000, price: ["TOKENS_POWER", 49900], regular: ["TOKENS_POWER_REGULAR", 73500], label: "Power" },
 ];
-export function tokenPacks(env) {
+/* From PACKS_V2_FROM (default 2026-12-26, 3 months after the owner's 2026-09-26 call) each pack holds
+ * fewer tokens at the same price: the sizes above sold 2,000 MT for Rs 1 while 2,000 MT is also Rs 1 of
+ * our AI cost, so the Power pack lost money after the App Store fee (vault/Role-Tiers.md finding 13).
+ * Introductory sizes until then. Fulfilment reads this same table, so what is shown is what is credited.
+ * Struck anchors are dropped on the new sizes: they are no longer a genuine saving. */
+const TOKEN_PACKS_V2_MT = { boost: 10000, plus: 40000, power: 100000 };
+export const PACKS_V2_FROM_DEFAULT = Date.parse("2026-12-26T00:00:00+05:30");
+export function packsV2Active(env, now) {
+  const raw = env && env.PACKS_V2_FROM;
+  const at = raw == null || raw === "" ? PACKS_V2_FROM_DEFAULT : (/^\d+$/.test(String(raw)) ? +raw : Date.parse(String(raw)));
+  return (now || Date.now()) >= (Number.isFinite(at) ? at : PACKS_V2_FROM_DEFAULT);
+}
+export function tokenPacks(env, now) {
+  const v2 = packsV2Active(env, now);
   const out = {};
   TOKEN_PACKS.forEach((k) => {
-    const p = { mt: k.mt, amount: cfgPrice(env, k.price[0], k.price[1]) };
-    if (k.regular) p.regular = cfgPrice(env, k.regular[0], k.regular[1]);
+    const p = { mt: v2 ? TOKEN_PACKS_V2_MT[k.id] : k.mt, amount: cfgPrice(env, k.price[0], k.price[1]) };
+    if (k.regular && !v2) p.regular = cfgPrice(env, k.regular[0], k.regular[1]);
     p.label = k.label; if (k.popular) p.popular = true;
     out[k.id] = p;
   });

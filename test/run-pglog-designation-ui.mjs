@@ -96,8 +96,21 @@ try {
   // Unenrolled + signed out is exactly the state the bug was reported in.
   await ev(`window.PGLOG.open(); return 1;`);
   await sleep(1500);
+  const tEasy = String(await txt());
+  ok(tEasy.length > 0, "module opened");
+
+  /* ── 0. EASY MODE (smd_pglog_easy, default ON): signed out is asked to SIGN IN, not who they are.
+   * Every next step needs an account, so the role question was a detour. Sections 1-12 below cover
+   * the signed-out / institution-picking paths with the flag OFF, which also proves that "0"
+   * restores the previous screens exactly. */
+  ok(/Sign in to use your logbook/i.test(tEasy) && !!(await ev(`return !!document.querySelector('#pglogRoot [data-pgl="signin"]')`)),
+     `easy mode: signed out sees Sign in (got: ${JSON.stringify(tEasy.slice(0, 90))})`);
+  ok(!/Which of these are you/i.test(tEasy), "easy mode: the role question is not shown to a signed-out user");
+  await ev(`localStorage.setItem("smd_pglog_easy","0"); window.PGLOG.close && window.PGLOG.close(); return 1;`);
+  await sleep(300);
+  await ev(`window.SMD_PGLOG_SCREENS._state.ctx = null; window.PGLOG.open(); return 1;`);
+  await sleep(1500);
   const t0 = String(await txt());
-  ok(t0.length > 0, "module opened");
 
   // ── 1. It ASKS instead of assuming ──
   ok(/Which of these are you|Set up your logbook/i.test(t0), `entry screen asks for the role (got: ${JSON.stringify(t0.slice(0, 60))})`);
@@ -358,6 +371,10 @@ try {
      `a failed institution lookup is reported (got: ${JSON.stringify(tm.slice(0, 150))})`);
   ok(!/set up by StewardMD/i.test(tm),
      "a failed lookup is NOT reported as 'you have no institutions'");
+
+  // Signed-in sections run with easy mode back ON (the default), so its screens are what is checked.
+  await ev(`localStorage.removeItem("smd_pglog_easy"); return 1;`);
+  ok(await ev(`return SMD_PGLOG_FLAGS.bool("smd_pglog_easy")`) === true, "easy mode is ON by default");
 
   /* ── 13. A RETURNED entry must actually be correctable ──
    * "Correct" was a toast that told the resident to open the entry and correct the fields - which is

@@ -1,8 +1,9 @@
 /* sknx.js — SknX AI · module UI entry (sibling of thorex.js / window.THOREX).
  *
- * Flag-gated by smd_sknx AND (an Experimental Access code OR a non-free entitlement) (isOn() below —
+ * Flag-gated by smd_sknx AND (an Experimental Access code OR an early-access plan) (isOn() below —
  * the ONE unit-tested function in this file). Access mirrors FundX/KardioX/ThoreX: an SMD_XACCESS code
- * unlocks SknX per-device; the Pro (non-free entitlement) path is preserved as an alternative unlock.
+ * unlocks SknX per-device; Clinician Pro / Ultimate (SMD_PRO.hasEarlyAccess) open it with no code
+ * (owner decision 2026-09-26, which also retired the old "any Pro entitlement" unlock).
  * When off, open() is a complete no-op and the module never touches the DOM, exactly like
  * ThoreX/KardioX. Mounts a single scoped overlay root #sknxRoot; every SknX node lives under it with
  * .sknx-* classes (zero global leakage).
@@ -23,17 +24,20 @@
 
   // ── Gating (isOn) — the ONE unit-tested function; deps are injectable for test/sknx-entry.test.mjs.
   function dFlag() { try { return !!(window.SMD_SKNX_FLAGS && SMD_SKNX_FLAGS.bool("smd_sknx")); } catch (e) { return false; } }
-  function dEnt() { try { return (window.SMD_SKNX_ENTITLEMENT && SMD_SKNX_ENTITLEMENT.resolve()) || "free"; } catch (e) { return "free"; } }
   // Experimental Access code activation for "sknx" (SMD_XACCESS, one-code/one-device, server-verified).
   // isActiveCached() already folds in the native debug bypass, so a debug build opens without a code.
   function dXa() { try { return !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("sknx")); } catch (e) { return false; } }
-  // Access = flag AND (an active access-code OR a non-free entitlement). Additive: a code unlocks SknX
-  // exactly like FundX/KardioX/ThoreX, while the existing Pro (non-free) path is left untouched. The
-  // entitlement still resolves the TIER (v1/v2beta) inside the module — it is no longer the sole gate.
+  // Plan early access (owner decision 2026-09-26): Clinician Pro and Ultimate open SknX with no code.
+  // The tier list lives in ONE helper, SMD_PRO.hasEarlyAccess() (account.js).
+  function dPlan() { try { return !!(window.SMD_PRO && SMD_PRO.hasEarlyAccess && SMD_PRO.hasEarlyAccess()); } catch (e) { return false; } }
+  // Access = flag AND (an active access code OR an early-access plan). Owner decision 2026-09-26:
+  // every other tier needs the code, exactly like FundX/KardiQ X/ThoreX, so the old "any non-free
+  // (Pro) entitlement opens it" path is gone. The entitlement still resolves the analysis TIER
+  // (free/v1/v2beta) inside the module; it is no longer a gate. `deps.entitlement` is ignored.
   function isOn(deps) {
     deps = deps || {};
-    var f = deps.flag || dFlag, e = deps.entitlement || dEnt, x = deps.xaccess || dXa;
-    return !!f() && (x() || e() !== "free");
+    var f = deps.flag || dFlag, x = deps.xaccess || dXa, pl = deps.plan || dPlan;
+    return !!f() && (!!x() || !!pl());
   }
 
   function haptic(kind) { try { if (window.SMD_SKNX_FLAGS && SMD_SKNX_FLAGS.bool("smd_sknx_haptics") && window.SMD_HAPTICS) SMD_HAPTICS[kind || "light"] && SMD_HAPTICS[kind || "light"](); } catch (e) {} }
@@ -95,7 +99,13 @@
        *                        deliberate no-op. Say why instead, and offer the right next step
        *                        (verify vs subscribe - pro-notice.js decides which).
        * Checked against the flag directly, since isOn() has already collapsed the two. */
-      try { if (dFlag() && window.SMD_PRO_NOTICE) SMD_PRO_NOTICE.show("sknx"); } catch (e) {}
+      // Flag on but no access: offer the access-code gate, like the other three imaging modules.
+      try {
+        if (dFlag()) {
+          if (window.SMD_XACCESS && SMD_XACCESS.openGate) { SMD_XACCESS.openGate("sknx", function () { if (isOn()) open(); }); return; }
+          if (window.SMD_PRO_NOTICE) SMD_PRO_NOTICE.show("sknx");
+        }
+      } catch (e) {}
       return;
     }
     var el = root();

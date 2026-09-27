@@ -349,3 +349,13 @@ the parent test is cancelled along with every later test in the file (`cancelled
 "Promise resolution is still pending but the event loop has already resolved"). It passed locally
 every run and only failed on CI. A test that patches the global timer must build its own ticks on
 the captured real `setTimeout`.
+
+## 2026-09-26: the cloud fallback has its own credit (`STT_FALLBACK_CREDITS_ON`, default ON)
+Dictation on the phone (Whisper / native STT / Web Speech) stays free and unlimited. The cloud
+recorder fallback in `voice.js` (MediaRecorder -> `/api/ai/transcribe`) is charged per second of
+audio (Rs 0.02/s, so about Rs 6 for 5 minutes) against a monthly wallet: Free Rs 10, Pro accounts
+Rs 50, Clinician / Clinician Pro Rs 100 (`functions/_stt_fallback.js`). Checked before the model call,
+spent only on success. Charged seconds = max(client `durationMs`, audio bytes / 16,000): the byte
+floor stops a client shrinking its charge. Exhausted = 402 `stt-fallback-exhausted`, which
+`reasoning.js` keeps distinct from the Pro-upsell 402 and `voice.js` / `opd-emr.js` explain in one
+sentence. Owners exempt. Tests: `test/stt-fallback*.test.mjs`, `test/run-stt-fallback-ui.mjs`.
