@@ -139,7 +139,7 @@ body.oph-lock { overflow: hidden; }
 .oph-today { background: var(--op-s1); border-radius: 16px; padding: 16px; }
 .oph-today-line { margin: 0 0 14px; font-size: 16px; }
 .oph-today-line b { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
-.oph-clinics { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.oph-clinics { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px; }
 .oph-clinic { width: 100%; display: flex; align-items: center; gap: 14px; text-align: left; border: 0; background: transparent;
   padding: 12px 4px; border-radius: 12px; transition: transform 140ms var(--op-ease), background-color 160ms ease; }
 .oph-clinic:active { transform: scale(0.985); background: var(--op-s1); }
@@ -152,6 +152,9 @@ body.oph-lock { overflow: hidden; }
 .oph-clinic-b > span:not(.oph-small) { font-size: 13px; color: var(--op-mut); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .oph-clinic-b .oph-small b { color: var(--op-text); font-weight: 600; }
 .oph-chev { color: var(--op-mut); display: inline-flex; }
+.oph-tile { width: 44px; height: 44px; border-radius: 8px; background: var(--op-s2); color: var(--op-acc);
+  display: inline-flex; align-items: center; justify-content: center; }
+.oph-tile .smd-ico { width: 24px; height: 24px; }
 
 /* encounter */
 .oph-enc { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
