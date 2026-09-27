@@ -5785,7 +5785,7 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 .maik-collapsed{position:relative}
 /* streaming caret + thinking dots (kept, retokenized) */
 .maik-streaming{font:500 12.5px/1.55 'Inter';color:var(--mk-ink)}
-.maik-caret{display:inline-block;width:6px;height:13px;background:var(--mk-acc);margin-left:2px;vertical-align:text-bottom;animation:maikBlink 1s steps(2) infinite}
+.maik-caret{display:inline-block;width:2px;height:1.05em;border-radius:1px;background:var(--mk-acc);margin-left:2px;vertical-align:-.15em;animation:maikCaret 1.1s ease-in-out infinite}@keyframes maikCaret{0%,100%{opacity:1}50%{opacity:.15}}.maik-streaming .maik-sin{animation:maikSin .22s ease-out both}@keyframes maikSin{from{opacity:0}to{opacity:1}}#maikSheet .maik-fu{animation:maikSin .3s ease-out both}@media(prefers-reduced-motion:reduce){.maik-caret,.maik-streaming .maik-sin,#maikSheet .maik-fu{animation:none}}
 @keyframes maikBlink{0%,100%{opacity:1}50%{opacity:0}}
 .maik-thinking{color:var(--mk-mut);font:500 12.5px 'Inter'}
 .maik-thinking .d{display:inline-block;animation:maikThink 1.3s ease-in-out infinite}
@@ -7503,8 +7503,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               if (_maikStopped || _streamFinal) return;
               var _accS = maikStripRefine(_paintAcc).replace(/@@\s*MORE\s*@@/gi, "\n\n");   // hide the @@REFINE@@ / @@MORE@@ markers while streaming
               var rn = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(_accS) : maikEscH(_accS);
-              _live().innerHTML = '<div class="maik-streaming">' + rn + '<span class="maik-caret"></span></div>';   // live bubble, so the typewriter continues even after close→reopen
-              try { scroll(); } catch (e) {}
+              // SMD-02 (QA sheet 2026-09-27): no flicker, no jumping. Only the blocks that changed are
+              // replaced (normally just the last paragraph), the caret sits at the end of the text rather
+              // than on a line of its own, the box never shrinks mid-stream, and the view follows the
+              // answer only while the doctor is already at the bottom.
+              var _bd = document.getElementById("maikBody"), _pin = !_bd || (_bd.scrollHeight - _bd.scrollTop - _bd.clientHeight) < 96;
+              maikPatchStream(_live(), rn);   // live bubble, so the typewriter continues even after close→reopen
+              if (_pin) { try { scroll(); } catch (e) {} }
             };
             if (!_paintedOnce) { _paintedOnce = true; paint(); } else { _paintT = setTimeout(paint, 50); }
           };
@@ -8062,7 +8067,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       runClinical(q, q, depth, active, topic);
     }
     // test hook (dev/regression harnesses only — closures are otherwise unreachable)
-    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state, parked: !!_mkdState.parked } : null; }, docCue: maikDocCue, docClassify: maikDocClassify, route: maikRoute, calcFor: maikCalcFor, calcHTML: maikCalcHTML, toolChipsHTML: maikToolChipsHTML, webChipEl: maikWebChipEl, turns: function () { return _maikTurns.slice(); }, clearCache: function () { _maikCache = {}; }, companion: function () { return _mkc ? _mkc.state() : null; }, buddySet: function (v) { maikBuddySet(v); } }; } catch (e) {}
+    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state, parked: !!_mkdState.parked } : null; }, docCue: maikDocCue, docClassify: maikDocClassify, route: maikRoute, calcFor: maikCalcFor, calcHTML: maikCalcHTML, toolChipsHTML: maikToolChipsHTML, webChipEl: maikWebChipEl, turns: function () { return _maikTurns.slice(); }, clearCache: function () { _maikCache = {}; }, companion: function () { return _mkc ? _mkc.state() : null; }, buddySet: function (v) { maikBuddySet(v); }, patchStream: (typeof maikPatchStream === "function" ? maikPatchStream : null) }; } catch (e) {}
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
     if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; maikRestoreThread(); scroll(); } else { emptyState(); }
     /* A REOPENED CONVERSATION (owner, 2026-09-24): a saved thread comes back as HTML, which carries
@@ -8449,6 +8454,37 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
      *   done   success the answer is complete (iOS notification pattern, two soft knocks)
      *   error  error   generation failed or was refused
      *   pick   selection  choosing a model / flipping the Knowledge Base switch */
+    /* Streamed answer painter (SMD-02). Keeps one .maik-streaming box, swaps only the trailing blocks
+     * that differ from the new render, hangs the caret on the last text block, and ratchets the box's
+     * min-height so a re-flowing last line never makes the card jump. The final render replaces the
+     * whole bubble, which drops the box and its min-height with it. */
+    function maikPatchStream(host, html) {
+      if (!host) return;
+      var box = host.firstElementChild;
+      if (!box || host.children.length !== 1 || !box.classList.contains("maik-streaming")) { host.innerHTML = '<div class="maik-streaming"></div>'; box = host.firstElementChild; }
+      var caret = box.querySelector(".maik-caret"); if (caret && caret.parentNode) caret.parentNode.removeChild(caret);
+      var tmp = document.createElement("div"); tmp.innerHTML = html;
+      var o = box.childNodes, n = tmp.childNodes, i = 0, had = o.length;
+      // A block that faded in carries .maik-sin, which the fresh render lacks: compare without it.
+      var same = function (a, b) {
+        if (a.nodeType !== 1 || !a.classList.contains("maik-sin")) return a.isEqualNode(b);
+        var cls = a.getAttribute("class");
+        a.classList.remove("maik-sin"); if (!a.classList.length) a.removeAttribute("class");   // class="" != no class
+        var r = a.isEqualNode(b); a.setAttribute("class", cls); return r;
+      };
+      while (i < o.length && i < n.length && same(o[i], n[i])) i++;
+      while (box.childNodes.length > i) box.removeChild(box.lastChild);
+      [].slice.call(tmp.childNodes, i).forEach(function (x, k) {
+        // Only a block that did not exist before fades in; the growing last block is swapped silently.
+        if (i + k >= had && x.nodeType === 1 && x.classList) x.classList.add("maik-sin");
+        box.appendChild(x);
+      });
+      var tail = box.lastElementChild;
+      while (tail && tail.lastElementChild && /^(UL|OL|LI|BLOCKQUOTE|DIV)$/.test(tail.tagName)) tail = tail.lastElementChild;
+      var c = document.createElement("span"); c.className = "maik-caret";
+      (tail && !/^(TABLE|THEAD|TBODY|TR|HR|PRE|IMG)$/.test(tail.tagName) ? tail : box).appendChild(c);
+      var h = box.offsetHeight; if (h > (box._mh || 0)) { box._mh = h; box.style.minHeight = h + "px"; }
+    }
     var MAIK_HAPTIC = { send: "medium", stop: "heavy", start: "light", done: "success", error: "error", pick: "selection" };
     function maikHaptic(kind) {
       var fn = MAIK_HAPTIC[kind] || "light";
