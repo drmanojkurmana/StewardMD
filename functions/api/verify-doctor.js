@@ -22,9 +22,12 @@
 import { verifyFirebaseToken } from "../_fbauth.js";
 import { mergeUserClaims } from "../_fbadmin.js";
 import { emailVerified } from "../_email.js";
-import { markVerified, sendProUpsellOnce } from "../_lifecycle.js";
+import { markVerified, sendProUpsellOnce, getLifecycle } from "../_lifecycle.js";
+import { getUserClaims } from "../_fbadmin.js";
+import { gateTrial, weekPatch, requestSignals, trialOnceMode, firstGrantAt, warmTrialMode } from "../_trial_ledger.js";
 import { clearBudgetCache } from "../_aibudget.js";
 import { reconcileVerifiedClaim } from "../_verify_claim.js";
+import { normalizeVerifyRole, isTraineeVerifyRole, recordVerifiedRole } from "../_entitlement.js";
 import { regCandidates, nmcNameOf, nmcQueriesFor, pickMatch, uniqueNameMatch, autoVerifyOk, normName } from "../_verify_match.js";
 // Re-exported: test/verify-cert-recognition.test.mjs imports these from here.
 export { regCandidates, nmcNameOf };
@@ -52,6 +55,12 @@ export function decideTrial(rec, now, trialDays) {
   if (rec && (rec.verified === true || rec.status === "verified")) {
     return { status: "verified", regNo: (rec && rec.regNo) || "" };
   }
+  // A reviewed student/intern needs no trial either. Answered as "verified" + trainee:true because
+  // clients built before the trainee state existed only know "verified" as "dismiss the gate", and
+  // any other answer would strand them on it. It grants nothing: the claim decides access.
+  if (rec && rec.status === "trainee_verified") {
+    return { status: "verified", trainee: true, role: rec.role || "" };
+  }
   if (rec && rec.trialStartedAt) {
     const until = Date.parse(rec.provisionalUntil || "");
     if (!isNaN(until) && now < until) {
@@ -77,10 +86,72 @@ function decodePayload(token) {
 
 // Set the verified custom claim (via the shared Firebase-admin helper). Uses the clobber-safe
 // merge so verifying an already-Pro doctor keeps their pro/proExp claim instead of wiping it.
-async function setVerifiedClaim(env, uid, regNo) {
+async function setVerifiedClaim(env, uid, regNo, merge, signals) {
   // verifiedAt starts the free Pro week (_entitlement.js accessState). Without it the doctor is
   // verified but holds no entitlement, which reads to them as "verification did nothing".
-  await mergeUserClaims(env, uid, { verified: true, verifiedAt: Date.now(), regNo });
+  // traineeVerified is cleared: an intern who now holds full registration is a doctor from here on.
+  // With TRIAL_ONCE_ON the week is once per doctor (_trial_ledger.js): an existing verifiedAt is
+  // kept (no restart), and a registration / phone / device that already had a week on another
+  // account gets verified WITHOUT one (trialDenied).
+  const write = merge || mergeUserClaims;
+  if (trialOnceMode(env) === "off") { await write(env, uid, { verified: true, verifiedAt: Date.now(), regNo, traineeVerified: null }); return; }
+  let claims = {};
+  try { claims = (await getUserClaims(env, uid)) || {}; } catch (e) {}
+  const patch = await weekPatch(env, uid, claims, { regNo, ...(signals || {}) }, { door: "verify" });
+  await write(env, uid, { verified: true, regNo, traineeVerified: null, ...patch });
+}
+// What this request can prove about who is asking: the OTP-verified phone (lifecycle record), the
+// device id header and the connecting IP. Only read when the one-trial ledger is on.
+async function trialSignals(env, uid, request) {
+  if (trialOnceMode(env) === "off") return {};
+  let phone = "";
+  try { const lc = await getLifecycle(env, uid); if (lc && lc.phoneVerifiedAt) phone = lc.phone || ""; } catch (e) {}
+  return { phone, ...requestSignals(request) };
+}
+
+/* Everything after the register has matched a DOCTOR or PG RESIDENT: claim, KV record, role in
+ * entitlements/{uid}, emails, caches. Exported and deps-injectable so the auto-verify path is
+ * unit-tested offline (test/verify-roles.test.mjs). Throws only when the claim write fails (the
+ * caller answers 500); every later step is best-effort.
+ * v.signals: trialSignals() for the one-trial ledger (TRIAL_ONCE_ON).
+ * deps: { mergeUserClaims, recordVerifiedRole, emailVerified, markVerified, sendProUpsellOnce,
+ *         clearBudgetCache, getEntitlement, writeEntitlement } */
+export async function completeAutoVerify(env, store, v, deps) {
+  deps = deps || {};
+  const { uid, email, match } = v;
+  const role = normalizeVerifyRole(v.role);
+  // Defence in depth: the register never auto-verifies a student or intern (they are routed to
+  // manual review before any lookup), and this is the line that would mint a prescribing claim.
+  if (isTraineeVerifyRole(role)) throw new Error("trainee_cannot_auto_verify");
+
+  await setVerifiedClaim(env, uid, match.registrationNo, deps.mergeUserClaims, v.signals);
+
+  if (store) {
+    try { await store.put(regKey(match.registrationNo), uid); } catch (e) {}
+    try { await store.put(doctorKey(uid), JSON.stringify({
+      uid, email, status: "verified", verified: true, role,
+      regNo: match.registrationNo, name: match.firstName, council: match.smcName,
+      dob: match.birthDateStr || "", university: match.university || "",
+      source: v.source, via: v.idMode ? "id" : "cert", matchedBy: v.effReg ? "reg" : "name", lookup: v.lookupDiag || null,
+      confidence: (typeof v.confidence === "number") ? v.confidence : null,
+      verifiedAt: new Date().toISOString(),
+    })); } catch (e) {}
+  }
+  // WHO they are, for every role-keyed rule (device limit, clinic limit, AI budget, PG logbook).
+  // Best-effort by contract: recordVerifiedRole never throws.
+  const roleWrite = await (deps.recordVerifiedRole || recordVerifiedRole)(env, uid, role, deps);
+
+  // Confirmation email to the doctor (best-effort), then the Pro upsell at this high-intent moment.
+  try { await (deps.emailVerified || emailVerified)(env, { email, name: match.firstName, regNo: match.registrationNo, council: match.smcName }); } catch (e) {}
+  try {
+    await (deps.markVerified || markVerified)(env, uid);
+    await (deps.sendProUpsellOnce || sendProUpsellOnce)(env, uid, { email, name: match.firstName });
+  } catch (e) {}
+  // The AI budget tier just changed from "none" to a real allowance. The cap is cached for ~26h, so
+  // without this the doctor verifies and MaiK still refuses them until tomorrow.
+  try { await (deps.clearBudgetCache || clearBudgetCache)(env, uid); } catch (e) {}
+
+  return { status: "verified", role, regNo: match.registrationNo, name: match.firstName, council: match.smcName, roleWrite };
 }
 
 // ── Gemini — read the certificate ─────────────────────────────────────────────
@@ -240,7 +311,8 @@ async function signAction(secret, uid, action) {
   return Array.from(sig, (b) => b.toString(16).padStart(2, "0")).join("");
 }
 
-async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime, attach, regNo }) {
+async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime, attach, regNo, role }) {
+  const trainee = isTraineeVerifyRole(role);
   if (!env.RESEND_API_KEY) return;
   const support = env.SUPPORT_EMAIL || "support@stewardmd.in";
   const from = env.FROM_EMAIL || "StewardMD Verify <verify@stewardmd.in>";
@@ -260,7 +332,9 @@ async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime
       `<p style="margin:18px 0">` +
       `<a href="${approveUrl}" style="background:#15803d;color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font:700 14px system-ui;margin-right:10px">✓ Verify &amp; grant access</a>` +
       `<a href="${rejectUrl}" style="background:#dc2626;color:#fff;text-decoration:none;padding:12px 20px;border-radius:10px;font:700 14px system-ui">✕ Block until re-upload</a>` +
-      `</p><p style="font:400 12px system-ui;color:#64748b">Approve → sets the doctor verified (full access incl. prescriptions). Block → revokes access until they re-verify.</p>`;
+      `</p><p style="font:400 12px system-ui;color:#64748b">` + (trainee
+        ? `Approve: marks this ${role} as a reviewed trainee (full access, the prescription pad stays locked). Block: revokes access until they re-verify.`
+        : `Approve: sets the doctor verified (full access incl. prescriptions). Block: revokes access until they re-verify.`) + `</p>`;
   }
 
   // ID-path submissions are handled ephemerally: the identity document is NEVER attached or
@@ -277,6 +351,7 @@ async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime
         `<h2>Doctor verification needs manual review</h2><p><b>Reason:</b> ${reason}</p>` +
         `<table cellpadding="6"><tr><td><b>UID</b></td><td>${uid}</td></tr>` +
         `<tr><td><b>Google email</b></td><td>${email}</td></tr>` +
+        `<tr><td><b>Role</b></td><td>${role || "doctor"}</td></tr>` +
         `<tr><td><b>Reg no</b></td><td>${regForAction || "—"}</td></tr>` +
         `<tr><td><b>Name read</b></td><td>${extracted.name || "—"}</td></tr>` +
         `<tr><td><b>Council</b></td><td>${extracted.council || "—"}</td></tr>` +
@@ -293,6 +368,7 @@ async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime
 // ── Entry ─────────────────────────────────────────────────────────────────────
 export async function onRequest(context) {
   const { request, env } = context;
+  try { await warmTrialMode(env); } catch (e) {}   // TRIAL_ONCE_ON is a live KV flag
   if (request.method === "OPTIONS") return new Response(null, { status: 204 });
 
   // GET → the caller's own verification status (for the account panel).
@@ -307,13 +383,23 @@ export async function onRequest(context) {
       /* This endpoint answers from the KV record; every Pro gate reads the Firebase claim. When the
        * two disagreed the doctor saw "Your account is verified" here and "needs a verified
        * registration" on every feature, at the same moment. Heal it while they are on the screen. */
-      try {
-        const r = await reconcileVerifiedClaim(env, uid);
-        if (r.healed) { try { await clearBudgetCache(env, uid); } catch (e) {} }
-      } catch (e) {}
+      // Never for a student/intern record: healing re-asserts verified:true, the prescribing claim.
+      // Records approved before 2026-09-26 may say status "verified" with role intern/student; they
+      // are left for the owner to review (GET /api/verifications/legacy-trainees), not healed.
+      if (!isTraineeVerifyRole(rec.role)) {
+        try {
+          const r = await reconcileVerifiedClaim(env, uid);
+          if (r.healed) { try { await clearBudgetCache(env, uid); } catch (e) {} }
+        } catch (e) {}
+      }
+      const st = rec.status || (rec.verified ? "verified" : "unverified");
       return json({
-      status: rec.status || (rec.verified ? "verified" : "unverified"),
-      regNo: rec.regNo || rec.extractedRegNo || "", name: rec.name || "",
+      status: st,
+      role: rec.role || "",
+      // "May this account prescribe", answered by the server so no client has to infer it from
+      // status. Only a registered doctor/resident record; a trainee never.
+      canPrescribe: st === "verified" && !isTraineeVerifyRole(rec.role),
+      regNo: st === "trainee_verified" ? "" : (rec.regNo || rec.extractedRegNo || ""), name: rec.name || "",
       council: rec.council || "", verifiedAt: rec.verifiedAt || "", reason: rec.reason || "",
       provisionalUntil: rec.provisionalUntil || "",
       });
@@ -333,7 +419,8 @@ export async function onRequest(context) {
   const mime     = body.mime || "image/jpeg";
   const typedReg = String(body.regNo || "").trim();   // present ⇒ ID mode
   const idMode   = !!typedReg;
-  const role     = String(body.role || "doctor").toLowerCase();   // doctor | intern | student
+  // doctor | resident | intern | student. Unknown -> doctor (the historical default).
+  const role     = normalizeVerifyRole(body.role);
   if (!idToken)  return json({ error: "missing_id_token" }, 401);
 
   // "Skip for now" — grant one 7-day provisional trial per account (no certificate, no
@@ -343,6 +430,8 @@ export async function onRequest(context) {
     if (!tuid) return json({ error: "auth_failed" }, 401);
     let rec = null;
     try { if (store) rec = await store.get(doctorKey(tuid), "json"); } catch (e) {}
+    // Not a Pro door: this is the FREE plan while unverified (no claim is written), so the one-trial
+    // ledger deliberately does not gate it. A second person on a shared phone keeps the free plan.
     const decision = decideTrial(rec, Date.now(), TRIAL_DAYS);
     if (decision.grant && store) {
       const email = decodePayload(idToken).email || (rec && rec.email) || "";
@@ -378,7 +467,7 @@ export async function onRequest(context) {
   let lookupDiag = null;
   const toManual = async (reason) => {
     console.log("[verify] uid", uid, "→ MANUAL:", reason);
-    const provisionalUntil = new Date(Date.now() + PROVISIONAL_DAYS * 86400000).toISOString();
+    let provisionalUntil = new Date(Date.now() + PROVISIONAL_DAYS * 86400000).toISOString();
     // Store the uploaded proof to R2 so the owner's review dashboard can display it. Retained ONLY
     // until the owner approves/rejects (verifications endpoint deletes it then) — bounds sensitive-ID
     // (incl. Aadhaar) retention to the review window.
@@ -393,22 +482,43 @@ export async function onRequest(context) {
     } catch (e) { photoKey = ""; }
     // Owner decision 2026-08-27: full access WHILE PENDING, so review latency is never an outage
     // for someone who did everything right. The claim is what _entitlement.js accessState() reads.
-    try { await mergeUserClaims(env, uid, { provUntil: Date.now() + PROVISIONAL_DAYS * 86400000 }); } catch (e) {}
+    // Once per doctor (TRIAL_ONCE_ON): no pending access for a registration number that already
+    // belongs to another account, nor for a reg / phone / device that already had a free week. The
+    // review still goes to the owner; only the free access while waiting is withheld. A TYPED reg is
+    // checked but never recorded, so nobody can poison the ledger with someone else's number.
+    let trialFps = [], pendingOk = true;
+    if (trialOnceMode(env) !== "off") {
+      if (trialOnceMode(env) === "on" && store && effReg) {
+        try { const owner = await store.get(regKey(effReg)); if (owner && owner !== uid) pendingOk = false; } catch (e) {}
+      }
+      const g = await gateTrial(env, uid, { regNo: effReg, ...(await trialSignals(env, uid, request)) }, { door: "pending", noConsume: ["reg"], consume: pendingOk });
+      trialFps = (g.fps || []).filter((f) => f.kind !== "reg");
+      if (!g.grant) pendingOk = false;
+      // A re-upload must not restart the pending week: it runs from this account's first grant.
+      if (pendingOk && trialOnceMode(env) === "on") {
+        const first = await firstGrantAt(store, uid);
+        if (first) provisionalUntil = new Date(first + PROVISIONAL_DAYS * 86400000).toISOString();
+      }
+    }
+    if (!pendingOk) provisionalUntil = "";
+    if (pendingOk) { try { await mergeUserClaims(env, uid, { provUntil: Date.parse(provisionalUntil) }); } catch (e) {} }
+    else { try { await mergeUserClaims(env, uid, { trialDenied: Date.now(), provUntil: null }); } catch (e) {} }
     try { if (store) await store.put(doctorKey(uid), JSON.stringify({
       uid, email, status: "pending", reason, role,
       extractedRegNo: effReg, extractedName: ex.name, council: ex.council || "",
       confidence: (ex && typeof ex.confidence === "number") ? ex.confidence : null,
       via: idMode ? "id" : "cert", photoKey, photoMime: mime, lookup: lookupDiag,
-      provisionalUntil, updatedAt: new Date().toISOString(),
+      provisionalUntil, trialFps, updatedAt: new Date().toISOString(),
     })); } catch (e) {}
-    try { await emailSupport(env, { uid, email, extracted: ex, reason, imageB64, mime, attach: !idMode, regNo: effReg }); } catch (e) {}
-    return json({ status: "pending_review", reason, provisionalUntil, provisionalDays: PROVISIONAL_DAYS });
+    try { await emailSupport(env, { uid, email, extracted: ex, reason, imageB64, mime, attach: !idMode, regNo: effReg, role }); } catch (e) {}
+    return json({ status: "pending_review", reason, provisionalUntil, provisionalDays: pendingOk ? PROVISIONAL_DAYS : 0, ...(pendingOk ? {} : { trialUsed: true }) });
   };
 
-  // Interns/residents & students aren't on the NMC register — an institute/college ID can't be
-  // auto-verified, so route straight to manual review (provisional access, prescription locked).
-  // The owner approves from the admin console (User control → Approve verification).
-  if (role === "intern" || role === "student") return toManual(role === "student" ? "medical_student_id" : "intern_resident_id");
+  // Interns and students hold no full registration (interns: provisional only), so a college or
+  // internship ID cannot be auto-verified: straight to manual review (provisional access, Rx locked).
+  // The owner's approval gives them traineeVerified, never verified (functions/api/verifications).
+  // A PG RESIDENT holds full NMC/SMC registration and takes the doctor path below.
+  if (isTraineeVerifyRole(role)) return toManual(role === "student" ? "medical_student_id" : "intern_id");
 
   // 3. decide — the register (live NMC, D1 fallback) is authoritative. In ID mode we match the
   // name read off the ID against NMC's registered name for the reg number the doctor typed.
@@ -451,29 +561,16 @@ export async function onRequest(context) {
     }
   }
 
-  // 5. set the verified claim + persist
-  try { await setVerifiedClaim(env, uid, match.registrationNo); }
-  catch (e) { try { console.warn("[verify] claim_write_failed"); } catch (x) {} return json({ error: "claim_write_failed" }, 500); }
+  // 5. set the verified claim + persist + role (see completeAutoVerify)
+  let done;
+  try {
+    done = await completeAutoVerify(env, store, {
+      uid, email, role, match, source, idMode, effReg, lookupDiag,
+      confidence: (ex && typeof ex.confidence === "number") ? ex.confidence : null,
+      signals: await trialSignals(env, uid, request),
+    });
+  } catch (e) { try { console.warn("[verify] claim_write_failed"); } catch (x) {} return json({ error: "claim_write_failed" }, 500); }
+  console.log("[verify] uid", uid, "→ VERIFIED (" + source + "/" + (idMode ? "id" : "cert") + ", role " + role + ")");
 
-  if (store) {
-    try { await store.put(regKey(match.registrationNo), uid); } catch (e) {}
-    try { await store.put(doctorKey(uid), JSON.stringify({
-      uid, email, status: "verified", verified: true,
-      regNo: match.registrationNo, name: match.firstName, council: match.smcName,
-      dob: match.birthDateStr || "", university: match.university || "",
-      source, via: idMode ? "id" : "cert", matchedBy: effReg ? "reg" : "name", lookup: lookupDiag,
-      confidence: (typeof ex.confidence === "number") ? ex.confidence : null,
-      verifiedAt: new Date().toISOString(),
-    })); } catch (e) {}
-  }
-  console.log("[verify] uid", uid, "→ VERIFIED (" + source + "/" + (idMode ? "id" : "cert") + ")");
-
-  // Confirmation email to the doctor (best-effort), then the Pro upsell at this high-intent moment.
-  try { await emailVerified(env, { email, name: match.firstName, regNo: match.registrationNo, council: match.smcName }); } catch (e) {}
-  try { await markVerified(env, uid); await sendProUpsellOnce(env, uid, { email, name: match.firstName }); } catch (e) {}
-  // The AI budget tier just changed from "none" to a real allowance. The cap is cached for ~26h, so
-  // without this the doctor verifies and MaiK still refuses them until tomorrow.
-  try { await clearBudgetCache(env, uid); } catch (e) {}
-
-  return json({ status: "verified", regNo: match.registrationNo, name: match.firstName, council: match.smcName });
+  return json({ status: "verified", role: done.role, regNo: done.regNo, name: done.name, council: done.council });
 }

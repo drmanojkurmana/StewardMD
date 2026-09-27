@@ -42,6 +42,7 @@
     watch: '<rect x="6" y="6" width="12" height="12" rx="3"/><path d="M9 6l.7-3h4.6l.7 3M9 18l.7 3h4.6l.7-3"/><path d="M12 9v3l2 1"/>',
     refresh: '<path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/>',
     download: '<path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/>',
+    bug: '<rect x="8" y="6" width="8" height="14" rx="4"/><path d="M12 20v-9M8 11H4M16 11h4M8 16H5M16 16h3M9 6.5 7 4M15 6.5 17 4M10 6a2 2 0 0 1 4 0"/>',
     flask: '<path d="M10 2v5.5L4.4 18.5A2 2 0 0 0 6.1 21h11.8a2 2 0 0 0 1.7-2.5L14 7.5V2h-4Z"/><path d="M8.5 2h7M7 14h10"/>'
   };
   function svg(name) {
@@ -64,6 +65,8 @@
       if (b && b.open) b.open().catch(function (e) { toast("AgentConnect unavailable: " + (e && e.message ? e.message : "load failed")); });
       else toast("AgentConnect is not enabled");
     },
+    // Shake-to-report bugs and the developer's replies (bug-report.js).
+    bugs: function () { if (window.SMD_BUGS && SMD_BUGS.openCentre) SMD_BUGS.openCentre(); else toast("Bug Report Centre loading…"); },
     guidelines: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Guidelines loading…"); },
     tour: function () { if (window.SMD_TOUR && SMD_TOUR.start) SMD_TOUR.start({ replay: true }); else toast("Tour loading…"); },
     feedback: function () {
@@ -297,6 +300,7 @@
   // Wearable companion is platform-specific: Apple Watch on iOS, Wear OS on Android, none on web.
   // Showing "Apple Watch" on Android was wrong (that bridge is iOS-only).
   function watchPlat() { try { var C = window.Capacitor; return (C && (typeof C.getPlatform === "function" ? C.getPlatform() : C.platform)) || "web"; } catch (e) { return "web"; } }
+  function bugBadge() { try { var n = window.SMD_BUGS && SMD_BUGS.unread ? SMD_BUGS.unread() : 0; return n ? String(n) : ""; } catch (e) { return ""; } }
   function watchRow() {
     var p = watchPlat();
     if (p === "ios") return row("applewatch", "watch", "Apple Watch");
@@ -465,9 +469,10 @@
       row("drugs", "pills", "Drugs Database") +
       row("interactions", "interact", "Interaction Checker") +
       row("calculators", "calc", "Calculators") +
-      row("agentconnect", "steth", "AgentConnect") +
-      (flag("smd_personal_clinic", false) ? row("clinic", "steth", "My Clinic") : "") +
+      // AgentConnect and My Clinic left the sidebar on 2026-09-26 (owner). Both still open from their
+      // other entry points (home tile / More sheet, OPD queue); their ACT handlers stay for those.
       '<div class="sbr-sec">Reference &amp; Help</div>' +
+      row("bugs", "bug", "Bug Report Centre", bugBadge()) +
       row("guidelines", "book", "Guidelines &amp; Protocols") +
         (flag("smd_atlas", true) ? row("atlas", "atlas", "RadioAnatome") : "") +
       row("tour", "info", "How it works · App tour") +

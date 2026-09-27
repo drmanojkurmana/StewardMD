@@ -23,6 +23,7 @@
 import * as ORG from "../../_opd_org_store.js";
 import { recordDeps } from "../../_wardsynq/deps.js";
 import { redeemCode, portalRead, sessionPatient } from "../../_wardsynq/patient-access.js";
+import { hit as rateHit, ipHit } from "../../_wardsynq/rate-limit.js";
 import { sendMessage, requestAppointment } from "../../_wardsynq/portal-requests.js";
 import { withdrawOwnConsent, portalDocumentFile, queueStatus } from "../../_wardsynq/portal-view.js";
 import { portalPrivacy, portalAcknowledge, portalDataRequest } from "../../_wardsynq/dpdp.js";
@@ -80,6 +81,13 @@ export async function onRequest(context) {
   /* No actorDeps. There is no staff identity to resolve and nothing here asks for one: the modules
    * that need a clinician (enrol, revoke) are NOT imported by this file and are unreachable from it. */
   const deps = { migration, recordDeps: recordDeps(env, migration.tenantId), config: cfg && cfg.patientAccess };
+
+  /* SEC-11/SEC-15: an unauthenticated door that takes a secret. Per address across the portal, and
+   * per grant and per address on redeem, so neither a spray nor a burst at one grant gets far. */
+  const ipRl = await ipHit(env, request, "portal", 120, 60000);
+  const grantRl = sub === "redeem" && str(body.grantId) ? await rateHit({ kv: env && (env.WSQ_RL_KV || env.MAIK_KV) }, { key: `portal:redeem:${orgId}:${str(body.grantId)}`, limit: 10, windowMs: 600000 }) : { allowed: true };
+  const redeemIpRl = sub === "redeem" ? await ipHit(env, request, "portal-redeem", 20, 600000) : { allowed: true };
+  if (!ipRl.allowed || !grantRl.allowed || !redeemIpRl.allowed) return json({ ok: false, error: "rate_limited", detail: "Too many attempts. Wait a few minutes and try again." }, 429, request);
 
   if (sub === "redeem") {
     const r = await redeemCode(request, env, { ...deps, grantId: body.grantId, code: body.code });

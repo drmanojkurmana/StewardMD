@@ -56,7 +56,7 @@ function d1(db) {
   function stmt(sql) {
     let args = [];
     const s = {
-      bind(...a) { args = norm(a); return s; },
+      bind(...a) { if (a.length > 100) throw new Error(`D1_ERROR: too many SQL variables (${a.length})`); args = norm(a); return s; }, // D1's limit
       async first() { return db.prepare(sql).get(...args) ?? null; },
       async all() { return { results: db.prepare(sql).all(...args) }; },
       async run() { const r = db.prepare(sql).run(...args); return { success: true, meta: { last_row_id: Number(r.lastInsertRowid), changes: Number(r.changes) } }; },

@@ -839,6 +839,15 @@ async function resolveClinicalActorNow(request, env, tenantId, need, deps) {
   deps = deps || {};
   if (!deps.db) throw new PermissionError("record service is not provisioned");
   const identity = await resolveIdentity(request, env, deps);
+  return resolveClinicalActorFor(request, env, identity, tenantId, need, deps);
+}
+/* The same answer for an identity resolved EARLIER, re-asked now (SEC-09): a SMART token acts as the
+ * person who authorised it, so every use and every refresh asks the staff registry again whether that
+ * person is still a member and what their role may read today. `identity` is { kind, id, email, orgId }. */
+async function resolveClinicalActorFor(request, env, identity, tenantId, need, deps) {
+  deps = deps || {};
+  if (!deps.db) throw new PermissionError("record service is not provisioned");
+  if (!identity || !identity.id) throw new AuthError("authenticated actor required");
   const claims = deps.claimsFn && identity.kind === "firebase" ? (await deps.claimsFn(request, env)) || {} : {};
 
   // The tenant row is the record's key and must exist, whoever is asking.
@@ -889,6 +898,6 @@ export {
   RESOURCE_TYPES, ORDER_TYPES, VITALS_TYPES,
   grantForCaps, grantForRole, roleMapping,
   actorFromOpdRole, actorFromConnectRole, aiActorFor, isAiOrigin,
-  resolveIdentity, resolveClinicalActor,
+  resolveIdentity, resolveClinicalActor, resolveClinicalActorFor,
   sessionRefOf, requestContextOf,
 };

@@ -33,8 +33,9 @@ let fails = 0; const ok = (c, m) => { console.log((c ? "✅ " : "❌ ") + m); if
 
 // A signed-in doctor, a Firestore double, and an in-page /api/auth/phone-* server.
 const STUB = `
-  window.__claims = {}; window.__profile = { phone: "98765 43210", hospital: "GIMSR", degree: "MD", speciality: "Internal Medicine" };
+  window.__claims = {}; window.__profile = { name: "Dr Asha Rao", phone: "98765 43210", hospital: "GIMSR", degree: "MD", speciality: "Internal Medicine", role: "doctor" };   // role is a required profile field (Role box), else profile-setup opens first
   window.__saved = {}; window.__calls = []; window.__code = "482913"; window.__wa = true; window.__tries = 0; window.__srvOff = false;
+  window.__left = { whatsapp: 2, sms: 1 };   // server budget: 2 WhatsApp + 1 SMS per account per day
   window.SMD_AUTH = {
     currentUser: { uid: "u-doc-1", displayName: "Dr Asha Rao", email: "asha@hospital.org",
       getIdToken: function () { return Promise.resolve("tok"); },
@@ -53,10 +54,17 @@ const STUB = `
     window.__calls.push({ path: u.split("/").pop(), body: body, auth: o.headers && o.headers.Authorization });
     var reply = function (j, s) { return Promise.resolve({ ok: true, status: s || 200, json: function () { return Promise.resolve(j); } }); };
     if (window.__srvOff) return reply({ ok: false, error: "off" });
+    if (u.indexOf("phone-start") > 0 && window.__inUse) return reply({ ok: false, error: "phone-in-use" }, 409);
+    if (u.indexOf("phone-verify") > 0 && window.__inUseAtVerify) return reply({ ok: false, error: "phone-in-use" }, 409);
     if (u.indexOf("phone-start") > 0) {
       var digits = String(body.phone || "").replace(/\\D/g, ""); if (digits.length < 10) return reply({ ok: false, error: "bad-phone" }, 400);
-      var ch = body.channel === "sms" ? "sms" : (window.__wa ? "whatsapp" : "sms");
-      return reply({ ok: true, sent: true, channel: ch, fellBack: body.channel !== "sms" && !window.__wa, ttl: 600, to: "+91 ******" + digits.slice(-4) });
+      var L = window.__left;
+      if (!L.whatsapp && !L.sms) return reply({ ok: false, error: "send-cap", left: L }, 429);
+      if (body.channel === "sms" && !L.sms) return reply({ ok: false, error: "sms-used", left: L }, 429);
+      var ch = body.channel === "sms" ? "sms" : ((window.__wa && L.whatsapp) ? "whatsapp" : (L.sms ? "sms" : null));
+      if (!ch) return reply({ ok: false, error: "send-failed", left: L });
+      L[ch]--;
+      return reply({ ok: true, sent: true, channel: ch, fellBack: body.channel !== "sms" && ch === "sms" && !window.__wa, ttl: 600, to: "+91 ******" + digits.slice(-4), left: { whatsapp: L.whatsapp, sms: L.sms } });
     }
     if (String(body.code) === window.__code) return reply({ ok: true, verified: true });
     window.__tries++; return reply({ ok: false, error: "mismatch", triesLeft: 5 - window.__tries }, 400);
@@ -64,6 +72,9 @@ const STUB = `
   return 1;`;
 
 const on = () => ev(`var r=document.getElementById("phvRoot"); return !!(r && r.classList.contains("on"));`);
+// Poll rather than trust a fixed sleep: the sheet opens on a 1.5 s gate poll + 400 ms, which a
+// slow runner can miss by a few ms.
+const waitOn = async (want, ms = 4000) => { const t0 = Date.now(); let v; do { v = await on(); if (v === want) return v; await sleep(150); } while (Date.now() - t0 < ms); return v; };
 const text = () => ev(`var r=document.getElementById("phvRoot"); return r ? r.innerText : "";`);
 const click = (id) => ev(`var b=document.getElementById("${id}"); if(!b) return "missing"; b.click(); return "clicked";`);
 const type = (id, v) => ev(`var i=document.getElementById("${id}"); i.value=${JSON.stringify(v)}; i.dispatchEvent(new Event("input",{bubbles:true})); return i.value;`);
@@ -91,12 +102,12 @@ try {
   await sleep(3200);
   ok(await on() === false, "while the registration gate is open the phone sheet waits");
   await ev(`var g=document.getElementById("verifyGate"); if(g){ g.classList.add("hidden"); g.style.display="none"; } SMD_PHONE_VERIFY._reset(); return 1;`);
-  await sleep(2200);
-  ok(await on() === true, "and opens once the gate closes");
+  ok(await waitOn(true) === true, "and opens once the gate closes");
   await ev(`SMD_PHONE_VERIFY.close(); SMD_PHONE_VERIFY._reset(); var w=document.createElement("div"); w.className="smdt-wel"; w.style.display="flex"; document.body.appendChild(w); SMD_PHONE_VERIFY.check(); return 1;`); await sleep(1400);
   ok(await on() === false, "while the first-launch guided tour is up the phone sheet waits");
-  await ev(`document.querySelector(".smdt-wel").remove(); return 1;`); await sleep(2200);
-  ok(await on() === true, "and opens once the tour is dismissed");
+  await ev(`document.querySelector(".smdt-wel").remove(); return 1;`);
+  ok(await waitOn(true) === true, "and opens once the tour is dismissed");
+  await sleep(800);   // let the entrance animation settle before measuring
   // verify.js re-evaluates the stubbed (unverified) account and may re-show its gate; hide it again
   // so the geometry check measures the phone sheet itself, not that unrelated overlay.
   await ev(`var g=document.getElementById("verifyGate"); if(g){ g.classList.add("hidden"); g.style.display="none"; } return 1;`);
@@ -108,8 +119,7 @@ try {
   // The real SMD_AUTH existed before the stub, so re-run the bootstrap against the stub: the auth
   // listener fires, and check() runs 2 s later exactly as it does on a real sign-in.
   await ev(`SMD_PHONE_VERIFY._start(); return 1;`);
-  await sleep(3200);
-  ok(await on() === true, "the sheet opens on its own after sign-in when the phone is not verified");
+  ok(await waitOn(true, 6000) === true, "the sheet opens on its own after sign-in when the phone is not verified");
   ok(/Verify your mobile number/.test(await text()), "it asks to verify the mobile number");
   ok(await ev(`return document.getElementById("phvPhone").value;`) === "98765 43210", "the profile's phone is pre-filled");
   ok(/WhatsApp/.test(await text()) && /SMS instead/.test(await text()), "WhatsApp is the default, SMS is offered as the backup");
@@ -126,6 +136,8 @@ try {
   ok(/Sent by WhatsApp/.test(await text()) && /\*\*\*\*\*\*3210/.test(await text()), "the code step names WhatsApp and the masked number");
   ok(/Resend code in \d+s/.test(await text()), "resend is on a countdown");
   ok(await ev(`var cd=document.querySelector("#phvResend .phv-cd"); return !!cd;`) === true, "with a countdown ring");
+  ok(await ev(`var b=document.getElementById("phvSms2"); return !!(b && b.disabled);`) === true, "SMS instead waits out the same 30 s (the server would answer too-soon)");
+  ok(/Codes left today: 1 on WhatsApp, 1 by SMS/.test(await text()), "the sheet shows the remaining send budget");
   if (process.env.SHOT) { await ev(`document.body.classList.add("dark"); return 1;`); await sleep(250); const shot = await call("Page.captureScreenshot", { format: "png" }); (await import("node:fs")).writeFileSync(process.env.SHOT.replace(/\.png$/, "-dark.png"), Buffer.from(shot.result.data, "base64")); await ev(`document.body.classList.remove("dark"); return 1;`); }
   if (process.env.SHOT) { const shot = await call("Page.captureScreenshot", { format: "png" }); (await import("node:fs")).writeFileSync(process.env.SHOT, Buffer.from(shot.result.data, "base64")); }
 
@@ -179,11 +191,28 @@ try {
   ok(await ev(`return !document.getElementById("phvSms2");`) === true, "no second SMS offer once it is already SMS");
   await click("phvBack"); await sleep(200);
   ok(/Verify your mobile number/.test(await text()), "Change number goes back to the number step");
-  await ev(`window.__wa = false; return 1;`);
+  await ev(`window.__wa = false; window.__left = { whatsapp: 2, sms: 1 }; return 1;`);
   await click("phvSend"); await sleep(600);
   ok(/went by SMS/.test(await text()), "when WhatsApp fails server-side the sheet says the code went by SMS");
   await click("phvVerify"); await sleep(200);
   ok(/Enter the 6-digit code/.test(await text()), "Verify with an empty code is caught in-sheet");
+
+  // ── max 3 codes per account: 2 on WhatsApp + 1 by SMS (owner 2026-09-26) ──
+  await ev(`window.__wa = true; window.__left = { whatsapp: 2, sms: 1 }; window.__calls = []; SMD_PHONE_VERIFY.close(); SMD_PHONE_VERIFY._reset(); SMD_PHONE_VERIFY.open("9876543210"); return 1;`); await sleep(300);
+  await click("phvSend"); await sleep(500); await click("phvBack"); await sleep(150);
+  await click("phvSend"); await sleep(500);
+  ok(/Sent by WhatsApp/.test(await text()) && /Codes left today: 1 by SMS\./.test(await text()), "after 2 WhatsApp codes only the SMS one is left");
+  ok(/Resend by SMS in \d+s/.test(await text()) && await ev(`return !document.getElementById("phvSms2");`) === true, "Resend switches to SMS and there is no duplicate SMS button");
+  await click("phvBack"); await sleep(150);
+  await click("phvSms"); await sleep(500);
+  ok(/Sent by SMS/.test(await text()) && /No more codes today/.test(await text()), "the SMS code is the third and last");
+  ok(await ev(`return !document.getElementById("phvResend") && !document.getElementById("phvSms2");`) === true, "no resend offered once the budget is spent");
+  await click("phvBack"); await sleep(150);
+  ok(await ev(`return !document.getElementById("phvSms");`) === true, "the number step drops Use SMS instead once SMS is used");
+  await click("phvSend"); await sleep(500);
+  ok(/used all 3 codes for today/.test(await text()), "a fourth send is refused with a clear message (send-cap)");
+  ok(await ev(`return window.__calls.filter(function(c){return c.path==="phone-start"}).length;`) === 4, "3 sends went out, the 4th was refused server-side");
+  await ev(`window.__left = { whatsapp: 2, sms: 1 }; return 1;`);
 
   // ── Later snoozes for this app-open ──
   await click("phvBack"); await sleep(150); await click("phvLater"); await sleep(200);
@@ -191,6 +220,22 @@ try {
   ok(await ev(`try{return sessionStorage.getItem("smd_phone_verify_snoozed")}catch(e){return null}`) === "1", "snoozed for this app-open only (sessionStorage)");
   await ev(`SMD_PHONE_VERIFY._reset(); SMD_PHONE_VERIFY.check(); return 1;`); await sleep(900);
   ok(await on() === false, "and check() respects the snooze");
+
+  // ── one number, one account (audit finding 14): the server refuses a number another live account holds ──
+  await ev(`window.__calls = []; window.__inUse = true; SMD_PHONE_VERIFY._reset(); SMD_PHONE_VERIFY.open("9876543210"); return 1;`); await sleep(300);
+  await click("phvSend"); await sleep(600);
+  const inUse = await text();
+  ok(/This number is already verified on another StewardMD account\. Use a different number, or sign in to that account\./.test(inUse), "phone-in-use at Send shows the plain sentence");
+  ok(!/\u2014/.test(inUse), "no em-dash in the sheet");
+  ok(await on() === true && !!(await ev(`return !!document.getElementById("phvPhone");`)) && !(await ev(`return !!document.getElementById("phvCode");`)), "the sheet stays on the number step so another number can be entered");
+  ok(await ev(`return window.__calls.length === 1 && window.__calls[0].path === "phone-start";`) === true, "one phone-start, no verify attempted");
+  // Taken between Send and Verify: the code step says the same sentence.
+  await ev(`window.__inUse = false; window.__inUseAtVerify = true; return 1;`);
+  await type("phvPhone", "9876543210"); await click("phvSend"); await sleep(600);
+  await type("phvCode", "482913"); await sleep(700);
+  ok(/already verified on another StewardMD account/.test(await text()), "phone-in-use at Verify shows the same sentence");
+  ok(await ev(`try{return localStorage.getItem("smd_phone_verified_u-doc-1")}catch(e){return null}`) !== "1", "and the device is not marked verified");
+  await ev(`window.__inUseAtVerify = false; SMD_PHONE_VERIFY.close(); return 1;`);
 
   // ── kill switches ──
   await ev(`try{sessionStorage.clear(); localStorage.setItem("smd_phone_verify","0")}catch(e){} SMD_PHONE_VERIFY._reset(); SMD_PHONE_VERIFY.check(); return 1;`); await sleep(900);

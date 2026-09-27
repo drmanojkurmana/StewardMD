@@ -299,7 +299,8 @@ test("all three bedside dialogs refuse a revoked carrier before any server call"
   assert.match(WARD_SRC, tagVerify);
   assert.match(WARD_SRC, /if \(carrierRevoked\("wristband", normCarrierValue\(wristband\)\)\) \{ st\.err = revokedErr\(\); paint\(\); return; \}/);
   assert.match(WARD_SRC, /if \(_scanCode && carrierRevoked\("", normCarrierValue\(_scanCode\)\)\) \{ st\.err = revokedErr\(\); paint\(\); return; \}/);
-  assert.match(WARD_SRC, /body\.scan = \{ patient: val\("wScanP"\), drug: val\("wScanD"\) \};/,
+  // CLIN-10: in the server's own scan field names.
+  assert.match(WARD_SRC, /body\.scan = \{ patientBarcode: val\("wScanP"\), drugBarcode: val\("wScanD"\) \};/,
     "the scans themselves still travel to the server verbatim");
 });
 

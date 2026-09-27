@@ -45,5 +45,17 @@
     if (D && D.getInfo) return Promise.resolve().then(function () { return D.getInfo(); }).then(function (i) { return (i && ([i.manufacturer, i.model].filter(Boolean).join(" ") || i.model)) || coarseModel(); }).catch(coarseModel);
     return Promise.resolve(coarseModel());
   }
-  window.SMD_DEVICE = { getId: getId, getModel: getModel, getPlatform: platform };
+  /* The HARDWARE id, for the once-per-device free week (server functions/_trial_ledger.js). Unlike
+   * getId() it is never cached, so it follows the phone across reinstalls: Android ANDROID_ID and
+   * the iOS device id from @capacitor/device when the native build has the plugin. Without it this
+   * is the stored getId() ("dev-..."), which the server treats as a soft signal only. IMEI is not
+   * readable by apps on Android 10+ or iOS, so it is not attempted. */
+  function getHwId() {
+    var D = pluginDevice();
+    var p = (D && D.getId) ? Promise.resolve().then(function () { return D.getId(); }).then(function (r) { var hw = r && (r.identifier || r.uuid); return hw ? ("hw-" + hw) : null; }).catch(function () { return null; }) : Promise.resolve(null);
+    return p.then(function (hw) { return hw || getId(); });
+  }
+  // { "X-SMD-HW": id } for fetch headers; {} if nothing could be read. Never rejects.
+  function hwHeaders() { return getHwId().then(function (id) { return id ? { "X-SMD-HW": id } : {}; }, function () { return {}; }); }
+  window.SMD_DEVICE = { getId: getId, getModel: getModel, getPlatform: platform, getHwId: getHwId, hwHeaders: hwHeaders };
 })();

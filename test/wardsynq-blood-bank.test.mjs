@@ -5,7 +5,7 @@
  *
  * node --test --experimental-test-module-mocks test/wardsynq-blood-bank.test.mjs
  */
-import { as, seedHospital, recordsOf, auditsOf, U, ORG, ORG2 } from "./wardsynq-ops-harness.mjs";
+import { as, seedHospital, recordsOf, auditsOf, U, ORG, ORG2, recordBloodGroup } from "./wardsynq-ops-harness.mjs";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { unitStatuses, donationTests, inventoryOf } from "../functions/_wardsynq/blood-bank.js";
@@ -114,6 +114,7 @@ test("inventory gate on the existing workflow: POST /api/queue/ward/transfusion-
   assert.equal(reg.__status, 200, JSON.stringify(reg));
   const adm = await as(U.DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg.mrn, ward: "Medical A", bed: "1" });
   assert.equal(adm.__status, 200, JSON.stringify(adm));
+  await recordBloodGroup(adm.patientId, "O Positive");
   const req = await as(U.DOCTOR, "/ward/transfusion-request", "POST", { orgId: ORG, patientId: adm.patientId, mrn: reg.mrn, component: "red-cells", units: 1, aboGroup: "O", rhD: "positive" });
   assert.equal(req.__status, 200, JSON.stringify(req));
 

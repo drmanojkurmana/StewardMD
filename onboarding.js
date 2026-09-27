@@ -952,7 +952,7 @@
       { screen: "home", sel: '[data-act="askai"]', title: "MaiK, your AI resident", body: "The centre button opens MaiK. Ask the case, dictate a note, attach an image. Named scores open their calculator for free." },
       { screen: "home", sel: '[data-act="hospital"]', title: "Hospital: the patient hub", body: "ICU and Ward, Ward Sync, OPD Queue, FollowCare, Prescription and Connect all live under Hospital." },
       { screen: "home", sel: '[data-act="notifications"]', title: "Alerts", body: "Lab Watch results, referrals, unit activity and updates arrive here. Allow notifications the first time the app asks." },
-      { screen: "home", sel: '[data-act="menu"]', title: "The sidebar", body: "Calculators, Drugs, Guidelines, RadioAnatome, My Clinic, Experimental Features and Settings. Tap the menu icon any time." },
+      { screen: "home", sel: '[data-act="menu"]', title: "The sidebar", body: "Calculators, Drugs, Guidelines, RadioAnatome, the Bug Report Centre and Settings. Something not working? Shake your phone to report it." },
       { screen: "home", sel: '[data-act="more"]', title: "More", body: "Profile and StewardMD ID, Subscription, AI Usage, NMC eLOGBook, notification preferences, display, help and this guide." },
       { screen: "home", sel: '[data-act="theme"]', title: "Dark or light", body: "Tap the sun or moon to switch. Appearance and fonts live in Settings; the choice is remembered." }
     ] },

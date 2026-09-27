@@ -13,7 +13,8 @@
 
   // type: bool | int | tri (true/false/null) | enum. def: default when unset. query: ?alias (or null).
   var DEFS = {
-    smd_kardiox:            { type: "bool", def: false,     query: "kardiox",     desc: "KardiQ X AI master flag (home card + module). OWNER DECISION 2026-09-25: def:false again - code-gated beta. The tile appears only on a device unlocked with a StewardMD access code (Settings, Experimental Features; SMD_XACCESS sets smd_kardiox=1 on unlock) or on the early-access tier, and opening it always passes SMD_XACCESS.gate. (2026-08-26 had set def:true for every user.) THE CLINICAL POSITION IS UNCHANGED BY THIS FLAG - the model is still clinically unvalidated and regulatory-pending, and the in-module wording that says so must stay. Set def:false to close it again; ?kardiox=0 disables per device." },
+    smd_kardiox:            { type: "bool", def: false, early: true,     query: "kardiox",     desc: "KardiQ X AI master flag (home card + module). OWNER DECISION 2026-09-25: def:false again - code-gated beta. The tile appears only on a device unlocked with a StewardMD access code (Settings, Experimental Features; SMD_XACCESS sets smd_kardiox=1 on unlock) or on the early-access tier, and opening it always passes SMD_XACCESS.gate. (2026-08-26 had set def:true for every user.) THE CLINICAL POSITION IS UNCHANGED BY THIS FLAG - the model is still clinically unvalidated and regulatory-pending, and the in-module wording that says so must stay. Set def:false to close it again; ?kardiox=0 disables per device." },
+    smd_kardiox_learn:      { type: "bool", def: true,      query: "kxlearn",     desc: "Learn ECG (the 1,041-lesson atlas, quiz, daily challenge, flashcards; NO AI). Audit finding 11 / owner decision 2026-09-26: reachable by every signed-in user WITHOUT the KardiQ X AI access code (KARDIOX.openLearn(), home tile 'Learn ECG'). The ECG AI interpretation stays behind smd_kardiox + SMD_XACCESS. Kill switch: ?kxlearn=0 or localStorage smd_kardiox_learn=0 hides the tile and makes openLearn() a no-op." },
     smd_kardiox_cloud:      { type: "tri",  def: null,      query: null,          desc: "Cloud ECG-analysis consent (null = ask once). Off = mock/offline only." },
     smd_kardiox_confidence: { type: "bool", def: true,      query: null,          desc: "Always show the AI confidence % (Settings · Intelligence)." },
     smd_kardiox_haptics:    { type: "bool", def: true,      query: null,          desc: "Haptic feedback for taps / report-ready / urgent / quiz." },
@@ -48,10 +49,17 @@
       default: return raw;
     }
   }
+  // Plan early access (owner decision 2026-09-26): a master flag marked `early: true` that NOTHING
+  // has decided (no ?query, no localStorage value) reads ON for an early-access plan, via the one
+  // helper SMD_PRO.hasEarlyAccess() (account.js: Clinician Pro / Ultimate). An explicit ?query=0 or
+  // localStorage "0" still wins, so the per-device kill switches keep working.
+  function earlyAccess() { try { return !!(typeof window !== "undefined" && window.SMD_PRO && window.SMD_PRO.hasEarlyAccess && window.SMD_PRO.hasEarlyAccess()); } catch (e) { return false; } }
   function get(key) {
     var def = DEFS[key]; if (!def) return null;
     var q = rawQuery(def.query); if (q != null) return coerce(def, q);   // ?query wins
-    var s = store(); return coerce(def, s ? s.getItem(key) : null);
+    var s = store(), raw = s ? s.getItem(key) : null;
+    if (raw == null && def.early && earlyAccess()) return true;
+    return coerce(def, raw);
   }
   function set(key, val) {
     var def = DEFS[key], s = store(); if (!def || !s) return false;

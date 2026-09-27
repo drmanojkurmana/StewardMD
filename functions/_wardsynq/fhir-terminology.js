@@ -12,10 +12,15 @@
  *   because the seed file says so). Their system URIs are in our own urn:stewardmd namespace, and
  *   they are complete by definition: the list IS the code system.
  *
- *   A FRAGMENT OF SOMEBODY ELSE'S. LOINC, HL7's own code systems, and any system the hospital loaded
- *   codes for (wardsynq.terminology.codeSystems, where an ICD-10 subset would live). Served under the
- *   owner's canonical URI with content "fragment": this server ships no LOINC, SNOMED CT or ICD
- *   release and never answers as if it did. A system with nothing present is not served at all.
+ *   A FRAGMENT OF SOMEBODY ELSE'S. LOINC, ICD, and any system the hospital loaded codes for
+ *   (wardsynq.terminology.codeSystems): this server ships no LOINC, SNOMED CT or ICD release and
+ *   never answers as if it did, so these are always content "fragment". HL7's OWN code systems are
+ *   different (OPS-25/F25): a handful (v3-ActCode, v2-0203, and other curated operational subsets)
+ *   are genuinely fragments too, but the R4-required, closed status/clinical/intent enumerations
+ *   (administrative-gender, observation-status, condition-clinical, and others terminology.js#HL7
+ *   marks complete:true) ARE, in full, the vocabulary they claim to be - served as content "complete"
+ *   rather than telling a conformance client to re-verify this server's own base codes elsewhere. A
+ *   system with nothing present is not served at all.
  *
  *   THE HOSPITAL'S OWN VALUE SETS (wardsynq.terminology.valueSets): a title and a list of systems,
  *   optionally narrowed to named codes. A code the hospital names that this server does not hold is
@@ -89,7 +94,15 @@ function codeSystemTable(cfg) {
   for (const [uri, m] of frag) {
     const known = Object.values(SYSTEMS).find((s) => s.uri === uri);
     const name = (HL7[uri] && HL7[uri].name) || (known && known.name) || uri;
-    out.push({ id: idForUri(uri), url: uri, name: name.replace(/[^A-Za-z0-9]/g, ""), title: name, ours: false, status: "active",
+    // OPS-25/F25: `complete` (content:"complete" below) is true only for a system HL7.js itself
+    // marks complete=true AND where nothing beyond that closed set was merged in (a hospital
+    // remapping a custom code under a closed HL7 enum's URI would otherwise overclaim completeness).
+    // Kept SEPARATE from `ours` (unchanged: still only the hospital's own local lists below), which
+    // also drives whether valueSetTable() auto-generates a ValueSet for this row - a closed HL7
+    // enumeration being fully known does not make it one of THIS hospital's own lists.
+    const seed = KNOWN[uri];
+    const complete = !!(HL7[uri] && HL7[uri].complete) && !!seed && m.size === seed.size;
+    out.push({ id: idForUri(uri), url: uri, name: name.replace(/[^A-Za-z0-9]/g, ""), title: name, ours: false, complete, status: "active",
       description: `A fragment of ${name}: only the ${m.size} code(s) this server carries or this hospital loaded. This server is not an authoritative source for ${name}.`,
       concepts: [...m].map(([code, display]) => ({ code, ...(display ? { display } : {}) })) });
   }
@@ -102,7 +115,9 @@ function codeSystemResource(row) {
     resourceType: "CodeSystem", id: row.id, url: row.url, name: row.name, title: row.title, status: row.status,
     ...(row.experimental ? { experimental: true } : {}),
     description: row.description, caseSensitive: true,
-    content: row.ours ? "complete" : "fragment", count: row.concepts.length,
+    // OPS-25/F25: `complete` (a fragment row that IS, in full, the vocabulary it claims to be - see
+    // codeSystemTable() above) if set, else `ours` (the hospital's own lists, always complete).
+    content: (row.complete != null ? row.complete : row.ours) ? "complete" : "fragment", count: row.concepts.length,
     ...(row.id === "formulary" ? { property: [{ code: "restricted", type: "boolean", description: "The hospital requires an approval before this drug is ordered" }] } : {}),
     concept: row.concepts.length ? row.concepts : undefined,
   };
@@ -149,7 +164,7 @@ function membersOf(vs, systems) {
     const cs = systems.find((s) => s.url === inc.system);
     if (!cs) { warnings.push(`${inc.system}: this server holds no codes from this system, so none are included`); continue; }
     used.push(cs);
-    if (!cs.ours) warnings.push(`${cs.title}: a fragment of ${cs.concepts.length} code(s); this server is not an authoritative source for ${cs.title}`);
+    if (!(cs.complete != null ? cs.complete : cs.ours)) warnings.push(`${cs.title}: a fragment of ${cs.concepts.length} code(s); this server is not an authoritative source for ${cs.title}`);
     const byCode = new Map(cs.concepts.map((x) => [x.code, x]));
     const codes = inc.codes || cs.concepts.map((x) => x.code);
     const missing = [];

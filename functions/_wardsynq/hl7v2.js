@@ -56,13 +56,19 @@ function esc(value) {
     .replace(/[\r\n]+/g, " ");
 }
 
-/** PURE. YYYYMMDDHHMMSS, or "" when the instant is not one. Never a plausible-looking guess. */
+/**
+ * PURE. YYYYMMDDHHMMSS+ZZZZ, or "" when the instant is not one. Never a plausible-looking guess.
+ *
+ * The offset is ALWAYS explicit (+0000: these digits are UTC), never bare - a bare HL7 v2 timestamp
+ * is read by a spec-following receiver as ITS OWN local time (see hl7-normalize.js's hl7Date, the
+ * inbound mirror of this), so an outbound timestamp with no zone is silently misread the same way.
+ */
 function ts(iso) {
   const ms = Date.parse(str(iso));
   if (!Number.isFinite(ms)) return "";
   const d = new Date(ms);
   const p = (n, w) => String(n).padStart(w || 2, "0");
-  return `${d.getUTCFullYear()}${p(d.getUTCMonth() + 1)}${p(d.getUTCDate())}${p(d.getUTCHours())}${p(d.getUTCMinutes())}${p(d.getUTCSeconds())}`;
+  return `${d.getUTCFullYear()}${p(d.getUTCMonth() + 1)}${p(d.getUTCDate())}${p(d.getUTCHours())}${p(d.getUTCMinutes())}${p(d.getUTCSeconds())}+0000`;
 }
 
 /** PURE. YYYYMMDD for a date of birth. A partial or unparseable date is EMPTY, never completed. */
@@ -239,13 +245,20 @@ function oruMessage(input) {
   }
 
   /* OBR-4 is the panel that was ordered; OBR-3 the filler's own number for it, which is what a
-   * receiver quotes back when it asks about a result. */
-  segments.push(segment("OBR", [
-    "1", esc(report.serviceRequestId || ""), esc(report.id),
-    esc(report.code || "Laboratory result"),
-    "", "", ts(report.reportedAt), "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-    ts(report.reportedAt), "", obxStatus(report.status),
-  ]));
+   * receiver quotes back when it asks about a result.
+   * Built BY FIELD NUMBER, as the PV1 builder above already is: counting blanks by eye is exactly
+   * how OBR-22 (Results Rpt/Status Chng Date/Time) and OBR-25 (Result Status: F/P/C) ended up two
+   * fields off, at OBR-24 (a coded field, not a timestamp) and OBR-26 (Parent Result) instead. */
+  const obr = [];
+  const atObr = (n, v) => { obr[n - 1] = v; };
+  atObr(1, "1");
+  atObr(2, esc(report.serviceRequestId || ""));
+  atObr(3, esc(report.id));
+  atObr(4, esc(report.code || "Laboratory result"));
+  atObr(7, ts(report.reportedAt));               // OBR-7 Observation Date/Time
+  atObr(22, ts(report.reportedAt));              // OBR-22 Results Rpt/Status Chng - Date/Time
+  atObr(25, obxStatus(report.status));           // OBR-25 Result Status
+  segments.push(segment("OBR", Array.from(obr, (v) => v || "")));
 
   rows.forEach((o, idx) => {
     const range = o.referenceRange || null;
@@ -265,7 +278,9 @@ function oruMessage(input) {
        * would be this file interpreting a result. */
       o.sourceCritical === true ? "AA" : "",
       "", "", obxStatus(report.status),
-      "", "", "", "",
+      "", "",
+      // OBX-14, Date/Time of the Observation - two blanks, not four, or the timestamp lands on
+      // OBX-16 (Responsible Observer) instead and OBX-14 is empty.
       ts((o.meta && o.meta.effectiveAt) || o.effectiveAt || report.reportedAt),
     ]));
   });

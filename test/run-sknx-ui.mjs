@@ -89,7 +89,9 @@ try {
 
   // Force the module ON + a v2beta (dual-engine) entitlement BEFORE opening, per the task brief.
   await ev(`localStorage.setItem("smd_sknx","1"); localStorage.setItem("smd_sknx_rx","0"); return 1;`);
-  await ev(`window.SMD_PRO = { isProSync: function () { return true; } }; window.SMD_XACCESS = { tierFor: function () { return "v2beta"; } }; return 1;`);
+  // Owner 2026-09-26: a Pro entitlement alone no longer opens SknX; access = a code OR an early-access
+  // plan, so the stub grants the plan (hasEarlyAccess) alongside the v2beta entitlement it tests.
+  await ev(`window.SMD_PRO = { isProSync: function () { return true; }, hasEarlyAccess: function () { return true; } }; window.SMD_XACCESS = { tierFor: function () { return "v2beta"; } }; return 1;`);
   ok(await ev(`return SKNX.isOn();`) === true, "SKNX.isOn() is true once smd_sknx=1 + a v2beta entitlement are stubbed");
 
   // Home tile + ACT dispatch wiring: the gated tile must be in the real DOM and clicking it (through

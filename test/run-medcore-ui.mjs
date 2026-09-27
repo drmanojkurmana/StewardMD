@@ -61,14 +61,28 @@ const chartPatient = `
   ICU.reset(); ICU.ingestPatient({ name: "Core Pt", bed: "4", age: 65, sex: "M", weightKg: 72 });
   var S = ICU.state();
   S.vitals.push({ ts: Date.now() - 180*60000, map: 78, hr: 98, spo2: 97 });
-  S.vitals.push({ ts: Date.now() - 20*60000,  map: 55, hr: 128 });
+  S.vitals.push({ ts: Date.now() - 20*60000,  map: 55, hr: 128, spo2: 90 });
   ICU.savePatient(); ICU.open();
   var card = document.querySelector('[data-icu-act^="openpt"]');
   if (card) card.click();
   return document.querySelectorAll(".icu-wrap").length;`;
 
-async function openWorkspace() {
-  await ev(chartPatient);
+/* A patient charted once, long ago: the newest SpO2 and HR are real numbers but older than their
+ * freshness window, so they come back as STALE rather than as values. This is the case that used
+ * to render "last 96 9 h ago". */
+const stalePatient = `
+  try { for (var i=localStorage.length-1;i>=0;i--){ var k=localStorage.key(i); if(k&&k.indexOf("stewardmd_icu_patients")===0) localStorage.removeItem(k); } } catch(e){}
+  try { localStorage.setItem("smd_icu_groups","0"); } catch(e){}
+  ICU.reset(); ICU.ingestPatient({ name: "Stale Pt", bed: "3", age: 54, sex: "F", weightKg: 61 });
+  var S = ICU.state();
+  S.vitals.push({ ts: Date.now() - 9*60*60000, hr: 88, spo2: 96 });
+  ICU.savePatient(); ICU.open();
+  var card = document.querySelector('[data-icu-act^="openpt"]');
+  if (card) card.click();
+  return document.querySelectorAll(".icu-wrap").length;`;
+
+async function openWorkspace(script) {
+  await ev(script || chartPatient);
   for (let i = 0; i < 40; i++) {
     if (await ev(`return document.querySelectorAll(".icu-wrap").length`) > 0) return true;
     await sleep(250);
@@ -136,6 +150,10 @@ try {
   ok(on && on.subs.indexOf("What changed") !== -1, "the What changed list is painted");
   ok(on && on.subs.indexOf("Missing information") !== -1, "the Missing information list is painted");
   ok(on && on.rows.some((r) => /MAP/.test(r) && /78/.test(r) && /55/.test(r)), "the falling MAP is shown with both ends: " + JSON.stringify((on && on.rows) || []).slice(0, 220));
+  ok(on && on.rows.some((r) => /MAP.*55 mmHg/.test(r)), "a word unit keeps its space in the changed list: " + JSON.stringify((on && on.rows) || []).slice(0, 220));
+  // The row is a flex container, so a unit left as its own flex item gets the row's 8px gap and
+  // renders "91 %" no matter what the markup puts between them. Value and unit must be ONE item.
+  ok(on && on.rows.some((r) => /SpO2.*90%/.test(r)), "% closes up in the changed list too: " + JSON.stringify((on && on.rows) || []).slice(0, 260));
   ok(on && on.rows.some((r) => /Respiratory rate|Conscious level/.test(r)), "an uncharted core observation is listed as missing");
   ok(on && /no prediction, no alert/i.test(on.foot), "the panel states what it is not");
   ok(on && /Not a complete list/.test(on.foot),
@@ -155,6 +173,23 @@ try {
   ok(inert && inert.alertsUnchanged, "asking Medical Core changes no alert state");
   ok(inert && inert.summaryShape === "asOf,changed,missingInformation,provenance,schema", "the summary carries only the deterministic lists: " + (inert && inert.summaryShape));
   ok(inert && inert.hasProbability === false, "there is no probability anywhere in Phase 1 output");
+
+  /* ------------------------------------ 4. a stale reading must not read as one run-together number */
+  ok(await openWorkspace(stalePatient), "the workspace opens for a patient charted only 9 h ago");
+  const stale = await J(`
+    var rows = [].slice.call(document.querySelectorAll(".icu-mc-row")).map(function(e){return e.textContent.replace(/\\s+/g," ").trim();});
+    return JSON.stringify({ rows: rows, ages: rows.filter(function(r){return /ago/.test(r);}) });`);
+  ok(stale && stale.ages.length > 0, "a stale observation is listed with its age: " + JSON.stringify((stale && stale.rows) || []).slice(0, 200));
+  // The defect this pins: "last 96 9 h ago" put a value and an age side by side with only a space
+  // between them, so "96 9" could be read as one number. Every stale row must separate the two.
+  ok(stale && stale.ages.every((r) => !/\d\s+\d/.test(r)),
+    "no stale row leaves two numbers separated only by a space: " + JSON.stringify((stale && stale.ages) || []));
+  ok(stale && stale.ages.every((r) => /,\s/.test(r)),
+    "the value and the age are separated by a comma: " + JSON.stringify((stale && stale.ages) || []));
+  ok(stale && stale.ages.some((r) => /last 96%, /.test(r)),
+    "the stale value carries its unit, with % closed up as everywhere else in the app: " + JSON.stringify((stale && stale.ages) || []));
+  ok(stale && stale.ages.some((r) => /last 88 bpm, /.test(r)),
+    "a word unit keeps its space: " + JSON.stringify((stale && stale.ages) || []));
 } catch (e) {
   ok(false, "harness error: " + (e && e.message));
 } finally {

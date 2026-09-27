@@ -4926,6 +4926,8 @@
     "stt-unavailable": "On-device dictation is not available on this build.",
     "clinical-unavailable": "Clinical dictation is not ready on this device.",
     "transcription-failed": "Could not transcribe that - try again.",
+    "stt-fallback-exhausted": "Your dictation credits are used up. Top up, or use Clinical dictation on the phone.",
+    "stt-fallback-signin": "Sign in and verify your mobile number to use cloud dictation.",
     "speech-error": "Dictation stopped - try again.",
   };
   // Human label for the field being dictated ("BP systolic"), so the strip says what it is filling.

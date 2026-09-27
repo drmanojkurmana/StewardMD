@@ -14,6 +14,8 @@
  *   window.SMD_enableNativePush() request permission + register  → Promise<bool granted>
  *   window.SMD_disableNativePush() forget this device's token on the server
  *   window.SMD_nativePushOn()     best-effort "is it on" (local flag)
+ *   window.SMD_pushDiagnostics()  → Promise<{native,plugin,permission,token,flag}>: what only
+ *                                 the DEVICE knows. The server sees no further than Apple.
  */
 (function () {
   "use strict";
@@ -307,6 +309,36 @@
       } catch (x) {}
     });
   }
+
+  /* What this DEVICE can tell us about push, which the server cannot see at all.
+   *
+   * Owner, repeatedly: the test button says "Test notification sent" and nothing arrives. That
+   * message was never a lie - the server only counts a send when APNs returns 200 - but APNs
+   * returns 200 for a handset whose user has notifications switched OFF for the app, and iOS then
+   * drops the payload in silence. Every link after "Apple accepted it" is invisible server-side,
+   * so a test that only reports the server's answer can never explain the common failure.
+   *
+   * Returns the plain facts, for the caller to turn into one sentence:
+   *   native      false in a browser: push needs the installed app
+   *   plugin      false when the build shipped without the push plugin
+   *   permission  the OS answer: "granted" | "denied" | "prompt" | "prompt-with-rationale"
+   *   token       true once APNs has handed this install a device token
+   *   flag        our own "the doctor opted in" marker
+   */
+  window.SMD_pushDiagnostics = async function () {
+    var out = { native: !!native, plugin: false, permission: "unknown", token: false, flag: false };
+    try { out.flag = window.SMD_nativePushOn(); } catch (e) {}
+    var P = null;
+    try { P = plugin(); } catch (e) {}
+    out.plugin = !!P;
+    if (!P) return out;
+    try {
+      var perm = await P.checkPermissions();
+      out.permission = (perm && perm.receive) || "unknown";
+    } catch (e) {}
+    out.token = !!_token;
+    return out;
+  };
 
   // Request OS permission and register. Resolves true when granted+registering.
   window.SMD_enableNativePush = async function () {

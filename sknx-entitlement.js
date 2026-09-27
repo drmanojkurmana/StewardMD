@@ -1,7 +1,7 @@
 // sknx-entitlement.js — Free/V1/V2Beta resolver for SknX (clone of thorex-entitlement.js).
 (function () {
   "use strict";
-  function defIsPro() { try { if (window.SMD_PRO && SMD_PRO.isProSync && SMD_PRO.isProSync()) return true; if (typeof document !== "undefined" && document.body && document.body.classList.contains("pro-verified")) return true; } catch (e) {} return false; }
+  function defIsPro() { try { if (window.SMD_PRO && SMD_PRO.isProSync && SMD_PRO.isProSync()) return true; if (window.SMD_PRO && SMD_PRO.hasEarlyAccess && SMD_PRO.hasEarlyAccess()) return true; /* early-access plan (Clinician Pro / Ultimate) reads at least v1 */ if (typeof document !== "undefined" && document.body && document.body.classList.contains("pro-verified")) return true; } catch (e) {} return false; }
   function defTier() { try { return (window.SMD_XACCESS && SMD_XACCESS.tierFor) ? SMD_XACCESS.tierFor("sknx") : "v1"; } catch (e) { return "v1"; } }
   function resolve(opts) {
     opts = opts || {};

@@ -5,6 +5,58 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-26 · eLogbook made easy: HoD may approve joins and assign guides; supervisor falls back to the guide
+
+**Decision (owner: "make it user friendly and easy").** A resident can request to join by institution
+code; an Academic Cell OR the department HoD approves in one tap. The HoD may also assign guides, in
+their department scope only. A blank supervisor routes to the resident's guide, and with no guide the
+entry waits (unassigned) in the HoD queue instead of being refused. Enrolling an email that has not
+signed in yet leaves a pending invite.
+**Why.** NMC requires monthly guide authentication (PGMER 5.2(vii)), not a named supervisor per entry;
+the old chain made authentication unreachable (no guide could be assigned in the app).
+**What did not move.** No self-verification, verified entries immutable, one signature per month by a
+registration-verified signer, the role is never self-declared. **Reversible:** env
+`PGLOG_SUPERVISOR_FALLBACK`, `PGLOG_INVITES`, `PGLOG_JOIN_REQUESTS` ("0" restores) and client
+`smd_pglog_easy`. **Status:** built on the role-plans branch (PR #1272).
+
+## 2026-09-26 · Role box locks Home tools by role; trainees never hold the prescribing claim
+
+**Decision (owner).** A Role box at sign-up and in Profile (Medical student / Intern / PG Resident /
+Doctor) decides which Home tools open; the rest stay visible but locked with an explanation.
+Clinician Pro and Ultimate open the beta imaging AI without a code. Dictation credits are shown only as
+credits (Rs 10 = 100 credits), never in rupees, with buyable packs. All audit bugs fixed
+(vault/Role-Tiers.md section 6).
+**Why the role lock is presentation only.** The declared role is self-reported and changeable, so it
+must never be the thing that stops prescribing or unlocks paid work: those stay on server claims.
+That is also why approved students and interns now get `traineeVerified`, never `verified`.
+**Trade-off.** A user can mis-declare to see more tiles; the tools behind them still enforce their own
+gates. **Status.** Built on branch `claude/role-based-features-audit-9pph8l`; live after merge + native
+rebuild. Open: backfill of the phone index, owner review of legacy trainee approvals.
+
+## 2026-09-26 · Cloud dictation fallback gets its own monthly credit; Clinician struck prices
+
+**Decision (owner).** The cloud speech-to-text fallback (audio sent to `/api/ai/transcribe` only when
+the phone cannot transcribe, about Rs 6 per 5-minute consult) is cut from a separate monthly rupee
+wallet: Free Rs 10, Pro accounts Rs 50, Clinician / Clinician Pro Rs 100. On-device dictation stays
+free and unlimited. Struck-through anchors: Clinician Rs 3,499, Clinician Pro Rs 4,999.
+**Why.** The fallback is the only dictation path that costs real money per second; a wallet caps it
+without touching the free on-device path. **Trade-off.** A doctor whose phone cannot run Whisper
+runs out mid-month and is told to use on-device dictation. **Status.** Built behind
+`STT_FALLBACK_CREDITS_ON` (default ON, `"0"` off); live only after merge to main.
+
+## 2026-09-26 · Role-based plans: Co-Resident = two logins, one Trainee price, existing Pro becomes Ultimate
+
+**Decision (owner).** (1) Co-Resident is one subscription with two logins, one device each, not one
+shared login: the PG logbook, verification and Rx must name one doctor. (2) UG Student and Intern
+share one Trainee price; the verified role decides features. (3) Every account holding the `pro`
+claim today moves to a new never-sold **Ultimate** tier (everything, for friends and testers),
+through a reviewed, reversible migration. (4) Every plan, Free included, is limited to one phone +
+one iPad. (5) The Free AI and imaging allowance unlocks only after mobile-number verification
+(`phoneVerified`), with one number per account. (6) Plan prices stay as live today; the 80%-margin allowance and token/FollowCare
+pack model starts 3 months later (target 2026-12-26), with an Introductory offer at today's terms until
+then. WardSynQ is the only plan newly priced. **Open:** beta imaging AI without a code, strike-through
+anchors, sweep vs phone-verified Free. Full audit, matrix and price model: [[Role-Tiers]]. **Status:** nothing enforced yet.
+
 ## 2026-09-26 · Medical Core ships its DETERMINISTIC half ON by default as BETA; the model half stays off
 
 **Decision.** `smd_medcore` defaults to `true` in `medcore-flags.js`. Owner's call. What that turns on for every
@@ -10070,6 +10122,44 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
 - **Why not delete them**: the page is the truth; hiding a printed figure would make the app disagree with
   the document a clinician can open. The caution explains, the pool and reasoning ignore it.
 - **Reversible**: the checks live in `validateRow` and the store's `POOL_MIN_K`; the row flags are data.
+
+## 2026-09-26 - The free Pro week is once per doctor (reg, phone, device), not once per account
+- **Context**: owner: "7 days free trial is one time and once per number verification ... same device id no
+  second trial ... old signout account already pro new sign in again creating pro trial dont activate".
+  Every free-week door was keyed per uid, so a new Google account restarted it; the pending-review grant ran
+  before the one-reg-one-account check; the owner's approve moved a claimed reg silently; reject then
+  re-approve restarted the week.
+- **Decision** (`functions/_trial_ledger.js`, plan `vault/plans/One-Time-Trial.md`): a permanent ledger of
+  peppered HMACs (`trial:used:<kind>:<hash>` -> uid). Hard kinds deny a second account: registration number,
+  OTP-verified phone, native device id (`hw-`, ANDROID_ID / iOS id from @capacitor/device). Soft kinds are
+  recorded, never decisive: the localStorage id (`dev-`, lost on reinstall) and the IP /24 (hospital wifi).
+  A denied account is still VERIFIED (prescription pad works) with claim `trialDenied` and no week;
+  `/billing/status` answers `reason:"trial-used"` and the explainer sells, it never sends them to verify.
+- **Owner picks (2026-09-26, "go with your recommendations")**: IP is a signal only; a phone number blocks
+  the second TRIAL, not a second account; pending review keeps 7 days of access but through the ledger;
+  no DeviceCheck in v1.
+- **Deviation from the plan**: "Skip for now" is NOT gated. It writes no claim; it is the free plan for an
+  unverified account, not Pro. Gating it would lock a second person on a shared phone out of the free plan.
+- **Only an account that held a week can own a fingerprint** (a free-plan account verifying its phone does
+  not reserve the number), and a TYPED reg in the review path is checked but never recorded, so nobody can
+  poison the real doctor's number.
+- **The week never restarts for one account**: `trial:uid:<uid>` keeps the first grant time; a re-upload in
+  review and a reject/re-approve both reuse it. Pending time counts toward the 7 days.
+- **IMEI is impossible** (Android 10+ and iOS do not expose it to apps), so it is not attempted.
+- **Reversible**: `TRIAL_ONCE_ON` off = byte-for-byte the old behaviour (tested). Rollout: set `TRIAL_PEPPER`,
+  run the backfill, a week in `shadow`, then `1`.
+
+## 2026-09-26 - Shake to report a bug; Bug Report Centre replaces AgentConnect and My Clinic in the sidebar
+- **Context**: owner asked for shake-to-report with pointing at the problem, server-saved, a 24-hour fix
+  promise, a sidebar Bug Report Centre with developer replies, and AgentConnect + My Clinic removed.
+- **Decision**: a bug is a support ticket of `kind:"bug"` (`_support.js`), not a new store: the owner's
+  existing Support pane, complaint ids and reply thread already existed. `dueAt` = +24 h is shown to both
+  sides. Owner reply sends a push (id only). Screenshot optional, 30-day TTL, deleted on resolve.
+- **Why ticket, not the WardSynQ bug-reports module**: that one is tenant-scoped (hospital record store);
+  a doctor on the consumer app has no tenant.
+- **Sidebar**: only the sidebar rows were removed; AgentConnect (home tile, More sheet) and My Clinic (OPD
+  queue) remain reachable, so nothing is lost. Tour text updated.
+- **Reversible**: `smd_shake_report=0` turns shake off per device; the Centre still has "Report a bug".
 
 ## 2026-09-26 - A clinical protocol CAN be assigned, as case-sheet instructions the doctor ticks
 - **Context**: on 2026-09-25 the OPD Protocol tab shipped with "Assign exists only on oncology rows; a

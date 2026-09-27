@@ -15,7 +15,10 @@
  *   openGate(feature, onUnlock)  force the gate UI (Settings entry point)
  *   ensure(feature) -> Promise   {active} — startup/authoritative check (verify or restore)
  *   activate(feature, code)      -> Promise {ok,message}
- *   isActiveCached(feature)      sync best-effort from the local cache (fast tile gate)
+ *   isActiveCached(feature)      sync best-effort from the local cache (fast tile gate); also true
+ *                                when planUnlocks(feature)
+ *   planUnlocks(feature)         true for an imaging module on an early-access plan
+ *                                (SMD_PRO.hasEarlyAccess: Clinician Pro / Ultimate), no code needed
  *   clear(feature)               drop the local token (sign-out)
  *   devBypass()                  true on a debug build / dev opt-in
  */
@@ -61,7 +64,15 @@
   // Authorisation requires an actual signed token — a raw {active:true} cache with no token (a
   // hand-set localStorage spoof) is NOT treated as active, and the real gate is the server anyway.
   function cachedActive(f) { var s = loadState(f); return !!(loadToken(f) && s && s.active); }
-  function isActiveCached(f) { return devBypass() || cachedActive(f); }
+  // Plan-included early access (owner decision 2026-09-26): Clinician Pro and Ultimate open the four
+  // imaging modules with no code. The tier list lives in ONE helper, SMD_PRO.hasEarlyAccess()
+  // (account.js); this only restricts it to the four imaging features. Every other tier falls
+  // through to the code path below, unchanged.
+  var IMAGING = { fundx: 1, kardiox: 1, thorex: 1, sknx: 1 };
+  function planUnlocks(f) {
+    try { return !!IMAGING[f] && !!(window.SMD_PRO && SMD_PRO.hasEarlyAccess && SMD_PRO.hasEarlyAccess()); } catch (e) { return false; }
+  }
+  function isActiveCached(f) { return devBypass() || cachedActive(f) || planUnlocks(f); }
   // Sync best-effort tier reader from the cached state — no network round-trip. Defaults to
   // "v1" whenever the feature isn't active or the cached state predates tiering.
   function tierFor(f) {
@@ -195,14 +206,16 @@
       '</div>';
     el.classList.add("on");
   }
-  function renderEnabled(feature, deviceModel) {
+  function renderEnabled(feature, deviceModel, viaPlan) {
     var t = TITLES[feature] || feature;
     el.innerHTML =
       '<div class="xa-card">' +
         '<div class="xa-badge">🟢 ' + esc(t) + ' Beta enabled</div>' +
         '<div class="xa-ic">✅</div>' +
         '<h3>You\'re in</h3>' +
-        '<p class="xa-sub">' + esc(t) + ' is unlocked on this device' + (deviceModel ? ' (' + esc(deviceModel) + ')' : '') + '.</p>' +
+        '<p class="xa-sub">' + (viaPlan
+          ? esc(t) + ' is included with your plan as an early-access beta. No access code needed. The model is not yet clinically validated.'
+          : esc(t) + ' is unlocked on this device' + (deviceModel ? ' (' + esc(deviceModel) + ')' : '') + '.') + '</p>' +
         '<div class="xa-btns"><button class="xa-primary" data-xa="open">Open ' + esc(t) + '</button><button class="xa-ghost xa-close" data-xa="close">Close</button></div>' +
       '</div>';
     el.classList.add("on");
@@ -223,6 +236,7 @@
   function openGate(feature, onUnlock) {
     mount();
     current.feature = feature; current.onUnlock = onUnlock || null;
+    if (planUnlocks(feature)) return renderEnabled(feature, null, true);
     if (!signedIn()) return renderSignin(feature);
     // If already active (e.g. opened from Settings), show the enabled state; else the locked entry.
     if (cachedActive(feature)) { renderEnabled(feature, (loadState(feature) || {}).deviceModel); ensure(feature).then(function (r) { if (!r.active && el && el.classList.contains("on")) renderLocked(feature); }); return; }
@@ -234,12 +248,16 @@
   // cached token), otherwise shows the gate. Cached opens still re-verify in the background so a
   // revocation locks the feature by the next open.
   function gate(feature, onUnlock) {
-    if (devBypass()) { if (onUnlock) onUnlock(); return; }
+    if (devBypass() || planUnlocks(feature)) { if (onUnlock) onUnlock(); return; }
     if (cachedActive(feature)) { if (onUnlock) onUnlock(); verify(feature); return; }
     ensure(feature).then(function (r) { if (r.active) { if (onUnlock) onUnlock(); } else openGate(feature, onUnlock); });
   }
 
-  window.SMD_XACCESS = { gate: gate, openGate: openGate, ensure: ensure, activate: activate, verify: verify, status: status, isActiveCached: isActiveCached, tierFor: tierFor, token: token, clear: clear, devBypass: devBypass, onChange: onChange };
+  window.SMD_XACCESS = { gate: gate, openGate: openGate, ensure: ensure, activate: activate, verify: verify, status: status, isActiveCached: isActiveCached, planUnlocks: planUnlocks, tierFor: tierFor, token: token, clear: clear, devBypass: devBypass, onChange: onChange };
+
+  // The purchase tier lands from /api/billing/status after first paint; tell the Settings rows
+  // (ACTIVE / CODE REQUIRED) so a Clinician Pro or Ultimate account does not read as locked.
+  try { window.addEventListener("smd:tier", function () { Object.keys(IMAGING).forEach(notify); }); } catch (e) {}
 
   // Startup: if we hold a token, re-verify it (a remote revocation locks on launch); if we don't but
   // the user is signed in, try to restore it from the server (same account + same device after a

@@ -82,10 +82,28 @@ const UNIT_ALIASES = Object.freeze({
   "10*3/ul": "10*3/uL", "10*3/uL": "10*3/uL", "10^3/ul": "10*3/uL", "x103/ul": "10*3/uL",
   "/ul": "10*3/uL_raw", "cells/ul": "10*3/uL_raw", "/cumm": "10*3/uL_raw", "/cmm": "10*3/uL_raw",
   "{inr}": "{INR}", "": "{INR}_bare",
+  "meq/l": "mEq/L", "mEq/L": "mEq/L",
+  "lakhs/cumm": "lakhs/cumm", "lakh/cumm": "lakhs/cumm", "lakhs/cmm": "lakhs/cumm", "lakh/cmm": "lakhs/cumm", "lakhs/ul": "lakhs/cumm", "lakh/ul": "lakhs/cumm",
+  "10^9/l": "10*3/uL", "x10^9/l": "10*3/uL", "10*9/l": "10*3/uL",
 });
 function canonUnit(u) {
   const k = str(u);
   return UNIT_ALIASES[k] || UNIT_ALIASES[k.toLowerCase()] || k;
+}
+
+/* CLIN-07: the ward's own templates report potassium and sodium in mEq/L, the INR with no unit, and
+ * counts per cumm or in lakhs per cumm, and every one of those was UNCOMPARABLE, so no critical value
+ * from a template ever opened a loop. Only EXACT equivalences here, never an analyte conversion:
+ * mEq/L is mmol/L for a monovalent ion alone (a calcium in mEq/L is twice its mmol/L), an INR is a
+ * ratio with no unit, and a count per cumm is per microlitre. */
+const MONOVALENT = new Set(["2823-3", "2951-2", "2075-0", "2524-7"]);
+const COUNT_FACTOR = Object.freeze({ "10*3/uL": 1, "10*3/uL_raw": 0.001, "lakhs/cumm": 100 });
+function unitScale(code, unit) {
+  const u = canonUnit(unit);
+  if (u === "mEq/L" && MONOVALENT.has(code)) return { unit: "mmol/L", factor: 1 };
+  if (u === "{INR}_bare" && code === "6301-6") return { unit: "{INR}", factor: 1 };
+  if (COUNT_FACTOR[u]) return { unit: "10*3/uL", factor: COUNT_FACTOR[u] };
+  return { unit: u, factor: 1 };
 }
 
 /** PURE. The site's limits, with any org override applied per analyte. */
@@ -140,26 +158,36 @@ function classify(obs, limits) {
 
   // A value in unknown or mismatched units is not comparable. Reporting it as within limits would
   // be a false reassurance, so it is reported as UNCOMPARABLE instead of as normal.
-  const want = canonUnit(spec.unit), got = canonUnit(obs.unit);
-  if (spec.unit && got !== want) {
+  const want = unitScale(str(obs.code), spec.unit), got = unitScale(str(obs.code), obs.unit);
+  if (spec.unit && got.unit !== want.unit) {
     return { critical: false, uncomparable: true, basis: "unit-mismatch", code: obs.code, display: spec.display, value: obs.value, unit: obs.unit || null, expectedUnit: spec.unit };
   }
+  // In the limit's own unit. The value recorded on the loop stays the one the laboratory reported.
+  const v = spec.unit ? (value * got.factor) / want.factor : value;
 
-  if (spec.low !== null && value <= spec.low) {
+  if (spec.low !== null && v <= spec.low) {
     return { critical: true, basis: "limit", code: obs.code, display: spec.display, value, unit: obs.unit || spec.unit, bound: { side: "low", limit: spec.low } };
   }
-  if (spec.high !== null && value >= spec.high) {
+  if (spec.high !== null && v >= spec.high) {
     return { critical: true, basis: "limit", code: obs.code, display: spec.display, value, unit: obs.unit || spec.unit, bound: { side: "high", limit: spec.high } };
   }
   return null;
 }
 
-/** PURE. One loop per (report, analyte): a re-ingested result reopens nothing and duplicates nothing. */
+/** PURE. One loop per (report, analyte, value): a re-ingested result reopens nothing and duplicates nothing. */
 
+const slugOf = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 function loopIdFor(reportId, code) {
-  const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
-  const r = slug(reportId), c = slug(code);
+  const r = slugOf(reportId), c = slugOf(code);
   return r && c ? `wsq-crit-${r}-${c}` : null;
+}
+/** PURE. Is this the result the loop was opened for? A NUMBER that changed (or changed unit) is a different
+ * result. Text is not: a blood culture's growth, then its identification, is one positive culture and one loop
+ * (the culture route relies on it). */
+function sameResult(loop, hit) {
+  const a = numericValue(loop.value), b = numericValue(hit.value);
+  if (a === null || b === null) return true;
+  return a === b && str(loop.unit) === str(hit.unit);
 }
 
 /**
@@ -195,6 +223,8 @@ function CriticalResultLoop(input) {
     value: i.value == null ? null : i.value, unit: i.unit || null,
     basis: i.basis,                       // "lab" | "limit" — whose authority flagged this
     bound: i.bound || null,
+    // CLIN-07: set when basis is "unit-mismatch": the unit the limit is in, which the result was not.
+    expectedUnit: i.expectedUnit || null,
     state: STATES.includes(i.state) ? i.state : "open",
     reportedAt: i.reportedAt || null,     // when the RESULT was reported: the clock the loop runs on
     openedAt: i.openedAt || null,
@@ -283,16 +313,28 @@ async function openCriticalLoops(request, env, ctx) {
     rows.push({ code: report.code, display: report.code, value: null, unit: null, sourceCritical: true, id: null });
   }
 
+  let openedForReview = 0;
   for (const obs of rows) {
     const hit = classify(obs, table);
     if (!hit) continue;
-    if (hit.uncomparable) { uncomparable.push(hit); continue; }
+    /* CLIN-07: a value nobody could compare with the limit opens a loop too, marked unit-mismatch, so a
+     * clinician looks at it. Listing it only on the laboratory's release response left a potassium of 7.5
+     * in an odd unit with nobody on the ward told. */
+    if (hit.uncomparable) uncomparable.push(hit);
 
-    const id = loopIdFor(reportId, hit.code);
-    if (!id) continue;
-    let current;
-    try { current = await svc.get("CriticalResultLoop", id); }
-    catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), opened, loops: out }; }
+    const baseId = loopIdFor(reportId, hit.code);
+    if (!baseId) continue;
+    let id = baseId, current;
+    try {
+      current = await svc.get("CriticalResultLoop", id);
+      /* CLIN-14: a CHANGED number on the same report (a correction) is a new result a clinician has not
+       * seen, so it gets its own loop, keyed by the value. The same value again is a re-ingest and finds
+       * its loop. */
+      if (current && !sameResult(current, hit)) {
+        id = `${baseId}-v-${slugOf(`${str(hit.value)} ${str(hit.unit)}`) || "x"}`;
+        current = await svc.get("CriticalResultLoop", id);
+      }
+    } catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), opened, loops: out }; }
     // Already known. An acknowledged or closed loop is NEVER reopened by a re-ingest: that would
     // discard a clinician's acknowledgement because a message arrived twice.
     if (current) { out.push(summary(current)); continue; }
@@ -319,19 +361,19 @@ async function openCriticalLoops(request, env, ctx) {
       id, patientId: report.patientId, encounterId: report.encounterId || null,
       reportId, observationId: obs.id || null,
       code: hit.code, display: hit.display, value: hit.value, unit: hit.unit,
-      basis: hit.basis, bound: hit.bound, state: "open",
+      basis: hit.basis, bound: hit.bound, state: "open", expectedUnit: hit.expectedUnit || null,
       reportedAt, openedAt: new Date().toISOString(), notification, notifications: notices,
     });
     try {
       const res = await svc.put(loop, { idempotencyKey: ctx.idempotencyKey ? `${ctx.idempotencyKey}:${id}` : null });
-      opened += 1;
+      if (hit.uncomparable) openedForReview += 1; else opened += 1;
       out.push(summary({ ...loop, version: res.record.version }));
     } catch (e) {
       return { ...base, ...writeFailure(e, { loopId: id, opened, loops: out, actor: resolved.actor.id }) };
     }
   }
   return {
-    ...base, ok: true, reportId, opened, loops: out,
+    ...base, ok: true, reportId, opened, openedForReview, loops: out,
     // Never silently dropped: a value nobody could compare is reported as uncomparable, not normal.
     ...(uncomparable.length ? { uncomparable } : {}),
   };
@@ -350,7 +392,7 @@ function summary(l, nowMs, policy) {
     loopId: l.id, patientId: l.patientId, encounterId: l.encounterId || null,
     reportId: l.reportId, observationId: l.observationId || null,
     code: l.code, display: l.display, value: l.value, unit: l.unit,
-    basis: l.basis, bound: l.bound || null, state: l.state,
+    basis: l.basis, bound: l.bound || null, expectedUnit: l.expectedUnit || null, state: l.state,
     reportedAt: l.reportedAt, openedAt: l.openedAt,
     acknowledgedBy: l.acknowledgedBy || null, acknowledgedByName: l.acknowledgedByName || null, acknowledgedAt: l.acknowledgedAt || null,
     action: l.action || null, closedBy: l.closedBy || null, closedAt: l.closedAt || null,

@@ -42,7 +42,7 @@
 
 import { cfgPrice } from "./_billingcfg.js";
 
-export const FEATURES = ["care", "scribe", "msg"];
+export const FEATURES = ["care", "scribe", "msg", "dict"];
 
 export function quotaOn(env) { try { return String(env && env.QUOTA_METERS_ON) === "1"; } catch (e) { return false; } }
 
@@ -168,16 +168,22 @@ export function quotaPacks(env) {
     // Clinic Messaging queue pack. Consumable, and the balance NEVER expires - which is the whole
     // point of offering it next to a subscription: a clinic with a busy week buys once, not forever.
     "msg.100": pack({ key: "msg.100", feature: "msg", units: 100, amount: P("PACK_MSG_100", 59900), webAmount: P("PACK_MSG_100_WEB", 54900), label: "100 patients", product: "in.stewardmd.msg.100" }),
+    /* Dictation credits: the cloud speech-to-text fallback (owner, 2026-09-26). Shown ONLY as credits,
+     * never as rupees per unit (perUnit 0 hides the "each" line): 1 credit = 10 paise of our cost,
+     * about 12 credits a minute of cloud audio. 80% margin at the App Store price: 300 for Rs 199
+     * (cost Rs 30), 1,000 for Rs 699 (cost Rs 100). Consumable; bought credits never expire. */
+    "dict.300": Object.assign(pack({ key: "dict.300", feature: "dict", units: 300, amount: P("PACK_DICT_300", 19900), label: "300 dictation credits", product: "in.stewardmd.dict.300" }), { perUnit: 0 }),
+    "dict.1000": Object.assign(pack({ key: "dict.1000", feature: "dict", units: 1000, amount: P("PACK_DICT_1000", 69900), label: "1,000 dictation credits", product: "in.stewardmd.dict.1000", popular: true }), { perUnit: 0 }),
   };
 }
 // Selection key "pack:care.25" -> "care.25". Mirrors tokenPackFor() in _credits.js.
 export function quotaPackFor(planKey) {
-  const m = /^pack:((?:care|scribe|msg)\.\d+)$/.exec(String(planKey || ""));
+  const m = /^pack:((?:care|scribe|msg|dict)\.\d+)$/.exec(String(planKey || ""));
   return m ? m[1] : null;
 }
 // iOS product id -> selection key. "in.stewardmd.care.25" -> "pack:care.25".
 export function packKeyForProduct(productId) {
-  const m = /^in\.stewardmd\.(care|scribe|msg)\.(\d+)$/.exec(String(productId || ""));
+  const m = /^in\.stewardmd\.(care|scribe|msg|dict)\.(\d+)$/.exec(String(productId || ""));
   return m ? "pack:" + m[1] + "." + m[2] : null;
 }
 export function packsForFeature(env, feature) {
@@ -195,7 +201,9 @@ const MON_TTL = 60 * 60 * 24 * 70;   // ~2 months: long enough to read last mont
 
 export async function state(env, kv, uid, feature, opts) {
   const o = opts || {};
-  const included = includedFor(env, o.role, feature);
+  // Dictation credits (cloud speech-to-text fallback) carry their monthly allowance in from the caller,
+  // which sizes it from the plan class (functions/_stt_fallback.js), not from the pricing role.
+  const included = feature === "dict" ? Math.max(0, Math.floor(+o.included || 0)) : includedFor(env, o.role, feature);
   /* The Clinic Messaging subscription stacks ON TOP of the included allowance. Both reset on the
    * calendar month and neither rolls over, so ONE monthly counter spends them in the right order by
    * construction: `used` eats the included allowance first and only then the tier's, which is exactly
@@ -260,6 +268,19 @@ export function quotaCopy(feature, opts) {
       alert: "Your queue has gone quiet for patients. Keep them informed.",
       price: "\u20b95 a patient. Less than the chai they drink while they wait.",
       expiry: "100 patients. Never expires.",
+    };
+  }
+  if (feature === "dict") {
+    // Credits only, never rupees (owner, 2026-09-26). No em-dash.
+    return {
+      headline: "Dictation credits",
+      lines: [
+        "Clinical dictation on your phone is always free and unlimited.",
+        "Credits are used only when your phone cannot transcribe and the recording is sent to the cloud.",
+        "About 60 credits for a five-minute dictation.",
+      ],
+      price: "Monthly credits come with your plan. Top up any time.",
+      expiry: "Bought credits never expire.",
     };
   }
   if (feature === "scribe") {

@@ -14,12 +14,12 @@
  * so MaiK never breaks purely because metering storage is absent.
  */
 
-import { proFromRequest, proMessageFor } from "./_entitlement.js";
+import { proFromRequest, proMessageFor, isReviewedAccount } from "./_entitlement.js";
 import { aiBudgetOn, monthlyCapFor } from "./_aibudget.js";
 import { ownerOK } from "./_adminauth.js";
 import { addAiSpend } from "./_ai_usage.js";   // per-user spend rollup (the cost cap + wallet read it)
 import { bump, readDay, mergeCounters, MAIK_GROUPS } from "./_counters.js";
-import { verifiedClaimsFor, cfAccessEmail } from "./_fbauth.js";
+import { verifiedClaimsFor, cfAccessEmail, verifiedEmailOf } from "./_fbauth.js";
 
 
 export function usageKv(env) { return env.MAIK_KV || env.CASES_KV || env.GHIS_KV || env.UPDATES_KV || null; }
@@ -62,7 +62,13 @@ export async function identify(request, env) {
   // Verified claims (memoised per request). Key on the uid ("fb:<uid>"), never the whole object:
   // "fb:" + obj once collapsed EVERY signed-in user onto one shared "fb:[object Object]" bucket.
   const fb = await verifiedClaimsFor(request, env);
-  if (fb && fb.sub) return { id: "fb:" + fb.sub, guest: false, email: typeof fb.email === "string" ? fb.email.toLowerCase() : null, name: typeof fb.name === "string" ? fb.name : null };
+  /* `email` only when verified (SEC-01): it is what matches org membership, ownership and the owner
+   * list, and Firebase signs a token for a self-signed-up address nobody confirmed. `accountEmail` is
+   * the raw address, for METERING keys only (meterEmail): Firebase allows one account per address, so
+   * it cannot collide with another user's meter, and keying it on the verified email would move
+   * every unverified account's credits and caps. Never use accountEmail to grant access. */
+  if (fb && fb.sub) return { id: "fb:" + fb.sub, guest: false, email: verifiedEmailOf(fb),
+    accountEmail: typeof fb.email === "string" && fb.email ? fb.email.toLowerCase() : null, name: typeof fb.name === "string" ? fb.name : null };
   /* GUEST IDENTITY: per DEVICE when we have one, per IP only as a fallback (2026-08-25).
    *
    * It used to be IP-only, which meant everyone behind one public address shared a SINGLE guest
@@ -88,8 +94,9 @@ export async function identify(request, env) {
 // The stable, human-readable usage/limit KEY for a caller: the verified email when signed in
 // (so web + native attribute to the SAME person), else the guest IP bucket. Used by the AI usage
 // pipeline so records land under "em:<email>" and per-user caps resolve off it.
+export function meterEmail(who) { return (who && (who.email || who.accountEmail)) || null; }
 export function usageKeyFor(who) {
-  if (who && who.email) return "em:" + String(who.email).toLowerCase();
+  if (meterEmail(who)) return "em:" + String(meterEmail(who)).toLowerCase();
   return (who && who.id) || "ip:0";
 }
 
@@ -166,10 +173,15 @@ export async function checkQuota(env, request, type, opts) {
   // exempt = owner/admin OR the launch "no per-user restrictions" default. Only the per-USER throttles
   // below are skipped; the global daily-cost breaker + metering still run for everyone.
   const exempt = admin || aiUnlimited(env);
-  let isProCaller = true, callerUid = null, callerVerified = false;
-  try { const pr = await _proP; if (pr) { isProCaller = pr.pro; callerUid = pr.uid || null; callerVerified = !!(pr.claims && pr.claims.verified); } } catch (e) {}
+  // callerPhoneVerified keys the Free AI allowance (owner decision D8, 2026-09-26: the free
+  // allowance needs a verified MOBILE NUMBER; registration verification alone no longer grants it).
+  // callerVerified is "a reviewed account" (verified doctor OR an approved student/intern), so an
+  // approved trainee is never told to verify a registration they already had reviewed.
+  let isProCaller = true, callerUid = null, callerVerified = false, callerPhoneVerified = false;
+  try { const pr = await _proP; if (pr) { isProCaller = pr.pro; callerUid = pr.uid || null; callerVerified = isReviewedAccount(pr.claims); callerPhoneVerified = !!(pr.claims && pr.claims.phoneVerified === true); } } catch (e) {}
   const now = _now0, day = _day0, month = _month0;
   const QUOTA_MSG = "MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.";
+  const PHONE_MSG = "Verify your mobile number to unlock your free monthly MaiK allowance. It takes a minute and costs nothing.";
   const PRO_MSG = "You've used your free MaiK allowance for this month. Upgrade to StewardMD Pro for unlimited clinical AI, imaging, and evidence review.";
 
   // global circuit breaker (project-wide daily cost). Hard-stop defaults from env but is ADMIN-EDITABLE
@@ -204,12 +216,17 @@ export async function checkQuota(env, request, type, opts) {
   let budgetApplied = false;
   if (aiBudgetOn(env) && callerUid) {
     try {
-      const cap = await monthlyCapFor(env, callerUid, isProCaller, callerVerified, month, { kv: store });
+      const cap = await monthlyCapFor(env, callerUid, isProCaller, callerPhoneVerified, month, { kv: store });
       if (cap != null) { monthlyCap = cap; budgetApplied = true; }
     } catch (e) { /* fail-open: keep legacy cap */ }
   }
   if (!exempt && m.tokens >= monthlyCap) {
     if (!isProCaller) {
+      // A Free account whose mobile is not verified has a zero allowance under the budget tiers:
+      // the fix is the phone sheet, not a price (pro-notice.js "phone-unverified").
+      if (budgetApplied && !callerPhoneVerified) {
+        return { ok: false, reason: "phone-unverified", needsPro: true, verified: !!callerVerified, phoneVerified: false, message: PHONE_MSG, id };
+      }
       // callerVerified is already resolved above for the budget cap. Reuse it: "upgrade to Pro"
       // is the wrong ask for someone whose registration simply is not verified yet.
       const _r = callerVerified ? "verified-week-expired" : "unverified";

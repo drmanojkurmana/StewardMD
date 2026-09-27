@@ -48,6 +48,15 @@
     cache: null,         // last server dashboard payload (read-only mirror)
     cacheKey: "",        // residentId@orgId the mirror belongs to — load() drops keys absent here
     cacheAt: 0,
+    // Last good /me for this account + institution, so a cold start with no signal can open the
+    // logbook home instead of "Set up your logbook" (cachedContext()).
+    meCache: null, meCacheAt: 0,
+    // localId -> { code, message, fields, at }: a submission the SERVER REFUSED (a 4xx). These are not
+    // retried; the draft stays on the device and the UI shows a "Fix" row (failedDrafts()).
+    failed: {},
+    // localId -> { id, at }: the server draft already created for this local draft, so a retry after
+    // "create worked, submit failed" does not POST a second copy of the same entry.
+    serverIds: {},
     prefs: { lastKind: "procedure", lastSetting: "opd", lastSupervisor: "", lastDepartmentId: "", lastRotationId: "" }
   };
 
@@ -110,17 +119,66 @@
       body: opts.body ? JSON.stringify(opts.body) : undefined
     }).then(function (r) {
       return r.json().catch(function () { return {}; }).then(function (j) {
-        if (!r.ok) throw mkErr(j.error || ("http_" + r.status), j.message || j.detail || "", j.errors);
+        if (!r.ok) throw mkErr(j.error || ("http_" + r.status), j.message || j.detail || "", j.errors, r.status, j);
         return j;
       });
+    }, function () {
+      // fetch() itself rejected: no answer from the server at all (dead network, DNS, TLS, CORS).
+      throw mkErr("network", "Could not reach the server.", null, 0);
     });
   }
-  function mkErr(code, message, errors) {
-    var e = new Error(code); e.code = code; e.userMessage = message || ""; e.errors = errors || null; return e;
+  /* Every rejection carries `status` (the HTTP status, 0 when there was no HTTP answer), `retryable`
+   * and, for an HTTP answer, the parsed `body` (so a screen can read e.g. body.joinRequest). */
+  function mkErr(code, message, errors, status, body) {
+    var e = new Error(code); e.code = code; e.userMessage = message || ""; e.errors = errors || null;
+    e.status = status || 0; e.body = body || null;
+    e.retryable = isRetryable(e);
+    return e;
+  }
+  /* RETRY ONLY WHAT A RETRY CAN FIX. Offline, a network failure, a 5xx, a timeout, a rate limit or an
+   * expired sign-in all clear up by themselves. Any other 4xx is the server saying "no" to THIS
+   * entry (a validation failure, an unknown supervisor), and retrying it forever is what left
+   * residents with a queue that never drained and never said why. */
+  var RETRY_CODES = { offline: 1, network: 1, server_disabled: 1, signin_required: 1, not_linked: 1 };
+  function isRetryable(e) {
+    if (!e) return true;
+    if (RETRY_CODES[e.code]) return true;
+    var st = Number(e.status) || 0;
+    if (!st) return e.code !== "no_draft" && e.code !== "no_id";
+    return st >= 500 || st === 408 || st === 429 || st === 401;
   }
 
   /* ── reads ────────────────────────────────────────────────────────────────── */
-  function me(orgId) { return req("/me?orgId=" + encodeURIComponent(orgId || load().orgId || "")); }
+  function me(orgId) {
+    return req("/me?orgId=" + encodeURIComponent(orgId || load().orgId || "")).then(function (r) {
+      // Keep the last good context for THIS institution, for an offline cold start.
+      if (r && r.ok && r.orgId) patch(function (p) { p.meCache = r; p.meCacheAt = Date.now(); });
+      return r;
+    }, function (e) {
+      // The server said this account is not (or no longer) part of that institution: forget the
+      // mirror, so it can never reopen a logbook the account has lost access to.
+      if (e && (e.status === 403 || e.status === 404)) patch(function (p) { p.meCache = null; p.meCacheAt = 0; });
+      throw e;
+    });
+  }
+  /* OFFLINE COLD START. The last good /me plus the dashboard mirror, for this account and ONLY for the
+   * institution the device is linked to (and, for the dashboard, only that resident: the same keying
+   * cachedDashboard() applies). null when there is nothing that matches; the screen then shows setup
+   * exactly as before. Returns { ctx, dashboard, at }, ctx.stale = true. Read-only: nothing here can
+   * write, submit or verify. */
+  function cachedContext() {
+    var p = load();
+    var mc = p.meCache;
+    var want = normOrgHandle(p.orgId);
+    if (!mc || !want) return null;
+    if (normOrgHandle(mc.orgId) !== want && normOrgHandle(mc.orgCode || "") !== want) return null;
+    var res = mc.resident;
+    return {
+      ctx: Object.assign({}, mc, { stale: true }),
+      dashboard: res && res.id ? cachedDashboard(res.id) : null,
+      at: p.meCacheAt || 0
+    };
+  }
   function ready() {
     // Deliberately unauthenticated and never rejects: it is how the UI decides whether to offer the
     // "connect to your institution" path at all.
@@ -263,6 +321,36 @@
   function enrolPerson(orgId, body) {
     return req("/enrol", { method: "POST", body: Object.assign({ orgId: orgId }, body || {}) });
   }
+  /* Bulk: rows [{ email, guide?, trainingYear?, name? }], max 100. Resolves
+   * { ok, results:[{ email, ok, status:"enrolled"|"invited"|"error", error?, message?, residentId? }],
+   *   enrolled, invited, failed }. */
+  function enrolBulk(orgId, programmeId, rows, extra) {
+    return req("/enrol-bulk", { method: "POST", body: Object.assign({ orgId: orgId, programmeId: programmeId, rows: rows || [] }, extra || {}) });
+  }
+  function invites(orgId) { return req("/invites?orgId=" + encodeURIComponent(orgId)).then(function (r) { return r.invites || []; }); }
+  /* Assign / change a resident's guide (Academic Cell, or the HoD of that resident's department), or
+   * any other structural field (Academic Cell only). The server validates the guide and refuses to
+   * let anyone name themselves. Resolves the updated resident. */
+  function updateResident(residentId, patchBody) {
+    return req("/residents/" + encodeURIComponent(residentId), { method: "PATCH", body: patchBody || {} })
+      .then(function (r) { return r.resident; });
+  }
+  /* "Request to join" by institution code. Grants nothing until an Academic Cell / HoD approves. */
+  function requestJoin(orgCode, programmeHint, note) {
+    return req("/join-request", { method: "POST", body: { orgCode: orgCode, programmeHint: programmeHint || "", note: note || "" } });
+  }
+  function myJoinRequest() { return req("/join-request").then(function (r) { return r.joinRequest || null; }); }
+  function joinRequests(orgId, status) {
+    return req("/join-requests?orgId=" + encodeURIComponent(orgId) + (status ? "&status=" + encodeURIComponent(status) : ""))
+      .then(function (r) { return r.joinRequests || []; });
+  }
+  function approveJoinRequest(id, body) {
+    return req("/join-requests/" + encodeURIComponent(id) + "/approve", { method: "POST", body: body || {} });
+  }
+  function rejectJoinRequest(id, reason) {
+    return req("/join-requests/" + encodeURIComponent(id) + "/reject", { method: "POST", body: { reason: reason || "" } })
+      .then(function (r) { return r.joinRequest; });
+  }
   function config(programmeId) { return req("/config/" + encodeURIComponent(programmeId)); }
   function setConfig(programmeId, overrides) { return req("/config/" + encodeURIComponent(programmeId), { method: "PUT", body: { overrides: overrides } }); }
 
@@ -274,13 +362,17 @@
   function saveDraft(body) {
     var m = M(); if (!m) return null;
     var p = load();
-    var id = body.localId || localId();
+    /* Re-saving an EXISTING draft (the "Fix" path for a refused submission) must update that draft,
+     * not mint a second one beside it: reuse body.id when it names a draft already on the device. */
+    var id = body.localId || (body.id && p.drafts && p.drafts[body.id] ? body.id : "") || localId();
     var e = m.entry(Object.assign({}, body, {
-      id: id, residentId: body.residentId || p.residentId, programmeId: p.programmeId,
+      id: id, residentId: body.residentId || p.residentId, programmeId: body.programmeId || p.programmeId,
       status: "draft", createdAt: body.createdAt || Date.now(), updatedAt: Date.now()
     }));
     patch(function (st) {
       st.drafts[id] = e;
+      // Saving is how a refused draft is fixed: the old refusal no longer describes it.
+      if (st.failed) delete st.failed[id];
       st.prefs.lastKind = e.kind;
       if (e.setting) st.prefs.lastSetting = e.setting;
       if (e.supervisor) st.prefs.lastSupervisor = e.supervisor;
@@ -289,39 +381,155 @@
     });
     return e;
   }
+  /* A refused draft carries `lastError: { code, message, fields, at }` on the objects drafts(),
+   * getDraft() and failedDrafts() return. It is stored beside the draft (state.failed), not inside it,
+   * because m.entry() is the schema authority and drops unknown fields; so it is always a COPY, and
+   * re-saving the draft (saveDraft) clears it. */
+  function decorate(p, d) {
+    if (!d) return null;
+    var f = p.failed && p.failed[d.id];
+    return f ? Object.assign({}, d, { lastError: f }) : d;
+  }
   function drafts() {
-    var d = load().drafts || {};
-    return Object.keys(d).map(function (k) { return d[k]; })
+    var p = load(), d = p.drafts || {};
+    return Object.keys(d).map(function (k) { return decorate(p, d[k]); })
       .sort(function (a, b) { return String(b.occurredAt).localeCompare(String(a.occurredAt)); });
   }
-  function getDraft(id) { return (load().drafts || {})[id] || null; }
-  function dropDraft(id) { patch(function (p) { delete p.drafts[id]; p.queue = (p.queue || []).filter(function (q) { return q !== id; }); }); }
+  // Drafts the server refused (a 4xx). Not queued, not retried: each needs the resident to fix it.
+  function failedDrafts() {
+    var p = load(), d = p.drafts || {};
+    return Object.keys(p.failed || {}).map(function (k) { return decorate(p, d[k]); }).filter(Boolean)
+      .sort(function (a, b) { return (b.lastError.at || 0) - (a.lastError.at || 0); });
+  }
+  function getDraft(id) { var p = load(); return decorate(p, (p.drafts || {})[id] || null); }
+  function dropDraft(id) {
+    patch(function (p) {
+      delete p.drafts[id];
+      if (p.failed) delete p.failed[id];
+      if (p.serverIds) delete p.serverIds[id];
+      p.queue = (p.queue || []).filter(function (q) { return q !== id; });
+    });
+  }
   function validateDraft(e, ctx) { var m = M(); return m ? m.validateEntry(e, ctx) : { ok: false, errors: [] }; }
+
+  /* The refusal, in words a resident can act on. App-facing, so no em-dash (server and model text is
+   * folded too). */
+  function plain(t) { return String(t || "").replace(/\s*[\u2014\u2013]\s*/g, ", ").trim(); }
+  function lastErrorFor(e) {
+    var code = (e && e.code) || "error";
+    var fields = [];
+    (e && e.errors || []).forEach(function (x) { if (x && x.field) fields.push(String(x.field)); });
+    var first = (e && e.errors && e.errors[0] && e.errors[0].message) || "";
+    var msg;
+    if (code === "validation") msg = first ? "Fix this before sending: " + first : "Some details need fixing before this can be sent.";
+    else if (code === "supervisor_unresolved") msg = (e && e.userMessage) || "Pick your guide or a listed faculty member as the supervisor.";
+    else if (code === "not_found") msg = "Your logbook link has changed. Open the logbook again, then send this entry.";
+    else if (code === "forbidden" || code === "not_own_record" || code === "cross_org") msg = "This entry cannot be sent from this account. Check you are signed in as yourself and linked to the right institution.";
+    else msg = (e && e.userMessage) || "The server did not accept this entry. Open it to check the details.";
+    return { code: code, message: plain(msg), fields: fields, status: (e && e.status) || 0, at: Date.now() };
+  }
 
   /* ── submission ───────────────────────────────────────────────────────────────
    * push() is a two-step because the server owns both halves: create (which stamps the author and
    * the time) then submit (which sets pendingFor and notifies the supervisor). A failure between
-   * them leaves a server-side DRAFT, which is recoverable and visible — never a lost entry. */
+   * them leaves a server-side DRAFT, which is recoverable and visible, never a lost entry; its id is
+   * remembered (state.serverIds) so the retry submits THAT draft instead of creating a second copy.
+   *
+   * Rejects with e.retryable. retryable === false means the server refused this entry (a 4xx): it is
+   * taken out of the queue and kept as a draft with lastError, for the resident to fix. */
   function submitDraft(id) {
-    var d = getDraft(id);
-    if (!d) return Promise.reject(mkErr("no_draft", "That draft is gone."));
-    return req("/entries", { method: "POST", body: stripLocal(d) })
-      .then(function (r) {
+    var raw = (load().drafts || {})[id];
+    if (!raw) { var gone = mkErr("no_draft", "That draft is gone."); gone.retryable = false; return Promise.reject(gone); }
+    var d = raw;
+    /* A draft recorded BEFORE the account was linked has a blank residentId / programmeId. Stamp them
+     * from the link as it stands now; with no link yet it stays queued rather than failing. */
+    var c = context();
+    if ((!d.residentId && c.residentId) || (!d.programmeId && c.programmeId)) {
+      d = Object.assign({}, d, { residentId: d.residentId || c.residentId, programmeId: d.programmeId || c.programmeId });
+      patch(function (p) { if (p.drafts[id]) { p.drafts[id].residentId = d.residentId; p.drafts[id].programmeId = d.programmeId; } });
+    }
+    if (!d.residentId) {
+      return Promise.reject(mkErr("not_linked", "Your logbook is not linked to a programme yet. This entry will be sent once it is."));
+    }
+    var body = stripLocal(d);
+    var known = (load().serverIds || {})[id];
+    var create = function () {
+      return req("/entries", { method: "POST", body: body }).then(function (r) {
         var serverId = r.entry && r.entry.id;
         if (!serverId) throw mkErr("no_id", "The server did not return an entry id.");
+        patch(function (p) { p.serverIds = p.serverIds || {}; p.serverIds[id] = { id: serverId, at: d.updatedAt || 0 }; });
+        return serverId;
+      });
+    };
+    var alreadyDone = false;
+    var ensure = !known ? create() :
+      // Changed since that server draft was made (the resident fixed it): bring it up to date first.
+      ((d.updatedAt || 0) > (known.at || 0)
+        ? req("/entries/" + encodeURIComponent(known.id), { method: "PATCH", body: body }).then(function () {
+            patch(function (p) { if (p.serverIds && p.serverIds[id]) p.serverIds[id].at = d.updatedAt || 0; });
+            return known.id;
+          })
+        : Promise.resolve(known.id))
+      .then(null, function (e) {
+        if (e && e.status === 404) return create();                 // that server draft is gone
+        // The earlier attempt DID submit (its answer was lost): nothing left to do.
+        if (e && (e.code === "pglog_submitted_withdraw_first" || e.code === "pglog_verified_immutable")) { alreadyDone = true; return known.id; }
+        throw e;
+      });
+    return ensure
+      .then(function (serverId) {
+        if (alreadyDone) return { entry: { id: serverId, status: "submitted" } };
         return req("/entries/" + encodeURIComponent(serverId) + "/submit", { method: "POST", body: {} });
       })
-      .then(function (r) { dropDraft(id); return r.entry; });
+      .then(function (r) {
+        dropDraft(id);
+        var entry = r.entry || {};
+        if (r.routing) entry.routing = r.routing;
+        return entry;
+      }, function (e) {
+        e.retryable = isRetryable(e);
+        if (!e.retryable) {
+          var le = lastErrorFor(e);
+          e.lastError = le;
+          patch(function (p) {
+            p.failed = p.failed || {};
+            p.failed[id] = le;
+            p.queue = (p.queue || []).filter(function (q) { return q !== id; });
+          });
+        }
+        throw e;
+      });
   }
   // Queue for later when there is no network. The UI must show these as "waiting to submit", not as
-  // "submitted" — nobody owes them a verification yet.
+  // "submitted", since nobody owes them a verification yet. A draft the server REFUSED is not queued
+  // (retrying cannot fix it): the return value is then the unchanged queue length.
   function queueDraft(id) {
-    patch(function (p) { if (p.queue.indexOf(id) < 0) p.queue.push(id); });
+    patch(function (p) {
+      if (p.failed && p.failed[id]) return;
+      if (p.queue.indexOf(id) < 0) p.queue.push(id);
+    });
     return load().queue.length;
   }
   function queued() { var p = load(); return (p.queue || []).map(function (id) { return p.drafts[id]; }).filter(Boolean); }
+  /* THE ONE CALL a save screen needs. Never rejects. Resolves one of:
+   *   { status: "submitted", entry, routing }   routing: "supervisor" | "guide" | "unassigned"
+   *   { status: "queued", reason, message }     offline / network / 5xx / not linked yet: retried by flush()
+   *   { status: "needs_fix", lastError }         the server refused it (4xx): kept as a draft, not queued */
+  function submitOrQueue(id) {
+    if (!serverOn() || !online()) {
+      queueDraft(id);
+      return Promise.resolve({ status: "queued", reason: !serverOn() ? "server_disabled" : "offline", message: "" });
+    }
+    return submitDraft(id).then(function (entry) {
+      return { status: "submitted", entry: entry, routing: entry.routing || "" };
+    }, function (e) {
+      if (e && e.retryable === false) return { status: "needs_fix", lastError: e.lastError || lastErrorFor(e) };
+      queueDraft(id);
+      return { status: "queued", reason: (e && e.code) || "error", message: plain(e && e.userMessage) };
+    });
+  }
   // Drain the queue. Resolves with a per-item result rather than rejecting, so one bad entry does
-  // not strand the rest.
+  // not strand the rest: { sent, failed:[retryable, still queued], needsFix:[refused, moved to drafts] }.
   /* Two callers can start a flush: the boot timer and the `online` listener, and a reconnect fires
    * both. Without a guard they each snapshot the same queue and each POST every draft in it, so the
    * guide receives two identical entries - and the server has no idempotency key to collapse them.
@@ -330,26 +538,32 @@
   function flush() {
     if (_flushing) return _flushing;
     var q = (load().queue || []).slice();
-    if (!q.length) return Promise.resolve({ sent: 0, failed: [] });
-    var sent = 0, failed = [];
+    if (!q.length) return Promise.resolve({ sent: 0, failed: [], needsFix: [] });
+    var sent = 0, failed = [], needsFix = [];
     var done = function () {
       patch(function (p) {
         var attempted = {};
         q.forEach(function (id) { attempted[id] = 1; });
-        /* Keep anything that FAILED, and anything queued DURING this pass. The old filter kept only
-         * the failures, so a draft saved while the flush was in flight was dropped from the queue
-         * without ever being sent - after the app had told the resident "it will be submitted when
-         * you are back online". */
+        /* Keep anything that failed RETRYABLY, and anything queued DURING this pass. The old filter
+         * kept only the failures, so a draft saved while the flush was in flight was dropped from the
+         * queue without ever being sent. A REFUSED draft (4xx) leaves the queue for good: retrying it
+         * forever is how a queue never drained and never said why. */
         p.queue = (p.queue || []).filter(function (id) {
           return !attempted[id] || failed.some(function (f) { return f.id === id; });
         });
       });
       _flushing = null;
-      return { sent: sent, failed: failed };
+      return { sent: sent, failed: failed, needsFix: needsFix };
     };
     _flushing = q.reduce(function (chain, id) {
       return chain.then(function () {
-        return submitDraft(id).then(function () { sent++; }, function (e) { failed.push({ id: id, error: e.code, message: e.userMessage }); });
+        return submitDraft(id).then(function () { sent++; }, function (e) {
+          if (e && e.retryable === false) {
+            if (e.code !== "no_draft") needsFix.push({ id: id, error: e.code, message: (e.lastError && e.lastError.message) || "" });
+          } else {
+            failed.push({ id: id, error: e && e.code, message: e && e.userMessage });
+          }
+        });
       });
     }, Promise.resolve()).then(done, function (e) { _flushing = null; throw e; });
     return _flushing;
@@ -441,7 +655,7 @@
     // scope
     uid: uid, pkey: pkey, context: context, setContext: setContext, prefs: prefs, clearAccount: clearAccount,
     // reads
-    ready: ready, me: me, dashboard: dashboard, cachedDashboard: cachedDashboard,
+    ready: ready, me: me, dashboard: dashboard, cachedDashboard: cachedDashboard, cachedContext: cachedContext,
     facultyDashboard: facultyDashboard, deptDashboard: deptDashboard,
     entries: entries, entry: entry, rotations: rotations, assessments: assessments,
     attestations: attestations, pending: pending, residents: residents, programmes: programmes,
@@ -456,6 +670,11 @@
     saveDraft: saveDraft, drafts: drafts, getDraft: getDraft, dropDraft: dropDraft,
     validateDraft: validateDraft, submitDraft: submitDraft, queueDraft: queueDraft,
     queued: queued, flush: flush, stripLocal: stripLocal, localId: localId,
+    failedDrafts: failedDrafts, submitOrQueue: submitOrQueue, isRetryable: isRetryable,
+    // onboarding
+    enrolBulk: enrolBulk, invites: invites, updateResident: updateResident,
+    requestJoin: requestJoin, myJoinRequest: myJoinRequest, joinRequests: joinRequests,
+    approveJoinRequest: approveJoinRequest, rejectJoinRequest: rejectJoinRequest,
     // mutations
     editEntry: editEntry, resubmit: resubmit, withdraw: withdraw, verify: verify, returnEntry: returnEntry,
     amend: amend, removeEntry: removeEntry,

@@ -30,7 +30,10 @@ import { authHeaders } from "./dicomweb.js";
 import { activeConnectors, openConnectorSecrets } from "./connectors.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
-const UID = /^[0-9]+(\.[0-9]+)*$/;
+// OPS-28/F28: PS3.5 section 9.1 forbids a leading zero in any UID component except a lone "0" itself
+// ("1.02.3" is not a valid UID). WardSynQ never mints such a UID itself; this only matters when an
+// upstream PACS already emits a malformed one - defence-in-depth, not an active bug.
+const UID = /^(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))*$/;
 const isUid = (v) => typeof v === "string" && v.length <= 64 && UID.test(v);
 const QIDO_TIMEOUT_MS = 8000, WADO_TIMEOUT_MS = 20000;
 const MAX_SERIES = 60, MAX_INSTANCES = 1500;

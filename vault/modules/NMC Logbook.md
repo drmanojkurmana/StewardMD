@@ -79,6 +79,37 @@ roles plus `academic_cell` ONLY. **An Academic Cell can never mint an org admin 
 faculty-roster management UI, rotation setup, bulk enrolment, institution-level exports. `dept`,
 `resident` detail and the 12 reports already exist for HOD-level oversight and export.
 
+## Made easy — 2026-09-26 (owner: "friends say it is very hard to use, strict framework")
+A usability audit (resident + guide journeys walked at 390px) found the friction was mostly OUR setup
+chain and bugs, not NMC. The two serious ones: **no screen could assign a guide**, so monthly
+authentication (5.2(vii)) was unreachable; and **MD quick-log entries were refused by the server**
+(`supervisor_unresolved`) while the app said "will be submitted when online", retrying forever.
+
+Server/store (all invariants unchanged; relaxations behind env flags, default ON, "0" restores):
+- `functions/_pglog_enrol.js` `enrolOne()`: the ONE enrol path for `/enrol`, `/enrol-bulk` (max 100),
+  join-request approval and invite resolution. Guide validated everywhere (active pg_faculty/pg_hod in
+  the resident's department scope, never the resident). `trainingYear` 1..3.
+- `PGLOG_SUPERVISOR_FALLBACK`: a blank supervisor routes to the resident's guide; with no guide the entry
+  is `unassigned` and waits in the HoD queue until a guide is assigned. MS/M.Ch procedures still need a
+  named supervisor. A typed supervisor that does not resolve is still refused.
+- `PGLOG_INVITES`: enrolling an email that has not signed in yet creates a pending invite (`pg_invites`,
+  60 days, resolved only against the token's verified email) instead of `no_such_account`.
+- `PGLOG_JOIN_REQUESTS`: a resident types the institution code and requests to join (`pg_join_requests`,
+  rate-limited); academic_cell / owner / pg_hod approve in one tap. Nobody self-enrols: the role is
+  still written to `q_members` by someone else.
+- **HoD powers widened (decision 2026-09-26):** a pg_hod may approve join requests and assign guides,
+  within their department scope only. Before, only CONFIGURE holders could.
+- Names: `/faculty-roster` returns display names (never email/phone; `pg_names/<uid>` registry); `/pending`
+  and entries carry `residentName`. `/dashboard/faculty` lists the HoD's whole department.
+- Store: `submitOrQueue()` queues only offline / network / 5xx; a 4xx keeps the draft with `lastError`
+  (`failedDrafts()`); pre-link drafts get `residentId`/`programmeId` stamped; `cachedContext()` for an
+  offline cold start; a retry after a half-finished submit reuses the server draft (no duplicates).
+- Tests: `test/pglog-enrol.test.mjs` (28), `test/pglog-store-submit.test.mjs` (10); pglog suite 346 pass.
+
+Client: see the `smd_pglog_easy` flag (screens: guide assignment, name chips, Fix rows, join request,
+batch "Verify selected" then Authenticate, Today/Yesterday, Log again, de-jargoned copy with a "Why is
+this required?" disclosure; provenance stays on Progress, Reports and the certificate).
+
 ## Key files
 
 | File | What it is |

@@ -150,10 +150,13 @@ async function realInvoice() {
   const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "NegAuth Testcase " + n, mobile: "98765090" + String(n).padStart(2, "0"), gender: "male", ageYears: 50 });
   const adm = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg.mrn, ward: "Medical A", bed: String(n) });
   const drug = "Metformin 500mg";
-  const ord = await as(DOCTOR, "/ward/medication-order", "POST", { orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug, drugCode: "MET500", dose: { value: 500, unit: "mg" }, route: "oral", frequency: "OD" } });
+  const ord = await as(DOCTOR, "/ward/medication-order", "POST", { orgId: ORG, order: { patientId: adm.patientId, encounterId: adm.encounterId, drug, drugCode: "MET500", dose: { value: 500, unit: "mg" }, route: "oral", frequency: "STAT" } });
   const patient = { id: adm.patientId, mrn: reg.mrn, wristbandBarcode: reg.mrn };
   const scan = { patientBarcode: reg.mrn, drugBarcode: drug, dose: { value: 500, unit: "mg" }, route: "oral" };
-  const mar = (action, extra) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action, orderId: ord.orderId, dueAt: "2026-09-09T09:00:00.000Z", patient, ...extra });
+  // CLIN-11: the STAT dose's own time from the round; the eMAR charts no dose at a time the order does not schedule.
+  const win = (h) => encodeURIComponent(new Date(Date.now() + h * 3600e3).toISOString());
+  const dueAt = (await as(NURSE, `/ward/schedule?orgId=${ORG}&patientId=${adm.patientId}&from=${win(-1)}&to=${win(1)}`)).due.find((d) => d.orderId === ord.orderId).dueAt;
+  const mar = (action, extra) => as(NURSE, "/ward/mar", "POST", { orgId: ORG, action, orderId: ord.orderId, dueAt, patient, ...extra });
   await mar("verify"); await mar("dispense"); await mar("scan", { scan }); await mar("administer");
   const raised = await as(CASHIER, "/ward/invoice", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId });
   assert.equal(raised.__status, 200, JSON.stringify(raised));

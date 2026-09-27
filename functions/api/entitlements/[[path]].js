@@ -2,6 +2,8 @@
  *
  *   POST /api/entitlements/admin/lookup         {uid|smdId|email|regNo}                -> joined record
  *   POST /api/entitlements/admin/set-role       {uid|smdId|email|regNo, role}          -> write role
+ *   POST /api/entitlements/admin/set-plan       {uid|smdId|email|regNo, tier, days|expiresAt|forever} -> purchase tier (incl. ultimate)
+ *   POST /api/entitlements/admin/ultimate-migration {dryRun?, uids?}                   -> list, then convert Pro holders to ultimate
  *   POST /api/entitlements/admin/set-tier       {uid|smdId|email|regNo, feature, tier} -> write override
  *   POST /api/entitlements/admin/clear-override {uid|smdId|email|regNo, feature}       -> null override
  *   POST /api/entitlements/admin/set-budget     {uid|smdId|email|regNo, tokens}        -> write aiCapTokens
@@ -16,7 +18,7 @@
  * just authenticates, stamps the auditable `updatedBy`, and dispatches by last path segment.
  */
 import { ownerOK, emailFromToken } from "../../_adminauth.js";
-import { adminLookup, adminSetRole, adminSetTier, adminClearOverride, adminSetBudget, adminAddGrant, adminSetModel, adminSetFlag, adminClearFlag } from "../../_entitlements.js";
+import { adminLookup, adminSetRole, adminSetTier, adminClearOverride, adminSetBudget, adminAddGrant, adminSetModel, adminSetFlag, adminClearFlag, adminSetPlan, adminUltimateMigration } from "../../_entitlements.js";
 
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 
@@ -30,6 +32,8 @@ export async function onRequestPost(context) {
   try { body.updatedBy = emailFromToken((request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "")) || null; } catch (e) {}
   if (seg === "lookup") return json(await adminLookup(env, body));
   if (seg === "set-role") return json(await adminSetRole(env, body));
+  if (seg === "set-plan") return json(await adminSetPlan(env, body));
+  if (seg === "ultimate-migration") return json(await adminUltimateMigration(env, body));
   if (seg === "set-tier") return json(await adminSetTier(env, body));
   if (seg === "clear-override") return json(await adminClearOverride(env, body));
   if (seg === "set-budget") return json(await adminSetBudget(env, body));

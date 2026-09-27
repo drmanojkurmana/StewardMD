@@ -103,6 +103,12 @@ export async function as(email, path, method, body) {
   return j;
 }
 
+/* CLIN-09: a patient's ABO/RhD is a recorded blood group result (LOINC 882-1), never the transfusion request. */
+export async function recordBloodGroup(patientId, value) {
+  const now = new Date().toISOString();
+  await H.RECORD.append(TENANT, [{ resourceType: "Observation", id: "grp-" + patientId, version: 1, patientId, category: "laboratory",
+    code: "882-1", codeSystem: "http://loinc.org", value, unit: null, meta: { recordedAt: now, effectiveAt: now } }]);
+}
 /** The latest version of every record of a type in the hospital's tenant. */
 export async function recordsOf(type) {
   return (await H.RECORD.latestByType(TENANT, type, 1000)) || [];

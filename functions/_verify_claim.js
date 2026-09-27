@@ -20,6 +20,7 @@
  * Best-effort by design: every caller is on a read path that must still answer if this fails.
  */
 import { getUserClaims, mergeUserClaims } from "./_fbadmin.js";
+import { trialOnceMode } from "./_trial_ledger.js";
 
 function kv(env) { return (env && (env.CASES_KV || env.GHIS_KV)) || null; }
 const doctorKey = (uid) => "icu:doctor:" + uid;
@@ -39,7 +40,12 @@ export async function reconcileVerifiedClaim(env, uid, deps) {
   const status = rec.status || (rec.verified ? "verified" : "unverified");
   out.status = status;
   out.regNo = rec.regNo || rec.extractedRegNo || "";
-  if (status !== "verified") return out;   // pending / trial / rejected never grant the claim
+  if (status !== "verified") return out;   // pending / trial / rejected / trainee_verified never grant the claim
+  // verified:true is the PRESCRIBING claim. A student or intern record never re-asserts it, even one
+  // an older approval marked "verified" (audit 2026-09-26, finding 3): those are for the owner to
+  // review (GET /api/verifications/legacy-trainees), not for a read path to re-grant.
+  const role = String(rec.role || "").trim().toLowerCase();
+  if (role === "student" || role === "intern") return out;
 
   let claims = null;
   try { claims = (deps && deps.getUserClaims ? deps.getUserClaims : getUserClaims)(env, uid); claims = await claims; }
@@ -47,7 +53,9 @@ export async function reconcileVerifiedClaim(env, uid, deps) {
 
   // Already consistent. verifiedAt is required too: without it accessState() computes a zero-length
   // free week, which is the same "verified but no Pro" symptom by a different route.
-  if (claims && claims.verified === true && claims.verifiedAt) return out;
+  // trialDenied counts as consistent too: that account is verified with no free week on purpose
+  // (_trial_ledger.js), and writing verifiedAt here would hand it the week it was refused.
+  if (claims && claims.verified === true && (claims.verifiedAt || (claims.trialDenied && trialOnceMode(env) === "on"))) return out;
 
   try {
     const merge = (deps && deps.mergeUserClaims) || mergeUserClaims;

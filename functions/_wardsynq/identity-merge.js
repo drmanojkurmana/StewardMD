@@ -170,6 +170,18 @@ async function mergePatients(request, env, ctx) {
   if (alreadyGone) {
     return { ...base, ok: false, status: 409, error: "already_merged", detail: "this record is already merged into another; unmerge that first", mergedId, into: alreadyGone.survivorId, written: 0 };
   }
+  /* ONE HOP, NEVER A CHAIN OR A CYCLE (audit DATA-06). resolveIdentity follows one link, so merging C into B
+   * and then B into A left C's records out of A's chart, and merging A back into B made each record merged
+   * into the other. A survivor that is itself merged away, or a record that has already absorbed others,
+   * is refused with the link in the way; together these also rule out every cycle. */
+  const survivorGone = (allLinks || []).find((l) => l && l.state === "merged" && l.mergedId === survivorId);
+  if (survivorGone) {
+    return { ...base, ok: false, status: 409, error: "survivor_is_merged", detail: "the record you are keeping is itself merged into another; merge into that one instead", survivorId, into: survivorGone.survivorId, written: 0 };
+  }
+  const absorbedBy = (allLinks || []).filter((l) => l && l.state === "merged" && l.survivorId === mergedId);
+  if (absorbedBy.length) {
+    return { ...base, ok: false, status: 409, error: "merged_has_absorbed", detail: "the record being merged in already has other records merged into it; unmerge those first", mergedId, absorbed: absorbedBy.map((l) => l.mergedId), written: 0 };
+  }
 
   const id = linkIdFor(survivorId, mergedId);
   const current = (existing || []).find((l) => l && l.id === id) || null;
