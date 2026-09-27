@@ -6262,7 +6262,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         ["cDrug", "What investigations next?", "Targeted workup"]
       ] : [
         ["cAssess", "Start a clinical assessment", "Guided differential & workup"],
-        ["cKnow", "Ask a knowledge question", "Cited, page-level answers"],
+        ["cKnow", "Ask a knowledge question", (function () { try { return window.SMD_MAIK_ENGINE.knowSub(); } catch (e) { return "Cited, page-level answers"; } })()],   // SMD-16: matches the engine, as the footer does
         ["cDrug", "Open Drug Index & calculators", "Doses, spectrum, tools"]
       ];
       var cardHTML = cards.map(function (c, i) {
