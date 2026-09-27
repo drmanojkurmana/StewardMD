@@ -61,7 +61,7 @@ const chartPatient = `
   ICU.reset(); ICU.ingestPatient({ name: "Core Pt", bed: "4", age: 65, sex: "M", weightKg: 72 });
   var S = ICU.state();
   S.vitals.push({ ts: Date.now() - 180*60000, map: 78, hr: 98, spo2: 97 });
-  S.vitals.push({ ts: Date.now() - 20*60000,  map: 55, hr: 128 });
+  S.vitals.push({ ts: Date.now() - 20*60000,  map: 55, hr: 128, spo2: 90 });
   ICU.savePatient(); ICU.open();
   var card = document.querySelector('[data-icu-act^="openpt"]');
   if (card) card.click();
@@ -150,6 +150,10 @@ try {
   ok(on && on.subs.indexOf("What changed") !== -1, "the What changed list is painted");
   ok(on && on.subs.indexOf("Missing information") !== -1, "the Missing information list is painted");
   ok(on && on.rows.some((r) => /MAP/.test(r) && /78/.test(r) && /55/.test(r)), "the falling MAP is shown with both ends: " + JSON.stringify((on && on.rows) || []).slice(0, 220));
+  ok(on && on.rows.some((r) => /MAP.*55 mmHg/.test(r)), "a word unit keeps its space in the changed list: " + JSON.stringify((on && on.rows) || []).slice(0, 220));
+  // The row is a flex container, so a unit left as its own flex item gets the row's 8px gap and
+  // renders "91 %" no matter what the markup puts between them. Value and unit must be ONE item.
+  ok(on && on.rows.some((r) => /SpO2.*90%/.test(r)), "% closes up in the changed list too: " + JSON.stringify((on && on.rows) || []).slice(0, 260));
   ok(on && on.rows.some((r) => /Respiratory rate|Conscious level/.test(r)), "an uncharted core observation is listed as missing");
   ok(on && /no prediction, no alert/i.test(on.foot), "the panel states what it is not");
   ok(on && /Not a complete list/.test(on.foot),
@@ -182,8 +186,10 @@ try {
     "no stale row leaves two numbers separated only by a space: " + JSON.stringify((stale && stale.ages) || []));
   ok(stale && stale.ages.every((r) => /,\s/.test(r)),
     "the value and the age are separated by a comma: " + JSON.stringify((stale && stale.ages) || []));
-  ok(stale && stale.ages.some((r) => /last 96 %, /.test(r)),
-    "the stale value carries its unit: " + JSON.stringify((stale && stale.ages) || []));
+  ok(stale && stale.ages.some((r) => /last 96%, /.test(r)),
+    "the stale value carries its unit, with % closed up as everywhere else in the app: " + JSON.stringify((stale && stale.ages) || []));
+  ok(stale && stale.ages.some((r) => /last 88 bpm, /.test(r)),
+    "a word unit keeps its space: " + JSON.stringify((stale && stale.ages) || []));
 } catch (e) {
   ok(false, "harness error: " + (e && e.message));
 } finally {
