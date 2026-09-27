@@ -279,6 +279,24 @@
   /* ── render ───────────────────────────────────────────────────────────────────────────────── */
   function render() {
     var el = root(); el.classList.add("on"); bindViewport();
+    // Opened from Profile on a number that is already verified: say so. Sending a code is only one tap
+    // away (Change number), never the first thing a tap on a verified row does (owner, 2026-09-28).
+    if (state.step === "done") {
+      el.innerHTML = '<div class="phv-card">' +
+        '<div class="phv-head"><div class="phv-grab"></div>' +
+          '<div class="phv-mark">' + ICO.check + '</div>' +
+          '<div class="phv-t">Number verified</div></div>' +
+        '<div class="phv-body">' +
+          '<p class="phv-s"><b>' + esc(state.phone) + '</b> is verified on this account. Colleagues and FollowCare reach you here.</p>' +
+        '</div>' +
+        '<div class="phv-foot">' +
+          '<div class="phv-acts"><button type="button" class="phv-btn phv-go" id="phvDone"><span>Done</span></button></div>' +
+          '<div class="phv-subacts"><button type="button" class="phv-alt" id="phvChange">' + ICO.phone + '<span>Change number</span></button></div>' +
+        '</div></div>';
+      el.querySelector("#phvDone").addEventListener("click", close);
+      el.querySelector("#phvChange").addEventListener("click", function () { state.step = "phone"; render(); });
+      return;
+    }
     if (state.step === "phone") {
       el.innerHTML = '<div class="phv-card">' +
         '<div class="phv-head"><div class="phv-grab"></div>' +
@@ -451,7 +469,7 @@
       setMsg("done", "Verified.");
       var t = document.querySelector("#" + ROOT_ID + " .phv-t"); if (t) t.textContent = "Number verified";
       setTimeout(function () { close(); toast("Mobile number verified"); }, 650);
-      try { document.dispatchEvent(new CustomEvent("smd:phone-verified")); } catch (e) {}
+      try { document.dispatchEvent(new CustomEvent("smd:phone-verified", { detail: { phone: state.phone } })); } catch (e) {}
     }).catch(function () { busy(false, "phvVerify", "Verify"); showErr("You are offline. Try again once you are connected."); });
   }
 
@@ -482,7 +500,8 @@
       setTimeout(function () { fitViewport(undefined); }, 120); setTimeout(function () { fitViewport(undefined); }, 420);
     }, true);
   } catch (e) {}
-  function open(phone) { state = { phone: phone || state.phone || "", step: "phone", channel: "", to: "", sentAt: 0, busy: false, left: state.left || null }; render(); }
+  // opts.verified: Profile says this number is already verified, so open on that, not on Send code.
+  function open(phone, opts) { phone = phone || state.phone || ""; state = { phone: phone, step: opts && opts.verified && phone ? "done" : "phone", channel: "", to: "", sentAt: 0, busy: false, left: state.left || null }; render(); }
 
   var _asked = false;
   function check() {

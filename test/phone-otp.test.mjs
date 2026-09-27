@@ -67,19 +67,20 @@ test("auto: WhatsApp first when configured, and the code goes in the BSP body", 
     assert.equal(body.to, "919876543210"); assert.equal(body.code, "123456"); assert.match(body.text, /123456 is your StewardMD verification code/);
   }));
 
-test("auto: WhatsApp fails -> SMS backup (2Factor OTP API), reported as a fallback", () =>
+test("auto: WhatsApp fails -> SMS backup (our DLT OTP template), reported as a fallback", () =>
   withFetch((url) => url.indexOf("bsp.example") >= 0 ? res(false, "err") : res(true, '{"Status":"Success","Details":"sid"}'), async (calls) => {
     const r = await deliverOtp({ ...WA, ...SMS2F }, { phone: "919876543210", code: "123456", channel: "auto" });
     assert.deepEqual(r, { ok: true, channel: "sms", fellBack: true });
     assert.equal(calls.length, 2);
-    assert.match(calls[1].url, /^https:\/\/2factor\.in\/API\/V1\/k2f\/SMS\/9876543210\/123456$/, "10-digit number, code, default OTP template");
+    assert.equal(calls[1].url, "https://2factor.in/API/R1/");
+    assert.equal(new URLSearchParams(calls[1].o.body).get("var1"), "123456");
   }));
 
-test("auto with no WhatsApp provider: straight to SMS, not a fallback; template name honoured", () =>
+test("auto with no WhatsApp provider: straight to SMS, not a fallback", () =>
   withFetch(() => res(true, '{"Status":"Success"}'), async (calls) => {
-    const r = await deliverOtp({ ...SMS2F, TWOFACTOR_TEMPLATE_OTP: "STEWARDMD_OTP" }, { phone: "919876543210", code: "654321", channel: "auto" });
+    const r = await deliverOtp(SMS2F, { phone: "919876543210", code: "654321", channel: "auto" });
     assert.deepEqual(r, { ok: true, channel: "sms", fellBack: false });
-    assert.match(calls[0].url, /\/654321\/STEWARDMD_OTP$/);
+    assert.equal(calls[0].url, "https://2factor.in/API/R1/");
   }));
 
 test("channel sms skips WhatsApp even when it is configured", () =>
@@ -101,9 +102,11 @@ test("nothing configured: no_channel, no network, never throws", () =>
     assert.equal(smsAvailable({}), false); assert.equal(smsAvailable(SMS2F), true);
   }));
 
-test("with the MAIK header set, SMS goes as our own approved DLT OTP template (code, 10 minutes)", () =>
+// 2026-09-28: production's TWOFACTOR_SENDER was not MAIK, 2Factor refused every OTP and the old fallback phoned
+// the doctor instead. The header is the one the template is registered under, whatever TWOFACTOR_SENDER says.
+test("SMS goes as our own approved DLT OTP template (code, 10 minutes) from MAIK, whatever TWOFACTOR_SENDER holds", () =>
   withFetch(() => res(true, '{"Status":"Success","Details":"sid"}'), async (calls) => {
-    const r = await deliverOtp({ ...SMS2F, TWOFACTOR_SENDER: "MAIK" }, { phone: "919876543210", code: "445566", channel: "sms" });
+    const r = await deliverOtp({ ...SMS2F, TWOFACTOR_SENDER: "STWDMD" }, { phone: "919876543210", code: "445566", channel: "sms" });
     assert.deepEqual(r, { ok: true, channel: "sms", fellBack: false });
     assert.equal(calls.length, 1); assert.equal(calls[0].url, "https://2factor.in/API/R1/");
     const f = new URLSearchParams(calls[0].o.body);
@@ -112,12 +115,23 @@ test("with the MAIK header set, SMS goes as our own approved DLT OTP template (c
     assert.equal(f.get("var1"), "445566"); assert.equal(f.get("var2"), String(TTL / 60));
   }));
 
-test("our DLT template refused -> 2Factor's own OTP route still delivers the same code", () =>
+test("our DLT template refused: the send fails and is logged, never a 2Factor voice call", () =>
+  withFetch(() => res(true, '{"Status":"Error","Details":"Invalid sender 919876543210 k2f"}'), async (calls) => {
+    const warned = []; const realWarn = console.warn; console.warn = (...a) => warned.push(a.join(" "));
+    let r; try { r = await deliverOtp(SMS2F, { phone: "919876543210", code: "778899", channel: "sms" }); } finally { console.warn = realWarn; }
+    assert.equal(r.ok, false);
+    assert.equal(calls.length, 1, "no V1 call: unnamed, that route rings the doctor");
+    assert.equal(warned.length, 1); assert.match(warned[0], /STEWARDMD_OTP \(HTTP 200\): .*Invalid sender/);
+    assert.doesNotMatch(warned[0], /919876543210|k2f/, "the log carries neither the number nor the key");
+  }));
+
+test("our DLT template refused, a 2Factor OTP SMS template named: that route delivers the same code", () =>
   withFetch((url) => url.indexOf("/API/R1/") >= 0 ? res(true, '{"Status":"Error","Details":"x"}') : res(true, '{"Status":"Success"}'), async (calls) => {
-    const r = await deliverOtp({ ...SMS2F, TWOFACTOR_SENDER: "MAIK" }, { phone: "919876543210", code: "778899", channel: "sms" });
+    const realWarn = console.warn; console.warn = () => {};
+    let r; try { r = await deliverOtp({ ...SMS2F, TWOFACTOR_TEMPLATE_OTP: "SMD_OTP" }, { phone: "919876543210", code: "778899", channel: "sms" }); } finally { console.warn = realWarn; }
     assert.equal(r.ok, true); assert.equal(r.channel, "sms");
     assert.equal(calls.length, 2);
-    assert.match(calls[1].url, /^https:\/\/2factor\.in\/API\/V1\/k2f\/SMS\/9876543210\/778899$/);
+    assert.match(calls[1].url, /^https:\/\/2factor\.in\/API\/V1\/k2f\/SMS\/9876543210\/778899\/SMD_OTP$/);
   }));
 
 test("other SMS providers get the code through sendSms (msg91 recipient var2)", () =>

@@ -10,10 +10,11 @@
  *   channel "sms"       SMS only (the "Send by SMS instead" button).
  *   channel "whatsapp"  WhatsApp only.
  * Providers are the FollowCare senders (_followcare_whatsapp.js / _followcare_sms.js), so no new
- * vendor is needed. SMS goes first through our own DLT OTP template (sendDlt, when TWOFACTOR_SENDER
- * is set), and if that fails through 2Factor's dedicated OTP API (a DLT-approved OTP template comes
- * with the account, TWOFACTOR_TEMPLATE_OTP overrides the name); every other provider goes through
- * sendSms() with the code in var2 / the body. WhatsApp through the custom BSP fills
+ * vendor is needed. With 2Factor, SMS goes as our own DLT OTP template (sendDlt, header MAIK). If
+ * that is refused, 2Factor's OTP API is tried ONLY when TWOFACTOR_TEMPLATE_OTP names an approved
+ * 2Factor OTP SMS template: without one that route delivers the code as a VOICE CALL (2Factor's
+ * default), which is what doctors got instead of an SMS until 2026-09-28. Every other provider goes
+ * through sendSms() with the code in var2 / the body. WhatsApp through the custom BSP fills
  * PHONE_OTP_WA_BODY when set (same {{to}} {{name}} {{link}} {{text}} tokens; the code is {{link}}),
  * else the FollowCare body.
  *
@@ -78,7 +79,7 @@ function whatsappEnv(env) {
   return env.PHONE_OTP_WA_BODY ? Object.assign({}, env, { FOLLOWCARE_WA_BODY: env.PHONE_OTP_WA_BODY }) : env;
 }
 
-// 2Factor's OTP endpoint sends the code through its pre-approved OTP template.
+// 2Factor's OTP endpoint with a named OTP SMS template (TWOFACTOR_TEMPLATE_OTP). Unnamed, it calls instead.
 async function twoFactorOtp(env, phone, code) {
   const tpl = env.TWOFACTOR_TEMPLATE_OTP ? "/" + encodeURIComponent(env.TWOFACTOR_TEMPLATE_OTP) : "";
   const to10 = phone.length > 10 ? phone.slice(-10) : phone;
@@ -94,12 +95,10 @@ export function smsAvailable(env) {
 }
 
 async function viaSms(env, phone, code, name) {
-  // Our own approved DLT OTP template (header MAIK) first; 2Factor's OTP route below stays the fallback.
   if (dltConfigured(env)) {
     const own = await sendDlt(env, phone, "otp", [code, String(TTL / 60)]);
-    if (own.ok) return own;
-  }
-  if (smsProvider(env) === "twofactor" && env.TWOFACTOR_API_KEY) {
+    // No template named: fail here (the doctor sees Resend) rather than fall through to a voice call.
+    if (own.ok || !env.TWOFACTOR_TEMPLATE_OTP) return own;
     try { return await twoFactorOtp(env, phone, code); } catch (e) { return { ok: false, reason: "exception" }; }
   }
   return sendSms(env, { toE164: phone, body: otpText(code), templateId: env.SMS_TEMPLATE_OTP || undefined, vars: { var1: name || "Doctor", var2: code, name: name || "Doctor", code: code, link: code } });

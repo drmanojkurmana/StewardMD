@@ -3610,6 +3610,18 @@
     if (!u || typeof u.getIdTokenResult !== "function") { paint(true); return; }
     u.getIdTokenResult().then(function (r) { paint(!!(r && r.claims && r.claims.phoneVerified === true)); }, function () { paint(true); });
   }
+  // A code just verified: put the number on this device's copy of the profile at once, so Profile paints
+  // Verified even when neither read below answers (owner, 2026-09-28: verified, and Profile still said
+  // Checking). The server stamps the same fields on the profile doc (functions/api/auth phone-verify).
+  document.addEventListener("smd:phone-verified", function (e) {
+    try {
+      var p = e && e.detail && e.detail.phone, u = window.SMD_AUTH && SMD_AUTH.currentUser;
+      if (!p || !u) return;
+      var k = "smd_profile_cache:" + u.uid, c = JSON.parse(localStorage.getItem(k) || "null") || {};
+      c.phone = p; c.phoneVerifiedNumber = p; c.phoneVerifiedAt = Date.now();
+      localStorage.setItem(k, JSON.stringify(c));
+    } catch (x) {}
+  });
   // The one Profile page is permanent (owner, 2026-09-27: "hardcode this change"). The flag that used
   // to gate it (smd_profile_hub) is retired; the old three-door layout is gone from every entry point.
   function profileHubOn() { return true; }
@@ -3624,12 +3636,13 @@
           // Adding or changing the number always goes through the WhatsApp / SMS code, so "Verified"
           // can never sit next to a number nobody proved. Profile comes back once it is done.
           var cur = ""; try { cur = (s.querySelector("#pfPhoneNum") || { getAttribute: function () { return ""; } }).getAttribute("data-num") || ""; } catch (e) {}
+          var hubEl = s.querySelector(".hv-pf"), isVerified = !!(hubEl && hubEl._phone);
           closeSheet();
           if (!acctWireHub._phoneBack) {
             acctWireHub._phoneBack = true;
             document.addEventListener("smd:phone-verified", function () { setTimeout(function () { try { openAccount(); } catch (e) {} }, 800); });
           }
-          setTimeout(function () { try { if (window.SMD_PHONE_VERIFY && SMD_PHONE_VERIFY.open) SMD_PHONE_VERIFY.open(cur); } catch (e) {} }, 80);
+          setTimeout(function () { try { if (window.SMD_PHONE_VERIFY && SMD_PHONE_VERIFY.open) SMD_PHONE_VERIFY.open(cur, { verified: isVerified }); } catch (e) {} }, 80);
         }
         else if (k === "subscription") { try { openSubscription(); } catch (e) {} }
         else if (k === "aiusage") { closeSheet(); try { openAiUsage(); } catch (e) {} }
@@ -3749,6 +3762,21 @@
     }
     function offline(msg, why) {
       ["regno", "hospital", "city", "phone", "degree", "speciality"].forEach(function (k) { setRow(k, "", { placeholder: msg, edit: false }); });
+      // The Mobile number row only paints from the profile doc, so without this it said Checking for
+      // good. The account's phoneVerified claim is the server's own answer; show that instead.
+      try {
+        var hub = card.closest(".hv-pf") || card, pv = hub.querySelector("#pfPhoneVal"), pn = hub.querySelector("#pfPhoneNum");
+        if (pv && pn && pn.textContent === "Checking…") {
+          pn.textContent = "Number not loaded"; pv.textContent = ""; pv.className = "hub-v";
+          var cu = window.SMD_AUTH && SMD_AUTH.currentUser;
+          if (cu && typeof cu.getIdTokenResult === "function") cu.getIdTokenResult().then(function (r) {
+            var ok = !!(r && r.claims && r.claims.phoneVerified === true);
+            if (pn.textContent !== "Number not loaded") return;   // a read answered after all
+            pv.textContent = ok ? "Verified" : "Not verified"; pv.className = "hub-v " + (ok ? "ok" : "warn");
+            hub._phone = ok; hubCta(hub);
+          }, function () {});
+        }
+      } catch (e) {}
       // ONE note, ever. This used to append unconditionally, so any second call (the auth watcher
       // re-renders, and the .catch() below can fire after the !fdb branch already ran) stacked a
       // second "Couldn't load your details" row underneath the first — visible in the wild.
@@ -3872,14 +3900,20 @@
     (function viaServer() {
       var u = null; try { u = SMD_AUTH && SMD_AUTH.currentUser; } catch (e) {}
       if (!u || typeof u.getIdToken !== "function") { failed({ code: "no-user" }); return; }
+      // Bounded like the SDK read: a token refresh or fetch that never settles must still let the
+      // "both failed" answer through, or every row waits on Loading / Checking for good.
+      var srvDone = false;
+      setTimeout(function () { if (!srvDone) { srvDone = true; failed({ code: "server-timeout" }); } }, 10000);
+      var srvFail = function (e) { if (srvDone) return; srvDone = true; failed(e); };
       u.getIdToken().then(function (tok) {
         return fetch((window.SMD_API_BASE || "") + "/api/auth/my-profile", {
           method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: "{}"
         });
       }).then(function (r) { return r.json(); }).then(function (j) {
         if (!j || !j.ok) throw { code: (j && j.error) || "server" };
+        srvDone = true;
         fresh(wrap(j.profile, j.exists));
-      }).catch(function (e) { failed(e); });
+      }).catch(srvFail);
     })();
 
     function onData(snap) {

@@ -23,7 +23,7 @@ import { emailOtp, emailResetCode, emailTempPassword } from "../../_email.js";
 import { phoneStart, phoneVerify, deliverOtp, phoneVerifyEnabled } from "../../_phone_otp.js";
 import { markPhoneVerified, checkPhoneAvailable, bindPhone } from "../../_lifecycle.js";
 import { clearBudgetCache } from "../../_aibudget.js";
-import { fsGet } from "../../_fbfirestore.js";
+import { fsGet, fsCommit, wUpdate } from "../../_fbfirestore.js";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 const TTL = 600;            // 10 minutes
@@ -143,6 +143,13 @@ async function handle(context) {
             await mergeUserClaims(env, who.uid, pc.phoneVerifiedAt ? { phoneVerified: true } : { phoneVerified: true, phoneVerifiedAt: Date.now() });
           } catch (e) { try { await mergeUserClaims(env, who.uid, { phoneVerified: true }); } catch (x) {} }
           try { await markPhoneVerified(env, who.uid, phone); } catch (e) {}
+          // The profile's "Verified" reads phoneVerifiedNumber off this doc. The app used to write it
+          // alone, through the Firestore SDK, which never lands inside the iOS WebView: the code was
+          // accepted and Profile still said Checking / Not verified (2026-09-28). Written here too.
+          try {
+            const e164 = "+" + phone;
+            await fsCommit(env, [wUpdate(env, "users/" + who.uid + "/profile/self", { phone: e164, phoneVerifiedAt: Date.now(), phoneVerifiedNumber: e164 })]);
+          } catch (e) { try { console.warn("[phone-verify] profile stamp failed", String(e && (e.code || e.message) || e)); } catch (x) {} }
           // The Free AI allowance follows phoneVerified (D8, 2026-09-26): drop the cached cap so the
           // new allowance applies on the next call rather than after the ~26 h cache.
           try { await clearBudgetCache(env, who.uid); } catch (e) {}

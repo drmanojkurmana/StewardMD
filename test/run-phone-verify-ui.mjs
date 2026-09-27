@@ -169,8 +169,10 @@ try {
   ok(/not right/.test(await text()) && /4 tries left/.test(await text()), "a wrong code shows the tries left");
   ok(await ev(`var s=document.getElementById("phvSlots"); return s.classList.contains("bad") && document.getElementById("phvCode").value==="";`) === true, "the row shakes red and clears for another try");
   ok(await on() === true, "and the sheet stays open");
+  await ev(`window.__pvEv = null; document.addEventListener("smd:phone-verified", function (e) { window.__pvEv = e.detail && e.detail.phone; }, { once: true }); return 1;`);
   await type("phvCode", "482913"); await sleep(300);
   ok(await ev(`var s=document.getElementById("phvSlots"); return !!(s && s.classList.contains("ok"));`) === true, "the six slots sweep green on the right code");
+  ok(await ev(`return window.__pvEv;`) === "+91 98765 43210", "smd:phone-verified carries the verified number (Profile paints it without a read)");
   if (process.env.SHOT) { const shot = await call("Page.captureScreenshot", { format: "png" }); (await import("node:fs")).writeFileSync(process.env.SHOT.replace(/\.png$/, "-ok.png"), Buffer.from(shot.result.data, "base64")); }
   await sleep(1200);
   ok(await on() === false, "six correct digits verify automatically and close the sheet");
@@ -236,6 +238,23 @@ try {
   ok(/already verified on another StewardMD account/.test(await text()), "phone-in-use at Verify shows the same sentence");
   ok(await ev(`try{return localStorage.getItem("smd_phone_verified_u-doc-1")}catch(e){return null}`) !== "1", "and the device is not marked verified");
   await ev(`window.__inUseAtVerify = false; SMD_PHONE_VERIFY.close(); return 1;`);
+
+  // ── a number already verified: Profile opens the sheet on that, not on Send code (owner, 2026-09-28:
+  // "on pressing it again sends the code") ──
+  await ev(`window.__calls = []; SMD_PHONE_VERIFY._reset(); SMD_PHONE_VERIFY.open("+91 98765 43210", { verified: true }); return 1;`); await sleep(300);
+  const done = await text();
+  ok(/Number verified/.test(done) && /\+91 98765 43210 is verified on this account/.test(done), "a verified number opens on Number verified, naming it");
+  ok(await ev(`return !document.getElementById("phvSend") && !document.getElementById("phvCode");`) === true && await ev(`return window.__calls.length;`) === 0, "no Send button, no code step, nothing sent");
+  ok(!/—/.test(done), "no em-dash on it");
+  if (process.env.SHOT) { const shot = await call("Page.captureScreenshot", { format: "png" }); (await import("node:fs")).writeFileSync(process.env.SHOT.replace(/\.png$/, "-verified.png"), Buffer.from(shot.result.data, "base64")); }
+  await click("phvChange"); await sleep(300);
+  ok(await ev(`var i=document.getElementById("phvPhone"); return i && i.value;`) === "+91 98765 43210" && await ev(`return window.__calls.length;`) === 0, "Change number goes to the number step, filled in, still nothing sent");
+  await ev(`SMD_PHONE_VERIFY.open("+91 98765 43210", { verified: true }); return 1;`); await sleep(300);
+  await click("phvDone"); await sleep(200);
+  ok(await on() === false, "Done closes it");
+  await ev(`SMD_PHONE_VERIFY.open("+91 98765 43210"); return 1;`); await sleep(300);
+  ok(await ev(`return !!document.getElementById("phvSend");`) === true, "opened without verified (an unverified number): the Send code step, as before");
+  await ev(`SMD_PHONE_VERIFY.close(); return 1;`);
 
   // ── kill switches ──
   await ev(`try{sessionStorage.clear(); localStorage.setItem("smd_phone_verify","0")}catch(e){} SMD_PHONE_VERIFY._reset(); SMD_PHONE_VERIFY.check(); return 1;`); await sleep(900);
