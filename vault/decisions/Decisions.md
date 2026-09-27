@@ -5,6 +5,58 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-26 · eLogbook made easy: HoD may approve joins and assign guides; supervisor falls back to the guide
+
+**Decision (owner: "make it user friendly and easy").** A resident can request to join by institution
+code; an Academic Cell OR the department HoD approves in one tap. The HoD may also assign guides, in
+their department scope only. A blank supervisor routes to the resident's guide, and with no guide the
+entry waits (unassigned) in the HoD queue instead of being refused. Enrolling an email that has not
+signed in yet leaves a pending invite.
+**Why.** NMC requires monthly guide authentication (PGMER 5.2(vii)), not a named supervisor per entry;
+the old chain made authentication unreachable (no guide could be assigned in the app).
+**What did not move.** No self-verification, verified entries immutable, one signature per month by a
+registration-verified signer, the role is never self-declared. **Reversible:** env
+`PGLOG_SUPERVISOR_FALLBACK`, `PGLOG_INVITES`, `PGLOG_JOIN_REQUESTS` ("0" restores) and client
+`smd_pglog_easy`. **Status:** built on the role-plans branch (PR #1272).
+
+## 2026-09-26 · Role box locks Home tools by role; trainees never hold the prescribing claim
+
+**Decision (owner).** A Role box at sign-up and in Profile (Medical student / Intern / PG Resident /
+Doctor) decides which Home tools open; the rest stay visible but locked with an explanation.
+Clinician Pro and Ultimate open the beta imaging AI without a code. Dictation credits are shown only as
+credits (Rs 10 = 100 credits), never in rupees, with buyable packs. All audit bugs fixed
+(vault/Role-Tiers.md section 6).
+**Why the role lock is presentation only.** The declared role is self-reported and changeable, so it
+must never be the thing that stops prescribing or unlocks paid work: those stay on server claims.
+That is also why approved students and interns now get `traineeVerified`, never `verified`.
+**Trade-off.** A user can mis-declare to see more tiles; the tools behind them still enforce their own
+gates. **Status.** Built on branch `claude/role-based-features-audit-9pph8l`; live after merge + native
+rebuild. Open: backfill of the phone index, owner review of legacy trainee approvals.
+
+## 2026-09-26 · Cloud dictation fallback gets its own monthly credit; Clinician struck prices
+
+**Decision (owner).** The cloud speech-to-text fallback (audio sent to `/api/ai/transcribe` only when
+the phone cannot transcribe, about Rs 6 per 5-minute consult) is cut from a separate monthly rupee
+wallet: Free Rs 10, Pro accounts Rs 50, Clinician / Clinician Pro Rs 100. On-device dictation stays
+free and unlimited. Struck-through anchors: Clinician Rs 3,499, Clinician Pro Rs 4,999.
+**Why.** The fallback is the only dictation path that costs real money per second; a wallet caps it
+without touching the free on-device path. **Trade-off.** A doctor whose phone cannot run Whisper
+runs out mid-month and is told to use on-device dictation. **Status.** Built behind
+`STT_FALLBACK_CREDITS_ON` (default ON, `"0"` off); live only after merge to main.
+
+## 2026-09-26 · Role-based plans: Co-Resident = two logins, one Trainee price, existing Pro becomes Ultimate
+
+**Decision (owner).** (1) Co-Resident is one subscription with two logins, one device each, not one
+shared login: the PG logbook, verification and Rx must name one doctor. (2) UG Student and Intern
+share one Trainee price; the verified role decides features. (3) Every account holding the `pro`
+claim today moves to a new never-sold **Ultimate** tier (everything, for friends and testers),
+through a reviewed, reversible migration. (4) Every plan, Free included, is limited to one phone +
+one iPad. (5) The Free AI and imaging allowance unlocks only after mobile-number verification
+(`phoneVerified`), with one number per account. (6) Plan prices stay as live today; the 80%-margin allowance and token/FollowCare
+pack model starts 3 months later (target 2026-12-26), with an Introductory offer at today's terms until
+then. WardSynQ is the only plan newly priced. **Open:** beta imaging AI without a code, strike-through
+anchors, sweep vs phone-verified Free. Full audit, matrix and price model: [[Role-Tiers]]. **Status:** nothing enforced yet.
+
 ## 2026-09-26 · Medical Core ships its DETERMINISTIC half ON by default as BETA; the model half stays off
 
 **Decision.** `smd_medcore` defaults to `true` in `medcore-flags.js`. Owner's call. What that turns on for every

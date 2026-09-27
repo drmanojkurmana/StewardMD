@@ -461,3 +461,62 @@ body.ui-v2 #pglogRoot .pgl-btn.ghost { color: var(--pgl-ink) !important; }
 .pgl-switch small { display: block; margin-top: 4px; font: 500 12px/1.5 var(--pgl-sans, system-ui); color: var(--pgl-muted, #5B6779); }
 
 @media (prefers-reduced-motion: reduce) { .pgl-qmic.on { animation: none; } }
+
+/* --- easy mode (smd_pglog_easy) --- */
+/* "Why is this required?": the provenance badges live here on home, forms and headers. */
+#pglogRoot .pgl-why { margin-top: 8px; font-size: 12px; color: var(--pgl-muted); }
+#pglogRoot .pgl-why > summary { display: inline-flex; align-items: center; gap: 4px; cursor: pointer; list-style: none;
+  font-weight: 700; color: var(--pgl-primary); min-height: 32px; -webkit-tap-highlight-color: transparent; }
+#pglogRoot .pgl-why > summary::-webkit-details-marker { display: none; }
+#pglogRoot .pgl-why > summary .material-symbols-rounded { font-size: 16px; }
+#pglogRoot .pgl-why > div { margin-top: 4px; padding: 8px 10px; border-radius: 10px; background: var(--pgl-surface-2); line-height: 1.5; }
+/* The supervisor, as a name. */
+#pglogRoot .pgl-supchip { display: flex; align-items: center; gap: 8px; width: 100%; box-sizing: border-box; min-height: 46px;
+  padding: 9px 12px; border: 1px solid var(--pgl-line); border-radius: var(--pgl-r-ctl); background: var(--pgl-surface);
+  color: var(--pgl-ink); font: inherit; font-size: 14.5px; text-align: left; cursor: pointer; }
+#pglogRoot .pgl-supchip b { font-weight: 700; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#pglogRoot .pgl-supchip small { font-size: 11.5px; color: var(--pgl-muted); background: var(--pgl-hue-soft); border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
+#pglogRoot .pgl-supchip .chg { margin-left: auto; font-size: 12.5px; font-weight: 700; color: var(--pgl-primary); white-space: nowrap; }
+#pglogRoot .pgl-fixtag { flex: 0 0 auto; padding: 5px 11px; border-radius: 999px; background: var(--pgl-bad); color: #fff; font-size: 12px; font-weight: 800; }
+#pglogRoot .pgl-vstate[data-s="failed"] { color: var(--pgl-bad); background: var(--pgl-bad-bg); }
+#pglogRoot .pgl-row.static.pgl-waiting { cursor: default; }
+#pglogRoot .pgl-row-quick { border-color: color-mix(in srgb, var(--pgl-primary) 40%, var(--pgl-line)); }
+#pglogRoot .pgl-2col { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
+#pglogRoot .pgl-2col .pgl-field { margin: 8px 0; }
+/* Dictation beside a free-text field. */
+#pglogRoot .pgl-micwrap { position: relative; }
+#pglogRoot .pgl-micwrap input, #pglogRoot .pgl-micwrap textarea { padding-right: 50px; }
+#pglogRoot .pgl-fmic { position: absolute; right: 6px; top: 6px; width: 36px; height: 36px; border: 0; border-radius: 50%;
+  display: grid; place-items: center; background: var(--pgl-hue-soft); color: var(--pgl-ink-hue); cursor: pointer; }
+#pglogRoot .pgl-fmic.on { background: var(--pgl-bad); color: #fff; }
+/* Date chips. */
+#pglogRoot .pgl-datechips { align-items: center; }
+#pglogRoot .pgl-datechips input[type="date"] { width: auto; flex: 1 1 140px; min-width: 0; padding: 8px 10px; font-size: 14px; }
+.pgl-datepick { position: relative; display: inline-flex; align-items: center; gap: 5px; overflow: hidden; cursor: pointer; }
+.pgl-datepick .material-symbols-rounded { font-size: 17px; }
+.pgl-datepick input { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; border: 0; padding: 0; }
+/* Guide batch review: one month of one resident. */
+#pglogRoot .pgl-resgrp { margin-top: 22px; }
+#pglogRoot .pgl-month { padding: 12px; }
+#pglogRoot .pgl-month-h { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+#pglogRoot .pgl-bitem { display: flex; align-items: stretch; gap: 8px; border-top: 1px solid var(--pgl-line); }
+#pglogRoot .pgl-bchk { flex: 0 0 44px; display: grid; place-items: center; color: var(--pgl-ok); }
+#pglogRoot .pgl-bchk input { width: 22px; height: 22px; margin: 0; accent-color: var(--pgl-primary); }
+#pglogRoot .pgl-bchk .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+#pglogRoot .pgl-bmain { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 10px 0;
+  border: 0; background: none; color: var(--pgl-ink); font: inherit; text-align: left; cursor: pointer; }
+#pglogRoot .pgl-bmain[disabled] { cursor: default; }
+#pglogRoot .pgl-bmain .pgl-row-t { font-size: 14px; }
+#pglogRoot .pgl-month .pgl-btn.wide { margin-top: 10px; }
+/* Requests to join. */
+#pglogRoot .pgl-jr { padding: 12px 0 4px; border-top: 1px solid var(--pgl-line); }
+#pglogRoot .pgl-jr:first-of-type { border-top: 0; }
+#pglogRoot .pgl-joins h3 .pgl-count { margin-left: 6px; color: var(--pgl-muted); }
+#pglogRoot .pgl-join .t { line-height: 1.35; }
+/* The in-app reason sheet (replaces window.prompt). */
+.pgl-reason-b { margin: 0 0 12px; font: 500 13.5px/1.55 var(--pgl-sans, system-ui); color: var(--pgl-muted, #5B6779); }
+.pgl-reason textarea { min-height: 88px; font: 500 15px/1.45 var(--pgl-sans, system-ui); }
+.pgl-reason-err { min-height: 16px; margin-top: 6px; font: 600 12px var(--pgl-sans, system-ui); color: var(--pgl-bad, #B42332); }
+#pglogRoot .pgl-datepick.on { background: var(--pgl-ink-hue); border-color: var(--pgl-ink-hue); color: #fff; }
+#pglogRoot .pgl-datepick { font: 600 13px var(--pgl-sans); }
+#pglogRoot .pgl-qsec .pgl-datepick, #pglogRoot .pgl-datepick span { font-size: 13px; font-weight: 600; }

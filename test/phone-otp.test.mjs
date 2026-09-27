@@ -122,7 +122,7 @@ test("phoneStart: validates, stores a 6-digit code with a TTL, counts the number
   assert.equal(r.ok, true); assert.equal(r.channel, "whatsapp"); assert.equal(r.to, "+91 ******3210"); assert.equal(r.ttl, TTL);
   const rec = await store.get(otpKey("u1"), "json");
   assert.match(rec.code, /^\d{6}$/); assert.equal(rec.phone, "919876543210"); assert.equal(rec.tries, 0);
-  assert.equal(await store.get(capKey("919876543210")), "1");
+  assert.equal(await store.get(await capKey("919876543210")), "1");
   assert.equal(d.sent[0].code, rec.code);
 });
 
@@ -141,7 +141,7 @@ test("phoneStart: 30 s throttle per account; a same-window resend by SMS carries
 
 test("phoneStart: the per-number daily cap stops at DAILY_CAP, whoever asks", async () => {
   const store = memKV(); const d = deps(store);
-  await store.put(capKey("919876543210"), String(DAILY_CAP));
+  await store.put(await capKey("919876543210"), String(DAILY_CAP));
   const r = await phoneStart({ uid: "someone-else" }, { phone: "9876543210" }, d);
   assert.equal(r.error, "daily-cap"); assert.equal(r.status, 429); assert.equal(d.sent.length, 0);
 });
@@ -175,7 +175,7 @@ test("phoneVerify: mismatch counts down, the fifth wrong guess burns the code, t
   assert.equal(await store.get(otpKey("u1"), "json"), null, "code burnt");
   assert.equal(verified, null);
 
-  await store.put(capKey("919876543210"), "0");
+  await store.put(await capKey("919876543210"), "0");
   const rec0 = { code: "424242", phone: "919876543210", exp: Math.floor(Date.now() / 1000) + 100, tries: 0, sentAt: 0 };
   await store.put(otpKey("u1"), JSON.stringify(rec0));
   const ok = await phoneVerify(WHO, { code: "42 42 42" }, v);

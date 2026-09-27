@@ -14,6 +14,7 @@ import { runVision, runClinical, health, logJSON, httpErr } from "../../_fundx_a
 import { identify, usageKv } from "../../_usage.js";
 import { cfAccessEmail } from "../../_fbauth.js";
 import { checkActive } from "../../_experimental.js";
+import { planEarlyAccess } from "../../_features.js";
 import { ownerOK } from "../../_adminauth.js";
 
 const CORS_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost", "ionic://localhost", "https://stewardmd.in", "https://www.stewardmd.in"];
@@ -47,6 +48,8 @@ async function authorise(request, env) {
 async function betaGate(request, env) {
   if (env.EXPERIMENTAL_ENFORCE_FUNDX !== "1") return { ok: true };
   try { if (await ownerOK(request, env)) return { ok: true }; } catch (e) {}
+  // Clinician Pro / Ultimate: early access is part of the plan, no code needed (owner 2026-09-26).
+  try { if (await planEarlyAccess(env, request, "fundx")) return { ok: true }; } catch (e) {}
   const tok = request.headers.get("X-XA-Token") || "";
   try { const acc = await checkActive(env, "fundx", tok); if (acc && acc.active) return { ok: true }; } catch (e) {}
   return { ok: false };

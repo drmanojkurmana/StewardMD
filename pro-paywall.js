@@ -345,8 +345,30 @@
     });
   }
   // Route a purchase: iOS -> StoreKit via SMD_IAP (Session A's plugin); web/Android -> Razorpay Standard Checkout.
+  /* The Trainee plan needs a reviewed account (audit finding 12): registration-verified, a student/intern
+   * approved by the owner (traineeVerified), or in manual review. Checked BEFORE any store sheet opens,
+   * because an App Store purchase cannot be refused after the money moves. The server refuses web
+   * orders the same way (functions/api/billing traineeGate). */
+  function traineeReady() {
+    var u = fbUser();
+    if (!u || typeof u.getIdTokenResult !== "function") return Promise.resolve(true);   // fail-open; server still checks web
+    return u.getIdTokenResult().then(function (r) {
+      var c = (r && r.claims) || {};
+      return c.verified === true || c.traineeVerified === true || (+c.provUntil || 0) > Date.now();
+    }, function () { return true; });
+  }
+  var TRAINEE_VERIFY_MSG = "The Trainee plan is for verified students, interns and residents. Verify your college ID first, then choose the plan.";
   function doBuy(body, btn) {
     if (!fbUser()) { try { if (window.SMD_signInWithGoogle) SMD_signInWithGoogle(); } catch (e) {} return; }
+    if (body && body.tier === "student" && !body._traineeChecked) {
+      traineeReady().then(function (ok) {
+        if (ok) return doBuy(Object.assign({}, body, { _traineeChecked: true }), btn);
+        toast(TRAINEE_VERIFY_MSG);
+        try { if (window.SMD_VERIFY && SMD_VERIFY.openPanel) { close(); SMD_VERIFY.openPanel(); } } catch (e) {}
+      });
+      return;
+    }
+    if (body && body._traineeChecked) { body = Object.assign({}, body); delete body._traineeChecked; }
     if (plat() === "ios") {
       if (!iosNativeIap()) { toast("Purchases are coming soon on iOS."); return; }
       var pid = productIdFor(body); if (!pid) return;
@@ -362,7 +384,7 @@
       .then(function (x) {
         if (x.s !== 200 || !x.d || !x.d.orderId) {
           if (btn) btn.disabled = false;
-          toast(x.d && x.d.error === "razorpay-not-configured" ? "Payments aren’t switched on yet." : (x.d && x.d.error === "signin-required" ? "Sign in first." : "Couldn’t start checkout. Try again."));
+          toast(x.d && x.d.error === "razorpay-not-configured" ? "Payments aren’t switched on yet." : (x.d && x.d.error === "signin-required" ? "Sign in first." : (x.d && x.d.error === "verify-first" ? TRAINEE_VERIFY_MSG : "Couldn’t start checkout. Try again.")));
           return;
         }
         var o = x.d;
@@ -428,8 +450,8 @@
   function openTopUp(info) {
     info = info || {}; close();
     var c = info.copy || {}, packs = info.packs || [];
-    var title = info.feature === "scribe" ? "MaiK Voice Scribe consults" : info.feature === "msg" ? "Clinic Messaging" : "Patient credits";
-    var unitWord = info.feature === "scribe" ? "consults" : "patients";
+    var title = info.feature === "scribe" ? "MaiK Voice Scribe consults" : info.feature === "msg" ? "Clinic Messaging" : info.feature === "dict" ? "Dictation credits" : "Patient credits";
+    var unitWord = info.feature === "scribe" ? "consults" : info.feature === "dict" ? "credits" : "patients";
     var lines = (c.lines || []).map(function (t) {
       return '<div style="font:500 13px/1.6 var(--sans);color:var(--slate,#2d4356);margin-top:4px">' + esc(t) + '</div>';
     }).join("");

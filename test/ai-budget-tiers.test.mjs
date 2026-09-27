@@ -1,4 +1,8 @@
-/* test/ai-budget-tiers.test.mjs — verified doctors get a real AI allowance, unverified get none.
+/* test/ai-budget-tiers.test.mjs — the AI allowance ladder.
+ *
+ * D8 (owner, 2026-09-26): the FREE allowance needs a verified MOBILE NUMBER (`phoneVerified`), not
+ * registration verification. The third argument to budgetTier/roleAllowance/effectiveAllowance is
+ * that flag now; a registration-verified doctor reaches Pro through the Pro path (isPro true).
  *
  * OWNER 2026-08-27: "no launch promo for who not verified (like who verified had better pro limits
  * while guest have very less)". The tiers already existed in _aibudget.js and already said exactly
@@ -21,9 +25,9 @@ test("the tiers are ON by default now, and can still be switched off", () => {
   assert.equal(aiBudgetOn({ AI_BUDGET_ON: "1" }), true);
 });
 
-test("the ladder: unverified gets nothing, verified gets more, Pro gets most", () => {
-  assert.equal(budgetTier(false, null, false), "none", "signed up but unverified");
-  assert.equal(budgetTier(false, null, true), "free", "verified, free week over");
+test("the ladder: no verified mobile gets nothing, a verified mobile gets Free, Pro gets most", () => {
+  assert.equal(budgetTier(false, null, false), "none", "Free account, mobile not verified");
+  assert.equal(budgetTier(false, null, true), "free", "Free account, mobile verified");
   assert.equal(budgetTier(true, null, true), "pro");
   assert.equal(budgetTier(true, "physician", true), "promax");
 
@@ -32,9 +36,9 @@ test("the ladder: unverified gets nothing, verified gets more, Pro gets most", (
   const pro = roleAllowance(ENV, true, null, true);
   const promax = roleAllowance(ENV, true, "physician", true);
 
-  assert.equal(none, 0, "an unverified account gets no AI budget at all");
-  assert.ok(free > none, "verifying is worth something even after the free week");
-  assert.ok(pro > free, "Pro is worth more than verified-only");
+  assert.equal(none, 0, "an account without a verified mobile gets no AI budget at all");
+  assert.ok(free > none, "verifying the mobile is worth something");
+  assert.ok(pro > free, "Pro is worth more than Free");
   assert.ok(promax > pro, "physician tier is the top of the ladder");
 });
 
@@ -67,4 +71,16 @@ test("a per-account override beats the tier, and a monthly grant adds to it", ()
 test("a negative or junk override cannot create a negative allowance", () => {
   assert.equal(effectiveAllowance(ENV, false, null, false, { aiCapTokens: -5 }, "2026-08"), 0);
   assert.equal(currentMonthGrant({ aiGrantMonth: "2026-08", aiGrantTokens: -9 }, "2026-08"), 0);
+});
+
+test("D8: registration verification alone no longer grants the Free allowance; the mobile does", () => {
+  // A Free (non-Pro) doctor whose REGISTRATION is verified but whose mobile is not: callers now pass
+  // claims.phoneVerified, which is false here, so the tier is none.
+  assert.equal(roleAllowance(ENV, false, null, false), 0);
+  assert.equal(roleAllowance(ENV, false, null, true), 5000, "BUDGET_FREE_TOKENS default");
+  // Only a real boolean true counts: a truthy string from a mangled claim does not unlock tokens.
+  assert.equal(budgetTier(false, null, "true"), "none");
+  // Pro is unaffected either way.
+  assert.equal(roleAllowance(ENV, true, null, false), roleAllowance(ENV, true, null, true));
+  assert.equal(roleAllowance(ENV, true, "physician", false), roleAllowance(ENV, true, "physician", true));
 });

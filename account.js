@@ -125,6 +125,14 @@
    * synchronously on first paint (the home tool grid) must not wait for /api/billing/status.
    * Unknown → "" (never guess a tier up). */
   function tierSync() { return _tier; }
+  /* Early access to the four beta imaging AI modules (ThoreX, KardiQ X, SknX, FundX) with no
+   * access code. Owner decision 2026-09-26: Clinician Pro ("physicianpro") and the comp tier for
+   * friends/testers ("ultimate", ranked above physicianpro). Every other tier still needs the
+   * SMD_XACCESS code. THIS is the one client check: callers use hasEarlyAccess(), never a tier string
+   * compare, so adding or dropping a tier happens here and nowhere else. The server gates the actual
+   * compute (functions/_features.js); this only decides what the UI offers. Optional `t` = test hook. */
+  var EARLY_ACCESS_TIERS = ["physicianpro", "ultimate"];
+  function hasEarlyAccess(t) { var v = (typeof t === "string") ? t : _tier; return EARLY_ACCESS_TIERS.indexOf(String(v || "").toLowerCase()) >= 0; }
   function isPro() { return syncStatus().then(function () { return _pro; }); }
   function proState() { return _proState; }
   // onProChange: for surfaces that render a Pro gate synchronously and cannot poll. Fires only on an
@@ -135,7 +143,7 @@
     try { window.addEventListener("smd:pro", h); } catch (e) {}
     return function () { try { window.removeEventListener("smd:pro", h); } catch (e) {} };
   }
-  window.SMD_PRO = { isPro: isPro, isProSync: isProSync, tierSync: tierSync, proState: proState, sync: syncStatus, onProChange: onProChange, proKnown: proKnown, TEST_PRO_EMAILS: [] };
+  window.SMD_PRO = { isPro: isPro, isProSync: isProSync, tierSync: tierSync, hasEarlyAccess: hasEarlyAccess, EARLY_ACCESS_TIERS: EARLY_ACCESS_TIERS.slice(), proState: proState, sync: syncStatus, onProChange: onProChange, proKnown: proKnown, TEST_PRO_EMAILS: [] };
   onChange(function () { try { _pro = loadProCache(); _proKnown = loadProCacheRaw() !== null; _tier = loadTierCache(); } catch (e) {} try { syncStatus(); } catch (e) {} });   // reseed for this uid, then refresh
 
   /* -------- Anti-sharing device lock --------
