@@ -252,3 +252,18 @@ test("'He denies X, Y or Z' negates every item; 'rather than X'; a list's fever 
   assert.ok(!r("3 weeks of cough and 2 days of fever").present.includes("prolongedFever"), "another number in between: not the fever's");
   assert.ok(r("she has cough, fever and vomiting").present.includes("nauseaVomiting"), "a positive list stays positive");
 });
+
+// round 15: a ketone RESULT is read against the DKA threshold; "resolved completely" IS clinical improvement
+test("ketone results below 3 mmol/L, trace or zero are not ketonaemia; resolution reads as improving", () => {
+  const c15 = { valid: { ketonemia: 1, clinicallyImproving: 1 }, labels: {}, numeric: {}, v2: true,
+    syn: { ketonemia: ["ketones", "hydroxybutyrate"], clinicallyImproving: ["resolved completely", "now improving"] } };
+  const p = (t) => NLP.extract(t, c15).present;
+  assert.ok(!p("serum ketones (beta-hydroxybutyrate) 1.2").includes("ketonemia"));
+  assert.ok(!p("urine ketones trace").includes("ketonemia"));
+  assert.ok(!p("serum ketones mmol/l 0").includes("ketonemia"));
+  assert.ok(p("serum ketones 5.8 mmol/l").includes("ketonemia"));
+  assert.ok(p("urine ketones 2+").includes("ketonemia"), "a dipstick grade is positive");
+  assert.ok(p("ketones positive").includes("ketonemia"));
+  assert.ok(p("weakness that resolved completely with no residual deficit").includes("clinicallyImproving"));
+  assert.ok(!NLP.extract("serum ketones 1.2", { ...c15, v2: false }).absent.includes("ketonemia"), "classic unchanged");
+});

@@ -320,6 +320,17 @@
       // v2: "a 3-day history of fever" is the PRESENT illness; classic read "history of" as past history
       // and dropped everything in that clause
       if (v2 && r.temporality === "historical" && (PRESENT_HX_V2.test(cl) || PRESENT_BG_V2.test(cl)) && !/\b(?:known case of|past|previous|prior|resolved|status post)\b|(?:^|[^-])\bold\b/.test(cl)) r.temporality = "current";
+      // round 14: "clinically improving" / "resolved completely, no residual deficit" IS the finding: resolution and the
+      // "no" of "no residual" do not cancel it; only a negation right before it does ("not improving on")
+      if (v2 && key === "clinicallyImproving" && e.method !== "vitals") {
+        r.polarity = /\b(?:not|no|never|without)\s+(?:[a-z-]+\s+){0,1}$/.test(norm.slice(Math.max(0, e.idx - 20), e.idx)) ? "absent" : "present";
+        r.temporality = "current"; r.certainty = "explicit"; r.req = false; return r;
+      }
+      // round 14: a ketone RESULT below the DKA threshold (3 mmol/L), trace or zero is not ketonaemia
+      if (v2 && key === "ketonemia" && e.method !== "vitals") {
+        var kv = /^[^.;\d]{0,35}?(\d+(?:\.\d+)?)(\s*\+)?|^[^.;]{0,35}?\b(trace|nil|negative|absent)\b/.exec(norm.slice(e.idx + (e.srcText || "").length));
+        if (kv && (kv[3] || (kv[1] != null && +kv[1] < 3 && !kv[2]))) r.polarity = "absent";   // "2+" on a dipstick is positive
+      }
       if (v2 && hasWord(cl, FAMILY_V2)) r.temporality = "family";   // a relative's condition is not the patient's
       else if (v2 && e.method !== "vitals" && STOPPED_BEFORE_V2.test(norm.slice(Math.max(0, e.idx - 30), e.idx))) r.temporality = "resolved";
       // round 8: "fever settled on day 3" reports a finding that has gone
