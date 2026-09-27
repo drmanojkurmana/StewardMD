@@ -1,5 +1,5 @@
 {
- "version": "90e6f17dba79",
+ "version": "b88d5f039b13",
  "generated": "build",
  "countMismatches": [
   {
@@ -885,6 +885,39 @@
   },
   {
    "src": "AARSNET_2025",
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "drug": "cefuroxime",
+   "value": 65,
+   "action": "caution",
+   "why": "a cefuroxime-susceptible isolate is also ceftriaxone-susceptible, so ceftriaxone cannot be this much lower; the source figures disagree (Cefuroxime 65%, Ceftriaxone 15%)"
+  },
+  {
+   "src": "AARSNET_2025",
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "drug": "ceftriaxone",
+   "value": 15,
+   "action": "caution",
+   "why": "a cefuroxime-susceptible isolate is also ceftriaxone-susceptible, so ceftriaxone cannot be this much lower; the source figures disagree (Cefuroxime 65%, Ceftriaxone 15%)"
+  },
+  {
+   "src": "AARSNET_2025",
+   "spec": "blood",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
+   "drug": "cefotaxime",
+   "value": 23,
+   "action": "caution",
+   "why": "a cefuroxime-susceptible isolate is also cefotaxime-susceptible, so cefotaxime cannot be this much lower; the source figures disagree (Cefuroxime 65%, Cefotaxime 23%)"
+  },
+  {
+   "src": "AARSNET_2025",
    "spec": "all",
    "set": "opd",
    "org": "Pseudomonas species",
@@ -981,6 +1014,17 @@
    "value": 14,
    "action": "caution",
    "why": "approximate (read from a chart in the source)"
+  },
+  {
+   "src": "KIMS_STERILE",
+   "spec": "sterile",
+   "set": "all",
+   "org": "Enterococcus",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 93,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
   },
   {
    "src": "KIMS_STERILE",
@@ -1626,10 +1670,32 @@
    "set": "all",
    "org": "Enterobacter spp.",
    "pheno": null,
+   "drug": "cefotaxime",
+   "value": 50,
+   "action": "caution",
+   "why": "an isolate susceptible to cefotaxime is carbapenem-susceptible, so imipenem cannot be this much lower; the source figures disagree (Cefotaxime 50%, Imipenem 0%)"
+  },
+  {
+   "src": "RIMS_IMPHAL_2025",
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "pheno": null,
    "drug": "ceftazidime_avibactam",
    "value": 0,
    "action": "caution",
    "why": "printed 0, which here probably means not tested rather than all resistant: the report prints 0 for agents it did not test (Table 24 shows ceftazidime-avibactam as 0 for 2020 to 2024, with values only for 2025), so a 0 in the Enterobacterales tables may mean not tested"
+  },
+  {
+   "src": "RIMS_IMPHAL_2025",
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "drug": "ceftriaxone",
+   "value": 50,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so imipenem cannot be this much lower; the source figures disagree (Ceftriaxone 50%, Imipenem 0%)"
   },
   {
    "src": "RIMS_IMPHAL_2025",
@@ -2869,10 +2935,43 @@
    "set": "all",
    "org": "Enterobacter cloacae",
    "pheno": null,
+   "drug": "cefotaxime",
+   "value": 100,
+   "action": "caution",
+   "why": "an isolate susceptible to cefotaxime is carbapenem-susceptible, so ertapenem cannot be this much lower; the source figures disagree (Cefotaxime 100%, Ertapenem 0%)"
+  },
+  {
+   "src": "RIMS_IMPHAL_2025",
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Enterobacter cloacae",
+   "pheno": null,
    "drug": "ceftazidime_avibactam",
    "value": 0,
    "action": "caution",
    "why": "printed 0, which here probably means not tested rather than all resistant: the report prints 0 for agents it did not test (Table 24 shows ceftazidime-avibactam as 0 for 2020 to 2024, with values only for 2025), so a 0 in the Enterobacterales tables may mean not tested"
+  },
+  {
+   "src": "RIMS_IMPHAL_2025",
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Enterobacter cloacae",
+   "pheno": null,
+   "drug": "ceftriaxone",
+   "value": 100,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so ertapenem cannot be this much lower; the source figures disagree (Ceftriaxone 100%, Ertapenem 0%)"
+  },
+  {
+   "src": "RIMS_IMPHAL_2025",
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Enterobacter cloacae",
+   "pheno": null,
+   "drug": "ertapenem",
+   "value": 0,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so ertapenem cannot be this much lower; the source figures disagree (Ceftriaxone 100%, Ertapenem 0%)"
   },
   {
    "src": "RIMS_IMPHAL_2025",
@@ -2946,6 +3045,17 @@
    "set": "all",
    "org": "Enterobacter spp.",
    "pheno": null,
+   "drug": "ertapenem",
+   "value": 50,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so ertapenem cannot be this much lower; the source figures disagree (Ceftriaxone 75%, Ertapenem 50%)"
+  },
+  {
+   "src": "RIMS_IMPHAL_2025",
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Enterobacter spp.",
+   "pheno": null,
    "drug": "imipenem",
    "value": 33,
    "action": "caution",
@@ -2979,10 +3089,32 @@
    "set": "all",
    "org": "Serratia marcescens",
    "pheno": null,
+   "drug": "cefotaxime",
+   "value": 100,
+   "action": "caution",
+   "why": "an isolate susceptible to cefotaxime is carbapenem-susceptible, so imipenem cannot be this much lower; the source figures disagree (Cefotaxime 100%, Imipenem 0%)"
+  },
+  {
+   "src": "RIMS_IMPHAL_2025",
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "pheno": null,
    "drug": "ceftazidime_avibactam",
    "value": 0,
    "action": "caution",
    "why": "printed 0, which here probably means not tested rather than all resistant: the report prints 0 for agents it did not test (Table 24 shows ceftazidime-avibactam as 0 for 2020 to 2024, with values only for 2025), so a 0 in the Enterobacterales tables may mean not tested"
+  },
+  {
+   "src": "RIMS_IMPHAL_2025",
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "pheno": null,
+   "drug": "ceftriaxone",
+   "value": 100,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so imipenem cannot be this much lower; the source figures disagree (Ceftriaxone 100%, Imipenem 0%)"
   },
   {
    "src": "RIMS_IMPHAL_2025",
@@ -3749,10 +3881,43 @@
    "set": "all",
    "org": "Klebsiella pneumoniae",
    "pheno": null,
+   "drug": "ceftriaxone",
+   "value": 36,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so imipenem cannot be this much lower; the source figures disagree (Ceftriaxone 36%, Imipenem 14%)"
+  },
+  {
+   "src": "RIMS_IMPHAL_2025",
+   "spec": "sterile",
+   "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
    "drug": "imipenem",
    "value": 14,
    "action": "caution",
    "why": "imipenem and meropenem should give similar results for this organism; the source figures disagree; imipenem is the outlier (imipenem disks lose potency, a known cause of false resistance) (Imipenem 14%, Meropenem 64%)"
+  },
+  {
+   "src": "RIMS_IMPHAL_2025",
+   "spec": "sterile",
+   "set": "all",
+   "org": "Klebsiella oxytoca",
+   "pheno": null,
+   "drug": "cefotaxime",
+   "value": 33,
+   "action": "caution",
+   "why": "an isolate susceptible to cefotaxime is carbapenem-susceptible, so imipenem cannot be this much lower; the source figures disagree (Cefotaxime 33%, Imipenem 0%)"
+  },
+  {
+   "src": "RIMS_IMPHAL_2025",
+   "spec": "sterile",
+   "set": "all",
+   "org": "Klebsiella oxytoca",
+   "pheno": null,
+   "drug": "ceftriaxone",
+   "value": 33,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so imipenem cannot be this much lower; the source figures disagree (Ceftriaxone 33%, Imipenem 0%)"
   },
   {
    "src": "RIMS_IMPHAL_2025",
@@ -3896,6 +4061,17 @@
    "value": 15.6,
    "action": "caution",
    "why": "imipenem and meropenem should give similar results for this organism; the source figures disagree; imipenem is the outlier (imipenem disks lose potency, a known cause of false resistance) (Imipenem 15.6%, Meropenem 48.4%)"
+  },
+  {
+   "src": "RIMS_IMPHAL_2025",
+   "spec": "all",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "drug": "ceftriaxone",
+   "value": 50.8,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so imipenem cannot be this much lower; the source figures disagree (Ceftriaxone 50.8%, Imipenem 23.3%)"
   },
   {
    "src": "RIMS_IMPHAL_2025",
@@ -4728,6 +4904,28 @@
    "set": "all",
    "org": "Serratia marcescens",
    "pheno": null,
+   "drug": "cefotaxime",
+   "value": 33.3,
+   "action": "caution",
+   "why": "an isolate susceptible to cefotaxime is carbapenem-susceptible, so imipenem cannot be this much lower; the source figures disagree (Cefotaxime 33.3%, Imipenem 0%)"
+  },
+  {
+   "src": "RIMS_IMPHAL_2024",
+   "spec": "blood",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "pheno": null,
+   "drug": "ceftriaxone",
+   "value": 33.3,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so imipenem cannot be this much lower; the source figures disagree (Ceftriaxone 33.3%, Imipenem 0%)"
+  },
+  {
+   "src": "RIMS_IMPHAL_2024",
+   "spec": "blood",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "pheno": null,
    "drug": "imipenem",
    "value": 0,
    "action": "caution",
@@ -5078,6 +5276,39 @@
    "src": "RIMS_IMPHAL_2024",
    "spec": "respiratory",
    "set": "all",
+   "org": "Enterobacter spp.",
+   "pheno": null,
+   "drug": "ertapenem",
+   "value": 14.3,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so ertapenem cannot be this much lower; the source figures disagree (Ceftriaxone 42.9%, Ertapenem 14.3%)"
+  },
+  {
+   "src": "RIMS_IMPHAL_2024",
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Citrobacter freundii",
+   "pheno": null,
+   "drug": "cefotaxime",
+   "value": 40,
+   "action": "caution",
+   "why": "an isolate susceptible to cefotaxime is carbapenem-susceptible, so imipenem cannot be this much lower; the source figures disagree (Cefotaxime 40%, Imipenem 0%)"
+  },
+  {
+   "src": "RIMS_IMPHAL_2024",
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Citrobacter freundii",
+   "pheno": null,
+   "drug": "ceftriaxone",
+   "value": 40,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so imipenem cannot be this much lower; the source figures disagree (Ceftriaxone 40%, Imipenem 0%)"
+  },
+  {
+   "src": "RIMS_IMPHAL_2024",
+   "spec": "respiratory",
+   "set": "all",
    "org": "Citrobacter freundii",
    "pheno": null,
    "drug": "imipenem",
@@ -5106,6 +5337,28 @@
    "value": 100,
    "action": "caution",
    "why": "cefotaxime and ceftriaxone should give nearly the same result; the source figures disagree (Cefotaxime 75%, Ceftriaxone 100%)"
+  },
+  {
+   "src": "RIMS_IMPHAL_2024",
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "pheno": null,
+   "drug": "ertapenem",
+   "value": 75,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so ertapenem cannot be this much lower; the source figures disagree (Ceftriaxone 100%, Ertapenem 75%)"
+  },
+  {
+   "src": "RIMS_IMPHAL_2024",
+   "spec": "respiratory",
+   "set": "all",
+   "org": "Serratia marcescens",
+   "pheno": null,
+   "drug": "imipenem",
+   "value": 75,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so imipenem cannot be this much lower; the source figures disagree (Ceftriaxone 100%, Imipenem 75%)"
   },
   {
    "src": "RIMS_IMPHAL_2024",
@@ -5278,6 +5531,17 @@
    "set": "all",
    "org": "Citrobacter freundii",
    "pheno": null,
+   "drug": "cefotaxime",
+   "value": 37.5,
+   "action": "caution",
+   "why": "an isolate susceptible to cefotaxime is carbapenem-susceptible, so imipenem cannot be this much lower; the source figures disagree (Cefotaxime 37.5%, Imipenem 12.5%)"
+  },
+  {
+   "src": "RIMS_IMPHAL_2024",
+   "spec": "pus",
+   "set": "all",
+   "org": "Citrobacter freundii",
+   "pheno": null,
    "drug": "imipenem",
    "value": 12.5,
    "action": "caution",
@@ -5425,6 +5689,17 @@
    "value": 100,
    "action": "caution",
    "why": "cefotaxime and ceftriaxone should give nearly the same result; the source figures disagree (Cefotaxime 0%, Ceftriaxone 100%)"
+  },
+  {
+   "src": "RIMS_IMPHAL_2024",
+   "spec": "pus",
+   "set": "all",
+   "org": "Providencia stuartii",
+   "pheno": null,
+   "drug": "ertapenem",
+   "value": 0,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so ertapenem cannot be this much lower; the source figures disagree (Ceftriaxone 100%, Ertapenem 0%)"
   },
   {
    "src": "RIMS_IMPHAL_2024",
@@ -6453,6 +6728,61 @@
    "src": "ICMR_AMRSN_2024",
    "spec": "all",
    "set": "all",
+   "org": "Candida tropicalis",
+   "pheno": null,
+   "drug": "anidulafungin",
+   "value": 70.9,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida; the source figures disagree (Micafungin 97.6%, Anidulafungin 70.9%)"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "all",
+   "set": "all",
+   "org": "Candida tropicalis",
+   "pheno": null,
+   "drug": "micafungin",
+   "value": 97.6,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida; the source figures disagree (Micafungin 97.6%, Anidulafungin 70.9%)"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "all",
+   "set": "all",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "drug": "fluconazole",
+   "value": 91.9,
+   "action": "caution",
+   "why": "CLSI has no susceptible category for fluconazole in C. glabrata (only susceptible-dose-dependent and resistant), so a percent susceptible here is not a susceptibility rate; see the MIC"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "all",
+   "set": "all",
+   "org": "Candida krusei",
+   "pheno": null,
+   "drug": "caspofungin",
+   "value": 72.9,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 72.9%, Micafungin 95.7%)"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "all",
+   "set": "all",
+   "org": "Candida krusei",
+   "pheno": null,
+   "drug": "micafungin",
+   "value": 95.7,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 72.9%, Micafungin 95.7%)"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "all",
+   "set": "all",
    "org": "Candida krusei",
    "pheno": null,
    "drug": "fluconazole",
@@ -6464,12 +6794,111 @@
    "src": "ICMR_AMRSN_2024",
    "spec": "blood",
    "set": "all",
+   "org": "Candida tropicalis",
+   "pheno": null,
+   "drug": "anidulafungin",
+   "value": 61.4,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida; the source figures disagree (Micafungin 96.6%, Anidulafungin 61.4%)"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida tropicalis",
+   "pheno": null,
+   "drug": "micafungin",
+   "value": 96.6,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida; the source figures disagree (Micafungin 96.6%, Anidulafungin 61.4%)"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida albicans",
+   "pheno": null,
+   "drug": "anidulafungin",
+   "value": 73.4,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida; the source figures disagree (Micafungin 94.6%, Anidulafungin 73.4%)"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida albicans",
+   "pheno": null,
+   "drug": "micafungin",
+   "value": 94.6,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida; the source figures disagree (Micafungin 94.6%, Anidulafungin 73.4%)"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "drug": "fluconazole",
+   "value": 92.9,
+   "action": "caution",
+   "why": "CLSI has no susceptible category for fluconazole in C. glabrata (only susceptible-dose-dependent and resistant), so a percent susceptible here is not a susceptibility rate; see the MIC"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida krusei",
+   "pheno": null,
+   "drug": "anidulafungin",
+   "value": 94.5,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 66.7%, Anidulafungin 94.5%)"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida krusei",
+   "pheno": null,
+   "drug": "caspofungin",
+   "value": 66.7,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 66.7%, Micafungin 95.7%)"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida krusei",
+   "pheno": null,
+   "drug": "micafungin",
+   "value": 95.7,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 66.7%, Micafungin 95.7%)"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "blood",
+   "set": "all",
    "org": "Candida krusei",
    "pheno": null,
    "drug": "fluconazole",
    "value": 22.8,
    "action": "intrinsic",
    "why": "intrinsic resistance of this fungus (an expected resistant phenotype)"
+  },
+  {
+   "src": "ICMR_AMRSN_2024",
+   "spec": "urine",
+   "set": "all",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "drug": "fluconazole",
+   "value": 89.2,
+   "action": "caution",
+   "why": "CLSI has no susceptible category for fluconazole in C. glabrata (only susceptible-dose-dependent and resistant), so a percent susceptible here is not a susceptibility rate; see the MIC"
   },
   {
    "src": "ICMR_AMRSN_2024",
@@ -6849,6 +7278,39 @@
    "src": "ICMR_AMRSN_2023",
    "spec": "all",
    "set": "all",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "drug": "fluconazole",
+   "value": 91.3,
+   "action": "caution",
+   "why": "CLSI has no susceptible category for fluconazole in C. glabrata (only susceptible-dose-dependent and resistant), so a percent susceptible here is not a susceptibility rate; see the MIC"
+  },
+  {
+   "src": "ICMR_AMRSN_2023",
+   "spec": "all",
+   "set": "all",
+   "org": "Candida krusei",
+   "pheno": null,
+   "drug": "caspofungin",
+   "value": 61.5,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 61.5%, Micafungin 93.8%)"
+  },
+  {
+   "src": "ICMR_AMRSN_2023",
+   "spec": "all",
+   "set": "all",
+   "org": "Candida krusei",
+   "pheno": null,
+   "drug": "micafungin",
+   "value": 93.8,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 61.5%, Micafungin 93.8%)"
+  },
+  {
+   "src": "ICMR_AMRSN_2023",
+   "spec": "all",
+   "set": "all",
    "org": "Candida krusei",
    "pheno": null,
    "drug": "fluconazole",
@@ -6860,12 +7322,67 @@
    "src": "ICMR_AMRSN_2023",
    "spec": "blood",
    "set": "all",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "drug": "fluconazole",
+   "value": 85.7,
+   "action": "caution",
+   "why": "CLSI has no susceptible category for fluconazole in C. glabrata (only susceptible-dose-dependent and resistant), so a percent susceptible here is not a susceptibility rate; see the MIC"
+  },
+  {
+   "src": "ICMR_AMRSN_2023",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida krusei",
+   "pheno": null,
+   "drug": "anidulafungin",
+   "value": 100,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 47.4%, Anidulafungin 100%)"
+  },
+  {
+   "src": "ICMR_AMRSN_2023",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida krusei",
+   "pheno": null,
+   "drug": "caspofungin",
+   "value": 47.4,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 47.4%, Micafungin 94.1%)"
+  },
+  {
+   "src": "ICMR_AMRSN_2023",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida krusei",
+   "pheno": null,
+   "drug": "micafungin",
+   "value": 94.1,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 47.4%, Micafungin 94.1%)"
+  },
+  {
+   "src": "ICMR_AMRSN_2023",
+   "spec": "blood",
+   "set": "all",
    "org": "Candida krusei",
    "pheno": null,
    "drug": "fluconazole",
    "value": 31.6,
    "action": "intrinsic",
    "why": "intrinsic resistance of this fungus (an expected resistant phenotype)"
+  },
+  {
+   "src": "ICMR_AMRSN_2023",
+   "spec": "urine",
+   "set": "all",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "drug": "fluconazole",
+   "value": 90.9,
+   "action": "caution",
+   "why": "CLSI has no susceptible category for fluconazole in C. glabrata (only susceptible-dose-dependent and resistant), so a percent susceptible here is not a susceptibility rate; see the MIC"
   },
   {
    "src": "ICMR_AMRSN_2023",
@@ -8204,6 +8721,17 @@
    "set": "ward",
    "org": "Klebsiella aerogenes",
    "pheno": null,
+   "drug": "cefotaxime",
+   "value": 100,
+   "action": "caution",
+   "why": "an isolate susceptible to cefotaxime is carbapenem-susceptible, so imipenem cannot be this much lower; the source figures disagree (Cefotaxime 100%, Imipenem 66.7%)"
+  },
+  {
+   "src": "AIIMS_JODHPUR_2023",
+   "spec": "all",
+   "set": "ward",
+   "org": "Klebsiella aerogenes",
+   "pheno": null,
    "drug": "imipenem",
    "value": 66.7,
    "action": "caution",
@@ -8534,10 +9062,65 @@
    "set": "icu",
    "org": "Acinetobacter baumannii",
    "pheno": null,
+   "drug": "piptazo",
+   "value": 0,
+   "action": "caution",
+   "why": "a clinical antibiogram (HAP/VAP, page 18; this unit's laboratory figures are on page 14): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_MICU_2023",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "drug": "meropenem",
+   "value": 46.66,
+   "action": "caution",
+   "why": "a clinical antibiogram (HAP/VAP, page 18; this unit's laboratory figures are on page 14): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_MICU_2023",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "drug": "cotrimoxazole",
+   "value": 3.33,
+   "action": "caution",
+   "why": "a clinical antibiogram (HAP/VAP, page 18; this unit's laboratory figures are on page 14): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_MICU_2023",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "drug": "amikacin",
+   "value": 0,
+   "action": "caution",
+   "why": "a clinical antibiogram (HAP/VAP, page 18; this unit's laboratory figures are on page 14): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_MICU_2023",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
    "drug": "colistin",
    "value": 46.67,
    "action": "caution",
-   "why": "a low figure for colistin or polymyxin B usually reflects the breakpoint system (CLSI has no susceptible category, only intermediate and resistant) rather than resistance; confirm with a broth microdilution MIC"
+   "why": "a clinical antibiogram (HAP/VAP, page 18; this unit's laboratory figures are on page 14): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_MICU_2023",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "drug": "ceftriaxone",
+   "value": 3,
+   "action": "caution",
+   "why": "a clinical antibiogram (HAP/VAP, page 18; this unit's laboratory figures are on page 14): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
   },
   {
    "src": "AIIMS_RISHIKESH_MICU_2023",
@@ -8548,7 +9131,29 @@
    "drug": "imipenem",
    "value": 0,
    "action": "caution",
-   "why": "imipenem and meropenem rarely differ this much for non-fermenters; the source figures disagree; imipenem is the outlier (imipenem disks lose potency, a known cause of false resistance) (Imipenem 0%, Meropenem 46.66%)"
+   "why": "a clinical antibiogram (HAP/VAP, page 18; this unit's laboratory figures are on page 14): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_MICU_2023",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "drug": "ceftazidime",
+   "value": 0,
+   "action": "caution",
+   "why": "a clinical antibiogram (HAP/VAP, page 18; this unit's laboratory figures are on page 14): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_MICU_2023",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "drug": "gentamicin",
+   "value": 0,
+   "action": "caution",
+   "why": "a clinical antibiogram (HAP/VAP, page 18; this unit's laboratory figures are on page 14): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
   },
   {
    "src": "AIIMS_RISHIKESH_MICU_2023",
@@ -8560,6 +9165,28 @@
    "value": 0,
    "action": "intrinsic",
    "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_MICU_2023",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "drug": "ciprofloxacin",
+   "value": 0,
+   "action": "caution",
+   "why": "a clinical antibiogram (HAP/VAP, page 18; this unit's laboratory figures are on page 14): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_MICU_2023",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Acinetobacter baumannii",
+   "pheno": null,
+   "drug": "levofloxacin",
+   "value": 6.6,
+   "action": "caution",
+   "why": "a clinical antibiogram (HAP/VAP, page 18; this unit's laboratory figures are on page 14): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
   },
   {
    "src": "AIIMS_RISHIKESH_2024",
@@ -8743,10 +9370,153 @@
    "set": "icu",
    "org": "Klebsiella pneumoniae",
    "pheno": null,
+   "drug": "piptazo",
+   "value": 3.33,
+   "action": "caution",
+   "why": "a clinical antibiogram (General Medicine ICU, HAP/VAP, book page 107): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_2024",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "drug": "meropenem",
+   "value": 6.66,
+   "action": "caution",
+   "why": "a clinical antibiogram (General Medicine ICU, HAP/VAP, book page 107): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_2024",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "drug": "cotrimoxazole",
+   "value": 3.33,
+   "action": "caution",
+   "why": "a clinical antibiogram (General Medicine ICU, HAP/VAP, book page 107): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_2024",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "drug": "amikacin",
+   "value": 3.33,
+   "action": "caution",
+   "why": "a clinical antibiogram (General Medicine ICU, HAP/VAP, book page 107): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_2024",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
    "drug": "colistin",
    "value": 33.33,
    "action": "caution",
-   "why": "a low figure for colistin or polymyxin B usually reflects the breakpoint system (CLSI has no susceptible category, only intermediate and resistant) rather than resistance; confirm with a broth microdilution MIC"
+   "why": "a clinical antibiogram (General Medicine ICU, HAP/VAP, book page 107): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_2024",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "drug": "ceftriaxone",
+   "value": 0,
+   "action": "caution",
+   "why": "a clinical antibiogram (General Medicine ICU, HAP/VAP, book page 107): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_2024",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "drug": "imipenem",
+   "value": 0,
+   "action": "caution",
+   "why": "a clinical antibiogram (General Medicine ICU, HAP/VAP, book page 107): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_2024",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "drug": "ceftazidime",
+   "value": 0,
+   "action": "caution",
+   "why": "a clinical antibiogram (General Medicine ICU, HAP/VAP, book page 107): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_2024",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "drug": "gentamicin",
+   "value": 3.33,
+   "action": "caution",
+   "why": "a clinical antibiogram (General Medicine ICU, HAP/VAP, book page 107): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_2024",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "drug": "ertapenem",
+   "value": 0,
+   "action": "caution",
+   "why": "a clinical antibiogram (General Medicine ICU, HAP/VAP, book page 107): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_2024",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "drug": "ciprofloxacin",
+   "value": 0,
+   "action": "caution",
+   "why": "a clinical antibiogram (General Medicine ICU, HAP/VAP, book page 107): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_2024",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "drug": "levofloxacin",
+   "value": 0,
+   "action": "caution",
+   "why": "a clinical antibiogram (General Medicine ICU, HAP/VAP, book page 107): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_2024",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "drug": "tigecycline",
+   "value": 0,
+   "action": "caution",
+   "why": "a clinical antibiogram (General Medicine ICU, HAP/VAP, book page 107): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
+  },
+  {
+   "src": "AIIMS_RISHIKESH_2024",
+   "spec": "respiratory",
+   "set": "icu",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "drug": "minocycline",
+   "value": 3.33,
+   "action": "caution",
+   "why": "a clinical antibiogram (General Medicine ICU, HAP/VAP, book page 107): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"
   },
   {
    "src": "GMC_SRINAGAR_2024",
@@ -10008,6 +10778,17 @@
    "set": "icu",
    "org": "Escherichia coli",
    "pheno": null,
+   "drug": "ceftriaxone",
+   "value": 100,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so imipenem cannot be this much lower; the source figures disagree (Ceftriaxone 100%, Imipenem 50%)"
+  },
+  {
+   "src": "GMC_SRINAGAR_2024_H1",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Escherichia coli",
+   "pheno": null,
    "drug": "imipenem",
    "value": 50,
    "action": "caution",
@@ -10554,6 +11335,28 @@
   },
   {
    "src": "GMC_SRINAGAR_2021",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Candida spp.",
+   "pheno": null,
+   "drug": "micafungin",
+   "value": 86,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 65%, Micafungin 86%)"
+  },
+  {
+   "src": "GMC_SRINAGAR_2021",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Candida spp.",
+   "pheno": null,
+   "drug": "caspofungin",
+   "value": 65,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 65%, Micafungin 86%)"
+  },
+  {
+   "src": "GMC_SRINAGAR_2021",
    "spec": "pus",
    "set": "all",
    "org": "Enterobacter species",
@@ -11007,12 +11810,34 @@
    "src": "MGJAIPUR_BSI",
    "spec": "blood",
    "set": "all",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "drug": "ertapenem",
+   "value": 28.5,
+   "action": "caution",
+   "why": "an ertapenem-susceptible isolate is meropenem-susceptible, so meropenem cannot be this much lower; the source figures disagree (Ertapenem 28.5%, Meropenem 12.3%)"
+  },
+  {
+   "src": "MGJAIPUR_BSI",
+   "spec": "blood",
+   "set": "all",
    "org": "Acinetobacter baumannii",
    "pheno": null,
    "drug": "aztreonam",
    "value": 5.1,
    "action": "intrinsic",
    "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "MGJAIPUR_BSI",
+   "spec": "blood",
+   "set": "all",
+   "org": "Enterococcus",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
   },
   {
    "src": "RML_ICU",
@@ -12476,6 +13301,17 @@
    "value": 60,
    "action": "caution",
    "why": "imipenem and meropenem should give similar results for this organism; the source figures disagree (Imipenem 60%, Meropenem 25%)"
+  },
+  {
+   "src": "RMLIMS_LUCKNOW_2017",
+   "spec": "respiratory",
+   "set": "opd",
+   "org": "Citrobacter freundii",
+   "pheno": null,
+   "drug": "ertapenem",
+   "value": 75,
+   "action": "caution",
+   "why": "an ertapenem-susceptible isolate is meropenem-susceptible, so meropenem cannot be this much lower; the source figures disagree (Ertapenem 75%, Meropenem 25%)"
   },
   {
    "src": "RMLIMS_LUCKNOW_2017",
@@ -14084,6 +14920,39 @@
    "why": "intrinsic resistance of this fungus (an expected resistant phenotype)"
   },
   {
+   "src": "SGRH_FUNGAL_2020",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "drug": "caspofungin",
+   "value": 37.5,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 37.5%, Micafungin 87.5%)"
+  },
+  {
+   "src": "SGRH_FUNGAL_2020",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "drug": "micafungin",
+   "value": 87.5,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 37.5%, Micafungin 87.5%)"
+  },
+  {
+   "src": "SGRH_FUNGAL_2020",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "drug": "anidulafungin",
+   "value": 100,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 37.5%, Anidulafungin 100%)"
+  },
+  {
    "src": "SGRH_FUNGAL_2019",
    "spec": "blood",
    "set": "all",
@@ -14093,6 +14962,28 @@
    "value": 37.3,
    "action": "caution",
    "why": "the source contradicts itself: printed 37.3% for a row of n = 27; no whole number of 27 or fewer tested isolates gives 37.3%"
+  },
+  {
+   "src": "SGRH_FUNGAL_2019",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida auris",
+   "pheno": null,
+   "drug": "micafungin",
+   "value": 100,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida; the source figures disagree (Micafungin 100%, Anidulafungin 78.6%)"
+  },
+  {
+   "src": "SGRH_FUNGAL_2019",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida auris",
+   "pheno": null,
+   "drug": "anidulafungin",
+   "value": 78.6,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida; the source figures disagree (Micafungin 100%, Anidulafungin 78.6%)"
   },
   {
    "src": "SGRH_FUNGAL_2019",
@@ -14142,6 +15033,28 @@
    "src": "SGRH_FUNGAL_2018",
    "spec": "blood",
    "set": "all",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "drug": "caspofungin",
+   "value": 75,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 75%, Micafungin 100%)"
+  },
+  {
+   "src": "SGRH_FUNGAL_2018",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "drug": "micafungin",
+   "value": 100,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 75%, Micafungin 100%)"
+  },
+  {
+   "src": "SGRH_FUNGAL_2018",
+   "spec": "blood",
+   "set": "all",
    "org": "Candida krusei",
    "pheno": null,
    "drug": "fluconazole",
@@ -14170,6 +15083,28 @@
    "value": 0,
    "action": "intrinsic",
    "why": "intrinsic resistance of this fungus (an expected resistant phenotype)"
+  },
+  {
+   "src": "SGRH_FUNGAL_2017",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida auris",
+   "pheno": null,
+   "drug": "caspofungin",
+   "value": 79.5,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 79.5%, Micafungin 100%)"
+  },
+  {
+   "src": "SGRH_FUNGAL_2017",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida auris",
+   "pheno": null,
+   "drug": "micafungin",
+   "value": 100,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 79.5%, Micafungin 100%)"
   },
   {
    "src": "SGRH_FUNGAL_2017",
@@ -14225,6 +15160,28 @@
    "value": 0,
    "action": "intrinsic",
    "why": "intrinsic resistance of this fungus (an expected resistant phenotype)"
+  },
+  {
+   "src": "SGRH_FUNGAL_2016",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida auris",
+   "pheno": null,
+   "drug": "caspofungin",
+   "value": 79.4,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 79.4%, Micafungin 100%)"
+  },
+  {
+   "src": "SGRH_FUNGAL_2016",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida auris",
+   "pheno": null,
+   "drug": "micafungin",
+   "value": 100,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 79.4%, Micafungin 100%)"
   },
   {
    "src": "SGRH_FUNGAL_2016",
@@ -14395,6 +15352,17 @@
    "src": "SGRH_FUNGAL_2012",
    "spec": "blood",
    "set": "all",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "drug": "fluconazole",
+   "value": 52.9,
+   "action": "caution",
+   "why": "CLSI has no susceptible category for fluconazole in C. glabrata (only susceptible-dose-dependent and resistant), so a percent susceptible here is not a susceptibility rate; see the MIC"
+  },
+  {
+   "src": "SGRH_FUNGAL_2012",
+   "spec": "blood",
+   "set": "all",
    "org": "Candida krusei",
    "pheno": null,
    "drug": "fluconazole",
@@ -14423,6 +15391,17 @@
    "value": 0,
    "action": "intrinsic",
    "why": "intrinsic resistance of this fungus (an expected resistant phenotype)"
+  },
+  {
+   "src": "SGRH_FUNGAL_2011",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "drug": "fluconazole",
+   "value": 83.3,
+   "action": "caution",
+   "why": "CLSI has no susceptible category for fluconazole in C. glabrata (only susceptible-dose-dependent and resistant), so a percent susceptible here is not a susceptibility rate; see the MIC"
   },
   {
    "src": "SGRH_2024",
@@ -14668,6 +15647,39 @@
   },
   {
    "src": "SGRH_2019",
+   "spec": "blood",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2019",
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2019",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 64,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2019",
    "spec": "urine",
    "set": "opd",
    "org": "Proteus spp",
@@ -14698,6 +15710,39 @@
    "value": 33,
    "action": "suppress",
    "why": "Penicillin susceptibility (33%) is higher than methicillin (cefoxitin/oxacillin) susceptibility (0%), which is impossible: methicillin-resistant strains are beta-lactam resistant"
+  },
+  {
+   "src": "SGRH_2019",
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 50,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2017",
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2017",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
   },
   {
    "src": "SGRH_2017",
@@ -14733,6 +15778,72 @@
    "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
   },
   {
+   "src": "SGRH_2017",
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2017",
+   "spec": "pus",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2017",
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2017",
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2017",
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2017",
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
    "src": "SGRH_2016",
    "spec": "blood",
    "set": "opd",
@@ -14742,6 +15853,39 @@
    "value": 98,
    "action": "caution",
    "why": "the source contradicts itself: printed 98% for a row of n = 15; no whole number of 15 or fewer tested isolates gives 98%"
+  },
+  {
+   "src": "SGRH_2016",
+   "spec": "blood",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2016",
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2016",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
   },
   {
    "src": "SGRH_2016",
@@ -14901,6 +16045,39 @@
    "src": "SGRH_2016",
    "spec": "pus",
    "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2016",
+   "spec": "pus",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2016",
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2016",
+   "spec": "pus",
+   "set": "opd",
    "org": "Klebsiella spp.",
    "pheno": null,
    "drug": "ampicillin",
@@ -15000,6 +16177,39 @@
    "src": "SGRH_2016",
    "spec": "sterile",
    "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2016",
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2016",
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2016",
+   "spec": "sterile",
+   "set": "opd",
    "org": "Klebsiella spp.",
    "pheno": null,
    "drug": "ampicillin",
@@ -15083,6 +16293,39 @@
    "value": 0,
    "action": "intrinsic",
    "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2015",
+   "spec": "blood",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2015",
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2015",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
   },
   {
    "src": "SGRH_2015",
@@ -15182,6 +16425,39 @@
    "value": 3,
    "action": "intrinsic",
    "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2015",
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2015",
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2015",
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
   },
   {
    "src": "SGRH_2015",
@@ -15440,6 +16716,39 @@
    "src": "SGRH_2015",
    "spec": "pus",
    "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2015",
+   "spec": "pus",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2015",
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2015",
+   "spec": "pus",
+   "set": "opd",
    "org": "Klebsiella spp.",
    "pheno": null,
    "drug": "ampicillin",
@@ -15512,6 +16821,39 @@
    "value": 6,
    "action": "caution",
    "why": "the source contradicts itself: printed 6% for a row of n = 14; no whole number of 14 or fewer tested isolates gives 6%"
+  },
+  {
+   "src": "SGRH_2015",
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2015",
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2015",
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
   },
   {
    "src": "SGRH_2015",
@@ -15611,6 +16953,39 @@
    "value": 1,
    "action": "intrinsic",
    "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2014",
+   "spec": "blood",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2014",
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 96,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2014",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 98,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
   },
   {
    "src": "SGRH_2014",
@@ -15743,6 +17118,39 @@
    "value": 10,
    "action": "intrinsic",
    "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2014",
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2014",
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2014",
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
   },
   {
    "src": "SGRH_2014",
@@ -15979,6 +17387,39 @@
    "src": "SGRH_2014",
    "spec": "pus",
    "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2014",
+   "spec": "pus",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2014",
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2014",
+   "spec": "pus",
+   "set": "opd",
    "org": "Klebsiella spp.",
    "pheno": null,
    "drug": "ampicillin",
@@ -16051,6 +17492,39 @@
    "value": 0,
    "action": "intrinsic",
    "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2014",
+   "spec": "sterile",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2014",
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2014",
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
   },
   {
    "src": "SGRH_2014",
@@ -16177,6 +17651,39 @@
    "src": "SGRH_2013",
    "spec": "blood",
    "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2013",
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2013",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2013",
+   "spec": "blood",
+   "set": "opd",
    "org": "Klebsiella spp.",
    "pheno": null,
    "drug": "ampicillin",
@@ -16238,6 +17745,39 @@
    "value": 7,
    "action": "intrinsic",
    "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2013",
+   "spec": "urine",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2013",
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2013",
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
   },
   {
    "src": "SGRH_2013",
@@ -16337,6 +17877,39 @@
    "value": 0,
    "action": "intrinsic",
    "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2013",
+   "spec": "pus",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2013",
+   "spec": "pus",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2013",
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
   },
   {
    "src": "SGRH_2013",
@@ -16573,6 +18146,39 @@
    "src": "SGRH_2012",
    "spec": "blood",
    "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2012",
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2012",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2012",
+   "spec": "blood",
+   "set": "opd",
    "org": "Pseudomonas aeruginosa",
    "pheno": null,
    "drug": "gentamicin",
@@ -16617,6 +18223,39 @@
    "src": "SGRH_2012",
    "spec": "urine",
    "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2012",
+   "spec": "urine",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2012",
+   "spec": "urine",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2012",
+   "spec": "urine",
+   "set": "opd",
    "org": "Klebsiella spp.",
    "pheno": null,
    "drug": "ampicillin",
@@ -16656,6 +18295,28 @@
    "value": 44,
    "action": "caution",
    "why": "the source contradicts itself: printed 44% for a row of n = 7; no whole number of 7 or fewer tested isolates gives 44%"
+  },
+  {
+   "src": "SGRH_2012",
+   "spec": "pus",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2012",
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
   },
   {
    "src": "SGRH_2012",
@@ -16711,6 +18372,28 @@
    "value": 57,
    "action": "caution",
    "why": "the source contradicts itself: printed 57% for a row of n = 6; no whole number of 6 or fewer tested isolates gives 57%"
+  },
+  {
+   "src": "SGRH_2012",
+   "spec": "sterile",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2012",
+   "spec": "sterile",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
   },
   {
    "src": "SGRH_2012",
@@ -16810,6 +18493,39 @@
    "value": 2,
    "action": "intrinsic",
    "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "blood",
+   "set": "opd",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "blood",
+   "set": "ward",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
+  },
+  {
+   "src": "SGRH_2011",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Enterococcus spp.",
+   "pheno": null,
+   "drug": "daptomycin",
+   "value": 100,
+   "action": "caution",
+   "why": "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"
   },
   {
    "src": "SGRH_2011",
@@ -17741,6 +19457,28 @@
    "set": "icu",
    "org": "Klebsiella spp.",
    "pheno": null,
+   "drug": "ertapenem",
+   "value": 41,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so ertapenem cannot be this much lower; the source figures disagree (Ceftriaxone 70%, Ertapenem 41%)"
+  },
+  {
+   "src": "SKIMS_2025",
+   "spec": "urine",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "pheno": null,
+   "drug": "imipenem",
+   "value": 23,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so imipenem cannot be this much lower; the source figures disagree (Ceftriaxone 70%, Imipenem 23%)"
+  },
+  {
+   "src": "SKIMS_2025",
+   "spec": "urine",
+   "set": "icu",
+   "org": "Klebsiella spp.",
+   "pheno": null,
    "drug": "cefepime",
    "value": 83.6,
    "action": "caution",
@@ -18027,6 +19765,28 @@
    "set": "ward",
    "org": "Escherichia coli",
    "pheno": null,
+   "drug": "ertapenem",
+   "value": 48,
+   "action": "caution",
+   "why": "an ertapenem-susceptible isolate is meropenem-susceptible, so meropenem cannot be this much lower; the source figures disagree (Ertapenem 48%, Meropenem 23%)"
+  },
+  {
+   "src": "SKIMS_2024",
+   "spec": "urine",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "drug": "imipenem",
+   "value": 13,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so imipenem cannot be this much lower; the source figures disagree (Ceftriaxone 68%, Imipenem 13%)"
+  },
+  {
+   "src": "SKIMS_2024",
+   "spec": "urine",
+   "set": "ward",
+   "org": "Escherichia coli",
+   "pheno": null,
    "drug": "meropenem",
    "value": 23,
    "action": "caution",
@@ -18042,6 +19802,28 @@
    "value": 87,
    "action": "caution",
    "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so meropenem cannot be this much lower; the source figures disagree (Ceftriaxone 87%, Meropenem 23%)"
+  },
+  {
+   "src": "SKIMS_2024",
+   "spec": "urine",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "drug": "ertapenem",
+   "value": 47,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so ertapenem cannot be this much lower; the source figures disagree (Ceftriaxone 87%, Ertapenem 47%)"
+  },
+  {
+   "src": "SKIMS_2024",
+   "spec": "urine",
+   "set": "opd",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "drug": "imipenem",
+   "value": 23,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so imipenem cannot be this much lower; the source figures disagree (Ceftriaxone 87%, Imipenem 23%)"
   },
   {
    "src": "SKIMS_2024",
@@ -18097,6 +19879,28 @@
    "value": 25,
    "action": "caution",
    "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so imipenem cannot be this much lower; the source figures disagree (Ceftriaxone 75%, Imipenem 25%)"
+  },
+  {
+   "src": "SKIMS_2024",
+   "spec": "urine",
+   "set": "ward",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "drug": "ceftriaxone",
+   "value": 100,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so ertapenem cannot be this much lower; the source figures disagree (Ceftriaxone 100%, Ertapenem 50%)"
+  },
+  {
+   "src": "SKIMS_2024",
+   "spec": "urine",
+   "set": "ward",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "drug": "ertapenem",
+   "value": 50,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so ertapenem cannot be this much lower; the source figures disagree (Ceftriaxone 100%, Ertapenem 50%)"
   },
   {
    "src": "SKIMS_2024",
@@ -19124,6 +20928,17 @@
   {
    "src": "SKIMS_2023",
    "spec": "urine",
+   "set": "ward",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "drug": "ertapenem",
+   "value": 0,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so ertapenem cannot be this much lower; the source figures disagree (Ceftriaxone 50%, Ertapenem 0%)"
+  },
+  {
+   "src": "SKIMS_2023",
+   "spec": "urine",
    "set": "icu",
    "org": "Pseudomonas spp.",
    "pheno": null,
@@ -19721,6 +21536,28 @@
    "set": "icu",
    "org": "Proteus spp.",
    "pheno": null,
+   "drug": "cefotaxime",
+   "value": 50,
+   "action": "caution",
+   "why": "an isolate susceptible to cefotaxime is carbapenem-susceptible, so ertapenem cannot be this much lower; the source figures disagree (Cefotaxime 50%, Ertapenem 0%)"
+  },
+  {
+   "src": "SKIMS_2022",
+   "spec": "urine",
+   "set": "icu",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "drug": "ceftriaxone",
+   "value": 50,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so ertapenem cannot be this much lower; the source figures disagree (Ceftriaxone 50%, Ertapenem 0%)"
+  },
+  {
+   "src": "SKIMS_2022",
+   "spec": "urine",
+   "set": "icu",
+   "org": "Proteus spp.",
+   "pheno": null,
    "drug": "ciprofloxacin",
    "value": 50,
    "action": "caution",
@@ -19736,6 +21573,17 @@
    "value": 0,
    "action": "caution",
    "why": "ciprofloxacin and levofloxacin should give similar results; the source figures disagree (Ciprofloxacin 50%, Levofloxacin 0%)"
+  },
+  {
+   "src": "SKIMS_2022",
+   "spec": "urine",
+   "set": "icu",
+   "org": "Proteus spp.",
+   "pheno": null,
+   "drug": "ertapenem",
+   "value": 0,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so ertapenem cannot be this much lower; the source figures disagree (Ceftriaxone 50%, Ertapenem 0%)"
   },
   {
    "src": "SKIMS_2021",
@@ -20623,6 +22471,17 @@
    "set": "ward",
    "org": "Proteus spp.",
    "pheno": null,
+   "drug": "ertapenem",
+   "value": 50,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so ertapenem cannot be this much lower; the source figures disagree (Ceftriaxone 100%, Ertapenem 50%)"
+  },
+  {
+   "src": "SKIMS_2021",
+   "spec": "urine",
+   "set": "ward",
+   "org": "Proteus spp.",
+   "pheno": null,
    "drug": "meropenem",
    "value": 66.6,
    "action": "caution",
@@ -21199,6 +23058,28 @@
    "value": 91,
    "action": "caution",
    "why": "imipenem and meropenem should give similar results for this organism; the source figures disagree (Imipenem 91%, Meropenem 0%)"
+  },
+  {
+   "src": "UCMS_GTBH_2025",
+   "spec": "urine",
+   "set": "all",
+   "org": "Citrobacter koseri",
+   "pheno": null,
+   "drug": "cefotaxime",
+   "value": 34,
+   "action": "caution",
+   "why": "an isolate susceptible to cefotaxime is carbapenem-susceptible, so meropenem cannot be this much lower; the source figures disagree (Cefotaxime 34%, Meropenem 0%)"
+  },
+  {
+   "src": "UCMS_GTBH_2025",
+   "spec": "urine",
+   "set": "all",
+   "org": "Citrobacter koseri",
+   "pheno": null,
+   "drug": "ceftriaxone",
+   "value": 31,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so meropenem cannot be this much lower; the source figures disagree (Ceftriaxone 31%, Meropenem 0%)"
   },
   {
    "src": "UCMS_GTBH_2025",
@@ -22658,6 +24539,17 @@
    "set": "all",
    "org": "Klebsiella species",
    "pheno": null,
+   "drug": "cefuroxime",
+   "value": 57,
+   "action": "caution",
+   "why": "a cefuroxime-susceptible isolate is also cefotaxime-susceptible, so cefotaxime cannot be this much lower; the source figures disagree (Cefuroxime 57%, Cefotaxime 23%)"
+  },
+  {
+   "src": "KARSNET_THIRUVANANTHAPURAM_2024",
+   "spec": "pus",
+   "set": "all",
+   "org": "Klebsiella species",
+   "pheno": null,
    "drug": "ceftriaxone",
    "value": 50,
    "action": "caution",
@@ -23751,6 +25643,28 @@
    "value": 4.4,
    "action": "intrinsic",
    "why": "may test active but is not effective clinically for Salmonella or Shigella; not reported as susceptible (CLSI M100)"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2024_H2",
+   "spec": "all",
+   "set": "all",
+   "org": "Typhoidal Salmonella",
+   "pheno": null,
+   "drug": "amoxiclav",
+   "value": 70.8,
+   "action": "caution",
+   "why": "an isolate susceptible to ampicillin is also susceptible to amoxicillin-clavulanate, so amoxicillin-clavulanate cannot be this much lower; the source figures disagree (Ampicillin 87.8%, Amoxicillin-clavulanate 70.8%)"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2024_H2",
+   "spec": "all",
+   "set": "all",
+   "org": "Typhoidal Salmonella",
+   "pheno": null,
+   "drug": "ampicillin",
+   "value": 87.8,
+   "action": "caution",
+   "why": "an isolate susceptible to ampicillin is also susceptible to amoxicillin-clavulanate, so amoxicillin-clavulanate cannot be this much lower; the source figures disagree (Ampicillin 87.8%, Amoxicillin-clavulanate 70.8%)"
   },
   {
    "src": "AIIMS_BHOPAL_2024_H2",
@@ -24979,10 +26893,32 @@
    "set": "all",
    "org": "Enterobacter cloacae complex",
    "pheno": null,
+   "drug": "meropenem",
+   "value": 8,
+   "action": "caution",
+   "why": "an ertapenem-susceptible isolate is meropenem-susceptible, so meropenem cannot be this much lower; the source figures disagree (Ertapenem 48%, Meropenem 8%)"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2021",
+   "spec": "all",
+   "set": "all",
+   "org": "Enterobacter cloacae complex",
+   "pheno": null,
    "drug": "cefuroxime",
    "value": 6,
    "action": "caution",
    "why": "the source contradicts itself: printed 2 (6%) susceptible of 52 tested; 2/52 is 3.8%"
+  },
+  {
+   "src": "AIIMS_BHOPAL_2021",
+   "spec": "all",
+   "set": "all",
+   "org": "Enterobacter cloacae complex",
+   "pheno": null,
+   "drug": "ertapenem",
+   "value": 48,
+   "action": "caution",
+   "why": "an ertapenem-susceptible isolate is meropenem-susceptible, so meropenem cannot be this much lower; the source figures disagree (Ertapenem 48%, Meropenem 8%)"
   },
   {
    "src": "AIIMS_BHOPAL_2021",
@@ -28242,6 +30178,28 @@
   },
   {
    "src": "BVDU_PUNE_2024",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "drug": "caspofungin",
+   "value": 33,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 33%, Micafungin 100%)"
+  },
+  {
+   "src": "BVDU_PUNE_2024",
+   "spec": "blood",
+   "set": "all",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "drug": "micafungin",
+   "value": 100,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 33%, Micafungin 100%)"
+  },
+  {
+   "src": "BVDU_PUNE_2024",
    "spec": "pus",
    "set": "opd",
    "org": "Pseudomonas aeruginosa",
@@ -28464,12 +30422,56 @@
    "src": "BVDU_PUNE_2024",
    "spec": "blood",
    "set": "icu",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "drug": "caspofungin",
+   "value": 50,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 50%, Micafungin 100%)"
+  },
+  {
+   "src": "BVDU_PUNE_2024",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "drug": "micafungin",
+   "value": 100,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 50%, Micafungin 100%)"
+  },
+  {
+   "src": "BVDU_PUNE_2024",
+   "spec": "blood",
+   "set": "icu",
    "org": "Candida krusei",
    "pheno": null,
    "drug": "fluconazole",
    "value": 0,
    "action": "intrinsic",
    "why": "intrinsic resistance of this fungus (an expected resistant phenotype)"
+  },
+  {
+   "src": "BVDU_PUNE_2024",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Candida tropicalis",
+   "pheno": null,
+   "drug": "caspofungin",
+   "value": 100,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 100%, Micafungin 75%)"
+  },
+  {
+   "src": "BVDU_PUNE_2024",
+   "spec": "blood",
+   "set": "icu",
+   "org": "Candida tropicalis",
+   "pheno": null,
+   "drug": "micafungin",
+   "value": 75,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 100%, Micafungin 75%)"
   },
   {
    "src": "BVDU_PUNE_2024",
@@ -28851,6 +30853,17 @@
    "set": "opd",
    "org": "Klebsiella pneumoniae",
    "pheno": null,
+   "drug": "ofloxacin",
+   "value": 74,
+   "action": "caution",
+   "why": "an isolate susceptible to ofloxacin is also levofloxacin-susceptible, so levofloxacin cannot be this much lower; the source figures disagree (Ofloxacin 74%, Levofloxacin 0%)"
+  },
+  {
+   "src": "BVDU_PUNE_2023",
+   "spec": "urine",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
    "drug": "levofloxacin",
    "value": 0,
    "action": "caution",
@@ -29166,6 +31179,28 @@
   },
   {
    "src": "BVDU_PUNE_2022",
+   "spec": "urine",
+   "set": "icu",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "drug": "caspofungin",
+   "value": 25,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 25%, Micafungin 100%)"
+  },
+  {
+   "src": "BVDU_PUNE_2022",
+   "spec": "urine",
+   "set": "icu",
+   "org": "Candida glabrata",
+   "pheno": null,
+   "drug": "micafungin",
+   "value": 100,
+   "action": "caution",
+   "why": "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree (Caspofungin 25%, Micafungin 100%)"
+  },
+  {
+   "src": "BVDU_PUNE_2022",
    "spec": "pus",
    "set": "opd",
    "org": "Escherichia coli",
@@ -29234,6 +31269,17 @@
    "src": "BVDU_PUNE_2022",
    "spec": "urine",
    "set": "opd",
+   "org": "Escherichia coli",
+   "pheno": null,
+   "drug": "ofloxacin",
+   "value": 46,
+   "action": "caution",
+   "why": "an isolate susceptible to ofloxacin is also levofloxacin-susceptible, so levofloxacin cannot be this much lower; the source figures disagree (Ofloxacin 46%, Levofloxacin 0%)"
+  },
+  {
+   "src": "BVDU_PUNE_2022",
+   "spec": "urine",
+   "set": "opd",
    "org": "Klebsiella pneumoniae",
    "pheno": null,
    "drug": "levofloxacin",
@@ -29251,6 +31297,17 @@
    "value": 30,
    "action": "caution",
    "why": "an isolate susceptible to ciprofloxacin is also levofloxacin-susceptible, so levofloxacin cannot be this much lower; the source figures disagree (Ciprofloxacin 30%, Levofloxacin 0%)"
+  },
+  {
+   "src": "BVDU_PUNE_2022",
+   "spec": "urine",
+   "set": "opd",
+   "org": "Klebsiella pneumoniae",
+   "pheno": null,
+   "drug": "ofloxacin",
+   "value": 53,
+   "action": "caution",
+   "why": "an isolate susceptible to ofloxacin is also levofloxacin-susceptible, so levofloxacin cannot be this much lower; the source figures disagree (Ofloxacin 53%, Levofloxacin 0%)"
   },
   {
    "src": "BVDU_PUNE_2022",
@@ -29361,6 +31418,17 @@
    "value": 0,
    "action": "intrinsic",
    "why": "intrinsic resistance (CLSI M100 Appendix B; EUCAST expected resistant phenotypes)"
+  },
+  {
+   "src": "BVDU_PUNE_2020",
+   "spec": "pus",
+   "set": "icu",
+   "org": "Enterobacter cloacae",
+   "pheno": null,
+   "drug": "ceftriaxone",
+   "value": 100,
+   "action": "caution",
+   "why": "an isolate susceptible to ceftriaxone is carbapenem-susceptible, so imipenem cannot be this much lower; the source figures disagree (Ceftriaxone 100%, Imipenem 0%)"
   },
   {
    "src": "BVDU_PUNE_2020",

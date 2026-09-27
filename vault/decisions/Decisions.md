@@ -5,6 +5,20 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-27 · Antibiogram review round 4: clinical antibiograms, one answer for console and reasoning
+
+**Decision.** A clinical antibiogram (laboratory results combined with patient response) never answers a
+syndrome, a pool or WISCA: a `clinical` row flag makes its figures cautions and the store treats the row as
+not usable. The console and reasoning use the same answer function (`susceptibility`), including its drug-by-drug
+walk-on to another stratum, and label such figures with their own stratum and counts. WISCA covers bacteria
+only. Paired checks read the figures before any of them was flagged. An indwelling catheter makes a UTI
+complicated.
+**Why.** The round-4 reviewer showed the MICU VAP console at "Meropenem 53% R" from a clinical table, where
+the lab gives 3.9% susceptible. The console and reasoning also gave different answers for the same question
+(grey 10.9 against 84% resistant).
+**Trade-off.** More cautions (whole contradictory rows grey out, not just one cell), and footnotes in the
+reasoning panel. **Status:** built; reviewed items listed in vault/modules/Antibiogram.md.
+
 ## 2026-09-27 · CodeQL is off: no default setup, no codeql.yml
 
 **Decision (owner: "turn off codeql").** GitHub CodeQL code scanning is disabled in the repo settings
