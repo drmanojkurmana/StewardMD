@@ -5,6 +5,17 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-27 · CodeQL is off: no default setup, no codeql.yml
+
+**Decision (owner: "turn off codeql").** GitHub CodeQL code scanning is disabled in the repo settings
+(Settings, Advanced Security, CodeQL analysis), and the advanced workflow `.github/workflows/codeql.yml`
+was deleted on 2026-09-26. Do not re-add either.
+**Why.** Every PR waited on CodeQL jobs that added nothing. The advanced workflow failed because default
+setup was also on. Under default setup, `Analyze (swift)` queued for up to an hour on macOS runners and
+then failed with "configuration error" (it cannot autobuild the Capacitor iOS app).
+**Trade-off.** No CodeQL static analysis. Security checks that remain: the `security-scan` job in
+`ci.yml`, plus review and tests. **Status:** done 2026-09-27.
+
 ## 2026-09-26 · eLogbook made easy: HoD may approve joins and assign guides; supervisor falls back to the guide
 
 **Decision (owner: "make it user friendly and easy").** A resident can request to join by institution
