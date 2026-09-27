@@ -10087,3 +10087,14 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
 - **Decision 3 (`smd_kb_v2`)**: the KB's `feverGU` rules are read as "fever" under the flag rather
   than renaming the key, so saved cases and the classic path are untouched.
 - **Reversible**: all three are flags, default OFF; flags off is byte-identical (1,660 case-paths).
+
+## 2026-09-27 - Dx workspace: a plain view, behind a flag, instead of rewriting the classic one
+- **Context**: the owner said the Clinical Reasoning module is hard to understand. The classic view
+  was chosen earlier ("direction B, Guided Consult") and other tests and habits depend on it.
+- **Decision**: `smd_dx_simple` layers a plain view over the same engine: one list numbered once,
+  a Most likely card first, plain fit labels and card headings, less shown by default. Clinical
+  logic, scores and the antibiotic gate are untouched; the view is presentation only.
+- **Why a flag and not an edit in place**: reversible per CLAUDE.md; the owner decides the default
+  after using it. Two outright bugs (heading spacing, repeated guideline sentence) were fixed for
+  everyone.
+

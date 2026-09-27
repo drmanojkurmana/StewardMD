@@ -1425,7 +1425,7 @@
       '</div>' +
       '<nav class="dx-work-nav" aria-label="Reasoning workspace"><button type="button" data-dx-jump="dxIntake">Findings <span id="dxFindingCount">0</span></button><button type="button" data-dx-jump="dxReview">Review differential <span aria-hidden="true">↓</span></button></nav>' +
       '<div class="dx-body">' +
-        '<section class="dx-intake" id="dxIntake" aria-labelledby="dxIntakeTitle"><div class="dx-section-intro"><span class="dx-eyebrow">GUIDED CONSULT</span><h2 id="dxIntakeTitle">One useful question<br>at a time.</h2><p>Start with the presentation. Add confirmed findings, then explore what else to check.</p></div>' +
+        '<section class="dx-intake" id="dxIntake" aria-labelledby="dxIntakeTitle"><div class="dx-section-intro"><span class="dx-eyebrow">GUIDED CONSULT</span><h2 id="dxIntakeTitle">One useful question <br>at a time.</h2><p>Start with the presentation. Add confirmed findings, then explore what else to check.</p></div>' +
         '<div id="dxImported" class="dx-imported"></div>' +
         '<div id="dxHosp" class="dx-hosp"></div>' +
         '<div class="dx-find-wrap">' +
@@ -1634,6 +1634,7 @@
     if (!Object.keys(S.f).length) { el.innerHTML = ""; return; }
     var skipped = S.consultSkipped || [];
     var sug = suggestionKeys(d).filter(function (k) { return skipped.indexOf(k) < 0; });
+    if (simpleOn()) sug = plainKeys(sug);
     if (!sug.length) {
       el.innerHTML = '<div class="dx-sugg-h">Ready to review?</div><p class="dx-suggest-note">No further suggestions in this set. You can still search for findings or review the differential.</p>' + (skipped.length ? '<button class="dx-chip" id="dxRevisit">Revisit skipped questions</button>' : '');
       var revisit = el.querySelector("#dxRevisit"); if (revisit) revisit.onclick = function () { S.consultSkipped = []; renderSuggest(); };
@@ -2748,6 +2749,7 @@
   }
 
   function card(r, rank, above) {
+    if (simpleOn()) return cardSimple(r, rank, above);
     var open = S.expanded[r.id];
     var cls = r.inf ? "inf" : "ni";
     var delta = "";
@@ -2822,7 +2824,21 @@
       else if (r.score - p >= 6) msgs.push("▲ " + r.name + " rose (" + p + "→" + r.score + ")");
       else if (p - r.score >= 6) msgs.push("▼ " + r.name + " fell (" + p + "→" + r.score + ")");
     });
-    if (msgs.length) { el.style.display = ""; el.innerHTML = '<b>What changed</b> ' + (S.lastAdded ? 'adding <b>' + esc(S.lastAdded) + '</b> — ' : "") + msgs.slice(0, 3).map(esc).join("  ·  "); }
+    if (msgs.length && simpleOn()) {
+      var ent = [], up = [], down = [];
+      all.slice(0, 12).forEach(function (r) {
+        var p0 = S.prev[r.id];
+        if (p0 == null) { if (r.score >= 20) ent.push(r.name); } else if (r.score - p0 >= 6) up.push(r.name); else if (p0 - r.score >= 6) down.push(r.name);
+      });
+      var names = function (a) { return a.length > 3 ? a.slice(0, 3).join(", ") + " and " + (a.length - 3) + " more" : a.join(", "); };
+      var parts = [];
+      if (ent.length) parts.push(esc(names(ent)) + (ent.length > 1 ? " now fit" : " now fits"));
+      if (up.length) parts.push(esc(names(up)) + " moved up");
+      if (down.length) parts.push(esc(names(down)) + " moved down");
+      if (!parts.length) { el.style.display = "none"; return; }
+      el.style.display = ""; el.innerHTML = '<strong>What changed:</strong> ' + (S.lastAdded ? 'after adding ' + esc(S.lastAdded) + ', ' : '') + parts.join("; ") + '.';
+    }
+    else if (msgs.length) { el.style.display = ""; el.innerHTML = '<b>What changed</b> ' + (S.lastAdded ? 'adding <b>' + esc(S.lastAdded) + '</b> — ' : "") + msgs.slice(0, 3).map(esc).join("  ·  "); }
     else el.style.display = "none";
   }
 
@@ -2939,7 +2955,7 @@
     if (!el || !window.HOSPITAL) { if (el) el.innerHTML = ""; return; }
     var h = window.HOSPITAL.current();
     var opts = hospOptions(h.id);
-    el.innerHTML = '<span class="dx-hosp-l">Region / policy</span>' +
+    el.innerHTML = '<span class="dx-hosp-l">' + (simpleOn() ? "Antibiotic guideline (used for treatment advice)" : "Region / policy") + '</span>' +
       (h.logo ? '<img class="dx-hosp-logo" src="' + h.logo + '" alt="' + esc(h.short) + ' logo">' : "") +
       '<select id="dxHospSel" class="dx-hosp-sel" aria-label="Select hospital policy">' + opts + '</select>';
     var sel = el.querySelector("#dxHospSel");
@@ -3015,7 +3031,8 @@
       html = '<div class="dx-policy nopol">' +
         '<div class="dx-policy-src">' + src + '</div>' +
         '<div class="dx-policy-note"><b>ICMR national guidance (AMRSN 2024)</b> is applied as the default standard for <b>' + esc(lead.name) + '</b>' + (h.id === "ICMR" ? "" : " — no " + esc(h.short || h.name) + "-specific local entry") + '. ' +
-        (h.note ? esc(h.note) + " " : "") + 'StewardMD incorporates ICMR / IDSA evidence on the full disease page; institutional policies (e.g. GIMSR) are offered last as local options.</div>' +
+        (h.note ? esc(h.note) + " " : "") + (h.note && /incorporates/i.test(h.note) ? '' : 'StewardMD incorporates ICMR / IDSA evidence on the full disease page; ') +
+        (h.note && /incorporates/i.test(h.note) ? 'Institutional policies (e.g. GIMSR) are offered last as local options.' : 'institutional policies (e.g. GIMSR) are offered last as local options.') + '</div>' +
         regionSuscHTML(lead) +
         '<button class="dx-select inf" data-sel="' + lead.id + '">Open full stewardship page →</button>' +
       '</div>';
@@ -3065,6 +3082,7 @@
     renderSelected(); renderPicker(); renderHosp(); renderAdv();
     if (S.imported) { try { renderImported(); } catch (e) {} }
     var d = differential();
+    applySimple(simpleOn());
     renderSuggest(d);
 
     // --- Clinical Information Threshold ---------------------------------- *
@@ -3079,6 +3097,8 @@
     // smd_calib: the same rule the engine's answer uses, which also treats a red flag (hypotension,
     // altered sensorium, neutropenia...) as enough, so a possible sepsis picture is never hidden here
     if (calibOn()) ready = enoughInfo(d, S.f);
+    renderGo(nFind, ready, d);
+    var topEl = root.querySelector("#dxTop"); if (topEl && (!nFind || !ready)) topEl.innerHTML = "";
     var gateEl = root.querySelector("#dxGate"), polEl = root.querySelector("#dxPolicy"),
         chEl = root.querySelector("#dxChanged"), colEl = root.querySelector("#dxCols");
     var domEl = root.querySelector("#dxDom");
@@ -3110,8 +3130,9 @@
       (gateMsg(g) ? '<div class="dx-gate-m">' + esc(gateMsg(g)) + '</div>' : '') + nextHtml +
       '</div>';
     renderPolicy(g);
+    if (simpleOn()) { foldPolicy(); renderTop(d); }
     renderChanged(d);
-    root.querySelector("#dxCols").innerHTML =
+    root.querySelector("#dxCols").innerHTML = simpleOn() ? mergedHTML(d) :
       colHTML('🔴 Infectious', 'inf', d.inf, S.started ? "No infectious cause suggested by the current findings." : "Add findings to see infectious differentials.") +
       colHTML('🟢 Non-infectious', 'ni', d.ni, S.started ? "No non-infectious cause suggested yet." : "Add findings to see non-infectious differentials.");
     // wire expand + select
@@ -3128,7 +3149,7 @@
     root.querySelectorAll(".dx-cmp").forEach(function (b) {
       b.addEventListener("click", function (e) { e.stopPropagation(); toggleCompare(b.getAttribute("data-cmp")); });
     });
-    wireAsk();
+    wireAsk(); wireSimple();
     renderCompare(d);
     recordRecentCase(d);
     // NB: S.prev is the PRE-change snapshot taken in addFinding — do not
@@ -3157,9 +3178,10 @@
   // re-render only the columns (used on expand so we don't reset prev/delta)
   function renderColsOnly() {
     var d = differential();
-    root.querySelector("#dxCols").innerHTML =
+    root.querySelector("#dxCols").innerHTML = simpleOn() ? mergedHTML(d) :
       colHTML('🔴 Infectious', 'inf', d.inf, "No infectious cause suggested by the current findings.") +
       colHTML('🟢 Non-infectious', 'ni', d.ni, "No non-infectious cause suggested yet.");
+    if (simpleOn()) renderTop(d);
     root.querySelectorAll(".dx-row-head").forEach(function (h) {
       h.addEventListener("click", function () { var id = h.getAttribute("data-id"); S.expanded[id] = !S.expanded[id]; renderColsOnly(); });
     });
@@ -3173,7 +3195,7 @@
     root.querySelectorAll(".dx-cmp").forEach(function (b) {
       b.addEventListener("click", function (e) { e.stopPropagation(); toggleCompare(b.getAttribute("data-cmp")); });
     });
-    wireAsk();
+    wireAsk(); wireSimple();
     renderCompare(d);
   }
 
@@ -3871,6 +3893,175 @@
     } catch (e) { return false; }
   }
   // feverGU is "fever with urinary symptoms" by label but plain fever in the KB rules: never ask it
+  /* smd_dx_simple (default OFF): the workspace in plain language. ?dxsimple=1|0. Presentation only:
+   * the engine, scores, gate and antibiotic advice are unchanged. The owner asked for the module to be
+   * "easier to understand" (2026-09-27); a first-time walkthrough found the answer buried under six
+   * boxes, two lists each numbered from 1, a bare "Ranking score 86/100" that reads like a
+   * probability, unexplained badges (NEW, ↔ mimics, ▲▼, ⚖) and technical card headings.
+   *  - review: a "Most likely" card first; ONE list, best fit first, numbered once, each row tagged
+   *    Infective / Non-infective; "Strong / Possible / Weak fit"; less likely ones behind "Show more"
+   *  - cards: plain headings in the order a clinician uses them, long text folded
+   *  - the guideline box folds to one line; "What changed" is a sentence; the system box is hidden
+   *  - intake: a "See what it could be" button once there is enough; the guideline picker moves below
+   *    the findings; "Fever with urinary symptoms" is not suggested when fever is already entered */
+  function simpleOn() {
+    try {
+      var q = /[?&]dxsimple=([01])\b/.exec((window.location && location.search) || "");
+      if (q) return q[1] === "1";
+      return localStorage.getItem("smd_dx_simple") === "1";
+    } catch (e) { return false; }
+  }
+  function fitLabel(sc) { return sc >= 70 ? "Strong fit" : sc >= 40 ? "Possible fit" : "Weak fit"; }
+  // feverGU is labelled "fever with urinary symptoms" but the KB means fever: never suggest it on top of fever
+  function plainKeys(keys) { return (keys || []).filter(function (k) { return !(k === "feverGU" && S.f.fever); }); }
+  function rkOf(x) { return x.rankScore != null ? x.rankScore : x.score; }
+  function allByFit(d) {
+    return d.inf.concat(d.ni).filter(function (r) { return r.score > 0; })
+      .sort(function (a, b) { return (rkOf(b) - rkOf(a)) || (b.score - a.score) || a.name.localeCompare(b.name); });
+  }
+  var SIMPLE_CAP = 6;
+  function mergedHTML(d) {
+    var all = allByFit(d);
+    if (!all.length) return '<div class="dx-empty">No diagnosis fits the current findings yet.</div>';
+    var cap = S.showAllDx ? Math.min(all.length, 30) : Math.min(all.length, SIMPLE_CAP);
+    // the first view always holds the best infective AND the best non-infective candidate (a
+    // reasonable one: 30+ and in the top 10), so "is it an infection at all?" stays answerable
+    var firstInf = -1, firstNi = -1;
+    all.forEach(function (r, i) { if (r.inf && firstInf < 0) firstInf = i; if (!r.inf && firstNi < 0) firstNi = i; });
+    [firstInf, firstNi].forEach(function (i) { if (i >= cap && i < 10 && all[i].score >= 30) cap = i + 1; });
+    // an open card (or the one being tested) stays in view even when it sits below the cut
+    all.forEach(function (r, i) { if (i >= cap && i < 30 && (S.expanded[r.id] || (S.ask && S.ask.target === r.id))) cap = i + 1; });
+    var shown = all.slice(0, cap), rest = all.length - shown.length;
+    var body = shown.map(function (r, i) { return card(r, i + 1, i > 0 ? shown[i - 1] : null); }).join("");
+    if (rest > 0) body += '<button type="button" class="dx-more dx-showall" id="dxShowAll">Show ' + rest + ' less likely possibilit' + (rest === 1 ? 'y' : 'ies') + '</button>';
+    else if (S.showAllDx && all.length > SIMPLE_CAP) body += '<button type="button" class="dx-more dx-showall" id="dxShowAll">Show fewer</button>';
+    return '<div class="dx-col all"><div class="dx-col-h">All possibilities, best fit first <span class="dx-col-n">' + all.length + '</span></div>' +
+      '<p class="dx-col-sub">Fit shows how well the findings match each diagnosis. It is not a probability. Tap one to see why.</p>' + body + '</div>';
+  }
+  function renderTop(d) {
+    var el = root.querySelector("#dxTop");
+    if (!el) return;
+    var all = allByFit(d), A = all[0];
+    if (!simpleOn() || !A) { el.innerHTML = ""; return; }
+    var cls = A.inf ? "inf" : "ni", B = all[1], tie = B && rkOf(A) - rkOf(B) < 3;
+    var also = all.slice(1, 3).map(function (r) { return r.name; });
+    el.innerHTML = '<div class="dx-topcard">' +
+      '<div class="dx-eyebrow">' + (tie ? "CLOSEST FITS ON THESE FINDINGS" : "MOST LIKELY ON THESE FINDINGS") + '</div>' +
+      '<div class="dx-top-name">' + esc(A.name) + '</div>' +
+      '<div class="dx-tags"><span class="dx-tag ' + cls + '">' + (A.inf ? "Infective" : "Non-infective") + '</span><span class="dx-tag fit">' + fitLabel(A.score) + ' · ' + A.score + '/100</span></div>' +
+      ((A.supporting || []).length ? '<p class="dx-top-line"><strong>Fits:</strong> ' + esc(A.supporting.slice(0, 4).map(lbl).join(", ")) + '</p>' : '') +
+      (tie ? '<p class="dx-top-line"><strong>' + esc(B.name) + '</strong> fits just as well. Open either card and press Select to get questions that separate them.</p>'
+           : (also.length ? '<p class="dx-top-line"><strong>Also consider:</strong> ' + esc(also.join(", ")) + '</p>' : '')) +
+      '<button type="button" class="dx-chip dx-top-open" data-open="' + A.id + '">See why, and what to check next</button>' +
+      '</div>';
+  }
+  // the guideline box is long and repeats itself; fold it to one line, keep its page button outside
+  function foldPolicy() {
+    var el = root.querySelector("#dxPolicy"), box = el && el.firstElementChild;
+    if (!box || box.tagName === "DETAILS") return;
+    var btn = box.querySelector(".dx-select[data-sel]"), src = box.querySelector(".dx-policy-src");
+    var srcTxt = src ? (src.innerText || src.textContent || "").replace(/\s+/g, " ").trim() : "";
+    var det = document.createElement("details");
+    det.className = "dx-pol-fold";
+    det.innerHTML = '<summary>Antibiotic guidance' + (srcTxt ? ': ' + esc(srcTxt) : '') + '</summary>';
+    if (btn) btn.parentNode.removeChild(btn);   // the node keeps its click handler
+    det.appendChild(box);
+    el.appendChild(det);
+    if (btn) el.appendChild(btn);
+  }
+  var SIMPLE_ORIG = null;
+  function applySimple(on) {
+    if (!root || (!on && !root.classList.contains("dx-simple"))) return;   // off and never on: touch nothing
+    root.classList.toggle("dx-simple", !!on);
+    var t = root.querySelector("#dxReviewTitle"), intro = root.querySelector(".dx-section-intro p");
+    if (!SIMPLE_ORIG) SIMPLE_ORIG = { t: t ? t.innerHTML : "", intro: intro ? intro.innerHTML : "" };
+    if (t) t.innerHTML = on ? "What it could be" : SIMPLE_ORIG.t;
+    if (intro) intro.innerHTML = on ? '<span class="dx-steps"><span>1. Add what you found: search, speak, or browse by system.</span><span>2. Answer the suggested question, or skip it.</span><span>3. See what it could be, best fit first.</span></span>' : SIMPLE_ORIG.intro;
+    // the guideline picker belongs with treatment, not before the first finding
+    var h = root.querySelector("#dxHosp"), adv = root.querySelector("#dxAdvToggle"), imp = root.querySelector("#dxImported");
+    if (h && adv && imp) { if (on) adv.parentNode.insertBefore(h, adv); else imp.parentNode.insertBefore(h, imp.nextSibling); }
+    var top = root.querySelector("#dxTop");
+    if (!top) { top = document.createElement("div"); top.id = "dxTop"; var g = root.querySelector("#dxGate"); if (g) g.parentNode.insertBefore(top, g); }
+    var go = root.querySelector("#dxGo");
+    if (!go) { go = document.createElement("div"); go.id = "dxGo"; var sel = root.querySelector("#dxSel"); if (sel) sel.parentNode.insertBefore(go, sel.nextSibling); }
+  }
+  function renderGo(nFind, ready, d) {
+    var el = root.querySelector("#dxGo");
+    if (!el) return;
+    if (!simpleOn() || !nFind) { el.innerHTML = ""; return; }
+    if (ready) {
+      var n = allByFit(d).length;
+      el.innerHTML = '<button type="button" class="dx-go" id="dxGoBtn">See what it could be (' + n + ' possibilit' + (n === 1 ? 'y' : 'ies') + ') →</button>';
+      el.querySelector("#dxGoBtn").addEventListener("click", function () { showConsultPane("dxReview"); });
+    } else {
+      el.innerHTML = '<p class="dx-go-hint">Add ' + Math.max(1, 3 - nFind) + ' more finding' + (3 - nFind === 1 ? '' : 's') + ', or one specific sign, to see what it could be.</p>';
+    }
+  }
+  function wireSimple() {
+    if (!root || !simpleOn()) return;
+    var sa = root.querySelector("#dxShowAll");
+    if (sa) sa.addEventListener("click", function (e) { e.stopPropagation(); S.showAllDx = !S.showAllDx; renderColsOnly(); });
+    root.querySelectorAll("[data-clamp]").forEach(function (b) {
+      b.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var t = b.previousElementSibling; if (!t) return;
+        var open = t.classList.toggle("open"); b.textContent = open ? "Show less" : "Read more";
+      });
+    });
+    root.querySelectorAll("[data-addf]").forEach(function (b) {
+      b.addEventListener("click", function (e) { e.stopPropagation(); addFinding(b.getAttribute("data-addf")); });
+    });
+    root.querySelectorAll("[data-open]").forEach(function (b) {
+      b.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var id = b.getAttribute("data-open"); S.expanded[id] = true; renderColsOnly();
+        var h = root.querySelector('.dx-row-head[data-id="' + id + '"]');
+        if (h) { try { h.scrollIntoView({ behavior: "smooth", block: "start" }); } catch (x) { h.scrollIntoView(); } }
+      });
+    });
+  }
+  // a plain card: same data and buttons, plain headings in the order a clinician uses them
+  function cardSimple(r, rank, above) {
+    var open = S.expanded[r.id], cls = r.inf ? "inf" : "ni", inCmp = S.compare.indexOf(r.id) >= 0;
+    var head =
+      '<div class="dx-row-head" role="button" tabindex="0" aria-expanded="' + (!!open) + '" aria-label="Review ' + esc(r.name) + '" data-id="' + r.id + '">' +
+        '<div class="dx-rank ' + cls + '">' + rank + '</div>' +
+        '<div class="dx-row-main">' +
+          '<div class="dx-row-name">' + esc(r.name) + '</div>' +
+          '<div class="dx-tags"><span class="dx-tag ' + cls + '">' + (r.inf ? "Infective" : "Non-infective") + '</span>' +
+            (r.matched ? '<span class="dx-tag met">Meets criteria</span>' : '') + (inCmp ? '<span class="dx-tag fit">In compare</span>' : '') + '</div>' +
+          '<div class="dx-bar ' + cls + '"><span style="width:' + r.score + '%"></span></div>' +
+          '<div class="dx-fit"><strong>' + fitLabel(r.score) + '</strong> · ' + r.score + '/100' + (r.system ? ' · ' + esc(r.system) : '') + '</div>' +
+        '</div>' +
+      '</div>';
+    if (!open) return '<div class="dx-card ' + cls + '">' + head + '</div>';
+    function fl(keys, c, sign) { return keys.map(function (k) { return '<span class="dx-f ' + c + '">' + (sign || "") + esc(lbl(k)) + '</span>'; }).join(""); }
+    function row(label, body, extra) { return '<div class="dx-d-row' + (extra ? " " + extra : "") + '"><b>' + label + '</b>' + body + '</div>'; }
+    function list(items) { return '<ul>' + items.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>'; }
+    function folded(text) { return '<div class="dx-reason' + (text.length > 200 ? ' dx-clamp' : '') + '">' + text + '</div>' + (text.length > 200 ? '<button type="button" class="dx-more-link" data-clamp>Read more</button>' : ''); }
+    var miss = plainKeys(r.missing), tools = toolsFor(r.id);
+    var whyNot = (rank > 1 && above) ? 'It sits just below <strong>' + esc(above.name) + '</strong> (' + above.score + ' vs ' + r.score + '), which also fits these findings.' +
+      (miss.length ? ' It would move up with ' + esc(miss.slice(0, 3).map(lbl).join(", ")) + '.' : '') : "";
+    var mm = reasonV2() ? mimicsFor(r.id, r.inf) : [];
+    var det = '<div class="dx-detail">' +
+      ((r.supporting || []).length ? row("Fits because", '<div>' + fl(r.supporting, "sup", "✓ ") + '</div>') : '') +
+      ((r.contra || []).length ? row("Against it", '<div>' + fl(r.contra, "con", "✕ ") + '</div>') : '') +
+      (whyNot ? row("Why it is not first", '<div class="dx-reason">' + whyNot + '</div>') : '') +
+      (miss.length ? row("Ask or check next", '<div>' + miss.map(function (k) { return '<button type="button" class="dx-f mis dx-addf" data-addf="' + k + '">+ ' + esc(lbl(k)) + '</button>'; }).join("") + '</div><p class="dx-row-hint">Tap one you have found to add it to the case.</p>') : '') +
+      (r.reason ? row("Why it fits", folded(esc(r.reason))) : '') +
+      ((r.red || []).length ? row("Red flags", list(r.red), "red") : '') +
+      ((r.inv || []).length ? row("Tests to consider", list(r.inv.slice(0, 5))) : '') +
+      ((r.disc || []).length ? row("Key information to get", '<div class="dx-disc">' + r.disc.slice(0, 6).map(function (x) { return '<span class="dx-disc-pill">' + esc(x) + '</span>'; }).join("") + '</div>') : '') +
+      (mm.length ? row("Look-alikes to rule out", folded(esc(mm.join("; ")) + '.')) : '') +
+      (tools.length ? row("Bedside tools", '<div class="dx-tools">' + tools.map(function (t) { return '<button class="dx-tool" data-tool="' + t + '">' + esc(TOOLREG[t].icon + " " + TOOLREG[t].label) + '</button>'; }).join("") + '</div>') : '') +
+      scoreChipsBlock(r) +
+      harrisonRef(r.id) +
+      '<button type="button" class="dx-cmp dx-cmp-add" aria-pressed="' + inCmp + '" data-cmp="' + r.id + '">' + (inCmp ? "Remove from compare" : "Add to compare") + '</button>' +
+      (S.ask && S.ask.target === r.id ? askHTML(r) : '<button class="dx-select ' + cls + '" data-sel="' + r.id + '">Select this diagnosis →</button>') +
+      '</div>';
+    return '<div class="dx-card ' + cls + ' open">' + head + det + '</div>';
+  }
+
   var ASK_SKIP = { age: 1, sex: 1, ageOver50: 1, feverGU: 1 };
   var ASK_NUMERIC = null;
   function askable(k) {
@@ -4466,6 +4657,7 @@
   window.DX = { open: open, openWorkspace: openWorkspace, close: close, reset: resetAll, importPatient: importPatient, restore: restore, addFindings: addFindings, findingCatalog: findingCatalog, _state: S, _ni: DDX_NI, _differential: differential,
     _nextQuestions: nextQuestions,
     _differentiate: differentiate, _dxAsk: dxAskOn, _openAsk: openAsk, // smd_dx_ask
+    _simple: simpleOn, // smd_dx_simple
     // PURE: free text -> present engine finding keys, using the engine's OWN synonym set (FT_SYN) so
     // callers (e.g. OPD Ask MaiK) get the same rich extraction the reasoning workspace does. No S.f mutation.
     // PURE: free text -> { present, absent } engine keys (absent = explicitly denied in the note)

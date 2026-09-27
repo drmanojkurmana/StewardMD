@@ -152,3 +152,26 @@ render paths; the Select loop now matches `.dx-select[data-sel]` only, so the in
   suggest it. `askPositive` keeps it out of the questions; the scoring fix belongs behind a flag with
   re-measured floors.
 - Test `test/run-dx-ask.mjs` (CI).
+
+## Plain view (`smd_dx_simple`, default OFF, 2026-09-27)
+
+The owner found the module hard to understand. A first-time walkthrough at 390px found: the answer
+under six boxes (heading, score disclaimer, gate, a guideline box that repeated its own sentence,
+"What changed", "Dominant system"); two lists each numbered from 1; "Ranking score 86/100" reading
+as a probability; NEW / ↔ mimics / ▲▼ / ⚖ unexplained; technical card headings; "questionat a time"
+on the empty state; the guideline picker before any finding.
+
+`reasoning.js` `simpleOn()` (`?dxsimple=1`), `applySimple()` (root class `dx-simple`, moves `#dxHosp`,
+creates `#dxTop` / `#dxGo`; does nothing while off), `cardSimple()` (`card()` delegates),
+`mergedHTML()` / `allByFit()` (one list by `rankScore`, `SIMPLE_CAP` 6, extended to include the best
+infective and non-infective candidate at 30+ in the top 10, and any open card), `renderTop()`,
+`foldPolicy()` (moves the policy node into `<details>`, its button outside keeps its handler),
+`renderGo()`, `wireSimple()` (Show more, Read more, `data-addf`, `data-open`), `plainKeys()` (no
+`feverGU` on top of fever). Styles in `reasoning-workspace.css` under `#dxOverlay.dx-simple`.
+Fixed for everyone: the empty-state heading space, and the guideline note no longer repeats
+"StewardMD incorporates ICMR / IDSA evidence" when the hospital note already says it.
+
+- Presentation only: `SMD_REASON.assess` is identical on and off (checked in the test).
+- Test `test/run-dx-simple.mjs` (CI). Known leftovers: "Know more" is light in dark mode (existing);
+  the classic gate still says "empiric antimicrobial therapy is appropriate" for viral hepatitis
+  unless `smd_gate_v2` is on.
