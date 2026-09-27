@@ -2758,7 +2758,8 @@
         var a = b.getAttribute("data-mi");
         if (a === "display") return openDisplay();
         if (a === "notifprefs") return openNotifPrefs();
-        if (a === "help") { closeSheet(); return openHelp(); }
+        // One Help & Support centre (bug-report.js, 2026-09-27); the old sheet is the fallback only.
+        if (a === "help") { closeSheet(); if (window.SMD_HELP && SMD_HELP.openCentre) return SMD_HELP.openCentre(); return openHelp(); }
         if (a === "account") return openAccount();
         if (a === "subscription") return openSubscription();
         if (a === "aiusage") { closeSheet(); return openAiUsage(); }

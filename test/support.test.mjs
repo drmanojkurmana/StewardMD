@@ -5,7 +5,8 @@ import assert from "node:assert/strict";
 import { createTicket, addMessage, setStatus, getTicket, listTickets, listMine, makeId, isStatus } from "../functions/_support.js";
 
 function fakeStore() { const m = new Map(); return { get: (k) => Promise.resolve(m.has(k) ? m.get(k) : null), put: (k, v) => { m.set(k, v); return Promise.resolve(); } }; }
-const NOW = Date.parse("2026-08-16T10:00:00Z");
+// Real clock: solved tickets expire 30 days after solving (owner 2026-09-27), so a fixed past date would read as expired.
+const NOW = Date.now();
 const WHO = { id: "fb:doc1", email: "doc1@x.in", name: "Dr One" };
 
 test("complaint id is SMD- prefixed and deterministic from entropy", () => {

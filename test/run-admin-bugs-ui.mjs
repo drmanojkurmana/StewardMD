@@ -40,7 +40,9 @@ function wireFetchBlock() {
 // Fake owner sign-in + an in-page /api/ai/admin/support* that behaves like the real route.
 const H = 3600000;
 const BOOT = `
-  window.__sent = []; var NOW = Date.now(), H = ${H};
+  window.__sent = []; var NOW = Date.now(), H = ${H}; window.__events = []; window.__seq = 0;
+  window.__docMsg = function (id, text) { var t = window.__tickets.filter(function (x) { return x.id === id; })[0]; var now = Date.now();
+    t.messages.push({ from: "user", text: text, ts: now }); t.unread = true; t.updatedAt = now; window.__events.push({ seq: ++window.__seq, ticket: id, owner: t.owner, sender: "user", kind: "msg", text: text, ts: now }); };
   window.__tickets = [
     { id: "SMD-LATE01", kind: "bug", owner: "fb:d1", email: "late@doc.in", subject: "Bug: ICU chart blank", status: "open", unread: true, createdAt: NOW - 30*H, dueAt: NOW - 6*H, updatedAt: NOW - 30*H,
       platform: "ios", build: "3.1", hasShot: true, bug: { route: "#icu | icuModal", element: { label: "Save", tag: "button", sel: "button#icuSave" }, screen: { w: 390, h: 844, dpr: 3 }, ua: "iPhone OS 26" },
@@ -56,12 +58,21 @@ const BOOT = `
     auth: function () { window.__auth = { currentUser: FAKE_USER, onAuthStateChanged: function (cb) { cb(FAKE_USER); }, signOut: function () {} }; return window.__auth; } };
   window.firebase.auth.GoogleAuthProvider = function () {};
   var realFetch = window.fetch.bind(window);
-  function row(t) { var r = {}; ["id","kind","owner","email","subject","status","unread","createdAt","updatedAt","dueAt","resolvedAt"].forEach(function (k) { if (t[k] !== undefined) r[k] = t[k]; }); return r; }
+  function row(t) { var r = {}; ["id","kind","owner","email","subject","status","unread","createdAt","updatedAt","dueAt","resolvedAt"].forEach(function (k) { if (t[k] !== undefined) r[k] = t[k]; }); var m = (t.messages || []).slice(-1)[0]; if (m) r.last = { from: m.from, text: m.text, ts: m.ts }; return r; }
   window.fetch = function (url, opts) {
     opts = opts || {}; url = String(url);
     if (url.indexOf("/api/") !== 0) return realFetch(url, opts);
     window.__sent.push({ url: url, method: opts.method || "GET", body: opts.body || null, auth: opts.headers && opts.headers.Authorization });
     var J = function (d, s) { return Promise.resolve(new Response(JSON.stringify(d), { status: s || 200, headers: { "Content-Type": "application/json" } })); };
+    if (url.indexOf("/api/ai/admin/support-live") === 0) {
+      var am = /after=([0-9]+)/.exec(url);
+      if (!am) return J({ ok: true, live: true, seq: window.__seq, events: [] });
+      var evs = window.__events.filter(function (e) { return e.seq > +am[1]; });
+      return J({ ok: true, live: true, seq: evs.length ? evs[evs.length - 1].seq : +am[1], events: evs });
+    }
+    if (url.indexOf("/api/ai/admin/support-seen") === 0) {
+      var sb = JSON.parse(opts.body || "{}"); window.__tickets.forEach(function (t) { if (t.id === sb.id) t.unread = false; }); return J({ ok: true });
+    }
     if (url.indexOf("/api/ai/admin/support-shot") === 0) {
       var c = document.createElement("canvas"); c.width = 20; c.height = 40; var g = c.getContext("2d"); g.fillStyle = "#e5484d"; g.fillRect(0, 0, 20, 40);
       return new Promise(function (res) { c.toBlob(function (b) { res(new Response(b, { status: 200, headers: { "Content-Type": "image/png" } })); }); });
@@ -112,14 +123,18 @@ try {
   };
   const waitFor = async (expr, ms = 6000) => { const t0 = Date.now(); do { if (await ev(expr) === true) return true; await sleep(120); } while (Date.now() - t0 < ms); return false; };
 
-  ok(await ev(`return !!document.querySelector('[data-p="bugs"]') && /Bug Centre/.test(document.querySelector('[data-p="bugs"]').textContent)`) === true, "the admin sidebar has Bug Centre");
-  ok(await waitFor(`return document.getElementById("navBugs").textContent==="2"`), "its badge counts the 2 open bugs (not the support question, not the fixed one)");
+  ok(await ev(`return !!document.querySelector('[data-p="bugs"]') && /Help & Support/.test(document.querySelector('[data-p="bugs"]').textContent) && !document.querySelector('[data-p="support"]')`) === true, "the admin sidebar has ONE Help & Support inbox (no separate Support tickets)");
   await click('[data-p="bugs"]');
-  ok(await waitFor(`return document.querySelectorAll("#bgBox [data-bug]").length===2`), "Open lists the two open bugs");
-  ok(await ev(`return document.getElementById("bgOpen").textContent==="2" && document.getElementById("bgLate").textContent==="1" && document.getElementById("bgWork").textContent==="0" && document.getElementById("bgFixed").textContent==="1" && document.getElementById("bgSla").textContent==="100%"`) === true,
-     "counts: 2 open, 1 past the 24 h promise, 0 in progress, 1 fixed this week, 100% fixed within 24 h");
+  ok(await waitFor(`return document.querySelectorAll("#bgBox [data-bug]").length===3`), "Open lists every open conversation: the two open bugs and the open question");
+  ok(await waitFor(`return document.getElementById("navBugs").textContent==="1"`), "the badge counts what is waiting on us (1 unread)");
+  ok(await ev(`return document.getElementById("bgOpen").textContent==="3" && document.getElementById("bgLate").textContent==="1" && document.getElementById("bgWork").textContent==="0" && document.getElementById("bgFixed").textContent==="1" && document.getElementById("bgSla").textContent==="100%"`) === true,
+     "counts: 3 open, 1 bug past the 24 h promise, 0 in progress, 1 solved this week, 100% of bugs fixed within 24 h");
   ok(await ev(`var r=document.querySelectorAll("#bgBox [data-bug]"); return r[0].getAttribute("data-bug")==="SMD-LATE01" && /Overdue 6 h/.test(r[0].innerText) && /Due in 4 h/.test(r[1].innerText)`) === true, "most urgent first: the overdue bug on top, with its hours");
-  ok(await ev(`return !/How do I export/.test(document.getElementById("bgBox").innerText)`) === true, "support questions stay in Support, not in the Bug Centre");
+  ok(await ev(`return /Question/.test(document.getElementById("bgBox").innerText) && /How do I export/.test(document.getElementById("bgBox").innerText)`) === true, "questions sit in the same inbox, marked Question");
+  await click('#bgFilters [data-bf="help"]');
+  ok(await waitFor(`var r=document.querySelectorAll("#bgBox [data-bug]"); return r.length===1 && r[0].getAttribute("data-bug")==="SMD-HELP04"`), "the Questions filter shows only questions");
+  await click('#bgFilters [data-bf="open"]');
+  await waitFor(`return document.querySelectorAll("#bgBox [data-bug]").length===3`);
   await click('#bgFilters [data-bf="late"]');
   ok(await waitFor(`return document.querySelectorAll("#bgBox [data-bug]").length===1`), "the Overdue filter shows only the late one");
   await click('#bgFilters [data-bf="fixed"]');
@@ -160,8 +175,16 @@ try {
   await click("#bgCopyBtn");
   ok(await waitFor(`return typeof window.__copied==="string" && /Bug SMD-LATE01/.test(window.__copied) && /button#icuSave/.test(window.__copied) && /Tapping Save does nothing/.test(window.__copied)`), "Copy for GitHub gives a plain-text summary");
   await click("#bgBack");
-  ok(await waitFor(`return document.querySelectorAll("#bgBox [data-bug]").length===2`), "back to the list");
+  ok(await waitFor(`return document.querySelectorAll("#bgBox [data-bug]").length===3`), "back to the list");
 
-  console.log(fails === 0 ? "\nALL GREEN - admin Bug Centre: counts, urgency order, detail with screenshot, working on it, reply, fix, reopen, copy" : `\n${fails} FAILED`);
+  // ── LIVE: the doctor writes while the developer has the conversation open ──
+  await click('#bgBox [data-bug="SMD-SOON02"]');
+  ok(await waitFor(`return /drug search slow/.test(document.getElementById("bgBox").innerText)`), "open another conversation");
+  ok(await waitFor(`return window.__sent.some(function(x){return /support-seen/.test(x.url) && /SMD-SOON02/.test(x.body||"")})`), "opening it tells the doctor it was Seen");
+  await ev(`document.getElementById("bgTx").value="half-typed reply"; window.__docMsg("SMD-SOON02", "It is worse on 4G"); return 1;`);
+  ok(await waitFor(`return /It is worse on 4G/.test(document.getElementById("bgBox").innerText)`, 8000), "the doctor's new message appears within seconds, no reload");
+  ok(await ev(`return document.getElementById("bgTx").value==="half-typed reply"`) === true, "without losing what the developer was typing");
+
+  console.log(fails === 0 ? "\nALL GREEN - admin Help & Support inbox: every kind, counts, urgency order, detail, LIVE doctor messages, Seen, reply, fix, reopen, copy" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }

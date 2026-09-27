@@ -36,7 +36,7 @@ test("reply pushes to the reporter, with the id only; resolve deletes the screen
   assert.equal(r.status, 200);
   await new Promise((res) => setTimeout(res, 5));
   assert.equal(PUSHES.length, 1);
-  assert.deepEqual(PUSHES[0].opts, { uid: "doc-uid-9" });
+  assert.deepEqual(PUSHES[0].opts, { uid: "fb:doc-uid-9" }, "push tokens are stored under the namespaced id (the bug: it was stripped, so nothing was sent)");
   assert.equal(PUSHES[0].msg.title, "Reply to your bug report");
   assert.equal(JSON.stringify(PUSHES[0].msg).includes("Ramesh"), false, "no ticket text on a lock screen");
   assert.equal(JSON.stringify(PUSHES[0].msg).includes("Fixed in 1.3"), false);
