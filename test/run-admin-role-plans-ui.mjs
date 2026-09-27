@@ -23,6 +23,13 @@ let msgId = 1; const pending = new Map(); let ws, sessionId;
 const call = (m, p) => { const i = msgId++; return new Promise(r => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return JSON.stringify({__err:String(x&&x.message||x)})}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : null; };
 const J = async (e) => { const v = await ev(e); try { return JSON.parse(v); } catch { return v; } };
+// Values reach the page as call ARGUMENTS (Runtime.callFunctionOn), never spliced into code, so no test
+// value can change what runs in the page. The function sources below are fixed literals.
+async function callFn(fnSrc, ...args) {
+  const w = await call("Runtime.evaluate", { expression: "window" });
+  const r = await call("Runtime.callFunctionOn", { objectId: w.result.result.objectId, functionDeclaration: fnSrc, arguments: args.map((v) => ({ value: v })), returnByValue: true });
+  return r.result && r.result.result ? r.result.result.value : null;
+}
 let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 
 const BOOT = `
@@ -52,11 +59,11 @@ const BOOT = `
     return Promise.resolve(new Response(JSON.stringify(d), { status: 200, headers: { "Content-Type": "application/json" } }));
   };
 `;
-const sent = (frag) => J(`return JSON.stringify(window.__sent.filter(function(x){return x.url.indexOf(${JSON.stringify(frag)})>=0;}))`);
+const sent = (frag) => callFn("function (frag) { return window.__sent.filter(function (x) { return x.url.indexOf(frag) >= 0; }); }", frag);
 
-async function open(path, readyExpr) {
+async function open(path, selectors) {
   await call("Page.navigate", { url: BASE + path });
-  for (let i = 0; i < 90; i++) { await sleep(300); if (await ev(`return !!(${readyExpr})`) === true) return true; }
+  for (let i = 0; i < 90; i++) { await sleep(300); if (await callFn("function (sels) { return sels.every(function (s) { return !!document.querySelector(s); }); }", selectors) === true) return true; }
   return false;
 }
 try {
@@ -70,7 +77,7 @@ try {
   await call("Page.addScriptToEvaluateOnNewDocument", { source: BOOT });
 
   // 1) Legacy trainees
-  ok(await open("admin/verifications.html", 'document.querySelector("[data-f=legacy]")'), "verifications page shows a 'Legacy trainees' filter");
+  ok(await open("admin/verifications.html", ["[data-f=legacy]"]), "verifications page shows a 'Legacy trainees' filter");
   await ev(`document.querySelector("[data-f=legacy]").click(); return 1;`); await sleep(300);
   await ev(`var r=document.getElementById("reload"); if(r) r.click(); return 1;`); await sleep(800);
   const rows = await J(`return JSON.stringify(Array.prototype.map.call(document.querySelectorAll("[data-approve]"),function(b){ var u=b.getAttribute("data-approve"), s=document.querySelector('[data-role-for="'+u+'"]'); return {uid:u, role:s&&s.value}; }))`);
@@ -82,7 +89,7 @@ try {
   ok(ap.length === 1 && ap[0].body.uid === "legacyA" && ap[0].body.role === "resident", "Approve re-issues with the chosen role (intern corrected to resident): " + JSON.stringify(ap.map((x) => x.body)));
 
   // 2) Plan setter + 3) Ultimate card on the admin console
-  ok(await open("admin/index.html", 'document.getElementById("ultList") && document.getElementById("entlLookup")'), "admin console shows the Ultimate card and User Entitlements");
+  ok(await open("admin/index.html", ["#ultList", "#entlLookup"]), "admin console shows the Ultimate card and User Entitlements");
   await ev(`document.getElementById("ultList").click(); return 1;`); await sleep(700);
   const listed = await J(`return JSON.stringify({ picks: Array.prototype.map.call(document.querySelectorAll(".ultPick"),function(b){return {uid:b.value,checked:b.checked};}), text: document.getElementById("ultResult").innerText, convertDisabled: document.getElementById("ultConvert").disabled })`);
   ok(listed.picks.length === 4 && listed.picks.every((p) => !p.checked), "dry run lists 4 accounts, none pre-ticked");
