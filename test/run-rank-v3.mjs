@@ -71,6 +71,10 @@ const CASES = {
   viralMen: ["fever", "headacheSevere", "neckStiffness", "photophobia", "myalgiaArthralgia"],
   anasarca: ["proteinuria", "legSwellingBilateral", "ascites", "oliguria"],
   thyroCalm: ["tachycardia", "weightLoss", "palpitations", "diarrhea"],
+  // round 14
+  crab: ["backPain", "renalImpairment", "weightLoss", "constipationOrDiarrhea", "polyuriaPolydipsia", "nauseaVomiting"],
+  hhsDry: ["polyuriaPolydipsia", "alteredSensorium", "dehydration", "diabetesHx", "tachycardia"],
+  slowK: ["renalImpairment", "bradycardia", "oliguria", "hypotension"],
 };
 
 try {
@@ -112,6 +116,9 @@ try {
   ok(pos("viralMen", "VIRAL_MENINGITIS") < pos("viralMen", "MENINGITIS"), `on  · meningism with myalgia and a clear sensorium: viral above bacterial (#${pos("viralMen", "VIRAL_MENINGITIS")} vs #${pos("viralMen", "MENINGITIS")})`);
   ok(pos("anasarca", "nephrotic") < pos("anasarca", "ckd"), `on  · proteinuria with ascites, bland urine: nephrotic above CKD (#${pos("anasarca", "nephrotic")} vs #${pos("anasarca", "ckd")})`);
   ok(pos("thyroCalm", "hyperthyroidism") < pos("thyroCalm", "thyroid_storm"), `on  · thyrotoxic without fever or confusion: not a storm (#${pos("thyroCalm", "hyperthyroidism")} vs #${pos("thyroCalm", "thyroid_storm")})`);
+  ok(pos("crab", "myeloma") <= 3 && pos("crab", "myeloma") < off.crab.order.indexOf("myeloma") + 1, `on  · bone pain + renal impairment + hypercalcaemic symptoms: myeloma rises into the top three (#${off.crab.order.indexOf("myeloma") + 1} -> #${pos("crab", "myeloma")})`);
+  ok(pos("hhsDry", "hhs") < pos("hhsDry", "hypercalcemia"), `on  · a dry, confused diabetic after polyuria, no ketones: HHS above hypercalcaemia (#${pos("hhsDry", "hhs")})`);
+  ok(pos("slowK", "hyperkalemia") < pos("slowK", "hypovolemic_shock"), `on  · renal failure with a slow pulse and low BP: hyperkalaemia above volume-loss shock (#${pos("slowK", "hyperkalemia")} vs #${pos("slowK", "hypovolemic_shock")})`);
   // default ON since 2026-09-27 (owner decision); localStorage "0" is the opt-out
   ok(await load(BASE + "?gatev2=0"), "app + KB load without ?rankv3");
   ok(await ev(`return DX._rankV3()`) === true, "default · DX._rankV3() is on without any flag");

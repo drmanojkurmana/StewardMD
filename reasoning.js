@@ -1124,7 +1124,6 @@
     migraine: function (f) { return noneOf(f, ["headache", "headacheSevere"]) ? -25 : 0; },
     LEPTOSPIROSIS: function (f) { return noneOf(f, FEBRILE) ? -20 : 0; },
     LIVER_ABSCESS: function (f) { return noneOf(f, FEBRILE) ? -20 : 0; },
-    AMOEBIC_LIVER_ABSCESS: function (f) { return noneOf(f, FEBRILE) ? -20 : 0; },
     CNS_TB: function (f) { return noneOf(f, FEBRILE.concat(["headache", "headacheSevere", "neckStiffness"])) ? -20 : 0; },
     ENCEPHALITIS: function (f) { return noneOf(f, FEBRILE.concat(["headache", "headacheSevere", "seizure"])) ? -20 : 0; },
     tia: function (f) { return f.clinicallyImproving ? 0 : -20; },          // a TIA has resolved; a deficit now is a stroke
@@ -1152,6 +1151,20 @@
     aki: function (f) { return (f.oliguria && f.renalImpairment && !f.proteinuria && !f.hematuria && !f.darkUrine) ? 12 : 0; },
     // thyroid storm is decompensated thyrotoxicosis: fever, a changed sensorium or shock
     thyroid_storm: function (f) { return noneOf(f, ["fever", "alteredSensorium", "hypotension", "toxicAppearing"]) ? -20 : 0; },
+    // round 14 (2026-09-27, train confusion pairs, each trigger checked against every train and dev case first).
+    // Myeloma is the CRAB picture: bone pain with renal impairment and hypercalcaemic symptoms or weight loss
+    myeloma: function (f) { return (f.backPain && f.renalImpairment && (f.weightLoss || f.constipationOrDiarrhea || f.polyuriaPolydipsia)) ? 20 : 0; },
+    // HHS: a diabetic, dry and confused after days of polyuria, without ketosis (hypercalcaemia shares the rest)
+    hhs: function (f) { return (f.polyuriaPolydipsia && f.alteredSensorium && f.dehydration && f.diabetesHx && !f.ketonemia) ? 15 : 0; },
+    // renal failure with a slow pulse is hyperkalaemia until the potassium says otherwise (not a toxidrome, not a bleed)
+    hyperkalemia: function (f) { return (f.renalImpairment && f.bradycardia && !f.miosisSecretions && !f.focalNeuroDeficit && !f.headInjury) ? 15 : 0; },
+    // volume-loss shock is tachycardic; a slow pulse with low pressure is reflex, endocrine or electrolyte
+    hypovolemic_shock: function (f) { return (f.bradycardia && !f.tachycardia) ? -15 : 0; },
+    vasovagal_syncope: function (f) { return (f.syncope && f.bradycardia && !f.hypothermia) ? 10 : 0; },
+    // the clinician's own "prolonged fever, still unexplained after work-up" is the working diagnosis
+    PUO: function (f) { return f.prolongedFeverUnexplained ? 20 : 0; },
+    // a single abscess in a drinker without biliary disease is amoebic until serology says otherwise
+    AMOEBIC_LIVER_ABSCESS: function (f) { return (noneOf(f, FEBRILE) ? -20 : 0) + ((f.singleLesion && f.alcoholExcess && !f.dilatedCBD && !f.knownGallstones) ? 15 : 0); },
     // not here: confirmed mixed malaria over malaria. Leading with the lower-scored of the two widened the
     // gate's "close rival" window and turned antimalarial-only care into "antibiotics" (train gc_135)
   };
