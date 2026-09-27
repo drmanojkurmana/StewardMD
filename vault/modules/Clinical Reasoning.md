@@ -93,6 +93,8 @@ added) and the numeric-field list. Off: 0 differences across 1,660 case-paths.
 - Round 11 (2026-09-27): `FT_SYN_ADD_V2_R11` phrasing for label-only catalog findings; derived severe
   abdominal / loin pain and a named swollen joint. Round 12: five `RANK_V3_R2` discriminators (hepatitis,
   aseptic meningitis, nephrotic, AKI, thyroid storm). To find label-only keys, dump `nlpCtx()` (valid, syn).
+- Round 13 (2026-09-27): list negation allows a subject ("He denies X, Y or Z"); "rather than X" is absent; gate
+  `ni_explains_fever` (`FEVER_NI` list; no cancers, no gout).
 
 ## Differential ordering v3 (`smd_rank_v3`, default ON since 2026-09-27; `"0"` opts out)
 

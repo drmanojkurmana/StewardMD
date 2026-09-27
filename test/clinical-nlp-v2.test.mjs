@@ -239,3 +239,16 @@ test("severe abdominal / loin pain with words between; a named swollen joint", (
   assert.ok(p("Right knee is markedly swollen with a tense effusion").includes("jointSwelling"));
   assert.ok(!p("knee not swollen").includes("jointSwelling"));
 });
+
+// round 13: a subject before the negation, "rather than", the fever later in a duration's list
+test("'He denies X, Y or Z' negates every item; 'rather than X'; a list's fever takes the duration", () => {
+  const keys = ["diarrhea", "nauseaVomiting", "cough", "fever", "prolongedFever", "headache"];
+  const c13 = { valid: Object.fromEntries(keys.map((k) => [k, 1])), labels: {}, numeric: {}, v2: true,
+    syn: { diarrhea: ["diarrhea", "diarrhoea"], nauseaVomiting: ["vomiting"], cough: ["cough"], fever: ["fever"], headache: ["headache"] } };
+  const r = (t) => NLP.extract(t, c13);
+  assert.deepEqual(r("He denies recent illness, diarrhea, or vomiting").present, []);
+  assert.ok(r("mild constipation rather than diarrhoea").absent.includes("diarrhea"));
+  assert.ok(r("Three weeks of worsening headache, low-grade fever and drowsiness").present.includes("prolongedFever"));
+  assert.ok(!r("3 weeks of cough and 2 days of fever").present.includes("prolongedFever"), "another number in between: not the fever's");
+  assert.ok(r("she has cough, fever and vomiting").present.includes("nauseaVomiting"), "a positive list stays positive");
+});

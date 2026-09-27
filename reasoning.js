@@ -1298,6 +1298,8 @@
       return localStorage.getItem("smd_gate_v2") !== "0";
     } catch (e) { return true; }
   }
+  var FEVER_NI = { thyroid_storm: 1, alcohol_withdrawal: 1, ttp_hus: 1, serotonin_nms: 1, sle_flare: 1, vasculitis: 1, pancreatitis: 1,
+    sarcoidosis: 1, heat_stroke: 1, drug_fever: 1, sjs_ten: 1, still_disease: 1 };
   var GATE_V2_KEEP = ["hypotension", "lactateElevated", "raised_lactate", "vasopressorRequirement",
     "immunocompromised", "neutropenia", "absoluteNeutrophilCountLow", "persistentBacteremia"];
   // YES | NO | CONDITIONAL | SPECIFIC (ASP "N/A": antiparasitic / antiviral, not antibacterial)
@@ -1373,6 +1375,17 @@
         g.cls = "noninfective"; g.rule = "ni_lead_afebrile"; g.why = bestN.name;
         return;
       }
+    }
+    // round 13 (2026-09-27): a non-infective cause that itself produces fever (storm, withdrawal, TTP, NMS, lupus,
+    // vasculitis, pancreatitis...) leads the v3 order by 10+ with no shock physiology or host modifier: it explains
+    // the fever. Leukaemia, lymphoma and other cancers are NOT on the list (fever there is neutropenic until shown
+    // otherwise: train gc_044 endocarditis behind leukaemia), nor gout (a septic joint needs a tap to exclude).
+    if ((g.cls === "very_likely" || g.cls === "likely") && rankV3() &&
+        !GATE_V2_KEEP.some(function (k) { return f[k]; })) {
+      var rk3 = function (x) { return x.rankScore != null ? x.rankScore : x.score; };
+      var bI = d.inf.reduce(function (m, x) { return !m || rk3(x) > rk3(m) ? x : m; }, null);
+      var bN = d.ni.reduce(function (m, x) { return !m || rk3(x) > rk3(m) ? x : m; }, null);
+      if (bN && bI && FEVER_NI[bN.id] && rk3(bN) >= rk3(bI) + 10) { g.cls = "noninfective"; g.rule = "ni_explains_fever"; g.why = bN.name; return; }
     }
     // (a) the lead infection's own antibiotic need
     if (g.cls !== "very_likely" && g.cls !== "likely") return;
@@ -1503,6 +1516,7 @@
     return (g.rule || g.why) ? m.replace(/\s*\u2014\s*/g, ": ") : m;
   }
   function gateMsgRaw(g) {
+    if (g.rule === "ni_explains_fever") return g.why + " leads the differential and explains the fever, with no shock signs or immune compromise: antibiotics are not recommended on these findings. Look for a source and reconsider if one appears or the patient deteriorates.";
     if (g.rule === "ni_lead_afebrile") return "No fever, shock signs or immune compromise, and a non-infectious diagnosis leads (" + g.why + "): antibiotics are not recommended on these findings. Reconsider if fever, rigors or a source of infection appears.";
     var lead = g.lead && g.lead.name;
     // smd_gate_v2: why antibiotics stay on although the lead infection alone would not need them
@@ -1987,6 +2001,7 @@
     jointSwelling: ["swollen knee", "swollen ankle", "swollen wrist", "swollen elbow", "swollen joints", "joint effusion", "tense effusion", "knee effusion", "hot, swollen"],
     hematuria: ["cola-coloured urine", "cola coloured urine", "cola-colored urine", "smoky urine", "red urine", "pink urine", "blood in the urine", "frank blood in urine"],
     legSwellingBilateral: ["pedal oedema", "ankle oedema", "ankle edema", "bilateral ankle", "pretibial", "bilateral pitting", "oedema of both legs", "edema of both legs"],
+    sharplyDemarcatedBorder: ["sharply demarcated", "sharply marginated", "well-demarcated", "well demarcated", "clearly demarcated", "raised border", "raised edge", "raised margin", "step-off"],
     pleuriticChestPain: ["worse on deep inspiration", "worse on inspiration", "worse on breathing", "pain on deep breathing", "pain on inspiration", "worsened by deep inspiration", "sharp chest pain worse"]
   };
   var FT_SYN_V2 = (function () {

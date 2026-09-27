@@ -156,7 +156,7 @@
   function negList(norm, idx) {
     var st = Math.max(norm.lastIndexOf(".", idx - 1), norm.lastIndexOf(";", idx - 1), norm.lastIndexOf(":", idx - 1)) + 1;
     var en = norm.slice(idx).search(/[.,;:]| and | or | nor /), segs = norm.slice(st, en < 0 ? norm.length : idx + en).split(/,| and | or | nor /);
-    if (segs.length < 2 || !/^\s*(?:no|denies|denied|without|nil|negative for|not)\b/.test(segs[0]) || LIST_HEAD_SKIP_V2.test(segs[0]) || segs[0].replace(NEG_IDIOM_V2, "") !== segs[0]) return false;
+    if (segs.length < 2 || !/^\s*(?:(?:he|she|they|patient|the patient|pt|mother|father|family)\s+(?:also\s+)?)?(?:no|denies|denied|without|nil|negative for|not)\b/.test(segs[0]) || LIST_HEAD_SKIP_V2.test(segs[0]) || segs[0].replace(NEG_IDIOM_V2, "") !== segs[0]) return false;
     for (var i = 1; i < segs.length; i++) { var w = segs[i].trim().split(/\s+/).filter(Boolean); if (w.length > 3 || LIST_STOP_V2.test(segs[i])) return false; }
     var rest = norm.slice(idx), se = rest.search(/[.;:]/);
     return !LIST_DUR_V2.test(se < 0 ? rest : rest.slice(0, se));
@@ -259,6 +259,9 @@
       var maxDur = function (re) { var best = { d: 0, i: 0, src: "" }, mm; while ((mm = re.exec(norm))) { var dd = days(mm[1], mm[2]); if (dd > best.d) best = { d: dd, i: mm.index, src: mm[0].trim() }; } return best; };
       var fA = maxDur(new RegExp("\\b(?:fever|pyrexia|febrile)\\b[^.;]{0,30}?(?:for|since|x|of|over|past|last)\\s*(?:the\\s*)?(?:past|last)?\\s*" + DUR, "g")),
         fB = maxDur(new RegExp("\\b" + DUR + "\\s*(?:of|history of)\\s*(?:[a-z-]+\\s*){0,2}(?:fever|pyrexia)", "g")), fv = fA.d >= fB.d ? fA : fB;
+      // round 13 (v2): the fever later in the same list ("three weeks of worsening headache, low-grade fever and ...");
+      // no other number in between, so "3 weeks of cough and 2 days of fever" stays 2 days
+      var fC = maxDur(new RegExp("\\b" + DUR + "\\s*(?:of|history of)\\s*[^.;\\d]{0,45}?\\b(?:fever|pyrexia)", "g")); if (fC.d > fv.d) fv = fC;
       if (fv.d >= 7) consider("prolongedFever", fv.i, "compound", fv.src);
       // round 10: a cough of 2 weeks or more (the TB screening threshold); "chronic / persistent cough" says it in words
       var cA = maxDur(new RegExp("\\bcough(?:ing)?\\b[^.;]{0,30}?(?:for|since|x|of|over|past|last)\\s*(?:the\\s*)?(?:past|last)?\\s*(?:about|around|nearly|~)?\\s*" + DUR, "g")),
@@ -307,6 +310,8 @@
       if (v2 && e.method !== "vitals") cl = cl.replace(NEG_IDIOM_V2, " ").replace(RECENT_V2, " ");
       // v2: a measured temperature of 38 or more is fever even if "afebrile" appears elsewhere in the note
       if (hasWord(cl, NEG) || (key === "fever" && !(v2 && e.method === "vitals") && hasWord(norm, AFEBRILE))) r.polarity = "absent";
+      // round 13: "constipation rather than diarrhoea", "instead of fever": the named alternative is absent
+      else if (v2 && e.method !== "vitals" && /\b(?:rather than|instead of)\s+(?:[a-z-]+\s+){0,2}$/.test(norm.slice(Math.max(0, e.idx - 40), e.idx))) r.polarity = "absent";
       else if (v2 && e.method !== "vitals" && (negList(norm, e.idx) || negAfter(norm, e.idx + (e.srcText || "").length))) r.polarity = "absent";
       else if (v2 && e.method !== "vitals" && (TEST_AFTER_V2.test(norm.slice(e.idx + (e.srcText || "").length, e.idx + (e.srcText || "").length + 40)) || COND_V2.test(norm.slice(Math.max(0, e.idx - 40), e.idx)))) r.polarity = "uncertain";
       if (hasWord(cl, EXCLUDE)) { r.polarity = "uncertain"; r.certainty = "possible"; r.req = true; }

@@ -10504,3 +10504,10 @@ the new one. Full unit suite 10915/10916 passing, 0 failures.
 - **Why**: typed top-1 213 -> 240, top-3 326 -> 354, needed antibiotics 143 -> 153; tapped top-1 398 -> 406;
   unseen notes top-1 25 -> 29 and 24 -> 27. Floors raised, none lowered; pending items listed in the audit.
 
+## 2026-09-27 - Round 13: a non-infective cause that explains the fever (gate `ni_explains_fever`)
+- **Decision**: under gate v2 + v3 order, a fever-producing non-infective diagnosis leading by 10+ with no shock
+  or host modifier reads "no antibiotics, look for a source". Haematological cancer, other cancers and gout are
+  deliberately excluded (neutropenic fever; septic joint).
+- **Why**: tapped not-needed antibiotics 34 -> 31, typed 58 -> 53, no needed or time-critical call lost; with the
+  round-13 reading fixes typed top-1 240 -> 252.
+

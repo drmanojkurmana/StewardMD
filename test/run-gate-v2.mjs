@@ -156,6 +156,13 @@ try {
   const obst = await assessNeg(T(obstruction), obstNeg);
   ok(obst.ab === false && obst.rule === "ni_lead_afebrile", `defaults · afebrile bowel obstruction leading the order: no antibiotics (${obst.cls}, ${obst.rule})`);
   ok((await assess(T(obstruction.concat(["fever", "rigors"])))).rule !== "ni_lead_afebrile", "defaults · the same with fever: the rule stands aside");
+  // round 13: a non-infective cause of fever leading the order by 10+ explains the fever (train gc_234, thyroid storm);
+  // leukaemia never does (fever there is neutropenic until shown otherwise)
+  const storm = ["palpitations", "atrialFibHx", "fever", "alteredSensorium", "weightLoss", "nightSweats", "diarrhea", "nauseaVomiting", "focalNeuroDeficit",
+    "behavioralChange", "hypertensionHx", "tachycardia", "tachypnea"], stormNeg = ["chestPain", "raisedJVP", "crepitations", "consolidation", "neckStiffness"];
+  const st = await assessNeg(T(storm), stormNeg);
+  ok(st.ab === false && st.rule === "ni_explains_fever" && /explains the fever/.test(st.message || "") && !/\u2014/.test(st.message || ""), `defaults · febrile thyroid storm leading by a clear margin: no antibiotics (${st.cls}, ${st.rule})`);
+  ok((await assessNeg(T(storm.concat(["hypotension", "lactateElevated"])), stormNeg)).rule !== "ni_explains_fever", "defaults · the same with shock physiology: the rule stands aside");
   await load(BASE + "?gatev2=1&nlpv2=0");
   ok((await assessNeg(T(obstruction), obstNeg)).rule !== "ni_lead_afebrile", "classic extractor · raw-score check kept (it reads only a note's first mention of fever)");
   await load(BASE + "?gatev2=1&rankv3=0&kbv2=0");
