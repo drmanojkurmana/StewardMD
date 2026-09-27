@@ -90,10 +90,15 @@
   /* --------------------------------------------------------------- resistance --- */
   function metaLine(t) {
     if (t.pooled) {
+      // Institutions and isolates behind the figures of this view: a source whose tables failed their
+      // checks (SKNMC) feeds no figure and is not counted.
       var inst = {}, iso = 0;
-      t.orgs.forEach(function (o) { o.rows.forEach(function (r) { if (r.n >= 30) inst[r.src.inst] = r.src; }); });
+      t.orgs.forEach(function (o) {
+        var from = {};
+        Object.keys(o.cells).forEach(function (d) { (o.cells[d].parts || []).forEach(function (x) { from[x.src] = 1; }); });
+        o.rows.forEach(function (r) { if (from[r.src.id]) { inst[r.src.inst] = r.src; if (!o.pheno && r.n >= 30) iso += r.n; } });
+      });
       var k = Object.keys(inst).length;
-      t.orgs.forEach(function (o) { if (!o.pheno) iso += o.n || 0; });
       var pf = S().poolFrom && S().poolFrom();
       return '<div class="v2-meta"><b>Pooled from ' + k + " institution" + (k === 1 ? "" : "s") + "</b> (latest edition of each" + (pf ? ", data from " + pf + " or later" : "") + "), " + fmtN(iso) + " isolates in this view. " +
         "Each figure is the isolate-weighted mean of the institutions that reported it; tap a cell to see them. Rows under 30 isolates and figures that failed a check are left out of pools. Surveillance network reports are listed separately so the same isolates are not counted twice.</div>";
@@ -211,7 +216,7 @@
     if (!drugs.length) return "";
     var opt = function (sel) { return '<option value="">' + (sel === "B" ? "None" : "Choose an antibiotic") + "</option>" + drugs.map(function (d) { var v = sel === "A" ? st.drugA : st.drugB; return '<option value="' + d + '"' + (v === d ? " selected" : "") + ">" + esc(R().drugLabel(d)) + " (" + (R().aware(d) || "") + ")</option>"; }).join(""); };
     var h = '<section class="v2-wis" aria-label="Estimated empiric coverage"><h3>Estimated empiric coverage</h3>' +
-      '<p class="v2-mut">For the organisms that grew from ' + esc(specPhrase(st.spec)) + " (" + lc(esc(R().SETTINGS[st.set].label)) + ") in this source: the share of isolates a regimen would have covered, weighted by how often each organism grew (weighted-incidence method).</p>" +
+      '<p class="v2-mut">For the bacteria that grew from ' + esc(specPhrase(st.spec)) + " (" + lc(esc(R().SETTINGS[st.set].label)) + ") in this source: the share of isolates a regimen would have covered, weighted by how often each organism grew (weighted-incidence method).</p>" +
       '<div class="v2-wrow"><select class="v2-sel" id="v2DrugA" aria-label="First antibiotic">' + opt("A") + '</select><span class="v2-plus">+</span><select class="v2-sel" id="v2DrugB" aria-label="Second antibiotic (optional)">' + opt("B") + "</select></div>" +
       (st.spec === "blood" ? '<label class="v2-chk"><input type="checkbox" id="v2Cons"' + (st.cons ? " checked" : "") + "> Count coagulase-negative staphylococci (often contaminants)</label>" : "");
     if (st.drugA) {
@@ -509,7 +514,7 @@
     var checks = info.cautions.map(function (x) { return x.text; }).concat(info.lowCells);
     return "<!doctype html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Antibiogram</title><style>body{font:11px -apple-system,Segoe UI,Roboto,sans-serif;color:#111;background:#fff;margin:24px}table{border-collapse:collapse;width:100%}th,td{border:1px solid #bbb;padding:3px 4px;text-align:center}th:first-child,td:first-child{text-align:left}tr.low td{color:#666;font-style:italic}h1{font-size:16px}p,li{color:#333}@media print{body{margin:10mm}}</style></head><body>" +
       "<h1>Antibiogram: " + esc(info.source) + "</h1><p>" + esc(info.specimen) + ", " + lc(esc(info.setting)) + ". Period: " + esc(info.period) + ".<br>" + esc(info.citation) + "</p>" +
-      "<p>Figures: " + esc(info.measure) + ". IR = intrinsic resistance; * = failed a data check, shown for reference only (listed below); rows in italics rest on fewer than 30 isolates and are unstable (CLSI M39).</p>" +
+      "<p>Figures: " + esc(info.measure) + ". IR = intrinsic resistance; * = failed a data check" + (info.pooled ? " or from fewer than 3 institutions" : "") + ", shown for reference only (listed below); rows in italics rest on fewer than 30 isolates and are unstable (CLSI M39).</p>" +
       "<table><thead>" + head + "</thead><tbody>" + body + "</tbody></table>" +
       (checks.length ? "<h2 style=\"font-size:13px\">Checks</h2><ul>" + checks.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : "") +
       "<p>Exported from StewardMD on " + esc(info.exported) + " (data version " + esc(info.version) + "). Decision support only; verify against the source.</p></body></html>";

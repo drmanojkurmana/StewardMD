@@ -110,6 +110,9 @@
     try { document.addEventListener("visibilitychange", function () { if (!document.hidden) setTimeout(syncVerified, 1500); }); } catch (e) {}
   })();
 
+  /* Keep what another script already hung on SMD_ROLE (native-watch.js adds seniorMost /
+   * isRestricted). Whichever of the two loads first, neither may erase the other. */
+  var _prevRole = window.SMD_ROLE || null;
   window.SMD_ROLE = {
     syncVerified: syncVerified,
     ROLES: ROLES, LOCKED: LOCKED, normalize: normalize, current: current, declared: declaredRole,
@@ -117,4 +120,5 @@
     labelOf: labelOf, set: set, setVerified: setVerified, gatesOn: gatesOn,
     labels: function () { return ROLES.map(function (x) { return x.label; }); }
   };
+  if (_prevRole) { for (var _k in _prevRole) { if (Object.prototype.hasOwnProperty.call(_prevRole, _k) && !(_k in window.SMD_ROLE)) window.SMD_ROLE[_k] = _prevRole[_k]; } }
 })();

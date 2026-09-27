@@ -92,7 +92,7 @@
           }
           return { status: "uptodate", current: v };
         }
-        return { status: "available", version: j.version, current: v, zipUrl: j.zipUrl, zipHash: j.zipHash };
+        return { status: "available", version: j.version, current: v, zipUrl: j.zipUrl, zipHash: j.zipHash, zipSize: +j.zipSize || 0 };
       }, function () { return { status: "error", error: "network" }; });
     });
   }
@@ -104,12 +104,36 @@
   function install(pending, onProgress, immediate) {
     var p = plugin();
     if (!p || !p.download || !pending || !pending.zipUrl) return Promise.resolve({ ok: false, error: "unavailable" });
-    var offDl = null, offFail = null;
-    function cleanup() { try { if (offDl && offDl.remove) offDl.remove(); } catch (e) {} try { if (offFail && offFail.remove) offFail.remove(); } catch (e) {} }
+    var offDl = null, offFail = null, tick = null;
+    /* WHAT THE BAR CAN KNOW (owner, 2026-09-27: "progress didn't show 0 to 100 but restarted and
+     * updated"). Read from @capgo/capacitor-updater 8.51 CapgoUpdater.swift: for a single-zip bundle
+     * it emits 0% when the request opens, then NOTHING while the bytes transfer (the request is
+     * awaited with no byte callback), then 70% once the whole file has landed, then set() restarts
+     * the app. So a percentage sat at 0% for the entire ~50 MB download and then vanished.
+     *
+     * The honest display is the one we can back: the size, a running clock while the transfer is in
+     * flight, then Installing when the plugin reports the file complete, then Restarting. Callers get
+     * (percent, label); the label is what to show. */
+    var mb = pending.zipSize ? (Math.round(pending.zipSize / 104857.6) / 10) + " MB" : "";
+    var t0 = Date.now(), phase = "download";
+    function say(pct) {
+      if (!onProgress) return;
+      var secs = Math.round((Date.now() - t0) / 1000);
+      var label = phase === "download" ? "Downloading update" + (mb ? " (" + mb + ")" : "") + "\u2026 " + secs + "s"
+        : phase === "install" ? "Installing\u2026"
+        : "Restarting to finish\u2026";
+      try { onProgress(pct, label); } catch (e) {}
+    }
+    function cleanup() { try { if (tick) clearInterval(tick); } catch (e) {} try { if (offDl && offDl.remove) offDl.remove(); } catch (e) {} try { if (offFail && offFail.remove) offFail.remove(); } catch (e) {} }
     try {
       if (onProgress && p.addListener) {
-        p.addListener("download", function (ev) { try { onProgress(Math.round((ev && ev.percent) || 0)); } catch (e) {} }).then(function (h) { offDl = h; });
+        p.addListener("download", function (ev) {
+          var pct = Math.round((ev && ev.percent) || 0);
+          if (pct >= 70 && phase === "download") phase = "install";   // the file is down; unzip + verify
+          say(pct);
+        }).then(function (h) { offDl = h; });
       }
+      if (onProgress) { say(0); tick = setInterval(function () { if (phase === "download") say(0); }, 1000); }
     } catch (e) {}
     // One automatic retry on a transport-class download failure. The plugin verifies the
     // sha256 NATIVELY after fetching, so a connection that drops mid-file surfaces as
@@ -126,6 +150,7 @@
     }
     return tryDownload(1)
       .then(function (bundle) {
+        phase = "restart"; say(100);
         cleanup();
         var applied = (immediate === false) ? p.next({ id: bundle.id }) : p.set({ id: bundle.id });
         return applied.then(function () {

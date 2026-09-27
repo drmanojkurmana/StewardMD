@@ -21,7 +21,7 @@
  * ======================================================================================== */
 (function () {
   "use strict";
-  var ABG_V = "90e6f17dba79";
+  var ABG_V = "232ca2a37294";
   var R = window.ABG_RULES;
   var ACT = { k: "keep", i: "intrinsic", h: "hide", x: "suppress", c: "caution" };
   var LOCAL_KEY = "smd_abg_local";
@@ -223,7 +223,8 @@
       rows.forEach(function (r) { var k = r.org + "|" + (r.pheno || "") + "|" + (r.cohort || ""); (byOrg[k] = byOrg[k] || []).push(r); });
       Object.keys(byOrg).forEach(function (k) {
         var g = byOrg[k], pooled = R.pool(g.map(function (r) { return { src: r.src.id, inst: r.src.inst, year: r.src.ord, n: r.n, cells: r.cells }; }));
-        var usable = g.filter(function (r) { return r.n >= R.M39_MIN; });
+        var isClin = function (r) { return r.flags.indexOf("clinical") >= 0; };
+        var usable = g.filter(function (r) { return r.n >= R.M39_MIN && !isClin(r); });
         var cells = {};
         Object.keys(pooled).forEach(function (d) {
           var p = pooled[d], rs = g.filter(function (r) { return p.parts.some(function (x) { return x.src === r.src.id; }); });
@@ -244,12 +245,12 @@
         g.forEach(function (r) { Object.keys(r.cells).forEach(function (d) { if (r.cells[d].act === "intrinsic" && !cells[d]) { cells[d] = { s: null, act: "intrinsic", why: r.cells[d].why }; drugs[d] = 1; } }); });
         var hospRow = {}; usable.forEach(function (r) { hospRow[r.src.name || r.src.inst] = 1; });
         out.push({ org: g[0].org, pheno: g[0].pheno, cohort: g[0].cohort || null, n: usable.reduce(function (a, r) { return a + r.n; }, 0), k: Object.keys(hospRow).length, kAll: g.length,
-          lowOnly: !usable.length, cells: cells, rows: g, pooled: true });
+          lowOnly: !usable.length, clinical: g.every(isClin), cells: cells, rows: g, pooled: true });
       });
     } else {
       rows.forEach(function (r) {
         Object.keys(r.cells).forEach(function (d) { drugs[d] = 1; });
-        out.push({ org: r.org, pheno: r.pheno, n: r.n, k: 1, cells: r.cells, rows: [r], row: r, lowN: r.flags.indexOf("lowN") >= 0, noN: r.flags.indexOf("noN") >= 0, derived: r.derived, how: r.how, as: r.as, q: r.q, notes: r.notes,
+        out.push({ org: r.org, pheno: r.pheno, n: r.n, k: 1, cells: r.cells, rows: [r], row: r, lowN: r.flags.indexOf("lowN") >= 0, noN: r.flags.indexOf("noN") >= 0, clinical: r.flags.indexOf("clinical") >= 0, derived: r.derived, how: r.how, as: r.as, q: r.q, notes: r.notes,
           measure: r.measure, cohort: r.cohort, note: r.note, table: r.table, page: r.page, spAs: r.spAs, nFrom: r.nFrom });
       });
     }
@@ -291,12 +292,16 @@
     enterococcus_other: "enterococcus", enterobacter_other: "enterobacter", citrobacter_other: "citrobacter", streptococcus_other: "streptococcus",
     burkholderia_other: "burkholderia", candida_other: "candida", providencia_other: "providencia", shigella_other: "shigella" };
   function isCoNS(k) { return k === "cons" || PARENT[k] === "cons"; }
+  // Empiric coverage is estimated for antibacterial regimens only, so yeasts and moulds are not part
+  // of the mix: counted as "not covered" they lowered every figure (India blood meropenem 40.1 for 42.5).
+  function isFungus(k) { return !!(R.ORGS[k] && R.ORGS[k].group === "fungi"); }
   function mix(scope, spec, set, opts) {
     opts = opts || {};
     var t = table(scope, spec, set), parts = [];
     t.orgs.forEach(function (o) {
-      if (o.pheno) return;                                        // phenotype rows are subsets
+      if (o.pheno || o.clinical) return;                          // phenotype rows are subsets; clinical antibiograms are not % susceptible
       if (opts.excludeCoNS !== false && isCoNS(o.org) && spec === "blood") return;
+      if (isFungus(o.org)) return;
       if (!(o.n > 0)) return;
       var s = {}, act = {};
       Object.keys(o.cells).forEach(function (d) { s[d] = o.cells[d].s; act[d] = o.cells[d].act; });
@@ -328,6 +333,7 @@
       parts.forEach(function (p) { covered[p.org] = 1; if (PARENT[p.org]) covered[PARENT[p.org]] = 1; });
       Object.keys(byOrg).forEach(function (k) {
         if (opts.excludeCoNS !== false && isCoNS(k) && spec === "blood") return;
+        if (isFungus(k)) return;
         if (!covered[k] && !(PARENT[k] && covered[PARENT[k]])) extra += byOrg[k];
       });
     }
@@ -464,7 +470,7 @@
   function usableInfo(scope, spec, set) {
     var t = table(scope, spec, set), orgs = 0, maxK = 0;
     t.orgs.forEach(function (o) {
-      if (o.pheno) return;
+      if (o.pheno || o.clinical) return;
       if (t.pooled ? o.lowOnly : (o.lowN || o.noN)) return;
       orgs++; if ((o.k || 0) > maxK) maxK = o.k || 0;
     });
@@ -559,7 +565,8 @@
     var out = []; (CHILDREN[o.key] || []).forEach(function (c) { out = out.concat(find(c)); });
     return out;
   }
-  function rowUsable(t, o) { return t.pooled ? !o.lowOnly : !(o.lowN || o.noN); }
+  // A clinical antibiogram row (laboratory results combined with patient response) never answers.
+  function rowUsable(t, o) { return !o.clinical && (t.pooled ? !o.lowOnly : !(o.lowN || o.noN)); }
   /* {s, n, k, spec, set, specMatch, setMatch, src, pooled, scope} for a profile scope, or
    * {intrinsic:true, why} or null. Low-isolate rows are returned with lowN:true; callers that
    * show a figure as fact must skip them. Species rows standing in for a genus are combined
@@ -582,6 +589,23 @@
       if (res && !res.intrinsic) return res;
     }
     return null;
+  }
+  /* Every drug the answer for one organism can come from: the drugs of its own stratum and, in a
+   * pooled scope, those the walk-on in susceptibility() can reach. The console lists these so it
+   * shows the same answer reasoning gives (round 4: North catheter-UTI E. coli ceftriaxone read grey
+   * 10.9 in the console and 84% resistant in reasoning). */
+  function drugsFor(scope, orgName, ctx) {
+    if (!B) return [];
+    ctx = ctx || {};
+    var seen = {}, st = pickStratumFor(scope, orgName, ctx.spec, ctx.set, ctx), list = [st];
+    if (isPooled(scope)) list = list.concat(candidatesFor(scope, orgName, ctx.spec, ctx.set, ctx).order);
+    list.forEach(function (x) {
+      orgRows(table(scope, x.spec, x.set), orgName, x.cohort).forEach(function (o) {
+        if (!rowUsable(table(scope, x.spec, x.set), o)) return;
+        Object.keys(o.cells).forEach(function (d) { if (o.cells[d].act === "keep") seen[d] = 1; });
+      });
+    });
+    return sortDrugs(Object.keys(seen));
   }
   function suscAt(scope, orgName, d, st) {
     var t = table(scope, st.spec, st.set), rows = orgRows(t, orgName, st.cohort);
@@ -618,7 +642,7 @@
     if (!B) return null;
     var st = pickStratum(scope, spec, set || "all"), t = table(scope, st.spec, st.set), org = {};
     t.orgs.forEach(function (o) {
-      if (o.pheno) return;                               // subsets (MRSA, CR) are not the organism
+      if (o.pheno || o.clinical) return;                 // subsets (MRSA, CR) are not the organism; clinical antibiograms not % susceptible
       if (!t.pooled && (o.lowN || o.noN)) return;
       if (t.pooled && o.lowOnly) return;
       var name = R.orgLabel(o.org).replace(/ \/ spp\.$/, "") + (o.pheno ? " (" + o.pheno + ")" : "");
@@ -644,7 +668,10 @@
   function exportInfo(t, scopeName) {
     var srcs = {}, cautions = [], lowCells = [];
     t.orgs.forEach(function (o) {
-      o.rows.forEach(function (r) { if (r.src) srcs[r.src.id] = r.src; });
+      // A pooled view cites the sources behind its figures, not every row in the stratum (SKNMC's
+      // tables failed their checks and feed no figure).
+      if (t.pooled) Object.keys(o.cells).forEach(function (d) { (o.cells[d].parts || []).forEach(function (x) { var so = sourceById(x.src); if (so) srcs[so.id] = so; }); });
+      else o.rows.forEach(function (r) { if (r.src) srcs[r.src.id] = r.src; });
       Object.keys(o.cells).forEach(function (d) {
         var c = o.cells[d], who = R.orgShort(o.org) + (o.pheno ? " (" + o.pheno + ")" : "") + ", " + R.drugLabel(d);
         if (c.act === "caution" || c.act === "suppress") cautions.push({ org: o.org, pheno: o.pheno || null, drug: d, s: typeof c.s === "number" ? c.s : null, act: c.act, text: who + ": " + (c.act === "suppress" ? "not shown" : "caution") + ", " + (c.why || "failed a data check") });
@@ -668,7 +695,7 @@
     var info = exportInfo(t, labels && labels.scope), lines = [];
     [["Antibiogram exported from StewardMD", "decision support; verify against the source"], ["Source", info.source], ["Period", info.period], ["Citation", info.citation],
       ["Specimen", info.specimen], ["Setting", info.setting], ["Figures", info.measure], ["Data version", info.version], ["Exported", info.exported],
-      ["Key", "IR = intrinsic resistance; a value ending in * failed a data check and is shown for reference only (see Checks below); blank = not reported, not relevant to the specimen, or not shown"]]
+      ["Key", "IR = intrinsic resistance; a value ending in * failed a data check" + (t.pooled ? " or comes from fewer than 3 institutions" : "") + " and is shown for reference only (see Checks below); blank = not reported, not relevant to the specimen, or not shown"]]
       .forEach(function (kv) { lines.push(kv.map(q).join(",")); });
     lines.push("");
     var head = ["Organism", "Phenotype", "Isolates", "Under 30 isolates", "Combined by StewardMD"].concat(t.pooled ? ["Institutions"] : []).concat(t.drugs.map(function (d) { return R.drugLabel(d) + " %S"; }));
@@ -696,7 +723,7 @@
     load: load, ready: load, onReady: onReady, loaded: function () { return !!B; }, data: function () { return B; },
     scopes: scopes, scopeLabel: scopeLabel, scopeRows: scopeRows, isPooled: isPooled, strata: strata,
     table: table, cell: cell, phenotypes: phenotypes, wisca: wisca, rank: rank, mix: mix, trend: trend,
-    susceptibility: susceptibility, legacyAbg: legacyAbg, specimenFor: specimenFor, specimenChain: specimenChain, settingFor: settingFor, synCtx: synCtx, synDrug: synDrug,
+    susceptibility: susceptibility, drugsFor: drugsFor, legacyAbg: legacyAbg, specimenFor: specimenFor, specimenChain: specimenChain, settingFor: settingFor, synCtx: synCtx, synDrug: synDrug,
     pickStratum: pickStratum, pickStratumFor: pickStratumFor, orgRows: orgRows, usable: usable,
     sourceById: sourceById, detail: detail, editions: editions, flagged: flagged, csv: csv, exportInfo: exportInfo, sortDrugs: sortDrugs,
     localGet: localGet, localSave: localSave, localClear: localClear,

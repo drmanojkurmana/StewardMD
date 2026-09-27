@@ -1,0 +1,414 @@
+{
+ "v": 1,
+ "review": "ai_drafted",
+ "reviewNote": "Teaching points and plans were drafted with AI from standard references (ICDR, ICROP3, ETROP, AAO Preferred Practice Patterns). They are for learning, not patient care, and need sign-off by an ophthalmologist before the module leaves Beta. ROP stage descriptions follow the ROP-VL dataset (CC BY 4.0).",
+ "tracks": [
+  {
+   "id": "oct",
+   "deck": "decks/oct.json",
+   "title": "OCT reading",
+   "sub": "Macular B-scans, 7 diagnoses",
+   "modality": "Spectral-domain OCT, macular B-scan",
+   "source": "octdl",
+   "labels": {
+    "NO": "Normal",
+    "AMD": "Age-related macular degeneration",
+    "DME": "Diabetic macular edema",
+    "ERM": "Epiretinal membrane",
+    "RVO": "Retinal vein occlusion",
+    "RAO": "Retinal artery occlusion",
+    "VID": "Vitreomacular interface disease"
+   },
+   "short": {
+    "NO": "Normal",
+    "AMD": "AMD",
+    "DME": "DME",
+    "ERM": "ERM",
+    "RVO": "RVO",
+    "RAO": "RAO",
+    "VID": "VMI"
+   },
+   "teach": {
+    "NO": [
+     "Foveal pit with a smooth, symmetric contour",
+     "Every layer continuous, including the ellipsoid zone",
+     "No intraretinal or subretinal fluid; RPE line smooth"
+    ],
+    "AMD": [
+     "Drusen: dome-shaped elevations of the RPE",
+     "Neovascular AMD: subretinal fluid, pigment epithelial detachment, subretinal hyperreflective material",
+     "Atrophic AMD: RPE loss with light passing into the choroid (hypertransmission)"
+    ],
+    "DME": [
+     "Hyporeflective cystoid spaces within the retina",
+     "Increased central retinal thickness",
+     "Hyperreflective foci and exudates; subretinal fluid in some eyes"
+    ],
+    "ERM": [
+     "Hyperreflective band on the inner retinal surface",
+     "Wrinkled inner retina and a flattened or lost foveal pit",
+     "Diffuse thickening; traction cysts in some eyes"
+    ],
+    "RVO": [
+     "Cystoid macular edema with inner retinal thickening",
+     "Branch occlusion: often sectoral, respecting the horizontal raphe",
+     "Look for disorganised inner layers and hyperreflective foci"
+    ],
+    "RAO": [
+     "Acute: thickened, hyperreflective inner retina with shadowing of the outer layers",
+     "Chronic: thinning and atrophy of the inner retina",
+     "Outer retina and RPE are relatively preserved"
+    ],
+    "VID": [
+     "Macular hole: full-thickness foveal defect, often with cystic edges",
+     "Lamellar hole: partial-thickness defect with an irregular foveal contour",
+     "Vitreomacular traction: vitreous still attached at the fovea, distorting it"
+    ]
+   },
+   "pearl": "Read an OCT outside in: vitreous and interface, inner retina, fluid spaces, outer retina and ellipsoid zone, RPE, then choroid.",
+   "foundation": [
+    {
+     "id": "NO",
+     "label": "Normal",
+     "of": [
+      "NO"
+     ]
+    },
+    {
+     "id": "AMD",
+     "label": "Age-related macular degeneration",
+     "of": [
+      "AMD"
+     ]
+    },
+    {
+     "id": "fluid",
+     "label": "Fluid in the retina (DME or vein occlusion)",
+     "of": [
+      "DME",
+      "RVO"
+     ]
+    },
+    {
+     "id": "surface",
+     "label": "Interface problem (membrane, hole or traction)",
+     "of": [
+      "ERM",
+      "VID"
+     ]
+    },
+    {
+     "id": "RAO",
+     "label": "Retinal artery occlusion",
+     "of": [
+      "RAO"
+     ]
+    }
+   ],
+   "clinic": "Retina clinic",
+   "plan": {
+    "NO": "No macular treatment needed.",
+    "AMD": "Separate wet from dry: fluid or subretinal material means urgent retina referral for anti-VEGF; drusen alone means monitoring, and AREDS2 supplements for intermediate AMD.",
+    "DME": "Refer to retina. Anti-VEGF injections are first line for centre-involving DME with reduced vision; optimise glucose, blood pressure and lipids.",
+    "ERM": "Observe while vision is good. Vitrectomy with membrane peel if distortion or vision loss affects daily life.",
+    "RVO": "Treat macular edema with anti-VEGF, watch for neovascularisation, and manage systemic risk: blood pressure, diabetes, lipids.",
+    "RAO": "An acute artery occlusion is an eye stroke: same-day stroke-pathway referral, and check ESR and CRP for giant cell arteritis if over 50.",
+    "VID": "Full-thickness macular hole: vitrectomy with ILM peel. Lamellar hole or traction: observe, operate if it progresses or vision falls."
+   }
+  },
+  {
+   "id": "disc",
+   "deck": "decks/disc.json",
+   "title": "Optic disc",
+   "sub": "Glaucomatous or healthy",
+   "modality": "Fundus photograph cropped to the optic disc",
+   "source": "acrima",
+   "labels": {
+    "normal": "Healthy disc",
+    "glaucoma": "Glaucomatous disc"
+   },
+   "short": {
+    "normal": "Healthy",
+    "glaucoma": "Glaucoma"
+   },
+   "teach": {
+    "normal": [
+     "Pink neuroretinal rim that follows the ISNT pattern (inferior thickest, then superior, nasal, temporal)",
+     "Cup size in proportion to disc size: a large disc can have a large cup",
+     "No notch, no disc haemorrhage"
+    ],
+    "glaucoma": [
+     "Enlarged vertical cup, or rim thinning that breaks the ISNT pattern",
+     "Focal notching, most often inferotemporal or superotemporal",
+     "Disc haemorrhage at the rim, bayoneting vessels, beta-zone peripapillary atrophy"
+    ]
+   },
+   "pearl": "Judge the rim, not the cup-to-disc ratio alone. Always estimate disc size first.",
+   "foundation": [
+    {
+     "id": "normal",
+     "label": "Healthy disc",
+     "of": [
+      "normal"
+     ]
+    },
+    {
+     "id": "glaucoma",
+     "label": "Glaucomatous disc",
+     "of": [
+      "glaucoma"
+     ]
+    }
+   ],
+   "clinic": "Glaucoma clinic",
+   "plan": {
+    "normal": "Routine review. A large cup in a large disc can be normal.",
+    "glaucoma": "Confirm and stage: IOP, gonioscopy, visual fields and OCT nerve fibre layer. Treat to a target pressure."
+   }
+  },
+  {
+   "id": "dr",
+   "deck": "decks/dr.json",
+   "title": "Diabetic retinopathy",
+   "sub": "Grade 0 to 4 (ICDR)",
+   "modality": "45-degree macula-centred colour fundus photograph",
+   "source": "retino",
+   "labels": {
+    "0": "No retinopathy",
+    "1": "Mild NPDR",
+    "2": "Moderate NPDR",
+    "3": "Severe NPDR",
+    "4": "Proliferative DR"
+   },
+   "short": {
+    "0": "0 None",
+    "1": "1 Mild",
+    "2": "2 Moderate",
+    "3": "3 Severe",
+    "4": "4 PDR"
+   },
+   "teach": {
+    "0": [
+     "No microaneurysms, haemorrhages, exudates or new vessels"
+    ],
+    "1": [
+     "Microaneurysms only: tiny, sharp red dots"
+    ],
+    "2": [
+     "More than microaneurysms but less than severe NPDR",
+     "Dot and blot haemorrhages, hard exudates, cotton wool spots"
+    ],
+    "3": [
+     "4-2-1 rule, any one of: more than 20 haemorrhages in each of 4 quadrants; venous beading in 2 or more quadrants; prominent IRMA in 1 or more quadrant",
+     "No new vessels"
+    ],
+    "4": [
+     "New vessels on the disc (NVD) or elsewhere (NVE)",
+     "Or preretinal or vitreous haemorrhage"
+    ]
+   },
+   "pearl": "One macula-centred photograph cannot show all four quadrants, so severe NPDR is a judgement from what is visible. Grade the worst lesion you can see.",
+   "foundation": [
+    {
+     "id": "none",
+     "label": "No retinopathy",
+     "of": [
+      "0"
+     ]
+    },
+    {
+     "id": "npdr",
+     "label": "Non-proliferative (mild to severe)",
+     "of": [
+      "1",
+      "2",
+      "3"
+     ]
+    },
+    {
+     "id": "pdr",
+     "label": "Proliferative",
+     "of": [
+      "4"
+     ]
+    }
+   ],
+   "clinic": "Diabetic eye screening",
+   "plan": {
+    "0": "Rescreen in 12 months.",
+    "1": "Rescreen in 12 months; optimise glucose, blood pressure and lipids.",
+    "2": "Refer to ophthalmology; review in 3 to 6 months.",
+    "3": "Urgent ophthalmology referral; panretinal laser is often considered, especially if follow-up is uncertain.",
+    "4": "Urgent treatment: panretinal laser and/or anti-VEGF; vitrectomy for non-clearing vitreous haemorrhage."
+   }
+  },
+  {
+   "id": "rop",
+   "deck": "decks/rop.json",
+   "title": "Retinopathy of prematurity",
+   "sub": "Stage, A-ROP or treated",
+   "modality": "Wide-field neonatal fundus image",
+   "source": "ropvl",
+   "labels": {
+    "normal": "No ROP",
+    "s1": "Stage 1",
+    "s2": "Stage 2",
+    "s3": "Stage 3",
+    "s4": "Stage 4",
+    "s5": "Stage 5",
+    "arop": "Aggressive ROP (A-ROP)",
+    "laser": "Laser-treated ROP"
+   },
+   "short": {
+    "normal": "No ROP",
+    "s1": "Stage 1",
+    "s2": "Stage 2",
+    "s3": "Stage 3",
+    "s4": "Stage 4",
+    "s5": "Stage 5",
+    "arop": "A-ROP",
+    "laser": "Treated"
+   },
+   "teach": {
+    "normal": [
+     "No ROP signs; the peripheral retina may still be incompletely vascularised"
+    ],
+    "s1": [
+     "Demarcation line: a thin, flat white line between vascular and avascular retina"
+    ],
+    "s2": [
+     "Ridge: the line gains height and width, white to pink",
+     "Small isolated neovascular tufts may sit behind it"
+    ],
+    "s3": [
+     "Extraretinal neovascular proliferation from the ridge into the vitreous",
+     "Ragged posterior edge of the ridge"
+    ],
+    "s4": [
+     "Partial retinal detachment: 4A spares the fovea, 4B involves it"
+    ],
+    "s5": [
+     "Total retinal detachment (ICROP3: 5A open funnel, 5B closed funnel, 5C with anterior segment changes)"
+    ],
+    "arop": [
+     "Rapid, severe disease with marked plus disease",
+     "Flat, often subtle neovascularisation at the vascular-avascular border, typically posterior",
+     "May skip the classic stage sequence"
+    ],
+    "laser": [
+     "White or pigmented laser spots in the peripheral avascular retina"
+    ]
+   },
+   "descSource": "ROP-VL disease descriptions (CC BY 4.0), paraphrased",
+   "pearl": "Treat Type 1 ROP (ETROP): zone I any stage with plus, zone I stage 3 without plus, or zone II stage 2 or 3 with plus.",
+   "context": true,
+   "foundation": [
+    {
+     "id": "none",
+     "label": "No ROP",
+     "of": [
+      "normal"
+     ]
+    },
+    {
+     "id": "active",
+     "label": "Active ROP (stage 1 to 3 or A-ROP)",
+     "of": [
+      "s1",
+      "s2",
+      "s3",
+      "arop"
+     ]
+    },
+    {
+     "id": "rd",
+     "label": "Retinal detachment (stage 4 or 5)",
+     "of": [
+      "s4",
+      "s5"
+     ]
+    },
+    {
+     "id": "treated",
+     "label": "Treated with laser",
+     "of": [
+      "laser"
+     ]
+    }
+   ],
+   "clinic": "ROP screening",
+   "plan": {
+    "normal": "Continue screening until the retina is fully vascularised.",
+    "s1": "Review in 1 to 2 weeks. Zone and plus disease, not stage alone, decide treatment.",
+    "s2": "Review in 1 to 2 weeks; treat if it meets Type 1 (zone I with plus, or zone II with plus).",
+    "s3": "Treat if Type 1 (zone I stage 3, or zone II stage 3 with plus); otherwise review within a week.",
+    "s4": "Refer for vitreoretinal surgery.",
+    "s5": "Refer for vitreoretinal surgery; visual prognosis is poor.",
+    "arop": "Treat urgently with laser or anti-VEGF; do not wait for the classic stages.",
+    "laser": "Follow up for regression and late problems: myopia, strabismus, amblyopia, retinal detachment."
+   }
+  },
+  {
+   "id": "cases",
+   "deck": "decks/cases.json",
+   "title": "Image cases",
+   "sub": "60 cases, 10 questions each",
+   "modality": "Slit lamp, SLO, fundus photo, OCT, FFA, ocular ultrasound",
+   "source": "ophthalvqa",
+   "selfRated": true,
+   "types": {
+    "Slit_lamp": "Slit lamp",
+    "SLO": "Scanning laser ophthalmoscopy",
+    "FPP": "Fundus photograph",
+    "OCT": "OCT",
+    "FFA": "Fluorescein angiography",
+    "OUS": "Ocular ultrasound"
+   },
+   "clinic": "Case conference"
+  }
+ ],
+ "sources": {
+  "octdl": {
+   "name": "OCTDL",
+   "license": "CC BY 4.0",
+   "cite": "Kulyabin M, et al. OCTDL: Optical Coherence Tomography Dataset for Image-Based Deep Learning Methods. Sci Data 2024. doi:10.17632/sncdhf53xc.4"
+  },
+  "acrima": {
+   "name": "ACRIMA",
+   "license": "CC BY 4.0",
+   "cite": "Diaz-Pinto A, et al. CNNs for automatic glaucoma assessment using fundus images: an extensive validation. Biomed Eng Online 2019. doi:10.6084/m9.figshare.7613135"
+  },
+  "retino": {
+   "name": "Retino (MedFMC)",
+   "license": "CC0 1.0",
+   "cite": "Wang D, et al. MedFMC: A Real-world Dataset and Benchmark for Foundation Model Adaptation in Medical Image Classification. Sci Data 2023. doi:10.1038/s41597-023-02460-0. Data: doi:10.6084/m9.figshare.22302562"
+  },
+  "ropvl": {
+   "name": "ROP-VL",
+   "license": "CC BY 4.0",
+   "cite": "ROP-VL: An Open Dataset Integrating Fundus Photograph and Clinical Knowledge for Retinopathy of Prematurity. figshare 30143461"
+  },
+  "ophthalvqa": {
+   "name": "OphthalVQA",
+   "license": "CC BY 4.0",
+   "cite": "Xu P, Chen X, Zhao Z, Shi D. Unveiling the clinical incapabilities: a benchmarking study of GPT-4V(ision) for ophthalmic multimodal image analysis. Br J Ophthalmol 2024. doi:10.1136/bjo-2023-325054"
+  }
+ },
+ "access": {
+  "freeLevels": [
+   "foundation"
+  ],
+  "freeCases": 10,
+  "note": "Owner decision 2026-09-27: free core (every Foundation level, cases 1-10), Pro extras (Resident levels, all 60 cases). Change here only."
+ },
+ "levels": {
+  "foundation": {
+   "label": "Foundation",
+   "sub": "Students: the main patterns"
+  },
+  "resident": {
+   "label": "Resident",
+   "sub": "Full classification"
+  }
+ }
+}

@@ -151,6 +151,24 @@ test("flush() stops retrying a 4xx forever: it moves to drafts with lastError", 
   assert.equal(store.drafts().length, 0);
 });
 
+test("a fix saved in the same millisecond as the refused save still patches the server draft", async (t) => {
+  // CI once ran the save and the re-save inside one millisecond: equal stamps skipped the PATCH.
+  t.mock.method(Date, "now", () => 1700000000000);
+  let refuse = true;
+  const srv = server({ submit: () => refuse ? reply(400, { error: "validation", errors: [{ field: "role", message: "Choose your role." }] })
+                                            : reply(200, { ok: true, entry: { id: "x", status: "submitted" } }) });
+  const { store } = loadStore(srv.impl);
+  const bad = store.saveDraft(draft());
+  assert.equal((await store.submitOrQueue(bad.id)).status, "needs_fix");
+  refuse = false;
+  const fixed = store.saveDraft(Object.assign({}, store.getDraft(bad.id), { role: "assisted" }));
+  assert.ok(fixed.updatedAt > bad.updatedAt, "the re-save is stamped later although the clock did not move");
+  assert.equal((await store.submitOrQueue(bad.id)).status, "submitted");
+  assert.equal(srv.calls.created.length, 1);
+  assert.equal(srv.calls.patched.length, 1, "the server draft is brought up to date with the fix");
+  assert.equal(srv.calls.patched[0].body.role, "assisted");
+});
+
 test("a retry after 'create worked, submit failed (5xx)' submits the SAME server draft", async () => {
   let fail = true;
   const srv = server({ submit: () => fail ? reply(502, {}) : reply(200, { ok: true, entry: { id: "srv-1", status: "submitted" } }) });

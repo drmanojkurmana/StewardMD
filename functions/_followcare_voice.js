@@ -19,6 +19,7 @@ import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
 import { getEpisode, decPHI, audit, worstEsc, isConfigured } from "./_followcare.js";
 import { sendSms } from "./_followcare_sms.js";
 import { sendWhatsApp, waConfigured } from "./_followcare_whatsapp.js";
+import { sendPatientMessage } from "./_followcare_dispatch.js";
 import Pathways from "../followcare-pathways.js";
 import Engine from "../followcare-engine.js";
 import Assessment from "../followcare-assessment.js";
@@ -300,15 +301,14 @@ export async function voiceAlert(env, body, meta) {
 
 // ---- post-call patient recap — de-identified, generic reassurance (opt-out aware) ---------
 async function sendPatientRecap(env, ep, r) {
-  let phone = "";
-  try { phone = await decPHI(env, ep.isMinor ? ep._phi.guardianEnc : ep._phi.phoneEnc); } catch (e) {}
-  if (!phone) return { ok: false, reason: "no_phone" };
   const worrying = r && (r.escalation === "red" || r.escalation === "orange");
   const msg = worrying
     ? "Namaste. Thank you for your recovery check-in. Your care team has your update and will follow up. If you feel worse, please contact your doctor or hospital."
     : "Namaste. Thank you for your recovery check-in today. Your care team has your update. Please take your medicines and rest well. Get well soon.";
   const method = (env.FOLLOWCARE_MSG_CHANNEL === "whatsapp") ? "whatsapp" : "sms";
-  const res = await sendToNumber(env, phone, msg, method);
+  // WhatsApp carries the text above; SMS carries the same meaning as an approved DLT template with no link:
+  // Post-Visit Check-in ("if symptoms worsen, contact us") or Care Plan ("please continue your care plan").
+  const res = await sendPatientMessage(env, ep, msg, { dltKey: worrying ? "post_visit" : "care_plan" });
   try { await audit(env, { hospitalId: ep.hospitalId, episodeId: ep.episodeId, actor: "voice", action: "voice_recap", meta: { delivered: res && res.ok ? "sent" : "failed", method } }); } catch (e) {}
   return res || { ok: false };
 }

@@ -6,6 +6,8 @@
  *   B) END-TO-END: natural doctor complaint TEXT -> findingsFromText -> differential -> top-1/3/5.
  *      (what a doctor experiences in OPD Ask MaiK: extraction + ranking)
  * Not a unit test — a measurement. Prints a scorecard + the misses. Run: node test/run-opd-dx-bench.mjs
+ * Under Node neither part is valid today (app.js, which defines the infectious syndromes, and the NLP base
+ * vocabulary do not load), so both parts refuse. The browser harness test/run-dx-audit.mjs is the measurement.
  */
 import fs from "node:fs"; import path from "node:path"; import vm from "node:vm"; import { fileURLToPath } from "node:url";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -68,7 +70,19 @@ function scorecard(title, cases, getRanked) {
 // ---- Part A: curated finding sets (vignettes.json) ---------------------------------------------
 const vig = JSON.parse(fs.readFileSync(path.join(ROOT, "test/vignettes.json"), "utf8")).vignettes || [];
 const partA = vig.map((v) => ({ label: v.label || v.id, expect: v.id.replace(/_/g, "|"), findings: v.findings }));
-scorecard("A. SCORING accuracy (curated findings -> differential)", partA, (c) => rank(c.findings));
+// The 51 infectious syndromes live in window.SYNDROMES, which app.js defines; app.js does not run
+// under this Node shim, so without them every infection is missing from the differential and a
+// Part-A score would silently under-count (CAP absent for "fever, cough, purulent sputum"). Refuse
+// rather than print a wrong number; test/run-dx-audit.mjs measures the same OPD path in a browser.
+const nSyn = Object.keys(globalThis.SYNDROMES || {}).length;
+if (!nSyn) {
+  console.log("\n=== A. SCORING — SKIPPED ===");
+  console.log("  window.SYNDROMES (infectious syndromes, defined in app.js) did not load under Node, so infections");
+  console.log("  cannot rank and any score here would be wrong. Use: node test/run-dx-audit.mjs (real browser,");
+  console.log("  includes the OPD re-ranker). See kb/validation/AUDIT-2026-09-26.md.");
+} else {
+  scorecard("A. SCORING accuracy (curated findings -> differential)", partA, (c) => rank(c.findings));
+}
 
 // ---- Part B: natural doctor complaint text -> findingsFromText -> differential ------------------
 // realistic OPD/ED one-liners; expect = keyword(s) that must appear in the ranked dx name (| = any).
@@ -110,7 +124,7 @@ if (!sane) {
   console.log("\n=== B. END-TO-END (natural text) — SKIPPED ===");
   console.log("  SMD_NLP's base vocabulary does not run under Node (only FT_SYN synonyms extract), so text->findings");
   console.log("  is crippled here and any Part-B score would be a false LOWER BOUND. Measure end-to-end ON-DEVICE");
-  console.log("  (CDP: DX.findingsFromText -> differential) for the true figure. Part A below is environment-independent.");
+  console.log("  (CDP: DX.findingsFromText -> differential) for the true figure: node test/run-dx-audit.mjs.");
 } else {
   scorecard("B. END-TO-END accuracy (natural complaint text -> findingsFromText -> differential)", partB,
     (c) => rank(DX.findingsFromText(c.text)));

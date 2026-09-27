@@ -9,7 +9,15 @@
 const IDX_KEY = "support:index";              // [{id, owner, email, subject, status, unread, createdAt, updatedAt}] newest-first
 const tKey = (id) => "support:t:" + id;
 const INDEX_CAP = 800;                          // ponytail: ring-buffer cap; oldest summaries drop past this (ticket bodies still TTL out)
-const TTL = 180 * 86400;                        // 180d, refreshed on every update
+const TTL = 180 * 86400;                        // 180d while OPEN, refreshed on every update
+// Owner 2026-09-27: "auto expiry of tickets within 30 days ... once solved, so we dont need big
+// databases". A solved ticket (and its index row) is kept 30 days from the moment it was solved,
+// then KV drops it. Reopening puts it back on the open TTL.
+export const RESOLVED_TTL = 30 * 86400;
+export function ttlFor(t) { return t && t.status === "resolved" ? RESOLVED_TTL : TTL; }
+// Kinds: "bug" (shake to report, 24 h promise), "help" (a question), "feedback" (an idea / opinion).
+export const KINDS = ["bug", "help", "feedback"];
+function preview(m) { return m && m.text ? { from: m.from, text: String(m.text).slice(0, 140), ts: m.ts } : null; }
 const SUBJECT_MAX = 200, TEXT_MAX = 4000, MSGS_MAX = 200;
 // Bug reports (shake to report, 2026-09-26) are tickets of kind "bug" with where-it-happened details
 // and a promised fix time. The owner asked for "solved in 24hrs", so dueAt is createdAt + 24 h.
@@ -49,8 +57,10 @@ function idFrom(rand32a, rand32b) {
 }
 export function makeId(rands) { return idFrom(rands[0] || 0, rands[1] || 0); }
 
-async function readIndex(store) { try { return JSON.parse((await store.get(IDX_KEY)) || "[]") || []; } catch (e) { return []; } }
-async function writeIndex(store, idx) { await store.put(IDX_KEY, JSON.stringify(idx.slice(0, INDEX_CAP)), { expirationTtl: TTL }); }
+// Solved rows older than RESOLVED_TTL are gone from the index too (their ticket body already expired).
+function live(r, now) { return !(r && r.status === "resolved" && r.resolvedAt && (now || Date.now()) - r.resolvedAt > RESOLVED_TTL * 1000); }
+async function readIndex(store) { try { return (JSON.parse((await store.get(IDX_KEY)) || "[]") || []).filter((r) => live(r)); } catch (e) { return []; } }
+async function writeIndex(store, idx) { await store.put(IDX_KEY, JSON.stringify(idx.filter((r) => live(r)).slice(0, INDEX_CAP)), { expirationTtl: TTL }); }
 
 /* Create a ticket. who = { id (owner key), email, name }. Returns the ticket (incl. its complaint id).
  * `rands` = [int, int] entropy for the id; `now` = ms. Throws on empty subject+text. */
@@ -72,10 +82,10 @@ export async function createTicket(store, who, body, rands, now) {
   };
   if (body && body.kind === "bug") {
     ticket.kind = "bug"; ticket.dueAt = now + BUG_SLA_MS; ticket.bug = cleanBugMeta(body.bug); ticket.hasShot = !!body.hasShot;
-  }
-  await store.put(tKey(id), JSON.stringify(ticket), { expirationTtl: TTL });
+  } else ticket.kind = body && KINDS.indexOf(body.kind) > -1 ? body.kind : "help";
+  await store.put(tKey(id), JSON.stringify(ticket), { expirationTtl: ttlFor(ticket) });
   idx.unshift({ id, owner: ticket.owner, email: ticket.email, subject: ticket.subject, status: "open", unread: true, createdAt: now, updatedAt: now,
-    ...(ticket.kind === "bug" ? { kind: "bug", dueAt: ticket.dueAt } : {}) });
+    kind: ticket.kind, last: preview(ticket.messages[0]), ...(ticket.kind === "bug" ? { dueAt: ticket.dueAt } : {}) });
   await writeIndex(store, idx);
   return ticket;
 }
@@ -100,10 +110,10 @@ export async function addMessage(store, id, from, text, now, status) {
   if (from === "support" && msg) t.userUnread = true;
   if (from === "user") t.userUnread = false;
   t.updatedAt = now;
-  await store.put(tKey(id), JSON.stringify(t), { expirationTtl: TTL });
+  await store.put(tKey(id), JSON.stringify(t), { expirationTtl: ttlFor(t) });
   const idx = await readIndex(store);
   const row = idx.find((r) => r.id === id);
-  if (row) { row.status = t.status; row.updatedAt = now; row.unread = from === "user"; if (t.resolvedAt) row.resolvedAt = t.resolvedAt; else delete row.resolvedAt; }
+  if (row) { row.status = t.status; row.updatedAt = now; row.unread = from === "user"; if (t.resolvedAt) row.resolvedAt = t.resolvedAt; else delete row.resolvedAt; if (msg) row.last = preview(t.messages[t.messages.length - 1]); }
   // bump to front on new activity
   const rest = idx.filter((r) => r.id !== id);
   await writeIndex(store, row ? [row].concat(rest) : idx);
@@ -148,8 +158,18 @@ export async function markSeen(store, id, now) {
   const t = await getTicket(store, id);
   if (!t || !t.userUnread) return t;
   t.userUnread = false;
-  await store.put(tKey(id), JSON.stringify(t), { expirationTtl: TTL });
+  await store.put(tKey(id), JSON.stringify(t), { expirationTtl: ttlFor(t) });
   return t;
+}
+
+// The developer opened the conversation: clear the owner-side unread dot in the index.
+export async function markSeenBySupport(store, id) {
+  const idx = await readIndex(store);
+  const row = idx.find((r) => r.id === id);
+  if (!row || !row.unread) return false;
+  row.unread = false;
+  await writeIndex(store, idx);
+  return true;
 }
 
 export const _internal = { IDX_KEY, tKey, INDEX_CAP, SUBJECT_MAX, TEXT_MAX };

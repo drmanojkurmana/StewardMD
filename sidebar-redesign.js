@@ -42,6 +42,7 @@
     watch: '<rect x="6" y="6" width="12" height="12" rx="3"/><path d="M9 6l.7-3h4.6l.7 3M9 18l.7 3h4.6l.7-3"/><path d="M12 9v3l2 1"/>',
     refresh: '<path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/>',
     download: '<path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/>',
+    chat: '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/><path d="M8.5 11h7M8.5 14h4.5"/>',
     bug: '<rect x="8" y="6" width="8" height="14" rx="4"/><path d="M12 20v-9M8 11H4M16 11h4M8 16H5M16 16h3M9 6.5 7 4M15 6.5 17 4M10 6a2 2 0 0 1 4 0"/>',
     flask: '<path d="M10 2v5.5L4.4 18.5A2 2 0 0 0 6.1 21h11.8a2 2 0 0 0 1.7-2.5L14 7.5V2h-4Z"/><path d="M8.5 2h7M7 14h10"/>'
   };
@@ -50,6 +51,7 @@
   }
   function flag(k, def) { try { var v = localStorage.getItem(k); return v === null ? def : v === "1"; } catch (e) { return def; } }
   function toast(m) { try { if (window.toast) window.toast(m); } catch (e) {} }
+  function hubOn() { return true; }   // one Profile, permanent (owner, 2026-09-27); smd_profile_hub retired
   function closeSB() { try { if (window.SB && SB.close) SB.close(); } catch (e) {} }
 
   // Row actions → existing globals, with graceful fallbacks.
@@ -66,10 +68,12 @@
       else toast("AgentConnect is not enabled");
     },
     // Shake-to-report bugs and the developer's replies (bug-report.js).
-    bugs: function () { if (window.SMD_BUGS && SMD_BUGS.openCentre) SMD_BUGS.openCentre(); else toast("Bug Report Centre loading…"); },
+    help: function () { if (window.SMD_HELP && SMD_HELP.openCentre) SMD_HELP.openCentre(); else toast("Help & Support loading…"); },
+    bugs: function () { if (window.SMD_HELP && SMD_HELP.openCentre) SMD_HELP.openCentre(); else toast("Help & Support loading…"); },
     guidelines: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Guidelines loading…"); },
     tour: function () { if (window.SMD_TOUR && SMD_TOUR.start) SMD_TOUR.start({ replay: true }); else toast("Tour loading…"); },
     feedback: function () {
+      if (window.SMD_HELP && SMD_HELP.openCentre) return SMD_HELP.openCentre({ compose: "feedback" });
       if (window.SMD_openFeedback) return SMD_openFeedback();
       var b = document.querySelector('[data-act="feedback"],#v3FeedbackBtn'); if (b && b !== this) return b.click();
       try { location.href = "mailto:hello@maiknowledge.com?subject=StewardMD%20feedback"; } catch (e) {}
@@ -411,8 +415,8 @@
     if (installBtn) installBtn.addEventListener("click", function () {
       if (!pending) return;
       installBtn.disabled = true;
-      SMD_OTA.install(pending, function (pct) { if (statusEl) statusEl.textContent = "Downloading… " + pct + "%"; }).then(function (res) {
-        if (res && res.ok) { if (statusEl) statusEl.textContent = "Update ready — reopening…"; }
+      SMD_OTA.install(pending, function (pct, label) { if (statusEl) statusEl.textContent = label || ("Downloading… " + pct + "%"); }).then(function (res) {
+        if (res && res.ok) { if (statusEl) statusEl.textContent = "Update ready, reopening…"; }
         else {
           installBtn.disabled = false;
           // Phrase it from the failure CODE, same vocabulary as the update banner. The raw code was
@@ -472,11 +476,11 @@
       // AgentConnect and My Clinic left the sidebar on 2026-09-26 (owner). Both still open from their
       // other entry points (home tile / More sheet, OPD queue); their ACT handlers stay for those.
       '<div class="sbr-sec">Reference &amp; Help</div>' +
-      row("bugs", "bug", "Bug Report Centre", bugBadge()) +
+      // ONE Help & Support centre (2026-09-27): bugs, questions and feedback, live chat with the team.
+      row("help", "chat", "Help &amp; Support", bugBadge()) +
       row("guidelines", "book", "Guidelines &amp; Protocols") +
         (flag("smd_atlas", true) ? row("atlas", "atlas", "RadioAnatome") : "") +
       row("tour", "info", "How it works · App tour") +
-      row("feedback", "edit", "Send Feedback") +
       row("ack", "award", "About &amp; Acknowledgements") +
       '<div class="sbr-sec">Settings</div>' +
       // One entry → the full Settings page (account, notifications, appearance, watch, advanced +
@@ -727,8 +731,12 @@
       '<header class="sbr-set-head"><button class="sbr-set-back" data-sset="close" aria-label="Back"><span class="sbr-set-chev">‹</span><span>Back</span></button><h2>Settings</h2></header>' +
       '<div class="sbr-set-body">' +
         '<div class="sbr-sec">Account</div>' +
-        row("profile", "steth", "Profile &amp; StewardMD ID") +
-        '<button class="sbr-row" data-sbr-act="account" data-smd-verify="1">' + svg("shield") + '<span class="sbr-lbl">Account &amp; Verification</span></button>' +
+        /* ONE Profile (smd_profile_hub): Profile & StewardMD ID and Account & Verification were two rows
+         * into overlapping pages. The hub holds both, so Settings has one door. "0" restores the pair. */
+        (hubOn()
+          ? row("profile", "user", "Profile, ID &amp; verification")
+          : row("profile", "steth", "Profile &amp; StewardMD ID") +
+            '<button class="sbr-row" data-sbr-act="account" data-smd-verify="1">' + svg("shield") + '<span class="sbr-lbl">Account &amp; Verification</span></button>') +
         '<div class="sbr-sec">Preferences</div>' +
         row("notifications", "bell", "Notifications") +
         row("appearance", "sun", "Appearance &amp; Theme") +
