@@ -2268,8 +2268,32 @@
     });
   }
   try { window.SMD_openRoleLock = openRoleLock; } catch (e) {}
+  /* Lively tiles (owner, 2026-09-27: "just like oncotree make all clinical tool icons have motion").
+   * Every glyph tile gets a small motion that fits what it is: a heartbeat for the heart tools, a
+   * page turn for documents, a sparkle for MaiK. CSS lives in redesign-system.css (.ai-live); it runs
+   * only with reduced motion off, pauses off screen and under overlays (refreshTileAnim), and is
+   * staggered per tool so the grid never bobs in unison. Locked tiles and SURGX (static by its
+   * brief) stay still. */
+  var LIVE_MOTION = {
+    beat: ["ecg_heart", "monitor_heart", "cardiology", "favorite", "vital_signs"],
+    pulse: ["health_and_safety", "local_hospital", "medical_services", "vaccines", "water_drop", "rate_review", "coronavirus", "emergency"],
+    tilt: ["medication", "science", "biotech", "stethoscope", "calculate", "medication_liquid", "pill"],
+    sparkle: ["auto_awesome"],
+    blink: ["photo_camera", "eye", "visibility"],
+    flip: ["description", "book_2", "history_edu", "school", "menu_book"],
+    bounce: ["groups", "support_agent", "diversity_3"],
+    rise: ["stairs", "trending_up"],
+    spin: ["hub", "sync"],
+    listen: ["mic", "record_voice_over"],
+    sweep: ["search", "neurology", "psychology", "body_system", "oncology"]
+  };
+  function liveMotion(ic) { for (var k in LIVE_MOTION) if (LIVE_MOTION[k].indexOf(ic) >= 0) return k; return "float"; }
+  function liveIcon(t) {
+    var h = 0, a = String(t.act || ""); for (var i = 0; i < a.length; i++) h = (h * 31 + a.charCodeAt(i)) % 997;
+    return '<span class="rds-icon ai-live" data-live="' + liveMotion(t.ic) + '" style="--live-d:-' + ((h % 23) / 10).toFixed(1) + 's" aria-hidden="true">' + t.ic + '</span>';
+  }
   function homeToolTile(t, locked) {
-    var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : ric(t.ic);
+    var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : (locked ? ric(t.ic) : liveIcon(t));
     // A1: the Specialty Kits tile names the doctor's own kit once one is known (profile or chosen).
     if (t.act === "speckit") { var mk = ""; try { mk = (window.SMD_KITS && SMD_KITS.myLabel) ? SMD_KITS.myLabel() : ""; } catch (e) {} if (mk) t = { act: t.act, ic: t.ic, tt: t.tt, sub: "My kit: " + mk, defOn: t.defOn, feat: t.feat }; }
     // BETA chip: these models are clinically unvalidated, so the label rides the tile on EVERY path
@@ -2580,7 +2604,7 @@
       if (h.classList.contains("hv-still") !== still) h.classList.toggle("hv-still", still);
       if (still || !_aiSeen || typeof IntersectionObserver !== "function") return;
       if (!_aiIO) _aiIO = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target.classList.toggle("ai-offscreen", !e.isIntersecting); }); });
-      var els = h.querySelectorAll(".ai-anim, .ai-clinix-img, .tx-tile-lungs");
+      var els = h.querySelectorAll(".ai-anim, .ai-clinix-img, .tx-tile-lungs, .ai-live, .ai-brandmark");
       for (var i = 0; i < els.length; i++) if (!_aiSeen.has(els[i])) { _aiSeen.add(els[i]); _aiIO.observe(els[i]); }
     }
     function scheduleFab() { if (_fabRaf) return; _fabRaf = requestAnimationFrame(function () { _fabRaf = 0; if (_fabScrolling) return; try { refreshTileAnim(); } catch (e) {} if (fab && fab.isConnected) refreshFab(); }); }
