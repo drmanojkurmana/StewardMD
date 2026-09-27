@@ -64,7 +64,7 @@ case-paths (`test/run-dx-audit.mjs`).
 **Gotcha for harnesses:** the KB (`kb/dist/*`) is lazy-loaded after first paint by `kb-loader.js`.
 Wait for `window.SMD_KB_READY` before scoring, or early cases run without it and numbers drift.
 
-## Text extraction v2 (`smd_nlp_v2`, default OFF, 2026-09-26)
+## Text extraction v2 (`smd_nlp_v2`, default ON since 2026-09-27)
 
 Phase 2 of `kb/validation/PLAN-DX-ABX-10.md`. The flag is read inside `clinical-nlp.js` (`SMD_NLP._v2`;
 `ctx.v2` overrides it, `?nlpv2=1`, `localStorage smd_nlp_v2=1`), so every `SMD_NLP.extract` caller gets
@@ -104,7 +104,7 @@ rival excluded by v3 cannot keep antibiotics on (`rankV3Excluded`).
   Tapped top-1 train 85%, dev 76%, test 78%. Probe for new rules: dump `SMD_REASON.assess` top-3 with
   `rank` and `supporting` per TRAIN miss; confirm on dev; never inspect test cases.
 
-## KB additions, "not enough information", prevalence prior (2026-09-27, all default OFF)
+## KB additions, "not enough information", prevalence prior (2026-09-27; KB and calib default ON, the prior a per-device switch)
 
 Results in `kb/validation/AUDIT-2026-09-26.md` (Round 4).
 
@@ -134,7 +134,7 @@ Results in `kb/validation/AUDIT-2026-09-26.md` (Round 4).
   sufficiency); gold viral cases need re-keying with the new findings; the prior needs real
   case-mix counts.
 
-## Differentiating questions on Select (`smd_dx_ask`, default OFF, 2026-09-27)
+## Differentiating questions on Select (`smd_dx_ask`, default ON since 2026-09-27)
 
 `reasoning.js` `differentiate(targetId)` (next to `nextQuestions`), `askStanding()`, `pickDx()` /
 `openAsk()` / `askHTML()` / `wireAsk()` / `askAnswer()` / `askUndo()`; pure API `SMD_REASON.differentiate(id, findings?,
