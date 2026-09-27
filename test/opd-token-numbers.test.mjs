@@ -69,9 +69,9 @@ mock.module("../functions/_queue.js", {
     signToken: async () => "", verifyToken: async () => ({ ok: false }), idFromToken: () => "", queueSecret: () => "",
   },
 });
-const notified = [];
+const notified = [], notifiedEta = [];
 mock.module("../functions/_queue_notify.js", {
-  namedExports: { runQueueNotifications: async () => {}, notifyTicket: async (_e, _s, t, ev) => { notified.push({ ev, token: t.token }); } },
+  namedExports: { runQueueNotifications: async () => {}, notifyTicket: async (_e, _s, t, ev) => { notified.push({ ev, token: t.token }); notifiedEta.push(t.etaStart); } },
 });
 
 const Q = await import("../functions/_queue_engine.js");
@@ -300,6 +300,16 @@ test("the allocation is audited on the register row, token in meta and no PHI", 
   assert.match(ev.meta, /token:1\b/);
   assert.doesNotMatch(JSON.stringify(ev), /Asha|Kumar|9876543210|MR1234/);
   assert.deepEqual(notified, [{ ev: "registered", token: "1" }], "the registration message gets the token");
+});
+
+test("the registration message carries the estimate recompute just gave the ticket (the SMS template names a time)", async () => {
+  reset();
+  notified.length = 0; notifiedEta.length = 0;
+  const s = await session("d1");
+  await add(s, "Asha"); await add(s, "Ravi");
+  assert.equal(notifiedEta.length, 2);
+  for (const e of notifiedEta) assert.ok(e > 0, "etaStart is set, not the 0 the new ticket was created with");
+  assert.ok(notifiedEta[1] > notifiedEta[0], "the second patient's estimate is later");
 });
 
 test("the doctor/desk view carries the token; an old ticket without one carries none", async () => {

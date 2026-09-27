@@ -8,7 +8,7 @@
  * pendingEvent() is PURE and unit-tested; the sender is thin best-effort I/O.
  */
 import I18n from "../followcare-i18n.js";
-import { sendSms, smsConfigured } from "./_followcare_sms.js";
+import { sendDlt, dltConfigured } from "./_followcare_sms.js";
 import { sendWhatsApp, waConfigured } from "./_followcare_whatsapp.js";
 import { decPHI, mintTicketToken } from "./_queue.js";
 import { fsCommit, wUpdate } from "./_fbfirestore.js";
@@ -75,17 +75,37 @@ function queueChannel(env) {
   var c = String((env && (env.QUEUE_MSG_CHANNEL || env.FOLLOWCARE_MSG_CHANNEL)) || "whatsapp").toLowerCase();
   return c === "sms" ? "sms" : "whatsapp";
 }
-async function send(env, toE164, body, link) {
+/* SMS can only say what an approved DLT template says (functions/_followcare_sms.js DLT), so an SMS is built
+ * from its template, never from the WhatsApp body. "Patient", never the name (owner 2026-09-27: PHI); the
+ * token, position and everything else are on the linked live page. registered and ahead2 have a template;
+ * every other event goes by WhatsApp only. PURE. null = no SMS for this message. */
+export function smsSpec(event, session, ticket, link, nowMs) {
+  var dr = String((session && session.doctorName) || "").replace(/^\s*dr\b\.?\s*/i, "").trim();
+  if (!dr || /^unassigned$/i.test(dr)) return null;   // the templates say "Dr. <name>"; a pool ticket has no doctor yet
+  var at = ticket.department || (session && session.department) || "the clinic";
+  var eta = ticket.etaStart ? smsTime(ticket.etaStart) : "";
+  if (!eta) return null;
+  if (event === "registered") return { key: "appt_confirm", slots: ["Patient", dr, at, smsDate(nowMs), eta, link] };
+  if (event === "ahead2") return { key: "checkin_alert", slots: ["Patient", dr, at, eta, link] };
+  return null;
+}
+// "11.40am" and "27.9.2026": the shapes the approved DLT samples used.
+export function smsTime(ms) { return clockTime(ms).replace(":", ".").replace(/\s+/g, ""); }
+export function smsDate(ms) {
+  try { return new Date(ms).toLocaleDateString("en-IN", { day: "numeric", month: "numeric", year: "numeric", timeZone: "Asia/Kolkata" }).replace(/\//g, "."); } catch (e) { return ""; }
+}
+async function send(env, toE164, body, link, sms) {
   var payload = { toE164: toE164, body: body, vars: { link: link, text: body } };
-  // WhatsApp first (when configured); if that send fails or the patient isn't on WhatsApp, fall back to
-  // SMS (2Factor). Otherwise SMS is the primary channel.
+  // WhatsApp first (when configured); if that send fails or the patient isn't on WhatsApp, fall back to an
+  // SMS from the event's DLT template (2Factor), when it has one. Otherwise SMS is the primary channel.
   if (queueChannel(env) === "whatsapp" && waConfigured(env)) {
     var wa; try { wa = await sendWhatsApp(env, payload); } catch (e) { wa = { ok: false, reason: "wa_exception" }; }
     if (wa && wa.ok) return Object.assign({ channel: "whatsapp" }, wa);
-    if (smsConfigured(env)) return Object.assign({ channel: "sms", waFellBack: true }, await sendSms(env, payload));
+    if (sms && dltConfigured(env)) return Object.assign({ channel: "sms", waFellBack: true }, await sendDlt(env, toE164, sms.key, sms.slots));
     return Object.assign({ channel: "whatsapp" }, wa);
   }
-  return Object.assign({ channel: "sms" }, await sendSms(env, payload));
+  if (!sms) return { channel: "sms", ok: false, skipped: true, reason: "no_sms_template" };
+  return Object.assign({ channel: "sms" }, await sendDlt(env, toE164, sms.key, sms.slots));
 }
 /* Clinic Messaging meter. ONE unit per patient per visit: the ticket id is the visit, so the first
  * message of a visit charges and every later message of the SAME visit is free (see consumeVisit in
@@ -164,7 +184,7 @@ export async function notifyTicket(env, session, ticket, event, vars) {
       ahead: vars.ahead != null ? vars.ahead : Math.max(0, (ticket.position || 1) - 1), eta: vars.eta || ""
     });
     if (ticket.token && (event === "registered" || event === "next")) body = I18n.t("queue.msg.token", ticket.lang || "en", { token: ticket.token }) + " " + body;
-    res = await send(env, mobile, body, link);
+    res = await send(env, mobile, body, link, smsSpec(event, session, ticket, link, Date.now()));
   } catch (e) { res = { ok: false, reason: "exception" }; }
   // Mark the tier attempted (we had a number) so it never re-fires; audit masked. Best-effort writes.
   var patch = { updatedAt: Date.now() };
