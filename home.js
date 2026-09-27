@@ -2246,8 +2246,8 @@
     // SURGX: the real owner-supplied monogram (surgx-logo.png), same pattern as maitri/clinix above.
     // brightness(0) invert(1) forces it WHITE on this dark badge regardless of the source colour,
     // which works because the PNG is alpha-masked rather than a white-background image.
-    // Deliberately STATIC - the module's design brief is "not gamified", and an animating badge on
-    // a surgical tile reads wrong.
+    // Not a loop of motion but a blade glint (owner, 2026-09-27: "SurgX should shine like a sharp
+    // knife"): redesign-system.css sweeps a streak of light across the mark, clipped to its shape.
     surgx: '<img class="ai-brandmark ai-surgx-img" src="/surgx-logo.png" alt="">'
   };
   /* Role box (owner, 2026-09-26): tools outside the user's role stay on Home but locked, after the

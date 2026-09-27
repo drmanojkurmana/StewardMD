@@ -889,6 +889,28 @@ html body.v3-dark #homeV2.rnav .rnav-tab-maik .rds-icon {
 #homeV2.hv-still .ai-anim, #homeV2.hv-still .ai-anim *, #homeV2.hv-still .ai-clinix-img, #homeV2.hv-still .tx-tile-lungs, #homeV2.hv-still .ai-live, #homeV2.hv-still .ai-brandmark,
 #homeV2 .ai-offscreen, #homeV2 .ai-offscreen * { animation-play-state: paused !important; }
 
+/* SURGX: "should shine like a sharp knife" (owner, 2026-09-27; replaces the earlier static brief).
+ * A narrow streak of light runs across the mark itself - clipped to the logo by a mask of the same
+ * PNG, so it glints on the blade, not the sphere - fast, then rests, like light catching an edge.
+ * The logo box is 38px tall at 368:512, so the mask is sized auto x 38px, centred like the img. */
+#homeV2.rnav .rnav-tile[data-act="surgx"] .rnav-badge::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 28px; height: 38px; transform: translate(-50%, -50%);
+  pointer-events: none; opacity: 0;
+  background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.35) 45%, #fff 49%, #fff 51%, rgba(220,248,255,.45) 55%, transparent 60%) no-repeat;
+  background-size: 300% 100%; background-position: 130% 0;
+  -webkit-mask: url(/surgx-logo.png) center / auto 38px no-repeat; mask: url(/surgx-logo.png) center / auto 38px no-repeat;
+}
+/* Steel, not white: the blade rests a brushed silver so the white glint has something to cross. */
+#homeV2.rnav .rnav-tile[data-act="surgx"] .ai-surgx-img { filter: brightness(0) invert(.8) drop-shadow(0 2px 3px rgba(0,0,0,.35)); }
+@media (prefers-reduced-motion: no-preference) {
+  #homeV2.rnav .rnav-tile[data-act="surgx"] .rnav-badge::after { animation: surgxGlint 3.4s cubic-bezier(.5,0,.2,1) infinite; animation-delay: .8s; }
+  #homeV2.rnav .rnav-tile[data-act="surgx"] .ai-surgx-img { animation: surgxEdge 3.4s ease-in-out infinite; animation-delay: .8s; }
+  @keyframes surgxGlint { 0% { opacity: 1; background-position: 130% 0; } 22% { opacity: 1; background-position: -30% 0; } 23%, 100% { opacity: 0; background-position: -30% 0; } }
+  @keyframes surgxEdge { 0%, 6%, 30%, 100% { filter: brightness(0) invert(.8) drop-shadow(0 2px 3px rgba(0,0,0,.35)); }
+    13% { filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(215,248,255,1)) drop-shadow(0 2px 3px rgba(0,0,0,.35)); } }
+}
+#homeV2.hv-still .rnav-tile[data-act="surgx"] .rnav-badge::after, #homeV2 .rnav-badge:has(.ai-offscreen)::after { animation-play-state: paused !important; }
+
 /* Lively Clinical Tools glyphs (owner, 2026-09-27: "just like oncotree make all clinical tool icons
  * have motion or lively"). One small motion per kind of tool, set by home.js liveIcon() as
  * data-live; --live-d staggers each tool so the grid never moves in unison. Transforms and opacity
