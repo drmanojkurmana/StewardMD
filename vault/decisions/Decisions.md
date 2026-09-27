@@ -10495,3 +10495,15 @@ the new one. Full unit suite 10915/10916 passing, 0 failures.
   hence a switch rather than a default.
 - Tests written against the classic defaults pin their flags (`?kbv2=0` in the gate fixtures); the new
   default is asserted beside them.
+
+## 2026-09-27 - Website pricing mirrors the app price table
+The marketing site (`_site/index.html` #pricing) quoted a stale ladder (Student 129, Intern 199,
+Resident 299, Physician Pro 579, Onco+ 799, invented institution prices, a Quarterly cycle the app
+never sold). It now carries the app's `plans()` table (`functions/api/billing/[[path]].js`,
+`wrangler.toml`): Trainee 199/1,999, Co-Resident 299/2,999, Pro 599/4,999, Physician 1,499/14,999,
+Physician Pro 2,499/24,999, struck `regular` anchors (x12 on annual) and per-day lines computed the
+same way as `pro-paywall.js`; Monthly and Annual only; add-ons Onco 89, Extra clinic 139; hospitals
+and colleges "On request". The site is static, so `test/site-pricing.test.mjs` pins it to
+`plans({})` defaults. A live KV price override (/admin) does NOT reach the site: change both.
+Open owner item carried from vault/Role-Tiers.md section 10: the ASCI/CCPA strike-through caution
+applies to the site exactly as to the app.
