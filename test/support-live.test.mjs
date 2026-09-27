@@ -144,3 +144,75 @@ test("one centre: kinds bug | help | feedback; new conversations are capped per 
   assert.deepEqual(await get("?live=1&after=0"), { ok: true, live: false, seq: 0, events: [] });
   assert.equal((await post({ action: "create", text: "x" })).status, 401);
 });
+
+/* Owner 2026-09-27, round 2: "still not as fast or real time as WhatsApp". */
+test("long-poll: a held request answers the moment a reply lands, not at the next poll", async () => {
+  fresh();
+  const t = (await post({ action: "create", text: "Is the app down?" })).body.ticket;
+  const head = (await get("?live=1")).seq;
+  const t0 = Date.now();
+  const held = get("?live=1&fast=1&wait=10&after=" + head);          // the doctor's chat, waiting
+  setTimeout(() => { admin("admin/support-reply", { id: t.id, text: "No, all fine now." }); }, 300);
+  const r = await held;
+  const took = Date.now() - t0;
+  assert.ok(r.events.some((e) => e.kind === "msg" && e.text === "No, all fine now."), "the reply came back on the held request");
+  assert.ok(took < 2000, "answered within a tick of the reply (" + took + " ms), not after the 10 s wait");
+  // Nothing happening: it waits the full time and returns empty.
+  const t1 = Date.now();
+  const idle = await L.waitEvents(ENV(), { owner: "fb:doc1", after: r.seq, waitMs: 500, tickMs: 100 });
+  assert.equal(idle.events.length, 0); assert.ok(Date.now() - t1 >= 400);
+  // The server caps the hold, and the D1 queries one held request can make.
+  assert.equal(L.WAIT_MAX_MS, 25000);
+  let q = 0; const db = DB, counting = { prepare: (sql) => { if (/^SELECT seq/.test(sql)) q++; return db.prepare(sql); }, batch: (x) => db.batch(x) };
+  await L.waitEvents(ENV(), { owner: "fb:nobody", after: 0, waitMs: 25000, tickMs: 100 }, counting);
+  assert.equal(q, L.MAX_CHECKS, "never more than MAX_CHECKS queries per hold");
+});
+
+test("typing: each side sees the other typing; only the owner can signal on a conversation", async () => {
+  fresh();
+  const t = (await post({ action: "create", text: "q" })).body.ticket;
+  const dh = (await get("?live=1")).seq, ah = (await admin("admin/support-live")).body.seq;
+  assert.equal((await admin("admin/support-typing", { id: t.id })).status, 200);
+  assert.ok((await get("?live=1&after=" + dh)).events.some((e) => e.kind === "typing" && e.sender === "support"), "doctor sees support typing");
+  assert.equal((await post({ action: "typing", id: t.id })).status, 200);
+  assert.ok((await admin("admin/support-live?after=" + ah)).body.events.some((e) => e.kind === "typing" && e.sender === "user"), "admin sees the doctor typing");
+  WHO.current = { id: "fb:someone-else", guest: false };
+  assert.equal((await post({ action: "typing", id: t.id })).status, 404);
+});
+
+test("KV lag cannot hide or drop a message: reads and writes fold in the D1 log", async () => {
+  fresh();
+  const t = (await post({ action: "create", text: "first" })).body.ticket;
+  // Simulate an edge location whose KV copy has not caught up with the developer's reply.
+  const stale = STORE._m.get("support:t:" + t.id), staleIdx = STORE._m.get("support:index");
+  await admin("admin/support-reply", { id: t.id, text: "Reply written at another PoP" });
+  STORE._m.set("support:t:" + t.id, stale); STORE._m.set("support:index", staleIdx);
+  // The doctor's list still shows it (merged from D1), unread.
+  const mine = (await get("")).tickets.find((x) => x.id === t.id);
+  assert.ok(mine.messages.some((m) => m.from === "support" && m.text === "Reply written at another PoP"));
+  assert.equal(mine.userUnread, true);
+  // The doctor answers from that stale copy: the reply is not overwritten away.
+  await post({ action: "reply", id: t.id, text: "Thanks" });
+  const texts = (await S.getTicket(STORE, t.id)).messages.map((m) => m.text);
+  assert.deepEqual(texts, ["first", "Reply written at another PoP", "Thanks"]);
+  // Same the other way: the admin's view of the thread and the inbox preview are current.
+  STORE._m.set("support:t:" + t.id, stale); STORE._m.set("support:index", staleIdx);
+  const one = (await admin("admin/support?id=" + t.id)).body.ticket;
+  assert.deepEqual(one.messages.map((m) => m.text), ["first", "Reply written at another PoP", "Thanks"]);
+  const row = (await admin("admin/support")).body.tickets.find((x) => x.id === t.id);
+  assert.equal(row.last.text, "Thanks"); assert.equal(row.unread, true);
+});
+
+test("a conversation started a moment ago shows in the inbox before KV's index catches up", async () => {
+  fresh();
+  const before = STORE._m.get("support:index") || "[]";
+  const t = (await post({ action: "bug", text: "Export button does nothing" })).body.ticket;
+  STORE._m.set("support:index", before);                              // this edge has not seen it yet
+  const row = (await admin("admin/support?status=open")).body.tickets.find((x) => x.id === t.id);
+  assert.ok(row, "listed from the live log");
+  assert.equal(row.kind, "bug"); assert.equal(row.unread, true); assert.match(row.subject, /Export button/);
+  // Seen by support clears the dot even on the merged row.
+  await admin("admin/support-seen", { id: t.id });
+  STORE._m.set("support:index", before);
+  assert.equal((await admin("admin/support")).body.tickets.find((x) => x.id === t.id).unread, false);
+});

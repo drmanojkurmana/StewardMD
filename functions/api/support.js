@@ -14,7 +14,7 @@
  * Requires a signed-in doctor (so the owner's replies route back in-app). Admin side = /api/ai/admin/support*. */
 import { usageKv, identify } from "../_usage.js";
 import { createTicket, addMessage, getTicket, listMine, markSeen, shotKey, shotResponse, SHOT_MAX, SHOT_TTL } from "../_support.js";
-import { logEvent, eventsSince, headSeq } from "../_support_live.js";
+import { logEvent, eventsSince, headSeq, waitEvents, recentMsgs, mergeMsgs } from "../_support_live.js";
 
 const json = (o, s) => new Response(JSON.stringify(o), { status: s || 200, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 
@@ -22,6 +22,9 @@ function rands() { const a = new Uint32Array(2); crypto.getRandomValues(a); retu
 
 export const BUGS_PER_DAY = 20;   // per account: a stuck shake detector must not flood the owner's queue
 export const NEW_PER_DAY = 20;    // new questions/feedback per account per day (replies are not capped)
+
+// KV lags across edge locations by up to 60 s; messages newer than this are folded in from D1.
+export const MERGE_WINDOW_MS = 10 * 60 * 1000;
 
 // Every write also goes to the live log so the other side sees it within seconds. Best-effort.
 function live(env, ctx, ev) { const p = logEvent(env, ev); if (ctx && typeof ctx.waitUntil === "function") ctx.waitUntil(p); return p; }
@@ -47,10 +50,18 @@ export async function onRequestPost(context) {
     if (!String(b.text || "").trim()) return json({ error: "empty" }, 400);
     // Writing back on a solved ticket reopens it ("if it still happens, reply and we reopen it").
     const reopen = t.status === "resolved";
-    const u = await addMessage(store, t.id, "user", b.text, now, reopen ? "open" : undefined);
+    const recent = await recentMsgs(env, { ticket: t.id, since: now - MERGE_WINDOW_MS });
+    const u = await addMessage(store, t.id, "user", b.text, now, reopen ? "open" : undefined, recent);
     await live(env, context, { ticket: t.id, owner: who.id, sender: "user", kind: "msg", text: String(b.text).trim(), ts: now });
     if (reopen) await live(env, context, { ticket: t.id, owner: who.id, sender: "user", kind: "status:open", ts: now });
     return json({ ok: true, ticket: u });
+  }
+  // "typing…" on the other side. Live log only, nothing stored on the ticket.
+  if (b.action === "typing") {
+    const t = await getTicket(store, String(b.id || ""));
+    if (!t || t.owner !== who.id) return json({ error: "not-found" }, 404);
+    await live(env, context, { ticket: t.id, owner: who.id, sender: "user", kind: "typing", ts: now });
+    return json({ ok: true });
   }
   if (b.action === "seen") {
     const t = await getTicket(store, String(b.id || ""));
@@ -73,7 +84,7 @@ export async function onRequestPost(context) {
     } catch (e) { return json({ error: "empty" }, 400); }
     if (shot) { try { await store.put(shotKey(t.id), shot, { expirationTtl: SHOT_TTL }); } catch (e) {} }
     try { await store.put(capK, String(n + 1), { expirationTtl: 2 * 86400 }); } catch (e) {}
-    await live(env, context, { ticket: t.id, owner: who.id, sender: "user", kind: "new", text, ts: now });
+    await live(env, context, { ticket: t.id, owner: who.id, sender: "user", kind: "new:bug", text, ts: now });
     return json({ ok: true, ticket: t });
   }
   // create: a question ("help") or feedback / an idea
@@ -86,7 +97,7 @@ export async function onRequestPost(context) {
   try {
     const t = await createTicket(store, who, { ...b, kind, subject: String(b.subject || "").trim() || text.split("\n")[0].slice(0, 80) }, rands(), now);
     try { await store.put(capK, String(n + 1), { expirationTtl: 2 * 86400 }); } catch (e) {}
-    await live(env, context, { ticket: t.id, owner: who.id, sender: "user", kind: "new", text, ts: now });
+    await live(env, context, { ticket: t.id, owner: who.id, sender: "user", kind: "new:" + kind, text, ts: now });
     return json({ ok: true, ticket: t });
   } catch (e) { return json({ error: "empty" }, 400); }
 }
@@ -107,8 +118,15 @@ export async function onRequestGet({ request, env }) {
     if (!who || who.guest) return json({ ok: true, live: false, seq: 0, events: [] });
     const after = url.searchParams.get("after");
     if (after == null || after === "") return json({ ok: true, live: true, seq: await headSeq(env, who.id), events: [] });
-    return json({ ok: true, ...(await eventsSince(env, { owner: who.id, after: +after })) });
+    // ?wait=<s>: hold the request until something happens (long-poll). How often it checks D1:
+    // ?fast=1 in an open chat (350 ms), ?bg=1 elsewhere in the app (3 s), else 1.2 s.
+    const wait = Math.min(25, Math.max(0, +url.searchParams.get("wait") || 0)) * 1000;
+    const tick = url.searchParams.get("fast") ? 350 : url.searchParams.get("bg") ? 3000 : 1200;
+    return json({ ok: true, ...(await waitEvents(env, { owner: who.id, after: +after, waitMs: wait, tickMs: tick })) });
   }
   if (!who || who.guest) return json({ ok: true, tickets: [] });
-  return json({ ok: true, tickets: await listMine(usageKv(env), who.id) });
+  const mine = await listMine(usageKv(env), who.id);
+  const recent = await recentMsgs(env, { owner: who.id, since: Date.now() - MERGE_WINDOW_MS });
+  if (recent.length) mine.forEach((t) => mergeMsgs(t, recent));
+  return json({ ok: true, tickets: mine });
 }

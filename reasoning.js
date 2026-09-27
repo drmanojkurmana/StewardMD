@@ -858,8 +858,9 @@
     try {
       var q = /[?&]kbv2=([01])\b/.exec((window.location && location.search) || "");
       if (q) return q[1] === "1";
-      return localStorage.getItem("smd_kb_v2") === "1";
-    } catch (e) { return false; }
+      // default ON since 2026-09-27 (owner: "turn all on"); localStorage "0" or ?kbv2=0 turns it off
+      return localStorage.getItem("smd_kb_v2") !== "0";
+    } catch (e) { return true; }
   }
   var KB_V2_FIELDS = [
     { key: "knownGallstones", label: "Gallstones (known, or on imaging)" },
@@ -1197,6 +1198,8 @@
     try {
       var q = /[?&]prior=([01])\b/.exec((window.location && location.search) || "");
       if (q) return q[1] === "1";
+      // OFF by default; the doctor turns it on per device with the switch under "All possibilities"
+      // (owner, 2026-09-27: "prevalence based order should be optional for user")
       return localStorage.getItem("smd_prior_v1") === "1";
     } catch (e) { return false; }
   }
@@ -1440,8 +1443,9 @@
     try {
       var q = /[?&]calib=([01])\b/.exec((window.location && location.search) || "");
       if (q) return q[1] === "1";
-      return localStorage.getItem("smd_calib") === "1";
-    } catch (e) { return false; }
+      // default ON since 2026-09-27 (owner: "turn all on"); localStorage "0" or ?calib=0 turns it off
+      return localStorage.getItem("smd_calib") !== "0";
+    } catch (e) { return true; }
   }
   var CALIB_SKIP = { age: 1, sex: 1, ageOver50: 1 };
   // a red-flag finding is never "not enough information": the answer to possible shock is urgency
@@ -4019,8 +4023,9 @@
     try {
       var q = /[?&]dxask=([01])\b/.exec((window.location && location.search) || "");
       if (q) return q[1] === "1";
-      return localStorage.getItem("smd_dx_ask") === "1";
-    } catch (e) { return false; }
+      // default ON since 2026-09-27 (owner: "turn all on"); localStorage "0" or ?dxask=0 turns it off
+      return localStorage.getItem("smd_dx_ask") !== "0";
+    } catch (e) { return true; }
   }
   // feverGU is "fever with urinary symptoms" by label but plain fever in the KB rules: never ask it
   /* smd_dx_simple (default ON since 2026-09-27, owner approved): the workspace in plain language.
@@ -4067,7 +4072,10 @@
     var tail = rest > 0 ? '<button type="button" class="dx-more dx-showall" id="dxShowAll">Show ' + rest + ' less likely</button>'
       : (S.showAllDx && all.length > SIMPLE_CAP ? '<button type="button" class="dx-more dx-showall" id="dxShowAll">Show fewer</button>' : '');
     return '<div class="dx-col all"><div class="dx-col-h">All possibilities <span class="dx-col-n">' + all.length + '</span></div>' +
-      '<p class="dx-col-sub">Best fit first. Fit is how well the findings match, not a probability.</p><div class="dx-rows">' + body + '</div>' + tail + '</div>';
+      '<p class="dx-col-sub">Best fit first. Fit is how well the findings match, not a probability.</p>' +
+      '<label class="dx-prior-sw"><input type="checkbox" id="dxPriorSw"' + (priorOn() ? ' checked' : '') + '>' +
+        '<span>Put common diagnoses first<em>A small nudge for how often each is seen in Indian practice. How well the findings fit still decides.</em></span></label>' +
+      '<div class="dx-rows">' + body + '</div>' + tail + '</div>';
   }
   function renderTop(d) {
     var el = root.querySelector("#dxTop");
@@ -4137,6 +4145,13 @@
     if (!root || !simpleOn()) return;
     var sa = root.querySelector("#dxShowAll");
     if (sa) sa.addEventListener("click", function (e) { e.stopPropagation(); S.showAllDx = !S.showAllDx; renderColsOnly(); });
+    // smd_prior_v1 is the doctor's choice, remembered on this device
+    var ps = root.querySelector("#dxPriorSw");
+    if (ps) ps.addEventListener("change", function (e) {
+      e.stopPropagation();
+      try { localStorage.setItem("smd_prior_v1", ps.checked ? "1" : "0"); } catch (x) {}
+      renderColsOnly();
+    });
     root.querySelectorAll("[data-clamp]").forEach(function (b) {
       b.addEventListener("click", function (e) {
         e.stopPropagation();

@@ -33,7 +33,8 @@ const STUB = `
   window.__calls = []; window.__tickets = []; window.__events = []; window.__seq = 0; window.__errs = [];
   window.addEventListener("error", function (e) { window.__errs.push(String(e.message)); }); window.addEventListener("unhandledrejection", function (e) { window.__errs.push("rej " + String(e.reason && e.reason.message || e.reason)); });
   // The developer side of the live log (functions/_support_live.js), for the test to drive.
-  window.__ev = function (e) { e.seq = ++window.__seq; e.ts = e.ts || Date.now(); window.__events.push(e); };
+  window.__waiters = [];
+  window.__ev = function (e) { e.seq = ++window.__seq; e.ts = e.ts || Date.now(); window.__events.push(e); var w = window.__waiters; window.__waiters = []; w.forEach(function (f) { f(); }); };
   window.__devReply = function (id, text) { var t = window.__tickets.filter(function (x) { return x.id === id; })[0]; var now = Date.now();
     t.messages.push({ from: "support", text: text, ts: now }); t.userUnread = true; t.updatedAt = now; window.__ev({ ticket: id, sender: "support", kind: "msg", text: text, ts: now }); };
   window.__devSeen = function (id) { window.__ev({ ticket: id, sender: "support", kind: "read" }); };
@@ -50,8 +51,15 @@ const STUB = `
       if (u.indexOf("live=1") > -1) {
         var m = /after=(\\d+)/.exec(u);
         if (!m) return reply({ ok: true, live: true, seq: window.__seq, events: [] });
-        var ev = window.__events.filter(function (e) { return e.seq > +m[1]; });
-        return reply({ ok: true, live: true, seq: ev.length ? ev[ev.length - 1].seq : +m[1], events: ev });
+        var since = function () { var ev = window.__events.filter(function (e) { return e.seq > +m[1]; }); return { ok: true, live: true, seq: ev.length ? ev[ev.length - 1].seq : +m[1], events: ev }; };
+        var w = /wait=(\\d+)/.exec(u);
+        if (!w || since().events.length) return reply(since());
+        // Hold it like the server does: answer the moment an event lands, or empty after the wait.
+        return new Promise(function (res, rej) {
+          var done = false, fin = function () { if (done) return; done = true; clearTimeout(tm); res(); };
+          var tm = setTimeout(fin, +w[1] * 1000); window.__waiters.push(fin);
+          if (o.signal) o.signal.addEventListener("abort", function () { if (done) return; done = true; clearTimeout(tm); rej(new DOMException("aborted", "AbortError")); });
+        }).then(function () { return reply(since()); });
       }
       return reply({ ok: true, tickets: JSON.parse(JSON.stringify(window.__tickets)) });
     }
@@ -64,6 +72,7 @@ const STUB = `
         hasShot: !!body.shot, bug: body.bug, messages: [{ from: "user", text: body.text, ts: now }] };
       window.__tickets.unshift(t); return reply({ ok: true, ticket: t });
     }
+    if (body.action === "typing") return reply({ ok: true });
     if (body.action === "seen") { window.__tickets.forEach(function (t) { if (t.id === body.id) t.userUnread = false; }); return reply({ ok: true }); }
     if (body.action === "reply") { var tt = window.__tickets.filter(function (t) { return t.id === body.id; })[0]; tt.messages.push({ from: "user", text: body.text, ts: Date.now() }); tt.updatedAt = Date.now(); return reply({ ok: true, ticket: JSON.parse(JSON.stringify(tt)) }); }
     return reply({ error: "bad" }, 400);
@@ -181,8 +190,23 @@ try {
   // ── LIVE: the developer replies while the chat is OPEN; it appears without reopening ──
   await ev(`document.querySelector("#bugcRoot [data-bc]").click(); return 1;`);
   ok(await waitFor(`return /Tapping this does nothing/.test(document.getElementById("bugcRoot").innerText)`), "the conversation opens as a chat");
-  await ev(`window.__devReply("SMD-ABC123", "Thanks, we found it. Fix in the next update."); return 1;`);
-  ok(await waitFor(`return /we found it/.test(document.getElementById("bugcRoot").innerText)`, 6000), "the developer's reply appears in the open chat within seconds, no reopening");
+  // The chat is holding a long-poll open: a reply lands without waiting for a poll interval.
+  ok(await waitFor(`return window.__calls.some(function(c){return /live=1&after=\\d+&wait=20&fast=1/.test(c.url)})`), "the open chat holds a fast long-poll (wait=20&fast=1)");
+  const idle0 = await ev(`return window.__calls.filter(function(c){return /live=1/.test(c.url)}).length`);
+  await new Promise((r) => setTimeout(r, 1500));
+  ok(await ev(`return window.__calls.filter(function(c){return /live=1/.test(c.url)}).length`) - idle0 <= 1, "idle: no request churn while nothing happens (one held request)");
+  // The doctor is mid-sentence when the reply lands: the keyboard stays up and the draft stays.
+  await ev(`var x=document.getElementById("bcTx"); x.focus(); x.value="I was about to"; x.dispatchEvent(new Event("input")); return 1;`);
+  ok(await waitFor(`return window.__calls.some(function(c){return c.body.action==="typing" && c.body.id==="SMD-ABC123"})`), "typing is signalled to the developer");
+  await ev(`window.__t0=Date.now(); window.__devReply("SMD-ABC123", "Thanks, we found it. Fix in the next update."); return 1;`);
+  ok(await waitFor(`return /we found it/.test(document.getElementById("bugcRoot").innerText)`, 6000), "the developer's reply appears in the open chat, no reopening");
+  const lat = await ev(`return Date.now()-window.__t0`);
+  ok(lat < 800, "and it lands at once, like a messenger (" + lat + " ms)");
+  ok(await ev(`var x=document.getElementById("bcTx"); return document.activeElement===x && x.value==="I was about to"`) === true, "the keyboard stays up and the half-typed message is kept");
+  await ev(`window.__ev({ ticket: "SMD-ABC123", sender: "support", kind: "typing" }); return 1;`);
+  ok(await waitFor(`return !!document.querySelector("#bugcRoot .hs-typing")`, 3000), "\"StewardMD support is typing\" dots show while the developer writes");
+  ok(await ev(`return document.activeElement===document.getElementById("bcTx")`) === true, "still focused after the typing update");
+  await ev(`document.getElementById("bcTx").value=""; document.getElementById("bcTx").dispatchEvent(new Event("input")); return 1;`);
   ok(await waitFor(`return window.__calls.some(function(c){return c.body.action==="seen" && c.body.id==="SMD-ABC123"})`), "and is marked read at once (the chat is on screen)");
   await ev(`document.getElementById("bcTx").value="Great, thank you"; document.getElementById("bcTx").dispatchEvent(new Event("input")); document.getElementById("bcSend").click(); return 1;`);
   ok(await waitFor(`return window.__calls.some(function(c){return c.body.action==="reply" && c.body.text==="Great, thank you"})`), "the doctor replies from the chat composer");

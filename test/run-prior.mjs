@@ -106,6 +106,24 @@ try {
   ok(bad.lead === "DENGUE", "counts · malformed counts fall back to the tiers");
   await ev(`localStorage.removeItem("smd_prior_counts"); return 1`);
 
+  // ---- the doctor's own switch (owner, 2026-09-27: "prevalence based order should be optional") ----
+  await ev(`localStorage.removeItem("smd_prior_v1"); return 1`);
+  ok(await load(BASE), "switch · app loads without ?prior");
+  ok((await ev(`return DX._prior()`)) === false, "switch · off by default");
+  const sw = async () => JSON.parse(await ev(`try{DX.openWorkspace();}catch(e){} DX.reset&&DX.reset(); DX.addFindings(["fever","rash","myalgiaArthralgia"]);
+    var s=document.querySelector('#dxPriorSw'), l=s&&s.closest('label'), ids=[].map.call(document.querySelectorAll('.dx-row-head[data-id]'),function(h){return h.getAttribute('data-id');});
+    return JSON.stringify({has:!!s, on:!!(s&&s.checked), text:l?l.innerText:'', ids:ids, wide:(function(){var b=document.querySelector('#dxOverlay .dx-body');return !b||b.scrollWidth<=b.clientWidth+1;})()});`));
+  let st = await sw();
+  ok(st.has && !st.on && /common diagnoses first/i.test(st.text) && !/\u2014/.test(st.text), `switch · shown under "All possibilities", unticked, plain wording ("${st.text.replace(/\s+/g, " ").slice(0, 60)}...")`);
+  ok(st.wide, "switch · no horizontal overflow at phone width");
+  await ev(`var s=document.querySelector('#dxPriorSw'); s.checked=true; s.dispatchEvent(new Event('change',{bubbles:true})); return 1`);
+  st = await sw();
+  ok(st.on && (await ev(`return localStorage.getItem("smd_prior_v1")`)) === "1" && (await ev(`return DX._prior()`)) === true, "switch · ticking it turns the prior on and remembers it on this device");
+  ok(st.ids.indexOf("DENGUE") >= 0 && st.ids.indexOf("DENGUE") < st.ids.indexOf("CHIKUNGUNYA"), `switch · on: the commoner dengue sits above chikungunya (${st.ids.slice(0, 4).join(", ")})`);
+  await ev(`var s=document.querySelector('#dxPriorSw'); s.checked=false; s.dispatchEvent(new Event('change',{bubbles:true})); return 1`);
+  ok((await ev(`return localStorage.getItem("smd_prior_v1")`)) === "0" && (await ev(`return DX._prior()`)) === false, "switch · unticking turns it off again");
+  await ev(`localStorage.removeItem("smd_prior_v1"); return 1`);
+
   console.log(fails === 0 ? "\nALL GREEN: prevalence prior" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); setTimeout(() => process.exit(fails === 0 ? 0 : 1), 300); }

@@ -135,8 +135,8 @@ import { getRemoteConfig, setRemoteConfig } from "../../_remoteconfig.js";
 import { lookupUidByEmail, getUserRecord, setUserDisabled, mergeUserClaims } from "../../_fbadmin.js";
 import { getAnalytics } from "../../_analytics.js";
 import { sseFrames, sseFrameText, sseFrameUsage } from "../../_sse_parse.js";
-import { listTickets as listSupportTickets, getTicket as getSupportTicket, addMessage as addSupportMessage, setStatus as setSupportStatus, shotKey as supportShotKey, shotResponse as supportShotResponse, markSeenBySupport } from "../../_support.js";
-import { logEvent as logSupportEvent, eventsSince as supportEventsSince, headSeq as supportHeadSeq } from "../../_support_live.js";
+import { listTickets as listSupportTickets, getTicket as getSupportTicket, addMessage as addSupportMessage, shotKey as supportShotKey, shotResponse as supportShotResponse, markSeenBySupport } from "../../_support.js";
+import { logEvent as logSupportEvent, eventsSince as supportEventsSince, headSeq as supportHeadSeq, waitEvents as supportWaitEvents, recentMsgs as supportRecentMsgs, mergeMsgs as supportMergeMsgs, mergeIndex as supportMergeIndex } from "../../_support_live.js";
 import { sendNativeToAll } from "../../_nativepush.js";
 import { answerCacheKey, getCachedAnswer, putCachedAnswer, getRuntimeCfg as getMaikCfg, setRuntimeCfg as setMaikCfg, cacheEligibleCtx, kbFingerprint } from "../../_maik_cache.js";
 import { scrubMetaTalk, metaTalkStream } from "../../_maik_metatalk.js";   // no "the passage you sent" talk (2026-09-26)
@@ -1200,7 +1200,7 @@ export async function onRequest(context) {
 
   // AI Control Center admin console APIs (owner-gated): model switch, quota editor, global rollup,
   // emergency kill switch, runtime budget, audit log. Every mutation is written to the audit log.
-  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config" || seg === "admin/analytics" || seg === "admin/support" || seg === "admin/support-reply" || seg === "admin/support-shot" || seg === "admin/support-live" || seg === "admin/support-seen" || seg === "admin/maik-config" || seg === "admin/maik-feedback") {
+  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config" || seg === "admin/analytics" || seg === "admin/support" || seg === "admin/support-reply" || seg === "admin/support-shot" || seg === "admin/support-live" || seg === "admin/support-seen" || seg === "admin/support-typing" || seg === "admin/maik-config" || seg === "admin/maik-feedback") {
     const url = new URL(request.url);
     if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
     const store = usageKv(env);
@@ -1239,14 +1239,32 @@ export async function onRequest(context) {
     // Support tickets: GET list (?status=open|resolved) or a single thread (?id=); POST reply/resolve/reopen.
     if (seg === "admin/support") {
       const u2 = new URL(request.url), tid = u2.searchParams.get("id");
-      if (tid) return json({ ticket: await getSupportTicket(store, tid) });
-      return json({ tickets: await listSupportTickets(store, u2.searchParams.get("status") || "") });
+      if (tid) {
+        const t = await getSupportTicket(store, tid);
+        if (t) supportMergeMsgs(t, await supportRecentMsgs(env, { ticket: t.id, since: Date.now() - 10 * 60 * 1000 }));
+        return json({ ticket: t });
+      }
+      const st = u2.searchParams.get("status") || "";
+      const rows = await supportMergeIndex(env, await listSupportTickets(store, st), Date.now() - 10 * 60 * 1000);
+      return json({ tickets: st === "open" ? rows.filter((r) => r.status !== "resolved") : st ? rows.filter((r) => r.status === st) : rows });
     }
     // Live feed for the Help & Support inbox: every event after ?after=<seq> (D1, strongly consistent).
     if (seg === "admin/support-live") {
       const a = new URL(request.url).searchParams.get("after");
       if (a == null || a === "") return json({ ok: true, live: true, seq: await supportHeadSeq(env, null), events: [] });
-      return json({ ok: true, ...(await supportEventsSince(env, { after: +a })) });
+      // ?wait=<s> long-poll: answers the moment a doctor writes. ?fast=1 while a conversation is open.
+      const u3 = new URL(request.url).searchParams;
+      const wait = Math.min(25, Math.max(0, +u3.get("wait") || 0)) * 1000;
+      return json({ ok: true, ...(await supportWaitEvents(env, { after: +a, waitMs: wait, tickMs: u3.get("fast") ? 350 : 1200 })) });
+    }
+    // "typing…" on the doctor's screen while the developer writes a reply. Live log only.
+    if (seg === "admin/support-typing") {
+      if (request.method !== "POST") return json({ error: "method" }, 405);
+      let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
+      const t = await getSupportTicket(store, String(b.id || ""));
+      if (!t) return json({ ok: false, error: "not-found" }, 404);
+      await logSupportEvent(env, { ticket: t.id, owner: t.owner, sender: "support", kind: "typing", ts: Date.now() });
+      return json({ ok: true });
     }
     // The developer opened a conversation: clear the inbox dot and tell the doctor it was read.
     if (seg === "admin/support-seen") {
@@ -1269,12 +1287,11 @@ export async function onRequest(context) {
       let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
       const id = String(b.id || ""); const hasText = !!String(b.text || "").trim();
       const resolve = b.resolve === true || b.status === "resolved"; const reopen = b.status === "open"; const working = b.status === "in_progress";
-      let t = null;
-      if (hasText) t = await addSupportMessage(store, id, "support", b.text, Date.now(), resolve ? "resolved" : (reopen ? "open" : (working ? "in_progress" : undefined)));
-      else if (resolve) t = await setSupportStatus(store, id, "resolved", Date.now());
-      else if (reopen) t = await setSupportStatus(store, id, "open", Date.now());
-      else if (working) t = await setSupportStatus(store, id, "in_progress", Date.now());
-      else return json({ ok: false, error: "nothing-to-do" }, 400);
+      if (!hasText && !resolve && !reopen && !working) return json({ ok: false, error: "nothing-to-do" }, 400);
+      // Fold in the doctor's latest messages from D1 first: this edge's KV copy can lag theirs, and
+      // writing a stale copy back would drop what they just sent.
+      const recent = await supportRecentMsgs(env, { ticket: id, since: Date.now() - 10 * 60 * 1000 });
+      const t = await addSupportMessage(store, id, "support", hasText ? b.text : "", Date.now(), resolve ? "resolved" : (reopen ? "open" : (working ? "in_progress" : undefined)), recent);
       if (!t) return json({ ok: false, error: "not-found" }, 404);
       // A resolved bug drops its screenshot: it can show a patient, and the fix no longer needs it.
       if (resolve && t.kind === "bug") { try { await store.delete(supportShotKey(id)); } catch (e) {} }
