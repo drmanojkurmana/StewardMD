@@ -482,7 +482,7 @@
         "A CSV with one row per isolate: patient ID, date, specimen, location, organism, then one column per antibiotic holding S, I or R. A WHONET export saved as CSV with interpretations works (columns such as AMK_ND30 or MEM_NM are recognised). StewardMD keeps the first isolate per patient per organism (CLSI M39), applies the MRSA rule to beta-lactams, and computes % susceptible (intermediate counts as not susceptible).") + "</p>" +
       '<button class="v2-btn" data-v2="template">Download a template</button>' +
       '<label class="v2-lab" for="v2Name">Name</label><input class="v2-in" id="v2Name" value="' + esc((st.imp && st.imp.name) || (loc && loc.name) || "") + '" placeholder="e.g. City Hospital 2025">' +
-      '<label class="v2-lab" for="v2Period">Period</label><input class="v2-in" id="v2Period" value="' + esc((st.imp && st.imp.period) || "") + '" placeholder="e.g. January to December 2025">' +
+      periodHtml((st.imp && st.imp.period) || (loc && loc.period) || "") +
       '<label class="v2-lab" for="v2File">File (CSV)</label><input type="file" id="v2File" accept=".csv,.txt,text/csv">' +
       '<label class="v2-lab" for="v2Paste">or paste the CSV</label><textarea class="v2-in" id="v2Paste" rows="4" placeholder="organism,specimen,setting,n,AMK,MEM,..."></textarea>' +
       '<button class="v2-btn v2-pri" data-v2="imp-check">Check</button></section>';
@@ -505,6 +505,34 @@
     return h + "</div>";
   }
 
+  /* ------------------------------------------------------------------ period --- */
+  // SMD-11: the period is picked, not typed: From and To as month and year, stored in one form
+  // ("Jan 2025 to Dec 2025") so every saved antibiogram and export reads the same way.
+  var MONS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  function parsePeriod(txt) {
+    var m = /^([A-Z][a-z]{2}) (\d{4}) to ([A-Z][a-z]{2}) (\d{4})$/.exec(String(txt || "").trim());
+    if (m && MONS.indexOf(m[1]) >= 0 && MONS.indexOf(m[3]) >= 0) return { fm: MONS.indexOf(m[1]), fy: +m[2], tm: MONS.indexOf(m[3]), ty: +m[4] };
+    var y = new Date().getFullYear() - 1; return { fm: 0, fy: y, tm: 11, ty: y };
+  }
+  function fmtPeriod(p) { return MONS[p.fm] + " " + p.fy + " to " + MONS[p.tm] + " " + p.ty; }
+  function periodHtml(txt) {
+    var p = parsePeriod(txt), now = new Date().getFullYear(), years = [];
+    for (var y = now; y >= 2000; y--) years.push(y);
+    var mo = function (sel) { return MONS.map(function (m, i) { return '<option value="' + i + '"' + (i === sel ? " selected" : "") + ">" + m + "</option>"; }).join(""); };
+    var yo = function (sel) { return years.map(function (y) { return '<option value="' + y + '"' + (y === sel ? " selected" : "") + ">" + y + "</option>"; }).join(""); };
+    return '<span class="v2-lab" id="v2PerLab">Period</span><div class="v2-per" role="group" aria-labelledby="v2PerLab">' +
+      '<div class="v2-per-r"><span class="v2-per-k">From</span><select class="v2-sel" id="v2PerFm" aria-label="From month">' + mo(p.fm) + '</select><select class="v2-sel" id="v2PerFy" aria-label="From year">' + yo(p.fy) + "</select></div>" +
+      '<div class="v2-per-r"><span class="v2-per-k">To</span><select class="v2-sel" id="v2PerTm" aria-label="To month">' + mo(p.tm) + '</select><select class="v2-sel" id="v2PerTy" aria-label="To year">' + yo(p.ty) + "</select></div></div>";
+  }
+  // { text, err }: the picked period in the standard form, or why it cannot be used.
+  function readPeriod(root) {
+    var g = function (id) { var el = root.querySelector("#" + id); return el ? +el.value : NaN; };
+    var p = { fm: g("v2PerFm"), fy: g("v2PerFy"), tm: g("v2PerTm"), ty: g("v2PerTy") };
+    if ([p.fm, p.fy, p.tm, p.ty].some(isNaN)) return { text: "", err: "" };
+    if (p.ty * 12 + p.tm < p.fy * 12 + p.fm) return { text: fmtPeriod(p), err: "The period ends before it starts. Check the From and To months." };
+    return { text: fmtPeriod(p), err: "" };
+  }
+
   /* ------------------------------------------------------------------- files --- */
   function nativePdf() { return !!(window.SMD_NATIVE && window.SMD_NATIVE.sharePdfFromHtml); }
   function saveText(text, name, mime) {
@@ -520,24 +548,60 @@
     } catch (e) {}
     return Promise.resolve();
   }
+  // SMD-12: a StewardMD letterhead (mark, source or hospital, period, export date) and a table that
+  // always fits a portrait page: fixed layout, the type steps down as columns grow, and past 10
+  // antibiotics the heads switch to laboratory codes with a key underneath.
+  // The StewardMD SD mark, inlined: the native PDF renderer loads the page with no base URL.
+  var PDF_MARK = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAMAAAArteDzAAAAYFBMVEUkY0gkY0gkY0gkY0gkY0gkY0gkY0gkY0gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABrQxRTAAAAIHRSTlMA/G7PTi2ujgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOXRdfwAAAJKSURBVHjaxZlZVsMwDEUTjfvfMS0txE0kR4MP+BPqW1dPk+Vt+9vFBPpYQLyMqLj/LoEVXBqIr6VdLMluLG0xdbcXNg4ru7ugKhDu+3Lqh+bE/PSr4W/U++2jFw3KUUOjswcBlqnk247LVJztK1JhvqtGxZvQqVDfFsWAv1FWegoYXZO/HgOfiQcWRw7x7VmU1v5uBwrno2lZ7RiguP0v9JnAROaFMQmFIZmjW8FSUDjncqGuUITRwkjhCIR4YeRoBKpbwrgWpqdqiyIymoK8E0C02srbl3hWa36KSYz5Ea3gdxvvDRIoYmfTP79Mp6rqvexXGwnUcrCWqj9PHRmLnRr41EGieosSkIibZ7UkwrhpTaohUa5a0ZUqV4ko6QZnqiURpZ3rMwiO5KmtJpAGSZwoqlGR5lF0UMP9CryTkEyiCGvXi3kUcYlqSmQWAcgngmMPQ5NqR5G2qIdE9OFpDSqjG5llqiU7ONVdJlX/6Zt0kUivJgbPUOgYERUAhvYAQp4u3r/MKzkFI13so9K04eK7kmd/o9F0GRK5dwiwg/nScoLBzN/BxuZ47Lc1Mu7xb4v0LTyKkmUYCJSgYAqQWILnzJ0Vp+Fy+aDkDgohqG5LqZhqs2JUTs4BQlTKlpUIFdLNcIAq+Xv9LZUr7fAdVUpDyzkV9tpUY0al8oDZp/4m+M5oVZxGpjQGPtoLsOa1sm0t6iOJ02u0jP3Z+mSw3phnudTOG4A3PpHe3I1l4aOCOZ9f9Fbzwg7PCWtelY4536OZo7UzzOn6ArRoDc6RCuFDAAAAAElFTkSuQmCC";
+  function pdfCode(d) {
+    var D = R().DRUGS[d] || {}, c = (D.codes || []).filter(function (x) { return /^[A-Z]{2,4}$/.test(x); })[0];
+    return c || String(D.label || d).slice(0, 4);
+  }
   function pdfHtml() {
     var t = S().table(st.scope, st.spec, st.set), R0 = R(), info = S().exportInfo(t, S().scopeLabel(st.scope));
     var drugs = t.drugs.filter(function (d) { return t.orgs.some(function (o) { var c = o.cells[d]; return c && c.act !== "hide"; }); });
-    var head = "<tr><th>Organism</th><th>Isolates</th>" + drugs.map(function (d) { return "<th>" + esc(R0.drugLabel(d)) + "</th>"; }).join("") + "</tr>";
-    var body = t.orgs.map(function (o) {
-      var low = t.pooled ? o.lowOnly : (o.lowN || o.noN);
-      return "<tr" + (low ? ' class="low"' : "") + "><td><i>" + esc(orgLabel(o)) + "</i>" + (o.derived ? " (combined)" : "") + "</td><td>" + (o.n == null ? "not given" : fmtN(o.n)) + (low ? " (under 30)" : "") + (t.pooled ? ", " + o.k + " inst." : "") + "</td>" + drugs.map(function (d) {
-        var c = o.cells[d]; if (!c) return "<td></td>"; if (c.act === "intrinsic") return "<td>IR</td>"; if (c.act !== "keep" && c.act !== "caution") return "<td></td>";
-        return "<td>" + num(c.s) + (c.act === "caution" ? "*" : "") + "</td>";
-      }).join("") + "</tr>";
-    }).join("");
+    // Past 14 antibiotics the table is split into stacked blocks (each repeats organism and isolates)
+    // rather than shrunk until it cannot be read.
+    var PER = 14, blocks = [];
+    for (var bi = 0; bi < drugs.length; bi += PER) blocks.push(drugs.slice(bi, bi + PER));
+    if (!blocks.length) blocks.push([]);
+    var n = Math.max.apply(null, blocks.map(function (x) { return x.length; })), codes = n > 10, fs = n <= 8 ? 10 : n <= 11 ? 9 : 8;
+    var orgW = 20, isoW = 10;
+    var table = function (ds) {
+      var dw = ds.length ? ((100 - orgW - isoW) / ds.length).toFixed(3) : 0;
+      var cols = '<colgroup><col style="width:' + orgW + '%"><col style="width:' + isoW + '%">' + ds.map(function () { return '<col style="width:' + dw + '%">'; }).join("") + "</colgroup>";
+      var head = "<tr><th class=\"l\">Organism</th><th>Isolates</th>" + ds.map(function (d) { return "<th>" + esc(codes ? pdfCode(d) : R0.drugLabel(d)) + "</th>"; }).join("") + "</tr>";
+      var body = t.orgs.map(function (o) {
+        var low = t.pooled ? o.lowOnly : (o.lowN || o.noN);
+        return "<tr" + (low ? ' class="low"' : "") + '><td class="l"><i>' + esc(orgLabel(o)) + "</i>" + (o.derived ? " (combined)" : "") + "</td><td>" + (o.n == null ? "not given" : fmtN(o.n)) + (low ? " (under 30)" : "") + (t.pooled ? ", " + o.k + " inst." : "") + "</td>" + ds.map(function (d) {
+          var c = o.cells[d]; if (!c) return "<td></td>"; if (c.act === "intrinsic") return '<td class="ir">IR</td>'; if (c.act !== "keep" && c.act !== "caution") return "<td></td>";
+          return '<td class="' + (c.act === "caution" || low ? "cau" : band(c.s)) + '">' + num(c.s) + (c.act === "caution" ? "*" : "") + "</td>";
+        }).join("") + "</tr>";
+      }).join("");
+      return "<table>" + cols + "<thead>" + head + "</thead><tbody>" + body + "</tbody></table>";
+    };
+    var tables = blocks.map(function (ds, k) { return (blocks.length > 1 ? '<div class="part">Antibiotics ' + (k * PER + 1) + " to " + (k * PER + ds.length) + " of " + drugs.length + "</div>" : "") + table(ds); }).join("");
+    var key = codes ? '<p class="key"><b>Antibiotic codes:</b> ' + drugs.map(function (d) { return "<b>" + esc(pdfCode(d)) + "</b> " + esc(R0.drugLabel(d)); }).join(", ") + ".</p>" : "";
     var checks = info.cautions.map(function (x) { return x.text; }).concat(info.lowCells);
-    return "<!doctype html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Antibiogram</title><style>body{font:11px -apple-system,Segoe UI,Roboto,sans-serif;color:#111;background:#fff;margin:24px}table{border-collapse:collapse;width:100%}th,td{border:1px solid #bbb;padding:3px 4px;text-align:center}th:first-child,td:first-child{text-align:left}tr.low td{color:#666;font-style:italic}h1{font-size:16px}p,li{color:#333}@media print{body{margin:10mm}}</style></head><body>" +
-      "<h1>Antibiogram: " + esc(info.source) + "</h1><p>" + esc(info.specimen) + ", " + lc(esc(info.setting)) + ". Period: " + esc(info.period) + ".<br>" + esc(info.citation) + "</p>" +
-      "<p>Figures: " + esc(info.measure) + ". IR = intrinsic resistance; * = failed a data check" + (info.pooled ? " or from fewer than 3 institutions" : "") + ", shown for reference only (listed below); rows in italics rest on fewer than 30 isolates and are unstable (CLSI M39).</p>" +
-      "<table><thead>" + head + "</thead><tbody>" + body + "</tbody></table>" +
-      (checks.length ? "<h2 style=\"font-size:13px\">Checks</h2><ul>" + checks.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : "") +
-      "<p>Exported from StewardMD on " + esc(info.exported) + " (data version " + esc(info.version) + "). Decision support only; verify against the source.</p></body></html>";
+    var mark = '<img class="mk" alt="StewardMD" src="' + PDF_MARK + '">';
+    var css = "@page{size:A4 portrait;margin:12mm}*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}" +
+      "body{font:" + fs + "px/1.35 -apple-system,'SF Pro Text','Helvetica Neue',Segoe UI,Roboto,sans-serif;color:#111;background:#fff;margin:0;padding:18px}" +
+      ".lh{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-bottom:2px solid #246348;padding-bottom:10px;margin-bottom:12px}" +
+      ".brand{display:flex;align-items:center;gap:9px}.mk{width:30px;height:30px;display:block}.wm{font:700 17px -apple-system,'SF Pro Display','Helvetica Neue',sans-serif;letter-spacing:-.01em;color:#0f172a}.wm span{color:#246348}.tag{font:500 9px -apple-system,sans-serif;color:#64748b;text-transform:uppercase;letter-spacing:.08em}" +
+      ".meta{text-align:right;font:500 9.5px/1.45 -apple-system,sans-serif;color:#334155;max-width:60%}.meta b{display:block;font:700 12px -apple-system,sans-serif;color:#0f172a}" +
+      "h1{font:700 13px -apple-system,sans-serif;margin:0 0 4px}p{color:#334155;margin:0 0 6px;font-size:9px}.key{margin-top:6px}" +
+      "table{border-collapse:collapse;width:100%;table-layout:fixed;margin:6px 0}th,td{border:1px solid #cbd5e1;padding:3px 2px;text-align:center;overflow-wrap:anywhere;word-break:break-word}" +
+      "th{background:#f1f5f9;font-weight:700;vertical-align:bottom;hyphens:auto}.l{text-align:left;padding-left:4px}thead{display:table-header-group}tr{page-break-inside:avoid}" +
+      "td.b5{background:#dcfce7}td.b4{background:#ecfccb}td.b3{background:#fef9c3}td.b2{background:#ffedd5}td.b1{background:#fee2e2}td.ir{color:#64748b}td.cau{color:#64748b}tr.low td{color:#64748b;font-style:italic;background:#fff}" +
+      ".part{font:600 9px -apple-system,sans-serif;color:#246348;margin:10px 0 0}h2{font:700 10.5px -apple-system,sans-serif;margin:12px 0 4px}ul{margin:0;padding-left:16px;font-size:8.5px;color:#334155}.ft{margin-top:12px;border-top:1px solid #e2e8f0;padding-top:6px;font-size:8.5px;color:#64748b}";
+    return "<!doctype html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Antibiogram</title><style>" + css + "</style></head><body>" +
+      '<header class="lh"><div class="brand">' + mark + '<div><div class="wm">Steward<span>MD</span></div><div class="tag">Cumulative antibiogram</div></div></div>' +
+      '<div class="meta"><b>' + esc(info.source) + "</b>Period: " + esc(info.period || "not stated") + "<br>Exported " + esc(info.exported) + "</div></header>" +
+      "<h1>" + esc(info.specimen) + ", " + lc(esc(info.setting)) + "</h1>" + (info.citation ? "<p>" + esc(info.citation) + "</p>" : "") +
+      "<p>Figures: " + esc(info.measure) + ". Shading by % susceptible: 90 or more, 80 to 89, 60 to 79, 40 to 59, under 40. IR = intrinsic resistance; * = failed a data check" + (info.pooled ? " or from fewer than 3 institutions" : "") + ", shown for reference only (listed below); rows in italics rest on fewer than 30 isolates and are unstable (CLSI M39).</p>" +
+      tables + key +
+      (checks.length ? "<h2>Checks</h2><ul>" + checks.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : "") +
+      '<p class="ft">Exported from StewardMD on ' + esc(info.exported) + " (data version " + esc(info.version) + "). Decision support only; verify against the source. stewardmd.in</p></body></html>";
   }
 
   /* ------------------------------------------------------------------ events --- */
@@ -588,7 +652,8 @@
     return false;
   }
   function runImport(api) {
-    var root = api.root, name = (root.querySelector("#v2Name") || {}).value || "", period = (root.querySelector("#v2Period") || {}).value || "";
+    var root = api.root, name = (root.querySelector("#v2Name") || {}).value || "", per = readPeriod(root), period = per.text;
+    if (per.err) { st.imp = { name: name, period: period, res: { rows: [], errors: [per.err], warnings: [] } }; api.render(); return; }
     var file = root.querySelector("#v2File"), paste = (root.querySelector("#v2Paste") || {}).value || "";
     var go = function (text) {
       var res = st.impMode === "summary" ? R().importSummaryCsv(text, { measure: st.impMeasure }) : R().importIsolateCsv(text);
@@ -637,6 +702,10 @@
 
   var css = [
     ".v2{display:flex;flex-direction:column;gap:12px;padding-bottom:28px}",
+    ".v2-per{display:flex;flex-direction:column;gap:8px;margin-top:4px}.v2-per-r{display:flex;align-items:center;gap:8px}.v2-per-k{flex:0 0 40px;font:600 13px var(--f);color:var(--mut)}.v2-per-r .v2-sel{flex:1 1 0}",
+    // SMD-13: nothing on these screens may push the page sideways (a long drug pair in the pickers
+    // widened the row on iOS and shifted the exports and the footer past the left edge).
+    ".v2{min-width:0;max-width:100%;overflow-x:clip}.v2>*{min-width:0;max-width:100%;box-sizing:border-box}.v2-wrow>*,.v2-wl{min-width:0}.v2-foot,.v2-foot p,.v2-wis p{overflow-wrap:anywhere}.v2-acts{max-width:100%}",
     ".v2-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.v2-lab{font:800 11px var(--f);text-transform:uppercase;letter-spacing:.05em;color:var(--mut);display:block;margin-top:6px}",
     ".v2-sel{flex:1;min-width:0;max-width:100%;border:1px solid var(--line);border-radius:10px;padding:10px;font:700 14px var(--f);background:var(--panel);color:var(--ink)}",
     ".v2-chips{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px}.v2-chip{flex:0 0 auto;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:8px 12px;font:700 13px var(--f);min-height:36px}",
@@ -772,5 +841,5 @@
     // Redesign: three tabs; Sources opens from the action row under the table.
     tabs: function () { return !on() ? null : pro() ? [["resistance", "Resistance"], ["mine", "My hospital"]] : [["resistance", "Resistance rates"], ["sources", "Sources"], ["mine", "My hospital"]]; },
     pro: pro,
-    _cellSheet: cellSheet, _pdfHtml: pdfHtml };
+    _cellSheet: cellSheet, _pdfHtml: pdfHtml, _parsePeriod: parsePeriod, _fmtPeriod: fmtPeriod };
 })();

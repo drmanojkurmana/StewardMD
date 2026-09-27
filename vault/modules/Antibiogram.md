@@ -168,6 +168,15 @@ a PDF. Every figure in the table is a `<button>` inside its cell (Tab, Enter or 
 its headers for screen readers; the button's label names organism, agent and value). Search says what
 it matched, and says so when nothing did.
 
+PDF (QA sheet SMD-12, 2026-09-27): StewardMD letterhead (the SD mark, inlined as `PDF_MARK` because the
+native renderer, `VisionOcr.htmlToPdf`, loads the HTML with no base URL; source; period; export date).
+The native page is fixed portrait, so the table never grows sideways: past 14 antibiotics it splits into
+stacked blocks that repeat organism and isolates, and past 10 per block the heads become lab codes
+(`pdfCode`, first 2-4 letter code in `DRUGS[d].codes`) with a key. Cells shaded by % susceptible band.
+My hospital period (SMD-11) is picked as From/To month and year and stored as `Jan 2025 to Dec 2025`
+(`_parsePeriod`/`_fmtPeriod`); an end before the start is refused at Check. Test:
+`test/run-antibiogram-export-ui.mjs` (also guards SMD-13, nothing on Resistance past the screen edge).
+
 ## Gotchas
 - `ABG_STORE.table()` results are memoised and shared: never mutate them. The memo clears on load and
   on local import changes.
