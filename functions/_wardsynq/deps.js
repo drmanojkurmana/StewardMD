@@ -7,7 +7,7 @@
  */
 import { identify } from "../_usage.js";
 import { verifyFirebaseClaims } from "../_fbauth.js";
-import { verifyStaffSession } from "../_opd_auth.js";
+import { liveStaffSession } from "../_opd_org_store.js";
 import { hmacPseudonym } from "../_connect/audit.js";
 import { D1Repository } from "./repository-d1.js";
 import { orgForTenant, authorizeOrg } from "./org.js";
@@ -20,6 +20,11 @@ async function claimsOf(request, env) {
   try { return (await verifyFirebaseClaims(tok, env)) || {}; } catch { return {}; }
 }
 
+async function clinicalStaffSession(env, token, nowMs) {
+  const ss = await liveStaffSession(env, token, nowMs);
+  return ss && !ss.mfaSetupOnly ? ss : null;
+}
+
 /** The actor-resolution seams. `overrides` win, key by key, so a test replaces only what it must. */
 function actorDeps(env, overrides) {
   overrides = overrides || {};
@@ -27,7 +32,8 @@ function actorDeps(env, overrides) {
     db: "db" in overrides ? overrides.db : env.CONNECT_DB,
     identifyFn: overrides.identifyFn || identify,
     claimsFn: overrides.claimsFn || claimsOf,
-    staffSession: overrides.staffSession || verifyStaffSession,
+    // SEC-10: the same live-session check as the queue router (revoked by a reset, or owing two-step setup = no session).
+    staffSession: overrides.staffSession || clinicalStaffSession,
     orgForTenant: "orgForTenant" in overrides ? overrides.orgForTenant : orgForTenant,
     authorizeOrg: overrides.authorizeOrg || authorizeOrg,
     // The hospital's expired-registration signing rule (hr-records.js); asked only when that rule is on.
@@ -48,4 +54,4 @@ function recordDeps(env, tenantId, overrides) {
   };
 }
 
-export { claimsOf, actorDeps, recordDeps };
+export { claimsOf, clinicalStaffSession, actorDeps, recordDeps };

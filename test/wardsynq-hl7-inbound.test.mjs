@@ -39,14 +39,21 @@ const ORU = [
   "OBX|6|NM|GONE^Deleted^L||1||||||D",
 ].join(CR);
 
-test("hl7Date never defaults: precision is kept, a zone is honoured, nonsense is null", () => {
+test("hl7Date never defaults the VALUE, but a bare timestamp is the sender's local time, not UTC", () => {
   assert.equal(hl7Date("20260808101500+0530"), "2026-08-08T10:15:00+05:30");
   assert.equal(hl7Date("20260808"), "2026-08-08");
   assert.equal(hl7Date("202608"), "2026-08");
   assert.equal(hl7Date("2026"), "2026");
-  assert.equal(hl7Date("2026080810"), "2026-08-08T10:00:00Z");
+  // Was, incorrectly, "...Z" (UTC) - OPS-03/F3: per HL7 v2.5.1, a timestamp with no zone is the
+  // SENDING FACILITY's local time. With no configured clock this defaults to Asia/Kolkata (+05:30),
+  // not UTC, because every sender this gateway has ever seen is an Indian HIS on its own local clock.
+  assert.equal(hl7Date("2026080810"), "2026-08-08T10:00:00+05:30");
   assert.equal(hl7Date("yesterday"), null);
   assert.equal(hl7Date(""), null);
+  // A configured offset (ctx.clock.offsetMinutes) is honoured over the Asia/Kolkata default.
+  assert.equal(hl7Date("2026080810", { offsetMinutes: 0 }), "2026-08-08T10:00:00+00:00");
+  // A configured named zone (ctx.clock.timeZone) wins over offsetMinutes.
+  assert.equal(hl7Date("2026080810", { timeZone: "Asia/Kolkata", offsetMinutes: 0 }), "2026-08-08T10:00:00+05:30");
 });
 
 test("ADT A01 -> SCCM 1.1: identifiers with their authorities, the visit number, the location as sent, diagnosis and allergy, Z-segments preserved and never read", () => {
@@ -59,7 +66,7 @@ test("ADT A01 -> SCCM 1.1: identifiers with their authorities, the visit number,
   assert.equal(sccm.patient.name.text, "Partner Testcase"); assert.equal(sccm.patient.gender, "female"); assert.equal(sccm.patient.birthDate, "1975-03-09");
   const e = sccm.encounters[0];
   assert.equal(e.id, "V-2026-001"); assert.equal(e.class, "IPD"); assert.equal(e.status, "in-progress");
-  assert.equal(e.period.start, "2026-08-08T10:00:00Z");
+  assert.equal(e.period.start, "2026-08-08T10:00:00+05:30", "PV1-44 is bare - the sender's local time, Asia/Kolkata by default");
   assert.deepEqual(e.location, { facility: "GENHOSP", ward: "MED-A", bed: "12-B" }, "the sender's ward and bed, as sent");
   assert.deepEqual(e.identifiers, [{ system: "GENHOSP", type: "VN", value: "V-2026-001" }]);
   assert.equal(sccm.conditions[0].code.coding[0].system, CODING_SYSTEMS.I10);
@@ -85,20 +92,75 @@ test("ADT A01 -> SCCM 1.1: identifiers with their authorities, the visit number,
 test("ADT A03 finishes the visit, A02 moves it, A08 is an update of the same visit, an unknown class is named", () => {
   const a03 = hl7ToSccm(parseHl7(A01.replace("ADT^A01^ADT_A01", "ADT^A03^ADT_A03").replace("EVN|A01", "EVN|A03").replace(PV1(), PV1({ 45: "20260810090000" }))), {});
   assert.equal(a03.sccm.encounters[0].status, "finished");
-  assert.equal(a03.sccm.encounters[0].period.end, "2026-08-10T09:00:00Z");
+  assert.equal(a03.sccm.encounters[0].period.end, "2026-08-10T09:00:00+05:30");
   const a02 = hl7ToSccm(parseHl7(A01.replace("ADT^A01^ADT_A01", "ADT^A02^ADT_A02").replace("MED-A^12^B", "ICU^3^A")), {});
   assert.deepEqual(a02.sccm.encounters[0].location, { facility: "GENHOSP", ward: "ICU", bed: "3-A" });
   assert.equal(a02.sccm.encounters[0].id, "V-2026-001", "the same visit: the record versions, it does not fork");
   const weird = hl7ToSccm(parseHl7(A01.replace("PV1|1|I|", "PV1|1|Q|")), {});
   assert.equal(weird.sccm.encounters[0].class, null);
   assert.ok(weird.warnings.some((w) => /PV1-2 patient class "Q"/.test(w)));
+  // OPS-11/F11: the warning used to claim "the adapter records IPD" while the code stored class: null.
+  assert.ok(weird.warnings.some((w) => /no class was filed/.test(w)), "the warning says what actually happened");
+  assert.ok(!weird.warnings.some((w) => /records IPD/.test(w)), "the warning no longer claims a class that was never filed");
+  // OPS-19/F19: U (Unknown, HL7 table 0004) is NOT silently recorded as IPD - a class the sender
+  // itself could not say is exactly the case the null-plus-warning path exists for.
+  const unknown = hl7ToSccm(parseHl7(A01.replace("PV1|1|I|", "PV1|1|U|")), {});
+  assert.equal(unknown.sccm.encounters[0].class, null, "an Unknown class is never recorded as a real admission");
+  assert.ok(unknown.warnings.some((w) => /PV1-2 patient class "U"/.test(w)));
+});
+
+test("OPS-10/F10: an ORC with no OBR names no service and is skipped, never filed under ORC-4's batching id", () => {
+  const orcOnly = [
+    "MSH|^~\\&|HIS|GENHOSP|WARDSYNQ|WSQ|20260808101500+0530||ORM^O01^ORM_O01|MSG0010|P|2.5.1",
+    "PID|1||H-77^^^GENHOSP^MR||Testcase^Partner||19750309|F",
+    PV1(),
+    S("ORC", { 1: "NW", 2: "PLC-1", 4: "GRP-99^LabBatchA^2.16.840.1^ISO" }),
+  ].join(CR);
+  const { sccm, warnings } = hl7ToSccm(parseHl7(orcOnly), {});
+  assert.equal(sccm.serviceRequests.length, 0, "no fabricated order was filed from ORC-4's batching id");
+  assert.ok(warnings.some((w) => /names no service \(OBR-4 empty or missing\)/.test(w)));
+
+  // With an OBR present, OBR-4 is what was ordered, as before.
+  const withObr = [
+    "MSH|^~\\&|HIS|GENHOSP|WARDSYNQ|WSQ|20260808101500+0530||ORM^O01^ORM_O01|MSG0011|P|2.5.1",
+    "PID|1||H-77^^^GENHOSP^MR||Testcase^Partner||19750309|F",
+    PV1(),
+    S("ORC", { 1: "NW", 2: "PLC-2" }),
+    S("OBR", { 1: "1", 2: "PLC-2", 4: "RENAL^Renal profile^L" }),
+  ].join(CR);
+  const r2 = hl7ToSccm(parseHl7(withObr), {});
+  assert.equal(r2.sccm.serviceRequests.length, 1);
+  assert.equal(r2.sccm.serviceRequests[0].code.text, "Renal profile");
+});
+
+test("OPS-20/F20: an SN value splits on the message's OWN component separator, not a hard-coded ^", () => {
+  // The baseline (^) case, still correct.
+  const withCaret = hl7ToSccm(parseHl7([
+    "MSH|^~\\&|LAB|GENHOSP|WARDSYNQ|WSQ|20260808120000||ORU^R01^ORU_R01|MSG0021|P|2.5.1",
+    "PID|1||H-77^^^GENHOSP^MR||Testcase^Partner||19750309|F",
+    S("OBR", { 1: "1", 2: "PLC-9", 3: "FIL-9", 4: "RENAL^Renal profile^L", 7: "20260808113000", 25: "F" }),
+    "OBX|1|SN|TITER^Titer^L||>^100|||||F",
+  ].join(CR)), {});
+  assert.equal(withCaret.sccm.observations[0].value.comparator, ">");
+  assert.equal(withCaret.sccm.observations[0].value.value, 100);
+
+  // MSH-2 declares "#" as the component separator (field separator stays "|"). Before the fix, the
+  // SN branch split on a hard-coded "^" regardless, so ">#100" came through as opaque text.
+  const withHash = hl7ToSccm(parseHl7([
+    "MSH|#~\\&|LAB|GENHOSP|WARDSYNQ|WSQ|20260808120000||ORU#R01#ORU_R01|MSG0022|P|2.5.1",
+    "PID|1||H-77#GENHOSP#MR||Testcase#Partner||19750309|F",
+    S("OBR", { 1: "1", 2: "PLC-9", 3: "FIL-9", 4: "RENAL#Renal profile#L", 7: "20260808113000", 25: "F" }),
+    "OBX|1|SN|TITER#Titer#L||>#100|||||F",
+  ].join(CR)), {});
+  assert.equal(withHash.sccm.observations[0].value.comparator, ">", "the sender's own separator (#), not the default ^");
+  assert.equal(withHash.sccm.observations[0].value.value, 100);
 });
 
 test("ORU R01 -> report over typed observations: NM, SN-like, ST, CE; the laboratory's flag carried never recomputed; deleted and unparseable named", () => {
   const { sccm, warnings } = hl7ToSccm(parseHl7(ORU), {});
   assert.equal(validateBundle(sccm).ok, true, JSON.stringify(validateBundle(sccm).errors));
   const rep = sccm.diagnosticReports[0];
-  assert.equal(rep.id, "FIL-9"); assert.equal(rep.status, "final"); assert.equal(rep.effectiveDateTime, "2026-08-08T11:30:00Z");
+  assert.equal(rep.id, "FIL-9"); assert.equal(rep.status, "final"); assert.equal(rep.effectiveDateTime, "2026-08-08T11:30:00+05:30");
   assert.deepEqual(rep.basedOn, { type: "ServiceRequest", id: "PLC-9" });
   assert.equal(sccm.serviceRequests[0].id, "PLC-9"); assert.equal(sccm.serviceRequests[0].status, "completed");
   assert.equal(sccm.observations.length, 5, "six OBX, one deleted (D) not carried");
@@ -110,7 +172,7 @@ test("ORU R01 -> report over typed observations: NM, SN-like, ST, CE; the labora
   assert.equal(bad.value.text, "not-a-number"); assert.ok(warnings.some((w) => /typed NM but carries/.test(w)));
   assert.ok(warnings.some((w) => /marked D \(deleted\/wrong\) and was not carried/.test(w)));
   assert.equal(rep.results.length, 5); assert.equal(rep.results[0].id, cr.id);
-  assert.equal(k.effectiveDateTime, "2026-08-08T11:30:00Z", "an OBX with no OBX-14 takes the report's time, never now");
+  assert.equal(k.effectiveDateTime, "2026-08-08T11:30:00+05:30", "an OBX with no OBX-14 takes the report's time, never now");
 });
 
 test("THE INTEGRATION PROFILE only narrows, and refuses before content is looked at", () => {
@@ -138,7 +200,7 @@ test("ACKs are ER7 with every value escaped, MSA-2 echoing the control id, and E
   const kind = { type: "ADT", event: "A01", controlId: "MSG|0001", sendingApp: "HIS^X", sendingFacility: "GEN&HOSP", processingId: "P" };
   const ack = buildAck(kind, { code: "AE", text: "held for a person: see ExchangeException/x", errors: [{ code: "207", name: "Application internal error", segment: "PID", detail: "held: wsq-xchg-1" }] }, { now: "2026-08-08T10:16:00.000Z", facility: "WSQ Ward", controlId: "ACK-1" });
   const lines = ack.split("\r").filter(Boolean);
-  assert.match(lines[0], /^MSH\|\^~\\&\|WardSynQ\|WSQ Ward\|HIS\\S\\X\|GEN\\T\\HOSP\|20260808101600\|\|ACK\^A01\^ACK\|ACK-1\|P\|2\.5\.1$/);
+  assert.match(lines[0], /^MSH\|\^~\\&\|WardSynQ\|WSQ Ward\|HIS\\S\\X\|GEN\\T\\HOSP\|20260808101600\+0000\|\|ACK\^A01\^ACK\|ACK-1\|P\|2\.5\.1$/);
   assert.equal(lines[1], "MSA|AE|MSG\\F\\0001|held for a person: see ExchangeException/x");
   assert.equal(lines[2], "ERR||PID^1|207^Application internal error^HL70357|E||||held: wsq-xchg-1");
   assert.ok(ack.endsWith("\r"));

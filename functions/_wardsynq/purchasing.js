@@ -43,7 +43,7 @@ import { RecordService, ListCeilingError } from "./service.js";
 import { VersionConflictError } from "./repository.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { chainState, approvalCovers, levelsFor, amountOf, allVerifications } from "./verification.js";
-import { levelsFrom, quantityOf, returnableFrom, toBaseUnit, dualDisplay, MOVE_TYPE as STOCK_TYPE } from "./stock.js";
+import { levelsFrom, issueStoreFor, quantityOf, returnableFrom, toBaseUnit, dualDisplay, replayMovement, MOVE_TYPE as STOCK_TYPE } from "./stock.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 /* Orders, receipts, approvals and suppliers are read whole (service.listAll, paged): a receipt or approval missed by a
@@ -51,6 +51,9 @@ const str = (v) => (v == null ? "" : String(v).trim());
  * ponytail: each page re-groups every version; a by-order index (or audit O20) is the upgrade. */
 const READ_MAX = 50000;
 const every = async (svc, type) => (await svc.listAll(type, { max: READ_MAX, throwOnTruncate: true })).rows;
+/* The item master's pack sizes, for matching a receipt to its line. A pharmacy role may not read it: then there are none,
+ * and a receipt in another unit is flagged as it always was, never guessed. */
+const itemMaster = async (svc) => { try { return await every(svc, "StoreItem"); } catch (e) { if (e instanceof ListCeilingError) throw e; return []; } };
 const key = (v) => str(v).toUpperCase();
 const PO_TYPE = "PurchaseOrder";
 const VENDOR_TYPE = "Vendor";
@@ -98,14 +101,28 @@ function poIdFor(orgId, at, salt) {
 /**
  * Reads an order's lines and every receipt booked against it, and says where the order stands.
  * The ONLY place an order's state is decided. Nothing stores it.
+ * items: the stores item master (StoreItem rows), optional. An item that declares `packs` lets a line and a receipt in
+ * two of its units meet in its base unit (BILL-19: 10 boxes of 100 booked against a 1,000-glove line left it open).
  */
-function orderState(po, receipts, approval) {
+function orderState(po, receipts, approval, items) {
   const lines = Array.isArray(po && po.lines) ? po.lines : [];
   const booked = Array.isArray(receipts) ? receipts : [];
+  const master = new Map((items || []).filter((x) => x && Array.isArray(x.packs) && x.packs.length).map((x) => [key(x.code), x]));
 
   const byLine = lines.map((l, i) => {
     const ordered = qtyOf(l && l.quantity);
     const unit = key(l && l.unit);
+    const item = master.get(key(l && l.item));
+    const lineConv = item ? toBaseUnit(item.unit, item.packs, { value: 1, unit: l && l.unit }) : null;
+    /* A receipt in the line's own unit: as booked (receivedAs), or its base quantity when the line is in the base unit,
+     * or converted through the item's packs. null when nothing says how the two units relate. */
+    const inLineUnit = (r) => {
+      const entered = orderedAmount(r), own = { value: amountIn(r), unit: unitOf(r) };
+      if (key(entered.unit) === unit) return entered.value;
+      if (key(own.unit) === unit) return own.value;
+      const b = lineConv && lineConv.ok ? toBaseUnit(item.unit, item.packs, own) : null;
+      return b && b.ok ? b.value / lineConv.factor : null;
+    };
     /* A receipt that NAMES a line belongs to that line and only that line. Only one that names no
      * line falls back to matching on the item. Doing both at once double-counts a receipt whose
      * line is 0 against every other line holding the same item. */
@@ -115,9 +132,9 @@ function orderState(po, receipts, approval) {
     /* Only receipts in the SAME unit count towards the line being fulfilled. One in a different
      * unit is real stock and is recorded, but adding it here would be the unit guess this file
      * refuses to make. */
-    const same = mine.filter((r) => key(orderedAmount(r).unit) === unit);
-    const otherUnits = mine.filter((r) => key(orderedAmount(r).unit) !== unit);
-    const received = same.reduce((a, r) => a + (orderedAmount(r).value || 0), 0);
+    const same = mine.filter((r) => inLineUnit(r) !== null);
+    const otherUnits = mine.filter((r) => inLineUnit(r) === null);
+    const received = same.reduce((a, r) => a + (inLineUnit(r) || 0), 0);
     return {
       index: i, item: str(l && l.item), unit: str(l && l.unit),
       ordered, received,
@@ -243,6 +260,14 @@ async function receiveGoods(request, env, ctx) {
 
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
+  /* A retried book-in is answered with the receipt it made (BILL-03), before the order is read again. */
+  const prior = await replayMovement(svc, ctx.idempotencyKey);
+  if (prior) {
+    if (prior.error) return { ...base, ...prior.error, written: 0 };
+    const r = prior.record, after = await readOrder(svc, poId, ctx);
+    return { ...base, ok: true, written: 0, replayed: true, receiptId: r.id, purchaseOrderId: str(r.purchaseOrderId) || poId, item: str(r.item), quantity: amountIn(r), unit: unitOf(r),
+      ...(r.receivedAs ? { receivedAs: r.receivedAs } : {}), state: after ? after.state : null, lines: after ? after.lines : [], actor: resolved.actor.id };
+  }
 
   let po;
   try { po = await svc.get(PO_TYPE, poId); }
@@ -262,7 +287,7 @@ async function receiveGoods(request, env, ctx) {
   /* PACK SIZES: if the item is in the general stores item master (StoreItem) and declares `packs`, and the unit
    * received differs from its own base unit, the receipt is converted to base units before it reaches stock.js -
    * an item with no packs, or not in that master (every pharmacy drug today), receives exactly as before. */
-  let baseUnit = unit, baseQty = quantity, receivedAs = null, packItem = null, packFactor = null;
+  let baseUnit = unit, baseQty = quantity, receivedAs = null, packItem = null;
   try {
     const storeItems = await every(svc, "StoreItem");
     packItem = (storeItems || []).find((si) => si && key(si.code) === key(item) && Array.isArray(si.packs) && si.packs.length) || null;
@@ -273,7 +298,7 @@ async function receiveGoods(request, env, ctx) {
       return { ...base, ok: false, status: 422, error: "unknown_unit", written: 0,
         detail: converted.detail || `"${unit}" is not ${packItem.unit} or a pack size declared for this item.` };
     }
-    baseUnit = converted.unit; baseQty = converted.value; packFactor = converted.factor; receivedAs = { value: quantity, unit };
+    baseUnit = converted.unit; baseQty = converted.value; receivedAs = { value: quantity, unit };
   }
 
   const at = str(ctx.at) || new Date().toISOString();
@@ -294,16 +319,18 @@ async function receiveGoods(request, env, ctx) {
       receivedBy: resolved.actor.id, at,
     };
     const out = await svc.put(movement, { idempotencyKey: ctx.idempotencyKey || null });
-    const after = await readOrder(svc, poId, ctx);
-    /* Valuation kept in base units: the PO line's own price (per the unit it was ordered in) divided by the pack
+    const after = await readOrder(svc, poId, ctx, packItem ? [packItem] : null);
+    /* Valuation kept in base units: the PO line's own price (per the unit it was ordered in) divided by THAT unit's
      * factor, rounded to the nearest whole paisa, half a paisa rounding up - the same rounding poTotalPaise's
-     * Math.round already applies elsewhere in this file. */
+     * Math.round already applies elsewhere in this file. BILL-19: this divided by the factor of the unit RECEIVED, so
+     * a glove line at 500 paise booked in boxes of 100 was valued at 5 paise a glove. */
     const orderedLine = str(ctx.line) !== "" && po.lines ? po.lines[Number(ctx.line)] : null;
     const linePricePaise = orderedLine ? qtyOf(orderedLine.unitPricePaise) : null;
+    const lineConv = orderedLine && packItem ? toBaseUnit(packItem.unit, packItem.packs, { value: 1, unit: orderedLine.unit }) : null;
     return { ...base, ok: true, written: 1, receiptId: id, purchaseOrderId: poId,
       item, quantity: baseQty, unit: baseUnit, state: after ? after.state : null, lines: after ? after.lines : [],
       ...(receivedAs ? { receivedAs, packDisplay: dualDisplay(baseUnit, packItem.packs, baseQty) } : {}),
-      ...(receivedAs && linePricePaise !== null ? { valuation: { unitPricePaiseBase: Math.round(linePricePaise / packFactor), baseUnit } } : {}),
+      ...(receivedAs && linePricePaise !== null && lineConv && lineConv.ok ? { valuation: { unitPricePaiseBase: Math.round(linePricePaise / lineConv.factor), baseUnit } } : {}),
       /* Over-delivery is named, not refused: the boxes are on the shelf either way, and a receipt
        * turned away is stock no record knows about. */
       ...(after && after.overDelivered ? { overDelivered: true, detail: "More arrived than was ordered. It is recorded, because it is on the shelf; the difference is worth a word with the supplier." } : {}),
@@ -334,17 +361,18 @@ async function approvalFor(svc, poId, ctx) {
   return state;
 }
 
-async function readOrder(svc, poId, ctx) {
+async function readOrder(svc, poId, ctx, items) {
   let po, moves;
   try {
     po = await svc.get(PO_TYPE, poId);
     const all = await every(svc, MOVE_TYPE);
     moves = all.filter((m) => m && str(m.purchaseOrderId) === poId);
+    if (!items) items = await itemMaster(svc);
   } catch { return null; }
   if (!po) return null;
   const approval = await approvalFor(svc, poId, ctx);
   return { purchaseOrderId: poId, vendor: str(po.vendor), raisedBy: str(po.raisedBy), raisedAt: str(po.raisedAt),
-    ...orderState(po, moves, approval), approval: approval || { state: "none" } };
+    ...orderState(po, moves, approval, items), approval: approval || { state: "none" } };
 }
 
 /** Every order and where each stands. */
@@ -356,18 +384,18 @@ async function listPurchaseOrders(request, env, ctx) {
   const { svc, error } = await open(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, orders: [] };
 
-  let pos, moves, verifs;
+  let pos, moves, verifs, items;
   try {
-    [pos, moves, verifs] = await Promise.all([every(svc, PO_TYPE), every(svc, MOVE_TYPE), every(svc, "Verification")]);
+    [pos, moves, verifs, items] = await Promise.all([every(svc, PO_TYPE), every(svc, MOVE_TYPE), every(svc, "Verification"), itemMaster(svc)]);
   } catch (e) {
     return { ...base, ...readFailure(e), orders: [] };
   }
 
-  return { ...base, ok: true, orders: ordersFrom(pos, moves, verifs, ctx) };
+  return { ...base, ok: true, orders: ordersFrom(pos, moves, verifs, ctx, items) };
 }
 
-/** PURE. Every order and where each stands, from the orders, the receipts and the approval rows. */
-function ordersFrom(pos, moves, verifs, ctx) {
+/** PURE. Every order and where each stands, from the orders, the receipts and the approval rows (and the item master). */
+function ordersFrom(pos, moves, verifs, ctx, items) {
   return pos.map((po) => {
     const id = str(po.id);
     const mine = moves.filter((m) => str(m.purchaseOrderId) === id);
@@ -380,7 +408,7 @@ function ordersFrom(pos, moves, verifs, ctx) {
     return { purchaseOrderId: id, vendor: str(po.vendor), raisedBy: str(po.raisedBy), raisedAt: str(po.raisedAt),
       ...(str(po.indentId) ? { indentId: str(po.indentId) } : {}),
       location: str(po.location) || null,
-      totalPaise: poTotalPaise(po), ...orderState(po, mine, approval), approval };
+      totalPaise: poTotalPaise(po), ...orderState(po, mine, approval, items), approval };
   }).sort((a, b) => str(b.raisedAt).localeCompare(str(a.raisedAt)));
 }
 
@@ -553,14 +581,8 @@ function reorderSuggestionsFrom({ movements, dispenses, onOrder, onOrderAt, poli
   const since = nowMs - policy.windowDays * DAY_MS;
   const { levels } = levelsFrom(movements, dispenses);
   const k3 = (code, location, unit) => `${key(code)}|${key(location)}|${key(unit)}`;
-  /* A dispense comes out of the one store its item was received into, as levelsFrom() decides. */
-  const receivedAt = new Map();
-  for (const m of movements || []) {
-    const q = m && quantityOf(m.quantity);
-    if (!q || (str(m.kind) !== "receipt" && str(m.kind) !== "transfer-in")) continue;
-    const k = `${key(m.code)}|${key(q.unit)}`;
-    const s = receivedAt.get(k) || new Set(); s.add(str(m.location) || null); receivedAt.set(k, s);
-  }
+  /* A dispense comes out of the store levelsFrom() takes it from (stock.js issueStoreFor). */
+  const storeOf = issueStoreFor(movements);
   const stat = new Map();
   const note = (k, atMs, used) => {
     const r = stat.get(k) || { first: Infinity, used: 0 };
@@ -578,8 +600,7 @@ function reorderSuggestionsFrom({ movements, dispenses, onOrder, onOrderAt, poli
     const q = d && d.state !== "returned" && quantityOf(d.quantity);
     const code = d && (str(d.drugCode) || str(d.drug));
     if (!q || !code) continue;
-    const from = receivedAt.get(`${key(code)}|${key(q.unit)}`);
-    note(k3(code, from && from.size === 1 ? [...from][0] : null, q.unit), Date.parse(str(d.dispensedAt)), q.value);
+    note(k3(code, storeOf(d, code, q.unit), q.unit), Date.parse(str(d.dispensedAt)), q.value);
   }
   return levels.map((r) => {
     const s = stat.get(k3(r.code, r.location, r.unit)) || { first: Infinity, used: 0 };
@@ -609,14 +630,14 @@ async function reorderSuggestions(request, env, ctx) {
   let moves, dispenses, pos, verifs, items;
   try {
     [moves, dispenses, pos, verifs, items] = await Promise.all([every(svc, STOCK_TYPE), ctx.storesOnly ? [] : every(svc, "MedicationDispense"),
-      every(svc, PO_TYPE), every(svc, "Verification"), ctx.storesOnly ? every(svc, "StoreItem") : null]);
+      every(svc, PO_TYPE), every(svc, "Verification"), ctx.storesOnly ? every(svc, "StoreItem") : itemMaster(svc)]);
   } catch (e) {
     /* A suggestion from a partial ledger is wrong in a direction nobody can see, so none is made. */
     if (e instanceof ListCeilingError) return { ...base, ok: false, status: 409, error: "too_many_records", detail: "More stock or order records exist than can be read at once, so usage cannot be worked out safely. No suggestion was made.", suggestions: [] };
     return { ...base, ...readFailure(e), suggestions: [] };
   }
   const onOrder = new Map(), onOrderAt = new Map();
-  for (const o of ordersFrom((pos || []).filter(Boolean), (moves || []).filter((m) => m && str(m.purchaseOrderId)), (verifs || []).filter(Boolean), ctx)) {
+  for (const o of ordersFrom((pos || []).filter(Boolean), (moves || []).filter((m) => m && str(m.purchaseOrderId)), (verifs || []).filter(Boolean), ctx, items)) {
     if (!["open", "part-received", "awaiting-approval"].includes(o.state)) continue;
     for (const l of o.lines) {
       if (!(l.outstanding > 0)) continue;

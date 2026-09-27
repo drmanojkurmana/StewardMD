@@ -36,6 +36,22 @@
    * degree they do not hold. */
   var DEGREES = ["MBBS", "MD", "MS", "DM", "MCh", "DNB", "DrNB", "Diploma", "Other"];
 
+  /* The Role box (owner, 2026-09-26): who the user is decides which Home tools open for them
+   * (role-features.js). Stored on the profile doc as the KEY (student|intern|resident|doctor); the
+   * form shows the label. A registration verification later overrides the declared role. */
+  var ROLE_OPTS = [
+    { key: "student", label: "Medical student (UG)" }, { key: "intern", label: "Intern" },
+    { key: "resident", label: "PG Resident" }, { key: "doctor", label: "Doctor (practising)" }
+  ];
+  var ROLE_LABELS = ROLE_OPTS.map(function (r) { return r.label; });
+  function roleKey(v) {
+    var s = String(v == null ? "" : v).trim().toLowerCase();
+    for (var i = 0; i < ROLE_OPTS.length; i++) if (s === ROLE_OPTS[i].key || s === ROLE_OPTS[i].label.toLowerCase()) return ROLE_OPTS[i].key;
+    return "";
+  }
+  function roleLabel(v) { var k = roleKey(v); for (var i = 0; i < ROLE_OPTS.length; i++) if (ROLE_OPTS[i].key === k) return ROLE_OPTS[i].label; return ""; }
+  function isTraineeRole(v) { var k = roleKey(v); return k === "student" || k === "intern"; }
+
   /* Broad but finite. Covers the MD/MS/DNB, DM/MCh/DrNB and the common diploma tracks. */
   var SPECIALITIES = [
     "Internal Medicine", "General Surgery", "Paediatrics", "Obstetrics & Gynaecology",
@@ -64,10 +80,55 @@
   function db() { try { return window.SMD_DB || null; } catch (e) { return null; } }
   function docRef() { var u = uid(), d = db(); return (u && d) ? d.collection("users").doc(u).collection("profile").doc("self") : null; }
 
+  /* Getting to that ref, rather than giving up on it.
+   *
+   * Owner, from a device with full signal: "not able to save after being online" - Save answered
+   * "You are offline. Try again once you are connected." on a filled-in form. Nothing about that
+   * was true. Save read window.SMD_DB once and, finding it empty, blamed the network.
+   *
+   * SMD_DB is set by SMD_bootFirebase, and Firebase is LAZY (index.html SMD_loadFirebase, kicked
+   * once from requestIdleCallback). Two ways that leaves this sheet with no db:
+   *   - this form opens ~800ms after boot and can simply beat the idle load;
+   *   - if that ONE attempt failed (booted on a dead network), the loader resets and waits for
+   *     somebody to call it again. Nothing here ever did, so the SDK stayed absent for the rest of
+   *     the session however good the signal later became. That is the reported bug exactly.
+   * So: load it on demand, and wait for auth to restore before concluding anything, because
+   * currentUser is empty until the persisted session comes back. */
+  function ensureRef(cb) {
+    var r = docRef();
+    if (r) { cb(r, null); return; }
+    var done = false;
+    function finish() {
+      if (done) return;
+      done = true;
+      var ref = docRef();
+      // Tell the two apart: signed out is the doctor's to fix, no SDK is ours.
+      cb(ref, ref ? null : (db() ? "auth" : "sdk"));
+    }
+    if (!window.SMD_loadFirebase) { finish(); return; }
+    try {
+      window.SMD_loadFirebase(function () {
+        var a = null;
+        try { a = window.SMD_AUTH; } catch (e) {}
+        if (a && !a.currentUser && a.onAuthStateChanged) {
+          try {
+            var un = a.onAuthStateChanged(function () { try { if (un) un(); } catch (e) {} finish(); });
+            setTimeout(finish, 4000);
+            return;
+          } catch (e) {}
+        }
+        finish();
+      });
+    } catch (e) { finish(); return; }
+    // The loader calls back on failure too, but not if a script load hangs outright.
+    setTimeout(finish, 8000);
+  }
+
   /* The whole profile, asked once. `req` marks what Save insists on; state and city are helpers for
    * finding the institution, so they are offered but never block a doctor whose hospital is already
    * named. */
   var FIELDS = [
+    { key: "role", label: "I am a", kind: "choice", opts: ROLE_LABELS, ph: "Choose your role", req: true, title: "What best describes you?" },
     { key: "name", label: "Full name", kind: "text", ph: "Dr Jane Doe", req: true },
     { key: "phone", label: "Phone number", kind: "tel", ph: "10-digit mobile number", req: true },
     { key: "state", label: "State / UT", kind: "state", ph: "Choose your state" },
@@ -82,7 +143,9 @@
     var out = [];
     for (var i = 0; i < FIELDS.length; i++) {
       if (!FIELDS[i].req) continue;                 // state/city help the search; they never block
-      var v = d[FIELDS[i].key];
+      // A medical student or intern holds no PG degree or speciality yet: never block them on those.
+      if ((FIELDS[i].key === "degree" || FIELDS[i].key === "speciality") && isTraineeRole(d.role)) continue;
+      var v = FIELDS[i].key === "role" ? roleKey(d.role) : d[FIELDS[i].key];
       if (v == null || String(v).trim() === "") out.push(FIELDS[i].key);
     }
     return out;
@@ -95,7 +158,7 @@
     var st = document.createElement("style");
     st.id = "pfSetupCss";
     st.textContent = [
-      "#" + ROOT_ID + "{position:fixed;inset:0;z-index:17000;display:none;align-items:flex-end;justify-content:center;background:rgba(15,23,42,.46);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}",
+      "#" + ROOT_ID + "{position:fixed;inset:0;z-index:17000;display:none;align-items:flex-end;justify-content:center;box-sizing:border-box;padding-bottom:var(--pfs-kb,0px);background:rgba(15,23,42,.46);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);transition:padding-bottom .2s cubic-bezier(.2,.8,.2,1)}",
       "#" + ROOT_ID + ".on{display:flex}",
       "#" + ROOT_ID + " .pfs-card{width:100%;max-width:560px;max-height:92vh;overflow:auto;-webkit-overflow-scrolling:touch;background:var(--hpanel,#fff);color:var(--hink,#0f172a);border-radius:20px 20px 0 0;padding:18px 16px calc(env(safe-area-inset-bottom,0px) + 18px);box-shadow:0 -8px 40px -8px rgba(15,23,42,.4);font-family:var(--hfont,-apple-system,'Segoe UI',Roboto,system-ui,sans-serif)}",
       "#" + ROOT_ID + " .pfs-t{font:800 18px/1.25 var(--hfont,system-ui);margin:2px 0 4px}",
@@ -113,6 +176,18 @@
       "#" + ROOT_ID + " .pfs-save{background:var(--hp,#0f766e);color:#fff}",
       "#" + ROOT_ID + " .pfs-later{background:none;border:1px solid var(--hbd,#e2e8f0);color:var(--hmut,#64748b);flex:0 0 34%}",
       "#" + ROOT_ID + " .pfs-list{max-height:52vh;overflow:auto;-webkit-overflow-scrolling:touch;margin-top:8px}",
+      /* THE PICKER SHEET, with the keyboard up (owner, screenshot: "cant scroll and cant see
+       * option"). Two faults, both of them here. (a) 52vh is a slice of the LAYOUT viewport,
+       * which iOS does not shrink for the keyboard, so the list was sized for a screen half of
+       * which was behind the keys. (b) the card scrolled as one block, so the search field
+       * scrolled away under the keyboard accessory bar and the rows had nowhere to go. As a
+       * flex column the header and the Back button are fixed and the list is the single
+       * scrolling region, sized to whatever is actually visible. */
+      "#" + ROOT_ID + " .pfs-card.pfs-choose{display:flex;flex-direction:column;overflow:hidden;min-height:0}",
+      "#" + ROOT_ID + " .pfs-card.pfs-choose>.pfs-t," + "#" + ROOT_ID + " .pfs-card.pfs-choose>.pfs-s," + "#" + ROOT_ID + " .pfs-card.pfs-choose>.pfs-in," + "#" + ROOT_ID + " .pfs-card.pfs-choose>.pfs-acts{flex:0 0 auto}",
+      "#" + ROOT_ID + " .pfs-card.pfs-choose>.pfs-list{flex:1 1 auto;min-height:0;max-height:none}",
+      "#" + ROOT_ID + ".kb .pfs-card{max-height:100%}",
+      "#" + ROOT_ID + ".kb .pfs-s{margin-bottom:8px}",
       "#" + ROOT_ID + " .pfs-opt{display:block;width:100%;text-align:left;border:0;border-top:1px solid var(--hbd,#e2e8f0);background:none;padding:12px 4px;cursor:pointer;min-height:46px}",
       "#" + ROOT_ID + " .pfs-opt b{display:block;font:600 13.5px var(--hfont,system-ui);color:var(--hink,#0f172a)}",
       "#" + ROOT_ID + " .pfs-opt span{display:block;font:500 11px var(--hfont,system-ui);color:var(--hmut,#64748b)}",
@@ -153,7 +228,48 @@
     document.body.appendChild(el);
     return el;
   }
-  function close() { var el = document.getElementById(ROOT_ID); if (el) { el.classList.remove("on"); el.innerHTML = ""; } }
+  /* ── keyboard ─────────────────────────────────────────────────────────────────────────────────
+   * Owner, screenshot of the city picker: "cant scroll and cant see option". A position:fixed,
+   * bottom-anchored sheet is laid out against the LAYOUT viewport, which iOS does not shrink when
+   * the keyboard rises - so the search field ended up behind the keyboard's accessory bar and the
+   * results had no room left. window.visualViewport is the part the doctor can actually see; its
+   * missing height becomes the scrim's bottom padding, so the card sits ON the keyboard. The scrim
+   * itself stays full screen, or the app's own chrome shows through the gap. Android's WebView
+   * resizes the layout viewport itself, where this is a no-op. Same fix, same shape, as
+   * phone-verify.js - see its note; these two sheets must behave identically. */
+  var _vvOn = false, _vvTest = null;
+  function fitViewport(vv) {
+    // An explicitly passed viewport sticks (null clears it): a headless browser has no soft
+    // keyboard, so the test feeds the shrunken viewport in this way.
+    if (vv !== undefined) _vvTest = vv;
+    var el = document.getElementById(ROOT_ID);
+    if (!el || !el.classList.contains("on")) return;
+    vv = _vvTest || window.visualViewport;
+    if (!vv || !vv.height) return;
+    var ih = window.innerHeight || vv.height;
+    var kb = Math.max(0, ih - vv.height - (vv.offsetTop || 0));
+    el.style.setProperty("--pfs-kb", Math.round(kb) + "px");
+    el.classList.toggle("kb", kb > 80);
+    // Keep whatever is being typed in on screen inside the now shorter card.
+    try {
+      var a = document.activeElement;
+      if (kb > 80 && a && el.contains(a)) setTimeout(function () { try { a.scrollIntoView({ block: "nearest" }); } catch (e) {} }, 60);
+    } catch (e) {}
+  }
+  function onVv() { fitViewport(undefined); }
+  function bindViewport() {
+    if (_vvOn || !window.visualViewport) return;
+    _vvOn = true;
+    try { window.visualViewport.addEventListener("resize", onVv); window.visualViewport.addEventListener("scroll", onVv); } catch (e) {}
+    fitViewport();
+  }
+  function unbindViewport() {
+    if (_vvOn) { try { window.visualViewport.removeEventListener("resize", onVv); window.visualViewport.removeEventListener("scroll", onVv); } catch (e) {} _vvOn = false; }
+    _vvTest = null;
+    var el = document.getElementById(ROOT_ID);
+    if (el) { el.style.removeProperty("--pfs-kb"); el.classList.remove("kb"); }
+  }
+  function close() { var el = document.getElementById(ROOT_ID); if (el) { el.classList.remove("on"); el.innerHTML = ""; } unbindViewport(); }
 
   /* A searchable chooser rendered INSIDE our own overlay, so it never fights the app's sheet. */
   function chooser(title, items, current, onPick, onCancel, sub) {
@@ -192,13 +308,14 @@
       }
       return out;
     }
-    el.innerHTML = '<div class="pfs-card">' +
+    el.innerHTML = '<div class="pfs-card pfs-choose">' +
       '<div class="pfs-t">' + esc(title) + "</div>" +
       (sub ? '<p class="pfs-s">' + esc(sub) + "</p>" : "") +
       '<input class="pfs-in" id="pfsQ" type="search" autocomplete="off" placeholder="Search" value="">' +
       '<div class="pfs-list" id="pfsL">' + rows("") + "</div>" +
       '<div class="pfs-acts"><button type="button" class="pfs-btn pfs-later" id="pfsBack">Back</button></div></div>';
     var q = el.querySelector("#pfsQ"), list = el.querySelector("#pfsL");
+    bindViewport();
     if (q) q.addEventListener("input", function () { list.innerHTML = rows(q.value); });
     el.querySelector("#pfsBack").addEventListener("click", function () { onCancel(); });
     list.addEventListener("click", function (e) {
@@ -285,6 +402,7 @@
 
   function form(force) {
     var el = root(); el.classList.add("on");
+    bindViewport();
     var need = missing(draft);
     el.innerHTML = '<div class="pfs-card">' +
       '<div class="pfs-t">Complete your profile</div>' +
@@ -337,7 +455,7 @@
             title = "Choose your state or union territory";
           } else {
             items = f.opts;
-            title = "Choose your " + f.label.toLowerCase();
+            title = f.title || ("Choose your " + f.label.toLowerCase());
           }
           chooser(title, items, draft[k], function (v) {
             if (v) {
@@ -369,12 +487,23 @@
       if (String(draft.phone || "").replace(/\D/g, "").length < 7 && bad.indexOf("phone") < 0) bad.push("phone");
       el.querySelectorAll(".pfs-f").forEach(function (f) { f.classList.toggle("bad", bad.indexOf(f.getAttribute("data-f")) >= 0); });
       if (bad.length) return;
-      var ref = docRef();
-      if (!ref) { toast("You are offline. Try again once you are connected."); return; }
       var btn = el.querySelector("#pfsSave"); btn.disabled = true; btn.textContent = "Saving…";
+      ensureRef(function (ref, why) {
+      if (!ref) {
+        btn.disabled = false; btn.textContent = "Save";
+        /* Say what is actually wrong. "You are offline" on a phone with full signal sends the
+         * doctor to look at their connection instead of at the thing that needs fixing. The
+         * form stays open either way, so nothing typed is lost. */
+        toast(why === "auth" ? "Sign in to save your profile."
+                             : "Couldn't reach your account. Check your connection and try again.");
+        return;
+      }
       /* The SAME doc email-auth.js used to write, with the same keys, so a profile created by
        * either path is one profile. profileComplete is what email-auth's own prompt checks. */
+      var rk = roleKey(draft.role);
+      try { if (rk && window.SMD_ROLE) SMD_ROLE.set(rk); } catch (e) {}
       ref.set({
+        role: rk,
         name: draft.name || "", phone: draft.phone || "",
         state: draft.state || "", city: draft.city || "",
         hospital: draft.hospital || "", degree: draft.degree || "", speciality: draft.speciality || "",
@@ -387,24 +516,27 @@
           announce(draft);
         })
         .catch(function () { btn.disabled = false; btn.textContent = "Save"; toast("Couldn't save. Check your connection."); });
+      });
     });
     return el;
   }
 
   /* Open the form, pre-filled with whatever is already stored. */
   function open() {
-    var ref = docRef();
-    if (!ref) { draft = {}; form(true); return; }
-    ref.get().then(function (snap) {
-      draft = (snap && snap.exists && snap.data()) || {};
-      form(true);
-    }).catch(function () { draft = {}; form(true); });
+    ensureRef(function (ref) {
+      if (!ref) { draft = {}; form(true); return; }
+      ref.get().then(function (snap) {
+        draft = (snap && snap.exists && snap.data()) || {};
+        draft.role = roleLabel(draft.role);
+        form(true);
+      }).catch(function () { draft = {}; form(true); });
+    });
   }
 
   /* Tell the rest of the app the clinician's degree and speciality (specialty-kits.js personalises
    * Home, the default kit and MaiK from it). Professional details only, never patient data. */
   function announce(d) {
-    try { document.dispatchEvent(new CustomEvent("smd:profile-loaded", { detail: { degree: (d && d.degree) || "", speciality: (d && d.speciality) || "" } })); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent("smd:profile-loaded", { detail: { degree: (d && d.degree) || "", speciality: (d && d.speciality) || "", role: roleKey(d && d.role) } })); } catch (e) {}
   }
   /* Should we ask? Signed in, not snoozed this app-open, and something is genuinely missing. */
   function needed(cb) {
@@ -429,6 +561,7 @@
     needed(function (yes, d) {
       if (!yes) return;
       draft = d || {};
+      draft.role = roleLabel(draft.role);
       setTimeout(function () { form(true); }, 400);
     });
   }
@@ -451,7 +584,8 @@
   else document.addEventListener("DOMContentLoaded", function () { setTimeout(start, 800); });
 
   window.SMD_PROFILE_SETUP = {
-    open: open, needed: needed, missing: missing, close: close,
-    DEGREES: DEGREES, SPECIALITIES: SPECIALITIES, FIELDS: FIELDS
+    open: open, needed: needed, missing: missing, close: close, _fit: fitViewport,
+    DEGREES: DEGREES, SPECIALITIES: SPECIALITIES, FIELDS: FIELDS,
+    ROLE_OPTS: ROLE_OPTS, roleKey: roleKey, roleLabel: roleLabel
   };
 })();

@@ -33,7 +33,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { VersionConflictError } from "./repository.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
-import { levelsFrom, flagLevels, nearExpiry, recordMovement, MOVE_TYPE, validatePacks, toBaseUnit, dualDisplay } from "./stock.js";
+import { levelsFrom, flagLevels, nearExpiry, recordMovement, replayMovement, MOVE_TYPE, validatePacks, toBaseUnit, dualDisplay } from "./stock.js";
 import { raisePurchaseOrder } from "./purchasing.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -87,7 +87,8 @@ function latest(rows) {
 
 /**
  * PURE. Where one indent stands, from its own records. Never stored.
- * movements: StockMovement rows (only transfer-in rows naming this indent count as issued).
+ * movements: StockMovement rows naming this indent. Issued is what arrived (transfer-in) or, when more, what left the
+ * central store for it (transfer-out): an issue whose second half has not landed yet is still issued (BILL-13).
  */
 function indentState(indent, decisions, movements, receipts, closures) {
   const id = str(indent && indent.id);
@@ -95,10 +96,12 @@ function indentState(indent, decisions, movements, receipts, closures) {
   const decision = mine(decisions).sort((a, b) => str(a.at).localeCompare(str(b.at)))[0] || null;
   const closure = mine(closures)[0] || null;
   const ins = mine(movements).filter((m) => str(m.kind) === "transfer-in");
+  const outs = mine(movements).filter((m) => str(m.kind) === "transfer-out");
   const acks = mine(receipts);
   const lines = (Array.isArray(indent && indent.lines) ? indent.lines : []).map((l) => {
     const same = (r) => key(r.code) === key(l.code) && key(r.quantity && r.quantity.unit) === key(l.unit);
-    const issued = ins.filter(same).reduce((a, m) => a + (Number(m.quantity && m.quantity.value) || 0), 0);
+    const sum = (rows) => rows.filter(same).reduce((a, m) => a + (Number(m.quantity && m.quantity.value) || 0), 0);
+    const issued = Math.max(sum(ins), sum(outs));
     const dl = decision && Array.isArray(decision.lines) ? decision.lines.find((x) => key(x.code) === key(l.code)) : null;
     const approved = !decision || str(decision.decision) !== "approved" ? 0
       : dl && dl.approvedQuantity != null && str(dl.approvedQuantity) !== "" ? Number(dl.approvedQuantity) : Number(l.quantity);
@@ -134,7 +137,9 @@ function indentState(indent, decisions, movements, receipts, closures) {
 
 /**
  * PURE. What each department used between two dates: stock transferred into a sub-store that belongs to it, plus
- * parts consumed against it. Per (department, item, unit); units are never added together.
+ * parts consumed against it from anywhere else. Per (department, item, unit); units are never added together.
+ * A part taken from the department's OWN sub-store was already counted when it was issued in (BILL-20: 5 bulbs sent
+ * to the ICU store and 1 of them fitted read 6).
  */
 function consumptionByDepartment(movements, locations, fromIso, toIso) {
   const deptOf = new Map((locations || []).map((l) => [key(l.code), { id: str(l.departmentId), name: str(l.departmentName) }]));
@@ -145,7 +150,11 @@ function consumptionByDepartment(movements, locations, fromIso, toIso) {
     if ((fromIso && at < fromIso) || (toIso && at > toIso)) continue;
     let dept = null;
     if (str(m.kind) === "transfer-in") dept = deptOf.get(key(m.location)) || null;
-    else if (str(m.kind) === "consumption" && str(m.departmentId)) dept = { id: str(m.departmentId), name: "" };
+    else if (str(m.kind) === "consumption" && str(m.departmentId)) {
+      const own = deptOf.get(key(m.location));
+      if (own && own.id === str(m.departmentId)) continue;
+      dept = { id: str(m.departmentId), name: "" };
+    }
     if (!dept || !dept.id) continue;
     const k = `${dept.id}|${key(m.code)}|${key(m.quantity.unit)}`;
     const row = rows.get(k) || { departmentId: dept.id, departmentName: dept.name, code: str(m.code), display: str(m.display) || str(m.code), unit: str(m.quantity.unit), quantity: 0 };
@@ -274,7 +283,7 @@ async function storeMovement(request, env, ctx) {
   const loc = master.locations.find((l) => key(l.code) === key(ctx.location));
   if (!item) return { ...base, ok: false, status: 422, error: "unknown_item", detail: "That item is not in the stores item master.", written: 0 };
   if (!loc) return { ...base, ok: false, status: 422, error: "unknown_location", detail: "That store location does not exist.", written: 0 };
-  const qty = kind === "adjustment" ? Number(ctx.quantity) : positive(ctx.quantity);
+  const qty = kind === "adjustment" ? (/^-?\d+(\.\d+)?$/.test(str(ctx.quantity)) ? Number(str(ctx.quantity)) : null) : positive(ctx.quantity);
   if (qty === null || !Number.isFinite(qty) || qty === 0) return { ...base, ok: false, status: 422, error: "quantity_required", written: 0 };
   /* A receipt may be entered in a pack unit the item declares (ctx.unit); adjustment and wastage stay in the
    * item's own base unit, same as always - the count they correct or destroy is already in that unit. */
@@ -342,7 +351,7 @@ async function readIndent(svc, indentId) {
   if (!indent) return null;
   if (got.truncated) return { tooMany: true };
   const { IndentDecision: decisions, [MOVE_TYPE]: moves, IndentReceipt: receipts, IndentClosure: closures } = got.all;
-  return { indent, state: indentState(indent, decisions, moves, receipts, closures) };
+  return { indent, moves, state: indentState(indent, decisions, moves, receipts, closures) };
 }
 
 /** POST /ward/indent-decide - the department's in-charge approves (optionally fewer) or rejects. Never their own. */
@@ -384,7 +393,15 @@ async function decideIndent(request, env, ctx) {
   } catch (e) { return { ...base, ...writeFailure(e), written: 0 }; }
 }
 
-/** POST /ward/indent-issue - the store hands over approved items. Partial issue leaves the rest back-ordered. */
+/** POST /ward/indent-issue - the store hands over approved items. Partial issue leaves the rest back-ordered.
+ *
+ * ONE ISSUE PER LINE AT A TIME (BILL-13). Two issues of the whole approval sent together both read "30 to issue" and
+ * both wrote, so 60 left the store against an approval of 30. Each line's transfer out now has an id fixed by how many
+ * the line already has, written create-only: two issues read from the same state claim the same id, and the second is
+ * refused (409) before it moves anything. The next honest issue reads the first and claims the next number.
+ *
+ * A RETRY IS ANSWERED WITH WHAT IT ALREADY DID (BILL-03): each line's writes carry the request's key, so a line the key
+ * already issued is reported, not issued again, and only lines it never reached are issued now. */
 async function issueIndent(request, env, ctx) {
   const base = baseOf(ctx);
   if (!ctx.migration || ctx.migration.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
@@ -396,10 +413,28 @@ async function issueIndent(request, env, ctx) {
   try { cur = await readIndent(svc, indentId); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
   if (!cur) return { ...base, ok: false, status: 404, error: "indent_not_found", written: 0 };
   if (cur.tooMany) return { ...base, ok: false, status: 409, error: "too_many_records", written: 0 };
+  const idem = str(ctx.idempotencyKey);
+  const keyFor = (code, half) => (idem ? `${idem}:${key(code)}:${half}` : null);
+  const asked = (Array.isArray(ctx.lines) ? ctx.lines : []).filter((l) => l && str(l.quantity) !== "" && Number(l.quantity) !== 0);
+  const already = [];
+  let written = 0;
+  for (const l of idem ? asked : []) {
+    const prior = await replayMovement(svc, keyFor(l.code, "out"));
+    if (prior && prior.error) return { ...base, ...prior.error, written: 0 };
+    if (!prior) continue;
+    /* Its arrival half is sent again under its own key: replayed if it landed, written if the first attempt stopped between. */
+    const r = prior.record;
+    const inn = await recordMovement(request, env, { ...ctx, kind: "transfer-in", code: r.code, display: r.display, quantity: r.quantity, batch: r.batch, expiry: r.expiry, indentId, departmentId: cur.indent.departmentId,
+      location: cur.indent.toLocation, idempotencyKey: keyFor(l.code, "in") });
+    if (!inn.ok) return { ...base, ...inn, ok: false, partial: true, written, issued: already, failedLine: str(r.code) };
+    written += inn.written;
+    already.push({ code: str(r.code), quantity: r.quantity.value, unit: r.quantity.unit });
+  }
+  const todo = asked.filter((l) => !already.some((a) => key(a.code) === key(l.code)));
+  if (already.length && !todo.length) return { ...base, ok: true, written, replayed: true, indentId, issued: already };
   if (!["approved", "part-issued"].includes(cur.state.state)) return { ...base, ok: false, status: 409, error: "indent_not_issuable", state: cur.state.state, detail: "Only an approved indent with items still to issue can be issued against.", written: 0 };
   const wanted = [];
-  for (const l of Array.isArray(ctx.lines) ? ctx.lines : []) {
-    if (!l || str(l.quantity) === "" || Number(l.quantity) === 0) continue;
+  for (const l of todo) {
     const line = cur.state.lines.find((x) => key(x.code) === key(l.code));
     const q = positive(l.quantity);
     if (!line || q === null) return { ...base, ok: false, status: 422, error: "bad_line", code: str(l.code), written: 0 };
@@ -407,16 +442,23 @@ async function issueIndent(request, env, ctx) {
     wanted.push({ line, quantity: q, batch: str(l.batch) || null, expiry: str(l.expiry) || null });
   }
   if (!wanted.length) return { ...base, ok: false, status: 422, error: "nothing_to_issue", written: 0 };
-  const issued = [];
-  let written = 0;
+  const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  const issued = [...already];
   for (const w of wanted) {
-    const common = { ...ctx, code: w.line.code, display: w.line.display, quantity: { value: w.quantity, unit: w.line.unit }, batch: w.batch, expiry: w.expiry, indentId, departmentId: cur.indent.departmentId, idempotencyKey: null };
-    const out = await recordMovement(request, env, { ...common, kind: "transfer-out", location: cur.indent.fromLocation });
-    if (!out.ok) return { ...base, ...out, ok: false, partial: written > 0, written, issued, failedLine: w.line.code, detail: `${w.line.display} could not be issued: ${out.detail || out.error}. ${issued.length ? "The lines listed as issued were written and must not be issued again." : "Nothing was issued."}` };
-    written++;
-    const inn = await recordMovement(request, env, { ...common, kind: "transfer-in", location: cur.indent.toLocation });
+    const common = { ...ctx, code: w.line.code, display: w.line.display, quantity: { value: w.quantity, unit: w.line.unit }, batch: w.batch, expiry: w.expiry, indentId, departmentId: cur.indent.departmentId };
+    const n = cur.moves.filter((m) => m && str(m.indentId) === indentId && str(m.kind) === "transfer-out" && key(m.code) === key(w.line.code)).length + 1;
+    const out = await recordMovement(request, env, { ...common, kind: "transfer-out", location: cur.indent.fromLocation, idempotencyKey: keyFor(w.line.code, "out"),
+      movementId: `wsq-stock-indent-${slug(indentId)}-${slug(w.line.code)}-out-${n}` });
+    if (!out.ok) {
+      const raced = out.status === 409 && out.error === "version_conflict";
+      return { ...base, ...out, ok: false, ...(raced ? { error: "issue_in_progress" } : {}), partial: written > 0, written, issued, failedLine: w.line.code,
+        detail: raced ? `${w.line.display} was issued against this indent by someone else at the same moment. Reload the indent before issuing more. ${issued.length ? "The lines listed as issued were written." : "Nothing was issued by this request."}`
+          : `${w.line.display} could not be issued: ${out.detail || out.error}. ${issued.length ? "The lines listed as issued were written and must not be issued again." : "Nothing was issued."}` };
+    }
+    written += out.written;
+    const inn = await recordMovement(request, env, { ...common, kind: "transfer-in", location: cur.indent.toLocation, idempotencyKey: keyFor(w.line.code, "in") });
     if (!inn.ok) return { ...base, ...inn, ok: false, partial: true, written, issued, failedLine: w.line.code, detail: `${w.line.display} left ${cur.indent.fromLocation} on the record but did not arrive at ${cur.indent.toLocation}: ${inn.detail || inn.error}. Record a receipt of ${w.quantity} ${w.line.unit} at ${cur.indent.toLocation} by hand. Do not issue it again.` };
-    written++;
+    written += inn.written;
     issued.push({ code: w.line.code, quantity: w.quantity, unit: w.line.unit });
   }
   return { ...base, ok: true, written, indentId, issued };

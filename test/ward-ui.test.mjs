@@ -209,7 +209,8 @@ test("IT NEVER DECIDES A DOSE IS SAFE: there is no client-side safety rule anywh
   // It must not decide the five rights itself either: the scans go to the server untouched, and the
   // server compares them against the order. The UI only collects and forwards.
   assert.ok(!/scan\.patient\s*[=!]==|scan\.drug\s*[=!]==/.test(code), "the UI never compares a scan itself");
-  assert.match(code, /body\.scan = \{ patient: val\("wScanP"\), drug: val\("wScanD"\) \}/, "scans are forwarded verbatim");
+  // CLIN-10: in the server's own field names (wardsynq-meds.js checkFiveRights), which the old { patient, drug } were not.
+  assert.match(code, /body\.scan = \{ patientBarcode: val\("wScanP"\), drugBarcode: val\("wScanD"\) \}/, "scans are forwarded verbatim");
 });
 
 test("critical results sit ABOVE everything else on the chart, and say whose call each one was", () => {

@@ -27,10 +27,19 @@ const grab = (name) => {
 };
 const GATE_SRC = grab("earlyAccessTier") + "\n" + grab("expTileOn") + "\nreturn expTileOn;";
 
+// The ONE early-access helper, lifted verbatim from account.js (SMD_PRO.hasEarlyAccess), so this
+// test tracks the shipped tier list rather than a copy of it.
+const acct = readFileSync(join(ROOT, "account.js"), "utf8");
+const tiersLine = acct.split("\n").find((l) => /var EARLY_ACCESS_TIERS = \[/.test(l));
+assert.ok(tiersLine, "EARLY_ACCESS_TIERS not found in account.js");
+const hasLine = acct.split("\n").find((l) => /function hasEarlyAccess\(t\)/.test(l));
+assert.ok(hasLine, "hasEarlyAccess not found in account.js");
+const makeHas = (tier) => new Function("_tier", tiersLine + "\n" + hasLine + "\nreturn hasEarlyAccess;")(tier);
+
 // stub environment: { tier, store: {key: value}, search: "?thorex=1", mods: { THOREX: {isOn} } }
 function gate(env) {
   const store = env.store || {};
-  const win = Object.assign({ SMD_PRO: { tierSync: () => env.tier || "" } }, env.mods || {});
+  const win = Object.assign({ SMD_PRO: { tierSync: () => env.tier || "", hasEarlyAccess: makeHas(env.tier || "") } }, env.mods || {});
   const localStorage = { getItem: (k) => (Object.prototype.hasOwnProperty.call(store, k) ? store[k] : null) };
   const location = { search: env.search || "" };
   return new Function("window", "localStorage", "location", GATE_SRC)(win, localStorage, location);
@@ -43,9 +52,16 @@ const TILES = [
   ["smd_fundx", "fundx", null]
 ];
 
-test("physicianpro sees every tile with no localStorage flag set", () => {
-  const on = gate({ tier: "physicianpro" });
-  TILES.forEach(([k, p, m]) => assert.equal(on(k, p, m), true, p));
+test("physicianpro and ultimate see every tile with no localStorage flag set", () => {
+  ["physicianpro", "ultimate"].forEach((tier) => {
+    const on = gate({ tier });
+    TILES.forEach(([k, p, m]) => assert.equal(on(k, p, m), true, tier + " " + p));
+  });
+});
+
+test("home.js never compares a tier string for early access", () => {
+  // Owner 2026-09-26: one helper (SMD_PRO.hasEarlyAccess), no scattered string compares.
+  assert.ok(!/tierSync\(\)\s*===/.test(src), "home.js compares tierSync() to a string");
 });
 
 test("pro / physician / free / unknown tier see nothing and read no flag", () => {
@@ -71,8 +87,10 @@ test("a module's own isOn() still wins first (the access-code path)", () => {
 test("an explicit tester OFF beats the paid tier", () => {
   // A tester who set the flag to "0" (or used ?thorex=0) is deliberately checking the hidden state.
   TILES.forEach(([k, p, m]) => {
-    assert.equal(gate({ tier: "physicianpro", store: { [k]: "0" } })(k, p, m), false, k + "=0");
-    assert.equal(gate({ tier: "physicianpro", search: "?" + p + "=0" })(k, p, m), false, "?" + p + "=0");
+    ["physicianpro", "ultimate"].forEach((tier) => {
+      assert.equal(gate({ tier, store: { [k]: "0" } })(k, p, m), false, tier + " " + k + "=0");
+      assert.equal(gate({ tier, search: "?" + p + "=0" })(k, p, m), false, tier + " ?" + p + "=0");
+    });
   });
 });
 

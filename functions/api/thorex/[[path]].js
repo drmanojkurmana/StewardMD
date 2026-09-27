@@ -31,6 +31,7 @@ import { aiBudgetOn, monthlyCapFor } from "../../_aibudget.js";
 import { proFromRequest } from "../../_entitlement.js";
 import { requireFeature } from "../../_features.js";
 import { checkActive } from "../../_experimental.js";
+import { planEarlyAccess } from "../../_features.js";
 import { ownerOK } from "../../_adminauth.js";
 
 // Experimental Access enforcement (opt-in via EXPERIMENTAL_ENFORCE_THOREX="1"). Default off = ungated
@@ -39,6 +40,8 @@ import { ownerOK } from "../../_adminauth.js";
 async function betaGate(request, env) {
   if (env.EXPERIMENTAL_ENFORCE_THOREX !== "1") return { ok: true };
   try { if (await ownerOK(request, env)) return { ok: true }; } catch (e) {}
+  // Clinician Pro / Ultimate: early access is part of the plan, no code needed (owner 2026-09-26).
+  try { if (await planEarlyAccess(env, request, "thorex")) return { ok: true }; } catch (e) {}
   try { const acc = await checkActive(env, "thorex", request.headers.get("X-XA-Token") || ""); if (acc && acc.active) return { ok: true }; } catch (e) {}
   return { ok: false };
 }
@@ -266,13 +269,14 @@ export async function onRequest(context) {
     if (aiBudgetOn(env)) {
       try {
         const pr = await proFromRequest(env, request);
-        const isPro = pr.pro, verified = !!(pr.claims && pr.claims.verified);
+        // D8 (2026-09-26): the Free allowance follows the verified MOBILE number, not the registration.
+        const isPro = pr.pro, phoneVerified = !!(pr.claims && pr.claims.phoneVerified === true);
         const store = usageKv(env);
         const month = new Date().toISOString().slice(0, 7); // YYYY-MM (matches monthKey)
-        const cap = await monthlyCapFor(env, uid, isPro, verified, month, { kv: store });
+        const cap = await monthlyCapFor(env, uid, isPro, phoneVerified, month, { kv: store });
         if (cap != null && store) {
           const used = (((await store.get("maik:m:fb:" + uid + ":" + month, "json")) || {}).tokens) || 0;
-          if (used >= cap) return json({ ok: false, error: "quota", reason: isPro ? "over-budget" : "needs-pro", needsPro: !isPro }, isPro ? 429 : 402, request);
+          if (used >= cap) return json({ ok: false, error: "quota", reason: isPro ? "over-budget" : (phoneVerified ? "needs-pro" : "phone-unverified"), needsPro: !isPro }, isPro ? 429 : 402, request);
           budgetMeterId = "fb:" + uid;
         }
       } catch (e) { /* fail-open: keep call-rate limit only */ }

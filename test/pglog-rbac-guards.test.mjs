@@ -19,14 +19,18 @@ const ORGSTORE = read("../functions/_opd_org_store.js");
  * ("monitoring implementation is not signing a trainee's clinical record"). pg_faculty and pg_hod
  * both carry all three, and setMembership is an upsert, so POSTing your own email with
  * role:"pg_hod" handed you the sign-off powers the separation exists to deny. */
+/* The enrol logic moved to functions/_pglog_enrol.js (enrolOne), so /enrol, /enrol-bulk, join-request
+ * approval and pending-invite resolution share ONE path. The guard is pinned there, and exercised
+ * for real in test/pglog-enrol.test.mjs. */
+const ENROL = read("../functions/_pglog_enrol.js");
 test("enrol refuses to change the caller's own role", () => {
-  assert.match(PGLOG, /cannot_assign_self/, "the self-assignment refusal must exist");
-  const i = PGLOG.indexOf("cannot_assign_self");
-  const j = PGLOG.indexOf("ORG.setMembership");
+  assert.match(PGLOG, /E\.enrolOne\(/, "the /enrol route must go through the shared enrolOne()");
+  const body = ENROL.slice(ENROL.indexOf("export async function enrolOne"));
+  assert.match(body, /cannot_assign_self/, "the self-assignment refusal must exist");
+  const i = body.indexOf("M.sameActor(identity, actorUid)");
+  const j = body.indexOf("d.setMembership");
   assert.ok(i > -1 && j > -1 && i < j,
     "the refusal must come BEFORE setMembership, or the row is already overwritten");
-  assert.match(PGLOG, /M\.sameActor\(identity, ctx\.actorUid\)/,
-    "compare with sameActor, which normalises the fb: namespace");
 });
 
 /* Re-enrolling an already-scoped HoD to fix a typo silently promoted them to institution-wide

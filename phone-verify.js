@@ -202,8 +202,9 @@
   function api(path, body) {
     var u = user();
     if (!u || typeof u.getIdToken !== "function") return Promise.reject(new Error("signin-required"));
-    return u.getIdToken().then(function (tok) {
-      return fetch("/api/auth/" + path, { method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: JSON.stringify(body || {}) });
+    var hw = (window.SMD_DEVICE && SMD_DEVICE.hwHeaders) ? SMD_DEVICE.hwHeaders() : Promise.resolve({});
+    return Promise.all([u.getIdToken(), hw]).then(function (x) {
+      return fetch("/api/auth/" + path, { method: "POST", headers: Object.assign({ "Content-Type": "application/json", "Authorization": "Bearer " + x[0] }, x[1] || {}), body: JSON.stringify(body || {}) });
     }).then(function (r) { return r.json().catch(function () { return { ok: false, error: "bad-response" }; }); });
   }
 
@@ -214,6 +215,7 @@
     "send-cap": "You have used all 3 codes for today (2 on WhatsApp, 1 by SMS). Try again tomorrow.",
     "sms-used": "The SMS code for today is used. Resend on WhatsApp instead.",
     "no-channel": "We cannot send codes right now. Please try again later.",
+    "phone-in-use": "This number is already verified on another StewardMD account. Use a different number, or sign in to that account.",
     "send-failed": "The code could not be delivered. Try SMS instead.",
     "mismatch": "That code is not right.",
     "expired": "That code has expired. Send a new one.",

@@ -120,7 +120,7 @@ function withCors(request, resp) {
  * Selection via env.AI_PROVIDER; Vertex is primary and fails over to the
  * Developer API. A future provider drops into PROVIDERS.
  * =================================================================== */
-import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor, deviceCheck } from "../../_usage.js";
+import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor, meterEmail, deviceCheck } from "../../_usage.js";
 import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime, scribeChargeSec, isScribeKind, poolKeyFor, capsEnforced, resolveModel, modelRate, rateConfirmed, estCostInr as aiEstCostInr } from "../../_ai_usage.js";
 import { getCredits, dailyCostCap, costCapOn, inrToMt, MT_PER_INR, tokenPackList } from "../../_credits.js";
 import { warmBillingCfg } from "../../_billingcfg.js";
@@ -135,7 +135,8 @@ import { getRemoteConfig, setRemoteConfig } from "../../_remoteconfig.js";
 import { lookupUidByEmail, getUserRecord, setUserDisabled, mergeUserClaims } from "../../_fbadmin.js";
 import { getAnalytics } from "../../_analytics.js";
 import { sseFrames, sseFrameText, sseFrameUsage } from "../../_sse_parse.js";
-import { listTickets as listSupportTickets, getTicket as getSupportTicket, addMessage as addSupportMessage, setStatus as setSupportStatus } from "../../_support.js";
+import { listTickets as listSupportTickets, getTicket as getSupportTicket, addMessage as addSupportMessage, setStatus as setSupportStatus, shotKey as supportShotKey, shotResponse as supportShotResponse } from "../../_support.js";
+import { sendNativeToAll } from "../../_nativepush.js";
 import { answerCacheKey, getCachedAnswer, putCachedAnswer, getRuntimeCfg as getMaikCfg, setRuntimeCfg as setMaikCfg, cacheEligibleCtx, kbFingerprint } from "../../_maik_cache.js";
 import { scrubMetaTalk, metaTalkStream } from "../../_maik_metatalk.js";   // no "the passage you sent" talk (2026-09-26)
 import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
@@ -149,8 +150,9 @@ import { opdSuggestPrompt, sanitizeOpdSuggest } from "./_opd-suggest.js";
 import { icdSuggestPrompt, sanitizeIcdSuggest } from "./_icd-suggest.js";
 import * as icdRepo from "../../_icd_repo.js";
 import { surgxNotePrompt, sanitizeSurgxNote } from "./_surgx-note.js";
-import { quotaOn, quotaKv, consumeScribeSession, quotaRefusal } from "../../_quota.js";
-import { getEntitlement } from "../../_entitlements.js";
+import { quotaOn, quotaKv, consumeScribeSession, quotaRefusal, state as quotaState, consume as quotaConsume } from "../../_quota.js";
+import { getEntitlement, effectiveTierFor } from "../../_entitlements.js";
+import { sttFallbackOn, planClass, monthlyCredits, chargeCredits, signinBody } from "../../_stt_fallback.js";
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
 // model by setModelOverride) wins; otherwise the exact prior behaviour (env.GEMINI_MODEL || default).
 // env.__modelOverride is stamped once per request in onRequest from the KV override.
@@ -1197,7 +1199,7 @@ export async function onRequest(context) {
 
   // AI Control Center admin console APIs (owner-gated): model switch, quota editor, global rollup,
   // emergency kill switch, runtime budget, audit log. Every mutation is written to the audit log.
-  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config" || seg === "admin/analytics" || seg === "admin/support" || seg === "admin/support-reply" || seg === "admin/maik-config" || seg === "admin/maik-feedback") {
+  if (seg === "admin/model" || seg === "admin/ai-usage" || seg === "admin/limits" || seg === "admin/emergency" || seg === "admin/budget" || seg === "admin/audit" || seg === "admin/abuse" || seg === "admin/clientlog" || seg === "admin/config" || seg === "admin/analytics" || seg === "admin/support" || seg === "admin/support-reply" || seg === "admin/support-shot" || seg === "admin/maik-config" || seg === "admin/maik-feedback") {
     const url = new URL(request.url);
     if (!(await aiAdminAuthed(request, env, url))) return json({ error: "forbidden" }, 403);
     const store = usageKv(env);
@@ -1239,18 +1241,35 @@ export async function onRequest(context) {
       if (tid) return json({ ticket: await getSupportTicket(store, tid) });
       return json({ tickets: await listSupportTickets(store, u2.searchParams.get("status") || "") });
     }
+    // Bug report screenshot (shake to report). Owner-only, like every admin/* route.
+    if (seg === "admin/support-shot") {
+      const sid = new URL(request.url).searchParams.get("id") || "";
+      let raw = null; try { raw = await store.get(supportShotKey(sid)); } catch (e) {}
+      return supportShotResponse(raw) || json({ error: "not-found" }, 404);
+    }
     if (seg === "admin/support-reply") {
       if (request.method !== "POST") return json({ error: "method" }, 405);
       let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
       const id = String(b.id || ""); const hasText = !!String(b.text || "").trim();
-      const resolve = b.resolve === true || b.status === "resolved"; const reopen = b.status === "open";
+      const resolve = b.resolve === true || b.status === "resolved"; const reopen = b.status === "open"; const working = b.status === "in_progress";
       let t = null;
-      if (hasText) t = await addSupportMessage(store, id, "support", b.text, Date.now(), resolve ? "resolved" : (reopen ? "open" : undefined));
+      if (hasText) t = await addSupportMessage(store, id, "support", b.text, Date.now(), resolve ? "resolved" : (reopen ? "open" : (working ? "in_progress" : undefined)));
       else if (resolve) t = await setSupportStatus(store, id, "resolved", Date.now());
       else if (reopen) t = await setSupportStatus(store, id, "open", Date.now());
+      else if (working) t = await setSupportStatus(store, id, "in_progress", Date.now());
       else return json({ ok: false, error: "nothing-to-do" }, 400);
       if (!t) return json({ ok: false, error: "not-found" }, 404);
-      await auditRecord(store, "support", id + (hasText ? ":reply" : "") + (resolve ? ":resolved" : reopen ? ":reopened" : ""), actorId, Date.now());
+      // A resolved bug drops its screenshot: it can show a patient, and the fix no longer needs it.
+      if (resolve && t.kind === "bug") { try { await store.delete(supportShotKey(id)); } catch (e) {} }
+      // Tell the doctor on their phone. No ticket text in the push (a lock screen is not private):
+      // only that a reply exists; the reply itself is read in the Bug Report Centre.
+      if (hasText && /^fb:/.test(String(t.owner || ""))) {
+        const bug = t.kind === "bug";
+        const push = sendNativeToAll(env, { title: bug ? (resolve ? "Your bug report is fixed" : "Reply to your bug report") : "Reply from StewardMD support",
+          body: t.id + ": open StewardMD to read it.", tag: "smd-support-" + t.id, url: "https://stewardmd.in/#bugs" }, { uid: String(t.owner).slice(3) }).catch(function () {});
+        if (context && typeof context.waitUntil === "function") context.waitUntil(push); else await push;
+      }
+      await auditRecord(store, "support", id + (hasText ? ":reply" : "") + (resolve ? ":resolved" : reopen ? ":reopened" : working ? ":in-progress" : ""), actorId, Date.now());
       return json({ ok: true, ticket: t });
     }
 
@@ -1395,7 +1414,7 @@ export async function onRequest(context) {
     out.costCapOn = costCapOn(env);
     try {
       out.balanceMt = inrToMt(await getCredits(store, key));
-      out.dailyFreeMt = inrToMt(await dailyCostCap(env, store, who && who.email, null));
+      out.dailyFreeMt = inrToMt(await dailyCostCap(env, store, meterEmail(who), null));
     } catch (e) { out.balanceMt = 0; out.dailyFreeMt = 0; }
     // Rate card: what one unit of AI costs, priced off the SAME cost model that debits the wallet
     // (_ai_usage.estCostInr), so the published rate can never drift from what is actually charged.
@@ -1556,7 +1575,7 @@ export async function onRequest(context) {
     if (_capped) {
       try {
         const _who = await _whoP;
-        const _mq = await gateAndCount(env, _acStore, _mod, usageKeyFor(_who), _who.guest ? "guest" : "unknown", Date.now(), _who.email, context.waitUntil.bind(context), await _ownerP, seg === "explain");
+        const _mq = await gateAndCount(env, _acStore, _mod, usageKeyFor(_who), _who.guest ? "guest" : "unknown", Date.now(), meterEmail(_who), context.waitUntil.bind(context), await _ownerP, seg === "explain");
         if (_mq && typeof _mq.commit === "function") _moduleCommit = _mq.commit;
         try { _hm.gateMs = _mq && _mq._ms; } catch (e) {}
         // Mirror the existing quota response shape so the client's quota handling surfaces it unchanged.
@@ -2151,7 +2170,7 @@ export async function onRequest(context) {
         let usedNow = 0, capNow = 2;
         if (store) {
           const who = await identify(request, env);
-          const mq = await gateAndCount(env, store, "research", usageKeyFor(who), who.guest ? "guest" : "unknown", Date.now(), who.email);
+          const mq = await gateAndCount(env, store, "research", usageKeyFor(who), who.guest ? "guest" : "unknown", Date.now(), meterEmail(who));
           if (!mq.ok) {
             // Over-cap denial must NOT burn a general MaiK slot (no AI work done, and recordUsage's
             // general counter would decrement the shared 60/day allowance). gateAndCount already
@@ -2475,11 +2494,30 @@ export async function onRequest(context) {
       if (!b64) return json({ error: "no audio" }, 400);
       const gate = await checkQuota(env, request, "ocr");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
+      // Dictation credits for this fallback (owner 2026-09-26): 100 free (mobile verified), 500 Pro,
+      // 1,000 Clinician a month, then bought packs. Checked before the model call, spent only on success.
+      // Owners are exempt; STT_FALLBACK_CREDITS_ON="0" turns the meter off.
+      let fb = null;
+      if (sttFallbackOn(env) && !(await ownerOK(request, env).catch(function () { return false; }))) {
+        let pr = null, rec = null;
+        try { pr = await proFromRequest(env, request); } catch (e) { pr = null; }
+        const fbUid = (pr && pr.uid) || null;
+        if (!fbUid) return json(signinBody(), 402);
+        try { rec = await getEntitlement(env, fbUid); } catch (e) { rec = null; }
+        const phoneOk = !!(pr && pr.claims && pr.claims.phoneVerified === true);
+        const included = monthlyCredits(env, planClass(effectiveTierFor(rec), !!(pr && pr.pro), true, phoneOk));
+        const units = chargeCredits(env, b64.length, body.durationMs);
+        const qkv = quotaKv(env);
+        const st = await quotaState(env, qkv, fbUid, "dict", { included });
+        if (st.meter && st.remaining < units) return json(Object.assign(quotaRefusal(env, "dict"), { needed: units, remaining: st.remaining, phoneVerified: phoneOk }), 402);
+        fb = { qkv, uid: fbUid, units, included };
+      }
       const sys = "Transcribe this clinical dictation audio to plain text, VERBATIM. Return ONLY the transcript text — no preamble, labels, quotes, or commentary. If the audio is empty or inaudible, return an empty string.";
       let text;
       try { text = await gen([{ text: sys }, { inline_data: { mime_type: mime, data: b64 } }], MAX_OUT); }
       catch (e) { await recordUsage(gate, { inTok: 1200, outTok: 0, status: "failed" }); throw e; }
       await recordUsage(gate, { ...tokens(4800, text), status: "success" });
+      if (fb) { try { await quotaConsume(env, fb.qkv, fb.uid, "dict", { units: fb.units, included: fb.included }); } catch (e) {} }
       return json({ transcript: String(text || "").trim(), mode: "ai" });
     }
     return json({ error: "unknown endpoint", seg: seg }, 404);

@@ -5615,11 +5615,14 @@
         .catch(function (e) { return { error: String(e && e.message || e) }; }), 20000, { error: "timeout" });
     },
     // AI STT fallback — audio dataURL → { transcript }. Used only where native/Web-Speech STT is absent.
-    transcribe: function (audioDataUrl) {
+    transcribe: function (audioDataUrl, opts) {
       var b = aiBase(); if (!b) return Promise.resolve({ error: "ai-off" });
       var a = String(audioDataUrl == null ? "" : audioDataUrl); if (!a) return Promise.resolve({ error: "no-audio" });
-      return aiHeaders().then(function (h) { return fetch(b + "/transcribe", { method: "POST", headers: h, body: JSON.stringify({ audio: a }) }); })
-        .then(function (r) { if (r.status === 402) return { error: "quota", needsPro: true }; if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
+      var dur = opts && +opts.durationMs > 0 ? Math.round(+opts.durationMs) : 0;
+      return aiHeaders().then(function (h) { return fetch(b + "/transcribe", { method: "POST", headers: h, body: JSON.stringify({ audio: a, durationMs: dur }) }); })
+        // 402 quota-exhausted/dict = dictation credits spent (pro-paywall.js opens the top-up sheet off the
+        // same response); stt-fallback-signin = no account. Neither is the Pro upsell.
+        .then(function (r) { if (r.status === 402) return r.json().then(function (j) { return (j && j.error === "quota-exhausted" && j.feature === "dict") ? { error: "stt-fallback-exhausted" } : (j && j.error === "stt-fallback-signin") ? { error: "stt-fallback-signin" } : { error: "quota", needsPro: true }; }, function () { return { error: "quota", needsPro: true }; }); if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; });
     },
     // AI Vision — IMAGE mode. Sends the ORIGINAL image { image, kind } so the server can read

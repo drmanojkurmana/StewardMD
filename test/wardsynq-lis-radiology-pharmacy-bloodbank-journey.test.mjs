@@ -202,6 +202,10 @@ test("JOURNEY: one admission -> lab order/result -> imaging order/report -> medi
   assert.equal(dispense.__status, 200, JSON.stringify(dispense));
 
   // ---- Blood Bank: request -> crossmatch -> issue -> two-person bedside check -> start -> complete.
+  // CLIN-09: the lab's blood group result is the patient's group; the request carries none that counts.
+  const grp = await as(DOCTOR, "/ward/investigation", "POST", { orgId: ORG, encounterId, code: "Blood Group", category: "laboratory" });
+  assert.equal((await as(NURSE, "/ward/collect", "POST", { orgId: ORG, serviceRequestId: grp.orderId, specimenType: "Whole blood", scannedPatientBarcode: reg.mrn })).__status, 200);
+  assert.equal((await as(LABTECH, "/ward/release-result", "POST", { orgId: ORG, serviceRequestId: grp.orderId, status: "final", tests: [{ test: "Blood Group", value: "O Positive" }] })).__status, 200);
   const txReq = await as(DOCTOR, "/ward/transfusion-request", "POST", { orgId: ORG, mrn: reg.mrn, component: "red-cells", units: 1, aboGroup: "O", rhD: "positive" });
   assert.equal(txReq.__status, 200, JSON.stringify(txReq));
   assert.equal(txReq.patientId, patientId, "the transfusion episode resolves to the SAME canonical patientId, not a second identity");
@@ -211,7 +215,7 @@ test("JOURNEY: one admission -> lab order/result -> imaging order/report -> medi
   assert.equal(txIssue.__status, 200, JSON.stringify(txIssue));
   const patientForCheck = { id: patientId, mrn: reg.mrn, wristbandBarcode: reg.mrn };
   const txCheck = await as(DOCTOR, "/ward/transfusion-bedside-check", "POST", {
-    orgId: ORG, episodeId: txReq.episodeId, checkerId: "nurse-a", secondCheckerId: "nurse-b",
+    orgId: ORG, episodeId: txReq.episodeId, checkerId: "nurse-a", secondCheckerId: idFor(NURSE),
     scannedPatientBarcode: reg.mrn, scannedUnitId: "UNIT-J01", patient: patientForCheck,
     unitInHand: { unitId: "UNIT-J01", aboGroup: "O", rhD: "positive", component: "red-cells" },
   });
@@ -235,15 +239,16 @@ test("JOURNEY: one admission -> lab order/result -> imaging order/report -> medi
   assert.ok(types.has("ServiceRequest"), "the bundle carries BOTH the lab and the imaging order (same FHIR type, both mapped): " + JSON.stringify([...types]));
   const serviceRequests = entries.filter((e) => e.resource && e.resource.resourceType === "ServiceRequest");
   // Three: the lab order, the second (critical) potassium added to prove critical loops open on release, and imaging.
-  assert.equal(serviceRequests.length, 4, "exactly the four orders this journey placed - two lab and two imaging: " + serviceRequests.length);
+  // CLIN-09: plus the blood group the transfusion is checked against.
+  assert.equal(serviceRequests.length, 5, "exactly the five orders this journey placed - three lab and two imaging: " + serviceRequests.length);
 
   assert.ok(types.has("DiagnosticReport"), "the bundle carries BOTH the lab result and the imaging report: " + JSON.stringify([...types]));
   const diagnosticReports = entries.filter((e) => e.resource && e.resource.resourceType === "DiagnosticReport");
-  assert.equal(diagnosticReports.length, 4, "exactly the four reports this journey released - two lab and two imaging: " + diagnosticReports.length);
+  assert.equal(diagnosticReports.length, 5, "exactly the five reports this journey released - three lab and two imaging: " + diagnosticReports.length);
 
   assert.ok(types.has("Specimen"), "TASK 3.7 gap closed: the specimen collected for the lab order is now visible in $everything: " + JSON.stringify([...types]));
   const specimens = entries.filter((e) => e.resource && e.resource.resourceType === "Specimen");
-  assert.equal(specimens.length, 2, "one sample per lab order (LT-25: the second order is collected before its result too)");
+  assert.equal(specimens.length, 3, "one sample per lab order (LT-25: the second order is collected before its result too)");
   assert.equal(specimens[0].resource.status, "available");
 
   assert.ok(types.has("MedicationRequest") || types.has("MedicationDispense"), "the bundle carries the medication side of the journey: " + JSON.stringify([...types]));

@@ -21,6 +21,9 @@
   function defIsPro() {
     try {
       if (window.SMD_PRO && SMD_PRO.isProSync && SMD_PRO.isProSync()) return true;
+      // An early-access plan (Clinician Pro / Ultimate, SMD_PRO.hasEarlyAccess) is a paid plan: at
+      // least v1, even for a comp "ultimate" account the billing verdict does not mark pro.
+      if (window.SMD_PRO && SMD_PRO.hasEarlyAccess && SMD_PRO.hasEarlyAccess()) return true;
       if (typeof document !== "undefined" && document.body && document.body.classList.contains("pro-verified")) return true;
     } catch (e) {}
     return false;

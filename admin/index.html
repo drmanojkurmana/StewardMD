@@ -88,6 +88,7 @@
       <nav class="nav" id="nav">
         <a class="on" data-p="overview">📊 Overview</a>
         <div class="grp">Control center</div>
+        <a data-p="bugs">🪲 Bug Centre <span class="b" id="navBugs">0</span></a>
         <a data-p="support">💬 Support tickets <span class="b" id="navSupport">0</span></a>
         <a data-p="userctl">👤 User control</a>
         <a data-p="aictl">🧠 AI control</a>
@@ -272,6 +273,13 @@
           <div class="qa" style="margin-top:12px"><button class="primary" id="entlLookup">Lookup</button></div>
           <div class="msg" id="entlMsg"></div>
           <div id="entlResult" class="hint" style="margin-top:8px">—</div>
+        </div>
+        <div class="card">
+          <b>Ultimate for friends and testers</b>
+          <div class="hint" style="margin:2px 0 8px">Lists every account that holds Pro today. Nothing changes until you tick accounts and press Convert. Paying subscribers are listed separately. Undo any one with Plan: free in User Entitlements.</div>
+          <div class="qa"><button class="primary" id="ultList">List Pro accounts</button> <button class="ghost" id="ultConvert" disabled>Convert selected to Ultimate</button></div>
+          <div class="msg" id="ultMsg"></div>
+          <div id="ultResult" class="hint" style="margin-top:8px">&mdash;</div>
         </div>
         <div class="card">
           <b>Institution coupons</b>
@@ -488,13 +496,30 @@
           <div id="kxRows" style="margin-top:12px"></div>
         </div>
       </div>
+      <!-- BUG CENTRE: shake-to-report bugs from the app, each promised a fix within 24 hours -->
+      <div class="pane" id="pane-bugs" data-need-auth>
+        <div class="stats">
+          <div class="sc"><div class="n" id="bgOpen">—</div><div class="l">Open bugs</div></div>
+          <div class="sc"><div class="n" id="bgLate" style="color:var(--red)">—</div><div class="l">Past 24 h promise</div></div>
+          <div class="sc"><div class="n" id="bgWork">—</div><div class="l">Working on it</div></div>
+          <div class="sc"><div class="n" id="bgFixed">—</div><div class="l">Fixed, last 7 days</div></div>
+          <div class="sc"><div class="n" id="bgSla">—</div><div class="l">Fixed within 24 h</div></div>
+        </div>
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><b style="flex:1">Bug Centre</b>
+            <div class="filters" id="bgFilters"><button class="pill on" data-bf="open">Open</button><button class="pill" data-bf="late">Overdue</button><button class="pill" data-bf="fixed">Fixed</button><button class="pill" data-bf="all">All</button></div>
+            <button class="ghost" id="bgReload" style="padding:7px 11px">Reload</button></div>
+          <div class="hint" style="margin:6px 0 4px">Doctors shake the phone (or tap Report a bug) to send these. The app promises a fix within 24 hours. "Working on it" shows on their phone; "Mark fixed" replies, notifies them and deletes the screenshot.</div>
+          <div class="msg" id="bgMsg"></div><div id="bgBox" style="margin-top:12px"></div>
+        </div>
+      </div>
       <!-- SUPPORT TICKETS -->
       <div class="pane" id="pane-support" data-need-auth>
         <div class="card">
           <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><b style="flex:1">Support tickets</b>
-            <div class="filters" id="supFilters"><button class="pill on" data-sf="open">Open</button><button class="pill" data-sf="">All</button><button class="pill" data-sf="resolved">Resolved</button></div>
+            <div class="filters" id="supFilters"><button class="pill on" data-sf="open">Open</button><button class="pill" data-sf="bugs">Bugs</button><button class="pill" data-sf="">All</button><button class="pill" data-sf="resolved">Resolved</button></div>
             <button class="ghost" id="supReload" style="padding:7px 11px">Reload</button></div>
-          <div class="hint" style="margin:6px 0 4px">Doctors file requests from the app (Help &amp; support). Each has a unique complaint id. Reply here and they see it in-app.</div>
+          <div class="hint" style="margin:6px 0 4px">Doctors file requests from the app (Help &amp; support) and bug reports by shaking the phone (the app promises a fix within 24 hours). Each has a unique complaint id. Reply here: they get a push and read it in the Bug Report Centre. Resolving a bug deletes its screenshot.</div>
           <div class="msg" id="supMsg"></div><div id="supBox" style="margin-top:12px"></div>
         </div>
       </div>
@@ -603,8 +628,8 @@
   var FB={apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I",authDomain:"stewardmd-498ec.firebaseapp.com",projectId:"stewardmd-498ec",storageBucket:"stewardmd-498ec.firebasestorage.app",messagingSenderId:"911280405587",appId:"1:911280405587:web:d09038e15e98d69dc79aa6"};
   var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
   var vFilter="pending", activePane="overview", _aiStructured=null;
-  var PANES=["audit","overview","support","userctl","aictl","config","crashes","analytics","feedback","notif","sources","logs","verif","pro","ota","push","watch","ai","kardiox","xa","tenants"];
-  var TITLES={audit:"Admin activity",overview:"Overview",support:"Support tickets",userctl:"User control",aictl:"AI control",config:"Remote config",crashes:"Crashes",analytics:"Usage analytics",feedback:"MaiK feedback",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",pro:"Payments & Billing",ota:"App updates (OTA)",push:"Push blast",watch:"Lab-watch",ai:"AI usage",kardiox:"KardiQ X training",xa:"Experimental Features",tenants:"Medical colleges"};
+  var PANES=["audit","overview","bugs","support","userctl","aictl","config","crashes","analytics","feedback","notif","sources","logs","verif","pro","ota","push","watch","ai","kardiox","xa","tenants"];
+  var TITLES={audit:"Admin activity",overview:"Overview",bugs:"Bug Centre",support:"Support tickets",userctl:"User control",aictl:"AI control",config:"Remote config",crashes:"Crashes",analytics:"Usage analytics",feedback:"MaiK feedback",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",pro:"Payments & Billing",ota:"App updates (OTA)",push:"Push blast",watch:"Lab-watch",ai:"AI usage",kardiox:"KardiQ X training",xa:"Experimental Features",tenants:"Medical colleges"};
   var TYPE2CAT={guideline:"guideline",drug_approval:"approval",safety_alert:"safety",trial:"study",general:"general"};
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function when(ts){ if(!ts)return""; if(typeof ts==="number"){var s=Math.floor((Date.now()-ts)/1000); if(s<3600)return Math.floor(s/60)+"m ago"; if(s<86400)return Math.floor(s/3600)+"h ago"; return new Date(ts).toLocaleDateString();} return String(ts).slice(0,16).replace("T"," "); }
@@ -680,6 +705,7 @@
     load("/api/verifications?status=pending",true,["ovVerif"],function(d){var n=(d.doctors||[]).length;setN("ovVerif",n);badge("navVerif",n);});
     load("/api/updates?limit=100",false,["ovNotif"],function(d){setN("ovNotif",(d.items||[]).length);});
     load("/api/ai/admin/support?status=open",true,["ovSupport"],function(d){var n=(d.tickets||[]).length;setN("ovSupport",n);badge("navSupport",n);});
+    load("/api/ai/admin/support",true,[],function(d){ var now=Date.now(); var open=(d.tickets||[]).filter(function(t){return t.kind==="bug"&&t.status!=="resolved";}); bugBadge(open.length); });
     load("/api/ai/admin/clientlog",true,["ovErrors"],function(d){var n=(d.errors||[]).length;setN("ovErrors",n);badge("navCrash",n);});
   }
   $("ovRefresh").onclick=ovLoad;
@@ -781,7 +807,7 @@
 
   // ---- Edit prices & flags (live KV overrides) ----
   var BC_PRICE=[["PRO_PRICE_MONTHLY","Pro /mo"],["PRO_PRICE_ANNUAL","Pro /yr"],["PHYSICIAN_PRICE_MONTHLY","Physician /mo"],["PHYSICIAN_PRICE_ANNUAL","Physician /yr"],["PHYSICIANPRO_PRICE_MONTHLY","Physician Pro /mo"],["PHYSICIANPRO_PRICE_ANNUAL","Physician Pro /yr"],["STUDENT_PRICE_MONTHLY","Trainee /mo"],["STUDENT_PRICE_ANNUAL","Trainee /yr"],["CORESIDENT_PRICE_MONTHLY","Co-Resident /mo"],["ONCO_ADDON_MONTHLY","Onco add-on /mo"],["CLINIC_ADDON_MONTHLY","Extra clinic /mo"],["FOUNDING_PRICE_YEAR","Founding /yr"],["TOKENS_BOOST","Tokens Boost"],["TOKENS_PLUS","Tokens Plus"],["TOKENS_POWER","Tokens Power"]];
-  var BC_FLAG=[["AI_COST_CAP_ON","AI rupee cost cap"],["DEVICE_LOCK_ON","Device-share lock"],["MAIK_ENFORCE_CAPS","AI per-module caps"],["FEATURES_ON","Feature gating"]];
+  var BC_FLAG=[["AI_COST_CAP_ON","AI rupee cost cap"],["DEVICE_LOCK_ON","Device-share lock"],["MAIK_ENFORCE_CAPS","AI per-module caps"],["FEATURES_ON","Feature gating"],["TRIAL_ONCE_ON","Free week once per doctor (reg, phone, device)"]];
   var _bcEff={};
   function bcFlat(pl){ pl=pl||{}; var t=pl.tiers||{},a=pl.addons||{},tk=pl.tokens||{}; return {
     PRO_PRICE_MONTHLY:t.pro&&t.pro.amount, PRO_PRICE_ANNUAL:t.pro&&t.pro.annual,
@@ -797,7 +823,7 @@
       if(x.s!==200){ $("bcEditor").innerHTML='<div class="hint">'+(x.s===401?"Not an owner.":"Could not load.")+'</div>'; return; }
       var cfg=(x.d&&x.d.cfg)||{flags:{},prices:{}}; _bcEff=bcFlat(x.d&&x.d.effective);
       var flH=BC_FLAG.map(function(f){ var cur=cfg.flags&&cfg.flags[f[0]]; function opt(v,l){ return '<option value="'+v+'"'+(String(cur==null?"":cur)===v?" selected":"")+'>'+l+'</option>'; }
-        return '<div style="display:flex;align-items:center;gap:8px;margin:4px 0"><span style="flex:1;font-size:12.5px">'+f[1]+'</span><select data-fkey="'+f[0]+'" style="padding:6px">'+opt("","Default")+opt("1","On")+opt("0","Off")+'</select></div>'; }).join("");
+        return '<div style="display:flex;align-items:center;gap:8px;margin:4px 0"><span style="flex:1;font-size:12.5px">'+f[1]+'</span><select data-fkey="'+f[0]+'" style="padding:6px">'+opt("","Default")+opt("1","On")+(f[0]==="TRIAL_ONCE_ON"?opt("shadow","Shadow (log only)"):"")+opt("0","Off")+'</select></div>'; }).join("");
       var promoCur=(cfg.flags&&cfg.flags.PRO_FREE_UNTIL)||"";
       flH+='<div style="display:flex;align-items:center;gap:8px;margin:6px 0"><span style="flex:1;font-size:12.5px">Launch promo until (blank = env; past date = end promo now)</span><input id="bcPromo" value="'+esc(promoCur)+'" placeholder="env default" style="width:150px;padding:6px"></div>';
       var prH='<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 14px">'+BC_PRICE.map(function(p){ var eff=_bcEff[p[0]], val=(eff!=null?Math.round(eff/100):""); return '<div style="display:flex;align-items:center;gap:6px"><span style="flex:1;font-size:12px">'+p[1]+'</span>₹<input data-pkey="'+p[0]+'" value="'+val+'" inputmode="numeric" style="width:74px;padding:5px"></div>'; }).join("")+'</div>';
@@ -1051,21 +1077,111 @@
   var AI="/api/ai/admin";
   function forbid(x,msg){ return x.s===403?"Not an owner.":("Failed: "+(msg&&x.d&&x.d.error||x.s)); }
 
+  // ---- Bug Centre (tickets of kind "bug"; functions/_support.js) ----
+  var bugFilter="open", DAY=86400000;
+  function bugBadge(n){ var b=$("navBugs"); if(b){ b.textContent=n; b.classList.toggle("on",n>0); } }
+  function bugDue(t,now){ now=now||Date.now(); if(t.status==="resolved") return {txt:"Fixed"+(t.resolvedAt&&t.createdAt?" in "+Math.max(1,Math.round((t.resolvedAt-t.createdAt)/3600000))+" h":""),late:false,ok:true};
+    // Time left rounds UP ("Due in 4 h" until it is 3), time overdue rounds DOWN (never overstated).
+    var left=(t.dueAt||(t.createdAt+DAY))-now;
+    return left<=0?{txt:"Overdue "+Math.max(1,Math.floor(-left/3600000))+" h",late:true}:{txt:"Due in "+Math.max(1,Math.ceil(left/3600000))+" h",late:false}; }
+  function bugPill(t){ var d=bugDue(t); var st=t.status==="in_progress"?'<span class="pill" style="pointer-events:none">Working on it</span> ':'';
+    return st+'<span class="pill'+(d.late?' on':'')+'" style="pointer-events:none;white-space:nowrap;'+(d.late?'background:var(--red);border-color:var(--red);color:#fff':(d.ok?'color:var(--tl)':''))+'">'+esc(d.txt)+'</span>'; }
+  function bugStats(all){ var now=Date.now(), open=all.filter(function(t){return t.status!=="resolved";});
+    var late=open.filter(function(t){return (t.dueAt||0)<=now;}).length, work=open.filter(function(t){return t.status==="in_progress";}).length;
+    var fixed=all.filter(function(t){return t.status==="resolved";}), week=fixed.filter(function(t){return (t.resolvedAt||t.updatedAt||0)>now-7*DAY;}).length;
+    var timed=fixed.filter(function(t){return t.resolvedAt&&t.createdAt;}), inSla=timed.filter(function(t){return t.resolvedAt-t.createdAt<=DAY;}).length;
+    $("bgOpen").textContent=open.length; $("bgLate").textContent=late; $("bgWork").textContent=work; $("bgFixed").textContent=week;
+    $("bgSla").textContent=timed.length?Math.round(inSla*100/timed.length)+"%":"—";
+    bugBadge(open.length); }
+  function bugLoad(){
+    say("bgMsg","","Loading…");
+    api(AI+"/support").then(function(x){
+      if(x.s!==200){ say("bgMsg","err",forbid(x)); return; }
+      say("bgMsg","","");
+      var all=((x.d&&x.d.tickets)||[]).filter(function(t){return t.kind==="bug";}); bugStats(all);
+      var now=Date.now(), ts=all.filter(function(t){
+        if(bugFilter==="open") return t.status!=="resolved";
+        if(bugFilter==="late") return t.status!=="resolved"&&(t.dueAt||0)<=now;
+        if(bugFilter==="fixed") return t.status==="resolved";
+        return true; });
+      // Most urgent first: overdue, then soonest due; fixed ones newest first.
+      ts.sort(function(a,b){ var ra=a.status==="resolved", rb=b.status==="resolved"; if(ra!==rb) return ra?1:-1; return ra?((b.resolvedAt||b.updatedAt||0)-(a.resolvedAt||a.updatedAt||0)):((a.dueAt||0)-(b.dueAt||0)); });
+      if(!ts.length){ $("bgBox").innerHTML='<div class="hint">'+(bugFilter==="late"?"Nothing past the 24-hour promise.":"No bugs here.")+'</div>'; return; }
+      $("bgBox").innerHTML=ts.map(function(t){
+        return '<div data-bug="'+esc(t.id)+'" style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer">'+
+          '<div style="flex:1;min-width:0"><b>'+esc(String(t.subject||"").replace(/^Bug:\s*/,""))+'</b>'+(t.unread?' <span style="color:var(--red)">●</span>':'')+
+          '<div class="hint">'+esc(t.id)+' · '+esc(t.email||t.owner||"")+' · '+esc(new Date(t.createdAt).toLocaleString())+'</div></div>'+bugPill(t)+'</div>';
+      }).join("");
+      Array.prototype.forEach.call($("bgBox").querySelectorAll("[data-bug]"),function(el){ el.onclick=function(){ bugOpen(el.getAttribute("data-bug")); }; });
+    }).catch(function(){ say("bgMsg","err","Failed to load."); });
+  }
+  // A plain-text summary to paste into a GitHub issue or a commit. No screenshot, no patient data.
+  function bugSummary(t){ var b=t.bug||{}, e=b.element||{};
+    return ["Bug "+t.id+": "+String(t.subject||"").replace(/^Bug:\s*/,""),
+      "Reported: "+new Date(t.createdAt).toISOString()+" (fix promised by "+new Date(t.dueAt||t.createdAt+DAY).toISOString()+")",
+      "Platform: "+((t.platform||"")+" "+(t.build||"")).trim(), "Screen: "+(b.route||""),
+      "Pointed at: "+(e.label||e.tag||"whole screen")+(e.sel?" ("+e.sel+")":""),
+      b.screen?("Viewport: "+b.screen.w+"x"+b.screen.h+" @"+b.screen.dpr+"x"):"", "UA: "+(b.ua||""), "",
+      "Doctor wrote:", ((t.messages||[])[0]||{}).text||""].filter(function(l){return l!==null;}).join("\n"); }
+  function bugOpen(id){
+    say("bgMsg","","Loading…");
+    api(AI+"/support?id="+encodeURIComponent(id)).then(function(x){
+      var t=x.d&&x.d.ticket; if(x.s!==200||!t){ say("bgMsg","err","Not found."); return; }
+      say("bgMsg","");
+      var b=t.bug||{}, e=b.element||{}, open=t.status!=="resolved";
+      var thread=(t.messages||[]).filter(function(m){return m.text;}).map(function(m){ var mine=m.from==="support";
+        return '<div style="margin:6px 0;padding:9px 12px;border-radius:12px;max-width:85%;'+(mine?"margin-left:auto;background:var(--tl);color:#fff":"background:var(--bg);border:1px solid var(--line)")+'"><div style="font:800 10px var(--f);opacity:.75;margin-bottom:2px">'+(mine?"You (developer)":"Doctor")+' · '+esc(new Date(m.ts).toLocaleString())+'</div><div style="white-space:pre-wrap;font:600 13px var(--f)">'+esc(m.text)+'</div></div>';
+      }).join("");
+      $("bgBox").innerHTML=
+        '<button class="ghost" id="bgBack" style="padding:6px 10px;margin-bottom:10px">← All bugs</button>'+
+        '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><b style="font-size:16px;flex:1">'+esc(String(t.subject||"").replace(/^Bug:\s*/,""))+'</b>'+bugPill(t)+'</div>'+
+        '<div class="hint" style="margin:4px 0 12px">'+esc(t.id)+' · '+esc(t.email||t.owner||"")+' · reported '+esc(new Date(t.createdAt).toLocaleString())+'</div>'+
+        '<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">'+
+          (t.hasShot&&open?'<a id="bgShotA" target="_blank" rel="noopener"><img id="bgShot" alt="Screenshot" style="width:220px;border-radius:12px;border:1px solid var(--line)"></a>':'<div class="hint" style="width:220px">'+(t.hasShot?"Screenshot deleted when fixed.":"No screenshot sent.")+'</div>')+
+          '<div style="flex:1;min-width:240px;font:600 13px/1.6 var(--f)">'+
+            '<div><span class="hint">Pointed at</span><br>'+(e.label||e.tag?'<b>'+esc(e.label||e.tag)+'</b>':'<b>The whole screen</b>')+(e.sel?'<br><code>'+esc(e.sel)+'</code>':'')+'</div>'+
+            '<div style="margin-top:8px"><span class="hint">Screen</span><br><code>'+esc(b.route||"")+'</code></div>'+
+            '<div style="margin-top:8px"><span class="hint">Device</span><br>'+esc(((t.platform||"")+" "+(t.build||"")).trim()||"unknown")+(b.screen?' · '+b.screen.w+'x'+b.screen.h+' @'+b.screen.dpr+'x':'')+'<div class="hint" style="word-break:break-all">'+esc(b.ua||"")+'</div></div>'+
+          '</div></div>'+
+        '<div style="margin-top:14px">'+thread+'</div>'+
+        '<textarea id="bgTx" placeholder="Reply to the doctor (they get a push and read it in their Bug Report Centre)…" style="min-height:80px;margin-top:8px"></textarea>'+
+        '<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">'+
+          (open?(t.status!=="in_progress"?'<button class="ghost" id="bgWorkBtn">Working on it</button>':'')+'<button class="primary" id="bgReplyBtn">Reply</button><button class="approve" id="bgFixBtn" style="border:0;border-radius:10px;padding:9px 14px;font:800 13px var(--f);cursor:pointer">Mark fixed &amp; notify</button>':'<button class="primary" id="bgReplyBtn">Reply</button><button class="ghost" id="bgReopenBtn">Reopen</button>')+
+          '<button class="ghost" id="bgCopyBtn">Copy for GitHub</button></div><div class="msg" id="bgTMsg"></div>';
+      $("bgBack").onclick=bugLoad;
+      var si=$("bgShot"); if(si){ tok().then(function(tk){ return fetch(AI+"/support-shot?id="+encodeURIComponent(id),{headers:{"Authorization":"Bearer "+tk}}); }).then(function(r){ return r.ok?r.blob():null; }).then(function(bl){ if(bl){ var u=URL.createObjectURL(bl); si.src=u; $("bgShotA").href=u; } else si.parentNode.outerHTML='<div class="hint" style="width:220px">Screenshot unavailable.</div>'; },function(){}); }
+      function send(body,okMsg){ say("bgTMsg","","Sending…"); body.id=id;
+        api(AI+"/support-reply",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){ if(r.s===200&&r.d.ok){ say("bgTMsg","ok",okMsg); setTimeout(function(){ bugOpen(id); },500); } else say("bgTMsg","err","Failed: "+(r.d&&r.d.error||r.s)); }); }
+      $("bgReplyBtn").onclick=function(){ var v=($("bgTx").value||"").trim(); if(!v){ say("bgTMsg","err","Write a reply first."); return; } send({text:v},"Sent. The doctor has been notified."); };
+      var wb=$("bgWorkBtn"); if(wb) wb.onclick=function(){ var v=($("bgTx").value||"").trim(); send(v?{text:v,status:"in_progress"}:{status:"in_progress"},"Marked as working on it."); };
+      var fb=$("bgFixBtn"); if(fb) fb.onclick=function(){ var v=($("bgTx").value||"").trim()||"Fixed. It will reach your phone with the next app update. Thank you for reporting it."; send({text:v,resolve:true},"Marked fixed. The doctor has been notified."); };
+      var rb=$("bgReopenBtn"); if(rb) rb.onclick=function(){ send({status:"open"},"Reopened."); };
+      $("bgCopyBtn").onclick=function(){ var txt=bugSummary(t); try{ navigator.clipboard.writeText(txt).then(function(){ say("bgTMsg","ok","Copied."); },function(){ $("bgTx").value=txt; say("bgTMsg","","Copy blocked; the summary is in the box."); }); }catch(ex){ $("bgTx").value=txt; } };
+    }).catch(function(){ say("bgMsg","err","Failed."); });
+  }
+  $("bgFilters").addEventListener("click",function(e){var b=e.target.closest("[data-bf]");if(!b)return;bugFilter=b.getAttribute("data-bf");Array.prototype.forEach.call($("bgFilters").children,function(p){p.classList.toggle("on",p===b);});bugLoad();});
+  $("bgReload").onclick=bugLoad;
+
   // ---- Support tickets ----
   var supFilter="open";
   function supPill(st){ return '<span class="pill'+(st==="resolved"?"":" on")+'" style="pointer-events:none">'+(st==="resolved"?"Resolved":"Open")+'</span>'; }
+  // Bug SLA: the app promises a fix within 24 h of the report (dueAt).
+  function supDue(t){ if(t.kind!=="bug") return ""; if(t.status==="resolved") return '<span class="pill" style="pointer-events:none">Fixed</span>';
+    var left=(t.dueAt||0)-Date.now(), h=Math.ceil(Math.abs(left)/3600000);
+    return '<span class="pill'+(left<=0?' on':'')+'" style="pointer-events:none;'+(left<=0?'background:var(--red);border-color:var(--red)':'')+'">'+(left<=0?("Overdue "+h+" h"):("Due in "+h+" h"))+'</span>'; }
   function supLoad(){
     say("supMsg","","Loading…");
-    api(AI+"/support"+(supFilter?("?status="+supFilter):"")).then(function(x){
+    var bugsOnly=supFilter==="bugs";
+    api(AI+"/support"+(supFilter&&!bugsOnly?("?status="+supFilter):(bugsOnly?"?status=open":""))).then(function(x){
       if(x.s!==200){ say("supMsg","err",forbid(x)); return; }
       say("supMsg","","");
-      var ts=(x.d&&x.d.tickets)||[]; var nb=$("navSupport");
+      var ts=(x.d&&x.d.tickets)||[]; if(bugsOnly) ts=ts.filter(function(t){return t.kind==="bug";}).sort(function(a,b){return (a.dueAt||0)-(b.dueAt||0);}); var nb=$("navSupport");
       if(nb && supFilter==="open"){ nb.textContent=ts.length; nb.classList.toggle("on",ts.length>0); }
       if(!ts.length){ $("supBox").innerHTML='<div class="hint">No tickets.</div>'; return; }
       $("supBox").innerHTML=ts.map(function(t){
         return '<div data-sup="'+esc(t.id)+'" style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer">'+
-          '<div style="flex:1;min-width:0"><b>'+esc(t.subject)+'</b>'+(t.unread?' <span style="color:var(--red)">●</span>':'')+
-          '<div class="hint">'+esc(t.id)+' · '+esc(t.email||t.owner||"")+'</div></div>'+supPill(t.status)+'</div>';
+          '<div style="flex:1;min-width:0"><b>'+(t.kind==="bug"?'<span style="color:var(--red)">BUG</span> ':'')+esc(t.subject)+'</b>'+(t.unread?' <span style="color:var(--red)">●</span>':'')+
+          '<div class="hint">'+esc(t.id)+' · '+esc(t.email||t.owner||"")+'</div></div>'+supDue(t)+supPill(t.status)+'</div>';
       }).join("");
       Array.prototype.forEach.call($("supBox").querySelectorAll("[data-sup]"),function(el){ el.onclick=function(){ supOpen(el.getAttribute("data-sup")); }; });
     }).catch(function(){ say("supMsg","err","Failed to load."); });
@@ -1081,11 +1197,18 @@
       $("supBox").innerHTML=
         '<button class="ghost" id="supBack" style="padding:6px 10px;margin-bottom:8px">← Back</button>'+
         '<div class="hint">'+esc(t.id)+' · '+esc(t.email||t.owner||"")+' · '+esc(((t.platform||"")+" "+(t.build||"")).trim())+'</div>'+
-        '<b style="display:block;margin:4px 0 8px">'+esc(t.subject)+'</b><div>'+thread+'</div>'+
+        '<b style="display:block;margin:4px 0 8px">'+esc(t.subject)+'</b>'+
+        (t.kind==="bug"?('<div class="hint" style="margin-bottom:8px">'+supDue(t)+' '+
+          (t.bug&&t.bug.route?'Screen: <b>'+esc(t.bug.route)+'</b><br>':'')+
+          (t.bug&&t.bug.element?'Pointed at: <b>'+esc(t.bug.element.label||t.bug.element.tag||"")+'</b> <code>'+esc(t.bug.element.sel||"")+'</code><br>':'Whole screen<br>')+
+          (t.bug&&t.bug.screen?'Viewport '+t.bug.screen.w+'x'+t.bug.screen.h+' @'+t.bug.screen.dpr+'x · ':'')+esc((t.bug&&t.bug.ua)||"")+'</div>'+
+          (t.hasShot&&t.status!=="resolved"?'<img id="supShot" alt="Screenshot" style="max-width:260px;border-radius:10px;border:1px solid var(--line);margin-bottom:8px">':'')):'')+
+        '<div>'+thread+'</div>'+
         '<textarea id="supTx" placeholder="Reply to the doctor…" style="min-height:80px"></textarea>'+
         '<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><button class="primary" id="supReplyBtn">Reply</button><button class="primary" id="supResolveBtn">Reply &amp; Resolve</button>'+
         (t.status==="resolved"?'<button class="ghost" id="supReopenBtn">Reopen</button>':'')+'</div><div class="msg" id="supTMsg"></div>';
       $("supBack").onclick=supLoad;
+      var si=$("supShot"); if(si){ tok().then(function(tk){ return fetch(AI+"/support-shot?id="+encodeURIComponent(id),{headers:{"Authorization":"Bearer "+tk}}); }).then(function(r){ return r.ok?r.blob():null; }).then(function(b){ if(b) si.src=URL.createObjectURL(b); else si.remove(); },function(){ si.remove(); }); }
       function send(mode){ var txt=($("supTx").value||"").trim(), body={id:id};
         if(mode==="reply"){ if(!txt){say("supTMsg","err","Enter a reply.");return;} body.text=txt; }
         else if(mode==="resolve"){ body.text=txt; body.resolve=true; } else if(mode==="reopen"){ body.status="open"; }
@@ -1228,7 +1351,7 @@
   $("fbReload").onclick=fbLoad;
   $("fbClear").onclick=function(){ if(!confirm("Clear all MaiK feedback?"))return; api(AI+"/maik-feedback",{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"}).then(function(){ fbLoad(); }); };
 
-  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="audit")auditLoad(); else if(pane==="overview")ovLoad(); else if(pane==="support")supLoad(); else if(pane==="userctl"){ try{ if(!$("ucEmail").value) $("ucEmail").focus(); }catch(e){} } else if(pane==="aictl")aicLoad(); else if(pane==="config")cfgLoad(); else if(pane==="crashes")crLoad(); else if(pane==="analytics")anLoad(); else if(pane==="feedback")fbLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="ota")otaLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="tenants")tnLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} try{ pbLoad(); }catch(e){} try{ bcLoad(); }catch(e){} try{ cpnLoad(); }catch(e){} } }
+  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="audit")auditLoad(); else if(pane==="overview")ovLoad(); else if(pane==="support")supLoad(); else if(pane==="bugs")bugLoad(); else if(pane==="userctl"){ try{ if(!$("ucEmail").value) $("ucEmail").focus(); }catch(e){} } else if(pane==="aictl")aicLoad(); else if(pane==="config")cfgLoad(); else if(pane==="crashes")crLoad(); else if(pane==="analytics")anLoad(); else if(pane==="feedback")fbLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="ota")otaLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="tenants")tnLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} try{ pbLoad(); }catch(e){} try{ bcLoad(); }catch(e){} try{ cpnLoad(); }catch(e){} } }
 
   // ---- Medical colleges (tenant provisioning; owner-gated /api/tenants) ----
   function tnRow(t){
@@ -1344,6 +1467,39 @@
   (function(){ var s=$("kxSave"); if(s)s.onclick=kxSave; var r=$("kxReload"); if(r)r.onclick=kxLoad;
     var m=$("kxMlabSave"); if(m)m.onclick=kxMlabSave; var mr=$("kxMlabReload"); if(mr)mr.onclick=kxLoad; })();
 
+  // ---- Ultimate migration (owner decision 2026-09-26): list first, convert only what is ticked ----
+  (function(){
+    var L=$("ultList"), C=$("ultConvert"); if(!L||!C) return;
+    function rowsHtml(list, paying){
+      return list.map(function(u){
+        return '<label style="display:flex;gap:8px;align-items:center;padding:6px 0;border-top:1px solid var(--line,#e2e8f0)">'+
+          '<input type="checkbox" class="ultPick" value="'+esc(u.uid)+'"'+(u.tier==="ultimate"?' disabled':'')+'> <span><b>'+esc(u.email||u.uid)+'</b> <span class="hint">'+esc(u.source||"no source")+(u.proExp?' · Pro until '+esc(new Date(u.proExp).toISOString().slice(0,10)):' · no expiry')+(paying?' · PAYING':'')+(u.tier==="ultimate"?' · already Ultimate':'')+'</span></span></label>';
+      }).join("");
+    }
+    function list(note){
+      say("ultMsg","","Listing…"); C.disabled=true;
+      api("/api/entitlements/admin/ultimate-migration",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({dryRun:true})}).then(function(x){
+        if(!(x.s===200&&x.d&&x.d.ok)){ say("ultMsg","err",entlErr(x)); return; }
+        var c=x.d.candidates||[], p=x.d.paying||[];
+        $("ultResult").innerHTML=(c.length?'<div><b>Pro accounts ('+c.length+')</b></div>'+rowsHtml(c,false):'<div>No non-paying Pro accounts.</div>')+
+          (p.length?'<div style="margin-top:10px"><b>Paying subscribers ('+p.length+')</b> <span class="hint">tick only if you mean it</span></div>'+rowsHtml(p,true):'')+
+          (x.d.more?'<div class="hint" style="margin-top:6px">More accounts exist; convert these, then list again.</div>':'');
+        C.disabled=!(c.length+p.length); say("ultMsg","ok",note||"Nothing changed yet. Tick the accounts to convert.");
+      }).catch(function(){ say("ultMsg","err","Sign in first."); });
+    }
+    L.onclick=function(){ list(); };
+    C.onclick=function(){
+      var uids=Array.prototype.map.call(document.querySelectorAll(".ultPick:checked"),function(b){return b.value;});
+      if(!uids.length){ say("ultMsg","err","Tick at least one account."); return; }
+      if(!confirm("Convert "+uids.length+" account(s) to Ultimate?")) return;
+      say("ultMsg","","Converting…");
+      api("/api/entitlements/admin/ultimate-migration",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({dryRun:false,uids:uids})}).then(function(x){
+        if(!(x.s===200&&x.d&&x.d.ok)){ say("ultMsg","err",entlErr(x)); return; }
+        list("✅ Converted "+(x.d.converted||[]).length+(x.d.skipped&&x.d.skipped.length?(", skipped "+x.d.skipped.length):"")+". Converted accounts now show as already Ultimate.");
+      }).catch(function(){ say("ultMsg","err","Sign in first."); });
+    };
+  })();
+
   // ---- User Entitlements (lookup by StewardMD ID / email / reg no; role + per-feature tier override) ----
   var ENTL_BASE="/api/entitlements/admin", entlLast=null;
   function entlIdPayload(v){
@@ -1356,7 +1512,7 @@
   function entlRender(r){
     var el=$("entlResult"); if(!el)return;
     if(!r||r.ok===false){ el.innerHTML='<span class="hint">Not found'+(r&&r.error?" ("+esc(r.error)+")":"")+'</span>'; return; }
-    var roles=["","physician","resident","student"];
+    var roles=["","physician","physician_pro","pro","resident","co_resident","intern","student"];
     var roleOpts=roles.map(function(x){return '<option value="'+x+'"'+((r.role||"")===x?" selected":"")+'>'+(x||"— none —")+'</option>';}).join("");
     var tiers=[["","Auto"],["v1","V1"],["v2beta","V2 Beta"]];
     var curOv=(r.overrides&&r.overrides.thorex)||"";
@@ -1365,6 +1521,7 @@
       '<div><b>'+esc(r.smdId||"—")+'</b> · '+esc(r.email||"—")+(r.name?' · '+esc(r.name):'')+'</div>'+
       '<div style="margin-top:4px">Pro: '+(r.pro?"✅":"—")+' · Verified: '+(r.verified?("✅ "+esc(r.regNo||"")):"—")+'</div>'+
       '<div style="margin-top:8px">Role: <select id="entlRole">'+roleOpts+'</select> <button class="ghost" id="entlSaveRole">Save role</button></div>'+
+      '<div style="margin-top:8px">Plan: <select id="entlPlan">'+["free","trainee","coresident","pro","physician","physicianpro","ultimate"].map(function(t){return '<option value="'+t+'"'+((r.tier||"free")===t?" selected":"")+'>'+t+'</option>';}).join("")+'</select> for <input id="entlPlanDays" type="number" min="1" value="365" style="width:80px"> days <label><input type="checkbox" id="entlPlanForever"> forever</label> <button class="ghost" id="entlSavePlan">Save plan</button>'+(r.tierExp?' <span class="hint">until '+esc(new Date(r.tierExp).toISOString().slice(0,10))+'</span>':(r.tier&&r.tier!=="free"?' <span class="hint">no expiry</span>':''))+'</div>'+
       '<div style="margin-top:8px">ThoreX tier (effective): <b>'+esc((r.effectiveTiers&&r.effectiveTiers.thorex)||"—")+'</b> — override: <select id="entlTx">'+tierOpts+'</select> <button class="ghost" id="entlSaveTx">Save tier</button></div>'+
       '<div style="margin-top:8px">AI budget: <b>'+(r.usage?(r.usage.used+" / "+r.usage.cap+" this month · "+r.usage.remaining+" left · resets "+r.usage.resetMonth):"—")+'</b></div>'+
       '<div style="margin-top:8px">Monthly allowance override: <input id="entlBudget" type="number" min="0" placeholder="role default" value="'+(r.aiCapTokens!=null?r.aiCapTokens:"")+'" style="width:120px"> <button class="ghost" id="entlSaveBudget">Save</button></div>'+
@@ -1383,6 +1540,14 @@
       say("entlMsg","","Saving role…");
       api(ENTL_BASE+"/set-role",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({uid:uid,role:$("entlRole").value})}).then(function(x){
         if(x.s===200&&x.d&&x.d.ok!==false){ say("entlMsg","ok","✅ Role updated."); entlReload(); } else say("entlMsg","err",entlErr(x));
+      }).catch(function(){ say("entlMsg","err","Sign in first."); });
+    };
+    $("entlSavePlan").onclick=function(){
+      var t=$("entlPlan").value, forever=$("entlPlanForever").checked, days=Number($("entlPlanDays").value||0);
+      var payload={uid:uid,tier:t}; if(t!=="free"){ if(forever) payload.forever=true; else payload.days=days; }
+      say("entlMsg","","Saving plan…");
+      api(ENTL_BASE+"/set-plan",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)}).then(function(x){
+        if(x.s===200&&x.d&&x.d.ok!==false){ say("entlMsg","ok","✅ Plan set to "+t+"."); entlReload(); } else say("entlMsg","err",entlErr(x));
       }).catch(function(){ say("entlMsg","err","Sign in first."); });
     };
     $("entlSaveTx").onclick=function(){

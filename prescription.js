@@ -30,11 +30,23 @@
   // regNo}), never a self-typed one. If the gate isn't present on this build (e.g. local
   // dev before verify.js ships), we fall back to a manual NMC entry so the pad still works.
   function fbUser() { try { return (window.firebase && firebase.auth && firebase.auth().currentUser) || null; } catch (e) { return null; } }
-  var _vcache = null;   // last known { verified, regNo }
+  var _vcache = null;   // last known { verified, regNo, trainee? }
+  /* `verified` here means REGISTERED DOCTOR (claim verified:true), the only account that may
+   * prescribe. An owner-approved medical student or intern holds traineeVerified instead (audit
+   * 2026-09-26, finding 3): trainee:true, verified:false, and the pad refuses them in plain words. */
+  function traineeInfo() {
+    var V = window.SMD_VERIFY;
+    if (!V || typeof V.isTrainee !== "function") return Promise.resolve(false);
+    return V.isTrainee().then(function (t) { return !!t; }, function () { return false; });
+  }
   function verifiedInfo() {
     if (!window.SMD_VERIFY || !window.SMD_VERIFY.isVerified) return Promise.resolve(null);   // gate absent → caller falls back
     return window.SMD_VERIFY.isVerified().then(function (v) {
-      if (!v) return (_vcache = { verified: false, regNo: "" });
+      if (!v) return traineeInfo().then(function (t) {
+        var role = "";
+        try { role = (t && window.SMD_VERIFY.traineeRole && window.SMD_VERIFY.traineeRole()) || ""; } catch (e) {}
+        return (_vcache = t ? { verified: false, trainee: true, role: role, regNo: "" } : { verified: false, regNo: "" });
+      });
       var u = fbUser();
       if (!(u && u.getIdTokenResult)) return (_vcache = { verified: true, regNo: "" });
       return u.getIdTokenResult().then(function (r) {
@@ -52,7 +64,7 @@
   function nmcKey() { return "stewardmd_nmc_reg_" + uid(); }
   function getNmc() { try { return (localStorage.getItem(nmcKey()) || "").trim(); } catch (e) { return ""; } }
   function setNmc(v) { try { localStorage.setItem(nmcKey(), String(v || "").trim()); } catch (e) {} }
-  function canPrescribe() { return window.SMD_VERIFY ? !!(_vcache && _vcache.verified) : !!getNmc(); }
+  function canPrescribe() { return window.SMD_VERIFY ? !!(_vcache && _vcache.verified && !_vcache.trainee) : !!getNmc(); }
 
   function injectCSS() {
     if (document.getElementById("rxCss")) return;
@@ -2638,10 +2650,34 @@
         '</div>' +
       '</div>' +
       '<div class="rx-scroll-body">' +
-        '<div class="rx-gate">Only <b>verified doctors</b> can create prescriptions. Verify your medical registration once — the pad then opens with your <b>registered number</b> printed on every Rx.</div>' +
+        '<div class="rx-gate">Only <b>verified doctors</b> can create prescriptions. Verify your medical registration once and the pad opens with your <b>registered number</b> printed on every Rx.</div>' +
       '</div>' +
       '<div class="rx-dock">' +
         '<button class="rx-btn rx-print rx-hero-export" id="rxVerify" style="width:100%;justify-content:center">Verify my registration</button>' +
+      '</div>'
+    );
+    sheet.querySelector("#rxX").addEventListener("click", close);
+    sheet.querySelector("#rxVerify").addEventListener("click", function () { close(); try { window.SMD_VERIFY.openPanel(); } catch (e) {} });
+  }
+
+  // Reviewed student or intern: a real account, but no full registration, so no prescriptions.
+  function traineeRefused(role) {
+    var who = role === "student" ? "Medical students" : (role === "intern" ? "Interns" : "Student and intern accounts");
+    show(
+      '<div class="rx-head">' +
+        '<div class="rx-handle-bar"></div>' +
+        '<div class="rx-head-inner">' +
+          '<button class="rx-x" id="rxX" aria-label="Back">' + '<span class="rx-back-chevron" aria-hidden="true">&#8249;</span> Back</button>' +
+          '<div class="rx-head-title"><span class="rx-title-main">Prescriptions</span></div>' +
+          '<div style="width:32px"></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="rx-scroll-body">' +
+        '<div class="rx-gate" id="rxTraineeMsg">' + who + ' cannot create prescriptions, because prescribing needs full medical registration. ' +
+        'If you now hold full registration, verify it as a PG Resident or Doctor and the pad will open.</div>' +
+      '</div>' +
+      '<div class="rx-dock">' +
+        '<button class="rx-btn rx-print rx-hero-export" id="rxVerify" style="width:100%;justify-content:center">Verify full registration</button>' +
       '</div>'
     );
     sheet.querySelector("#rxX").addEventListener("click", close);
@@ -2669,6 +2705,7 @@
     // PRIMARY: gate on the Doctor Verification system; Rx carries the VERIFIED reg number.
     if (window.SMD_VERIFY) {
       verifiedInfo().then(function (info) {
+        if (info && info.trainee) { traineeRefused(info.role); return; }
         if (!info || !info.verified) { verifyRequired(); return; }
         build(info.regNo || "");
       }).catch(function () { verifyRequired(); });

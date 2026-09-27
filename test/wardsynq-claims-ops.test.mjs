@@ -100,7 +100,7 @@ const CLAIM = { id: "c1", patientId: "opd-pat-smd-1", encounterId: "e1", payerId
 const FACTS = {
   conditions: [{ code: "I10", codeSystem: "icd-10", verificationStatus: "confirmed", clinicalStatus: "active", encounterId: "e1", display: "Essential hypertension" }],
   preAuths: [{ id: "pa1", payerId: "star", state: "approved", treatment: "Admission", authorizedAmount: 20000, validUntil: "2026-09-30" }],
-  packageAssignment: null, encounter: { id: "e1", periodStart: "2026-09-10T06:00:00Z", class: "IPD" }, dischargeSummary: { signedBy: "dr" }, invoice: null,
+  packageAssignment: null, encounter: { id: "e1", periodStart: "2026-09-10T06:00:00Z", class: "IPD" }, encounters: [], dischargeSummary: { signedBy: "dr" }, invoice: null,
 };
 const complete = { ...CLAIM, documents: [{ name: "discharge summary" }, { name: "Final bill" }] };
 

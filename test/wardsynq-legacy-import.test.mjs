@@ -227,8 +227,11 @@ test("R3-1: a 250-row patient file commits in three runs; re-running after a fai
 
   const again = await step(runs[1]);
   assert.equal(again.__status, 200, again.__text);
-  assert.deepEqual(again.counts, { create: 69, matched: 30, duplicate: 1, invalid: 0 }, "only what is missing is added; the half-written patient is named, never registered twice");
-  assert.equal((await step(runs[1], true, again)).written, 69);
+  /* DATA-07: the half-written patient (MR number issued, chart record not written) is planned as a REPAIR of its
+   * chart record, never registered twice; it used to stay a duplicate forever. */
+  assert.deepEqual(again.counts, { create: 70, matched: 30, duplicate: 0, invalid: 0 }, "only what is missing is added");
+  assert.match(again.rows.find((r) => r.row === 132).reason, /chart record was never written/);
+  assert.equal((await step(runs[1], true, again)).written, 70);
   const d3 = await step(runs[2]);
   assert.equal((await step(runs[2], true, d3)).written, 50);
   assert.equal(stored("q_patients/"), 250, "every patient registered exactly once");

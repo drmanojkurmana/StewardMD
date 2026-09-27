@@ -38,8 +38,8 @@ import { VITAL_CODES, displayUnit } from "./migrate-vitals.js";
 import { problemLine, problemsForSummary } from "./migrate-problem.js";
 import { diagnosisFor } from "./patient-record.js";
 import { reconciliationIdFor, reconciliationForSummary } from "./med-reconciliation.js";
-import { ADMISSION_CLASSES, freeMasterBed } from "./migrate-inpatient.js";
-import { chargesForPatient } from "./charge-capture.js";
+import { ADMISSION_CLASSES, freeMasterBed, stopOrderVersion } from "./migrate-inpatient.js";
+import { chargesForPatient, unbilledItems } from "./charge-capture.js";
 import { reconciliationOf } from "../../wardsynq/wardsynq-invoice.js";
 import { invoicesForStay } from "./invoice.js";
 import { birthForSummary, birthSectionText } from "./migrate-maternity.js";
@@ -447,11 +447,9 @@ function billState(charges, invoices, encounter, nowMs) {
     return { state: "unreadable", balance: null, unbilled: [], unpriced: [] };
   }
   const live = invoices.filter((i) => i && !isExternalRecord(i) && !i.void);
-  // An item on ANY of the patient's bills is billed: the same event is never billed twice (invoice.js).
-  const onBill = new Set();
-  for (const inv of live) for (const l of inv.lines || []) if (l.sourceType && l.sourceId) onBill.add(`${l.sourceType}:${l.sourceId}`);
-  const unbilled = (charges.priced || []).filter((it) => !(it.sourceType && it.sourceId && onBill.has(`${it.sourceType}:${it.sourceId}`)))
-    .map((it) => ({ display: it.display || it.code, code: it.code, amount: it.line }));
+  /* An item on ANY of the patient's live bills is billed: the same event is never billed twice (invoice.js). A bed day
+   * billed for fewer hours than it now has is billed only in part, and the rest is unbilled (BILL-07). */
+  const unbilled = unbilledItems(charges.priced || [], live).map((it) => ({ display: it.display || it.code, code: it.code, amount: it.line }));
   const unpriced = (charges.unpriced || []).map((it) => ({ display: it.display || it.code, code: it.code }));
   /* What is owed is read from THIS STAY's invoices (retest 2026-09-16): an invoice carrying the stay's id, or an older
    * one with no id matched by its lines or its date (invoice.js invoicesForStay). With no stay given, every bill. */
@@ -606,7 +604,18 @@ async function dischargePatient(request, env, ctx) {
     // authoritative record of the discharge either way.
     const loc = current.location || {};
     if (ctx.orgId && loc.ward && loc.bed) await freeMasterBed(env, ctx.orgId, loc.ward, loc.bed, resolved.actor.id);
+    /* CLIN-04: THE STAY'S MEDICATION ORDERS END WITH IT. Every order of this encounter still active is stopped, as a new
+     * version by the discharging clinician with the reason "discharged", so none of them stays on a round, in a
+     * worklist or in a later admission's checks. Medicines to continue at home belong on the discharge prescription.
+     * One that could not be stopped is named on the response; it still leaves every round, whose orders come only
+     * from open stays (mar-schedule.js roundOrders). */
+    const ordersStopped = [], ordersNotStopped = [];
+    for (const o of (stay.inputs.orders || []).filter((x) => x && x.status === "active")) {
+      try { await stopOrderVersion(svc, o, resolved.actor.id, "discharged", dischargedAt, null); ordersStopped.push(o.id); }
+      catch (e) { ordersNotStopped.push({ orderId: o.id, drug: o.drug || null, error: str(e && e.message) }); }
+    }
     return { ...base, ok: true, written: 1, encounterId, patientId: current.patientId, status: "finished", dischargedAt, disposition, dosesInFlight: inFlight,
+      ordersStopped, ...(ordersNotStopped.length ? { ordersNotStopped } : {}),
       billDeferred: candidate.billDeferred || null, dischargeOverride: candidate.dischargeOverride || null,
       version: out.record.version, actor: resolved.actor.id, role: resolved.role };
   } catch (e) {

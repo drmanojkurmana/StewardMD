@@ -13,7 +13,7 @@
 
   // type: bool | int | tri (true/false/null) | enum. def: default when unset. query: ?alias (or null).
   var DEFS = {
-    smd_fundx:                   { type: "bool", def: false,     query: "fundx",      desc: "FundX master flag (home tile + module). OWNER DECISION 2026-09-25: def:false - code-gated beta, unlocked per device with a StewardMD access code (SMD_XACCESS sets smd_fundx=1 on unlock). Debug builds still auto-enable it (home.js)." },
+    smd_fundx:                   { type: "bool", def: false, early: true,     query: "fundx",      desc: "FundX master flag (home tile + module). OWNER DECISION 2026-09-25: def:false - code-gated beta, unlocked per device with a StewardMD access code (SMD_XACCESS sets smd_fundx=1 on unlock). Debug builds still auto-enable it (home.js)." },
     smd_fundx_depth:             { type: "bool", def: false,      query: "fundxdepth", desc: "Native depth fusion (ARCore / ARKit + LiDAR)" },
     smd_fundx_gpu_preview:       { type: "bool", def: false,      query: "fundxgpu",   desc: "Full-res GPU camera preview" },
     smd_fundx_dev:               { type: "bool", def: false,      query: "fundxdev",   desc: "Developer mode overlay + telemetry HUD" },
@@ -54,10 +54,17 @@
       default: return raw;
     }
   }
+  // Plan early access (owner decision 2026-09-26): a master flag marked `early: true` that NOTHING
+  // has decided (no ?query, no localStorage value) reads ON for an early-access plan, via the one
+  // helper SMD_PRO.hasEarlyAccess() (account.js: Clinician Pro / Ultimate). An explicit ?query=0 or
+  // localStorage "0" still wins, so the per-device kill switches keep working.
+  function earlyAccess() { try { return !!(typeof window !== "undefined" && window.SMD_PRO && window.SMD_PRO.hasEarlyAccess && window.SMD_PRO.hasEarlyAccess()); } catch (e) { return false; } }
   function get(key) {
     var def = DEFS[key]; if (!def) return null;
     var q = rawQuery(def.query); if (q != null) return coerce(def, q);   // ?query wins
-    var s = store(); return coerce(def, s ? s.getItem(key) : null);
+    var s = store(), raw = s ? s.getItem(key) : null;
+    if (raw == null && def.early && earlyAccess()) return true;
+    return coerce(def, raw);
   }
   function set(key, val) {
     var def = DEFS[key], s = store(); if (!def || !s) return false;

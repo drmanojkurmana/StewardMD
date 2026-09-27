@@ -21,7 +21,8 @@ import { RecordService, isExternalRecord } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { openInvoice, postEvent, voidInvoice, reconciliationOf, receiptFor, receiptsFor, InvoiceRefusalError, NOTE_KINDS, postNote, setBuyer } from "../../wardsynq/wardsynq-invoice.js";
 import { validateCollection, applyAdapterResult } from "../../wardsynq/wardsynq-payment-methods.js";
-import { chargesForPatient } from "./charge-capture.js";
+import { chargesForPatient, unbilledItems } from "./charge-capture.js";
+import { StagedRepository } from "./staged.js";
 import { submitPaymentViaAdapter } from "../../wardsynq/wardsynq-payment-adapter.js";
 import { resolveParties, partiesRecord } from "./payer-contracts.js";
 import { STAY_PAYER_TYPE, stayPayerIdFor } from "./stay-payer.js";
@@ -153,6 +154,18 @@ async function raiseInvoice(request, env, ctx) {
   const { svc, resolved, error } = await open_(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
 
+  /* A RAISE RESENT AFTER ITS ANSWER WAS LOST (BILL-03) answers with the bill it made, before anything is read or a
+   * document number is issued. */
+  const replay = await replayed(svc, ctx, patientId);
+  if (replay) return { ...base, ...replay };
+  /* ONE RAISE AT A TIME PER PATIENT (BILL-02). The patient's raise head is read BEFORE the bills already raised, and the
+   * new bill lands in one append with the head's next version. Two raises that read the same head cannot both land, so
+   * two cashiers (or a double tap) can never put the same charges on two bills. */
+  const headId = `raise-${slug(patientId)}`;
+  let head;
+  try { head = await ctx.recordDeps.repository.latest(mig.tenantId, HEAD_TYPE, headId); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
+
   /* THE STAY THIS BILL BELONGS TO (retest 2026-09-16). The cashier sends only the patient, so every invoice was
    * written with encounterId null and the discharge checklist could not tell it was this stay's bill. A named
    * encounter must be this patient's inpatient stay; with none named, the patient's open stay is used. */
@@ -174,15 +187,13 @@ async function raiseInvoice(request, env, ctx) {
     let earlier;
     try { earlier = (await svc.byPatient(TYPE, patientId)) || []; }
     catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
-    const onBill = new Set();
-    for (const inv of earlier) if (inv && !isExternalRecord(inv)) for (const l of inv.lines || []) if (l.sourceType && l.sourceId) onBill.add(`${l.sourceType}:${l.sourceId}`);
     const pick = !encounterId;
     for (const a of actives) {
       if (a.encounterId === encounterId) continue;
       const ch = await chargesForPatient(request, env, { ...ctx, patientId, encounterId: a.encounterId });
       if (!ch.ok) return { ...base, ...ch, written: 0 };
       const ap = applyPackage(ch, a, ctx.tariff);
-      if (pick && !encounterId && ap.lines.some((l) => !l.packageIncluded && !onBill.has(`${l.sourceType}:${l.sourceId}`))) { encounterId = a.encounterId; continue; }
+      if (pick && !encounterId && unbilledItems(ap.lines, earlier).some((l) => !l.packageIncluded)) { encounterId = a.encounterId; continue; }
       for (const it of [...(ch.priced || []), ...(ch.unpriced || [])]) if (it.sourceType && it.sourceId) packageKeys.add(`${it.sourceType}:${it.sourceId}`);
     }
   }
@@ -205,14 +216,13 @@ async function raiseInvoice(request, env, ctx) {
   const unpricedNames = ((applied ? applied.unpriced : charges.unpriced) || []).map((u) => ({ display: u.display || u.code, code: u.code, reason: u.reason }));
   if (!billable || !billable.length) return { ...base, ok: true, written: 0, skipped: "nothing_priced", unpriced: unpricedNames, ...(charges.unreadable ? { unreadable: charges.unreadable } : {}), detail: charges.tariffWarning || "Nothing chargeable is priced right now." };
 
-  // NEVER TWICE. Every source event already sitting on an earlier invoice for this patient is
-  // excluded here, before a second invoice can be raised against it.
+  // NEVER TWICE. Every source event already sitting on an earlier live invoice for this patient is
+  // excluded here, before a second invoice can be raised against it. A void bill bills nothing (BILL-04), and a
+  // bed day billed for fewer hours than it now has leaves only the hours added since (BILL-07).
   let existing;
   try { existing = (await svc.byPatient(TYPE, patientId)) || []; }
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 }; }
-  const alreadyInvoiced = new Set();
-  for (const inv of existing) { if (inv && !isExternalRecord(inv)) for (const l of inv.lines || []) if (l.sourceType && l.sourceId) alreadyInvoiced.add(`${l.sourceType}:${l.sourceId}`); }
-  const newLines = billable.filter((it) => !(it.sourceType && it.sourceId && alreadyInvoiced.has(`${it.sourceType}:${it.sourceId}`)));
+  const newLines = unbilledItems(billable, existing);
   if (!newLines.length) return { ...base, ok: true, written: 0, skipped: "already_invoiced", detail: "Every currently priced item is already on an earlier invoice." };
   if (newLines.every((l) => l.packageIncluded)) return { ...base, ok: true, written: 0, skipped: "package_covers_all", detail: "Everything new on this stay is covered by its package, and the package is already on a bill." };
 
@@ -310,7 +320,16 @@ async function raiseInvoice(request, env, ctx) {
   }
 
   try {
-    const out = await svc.put(ep, { idempotencyKey: ctx.idempotencyKey || null });
+    const staged = new StagedRepository(ctx.recordDeps.repository);
+    const wsvc = new RecordService({ repository: staged, pseudonym: ctx.recordDeps.pseudonym, tenant: resolved.tenant, actor: resolved.actor, role: resolved.role, roleSource: resolved.source });
+    const out = await wsvc.put(ep, { idempotencyKey: ctx.idempotencyKey || null });
+    await staged.append(mig.tenantId, [{ resourceType: HEAD_TYPE, id: headId, version: head ? head.version + 1 : 1, lastInvoiceId: id, writtenBy: { id: resolved.actor.id, kind: "human", at } }], {});
+    try { await staged.commit(); }
+    catch (e) {
+      if (e instanceof VersionConflictError) return { ...base, ok: false, status: 409, error: "invoice_raise_in_progress", written: 0, actor: resolved.actor.id,
+        detail: "Another bill for this patient was raised at the same moment, so this one was not. Check the patient's bills before raising again." };
+      throw e;
+    }
     return { ...base, ok: true, written: 1, ...summary({ ...ep, version: out.record.version }), actor: resolved.actor.id,
       ...(unpricedNames.length ? { unpriced: unpricedNames } : {}), ...(charges.unreadable ? { unreadable: charges.unreadable } : {}),
       ...(carved && packageStay && !packageStay.periodEnd ? { warning: "This stay is still open. Room days after this bill are not in its GST room charges; raise a debit note for them." } : {}),
@@ -319,6 +338,17 @@ async function raiseInvoice(request, env, ctx) {
 }
 
 const SERIES_TYPE = "_wardsynq_doc_series";
+const HEAD_TYPE = "_wardsynq_invoice_raise";
+
+/** The outcome a request with this idempotency key already produced for this patient's bill, as the response, or null.
+ *  A key used for another patient or another kind of record is refused (service.js replayFor). */
+async function replayed(svc, ctx, patientId, invoiceId) {
+  if (!str(ctx.idempotencyKey)) return null;
+  let prior;
+  try { prior = await svc.replayFor(ctx.idempotencyKey, TYPE, patientId || null, invoiceId || null); }
+  catch (e) { return writeFailure(e, { written: 0 }); }
+  return prior && prior.record ? { ok: true, written: 0, replayed: true, ...summary(prior.record) } : null;
+}
 /** The next number in a document series ("INV", "CRN", "DBN") for the financial year of `at`: INV/2627/000001.
  *  Optimistic: two cashiers racing for the same number cannot both land (append refuses a version that exists). */
 async function nextDocumentNumber(repo, tenantId, typ, at, actorId) {
@@ -353,6 +383,10 @@ async function transition(request, env, ctx, run, before) {
 
   const current = await svc.get(TYPE, invoiceId).catch(() => null);
   if (!current) return { ...base, ok: false, status: 404, error: "invoice_not_found", invoiceId, written: 0 };
+  /* A payment, refund or any event resent after its answer was lost (BILL-03) is answered with what the first one did,
+   * before any payment adapter is asked again and before anything is appended. */
+  const replay = await replayed(svc, ctx, current.patientId, invoiceId);
+  if (replay) return { ...base, ...replay, invoiceId };
 
   if (before) {
     const refused = await before(current, resolved.actor.id);
@@ -399,21 +433,20 @@ function collectionFor(ctx, kind) {
   );
 }
 
-async function postDeposit(request, env, ctx) {
-  const c = collectionFor(ctx, "deposit");
+/* A deposit or payment: the adapter is asked once the bill is read and the request is known not to be a retry. */
+function collect(request, env, ctx, kind) {
+  const c = collectionFor(ctx, kind);
   if (!c.ok) return { mode: ctx.migration && ctx.migration.mode, tenantId: (ctx.migration && ctx.migration.tenantId) || null, ok: false, status: 422, error: c.error, detail: c.detail, ...(c.missing ? { missing: c.missing } : {}), written: 0 };
-  const adapter = await submitPaymentViaAdapter({ kind: "deposit", amount: ctx.amount, reference: ctx.reference, method: c.collection && c.collection.method }, ctx.paymentAdapter || null);
-  const collection = c.collection ? applyAdapterResult(c.collection, adapter) : null;
-  return transition(request, env, ctx, (inv, actorId) => postEvent(inv, "deposit", { amount: ctx.amount, actorId, at: at_(ctx), reference: ctx.reference, adapter, ...(collection ? { collection } : {}) }));
+  let adapter = null, collection = null;
+  return transition(request, env, ctx, (inv, actorId) => postEvent(inv, kind, { amount: ctx.amount, actorId, at: at_(ctx), reference: ctx.reference, adapter, ...(collection ? { collection } : {}) }), async () => {
+    adapter = await submitPaymentViaAdapter({ kind, amount: ctx.amount, reference: ctx.reference, method: c.collection && c.collection.method }, ctx.paymentAdapter || null);
+    collection = c.collection ? applyAdapterResult(c.collection, adapter) : null;
+    return null;
+  });
 }
+async function postDeposit(request, env, ctx) { return collect(request, env, ctx, "deposit"); }
 /** ctx: { migration, invoiceId, amount, reference?, method?, paymentDetails?, paymentMethods?, paymentAdapter?, actorDeps, recordDeps } */
-async function postPayment(request, env, ctx) {
-  const c = collectionFor(ctx, "payment");
-  if (!c.ok) return { mode: ctx.migration && ctx.migration.mode, tenantId: (ctx.migration && ctx.migration.tenantId) || null, ok: false, status: 422, error: c.error, detail: c.detail, ...(c.missing ? { missing: c.missing } : {}), written: 0 };
-  const adapter = await submitPaymentViaAdapter({ kind: "payment", amount: ctx.amount, reference: ctx.reference, method: c.collection && c.collection.method }, ctx.paymentAdapter || null);
-  const collection = c.collection ? applyAdapterResult(c.collection, adapter) : null;
-  return transition(request, env, ctx, (inv, actorId) => postEvent(inv, "payment", { amount: ctx.amount, actorId, at: at_(ctx), reference: ctx.reference, adapter, ...(collection ? { collection } : {}) }));
-}
+async function postPayment(request, env, ctx) { return collect(request, env, ctx, "payment"); }
 /** ctx: { migration, invoiceId, amount, reason, reference?, actorDeps, recordDeps } */
 async function postRefund(request, env, ctx) { return transition(request, env, ctx, (inv, actorId) => postEvent(inv, "refund", { amount: ctx.amount, actorId, at: at_(ctx), reason: ctx.reason, reference: ctx.reference })); }
 /** ctx: { migration, invoiceId, amount, reason, actorDeps, recordDeps } */
@@ -444,6 +477,8 @@ async function postNoteRoute(request, env, ctx) {
   try { current = await svc.get(TYPE, invoiceId); }
   catch (e) { return { ...base, ...writeFailure(e, { invoiceId, written: 0 }) }; }
   if (!current) return { ...base, ok: false, status: 404, error: "invoice_not_found", invoiceId, written: 0 };
+  const replay = await replayed(svc, ctx, current.patientId, invoiceId);
+  if (replay) return { ...base, ...replay, invoiceId };
   const at = at_(ctx), actorId = resolved.actor.id;
   const opts = { actorId, at, reason: ctx.reason, lines: ctx.lines };
   let probe;

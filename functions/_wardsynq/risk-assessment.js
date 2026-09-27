@@ -188,6 +188,11 @@ async function recordAssessment(request, env, ctx) {
   if (!def) return { ...base, ok: false, status: 404, error: "tool_not_found", toolId, written: 0 };
   const tool = resolveTool(def);
   if (!tool.ok) return { ...base, ok: false, status: 422, error: tool.error, detail: tool.detail, problems: tool.problems, written: 0 };
+  /* CLIN-23: an item the tool could not use would be scored as if it were not on the form, so the band comes
+   * out lower than the paper tool's. The assessment is refused until the hospital corrects the tool. */
+  if (tool.problems && tool.problems.length) {
+    return { ...base, ok: false, status: 422, error: "tool_has_unusable_items", detail: "This risk tool has items that cannot be scored. Ask the administrator to correct the tool; a score without them would read lower than the truth.", problems: tool.problems, written: 0 };
+  }
 
   const scored = score(tool, ctx.answers);
   if (!scored.ok) return { ...base, ok: false, status: 422, error: scored.error, detail: scored.detail, missing: scored.missing, invalid: scored.invalid, written: 0 };

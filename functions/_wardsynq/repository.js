@@ -481,17 +481,19 @@ class MemoryRepository {
      * claiming a patient the record does not have. Claiming an identifier that already belongs to a
      * DIFFERENT patient is refused; re-claiming your own (every new version of a Patient re-offers
      * its identifiers) is a no-op. */
-    const claims = [];
+    const claims = [], claimed = new Map();
     for (const rec of records) {
       for (const k of patientIdentifierKeys(rec)) {
         const mapKey = `${tenantId}|${k.systemKey}|${k.valueNorm}`;
-        const owner = this._ident.get(mapKey);
+        /* A key claimed by an earlier record IN THIS CALL counts as held: D1 inserts both claims in one
+         * batch, the primary key refuses the second and the whole batch rolls back (audit DATA-13). */
+        const owner = this._ident.get(mapKey) || claimed.get(mapKey);
         if (owner && owner !== rec.id) {
           throw new IdentityConflictError(
             `${k.systemKey} ${k.valueNorm} already identifies ${owner}`,
             { systemKey: k.systemKey, valueNorm: k.valueNorm, heldBy: owner, offeredFor: rec.id });
         }
-        if (!owner) claims.push([mapKey, rec.id]);
+        if (!owner) { claims.push([mapKey, rec.id]); claimed.set(mapKey, rec.id); }
       }
     }
     let last = this._seq;
@@ -577,8 +579,9 @@ class MemoryRepository {
   async auditTrail(tenantId, opts) {
     const since = String((opts && opts.since) || "");
     const limit = Math.max(1, Math.min(AUDIT_READ_MAX, Number(opts && opts.limit) || AUDIT_READ_MAX));
+    // The same rows D1's `connector_id LIKE 'wardsynq%'` reads; an event with no connector is stored as "wardsynq".
     const mine = this.audit.map((e, i) => ({ id: e.id || `mem-${i}`, ...clone(e) }))
-      .filter((e) => e.tenantId === tenantId);
+      .filter((e) => e.tenantId === tenantId && /^wardsynq/i.test(String(e.connectorId || "wardsynq")));
     const all = mine.filter((e) => String(e.ts || "") >= since).sort((a, b) => String(a.ts || "").localeCompare(String(b.ts || "")));
     const oldest = mine.map((e) => String(e.ts || "")).filter(Boolean).sort()[0] || null;
     return { events: all.slice(-limit), oldestAt: oldest, truncated: all.length > limit };

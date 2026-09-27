@@ -44,6 +44,7 @@
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService, ListCeilingError } from "./service.js";
+import { VersionConflictError } from "./repository.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { witnessOrRefusal } from "./controlled-drugs.js";
 
@@ -210,18 +211,8 @@ function levelsFrom(movements, dispenses) {
   /* AN ISSUE LEAVES THE STORE IT CAME FROM, NOT THE WARD IT WENT TO (LT-38). A dispense's `destination` is the
    * ward the medicine was sent to, and this subtracted it THERE: the pharmacy's received stock never went down, and
    * every ward that was sent a dose, having received nothing on record, read negative ("Amoxicillin, General
-   * Medicine A, -12 dose"). A dispense names no source location (pharmacy-dispense.js), so it comes out of the one
-   * place that item and unit were ever received into; received into several places, or nowhere, it comes out of the
-   * unnamed main store (location null), where a level with no receipt at all still shows negative, as it should. */
-  const receivedAt = new Map();
-  for (const m of movements || []) {
-    const qty = m && quantityOf(m.quantity);
-    if (!qty || (str(m.kind) !== "receipt" && str(m.kind) !== "transfer-in") || !str(m.code)) continue;
-    const k = `${key(m.code)}|${key(qty.unit)}`;
-    const set = receivedAt.get(k) || new Set();
-    set.add(str(m.location) || null);
-    receivedAt.set(k, set);
-  }
+   * Medicine A, -12 dose"). Where it DID come from is issueStoreFor() below. */
+  const storeOf = issueStoreFor(movements);
   for (const d of dispenses || []) {
     /* A RETURNED ISSUE CAME BACK (pharmacy-dispense.js returnDispense: "stock comes back"). It was subtracted anyway,
      * so every return left the level short by what was returned, and a controlled-drug count then read as a loss. */
@@ -235,12 +226,37 @@ function levelsFrom(movements, dispenses) {
       problems.push({ dispenseId: d.id || null, reason: "dispense_not_countable" });
       continue;
     }
-    const from = receivedAt.get(`${key(code)}|${key(qty.unit)}`);
-    const row = bump(code, d.drug, from && from.size === 1 ? [...from][0] : null, qty, -1);
+    const row = bump(code, d.drug, storeOf(d, code, qty.unit), qty, -1);
     row.issued += qty.value;
   }
 
   return { levels: [...rows.values()], problems };
+}
+
+/**
+ * PURE. The store each dispense came out of, as `(dispense, code, unit) => location`. Shared by levelsFrom(), the NDPS
+ * register book (controlled-drugs.js) and reorder use (purchasing.js), so the three can never disagree.
+ *
+ * THE STORE A DISPENSE RECORDS (pharmacy-dispense.js `location`), when it records one. One that records none comes out
+ * of the pharmacy's MAIN store for that item: where its earliest receipt from a supplier landed (null, the unnamed main
+ * store, when that receipt named no location or there is none). BILL-11: this used to be "the one place the item was
+ * ever received into", recomputed on every read, so transferring ten ampoules to the ICU moved every past dispense,
+ * the NDPS register's included, onto a store with no name. A later receipt or transfer never moves a past issue now.
+ */
+function issueStoreFor(movements) {
+  const first = new Map();
+  for (const m of movements || []) {
+    const qty = m && quantityOf(m.quantity);
+    if (!qty || str(m.kind) !== "receipt" || !str(m.code)) continue;
+    const k = `${key(m.code)}|${key(qty.unit)}`;
+    const p = first.get(k);
+    if (!p || str(m.at) < p.at) first.set(k, { at: str(m.at), location: str(m.location) || null });
+  }
+  return (d, code, unit) => {
+    if (d && str(d.location)) return str(d.location);
+    const hit = first.get(`${key(code)}|${key(unit)}`);
+    return hit ? hit.location : null;
+  };
 }
 
 /** PURE. Which rows are at or below the hospital's reorder level, and which are impossible. */
@@ -369,6 +385,9 @@ async function reconcileCount(request, env, ctx) {
 
   const { svc, error } = await open_(request, env, ctx, "record:read");
   if (error) return { ...base, ...error, written: 0 };
+  const prior = await replayMovement(svc, ctx.idempotencyKey);
+  if (prior) return prior.error ? { ...base, ...prior.error, written: 0 }
+    : { ...base, ...replayed(prior.record), counted, variance: quantityOf(prior.record.quantity) ? quantityOf(prior.record.quantity).value : null, reason: prior.record.reason || null };
 
   let movements, dispenses;
   try {
@@ -433,7 +452,7 @@ async function open_(request, env, ctx, need) {
 
 /**
  * Records a stock movement.
- * ctx: { migration, kind, code, display?, quantity, location?, batch?, expiry?, reason?, at? }
+ * ctx: { migration, kind, code, display?, quantity, location?, batch?, expiry?, reason?, at?, idempotencyKey?, movementId? }
  */
 async function recordMovement(request, env, ctx) {
   const mig = ctx.migration;
@@ -450,6 +469,12 @@ async function recordMovement(request, env, ctx) {
 
   const quantity = quantityOf(ctx.quantity);
   if (!quantity) return { ...base, ok: false, status: 422, error: "quantity_required", detail: "a movement is a number and a unit. \"Some\" is not a stock record.", written: 0 };
+  /* ONLY A COUNT CORRECTION CAN BE NEGATIVE (BILL-12). A "receipt" of -5 ampoules took controlled stock away with no
+   * witness and no reason, where a wastage of 5 needs both. Every other kind says its direction by its kind. */
+  if (kind === "adjustment" ? quantity.value === 0 : !(quantity.value > 0)) {
+    return { ...base, ok: false, status: 422, error: kind === "adjustment" ? "quantity_required" : "quantity_must_be_positive", written: 0,
+      detail: kind === "adjustment" ? "An adjustment of nothing is not an adjustment." : `A ${kind} is a quantity above zero. Stock that went the other way is a wastage, a return or an adjustment, each with its reason.` };
+  }
 
   /* An adjustment without a reason is the movement that hides everything else. It is the only kind
    * that can make a level say whatever somebody wants it to say, so it is the one that must say why. */
@@ -461,6 +486,8 @@ async function recordMovement(request, env, ctx) {
 
   const { svc, resolved, error } = await open_(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
+  const prior = await replayMovement(svc, ctx.idempotencyKey);
+  if (prior) return prior.error ? { ...base, ...prior.error, written: 0 } : { ...base, ...replayed(prior.record), actor: resolved.actor.id };
 
   /* A CONTROLLED DRUG IS NOT DESTROYED OR WRITTEN OFF BY ONE PERSON (controlled-drugs.js). The route decides whether
    * the item is controlled (the hospital's drug master) and hands in the check that the witness is a real, different
@@ -510,8 +537,10 @@ async function recordMovement(request, env, ctx) {
   const at = str(ctx.at) || new Date().toISOString();
   /* The random tail matters: two receipts of one drug in the same millisecond used to share an id, and
    * the second became a new version of the first, so the first delivery vanished from every level.
-   * A retried request is caught by idempotencyKey, not by the id. */
-  const id = `wsq-stock-${key(code).toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${at.replace(/[^0-9]/g, "")}-${kind}-${crypto.randomUUID().slice(0, 8)}`;
+   * A retried request is caught by idempotencyKey, not by the id. A caller that names the id (stores.js, one issue per
+   * indent line at a time) writes it create-only, so a second writer of the same id is refused rather than versioned. */
+  const fixedId = str(ctx.movementId);
+  const id = fixedId || `wsq-stock-${key(code).toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${at.replace(/[^0-9]/g, "")}-${kind}-${crypto.randomUUID().slice(0, 8)}`;
   const record = {
     resourceType: MOVE_TYPE, id, kind, code, display: str(ctx.display) || code,
     quantity, location: str(ctx.location) || null,
@@ -549,16 +578,33 @@ async function recordMovement(request, env, ctx) {
   };
 
   try {
-    const out = await svc.put(record, { idempotencyKey: ctx.idempotencyKey || null });
+    const out = await svc.put(record, { idempotencyKey: ctx.idempotencyKey || null, ...(fixedId ? { expectedVersion: 0 } : {}) });
     /* A replayed key answers with the movement that key first wrote, not the id this retry minted. */
     const saved = out.replayed && out.record ? out.record : record;
-    return { ...base, ok: true, written: 1, movementId: saved.id, kind, recordVersion: out.record.version, movement: saved, actor: resolved.actor.id,
+    return { ...base, ok: true, written: out.replayed ? 0 : 1, ...(out.replayed ? { replayed: true } : {}), movementId: saved.id, kind, recordVersion: out.record.version, movement: saved, actor: resolved.actor.id,
       note: "A movement, not a gate. Nothing in stock control can refuse a dispense.", ...(estimate && estimate.warning ? { estimateWarning: estimate.warning } : {}) };
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "governance", reasons: e.reasons.map((r) => r.code), written: 0 };
+    if (e instanceof VersionConflictError) return { ...base, ok: false, status: 409, error: "version_conflict", detail: str(e && e.message), written: 0 };
     return { ...base, ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), written: 0 };
   }
 }
+
+/* A RETRY IS ANSWERED WITH WHAT IT ALREADY DID (BILL-03), before anything is judged again: asked again, a retried
+ * return is refused against the receipt it already emptied and a retried count finds no variance, although both landed.
+ * null for a new key; { error } for a key that already committed something that is not a stock movement. */
+async function replayMovement(svc, idempotencyKey) {
+  if (!idempotencyKey) return null;
+  try {
+    const r = await svc.replayFor(idempotencyKey, MOVE_TYPE, null);
+    return r && r.record ? { record: r.record } : null;
+  } catch (e) {
+    if (e instanceof VersionConflictError) return { error: { ok: false, status: 409, error: "idempotency_conflict", detail: "This request key already recorded something else." } };
+    return { error: { ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message) } };
+  }
+}
+const replayed = (rec) => ({ ok: true, written: 0, replayed: true, movementId: rec.id, kind: rec.kind, recordVersion: rec.version, movement: rec,
+  note: "Already recorded by this request. Nothing was written again." });
 
 /* A ledger is never computed from a short read. Every movement and dispense is read (service.listAll, paged); past
  * READ_CAP the read throws ListCeilingError and the caller refuses with 409 too_many_records, as it did at the old 1,000.
@@ -604,6 +650,8 @@ async function returnToSupplier(request, env, ctx) {
 
   const { svc, error } = await open_(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, written: 0 };
+  const prior = await replayMovement(svc, ctx.idempotencyKey);
+  if (prior) return prior.error ? { ...base, ...prior.error, written: 0 } : { ...base, ...replayed(prior.record), supplier: prior.record.supplier || null, receiptId: prior.record.returnOfReceipt || receiptId };
 
   let receipt, movements, po = null;
   try {
@@ -712,4 +760,4 @@ async function stockLevels(request, env, ctx) {
   };
 }
 
-export { returnableFrom, returnToSupplier, batchBalances, fefoSuggestion, stockFefo, MOVE_TYPE, KINDS, SIGN, quantityOf, levelsFrom, flagLevels, mixedUnits, nearExpiry, recordMovement, stockLevels, reconcileCount, packFactors, validatePacks, toBaseUnit, dualDisplay };
+export { issueStoreFor, replayMovement, returnableFrom, returnToSupplier, batchBalances, fefoSuggestion, stockFefo, MOVE_TYPE, KINDS, SIGN, quantityOf, levelsFrom, flagLevels, mixedUnits, nearExpiry, recordMovement, stockLevels, reconcileCount, packFactors, validatePacks, toBaseUnit, dualDisplay };

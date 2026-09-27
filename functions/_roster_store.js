@@ -7,6 +7,7 @@
  * none is written and every refusal is returned, so a manager never ends up with half a repeating rota.
  */
 import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
+import { readAll } from "./_fs_read_all.js";
 import { qAudit } from "./_queue_engine.js";
 import { appendOrgAudit } from "./_q_audit_chain.js";
 import { listWards } from "./_opd_org_store.js";
@@ -33,11 +34,15 @@ const today = () => new Date().toISOString().slice(0, 10);
 function datesBetween(from, to) { const out = []; for (let d = from; d <= to && out.length < 400; d = R.addDays(d, 1)) out.push(d); return out; }
 const monthsFor = (orgId, dates, padDays) => [...new Set(dates.flatMap((d) => [R.addDays(d, -(padDays || 0)), d, R.addDays(d, padDays || 0)]).map((d) => monthKey(orgId, d)))];
 const yearsFor = (orgId, dates) => [...new Set(dates.flatMap((d) => [d, String(Number(d.slice(0, 4)) - 1) + d.slice(4)]).map((d) => yearKey(orgId, d)))];
+/* CLIN-15: every row of each month, read in pages (readAll). One capped query of SCAN rows used to be the whole
+ * month, so past 1000 assignments today's on-duty staff could be the rows left out, and a critical alert went to
+ * nobody. partial now means more than MONTH_ROWS in one month, and every caller says it. */
+const MONTH_ROWS = 20000;
 async function rowsBy(env, coll, field, keys) {
   const byId = new Map(); let partial = false;
   for (const k of keys) {
-    const r = await fsQuery(env, coll, { where: { field, value: k }, limit: SCAN });
-    if (r.length >= SCAN) partial = true;
+    const { rows: r, truncated } = await readAll(env, coll, { field, value: k }, MONTH_ROWS);
+    if (truncated) partial = true;
     for (const x of r) byId.set(x.id, { id: x.id, ...(x.fields || {}) });
   }
   return { list: [...byId.values()], partial };

@@ -33,7 +33,7 @@ let fails = 0; const ok = (c, m) => { console.log((c ? "✅ " : "❌ ") + m); if
 
 // A signed-in doctor, a Firestore double, and an in-page /api/auth/phone-* server.
 const STUB = `
-  window.__claims = {}; window.__profile = { name: "Dr Asha Rao", phone: "98765 43210", hospital: "GIMSR", degree: "MD", speciality: "Internal Medicine" };
+  window.__claims = {}; window.__profile = { name: "Dr Asha Rao", phone: "98765 43210", hospital: "GIMSR", degree: "MD", speciality: "Internal Medicine", role: "doctor" };   // role is a required profile field (Role box), else profile-setup opens first
   window.__saved = {}; window.__calls = []; window.__code = "482913"; window.__wa = true; window.__tries = 0; window.__srvOff = false;
   window.__left = { whatsapp: 2, sms: 1 };   // server budget: 2 WhatsApp + 1 SMS per account per day
   window.SMD_AUTH = {
@@ -54,6 +54,8 @@ const STUB = `
     window.__calls.push({ path: u.split("/").pop(), body: body, auth: o.headers && o.headers.Authorization });
     var reply = function (j, s) { return Promise.resolve({ ok: true, status: s || 200, json: function () { return Promise.resolve(j); } }); };
     if (window.__srvOff) return reply({ ok: false, error: "off" });
+    if (u.indexOf("phone-start") > 0 && window.__inUse) return reply({ ok: false, error: "phone-in-use" }, 409);
+    if (u.indexOf("phone-verify") > 0 && window.__inUseAtVerify) return reply({ ok: false, error: "phone-in-use" }, 409);
     if (u.indexOf("phone-start") > 0) {
       var digits = String(body.phone || "").replace(/\\D/g, ""); if (digits.length < 10) return reply({ ok: false, error: "bad-phone" }, 400);
       var L = window.__left;
@@ -218,6 +220,22 @@ try {
   ok(await ev(`try{return sessionStorage.getItem("smd_phone_verify_snoozed")}catch(e){return null}`) === "1", "snoozed for this app-open only (sessionStorage)");
   await ev(`SMD_PHONE_VERIFY._reset(); SMD_PHONE_VERIFY.check(); return 1;`); await sleep(900);
   ok(await on() === false, "and check() respects the snooze");
+
+  // ── one number, one account (audit finding 14): the server refuses a number another live account holds ──
+  await ev(`window.__calls = []; window.__inUse = true; SMD_PHONE_VERIFY._reset(); SMD_PHONE_VERIFY.open("9876543210"); return 1;`); await sleep(300);
+  await click("phvSend"); await sleep(600);
+  const inUse = await text();
+  ok(/This number is already verified on another StewardMD account\. Use a different number, or sign in to that account\./.test(inUse), "phone-in-use at Send shows the plain sentence");
+  ok(!/\u2014/.test(inUse), "no em-dash in the sheet");
+  ok(await on() === true && !!(await ev(`return !!document.getElementById("phvPhone");`)) && !(await ev(`return !!document.getElementById("phvCode");`)), "the sheet stays on the number step so another number can be entered");
+  ok(await ev(`return window.__calls.length === 1 && window.__calls[0].path === "phone-start";`) === true, "one phone-start, no verify attempted");
+  // Taken between Send and Verify: the code step says the same sentence.
+  await ev(`window.__inUse = false; window.__inUseAtVerify = true; return 1;`);
+  await type("phvPhone", "9876543210"); await click("phvSend"); await sleep(600);
+  await type("phvCode", "482913"); await sleep(700);
+  ok(/already verified on another StewardMD account/.test(await text()), "phone-in-use at Verify shows the same sentence");
+  ok(await ev(`try{return localStorage.getItem("smd_phone_verified_u-doc-1")}catch(e){return null}`) !== "1", "and the device is not marked verified");
+  await ev(`window.__inUseAtVerify = false; SMD_PHONE_VERIFY.close(); return 1;`);
 
   // ── kill switches ──
   await ev(`try{sessionStorage.clear(); localStorage.setItem("smd_phone_verify","0")}catch(e){} SMD_PHONE_VERIFY._reset(); SMD_PHONE_VERIFY.check(); return 1;`); await sleep(900);

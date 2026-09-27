@@ -61,6 +61,10 @@ const instance = (who, s, sop) => as(who, `/ward/imaging-instance?orgId=${ORG_ID
 
 test("pure: series sorted by number, instances by InstanceNumber, bad UIDs dropped; the first multipart part", () => {
   assert.equal(V.isUid("1.2.3"), true); assert.equal(V.isUid("1.2.x"), false); assert.equal(V.isUid("../1"), false);
+  // OPS-28/F28: PS3.5 section 9.1 forbids a leading zero in a UID component.
+  assert.equal(V.isUid("1.02.3"), false, "a leading zero component is not a valid DICOM UID");
+  assert.equal(V.isUid("1.0.3"), true, "a lone 0 component is fine");
+  assert.equal(V.isUid("0"), true);
   const s = V.seriesOf([{ "0020000E": { Value: ["1.2"] }, "00200011": { Value: [2] } }, { "0020000E": { Value: ["1.1"] }, "00200011": { Value: [1] } }],
     { "1.1": [{ "00080018": { Value: ["1.1.2"] }, "00200013": { Value: [2] } }, { "00080018": { Value: ["1.1.1"] }, "00200013": { Value: [1] } }] });
   assert.deepEqual(s.map((x) => x.seriesUid), ["1.1", "1.2"]);

@@ -112,7 +112,8 @@ function seedHospital() {
       id: ORG, code: "SMD-WARD01", name: "WSQ Ward Hospital", kind: "clinic", mode: "wardsynq",
       connectTenantId: TENANT_ROW.id, ownerUid: idFor(OWNER), createdAt: 1,
       wardsynq: {
-        tariff: { AMOXICILLIN: { amount: 250, currency: "INR" } },
+        // The supply is priced per tablet under its supply code (BILL-01, BILL-06): 25 tablets at Rs 10 is Rs 250.
+        tariff: { "AMOXICILLIN:supply:tablet": { amount: 10, currency: "INR" } },
         chartCompletion: { "unsigned-notes": { responsibleRole: "author" } },
       },
     }, updateTime: "t1",
@@ -158,7 +159,7 @@ test("TASK 4.18: the full enterprise journey, same patient and encounter through
   assert.equal(order.__status, 200, JSON.stringify(order));
   const orderId = order.orderId;
   assert.ok(orderId, "the order returns a real orderId");
-  const dispense = await as("/ward/dispense", "POST", { orgId: ORG, orderId: orderId, quantity: { value: 30, unit: "tablet" } });
+  const dispense = await as("/ward/dispense", "POST", { orgId: ORG, orderId: orderId, quantity: { value: 25, unit: "tablet" } });
   assert.equal(dispense.__status, 200, JSON.stringify(dispense));
   const dispenseId = dispense.dispenseId;
   assert.ok(dispenseId, "the dispense returns a real dispenseId - this is the source event billing must trace back to");
@@ -171,7 +172,8 @@ test("TASK 4.18: the full enterprise journey, same patient and encounter through
   assert.equal(raised.patientId, patientId, "the invoice is for the SAME patient the whole journey has followed");
   assert.ok(raised.lines && raised.lines.length >= 1, "at least one real chargeable line: " + JSON.stringify(raised.lines));
   const line = raised.lines[0];
-  assert.equal(String(line.code).toUpperCase(), "AMOXICILLIN", "the invoice's own line is the real drug dispensed, never a guessed one");
+  assert.equal(String(line.code).toUpperCase(), "AMOXICILLIN:SUPPLY:TABLET", "the invoice's own line is the real drug dispensed, never a guessed one");
+  assert.equal(line.quantity, 25, "billed for the quantity issued");
   assert.equal(raised.charged, 250, "priced from the hospital's own tariff, not invented here");
 
   // Billing never invents a diagnosis - wardsynq-billing.js's own rule refuses a code the chart does

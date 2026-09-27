@@ -157,6 +157,82 @@ async function verifyAuditChain(repository, tenantId, opts) {
   }
 }
 
+/**
+ * THE WHOLE CHAIN, PAGED (audit DATA-09). verifyAuditChain() checks one window, the newest by default,
+ * so an edit or a deletion below that window was never seen by any caller. This walks from `fromSeq`
+ * (default 1) in VERIFY_MAX pages, each page tied to the one before it by its first link's prev_hash,
+ * and stops at the first finding. `maxRows` bounds one call: past it the walk returns
+ * `status: "partial"` with `nextSeq`, and the next call resumes there (sweepAuditChain does).
+ * @returns {Promise<{status: "ok"|"partial"|"empty"|"broken"|"gap"|"not_verified", checked, fromSeq, toSeq, headSeq, nextSeq?, message}>}
+ */
+async function verifyAuditChainFull(repository, tenantId, opts) {
+  const o = opts || {};
+  const from = Math.max(1, Math.floor(Number(o.fromSeq)) || 1);
+  const budget = Math.max(1, Math.floor(Number(o.maxRows)) || Infinity);
+  let seq = from, checked = 0, headSeq = null;
+  for (;;) {
+    const page = Math.min(VERIFY_MAX, budget - checked);
+    const v = await verifyAuditChain(repository, tenantId, { fromSeq: seq, limit: page });
+    if (v.status !== "ok") return { ...v, fromSeq: from, checked: checked + (v.checked || 0) };
+    checked += v.checked; headSeq = v.headSeq;
+    if (v.toSeq >= v.headSeq) {
+      return { status: "ok", fromSeq: from, toSeq: v.toSeq, headSeq, checked, headHash: v.headHash,
+        message: from === 1 ? `Intact: all ${plural(headSeq, "chained row")} checked from the first.` : `Intact: chained rows ${from} to ${v.toSeq} checked.` };
+    }
+    seq = v.toSeq + 1;
+    if (checked >= budget) {
+      return { status: "partial", fromSeq: from, toSeq: v.toSeq, headSeq, checked, nextSeq: seq,
+        message: `Intact so far: chained rows ${from} to ${v.toSeq} of ${headSeq} checked; the walk continues from ${seq}.` };
+    }
+  }
+}
+
+/* THE SCHEDULED FULL WALK. The hourly anchor tick walks the next SWEEP_ROWS links from a cursor kept
+ * beside the anchors (outside the database), so over successive ticks every link from the first is
+ * re-hashed, and the cursor wraps to 1 once the head is reached. A finding is kept on the state (with
+ * when it was found) until a later pass from the first link comes back whole, so the security review
+ * shows an old break, not only the newest rows.
+ * ponytail: one window per hour; a hospital writing more than SWEEP_ROWS audit rows an hour never
+ * catches up to the head. Raise SWEEP_ROWS, or sweep on more ticks, if the state shows it lagging. */
+const SWEEP_PREFIX = "wsq:auditsweep:";
+const SWEEP_ROWS = 20000;
+const sweepKey = (tenantId) => SWEEP_PREFIX + str(tenantId);
+
+/** The stored sweep state, or null when none was ever stored or it is unreadable. */
+async function readSweep(store, tenantId) {
+  if (!store || typeof store.get !== "function") return null;
+  try {
+    const raw = await store.get(sweepKey(tenantId));
+    const v = raw == null || raw === "" ? null : (typeof raw === "string" ? JSON.parse(raw) : raw);
+    return v && typeof v === "object" && !Array.isArray(v) ? v : null;
+  } catch { return null; }
+}
+
+/** One step of the rotating full walk. A failed read of the chain changes nothing stored; a failed write throws. */
+async function sweepAuditChain(repository, tenantId, store, nowIso, opts) {
+  if (!store || typeof store.get !== "function" || typeof store.put !== "function") throw new Error("no anchor store was handed in");
+  const at = str(nowIso) || new Date().toISOString();
+  const prev = (await readSweep(store, tenantId)) || {};
+  const fromSeq = Math.max(1, Math.floor(Number(prev.nextSeq)) || 1);
+  let v = await verifyAuditChainFull(repository, tenantId, { fromSeq, maxRows: (opts && opts.maxRows) || SWEEP_ROWS });
+  // The cursor is past the head: rows the last run walked are gone from the end of the chain.
+  if (v.status === "not_verified" && v.headSeq != null && fromSeq > v.headSeq) {
+    v = { status: "gap", atSeq: v.headSeq + 1, message: `Gap: the audit chain now ends at row ${v.headSeq}, but row ${fromSeq - 1} was checked on an earlier run. Rows were removed from the end of the audit trail.` };
+  }
+  if (v.status === "not_verified" || v.status === "empty") return { ...v, stored: false };
+  const next = { nextSeq: 1, lastRunAt: at, lastFullAt: prev.lastFullAt || null, finding: prev.finding || null, lastFinding: prev.lastFinding || null };
+  if (v.status === "partial") next.nextSeq = v.nextSeq;
+  else if (v.status === "ok") {
+    /* The head was reached. A finding sends the cursor back to 1, so reaching the head means every link
+     * from the first was re-hashed clean since then: the open finding closes, and stays on lastFinding. */
+    next.lastFullAt = at; next.finding = null;
+  } else {
+    next.finding = next.lastFinding = { status: v.status, atSeq: v.atSeq != null ? v.atSeq : null, auditId: v.auditId || null, foundAt: at, message: v.message };
+  }
+  await store.put(sweepKey(tenantId), JSON.stringify(next));
+  return { ...v, stored: true, state: next };
+}
+
 /* INDIA: Indian Medical Council regulation 1.3.1 keeps in-patient records at least three years, and the
  * audit of those records is kept at least as long. It is informational (nothing deletes on it) and above
  * the one-year log floor of DPDP Rules 2025 r.6(1)(e) and r.8(3); documents.js now keeps documents ten
@@ -560,4 +636,4 @@ async function acknowledgeAcrossStores(repository, tenantId, list, k, fail) {
       (notSeeded.length ? ` ${notSeeded.join(" and ")} held no copy and could not be given one now; it gets one on the next hourly anchor.` : "") };
 }
 
-export { ANCHOR_RANK, anchorStoresOf, anchorDisagreement, checkAnchorStores, GENESIS_PREFIX, VERIFY_DEFAULT, VERIFY_MAX, APPEND_ATTEMPTS, ANCHOR_PREFIX, ANCHOR_MAX, ANCHOR_ACK_ACTION, retryPause, withChainLock, canonicalJson, genesisHash, chainHash, nextLinks, verifyAuditChain, auditRetentionSetting, anchorKey, anchorArchiveKey, anchorEntry, parseAnchorLog, appendAnchorEntry, anchorHead, checkAnchors, acknowledgeAnchorBreak };
+export { SWEEP_PREFIX, SWEEP_ROWS, sweepKey, readSweep, sweepAuditChain, verifyAuditChainFull, ANCHOR_RANK, anchorStoresOf, anchorDisagreement, checkAnchorStores, GENESIS_PREFIX, VERIFY_DEFAULT, VERIFY_MAX, APPEND_ATTEMPTS, ANCHOR_PREFIX, ANCHOR_MAX, ANCHOR_ACK_ACTION, retryPause, withChainLock, canonicalJson, genesisHash, chainHash, nextLinks, verifyAuditChain, auditRetentionSetting, anchorKey, anchorArchiveKey, anchorEntry, parseAnchorLog, appendAnchorEntry, anchorHead, checkAnchors, acknowledgeAnchorBreak };

@@ -39,7 +39,7 @@
 
 import { makeActor, KIND, TIER } from "../../wardsynq/wardsynq-actors.js";
 import { RecordService } from "./service.js";
-import { resolveClinicalActor } from "./actor.js";
+import { resolveClinicalActor, resolveClinicalActorFor } from "./actor.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { hashSecret, sameSecret } from "./patient-access.js";
@@ -144,9 +144,34 @@ function compartmentTypesFor(scopes) {
   if (!patient.length) return null;
   const wide = parsed.filter((s) => s.context !== "patient");
   if (wide.some((s) => s.resource === "*")) return [];
-  const wideTypes = new Set(wide.map((s) => CANONICAL_TYPE[s.resource]).filter(Boolean));
-  if (patient.some((s) => s.resource === "*")) return wideTypes.size ? Object.keys(FHIR_TYPE).filter((t) => !wideTypes.has(t)) : "*";
-  return [...new Set(patient.map((s) => CANONICAL_TYPE[s.resource]).filter((t) => t && !wideTypes.has(t)))];
+  /* SEC-05: a Provenance scope opens EVERY type (readTypesFor), so a patient/Provenance scope must fence
+   * every type too. Mapping it through CANONICAL_TYPE (it has none) fenced nothing, and a token launched
+   * for one patient read any other patient's chart. */
+  const typesOf = (s) => (s.resource === "Provenance" ? Object.keys(FHIR_TYPE) : [CANONICAL_TYPE[s.resource]].filter(Boolean));
+  const wideTypes = new Set(wide.flatMap(typesOf));
+  if (patient.some((s) => s.resource === "*" || s.resource === "Provenance")) return wideTypes.size ? Object.keys(FHIR_TYPE).filter((t) => !wideTypes.has(t)) : "*";
+  return [...new Set(patient.flatMap(typesOf).filter((t) => !wideTypes.has(t)))];
+}
+
+/** PURE. Two read-type sets intersected; null means "every type" (SEC-06). */
+function narrowTypes(a, b) {
+  if (a == null) return b == null ? null : [...b];
+  if (b == null) return [...a];
+  return a.filter((t) => b.includes(t));
+}
+
+/** PURE. Who authorised a grant, as resolveClinicalActorFor takes it. A grant from before this field
+ *  existed is re-checked by its subject id alone: a member matched only by email then fails closed. */
+function subjectIdentityOf(g) {
+  const i = g && g.subjectIdentity;
+  if (i && i.id) return { kind: i.kind === "staff" ? "staff" : "firebase", id: str(i.id), email: i.email ? str(i.email) : null, orgId: i.orgId ? str(i.orgId) : null, sessionRef: null };
+  return { kind: "firebase", id: str(g && g.subject), email: null, orgId: null, sessionRef: null };
+}
+
+/** The authorising person, asked again NOW (SEC-09): still a member, and what their role reads today. */
+async function subjectNow(request, env, ctx, g) {
+  try { return await resolveClinicalActorFor(request, env, subjectIdentityOf(g), ctx.migration.tenantId, "record:read", ctx.actorDeps); }
+  catch { return null; }
 }
 
 const b64url = (bytes) => btoa(String.fromCharCode(...new Uint8Array(bytes))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
@@ -337,6 +362,8 @@ function SmartGrant(input) {
     codeChallenge: i.codeChallenge || null,
     params: i.params || null,                       // an authz transaction's request, awaiting consent
     familyId: i.familyId || null,                   // refresh tokens: the chain they belong to
+    familyIssuedAt: i.familyIssuedAt || null,       // when the person authorised; no refresh outlives this + the refresh lifetime
+    subjectIdentity: i.subjectIdentity || null,     // { kind, id, email, orgId } of the person, re-checked on every use
     nonce: i.nonce || null,
     issuedAt: i.issuedAt, expiresAt: i.expiresAt,
     redeemedAt: i.redeemedAt || null, tokenGrantId: i.tokenGrantId || null,
@@ -440,6 +467,8 @@ async function createLaunch(request, env, ctx) {
 
 /* ---- authorize -------------------------------------------------------------------------------- */
 
+const identityOf = (i) => (i ? { kind: i.kind, id: i.id, email: i.email || null, orgId: i.orgId || null } : null);
+
 /** Everything the authorize endpoint validates about a request BEFORE anyone is asked anything. */
 async function checkAuthorizeRequest(request, env, ctx, p) {
   const mig = ctx.migration;
@@ -511,7 +540,8 @@ async function authorize(request, env, ctx) {
   for (const [k, v] of p.entries()) params[k] = v;
   const grant = SmartGrant({
     id: await grantIdFor("authz", authz), kind: "authz", clientId: c.client.clientId, clientKind: c.client.kind,
-    subject: c.resolved.actor.id, subjectKind: "human", scopes: c.granted, readTypes: readTypesFor(c.granted),
+    subject: c.resolved.actor.id, subjectKind: "human", scopes: c.granted, readTypes: narrowTypes(readTypesFor(c.granted), c.resolved.actor.scope.read),
+    subjectIdentity: identityOf(c.resolved.identity),
     patientId: c.context.patientId, encounterId: c.context.encounterId, redirectUri: c.redirectUri, codeChallenge: c.challenge, params, nonce: c.nonce,
     issuedAt: now.toISOString(), expiresAt: new Date(now.getTime() + AUTHZ_TTL_SECONDS * 1000).toISOString(), issuedBy: c.resolved.actor.id,
   });
@@ -588,7 +618,8 @@ async function decide(request, env, ctx) {
   const code = randomToken(32);
   const codeGrant = SmartGrant({
     id: await grantIdFor("code", code), kind: "code", clientId: client.clientId, clientKind: client.kind,
-    subject: g.subject, subjectKind: "human", scopes: g.scopes, readTypes: g.readTypes, patientId, encounterId,
+    subject: g.subject, subjectKind: "human", scopes: g.scopes, readTypes: narrowTypes(g.readTypes, resolved.actor.scope.read), patientId, encounterId,
+    subjectIdentity: identityOf(resolved.identity), familyIssuedAt: now.toISOString(),
     redirectUri, codeChallenge: g.codeChallenge, nonce: g.nonce,
     issuedAt: now.toISOString(), expiresAt: new Date(now.getTime() + CODE_TTL_SECONDS * 1000).toISOString(), issuedBy: g.subject,
   });
@@ -628,22 +659,29 @@ async function token(request, env, ctx) {
   const refreshTtl = Math.min(MAX_REFRESH_TTL_SECONDS, Math.max(300, Number(ctx.config.smart.refreshTtlSeconds) || DEFAULT_REFRESH_TTL_SECONDS));
   const key = signingKey(env);
 
-  const mint = async ({ subject, subjectKind, scopes, issuedBy, patientId, encounterId, familyId }) => {
+  /* `ceiling`: the read types the authorising person's role allowed (SEC-06). A token never reads more
+   * than its scopes AND that person could read; null for a service, whose scopes are the whole grant. */
+  const mint = async ({ subject, subjectKind, scopes, issuedBy, patientId, encounterId, familyId, ceiling, subjectIdentity, familyIssuedAt }) => {
     const access = randomToken(32);
     const g = SmartGrant({
       id: await grantIdFor("token", access), kind: "token", clientId: client.clientId, clientKind: client.kind,
-      subject, subjectKind, scopes, readTypes: readTypesFor(scopes), patientId: patientId || null, encounterId: encounterId || null, familyId: familyId || null,
+      subject, subjectKind, scopes, readTypes: narrowTypes(readTypesFor(scopes), ceiling), patientId: patientId || null, encounterId: encounterId || null, familyId: familyId || null,
+      subjectIdentity: subjectIdentity || null, familyIssuedAt: familyIssuedAt || null,
       issuedAt: now.toISOString(), expiresAt: new Date(now.getTime() + ttl * 1000).toISOString(), issuedBy,
     });
     await svc.put(g);
     return { access, grantId: g.id };
   };
-  const mintRefresh = async ({ subject, scopes, familyId, patientId, encounterId, issuedBy }) => {
+  /* SEC-09: a refresh token never outlives the moment the person authorised plus the refresh lifetime.
+   * Rotation used to give every new refresh token a fresh full lifetime, so a family renewed for ever. */
+  const mintRefresh = async ({ subject, scopes, familyId, patientId, encounterId, issuedBy, ceiling, subjectIdentity, familyIssuedAt }) => {
     const refresh = randomToken(32);
+    const cap = Date.parse(str(familyIssuedAt)) + refreshTtl * 1000;
     const g = SmartGrant({
       id: await grantIdFor("refresh", refresh), kind: "refresh", clientId: client.clientId, clientKind: client.kind,
-      subject, subjectKind: "human", scopes, readTypes: readTypesFor(scopes), patientId: patientId || null, encounterId: encounterId || null, familyId,
-      issuedAt: now.toISOString(), expiresAt: new Date(now.getTime() + refreshTtl * 1000).toISOString(), issuedBy,
+      subject, subjectKind: "human", scopes, readTypes: narrowTypes(readTypesFor(scopes), ceiling), patientId: patientId || null, encounterId: encounterId || null, familyId,
+      subjectIdentity: subjectIdentity || null, familyIssuedAt: familyIssuedAt || null,
+      issuedAt: now.toISOString(), expiresAt: new Date(Math.min(now.getTime() + refreshTtl * 1000, Number.isFinite(cap) ? cap : 0)).toISOString(), issuedBy,
     });
     await svc.put(g);
     return refresh;
@@ -670,15 +708,19 @@ async function token(request, env, ctx) {
     if (!grantLive(g, now.toISOString()).ok) return deny;
     if (str(g.redirectUri) !== redirectUri) return deny;
     if (!(await pkceMatches(verifier, g.codeChallenge))) { await audit(ctx, "smart.token.denied", { scope: { clientId: client.clientId, grant: "authorization_code", pkce: false } }); return deny; }
+    const who = await subjectNow(request, env, ctx, g);
+    if (!who) { await audit(ctx, "smart.token.denied", { scope: { clientId: client.clientId, grant: "authorization_code", why: "not_a_member" } }); return deny; }
+    const ceiling = narrowTypes(g.readTypes, who.actor.scope.read);
+    const familyIssuedAt = g.familyIssuedAt || now.toISOString();
 
     let minted, refresh = null, idToken = null;
     try {
-      minted = await mint({ subject: g.subject, subjectKind: g.subjectKind, scopes: g.scopes, issuedBy: g.subject, patientId: g.patientId, encounterId: g.encounterId });
+      minted = await mint({ subject: g.subject, subjectKind: g.subjectKind, scopes: g.scopes, issuedBy: g.subject, patientId: g.patientId, encounterId: g.encounterId, ceiling, subjectIdentity: g.subjectIdentity, familyIssuedAt });
       const { meta, version, ...rest } = g;
       /* The code is spent in the same breath. A second exchange of the same code would otherwise
        * mint a second token, which is exactly the replay PKCE exists to stop. */
       await svc.put({ ...rest, redeemedAt: now.toISOString(), tokenGrantId: minted.grantId }, { expectedVersion: version });
-      if (g.scopes.includes("offline_access") || g.scopes.includes("online_access")) refresh = await mintRefresh({ subject: g.subject, scopes: g.scopes, familyId: minted.grantId, patientId: g.patientId, encounterId: g.encounterId, issuedBy: g.subject });
+      if (g.scopes.includes("offline_access") || g.scopes.includes("online_access")) refresh = await mintRefresh({ subject: g.subject, scopes: g.scopes, familyId: minted.grantId, patientId: g.patientId, encounterId: g.encounterId, issuedBy: g.subject, ceiling, subjectIdentity: g.subjectIdentity, familyIssuedAt });
       idToken = await idTokenFor({ subject: g.subject, scopes: g.scopes, nonce: g.nonce });
     } catch (e) {
       if (e instanceof GovernanceError) return oauthError(500, "server_error", "could not record the grant");
@@ -725,15 +767,22 @@ async function token(request, env, ctx) {
       return deny;
     }
     if (!grantLive(g, now.toISOString()).ok) return deny;
+    // SEC-09: the person must still be a member, and the family must still be inside its lifetime.
+    let familyIssuedAt = g.familyIssuedAt;
+    if (!familyIssuedAt) { try { const first = await svc.get(GRANT_TYPE, g.familyId); familyIssuedAt = first && first.issuedAt; } catch { familyIssuedAt = null; } }
+    if (!(Date.parse(str(familyIssuedAt)) + refreshTtl * 1000 > now.getTime())) return deny;
+    const who = await subjectNow(request, env, ctx, g);
+    if (!who) { await audit(ctx, "smart.token.denied", { scope: { clientId: client.clientId, grant: "refresh_token", why: "not_a_member" } }); return deny; }
+    const ceiling = narrowTypes(g.readTypes, who.actor.scope.read);
     // The scope may be narrowed on refresh, never widened.
     const askedScopes = str(f.get("scope")) ? str(f.get("scope")).split(/\s+/).filter((s) => g.scopes.includes(s)) : g.scopes;
     const scopes = askedScopes.some((s) => parseScope(s)) ? askedScopes : g.scopes;
     let minted, refresh, idToken = null;
     try {
-      minted = await mint({ subject: g.subject, subjectKind: "human", scopes, issuedBy: g.subject, patientId: g.patientId, encounterId: g.encounterId, familyId: g.familyId });
+      minted = await mint({ subject: g.subject, subjectKind: "human", scopes, issuedBy: g.subject, patientId: g.patientId, encounterId: g.encounterId, familyId: g.familyId, ceiling, subjectIdentity: g.subjectIdentity, familyIssuedAt });
       const { meta, version, ...rest } = g;
       await svc.put({ ...rest, redeemedAt: now.toISOString(), tokenGrantId: minted.grantId }, { expectedVersion: version });
-      refresh = await mintRefresh({ subject: g.subject, scopes, familyId: g.familyId, patientId: g.patientId, encounterId: g.encounterId, issuedBy: g.subject });
+      refresh = await mintRefresh({ subject: g.subject, scopes, familyId: g.familyId, patientId: g.patientId, encounterId: g.encounterId, issuedBy: g.subject, ceiling, subjectIdentity: g.subjectIdentity, familyIssuedAt });
       idToken = await idTokenFor({ subject: g.subject, scopes });
     } catch (e) { return oauthError(500, "server_error", "could not issue the token"); }
     await audit(ctx, "smart.token", { actor: g.subject, scope: { clientId: client.clientId, grant: "refresh_token", scopes } });
@@ -787,6 +836,14 @@ async function resolveBearer(request, env, ctx) {
   if (!live.ok) return { error: { status: 401, code: "invalid_token", detail: `the token is ${live.reason}` } };
   const client = findClient(ctx.config, g.clientId);
   if (!client) return { error: { status: 401, code: "invalid_token", detail: "the client is no longer registered" } };
+  /* SEC-06/SEC-09: a token for a PERSON reads no more than that person may read today. Disabled,
+   * removed or demoted since they authorised the app: the token follows, on its very next use. */
+  let readTypes = g.readTypes === null ? null : (g.readTypes || []);
+  if (g.subjectKind !== "service") {
+    const who = await subjectNow(request, env, ctx, g);
+    if (!who) return { error: { status: 401, code: "invalid_token", detail: "the person who authorised this token no longer has access" } };
+    readTypes = narrowTypes(readTypes, who.actor.scope.read);
+  }
 
   /* READ tier, empty write scope, read narrowed to the granted types. A human subject keeps their
    * own id so the audit shows the person; a service subject is `smart:<client>`. Neither can be
@@ -796,7 +853,7 @@ async function resolveBearer(request, env, ctx) {
     kind: g.subjectKind === "service" ? KIND.SERVICE : KIND.HUMAN,
     tier: TIER.READ,
     display: `${client.name} (SMART)`,
-    scope: { read: g.readTypes === null ? null : (g.readTypes || []), write: [] },
+    scope: { read: readTypes, write: [] },
   });
   const compartmentTypes = compartmentTypesFor(g.scopes);
   return { actor, tenant: { id: mig.tenantId }, role: "smart", source: `smart:${g.clientKind}`, grantId: g.id, scopes: g.scopes, patientId: g.patientId || null, encounterId: g.encounterId || null, compartmentTypes: g.patientId ? compartmentTypes : null };
@@ -836,7 +893,7 @@ async function revoke(request, env, ctx) {
 
 export {
   GRANT_TYPE, CODE_TTL_SECONDS, AUTHZ_TTL_SECONDS, LAUNCH_TTL_SECONDS, DEFAULT_TOKEN_TTL_SECONDS, MAX_TOKEN_TTL_SECONDS, DEFAULT_REFRESH_TTL_SECONDS, MAX_REFRESH_TTL_SECONDS, ASSERTION_MAX_LIFETIME_SECONDS, JWT_BEARER, SCOPE_RESOURCES, SPECIAL_SCOPES,
-  smartEnabled, findClient, parseScope, grantScopes, readTypesFor, compartmentTypesFor, pkceMatches, randomToken, smartConfiguration,
+  smartEnabled, findClient, parseScope, grantScopes, readTypesFor, compartmentTypesFor, narrowTypes, pkceMatches, randomToken, smartConfiguration,
   decodeJws, verifyClientAssertion, signingKey, publicJwks, signJwt, jwksFetcher, resetJwksCache, SmartGrant, grantLive, consentPage,
   createLaunch, authorize, decide, token, resolveBearer, revoke,
 };

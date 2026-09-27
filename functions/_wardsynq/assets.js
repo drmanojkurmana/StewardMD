@@ -359,15 +359,18 @@ async function updateJobCard(request, env, ctx) {
   } else if (action === "part") {
     const q = Number(ctx.quantity);
     if (!str(ctx.code) || !str(ctx.location) || !(q > 0)) return { ...base, ok: false, status: 422, error: "part_incomplete", detail: "A part needs the stores item, the quantity and the store it came from.", written: 0 };
-    let items;
-    try { items = latest(await every(svc, "StoreItem")); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
+    let items, locs;
+    try { [items, locs] = await Promise.all([every(svc, "StoreItem"), every(svc, "StoreLocation")].map((p) => p.then(latest))); } catch (e) { return { ...base, ...readFailure(e), written: 0 }; }
     const item = items.find((i) => key(i.code) === key(ctx.code));
     if (!item) return { ...base, ok: false, status: 422, error: "unknown_item", detail: "That part is not in the stores item master.", written: 0 };
+    /* The store it came from is one the stores know (BILL-20): free text booked the part out of a level nobody holds. */
+    const loc = locs.find((l) => key(l.code) === key(ctx.location));
+    if (!loc) return { ...base, ok: false, status: 422, error: "unknown_location", detail: "That store location does not exist.", written: 0 };
     const pos = assetPosition(card.assetId, assetEvents);
-    const moved = await recordMovement(request, env, { ...ctx, kind: "consumption", code: item.code, display: item.name, quantity: { value: q, unit: item.unit }, location: str(ctx.location), jobCardId, departmentId: pos.departmentId, reason: `Fitted to ${asset ? asset.tag : card.assetId} on job card ${jobCardId}`, idempotencyKey: ctx.idempotencyKey || null });
+    const moved = await recordMovement(request, env, { ...ctx, kind: "consumption", code: item.code, display: item.name, quantity: { value: q, unit: item.unit }, location: loc.code, jobCardId, departmentId: pos.departmentId, reason: `Fitted to ${asset ? asset.tag : card.assetId} on job card ${jobCardId}`, idempotencyKey: ctx.idempotencyKey || null });
     if (!moved.ok) return { ...base, ...moved, written: 0 };
     movementId = moved.movementId;
-    ev.part = { code: item.code, display: item.name, quantity: q, unit: item.unit, location: str(ctx.location), movementId };
+    ev.part = { code: item.code, display: item.name, quantity: q, unit: item.unit, location: loc.code, movementId };
   } else {
     if (!str(ctx.resolution)) return { ...base, ok: false, status: 422, error: "resolution_required", detail: "Say what was done.", written: 0 };
     if (!state.engineer) return { ...base, ok: false, status: 409, error: "not_assigned", detail: "Assign an engineer before closing the job.", written: 0 };
@@ -389,7 +392,8 @@ async function updateJobCard(request, env, ctx) {
     if (str(ctx.statusAfter) && !STATUSES.includes(str(ctx.statusAfter))) return { ...base, ok: false, status: 422, error: "bad_status", written: 0 };
     ev.resolution = str(ctx.resolution);
   }
-  try { await svc.put(ev); }
+  /* A retried step lands once: the event carries its own key beside the part's movement (BILL-03). */
+  try { await svc.put(ev, { idempotencyKey: ctx.idempotencyKey ? `${ctx.idempotencyKey}:event` : null }); }
   catch (e) {
     return { ...base, ...writeFailure(e), written: movementId ? 1 : 0, ...(movementId ? { partial: true, movementId,
       detail: "The part was booked out of the store but the job card step was not written. Do not book the part out again; add a note to the job card." } : {}) };

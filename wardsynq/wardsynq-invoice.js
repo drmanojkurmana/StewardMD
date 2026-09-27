@@ -169,6 +169,14 @@ function creditableOn(invoice, lineIndex) {
   return round2(n);
 }
 
+/* The tax a note line carries, the way the charge line's was worked out: GST as two equal halves, each rounded to the
+ * paisa (functions/_region_in.js gstOn, BILL-22), so a note on a whole line reverses exactly the tax on it. */
+function noteTax(l, taxable) {
+  const rate = Number(l.taxRate);
+  if (l.taxKind !== "GST") return round2(taxable * rate / 100);
+  return (2 * Math.round(Math.round(taxable * 100) * Math.round(rate * 100) / 20000)) / 100;
+}
+
 /**
  * PURE. Appends a credit or debit note. o: { noteNumber, actorId, at, reason, lines: [{ lineIndex, taxable }],
  * withoutGst?, gstTreatment?, gstConfirmation? }.
@@ -201,7 +209,7 @@ function postNote(invoice, kind, opts) {
     }
     const taxed = !!l.taxKind && l.taxExempt !== true && l.taxRate != null && o.withoutGst !== true;
     return { lineIndex: idx, code: l.code, display: l.display, ...(l.hsnSac ? { hsnSac: l.hsnSac } : {}), ...(l.kind ? { kind: l.kind } : {}),
-      taxable: round2(taxable), ...(l.taxKind ? { taxKind: l.taxKind, taxRate: l.taxRate, taxExempt: l.taxExempt === true, taxBasis: l.taxBasis || null, tax: taxed ? round2(taxable * Number(l.taxRate) / 100) : 0 } : {}) };
+      taxable: round2(taxable), ...(l.taxKind ? { taxKind: l.taxKind, taxRate: l.taxRate, taxExempt: l.taxExempt === true, taxBasis: l.taxBasis || null, tax: taxed ? noteTax(l, taxable) : 0 } : {}) };
   });
   const taxable = round2(lines.reduce((n, l) => n + l.taxable, 0)), tax = round2(lines.reduce((n, l) => n + (Number(l.tax) || 0), 0));
   invoice.events.push({ kind, noteNumber, amount: round2(taxable + tax), taxable, tax, lines, actorId, at, reason, reference: null,
