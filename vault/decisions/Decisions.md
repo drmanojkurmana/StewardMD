@@ -10288,6 +10288,6 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
 - **Why**: extraction precision train 56% -> 60%, dev 52% -> 56%, recall flat; text-path top-1 +11 to +14
   and antibiotics-when-not-needed -9 to -10 in every v2 config; time-critical held. (2) closes the hole
   the better negation exposed (a catheter urosepsis note answered right only because of mis-read positives).
-- **Open (owner)**: one test-split case (aggregate only) loses a needed antibiotic call on the text path in
-  the v2 configs (abxSens 139 -> 138). Not tuned against the test split; the floor is not lowered without
-  the owner's say. `smd_nlp_v2` stays OFF.
+- **Owner accepted (2026-09-27)**: one test-split case (aggregate only) loses a needed antibiotic call on
+  the text path in the v2 configs, so their `abxSens` floor is 138 (was 139). Not tuned against the test
+  split. `smd_nlp_v2` stays OFF; `sepsis_afebrile` is live with gate v2.
