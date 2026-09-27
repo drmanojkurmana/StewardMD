@@ -3681,9 +3681,11 @@
       ".dx-score{font:800 18px var(--sans);color:var(--ink);flex:0 0 auto}.dx-score small{font-size:10px;color:var(--slate-soft);font-weight:600}",
       ".dx-detail{padding:2px 13px 13px;border-top:1px solid var(--line);animation:dxIn .2s ease}",
       ".dx-d-row{margin-top:11px;font:500 12.5px var(--sans);color:var(--slate)}",
-      ".dx-d-row b{display:block;font:700 10.5px var(--sans);text-transform:uppercase;letter-spacing:.03em;color:var(--slate-soft);margin-bottom:5px}",
+      // the row's own label only (a direct child); bold text inside the row body stays inline
+      ".dx-d-row>b{display:block;font:700 10.5px var(--sans);text-transform:uppercase;letter-spacing:.03em;color:var(--slate-soft);margin-bottom:5px}",
+      ".dx-d-row .dx-reason b{font-weight:700;color:var(--ink)}",
       ".dx-d-row ul{margin:0;padding-left:18px}.dx-d-row li{margin:2px 0}",
-      ".dx-d-row.red b{color:var(--red)}",
+      ".dx-d-row.red>b{color:var(--red)}",
       ".dx-reason{line-height:1.55;color:var(--ink)}",
       ".dx-f{display:inline-block;border-radius:6px;padding:3px 8px;margin:0 5px 5px 0;font-size:12px;font-weight:600}",
       ".dx-f.sup{background:var(--green-bg);color:var(--green)}",
