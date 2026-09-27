@@ -10445,3 +10445,23 @@ scoped to offline models with the same fine print as the posters.
 **Verification:** headless Chromium at 1440 and 390 wide, no horizontal overflow, no page errors; site tests
 67/67. Full CI suite 10847/10849, the one failure (`wardsynq-ed` concurrent provisional MRN) passes 3/3 in
 isolation and is unrelated to this change.
+
+## 2026-09-27 - Preview deployments no longer serve the web app
+
+**Decision (owner):** StewardMD is native-only (iOS, Android, iPad). A branch/PR preview URL
+(`<hash|branch>.stewardmd.pages.dev`) opening the full clinical web app in a browser is not acceptable.
+
+**What changed:** `functions/_middleware.js` had a PREVIEW BYPASS that returned the real app on every
+`*.stewardmd.pages.dev` host "for QA". It is removed: previews now get exactly the stewardmd.in routing
+(marketing site at the root, 404 for the app bundle and kb/). Previews keep `X-Robots-Tag: noindex,
+nofollow` (marketing response and the coming-soon fallback). Production stays indexable.
+
+**Also found:** the `/realapp` secret path still sets the `smd_access` cookie, but nothing reads it any more,
+so it unlocks nothing; the web app on stewardmd.in was already fully blocked. Left as is.
+
+**Testing the app now:** on device, or locally with `test/serve.mjs`. `SITE_ALLOW_WEB=1` (Pages env) remains
+the emergency valve and applies to every host.
+
+**Verification:** `test/site-gate.test.mjs` pins it (preview hosts: /home.js and kb/ are 404, root is the
+marketing site, noindex; production root indexable). The new test fails on the old middleware and passes on
+the new one. Full unit suite 10915/10916 passing, 0 failures.
