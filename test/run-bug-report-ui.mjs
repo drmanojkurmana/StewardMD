@@ -52,11 +52,18 @@ const STUB = `
   };
   return 1;`;
 
-const text = (id) => ev(`var r=document.getElementById("${id}"); return r ? r.innerText : "";`);
-const on = (id) => ev(`var r=document.getElementById("${id}"); return !!(r && r.classList.contains("on"));`);
+// Values travel as CDP ARGUMENTS, never spliced into page code (CodeQL: code construction).
+async function fn(decl, ...args) {
+  const g = await call("Runtime.evaluate", { expression: "globalThis" });
+  const r = await call("Runtime.callFunctionOn", { objectId: g.result.result.objectId, functionDeclaration: decl, returnByValue: true, arguments: args.map((value) => ({ value })) });
+  return r.result && r.result.result ? r.result.result.value : null;
+}
+const text = (id) => fn('function (id) { var r = document.getElementById(id); return r ? r.innerText : ""; }', id);
+const on = (id) => fn('function (id) { var r = document.getElementById(id); return !!(r && r.classList.contains("on")); }', id);
 const waitFor = async (expr, ms = 8000) => { const t0 = Date.now(); do { if (await ev(expr) === true) return true; await sleep(150); } while (Date.now() - t0 < ms); return false; };
 // A hand shake: alternating hard swings ~120 ms apart (the detector counts one peak per swing).
-const shake = async () => { for (let i = 0; i < 6; i++) { await ev(`window.dispatchEvent(new DeviceMotionEvent("devicemotion",{accelerationIncludingGravity:{x:${i % 2 ? 22 : -22},y:4,z:9.8}})); return 1;`); await sleep(120); } };
+// The swing direction alternates in the page (a counter), so no value is spliced into page code.
+const shake = async () => { for (let i = 0; i < 6; i++) { await ev(`window.__sw=(window.__sw||0)+1; window.dispatchEvent(new DeviceMotionEvent("devicemotion",{accelerationIncludingGravity:{x:(window.__sw%2?22:-22),y:4,z:9.8}})); return 1;`); await sleep(120); } };
 
 try {
   let ver, t = 0; while (t++ < 60) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }

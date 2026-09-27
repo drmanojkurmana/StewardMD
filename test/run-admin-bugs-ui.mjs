@@ -102,7 +102,14 @@ try {
   if (!ready) throw new Error("admin console did not load");
   await sleep(400);   // let the fake onAuthStateChanged callback + showActivePane() settle
 
-  const click = (sel) => ev(`var e=document.querySelector(${JSON.stringify(sel)}); if(!e) return "missing"; e.click(); return "ok";`);
+  // The selector travels as a CDP ARGUMENT, never spliced into page code (CodeQL: code construction
+  // from an unsanitised value).
+  const { result: { result: { objectId: gObj } } } = await call("Runtime.evaluate", { expression: "globalThis" });
+  const click = async (sel) => {
+    const r = await call("Runtime.callFunctionOn", { objectId: gObj, returnByValue: true, arguments: [{ value: sel }],
+      functionDeclaration: "function (sel) { var e = document.querySelector(sel); if (!e) return 'missing'; e.click(); return 'ok'; }" });
+    return r.result && r.result.result ? r.result.result.value : null;
+  };
   const waitFor = async (expr, ms = 6000) => { const t0 = Date.now(); do { if (await ev(expr) === true) return true; await sleep(120); } while (Date.now() - t0 < ms); return false; };
 
   ok(await ev(`return !!document.querySelector('[data-p="bugs"]') && /Bug Centre/.test(document.querySelector('[data-p="bugs"]').textContent)`) === true, "the admin sidebar has Bug Centre");
