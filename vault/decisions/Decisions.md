@@ -10552,3 +10552,18 @@ black "Steward" can sit on it; the white MaiK wordmark there is rendered black v
   into this device's profile cache at once (smd:phone-verified detail), the server read is bounded at 10 s, a
   Profile whose reads both fail paints the Mobile number row from the phoneVerified claim, and tapping a VERIFIED
   row opens "Number verified" (Done / Change number) instead of the Send-code step.
+
+## 2026-09-27 - Marketing site: Apple-style phone layer
+Owner: "make it mobile compatible and best to watch and get same experience like apple website on
+mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_site/index.html`:
+- Bar is logo + menu only (Verify pill hidden on phones; it stays in the menu), frosted
+  rgba(251,251,253,.8) blur 20px, safe-area insets (`viewport-fit=cover`).
+- Menu is full screen with 26px links and a stagger; page scroll locks while open. The bar drops
+  its backdrop-filter while the menu is open, because a backdrop-filter on #nav makes it the
+  containing block and would trap the fixed sheet inside the 60px bar.
+- MaiK chapters and the 111 calculator chips become swipeable rails (chapters: cards of
+  100vw-96px so the next one peeks; calculators: 5-row horizontal grid).
+- 11px floor on labels. The selector lists both `font-size:10px` and `font-size: 10px`: once JS
+  touches el.style, the browser re-serialises the style attribute with a space and the
+  no-space selector silently stops matching.
+- Footer links 44px tap height. Checked at 320/375/390/430/820/1024: no horizontal scroll, no errors.
