@@ -10593,3 +10593,10 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   the reader takes the worst value of each vital and lab, the explicit age, every mention of a label.
 - **Why**: doubled spaces had cost 510 of 571 notes findings; reversed order changed 50 notes (now 6).
 
+## 2026-09-27 - Round 20: say when the lead is a close call (smd_calib)
+- **Decision**: the plain view labels a lead under 15 points ahead of the runner-up "Leading, but close" and
+  names the runner-up; a calibrated percentage is NOT shown (fitted on train it helped dev but worsened Brier on
+  both unseen sets). The audit prints ECE / Brier / clear-vs-close accuracy per path.
+- **Why**: "Most likely" over a close call claimed more than the engine knows (typed close calls are right 47%,
+  clear leads 71%; unseen notes 40 to 56% vs 83 to 84%).
+

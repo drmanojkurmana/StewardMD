@@ -137,7 +137,7 @@ try {
       function ok(x){ return !!x && (acc.indexOf(String(x.id).toLowerCase())>=0 || acc.some(function(a){return a && String(x.name||'').toLowerCase().indexOf(a)>=0;})); }
       function run(f){ var ab=negOf(f); var a=ab?SMD_REASON.assess(f,{absent:ab}):SMD_REASON.assess(f); var all=[].concat(a.infectious||[],a.nonInfectious||[]).sort(function(x,y){return ((y.rank!=null?y.rank:y.confidence)-(x.rank!=null?x.rank:x.confidence))||(y.confidence-x.confidence);});
         var pos=0; for(var i=0;i<all.length;i++){ if(ok(all[i])){pos=i+1;break;} }
-        return { gate:a.gate.cls, ab:!!a.gate.ab, top1:all[0]?all[0].name:null, conf:all[0]?all[0].confidence:0, pos:pos, n:Object.keys(f).length, top3:all.slice(0,3).map(function(x){return x.name+'('+x.confidence+')';}) }; }
+        return { gate:a.gate.cls, ab:!!a.gate.ab, top1:all[0]?all[0].name:null, conf:all[0]?all[0].confidence:0, margin:all[1]?all[0].confidence-all[1].confidence:100, pos:pos, n:Object.keys(f).length, top3:all.slice(0,3).map(function(x){return x.name+'('+x.confidence+')';}) }; }
       // the text path keeps the note's explicit negatives when the engine can use them (smd_rank_v3), as OPD Ask MaiK does
       var useNeg=!!(DX._rankV3&&DX._rankV3()&&DX.extractText), NEG={};
       function fromText(t){ var ks, ab=[]; if(useNeg){ var e=DX.extractText(t); ks=e.present; ab=e.absent; } else ks=DX.findingsFromText(t)||[]; var f={}; ks.forEach(function(k){f[k]=true;}); NEG[JSON.stringify(Object.keys(f))]=ab; return f; }
@@ -195,12 +195,26 @@ try {
       // smd_calib: "not enough information" should land on the cases the engine would get wrong
       const I = S.filter((x) => x[path].gate === "insufficient"), E = S.filter((x) => x[path].gate !== "insufficient");
       if (I.length) m.insufficient = { n: I.length, top1: I.filter((x) => x[path].pos === 1).length, restTop1: E.filter((x) => x[path].pos === 1).length, restN: E.length };
+      // round 20 (idea from Laya: calibration and abstention): is the lead's score honest? ECE and Brier of the top-1
+      // score read as a probability, and top-1 accuracy for a clear lead (margin >= 15 over the runner-up, the
+      // threshold chosen on train) against a close call. Informational: printed, not a floor.
+      const Q = S.filter((x) => x[path].pos != null && x[path].conf != null);
+      if (Q.length) {
+        let ece = 0, brier = 0;
+        [[0, 50], [50, 70], [70, 85], [85, 95], [95, 101]].forEach(([lo, hi]) => { const b = Q.filter((x) => x[path].conf >= lo && x[path].conf < hi); if (!b.length) return;
+          ece += b.length / Q.length * Math.abs(b.filter((x) => x[path].pos === 1).length / b.length - b.reduce((a, x) => a + x[path].conf, 0) / b.length / 100); });
+        Q.forEach((x) => { brier += (x[path].conf / 100 - (x[path].pos === 1 ? 1 : 0)) ** 2; });
+        const clear = Q.filter((x) => x[path].margin >= 15), close = Q.filter((x) => !(x[path].margin >= 15));
+        m.honesty = { ece: Math.round(1000 * ece) / 10, brier: Math.round(1000 * brier / Q.length) / 1000, clearN: clear.length, clearTop1: clear.filter((x) => x[path].pos === 1).length,
+          closeN: close.length, closeTop1: close.filter((x) => x[path].pos === 1).length, closeTop3: close.filter((x) => x[path].pos && x[path].pos <= 3).length };
+      }
       metrics[set + "." + path] = m;
       const sp = (k) => m[k] ? `${k} ${Math.round(100 * m[k].top1 / m[k].n)}/${Math.round(100 * m[k].top3 / m[k].n)}` : "";
       console.log(`${(set + " " + { cur: "keys", txt: "text", pc: "complaint" }[path]).padEnd(18)} top1 ${pct(m.all.top1, m.all.n)} top3 ${pct(m.all.top3, m.all.n)} absent ${m.absent}` +
         `  [top1/top3 % ${["train", "dev", "test"].map(sp).filter(Boolean).join(" · ")}]`);
       console.log(`${"".padEnd(18)} gate: abx when indicated ${pct(m.abxSens, m.abxN)} · when not ${pct(m.overcall, m.overN)} · critical ${pct(m.critical, m.critN)} · viral/self-limited ${pct(m.noAbxInf, m.noAbxN)} · malaria as specific therapy ${pct(m.specific, m.specN)}` +
         (m.opdTop1 != null ? ` · OPD rerank top1 ${pct(m.opdTop1, m.all.n)}` : ""));
+      if (m.honesty) { const h = m.honesty; console.log(`${"".padEnd(18)} score honesty: clear lead ${pct(h.clearTop1, h.clearN)} right · close call ${pct(h.closeTop1, h.closeN)} right (top-3 ${pct(h.closeTop3, h.closeN)}) · ECE ${h.ece} · Brier ${h.brier}`); }
       if (m.insufficient) console.log(`${"".padEnd(18)} not enough information: ${m.insufficient.n} cases (top1 among them ${pct(m.insufficient.top1, m.insufficient.n)}; top1 on the rest ${pct(m.insufficient.restTop1, m.insufficient.restN)})`);
     }
   }

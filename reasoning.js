@@ -4278,12 +4278,19 @@
     if (!simpleOn() || !A) { el.innerHTML = ""; return; }
     var cls = A.inf ? "inf" : "ni", B = all[1], tie = B && rkOf(A) - rkOf(B) < 3;
     var also = all.slice(1, 3).map(function (r) { return r.name; });
+    // round 20 (smd_calib; idea from Laya: say how sure, and abstain when unsure): a lead less than 15 points
+    // ahead of the runner-up is a close call. On the validation notes a clear lead was right 78 to 88% of the
+    // time and a close call 40 to 56% (typed notes), in every split and in both unseen sets, so "Most likely"
+    // over a close call claimed more than the engine knows.
+    var close = calibOn() && !tie && B && A.score - B.score < 15;
     el.innerHTML = '<div class="dx-topcard">' +
-      '<div class="dx-eyebrow">' + (tie ? "Closest fits" : "Most likely") + '</div>' +
+      '<div class="dx-eyebrow">' + (tie ? "Closest fits" : close ? "Leading, but close" : "Most likely") + '</div>' +
       '<div class="dx-top-name">' + esc(A.name) + '</div>' +
-      '<div class="dx-tags"><span class="dx-tag ' + cls + '">' + (A.inf ? "Infective" : "Non-infective") + '</span><span class="dx-tag fit">' + fitLabel(A.score) + ', ' + A.score + '/100</span></div>' +
+      '<div class="dx-tags"><span class="dx-tag ' + cls + '">' + (A.inf ? "Infective" : "Non-infective") + '</span><span class="dx-tag fit">' + fitLabel(A.score) + ', ' + A.score + '/100</span>' +
+        (calibOn() && !tie && !close && B ? '<span class="dx-tag lead">Clear lead</span>' : '') + '</div>' +
       ((A.supporting || []).length ? '<p class="dx-top-line"><strong>Fits:</strong> ' + esc(A.supporting.slice(0, 4).map(lbl).join(", ")) + '</p>' : '') +
       (tie ? '<p class="dx-top-line"><strong>' + esc(B.name) + '</strong> fits just as well. Open either card and press Select to get questions that separate them.</p>'
+           : close ? '<p class="dx-top-line dx-close"><strong>' + esc(B.name) + '</strong> fits nearly as well (' + A.score + ' vs ' + B.score + '). Keep both open: press Select on either to get the questions that separate them.</p>'
            : (also.length ? '<p class="dx-top-line"><strong>Also consider:</strong> ' + esc(also.join(", ")) + '</p>' : '')) +
       '<button type="button" class="dx-chip dx-top-open" data-open="' + A.id + '">See why, and what to check next</button>' +
       '</div>';
