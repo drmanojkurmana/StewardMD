@@ -1,9 +1,9 @@
 {
-  "note": "Keys that show English in a translated screen. The machine translation pipeline drops a value when it fails a mechanical check (placeholders, digits, entities, a missing negation marker) or when the second-model meaning check flags it, because a wrong clinical translation is worse than English. Every key here is deliberate: test/wardsynq-i18n.test.mjs fails if a catalog is missing a key that is not listed here. Added 2026-09-19: the MaiK Scribe keys for the ward round and discharge summary (ward.scribe-*, ward.dc-scribe-*) are new and not yet through the translation pipeline; both features ship behind flags that are off, so run the pipeline over these before enabling them. Added 2026-09-24: the Ni-Key / StewardID registration keys (ward.reg-read-nfc, ward.reg-hold-tag, ward.reg-carrier-revoked, ward.reg-tag-read, ward.reg-scanned-code, ward.reg-camera-denied, ward.reg-camera-scan-failed, ward.reg-scan-or-type, ward.reg-tag-empty, ward.reg-nfc-denied, ward.reg-nfc-read-error, ward.reg-scan-qr, ward.reg-stewardid), ward.scanned-tag-deactivated and the bedside OPD/IPD episode picker keys (ward.bedside-episode-opd, ward.bedside-episode-ipd, ward.where-do-you-want-to-work, ward.this-patient-has-an-opd-visit-and-an-admission) are new and not yet through the pipeline, like the earlier ward.reg-nfc-* keys. Added 2026-09-27 (audit fixes CLIN-07, CLIN-16, CLIN-24): ward.crit-uncomparable, ward.crit-unit-unchecked, ward.fluid-direction-gaps and ward.second-checker-staff-id are new and not yet through the pipeline.",
+  "note": "Keys that show English in a translated screen. The machine translation pipeline drops a value when it fails a mechanical check (placeholders, digits, entities, a missing negation marker) or when the second-model meaning check flags it, because a wrong clinical translation is worse than English. Every key here is deliberate: test/wardsynq-i18n.test.mjs fails if a catalog is missing a key that is not listed here. Added 2026-09-19: the MaiK Scribe keys for the ward round and discharge summary (ward.scribe-*, ward.dc-scribe-*) are new and not yet through the translation pipeline; both features ship behind flags that are off, so run the pipeline over these before enabling them. Added 2026-09-24: the Ni-Key / StewardID registration keys (ward.reg-read-nfc, ward.reg-hold-tag, ward.reg-carrier-revoked, ward.reg-tag-read, ward.reg-scanned-code, ward.reg-camera-denied, ward.reg-camera-scan-failed, ward.reg-scan-or-type, ward.reg-tag-empty, ward.reg-nfc-denied, ward.reg-nfc-read-error, ward.reg-scan-qr, ward.reg-stewardid), ward.scanned-tag-deactivated and the bedside OPD/IPD episode picker keys (ward.bedside-episode-opd, ward.bedside-episode-ipd, ward.where-do-you-want-to-work, ward.this-patient-has-an-opd-visit-and-an-admission) are new and not yet through the pipeline, like the earlier ward.reg-nfc-* keys. Added 2026-09-27 (audit fixes CLIN-07, CLIN-16, CLIN-24): ward.crit-uncomparable, ward.crit-unit-unchecked, ward.fluid-direction-gaps and ward.second-checker-staff-id are new and not yet through the pipeline. Added 2026-09-27 (billing audit fixes): ward.payment-link-closed-bill-no-longer-owes, ward.the-bill-was-already-paid-when-this-payment and ward.claim-already-open are new and not yet through the pipeline.",
   "generated": "2026-09-19",
   "languages": {
     "es": {
-      "count": 210,
+      "count": 213,
       "keys": [
         "fb.no",
         "intake.no",
@@ -214,11 +214,14 @@
         "ward.crit-uncomparable",
         "ward.crit-unit-unchecked",
         "ward.fluid-direction-gaps",
-        "ward.second-checker-staff-id"
+        "ward.second-checker-staff-id",
+        "ward.payment-link-closed-bill-no-longer-owes",
+        "ward.the-bill-was-already-paid-when-this-payment",
+        "ward.claim-already-open"
       ]
     },
     "te": {
-      "count": 190,
+      "count": 193,
       "keys": [
         "comm.off",
         "comm.whatsapp",
@@ -409,11 +412,14 @@
         "ward.crit-uncomparable",
         "ward.crit-unit-unchecked",
         "ward.fluid-direction-gaps",
-        "ward.second-checker-staff-id"
+        "ward.second-checker-staff-id",
+        "ward.payment-link-closed-bill-no-longer-owes",
+        "ward.the-bill-was-already-paid-when-this-payment",
+        "ward.claim-already-open"
       ]
     },
     "hi": {
-      "count": 125,
+      "count": 128,
       "keys": [
         "comm.whatsapp",
         "privacy.kind.nomination",
@@ -539,11 +545,14 @@
         "ward.crit-uncomparable",
         "ward.crit-unit-unchecked",
         "ward.fluid-direction-gaps",
-        "ward.second-checker-staff-id"
+        "ward.second-checker-staff-id",
+        "ward.payment-link-closed-bill-no-longer-owes",
+        "ward.the-bill-was-already-paid-when-this-payment",
+        "ward.claim-already-open"
       ]
     },
     "bn": {
-      "count": 241,
+      "count": 244,
       "keys": [
         "comm.whatsapp",
         "msg.empty",
@@ -785,11 +794,14 @@
         "ward.crit-uncomparable",
         "ward.crit-unit-unchecked",
         "ward.fluid-direction-gaps",
-        "ward.second-checker-staff-id"
+        "ward.second-checker-staff-id",
+        "ward.payment-link-closed-bill-no-longer-owes",
+        "ward.the-bill-was-already-paid-when-this-payment",
+        "ward.claim-already-open"
       ]
     },
     "kn": {
-      "count": 119,
+      "count": 122,
       "keys": [
         "comm.whatsapp",
         "privacy.kind.nomination",
@@ -909,11 +921,14 @@
         "ward.crit-uncomparable",
         "ward.crit-unit-unchecked",
         "ward.fluid-direction-gaps",
-        "ward.second-checker-staff-id"
+        "ward.second-checker-staff-id",
+        "ward.payment-link-closed-bill-no-longer-owes",
+        "ward.the-bill-was-already-paid-when-this-payment",
+        "ward.claim-already-open"
       ]
     },
     "ta": {
-      "count": 174,
+      "count": 177,
       "keys": [
         "comm.whatsapp",
         "privacy.kind.erasure",
@@ -1088,11 +1103,14 @@
         "ward.crit-uncomparable",
         "ward.crit-unit-unchecked",
         "ward.fluid-direction-gaps",
-        "ward.second-checker-staff-id"
+        "ward.second-checker-staff-id",
+        "ward.payment-link-closed-bill-no-longer-owes",
+        "ward.the-bill-was-already-paid-when-this-payment",
+        "ward.claim-already-open"
       ]
     },
     "ml": {
-      "count": 145,
+      "count": 148,
       "keys": [
         "comm.whatsapp",
         "site.abdm.notAvailable",
@@ -1238,11 +1256,14 @@
         "ward.crit-uncomparable",
         "ward.crit-unit-unchecked",
         "ward.fluid-direction-gaps",
-        "ward.second-checker-staff-id"
+        "ward.second-checker-staff-id",
+        "ward.payment-link-closed-bill-no-longer-owes",
+        "ward.the-bill-was-already-paid-when-this-payment",
+        "ward.claim-already-open"
       ]
     },
     "mr": {
-      "count": 165,
+      "count": 168,
       "keys": [
         "comm.whatsapp",
         "site.admin.ccs.critical.intro",
@@ -1408,7 +1429,10 @@
         "ward.crit-uncomparable",
         "ward.crit-unit-unchecked",
         "ward.fluid-direction-gaps",
-        "ward.second-checker-staff-id"
+        "ward.second-checker-staff-id",
+        "ward.payment-link-closed-bill-no-longer-owes",
+        "ward.the-bill-was-already-paid-when-this-payment",
+        "ward.claim-already-open"
       ]
     }
   }

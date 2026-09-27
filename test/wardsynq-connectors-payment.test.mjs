@@ -328,3 +328,50 @@ test("cashier screen: a link is offered only while money is owed; open, paid and
   assert.match(cashierHtml({ invoices: [inv], payLinks: false }), /could not be loaded. Do not read this as none sent/);
   assert.match(cashierHtml({ invoices: [inv], payLinks: null }), /Loading payment links/);
 });
+
+/* BILL-05 (audit 2026-09): a link made for the balance kept collecting after the bill was paid at the counter, and the
+ * gateway's notice posted a second payment. A payment on a bill that no longer owes the link's amount is flagged for a
+ * refund and never posted, and the open link is shown closed. */
+test("BILL-05: a link paid after the bill was settled at the counter is flagged for refund, never posted; the link reads closed", async () => {
+  seed();
+  await seedInvoice("inv-1", 150.5);
+  await saveGateway(ADMIN);
+  const api = gatewayApi();
+  ENV.WSQ_PAY_FETCH = api.fetchImpl;
+  try {
+    const link = await as(CASHIER, "/ward/invoice-payment-link", "POST", { orgId: ORG_ID, invoiceId: "inv-1" });
+    assert.equal(link.__status, 200, link.__text);
+    const cash = await as(CASHIER, "/ward/invoice-payment", "POST", { orgId: ORG_ID, invoiceId: "inv-1", amount: 150.5 });
+    assert.equal(cash.balance, 0, cash.__text);
+    const listed = await as(CASHIER, `/ward/payment-requests?orgId=${ORG_ID}&patientId=${PATIENT}`);
+    assert.deepEqual(listed.requests.map((q) => [q.status, q.url]), [["expired", null]], "the cashier screen no longer offers the link");
+    const raw = rzpNotice(link.request.id, 15050);
+    const paid = await callback(raw, { "X-Razorpay-Signature": hex(WH, raw) });
+    assert.equal(paid.__status, 200, paid.__text);
+    assert.equal(paid.flagged, "bill_settled_before_online_payment");
+    const inv = await H.RECORD.latest(T, "Invoice", "inv-1");
+    assert.deepEqual([reconciliationOf(inv).balance, reconciliationOf(inv).paidIn], [0, 150.5], "the online money is not posted to the bill");
+    assert.equal((await H.RECORD.latest(T, REQUEST_TYPE, link.request.id)).status, "flagged");
+  } finally { delete ENV.WSQ_PAY_FETCH; }
+});
+
+test("BILL-05: after a part payment at the counter, a new link replaces the open one for what is still owed", async () => {
+  seed();
+  await seedInvoice("inv-1", 150.5);
+  await saveGateway(ADMIN);
+  const api = gatewayApi();
+  ENV.WSQ_PAY_FETCH = api.fetchImpl;
+  try {
+    const first = await as(CASHIER, "/ward/invoice-payment-link", "POST", { orgId: ORG_ID, invoiceId: "inv-1" });
+    assert.equal(first.__status, 200, first.__text);
+    await as(CASHIER, "/ward/invoice-payment", "POST", { orgId: ORG_ID, invoiceId: "inv-1", amount: 50 });
+    const second = await as(CASHIER, "/ward/invoice-payment-link", "POST", { orgId: ORG_ID, invoiceId: "inv-1" });
+    assert.equal(second.__status, 200, second.__text);
+    assert.equal(JSON.parse(api.calls.at(-1).init.body).amount, 10050, "the new link asks for what is still owed, in paise");
+    assert.equal((await H.RECORD.latest(T, REQUEST_TYPE, first.request.id)).status, "expired");
+    const raw = rzpNotice(first.request.id, 15050);
+    const late = await callback(raw, { "X-Razorpay-Signature": hex(WH, raw) });
+    assert.equal(late.flagged, "bill_settled_before_online_payment", "the closed link, paid anyway, is flagged and not posted");
+    assert.equal(reconciliationOf(await H.RECORD.latest(T, "Invoice", "inv-1")).paidIn, 50);
+  } finally { delete ENV.WSQ_PAY_FETCH; }
+});

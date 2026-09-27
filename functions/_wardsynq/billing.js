@@ -65,6 +65,9 @@ const str = (v) => (v == null ? "" : String(v).trim());
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 
 const CLAIM_TYPE = "Claim";
+// A claim still being worked. A stay has at most one of these (BILL-18).
+const OPEN_CLAIM_STATES = Object.freeze([CLAIM_STATE.DRAFT, CLAIM_STATE.CODED, CLAIM_STATE.SUBMITTED, CLAIM_STATE.QUERIED]);
+const openClaimOf = (stayClaims) => stayClaims.find((c) => OPEN_CLAIM_STATES.includes(c.state)) || null;
 const PREAUTH_TYPE = "PreAuthorisation";
 const ESTIMATE_TYPE = "CostEstimate";
 
@@ -193,19 +196,39 @@ async function codeClaimForEncounter(request, env, ctx) {
   const { svc, resolved, error } = await open(request, env, ctx, "record:write");
   if (error) return { ...base, ...error, claim: null };
 
-  let conditions;
-  try { conditions = await svc.byPatient("Condition", patientId); }
-  catch (e) {
+  /* One open claim per stay (BILL-18). A retried "Code claim" (a lost response, a double tap) is handed the stay's open
+   * claim back, unchanged, instead of a second claim for the same admission. A denied, paid or written-off claim does
+   * not count, so a fresh claim can still follow one of those. */
+  let conditions, prior, stayClaims;
+  try {
+    stayClaims = ((await svc.byPatient(CLAIM_TYPE, patientId)) || []).filter((c) => c && str(c.encounterId) === encounterId);
+    prior = openClaimOf(stayClaims);
+    conditions = prior ? null : await svc.byPatient("Condition", patientId);
+  } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), claim: null };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), claim: null };
   }
+  const existingAnswer = (rec) => {
+    const { claim: existing, version } = stored(rec);
+    return { ...base, ok: true, existing: true, claimId: existing.id, state: existing.state, recordVersion: version, claim: existing, upcoding: existing.upcoding || null, actor: resolved.actor.id,
+      note: "This stay already has an open claim, returned unchanged. Work on that claim; a new one can be coded once it is denied, paid or written off." };
+  };
+  if (prior) return existingAnswer(prior);
+  /* BILL-17: the stay's end as the encounter records it, so timely filing counts from discharge rather than from coding.
+   * A stay that could not be read, or has not ended, leaves it off and the old basis applies, said as such. */
+  let encounter = null;
+  try { encounter = await svc.get("Encounter", encounterId); } catch { encounter = null; }
+  const dischargedAt = encounter && str(encounter.patientId) === patientId ? str(encounter.periodEnd) || null : null;
 
   const view = clinicalView(conditions);
   const now = str(ctx.now) || new Date().toISOString();
 
   let claim;
   try {
-    claim = codeClaim({ encounterId, patientId, record: view, codes, codedBy: resolved.actor.id, now, invoiceId: str(ctx.invoiceId) || null });
+    claim = codeClaim({ encounterId, patientId, record: view, codes, codedBy: resolved.actor.id, now, invoiceId: str(ctx.invoiceId) || null, dischargedAt });
+    /* The stay's claim number instead of the moment of coding, written create-only below: two codes of one stay at once
+     * name the same record, and the second collides instead of becoming a second claim. */
+    claim.id = `claim-${encounterId}-${stayClaims.length + 1}`;
     // P1.5: which payer, as a reference only. Everything payer-specific stays in wardsynq.payers.
     claim.payerId = str(ctx.payerId) || null;
     if (str(ctx.policyNumber)) claim.policyNumber = str(ctx.policyNumber);
@@ -236,7 +259,9 @@ async function codeClaimForEncounter(request, env, ctx) {
   };
 
   try {
-    const out = await svc.put(record, { idempotencyKey: ctx.idempotencyKey || null });
+    const out = await svc.put(record, { expectedVersion: 0, idempotencyKey: ctx.idempotencyKey || null });
+    // A retried key answers with the claim it first made, not the one computed just now.
+    if (out.replayed) { const { claim: first } = stored(out.record); return { ...base, ok: true, replayed: true, claimId: first.id, state: first.state, recordVersion: out.record.version, claim: first, upcoding: first.upcoding || null, actor: resolved.actor.id }; }
     return {
       ...base, ok: true, claimId: claim.id, state: claim.state, recordVersion: out.record.version,
       claim: record, upcoding,
@@ -246,6 +271,12 @@ async function codeClaimForEncounter(request, env, ctx) {
       actor: resolved.actor.id,
     };
   } catch (e) {
+    // Lost the race to code this stay: answer with the claim that won, when it can be read.
+    if (e instanceof VersionConflictError && e.code !== "IDEMPOTENCY_KEY_REUSED") {
+      let won = null;
+      try { won = openClaimOf(((await svc.byPatient(CLAIM_TYPE, patientId)) || []).filter((c) => c && str(c.encounterId) === encounterId)); } catch { won = null; }
+      if (won) return existingAnswer(won);
+    }
     return { ...base, ...writeFailure(e, { claimId: claim.id, claim: null, actor: resolved.actor.id }) };
   }
 }
@@ -256,7 +287,7 @@ const ACTIONS = Object.freeze(["submit", "deny", "resubmit", "adjudicate", "ackn
 
 /**
  * Moves a claim through its lifecycle.
- * ctx: { migration, claimId, action, reason?, codes?, now?, overrideReason?, text?, receivedAt?, documents?, denialCode?, rootCause?, rcm?, payers? }
+ * ctx: { migration, claimId, action, reason?, codes?, now?, overrideReason?, text?, receivedAt?, documents?, denialCode?, rootCause?, rcm?, payers?, policyNumber? }
  */
 async function claimAction(request, env, ctx) {
   const mig = ctx.migration;
@@ -282,6 +313,14 @@ async function claimAction(request, env, ctx) {
   const now = str(ctx.now) || new Date().toISOString();
   const by = resolved.actor.id;
   const reason = str(ctx.reason);
+
+  /* A send in flight holds the claim (BILL-09): the reservation written below before anything leaves. Past SEND_WINDOW_MS
+   * the request that wrote it is gone, and the claim is released with that said in its history. */
+  const inFlight = claim.sending && Date.now() - Date.parse(claim.sending.at) < SEND_WINDOW_MS;
+  if (inFlight) {
+    return { ...base, ok: false, status: 409, error: "submission_in_progress", claim: null,
+      message: `A send of this claim started at ${claim.sending.at} and its outcome is not recorded yet. It may have reached the payer: check with the payer before sending it again.` };
+  }
 
   /* A claim whose severity the record does not support is not blocked, because the flag may be a
    * question rather than a finding. It cannot be submitted SILENTLY: the reason is required and is
@@ -310,6 +349,8 @@ async function claimAction(request, env, ctx) {
     }
   }
 
+  // The claim as it stands, kept apart: the transitions below change `claim` in place, and a send that fails leaves it here.
+  const before = action === "submit" || action === "resubmit" ? structuredClone(claim) : null;
   let next;
   try {
     if (action === "submit") next = submit(claim, { by, now, submittedAmount: ctx.submittedAmount });
@@ -378,12 +419,7 @@ async function claimAction(request, env, ctx) {
    * so this defaults to NullAdapter() and the claim is honestly recorded as queued for the
    * hospital's own existing out-of-band process - never claimed as sent to a payer that was never
    * actually contacted. */
-  if (action === "submit" || action === "resubmit") {
-    if (str(ctx.payerId)) next.payerId = str(ctx.payerId);
-    next.adapter = await submitViaAdapter(next, resolveAdapter(env, ctx, next.payerId, by), { use: "claim", now, payerId: next.payerId || null });
-    applyAcknowledged(next, next.adapter, now);
-    next.history.push({ at: now, event: "payer-channel", by, detail: `${next.adapter.adapterId}: ${next.adapter.state}` });
-  }
+  if (action === "submit" || action === "resubmit") return send(svc, env, ctx, { base, claimId, action, before, next, version, by, now });
 
   try {
     // The version the transition was computed from. Two coders acting on one claim at once is
@@ -400,6 +436,69 @@ async function claimAction(request, env, ctx) {
   } catch (e) {
     return { ...base, ...writeFailure(e, { claimId, claim: null, actor: by }) };
   }
+}
+
+/* The payer channel has the claim (or, for "queued", the hospital's own manual process does). */
+const DELIVERED = Object.freeze(["sent", "acknowledged", "queued"]);
+/* How long a reservation holds the claim. Two NHCX calls at 15 s each is the longest a send takes. */
+const SEND_WINDOW_MS = 2 * 60 * 1000;
+
+/**
+ * submit/resubmit, in three writes-and-sends (BILL-09, BILL-10):
+ *   1. RESERVE. The claim as it stands, plus `sending`, written against the version the transition was computed from.
+ *      Of two sends at once only one gets past this, so only one reaches the payer.
+ *   2. SEND through the payer's adapter.
+ *   3. RECORD against the reserved version. SUBMITTED only when the adapter reports sent, acknowledged or queued; the
+ *      NullAdapter (no payer channel at all) still records the person's own out-of-band submission, as it always has.
+ *      Anything else leaves the claim where it was (coded, denied or queried) with the failed attempt recorded, so it
+ *      stays on the not-submitted worklist and can be sent again.
+ * If the record fails after a send, the answer says the claim went, as nhcx.js writeFailed(sent) does.
+ */
+async function send(svc, env, ctx, { base, claimId, action, before, next, version, by, now }) {
+  if (str(ctx.payerId)) next.payerId = str(ctx.payerId);
+  // A policy number missing at coding is given here, so a claim refused for want of one can be sent again.
+  if (str(ctx.policyNumber)) next.policyNumber = str(ctx.policyNumber);
+  const stale = before.sending || null;
+  delete before.sending; delete next.sending;
+
+  let held;
+  try { held = await svc.put({ ...before, resourceType: CLAIM_TYPE, sending: { at: new Date().toISOString(), by, action } }, { expectedVersion: version }); }
+  catch (e) { return { ...base, ...writeFailure(e, { claimId, claim: null, actor: by }), sent: false }; }
+
+  const adapter = await submitViaAdapter(next, resolveAdapter(env, ctx, next.payerId, by), { use: "claim", now, payerId: next.payerId || null });
+  const delivered = DELIVERED.includes(adapter.state) || adapter.adapterId === "null";
+  let out;
+  if (delivered) {
+    out = next;
+    out.adapter = adapter;
+    applyAcknowledged(out, adapter, now);
+    out.history.push({ at: now, event: "payer-channel", by, detail: `${adapter.adapterId}: ${adapter.state}` });
+  } else {
+    out = { ...before, payerId: next.payerId || null, ...(next.policyNumber ? { policyNumber: next.policyNumber } : {}),
+      ...(next.checklist ? { checklist: next.checklist } : {}), ...(next.checklistOverrides ? { checklistOverrides: next.checklistOverrides } : {}), adapter };
+    out.history.push({ at: now, event: "not-sent", by, detail: `${adapter.adapterId}: ${adapter.state}${adapter.note ? `: ${adapter.note}` : ""}`.slice(0, 500) });
+  }
+  if (stale) out.history.push({ at: now, event: "send-outcome-unrecorded", by, detail: `a send started at ${stale.at} by ${stale.by} recorded no outcome; it may have reached the payer` });
+
+  const reached = adapter.state === "sent" || adapter.state === "acknowledged";
+  let written;
+  try { written = await svc.put({ ...out, resourceType: CLAIM_TYPE }, { expectedVersion: held.record.version }); }
+  catch (e) {
+    return { ...base, ok: false, status: e instanceof VersionConflictError ? 409 : 502, error: "record_write_failed", claimId, claim: null, actor: by, sent: reached,
+      message: reached ? "The claim reached the payer but could not be recorded here. Do not send it again: check with the payer, then record what they say." : "The claim was not sent, and the attempt could not be recorded." };
+  }
+  if (!delivered) {
+    return { ...base, ok: false, status: 502, error: "claim_not_sent", claimId, action, state: out.state, recordVersion: written.record.version, claim: out, actor: by, sent: false,
+      message: `Not sent: ${adapter.note || adapter.state}. The claim stays ${out.state} and can be sent again.` };
+  }
+  return {
+    ...base, ok: true, claimId, action, state: out.state, recordVersion: written.record.version,
+    claim: out, actor: by,
+    ...(out.clinicalContentChangedAfterDenial ? {
+      upcodingFlag: out.upcodingFlag,
+      flagged: "The clinical coding changed between the denial and this resubmission. This is not blocked, because a genuine correction happens too, and it is recorded permanently.",
+    } : {}),
+  };
 }
 
 /**
@@ -460,6 +559,17 @@ async function recordPreAuth(request, env, ctx) {
 
   const id = `wsq-preauth-${slug(patientId)}-${slug(treatment)}-${slug(decidedAt)}`;
   const record = { ...auth, resourceType: PREAUTH_TYPE, id, source: { system: "wardsynq-native", sourceId: `preauth:${id}` } };
+  /* BILL-18: a retried request (same idempotency key) is answered from the first one's record, before anything could
+   * reach the payer again. The id carries the moment of the request, so the write's own replay comes too late. */
+  if (ctx.idempotencyKey) {
+    let replay;
+    try { replay = await svc.replayFor(ctx.idempotencyKey, PREAUTH_TYPE, patientId, id); }
+    catch (e) { return { ...base, ...writeFailure(e, { preAuthId: id, preAuth: null, actor: resolved.actor.id }) }; }
+    if (replay) {
+      const { meta, version, ...prev } = replay.record;
+      return { ...base, ok: true, replayed: true, preAuthId: prev.id, state: prev.state, recordVersion: version, preAuth: prev, clinical: mayProceedClinically(), actor: resolved.actor.id };
+    }
+  }
   /* P1.5: a REQUESTED pre-authorisation with a payer goes through that payer's adapter as a FHIR Claim
    * with use=preauthorization. A decision (approved/refused/expired) is a fact arriving and sends nothing. */
   if (state === PREAUTH_STATE.REQUESTED && auth.payerId) {

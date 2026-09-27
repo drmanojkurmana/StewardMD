@@ -1353,12 +1353,15 @@
       : ps.assessAuthorized ? "This assessment is authorised and locked, so nothing can be added to it."
         : !ps.assessLoaded ? "Waiting for the assessment to load." : "";
     return G.SMD_KBPROTO.assignHTML(p, ps.protoAssign.sel, {
-      act: function (cmd) { return 'data-oe-act="' + esc(cmd) + '"'; }, disabled: !can, note: note
+      act: function (cmd) { return 'data-oe-act="' + esc(cmd) + '"'; },
+      inp: function (name) { return 'data-oe-inp="' + esc(name) + '"'; },
+      edits: ps.protoAssign.edits, editing: ps.protoAssign.editing,
+      disabled: !can, note: note
     });
   }
   function openProtoAssign(id) {
     if (!protoAssignOn()) return;
-    st.protoAssign = { id: id, sel: {} };
+    st.protoAssign = { id: id, sel: {}, edits: {}, editing: "" };
     if (st.protoOpenId === id && st.protoDoc) { paint(); canvasTop(0); return; }
     openKbProtocol(id);
   }
@@ -1370,10 +1373,20 @@
     a.sel[lineId] = !cur;
     paint();
   }
+  function toggleProtoAssignEdit(lineId) {
+    var a = st.protoAssign; if (!a) return;
+    a.editing = a.editing === lineId ? "" : lineId;
+    paint();
+    if (a.editing) { try { var el = document.querySelector('#smdOpdEmr [data-oe-inp="proto-as-txt:' + a.editing + '"]'); if (el) { el.focus(); el.setSelectionRange(el.value.length, el.value.length); } } catch (e) {} }
+  }
+  function undoProtoAssignEdit(lineId) {
+    var a = st.protoAssign; if (!a || !a.edits) return;
+    delete a.edits[lineId]; paint();
+  }
   // all: true = tick everything, false = clear, null = back to the protocol's own defaults.
   function bulkProtoAssign(all) {
     var a = st.protoAssign, p = st.protoDoc; if (!a || !p) return;
-    if (all === null) { a.sel = {}; paint(); return; }
+    if (all === null) { a.sel = {}; a.edits = {}; a.editing = ""; paint(); return; }
     var sel = {};
     (G.SMD_KBPROTO.assignLines(p) || []).forEach(function (l) { sel[l.id] = !!all; });
     a.sel = sel; paint();
@@ -1384,7 +1397,7 @@
     if (!st.writeOn) { toast("Open the patient in write mode to add a protocol to the case sheet."); return; }
     if (st.assessAuthorized) { toast("This assessment is authorised and locked in " + emrLabel() + "."); return; }
     if (!st.assessLoaded || st.assessLoading) { toast("The assessment is still loading. Try again in a moment."); return; }
-    var res = G.SMD_KBPROTO.assignText(p, protoSelIds(p, a.sel));
+    var res = G.SMD_KBPROTO.assignText(p, protoSelIds(p, a.sel), a.edits);
     if (!res.count) { toast("Tick at least one instruction first."); return; }
     st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
     res.blocks.forEach(function (b) { appendPlan(b.field, b.text); });
@@ -1854,6 +1867,10 @@
     if (inp === "proto-q") { st.protoQuery = el.value; renderProtoOut(); return; }   // local filter, no network, keep focus
     if (inp === "proto-type") { st.protoOncoType = el.value; renderProtoOut(); return; }
     if (inp === "scribe-spec") return setScribeSpecialty(el.value);
+    if (inp.indexOf("proto-as-txt:") === 0) {   // silent: a repaint per keystroke would close the keyboard
+      var a = st.protoAssign; if (a) { a.edits = a.edits || {}; a.edits[inp.slice(13)] = el.value; }
+      return;
+    }
     if (inp === "inv-q") { st.invQuery = el.value; scheduleSearch("inv"); return; }
     if (inp === "med-q") { st.medQuery = el.value; scheduleSearch("med"); return; }
     if (inp === "notes") { st.voiceTranscript = el.value; _lastFullTranscript = el.value; return; }   // doctor edits the clinical-notes transcript after Stop
@@ -2013,6 +2030,8 @@
     if (cmd === "proto-close") return closeKbProtocol();
     if (cmd === "proto-as-open") return openProtoAssign(arg);
     if (cmd === "proto-as-line") return toggleProtoAssignLine(arg);
+    if (cmd === "proto-as-edit") return toggleProtoAssignEdit(arg);
+    if (cmd === "proto-as-undo") return undoProtoAssignEdit(arg);
     if (cmd === "proto-as-all") return bulkProtoAssign(true);
     if (cmd === "proto-as-none") return bulkProtoAssign(false);
     if (cmd === "proto-as-reset") return bulkProtoAssign(null);

@@ -105,10 +105,25 @@ try{
  ok(await until(`document.querySelector('#smdOpdEmr [data-oe-act="proto-as-apply"]').disabled&&/Nothing ticked/.test(document.querySelector('#smdOpdEmr .kbp-as-n').textContent)`),'Clear unticks everything and disables Add');
  await ev(`document.querySelector('#smdOpdEmr [data-oe-act="proto-as-reset"]').click()`);
  ok(await until(`document.querySelectorAll('#smdOpdEmr .kbp-as-row input:checked').length===${ticked}`),'Reset restores the defaults');
+
+ // Every line is editable before it goes in (owner, 2026-09-27), drug doses included.
+ const line0=await ev(`document.querySelector('#smdOpdEmr [data-oe-act^="proto-as-edit:"]').getAttribute('data-oe-act').slice(14)`);
+ await ev(`document.querySelector('#smdOpdEmr [data-oe-act="proto-as-edit:${line0}"]').click()`);
+ ok(await until(`!!document.querySelector('#smdOpdEmr .kbp-as-tx')&&document.activeElement===document.querySelector('#smdOpdEmr .kbp-as-tx')`),'Edit opens a textarea on that line and focuses it');
+ const MINE='Local wording: piperacillin-tazobactam 4.5 g IV per our antibiogram';
+ await ev(`(()=>{const t=document.querySelector('#smdOpdEmr .kbp-as-tx');t.value=${JSON.stringify(MINE)};t.dispatchEvent(new Event('input',{bubbles:true}));return 1})()`);
+ ok(await ev(`document.activeElement===document.querySelector('#smdOpdEmr .kbp-as-tx')`),'typing does not repaint the panel away from under the keyboard');
+ await ev(`document.querySelector('#smdOpdEmr [data-oe-act="proto-as-edit:${line0}"]').click()`);
+ ok(await until(`!document.querySelector('#smdOpdEmr .kbp-as-tx')&&/edited/.test(document.querySelector('#smdOpdEmr .kbp-assign').textContent)`),'Done closes the editor and marks the line edited');
+ // Tick the edited line (it is a Recognise line, unticked by default) and add it.
+ await ev(`(()=>{const c=document.querySelector('#smdOpdEmr [data-oe-act="proto-as-line:${line0}"]');if(!c.checked)c.click();return 1})()`);
+ ok(await ev(`[...document.querySelectorAll('#smdOpdEmr .kbp-as-duty')].length===1&&parseFloat(getComputedStyle(document.querySelector('#smdOpdEmr .kbp-as-duty')).fontSize)<=10`),'the legal line is there, in the smallest type');
+
  await shot('assign-390');
  ok(await ev(`(()=>{const c=document.querySelector('#smdOpdEmr .oe-canvas');return c.scrollWidth<=c.clientWidth+1})()`),'the tick list fits 390px');
  await ev(`document.querySelector('#smdOpdEmr [data-oe-act="proto-as-apply"]').click()`);
  ok(await until(`window.OPDEMR._state().tab==='assess'&&/^Protocol: /m.test(window.OPDEMR._state().assessVals.management_plan||'')`),'Add to case sheet writes the block into the Management plan and returns to Assessment');
+ ok(await ev(`(window.OPDEMR._state().assessVals.management_plan||'').includes(${JSON.stringify("Local wording: piperacillin-tazobactam 4.5 g IV per our antibiogram")})`),'the doctor\'s own wording is what reaches the case sheet, not the protocol\'s');
  ok(await ev(`(window.OPDEMR._state().assessTouched||{}).management_plan===true`),'the field is marked touched, so the scribe never overwrites it');
  await open();
  ok(await until(`document.querySelectorAll('#oe-out-proto .oe-proto-row').length>${idx.count}`),'Back returns to the list');

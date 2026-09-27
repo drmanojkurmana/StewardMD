@@ -223,3 +223,6 @@ body.dark .kit .kit-foot { background: var(--sc-lowest); }
 .kit .kit-protorow { display: flex; align-items: stretch; gap: 6px; width: 100%; }
 .kit .kit-protorow .kit-pill:first-child { flex: 1; min-width: 0; }
 .kit .kit-pill-as { flex: 0 0 auto; border-color: var(--primary); color: var(--primary); font-weight: 700; white-space: nowrap; }
+
+/* The legal line at the foot of every kit: smallest readable size, one line of space (2026-09-27). */
+.kit .kit-duty { margin: 6px 0 0; color: var(--on-surface-variant); opacity: .75; font: 500 9.5px/1.35 var(--q-sans); }

@@ -174,5 +174,10 @@ set nothing), marks the fields touched (so the scribe never overwrites them) and
   kit screens only. The titles themselves were left alone (other screens use them).
 - No em/en dashes (validator + browser test), British spelling.
 
+12. **Legal line** (owner, 2026-09-27): every kit closes with `DUTY_LINE` ("The treating doctor is
+    responsible for every instruction used or recorded; StewardMD accepts no liability.") in `.kit-duty`,
+    9.5px. The same sentence lives in `kb-protocols.js`; `test/kit-tools-docs.test.mjs` keeps the two in
+    step (buildless IIFEs cannot import each other).
+
 Deps: [[OPD Queue]] · [[MaiK Scribe]] · [[Clinical Protocols]] · [[Home Tools]] · [[Knowledge Library]] ·
 [[Clinical Documents]] · [[Review Desk]] · [[Universal Search]].
