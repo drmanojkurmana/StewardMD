@@ -316,19 +316,25 @@ test("milestones tool: checkpoint picker from the CDC data and an achieved / not
 /* ================================ rendering ================================ */
 function fakeHost(over) {
   return Object.assign({ kind: "opd", canWrite: () => true, ready: () => true, readyNote: () => "Loading the assessment…", addLabel: () => "Add",
-    fieldLabel: (n) => "Label of " + n, insert() {}, repaint() {}, protocol() {}, calculator: null, investigate() {}, openTab() {}, setScribe() {},
+    fieldLabel: (n) => "Label of " + n, insert() {}, repaint() {}, protocol() {}, calculator: null, investigate() {}, queueTests() {}, openTab() {}, setScribe() {},
     patient: () => ({ sex: "F" }) }, over || {});
 }
 test("every kit renders for the OPD host and the standalone host without undefined, NaN or dashes", () => {
   BUNDLE.kits.forEach((kit, i) => {
-    [fakeHost(), fakeHost({ kind: "standalone", addLabel: () => "Copy", investigate: null, openTab: null, calculator() {} })].forEach((host, j) => {
+    [fakeHost(), fakeHost({ kind: "standalone", addLabel: () => "Copy", investigate: null, queueTests: null, openTab: null, calculator() {} })].forEach((host, j) => {
       const key = "t" + i + "-" + j;
       K.state(key).kitId = kit.id;
       const html = K.html({ host, key });
       assert.doesNotMatch(html, /undefined|NaN|\[object Object\]/, kit.id);
       assert.doesNotMatch(html, /[–—]/, kit.id + " has an em or en dash");
       kit.sections.forEach((s) => assert.ok(html.includes('data-kit-sec="' + s.id + '"'), kit.id + "/" + s.id));
-      assert.equal(html.includes("Investigations</h3>"), host.kind === "opd" && kit.investigations.length > 0);
+      // The investigations card is now a tick list in BOTH hosts: the OPD one queues them on the
+      // Investigations tab (host.queueTests), the standalone sheet copies the names.
+      assert.equal(html.includes("Investigations</h3>"), kit.investigations.length > 0);
+      if (kit.investigations.length) {
+        assert.equal((html.match(/data-kit-act="invtick:/g) || []).length, kit.investigations.length, kit.id + " tick per test");
+        assert.ok(html.includes(host.queueTests ? "Add 0 to investigations" : "Copy 0 tests"), kit.id + " add button");
+      }
       assert.equal(html.includes("Calculators</h3>"), host.kind === "standalone" && kit.calculators.length > 0);
       assert.ok(html.includes("pending clinical review") || kit.review.status !== "ai_drafted");
     });
