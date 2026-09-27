@@ -45,13 +45,15 @@ const STUB = `
   window.SMD_loadFirebase = function (cb) { cb && cb(); };
   window.SMD_AUTH = { currentUser: { uid: "u1", getIdToken: function () { return Promise.resolve("t"); } } };
   window.SMD_DB = { collection: function () { return { doc: function () { return { collection: function () { return { doc: function () { return {
-    get: function () { return Promise.resolve({ exists: true, data: function () { return { hospital: "King George Hospital", degree: "MD", speciality: "Internal Medicine", regNo: "APMC 84213" }; } }); },
+    get: function () { return Promise.resolve({ exists: true, data: function () { return Object.assign({ hospital: "King George Hospital", degree: "MD", speciality: "Internal Medicine", regNo: "APMC 84213" }, window.__pd || {}); } }); },
     set: function () { return Promise.resolve(); } }; } }; } }; } }; } };
   window.__calls = [];
   window.__ver = false;
   SMD_VERIFY.isVerified = function () { return Promise.resolve(window.__ver); };
   SMD_VERIFY.isTrainee = function () { return Promise.resolve(false); };
   SMD_VERIFY.openPanel = function () { window.__calls.push("verify"); };
+  window.SMD_PHONE_VERIFY = window.SMD_PHONE_VERIFY || {};
+  SMD_PHONE_VERIFY.open = function (n) { window.__calls.push("phone:" + (n || "")); };
   return 1;`;
 const open = async () => { await ev(`document.getElementById("hvScrim") && document.getElementById("hvScrim").click(); return 1;`); await sleep(200); await ev(`SMD_openProfile(); return 1;`); await sleep(700); };
 const q = (sel) => ev(`return !!document.querySelector(${JSON.stringify(sel)});`);
@@ -100,6 +102,21 @@ try {
   await ev(`window.__pw = 0; if (window.SMD_PRO) { SMD_PRO.openPaywall = function () { window.__pw++; }; } return 1;`);
   await ev(`document.querySelector('#hvSheet [data-hub="subscription"]').click(); return 1;`); await sleep(500);
   ok(await ev(`var s=document.getElementById("hvSheet"); return window.__pw > 0 || (s.classList.contains("on") && !s.querySelector(".hv-pf.hub"));`) === true, "Subscription opens plans & billing");
+
+  // ── the mobile number: shown with its status, and changed only through the code ───────────────
+  await ev(`window.__ver = false; window.__pd = { phone: "8897298117", phoneVerifiedAt: 1, phoneVerifiedNumber: "8897298117" }; return 1;`); await open(); await sleep(400);
+  ok(await txt("#pfPhoneNum") === "8897298117" && await txt("#pfPhoneVal") === "Verified", "a verified number shows the number and Verified");
+  ok(await ev(`return document.getElementById("pfVerifyCta").hidden;`) === true, "a verified phone alone clears the call to action (either one counts)");
+  ok(await ev(`return !document.querySelector('#pfPro [data-row="phone"]');`) === true, "the phone is not duplicated under Professional details");
+  await ev(`window.__pd = { phone: "9000000001", phoneVerifiedAt: 1, phoneVerifiedNumber: "8897298117" }; return 1;`); await open(); await sleep(400);
+  ok(await txt("#pfPhoneVal") === "Not verified", "a number changed after verification reads Not verified");
+  ok(await ev(`return !document.getElementById("pfVerifyCta").hidden;`) === true, "and, with no registration either, the call to action returns");
+  await ev(`window.__pd = {}; return 1;`); await open(); await sleep(400);
+  ok(await txt("#pfPhoneNum") === "Not added" && await txt("#pfPhoneVal") === "Add", "no number: Not added / Add");
+  await ev(`window.__pd = { phone: "8897298117", phoneVerifiedNumber: "8897298117", phoneVerifiedAt: 1 }; window.__calls = []; return 1;`); await open(); await sleep(400);
+  await ev(`document.querySelector('#hvSheet [data-hub="phone"]').click(); return 1;`); await sleep(300);
+  ok(await ev(`return window.__calls.indexOf("phone:8897298117") >= 0;`) === true, "tapping it opens the code flow for that number (edit = re-verify)");
+  await ev(`window.__pd = null; return 1;`);
 
   // ── every door leads here, and the duplicate doors are gone ───────────────────────────────────
   await ev(`document.getElementById("hvScrim").click(); SMD_openSettings(); return 1;`); await sleep(300);

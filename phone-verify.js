@@ -443,7 +443,9 @@
       abortWebOtp();
       var u = user();
       try { if (u) localStorage.setItem(doneKey(u.uid), "1"); } catch (e) {}
-      try { var ref = docRef(); if (ref) ref.set({ phone: state.phone, phoneVerifiedAt: Date.now() }, { merge: true }).catch(function () {}); } catch (e) {}
+      // phoneVerifiedNumber: WHICH number was verified. Profile shows "Verified" only while the number on
+      // file is this one, so a number changed any other way reads as not verified.
+      try { var ref = docRef(); if (ref) ref.set({ phone: state.phone, phoneVerifiedAt: Date.now(), phoneVerifiedNumber: state.phone }, { merge: true }).catch(function () {}); } catch (e) {}
       try { if (u && u.getIdToken) u.getIdToken(true).catch(function () {}); } catch (e) {}
       if (sl) { sl.classList.remove("bad"); sl.classList.add("ok"); }
       setMsg("done", "Verified.");

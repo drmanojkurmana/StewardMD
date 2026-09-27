@@ -114,7 +114,13 @@ async function handle(context) {
       : await phoneVerify(who, pb, { store: store,
           bind: function (phone) { return bindPhone(env, who.uid, phone); },
           onVerified: async function (phone) {
-          try { await mergeUserClaims(env, who.uid, { phoneVerified: true }); } catch (e) {}
+          // phoneVerifiedAt starts the free Pro week for a phone-verified account (_entitlement.js
+          // weekStart). Only the FIRST verification stamps it: re-verifying a number, or changing to a
+          // new one, must not start the week again.
+          try {
+            const pc = (await getUserClaims(env, who.uid)) || {};
+            await mergeUserClaims(env, who.uid, pc.phoneVerifiedAt ? { phoneVerified: true } : { phoneVerified: true, phoneVerifiedAt: Date.now() });
+          } catch (e) { try { await mergeUserClaims(env, who.uid, { phoneVerified: true }); } catch (x) {} }
           try { await markPhoneVerified(env, who.uid, phone); } catch (e) {}
           // The Free AI allowance follows phoneVerified (D8, 2026-09-26): drop the cached cap so the
           // new allowance applies on the next call rather than after the ~26 h cache.

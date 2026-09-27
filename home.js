@@ -3494,7 +3494,7 @@
         // Only an unverified account sees this; acctFillHubVerify reveals it.
         '<button class="hub-cta" type="button" data-hub="verify" id="pfVerifyCta" hidden>' +
           '<span class="hub-tile hub-t-amber">' + svg("shield") + '</span>' +
-          '<span class="hub-l">Verify your registration<span class="hub-s">Verified once, recognised everywhere in StewardMD.</span></span>' +
+          '<span class="hub-l">Verify your profile<span class="hub-s">Your mobile number or medical registration. Either one unlocks 7 days of Pro, free.</span></span>' +
           '<span class="hub-chev">' + svg("chev") + '</span></button>' +
 
         '<div class="hv-pf-sec">StewardMD ID</div>' +
@@ -3506,8 +3506,10 @@
 
         '<div class="hv-pf-sec">Verification</div>' +
         '<div class="hv-pf-card">' +
+          nav("phone", "hub-t-teal", "device", "Mobile number", '<span id="pfPhoneNum">Checking…</span>', "Checking…", "pfPhoneVal") +
           nav("verify", "hub-t-green", "shield", "Registration", "NMC or state council", "Checking…", "pfVerifyVal") +
         '</div>' +
+        '<p class="hv-pf-note">Verify either one to get 7 days of Pro, free. A verified registration is also what lets you prescribe.</p>' +
 
         '<div class="hv-pf-sec">Professional details</div>' +
         '<div class="hv-pf-card" id="pfPro">' +
@@ -3517,7 +3519,6 @@
           row("Degree", "degree", { value: "", placeholder: "Loading…", edit: false }) +
           row("Speciality", "speciality", { value: "", placeholder: "Loading…", edit: false }) +
           row("City", "city", { value: "", placeholder: "Loading…", edit: false }) +
-          row("Phone", "phone", { value: "", placeholder: "Loading…", edit: false }) +
         '</div>' +
 
         '<div class="hv-pf-sec">Plan &amp; usage</div>' +
@@ -3571,6 +3572,37 @@
     acctFillProfessional(s);
     if (profileHubOn()) acctWireHub(s);
   }
+  // The hub's call to action: only when BOTH answers are in and neither is verified.
+  function hubCta(root) {
+    var cta = root.querySelector("#pfVerifyCta"); if (!cta) return;
+    var regOk = root._reg === "doctor" || root._reg === "trainee";
+    var known = root._reg && root._reg !== "unknown" && root._phone != null;
+    cta.hidden = !(known && !regOk && !root._phone);
+  }
+  /* The hub's Mobile number row. Verified means the number on file is the one that passed the code
+   * (phoneVerifiedNumber); for numbers verified before that was recorded, a verification on file plus
+   * the account's phoneVerified claim. A number changed any other way reads as not verified. */
+  function acctPaintPhone(root, d) {
+    var num = root.querySelector("#pfPhoneNum"), val = root.querySelector("#pfPhoneVal");
+    if (!num || !val) return;
+    var digits = function (x) { return String(x || "").replace(/\D/g, "").slice(-10); };
+    var phone = String((d && d.phone) || "");
+    function paint(ok) {
+      if (!document.body.contains(root)) return;
+      num.textContent = phone || "Not added";
+      num.setAttribute("data-num", phone);
+      val.textContent = !phone ? "Add" : ok ? "Verified" : "Not verified";
+      val.className = "hub-v" + (!phone ? "" : ok ? " ok" : " warn");
+      root._phone = !!(phone && ok);
+      hubCta(root);
+    }
+    if (!phone) { paint(false); return; }
+    if (d.phoneVerifiedNumber) { paint(digits(d.phoneVerifiedNumber) === digits(phone)); return; }
+    if (!d.phoneVerifiedAt) { paint(false); return; }
+    var u = null; try { u = window.SMD_AUTH && SMD_AUTH.currentUser; } catch (e) {}
+    if (!u || typeof u.getIdTokenResult !== "function") { paint(true); return; }
+    u.getIdTokenResult().then(function (r) { paint(!!(r && r.claims && r.claims.phoneVerified === true)); }, function () { paint(true); });
+  }
   function profileHubOn() { try { return localStorage.getItem("smd_profile_hub") !== "0"; } catch (e) { return true; } }
   try { window.SMD_PROFILE_HUB_ON = profileHubOn; } catch (e) {}
   // The hub's drill-in rows. Each closes Profile first, so the next screen is never stacked under it.
@@ -3579,6 +3611,17 @@
       b.addEventListener("click", function () {
         var k = b.getAttribute("data-hub");
         if (k === "verify") { closeSheet(); setTimeout(function () { try { if (window.SMD_VERIFY && SMD_VERIFY.openPanel) SMD_VERIFY.openPanel(); } catch (e) {} }, 80); }
+        else if (k === "phone") {
+          // Adding or changing the number always goes through the WhatsApp / SMS code, so "Verified"
+          // can never sit next to a number nobody proved. Profile comes back once it is done.
+          var cur = ""; try { cur = (s.querySelector("#pfPhoneNum") || { getAttribute: function () { return ""; } }).getAttribute("data-num") || ""; } catch (e) {}
+          closeSheet();
+          if (!acctWireHub._phoneBack) {
+            acctWireHub._phoneBack = true;
+            document.addEventListener("smd:phone-verified", function () { setTimeout(function () { try { openAccount(); } catch (e) {} }, 800); });
+          }
+          setTimeout(function () { try { if (window.SMD_PHONE_VERIFY && SMD_PHONE_VERIFY.open) SMD_PHONE_VERIFY.open(cur); } catch (e) {} }, 80);
+        }
         else if (k === "subscription") { try { openSubscription(); } catch (e) {} }
         else if (k === "aiusage") { closeSheet(); try { openAiUsage(); } catch (e) {} }
       });
@@ -3595,7 +3638,10 @@
         val.textContent = state === "doctor" ? "Verified" : state === "trainee" ? "Verified trainee" : state === "none" ? "Not verified" : "Unavailable";
         val.className = "hub-v" + (state === "doctor" || state === "trainee" ? " ok" : state === "none" ? " warn" : "");
       }
-      if (cta) cta.hidden = !(state === "none");
+      // Stored on the SAME element acctPaintPhone uses (.hv-pf.hub), so hubCta sees both answers.
+      var R = s.querySelector(".hv-pf.hub") || s;
+      R._reg = state;   // "doctor" | "trainee" | "none" | "unknown"
+      hubCta(R);
     }
     var V = window.SMD_VERIFY;
     if (!V || !V.isVerified) { paint("unknown"); return; }
@@ -3812,6 +3858,7 @@
       setRow("speciality", d.speciality, { editLabel: d.speciality ? "Change" : "Choose" });
       setRow("city", d.city);
       setRow("phone", d.phone);
+      if (profileHubOn()) acctPaintPhone(card.closest(".hv-pf") || card, d);
 
       function save(obj) { return pref.set(obj, { merge: true }); }
 

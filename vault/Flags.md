@@ -323,6 +323,7 @@ default (ON) is what you get.
 | `smd_steward_id` | **ON** | Verified-email / Apple-proxy anchor capture UI. ON by owner decision 2026-08-26. The ID itself was already minted on sign-in regardless (smd_steward_i… |
 | `smd_steward_id_mint` | **ON** | Mint the universal StewardMD ID on sign-in. DEFAULT ON. |
 | `smd_phone_verify` | **ON** | Ask every signed-in account to verify its mobile number (WhatsApp code, SMS backup) after the profile form; `phone-verify.js`, 2026-09-19. Set `"0"` to stop asking on this device. Server twin: `PHONE_VERIFY_ON`. |
+| `smd_profile_hub` | **ON** | One Profile page (2026-09-27) instead of three doors: Profile, Settings > Profile & StewardMD ID, and Account & Verification. iOS inset-grouped; verification (mobile number + registration), plan, usage, security and sign-in in one place. `home.js` openAccountPage; Settings shows one row; the drawer no longer injects its own verify row. `"0"` restores the old page and both old doors. Test: `test/run-profile-hub-ui.mjs`. |
 
 ### ThoreX  <sub>5 ON · 4 OFF</sub>
 
@@ -345,6 +346,7 @@ Set in Cloudflare (env or the billing-cfg KV, which wins). These are not `localS
 | Flag | Def | Why |
 |---|---|---|
 | `VERIFY_REQUIRED_FOR_PRO` | **ON** | Pro requires a verified NMC/SMC registration (`_entitlement.js` `isPro`). Set `0` to restore the pre-2026-08-27 launch-promo free-for-all with no deploy; `test/entitlement-trial.test.mjs` pins that path. |
+| `TRIAL_NEEDS_VERIFY` | **ON** (`"0"` = off) | Owner 2026-09-27: the 7-day free Pro week goes ONLY to a verified profile, meaning a verified mobile number (`phoneVerified`) OR a verified NMC/SMC registration (`verified` / `traineeVerified`). One week, from whichever came first (`phoneVerifiedAt` vs `verifiedAt`). `provUntil` alone (the "Not now" skip trial, or a certificate still pending review) no longer unlocks Pro. A phone-only account is `phoneVerified`, never `verified`, so prescribing is unchanged. `_entitlement.js` `trialNeedsVerify` / `weekStart`; `test/verify-gate.test.mjs`. `"0"` restores provisional Pro. |
 | `TRIAL_ONCE_ON` | **OFF** | Free Pro week once per DOCTOR (`_trial_ledger.js`): a reg no / verified phone / native device id that already had a week on another account gets none (verified, `trialDenied`). KV flag from /admin Billing: `1` enforce, `shadow` record + log only, else off. Needs secret `TRIAL_PEPPER`; without it the ledger is off. Seed first: `POST /api/verifications/trial-backfill`. Plan: [[One-Time-Trial]]. |
 | `VERIFY_NAME_ONLY_MATCH` | **OFF** | Auto-verify a certificate whose registration NUMBER could not be read but whose NAME could, when the register returns exactly ONE agreeing row (council-narrowed). A loosening of the rule, so the owner turns it on; `_verify_match.js` `uniqueNameMatch`, added 2026-09-02. Everything else in that change (core-first queries, D1 on empty, initials, 0.5 confidence floor) is unconditional. |
 | `VERIFIED_PRO_DAYS` | `7` | Length of the free Pro window a doctor earns by verifying. |
