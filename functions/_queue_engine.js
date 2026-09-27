@@ -233,8 +233,11 @@ export async function addTicket(env, session, body, actor, org, tele) {
   if (body.offlineToken) await commitOfflineTicket(env, session, f, id, body);
   else await allocateToken(env, session, f, id, td.cfg, td.department, td.unmatched);
   await qAudit(env, { hospitalId: session.hospitalId, ticketId: id, actor, action: "register", meta: f.visitType + (f.teleconsult ? " video consent:" + f.teleConsentBy : "") + " token:" + f.token + (prio ? " priority:" + prio.reason + (prio.note ? " (" + prio.note.slice(0, 60) + ")" : "") : "") });
-  await recompute(env, session);
+  const queued = await recompute(env, session);
   const ticket = withId(id, f);
+  // The estimate recompute just gave this ticket: the registration SMS template names a time.
+  const mine = (queued || []).find((x) => x.id === id);
+  if (mine) ticket.etaStart = mine.etaStart;
   try { await notifyTicket(env, session, ticket, "registered", {}); } catch (e) {}   // best-effort SMS/WhatsApp
   return ticket;
 }

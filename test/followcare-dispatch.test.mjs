@@ -44,11 +44,11 @@ test("plan: no reminder churn once the patient has answered", () => {
   assert.equal(p.missedCount, 0);
 });
 
-test("messageBody: PHI-light template, includes link, en + hi", () => {
+test("messageBody: no patient name even when one is passed (owner 2026-09-27: PHI), includes link, en + hi", () => {
   const en = messageBody("Ramesh", "https://x/y?t=abc", "en", "send");
-  assert.match(en, /Ramesh/); assert.match(en, /https:\/\/x\/y/); assert.match(en, /StewardMD/);
+  assert.doesNotMatch(en, /Ramesh/); assert.match(en, /^Hi, /); assert.match(en, /https:\/\/x\/y/); assert.match(en, /StewardMD/);
   const hi = messageBody("Ramesh", "https://x/y?t=abc", "hi", "send");
-  assert.match(hi, /https:\/\/x\/y/);
+  assert.doesNotMatch(hi, /Ramesh/); assert.match(hi, /https:\/\/x\/y/);
   const rem = messageBody("", "https://x/y", "en", "remind");
   assert.match(rem, /Reminder/i);
   // unknown lang falls back to English
