@@ -55,7 +55,7 @@ const BOOT = `
     set: function (opts) { window.__calls.push(["set", opts]); return Promise.resolve(); },
     next: function (opts) { window.__calls.push(["next", opts]); return Promise.resolve({}); },
     reset: function () { window.__calls.push(["reset"]); return Promise.resolve(); },
-    addListener: function (name, cb) { window.__downloadListeners.push(name); return Promise.resolve({ remove: function () {} }); },
+    addListener: function (name, cb) { window.__downloadListeners.push(name); if (name === "download") (window.__dlCbs = window.__dlCbs || []).push(cb); return Promise.resolve({ remove: function () {} }); },
     list: function () { window.__calls.push(["list"]); return Promise.resolve({ bundles: window.__bundles || [] }); },
     current: function () { window.__calls.push(["current"]); return Promise.resolve(window.__current || { bundle: { id: "builtin" } }); },
     delete: function (opts) { window.__calls.push(["delete", opts]); return Promise.resolve(); },
@@ -289,6 +289,31 @@ try {
   const builtin = await J(`window.__current = { bundle: { id: 'builtin', version: '1.0' } };
     return SMD_OTA.reconcile().then(function(){ return JSON.stringify({ v: SMD_OTA.currentVersion() }); });`);
   ok(builtin.v === null, `on the built-in bundle there is no OTA version to claim (got ${JSON.stringify(builtin)})`);
+
+  // ── what the progress line says (owner, 2026-09-27: "progress didn't show 0 to 100 but restarted
+  // and updated"). @capgo/capacitor-updater 8.51 emits 0% at the start of a zip download, NOTHING while
+  // the bytes transfer, then 70% when the file has landed. So the display is the size and a running
+  // clock, then Installing, then Restarting - never a percentage frozen at 0.
+  const prog = await J(`window.__dlCbs = []; window.__labels = [];
+    var release; window.__downloadResult = new Promise(function (r) { release = r; });
+    var done = SMD_OTA.install({ version: 12, zipUrl: "https://stewardmd.in/api/ota/file/p", zipHash: "p", zipSize: 51851378 },
+      function (pct, label) { window.__labels.push(label || ""); }, true);
+    return new Promise(function (res) {
+      setTimeout(function () {
+        (window.__dlCbs || []).forEach(function (cb) { cb({ percent: 0 }); });
+        setTimeout(function () {
+          (window.__dlCbs || []).forEach(function (cb) { cb({ percent: 70 }); });
+          release({ id: "bundle-p" });
+          done.then(function () { window.__downloadResult = null; res(JSON.stringify(window.__labels)); });
+        }, 2300);
+      }, 50);
+    });`);
+  const labels = Array.isArray(prog) ? prog : [];
+  ok(labels.some((l) => /^Downloading update \(49\.4 MB\)… \d+s$/.test(l)), "while downloading it shows the size and a running clock " + JSON.stringify(labels.slice(0, 3)));
+  ok(labels.filter((l) => /^Downloading update/.test(l)).some((l) => !/ 0s$/.test(l)), "and the clock actually moves (not frozen at 0)");
+  ok(!labels.some((l) => /\b0%/.test(l)), "no label is a percentage stuck at 0%");
+  ok(labels.includes("Installing…"), "once the plugin reports the file down: Installing");
+  ok(labels[labels.length - 1] === "Restarting to finish…", "and last: Restarting to finish (got " + labels[labels.length - 1] + ")");
 
   // an OLDER bundle left pending (127 while 132 runs) is removed; a NEWER pending one is kept
   const stale = await J(`window.__calls = [];

@@ -626,15 +626,18 @@
   }
 
   // ---- Inject "Account & Verification" into the sidebar (mirrors home.js SB.open wrap) ----
+  /* The drawer's first row is PROFILE (owner, 2026-09-27, screenshot: "want profile button here").
+   * It used to be "Account & Verification", a second door into what is now one Profile page; that
+   * page holds verification, so this row opens Profile. Permanent, not behind a flag. */
   function injectMenu() {
-    /* With the Profile hub on, verification lives INSIDE Profile (the identity card at the top of
-     * this same drawer opens it), so a second "Account & Verification" door is not added. */
-    try { if (localStorage.getItem("smd_profile_hub") !== "0") return; } catch (e) { return; }
     var menu = $("sbMenu"); if (!menu || menu.querySelector("[data-smd-verify]")) return;
     var b = document.createElement("button");
-    b.className = "sb-main sb-main-link"; b.setAttribute("data-smd-verify", "1");
-    b.innerHTML = '<span class="ic">' + vfIco("shield") + '</span><span>Account &amp; Verification</span>';
-    b.addEventListener("click", function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(openPanel, 80); });
+    b.className = "sb-main sb-main-link"; b.setAttribute("data-smd-verify", "1"); b.setAttribute("data-smd-profile", "1");
+    b.innerHTML = '<span class="ic">' + (vfIco("user") || vfIco("shield")) + '</span><span>Profile</span>';
+    b.addEventListener("click", function () {
+      try { if (window.SB && SB.close) SB.close(); } catch (e) {}
+      setTimeout(function () { try { if (window.SMD_openProfile) window.SMD_openProfile(); else openPanel(); } catch (e) {} }, 80);
+    });
     menu.insertBefore(b, menu.firstChild);
   }
   function wrapSBOpen() {

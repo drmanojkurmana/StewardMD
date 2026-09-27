@@ -1,4 +1,4 @@
-/* The Profile hub (smd_profile_hub), in a real headless browser as the iOS app.
+/* The Profile page (one page, permanent since 2026-09-27), in a real headless browser as the iOS app.
  *
  * Owner, 2026-09-27, with three screenshots: the sidebar's "Account & Verification", More >
  * "Profile" and Settings > "Profile & StewardMD ID" were three doors into overlapping pages. "Mix all
@@ -124,17 +124,21 @@ try {
   ok(rows === "Profile, ID & verification", "Settings has ONE account row, not two (" + rows + ")");
   await ev(`document.querySelector('#sbrSettings [data-sbr-act="profile"]').click(); return 1;`); await sleep(600);
   ok(await q("#hvSheet.on .hv-pf.hub"), "and it opens the hub");
-  await ev(`document.getElementById("hvScrim").click(); try { SB.open(); } catch (e) {} return 1;`); await sleep(500);
-  ok(await ev(`return !document.querySelector('#sbMenu [data-smd-verify]');`) === true, "the drawer no longer grows a separate Account & Verification row");
-  await ev(`try { SB.close(); } catch (e) {} return 1;`); await sleep(200);
+  // The drawer's first row is PROFILE (owner, 2026-09-27: "want profile button here").
+  await ev(`document.getElementById("hvScrim").click(); try { SB.open(); } catch (e) {} return 1;`); await sleep(600);
+  const drow = await ev(`var b=document.querySelector('#sbMenu [data-smd-profile]'); return b ? b.textContent.trim() : null;`);
+  ok(drow === "Profile", "the drawer has a Profile row where Account & Verification was (" + drow + ")");
+  ok(await ev(`return !/Account\s*&\s*Verification/.test(document.getElementById("sbMenu").textContent);`) === true, "and no Account & Verification row");
+  await ev(`document.querySelector('#sbMenu [data-smd-profile]').click(); return 1;`); await sleep(700);
+  ok(await q("#hvSheet.on .hv-pf.hub"), "tapping it opens the Profile page");
 
-  // ── the flag brings the old layout back ───────────────────────────────────────────────────────
+  // ── hardcoded: the retired switch changes nothing ─────────────────────────────────────────────
   await ev(`localStorage.setItem("smd_profile_hub", "0"); return 1;`);
   await open();
-  ok(await q("#hvSheet.on .hv-pf") && !(await q("#hvSheet .hv-pf.hub")), 'smd_profile_hub="0" restores the previous Profile page');
+  ok(await q("#hvSheet.on .hv-pf.hub"), 'the one Profile page is permanent: smd_profile_hub="0" no longer reverts it');
   await ev(`document.getElementById("hvScrim").click(); SMD_openSettings(); return 1;`); await sleep(300);
-  ok(await q('#sbrSettings [data-sbr-act="account"]'), "and the separate Account & Verification row in Settings");
-  await ev(`localStorage.removeItem("smd_profile_hub"); return 1;`);
+  ok(!(await q('#sbrSettings [data-sbr-act="account"]')), "and Settings keeps its single Profile row");
+  await ev(`localStorage.removeItem("smd_profile_hub"); var o=document.getElementById("sbrSettings"); if(o) o.remove(); return 1;`);
 
   console.log(fails ? `\n${fails} FAILED` : "\nall passed");
 } finally {
