@@ -322,7 +322,7 @@
       // round 11: severe pain in the abdomen, loin or flank said with words between ("severe, boring epigastric pain")
       if ((m2 = norm.match(/\b(?:severe|excruciating|intense|unbearable|agoni[sz]ing|worst)\b[^.;]{0,25}?\b(?:abdominal|epigastric|loin|flank|periumbilical|umbilical|belly|upper abdominal|lower abdominal)\s+(?:pain|colic)\b/))) consider("severeAbdominalPain", m2.index, "compound", m2[0]);
       // round 11: a swollen joint named ("right knee is markedly swollen", "first MTP joint is swollen")
-      if ((m2 = norm.match(/\b(?:joint|knee|ankle|wrist|elbow|mtp|toe|shoulder|hip)\b[^.;,]{0,25}?\b(?:swollen|effusion)\b/))) consider("jointSwelling", m2.index, "compound", m2[0]);
+      if ((m2 = norm.match(/\b(?:joint|knee|ankle|wrist|elbow|mtp|toe|shoulder|hip)\b[^.;,]{0,25}?\b(?:swollen|effusion)\b|\b(?:hot|red|swollen)\b[^.;]{0,35}?\b(?:swollen|painful|tender)\s+(?:(?:right|left)\s+)?(?:knee|ankle|wrist|elbow|shoulder|hip|joint)\b/))) consider("jointSwelling", m2.index, "compound", m2[0]);   // round 24: "hot, swollen, painful right knee"
       // round 21: an ulcer named on the foot ("ulcer over the right forefoot", "plantar ulcer")
       var fure = /\bulcers?\b[^.;,]{0,30}?\b(?:foot|feet|forefoot|toe|toes|heel|plantar|metatarsal|sole)\b|\b(?:foot|forefoot|toe|heel|plantar)\s+ulcers?\b/g;
       while ((m2 = fure.exec(norm))) consider("diabeticFootUlcer", m2.index, "compound", m2[0]);   // every mention, as for admission days

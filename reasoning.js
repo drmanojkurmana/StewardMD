@@ -2114,6 +2114,12 @@
       "puffy face", "facial puffiness", "puffiness of the face", "face and arm swelling", "facial and arm swelling"],   // not periorbital: that is also orbital cellulitis
     increasedSputumVolume: ["larger in volume", "increase in sputum", "more sputum than usual", "greater volume of sputum"],
     malignancy: ["mediastinal mass", "paratracheal mass", "hilar mass", "lung mass", "pulmonary mass", "space-occupying lesion"],
+    // round 24
+    cardiacImplantableDevice: ["pacemaker", "implantable cardioverter", "icd pocket", "icd site", "device pocket", "generator pocket", "crt-d", "crt device"],
+    erythemaAtSite: ["redness over the pacemaker", "red, discharging swelling over the", "redness and discharge over", "red swelling over the pacemaker", "erythema at the insertion",
+      "redness at the insertion", "red and tender exit site", "exit-site redness", "exit site redness"],
+    dysuria: ["painful obstructed micturition", "pain on passing urine", "painful voiding", "burning when passing urine"],
+    urinaryRetention: ["obstructed micturition", "poor stream", "straining to void"],
     knownIBD: ["ulcerative colitis", "crohn's", "crohns", "crohn disease", "inflammatory bowel disease", "known ibd", "ibd flare"]
   };
   var FT_SYN_V2 = (function () {

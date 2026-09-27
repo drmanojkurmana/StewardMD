@@ -320,3 +320,12 @@ test("an ulcer named on the foot is a diabetic foot ulcer finding", () => {
   assert.ok(!p("peptic ulcer disease").includes("diabeticFootUlcer"));
   assert.ok(!p("no foot ulcer").includes("diabeticFootUlcer"));
 });
+
+// round 24: "a hot, swollen, painful right knee" names a swollen joint (adjectives before the joint)
+test("a hot, swollen, painful knee is a swollen joint", () => {
+  const c24 = { valid: { jointSwelling: 1 }, labels: {}, syn: {}, numeric: {}, v2: true };
+  const p = (t) => NLP.extract(t, c24).present;
+  assert.ok(p("Rapid onset of a hot, swollen, exquisitely painful right knee with fever").includes("jointSwelling"));
+  assert.ok(p("right knee is swollen").includes("jointSwelling"));
+  assert.ok(!p("no swollen joints").includes("jointSwelling"));
+});
