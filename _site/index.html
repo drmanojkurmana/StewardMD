@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>StewardMD · Clinical intelligence for doctors</title>
 <link rel="icon" href="/_site/assets/s/logo.png" type="image/png">
 <link rel="apple-touch-icon" href="/_site/assets/s/logo.png">
@@ -129,6 +129,39 @@
     #offline .stat:nth-child(3) { border-left:0; }
     #offline .story, #offline .duo .pair { grid-template-columns:1fr; }
   }
+</style>
+<style id="apple-mobile">
+/* Phone layer (2026-09-27): Apple-style mobile. Minimal frosted bar (logo + menu), full-screen menu,
+   swipeable card rails instead of long stacks, 11px floor on labels, 44px tap targets, safe areas. */
+html { -webkit-text-size-adjust:100%; }
+body { -webkit-tap-highlight-color:transparent; }
+#offline .railhint { display:none; margin:14px 0 0; font-size:13px; color:#86868b; }
+@media (max-width:760px) {
+  #nav nav { padding-top:calc(8px + env(safe-area-inset-top)) !important; padding-bottom:8px !important; padding-left:max(16px, env(safe-area-inset-left)) !important; padding-right:max(16px, env(safe-area-inset-right)) !important; }
+  #menuBtn { border:0 !important; background:transparent !important; width:44px !important; height:44px !important; }
+  #sheet { position:fixed; left:0; right:0; bottom:0; overflow-y:auto; -webkit-overflow-scrolling:touch; background:#fbfbfd !important; border-top:0 !important; padding:18px 32px calc(40px + env(safe-area-inset-bottom)) !important; }
+  #sheet a { border:0 !important; padding:9px 0 !important; font-size:26px !important; line-height:1.2 !important; font-weight:600 !important; letter-spacing:-.025em; color:#1d1d1f !important; opacity:0; transform:translateY(-6px); animation:amSheet .42s cubic-bezier(.2,.7,.2,1) forwards; }
+  #sheet a:last-child { color:#0E6E63 !important; }
+  #sheet a:nth-child(2){animation-delay:.02s} #sheet a:nth-child(3){animation-delay:.04s} #sheet a:nth-child(4){animation-delay:.06s} #sheet a:nth-child(5){animation-delay:.08s} #sheet a:nth-child(6){animation-delay:.1s} #sheet a:nth-child(7){animation-delay:.12s} #sheet a:nth-child(8){animation-delay:.14s} #sheet a:nth-child(9){animation-delay:.16s} #sheet a:nth-child(10){animation-delay:.18s} #sheet a:nth-child(11){animation-delay:.2s}
+  @keyframes amSheet { to { opacity:1; transform:none; } }
+
+  main h2:not(#offline-h) { font-size:32px !important; line-height:1.1 !important; letter-spacing:-.035em !important; }
+  /* both spellings: once JS touches el.style the browser rewrites the attribute as "font-size: 10px" */
+  [style*="font-size:8px"], [style*="font-size: 8px"], [style*="font-size:8.5px"], [style*="font-size: 8.5px"], [style*="font-size:9px"], [style*="font-size: 9px"], [style*="font-size:9.5px"], [style*="font-size: 9.5px"], [style*="font-size:10px"], [style*="font-size: 10px"], [style*="font-size:10.5px"], [style*="font-size: 10.5px"] { font-size:11px !important; }
+
+  /* Swipeable rails: the chapters and the calculator list scroll sideways, like Apple's card galleries */
+  #offline .story, #scoreRail { scrollbar-width:none; -webkit-overflow-scrolling:touch; overscroll-behavior-x:contain; }
+  #offline .story::-webkit-scrollbar, #scoreRail::-webkit-scrollbar { display:none; }
+  #offline .story { display:flex !important; overflow-x:auto; scroll-snap-type:x mandatory; gap:12px; margin-left:-24px; margin-right:-24px; padding:0 24px 6px; scroll-padding:0 24px; }
+  #offline .story .ch { flex:0 0 calc(100vw - 96px); box-sizing:border-box; min-width:0; scroll-snap-align:start; }
+  #offline .story .ch.wide { text-align:left; }
+  #offline .railhint { display:block; }
+  #scoreRail { display:grid !important; grid-auto-flow:column; grid-template-rows:repeat(5,auto); justify-content:start; overflow-x:auto; scroll-snap-type:x proximity; margin-left:-28px; margin-right:-28px; padding:0 28px 6px; }
+  #scoreRail > * { white-space:nowrap; }
+
+  footer a { display:inline-block; padding:12px 0; }
+  footer [style*="gap:11px"] { gap:2px !important; }
+}
 </style>
 </head>
 <body>
@@ -313,6 +346,7 @@
         <div class="ch" data-rise="1"><div class="n">Chapter four</div><h3>And we kept the doses out of its hands.</h3><p>A dose never comes from the model. It comes from the StewardMD drug database, offline or online, so the number you read is the number in the database.</p></div>
         <div class="ch wide" data-rise="1"><div class="n">Private by design</div><h3>Offline, your question stays on your phone.</h3><p>Offline answers are written on the device. There is no server in the middle to send the question to, which is what makes it private, and why it keeps working in airplane mode. The doctor still decides; MaiK is decision support.</p></div>
       </div>
+      <p class="railhint" aria-hidden="true">Swipe for the next chapter</p>
       <div class="duo">
         <h3 data-rise="1">One MaiK. Two engines.</h3>
         <p data-rise="1">Online or offline, you ask the same MaiK. It picks the right engine for where you are.</p>
@@ -1785,9 +1819,10 @@
   function _navTick(){
     var nav = gid('nav'); if (!nav) return;
     var on = (window.scrollY || -(document.body.getBoundingClientRect().top) || 0) > 20;
-    nav.style.background = on ? 'rgba(248,250,252,.78)' : 'transparent';
-    nav.style.backdropFilter = on ? 'saturate(1.6) blur(16px)' : 'none';
-    nav.style.webkitBackdropFilter = on ? 'saturate(1.6) blur(16px)' : 'none';
+    if (menuOpen) return;   // the open menu owns the bar (a backdrop-filter would trap the fixed sheet)
+    nav.style.background = on ? 'rgba(251,251,253,.8)' : 'transparent';
+    nav.style.backdropFilter = on ? 'saturate(1.8) blur(20px)' : 'none';
+    nav.style.webkitBackdropFilter = on ? 'saturate(1.8) blur(20px)' : 'none';
     nav.style.borderBottomColor = on ? '#E2E8F0' : 'rgba(226,232,240,0)';
   }
 
@@ -1800,6 +1835,7 @@
     if (nav){ nav.style.gap = phone ? '12px' : '30px'; nav.style.padding = phone ? '13px 16px' : '15px 28px'; }
     var cta = document.querySelector('[data-navcta]'); if (cta) cta.style.display = phone ? 'none' : 'inline-flex';
     var navOpd = gid('navOpd'); if (navOpd) navOpd.style.display = narrow ? 'none' : 'inline-flex';
+    var navVerify = gid('navVerify'); if (navVerify) navVerify.style.display = phone ? 'none' : 'inline-flex';
     var eyebrow = document.querySelector('[data-eyebrow]'); if (eyebrow) eyebrow.style.whiteSpace = w < 420 ? 'normal' : 'nowrap';
     _q('[data-rule]').forEach(function(r){ r.style.display = w < 420 ? 'none' : 'block'; });
   }
@@ -2232,8 +2268,19 @@
   }
 
   // Menu
-  function toggleMenu(){ var s = gid('sheet'); if (!s) return; menuOpen = !menuOpen; s.style.display = menuOpen ? 'flex' : 'none'; }
-  function closeMenu(){ menuOpen = false; var s = gid('sheet'); if (s) s.style.display = 'none'; }
+  /* Full-screen menu on phones (Apple pattern): the bar turns solid, the page stops scrolling. */
+  function _menuState(){
+    var s = gid('sheet'), nav = gid('nav'), btn = gid('menuBtn'); if (!s || !nav) return;
+    s.style.display = menuOpen ? 'flex' : 'none';
+    if (btn) btn.setAttribute('aria-expanded', menuOpen ? 'true' : 'false');
+    document.documentElement.style.overflow = menuOpen ? 'hidden' : '';
+    if (menuOpen){
+      nav.style.background = '#fbfbfd'; nav.style.backdropFilter = 'none'; nav.style.webkitBackdropFilter = 'none';
+      var bar = nav.querySelector('nav'); s.style.top = (bar ? bar.offsetHeight : 60) + 'px';
+    } else _navTick();
+  }
+  function toggleMenu(){ menuOpen = !menuOpen; _menuState(); }
+  function closeMenu(){ if (!menuOpen) { var s = gid('sheet'); if (s) s.style.display = 'none'; return; } menuOpen = false; _menuState(); }
 
   // Checkout modal
   function openCheckout(kind){
