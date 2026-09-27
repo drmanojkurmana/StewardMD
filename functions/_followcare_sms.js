@@ -87,14 +87,23 @@ export async function sendTwoFactor(env, to, msg) {
 
 // ---- Our DLT content templates (Vodafone Idea DLT, header MAIK, approved 2026-09-08) ----
 // The operator drops an SMS whose text does not match the registered template, so each text below is the
-// approved text verbatim and every {#..#} slot must be filled, in order. Only the templates a sender uses are
-// listed. {#cbn#} is the clinic's own phone (org.phone), never a StewardMD number.
+// approved text verbatim and every {#..#} slot must be filled, in order. All 11 approved templates are here.
+// {#cbn#} is the clinic's own phone (org.phone), never a StewardMD number. A "Detailed" template ends in its
+// link ({#uro#}); `plain` names its approved twin without the link, which sendDlt uses when there is no link.
+// Links must be CTA-whitelisted on Vilpower: https://stewardmd.in/queue? and /followcare? (dynamic, 2026-09-27).
 export var DLT_PEID = "1101720950000098192";   // MAIKNOWLEDGE LLP's DLT entity id (Vilpower); public, not a secret
 export var DLT = {
-  care_plan: { ctid: "1177178791481113659", text: "Dear {#alp#}, please continue your prescribed care plan from Dr. {#alp#} at {#alp#}. For any questions, contact us at {#cbn#}. Details: {#uro#} -StewardMD" },
   otp: { ctid: "1177178791267832947", text: "Your OTP for login to StewardMD is {#num#}. Valid for {#num#} minutes. Do not share this OTP with anyone. -StewardMD" },
-  appt_confirm: { ctid: "1177178791454063563", text: "Dear {#alp#}, your appointment with Dr. {#alp#} at {#alp#} is confirmed for {#alp#} at {#alp#}. View details: {#uro#} -StewardMD" },
-  checkin_alert: { ctid: "1177178791462158338", text: "Dear {#alp#}, reminder: your appointment with Dr. {#alp#} at {#alp#} is today at {#alp#}. Please check-in at reception 10 mins prior. Details: {#uro#} -StewardMD" },
+  appt_confirm: { ctid: "1177178791454063563", plain: "appt_confirm_plain", text: "Dear {#alp#}, your appointment with Dr. {#alp#} at {#alp#} is confirmed for {#alp#} at {#alp#}. View details: {#uro#} -StewardMD" },
+  appt_confirm_plain: { ctid: "1177178791273967656", text: "Dear {#alp#}, your appointment with Dr. {#alp#} at {#alp#} is confirmed for {#alp#} at {#alp#}. Please arrive 10 mins early. -StewardMD" },
+  checkin_alert: { ctid: "1177178791462158338", plain: "checkin_alert_plain", text: "Dear {#alp#}, reminder: your appointment with Dr. {#alp#} at {#alp#} is today at {#alp#}. Please check-in at reception 10 mins prior. Details: {#uro#} -StewardMD" },
+  checkin_alert_plain: { ctid: "1177178791369851422", text: "Dear {#alp#}, reminder: your appointment with Dr. {#alp#} at {#alp#} is today at {#alp#}. Please check-in at reception 10 mins prior. -StewardMD" },
+  care_plan: { ctid: "1177178791481113659", plain: "care_plan_plain", text: "Dear {#alp#}, please continue your prescribed care plan from Dr. {#alp#} at {#alp#}. For any questions, contact us at {#cbn#}. Details: {#uro#} -StewardMD" },
+  care_plan_plain: { ctid: "1177178791389160530", text: "Dear {#alp#}, please continue your prescribed care plan from Dr. {#alp#} at {#alp#}. For any questions, contact us at {#cbn#}. -StewardMD" },
+  post_visit: { ctid: "1177178791495757255", plain: "post_visit_plain", text: "Dear {#alp#}, we hope you're recovering well after your visit with Dr. {#alp#} at {#alp#}. If symptoms worsen, please contact us at {#cbn#}. Details: {#uro#} -StewardMD" },
+  post_visit_plain: { ctid: "1177178791396071579", text: "Dear {#alp#}, we hope you're recovering well after your visit with Dr. {#alp#} at {#alp#}. If symptoms worsen, please contact us at {#cbn#}. -StewardMD" },
+  visit_reminder: { ctid: "1177178791470273641", plain: "visit_reminder_plain", text: "Dear {#alp#}, this is a reminder for your follow-up visit with Dr. {#alp#} at {#alp#} scheduled on {#alp#}. Please carry previous prescriptions and reports. Details: {#uro#} -StewardMD" },
+  visit_reminder_plain: { ctid: "1177178791346053803", text: "Dear {#alp#}, this is a reminder for your follow-up visit with Dr. {#alp#} at {#alp#} scheduled on {#alp#}. Please carry previous prescriptions and reports. -StewardMD" },
 };
 // PURE: the template text with its slots filled in order. "" when the template is unknown, the slot count is
 // wrong, or a slot is blank: a message that cannot match its registered text is never sent.
@@ -116,6 +125,10 @@ export function dltConfigured(env) { return smsProvider(env) === "twofactor" && 
 export async function sendDlt(env, toE164, key, slots) {
   if (!dltConfigured(env)) return { ok: false, skipped: true, reason: "not_configured" };
   var msg = dltText(key, slots);
+  // No link (the last slot of every Detailed template): send the approved twin that has none.
+  if (!msg && DLT[key] && DLT[key].plain && Array.isArray(slots) && !String(slots[slots.length - 1] || "").trim()) {
+    key = DLT[key].plain; slots = slots.slice(0, -1); msg = dltText(key, slots);
+  }
   if (!msg) return { ok: false, reason: "template_mismatch" };
   var to = toDialable(toE164, env.FOLLOWCARE_DEFAULT_CC);
   if (!to || to.length < 10) return { ok: false, reason: "bad_number" };

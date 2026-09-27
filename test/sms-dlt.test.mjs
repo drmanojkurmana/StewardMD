@@ -12,15 +12,41 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { DLT, DLT_PEID, dltText, dltConfigured, sendDlt } from "../functions/_followcare_sms.js";
 
-test("the template texts are the approved DLT texts, verbatim, with their content-template ids", () => {
-  // Copied from the DLT portal export (ContentTemplates.csv, 2026-09-27). A change here must be a new approval.
-  assert.deepEqual(DLT.otp, { ctid: "1177178791267832947", text: "Your OTP for login to StewardMD is {#num#}. Valid for {#num#} minutes. Do not share this OTP with anyone. -StewardMD" });
-  assert.deepEqual(DLT.appt_confirm, { ctid: "1177178791454063563", text: "Dear {#alp#}, your appointment with Dr. {#alp#} at {#alp#} is confirmed for {#alp#} at {#alp#}. View details: {#uro#} -StewardMD" });
-  assert.deepEqual(DLT.checkin_alert, { ctid: "1177178791462158338", text: "Dear {#alp#}, reminder: your appointment with Dr. {#alp#} at {#alp#} is today at {#alp#}. Please check-in at reception 10 mins prior. Details: {#uro#} -StewardMD" });
+// All 11 approved templates, from the DLT portal export (ContentTemplates.csv, 2026-09-27). A change here must be
+// a new approval on Vilpower: the operator matches the text byte for byte.
+const APPROVED = {
+  "1177178791267832947": "Your OTP for login to StewardMD is {#num#}. Valid for {#num#} minutes. Do not share this OTP with anyone. -StewardMD",
+  "1177178791454063563": "Dear {#alp#}, your appointment with Dr. {#alp#} at {#alp#} is confirmed for {#alp#} at {#alp#}. View details: {#uro#} -StewardMD",
+  "1177178791273967656": "Dear {#alp#}, your appointment with Dr. {#alp#} at {#alp#} is confirmed for {#alp#} at {#alp#}. Please arrive 10 mins early. -StewardMD",
+  "1177178791462158338": "Dear {#alp#}, reminder: your appointment with Dr. {#alp#} at {#alp#} is today at {#alp#}. Please check-in at reception 10 mins prior. Details: {#uro#} -StewardMD",
+  "1177178791369851422": "Dear {#alp#}, reminder: your appointment with Dr. {#alp#} at {#alp#} is today at {#alp#}. Please check-in at reception 10 mins prior. -StewardMD",
+  "1177178791481113659": "Dear {#alp#}, please continue your prescribed care plan from Dr. {#alp#} at {#alp#}. For any questions, contact us at {#cbn#}. Details: {#uro#} -StewardMD",
+  "1177178791389160530": "Dear {#alp#}, please continue your prescribed care plan from Dr. {#alp#} at {#alp#}. For any questions, contact us at {#cbn#}. -StewardMD",
+  "1177178791495757255": "Dear {#alp#}, we hope you're recovering well after your visit with Dr. {#alp#} at {#alp#}. If symptoms worsen, please contact us at {#cbn#}. Details: {#uro#} -StewardMD",
+  "1177178791396071579": "Dear {#alp#}, we hope you're recovering well after your visit with Dr. {#alp#} at {#alp#}. If symptoms worsen, please contact us at {#cbn#}. -StewardMD",
+  "1177178791470273641": "Dear {#alp#}, this is a reminder for your follow-up visit with Dr. {#alp#} at {#alp#} scheduled on {#alp#}. Please carry previous prescriptions and reports. Details: {#uro#} -StewardMD",
+  "1177178791346053803": "Dear {#alp#}, this is a reminder for your follow-up visit with Dr. {#alp#} at {#alp#} scheduled on {#alp#}. Please carry previous prescriptions and reports. -StewardMD",
+};
+
+test("all 11 approved DLT templates are here, verbatim, each under its own content-template id", () => {
+  const byId = {};
+  for (const k of Object.keys(DLT)) { assert.ok(!byId[DLT[k].ctid], "ctid used twice: " + k); byId[DLT[k].ctid] = DLT[k].text; }
+  assert.deepEqual(byId, APPROVED);
 });
 
-test("Care Plan - Detailed: verbatim, and its callback slot is filled like any other", () => {
-  assert.deepEqual(DLT.care_plan, { ctid: "1177178791481113659", text: "Dear {#alp#}, please continue your prescribed care plan from Dr. {#alp#} at {#alp#}. For any questions, contact us at {#cbn#}. Details: {#uro#} -StewardMD" });
+test("every Detailed template ends in its link and points at an approved no-link twin with the same slots before it", () => {
+  for (const k of Object.keys(DLT)) {
+    if (!DLT[k].plain) continue;
+    const tw = DLT[DLT[k].plain];
+    assert.ok(tw && !tw.plain, k + " -> " + DLT[k].plain);
+    assert.match(DLT[k].text, /\{#uro#\} -StewardMD$/, k + " ends in its link");
+    const slots = (t) => t.match(/\{#\w+#\}/g);
+    assert.deepEqual(slots(tw.text), slots(DLT[k].text).slice(0, -1), k + " twin has the same slots minus the link");
+  }
+  assert.deepEqual(Object.keys(DLT).filter((k) => DLT[k].plain).sort(), ["appt_confirm", "care_plan", "checkin_alert", "post_visit", "visit_reminder"]);
+});
+
+test("Care Plan - Detailed: its callback slot is filled like any other", () => {
   assert.equal(dltText("care_plan", ["Patient", "Rao", "Cardiology", "04023456789", "L"]),
     "Dear Patient, please continue your prescribed care plan from Dr. Rao at Cardiology. For any questions, contact us at 04023456789. Details: L -StewardMD");
   assert.equal(dltText("care_plan", ["Patient", "Rao", "Cardiology", "", "L"]), "", "no clinic number: no message");
@@ -66,6 +92,17 @@ test("sendDlt posts the filled text to 2Factor R1 as TRANS_SMS from MAIK with ou
     assert.equal(DLT_PEID, "1101720950000098192", "MAIKNOWLEDGE LLP on Vilpower");
     assert.equal(f.get("peid"), DLT_PEID, "no entity id: the operator rejects the message");
     assert.equal(f.get("msg"), "Your OTP for login to StewardMD is 654321. Valid for 10 minutes. Do not share this OTP with anyone. -StewardMD");
+  }));
+
+test("sendDlt with no link sends the approved no-link twin; a missing clinic phone still sends nothing", () =>
+  withFetch(() => res(true, '{"Status":"Success","Details":"sid-2"}'), async (calls) => {
+    await sendDlt(ENV, "9876543210", "post_visit", ["Patient", "Rao", "Cardiology", "04023456789", ""]);
+    const f = new URLSearchParams(calls[0].o.body);
+    assert.equal(f.get("ctid"), "1177178791396071579");
+    assert.equal(f.get("msg"), "Dear Patient, we hope you're recovering well after your visit with Dr. Rao at Cardiology. If symptoms worsen, please contact us at 04023456789. -StewardMD");
+    assert.deepEqual(await sendDlt(ENV, "9876543210", "post_visit", ["Patient", "Rao", "Cardiology", "", ""]), { ok: false, reason: "template_mismatch" });
+    assert.deepEqual(await sendDlt(ENV, "9876543210", "otp", ["1", ""]), { ok: false, reason: "template_mismatch" }, "no twin: nothing");
+    assert.equal(calls.length, 1);
   }));
 
 test("sendDlt reports 2Factor's refusal, and never throws on a network failure", async () => {

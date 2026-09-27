@@ -67,7 +67,7 @@ export async function postDoctorAction(env, ep, doctor, type, input) {
   try {
     const link = await linkFor(env, ep);
     const body = I18n.t(notifyKey(type), ep.lang || "en", { link: link, hospital: fields.hospitalName });
-    const res = await sendPatientMessage(env, ep, body, { link: link });
+    const res = await sendPatientMessage(env, ep, body, { link: link, doctorName: doctor && doctor.name });
     const st = res && res.ok ? "delivered" : (res && res.skipped ? "sent" : "sent");
     try { await fsCommit(env, [wUpdate(env, "fc_comms/" + commId, { status: st }, { exists: true })]); } catch (e) {}
   } catch (e) {}

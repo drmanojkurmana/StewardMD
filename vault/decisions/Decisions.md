@@ -10373,6 +10373,21 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
 - **Open**: FollowCare's hospital is a free-text id the doctor types (`fc_doctors`), not an OPD clinic, so its
   Post-Visit template still has no callback number or doctor name; FollowCare stays WhatsApp only.
 
+## 2026-09-27 - DLT SMS delivers as msg + peid + ctid; all 11 templates wired; FollowCare SMS on DLT
+- **Decision**: `sendDlt` posts R1 TRANS_SMS with the filled text, our DLT entity id (`DLT_PEID`
+  1101720950000098192, MAIKNOWLEDGE LLP) and the content-template id. All 11 approved templates live in the `DLT`
+  table; each Detailed one names its no-link twin (`plain`), used when there is no link. FollowCare's single send
+  point (`sendPatientMessage`) sends check-ins, reminders, the enrol welcome and doctor nudges as Post-Visit
+  Check-in, medicine reminders and the green voice recap as Care Plan (recap: no-link twins). Its slots: doctor
+  = profile name (or the Action Center doctor), clinic + call-back phone = the OPD clinic the hospital ID names,
+  else the ONE OPD clinic the doctor owns. Any slot missing: no SMS, the delivery log says `template_mismatch`.
+- **Why**: live tests 2026-09-27 from MAIK: `templatename` reached the operator and came back DLT-CNT-REJECT;
+  msg + peid + ctid was DELIVERED. Vilpower CTA whitelist (dynamic): `https://stewardmd.in/queue?` (ACTIVE) and
+  `https://stewardmd.in/followcare?`. A call-back number is whitelisted per exact number (no pattern, and the
+  Registration APIs cannot do CTAs), so each clinic's phone is added on Vilpower (CTA Whitelisting > Number).
+- **Not wired**: Visit Reminder (+ twin) is ready but no app event has a follow-up visit date yet. ABDM
+  record-link OTP has no approved template (our OTP text says "login to StewardMD"); it needs its own.
+
 ## 2026-09-27 - Ophthalmós integrated as a module, behind a flag default OFF
 - **Context**: Ophthalmós (eye-imaging clinic trainer: OCT, disc, DR grading, ROP, case conference) was
   built end-to-end in its own repo (`github.com/drmanojkurmana/ophthalmos`), not inside StewardMD.
