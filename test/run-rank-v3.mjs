@@ -67,7 +67,7 @@ try {
   await call("Runtime.enable");
 
   // ---- 1. OFF ------------------------------------------------------------------------------
-  ok(await load(BASE + "?rankv3=0"), "app + KB load with ?rankv3=0");
+  ok(await load(BASE + "?rankv3=0&gatev2=0"), "app + KB load with ?rankv3=0 (classic gate: v3 is order only)");
   const off = {};
   for (const [k, keys] of Object.entries(CASES)) off[k] = await run(keys);
   ok(off.feverOnly.order[0] === "HLH", `off · fever alone leads with HLH (the classic behaviour v3 fixes): ${off.feverOnly.order[0]}`);
@@ -76,7 +76,7 @@ try {
   ok(await ev(`return DX._rankV3()`) === false, "off · DX._rankV3() is false");
 
   // ---- 2. ON -------------------------------------------------------------------------------
-  ok(await load(BASE + "?rankv3=1"), "app + KB load with ?rankv3=1");
+  ok(await load(BASE + "?rankv3=1&gatev2=0"), "app + KB load with ?rankv3=1 (classic gate: v3 is order only)");
   const on = {};
   for (const [k, keys] of Object.entries(CASES)) on[k] = await run(keys);
   for (const k of Object.keys(CASES)) {

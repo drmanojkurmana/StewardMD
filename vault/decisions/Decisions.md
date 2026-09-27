@@ -10248,3 +10248,15 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
 - **Checked**: every workspace-touching browser suite was run before and after the flip; the only
   new failure was a test that looked for the classic "Why not higher" label, now covering both views.
 
+## 2026-09-27 - Antibiotic gate v2 is the default
+- **Decision**: `smd_gate_v2` defaults ON (owner: "turn on smd_gate_v2"). Its rules are ai_drafted; the
+  owner, a clinician, approved them for default ahead of a separate clinician review.
+- **Measured effect** (same 491 gold cases, default config, classic -> v2): antibiotics when indicated
+  156 -> 161 (tapped) and 110 -> 111 (text); time-critical flagged 47 -> 49 of 49 (tapped), 31 -> 32
+  (text); viral given antibiotics 13 -> 9 and 10 -> 6; overcall on text 79 -> 72, complaint 19 -> 12.
+  Worse: overcall on tapped findings 48 -> 52; complaint-only abx-when-indicated 42 -> 40; held-out 2
+  abx-when-indicated 9 -> 8 (one case). The overcall is the next target.
+- **Reversible**: `?gatev2=0` or localStorage `smd_gate_v2 = "0"`. The classic gate keeps its own floors
+  (`smd_gate_v2=0`) and CI step; configs that now include the gate implicitly were re-recorded and
+  match the old explicit `smd_gate_v2=1` configs exactly.
+

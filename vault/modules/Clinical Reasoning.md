@@ -38,7 +38,7 @@ doctor text: 40% / 55%. The text extraction layer is the bottleneck, not the ran
 gate ignores `antibioticRelevant`, so viral cases (dengue, URTI, viral meningitis) show
 "empiric antimicrobial therapy is appropriate". `baseline.json` is stale (18 false "regressions").
 
-## Antibiotic gate v2 (`smd_gate_v2`, default OFF, 2026-09-26)
+## Antibiotic gate v2 (`smd_gate_v2`, default ON since 2026-09-27; `smd_gate_v2=0` = classic)
 
 Phase 1 of `kb/validation/PLAN-DX-ABX-10.md`. `reasoning.js` `gateV2()` / `gateV2Apply()`; on with
 `localStorage smd_gate_v2=1` or `?gatev2=1`. Off is the classic gate: 0 differences across 1,580

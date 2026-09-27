@@ -1195,7 +1195,8 @@
     r.rankScore = (r.rankScore != null ? r.rankScore : r.score) + b;
   }
 
-  /* smd_gate_v2 (default OFF): Phase 1 of kb/validation/PLAN-DX-ABX-10.md. ?gatev2=1|0 overrides.
+  /* smd_gate_v2 (default ON since 2026-09-27, owner decision; "0" keeps the classic gate): Phase 1 of
+   * kb/validation/PLAN-DX-ABX-10.md. ?gatev2=1|0 overrides.
    * (a) The gate reads what the app's own stewardship dataset already tells the doctor under
    *     "Need antibiotics?" (ASP_DATA.needAbx) for the leading infection: NO (viral, self-limited),
    *     CONDITIONAL (only when criteria are met) or N/A (a specific non-antibacterial therapy such
@@ -1213,8 +1214,9 @@
     try {
       var q = /[?&]gatev2=([01])\b/.exec((window.location && location.search) || "");
       if (q) return q[1] === "1";
-      return localStorage.getItem("smd_gate_v2") === "1";
-    } catch (e) { return false; }
+      // default ON since 2026-09-27 (owner decision); localStorage "0" keeps the classic gate
+      return localStorage.getItem("smd_gate_v2") !== "0";
+    } catch (e) { return true; }
   }
   var GATE_V2_KEEP = ["hypotension", "lactateElevated", "raised_lactate", "vasopressorRequirement",
     "immunocompromised", "neutropenia", "absoluteNeutrophilCountLow", "persistentBacteremia"];

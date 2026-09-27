@@ -113,7 +113,11 @@ try {
   ok((await assess(keys("gc_118"))).cls === "infection_no_abx", "localStorage flag alone turns v2 on");
   await ev(`localStorage.removeItem("smd_gate_v2"); return 1`);
   ok(await load(BASE), "reload with the flag cleared");
-  ok((await assess(keys("gc_118"))).cls === "very_likely", "cleared flag = classic gate (default OFF)");
+  ok((await assess(keys("gc_118"))).cls === "infection_no_abx", "cleared flag = gate v2 (default ON since 2026-09-27, owner decision)");
+  await ev(`localStorage.setItem("smd_gate_v2","0"); return 1`);
+  ok(await load(BASE), "reload with localStorage smd_gate_v2=0");
+  ok((await assess(keys("gc_118"))).cls === "very_likely", "smd_gate_v2=0 = classic gate (the opt-out)");
+  await ev(`localStorage.removeItem("smd_gate_v2"); return 1`);
 
   // ---- 4. Dx workspace renders the v2 decision ---------------------------------------------
   ok(await load(BASE + "?gatev2=1"), "reload with ?gatev2=1 for the workspace");
