@@ -423,6 +423,10 @@ is no configuration in which the exported document is ambiguous about whether an
   L, and the folder rewrites L to 1. Reversed, every scanned and every hand-typed code returns empty.
   Order is the whole bug; there is a test.
 - **The QR block stays LIGHT in dark mode on purpose.** An inverted QR does not scan reliably.
+- **A re-saved draft's `updatedAt` must be strictly later than its last save.** `submitDraft` patches
+  the existing server draft only when `updatedAt > serverIds[id].at`. With a plain `Date.now()`, a fix
+  saved in the same millisecond as the refused save got an equal stamp and the PATCH was skipped (CI
+  hit this once, 2026-09-27). `saveDraft` stamps `max(now, previous + 1)`; the test freezes the clock.
 - **A wrong QR is worse than no QR** — it looks scannable and is not. Every part of the encoder with
   a published reference value is tested against it (GF(256) tables, RS generators, all 32 format
   strings from Table C.1, the version strings from Table D.1). Do not "optimise" it without those.

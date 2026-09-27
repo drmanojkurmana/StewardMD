@@ -449,6 +449,7 @@
     var org = row.org, pheno = row.pheno || null, isStaph = ORGS[org] && ORGS[org].staph;
     if (!(row.n > 0)) out.flags.push("noN");
     else if (row.n < M39_MIN) out.flags.push("lowN");
+    if (row.clinical) out.flags.push("clinical");
     var fox = null;
     if (isStaph && !pheno) {
       if (typeof s.cefoxitin === "number") fox = s.cefoxitin;
@@ -460,6 +461,9 @@
       if (typeof v !== "number" || isNaN(v) || v < 0 || v > 100) { c.act = "suppress"; c.why = "not a percentage between 0 and 100"; return; }
       var ir = intrinsicReason(org, d);
       if (ir) { c.act = "intrinsic"; c.why = ir; return; }
+      // A clinical antibiogram (laboratory results combined with how patients responded to
+      // treatment) is not a laboratory percent susceptible: shown with a caution, never used.
+      if (row.clinical) { c.act = "caution"; c.why = "a clinical antibiogram (" + row.clinical + "): the figure combines laboratory results with how patients responded to treatment, so it is not a laboratory percent susceptible and is not used"; return; }
       // The extractor found the source contradicting itself for this figure (e.g. a printed %
       // that its own printed counts do not give).
       if (conflict[d]) { c.act = "caution"; c.why = "the source contradicts itself: " + conflict[d]; return; }
@@ -503,9 +507,24 @@
       if (d === "daptomycin" && org === "efaecium" && v < 50) {
         c.act = "caution"; c.why = "CLSI has had no susceptible category for daptomycin in E. faecium since 2019 (only susceptible-dose-dependent and resistant), so a low figure reflects the breakpoints rather than resistance; see the MIC"; return;
       }
+      // A genus row (Enterococcus spp., species not separated) mixes E. faecalis, which has a
+      // daptomycin susceptible category, with E. faecium, which has none: the figure means nothing.
+      if (d === "daptomycin" && org === "enterococcus") {
+        c.act = "caution"; c.why = "for Enterococcus spp. with the species not separated, a daptomycin percent susceptible mixes E. faecalis (which has a susceptible category) with E. faecium (none since CLSI 2019); use the species figures or the MIC"; return;
+      }
+      // CLSI has no susceptible category for fluconazole in C. glabrata, only susceptible-dose-
+      // dependent and resistant, so a printed "% susceptible" counts SDD isolates or uses another scheme.
+      if (d === "fluconazole" && org === "cglabrata") {
+        c.act = "caution"; c.why = "CLSI has no susceptible category for fluconazole in C. glabrata (only susceptible-dose-dependent and resistant), so a percent susceptible here is not a susceptibility rate; see the MIC"; return;
+      }
       var un = unusualReason(org, d, v);
       if (un) { c.act = "caution"; c.why = un; return; }
     });
+    // The paired checks below all read the figures as they stood after the per-cell checks, so a
+    // check never shields its partner by flagging one side first (round 4: SKIMS 2024 urine E. coli
+    // imipenem 23 and ertapenem 47 survived beside ceftriaxone 87 once meropenem was flagged).
+    var base = {}; Object.keys(out.cells).forEach(function (d) { base[d] = out.cells[d].act === "keep"; });
+    function flag(c, why) { if (c.act === "keep") { c.act = "caution"; c.why = why; } }
     // Paired agents that should agree. Cefotaxime and ceftriaxone have the same activity
     // against Enterobacterales, and imipenem and meropenem nearly so for E. coli and
     // Klebsiella; a wide gap means a transcription or testing problem in the source.
@@ -517,8 +536,8 @@
     }
     function pair(a, b, gap, why) {
       var ca = out.cells[a], cb = out.cells[b];
-      if (!ca || !cb || ca.act !== "keep" || cb.act !== "keep" || !comparable(ca, cb)) return;
-      if (Math.abs(ca.s - cb.s) > gap) { ca.act = cb.act = "caution"; ca.why = cb.why = why + " (" + drugLabel(a) + " " + ca.s + "%, " + drugLabel(b) + " " + cb.s + "%)"; }
+      if (!ca || !cb || !base[a] || !base[b] || !comparable(ca, cb)) return;
+      if (Math.abs(ca.s - cb.s) > gap) { var w = why + " (" + drugLabel(a) + " " + ca.s + "%, " + drugLabel(b) + " " + cb.s + "%)"; flag(ca, w); flag(cb, w); }
     }
     if (orgGroup(org) === "entero") pair("cefotaxime", "ceftriaxone", 20, "cefotaxime and ceftriaxone should give nearly the same result; the source figures disagree");
     // Imipenem and meropenem: close for Enterobacterales except the Proteeae (Proteus, Morganella,
@@ -530,10 +549,10 @@
     // caution and meropenem stays usable. Meropenem far below imipenem questions both.
     function carbapenems(gap, why) {
       var ci = out.cells.imipenem, cm = out.cells.meropenem;
-      if (!ci || !cm || ci.act !== "keep" || cm.act !== "keep" || !comparable(ci, cm)) return;
+      if (!ci || !cm || !base.imipenem || !base.meropenem || !comparable(ci, cm)) return;
       var txt = " (" + drugLabel("imipenem") + " " + ci.s + "%, " + drugLabel("meropenem") + " " + cm.s + "%)";
-      if (ci.s < cm.s - gap) { ci.act = "caution"; ci.why = why + "; imipenem is the outlier (imipenem disks lose potency, a known cause of false resistance)" + txt; }
-      else if (cm.s < ci.s - gap) { ci.act = cm.act = "caution"; ci.why = cm.why = why + txt; }
+      if (ci.s < cm.s - gap) flag(ci, why + "; imipenem is the outlier (imipenem disks lose potency, a known cause of false resistance)" + txt);
+      else if (cm.s < ci.s - gap) { flag(ci, why + txt); flag(cm, why + txt); }
     }
     if (grp === "entero" && PROTEEAE.indexOf(org) < 0) carbapenems(25, "imipenem and meropenem should give similar results for this organism; the source figures disagree");
     if (org === "paeruginosa" || org === "acinetobacter") carbapenems(30, "imipenem and meropenem rarely differ this much for non-fermenters; the source figures disagree");
@@ -550,11 +569,18 @@
     // isolates are almost always amikacin-susceptible. A figure far out of that order is an error.
     if (grp === "entero") {
       ["ceftriaxone", "cefotaxime"].forEach(function (a) {
-        ["meropenem"].concat(PROTEEAE.indexOf(org) < 0 ? ["imipenem"] : []).forEach(function (b) { atMost(a, b, 20, "an isolate susceptible to " + drugLabel(a).toLowerCase() + " is carbapenem-susceptible, so " + drugLabel(b).toLowerCase() + " cannot be this much lower; the source figures disagree"); });
+        ["meropenem", "ertapenem"].concat(PROTEEAE.indexOf(org) < 0 ? ["imipenem"] : []).forEach(function (b) { atMost(a, b, 20, "an isolate susceptible to " + drugLabel(a).toLowerCase() + " is carbapenem-susceptible, so " + drugLabel(b).toLowerCase() + " cannot be this much lower; the source figures disagree"); });
       });
       atMost("ertapenem", "meropenem", 10, "an ertapenem-susceptible isolate is meropenem-susceptible, so meropenem cannot be this much lower; the source figures disagree");
       ["ceftriaxone", "cefotaxime"].forEach(function (b) { atMost("cefuroxime", b, 10, "a cefuroxime-susceptible isolate is also " + drugLabel(b).toLowerCase() + "-susceptible, so " + drugLabel(b).toLowerCase() + " cannot be this much lower; the source figures disagree"); });
       atMost("gentamicin", "amikacin", 20, "gentamicin-susceptible Enterobacterales are almost always amikacin-susceptible, so amikacin cannot be this much lower; the source figures disagree");
+    }
+    // Echinocandins: caspofungin, micafungin and anidulafungin give similar results for Candida;
+    // caspofungin MIC testing varies between laboratories, so a wide gap is a testing problem.
+    if (grp === "fungi") {
+      pair("caspofungin", "micafungin", 20, "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree");
+      pair("caspofungin", "anidulafungin", 20, "the echinocandins should give similar results for Candida (caspofungin testing varies between laboratories); the source figures disagree");
+      pair("micafungin", "anidulafungin", 20, "the echinocandins should give similar results for Candida; the source figures disagree");
     }
     // Cefoxitin and oxacillin both measure methicillin resistance in staphylococci.
     if (ORGS[org] && ORGS[org].staph && !pheno) pair("cefoxitin", "oxacillin", 20, "cefoxitin and oxacillin both measure methicillin resistance and should agree; the source figures disagree");
@@ -569,10 +595,21 @@
     }
     // One direction only: a tetracycline-susceptible isolate is also doxycycline- and
     // minocycline-susceptible (CLSI M100), so tetracycline cannot be far above either.
+    // When the two drugs were tested on different numbers of isolates the percentages are not
+    // comparable, but the counts still bound each other: every isolate susceptible to a is
+    // susceptible to b, so b's susceptible count cannot fall below a's minus the isolates b may not
+    // have been tested on (Bhopal 2021 E. cloacae: ertapenem 48% of 52 = 25 isolates, meropenem 8%
+    // of 86 = 7).
     function atMost(a, b, gap, why) {
       var ca = out.cells[a], cb = out.cells[b];
-      if (!ca || !cb || ca.act !== "keep" || cb.act !== "keep" || !comparable(ca, cb)) return;
-      if (ca.s > cb.s + gap) { ca.act = cb.act = "caution"; ca.why = cb.why = why + " (" + drugLabel(a) + " " + ca.s + "%, " + drugLabel(b) + " " + cb.s + "%)"; }
+      if (!ca || !cb || !base[a] || !base[b]) return;
+      var bad;
+      if (comparable(ca, cb)) bad = ca.s > cb.s + gap;
+      else {
+        var na = ca.nt != null ? ca.nt : row.n, nb = cb.nt != null ? cb.nt : row.n;
+        bad = cb.s * nb / 100 + gap * Math.min(na, nb) / 100 < ca.s * na / 100 - Math.max(0, na - nb);
+      }
+      if (bad) { var w = why + " (" + drugLabel(a) + " " + ca.s + "%, " + drugLabel(b) + " " + cb.s + "%)"; flag(ca, w); flag(cb, w); }
     }
     ["doxycycline", "minocycline"].forEach(function (b) { atMost("tetracycline", b, 15, "a tetracycline-susceptible isolate is also " + drugLabel(b).toLowerCase() + "-susceptible (CLSI), so tetracycline cannot be this much higher; the source figures disagree"); });
     // Warnings that do not change a cell.

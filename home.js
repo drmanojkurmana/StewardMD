@@ -401,8 +401,8 @@
           if (otaInstall) otaInstall.addEventListener("click", function () {
             if (!window.SMD_OTA || !pending) return;
             otaInstall.disabled = true;
-            SMD_OTA.install(pending, function (pct) { if (otaStatus) otaStatus.textContent = "Downloading… " + pct + "%"; }).then(function (res) {
-              if (res && res.ok) { if (otaStatus) otaStatus.textContent = "Update ready — reopening…"; }
+            SMD_OTA.install(pending, function (pct, label) { if (otaStatus) otaStatus.textContent = label || ("Downloading… " + pct + "%"); }).then(function (res) {
+              if (res && res.ok) { if (otaStatus) otaStatus.textContent = "Update ready, reopening…"; }
               else { otaInstall.disabled = false; if (otaStatus) otaStatus.textContent = otaSay(res && res.error, "Update failed"); }
             });
           });
@@ -3603,7 +3603,9 @@
     if (!u || typeof u.getIdTokenResult !== "function") { paint(true); return; }
     u.getIdTokenResult().then(function (r) { paint(!!(r && r.claims && r.claims.phoneVerified === true)); }, function () { paint(true); });
   }
-  function profileHubOn() { try { return localStorage.getItem("smd_profile_hub") !== "0"; } catch (e) { return true; } }
+  // The one Profile page is permanent (owner, 2026-09-27: "hardcode this change"). The flag that used
+  // to gate it (smd_profile_hub) is retired; the old three-door layout is gone from every entry point.
+  function profileHubOn() { return true; }
   try { window.SMD_PROFILE_HUB_ON = profileHubOn; } catch (e) {}
   // The hub's drill-in rows. Each closes Profile first, so the next screen is never stacked under it.
   function acctWireHub(s) {
@@ -3829,17 +3831,49 @@
       // check their wifi for a problem that has nothing to do with it.
       var denied = /permission[-_ ]?denied|unauthenticated|app-?check/i.test(code);
       try {
-        if (!document.body.contains(card)) return;
+        if (!document.body.contains(card) || painted) return;
         if (denied) offline("Unverified", "Signed in, but this device could not be verified. Sign out and back in, then retry.");
         else offline("Offline", "Couldn't load your details.");
       } catch (e) {}
     };
-    pref.get().then(once(onData), once(onFail));
-    setTimeout(function () {
-      if (settled || !document.body.contains(card)) return;
-      try { pref.get({ source: "cache" }).then(once(onData), once(onFail)); }
-      catch (e) { once(onFail)(); }
-    }, 7000);
+    /* THREE SOURCES, NEVER "OFFLINE" WHILE ONE OF THEM WORKS (owner, 2026-09-27, screenshot: every
+     * detail read "Offline" / "Couldn't load your details" while Registration beside it said
+     * Verified, so the phone was online and reaching our server). What failed was this SDK read
+     * inside the iOS WebView: it hung, and the cache read that follows it missed. So:
+     *   1. the last good copy on this device paints at once (no Loading, no Offline);
+     *   2. the SDK read and POST /api/auth/my-profile (the same doc via the server's admin
+     *      credential) run side by side, and whichever answers first paints;
+     *   3. "Offline" appears only if BOTH fail AND nothing was ever loaded here. */
+    var CK = "smd_profile_cache:" + uid;
+    var painted = false, failures = 0;
+    function wrap(obj, exists) { return { exists: exists !== false, data: function () { return obj || {}; } }; }
+    function fresh(snap) {
+      var dd = (snap && snap.exists && snap.data()) || {};
+      try { localStorage.setItem(CK, JSON.stringify(dd)); } catch (e) {}
+      painted = true; settled = true;
+      onData(snap);
+    }
+    function failed(err) {
+      failures++;
+      if (failures < 2 || painted) return;          // the other source may still answer
+      onFail(err);
+    }
+    try { var cached = JSON.parse(localStorage.getItem(CK) || "null"); if (cached) { painted = true; onData(wrap(cached)); } } catch (e) {}
+    var sdkDone = false;
+    pref.get().then(function (snap) { sdkDone = true; fresh(snap); }, function (e) { sdkDone = true; failed(e); });
+    setTimeout(function () { if (!sdkDone) { sdkDone = true; failed({ code: "sdk-timeout" }); } }, 6000);
+    (function viaServer() {
+      var u = null; try { u = SMD_AUTH && SMD_AUTH.currentUser; } catch (e) {}
+      if (!u || typeof u.getIdToken !== "function") { failed({ code: "no-user" }); return; }
+      u.getIdToken().then(function (tok) {
+        return fetch((window.SMD_API_BASE || "") + "/api/auth/my-profile", {
+          method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: "{}"
+        });
+      }).then(function (r) { return r.json(); }).then(function (j) {
+        if (!j || !j.ok) throw { code: (j && j.error) || "server" };
+        fresh(wrap(j.profile, j.exists));
+      }).catch(function (e) { failed(e); });
+    })();
 
     function onData(snap) {
       if (!document.body.contains(card)) return;
