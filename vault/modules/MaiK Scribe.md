@@ -137,6 +137,10 @@ style like `voice-scribe-ground.js`: `scribe-drugfix.js` (unambiguous drug-name 
 `scribe-templates.js` (`SMD_SCRIBETPL`: general, paediatrics, obgyn, surgery follow-up; since
 2026-09-25 also orthopaedics, ophthalmology, ent, dermatology, psychiatry and dental, one per
 [[Specialty Kits]] kit. Picking a kit chip in the OPD Specialty tab selects the matching template.
+**The picker is ONE line since 2026-09-26** (`specialtyPicker()` renders `<select data-oe-inp="scribe-spec">`
+plus a "Kit" button that opens the Specialty tab): the old grid of 20+ chips filled the first screen of
+the consult and pushed the mic and the note below the fold (owner screenshot). Same templates, same
+`smd_scribe_specialty:<author>` key, same `setScribeSpecialty`.
 Each new template names only real `VOICE_MAP` keys and asks for what was said, never a grade,
 classification or risk level that was not; `test/scribe-templates.test.mjs` enforces both).
 
