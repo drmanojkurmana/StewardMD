@@ -1069,7 +1069,7 @@
     CAP: function (f) { return f.hypotension || f.vasopressorRequirement || f.mechanicalVentilation || f.hospitalDay48 || (f.subacuteOnset && (f.weightLoss || f.nightSweats || f.prolongedCough2Weeks)); },
     GASTROENTERITIS: function (f) { return f.bloodyStool || f.tenesmus || f.ketonemia || f.ascendingWeakness || ((f.antibioticsLast90Days || f.priorAntibiotics) && f.diarrhea) || f.subacuteOnset || f.prolongedFever; },
     asthma_exac: function (f) { return f.knownCOPD || (f.hypotension && (f.rash || f.facialSwelling)) || f.ascendingWeakness; },
-    URTI: function (f) { return f.crepitations || f.consolidation || f.hypoxia; }
+    URTI: function (f) { return f.crepitations || f.bilateralCrackles || f.consolidation || f.hypoxia; }
   };
   var RANK_V3_ANCHOR = {
     // pneumonia needs a lower-respiratory sign; fever + cough alone is URTI / bronchitis territory
@@ -1351,7 +1351,13 @@
       var rk2 = function (x) { return x.rankScore != null ? x.rankScore : x.score; };
       var bestI = d.inf.reduce(function (m, x) { return !m || rk2(x) > rk2(m) ? x : m; }, null);
       var bestN = d.ni.reduce(function (m, x) { return !m || rk2(x) > rk2(m) ? x : m; }, null);
-      if (bestN && bestI && rk2(bestN) > rk2(bestI) && bestN.score >= bestI.score) {
+      // round 9 (2026-09-27): with smd_rank_v3 the ORDER is the reviewed reading, so a non-infective lead there is
+      // enough; the raw-score check stays for the classic order (an infection can score high on one shared symptom:
+      // gastroenteritis 81 on vomiting alone behind bowel obstruction, DKA, myeloma on the train split)
+      // It also needs the v2 extractor, which reads every mention: the classic one reads only the first, so "denies
+      // fever at home ... temp 39" reads afebrile there (classic extractor + this: needed antibiotics 109 -> 107).
+      var nlp2 = !!(window.SMD_NLP && SMD_NLP._v2 && SMD_NLP._v2({}));
+      if (bestN && bestI && rk2(bestN) > rk2(bestI) && ((rankV3() && nlp2) || bestN.score >= bestI.score)) {
         g.cls = "noninfective"; g.rule = "ni_lead_afebrile"; g.why = bestN.name;
         return;
       }
@@ -1367,11 +1373,12 @@
     // hepatitis leading a leptospirosis or SBP picture); this stops a ranking miss from becoming
     // "no antibiotics".
     var rivalYes = null, rivalCond = null;
-    var v3 = rankV3();
+    var v3 = rankV3(), rk2g = function (y) { return y.rankScore != null ? y.rankScore : y.score; };
     d.inf.forEach(function (x) {
       if (x === lead || x.score < 42) return;
       if (v3 && rankV3Excluded(x, f)) return;   // smd_rank_v3: an excluded rival cannot hold antibiotics on
-      var n = abxNeed(x), close = x.score >= lead.score - 30;
+      // round 9: under smd_rank_v3 "close" is measured on the ordered score the doctor sees (raw otherwise)
+      var n = abxNeed(x), close = v3 ? rk2g(x) >= rk2g(lead) - 30 : x.score >= lead.score - 30;
       var critical = x._syn && x._syn.decision && x._syn.decision.status === "red";
       // a time-critical rival counts from any distance only when its criteria are met (x.matched);
       // an unmatched one is keyword overlap and must be within the 30 points like any other
@@ -1911,11 +1918,34 @@
     alteredSensorium: ["not responding to voice", "not responding to pain", "not responding to painful", "not responding to verbal", "not responding to commands",
       "not responding to call", "not responding to name", "not responding to us"]
   };
+  // round 10 (2026-09-27): findings whose absence most often cost the right top-1 on typed train notes (per-finding
+  // ablation: add the missed key, does the diagnosis come right?). Several had no synonym at all, only the label.
+  var FT_SYN_ADD_V2_R10 = {
+    hemoptysis: ["haemoptysis", "blood-streaked sputum", "streaked with blood", "blood-stained sputum", "blood in sputum", "blood in the sputum"],
+    retroorbitalPain: ["retro-orbital", "retroorbital", "retro orbital", "behind the eyes", "pain on eye movement", "worse on eye movement"],
+    travelEndemicArea: ["returned from", "returning from", "return from", "travel to", "travelled to", "traveled to", "trip to", "endemic region",
+      "endemic area", "endemic district", "malaria-endemic", "forested district", "rural district", "visiting relatives in"],
+    // true paroxysms only: "intermittent fever with rigors" is endocarditis or a line infection as often as malaria (train gc_044)
+    paroxysmalFever: ["paroxysmal fever", "paroxysmal high", "paroxysms of fever", "fever every", "rigors every", "every 48 hours", "every 36", "every 72 hours", "tertian", "quartan"],
+    polyarthralgia: ["polyarthralgia", "small-joint pain", "small joint pain", "symmetric joint pain", "symmetrical joint pain", "multiple joint pain", "pain in multiple joints"],
+    severeArthralgia: ["severe joint pain", "severe arthralgia", "severe polyarthralgia", "disabling joint pain", "incapacitating joint", "excruciating joint",
+      "severe, symmetric joint pain", "severe symmetric joint pain", "in obvious joint pain"],
+    orthopnea: ["unable to lie flat", "cannot lie flat", "can't lie flat", "worse on lying flat", "worsens on lying flat", "breathless lying flat", "extra pillow",
+      "two pillows", "three pillows", "propped up", "sleeps propped", "paroxysmal nocturnal"],
+    indwellingCatheter: ["indwelling", "foley", "urinary catheter", "urethral catheter", "suprapubic catheter", "long-term catheter", "catheterised", "catheterized"],   // urinary: a central line is not this finding
+    drugOverdose: ["ingestion of", "ingested", "took an overdose", "tablets of amitriptyline", "extra doses", "took extra"],
+    foulSmellingSputum: ["foul-smelling sputum", "foul smelling sputum", "foul sputum", "putrid sputum", "fetid sputum", "foul-tasting sputum"],
+    // the diagnosis, not the CT sign ("traction bronchiectasis" is fibrosis, train gc_195 / gc_475)
+    knownBronchiectasis: ["known bronchiectasis", "with bronchiectasis", "background of bronchiectasis", "history of bronchiectasis", "non-cf bronchiectasis",
+      "idiopathic bronchiectasis", "post-tb bronchiectasis", "post-tuberculous bronchiectasis", "bronchiectasis exacerbation"],
+    bilateralCrackles: ["bibasal", "bibasilar", "velcro"]
+  };
   var FT_SYN_V2 = (function () {
     var o = {};
     Object.keys(FT_SYN).forEach(function (k) { var drop = FT_SYN_DROP_V2[k] || []; o[k] = FT_SYN[k].filter(function (x) { return drop.indexOf(x) < 0; }); });
     Object.keys(FT_SYN_ADD_V2).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2[k]); });
     Object.keys(FT_SYN_ADD_V2_R8).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R8[k]); });
+    Object.keys(FT_SYN_ADD_V2_R10).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R10[k]); });
     return o;
   })();
   // the extraction context: classic exactly as before; v2 adds the cleaned table and the numeric-field list

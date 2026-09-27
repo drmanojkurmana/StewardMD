@@ -10484,3 +10484,15 @@ the new one. Full unit suite 10915/10916 passing, 0 failures.
   hence a switch rather than a default.
 - Tests written against the classic defaults pin their flags (`?kbv2=0` in the gate fixtures); the new
   default is asserted beside them.
+
+## 2026-09-27 - Rounds 8 to 10: typed-note reading, order-aware gate, deciding findings
+- **Owner**: "improve the typed note reading", then "dont stop till you reach 9/10".
+- **Decision**: the v2 extractor reads every mention of a finding (a clean current one wins); course idioms,
+  recent time, tests, plans, stopped drugs and settled symptoms are read for what they are. Under v3 order + v2
+  extraction the afebrile "non-infective cause leads" gate rule trusts the order, not the raw score. Findings
+  chosen by per-finding ablation (which missed or extra finding flips the top diagnosis) get their phrasing.
+- **Why**: typed-note top-1 187 -> 213, top-3 299 -> 326; needed antibiotics 138 -> 143 and not-needed
+  63 -> 58 on typed notes; tapped not-needed 39 -> 34; complaint-only top-1 133 -> 147. Floors raised, none lowered.
+- **Pending owner**: accept complaint-only viral-with-antibiotics 4 -> 5 (one hidden case) and small overcall
+  rises in the gate-v2-off, rank-v3-off and classic-extractor opt-out configurations
+  (`kb/validation/AUDIT-2026-09-26.md`, Rounds 8 to 10).

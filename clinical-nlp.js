@@ -260,6 +260,21 @@
       var fA = maxDur(new RegExp("\\b(?:fever|pyrexia|febrile)\\b[^.;]{0,30}?(?:for|since|x|of|over|past|last)\\s*(?:the\\s*)?(?:past|last)?\\s*" + DUR, "g")),
         fB = maxDur(new RegExp("\\b" + DUR + "\\s*(?:of|history of)\\s*(?:[a-z-]+\\s*){0,2}(?:fever|pyrexia)", "g")), fv = fA.d >= fB.d ? fA : fB;
       if (fv.d >= 7) consider("prolongedFever", fv.i, "compound", fv.src);
+      // round 10: a cough of 2 weeks or more (the TB screening threshold); "chronic / persistent cough" says it in words
+      var cA = maxDur(new RegExp("\\bcough(?:ing)?\\b[^.;]{0,30}?(?:for|since|x|of|over|past|last)\\s*(?:the\\s*)?(?:past|last)?\\s*(?:about|around|nearly|~)?\\s*" + DUR, "g")),
+        cB = maxDur(new RegExp("\\b" + DUR + "\\s*(?:of|history of)\\s*(?:[a-z-]+\\s*){0,3}cough", "g")),
+        cC = maxDur(new RegExp("\\bcough\\s*(?:began|started|since)\\s*(?:about|around|nearly|~)?\\s*" + DUR, "g")), cv = [cA, cB, cC].sort(function (x, y) { return y.d - x.d; })[0];
+      if (cv.d >= 14) consider("prolongedCough2Weeks", cv.i, "compound", cv.src);
+      else if ((m2 = norm.match(/\b(?:chronic|persistent|long-standing|longstanding)\s+(?:(?:dry|productive|non-productive|wet)\s+)?cough\b/))) consider("prolongedCough2Weeks", m2.index, "compound", m2[0]);
+      // round 10: bilateral crackles said with words between ("bilateral fine inspiratory crackles")
+      if ((m2 = norm.match(/\b(?:bilateral|bibasal|bibasilar|both bases)\b[^.;,]{0,40}?\b(?:crackles|crepitations|creps|crepts|crackle)\b/))) consider("bilateralCrackles", m2.index, "compound", m2[0]);
+      // round 10: chest pain or tightness brought on by effort, either order
+      if ((m2 = norm.match(/\b(?:chest (?:pain|tightness|heaviness|discomfort)|angina)\b[^.;,]{0,40}?\b(?:exertion|exercise|walking|climbing|stairs|effort)\b|\b(?:on exertion|exertional|while walking|climbing stairs|on climbing)\b[^.;,]{0,40}?\bchest (?:pain|tightness|heaviness|discomfort)\b/))) consider("exertionalChestPain", m2.index, "compound", m2[0]);
+      // round 10: 48 hours or more into a hospital stay (hospital-acquired territory)
+      if ((m2 = norm.match(/\b(?:admitted|hospitali[sz]ed|intubated|ventilated)\s+(\d{1,2}|two|three|four|five|six|seven|eight|nine|ten)\s*days?\s*(?:ago|earlier|previously|before)\b|\b(?:hospital|post-?operative|ward|icu)\s+day\s+(\d{1,2})\b|\bday\s+(\d{1,2})\s+of\s+(?:(?:a|an|the|his|her)\s+)?(?:[a-z-]+\s+){0,2}(?:admission|ventilation|hospital stay|stay)\b/))) {
+        var hd = m2[1] ? (WN[m2[1]] || +m2[1]) : +(m2[2] || m2[3]);
+        if (hd >= 2) consider("hospitalDay48", m2.index, "compound", m2[0]);
+      }
       // the illness's own tempo: the longest stated duration up to 8 weeks (longer = chronic background,
       // e.g. "PSA rising over 6 months", which must not hide "back pain for 3 weeks"). A bare "3 weeks
       // ago" dates an event ("catheter changed 3 weeks ago"); it counts only after an onset word.

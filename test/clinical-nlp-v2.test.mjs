@@ -207,3 +207,23 @@ test("resolved, stopped, tested or planned is not a current finding", () => {
   assert.ok(!present8("No ketones on the clinic dipstick. Serum ketones (bhb) 1.2", true).includes("ketonemia"),
     "a later lab name with a value is left to the numeric parser");
 });
+
+// round 10: derived findings that most often decided the top diagnosis on typed train notes
+test("a cough of two weeks or more; bilateral crackles; exertional chest pain; days into admission", () => {
+  const keys = ["cough", "prolongedCough2Weeks", "bilateralCrackles", "exertionalChestPain", "hospitalDay48"];
+  const c10 = { valid: Object.fromEntries(keys.map((k) => [k, 1])), labels: {}, syn: { cough: ["cough"] }, numeric: {}, v2: true };
+  const p = (t) => NLP.extract(t, c10).present;
+  assert.ok(p("Cough for 6 weeks with evening fever").includes("prolongedCough2Weeks"));
+  assert.ok(p("6-week history of productive cough").includes("prolongedCough2Weeks"));
+  assert.ok(p("persistent dry cough").includes("prolongedCough2Weeks"));
+  assert.ok(p("Cough began ~6 weeks ago").includes("prolongedCough2Weeks"));
+  assert.ok(!p("cough for 5 days").includes("prolongedCough2Weeks"));
+  assert.ok(p("Bilateral fine inspiratory crackles to mid-zones").includes("bilateralCrackles"));
+  assert.ok(!p("no bilateral crackles").includes("bilateralCrackles"));
+  assert.ok(p("chest tightness while climbing stairs").includes("exertionalChestPain"));
+  assert.ok(!p("breathless on exertion, chest pain at rest").includes("exertionalChestPain"), "a comma ends the link");
+  assert.ok(p("admitted 6 days ago for hip surgery").includes("hospitalDay48"));
+  assert.ok(p("day 5 of mechanical ventilation").includes("hospitalDay48"));
+  assert.ok(!p("admitted 1 day ago").includes("hospitalDay48"));
+  assert.ok(!NLP.extract("Cough for 6 weeks", { ...c10, v2: false }).present.includes("prolongedCough2Weeks"), "classic unchanged");
+});

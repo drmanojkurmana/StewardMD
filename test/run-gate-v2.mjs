@@ -147,6 +147,17 @@ try {
   // default ON since 2026-09-27 (smd_kb_v2): SBP with fever matches the knowledge base itself
   const sbpDefault = await assess(keys("gc_143"));
   ok(sbpDefault.ab === true, `defaults · SBP (fever) gc_143: antibiotics yes (${sbpDefault.cls})`);
+  // round 9: under the v3 order (and the v2 extractor) a non-infective lead is enough; the raw-score check
+  // stays for the classic order. Gastroenteritis scores 81 on diarrhoea alone behind a bowel obstruction (train gc_192).
+  const obstruction = ["diarrhea", "abdominalPain", "abdominalDistension", "abdominalDiscomfort"];
+  // with the note's explicit negatives, as the typed-note path passes them ("no fever, weight loss or blood in stool")
+  const obstNeg = ["fever", "weightLoss", "bloodyStool", "malignancy", "lymphadenopathy", "jointSwelling"];
+  const assessNeg = async (f, ab) => JSON.parse(await ev(`return JSON.stringify(SMD_REASON.assess(${lit(f)}, { absent: ${lit(ab)} }).gate);`));
+  const obst = await assessNeg(T(obstruction), obstNeg);
+  ok(obst.ab === false && obst.rule === "ni_lead_afebrile", `defaults · afebrile bowel obstruction leading the order: no antibiotics (${obst.cls}, ${obst.rule})`);
+  ok((await assess(T(obstruction.concat(["fever", "rigors"])))).rule !== "ni_lead_afebrile", "defaults · the same with fever: the rule stands aside");
+  await load(BASE + "?gatev2=1&nlpv2=0");
+  ok((await assessNeg(T(obstruction), obstNeg)).rule !== "ni_lead_afebrile", "classic extractor · raw-score check kept (it reads only a note's first mention of fever)");
   await load(BASE + "?gatev2=1&rankv3=0&kbv2=0");
   ok(fnOn.ab === true && fnOn.cls === fnOff.cls, `on  · fever + "Neutropenia (ANC <500)" unchanged by v2 (${fnOn.cls})`);
 

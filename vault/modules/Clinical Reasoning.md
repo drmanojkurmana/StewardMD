@@ -85,6 +85,11 @@ added) and the numeric-field list. Off: 0 differences across 1,660 case-paths.
   durations) and postfix "negative" (`negAfter`); "N weeks ago" needs an onset word. Precision train
   56 -> 60%, dev 52 -> 56%. Owner accepted `abxSens` 139 -> 138 on the text path (one test-split case,
   aggregate only) for the v2 configs. Extraction audit: dump `DX.extractText` per case, score vs gold keys.
+- Rounds 8 and 10 (2026-09-27): every mention of a finding is read (`alts` in `extract`; a clean current one
+  wins), course idioms (`NEG_IDIOM_V2`), recent time (`RECENT_V2`), tests (`TEST_AFTER_V2`), plans (`COND_V2`),
+  stopped drugs and settled symptoms (temporality "resolved"), derived cough >= 2 weeks, bilateral crackles,
+  exertional chest pain, hospital day >= 2. Phrasing tables `FT_SYN_ADD_V2_R8` / `_R10` in `reasoning.js`.
+- Round 9 (2026-09-27): gate `ni_lead_afebrile` trusts the v3 order when the v2 extractor is on.
 
 ## Differential ordering v3 (`smd_rank_v3`, default ON since 2026-09-27; `"0"` opts out)
 
