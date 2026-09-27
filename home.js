@@ -3303,7 +3303,33 @@
    *  2) collect edits through window.prompt() — a desktop dialog in a mobile shell. Rows edit in
    *     place instead (hospital keeps the searchable directory picker).
    */
+  /* The role label, read defensively. SMD_ROLE is shared by role-features.js and native-watch.js,
+   * and native-watch.js once REPLACED it on phones, leaving no labelOf: Profile threw here, before
+   * its sheet opened, and every tap on it did nothing. An optional line must never cost the page. */
+  function acctRoleLabel() {
+    try {
+      var R = window.SMD_ROLE;
+      if (R && typeof R.labelOf === "function" && typeof R.current === "function") return R.labelOf(R.current()) || "";
+    } catch (e) {}
+    return "";
+  }
+  /* Profile must OPEN, whatever else fails. Every caller (the sidebar, the More sheet, Settings)
+   * wraps this in try/catch and discards the error, so a throw anywhere before openSheet used to
+   * read on the phone as a button that does nothing, however many times it was tapped. Now a
+   * failure still opens Profile, with a Retry, and the reason goes to the console. */
   function openAccount() {
+    try { return openAccountPage(); }
+    catch (e) {
+      try { console.warn("[profile] open failed:", e); } catch (x) {}
+      try {
+        openSheet('<div class="hv-sh-t">Profile</div><div class="hv-pf"><p class="hv-pf-note">Your profile could not be shown in full. ' +
+          '<button class="hv-pf-retry" type="button" data-acct="retry">Retry</button></p></div>');
+        var rb = sheetEl().querySelector('[data-acct="retry"]');
+        if (rb) rb.addEventListener("click", function () { openAccount(); });
+      } catch (x) {}
+    }
+  }
+  function openAccountPage() {
     var a = readAccount();
     var P = (window.SMD_ACCOUNT && window.SMD_ACCOUNT.profile && window.SMD_ACCOUNT.profile()) || null;
     var signedIn = P ? P.signedIn : !!(a && (a.email || a.type === "google" || a.type === "apple" || a.type === "email" || a.providerType === "email"));
@@ -3365,7 +3391,7 @@
 
       '<div class="hv-pf-sec">Professional details</div>' +
       '<div class="hv-pf-card" id="pfPro">' +
-        row("Role", "role", { value: (window.SMD_ROLE && SMD_ROLE.labelOf(SMD_ROLE.current())) || "", placeholder: "Not set", editLabel: "Change" }) +
+        row("Role", "role", { value: acctRoleLabel(), placeholder: "Not set", editLabel: "Change" }) +
         row("Medical reg. no", "regno", { value: "", placeholder: "Loading…", edit: false }) +
         row("Hospital / college", "hospital", { value: "", placeholder: "Loading…", edit: false }) +
         row("Degree", "degree", { value: "", placeholder: "Loading…", edit: false }) +
