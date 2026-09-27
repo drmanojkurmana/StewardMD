@@ -33,6 +33,20 @@ owns the native StoreKit mechanism + creating these ASC products to match.
 | `in.stewardmd.tokens.plus`  | 250,000 MT | 199 |
 | `in.stewardmd.tokens.power` | 750,000 MT | 499 |
 
+**From 2026-12-26 (`PACKS_V2_FROM`) the same three product ids credit 10,000 / 40,000 / 100,000 MT** at the
+same prices (the old sizes sold tokens at our cost; the Power pack lost money after Apple's cut). Keep the ASC
+display name and description free of the token count, or edit them on that date. See `vault/Role-Tiers.md`.
+
+## Consumables — Dictation credit packs (added 2026-09-26, NOT yet created in ASC / Play)
+Cloud speech-to-text is used only when the phone cannot transcribe; it spends dictation credits (never shown in
+rupees). Server: `functions/_quota.js` feature `dict`, fulfilled like the care/scribe packs.
+| Product ID | Credits | Price (INR) | ASC display name | Description (<= 55 chars) |
+|---|---|---|---|---|
+| `in.stewardmd.dict.300`  | 300   | 199 | 300 Dictation Credits   | Cloud dictation when your phone cannot transcribe |
+| `in.stewardmd.dict.1000` | 1,000 | 699 | 1,000 Dictation Credits | Cloud dictation when your phone cannot transcribe |
+Type: Consumable. Create the same two ids as Google Play in-app products (managed, consumable). Until they exist,
+the top-up sheet shows the packs but a store purchase fails; web (Razorpay) purchase works now.
+
 ## Not standard iOS IAP (handle separately)
 - **Personal clinic add-on (₹100/clinic/mo)** — quantity-based; keep web-only or model later.
 - **Hospital B2B plans** — sales-led, not App Store.

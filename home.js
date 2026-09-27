@@ -3433,7 +3433,9 @@
     if (acctWatchAuth._sub || !(window.SMD_ACCOUNT && window.SMD_ACCOUNT.onChange)) return;
     acctWatchAuth._sub = true;
     window.SMD_ACCOUNT.onChange(function () {
-      try { var sh = sheetEl(); if (sh && (sh.querySelector(".hv-pf") || sh.querySelector(".hv-acct"))) openAccount(); } catch (e) {}
+      // Only re-render a sheet that is OPEN. It used to test for profile markup alone, which a closed
+      // sheet still holds, so an auth change after the doctor dismissed Profile reopened it on them.
+      try { var sh = sheetEl(); if (sh && sh.classList.contains("on") && (sh.querySelector(".hv-pf") || sh.querySelector(".hv-acct"))) openAccount(); } catch (e) {}
     });
   }
 
@@ -3522,37 +3524,62 @@
         ' <button class="hv-pf-retry" type="button" data-retry>Retry</button></span>';
       card.appendChild(note);
       var rb = note.querySelector("[data-retry]");
-      if (rb) rb.addEventListener("click", function () { acctFillProfessional._bootTried = false; openAccount(); });
+      if (rb) rb.addEventListener("click", function () { acctFillProfessional._bootFailed = false; acctFillProfessional._bootAt = 0; openAccount(); });
     }
     /* Firestore is loaded LAZILY (window.SMD_loadFirebase, index.html) — window.SMD_DB simply does
      * not exist yet on a cold start. Declaring "Offline" on that first look was wrong: the user is
      * online, signed in, and every row reads Offline with no way back except a manual Retry. That is
      * the reported bug. Boot Firebase and come back instead; only a real failure shows the notice. */
-    if (uid && !fdb && typeof window.SMD_loadFirebase === "function") {
+    /* COLD START (owner: "profile not opening after repeated clicks... even information doesn't
+     * load if it opens"). Firebase is LAZY, and that includes AUTH, not just the database:
+     * SMD_AUTH is set by the same SMD_bootFirebase call as SMD_DB. The old guard was
+     * `uid && !fdb`, so on a real cold start - no SMD_AUTH, therefore no uid - it never asked for
+     * Firebase at all and fell straight to "Sign-in still loading", which then stayed on screen
+     * for good: nothing else was going to load it. Measured in a browser: zero load requests
+     * across five opens. The account is known to be signed in (we are on the signed-in branch),
+     * so either missing half means "load it and come back".
+     *
+     * The old in-flight guard was a boolean with no expiry, so one load that never called back
+     * locked every later open onto "Loading..." until the app was killed. It is a timestamp now,
+     * and a boot older than BOOT_MS is treated as dead and retried. */
+    var BOOT_MS = 12000;
+    if ((!uid || !fdb) && typeof window.SMD_loadFirebase === "function") {
       ["regno", "hospital", "city", "phone", "degree", "speciality"].forEach(function (k) { setRow(k, "", { placeholder: "Loading…", edit: false }); });
-      // _bootTried, not a "booting" flag: SMD_loadFirebase fires its callback SYNCHRONOUSLY once
-      // the SDK is loaded, so a boot that leaves SMD_DB null (init threw) re-entered this function
-      // on the spot and recursed until the stack blew — leaving the rows on "Loading…" forever.
-      if (acctFillProfessional._booting) return;   // a boot is in flight — never declare Offline yet
-      if (!acctFillProfessional._bootTried) {
-        acctFillProfessional._bootTried = true;
-        acctFillProfessional._booting = true;
-        try {
-          window.SMD_loadFirebase(function () {
-            acctFillProfessional._booting = false;
-            // Re-fill the sheet that is on screen NOW: a re-render between the request and the
-            // callback leaves the captured card detached, and filling that shows the user nothing.
-            try { var live = sheetEl(); if (live && live.querySelector("#pfPro")) acctFillProfessional(live); } catch (e) {}
-          });
-        } catch (e) { acctFillProfessional._booting = false; }
-        return;
+      var since = acctFillProfessional._bootAt || 0;
+      if (since && Date.now() - since < BOOT_MS) return;          // a live boot will refill the sheet
+      if (acctFillProfessional._bootFailed) { offline("Offline"); return; }   // Retry clears this
+      acctFillProfessional._bootAt = Date.now();
+      var done = false;
+      function refill() {
+        if (done) return; done = true;
+        acctFillProfessional._bootAt = 0;
+        var u2 = null, d2 = null;
+        try { u2 = (window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.uid) || null; d2 = window.SMD_DB || null; } catch (e) {}
+        // Still nothing after a full boot: say so once, with Retry, rather than looping.
+        if (!u2 || !d2) acctFillProfessional._bootFailed = true;
+        // Refill the sheet that is on screen NOW: a re-render between request and callback leaves
+        // the captured card detached, and filling that shows the doctor nothing.
+        try { var live = sheetEl(); if (live && live.classList.contains("on") && live.querySelector("#pfPro")) acctFillProfessional(live); } catch (e) {}
       }
-      // The boot already ran and left no database. Say so — with a Retry that re-arms it — instead
-      // of returning and leaving every row on "Loading…" forever.
-      offline("Offline");
+      try {
+        window.SMD_loadFirebase(function () {
+          var A = null; try { A = window.SMD_AUTH; } catch (e) {}
+          // currentUser is empty until the persisted session is restored, which is asynchronous.
+          if (A && !A.currentUser && A.onAuthStateChanged) {
+            try {
+              var un = A.onAuthStateChanged(function () { try { if (typeof un === "function") un(); } catch (e) {} refill(); });
+              setTimeout(refill, 5000);
+              return;
+            } catch (e) {}
+          }
+          refill();
+        });
+      } catch (e) { refill(); return; }
+      setTimeout(refill, BOOT_MS);   // the loader's callback is not guaranteed if a script hangs
       return;
     }
     if (!uid || !fdb) { offline(uid ? "Offline" : "Sign-in still loading"); return; }
+    acctFillProfessional._bootFailed = false;
 
     var pref = fdb.collection("users").doc(uid).collection("profile").doc("self");
     /* A get() that never settles is the "stuck on Loading…" report: on a half-open connection

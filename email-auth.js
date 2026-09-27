@@ -516,7 +516,14 @@
   window.SMD_EMAIL_AUTH = { openEmail: openEmail, openOtp: openOtp, sendOtp: sendOtp,
     // read-only, for applock.js: is a pre-home gate up / is one of our sheets open / the profile doc
     gateUp: gateUp, flowOpen: function () { return !!(_el && _el.style.display === "flex"); }, loadProfile: loadProfile };
-  window.SMD_openProfile = function () { try { openProfile({ firstRun: false }); } catch (e) {} };
+  /* ONE Profile entry point. home.js ALSO exports window.SMD_openProfile (the full Profile page:
+   * ID, hospital, plan). Both scripts are deferred, this one first, so the button's behaviour
+   * depended on how far home.js - a very large file - had got: tap early and you got the setup
+   * FORM, tap later and you got the Profile PAGE. The Profile page is the canonical one (home.js
+   * says so where it exports it), so this is only a fallback for when home.js is not there. */
+  if (typeof window.SMD_openProfile !== "function") {
+    window.SMD_openProfile = function () { try { openProfile({ firstRun: false }); } catch (e) {} };
+  }
 
   function boot() {
     watchGate();

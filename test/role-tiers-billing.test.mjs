@@ -111,8 +111,11 @@ test("D3: Ultimate migration lists first, converts only named uids, flags paying
   let writes = 0;
   const deps = { listUsersPage: async () => ({ users, nextPageToken: null }), writeEntitlement: async () => { writes++; },
     getUserClaims: async (e, uid) => (users.find((u) => u.uid === uid) || {}).claims, invalidateBudgetCache: async () => {} };
+  deps.getEntitlement = async (e, uid) => (uid === "b" ? { tier: "ultimate", tierExp: null } : null);
   const dry = await adminUltimateMigration({}, {}, deps);
   assert.equal(dry.dryRun, true);
+  assert.equal(dry.candidates[0].tier, "free");
+  assert.equal(dry.paying[0].tier, "ultimate", "an account already converted is marked");
   assert.deepEqual(dry.candidates.map((x) => x.uid), ["a"]);
   assert.deepEqual(dry.paying.map((x) => x.uid), ["b"]);
   assert.equal(writes, 0, "a dry run writes nothing");
