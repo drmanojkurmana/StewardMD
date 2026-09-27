@@ -660,6 +660,7 @@
     (EXTRA_GROUPS).forEach(function (g) { groups.push(g); });
     if (kbV2()) groups.push({ group: "Hepatobiliary imaging / labs", fields: KB_V2_FIELDS });   // smd_kb_v2
     if (kbV2()) groups.push({ group: "Electrolytes / glucose", fields: KB_V2_LAB_FIELDS });   // smd_kb_v2 round 18
+    if (kbV2()) groups.push({ group: "Bowel history", fields: KB_V2_HX_FIELDS });   // smd_kb_v2 round 22
     var fg = (window.FIELD_GROUPS || []);
     fg.forEach(function (g) { if (g && g.fields) groups.push({ group: g.group, fields: g.fields }); });
     groups.forEach(function (g) {
@@ -680,7 +681,7 @@
     if (kbV2()) SYSPICK = SYSPICK.map(function (sp) {
       if (sp.id !== "gastrointestinal" || (sp.groups || []).indexOf("Hepatobiliary imaging / labs") >= 0) return sp;
       var c = {}; for (var k in sp) c[k] = sp[k];
-      c.groups = (sp.groups || []).concat(["Hepatobiliary imaging / labs"]); return c;
+      c.groups = (sp.groups || []).concat(["Hepatobiliary imaging / labs", "Bowel history"]); return c;
     });
     if (kbV2()) SYSPICK = SYSPICK.map(function (sp) {
       if (sp.id !== "systemic" || (sp.groups || []).indexOf("Electrolytes / glucose") >= 0) return sp;
@@ -888,6 +889,8 @@
     { key: "glucoseHigh", label: "Glucose >= 14 mmol/L (250 mg/dL)" },
     { key: "glucoseVeryHigh", label: "Glucose > 33 mmol/L (600 mg/dL)" }
   ];
+  // round 22: a known chronic bowel disease changes what bloody diarrhoea means (listed under Gastrointestinal)
+  var KB_V2_HX_FIELDS = [{ key: "knownIBD", label: "Known inflammatory bowel disease (UC / Crohn's)" }];
   var KB_V2_PATCH = {
     CHOLANGITIS: {
       rule: { allOf: ["jaundice", { anyOf: ["feverGU", "rigors"] }, { anyOf: ["rightUpperQuadrantPain", "dilatedCBD", "knownGallstones"] }, { not: "singleLesion" }] },
@@ -910,7 +913,10 @@
     hypoglycemia: { find: { glucoseLow: 45, glucoseHigh: -30, glucoseVeryHigh: -30 } },
     hhs: { find: { glucoseVeryHigh: 30, glucoseHigh: 10, glucoseLow: -30 } },
     dka: { find: { glucoseHigh: 12, glucoseVeryHigh: 6, glucoseLow: -30 } },
-    adrenal_crisis: { find: { sodiumLow: 10, potassiumHigh: 10, glucoseLow: 8 } }
+    adrenal_crisis: { find: { sodiumLow: 10, potassiumHigh: 10, glucoseLow: 8 } },
+    // round 22: bloody diarrhoea in known ulcerative colitis or Crohn's is a flare until a stool test says otherwise
+    ibd_flare: { find: { knownIBD: 22 } },
+    ibs: { find: { knownIBD: -20 } }
   };
   var _kbV2Applied = false;
   function ensureKbV2() {
@@ -1410,7 +1416,7 @@
         (f.worseningOxygenation || f.hypoxia || f.consolidation)) ? "hap_criteria" :
       (febrile && f.rightUpperQuadrantPain && (f.murphySign || f.knownGallstones)) ? "cholecystitis_signs" :
       // round 21: fever with bloody diarrhoea is bacillary dysentery until shown otherwise (WHO; India)
-      (febrile && f.bloodyStool && f.diarrhea) ? "febrile_dysentery" : null;
+      (febrile && f.bloodyStool && f.diarrhea && !f.knownIBD) ? "febrile_dysentery" : null;   // known IBD: a flare first
     if (cantMiss && weak && !gib) { g.cls = "likely"; g.rule = cantMiss; return; }
     if (f.liverDisease && (f.hematemesis || f.melena || f.gibPresentation) && g.cls !== "very_likely" && g.cls !== "likely") {
       g.cls = "abx_prophylaxis"; g.rule = "cirrhosis_gib";
@@ -2092,7 +2098,8 @@
     facialSwelling: ["swelling of the face", "swelling of the lips", "swelling of the lip", "swelling of the tongue", "swelling of the lower lip", "swollen lips", "swollen tongue",
       "puffy face", "facial puffiness", "puffiness of the face", "face and arm swelling", "facial and arm swelling"],   // not periorbital: that is also orbital cellulitis
     increasedSputumVolume: ["larger in volume", "increase in sputum", "more sputum than usual", "greater volume of sputum"],
-    malignancy: ["mediastinal mass", "paratracheal mass", "hilar mass", "lung mass", "pulmonary mass", "space-occupying lesion"]
+    malignancy: ["mediastinal mass", "paratracheal mass", "hilar mass", "lung mass", "pulmonary mass", "space-occupying lesion"],
+    knownIBD: ["ulcerative colitis", "crohn's", "crohns", "crohn disease", "inflammatory bowel disease", "known ibd", "ibd flare"]
   };
   var FT_SYN_V2 = (function () {
     var o = {};

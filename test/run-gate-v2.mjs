@@ -176,6 +176,7 @@ try {
   const dys = await cm(["fever", "diarrhea", "bloodyStool", "abdominalPain"]);
   ok(dys.ab === true, `defaults · fever with bloody diarrhoea: dysentery, antibiotics (${dys.cls}, ${dys.rule})`);
   ok((await cm(["diarrhea", "bloodyStool", "abdominalPain"])).rule !== "febrile_dysentery", "defaults · bloody diarrhoea without fever: the rule stands aside");
+  ok((await cm(["fever", "diarrhea", "bloodyStool", "abdominalPain", "knownIBD"])).rule !== "febrile_dysentery", "defaults · the same in known IBD: a flare first, the dysentery rule stands aside");
   const chole = await cm(["fever", "rightUpperQuadrantPain", "murphySign", "nauseaVomiting"]);
   ok(chole.ab === true, `defaults · fever + RUQ pain + Murphy sign: antibiotics (${chole.cls}, ${chole.rule})`);
   ok((await cm(["rightUpperQuadrantPain", "murphySign", "nauseaVomiting"])).rule !== "cholecystitis_signs", "defaults · the same without fever: the rule stands aside");

@@ -109,7 +109,7 @@
     "brother had", "sister had", "sibling had", "runs in the family", "in the family"];
   // v2: background conditions kept even when phrased historically ("known cirrhosis", "h/o stroke")
   var BACKGROUND_V2 = { liverDisease: 1, cerebrovascularDisease: 1, malignancy: 1, immunocompromised: 1, anticoagulated: 1,
-    nursingHomeResident: 1, hospitalizationLast90Days: 1, antibioticsLast90Days: 1, priorAntibiotics: 1, steroidUse: 1, knownCKD: 1 };
+    nursingHomeResident: 1, hospitalizationLast90Days: 1, antibioticsLast90Days: 1, priorAntibiotics: 1, steroidUse: 1, knownCKD: 1, knownIBD: 1 };
 
   function spaceV2(s) { return s.replace(/[ \t\u00a0]*[\r\n]+[ \t\u00a0]*/g, ". ").replace(/[ \t\u00a0]+/g, " "); }
   function normalize(text, v2) {
