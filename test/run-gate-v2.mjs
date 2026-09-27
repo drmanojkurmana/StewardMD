@@ -163,6 +163,17 @@ try {
   const st = await assessNeg(T(storm), stormNeg);
   ok(st.ab === false && st.rule === "ni_explains_fever" && /explains the fever/.test(st.message || "") && !/\u2014/.test(st.message || ""), `defaults · febrile thyroid storm leading by a clear margin: no antibiotics (${st.cls}, ${st.rule})`);
   ok((await assessNeg(T(storm.concat(["hypotension", "lactateElevated"])), stormNeg)).rule !== "ni_explains_fever", "defaults · the same with shock physiology: the rule stands aside");
+  // round 16: infections treated on the clinical picture, whatever the scores say
+  const cm = async (ks) => assess(T(ks));
+  const murmur = await cm(["fever", "newMurmur", "weightLoss", "nightSweats", "petechialRash", "mucocutaneousBleeding", "thrombocytopenia"]);
+  ok(murmur.ab === true && murmur.rule === "fever_murmur" && /three sets of blood cultures/.test(murmur.message || ""), `defaults · fever + new murmur behind a leukaemia picture: endocarditis, antibiotics (${murmur.cls}, ${murmur.rule})`);
+  const uti = await cm(["fever", "rigors", "dysuria", "urinaryFrequency", "feverGU", "diabetesHx", "ageOver50"]);
+  ok(uti.ab === true, `defaults · febrile UTI in a diabetic man: antibiotics (${uti.cls}, ${uti.rule})`);
+  const hap = await cm(["hospitalDay48", "fever", "purulentSecretions", "worseningOxygenation", "knownHeartFailure", "orthopnea", "legSwellingBilateral", "bilateralCrackles", "raisedJVP"]);
+  ok(hap.ab === true && hap.rule === "hap_criteria", `defaults · HAP criteria met with heart failure leading: antibiotics (${hap.cls}, ${hap.rule})`);
+  const chole = await cm(["fever", "rightUpperQuadrantPain", "murphySign", "nauseaVomiting"]);
+  ok(chole.ab === true, `defaults · fever + RUQ pain + Murphy sign: antibiotics (${chole.cls}, ${chole.rule})`);
+  ok((await cm(["rightUpperQuadrantPain", "murphySign", "nauseaVomiting"])).rule !== "cholecystitis_signs", "defaults · the same without fever: the rule stands aside");
   await load(BASE + "?gatev2=1&nlpv2=0");
   ok((await assessNeg(T(obstruction), obstNeg)).rule !== "ni_lead_afebrile", "classic extractor · raw-score check kept (it reads only a note's first mention of fever)");
   await load(BASE + "?gatev2=1&rankv3=0&kbv2=0");

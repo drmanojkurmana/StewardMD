@@ -1365,6 +1365,18 @@
       g.cls = "likely"; g.rule = "sepsis_afebrile";
       return;
     }
+    // round 16 (2026-09-27): infections that are treated on the clinical picture, before a score says so.
+    // Fever with a new regurgitant murmur is endocarditis until three blood cultures say otherwise (modified Duke);
+    // a febrile UTI is by definition upper or complicated; hospital-acquired pneumonia is defined by 48 h+ in hospital
+    // with fever, purulent secretions and worsening gas exchange or a new infiltrate (ATS/IDSA); fever with RUQ
+    // pain and a Murphy sign or known gallstones is acute cholecystitis (Tokyo) until imaging says otherwise.
+    var weak = g.cls === "possible" || g.cls === "unlikely" || g.cls === "noninfective" || g.cls === "none";
+    var febrile = f.fever || f.rigors || f.feverGU;
+    var cantMiss = febrile && f.newMurmur ? "fever_murmur" :
+      f.feverGU ? "febrile_uti" :
+      (f.hospitalDay48 && febrile && (f.purulentSputum || f.purulentSecretions) && (f.worseningOxygenation || f.hypoxia || f.consolidation)) ? "hap_criteria" :
+      (febrile && f.rightUpperQuadrantPain && (f.murphySign || f.knownGallstones)) ? "cholecystitis_signs" : null;
+    if (cantMiss && weak && !gib) { g.cls = "likely"; g.rule = cantMiss; return; }
     if (f.liverDisease && (f.hematemesis || f.melena || f.gibPresentation) && g.cls !== "very_likely" && g.cls !== "likely") {
       g.cls = "abx_prophylaxis"; g.rule = "cirrhosis_gib";
       return;
@@ -1529,6 +1541,10 @@
     return (g.rule || g.why) ? m.replace(/\s*\u2014\s*/g, ": ") : m;
   }
   function gateMsgRaw(g) {
+    if (g.rule === "fever_murmur") return "Fever with a new murmur: infective endocarditis until proven otherwise. Take three sets of blood cultures before antibiotics, then treat empirically; echocardiography.";
+    if (g.rule === "febrile_uti") return "A febrile urinary infection is upper or complicated by definition: send a urine culture and start antibiotics.";
+    if (g.rule === "hap_criteria") return "Hospital-acquired pneumonia criteria are met (48 h or more in hospital, fever, purulent secretions, worsening gas exchange or a new infiltrate): cultures, then empiric antibiotics.";
+    if (g.rule === "cholecystitis_signs") return "Fever with right upper quadrant pain and a Murphy sign or gallstones: acute cholecystitis until imaging says otherwise. Antibiotics with source control.";
     if (g.rule === "ni_explains_fever") return g.why + " leads the differential and explains the fever, with no shock signs or immune compromise: antibiotics are not recommended on these findings. Look for a source and reconsider if one appears or the patient deteriorates.";
     if (g.rule === "ni_lead_afebrile") return "No fever, shock signs or immune compromise, and a non-infectious diagnosis leads (" + g.why + "): antibiotics are not recommended on these findings. Reconsider if fever, rigors or a source of infection appears.";
     var lead = g.lead && g.lead.name;
@@ -2017,6 +2033,15 @@
     sharplyDemarcatedBorder: ["sharply demarcated", "sharply marginated", "well-demarcated", "well demarcated", "clearly demarcated", "raised border", "raised edge", "raised margin", "step-off"],
     pleuriticChestPain: ["worse on deep inspiration", "worse on inspiration", "worse on breathing", "pain on deep breathing", "pain on inspiration", "worsened by deep inspiration", "sharp chest pain worse"]
   };
+  // round 16 (2026-09-27): phrasing behind needed-antibiotic misses on typed train notes
+  var FT_SYN_ADD_V2_R16 = {
+    murphySign: ["murphy sign", "murphy's sign", "murphys sign", "positive murphy", "murphy positive", "murphy's positive"],
+    purulentSputum: ["yellow-green", "yellowish-green", "turned purulent", "sputum colour", "sputum color", "discoloured sputum", "discolored sputum"],
+    skinErythema: ["red swollen", "red, hot", "red and hot", "red hot"],
+    urinaryRetention: ["urinary retention", "retention of urine", "unable to pass urine", "unable to void", "not able to pass urine", "acute retention"],
+    perinealPain: ["perineal pain", "perineal discomfort", "pain in the perineum", "perineal ache", "pelvic pain", "tender prostate", "boggy prostate", "exquisitely tender prostate"],
+    embolicPhenomena: ["splinter haemorrhage", "splinter hemorrhage", "janeway", "osler node", "osler's node", "roth spot", "conjunctival petechiae", "septic emboli", "embolic"]
+  };
   var FT_SYN_V2 = (function () {
     var o = {};
     Object.keys(FT_SYN).forEach(function (k) { var drop = FT_SYN_DROP_V2[k] || []; o[k] = FT_SYN[k].filter(function (x) { return drop.indexOf(x) < 0; }); });
@@ -2024,6 +2049,7 @@
     Object.keys(FT_SYN_ADD_V2_R8).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R8[k]); });
     Object.keys(FT_SYN_ADD_V2_R10).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R10[k]); });
     Object.keys(FT_SYN_ADD_V2_R11).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R11[k]); });
+    Object.keys(FT_SYN_ADD_V2_R16).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R16[k]); });
     return o;
   })();
   // the extraction context: classic exactly as before; v2 adds the cleaned table and the numeric-field list

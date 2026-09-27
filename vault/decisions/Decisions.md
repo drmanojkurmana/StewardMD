@@ -10511,3 +10511,9 @@ the new one. Full unit suite 10915/10916 passing, 0 failures.
 - **Why**: tapped not-needed antibiotics 34 -> 31, typed 58 -> 53, no needed or time-critical call lost; with the
   round-13 reading fixes typed top-1 240 -> 252.
 
+## 2026-09-27 - Round 16: can't-miss infections treated on the clinical picture
+- **Decision**: gate v2 gives antibiotics for fever + new murmur (endocarditis), a febrile UTI, met
+  hospital-acquired pneumonia criteria, and fever + RUQ pain + Murphy sign or gallstones, whatever the scores.
+- **Why**: typed needed antibiotics 153 -> 158, time-critical 48 -> 49 (100%), complaint-only 72 -> 78;
+  cost one typed overcall (hidden case), pending the owner.
+
