@@ -156,12 +156,25 @@
   // significant history, cough for 3 days"), and a later item that states a duration turns the list into
   // a positive statement ("no vomiting, fever and cough for 3 days").
   var LIST_HEAD_SKIP_V2 = /\b(?:allerg\w*|comorbid\w*|addictions?|complaints?|significant)\b|\bhistory\s*$/;
+  var NEG_LIST_HEAD_V2 = /^\s*(?:(?:he|she|they|patient|the patient|pt|mother|father|family)\s+(?:also\s+)?)?(?:(?:has|have|had|there (?:is|was|were|are)|with)\s+)?(?:no|denies|denied|without|nil|negative for|not)\b/;
+  var NEG_LIST_LEAD_V2 = /^\s*(?:(?:he|she|they|patient|the patient|pt)\s+(?:also\s+)?)?(?:has|have|had|there (?:is|was|were|are)|with)\s+(?:no|nil|not)\b/;
   var LIST_DUR_V2 = /\b(?:for|since|x|over)\s+(?:the\s+)?(?:\d|a |an |one|two|three|four|five|six|seven|few|several|past|last)|\b\d+\s*(?:d|days?|wks?|weeks?|hours?|hrs?|months?)\b/;
   function negList(norm, idx) {
     var st = Math.max(norm.lastIndexOf(".", idx - 1), norm.lastIndexOf(";", idx - 1), norm.lastIndexOf(":", idx - 1)) + 1;
     var en = norm.slice(idx).search(/[.,;:]| and | or | nor /), segs = norm.slice(st, en < 0 ? norm.length : idx + en).split(/,| and | or | nor /);
-    if (segs.length < 2 || !/^\s*(?:(?:he|she|they|patient|the patient|pt|mother|father|family)\s+(?:also\s+)?)?(?:no|denies|denied|without|nil|negative for|not)\b/.test(segs[0]) || LIST_HEAD_SKIP_V2.test(segs[0]) || segs[0].replace(NEG_IDIOM_V2, "") !== segs[0]) return false;
-    for (var i = 1; i < segs.length; i++) { var w = segs[i].trim().split(/\s+/).filter(Boolean); if (w.length > 5 || LIST_STOP_V2.test(segs[i])) return false; }
+    if (segs.length < 2) return false;
+    var item = function (x) { return x.trim().split(/\s+/).filter(Boolean).length <= 5 && !LIST_STOP_V2.test(x); };
+    var headOk = function (x) { return !LIST_HEAD_SKIP_V2.test(x) && x.replace(NEG_IDIOM_V2, "") === x; }, ok = false, k;
+    // the list opens the sentence or clause ("No cough, fever or haemoptysis"; "He has no rash, headache or vomiting")
+    if (NEG_LIST_HEAD_V2.test(segs[0]) && headOk(segs[0])) { ok = true; for (k = 1; k < segs.length; k++) if (!item(segs[k])) { ok = false; break; } }
+    // round 28: or it starts mid-sentence with a clause lead ("passed urine in good volume, and has no jaundice,
+    // breathlessness or confusion"). A bare "no X" inside a list does not negate what follows it ("cough, sputum,
+    // no fever, breathlessness on exertion").
+    if (!ok) for (k = segs.length - 2; k > 0; k--) {
+      if (NEG_LIST_LEAD_V2.test(segs[k])) { ok = headOk(segs[k]); break; }
+      if (!item(segs[k])) break;
+    }
+    if (!ok) return false;
     var rest = norm.slice(idx), se = rest.search(/[.;:]/);
     return !LIST_DUR_V2.test(se < 0 ? rest : rest.slice(0, se));
   }
@@ -181,6 +194,9 @@
 
     function consider(key, idx, method, srcText, display) {
       if (!valid[key]) return;
+      // round 28: "unresponsive to antibiotics / cell-wall agents / paracetamol" is about a treatment, not the sensorium
+      if (v2 && key === "alteredSensorium" && /^(?:un|non-?)responsive$/.test(srcText || "") &&
+          /^\s+to\s+(?!voice|pain|painful|verbal|stimul|command|touch|sternal|call|name)/.test(norm.slice(idx + srcText.length, idx + srcText.length + 30))) return;
       if (v2) (alts[key] = alts[key] || []).push({ idx: idx, method: method, srcText: srcText || "" });
       if (byKey[key] && byKey[key].conf >= 0.9) return;
       byKey[key] = { idx: idx, method: method, srcText: srcText || "", display: display || labels[key] || key,
@@ -364,7 +380,9 @@
         var cr2 = num(m2[1]); if ((m2[2] && /mol/.test(m2[2])) || cr2 > 25 ? cr2 >= 177 : cr2 >= 2) od = od || m2[0]; }
       if ((m2 = pick(/\b(?:platelets?|plt|platelet count)\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:[.,]\d+)?)\s*(lakhs?|lacs?)?/, PLTV, -1))) { var p2 = num(m2[1]); p2 = m2[2] ? p2 * 100000 : p2 >= 1000 ? p2 : p2 * 1000; if (p2 > 0 && p2 < 100000) od = od || m2[0]; }
       if ((m2 = pick(/\bgcs\s*(?:of|is|was|=|:)?\s*(\d{1,2})\b/, V1, -1)) && +m2[1] >= 3 && +m2[1] <= 12) od = od || m2[0];
-      if ((m2 = norm.match(/\b(?:multi-?organ|organ (?:dysfunction|failure)|mods|end-organ|acute kidney injury|aki)\b/))) od = od || m2[0];
+      // round 28: every mention, and not one said to be absent ("no organ failure", "before any organ failure")
+      var odre = /\b(?:multi-?organ|organ (?:dysfunction|failure)|mods|end-organ|acute kidney injury|aki)\b/g;
+      while (!od && (m2 = odre.exec(norm))) if (!/\b(?:no|not|without|nor|before any|prior to any|ahead of any|free of)\s+(?:[a-z-]+\s+){0,2}$/.test(norm.slice(Math.max(0, m2.index - 40), m2.index))) od = m2[0];
       if (od) vital("organDysfunction", od);
     }
 
@@ -380,6 +398,8 @@
       if (hasWord(cl, NEG) || (key === "fever" && !(v2 && e.method === "vitals") && hasWord(norm, AFEBRILE))) r.polarity = "absent";
       // round 26: "non-erythematous", "non-tender", "non-productive": a "non-" prefix negates the word it is fused to
       else if (v2 && e.method !== "vitals" && /\bnon[-\s]?$/.test(norm.slice(Math.max(0, e.idx - 4), e.idx))) r.polarity = "absent";
+      // round 28: "caught before any organ failure", "prior to any bleeding": not (yet) there
+      else if (v2 && e.method !== "vitals" && /\b(?:before|prior to|ahead of)\s+(?:any|the onset of|developing)\s+(?:[a-z-]+\s+){0,2}$/.test(norm.slice(Math.max(0, e.idx - 45), e.idx))) r.polarity = "absent";
       // round 13: "constipation rather than diarrhoea", "instead of fever": the named alternative is absent
       else if (v2 && e.method !== "vitals" && /\b(?:rather than|instead of)\s+(?:[a-z-]+\s+){0,2}$/.test(norm.slice(Math.max(0, e.idx - 40), e.idx))) r.polarity = "absent";
       else if (v2 && e.method !== "vitals" && (negList(norm, e.idx) || negAfter(norm, e.idx + (e.srcText || "").length))) r.polarity = "absent";
@@ -411,8 +431,9 @@
       else if (v2 && e.method !== "vitals" && STOPPED_BEFORE_V2.test(norm.slice(Math.max(0, e.idx - 30), e.idx))) r.temporality = "resolved";
       // round 8: "fever settled on day 3" reports a finding that has gone
       else if (v2 && e.method !== "vitals" && RESOLVED_AFTER_V2.test(norm.slice(e.idx + (e.srcText || "").length, e.idx + (e.srcText || "").length + 40))) r.temporality = "resolved";
-      // round 27: a leftover sign ("residual basal consolidation, resolving", "crackles from resolving infection") is past
-      else if (v2 && e.method !== "vitals" && (/\b(?:residual|healed)\s+(?:[a-z\/-]+\s+){0,3}$/.test(norm.slice(Math.max(0, e.idx - 40), e.idx)) ||
+      // round 27: a sign on its way out ("basal consolidation, resolving", "crackles from resolving infection") or healed is
+      // past ("residual" tenderness is still there, round 28)
+      else if (v2 && e.method !== "vitals" && (/\bhealed\s+(?:[a-z\/-]+\s+){0,3}$/.test(norm.slice(Math.max(0, e.idx - 40), e.idx)) ||
           /^[^.;]{0,6}(?:,\s*|\s+(?:from|of|due to)\s+(?:a\s+|the\s+)?)resolving\b/.test(norm.slice(e.idx + (e.srcText || "").length, e.idx + (e.srcText || "").length + 40)))) r.temporality = "resolved";
       return r;
     }

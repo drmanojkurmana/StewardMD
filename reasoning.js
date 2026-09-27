@@ -903,7 +903,7 @@
       rule: { allOf: ["ascites", { anyOf: ["abdominalPain", "feverGU", "alteredSensorium", "asciticPMNHigh"] }] },
       add: [{ when: "asciticPMNHigh", add: 25 }] },
     toxic_hepatitis: { find: { transaminasesVeryHigh: 22 } },
-    biliary_colic: { find: { knownGallstones: 20, transaminasesVeryHigh: -10 } },
+    biliary_colic: { find: { knownGallstones: 20, transaminasesVeryHigh: -10, severeAbdominalPain: 10 } },   // round 28: colic is severe pain
     pancreatitis: { find: { knownGallstones: 8 } },
     // round 18: the metabolic emergencies read their defining lab value
     hyponatremia: { find: { sodiumLow: 40 } },

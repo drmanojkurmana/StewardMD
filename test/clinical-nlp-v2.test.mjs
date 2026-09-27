@@ -384,3 +384,22 @@ test("round 27 readings", () => {
   assert.ok(!p("a few basal crackles from resolving infection").includes("crepitations"));
   assert.ok(p("right basal crackles, consolidation on CXR").includes("consolidation"));
 });
+
+// round 28: a negated list that starts mid-sentence with a clause lead; treatment-unresponsive; "before any"; residual is present
+test("round 28 readings", () => {
+  const c28 = { valid: { jaundice: 1, dyspnea: 1, bleedingManifestation: 1, alteredSensorium: 1, oliguria: 1, organDysfunction: 1, cough: 1, fever: 1,
+    purulentSputum: 1, rightUpperQuadrantPain: 1 }, labels: {}, numeric: {}, v2: true,
+    syn: { jaundice: ["jaundice"], dyspnea: ["breathless", "breathlessness"], bleedingManifestation: ["bleeding"], alteredSensorium: ["confusion", "unresponsive"],
+      oliguria: ["oliguria"], cough: ["cough"], fever: ["fever"], purulentSputum: ["sputum"], rightUpperQuadrantPain: ["right-upper-quadrant tenderness"] } };
+  const r = (t) => NLP.extract(t, c28);
+  const a = r("He is eating, has passed urine in good volume, and has NO jaundice, breathlessness, bleeding, confusion or oliguria.");
+  assert.deepEqual(a.present, []);
+  assert.ok(["jaundice", "dyspnea", "bleedingManifestation", "alteredSensorium", "oliguria"].every((k) => a.absent.includes(k)));
+  // a bare "no X" inside a terse list does not negate what follows it
+  const b = r("c/o cough, sputum, no fever, breathlessness on exertion");
+  assert.ok(b.present.includes("dyspnea") && b.absent.includes("fever"));
+  assert.ok(!r("fever unresponsive to paracetamol").present.includes("alteredSensorium"));
+  assert.ok(r("found unresponsive at home").present.includes("alteredSensorium"));
+  assert.ok(!r("caught before any organ failure").present.includes("organDysfunction"));
+  assert.ok(r("mild residual right-upper-quadrant tenderness").present.includes("rightUpperQuadrantPain"));
+});
