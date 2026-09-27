@@ -86,7 +86,7 @@ added) and the numeric-field list. Off: 0 differences across 1,660 case-paths.
   56 -> 60%, dev 52 -> 56%. Owner accepted `abxSens` 139 -> 138 on the text path (one test-split case,
   aggregate only) for the v2 configs. Extraction audit: dump `DX.extractText` per case, score vs gold keys.
 
-## Differential ordering v3 (`smd_rank_v3`, default OFF, 2026-09-27)
+## Differential ordering v3 (`smd_rank_v3`, default ON since 2026-09-27; `"0"` opts out)
 
 Phase 3 of `kb/validation/PLAN-DX-ABX-10.md`. `reasoning.js` `rankV3()` / `rankV3Adjust()` (`?rankv3=1`,
 `localStorage smd_rank_v3=1`). **Order only**: adjusts `rankScore`, never `score`, so the gate, the

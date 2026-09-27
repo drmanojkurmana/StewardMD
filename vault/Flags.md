@@ -86,7 +86,7 @@ leaving it present:
 - `opd-boot.js`, the bedside mount. Unconfigured it paints an explicitly disabled "not connected to
   a patient record" surface rather than a plausible-looking drug round.
 
-## Clinical Reasoning: `smd_gate_v2`, `smd_nlp_v2`, `smd_rank_v3`, `smd_kb_v2`, `smd_calib`, `smd_prior_v1`, `smd_dx_ask` OFF; `smd_dx_simple`, `smd_gate_v2` ON, added 2026-09-26/27
+## Clinical Reasoning: `smd_nlp_v2`, `smd_kb_v2`, `smd_calib`, `smd_prior_v1`, `smd_dx_ask` OFF; `smd_dx_simple`, `smd_gate_v2`, `smd_rank_v3` ON, added 2026-09-26/27
 
 Not in a registry: read inline like `smd_reason_v2` / `smd_rank_v2` (`reasoning.js` `gateV2()`,
 `clinical-nlp.js` `nlpV2()`, `reasoning.js` `rankV3()` / `kbV2()` / `calibOn()` / `priorOn()` / `dxAskOn()` / `simpleOn()`; `?gatev2=1|0` / `?nlpv2=1|0` / `?rankv3=1|0` / `?kbv2=1|0` / `?calib=1|0` / `?prior=1|0` / `?dxask=1|0` / `?dxsimple=1|0` -> localStorage -> OFF). Not in the
@@ -95,7 +95,7 @@ Not in a registry: read inline like `smd_reason_v2` / `smd_rank_v2` (`reasoning.
 | Flag | State | What turning it on does |
 |---|---|---|
 | `smd_nlp_v2` | OFF | Text extraction v2 (`clinical-nlp.js`, every caller): fixes vitals being negated by any "no" in the note, "3-day history of fever" read as past history, substring synonyms, BP/age parsing; adds numeric labs, durations, SOFA-2 organ dysfunction. Unseen held-out top-1 33% -> 55%. Round 2 (2026-09-27): word-start phrase matching, list and postfix negation. Owner decision; pending clinician review of the thresholds. |
-| `smd_rank_v3` | OFF | Differential ORDER only (scores, gate and confidences unchanged): parsimony re-rank, disqualifiers for attractor diagnoses (non-severe CAP with shock, gastroenteritis with dysentery/DKA...), anchors for rare ones (HLH needs a cytopenia/organomegaly), pertinent negatives; OPD Ask MaiK orders from the engine rank. Tapped top-1 72 -> 74%, OPD 335 -> 358. Owner decision; rules pending clinician review. |
+| `smd_rank_v3` | **ON** (since 2026-09-27, owner; localStorage `"0"` or `?rankv3=0` = classic order) | Differential ORDER only (scores, gate and confidences unchanged): parsimony re-rank, disqualifiers for attractor diagnoses (non-severe CAP with shock, gastroenteritis with dysentery/DKA...), anchors for rare ones (HLH needs a cytopenia/organomegaly), pertinent negatives; OPD Ask MaiK orders from the engine rank. Tapped top-1 72 -> 74%, OPD 335 -> 358. Owner decision; rules pending clinician review. |
 | `smd_kb_v2` | OFF | Knowledge-base additions: plain "Fever" satisfies the infection rules written against `feverGU` ("fever with urinary symptoms"); new findings gallstones, dilated CBD, ALT/AST > 1000, cholestatic LFTs, ascitic PMN >= 250 and rules separating cholangitis from viral hepatitis; SBP on ascitic neutrophils. Tapped abx-indicated 156 -> 161. Rules ai_drafted, pending clinician review. |
 | `smd_calib` | OFF | "Not enough information yet" gate class when findings are non-diagnostic (fewer than 3 clinical findings, nothing specific, no red flag): no infection or antibiotic call, next-best findings listed; OPD Ask MaiK gives no provisional dx or treatment. Red flags always get the normal answer. |
 | `smd_prior_v1` | OFF | Prevalence prior, ORDER only (+/-8 rank): ai_drafted ordinal tiers, time-critical diagnoses never pushed down; `localStorage smd_prior_counts` (a hospital's aggregate diagnosis counts, no patient rows) overrides. Cannot be validated on the balanced gold set; needs real case-mix data. |

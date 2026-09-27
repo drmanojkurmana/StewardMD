@@ -98,7 +98,9 @@ try {
   ok(fnOff.ab === true, `off · fever + "Neutropenia (ANC <500)" -> antibiotics (${fnOff.cls}; the syndrome itself scores on this key)`);
 
   // ---- 2. flag ON --------------------------------------------------------------------------
-  ok(await load(BASE + "?gatev2=1"), "app + KB load with ?gatev2=1");
+  // the fixtures were written against the classic order (?rankv3=0); v3's own effect on the gate is
+  // asserted after them, and in test/run-rank-v3.mjs
+  ok(await load(BASE + "?gatev2=1&rankv3=0"), "app + KB load with ?gatev2=1&rankv3=0");
   for (const [id, what, , v2cls, v2ab, re] of FIX) {
     const g = await assess(keys(id));
     ok(g.cls === v2cls && g.ab === v2ab, `on  · ${what} (${id}): ${v2cls}, antibiotics ${v2ab ? "yes" : "no"} (${g.cls}, ${g.ab})`);
@@ -137,6 +139,12 @@ try {
   const noShock = await assess(T(["alteredSensorium", "tachypnea", "lactateElevated", "ageOver50"]));
   ok(noShock.rule !== "sepsis_afebrile", `on  · confusion + fast breathing + lactate without low BP: no override (${noShock.cls})`);
   const fnOn = await assess(fn);
+  // smd_rank_v3 (default ON): CAP without a lower-respiratory sign cannot hold antibiotics as a rival,
+  // so an URTI picture (gc_149, gold: URTI, no antibiotics) reads "only if pharyngitis criteria are met"
+  ok(await load(BASE + "?gatev2=1"), "app + KB load with ?gatev2=1 (v3 order, the default)");
+  const urtiV3 = await assess(keys("gc_149"));
+  ok(urtiV3.cls === "infection_conditional" && urtiV3.rule !== "keep_rival", `on + v3 · URTI with pneumonia only keyword-close (gc_149): conditional, not "likely" (${urtiV3.cls})`);
+  await load(BASE + "?gatev2=1&rankv3=0");
   ok(fnOn.ab === true && fnOn.cls === fnOff.cls, `on  · fever + "Neutropenia (ANC <500)" unchanged by v2 (${fnOn.cls})`);
 
   // ---- 3. localStorage flag without the query ----------------------------------------------
