@@ -3039,10 +3039,74 @@
 
   function openSoundLab() {
     state.diaMode = "all";
+    // SMD-05: build the audio context and the noise buffer now, and wake the output on the finger's
+    // first contact (pointerdown), so the click that follows plays at once.
+    try { if (window.SMD_CLINIX_AUDIO && SMD_CLINIX_AUDIO.prewarm) SMD_CLINIX_AUDIO.prewarm(); } catch (e) {}
+    if (!openSoundLab._armed) {
+      openSoundLab._armed = true;
+      document.addEventListener("pointerdown", function (e) {
+        var b = e.target && e.target.closest && e.target.closest('[data-act="cx-audio"]');
+        if (b) { try { SMD_CLINIX_AUDIO.unlock(); } catch (x) {} }
+      }, true);
+    }
     go("soundlab");
   }
 
+  /* SMD-06: a live phonocardiogram-style trace of the sound that is playing, drawn from the audio
+   * output itself (an AnalyserNode), scrolling right to left. Cardiac sounds mark S1 and S2 where the
+   * engine schedules them; breath sounds mark inspiration and expiration. Stops when the sound stops
+   * or the card leaves the screen. */
+  function waveMarks(h, from, to) {
+    var s = h.spec || {}, out = [], k, t;
+    var cardiac = s.type === "cardiac" || !!s.cardiac || !!s.bpm || !!s.systole || !!s.sysLen;
+    if (cardiac) {
+      var cyc = s.period || s.cycle || 0.85, sys = s.systole || s.sysLen || 0.3;
+      for (k = 0, t = h.startsAt; t < to && t < h.endsAt; k++, t = h.startsAt + k * cyc) {
+        if (t >= from) out.push({ t: t, l: "S1" });
+        if (t + sys >= from && t + sys < to) out.push({ t: t + sys, l: "S2" });
+      }
+    } else {
+      var br = (s.insp || 1) + (s.gap || 0) + (s.exp || 1) + (s.rest || 0);
+      for (k = 0, t = h.startsAt; t < to && t < h.endsAt; k++, t = h.startsAt + k * br) {
+        if (t >= from) out.push({ t: t, l: "In" });
+        var te = t + (s.insp || 1) + (s.gap || 0);
+        if (te >= from && te < to) out.push({ t: te, l: "Ex" });
+      }
+    }
+    return out;
+  }
+  function startWave(cv, kind) {
+    var A = window.SMD_CLINIX_AUDIO; if (!A || !A.current || !cv.getContext) return;
+    var g = cv.getContext("2d"), dpr = Math.min(window.devicePixelRatio || 1, 3), hist = [], buf = null, SPAN = 3;
+    var cs = getComputedStyle(cv), ink = cs.color || "#0f766e";
+    function size() { var r = cv.getBoundingClientRect(); cv.width = Math.max(1, Math.round(r.width * dpr)); cv.height = Math.max(1, Math.round(r.height * dpr)); }
+    size();
+    (function frame() {
+      if (!cv.isConnected) return;
+      var h = A.current(); if (!h || h.kind !== kind || !h.analyser) return;
+      var now = A.now(), W = cv.width, H = cv.height, mid = H / 2;
+      if (!buf) buf = new Float32Array(h.analyser.fftSize);
+      h.analyser.getFloatTimeDomainData(buf);
+      var pk = 0; for (var i = 0; i < buf.length; i++) { var a = Math.abs(buf[i]); if (a > pk) pk = a; }
+      hist.push({ t: now, v: Math.min(1, pk * 1.6) });
+      while (hist.length && hist[0].t < now - SPAN) hist.shift();
+      g.clearRect(0, 0, W, H);
+      g.globalAlpha = .25; g.fillStyle = ink; g.fillRect(0, mid - dpr * .5, W, dpr); g.globalAlpha = 1;
+      g.fillStyle = ink;
+      var bw = Math.max(dpr, W / (SPAN * 60));
+      hist.forEach(function (p) { var x = W - (now - p.t) / SPAN * W, hh = Math.max(dpr, p.v * (mid - 12 * dpr)); g.fillRect(x - bw, mid - hh, bw, hh * 2); });
+      g.font = (10 * dpr) + "px -apple-system,system-ui,sans-serif"; g.textAlign = "center";
+      waveMarks(h, now - SPAN, now).forEach(function (m) {
+        var x = W - (now - m.t) / SPAN * W;
+        g.globalAlpha = .5; g.fillRect(x, 10 * dpr, dpr, H - 20 * dpr); g.globalAlpha = 1;
+        g.fillText(m.l, x, 9 * dpr);
+      });
+      requestAnimationFrame(frame);
+    })();
+  }
+
   function renderSoundLab(host) {
+    try { if (window.SMD_CLINIX_AUDIO && SMD_CLINIX_AUDIO.prewarm) SMD_CLINIX_AUDIO.prewarm(); } catch (e) {}
     var html = header("Auscultation Sound Lab", "Acoustics & Real Audio Reference", "cx-back");
 
     var filter = state.diaMode || "all";
@@ -3073,7 +3137,8 @@
             (s.ytVideoId ? '<button type="button" class="cx-btn cx-btn--ghost" style="padding:6px 10px;font-size:12.5px;color:#c00;border-color:rgba(204,0,0,0.35);" data-act="cx-sound-yt" data-id="' + esc(s.kind) + '">' +
               ic(isYtActive ? "expand_less" : "smart_display") + ' ' + (isYtActive ? "Hide" : "Real (" + esc(s.ytChannel || "YouTube") + ")") + '</button>' : '') +
           '</div></div>' +
-        '<div style="font-size:13px;color:var(--cx-muted);line-height:1.45;margin-bottom:6px;">' + esc(s.desc) + '</div>';
+        '<div style="font-size:13px;color:var(--cx-muted);line-height:1.45;margin-bottom:6px;">' + esc(s.desc) + '</div>' +
+        (isPlaying ? '<canvas class="cx-wave" data-wave="' + esc(s.kind) + '" role="img" aria-label="Live waveform of the ' + esc(s.label) + ' sound" style="display:block;width:100%;height:72px;margin-top:6px;border-radius:10px;background:color-mix(in srgb,var(--cx-accent,#0f766e) 7%,transparent);color:var(--cx-accent,#0f766e)"></canvas>' : "");
 
       if (isYtActive && s.ytVideoId) {
         var shimUrl = YT_SHIM + "?v=" + esc(s.ytVideoId) + (s.ytStart ? "&start=" + s.ytStart : "");
@@ -3090,6 +3155,7 @@
 
     html += '</div></div>';
     host.innerHTML = html;
+    var wv = host.querySelector("canvas.cx-wave"); if (wv) startWave(wv, wv.getAttribute("data-wave"));
   }
 
   /* ── router ──────────────────────────────────────────────────────────────── */
@@ -3199,7 +3265,8 @@
       state.audioKind = kind;
       SMD_CLINIX_AUDIO.play(kind, { breaths: 3, onEnd: function () {
         state.audioKind = null;
-        if (state.stack[state.stack.length - 1] === "lesson" || state.stack[state.stack.length - 1] === "sandbox") repaint();
+        var top = state.stack[state.stack.length - 1];
+        if (top === "lesson" || top === "sandbox" || top === "soundlab") repaint();   // soundlab: the Stop button and trace go when the sound ends
       } });
     } catch (e) { state.audioKind = null; }
   }
