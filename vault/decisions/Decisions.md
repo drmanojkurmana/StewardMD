@@ -10339,3 +10339,36 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
 - **Retention (owner)**: solved conversations expire 30 days after they were solved (KV TTL + index
   filter); open ones stay; reopening restores the open TTL. Screenshots already go on fix.
 
+
+## 2026-09-27 - SMS only as our approved DLT templates, and no patient name in any message
+- **Decision**: every patient/doctor SMS is built from one of our approved Vodafone Idea DLT templates
+  (header MAIK, `functions/_followcare_sms.js` DLT, text verbatim) and sent through 2Factor's R1 API with
+  its content-template id (`sendDlt`). OPD queue: token issued -> Appointment Confirmation - Detailed,
+  2 ahead -> Check-In Alert - Detailed; every other queue event is WhatsApp only. Doctor OTP -> our OTP
+  template first, 2Factor's own OTP route as the fallback. The name slot is always "Patient"; FollowCare
+  stops decrypting and sending the first name.
+- **Why**: the operator drops an SMS that does not match its registered template. The queue SMS fallback sent
+  the FollowCare check-in template with a blank name for every event, and FollowCare filled 2 of the
+  templates' 4-5 slots. Owner (2026-09-27): no new templates, adjust to the ones we have; a patient name is
+  PHI, say "Dear Patient", details go on the page the link opens.
+- **Open**: Care Plan / Post-Visit templates need a callback number ({#cbn#}); none is stored, and none is
+  guessed (a worsening patient would call it). Needs `TWOFACTOR_SENDER=MAIK` in Pages secrets, and
+  `stewardmd.in` on the DLT CTA whitelist, before any of it sends.
+## 2026-09-27 - Differential ordering v3, round 2 (discriminators between close neighbours)
+- **Decision**: `smd_rank_v3` gains `RANK_V3_R2`, textbook discriminators (afebrile colic, Anthonisen
+  purulence, ITP vs DIC/TTP/leukaemia, GBS vs myasthenia, stroke vs TIA, nephritic / pulmonary-renal /
+  lupus patterns, fever for febrile infections...). Order only; the antibiotic gate never reads them.
+- **Why**: tapped top-1 train 75 -> 85%, dev 70 -> 76%, test 72 -> 78%; OPD ordering 358 -> 386.
+  Tried and dropped: source-over-sepsis, a complicated-UTI bonus, mixed malaria over malaria (see
+  `kb/validation/AUDIT-2026-09-26.md`, Round 7).
+- **Owner accepted (2026-09-27)**: v3 on the classic extractor, chart-text top-3 208 -> 206 (two
+  classic-extractor misreads). `smd_rank_v3` stays OFF.
+## 2026-09-27 - The SMS callback number is the clinic's own phone
+- **Decision**: a clinic saves its own phone (Staff & roles > Doctor & Clinic Admin Profile > "Clinic phone for
+  patients", `org.phone`, cleaned by `clinicPhone()` in `functions/_opd_org.js`: 10-digit mobile starting 6-9,
+  landline with its 0 STD code, or 1800 / 1860). It fills the DLT `{#cbn#}` slot, so the checkout visit-summary SMS goes as
+  Care Plan - Detailed. No number saved: that message stays WhatsApp only. Never a StewardMD number.
+- **Why**: owner (2026-09-27), option 1 of three: "If symptoms worsen, contact us at" is a number a worsening
+  patient calls, so it must be the clinic that treated them.
+- **Open**: FollowCare's hospital is a free-text id the doctor types (`fc_doctors`), not an OPD clinic, so its
+  Post-Visit template still has no callback number or doctor name; FollowCare stays WhatsApp only.

@@ -2,7 +2,7 @@
  *
  * Turns the schedule into outbound check-in links and keeps episodes moving:
  *   • plan(episode, now)        — PURE decision: send today's link / send a reminder / nothing + missedCount.
- *   • messageBody(name, link, lang) — templated, PHI-light (first name + opaque link only), en + hi.
+ *   • messageBody(name, link, lang) — templated, no patient name (opaque link only), en + hi.
  *   • sendCheckinLink(...)      — compose + send via SMS (reuse _followcare_sms), log delivery.
  *   • runScheduler(env, now)    — scan ACTIVE episodes, dispatch due links + reminders, and escalate MISSED
  *                                 check-ins (engine.assessMissed → notify the enrolling clinician, de-identified).
@@ -50,35 +50,34 @@ export function plan(ep, nowMs, opts) {
 // ---- templated, PHI-light message -------------------------------------------------------
 // Bodies come from the reviewed i18n registry (followcare-i18n.js) so a patient gets their check-in in
 // their own language when one has been reviewed, and English otherwise — NEVER a machine translation at
-// send time. PHI-light: first name + opaque link only. `kind` maps to a registry key.
+// send time. No patient name, ever (owner 2026-09-27: a name is PHI); the greeting reads "Hi," and the
+// portal greets them once the link is open. Opaque link only. `kind` maps to a registry key.
 const MSG_KEY = { send: "fc.msg.send", remind: "fc.msg.remind", reminder_med: "fc.msg.reminder_med", reminder_appt: "fc.msg.reminder_appt" };
-export function messageBody(firstName, link, lang, kind) {
+export function messageBody(_firstName, link, lang, kind) {
   const key = MSG_KEY[kind] || MSG_KEY.send;
-  return I18n.t(key, lang || "en", { name: firstName || "", link: link || "" });
+  return I18n.t(key, lang || "en", { name: "", link: link || "" });
 }
 
 // ---- send one check-in link -------------------------------------------------------------
 export async function sendCheckinLink(env, ep, kind) {
-  // A minor's messages go to the GUARDIAN (DPDP §9), with a generic greeting (never the child's name).
+  // A minor's messages go to the GUARDIAN (DPDP §9). Nobody's name is in any message.
   const recipientEnc = ep.isMinor ? ep._phi.guardianEnc : ep._phi.phoneEnc;
-  let firstName = "";
-  if (!ep.isMinor) { try { firstName = (await decPHI(env, ep._phi.nameEnc)).trim().split(/\s+/)[0] || ""; } catch (e) {} }
   let phone = "";
   try { phone = await decPHI(env, recipientEnc); } catch (e) {}
   if (!phone) return { ok: false, reason: "no_phone" };
   const link = await linkFor(env, ep);
-  const body = messageBody(firstName, link, ep.lang || "en", kind || "send");
-  return sendPatientMessage(env, ep, body, { firstName: firstName, link: link, phone: phone });
+  const body = messageBody("", link, ep.lang || "en", kind || "send");
+  return sendPatientMessage(env, ep, body, { link: link, phone: phone });
 }
 // Reusable: send ONE PHI-light message to the episode's patient over the configured channel + log delivery.
 // Used by check-in dispatch AND by the Doctor Action Center (comms notifications). `opts` may pre-supply the
-// decrypted phone/firstName/link (avoids re-decrypting); otherwise phone is decrypted here. Fails SAFE.
+// decrypted phone/link (avoids re-decrypting); otherwise phone is decrypted here. Fails SAFE.
 export async function sendPatientMessage(env, ep, body, opts) {
   opts = opts || {};
   let phone = opts.phone || "";
   if (!phone) { const recEnc = ep.isMinor ? ep._phi.guardianEnc : ep._phi.phoneEnc; try { phone = await decPHI(env, recEnc); } catch (e) {} }
   if (!phone) return { ok: false, reason: "no_phone" };
-  const payload = { toE164: phone, body: body, vars: { var1: opts.firstName || "", var2: opts.link || "", name: opts.firstName || "", link: opts.link || "", text: body } };
+  const payload = { toE164: phone, body: body, vars: { var1: "Patient", var2: opts.link || "", name: "Patient", link: opts.link || "", text: body } };
   // Channel: WhatsApp when selected + configured, else SMS. Both fail SAFE (skipped) when unconfigured.
   const channel = String(env.FOLLOWCARE_MSG_CHANNEL || "sms").toLowerCase();
   let res, ch;

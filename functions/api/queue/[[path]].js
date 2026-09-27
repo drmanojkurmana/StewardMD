@@ -492,7 +492,7 @@ async function wsqLinkTenantOrg(env, org) {
   } catch (e) { /* best-effort: a missed reciprocal link never blocks the org update itself */ }
 }
 import { tenantLinkRefusal } from "../../_wardsynq/tenant-link.js";
-import { publicOrg } from "../../_opd_org.js";
+import { publicOrg, clinicPhone } from "../../_opd_org.js";
 import { localUrlProblem } from "../../_wardsynq/maik-gateway.js";
 import "../../_opd_ghis_connector.js";   // side-effect: registers the "ghis" OPD connector
 import "../../_opd_connect_connector.js";   // side-effect: registers the "connect" OPD connector (any FHIR hospital via Connect EMR)
@@ -7016,6 +7016,12 @@ export async function onRequest(context) {
       }
       if (seg === "org" && sub === "update") {
         const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az);
+        // The clinic's own number for patient SMS ("contact us at"): saved cleaned, or refused whole.
+        if (body.phone !== undefined) {
+          const ph = clinicPhone(body.phone);
+          if (!ph.ok) return json({ ok: false, error: "bad_clinic_phone", message: "Enter the clinic's 10-digit mobile, or its landline with the STD code (for example 04023456789). Nothing was saved." }, 422, request);
+          body.phone = ph.value;
+        }
         // P2.6: country identifiers are validated by the region adapter AFTER authorization, so an
         // unauthorised caller learns nothing from this route.
         if (body.regionProfile !== undefined) {
@@ -7614,7 +7620,9 @@ export async function onRequest(context) {
         // PRE-checkout snapshot taken above.
         const closed = await Q.getTicket(env, t.id);
         if (closed) await syncEncounter(request, env, s, closed);
-        let sent = null; try { sent = await notifyTimeline(env, s, t, fin.url); } catch (e) {}   // WhatsApp/SMS the link
+        // The clinic's own number fills the SMS template's "contact us at"; without one the link goes by WhatsApp only.
+        let clinic = null; try { clinic = await ORG.getOrg(env, s.hospitalId); } catch (e) {}
+        let sent = null; try { sent = await notifyTimeline(env, s, t, fin.url, clinic && clinic.phone); } catch (e) {}   // WhatsApp/SMS the link
         const tickets = await Q.callNext(env, s, actor.id);
         return json({ ok: true, timelineUrl: fin.url, linkExpiresAt: fin.linkExpiresAt, sent: !!(sent && sent.ok), tickets: await ticketView(env, tickets) }, 200, request);
       }
