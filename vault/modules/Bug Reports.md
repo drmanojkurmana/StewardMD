@@ -16,10 +16,24 @@ reached the user or he received a notification" + "auto expiry of tickets within
   team left, day separators, Sent/Seen), composer pinned at the bottom; replying on a solved one reopens.
 - **LIVE**: KV is eventually consistent across PoPs (up to 60 s) and the app only re-read on open,
   so every message/status/read is also written to D1 `support_events` (`functions/_support_live.js`,
-  `UPDATES_DB`, table created on first use). App polls `/api/support?live=1&after=<seq>` every 2.5 s in a
-  chat, 5 s on the list, 30 s in the background (banner `#hsToast` on a new reply), and on resume.
-  Admin polls `admin/support-live` (2.5 s in a chat, 4 s on the list, 20 s off-pane; `bgKick()` when the
-  pane or a chat opens). `admin/support-seen` clears the dot and sends "Seen".
+  `UPDATES_DB`, table created on first use).
+- **REALTIME (owner, same day: "still not as fast as WhatsApp")**: LONG-POLL, not interval polling.
+  `GET /api/support?live=1&after=<seq>&wait=20&<fast|bg>=1` (and `admin/support-live?after=&wait=20&fast=1`)
+  is HELD by the server (`waitEvents`) and answers the moment an event lands; the client re-asks at once.
+  Server checks D1 every 350 ms (`fast`, a chat on screen), 1.2 s (centre list), 3 s (`bg`, elsewhere in
+  the app). Measured in the headless tests: reply on screen ~10 ms after it is written. An empty answer
+  that came back in < 1 s is paced 2.5 s (a server/proxy that did not hold must not make it spin).
+  Nothing runs while the app is hidden (push covers it). Native `/api` goes through the CapacitorHttp
+  PLUGIN, which cannot abort: `schedule()` only restarts a held request when entering a chat, so they
+  never stack on the phone's HTTP bridge.
+- Typing: `action:"typing"` / `admin/support-typing` log a `typing` event (client sends at most every
+  3 s); the other side shows dots / "Doctor is typing…" for 6 s. Live updates repaint only the messages
+  (doctor: `data-thread` in-place path; admin: `bgPaintThread`), so the keyboard/cursor and draft stay.
+- KV lag can no longer hide or DROP a message: every read and write folds in the last 10 min of D1
+  (`recentMsgs` + `mergeMsgs` on the doctor list, admin thread, and before `addMessage` writes back;
+  `mergeIndex` on the admin list, incl. conversations KV's index has not seen yet via `new:<kind>` events).
+- Banner `#hsToast` on a new reply while elsewhere in the app. `admin/support-seen` clears the dot and
+  sends "Seen".
 - **The push bug**: native tokens are stored under `fb:<uid>` (push route `identify()`); the reply sent to
   the uid with `fb:` STRIPPED, matching no device. Fixed: `sendNativeToAll(..., { uid: t.owner })`, url `#help`.
 - **30-day expiry once solved**: `RESOLVED_TTL` (30 d) on the ticket when solved, and solved index rows

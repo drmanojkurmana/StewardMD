@@ -41,11 +41,12 @@
   function platform() { try { var c = window.Capacitor; return (c && (c.getPlatform ? c.getPlatform() : c.platform)) || "web"; } catch (e) { return "web"; } }
   function build() { try { return (window.SMD_OTA && SMD_OTA.versionLabel && SMD_OTA.versionLabel()) || ""; } catch (e) { return ""; } }
 
-  function api(method, path, body) {
+  function api(method, path, body, signal) {
     var u = user();
     if (!u || typeof u.getIdToken !== "function") return Promise.resolve({ ok: false, error: "sign-in-required", status: 401 });
     return u.getIdToken().then(function (tok) {
       var o = { method: method, headers: { "Authorization": "Bearer " + tok } };
+      if (signal) o.signal = signal;
       if (body) { o.headers["Content-Type"] = "application/json"; o.body = JSON.stringify(body); }
       return fetch("/api/support" + (path || ""), o);
     }).then(function (r) { return r.json().catch(function () { return { ok: false, error: "bad-response" }; }).then(function (j) { j.status = r.status; return j; }); });
@@ -292,6 +293,12 @@
       "#" + C + " .hs-who{font:800 11px var(--f);color:var(--acc);margin-bottom:2px}",
       "#" + C + " .hs-tx{white-space:pre-wrap;word-wrap:break-word}",
       "#" + C + " .hs-ts{font:600 10.5px var(--f);opacity:.7;text-align:right;margin-top:3px}",
+      "#" + C + " .hs-dots{display:flex;gap:4px;padding:4px 2px}",
+      "#" + C + " .hs-dots i{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.35;animation:hsDot 1.2s infinite}",
+      "#" + C + " .hs-dots i:nth-child(2){animation-delay:.2s}",
+      "#" + C + " .hs-dots i:nth-child(3){animation-delay:.4s}",
+      "@keyframes hsDot{0%,60%,100%{opacity:.35;transform:none}30%{opacity:.9;transform:translateY(-3px)}}",
+      "@media (prefers-reduced-motion:reduce){#" + C + " .hs-dots i{animation:none}}",
       "#" + C + " .hs-bug{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:12px}",
       "#" + C + " .hs-bug-h{display:flex;gap:8px;align-items:center;font:800 13.5px var(--f)}#" + C + " .hs-bug-h svg{width:18px;height:18px;color:var(--red)}",
       "#" + C + " .hs-bug-l{font:500 12.5px/1.45 var(--f);color:var(--mut);margin-top:6px}",
@@ -475,10 +482,14 @@
    * tabs, one single Help & support centre, world class, with real time chatting. I replied
    * immediately but it never reached the user". Conversations are the support tickets
    * (functions/_support.js, kinds bug | help | feedback). The chat is live: while it is open the
-   * app polls /api/support?live=1&after=<seq> (D1, strongly consistent) every few seconds, and more
-   * slowly in the background for the badge; a KV re-read is the fallback when live is unavailable. */
+   * app long-polls /api/support?live=1&after=<seq>&wait=20 (D1, strongly consistent): the server holds
+   * the request and answers the moment a reply, status change, "Seen" or "typing" lands, and the app
+   * asks again at once (owner: "as fast as WhatsApp"). The server checks every 350 ms while a chat is
+   * on screen, 1.2 s on the centre's list, 3 s elsewhere in the app; nothing runs while the app is in
+   * the background (push covers that). A KV re-read is the fallback when live is unavailable. */
   var _tickets = [], _unread = 0, _open = null, _compose = null, _seq = null, _live = true, _pollT = 0, _lastFull = 0;
-  var POLL_THREAD = 2500, POLL_LIST = 5000, POLL_BG = 30000, FULL_EVERY = 60000;
+  var _ctl = null, _ctlFast = "", _fails = 0, _typingSent = 0, _typingT = 0;
+  var WAIT_S = 20, RETRY_MS = 3000, FALLBACK_MS = 5000, FULL_EVERY = 60000, TYPING_EVERY = 3000, TYPING_SHOW = 6000;
   var KIND = { bug: { label: "Bug", icon: "bug" }, help: { label: "Question", icon: "chat" }, feedback: { label: "Feedback", icon: "spark" } };
   function unread() { return _unread; }
   function kindOf(t) { return (t && KIND[t.kind]) ? t.kind : "help"; }
@@ -491,7 +502,20 @@
       if (r && r.tickets) {
         // Keep live-only state (seen receipts) across a full re-read.
         var prev = {}; _tickets.forEach(function (t) { prev[t.id] = t; });
-        _tickets = r.tickets.map(function (t) { var p = prev[t.id]; if (p && p._seenAt && !t.supportSeenAt) t.supportSeenAt = p._seenAt; return t; });
+        _tickets = r.tickets.map(function (t) {
+          var p = prev[t.id]; if (!p) return t;
+          if (p._seenAt && !t.supportSeenAt) t.supportSeenAt = p._seenAt;
+          if (p._typingUntil) t._typingUntil = p._typingUntil;
+          // A message still sending, or one that reached this phone live, stays on screen even if this
+          // read came from an edge copy that has not caught up yet.
+          (p.messages || []).forEach(function (m) {
+            if (!m.pending && Date.now() - (m.ts || 0) > 600000) return;
+            var has = (t.messages || []).some(function (x) { return x.from === m.from && x.text === m.text && Math.abs((x.ts || 0) - (m.ts || 0)) < 5000; });
+            if (!has) (t.messages = t.messages || []).push(m);
+          });
+          (t.messages || []).sort(function (a, b) { return (a.ts || 0) - (b.ts || 0); });
+          return t;
+        });
         sortTickets(); countUnread(); _lastFull = Date.now();
       }
       return _tickets;
@@ -531,16 +555,17 @@
 
   /* ── live events ── */
   function applyEvents(evs) {
-    var fresh = [], need = false;
+    var fresh = [], need = false, typing = false;
     (evs || []).forEach(function (e) {
       var t = byId(e.ticket);
       if (!t) { need = true; return; }   // a conversation this device has not seen yet (other device)
       if (e.kind === "msg") {
         var dup = (t.messages || []).some(function (m) { return m.from === e.sender && m.text === e.text && Math.abs((m.ts || 0) - e.ts) < 5000; });
-        if (!dup) { (t.messages = t.messages || []).push({ from: e.sender, text: e.text, ts: e.ts }); t.updatedAt = e.ts; if (e.sender === "support") { t.userUnread = true; fresh.push(t); } }
+        if (!dup) { (t.messages = t.messages || []).push({ from: e.sender, text: e.text, ts: e.ts }); t.updatedAt = e.ts; if (e.sender === "support") { t.userUnread = true; t._typingUntil = 0; fresh.push(t); } }
       } else if (e.kind.indexOf("status:") === 0) { t.status = e.kind.slice(7); t.updatedAt = e.ts; if (t.status === "resolved") t.resolvedAt = e.ts; }
       else if (e.kind === "read" && e.sender === "support") { t.supportSeenAt = e.ts; t._seenAt = e.ts; }
-      else if (e.kind === "new" && e.sender === "user") need = true;
+      else if (e.kind.indexOf("new") === 0 && e.sender === "user") need = true;
+      else if (e.kind === "typing" && e.sender === "support" && Date.now() - e.ts < TYPING_SHOW) { t._typingUntil = Date.now() + TYPING_SHOW; typing = true; }
     });
     sortTickets();
     // A reply for the conversation that is open on screen is read the moment it lands.
@@ -550,27 +575,59 @@
     if (other.length) notifyReply(other[other.length - 1]);
     if (need) refresh().then(repaint);
     if (evs && evs.length) repaint();
+    if (typing) { clearTimeout(_typingT); _typingT = setTimeout(function () { if (_open && centreOpen()) paintThread(); }, TYPING_SHOW + 100); }
   }
+  // Server check rate for the held request: fast in a chat, normal in the centre, slow elsewhere in
+  // the app (the banner; a push covers the rest).
+  function mode() { return !centreOpen() ? "bg" : (_open || _compose) ? "fast" : ""; }
+  function stopPoll() { clearTimeout(_pollT); _pollT = 0; if (_ctl) { try { _ctl.abort(); } catch (e) {} _ctl = null; } }
   function poll() {
-    clearTimeout(_pollT); _pollT = 0;
-    if (!user()) { schedule(); return; }
-    var p;
-    if (!_live) p = (Date.now() - _lastFull > (centreOpen() ? POLL_LIST : POLL_BG) ? refresh().then(repaint) : Promise.resolve());
-    else if (_seq == null) p = api("GET", "?live=1").then(function (r) { if (r && r.ok) { _seq = +r.seq || 0; _live = r.live !== false; } });
-    else p = api("GET", "?live=1&after=" + _seq).then(function (r) {
-      if (!r || !r.ok) return;
-      if (r.live === false) { _live = false; return; }
-      _seq = Math.max(_seq, +r.seq || 0);
-      applyEvents(r.events);
+    stopPoll();
+    if (document.hidden) return;                         // resumes on visibilitychange; push covers the background
+    if (!user()) { _pollT = setTimeout(poll, RETRY_MS); return; }
+    if (!_live) {                                        // no D1: re-read the list now and then
+      var due = Date.now() - _lastFull > (centreOpen() ? FALLBACK_MS : 30000);
+      (due ? refresh().then(repaint) : Promise.resolve()).then(function () { _pollT = setTimeout(poll, FALLBACK_MS); });
+      return;
+    }
+    var ctl = typeof AbortController === "function" ? new AbortController() : null;
+    _ctl = ctl || { abort: function () {} }; _ctlFast = mode();
+    var mine = _ctl, t0 = Date.now(), head = _seq == null;
+    var q = _seq == null ? "?live=1" : "?live=1&after=" + _seq + "&wait=" + WAIT_S + (_ctlFast ? "&" + _ctlFast + "=1" : "");
+    api("GET", q, null, ctl && ctl.signal).then(function (r) {
+      if (_ctl !== mine) return;                         // superseded by a newer poll
+      _ctl = null;
+      if (!r || !r.ok) { _fails++; _pollT = setTimeout(poll, RETRY_MS); return; }
+      _fails = 0;
+      if (r.live === false) { _live = false; _pollT = setTimeout(poll, 0); return; }
+      if (_seq == null) _seq = +r.seq || 0;
+      else { _seq = Math.max(_seq, +r.seq || 0); applyEvents(r.events); }
+      // A full re-read now and then heals anything the live log missed (it is a fast path, not the record).
+      var heal = Date.now() - _lastFull > FULL_EVERY && centreOpen() ? refresh().then(repaint) : null;
+      if (heal) heal.then(null, function () {});
+      // Ask again at once: the server holds it open. An empty answer that came straight back means
+      // it did not hold (an older server, a proxy): pace those rather than spin.
+      var quick = !head && !(r.events && r.events.length) && Date.now() - t0 < 1000;
+      _pollT = setTimeout(poll, quick ? 2500 : 0);
+    }, function () {
+      if (_ctl !== mine) return;                         // aborted on purpose
+      _ctl = null; _fails++;
+      _pollT = setTimeout(poll, Math.min(15000, RETRY_MS * _fails));
     });
-    // A full re-read now and then heals anything the live log missed (it is a fast path, not the record).
-    p.then(function () { if (Date.now() - _lastFull > FULL_EVERY && centreOpen()) return refresh().then(repaint); }, function () {})
-      .then(schedule, schedule);
   }
+  // Keep one long-poll running. Going into a chat restarts it at the fast rate at once; other screen
+  // changes take effect on the next round. (Native /api calls cannot be cancelled, so restarting on
+  // every screen change would stack held requests on the phone's HTTP bridge.)
   function schedule() {
-    clearTimeout(_pollT);
-    if (document.hidden) { _pollT = 0; return; }   // resumes on visibilitychange
-    _pollT = setTimeout(poll, centreOpen() ? (_open || _compose ? POLL_THREAD : POLL_LIST) : POLL_BG);
+    if (document.hidden) { stopPoll(); return; }
+    if (_ctl && (_ctlFast === mode() || mode() !== "fast")) return;
+    if (_ctl || !_pollT) poll();
+  }
+  // "typing…" for the developer, at most once every few seconds while the doctor writes.
+  function sendTyping() {
+    if (!_open || Date.now() - _typingSent < TYPING_EVERY) return;
+    _typingSent = Date.now();
+    api("POST", "", { action: "typing", id: _open }).then(null, function () {});
   }
   function centreOpen() { var el = document.getElementById(C); return !!(el && el.classList.contains("on")); }
   // A reply while the doctor is elsewhere in the app: a tappable banner, the way a messenger does it.
@@ -591,6 +648,7 @@
   function shell(title, inner, opts) {
     opts = opts || {};
     var el = root(C);
+    el.removeAttribute("data-thread");
     el.innerHTML = '<div role="dialog" aria-modal="true" aria-label="Help and Support" style="display:contents"><div class="bc-head">' +
       (opts.back ? '<button type="button" class="bc-ic" id="bcBack" aria-label="Back">' + ICO.back + "</button>" : "") +
       '<div class="bc-ttl"><b>' + title + "</b>" + (opts.sub ? "<small>" + opts.sub + "</small>" : "") + "</div>" +
@@ -706,8 +764,24 @@
         (t.hasShot && t.status !== "resolved" ? '<img class="bc-shot" id="bcShot" alt="Your screenshot">' : "") + "</div>";
     }
     var solved = t.status === "resolved" ? '<div class="hs-solved">' + ICO.check + "<span>" + (t.kind === "bug" ? "Marked fixed." : "Marked solved.") + " Still happening? Reply and we reopen it.</span></div>" : "";
-    var el = shell(esc(k.label) + " · " + esc(t.id), bugBox + '<div class="hs-thread">' + html + "</div>" + solved,
-      { back: true, chat: true, sub: '<span class="bc-pill ' + s.cls + '">' + esc(s.txt) + "</span>", foot: composer(t.status === "resolved" ? "Reply to reopen" : "Message") });
+    if ((t._typingUntil || 0) > Date.now()) html += '<div class="hs-b them hs-typing" aria-live="polite"><div class="hs-who">StewardMD support</div><div class="hs-dots" aria-label="typing"><i></i><i></i><i></i></div></div>';
+    var inner = bugBox + '<div class="hs-thread">' + html + "</div>" + solved;
+    var sub = '<span class="bc-pill ' + s.cls + '">' + esc(s.txt) + "</span>", ph = t.status === "resolved" ? "Reply to reopen" : "Message";
+    // Live updates repaint only the messages: rebuilding the composer would drop the keyboard mid-sentence.
+    var cur = document.getElementById(C), tx0 = document.getElementById("bcTx");
+    if (!first && cur && cur.getAttribute("data-thread") === t.id && tx0 && body) {
+      var oldShot = document.getElementById("bcShot");
+      body.innerHTML = inner;
+      var sm = cur.querySelector(".bc-ttl small"); if (sm) sm.innerHTML = sub;
+      tx0.setAttribute("placeholder", ph);
+      var ns = document.getElementById("bcShot"); if (ns && oldShot && oldShot.src) ns.src = oldShot.src;
+      else if (ns) loadShot(ns, t.id);
+      if (keep.atEnd) body.scrollTop = body.scrollHeight;
+      return;
+    }
+    var el = shell(esc(k.label) + " · " + esc(t.id), inner, { back: true, chat: true, sub: sub, foot: composer(ph) });
+    el.setAttribute("data-thread", t.id);
+    var txT = el.querySelector("#bcTx"); if (txT) txT.addEventListener("input", function () { if (txT.value.trim()) sendTyping(); });
     wireComposer(el, function (v, tx, btn) {
       var pend = { from: "user", text: v, ts: Date.now(), pending: true };
       (t.messages = t.messages || []).push(pend); tx.value = ""; paintThread();
@@ -720,11 +794,12 @@
     var tx2 = document.getElementById("bcTx"); if (tx2 && keep.draft) { tx2.value = keep.draft; tx2.dispatchEvent(new Event("input")); }
     var b2 = document.getElementById("bcBody"); if (b2 && keep.atEnd) b2.scrollTop = b2.scrollHeight;
     var img = document.getElementById("bcShot");
-    if (img) {
-      var u = user(), id = t.id;
-      if (u && u.getIdToken) u.getIdToken().then(function (tok) { return fetch("/api/support?shot=" + encodeURIComponent(id), { headers: { "Authorization": "Bearer " + tok } }); })
-        .then(function (r) { return r.ok ? r.blob() : null; }).then(function (b) { if (b && img.isConnected) img.src = URL.createObjectURL(b); else if (img) img.remove(); }, function () { try { img.remove(); } catch (e) {} });
-    }
+    if (img) loadShot(img, t.id);
+  }
+  function loadShot(img, id) {
+    var u = user();
+    if (u && u.getIdToken) u.getIdToken().then(function (tok) { return fetch("/api/support?shot=" + encodeURIComponent(id), { headers: { "Authorization": "Bearer " + tok } }); })
+      .then(function (r) { return r.ok ? r.blob() : null; }).then(function (b) { if (b && img.isConnected) img.src = URL.createObjectURL(b); else if (img) img.remove(); }, function () { try { img.remove(); } catch (e) {} });
   }
   // opts: { ticket: id } opens that conversation; { compose: "help"|"feedback" } starts one.
   function openCentre(opts) {
@@ -735,7 +810,7 @@
       if (!centreOpen()) return;
       if (opts.ticket && byId(opts.ticket)) openThread(opts.ticket); else repaint();
     });
-    poll();
+    schedule();
   }
   function closeCentre() { var el = document.getElementById(C); if (el) { el.classList.remove("on"); el.innerHTML = ""; } _open = null; _compose = null; schedule(); }
 
@@ -743,7 +818,7 @@
   function boot() {
     bootShake();
     window.addEventListener("online", function () { flush(); poll(); });
-    document.addEventListener("visibilitychange", function () { if (!document.hidden) poll(); });
+    document.addEventListener("visibilitychange", function () { if (document.hidden) stopPoll(); else poll(); });
     // A push tap opens https://stewardmd.in/#help (older pushes: #bugs)
     var deep = function () { var h = location.hash; if (h === "#help" || h === "#bugs") openCentre(); };
     setTimeout(deep, 900);

@@ -1077,7 +1077,7 @@
   function forbid(x,msg){ return x.s===403?"Not an owner.":("Failed: "+(msg&&x.d&&x.d.error||x.s)); }
 
   // ---- Help & Support (one live inbox: bugs, questions, feedback; functions/_support.js + _support_live.js) ----
-  var bugFilter="open", DAY=86400000, bgOpenId=null, bgSeq=null, bgPollT=0, bgList=[];
+  var bugFilter="open", DAY=86400000, bgOpenId=null, bgSeq=null, bgPollT=0, bgList=[], bgCur=null, bgCtl=null, bgCtlFast=false, bgFails=0, bgTypUntil=0, bgTypSent=0, bgTypT=0;
   var KINDL={bug:"Bug",help:"Question",feedback:"Feedback"};
   function kindOf(t){ return KINDL[t&&t.kind]?t.kind:"help"; }
   function bugBadge(n){ var b=$("navBugs"); if(b){ b.textContent=n; b.classList.toggle("on",n>0); } }
@@ -1100,7 +1100,7 @@
     bugBadge(open.filter(function(t){return t.unread;}).length||open.length); }
   // Opening the inbox or a conversation switches the live poll to its fast rate at once
   // (it runs every 20 s while the inbox is not on screen).
-  function bgKick(){ if(typeof bgPoll!=="function") return; clearTimeout(bgPollT); bgPollT=setTimeout(bgPoll,1200); }
+  function bgKick(){ if(typeof bgPoll!=="function") return; if(bgCtl&&bgCtlFast===!!bgOpenId) return; bgPoll(); }
   function bugLoad(quiet){
     if(!quiet) say("bgMsg","","Loading…");
     bgOpenId=null; if(!quiet) bgKick();
@@ -1148,10 +1148,11 @@
       if(bgOpenId!==id) return;
       say("bgMsg","");
       var draft=keep&&$("bgTx")?$("bgTx").value:"";
+      var ae=document.activeElement, foc=keep&&ae&&ae.id==="bgTx", selA=foc?ae.selectionStart:0, selB=foc?ae.selectionEnd:0;
+      if(!bgCur||bgCur.id!==id) bgTypUntil=0;
+      bgCur=t;
       var b=t.bug||{}, e=b.element||{}, open=t.status!=="resolved", isBug=t.kind==="bug";
-      var thread=(t.messages||[]).filter(function(m){return m.text;}).map(function(m){ var mine=m.from==="support";
-        return '<div style="margin:6px 0;padding:9px 12px;border-radius:14px;max-width:80%;'+(mine?"margin-left:auto;background:var(--tl);color:#fff":"background:var(--bg);border:1px solid var(--line)")+'"><div style="font:800 10px var(--f);opacity:.75;margin-bottom:2px">'+(mine?"You (StewardMD)":"Doctor")+' · '+esc(new Date(m.ts).toLocaleString())+'</div><div style="white-space:pre-wrap;font:600 13.5px var(--f)">'+esc(m.text)+'</div></div>';
-      }).join("");
+      var thread=bgThreadHtml(t);
       var bugInfo=!isBug?'':
         '<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;margin-bottom:6px">'+
           (t.hasShot&&open?'<a id="bgShotA" target="_blank" rel="noopener"><img id="bgShot" alt="Screenshot" style="width:220px;border-radius:12px;border:1px solid var(--line)"></a>':'<div class="hint" style="width:220px">'+(t.hasShot?"Screenshot deleted when fixed.":"No screenshot sent.")+'</div>')+
@@ -1172,12 +1173,17 @@
           (isBug?'<button class="ghost" id="bgCopyBtn">Copy for GitHub</button>':'')+'</div><div class="msg" id="bgTMsg"></div>';
       var th=$("bgThread"); if(th) th.scrollTop=th.scrollHeight;
       if(draft) $("bgTx").value=draft;
+      if(foc){ try{ $("bgTx").focus(); $("bgTx").setSelectionRange(selA,selB); }catch(ex){} }
+      $("bgTx").addEventListener("input",function(){ if(!$("bgTx").value.trim()||Date.now()-bgTypSent<3000) return; bgTypSent=Date.now();
+        api(AI+"/support-typing",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:id})}).catch(function(){}); });
       $("bgBack").onclick=function(){ bugLoad(); };
       // Opening it is reading it: clears the dot and shows "Seen" on the doctor's phone.
       if(!keep) api(AI+"/support-seen",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:id})});
       var si=$("bgShot"); if(si){ tok().then(function(tk){ return fetch(AI+"/support-shot?id="+encodeURIComponent(id),{headers:{"Authorization":"Bearer "+tk}}); }).then(function(r){ return r.ok?r.blob():null; }).then(function(bl){ if(bl){ var u=URL.createObjectURL(bl); si.src=u; $("bgShotA").href=u; } else si.parentNode.outerHTML='<div class="hint" style="width:220px">Screenshot unavailable.</div>'; },function(){}); }
       function send(body,okMsg){ say("bgTMsg","","Sending…"); body.id=id;
-        api(AI+"/support-reply",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){ if(r.s===200&&r.d.ok){ $("bgTx").value=""; say("bgTMsg","ok",okMsg); bugOpen(id,true); } else say("bgTMsg","err","Failed: "+(r.d&&r.d.error||r.s)); }); }
+        api(AI+"/support-reply",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){ if(r.s===200&&r.d.ok){ $("bgTx").value=""; say("bgTMsg","ok",okMsg);
+          // A plain reply only adds a bubble: repaint the thread in place. A status change redraws the buttons too.
+          if(!body.status&&!body.resolve&&r.d.ticket&&bgOpenId===id){ bgCur=r.d.ticket; bgPaintThread(); } else bugOpen(id,true); } else say("bgTMsg","err","Failed: "+(r.d&&r.d.error||r.s)); }); }
       $("bgReplyBtn").onclick=function(){ var v=($("bgTx").value||"").trim(); if(!v){ say("bgTMsg","err","Write a reply first."); return; } send({text:v},"Sent. The doctor has been notified."); };
       $("bgTx").addEventListener("keydown",function(ev){ if(ev.key==="Enter"&&(ev.metaKey||ev.ctrlKey)){ ev.preventDefault(); $("bgReplyBtn").click(); } });
       var wb=$("bgWorkBtn"); if(wb) wb.onclick=function(){ var v=($("bgTx").value||"").trim(); send(v?{text:v,status:"in_progress"}:{status:"in_progress"},"Marked as working on it."); };
@@ -1188,20 +1194,52 @@
   }
   // Live: new doctor messages land within seconds (D1 event log, not KV's eventual consistency).
   function bgPane(){ var p=$("pane-bugs"); return !!(p&&p.classList.contains("on")); }
+  function bgThreadHtml(t){
+    var h=(t.messages||[]).filter(function(m){return m.text;}).map(function(m){ var mine=m.from==="support";
+      return '<div style="margin:6px 0;padding:9px 12px;border-radius:14px;max-width:80%;'+(mine?"margin-left:auto;background:var(--tl);color:#fff":"background:var(--bg);border:1px solid var(--line)")+'"><div style="font:800 10px var(--f);opacity:.75;margin-bottom:2px">'+(mine?"You (StewardMD)":"Doctor")+' · '+esc(new Date(m.ts).toLocaleString())+'</div><div style="white-space:pre-wrap;font:600 13.5px var(--f)">'+esc(m.text)+'</div></div>';
+    }).join("");
+    if(bgTypUntil>Date.now()) h+='<div id="bgTyping" class="hint" style="margin:6px 2px;font-style:italic">Doctor is typing…</div>';
+    return h;
+  }
+  function bgPaintThread(){
+    var th=$("bgThread"); if(!th||!bgCur) return;
+    var atEnd=th.scrollTop+th.clientHeight>=th.scrollHeight-40;
+    th.innerHTML=bgThreadHtml(bgCur); if(atEnd) th.scrollTop=th.scrollHeight;
+  }
+  // Live (owner: "as fast as WhatsApp"): a long-poll that the server answers the moment a doctor writes,
+  // re-asked at once. Messages for the open conversation are added in place, so a half-typed reply
+  // keeps its focus; the list is re-read (the server folds the last minutes of D1 into KV's index).
   function bgPoll(){
-    clearTimeout(bgPollT);
-    if(!(auth&&auth.currentUser)){ bgPollT=setTimeout(bgPoll,5000); return; }
-    var q=bgSeq==null?"":("?after="+bgSeq);
-    api(AI+"/support-live"+q).then(function(x){
-      if(x.s!==200||!x.d) return;
+    clearTimeout(bgPollT); bgPollT=0; if(bgCtl){ try{ bgCtl.abort(); }catch(e){} bgCtl=null; }
+    if(!(auth&&auth.currentUser)){ bgPollT=setTimeout(bgPoll,3000); return; }
+    var ctl=typeof AbortController==="function"?new AbortController():{abort:function(){}, signal:undefined}, me=ctl;
+    bgCtl=ctl; bgCtlFast=!!bgOpenId; var t0=Date.now();
+    var q=bgSeq==null?"":("?after="+bgSeq+"&wait=20"+(bgCtlFast?"&fast=1":""));
+    api(AI+"/support-live"+q,{signal:ctl.signal}).then(function(x){
+      if(bgCtl!==me) return; bgCtl=null;
+      if(x.s!==200||!x.d){ bgFails++; bgPollT=setTimeout(bgPoll,Math.min(15000,3000*bgFails)); return; }
+      bgFails=0;
       var lv=$("bgLive"); if(lv) lv.textContent=x.d.live===false?"":"● live";
       var evs=x.d.events||[]; var first=bgSeq==null; bgSeq=Math.max(bgSeq||0,+x.d.seq||0);
+      // Re-ask at once (the server held it); an empty answer that came straight back is paced, not spun.
+      bgPollT=setTimeout(bgPoll,x.d.live===false?5000:(!first&&!evs.length&&Date.now()-t0<1000?2500:0));
       if(first||!evs.length) return;
-      if(!bgPane()){ return api(AI+"/support").then(function(y){ if(y.s===200) bugStats((y.d&&y.d.tickets)||[]); }); }
-      var mine=bgOpenId&&evs.some(function(e){ return e.ticket===bgOpenId; });
-      if(bgOpenId){ if(mine) return bugOpen(bgOpenId,true); return api(AI+"/support").then(function(y){ if(y.s===200) bugStats((y.d&&y.d.tickets)||[]); }); }
+      var mineEvs=bgOpenId&&bgCur?evs.filter(function(e){ return e.ticket===bgOpenId; }):[];
+      var other=evs.some(function(e){ return !(bgOpenId&&e.ticket===bgOpenId)&&e.kind!=="typing"&&e.kind!=="read"; });
+      var redraw=false, repaint=false, gotMsg=false;
+      mineEvs.forEach(function(e){
+        if(e.kind==="msg"){ var ms=bgCur.messages=bgCur.messages||[];
+          if(!ms.some(function(m){ return m.from===e.sender&&m.text===e.text&&Math.abs((m.ts||0)-e.ts)<5000; })){ ms.push({from:e.sender,text:e.text,ts:e.ts}); repaint=true; if(e.sender==="user"){ gotMsg=true; bgTypUntil=0; } } }
+        else if(e.kind==="typing"&&e.sender==="user"&&Date.now()-e.ts<6000){ bgTypUntil=Date.now()+6000; repaint=true; clearTimeout(bgTypT); bgTypT=setTimeout(bgPaintThread,6100); }
+        else if(e.kind.indexOf("status:")===0&&e.sender==="user") redraw=true;
+      });
+      if(redraw) bugOpen(bgOpenId,true); else if(repaint) bgPaintThread();
+      // Reading it on screen is reading it: the doctor sees "Seen" and the dot stays clear.
+      if(gotMsg&&bgPane()&&!document.hidden) api(AI+"/support-seen",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:bgOpenId})}).catch(function(){});
+      if(!other) return;
+      if(!bgPane()||bgOpenId) return api(AI+"/support").then(function(y){ if(y.s===200) bugStats((y.d&&y.d.tickets)||[]); });
       return bugLoad(true);
-    }).catch(function(){}).then(function(){ bgPollT=setTimeout(bgPoll,bgPane()?(bgOpenId?2500:4000):20000); });
+    },function(){ if(bgCtl!==me) return; bgCtl=null; bgFails++; bgPollT=setTimeout(bgPoll,Math.min(15000,3000*bgFails)); });
   }
   bgPoll();
   $("bgFilters").addEventListener("click",function(e){var b=e.target.closest("[data-bf]");if(!b)return;bugFilter=b.getAttribute("data-bf");Array.prototype.forEach.call($("bgFilters").children,function(p){p.classList.toggle("on",p===b);});bugLoad();});

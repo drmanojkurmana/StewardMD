@@ -10338,6 +10338,11 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
   Functions have no socket server here, and a 2.5 s cursor poll against D1 is cheap and simple.
 - **Retention (owner)**: solved conversations expire 30 days after they were solved (KV TTL + index
   filter); open ones stay; reopening restores the open TTL. Screenshots already go on fix.
+- **Update (same day, owner: "still not as fast as WhatsApp")**: long-poll over D1 instead of 2.5 s
+  polling (a held request answers the moment an event lands), typing indicators, and D1 folded into
+  every KV read/write so edge lag can neither hide nor overwrite a message. Not websockets/Durable
+  Objects: that needs a separately deployed Worker; long-poll gets sub-second delivery on the existing
+  Pages Functions + D1 with one request per ~20 s idle.
 
 
 ## 2026-09-27 - SMS only as our approved DLT templates, and no patient name in any message
