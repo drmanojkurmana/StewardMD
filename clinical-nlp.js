@@ -297,14 +297,14 @@
       // and dropped everything in that clause
       if (v2 && r.temporality === "historical" && (PRESENT_HX_V2.test(cl) || PRESENT_BG_V2.test(cl)) && !/\b(?:known case of|past|previous|prior|resolved|status post)\b|(?:^|[^-])\bold\b/.test(cl)) r.temporality = "current";
       if (v2 && hasWord(cl, FAMILY_V2)) r.temporality = "family";   // a relative's condition is not the patient's
-      else if (v2 && e.method !== "vitals" && STOPPED_BEFORE_V2.test(norm.slice(Math.max(0, e.idx - 30), e.idx))) r.temporality = "historical";
+      else if (v2 && e.method !== "vitals" && STOPPED_BEFORE_V2.test(norm.slice(Math.max(0, e.idx - 30), e.idx))) r.temporality = "resolved";
       // round 8: "fever settled on day 3" reports a finding that has gone
-      else if (v2 && e.method !== "vitals" && RESOLVED_AFTER_V2.test(norm.slice(e.idx + (e.srcText || "").length, e.idx + (e.srcText || "").length + 40))) r.temporality = "historical";
+      else if (v2 && e.method !== "vitals" && RESOLVED_AFTER_V2.test(norm.slice(e.idx + (e.srcText || "").length, e.idx + (e.srcText || "").length + 40))) r.temporality = "resolved";
       return r;
     }
     // engine gets it only if present (or a possible finding to consider) AND either current or a background/chronic condition
     function engineOkFor(key, r) {
-      return (r.polarity === "present" || (r.polarity === "uncertain" && r.certainty === "possible" && key !== "meningitis")) && (r.temporality !== "historical" || BACKGROUND[key] || (v2 && BACKGROUND_V2[key])) && r.temporality !== "family" && r.polarity !== "absent";
+      return (r.polarity === "present" || (r.polarity === "uncertain" && r.certainty === "possible" && key !== "meningitis")) && (r.temporality !== "historical" || BACKGROUND[key] || (v2 && BACKGROUND_V2[key])) && r.temporality !== "family" && r.temporality !== "resolved" && r.polarity !== "absent";   // "resolved" (v2): gone or stopped, even a background drug
     }
     Object.keys(byKey).forEach(function (key) {
       var e = byKey[key], r = readCtx(key, e);

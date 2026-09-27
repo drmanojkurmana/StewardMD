@@ -204,6 +204,6 @@ test("resolved, stopped, tested or planned is not a current finding", () => {
   assert.ok(!present8("HIV non-reactive", true).includes("immunocompromised"));
   assert.ok(!present8("blood cultures if febrile", true).includes("fever"));
   assert.ok(present8("fever for 3 days", true).includes("fever"));
-  assert.ok(!present8("No history of ketone-prone diabetes. Serum ketones (bhb) 1.2", true).includes("ketonemia"),
+  assert.ok(!present8("No ketones on the clinic dipstick. Serum ketones (bhb) 1.2", true).includes("ketonemia"),
     "a later lab name with a value is left to the numeric parser");
 });
