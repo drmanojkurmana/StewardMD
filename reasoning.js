@@ -1425,7 +1425,8 @@
     // 16 -> 21 of 23. Not for a subacute or prolonged fever (TB, PUO, vasculitis: work-up, not empiric antibiotics).
     // It needs enough information (the smd_calib sufficiency rule, flag or not): fever alone is not an infection call.
     // And the v2 reader: "subacute" and "prolonged fever" come from its duration parsing, which the classic one lacks.
-    if (weak && febrile && rankV3() && !gib && !(f.subacuteOnset || f.prolongedFever || f.prolongedFeverUnexplained) && enoughInfo(d, f) &&
+    // (round 25: night sweats with weight loss, the B-symptom pair, is a chronic picture even without a stated duration)
+    if (weak && febrile && rankV3() && !gib && !(f.subacuteOnset || f.prolongedFever || f.prolongedFeverUnexplained || (f.weightLoss && f.nightSweats)) && enoughInfo(d, f) &&
         !!(window.SMD_NLP && SMD_NLP._v2 && SMD_NLP._v2({}))) {
       var rkg = function (x) { return x.rankScore != null ? x.rankScore : x.score; };
       var bI = d.inf.reduce(function (m, x) { return !m || rkg(x) > rkg(m) ? x : m; }, null);

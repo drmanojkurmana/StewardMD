@@ -329,3 +329,13 @@ test("a hot, swollen, painful knee is a swollen joint", () => {
   assert.ok(p("right knee is swollen").includes("jointSwelling"));
   assert.ok(!p("no swollen joints").includes("jointSwelling"));
 });
+
+// round 25: with thirst and no burning, "frequent urination" is polyuria (hyperglycaemia), not a bladder symptom
+test("frequent urination with thirst is polyuria; with burning it stays a urinary symptom", () => {
+  const c25 = { valid: { urinaryFrequency: 1, polyuriaPolydipsia: 1, dysuria: 1 }, labels: {}, numeric: {}, v2: true,
+    syn: { urinaryFrequency: ["frequent urination"], dysuria: ["burning"] } };
+  const p = (t) => NLP.extract(t, c25).present;
+  assert.deepEqual(p("3-day history of increasing thirst, frequent urination, and vomiting"), ["polyuriaPolydipsia"]);
+  assert.ok(p("burning and frequent urination").includes("urinaryFrequency"));
+  assert.ok(p("frequent urination at night").includes("urinaryFrequency"));
+});

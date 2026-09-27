@@ -438,6 +438,12 @@
         findings.push({ canonicalFindingId: key, displayLabel: label, polarity: "present", temporality: "current", certainty: "explicit", sourceText: "", confidence: 0.8,
           extractionMethod: "deterministic", requiresConfirmation: false, clinicalPriority: "routine" }); } };
       if (demo.age > 50) addDerived("ageOver50", "Age > 50");
+      // round 25: with thirst and no burning, "frequent urination" is polyuria (hyperglycaemia), not a bladder symptom
+      var fqi = present.indexOf("urinaryFrequency");
+      if (fqi >= 0 && valid.polyuriaPolydipsia && present.indexOf("dysuria") < 0 && /\b(?:thirst\w*|polydipsia|polyuria|drinking (?:a lot|large amounts))\b/.test(norm)) {
+        present.splice(fqi, 1); if (present.indexOf("polyuriaPolydipsia") < 0) present.push("polyuriaPolydipsia");
+        findings.forEach(function (fd) { if (fd.canonicalFindingId === "urinaryFrequency") { fd.canonicalFindingId = "polyuriaPolydipsia"; fd.displayLabel = labels.polyuriaPolydipsia || "Polyuria / polydipsia"; } });
+      }
       if (present.indexOf("fever") >= 0 && ["dysuria", "urinaryFrequency", "flankPain", "costovertebralTenderness"].some(function (k) { return present.indexOf(k) >= 0; })) addDerived("feverGU", "Fever with urinary symptoms");
     }
     if (/\b(male|gentleman|\d+\s*m\b|\bm\/\d)/.test(norm)) demo.sex = "male"; else if (/\b(female|lady|woman|\d+\s*f\b|\bf\/\d)/.test(norm)) demo.sex = "female";
