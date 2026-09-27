@@ -374,6 +374,9 @@
     "meropenem": "Meropenem",
     "cotrimoxazole": "Cotrimoxazole",
     "tigecycline": "Tigecycline"
+   },
+   "conflict": {
+    "doripenem": "Page 5 prints blood Klebsiella ICU (n=89) doripenem 0 beside meropenem 33 and imipenem 33, but doripenem and meropenem give near-identical results for Klebsiella, so the 0 contradicts the row."
    }
   },
   {
@@ -549,7 +552,8 @@
     "levofloxacin": "Levofloxacin",
     "cotrimoxazole": "Cotrimoxazole"
    },
-   "note": "Source inconsistencies, checked on the page image and kept as printed: no whole number of 16 isolates gives ceftriaxone 98%."
+   "note": "Source inconsistencies, checked on the page image and kept as printed: no whole number of 16 isolates gives ceftriaxone 98%.",
+   "unreliable": "Page 5 prints blood Salmonella IPD (n=16) ampicillin 80, ceftriaxone 98, co-trimoxazole 100 and levofloxacin 0, the same figures as 2020 and 2021 (and 98% is not possible for 16 isolates), so the row is carried over rather than measured."
   },
   {
    "spec": "blood",
@@ -648,7 +652,8 @@
     "meropenem": "Meropenem",
     "cotrimoxazole": "Cotrimoxazole"
    },
-   "note": "n printed as 8 (ICU); the blood organism table on page 3 gives 11 IPD and 9 ICU Enterobacter isolates (total 20, as here); kept as printed. Source inconsistencies, checked on the page image and kept as printed: no whole number of 8 isolates gives gentamicin 48%, cefoperazone-sulbactam 73%, piperacillin-tazobactam 47%, ciprofloxacin 35%, levofloxacin 54% or imipenem 73%."
+   "note": "n printed as 8 (ICU); the blood organism table on page 3 gives 11 IPD and 9 ICU Enterobacter isolates (total 20, as here); kept as printed. Source inconsistencies, checked on the page image and kept as printed: no whole number of 8 isolates gives gentamicin 48%, cefoperazone-sulbactam 73%, piperacillin-tazobactam 47%, ciprofloxacin 35%, levofloxacin 54% or imipenem 73%.",
+   "unreliable": "Page 5 prints blood Enterobacter ICU with n=8 but gentamicin 48, cefoperazone-sulbactam 73, piperacillin-tazobactam 47, ciprofloxacin 35, levofloxacin 54 and imipenem 73, which 8 isolates cannot give, so the printed n or the figures belong elsewhere and the co-trimoxazole 0 cannot be read either."
   },
   {
    "spec": "blood",
@@ -1224,7 +1229,10 @@
     "meropenem": "Meropenem",
     "cotrimoxazole": "Cotrimoxazole"
    },
-   "specimen_as_printed": "Pus & body fluids"
+   "specimen_as_printed": "Pus & body fluids",
+   "conflict": {
+    "cefepime": "Page 8 prints pus Klebsiella ICU (n=18) cefepime 0 beside ceftriaxone 11.1, but a ceftriaxone-susceptible Klebsiella is cefepime-susceptible, so the 0 contradicts the row."
+   }
   },
   {
    "spec": "pus",
@@ -1322,7 +1330,10 @@
     "cotrimoxazole": "Cotrimoxazole"
    },
    "specimen_as_printed": "Pus & body fluids",
-   "note": "The Proteus n per location (45 IPD, 14 OPD, 8 ICU) equals the pus organism table's combined Proteus spp./Morganella/Providencia row (page 6), so this row may include Morganella and Providencia isolates; the table's own group label reads Proteus spp. (n=64)."
+   "note": "The Proteus n per location (45 IPD, 14 OPD, 8 ICU) equals the pus organism table's combined Proteus spp./Morganella/Providencia row (page 6), so this row may include Morganella and Providencia isolates; the table's own group label reads Proteus spp. (n=64).",
+   "conflict": {
+    "cefoperazone_sulbactam": "Page 8 prints pus Proteus OPD (n=14) cefoperazone-sulbactam 0 beside ceftazidime 28.6, piperacillin-tazobactam 64.3 and meropenem 92.9, but isolates susceptible to ceftazidime are susceptible to cefoperazone-sulbactam, so the 0 contradicts the row."
+   }
   },
   {
    "spec": "pus",
@@ -1371,7 +1382,8 @@
     "cotrimoxazole": "Cotrimoxazole"
    },
    "specimen_as_printed": "Pus & body fluids",
-   "note": "The Proteus n per location (45 IPD, 14 OPD, 8 ICU) equals the pus organism table's combined Proteus spp./Morganella/Providencia row (page 6), so this row may include Morganella and Providencia isolates; the table's own group label reads Proteus spp. (n=64)."
+   "note": "The Proteus n per location (45 IPD, 14 OPD, 8 ICU) equals the pus organism table's combined Proteus spp./Morganella/Providencia row (page 6), so this row may include Morganella and Providencia isolates; the table's own group label reads Proteus spp. (n=64).",
+   "unreliable": "Page 8 prints pus Proteus ICU (n=8) cefepime 0 beside ceftriaxone and ceftazidime 12.5, amoxicillin-clavulanate 0 beside ampicillin-sulbactam 25, and levofloxacin 0 beside ciprofloxacin 37.5, so the row contradicts itself in three places."
   },
   {
    "spec": "pus",
@@ -1616,7 +1628,10 @@
     "cotrimoxazole": "Cotrimoxazole"
    },
    "specimen_as_printed": "Pus & body fluids",
-   "note": "Amikacin is printed as \"3.63.8\", which is not a single number (left out; see excluded)."
+   "note": "Amikacin is printed as \"3.63.8\", which is not a single number (left out; see excluded).",
+   "conflict": {
+    "levofloxacin": "Page 8 prints pus Acinetobacter ICU (n=80) levofloxacin 0 beside ciprofloxacin 11.3 (and amikacin printed as the garbled 3.63.8), but levofloxacin is at least as active as ciprofloxacin against Acinetobacter, so the 0 contradicts the row."
+   }
   },
   {
    "spec": "urine",
@@ -2058,7 +2073,8 @@
     "fosfomycin": "Fosfomycin",
     "cotrimoxazole": "Cotrimoxazole"
    },
-   "note": "Source inconsistencies, checked on the page image and kept as printed: cefotaxime 20% and ceftriaxone 60% should agree."
+   "note": "Source inconsistencies, checked on the page image and kept as printed: cefotaxime 20% and ceftriaxone 60% should agree.",
+   "unreliable": "Page 11 prints urine Proteus IPD (n=5) ceftazidime 0 and cefoperazone-sulbactam 0 beside ceftriaxone 60, cefotaxime 20 beside ceftriaxone 60, and ciprofloxacin 0 beside levofloxacin 80, so the row contradicts itself."
   },
   {
    "spec": "urine",
@@ -2108,7 +2124,8 @@
     "fosfomycin": "Fosfomycin",
     "cotrimoxazole": "Cotrimoxazole"
    },
-   "note": "Source inconsistencies, checked on the page image and kept as printed: cefotaxime 33.3% and ceftriaxone 83.3% should agree."
+   "note": "Source inconsistencies, checked on the page image and kept as printed: cefotaxime 33.3% and ceftriaxone 83.3% should agree.",
+   "unreliable": "Page 11 prints urine Proteus OPD (n=6) cefepime 0 and ceftazidime 0 beside ceftriaxone 83.3, and cefotaxime 33.3 against that same ceftriaxone 83.3, so the row contradicts itself."
   },
   {
    "spec": "urine",
@@ -2157,7 +2174,8 @@
     "meropenem": "Meropenem",
     "fosfomycin": "Fosfomycin",
     "cotrimoxazole": "Cotrimoxazole"
-   }
+   },
+   "unreliable": "Page 11 prints urine Proteus ICU (n=2) cefepime, piperacillin-tazobactam and cefoperazone-sulbactam 0 beside ceftriaxone 50, and levofloxacin 0 beside ciprofloxacin 50, so the row contradicts itself."
   },
   {
    "spec": "urine",
@@ -2268,7 +2286,8 @@
     "levofloxacin": "Levofloxacin",
     "imipenem": "Imipenem",
     "meropenem": "Meropenem"
-   }
+   },
+   "unreliable": "Page 11 prints urine Pseudomonas ICU (n=11) ceftazidime 0 beside cefepime 81.8, cefoperazone-sulbactam 63.6 and aztreonam 54.5, and tobramycin 0 beside gentamicin 36.4, so the row contradicts itself."
   },
   {
    "spec": "urine",

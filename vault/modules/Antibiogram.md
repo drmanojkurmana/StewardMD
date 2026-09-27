@@ -247,6 +247,13 @@ it matched, and says so when nothing did.
   - **Plain view** (reasoning, default on) keeps the resistance panel outside the folded guideline box.
   - **An indwelling catheter implies `complicatedUTIRisk`** (reasoning `ALIAS`), so a catheterised patient
     never leads with uncomplicated cystitis.
+  - **SKIMS 2020 to 2024 reliability pass**: every kept 0 (575 cells) read against its page. None was an
+    extraction error, and those tables print a dash for untested agents, so a printed 0 is a result. 68 rows
+    are marked `unreliable`: 2021's blood Gram-negative table repeats 2020 figures, 2023's blood tables are
+    2022's nudged by 1 to 4 points (median difference 1.0, against 8 to 11 for pus and urine), and 2024's
+    urine Gram-negative table is garbled (E. coli ceftriaxone 87 beside carbapenems at 23). 16 cells get a
+    `conflict` note (e.g. 2021 P. aeruginosa meropenem 0 beside imipenem 17.6) and one 0 is `untested`.
+    Those editions only feed trends: pools use SKIMS 2025.
   - **Tool names**: the build rejects a source text that names a tool or library (PyMuPDF, poppler and so on).
   - **Messages**: in the open overlay a message takes the header subtitle's place. The rotate hint is a
     strip at the foot of the overlay, not a floating pill over the table or a sheet.
