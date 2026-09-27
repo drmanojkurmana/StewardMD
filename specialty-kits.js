@@ -648,6 +648,9 @@
     finish(false);
   }
   function toast(m) { try { (G.toast || G.SMD_toast) && (G.toast || G.SMD_toast)(m); } catch (e) {} }
+  // The one legal line, word for word the same as kb-protocols.js DUTY_LINE (a test keeps them in step):
+  // the doctor owns what is used or recorded, not StewardMD. Shown small at the foot of every kit.
+  var DUTY_LINE = "The treating doctor is responsible for every instruction used or recorded; StewardMD accepts no liability.";
 
   /* ======================================= rendering ======================================= */
   function reviewNote(kit, host) {
@@ -1267,7 +1270,8 @@
     }).join("") + "</section>" : "";
     var src = '<section class="kit-card kit-src"><h3>' + ms("menu_book") + "Sources</h3><ol>" + (kit.sources || []).map(function (s) {
       return '<li><a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.title) + "</a><span>" + esc(s.org) + " · " + esc(s.year) + "</span></li>";
-    }).join("") + '</ol><p class="kit-muted">Decision support only. The kit adds text for you to check and edit; it never saves, signs or orders anything.</p></section>';
+    }).join("") + '</ol><p class="kit-muted">Decision support only. The kit adds text for you to check and edit; it never saves, signs or orders anything.</p>' +
+      '<p class="kit-duty">' + esc(DUTY_LINE) + "</p></section>";
     var share = shareHtml(kit, k, host);
     if (share) setTimeout(fillUnits, 0);
     return '<div class="kit" data-kit-root data-kit-key="' + esc(ctx.key) + '" data-kit-host="' + host.kind + '">' + head + reviewNote(kit, host) + blocked + docs + tools + secs + adv + osets + share + inv + protos + calcs + src + chips + "</div>";
@@ -1569,7 +1573,7 @@
   var API = {
     open: open, close: close, html: kitBody, loadKits: loadKits, loadGrowth: loadGrowth, kits: kitList, kit: kitById,
     mySpecialty: mySpecialty, setMySpecialty: setMySpecialty, myScribe: myScribe, myLabel: myLabel, kitForProfile: kitForProfile, state: ks, forget: forget, on: flagOn, notifiable: notifiable, groups: groupList,
-    KITS_V: KITS_V, GROWTH_V: GROWTH_V, TOOL_IDS: Object.keys(TOOLS), refresh: refresh, _kitSummary: kitSummary, _histHtml: histHtml, _unitHtml: unitHtml,
+    KITS_V: KITS_V, GROWTH_V: GROWTH_V, DUTY_LINE: DUTY_LINE, TOOL_IDS: Object.keys(TOOLS), refresh: refresh, _kitSummary: kitSummary, _histHtml: histHtml, _unitHtml: unitHtml,
     // pure, for tests
     _dating: dating, _acogThreshold: acogThreshold, _growth: growth, _lmsZ: lmsZ, _lmsZAdj: lmsZAdj, _pct: pct,
     _whoVision: whoVision, _logmar: logmar, _whoHearing: whoHearing, _tuningFork: tuningFork, _pasi: pasi, _pasiArea: pasiArea,
