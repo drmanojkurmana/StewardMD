@@ -10415,6 +10415,6 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
   (follows light, dark and the chosen theme), tinted heat scale with printed numbers, sentence-case copy,
   no gradients or glass blur inside the screen, and plain drug names (`no-druglink` on the overlay).
 - **Reversible**: `?abgpro=0` or localStorage `smd_abg_pro = "0"` restores the previous look and the four
-  tabs; git tag `abg-ui-pre-pro` is the pre-redesign main.
+  tabs; commit `3983aeac6` is the pre-redesign main.
 - **Not changed**: data, checks, pooling, exports and every figure's source sheet.
 

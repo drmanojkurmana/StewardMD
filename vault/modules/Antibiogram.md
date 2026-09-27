@@ -2,7 +2,7 @@
 tags: [module, stewardship, clinical-data]
 status: rebuilt 2026-09-26 (flag ON). Data read from published Indian antibiograms; every number traceable to its page.
 flag: smd_abg_v2 (antibiogram-flags.js, def:true, ?abg2=0 restores the previous resistance view on the same data)
-redesign: smd_abg_pro (def:true, 2026-09-27; ?abgpro=0 or localStorage smd_abg_pro=0 restores the previous look and the four tabs; recovery tag abg-ui-pre-pro)
+redesign: smd_abg_pro (def:true, 2026-09-27; ?abgpro=0 or localStorage smd_abg_pro=0 restores the previous look and the four tabs; pre-redesign main is 3983aeac6)
 kill-switch: smd_abg_data (def:true; ?abgdata=0 or localStorage smd_abg_data=0 makes the console, reasoning and antibiotic choice ignore the store and use the built-in ICMR 2024 national summary in app.js, as before the rebuild)
 ---
 # Antibiogram
