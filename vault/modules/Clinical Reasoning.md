@@ -100,6 +100,9 @@ rival excluded by v3 cannot keep antibiotics on (`rankV3Excluded`).
 - Test `test/run-rank-v3.mjs`; floors for `smd_rank_v3=1` and all three flags; CI runs both.
 - Known limits: fever alone now leads with vasculitis / SLE (still non-diagnostic, Phase 4 "not
   enough information"); no prevalence prior; cholangitis vs viral hepatitis needs new KB findings.
+- Round 2 (2026-09-27): `RANK_V3_R2` (per-diagnosis discriminators, order only, never read by the gate).
+  Tapped top-1 train 85%, dev 76%, test 78%. Probe for new rules: dump `SMD_REASON.assess` top-3 with
+  `rank` and `supporting` per TRAIN miss; confirm on dev; never inspect test cases.
 
 ## KB additions, "not enough information", prevalence prior (2026-09-27, all default OFF)
 

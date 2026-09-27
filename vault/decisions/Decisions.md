@@ -10340,3 +10340,12 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
 - **Open**: Care Plan / Post-Visit templates need a callback number ({#cbn#}); none is stored, and none is
   guessed (a worsening patient would call it). Needs `TWOFACTOR_SENDER=MAIK` in Pages secrets, and
   `stewardmd.in` on the DLT CTA whitelist, before any of it sends.
+## 2026-09-27 - Differential ordering v3, round 2 (discriminators between close neighbours)
+- **Decision**: `smd_rank_v3` gains `RANK_V3_R2`, textbook discriminators (afebrile colic, Anthonisen
+  purulence, ITP vs DIC/TTP/leukaemia, GBS vs myasthenia, stroke vs TIA, nephritic / pulmonary-renal /
+  lupus patterns, fever for febrile infections...). Order only; the antibiotic gate never reads them.
+- **Why**: tapped top-1 train 75 -> 85%, dev 70 -> 76%, test 72 -> 78%; OPD ordering 358 -> 386.
+  Tried and dropped: source-over-sepsis, a complicated-UTI bonus, mixed malaria over malaria (see
+  `kb/validation/AUDIT-2026-09-26.md`, Round 7).
+- **Owner accepted (2026-09-27)**: v3 on the classic extractor, chart-text top-3 208 -> 206 (two
+  classic-extractor misreads). `smd_rank_v3` stays OFF.
