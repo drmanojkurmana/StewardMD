@@ -64,7 +64,24 @@
    * when the network fails, so calling it from here would be mutual recursion. */
   var _vCache = { val: null, at: 0 };
   var VERIFY_FALSE_TTL = 60000;   // re-check a "no" at most once a minute, not on every gate render
-  function _rememberVerified(v) { _vCache = { val: v, at: Date.now() }; return v; }
+  /* VERIFIED ONCE, VERIFIED EVERYWHERE (owner, 2026-09-27: "after using a verified NMC register
+   * number it still asks at some point to verify my registration. once reg is verified it should
+   * be universal all over the app").
+   *
+   * A "yes" used to live only in memory, so every launch started from nothing, and every failure on
+   * the way to an answer - an expired token on a slow network, a fetch that timed out, the app
+   * opening offline - was scored as "no". evaluate() then ended in showForced(): the forced
+   * verification screen, shown to a doctor the server had already verified.
+   *
+   * So a yes from an AUTHORITATIVE source (the verified claim, or /api/verify-doctor saying
+   * "verified") is kept per account on this device, and is only ever withdrawn by an equally
+   * authoritative NO - the server answering with some other status. A network failure is not an
+   * answer and can never downgrade it. Server-side gates (Pro, billing) still read the token claim
+   * and are unaffected; this governs what the app ASKS the doctor. */
+  function _vKey(u) { var id = (u && u.uid) || ""; return id ? "smd_verified_ok:" + id : ""; }
+  function _persistedYes(u) { try { var k = _vKey(u); return !!(k && localStorage.getItem(k) === "1"); } catch (e) { return false; } }
+  function _persist(u, v) { try { var k = _vKey(u); if (!k) return; if (v) localStorage.setItem(k, "1"); else localStorage.removeItem(k); } catch (e) {} }
+  function _rememberVerified(v) { _vCache = { val: v, at: Date.now() }; if (v) _persist(fbUser(), true); return v; }
   function _claimOf(u, force) {
     return u.getIdTokenResult(!!force)
       .then(function (r) { return !!(r && r.claims && r.claims.verified === true); })
@@ -78,10 +95,11 @@
       return fetch("/api/verify-doctor", { headers: { "Authorization": "Bearer " + tok } })
         .then(function (r) { return r.ok ? r.json() : null; })
         .then(function (d) {
-          if (!d || d.status !== "verified") return false;
+          if (!d) return null;                                   // no answer, not a no
+          if (d.status !== "verified") { _persist(u, false); return false; }   // an authoritative no
           return typeof d.canPrescribe === "boolean" ? d.canPrescribe : true;
         });
-    }).catch(function () { return false; });
+    }).catch(function () { return null; });                     // network: no answer at all
   }
 
   /* TRAINEES (audit 2026-09-26, finding 3). An owner-approved medical student or intern holds the
@@ -119,6 +137,15 @@
     if (allowlisted()) return Promise.resolve(true);
     var u = fbUser(); if (!u) return Promise.resolve(false);
     if (!force && _vCache.val === true) return Promise.resolve(true);
+    // Verified on this device before: say so now, with no network. Re-checked in evaluate(), where
+    // only an authoritative server answer can withdraw it.
+    if (!force && _persistedYes(u)) {
+      _vCache = { val: true, at: Date.now() };
+      // Once per session, confirm with the server in the background. Only its explicit "no" (a
+      // revoked or rejected registration) withdraws this; silence or an error changes nothing.
+      if (!isVerifiedClaim._rechecked) { isVerifiedClaim._rechecked = true; try { _serverSaysVerified(u).then(function (sv) { if (sv === false) _vCache = { val: false, at: Date.now() }; }); } catch (e) {} }
+      return Promise.resolve(true);
+    }
     if (!force && _vCache.val === false && (Date.now() - _vCache.at) < VERIFY_FALSE_TTL) return Promise.resolve(false);
     return _claimOf(u, !!force).then(function (ok) {
       if (ok) return _rememberVerified(true);
@@ -128,6 +155,7 @@
         // A fresh token that says "reviewed trainee" is a settled NO: no server round trip needed.
         if (c.traineeVerified === true) { _tCache = { val: true, at: Date.now(), role: _tCache.role }; return _rememberVerified(false); }
         return _serverSaysVerified(u).then(function (sv) {       // the server is authoritative
+          if (sv === null) return _persistedYes(u);              // could not ask: keep what we knew
           if (!sv) return _rememberVerified(false);
           // Approved, but the claim has not propagated. Refresh so everything else agrees, and let
           // them in either way - the server already said yes.
@@ -135,7 +163,7 @@
                                         function () { return _rememberVerified(true); });
         });
       });
-    }).catch(function () { return false; });
+    }).catch(function () { return _persistedYes(u); });
   }
   // Full status (incl. pending) from the server; falls back to the claim.
   function fetchStatus() {
@@ -147,7 +175,8 @@
         .then(function (r) { return r.json(); })
         .then(function (d) { return d && d.status ? d : { status: "unverified" }; });
     }).catch(function () {
-      return isVerifiedClaim().then(function (ok) { return { status: ok ? "verified" : "unverified" }; });
+      // Not the server's answer: marked, so evaluate() never forces the gate on the strength of it.
+      return isVerifiedClaim().then(function (ok) { return { status: ok ? "verified" : "unverified", _offline: true }; });
     });
   }
   /* account.js caches the last /api/billing/status verdict, and every Pro gate - the Subscription
@@ -166,7 +195,9 @@
   // isVerified = registered doctor, may prescribe. isTrainee = approved student/intern (never
   // prescribes). isReviewed = either. prescription.js reads isVerified + isTrainee.
   window.SMD_VERIFY = { isVerified: isVerifiedClaim, isTrainee: isTrainee, isReviewed: isReviewed, traineeRole: traineeRole,
-    openPanel: openPanel, VERIFY_ALLOWLIST: VERIFY_ALLOWLIST };
+    openPanel: openPanel, VERIFY_ALLOWLIST: VERIFY_ALLOWLIST,
+    // Test seam: run the startup gate on demand (test/run-verify-universal-ui.mjs).
+    _evaluate: function () { return evaluate(); } };
 
   // ---- Overlay refs ----
   function $(id) { return document.getElementById(id); }
@@ -547,6 +578,9 @@
       if (ok) { if (g && g.dataset.mode !== "panel") hideGate(); return; }   // fully verified
       // Cached claim says not-verified — but the server is authoritative. Consult it.
       fetchStatus().then(function (d) {
+        // We could not reach the server. Nothing here is a verdict, so nothing is forced: a doctor
+        // opening the app on a poor network is not told to verify again.
+        if (d && d._offline && d.status !== "verified") { if (gate() && gate().dataset.mode !== "panel") hideGate(); return; }
         if (d && d.status === "trainee_verified") { admitTrainee(d); return; }   // reviewed student/intern
         // Owner just approved us (email/admin)? The cached ID token doesn't carry the fresh
         // verified:true claim yet — force a token refresh so the claim catches up, then let
@@ -583,12 +617,19 @@
         } else {
           showForced();
         }
-      }).catch(function () { showForced(); });
+      }).catch(function () {
+        // A failure to ASK is not an answer. Only force the screen for an account never verified here.
+        if (_persistedYes(fbUser())) { if (gate() && gate().dataset.mode !== "panel") hideGate(); return; }
+        showForced();
+      });
     });
   }
 
   // ---- Inject "Account & Verification" into the sidebar (mirrors home.js SB.open wrap) ----
   function injectMenu() {
+    /* With the Profile hub on, verification lives INSIDE Profile (the identity card at the top of
+     * this same drawer opens it), so a second "Account & Verification" door is not added. */
+    try { if (localStorage.getItem("smd_profile_hub") !== "0") return; } catch (e) { return; }
     var menu = $("sbMenu"); if (!menu || menu.querySelector("[data-smd-verify]")) return;
     var b = document.createElement("button");
     b.className = "sb-main sb-main-link"; b.setAttribute("data-smd-verify", "1");

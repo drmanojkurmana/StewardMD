@@ -1241,8 +1241,14 @@
   function gateV2Apply(g, d, f) {
     // (b) can't-miss rules. SBP: cirrhosis + ascites with fever -> infection likely; with only
     // abdominal pain or encephalopathy -> rule it out (diagnostic paracentesis) before deciding.
-    var sbpSign = f.fever || f.rigors || f.asciticPMNHigh, sbpSoft = f.abdominalPain || f.abdominalDiscomfort || f.severeAbdominalPain || f.alteredSensorium || f.asterixis;
-    if (f.liverDisease && f.ascites && (sbpSign || sbpSoft) &&
+    // fever, rigors, ascitic neutrophils >= 250 or abdominal pain / tenderness = suspected SBP: tap and
+    // treat. Encephalopathy alone (no fever, no pain) = tap first; the neutrophil count decides.
+    var sbpSign = f.fever || f.rigors || f.asciticPMNHigh || f.abdominalPain || f.abdominalDiscomfort || f.severeAbdominalPain,
+        sbpSoft = f.alteredSensorium || f.asterixis;
+    var gib = f.hematemesis || f.melena || f.gibPresentation;
+    // a GI bleed in cirrhosis needs antibiotic prophylaxis (Baveno VII) whatever the tap shows, so
+    // "rule out SBP, tap first" must not replace it: only fever-grade SBP signs take this branch then
+    if (f.liverDisease && f.ascites && (sbpSign || (sbpSoft && !gib)) &&
         (g.cls === "possible" || g.cls === "unlikely" || g.cls === "noninfective" || g.cls === "none")) {
       g.cls = sbpSign ? "likely" : "rule_out_sbp"; g.rule = "sbp";
       // the stewardship card must be SBP's, never another infection's regimen under an SBP banner
@@ -1260,6 +1266,20 @@
     if (f.liverDisease && (f.hematemesis || f.melena || f.gibPresentation) && g.cls !== "very_likely" && g.cls !== "likely") {
       g.cls = "abx_prophylaxis"; g.rule = "cirrhosis_gib";
       return;
+    }
+    // a non-infective diagnosis leads the differential and there is no fever, no shock physiology and
+    // no host modifier: the classic MAX-score thresholds still read "infection likely" whenever an
+    // infection matched and scored close (renal colic vs pyelonephritis, lung cancer vs TB, an IBD
+    // flare vs dysentery). Only the order-aware reading can see that the non-infective cause leads.
+    if ((g.cls === "very_likely" || g.cls === "likely") && !(f.fever || f.rigors || f.feverGU || f.highFeverGI) &&
+        !GATE_V2_KEEP.some(function (k) { return f[k]; }) && !f.organDysfunction) {
+      var rk2 = function (x) { return x.rankScore != null ? x.rankScore : x.score; };
+      var bestI = d.inf.reduce(function (m, x) { return !m || rk2(x) > rk2(m) ? x : m; }, null);
+      var bestN = d.ni.reduce(function (m, x) { return !m || rk2(x) > rk2(m) ? x : m; }, null);
+      if (bestN && bestI && rk2(bestN) > rk2(bestI) && bestN.score >= bestI.score) {
+        g.cls = "noninfective"; g.rule = "ni_lead_afebrile"; g.why = bestN.name;
+        return;
+      }
     }
     // (a) the lead infection's own antibiotic need
     if (g.cls !== "very_likely" && g.cls !== "likely") return;
@@ -1376,7 +1396,9 @@
     infection_conditional: { t: "Infection likely, antibiotics only if criteria met", c: "g-amber", ab: true },
     infection_specific:    { t: "Infection likely, specific therapy (not antibiotics)", c: "g-orange", ab: false },
     abx_prophylaxis:       { t: "Antibiotic prophylaxis indicated", c: "g-orange", ab: true },
-    rule_out_sbp:          { t: "Rule out spontaneous bacterial peritonitis", c: "g-amber", ab: true },
+    // the tap decides (EASL 2018 / AASLD 2021), as the message says; fever, rigors or ascitic
+    // neutrophils >= 250 already make it "likely" with antibiotics
+    rule_out_sbp:          { t: "Rule out spontaneous bacterial peritonitis", c: "g-amber", ab: false },
     // smd_calib only
     insufficient:          { t: "Not enough information yet", c: "g-slate", ab: false }
   };
@@ -1386,6 +1408,7 @@
     return (g.rule || g.why) ? m.replace(/\s*\u2014\s*/g, ": ") : m;
   }
   function gateMsgRaw(g) {
+    if (g.rule === "ni_lead_afebrile") return "No fever, shock signs or immune compromise, and a non-infectious diagnosis leads (" + g.why + "): antibiotics are not recommended on these findings. Reconsider if fever, rigors or a source of infection appears.";
     var lead = g.lead && g.lead.name;
     // smd_gate_v2: why antibiotics stay on although the lead infection alone would not need them
     var own = g.need === "SPECIFIC" ? " (its treatment is specific, not antibacterial)" : "";
@@ -1402,7 +1425,7 @@
       case "infection_specific": return (lead ? lead + " leads. " : "") + (g.why ? g.why + " " : "") +
         "Antibiotics only for a proven or strongly suspected bacterial co-infection.";
       case "insufficient": return "These findings do not point to a diagnosis yet, so no infection or antibiotic call is made. The list below is only what they are compatible with. Add examination findings, vitals or key labs; the most useful next ones are suggested.";
-      case "rule_out_sbp": return "Can't-miss: spontaneous bacterial peritonitis. Cirrhosis with ascites and abdominal pain or encephalopathy: do a diagnostic paracentesis now. Treat if ascitic neutrophils are 250/mm3 or more, or at once if fever, sepsis or shock develops.";
+      case "rule_out_sbp": return "Can't-miss: spontaneous bacterial peritonitis. Cirrhosis with ascites and encephalopathy, without fever or abdominal pain: do a diagnostic paracentesis now. Treat if ascitic neutrophils are 250/mm3 or more, or at once if fever, abdominal pain, sepsis or shock develops.";
       case "abx_prophylaxis": return "Cirrhosis with gastrointestinal bleeding: short-course antibiotic prophylaxis is indicated (for example ceftriaxone 1 g daily for up to 7 days; Baveno VII). It lowers infection, rebleeding and mortality; it is not treatment of a diagnosed infection.";
       case "possible": return "Infection is in the differential but not dominant — pursue targeted investigations before antibiotics.";
       case "unlikely": return "Infection is low on the differential — antibiotics are not recommended yet. Investigate the alternatives.";
@@ -4687,6 +4710,7 @@
     _nextQuestions: nextQuestions,
     _differentiate: differentiate, _dxAsk: dxAskOn, _openAsk: openAsk, // smd_dx_ask
     _simple: simpleOn, // smd_dx_simple
+    _ftSynV2: function () { return FT_SYN_V2; }, // read-only: the v2 phrase table (extraction audits)
     // PURE: free text -> present engine finding keys, using the engine's OWN synonym set (FT_SYN) so
     // callers (e.g. OPD Ask MaiK) get the same rich extraction the reasoning workspace does. No S.f mutation.
     // PURE: free text -> { present, absent } engine keys (absent = explicitly denied in the note)

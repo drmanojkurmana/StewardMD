@@ -141,6 +141,29 @@ export async function recordVerifiedRole(env, uid, verifyRole, deps) {
   }
 }
 
+/* THE FREE WEEK NEEDS A VERIFIED PROFILE (owner, 2026-09-27): "Only verified profiles get pro
+ * subscription for 7 days ... verification is mandatory, phone number or NMC or state MC id
+ * verification, to get eligible for the 7 days free Pro trial."
+ *
+ * Before this, an UNVERIFIED account held the week too: tapping "Not now" on the verify screen
+ * stamped provUntil (the skip trial), and so did uploading a certificate still awaiting review.
+ * Now the week needs one of: a verified registration (verified / traineeVerified) or a verified
+ * mobile number (phoneVerified, set only after the WhatsApp/SMS code matches). provUntil alone no
+ * longer unlocks Pro. It runs ONCE, from whichever verification came first, so verifying the
+ * other one later does not start a second week.
+ *
+ * `verified` keeps meaning "registered doctor" - the prescribing surfaces read it - so a phone-only
+ * account is `phoneVerified`, never `verified`. TRIAL_NEEDS_VERIFY "0" restores provisional access. */
+export function trialNeedsVerify(env) {
+  const v = String(cfgFlag(env, "TRIAL_NEEDS_VERIFY") == null ? "" : cfgFlag(env, "TRIAL_NEEDS_VERIFY")).trim().toLowerCase();
+  return !(v === "0" || v === "false" || v === "off");
+}
+// When the free week starts: the first verification this account completed.
+function weekStart(claims) {
+  const a = claims && claims.verifiedAt ? +claims.verifiedAt : 0;
+  const b = claims && claims.phoneVerifiedAt ? +claims.phoneVerifiedAt : 0;
+  return a && b ? Math.min(a, b) : (a || b);
+}
 function trialOnceOn(env) { const v = String(cfgFlag(env, "TRIAL_ONCE_ON") == null ? "" : cfgFlag(env, "TRIAL_ONCE_ON")).trim().toLowerCase(); return v === "1" || v === "true" || v === "on"; }
 export function accessState(env, claims, now) {
   now = now || Date.now();
@@ -151,7 +174,7 @@ export function accessState(env, claims, now) {
   // Honoured only while TRIAL_ONCE_ON is "1", so switching the flag off restores every denied week.
   const denied = !!(claims && claims.trialDenied) && trialOnceOn(env);
   if (claims && claims.verified === true) {
-    const at = claims.verifiedAt ? +claims.verifiedAt : 0;
+    const at = trialNeedsVerify(env) ? weekStart(claims) : (claims.verifiedAt ? +claims.verifiedAt : 0);
     // No verifiedAt = verified before this feature existed. entitlementFor() backfills it rather
     // than reading 0 here, so a doctor already verified never blinks out of Pro on deploy day.
     const endsAt = at ? at + verifiedProDays(env) * DAY_MS : 0;
@@ -163,7 +186,7 @@ export function accessState(env, claims, now) {
   // A reviewed student/intern: the same access and free week as a verified doctor, but `verified`
   // stays false, because that field is read as "registered doctor" by the prescribing surfaces.
   if (claims && claims.traineeVerified === true) {
-    const at = claims.verifiedAt ? +claims.verifiedAt : 0;
+    const at = trialNeedsVerify(env) ? weekStart(claims) : (claims.verifiedAt ? +claims.verifiedAt : 0);
     const endsAt = at ? at + verifiedProDays(env) * DAY_MS : 0;
     if (denied && !owner) return { allowed: true, verified: false, trainee: true, reviewed: true, pending: false, verifiedAt: at || null, owner, trialDenied: true,
              freeProEndsAt: null, freeProActive: false };
@@ -173,6 +196,19 @@ export function accessState(env, claims, now) {
   if (owner) {
     return { allowed: true, verified: false, pending: !!(prov && now < prov), provUntil: prov || null, owner: true,
              freeProEndsAt: null, freeProActive: true };
+  }
+  if (trialNeedsVerify(env)) {
+    if (claims && claims.phoneVerified === true) {
+      const at = weekStart(claims);
+      const endsAt = at ? at + verifiedProDays(env) * DAY_MS : 0;
+      if (denied) return { allowed: true, verified: false, phoneVerified: true, reviewed: false, pending: !!(prov && now < prov), provUntil: prov || null, verifiedAt: at || null, owner, trialDenied: true,
+               freeProEndsAt: null, freeProActive: false };
+      return { allowed: true, verified: false, phoneVerified: true, reviewed: false, pending: !!(prov && now < prov), provUntil: prov || null, verifiedAt: at || null, owner,
+               freeProEndsAt: endsAt || null, freeProActive: !!(endsAt && now < endsAt) };
+    }
+    // Pending review or a skipped verification, with nothing verified: no free week.
+    return { allowed: false, verified: false, pending: !!prov, provUntil: prov || null, needsVerification: true,
+             freeProEndsAt: null, freeProActive: false };
   }
   if (prov && now < prov && !denied) {
     return { allowed: true, verified: false, pending: true, provUntil: prov,
@@ -207,7 +243,7 @@ export function entitlementState(env, claims, now) {
   if (verifyRequired(env)) {
     const a = accessState(env, claims, now);
     const paid = !!(claims && claims.pro === true && (!claims.proExp || +claims.proExp > now));
-    const base = { promo: false, trial: false, verified: a.verified, pendingReview: !!a.pending,
+    const base = { promo: false, trial: false, verified: a.verified, phoneVerified: !!(a.phoneVerified || (claims && claims.phoneVerified === true)), pendingReview: !!a.pending,
                    traineeVerified: !!a.trainee, reviewed: !!a.reviewed,
                    verifyRequired: true, freeProEndsAt: a.freeProEndsAt || null };
     // Say WHY, not just no. The paywall/verify UI branches on `reason` so an unverified clinician
@@ -217,7 +253,7 @@ export function entitlementState(env, claims, now) {
     if (a.owner) return { ...base, pro: true, source: "owner", until: null, owner: true };
     if (a.freeProActive) {
       return { ...base, pro: true, until: a.freeProEndsAt,
-               source: a.pending ? "pending-review" : "verified-free-week", trial: true,
+               source: a.verified || a.trainee ? "verified-free-week" : a.phoneVerified ? "phone-verified-week" : a.pending ? "pending-review" : "verified-free-week", trial: true,
                daysLeft: Math.max(0, Math.ceil((a.freeProEndsAt - now) / DAY_MS)) };
     }
     return { ...base, pro: false, source: "none", until: null, reason: a.trialDenied ? "trial-used" : "verified-week-expired" };
@@ -245,6 +281,14 @@ export async function entitlementFor(env, uid, email) {
   // Start the per-user trial clock on first status check (no pro, no trial yet). One write per new
   // account; done here (not on the hot proFromRequest gate) so gates stay read-only.
   try { if (!claims.pro && !claims.trialStart) { const ts = Date.now(); await mergeUserClaims(env, uid, { trialStart: ts }); claims.trialStart = ts; } } catch (e) {}
+  // A number verified before phoneVerifiedAt existed: its week runs from now, once, rather than from 0.
+  try {
+    if (verifyRequired(env) && trialNeedsVerify(env) && claims.phoneVerified === true && !claims.phoneVerifiedAt) {
+      const pa = Date.now();
+      await mergeUserClaims(env, uid, { phoneVerifiedAt: pa });
+      claims.phoneVerifiedAt = pa;
+    }
+  } catch (e) {}
   // Backfill verifiedAt for doctors verified BEFORE the free week existed. Without it their window
   // computes from 0 and they drop to the free tier the instant this deploys - a support wave made
   // of exactly the people who did the right thing. One write, once, each.

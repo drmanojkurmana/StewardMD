@@ -12,6 +12,10 @@ import { spawn } from "node:child_process";
 import { setTimeout as sleep } from "node:timers/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+// data -> a JS literal safe to splice into code evaluated in the page (CodeQL js/bad-code-sanitization):
+// JSON.stringify leaves <, >, U+2028 and U+2029 raw, so escape them (the pattern CodeQL documents)
+const LIT_ESC = { "<": "\\u003C", ">": "\\u003E", "\b": "\\b", "\f": "\\f", "\n": "\\n", "\r": "\\r", "\t": "\\t", "\0": "\\0", "\u2028": "\\u2028", "\u2029": "\\u2029" };
+const lit = (v) => JSON.stringify(v).replace(/[<>\b\f\n\r\t\0\u2028\u2029]/g, (c) => LIT_ESC[c]);
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const BASE = (process.env.BASE || "http://localhost:8804/").replace(/\/?$/, "/");
@@ -41,7 +45,7 @@ async function load(url) {
   return false;
 }
 // every candidate's rank + confidence, the gate, and the leader, for a finding set
-const q = async (keys) => JSON.parse(await ev(`var f={}; ${JSON.stringify(keys)}.forEach(function(k){f[k]=true;}); var a=SMD_REASON.assess(f);
+const q = async (keys) => JSON.parse(await ev(`var f={}; ${lit(keys)}.forEach(function(k){f[k]=true;}); var a=SMD_REASON.assess(f);
   var all=[].concat(a.infectious,a.nonInfectious), m={};
   all.forEach(function(x){ m[x.id]={r:x.rank, c:x.confidence}; });
   all.sort(function(x,y){return (y.rank-x.rank)||(y.confidence-x.confidence)||x.name.localeCompare(y.name);});

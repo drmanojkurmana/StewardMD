@@ -14,6 +14,10 @@ import { spawn } from "node:child_process";
 import { setTimeout as sleep } from "node:timers/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+// data -> a JS literal safe to splice into code evaluated in the page (CodeQL js/bad-code-sanitization):
+// JSON.stringify leaves <, >, U+2028 and U+2029 raw, so escape them (the pattern CodeQL documents)
+const LIT_ESC = { "<": "\\u003C", ">": "\\u003E", "\b": "\\b", "\f": "\\f", "\n": "\\n", "\r": "\\r", "\t": "\\t", "\0": "\\0", "\u2028": "\\u2028", "\u2029": "\\u2029" };
+const lit = (v) => JSON.stringify(v).replace(/[<>\b\f\n\r\t\0\u2028\u2029]/g, (c) => LIT_ESC[c]);
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const BASE = (process.env.BASE || "http://localhost:8804/").replace(/\/?$/, "/");
@@ -43,9 +47,9 @@ async function load(url) {
   return false;
 }
 const HEP = ["fever", "jaundice", "nauseaVomiting"];
-const diff = async (t, f) => JSON.parse(await ev(`var f={}; ${JSON.stringify(f)}.forEach(function(k){f[k]=true;}); return JSON.stringify(SMD_REASON.differentiate(${JSON.stringify(t)}, f));`));
+const diff = async (t, f) => JSON.parse(await ev(`var f={}; ${lit(f)}.forEach(function(k){f[k]=true;}); return JSON.stringify(SMD_REASON.differentiate(${lit(t)}, f));`));
 // open the workspace on a finding set, expand a card and press its Select button
-const selectIn = async (f, id) => ev(`try{DX.openWorkspace();}catch(e){} DX.reset(); DX.addFindings(${JSON.stringify(f)});
+const selectIn = async (f, id) => ev(`try{DX.openWorkspace();}catch(e){} DX.reset(); DX.addFindings(${lit(f)});
   var h=document.querySelector('.dx-row-head[data-id="${id}"]'); if(!h) return 'no card'; h.click();
   var b=document.querySelector('.dx-card .dx-select[data-sel="${id}"]'); if(!b) return 'no select'; b.click(); return 'ok';`);
 const panel = async () => JSON.parse(await ev(`var c=document.querySelector('#dxAskCard'), blk=document.querySelector('.dx-card.open .dx-ask'), ov=document.querySelector('#dxOverlay');
@@ -122,7 +126,7 @@ try {
   ok(!p.on && !p.ws, "inline · Continue opens the chosen diagnosis page");
   ok((await selectIn(["fever", "cough", "crepitations"], "CAP")) === "ok" && !(await panel()).on, "inline · no close rival (CAP with crackles): straight through");
   // detail rows: the section label is a block heading; bold names inside the text stay inline
-  const why = JSON.parse(await ev(`DX.reset(); DX.addFindings(${JSON.stringify(HEP)});
+  const why = JSON.parse(await ev(`DX.reset(); DX.addFindings(${lit(HEP)});
     var h=document.querySelector('.dx-row-head[data-id="CHOLECYSTITIS"]'); if(!h) return '{}'; h.click();
     var rows=[].filter.call(document.querySelectorAll('.dx-card.open .dx-d-row'),function(r){return /^(Why not higher|Why it is not first)/i.test((r.firstElementChild||{}).textContent||'');});
     if(!rows.length) return '{}'; var r=rows[0], lab=r.firstElementChild, inl=r.querySelector('.dx-reason b, .dx-reason strong');

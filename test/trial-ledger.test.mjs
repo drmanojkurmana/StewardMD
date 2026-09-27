@@ -182,7 +182,10 @@ test("reversible: with TRIAL_ONCE_ON off (or shadow) a trialDenied claim is igno
   const c = { verified: true, verifiedAt: now - 1000, trialDenied: now - 1000 };
   assert.equal(isPro({}, c, now), true);
   assert.equal(isPro({ TRIAL_ONCE_ON: "shadow" }, c, now), true);
-  assert.equal(isPro({}, { provUntil: now + DAY, trialDenied: now }, now), true);
+  // A provisional-only account (nothing verified) holds Pro only with TRIAL_NEEDS_VERIFY off; the
+  // owner's 2026-09-27 rule gives the week to verified profiles only (see verify-gate.test.mjs).
+  assert.equal(isPro({ TRIAL_NEEDS_VERIFY: "0" }, { provUntil: now + DAY, trialDenied: now }, now), true);
+  assert.equal(isPro({}, { provUntil: now + DAY, trialDenied: now }, now), false);
 });
 
 test("shadow: weekPatch writes what it always did (fresh verifiedAt) while recording", async () => {

@@ -352,10 +352,19 @@
   function traineeReady() {
     var u = fbUser();
     if (!u || typeof u.getIdTokenResult !== "function") return Promise.resolve(true);   // fail-open; server still checks web
-    return u.getIdTokenResult().then(function (r) {
-      var c = (r && r.claims) || {};
-      return c.verified === true || c.traineeVerified === true || (+c.provUntil || 0) > Date.now();
-    }, function () { return true; });
+    /* Ask the app's ONE verification answer first (verify.js isReviewed: registered doctor OR
+     * approved student/intern, with the server consulted when the token is stale). This used to
+     * read the cached token claim on its own, which lags an approval by up to an hour, so a doctor
+     * verified minutes earlier was sent back to "verify your college ID". */
+    var V = window.SMD_VERIFY;
+    var reviewed = (V && typeof V.isReviewed === "function") ? V.isReviewed().catch(function () { return false; }) : Promise.resolve(false);
+    return reviewed.then(function (ok) {
+      if (ok) return true;
+      return u.getIdTokenResult().then(function (r) {
+        var c = (r && r.claims) || {};
+        return c.verified === true || c.traineeVerified === true || (+c.provUntil || 0) > Date.now();
+      }, function () { return true; });
+    });
   }
   var TRAINEE_VERIFY_MSG = "The Trainee plan is for verified students, interns and residents. Verify your college ID first, then choose the plan.";
   function doBuy(body, btn) {

@@ -17,6 +17,10 @@ import { spawn } from "node:child_process";
 import { setTimeout as sleep } from "node:timers/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+// data -> a JS literal safe to splice into code evaluated in the page (CodeQL js/bad-code-sanitization):
+// JSON.stringify leaves <, >, U+2028 and U+2029 raw, so escape them (the pattern CodeQL documents)
+const LIT_ESC = { "<": "\\u003C", ">": "\\u003E", "\b": "\\b", "\f": "\\f", "\n": "\\n", "\r": "\\r", "\t": "\\t", "\0": "\\0", "\u2028": "\\u2028", "\u2029": "\\u2029" };
+const lit = (v) => JSON.stringify(v).replace(/[<>\b\f\n\r\t\0\u2028\u2029]/g, (c) => LIT_ESC[c]);
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const BASE = (process.env.BASE || "http://localhost:8804/").replace(/\/?$/, "/");
@@ -47,7 +51,7 @@ async function load(url) {
 }
 const HEP = ["fever", "jaundice", "nauseaVomiting"], MEN = ["fever", "headache", "neckStiffness"];
 const open = async (f, pane) => ev(`['introPoster','splash','accountGate','introOverlay','smdBootSplash'].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();});
-  try{DX.openWorkspace();}catch(e){} DX.reset(); DX.addFindings(${JSON.stringify(f)}); var j=document.querySelector('[data-dx-jump="${pane || "dxReview"}"]'); if(j) j.click(); return 1;`);
+  try{DX.openWorkspace();}catch(e){} DX.reset(); DX.addFindings(${lit(f)}); var j=document.querySelector('[data-dx-jump="${pane || "dxReview"}"]'); if(j) j.click(); return 1;`);
 const view = async () => JSON.parse(await ev(`var ov=document.querySelector('#dxOverlay'), cols=document.querySelector('#dxCols'), top=document.querySelector('#dxTop');
   var ranks=[].map.call(document.querySelectorAll('#dxCols .dx-rank'),function(x){return +x.textContent;});
   var body=document.querySelector('#dxOverlay .dx-body');
@@ -56,7 +60,7 @@ const view = async () => JSON.parse(await ev(`var ov=document.querySelector('#dx
     top:top?top.innerText:'', firstName:(cols.querySelector('.dx-row-name')||{}).textContent||'', colsText:cols.innerText, title:(document.querySelector('#dxReviewTitle')||{}).textContent,
     changed:(document.querySelector('#dxChanged')||{}).innerText||'', go:(document.querySelector('#dxGo')||{}).innerText||'',
     wide:body.scrollWidth<=body.clientWidth+1, hospAfter:!!(document.querySelector('#dxHosp')&&document.querySelector('.dx-find-wrap')&&(document.querySelector('.dx-find-wrap').compareDocumentPosition(document.querySelector('#dxHosp'))&4))});`));
-const ASSESS = `return JSON.stringify([${JSON.stringify(HEP)},${JSON.stringify(MEN)},["fever","cough","crepitations"],["chestPain","diaphoresis"]].map(function(f){var o={}; f.forEach(function(k){o[k]=true;}); return SMD_REASON.assess(o);}));`;
+const ASSESS = `return JSON.stringify([${lit(HEP)},${lit(MEN)},["fever","cough","crepitations"],["chestPain","diaphoresis"]].map(function(f){var o={}; f.forEach(function(k){o[k]=true;}); return SMD_REASON.assess(o);}));`;
 
 try {
   let ver; for (let t = 0; t < 60; t++) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
@@ -125,10 +129,10 @@ try {
   const heads = JSON.parse(await ev(`return JSON.stringify([].map.call(document.querySelectorAll('.dx-card.open .dx-d-row>b'),function(b){return b.textContent;}))`));
   ok(heads[0] === "Fits because" && heads.includes("Ask or check next") && heads.includes("Tests to consider") && !heads.some((x) => /discriminator|—/.test(x)), `on  · plain card headings: ${heads.join(" / ")}`);
   const addk = await ev(`var b=document.querySelector('.dx-card.open [data-addf]'); if(!b) return ''; var k=b.getAttribute('data-addf'); b.click(); return k;`);
-  ok(addk && (await ev(`return !!DX._state.f[${JSON.stringify(addk)}]`)) === true, `on  · tapping "+ ${addk}" under Ask or check next adds it`);
+  ok(addk && (await ev(`return !!DX._state.f[${lit(addk)}]`)) === true, `on  · tapping "+ ${addk}" under Ask or check next adds it`);
   v = await view();
   ok(/^What changed: after adding /.test(v.changed.trim()) && !/–|—/.test(v.changed), `on  · What changed is a sentence ("${v.changed.trim().slice(0, 70)}...")`);
-  const gu = await ev(`DX.reset(); DX.addFindings(${JSON.stringify(HEP)}); var h=document.querySelector('.dx-row-head[data-id="CHOLECYSTITIS"]'); if(h) h.click();
+  const gu = await ev(`DX.reset(); DX.addFindings(${lit(HEP)}); var h=document.querySelector('.dx-row-head[data-id="CHOLECYSTITIS"]'); if(h) h.click();
     var t=[].map.call(document.querySelectorAll('.dx-card.open [data-addf]'),function(b){return b.getAttribute('data-addf');}); var sg=document.querySelector('#dxSuggest [data-confirm]');
     return JSON.stringify({card:t, sug:sg?sg.getAttribute('data-confirm'):null});`);
   ok(!/feverGU/.test(gu), `on  · 'Fever with urinary symptoms' is not suggested on top of fever (${gu})`);
