@@ -11,7 +11,7 @@ let pass = 0, fail = 0;
 const ok = (n, c) => { if (c) pass++; else { fail++; console.log("x FAIL:", n); } };
 
 // Deck item counts, per the source repo's README.
-const DECKS = { oct: 2064, disc: 705, dr: 1392, rop: 2020, cases: 60 };
+const DECKS = { oct: 2064, disc: 705, dr: 1392, rop: 2020, cases: 60, mcq: 3035, rfmid: 438 };
 for (const [name, count] of Object.entries(DECKS)) {
   const d = JSON.parse(readFileSync(join(ROOT, "ophthalmos/decks", name + ".json"), "utf8"));
   ok("ophthalmos/decks/" + name + ".json parses as JSON", typeof d === "object" && d !== null);
@@ -34,6 +34,24 @@ for (const [name, count] of Object.entries(DECKS)) {
   ok("index.html loads ophthalmos.css", html.includes("ophthalmos.css"));
 }
 
+// notes.json: 30 illustrated notes, marked as drafts, no em-dash.
+{
+  const raw = readFileSync(join(ROOT, "ophthalmos/notes.json"), "utf8"), n = JSON.parse(raw);
+  ok("ophthalmos/notes.json has 30 notes", Array.isArray(n.notes) && n.notes.length === 30);
+  ok("ophthalmos/notes.json is marked ai_drafted", n.review === "ai_drafted");
+  ok("ophthalmos/notes.json has no em-dash", !raw.includes("\u2014"));
+}
+
+// index.html loads the feature files after the screens, each with its stylesheet.
+{
+  const html = readFileSync(join(ROOT, "index.html"), "utf8"), base = html.indexOf("ophthalmos-screens.js");
+  for (const f of ["ophthalmos-mcq", "ophthalmos-notes", "ophthalmos-retino-model", "ophthalmos-retino", "ophthalmos-neuro", "ophthalmos-tools-model", "ophthalmos-tools"]) {
+    const i = html.indexOf("/" + f + ".js");
+    ok("index.html loads " + f + ".js after the screens", i > base);
+  }
+  for (const f of ["mcq", "notes", "retino", "neuro", "tools"]) ok("index.html loads ophthalmos-" + f + ".css", html.includes("/ophthalmos-" + f + ".css"));
+}
+
 // home.js: the tile and the action.
 {
   const src = readFileSync(join(ROOT, "home.js"), "utf8");
@@ -45,6 +63,7 @@ for (const [name, count] of Object.entries(DECKS)) {
 {
   const src = readFileSync(join(ROOT, "scripts/build-www.sh"), "utf8");
   ok("build-www.sh copies ophthalmos/", /ophthalmos\/decks/.test(src));
+  ok("build-www.sh copies ophthalmos/notes.json", /ophthalmos\/notes\.json/.test(src));
 }
 
 console.log(fail === 0 ? "ALL " + pass + " PASS" : pass + " pass / " + fail + " FAIL");

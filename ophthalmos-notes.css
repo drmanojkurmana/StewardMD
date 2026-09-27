@@ -1,0 +1,75 @@
+/* Ophthalmós notes: the reading surface. Same reading room (tokens from ophthalmos.css), tuned for
+   long-form text: 17px body, 1.6 leading, a 65ch measure, real images at column width. */
+
+/* ---- list ---- */
+.oph-lede { margin: 4px 0 0; font-size: 15px; line-height: 1.5; color: var(--op-mut); max-width: 60ch; }
+.oph-nlist { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.oph-nrow { width: 100%; display: flex; align-items: center; gap: 14px; text-align: left; border: 0; background: transparent;
+  padding: 10px 4px; border-radius: 12px; transition: transform 140ms var(--op-ease), background-color 160ms ease; }
+.oph-nrow:active { transform: scale(0.985); background: var(--op-s1); }
+.oph-nrow > img { width: 56px; height: 56px; flex: 0 0 56px; object-fit: cover; border-radius: 10px; background: var(--op-s2); }
+.oph-nrow-b { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.oph-nrow-b > b { font-size: 16px; font-weight: 650; line-height: 1.3; }
+.oph-nrow-b > span:not(.oph-small) { font-size: 13px; line-height: 1.35; color: var(--op-mut); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.oph-done { display: inline-flex; align-items: center; gap: 3px; color: var(--op-ok); font-weight: 600; }
+.oph-done .smd-ico { width: 14px; height: 14px; }
+
+/* ---- reader ---- */
+.oph-article { max-width: 34em; margin: 0 auto; font-size: 17px; line-height: 1.6; } /* ~70 characters of Inter per line */
+.oph-article h1 { font-size: 28px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; margin: 8px 0 10px; text-wrap: balance; }
+.oph-meta { margin: 0 0 8px; font-size: 14px; line-height: 1.5; color: var(--op-mut); }
+.oph-draftline { display: flex; align-items: flex-start; gap: 6px; margin-top: 6px; color: var(--op-warn); }
+.oph-draftline .smd-ico { width: 16px; height: 16px; margin-top: 2px; }
+.oph-nh { font-size: 20px; line-height: 1.25; font-weight: 650; letter-spacing: -0.01em; margin: 32px 0 8px; text-wrap: balance; }
+.oph-article p { margin: 0 0 14px; text-wrap: pretty; }
+.oph-article ul { margin: 0 0 14px; padding: 0 0 0 20px; }
+.oph-article li { margin: 6px 0; padding-left: 2px; }
+.oph-article li::marker { color: var(--op-mut); }
+.oph-article strong { font-weight: 650; color: #fff; }
+.oph-article .oph-npearl { background: var(--op-s1); border-radius: 14px; padding: 14px 16px; margin: 20px 0; }
+.oph-npearl > b { font-weight: 700; }
+
+/* figures: real images at column width, space reserved by width/height, tap to enlarge */
+.oph-fig { margin: 20px 0 22px; }
+.oph-fig-b { display: block; width: 100%; padding: 0; border: 0; background: #000; border-radius: 12px; overflow: hidden;
+  cursor: zoom-in; transition: transform 140ms var(--op-ease); }
+.oph-fig-b:active { transform: scale(0.985); }
+.oph-fig-b img { display: block; width: 100%; height: auto; max-height: 62vh; object-fit: contain; background: #000; }
+.oph-fig figcaption { margin-top: 8px; font-size: 14px; line-height: 1.45; color: var(--op-mut); }
+.oph-credit { display: block; margin-top: 2px; font-size: 12px; }
+.oph-fig.err .oph-fig-b { min-height: 80px; cursor: default; }
+.oph-fig.err img { visibility: hidden; }
+.oph-fig-err { color: var(--op-bad); font-weight: 600; }
+
+/* practise, sources, next */
+.oph-practise { margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--op-line); }
+.oph-practise .oph-small { margin: 8px 0 0; line-height: 1.45; }
+.oph-article .oph-ptopic { display: flex; flex-direction: column; gap: 2px; margin: 0; }
+.oph-ptopic b { font-size: 16px; font-weight: 650; }
+.oph-refs { margin: 0; padding: 0 0 0 20px; font-size: 14px; line-height: 1.5; color: var(--op-mut); overflow-wrap: anywhere; }
+.oph-refs li { margin: 0 0 8px; }
+.oph-nextnote { width: 100%; margin: 28px 0 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto;
+  column-gap: 12px; align-items: center; text-align: left; border: 0; border-radius: 14px; background: var(--op-s1); padding: 14px 16px;
+  transition: transform 140ms var(--op-ease), background-color 160ms ease; }
+.oph-nextnote:active { transform: scale(0.985); }
+.oph-nextnote b { font-size: 16px; font-weight: 650; line-height: 1.3; grid-column: 1; }
+.oph-nextnote .oph-chev { grid-column: 2; grid-row: 1 / span 2; }
+
+/* ---- enlarged image: the clinic stage over the note ---- */
+/* Opacity only: a transform here would shrink the stage the zoom model measures on open. */
+.oph-zoom { position: absolute; inset: 0; z-index: 2; background: #000; display: flex; flex-direction: column;
+  transition: opacity 200ms var(--op-ease); }
+.oph-zoom.pre { opacity: 0; }
+.oph-zoom.out { transition-duration: 150ms; }
+.oph-zoom .oph-stage { flex: 1 1 auto; min-height: 0; }
+.oph-zcap { flex: 0 0 auto; margin: 0; padding: 10px 16px calc(14px + env(safe-area-inset-bottom, 0px)); font-size: 14px; line-height: 1.45;
+  color: var(--op-mut); max-height: 30vh; overflow-y: auto; overscroll-behavior: contain; }
+.oph-draft { z-index: 3; }
+
+@media (hover: hover) and (pointer: fine) {
+  .oph-nrow:hover, .oph-nextnote:hover { background: var(--op-s2); }
+}
+@media (min-width: 700px) {
+  .oph-article h1 { font-size: 34px; }
+  .oph-zcap { text-align: center; }
+}

@@ -1,0 +1,121 @@
+/* Ophthalmós neuro-ophthalmology simulator and pupil lab (docs/DESIGN.md, Simulators).
+   Same world as the encounter: black stage on top, panel below, stage left on tablet landscape.
+   Uses the --op-* tokens that .oph-overlay defines. */
+.nr-screen { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+.nr-stage { position: relative; flex: 0 0 auto; height: clamp(210px, 34vh, 300px); background: #000; overflow: hidden;
+  touch-action: none; user-select: none; -webkit-user-select: none; cursor: crosshair; }
+.nr-stage[data-tab="pupils"] { cursor: pointer; }
+.nr-stage canvas { display: block; width: 100%; height: 100%; }
+.nr-nocv { position: absolute; inset: 0; margin: 0; display: flex; align-items: center; justify-content: center;
+  padding: 16px; text-align: center; color: var(--op-mut); font-size: 14px; }
+.nr-nocv[hidden] { display: none; }
+
+/* The coaching line: what the examiner sees, and in practice why. Announced politely. */
+.nr-live { flex: 0 0 auto; margin: 0; padding: 10px 16px; min-height: calc(2.8em + 20px); font-size: 14px; line-height: 1.4;
+  color: var(--op-text); background: var(--op-s1); border-top: 1px solid var(--op-line); border-bottom: 1px solid var(--op-line);
+  text-wrap: pretty; }
+.nr-why { color: var(--op-mut); }
+.nr-i { display: inline-flex; }
+.nr-panel h2, .nr-panel h3, .nr-verdict { text-wrap: balance; }
+
+.nr-panel { flex: 1 1 auto; min-height: 0; padding: 12px 16px calc(28px + env(safe-area-inset-bottom, 0px)); }
+.nr-full { display: flex; width: 100%; }
+.nr-full button { flex: 1 1 0; min-width: 0; justify-content: center; }
+.nr-panel .oph-seg button { min-height: 44px; padding: 0 8px; transition: transform 140ms var(--op-ease), background-color 160ms ease, color 160ms ease; }
+.nr-panel .oph-seg .smd-ico { width: 16px; height: 16px; }
+.nr-mode { margin-bottom: 14px; }
+.nr-exam { margin-top: 16px; }
+.nr-tabs { margin-bottom: 12px; }
+
+.nr-field { display: flex; flex-direction: column; gap: 6px; margin: 0 0 4px; }
+.nr-field label, .nr-lab { font-size: 13px; font-weight: 550; color: var(--op-mut); }
+.nr-field select, .nr-sel {
+  -webkit-appearance: none; appearance: none; width: 100%; min-height: 48px; border-radius: 12px; border: 1px solid var(--op-line);
+  background: var(--op-s1) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a8a8b0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center / 16px;
+  color: var(--op-text); font: inherit; font-size: 15px; padding: 0 40px 0 14px; text-overflow: ellipsis; }
+.nr-sel { min-height: 44px; font-size: 14px; }
+.nr-panel option, .nr-panel optgroup { background-color: var(--op-s1); color: var(--op-text); }
+.nr-field select:focus-visible, .nr-sel:focus-visible { outline: 2px solid var(--op-acc); outline-offset: 2px; }
+.nr-row { display: grid; grid-template-columns: 76px minmax(0, 1fr); align-items: center; gap: 8px; margin-top: 10px; }
+.nr-stack { grid-template-columns: minmax(0, 1fr); gap: 4px; margin-top: 0; }
+
+/* eye movements: gaze pad (the H test as nine targets) beside cover, tilt, near and lids */
+.nr-mot { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: start; }
+.nr-padw { display: flex; flex-direction: column; gap: 4px; }
+.nr-pad { display: grid; grid-template-columns: repeat(3, 44px); gap: 4px; }
+.nr-pad button { width: 44px; height: 44px; padding: 0; border-radius: 10px; border: 1px solid var(--op-line); background: var(--op-s1);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: transform 140ms var(--op-ease), background-color 160ms ease, border-color 160ms ease; }
+.nr-pad button i { width: 6px; height: 6px; border-radius: 50%; background: var(--op-mut); transition: transform 160ms var(--op-ease), background-color 160ms ease; }
+.nr-pad button[aria-pressed="true"] { background: var(--op-s3); border-color: var(--op-acc); }
+.nr-pad button[aria-pressed="true"] i { background: var(--op-acc); transform: scale(1.6); }
+.nr-ctl { display: grid; gap: 10px; min-width: 0; }
+.nr-togs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.nr-tog { min-height: 44px; border-radius: 12px; border: 1px solid var(--op-line); background: var(--op-s1); padding: 4px 10px;
+  font-size: 14px; font-weight: 600; line-height: 1.2; display: inline-flex; align-items: center; justify-content: center; gap: 6px; text-align: center;
+  transition: transform 140ms var(--op-ease), background-color 160ms ease, border-color 160ms ease; }
+.nr-tog .smd-ico { width: 16px; height: 16px; }
+.nr-tog .nr-tick { display: none; color: var(--op-acc); }
+.nr-tog[aria-pressed="true"] { border-color: var(--op-acc); background: rgba(59, 157, 255, .14); }
+.nr-tog[aria-pressed="true"] .nr-tick { display: inline-flex; }
+.nr-pad button:active, .nr-tog:active, .nr-panel .oph-seg button:active { transform: scale(0.97); }
+
+/* pupils */
+.nr-drops { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.nr-droprow { align-items: start; }
+.nr-droprow > .nr-lab { padding-top: 13px; }
+.nr-wash .smd-ico { color: var(--op-mut); }
+.nr-dropnote { margin: 8px 0 0; }
+.nr-hint { display: none; margin: 12px 0 0; font-size: 12px; color: var(--op-mut); }
+
+/* findings: nine gazes, Hess chart, teaching */
+#nrFind, #nrSign { margin-top: 8px; }
+.nr-p { margin: 2px 0 0; font-size: 15px; }
+.nr-nine { width: 100%; margin: 18px 0 0; border-collapse: separate; border-spacing: 3px; table-layout: fixed; font-size: 13px; }
+.nr-nine caption { caption-side: top; text-align: left; font-size: 13px; color: var(--op-mut); padding: 0 3px 4px; }
+.nr-nine thead td { width: 44px; }
+.nr-nine th { font-size: 12px; font-weight: 600; color: var(--op-mut); padding: 2px; }
+.nr-nine tbody th { text-align: left; }
+.nr-nine td { background: var(--op-s1); border-radius: 8px; text-align: center; padding: 9px 2px; }
+.nr-nine td.p { background: var(--op-s2); font-weight: 700; }
+.nr-hess { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px; }
+.nr-hessf { margin: 0; }
+.nr-hessf svg { display: block; width: 100%; height: auto; background: var(--op-s1); border-radius: 12px; }
+.nr-hessf .g line { stroke: var(--op-line); stroke-width: .6; }
+.nr-hessf .i rect { fill: none; stroke: #6a6a72; stroke-width: .8; stroke-dasharray: 3 3; }
+.nr-hessf .f polygon { fill: rgba(59, 157, 255, .1); stroke: var(--op-acc); stroke-width: 1.4; stroke-linejoin: round; }
+.nr-hessf .f circle { fill: var(--op-acc); }
+.nr-hessf figcaption { margin-top: 6px; font-size: 13px; font-weight: 600; text-align: center; }
+
+/* case: patient card, diagnosis, sign-off */
+.nr-card { margin: 0 0 4px; min-height: 72px; }
+.nr-card .oph-card-l span { white-space: normal; }
+#nrDxQ { margin: 22px 0 8px; }
+.nr-err { margin: 10px 0 0; font-size: 14px; color: var(--op-bad); }
+.nr-err:empty { display: none; }
+#nrSign > .oph-btn { margin-top: 14px; }
+.nr-verdict.part { color: var(--op-warn); }
+.nr-marks { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 6px; font-size: 15px; }
+.nr-marks li { display: flex; align-items: flex-start; gap: 8px; }
+.nr-marks .smd-ico { width: 18px; height: 18px; flex: 0 0 auto; margin-top: 1px; }
+.nr-marks li.y .smd-ico { color: var(--op-ok); }
+.nr-marks li.n .smd-ico { color: var(--op-bad); }
+.nr-next { margin: 16px 0 6px; }
+.nr-marks + .nr-p { margin-top: 12px; }
+.nr-locked p { margin: 4px 0 14px; }
+.nr-locked .oph-btn + .oph-btn { margin-top: 10px; }
+
+@media (hover: hover) and (pointer: fine) {
+  .nr-hint { display: block; }
+  .nr-pad button:not([aria-pressed="true"]):hover, .nr-tog:not([aria-pressed="true"]):hover { background: var(--op-s2); border-color: #4a4a52; }
+  .nr-panel .oph-seg button:not([aria-pressed="true"]):hover { color: var(--op-text); background: var(--op-s2); }
+}
+
+/* tablet landscape: stage left; the live line and the panel right */
+@media (min-width: 900px) and (orientation: landscape) {
+  .nr-screen { display: grid; grid-template-columns: minmax(0, 1fr) 420px; grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas: "stage live" "stage panel"; }
+  .nr-stage { grid-area: stage; height: auto; }
+  .nr-live { grid-area: live; border-top: 0; border-left: 1px solid var(--op-line); }
+  .nr-panel { grid-area: panel; border-left: 1px solid var(--op-line); }
+}

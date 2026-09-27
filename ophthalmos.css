@@ -12,7 +12,6 @@
   background: var(--op-bg); color: var(--op-text);
   display: none; flex-direction: column; overflow: hidden;
   font-family: inherit; font-size: 16px; line-height: 1.45;
-  font-variant-numeric: tabular-nums;
   padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px);
   -webkit-font-smoothing: antialiased;
   color-scheme: dark;
@@ -131,6 +130,7 @@ body.oph-lock { overflow: hidden; }
 .oph-h2 { font-size: 13px; font-weight: 650; color: var(--op-mut); margin: 28px 0 10px; letter-spacing: 0; }
 .oph-h3 { font-size: 14px; font-weight: 650; margin: 16px 0 4px; color: var(--op-text); }
 .oph-wide { width: 100%; }
+.oph-maik { min-height: 44px; margin-top: 14px; padding: 0 16px; font-size: 15px; }
 .oph-link { background: none; border: 0; padding: 0; color: var(--op-acc); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .oph-note { font-size: 13px; color: var(--op-mut); margin: 28px 0 0; line-height: 1.5; }
 
@@ -200,6 +200,29 @@ body.oph-lock { overflow: hidden; }
 .oph-days i { flex: 1 1 0; background: var(--op-s3); border-radius: 3px 3px 0 0; }
 .oph-days i:last-child { background: var(--op-acc); }
 
+/* overview: next-7-days forecast */
+.oph-fc { display: flex; align-items: flex-end; gap: 8px; height: 76px; margin: 8px 0 4px; }
+.oph-fc-col { flex: 1 1 0; display: flex; flex-direction: column; align-items: center; height: 100%; }
+.oph-fc-col i { display: block; width: 100%; background: var(--op-acc); border-radius: 3px 3px 0 0; margin-top: auto; }
+.oph-fc-col span { margin-top: 6px; font-size: 11px; color: var(--op-mut); }
+
+/* overview: 12-week calendar heatmap, one hue, five steps (sequential) */
+.oph-hm { display: grid; grid-template-rows: repeat(7, 1fr); grid-auto-flow: column; grid-auto-columns: 1fr; gap: 3px; height: 98px; margin: 10px 0 8px; overflow: hidden; }
+.oph-hm i { display: block; width: 100%; height: 100%; border-radius: 2px; }
+.oph-hm-0 { background: var(--op-s2); }
+.oph-hm-1 { background: rgba(59, 157, 255, .25); }
+.oph-hm-2 { background: rgba(59, 157, 255, .45); }
+.oph-hm-3 { background: rgba(59, 157, 255, .68); }
+.oph-hm-4 { background: var(--op-acc); }
+.oph-hm-legend { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--op-mut); margin: 0 0 4px; }
+.oph-hm-legend i { width: 11px; height: 11px; border-radius: 2px; }
+
+/* overview: weak spots / strengths, simulators (per-clinic .oph-srow keeps its own spacing) */
+.oph-slist > li:not(.oph-srow) { border-top: 1px solid var(--op-line); padding-top: 10px; margin-top: 10px; }
+.oph-slist > li:not(.oph-srow):first-child { border-top: 0; padding-top: 0; margin-top: 0; }
+.oph-ws .oph-link { display: inline-block; margin-top: 6px; }
+.oph-err { list-style: none; margin: 6px 0 0; padding: 0; font-size: 13px; color: var(--op-mut); display: grid; gap: 2px; }
+
 /* sources */
 .oph-sources { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 16px; }
 .oph-sources li { display: flex; flex-direction: column; gap: 2px; }
@@ -231,3 +254,37 @@ body.oph-lock { overflow: hidden; }
   .oph-foot { grid-area: foot; }
   .oph-scroll.oph-pad { padding-left: max(16px, calc((100% - 720px) / 2)); padding-right: max(16px, calc((100% - 720px) / 2)); }
 }
+
+/* weak-spot Drill: a real 44 px button, smaller than the primary actions */
+.oph-drill { min-height: 44px; padding: 0 16px; font-size: 15px; margin-top: 8px; }
+
+/* Today's plan (hub): a short checklist built from what is due; the primary button starts the next part */
+.oph-plan-h { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 0 0 8px; }
+.oph-plan-h b { font-size: 17px; font-weight: 700; }
+.oph-plan-h .oph-mut { font-size: 13px; text-align: right; }
+.oph-day { list-style: none; margin: 0 0 12px; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); }
+.oph-plan-row { width: 100%; display: flex; align-items: center; gap: 12px; text-align: left; border: 0; background: transparent; color: inherit;
+  min-height: 56px; padding: 8px 2px; border-radius: 12px; transition: transform 140ms var(--op-ease), background-color 160ms ease; }
+.oph-plan-row:active { transform: scale(0.985); background: var(--op-s2); }
+.oph-day li + li .oph-plan-row { border-top: 1px solid var(--op-s2); border-radius: 0; }
+.oph-plan-ck { flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%; box-shadow: inset 0 0 0 2px var(--op-s3);
+  display: inline-flex; align-items: center; justify-content: center; color: #fff; }
+.oph-plan-row[data-done="true"] .oph-plan-ck { background: var(--op-ok); box-shadow: none; }
+.oph-plan-ck .smd-ico { width: 16px; height: 16px; }
+.oph-plan-b { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.oph-plan-b b { font-size: 16px; font-weight: 650; }
+.oph-plan-b span { font-size: 13px; color: var(--op-mut); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.oph-plan-row[data-done="true"] .oph-plan-b b { color: var(--op-mut); }
+@media (hover: hover) and (pointer: fine) { .oph-plan-row:hover { background: var(--op-s2); } }
+@media (prefers-reduced-motion: reduce) { .oph-plan-row { transition: none; } .oph-plan-row:active { transform: none; } }
+.oph-sr { position: absolute !important; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* wrong answer: a real image of the learner's pick, another patient */
+.oph-exs { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 10px 0 4px; }
+.oph-ex { margin: 0; }
+.oph-ex img { display: block; width: 100%; height: auto; max-height: 220px; object-fit: contain; background: #000; border-radius: 10px; }
+.oph-ex figcaption { font-size: 13px; color: var(--op-mut); margin-top: 6px; }
+
+/* Tabular figures only where numbers change in place. On the whole overlay they also widened Inter's hyphen,
+   so "Age-related" read "Age - related". */
+.oph-overlay output, .oph-stat-line, .oph-srow-h b, .oph-today-line b, .mcq-score, #mcqClock { font-variant-numeric: tabular-nums; }
