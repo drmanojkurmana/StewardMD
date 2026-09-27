@@ -10358,3 +10358,23 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
   patient calls, so it must be the clinic that treated them.
 - **Open**: FollowCare's hospital is a free-text id the doctor types (`fc_doctors`), not an OPD clinic, so its
   Post-Visit template still has no callback number or doctor name; FollowCare stays WhatsApp only.
+
+## 2026-09-27 - Ophthalmós integrated as a module, behind a flag default OFF
+- **Context**: Ophthalmós (eye-imaging clinic trainer: OCT, disc, DR grading, ROP, case conference) was
+  built end-to-end in its own repo (`github.com/drmanojkurmana/ophthalmos`), not inside StewardMD.
+- **Decision**: integrate the finished module by copying its shipped client files
+  (`ophthalmos-core.js`, `ophthalmos-data.js`, `ophthalmos-stage.js`, `ophthalmos.js`,
+  `ophthalmos-screens.js`, `ophthalmos.css`, `ophthalmos/tracks.json`, `ophthalmos/decks/*.json`) into
+  this repo and wiring it exactly like [[RadioAnatome]] (`atlas`): Home tile, `home.js` action,
+  `swipe-back.js` back-handling, `scripts/build-www.sh` data copy. Gated behind `smd_ophthalmos`,
+  default OFF (query param or `localStorage === "1"` only): nothing in it is clinically signed off yet.
+- **Images kept off Cloudflare Pages**: the module's 6,241 WebP images (134 MB) are not committed here.
+  Pages caps a deploy at 20,000 files and this repo is already at ~19,400, so bundling them is not an
+  option; they need an R2 bucket and `window.SMD_OPHTHALMOS_IMG` before the flag can go on for real
+  users, same posture as RadioAnatome's own un-bundled slice images.
+- **Reversible**: the flag is OFF by default and the source repo remains the source of truth: future
+  edits happen there, then get re-synced into this repo's copies, never the other way around.
+- **Update (same day)**: images now hosted in R2 bucket `stewardmd-ophthalmos-img` (APAC) at `https://ophthalmos-img.stewardmd.in`, immutable cache headers; the flag stays OFF until ophthalmologist sign-off.
+- **Update (same day, owner)**: the owner turned Ophthalmós ON for all users before sign-off, with a
+  4px "To be verified · draft" mark on every screen (the hub's readable Beta note stays). Kill switch
+  `smd_ophthalmos="0"` / `?ophthalmos=0`. Sign-off of the ai_drafted teaching points and plans is still open.
