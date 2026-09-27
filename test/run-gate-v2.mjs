@@ -36,7 +36,8 @@ const FIX = [
   ["gc_149", "URTI with pneumonia competitive", "likely", "likely", true, /Community Acquired Pneumonia .* is competitive/],
   ["gc_152", "viral vs bacterial meningitis", "very_likely", "very_likely", true, null],
   ["gc_143", "SBP (fever)", "noninfective", "likely", true, /Can't-miss: spontaneous bacterial peritonitis/],
-  ["gc_036", "hepatic encephalopathy with ascites", "noninfective", "rule_out_sbp", true, /diagnostic paracentesis now/],
+  // 2026-09-27: "rule out SBP" is tap first, antibiotics on the result (EASL 2018 / AASLD 2021)
+  ["gc_036", "hepatic encephalopathy with ascites", "noninfective", "rule_out_sbp", false, /diagnostic paracentesis now/],
   ["gc_238", "variceal bleed in cirrhosis", "noninfective", "abx_prophylaxis", true, /Baveno VII/],
   ["gc_019", "ACS (non-infective)", "noninfective", "noninfective", false, null],
 ];
@@ -104,6 +105,23 @@ try {
   ok(sp.cls === "likely" && sp.ab === true && /sepsis until proven otherwise/.test(sp.message || ""), `on  · fever + hypotension alone: sepsis until proven otherwise (${sp.cls})`);
   const ac = await assess({ fever: true, hypotension: true, steroidUse: true });
   ok(ac.rule !== "sepsis_phys", `on  · fever + hypotension on long-term steroids: the rule does not override a leading adrenal crisis (${ac.cls})`);
+  // 2026-09-27 overcall round: an afebrile non-infective lead is not "infection likely"
+  const T = (ks) => Object.fromEntries(ks.map((k) => [k, true]));
+  const colic = await assess(T(["flankPain", "severeAbdominalPain", "hematuria", "nauseaVomiting", "costovertebralTenderness", "tachycardia"]));
+  ok(colic.ab === false && colic.rule === "ni_lead_afebrile" && /No fever/.test(colic.message || "") && !/\u2014/.test(colic.message || ""), `on  · afebrile renal colic picture: not an infection call (${colic.cls}, ${colic.rule})`);
+  const colicF = await assess(T(["flankPain", "severeAbdominalPain", "hematuria", "nauseaVomiting", "costovertebralTenderness", "tachycardia", "fever", "rigors"]));
+  ok(colicF.ab === true && colicF.rule !== "ni_lead_afebrile", `on  · the same with fever and rigors: infection kept (${colicF.cls})`);
+  const colicS = await assess(T(["flankPain", "severeAbdominalPain", "hematuria", "costovertebralTenderness", "hypotension", "lactateElevated"]));
+  ok(colicS.rule !== "ni_lead_afebrile", `on  · the same with shock physiology: the rule stands aside (${colicS.cls})`);
+  // SBP: encephalopathy or pain alone = tap first; fever = treat; a GI bleed = prophylaxis regardless
+  const he = await assess(T(["liverDisease", "ascites", "alteredSensorium", "asterixis", "jaundice"]));
+  ok(he.cls === "rule_out_sbp" && he.ab === false && /paracentesis/.test(he.message || ""), `on  · cirrhosis + ascites + encephalopathy: tap first, antibiotics on the result (${he.cls}, ab ${he.ab})`);
+  const heF = await assess(T(["liverDisease", "ascites", "alteredSensorium", "asterixis", "jaundice", "fever"]));
+  ok(heF.ab === true, `on  · the same with fever: treat as SBP (${heF.cls})`);
+  const heP = await assess(T(["liverDisease", "ascites", "abdominalPain", "jaundice"]));
+  ok(heP.ab === true && heP.cls !== "rule_out_sbp", `on  · cirrhosis + ascites + abdominal pain, no fever: suspected SBP, tap and treat (${heP.cls})`);
+  const heB = await assess(T(["liverDisease", "ascites", "alteredSensorium", "hematemesis", "melena"]));
+  ok(heB.ab === true && heB.cls !== "rule_out_sbp", `on  · cirrhosis + ascites + GI bleed: antibiotics kept, never downgraded to 'tap first' (${heB.cls})`);
   const fnOn = await assess(fn);
   ok(fnOn.ab === true && fnOn.cls === fnOff.cls, `on  · fever + "Neutropenia (ANC <500)" unchanged by v2 (${fnOn.cls})`);
 
