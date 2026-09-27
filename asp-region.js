@@ -81,10 +81,15 @@
     var want = ctx.spec[0], fb = "";
     if (want && !strat.specMatch) fb = "This source has no " + (SPEC[want] || want) + " figures; the figures for " + (SPEC[strat.spec] || strat.spec) + " are shown instead" + (strat.spec === "all" ? " (they include urine isolates)" : "") + ". ";
     else if (strat.wantSet && strat.wantSet !== "all" && !strat.setMatch) fb = "This source has no figures for " + (SET[strat.wantSet] || strat.wantSet) + "; the figures for " + (SET[strat.set] || strat.set) + " are shown instead. ";
-    return head + (fb ? '<div style="font:600 11.5px/1.4 system-ui;color:#B45309;margin-bottom:6px">' + esc(fb) + '</div>' : "") + rows.map(function (o) { return orgBlock(t, o, name); }).join("");
+    // A pooled answer can come from another stratum drug by drug (a figure from fewer than 3
+    // institutions here, a pooled one a step further out). The console asks the same function
+    // reasoning does, so the two never disagree; such figures carry their own stratum.
+    var walk = (t.pooled && rows.length === 1 && !rows[0].pheno && st.susceptibility && st.drugsFor)
+      ? { org: org, ctx: { scope: info.scope, spec: ctx.spec, set: ctx.set, cohort: ctx.cohort, only: ctx.only, noAll: ctx.noAll } } : null;
+    return head + (fb ? '<div style="font:600 11.5px/1.4 system-ui;color:#B45309;margin-bottom:6px">' + esc(fb) + '</div>' : "") + rows.map(function (o) { return orgBlock(t, o, name, walk); }).join("");
   }
 
-  function orgBlock(t, o, name) {
+  function orgBlock(t, o, name, walk) {
     var st = S(), rl = R();
     var meta = [SPEC[t.spec] || t.spec, SET[t.set] || t.set];
     if (o.n) meta.push(fmtN(o.n) + " isolates");
@@ -94,8 +99,26 @@
     var h = '<div style="margin-bottom:8px"><div style="font:700 13px system-ui"><i>' + esc(rl.orgLabel(o.org)) + '</i>' + (o.pheno ? " (" + esc(o.pheno) + ")" : "") +
       ' <span style="font-style:normal;font-weight:600;font-size:10.5px;color:var(--slate-soft,#64748b)">' + esc(meta.join(", ")) + '</span></div>';
     if (o.cohort === "hai") h += '<div style="font:600 11px system-ui;color:var(--slate-soft,#64748b)">ICU device-associated infection surveillance</div>';
+    if (o.clinical) h += '<div style="font:700 11px system-ui;color:#B45309;margin:2px 0">Clinical antibiogram: laboratory results combined with how patients responded to treatment. Not a laboratory % susceptible; shown for reference only.</div>';
     if (low) h += '<div style="font:700 11px system-ui;color:#B45309;margin:2px 0">' + (o.noN ? "Isolate number not reported" : "Fewer than 30 isolates") + ': interpret with caution (CLSI M39).</div>';
     var drugs = st.sortDrugs(Object.keys(o.cells)).filter(function (d) { var c = o.cells[d]; return c.act === "keep" || c.act === "caution" || c.act === "intrinsic"; });
+    // Figures the shared answer takes from another stratum (walk: pooled scopes only).
+    var ans = {}, notes = [], noteOf = {};
+    if (walk) {
+      var more = st.drugsFor(walk.ctx.scope, walk.org, walk.ctx).filter(function (d) { return drugs.indexOf(d) < 0 && !(o.cells[d] && o.cells[d].act === "hide"); });
+      drugs = st.sortDrugs(drugs.concat(more));
+      drugs.forEach(function (d) {
+        var c = o.cells[d];
+        if (c && (c.act === "keep" || c.act === "intrinsic")) return;
+        var r = st.susceptibility(walk.org, d, walk.ctx);
+        if (!r || r.intrinsic || r.lowN || r.s == null) return;
+        if (r.spec === t.spec && r.set === t.set && (r.cohort || null) === (o.cohort || null)) return;
+        var key = r.spec + "|" + r.set + "|" + (r.cohort || "");
+        if (!noteOf[key]) { notes.push({ r: r }); noteOf[key] = notes.length; }
+        ans[d] = { r: r, mark: noteOf[key] };
+      });
+      drugs = drugs.filter(function (d) { return o.cells[d] || ans[d]; });
+    }
     // Agents this syndrome cannot rely on (urinary agents for sepsis, daptomycin for pneumonia) are
     // left out here and named once below.
     var off = st.synDrug ? drugs.filter(function (d) { return st.synDrug(_syn, d); }) : [];
@@ -104,9 +127,18 @@
     drugs.forEach(function (d) {
       var c = o.cells[d], aw = AW[rl.aware(d)];
       var awb = aw ? ' <span title="WHO AWaRe: ' + aw[0] + '" style="font:800 9.5px system-ui;color:' + aw[1] + ';border:1px solid ' + aw[1] + ';border-radius:5px;padding:0 4px">' + rl.aware(d) + '</span>' : "";
-      if (c.act === "intrinsic") {
+      if (c && c.act === "intrinsic") {
         h += '<div class="asp-region-row" data-drug="' + esc(d) + '" data-org="' + esc(o.org) + '" data-pheno="' + esc(o.pheno || "") + '" data-spec="' + esc(t.spec) + '" data-set="' + esc(t.set) + '" style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;font:600 12.5px system-ui;cursor:pointer" title="' + esc(c.why || "") + '">' +
           '<span>' + esc(drugLabel(d)) + awb + '</span><span style="font:800 11px system-ui;color:var(--ink,#0f172a);background:var(--line,#e2e8f0);padding:2px 8px;border-radius:999px">Intrinsic R</span></div>';
+        return;
+      }
+      if (ans[d]) {
+        var ar = ans[d].r, aR = Math.round(100 - ar.s), acol = rColor(aR);
+        h += '<div class="asp-region-row" data-drug="' + esc(d) + '" data-org="' + esc(o.org) + '" data-pheno="" data-spec="' + esc(ar.spec) + '" data-set="' + esc(ar.set) + '" style="padding:5px 0;cursor:pointer" title="pooled figure for ' + esc((SPEC[ar.spec] || ar.spec) + ", " + (SET[ar.set] || ar.set)) + '">' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;font:600 12.5px system-ui;gap:8px">' +
+          '<span>' + esc(drugLabel(d)) + awb + (ar.n ? ' <span style="font-weight:600;font-size:10px;color:var(--slate-soft,#64748b)">n ' + fmtN(ar.n) + '</span>' : "") + ' <sup style="font:800 9.5px system-ui;color:var(--slate-soft,#64748b)">' + ans[d].mark + '</sup></span>' +
+          '<span style="font:800 12px system-ui;color:#fff;background:' + acol + ';padding:2px 8px;border-radius:999px;min-width:56px;text-align:center">' + aR + '% R</span></div>' +
+          '<div style="height:5px;border-radius:3px;background:var(--line,#eef1f4);margin-top:3px;overflow:hidden"><i style="display:block;height:100%;width:' + aR + '%;background:' + acol + '"></i></div></div>';
         return;
       }
       // A figure that failed a check, or that rests on fewer than 30 isolates, is shown in grey,
@@ -119,8 +151,10 @@
         '<span style="font:800 12px system-ui;color:#fff;background:' + col + ';padding:2px 8px;border-radius:999px;min-width:56px;text-align:center">' + Rv + '% R' + star + '</span></div>' +
         '<div style="height:5px;border-radius:3px;background:var(--line,#eef1f4);margin-top:3px;overflow:hidden"><i style="display:block;height:100%;width:' + Rv + '%;background:' + col + '"></i></div></div>';
     });
-    if (drugs.some(function (d) { return o.cells[d].act === "caution"; })) {
-      var few = drugs.some(function (d) { return o.cells[d].act === "caution" && o.cells[d].few; }), chk = drugs.some(function (d) { return o.cells[d].act === "caution" && !o.cells[d].few; });
+    if (notes.length) h += notes.map(function (x, i) { var r = x.r; return '<div style="font:500 10.5px system-ui;color:var(--slate-soft,#64748b)">' + (i + 1) + ': pooled figure for ' + esc((SPEC[r.spec] || r.spec) + ", " + (SET[r.set] || r.set)) + (r.cohort === "hai" ? " (ICU device infections)" : "") + ", " + (r.k || 0) + (r.k === 1 ? " institution" : " institutions") + ', because this stratum has it from fewer than 3 institutions.</div>'; }).join("");
+    var shownCaution = drugs.filter(function (d) { return !ans[d] && o.cells[d] && o.cells[d].act === "caution"; });
+    if (shownCaution.length) {
+      var few = shownCaution.some(function (d) { return o.cells[d].few; }), chk = shownCaution.some(function (d) { return !o.cells[d].few; });
       h += '<div style="font:500 10.5px system-ui;color:var(--slate-soft,#64748b)">* grey: ' + (chk ? "failed a data check" : "") + (chk && few ? ", or " : "") + (few ? "from fewer than 3 institutions, so not a pooled figure" : "") + ' (tap for the reason); shown for reference, not used in pooled figures or reasoning.</div>';
     }
     if (off.length) h += '<div style="font:500 10.5px/1.4 system-ui;color:var(--slate-soft,#64748b)">Not shown for this syndrome: ' + esc(off.map(function (d) { return st.synDrug(_syn, d); }).join("; ")) + '.</div>';

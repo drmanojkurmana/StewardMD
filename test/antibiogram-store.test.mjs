@@ -342,3 +342,31 @@ test("review round 3: a region is pooled only when 3 institutions contribute usa
   const sc = three.scopes().find((x) => x.id === "region:west");
   assert.ok(sc && /3 institutions/.test(sc.label));
 });
+
+test("review round 4: clinical antibiograms never answer, WISCA leaves yeasts out, pooled views cite only the sources behind their figures", () => {
+  const S4 = load([
+    src({ id: "M_2023", inst: "M", institution: "Mu ICU", short: "Mu", region: "north", year: 2024, rows: [
+      { spec: "all", set: "icu", org: "Acinetobacter baumannii", n: 127, s: { meropenem: 3.9, colistin: 96 } },
+      { spec: "respiratory", set: "icu", org: "Acinetobacter baumannii", n: 30, cohort: "hai", clinical: "HAP/VAP, page 18", s: { meropenem: 46.66 } }] }),
+    src({ id: "F_2024", inst: "F", institution: "Phi Hospital", short: "Phi", region: "north", year: 2024, rows: [
+      { spec: "blood", set: "all", org: "E. coli", n: 100, s: { meropenem: 80 } },
+      { spec: "blood", set: "all", org: "Candida albicans", n: 100, s: { fluconazole: 90 } }] }),
+    src({ id: "U_2024", inst: "U", institution: "Upsilon Hospital", short: "Upsilon", region: "north", year: 2024, rows: [
+      { spec: "blood", set: "all", org: "E. coli", n: 100, unreliable: "levofloxacin 0 beside ciprofloxacin 60", s: { meropenem: 50 } }] }),
+    src({ id: "G_2024", inst: "G", institution: "Gamma Hospital", short: "Gamma", region: "north", year: 2024, rows: [
+      { spec: "blood", set: "all", org: "E. coli", n: 100, s: { meropenem: 70 } }] }),
+    src({ id: "H_2024", inst: "H", institution: "Eta Hospital", short: "Eta", region: "north", year: 2024, rows: [
+      { spec: "blood", set: "all", org: "E. coli", n: 100, s: { meropenem: 60 } }] })
+  ]);
+  // VAP asks for the ICU device-infection cohort first; the clinical row there must not answer, so the
+  // unit's laboratory table does (MICU profile: meropenem 3.9, never the clinical 46.66).
+  const vap = S4.susceptibility("Acinetobacter baumannii", "meropenem", Object.assign({ scope: "inst:M" }, S4.synCtx("VAP")));
+  assert.equal(vap.s, 3.9); assert.equal(vap.spec, "all");
+  assert.equal(S4.mix("inst:M", "respiratory", "icu").parts.length, 0, "a clinical antibiogram is not part of any WISCA mix");
+  // Yeasts are not part of an antibacterial coverage estimate: 80%, not 40%.
+  assert.equal(S4.wisca("inst:F", "blood", "all", ["meropenem"]).coverage, 80);
+  // Upsilon's table failed its checks and feeds no figure: not cited, not counted.
+  const info = S4.exportInfo(S4.table("region:north", "blood", "all"));
+  assert.match(info.citation, /Phi/); assert.match(info.citation, /Gamma/); assert.doesNotMatch(info.citation, /Upsilon/);
+  assert.ok(S4.drugsFor("region:north", "E. coli", { spec: ["blood"], set: "all" }).includes("meropenem"));
+});

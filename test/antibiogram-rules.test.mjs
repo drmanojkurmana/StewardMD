@@ -392,3 +392,35 @@ test("review round 3: WISCA counts an intrinsic 0 only when the drug is measured
   const w = R.wisca(mixed, ["vancomycin"]);
   assert.equal(w.coverage, 20, "with S. aureus measured, the Gram-negatives count as 0: 50*100/250");
 });
+
+test("review round 4: a clinical antibiogram (laboratory results combined with patient response) is never a % susceptible", () => {
+  // AIIMS Rishikesh MICU 2023 page 18: A. baumannii HAP/VAP, n 30, meropenem 46.66.
+  const v = row({ org: "acinetobacter", spec: "respiratory", set: "icu", n: 30, s: { meropenem: 46.66, colistin: 46.67, ertapenem: 0 }, clinical: "HAP/VAP, page 18" });
+  assert.equal(v.cells.meropenem.act, "caution");
+  assert.match(v.cells.meropenem.why, /clinical antibiogram \(HAP\/VAP, page 18\)/);
+  assert.equal(v.cells.ertapenem.act, "intrinsic", "intrinsic resistance is still shown as such");
+  assert.ok(v.flags.includes("clinical"), "the row carries the flag the store reads");
+});
+
+test("review round 4: paired checks read the figures before any of them was flagged", () => {
+  // SKIMS 2024 urine OPD E. coli: every figure in the contradiction is questioned, whatever check runs first.
+  const v = row({ org: "ecoli", s: { ceftriaxone: 87, meropenem: 23, imipenem: 23, ertapenem: 47 } });
+  ["ceftriaxone", "meropenem", "imipenem", "ertapenem"].forEach((d) => assert.equal(v.cells[d].act, "caution", d));
+  // Ceftriaxone-susceptible Enterobacterales are ertapenem-susceptible too.
+  assert.equal(row({ org: "ecoli", s: { ceftriaxone: 80, ertapenem: 40 } }).cells.ertapenem.act, "caution");
+  // Different numbers tested: the counts still bound each other (Bhopal 2021 E. cloacae, ertapenem 48% of
+  // 52 = 25 isolates, meropenem 8% of 86 = 7).
+  const b = row({ org: "ecloacae", n: 86, s: { ertapenem: 48, meropenem: 8 }, nt: { ertapenem: 52, meropenem: 86 } });
+  assert.equal(b.cells.meropenem.act, "caution"); assert.equal(b.cells.ertapenem.act, "caution");
+  // ...but a subset whose counts can agree is not questioned.
+  assert.equal(row({ org: "ecloacae", n: 86, s: { ertapenem: 90, meropenem: 60 }, nt: { ertapenem: 20, meropenem: 86 } }).cells.meropenem.act, "keep");
+});
+
+test("review round 4: genus enterococci and daptomycin, C. glabrata fluconazole, echinocandins that disagree", () => {
+  assert.match(row({ org: "enterococcus", s: { daptomycin: 64 } }).cells.daptomycin.why, /species not separated/);
+  assert.match(row({ org: "cglabrata", n: 117, s: { fluconazole: 92.9 } }).cells.fluconazole.why, /no susceptible category for fluconazole in C\. glabrata/);
+  assert.equal(row({ org: "calbicans", s: { fluconazole: 95 } }).cells.fluconazole.act, "keep", "C. albicans has a susceptible category");
+  const e = row({ org: "ctropicalis", s: { anidulafungin: 61.4, caspofungin: 97.6, micafungin: 97 } });
+  assert.equal(e.cells.anidulafungin.act, "caution"); assert.equal(e.cells.caspofungin.act, "caution");
+  assert.equal(row({ org: "ctropicalis", s: { anidulafungin: 96, caspofungin: 97.6 } }).cells.caspofungin.act, "keep");
+});

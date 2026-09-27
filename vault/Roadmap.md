@@ -198,3 +198,18 @@ native-speaker check of the Telugu and Hindi consent forms and handouts.
 - [x] **On-device** (PR #1245, 2026-09-26): `maik-local.js` runs an ES5 copy of the meta-talk filter,
   pinned to the Cloud file by a parity test. Move both copies into one kb/ai UMD file if a third caller
   appears. The fine-tuned framing ("Reference material ... above") is unchanged.
+
+## Clinical Reasoning + Antibiotic engine accuracy
+Plan: `kb/validation/PLAN-DX-ABX-10.md` (baseline audit `kb/validation/AUDIT-2026-09-26.md`). See [[Clinical Reasoning]].
+- [ ] Phase 0: data split, held-out set to 300, adjudicated abx labels, CI gate
+- [ ] Phase 1: gate respects `antibioticRelevant`; can't-miss rules (`smd_gate_v2`)
+- [ ] Phase 2: text extraction synonyms + numeric labs + confirm chips (`smd_nlp_v2`)
+- [ ] Phase 3: base-rate priors, anchors, pertinent negatives, confusion clusters (`smd_rank_v3`)
+- [ ] Phase 4: calibrated confidence (`smd_calib`). "Not enough information" part built (default OFF, 2026-09-27); calibration map and match-strength bands not started
+- [ ] KB content (`smd_kb_v2`, built default OFF 2026-09-27): clinician review of the hepatobiliary rules; re-key the gold viral / biliary cases with the new findings
+- [ ] Prevalence prior (`smd_prior_v1`, mechanism built default OFF 2026-09-27): needs a hospital's aggregate diagnosis counts to validate
+- [ ] Differentiating questions on Select (`smd_dx_ask`, built default OFF 2026-09-27): owner review of the flow; later the same questions in OPD Ask MaiK
+- [x] Plain view of the Dx workspace (`smd_dx_simple`): default ON 2026-09-27, owner approved. Remaining: reaches the native app only after build-www, cap sync and a native rebuild; retire the classic view once nobody opts out
+- [ ] Engine: KB `assoc` carries `not`-clause terms, so an excluded finding raises and "supports" the disease (neck stiffness -> chikungunya 41 -> 56). Fix behind a flag, re-measure floors
+- [ ] Phase 5: one drug resolver with host modifiers, adjudicated regimens (`smd_rx_v2`)
+- [ ] Phase 6: shadow-mode validation + clinician sign-off

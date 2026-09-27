@@ -401,8 +401,8 @@
           if (otaInstall) otaInstall.addEventListener("click", function () {
             if (!window.SMD_OTA || !pending) return;
             otaInstall.disabled = true;
-            SMD_OTA.install(pending, function (pct) { if (otaStatus) otaStatus.textContent = "Downloading… " + pct + "%"; }).then(function (res) {
-              if (res && res.ok) { if (otaStatus) otaStatus.textContent = "Update ready — reopening…"; }
+            SMD_OTA.install(pending, function (pct, label) { if (otaStatus) otaStatus.textContent = label || ("Downloading… " + pct + "%"); }).then(function (res) {
+              if (res && res.ok) { if (otaStatus) otaStatus.textContent = "Update ready, reopening…"; }
               else { otaInstall.disabled = false; if (otaStatus) otaStatus.textContent = otaSay(res && res.error, "Update failed"); }
             });
           });
@@ -1618,6 +1618,47 @@
       ".hv-pf-note{font:400 12px/1.55 var(--hfont,system-ui);color:var(--hmut,#64748b);margin:8px 2px 0}",
       ".hv-pf-retry{border:0;background:none;color:var(--hp,#0F766E);font:600 12.5px var(--hfont,system-ui);cursor:pointer;padding:0 2px}",
       ".hv-pf-acts{margin-top:22px}",
+      /* PROFILE HUB (smd_profile_hub, 2026-09-27). One page for what used to be three: Profile, Settings >
+       * Profile & StewardMD ID, and Account & Verification. Laid out as an iOS inset-grouped list: a
+       * centred identity hero, soft grouped cards with no borders, coloured icon tiles on the rows you
+       * navigate from, hairlines inset past the tile, destructive actions as centred red rows. */
+      ".hv-pf.hub{--hub-card:rgba(118,118,128,.075);--hub-line:rgba(60,60,67,.13);--hub-chev:rgba(60,60,67,.32);padding:0 0 8px}",
+      "body.dark .hv-pf.hub{--hub-card:rgba(255,255,255,.055);--hub-line:rgba(255,255,255,.09);--hub-chev:rgba(235,235,245,.3)}",
+      ".hub-hero{display:flex;flex-direction:column;align-items:center;text-align:center;padding:6px 8px 4px}",
+      ".hub-hero .hv-pf-pic{width:88px;height:88px;box-shadow:0 0 0 3px var(--hpanel,#fff),0 0 0 5px var(--hps,rgba(15,118,110,.18));margin-bottom:12px}",
+      ".hub-hero .hv-pf-ph{font-size:34px}",
+      ".hub-nm{font:700 22px/1.2 var(--hfont,system-ui);letter-spacing:-.02em;color:var(--hink,#0f172a);overflow-wrap:anywhere}",
+      ".hub-em{font:400 13.5px var(--hfont,system-ui);color:var(--hmut,#64748b);margin-top:3px;overflow-wrap:anywhere}",
+      ".hub-hero .hv-pf-badges{justify-content:center;margin-top:11px}",
+      ".hub-hero .hv-pf-badge{border-radius:999px;padding:4px 10px;font-size:11px}",
+      ".hv-pf.hub .hv-pf-card{border:0;background:var(--hub-card);border-radius:14px}",
+      ".hv-pf.hub .hv-pf-row{border-top:.5px solid var(--hub-line);min-height:50px;padding:12px 15px}",
+      ".hv-pf.hub .hv-pf-row:first-child{border-top:0}",
+      ".hv-pf.hub .hv-pf-sec{margin:26px 16px 7px;font-size:11.5px;letter-spacing:.06em}",
+      ".hv-pf.hub .hv-pf-note{margin:8px 16px 0}",
+      ".hub-nav{display:flex;align-items:center;gap:13px;width:100%;min-height:54px;padding:10px 14px;border:0;background:none;text-align:left;cursor:pointer;color:var(--hink,#0f172a);-webkit-tap-highlight-color:transparent}",
+      ".hub-nav:active{background:var(--hub-line)}",
+      ".hv-pf-card>.hub-nav+.hub-nav{border-top:.5px solid var(--hub-line)}",
+      ".hub-tile{flex:0 0 30px;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff}",
+      ".hub-tile svg{width:17px;height:17px;stroke-width:2}",
+      ".hub-t-teal{background:linear-gradient(180deg,#14837A,#0E6E63)}.hub-t-amber{background:linear-gradient(180deg,#F5A524,#E08A00)}",
+      ".hub-t-indigo{background:linear-gradient(180deg,#6E71F0,#5053D6)}.hub-t-slate{background:linear-gradient(180deg,#7B8794,#5F6B78)}",
+      ".hub-t-green{background:linear-gradient(180deg,#2BB673,#1E9A5C)}",
+      ".hub-l{flex:1;min-width:0;font:600 15px/1.25 var(--hfont,system-ui);letter-spacing:-.01em}",
+      ".hub-s{display:block;font:400 12.5px/1.35 var(--hfont,system-ui);color:var(--hmut,#64748b);margin-top:2px;letter-spacing:0}",
+      ".hub-v{flex:0 1 auto;max-width:44%;font:500 14px var(--hfont,system-ui);color:var(--hmut,#64748b);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+      ".hub-v.ok{color:#1E9A5C}.hub-v.warn{color:#B86E00}",
+      ".hub-chev{flex:0 0 auto;display:flex;color:var(--hub-chev)}.hub-chev svg{width:15px;height:15px;stroke-width:2.4}",
+      ".hub-cta{display:flex;align-items:center;gap:13px;width:100%;margin:18px 0 0;padding:14px;border-radius:16px;border:1px solid rgba(224,138,0,.28);background:linear-gradient(180deg,rgba(245,165,36,.12),rgba(245,165,36,.04));text-align:left;cursor:pointer;color:var(--hink,#0f172a)}",
+      ".hub-cta[hidden]{display:none}",
+      ".hub-danger{display:block;width:100%;min-height:50px;border:0;background:none;padding:14px;font:600 15px var(--hfont,system-ui);color:#D93A3A;text-align:center;cursor:pointer}",
+      ".hub-danger.soft{color:var(--hp,#0F766E)}",
+      ".hv-pf-card>.hub-danger+.hub-danger{border-top:.5px solid var(--hub-line)}",
+      // Values read as values, not headlines: regular weight, two lines at most, labels a fixed column.
+      ".hv-pf.hub .hv-pf-k{flex:0 0 31%;font:400 14.5px var(--hfont,system-ui);color:var(--hink,#0f172a)}",
+      ".hv-pf.hub .hv-pf-v{font:400 14.5px/1.3 var(--hfont,system-ui);color:var(--hmut,#64748b);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}",
+      ".hv-pf.hub .hv-pf-v.unset{color:var(--hub-chev)}",
+      ".hv-pf.hub .hv-pf-edit{font:600 14px var(--hfont,system-ui);padding-left:10px}",
       // About modal: tabs + version-history timeline + facts
       ".smd-ab-tabs{display:flex;gap:4px;margin:-4px 0 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}",
       ".smd-ab-tab{border:none;background:none;font:700 12.5px var(--sans);color:var(--slate-soft);padding:8px 2px;margin-right:14px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}",
@@ -2697,7 +2738,7 @@
       // the flag object does not exist yet when this sheet is built. Flag off = the row is absent,
       // not a row that opens nothing.
       (pglogOn() ? mi("book", "NMC eLOGBook", "Digital Residency Logbook &amp; Competency Portfolio Powered by AI", "pglog") : "") +
-      mi("user", "Profile", "Your StewardMD ID, hospital, plan &amp; sign-in", "account") +
+      mi("user", "Profile", "ID, verification, hospital, plan &amp; sign-in", "account") +
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
       mi("trend", "AI Usage", "MaiK Tokens, today&rsquo;s spend &amp; rate card", "aiusage") +
       (nIsOwner() ? mi("framework", "AI Control Center", "Models, usage &amp; quotas (owner)", "aictl") : "") +
@@ -3309,7 +3350,33 @@
    *  2) collect edits through window.prompt() — a desktop dialog in a mobile shell. Rows edit in
    *     place instead (hospital keeps the searchable directory picker).
    */
+  /* The role label, read defensively. SMD_ROLE is shared by role-features.js and native-watch.js,
+   * and native-watch.js once REPLACED it on phones, leaving no labelOf: Profile threw here, before
+   * its sheet opened, and every tap on it did nothing. An optional line must never cost the page. */
+  function acctRoleLabel() {
+    try {
+      var R = window.SMD_ROLE;
+      if (R && typeof R.labelOf === "function" && typeof R.current === "function") return R.labelOf(R.current()) || "";
+    } catch (e) {}
+    return "";
+  }
+  /* Profile must OPEN, whatever else fails. Every caller (the sidebar, the More sheet, Settings)
+   * wraps this in try/catch and discards the error, so a throw anywhere before openSheet used to
+   * read on the phone as a button that does nothing, however many times it was tapped. Now a
+   * failure still opens Profile, with a Retry, and the reason goes to the console. */
   function openAccount() {
+    try { return openAccountPage(); }
+    catch (e) {
+      try { console.warn("[profile] open failed:", e); } catch (x) {}
+      try {
+        openSheet('<div class="hv-sh-t">Profile</div><div class="hv-pf"><p class="hv-pf-note">Your profile could not be shown in full. ' +
+          '<button class="hv-pf-retry" type="button" data-acct="retry">Retry</button></p></div>');
+        var rb = sheetEl().querySelector('[data-acct="retry"]');
+        if (rb) rb.addEventListener("click", function () { openAccount(); });
+      } catch (x) {}
+    }
+  }
+  function openAccountPage() {
     var a = readAccount();
     var P = (window.SMD_ACCOUNT && window.SMD_ACCOUNT.profile && window.SMD_ACCOUNT.profile()) || null;
     var signedIn = P ? P.signedIn : !!(a && (a.email || a.type === "google" || a.type === "apple" || a.type === "email" || a.providerType === "email"));
@@ -3335,7 +3402,8 @@
     var nm = (P && P.name) || (a && a.name) || "Signed in";
     var em = (P && P.email) || (a && a.email) || "";
     var pc = (P && P.picture) || (a && a.picture) || "";
-    var initial = (((nm || em || "U").trim()[0]) || "U").toUpperCase();
+    // The initial of the NAME, not of its title: "Dr Manoj" is M, not D.
+    var initial = ((((nm || em || "U").trim().replace(/^(dr|prof|mr|mrs|ms)\.?\s+/i, "")) || "U")[0] || "U").toUpperCase();
     var pic = pc
       ? '<img class="hv-pf-pic" src="' + smdEsc(pc) + '" referrerpolicy="no-referrer" alt="" onerror="this.outerHTML=\'<div class=&quot;hv-pf-pic hv-pf-ph&quot;>' + smdEsc(initial) + '</div>\'">'
       : '<div class="hv-pf-pic hv-pf-ph">' + smdEsc(initial) + '</div>';
@@ -3371,7 +3439,7 @@
 
       '<div class="hv-pf-sec">Professional details</div>' +
       '<div class="hv-pf-card" id="pfPro">' +
-        row("Role", "role", { value: (window.SMD_ROLE && SMD_ROLE.labelOf(SMD_ROLE.current())) || "", placeholder: "Not set", editLabel: "Change" }) +
+        row("Role", "role", { value: acctRoleLabel(), placeholder: "Not set", editLabel: "Change" }) +
         row("Medical reg. no", "regno", { value: "", placeholder: "Loading…", edit: false }) +
         row("Hospital / college", "hospital", { value: "", placeholder: "Loading…", edit: false }) +
         row("Degree", "degree", { value: "", placeholder: "Loading…", edit: false }) +
@@ -3406,6 +3474,85 @@
         '<button data-acct="delete" type="button" ' + dangerBtn + '>Delete account &amp; data</button>' +
       '</div></div>';
 
+    /* PROFILE HUB. Owner, with three screenshots: the sidebar's "Account & Verification", More >
+     * "Profile" and Settings > "Profile & StewardMD ID" were three doors to overlapping pages - "mix all
+     * three into one Profile section ... everything at one place". This is that page. It keeps every
+     * hook the old one had (#pfPro rows, #pfIdCode, #pfBadges, data-acct, data-edit) so all the
+     * fillers and handlers below work unchanged, and adds verification, plan and usage as rows that
+     * drill in. smd_profile_hub="0" restores the previous layout. */
+    if (profileHubOn()) {
+      var nav = function (act, tile, icon, label, sub, value, valId) {
+        return '<button class="hub-nav" type="button" data-hub="' + act + '">' +
+          '<span class="hub-tile ' + tile + '">' + svg(icon) + '</span>' +
+          '<span class="hub-l">' + label + (sub ? '<span class="hub-s">' + sub + '</span>' : '') + '</span>' +
+          (value != null ? '<span class="hub-v"' + (valId ? ' id="' + valId + '"' : '') + '>' + value + '</span>' : '') +
+          '<span class="hub-chev">' + svg("chev") + '</span></button>';
+      };
+      body = '<div class="hv-pf hub">' +
+        '<div class="hub-hero">' + pic +
+          '<div class="hub-nm">' + smdEsc(nm) + '</div>' +
+          (em ? '<div class="hub-em">' + smdEsc(em) + '</div>' : '') +
+          '<div class="hv-pf-badges" id="pfBadges">' +
+            '<span class="hv-pf-badge">' + smdEsc(acctProviderLabel(a, false)) + '</span>' +
+            (isPro ? '<span class="hv-pf-badge pro">Pro</span>' : '<span class="hv-pf-badge">Free</span>') +
+          '</div>' +
+        '</div>' +
+        // Only an unverified account sees this; acctFillHubVerify reveals it.
+        '<button class="hub-cta" type="button" data-hub="verify" id="pfVerifyCta" hidden>' +
+          '<span class="hub-tile hub-t-amber">' + svg("shield") + '</span>' +
+          '<span class="hub-l">Verify your profile<span class="hub-s">Your mobile number or medical registration. Either one unlocks 7 days of Pro, free.</span></span>' +
+          '<span class="hub-chev">' + svg("chev") + '</span></button>' +
+
+        '<div class="hv-pf-sec">StewardMD ID</div>' +
+        '<div class="hv-pf-card"><div class="hv-pf-id">' +
+          '<span class="hv-pf-idl"><span class="hv-pf-idcode" id="pfIdCode">Generating…</span>' +
+          '<span class="hv-pf-idsub">Your permanent ID. Colleagues add you to a unit with it.</span></span>' +
+          '<button class="hv-pf-copy" id="pfIdCopy" type="button" hidden>Copy</button>' +
+        '</div></div>' +
+
+        '<div class="hv-pf-sec">Verification</div>' +
+        '<div class="hv-pf-card">' +
+          nav("phone", "hub-t-teal", "device", "Mobile number", '<span id="pfPhoneNum">Checking…</span>', "Checking…", "pfPhoneVal") +
+          nav("verify", "hub-t-green", "shield", "Registration", "NMC or state council", "Checking…", "pfVerifyVal") +
+        '</div>' +
+        '<p class="hv-pf-note">Verify either one to get 7 days of Pro, free. A verified registration is also what lets you prescribe.</p>' +
+
+        '<div class="hv-pf-sec">Professional details</div>' +
+        '<div class="hv-pf-card" id="pfPro">' +
+          row("Role", "role", { value: acctRoleLabel(), placeholder: "Not set", editLabel: "Change" }) +
+          row("Reg. number", "regno", { value: "", placeholder: "Loading…", edit: false }) +
+          row("Hospital", "hospital", { value: "", placeholder: "Loading…", edit: false }) +
+          row("Degree", "degree", { value: "", placeholder: "Loading…", edit: false }) +
+          row("Speciality", "speciality", { value: "", placeholder: "Loading…", edit: false }) +
+          row("City", "city", { value: "", placeholder: "Loading…", edit: false }) +
+        '</div>' +
+
+        '<div class="hv-pf-sec">Plan &amp; usage</div>' +
+        '<div class="hv-pf-card">' +
+          nav("subscription", "hub-t-amber", "award", "Subscription", "Plans &amp; billing", isPro ? "Pro" : "Free") +
+          nav("aiusage", "hub-t-indigo", "trend", "AI usage", "MaiK tokens, today’s spend", null) +
+        '</div>' +
+
+        (window.SMD_APPLOCK ?
+          '<div class="hv-pf-sec">Security</div>' +
+          '<div class="hv-pf-card">' +
+            row("App Lock", "applock", {
+              value: { pin: "PIN set", biometric: "Face ID / Touch ID" }[window.SMD_APPLOCK.method()] || "Not set",
+              editLabel: "Manage"
+            }) +
+          '</div>' : "") +
+
+        '<div class="hv-pf-sec">Sign-in</div>' +
+        '<div class="hv-pf-card">' +
+          row("Signed in with", "provider", { value: acctProviderLabel(a, true), edit: false }) +
+        '</div>' +
+        '<p class="hv-pf-note">Name, email and photo come from your Google or Apple account, so they change there.</p>' +
+
+        '<div class="hv-pf-sec">&nbsp;</div>' +
+        '<div class="hv-pf-card"><button class="hub-danger soft" data-acct="signout" type="button">Sign out</button></div>' +
+        '<div class="hv-pf-card" style="margin-top:12px"><button class="hub-danger" data-acct="delete" type="button">Delete account &amp; data</button></div>' +
+      '</div>';
+    }
     openSheet('<div class="hv-sh-t">Profile</div>' + body);
     var s = sheetEl();
 
@@ -3427,8 +3574,92 @@
     });
     acctWatchAuth();
     acctFillId(s);
-    acctFillVerified(s);
+    if (!profileHubOn()) acctFillVerified(s);   // the hub shows status in its own row, once
     acctFillProfessional(s);
+    if (profileHubOn()) acctWireHub(s);
+  }
+  // The hub's call to action: only when BOTH answers are in and neither is verified.
+  function hubCta(root) {
+    var cta = root.querySelector("#pfVerifyCta"); if (!cta) return;
+    var regOk = root._reg === "doctor" || root._reg === "trainee";
+    var known = root._reg && root._reg !== "unknown" && root._phone != null;
+    cta.hidden = !(known && !regOk && !root._phone);
+  }
+  /* The hub's Mobile number row. Verified means the number on file is the one that passed the code
+   * (phoneVerifiedNumber); for numbers verified before that was recorded, a verification on file plus
+   * the account's phoneVerified claim. A number changed any other way reads as not verified. */
+  function acctPaintPhone(root, d) {
+    var num = root.querySelector("#pfPhoneNum"), val = root.querySelector("#pfPhoneVal");
+    if (!num || !val) return;
+    var digits = function (x) { return String(x || "").replace(/\D/g, "").slice(-10); };
+    var phone = String((d && d.phone) || "");
+    function paint(ok) {
+      if (!document.body.contains(root)) return;
+      num.textContent = phone || "Not added";
+      num.setAttribute("data-num", phone);
+      val.textContent = !phone ? "Add" : ok ? "Verified" : "Not verified";
+      val.className = "hub-v" + (!phone ? "" : ok ? " ok" : " warn");
+      root._phone = !!(phone && ok);
+      hubCta(root);
+    }
+    if (!phone) { paint(false); return; }
+    if (d.phoneVerifiedNumber) { paint(digits(d.phoneVerifiedNumber) === digits(phone)); return; }
+    if (!d.phoneVerifiedAt) { paint(false); return; }
+    var u = null; try { u = window.SMD_AUTH && SMD_AUTH.currentUser; } catch (e) {}
+    if (!u || typeof u.getIdTokenResult !== "function") { paint(true); return; }
+    u.getIdTokenResult().then(function (r) { paint(!!(r && r.claims && r.claims.phoneVerified === true)); }, function () { paint(true); });
+  }
+  // The one Profile page is permanent (owner, 2026-09-27: "hardcode this change"). The flag that used
+  // to gate it (smd_profile_hub) is retired; the old three-door layout is gone from every entry point.
+  function profileHubOn() { return true; }
+  try { window.SMD_PROFILE_HUB_ON = profileHubOn; } catch (e) {}
+  // The hub's drill-in rows. Each closes Profile first, so the next screen is never stacked under it.
+  function acctWireHub(s) {
+    s.querySelectorAll("[data-hub]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-hub");
+        if (k === "verify") { closeSheet(); setTimeout(function () { try { if (window.SMD_VERIFY && SMD_VERIFY.openPanel) SMD_VERIFY.openPanel(); } catch (e) {} }, 80); }
+        else if (k === "phone") {
+          // Adding or changing the number always goes through the WhatsApp / SMS code, so "Verified"
+          // can never sit next to a number nobody proved. Profile comes back once it is done.
+          var cur = ""; try { cur = (s.querySelector("#pfPhoneNum") || { getAttribute: function () { return ""; } }).getAttribute("data-num") || ""; } catch (e) {}
+          closeSheet();
+          if (!acctWireHub._phoneBack) {
+            acctWireHub._phoneBack = true;
+            document.addEventListener("smd:phone-verified", function () { setTimeout(function () { try { openAccount(); } catch (e) {} }, 800); });
+          }
+          setTimeout(function () { try { if (window.SMD_PHONE_VERIFY && SMD_PHONE_VERIFY.open) SMD_PHONE_VERIFY.open(cur); } catch (e) {} }, 80);
+        }
+        else if (k === "subscription") { try { openSubscription(); } catch (e) {} }
+        else if (k === "aiusage") { closeSheet(); try { openAiUsage(); } catch (e) {} }
+      });
+    });
+    acctFillHubVerify(s);
+  }
+  // Verification status on the hub, from the SAME answer every gate uses (SMD_VERIFY). Verified
+  // hides the call to action; anything else shows it.
+  function acctFillHubVerify(s) {
+    var val = s.querySelector("#pfVerifyVal"), cta = s.querySelector("#pfVerifyCta");
+    function paint(state) {
+      if (!document.body.contains(s)) return;
+      if (val) {
+        val.textContent = state === "doctor" ? "Verified" : state === "trainee" ? "Verified trainee" : state === "none" ? "Not verified" : "Unavailable";
+        val.className = "hub-v" + (state === "doctor" || state === "trainee" ? " ok" : state === "none" ? " warn" : "");
+      }
+      // Stored on the SAME element acctPaintPhone uses (.hv-pf.hub), so hubCta sees both answers.
+      var R = s.querySelector(".hv-pf.hub") || s;
+      R._reg = state;   // "doctor" | "trainee" | "none" | "unknown"
+      hubCta(R);
+    }
+    var V = window.SMD_VERIFY;
+    if (!V || !V.isVerified) { paint("unknown"); return; }
+    try {
+      V.isVerified().then(function (ok) {
+        if (ok) return paint("doctor");
+        if (!V.isTrainee) return paint("none");
+        return V.isTrainee().then(function (t) { paint(t ? "trainee" : "none"); }, function () { paint("none"); });
+      }, function () { paint("unknown"); });
+    } catch (e) { paint("unknown"); }
   }
   // Exported so every account surface opens the SAME page: the sidebar identity block, the More
   // sheet, and Settings → Account (sidebar-redesign.js, which lives outside this closure).
@@ -3606,17 +3837,49 @@
       // check their wifi for a problem that has nothing to do with it.
       var denied = /permission[-_ ]?denied|unauthenticated|app-?check/i.test(code);
       try {
-        if (!document.body.contains(card)) return;
+        if (!document.body.contains(card) || painted) return;
         if (denied) offline("Unverified", "Signed in, but this device could not be verified. Sign out and back in, then retry.");
         else offline("Offline", "Couldn't load your details.");
       } catch (e) {}
     };
-    pref.get().then(once(onData), once(onFail));
-    setTimeout(function () {
-      if (settled || !document.body.contains(card)) return;
-      try { pref.get({ source: "cache" }).then(once(onData), once(onFail)); }
-      catch (e) { once(onFail)(); }
-    }, 7000);
+    /* THREE SOURCES, NEVER "OFFLINE" WHILE ONE OF THEM WORKS (owner, 2026-09-27, screenshot: every
+     * detail read "Offline" / "Couldn't load your details" while Registration beside it said
+     * Verified, so the phone was online and reaching our server). What failed was this SDK read
+     * inside the iOS WebView: it hung, and the cache read that follows it missed. So:
+     *   1. the last good copy on this device paints at once (no Loading, no Offline);
+     *   2. the SDK read and POST /api/auth/my-profile (the same doc via the server's admin
+     *      credential) run side by side, and whichever answers first paints;
+     *   3. "Offline" appears only if BOTH fail AND nothing was ever loaded here. */
+    var CK = "smd_profile_cache:" + uid;
+    var painted = false, failures = 0;
+    function wrap(obj, exists) { return { exists: exists !== false, data: function () { return obj || {}; } }; }
+    function fresh(snap) {
+      var dd = (snap && snap.exists && snap.data()) || {};
+      try { localStorage.setItem(CK, JSON.stringify(dd)); } catch (e) {}
+      painted = true; settled = true;
+      onData(snap);
+    }
+    function failed(err) {
+      failures++;
+      if (failures < 2 || painted) return;          // the other source may still answer
+      onFail(err);
+    }
+    try { var cached = JSON.parse(localStorage.getItem(CK) || "null"); if (cached) { painted = true; onData(wrap(cached)); } } catch (e) {}
+    var sdkDone = false;
+    pref.get().then(function (snap) { sdkDone = true; fresh(snap); }, function (e) { sdkDone = true; failed(e); });
+    setTimeout(function () { if (!sdkDone) { sdkDone = true; failed({ code: "sdk-timeout" }); } }, 6000);
+    (function viaServer() {
+      var u = null; try { u = SMD_AUTH && SMD_AUTH.currentUser; } catch (e) {}
+      if (!u || typeof u.getIdToken !== "function") { failed({ code: "no-user" }); return; }
+      u.getIdToken().then(function (tok) {
+        return fetch((window.SMD_API_BASE || "") + "/api/auth/my-profile", {
+          method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: "{}"
+        });
+      }).then(function (r) { return r.json(); }).then(function (j) {
+        if (!j || !j.ok) throw { code: (j && j.error) || "server" };
+        fresh(wrap(j.profile, j.exists));
+      }).catch(function (e) { failed(e); });
+    })();
 
     function onData(snap) {
       if (!document.body.contains(card)) return;
@@ -3635,6 +3898,7 @@
       setRow("speciality", d.speciality, { editLabel: d.speciality ? "Change" : "Choose" });
       setRow("city", d.city);
       setRow("phone", d.phone);
+      if (profileHubOn()) acctPaintPhone(card.closest(".hv-pf") || card, d);
 
       function save(obj) { return pref.set(obj, { merge: true }); }
 

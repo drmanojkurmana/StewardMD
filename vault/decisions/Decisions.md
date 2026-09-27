@@ -5,6 +5,31 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-27 · Antibiogram review round 4: clinical antibiograms, one answer for console and reasoning
+
+**Decision.** A clinical antibiogram (laboratory results combined with patient response) never answers a
+syndrome, a pool or WISCA: a `clinical` row flag makes its figures cautions and the store treats the row as
+not usable. The console and reasoning use the same answer function (`susceptibility`), including its drug-by-drug
+walk-on to another stratum, and label such figures with their own stratum and counts. WISCA covers bacteria
+only. Paired checks read the figures before any of them was flagged. An indwelling catheter makes a UTI
+complicated.
+**Why.** The round-4 reviewer showed the MICU VAP console at "Meropenem 53% R" from a clinical table, where
+the lab gives 3.9% susceptible. The console and reasoning also gave different answers for the same question
+(grey 10.9 against 84% resistant).
+**Trade-off.** More cautions (whole contradictory rows grey out, not just one cell), and footnotes in the
+reasoning panel. **Status:** built; reviewed items listed in vault/modules/Antibiogram.md.
+
+## 2026-09-27 · CodeQL is off: no default setup, no codeql.yml
+
+**Decision (owner: "turn off codeql").** GitHub CodeQL code scanning is disabled in the repo settings
+(Settings, Advanced Security, CodeQL analysis), and the advanced workflow `.github/workflows/codeql.yml`
+was deleted on 2026-09-26. Do not re-add either.
+**Why.** Every PR waited on CodeQL jobs that added nothing. The advanced workflow failed because default
+setup was also on. Under default setup, `Analyze (swift)` queued for up to an hour on macOS runners and
+then failed with "configuration error" (it cannot autobuild the Capacitor iOS app).
+**Trade-off.** No CodeQL static analysis. Security checks that remain: the `security-scan` job in
+`ci.yml`, plus review and tests. **Status:** done 2026-09-27.
+
 ## 2026-09-26 · eLogbook made easy: HoD may approve joins and assign guides; supervisor falls back to the guide
 
 **Decision (owner: "make it user friendly and easy").** A resident can request to join by institution
@@ -10211,6 +10236,128 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
   the point of use rather than adding a new claim. Held as `DUTY_LINE` in both `kb-protocols.js` and
   `specialty-kits.js` (buildless IIFEs cannot import each other) with a test that keeps the wording
   identical.
+
+## 2026-09-27 - Dx engine: "not enough information" is an answer, and prevalence is ordinal until real counts exist
+- **Context**: fever alone still produced a confident-looking top diagnosis (HLH, then vasculitis), and
+  common diseases did not outrank rare ones. Plan `kb/validation/PLAN-DX-ABX-10.md`, audit Round 4.
+- **Decision 1 (`smd_calib`)**: below a minimum of clinical information the gate returns
+  "Not enough information yet", makes no infection or antibiotic call, and lists the next findings;
+  OPD Ask MaiK then gives no provisional diagnosis and no treatment. A red flag always gets the
+  normal answer, because the answer to possible shock is urgency, not a request for more data.
+- **Decision 2 (`smd_prior_v1`)**: the prior is ordinal tiers (ai_drafted), bounded at +/-8 on the
+  rank and never on the score, with time-critical diagnoses never pushed down. No prevalence number is
+  invented. A hospital's aggregate diagnosis counts replace the tiers; patient rows never enter it.
+- **Why not tune the prior on the gold set**: the gold set is balanced (3 to 4 cases per diagnosis),
+  so it penalises any prior toward the common and tuning on it would be circular. It stays OFF until
+  real frequencies (Phase 6) show it helps.
+- **Decision 3 (`smd_kb_v2`)**: the KB's `feverGU` rules are read as "fever" under the flag rather
+  than renaming the key, so saved cases and the classic path are untouched.
+- **Reversible**: all three are flags, default OFF; flags off is byte-identical (1,660 case-paths).
+
+## 2026-09-27 - Dx workspace: a plain view, behind a flag, instead of rewriting the classic one
+- **Context**: the owner said the Clinical Reasoning module is hard to understand. The classic view
+  was chosen earlier ("direction B, Guided Consult") and other tests and habits depend on it.
+- **Decision**: `smd_dx_simple` layers a plain view over the same engine: one list numbered once,
+  a Most likely card first, plain fit labels and card headings, less shown by default. Clinical
+  logic, scores and the antibiotic gate are untouched; the view is presentation only.
+- **Why a flag and not an edit in place**: reversible per CLAUDE.md; the owner decides the default
+  after using it. Two outright bugs (heading spacing, repeated guideline sentence) were fixed for
+  everyone.
+
+## 2026-09-27 - Dx workspace: the plain view is the default
+- **Decision**: `smd_dx_simple` defaults ON (owner: "yes make it the default"), after the anti-slop
+  pass (tasteskill.dev redesign audit). Presentation only; engine, scores and antibiotic gate are
+  unchanged (asserted in `test/run-dx-simple.mjs`).
+- **Reversible**: `?dxsimple=0`, or localStorage `smd_dx_simple = "0"`, shows the classic view; the
+  code path is intact. Recovery point: commit 9712fdc87 (flag default OFF).
+- **Checked**: every workspace-touching browser suite was run before and after the flip; the only
+  new failure was a test that looked for the classic "Why not higher" label, now covering both views.
+
+## 2026-09-27 - Antibiotic gate v2 is the default
+- **Decision**: `smd_gate_v2` defaults ON (owner: "turn on smd_gate_v2"). Its rules are ai_drafted; the
+  owner, a clinician, approved them for default ahead of a separate clinician review.
+- **Measured effect** (same 491 gold cases, default config, classic -> v2): antibiotics when indicated
+  156 -> 161 (tapped) and 110 -> 111 (text); time-critical flagged 47 -> 49 of 49 (tapped), 31 -> 32
+  (text); viral given antibiotics 13 -> 9 and 10 -> 6; overcall on text 79 -> 72, complaint 19 -> 12.
+  Worse: overcall on tapped findings 48 -> 52; complaint-only abx-when-indicated 42 -> 40; held-out 2
+  abx-when-indicated 9 -> 8 (one case). The overcall is the next target.
+- **Reversible**: `?gatev2=0` or localStorage `smd_gate_v2 = "0"`. The classic gate keeps its own floors
+  (`smd_gate_v2=0`) and CI step; configs that now include the gate implicitly were re-recorded and
+  match the old explicit `smd_gate_v2=1` configs exactly.
+
+## 2026-09-27 - Gate v2: afebrile non-infective lead, and "rule out SBP" means tap first
+- **Decision**: (1) with no fever, shock physiology or host modifier, a leading non-infective diagnosis
+  is not "infection likely"; (2) cirrhosis + ascites: fever / rigors / ascitic PMN >= 250 / abdominal pain
+  = suspected SBP (tap and treat); encephalopathy alone = tap first; a GI bleed keeps prophylaxis.
+- **Why**: overcall on tapped findings 52 -> 37 of 318 with no loss of a needed antibiotic call in any
+  split or configuration. The first cut put abdominal pain in "tap first" and lost a time-critical
+  case on the text path; clinical grounds (pain is a cardinal SBP symptom) put it back in "treat".
+
+## 2026-09-27 - Free Pro week: verified profiles only (REVERSES "pending review gets full access")
+- **Owner**: "Only verified profiles get pro subscription for 7 days ... verification is mandatory,
+  phone number or NMC or state MC id verification, to get eligible for 7 days free Pro trial."
+- **Before**: an unverified account could hold the week. Tapping "Not now" on the verify screen
+  stamped `provUntil` (the skip trial), and so did a certificate still awaiting manual review
+  (the earlier decision "manual review PENDING gets full access").
+- **Now** (`TRIAL_NEEDS_VERIFY`, default on): the week needs a verified mobile number OR a verified
+  registration. ONE week per account, counted from whichever verification came first. A doctor
+  whose certificate is pending review but whose phone is verified still gets it, through the phone.
+- **Unchanged**: `verified` still means "registered doctor", so a phone-only account can never
+  prescribe; paid Pro and the owner are unaffected; the one-week-per-doctor ledger still applies.
+- **Reversible**: `TRIAL_NEEDS_VERIFY = "0"` (env or KV `billing:cfg.flags`) restores provisional
+  access with no deploy. `test/verify-gate.test.mjs` asserts both sides.
+
+## 2026-09-27 - One Profile, and verification remembered per account
+- Three doors (Profile / Settings > Profile & StewardMD ID / Account & Verification) became one
+  Profile page behind `smd_profile_hub`.
+- A server-confirmed verification is now kept per account on the device and withdrawn only by an
+  explicit server "no". Previously any network failure at launch scored as "not verified" and
+  forced the verify screen on doctors already verified. See `verify.js` and
+  `test/run-verify-universal-ui.mjs`.
+## 2026-09-27 - Extraction v2 round 2, and afebrile septic shock in gate v2
+- **Decision**: (1) `smd_nlp_v2` phrases must start a word (short ones also end one); negated lists and
+  postfix "negative" negate; "N weeks ago" needs an onset word; noisy phrases dropped (diaphoresis as
+  cholinergic, "leg swelling" as one-sided, mucositis, bare "rigid"). (2) gate v2 `sepsis_afebrile`: no
+  fever, low BP + raised lactate or pressors + confusion or fast breathing, host over 50 / care home /
+  immunocompromised, infection still competitive -> possible septic shock, antibiotics.
+- **Why**: extraction precision train 56% -> 60%, dev 52% -> 56%, recall flat; text-path top-1 +11 to +14
+  and antibiotics-when-not-needed -9 to -10 in every v2 config; time-critical held. (2) closes the hole
+  the better negation exposed (a catheter urosepsis note answered right only because of mis-read positives).
+- **Owner accepted (2026-09-27)**: one test-split case (aggregate only) loses a needed antibiotic call on
+  the text path in the v2 configs, so their `abxSens` floor is 138 (was 139). Not tuned against the test
+  split. `smd_nlp_v2` stays OFF; `sepsis_afebrile` is live with gate v2.
+## 2026-09-27 - SMS only as our approved DLT templates, and no patient name in any message
+- **Decision**: every patient/doctor SMS is built from one of our approved Vodafone Idea DLT templates
+  (header MAIK, `functions/_followcare_sms.js` DLT, text verbatim) and sent through 2Factor's R1 API with
+  its content-template id (`sendDlt`). OPD queue: token issued -> Appointment Confirmation - Detailed,
+  2 ahead -> Check-In Alert - Detailed; every other queue event is WhatsApp only. Doctor OTP -> our OTP
+  template first, 2Factor's own OTP route as the fallback. The name slot is always "Patient"; FollowCare
+  stops decrypting and sending the first name.
+- **Why**: the operator drops an SMS that does not match its registered template. The queue SMS fallback sent
+  the FollowCare check-in template with a blank name for every event, and FollowCare filled 2 of the
+  templates' 4-5 slots. Owner (2026-09-27): no new templates, adjust to the ones we have; a patient name is
+  PHI, say "Dear Patient", details go on the page the link opens.
+- **Open**: Care Plan / Post-Visit templates need a callback number ({#cbn#}); none is stored, and none is
+  guessed (a worsening patient would call it). Needs `TWOFACTOR_SENDER=MAIK` in Pages secrets, and
+  `stewardmd.in` on the DLT CTA whitelist, before any of it sends.
+## 2026-09-27 - Differential ordering v3, round 2 (discriminators between close neighbours)
+- **Decision**: `smd_rank_v3` gains `RANK_V3_R2`, textbook discriminators (afebrile colic, Anthonisen
+  purulence, ITP vs DIC/TTP/leukaemia, GBS vs myasthenia, stroke vs TIA, nephritic / pulmonary-renal /
+  lupus patterns, fever for febrile infections...). Order only; the antibiotic gate never reads them.
+- **Why**: tapped top-1 train 75 -> 85%, dev 70 -> 76%, test 72 -> 78%; OPD ordering 358 -> 386.
+  Tried and dropped: source-over-sepsis, a complicated-UTI bonus, mixed malaria over malaria (see
+  `kb/validation/AUDIT-2026-09-26.md`, Round 7).
+- **Owner accepted (2026-09-27)**: v3 on the classic extractor, chart-text top-3 208 -> 206 (two
+  classic-extractor misreads). `smd_rank_v3` stays OFF.
+## 2026-09-27 - The SMS callback number is the clinic's own phone
+- **Decision**: a clinic saves its own phone (Staff & roles > Doctor & Clinic Admin Profile > "Clinic phone for
+  patients", `org.phone`, cleaned by `clinicPhone()` in `functions/_opd_org.js`: 10-digit mobile starting 6-9,
+  landline with its 0 STD code, or 1800 / 1860). It fills the DLT `{#cbn#}` slot, so the checkout visit-summary SMS goes as
+  Care Plan - Detailed. No number saved: that message stays WhatsApp only. Never a StewardMD number.
+- **Why**: owner (2026-09-27), option 1 of three: "If symptoms worsen, contact us at" is a number a worsening
+  patient calls, so it must be the clinic that treated them.
+- **Open**: FollowCare's hospital is a free-text id the doctor types (`fc_doctors`), not an OPD clinic, so its
+  Post-Visit template still has no callback number or doctor name; FollowCare stays WhatsApp only.
 
 ## 2026-09-27 - Ophthalmós integrated as a module, behind a flag default OFF
 - **Context**: Ophthalmós (eye-imaging clinic trainer: OCT, disc, DR grading, ROP, case conference) was

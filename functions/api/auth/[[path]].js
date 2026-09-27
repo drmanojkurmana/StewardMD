@@ -23,6 +23,7 @@ import { emailOtp, emailResetCode, emailTempPassword } from "../../_email.js";
 import { phoneStart, phoneVerify, deliverOtp, phoneVerifyEnabled } from "../../_phone_otp.js";
 import { markPhoneVerified, checkPhoneAvailable, bindPhone } from "../../_lifecycle.js";
 import { clearBudgetCache } from "../../_aibudget.js";
+import { fsGet } from "../../_fbfirestore.js";
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 const TTL = 600;            // 10 minutes
@@ -87,6 +88,26 @@ async function handle(context) {
   var who = await authed(request, env);
   if (!who) return json({ ok: false, error: "signin-required" }, 401);
 
+  /* POST /api/auth/my-profile -> the CALLER'S OWN users/<uid>/profile/self, read server-side.
+   * Owner, 2026-09-27, screenshot: Profile listed every professional detail as "Offline" with
+   * "Couldn't load your details" while Registration beside it said Verified - so the phone was
+   * online and reaching us. What failed was the Firebase web SDK's direct read inside the iOS
+   * WebView (it hangs; the cache fallback then misses). This is the same document through the
+   * admin credential, keyed ONLY by the uid in the verified token, and only these fields. */
+  if (action === "my-profile") {
+    var MY_FIELDS = ["name", "phone", "state", "city", "hospital", "degree", "speciality", "role", "regNo",
+      "regNoPendingCert", "phoneVerifiedAt", "phoneVerifiedNumber", "smdId", "profileComplete", "updatedAt"];
+    try {
+      var doc = await fsGet(env, "users/" + who.uid + "/profile/self");
+      var f = (doc && doc.fields) || {}, out = {};
+      MY_FIELDS.forEach(function (k) { if (f[k] !== undefined && f[k] !== null) out[k] = f[k]; });
+      var claims = {}; try { claims = (await getUserClaims(env, who.uid)) || {}; } catch (e) {}
+      return json({ ok: true, exists: !!doc, profile: out, phoneVerified: claims.phoneVerified === true });
+    } catch (e) {
+      return json({ ok: false, error: "read-failed" }, 502);
+    }
+  }
+
   // Anchor-email routes verify a USER-SUPPLIED real email, so they must be reachable by an Apple
   // "Hide My Email" account whose token email is a proxy OR literally empty — i.e. BEFORE the
   // `no-email-on-account` gate below (which is what those users are trying to route around).
@@ -114,7 +135,13 @@ async function handle(context) {
       : await phoneVerify(who, pb, { store: store,
           bind: function (phone) { return bindPhone(env, who.uid, phone); },
           onVerified: async function (phone) {
-          try { await mergeUserClaims(env, who.uid, { phoneVerified: true }); } catch (e) {}
+          // phoneVerifiedAt starts the free Pro week for a phone-verified account (_entitlement.js
+          // weekStart). Only the FIRST verification stamps it: re-verifying a number, or changing to a
+          // new one, must not start the week again.
+          try {
+            const pc = (await getUserClaims(env, who.uid)) || {};
+            await mergeUserClaims(env, who.uid, pc.phoneVerifiedAt ? { phoneVerified: true } : { phoneVerified: true, phoneVerifiedAt: Date.now() });
+          } catch (e) { try { await mergeUserClaims(env, who.uid, { phoneVerified: true }); } catch (x) {} }
           try { await markPhoneVerified(env, who.uid, phone); } catch (e) {}
           // The Free AI allowance follows phoneVerified (D8, 2026-09-26): drop the cached cap so the
           // new allowance applies on the next call rather than after the ~26 h cache.

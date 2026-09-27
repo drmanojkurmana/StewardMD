@@ -211,11 +211,21 @@ try {
   const rp = await text('#dxPolicy .dx-region-abg');
   ok(/urine/i.test(rp) && /isolates/.test(rp) && !/—/.test(rp), 'the panel names the specimen and isolates, without an em dash');
   await ev(`document.querySelector('[data-dx-jump="dxReview"]')?.click();1`); await sleep(300);
+  // The plain view (default on) folds the guideline box; the resistance figures must stay in view,
+  // not only exist in the DOM (round 4: the screenshot showed no figures).
+  ok(await ev(`(()=>{const p=document.querySelector('#dxPolicy .dx-region-abg');return !!p && !p.closest('details:not([open])') && p.getBoundingClientRect().height>20})()`), 'the resistance panel is visible, not folded into a closed section');
   await ev(`document.querySelector('#dxPolicy .dx-region-abg').scrollIntoView({block:'start'});1`);
   await shot('reasoning-panel');
   await click('#dxPolicy .dx-abg-open');
   ok(await until(`document.querySelector('#abgOverlay')?.classList.contains('on')`), 'the panel opens the full antibiogram');
   await ev('ABG.close();1');
+  // Round 4: an indwelling catheter makes a UTI complicated; the lead (which picks the panel's
+  // stratum) must never be "uncomplicated cystitis" with its outpatient urine figures.
+  await ev(`DX.reset();1`);
+  const ids2 = await ev(`(()=>{const keys=DX.findingCatalog().map(f=>f.key);return ['fever','indwellingCatheter','hospitalDay48','dysuria'].filter(k=>keys.includes(k))})()`);
+  await ev(`DX.addFindings(${JSON.stringify(ids2)});1`);
+  const lead2 = await ev(`(DX._differential().inf||[])[0]?.id||''`);
+  ok(ids2.includes('indwellingCatheter') && lead2 !== 'CYSTITIS' && /UTI/.test(lead2), `a catheterised patient with dysuria is not uncomplicated cystitis (lead ${lead2})`);
 
   /* ---- flag off: previous view on the new data ---- */
   await ev(`localStorage.setItem('smd_abg_v2','0');HOSPITAL.setProfile('ICMR');ABG.close();document.getElementById('abgOverlay')?.remove();1`);

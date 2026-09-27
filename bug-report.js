@@ -116,13 +116,30 @@
       return c;
     } catch (e) { return "#ffffff"; }
   }
+  // The screen in the page's OWN css px. With the Display zoom on (documentElement.style.zoom),
+  // innerWidth is not the width the page lays out in; a fixed inset:0 box is, on every engine.
+  function layoutViewport() {
+    try {
+      var p = document.createElement("div");
+      p.style.cssText = "position:fixed;left:0;top:0;right:0;bottom:0;visibility:hidden;pointer-events:none";
+      document.body.appendChild(p);
+      var v = { w: p.clientWidth || window.innerWidth, h: p.clientHeight || window.innerHeight };
+      p.remove();
+      return v;
+    } catch (e) { return { w: window.innerWidth, h: window.innerHeight }; }
+  }
   // The visible viewport at half resolution, as a canvas. Never rejects (null when it cannot).
   function capture() {
     return loadH2C().then(function (h2c) {
-      var w = window.innerWidth, h = window.innerHeight;
+      var v = layoutViewport(), w = v.w, h = v.h;
+      if (st) st.vw = w;   // the screenshot's width in page px, for placing the outline on it
       return h2c(document.body, { x: window.scrollX, y: window.scrollY, width: w, height: h, windowWidth: w, windowHeight: h,
         scale: Math.min(1, 720 / Math.max(1, w)), backgroundColor: pageBg(), logging: false, useCORS: true,
-        ignoreElements: function (el) { return el && (el.id === R || el.id === C || el.id === "bugrPick"); } });
+        ignoreElements: function (el) { return el && (el.id === R || el.id === C || el.id === "bugrPick"); },
+        // Owner's iPhone, 2026-09-27: the screenshot arrived BLANK. body is overflow:hidden with zero
+        // height here (every screen is a fixed layer), and html2canvas clips to body's box, so it drew
+        // nothing. Lift the clip on the CLONE only; the live page is untouched.
+        onclone: function (d) { try { d.body.style.overflow = "visible"; d.body.style.height = h + "px"; d.documentElement.style.overflow = "visible"; } catch (e) {} } });
     }).catch(function () { return null; });
   }
   // The screenshot as JPEG, with the pointed-at element outlined in red.
@@ -132,7 +149,7 @@
       var out = document.createElement("canvas"); out.width = canvas.width; out.height = canvas.height;
       var g = out.getContext("2d"); g.fillStyle = pageBg(); g.fillRect(0, 0, out.width, out.height); g.drawImage(canvas, 0, 0);
       if (rect) {
-        var k = canvas.width / Math.max(1, window.innerWidth);
+        var k = canvas.width / Math.max(1, (st && st.vw) || window.innerWidth);
         g.strokeStyle = "#e5484d"; g.lineWidth = Math.max(3, 4 * k);
         g.strokeRect(rect.x * k - 4, rect.y * k - 4, rect.w * k + 8, rect.h * k + 8);
       }
@@ -143,10 +160,14 @@
   }
 
   /* ── describing the pointed element ──────────────────────────────────────────────────────── */
-  function describe(el) {
+  // The smallest control under the finger; a plain area is reported as itself.
+  function target(el) {
     if (!el || el === document.body || el === document.documentElement) return null;
-    // The smallest control under the finger; a plain area is reported as itself.
-    var t = (el.closest && el.closest("button,a,[role=button],[role=tab],[role=switch],input,select,textarea,label,[data-act],[data-sbr-act]")) || el;
+    return (el.closest && el.closest("button,a,[role=button],[role=tab],[role=switch],input,select,textarea,label,[data-act],[data-sbr-act]")) || el;
+  }
+  function describe(el) {
+    var t = target(el);
+    if (!t) return null;
     var r = t.getBoundingClientRect();
     var sel = [], n = t;
     for (var i = 0; n && n.nodeType === 1 && i < 4; i++) {
@@ -219,7 +240,7 @@
       "#bugrPick .bp-bar span{flex:1}",
       "#bugrPick .bp-bar button{border:0;border-radius:11px;padding:9px 12px;font:800 13.5px var(--f);cursor:pointer}",
       "#bugrPick .bp-use{background:#2fc4b0;color:#06201c}#bugrPick .bp-cancel{background:rgba(255,255,255,.12);color:#fff}",
-      "#bugrPick .bp-box{position:fixed;border:3px solid #e5484d;border-radius:8px;box-shadow:0 0 0 9999px rgba(8,12,18,.35);pointer-events:none;transition:all .12s}",
+      "#bugrPick .bp-box{position:absolute;border:3px solid #e5484d;border-radius:8px;box-shadow:0 0 0 9999px rgba(8,12,18,.35);pointer-events:none;transition:all .12s}",
       "#" + C + "{position:fixed;inset:0;z-index:2147482990;display:none;flex-direction:column;background:var(--bg);color:var(--ink);font-family:var(--f)}",
       "#" + C + ".on{display:flex}",
       "#" + C + " .bc-head{display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 12px;border-bottom:1px solid var(--line)}",
@@ -295,27 +316,55 @@
     el.querySelector("#bgWhole").onclick = function () { st.element = null; writeStep(); };
     el.querySelector("#bgCancel").onclick = closeReport;
   }
+  /* Owner's iPhone, 2026-09-27: the red outline sat above and smaller than the tile tapped. The
+   * rect was measured ONCE, at the tap, while the page was still settling from the report sheet
+   * closing (a scale/scroll animation); the outline then stayed where the element had been. Now
+   * the outline FOLLOWS the element every frame until "Use this", and the rect used for the
+   * screenshot is re-measured at that moment. The sheet is emptied (not just hidden) first. */
   function pointStep() {
-    var el = document.getElementById(R); if (el) { el.classList.remove("on"); }
+    var el = document.getElementById(R); if (el) { el.classList.remove("on"); el.innerHTML = ""; }
     var pk = document.createElement("div"); pk.id = "bugrPick";
     pk.innerHTML = '<div class="bp-box" style="display:none"></div><div class="bp-bar"><span>Tap the button or area with the problem</span><button type="button" class="bp-cancel">Back</button></div>';
     styleOnce(); document.body.appendChild(pk);
-    var box = pk.querySelector(".bp-box"), bar = pk.querySelector(".bp-bar"), picked = null;
-    function done(back) { try { pk.remove(); } catch (e) {} if (back) askStep(); }
+    var box = pk.querySelector(".bp-box"), bar = pk.querySelector(".bp-bar"), picked = null, node = null, raf = 0;
+    box.style.transition = "none";
+    // Re-measure the picked element and move the outline onto it.
+    // The Display setting zooms the whole page (home.js applyD: documentElement.style.zoom), and
+    // engines disagree on whether getBoundingClientRect reports zoomed px. The overlay always covers
+    // exactly the screen, so its own rect vs its own CSS size IS the conversion, on any engine:
+    // overlay px for drawing the outline, and screen-fraction px (innerWidth-based) for the screenshot.
+    function place() {
+      if (!node || !picked) return;
+      var r = node.getBoundingClientRect(), o = pk.getBoundingClientRect();
+      if (!o.width || !o.height) return;
+      var fx = pk.clientWidth / o.width, fy = pk.clientHeight / o.height;
+      // Page px (the same space the screenshot was captured in), so the outline lands on the image too.
+      picked.rect = { x: Math.round((r.left - o.left) * fx), y: Math.round((r.top - o.top) * fy), w: Math.round(r.width * fx), h: Math.round(r.height * fy) };
+      box.style.display = "block";
+      box.style.left = ((r.left - o.left) * fx - 4) + "px"; box.style.top = ((r.top - o.top) * fy - 4) + "px";
+      box.style.width = (r.width * fx + 8) + "px"; box.style.height = (r.height * fy + 8) + "px";
+    }
+    function follow() { place(); raf = (window.requestAnimationFrame || function (f) { return setTimeout(f, 16); })(follow); }
+    function stop() { try { (window.cancelAnimationFrame || clearTimeout)(raf); } catch (e) {} raf = 0; window.removeEventListener("scroll", place, true); window.removeEventListener("resize", place); }
+    window.addEventListener("scroll", place, true); window.addEventListener("resize", place);
+    function done(back) { stop(); try { pk.remove(); } catch (e) {} if (back) askStep(); }
+    // Taps are ignored until the sheet that just closed has finished moving the page.
+    var armedAt = Date.now() + 350;
     pk.addEventListener("click", function (e) {
       if (bar.contains(e.target)) {
-        if (e.target.classList.contains("bp-use")) { st.element = picked; done(false); writeStep(); }
+        if (e.target.classList.contains("bp-use")) { place(); st.element = picked; done(false); writeStep(); }
         else if (e.target.classList.contains("bp-cancel")) done(true);
         return;
       }
       e.preventDefault(); e.stopPropagation();
+      if (Date.now() < armedAt) return;
       pk.style.pointerEvents = "none";
       var under = document.elementFromPoint(e.clientX, e.clientY);
       pk.style.pointerEvents = "";
+      node = target(under); pk.__node = node;   // test hook: which element the outline tracks
       picked = describe(under);
-      if (!picked) return;
-      var r = picked.rect;
-      box.style.display = "block"; box.style.left = (r.x - 4) + "px"; box.style.top = (r.y - 4) + "px"; box.style.width = (r.w + 8) + "px"; box.style.height = (r.h + 8) + "px";
+      if (!picked) { node = null; return; }
+      place(); if (!raf) follow();
       bar.innerHTML = "<span>" + esc(picked.label ? '"' + picked.label.slice(0, 40) + '"' : "This area") + ' selected</span><button type="button" class="bp-cancel">Back</button><button type="button" class="bp-use">Use this</button>';
     }, true);
   }
@@ -502,5 +551,5 @@
   else document.addEventListener("DOMContentLoaded", function () { setTimeout(boot, 600); });
 
   window.SMD_BUGS = { report: report, openCentre: openCentre, closeCentre: closeCentre, unread: unread, refresh: refresh,
-    enableShake: enableShake, _shake: onShake, _detector: detector, _slaText: slaText, _describe: describe, _payload: payload };
+    enableShake: enableShake, _shake: onShake, _capture: capture, _detector: detector, _slaText: slaText, _describe: describe, _payload: payload };
 })();

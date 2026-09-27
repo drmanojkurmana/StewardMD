@@ -545,10 +545,15 @@
   // (e.g. Notification preferences locks task / critical-value alerts ON for JR/interns).
   // Reuses roleForRelay() over the live ICU-group subscription; null when the user is in no
   // unit yet (unrestricted). isRestricted() = a junior resident or intern anywhere.
-  window.SMD_ROLE = {
-    seniorMost: function () { return roleForRelay(); },
-    isRestricted: function () { var r = roleForRelay(); return r === "junior_resident" || r === "intern"; }
-  };
+  /* ADD to window.SMD_ROLE - never replace it. role-features.js owns that object (current, labelOf,
+   * allows, isVerified, lockReason ...) and loads BEFORE this file. This used to assign a fresh
+   * object, so on every phone - this code is native-only, which is why a browser never showed it -
+   * the whole role API vanished. Profile then threw "SMD_ROLE.labelOf is not a function" before its
+   * sheet opened, and the sidebar's try/catch swallowed it: the owner's "Profile not opening after
+   * repeated clicks", and every role-based lock silently gone with it. */
+  var _role = window.SMD_ROLE || (window.SMD_ROLE = {});
+  _role.seniorMost = function () { return roleForRelay(); };
+  _role.isRestricted = function () { var r = roleForRelay(); return r === "junior_resident" || r === "intern"; };
 
   window.SMD_CLINIX_WATCH = {
     publishPulse: function (pulseData) {

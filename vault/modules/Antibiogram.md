@@ -66,8 +66,9 @@ places:
    urine" combines only with urine (no double counting). ICU device-infection rows (`cohort:"hai"`) are
    never combined.
 5. **Count checks**: rows are compared with the source's own organism count tables; mismatches go to
-   `validation-report.json` and the source sheet ("The source's own tables disagree"). SKIMS 2025 has 4
-   (respiratory S. aureus IPD/OPD swapped between tables; pus Acinetobacter IPD/ICU 60 isolates apart).
+   `validation-report.json` and the source sheet ("The source's own tables disagree"). SKIMS 2025 has 5
+   (respiratory S. aureus IPD/OPD swapped between tables; pus Acinetobacter IPD/ICU 60 isolates apart;
+   pus OPD Enterococcus 16 in the organism table against 20 in the antibiogram table).
    Not a disagreement: a genus line that means "other species" (the count table also lists the
    species), species rows adding up to less than a genus count (species without a row), an
    all-settings row above its summed location counts (isolates without a location), and rows marked
@@ -220,6 +221,42 @@ it matched, and says so when nothing did.
   they contribute a usable row, and a region is pooled only if some stratum has a pooled figure (the West
   had none: AIIMS Bhopal, BVDU and SKNMC rarely report the same stratum). Cells from too few institutions
   carry `few` and say so ("too few institutions", not "failed a data check").
+- **Review round 4 (2026-09-27)**:
+  - **Clinical antibiograms**: `clinical: "what it is"` marks a table that combines laboratory results with how
+    patients responded to treatment (AIIMS Rishikesh MICU 2023 p18 and Rishikesh 2024 book p107, HAP/VAP).
+    Every figure is a caution and the build adds the row flag `clinical`; the store treats such a row as not
+    usable (`rowUsable`, `usableInfo`, WISCA `mix`, pooled `usable`, `legacyAbg`), so VAP in the MICU
+    profile reads the unit's laboratory table (meropenem 3.9), never the clinical 46.66.
+  - **Paired checks read the figures as they stood after the per-cell checks** (`base` in `validateRow`), so
+    one check never shields its partner. SKIMS 2024 urine E. coli: imipenem 23 and ertapenem 47 survived
+    beside ceftriaxone 87. Ceftriaxone or cefotaxime more than 20 above ertapenem is now a caution too.
+  - **`atMost` with different numbers tested** compares counts, not percentages. The susceptible count of the
+    broader agent cannot fall below the narrower one's minus the isolates it may not have been tested on
+    (Bhopal 2021 E. cloacae: ertapenem 25 of 52, meropenem 7 of 86).
+  - **New cautions**: daptomycin for a genus Enterococcus row; C. glabrata fluconazole (no susceptible
+    category); echinocandins more than 20 apart for Candida.
+  - **One answer for console and reasoning.** `susceptibility()` walks on drug by drug in pooled scopes. The
+    console now asks it for each drug (`drugsFor` lists what it can reach) and marks a figure taken from
+    another stratum with a number and a note. Reasoning groups its chips by stratum: the lead stratum names
+    its organism isolates (from the table, not the largest number tested for one drug), and the others are
+    marked and footnoted.
+  - **WISCA is antibacterial only**: yeasts and moulds are left out of the mix (India blood meropenem 42.5,
+    not 40.1). The screen says "bacteria".
+  - **Pooled views cite only the sources behind their figures** (meta line, CSV and print): SKNMC feeds no
+    figure. The CSV key and print legend say "or from fewer than 3 institutions".
+  - **Plain view** (reasoning, default on) keeps the resistance panel outside the folded guideline box.
+  - **An indwelling catheter implies `complicatedUTIRisk`** (reasoning `ALIAS`), so a catheterised patient
+    never leads with uncomplicated cystitis.
+  - **SKIMS 2020 to 2024 reliability pass**: every kept 0 (575 cells) read against its page. None was an
+    extraction error, and those tables print a dash for untested agents, so a printed 0 is a result. 68 rows
+    are marked `unreliable`: 2021's blood Gram-negative table repeats 2020 figures, 2023's blood tables are
+    2022's nudged by 1 to 4 points (median difference 1.0, against 8 to 11 for pus and urine), and 2024's
+    urine Gram-negative table is garbled (E. coli ceftriaxone 87 beside carbapenems at 23). 16 cells get a
+    `conflict` note (e.g. 2021 P. aeruginosa meropenem 0 beside imipenem 17.6) and one 0 is `untested`.
+    Those editions only feed trends: pools use SKIMS 2025.
+  - **Tool names**: the build rejects a source text that names a tool or library (PyMuPDF, poppler and so on).
+  - **Messages**: in the open overlay a message takes the header subtitle's place. The rotate hint is a
+    strip at the foot of the overlay, not a floating pill over the table or a sheet.
 - **Row flags from the lead**: `unreliable: "what is inconsistent"` makes every figure of a row a caution
   (BVDU Pune 2024 page 12 Gram-negative rows; SKNMC Pune 2024 Pseudomonas lists); `untested: {drug: why}`
   turns a printed 0 that means "not tested" into a caution (RIMS Imphal 2023-24 blood cefazolin).

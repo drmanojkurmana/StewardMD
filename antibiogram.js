@@ -1628,7 +1628,18 @@
     });
   }
 
+  // Inside the open overlay a message takes the header subtitle's place for a moment, so it never
+  // sits over table headers or sheet text; outside it, the floating toast.
+  var subTimer = null;
   function toast(m) {
+    var sub = root && root.classList.contains("on") && root.querySelector(".abg-top .abg-subttl");
+    if (sub) {
+      if (sub.getAttribute("data-orig") == null) sub.setAttribute("data-orig", sub.innerHTML);
+      sub.setAttribute("role", "status"); sub.textContent = m; sub.classList.add("abg-subttl-msg");
+      clearTimeout(subTimer);
+      subTimer = setTimeout(function () { sub.innerHTML = sub.getAttribute("data-orig"); sub.removeAttribute("data-orig"); sub.classList.remove("abg-subttl-msg"); }, 2400);
+      return;
+    }
     if (!tEl) { tEl = document.createElement("div"); tEl.className = "abg-toast smd-books-keep"; tEl.setAttribute("role", "status"); document.body.appendChild(tEl); }
     tEl.textContent = m; tEl.classList.add("on"); clearTimeout(tTimer);
     tTimer = setTimeout(function () { tEl.classList.remove("on"); }, 2400);
@@ -1883,8 +1894,9 @@
       ".abg-toast{position:fixed;left:50%;bottom:40px;transform:translateX(-50%) translateY(10px);background:#0F172A;color:#fff;font:600 13px var(--f);padding:11px 18px;border-radius:12px;z-index:970;opacity:0;transition:.2s;pointer-events:none;max-width:88vw;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.3)}",
       ".abg-toast.on{opacity:1;transform:translateX(-50%)}",
       /* Rotate Hint — iOS notification style */
-      ".abg-rotate{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(50px);display:flex;align-items:center;gap:8px;background:rgba(28,28,30,.88);-webkit-backdrop-filter:blur(20px) saturate(1.6);backdrop-filter:blur(20px) saturate(1.6);color:rgba(255,255,255,.92);font:600 13px/1 -apple-system,BlinkMacSystemFont,var(--f);padding:10px 16px;border-radius:100px;z-index:990;opacity:0;transition:opacity .3s ease,transform .35s cubic-bezier(.2,.8,.4,1);box-shadow:0 2px 12px rgba(0,0,0,.18);cursor:pointer;-webkit-tap-highlight-color:transparent}",
-      ".abg-rotate.on{opacity:1;transform:translateX(-50%) translateY(0)}",
+      ".abg-rotate{flex:none;display:flex;align-items:center;justify-content:center;gap:8px;padding:9px 16px calc(9px + env(safe-area-inset-bottom));background:#1C1C1E;color:rgba(255,255,255,.92);font:600 13px/1 -apple-system,BlinkMacSystemFont,var(--f);opacity:0;transition:opacity .3s ease;cursor:pointer;-webkit-tap-highlight-color:transparent}",
+      ".abg-rotate.on{opacity:1}",
+      ".abg-subttl.abg-subttl-msg{color:var(--tl);text-transform:none;letter-spacing:0}",
       ".abg-rotate-ic{display:flex;align-items:center}.abg-rotate-ic svg{width:15px;height:15px;opacity:.7}",
       ".abg-rotate-tx{white-space:nowrap;letter-spacing:-.01em}",
       /* Drug DB Overlay Integration */

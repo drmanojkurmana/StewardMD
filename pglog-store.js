@@ -367,7 +367,9 @@
     var id = body.localId || (body.id && p.drafts && p.drafts[body.id] ? body.id : "") || localId();
     var e = m.entry(Object.assign({}, body, {
       id: id, residentId: body.residentId || p.residentId, programmeId: body.programmeId || p.programmeId,
-      status: "draft", createdAt: body.createdAt || Date.now(), updatedAt: Date.now()
+      status: "draft", createdAt: body.createdAt || Date.now(),
+      // strictly later than the last save, so a fix saved in the same millisecond still patches the server draft
+      updatedAt: Math.max(Date.now(), ((p.drafts && p.drafts[id] && p.drafts[id].updatedAt) || 0) + 1)
     }));
     patch(function (st) {
       st.drafts[id] = e;

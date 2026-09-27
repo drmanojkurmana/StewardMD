@@ -50,6 +50,7 @@
   }
   function flag(k, def) { try { var v = localStorage.getItem(k); return v === null ? def : v === "1"; } catch (e) { return def; } }
   function toast(m) { try { if (window.toast) window.toast(m); } catch (e) {} }
+  function hubOn() { return true; }   // one Profile, permanent (owner, 2026-09-27); smd_profile_hub retired
   function closeSB() { try { if (window.SB && SB.close) SB.close(); } catch (e) {} }
 
   // Row actions → existing globals, with graceful fallbacks.
@@ -411,8 +412,8 @@
     if (installBtn) installBtn.addEventListener("click", function () {
       if (!pending) return;
       installBtn.disabled = true;
-      SMD_OTA.install(pending, function (pct) { if (statusEl) statusEl.textContent = "Downloading… " + pct + "%"; }).then(function (res) {
-        if (res && res.ok) { if (statusEl) statusEl.textContent = "Update ready — reopening…"; }
+      SMD_OTA.install(pending, function (pct, label) { if (statusEl) statusEl.textContent = label || ("Downloading… " + pct + "%"); }).then(function (res) {
+        if (res && res.ok) { if (statusEl) statusEl.textContent = "Update ready, reopening…"; }
         else {
           installBtn.disabled = false;
           // Phrase it from the failure CODE, same vocabulary as the update banner. The raw code was
@@ -727,8 +728,12 @@
       '<header class="sbr-set-head"><button class="sbr-set-back" data-sset="close" aria-label="Back"><span class="sbr-set-chev">‹</span><span>Back</span></button><h2>Settings</h2></header>' +
       '<div class="sbr-set-body">' +
         '<div class="sbr-sec">Account</div>' +
-        row("profile", "steth", "Profile &amp; StewardMD ID") +
-        '<button class="sbr-row" data-sbr-act="account" data-smd-verify="1">' + svg("shield") + '<span class="sbr-lbl">Account &amp; Verification</span></button>' +
+        /* ONE Profile (smd_profile_hub): Profile & StewardMD ID and Account & Verification were two rows
+         * into overlapping pages. The hub holds both, so Settings has one door. "0" restores the pair. */
+        (hubOn()
+          ? row("profile", "user", "Profile, ID &amp; verification")
+          : row("profile", "steth", "Profile &amp; StewardMD ID") +
+            '<button class="sbr-row" data-sbr-act="account" data-smd-verify="1">' + svg("shield") + '<span class="sbr-lbl">Account &amp; Verification</span></button>') +
         '<div class="sbr-sec">Preferences</div>' +
         row("notifications", "bell", "Notifications") +
         row("appearance", "sun", "Appearance &amp; Theme") +
