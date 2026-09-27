@@ -177,6 +177,11 @@ try {
   ok(dys.ab === true, `defaults · fever with bloody diarrhoea: dysentery, antibiotics (${dys.cls}, ${dys.rule})`);
   ok((await cm(["diarrhea", "bloodyStool", "abdominalPain"])).rule !== "febrile_dysentery", "defaults · bloody diarrhoea without fever: the rule stands aside");
   ok((await cm(["fever", "diarrhea", "bloodyStool", "abdominalPain", "knownIBD"])).rule !== "febrile_dysentery", "defaults · the same in known IBD: a flare first, the dysentery rule stands aside");
+  // round 23: an acute fever with an infection leading the v3 order is a likely infection; not a subacute fever
+  const cell = await cm(["fever", "legSwellingUnilateral", "skinErythema", "rapidlySpreadingErythema"]);
+  ok(cell.ab === true, `defaults · short note, fever + red spreading swollen leg: antibiotics (${cell.cls}, ${cell.rule})`);
+  const sub = await cm(["fever", "subacuteOnset", "weightLoss", "nightSweats", "cough"]);
+  ok(sub.rule !== "febrile_infection_lead", `defaults · subacute fever with weight loss: work-up, not the acute-fever rule (${sub.cls})`);
   const chole = await cm(["fever", "rightUpperQuadrantPain", "murphySign", "nauseaVomiting"]);
   ok(chole.ab === true, `defaults · fever + RUQ pain + Murphy sign: antibiotics (${chole.cls}, ${chole.rule})`);
   ok((await cm(["rightUpperQuadrantPain", "murphySign", "nauseaVomiting"])).rule !== "cholecystitis_signs", "defaults · the same without fever: the rule stands aside");

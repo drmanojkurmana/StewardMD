@@ -62,7 +62,8 @@ try {
   // ---- 1. OFF --------------------------------------------------------------------------------
   ok(await load(BASE + "?kbv2=0"), "app + KB load with ?kbv2=0");
   const c0 = await q(CHARCOT, "CHOLANGITIS");
-  ok(!c0.m && c0.gate === "possible", `off · fever + jaundice + RUQ pain: cholangitis NOT matched (${c0.s}), gate "${c0.gate}" (the defect)`);
+  // the matching defect stands; since round 23 the acute-fever rule (gate v2, v3 order) calls it "likely" anyway
+  ok(!c0.m && (c0.gate === "possible" || c0.gate === "likely"), `off · fever + jaundice + RUQ pain: cholangitis NOT matched (${c0.s}), gate "${c0.gate}" (the defect)`);
   const s0 = await q(["fever", "ascites", "liverDisease"], "SBP");
   ok(!s0.m, `off · fever + ascites in cirrhosis: SBP not matched (${s0.s})`);
   ok(!(await catalogHas("dilatedCBD")), "off · the new findings are not in the catalog");

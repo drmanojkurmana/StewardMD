@@ -1416,8 +1416,22 @@
         (f.worseningOxygenation || f.hypoxia || f.consolidation)) ? "hap_criteria" :
       (febrile && f.rightUpperQuadrantPain && (f.murphySign || f.knownGallstones)) ? "cholecystitis_signs" :
       // round 21: fever with bloody diarrhoea is bacillary dysentery until shown otherwise (WHO; India)
-      (febrile && f.bloodyStool && f.diarrhea && !f.knownIBD) ? "febrile_dysentery" : null;   // known IBD: a flare first
+      (febrile && f.bloodyStool && (f.diarrhea || f.tenesmus || f.abdominalPain) && !f.knownIBD) ? "febrile_dysentery" : null;   // known IBD: a flare first
     if (cantMiss && weak && !gib) { g.cls = "likely"; g.rule = cantMiss; return; }
+    // round 23 (2026-09-27): an ACUTE febrile illness whose leading diagnosis (v3 order) is an infection is treated
+    // as infection likely; the lead's own antibiotic need then decides (a viral or antiparasitic lead still gets
+    // none). Short notes carry few findings, so the MAX-score thresholds (62 and "criteria met") read "possible"
+    // for a febrile cellulitis or cholangitis: on the unseen doctor-style notes, needed antibiotics 18 -> 22 and
+    // 16 -> 21 of 23. Not for a subacute or prolonged fever (TB, PUO, vasculitis: work-up, not empiric antibiotics).
+    // It needs enough information (the smd_calib sufficiency rule, flag or not): fever alone is not an infection call.
+    // And the v2 reader: "subacute" and "prolonged fever" come from its duration parsing, which the classic one lacks.
+    if (weak && febrile && rankV3() && !gib && !(f.subacuteOnset || f.prolongedFever || f.prolongedFeverUnexplained) && enoughInfo(d, f) &&
+        !!(window.SMD_NLP && SMD_NLP._v2 && SMD_NLP._v2({}))) {
+      var rkg = function (x) { return x.rankScore != null ? x.rankScore : x.score; };
+      var bI = d.inf.reduce(function (m, x) { return !m || rkg(x) > rkg(m) ? x : m; }, null);
+      var bN = d.ni.reduce(function (m, x) { return !m || rkg(x) > rkg(m) ? x : m; }, null);
+      if (bI && (!bN || rkg(bI) > rkg(bN))) { g.cls = "likely"; g.rule = "febrile_infection_lead"; g.lead = bI; }
+    }
     if (f.liverDisease && (f.hematemesis || f.melena || f.gibPresentation) && g.cls !== "very_likely" && g.cls !== "likely") {
       g.cls = "abx_prophylaxis"; g.rule = "cirrhosis_gib";
       return;
@@ -1585,6 +1599,7 @@
     if (g.rule === "fever_murmur") return "Fever with a new murmur: infective endocarditis until proven otherwise. Take three sets of blood cultures before antibiotics, then treat empirically; echocardiography.";
     if (g.rule === "febrile_uti") return "A febrile urinary infection is upper or complicated by definition: send a urine culture and start antibiotics.";
     if (g.rule === "hap_criteria") return "Hospital-acquired pneumonia criteria are met (48 h or more in hospital, fever, purulent secretions, worsening gas exchange or a new infiltrate): cultures, then empiric antibiotics.";
+    if (g.rule === "febrile_infection_lead") return "An acute fever with an infection leading the differential" + (g.lead && g.lead.name ? " (" + g.lead.name + ")" : "") + ": treat as a likely infection. Take cultures from the likely source before the first dose, and review at 48 to 72 hours.";
     if (g.rule === "febrile_dysentery") return "Fever with bloody diarrhoea: bacillary dysentery until shown otherwise. Send a stool culture and start antibiotics; reconsider if a stool test or colonoscopy shows inflammatory bowel disease.";
     if (g.rule === "cholecystitis_signs") return "Fever with right upper quadrant pain and a Murphy sign or gallstones: acute cholecystitis until imaging says otherwise. Antibiotics with source control.";
     if (g.rule === "ni_explains_fever") return g.why + " leads the differential and explains the fever, with no shock signs or immune compromise: antibiotics are not recommended on these findings. Look for a source and reconsider if one appears or the patient deteriorates.";

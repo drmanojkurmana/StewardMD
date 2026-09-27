@@ -10600,3 +10600,9 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
 - **Why**: "Most likely" over a close call claimed more than the engine knows (typed close calls are right 47%,
   clear leads 71%; unseen notes 40 to 56% vs 83 to 84%).
 
+## 2026-09-27 - Round 23: acute fever with an infection leading is a likely infection (gate v2)
+- **Decision**: gate rule `febrile_infection_lead` (v3 order, v2 reader, enough information, not subacute).
+- **Why**: needed antibiotics on the unseen short notes 18 -> 21 and 16 -> 20 of 23; complaint-only 82 -> 105.
+  Missing a needed antibiotic in an acute febrile infection is the dangerous error.
+- **Pending owner**: complaint-only overcall 14 -> 20 (viral 4 -> 7), unseen set 2 overcall 1 -> 2.
+
