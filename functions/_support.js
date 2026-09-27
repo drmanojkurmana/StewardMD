@@ -6,6 +6,7 @@
  * include patient-identifying details; we cannot reliably scrub free text, so access control is the
  * control. Never log ticket bodies elsewhere. */
 
+import { mergeMsgs } from "./_support_live.js";
 const IDX_KEY = "support:index";              // [{id, owner, email, subject, status, unread, createdAt, updatedAt}] newest-first
 const tKey = (id) => "support:t:" + id;
 const INDEX_CAP = 800;                          // ponytail: ring-buffer cap; oldest summaries drop past this (ticket bodies still TTL out)
@@ -96,9 +97,13 @@ export async function getTicket(store, id) { try { return JSON.parse((await stor
  * status in the same call (owner "reply & resolve"). `unread` in the index flips so each side sees
  * a pending badge: a support reply marks unread for nobody-in-index (doctor polls the ticket), a
  * user follow-up marks unread=true for the owner. */
-export async function addMessage(store, id, from, text, now, status) {
+export async function addMessage(store, id, from, text, now, status, recent) {
   const t = await getTicket(store, id);
   if (!t) return null;
+  // `recent`: messages from the D1 live log (see _support_live.js recentMsgs). A copy of the ticket
+  // read at this edge location can lag one written elsewhere; folding them in first means writing
+  // it back never drops a message the other side sent a moment ago.
+  if (recent && recent.length) mergeMsgs(t, recent);
   const msg = clean(text, TEXT_MAX);
   if (msg) { t.messages.push({ from: from === "support" ? "support" : "user", text: msg, ts: now }); if (t.messages.length > MSGS_MAX) t.messages = t.messages.slice(-MSGS_MAX); }
   if (status && isStatus(status)) {
@@ -156,8 +161,9 @@ export function shotResponse(raw) {
 // The doctor opened the ticket: clear their unread badge. Owner-checked by the caller.
 export async function markSeen(store, id, now) {
   const t = await getTicket(store, id);
-  if (!t || !t.userUnread) return t;
+  if (!t) return t;
   t.userUnread = false;
+  t.userSeenAt = Math.max(+t.userSeenAt || 0, +now || Date.now());   // replies older than this are read
   await store.put(tKey(id), JSON.stringify(t), { expirationTtl: ttlFor(t) });
   return t;
 }

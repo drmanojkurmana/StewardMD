@@ -138,6 +138,10 @@ body.dark #dxOverlay.dx-simple { --dx-accent:#45b3a3; --dx-accent-fill:#1d7065; 
 /* one flat list: rows with dividers inside a single surface */
 #dxOverlay.dx-simple .dx-col.all .dx-col-h { text-transform:none; letter-spacing:-.01em; font-size:17px; display:flex; align-items:center; gap:8px; }
 #dxOverlay.dx-simple .dx-col-sub { font-size:12.5px; line-height:1.55; color:var(--dx-muted); margin:2px 0 10px; }
+/* smd_prior_v1: the doctor's own switch (off by default) */
+#dxOverlay .dx-prior-sw { display:flex; align-items:flex-start; gap:10px; margin:0 0 12px; padding:10px 12px; border:1px solid var(--dx-line, rgba(0,0,0,.12)); border-radius:12px; cursor:pointer; font-size:13.5px; font-weight:600; color:var(--ink); }
+#dxOverlay .dx-prior-sw input { flex:none; width:18px; height:18px; margin:1px 0 0; accent-color:var(--dx-accent, #0f766e); }
+#dxOverlay .dx-prior-sw em { display:block; font-style:normal; font-weight:400; font-size:12px; line-height:1.5; color:var(--dx-muted); margin-top:2px; }
 #dxOverlay.dx-simple .dx-rows { background:var(--dx-surface); border:1px solid var(--dx-border); border-radius:var(--dx-r); overflow:hidden; }
 /* !important: appearance.css themes restyle .dx-card as glass cards via #dxOverlay:not(#_) */
 #dxOverlay.dx-simple .dx-rows > .dx-card { border:none!important; border-radius:0!important; background:none!important; box-shadow:none!important; -webkit-backdrop-filter:none!important; backdrop-filter:none!important; margin:0!important; border-top:1px solid var(--dx-border)!important; }

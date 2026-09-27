@@ -19,8 +19,9 @@ const ctx = (v2) => ({
 });
 const present = (t, v2) => NLP.extract(t, ctx(v2)).present;
 
-test("off by default: no ctx.v2, no window, no flag", () => {
-  assert.equal(NLP._v2({}), false);
+test("on by default since 2026-09-27: no ctx.v2, no window, no flag; ctx.v2 overrides", () => {
+  assert.equal(NLP._v2({}), true);
+  assert.equal(NLP._v2({ v2: false }), false);
   assert.equal(NLP._v2({ v2: true }), true);
 });
 

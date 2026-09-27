@@ -70,15 +70,16 @@
   }
   function esc(s) { return String(s).replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
 
-  // smd_nlp_v2 (default OFF): Phase 2 of kb/validation/PLAN-DX-ABX-10.md. ctx.v2 overrides the flag
-  // (tests / callers that know); otherwise ?nlpv2=1|0, then localStorage smd_nlp_v2. Off = unchanged.
+  // smd_nlp_v2 (default ON since 2026-09-27, owner: "turn all on"): Phase 2 of kb/validation/PLAN-DX-ABX-10.md.
+  // ctx.v2 overrides the flag (tests / callers that know); otherwise ?nlpv2=1|0, then localStorage
+  // smd_nlp_v2 ("0" = the classic extractor, unchanged).
   function nlpV2(ctx) {
     if (ctx && ctx.v2 != null) return !!ctx.v2;
     try {
       var q = /[?&]nlpv2=([01])\b/.exec((root && root.location && root.location.search) || "");
       if (q) return q[1] === "1";
-      return !!(root && root.localStorage && root.localStorage.getItem("smd_nlp_v2") === "1");
-    } catch (e) { return false; }
+      return !(root && root.localStorage && root.localStorage.getItem("smd_nlp_v2") === "0");
+    } catch (e) { return true; }
   }
   // v2: phrases the abbreviation table would otherwise mangle ("cva" -> "stroke")
   var PRE_V2 = [[/\bcva\s*(?:angle\s*)?tender(?:ness)?\b/g, "costovertebral angle tenderness"], [/\bcva\s*angle\b/g, "costovertebral angle"]];

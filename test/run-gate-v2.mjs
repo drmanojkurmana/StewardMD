@@ -85,7 +85,7 @@ try {
   await call("Runtime.enable");
 
   // ---- 1. flag OFF: classic ----------------------------------------------------------------
-  ok(await load(BASE + "?gatev2=0"), "app + KB load with ?gatev2=0");
+  ok(await load(BASE + "?gatev2=0&kbv2=0"), "app + KB load with ?gatev2=0&kbv2=0 (fixtures predate smd_kb_v2 ON)");
   await ev(`localStorage.removeItem("smd_gate_v2"); return 1`);
   for (const [id, what, classic] of FIX) {
     const g = await assess(keys(id));
@@ -100,7 +100,7 @@ try {
   // ---- 2. flag ON --------------------------------------------------------------------------
   // the fixtures were written against the classic order (?rankv3=0); v3's own effect on the gate is
   // asserted after them, and in test/run-rank-v3.mjs
-  ok(await load(BASE + "?gatev2=1&rankv3=0"), "app + KB load with ?gatev2=1&rankv3=0");
+  ok(await load(BASE + "?gatev2=1&rankv3=0&kbv2=0"), "app + KB load with ?gatev2=1&rankv3=0&kbv2=0");
   for (const [id, what, , v2cls, v2ab, re] of FIX) {
     const g = await assess(keys(id));
     ok(g.cls === v2cls && g.ab === v2ab, `on  · ${what} (${id}): ${v2cls}, antibiotics ${v2ab ? "yes" : "no"} (${g.cls}, ${g.ab})`);
@@ -144,7 +144,10 @@ try {
   ok(await load(BASE + "?gatev2=1"), "app + KB load with ?gatev2=1 (v3 order, the default)");
   const urtiV3 = await assess(keys("gc_149"));
   ok(urtiV3.cls === "infection_conditional" && urtiV3.rule !== "keep_rival", `on + v3 · URTI with pneumonia only keyword-close (gc_149): conditional, not "likely" (${urtiV3.cls})`);
-  await load(BASE + "?gatev2=1&rankv3=0");
+  // default ON since 2026-09-27 (smd_kb_v2): SBP with fever matches the knowledge base itself
+  const sbpDefault = await assess(keys("gc_143"));
+  ok(sbpDefault.ab === true, `defaults · SBP (fever) gc_143: antibiotics yes (${sbpDefault.cls})`);
+  await load(BASE + "?gatev2=1&rankv3=0&kbv2=0");
   ok(fnOn.ab === true && fnOn.cls === fnOff.cls, `on  · fever + "Neutropenia (ANC <500)" unchanged by v2 (${fnOn.cls})`);
 
   // ---- 3. localStorage flag without the query ----------------------------------------------
@@ -160,7 +163,7 @@ try {
   await ev(`localStorage.removeItem("smd_gate_v2"); return 1`);
 
   // ---- 4. Dx workspace renders the v2 decision ---------------------------------------------
-  ok(await load(BASE + "?gatev2=1"), "reload with ?gatev2=1 for the workspace");
+  ok(await load(BASE + "?gatev2=1&kbv2=0"), "reload with ?gatev2=1&kbv2=0 for the workspace");
   const ws1 = JSON.parse(await ev(`try{DX.openWorkspace();}catch(e){} DX.reset&&DX.reset(); DX.addFindings(${lit(Object.keys(keys("gc_118")))});
     var g=document.querySelector('#dxGate'), p=document.querySelector('#dxPolicy');
     return JSON.stringify({gate: g?g.innerText:'', policy: p?p.innerText.trim():'', live: Object.keys(DX._state.f).length});`));

@@ -42,7 +42,9 @@ const H = 3600000;
 const BOOT = `
   window.__sent = []; var NOW = Date.now(), H = ${H}; window.__events = []; window.__seq = 0;
   window.__docMsg = function (id, text) { var t = window.__tickets.filter(function (x) { return x.id === id; })[0]; var now = Date.now();
-    t.messages.push({ from: "user", text: text, ts: now }); t.unread = true; t.updatedAt = now; window.__events.push({ seq: ++window.__seq, ticket: id, owner: t.owner, sender: "user", kind: "msg", text: text, ts: now }); };
+    t.messages.push({ from: "user", text: text, ts: now }); t.unread = true; t.updatedAt = now; window.__push({ ticket: id, owner: t.owner, sender: "user", kind: "msg", text: text, ts: now }); };
+  window.__waiters = [];
+  window.__push = function (e) { e.seq = ++window.__seq; e.ts = e.ts || Date.now(); window.__events.push(e); var w = window.__waiters; window.__waiters = []; w.forEach(function (f) { f(); }); };
   window.__tickets = [
     { id: "SMD-LATE01", kind: "bug", owner: "fb:d1", email: "late@doc.in", subject: "Bug: ICU chart blank", status: "open", unread: true, createdAt: NOW - 30*H, dueAt: NOW - 6*H, updatedAt: NOW - 30*H,
       platform: "ios", build: "3.1", hasShot: true, bug: { route: "#icu | icuModal", element: { label: "Save", tag: "button", sel: "button#icuSave" }, screen: { w: 390, h: 844, dpr: 3 }, ua: "iPhone OS 26" },
@@ -67,9 +69,17 @@ const BOOT = `
     if (url.indexOf("/api/ai/admin/support-live") === 0) {
       var am = /after=([0-9]+)/.exec(url);
       if (!am) return J({ ok: true, live: true, seq: window.__seq, events: [] });
-      var evs = window.__events.filter(function (e) { return e.seq > +am[1]; });
-      return J({ ok: true, live: true, seq: evs.length ? evs[evs.length - 1].seq : +am[1], events: evs });
+      var since = function () { var evs = window.__events.filter(function (e) { return e.seq > +am[1]; }); return { ok: true, live: true, seq: evs.length ? evs[evs.length - 1].seq : +am[1], events: evs }; };
+      var wm = /wait=([0-9]+)/.exec(url);
+      if (!wm || since().events.length) return J(since());
+      // Held like the server: answers the moment an event lands.
+      return new Promise(function (res, rej) {
+        var done = false, fin = function () { if (done) return; done = true; clearTimeout(tm); res(); };
+        var tm = setTimeout(fin, +wm[1] * 1000); window.__waiters.push(fin);
+        if (opts.signal) opts.signal.addEventListener("abort", function () { if (done) return; done = true; clearTimeout(tm); rej(new DOMException("aborted", "AbortError")); });
+      }).then(function () { return J(since()); });
     }
+    if (url.indexOf("/api/ai/admin/support-typing") === 0) return J({ ok: true });
     if (url.indexOf("/api/ai/admin/support-seen") === 0) {
       var sb = JSON.parse(opts.body || "{}"); window.__tickets.forEach(function (t) { if (t.id === sb.id) t.unread = false; }); return J({ ok: true });
     }
@@ -181,9 +191,17 @@ try {
   await click('#bgBox [data-bug="SMD-SOON02"]');
   ok(await waitFor(`return /drug search slow/.test(document.getElementById("bgBox").innerText)`), "open another conversation");
   ok(await waitFor(`return window.__sent.some(function(x){return /support-seen/.test(x.url) && /SMD-SOON02/.test(x.body||"")})`), "opening it tells the doctor it was Seen");
-  await ev(`document.getElementById("bgTx").value="half-typed reply"; window.__docMsg("SMD-SOON02", "It is worse on 4G"); return 1;`);
-  ok(await waitFor(`return /It is worse on 4G/.test(document.getElementById("bgBox").innerText)`, 8000), "the doctor's new message appears within seconds, no reload");
-  ok(await ev(`return document.getElementById("bgTx").value==="half-typed reply"`) === true, "without losing what the developer was typing");
+  ok(await waitFor(`return window.__sent.some(function(x){return /support-live[?]after=[0-9]+&wait=20&fast=1/.test(x.url)})`), "the open conversation holds a fast long-poll");
+  await ev(`var x=document.getElementById("bgTx"); x.focus(); x.value="half-typed reply"; x.dispatchEvent(new Event("input")); return 1;`);
+  ok(await waitFor(`return window.__sent.some(function(x){return /support-typing/.test(x.url) && /SMD-SOON02/.test(x.body||"")})`), "the doctor is told the developer is typing");
+  await ev(`window.__push({ ticket: "SMD-SOON02", owner: "fb:x", sender: "user", kind: "typing" }); return 1;`);
+  ok(await waitFor(`return /Doctor is typing/.test(document.getElementById("bgBox").innerText)`, 3000), "and the developer sees \"Doctor is typing\"");
+  await ev(`window.__t0=Date.now(); window.__docMsg("SMD-SOON02", "It is worse on 4G"); return 1;`);
+  ok(await waitFor(`return /It is worse on 4G/.test(document.getElementById("bgBox").innerText)`, 8000), "the doctor's new message appears, no reload");
+  const lat = await ev(`return Date.now()-window.__t0`);
+  ok(lat < 800, "at once, like a messenger (" + lat + " ms)");
+  ok(await ev(`return document.getElementById("bgTx").value==="half-typed reply" && document.activeElement===document.getElementById("bgTx")`) === true, "without losing what the developer was typing, or the cursor");
+  ok(await ev(`return !/Doctor is typing/.test(document.getElementById("bgBox").innerText)`) === true, "the typing line gives way to the message");
 
   console.log(fails === 0 ? "\nALL GREEN - admin Help & Support inbox: every kind, counts, urgency order, detail, LIVE doctor messages, Seen, reply, fix, reopen, copy" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
