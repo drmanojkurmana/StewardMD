@@ -1633,15 +1633,15 @@
     if (!el) return;
     if (!Object.keys(S.f).length) { el.innerHTML = ""; return; }
     var skipped = S.consultSkipped || [];
-    var sug = suggestionKeys(d).filter(function (k) { return skipped.indexOf(k) < 0; });
-    if (simpleOn()) sug = plainKeys(sug);
+    var sug = plainKeys(suggestionKeys(d).filter(function (k) { return skipped.indexOf(k) < 0; }));
     if (!sug.length) {
       el.innerHTML = '<div class="dx-sugg-h">Ready to review?</div><p class="dx-suggest-note">No further suggestions in this set. You can still search for findings or review the differential.</p>' + (skipped.length ? '<button class="dx-chip" id="dxRevisit">Revisit skipped questions</button>' : '');
       var revisit = el.querySelector("#dxRevisit"); if (revisit) revisit.onclick = function () { S.consultSkipped = []; renderSuggest(); };
       return;
     }
     var key = sug[0];
-    el.innerHTML = '<div class="dx-eyebrow">CLARIFY THE CLINICAL PICTURE</div><h3 class="dx-question">Is this finding present?</h3><div class="dx-question-finding">' + esc(LABEL[key]) + '</div><p class="dx-suggest-note">Suggested from missing findings across the current differential. Verify before adding.</p><div class="dx-answer-row"><button class="dx-chip" data-confirm="' + key + '">Present · add</button><button class="dx-chip" id="dxSkipQuestion">Skip for now</button></div><p class="dx-question-foot">Skipping does not record absence or change the ranking.</p>';
+    var plain = simpleOn();
+    el.innerHTML = '<div class="dx-eyebrow">' + (plain ? 'Check this next' : 'CLARIFY THE CLINICAL PICTURE') + '</div><h3 class="dx-question">Is this finding present?</h3><div class="dx-question-finding">' + esc(LABEL[key]) + '</div><p class="dx-suggest-note">Suggested from missing findings across the current differential. Verify before adding.</p><div class="dx-answer-row"><button class="dx-chip" data-confirm="' + key + '">' + (plain ? 'Yes, add it' : 'Present · add') + '</button><button class="dx-chip" id="dxSkipQuestion">Skip for now</button></div><p class="dx-question-foot">Skipping does not record absence or change the ranking.</p>';
     el.querySelector("[data-confirm]").onclick = function () { addFinding(key); };
     el.querySelector("#dxSkipQuestion").onclick = function () { S.consultSkipped = skipped.concat([key]); renderSuggest(); var next = el.querySelector("[data-confirm], #dxRevisit"); if (next) next.focus({ preventScroll: true }); };
   }
@@ -2784,13 +2784,13 @@
     var whyNotBits = [];
     if (rank > 1 && above) whyNotBits.push("Ranked just below <b>" + esc(above.name) + "</b> (" + above.score + " vs " + r.score + "), which also fits the current findings");
     if (r.contra && r.contra.length) whyNotBits.push("argued against by " + esc(r.contra.map(lbl).join(", ")));
-    if (r.missing && r.missing.length) whyNotBits.push("would move up with " + esc(r.missing.slice(0, 3).map(lbl).join(", ")));
+    if (plainKeys(r.missing).length) whyNotBits.push("would move up with " + esc(plainKeys(r.missing).slice(0, 3).map(lbl).join(", ")));
     var whyNot = (rank > 1 && whyNotBits.length)
       ? '<div class="dx-d-row"><b>Why not higher</b><div class="dx-reason">' + whyNotBits.join("; ") + '.</div></div>' : "";
     var det = '<div class="dx-detail">' + confLine +
       '<div class="dx-d-row"><b>Supporting findings</b><div>' + fl(r.supporting, "sup", rIco("check")+" ") +'</div></div>' +
       (r.contra && r.contra.length ? '<div class="dx-d-row"><b>Contradictory findings</b><div>' + fl(r.contra, "con", "✕ ") + '</div></div>' : '') +
-      '<div class="dx-d-row"><b>Missing / would help</b><div>' + fl(r.missing, "mis", "? ") + '</div></div>' +
+      '<div class="dx-d-row"><b>Missing / would help</b><div>' + fl(plainKeys(r.missing), "mis", "? ") + '</div></div>' +
       (r.reason ? '<div class="dx-d-row"><b>Why this — likely because</b><div class="dx-reason">' +
         (function () { var s = (r.supporting || []).slice(0, 3).map(lbl); return s.length ? '<b>' + esc(s.join(", ")) + '</b> ' + (s.length > 1 ? "together point here — " : "points here — ") : ""; })() +
         esc(r.reason) + '</div></div>' : '') +
@@ -3058,7 +3058,7 @@
     var cols = S.compare.map(function (id) { return map[id]; }).filter(Boolean);
     if (cols.length < 2) { el.innerHTML = ""; return; }
     function cell(r, field, sign, c) {
-      var arr = r[field] || [];
+      var arr = field === "missing" ? plainKeys(r[field]) : (r[field] || []);
       return arr.length ? arr.map(function (k) { return '<span class="dx-f ' + c + '">' + (sign || "") + esc(lbl(k)) + '</span>'; }).join("") : '<span class="dx-none">—</span>';
     }
     var html = '<div class="dx-cmp-h">⚖ Compare diagnoses <button class="dx-cmp-clear" id="dxCmpClear">clear</button></div>' +
@@ -3290,16 +3290,16 @@
     var open = A.qs.filter(function (q) { return !A.ans[q.key]; }), q = open[0], n = A.qs.length - open.length;
     var body;
     if (q) {
-      body = '<div class="dx-eyebrow">BEFORE YOU COMMIT · QUESTION ' + (n + 1) + ' OF ' + A.qs.length + '</div>' +
+      body = '<div class="dx-eyebrow">Question ' + (n + 1) + ' of ' + A.qs.length + '</div>' +
         '<h3 class="dx-question">Is this finding present?</h3>' +
         '<div class="dx-question-finding">' + esc(q.label) + '</div>' +
         '<p class="dx-suggest-note">A yes favours <strong>' + esc(q.favoursName) + '</strong> over ' + esc(q.against) + '. Verify before answering.</p>' +
-        '<div class="dx-answer-row"><button class="dx-chip" type="button" data-askv="yes" data-askk="' + q.key + '">Yes · add</button>' +
+        '<div class="dx-answer-row"><button class="dx-chip" type="button" data-askv="yes" data-askk="' + q.key + '">Yes, add</button>' +
         '<button class="dx-chip" type="button" data-askv="no" data-askk="' + q.key + '">No</button>' +
         '<button class="dx-chip" type="button" data-askv="unk" data-askk="' + q.key + '">Unknown</button></div>' +
         '<p class="dx-question-foot">No is kept as a pertinent negative. Unknown leaves the case unchanged.</p>';
     } else {
-      body = '<div class="dx-eyebrow">BEFORE YOU COMMIT</div>' +
+      body = '<div class="dx-eyebrow">Done</div>' +
         '<h3 class="dx-question">All ' + A.qs.length + ' questions answered</h3>' +
         '<div class="dx-answer-row"><button class="dx-chip" type="button" id="dxAskMore">Ask more questions</button></div>';
     }
@@ -3317,8 +3317,8 @@
       '<div class="dx-suggest dx-askcard" id="dxAskCard">' + body + '</div>' +
       (answered ? '<div class="dx-ask-done"><div>' + answered + '</div><button class="dx-ask-undo" type="button" id="dxAskUndo">Undo last answer</button></div>' : '') +
       verdict +
-      '<button class="dx-select ' + cls + '" type="button" data-askgo="' + T.id + '">Continue with ' + esc(T.name) + ' →</button>' +
-      (st.leader ? '<button class="dx-chip dx-ask-alt" type="button" data-askgo="' + st.leader.id + '">Switch to ' + esc(st.leader.name) + ' →</button>' : '') +
+      '<button class="dx-select ' + cls + '" type="button" data-askgo="' + T.id + '">Continue with ' + esc(T.name) + '</button>' +
+      (st.leader ? '<button class="dx-chip dx-ask-alt" type="button" data-askgo="' + st.leader.id + '">Switch to ' + esc(st.leader.name) + '</button>' : '') +
       '<button class="dx-chip dx-ask-alt" type="button" id="dxAskCancel">Not now, back to the differential</button>' +
       '</div>';
   }
@@ -3933,10 +3933,10 @@
     all.forEach(function (r, i) { if (i >= cap && i < 30 && (S.expanded[r.id] || (S.ask && S.ask.target === r.id))) cap = i + 1; });
     var shown = all.slice(0, cap), rest = all.length - shown.length;
     var body = shown.map(function (r, i) { return card(r, i + 1, i > 0 ? shown[i - 1] : null); }).join("");
-    if (rest > 0) body += '<button type="button" class="dx-more dx-showall" id="dxShowAll">Show ' + rest + ' less likely possibilit' + (rest === 1 ? 'y' : 'ies') + '</button>';
-    else if (S.showAllDx && all.length > SIMPLE_CAP) body += '<button type="button" class="dx-more dx-showall" id="dxShowAll">Show fewer</button>';
-    return '<div class="dx-col all"><div class="dx-col-h">All possibilities, best fit first <span class="dx-col-n">' + all.length + '</span></div>' +
-      '<p class="dx-col-sub">Fit shows how well the findings match each diagnosis. It is not a probability. Tap one to see why.</p>' + body + '</div>';
+    var tail = rest > 0 ? '<button type="button" class="dx-more dx-showall" id="dxShowAll">Show ' + rest + ' less likely</button>'
+      : (S.showAllDx && all.length > SIMPLE_CAP ? '<button type="button" class="dx-more dx-showall" id="dxShowAll">Show fewer</button>' : '');
+    return '<div class="dx-col all"><div class="dx-col-h">All possibilities <span class="dx-col-n">' + all.length + '</span></div>' +
+      '<p class="dx-col-sub">Best fit first. Fit is how well the findings match, not a probability.</p><div class="dx-rows">' + body + '</div>' + tail + '</div>';
   }
   function renderTop(d) {
     var el = root.querySelector("#dxTop");
@@ -3946,9 +3946,9 @@
     var cls = A.inf ? "inf" : "ni", B = all[1], tie = B && rkOf(A) - rkOf(B) < 3;
     var also = all.slice(1, 3).map(function (r) { return r.name; });
     el.innerHTML = '<div class="dx-topcard">' +
-      '<div class="dx-eyebrow">' + (tie ? "CLOSEST FITS ON THESE FINDINGS" : "MOST LIKELY ON THESE FINDINGS") + '</div>' +
+      '<div class="dx-eyebrow">' + (tie ? "Closest fits" : "Most likely") + '</div>' +
       '<div class="dx-top-name">' + esc(A.name) + '</div>' +
-      '<div class="dx-tags"><span class="dx-tag ' + cls + '">' + (A.inf ? "Infective" : "Non-infective") + '</span><span class="dx-tag fit">' + fitLabel(A.score) + ' · ' + A.score + '/100</span></div>' +
+      '<div class="dx-tags"><span class="dx-tag ' + cls + '">' + (A.inf ? "Infective" : "Non-infective") + '</span><span class="dx-tag fit">' + fitLabel(A.score) + ', ' + A.score + '/100</span></div>' +
       ((A.supporting || []).length ? '<p class="dx-top-line"><strong>Fits:</strong> ' + esc(A.supporting.slice(0, 4).map(lbl).join(", ")) + '</p>' : '') +
       (tie ? '<p class="dx-top-line"><strong>' + esc(B.name) + '</strong> fits just as well. Open either card and press Select to get questions that separate them.</p>'
            : (also.length ? '<p class="dx-top-line"><strong>Also consider:</strong> ' + esc(also.join(", ")) + '</p>' : '')) +
@@ -3965,6 +3965,7 @@
     det.className = "dx-pol-fold";
     det.innerHTML = '<summary>Antibiotic guidance' + (srcTxt ? ': ' + esc(srcTxt) : '') + '</summary>';
     if (btn) btn.parentNode.removeChild(btn);   // the node keeps its click handler
+    if (btn) btn.textContent = btn.textContent.replace(/\s*→\s*$/, "");
     det.appendChild(box);
     el.appendChild(det);
     if (btn) el.appendChild(btn);
@@ -3976,7 +3977,7 @@
     var t = root.querySelector("#dxReviewTitle"), intro = root.querySelector(".dx-section-intro p");
     if (!SIMPLE_ORIG) SIMPLE_ORIG = { t: t ? t.innerHTML : "", intro: intro ? intro.innerHTML : "" };
     if (t) t.innerHTML = on ? "What it could be" : SIMPLE_ORIG.t;
-    if (intro) intro.innerHTML = on ? '<span class="dx-steps"><span>1. Add what you found: search, speak, or browse by system.</span><span>2. Answer the suggested question, or skip it.</span><span>3. See what it could be, best fit first.</span></span>' : SIMPLE_ORIG.intro;
+    if (intro) intro.innerHTML = on ? 'Add what you found, answer the question it suggests, then see what it could be.' : SIMPLE_ORIG.intro;
     // the guideline picker belongs with treatment, not before the first finding
     var h = root.querySelector("#dxHosp"), adv = root.querySelector("#dxAdvToggle"), imp = root.querySelector("#dxImported");
     if (h && adv && imp) { if (on) adv.parentNode.insertBefore(h, adv); else imp.parentNode.insertBefore(h, imp.nextSibling); }
@@ -3991,7 +3992,7 @@
     if (!simpleOn() || !nFind) { el.innerHTML = ""; return; }
     if (ready) {
       var n = allByFit(d).length;
-      el.innerHTML = '<button type="button" class="dx-go" id="dxGoBtn">See what it could be (' + n + ' possibilit' + (n === 1 ? 'y' : 'ies') + ') →</button>';
+      el.innerHTML = '<button type="button" class="dx-go" id="dxGoBtn">See what it could be (' + n + ')</button>';
       el.querySelector("#dxGoBtn").addEventListener("click", function () { showConsultPane("dxReview"); });
     } else {
       el.innerHTML = '<p class="dx-go-hint">Add ' + Math.max(1, 3 - nFind) + ' more finding' + (3 - nFind === 1 ? '' : 's') + ', or one specific sign, to see what it could be.</p>';
@@ -4028,10 +4029,9 @@
         '<div class="dx-rank ' + cls + '">' + rank + '</div>' +
         '<div class="dx-row-main">' +
           '<div class="dx-row-name">' + esc(r.name) + '</div>' +
-          '<div class="dx-tags"><span class="dx-tag ' + cls + '">' + (r.inf ? "Infective" : "Non-infective") + '</span>' +
+          '<div class="dx-tags"><span class="dx-fit"><strong>' + fitLabel(r.score) + '</strong>, ' + r.score + '/100</span>' +
+            '<span class="dx-tag ' + cls + '">' + (r.inf ? "Infective" : "Non-infective") + '</span>' +
             (r.matched ? '<span class="dx-tag met">Meets criteria</span>' : '') + (inCmp ? '<span class="dx-tag fit">In compare</span>' : '') + '</div>' +
-          '<div class="dx-bar ' + cls + '"><span style="width:' + r.score + '%"></span></div>' +
-          '<div class="dx-fit"><strong>' + fitLabel(r.score) + '</strong> · ' + r.score + '/100' + (r.system ? ' · ' + esc(r.system) : '') + '</div>' +
         '</div>' +
       '</div>';
     if (!open) return '<div class="dx-card ' + cls + '">' + head + '</div>';
@@ -4044,6 +4044,7 @@
       (miss.length ? ' It would move up with ' + esc(miss.slice(0, 3).map(lbl).join(", ")) + '.' : '') : "";
     var mm = reasonV2() ? mimicsFor(r.id, r.inf) : [];
     var det = '<div class="dx-detail">' +
+      (r.system ? '<p class="dx-row-sys">' + esc(r.system) + '</p>' : '') +
       ((r.supporting || []).length ? row("Fits because", '<div>' + fl(r.supporting, "sup", "✓ ") + '</div>') : '') +
       ((r.contra || []).length ? row("Against it", '<div>' + fl(r.contra, "con", "✕ ") + '</div>') : '') +
       (whyNot ? row("Why it is not first", '<div class="dx-reason">' + whyNot + '</div>') : '') +
@@ -4057,7 +4058,7 @@
       scoreChipsBlock(r) +
       harrisonRef(r.id) +
       '<button type="button" class="dx-cmp dx-cmp-add" aria-pressed="' + inCmp + '" data-cmp="' + r.id + '">' + (inCmp ? "Remove from compare" : "Add to compare") + '</button>' +
-      (S.ask && S.ask.target === r.id ? askHTML(r) : '<button class="dx-select ' + cls + '" data-sel="' + r.id + '">Select this diagnosis →</button>') +
+      (S.ask && S.ask.target === r.id ? askHTML(r) : '<button class="dx-select ' + cls + '" data-sel="' + r.id + '">Select this diagnosis</button>') +
       '</div>';
     return '<div class="dx-card ' + cls + ' open">' + head + det + '</div>';
   }

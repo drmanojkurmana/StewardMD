@@ -175,3 +175,23 @@ Fixed for everyone: the empty-state heading space, and the guideline note no lon
 - Test `test/run-dx-simple.mjs` (CI). Known leftovers: "Know more" is light in dark mode (existing);
   the classic gate still says "empiric antimicrobial therapy is appropriate" for viral hepatitis
   unless `smd_gate_v2` is on.
+
+### Anti-slop pass on the plain view (2026-09-27)
+
+Owner asked to "use tasteskills.dev and remove AI slop". Source: tasteskill.dev /
+github.com/Leonxlnx/taste-skill (MIT), the `redesign-skill` audit plus the "AI tells" list of the main
+skill; landing-page rules (heroes, testimonials, pricing) do not apply to a clinical app and were
+skipped. Applied under `#dxOverlay.dx-simple` in `reasoning-workspace.css`:
+- ONE accent: the brand teal (`--dx-accent`, plus `--dx-accent-fill` for filled buttons); the
+  workspace's violet was a second accent (and the skill's #1 AI tell). **Gotcha**: the workspace's
+  `body.dark #dxOverlay { --dx-accent }` outranks `#dxOverlay.dx-simple`, so dark needs its own rule.
+- sentence-case labels (no uppercase eyebrows), tags as plain coloured text (no pills), no score bars
+  on grey tracks, no middle-dot or arrow separators in the plain text, no numbered steps.
+- the list is one surface with divided rows. **Gotcha**: `appearance.css` restyles `.dx-card` through
+  `#dxOverlay:not(#_)` (glass themes), so the flat-row rules use `!important`.
+- the `workspaces.js` branch watermark (`.sw-wm`, hand-drawn IV bag + ECG line art) is hidden.
+- one radius scale (14px containers, 12px controls), no purple-tinted shadows, press feedback.
+- dark: off-black `#0d1113` instead of `#000`, and the "Know more" evidence box follows the theme.
+- Not done: the app font is Inter (the skill discourages it as a default); changing it is app-wide.
+- Also "Fever with urinary symptoms" is no longer suggested on top of fever in the standard view.
+- `test/run-dx-simple.mjs` asserts the accent, labels, pills, bars, watermark, separators and dark.

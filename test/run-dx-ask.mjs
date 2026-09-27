@@ -98,12 +98,12 @@ try {
   await selectIn(HEP, "VIRAL_HEPATITIS");
   let p = await panel();
   ok(p.on && p.ws && p.chrome && !p.selBtn, "inline · Select opens the questions inside the card; workspace header and tabs stay, Select button is replaced");
-  ok(/QUESTION 1 OF \d/.test(p.text) && /Cholangitis/.test(p.text) && !/\u2014/.test(p.text), `inline · one question at a time, names cholangitis as an alternative; no em-dash (${(p.text.match(/QUESTION 1 OF \d+/) || [""])[0]})`);
+  ok(/Question 1 of \d/.test(p.text) && /Cholangitis/.test(p.text) && !/\u2014/.test(p.text), `inline · one question at a time, names cholangitis as an alternative; no em-dash (${(p.text.match(/Question 1 of \d+/) || [""])[0]})`);
   ok(p.accent && p.accent[0] === p.accent[1], `inline · Yes uses the workspace accent (${p.accent && p.accent[0]})`);
   const wide = await ev(`var el=document.querySelector('#dxOverlay .dx-body'); return el.scrollWidth<=el.clientWidth+1;`);
   ok(wide === true, "inline · no horizontal overflow at 390px");
   let k = await answerCur("yes"); p = await panel();
-  ok(k === "rightUpperQuadrantPain" && p.f.includes(k) && p.warn && p.sw && /now ranks above/.test(p.text) && /QUESTION 2 OF/.test(p.text), `inline · Yes to ${k} adds it; a rival overtakes, Switch is offered; next question shown`);
+  ok(k === "rightUpperQuadrantPain" && p.f.includes(k) && p.warn && p.sw && /now ranks above/.test(p.text) && /Question 2 of/.test(p.text), `inline · Yes to ${k} adds it; a rival overtakes, Switch is offered; next question shown`);
   k = await answerCur("no"); p = await panel();
   ok(p.neg.includes(k) && !p.f.includes(k) && /\u2715 /.test(p.text), `inline · No to ${k}: pertinent negative, not a finding, listed as answered`);
   const kUnk = await answerCur("unk"); p = await panel();

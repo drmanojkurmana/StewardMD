@@ -86,16 +86,27 @@ try {
   ok(v.hospAfter, "on  · the antibiotic guideline picker sits below the findings");
   await open(HEP, "dxIntake");
   v = await view();
-  ok(/See what it could be \(\d+ possibilities\)/.test(v.go), `on  · intake with enough findings offers "${v.go.trim()}"`);
+  ok(/See what it could be \(\d+\)/.test(v.go), `on  · intake with enough findings offers "${v.go.trim()}"`);
   await ev(`document.querySelector('#dxGoBtn').click(); return 1`);
   ok((await ev(`return !document.querySelector('#dxReview').hidden`)) === true, "on  · that button opens the differential");
   v = await view();
   ok(v.simple && v.all && !v.two && v.title === "What it could be", "on  · 'What it could be': one list instead of two");
   ok(v.ranks.length && v.ranks.every((r, i) => r === i + 1), `on  · numbered once, 1 to ${v.ranks.length} (no second #1)`);
-  ok(/MOST LIKELY|CLOSEST FITS/.test(v.top) && v.top.includes(v.firstName) && /Infective|Non-infective/.test(v.top) && /fit · \d+\/100/.test(v.top), `on  · Most likely card names the first diagnosis (${v.firstName})`);
+  ok(/Most likely|Closest fits/.test(v.top) && v.top.includes(v.firstName) && /Infective|Non-infective/.test(v.top) && /fit, \d+\/100/.test(v.top), `on  · Most likely card names the first diagnosis (${v.firstName})`);
   ok(/Show \d+ less likely/.test(v.showAll) && v.cards <= 10, `on  · first view is short (${v.cards} cards), the rest folded ("${v.showAll}")`);
   ok(v.ni, "on  · the best non-infective alternative is in the first view (toxic hepatitis for this picture)");
   ok(!/Ranking score|NEW|⚖|mimics/.test(v.colsText) && /Strong fit|Possible fit|Weak fit/.test(v.colsText), "on  · no bare 'Ranking score', NEW, ⚖ or '↔ mimics' badges; plain fit labels");
+  // anti-slop (tasteskill.dev audit): one accent, sentence-case labels, no pills, no bars on tracks,
+  // no watermark, no arrows or middle dots in the plain text, off-black dark mode
+  const slop = JSON.parse(await ev(`var ov=document.querySelector('#dxOverlay'), teal=getComputedStyle(document.body).getPropertyValue('--teal').trim();
+    var top=document.querySelector('.dx-top-open'), lab=document.querySelector('.dx-col-h'), tag=document.querySelector('#dxCols .dx-tag'), bar=document.querySelector('#dxCols .dx-bar'), wm=document.querySelector('#dxOverlay .sw-wm');
+    var toHex=function(c){var m=c.match(/\\d+/g); return m?'#'+m.slice(0,3).map(function(x){return (+x).toString(16).padStart(2,'0');}).join(''):c;};
+    var txt=[].map.call(document.querySelectorAll('#dxTop, #dxCols .dx-fit, #dxCols .dx-col-h, #dxCols .dx-col-sub, #dxGo, #dxShowAll'),function(e){return e.innerText;}).join(' ');
+    return JSON.stringify({accent:toHex(getComputedStyle(top).backgroundColor), teal:teal.toLowerCase(), labT:getComputedStyle(lab).textTransform, tagBg:getComputedStyle(tag).backgroundColor, bar:bar?getComputedStyle(bar).display:'none', wm:wm?getComputedStyle(wm).display:'none', arrows:/→/.test(txt), dots:/·/.test(txt)});`));
+  ok(slop.accent === slop.teal, `slop · one accent: the brand teal (${slop.accent}), not the extra violet`);
+  ok(slop.labT === "none" && /rgba\(0, 0, 0, 0\)|transparent/.test(slop.tagBg), "slop · sentence-case headings, tags as plain text (no pills)");
+  ok(slop.bar === "none" && slop.wm === "none", "slop · no score bars on grey tracks, no decorative watermark");
+  ok(!slop.arrows && !slop.dots, "slop · no arrows or middle-dot separators in the plain text");
   await ev(`document.querySelector('#dxShowAll').click(); return 1`);
   const more = await view();
   ok(more.cards > v.cards && /Show fewer/.test(more.showAll) && more.ranks.every((r, i) => r === i + 1), `on  · Show more lists the rest (${more.cards}), still numbered once`);
@@ -114,6 +125,8 @@ try {
   const chrome = await ev(`return [].map.call(document.querySelectorAll('#dxTop, .dx-col-h, .dx-col-sub, .dx-card.open .dx-d-row>b, #dxChanged, #dxGo, .dx-section-intro, .dx-hosp-l'),function(e){return e.innerText;}).join(' ')`);
   ok(!/—/.test(chrome), "on  · no em-dash in the plain-view text");
   ok(v.wide && (await ev(`var j=document.querySelector('[data-dx-jump="dxIntake"]'); j.click(); var b=document.querySelector('#dxOverlay .dx-body'); return b.scrollWidth<=b.clientWidth+1;`)) === true, "on  · no horizontal overflow at 390px (review and intake)");
+  const dark = await ev(`document.body.classList.add('dark'); var c=getComputedStyle(document.querySelector('#dxOverlay')).backgroundColor; var ev=document.querySelector('#dxOverlay .ev-wrap'); var e=ev?getComputedStyle(ev).backgroundColor:''; document.body.classList.remove('dark'); return c+'|'+e;`);
+  ok(!/^rgb\(0, 0, 0\)/.test(dark) && !/rgb\(255, 255, 255\)$/.test(dark), `slop · dark mode is off-black, and "Know more" follows the theme (${dark})`);
   // guideline box: folded, its page button kept outside and still working
   await open(MEN);
   const pol = JSON.parse(await ev(`var el=document.querySelector('#dxPolicy'); return JSON.stringify({fold:!!el.querySelector(':scope > details.dx-pol-fold'), btn:!!el.querySelector(':scope > .dx-select[data-sel]'), sum:(el.querySelector('summary')||{}).textContent||''});`));
