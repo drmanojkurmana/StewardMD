@@ -115,3 +115,46 @@ test("liver enzymes and ascitic fluid (keys exist under smd_kb_v2)", () => {
   assert.ok(!present("ascitic fluid PMN 120", true).includes("asciticPMNHigh"));
   assert.ok(!present("ALT 2200", false).includes("transaminasesVeryHigh"), "classic path unchanged");
 });
+
+// round 2: word-start matching, list and postfix negation, "N weeks ago"
+const ctx2 = (v2) => ({
+  valid: { ...valid, immunocompromised: 1, ecgIschemia: 1, ketonemia: 1, diarrhea: 1, rash: 1, seizure: 1 },
+  labels: {}, v2, numeric: {},
+  syn: { ...ctx(v2).syn, immunocompromised: ["hiv"], ecgIschemia: ["stemi"], ketonemia: ["ketones", "hydroxybutyrate"], diarrhea: ["diarrhoea", "diarrhea"],
+    rash: ["rash"], seizure: ["seizure"], malignancy: ["cancer", "carcinoma"] },
+});
+const present2 = (t, v2) => NLP.extract(t, ctx2(v2)).present;
+
+test("a phrase has to start a word (short ones also end one)", () => {
+  assert.ok(present2("shivering since morning", false).includes("immunocompromised"), "classic: 'hiv' inside 'shivering'");
+  assert.ok(!present2("shivering since morning", true).includes("immunocompromised"));
+  assert.ok(!present2("unwell systemically", true).includes("ecgIschemia"), "'stemi' inside 'systemically'");
+  assert.ok(present2("HIV positive on ART", true).includes("immunocompromised"));
+  assert.ok(present2("known carcinomas of the bowel", true).includes("malignancy"), "a long phrase may run on (plural)");
+});
+
+test("a negated list negates each short item", () => {
+  const t = "No fever, cough, rash or diarrhoea.";
+  assert.ok(present2(t, false).includes("cough"), "classic: only the first item was negated");
+  for (const k of ["fever", "cough", "rash", "diarrhea"]) assert.ok(!present2(t, true).includes(k), k);
+  assert.ok(!present2("no history of head injury, seizure, or cancer", true).includes("seizure"));
+});
+
+test("list negation guards: idiom heads and run-on durations", () => {
+  assert.ok(present2("No known drug allergies, fever and cough.", true).includes("fever"), "allergy idiom negates nothing");
+  assert.ok(present2("No vomiting, fever and cough for 3 days.", true).includes("cough"), "a duration makes it positive");
+  assert.ok(present2("No vomiting, fever and cough for 3 days.", true).includes("fever"));
+  assert.ok(present2("no rash but fever", true).includes("fever"), "'but' ends the negation");
+});
+
+test("a result reported after the name", () => {
+  assert.ok(present2("urine ketones positive", true).includes("ketonemia"));
+  assert.ok(!present2("beta hydroxybutyrate negative", true).includes("ketonemia"));
+  assert.ok(present2("beta hydroxybutyrate negative", false).includes("ketonemia"), "classic kept it");
+});
+
+test("'3 weeks ago' dates an event; an onset word makes it the illness tempo", () => {
+  assert.ok(!present("Catheter last changed 3 weeks ago. fever", true).includes("subacuteOnset"));
+  assert.ok(present("Symptoms started 3 weeks ago", true).includes("subacuteOnset"));
+  assert.ok(present("cough for 3 weeks", true).includes("subacuteOnset"));
+});

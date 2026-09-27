@@ -10279,3 +10279,15 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
   split or configuration. The first cut put abdominal pain in "tap first" and lost a time-critical
   case on the text path; clinical grounds (pain is a cardinal SBP symptom) put it back in "treat".
 
+## 2026-09-27 - Extraction v2 round 2, and afebrile septic shock in gate v2
+- **Decision**: (1) `smd_nlp_v2` phrases must start a word (short ones also end one); negated lists and
+  postfix "negative" negate; "N weeks ago" needs an onset word; noisy phrases dropped (diaphoresis as
+  cholinergic, "leg swelling" as one-sided, mucositis, bare "rigid"). (2) gate v2 `sepsis_afebrile`: no
+  fever, low BP + raised lactate or pressors + confusion or fast breathing, host over 50 / care home /
+  immunocompromised, infection still competitive -> possible septic shock, antibiotics.
+- **Why**: extraction precision train 56% -> 60%, dev 52% -> 56%, recall flat; text-path top-1 +11 to +14
+  and antibiotics-when-not-needed -9 to -10 in every v2 config; time-critical held. (2) closes the hole
+  the better negation exposed (a catheter urosepsis note answered right only because of mis-read positives).
+- **Open (owner)**: one test-split case (aggregate only) loses a needed antibiotic call on the text path in
+  the v2 configs (abxSens 139 -> 138). Not tuned against the test split; the floor is not lowered without
+  the owner's say. `smd_nlp_v2` stays OFF.

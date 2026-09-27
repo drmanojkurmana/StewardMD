@@ -1260,6 +1260,16 @@
       g.cls = "likely"; g.rule = "sepsis_phys";
       return;
     }
+    // afebrile septic shock (Sepsis-3): the old and frail often never mount a fever. Low BP with a raised
+    // lactate or pressors plus a second qSOFA sign (confusion, fast breathing), while an infection is still
+    // competitive ("possible"), is septic shock until proven otherwise. Confusion + fast breathing without
+    // low BP is not enough (salicylate, SIADH on the train split). Limited to the hosts who fail to mount
+    // a fever: over 50, care-home residents, the immunocompromised
+    if (!(f.fever || f.rigors) && f.hypotension && (f.alteredSensorium || f.tachypnea) && (f.lactateElevated || f.vasopressorRequirement) &&
+        (f.ageOver50 || f.nursingHomeResident || f.immunocompromised) && g.cls === "possible" && !gib) {
+      g.cls = "likely"; g.rule = "sepsis_afebrile";
+      return;
+    }
     if (f.liverDisease && (f.hematemesis || f.melena || f.gibPresentation) && g.cls !== "very_likely" && g.cls !== "likely") {
       g.cls = "abx_prophylaxis"; g.rule = "cirrhosis_gib";
       return;
@@ -1413,7 +1423,8 @@
       g.rule === "keep_modifier" ? lead + " leads and does not need antibiotics on its own" + own + ", but these change that: " + g.why + ". Cover a bacterial infection empirically and reassess with cultures. " : "";
     switch (g.cls) {
       case "very_likely": return kept + "Infection leads the differential — empiric antimicrobial therapy is appropriate. Select the diagnosis to open its stewardship recommendation.";
-      case "likely": return kept + (g.rule === "sepsis_phys" ? "Can't-miss: fever with shock physiology and no non-infective cause leading. Treat as sepsis until proven otherwise: blood cultures, then antibiotics within the hour, and look for the source. " : "") + (g.rule === "sbp" ? "Can't-miss: spontaneous bacterial peritonitis. Cirrhosis with ascites plus fever, abdominal pain or encephalopathy: do a diagnostic paracentesis now and treat if ascitic neutrophils are 250/mm3 or more (at once if the patient is septic). " : "") +
+      case "likely": return kept + (g.rule === "sepsis_phys" ? "Can't-miss: fever with shock physiology and no non-infective cause leading. Treat as sepsis until proven otherwise: blood cultures, then antibiotics within the hour, and look for the source. " : "") +
+        (g.rule === "sepsis_afebrile" ? "Can't-miss: low BP with a raised lactate and confusion or fast breathing, in a patient who may not mount a fever. Possible septic shock: blood cultures, then antibiotics within the hour, and look for the source. " : "") + (g.rule === "sbp" ? "Can't-miss: spontaneous bacterial peritonitis. Cirrhosis with ascites plus fever, abdominal pain or encephalopathy: do a diagnostic paracentesis now and treat if ascitic neutrophils are 250/mm3 or more (at once if the patient is septic). " : "") +
         "Infection is the leading consideration — empiric therapy may be warranted after cultures. Confirm before prescribing.";
       case "infection_no_abx": return (lead ? lead + " leads, and it does not need antibiotics. " : "") + (g.why ? g.why + " " : "") +
         "Reassess if bacterial features, sepsis or immunosuppression appear.";
@@ -1729,12 +1740,18 @@
    * saturation reading (hypoxia; the numeric parser decides that now). v2 drops those and adds bedside
    * phrasing mined from the TRAIN split of kb/validation (never the test split). Classic table unchanged. */
   var FT_SYN_DROP_V2 = { diabetesHx: ["dm"], headInjury: ["fall", "fell"], alteredSensorium: ["gcs"], focalNeuroDeficit: ["weakness"],
-    exertionalChestPain: ["exertional", "on exertion"], purulentSputum: ["sputum"], hypoxia: ["spo2"], mucocutaneousBleeding: ["bleeding"], alcoholExcess: ["alcohol"] };
+    exertionalChestPain: ["exertional", "on exertion"], purulentSputum: ["sputum"], hypoxia: ["spo2"], mucocutaneousBleeding: ["bleeding"], alcoholExcess: ["alcohol"],
+    // round 2: sweating is not the cholinergic toxidrome, a swollen leg is not a one-sided one, chemo mucositis is not SJS,
+    // and neck or abdominal rigidity is not muscle rigidity
+    miosisSecretions: ["diaphoresis", "sweating profusely"], legSwellingUnilateral: ["leg swelling"], mucosalLesions: ["mucositis"], rigidity: ["rigid", "rigidity"] };
   var FT_SYN_ADD_V2 = {
     rigors: ["rigor", "chills", "shivering", "shaking chills"],
     toxicAppearing: ["toxic-looking", "toxic looking", "looks toxic", "looked toxic", "appears toxic", "toxic appearance", "toxic-appearing", "ill-looking", "ill looking",
       "ill-appearing", "ill appearing", "unwell-appearing", "unwell appearing",
-      "looks unwell", "looked unwell", "unwell-looking", "septic-looking", "septic looking", "sick-looking", "moribund"],
+      "looks unwell", "looked unwell", "unwell-looking", "septic-looking", "septic looking", "sick-looking", "moribund",
+      // round 2 (train split: "clammy" / "mottled" are shock of any cause, MI or bleed as often as sepsis, and a bare
+      // "appears unwell" never matched the gold label, so neither is here)
+      "acutely unwell", "critically unwell", "critically ill"],
     myalgiaArthralgia: ["myalgia", "body ache", "bodyache", "body pain", "muscle ache", "muscle pain", "arthralgia", "joint pain", "aches and pains"],
     dehydration: ["dehydrat", "dry mucous", "dry mucosa", "dry tongue", "skin turgor", "sunken eyes", "dry lips"],
     fever: ["pyrexial", "temperature spike", "spiking temperature", "high-grade temperature"],
@@ -1747,7 +1764,7 @@
     abdominalPain: ["pain abdomen", "pain in abdomen", "pain in the abdomen", "abdominal cramp", "periumbilical pain", "colicky pain", "lower abdominal pain", "upper abdominal pain", "iliac fossa pain", "suprapubic pain"],
     hepatosplenomegaly: ["hepatosplenomegaly", "enlarged liver and spleen"],
     immunocompromised: ["immunocompromis", "immunosuppress", "chemotherapy", "post-transplant", "transplant recipient", "hiv", "long-term steroid", "rituximab", "neutropenic"],
-    malignancy: ["malignan", "cancer", "carcinoma", "lymphoma", "leukaemia", "leukemia", "metasta", "myeloma", "sarcoma"],
+    malignancy: ["malignan", "cancer", "carcinoma", "adenocarcinoma", "cholangiocarcinoma", "lymphoma", "leukaemia", "leukemia", "metasta", "myeloma", "sarcoma"],
     nauseaVomiting: ["retching"],
     atrialFibHx: ["atrial fibrillation", " af ", " af,", " af.", "irregularly irregular"],
     behavioralChange: ["behaviour change", "behavioural change", "behavior change", "behavioral change", "personality change", "odd behaviour", "strange behaviour", "abnormal behaviour", "inappropriate behaviour"],
@@ -1755,7 +1772,7 @@
     abdominalDiscomfort: ["abdominal discomfort", "vague abdominal", "abdominal fullness"],
     petechialRash: ["petechia", "purpura", "purpuric", "non-blanching"],
     constipationOrDiarrhea: ["constipat", "obstipat"],
-    jaundice: ["icteric", "yellow discolo", "yellow eyes", "yellowish discolo", "yellowing"],
+    jaundice: ["subicter", "icteric", "yellow discolo", "yellow eyes", "yellowish discolo", "yellowing"],
     legSwellingBilateral: ["bilateral pedal", "pitting oedema", "pitting edema", "leg oedema", "leg edema", "swelling of both legs", "both legs swollen", "oedema feet"],
     oliguria: ["decreased urine output", "scanty urine", "passing less urine", "reduced urinary output"],
     ecgIschemia: ["st depression", "st-segment", "st segment", "t wave inversion", "t-wave inversion", "stemi", "nstemi", "q waves", "st changes"],
@@ -1797,6 +1814,10 @@
     dilatedCBD: ["dilated cbd", "cbd dilated", "cbd dilatation", "dilated common bile duct", "common bile duct dilated", "biliary dilatation", "dilated intrahepatic",
       "ihbrd", "cbd stone", "choledocholithiasis", "obstructive jaundice", "biliary obstruction"],
     cholestaticLFT: ["cholestatic", "raised alp", "elevated alp", "raised alkaline phosphatase", "elevated alkaline phosphatase"],
+    // round 2 (phrases now have to start a word, so compounds need their own entry)
+    ketonemia: ["ketonuria", "urine ketones", "serum ketones", "ketosis", "hydroxybutyrate", "beta-hydroxybutyrate", "betahydroxybutyrate"],
+    rigidity: ["muscle rigidity", "muscular rigidity", "lead pipe", "lead-pipe", "cogwheel", "generalised rigidity", "generalized rigidity", "limb rigidity", "rigid limbs"],
+    legSwellingUnilateral: ["left leg swelling", "right leg swelling", "swollen left leg", "swollen right leg", "left calf swelling", "right calf swelling", "one leg swollen"],
     renalImpairment: ["acute kidney injury", " aki ", " aki,", " aki.", "renal failure", "renal impairment", "raised creatinine", "deranged renal", "kidney injury", "uraemi", "uremi"]
   };
   var FT_SYN_V2 = (function () {
