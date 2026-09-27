@@ -38,6 +38,18 @@ with replies from the developer. The same request removed AgentConnect and My Cl
 - **Do not put `role="dialog"` on the `.on`-toggled root.** `dialog-motion.js` springs every
   `[role=dialog]` that gains `.on` and left the sheet half-faded over the app. The role sits on the card.
 - **A transparent html2canvas capture encodes as a BLACK JPEG.** `pageBg()` paints the page colour first.
+- **The screenshot came out BLANK on the owner's iPhone (2026-09-27).** `body` is `overflow:hidden` with
+  ZERO height here (every screen is a fixed layer; `<main>` scrolls), and html2canvas clips to body's
+  box. `capture()` lifts the clip in `onclone` (clone only). A "not black" check passed a blank frame;
+  the UI test now measures CONTRAST (sd of luminance), which is what a real screen has.
+- **The Display "screen size" setting zooms the whole document** (`home.js` `applyD` sets
+  `documentElement.style.zoom`; default is 0.95, not 1). The outline landed smaller and above the
+  tapped tile. Never mix `getBoundingClientRect` px with CSS px: the picker converts through the
+  overlay (`fixed; inset:0`), whose rect vs `clientWidth` IS the zoom on any engine; the capture is
+  sized to the same layout viewport (`layoutViewport()`), so the outline lands on the screenshot too.
+  The outline also FOLLOWS the element every frame until "Use this" (a page still settling after the
+  sheet closes moved it). `run-bug-report-ui.mjs` runs at `ZOOM=1.15` by default; checked at 0.8,
+  0.95, 1.15 and 2.
 - **Screenshots can show a patient.** The doctor sees it and can untick it; server keeps it 30 d max and
   drops it on resolve; no text in the push. `_support.js` bodies are owner-only.
 - **`admin/*` segs in the AI route are reachable only if listed in the owner-gated `if (seg === ...)`

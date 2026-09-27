@@ -77,6 +77,9 @@ try {
   ok(await waitFor(`return !!(window.SMD_BUGS && window.SMD_BUGS._shake)`, 30000), "bug-report.js loads with the app");
   await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash","verifyGate","phvRoot","pfSetupRoot"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{localStorage.setItem("smd_onboarding_tour","0");localStorage.removeItem("smd_shake_report");localStorage.removeItem("smd_bug_outbox");}catch(e){} document.querySelectorAll(".smdt-wel,.smdt-card").forEach(function(e){e.remove()}); return 1;`);
   await ev(STUB);
+  // Owner's iPhone, 2026-09-27: the Display "screen size" setting zooms the whole document
+  // (home.js applyD). Run the whole flow zoomed, the way that phone was.
+  await fn("function (z) { document.documentElement.style.zoom = z; return 1; }", process.env.ZOOM || "1.15");
 
   // ── a real shake (DeviceMotion events) opens the report sheet; a single bump does not ──
   await ev(`window.dispatchEvent(new DeviceMotionEvent("devicemotion",{accelerationIncludingGravity:{x:0,y:0,z:9.8}})); window.dispatchEvent(new DeviceMotionEvent("devicemotion",{accelerationIncludingGravity:{x:20,y:0,z:9.8}})); return 1;`);
@@ -89,11 +92,28 @@ try {
   // ── point at a button ──
   await ev(`document.getElementById("bgPoint").click(); return 1;`);
   ok(await waitFor(`return !!document.getElementById("bugrPick")`), "Point at the problem shows the picker");
-  const target = JSON.parse(await ev(`var b=[].slice.call(document.querySelectorAll("button,[data-act]")).filter(function(x){var r=x.getBoundingClientRect(); return r.width>30&&r.height>20&&r.top>60&&r.bottom<700&&!x.closest("#bugrPick")})[0]; var r=b.getBoundingClientRect(); b.setAttribute("data-bugtest","1"); return JSON.stringify({x:r.left+r.width/2,y:r.top+r.height/2});`));
+  await sleep(450);   // the picker ignores taps for 350 ms while the closing sheet settles the page
+  // A real, small control that is actually what a finger at its centre would hit (not a stack of
+  // tiles or a gap between them), the way a doctor points at "the button that does not work".
+  const target = JSON.parse(await ev(`var pk=document.getElementById("bugrPick"); pk.style.pointerEvents="none"; var b=[].slice.call(document.querySelectorAll("button,[data-act]")).filter(function(x){var r=x.getBoundingClientRect(); if(!(r.width>30&&r.height>20&&r.width<260&&r.height<200&&r.top>80&&r.bottom<innerHeight*0.8&&!x.closest("#bugrPick"))) return false; var h=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2); return !!(h&&x.contains(h)); })[0]; pk.style.pointerEvents=""; var r=b.getBoundingClientRect(); b.setAttribute("data-bugtest","1"); return JSON.stringify({x:r.left+r.width/2,y:r.top+r.height/2});`));
   await call("Input.dispatchMouseEvent", { type: "mousePressed", x: target.x, y: target.y, button: "left", clickCount: 1 });
   await call("Input.dispatchMouseEvent", { type: "mouseReleased", x: target.x, y: target.y, button: "left", clickCount: 1 });
   ok(await waitFor(`var b=document.querySelector("#bugrPick .bp-box"); return !!(b && b.style.display==="block")`), "tapping outlines the element in red");
   ok(await ev(`return !!document.querySelector("#bugrPick .bp-use")`) === true, "and offers Use this");
+  // Owner's iPhone, 2026-09-27: the outline landed above and smaller than the tapped tile because the
+  // page was still moving. Move the page AFTER the tap: the outline must follow the element.
+  // Compare in the SAME units (both getBoundingClientRect). The 4 px padding is overlay px, so it is
+  // scaled by the zoom too; allow for it.
+  const gap = () => ev(`var pk=document.getElementById("bugrPick"), b=pk.querySelector(".bp-box").getBoundingClientRect(), t=pk.__node.getBoundingClientRect(), p=4*pk.getBoundingClientRect().width/pk.clientWidth; return Math.max(Math.abs((b.left+p)-t.left),Math.abs((b.top+p)-t.top),Math.abs((b.width-2*p)-t.width),Math.abs((b.height-2*p)-t.height));`);
+  ok(await fn('function (x, y) { var r = document.getElementById("bugrPick").__node.getBoundingClientRect(); return x >= r.left - 1 && x <= r.right + 1 && y >= r.top - 1 && y <= r.bottom + 1; }', target.x, target.y) === true, "the picked control is the one under the finger");
+  ok(await gap() <= 2, "the outline sits exactly on it, with the page zoomed (gap " + Math.round(await gap()) + " px)");
+  // The page scrolls under the picker after the tap: the outline follows.
+  await ev(`var n=document.querySelector("[data-bugtest]"), s=n; while (s && s!==document.body && !(s.scrollHeight>s.clientHeight+20 && /auto|scroll/.test(getComputedStyle(s).overflowY))) s=s.parentElement; window.__scr=(s&&s!==document.body)?s:document.scrollingElement; window.__scr.scrollTop+=80; return 1;`);
+  await sleep(200);
+  ok(await gap() <= 2, "when the page scrolls after the tap, the outline follows the element (gap " + Math.round(await gap()) + " px)");
+  await ev(`window.__scr.scrollTop-=80; return 1;`); await sleep(150);
+  // Where the element is on screen, as a fraction of the screen: the outline in the SCREENSHOT must match.
+  await ev(`var pk=document.getElementById("bugrPick"), o=pk.getBoundingClientRect(), r=pk.__node.getBoundingClientRect(); var c=function(v){return Math.max(0,Math.min(1,v));}; window.__want={l:c((r.left-o.left)/o.width), t:c((r.top-o.top)/o.height), r:c((r.right-o.left)/o.width), b:c((r.bottom-o.top)/o.height), pw:pk.clientWidth, ph:pk.clientHeight}; return 1;`);
   await ev(`document.querySelector("#bugrPick .bp-use").click(); return 1;`);
   ok(await waitFor(`var r=document.getElementById("bugrRoot"); return !!(r && r.classList.contains("on") && /What went wrong/.test(r.innerText));`), "then asks what went wrong");
   ok(/You pointed at/.test(await text("bugrRoot")), "showing what was pointed at");
@@ -101,7 +121,15 @@ try {
   ok(hasThumb === true, "with the screenshot preview and an Include screenshot choice");
   // The screenshot must show the app, not a black frame (a transparent capture encodes as black JPEG).
   await ev(`window.__lum=null; var i=document.querySelector("#bugrRoot .bg-thumb img"); var im=new Image(); im.onload=function(){ var c=document.createElement("canvas"); c.width=40; c.height=80; var g=c.getContext("2d"); g.drawImage(im,0,0,40,80); var d=g.getImageData(0,0,40,80).data, s=0; for(var k=0;k<d.length;k+=4) s+=d[k]+d[k+1]+d[k+2]; window.__lum=s/(d.length/4)/3; }; im.src=i.src; return 1;`);
-  ok(await waitFor(`return window.__lum !== null`) && await ev(`return window.__lum > 80`) === true, "the screenshot shows the screen (not a black frame): mean luminance " + Math.round(await ev(`return window.__lum`)));
+  ok(await waitFor(`return window.__lum !== null`) && await ev(`return window.__lum > 80`) === true, "the screenshot is not a black frame: mean luminance " + Math.round(await ev(`return window.__lum`)));
+  // The red outline drawn into the screenshot sits on the element that was pointed at.
+  await ev(`window.__red=null; var i=document.querySelector("#bugrRoot .bg-thumb img"); var im=new Image(); im.onload=function(){ var c=document.createElement("canvas"); c.width=im.naturalWidth; c.height=im.naturalHeight; var g=c.getContext("2d"); g.drawImage(im,0,0); var d=g.getImageData(0,0,c.width,c.height).data, x0=1e9,y0=1e9,x1=-1,y1=-1; for(var y=0;y<c.height;y++) for(var x=0;x<c.width;x++){ var k=(y*c.width+x)*4; if(d[k]>200&&d[k+1]<110&&d[k+2]<110){ if(x<x0)x0=x; if(x>x1)x1=x; if(y<y0)y0=y; if(y>y1)y1=y; } } window.__red = x1<0 ? {none:true} : {l:x0/c.width, t:y0/c.height, r:x1/c.width, b:y1/c.height}; }; im.src=i.src; return 1;`);
+  ok(await waitFor(`return window.__red !== null`) && await ev(`var r=window.__red, w=window.__want; return !r.none && ["l","t","r","b"].every(function(k){ var e=0.012+7/((k==="l"||k==="r")?w.pw:w.ph); return Math.abs(r[k]-w[k])<e; });`) === true,
+     "the red outline in the screenshot is on the pointed element, with the page zoomed " + await ev(`return JSON.stringify({got:window.__red, want:window.__want})`));
+  // ...and not a BLANK one (owner's iPhone, 2026-09-27: page-colour frame with only the red box).
+  // A real screen has contrast: tiles, text, the teal banner. Measure the spread, not the mean.
+  await ev(`window.__sd=null; var i=document.querySelector("#bugrRoot .bg-thumb img"); var im=new Image(); im.onload=function(){ var c=document.createElement("canvas"); c.width=90; c.height=190; var g=c.getContext("2d"); g.drawImage(im,0,0,90,190); var d=g.getImageData(0,0,90,190).data, n=0, s=0, s2=0; for(var k=0;k<d.length;k+=4){ var l=(d[k]+d[k+1]+d[k+2])/3; if (d[k]>200 && d[k+1]<110 && d[k+2]<110) continue; s+=l; s2+=l*l; n++; } var m=s/n; window.__sd=Math.sqrt(s2/n-m*m); }; im.src=i.src; return 1;`);
+  ok(await waitFor(`return window.__sd !== null`) && await ev(`return window.__sd > 25`) === true, "the screenshot shows the app screen, not a blank page (contrast " + Math.round(await ev(`return window.__sd`)) + ")");
   // Settled (no half-faded sheet): the card is fully opaque and on top of the app.
   await sleep(700);
   ok(await ev(`var c=document.querySelector("#bugrRoot .bg-card"); var r=c.getBoundingClientRect(); var e=document.elementFromPoint(r.left+30,r.top+30); return getComputedStyle(document.getElementById("bugrRoot")).opacity==="1" && getComputedStyle(c).opacity==="1" && c.contains(e);`) === true, "the sheet is opaque and on top (not faded over the app)");
