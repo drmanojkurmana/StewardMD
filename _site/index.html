@@ -22,7 +22,7 @@
 <link rel="canonical" href="https://stewardmd.in/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;1,6..72,300&amp;family=Nunito:wght@600;800&amp;family=Inter:wght@400;450;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;1,6..72,300&amp;family=Nunito:wght@600;800&amp;family=Inter:wght@400;450;500;600;700;800&amp;display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
@@ -54,6 +54,69 @@
   ]
 }
 </script>
+<style id="apple-ds">
+  /* Apple design layer (2026-09-27). Overrides only: delete this block to restore the previous look. */
+  :root { --ink:#1d1d1f; --ink2:#6e6e73; --paper:#fbfbfd; --paper2:#f5f5f7; --line:#d2d2d7; --brand:#0F766E; }
+  body { background:var(--paper); color:var(--ink); letter-spacing:-.011em; }
+  /* SF-style display type in place of the serif */
+  [style*="Newsreader"] { font-family:'Inter',-apple-system,'SF Pro Display',system-ui,sans-serif !important; font-weight:700 !important; letter-spacing:-.042em !important; font-style:normal !important; }
+  h1[style*="Newsreader"] { line-height:1.03 !important; letter-spacing:-.05em !important; }
+  [style*="Newsreader"] em, [style*="Newsreader"] i, [style*="Newsreader"] [style*="font-style:italic"] { font-style:normal !important; }
+  [style*="color:#0F172A"] { color:var(--ink) !important; }
+  [style*="color:#475569"], [style*="color:#64748B"] { color:var(--ink2) !important; }
+  /* surfaces: Apple paper and true black, no hairlines between sections */
+  [style*="background:#F8FAFC"] { background:var(--paper2) !important; }
+  [style*="background:#0B1220"] { background:#000 !important; }
+  section[style*="border-top:1px solid #E2E8F0"], section[style*="border-top:1px solid #16233A"] { border-top:0 !important; }
+  /* frosted navigation bar */
+  #nav { -webkit-backdrop-filter:saturate(180%) blur(20px); backdrop-filter:saturate(180%) blur(20px); }
+  #nav nav { padding-top:11px !important; padding-bottom:11px !important; }
+  #navLinks { font-size:12.5px !important; font-weight:500 !important; }
+  #navLinks a:hover { color:var(--ink) !important; }
+  /* pill controls */
+  #nav a[style*="border-radius:11px"], a[style*="border-radius:12px"][href^="#"], a[data-navcta] { border-radius:980px !important; }
+  #menuBtn { border-radius:980px !important; }
+  ::selection { background:#CCFBF1; }
+  /* MaiK Offline story */
+  #offline { position:relative; background:#000; color:#f5f5f7; overflow:hidden; padding:clamp(96px,12vw,168px) 24px clamp(88px,10vw,140px); }
+  #offline .wrap { max-width:1120px; margin:0 auto; text-align:center; }
+  #offline .glow { position:absolute; left:50%; top:30%; width:1200px; height:1200px; margin-left:-600px; border-radius:50%; background:radial-gradient(closest-side,rgba(56,189,248,.18),rgba(167,139,250,.08) 55%,transparent); pointer-events:none; }
+  #offline .logo { height:clamp(44px,5vw,64px); display:block; margin:0 auto 22px; }
+  #offline h2 { margin:0; font-family:'Inter',-apple-system,'SF Pro Display',sans-serif; font-weight:700; font-size:clamp(40px,7vw,96px); line-height:1.02; letter-spacing:-.05em; text-wrap:balance; }
+  #offline .tri { background:linear-gradient(180deg,#ff9933 0%,#ff9933 40%,#fff 42%,#fff 60%,#1fa83a 62%,#1fa83a 100%); -webkit-background-clip:text; background-clip:text; color:transparent; padding-bottom:.06em; }
+  #offline .grad { background:linear-gradient(90deg,#5eead4 0%,#38bdf8 50%,#a78bfa 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  #offline .lead { margin:26px auto 0; max-width:640px; font-size:clamp(19px,2vw,24px); line-height:1.4; font-weight:500; color:#86868b; letter-spacing:-.015em; }
+  #offline .lead b { color:#f5f5f7; font-weight:600; }
+  #offline .stage { position:relative; margin:clamp(96px,9vw,120px) auto 0; width:min(340px,78vw); }
+  #offline .phone { position:relative; aspect-ratio:600/1300; border-radius:15% / 7%; background:#1d1d1f; padding:3.2%; box-shadow:0 0 0 1.5px #3a3a3c,0 60px 140px rgba(56,189,248,.22); }
+  #offline .phone video { width:100%; height:100%; display:block; border-radius:12.5% / 5.8%; background:#000; object-fit:cover; }
+  #offline .pill { position:absolute; left:50%; top:-58px; transform:translateX(-50%); white-space:nowrap; display:inline-flex; align-items:center; gap:8px; padding:9px 16px; border-radius:980px; background:rgba(255,159,10,.14); border:1px solid rgba(255,159,10,.45); color:#ffb340; font-size:13.5px; font-weight:600; }
+  #offline .pill svg { width:16px; height:16px; }
+  #offline .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin:clamp(56px,7vw,96px) auto 0; max-width:980px; }
+  #offline .stat { padding:6px 18px; border-left:1px solid #2c2c2e; text-align:center; }
+  #offline .stat:first-child { border-left:0; }
+  #offline .stat b { display:block; font-size:clamp(30px,3.6vw,48px); font-weight:700; letter-spacing:-.045em; color:#f5f5f7; }
+  #offline .stat span { display:block; margin-top:6px; font-size:14px; color:#86868b; font-weight:500; line-height:1.35; }
+  #offline .story { margin:clamp(80px,10vw,140px) auto 0; max-width:1120px; display:grid; grid-template-columns:repeat(2,1fr); gap:20px; text-align:left; }
+  #offline .ch { background:#161617; border-radius:28px; padding:clamp(28px,3vw,40px); }
+  #offline .ch .n { font-size:13px; font-weight:600; color:#5eead4; letter-spacing:.01em; }
+  #offline .ch h3 { margin:10px 0 0; font-size:clamp(24px,2.4vw,32px); line-height:1.12; font-weight:700; letter-spacing:-.035em; color:#f5f5f7; }
+  #offline .ch p { margin:14px 0 0; font-size:17px; line-height:1.55; color:#a1a1a6; letter-spacing:-.01em; }
+  #offline .ch.wide { grid-column:1 / -1; text-align:center; background:linear-gradient(135deg,#0b2a27,#101a2e); }
+  #offline .ch.wide p { max-width:720px; margin-left:auto; margin-right:auto; }
+  #offline .dev { margin:clamp(56px,7vw,88px) auto 0; max-width:820px; font-size:15px; line-height:1.6; color:#86868b; }
+  #offline .dev b { color:#f5f5f7; font-weight:600; }
+  #offline .cta { margin-top:34px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  #offline .cta a { display:inline-flex; align-items:center; gap:8px; padding:14px 26px; border-radius:980px; font-size:16px; font-weight:600; }
+  #offline .cta .p { background:#f5f5f7; color:#000; }
+  #offline .cta .s { color:#5eead4; border:1px solid #2c2c2e; }
+  #offline .fine { margin:28px auto 0; max-width:760px; font-size:12.5px; line-height:1.6; color:#6e6e73; }
+  @media (max-width:760px) {
+    #offline .stats { grid-template-columns:repeat(2,1fr); row-gap:30px; }
+    #offline .stat:nth-child(3) { border-left:0; }
+    #offline .story { grid-template-columns:1fr; }
+  }
+</style>
 </head>
 <body>
 
@@ -66,6 +129,7 @@
       <span style="font-family:'Nunito',sans-serif;font-weight:800;font-size:18.5px;letter-spacing:-.02em">Steward<span style="color:#0F766E;font-weight:600">MD</span></span>
     </a>
     <div id="navLinks" style="display:flex;align-items:center;gap:24px;font-size:13px;font-weight:450;color:#475569;white-space:nowrap">
+      <a href="#offline" style="color:inherit">MaiK Offline</a>
       <a href="#reason" style="color:inherit">Reasoning</a>
       <a href="#abx" style="color:inherit">Antibiotics</a>
       <a href="#drugs" style="color:inherit">Drugs</a>
@@ -87,6 +151,7 @@
     </button>
   </nav>
   <div id="sheet" style="display:none;border-top:1px solid #E2E8F0;background:#fff;padding:6px 28px 22px;flex-direction:column">
+    <a href="#offline" data-act="closeMenu" style="padding:14px 0;font-size:16px;color:#0F172A;border-bottom:1px solid #F1F5F9">MaiK Offline</a>
     <a href="#reason" data-act="closeMenu" style="padding:14px 0;font-size:16px;color:#0F172A;border-bottom:1px solid #F1F5F9">Clinical reasoning</a>
     <a href="#abx" data-act="closeMenu" style="padding:14px 0;font-size:16px;color:#0F172A;border-bottom:1px solid #F1F5F9">Antibiotic decision engine</a>
     <a href="#drugs" data-act="closeMenu" style="padding:14px 0;font-size:16px;color:#0F172A;border-bottom:1px solid #F1F5F9">Drugs and interactions</a>
@@ -208,6 +273,39 @@
       <p data-rise="1" style="margin:22px auto 0;max-width:560px;font-size:12.5px;line-height:1.6;color:#94A3B8">Clinician-only decision support. StewardMD does not diagnose or prescribe on its own; the treating doctor decides.</p>
     </div>
   </section>
+
+  <!-- MaiK Offline: the story of the on-device model (2026-09-27). Claims map to code: on-device inference
+       (maik-local.js), 10 model packs (maik-models.js), claim-level grounding (kb/ai/maik-grounding.js),
+       doses from the drug database (kb/ai/drug-dose.js). Evidence file: vault/legal-assets/maik-india-first-evidence.md -->
+  <section id="offline" aria-labelledby="offline-h">
+    <div class="glow"></div>
+    <div class="wrap">
+      <img class="logo" data-rise="1" src="/_site/assets/s/maik-wordmark-white.png" alt="MaiK" width="190" height="64">
+      <h2 id="offline-h" data-rise="1"><span class="tri">India</span>'s first<br><span class="grad">offline medical AI.</span></h2>
+      <p class="lead" data-rise="1">No signal in the ward. No Wi-Fi at the rural clinic.<br><b>MaiK still answers, right on your phone.</b></p>
+      <div class="stage" data-rise="1">
+        <span class="pill"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg>Airplane mode. Still answering.</span>
+        <div class="phone"><video src="/_site/assets/s/maik-offline-demo.mp4" poster="/_site/assets/s/maik-offline-demo.jpg" autoplay muted loop playsinline preload="metadata" aria-label="MaiK answering a clinical question on an iPhone in airplane mode"></video></div>
+      </div>
+      <div class="stats" data-rise="1">
+        <div class="stat"><b>0</b><span>bars of signal needed</span></div>
+        <div class="stat"><b>10</b><span>medical models that run on the phone</span></div>
+        <div class="stat"><b>Free</b><span>and unlimited on offline models*</span></div>
+        <div class="stat"><b>Every</b><span>claim checked against the library</span></div>
+      </div>
+      <div class="story">
+        <div class="ch" data-rise="1"><div class="n">Chapter one</div><h3>The question never waits for a signal.</h3><p>Night duty in a basement ward. A district hospital with one bar. A primary health centre where the network comes and goes. The clinical question arrives anyway, and a cloud assistant goes quiet exactly when it is needed.</p></div>
+        <div class="ch" data-rise="1"><div class="n">Chapter two</div><h3>So we put the model on the phone.</h3><p>MaiK runs a medical language model on the device itself. MAiK Lite, our own fine-tuned model, is the default, and larger models are ready for phones that can carry them. When the connection drops, MaiK keeps answering from the phone.</p></div>
+        <div class="ch" data-rise="1"><div class="n">Chapter three</div><h3>Then we gave it a library, and a conscience.</h3><p>Before it answers, MaiK reads a medical knowledge base stored on your phone. Every factual claim is checked against what it found. A claim the library does not support is removed or qualified, never quietly kept.</p></div>
+        <div class="ch" data-rise="1"><div class="n">Chapter four</div><h3>And we kept the doses out of its hands.</h3><p>A dose never comes from the model. It comes from the StewardMD drug database, offline or online, so the number you read is the number in the database.</p></div>
+        <div class="ch wide" data-rise="1"><div class="n">Private by design</div><h3>Your question stays on your phone.</h3><p>Offline answers are written on the device. There is no server in the middle to send the question to, which is what makes it private, and why it keeps working in airplane mode. The doctor still decides; MaiK is decision support.</p></div>
+      </div>
+      <p class="dev" data-rise="1"><b>Works best on</b> iPhone 16 Pro, 17 Pro, 18 Pro and iPhone Duo, and Samsung Galaxy Z Fold5 to Fold8 and Galaxy S23 to S26 Ultra.</p>
+      <div class="cta" data-rise="1"><a class="p" href="#get">Get StewardMD</a><a class="s" href="#maik">See MaiK Evidence Review</a></div>
+      <p class="fine">*Offline models only. Supported on AI flagship phones only. T&amp;C apply. For registered doctors and clinicians. Early access is live on the App Store and Google Play; open to all soon.</p>
+    </div>
+  </section>
+
 
   <section style="padding:clamp(72px,9vw,130px) 28px;background:#fff;border-top:1px solid #E2E8F0">
     <div style="max-width:1120px;margin:0 auto;text-align:center">

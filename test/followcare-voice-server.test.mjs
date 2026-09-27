@@ -43,7 +43,7 @@ const fbMock = {
   wDelete: (_env, path) => ({ op: "delete", path: String(path) }),
 };
 mock.module("../functions/_fbfirestore.js", { namedExports: fbMock });
-mock.module("../functions/_followcare_sms.js", { namedExports: { sendSms: async (_env, p) => { smsCalls.push(p); return { ok: true, providerId: "mock" }; } } });
+mock.module("../functions/_followcare_sms.js", { namedExports: { sendSms: async (_env, p) => { smsCalls.push(p); return { ok: true, providerId: "mock" }; }, dltConfigured: () => false, sendDlt: async () => ({ ok: false, skipped: true }) } });
 mock.module("../functions/_followcare_whatsapp.js", { namedExports: { sendWhatsApp: async () => ({ ok: true }), waConfigured: () => false } });
 
 const V = await import("../functions/_followcare_voice.js");
