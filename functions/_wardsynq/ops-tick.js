@@ -18,7 +18,7 @@
  */
 
 import { drainOutbox } from "./outbox.js";
-import { anchorHead, anchorStoresOf } from "./audit-chain.js";
+import { anchorHead, anchorStoresOf, sweepAuditChain } from "./audit-chain.js";
 import { escalationOf } from "./critical-results.js";
 import { VersionConflictError, pagedLatest } from "./repository.js";
 import { dispatchLevel, smsFallbackDue } from "./push-alerts.js";
@@ -101,6 +101,13 @@ async function runTick(repository, tenantId, opts) {
   catch (e) { result.outbox = { error: String((e && e.message) || e).slice(0, 200) }; }
   try { result.anchor = await anchorTick(repository, tenantId, o); }
   catch (e) { result.anchor = { error: String((e && e.message) || e).slice(0, 200) }; }
+  /* DATA-09: on the same hourly run, the next window of the whole clinical chain is re-hashed from a
+   * cursor kept in the first anchor store, so edits and deletions below the newest rows are found. */
+  const sweepStore = anchorStoresOf(o.anchorStores || o.anchorStore)[0];
+  if (sweepStore) {
+    try { const w = await sweepAuditChain(repository, tenantId, sweepStore.store, result.at); result.auditSweep = { status: w.status, atSeq: w.atSeq != null ? w.atSeq : null, checked: w.checked || 0 }; }
+    catch (e) { result.auditSweep = { error: String((e && e.message) || e).slice(0, 200) }; }
+  }
   return result;
 }
 

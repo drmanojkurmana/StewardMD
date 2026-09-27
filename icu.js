@@ -1035,7 +1035,7 @@
       '.icu-vc-edit{position:absolute;top:5px;right:7px;font-size:10.5px;line-height:1;color:var(--muted);opacity:.5}' +
       '.icu-vc-tap:active .icu-vc-edit,.icu-vc-tap:hover .icu-vc-edit{opacity:.9}' +
       '.icu-vc .vl{font:600 9.5px var(--font);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
-      '.icu-vc .vv{font:600 19px/1.1 var(--mono);margin-top:4px;letter-spacing:-.01em}.icu-vc .vu{font:500 10px var(--font);color:var(--muted);margin-left:3px}' +
+      '.icu-vc .vv{font:600 19px/1.1 var(--mono);margin-top:4px;letter-spacing:-.01em}.icu-vc .vu{font:500 10px var(--font);color:var(--muted);margin-left:3px}.icu-vc .vu-tight{margin-left:0}' +
       '.icu-vc.crit{border-color:var(--danger);background:var(--danger-soft)}.icu-vc.crit .vv{color:var(--danger)}' +
       '.icu-vc.warn{border-color:var(--warn);background:var(--warn-soft)}.icu-vc.warn .vv{color:var(--warn)}' +
       '.icu-vc.ok .vv{color:var(--ok)}' +
@@ -1148,6 +1148,8 @@
       '.icu-mc-row:last-child{border-bottom:0}' +
       '.icu-mc-row b{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}' +
       '.icu-mc-row .w{margin-left:auto;font:600 11px var(--font);color:var(--muted);white-space:nowrap}' +
+      // One flex item, so the row gap never lands between a number and its unit.
+      '.icu-mc-row .icu-mc-val{white-space:nowrap}' +
       '.icu-mc-sub{font:700 10px var(--font);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:10px 0 2px}' +
       '.icu-mc-sub:first-child{margin-top:0}' +
       '.icu-mc-foot{font:400 10.5px/1.5 var(--font);color:var(--muted);margin:9px 0 0}' +
@@ -1632,6 +1634,12 @@
     var d = pts.map(function (p, i) { return (i ? "L" : "M") + (pad + (W - 2 * pad) * (p.ts - minX) / spanX).toFixed(1) + " " + (H - pad - (H - 2 * pad) * (p.v - minY) / spanY).toFixed(1); }).join(" ");
     return '<svg class="icu-spark" viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="none"><path d="' + d + '" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>';
   }
+  /* What goes between a number and its unit. "%" closes up against the number (98%), which is what
+   * every string-built percentage in this file already does and what a reader expects; every other
+   * unit keeps its space (76 bpm, 86 mmHg, 36.9 °C). One rule, so the vitals tiles and the Medical
+   * Core panel cannot drift apart again. */
+  function unitGap(unit) { return unit === "%" ? "" : " "; }
+
   function vitalCard(label, value, unit, status, series, edit) {
     // BUG #17: an empty tile means the value was NOT recorded — say so (visible dash is
     // muted + carries title/aria "not recorded") so "K⁺ —" is never mistaken for a real
@@ -1640,10 +1648,10 @@
     var empty = (value == null || value === "");
     var vv = empty
       ? '<span class="icu-vc-na" title="Not recorded" style="color:var(--muted)">—</span>'
-      : (esc(value) + (unit ? '<span class="vu">' + esc(unit) + "</span>" : ""));
+      : (esc(value) + (unit ? '<span class="vu' + (unitGap(unit) ? "" : " vu-tight") + '">' + esc(unit) + "</span>" : ""));
     // R5 UX#6: severity is announced, not conveyed by colour alone.
     var sev = status === "crit" ? " — critical, verify" : status === "warn" ? " — abnormal" : "";
-    var al = esc(label) + (empty ? ": not recorded" : ": " + esc(String(value)) + (unit ? " " + esc(unit) : "")) + sev;
+    var al = esc(label) + (empty ? ": not recorded" : ": " + esc(String(value)) + (unit ? unitGap(unit) + esc(unit) : "")) + sev;
     var attrs = edit
       ? ' data-icu-act="editvital:' + edit + '" role="button" tabindex="0" aria-label="' + al + ' — tap to edit"'
       : ' role="group" aria-label="' + al + '"';
@@ -1766,15 +1774,23 @@
       out += '<div class="icu-mc-sub">What changed</div>';
       out += changed.map(function (c) {
         var arrow = c.direction === "up" ? "\u2191" : "\u2193";
+        // Value and unit share ONE flex item. Left as siblings they are two, and the row's 8px
+        // flex gap pushes them apart whatever the markup says between them - which is why "91 %"
+        // survived deleting the literal space.
         return '<div class="icu-mc-row">' + arrow + ' ' + esc(label(c.param)) +
-          ' <b>' + esc(c.from) + ' \u2192 ' + esc(c.to) + '</b> ' + esc(c.unit || "") +
+          ' <span class="icu-mc-val"><b>' + esc(c.from) + ' \u2192 ' + esc(c.to) + '</b>' +
+          (c.unit ? unitGap(c.unit) + esc(c.unit) : "") + '</span>' +
           '<span class="w">over ' + esc(fmtMins(c.overMin)) + '</span></div>';
       }).join("");
     }
     if (missing.length) {
       out += '<div class="icu-mc-sub">Missing information</div>';
       out += missing.map(function (m) {
-        var why = m.reason === "STALE" ? ("last " + (m.staleValue != null ? m.staleValue + " " : "") + fmtMins(m.ageMin) + " ago")
+        /* "last 96 9 h ago" ran a value and an age together with nothing between them, so a tired
+         * reader could take "96 9" for one number. The value carries its unit and a comma splits
+         * it from the age: "last 96 %, 9 h ago". A stale entry with no value stays "last 9 h ago". */
+        var why = m.reason === "STALE" ? ("last " + (m.staleValue != null
+            ? m.staleValue + (m.staleUnit ? unitGap(m.staleUnit) + m.staleUnit : "") + ", " : "") + fmtMins(m.ageMin) + " ago")
           : m.reason === "REFUSED" ? "charted, could not be read"
           : m.reason === "NO_WINDOW" ? "no freshness rule set"
           : "not recorded";
@@ -5844,21 +5860,64 @@
   // Self-test push (ICU More → "Send me a test notification"): verifies push delivery on THIS device
   // in one tap, independent of groups/roles. The response tells us if a token is even registered.
   function grpTestPush() {
-    if (window.toast) toast("Sending a test notification…");
-    try {
+    /* A DIAGNOSTIC, not a fire-and-forget. This used to report only what the server said, and the
+     * server can only ever see as far as Apple: it counts a send when APNs returns 200. APNs
+     * returns 200 for a handset whose user has notifications switched OFF, and iOS then discards
+     * the payload silently - so "Test notification sent" was true and useless, and the doctor was
+     * left with a button that always claimed success while nothing ever arrived.
+     *
+     * So the device is asked first, because the last three links in the chain (permission, a
+     * registered token, and whether iOS will even draw a banner right now) are invisible from the
+     * server. Each failure now names itself and says what to do about it. */
+    function say(m) { if (window.toast) toast(m); }
+    function send() {
+      say("Sending a test notification…");
       idToken().then(function (tok) {
-        if (!tok) { if (window.toast) toast("Sign in first, then try the test push"); return; }
+        if (!tok) { say("Sign in first, then try the test push"); return; }
         fetch(grpPushUrl("/api/push/test"), { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok } })
           .then(function (r) { return r.json(); })
           .then(function (j) {
-            if (!window.toast) return;
-            if (j && j.sent) toast("Test notification sent — check your notifications");
-            else if (j && j.total === 0) toast("No device is registered for push yet. Allow notifications + reopen the app, then retry.");
-            else toast("Couldn't send the test push" + (j && j.error ? " (" + j.error + ")" : ""));
+            if (j && j.sent) {
+              /* Apple took it. If nothing shows now, the cause is on the handset and is one of
+               * these two, so say so rather than leaving the doctor to guess. */
+              say("Apple accepted it. If nothing appears: iOS hides banners while the app is open, and Focus / Do Not Disturb silences them.");
+            } else if (j && j.total === 0) {
+              say("This account has no registered device. Allow notifications, reopen the app, then retry.");
+            } else if (j && j.total) {
+              say("Apple rejected the push for this device. Its token is stale - reopen the app to register again.");
+            } else {
+              say("Couldn't send the test push" + (j && j.error ? " (" + j.error + ")" : ""));
+            }
           })
-          .catch(function () { if (window.toast) toast("Test push failed — check your connection"); });
-      }, function () { if (window.toast) toast("Couldn't get your auth token"); });
-    } catch (e) {}
+          .catch(function () { say("Test push failed - check your connection"); });
+      }, function () { say("Couldn't get your auth token"); });
+    }
+    try {
+      if (!window.SMD_pushDiagnostics) { send(); return; }   // older bundle: behave as before
+      window.SMD_pushDiagnostics().then(function (d) {
+        if (!d || !d.native) { say("Push needs the installed app. A browser tab cannot receive it."); return; }
+        if (!d.plugin) { say("This build shipped without push support. Reinstall the app."); return; }
+        if (d.permission === "denied") {
+          say("Notifications are OFF for StewardMD. Turn them on in iOS Settings → StewardMD → Notifications, then retry.");
+          return;
+        }
+        if (d.permission !== "granted") {
+          // Never been asked. Ask now, then carry on rather than making them tap twice.
+          if (window.SMD_enableNativePush) {
+            window.SMD_enableNativePush().then(function (on) {
+              if (!on) { say("Notifications were not allowed, so nothing can reach this device."); return; }
+              send();
+            }, function () { send(); });
+            return;
+          }
+        }
+        if (!d.token) {
+          say("This device has not finished registering with Apple. Reopen the app, then retry.");
+          return;
+        }
+        send();
+      }, function () { send(); });
+    } catch (e) { send(); }
   }
   // On-demand nudge: re-push a task's reminder to the unit's executor roles (SR/JR/intern), excluding
   // the sender. Only instructing roles reach here (button is role-gated; server re-checks). For a
@@ -9331,6 +9390,10 @@
 
   /* ------------------------------------------------------------- controller */
   var ICU = {
+    /* Test seam: the push self-test, so its branches can be driven in a browser without a real
+     * handset. Every link it reports on (OS permission, a device token, what APNs answered) only
+     * exists at runtime. See test/run-push-diagnostic-ui.mjs. */
+    _testPush: function () { return grpTestPush(); },
     // Roster search: filter the saved-patients sheet in place (by name / diagnosis / bed / StewardMD ID)
     // without a re-render, so the input keeps focus while typing.
     _rosterSearch: function (v) {

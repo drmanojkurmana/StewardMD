@@ -235,6 +235,22 @@ export function emailVerified(env, { email, name, regNo, council }) {
   });
 }
 
+/* A medical student or intern approved by the owner (traineeVerified, 2026-09-26). Deliberately NOT
+ * emailVerified: that one promises prescriptions, which a trainee may not write. No em-dash. */
+export function emailTraineeVerified(env, { email, name, role }) {
+  const who = role === "student" ? "medical student" : "intern";
+  return sendBranded(env, {
+    to: email,
+    subject: "Your " + who + " account is verified.",
+    title: "You are verified.",
+    subtitle: (name ? esc(name) + ", your" : "Your") + " " + who + " account on StewardMD is confirmed.",
+    preheader: "Your " + who + " account is verified. Your learning and bedside tools are unlocked.",
+    bodyHtml:
+      tile({ glyph: "&#10003;", title: "Your tools, unlocked.", text: "Everything built for a " + who + " is now open on your account. Prescribing stays with fully registered doctors." }) +
+      ctaRow("Open StewardMD", APP),
+  });
+}
+
 /* Day-5 warning before an unverified account is removed. Sent ONCE (guarded by purgeWarnedAt) and
  * always at least two days before the account is touched. This is an account notice, so it is NOT
  * suppressed by an unsubscribe: nobody may lose an account without having been told. */

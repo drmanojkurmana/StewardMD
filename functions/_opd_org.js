@@ -306,6 +306,20 @@ function wardsynqConfig(w) {
   }
   return Object.keys(pick).length ? pick : null;
 }
+/* SEC-04: an org AS A MEMBER SEES IT. wardsynq.transmitEndpoints[*].token is a live pharmacy/lab
+ * credential that transmit-send.js presents; the org projection above keeps it because it is also what
+ * is stored. Every response that hands an org to a member goes through this: the token becomes
+ * tokenSet:true, and updateOrg keeps the stored token when a screen sends that marker back. */
+export function publicOrg(o) {
+  const te = o && o.wardsynq && o.wardsynq.transmitEndpoints;
+  if (!te || typeof te !== "object") return o;
+  const safe = {};
+  for (const [k, v] of Object.entries(te)) {
+    if (v && typeof v === "object" && !Array.isArray(v) && "token" in v) { const { token, ...rest } = v; safe[k] = { ...rest, tokenSet: !!token }; }
+    else safe[k] = v;
+  }
+  return { ...o, wardsynq: { ...o.wardsynq, transmitEndpoints: safe } };
+}
 // Human StewardMD IDs: short, unambiguous (no 0/O/1/I). Clinics "SMD-XXXXXX", users "SMD-U-XXXXX".
 const SMD_ALPHABET = "23456789ABCDEFGHJKMNPQRSTUVWXYZ";
 export function normalizeSmdId(x) { return String(x || "").toUpperCase().replace(/[^0-9A-Z-]/g, "").trim(); }

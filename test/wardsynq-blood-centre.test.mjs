@@ -10,7 +10,7 @@
  *
  * node --test --experimental-test-module-mocks --test-concurrency=1 test/wardsynq-blood-centre.test.mjs
  */
-import { as, seedHospital, recordsOf, auditsOf, U, ORG, ORG2 } from "./wardsynq-ops-harness.mjs";
+import { as, seedHospital, recordsOf, auditsOf, U, ORG, ORG2, recordBloodGroup } from "./wardsynq-ops-harness.mjs";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { donationTests, unitTests, samplesOf, lookbackOf } from "../functions/_wardsynq/blood-bank.js";
@@ -297,6 +297,7 @@ test("POST /api/queue/ward/donor-notification: 401, 403 nurse and another hospit
   const unit = (await bank()).units.find((u) => u.bagNumber === "N1");
   const reg = await post(U.DOCTOR, "/patient/register", { name: "Recipient One", mobile: "9876522288", gender: "female", ageYears: 30 });
   const adm = await post(U.DOCTOR, "/ward/admit", { mrn: reg.mrn, ward: "Medical A", bed: "3" });
+  await recordBloodGroup(adm.patientId, "O Negative");
   const req = await post(U.DOCTOR, "/ward/transfusion-request", { patientId: adm.patientId, mrn: reg.mrn, component: "red-cells", units: 1, aboGroup: "O", rhD: "negative" });
   assert.equal((await post(U.BLOOD, "/ward/transfusion-crossmatch", { episodeId: req.episodeId, unitId: unit.unitNumber, component: "red-cells" })).__status, 200);
   assert.equal((await post(U.BLOOD, "/ward/transfusion-issue", { episodeId: req.episodeId })).__status, 200);

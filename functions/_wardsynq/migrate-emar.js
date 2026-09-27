@@ -39,6 +39,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { medicationAdministrationIdFor } from "./opd-identity.js";
+import { roundOrders, doseTimeRefusal } from "./mar-schedule.js";
 import { witnessOrRefusal } from "./controlled-drugs.js";
 import { readPregnancyLactation } from "./migrate-maternity.js";
 
@@ -80,12 +81,20 @@ async function safetyFacts(svc, order) {
   const patientId = order && order.patientId;
   // No catch: an unreadable allergy list or medication list is not an empty one. The callers turn the
   // throw into "the check could not run" instead of a clean check against no allergies.
-  const [allergies, orders] = await Promise.all([
+  const [allergies, orders, encounters] = await Promise.all([
     svc.byPatient("AllergyIntolerance", patientId),
     svc.byPatient("MedicationOrder", patientId),
+    // Which stays are over, read under the service as in roundOrders(): only used to leave their orders out.
+    svc.repository ? svc.repository.byPatient(svc.tenantId, "Encounter", patientId) : svc.byPatient("Encounter", patientId),
   ]);
+  /* CLIN-04: the checks read the orders of THIS stay, plus the patient's home medicines. An order left active on
+   * another stay (a past admission, before discharge stopped them) is not a medicine given on this one, and a
+   * months-old inpatient course must not raise a duplicate or a cumulative-dose block on a new admission. There is
+   * no home/long-term flag on an order: the OPD prescriptions are the home medicines, and every active one is still
+   * read, as before. An order whose stay cannot be found is read too; leaving it out is the unsafe direction. */
+  const otherStays = new Set((encounters || []).filter((e) => e && e.class !== "OPD" && e.id !== (order && order.encounterId)).map((e) => e.id));
   const activeMeds = (orders || [])
-    .filter((o) => o && o.status === "active" && o.id !== (order && order.id))
+    .filter((o) => o && o.status === "active" && o.id !== (order && order.id) && !otherStays.has(o.encounterId))
     .map((o) => ({ drug: o.drug, drugCode: o.genericName || o.drugCode, dose: o.dose || null, frequency: o.frequency || null }));
   /* The patient's OWN recorded weight, from the ward vitals, because a weight-based ceiling
    * cannot be checked without one — the engine blocks with DOSE_WEIGHT_MISSING, which is the
@@ -95,6 +104,33 @@ async function safetyFacts(svc, order) {
    * not weighed the patient there is nothing to send, and the block stands. */
   const weightKg = await latestWeightKg(svc, patientId);
   return { allergies: allergies || [], activeMeds, weightKg };
+}
+
+/* CLIN-12: a finding the prescriber already answered at order entry (safetyAtOrder, overridden with a reason)
+ * is not re-asked at every bedside scan with no way for the nurse to answer it. It is cleared to a warning, so the
+ * nurse still sees it. Only the SAME finding is cleared: matched by rule or allergy id where the order recorded
+ * one, else by its exact words, so a new interaction or a new allergy since the order still stops the scan. */
+function withOrderDecisions(verdict, order, extraWarnings) {
+  const sao = order && order.safetyAtOrder;
+  const decided = sao && sao.checked && sao.reason ? (sao.findings || []).filter((f) => f && f.overridden) : [];
+  const isDecided = (b) => b.requiresOverride && decided.some((d) => d.code === b.code
+    && (d.ruleId || d.allergyId ? (!!d.ruleId && d.ruleId === b.ruleId) || (!!d.allergyId && d.allergyId === b.allergyId) : d.message === b.message));
+  const cleared = verdict.blocks.filter(isDecided);
+  const blocks = verdict.blocks.filter((b) => !isDecided(b));
+  return { ...verdict, allowed: blocks.length === 0, blocks,
+    warnings: verdict.warnings.concat(cleared.map((b) => ({ code: b.code, severity: b.severity, disposition: "warn", message: b.message, overriddenAtOrder: true, reason: sao.reason })), extraWarnings || []) };
+}
+
+/* CLIN-20: a pharmacist's open query on this version of the order is said at the bedside. Read under the service
+ * (a nurse may not hold the verification grant); an unreadable list is said too, never read as "no query". */
+async function pharmacyQueryWarning(svc, order) {
+  try {
+    const rows = ((await svc.repository.byPatient(svc.tenantId, "MedicationVerification", order.patientId)) || [])
+      .filter((v) => v && v.orderId === order.id && Number(v.orderVersion) === Number(order.version) && v.outcome === "queried");
+    return rows.map((v) => ({ code: "PHARMACY_QUERY_OPEN", disposition: "warn", message: `The pharmacist has queried this order: ${v.reason || "no reason given"}. Check with the prescriber before giving.` }));
+  } catch (e) {
+    return [{ code: "PHARMACY_QUERY_UNKNOWN", disposition: "warn", message: "Whether the pharmacist has queried this order could not be read." }];
+  }
 }
 
 function bedsideSafetyCheck(svc, rulePack) {
@@ -109,7 +145,8 @@ function bedsideSafetyCheck(svc, rulePack) {
       // `ctx.weightKg ?? patient.weightKg`. Attaching it here is what makes the ceiling checkable
       // without widening the engine's own hook signature.
       const patient = { ...(hookCtx.patient || {}), ...(typeof weightKg === "number" ? { weightKg } : {}) };
-      return engine.hook()({ order, patient, activeMeds, allergies });
+      const verdict = engine.hook()({ order, patient, activeMeds, allergies });
+      return withOrderDecisions(verdict, order, await pharmacyQueryWarning(svc, order));
     } catch (e) {
       // Could not check. Say so as a warning and let the machine's own gates decide; silently
       // returning "allowed" would be the clean-bill-of-health-for-a-check-that-never-ran failure.
@@ -197,12 +234,12 @@ async function medicationRound(request, env, ctx) {
   if (error) return { ...base, ...error, due: [] };
 
   let orders;
-  try { orders = await svc.byPatient("MedicationOrder", patientId); }
+  try { orders = await roundOrders(svc, patientId); } // CLIN-04: this stay's orders only
   catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), due: [] }; }
 
   const due = [];
   let unread = 0;
-  for (const o of (orders || []).filter((x) => x && x.status === "active")) {
+  for (const o of orders) {
     const marId = medicationAdministrationIdFor(o.id, dueAt);
     let mar = null, readFailed = false;
     /* A failed read is NOT "not started". Reporting it as null invited a second dose of something
@@ -296,13 +333,29 @@ async function administerStep(request, env, ctx) {
     return { ...base, ok: false, status: 409, error: "wrong_patient", detail: "this order belongs to a different patient", orderId, orderPatientId: order.patientId, presentedPatientId: patient.id };
   }
 
+  /* CLIN-11: the wristband the scan must match is the PATIENT RECORD's, never one the request names. The body
+   * only says which patient the ward thinks it holds (checked against the order above). */
+  let bedsidePatient = { id: order.patientId };
+  if (action === "scan") {
+    let rec;
+    try { rec = await svc.get("Patient", order.patientId); }
+    catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), orderId, written: 0 }; }
+    if (!rec) return { ...base, ok: false, status: 409, error: "patient_not_found", detail: "the patient this order belongs to has no record to check the wristband against", orderId, written: 0 };
+    bedsidePatient = { id: order.patientId, mrn: rec.mrn || null, wristbandBarcode: rec.wristbandBarcode || null };
+  }
+
   const emar = new MedicationAdministrationRecord({
     safetyCheck: bedsideSafetyCheck(svc, ctx.rulePack),
     highAlertDrugs: ctx.highAlertDrugs || [],
+    // CLIN-11: the right-time check runs against this dose's due time; a late dose is charted as late, never early.
+    allowLate: true,
   });
 
   let record = existing;
   if (!record) {
+    // CLIN-11: a new dose record only at a time the order schedules (the round's own slots), never an arbitrary one.
+    const off = doseTimeRefusal(order, dueAt, ctx.schedule, Date.now(), 60);
+    if (off) return { ...base, ok: false, status: 409, error: "not_a_scheduled_dose", detail: off, orderId, dueAt, written: 0 };
     if (action !== "verify" && action !== "cancel" && action !== "hold") {
       // A dose has to start at the beginning. Refusing here is what stops an "administer" call on an
       // order that nobody verified or dispensed from quietly creating a record already at the end.
@@ -323,8 +376,29 @@ async function administerStep(request, env, ctx) {
    * Stricter than the high-alert witness below: the witness must also be an active member of this hospital who may
    * witness one, checked by the route, because this dose is a line in the NDPS register. Refused before the machine
    * runs, so nothing is written. */
-  if (action === "administer" && typeof ctx.isControlled === "function" && ctx.isControlled(order.drug, order.drugCode) === true) {
-    const w = await witnessOrRefusal(ctx, resolved.actor.id);
+  /* CLIN-18: a HIGH-ALERT dose's witness is checked the same way when one is named (the machine below refuses
+   * one that is missing or is the nurse); before, any string other than the nurse's own id passed. */
+  const controlledDose = typeof ctx.isControlled === "function" && ctx.isControlled(order.drug, order.drugCode) === true;
+  let witnessId = str(ctx.witnessId) || null;
+  /* CLIN-18: a bedside witness (high-alert or controlled) AUTHENTICATES: they enter their own staff PIN on this device
+   * and it is verified before anything is recorded (witness-auth.js). A typed identifier alone is refused. */
+  // The nurse naming herself is refused below as not independent, before anyone's PIN is tried.
+  if (action === "administer" && witnessId && (controlledDose || emar.isHighAlert(order)) && witnessId.toLowerCase() !== str(resolved.actor.id).toLowerCase()) {
+    if (typeof ctx.witnessPinCheck !== "function") {
+      return { ...base, ok: false, status: 502, error: "witness_check_unavailable", detail: "The witness could not be checked, so nothing was recorded.", orderId, administrationId: marId, written: 0 };
+    }
+    let pinR;
+    try { pinR = await ctx.witnessPinCheck(witnessId, ctx.witnessPin); }
+    catch (e) { return { ...base, ok: false, status: 502, error: "witness_check_failed", detail: "The witness could not be checked, so nothing was recorded.", orderId, administrationId: marId, written: 0 }; }
+    if (!pinR || !pinR.ok) {
+      return { ...base, ok: false, status: 409, error: "refused", action, from: existing ? existing.status : null, orderId, administrationId: marId, actor: resolved.actor.id, written: 0,
+        reasons: [{ code: String((pinR && pinR.error) || "witness_pin_wrong").toUpperCase(), message: (pinR && pinR.detail) || "The witness's PIN is not right." }],
+        detail: (pinR && pinR.detail) || "The witness's PIN is not right.", ...(pinR && pinR.attemptsLeft != null ? { attemptsLeft: pinR.attemptsLeft } : {}) };
+    }
+    witnessId = pinR.identity;
+  }
+  if (action === "administer" && (controlledDose || (emar.isHighAlert(order) && witnessId))) {
+    const w = await witnessOrRefusal({ ...ctx, witnessId }, resolved.actor.id);
     if (w.error) {
       return { ...base, ok: false, status: w.error.status === 502 ? 502 : 409, error: w.error.status === 502 ? w.error.error : "refused", action, from: before,
         reasons: [{ code: String(w.error.error).toUpperCase(), message: w.error.detail }], detail: w.error.detail, orderId, administrationId: marId, actor: resolved.actor.id, written: 0 };
@@ -333,8 +407,10 @@ async function administerStep(request, env, ctx) {
   try {
     if (action === "verify") await emar.transition(record, STATES.VERIFIED, { actorId: resolved.actor.id });
     else if (action === "dispense") await emar.transition(record, STATES.DISPENSED, { actorId: resolved.actor.id });
-    else if (action === "scan") await emar.scan(record, { order, patient, scan: ctx.scan || {}, nurseId: resolved.actor.id });
-    else if (action === "administer") await emar.administer(record, { order, nurseId: resolved.actor.id, witnessId: str(ctx.witnessId) || null });
+    else if (action === "scan") await emar.scan(record, { order, patient: bedsidePatient, nurseId: resolved.actor.id,
+      // The due time and the moment of the scan are the server's, never the device's.
+      scan: { ...(ctx.scan || {}), scheduledAt: dueAt, at: new Date().toISOString() } });
+    else if (action === "administer") await emar.administer(record, { order, nurseId: resolved.actor.id, witnessId });
     else if (action === "hold") await emar.hold(record, resolved.actor.id, str(ctx.reason));
     else if (action === "refuse") await emar.refuse(record, resolved.actor.id, str(ctx.reason));
     else if (action === "cancel") await emar.cancel(record, resolved.actor.id, str(ctx.reason));

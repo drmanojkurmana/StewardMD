@@ -330,3 +330,34 @@ the curated regimen MaiK Cloud answers from. Now a treatment question's curated 
 Still zero key points: child paracetamol and acute heart failure (router matches nothing), tramadol +
 SSRI, severe pre-eclampsia, acute diarrhoea (the regimen or pearls lack those key points).
 
+## A patient case gets choices, not a redirect (2026-09-27, branch maik-patient-choice)
+Owner transcript: "35 year old male, non-healing leg ulcer, RBS 450, platelets 72K" got the canned
+"Start Dx My Patient or Clinical Reasoning" text three times, "Give me dd" and "???" included. The
+`route.kind === "patient"` branch in `maikSendRest` (home.js) now shows `maikPatientCard`, modelled on the
+drug monograph card: **Start Case** / **Dx My Patient** (existing `data-maik-tool` chips, `ACT.startcase` /
+`ACT.reasoning`), **Answer here** (existing `data-maik-anyway`), **Answer, don't ask again**
+(`smd_maik_ptask=0`). Once per conversation; a message that asks for something (`MAIK_PT_ASK`: dd,
+differential, management, rx, "??") is answered at once. `maikStripIds` drops MRN/UHID/IP/OP/reg numbers
+and emails before a patient case is answered (the redirect used to keep those messages on the phone);
+lab values stay. Tests: `test/maik-patient-card.test.mjs`, `node test/run-maik-patient-card-ui.mjs`
+(headless; sets `window.AI_PROXY = "/api/ai"` because `aiBase()` is "" on plain localhost).
+
+## Answer tables scroll sideways; figures prefer workup flowcharts (2026-09-27, branch maik-patient-choice)
+Owner screenshots: a 5-column differential table squeezed into the bubble with words split mid-word
+("Diagno sis"), and a figure strip of ulcer photographs ("I wanted workup flowcharts; if they are absent
+show this").
+- **Tables** (`maik-polish.css`): the polished bubble's `overflow-wrap:anywhere` let cells shrink below a
+  word and `.maik-tbl{width:100%}` kept tables inside the bubble. Cells now wrap only between words with
+  `min-width:9em` (Chrome honours it on cells) plus a table floor by column count via `:has()` (27/36/45em
+  for 3/4/5+ columns; WebKit does not promise cell min-width). Wide tables scroll in `.maik-tblwrap`;
+  narrow ones still fill the bubble. `node test/run-maik-table-ui.mjs` (Chrome), and verified once in
+  Playwright WebKit 26.6 at iPhone 13 and SE widths. **Gotcha:** the page upgrades insecure requests, and
+  WebKit applies that to `http://localhost`, so every subresource fails; test WebKit over local HTTPS.
+- **Figures** (`functions/_figures.js`): a figure is a DIAGRAM when its alt, title, file name or the caption
+  after it names an algorithm, flowchart, pathway, management, evaluation, criteria, classification or
+  table. Per page the best diagram beats a better-scored photo; across pages only diagrams are shown when
+  any exist, photographs are the fallback. `"<topic> algorithm"` is searched beside the plain topic (each
+  page read once). Real pages: PMC diabetic foot ulcer now shows "Overview of management" (was
+  "Pathophysiology"), PMC acute pancreatitis the Revised Atlanta severity figure. Limit: AAFP's older GIF
+  algorithms are drawn by script and dropped as GIFs, so those pages still show nothing or a photo.
+

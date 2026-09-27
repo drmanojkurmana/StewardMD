@@ -2,7 +2,9 @@
  * ?kbproto= query -> localStorage -> default. DEFAULT ON: the Protocols tab is additive (a fifth tab in
  * the Knowledge Library) and every protocol renders its review status; content is ai_drafted pending
  * clinical review. Force off per device with ?kbproto=0 or localStorage smd_kb_protocols=0.
- * Exposes window.SMD_KBPROTO_FLAGS. No PHI, no network. */
+ * Exposes window.SMD_KBPROTO_FLAGS. No PHI, no network.
+ * smd_protocol_assign (?protoassign=, default ON) gates assigning a protocol into the open patient's
+ * case sheet (opd-emr.js Protocol tab + the specialty kit). Off = protocols stay read-only reference. */
 (function () {
   "use strict";
   var G = (typeof window !== "undefined") ? window : globalThis;
@@ -10,7 +12,8 @@
   var Q = (function () { try { return new URLSearchParams(G.location && G.location.search || ""); } catch (e) { return { get: function () { return null; } }; } })();
 
   var DEFS = {
-    smd_kb_protocols: { type: "bool", def: true, query: "kbproto", desc: "Knowledge Library Protocols tab (clinical protocols across specialties). DEFAULT ON; content ai_drafted pending clinical review. Force off per device with ?kbproto=0." }
+    smd_kb_protocols: { type: "bool", def: true, query: "kbproto", desc: "Knowledge Library Protocols tab (clinical protocols across specialties). DEFAULT ON; content ai_drafted pending clinical review. Force off per device with ?kbproto=0." },
+    smd_protocol_assign: { type: "bool", def: true, query: "protoassign", desc: "Assign a clinical protocol to the open patient: tick its instructions and add them to the Management plan as a case-sheet block (and queue its investigations). DEFAULT ON; the doctor ticks every line and still saves the assessment. Force off per device with ?protoassign=0." }
   };
 
   function raw(key) {
@@ -25,9 +28,10 @@
   function bool(key) { return raw(key) === "1"; }
   function set(key, on) { try { LS && LS.setItem(key, on ? "1" : "0"); } catch (e) {} }
   function on() { return bool("smd_kb_protocols"); }
+  function assignOn() { return bool("smd_protocol_assign"); }
   function defs() { return DEFS; }
 
-  var API = { bool: bool, set: set, on: on, defs: defs, _version: 1 };
+  var API = { bool: bool, set: set, on: on, assignOn: assignOn, defs: defs, _version: 2 };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_KBPROTO_FLAGS = API;
 })();

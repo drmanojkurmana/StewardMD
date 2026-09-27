@@ -19,11 +19,16 @@ test("clinix_all / case_sync: any paid tier, free refused", () => {
   });
 });
 
-test("pglog: trainee/coresident tier AND intern|resident role", () => {
-  assert.equal(matrixAllows("pglog", "trainee", "resident"), true);
-  assert.equal(matrixAllows("pglog", "trainee", "intern"), true);
+// Audit finding 5 (2026-09-26): PGMER logbook is PG only (interns out) and belongs to the resident
+// plans, Resident Pro (tier "pro") included.
+test("pglog: Co-Resident / Resident Pro / Ultimate tier AND a PG resident role", () => {
   assert.equal(matrixAllows("pglog", "coresident", "resident"), true);
-  assert.equal(matrixAllows("pglog", "trainee", "student"), false);   // role gate
+  assert.equal(matrixAllows("pglog", "pro", "resident"), true);
+  assert.equal(matrixAllows("pglog", "coresident", "co_resident"), true);
+  assert.equal(matrixAllows("pglog", "ultimate", "resident"), true);
+  assert.equal(matrixAllows("pglog", "pro", "intern"), false);        // interns: not PGMER
+  assert.equal(matrixAllows("pglog", "trainee", "resident"), false);  // Trainee = UG student / intern plan
+  assert.equal(matrixAllows("pglog", "coresident", "student"), false);
   assert.equal(matrixAllows("pglog", "physician", "resident"), false); // attending tier
   assert.equal(matrixAllows("pglog", "free", "resident"), false);
 });
@@ -41,9 +46,14 @@ test("lab_watch / scribe / followcare / opd_clinic / clinic_hosted", () => {
   ["scribe", "followcare", "opd_clinic"].forEach((k) => {
     assert.equal(matrixAllows(k, "physician", null), true, k);
     assert.equal(matrixAllows(k, "physicianpro", null), true, k);
-    assert.equal(matrixAllows(k, "pro", null), false, k);
+    assert.equal(matrixAllows(k, "ultimate", null), true, k);
+    assert.equal(matrixAllows(k, "coresident", null), false, k);
   });
+  assert.equal(matrixAllows("scribe", "pro", null), true);           // Resident Pro includes Scribe
+  assert.equal(matrixAllows("followcare", "pro", null), false);
+  assert.equal(matrixAllows("opd_clinic", "pro", null), false);      // no private practice for residents
   assert.equal(matrixAllows("clinic_hosted", "physicianpro", null), true);
+  assert.equal(matrixAllows("clinic_hosted", "ultimate", null), true);
   assert.equal(matrixAllows("clinic_hosted", "physician", null), false);
 });
 
@@ -99,4 +109,19 @@ test("requireFeature: matrix denial only when both flags are on", async () => {
   const deps = { uid: "u1", getEntitlement: async () => ({ role: "student", tier: "free" }) };
   assert.equal((await requireFeature({ FEATURES_ON: "1" }, req, "case_sync", deps)).allowed, true);
   assert.equal((await requireFeature({ FEATURES_ON: "1", ROLE_GATES_ON: "1" }, req, "case_sync", deps)).allowed, false);
+});
+
+// Owner 2026-09-26: Clinician Pro + Ultimate open the beta imaging AI without an access code. Grant-only,
+// so it holds with ROLE_GATES_ON unset; everyone else still needs the code (null record -> false).
+test("early access: physicianpro + ultimate, without ROLE_GATES_ON; nobody else", () => {
+  const far = Date.now() + DAY;
+  ["thorex", "kardiox", "sknx", "fundx", "thorex_llm", "kardiox_ecg19"].forEach((k) => {
+    assert.equal(featureAllowed({}, { tier: "physicianpro", tierExp: far }, k, null), true, k);
+    assert.equal(featureAllowed({}, { tier: "ultimate", tierExp: null }, k, null), true, k);
+  });
+  ["thorex", "kardiox", "sknx", "fundx"].forEach((k) => {
+    assert.equal(featureAllowed({}, { tier: "physician", tierExp: far }, k, "physician"), false, k);
+    assert.equal(featureAllowed({}, { tier: "pro", tierExp: far }, k, null), false, k);
+    assert.equal(featureAllowed({}, null, k, null), false, k);
+  });
 });

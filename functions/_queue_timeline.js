@@ -21,6 +21,10 @@ const DAY = 86400000;
 const OPEN_TTL_MS = 2 * DAY;   // an un-checked-out timeline is cleaned up ~2 days later
 const LINK_DAYS_DEFAULT = 7;
 const LINK_DAYS_MAX = 30;
+/* SEC-12: the timeline link signs "tl:<ticketId>", never the bare ticket id. The PHI-free queue-position
+ * link (sent by SMS/WhatsApp at registration) signs the bare ticket id under the same secret, so a
+ * shared id let that link open the sealed clinical timeline after checkout. */
+const TL_PREFIX = "tl:";
 
 // ---- pure helpers -------------------------------------------------------------------------------
 export const TL_KINDS = ["note", "assessment", "medication", "vitals", "status", "move", "checkout", "immunization"];
@@ -75,9 +79,13 @@ export async function getTimeline(env, ticketId) {
 
 // ---- PATIENT view: opaque token -> their own timeline (only after checkout, while the link is live) --
 export async function getTimelineByToken(env, token) {
-  const id = ticketIdFromToken(token); if (!id) return { error: "invalid" };
+  const raw = ticketIdFromToken(token); if (!raw) return { error: "invalid" };
+  const prefixed = raw.indexOf(TL_PREFIX) === 0, id = prefixed ? raw.slice(TL_PREFIX.length) : raw;
+  if (!id) return { error: "invalid" };
   const d = await fsGet(env, "q_timeline/" + id); if (!d) return { error: "not_found" };
   const doc = d.fields;
+  // A link minted before SEC-12 carries the bare id, like the queue link: only the exact token checkout stored is honoured.
+  if (!prefixed && !(doc.token && doc.token === String(token))) return { error: "invalid" };
   const v = await verifyTicketToken(env, token, doc.tokenVer || 1); if (!v || !v.ok) return { error: "invalid" };
   if (!doc.closed) return { error: "not_ready" };
   if (!timelineLive(doc, now())) return { error: "expired" };
@@ -94,7 +102,7 @@ export async function finalizeCheckout(env, session, ticket, actor) {
   await appendTimeline(env, session, ticket, "checkout", "Visit completed", actor);   // ensures the doc exists
   const d = await fsGet(env, "q_timeline/" + id);
   const tokenVer = (d && d.fields && d.fields.tokenVer) || 1;
-  const token = await mintTicketToken(env, id, maxExp, tokenVer);
+  const token = await mintTicketToken(env, TL_PREFIX + id, maxExp, tokenVer);
   // expiresAt (TTL) tracks the effective link expiry, so an un-extended timeline is deleted at 7 days.
   await fsCommit(env, [wUpdate(env, "q_timeline/" + id, { closed: true, closedAt: nowMs, linkExpiresAt: linkExpiresAt, expiresAt: linkExpiresAt, token: token, updatedAt: nowMs })]);
   const base = (env && env.QUEUE_LINK_BASE) || "https://stewardmd.in";
@@ -109,6 +117,14 @@ export async function extendTimeline(env, ticketId, days) {
   const linkExpiresAt = extendLinkMs(now(), days, d.fields.closedAt);
   await fsCommit(env, [wUpdate(env, "q_timeline/" + ticketId, { linkExpiresAt: linkExpiresAt, expiresAt: linkExpiresAt, updatedAt: now() })]);
   return { ok: true, linkExpiresAt: linkExpiresAt };
+}
+
+// ---- staff stop the patient's timeline link (sent to a wrong number, asked by the patient) ------
+// Bumps the version every existing link was signed with, so no copy of any of them opens again.
+export async function revokeTimelineLink(env, ticketId) {
+  const d = await fsGet(env, "q_timeline/" + ticketId); if (!d) return { error: "not_found" };
+  await fsCommit(env, [wUpdate(env, "q_timeline/" + ticketId, { tokenVer: (Number(d.fields.tokenVer) || 1) + 1, token: "", updatedAt: now() })]);
+  return { ok: true };
 }
 
 // ---- doctor's treated-patient history (closed + not expired). Masked: mrnLast4 + counts only. ----

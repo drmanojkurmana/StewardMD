@@ -369,13 +369,16 @@ test("_requiredMissing: a template key this form cannot save is skipped, not rep
   assert.deepEqual(OE._requiredMissing(["no_such_voice_key"], {}), []);
 });
 
-test("_render: the specialty picker is on the idle Scribe panel and remembers the stored choice", () => {
+// 2026-09-26: one <select>, not a 20-chip grid (the grid filled the first screen of the consult).
+// Same templates, same stored key; the Specialty tab's kit picker still sets it (kitHost.setScribe).
+test("_render: the specialty picker is one line on the idle Scribe panel and remembers the stored choice", () => {
   const OE = load({ getItem: (k) => (k === "smd_scribe_specialty" ? "paediatrics" : null) });
   const html = OE._render(assessState());
-  assert.match(html, /data-oe-act="scribe-spec:paediatrics"/);
-  assert.match(html, /data-oe-act="scribe-spec:obgyn"/);
-  assert.match(html, /data-oe-act="scribe-spec:surgery-followup"/);
-  assert.match(html, /oe-vc-specb on" data-oe-act="scribe-spec:paediatrics"/, "the stored specialty is the pressed one");
+  assert.match(html, /data-oe-inp="scribe-spec"/);
+  assert.match(html, /<option value="obgyn"/);
+  assert.match(html, /<option value="surgery-followup"/);
+  assert.match(html, /<option value="paediatrics" selected/, "the stored specialty is the selected one");
+  assert.doesNotMatch(html, /oe-vc-specb/, "the chip grid is gone");
 });
 
 test("_render: the review panel prompts for the specialty's still-blank required fields", () => {

@@ -103,7 +103,7 @@ const DOCTOR = "doctor@example.test", NURSE = "nurse@example.test";
 /* THE HOSPITAL'S AI CONFIGURATION. `phiApproved` is the whole control: a hospital that has named no
  * provider cannot send patient data anywhere, and that is the shipped default. Here it approves the
  * provider that talks to a model on its OWN hardware. */
-const AI_ON = { enabled: true, phiApproved: ["local-openai"], localBaseUrl: "https://hospital.internal/v1", localModel: "ward-model-7b" };
+const AI_ON = { enabled: true, phiApproved: ["local-openai"], localBaseUrl: "https://ai.hospital.example/v1", localModel: "ward-model-7b" };
 
 /* THE SOCKET, and nothing above it. The REAL local-model adapter runs - it builds the real
  * OpenAI-compatible request and parses the real response shape - and this answers as a model server
@@ -221,7 +221,7 @@ test("2. an allergy list that is empty says nothing has been RECORDED, never tha
 
 test("3. with NO provider approved for patient data, nothing is sent and the refusal says so", async () => {
   const s = socket("should never be reached");
-  seed({ enabled: true, phiApproved: [], localBaseUrl: "https://hospital.internal/v1", localModel: "m" }, s);
+  seed({ enabled: true, phiApproved: [], localBaseUrl: "https://ai.hospital.example/v1", localModel: "m" }, s);
   await patient("pat-1", "GH-1", "Anjali Menon");
 
   const r = await ask(DOCTOR, { patientId: "pat-1", task: TASK.SUMMARISE });

@@ -68,7 +68,14 @@ bucket_name = "stewardmd-offline"
 # DPDP §8(7) storage limitation: auto-erase a FollowCare episode 7 days after it is
 # recovered/closed (active follow-ups are never touched; see functions/_followcare_dispatch.js).
 [vars]
-MAIK_LIVE_STREAM = "1"
+# OPS-26/F26: OFF by default. functions/api/ai/[[path]].js documents in detail why this must default
+# off (a 2026-08-20 commit silently flipped this fallback to "1", re-enabling an SSE-hang regression;
+# restored to OFF), and docs/MAIK_ARCHITECTURE_AUDIT.md states streaming is effectively off. Cloudflare
+# Pages named environments (production included) do not inherit this bare [vars] block, so production
+# was already unaffected either way - but a preview/branch deploy or `wrangler pages dev` locally with
+# real AI creds in .dev.vars DOES pick this up, which silently re-enabled the exact regression the code
+# says was reverted, in exactly the environment someone would exercise it.
+MAIK_LIVE_STREAM = "0"
 AI_PROVIDER = "vertex"        # Vertex main (VERTEX_API_KEY), Gemini key = fallback (owner, 2026-09-24)
 FOLLOWCARE_RETENTION_DAYS = "7"
 # Admin/owner allowlist (comma-separated Google account emails). The authoritative server gate
@@ -125,6 +132,8 @@ PHYSICIAN_PRICE_MONTHLY = "149900"   # Physician ₹1,499/mo
 PHYSICIAN_PRICE_ANNUAL = "1499900"   # Physician ₹14,999/yr
 PHYSICIANPRO_PRICE_MONTHLY = "249900"  # Physician Pro ₹2,499/mo
 PHYSICIANPRO_PRICE_ANNUAL = "2499900"  # Physician Pro ₹24,999/yr
+PHYSICIAN_REGULAR = "349900"         # Clinician struck-through ₹3,499 (owner 2026-09-26)
+PHYSICIANPRO_REGULAR = "499900"      # Clinician Pro struck-through ₹4,999 (owner 2026-09-26)
 ONCO_ADDON_MONTHLY = "8900"          # Physician Onco add-on +₹89/mo
 CLINIC_ADDON_MONTHLY = "13900"       # extra personal clinic ₹139/mo each (beyond tier limit)
 FOUNDING_PRICE_YEAR = "39900"        # Founding-Doctor ₹399 for the whole year (first 500)
@@ -197,6 +206,8 @@ PHYSICIAN_PRICE_MONTHLY = "149900"   # Physician ₹1,499/mo
 PHYSICIAN_PRICE_ANNUAL = "1499900"   # Physician ₹14,999/yr
 PHYSICIANPRO_PRICE_MONTHLY = "249900"  # Physician Pro ₹2,499/mo
 PHYSICIANPRO_PRICE_ANNUAL = "2499900"  # Physician Pro ₹24,999/yr
+PHYSICIAN_REGULAR = "349900"         # Clinician struck-through ₹3,499 (owner 2026-09-26)
+PHYSICIANPRO_REGULAR = "499900"      # Clinician Pro struck-through ₹4,999 (owner 2026-09-26)
 ONCO_ADDON_MONTHLY = "8900"          # Physician Onco +₹89/mo
 CLINIC_ADDON_MONTHLY = "13900"       # extra personal clinic ₹139/mo each
 FOUNDING_PRICE_YEAR = "39900"        # Founding-Doctor ₹399/year (first 500)

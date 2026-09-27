@@ -108,6 +108,12 @@ function seedHospital() {
   }
 }
 
+/* CLIN-09: the patient's group is a recorded blood group result, never the request body. */
+async function recordGroup(patientId, value) {
+  await RECORD.append(TENANT_ROW.id, [{ resourceType: "Observation", id: "grp-" + patientId, version: 1, patientId, category: "laboratory",
+    code: "882-1", codeSystem: "http://loinc.org", value, unit: null, meta: { recordedAt: new Date().toISOString(), effectiveAt: new Date().toISOString() } }]);
+}
+
 async function as(email, path, method, body) {
   const res = await onRequest({
     request: new Request("https://x/api/queue" + path, {
@@ -140,6 +146,7 @@ test("CROSSMATCH -> ISSUE -> BEDSIDE CHECK -> START -> OBSERVE -> COMPLETE: the 
   const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Full Chain Testcase", mobile: "9876500902", gender: "female", ageYears: 40 });
   const req = await as(DOCTOR, "/ward/transfusion-request", "POST", { orgId: ORG, mrn: reg.mrn, component: "red-cells", units: 1, aboGroup: "O", rhD: "negative" });
   const episodeId = req.episodeId;
+  await recordGroup(req.patientId, "O Negative");
 
   const xm = await as(DOCTOR, "/ward/transfusion-crossmatch", "POST", { orgId: ORG, episodeId, unitId: "UNIT-001", aboGroup: "O", rhD: "negative", component: "red-cells", expiresAt: "2027-01-01T00:00:00.000Z" });
   assert.equal(xm.__status, 200, JSON.stringify(xm)); assert.equal(xm.phase, "crossmatched");
@@ -149,7 +156,7 @@ test("CROSSMATCH -> ISSUE -> BEDSIDE CHECK -> START -> OBSERVE -> COMPLETE: the 
 
   const patient = { id: req.patientId, mrn: reg.mrn, wristbandBarcode: reg.mrn };
   const check = await as(DOCTOR, "/ward/transfusion-bedside-check", "POST", {
-    orgId: ORG, episodeId, checkerId: "nurse-a", secondCheckerId: "nurse-b",
+    orgId: ORG, episodeId, checkerId: "nurse-a", secondCheckerId: idFor(NURSE),
     scannedPatientBarcode: reg.mrn, scannedUnitId: "UNIT-001", patient,
     unitInHand: { unitId: "UNIT-001", aboGroup: "O", rhD: "negative", component: "red-cells" },
   });
@@ -177,6 +184,7 @@ test("ADVERSARIAL: a bad crossmatch is REFUSED, and the refusal itself is still 
   seedHospital();
   const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Incompatible Testcase", mobile: "9876500903", gender: "male", ageYears: 30 });
   const req = await as(DOCTOR, "/ward/transfusion-request", "POST", { orgId: ORG, mrn: reg.mrn, component: "red-cells", aboGroup: "A", rhD: "positive" });
+  await recordGroup(req.patientId, "A Positive");
 
   const bad = await as(DOCTOR, "/ward/transfusion-crossmatch", "POST", { orgId: ORG, episodeId: req.episodeId, unitId: "UNIT-BAD", aboGroup: "B", rhD: "positive", component: "red-cells" });
   assert.equal(bad.__status, 409, JSON.stringify(bad));
@@ -192,18 +200,19 @@ test("ADVERSARIAL: a single-person bedside check is refused; a mismatched unit i
   seedHospital();
   const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Bedside Testcase", mobile: "9876500904", gender: "female", ageYears: 45 });
   const req = await as(DOCTOR, "/ward/transfusion-request", "POST", { orgId: ORG, mrn: reg.mrn, component: "red-cells", aboGroup: "AB", rhD: "positive" });
+  await recordGroup(req.patientId, "AB Positive");
   await as(DOCTOR, "/ward/transfusion-crossmatch", "POST", { orgId: ORG, episodeId: req.episodeId, unitId: "UNIT-002", aboGroup: "AB", rhD: "positive", component: "red-cells" });
   await as(DOCTOR, "/ward/transfusion-issue", "POST", { orgId: ORG, episodeId: req.episodeId });
   const patient = { id: req.patientId, mrn: reg.mrn, wristbandBarcode: reg.mrn };
 
   const onePerson = await as(DOCTOR, "/ward/transfusion-bedside-check", "POST", {
-    orgId: ORG, episodeId: req.episodeId, checkerId: "nurse-a", secondCheckerId: "nurse-a",
+    orgId: ORG, episodeId: req.episodeId, checkerId: "nurse-a", secondCheckerId: idFor(DOCTOR),
     scannedPatientBarcode: reg.mrn, scannedUnitId: "UNIT-002", patient, unitInHand: { unitId: "UNIT-002", aboGroup: "AB", rhD: "positive", component: "red-cells" },
   });
   assert.equal(onePerson.__status, 409); assert.equal(onePerson.code, "SECOND_CHECKER_NOT_INDEPENDENT", JSON.stringify(onePerson));
 
   const wrongUnit = await as(DOCTOR, "/ward/transfusion-bedside-check", "POST", {
-    orgId: ORG, episodeId: req.episodeId, checkerId: "nurse-a", secondCheckerId: "nurse-b",
+    orgId: ORG, episodeId: req.episodeId, checkerId: "nurse-a", secondCheckerId: idFor(NURSE),
     scannedPatientBarcode: reg.mrn, scannedUnitId: "UNIT-WRONG", patient, unitInHand: { unitId: "UNIT-WRONG", aboGroup: "AB", rhD: "positive", component: "red-cells" },
   });
   assert.equal(wrongUnit.__status, 409); assert.equal(wrongUnit.code, "WRONG_UNIT", JSON.stringify(wrongUnit));
@@ -216,11 +225,12 @@ test("REACTION stops the episode terminally, and RBAC: a pharmacy actor cannot r
   seedHospital();
   const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Reaction Testcase", mobile: "9876500905", gender: "male", ageYears: 60 });
   const req = await as(DOCTOR, "/ward/transfusion-request", "POST", { orgId: ORG, mrn: reg.mrn, component: "red-cells", aboGroup: "O", rhD: "positive" });
+  await recordGroup(req.patientId, "O Positive");
   await as(DOCTOR, "/ward/transfusion-crossmatch", "POST", { orgId: ORG, episodeId: req.episodeId, unitId: "UNIT-003", aboGroup: "O", rhD: "positive", component: "red-cells" });
   await as(DOCTOR, "/ward/transfusion-issue", "POST", { orgId: ORG, episodeId: req.episodeId });
   const patient = { id: req.patientId, mrn: reg.mrn, wristbandBarcode: reg.mrn };
   await as(DOCTOR, "/ward/transfusion-bedside-check", "POST", {
-    orgId: ORG, episodeId: req.episodeId, checkerId: "nurse-a", secondCheckerId: "nurse-b",
+    orgId: ORG, episodeId: req.episodeId, checkerId: "nurse-a", secondCheckerId: idFor(NURSE),
     scannedPatientBarcode: reg.mrn, scannedUnitId: "UNIT-003", patient, unitInHand: { unitId: "UNIT-003", aboGroup: "O", rhD: "positive", component: "red-cells" },
   });
   await as(DOCTOR, "/ward/transfusion-start", "POST", { orgId: ORG, episodeId: req.episodeId });

@@ -611,9 +611,51 @@
 
     // 1. Self-authored inline SVG. Always clearable, inherits the theme, and can be interactive.
     if (m.renderable && m.inline && m.diagramId && window.SMD_CLINIX_DIAGRAMS && SMD_CLINIX_DIAGRAMS.has(m.diagramId)) {
+      var atlas = (window.SMD_CLINIX_DIAGRAMS.getAtlas && window.SMD_CLINIX_DIAGRAMS.getAtlas(m.diagramId)) || null;
       var svg = SMD_CLINIX_DIAGRAMS.render(m.diagramId, {
         focus: state.diaFocus, selected: state.diaZone, mode: state.diaMode, view: state.diaView
       });
+
+      if (atlas && atlas.src) {
+        var isDia = state.diaViewMode === "diagram";
+        return head + '<figure class="cx-media cx-media--dual" data-dia-id="' + esc(m.diagramId) + '">' +
+          '<div class="cx-dia-dual-nav">' +
+            '<button type="button" class="cx-dia-dual-btn' + (!isDia ? " cx-dia-dual-btn--on" : "") + '" data-act="cx-dia-dual-view" data-id="atlas">' +
+              '<span class="cx-dia-dual-icon">&#x1f4f7;</span> Clinical Photo' +
+            '</button>' +
+            '<button type="button" class="cx-dia-dual-btn' + (isDia ? " cx-dia-dual-btn--on" : "") + '" data-act="cx-dia-dual-view" data-id="diagram">' +
+              '<span class="cx-dia-dual-icon">&#x1f4d0;</span> Interactive Diagram' +
+            '</button>' +
+          '</div>' +
+          '<div class="cx-dia-dual-viewport">' +
+            '<div class="cx-dia-dual-track" style="transform:translateX(' + (isDia ? "-50%" : "0%") + ')">' +
+              '<div class="cx-dia-dual-slide cx-dia-dual-slide--atlas">' +
+                '<div class="cx-dia-art-wrap">' +
+                  '<img src="' + esc(atlas.src) + '" alt="' + esc(atlas.title) + '" class="cx-dia-art-img" loading="lazy" />' +
+                  '<div class="cx-dia-art-badge"><span class="cx-badge-dot"></span> Verified Bedside Photo</div>' +
+                '</div>' +
+                '<div class="cx-dia-art-meta">' +
+                  '<div class="cx-dia-art-title">' + esc(atlas.title) + '</div>' +
+                  '<div class="cx-dia-art-desc">' + esc(atlas.desc) + '</div>' +
+                '</div>' +
+              '</div>' +
+              '<div class="cx-dia-dual-slide cx-dia-dual-slide--svg">' +
+                '<div class="cx-dia-svg-badge"><span class="cx-badge-dot cx-badge-dot--interactive"></span> Interactive SVG</div>' +
+                '<div class="cx-dia-svg-content">' + svg + '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="cx-dia-dual-footer">' +
+            '<div class="cx-dia-dual-dots">' +
+              '<button type="button" class="cx-dia-dual-dot' + (!isDia ? " cx-dia-dual-dot--on" : "") + '" data-act="cx-dia-dual-view" data-id="atlas" aria-label="Clinical photo"></button>' +
+              '<button type="button" class="cx-dia-dual-dot' + (isDia ? " cx-dia-dual-dot--on" : "") + '" data-act="cx-dia-dual-view" data-id="diagram" aria-label="Interactive diagram"></button>' +
+            '</div>' +
+            '<div class="cx-dia-dual-hint">Swipe or tap tabs to compare photo &amp; diagram</div>' +
+          '</div>' +
+          '<figcaption class="cx-media-cap">' + esc(m.caption) +
+            '<span class="cx-media-src">' + esc(m.attribution) + " \u00b7 " + esc(m.licence) + "</span></figcaption></figure>";
+      }
+
       return head + '<figure class="cx-media cx-media--dia">' + svg +
         '<figcaption class="cx-media-cap">' + esc(m.caption) +
         '<span class="cx-media-src">' + esc(m.attribution) + " \u00b7 " + esc(m.licence) + "</span></figcaption></figure>";
@@ -3725,6 +3767,7 @@
         if (!state.stationDef) { toast("Could not restart this station"); back(); return; }
         startStation(state.stationDef.id); return;
 
+      case "cx-dia-dual-view": state.diaViewMode = id; haptic("tap"); repaint(); return;
       case "cx-dia-focus": state.diaFocus = id; haptic("tap"); repaint(); return;
       case "cx-dia-mode": state.diaMode = id; haptic("tap"); repaint(); return;
       case "cx-dia-view": state.diaView = id; haptic("tap"); repaint(); return;

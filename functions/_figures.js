@@ -25,6 +25,10 @@ const NO_FIGURES = /(^|\.)(uptodate\.com|medscape\.com)$/i;
 // "obj_head"/"graphic", Medscape's "inlineImage" + "::figure" comment, AAFP's "__figure" class.
 const FIGURE_CTX = /<figure\b|figcaption|figure|inlineimage|img-box|obj_head|class="graphic/i;
 const STOP = /^(?:the|of|and|for|in|on|with|to|a|an|is|are|vs|or|workup|work-up|management|treatment|approach|evaluation)$/i;
+// A figure that shows how to WORK UP or MANAGE the condition (owner, 2026-09-27, over a strip of ulcer
+// photographs: "I wanted workup flowcharts; if they are absent show this"). Read from the image's alt,
+// title, file name and the caption right after it: a PMC figure is "Figure 2" until its caption.
+const DIAGRAM = /algorithm|flow\s?-?chart|pathway|approach to|work-?up|decision|diagnostic (?:approach|evaluation|strategy)|evaluation of|management of|differential|criteria|classification|staging|schematic|diagram|protocol|step-?wise|\btable\b/i;
 
 function attr(tag, name) {
   const m = new RegExp("\\b" + name + "\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s>]+))", "i").exec(tag);
@@ -46,7 +50,7 @@ export function pickFigure(html, pageUrl, topic) {
   const h = String(html || "").slice(0, PAGE_BYTES);
   const toks = topicTokens(topic);
   const hit = (s) => toks.reduce((n, t) => n + (String(s || "").toLowerCase().includes(t) ? 1 : 0), 0);
-  let best = null;
+  let best = null, bestDiagram = null;
   const re = /<img\b[^>]*>/gi;
   let m;
   while ((m = re.exec(h))) {
@@ -70,8 +74,13 @@ export function pickFigure(html, pageUrl, topic) {
     if (/<figure\b/i.test(before) && !/<\/figure>/i.test(before)) score += 2;
     if (w >= 400 || hh >= 300) score += 1;
     if (score <= 0) continue;
-    if (!best || score > best.score) best = { img: src, alt: (alt || title || "").slice(0, 160), score };
+    const caption = h.slice(m.index + tag.length, m.index + tag.length + 800).split(/<\/figure>|<img\b/i)[0].replace(/<[^>]+>/g, " ");
+    const diagram = DIAGRAM.test(alt + " " + title + " " + src + " " + caption);
+    const c = { img: src, alt: (alt || title || "").slice(0, 160), score, diagram };
+    if (!best || score > best.score) best = c;
+    if (diagram && (!bestDiagram || score > bestDiagram.score)) bestDiagram = c;
   }
+  if (bestDiagram) return bestDiagram;   // a workup/management figure beats a better-scored photograph
   if (!best) {
     // A page built around one figure often carries it as og:image; only when it names the topic.
     const og = /<meta\b[^>]*property\s*=\s*["']og:image["'][^>]*>/i.exec(h);
@@ -79,7 +88,7 @@ export function pickFigure(html, pageUrl, topic) {
     // Must look like an image file: aafp.org's og:image for its pancreatitis review was the article
     // URL itself (text/html), which would have rendered as a broken card (production, 2026-09-18).
     const looksImage = /\.(?:jpe?g|png|webp)(?:\?|$)/i.test(ogSrc) || /\/(?:image|images|media|img)\//i.test(ogSrc);
-    if (ogSrc && looksImage && !JUNK.test(ogSrc) && (hit(ogSrc) || FIGURE_HINT.test(ogSrc))) best = { img: ogSrc, alt: "", score: 1 };
+    if (ogSrc && looksImage && !JUNK.test(ogSrc) && (hit(ogSrc) || FIGURE_HINT.test(ogSrc))) best = { img: ogSrc, alt: "", score: 1, diagram: DIAGRAM.test(ogSrc) };
   }
   return best;
 }
@@ -106,18 +115,23 @@ export async function findFigures(env, topic, max = 3, opts = {}) {
   // site suggestions: "hyperkalemia ECG changes" -> litfl.com, pmc.ncbi.nlm.nih.gov), one reworded
   // retry asks for article pages before giving up. TinyFish search costs no credits.
   const debug = [];
-  const eligible = [];
-  const queries = [q, q + " review article"];
-  for (const query of queries) {
-    if (eligible.length) break;
-    let pages = [];
-    try { pages = await tinyfishSearch(env, query); } catch (e) { pages = []; }
-    if (query !== q) debug.push({ retry: query, results: (pages || []).length });
-    sift(pages);
+  const eligible = [], seen = new Set();
+  // "<topic> algorithm" runs beside the plain topic (2026-09-27), so pages built around a workup or
+  // management flowchart get read; the plain search fills the other reads and the photo fallback.
+  const search = (query) => Promise.resolve().then(() => tinyfishSearch(env, query)).catch(() => []);
+  const [algo, plain] = await Promise.all([search(q + " algorithm"), search(q)]);
+  sift(algo, 3); sift(plain, 5); sift(algo, 5);
+  if (!eligible.length) {
+    const pages = await search(q + " review article");
+    debug.push({ retry: q + " review article", results: (pages || []).length });
+    sift(pages, 5);
   }
-  function sift(pages) {
+  function sift(pages, cap) {
   for (const p of (pages || []).slice(0, 8)) {
     if (!p || !/^https:\/\//i.test(p.url)) continue;
+    if (eligible.length >= cap) return;
+    if (seen.has(p.url)) continue;   // both searches return the same article: read it once
+    seen.add(p.url);
     const d = { url: p.url };
     debug.push(d);
     let u; try { u = new URL(p.url); } catch (e) { d.skip = "bad-url"; continue; }
@@ -125,7 +139,7 @@ export async function findFigures(env, topic, max = 3, opts = {}) {
     if (!isTrustedUrl(p.url)) { d.skip = "untrusted"; continue; }
     if (NO_FIGURES.test(u.hostname)) { d.skip = "no-figures-host"; continue; }
     if (u.pathname === "/" || u.pathname === "") { d.skip = "homepage"; continue; }
-    if (eligible.length < 5) eligible.push({ p, d });
+    eligible.push({ p, d });
   }
   }
   const found = await Promise.all(eligible.map(async ({ p, d }) => {
@@ -138,10 +152,12 @@ export async function findFigures(env, topic, max = 3, opts = {}) {
       d.bytes = html.length; d.imgs = (html.match(/<img\b/gi) || []).length;
       const f = pickFigure(html, p.url, q);
       d.pick = f ? f.img : null;
-      return f ? { img: f.img, page: p.url, site: host.replace(/^www\./, ""), title: String(p.title || f.alt || host).slice(0, 160), score: f.score } : null;
+      return f ? { img: f.img, page: p.url, site: host.replace(/^www\./, ""), title: String(p.title || f.alt || host).slice(0, 160), score: f.score, diagram: f.diagram } : null;
     } catch (e) { d.error = String((e && e.message) || e).slice(0, 80); return null; }
   }));
-  const out = found.filter(Boolean).sort((a, b) => b.score - a.score).slice(0, max).map(({ score, ...rest }) => rest);
+  // Diagrams only when there are any; photographs are the fallback, never mixed in beside them.
+  const hits = found.filter(Boolean), diagrams = hits.filter((f) => f.diagram);
+  const out = (diagrams.length ? diagrams : hits).sort((a, b) => b.score - a.score).slice(0, max).map(({ score, diagram, ...rest }) => rest);
   if (opts.debug) out._debug = debug;
   return out;
 }

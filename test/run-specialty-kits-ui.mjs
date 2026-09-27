@@ -97,12 +97,13 @@ try{
  /* ---------------- OPD EMR Specialty tab ---------------- */
  const openOpd=async(wait='tab:kit')=>{await ev(`OPDEMR.close&&OPDEMR.close();OPDEMR.openProfile({patientId:'MR-KIT-1',name:'Kit Patient',sex:'Female',noStore:true});1`);return until(`!!document.querySelector('#smdOpdEmr.on [data-oe-act="${wait}"]')`);};
  ok(await openOpd(),'OPD EMR shows a Specialty tab');
- ok(await ev(`(()=>{const t=[...document.querySelectorAll('#smdOpdEmr .oe-tab')].map(b=>b.dataset.oeAct);return t[t.indexOf('tab:assess')+1]==='tab:kit'})()`),'Specialty sits right after Assessment');
+ ok(await ev(`(()=>{const t=[...document.querySelectorAll('#smdOpdEmr .oe-tab')].map(b=>b.dataset.oeAct);return JSON.stringify(t.filter(x=>x!=='tab:immun'))===JSON.stringify(['tab:profile','tab:assess','tab:kit','tab:inv','tab:meds','tab:note','tab:protocol','tab:onco'])})()`),'tabs run in consult order: Profile, Assessment, Specialty, then Investigations and Medications');
  await click('#smdOpdEmr [data-oe-act="tab:kit"]');
  ok(await until(`!!document.querySelector('#smdOpdEmr .kit[data-kit-host="opd"]')`),'Specialty tab renders the kit with the OPD host');
  ok(await ev(`(()=>{const t=document.querySelector('#smdOpdEmr .oe-tabs'),on=t.querySelector('.oe-tab.on');const a=t.getBoundingClientRect(),b=on.getBoundingClientRect();return on.dataset.oeAct==='tab:kit'&&b.left>=a.left-1&&b.right<=a.right+1})()`),'the active Specialty tab stays in view in the tab strip');
  ok(await ev(`document.querySelector('#smdOpdEmr .kit-chip.on').dataset.kitAct==='kit:paediatrics'`),'"my specialty" is the default kit in the consult');
- ok(await ev(`[...document.querySelectorAll('#smdOpdEmr .kit-add')].every(b=>!b.disabled)`),'write mode with the assessment loaded: every Add is enabled');
+ ok(await ev(`[...document.querySelectorAll('#smdOpdEmr .kit-add:not(.kit-addq)')].every(b=>!b.disabled)`),'write mode with the assessment loaded: every Add is enabled');
+ ok(await ev(`document.querySelector('#smdOpdEmr .kit-addq').disabled`),'the investigations Add waits until a test is ticked');
  ok(await ev(`!!document.querySelector('#smdOpdEmr [data-kit-act="tool:growth-who"]')&&/Add to Nutrition$/.test(document.querySelector('#smdOpdEmr [data-kit-act="tool:growth-who"]').textContent)&&/Add to Systemic examination$/.test(document.querySelector('#smdOpdEmr [data-kit-act="sec:danger-signs"]').textContent)`),'Add buttons name the form\'s own field labels');
  ok(await ev(`document.querySelector('#smdOpdEmr [data-kit-f="growth:sex"]').value==='Female'`),'growth sex comes from the patient record');
 
@@ -151,6 +152,28 @@ try{
  await click('#smdOpdEmr [data-oe-act="tab:kit"]'); await until(`!!document.querySelector('#smdOpdEmr .kit')`);
  await click('#smdOpdEmr [data-kit-act="proto:fever-in-under-5s"]');
  ok(await until(`OPDEMR._state().tab==='protocol'&&!!document.querySelector('#smdOpdEmr .kbp-embed')`),'protocol shortcut opens the reader in the Protocol tab');
+ await click('#smdOpdEmr [data-oe-act="tab:kit"]'); await until(`!!document.querySelector('#smdOpdEmr .kit')`);
+
+ // 2026-09-26: the picker is a sticky FOOTER, the investigations are a tick list, and a clinical
+ // protocol can be assigned into the case sheet the way an oncology regimen is.
+ ok(await ev(`(()=>{const k=document.querySelector('#smdOpdEmr .kit'),f=k.querySelector(':scope > .kit-foot');return !!f&&k.lastElementChild===f&&getComputedStyle(f).position==='sticky'&&f.contains(document.querySelector('#smdOpdEmr .kit-chips'))})()`),'the kit picker is a sticky footer under the kit content');
+ await click('#smdOpdEmr [data-kit-act="invtick:0"]');
+ await click('#smdOpdEmr [data-kit-act="invtick:1"]');
+ ok(await until(`/Add 2 to investigations/.test(document.querySelector('#smdOpdEmr [data-kit-act="invadd"]').textContent)`),'ticking investigations counts them on one Add button');
+ await armToasts();
+ await click('#smdOpdEmr [data-kit-act="invadd"]');
+ const paedIx=BUNDLE.kits.find(k=>k.id==='paediatrics').investigations.slice(0,2).map(x=>x.query||x.label);
+ ok(await until(`OPDEMR._state().tab==='inv'&&${JSON.stringify(paedIx)}.every(t=>(OPDEMR._state().dictatedInv||[]).includes(t))`),'Add queues the ticked tests on the Investigations tab');
+ await click('#smdOpdEmr [data-oe-act="tab:kit"]'); await until(`!!document.querySelector('#smdOpdEmr .kit')`);
+ await click('#smdOpdEmr [data-kit-act="protoas:fever-in-under-5s"]');
+ ok(await until(`OPDEMR._state().tab==='protocol'&&!!document.querySelector('#smdOpdEmr .kbp-assign')`),'kit Assign opens the protocol with its instruction tick list');
+ ok(await ev(`document.querySelectorAll('#smdOpdEmr .kbp-as-row input:checked').length>0&&!document.querySelector('#smdOpdEmr [data-oe-act="proto-as-apply"]').disabled`),'the actionable instructions start ticked and Add is live');
+ await armToasts();
+ await click('#smdOpdEmr [data-oe-act="proto-as-apply"]');
+ ok(await until(`OPDEMR._state().tab==='assess'&&/Protocol: /.test(OPDEMR._state().assessVals.management_plan||'')&&(OPDEMR._state().assessVals.management_plan||'').includes(${JSON.stringify("\n1. ")})`),'Add to case sheet writes a numbered protocol block into the Management plan');
+ ok(await ev(`window.__toasts.some(t=>/instructions added to Management plan/.test(t))`),'the toast names the field it went to');
+ await click('#smdOpdEmr [data-oe-act="tab:protocol"]');
+ ok(await until(`!!document.querySelector('#smdOpdEmr [data-oe-act^="proto-as-open:"]')`),'the Protocol tab offers Assign on clinical protocols, beside Open');
  await click('#smdOpdEmr [data-oe-act="tab:kit"]'); await until(`!!document.querySelector('#smdOpdEmr .kit')`);
  await click('#smdOpdEmr [data-kit-act="calc:paeds_weight"]');
  ok(await until(`document.querySelector('.mc-overlay.on')`)&&await topIs('.mc-overlay'),'calculator shortcut opens above the OPD EMR');

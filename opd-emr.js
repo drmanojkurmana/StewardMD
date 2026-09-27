@@ -22,9 +22,14 @@
       '<button class="oe-close" data-oe-act="close" title="Close" aria-label="Close">' + ms("close") + "</button></header>";
   }
   function tabsNav(active) {
-    var defs = [["profile", "Profile", "person"], ["inv", "Investigations", "science"], ["meds", "Medications", "pill"], ["assess", "Assessment", "clinical_notes"], ["note", "Note", "edit_note"], ["protocol", "Protocol", "account_tree"], ["onco", "ONCQIS", "vaccines"]];
-    if (immunFlagOn()) defs.splice(3, 0, ["immun", "Immunisation", "vaccines"]);
-    if (kitsOn()) defs.splice(defs.map(function (d) { return d[0]; }).indexOf("assess") + 1, 0, ["kit", "Specialty", "stethoscope"]);
+    // Consult order (owner, 2026-09-26): see the patient, assess, add the specialty detail, THEN
+    // order tests, prescribe and immunise, write the note and open a protocol. Investigations used to
+    // sit before Assessment, which is the reverse of how a consultation actually runs.
+    var defs = [["profile", "Profile", "person"], ["assess", "Assessment", "clinical_notes"]];
+    if (kitsOn()) defs.push(["kit", "Specialty", "stethoscope"]);
+    defs.push(["inv", "Investigations", "science"], ["meds", "Medications", "pill"]);
+    if (immunFlagOn()) defs.push(["immun", "Immunisation", "vaccines"]);
+    defs.push(["note", "Note", "edit_note"], ["protocol", "Protocol", "account_tree"], ["onco", "ONCQIS", "vaccines"]);
     return '<nav class="oe-tabs">' + defs.map(function (t) {
       return '<button class="oe-tab' + (t[0] === active ? " on" : "") + '" data-oe-act="tab:' + t[0] + '">' + ms(t[2]) + "<span>" + t[1] + "</span></button>";
     }).join("") + "</nav>";
@@ -1126,7 +1131,16 @@
   function oncoTab(st) {
     if (!oncoFlagOn()) return section("vaccines", "ONCQIS", "", "", "Oncology protocols are not enabled for this account.");
     var plan = st.oncoPlan;
-    if (!plan) return section("vaccines", "ONCQIS", "", "", "No active treatment plan for this patient yet.");
+    // A regimen picked in OncoTree (or applied from the Assessment tab) is STAGED, not a plan: it waits
+    // in the review panel on the Assessment tab for Create & Activate. This tab used to say "no plan
+    // yet" and nothing else, so the hand-off looked like it had done nothing (owner, 2026-09-26).
+    if (!plan && st.oncoDraft) {
+      var d = st.oncoDraft.template || {};
+      return section("vaccines", "ONCQIS", "",
+        '<div class="oe-search-note">' + ms("info") + esc((d.name || d.id || "A regimen") + " is staged for this patient with its computed doses. Review it on the Assessment tab and Create & Activate there; nothing is dosed or administered until you do.") + "</div>" +
+        '<button class="oe-btn primary" data-oe-act="tab:assess">' + ms("clinical_notes") + "Review the staged regimen</button>", "");
+    }
+    if (!plan) return section("vaccines", "ONCQIS", "", "", "No active treatment plan for this patient yet." + (oncoNavOn() && G.SMD_ONCOTREE && G.SMD_ONCOTREE.open ? " Find one with the OncoTree pathway on the Assessment or Protocol tab." : ""));
     var toggle = oncoViewToggle(st);
     var body;
     if (st.oncoView === "nurse") {
@@ -1250,14 +1264,19 @@
       '<div class="oe-search-note" style="margin:0 0 8px">' + ms("info") + esc(note) + "</div>" +
       searchBox("proto", ps.protoQuery, "Search condition, cancer or drug") + basisBar +
       '<div class="oe-proto-branches" role="group" aria-label="Filter by branch">' + chips + "</div>" + typePicker +
+      (br === "oncology" && ps.writeOn ? oncoTreeLaunchBtn() : "") +
       '<div class="oe-searchout" id="oe-out-proto">' + protoResults(ps) + "</div>", "");
   }
-  function clinRow(p, idx) {
+  function clinRow(p, idx, canAssign) {
     var subj = ((idx.subjects || []).filter(function (x) { return x.key === p.subject; })[0] || {}).label || p.subject;
-    return '<button type="button" class="oe-proto-row" data-oe-act="proto-open:' + esc(p.id) + '"><span class="oe-proto-b">' +
-      '<span class="oe-proto-t">' + esc(p.title) + '</span><span class="oe-proto-m">' + esc(subj) + " · " + esc(p.population) +
+    var body = '<span class="oe-proto-t">' + esc(p.title) + '</span><span class="oe-proto-m">' + esc(subj) + " · " + esc(p.population) +
       (p.basis ? ' <span class="oe-proto-bpill oe-b-' + esc(p.basis) + '">' + (p.basis === "india" ? "India" : "International") + "</span>" : "") + "</span>" +
-      '<span class="oe-proto-s">' + esc(p.summary) + "</span></span>" + ms("chevron_right") + "</button>";
+      '<span class="oe-proto-s">' + esc(p.summary) + "</span>";
+    // Assign, beside Open, exactly like an oncology regimen: it opens the protocol with its instruction
+    // tick list ready, so a clinical protocol reaches the case sheet the same way a regimen does.
+    if (!canAssign) return '<button type="button" class="oe-proto-row" data-oe-act="proto-open:' + esc(p.id) + '"><span class="oe-proto-b">' + body + "</span>" + ms("chevron_right") + "</button>";
+    return '<div class="oe-proto-row static"><button type="button" class="oe-proto-b" data-oe-act="proto-open:' + esc(p.id) + '">' + body + "</button>" +
+      '<button type="button" class="oe-btn primary oe-proto-as" data-oe-act="proto-as-open:' + esc(p.id) + '">' + ms("assignment_turned_in") + "Assign</button></div>";
   }
   function oncoRow(p, writeOn) {
     var intents = [].concat(p.intentOptions || p.treatmentIntent || []).filter(Boolean);
@@ -1271,6 +1290,7 @@
   function protoResults(ps) {
     var br = ps.protoBranch || "all", q = String(ps.protoQuery || "").trim(), basis = ps.protoBasis || "all";
     var clinOn = kbpOn(), oncOn = oncoFlagOn(), idx = clinOn ? ps.kbpIndex : null, html = "", shown = 0, waiting = false;
+    var canAssign = protoAssignOn() && !!ps.writeOn;
     if (clinOn && br !== "oncology") {
       if (idx) {
         var clin = G.SMD_KBPROTO._searchIndex(idx, q, br === "all" ? "all" : br, basis);
@@ -1280,9 +1300,9 @@
           if (br === "all" && !q) {
             idx.subjects.forEach(function (sj) {
               var rows = clin.filter(function (p) { return p.subject === sj.key; });
-              if (rows.length) html += '<div class="oe-proto-sub">' + esc(sj.label) + "</div>" + rows.map(function (p) { return clinRow(p, idx); }).join("");
+              if (rows.length) html += '<div class="oe-proto-sub">' + esc(sj.label) + "</div>" + rows.map(function (p) { return clinRow(p, idx, canAssign); }).join("");
             });
-          } else html += clin.map(function (p) { return clinRow(p, idx); }).join("");
+          } else html += clin.map(function (p) { return clinRow(p, idx, canAssign); }).join("");
         }
       } else if (ps.kbpError) { waiting = true; html += '<div class="oe-search-note err">' + ms("error") + "Clinical protocols could not be loaded. Check your connection and reopen this tab.</div>"; }
       else { waiting = true; html += '<div class="oe-search-note">' + ms("hourglass_top") + "Loading clinical protocols…</div>"; }
@@ -1300,7 +1320,79 @@
     var back = '<button type="button" class="oe-btn ghost oe-proto-back" data-oe-act="proto-close" aria-label="Back to protocols">' + ms("arrow_back") + "All protocols</button>";
     if (ps.protoDocErr) return back + '<div class="oe-search-note err">' + ms("error") + esc(ps.protoDocErr) + "</div>";
     if (!ps.protoDoc || !G.SMD_KBPROTO || !G.SMD_KBPROTO.readerHTML) return back + '<div class="oe-search-note">' + ms("hourglass_top") + "Loading protocol…</div>";
-    return back + '<div class="kbp-embed kblib-tool-protocols">' + G.SMD_KBPROTO.readerHTML(ps.protoDoc, { idPrefix: "oeKbp", openAttr: function (id) { return 'data-oe-act="proto-open:' + esc(id) + '"'; } }) + "</div>";
+    return back + protoAssignHtml(ps) + '<div class="kbp-embed kblib-tool-protocols">' + G.SMD_KBPROTO.readerHTML(ps.protoDoc, { idPrefix: "oeKbp", openAttr: function (id) { return 'data-oe-act="proto-open:' + esc(id) + '"'; } }) + "</div>";
+  }
+  /* ---- Assign a clinical protocol to the open patient (flag smd_protocol_assign, default ON) ------
+   * The owner's ask (2026-09-26): "protocols cant be assigned like oncology protocols". An oncology
+   * regimen attaches a draft plan server-side; a clinical protocol has no plan object, so it is
+   * assigned the way the specialty kit adds findings: the doctor ticks the instructions that apply and
+   * they are appended to the case sheet (Management plan, and lifestyle lines to Diet & lifestyle
+   * advice) as editable text. Nothing is prescribed, ordered or saved until the assessment is saved.
+   * The tick list and the composed text are pure and live in kb-protocols.js (assignLines/assignText).
+   */
+  function protoAssignOn() {
+    try {
+      if (!kbpOn() || !(G.SMD_KBPROTO && G.SMD_KBPROTO.assignText)) return false;
+      return !(G.SMD_KBPROTO_FLAGS && G.SMD_KBPROTO_FLAGS.assignOn) || G.SMD_KBPROTO_FLAGS.assignOn();
+    } catch (e) { return false; }
+  }
+  // The ids the doctor has ticked: an explicit choice wins, otherwise the line's own default.
+  function protoSelIds(p, sel) {
+    sel = sel || {};
+    return ((G.SMD_KBPROTO && G.SMD_KBPROTO.assignLines && G.SMD_KBPROTO.assignLines(p)) || [])
+      .filter(function (l) { return sel[l.id] !== undefined ? !!sel[l.id] : l.on; }).map(function (l) { return l.id; });
+  }
+  function protoAssignHtml(ps) {
+    if (!protoAssignOn()) return "";
+    var p = ps.protoDoc, open = ps.protoAssign && ps.protoAssign.id === ps.protoOpenId;
+    // Read-only consult: no Assign here either, exactly as the list rows and the oncology rows behave.
+    if (!open) return ps.writeOn ? '<button type="button" class="oe-btn primary oe-proto-asbtn" data-oe-act="proto-as-open:' + esc(ps.protoOpenId) + '">' +
+      ms("assignment_turned_in") + "Assign to this patient</button>" : "";
+    var can = !!ps.writeOn && !ps.assessAuthorized && !!ps.assessLoaded;
+    var note = !ps.writeOn ? "Open the patient in write mode to add these to the case sheet."
+      : ps.assessAuthorized ? "This assessment is authorised and locked, so nothing can be added to it."
+        : !ps.assessLoaded ? "Waiting for the assessment to load." : "";
+    return G.SMD_KBPROTO.assignHTML(p, ps.protoAssign.sel, {
+      act: function (cmd) { return 'data-oe-act="' + esc(cmd) + '"'; }, disabled: !can, note: note
+    });
+  }
+  function openProtoAssign(id) {
+    if (!protoAssignOn()) return;
+    st.protoAssign = { id: id, sel: {} };
+    if (st.protoOpenId === id && st.protoDoc) { paint(); canvasTop(0); return; }
+    openKbProtocol(id);
+  }
+  function toggleProtoAssignLine(lineId) {
+    var a = st.protoAssign, p = st.protoDoc; if (!a || !p) return;
+    var line = ((G.SMD_KBPROTO.assignLines(p) || []).filter(function (l) { return l.id === lineId; })[0]);
+    if (!line) return;
+    var cur = a.sel[lineId] !== undefined ? !!a.sel[lineId] : line.on;
+    a.sel[lineId] = !cur;
+    paint();
+  }
+  // all: true = tick everything, false = clear, null = back to the protocol's own defaults.
+  function bulkProtoAssign(all) {
+    var a = st.protoAssign, p = st.protoDoc; if (!a || !p) return;
+    if (all === null) { a.sel = {}; paint(); return; }
+    var sel = {};
+    (G.SMD_KBPROTO.assignLines(p) || []).forEach(function (l) { sel[l.id] = !!all; });
+    a.sel = sel; paint();
+  }
+  function applyProtoAssign() {
+    var p = st.protoDoc, a = st.protoAssign;
+    if (!p || !a || !protoAssignOn()) return;
+    if (!st.writeOn) { toast("Open the patient in write mode to add a protocol to the case sheet."); return; }
+    if (st.assessAuthorized) { toast("This assessment is authorised and locked in " + emrLabel() + "."); return; }
+    if (!st.assessLoaded || st.assessLoading) { toast("The assessment is still loading. Try again in a moment."); return; }
+    var res = G.SMD_KBPROTO.assignText(p, protoSelIds(p, a.sel));
+    if (!res.count) { toast("Tick at least one instruction first."); return; }
+    st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
+    res.blocks.forEach(function (b) { appendPlan(b.field, b.text); });
+    try { addToTimeline("note", "Protocol added to the case sheet: " + (p.title || p.id) + " (" + res.count + " instructions)"); } catch (e) {}
+    st.protoAssign = null; st.protoOpenId = ""; st.protoDoc = null; st.tab = "assess";
+    paint(); canvasTop(0);
+    toast(res.count + " instruction" + (res.count === 1 ? "" : "s") + " added to " +
+      res.blocks.map(function (b) { return b.label; }).join(" and ") + ". Edit them and save the assessment to keep them.");
   }
   function renderProtoOut() { try { var el = document.querySelector("#smdOpdEmr #oe-out-proto"); if (el) el.innerHTML = protoResults(st); } catch (e) {} }
   function canvasTop(v) { try { var c = document.querySelector("#smdOpdEmr .oe-canvas"); if (c) c.scrollTop = v || 0; } catch (e) {} }
@@ -1315,7 +1407,7 @@
       if (mine !== st || st.protoOpenId !== id) return; st.protoDocErr = "This protocol could not be loaded. Check your connection and try again."; paint();
     });
   }
-  function closeKbProtocol() { st.protoOpenId = ""; st.protoDoc = null; st.protoDocErr = ""; paint(); canvasTop(st.protoListScroll); }
+  function closeKbProtocol() { st.protoOpenId = ""; st.protoDoc = null; st.protoDocErr = ""; st.protoAssign = null; paint(); canvasTop(st.protoListScroll); }
   function assignProtocol(id) {
     var p = (st.oncoProtocols || []).filter(function (x) { return String(x.id) === String(id); })[0];
     if (!p) { toast("Protocol not found."); return; }
@@ -1393,7 +1485,8 @@
       toast("Added to " + kitHost.fieldLabel(field) + (n ? " and " + n + " more field" + (n > 1 ? "s" : "") : "") + ". Save the assessment to keep it.");
     },
     repaint: function () { if (st.tab === "kit") paint(); },
-    protocol: function (id) { st._protoInit = true; st.tab = "protocol"; paint(); openKbProtocol(id); },
+    protocol: function (id, opts) { st._protoInit = true; st.tab = "protocol"; paint(); if (opts && opts.assign && protoAssignOn()) openProtoAssign(id); else openKbProtocol(id); },
+    canAssignProtocol: function () { return protoAssignOn(); },
     // Calculators render in the MEDCALC overlay (z 870), under this overlay (12010): lift it for the
     // rest of this consult (html.oe-kit-calc in specialty-kits.css; removed by close()).
     calculator: function (id) { if (!(G.MEDCALC && G.MEDCALC.open)) { toast("Calculators are not available."); return; } document.documentElement.classList.add("oe-kit-calc"); G.MEDCALC.open(id); },
@@ -1454,7 +1547,7 @@
   function toast(m) { try { (G.toast || G.SMD_toast) && (G.toast || G.SMD_toast)(m); } catch (e) {} }
   function root() { var el = document.getElementById("smdOpdEmr"); if (!el) { el = document.createElement("div"); el.id = "smdOpdEmr"; document.body.appendChild(el); } return el; }
   var st = freshState();
-  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, hospitalId: "", labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null, scribeFilledFields: [], scribeGround: null, scribeOfflineDraft: false, scribeReview: {}, scribeDrugFixes: [], scribeDrugFixUndone: {}, scribeDrugFixSrc: "", scribeRx: null, scribeSafety: null, scribeIcd: null, scribeSpeakerFix: {}, scribeDraft: null, fieldMic: null, savedConsult: false, dictatedInv: [], voiceTranscript: "", voiceTranscriptEn: "", notesView: "raw", _notesSavedText: "", oncoPlan: null, doseDrawer: null, oncoProtocols: [], oncoProtocolsLoaded: false, oncoProtocolsReady: false, protoQuery: "", protoBasis: "all", protoBranch: "all", protoOncoType: "", protoOpenId: "", protoDoc: null, protoDocErr: "", protoListScroll: 0, kbpIndex: null, kbpLoading: false, kbpError: false, oncoDraft: null, oncoOverrideDraft: {}, oncoView: "doctor", oncoCycle: null, oncoAdminDraft: {}, oncoClearanceDraft: {} }; }
+  function freshState() { return { loading: true, error: "", tab: "profile", writeOn: false, patient: {}, hospitalId: "", labs: [], radiology: [], medications: [], phone: "", invQuery: "", invResults: [], invDraft: {}, medQuery: "", medResults: [], medDraft: {}, assessLoaded: false, assessLoading: false, assessErr: "", assessVals: {}, report: null, scribeSuggestions: null, scribeStats: null, scribeFilledFields: [], scribeGround: null, scribeOfflineDraft: false, scribeReview: {}, scribeDrugFixes: [], scribeDrugFixUndone: {}, scribeDrugFixSrc: "", scribeRx: null, scribeSafety: null, scribeIcd: null, scribeSpeakerFix: {}, scribeDraft: null, fieldMic: null, savedConsult: false, dictatedInv: [], voiceTranscript: "", voiceTranscriptEn: "", notesView: "raw", _notesSavedText: "", oncoPlan: null, doseDrawer: null, oncoProtocols: [], oncoProtocolsLoaded: false, oncoProtocolsReady: false, protoQuery: "", protoBasis: "all", protoBranch: "all", protoOncoType: "", protoOpenId: "", protoDoc: null, protoDocErr: "", protoAssign: null, protoListScroll: 0, kbpIndex: null, kbpLoading: false, kbpError: false, oncoDraft: null, oncoOverrideDraft: {}, oncoView: "doctor", oncoCycle: null, oncoAdminDraft: {}, oncoClearanceDraft: {} }; }
   /* Keep the scroll position across a repaint.
    *
    * Every action in a consultation repaints the whole overlay with one innerHTML swap, and the new
@@ -1760,6 +1853,7 @@
     var el = e.target, inp = el.getAttribute && el.getAttribute("data-oe-inp"); if (!inp) return;
     if (inp === "proto-q") { st.protoQuery = el.value; renderProtoOut(); return; }   // local filter, no network, keep focus
     if (inp === "proto-type") { st.protoOncoType = el.value; renderProtoOut(); return; }
+    if (inp === "scribe-spec") return setScribeSpecialty(el.value);
     if (inp === "inv-q") { st.invQuery = el.value; scheduleSearch("inv"); return; }
     if (inp === "med-q") { st.medQuery = el.value; scheduleSearch("med"); return; }
     if (inp === "notes") { st.voiceTranscript = el.value; _lastFullTranscript = el.value; return; }   // doctor edits the clinical-notes transcript after Stop
@@ -1917,6 +2011,13 @@
     if (cmd === "proto-assign") return assignProtocol(arg);
     if (cmd === "proto-open") return openKbProtocol(arg);
     if (cmd === "proto-close") return closeKbProtocol();
+    if (cmd === "proto-as-open") return openProtoAssign(arg);
+    if (cmd === "proto-as-line") return toggleProtoAssignLine(arg);
+    if (cmd === "proto-as-all") return bulkProtoAssign(true);
+    if (cmd === "proto-as-none") return bulkProtoAssign(false);
+    if (cmd === "proto-as-reset") return bulkProtoAssign(null);
+    if (cmd === "proto-as-cancel") { st.protoAssign = null; paint(); return; }
+    if (cmd === "proto-as-apply") return applyProtoAssign();
     if (cmd === "proto-basis") { st.protoBasis = arg || "all"; if (st.protoBasis === "india" && st.protoBranch === "oncology") { st.protoBranch = "all"; st.protoOncoType = ""; } paint(); return; }
     if (cmd === "proto-branch") { st.protoBranch = arg || "all"; if (st.protoBranch !== "oncology") st.protoOncoType = ""; paint(); return; }
     if (cmd === "onco-apply") return oncoApply(arg);
@@ -2071,10 +2172,14 @@
   // Receive a protocol chosen in OncoTree and stage its dose PREVIEW for the open patient. No activation:
   // oncoApply only computes + stages a draft; the create/confirm gate + server QUEUE_ONCO_WRITE still own
   // activation. Guarded so a stray event with no patient profile open (e.g. OncoTree from Home) is ignored.
+  // Every bail used to be SILENT, so "Continue in treatment workflow" looked like it did nothing
+  // (owner, 2026-09-26: "not able to assign a protocol via oncotree"). Each one now says why; the
+  // gates themselves are unchanged.
   function receiveOncoTreeProtocol(detail) {
     if (!detail || !detail.protocolId) return;
-    if (!oncoFlagOn() || !st.writeOn) return;                                // engine off / read-only session
-    if (!st.patient || !(st.patient.mrn || st.patient.name)) return;         // no patient profile open
+    if (!st.patient || !(st.patient.mrn || st.patient.name)) return;         // OncoTree opened from Home: nothing to stage here
+    if (!oncoFlagOn()) { toast("Oncology protocols are not enabled for this account."); return; }
+    if (!st.writeOn) { toast("Open the patient in write mode to bring a regimen into this chart."); return; }
     // Patient-switch race guard (R1): if the event names a patient, it must be the one open now, so a
     // stale/duplicate event after a switch can never stage protocol-for-A onto patient B.
     if (detail.patient && detail.patient.patientId && st.patient.mrn && detail.patient.patientId !== st.patient.mrn) return;
@@ -2082,14 +2187,20 @@
     var have = (st.oncoProtocols || []).some(function (p) { return p && p.id === id; });
     if (!have && detail.template && oncoUsable(detail.template)) st.oncoProtocols = (st.oncoProtocols || []).concat([detail.template]);
     st.tab = "assess";
-    oncoApply(id);   // paints the review panel with computed doses (or no-ops if the protocol isn't usable)
+    if (oncoApply(id)) return;   // paints the review panel with the computed doses
+    var t = detail.template || (st.oncoProtocols || []).filter(function (p) { return p && p.id === id; })[0];
+    var name = (t && (t.name || t.id)) || "That regimen";
+    paint();
+    toast(t && !oncoUsable(t)
+      ? name + " is not an active regimen yet, so it cannot be assigned from here."
+      : name + " could not be loaded into this chart. Open it from the Protocol tab instead.");
   }
   // Apply an ACTIVE protocol: snapshot params from the EMR already in state (Height/Weight -> BSA;
   // age/creatinine not yet captured on this form - never-invent, the dose engine warns instead of
   // guessing), compute the lineage, and STAGE it. Purely local - no fetch, no write.
   function oncoApply(protocolId) {
     var proto = (st.oncoProtocols || []).filter(function (p) { return p && p.id === protocolId && oncoUsable(p); })[0];
-    if (!proto) return;   // defensive - only active (or experimental-when-flagged) protocols are ever offered
+    if (!proto) return false;   // defensive - only active (or experimental-when-flagged) protocols are ever offered
     var v = st.assessVals || {};
     var height = parseFloat(v.Height), weight = parseFloat(v.Weight);
     var params = {
@@ -2102,6 +2213,7 @@
     st.oncoDraft = { protocolId: proto.id, template: proto, params: params, intent: (proto.intentOptions && proto.intentOptions[0]) || "", calculatedDoses: calculatedDoses, overrides: [] };
     st.oncoOverrideDraft = {};
     paint();
+    return true;
   }
   // Save a typed override for one drug line. Override-needs-reason is enforced by SMD_ONCOUI._stageOverride
   // (mirrors the server's _recordOverride) - a reasonless save is rejected and toasted, never staged.
@@ -4596,14 +4708,18 @@
   }
   // The picker itself, on the MaiK Scribe panel head. Buttons (not a select) to match the language
   // toggle beside it; the current choice is the only pressed one.
+  // ONE line, not the 20-chip grid it used to be (owner, 2026-09-26: the grid filled the first screen
+  // of the consult and pushed the mic and the note below the fold). Same choice, same storage key, and
+  // picking a kit on the Specialty tab still sets it (kitHost.setScribe), so the two stay in step.
   function specialtyPicker() {
     if (!scribeClinicalOn() || !(G.SMD_SCRIBETPL && G.SMD_SCRIBETPL.list)) return "";
     var cur = scribeSpecialtyId() || (G.SMD_SCRIBETPL.DEFAULT_ID || "general");
     var list = G.SMD_SCRIBETPL.list() || [];
     if (!list.length) return "";
-    return '<div class="oe-vc-spec" role="group" aria-label="Consultation specialty">' + list.map(function (t) {
-      return '<button class="oe-vc-specb' + (t.id === cur ? " on" : "") + '" data-oe-act="scribe-spec:' + esc(t.id) + '" aria-pressed="' + (t.id === cur) + '" title="' + esc(t.description || "") + '">' + esc(t.label) + "</button>";
-    }).join("") + "</div>";
+    return '<div class="oe-vc-spec1"><span>Listening as</span><select class="oe-vc-spec1s" data-oe-inp="scribe-spec" aria-label="Consultation specialty">' +
+      list.map(function (t) {
+        return '<option value="' + esc(t.id) + '"' + (t.id === cur ? " selected" : "") + ' title="' + esc(t.description || "") + '">' + esc(t.label) + "</option>";
+      }).join("") + "</select>" + (kitsOn() ? '<button type="button" class="oe-vc-spec1k" data-oe-act="tab:kit" title="Open the Specialty tab">' + ms("stethoscope") + "Kit</button>" : "") + "</div>";
   }
   // The review panel's "this specialty expects these" prompt. Never fills anything in.
   function specialtyMissingHtml(st) {
@@ -4810,6 +4926,8 @@
     "stt-unavailable": "On-device dictation is not available on this build.",
     "clinical-unavailable": "Clinical dictation is not ready on this device.",
     "transcription-failed": "Could not transcribe that - try again.",
+    "stt-fallback-exhausted": "Your dictation credits are used up. Top up, or use Clinical dictation on the phone.",
+    "stt-fallback-signin": "Sign in and verify your mobile number to use cloud dictation.",
     "speech-error": "Dictation stopped - try again.",
   };
   // Human label for the field being dictated ("BP systolic"), so the strip says what it is filling.

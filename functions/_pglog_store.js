@@ -163,6 +163,8 @@ export async function enrolResident(env, orgId, body, actorUid, deps) {
   const rec = Object.assign({}, f, { guideKey: sanitize(orgId) + "|" + norm(f.guide), orgScope: sanitize(orgId) });
   await d.fsCommit(env, [d.wUpdate(env, COL.resident + "/" + id, rec)]);
   await audit(env, orgId, actorUid, "pglog:resident:enrol", prog.specialtyId + " y" + f.trainingYear, deps);
+  // Entries submitted before this resident had a guide now reach one.
+  if (f.guide) { try { await routeUnassignedTo(env, id, f.guide, deps); } catch (e) {} }
   return f;
 }
 export async function getResident(env, id, deps) {
@@ -198,6 +200,9 @@ export async function updateResident(env, id, patch, actorUid, deps) {
   const rec = Object.assign({}, f, { guideKey: sanitize(cur.orgId) + "|" + norm(f.guide), orgScope: sanitize(cur.orgId) });
   await d.fsCommit(env, [d.wUpdate(env, COL.resident + "/" + sanitize(id), rec)]);
   await audit(env, cur.orgId, actorUid, "pglog:resident:update", id, deps);
+  if (f.guide && norm(f.guide) !== norm(cur.guide)) {
+    try { await routeUnassignedTo(env, cur.id, f.guide, deps); } catch (e) {}
+  }
   return f;
 }
 
@@ -246,17 +251,28 @@ export async function updateRotation(env, id, patch, actorUid, deps) {
 // The denormalised keys a write must maintain. `pendingFor` is what makes a faculty member's
 // "awaiting my verification" list a single-field query; it is set on submit and CLEARED on
 // verify/return, so a stale entry can never linger in someone's queue.
-function entryKeys(e, orgId) {
+/* A submitted entry with NO named supervisor (PGLOG_SUPERVISOR_FALLBACK, see submitEntry) still has
+ * to land in SOMEBODY's queue, or it is the orphan the roster resolution below exists to prevent.
+ * It goes to the resident's guide when they have one, otherwise to the org-wide "unassigned" key an
+ * HoD's queue reads (pendingUnassigned). Assigning a guide later moves it (routeUnassignedTo). */
+function unassignedKey(orgId) { return "unassigned|" + sanitize(orgId); }
+function entryKeys(e, orgId, routeTo) {
   return {
     orgScope: sanitize(orgId),
     deptScope: sanitize(orgId) + "|" + sanitize(e.departmentId),
-    pendingFor: e.status === "submitted" ? norm(e.supervisor) : "",
+    pendingFor: e.status === "submitted" ? (norm(e.supervisor) || routeTo || unassignedKey(orgId)) : "",
     monthKey: M.monthKey(e.occurredAt)
   };
 }
 async function writeEntry(env, e, orgId, deps, opts) {
   const d = D(deps);
-  const rec = Object.assign({}, e, entryKeys(e, orgId));
+  let routeTo = (opts && opts.routeTo) || "";
+  // Only the rare "submitted with nobody named" case pays for the resident read.
+  if (!routeTo && e.status === "submitted" && !norm(e.supervisor)) {
+    const res = await getResident(env, e.residentId, deps).catch(() => null);
+    routeTo = res && res.guide ? norm(res.guide) : "";
+  }
+  const rec = Object.assign({}, e, entryKeys(e, orgId, routeTo));
   const path = COL.entry + "/" + sanitize(e.id);
   await d.fsCommit(env, [(opts && opts.create) ? d.wCreate(env, path, rec) : d.wUpdate(env, path, rec)]);
   return e;
@@ -398,25 +414,55 @@ export async function submitEntry(env, id, actorUid, deps) {
   if (!cur) throw e404("entry");
   if (norm(cur.createdBy) !== norm(actorUid)) throw e403("not_own_record");
   const ctx = await entryContext(env, cur.residentId, deps);
+  // Validation runs FIRST and on the entry as written. That keeps the MS / M.Ch rule intact: a
+  // procedure entry from those degrees must NAME its supervising consultant, and the guide fallback
+  // below never satisfies that on the resident's behalf (it would claim the guide supervised a
+  // procedure they may not have been in theatre for).
   const v = M.validateEntry(cur, ctx);
   if (!v.ok) throw Object.assign(e400("validation"), { errors: v.errors });
+
+  /* PGLOG_SUPERVISOR_FALLBACK (default ON; "0" restores the old refusal).
+   * NMC asks for no named supervisor per entry: PGMER-2023 5.2(vii) has the logbook authenticated
+   * monthly by the GUIDE. Refusing a blank supervisor stopped residents logging at all. So:
+   *   blank supervisor -> the resident's guide;
+   *   no guide either  -> accepted with no supervisor, queued for "whoever is responsible": the guide
+   *                       once one is assigned (routeUnassignedTo), meanwhile an HoD of the
+   *                       programme (pendingUnassigned). requireNamedFor() already lets exactly those
+   *                       people sign it, and nobody else.
+   * A supervisor that was TYPED and does not resolve is still refused: that is a named person we
+   * cannot find, and silently re-routing it would put words in the resident's mouth. */
+  const fallback = String((env && env.PGLOG_SUPERVISOR_FALLBACK) || "") !== "0";
+  const typed = String(cur.supervisor || "").trim();
+  const guide = String((ctx.resident && ctx.resident.guide) || "").trim();
+  const wanted = typed || (fallback ? guide : "");
   // Resolve BEFORE stamping submitted, so an unresolvable supervisor is a refusal the resident sees
   // rather than an entry that quietly reaches nobody.
-  const resolved = await resolveSupervisor(env, cur.orgId, cur.supervisor, ctx.resident, deps);
-  if (!resolved) {
+  const resolved = wanted ? await resolveSupervisor(env, cur.orgId, wanted, ctx.resident, deps) : "";
+  const unassigned = !resolved && !typed && fallback && !guide;
+  if (!resolved && !unassigned) {
     // NOTE: userMessage, not message. The router's fail() maps a known error by e.message, so
     // overwriting it here would both break that mapping and hide the error code from callers.
     throw Object.assign(e400("supervisor_unresolved"), {
       detail: cur.supervisor,
-      userMessage: "That supervisor is not on your department's faculty list, so nobody would " +
-        "receive this entry to verify. Pick your guide or a listed faculty member."
+      userMessage: typed
+        ? "That supervisor is not on your department's faculty list, so nobody would " +
+          "receive this entry to verify. Pick your guide or a listed faculty member."
+        : "Name the faculty member who should verify this entry."
     });
   }
-  const out = M.submit(Object.assign({}, cur, { supervisor: resolved }), actorUid, d.now());
-  await writeEntry(env, out, cur.orgId, deps);
-  await audit(env, cur.orgId, actorUid, "pglog:entry:submit", cur.kind, deps);
-  await notify(env, { to: resolved, orgId: cur.orgId, kind: "verify_pending", entryId: id,
-    residentId: cur.residentId, text: "A logbook entry is awaiting your verification." }, deps);
+  const out = M.submit(Object.assign({}, cur, { supervisor: resolved || "" }), actorUid, d.now());
+  await writeEntry(env, out, cur.orgId, deps, unassigned ? { routeTo: unassignedKey(cur.orgId) } : null);
+  await audit(env, cur.orgId, actorUid, "pglog:entry:submit", cur.kind + (unassigned ? " unassigned" : ""), deps);
+  if (resolved) {
+    await notify(env, { to: resolved, orgId: cur.orgId, kind: "verify_pending", entryId: id,
+      residentId: cur.residentId, text: "A logbook entry is awaiting your verification." }, deps);
+  } else {
+    await notifyHods(env, cur.orgId, cur.departmentId || (ctx.resident && ctx.resident.departmentId), {
+      kind: "verify_pending_unassigned", entryId: id, residentId: cur.residentId,
+      text: "A resident with no guide assigned submitted a logbook entry. Assign a guide or verify it." }, deps);
+  }
+  // How it was routed, for the response only (set after the write, so it is never persisted).
+  out.routing = unassigned ? "unassigned" : (typed ? "supervisor" : "guide");
   return out;
 }
 
@@ -565,6 +611,108 @@ export async function pendingForFaculty(env, orgId, identity, deps) {
   return r.map((x) => withSignature(M.entry(withId(x.id, x.fields)), x.fields))
     .filter((x) => !x.deleted && x.status === "submitted" && x.orgId === sanitize(orgId))
     .sort((a, b) => (a.submittedAt || 0) - (b.submittedAt || 0));
+}
+
+/* Submitted entries nobody is named on (no supervisor, no guide at submit time). An HoD's queue
+ * reads these so they are never orphaned; `departments` is the HoD's recorded scope, where an empty
+ * list means whole-org exactly as it does everywhere else in the app. */
+export async function pendingUnassigned(env, orgId, departments, deps) {
+  const d = D(deps);
+  const scope = departments || [];
+  const r = await d.fsQuery(env, COL.entry, { where: { field: "pendingFor", value: unassignedKey(orgId) }, limit: 500 });
+  return r.map((x) => withSignature(M.entry(withId(x.id, x.fields)), x.fields))
+    .filter((x) => !x.deleted && x.status === "submitted" && x.orgId === sanitize(orgId) && !norm(x.supervisor))
+    .filter((x) => !scope.length || !x.departmentId || scope.indexOf(x.departmentId) > -1)
+    .sort((a, b) => (a.submittedAt || 0) - (b.submittedAt || 0));
+}
+
+/* A guide was just assigned: move this resident's unassigned submitted entries into their queue.
+ * The entry's `supervisor` is NOT rewritten - the record truthfully says nobody was named - only the
+ * queue key moves. requireNamedFor() lets the guide sign it through resident.guide. */
+export async function routeUnassignedTo(env, residentId, guide, deps) {
+  const d = D(deps);
+  const to = norm(guide);
+  if (!to) return 0;
+  const rows = (await listEntries(env, residentId, { status: "submitted" }, deps)).filter((e) => !norm(e.supervisor));
+  if (!rows.length) return 0;
+  for (let i = 0; i < rows.length; i += 400) {
+    const writes = rows.slice(i, i + 400).map((e) => d.wUpdate(env, COL.entry + "/" + sanitize(e.id), { pendingFor: to }));
+    await d.fsCommit(env, writes);
+  }
+  const res = await getResident(env, residentId, deps).catch(() => null);
+  await notify(env, { to: guide, orgId: (res && res.orgId) || rows[0].orgId, kind: "verify_pending",
+    residentId, text: rows.length + " logbook entr" + (rows.length === 1 ? "y is" : "ies are") +
+      " awaiting your verification." }, deps);
+  return rows.length;
+}
+
+// Tell the heads of department who cover `departmentId` (best-effort, capped).
+async function notifyHods(env, orgId, departmentId, n, deps) {
+  let members = [];
+  try { members = await (deps && deps.listMembers ? deps.listMembers : listMembers)(env, orgId); } catch (e) { return 0; }
+  const hods = (members || []).filter((m) => m && m.active !== false && m.role === "pg_hod")
+    .filter((m) => {
+      const s = (m.scope && m.scope.departments) || [];
+      return !s.length || !departmentId || s.indexOf(departmentId) > -1;
+    }).slice(0, 5);
+  for (const h of hods) await notify(env, Object.assign({ to: h.identity, orgId }, n), deps);
+  return hods.length;
+}
+
+/* ── display names (never email / phone) ────────────────────────────────────
+ * A roster of opaque uids is unusable: a resident cannot pick "fb:9f2c..." as their supervisor. The
+ * name comes from, in order: the org's own staff registry (q_members.displayName), then the name the
+ * person carries in their StewardMD profile, cached here by rememberName() when they open the
+ * module (membership identities are lower-cased, and a Firebase uid is case-sensitive, so the
+ * profile cannot be read from the roster identity directly). Anything that looks like an email, a
+ * phone number or a uid is dropped rather than shown. */
+const NAME_COL = "pg_names";
+export function cleanName(v) {
+  const x = String(v == null ? "" : v).replace(/[\u0000-\u001f]/g, " ").trim().slice(0, 80);
+  if (!x) return "";
+  if (/@/.test(x) || /^\+?[\d\s().-]{7,}$/.test(x) || /^(fb|cfa|ghis|uid):/i.test(x)) return "";
+  return x;
+}
+export async function rememberName(env, actorUid, name, deps) {
+  const d = D(deps);
+  const n = cleanName(name);
+  const key = sanitize(norm(actorUid));
+  if (!n || !key) return false;
+  try {
+    const cur = await d.fsGet(env, NAME_COL + "/" + key);
+    if (cur && cur.fields && cur.fields.name === n) return false;
+    await d.fsCommit(env, [d.wUpdate(env, NAME_COL + "/" + key, { name: n, at: d.now() })]);
+    return true;
+  } catch (e) { return false; }
+}
+export async function nameFor(env, identity, member, deps) {
+  const d = D(deps);
+  const own = cleanName(member && member.displayName);
+  if (own) return own;
+  try {
+    const doc = await d.fsGet(env, NAME_COL + "/" + sanitize(norm(identity)));
+    return cleanName(doc && doc.fields && doc.fields.name);
+  } catch (e) { return ""; }
+}
+// The faculty roster WITH names, for a picker. identity + role + name, never email or phone.
+export async function facultyRosterNamed(env, orgId, deps) {
+  const members = await (deps && deps.listMembers ? deps.listMembers : listMembers)(env, orgId);
+  const out = [];
+  for (const m of (members || [])) {
+    if (!m || m.active === false || !can(m.role, CAPS.PGLOG_VERIFY)) continue;
+    out.push({ identity: m.identity, role: m.role, name: await nameFor(env, m.identity, m, deps),
+               departments: (m.scope && m.scope.departments) || [] });
+  }
+  return out.sort((a, b) => String(a.name || "~").localeCompare(String(b.name || "~")));
+}
+// residentId -> the enrolled name, for a verification queue that otherwise shows only ids.
+export async function residentNames(env, ids, deps) {
+  const out = {};
+  for (const id of Array.from(new Set((ids || []).filter(Boolean)))) {
+    const r = await getResident(env, id, deps).catch(() => null);
+    out[id] = (r && cleanName(r.name)) || "";
+  }
+  return out;
 }
 
 export async function listEntriesForScope(env, orgId, opts, deps) {
@@ -1213,4 +1361,4 @@ export function audienceFor(role, actorUid, entry, resident) {
 // unavailable, never as the gate — the gate is signerSnapshot() throwing on the write path.
 export async function signerStatus(env, actorUid, deps) { return canSign(env, actorUid, deps); }
 
-export { COL, norm, residentId };
+export { COL, norm, residentId, unassignedKey, sanitize };

@@ -15,11 +15,12 @@ import { verifyFirebaseToken } from "./_fbauth.js";
 // `tierRoles`  = a tier admitted only for certain roles (a Trainee gets Ward Sync only as a resident).
 // Entries with none of these keep the legacy defaultOn/defaultRoles behaviour untouched.
 // Inert unless ROLE_GATES_ON=1 — see featureAllowed().
-const PAID_TIERS = ["trainee", "coresident", "pro", "physician", "physicianpro"];
-const ATTENDING_TIERS = ["physician", "physicianpro"];
+// "ultimate" = everything, for the owner's friends and testers (2026-09-26); never sold.
+const PAID_TIERS = ["trainee", "coresident", "pro", "physician", "physicianpro", "ultimate"];
+const ATTENDING_TIERS = ["physician", "physicianpro", "ultimate"];
 const ALL_TIERS = ["free"].concat(PAID_TIERS);
 // Imaging AI is never refused, only rationed. Defaults here; env IMAGING_CAP_<TIER> overrides.
-const IMAGING_CAPS = { free: 2, trainee: 4, coresident: 4, pro: 10, physician: 10, physicianpro: 20 };
+const IMAGING_CAPS = { free: 2, trainee: 4, coresident: 4, pro: 10, physician: 10, physicianpro: 20, ultimate: 50 };
 export const ONCO_TRIAL_DAYS = 3;
 
 export const FEATURE_REGISTRY = [
@@ -29,10 +30,10 @@ export const FEATURE_REGISTRY = [
   { key: "sknx_cloud",       label: "SknX cloud classifier (secure-egress proxy)", defaultOn: true },
   { key: "kardiox_ecg19",    label: "KardioX 19-class ECG model",        defaultRoles: [] },
   { key: "scribe_dictation", label: "MaiK Scribe clinical dictation",    defaultRoles: ["physician", "resident"] },
-  { key: "lab_watch",        label: "Apple Watch Lab Watch sync",        defaultRoles: ["physician", "resident", "student"], tiers: ["pro", "physician", "physicianpro"] },
+  { key: "lab_watch",        label: "Apple Watch Lab Watch sync",        defaultRoles: ["physician", "resident", "student"], tiers: ["pro", "physician", "physicianpro", "ultimate"] },
   { key: "case_sync",        label: "Cross-device case sync",            defaultOn: true, tiers: PAID_TIERS },
   { key: "ward_sync",        label: "Ward Sync / ICU collaboration",     defaultRoles: ["physician", "resident"],
-    tiers: ["coresident", "pro", "physician", "physicianpro"], tierRoles: { trainee: ["resident"] } },
+    tiers: ["coresident", "pro", "physician", "physicianpro", "ultimate"], tierRoles: { trainee: ["resident"] } },
   { key: "fundx",            label: "FundX module",   defaultRoles: [], experimental: true },
   { key: "kardiox",          label: "KardioX module", defaultRoles: [], experimental: true },
   { key: "thorex",           label: "ThoreX module",  defaultRoles: [], experimental: true },
@@ -40,11 +41,14 @@ export const FEATURE_REGISTRY = [
   // Ladder features (matrix-gated; live only under ROLE_GATES_ON)
   { key: "clinix_all",       label: "CliniX full library",              tiers: PAID_TIERS },
   { key: "local_ai",         label: "On-device MaiK",                   tiers: ALL_TIERS },   // free for every user (owner, 2026-09-20)
-  { key: "pglog",            label: "NMC PG logbook",                   tiers: ["trainee", "coresident"], roles: ["intern", "resident"] },
-  { key: "scribe",           label: "MaiK Scribe",                      tiers: ATTENDING_TIERS },
+  // PGMER-2023 logbook is PG ONLY (interns out) and belongs to the resident plans, Resident Pro (tier
+  // "pro") included (audit finding 5, 2026-09-26). The verified PG role is still required on top.
+  { key: "pglog",            label: "NMC PG logbook",                   tiers: ["coresident", "pro", "ultimate"], roles: ["resident", "co_resident"] },
+  // Resident Pro includes Scribe (ward / discharge dictation), vault/Role-Tiers.md section 2.
+  { key: "scribe",           label: "MaiK Scribe",                      tiers: ["pro"].concat(ATTENDING_TIERS) },
   { key: "followcare",       label: "FollowCare",                       tiers: ATTENDING_TIERS },
   { key: "opd_clinic",       label: "OPD queue / billing / clinic EMR", tiers: ATTENDING_TIERS },
-  { key: "clinic_hosted",    label: "Hosted clinic (we hold the PHI)",  tiers: ["physicianpro"] },
+  { key: "clinic_hosted",    label: "Hosted clinic (we hold the PHI)",  tiers: ["physicianpro", "ultimate"] },
   { key: "imaging_ai",       label: "Imaging AI (per-day capped)",      tiers: ALL_TIERS },
   { key: "onco_ai",          label: "Oncology AI extras (add-on/trial)", addon: "onco", trialDays: ONCO_TRIAL_DAYS }
 ];
@@ -59,14 +63,14 @@ function envDefaultOn(env, key) { return String((env && env[envKey(key) + "_DEFA
 // ---- Matrix resolvers (pure) ----
 export function roleGatesOn(env) { return String((env && env.ROLE_GATES_ON) || "") === "1"; }
 
-/* Physician Pro (Rs 899/mo) includes EARLY ACCESS to the four experimental imaging modules — no
+/* Physician Pro (Clinician Pro) and Ultimate include EARLY ACCESS to the four experimental imaging modules — no
  * access code needed (owner decision 2026-09-18). GRANT-ONLY: it never denies, so every other tier
  * keeps exactly today's behaviour (the checkActive access-code path in requireFeature). Listed
  * explicitly rather than derived from `experimental: true` because the paid sub-keys (thorex_llm,
  * sknx_cloud, kardiox_ecg19 ...) are separate registry entries with their own legacy defaults.
  * EARLY ACCESS IS NOT VALIDATION: these models are unvalidated (docs/fundx/VALIDATION-PROGRAM.md)
  * and every surface reached this way must still render its beta/experimental labelling. */
-const EARLY_ACCESS_TIERS = ["physicianpro"];
+const EARLY_ACCESS_TIERS = ["physicianpro", "ultimate"];
 export const EARLY_ACCESS_KEYS = [
   "thorex", "thorex_llm", "thorex_backend",
   "kardiox", "kardiox_ecg19",
@@ -121,13 +125,32 @@ export function featureAllowed(env, record, key, role, now) {
   const entry = registryEntry(key);
   if (!entry) return false;
   if (envDefaultOn(env, key)) return true;   // ops escape hatch, above the matrix
+  // Clinician Pro + Ultimate open the beta imaging AI without an access code (owner, 2026-09-26). It is
+  // GRANT-ONLY (never denies anyone), so it no longer waits for ROLE_GATES_ON: until now the promise on
+  // the paywall was only kept once the whole matrix was switched on.
+  if (earlyAccessAllows(key, effectiveTierFor(record, now))) return true;
   if (roleGatesOn(env)) {
-    if (earlyAccessAllows(key, effectiveTierFor(record, now))) return true;   // grant-only, never denies
     const m = matrixVerdict(record, key, role, now); if (m !== null) return m;
   }
   if (entry.defaultOn) return true;
   const roles = envRoles(env, key) || entry.defaultRoles || [];
   return roles.indexOf(role) >= 0;
+}
+
+/* Server twin of the client's plan early access (owner 2026-09-26): an account on Clinician Pro or
+ * Ultimate passes the beta-imaging gate without an X-XA-Token. Used by each module's betaGate when
+ * EXPERIMENTAL_ENFORCE_<MODULE>="1", so enforcing the access codes can never lock out the plan that was
+ * sold with early access. Grant-only, fails closed (false) on any error. deps: uid, getEntitlement,
+ * verifyFirebaseToken. */
+export async function planEarlyAccess(env, request, key, deps) {
+  deps = deps || {};
+  try {
+    let uid = deps.uid || null;
+    if (!uid) uid = await (deps.verifyFirebaseToken || verifyFirebaseToken)(bearer(request), env);
+    if (!uid) return false;
+    const rec = await (deps.getEntitlement || getEntitlement)(env, uid, deps);
+    return earlyAccessAllows(key, effectiveTierFor(rec));
+  } catch (e) { return false; }
 }
 
 function bearer(request) { try { return (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, ""); } catch (e) { return ""; } }

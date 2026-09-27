@@ -122,6 +122,14 @@ On the NATIVE app there is no address bar, so the query param is unreachable —
 A reinstall clears `localStorage`, so an override does NOT survive one: after a reinstall the
 default (ON) is what you get.
 
+## Cloud dictation fallback credit (server env), ON since 2026-09-26
+| Switch | Def | Why |
+|---|---|---|
+| `STT_FALLBACK_CREDITS_ON` | **ON** (`"0"` = off) | Owner: the cloud speech-to-text fallback (`/api/ai/transcribe`, used only when the phone cannot transcribe) spends **dictation credits**, never shown in rupees (1 credit = 10 paise of our cost): Free 100 a month (mobile-verified only), Pro accounts 500, Clinician / Clinician Pro / Ultimate 1,000, then bought packs `dict.300` (Rs 199) / `dict.1000` (Rs 699). `functions/_stt_fallback.js` + the `dict` meter in `functions/_quota.js`. Sizes: `DICT_CREDITS_FREE/PRO/CLINICIAN`. Settable in env or KV `billing:cfg.flags`. |
+| `PACKS_V2_FROM` | 2026-12-26 IST | From this date the MaiK Token packs hold 10k / 40k / 100k MT at the same Rs 49 / 199 / 499 (was 50k / 250k / 750k, the Power pack lost money on iOS). Introductory sizes until then. `tokenPacks()` in `functions/api/billing/[[path]].js`. |
+| `smd_pglog_easy` | ON (`"0"` = old UI) | eLogbook easy mode (2026-09-26): sign-in for signed-out users, join request by college code, log before linking, guide name chip, Today/Yesterday, Log again, batch "Verify selected" then Authenticate, jargon behind "Why is this required?". Server twins: `PGLOG_SUPERVISOR_FALLBACK`, `PGLOG_INVITES`, `PGLOG_JOIN_REQUESTS` (env, default ON). |
+| `smd_role_gates` (localStorage) | ON (`"0"` = off) | Role box: Home tools locked by the user's role (`role-features.js`). Presentation only; real gates stay server-side. |
+
 ## Everything, by module
 
 ### CliniX  <sub>5 ON · 2 OFF</sub>
@@ -197,6 +205,7 @@ default (ON) is what you get.
 | Flag | Def | Why |
 |---|---|---|
 | `smd_kb_protocols` | **ON** | The Protocols tab in the Knowledge Library + the Protocols category in Universal Search. Additive: off removes the tab, nothing else changes. Content is `ai_drafted` pending clinical review and every screen says so. Force off per device with `?kbproto=0`. See [[Clinical Protocols]]. |
+| `smd_protocol_assign` | **ON** | Assign a clinical protocol to the open patient: tick its instructions and they are appended to the case sheet (Management plan, lifestyle lines to Diet & lifestyle advice) as editable text, with a timeline note. Write-safe: the doctor ticks every line and the normal Save is what keeps it; nothing is prescribed or ordered. Off leaves protocols read-only reference. Force off per device with `?protoassign=0`. See [[Clinical Protocols]]. |
 | `smd_abg_v2` | **ON** | [[Antibiogram]] screen v2: Resistance (validated sources, specimen and setting strata, pooled India and regions, WISCA), Sources (census) and My hospital (device-local import). Off (`?abg2=0` or `smd_abg_v2 = "0"`) restores the previous resistance view, which reads the same validated data; the console and reasoning use the new data either way. Registry: `antibiogram-flags.js`. |
 
 ### Specialty Kits  <sub>1 ON · 0 OFF</sub>  <small>(added 2026-09-25)</small>
@@ -319,6 +328,7 @@ Set in Cloudflare (env or the billing-cfg KV, which wins). These are not `localS
 | Flag | Def | Why |
 |---|---|---|
 | `VERIFY_REQUIRED_FOR_PRO` | **ON** | Pro requires a verified NMC/SMC registration (`_entitlement.js` `isPro`). Set `0` to restore the pre-2026-08-27 launch-promo free-for-all with no deploy; `test/entitlement-trial.test.mjs` pins that path. |
+| `TRIAL_ONCE_ON` | **OFF** | Free Pro week once per DOCTOR (`_trial_ledger.js`): a reg no / verified phone / native device id that already had a week on another account gets none (verified, `trialDenied`). KV flag from /admin Billing: `1` enforce, `shadow` record + log only, else off. Needs secret `TRIAL_PEPPER`; without it the ledger is off. Seed first: `POST /api/verifications/trial-backfill`. Plan: [[One-Time-Trial]]. |
 | `VERIFY_NAME_ONLY_MATCH` | **OFF** | Auto-verify a certificate whose registration NUMBER could not be read but whose NAME could, when the register returns exactly ONE agreeing row (council-narrowed). A loosening of the rule, so the owner turns it on; `_verify_match.js` `uniqueNameMatch`, added 2026-09-02. Everything else in that change (core-first queries, D1 on empty, initials, 0.5 confidence floor) is unconditional. |
 | `VERIFIED_PRO_DAYS` | `7` | Length of the free Pro window a doctor earns by verifying. |
 | `UNVERIFIED_PURGE_ON` | **ON** | **DESTRUCTIVE, ARMED 2026-08-27 (owner).** The 7-day unverified-account sweep acts. Set `0` for report-only. Warning emails send either way. |

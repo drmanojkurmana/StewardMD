@@ -63,15 +63,19 @@ function resolveRows(list) {
  * Returns null rather than throwing: one unusable observation must not take the whole flowsheet off
  * a screen, and the caller counts what it skipped.
  */
+const CLOCK_SKEW_MS = 5 * 60000;
 function entryFrom(obs) {
   const o = obs || {};
   const meta = o.meta || {};
-  const observedAt = str(meta.effectiveAt) || str(o.effectiveAt) || str(meta.recordedAt);
+  let observedAt = str(meta.effectiveAt) || str(o.effectiveAt) || str(meta.recordedAt);
   const chartedAt = str(meta.recordedAt) || observedAt;
   if (!o.patientId || !o.code || !observedAt || !chartedAt) return null;
   /* `chart()` refuses an entry charted BEFORE it was observed, and it is right to. A record can hold
    * that pair - a corrected effectiveAt, a clock skew - and the flowsheet's refusal is not a reason
-   * to drop the whole grid, so it is skipped and counted. */
+   * to drop the whole grid, so it is skipped and counted. CLIN-22: a gap of a few minutes is a device
+   * clock running fast, not a reading from the future, so it is charted at the moment it was received. */
+  const ahead = Date.parse(observedAt) - Date.parse(chartedAt);
+  if (ahead > 0 && ahead <= CLOCK_SKEW_MS) observedAt = chartedAt;
   if (Date.parse(chartedAt) < Date.parse(observedAt)) return null;
   try {
     return chart({

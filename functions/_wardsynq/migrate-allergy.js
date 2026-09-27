@@ -201,4 +201,84 @@ async function recordAllergiesFromAssessment(request, env, ctx) {
   return { ...base, ok: true, written, entries, actor: resolved.actor.id, role: resolved.role, roleSource: resolved.source };
 }
 
-export { parseAllergyFreeText, resolveAllergySubstance, sameAllergy, allergyId, recordAllergiesFromAssessment };
+/* ---- the ward's own allergy entry (CLIN-05) --------------------------------------------------------
+ *
+ * The OPD assessment above was the only way to put an allergy on the record, so a patient admitted
+ * through the ED or directly had every allergy check run against an empty list. This is the ward's
+ * entry: ONE substance a clinician names, with the reaction and severity they state, resolved through
+ * the SAME resolveAllergySubstance() as the assessment, so the Allergy Shield reads it exactly as it
+ * reads an OPD one. Unverified (verifiedBy null), like every entry this file writes: a documented
+ * allergy is an overridable finding at order entry, and a hard block only once a doctor verifies it.
+ *
+ * "No known drug allergies" is a positive record too (NKDA_ID), because "asked, and there are none" and
+ * "never asked" must not look alike. It matches no drug. Recording a real allergy afterwards writes a
+ * new version of it saying it no longer holds, and recording it while an allergy is on file is refused.
+ */
+const SEVERITIES = Object.freeze(["mild", "moderate", "severe"]);
+const NKDA_TEXT = "No known drug allergies";
+const nkdaId = (patientId) => `wsq-alg-${slug(patientId)}-nkda`;
+
+/** ctx: { migration, patientId, substance?, reaction?, severity?, noKnownAllergies?, rulePack, actorDeps, recordDeps } */
+async function recordWardAllergy(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
+  const s = (v) => (typeof v === "string" ? v.trim() : "");
+  const patientId = s(ctx.patientId), text = s(ctx.substance).slice(0, 200), nka = ctx.noKnownAllergies === true;
+  const reaction = s(ctx.reaction).slice(0, 200), severity = s(ctx.severity).toLowerCase();
+  if (!patientId) return { ...base, ok: false, status: 422, error: "patient_required", written: 0 };
+  if (!nka && !text) return { ...base, ok: false, status: 422, error: "substance_required", detail: "Name what the patient is allergic to, or record no known drug allergies.", written: 0 };
+  if (!nka && NEGATION_RE.test(text)) return { ...base, ok: false, status: 422, error: "substance_negated", detail: "Name only what the patient IS allergic to. To say there are none, record no known drug allergies.", written: 0 };
+  if (severity && !SEVERITIES.includes(severity)) return { ...base, ok: false, status: 422, error: "bad_severity", allowed: SEVERITIES, written: 0 };
+
+  let resolved;
+  try { resolved = await resolveClinicalActor(request, env, mig.tenantId, "record:write", ctx.actorDeps); }
+  catch (e) {
+    const status = e instanceof AuthError ? 401 : e instanceof PermissionError ? 403 : 502;
+    return { ...base, ok: false, status, error: e instanceof AuthError ? "auth" : e instanceof PermissionError ? "permission" : "error", detail: String((e && e.message) || e), written: 0 };
+  }
+  const svc = new RecordService({ repository: ctx.recordDeps.repository, pseudonym: ctx.recordDeps.pseudonym, tenant: resolved.tenant, actor: resolved.actor, role: resolved.role, roleSource: resolved.source });
+  const fail = (e) => ({ ...base, ok: false, status: e instanceof GovernanceError ? 403 : e instanceof VersionConflictError ? 409 : 502,
+    error: e instanceof GovernanceError ? "governance" : e instanceof VersionConflictError ? "version_conflict" : "record_write_failed", detail: String((e && e.message) || e), written: 0 });
+
+  let onFile, patient;
+  try { [onFile, patient] = await Promise.all([svc.byPatient("AllergyIntolerance", patientId), svc.get("Patient", patientId)]); }
+  catch (e) { return { ...base, ok: false, status: 502, error: "record_read_failed", detail: "The allergy list could not be read, so nothing was recorded.", written: 0 }; }
+  if (!patient) return { ...base, ok: false, status: 404, error: "patient_not_found", written: 0 };
+  const nkdaRow = (onFile || []).find((a) => a && a.id === nkdaId(patientId)) || null;
+  const real = (onFile || []).filter((a) => a && a.id !== nkdaId(patientId));
+
+  if (nka) {
+    if (real.length) return { ...base, ok: false, status: 409, error: "allergies_on_file", detail: "This patient has allergies on record, so no known drug allergies cannot be recorded.", written: 0 };
+    if (nkdaRow && nkdaRow.noKnownAllergies === true) return { ...base, ok: true, written: 0, skipped: "unchanged", allergyId: nkdaRow.id };
+    const rec = AllergyIntolerance({ id: nkdaId(patientId), patientId, substance: NKDA_TEXT, substanceCodeSystem: "wardsynq-no-known-allergies",
+      severity: "unknown", criticality: "unable-to-assess", verifiedBy: null, source: { system: "wardsynq-native", sourceId: `ward-allergy:${nkdaId(patientId)}` } });
+    rec.noKnownAllergies = true;
+    try { const out = await svc.put(rec, { expectedVersion: nkdaRow ? nkdaRow.version : undefined, idempotencyKey: ctx.idempotencyKey || null }); return { ...base, ok: true, written: 1, allergyId: rec.id, noKnownAllergies: true, version: out.record.version, actor: resolved.actor.id }; }
+    catch (e) { return fail(e); }
+  }
+
+  const substance = resolveAllergySubstance(text, ctx.rulePack);
+  const id = `wsq-alg-${slug(patientId)}-${slug(substance || text)}`;
+  const current = real.find((a) => a.id === id) || null;
+  const rec = AllergyIntolerance({ id, patientId, substance: substance || "unspecified",
+    substanceCodeSystem: substance ? "wardsynq-ward-entry" : "unresolved-free-text",
+    reaction: reaction || null, severity: severity || "unknown", criticality: "unable-to-assess", verifiedBy: null,
+    source: { system: "wardsynq-native", sourceId: `ward-allergy:${id}` } });
+  rec.reportedText = text;
+  try {
+    const out = await svc.put(rec, { expectedVersion: current ? current.version : undefined, idempotencyKey: ctx.idempotencyKey || null });
+    // A real allergy ends a "no known drug allergies" record: said on a new version of it, never deleted.
+    let nkdaRetired = false;
+    if (nkdaRow && nkdaRow.noKnownAllergies === true) {
+      const next = { ...nkdaRow, noKnownAllergies: false, substance: NKDA_TEXT + " (no longer true: an allergy was recorded)" };
+      delete next.version; delete next.meta; delete next.writtenBy;
+      try { await svc.put(next, { expectedVersion: nkdaRow.version }); nkdaRetired = true; } catch { nkdaRetired = false; }
+    }
+    return { ...base, ok: true, written: 1, allergyId: id, substance: rec.substance, resolved: !!substance, version: out.record.version, ...(nkdaRow && nkdaRow.noKnownAllergies === true ? { nkdaRetired } : {}),
+      ...(substance ? {} : { note: "Recorded as written, but the decision-support content does not recognise it, so no automatic allergy check will match it. Check orders against it by hand." }),
+      actor: resolved.actor.id };
+  } catch (e) { return fail(e); }
+}
+
+export { parseAllergyFreeText, resolveAllergySubstance, sameAllergy, allergyId, recordAllergiesFromAssessment, recordWardAllergy, nkdaId };
