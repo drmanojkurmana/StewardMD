@@ -119,7 +119,7 @@ try {
   if (!(await ready())) throw new Error("engine did not load at " + BASE);
   // flags are read by the engine at call time from localStorage; set them, then reload so any
   // load-time reader sees them too
-  await ev(`${JSON.stringify(FLAGS)}.forEach(function(kv){localStorage.setItem(kv[0],kv[1]);}); ["smd_gate_v2","smd_nlp_v2"].forEach(function(k){ if(!${JSON.stringify(FLAGS.map((f) => f[0]))}.includes(k)) localStorage.removeItem(k); }); return 1`);
+  await ev(`${JSON.stringify(FLAGS)}.forEach(function(kv){localStorage.setItem(kv[0],kv[1]);}); ["smd_gate_v2","smd_nlp_v2","smd_rank_v3"].forEach(function(k){ if(!${JSON.stringify(FLAGS.map((f) => f[0]))}.includes(k)) localStorage.removeItem(k); }); return 1`);
   await call("Page.navigate", { url: BASE });
   if (!(await ready())) throw new Error("engine did not reload");
   await ev(`DX.findingCatalog(); return 1`);
@@ -131,11 +131,15 @@ try {
       var c=${JSON.stringify({ findings: c.findings || {}, acc: exp.acceptableIds || [], pc: c.presentingComplaint || c.chiefComplaint || c.text || "", full: chartText(c) })};
       var acc=c.acc.map(function(s){return String(s).toLowerCase();});
       function ok(x){ return !!x && (acc.indexOf(String(x.id).toLowerCase())>=0 || acc.some(function(a){return a && String(x.name||'').toLowerCase().indexOf(a)>=0;})); }
-      function run(f){ var a=SMD_REASON.assess(f); var all=[].concat(a.infectious||[],a.nonInfectious||[]).sort(function(x,y){return ((y.rank!=null?y.rank:y.confidence)-(x.rank!=null?x.rank:x.confidence))||(y.confidence-x.confidence);});
+      function run(f){ var ab=negOf(f); var a=ab?SMD_REASON.assess(f,{absent:ab}):SMD_REASON.assess(f); var all=[].concat(a.infectious||[],a.nonInfectious||[]).sort(function(x,y){return ((y.rank!=null?y.rank:y.confidence)-(x.rank!=null?x.rank:x.confidence))||(y.confidence-x.confidence);});
         var pos=0; for(var i=0;i<all.length;i++){ if(ok(all[i])){pos=i+1;break;} }
         return { gate:a.gate.cls, ab:!!a.gate.ab, top1:all[0]?all[0].name:null, conf:all[0]?all[0].confidence:0, pos:pos, n:Object.keys(f).length, top3:all.slice(0,3).map(function(x){return x.name+'('+x.confidence+')';}) }; }
-      function fromText(t){ var ks=DX.findingsFromText(t)||[]; var f={}; ks.forEach(function(k){f[k]=true;}); return f; }
-      function opd(f){ var S=DX._state, sv=S.f; try{ S.f={}; Object.keys(f).forEach(function(k){S.f[k]=true;}); var d=DX._differential()||{}; var l=(d.inf||[]).concat(d.ni||[]).map(function(r){return {id:r.id,name:r.name,score:r.score};}); var rr=OPDEMR._clinicalRerank(l,Object.keys(f)); var pos=0; for(var i=0;i<rr.length;i++){ if(ok(rr[i])){pos=i+1;break;} } return pos; } finally { S.f=sv; } }
+      // the text path keeps the note's explicit negatives when the engine can use them (smd_rank_v3), as OPD Ask MaiK does
+      var useNeg=!!(DX._rankV3&&DX._rankV3()&&DX.extractText), NEG={};
+      function fromText(t){ var ks, ab=[]; if(useNeg){ var e=DX.extractText(t); ks=e.present; ab=e.absent; } else ks=DX.findingsFromText(t)||[]; var f={}; ks.forEach(function(k){f[k]=true;}); NEG[JSON.stringify(Object.keys(f))]=ab; return f; }
+      function negOf(f){ return NEG[JSON.stringify(Object.keys(f))]||null; }
+      // the real OPD Ask MaiK ordering: opd-emr.js differentialFor -> clinicalRerank
+      function opd(f){ var rr=OPDEMR._clinicalRerank(OPDEMR._differentialFor(Object.keys(f),negOf(f)),Object.keys(f)); var pos=0; for(var i=0;i<rr.length;i++){ if(ok({id:rr[i].id,name:rr[i].dx})){pos=i+1;break;} } return pos; }
       var hasKeys=Object.keys(c.findings).length>0;
       var cur=hasKeys?run(c.findings):null; if(cur) cur.opd=opd(c.findings);
       var ft=fromText(c.full); var txt=run(ft); txt.opd=opd(ft);

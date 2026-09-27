@@ -967,8 +967,83 @@
     // EXACTLY to the classic score-then-name ordering. Score is untouched.
     var rk = function (x) { return x.rankScore != null ? x.rankScore : x.score; };
     var by = function (a, b) { return (rk(b) - rk(a)) || (b.score - a.score) || a.name.localeCompare(b.name); };
+    if (rankV3()) { inf.forEach(rankV3Adjust); ni.forEach(rankV3Adjust); }
     inf.sort(by); ni.sort(by);
     return { inf: inf, ni: ni };
+  }
+
+  /* smd_rank_v3 (default OFF): Phase 3 of kb/validation/PLAN-DX-ABX-10.md. ?rankv3=1|0 overrides.
+   * ORDER only: adjusts rankScore, never score, so the infection gate, the antibiotic decision and
+   * every displayed confidence are unchanged. Three parts, fitted on the TRAIN split, checked on dev:
+   *  1. parsimony: + 2 x the specificity (global IDF) of the patient's non-generic findings a
+   *     diagnosis explains, capped at 40, so a diagnosis that accounts for the specific picture beats
+   *     one that matched only generic findings ("fever, cough" -> CAP over a TB picture);
+   *  2. disqualifiers: textbook exclusions of the "attractor" diagnoses that won most wrong cases
+   *     (non-severe CAP with shock or hospital onset; acute gastroenteritis with dysentery, DKA or
+   *     GBS features; asthma in known COPD or with an anaphylaxis picture; URTI with lung signs);
+   *  3. anchors: a rare diagnosis cannot lead without one of its defining findings ("fever" alone
+   *     no longer puts HLH first).
+   * Rules are ai_drafted and pending clinician review. */
+  function rankV3() {
+    try {
+      var q = /[?&]rankv3=([01])\b/.exec((window.location && location.search) || "");
+      if (q) return q[1] === "1";
+      return localStorage.getItem("smd_rank_v3") === "1";
+    } catch (e) { return false; }
+  }
+  var RANK_V3_DQ = {
+    CAP: function (f) { return f.hypotension || f.vasopressorRequirement || f.mechanicalVentilation || f.hospitalDay48 || (f.subacuteOnset && (f.weightLoss || f.nightSweats || f.prolongedCough2Weeks)); },
+    GASTROENTERITIS: function (f) { return f.bloodyStool || f.tenesmus || f.ketonemia || f.ascendingWeakness || ((f.antibioticsLast90Days || f.priorAntibiotics) && f.diarrhea) || f.subacuteOnset || f.prolongedFever; },
+    asthma_exac: function (f) { return f.knownCOPD || (f.hypotension && (f.rash || f.facialSwelling)) || f.ascendingWeakness; },
+    URTI: function (f) { return f.crepitations || f.consolidation || f.hypoxia; }
+  };
+  var RANK_V3_ANCHOR = {
+    // pneumonia needs a lower-respiratory sign; fever + cough alone is URTI / bronchitis territory
+    CAP: ["crepitations", "consolidation", "hypoxia", "tachypnea", "pleuriticChestPain"],
+    HLH: ["cytopenia", "thrombocytopenia", "hepatosplenomegaly", "splenomegaly"],
+    thyroid_storm: ["palpitations", "atrialFibHx", "weightLoss"],
+    serotonin_nms: ["rigidity", "drugOverdose"],
+    ttp_hus: ["thrombocytopenia"],
+    sjs_ten: ["mucosalLesions"],
+    acute_leukemia: ["mucocutaneousBleeding", "bleedingManifestation", "petechialRash", "thrombocytopenia", "lymphadenopathy", "hepatosplenomegaly", "splenomegaly"],
+    malignancy_b: ["weightLoss", "lymphadenopathy", "nightSweats", "malignancy"],
+    myxedema: ["hypothermia", "bradycardia"],
+    dic: ["mucocutaneousBleeding", "bleedingManifestation", "thrombocytopenia", "inr"]
+  };
+  var RANK_V3_NUMERIC = null;
+  // v3 knowledge the antibiotic gate may use: a candidate that is disqualified or lacks its anchor
+  function rankV3Excluded(r, f) {
+    if (RANK_V3_DQ[r.id] && RANK_V3_DQ[r.id](f)) return true;
+    var anc = RANK_V3_ANCHOR[r.id];
+    return !!(anc && !anc.some(function (k) { return f[k]; }));
+  }
+  function rankV3Adjust(r) {
+    if (!RANK_V3_NUMERIC) {
+      RANK_V3_NUMERIC = {};
+      (window.FIELD_GROUPS || []).forEach(function (g) { (g.fields || []).forEach(function (fl) { if (fl.type === "number" || fl.type === "select") RANK_V3_NUMERIC[fl.key] = 1; }); });
+    }
+    var g = globalIDF(), f = S.fInf || S.f || {}, spec = 0;
+    (r.supporting || []).forEach(function (k) { if (!FW_LOW[k] && !RANK_V3_NUMERIC[k]) spec += (g[k] != null ? g[k] : 0.5); });
+    var adj = Math.min(40, 2 * spec);
+    if (RANK_V3_DQ[r.id] && RANK_V3_DQ[r.id](f)) adj -= 35;
+    var anc = RANK_V3_ANCHOR[r.id];
+    if (anc && !anc.some(function (k) { return f[k]; })) adj -= 25;
+    // 4. pertinent negatives from the note ("no neck stiffness", "chest clear"): each strong finding
+    // of this diagnosis the note explicitly denies costs 12, at most 30
+    var neg = S.neg || {}, nneg = 0;
+    if (Object.keys(neg).length) {
+      var strong = [];
+      if (r.inf && r._syn) strong = assocKeys(r._syn).filter(function (k) { return fw(k) === 3; });
+      else { var fm = niFind(r.id); for (var k2 in fm) if (fm[k2] >= 20) strong.push(k2); }
+      strong.forEach(function (k) { if (neg[k] && !f[k]) nneg++; });
+      adj -= Math.min(30, 12 * nneg);
+    }
+    r.rankScore = (r.rankScore != null ? r.rankScore : r.score) + adj;
+  }
+  function niFind(id) {
+    var kb = kbDisease(id); if (kb && kb.find) return kb.find;
+    for (var i = 0; i < DDX_NI.length; i++) if (DDX_NI[i].id === id) return DDX_NI[i].find || {};
+    return {};
   }
 
   /* smd_gate_v2 (default OFF): Phase 1 of kb/validation/PLAN-DX-ABX-10.md. ?gatev2=1|0 overrides.
@@ -1035,8 +1110,10 @@
     // hepatitis leading a leptospirosis or SBP picture); this stops a ranking miss from becoming
     // "no antibiotics".
     var rivalYes = null, rivalCond = null;
+    var v3 = rankV3();
     d.inf.forEach(function (x) {
       if (x === lead || x.score < 42) return;
+      if (v3 && rankV3Excluded(x, f)) return;   // smd_rank_v3: an excluded rival cannot hold antibiotics on
       var n = abxNeed(x), close = x.score >= lead.score - 30;
       var critical = x._syn && x._syn.decision && x._syn.decision.status === "red";
       if (n === "YES" && (close || critical) && (!rivalYes || x.score > rivalYes.score)) rivalYes = x;
@@ -1521,6 +1598,7 @@
     if (window.SMD_NLP && SMD_NLP.extract) {
       var nr = SMD_NLP.extract(text, nlpCtx()), nadded = 0;
       (nr.present || []).forEach(function (k) { if (VALID[k] && !S.f[k]) { S.f[k] = true; nadded++; } });
+      if (rankV3()) { S.neg = S.neg || {}; (nr.absent || []).forEach(function (k) { if (VALID[k] && !S.f[k]) S.neg[k] = true; }); }
       S._lastExtract = nr;
       S.started = true;
       S.timeline.push({ f: "free-text (" + nadded + " finding" + (nadded === 1 ? "" : "s") + " extracted — review)", topName: null, topScore: null });
@@ -1574,7 +1652,7 @@
   }
   function loadSession(i) {
     var s = loadSessions()[i]; if (!s) return;
-    S.f = {}; (s.findings || []).forEach(function (k) { S.f[k] = true; }); S.started = true; S.timeline = []; recompute();
+    S.f = {}; S.neg = {}; (s.findings || []).forEach(function (k) { S.f[k] = true; }); S.started = true; S.timeline = []; recompute();
   }
   function buildSummary() {
     var d = differential(), g = gate(d), L = [];
@@ -3115,7 +3193,7 @@
     });
   }
 
-  function resetAll() { S.consultSkipped = []; S.f = {}; S.prev = {}; S.expanded = {}; S.started = false; S.system = null; S.showRare = false; S.compare = []; S.timeline = []; S.noteDraft = ""; var note = root && root.querySelector("#dxFreeText"); if (note) note.value = ""; if (!S._restoring) S._caseId = null; filter = ""; closeMgmt(); var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
+  function resetAll() { S.consultSkipped = []; S.f = {}; S.neg = {}; S.prev = {}; S.expanded = {}; S.started = false; S.system = null; S.showRare = false; S.compare = []; S.timeline = []; S.noteDraft = ""; var note = root && root.querySelector("#dxFreeText"); if (note) note.value = ""; if (!S._restoring) S._caseId = null; filter = ""; closeMgmt(); var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
   function open(opts) {
     ensureRoot();
     root.classList.remove("dx-reference-mode");
@@ -3955,6 +4033,12 @@
     _nextQuestions: nextQuestions,
     // PURE: free text -> present engine finding keys, using the engine's OWN synonym set (FT_SYN) so
     // callers (e.g. OPD Ask MaiK) get the same rich extraction the reasoning workspace does. No S.f mutation.
+    // PURE: free text -> { present, absent } engine keys (absent = explicitly denied in the note)
+    extractText: function (text) {
+      if (!text || !(window.SMD_NLP && SMD_NLP.extract)) return { present: [], absent: [] };
+      var nr = SMD_NLP.extract(String(text), nlpCtx()) || {};
+      return { present: (nr.present || []).filter(function (k) { return VALID[k]; }), absent: (nr.absent || []).filter(function (k) { return VALID[k]; }) };
+    },
     findingsFromText: function (text) {
       if (!text || !(window.SMD_NLP && SMD_NLP.extract)) return [];
       var nr = SMD_NLP.extract(String(text), nlpCtx()) || {};
@@ -3971,6 +4055,7 @@
       document.body.classList.add("dx-lock");
     },
     _kbOpen: kbOpen, // test seam: Knowledge Library / global-search entry point (not user-facing API)
+    _rankV3: rankV3, // smd_rank_v3 on? (opd-emr.js clinicalRerank orders from the engine rank when it is)
     _assess: function () {
       var d = differential(), g = gate(d), info = GATEINFO[g.cls];
       return { cls: g.cls, ab: !!info.ab, lead: g.lead && g.lead.name,
@@ -4009,9 +4094,12 @@
   window.SMD_REASON = {
     // assess(findings?) → structured, interface-independent result. Pure: if a
     // findings object is passed it is evaluated without disturbing live state.
-    assess: function (findings) {
-      var restore = null;
+    assess: function (findings, opts) {
+      var restore = null, restoreNeg = S.neg;
       if (findings && typeof findings === "object") { restore = S.f; S.f = {}; Object.keys(findings).forEach(function (k) { if (findings[k]) S.f[k] = true; }); }
+      // opts.absent: keys the note explicitly denies (used by smd_rank_v3 ordering only)
+      if (opts && opts.absent) { S.neg = {}; opts.absent.forEach(function (k) { S.neg[k] = true; }); }
+      else if (restore) S.neg = {};
       var out;
       try {
         var d = differential(), g = gate(d), info = GATEINFO[g.cls] || {};
@@ -4029,6 +4117,7 @@
         if (g.why || g.rule) { out.gate.why = g.why || ""; out.gate.rule = g.rule || null; out.gate.message = gateMsg(g); }
       } catch (e) { out = { gate: {}, infectious: [], nonInfectious: [], suggestions: [] }; }
       if (restore) S.f = restore;
+      S.neg = restoreNeg;
       return out;
     },
     // progressive Step-3 source: top-N findings for a system, common-first, plus the rest.

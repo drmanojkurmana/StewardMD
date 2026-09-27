@@ -3268,16 +3268,18 @@
   // Pure findingKeys -> ranked differential via the DX engine, WITHOUT disturbing the live reasoning
   // workspace: snapshot S.f, score on the given keys, restore. Synchronous, so nothing interleaves;
   // derived caches (fInf/_dom) self-heal on the next real differential() call.
-  function differentialFor(keys) {
+  function differentialFor(keys, absent) {
     var DX = G.DX;
     if (!(DX && DX._differential && DX._state)) return [];
-    var S = DX._state, savedF = S.f;
+    var S = DX._state, savedF = S.f, savedNeg = S.neg;
     try {
       var f = {}; (keys || []).forEach(function (k) { if (k) f[k] = true; });
       S.f = f;
+      // explicitly denied findings from the note (smd_rank_v3 ordering only); never the live workspace's
+      S.neg = {}; (absent || []).forEach(function (k) { if (k && !f[k]) S.neg[k] = true; });
       var d = DX._differential() || {};
-      return (d.inf || []).concat(d.ni || []).map(function (r) { return { id: r.id, dx: r.name, score: r.score, inv: r.inv || [], reason: r.reason || "", red: r.red || [] }; });
-    } catch (e) { return []; } finally { S.f = savedF; }
+      return (d.inf || []).concat(d.ni || []).map(function (r) { return { id: r.id, dx: r.name, score: r.score, rank: r.rankScore, inv: r.inv || [], reason: r.reason || "", red: r.red || [] }; });
+    } catch (e) { return []; } finally { S.f = savedF; S.neg = savedNeg; }
   }
   // Grounding options for SMD_SCRIBEGROUND.ground(): extract findings from the transcript
   // (deterministic, SMD_NLP over the DX catalog) and anchor the differential + investigations to the
@@ -3501,6 +3503,7 @@
   // rule's effect is measured. Only fires when the discriminating findings are present.
   function clinicalRerank(list, keys) {
     var f = {}; (keys || []).forEach(function (k) { if (k) f[k] = 1; });
+    var useRank = !!(G.DX && G.DX._rankV3 && G.DX._rankV3());
     var scored = (list || []).map(function (e) {
       var adj = 0, n = e.dx || e.name || "";
       if (f.fever) {
@@ -3514,9 +3517,12 @@
       if (f.fever && f.jaundice && /cholangitis/i.test(n)) adj += 24;                                       // fever + jaundice (Charcot) -> cholangitis
       if (f.hypotension && (f.lactate || f.tachycardia) && /(sepsis|septic)/i.test(n)) adj += 22;           // shock + lactate -> sepsis
       if (f.purulentSputum && /asthma/i.test(n)) adj -= 16;                                                 // purulent sputum is not asthma
-      var c = {}; for (var k in e) c[k] = e[k]; c.score = (e.score || 0) + adj; return c;
+      var c = {}; for (var k in e) c[k] = e[k]; c.score = (e.score || 0) + adj;
+      // smd_rank_v3: order from the engine's rank (parsimony, disqualifiers, anchors) plus these
+      // discriminators; the displayed score is unchanged. Off: classic score order, exactly as before.
+      c._key = (useRank && e.rank != null ? e.rank : (e.score || 0)) + adj; return c;
     });
-    return scored.sort(function (a, b) { return (b.score || 0) - (a.score || 0); });
+    return scored.sort(function (a, b) { return (b._key || 0) - (a._key || 0); });
   }
 
   // Keep surfaced/accepted clinical text app-clean: em-dash -> comma (sentence separator), en-dash ->
@@ -3653,9 +3659,10 @@
     if (!text.replace(/[.\s]/g, "")) { toast("Type the complaint / history first, then Ask MaiK."); return; }
     // Extract findings with the engine's OWN synonym set (rich FT_SYN) when available, so risk factors
     // like "known diabetic" -> diabetesHx are captured; fall back to the bare SMD_NLP context otherwise.
-    var keys = (G.DX && DX.findingsFromText) ? DX.findingsFromText(text)
+    var ext = (G.DX && DX.extractText && DX._rankV3 && DX._rankV3()) ? DX.extractText(text) : null;   // smd_rank_v3: keep the negatives
+    var keys = ext ? ext.present : (G.DX && DX.findingsFromText) ? DX.findingsFromText(text)
       : ((G.SMD_NLP && SMD_NLP.extract) ? ((SMD_NLP.extract(text, nlpCtx()) || {}).present || []) : []);
-    var diff = clinicalRerank(differentialFor(keys), keys);   // score-rank + textbook clinical discriminators
+    var diff = clinicalRerank(differentialFor(keys, ext ? ext.absent : null), keys);   // score-rank + textbook clinical discriminators
     if (!diff.length) { toast("MaiK could not derive a differential yet. Add more detail to the notes."); return; }
     st.maikBusy = true; paint();
     // Capture the patient in scope NOW. openProfile() reassigns the module-level `st` to a fresh object

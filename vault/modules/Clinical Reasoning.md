@@ -81,3 +81,18 @@ added) and the numeric-field list. Off: 0 differences across 1,660 case-paths.
 - Tuning rule: mine misses with `SPLITS=train` only; held-out 2 (`test/dx-heldout-2.json`) is read in
   aggregate only. Held-out 1 is partly in-sample now (its misses shaped a few phrases).
 
+## Differential ordering v3 (`smd_rank_v3`, default OFF, 2026-09-27)
+
+Phase 3 of `kb/validation/PLAN-DX-ABX-10.md`. `reasoning.js` `rankV3()` / `rankV3Adjust()` (`?rankv3=1`,
+`localStorage smd_rank_v3=1`). **Order only**: adjusts `rankScore`, never `score`, so the gate, the
+antibiotic decision and displayed confidences are identical. Parsimony (explained non-generic
+specificity), disqualifiers (`RANK_V3_DQ`), anchors (`RANK_V3_ANCHOR`), pertinent negatives (`S.neg`,
+from the note via `DX.extractText` and `SMD_REASON.assess(f, {absent})`; cleared by reset and case
+restore; `assess` restores it, stays pure). `DX._rankV3()` lets `opd-emr.js` `clinicalRerank` order
+from the engine rank; `differentialFor(keys, absent)` carries the note's negatives. Under gate v2, a
+rival excluded by v3 cannot keep antibiotics on (`rankV3Excluded`).
+
+- Test `test/run-rank-v3.mjs`; floors for `smd_rank_v3=1` and all three flags; CI runs both.
+- Known limits: fever alone now leads with vasculitis / SLE (still non-diagnostic, Phase 4 "not
+  enough information"); no prevalence prior; cholangitis vs viral hepatitis needs new KB findings.
+
