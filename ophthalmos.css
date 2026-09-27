@@ -18,6 +18,8 @@
   color-scheme: dark;
 }
 .oph-overlay.on { display: flex; }
+/* Draft mark (owner-specified 4px), pinned above the home indicator, never takes layout or taps. */
+.oph-draft { position: absolute; left: 0; right: 0; bottom: calc(2px + env(safe-area-inset-bottom, 0px)); margin: 0; font-size: 4px; line-height: 1; text-align: center; color: var(--op-mut); pointer-events: none; }
 body.oph-lock { overflow: hidden; }
 .oph-overlay ::selection { background: rgba(59, 157, 255, .35); color: #fff; }
 .oph-overlay * { box-sizing: border-box; }

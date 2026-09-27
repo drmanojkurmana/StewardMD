@@ -80,9 +80,12 @@
     }
     return el;
   }
+  // Owner-specified draft mark on every screen until ophthalmologist sign-off; the readable
+  // disclosure is the hub's Beta note.
+  var DRAFT = '<p class="oph-draft">To be verified · draft</p>';
   function paint(html, focusSel) {
     var el = root();
-    el.innerHTML = html;
+    el.innerHTML = html + DRAFT;
     var f = focusSel && el.querySelector(focusSel);
     try { (f || el.querySelector(".oph-back")).focus({ preventScroll: true }); } catch (e) {}
   }
