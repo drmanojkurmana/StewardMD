@@ -10527,3 +10527,6 @@ Owner: "keep maik cloud also (online version) we have both". #offline gains "One
 engines.": MaiK Cloud (online, paid plans) and MaiK on this phone (offline, free), plus the
 automatic offline hand-off (`maik-engine.js` `smd_maik_offline_local`, default on). Nav link
 MaiK Offline -> MaiK; privacy panel scoped to "Offline, your question stays on your phone".
+Follow-up same day: the headline "offline medical AI." keeps the poster gradient
+(#5eead4 > #38bdf8 > #a78bfa, owner: "as in poster"), the one exception to the single green. Chips that
+were mint text on a dark-teal fill now read white on #0E6E63 (both had collapsed to teal).
