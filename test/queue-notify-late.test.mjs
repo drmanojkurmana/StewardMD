@@ -13,8 +13,9 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
 const sent = [], writes = [];
-mock.module("../functions/_followcare_sms.js", { namedExports: { sendSms: async (_e, p) => { sent.push(p.body); return { ok: true }; }, smsConfigured: () => true } });
-mock.module("../functions/_followcare_whatsapp.js", { namedExports: { sendWhatsApp: async () => ({ ok: false }), waConfigured: () => false } });
+// The wording goes out by WhatsApp; SMS carries only a DLT template (test/queue-notify-sms.test.mjs).
+mock.module("../functions/_followcare_sms.js", { namedExports: { sendDlt: async () => ({ ok: true }), dltConfigured: () => true } });
+mock.module("../functions/_followcare_whatsapp.js", { namedExports: { sendWhatsApp: async (_e, p) => { sent.push(p.body); return { ok: true }; }, waConfigured: () => true } });
 mock.module("../functions/_queue.js", { namedExports: { decPHI: async (_e, v) => String(v || "").replace(/^enc:/, ""), mintTicketToken: async () => "opaque" } });
 mock.module("../functions/_fbfirestore.js", { namedExports: { fsCommit: async (_e, w) => { writes.push(...w); return { ok: true }; }, wCreate: () => ({}), wUpdate: (_e, path, f) => ({ path, f }) } });
 const N = await import("../functions/_queue_notify.js");

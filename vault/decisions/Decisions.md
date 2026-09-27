@@ -10326,3 +10326,17 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
 - **Owner accepted (2026-09-27)**: one test-split case (aggregate only) loses a needed antibiotic call on
   the text path in the v2 configs, so their `abxSens` floor is 138 (was 139). Not tuned against the test
   split. `smd_nlp_v2` stays OFF; `sepsis_afebrile` is live with gate v2.
+## 2026-09-27 - SMS only as our approved DLT templates, and no patient name in any message
+- **Decision**: every patient/doctor SMS is built from one of our approved Vodafone Idea DLT templates
+  (header MAIK, `functions/_followcare_sms.js` DLT, text verbatim) and sent through 2Factor's R1 API with
+  its content-template id (`sendDlt`). OPD queue: token issued -> Appointment Confirmation - Detailed,
+  2 ahead -> Check-In Alert - Detailed; every other queue event is WhatsApp only. Doctor OTP -> our OTP
+  template first, 2Factor's own OTP route as the fallback. The name slot is always "Patient"; FollowCare
+  stops decrypting and sending the first name.
+- **Why**: the operator drops an SMS that does not match its registered template. The queue SMS fallback sent
+  the FollowCare check-in template with a blank name for every event, and FollowCare filled 2 of the
+  templates' 4-5 slots. Owner (2026-09-27): no new templates, adjust to the ones we have; a patient name is
+  PHI, say "Dear Patient", details go on the page the link opens.
+- **Open**: Care Plan / Post-Visit templates need a callback number ({#cbn#}); none is stored, and none is
+  guessed (a worsening patient would call it). Needs `TWOFACTOR_SENDER=MAIK` in Pages secrets, and
+  `stewardmd.in` on the DLT CTA whitelist, before any of it sends.

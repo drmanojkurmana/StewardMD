@@ -10,7 +10,8 @@
  *   channel "sms"       SMS only (the "Send by SMS instead" button).
  *   channel "whatsapp"  WhatsApp only.
  * Providers are the FollowCare senders (_followcare_whatsapp.js / _followcare_sms.js), so no new
- * vendor is needed. SMS via 2Factor uses its dedicated OTP API (a DLT-approved OTP template comes
+ * vendor is needed. SMS goes first through our own DLT OTP template (sendDlt, when TWOFACTOR_SENDER
+ * is set), and if that fails through 2Factor's dedicated OTP API (a DLT-approved OTP template comes
  * with the account, TWOFACTOR_TEMPLATE_OTP overrides the name); every other provider goes through
  * sendSms() with the code in var2 / the body. WhatsApp through the custom BSP fills
  * PHONE_OTP_WA_BODY when set (same {{to}} {{name}} {{link}} {{text}} tokens; the code is {{link}}),
@@ -34,7 +35,7 @@
  * the claim is written. The per-number daily-cap key is hashed the same way.
  */
 import { sendWhatsApp, waConfigured } from "./_followcare_whatsapp.js";
-import { sendSms, smsProvider, smsConfigured } from "./_followcare_sms.js";
+import { sendSms, smsProvider, smsConfigured, sendDlt, dltConfigured } from "./_followcare_sms.js";
 
 export const TTL = 600;              // the code lives 10 minutes
 export const RESEND_THROTTLE = 30;   // seconds between sends to one account
@@ -93,6 +94,11 @@ export function smsAvailable(env) {
 }
 
 async function viaSms(env, phone, code, name) {
+  // Our own approved DLT OTP template (header MAIK) first; 2Factor's OTP route below stays the fallback.
+  if (dltConfigured(env)) {
+    const own = await sendDlt(env, phone, "otp", [code, String(TTL / 60)]);
+    if (own.ok) return own;
+  }
   if (smsProvider(env) === "twofactor" && env.TWOFACTOR_API_KEY) {
     try { return await twoFactorOtp(env, phone, code); } catch (e) { return { ok: false, reason: "exception" }; }
   }
