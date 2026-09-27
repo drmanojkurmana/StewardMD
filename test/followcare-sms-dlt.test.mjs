@@ -30,6 +30,14 @@ mock.module("../functions/_followcare.js", { namedExports: {
 mock.module("../functions/_fbfirestore.js", { namedExports: { fsQuery: async () => [], wUpdate: () => ({}), fsCommit: async () => {} } });
 
 const { sendPatientMessage, sendCheckinLink } = await import("../functions/_followcare_dispatch.js");
+const { DLT, dltText } = await import("../functions/_followcare_sms.js");
+// The text the patient receives: 2Factor fills its registered template (same text as DLT) with var1..varN.
+function msgOf(f) {
+  const key = Object.keys(DLT).find((k) => DLT[k].tpl === f.get("templatename"));
+  const vars = []; for (let i = 1; f.get("var" + i) != null; i++) vars.push(f.get("var" + i));
+  assert.ok(key, "a registered 2Factor template"); assert.equal(f.get("ctid"), DLT[key].ctid, "name and DLT id agree");
+  return dltText(key, vars);
+}
 
 const ENV = { FOLLOWCARE_SMS_PROVIDER: "twofactor", TWOFACTOR_API_KEY: "k2f", TWOFACTOR_SENDER: "MAIK" };
 const EP = { episodeId: "e1", hospitalId: "SMD-ABC123", doctorUid: "u1", lang: "en", _phi: { phoneEnc: "P", guardianEnc: "G" } };
@@ -49,7 +57,7 @@ test("a check-in link goes as Post-Visit Check-in - Detailed: profile doctor, OP
     assert.equal(calls[0].url, "https://2factor.in/API/R1/");
     assert.equal(f.get("ctid"), "1177178791495757255"); assert.equal(f.get("peid"), "1101720950000098192"); assert.equal(f.get("from"), "MAIK");
     assert.equal(f.get("to"), "919876543210");
-    assert.equal(f.get("msg"), "Dear Patient, we hope you're recovering well after your visit with Dr. Rao at Sunrise Clinic. If symptoms worsen, please contact us at 04023456789. Details: https://stewardmd.in/followcare?t=tok -StewardMD");
+    assert.equal(msgOf(f), "Dear Patient, we hope you're recovering well after your visit with Dr. Rao at Sunrise Clinic. If symptoms worsen, please contact us at 04023456789. Details: https://stewardmd.in/followcare?t=tok -StewardMD");
     assert.equal(deliveries[0].status, "sent"); assert.equal(deliveries[0].channel, "sms");
   }));
 
@@ -58,20 +66,20 @@ test("a medicine reminder goes as Care Plan; the Action Center's doctor name win
     await sendCheckinLink(ENV, EP, "reminder_med");
     assert.equal(calls[0].f.get("ctid"), "1177178791481113659");
     await sendPatientMessage(ENV, EP, "ignored body", { link: "https://stewardmd.in/followcare?t=x", doctorName: "Dr Mehta" });
-    assert.match(calls[1].f.get("msg"), /visit with Dr\. Mehta at Sunrise Clinic\./);
+    assert.match(msgOf(calls[1].f), /visit with Dr\. Mehta at Sunrise Clinic\./);
   }));
 
 test("no link (the voice recap) sends the approved no-link twin", () =>
   withFetch(async (calls) => {
     await sendPatientMessage(ENV, EP, "recap", { dltKey: "care_plan" });
     assert.equal(calls[0].f.get("ctid"), "1177178791389160530");
-    assert.equal(calls[0].f.get("msg"), "Dear Patient, please continue your prescribed care plan from Dr. Rao at Sunrise Clinic. For any questions, contact us at 04023456789. -StewardMD");
+    assert.equal(msgOf(calls[0].f), "Dear Patient, please continue your prescribed care plan from Dr. Rao at Sunrise Clinic. For any questions, contact us at 04023456789. -StewardMD");
   }));
 
 test("a free-text hospital ID falls back to the one OPD clinic the doctor owns", () =>
   withFetch(async (calls) => {
     await sendPatientMessage(ENV, { ...EP, hospitalId: "GIMSR" }, "body", { link: "L" });
-    assert.match(calls[0].f.get("msg"), /at Sunrise Clinic\. If symptoms worsen, please contact us at 04023456789\./);
+    assert.match(msgOf(calls[0].f), /at Sunrise Clinic\. If symptoms worsen, please contact us at 04023456789\./);
   }));
 
 test("no clinic to name (none, or a doctor with several) sends nothing, and the delivery log says why", () =>
@@ -88,7 +96,7 @@ test("a minor's message goes to the guardian; no patient name in any text", () =
   withFetch(async (calls) => {
     await sendPatientMessage(ENV, { ...EP, isMinor: true }, "body", { link: "L" });
     assert.equal(calls[0].f.get("to"), "919812345678");
-    assert.match(calls[0].f.get("msg"), /^Dear Patient, /);
+    assert.match(msgOf(calls[0].f), /^Dear Patient, /);
   }));
 
 test("other SMS providers keep the old path (no DLT request)", () =>

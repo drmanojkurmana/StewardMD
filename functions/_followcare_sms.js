@@ -10,12 +10,13 @@
  * the composed `body` directly. FollowCare and the OPD queue never pass a patient name: their DLT slots greet
  * "Patient" (owner 2026-09-27: a name is PHI).
  *
- * sendDlt() is the path for OUR approved DLT templates (DLT below): it fills the registered text itself and
- * sends it through 2Factor's R1 Transactional-SMS API with our DLT entity id and the content-template id, so
- * nothing has to be registered by name on 2Factor's dashboard. Without peid R1 answered "Missing templatename
- * value", and a 2Factor template name reached the operator but came back DLT-CNT-REJECT; msg + peid + ctid was
- * DELIVERED (live test 2026-09-27). Needs FOLLOWCARE_SMS_PROVIDER=twofactor, TWOFACTOR_API_KEY and
- * TWOFACTOR_SENDER=MAIK (the only approved header).
+ * sendDlt() is the path for OUR approved DLT templates (DLT below): it checks every slot against the registered
+ * text, then sends 2Factor's R1 Transactional-SMS API the template's 2Factor name (`tpl`, the same text registered
+ * on 2Factor's dashboard, Transactional SMS > Manage Sender Ids) with the slots as var1..varN, our DLT entity id
+ * and the content-template id. Live tests 2026-09-27 from MAIK: a name without peid/ctid came back DLT-CNT-REJECT;
+ * msg + peid + ctid delivered only when 2Factor's own text matching accepted it (Appointment Confirmation it
+ * refused, "Missing templatename value"); name + vars + peid + ctid DELIVERED. Needs FOLLOWCARE_SMS_PROVIDER=
+ * twofactor, TWOFACTOR_API_KEY and TWOFACTOR_SENDER=MAIK (the only approved header).
  *
  * Env (owner provisions ONE provider):
  *   FOLLOWCARE_SMS_PROVIDER = "twofactor" | "msg91" | "twilio" | "gupshup" | "" (off)
@@ -93,17 +94,17 @@ export async function sendTwoFactor(env, to, msg) {
 // Links must be CTA-whitelisted on Vilpower: https://stewardmd.in/queue? and /followcare? (dynamic, 2026-09-27).
 export var DLT_PEID = "1101720950000098192";   // MAIKNOWLEDGE LLP's DLT entity id (Vilpower); public, not a secret
 export var DLT = {
-  otp: { ctid: "1177178791267832947", text: "Your OTP for login to StewardMD is {#num#}. Valid for {#num#} minutes. Do not share this OTP with anyone. -StewardMD" },
-  appt_confirm: { ctid: "1177178791454063563", plain: "appt_confirm_plain", text: "Dear {#alp#}, your appointment with Dr. {#alp#} at {#alp#} is confirmed for {#alp#} at {#alp#}. View details: {#uro#} -StewardMD" },
-  appt_confirm_plain: { ctid: "1177178791273967656", text: "Dear {#alp#}, your appointment with Dr. {#alp#} at {#alp#} is confirmed for {#alp#} at {#alp#}. Please arrive 10 mins early. -StewardMD" },
-  checkin_alert: { ctid: "1177178791462158338", plain: "checkin_alert_plain", text: "Dear {#alp#}, reminder: your appointment with Dr. {#alp#} at {#alp#} is today at {#alp#}. Please check-in at reception 10 mins prior. Details: {#uro#} -StewardMD" },
-  checkin_alert_plain: { ctid: "1177178791369851422", text: "Dear {#alp#}, reminder: your appointment with Dr. {#alp#} at {#alp#} is today at {#alp#}. Please check-in at reception 10 mins prior. -StewardMD" },
-  care_plan: { ctid: "1177178791481113659", plain: "care_plan_plain", text: "Dear {#alp#}, please continue your prescribed care plan from Dr. {#alp#} at {#alp#}. For any questions, contact us at {#cbn#}. Details: {#uro#} -StewardMD" },
-  care_plan_plain: { ctid: "1177178791389160530", text: "Dear {#alp#}, please continue your prescribed care plan from Dr. {#alp#} at {#alp#}. For any questions, contact us at {#cbn#}. -StewardMD" },
-  post_visit: { ctid: "1177178791495757255", plain: "post_visit_plain", text: "Dear {#alp#}, we hope you're recovering well after your visit with Dr. {#alp#} at {#alp#}. If symptoms worsen, please contact us at {#cbn#}. Details: {#uro#} -StewardMD" },
-  post_visit_plain: { ctid: "1177178791396071579", text: "Dear {#alp#}, we hope you're recovering well after your visit with Dr. {#alp#} at {#alp#}. If symptoms worsen, please contact us at {#cbn#}. -StewardMD" },
-  visit_reminder: { ctid: "1177178791470273641", plain: "visit_reminder_plain", text: "Dear {#alp#}, this is a reminder for your follow-up visit with Dr. {#alp#} at {#alp#} scheduled on {#alp#}. Please carry previous prescriptions and reports. Details: {#uro#} -StewardMD" },
-  visit_reminder_plain: { ctid: "1177178791346053803", text: "Dear {#alp#}, this is a reminder for your follow-up visit with Dr. {#alp#} at {#alp#} scheduled on {#alp#}. Please carry previous prescriptions and reports. -StewardMD" },
+  otp: { tpl: "STEWARDMD_OTP", ctid: "1177178791267832947", text: "Your OTP for login to StewardMD is {#num#}. Valid for {#num#} minutes. Do not share this OTP with anyone. -StewardMD" },
+  appt_confirm: { tpl: "APPT_CONFIRM_DETAILED", ctid: "1177178791454063563", plain: "appt_confirm_plain", text: "Dear {#alp#}, your appointment with Dr. {#alp#} at {#alp#} is confirmed for {#alp#} at {#alp#}. View details: {#uro#} -StewardMD" },
+  appt_confirm_plain: { tpl: "APPT_CONFIRM_PLAIN", ctid: "1177178791273967656", text: "Dear {#alp#}, your appointment with Dr. {#alp#} at {#alp#} is confirmed for {#alp#} at {#alp#}. Please arrive 10 mins early. -StewardMD" },
+  checkin_alert: { tpl: "CHECKIN_ALERT_DETAILED", ctid: "1177178791462158338", plain: "checkin_alert_plain", text: "Dear {#alp#}, reminder: your appointment with Dr. {#alp#} at {#alp#} is today at {#alp#}. Please check-in at reception 10 mins prior. Details: {#uro#} -StewardMD" },
+  checkin_alert_plain: { tpl: "CHECKIN_ALERT_PLAIN", ctid: "1177178791369851422", text: "Dear {#alp#}, reminder: your appointment with Dr. {#alp#} at {#alp#} is today at {#alp#}. Please check-in at reception 10 mins prior. -StewardMD" },
+  care_plan: { tpl: "CARE_PLAN_DETAILED", ctid: "1177178791481113659", plain: "care_plan_plain", text: "Dear {#alp#}, please continue your prescribed care plan from Dr. {#alp#} at {#alp#}. For any questions, contact us at {#cbn#}. Details: {#uro#} -StewardMD" },
+  care_plan_plain: { tpl: "CARE_PLAN_PLAIN", ctid: "1177178791389160530", text: "Dear {#alp#}, please continue your prescribed care plan from Dr. {#alp#} at {#alp#}. For any questions, contact us at {#cbn#}. -StewardMD" },
+  post_visit: { tpl: "POST_VISIT_DETAILED", ctid: "1177178791495757255", plain: "post_visit_plain", text: "Dear {#alp#}, we hope you're recovering well after your visit with Dr. {#alp#} at {#alp#}. If symptoms worsen, please contact us at {#cbn#}. Details: {#uro#} -StewardMD" },
+  post_visit_plain: { tpl: "POST_VISIT_PLAIN", ctid: "1177178791396071579", text: "Dear {#alp#}, we hope you're recovering well after your visit with Dr. {#alp#} at {#alp#}. If symptoms worsen, please contact us at {#cbn#}. -StewardMD" },
+  visit_reminder: { tpl: "VISIT_REMINDER_DETAILED", ctid: "1177178791470273641", plain: "visit_reminder_plain", text: "Dear {#alp#}, this is a reminder for your follow-up visit with Dr. {#alp#} at {#alp#} scheduled on {#alp#}. Please carry previous prescriptions and reports. Details: {#uro#} -StewardMD" },
+  visit_reminder_plain: { tpl: "VISIT_REMINDER_PLAIN", ctid: "1177178791346053803", text: "Dear {#alp#}, this is a reminder for your follow-up visit with Dr. {#alp#} at {#alp#} scheduled on {#alp#}. Please carry previous prescriptions and reports. -StewardMD" },
 };
 // PURE: the template text with its slots filled in order. "" when the template is unknown, the slot count is
 // wrong, or a slot is blank: a message that cannot match its registered text is never sent.
@@ -133,7 +134,9 @@ export async function sendDlt(env, toE164, key, slots) {
   var to = toDialable(toE164, env.FOLLOWCARE_DEFAULT_CC);
   if (!to || to.length < 10) return { ok: false, reason: "bad_number" };
   // R1 takes "91XXXXXXXXXX" (2Factor's API docs), unlike the TSMS endpoint above, which wants 10 digits.
-  var form = new URLSearchParams({ module: "TRANS_SMS", apikey: env.TWOFACTOR_API_KEY, to: to, from: env.TWOFACTOR_SENDER, msg: msg, peid: DLT_PEID, ctid: DLT[key].ctid });
+  var form = new URLSearchParams({ module: "TRANS_SMS", apikey: env.TWOFACTOR_API_KEY, to: to, from: env.TWOFACTOR_SENDER, templatename: DLT[key].tpl });
+  slots.forEach(function (v, i) { form.set("var" + (i + 1), String(v == null ? "" : v).replace(/\s+/g, " ").trim()); });
+  form.set("peid", DLT_PEID); form.set("ctid", DLT[key].ctid);
   try {
     var r = await fetch("https://2factor.in/API/R1/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: form.toString() });
     var text = await r.text(); var j = {}; try { j = JSON.parse(text); } catch (e) {}

@@ -32,6 +32,9 @@ test("all 11 approved DLT templates are here, verbatim, each under its own conte
   const byId = {};
   for (const k of Object.keys(DLT)) { assert.ok(!byId[DLT[k].ctid], "ctid used twice: " + k); byId[DLT[k].ctid] = DLT[k].text; }
   assert.deepEqual(byId, APPROVED);
+  // Each is registered on 2Factor under this name with the same text (#VARn# for the slots), 2026-09-27.
+  const tpls = Object.keys(DLT).map((k) => DLT[k].tpl);
+  assert.equal(new Set(tpls).size, 11); for (const t of tpls) assert.match(t, /^[A-Z_]+$/);
 });
 
 test("every Detailed template ends in its link and points at an approved no-link twin with the same slots before it", () => {
@@ -91,15 +94,17 @@ test("sendDlt posts the filled text to 2Factor R1 as TRANS_SMS from MAIK with ou
     assert.equal(f.get("from"), "MAIK"); assert.equal(f.get("ctid"), "1177178791267832947");
     assert.equal(DLT_PEID, "1101720950000098192", "MAIKNOWLEDGE LLP on Vilpower");
     assert.equal(f.get("peid"), DLT_PEID, "no entity id: the operator rejects the message");
-    assert.equal(f.get("msg"), "Your OTP for login to StewardMD is 654321. Valid for 10 minutes. Do not share this OTP with anyone. -StewardMD");
+    assert.equal(f.get("templatename"), "STEWARDMD_OTP");
+    assert.deepEqual([f.get("var1"), f.get("var2"), f.get("var3")], ["654321", "10", null]);
+    assert.equal(f.get("msg"), null, "2Factor fills its registered text; its own text matching refused a valid one");
   }));
 
 test("sendDlt with no link sends the approved no-link twin; a missing clinic phone still sends nothing", () =>
   withFetch(() => res(true, '{"Status":"Success","Details":"sid-2"}'), async (calls) => {
     await sendDlt(ENV, "9876543210", "post_visit", ["Patient", "Rao", "Cardiology", "04023456789", ""]);
     const f = new URLSearchParams(calls[0].o.body);
-    assert.equal(f.get("ctid"), "1177178791396071579");
-    assert.equal(f.get("msg"), "Dear Patient, we hope you're recovering well after your visit with Dr. Rao at Cardiology. If symptoms worsen, please contact us at 04023456789. -StewardMD");
+    assert.equal(f.get("ctid"), "1177178791396071579"); assert.equal(f.get("templatename"), "POST_VISIT_PLAIN");
+    assert.deepEqual([1, 2, 3, 4, 5].map((i) => f.get("var" + i)), ["Patient", "Rao", "Cardiology", "04023456789", null]);
     assert.deepEqual(await sendDlt(ENV, "9876543210", "post_visit", ["Patient", "Rao", "Cardiology", "", ""]), { ok: false, reason: "template_mismatch" });
     assert.deepEqual(await sendDlt(ENV, "9876543210", "otp", ["1", ""]), { ok: false, reason: "template_mismatch" }, "no twin: nothing");
     assert.equal(calls.length, 1);
