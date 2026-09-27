@@ -37,7 +37,8 @@ ok((home.match(/maikRenderAnswer\(_live\(\)|maikRenderAnswer\(_h,/g) || []).leng
   "answer renders go through _live()/_h (the live host), not the sheet-captured bubble");
 
 // 4) live streaming (onDelta) also paints the live bubble, so the typewriter continues after reopen
-ok(/_live\(\)\.innerHTML = '<div class="maik-streaming">/.test(home),
+// (SMD-02: the stream is patched into the same live host by maikPatchStream, not replaced wholesale)
+ok(/_live\(\)\.innerHTML = '<div class="maik-streaming">/.test(home) || /maikPatchStream\(_live\(\), rn\)/.test(home),
   "onDelta streams into _live() so the reopened sheet keeps typing");
 
 // 5) close() KEEPS the in-flight bubble (no more .maik-thinking strip) but still persists the thread

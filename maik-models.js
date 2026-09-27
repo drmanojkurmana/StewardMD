@@ -20,7 +20,10 @@
  *   • Progress is a real byte fraction, so a big download shows honest movement.
  *
  * INTEGRITY: we check the exact byte length, then the GGUF magic, then let llama.cpp's own loader
- * reject anything structurally wrong. We deliberately do NOT hash the whole file on device.
+ * reject anything structurally wrong. UPDATE 2026-09-27 (QA sheet SMD-03): on native the plugin now
+ * hashes the finished file itself (modelVerify, streamed natively, nothing crosses the bridge) and a
+ * pack is marked installed only when that equals the registry sha256 - see hashCheck() in
+ * nativeDownload(). The web PWA path below still does NOT hash the whole file:
  * ponytail: size + magic + loader validation, not a full SHA-256 (which would mean reading 2.5 GB
  * back through the bridge). The sha256 below is for OFF-device verification only.
  *
@@ -1083,6 +1086,26 @@
       });
     }
 
+    /* NEVER "Downloaded" BEFORE THE HASH PASSES (QA sheet SMD-03, 2026-09-27: Settings said
+     * "Downloaded, Selected" while chat said the file was damaged and removed). Size and the .parts
+     * sidecar cannot see bytes that are wrong in place (a resume from a bad offset), so the native
+     * plugin hashes the finished file and it must equal the registry's sha256. A mismatch deletes it
+     * and downloads it again, once, on its own; a second mismatch stops with a plain message. Packs
+     * with no registry hash, or an older native build without modelVerify, keep the previous checks. */
+    function hashCheck(pass) {
+      var want = f.sha256 ? String(f.sha256).toLowerCase() : "";
+      if (!want || !L.modelVerify) return Promise.resolve();
+      report(total, "Checking the downloaded file");
+      return L.modelVerify({ name: f.name }).then(function (r) {
+        if (r && String(r.sha256 || "").toLowerCase() === want) return;
+        if (pass >= 1 || stopped) throw new Error("The download was damaged twice in a row. Check the connection and tap Download to try again.");
+        report(0, "The file was damaged in transit, downloading it again");
+        return (L.modelDelete ? L.modelDelete({ name: f.name }).catch(function () {}) : Promise.resolve())
+          .then(function () { lrem(KEY_DLID + id); return fresh().then(poll); })
+          .then(function () { return hashCheck(pass + 1); });
+      });
+    }
+
     return L.modelPath({ name: f.name }).then(function (mp) {
       // `partial` is what distinguishes "2.49 GB of finished model" from "2.49 GB of preallocated
       // file with 14 parts still missing". Size alone cannot tell them apart.
@@ -1107,6 +1130,8 @@
         return (L.modelDelete ? L.modelDelete({ name: f.name }).catch(function () {}) : Promise.resolve())
           .then(function () { lrem(KEY_DLID + id); return fresh().then(poll); });
       });
+    }).then(function () {
+      return hashCheck(0);
     }).then(function () {
       lset(MARK_PREFIX + id, "1");
       var s0 = registrySha(id); if (s0) lset(SHA_PREFIX + id, s0);
@@ -1355,6 +1380,7 @@
     lrem(SHA_PREFIX + id);
     lrem(KEY_DLID + id);
     delete _state[id];
+    emit(id);   // SMD-03: Settings must stop saying "Downloaded" the moment the file is gone
     if (isNative() && L && L.modelDelete) {
       return pack(id).files.reduce(function (chain, f) {
         return chain.then(function () { return L.modelDelete({ name: f.name }).catch(function () {}); });

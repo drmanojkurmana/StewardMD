@@ -7073,6 +7073,27 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         });
         think.appendChild(onBtn); scroll(); return;
       }
+      if (r && r.error && /model-corrupted|corrupt/i.test(String(r.error))) {
+        // SMD-03: a damaged model is a dead end without a way out from here. Two taps, both explicit:
+        // download it again (the file is already removed and the pack unmarked), or switch this
+        // conversation to MaiK Cloud. Never a silent cloud call (decision 2026-09-11, Local is a hard
+        // policy), so the cloud is one tap, not automatic.
+        think.innerHTML = '<div class="maik-welcome">The on-device model file was damaged, so it has been removed. Download it again, or ask this with MaiK Cloud.</div>';
+        var row = document.createElement("div"); row.style.cssText = "display:flex;gap:8px;flex-wrap:wrap;margin-top:8px";
+        var dl = document.createElement("button"); dl.className = "maik-chip"; dl.textContent = "Download it again";
+        dl.addEventListener("click", function () {
+          var M = window.SMD_MAIK_MODELS, pid = r.pack || (M && M.activePack && M.activePack());
+          try { if (M && M.ensure && pid) { M.ensure(pid).catch(function () {}); dl.textContent = "Downloading in the background"; dl.disabled = true; } } catch (e) {}
+        });
+        var cl = document.createElement("button"); cl.className = "maik-chip"; cl.textContent = "Switch to MaiK Cloud and ask again";
+        cl.addEventListener("click", function () {
+          try { if (window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.setPref) SMD_MAIK_ENGINE.setPref("cloud"); } catch (e) {}
+          try { qEl.value = question || ""; } catch (e) {}
+          send();
+        });
+        row.appendChild(dl); row.appendChild(cl); think.appendChild(row);
+        maikBuddyCue("error"); scroll(); return;
+      }
       if (r && r.error) { think.innerHTML = '<div class="maik-welcome">' + maikErrorNotice(r) + '</div>'; maikBuddyCue("error"); return; }
       var md = (r && r.text) ? String(r.text).trim() : "";
       var _refine = maikParseRefine(md); md = _refine.text;   // strip the @@REFINE@@ block; its chips render below

@@ -10530,3 +10530,29 @@ MaiK Offline -> MaiK; privacy panel scoped to "Offline, your question stays on y
 Follow-up same day: the headline "offline medical AI." keeps the poster gradient
 (#5eead4 > #38bdf8 > #a78bfa, owner: "as in poster"), the one exception to the single green. Chips that
 were mint text on a dark-teal fill now read white on #0E6E63 (both had collapsed to teal).
+
+## 2026-09-27 — QA bug sheet (SMD-01..16): decisions taken while fixing
+
+- **Model integrity is hashed natively (SMD-03).** Reverses the "no full SHA on device" note in
+  `maik-models.js`: that rule was about reading 2.5 GB back through the JS bridge. The llama plugin now
+  has `modelVerify` (iOS CryptoKit / Android MessageDigest, streamed in 8 MiB reads off the inference
+  thread). `nativeDownload()` marks a pack installed only when the hash equals the registry sha256; a
+  mismatch deletes and re-downloads once, a second mismatch stops. Packs with no registry hash, and
+  native builds without `modelVerify`, keep size + sidecar + loader checks. `remove()` now emits.
+- **No silent cloud fallback, kept.** The sheet asked for a corrupt on-device model to fall back to
+  MaiK Cloud automatically. That contradicts 2026-09-11 (Local is a hard policy, never a silent cloud
+  call), so the chat offers two explicit taps instead: "Download it again" and "Switch to MaiK Cloud
+  and ask again". Owner to decide if Local should ever fall back on its own.
+- **iOS background downloads (SMD-04).** Already a background URLSession; what was missing was
+  `application(_:handleEventsForBackgroundURLSession:)`. AppDelegate now recreates the session by ObjC
+  runtime name (`LlamaPlugin.ModelDownloader.wakeForBackgroundEvents`, the app target does not import
+  the plugin module) and returns iOS's completion handler on `SMDBackgroundURLSessionDone`. A local
+  notification says when a model finished while the app was in the background. Uncompiled here:
+  build on the Mac and watch a download with the phone locked.
+- **The grey edge tab (SMD-15) is iOS's Picture-in-Picture stash handle**, not app UI; one report showed
+  a live camera feed in the PiP window. `swipe-back.js` now opts every app `<video>` out of PiP, leaves
+  PiP on removal or backgrounding, and stops a removed camera preview's stream.
+- **Antibiogram PDF (SMD-12)** splits tables past 14 antibiotics into stacked blocks with lab-code heads
+  rather than shrinking type or switching to landscape (the native renderer is fixed portrait).
+- **MaiK start card (SMD-16)** promises citations only when the answering engine gives them
+  (`SMD_MAIK_ENGINE.knowSub()`), in the same terms as the footer.
