@@ -20,7 +20,7 @@ test("POST /api/queue/org/update phone: 401, nurse 403, other hospital refused, 
   assert.equal((await api("/org/update", "POST", { orgId: "org-a", phone: "9876543210" }, H.NURSE_A)).__status, 403);
   const other = await api("/org/update", "POST", { orgId: "org-a", phone: "9876543210" }, H.HR_B);
   assert.ok(other.__status === 403 || other.__status === 404, JSON.stringify(other));
-  for (const bad of ["123", "98765 4321", "+1 415 555 0123", "call reception", "987654321012"]) {
+  for (const bad of ["123", "98765 4321", "+1 415 555 0123", "call reception", "987654321012", "1234567890"]) {
     const r = await api("/org/update", "POST", { orgId: "org-a", phone: bad }, H.HR_A);
     assert.equal(r.__status, 422, bad + " " + JSON.stringify(r));
     assert.equal(r.error, "bad_clinic_phone");

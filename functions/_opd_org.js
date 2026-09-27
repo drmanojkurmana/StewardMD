@@ -161,14 +161,14 @@ export function org(o = {}) {
 
 /* The number a patient calls, printed in SMS as the DLT callback number (the {#cbn#} slot of "contact us
  * at ..."). Owner 2026-09-27: each clinic's own number, never a StewardMD one, because a patient whose
- * symptoms worsen will call it. India only (DLT is Indian): a 10-digit mobile, an 11-digit landline with
- * its 0 STD code, or an 1800 toll-free number; +91 / 91 in front is dropped. "" clears it. PURE. */
+ * symptoms worsen will call it. India only (DLT is Indian): a 10-digit mobile (6-9 first), a landline with
+ * its 0 STD code (11 digits), or an 1800 / 1860 number; +91 / 91 in front is dropped. "" clears it. PURE. */
 export function clinicPhone(raw) {
   let d = String(raw == null ? "" : raw).replace(/[\s\-().]/g, "");
   if (!d) return { ok: true, value: "" };
   d = d.replace(/^\+91/, "");
-  if (/^91\d{10}$/.test(d)) d = d.slice(2);
-  return /^\d{10,11}$/.test(d) ? { ok: true, value: d } : { ok: false };
+  if (/^91[6-9]\d{9}$/.test(d)) d = d.slice(2);
+  return /^(?:[6-9]\d{9}|0\d{10}|18[06]0\d{7})$/.test(d) ? { ok: true, value: d } : { ok: false };
 }
 
 /* Sign-in policy for the hospital's staff accounts. Top-level, not inside wardsynq, because it governs

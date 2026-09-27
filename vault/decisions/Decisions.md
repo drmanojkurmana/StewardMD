@@ -10342,8 +10342,8 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
   `stewardmd.in` on the DLT CTA whitelist, before any of it sends.
 ## 2026-09-27 - The SMS callback number is the clinic's own phone
 - **Decision**: a clinic saves its own phone (Staff & roles > Doctor & Clinic Admin Profile > "Clinic phone for
-  patients", `org.phone`, cleaned by `clinicPhone()` in `functions/_opd_org.js`: 10-digit mobile, 11-digit
-  landline with its STD code, or 1800). It fills the DLT `{#cbn#}` slot, so the checkout visit-summary SMS goes as
+  patients", `org.phone`, cleaned by `clinicPhone()` in `functions/_opd_org.js`: 10-digit mobile starting 6-9,
+  landline with its 0 STD code, or 1800 / 1860). It fills the DLT `{#cbn#}` slot, so the checkout visit-summary SMS goes as
   Care Plan - Detailed. No number saved: that message stays WhatsApp only. Never a StewardMD number.
 - **Why**: owner (2026-09-27), option 1 of three: "If symptoms worsen, contact us at" is a number a worsening
   patient calls, so it must be the clinic that treated them.
