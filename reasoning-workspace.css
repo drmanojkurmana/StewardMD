@@ -87,6 +87,17 @@ body.dark #dxOverlay { --dx-accent:#b6b0ff; }
 #dxOverlay .dx-select, #dxOverlay .dx-tool { min-height:44px; }
 #dxOverlay .dx-discl { margin-top:24px; padding:14px 0; border-top:1px solid var(--dx-border); background:none; border-radius:0; font-size:12px; line-height:1.65; }
 #dxOverlay .dx-cmp-grid { overflow-x:auto; }
+/* smd_dx_ask: "Rule out the closest alternatives" inside the chosen diagnosis card, built from the intake question card. */
+#dxOverlay .dx-ask .dx-suggest { margin:12px 0; padding:18px!important; box-shadow:none; border-radius:16px; }
+#dxOverlay .dx-ask .dx-question-finding { font-size:20px; }
+#dxOverlay .dx-ask .dx-answer-row button { min-width:0; justify-content:center; text-align:center; }
+#dxOverlay [data-askv="yes"] { background:var(--dx-accent); color:var(--dx-surface); border-color:var(--dx-accent); }
+#dxOverlay .dx-ask-done { display:flex; flex-direction:column; gap:6px; margin:0 0 12px; }
+#dxOverlay .dx-ask-done > div { display:flex; flex-wrap:wrap; gap:6px; }
+#dxOverlay .dx-ask-undo { align-self:flex-start; min-height:44px; padding:0; background:none; border:none; color:var(--dx-accent); font:600 12px var(--sans,system-ui); cursor:pointer; }
+#dxOverlay .dx-ask-v { border:1px solid var(--dx-border); border-radius:14px; padding:12px 14px; background:var(--dx-surface); font-size:13px; line-height:1.6; color:var(--ink,#132b38); }
+#dxOverlay .dx-ask-v.warn { background:var(--yellow-bg); border-color:var(--yellow-line); }
+#dxOverlay .dx-ask-alt { display:flex; width:100%; margin-top:8px; justify-content:center; text-align:center; }
 #dxOverlay :is(button,input,textarea,[role=button]):focus-visible { outline:3px solid var(--dx-accent); outline-offset:3px; }
 #dxOverlay h2[tabindex='-1']:focus { outline:none; }
 @media(min-width:1024px) { #dxOverlay .dx-body { display:grid; grid-template-columns:minmax(360px,.85fr) minmax(0,1.15fr); gap:32px; align-items:start; } #dxOverlay .dx-review { padding-top:0; } #dxOverlay .dx-work-nav { padding-inline:max(20px,calc((100vw - 1000px)/2)); } }

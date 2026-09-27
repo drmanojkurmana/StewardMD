@@ -2807,7 +2807,7 @@
       (tools.length ? '<div class="dx-d-row"><b>Related bedside tools</b><div class="dx-tools">' + tools.map(function (t){return '<button class="dx-tool" data-tool="'+t+'">'+esc(TOOLREG[t].icon+" "+TOOLREG[t].label)+'</button>';}).join("") + '</div></div>' : '') +
       scoreChipsBlock(r) +
       harrisonRef(r.id) +
-      '<button class="dx-select ' + cls + '" data-sel="' + r.id + '">Select this diagnosis →</button>' +
+      (S.ask && S.ask.target === r.id ? askHTML(r) : '<button class="dx-select ' + cls + '" data-sel="' + r.id + '">Select this diagnosis →</button>') +
       '</div>';
     return '<div class="dx-card ' + cls + ' open">' + head + det + '</div>';
   }
@@ -3118,7 +3118,7 @@
     root.querySelectorAll(".dx-row-head").forEach(function (h) {
       h.addEventListener("click", function () { var id = h.getAttribute("data-id"); S.expanded[id] = !S.expanded[id]; renderColsOnly(); });
     });
-    root.querySelectorAll(".dx-select").forEach(function (b) {
+    root.querySelectorAll(".dx-select[data-sel]").forEach(function (b) {
       // a diagnosis card's Select may ask first (smd_dx_ask); the gate card's page button is unchanged
       b.addEventListener("click", function (e) { e.stopPropagation(); var id = b.getAttribute("data-sel"); if (b.closest && b.closest(".dx-card")) pickDx(id); else selectDx(id); });
     });
@@ -3128,6 +3128,7 @@
     root.querySelectorAll(".dx-cmp").forEach(function (b) {
       b.addEventListener("click", function (e) { e.stopPropagation(); toggleCompare(b.getAttribute("data-cmp")); });
     });
+    wireAsk();
     renderCompare(d);
     recordRecentCase(d);
     // NB: S.prev is the PRE-change snapshot taken in addFinding — do not
@@ -3162,7 +3163,7 @@
     root.querySelectorAll(".dx-row-head").forEach(function (h) {
       h.addEventListener("click", function () { var id = h.getAttribute("data-id"); S.expanded[id] = !S.expanded[id]; renderColsOnly(); });
     });
-    root.querySelectorAll(".dx-select").forEach(function (b) {
+    root.querySelectorAll(".dx-select[data-sel]").forEach(function (b) {
       // a diagnosis card's Select may ask first (smd_dx_ask); the gate card's page button is unchanged
       b.addEventListener("click", function (e) { e.stopPropagation(); var id = b.getAttribute("data-sel"); if (b.closest && b.closest(".dx-card")) pickDx(id); else selectDx(id); });
     });
@@ -3172,6 +3173,7 @@
     root.querySelectorAll(".dx-cmp").forEach(function (b) {
       b.addEventListener("click", function (e) { e.stopPropagation(); toggleCompare(b.getAttribute("data-cmp")); });
     });
+    wireAsk();
     renderCompare(d);
   }
 
@@ -3221,72 +3223,98 @@
     if (dxAskOn()) { try { if (openAsk(id)) return; } catch (e) {} }
     selectDx(id);
   }
+  // The questions live INSIDE the chosen diagnosis card, in place of its Select button, built from the
+  // same parts as the intake's "Clarify the clinical picture" card: one question at a time.
   function openAsk(id) {
     var res = differentiate(id, 6);
     if (!res || !res.rivals.length || !res.questions.length) return false;
-    S.ask = { target: id, rivals: res.rivals.map(function (r) { return r.id; }), qs: res.questions, ans: {} };
-    renderAsk();
+    S.ask = { target: id, rivals: res.rivals.map(function (r) { return r.id; }), qs: res.questions, ans: {}, order: [] };
+    S.expanded[id] = true;
+    renderColsOnly();
+    askFocus();
     return true;
   }
-  function closeAsk() { S.ask = null; var el = root && root.querySelector("#dxAsk"); if (el) el.classList.remove("on"); }
+  function closeAsk() { S.ask = null; }
+  function askFocus() {
+    var c = root && root.querySelector("#dxAskCard");
+    if (!c) return;
+    try { c.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) { c.scrollIntoView(); }
+    var b = c.querySelector("[data-askv]"); if (b) { try { b.focus({ preventScroll: true }); } catch (e) {} }
+  }
   function askAnswer(k, v) {
     var A = S.ask; if (!A) return;
     var was = A.ans[k];
-    if (was === v) return;
     A.ans[k] = v;
+    A.order = A.order.filter(function (x) { return x !== k; }).concat([k]);
     S.neg = S.neg || {};
     if (v === "no") S.neg[k] = true; else delete S.neg[k];
-    if (v === "yes") { addFinding(k); }
-    else if (was === "yes" && S.f[k]) { delete S.f[k]; recompute(); }
-    else recompute();
-    renderAsk();
+    if (v === "yes" && !S.f[k]) addFinding(k);            // re-renders the workspace, card included
+    else if (was === "yes" && v !== "yes" && S.f[k]) { delete S.f[k]; recompute(); }
+    else renderColsOnly();
+    askFocus();
   }
-  function renderAsk() {
-    var A = S.ask; if (!A || !root) return;
-    var el = root.querySelector("#dxAsk");
-    if (!el) { el = document.createElement("div"); el.id = "dxAsk"; el.className = "dx-mgmt dx-ask"; el.setAttribute("role", "dialog"); el.setAttribute("aria-label", "Differentiating questions"); root.appendChild(el); }
-    var st = askStanding(A.target, A.rivals);
-    if (!st) { closeAsk(); return; }
-    var T = st.target, nAns = Object.keys(A.ans).length;
-    var rivalNames = A.rivals.map(function (id) { var r = st.rows.filter(function (x) { return x.id === id; })[0]; return r ? r.name : null; }).filter(Boolean);
-    var qs = A.qs.map(function (q) {
-      var a = A.ans[q.key] || "";
-      function btn(v, t) { return '<button class="dx-chip" type="button" data-ask="' + q.key + '" data-v="' + v + '" aria-pressed="' + (a === v) + '">' + t + '</button>'; }
-      return '<div class="dx-ask-q' + (a ? " done" : "") + '"><div class="dx-ask-l">' + esc(q.label) + '</div>' +
-        '<div class="dx-ask-h">Yes favours <b>' + esc(q.favoursName) + '</b> over ' + esc(q.against) + '</div>' +
-        '<div class="dx-ask-b">' + btn("yes", "Yes") + btn("no", "No") + btn("unk", "Not known") + '</div></div>';
+  function askUndo() {
+    var A = S.ask; if (!A || !A.order.length) return;
+    var k = A.order.pop(), was = A.ans[k];
+    delete A.ans[k];
+    if (S.neg) delete S.neg[k];
+    if (was === "yes" && S.f[k]) { delete S.f[k]; recompute(); } else renderColsOnly();
+    askFocus();
+  }
+  function askHTML(r) {
+    var A = S.ask, st = askStanding(A.target, A.rivals);
+    if (!st) return "";
+    var T = st.target, cls = r.inf ? "inf" : "ni";
+    var open = A.qs.filter(function (q) { return !A.ans[q.key]; }), q = open[0], n = A.qs.length - open.length;
+    var body;
+    if (q) {
+      body = '<div class="dx-eyebrow">BEFORE YOU COMMIT · QUESTION ' + (n + 1) + ' OF ' + A.qs.length + '</div>' +
+        '<h3 class="dx-question">Is this finding present?</h3>' +
+        '<div class="dx-question-finding">' + esc(q.label) + '</div>' +
+        '<p class="dx-suggest-note">A yes favours <strong>' + esc(q.favoursName) + '</strong> over ' + esc(q.against) + '. Verify before answering.</p>' +
+        '<div class="dx-answer-row"><button class="dx-chip" type="button" data-askv="yes" data-askk="' + q.key + '">Yes · add</button>' +
+        '<button class="dx-chip" type="button" data-askv="no" data-askk="' + q.key + '">No</button>' +
+        '<button class="dx-chip" type="button" data-askv="unk" data-askk="' + q.key + '">Unknown</button></div>' +
+        '<p class="dx-question-foot">No is kept as a pertinent negative. Unknown leaves the case unchanged.</p>';
+    } else {
+      body = '<div class="dx-eyebrow">BEFORE YOU COMMIT</div>' +
+        '<h3 class="dx-question">All ' + A.qs.length + ' questions answered</h3>' +
+        '<div class="dx-answer-row"><button class="dx-chip" type="button" id="dxAskMore">Ask more questions</button></div>';
+    }
+    var answered = A.order.map(function (k) {
+      var qq = A.qs.filter(function (x) { return x.key === k; })[0]; if (!qq) return "";
+      var v = A.ans[k];
+      return '<span class="dx-f ' + (v === "yes" ? "sup" : v === "no" ? "con" : "mis") + '">' + (v === "yes" ? "✓ " : v === "no" ? "✕ " : "? ") + esc(qq.label) + '</span>';
     }).join("");
     var verdict;
-    if (st.leader) verdict = '<div class="dx-ask-v warn" role="status"><b>' + esc(st.leader.name) + '</b> now ranks above ' + esc(T.name) + ' (by ' + (-st.leader.gap) + '). Reconsider before committing.</div>';
-    else if (st.rows.length) verdict = '<div class="dx-ask-v" role="status"><b>' + esc(T.name) + '</b> still leads: ' + st.rows.slice(0, 3).map(function (r) { return 'ahead of ' + esc(r.name) + ' by ' + r.gap; }).join(", ") + '.</div>';
-    else verdict = '<div class="dx-ask-v" role="status"><b>' + esc(T.name) + '</b> has no close rival left.</div>';
-    var noes = A.qs.filter(function (q) { return A.ans[q.key] === "no"; });
-    var noteNo = noes.length ? '<p class="dx-ask-n">Recorded as absent: ' + noes.map(function (q) { return esc(q.label) + (q.favours !== T.id ? ' (a yes would have favoured ' + esc(q.favoursName) + ')' : ''); }).join("; ") + '.' +
-      (rankV3() ? '' : ' Absent answers are kept as pertinent negatives; they do not change the scores.') + '</p>' : '';
-    var more = nAns >= A.qs.length ? '<button class="dx-chip" type="button" id="dxAskMore">Ask more questions</button>' : '';
-    el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxAskBack" type="button">‹ Back to differential</button></div>' +
-      '<div class="dx-mgmt-body">' +
-        '<div class="dx-mgmt-badge">Before you commit</div>' +
-        '<h2 class="dx-mgmt-name">Is it ' + esc(T.name) + '?</h2>' +
-        '<p>Closest alternatives on the same findings: <b>' + esc(rivalNames.join(", ")) + '</b>. Answer what you know; each question was chosen because its answer moves ' + esc(T.name) + ' against one of them. Verify before answering.</p>' +
-        '<div class="dx-mgmt-sec">Differentiating questions</div>' + qs + more +
-        '<div class="dx-mgmt-sec">Where it stands</div>' + verdict + noteNo +
-        '<div class="dx-ask-go">' +
-          '<button class="dx-select ' + (window.SYNDROMES && SYNDROMES[T.id] ? "inf" : "ni") + '" type="button" data-askgo="' + T.id + '">Continue with ' + esc(T.name) + ' →</button>' +
-          (st.leader ? '<button class="dx-chip" type="button" data-askgo="' + st.leader.id + '">Switch to ' + esc(st.leader.name) + ' →</button>' : '') +
-        '</div>' +
+    if (st.leader) verdict = '<div class="dx-ask-v warn" role="status"><strong>' + esc(st.leader.name) + '</strong> now ranks above ' + esc(T.name) + ' (by ' + (-st.leader.gap) + '). Reconsider before committing.</div>';
+    else if (st.rows.length) verdict = '<div class="dx-ask-v" role="status"><strong>' + esc(T.name) + '</strong> leads: ' + st.rows.slice(0, 3).map(function (x) { return 'ahead of ' + esc(x.name) + ' by ' + x.gap; }).join(", ") + '.</div>';
+    else verdict = '<div class="dx-ask-v" role="status"><strong>' + esc(T.name) + '</strong> has no close rival left.</div>';
+    return '<div class="dx-d-row dx-ask"><b>Rule out the closest alternatives</b>' +
+      '<div class="dx-reason">' + esc(A.rivals.map(function (id) { var x = st.rows.filter(function (y) { return y.id === id; })[0]; return x ? x.name : ""; }).filter(Boolean).join(", ")) + ' also fit these findings.</div>' +
+      '<div class="dx-suggest dx-askcard" id="dxAskCard">' + body + '</div>' +
+      (answered ? '<div class="dx-ask-done"><div>' + answered + '</div><button class="dx-ask-undo" type="button" id="dxAskUndo">Undo last answer</button></div>' : '') +
+      verdict +
+      '<button class="dx-select ' + cls + '" type="button" data-askgo="' + T.id + '">Continue with ' + esc(T.name) + ' →</button>' +
+      (st.leader ? '<button class="dx-chip dx-ask-alt" type="button" data-askgo="' + st.leader.id + '">Switch to ' + esc(st.leader.name) + ' →</button>' : '') +
+      '<button class="dx-chip dx-ask-alt" type="button" id="dxAskCancel">Not now, back to the differential</button>' +
       '</div>';
-    el.classList.add("on");
-    el.querySelector("#dxAskBack").addEventListener("click", closeAsk);
-    el.querySelectorAll("[data-ask]").forEach(function (b) { b.addEventListener("click", function () { askAnswer(b.getAttribute("data-ask"), b.getAttribute("data-v")); }); });
-    el.querySelectorAll("[data-askgo]").forEach(function (b) { b.addEventListener("click", function () { var id = b.getAttribute("data-askgo"); closeAsk(); selectDx(id); }); });
-    var mb = el.querySelector("#dxAskMore");
-    if (mb) mb.addEventListener("click", function () {
-      var res = differentiate(A.target, 6), have = {};
-      A.qs.forEach(function (q) { have[q.key] = 1; });
-      var add = res ? res.questions.filter(function (q) { return !have[q.key]; }) : [];
-      if (add.length) { A.qs = A.qs.concat(add); renderAsk(); }
-      else { mb.outerHTML = '<p class="dx-ask-n">No further question separates these diagnoses with the findings the knowledge base has.</p>'; }
+  }
+  function wireAsk() {
+    if (!root || !S.ask) return;
+    root.querySelectorAll("[data-askv]").forEach(function (b) { b.addEventListener("click", function (e) { e.stopPropagation(); askAnswer(b.getAttribute("data-askk"), b.getAttribute("data-askv")); }); });
+    // re-render first so the card shows Select again when the doctor comes back to the workspace
+    root.querySelectorAll("[data-askgo]").forEach(function (b) { b.addEventListener("click", function (e) { e.stopPropagation(); var id = b.getAttribute("data-askgo"); S.ask = null; renderColsOnly(); selectDx(id); }); });
+    var u = root.querySelector("#dxAskUndo"); if (u) u.addEventListener("click", function (e) { e.stopPropagation(); askUndo(); });
+    var c = root.querySelector("#dxAskCancel"); if (c) c.addEventListener("click", function (e) { e.stopPropagation(); S.ask = null; renderColsOnly(); });
+    var mb = root.querySelector("#dxAskMore");
+    if (mb) mb.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var A = S.ask, res = differentiate(A.target, 6), have = {};
+      A.qs.forEach(function (x) { have[x.key] = 1; });
+      var add = res ? res.questions.filter(function (x) { return !have[x.key]; }) : [];
+      if (add.length) { A.qs = A.qs.concat(add); renderColsOnly(); askFocus(); }
+      else mb.outerHTML = '<p class="dx-suggest-note">No further question separates these diagnoses with the findings the knowledge base has.</p>';
     });
   }
 
@@ -3614,18 +3642,6 @@
       ".dx-mgmt-ul{margin:0;padding-left:18px}",
       ".dx-mgmt-ul li{font:500 13.5px/1.5 var(--sans);color:var(--slate);margin:4px 0}",
       ".dx-mgmt-src{margin-top:18px;font:600 11.5px var(--sans);color:var(--slate-soft)}",
-      ".dx-ask-q{border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin:8px 0;background:var(--panel)}",
-      ".dx-ask-q.done{opacity:.86}",
-      ".dx-ask-l{font:700 14px var(--sans);color:var(--ink)}",
-      ".dx-ask-h{font:500 12.5px/1.45 var(--sans);color:var(--slate);margin:3px 0 8px}",
-      ".dx-ask-b{display:flex;gap:6px;flex-wrap:wrap}",
-      ".dx-ask-b .dx-chip{min-height:44px;min-width:72px}",
-      ".dx-ask-b .dx-chip[aria-pressed=true]{background:var(--teal-soft);border-color:var(--teal);color:var(--teal)}",
-      ".dx-ask-v{border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:var(--teal-soft);font:500 13.5px/1.5 var(--sans);color:var(--ink)}",
-      ".dx-ask-v.warn{background:var(--yellow-bg);border-color:var(--yellow-line)}",
-      ".dx-ask-n{font:500 12.5px/1.5 var(--sans)!important;color:var(--slate)!important;margin:8px 0 0!important}",
-      ".dx-ask-go{display:flex;flex-direction:column;gap:8px;margin-top:18px}",
-      ".dx-ask-go .dx-chip{min-height:44px}",
       ".dx-chip{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:6px 11px;font:600 12px var(--sans);color:var(--slate);cursor:pointer;transition:all .12s}",
       ".dx-chip:hover{border-color:var(--teal);color:var(--teal)}",
       ".dx-gate{margin:14px 0 8px}",

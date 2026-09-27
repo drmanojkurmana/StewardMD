@@ -127,13 +127,20 @@ Results in `kb/validation/AUDIT-2026-09-26.md` (Round 4).
 ## Differentiating questions on Select (`smd_dx_ask`, default OFF, 2026-09-27)
 
 `reasoning.js` `differentiate(targetId)` (next to `nextQuestions`), `askStanding()`, `pickDx()` /
-`openAsk()` / `renderAsk()` / `askAnswer()`; pure API `SMD_REASON.differentiate(id, findings?,
+`openAsk()` / `askHTML()` / `wireAsk()` / `askAnswer()` / `askUndo()`; pure API `SMD_REASON.differentiate(id, findings?,
 {absent, limit})`; `DX._differentiate`. Rivals: candidates within 25 rank points of the chosen
 diagnosis that share a supporting finding (max 3). Questions: the rivals' and target's missing /
 associated keys, each simulated with `scoreMapFor` (state restored); kept when the answer moves the
 target-vs-rival gap by 4+ AND raises the favoured diagnosis's own score AND the favoured diagnosis's
 knowledge names the finding positively (`askPositive`). Never asks age/sex, number/select fields or
-`feverGU`. Panel reuses the `.dx-mgmt` overlay as `#dxAsk`; `closeMgmt()` also closes it.
+`feverGU`. **UI lives inside the chosen card** (`card()` renders `askHTML` in place of the Select
+button while `S.ask.target` is that card): the intake's question-card classes (`dx-suggest`,
+`dx-eyebrow`, `dx-question`, `dx-answer-row`), one question at a time, styles in
+`reasoning-workspace.css` under `#dxOverlay` (accent token, dark mode). A first version used a
+full-screen overlay; the owner rejected it as "a different screen". `wireAsk()` runs in both column
+render paths; the Select loop now matches `.dx-select[data-sel]` only, so the in-card Continue button
+(class `dx-select`, no `data-sel`) is not treated as a Select. Inline emphasis uses `<strong>`:
+`.dx-d-row b` is styled as a block uppercase label (the existing "Why not higher" line shows that bug).
 
 - **Gotcha**: only buttons inside `.dx-card` go through `pickDx`. The policy card's "Open full
   stewardship page" also has class `dx-select` and was already wired twice (its own handler plus the

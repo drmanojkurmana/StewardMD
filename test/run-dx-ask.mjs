@@ -3,9 +3,11 @@
  *   2. flag ON (with smd_kb_v2): SMD_REASON.differentiate names the closest rivals of a chosen
  *      diagnosis and the findings that separate them, each saying which way a yes points; it is pure;
  *      it never asks the mislabelled feverGU, and a yes only "favours" a diagnosis it raises.
- *   3. the panel: Select opens it; Yes adds the finding, No records a pertinent negative, Not known
- *      undoes; the verdict follows (a rival that overtakes is named, with a Switch button); Back keeps
- *      the case; Continue opens the chosen diagnosis; no rival -> no panel. Fits a 390px phone.
+ *   3. the questions open INSIDE the chosen diagnosis card (same workspace header, tabs and
+ *      intake-card styling, one question at a time): Yes adds the finding, No records a pertinent
+ *      negative, Unknown leaves the case unchanged, Undo reverts; the verdict follows (a rival
+ *      that overtakes is named, with Switch); "Not now" keeps the case; Continue opens the page; no
+ *      rival -> straight through. Fits a 390px phone.
  * USAGE: node test/serve.mjs . 8804 & BASE=http://localhost:8804/ CHROME=/path/to/chrome node test/run-dx-ask.mjs
  */
 import { spawn } from "node:child_process";
@@ -46,12 +48,15 @@ const diff = async (t, f) => JSON.parse(await ev(`var f={}; ${JSON.stringify(f)}
 const selectIn = async (f, id) => ev(`try{DX.openWorkspace();}catch(e){} DX.reset(); DX.addFindings(${JSON.stringify(f)});
   var h=document.querySelector('.dx-row-head[data-id="${id}"]'); if(!h) return 'no card'; h.click();
   var b=document.querySelector('.dx-card .dx-select[data-sel="${id}"]'); if(!b) return 'no select'; b.click(); return 'ok';`);
-const panel = async () => JSON.parse(await ev(`var el=document.querySelector('#dxAsk'), ov=document.querySelector('#dxOverlay');
-  return JSON.stringify({on:!!(el&&el.classList.contains('on')), text:el?el.innerText:'', nq:el?el.querySelectorAll('.dx-ask-q').length:0,
-    warn:!!(el&&el.querySelector('.dx-ask-v.warn')), sw:!!(el&&[].some.call(el.querySelectorAll('[data-askgo]'),function(b){return /Switch/.test(b.textContent);})),
-    ws:!!(ov&&ov.classList.contains('on')), f:Object.keys(DX._state.f).sort(), neg:Object.keys(DX._state.neg||{}).filter(function(k){return DX._state.neg[k];})});`));
-const answer = async (k, v) => ev(`var b=document.querySelector('#dxAsk [data-ask="${k}"][data-v="${v}"]'); if(!b) return 'missing'; b.click(); return 'ok';`);
-
+const panel = async () => JSON.parse(await ev(`var c=document.querySelector('#dxAskCard'), blk=document.querySelector('.dx-card.open .dx-ask'), ov=document.querySelector('#dxOverlay');
+  var y=c&&c.querySelector('[data-askv="yes"]'), nav=document.querySelector('.dx-work-nav'), title=document.querySelector('.dx-title');
+  return JSON.stringify({on:!!c, text:blk?blk.innerText:'', cur:y?y.getAttribute('data-askk'):null,
+    warn:!!(blk&&blk.querySelector('.dx-ask-v.warn')), sw:!!(blk&&[].some.call(blk.querySelectorAll('[data-askgo]'),function(b){return /Switch/.test(b.textContent);})),
+    ws:!!(ov&&ov.classList.contains('on')), chrome:!!(nav&&nav.offsetParent&&title&&/Dx My Patient/.test(title.innerText)),
+    selBtn:!!document.querySelector('.dx-card.open .dx-select[data-sel]'),
+    accent:y?[getComputedStyle(y).backgroundColor, getComputedStyle(c.querySelector('.dx-eyebrow')).color]:null,
+    f:Object.keys(DX._state.f).sort(), neg:Object.keys(DX._state.neg||{}).filter(function(k){return DX._state.neg[k];})});`));
+const answerCur = async (v) => ev(`var b=document.querySelector('#dxAskCard [data-askv="${v}"]'); if(!b) return 'missing'; var k=b.getAttribute('data-askk'); b.click(); return k;`);
 try {
   let ver; for (let t = 0; t < 60; t++) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
   ws = new WebSocket(ver.webSocketDebuggerUrl); await new Promise((res, rej) => { ws.onopen = res; ws.onerror = rej; });
@@ -92,24 +97,30 @@ try {
   await load(BASE + "?dxask=1&kbv2=1");
   await selectIn(HEP, "VIRAL_HEPATITIS");
   let p = await panel();
-  ok(p.on && p.ws && /Is it Acute Viral Hepatitis\?/.test(p.text) && p.nq >= 3, `panel · Select opens "Is it Acute Viral Hepatitis?" with ${p.nq} questions, workspace kept`);
-  ok(/Cholangitis/.test(p.text) && !/—/.test(p.text), "panel · names cholangitis as a rival; no em-dash");
-  const wide = await ev(`var el=document.querySelector('#dxAsk .dx-mgmt-body'); return el.scrollWidth<=el.clientWidth+1;`);
-  ok(wide === true, "panel · no horizontal overflow at 390px");
-  await answer("rightUpperQuadrantPain", "yes"); p = await panel();
-  ok(p.f.includes("rightUpperQuadrantPain") && p.warn && p.sw && /now ranks above/.test(p.text), `panel · Yes to RUQ pain adds it; a rival overtakes and Switch is offered`);
-  await answer("transaminasesVeryHigh", "yes"); p = await panel();
-  ok(p.f.includes("transaminasesVeryHigh") && !p.warn && /still leads/.test(p.text), "panel · Yes to ALT/AST > 1000: viral hepatitis leads again");
-  await answer("dilatedCBD", "no"); p = await panel();
-  ok(p.neg.includes("dilatedCBD") && !p.f.includes("dilatedCBD") && /Recorded as absent: Dilated CBD/.test(p.text), "panel · No records a pertinent negative, not a finding");
-  await answer("rightUpperQuadrantPain", "unk"); p = await panel();
-  ok(!p.f.includes("rightUpperQuadrantPain"), "panel · changing Yes to Not known takes the finding back out");
-  await ev(`document.querySelector('#dxAskBack').click(); return 1`); p = await panel();
-  ok(!p.on && p.ws && p.f.includes("transaminasesVeryHigh"), "panel · Back returns to the differential with the answers kept");
-  await selectIn(HEP, "VIRAL_HEPATITIS");
-  await ev(`var b=document.querySelector('#dxAsk [data-askgo="VIRAL_HEPATITIS"]'); b.click(); return 1`); p = await panel();
-  ok(!p.on && !p.ws, "panel · Continue opens the chosen diagnosis page");
-  ok((await selectIn(["fever", "cough", "crepitations"], "CAP")) === "ok" && !(await panel()).on, "panel · no close rival (CAP with crackles): straight through, no panel");
+  ok(p.on && p.ws && p.chrome && !p.selBtn, "inline · Select opens the questions inside the card; workspace header and tabs stay, Select button is replaced");
+  ok(/QUESTION 1 OF \d/.test(p.text) && /Cholangitis/.test(p.text) && !/\u2014/.test(p.text), `inline · one question at a time, names cholangitis as an alternative; no em-dash (${(p.text.match(/QUESTION 1 OF \d+/) || [""])[0]})`);
+  ok(p.accent && p.accent[0] === p.accent[1], `inline · Yes uses the workspace accent (${p.accent && p.accent[0]})`);
+  const wide = await ev(`var el=document.querySelector('#dxOverlay .dx-body'); return el.scrollWidth<=el.clientWidth+1;`);
+  ok(wide === true, "inline · no horizontal overflow at 390px");
+  let k = await answerCur("yes"); p = await panel();
+  ok(k === "rightUpperQuadrantPain" && p.f.includes(k) && p.warn && p.sw && /now ranks above/.test(p.text) && /QUESTION 2 OF/.test(p.text), `inline · Yes to ${k} adds it; a rival overtakes, Switch is offered; next question shown`);
+  k = await answerCur("no"); p = await panel();
+  ok(p.neg.includes(k) && !p.f.includes(k) && /\u2715 /.test(p.text), `inline · No to ${k}: pertinent negative, not a finding, listed as answered`);
+  const kUnk = await answerCur("unk"); p = await panel();
+  ok(!p.f.includes(kUnk) && !p.neg.includes(kUnk), `inline · Unknown to ${kUnk} leaves the case unchanged`);
+  // answer until ALT/AST > 1000 comes up, then yes
+  for (let i = 0; i < 6 && p.cur && p.cur !== "transaminasesVeryHigh"; i++) { await answerCur("unk"); p = await panel(); }
+  k = await answerCur("yes"); p = await panel();
+  ok(k === "transaminasesVeryHigh" && !p.warn && /Acute Viral Hepatitis leads/.test(p.text), "inline · Yes to ALT/AST > 1000: viral hepatitis leads again");
+  await ev(`document.querySelector('#dxAskUndo').click(); return 1`); p = await panel();
+  ok(!p.f.includes("transaminasesVeryHigh") && p.cur === "transaminasesVeryHigh", "inline · Undo takes the last answer back and asks it again");
+  await ev(`document.querySelector('#dxAskCancel').click(); return 1`); p = await panel();
+  ok(!p.on && p.ws && p.selBtn && p.f.includes("rightUpperQuadrantPain"), "inline · 'Not now' returns the card to Select with the answers kept");
+  await ev(`var b=document.querySelector('.dx-card.open .dx-select[data-sel="VIRAL_HEPATITIS"]'); b.click(); return 1`); p = await panel();
+  ok(p.on && p.cur !== "rightUpperQuadrantPain", "inline · asking again skips what is already answered");
+  await ev(`var b=document.querySelector('.dx-card.open [data-askgo="VIRAL_HEPATITIS"]'); b.click(); return 1`); p = await panel();
+  ok(!p.on && !p.ws, "inline · Continue opens the chosen diagnosis page");
+  ok((await selectIn(["fever", "cough", "crepitations"], "CAP")) === "ok" && !(await panel()).on, "inline · no close rival (CAP with crackles): straight through");
 
   console.log(fails === 0 ? "\nALL GREEN: differentiating questions" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
