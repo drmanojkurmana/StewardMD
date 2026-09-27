@@ -37,15 +37,29 @@ owns the native StoreKit mechanism + creating these ASC products to match.
 same prices (the old sizes sold tokens at our cost; the Power pack lost money after Apple's cut). Keep the ASC
 display name and description free of the token count, or edit them on that date. See `vault/Role-Tiers.md`.
 
-## Consumables — Dictation credit packs (added 2026-09-26, NOT yet created in ASC / Play)
+## Consumables — Dictation credit packs (added 2026-09-26; created in ASC 2026-09-27, Play pending)
 Cloud speech-to-text is used only when the phone cannot transcribe; it spends dictation credits (never shown in
 rupees). Server: `functions/_quota.js` feature `dict`, fulfilled like the care/scribe packs.
 | Product ID | Credits | Price (INR) | ASC display name | Description (<= 55 chars) |
 |---|---|---|---|---|
 | `in.stewardmd.dict.300`  | 300   | 199 | 300 Dictation Credits   | Cloud dictation when your phone cannot transcribe |
 | `in.stewardmd.dict.1000` | 1,000 | 699 | 1,000 Dictation Credits | Cloud dictation when your phone cannot transcribe |
-Type: Consumable. Create the same two ids as Google Play in-app products (managed, consumable). Until they exist,
-the top-up sheet shows the packs but a store purchase fails; web (Razorpay) purchase works now.
+Type: Consumable.
+
+**Status (2026-09-27, app 6790305279):**
+- **App Store Connect:** both created, READY_TO_SUBMIT, availability India + US, review screenshot attached.
+  - `dict.300` = IAP 6816651611
+  - `dict.1000` = IAP 6816651543
+  - They ship with the next review submission. Add the app version AND each IAP version to one submission with
+    `asc review submissions-create` and `asc review items add`; `asc review submit` alone sends only the app version.
+- **Token packs:** display names changed to "MaiK Tokens Boost / Plus / Power" with no token count, so the
+  2026-12-26 re-size needs no store edit.
+- **care.25, care.100, scribe.50, scribe.250:** were MISSING_METADATA since 2026-09-18 (no territory
+  availability; care.* had no localization). Fixed; now READY_TO_SUBMIT.
+- **msg.100 (6813248305):** still MISSING_METADATA because it has no price schedule. The owner sets INR 599.
+- **Google Play:** NOT created yet (no Play API access on the build Mac). In Play Console go to Monetize, then
+  Products, then In-app products, and create both ids at INR 199 / 699, then Activate. Until then an Android
+  store purchase of a dictation pack fails; web (Razorpay) purchase works.
 
 ## Not standard iOS IAP (handle separately)
 - **Personal clinic add-on (₹100/clinic/mo)** — quantity-based; keep web-only or model later.
