@@ -36,6 +36,10 @@ import { fileURLToPath } from "node:url";
 import { spawn } from "node:child_process";
 import { setTimeout as sleep } from "node:timers/promises";
 import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
+// data -> a JS literal safe to splice into code evaluated in the page (CodeQL js/bad-code-sanitization):
+// JSON.stringify leaves <, >, U+2028 and U+2029 raw, so escape them (the pattern CodeQL documents)
+const LIT_ESC = { "<": "\\u003C", ">": "\\u003E", "\b": "\\b", "\f": "\\f", "\n": "\\n", "\r": "\\r", "\t": "\\t", "\0": "\\0", "\u2028": "\\u2028", "\u2029": "\\u2029" };
+const lit = (v) => JSON.stringify(v).replace(/[<>\b\f\n\r\t\0\u2028\u2029]/g, (c) => LIT_ESC[c]);
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const BASE = (process.env.BASE || "http://localhost:8804/").replace(/\/?$/, "/");
@@ -119,7 +123,7 @@ try {
   if (!(await ready())) throw new Error("engine did not load at " + BASE);
   // flags are read by the engine at call time from localStorage; set them, then reload so any
   // load-time reader sees them too
-  await ev(`${JSON.stringify(FLAGS)}.forEach(function(kv){localStorage.setItem(kv[0],kv[1]);}); ["smd_gate_v2","smd_nlp_v2","smd_rank_v3","smd_kb_v2","smd_calib","smd_prior_v1"].forEach(function(k){ if(!${JSON.stringify(FLAGS.map((f) => f[0]))}.includes(k)) localStorage.removeItem(k); }); localStorage.removeItem("smd_prior_counts"); return 1`);
+  await ev(`${lit(FLAGS)}.forEach(function(kv){localStorage.setItem(kv[0],kv[1]);}); ["smd_gate_v2","smd_nlp_v2","smd_rank_v3","smd_kb_v2","smd_calib","smd_prior_v1"].forEach(function(k){ if(!${lit(FLAGS.map((f) => f[0]))}.includes(k)) localStorage.removeItem(k); }); localStorage.removeItem("smd_prior_counts"); return 1`);
   await call("Page.navigate", { url: BASE });
   if (!(await ready())) throw new Error("engine did not reload");
   await ev(`DX.findingCatalog(); return 1`);
@@ -128,7 +132,7 @@ try {
   for (const { set, c } of cases) {
     const exp = c.expected || {};
     const r = await ev(`
-      var c=${JSON.stringify({ findings: c.findings || {}, acc: exp.acceptableIds || [], pc: c.presentingComplaint || c.chiefComplaint || c.text || "", full: chartText(c) })};
+      var c=${lit({ findings: c.findings || {}, acc: exp.acceptableIds || [], pc: c.presentingComplaint || c.chiefComplaint || c.text || "", full: chartText(c) })};
       var acc=c.acc.map(function(s){return String(s).toLowerCase();});
       function ok(x){ return !!x && (acc.indexOf(String(x.id).toLowerCase())>=0 || acc.some(function(a){return a && String(x.name||'').toLowerCase().indexOf(a)>=0;})); }
       function run(f){ var ab=negOf(f); var a=ab?SMD_REASON.assess(f,{absent:ab}):SMD_REASON.assess(f); var all=[].concat(a.infectious||[],a.nonInfectious||[]).sort(function(x,y){return ((y.rank!=null?y.rank:y.confidence)-(x.rank!=null?x.rank:x.confidence))||(y.confidence-x.confidence);});
