@@ -248,7 +248,7 @@ export async function adminLookup(env, body, deps) {
     explicit: (rec.featureFlags && Object.prototype.hasOwnProperty.call(rec.featureFlags, e.key)) ? rec.featureFlags[e.key] : null
   }));
   return { ok: true, uid: r.uid, smdId, email: user.email || null, name: user.displayName || rec.name || null,
-    role: rec.role || null, effectiveTiers, overrides: pickOverrides(rec),
+    role: rec.role || null, tier: effectiveTierFor(rec), tierExp: rec.tierExp != null ? rec.tierExp : null, effectiveTiers, overrides: pickOverrides(rec),
     pro: claims.pro === true, proExp: claims.proExp || null, verified: claims.verified === true, traineeVerified: claims.traineeVerified === true, regNo: claims.regNo || null,
     aiCapTokens: rec.aiCapTokens != null ? rec.aiCapTokens : null,
     aiGrant: rec.aiGrantMonth ? { month: rec.aiGrantMonth, tokens: rec.aiGrantTokens } : null,
@@ -344,6 +344,15 @@ export async function adminUltimateMigration(env, body, deps) {
       });
       token = pg.nextPageToken || null; pages++;
     } while (token && pages < 20);
+    // Mark who is ALREADY Ultimate, so a re-list after converting shows what is left to do. One
+    // entitlement read per Pro holder (a small set), 8 at a time; an unreadable record is left unmarked.
+    const get = deps.getEntitlement || getEntitlement;
+    const all = candidates.concat(paying);
+    for (let i = 0; i < all.length; i += 8) {
+      await Promise.all(all.slice(i, i + 8).map(async (row) => {
+        try { row.tier = effectiveTierFor(await get(env, row.uid, deps)); } catch (e) { row.tier = null; }
+      }));
+    }
     return { ok: true, dryRun: true, candidates, paying, more: !!token, pageToken: token };
   }
   const uids = Array.isArray(body.uids) ? body.uids.map(String).filter(Boolean) : [];
