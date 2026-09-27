@@ -60,3 +60,33 @@ just before it would be forgotten. Interaction modelled the same way as [[RadioA
 - 6,266 WebP objects (6,241 images + 25 thumbnails, 134 MB), `Content-Type: image/webp`, `Cache-Control: public, max-age=31536000, immutable`. Paths are immutable: a changed image gets a new key, never rewritten bytes (same rule as RadioAnatome).
 - `ophthalmos.js` defaults to this domain (`IMG_DEFAULT`); `window.SMD_OPHTHALMOS_IMG` overrides it. `_headers` report-only CSP `img-src` lists the domain.
 - Re-upload after a pipeline change: `wrangler r2 object put stewardmd-ophthalmos-img/<key> --file <webp> --content-type image/webp --cache-control "public, max-age=31536000, immutable" --remote` per new file (no bulk command in wrangler 4.141).
+
+## 10x build (2026-09-28)
+Owner asked for Ophthalmós to be "10x better" than ophthalmo-daily. Built in the module repo on
+`feat/10x` (stacked PRs #3 to #11 there) and synced here byte-identical. Every feature registers itself
+in a registry on `OPHTHALMOS` (`_sims`, `_banks`, `_tools`, `_reads`), so the hub renders sections only
+for what loaded.
+- **Hub:** Today's plan (image reviews topped up with new referrals, questions, one graded simulator
+  patient rotating by day), then Clinics, Questions, Notes, Simulators, Tools, Your own images (FundX).
+- **Question bank** (`ophthalmos-mcq.js/.css`, `ophthalmos/decks/mcq.json` 2.5 MB, lazy-loaded):
+  3,035 MedMCQA ophthalmology items (MIT), ten subspecialties, study sets, timed exam (Pro), search,
+  flags for doubtful keys (MedMCQA keys are crowd-sourced), FSRS deck key `mcq`.
+- **Notes** (`ophthalmos-notes.js/.css`, `ophthalmos/notes.json`): 30 notes illustrated with deck images,
+  cited to current guidelines (AAO PPP 2024/2025 editions etc.), `review: "ai_drafted"`.
+- **Simulators:** retinoscopy (`ophthalmos-retino-model.js` + `ophthalmos-retino.js/.css`: one dioptric
+  matrix optics model, graded patients, named errors) and neuro-ophthalmology (`ophthalmos-neuro.js/.css`:
+  muscle, nerve and pupil model, nine-gaze deviation, Hess, cover test, pupil lab with drops).
+- **Tools** (`ophthalmos-tools-model.js` + `ophthalmos-tools.js/.css`): refraction, VA, SRK/T (matches
+  the OpenEyes reference to 0.0001 D), ETROP, ICDR with AAO PPP 2024 follow-up, AJCC 8th uveal melanoma T.
+- **Stats:** predicted recall per clinic (FSRS), 7-day forecast, 12-week heatmap, weak spots with a Drill.
+- **Ask MaiK:** encounter, case answer and question explanation offer "Ask MaiK" (`SMD_askMaik` types the
+  question into the sheet; the learner sends it, so engine choice, quota and local-only policy apply).
+  `swipe-back.js` skips the full-screen-module step while `body.maik-open` so back closes MaiK first.
+- **Tests:** `test/ophthalmos-module.test.mjs` (35 checks) and `test/run-ophthalmos-10x-ui.mjs` (real app,
+  16 checks: registries, hub, R2 image, Ask MaiK, bank deck, notes, both simulators, tools, no errors).
+  The module repo has 71 unit tests and a 19-step headless UI test.
+- **Not synced yet:** the RFMiD 2.0 general retina clinic (438 images, CC BY 4.0, uploaded to R2) sits
+  on the module repo's local `feat/rfmid-clinic`; its push was blocked by the permission check and
+  waits for the owner.
+- **Clinical review first:** simulator constants (e.g. sixth-nerve deviation sizes) are uncalibrated;
+  MedMCQA answer keys have known noise; notes list their own review items in the module PR #11.

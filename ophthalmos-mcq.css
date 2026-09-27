@@ -1,0 +1,31 @@
+/* Question bank (ophthalmos-mcq.js). Rows follow the hub clinic rows; answers reuse .oph-ans. */
+.mcq-topics, .mcq-results, .mcq-misses { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.mcq-topic, .mcq-hit { width: 100%; display: flex; align-items: center; gap: 12px; text-align: left; border: 0; background: transparent;
+  color: inherit; padding: 12px 4px; border-radius: 12px; min-height: 56px; transition: transform 140ms var(--op-ease), background-color 160ms ease; }
+.mcq-topic:active, .mcq-hit:active { transform: scale(0.985); background: var(--op-s1); }
+.mcq-topic-b { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.mcq-topic-b > b { font-size: 16px; font-weight: 650; }
+.mcq-topic-b .oph-small b { color: var(--op-text); font-weight: 600; }
+.mcq-hit { flex-direction: column; align-items: flex-start; gap: 4px; }
+.mcq-hit > span:first-child { font-size: 15px; line-height: 1.4; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.mcq-results:empty { display: none; }
+.mcq-search input { width: 100%; min-height: 48px; border-radius: 12px; border: 1px solid var(--op-line); background: var(--op-s1);
+  color: var(--op-text); padding: 0 14px; font: inherit; font-size: 16px; margin-bottom: 6px; }
+.mcq-search input::placeholder { color: var(--op-mut); }
+.mcq-search input:focus-visible { outline: 2px solid var(--op-acc); outline-offset: 2px; }
+.mcq-q { padding-top: 8px; }
+.mcq-stem { font-size: 18px; line-height: 1.5; font-weight: 550; margin: 4px 0 16px; overflow-wrap: anywhere; }
+.oph-ans[data-state="picked"] { border-color: var(--op-acc); background: rgba(59, 157, 255, .12); }
+.oph-ans[data-state="picked"] .k { color: var(--op-acc); }
+.oph-icon[aria-pressed="true"] { color: var(--op-warn); }
+.mcq-x { margin-top: 16px; }
+.mcq-key { margin: 8px 0 0; font-size: 15px; line-height: 1.45; }
+.mcq-xt { margin: 0; font-size: 15px; line-height: 1.6; overflow-wrap: anywhere; }
+.mcq-score { font-size: 17px; margin: 8px 0 4px; }
+.mcq-score b { font-size: 28px; font-weight: 700; letter-spacing: -0.01em; }
+.mcq-miss summary { cursor: pointer; padding: 12px 4px; min-height: 44px; font-size: 15px; line-height: 1.4; }
+.mcq-miss[open] summary { color: var(--op-mut); }
+.mcq-miss .mcq-x { margin: 0 4px 12px; }
+.mcq-foot2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (hover: hover) and (pointer: fine) { .mcq-topic:hover, .mcq-hit:hover { background: var(--op-s1); } }
+@media (prefers-reduced-motion: reduce) { .mcq-topic, .mcq-hit { transition: none; } .mcq-topic:active, .mcq-hit:active { transform: none; } }

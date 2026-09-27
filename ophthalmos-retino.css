@@ -1,0 +1,45 @@
+/* Retinoscopy simulator (ophthalmos-retino.js). Reuses the encounter layout: card, stage, panel, foot;
+   tablet landscape puts the stage left through the .oph-enc grid in ophthalmos.css. */
+.ret-stage { width: 100%; aspect-ratio: 1 / 1; max-height: 40vh; min-height: 220px; flex: 0 0 auto; cursor: grab; }
+.ret-stage:active { cursor: grabbing; }
+.ret-done .ret-stage { max-height: 26vh; min-height: 150px; } /* prescription and result: the numbers matter more */
+.ret-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.ret-nocv { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; margin: 0;
+  padding: 24px; text-align: center; color: var(--op-mut); }
+.ret-sr { position: absolute !important; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.ret-status { min-height: 44px; margin: 0 0 10px; font-size: 15px; line-height: 1.45; }
+.ret-row { display: grid; grid-template-columns: 70px auto minmax(0, 1fr); align-items: center; gap: 8px; min-height: 52px; }
+.ret-row > label, .ret-row > span { font-size: 14px; color: var(--op-mut); }
+.ret-row > output { min-width: 72px; font-size: 17px; font-weight: 650; white-space: nowrap; }
+.ret-row input[type="range"] { width: 100%; height: 44px; margin: 0; accent-color: var(--op-acc); touch-action: pan-y; }
+.ret-steps { display: flex; gap: 6px; justify-content: flex-end; min-width: 0; }
+.ret-step { flex: 1 1 0; max-width: 64px; min-height: 44px; padding: 0; border-radius: 10px; border: 1px solid var(--op-line);
+  background: var(--op-s1); color: var(--op-text); font-weight: 650; font-size: 14px;
+  transition: transform 140ms var(--op-ease), background-color 160ms ease; }
+.ret-step:active { transform: scale(0.97); background: var(--op-s2); }
+.ret-wd .oph-seg { justify-self: end; }
+.ret-acts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 6px 0 4px; }
+.ret-acts .oph-btn { min-height: 48px; font-size: 15px; padding: 0 12px; }
+.ret-auto { box-shadow: inset 0 0 0 1px var(--op-line); }
+.ret-auto[aria-pressed="true"] { box-shadow: inset 0 0 0 1.5px var(--op-acc); color: var(--op-acc); }
+.ret-cross { display: flex; align-items: center; gap: 14px; margin-top: 10px; min-height: 44px; }
+.ret-cross svg { flex: 0 0 auto; }
+.ret-cross .ret-ring { fill: none; stroke: var(--op-s3); stroke-width: 1.5; }
+.ret-cross line { stroke: var(--op-acc); stroke-width: 2.5; stroke-linecap: round; }
+.ret-cross text { fill: var(--op-text); font-size: 17px; font-weight: 650; font-family: inherit; }
+.ret-reads { list-style: none; margin: 0; padding: 0; font-size: 14px; color: var(--op-mut); display: grid; gap: 4px; }
+.ret-reads b { color: var(--op-text); font-weight: 650; }
+.ret-how { margin: 12px 0 0; }
+.ret-mini { min-height: 44px; padding: 0 12px; font-size: 13px; flex: 0 0 auto; }
+.ret-fill { display: inline-block; margin: 10px 0 4px; min-height: 44px; font-size: 14px; text-align: left; }
+.ret-foot2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.oph-verdict.warn { color: var(--op-warn); }
+.ret-dl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 14px; margin: 12px 0; font-size: 15px; }
+.ret-dl dt { color: var(--op-mut); }
+.ret-dl dd { margin: 0; font-weight: 600; }
+.ret-teach { font-size: 15px; line-height: 1.5; margin: 0 0 14px; }
+.ret-tab { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 10px; }
+.ret-tab th { text-align: left; color: var(--op-mut); font-weight: 600; padding: 6px 4px; border-bottom: 1px solid var(--op-line); }
+.ret-tab td { padding: 9px 4px; border-bottom: 1px solid var(--op-s2); }
+@media (hover: hover) and (pointer: fine) { .ret-step:hover { background: var(--op-s2); } }
+@media (prefers-reduced-motion: reduce) { .ret-step, .ret-step:active { transition: none; transform: none; } }

@@ -180,6 +180,7 @@ fi
 if [ -d ophthalmos ]; then
   mkdir -p "$WWW/ophthalmos/decks"
   cp ophthalmos/tracks.json "$WWW/ophthalmos/" 2>/dev/null || true
+  cp ophthalmos/notes.json "$WWW/ophthalmos/" 2>/dev/null || true
   cp -R ophthalmos/decks/. "$WWW/ophthalmos/decks/"
   echo "  ophthalmos: $(find "$WWW/ophthalmos" -type f | wc -l | tr -d ' ') files"
 fi

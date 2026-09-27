@@ -10465,3 +10465,13 @@ the emergency valve and applies to every host.
 **Verification:** `test/site-gate.test.mjs` pins it (preview hosts: /home.js and kb/ are 404, root is the
 marketing site, noindex; production root indexable). The new test fails on the old middleware and passes on
 the new one. Full unit suite 10915/10916 passing, 0 failures.
+
+## 2026-09-28 - Ophthalmós 10x: question bank, notes, simulators, tools, plan, MaiK tutor
+- **Context**: owner: "make it 10x better, don't stop till you make it" against ophthalmo-daily.
+- **Decision**: build each feature as its own file in the module repo, registered through small registries
+  on `OPHTHALMOS` so the hub composes itself; sync into StewardMD as one change. Content only from
+  licence-verified sources (MedMCQA MIT; image datasets CC BY / CC0) or our own cited writing, all marked
+  `ai_drafted` behind the existing "To be verified" draft mark. The tutor is StewardMD's own MaiK (no new
+  AI plumbing). Back closes MaiK before the module under it (`swipe-back.js`).
+- **Reversible**: module kill switch `smd_ophthalmos="0"`; each feature is a separate file and script tag.
+

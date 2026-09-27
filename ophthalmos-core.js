@@ -75,6 +75,17 @@
     return store.cards[k];
   }
 
+  // Simulator attempt: sims[id] = {n, ok, err: {type: count}}; counts toward the day and the streak.
+  function recordSim(store, simId, ok, errType, today) {
+    var all = store.sims || (store.sims = {});
+    var r = all[simId] || (all[simId] = { n: 0, ok: 0, err: {} });
+    r.n++; r.last = today;
+    if (ok) r.ok++;
+    else if (errType) r.err[errType] = (r.err[errType] || 0) + 1;
+    store.days[today] = (store.days[today] || 0) + 1;
+    return r;
+  }
+
   function recordAnswer(store, deckId, truth, chosen) {
     var d = store.conf[deckId] || (store.conf[deckId] = {});
     var row = d[truth] || (d[truth] = {});
@@ -150,11 +161,36 @@
     return n;
   }
 
+  // Predicted recall right now: FSRS retrievability of every card of this deck key the learner
+  // has actually seen, as of today. {seen, meanR, strong}: strong = R >= 0.9 (about to forget: R low).
+  function recall(store, deckKey, today) {
+    var prefix = deckKey + ":", seen = 0, sum = 0, strong = 0;
+    Object.keys(store.cards).forEach(function (k) {
+      if (k.indexOf(prefix) !== 0) return;
+      var c = store.cards[k], r = retrievability(Math.max(0, today - c[2]), c[1]);
+      seen++; sum += r; if (r >= 0.9) strong++;
+    });
+    return { seen: seen, meanR: seen ? sum / seen : null, strong: strong };
+  }
+
+  // Review forecast: due count for each of today..today+days-1 (overdue cards land on today).
+  // prefix, if given, keeps only cards whose key starts with it (e.g. one clinic's level).
+  function forecast(store, today, days, prefix) {
+    var out = new Array(days); for (var i = 0; i < days; i++) out[i] = 0;
+    Object.keys(store.cards).forEach(function (k) {
+      if (prefix && k.indexOf(prefix) !== 0) return;
+      var due = store.cards[k][3], i2 = due <= today ? 0 : due - today;
+      if (i2 < days) out[i2]++;
+    });
+    return out;
+  }
+
   var API = {
     W: W, FACTOR: FACTOR, AGAIN: AGAIN, HARD: HARD, GOOD: GOOD, EASY: EASY,
     retrievability: retrievability, nextState: nextState, intervalDays: intervalDays,
-    dayNum: dayNum, emptyStore: emptyStore, key: key, review: review, recordAnswer: recordAnswer,
-    gradeFor: gradeFor, buildSession: buildSession, counts: counts, classStats: classStats, streak: streak
+    dayNum: dayNum, emptyStore: emptyStore, key: key, review: review, recordAnswer: recordAnswer, recordSim: recordSim,
+    gradeFor: gradeFor, buildSession: buildSession, counts: counts, classStats: classStats, streak: streak,
+    recall: recall, forecast: forecast
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   else G.OPHTHALMOS_CORE = API;
