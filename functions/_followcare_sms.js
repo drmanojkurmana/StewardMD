@@ -11,8 +11,10 @@
  * "Patient" (owner 2026-09-27: a name is PHI).
  *
  * sendDlt() is the path for OUR approved DLT templates (DLT below): it fills the registered text itself and
- * sends it through 2Factor's R1 Transactional-SMS API with the content-template id, so nothing has to be
- * registered by name on 2Factor's dashboard. Needs FOLLOWCARE_SMS_PROVIDER=twofactor, TWOFACTOR_API_KEY and
+ * sends it through 2Factor's R1 Transactional-SMS API with our DLT entity id and the content-template id, so
+ * nothing has to be registered by name on 2Factor's dashboard. Without peid R1 answered "Missing templatename
+ * value", and a 2Factor template name reached the operator but came back DLT-CNT-REJECT; msg + peid + ctid was
+ * DELIVERED (live test 2026-09-27). Needs FOLLOWCARE_SMS_PROVIDER=twofactor, TWOFACTOR_API_KEY and
  * TWOFACTOR_SENDER=MAIK (the only approved header).
  *
  * Env (owner provisions ONE provider):
@@ -87,6 +89,7 @@ export async function sendTwoFactor(env, to, msg) {
 // The operator drops an SMS whose text does not match the registered template, so each text below is the
 // approved text verbatim and every {#..#} slot must be filled, in order. Only the templates a sender uses are
 // listed. {#cbn#} is the clinic's own phone (org.phone), never a StewardMD number.
+export var DLT_PEID = "1101720950000098192";   // MAIKNOWLEDGE LLP's DLT entity id (Vilpower); public, not a secret
 export var DLT = {
   care_plan: { ctid: "1177178791481113659", text: "Dear {#alp#}, please continue your prescribed care plan from Dr. {#alp#} at {#alp#}. For any questions, contact us at {#cbn#}. Details: {#uro#} -StewardMD" },
   otp: { ctid: "1177178791267832947", text: "Your OTP for login to StewardMD is {#num#}. Valid for {#num#} minutes. Do not share this OTP with anyone. -StewardMD" },
@@ -117,7 +120,7 @@ export async function sendDlt(env, toE164, key, slots) {
   var to = toDialable(toE164, env.FOLLOWCARE_DEFAULT_CC);
   if (!to || to.length < 10) return { ok: false, reason: "bad_number" };
   // R1 takes "91XXXXXXXXXX" (2Factor's API docs), unlike the TSMS endpoint above, which wants 10 digits.
-  var form = new URLSearchParams({ module: "TRANS_SMS", apikey: env.TWOFACTOR_API_KEY, to: to, from: env.TWOFACTOR_SENDER, msg: msg, ctid: DLT[key].ctid });
+  var form = new URLSearchParams({ module: "TRANS_SMS", apikey: env.TWOFACTOR_API_KEY, to: to, from: env.TWOFACTOR_SENDER, msg: msg, peid: DLT_PEID, ctid: DLT[key].ctid });
   try {
     var r = await fetch("https://2factor.in/API/R1/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: form.toString() });
     var text = await r.text(); var j = {}; try { j = JSON.parse(text); } catch (e) {}

@@ -3,13 +3,14 @@
  * The operator drops an SMS whose text does not match its registered template, so what these defend:
  *   - each template text is the approved text verbatim, every slot filled in order,
  *   - a wrong slot count or a blank slot sends nothing (never a half-filled message),
- *   - the request is 2Factor's R1 Transactional-SMS API with the content-template id.
+ *   - the request is 2Factor's R1 Transactional-SMS API with our DLT entity id and the content-template id
+ *     (without peid the operator rejects it: DLT-CNT-REJECT, live test 2026-09-27).
  *
  * node --test test/sms-dlt.test.mjs
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { DLT, dltText, dltConfigured, sendDlt } from "../functions/_followcare_sms.js";
+import { DLT, DLT_PEID, dltText, dltConfigured, sendDlt } from "../functions/_followcare_sms.js";
 
 test("the template texts are the approved DLT texts, verbatim, with their content-template ids", () => {
   // Copied from the DLT portal export (ContentTemplates.csv, 2026-09-27). A change here must be a new approval.
@@ -51,7 +52,7 @@ function withFetch(handler, fn) {
 }
 const res = (ok, body) => ({ ok, status: ok ? 200 : 400, text: async () => body });
 
-test("sendDlt posts the filled text to 2Factor R1 as TRANS_SMS from MAIK with the template id", () =>
+test("sendDlt posts the filled text to 2Factor R1 as TRANS_SMS from MAIK with our entity id and the template id", () =>
   withFetch(() => res(true, '{"Status":"Success","Details":"sid-1"}'), async (calls) => {
     const r = await sendDlt(ENV, "9876543210", "otp", ["654321", "10"]);
     assert.deepEqual(r, { ok: true, providerId: "sid-1", status: 200, detail: null });
@@ -62,6 +63,8 @@ test("sendDlt posts the filled text to 2Factor R1 as TRANS_SMS from MAIK with th
     assert.equal(f.get("module"), "TRANS_SMS"); assert.equal(f.get("apikey"), "k2f");
     assert.equal(f.get("to"), "919876543210", "country code added to a bare 10-digit number");
     assert.equal(f.get("from"), "MAIK"); assert.equal(f.get("ctid"), "1177178791267832947");
+    assert.equal(DLT_PEID, "1101720950000098192", "MAIKNOWLEDGE LLP on Vilpower");
+    assert.equal(f.get("peid"), DLT_PEID, "no entity id: the operator rejects the message");
     assert.equal(f.get("msg"), "Your OTP for login to StewardMD is 654321. Valid for 10 minutes. Do not share this OTP with anyone. -StewardMD");
   }));
 

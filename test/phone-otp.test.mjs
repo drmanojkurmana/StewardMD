@@ -107,7 +107,7 @@ test("with the MAIK header set, SMS goes as our own approved DLT OTP template (c
     assert.deepEqual(r, { ok: true, channel: "sms", fellBack: false });
     assert.equal(calls.length, 1); assert.equal(calls[0].url, "https://2factor.in/API/R1/");
     const f = new URLSearchParams(calls[0].o.body);
-    assert.equal(f.get("ctid"), "1177178791267832947"); assert.equal(f.get("from"), "MAIK");
+    assert.equal(f.get("ctid"), "1177178791267832947"); assert.equal(f.get("peid"), "1101720950000098192"); assert.equal(f.get("from"), "MAIK");
     assert.equal(f.get("msg"), "Your OTP for login to StewardMD is 445566. Valid for " + TTL / 60 + " minutes. Do not share this OTP with anyone. -StewardMD");
   }));
 
