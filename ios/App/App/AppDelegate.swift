@@ -17,6 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // SMD-04: iOS's completion handler for a background URLSession is returned once the
+        // downloader has processed the events (ModelDownloader.urlSessionDidFinishEvents posts this).
+        NotificationCenter.default.addObserver(
+            forName: Notification.Name("SMDBackgroundURLSessionDone"),
+            object: nil,
+            queue: .main
+        ) { note in
+            guard let id = note.object as? String, let done = AppDelegate.bgCompletions.removeValue(forKey: id) else { return }
+            done()
+        }
         NotificationCenter.default.addObserver(
             forName: Notification.Name("SMDSetOrientation"),
             object: nil,
@@ -47,6 +57,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 : UIInterfaceOrientation.landscapeRight.rawValue
             UIDevice.current.setValue(value, forKey: "orientation")
             UIViewController.attemptRotationToDeviceOrientation()
+        }
+    }
+
+    /* SMD-04 (QA sheet 2026-09-27): model downloads are background URLSession tasks, and iOS
+     * relaunches the app in the background to hand finished parts over. Without this method the
+     * session was never recreated during that launch, so the parts waited for the next time the app
+     * was opened. The llama plugin is a separate module this target does not import, so the
+     * downloader is reached by its ObjC runtime name. */
+    static var bgCompletions: [String: () -> Void] = [:]
+    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
+        AppDelegate.bgCompletions[identifier] = completionHandler
+        if identifier == "in.stewardmd.llama.modeldownload",
+           let cls = NSClassFromString("LlamaPlugin.ModelDownloader") {
+            _ = (cls as AnyObject).perform(NSSelectorFromString("wakeForBackgroundEvents"))
+        } else {
+            // Not ours, or the class could not be found: return the handler so iOS is not left waiting.
+            AppDelegate.bgCompletions.removeValue(forKey: identifier)?()
         }
     }
 

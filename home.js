@@ -2268,8 +2268,32 @@
     });
   }
   try { window.SMD_openRoleLock = openRoleLock; } catch (e) {}
+  /* Lively tiles (owner, 2026-09-27: "just like oncotree make all clinical tool icons have motion").
+   * Every glyph tile gets a small motion that fits what it is: a heartbeat for the heart tools, a
+   * page turn for documents, a sparkle for MaiK. CSS lives in redesign-system.css (.ai-live); it runs
+   * only with reduced motion off, pauses off screen and under overlays (refreshTileAnim), and is
+   * staggered per tool so the grid never bobs in unison. Locked tiles and SURGX (static by its
+   * brief) stay still. */
+  var LIVE_MOTION = {
+    beat: ["ecg_heart", "monitor_heart", "cardiology", "favorite", "vital_signs"],
+    pulse: ["health_and_safety", "local_hospital", "medical_services", "vaccines", "water_drop", "rate_review", "coronavirus", "emergency"],
+    tilt: ["medication", "science", "biotech", "stethoscope", "calculate", "medication_liquid", "pill"],
+    sparkle: ["auto_awesome"],
+    blink: ["photo_camera", "eye", "visibility"],
+    flip: ["description", "book_2", "history_edu", "school", "menu_book"],
+    bounce: ["groups", "support_agent", "diversity_3"],
+    rise: ["stairs", "trending_up"],
+    spin: ["hub", "sync"],
+    listen: ["mic", "record_voice_over"],
+    sweep: ["search", "neurology", "psychology", "body_system", "oncology"]
+  };
+  function liveMotion(ic) { for (var k in LIVE_MOTION) if (LIVE_MOTION[k].indexOf(ic) >= 0) return k; return "float"; }
+  function liveIcon(t) {
+    var h = 0, a = String(t.act || ""); for (var i = 0; i < a.length; i++) h = (h * 31 + a.charCodeAt(i)) % 997;
+    return '<span class="rds-icon ai-live" data-live="' + liveMotion(t.ic) + '" style="--live-d:-' + ((h % 23) / 10).toFixed(1) + 's" aria-hidden="true">' + t.ic + '</span>';
+  }
   function homeToolTile(t, locked) {
-    var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : ric(t.ic);
+    var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : (locked ? ric(t.ic) : liveIcon(t));
     // A1: the Specialty Kits tile names the doctor's own kit once one is known (profile or chosen).
     if (t.act === "speckit") { var mk = ""; try { mk = (window.SMD_KITS && SMD_KITS.myLabel) ? SMD_KITS.myLabel() : ""; } catch (e) {} if (mk) t = { act: t.act, ic: t.ic, tt: t.tt, sub: "My kit: " + mk, defOn: t.defOn, feat: t.feat }; }
     // BETA chip: these models are clinically unvalidated, so the label rides the tile on EVERY path
@@ -2580,7 +2604,7 @@
       if (h.classList.contains("hv-still") !== still) h.classList.toggle("hv-still", still);
       if (still || !_aiSeen || typeof IntersectionObserver !== "function") return;
       if (!_aiIO) _aiIO = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target.classList.toggle("ai-offscreen", !e.isIntersecting); }); });
-      var els = h.querySelectorAll(".ai-anim, .ai-clinix-img, .tx-tile-lungs");
+      var els = h.querySelectorAll(".ai-anim, .ai-clinix-img, .tx-tile-lungs, .ai-live, .ai-brandmark");
       for (var i = 0; i < els.length; i++) if (!_aiSeen.has(els[i])) { _aiSeen.add(els[i]); _aiIO.observe(els[i]); }
     }
     function scheduleFab() { if (_fabRaf) return; _fabRaf = requestAnimationFrame(function () { _fabRaf = 0; if (_fabScrolling) return; try { refreshTileAnim(); } catch (e) {} if (fab && fab.isConnected) refreshFab(); }); }
@@ -5819,7 +5843,7 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 .maik-collapsed{position:relative}
 /* streaming caret + thinking dots (kept, retokenized) */
 .maik-streaming{font:500 12.5px/1.55 'Inter';color:var(--mk-ink)}
-.maik-caret{display:inline-block;width:6px;height:13px;background:var(--mk-acc);margin-left:2px;vertical-align:text-bottom;animation:maikBlink 1s steps(2) infinite}
+.maik-caret{display:inline-block;width:2px;height:1.05em;border-radius:1px;background:var(--mk-acc);margin-left:2px;vertical-align:-.15em;animation:maikCaret 1.1s ease-in-out infinite}@keyframes maikCaret{0%,100%{opacity:1}50%{opacity:.15}}.maik-streaming .maik-sin{animation:maikSin .22s ease-out both}@keyframes maikSin{from{opacity:0}to{opacity:1}}#maikSheet .maik-fu{animation:maikSin .3s ease-out both}@media(prefers-reduced-motion:reduce){.maik-caret,.maik-streaming .maik-sin,#maikSheet .maik-fu{animation:none}}
 @keyframes maikBlink{0%,100%{opacity:1}50%{opacity:0}}
 .maik-thinking{color:var(--mk-mut);font:500 12.5px 'Inter'}
 .maik-thinking .d{display:inline-block;animation:maikThink 1.3s ease-in-out infinite}
@@ -6296,7 +6320,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         ["cDrug", "What investigations next?", "Targeted workup"]
       ] : [
         ["cAssess", "Start a clinical assessment", "Guided differential & workup"],
-        ["cKnow", "Ask a knowledge question", "Cited, page-level answers"],
+        ["cKnow", "Ask a knowledge question", (function () { try { return window.SMD_MAIK_ENGINE.knowSub(); } catch (e) { return "Cited, page-level answers"; } })()],   // SMD-16: matches the engine, as the footer does
         ["cDrug", "Open Drug Index & calculators", "Doses, spectrum, tools"]
       ];
       var cardHTML = cards.map(function (c, i) {
@@ -7107,6 +7131,27 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         });
         think.appendChild(onBtn); scroll(); return;
       }
+      if (r && r.error && /model-corrupted|corrupt/i.test(String(r.error))) {
+        // SMD-03: a damaged model is a dead end without a way out from here. Two taps, both explicit:
+        // download it again (the file is already removed and the pack unmarked), or switch this
+        // conversation to MaiK Cloud. Never a silent cloud call (decision 2026-09-11, Local is a hard
+        // policy), so the cloud is one tap, not automatic.
+        think.innerHTML = '<div class="maik-welcome">The on-device model file was damaged, so it has been removed. Download it again, or ask this with MaiK Cloud.</div>';
+        var row = document.createElement("div"); row.style.cssText = "display:flex;gap:8px;flex-wrap:wrap;margin-top:8px";
+        var dl = document.createElement("button"); dl.className = "maik-chip"; dl.textContent = "Download it again";
+        dl.addEventListener("click", function () {
+          var M = window.SMD_MAIK_MODELS, pid = r.pack || (M && M.activePack && M.activePack());
+          try { if (M && M.ensure && pid) { M.ensure(pid).catch(function () {}); dl.textContent = "Downloading in the background"; dl.disabled = true; } } catch (e) {}
+        });
+        var cl = document.createElement("button"); cl.className = "maik-chip"; cl.textContent = "Switch to MaiK Cloud and ask again";
+        cl.addEventListener("click", function () {
+          try { if (window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.setPref) SMD_MAIK_ENGINE.setPref("cloud"); } catch (e) {}
+          try { qEl.value = question || ""; } catch (e) {}
+          send();
+        });
+        row.appendChild(dl); row.appendChild(cl); think.appendChild(row);
+        maikBuddyCue("error"); scroll(); return;
+      }
       if (r && r.error) { think.innerHTML = '<div class="maik-welcome">' + maikErrorNotice(r) + '</div>'; maikBuddyCue("error"); return; }
       var md = (r && r.text) ? String(r.text).trim() : "";
       var _refine = maikParseRefine(md); md = _refine.text;   // strip the @@REFINE@@ block; its chips render below
@@ -7537,8 +7582,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               if (_maikStopped || _streamFinal) return;
               var _accS = maikStripRefine(_paintAcc).replace(/@@\s*MORE\s*@@/gi, "\n\n");   // hide the @@REFINE@@ / @@MORE@@ markers while streaming
               var rn = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(_accS) : maikEscH(_accS);
-              _live().innerHTML = '<div class="maik-streaming">' + rn + '<span class="maik-caret"></span></div>';   // live bubble, so the typewriter continues even after close→reopen
-              try { scroll(); } catch (e) {}
+              // SMD-02 (QA sheet 2026-09-27): no flicker, no jumping. Only the blocks that changed are
+              // replaced (normally just the last paragraph), the caret sits at the end of the text rather
+              // than on a line of its own, the box never shrinks mid-stream, and the view follows the
+              // answer only while the doctor is already at the bottom.
+              var _bd = document.getElementById("maikBody"), _pin = !_bd || (_bd.scrollHeight - _bd.scrollTop - _bd.clientHeight) < 96;
+              maikPatchStream(_live(), rn);   // live bubble, so the typewriter continues even after close→reopen
+              if (_pin) { try { scroll(); } catch (e) {} }
             };
             if (!_paintedOnce) { _paintedOnce = true; paint(); } else { _paintT = setTimeout(paint, 50); }
           };
@@ -8096,7 +8146,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       runClinical(q, q, depth, active, topic);
     }
     // test hook (dev/regression harnesses only — closures are otherwise unreachable)
-    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state, parked: !!_mkdState.parked } : null; }, docCue: maikDocCue, docClassify: maikDocClassify, route: maikRoute, calcFor: maikCalcFor, calcHTML: maikCalcHTML, toolChipsHTML: maikToolChipsHTML, webChipEl: maikWebChipEl, turns: function () { return _maikTurns.slice(); }, clearCache: function () { _maikCache = {}; }, companion: function () { return _mkc ? _mkc.state() : null; }, buddySet: function (v) { maikBuddySet(v); } }; } catch (e) {}
+    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state, parked: !!_mkdState.parked } : null; }, docCue: maikDocCue, docClassify: maikDocClassify, route: maikRoute, calcFor: maikCalcFor, calcHTML: maikCalcHTML, toolChipsHTML: maikToolChipsHTML, webChipEl: maikWebChipEl, turns: function () { return _maikTurns.slice(); }, clearCache: function () { _maikCache = {}; }, companion: function () { return _mkc ? _mkc.state() : null; }, buddySet: function (v) { maikBuddySet(v); }, patchStream: (typeof maikPatchStream === "function" ? maikPatchStream : null) }; } catch (e) {}
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
     if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; maikRestoreThread(); scroll(); } else { emptyState(); }
     /* A REOPENED CONVERSATION (owner, 2026-09-24): a saved thread comes back as HTML, which carries
@@ -8483,6 +8533,37 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
      *   done   success the answer is complete (iOS notification pattern, two soft knocks)
      *   error  error   generation failed or was refused
      *   pick   selection  choosing a model / flipping the Knowledge Base switch */
+    /* Streamed answer painter (SMD-02). Keeps one .maik-streaming box, swaps only the trailing blocks
+     * that differ from the new render, hangs the caret on the last text block, and ratchets the box's
+     * min-height so a re-flowing last line never makes the card jump. The final render replaces the
+     * whole bubble, which drops the box and its min-height with it. */
+    function maikPatchStream(host, html) {
+      if (!host) return;
+      var box = host.firstElementChild;
+      if (!box || host.children.length !== 1 || !box.classList.contains("maik-streaming")) { host.innerHTML = '<div class="maik-streaming"></div>'; box = host.firstElementChild; }
+      var caret = box.querySelector(".maik-caret"); if (caret && caret.parentNode) caret.parentNode.removeChild(caret);
+      var tmp = document.createElement("div"); tmp.innerHTML = html;
+      var o = box.childNodes, n = tmp.childNodes, i = 0, had = o.length;
+      // A block that faded in carries .maik-sin, which the fresh render lacks: compare without it.
+      var same = function (a, b) {
+        if (a.nodeType !== 1 || !a.classList.contains("maik-sin")) return a.isEqualNode(b);
+        var cls = a.getAttribute("class");
+        a.classList.remove("maik-sin"); if (!a.classList.length) a.removeAttribute("class");   // class="" != no class
+        var r = a.isEqualNode(b); a.setAttribute("class", cls); return r;
+      };
+      while (i < o.length && i < n.length && same(o[i], n[i])) i++;
+      while (box.childNodes.length > i) box.removeChild(box.lastChild);
+      [].slice.call(tmp.childNodes, i).forEach(function (x, k) {
+        // Only a block that did not exist before fades in; the growing last block is swapped silently.
+        if (i + k >= had && x.nodeType === 1 && x.classList) x.classList.add("maik-sin");
+        box.appendChild(x);
+      });
+      var tail = box.lastElementChild;
+      while (tail && tail.lastElementChild && /^(UL|OL|LI|BLOCKQUOTE|DIV)$/.test(tail.tagName)) tail = tail.lastElementChild;
+      var c = document.createElement("span"); c.className = "maik-caret";
+      (tail && !/^(TABLE|THEAD|TBODY|TR|HR|PRE|IMG)$/.test(tail.tagName) ? tail : box).appendChild(c);
+      var h = box.offsetHeight; if (h > (box._mh || 0)) { box._mh = h; box.style.minHeight = h + "px"; }
+    }
     var MAIK_HAPTIC = { send: "medium", stop: "heavy", start: "light", done: "success", error: "error", pick: "selection" };
     function maikHaptic(kind) {
       var fn = MAIK_HAPTIC[kind] || "light";

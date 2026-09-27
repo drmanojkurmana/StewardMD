@@ -110,6 +110,13 @@ try {
   await setVal('#sh_consent', true); await click('#smdShare [data-sh-act="send"]');
   ok(await toastHas(/^Referral sent\.$/) && await until(`/To Dr Bala/.test(document.querySelector('#smdShare').textContent)`), 'sent, and listed under Sent');
   ok(W.pushes.some((p) => p.uid === 'uB' && /sent you a referral/.test(p.msg.body)), 'Bala gets a fixed-text push');
+  // SMD-08: after sending, a WhatsApp nudge is offered; it carries NO patient details.
+  await ev(`window.__opened=[];window.open=function(u){window.__opened.push(String(u));return {}};1`);
+  ok(await until(`!!document.querySelector('#smdShare [data-sh-act="wa-nudge"]')`), 'SMD-08 after a referral, "Tell them on WhatsApp" is offered');
+  await click('#smdShare [data-sh-act="wa-nudge"]');
+  const nudge = await ev(`decodeURIComponent((window.__opened[0]||'').split('text=')[1]||'')`);
+  ok(/^https:\/\/wa\.me\/\?text=/.test(await ev(`window.__opened[0]||''`)) && /sent you a referral on StewardMD/.test(nudge), 'SMD-08 the nudge opens WhatsApp with a fixed message: ' + nudge);
+  ok(!/Lakshmi|MR-KX|Gravida|pre-eclampsia/i.test(nudge), 'SMD-08 no patient detail goes to WhatsApp');
   await shot('share-sent');
   await click('#smdShare [data-sh-act="close"]'); await click('#smdDocs [data-dl-act="close"]');
 
@@ -121,6 +128,10 @@ try {
   ok(/Your StewardMD ID: SMD-BBB222/.test(await text('#smdShare')), 'the inbox shows your own StewardMD ID to give to colleagues');
   await armToasts(); await click('#smdShare [data-sh-act="copyid"]');
   ok(await toastHas(/SMD-BBB222/), 'your ID can be copied');
+  await ev(`window.__opened=[];window.open=function(u){window.__opened.push(String(u));return {}};1`);
+  await click('#smdShare [data-sh-act="wa-invite"]');
+  const inv = await ev(`decodeURIComponent((window.__opened[0]||'').split('text=')[1]||'')`);
+  ok(/SMD-BBB222/.test(inv) && /stewardmd\.in/.test(inv) && /^https:\/\/wa\.me\//.test(await ev(`window.__opened[0]||''`)), 'SMD-08 Invite on WhatsApp sends your ID and the app link: ' + inv);
   await click('#smdShare .rv-row');
   ok(await until(`/Lakshmi Devi/.test(document.querySelector('#smdShare').textContent)&&/Severe pre-eclampsia/.test(document.querySelector('#smdShare').textContent)`), 'opening it shows the letter');
   await setVal('#sh_note', 'Bed ready in the labour ward.'); await click('#smdShare [data-sh-act="st:accepted"]');

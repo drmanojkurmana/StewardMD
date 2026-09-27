@@ -322,3 +322,6 @@ body.dark .mk-atmo-ctxt, body.v3-dark .mk-atmo-ctxt {
 }
 
 
+/* SMD-02: once the answer is streaming, the code rain drops to a whisper behind the text. */
+#maikSheet:has(.maik-streaming) .mk-atmo-thinking .mk-atmo-code { opacity:.07; }
+#maikSheet:has(.maik-streaming) .mk-atmo-dark.mk-atmo-thinking .mk-atmo-code { opacity:.1; }

@@ -1,4 +1,6 @@
 import Foundation
+import UIKit
+import UserNotifications
 
 /**
  * Background model download: CHUNKED, PARALLEL, and entirely inside one background URLSession.
@@ -326,6 +328,33 @@ final class ModelDownloader: NSObject, URLSessionDownloadDelegate {
         }
         try? FileManager.default.removeItem(at: Self.sidecarFor(name))
         print("[llama-dl] \(name): complete, \(Self.sizeOf(name)) bytes on disk")
+        // SMD-04: say so when the phone is locked or the app is in the background. The app still has
+        // to be opened once for the integrity check (JS hashCheck) before the model is marked ready.
+        DispatchQueue.main.async {
+            guard UIApplication.shared.applicationState != .active else { return }
+            let c = UNMutableNotificationContent()
+            c.title = "MaiK model downloaded"
+            c.body = "Open StewardMD to finish setting it up."
+            UNUserNotificationCenter.current().add(UNNotificationRequest(identifier: "llama-dl-" + name, content: c, trigger: nil))
+        }
+    }
+
+    /* SMD-04 (QA sheet 2026-09-27: downloads only moved with the app open). iOS finishes background
+     * parts without the app, but hands them over only to a live session with this identifier. When
+     * it relaunches the app in the background for that, AppDelegate calls this (by name, through the
+     * ObjC runtime, since the app target does not import this module) to recreate the session, so the
+     * finished parts are written into the model file right away instead of at the next launch. */
+    @objc static func wakeForBackgroundEvents() {
+        _ = shared.session
+        shared.adoptExistingTasks()
+    }
+
+    /// iOS has delivered every queued event: return its completion handler (held by AppDelegate).
+    func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
+        let id = session.configuration.identifier
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: Notification.Name("SMDBackgroundURLSessionDone"), object: id)
+        }
     }
 
     // MARK: - URLSessionDownloadDelegate

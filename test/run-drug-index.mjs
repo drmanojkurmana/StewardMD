@@ -55,13 +55,24 @@ try {
   ok(await ev(`return /Metformin/i.test(document.querySelector("#ml-test .ml-index-generic").textContent)`) === true, "result row shows the generic name");
   await ev(`document.querySelector("#ml-test [data-ml-index-result]").click(); return 1;`);
   ok(await ev(`return MEDLIST.getList().length === 1 && MEDLIST.getList()[0].generic === "metformin" && MEDLIST.getList()[0].source === "index"`) === true, "selecting a result adds the medicine (source='index')");
+  // SMD-07: after Add the search clears (ready for the next medicine), focus stays in the field,
+  // an "Added" note shows by the search bar, and a clear button empties the field.
+  ok(await ev(`var i=document.querySelector("#ml-test [data-ml-index-input]"); return !!i && i.value==="" && document.activeElement===i`) === true, "SMD-07 Add clears the search and keeps the field focused");
+  ok(await ev(`var a=document.querySelector("#ml-test [data-ml-index-added]"); return !!a && a.classList.contains("on") && /Added Metformin/i.test(a.textContent)`) === true, "SMD-07 an 'Added' note shows by the search bar");
+  ok(await ev(`return document.querySelector("#ml-test [data-ml-index-clear]").hidden===true`) === true, "SMD-07 the clear button hides when the field is empty");
+  await ev(`var i=document.querySelector("#ml-test [data-ml-index-input]"); i.value="clar"; i.dispatchEvent(new Event("input")); return 1;`);
+  ok(await ev(`return document.querySelector("#ml-test [data-ml-index-clear]").hidden===false`) === true, "SMD-07 the clear button shows once text is typed");
+  await ev(`document.querySelector("#ml-test [data-ml-index-clear]").click(); return 1;`);
+  ok(await ev(`var i=document.querySelector("#ml-test [data-ml-index-input]"); return i.value==="" && !!document.querySelector("#ml-test .ml-search-label")`) === true, "SMD-07 the clear button empties the search and shows the start list again");
 
   // ---- 3. Duplicate warning ---------------------------------------------------
+  // A same-drug, different-dose add asks with window.confirm, which would block this harness; answer "update".
+  await ev(`window.__confirmMsg="";window.confirm=function(m){window.__confirmMsg=String(m||"");return true}; return 1;`);
   await ev(`var i=document.querySelector("#ml-test [data-ml-index-input]"); i.value="glycomet"; i.dispatchEvent(new Event("input")); return 1;`);
   await sleep(150);
   await ev(`var r=document.querySelector("#ml-test [data-ml-index-result]"); if(r) r.click(); return 1;`);
   ok(await ev(`return MEDLIST.getList().length === 1`) === true, "adding the same generic again is prevented (duplicate)");
-  ok(await ev(`return /already in the list/i.test((document.getElementById("ml-test").innerText||""))`) === true, "a duplicate warning is surfaced");
+  ok(await ev(`return /already in the (medication )?list/i.test((document.getElementById("ml-test").innerText||"")+" "+(window.__confirmMsg||""))`) === true, "a duplicate warning is surfaced");
 
   // ---- 4. Type/Paste sheet opens only on demand -------------------------------
   await ev(`MEDLIST.clearAll(); MEDLIST.mount(document.getElementById("ml-test")); return 1;`);

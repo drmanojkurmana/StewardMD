@@ -162,6 +162,33 @@ public class LlamaPlugin extends Plugin {
         call.resolve(new JSObject().put("ok", downloader.delete(name)));
     }
 
+    /**
+     * SHA-256 of a downloaded model, computed natively (QA sheet SMD-03, 2026-09-27). The JS side
+     * marks a pack installed only when this matches the registry. Runs on its own thread (not
+     * `worker`, which serves inference), streaming 8 MiB reads so memory stays flat.
+     */
+    @PluginMethod
+    public void modelVerify(PluginCall call) {
+        String name = call.getString("name");
+        if (name == null || name.isEmpty()) { call.reject("Missing name", LlamaErr.BAD_ARGUMENTS.code); return; }
+        final java.io.File f = downloader.pathFor(name);
+        new Thread(() -> {
+            try (java.io.InputStream in = new java.io.BufferedInputStream(new java.io.FileInputStream(f), 1 << 20)) {
+                java.security.MessageDigest md = java.security.MessageDigest.getInstance("SHA-256");
+                byte[] buf = new byte[8 << 20];
+                long total = 0; int n;
+                while ((n = in.read(buf)) > 0) { md.update(buf, 0, n); total += n; }
+                StringBuilder hex = new StringBuilder(64);
+                for (byte b : md.digest()) hex.append(String.format("%02x", b & 0xff));
+                call.resolve(new JSObject().put("sha256", hex.toString()).put("bytes", total));
+            } catch (java.io.FileNotFoundException e) {
+                call.reject("model file not found", "model-missing");
+            } catch (Exception e) {
+                call.reject("could not read the model file: " + e.getMessage(), "model-verify-failed");
+            }
+        }, "llama-verify").start();
+    }
+
     /** Is on-device inference possible on this build/ABI at all? Cheap, synchronous. */
     @PluginMethod
     public void available(PluginCall call) {

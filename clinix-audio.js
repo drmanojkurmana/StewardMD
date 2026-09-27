@@ -28,7 +28,7 @@
     try {
       var C = window.AudioContext || window.webkitAudioContext;
       if (!C) return null;
-      AC = new C();
+      try { AC = new C({ latencyHint: "interactive" }); } catch (e1) { AC = new C(); }
     } catch (e) { return null; }
     return AC;
   }
@@ -39,8 +39,21 @@
    * Every play() is triggered by a tap, so resuming here is legitimate and required. */
   function unlock() {
     var c = ctx();
-    if (c && c.state === "suspended") { try { c.resume(); } catch (e) {} }
+    if (c && c.state !== "running") { try { c.resume(); } catch (e) {} }
+    // SMD-05 (QA sheet 2026-09-27: "taking 2 seconds"): iOS keeps the audio hardware asleep until
+    // something actually plays. A one-sample silent buffer inside the tap wakes the output route, so
+    // the real sound scheduled a moment later starts at once instead of after the wake-up.
+    if (c && !unlock._woke) {
+      try { var b = c.createBuffer(1, 1, c.sampleRate), src = c.createBufferSource(); src.buffer = b; src.connect(c.destination); src.start(0); unlock._woke = true; } catch (e) {}
+    }
     return c;
+  }
+  /* Called when a screen with sounds opens: builds the context (it may start suspended, which is
+   * fine) and the shared noise buffer, so the first tap does no set-up work at all. */
+  function prewarm() {
+    var c = ctx(); if (!c) return false;
+    try { noise(c); } catch (e) {}
+    return true;
   }
 
   // One reusable 4-second white-noise buffer. Breath sounds are all shaped noise, so everything
@@ -609,10 +622,13 @@
 
     var master = c.createGain();
     master.gain.value = typeof opts.volume === "number" ? opts.volume : 0.9;
-    master.connect(c.destination);
+    // SMD-06: an analyser on the output drives the live waveform, so the trace is the sound itself.
+    var analyser = null;
+    try { analyser = c.createAnalyser(); analyser.fftSize = 2048; analyser.smoothingTimeConstant = 0; master.connect(analyser); analyser.connect(c.destination); }
+    catch (e) { analyser = null; master.connect(c.destination); }
 
     var count = opts.breaths || opts.cycles || opts.beats || (isCardiac ? 4 : 3);
-    var t = c.currentTime + 0.08, total = 0, i;
+    var t = c.currentTime + (c.state === "running" ? 0.03 : 0.06), total = 0, i;
     for (i = 0; i < count; i++) {
       var len;
       if (isCardiac) {
@@ -632,7 +648,7 @@
 
     var handle = {
       cycle: isCardiac ? (s.period || s.cycle || 0.85) : (s.insp + (s.gap || 0) + s.exp + s.rest),
-      spec: s,
+      spec: s, kind: kind, analyser: analyser, startsAt: t, endsAt: t + total,
       stop: function () {
         try { master.gain.setTargetAtTime(0.0001, c.currentTime, 0.02); } catch (e) {}
         try { setTimeout(function () { try { master.disconnect(); } catch (e) {} }, 200); } catch (e) {}
@@ -692,6 +708,9 @@
   var API = {
     KINDS: KINDS, has: has, available: available,
     play: play, stopAll: stopAll, labelOf: labelOf, hintOf: hintOf,
+    unlock: unlock, prewarm: prewarm,
+    current: function () { return active.length ? active[active.length - 1] : null; },
+    now: function () { return AC ? AC.currentTime : 0; },
     AUDIO_REGISTRY: AUDIO_REGISTRY,
     getAudioMetadata: getAudioMetadata,
     listAudioAssets: listAudioAssets,
