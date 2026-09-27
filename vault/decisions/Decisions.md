@@ -10593,3 +10593,18 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   rather than shrinking type or switching to landscape (the native renderer is fixed portrait).
 - **MaiK start card (SMD-16)** promises citations only when the answering engine gives them
   (`SMD_MAIK_ENGINE.knowSub()`), in the same terms as the footer.
+
+## 2026-09-28 - Ophthalmós Learn tab ships in the bundle (Pages + native), not R2
+- **Context**: the Learn tab (module repo PR #17, `feat/learn` a22a8cd) adds `ophthalmos/learn/`: 14
+  bilingual lessons (English/Hindi), index, glossary, 5 original SVG diagrams and a 42-item media library
+  (17 photos, 17 illustrations, 8 animations) with `media/credits.json`, 65 files, about 1.9 MB.
+- **Decision**: ship it with the app, not on R2. The Pages upload is about 15,333 files before and about
+  15,400 after (cap 20,000), and 1.9 MB is small for the native bundle, so lessons, diagrams and "More
+  pictures" work offline. `scripts/build-www.sh` copies the whole `ophthalmos/learn/` (minus README.md).
+  Lessons load everything from `SMD_OPHTHALMOS_BASE` (default `/ophthalmos/`); the fundus/OCT deck images
+  in lessons still come from R2 (`ophthalmos-img.stewardmd.in`). `functions/_middleware.js` 404s
+  `/ophthalmos/` on the web by design (native-only app), unchanged.
+- **Owner decisions carried in this build**: Learn | Test tabs chosen on first open; MBBS lessons free,
+  Resident lessons Pro with one trial (`learn.resident`); Resident question-bank sets gated by trial feature
+  `mcq.resident`; primary button fill `--op-pri-fill #1d6ed4` (white text 4.96:1, was 2.82:1); back buttons
+  say where they go ("Back to lesson"). Lesson content is ai_drafted, pending ophthalmologist sign-off.

@@ -4,8 +4,12 @@
    Overlay contract mirrors .atlas-overlay: display:none when closed is load-bearing for
    swipe-back.js, safe-area insets applied once on the fixed overlay. */
 .oph-overlay {
+  --op-link: #8cc6ff; --op-link-line: rgba(140, 198, 255, .6);
   --op-bg: #000; --op-s1: #121214; --op-s2: #1c1c1f; --op-s3: #2c2c30; --op-line: #34343a;
   --op-text: #f2f2f4; --op-mut: #a8a8b0; --op-acc: #3b9dff; --op-ok: #34c759; --op-bad: #ff6961; --op-warn: #ffc05a;
+  /* fill behind white text (primary buttons, selected markers): white on it is 4.96:1 (4.68:1 hovered); white on
+     --op-acc is 2.82:1, so --op-acc stays the accent for text, bars and outlines on the dark surfaces */
+  --op-pri-fill: #1d6ed4; --op-pri-fill-hover: #2272da;
   --op-ease: cubic-bezier(0.23, 1, 0.32, 1);
   --op-sheet: cubic-bezier(0.32, 0.72, 0, 1);
   position: fixed; inset: 0; z-index: 880;
@@ -53,7 +57,7 @@ body.oph-lock { overflow: hidden; }
   transition: transform 140ms var(--op-ease), background-color 160ms ease, opacity 160ms ease;
 }
 .oph-btn:active { transform: scale(0.97); }
-.oph-btn.pri { background: var(--op-acc); color: #fff; }
+.oph-btn.pri { background: var(--op-pri-fill); color: #fff; }
 .oph-btn.sec { background: var(--op-s2); color: var(--op-text); }
 .oph-btn[disabled] { opacity: .45; cursor: default; }
 .oph-btn[disabled]:active { transform: none; }
@@ -69,6 +73,7 @@ body.oph-lock { overflow: hidden; }
 .oph-pro { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700;
   color: var(--op-warn); letter-spacing: .02em; }
 .oph-pro .smd-ico { width: 14px; height: 14px; }
+.oph-pro.used { color: var(--op-mut); } /* a spent trial reads quieter than an available one */
 
 /* ---- image stage: pinch / double-tap zoom, pan when zoomed ---- */
 .oph-stage { position: relative; background: #000; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; }
@@ -116,7 +121,7 @@ body.oph-lock { overflow: hidden; }
 @media (hover: hover) and (pointer: fine) {
   .oph-ans:not([data-state]):hover { border-color: #4a4a52; background: var(--op-s2); }
   .oph-btn.sec:hover { background: var(--op-s3); }
-  .oph-btn.pri:hover { background: #5aaeff; }
+  .oph-btn.pri:hover { background: var(--op-pri-fill-hover); }
   .oph-clinic:hover { background: var(--op-s1); }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -288,3 +293,11 @@ body.oph-lock { overflow: hidden; }
 /* Tabular figures only where numbers change in place. On the whole overlay they also widened Inter's hyphen,
    so "Age-related" read "Age - related". */
 .oph-overlay output, .oph-stat-line, .oph-srow-h b, .oph-today-line b, .mcq-score, #mcqClock { font-variant-numeric: tabular-nums; }
+
+/* Guided practice (MBBS): numbered next steps, the current one marked, done ones ticked. */
+.oph-guide { margin: 12px 0; padding: 0 0 0 22px; display: grid; gap: 4px; font-size: 14px; line-height: 1.45; color: var(--op-mut); }
+.oph-guide li[data-s="now"] { color: var(--op-text); }
+.oph-guide li[data-s="now"]::marker { color: var(--op-acc); font-weight: 700; }
+.oph-guide li[data-s="done"] { text-decoration: line-through; text-decoration-color: var(--op-ok); }
+.oph-btn.pri .oph-pro { color: inherit; } /* warn on accent fails contrast: the lock reads in the button's own white */
+.oph-clinic-b .oph-small .oph-pro { margin-left: 6px; vertical-align: -1px; }

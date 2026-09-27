@@ -1,9 +1,9 @@
 // Ophthalmós: integration checks for the module copied in from github.com/drmanojkurmana/ophthalmos.
 // Validates the REAL shipped JSON + wiring, so a bad re-sync or a dropped script tag fails `npm test`.
 // Run: node test/ophthalmos-module.test.mjs
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { dirname, join } from "node:path";
+import { dirname, join, relative } from "node:path";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -64,6 +64,49 @@ for (const [name, count] of Object.entries(DECKS)) {
   const src = readFileSync(join(ROOT, "scripts/build-www.sh"), "utf8");
   ok("build-www.sh copies ophthalmos/", /ophthalmos\/decks/.test(src));
   ok("build-www.sh copies ophthalmos/notes.json", /ophthalmos\/notes\.json/.test(src));
+}
+
+// Learn tab: ophthalmos/learn/ (index, glossary, lessons, diagrams, media + credits) is synced and complete.
+{
+  const LEARN = join(ROOT, "ophthalmos/learn");
+  const readJSON = (p) => { try { return JSON.parse(readFileSync(join(LEARN, p), "utf8")); } catch { return null; } };
+  const noDash = (p) => { try { return !readFileSync(join(LEARN, p), "utf8").includes("—"); } catch { return false; } };
+  const ix = readJSON("index.json"), gloss = readJSON("glossary.json");
+  ok("ophthalmos/learn/index.json parses with units", !!ix && Array.isArray(ix.units) && ix.units.length > 0);
+  ok("ophthalmos/learn/glossary.json parses with terms", !!gloss && typeof gloss.terms === "object" && gloss.terms !== null);
+  ok("ophthalmos/learn index + glossary have no em-dash", noDash("index.json") && noDash("glossary.json"));
+  const ids = ix && Array.isArray(ix.units) ? ix.units.flatMap((u) => u.lessons || []) : [];
+  ok("ophthalmos/learn/index.json lists lessons", ids.length > 0);
+  for (const id of ids) {
+    const l = readJSON("lessons/" + id + ".json");
+    ok("learn lesson " + id + " parses and its id matches the file", !!l && l.id === id);
+    ok("learn lesson " + id + " has no em-dash", noDash("lessons/" + id + ".json"));
+    if (l && l.see && l.see.diagram) ok("learn lesson " + id + " diagram " + l.see.diagram + " exists", existsSync(join(LEARN, l.see.diagram)));
+  }
+  const cr = readJSON("media/credits.json"), items = cr && Array.isArray(cr.items) ? cr.items : [];
+  ok("ophthalmos/learn/media/credits.json lists media", items.length > 0);
+  for (const it of items) ok("learn media " + it.file + " exists", !!it.file && existsSync(join(LEARN, "media", it.file)));
+  // Every shipped media file carries a credit (licence hygiene: open-licence items keep their attribution).
+  const credited = new Set(items.map((it) => it.file));
+  const walk = (d) => (existsSync(d) ? readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(join(d, e.name)) : [join(d, e.name)])) : []);
+  const media = walk(join(LEARN, "media")).map((f) => relative(join(LEARN, "media"), f)).filter((f) => f !== "credits.json");
+  ok("every learn media file is credited in credits.json", media.length > 0 && media.every((f) => credited.has(f)));
+}
+
+// index.html loads the Learn tab after every other feature file, with its stylesheet; one ?v= token for all.
+{
+  const html = readFileSync(join(ROOT, "index.html"), "utf8");
+  const learn = html.indexOf("/ophthalmos-learn.js"), tools = html.indexOf("/ophthalmos-tools.js");
+  ok("index.html loads ophthalmos-learn.js after the other feature files", learn > tools && tools > 0);
+  ok("index.html loads ophthalmos-learn.css", html.includes("/ophthalmos-learn.css"));
+  const tokens = new Set([...html.matchAll(/\/ophthalmos[\w-]*\.(?:js|css)\?v=([\w.-]+)/g)].map((m) => m[1]));
+  ok("every Ophthalmós tag in index.html shares one ?v= token (got " + [...tokens].join(",") + ")", tokens.size === 1);
+}
+
+// scripts/build-www.sh ships ophthalmos/learn/ (lessons, diagrams, media) into the native bundle.
+{
+  const src = readFileSync(join(ROOT, "scripts/build-www.sh"), "utf8");
+  ok("build-www.sh copies ophthalmos/learn", /cp -R ophthalmos\/learn\b/.test(src));
 }
 
 console.log(fail === 0 ? "ALL " + pass + " PASS" : pass + " pass / " + fail + " FAIL");

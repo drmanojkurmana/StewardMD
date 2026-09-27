@@ -82,7 +82,7 @@ for what loaded.
 - **Ask MaiK:** encounter, case answer and question explanation offer "Ask MaiK" (`SMD_askMaik` types the
   question into the sheet; the learner sends it, so engine choice, quota and local-only policy apply).
   `swipe-back.js` skips the full-screen-module step while `body.maik-open` so back closes MaiK first.
-- **Tests:** `test/ophthalmos-module.test.mjs` (35 checks) and `test/run-ophthalmos-10x-ui.mjs` (real app,
+- **Tests (10x, superseded by the Learn tab section below):** `test/ophthalmos-module.test.mjs` (35 checks) and `test/run-ophthalmos-10x-ui.mjs` (real app,
   16 checks: registries, hub, R2 image, Ask MaiK, bank deck, notes, both simulators, tools, no errors).
   The module repo has 71 unit tests and a 19-step headless UI test.
 - **General retina clinic (RFMiD 2.0, CC BY 4.0):** 438 images in 12 classes (normal, chorioretinitis,
@@ -90,3 +90,25 @@ for what loaded.
   `ophthalmos/decks/rfmid.json`, images on R2 (450 keys verified). Module repo PR #13.
 - **Clinical review first:** simulator constants (e.g. sixth-nerve deviation sizes) are uncalibrated;
   MedMCQA answer keys have known noise; notes list their own review items in the module PR #11.
+
+## Learn tab (2026-09-28)
+Owner: Learn | Test tabs, picked on first open (with the language), then the last tab is remembered
+(`smd_ophthalmos_prefs`). Synced byte-identical from module repo `feat/learn` a22a8cd (PR #17).
+- **Files:** `ophthalmos-learn.js` + `ophthalmos-learn.css`, loaded last (after `ophthalmos-tools.js`);
+  logic helpers (`validateLesson`, `nextLesson`, `mediaCredit`, `scopeSvg`) are in `ophthalmos-data.js`.
+  Every Ophthalmós tag in `index.html` uses `?v=oph6`.
+- **Data:** `ophthalmos/learn/`: `index.json` (units; MBBS and Resident), `glossary.json`,
+  `lessons/<id>.json` (14, English + Hindi, `review: "ai_drafted"`), `diagrams/*.svg` (5, original),
+  `media/` (17 photos, 17 illustrations, 8 animations, `credits.json` with licence and source per item).
+  Lessons fetch from `SMD_OPHTHALMOS_BASE + "learn/..."` (animations are fetched and inlined); `see.img`
+  deck images come from R2. `scripts/build-www.sh` copies the whole folder (README.md excluded).
+- **Hosting:** in the repo and the native bundle, not R2: 65 files, 1.9 MB; Pages upload about 15,400 of
+  20,000 files. The web middleware 404s `/ophthalmos/` by design (native-only).
+- **Access:** MBBS lessons free; Resident lessons Pro with one trial (`learn.resident`); Resident question-bank
+  sets gated by `mcq.resident`. At MBBS level the Test hub drops Notes and Tools: they live under Learn >
+  Reference (with the glossary). MBBS Today's plan is lesson-first (Lesson, Images, Questions).
+- **Tests:** `test/ophthalmos-module.test.mjs` also checks every lesson in the index, diagrams, every media
+  file credited, load order and one shared `?v=`; `test/run-ophthalmos-10x-ui.mjs` (25 checks) walks the
+  first-run choice, Test hub, Learn Reference, a lesson picture, a hotspot, a "More pictures" media figure
+  with its credit, and Hindi.
+

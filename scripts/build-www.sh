@@ -182,6 +182,10 @@ if [ -d ophthalmos ]; then
   cp ophthalmos/tracks.json "$WWW/ophthalmos/" 2>/dev/null || true
   cp ophthalmos/notes.json "$WWW/ophthalmos/" 2>/dev/null || true
   cp -R ophthalmos/decks/. "$WWW/ophthalmos/decks/"
+  # Learn tab (ophthalmos-learn.js): index, glossary, lessons, diagrams and the ~1.6 MB media library
+  # (photos, illustrations, animations + credits.json). Small, so it ships in the bundle and works offline;
+  # the fundus/OCT deck images stay on R2.
+  [ -d ophthalmos/learn ] && cp -R ophthalmos/learn "$WWW/ophthalmos/" && rm -f "$WWW/ophthalmos/learn/README.md"
   echo "  ophthalmos: $(find "$WWW/ophthalmos" -type f | wc -l | tr -d ' ') files"
 fi
 [ -d clinical-pathways ] && mkdir -p "$WWW/clinical-pathways" && cp -R clinical-pathways/. "$WWW/clinical-pathways/"

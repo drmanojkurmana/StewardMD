@@ -1,0 +1,666 @@
+{
+  "v": 1,
+  "review": "ai_drafted",
+  "terms": {
+    "cornea": {
+      "term": {
+        "en": "cornea",
+        "hi": "कॉर्निया (cornea)"
+      },
+      "def": {
+        "en": "The clear dome at the front of the eye. It does most of the focusing.",
+        "hi": "आँख के सामने का साफ़, पारदर्शी गुंबद। रोशनी को फ़ोकस करने का सबसे ज़्यादा काम यही करता है।"
+      }
+    },
+    "iris": {
+      "term": {
+        "en": "iris",
+        "hi": "आइरिस (iris)"
+      },
+      "def": {
+        "en": "The coloured ring of muscle behind the cornea. It controls how much light gets in.",
+        "hi": "कॉर्निया के पीछे का रंगीन, मांसपेशी वाला घेरा। यह तय करता है कि कितनी रोशनी अंदर जाए।"
+      }
+    },
+    "pupil": {
+      "term": {
+        "en": "pupil",
+        "hi": "पुतली (pupil)"
+      },
+      "def": {
+        "en": "The round opening in the centre of the iris. It looks black because the eye is dark inside.",
+        "hi": "आइरिस के बीच का गोल छेद। आँख अंदर से अँधेरी होती है, इसलिए यह काला दिखता है।"
+      }
+    },
+    "lens": {
+      "term": {
+        "en": "lens",
+        "hi": "लेंस (lens)"
+      },
+      "def": {
+        "en": "The clear, flexible disc behind the iris. It changes shape to focus on near or far things.",
+        "hi": "आइरिस के पीछे साफ़, लचीली चकती। पास या दूर की चीज़ पर फ़ोकस करने के लिए यह अपना आकार बदलती है।"
+      }
+    },
+    "vitreous": {
+      "term": {
+        "en": "vitreous",
+        "hi": "विट्रियस (vitreous)"
+      },
+      "def": {
+        "en": "The clear jelly that fills the eye behind the lens.",
+        "hi": "लेंस के पीछे आँख को भरने वाली साफ़ जेली।"
+      }
+    },
+    "retina": {
+      "term": {
+        "en": "retina",
+        "hi": "रेटिना (retina)"
+      },
+      "def": {
+        "en": "The thin layer of nerve tissue lining the back of the eye. It turns light into nerve signals.",
+        "hi": "आँख के पीछे अंदर की ओर बिछी नसों की पतली परत। यह रोशनी को नसों के संकेत में बदलती है।"
+      }
+    },
+    "macula": {
+      "term": {
+        "en": "macula",
+        "hi": "मैक्युला (macula)"
+      },
+      "def": {
+        "en": "The small central area of the retina, about 5 mm wide. It gives sharp detail and colour.",
+        "hi": "रेटिना का छोटा, बीच वाला हिस्सा, लगभग 5 मिमी चौड़ा। बारीक चीज़ें और रंग यही दिखाता है।"
+      }
+    },
+    "fovea": {
+      "term": {
+        "en": "fovea",
+        "hi": "फ़ोविया (fovea)"
+      },
+      "def": {
+        "en": "The tiny pit in the centre of the macula. It holds only cones, so it sees the sharpest.",
+        "hi": "मैक्युला के ठीक बीच का छोटा गड्ढा। यहाँ सिर्फ़ कोन कोशिकाएँ होती हैं, इसलिए सबसे साफ़ यहीं दिखता है।"
+      }
+    },
+    "optic-disc": {
+      "term": {
+        "en": "optic disc",
+        "hi": "ऑप्टिक डिस्क (optic disc)"
+      },
+      "def": {
+        "en": "The pale oval where the optic nerve leaves the eye. It has no light cells, so it is the blind spot.",
+        "hi": "वह हल्के रंग का अंडाकार हिस्सा जहाँ से ऑप्टिक नर्व आँख से निकलती है। यहाँ रोशनी पकड़ने वाली कोशिकाएँ नहीं होतीं, इसलिए यही ब्लाइंड स्पॉट है।"
+      }
+    },
+    "optic-nerve": {
+      "term": {
+        "en": "optic nerve",
+        "hi": "ऑप्टिक नर्व (optic nerve)"
+      },
+      "def": {
+        "en": "The cable of about a million nerve fibres that carries signals from the eye to the brain.",
+        "hi": "लगभग दस लाख नस-तंतुओं का केबल, जो आँख से दिमाग तक संकेत ले जाता है।"
+      }
+    },
+    "choroid": {
+      "term": {
+        "en": "choroid",
+        "hi": "कोरॉइड (choroid)"
+      },
+      "def": {
+        "en": "The layer of blood vessels between the retina and the sclera. It feeds the outer retina.",
+        "hi": "रेटिना और स्क्लेरा के बीच खून की नलियों की परत। यह रेटिना की बाहरी परतों को पोषण देती है।"
+      }
+    },
+    "sclera": {
+      "term": {
+        "en": "sclera",
+        "hi": "स्क्लेरा (sclera)"
+      },
+      "def": {
+        "en": "The tough white outer coat of the eye. It keeps the eye's shape.",
+        "hi": "आँख की मज़बूत, सफ़ेद बाहरी परत। यह आँख का आकार बनाए रखती है।"
+      }
+    },
+    "photoreceptor": {
+      "term": {
+        "en": "photoreceptor",
+        "hi": "फ़ोटोरिसेप्टर (photoreceptor)"
+      },
+      "def": {
+        "en": "A light-sensing cell in the retina. There are two kinds: rods and cones.",
+        "hi": "रेटिना की रोशनी पकड़ने वाली कोशिका। ये दो तरह की होती हैं: रॉड और कोन।"
+      }
+    },
+    "rod": {
+      "term": {
+        "en": "rod",
+        "hi": "रॉड कोशिका (rod)"
+      },
+      "def": {
+        "en": "A photoreceptor that works in dim light. It does not see colour.",
+        "hi": "कम रोशनी में काम करने वाली फ़ोटोरिसेप्टर कोशिका। यह रंग नहीं पहचानती।"
+      }
+    },
+    "cone": {
+      "term": {
+        "en": "cone",
+        "hi": "कोन कोशिका (cone)"
+      },
+      "def": {
+        "en": "A photoreceptor that works in bright light. It sees colour and fine detail.",
+        "hi": "तेज़ रोशनी में काम करने वाली फ़ोटोरिसेप्टर कोशिका। यह रंग और बारीक चीज़ें पहचानती है।"
+      }
+    },
+    "rpe": {
+      "term": {
+        "en": "retinal pigment epithelium (RPE)",
+        "hi": "रेटिनल पिगमेंट एपिथीलियम (RPE)"
+      },
+      "def": {
+        "en": "A single layer of dark cells under the photoreceptors. It feeds them and clears their waste.",
+        "hi": "फ़ोटोरिसेप्टर के नीचे गहरे रंग की कोशिकाओं की एक परत। यह उन्हें पोषण देती है और उनका कचरा साफ़ करती है।"
+      }
+    },
+    "ganglion-cell": {
+      "term": {
+        "en": "ganglion cell",
+        "hi": "गैंग्लियन कोशिका (ganglion cell)"
+      },
+      "def": {
+        "en": "A nerve cell in the inner retina. Its long fibre runs to the disc and forms the optic nerve.",
+        "hi": "रेटिना की अंदरूनी परत की नस-कोशिका। इसका लंबा तंतु डिस्क तक जाकर ऑप्टिक नर्व बनाता है।"
+      }
+    },
+    "nerve-fibre-layer": {
+      "term": {
+        "en": "nerve fibre layer",
+        "hi": "नर्व फ़ाइबर लेयर (nerve fibre layer)"
+      },
+      "def": {
+        "en": "The innermost layer of the retina. It is made of ganglion cell fibres on their way to the disc.",
+        "hi": "रेटिना की सबसे अंदर की परत। यह डिस्क की ओर जाते गैंग्लियन कोशिकाओं के तंतुओं से बनती है।"
+      }
+    },
+    "fundus": {
+      "term": {
+        "en": "fundus",
+        "hi": "फ़ंडस (fundus)"
+      },
+      "def": {
+        "en": "The inside back of the eye, seen through the pupil: retina, disc, macula and vessels.",
+        "hi": "पुतली से दिखने वाला आँख का अंदरूनी पिछला हिस्सा: रेटिना, डिस्क, मैक्युला और खून की नलियाँ।"
+      }
+    },
+    "fundus-photo": {
+      "term": {
+        "en": "fundus photo",
+        "hi": "फ़ंडस फ़ोटो (fundus photo)"
+      },
+      "def": {
+        "en": "A colour photo of the back of the eye, taken with a special camera.",
+        "hi": "एक ख़ास कैमरे से ली गई आँख के पिछले हिस्से की रंगीन फ़ोटो।"
+      }
+    },
+    "oct": {
+      "term": {
+        "en": "OCT scan",
+        "hi": "OCT स्कैन (optical coherence tomography)"
+      },
+      "def": {
+        "en": "Optical coherence tomography. It uses light, not X-rays, to show the retina in cross-section, like a slice of cake.",
+        "hi": "ऑप्टिकल कोहेरेंस टोमोग्राफ़ी। यह एक्स-रे नहीं, रोशनी से रेटिना का आड़ा कटा हिस्सा दिखाती है, जैसे केक का एक टुकड़ा।"
+      }
+    },
+    "capillary": {
+      "term": {
+        "en": "capillary",
+        "hi": "कैपिलरी (capillary)"
+      },
+      "def": {
+        "en": "The tiniest blood vessel. Its wall is one cell thick, so oxygen and food pass through it.",
+        "hi": "सबसे बारीक खून की नली। इसकी दीवार एक ही कोशिका जितनी पतली होती है, इसलिए ऑक्सीजन और पोषण इसके पार जाते हैं।"
+      }
+    },
+    "artery": {
+      "term": {
+        "en": "artery",
+        "hi": "धमनी (artery)"
+      },
+      "def": {
+        "en": "A vessel that brings blood in. Retinal arteries look thinner and lighter red than veins.",
+        "hi": "खून अंदर लाने वाली नली। रेटिना की धमनियाँ नसों से पतली और हल्के लाल रंग की दिखती हैं।"
+      }
+    },
+    "vein": {
+      "term": {
+        "en": "vein",
+        "hi": "शिरा (vein)"
+      },
+      "def": {
+        "en": "A vessel that takes blood away. Retinal veins look wider and darker than arteries.",
+        "hi": "खून वापस ले जाने वाली नली। रेटिना की शिराएँ धमनियों से चौड़ी और गहरे रंग की दिखती हैं।"
+      }
+    },
+    "arcades": {
+      "term": {
+        "en": "vascular arcades",
+        "hi": "वैस्कुलर आर्केड (vascular arcades)"
+      },
+      "def": {
+        "en": "The big vessels that curve above and below the macula, like two arches.",
+        "hi": "मैक्युला के ऊपर और नीचे मेहराब की तरह घूमने वाली बड़ी खून की नलियाँ।"
+      }
+    },
+    "cup": {
+      "term": {
+        "en": "cup",
+        "hi": "कप (cup)"
+      },
+      "def": {
+        "en": "The pale central hollow of the optic disc. The pink ring around it is the rim.",
+        "hi": "ऑप्टिक डिस्क के बीच का हल्के रंग का गड्ढा। इसके चारों ओर का गुलाबी घेरा रिम कहलाता है।"
+      }
+    },
+    "diabetes": {
+      "term": {
+        "en": "diabetes",
+        "hi": "मधुमेह (diabetes)"
+      },
+      "def": {
+        "en": "Diabetes mellitus: a long-term illness with high blood sugar.",
+        "hi": "डायबिटीज़ मेलिटस: लंबे समय तक चलने वाली बीमारी जिसमें खून में शुगर ज़्यादा रहती है।"
+      }
+    },
+    "diabetic-retinopathy": {
+      "term": {
+        "en": "diabetic retinopathy",
+        "hi": "मधुमेह रेटिनोपैथी (diabetic retinopathy)"
+      },
+      "def": {
+        "en": "Damage to the small vessels of the retina caused by diabetes.",
+        "hi": "मधुमेह की वजह से रेटिना की छोटी खून की नलियों को होने वाला नुकसान।"
+      }
+    },
+    "microaneurysm": {
+      "term": {
+        "en": "microaneurysm",
+        "hi": "माइक्रोएन्यूरिज़्म (microaneurysm)"
+      },
+      "def": {
+        "en": "A tiny bulge in a weak capillary wall. It is the smallest red dot and the first sign of diabetic retinopathy.",
+        "hi": "कमज़ोर कैपिलरी की दीवार में छोटा सा उभार। यह सबसे छोटा लाल बिंदु है और मधुमेह रेटिनोपैथी का पहला संकेत है।"
+      }
+    },
+    "haemorrhage": {
+      "term": {
+        "en": "haemorrhage",
+        "hi": "हेमरेज (haemorrhage)"
+      },
+      "def": {
+        "en": "Bleeding. In the retina it shows as red dots, blots or flame shapes.",
+        "hi": "खून बहना। रेटिना में यह लाल बिंदु, धब्बे या लौ के आकार में दिखता है।"
+      }
+    },
+    "hard-exudate": {
+      "term": {
+        "en": "hard exudate",
+        "hi": "हार्ड एक्सुडेट (hard exudate)"
+      },
+      "def": {
+        "en": "A yellow, waxy deposit with sharp edges. It is fat left behind when leaked fluid dries up.",
+        "hi": "तीखे किनारों वाला पीला, मोम जैसा जमाव। यह रिसे हुए तरल के सूखने के बाद बची चर्बी है।"
+      }
+    },
+    "cotton-wool-spot": {
+      "term": {
+        "en": "cotton wool spot",
+        "hi": "कॉटन वूल स्पॉट (cotton wool spot)"
+      },
+      "def": {
+        "en": "A soft, pale, fluffy patch. It marks a tiny area of nerve fibres that lost its blood supply.",
+        "hi": "रुई जैसा मुलायम, हल्के रंग का धब्बा। यह नस-तंतुओं के उस छोटे हिस्से को दिखाता है जिसकी खून की सप्लाई रुक गई।"
+      }
+    },
+    "new-vessels": {
+      "term": {
+        "en": "new vessels",
+        "hi": "नई खून की नलियाँ (new vessels)"
+      },
+      "def": {
+        "en": "Fragile, abnormal vessels that grow when the retina is short of oxygen. They bleed easily. The medical word is neovascularisation.",
+        "hi": "कमज़ोर, असामान्य नलियाँ जो रेटिना में ऑक्सीजन की कमी होने पर उगती हैं। ये आसानी से फट जाती हैं। डॉक्टरी शब्द: नियोवैस्कुलराइज़ेशन (neovascularisation)।"
+      }
+    },
+    "ischaemia": {
+      "term": {
+        "en": "ischaemia",
+        "hi": "इस्कीमिया (ischaemia)"
+      },
+      "def": {
+        "en": "Too little blood flow, so the tissue is short of oxygen.",
+        "hi": "खून का बहाव कम होना, जिससे ऊतक (tissue) को ऑक्सीजन कम मिलती है।"
+      }
+    },
+    "npdr": {
+      "term": {
+        "en": "non-proliferative diabetic retinopathy (NPDR)",
+        "hi": "नॉन-प्रोलिफ़ेरेटिव डायबिटिक रेटिनोपैथी (NPDR)"
+      },
+      "def": {
+        "en": "Diabetic retinopathy without new vessels. It is graded mild, moderate or severe.",
+        "hi": "बिना नई नलियों वाली मधुमेह रेटिनोपैथी। इसे माइल्ड, मॉडरेट या सीवियर में बाँटा जाता है।"
+      }
+    },
+    "pdr": {
+      "term": {
+        "en": "proliferative diabetic retinopathy (PDR)",
+        "hi": "प्रोलिफ़ेरेटिव डायबिटिक रेटिनोपैथी (PDR)"
+      },
+      "def": {
+        "en": "The late stage: new vessels have grown, or blood has leaked into the vitreous or in front of the retina.",
+        "hi": "आख़िरी चरण: नई नलियाँ उग आई हैं, या खून विट्रियस में या रेटिना के सामने आ गया है।"
+      }
+    },
+    "icdr": {
+      "term": {
+        "en": "ICDR scale",
+        "hi": "ICDR स्केल (International Clinical Diabetic Retinopathy scale)"
+      },
+      "def": {
+        "en": "The International Clinical Diabetic Retinopathy scale. It sorts an eye into 5 grades, from none to proliferative.",
+        "hi": "इंटरनेशनल क्लिनिकल डायबिटिक रेटिनोपैथी स्केल। यह आँख को 5 ग्रेड में बाँटता है: कोई रेटिनोपैथी नहीं से लेकर प्रोलिफ़ेरेटिव तक।"
+      }
+    },
+    "quadrant": {
+      "term": {
+        "en": "quadrant",
+        "hi": "क्वाड्रेंट (quadrant)"
+      },
+      "def": {
+        "en": "One of four quarters of the retina, split by a vertical and a horizontal line.",
+        "hi": "रेटिना के चार हिस्सों में से एक, जिन्हें एक खड़ी और एक आड़ी रेखा बाँटती है।"
+      }
+    },
+    "venous-beading": {
+      "term": {
+        "en": "venous beading",
+        "hi": "वीनस बीडिंग (venous beading)"
+      },
+      "def": {
+        "en": "A vein that swells and narrows in turn, like a string of beads. It signals severe oxygen shortage.",
+        "hi": "ऐसी शिरा जो बारी-बारी से फूलती और पतली होती है, जैसे मोतियों की माला। यह ऑक्सीजन की भारी कमी का संकेत है।"
+      }
+    },
+    "irma": {
+      "term": {
+        "en": "IRMA",
+        "hi": "IRMA (रेटिना के अंदर की असामान्य बारीक नलियाँ)"
+      },
+      "def": {
+        "en": "Intraretinal microvascular abnormality: twisted small vessels inside the retina, next to closed capillaries. They are not yet new vessels.",
+        "hi": "इंट्रारेटिनल माइक्रोवैस्कुलर एब्नॉर्मैलिटी: बंद कैपिलरी के पास रेटिना के अंदर मुड़ी-तुड़ी छोटी नलियाँ। ये अभी नई नलियाँ नहीं हैं।"
+      }
+    },
+    "vegf": {
+      "term": {
+        "en": "VEGF",
+        "hi": "VEGF (नई नलियाँ उगाने वाला संकेत)"
+      },
+      "def": {
+        "en": "Vascular endothelial growth factor. The oxygen-starved retina releases it. It makes vessels leak and new vessels grow.",
+        "hi": "वैस्कुलर एंडोथीलियल ग्रोथ फ़ैक्टर। ऑक्सीजन की कमी वाला रेटिना इसे छोड़ता है। इससे नलियाँ रिसती हैं और नई नलियाँ उगती हैं।"
+      }
+    },
+    "anti-vegf": {
+      "term": {
+        "en": "anti-VEGF injection",
+        "hi": "एंटी-VEGF इंजेक्शन (anti-VEGF)"
+      },
+      "def": {
+        "en": "A medicine injected into the eye that blocks VEGF. It dries leaks and shrinks new vessels.",
+        "hi": "आँख में लगाई जाने वाली दवा जो VEGF को रोकती है। इससे रिसाव सूखता है और नई नलियाँ सिकुड़ती हैं।"
+      }
+    },
+    "prp": {
+      "term": {
+        "en": "panretinal laser (PRP)",
+        "hi": "पैनरेटिनल लेज़र (PRP)"
+      },
+      "def": {
+        "en": "Panretinal photocoagulation: many small laser burns on the outer retina. The starved retina needs less oxygen, so new vessels shrink.",
+        "hi": "पैनरेटिनल फ़ोटोकोएगुलेशन: रेटिना के बाहरी हिस्से पर लेज़र के कई छोटे निशान। इससे भूखे रेटिना की ऑक्सीजन की ज़रूरत घटती है और नई नलियाँ सिकुड़ती हैं।"
+      }
+    },
+    "oedema": {
+      "term": {
+        "en": "oedema",
+        "hi": "सूजन (oedema)"
+      },
+      "def": {
+        "en": "Swelling caused by fluid building up in a tissue.",
+        "hi": "ऊतक में तरल जमा होने से आई सूजन।"
+      }
+    },
+    "dme": {
+      "term": {
+        "en": "diabetic macular oedema (DME)",
+        "hi": "डायबिटिक मैक्युलर ईडिमा (DME)"
+      },
+      "def": {
+        "en": "Swelling of the macula from fluid that leaks out of damaged vessels in diabetes.",
+        "hi": "मधुमेह में ख़राब नलियों से रिसे तरल के कारण मैक्युला में सूजन।"
+      }
+    },
+    "centre-involving": {
+      "term": {
+        "en": "centre-involving",
+        "hi": "सेंटर-इन्वॉल्विंग (centre-involving)"
+      },
+      "def": {
+        "en": "Oedema that reaches the central 1 mm of the macula. This type most often blurs vision.",
+        "hi": "ऐसी सूजन जो मैक्युला के बीच के 1 मिमी तक पहुँच जाए। इसी से अक्सर नज़र धुंधली होती है।"
+      }
+    },
+    "ophthalmologist": {
+      "term": {
+        "en": "ophthalmologist",
+        "hi": "नेत्र रोग विशेषज्ञ (ophthalmologist)"
+      },
+      "def": {
+        "en": "A medical doctor who treats eye diseases and does eye surgery.",
+        "hi": "आँखों की बीमारियों का इलाज और ऑपरेशन करने वाले डॉक्टर।"
+      }
+    },
+    "amd": {
+      "term": {
+        "en": "age-related macular degeneration (AMD)",
+        "hi": "एज-रिलेटेड मैक्युलर डिजनरेशन (AMD)"
+      },
+      "def": {
+        "en": "Wear and damage of the macula in people over 50. It blurs central vision.",
+        "hi": "50 साल से ऊपर के लोगों में मैक्युला का घिसना और ख़राब होना। इससे बीच की नज़र धुंधली होती है।"
+      }
+    },
+    "drusen": {
+      "term": {
+        "en": "drusen",
+        "hi": "ड्रूज़न (drusen)"
+      },
+      "def": {
+        "en": "Small yellow deposits under the RPE. They are the mark of dry AMD.",
+        "hi": "RPE के नीचे छोटे पीले जमाव। ये ड्राई AMD की पहचान हैं।"
+      }
+    },
+    "dry-amd": {
+      "term": {
+        "en": "dry AMD",
+        "hi": "ड्राई AMD (dry AMD)"
+      },
+      "def": {
+        "en": "The slow type of AMD, with drusen and gradual thinning of the macula.",
+        "hi": "AMD का धीमा प्रकार, जिसमें ड्रूज़न होते हैं और मैक्युला धीरे-धीरे पतला होता है।"
+      }
+    },
+    "wet-amd": {
+      "term": {
+        "en": "wet AMD",
+        "hi": "वेट AMD (wet AMD)"
+      },
+      "def": {
+        "en": "The fast type of AMD. New vessels under the macula leak fluid or blood. It needs quick treatment.",
+        "hi": "AMD का तेज़ प्रकार। मैक्युला के नीचे नई नलियाँ तरल या खून रिसाती हैं। इसका जल्दी इलाज ज़रूरी है।"
+      }
+    },
+    "amsler-grid": {
+      "term": {
+        "en": "Amsler grid",
+        "hi": "एम्सलर ग्रिड (Amsler grid)"
+      },
+      "def": {
+        "en": "A square of straight lines with a dot in the centre. Wavy or missing lines warn of macula trouble.",
+        "hi": "सीधी रेखाओं का एक चौकोर जाल, बीच में एक बिंदु। रेखाएँ टेढ़ी या ग़ायब दिखें तो मैक्युला में गड़बड़ी का संकेत है।"
+      }
+    },
+    "intraretinal-fluid": {
+      "term": {
+        "en": "intraretinal fluid",
+        "hi": "इंट्रारेटिनल फ़्लूइड (intraretinal fluid)"
+      },
+      "def": {
+        "en": "Fluid pockets, or cysts, inside the layers of the retina. On OCT they look dark.",
+        "hi": "रेटिना की परतों के अंदर तरल की थैलियाँ या सिस्ट। OCT पर ये काली दिखती हैं।"
+      }
+    },
+    "subretinal-fluid": {
+      "term": {
+        "en": "subretinal fluid",
+        "hi": "सबरेटिनल फ़्लूइड (subretinal fluid)"
+      },
+      "def": {
+        "en": "Fluid collected under the retina, between the retina and the RPE.",
+        "hi": "रेटिना के नीचे, रेटिना और RPE के बीच जमा तरल।"
+      }
+    },
+    "cst": {
+      "term": {
+        "en": "central subfield thickness (CST)",
+        "hi": "सेंट्रल सबफ़ील्ड थिकनेस (CST)"
+      },
+      "def": {
+        "en": "The OCT machine's average retinal thickness in the central 1 mm of the macula.",
+        "hi": "मैक्युला के बीच के 1 मिमी में रेटिना की औसत मोटाई, जो OCT मशीन नापती है।"
+      }
+    },
+    "steroid-implant": {
+      "term": {
+        "en": "steroid implant",
+        "hi": "स्टेरॉयड इम्प्लांट (steroid implant)"
+      },
+      "def": {
+        "en": "A tiny slow-release steroid pellet placed in the vitreous. It can raise eye pressure and speed up cataract.",
+        "hi": "विट्रियस में रखी जाने वाली छोटी स्टेरॉयड गोली जो धीरे-धीरे दवा छोड़ती है। इससे आँख का दबाव बढ़ सकता है और मोतियाबिंद जल्दी बन सकता है।"
+      }
+    },
+    "rvo": {
+      "term": {
+        "en": "retinal vein occlusion (RVO)",
+        "hi": "रेटिनल वेन ऑक्लूज़न (RVO)"
+      },
+      "def": {
+        "en": "A blocked retinal vein. A branch vein block is BRVO; a central vein block is CRVO.",
+        "hi": "रेटिना की शिरा का बंद होना। शाखा वाली शिरा बंद हो तो BRVO; मुख्य (सेंट्रल) शिरा बंद हो तो CRVO।"
+      }
+    },
+    "rapd": {
+      "term": {
+        "en": "RAPD",
+        "hi": "RAPD (रिलेटिव एफ़ेरेंट प्यूपिलरी डिफ़ेक्ट)"
+      },
+      "def": {
+        "en": "Relative afferent pupillary defect. In the swinging torch test, the pupils dilate when the light moves to the damaged eye.",
+        "hi": "रिलेटिव एफ़ेरेंट प्यूपिलरी डिफ़ेक्ट। टॉर्च को एक आँख से दूसरी पर घुमाने पर, ख़राब आँख पर रोशनी आते ही पुतलियाँ फैल जाती हैं।"
+      }
+    },
+    "neovascular-glaucoma": {
+      "term": {
+        "en": "neovascular glaucoma",
+        "hi": "नियोवैस्कुलर ग्लूकोमा (neovascular glaucoma)"
+      },
+      "def": {
+        "en": "High eye pressure caused by new vessels that block the eye's drainage angle. It is painful and hard to treat.",
+        "hi": "आँख के पानी निकलने वाले कोने (angle) को नई नलियाँ बंद कर दें तो आँख का दबाव बढ़ जाता है। यह दर्दनाक होता है और इसका इलाज मुश्किल है।"
+      }
+    },
+    "hyperreflective-foci": {
+      "term": {
+        "en": "hyperreflective foci",
+        "hi": "हाइपररिफ़्लेक्टिव फ़ोसाई (hyperreflective foci)"
+      },
+      "def": {
+        "en": "Small bright dots inside the retina on OCT. They may be lipid or inflammatory cells.",
+        "hi": "OCT पर रेटिना के अंदर छोटे चमकीले बिंदु। ये चर्बी या सूजन वाली कोशिकाएँ हो सकती हैं।"
+      }
+    },
+    "dril": {
+      "term": {
+        "en": "DRIL",
+        "hi": "DRIL (रेटिना की अंदरूनी परतों का बिखरना)"
+      },
+      "def": {
+        "en": "Disorganisation of the retinal inner layers: on OCT the inner layer borders cannot be told apart. It predicts poorer vision.",
+        "hi": "रेटिना की अंदरूनी परतों का बिखर जाना: OCT पर इन परतों की सीमाएँ अलग नहीं दिखतीं। इससे नज़र कम सुधरने का अंदाज़ा मिलता है।"
+      }
+    },
+    "ellipsoid-zone": {
+      "term": {
+        "en": "ellipsoid zone",
+        "hi": "एलिप्सॉइड ज़ोन (ellipsoid zone)"
+      },
+      "def": {
+        "en": "A bright line in the outer retina on OCT. When it is whole, the photoreceptors are healthy.",
+        "hi": "OCT पर रेटिना की बाहरी परत में एक चमकीली रेखा। यह पूरी हो तो फ़ोटोरिसेप्टर ठीक हैं।"
+      }
+    },
+    "myopia": {
+      "term": {
+        "en": "short sight (myopia)",
+        "hi": "निकट दृष्टि (myopia)"
+      },
+      "def": {
+        "en": "Far things look blurred because light focuses in front of the retina.",
+        "hi": "दूर की चीज़ें धुंधली दिखती हैं, क्योंकि रोशनी रेटिना से पहले ही फ़ोकस हो जाती है।"
+      }
+    },
+    "screening": {
+      "term": {
+        "en": "screening",
+        "hi": "स्क्रीनिंग (screening)"
+      },
+      "def": {
+        "en": "Checking people who have no symptoms, to find disease early.",
+        "hi": "जिन लोगों में कोई लक्षण नहीं हैं, उनकी जाँच करना ताकि बीमारी जल्दी पकड़ में आए।"
+      }
+    },
+    "dilating-drops": {
+      "term": {
+        "en": "dilating drops",
+        "hi": "पुतली फैलाने वाली दवा (dilating drops)"
+      },
+      "def": {
+        "en": "Eye drops that widen the pupil for a full view of the retina. Vision stays blurred for a few hours, so the patient should not drive.",
+        "hi": "आँख की बूँदें जो पुतली को फैलाती हैं ताकि पूरा रेटिना दिखे। कुछ घंटे नज़र धुंधली रहती है, इसलिए मरीज़ को गाड़ी नहीं चलानी चाहिए।"
+      }
+    },
+    "vitreous-haemorrhage": {
+      "term": {
+        "en": "vitreous haemorrhage",
+        "hi": "विट्रियस हेमरेज (vitreous haemorrhage)"
+      },
+      "def": {
+        "en": "Bleeding into the vitreous jelly. It causes sudden floaters or dark, cloudy vision.",
+        "hi": "विट्रियस जेली में खून आ जाना। इससे अचानक तैरते धब्बे दिखते हैं या नज़र काली-धुंधली हो जाती है।"
+      }
+    }
+  }
+}
