@@ -16,7 +16,7 @@ mock.module("../functions/_followcare_sms.js", { namedExports: { sendDlt: async 
 mock.module("../functions/_followcare_whatsapp.js", { namedExports: { sendWhatsApp: async (_e, p) => { wa.push(p.body); return { ok: false, reason: "not_on_whatsapp" }; }, waConfigured: () => true } });
 mock.module("../functions/_queue.js", { namedExports: { decPHI: async (_e, v) => String(v || "").replace(/^enc:/, ""), mintTicketToken: async () => "opaque" } });
 mock.module("../functions/_fbfirestore.js", { namedExports: { fsCommit: async () => ({ ok: true }), wCreate: () => ({}), wUpdate: () => ({}) } });
-const { notifyTicket, smsSpec, smsTime, smsDate } = await import("../functions/_queue_notify.js");
+const { notifyTicket, notifyTimeline, smsSpec, smsTime, smsDate } = await import("../functions/_queue_notify.js");
 
 const ETA = Date.parse("2026-09-25T06:10:00Z");   // 11:40 IST
 const S = { hospitalId: "h", department: "Cardiology", doctorName: "Dr Rao" };
@@ -49,6 +49,19 @@ test("the place is the ticket's department, then the session's, then 'the clinic
   assert.equal(smsSpec("ahead2", S, T({ department: "Orthopaedics" }), LINK, ETA).slots[2], "Orthopaedics");
   assert.equal(smsSpec("ahead2", S, T(), LINK, ETA).slots[2], "Cardiology");
   assert.equal(smsSpec("ahead2", { ...S, department: "" }, T(), LINK, ETA).slots[2], "the clinic");
+});
+
+test("checkout's visit-summary link: Care Plan with the clinic's own number, or no SMS without one", async () => {
+  assert.deepEqual(smsSpec("timeline", S, T(), LINK, ETA, "04023456789"), { key: "care_plan", slots: ["Patient", "Rao", "Cardiology", "04023456789", LINK] });
+  assert.equal(smsSpec("timeline", S, T(), LINK, ETA, ""), null, "no clinic number: never a StewardMD one, no SMS");
+  assert.equal(smsSpec("timeline", S, T({ etaStart: 0 }), LINK, ETA, "04023456789").key, "care_plan", "no estimate needed after the visit");
+  dlt.length = 0;
+  const r = await notifyTimeline({}, S, T(), LINK, "04023456789");
+  assert.equal(r.channel, "sms"); assert.equal(dlt.length, 1);
+  assert.deepEqual(dlt[0].slots, ["Patient", "Rao", "Cardiology", "04023456789", LINK]);
+  dlt.length = 0;
+  const none = await notifyTimeline({}, S, T(), LINK);
+  assert.equal(none.channel, "whatsapp"); assert.equal(dlt.length, 0, "no number saved: WhatsApp only");
 });
 
 test("through notifyTicket: WhatsApp fails, the SMS goes as the template; next goes by WhatsApp only", async () => {
