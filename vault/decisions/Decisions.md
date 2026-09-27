@@ -10530,3 +10530,10 @@ MaiK Offline -> MaiK; privacy panel scoped to "Offline, your question stays on y
 Follow-up same day: the headline "offline medical AI." keeps the poster gradient
 (#5eead4 > #38bdf8 > #a78bfa, owner: "as in poster"), the one exception to the single green. Chips that
 were mint text on a dark-teal fill now read white on #0E6E63 (both had collapsed to teal).
+
+## 2026-09-27 - Wordmark rule on the marketing site: Steward black, MD green
+Owner: "StewardMD steward is black and MD is Green". Every split wordmark on `_site/index.html` is
+now Steward #000 + MD #0E6E63 (nav, Knowledge Base heading, footer, and the hero "open StewardMD."
+which used to be all teal). The footer moved from dark (#0B1220) to Apple-light #f5f5f7 so the
+black "Steward" can sit on it; the white MaiK wordmark there is rendered black via
+`filter:brightness(0)` (no dark asset exists).
