@@ -204,7 +204,7 @@
     }
 
     // 1) compound phrases (highest-signal, may set red flags)
-    COMPOUND.forEach(function (c) { var m = c.re.exec(norm); if (m && valid[c.eng]) { consider(c.eng, m.index, "compound", m[0].trim(), c.display); byKey[c.eng]._red = c.red; } });
+    COMPOUND.forEach(function (c) { var m = c.re.exec(norm); if (m && valid[c.eng]) { consider(c.eng, m.index, "compound", m[0].trim(), c.display); if (byKey[c.eng]) byKey[c.eng]._red = c.red; } });
 
     // 2) synonym + label match against the engine's own vocabulary
     Object.keys(valid).forEach(function (key) {
@@ -215,13 +215,13 @@
         consider(key, hitIdx, "synonym", hitSrc);
         // v2: later mentions of the same finding, so a negated first one does not hide them
         if (v2) (syn[key] || []).forEach(function (sv) { var from = 0, j, n = 0;
-          while (n++ < 6 && (j = findWord(norm.slice(from), sv)) >= 0) { j += from; if (j !== hitIdx) alts[key].push({ idx: j, method: "synonym", srcText: sv }); from = j + sv.length; } });
+          while (n++ < 6 && (j = findWord(norm.slice(from), sv)) >= 0) { j += from; if (j !== hitIdx) { if (!byKey[key]) consider(key, j, "synonym", sv); else (alts[key] = alts[key] || []).push({ idx: j, method: "synonym", srcText: sv }); } from = j + sv.length; } });
         return;
       }
       var lab = (labels[key] || "").toLowerCase().replace(/\([^)]*\)/g, " ").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
       if (lab.length >= 5 && lab.length <= 26) { var li = norm.indexOf(" " + lab + " "); if (li < 0) li = norm.indexOf(" " + lab + "s "); if (li >= 0) consider(key, li + 1, "label", lab);
         // round 19 (metamorphic tests): every later occurrence too, so "no erythema ... diffuse erythema" reads the same either way round
-        if (v2 && li >= 0) { var lj = li + 1, ln = 0; while (ln++ < 6 && (lj = norm.indexOf(" " + lab, lj + lab.length)) >= 0) { if (/[^a-z]/.test(norm.charAt(lj + 1 + lab.length) || " ")) alts[key].push({ idx: lj + 1, method: "label", srcText: lab }); } } }
+        if (v2 && li >= 0) { var lj = li + 1, ln = 0; while (ln++ < 6 && (lj = norm.indexOf(" " + lab, lj + lab.length)) >= 0) { if (/[^a-z]/.test(norm.charAt(lj + 1 + lab.length) || " ")) (alts[key] = alts[key] || []).push({ idx: lj + 1, method: "label", srcText: lab }); } } }
     });
 
     // 3) fuzzy typo match against synonym vocabulary (safe: distance-gated, confirmation for red flags)

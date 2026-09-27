@@ -403,3 +403,10 @@ test("round 28 readings", () => {
   assert.ok(!r("caught before any organ failure").present.includes("organDysfunction"));
   assert.ok(r("mild residual right-upper-quadrant tenderness").present.includes("rightUpperQuadrantPain"));
 });
+
+// round 29: a guarded first mention must not crash the later-mention scan
+test("a finding whose first mention is skipped still reads a later mention", () => {
+  const c = { valid: { alteredSensorium: 1 }, labels: {}, numeric: {}, v2: true, syn: { alteredSensorium: ["unresponsive"] } };
+  const r = NLP.extract("fever unresponsive to paracetamol; later found unresponsive at home", c);
+  assert.ok(r.present.includes("alteredSensorium"));
+});
