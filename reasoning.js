@@ -606,7 +606,7 @@
    * far outweighs a non-specific one (fever). The dominant organ system,
    * derived from weighted findings, shapes the differential.
    * ---------------------------------------------------------------------- */
-  var FW_VERYHIGH = {neckStiffness:1,pleuriticChestPain:1,murphySign:1,hemoptysis:1,focalNeuroDeficit:1,hypotension:1,thunderclapHeadache:1,ecgIschemia:1,ascendingWeakness:1,miosisSecretions:1,mucosalLesions:1,costovertebralTenderness:1,exertionalChestPain:1,ketonemia:1,raisedJVP:1,pulsatileMass:1,asterixis:1,petechialRash:1,oliguria:1,proteinuria:1,eschar:1,bilateralCrackles:1,hematemesis:1,facialSwelling:1,sickleCellHx:1,rigidity:1,photophobia:1,bloodyStool:1,jaundice:1,seizure:1,hematuria:1,thrombocytopenia:1};
+  var FW_VERYHIGH = {dilatedCBD:1,asciticPMNHigh:1,transaminasesVeryHigh:1,neckStiffness:1,pleuriticChestPain:1,murphySign:1,hemoptysis:1,focalNeuroDeficit:1,hypotension:1,thunderclapHeadache:1,ecgIschemia:1,ascendingWeakness:1,miosisSecretions:1,mucosalLesions:1,costovertebralTenderness:1,exertionalChestPain:1,ketonemia:1,raisedJVP:1,pulsatileMass:1,asterixis:1,petechialRash:1,oliguria:1,proteinuria:1,eschar:1,bilateralCrackles:1,hematemesis:1,facialSwelling:1,sickleCellHx:1,rigidity:1,photophobia:1,bloodyStool:1,jaundice:1,seizure:1,hematuria:1,thrombocytopenia:1};
   var FW_LOW = {fever:1,headache:1,fatigue:1,weakness:1,malaise:1,tachycardia:1,tachypnea:1,rigors:1,cough:1,nauseaVomiting:1,myalgiaArthralgia:1,weightLoss:1,ageOver50:1};
   function fw(k) { return FW_VERYHIGH[k] ? 3 : (FW_LOW[k] ? 1 : 2); }
 
@@ -615,7 +615,8 @@
   // replacing the OS emoji that shipped in app.js's SYSTEM_PICKER_MAP + the two NI tabs below.
   var SYS_ICON = { respiratory: "lungs", genitourinary: "kidney", gastrointestinal: "stomach", skin: "skin", neuro: "brain", systemic: "aware", cardiac: "heart", tropical: "bug", ni_endo: "endocrine", ni_tox: "skull" };
   var GROUP_TAG = { "General / Vitals":"GEN","Respiratory":"RESP","Gastrointestinal":"GI","Genitourinary":"GU","Central Nervous System":"CNS","Cardiac":"CVS","Tropical Fever":"ID","Skin / Soft Tissue":"DERM","Sepsis / Oncology-Specific":"GEN" };
-  var EXTRA_TAG = { headache:"CNS",thunderclapHeadache:"CNS",chestPain:"CVS",pleuriticChestPain:"RESP",exertionalChestPain:"CVS",dyspnea:"RESP",orthopnea:"CVS",palpitations:"CVS",backPain:"MSK",visualDisturbance:"CNS",polyarthralgia:"MSK",legSwellingUnilateral:"CVS",legSwellingBilateral:"CVS",calfTenderness:"CVS",raisedJVP:"CVS",bilateralCrackles:"RESP",asterixis:"HEP",ecgIschemia:"CVS",ketonemia:"ENDO",polyuriaPolydipsia:"ENDO",knownCAD:"CVS",knownHeartFailure:"CVS",hypertensionHx:"CVS",diabetesHx:"ENDO",steroidUse:"ENDO",drugOverdose:"TOX",anticoagulated:"HEME",atrialFibHx:"CVS",pulsatileMass:"CVS",hematemesis:"GI",hematuria:"GU",jointSwelling:"MSK",ascendingWeakness:"CNS",rigidity:"TOX",hypothermia:"GEN",bradycardia:"CVS",bradypnea:"RESP",miosisSecretions:"TOX",mucocutaneousBleeding:"HEME",oliguria:"RENAL",mucosalLesions:"DERM",facialSwelling:"GEN",sickleCellHx:"HEME",headInjury:"CNS",alcoholExcess:"GEN",ataxia:"CNS",proteinuria:"RENAL",jaundice:"HEP",rightUpperQuadrantPain:"HEP",murphySign:"HEP",ascites:"HEP",flankPain:"GU",dysuria:"GU",feverGU:"GU",costovertebralTenderness:"GU" };
+  var EXTRA_TAG = { headache:"CNS",thunderclapHeadache:"CNS",chestPain:"CVS",pleuriticChestPain:"RESP",exertionalChestPain:"CVS",dyspnea:"RESP",orthopnea:"CVS",palpitations:"CVS",backPain:"MSK",visualDisturbance:"CNS",polyarthralgia:"MSK",legSwellingUnilateral:"CVS",legSwellingBilateral:"CVS",calfTenderness:"CVS",raisedJVP:"CVS",bilateralCrackles:"RESP",asterixis:"HEP",ecgIschemia:"CVS",ketonemia:"ENDO",polyuriaPolydipsia:"ENDO",knownCAD:"CVS",knownHeartFailure:"CVS",hypertensionHx:"CVS",diabetesHx:"ENDO",steroidUse:"ENDO",drugOverdose:"TOX",anticoagulated:"HEME",atrialFibHx:"CVS",pulsatileMass:"CVS",hematemesis:"GI",hematuria:"GU",jointSwelling:"MSK",ascendingWeakness:"CNS",rigidity:"TOX",hypothermia:"GEN",bradycardia:"CVS",bradypnea:"RESP",miosisSecretions:"TOX",mucocutaneousBleeding:"HEME",oliguria:"RENAL",mucosalLesions:"DERM",facialSwelling:"GEN",sickleCellHx:"HEME",headInjury:"CNS",alcoholExcess:"GEN",ataxia:"CNS",proteinuria:"RENAL",jaundice:"HEP",rightUpperQuadrantPain:"HEP",murphySign:"HEP",ascites:"HEP",flankPain:"GU",dysuria:"GU",feverGU:"GU",costovertebralTenderness:"GU",
+    knownGallstones:"HEP",dilatedCBD:"HEP",transaminasesVeryHigh:"HEP",cholestaticLFT:"HEP",asciticPMNHigh:"HEP" };
   var FSYS = {}; // findingKey -> organ tag (populated in buildOntology)
 
   function dzTag(systemStr) {
@@ -657,6 +658,7 @@
     if (ONT) return ONT;
     var groups = [];
     (EXTRA_GROUPS).forEach(function (g) { groups.push(g); });
+    if (kbV2()) groups.push({ group: "Hepatobiliary imaging / labs", fields: KB_V2_FIELDS });   // smd_kb_v2
     var fg = (window.FIELD_GROUPS || []);
     fg.forEach(function (g) { if (g && g.fields) groups.push({ group: g.group, fields: g.fields }); });
     groups.forEach(function (g) {
@@ -672,6 +674,13 @@
     SYSPICK = (window.SYSTEM_PICKER_MAP && window.SYSTEM_PICKER_MAP.length) ? window.SYSTEM_PICKER_MAP
       : fg.filter(function (g) { return g.group && g.group.indexOf("Vitals") < 0 && g.group.indexOf("MDR") < 0 && g.group.indexOf("Course") < 0; })
            .map(function (g) { return { id: g.group, label: g.group, icon: "•", groups: [g.group] }; });
+    // smd_kb_v2: the new hepatobiliary findings live under the Gastrointestinal system (a copy, so the
+    // shared SYSTEM_PICKER_MAP the classic form reads is never mutated)
+    if (kbV2()) SYSPICK = SYSPICK.map(function (sp) {
+      if (sp.id !== "gastrointestinal" || (sp.groups || []).indexOf("Hepatobiliary imaging / labs") >= 0) return sp;
+      var c = {}; for (var k in sp) c[k] = sp[k];
+      c.groups = (sp.groups || []).concat(["Hepatobiliary imaging / labs"]); return c;
+    });
     return ONT;
   }
   // Cardinal / most-common presenting symptoms, floated to the top of their system's
@@ -833,6 +842,62 @@
   }
   function kbEvalScore(sm, e) { if (!sm) return 0; var i = sm.base || 0; var mo = sm.modifiers || []; for (var n = 0; n < mo.length; n++) if (kbEvalRule(mo[n].when, e)) i += mo[n].add; return i; }
   function kbDisease(id) { return (window.KB_CORE && KB_CORE.diseases) ? KB_CORE.diseases[id] : null; }
+
+  /* smd_kb_v2 (default OFF): the knowledge-base additions of kb/validation/PLAN-DX-ABX-10.md
+   * ("fix this first", 2026-09-27). ?kbv2=1|0 overrides. Read once per page load.
+   * 1. General "Fever" satisfies the infection rules' feverGU. The KB (and app.js's legacy
+   *    SYNDROMES) wrote cholangitis, cholecystitis, SBP, liver abscess, C. diff, diabetic foot and the
+   *    UTIs against feverGU ("Fever with urinary symptoms"), so fever + jaundice + RUQ pain never
+   *    matched cholangitis and the gate said "infection possible"; the same for SBP.
+   * 2. New findings that separate the hepatobiliary infections: known gallstones, dilated CBD /
+   *    biliary obstruction, transaminases > 1000, cholestatic LFTs, ascitic neutrophils >= 250.
+   * 3. Rule fixes: viral hepatitis no longer excluded by RUQ pain when transaminases are > 1000;
+   *    cholangitis also matches on imaging (dilated CBD / stones) without pain.
+   * Pending clinician review. When approved, fold KB_V2_PATCH into kb/diseases/*.json and rebuild. */
+  function kbV2() {
+    try {
+      var q = /[?&]kbv2=([01])\b/.exec((window.location && location.search) || "");
+      if (q) return q[1] === "1";
+      return localStorage.getItem("smd_kb_v2") === "1";
+    } catch (e) { return false; }
+  }
+  var KB_V2_FIELDS = [
+    { key: "knownGallstones", label: "Gallstones (known, or on imaging)" },
+    { key: "dilatedCBD", label: "Dilated CBD / biliary obstruction on imaging" },
+    { key: "transaminasesVeryHigh", label: "ALT / AST > 1000 IU/L" },
+    { key: "cholestaticLFT", label: "Cholestatic LFTs (ALP >= 2x normal)" },
+    { key: "asciticPMNHigh", label: "Ascitic fluid neutrophils >= 250/mm3" }
+  ];
+  var KB_V2_PATCH = {
+    CHOLANGITIS: {
+      rule: { allOf: ["jaundice", { anyOf: ["feverGU", "rigors"] }, { anyOf: ["rightUpperQuadrantPain", "dilatedCBD", "knownGallstones"] }, { not: "singleLesion" }] },
+      add: [{ when: "dilatedCBD", add: 15 }, { when: "knownGallstones", add: 10 }, { when: "cholestaticLFT", add: 10 }, { when: "transaminasesVeryHigh", add: -20 }] },
+    VIRAL_HEPATITIS: {
+      rule: { allOf: ["jaundice", { anyOf: ["fever", "nauseaVomiting"] }, { anyOf: [{ not: "rightUpperQuadrantPain" }, "transaminasesVeryHigh"] }, { not: "dilatedCBD" }] },
+      add: [{ when: "transaminasesVeryHigh", add: 20 }, { when: "cholestaticLFT", add: -10 }, { when: "knownGallstones", add: -10 }] },
+    CHOLECYSTITIS: { add: [{ when: "knownGallstones", add: 10 }, { when: "transaminasesVeryHigh", add: -10 }] },
+    SBP: {
+      rule: { allOf: ["ascites", { anyOf: ["abdominalPain", "feverGU", "alteredSensorium", "asciticPMNHigh"] }] },
+      add: [{ when: "asciticPMNHigh", add: 25 }] },
+    toxic_hepatitis: { find: { transaminasesVeryHigh: 22 } },
+    biliary_colic: { find: { knownGallstones: 20, transaminasesVeryHigh: -10 } },
+    pancreatitis: { find: { knownGallstones: 8 } }
+  };
+  var _kbV2Applied = false;
+  function ensureKbV2() {
+    if (_kbV2Applied || !(window.KB_CORE && KB_CORE.diseases) || !kbV2()) return;
+    var D = KB_CORE.diseases;
+    Object.keys(KB_V2_PATCH).forEach(function (id) {
+      var d = D[id], p = KB_V2_PATCH[id]; if (!d) return;
+      var keys = {};
+      if (p.rule) d.rule = p.rule;
+      if (p.add && d.score) { d.score.modifiers = (d.score.modifiers || []).concat(p.add); p.add.forEach(function (m) { keys[m.when] = 1; }); }
+      if (p.find && d.find) Object.keys(p.find).forEach(function (k) { d.find[k] = p.find[k]; });
+      if (d.assoc) Object.keys(keys).forEach(function (k) { if (d.assoc.indexOf(k) < 0) d.assoc.push(k); });
+    });
+    _kbV2Applied = true;
+    IDF = null; GIDF = null; ASSOC = {};   // specificity tables must see the new findings
+  }
   // KB "why this" reason interpolator — renders the declarative template (no eval).
   function kbRenderNode(node, e) {
     if (!node) return "";
@@ -886,6 +951,7 @@
   function infFindings() {
     var e = {};
     for (var k in S.f) { e[k] = true; (ALIAS[k] || []).forEach(function (a) { e[a] = true; }); }
+    if (_kbV2Applied && S.f.fever) e.feverGU = true;   // smd_kb_v2: the rules' feverGU means fever
     return e;
   }
 
@@ -952,6 +1018,7 @@
   }
 
   function differential() {
+    ensureKbV2();
     buildOntology();
     S.fInf = infFindings();
     S._dom = dominantSystems().dom;
@@ -967,12 +1034,262 @@
     // EXACTLY to the classic score-then-name ordering. Score is untouched.
     var rk = function (x) { return x.rankScore != null ? x.rankScore : x.score; };
     var by = function (a, b) { return (rk(b) - rk(a)) || (b.score - a.score) || a.name.localeCompare(b.name); };
+    if (rankV3()) { inf.forEach(rankV3Adjust); ni.forEach(rankV3Adjust); }
+    if (priorOn()) { PRIOR_CUR = priorCounts(); inf.forEach(priorAdjust); ni.forEach(priorAdjust); }
     inf.sort(by); ni.sort(by);
     return { inf: inf, ni: ni };
   }
 
+  /* smd_rank_v3 (default OFF): Phase 3 of kb/validation/PLAN-DX-ABX-10.md. ?rankv3=1|0 overrides.
+   * ORDER only: adjusts rankScore, never score, so the infection gate, the antibiotic decision and
+   * every displayed confidence are unchanged. Three parts, fitted on the TRAIN split, checked on dev:
+   *  1. parsimony: + 2 x the specificity (global IDF) of the patient's non-generic findings a
+   *     diagnosis explains, capped at 40, so a diagnosis that accounts for the specific picture beats
+   *     one that matched only generic findings ("fever, cough" -> CAP over a TB picture);
+   *  2. disqualifiers: textbook exclusions of the "attractor" diagnoses that won most wrong cases
+   *     (non-severe CAP with shock or hospital onset; acute gastroenteritis with dysentery, DKA or
+   *     GBS features; asthma in known COPD or with an anaphylaxis picture; URTI with lung signs);
+   *  3. anchors: a rare diagnosis cannot lead without one of its defining findings ("fever" alone
+   *     no longer puts HLH first).
+   * Rules are ai_drafted and pending clinician review. */
+  function rankV3() {
+    try {
+      var q = /[?&]rankv3=([01])\b/.exec((window.location && location.search) || "");
+      if (q) return q[1] === "1";
+      return localStorage.getItem("smd_rank_v3") === "1";
+    } catch (e) { return false; }
+  }
+  var RANK_V3_DQ = {
+    CAP: function (f) { return f.hypotension || f.vasopressorRequirement || f.mechanicalVentilation || f.hospitalDay48 || (f.subacuteOnset && (f.weightLoss || f.nightSweats || f.prolongedCough2Weeks)); },
+    GASTROENTERITIS: function (f) { return f.bloodyStool || f.tenesmus || f.ketonemia || f.ascendingWeakness || ((f.antibioticsLast90Days || f.priorAntibiotics) && f.diarrhea) || f.subacuteOnset || f.prolongedFever; },
+    asthma_exac: function (f) { return f.knownCOPD || (f.hypotension && (f.rash || f.facialSwelling)) || f.ascendingWeakness; },
+    URTI: function (f) { return f.crepitations || f.consolidation || f.hypoxia; }
+  };
+  var RANK_V3_ANCHOR = {
+    // pneumonia needs a lower-respiratory sign; fever + cough alone is URTI / bronchitis territory
+    CAP: ["crepitations", "consolidation", "hypoxia", "tachypnea", "pleuriticChestPain"],
+    HLH: ["cytopenia", "thrombocytopenia", "hepatosplenomegaly", "splenomegaly"],
+    thyroid_storm: ["palpitations", "atrialFibHx", "weightLoss"],
+    serotonin_nms: ["rigidity", "drugOverdose"],
+    ttp_hus: ["thrombocytopenia"],
+    sjs_ten: ["mucosalLesions"],
+    acute_leukemia: ["mucocutaneousBleeding", "bleedingManifestation", "petechialRash", "thrombocytopenia", "lymphadenopathy", "hepatosplenomegaly", "splenomegaly"],
+    malignancy_b: ["weightLoss", "lymphadenopathy", "nightSweats", "malignancy"],
+    myxedema: ["hypothermia", "bradycardia"],
+    dic: ["mucocutaneousBleeding", "bleedingManifestation", "thrombocytopenia", "inr"]
+  };
+  var RANK_V3_NUMERIC = null;
+  // v3 knowledge the antibiotic gate may use: a candidate that is disqualified or lacks its anchor
+  function rankV3Excluded(r, f) {
+    if (RANK_V3_DQ[r.id] && RANK_V3_DQ[r.id](f)) return true;
+    var anc = RANK_V3_ANCHOR[r.id];
+    return !!(anc && !anc.some(function (k) { return f[k]; }));
+  }
+  function rankV3Adjust(r) {
+    if (!RANK_V3_NUMERIC) {
+      RANK_V3_NUMERIC = {};
+      (window.FIELD_GROUPS || []).forEach(function (g) { (g.fields || []).forEach(function (fl) { if (fl.type === "number" || fl.type === "select") RANK_V3_NUMERIC[fl.key] = 1; }); });
+    }
+    var g = globalIDF(), f = S.fInf || S.f || {}, spec = 0;
+    (r.supporting || []).forEach(function (k) { if (!FW_LOW[k] && !RANK_V3_NUMERIC[k]) spec += (g[k] != null ? g[k] : 0.5); });
+    var adj = Math.min(40, 2 * spec);
+    if (RANK_V3_DQ[r.id] && RANK_V3_DQ[r.id](f)) adj -= 35;
+    var anc = RANK_V3_ANCHOR[r.id];
+    if (anc && !anc.some(function (k) { return f[k]; })) adj -= 25;
+    // 4. pertinent negatives from the note ("no neck stiffness", "chest clear"): each strong finding
+    // of this diagnosis the note explicitly denies costs 12, at most 30
+    var neg = S.neg || {}, nneg = 0;
+    if (Object.keys(neg).length) {
+      var strong = [];
+      if (r.inf && r._syn) strong = assocKeys(r._syn).filter(function (k) { return fw(k) === 3; });
+      else { var fm = niFind(r.id); for (var k2 in fm) if (fm[k2] >= 20) strong.push(k2); }
+      strong.forEach(function (k) { if (neg[k] && !f[k]) nneg++; });
+      adj -= Math.min(30, 12 * nneg);
+    }
+    r.rankScore = (r.rankScore != null ? r.rankScore : r.score) + adj;
+  }
+  function niFind(id) {
+    var kb = kbDisease(id); if (kb && kb.find) return kb.find;
+    for (var i = 0; i < DDX_NI.length; i++) if (DDX_NI[i].id === id) return DDX_NI[i].find || {};
+    return {};
+  }
+
+  /* smd_prior_v1 (default OFF): prevalence prior. ?prior=1|0 overrides.
+   * "Common things are common": a small ORDER-only nudge (rankScore, never score, so the gate class
+   * and every displayed confidence are unchanged) from how often a diagnosis is seen, bounded at
+   * +/-8 so it only separates candidates the findings leave close together. Under smd_gate_v2 the
+   * leading infection can change, and with it the "Need antibiotics?" answer it reads; the v2 rival
+   * rule still keeps antibiotics while an antibiotic-requiring infection is within 30 points.
+   *  - Default: consensus tiers for adult medicine (OPD, ward, ED) in India. ai_drafted, pending
+   *    clinician review; they are ORDINAL, not measured prevalences, and no number is invented.
+   *  - A hospital's own diagnosis counts replace the tier for every diagnosis they cover:
+   *    localStorage "smd_prior_counts" (or window.SMD_PRIOR_COUNTS) = {"DENGUE": 412, "sah": 3, ...}.
+   *    Aggregate counts only, never patient rows.
+   *  - A time-critical diagnosis is never pushed DOWN for being rare (PRIOR_CANT_MISS).
+   * The gold set is balanced across diagnoses by design, so it cannot show whether this helps;
+   * that needs real case-mix data (Phase 6 of kb/validation/PLAN-DX-ABX-10.md). */
+  function priorOn() {
+    try {
+      var q = /[?&]prior=([01])\b/.exec((window.location && location.search) || "");
+      if (q) return q[1] === "1";
+      return localStorage.getItem("smd_prior_v1") === "1";
+    } catch (e) { return false; }
+  }
+  var PRIOR_BONUS = { very_common: 6, common: 3, uncommon: 0, rare: -4, very_rare: -8 };
+  var PRIOR_TIER = {
+    very_common: ["URTI", "PHARYNGITIS", "ACUTE_BRONCHITIS", "GASTROENTERITIS", "CYSTITIS", "CAP", "DENGUE",
+      "tension_ha", "migraine", "gerd_chest", "peptic_ulcer", "anemia_sympt", "asthma_exac"],
+    common: ["MALARIA", "ENTERIC_FEVER", "PYELONEPHRITIS", "COMPLICATED_UTI", "CA_UTI", "CELLULITIS", "DIABETIC_FOOT",
+      "PULMONARY_TB", "COPD_EXACERBATION", "copd_exac_ni", "SINUSITIS", "DYSENTERY", "CHIKUNGUNYA", "VIRAL_HEPATITIS",
+      "SCRUB_TYPHUS", "SEPSIS", "HAP", "ASPIRATION_PNEUMONIA", "CHOLECYSTITIS", "biliary_colic", "renal_colic",
+      "heart_failure", "acs", "atrial_fib", "ischemic_stroke", "hypoglycemia", "dka", "aki", "ckd", "hyponatremia",
+      "seizure_epilepsy", "vasovagal_syncope", "panic", "ibs", "pancreatitis", "decomp_cirrhosis", "crystal_arthritis",
+      "dvt", "alcohol_withdrawal", "drug_intox", "organophosphate"],
+    rare: ["vasculitis", "sle_flare", "sarcoidosis", "ms", "iih", "temporal_arteritis", "pmr", "salicylate_tox",
+      "angioedema_acei", "brain_tumour", "myeloma", "itp", "nephrotic", "glomerulonephritis", "hypercalcemia", "ild",
+      "svc_obstruction", "ncse", "carbamate", "b12_deficiency"],
+    very_rare: ["pheo", "HLH", "sjs_ten", "serotonin_nms", "ttp_hus", "thyroid_storm", "myxedema"]
+  };
+  // time-critical: missing it costs a life or an organ, so rarity never lowers it
+  var PRIOR_CANT_MISS = {};
+  ["MENINGITIS", "ENCEPHALITIS", "SEPSIS", "SEPTIC_SHOCK", "FEBRILE_NEUTROPENIA", "NECROTIZING_FASCIITIS", "CHOLANGITIS",
+    "BRAIN_ABSCESS", "SBP", "SEVERE_CAP", "VAP", "IE", "MIXED_MALARIA", "CNS_TB", "sah", "ich", "ischemic_stroke",
+    "aortic_dissection", "aaa", "pe", "acs", "tamponade", "cardiogenic_shock", "hypovolemic_shock", "anaphylaxis",
+    "adrenal_crisis", "dka", "hhs", "hypoglycemia", "thyroid_storm", "myxedema", "status_epilepticus", "cord_compression",
+    "mesenteric_ischemia", "ttp_hus", "dic", "HLH", "serotonin_nms", "organophosphate", "opioid_od", "hyperkalemia",
+    "variceal_bleed", "gbs", "myasthenic_crisis", "pneumothorax", "htn_emergency", "hypertensive_enceph", "cvt",
+    "wernicke", "acute_limb_ischemia", "delirium_tremens", "sjs_ten"].forEach(function (id) { PRIOR_CANT_MISS[id] = 1; });
+  var PRIOR_OF = null;
+  function priorTierOf(id) {
+    if (!PRIOR_OF) {
+      PRIOR_OF = {};
+      Object.keys(PRIOR_TIER).forEach(function (t) { PRIOR_TIER[t].forEach(function (id) { PRIOR_OF[id] = t; }); });
+    }
+    return PRIOR_OF[id] || "uncommon";
+  }
+  // a hospital's aggregate counts -> +/-8 on the log scale around the median diagnosis (10x = cap)
+  var PRIOR_COUNTS_SRC = null, PRIOR_COUNTS_BONUS = null;
+  function priorCounts() {
+    var raw = null;
+    try { raw = window.SMD_PRIOR_COUNTS || null; if (!raw) { var s = localStorage.getItem("smd_prior_counts"); if (s) raw = JSON.parse(s); } } catch (e) { raw = null; }
+    if (!raw || typeof raw !== "object") return null;
+    var sig = JSON.stringify(raw);
+    if (sig === PRIOR_COUNTS_SRC) return PRIOR_COUNTS_BONUS;
+    var ids = Object.keys(raw).filter(function (k) { return typeof raw[k] === "number" && raw[k] >= 0; });
+    if (!ids.length) return null;
+    var v = ids.map(function (k) { return raw[k] + 1; }).sort(function (a, b) { return a - b; });
+    var med = v[Math.floor(v.length / 2)], out = {};
+    ids.forEach(function (k) { out[k] = Math.max(-8, Math.min(8, 8 * Math.log((raw[k] + 1) / med) / Math.LN10)); });
+    PRIOR_COUNTS_SRC = sig; PRIOR_COUNTS_BONUS = out;
+    return out;
+  }
+  var PRIOR_CUR = null;   // the counts in force for this differential (read once, not per candidate)
+  function priorBonus(id) {
+    var c = PRIOR_CUR, b = (c && c[id] != null) ? c[id] : PRIOR_BONUS[priorTierOf(id)];
+    if (b < 0 && PRIOR_CANT_MISS[id]) b = 0;
+    return b;
+  }
+  function priorAdjust(r) {
+    var b = priorBonus(r.id);
+    r.prior = b;
+    r.rankScore = (r.rankScore != null ? r.rankScore : r.score) + b;
+  }
+
+  /* smd_gate_v2 (default ON since 2026-09-27, owner decision; "0" keeps the classic gate): Phase 1 of
+   * kb/validation/PLAN-DX-ABX-10.md. ?gatev2=1|0 overrides.
+   * (a) The gate reads what the app's own stewardship dataset already tells the doctor under
+   *     "Need antibiotics?" (ASP_DATA.needAbx) for the leading infection: NO (viral, self-limited),
+   *     CONDITIONAL (only when criteria are met) or N/A (a specific non-antibacterial therapy such
+   *     as an antimalarial). The classic gate said "empiric antimicrobial therapy is appropriate"
+   *     for dengue, URTI and acute bronchitis while the stewardship page for the same diagnosis
+   *     said NO.
+   * (b) Two can't-miss rules that only ever RAISE the gate: SBP in cirrhosis with ascites, and
+   *     antibiotic prophylaxis for GI bleeding in cirrhosis (Baveno VII).
+   * Antibiotics are always KEPT with sepsis physiology, immunosuppression or neutropenia,
+   * persistent bacteraemia, or when an antibiotic-requiring infection scores within 30 points of
+   * the lead or is time-critical at 42+ (e.g. bacterial vs viral meningitis before CSF); the card
+   * then says which, instead of changing class.
+   * The rules are ai_drafted and pending clinician review; off is the classic gate, unchanged. */
+  function gateV2() {
+    try {
+      var q = /[?&]gatev2=([01])\b/.exec((window.location && location.search) || "");
+      if (q) return q[1] === "1";
+      // default ON since 2026-09-27 (owner decision); localStorage "0" keeps the classic gate
+      return localStorage.getItem("smd_gate_v2") !== "0";
+    } catch (e) { return true; }
+  }
+  var GATE_V2_KEEP = ["hypotension", "lactateElevated", "raised_lactate", "vasopressorRequirement",
+    "immunocompromised", "neutropenia", "absoluteNeutrophilCountLow", "persistentBacteremia"];
+  // YES | NO | CONDITIONAL | SPECIFIC (ASP "N/A": antiparasitic / antiviral, not antibacterial)
+  function abxNeed(r) {
+    var asp = r && (window.ASP_DATA || {})[r.id];
+    if (asp && asp.needAbx) return asp.needAbx === "N/A" ? "SPECIFIC" : asp.needAbx;
+    if (r && r._syn && r._syn.antibioticRelevant === false) return "NO";
+    return "YES";
+  }
+  // the dataset's own rationale, first sentence(s) up to ~200 chars, without em-dashes
+  function abxWhy(r) {
+    var asp = r && (window.ASP_DATA || {})[r.id];
+    var t = String((asp && asp.needAbxWhy) || "").replace(/\s*—\s*/g, ": ");
+    var parts = t.match(/[^.!?]+[.!?]+/g) || (t ? [t] : []), out = "";
+    for (var i = 0; i < parts.length; i++) { if (out && (out + parts[i]).length > 200) break; out += parts[i]; }
+    return out.trim();
+  }
+  function gateV2Apply(g, d, f) {
+    // (b) can't-miss rules. SBP: cirrhosis + ascites with fever -> infection likely; with only
+    // abdominal pain or encephalopathy -> rule it out (diagnostic paracentesis) before deciding.
+    var sbpSign = f.fever || f.rigors || f.asciticPMNHigh, sbpSoft = f.abdominalPain || f.abdominalDiscomfort || f.severeAbdominalPain || f.alteredSensorium || f.asterixis;
+    if (f.liverDisease && f.ascites && (sbpSign || sbpSoft) &&
+        (g.cls === "possible" || g.cls === "unlikely" || g.cls === "noninfective" || g.cls === "none")) {
+      g.cls = sbpSign ? "likely" : "rule_out_sbp"; g.rule = "sbp";
+      // the stewardship card must be SBP's, never another infection's regimen under an SBP banner
+      g.lead = d.inf.filter(function (x) { return x.id === "SBP"; })[0] || null;
+      return;
+    }
+    // fever with shock physiology and no non-infectious cause leading: sepsis until proven otherwise
+    // (the classic override needs an infection syndrome scoring 38+, so fever + hypotension alone
+    // read "infection unlikely, antibiotics not recommended yet")
+    if ((f.fever || f.rigors) && (f.hypotension || f.lactateElevated || f.vasopressorRequirement) &&
+        (g.cls === "unlikely" || g.cls === "possible" || g.cls === "none")) {
+      g.cls = "likely"; g.rule = "sepsis_phys";
+      return;
+    }
+    if (f.liverDisease && (f.hematemesis || f.melena || f.gibPresentation) && g.cls !== "very_likely" && g.cls !== "likely") {
+      g.cls = "abx_prophylaxis"; g.rule = "cirrhosis_gib";
+      return;
+    }
+    // (a) the lead infection's own antibiotic need
+    if (g.cls !== "very_likely" && g.cls !== "likely") return;
+    var lead = g.lead, need = abxNeed(lead);
+    if (!lead || need === "YES") return;
+    var mods = GATE_V2_KEEP.filter(function (k) { return f[k]; });
+    if (mods.length) { g.rule = "keep_modifier"; g.need = need; g.why = mods.map(function (k) { try { return lbl(k); } catch (e) { return k; } }).join(", "); return; }
+    // A competing infection that DOES need antibiotics keeps them: within 30 points of the lead, or
+    // a time-critical one (decision status red) at 42+ whose criteria are met. The engine's lead can be wrong (viral
+    // hepatitis leading a leptospirosis or SBP picture); this stops a ranking miss from becoming
+    // "no antibiotics".
+    var rivalYes = null, rivalCond = null;
+    var v3 = rankV3();
+    d.inf.forEach(function (x) {
+      if (x === lead || x.score < 42) return;
+      if (v3 && rankV3Excluded(x, f)) return;   // smd_rank_v3: an excluded rival cannot hold antibiotics on
+      var n = abxNeed(x), close = x.score >= lead.score - 30;
+      var critical = x._syn && x._syn.decision && x._syn.decision.status === "red";
+      // a time-critical rival counts from any distance only when its criteria are met (x.matched);
+      // an unmatched one is keyword overlap and must be within the 30 points like any other
+      if (n === "YES" && (close || (critical && x.matched)) && (!rivalYes || x.score > rivalYes.score)) rivalYes = x;
+      else if (n === "CONDITIONAL" && close && !rivalCond) rivalCond = x;
+    });
+    if (rivalYes) { g.rule = "keep_rival"; g.need = need; g.whyFor = rivalYes.name; return; }
+    if (need === "SPECIFIC") { g.cls = "infection_specific"; g.why = abxWhy(lead); }
+    else if (need === "CONDITIONAL") { g.cls = "infection_conditional"; g.why = abxWhy(lead); }
+    else if (rivalCond) { g.cls = "infection_conditional"; g.why = abxWhy(rivalCond); g.whyFor = rivalCond.name; }
+    else { g.cls = "infection_no_abx"; g.why = abxWhy(lead); }
+  }
+
   /* Infection gate — keyed off whether infection LEADS overall */
   function gate(d) {
+    var v2 = gateV2();
     // MAX score across each column — order-independent, so the specificity
     // re-rank (which can change which candidate sits at [0]) leaves the infection
     // gate + antibiotic decision byte-identical to the classic ordering.
@@ -1002,11 +1319,47 @@
     }
     // Febrile neutropenia / fever in an immunocompromised host: low threshold
     // for empiric antibiotics (oncological emergency) — flag infection likely.
-    var febrileNeutropenia = (f.fever || f.rigors) && (f.absoluteNeutrophilCountLow || f.immunocompromised);
+    // v2 also accepts the "Neutropenia (ANC <500)" finding here (the classic override reads only
+    // absoluteNeutrophilCountLow / immunocompromised; the FEBRILE_NEUTROPENIA syndrome itself does
+    // score on neutropenia, so this matters only when that syndrome is not competitive)
+    var febrileNeutropenia = (f.fever || f.rigors) && (f.absoluteNeutrophilCountLow || f.immunocompromised || (v2 && f.neutropenia));
     if (febrileNeutropenia && topInf >= 30 && topInf >= topNi - 8) {
       if (cls === "noninfective" || cls === "unlikely" || cls === "possible") cls = "likely";
     }
-    return { cls: cls, topInf: topInf, topNi: topNi, lead: d.inf[0] || null };
+    var out = { cls: cls, topInf: topInf, topNi: topNi, lead: d.inf[0] || null };
+    if (v2) gateV2Apply(out, d, f);
+    // smd_calib: non-diagnostic findings (fever alone) say so instead of "non-infectious diagnosis
+    // favored". Never replaces "infection likely / very likely" or a v2 rule, so a sepsis or
+    // neutropenia signal cannot be hidden behind "not enough information".
+    if (calibOn()) {
+      out.enough = enoughInfo(d, f);
+      if (!out.enough && (out.cls === "possible" || out.cls === "unlikely" || out.cls === "noninfective" || out.cls === "none") && !out.rule) out.cls = "insufficient";
+    }
+    return out;
+  }
+  /* smd_calib (default OFF): Phase 4 of kb/validation/PLAN-DX-ABX-10.md, first part. ?calib=1|0.
+   * "Enough information" = the long-standing SMD_REASON.thresholdMet() rule, applied to the engine's
+   * own answer: 3+ clinical findings (age / sex / lab-value fields do not count), or one highly
+   * specific finding (IDF >= 1.7), or an infection whose criteria are met. */
+  function calibOn() {
+    try {
+      var q = /[?&]calib=([01])\b/.exec((window.location && location.search) || "");
+      if (q) return q[1] === "1";
+      return localStorage.getItem("smd_calib") === "1";
+    } catch (e) { return false; }
+  }
+  var CALIB_SKIP = { age: 1, sex: 1, ageOver50: 1 };
+  // a red-flag finding is never "not enough information": the answer to possible shock is urgency
+  var CALIB_RED = { hypotension: 1, lactateElevated: 1, raised_lactate: 1, vasopressorRequirement: 1, alteredSensorium: 1, hypoxia: 1,
+    neckStiffness: 1, focalNeuroDeficit: 1, seizure: 1, thunderclapHeadache: 1, ascendingWeakness: 1, petechialRash: 1, hematemesis: 1,
+    melena: 1, crepitusOrBullae: 1, neutropenia: 1, absoluteNeutrophilCountLow: 1, miosisSecretions: 1, organDysfunction: 1 };
+  function enoughInfo(d, f) {
+    var numeric = {};
+    (window.FIELD_GROUPS || []).forEach(function (g) { (g.fields || []).forEach(function (fl) { if (fl.type === "number" || fl.type === "select") numeric[fl.key] = 1; }); });
+    var keys = Object.keys(f || {}).filter(function (k) { return f[k] && !numeric[k] && !CALIB_SKIP[k]; });
+    if (keys.length >= 3 || keys.some(function (k) { return CALIB_RED[k]; })) return true;
+    computeIDF(); for (var i = 0; i < keys.length; i++) if ((IDF[keys[i]] || 0) >= 1.7) return true;
+    return d.inf.some(function (x) { return x.matched; });
   }
   var GATEINFO = {
     very_likely:  { t: "Infection very likely", c: "g-red",    ab: true },
@@ -1014,12 +1367,40 @@
     possible:     { t: "Infection possible",      c: "g-amber",  ab: false },
     unlikely:     { t: "Infection unlikely",      c: "g-teal",   ab: false },
     noninfective: { t: "Non-infectious diagnosis favored", c: "g-green2", ab: false },
-    none:         { t: "Add findings to begin reasoning", c: "g-slate", ab: false }
+    none:         { t: "Add findings to begin reasoning", c: "g-slate", ab: false },
+    // smd_gate_v2 only
+    infection_no_abx:      { t: "Infection likely, antibiotics not indicated", c: "g-teal", ab: false },
+    infection_conditional: { t: "Infection likely, antibiotics only if criteria met", c: "g-amber", ab: true },
+    infection_specific:    { t: "Infection likely, specific therapy (not antibiotics)", c: "g-orange", ab: false },
+    abx_prophylaxis:       { t: "Antibiotic prophylaxis indicated", c: "g-orange", ab: true },
+    rule_out_sbp:          { t: "Rule out spontaneous bacterial peritonitis", c: "g-amber", ab: true },
+    // smd_calib only
+    insufficient:          { t: "Not enough information yet", c: "g-slate", ab: false }
   };
   function gateMsg(g) {
+    var m = gateMsgRaw(g);
+    // anything smd_gate_v2 wrote or explained is app-facing text without em-dashes; classic text as before
+    return (g.rule || g.why) ? m.replace(/\s*\u2014\s*/g, ": ") : m;
+  }
+  function gateMsgRaw(g) {
+    var lead = g.lead && g.lead.name;
+    // smd_gate_v2: why antibiotics stay on although the lead infection alone would not need them
+    var own = g.need === "SPECIFIC" ? " (its treatment is specific, not antibacterial)" : "";
+    var kept = g.rule === "keep_rival" ? lead + " leads and does not need antibiotics on its own" + own + ", but " + g.whyFor + " is competitive and does: confirm or exclude it before deciding. " :
+      g.rule === "keep_modifier" ? lead + " leads and does not need antibiotics on its own" + own + ", but these change that: " + g.why + ". Cover a bacterial infection empirically and reassess with cultures. " : "";
     switch (g.cls) {
-      case "very_likely": return "Infection leads the differential — empiric antimicrobial therapy is appropriate. Select the diagnosis to open its stewardship recommendation.";
-      case "likely": return "Infection is the leading consideration — empiric therapy may be warranted after cultures. Confirm before prescribing.";
+      case "very_likely": return kept + "Infection leads the differential — empiric antimicrobial therapy is appropriate. Select the diagnosis to open its stewardship recommendation.";
+      case "likely": return kept + (g.rule === "sepsis_phys" ? "Can't-miss: fever with shock physiology and no non-infective cause leading. Treat as sepsis until proven otherwise: blood cultures, then antibiotics within the hour, and look for the source. " : "") + (g.rule === "sbp" ? "Can't-miss: spontaneous bacterial peritonitis. Cirrhosis with ascites plus fever, abdominal pain or encephalopathy: do a diagnostic paracentesis now and treat if ascitic neutrophils are 250/mm3 or more (at once if the patient is septic). " : "") +
+        "Infection is the leading consideration — empiric therapy may be warranted after cultures. Confirm before prescribing.";
+      case "infection_no_abx": return (lead ? lead + " leads, and it does not need antibiotics. " : "") + (g.why ? g.why + " " : "") +
+        "Reassess if bacterial features, sepsis or immunosuppression appear.";
+      case "infection_conditional": return (lead ? lead + " leads. " : "") + "Antibiotics only if " + (g.whyFor ? g.whyFor + " criteria are" : "its criteria are") + " met" +
+        (g.why ? ": " + g.why : ".") + " Check them before prescribing.";
+      case "infection_specific": return (lead ? lead + " leads. " : "") + (g.why ? g.why + " " : "") +
+        "Antibiotics only for a proven or strongly suspected bacterial co-infection.";
+      case "insufficient": return "These findings do not point to a diagnosis yet, so no infection or antibiotic call is made. The list below is only what they are compatible with. Add examination findings, vitals or key labs; the most useful next ones are suggested.";
+      case "rule_out_sbp": return "Can't-miss: spontaneous bacterial peritonitis. Cirrhosis with ascites and abdominal pain or encephalopathy: do a diagnostic paracentesis now. Treat if ascitic neutrophils are 250/mm3 or more, or at once if fever, sepsis or shock develops.";
+      case "abx_prophylaxis": return "Cirrhosis with gastrointestinal bleeding: short-course antibiotic prophylaxis is indicated (for example ceftriaxone 1 g daily for up to 7 days; Baveno VII). It lowers infection, rebleeding and mortality; it is not treatment of a diagnosed infection.";
       case "possible": return "Infection is in the differential but not dominant — pursue targeted investigations before antibiotics.";
       case "unlikely": return "Infection is low on the differential — antibiotics are not recommended yet. Investigate the alternatives.";
       case "noninfective": return "A non-infectious diagnosis currently leads — antibiotics are not recommended. Address the leading diagnosis.";
@@ -1046,7 +1427,7 @@
       '</div>' +
       '<nav class="dx-work-nav" aria-label="Reasoning workspace"><button type="button" data-dx-jump="dxIntake">Findings <span id="dxFindingCount">0</span></button><button type="button" data-dx-jump="dxReview">Review differential <span aria-hidden="true">↓</span></button></nav>' +
       '<div class="dx-body">' +
-        '<section class="dx-intake" id="dxIntake" aria-labelledby="dxIntakeTitle"><div class="dx-section-intro"><span class="dx-eyebrow">GUIDED CONSULT</span><h2 id="dxIntakeTitle">One useful question<br>at a time.</h2><p>Start with the presentation. Add confirmed findings, then explore what else to check.</p></div>' +
+        '<section class="dx-intake" id="dxIntake" aria-labelledby="dxIntakeTitle"><div class="dx-section-intro"><span class="dx-eyebrow">GUIDED CONSULT</span><h2 id="dxIntakeTitle">One useful question <br>at a time.</h2><p>Start with the presentation. Add confirmed findings, then explore what else to check.</p></div>' +
         '<div id="dxImported" class="dx-imported"></div>' +
         '<div id="dxHosp" class="dx-hosp"></div>' +
         '<div class="dx-find-wrap">' +
@@ -1254,14 +1635,15 @@
     if (!el) return;
     if (!Object.keys(S.f).length) { el.innerHTML = ""; return; }
     var skipped = S.consultSkipped || [];
-    var sug = suggestionKeys(d).filter(function (k) { return skipped.indexOf(k) < 0; });
+    var sug = plainKeys(suggestionKeys(d).filter(function (k) { return skipped.indexOf(k) < 0; }));
     if (!sug.length) {
       el.innerHTML = '<div class="dx-sugg-h">Ready to review?</div><p class="dx-suggest-note">No further suggestions in this set. You can still search for findings or review the differential.</p>' + (skipped.length ? '<button class="dx-chip" id="dxRevisit">Revisit skipped questions</button>' : '');
       var revisit = el.querySelector("#dxRevisit"); if (revisit) revisit.onclick = function () { S.consultSkipped = []; renderSuggest(); };
       return;
     }
     var key = sug[0];
-    el.innerHTML = '<div class="dx-eyebrow">CLARIFY THE CLINICAL PICTURE</div><h3 class="dx-question">Is this finding present?</h3><div class="dx-question-finding">' + esc(LABEL[key]) + '</div><p class="dx-suggest-note">Suggested from missing findings across the current differential. Verify before adding.</p><div class="dx-answer-row"><button class="dx-chip" data-confirm="' + key + '">Present · add</button><button class="dx-chip" id="dxSkipQuestion">Skip for now</button></div><p class="dx-question-foot">Skipping does not record absence or change the ranking.</p>';
+    var plain = simpleOn();
+    el.innerHTML = '<div class="dx-eyebrow">' + (plain ? 'Check this next' : 'CLARIFY THE CLINICAL PICTURE') + '</div><h3 class="dx-question">Is this finding present?</h3><div class="dx-question-finding">' + esc(LABEL[key]) + '</div><p class="dx-suggest-note">Suggested from missing findings across the current differential. Verify before adding.</p><div class="dx-answer-row"><button class="dx-chip" data-confirm="' + key + '">' + (plain ? 'Yes, add it' : 'Present · add') + '</button><button class="dx-chip" id="dxSkipQuestion">Skip for now</button></div><p class="dx-question-foot">Skipping does not record absence or change the ranking.</p>';
     el.querySelector("[data-confirm]").onclick = function () { addFinding(key); };
     el.querySelector("#dxSkipQuestion").onclick = function () { S.consultSkipped = skipped.concat([key]); renderSuggest(); var next = el.querySelector("[data-confirm], #dxRevisit"); if (next) next.focus({ preventScroll: true }); };
   }
@@ -1317,6 +1699,97 @@
   };
   // Merge unconditionally — parseFreeText only applies keys that are in VALID, so extras are harmless.
   Object.keys(FT_SYN_MORE).forEach(function (k) { FT_SYN[k] = (FT_SYN[k] || []).concat(FT_SYN_MORE[k]); });
+  /* smd_nlp_v2 (default OFF; clinical-nlp.js reads the flag): Phase 2 of kb/validation/PLAN-DX-ABX-10.md.
+   * Extraction matches synonyms as raw substrings, so short or generic ones fire in the wrong place:
+   * "dm" inside "admitted" (diabetes), "fall" inside "falling platelets" (head injury), "on exertion"
+   * in "breathless on exertion" (exertional chest pain), "weakness" (focal deficit), "spo2" in any
+   * saturation reading (hypoxia; the numeric parser decides that now). v2 drops those and adds bedside
+   * phrasing mined from the TRAIN split of kb/validation (never the test split). Classic table unchanged. */
+  var FT_SYN_DROP_V2 = { diabetesHx: ["dm"], headInjury: ["fall", "fell"], alteredSensorium: ["gcs"], focalNeuroDeficit: ["weakness"],
+    exertionalChestPain: ["exertional", "on exertion"], purulentSputum: ["sputum"], hypoxia: ["spo2"], mucocutaneousBleeding: ["bleeding"], alcoholExcess: ["alcohol"] };
+  var FT_SYN_ADD_V2 = {
+    rigors: ["rigor", "chills", "shivering", "shaking chills"],
+    toxicAppearing: ["toxic-looking", "toxic looking", "looks toxic", "looked toxic", "appears toxic", "toxic appearance", "toxic-appearing", "ill-looking", "ill looking",
+      "ill-appearing", "ill appearing", "unwell-appearing", "unwell appearing",
+      "looks unwell", "looked unwell", "unwell-looking", "septic-looking", "septic looking", "sick-looking", "moribund"],
+    myalgiaArthralgia: ["myalgia", "body ache", "bodyache", "body pain", "muscle ache", "muscle pain", "arthralgia", "joint pain", "aches and pains"],
+    dehydration: ["dehydrat", "dry mucous", "dry mucosa", "dry tongue", "skin turgor", "sunken eyes", "dry lips"],
+    fever: ["pyrexial", "temperature spike", "spiking temperature", "high-grade temperature"],
+    vasopressorRequirement: ["noradrenaline", "norepinephrine", "vasopressor", "pressor support", "on pressors", "inotrop", "vasopressin"],
+    liverDisease: ["cirrho", "chronic liver disease", "liver disease", "portal hypertension", "hepatic decompensation", "alcoholic liver"],
+    ascites: ["ascites", "ascitic", "shifting dullness", "fluid thrill"],
+    prolongedFever: ["prolonged fever", "long-standing fever", "pyrexia of unknown"],
+    chestPain: ["chest discomfort", "retrosternal", "chest tightness", "chest heaviness", "precordial pain", "central chest"],
+    headacheSevere: ["severe headache", "worst headache", "excruciating headache", "intense headache", "splitting headache", "severe holocranial", "severe frontal headache", "severe occipital headache"],
+    abdominalPain: ["pain abdomen", "pain in abdomen", "pain in the abdomen", "abdominal cramp", "periumbilical pain", "colicky pain", "lower abdominal pain", "upper abdominal pain", "iliac fossa pain", "suprapubic pain"],
+    hepatosplenomegaly: ["hepatosplenomegaly", "enlarged liver and spleen"],
+    immunocompromised: ["immunocompromis", "immunosuppress", "chemotherapy", "post-transplant", "transplant recipient", "hiv", "long-term steroid", "rituximab", "neutropenic"],
+    malignancy: ["malignan", "cancer", "carcinoma", "lymphoma", "leukaemia", "leukemia", "metasta", "myeloma", "sarcoma"],
+    nauseaVomiting: ["retching"],
+    atrialFibHx: ["atrial fibrillation", " af ", " af,", " af.", "irregularly irregular"],
+    behavioralChange: ["behaviour change", "behavioural change", "behavior change", "behavioral change", "personality change", "odd behaviour", "strange behaviour", "abnormal behaviour", "inappropriate behaviour"],
+    hospitalizationLast90Days: ["recently discharged", "recent hospitali", "recent admission", "hospitalised recently", "hospitalized recently", "discharged from hospital", "recent hospital stay"],
+    abdominalDiscomfort: ["abdominal discomfort", "vague abdominal", "abdominal fullness"],
+    petechialRash: ["petechia", "purpura", "purpuric", "non-blanching"],
+    constipationOrDiarrhea: ["constipat", "obstipat"],
+    jaundice: ["icteric", "yellow discolo", "yellow eyes", "yellowish discolo", "yellowing"],
+    legSwellingBilateral: ["bilateral pedal", "pitting oedema", "pitting edema", "leg oedema", "leg edema", "swelling of both legs", "both legs swollen", "oedema feet"],
+    oliguria: ["decreased urine output", "scanty urine", "passing less urine", "reduced urinary output"],
+    ecgIschemia: ["st depression", "st-segment", "st segment", "t wave inversion", "t-wave inversion", "stemi", "nstemi", "q waves", "st changes"],
+    asterixis: ["asterixis", "flapping tremor", "flap"],
+    severeAbdominalPain: ["severe abdominal pain", "severe epigastric pain", "excruciating abdominal", "intense abdominal pain", "severe pain abdomen"],
+    eveningFever: ["evening rise", "evening fever", "evening pyrexia", "fever in the evening"],
+    nightSweats: ["night sweat", "drenching sweat", "nocturnal sweat"],
+    visualDisturbance: ["blurring of vision", "loss of vision", "visual blurring", "double vision", "decreased vision", "visual field"],
+    skinWarmth: ["warm to touch", "warm to the touch", "local warmth", "warmth"],
+    severePain: ["pain out of proportion", "disproportionate pain"],
+    drugOverdose: ["overdose", "poisoning", "empty strips", "consumed tablets", "deliberate ingestion", "intentional ingestion", "suicidal ingestion", "tablet ingestion", "ingested tablets"],
+    supplementalOxygen: ["on oxygen", "oxygen via", "nasal cannula", "nasal prongs", "face mask", "non-rebreather", "high-flow", "on o2", "o2 via"],
+    nursingHomeResident: ["nursing home", "care home", "long-term care", "residential care", "old age home"],
+    antibioticsLast90Days: ["recent antibiotic", "course of antibiotics", "received antibiotics", "was on antibiotics", "took antibiotics", "prior antibiotic", "treated with antibiotics"],
+    priorAntibiotics: ["recent antibiotic", "course of antibiotics", "received antibiotics", "was on antibiotics", "took antibiotics", "prior antibiotic", "treated with antibiotics"],
+    weightLoss: ["lost weight", "loss of weight", "losing weight", "kg weight loss"],
+    knownCAD: ["coronary artery disease", "ischaemic heart disease", "ischemic heart disease", "prior mi", "previous mi", "old mi", "coronary stent", "ptca", "cabg", "ihd"],
+    anticoagulated: ["warfarin", "apixaban", "rivaroxaban", "dabigatran", "edoxaban", "acenocoumarol", "anticoagula", "enoxaparin"],
+    lymphadenopathy: ["lymphadenopathy", "lymph node", "enlarged nodes", "adenopathy", "lymphadenitis"],
+    contaminatedFoodWaterExposure: ["street food", "outside food", "contaminated water", "unsafe water", "untreated water", "roadside food", "contaminated food"],
+    urinaryFrequency: ["frequency of micturition", "increased frequency", "frequent urination", "urinary urgency", "urgency of micturition", "frequency and urgency", "frequency, urgency", "urinary frequency"],
+    dysuria: ["burning micturition", "painful micturition", "painful urination", "burning on urination", "burning while passing urine"],
+    costovertebralTenderness: ["costovertebral", "renal angle", "loin tenderness", "flank tenderness"],
+    bilateralCrackles: ["bibasal crackles", "bibasilar crackles", "bilateral basal crackles", "bilateral crepitations", "bilateral basal crepitations", "bibasal crepitations", "basal crepts", "bilateral crepts", "fine basal crackles"],
+    cerebrovascularDisease: ["previous stroke", "prior stroke", "old stroke", "history of stroke", "prior tia", "previous tia"],
+    syncope: ["passed out", "blacked out", "loss of consciousness"],
+    abdominalDistension: ["abdominal distension", "abdominal distention", "distended abdomen", "abdomen distended", "bloating", "bloated"],
+    focalNeuroDeficit: ["one-sided weakness", "left-sided weakness", "right-sided weakness", "left sided weakness", "right sided weakness", "weakness of the left", "weakness of the right",
+      "facial deviation", "deviation of the angle of the mouth", "aphasia", "dysarthria"],
+    exertionalChestPain: ["chest pain on exertion", "exertional chest", "exertional angina", "chest tightness on exertion", "angina"],
+    purulentSputum: ["yellow sputum", "green sputum", "rusty sputum", "mucopurulent", "foul-smelling sputum", "foul sputum"],
+    mucocutaneousBleeding: ["gum bleeding", "bleeding gums", "epistaxis", "nose bleed", "mucosal bleed"],
+    bleedingManifestation: ["bleeding gums", "gum bleed", "epistaxis", "nose bleed", "bleeding manifest", "petechia"],
+    headInjury: ["head injury", "hit his head", "hit her head", "trauma to head", "fall on the head", "fell and hit"],
+    alcoholExcess: ["alcohol abuse", "alcohol dependence", "alcohol excess", "heavy alcohol", "chronic alcohol", "heavy drinker", "chronic drinker", "binge drinking", "alcohol use disorder"],
+    subacuteOnset: ["subacute", "insidious", "gradual onset", "gradually progressive", "over weeks"],
+    // smd_kb_v2 findings (only extracted when those keys exist)
+    knownGallstones: ["gallstone", "gall stone", "cholelithiasis", "gallbladder calculi", "gall bladder calculi", "gb calculi", "gb stones", "calculous cholecystitis"],
+    dilatedCBD: ["dilated cbd", "cbd dilated", "cbd dilatation", "dilated common bile duct", "common bile duct dilated", "biliary dilatation", "dilated intrahepatic",
+      "ihbrd", "cbd stone", "choledocholithiasis", "obstructive jaundice", "biliary obstruction"],
+    cholestaticLFT: ["cholestatic", "raised alp", "elevated alp", "raised alkaline phosphatase", "elevated alkaline phosphatase"],
+    renalImpairment: ["acute kidney injury", " aki ", " aki,", " aki.", "renal failure", "renal impairment", "raised creatinine", "deranged renal", "kidney injury", "uraemi", "uremi"]
+  };
+  var FT_SYN_V2 = (function () {
+    var o = {};
+    Object.keys(FT_SYN).forEach(function (k) { var drop = FT_SYN_DROP_V2[k] || []; o[k] = FT_SYN[k].filter(function (x) { return drop.indexOf(x) < 0; }); });
+    Object.keys(FT_SYN_ADD_V2).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2[k]); });
+    return o;
+  })();
+  // the extraction context: classic exactly as before; v2 adds the cleaned table and the numeric-field list
+  function nlpCtx() {
+    var v2 = !!(window.SMD_NLP && SMD_NLP._v2 && SMD_NLP._v2());
+    if (!v2) return { valid: VALID, labels: LABEL, syn: FT_SYN };
+    var numeric = {};
+    (window.FIELD_GROUPS || []).forEach(function (g) { (g.fields || []).forEach(function (fl) { if (fl.type === "number" || fl.type === "select") numeric[fl.key] = 1; }); });
+    return { valid: VALID, labels: LABEL, syn: FT_SYN_V2, v2: true, numeric: numeric };
+  }
   function parseFreeText(text) {
     if (!text) return;
     // Preferred path: the deterministic clinical-narrative NLP layer (clinical-nlp.js).
@@ -1324,8 +1797,9 @@
     // vitals, and returns structured findings. Only PRESENT, engine-valid keys are ticked;
     // negated / purely-historical findings are kept for review but not fed to the engine.
     if (window.SMD_NLP && SMD_NLP.extract) {
-      var nr = SMD_NLP.extract(text, { valid: VALID, labels: LABEL, syn: FT_SYN }), nadded = 0;
+      var nr = SMD_NLP.extract(text, nlpCtx()), nadded = 0;
       (nr.present || []).forEach(function (k) { if (VALID[k] && !S.f[k]) { S.f[k] = true; nadded++; } });
+      if (rankV3()) { S.neg = S.neg || {}; (nr.absent || []).forEach(function (k) { if (VALID[k] && !S.f[k]) S.neg[k] = true; }); }
       S._lastExtract = nr;
       S.started = true;
       S.timeline.push({ f: "free-text (" + nadded + " finding" + (nadded === 1 ? "" : "s") + " extracted — review)", topName: null, topScore: null });
@@ -1379,7 +1853,7 @@
   }
   function loadSession(i) {
     var s = loadSessions()[i]; if (!s) return;
-    S.f = {}; (s.findings || []).forEach(function (k) { S.f[k] = true; }); S.started = true; S.timeline = []; recompute();
+    S.f = {}; S.neg = {}; (s.findings || []).forEach(function (k) { S.f[k] = true; }); S.started = true; S.timeline = []; recompute();
   }
   function buildSummary() {
     var d = differential(), g = gate(d), L = [];
@@ -1387,13 +1861,14 @@
     L.push("Generated: " + new Date().toLocaleString()); L.push("");
     L.push("Findings: " + (Object.keys(S.f).map(lbl).join(", ") || "—")); L.push("");
     L.push("Infection assessment: " + GATEINFO[g.cls].t); L.push("");
+    if (g.why || g.rule) { L.push(gateMsg(g)); L.push(""); }   // smd_gate_v2 only
     L.push("Infectious differential:");
     d.inf.slice(0, 6).forEach(function (r, i) { L.push("  " + (i + 1) + ". " + r.name + " — " + r.score + "/100"); });
     if (!d.inf.length) L.push("  (none)");
     L.push("Non-infectious differential:");
     d.ni.slice(0, 6).forEach(function (r, i) { L.push("  " + (i + 1) + ". " + r.name + " — " + r.score + "/100"); });
     if (!d.ni.length) L.push("  (none)");
-    if (GATEINFO[g.cls].ab && g.lead && window.HOSPITAL) {
+    if (GATEINFO[g.cls].ab && g.lead && window.HOSPITAL && g.cls !== "abx_prophylaxis") {
       var pol = window.HOSPITAL.getPolicy(g.lead.id);
       L.push(""); L.push("Leading infectious diagnosis: " + g.lead.name);
       if (pol && pol.entry) {
@@ -2276,6 +2751,7 @@
   }
 
   function card(r, rank, above) {
+    if (simpleOn()) return cardSimple(r, rank, above);
     var open = S.expanded[r.id];
     var cls = r.inf ? "inf" : "ni";
     var delta = "";
@@ -2310,13 +2786,13 @@
     var whyNotBits = [];
     if (rank > 1 && above) whyNotBits.push("Ranked just below <b>" + esc(above.name) + "</b> (" + above.score + " vs " + r.score + "), which also fits the current findings");
     if (r.contra && r.contra.length) whyNotBits.push("argued against by " + esc(r.contra.map(lbl).join(", ")));
-    if (r.missing && r.missing.length) whyNotBits.push("would move up with " + esc(r.missing.slice(0, 3).map(lbl).join(", ")));
+    if (plainKeys(r.missing).length) whyNotBits.push("would move up with " + esc(plainKeys(r.missing).slice(0, 3).map(lbl).join(", ")));
     var whyNot = (rank > 1 && whyNotBits.length)
       ? '<div class="dx-d-row"><b>Why not higher</b><div class="dx-reason">' + whyNotBits.join("; ") + '.</div></div>' : "";
     var det = '<div class="dx-detail">' + confLine +
       '<div class="dx-d-row"><b>Supporting findings</b><div>' + fl(r.supporting, "sup", rIco("check")+" ") +'</div></div>' +
       (r.contra && r.contra.length ? '<div class="dx-d-row"><b>Contradictory findings</b><div>' + fl(r.contra, "con", "✕ ") + '</div></div>' : '') +
-      '<div class="dx-d-row"><b>Missing / would help</b><div>' + fl(r.missing, "mis", "? ") + '</div></div>' +
+      '<div class="dx-d-row"><b>Missing / would help</b><div>' + fl(plainKeys(r.missing), "mis", "? ") + '</div></div>' +
       (r.reason ? '<div class="dx-d-row"><b>Why this — likely because</b><div class="dx-reason">' +
         (function () { var s = (r.supporting || []).slice(0, 3).map(lbl); return s.length ? '<b>' + esc(s.join(", ")) + '</b> ' + (s.length > 1 ? "together point here — " : "points here — ") : ""; })() +
         esc(r.reason) + '</div></div>' : '') +
@@ -2335,7 +2811,7 @@
       (tools.length ? '<div class="dx-d-row"><b>Related bedside tools</b><div class="dx-tools">' + tools.map(function (t){return '<button class="dx-tool" data-tool="'+t+'">'+esc(TOOLREG[t].icon+" "+TOOLREG[t].label)+'</button>';}).join("") + '</div></div>' : '') +
       scoreChipsBlock(r) +
       harrisonRef(r.id) +
-      '<button class="dx-select ' + cls + '" data-sel="' + r.id + '">Select this diagnosis →</button>' +
+      (S.ask && S.ask.target === r.id ? askHTML(r) : '<button class="dx-select ' + cls + '" data-sel="' + r.id + '">Select this diagnosis →</button>') +
       '</div>';
     return '<div class="dx-card ' + cls + ' open">' + head + det + '</div>';
   }
@@ -2350,7 +2826,21 @@
       else if (r.score - p >= 6) msgs.push("▲ " + r.name + " rose (" + p + "→" + r.score + ")");
       else if (p - r.score >= 6) msgs.push("▼ " + r.name + " fell (" + p + "→" + r.score + ")");
     });
-    if (msgs.length) { el.style.display = ""; el.innerHTML = '<b>What changed</b> ' + (S.lastAdded ? 'adding <b>' + esc(S.lastAdded) + '</b> — ' : "") + msgs.slice(0, 3).map(esc).join("  ·  "); }
+    if (msgs.length && simpleOn()) {
+      var ent = [], up = [], down = [];
+      all.slice(0, 12).forEach(function (r) {
+        var p0 = S.prev[r.id];
+        if (p0 == null) { if (r.score >= 20) ent.push(r.name); } else if (r.score - p0 >= 6) up.push(r.name); else if (p0 - r.score >= 6) down.push(r.name);
+      });
+      var names = function (a) { return a.length > 3 ? a.slice(0, 3).join(", ") + " and " + (a.length - 3) + " more" : a.join(", "); };
+      var parts = [];
+      if (ent.length) parts.push(esc(names(ent)) + (ent.length > 1 ? " now fit" : " now fits"));
+      if (up.length) parts.push(esc(names(up)) + " moved up");
+      if (down.length) parts.push(esc(names(down)) + " moved down");
+      if (!parts.length) { el.style.display = "none"; return; }
+      el.style.display = ""; el.innerHTML = '<strong>What changed:</strong> ' + (S.lastAdded ? 'after adding ' + esc(S.lastAdded) + ', ' : '') + parts.join("; ") + '.';
+    }
+    else if (msgs.length) { el.style.display = ""; el.innerHTML = '<b>What changed</b> ' + (S.lastAdded ? 'adding <b>' + esc(S.lastAdded) + '</b> — ' : "") + msgs.slice(0, 3).map(esc).join("  ·  "); }
     else el.style.display = "none";
   }
 
@@ -2467,7 +2957,7 @@
     if (!el || !window.HOSPITAL) { if (el) el.innerHTML = ""; return; }
     var h = window.HOSPITAL.current();
     var opts = hospOptions(h.id);
-    el.innerHTML = '<span class="dx-hosp-l">Region / policy</span>' +
+    el.innerHTML = '<span class="dx-hosp-l">' + (simpleOn() ? "Antibiotic guideline (used for treatment advice)" : "Region / policy") + '</span>' +
       (h.logo ? '<img class="dx-hosp-logo" src="' + h.logo + '" alt="' + esc(h.short) + ' logo">' : "") +
       '<select id="dxHospSel" class="dx-hosp-sel" aria-label="Select hospital policy">' + opts + '</select>';
     var sel = el.querySelector("#dxHospSel");
@@ -2518,7 +3008,8 @@
     var el = root.querySelector("#dxPolicy");
     if (!el) return;
     var info = GATEINFO[g.cls];
-    if (!info.ab || !g.lead || !window.HOSPITAL) { el.innerHTML = ""; return; }
+    // abx_prophylaxis (smd_gate_v2) is not treatment of the lead infection: no empiric-therapy card
+    if (!info.ab || !g.lead || !window.HOSPITAL || g.cls === "abx_prophylaxis") { el.innerHTML = ""; return; }
     var lead = g.lead, pol = window.HOSPITAL.getPolicy(lead.id), h = pol.hospital, e = pol.entry;
     var src = h.logo
       ? '<img class="dx-src-logo" src="' + h.logo + '" alt="GIMSR logo"> <b>' + rIco("check") + ' ' + esc(h.policyName) + '</b> <span>' + esc(h.version || "") + '</span>'
@@ -2542,7 +3033,8 @@
       html = '<div class="dx-policy nopol">' +
         '<div class="dx-policy-src">' + src + '</div>' +
         '<div class="dx-policy-note"><b>ICMR national guidance (AMRSN 2024)</b> is applied as the default standard for <b>' + esc(lead.name) + '</b>' + (h.id === "ICMR" ? "" : " — no " + esc(h.short || h.name) + "-specific local entry") + '. ' +
-        (h.note ? esc(h.note) + " " : "") + 'StewardMD incorporates ICMR / IDSA evidence on the full disease page; institutional policies (e.g. GIMSR) are offered last as local options.</div>' +
+        (h.note ? esc(h.note) + " " : "") + (h.note && /incorporates/i.test(h.note) ? '' : 'StewardMD incorporates ICMR / IDSA evidence on the full disease page; ') +
+        (h.note && /incorporates/i.test(h.note) ? 'Institutional policies (e.g. GIMSR) are offered last as local options.' : 'institutional policies (e.g. GIMSR) are offered last as local options.') + '</div>' +
         regionSuscHTML(lead) +
         '<button class="dx-select inf" data-sel="' + lead.id + '">Open full stewardship page →</button>' +
       '</div>';
@@ -2568,7 +3060,7 @@
     var cols = S.compare.map(function (id) { return map[id]; }).filter(Boolean);
     if (cols.length < 2) { el.innerHTML = ""; return; }
     function cell(r, field, sign, c) {
-      var arr = r[field] || [];
+      var arr = field === "missing" ? plainKeys(r[field]) : (r[field] || []);
       return arr.length ? arr.map(function (k) { return '<span class="dx-f ' + c + '">' + (sign || "") + esc(lbl(k)) + '</span>'; }).join("") : '<span class="dx-none">—</span>';
     }
     var html = '<div class="dx-cmp-h">⚖ Compare diagnoses <button class="dx-cmp-clear" id="dxCmpClear">clear</button></div>' +
@@ -2592,6 +3084,7 @@
     renderSelected(); renderPicker(); renderHosp(); renderAdv();
     if (S.imported) { try { renderImported(); } catch (e) {} }
     var d = differential();
+    applySimple(simpleOn());
     renderSuggest(d);
 
     // --- Clinical Information Threshold ---------------------------------- *
@@ -2603,6 +3096,11 @@
     var discriminative = false;
     for (var fk in S.f) { if ((IDF[fk] || 0) >= 1.7) { discriminative = true; break; } }
     var ready = nFind >= 3 || discriminative || d.inf.some(function (x) { return x.matched; });
+    // smd_calib: the same rule the engine's answer uses, which also treats a red flag (hypotension,
+    // altered sensorium, neutropenia...) as enough, so a possible sepsis picture is never hidden here
+    if (calibOn()) ready = enoughInfo(d, S.f);
+    renderGo(nFind, ready, d);
+    var topEl = root.querySelector("#dxTop"); if (topEl && (!nFind || !ready)) topEl.innerHTML = "";
     var gateEl = root.querySelector("#dxGate"), polEl = root.querySelector("#dxPolicy"),
         chEl = root.querySelector("#dxChanged"), colEl = root.querySelector("#dxCols");
     var domEl = root.querySelector("#dxDom");
@@ -2623,21 +3121,29 @@
     }
 
     var g = gate(d), info = GATEINFO[g.cls];
+    // smd_calib: when the findings are not enough, name the most useful next ones on the card itself
+    var nextHtml = "";
+    if (g.cls === "insufficient") {
+      var nx = []; try { nx = suggestionKeys(d).slice(0, 5); } catch (e) {}
+      if (nx.length) nextHtml = '<div class="dx-gate-m dx-gate-next"><b>Most useful next:</b> ' + nx.map(function (k) { return esc(LABEL[k] || k); }).join(", ") + '</div>';
+    }
     root.querySelector("#dxGate").innerHTML =
       '<div class="dx-gate-card ' + info.c + '"><div class="dx-gate-t">' + esc(info.t) + '</div>' +
-      (gateMsg(g) ? '<div class="dx-gate-m">' + esc(gateMsg(g)) + '</div>' : '') +
+      (gateMsg(g) ? '<div class="dx-gate-m">' + esc(gateMsg(g)) + '</div>' : '') + nextHtml +
       '</div>';
     renderPolicy(g);
+    if (simpleOn()) { foldPolicy(); renderTop(d); }
     renderChanged(d);
-    root.querySelector("#dxCols").innerHTML =
+    root.querySelector("#dxCols").innerHTML = simpleOn() ? mergedHTML(d) :
       colHTML('🔴 Infectious', 'inf', d.inf, S.started ? "No infectious cause suggested by the current findings." : "Add findings to see infectious differentials.") +
       colHTML('🟢 Non-infectious', 'ni', d.ni, S.started ? "No non-infectious cause suggested yet." : "Add findings to see non-infectious differentials.");
     // wire expand + select
     root.querySelectorAll(".dx-row-head").forEach(function (h) {
       h.addEventListener("click", function () { var id = h.getAttribute("data-id"); S.expanded[id] = !S.expanded[id]; renderColsOnly(); });
     });
-    root.querySelectorAll(".dx-select").forEach(function (b) {
-      b.addEventListener("click", function (e) { e.stopPropagation(); selectDx(b.getAttribute("data-sel")); });
+    root.querySelectorAll(".dx-select[data-sel]").forEach(function (b) {
+      // a diagnosis card's Select may ask first (smd_dx_ask); the gate card's page button is unchanged
+      b.addEventListener("click", function (e) { e.stopPropagation(); var id = b.getAttribute("data-sel"); if (b.closest && b.closest(".dx-card")) pickDx(id); else selectDx(id); });
     });
     root.querySelectorAll(".dx-tool").forEach(function (b) {
       b.addEventListener("click", function (e) { e.stopPropagation(); runTool(b.getAttribute("data-tool")); });
@@ -2645,6 +3151,7 @@
     root.querySelectorAll(".dx-cmp").forEach(function (b) {
       b.addEventListener("click", function (e) { e.stopPropagation(); toggleCompare(b.getAttribute("data-cmp")); });
     });
+    wireAsk(); wireSimple();
     renderCompare(d);
     recordRecentCase(d);
     // NB: S.prev is the PRE-change snapshot taken in addFinding — do not
@@ -2673,14 +3180,16 @@
   // re-render only the columns (used on expand so we don't reset prev/delta)
   function renderColsOnly() {
     var d = differential();
-    root.querySelector("#dxCols").innerHTML =
+    root.querySelector("#dxCols").innerHTML = simpleOn() ? mergedHTML(d) :
       colHTML('🔴 Infectious', 'inf', d.inf, "No infectious cause suggested by the current findings.") +
       colHTML('🟢 Non-infectious', 'ni', d.ni, "No non-infectious cause suggested yet.");
+    if (simpleOn()) renderTop(d);
     root.querySelectorAll(".dx-row-head").forEach(function (h) {
       h.addEventListener("click", function () { var id = h.getAttribute("data-id"); S.expanded[id] = !S.expanded[id]; renderColsOnly(); });
     });
-    root.querySelectorAll(".dx-select").forEach(function (b) {
-      b.addEventListener("click", function (e) { e.stopPropagation(); selectDx(b.getAttribute("data-sel")); });
+    root.querySelectorAll(".dx-select[data-sel]").forEach(function (b) {
+      // a diagnosis card's Select may ask first (smd_dx_ask); the gate card's page button is unchanged
+      b.addEventListener("click", function (e) { e.stopPropagation(); var id = b.getAttribute("data-sel"); if (b.closest && b.closest(".dx-card")) pickDx(id); else selectDx(id); });
     });
     root.querySelectorAll(".dx-tool").forEach(function (b) {
       b.addEventListener("click", function (e) { e.stopPropagation(); runTool(b.getAttribute("data-tool")); });
@@ -2688,6 +3197,7 @@
     root.querySelectorAll(".dx-cmp").forEach(function (b) {
       b.addEventListener("click", function (e) { e.stopPropagation(); toggleCompare(b.getAttribute("data-cmp")); });
     });
+    wireAsk(); wireSimple();
     renderCompare(d);
   }
 
@@ -2731,6 +3241,107 @@
     if (c) c.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
+  // smd_dx_ask: "Select this diagnosis" first asks the questions that separate it from its closest
+  // rivals. Off, or nothing to ask: straight to selectDx, exactly as before.
+  function pickDx(id) {
+    if (dxAskOn()) { try { if (openAsk(id)) return; } catch (e) {} }
+    selectDx(id);
+  }
+  // The questions live INSIDE the chosen diagnosis card, in place of its Select button, built from the
+  // same parts as the intake's "Clarify the clinical picture" card: one question at a time.
+  function openAsk(id) {
+    var res = differentiate(id, 6);
+    if (!res || !res.rivals.length || !res.questions.length) return false;
+    S.ask = { target: id, rivals: res.rivals.map(function (r) { return r.id; }), qs: res.questions, ans: {}, order: [] };
+    S.expanded[id] = true;
+    renderColsOnly();
+    askFocus();
+    return true;
+  }
+  function closeAsk() { S.ask = null; }
+  function askFocus() {
+    var c = root && root.querySelector("#dxAskCard");
+    if (!c) return;
+    try { c.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) { c.scrollIntoView(); }
+    var b = c.querySelector("[data-askv]"); if (b) { try { b.focus({ preventScroll: true }); } catch (e) {} }
+  }
+  function askAnswer(k, v) {
+    var A = S.ask; if (!A) return;
+    var was = A.ans[k];
+    A.ans[k] = v;
+    A.order = A.order.filter(function (x) { return x !== k; }).concat([k]);
+    S.neg = S.neg || {};
+    if (v === "no") S.neg[k] = true; else delete S.neg[k];
+    if (v === "yes" && !S.f[k]) addFinding(k);            // re-renders the workspace, card included
+    else if (was === "yes" && v !== "yes" && S.f[k]) { delete S.f[k]; recompute(); }
+    else renderColsOnly();
+    askFocus();
+  }
+  function askUndo() {
+    var A = S.ask; if (!A || !A.order.length) return;
+    var k = A.order.pop(), was = A.ans[k];
+    delete A.ans[k];
+    if (S.neg) delete S.neg[k];
+    if (was === "yes" && S.f[k]) { delete S.f[k]; recompute(); } else renderColsOnly();
+    askFocus();
+  }
+  function askHTML(r) {
+    var A = S.ask, st = askStanding(A.target, A.rivals);
+    if (!st) return "";
+    var T = st.target, cls = r.inf ? "inf" : "ni";
+    var open = A.qs.filter(function (q) { return !A.ans[q.key]; }), q = open[0], n = A.qs.length - open.length;
+    var body;
+    if (q) {
+      body = '<div class="dx-eyebrow">Question ' + (n + 1) + ' of ' + A.qs.length + '</div>' +
+        '<h3 class="dx-question">Is this finding present?</h3>' +
+        '<div class="dx-question-finding">' + esc(q.label) + '</div>' +
+        '<p class="dx-suggest-note">A yes favours <strong>' + esc(q.favoursName) + '</strong> over ' + esc(q.against) + '. Verify before answering.</p>' +
+        '<div class="dx-answer-row"><button class="dx-chip" type="button" data-askv="yes" data-askk="' + q.key + '">Yes, add</button>' +
+        '<button class="dx-chip" type="button" data-askv="no" data-askk="' + q.key + '">No</button>' +
+        '<button class="dx-chip" type="button" data-askv="unk" data-askk="' + q.key + '">Unknown</button></div>' +
+        '<p class="dx-question-foot">No is kept as a pertinent negative. Unknown leaves the case unchanged.</p>';
+    } else {
+      body = '<div class="dx-eyebrow">Done</div>' +
+        '<h3 class="dx-question">All ' + A.qs.length + ' questions answered</h3>' +
+        '<div class="dx-answer-row"><button class="dx-chip" type="button" id="dxAskMore">Ask more questions</button></div>';
+    }
+    var answered = A.order.map(function (k) {
+      var qq = A.qs.filter(function (x) { return x.key === k; })[0]; if (!qq) return "";
+      var v = A.ans[k];
+      return '<span class="dx-f ' + (v === "yes" ? "sup" : v === "no" ? "con" : "mis") + '">' + (v === "yes" ? "✓ " : v === "no" ? "✕ " : "? ") + esc(qq.label) + '</span>';
+    }).join("");
+    var verdict;
+    if (st.leader) verdict = '<div class="dx-ask-v warn" role="status"><strong>' + esc(st.leader.name) + '</strong> now ranks above ' + esc(T.name) + ' (by ' + (-st.leader.gap) + '). Reconsider before committing.</div>';
+    else if (st.rows.length) verdict = '<div class="dx-ask-v" role="status"><strong>' + esc(T.name) + '</strong> leads: ' + st.rows.slice(0, 3).map(function (x) { return 'ahead of ' + esc(x.name) + ' by ' + x.gap; }).join(", ") + '.</div>';
+    else verdict = '<div class="dx-ask-v" role="status"><strong>' + esc(T.name) + '</strong> has no close rival left.</div>';
+    return '<div class="dx-d-row dx-ask"><b>Rule out the closest alternatives</b>' +
+      '<div class="dx-reason">' + esc(A.rivals.map(function (id) { var x = st.rows.filter(function (y) { return y.id === id; })[0]; return x ? x.name : ""; }).filter(Boolean).join(", ")) + ' also fit these findings.</div>' +
+      '<div class="dx-suggest dx-askcard" id="dxAskCard">' + body + '</div>' +
+      (answered ? '<div class="dx-ask-done"><div>' + answered + '</div><button class="dx-ask-undo" type="button" id="dxAskUndo">Undo last answer</button></div>' : '') +
+      verdict +
+      '<button class="dx-select ' + cls + '" type="button" data-askgo="' + T.id + '">Continue with ' + esc(T.name) + '</button>' +
+      (st.leader ? '<button class="dx-chip dx-ask-alt" type="button" data-askgo="' + st.leader.id + '">Switch to ' + esc(st.leader.name) + '</button>' : '') +
+      '<button class="dx-chip dx-ask-alt" type="button" id="dxAskCancel">Not now, back to the differential</button>' +
+      '</div>';
+  }
+  function wireAsk() {
+    if (!root || !S.ask) return;
+    root.querySelectorAll("[data-askv]").forEach(function (b) { b.addEventListener("click", function (e) { e.stopPropagation(); askAnswer(b.getAttribute("data-askk"), b.getAttribute("data-askv")); }); });
+    // re-render first so the card shows Select again when the doctor comes back to the workspace
+    root.querySelectorAll("[data-askgo]").forEach(function (b) { b.addEventListener("click", function (e) { e.stopPropagation(); var id = b.getAttribute("data-askgo"); S.ask = null; renderColsOnly(); selectDx(id); }); });
+    var u = root.querySelector("#dxAskUndo"); if (u) u.addEventListener("click", function (e) { e.stopPropagation(); askUndo(); });
+    var c = root.querySelector("#dxAskCancel"); if (c) c.addEventListener("click", function (e) { e.stopPropagation(); S.ask = null; renderColsOnly(); });
+    var mb = root.querySelector("#dxAskMore");
+    if (mb) mb.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var A = S.ask, res = differentiate(A.target, 6), have = {};
+      A.qs.forEach(function (x) { have[x.key] = 1; });
+      var add = res ? res.questions.filter(function (x) { return !have[x.key]; }) : [];
+      if (add.length) { A.qs = A.qs.concat(add); renderColsOnly(); askFocus(); }
+      else mb.outerHTML = '<p class="dx-suggest-note">No further question separates these diagnoses with the findings the knowledge base has.</p>';
+    });
+  }
+
   // Management / treatment panel for a NON-INFECTIVE working diagnosis.
   function openMgmt(r) {
     var m = (window.DX_MGMT && window.DX_MGMT[r.id]) || null;
@@ -2762,7 +3373,7 @@
     var bk = el.querySelector("#dxMgmtBack");
     if (bk) bk.addEventListener("click", function () { el.classList.remove("on"); });
   }
-  function closeMgmt() { var el = root && root.querySelector("#dxMgmt"); if (el) el.classList.remove("on"); }
+  function closeMgmt() { var el = root && root.querySelector("#dxMgmt"); if (el) el.classList.remove("on"); closeAsk(); }
 
   // Full searchable disease directory (all 140) — merges the enrichment manifest
   // (every disease) with the live SYNDROMES / DDX_NI so a name lookup always works.
@@ -2918,7 +3529,7 @@
     });
   }
 
-  function resetAll() { S.consultSkipped = []; S.f = {}; S.prev = {}; S.expanded = {}; S.started = false; S.system = null; S.showRare = false; S.compare = []; S.timeline = []; S.noteDraft = ""; var note = root && root.querySelector("#dxFreeText"); if (note) note.value = ""; if (!S._restoring) S._caseId = null; filter = ""; closeMgmt(); var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
+  function resetAll() { S.consultSkipped = []; S.f = {}; S.neg = {}; S.prev = {}; S.expanded = {}; S.started = false; S.system = null; S.showRare = false; S.compare = []; S.timeline = []; S.noteDraft = ""; var note = root && root.querySelector("#dxFreeText"); if (note) note.value = ""; if (!S._restoring) S._caseId = null; filter = ""; closeMgmt(); var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
   function open(opts) {
     ensureRoot();
     root.classList.remove("dx-reference-mode");
@@ -3094,9 +3705,11 @@
       ".dx-score{font:800 18px var(--sans);color:var(--ink);flex:0 0 auto}.dx-score small{font-size:10px;color:var(--slate-soft);font-weight:600}",
       ".dx-detail{padding:2px 13px 13px;border-top:1px solid var(--line);animation:dxIn .2s ease}",
       ".dx-d-row{margin-top:11px;font:500 12.5px var(--sans);color:var(--slate)}",
-      ".dx-d-row b{display:block;font:700 10.5px var(--sans);text-transform:uppercase;letter-spacing:.03em;color:var(--slate-soft);margin-bottom:5px}",
+      // the row's own label only (a direct child); bold text inside the row body stays inline
+      ".dx-d-row>b{display:block;font:700 10.5px var(--sans);text-transform:uppercase;letter-spacing:.03em;color:var(--slate-soft);margin-bottom:5px}",
+      ".dx-d-row .dx-reason b{font-weight:700;color:var(--ink)}",
       ".dx-d-row ul{margin:0;padding-left:18px}.dx-d-row li{margin:2px 0}",
-      ".dx-d-row.red b{color:var(--red)}",
+      ".dx-d-row.red>b{color:var(--red)}",
       ".dx-reason{line-height:1.55;color:var(--ink)}",
       ".dx-f{display:inline-block;border-radius:6px;padding:3px 8px;margin:0 5px 5px 0;font-size:12px;font-weight:600}",
       ".dx-f.sup{background:var(--green-bg);color:var(--green)}",
@@ -3227,8 +3840,8 @@
     var d; try { d = differential(); } catch (e) { d = { inf: [], ni: [] }; }
     S.f = savedF; S.fInf = savedFInf; S._dom = savedDom;   // restore — purity guarantee
     var m = {};
-    d.inf.forEach(function (r) { m[r.id] = { score: r.score, name: r.name, inf: true }; });
-    d.ni.forEach(function (r) { m[r.id] = { score: r.score, name: r.name, inf: false }; });
+    d.inf.forEach(function (r) { m[r.id] = { score: r.score, name: r.name, inf: true, rank: r.rankScore != null ? r.rankScore : r.score }; });
+    d.ni.forEach(function (r) { m[r.id] = { score: r.score, name: r.name, inf: false, rank: r.rankScore != null ? r.rankScore : r.score }; });
     return { map: m, d: d };
   }
   function nextQuestions(limit) {
@@ -3264,6 +3877,297 @@
     });
     out.sort(function (a, b) { return b.value - a.value; });
     return out.slice(0, limit);
+  }
+
+  /* smd_dx_ask (default OFF): differentiating questions before a diagnosis is selected. ?dxask=1|0.
+   * The doctor picks a diagnosis (e.g. viral hepatitis); the engine names its closest rivals (the
+   * candidates within 25 rank points that explain at least one of the same findings, at most 3) and
+   * the unentered findings that best separate them. Each finding is simulated through the SAME
+   * engine (scoreMapFor, state restored), so a question is only asked when its answer would actually
+   * move the chosen diagnosis against a rival, and the card says which way. No new clinical rules:
+   * the questions are exactly as good as the knowledge base (with smd_kb_v2, gallstones, dilated CBD
+   * and ALT > 1000 separate viral hepatitis from cholangitis). PURE: never changes S. */
+  function dxAskOn() {
+    try {
+      var q = /[?&]dxask=([01])\b/.exec((window.location && location.search) || "");
+      if (q) return q[1] === "1";
+      return localStorage.getItem("smd_dx_ask") === "1";
+    } catch (e) { return false; }
+  }
+  // feverGU is "fever with urinary symptoms" by label but plain fever in the KB rules: never ask it
+  /* smd_dx_simple (default ON since 2026-09-27, owner approved): the workspace in plain language.
+   * ?dxsimple=1|0 overrides; localStorage smd_dx_simple = "0" keeps the classic view. Presentation only:
+   * the engine, scores, gate and antibiotic advice are unchanged. The owner asked for the module to be
+   * "easier to understand" (2026-09-27); a first-time walkthrough found the answer buried under six
+   * boxes, two lists each numbered from 1, a bare "Ranking score 86/100" that reads like a
+   * probability, unexplained badges (NEW, ↔ mimics, ▲▼, ⚖) and technical card headings.
+   *  - review: a "Most likely" card first; ONE list, best fit first, numbered once, each row tagged
+   *    Infective / Non-infective; "Strong / Possible / Weak fit"; less likely ones behind "Show more"
+   *  - cards: plain headings in the order a clinician uses them, long text folded
+   *  - the guideline box folds to one line; "What changed" is a sentence; the system box is hidden
+   *  - intake: a "See what it could be" button once there is enough; the guideline picker moves below
+   *    the findings; "Fever with urinary symptoms" is not suggested when fever is already entered */
+  function simpleOn() {
+    try {
+      var q = /[?&]dxsimple=([01])\b/.exec((window.location && location.search) || "");
+      if (q) return q[1] === "1";
+      return localStorage.getItem("smd_dx_simple") !== "0";   // default ON; "0" opts out
+    } catch (e) { return true; }
+  }
+  function fitLabel(sc) { return sc >= 70 ? "Strong fit" : sc >= 40 ? "Possible fit" : "Weak fit"; }
+  // feverGU is labelled "fever with urinary symptoms" but the KB means fever: never suggest it on top of fever
+  function plainKeys(keys) { return (keys || []).filter(function (k) { return !(k === "feverGU" && S.f.fever); }); }
+  function rkOf(x) { return x.rankScore != null ? x.rankScore : x.score; }
+  function allByFit(d) {
+    return d.inf.concat(d.ni).filter(function (r) { return r.score > 0; })
+      .sort(function (a, b) { return (rkOf(b) - rkOf(a)) || (b.score - a.score) || a.name.localeCompare(b.name); });
+  }
+  var SIMPLE_CAP = 6;
+  function mergedHTML(d) {
+    var all = allByFit(d);
+    if (!all.length) return '<div class="dx-empty">No diagnosis fits the current findings yet.</div>';
+    var cap = S.showAllDx ? Math.min(all.length, 30) : Math.min(all.length, SIMPLE_CAP);
+    // the first view always holds the best infective AND the best non-infective candidate (a
+    // reasonable one: 30+ and in the top 10), so "is it an infection at all?" stays answerable
+    var firstInf = -1, firstNi = -1;
+    all.forEach(function (r, i) { if (r.inf && firstInf < 0) firstInf = i; if (!r.inf && firstNi < 0) firstNi = i; });
+    [firstInf, firstNi].forEach(function (i) { if (i >= cap && i < 10 && all[i].score >= 30) cap = i + 1; });
+    // an open card (or the one being tested) stays in view even when it sits below the cut
+    all.forEach(function (r, i) { if (i >= cap && i < 30 && (S.expanded[r.id] || (S.ask && S.ask.target === r.id))) cap = i + 1; });
+    var shown = all.slice(0, cap), rest = all.length - shown.length;
+    var body = shown.map(function (r, i) { return card(r, i + 1, i > 0 ? shown[i - 1] : null); }).join("");
+    var tail = rest > 0 ? '<button type="button" class="dx-more dx-showall" id="dxShowAll">Show ' + rest + ' less likely</button>'
+      : (S.showAllDx && all.length > SIMPLE_CAP ? '<button type="button" class="dx-more dx-showall" id="dxShowAll">Show fewer</button>' : '');
+    return '<div class="dx-col all"><div class="dx-col-h">All possibilities <span class="dx-col-n">' + all.length + '</span></div>' +
+      '<p class="dx-col-sub">Best fit first. Fit is how well the findings match, not a probability.</p><div class="dx-rows">' + body + '</div>' + tail + '</div>';
+  }
+  function renderTop(d) {
+    var el = root.querySelector("#dxTop");
+    if (!el) return;
+    var all = allByFit(d), A = all[0];
+    if (!simpleOn() || !A) { el.innerHTML = ""; return; }
+    var cls = A.inf ? "inf" : "ni", B = all[1], tie = B && rkOf(A) - rkOf(B) < 3;
+    var also = all.slice(1, 3).map(function (r) { return r.name; });
+    el.innerHTML = '<div class="dx-topcard">' +
+      '<div class="dx-eyebrow">' + (tie ? "Closest fits" : "Most likely") + '</div>' +
+      '<div class="dx-top-name">' + esc(A.name) + '</div>' +
+      '<div class="dx-tags"><span class="dx-tag ' + cls + '">' + (A.inf ? "Infective" : "Non-infective") + '</span><span class="dx-tag fit">' + fitLabel(A.score) + ', ' + A.score + '/100</span></div>' +
+      ((A.supporting || []).length ? '<p class="dx-top-line"><strong>Fits:</strong> ' + esc(A.supporting.slice(0, 4).map(lbl).join(", ")) + '</p>' : '') +
+      (tie ? '<p class="dx-top-line"><strong>' + esc(B.name) + '</strong> fits just as well. Open either card and press Select to get questions that separate them.</p>'
+           : (also.length ? '<p class="dx-top-line"><strong>Also consider:</strong> ' + esc(also.join(", ")) + '</p>' : '')) +
+      '<button type="button" class="dx-chip dx-top-open" data-open="' + A.id + '">See why, and what to check next</button>' +
+      '</div>';
+  }
+  // the guideline box is long and repeats itself; fold it to one line, keep its page button outside
+  function foldPolicy() {
+    var el = root.querySelector("#dxPolicy"), box = el && el.firstElementChild;
+    if (!box || box.tagName === "DETAILS") return;
+    var btn = box.querySelector(".dx-select[data-sel]"), src = box.querySelector(".dx-policy-src");
+    var srcTxt = src ? (src.innerText || src.textContent || "").replace(/\s+/g, " ").trim() : "";
+    var det = document.createElement("details");
+    det.className = "dx-pol-fold";
+    det.innerHTML = '<summary>Antibiotic guidance' + (srcTxt ? ': ' + esc(srcTxt) : '') + '</summary>';
+    if (btn) btn.parentNode.removeChild(btn);   // the node keeps its click handler
+    if (btn) btn.textContent = btn.textContent.replace(/\s*→\s*$/, "");
+    det.appendChild(box);
+    el.appendChild(det);
+    if (btn) el.appendChild(btn);
+  }
+  var SIMPLE_ORIG = null;
+  function applySimple(on) {
+    if (!root || (!on && !root.classList.contains("dx-simple"))) return;   // off and never on: touch nothing
+    root.classList.toggle("dx-simple", !!on);
+    var t = root.querySelector("#dxReviewTitle"), intro = root.querySelector(".dx-section-intro p");
+    if (!SIMPLE_ORIG) SIMPLE_ORIG = { t: t ? t.innerHTML : "", intro: intro ? intro.innerHTML : "" };
+    if (t) t.innerHTML = on ? "What it could be" : SIMPLE_ORIG.t;
+    if (intro) intro.innerHTML = on ? 'Add what you found, answer the question it suggests, then see what it could be.' : SIMPLE_ORIG.intro;
+    // the guideline picker belongs with treatment, not before the first finding
+    var h = root.querySelector("#dxHosp"), adv = root.querySelector("#dxAdvToggle"), imp = root.querySelector("#dxImported");
+    if (h && adv && imp) { if (on) adv.parentNode.insertBefore(h, adv); else imp.parentNode.insertBefore(h, imp.nextSibling); }
+    var top = root.querySelector("#dxTop");
+    if (!top) { top = document.createElement("div"); top.id = "dxTop"; var g = root.querySelector("#dxGate"); if (g) g.parentNode.insertBefore(top, g); }
+    var go = root.querySelector("#dxGo");
+    if (!go) { go = document.createElement("div"); go.id = "dxGo"; var sel = root.querySelector("#dxSel"); if (sel) sel.parentNode.insertBefore(go, sel.nextSibling); }
+  }
+  function renderGo(nFind, ready, d) {
+    var el = root.querySelector("#dxGo");
+    if (!el) return;
+    if (!simpleOn() || !nFind) { el.innerHTML = ""; return; }
+    if (ready) {
+      var n = allByFit(d).length;
+      el.innerHTML = '<button type="button" class="dx-go" id="dxGoBtn">See what it could be (' + n + ')</button>';
+      el.querySelector("#dxGoBtn").addEventListener("click", function () { showConsultPane("dxReview"); });
+    } else {
+      el.innerHTML = '<p class="dx-go-hint">Add ' + Math.max(1, 3 - nFind) + ' more finding' + (3 - nFind === 1 ? '' : 's') + ', or one specific sign, to see what it could be.</p>';
+    }
+  }
+  function wireSimple() {
+    if (!root || !simpleOn()) return;
+    var sa = root.querySelector("#dxShowAll");
+    if (sa) sa.addEventListener("click", function (e) { e.stopPropagation(); S.showAllDx = !S.showAllDx; renderColsOnly(); });
+    root.querySelectorAll("[data-clamp]").forEach(function (b) {
+      b.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var t = b.previousElementSibling; if (!t) return;
+        var open = t.classList.toggle("open"); b.textContent = open ? "Show less" : "Read more";
+      });
+    });
+    root.querySelectorAll("[data-addf]").forEach(function (b) {
+      b.addEventListener("click", function (e) { e.stopPropagation(); addFinding(b.getAttribute("data-addf")); });
+    });
+    root.querySelectorAll("[data-open]").forEach(function (b) {
+      b.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var id = b.getAttribute("data-open"); S.expanded[id] = true; renderColsOnly();
+        var h = root.querySelector('.dx-row-head[data-id="' + id + '"]');
+        if (h) { try { h.scrollIntoView({ behavior: "smooth", block: "start" }); } catch (x) { h.scrollIntoView(); } }
+      });
+    });
+  }
+  // a plain card: same data and buttons, plain headings in the order a clinician uses them
+  function cardSimple(r, rank, above) {
+    var open = S.expanded[r.id], cls = r.inf ? "inf" : "ni", inCmp = S.compare.indexOf(r.id) >= 0;
+    var head =
+      '<div class="dx-row-head" role="button" tabindex="0" aria-expanded="' + (!!open) + '" aria-label="Review ' + esc(r.name) + '" data-id="' + r.id + '">' +
+        '<div class="dx-rank ' + cls + '">' + rank + '</div>' +
+        '<div class="dx-row-main">' +
+          '<div class="dx-row-name">' + esc(r.name) + '</div>' +
+          '<div class="dx-tags"><span class="dx-fit"><strong>' + fitLabel(r.score) + '</strong>, ' + r.score + '/100</span>' +
+            '<span class="dx-tag ' + cls + '">' + (r.inf ? "Infective" : "Non-infective") + '</span>' +
+            (r.matched ? '<span class="dx-tag met">Meets criteria</span>' : '') + (inCmp ? '<span class="dx-tag fit">In compare</span>' : '') + '</div>' +
+        '</div>' +
+      '</div>';
+    if (!open) return '<div class="dx-card ' + cls + '">' + head + '</div>';
+    function fl(keys, c, sign) { return keys.map(function (k) { return '<span class="dx-f ' + c + '">' + (sign || "") + esc(lbl(k)) + '</span>'; }).join(""); }
+    function row(label, body, extra) { return '<div class="dx-d-row' + (extra ? " " + extra : "") + '"><b>' + label + '</b>' + body + '</div>'; }
+    function list(items) { return '<ul>' + items.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>'; }
+    function folded(text) { return '<div class="dx-reason' + (text.length > 200 ? ' dx-clamp' : '') + '">' + text + '</div>' + (text.length > 200 ? '<button type="button" class="dx-more-link" data-clamp>Read more</button>' : ''); }
+    var miss = plainKeys(r.missing), tools = toolsFor(r.id);
+    var whyNot = (rank > 1 && above) ? 'It sits just below <strong>' + esc(above.name) + '</strong> (' + above.score + ' vs ' + r.score + '), which also fits these findings.' +
+      (miss.length ? ' It would move up with ' + esc(miss.slice(0, 3).map(lbl).join(", ")) + '.' : '') : "";
+    var mm = reasonV2() ? mimicsFor(r.id, r.inf) : [];
+    var det = '<div class="dx-detail">' +
+      (r.system ? '<p class="dx-row-sys">' + esc(r.system) + '</p>' : '') +
+      ((r.supporting || []).length ? row("Fits because", '<div>' + fl(r.supporting, "sup", "✓ ") + '</div>') : '') +
+      ((r.contra || []).length ? row("Against it", '<div>' + fl(r.contra, "con", "✕ ") + '</div>') : '') +
+      (whyNot ? row("Why it is not first", '<div class="dx-reason">' + whyNot + '</div>') : '') +
+      (miss.length ? row("Ask or check next", '<div>' + miss.map(function (k) { return '<button type="button" class="dx-f mis dx-addf" data-addf="' + k + '">+ ' + esc(lbl(k)) + '</button>'; }).join("") + '</div><p class="dx-row-hint">Tap one you have found to add it to the case.</p>') : '') +
+      (r.reason ? row("Why it fits", folded(esc(r.reason))) : '') +
+      ((r.red || []).length ? row("Red flags", list(r.red), "red") : '') +
+      ((r.inv || []).length ? row("Tests to consider", list(r.inv.slice(0, 5))) : '') +
+      ((r.disc || []).length ? row("Key information to get", '<div class="dx-disc">' + r.disc.slice(0, 6).map(function (x) { return '<span class="dx-disc-pill">' + esc(x) + '</span>'; }).join("") + '</div>') : '') +
+      (mm.length ? row("Look-alikes to rule out", folded(esc(mm.join("; ")) + '.')) : '') +
+      (tools.length ? row("Bedside tools", '<div class="dx-tools">' + tools.map(function (t) { return '<button class="dx-tool" data-tool="' + t + '">' + esc(TOOLREG[t].icon + " " + TOOLREG[t].label) + '</button>'; }).join("") + '</div>') : '') +
+      scoreChipsBlock(r) +
+      harrisonRef(r.id) +
+      '<button type="button" class="dx-cmp dx-cmp-add" aria-pressed="' + inCmp + '" data-cmp="' + r.id + '">' + (inCmp ? "Remove from compare" : "Add to compare") + '</button>' +
+      (S.ask && S.ask.target === r.id ? askHTML(r) : '<button class="dx-select ' + cls + '" data-sel="' + r.id + '">Select this diagnosis</button>') +
+      '</div>';
+    return '<div class="dx-card ' + cls + ' open">' + head + det + '</div>';
+  }
+
+  var ASK_SKIP = { age: 1, sex: 1, ageOver50: 1, feverGU: 1 };
+  var ASK_NUMERIC = null;
+  function askable(k) {
+    if (!ASK_NUMERIC) {
+      ASK_NUMERIC = {};
+      (window.FIELD_GROUPS || []).forEach(function (g) { (g.fields || []).forEach(function (fl) { if (fl.type === "number" || fl.type === "select") ASK_NUMERIC[fl.key] = 1; }); });
+    }
+    return !!(k && VALID[k] && LABEL[k] && !ASK_SKIP[k] && !ASK_NUMERIC[k] && !S.f[k] && !(S.neg && S.neg[k]));
+  }
+  function askCandKeys(r) {
+    var keys = (r.missing || []).slice();
+    if (r.inf && r._syn) keys = keys.concat(assocKeys(r._syn));
+    else { var fm = niFind(r.id); for (var k in fm) keys.push(k); }
+    return keys;
+  }
+  function askRk(x) { return x.rankScore != null ? x.rankScore : x.score; }
+  // findings a diagnosis's OWN knowledge names in its favour: KB rule terms outside a "not", score
+  // modifiers that add, or a positive weight. The engine's association list also carries the "not"
+  // terms (chikungunya lists neck stiffness because its rule EXCLUDES it), so "yes favours X" is
+  // only said for a finding in this set.
+  var ASK_POS = {};
+  function askPositive(id, k) {
+    if (!ASK_POS[id]) {
+      var pos = {}, kb = kbDisease(id);
+      var walk = function (n, neg) {
+        if (n == null) return;
+        if (typeof n === "string") { if (!neg) pos[n] = 1; return; }
+        if (n.length != null && typeof n !== "string") { for (var i = 0; i < n.length; i++) walk(n[i], neg); return; }
+        if (n.not != null) walk(n.not, !neg);
+        if (n.allOf) walk(n.allOf, neg);
+        if (n.anyOf) walk(n.anyOf, neg);
+        if (n.key && !neg) pos[n.key] = 1;
+      };
+      if (kb && (kb.rule || kb.score)) {
+        walk(kb.rule, false);
+        ((kb.score && kb.score.modifiers) || []).forEach(function (m) { if (m.add > 0) walk(m.when, false); });
+        if (kb.find) for (var f in kb.find) if (kb.find[f] > 0) pos[f] = 1;
+      } else {
+        var fm = niFind(id), any = false;
+        for (var f2 in fm) { any = true; if (fm[f2] > 0) pos[f2] = 1; }
+        if (!any) pos = null;   // no declarative knowledge to check against: trust the simulation
+      }
+      ASK_POS[id] = pos || { __all: 1 };
+    }
+    return !!(ASK_POS[id].__all || ASK_POS[id][k]);
+  }
+  function askRivals(all, T) {
+    var sup = {}; (T.supporting || []).forEach(function (k) { sup[k] = 1; });
+    return all.filter(function (r) {
+      return r.id !== T.id && r.score > 0 && askRk(r) >= askRk(T) - 25 && (r.supporting || []).some(function (k) { return sup[k]; });
+    }).sort(function (a, b) { return askRk(b) - askRk(a); }).slice(0, 3);
+  }
+  function differentiate(targetId, limit) {
+    buildOntology();
+    limit = limit || 6;
+    var base = scoreMapFor(null), all = base.d.inf.concat(base.d.ni), T = null;
+    all.forEach(function (r) { if (r.id === targetId) T = r; });
+    if (!T) return null;
+    var rivals = askRivals(all, T);
+    var out = { target: { id: T.id, name: T.name, score: T.score },
+      rivals: rivals.map(function (r) { return { id: r.id, name: r.name, score: r.score, gap: Math.round(askRk(T) - askRk(r)) }; }),
+      questions: [] };
+    if (!rivals.length) return out;
+    var seen = {}, keys = [];
+    [T].concat(rivals).forEach(function (r) { askCandKeys(r).forEach(function (k) { if (!seen[k] && askable(k)) { seen[k] = 1; keys.push(k); } }); });
+    var t0 = (base.map[T.id] || {}).rank || 0;
+    keys.forEach(function (k) {
+      var sim = scoreMapFor(k), t1 = (sim.map[T.id] || {}).rank || 0, best = null, sum = 0;
+      rivals.forEach(function (r) {
+        var r0 = (base.map[r.id] || {}).rank || 0, r1 = (sim.map[r.id] || {}).rank || 0;
+        var shift = (t1 - r1) - (t0 - r0);   // > 0: "yes" moves the chosen diagnosis ahead of this rival
+        sum += Math.abs(shift);
+        // "yes favours X" only when a yes RAISES X's own score, not merely lowers the other one (neck
+        // stiffness lowers dengue; it does not favour chikungunya, it points somewhere else). Score,
+        // not rank: the rank's specificity bonus rises with any rare finding.
+        var up = shift > 0 ? ((sim.map[T.id] || {}).score || 0) - T.score : ((sim.map[r.id] || {}).score || 0) - r.score;
+        if (up < 2 || !askPositive(shift > 0 ? T.id : r.id, k)) return;
+        if (!best || Math.abs(shift) > Math.abs(best.shift)) best = { id: r.id, name: r.name, shift: shift };
+      });
+      if (!best || Math.abs(best.shift) < 4) return;
+      var forT = best.shift > 0;
+      out.questions.push({ key: k, label: LABEL[k],
+        favours: forT ? T.id : best.id, favoursName: forT ? T.name : best.name, against: forT ? best.name : T.name,
+        shift: Math.round(Math.abs(best.shift)), value: Math.abs(best.shift) + 0.25 * (sum - Math.abs(best.shift)) });
+    });
+    // lead with the strongest, but keep both directions in view: a question that argues FOR a rival
+    // is the one that rules it in or out
+    out.questions.sort(function (a, b) { return b.value - a.value; });
+    out.questions = out.questions.slice(0, limit);
+    return out;
+  }
+  // where the chosen diagnosis stands now against the rivals it was tested against (and anything
+  // that has overtaken it since)
+  function askStanding(targetId, rivalIds) {
+    var d = differential(), all = d.inf.concat(d.ni), T = null, map = {};
+    all.forEach(function (r) { map[r.id] = r; if (r.id === targetId) T = r; });
+    if (!T) return null;
+    var ids = (rivalIds || []).slice();
+    all.forEach(function (r) { if (r.id !== T.id && askRk(r) > askRk(T) && ids.indexOf(r.id) < 0) ids.push(r.id); });
+    var rows = ids.map(function (id) { var r = map[id]; return r ? { id: id, name: r.name, score: r.score, gap: Math.round(askRk(T) - askRk(r)) } : null; })
+      .filter(Boolean).sort(function (a, b) { return a.gap - b.gap; });
+    return { target: { id: T.id, name: T.name, score: T.score }, rows: rows, leader: rows.length && rows[0].gap < 0 ? rows[0] : null };
   }
 
   /* ---------------------------------------------------------------------- *
@@ -3756,11 +4660,19 @@
 
   window.DX = { open: open, openWorkspace: openWorkspace, close: close, reset: resetAll, importPatient: importPatient, restore: restore, addFindings: addFindings, findingCatalog: findingCatalog, _state: S, _ni: DDX_NI, _differential: differential,
     _nextQuestions: nextQuestions,
+    _differentiate: differentiate, _dxAsk: dxAskOn, _openAsk: openAsk, // smd_dx_ask
+    _simple: simpleOn, // smd_dx_simple
     // PURE: free text -> present engine finding keys, using the engine's OWN synonym set (FT_SYN) so
     // callers (e.g. OPD Ask MaiK) get the same rich extraction the reasoning workspace does. No S.f mutation.
+    // PURE: free text -> { present, absent } engine keys (absent = explicitly denied in the note)
+    extractText: function (text) {
+      if (!text || !(window.SMD_NLP && SMD_NLP.extract)) return { present: [], absent: [] };
+      var nr = SMD_NLP.extract(String(text), nlpCtx()) || {};
+      return { present: (nr.present || []).filter(function (k) { return VALID[k]; }), absent: (nr.absent || []).filter(function (k) { return VALID[k]; }) };
+    },
     findingsFromText: function (text) {
       if (!text || !(window.SMD_NLP && SMD_NLP.extract)) return [];
-      var nr = SMD_NLP.extract(String(text), { valid: VALID, labels: LABEL, syn: FT_SYN }) || {};
+      var nr = SMD_NLP.extract(String(text), nlpCtx()) || {};
       return (nr.present || []).filter(function (k) { return VALID[k]; });
     },
     // open ANY disease's reference panel from outside the reasoning workspace
@@ -3774,6 +4686,9 @@
       document.body.classList.add("dx-lock");
     },
     _kbOpen: kbOpen, // test seam: Knowledge Library / global-search entry point (not user-facing API)
+    _calib: calibOn, // smd_calib on? (opd-emr.js withholds a provisional dx when information is insufficient)
+    _prior: priorOn, // smd_prior_v1 on? (opd-emr.js orders from the engine rank when it is)
+    _rankV3: rankV3, // smd_rank_v3 on? (opd-emr.js clinicalRerank orders from the engine rank when it is)
     _assess: function () {
       var d = differential(), g = gate(d), info = GATEINFO[g.cls];
       return { cls: g.cls, ab: !!info.ab, lead: g.lead && g.lead.name,
@@ -3812,9 +4727,12 @@
   window.SMD_REASON = {
     // assess(findings?) → structured, interface-independent result. Pure: if a
     // findings object is passed it is evaluated without disturbing live state.
-    assess: function (findings) {
-      var restore = null;
+    assess: function (findings, opts) {
+      var restore = null, restoreNeg = S.neg;
       if (findings && typeof findings === "object") { restore = S.f; S.f = {}; Object.keys(findings).forEach(function (k) { if (findings[k]) S.f[k] = true; }); }
+      // opts.absent: keys the note explicitly denies (used by smd_rank_v3 ordering only)
+      if (opts && opts.absent) { S.neg = {}; opts.absent.forEach(function (k) { S.neg[k] = true; }); }
+      else if (restore) S.neg = {};
       var out;
       try {
         var d = differential(), g = gate(d), info = GATEINFO[g.cls] || {};
@@ -3828,8 +4746,16 @@
           dominantSystem: Object.keys(S._dom || {}),
           infectious: d.inf.map(mapCand), nonInfectious: d.ni.map(mapCand),
           suggestions: (function () { try { return suggestionKeys(d); } catch (e) { return []; } })() };
+        // smd_gate_v2 only: why the gate moved and the message the workspace shows
+        if (g.why || g.rule) { out.gate.why = g.why || ""; out.gate.rule = g.rule || null; out.gate.message = gateMsg(g); }
+        // smd_calib only: is there enough to rank at all, and what to ask next
+        if (g.enough != null) {
+          out.sufficiency = { enough: g.enough, next: (out.suggestions || []).slice(0, 6).map(function (k) { return { key: k, label: LABEL[k] || k }; }) };
+          if (g.cls === "insufficient") out.gate.message = gateMsg(g);
+        }
       } catch (e) { out = { gate: {}, infectious: [], nonInfectious: [], suggestions: [] }; }
       if (restore) S.f = restore;
+      S.neg = restoreNeg;
       return out;
     },
     // progressive Step-3 source: top-N findings for a system, common-first, plus the rest.
@@ -3841,6 +4767,18 @@
     },
     // dynamic consultant suggestions = highest-yield next findings given current picks.
     nextFindings: function (limit) { try { return nextQuestions(limit || 6); } catch (e) { return []; } },
+    // PURE: the questions that separate a chosen diagnosis from its closest rivals (smd_dx_ask).
+    // findings: object of present keys (omit to use the live workspace); opts.absent: denied keys.
+    differentiate: function (targetId, findings, opts) {
+      var restore = null, restoreNeg = S.neg, out = null;
+      if (findings && typeof findings === "object") { restore = S.f; S.f = {}; Object.keys(findings).forEach(function (k) { if (findings[k]) S.f[k] = true; }); }
+      if (opts && opts.absent) { S.neg = {}; opts.absent.forEach(function (k) { S.neg[k] = true; }); }
+      else if (restore) S.neg = {};
+      try { out = differentiate(targetId, (opts && opts.limit) || 6); } catch (e) { out = null; }
+      if (restore) S.f = restore;
+      S.neg = restoreNeg;
+      return out;
+    },
     // interface-independent disease search over the KB index (name/synonym/system match) —
     // reused by the ICU "search & select diagnosis". Returns [{id,name,sys,...}].
     search: function (q, limit) { try { return kbSearch(q, limit || 12); } catch (e) { return []; } },

@@ -892,6 +892,10 @@
       body += '<div class="oe-ai-redflags">' + ms("warning") + "<div><b>Must-not-miss red flags</b><ul>" +
         s.redFlags.map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("") + "</ul></div></div>";
     }
+    // smd_calib: not enough information for a working diagnosis at all
+    if (s.insufficient) body += '<div class="oe-ai-lowconf" style="font:500 12.5px/1.45 system-ui;padding:9px 11px;border-radius:8px;margin:2px 0 8px;background:#f1f5f9;color:#334155;border-left:3px solid #64748b;display:flex;gap:6px;align-items:flex-start">' + ms("help") +
+      "<span><b>Not enough information for a working diagnosis yet.</b> The list below is only what these findings are compatible with; no treatment is suggested." +
+      ((s.nextFindings && s.nextFindings.length) ? " Most useful next: " + esc(s.nextFindings.slice(0, 5).join(", ")) + "." : "") + "</span></div>";
     // Never-guess: when the top possibilities are genuinely close, say so instead of presenting a confident dx.
     if (s.lowConfidence) body += '<div class="oe-ai-lowconf" style="font:500 12.5px/1.45 system-ui;padding:9px 11px;border-radius:8px;margin:2px 0 8px;background:#fff8e1;color:#7a5b00;border-left:3px solid #eab308;display:flex;gap:6px;align-items:flex-start">' + ms("help") + "<span>MaiK is not confident here — the leading possibilities are close. Treat this as a checklist, not an answer; add discriminating findings (exam, labs) to narrow it.</span></div>";
     if (s.provisionalDx) body += aiGroup("Provisional diagnosis", scribeRow("dx", 0, { label: s.provisionalDx, why: s.provisionalWhy, accepted: !!s.acceptedDx }), null, 1);
@@ -3399,16 +3403,18 @@
   // Pure findingKeys -> ranked differential via the DX engine, WITHOUT disturbing the live reasoning
   // workspace: snapshot S.f, score on the given keys, restore. Synchronous, so nothing interleaves;
   // derived caches (fInf/_dom) self-heal on the next real differential() call.
-  function differentialFor(keys) {
+  function differentialFor(keys, absent) {
     var DX = G.DX;
     if (!(DX && DX._differential && DX._state)) return [];
-    var S = DX._state, savedF = S.f;
+    var S = DX._state, savedF = S.f, savedNeg = S.neg;
     try {
       var f = {}; (keys || []).forEach(function (k) { if (k) f[k] = true; });
       S.f = f;
+      // explicitly denied findings from the note (smd_rank_v3 ordering only); never the live workspace's
+      S.neg = {}; (absent || []).forEach(function (k) { if (k && !f[k]) S.neg[k] = true; });
       var d = DX._differential() || {};
-      return (d.inf || []).concat(d.ni || []).map(function (r) { return { id: r.id, dx: r.name, score: r.score, inv: r.inv || [], reason: r.reason || "", red: r.red || [] }; });
-    } catch (e) { return []; } finally { S.f = savedF; }
+      return (d.inf || []).concat(d.ni || []).map(function (r) { return { id: r.id, dx: r.name, score: r.score, rank: r.rankScore, inv: r.inv || [], reason: r.reason || "", red: r.red || [] }; });
+    } catch (e) { return []; } finally { S.f = savedF; S.neg = savedNeg; }
   }
   // Grounding options for SMD_SCRIBEGROUND.ground(): extract findings from the transcript
   // (deterministic, SMD_NLP over the DX catalog) and anchor the differential + investigations to the
@@ -3632,6 +3638,7 @@
   // rule's effect is measured. Only fires when the discriminating findings are present.
   function clinicalRerank(list, keys) {
     var f = {}; (keys || []).forEach(function (k) { if (k) f[k] = 1; });
+    var useRank = !!(G.DX && ((G.DX._rankV3 && G.DX._rankV3()) || (G.DX._prior && G.DX._prior())));   // smd_prior_v1 also orders by engine rank
     var scored = (list || []).map(function (e) {
       var adj = 0, n = e.dx || e.name || "";
       if (f.fever) {
@@ -3645,9 +3652,12 @@
       if (f.fever && f.jaundice && /cholangitis/i.test(n)) adj += 24;                                       // fever + jaundice (Charcot) -> cholangitis
       if (f.hypotension && (f.lactate || f.tachycardia) && /(sepsis|septic)/i.test(n)) adj += 22;           // shock + lactate -> sepsis
       if (f.purulentSputum && /asthma/i.test(n)) adj -= 16;                                                 // purulent sputum is not asthma
-      var c = {}; for (var k in e) c[k] = e[k]; c.score = (e.score || 0) + adj; return c;
+      var c = {}; for (var k in e) c[k] = e[k]; c.score = (e.score || 0) + adj;
+      // smd_rank_v3: order from the engine's rank (parsimony, disqualifiers, anchors) plus these
+      // discriminators; the displayed score is unchanged. Off: classic score order, exactly as before.
+      c._key = (useRank && e.rank != null ? e.rank : (e.score || 0)) + adj; return c;
     });
-    return scored.sort(function (a, b) { return (b.score || 0) - (a.score || 0); });
+    return scored.sort(function (a, b) { return (b._key || 0) - (a._key || 0); });
   }
 
   // Keep surfaced/accepted clinical text app-clean: em-dash -> comma (sentence separator), en-dash ->
@@ -3784,10 +3794,27 @@
     if (!text.replace(/[.\s]/g, "")) { toast("Type the complaint / history first, then Ask MaiK."); return; }
     // Extract findings with the engine's OWN synonym set (rich FT_SYN) when available, so risk factors
     // like "known diabetic" -> diabetesHx are captured; fall back to the bare SMD_NLP context otherwise.
-    var keys = (G.DX && DX.findingsFromText) ? DX.findingsFromText(text)
+    var ext = (G.DX && DX.extractText && DX._rankV3 && DX._rankV3()) ? DX.extractText(text) : null;   // smd_rank_v3: keep the negatives
+    var keys = ext ? ext.present : (G.DX && DX.findingsFromText) ? DX.findingsFromText(text)
       : ((G.SMD_NLP && SMD_NLP.extract) ? ((SMD_NLP.extract(text, nlpCtx()) || {}).present || []) : []);
-    var diff = clinicalRerank(differentialFor(keys), keys);   // score-rank + textbook clinical discriminators
+    var diff = clinicalRerank(differentialFor(keys, ext ? ext.absent : null), keys);   // score-rank + textbook clinical discriminators
     if (!diff.length) { toast("MaiK could not derive a differential yet. Add more detail to the notes."); return; }
+    // smd_calib: non-diagnostic notes ("fever" alone) get no provisional diagnosis and no treatment, only
+    // what the findings are compatible with and the findings that would move it
+    if (G.DX && DX._calib && DX._calib() && G.SMD_REASON && SMD_REASON.assess) {
+      var fk = {}; keys.forEach(function (k) { fk[k] = true; });
+      var suff = (SMD_REASON.assess(fk, ext ? { absent: ext.absent } : undefined) || {}).sufficiency;
+      if (suff && !suff.enough) {
+        var sg0 = buildMaikSuggestions(diff, {});
+        st.scribeSuggestions = { provisionalDx: "", provisionalWhy: "", ddx: [{ label: sg0.provisionalDx, dx: sg0.provisionalDx, score: diff[0].score, source: "engine", why: sg0.provisionalWhy }].concat(sg0.ddx).slice(0, 5),
+          investigations: [], treatment: [], redFlags: sg0.redFlags, corrections: emrCorrections(v), lowConfidence: false,
+          insufficient: true, nextFindings: (suff.next || []).map(function (x) { return x.label; }),
+          acceptedDx: false, acceptedDdx: {}, acceptedInv: {}, acceptedRx: {}, acceptedFix: {}, source: "maik" };
+        st.scribeStats = { filled: 0, suggestions: st.scribeSuggestions.ddx.length };
+        st.scribeAnim = true; paint();
+        return;
+      }
+    }
     st.maikBusy = true; paint();
     // Capture the patient in scope NOW. openProfile() reassigns the module-level `st` to a fresh object
     // per patient, so if the doctor switches patients before these static-file loads resolve, we MUST NOT
