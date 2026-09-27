@@ -11,8 +11,10 @@ just before it would be forgotten. Interaction modelled the same way as [[RadioA
   `ophthalmos-stage.js` (image stage: pinch, double-tap, wheel zoom), `ophthalmos.js`
   (shell: open, close, layered back, stats, sources), `ophthalmos-screens.js` (clinic
   encounter layout: hub, encounter, summary, case conference), `ophthalmos.css`
-- **Flag + default:** `smd_ophthalmos`, default **OFF**. `?ophthalmos=1|on|true` shows it
-  for the current load; otherwise it needs `localStorage.smd_ophthalmos === "1"`. No
+- **Flag + default:** `smd_ophthalmos`, default **ON** for all users (owner decision
+  2026-09-27). Kill switch: `localStorage.smd_ophthalmos = "0"` or `?ophthalmos=0` for the
+  current load. Content is still ai_drafted, so every screen carries a 4px "To be verified ·
+  draft" mark (owner-specified) and the hub keeps the readable Beta note. No
   client flag registry file exists for this module, same as `atlas` (RadioAnatome): the
   gating lives inline in `home.js`'s `eligible()`, not in a `*-flags.js` registry.
 - **Data:** `ophthalmos/tracks.json` (levels, access, sources/credits) and

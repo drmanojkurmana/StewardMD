@@ -33,7 +33,7 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[ThoreX]] — chest X-ray support
 - [[FundX]] — smartphone fundus/retinal imaging
 - [[Ophthalmós]] — eye-imaging clinic trainer (OCT, disc, DR grading, ROP, case conference); flag
-  `smd_ophthalmos` default OFF, images not bundled (need R2), content ai_drafted pending sign-off
+  `smd_ophthalmos` default ON (kill switch "0"), images on R2, content ai_drafted pending sign-off
 - [[CliniX]] — clinical learning + bedside skills for medical students (flag OFF, content pending R1)
 - [[SURGX]] — SURGˣ Surgical Intelligence: notes, protocols, procedures, evidence, cases (flag ON for testers, content pending R1)
 - [[WardSynQ]] — the Clinical OS built inside this repo: canonical clinical model, event bus, safety

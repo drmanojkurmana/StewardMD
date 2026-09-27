@@ -2043,10 +2043,11 @@
     { act: "guidelines", ic: "book_2", tt: "Guides", sub: "Protocols" },
     { act: "atlas", ic: "body_system", tt: "RadioAnatome", sub: "Anatomy",
       eligible: function () { try { var q = (location.search.match(/[?&]atlas=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_atlas") !== "0"; } catch (e) { return true; } } },
-    // Ophthalmós (ophthalmos.js): eye-imaging clinic trainer. Flag smd_ophthalmos default OFF -- images
-    // (6,241 WebP, 134 MB) are not bundled and need an R2 bucket before this can go on for real users.
+    // Ophthalmós (ophthalmos.js): eye-imaging clinic trainer. ON for all (owner decision 2026-09-27);
+    // kill switch smd_ophthalmos="0" or ?ophthalmos=0. Images load from R2 (ophthalmos-img.stewardmd.in);
+    // content is ai_drafted, so every screen carries a "To be verified · draft" mark until sign-off.
     { act: "ophthalmos", ic: "eye", tt: "Ophthalmós", sub: "Eye imaging clinic",
-      eligible: function () { try { var q = (location.search.match(/[?&]ophthalmos=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_ophthalmos") === "1"; } catch (e) { return false; } } },
+      eligible: function () { try { var q = (location.search.match(/[?&]ophthalmos=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_ophthalmos") !== "0"; } catch (e) { return true; } } },
     { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
     // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).
     { act: "hospital", ic: "local_hospital", tt: "Hospital", sub: "OPD · ICU · Ward", defOn: false },

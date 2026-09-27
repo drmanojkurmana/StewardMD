@@ -10228,3 +10228,6 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
 - **Reversible**: the flag is OFF by default and the source repo remains the source of truth: future
   edits happen there, then get re-synced into this repo's copies, never the other way around.
 - **Update (same day)**: images now hosted in R2 bucket `stewardmd-ophthalmos-img` (APAC) at `https://ophthalmos-img.stewardmd.in`, immutable cache headers; the flag stays OFF until ophthalmologist sign-off.
+- **Update (same day, owner)**: the owner turned Ophthalmós ON for all users before sign-off, with a
+  4px "To be verified · draft" mark on every screen (the hub's readable Beta note stays). Kill switch
+  `smd_ophthalmos="0"` / `?ophthalmos=0`. Sign-off of the ai_drafted teaching points and plans is still open.
