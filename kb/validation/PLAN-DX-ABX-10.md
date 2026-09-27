@@ -3,7 +3,7 @@
 Baseline: `kb/validation/AUDIT-2026-09-26.md`. Harnesses: `test/run-case-validation.mjs`,
 `test/run-dx-audit.mjs`, `test/dx-heldout.json`.
 
-## Status (2026-09-26)
+## Status (2026-09-27)
 
 | Phase | State |
 |---|---|
@@ -11,7 +11,10 @@ Baseline: `kb/validation/AUDIT-2026-09-26.md`. Harnesses: `test/run-case-validat
 | 1 Gate safety | **Built behind `smd_gate_v2` (default OFF).** Curated keys: time-critical 49/49, abx-indicated 97%, viral flagged 13 -> 9 of 15. Test `test/run-gate-v2.mjs`. Needs clinician review of the rules and owner approval before default ON. Results in `AUDIT-2026-09-26.md`. |
 | 2 Text front door | **First pass built behind `smd_nlp_v2` (default OFF).** Four extractor defects fixed (vitals negated by any "no" in the note, "history of" as past history, substring synonyms, x/y and age parsing), numeric labs, durations, SOFA-2 organ dysfunction. Unseen held-out 2: top-1 33% -> 55%, top-3 48% -> 68%; text time-critical flagged 31 -> 46 of 49. Test `test/clinical-nlp-v2.test.mjs`. Still to do: doctor confirmation chips, OPD scribe-grounding context, the next round of train-split phrasing, then the exit gate (held-out top-3 >= 90%). |
 | 3 Ranking | **Built behind `smd_rank_v3` (default OFF), order only.** Parsimony re-rank, disqualifiers for attractor diagnoses, anchors for rare ones, pertinent negatives, OPD ordering from the engine rank. Tapped top-1 72 -> 74% (dev 64 -> 72%); text top-1 31 -> 34%, top-3 54 -> 58%; OPD tapped top-1 335 -> 358. Test `test/run-rank-v3.mjs`. Deferred: prevalence priors (need real-world data), cholangitis vs viral hepatitis (KB has no biliary / liver-enzyme findings). |
-| 4 to 6 | Not started. |
+| KB content | **Built behind `smd_kb_v2` (default OFF).** Fixes the `feverGU` defect (rules written against "fever with urinary symptoms" used as "fever"); adds gallstones, dilated CBD, ALT/AST > 1000, cholestatic LFTs, ascitic PMN >= 250 and rules separating cholangitis from viral hepatitis. Tapped abx-indicated 156 -> 161, complaint-only top-1 94 -> 101. Test `test/run-kb-v2.mjs`. Gold viral cases need clinician re-keying to show the effect. |
+| 4 Honest confidence | **Part 3 built behind `smd_calib` (default OFF)**: "not enough information" with next-best findings in the engine, workspace, wizard and OPD Ask MaiK (no provisional dx, no treatment); red flags always get an answer. Fires only on cases whose top-1 is wrong (0 correct of 40 complaint-only). Parts 1-2 (calibration map, match-strength bands) not started. Test `test/run-calib.mjs`. |
+| Prevalence prior | **Mechanism built behind `smd_prior_v1` (default OFF)**: ordinal tiers (ai_drafted), can't-miss guard, hospital aggregate counts override. The balanced gold set cannot validate it (costs 3 tapped top-1 there, as expected); needs real diagnosis frequencies (Phase 6). Test `test/run-prior.mjs`. |
+| 5 to 6 | Not started. |
 
 ## What "10/10" means (the exit criteria)
 

@@ -96,3 +96,31 @@ rival excluded by v3 cannot keep antibiotics on (`rankV3Excluded`).
 - Known limits: fever alone now leads with vasculitis / SLE (still non-diagnostic, Phase 4 "not
   enough information"); no prevalence prior; cholangitis vs viral hepatitis needs new KB findings.
 
+## KB additions, "not enough information", prevalence prior (2026-09-27, all default OFF)
+
+Results in `kb/validation/AUDIT-2026-09-26.md` (Round 4).
+
+- `smd_kb_v2` (`?kbv2=1`): `ensureKbV2()` patches `KB_CORE.diseases` ONCE per page (mutates the
+  lazy-loaded KB, then resets `IDF` / `GIDF` / `ASSOC`), called from `differential()`. Adds
+  `KB_V2_FIELDS` (group "Hepatobiliary imaging / labs", also appended to a COPY of the GI SYSPICK
+  entry so `findingCatalog()` lists it). **Gotcha**: `feverGU` is labelled "fever with urinary
+  symptoms" but the KB rules use it as fever; under the flag `infFindings()` sets it from `fever`.
+  Numbers from notes: `clinical-nlp.js` v2 numeric block (ALT/AST >= 1000, ALP >= 250, ascitic PMN
+  >= 250). Test `test/run-kb-v2.mjs`.
+- `smd_calib` (`?calib=1`): `enoughInfo(d, f)` (3+ clinical keys excluding number/select fields and
+  age/sex, or a `CALIB_RED` red flag, or IDF >= 1.7, or a matched infection); gate class
+  `insufficient` (`GATEINFO`, `ab:false`) only when no gate rule fired; `assess().sufficiency`
+  `{enough, next}`. Workspace `recompute()` uses it for `ready`. `DX._calib()` lets `opd-emr.js`
+  `askMaik()` skip the provisional dx and treatment. Wizard: `SEV.insufficient`. Test
+  `test/run-calib.mjs`.
+- Gate v2 additions found while building calib: `sepsis_phys` (fever/rigors + hypotension, lactate
+  or pressors lifts unlikely/possible/none to likely) and the rival rule needs a time-critical rival
+  to have MATCHED (not just scored 42+).
+- `smd_prior_v1` (`?prior=1`): `PRIOR_TIER` / `PRIOR_CANT_MISS` / `priorAdjust()` after
+  `rankV3Adjust` in `differential()`; `localStorage smd_prior_counts` overrides. `DX._prior()` also
+  makes OPD order by the engine rank. Order only, but under gate v2 the LEAD infection can change,
+  and with it the "Need antibiotics?" answer. Test `test/run-prior.mjs`.
+- Still open: the OPD scribe-grounding gap (MaiK's server call does not see the engine's
+  sufficiency); gold viral cases need re-keying with the new findings; the prior needs real
+  case-mix counts.
+

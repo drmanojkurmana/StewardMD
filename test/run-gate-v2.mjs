@@ -30,7 +30,8 @@ const FIX = [
   ["gc_118", "dengue", "very_likely", "infection_no_abx", false, /Dengue Fever leads, and it does not need antibiotics/],
   ["gc_242", "acute bronchitis", "very_likely", "infection_no_abx", false, /does not need antibiotics/],
   ["gc_137", "pharyngitis", "very_likely", "infection_conditional", true, /Antibiotics only if its criteria are met: .*Centor/],
-  ["gc_070", "malaria with a close bacterial rival", "very_likely", "very_likely", true, /Malaria leads .*specific, not antibacterial.* is competitive and does/],
+  ["gc_070", "uncomplicated malaria (no bacterial rival meets its criteria)", "very_likely", "infection_specific", false, /Malaria leads\. .*ANTIMALARIAL/],
+  ["gc_110", "chikungunya with rickettsial fever matched close behind", "very_likely", "very_likely", true, /leads and does not need antibiotics on its own, but Rickettsial Fever .* is competitive and does/],
   ["gc_390", "chikungunya in a neutropenic host", "very_likely", "very_likely", true, /these change that: .*Neutropenia/],
   ["gc_149", "URTI with pneumonia competitive", "likely", "likely", true, /Community Acquired Pneumonia .* is competitive/],
   ["gc_152", "viral vs bacterial meningitis", "very_likely", "very_likely", true, null],
@@ -41,6 +42,7 @@ const FIX = [
 ];
 const V2_CLASSES = ["infection_no_abx", "infection_conditional", "infection_specific", "abx_prophylaxis", "rule_out_sbp"];
 const ALL_CLASSES = ["very_likely", "likely", "possible", "unlikely", "noninfective"].concat(V2_CLASSES);
+// smd_calib's class is deliberately neutral (k "none") but must carry a label
 
 // start the static server if nothing answers at BASE (same pattern as run-reason-api.mjs)
 let serveProc = null;
@@ -86,6 +88,8 @@ try {
   }
   const fn = { fever: true, neutropenia: true };
   const fnOff = await assess(fn);
+  const spOff = await assess({ fever: true, hypotension: true });
+  ok(spOff.ab === false, `off · fever + hypotension alone: classic gate withholds antibiotics ("${spOff.cls}"), the gap v2 closes`);
   ok(fnOff.ab === true, `off · fever + "Neutropenia (ANC <500)" -> antibiotics (${fnOff.cls}; the syndrome itself scores on this key)`);
 
   // ---- 2. flag ON --------------------------------------------------------------------------
@@ -96,6 +100,10 @@ try {
     if (re) ok(re.test(g.message || ""), `on  · ${what}: message says why ("${String(g.message || "").slice(0, 90)}...")`);
     if (g.message) ok(!/\u2014/.test(g.message), `on  · ${what}: v2 message has no em-dash`);
   }
+  const sp = await assess({ fever: true, hypotension: true });
+  ok(sp.cls === "likely" && sp.ab === true && /sepsis until proven otherwise/.test(sp.message || ""), `on  · fever + hypotension alone: sepsis until proven otherwise (${sp.cls})`);
+  const ac = await assess({ fever: true, hypotension: true, steroidUse: true });
+  ok(ac.rule !== "sepsis_phys", `on  · fever + hypotension on long-term steroids: the rule does not override a leading adrenal crisis (${ac.cls})`);
   const fnOn = await assess(fn);
   ok(fnOn.ab === true && fnOn.cls === fnOff.cls, `on  · fever + "Neutropenia (ANC <500)" unchanged by v2 (${fnOn.cls})`);
 
@@ -132,6 +140,8 @@ try {
   // ---- 5. wizard severity mapping ----------------------------------------------------------
   const sev = JSON.parse(await ev(`return JSON.stringify(${JSON.stringify(ALL_CLASSES)}.map(function(c){var s=window.ABX_WIZARD&&ABX_WIZARD._sevOf?ABX_WIZARD._sevOf(c):null;return [c, s&&s.k, s&&s.label];}));`));
   sev.forEach(([c, k, label]) => ok(k && k !== "none" && label, `wizard severity for "${c}": ${k} "${label}"`));
+  const ins = JSON.parse(await ev(`return JSON.stringify(ABX_WIZARD._sevOf("insufficient"))`));
+  ok(ins && ins.label, `wizard severity for "insufficient": ${ins && ins.k} "${ins && ins.label}"`);
   const noAbx = sev.find((x) => x[0] === "infection_no_abx");
   ok(noAbx && noAbx[1] === "green" && !/antibiotics required|recommended/i.test(noAbx[2]), "wizard: viral lead is green, never 'Immediate antibiotics required'");
 

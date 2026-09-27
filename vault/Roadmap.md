@@ -205,6 +205,8 @@ Plan: `kb/validation/PLAN-DX-ABX-10.md` (baseline audit `kb/validation/AUDIT-202
 - [ ] Phase 1: gate respects `antibioticRelevant`; can't-miss rules (`smd_gate_v2`)
 - [ ] Phase 2: text extraction synonyms + numeric labs + confirm chips (`smd_nlp_v2`)
 - [ ] Phase 3: base-rate priors, anchors, pertinent negatives, confusion clusters (`smd_rank_v3`)
-- [ ] Phase 4: calibrated confidence (`smd_calib`)
+- [ ] Phase 4: calibrated confidence (`smd_calib`). "Not enough information" part built (default OFF, 2026-09-27); calibration map and match-strength bands not started
+- [ ] KB content (`smd_kb_v2`, built default OFF 2026-09-27): clinician review of the hepatobiliary rules; re-key the gold viral / biliary cases with the new findings
+- [ ] Prevalence prior (`smd_prior_v1`, mechanism built default OFF 2026-09-27): needs a hospital's aggregate diagnosis counts to validate
 - [ ] Phase 5: one drug resolver with host modifiers, adjudicated regimens (`smd_rx_v2`)
 - [ ] Phase 6: shadow-mode validation + clinician sign-off

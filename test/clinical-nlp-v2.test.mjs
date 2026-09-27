@@ -7,7 +7,7 @@ import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const NLP = require("../clinical-nlp.js");
 
-const KEYS = ["fever", "cough", "tachycardia", "tachypnea", "hypotension", "hypoxia", "alteredSensorium", "lactateElevated",
+const KEYS = ["transaminasesVeryHigh", "cholestaticLFT", "asciticPMNHigh", "fever", "cough", "tachycardia", "tachypnea", "hypotension", "hypoxia", "alteredSensorium", "lactateElevated",
   "thrombocytopenia", "neutropenia", "absoluteNeutrophilCountLow", "renalImpairment", "organDysfunction", "prolongedFever",
   "subacuteOnset", "ageOver50", "feverGU", "dysuria", "costovertebralTenderness", "malignancy", "platelets", "weight", "myalgiaArthralgia"];
 const valid = Object.fromEntries(KEYS.map((k) => [k, 1]));
@@ -103,4 +103,15 @@ test("family history is not the patient's; a child's reported fever is", () => {
   assert.ok(!present("family history of cancer", true).includes("malignancy"));
   assert.ok(present("known case of cancer", true).includes("malignancy"));
   assert.ok(present("Mother reports high fever since morning", true).includes("fever"));
+});
+
+test("liver enzymes and ascitic fluid (keys exist under smd_kb_v2)", () => {
+  assert.ok(present("ALT 2200, AST 1800", true).includes("transaminasesVeryHigh"));
+  assert.ok(present("SGPT 1,450 IU/L", true).includes("transaminasesVeryHigh"));
+  assert.ok(!present("ALT 320", true).includes("transaminasesVeryHigh"));
+  assert.ok(present("ALP 480 IU/L", true).includes("cholestaticLFT"));
+  assert.ok(!present("alkaline phosphatase 180", true).includes("cholestaticLFT"));
+  assert.ok(present("ascitic fluid PMN 450", true).includes("asciticPMNHigh"));
+  assert.ok(!present("ascitic fluid PMN 120", true).includes("asciticPMNHigh"));
+  assert.ok(!present("ALT 2200", false).includes("transaminasesVeryHigh"), "classic path unchanged");
 });

@@ -119,7 +119,7 @@ try {
   if (!(await ready())) throw new Error("engine did not load at " + BASE);
   // flags are read by the engine at call time from localStorage; set them, then reload so any
   // load-time reader sees them too
-  await ev(`${JSON.stringify(FLAGS)}.forEach(function(kv){localStorage.setItem(kv[0],kv[1]);}); ["smd_gate_v2","smd_nlp_v2","smd_rank_v3"].forEach(function(k){ if(!${JSON.stringify(FLAGS.map((f) => f[0]))}.includes(k)) localStorage.removeItem(k); }); return 1`);
+  await ev(`${JSON.stringify(FLAGS)}.forEach(function(kv){localStorage.setItem(kv[0],kv[1]);}); ["smd_gate_v2","smd_nlp_v2","smd_rank_v3","smd_kb_v2","smd_calib","smd_prior_v1"].forEach(function(k){ if(!${JSON.stringify(FLAGS.map((f) => f[0]))}.includes(k)) localStorage.removeItem(k); }); localStorage.removeItem("smd_prior_counts"); return 1`);
   await call("Page.navigate", { url: BASE });
   if (!(await ready())) throw new Error("engine did not reload");
   await ev(`DX.findingCatalog(); return 1`);
@@ -188,12 +188,16 @@ try {
         specific: SP.filter((x) => x[path].gate === "infection_specific").length, specN: SP.length,
       });
       if (path !== "pc") m.opdTop1 = S.filter((x) => x[path].opd === 1).length;
+      // smd_calib: "not enough information" should land on the cases the engine would get wrong
+      const I = S.filter((x) => x[path].gate === "insufficient"), E = S.filter((x) => x[path].gate !== "insufficient");
+      if (I.length) m.insufficient = { n: I.length, top1: I.filter((x) => x[path].pos === 1).length, restTop1: E.filter((x) => x[path].pos === 1).length, restN: E.length };
       metrics[set + "." + path] = m;
       const sp = (k) => m[k] ? `${k} ${Math.round(100 * m[k].top1 / m[k].n)}/${Math.round(100 * m[k].top3 / m[k].n)}` : "";
       console.log(`${(set + " " + { cur: "keys", txt: "text", pc: "complaint" }[path]).padEnd(18)} top1 ${pct(m.all.top1, m.all.n)} top3 ${pct(m.all.top3, m.all.n)} absent ${m.absent}` +
         `  [top1/top3 % ${["train", "dev", "test"].map(sp).filter(Boolean).join(" · ")}]`);
       console.log(`${"".padEnd(18)} gate: abx when indicated ${pct(m.abxSens, m.abxN)} · when not ${pct(m.overcall, m.overN)} · critical ${pct(m.critical, m.critN)} · viral/self-limited ${pct(m.noAbxInf, m.noAbxN)} · malaria as specific therapy ${pct(m.specific, m.specN)}` +
         (m.opdTop1 != null ? ` · OPD rerank top1 ${pct(m.opdTop1, m.all.n)}` : ""));
+      if (m.insufficient) console.log(`${"".padEnd(18)} not enough information: ${m.insufficient.n} cases (top1 among them ${pct(m.insufficient.top1, m.insufficient.n)}; top1 on the rest ${pct(m.insufficient.restTop1, m.insufficient.restN)})`);
     }
   }
   const G = R.filter((x) => x.set === "gold" && x.extractRecall != null);

@@ -887,6 +887,10 @@
       body += '<div class="oe-ai-redflags">' + ms("warning") + "<div><b>Must-not-miss red flags</b><ul>" +
         s.redFlags.map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("") + "</ul></div></div>";
     }
+    // smd_calib: not enough information for a working diagnosis at all
+    if (s.insufficient) body += '<div class="oe-ai-lowconf" style="font:500 12.5px/1.45 system-ui;padding:9px 11px;border-radius:8px;margin:2px 0 8px;background:#f1f5f9;color:#334155;border-left:3px solid #64748b;display:flex;gap:6px;align-items:flex-start">' + ms("help") +
+      "<span><b>Not enough information for a working diagnosis yet.</b> The list below is only what these findings are compatible with; no treatment is suggested." +
+      ((s.nextFindings && s.nextFindings.length) ? " Most useful next: " + esc(s.nextFindings.slice(0, 5).join(", ")) + "." : "") + "</span></div>";
     // Never-guess: when the top possibilities are genuinely close, say so instead of presenting a confident dx.
     if (s.lowConfidence) body += '<div class="oe-ai-lowconf" style="font:500 12.5px/1.45 system-ui;padding:9px 11px;border-radius:8px;margin:2px 0 8px;background:#fff8e1;color:#7a5b00;border-left:3px solid #eab308;display:flex;gap:6px;align-items:flex-start">' + ms("help") + "<span>MaiK is not confident here — the leading possibilities are close. Treat this as a checklist, not an answer; add discriminating findings (exam, labs) to narrow it.</span></div>";
     if (s.provisionalDx) body += aiGroup("Provisional diagnosis", scribeRow("dx", 0, { label: s.provisionalDx, why: s.provisionalWhy, accepted: !!s.acceptedDx }), null, 1);
@@ -3503,7 +3507,7 @@
   // rule's effect is measured. Only fires when the discriminating findings are present.
   function clinicalRerank(list, keys) {
     var f = {}; (keys || []).forEach(function (k) { if (k) f[k] = 1; });
-    var useRank = !!(G.DX && G.DX._rankV3 && G.DX._rankV3());
+    var useRank = !!(G.DX && ((G.DX._rankV3 && G.DX._rankV3()) || (G.DX._prior && G.DX._prior())));   // smd_prior_v1 also orders by engine rank
     var scored = (list || []).map(function (e) {
       var adj = 0, n = e.dx || e.name || "";
       if (f.fever) {
@@ -3664,6 +3668,22 @@
       : ((G.SMD_NLP && SMD_NLP.extract) ? ((SMD_NLP.extract(text, nlpCtx()) || {}).present || []) : []);
     var diff = clinicalRerank(differentialFor(keys, ext ? ext.absent : null), keys);   // score-rank + textbook clinical discriminators
     if (!diff.length) { toast("MaiK could not derive a differential yet. Add more detail to the notes."); return; }
+    // smd_calib: non-diagnostic notes ("fever" alone) get no provisional diagnosis and no treatment, only
+    // what the findings are compatible with and the findings that would move it
+    if (G.DX && DX._calib && DX._calib() && G.SMD_REASON && SMD_REASON.assess) {
+      var fk = {}; keys.forEach(function (k) { fk[k] = true; });
+      var suff = (SMD_REASON.assess(fk, ext ? { absent: ext.absent } : undefined) || {}).sufficiency;
+      if (suff && !suff.enough) {
+        var sg0 = buildMaikSuggestions(diff, {});
+        st.scribeSuggestions = { provisionalDx: "", provisionalWhy: "", ddx: [{ label: sg0.provisionalDx, dx: sg0.provisionalDx, score: diff[0].score, source: "engine", why: sg0.provisionalWhy }].concat(sg0.ddx).slice(0, 5),
+          investigations: [], treatment: [], redFlags: sg0.redFlags, corrections: emrCorrections(v), lowConfidence: false,
+          insufficient: true, nextFindings: (suff.next || []).map(function (x) { return x.label; }),
+          acceptedDx: false, acceptedDdx: {}, acceptedInv: {}, acceptedRx: {}, acceptedFix: {}, source: "maik" };
+        st.scribeStats = { filled: 0, suggestions: st.scribeSuggestions.ddx.length };
+        st.scribeAnim = true; paint();
+        return;
+      }
+    }
     st.maikBusy = true; paint();
     // Capture the patient in scope NOW. openProfile() reassigns the module-level `st` to a fresh object
     // per patient, so if the doctor switches patients before these static-file loads resolve, we MUST NOT

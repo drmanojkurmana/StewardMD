@@ -187,6 +187,11 @@
         var cr = num(m2[1]), umol = (m2[2] && /mol/.test(m2[2])) || cr > 25;
         if (umol ? cr >= LAB_V2.creatinineUmol : cr >= LAB_V2.creatinineMgDl) vital("renalImpairment", m2[0]);
       }
+      // liver enzymes and ascitic fluid (the findings exist only under smd_kb_v2; consider() drops invalid keys)
+      var CONN = "(?:\\s*(?:count|level|levels|value))?\\s*(?:\\([^)\\d]{0,12}\\))?\\s*(?:of|is|was|at|=|:|-|\\()?\\s*";
+      if ((m2 = raw.match(new RegExp("\\b(?:alt|ast|sgpt|sgot|transaminases?)\\b" + CONN + "(\\d+(?:[.,]\\d+)?)"))) && num(m2[1]) >= 1000) vital("transaminasesVeryHigh", m2[0]);
+      if ((m2 = raw.match(new RegExp("\\b(?:alp|alkaline phosphatase)\\b" + CONN + "(\\d+(?:[.,]\\d+)?)"))) && num(m2[1]) >= 250) vital("cholestaticLFT", m2[0]);
+      if ((m2 = raw.match(/\bascitic\b[^.;\n]{0,40}?\b(?:pmn|neutrophils?|polymorphs?)\b\s*(?:count)?\s*(?:of|is|was|=|:|-)?\s*(\d+(?:[.,]\d+)?)/)) && num(m2[1]) >= 250) vital("asciticPMNHigh", m2[0]);
       // durations: fever for >= 7 days -> prolonged fever; an illness of 1 to 8 weeks -> subacute onset
       var WN = { a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, few: 3, several: 4 };
       var DUR = "(\\d{1,2}|a|an|one|two|three|four|five|six|seven|eight|nine|ten|few|several)\\s*-?\\s*(d|days?|wks?|weeks?|months?)\\b";

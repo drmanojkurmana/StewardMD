@@ -10070,3 +10070,20 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
 - **Why not delete them**: the page is the truth; hiding a printed figure would make the app disagree with
   the document a clinician can open. The caution explains, the pool and reasoning ignore it.
 - **Reversible**: the checks live in `validateRow` and the store's `POOL_MIN_K`; the row flags are data.
+
+## 2026-09-27 - Dx engine: "not enough information" is an answer, and prevalence is ordinal until real counts exist
+- **Context**: fever alone still produced a confident-looking top diagnosis (HLH, then vasculitis), and
+  common diseases did not outrank rare ones. Plan `kb/validation/PLAN-DX-ABX-10.md`, audit Round 4.
+- **Decision 1 (`smd_calib`)**: below a minimum of clinical information the gate returns
+  "Not enough information yet", makes no infection or antibiotic call, and lists the next findings;
+  OPD Ask MaiK then gives no provisional diagnosis and no treatment. A red flag always gets the
+  normal answer, because the answer to possible shock is urgency, not a request for more data.
+- **Decision 2 (`smd_prior_v1`)**: the prior is ordinal tiers (ai_drafted), bounded at +/-8 on the
+  rank and never on the score, with time-critical diagnoses never pushed down. No prevalence number is
+  invented. A hospital's aggregate diagnosis counts replace the tiers; patient rows never enter it.
+- **Why not tune the prior on the gold set**: the gold set is balanced (3 to 4 cases per diagnosis),
+  so it penalises any prior toward the common and tuning on it would be circular. It stays OFF until
+  real frequencies (Phase 6) show it helps.
+- **Decision 3 (`smd_kb_v2`)**: the KB's `feverGU` rules are read as "fever" under the flag rather
+  than renaming the key, so saved cases and the classic path are untouched.
+- **Reversible**: all three are flags, default OFF; flags off is byte-identical (1,660 case-paths).

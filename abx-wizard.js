@@ -45,7 +45,9 @@
     infection_conditional: { k: "yellow", label: "Antibiotics only if criteria met", icon: "rule" },
     infection_specific: { k: "orange", label: "Specific therapy, not antibiotics", icon: "medication" },
     abx_prophylaxis: { k: "orange", label: "Antibiotic prophylaxis indicated", icon: "medication" },
-    rule_out_sbp: { k: "yellow", label: "Rule out SBP: paracentesis first", icon: "rule" }
+    rule_out_sbp: { k: "yellow", label: "Rule out SBP: paracentesis first", icon: "rule" },
+    // smd_calib: findings are non-diagnostic; neutral ramp, never an antibiotic call
+    insufficient: { k: "none", label: "Not enough information yet", icon: "help" }
   };
   function sevOf(cls) { return SEV[cls] || SEV.none; }
 

@@ -606,7 +606,7 @@
    * far outweighs a non-specific one (fever). The dominant organ system,
    * derived from weighted findings, shapes the differential.
    * ---------------------------------------------------------------------- */
-  var FW_VERYHIGH = {neckStiffness:1,pleuriticChestPain:1,murphySign:1,hemoptysis:1,focalNeuroDeficit:1,hypotension:1,thunderclapHeadache:1,ecgIschemia:1,ascendingWeakness:1,miosisSecretions:1,mucosalLesions:1,costovertebralTenderness:1,exertionalChestPain:1,ketonemia:1,raisedJVP:1,pulsatileMass:1,asterixis:1,petechialRash:1,oliguria:1,proteinuria:1,eschar:1,bilateralCrackles:1,hematemesis:1,facialSwelling:1,sickleCellHx:1,rigidity:1,photophobia:1,bloodyStool:1,jaundice:1,seizure:1,hematuria:1,thrombocytopenia:1};
+  var FW_VERYHIGH = {dilatedCBD:1,asciticPMNHigh:1,transaminasesVeryHigh:1,neckStiffness:1,pleuriticChestPain:1,murphySign:1,hemoptysis:1,focalNeuroDeficit:1,hypotension:1,thunderclapHeadache:1,ecgIschemia:1,ascendingWeakness:1,miosisSecretions:1,mucosalLesions:1,costovertebralTenderness:1,exertionalChestPain:1,ketonemia:1,raisedJVP:1,pulsatileMass:1,asterixis:1,petechialRash:1,oliguria:1,proteinuria:1,eschar:1,bilateralCrackles:1,hematemesis:1,facialSwelling:1,sickleCellHx:1,rigidity:1,photophobia:1,bloodyStool:1,jaundice:1,seizure:1,hematuria:1,thrombocytopenia:1};
   var FW_LOW = {fever:1,headache:1,fatigue:1,weakness:1,malaise:1,tachycardia:1,tachypnea:1,rigors:1,cough:1,nauseaVomiting:1,myalgiaArthralgia:1,weightLoss:1,ageOver50:1};
   function fw(k) { return FW_VERYHIGH[k] ? 3 : (FW_LOW[k] ? 1 : 2); }
 
@@ -615,7 +615,8 @@
   // replacing the OS emoji that shipped in app.js's SYSTEM_PICKER_MAP + the two NI tabs below.
   var SYS_ICON = { respiratory: "lungs", genitourinary: "kidney", gastrointestinal: "stomach", skin: "skin", neuro: "brain", systemic: "aware", cardiac: "heart", tropical: "bug", ni_endo: "endocrine", ni_tox: "skull" };
   var GROUP_TAG = { "General / Vitals":"GEN","Respiratory":"RESP","Gastrointestinal":"GI","Genitourinary":"GU","Central Nervous System":"CNS","Cardiac":"CVS","Tropical Fever":"ID","Skin / Soft Tissue":"DERM","Sepsis / Oncology-Specific":"GEN" };
-  var EXTRA_TAG = { headache:"CNS",thunderclapHeadache:"CNS",chestPain:"CVS",pleuriticChestPain:"RESP",exertionalChestPain:"CVS",dyspnea:"RESP",orthopnea:"CVS",palpitations:"CVS",backPain:"MSK",visualDisturbance:"CNS",polyarthralgia:"MSK",legSwellingUnilateral:"CVS",legSwellingBilateral:"CVS",calfTenderness:"CVS",raisedJVP:"CVS",bilateralCrackles:"RESP",asterixis:"HEP",ecgIschemia:"CVS",ketonemia:"ENDO",polyuriaPolydipsia:"ENDO",knownCAD:"CVS",knownHeartFailure:"CVS",hypertensionHx:"CVS",diabetesHx:"ENDO",steroidUse:"ENDO",drugOverdose:"TOX",anticoagulated:"HEME",atrialFibHx:"CVS",pulsatileMass:"CVS",hematemesis:"GI",hematuria:"GU",jointSwelling:"MSK",ascendingWeakness:"CNS",rigidity:"TOX",hypothermia:"GEN",bradycardia:"CVS",bradypnea:"RESP",miosisSecretions:"TOX",mucocutaneousBleeding:"HEME",oliguria:"RENAL",mucosalLesions:"DERM",facialSwelling:"GEN",sickleCellHx:"HEME",headInjury:"CNS",alcoholExcess:"GEN",ataxia:"CNS",proteinuria:"RENAL",jaundice:"HEP",rightUpperQuadrantPain:"HEP",murphySign:"HEP",ascites:"HEP",flankPain:"GU",dysuria:"GU",feverGU:"GU",costovertebralTenderness:"GU" };
+  var EXTRA_TAG = { headache:"CNS",thunderclapHeadache:"CNS",chestPain:"CVS",pleuriticChestPain:"RESP",exertionalChestPain:"CVS",dyspnea:"RESP",orthopnea:"CVS",palpitations:"CVS",backPain:"MSK",visualDisturbance:"CNS",polyarthralgia:"MSK",legSwellingUnilateral:"CVS",legSwellingBilateral:"CVS",calfTenderness:"CVS",raisedJVP:"CVS",bilateralCrackles:"RESP",asterixis:"HEP",ecgIschemia:"CVS",ketonemia:"ENDO",polyuriaPolydipsia:"ENDO",knownCAD:"CVS",knownHeartFailure:"CVS",hypertensionHx:"CVS",diabetesHx:"ENDO",steroidUse:"ENDO",drugOverdose:"TOX",anticoagulated:"HEME",atrialFibHx:"CVS",pulsatileMass:"CVS",hematemesis:"GI",hematuria:"GU",jointSwelling:"MSK",ascendingWeakness:"CNS",rigidity:"TOX",hypothermia:"GEN",bradycardia:"CVS",bradypnea:"RESP",miosisSecretions:"TOX",mucocutaneousBleeding:"HEME",oliguria:"RENAL",mucosalLesions:"DERM",facialSwelling:"GEN",sickleCellHx:"HEME",headInjury:"CNS",alcoholExcess:"GEN",ataxia:"CNS",proteinuria:"RENAL",jaundice:"HEP",rightUpperQuadrantPain:"HEP",murphySign:"HEP",ascites:"HEP",flankPain:"GU",dysuria:"GU",feverGU:"GU",costovertebralTenderness:"GU",
+    knownGallstones:"HEP",dilatedCBD:"HEP",transaminasesVeryHigh:"HEP",cholestaticLFT:"HEP",asciticPMNHigh:"HEP" };
   var FSYS = {}; // findingKey -> organ tag (populated in buildOntology)
 
   function dzTag(systemStr) {
@@ -657,6 +658,7 @@
     if (ONT) return ONT;
     var groups = [];
     (EXTRA_GROUPS).forEach(function (g) { groups.push(g); });
+    if (kbV2()) groups.push({ group: "Hepatobiliary imaging / labs", fields: KB_V2_FIELDS });   // smd_kb_v2
     var fg = (window.FIELD_GROUPS || []);
     fg.forEach(function (g) { if (g && g.fields) groups.push({ group: g.group, fields: g.fields }); });
     groups.forEach(function (g) {
@@ -672,6 +674,13 @@
     SYSPICK = (window.SYSTEM_PICKER_MAP && window.SYSTEM_PICKER_MAP.length) ? window.SYSTEM_PICKER_MAP
       : fg.filter(function (g) { return g.group && g.group.indexOf("Vitals") < 0 && g.group.indexOf("MDR") < 0 && g.group.indexOf("Course") < 0; })
            .map(function (g) { return { id: g.group, label: g.group, icon: "•", groups: [g.group] }; });
+    // smd_kb_v2: the new hepatobiliary findings live under the Gastrointestinal system (a copy, so the
+    // shared SYSTEM_PICKER_MAP the classic form reads is never mutated)
+    if (kbV2()) SYSPICK = SYSPICK.map(function (sp) {
+      if (sp.id !== "gastrointestinal" || (sp.groups || []).indexOf("Hepatobiliary imaging / labs") >= 0) return sp;
+      var c = {}; for (var k in sp) c[k] = sp[k];
+      c.groups = (sp.groups || []).concat(["Hepatobiliary imaging / labs"]); return c;
+    });
     return ONT;
   }
   // Cardinal / most-common presenting symptoms, floated to the top of their system's
@@ -833,6 +842,62 @@
   }
   function kbEvalScore(sm, e) { if (!sm) return 0; var i = sm.base || 0; var mo = sm.modifiers || []; for (var n = 0; n < mo.length; n++) if (kbEvalRule(mo[n].when, e)) i += mo[n].add; return i; }
   function kbDisease(id) { return (window.KB_CORE && KB_CORE.diseases) ? KB_CORE.diseases[id] : null; }
+
+  /* smd_kb_v2 (default OFF): the knowledge-base additions of kb/validation/PLAN-DX-ABX-10.md
+   * ("fix this first", 2026-09-27). ?kbv2=1|0 overrides. Read once per page load.
+   * 1. General "Fever" satisfies the infection rules' feverGU. The KB (and app.js's legacy
+   *    SYNDROMES) wrote cholangitis, cholecystitis, SBP, liver abscess, C. diff, diabetic foot and the
+   *    UTIs against feverGU ("Fever with urinary symptoms"), so fever + jaundice + RUQ pain never
+   *    matched cholangitis and the gate said "infection possible"; the same for SBP.
+   * 2. New findings that separate the hepatobiliary infections: known gallstones, dilated CBD /
+   *    biliary obstruction, transaminases > 1000, cholestatic LFTs, ascitic neutrophils >= 250.
+   * 3. Rule fixes: viral hepatitis no longer excluded by RUQ pain when transaminases are > 1000;
+   *    cholangitis also matches on imaging (dilated CBD / stones) without pain.
+   * Pending clinician review. When approved, fold KB_V2_PATCH into kb/diseases/*.json and rebuild. */
+  function kbV2() {
+    try {
+      var q = /[?&]kbv2=([01])\b/.exec((window.location && location.search) || "");
+      if (q) return q[1] === "1";
+      return localStorage.getItem("smd_kb_v2") === "1";
+    } catch (e) { return false; }
+  }
+  var KB_V2_FIELDS = [
+    { key: "knownGallstones", label: "Gallstones (known, or on imaging)" },
+    { key: "dilatedCBD", label: "Dilated CBD / biliary obstruction on imaging" },
+    { key: "transaminasesVeryHigh", label: "ALT / AST > 1000 IU/L" },
+    { key: "cholestaticLFT", label: "Cholestatic LFTs (ALP >= 2x normal)" },
+    { key: "asciticPMNHigh", label: "Ascitic fluid neutrophils >= 250/mm3" }
+  ];
+  var KB_V2_PATCH = {
+    CHOLANGITIS: {
+      rule: { allOf: ["jaundice", { anyOf: ["feverGU", "rigors"] }, { anyOf: ["rightUpperQuadrantPain", "dilatedCBD", "knownGallstones"] }, { not: "singleLesion" }] },
+      add: [{ when: "dilatedCBD", add: 15 }, { when: "knownGallstones", add: 10 }, { when: "cholestaticLFT", add: 10 }, { when: "transaminasesVeryHigh", add: -20 }] },
+    VIRAL_HEPATITIS: {
+      rule: { allOf: ["jaundice", { anyOf: ["fever", "nauseaVomiting"] }, { anyOf: [{ not: "rightUpperQuadrantPain" }, "transaminasesVeryHigh"] }, { not: "dilatedCBD" }] },
+      add: [{ when: "transaminasesVeryHigh", add: 20 }, { when: "cholestaticLFT", add: -10 }, { when: "knownGallstones", add: -10 }] },
+    CHOLECYSTITIS: { add: [{ when: "knownGallstones", add: 10 }, { when: "transaminasesVeryHigh", add: -10 }] },
+    SBP: {
+      rule: { allOf: ["ascites", { anyOf: ["abdominalPain", "feverGU", "alteredSensorium", "asciticPMNHigh"] }] },
+      add: [{ when: "asciticPMNHigh", add: 25 }] },
+    toxic_hepatitis: { find: { transaminasesVeryHigh: 22 } },
+    biliary_colic: { find: { knownGallstones: 20, transaminasesVeryHigh: -10 } },
+    pancreatitis: { find: { knownGallstones: 8 } }
+  };
+  var _kbV2Applied = false;
+  function ensureKbV2() {
+    if (_kbV2Applied || !(window.KB_CORE && KB_CORE.diseases) || !kbV2()) return;
+    var D = KB_CORE.diseases;
+    Object.keys(KB_V2_PATCH).forEach(function (id) {
+      var d = D[id], p = KB_V2_PATCH[id]; if (!d) return;
+      var keys = {};
+      if (p.rule) d.rule = p.rule;
+      if (p.add && d.score) { d.score.modifiers = (d.score.modifiers || []).concat(p.add); p.add.forEach(function (m) { keys[m.when] = 1; }); }
+      if (p.find && d.find) Object.keys(p.find).forEach(function (k) { d.find[k] = p.find[k]; });
+      if (d.assoc) Object.keys(keys).forEach(function (k) { if (d.assoc.indexOf(k) < 0) d.assoc.push(k); });
+    });
+    _kbV2Applied = true;
+    IDF = null; GIDF = null; ASSOC = {};   // specificity tables must see the new findings
+  }
   // KB "why this" reason interpolator — renders the declarative template (no eval).
   function kbRenderNode(node, e) {
     if (!node) return "";
@@ -886,6 +951,7 @@
   function infFindings() {
     var e = {};
     for (var k in S.f) { e[k] = true; (ALIAS[k] || []).forEach(function (a) { e[a] = true; }); }
+    if (_kbV2Applied && S.f.fever) e.feverGU = true;   // smd_kb_v2: the rules' feverGU means fever
     return e;
   }
 
@@ -952,6 +1018,7 @@
   }
 
   function differential() {
+    ensureKbV2();
     buildOntology();
     S.fInf = infFindings();
     S._dom = dominantSystems().dom;
@@ -968,6 +1035,7 @@
     var rk = function (x) { return x.rankScore != null ? x.rankScore : x.score; };
     var by = function (a, b) { return (rk(b) - rk(a)) || (b.score - a.score) || a.name.localeCompare(b.name); };
     if (rankV3()) { inf.forEach(rankV3Adjust); ni.forEach(rankV3Adjust); }
+    if (priorOn()) { PRIOR_CUR = priorCounts(); inf.forEach(priorAdjust); ni.forEach(priorAdjust); }
     inf.sort(by); ni.sort(by);
     return { inf: inf, ni: ni };
   }
@@ -1046,6 +1114,87 @@
     return {};
   }
 
+  /* smd_prior_v1 (default OFF): prevalence prior. ?prior=1|0 overrides.
+   * "Common things are common": a small ORDER-only nudge (rankScore, never score, so the gate class
+   * and every displayed confidence are unchanged) from how often a diagnosis is seen, bounded at
+   * +/-8 so it only separates candidates the findings leave close together. Under smd_gate_v2 the
+   * leading infection can change, and with it the "Need antibiotics?" answer it reads; the v2 rival
+   * rule still keeps antibiotics while an antibiotic-requiring infection is within 30 points.
+   *  - Default: consensus tiers for adult medicine (OPD, ward, ED) in India. ai_drafted, pending
+   *    clinician review; they are ORDINAL, not measured prevalences, and no number is invented.
+   *  - A hospital's own diagnosis counts replace the tier for every diagnosis they cover:
+   *    localStorage "smd_prior_counts" (or window.SMD_PRIOR_COUNTS) = {"DENGUE": 412, "sah": 3, ...}.
+   *    Aggregate counts only, never patient rows.
+   *  - A time-critical diagnosis is never pushed DOWN for being rare (PRIOR_CANT_MISS).
+   * The gold set is balanced across diagnoses by design, so it cannot show whether this helps;
+   * that needs real case-mix data (Phase 6 of kb/validation/PLAN-DX-ABX-10.md). */
+  function priorOn() {
+    try {
+      var q = /[?&]prior=([01])\b/.exec((window.location && location.search) || "");
+      if (q) return q[1] === "1";
+      return localStorage.getItem("smd_prior_v1") === "1";
+    } catch (e) { return false; }
+  }
+  var PRIOR_BONUS = { very_common: 6, common: 3, uncommon: 0, rare: -4, very_rare: -8 };
+  var PRIOR_TIER = {
+    very_common: ["URTI", "PHARYNGITIS", "ACUTE_BRONCHITIS", "GASTROENTERITIS", "CYSTITIS", "CAP", "DENGUE",
+      "tension_ha", "migraine", "gerd_chest", "peptic_ulcer", "anemia_sympt", "asthma_exac"],
+    common: ["MALARIA", "ENTERIC_FEVER", "PYELONEPHRITIS", "COMPLICATED_UTI", "CA_UTI", "CELLULITIS", "DIABETIC_FOOT",
+      "PULMONARY_TB", "COPD_EXACERBATION", "copd_exac_ni", "SINUSITIS", "DYSENTERY", "CHIKUNGUNYA", "VIRAL_HEPATITIS",
+      "SCRUB_TYPHUS", "SEPSIS", "HAP", "ASPIRATION_PNEUMONIA", "CHOLECYSTITIS", "biliary_colic", "renal_colic",
+      "heart_failure", "acs", "atrial_fib", "ischemic_stroke", "hypoglycemia", "dka", "aki", "ckd", "hyponatremia",
+      "seizure_epilepsy", "vasovagal_syncope", "panic", "ibs", "pancreatitis", "decomp_cirrhosis", "crystal_arthritis",
+      "dvt", "alcohol_withdrawal", "drug_intox", "organophosphate"],
+    rare: ["vasculitis", "sle_flare", "sarcoidosis", "ms", "iih", "temporal_arteritis", "pmr", "salicylate_tox",
+      "angioedema_acei", "brain_tumour", "myeloma", "itp", "nephrotic", "glomerulonephritis", "hypercalcemia", "ild",
+      "svc_obstruction", "ncse", "carbamate", "b12_deficiency"],
+    very_rare: ["pheo", "HLH", "sjs_ten", "serotonin_nms", "ttp_hus", "thyroid_storm", "myxedema"]
+  };
+  // time-critical: missing it costs a life or an organ, so rarity never lowers it
+  var PRIOR_CANT_MISS = {};
+  ["MENINGITIS", "ENCEPHALITIS", "SEPSIS", "SEPTIC_SHOCK", "FEBRILE_NEUTROPENIA", "NECROTIZING_FASCIITIS", "CHOLANGITIS",
+    "BRAIN_ABSCESS", "SBP", "SEVERE_CAP", "VAP", "IE", "MIXED_MALARIA", "CNS_TB", "sah", "ich", "ischemic_stroke",
+    "aortic_dissection", "aaa", "pe", "acs", "tamponade", "cardiogenic_shock", "hypovolemic_shock", "anaphylaxis",
+    "adrenal_crisis", "dka", "hhs", "hypoglycemia", "thyroid_storm", "myxedema", "status_epilepticus", "cord_compression",
+    "mesenteric_ischemia", "ttp_hus", "dic", "HLH", "serotonin_nms", "organophosphate", "opioid_od", "hyperkalemia",
+    "variceal_bleed", "gbs", "myasthenic_crisis", "pneumothorax", "htn_emergency", "hypertensive_enceph", "cvt",
+    "wernicke", "acute_limb_ischemia", "delirium_tremens", "sjs_ten"].forEach(function (id) { PRIOR_CANT_MISS[id] = 1; });
+  var PRIOR_OF = null;
+  function priorTierOf(id) {
+    if (!PRIOR_OF) {
+      PRIOR_OF = {};
+      Object.keys(PRIOR_TIER).forEach(function (t) { PRIOR_TIER[t].forEach(function (id) { PRIOR_OF[id] = t; }); });
+    }
+    return PRIOR_OF[id] || "uncommon";
+  }
+  // a hospital's aggregate counts -> +/-8 on the log scale around the median diagnosis (10x = cap)
+  var PRIOR_COUNTS_SRC = null, PRIOR_COUNTS_BONUS = null;
+  function priorCounts() {
+    var raw = null;
+    try { raw = window.SMD_PRIOR_COUNTS || null; if (!raw) { var s = localStorage.getItem("smd_prior_counts"); if (s) raw = JSON.parse(s); } } catch (e) { raw = null; }
+    if (!raw || typeof raw !== "object") return null;
+    var sig = JSON.stringify(raw);
+    if (sig === PRIOR_COUNTS_SRC) return PRIOR_COUNTS_BONUS;
+    var ids = Object.keys(raw).filter(function (k) { return typeof raw[k] === "number" && raw[k] >= 0; });
+    if (!ids.length) return null;
+    var v = ids.map(function (k) { return raw[k] + 1; }).sort(function (a, b) { return a - b; });
+    var med = v[Math.floor(v.length / 2)], out = {};
+    ids.forEach(function (k) { out[k] = Math.max(-8, Math.min(8, 8 * Math.log((raw[k] + 1) / med) / Math.LN10)); });
+    PRIOR_COUNTS_SRC = sig; PRIOR_COUNTS_BONUS = out;
+    return out;
+  }
+  var PRIOR_CUR = null;   // the counts in force for this differential (read once, not per candidate)
+  function priorBonus(id) {
+    var c = PRIOR_CUR, b = (c && c[id] != null) ? c[id] : PRIOR_BONUS[priorTierOf(id)];
+    if (b < 0 && PRIOR_CANT_MISS[id]) b = 0;
+    return b;
+  }
+  function priorAdjust(r) {
+    var b = priorBonus(r.id);
+    r.prior = b;
+    r.rankScore = (r.rankScore != null ? r.rankScore : r.score) + b;
+  }
+
   /* smd_gate_v2 (default OFF): Phase 1 of kb/validation/PLAN-DX-ABX-10.md. ?gatev2=1|0 overrides.
    * (a) The gate reads what the app's own stewardship dataset already tells the doctor under
    *     "Need antibiotics?" (ASP_DATA.needAbx) for the leading infection: NO (viral, self-limited),
@@ -1087,12 +1236,20 @@
   function gateV2Apply(g, d, f) {
     // (b) can't-miss rules. SBP: cirrhosis + ascites with fever -> infection likely; with only
     // abdominal pain or encephalopathy -> rule it out (diagnostic paracentesis) before deciding.
-    var sbpSign = f.fever || f.rigors, sbpSoft = f.abdominalPain || f.abdominalDiscomfort || f.severeAbdominalPain || f.alteredSensorium || f.asterixis;
+    var sbpSign = f.fever || f.rigors || f.asciticPMNHigh, sbpSoft = f.abdominalPain || f.abdominalDiscomfort || f.severeAbdominalPain || f.alteredSensorium || f.asterixis;
     if (f.liverDisease && f.ascites && (sbpSign || sbpSoft) &&
         (g.cls === "possible" || g.cls === "unlikely" || g.cls === "noninfective" || g.cls === "none")) {
       g.cls = sbpSign ? "likely" : "rule_out_sbp"; g.rule = "sbp";
       // the stewardship card must be SBP's, never another infection's regimen under an SBP banner
       g.lead = d.inf.filter(function (x) { return x.id === "SBP"; })[0] || null;
+      return;
+    }
+    // fever with shock physiology and no non-infectious cause leading: sepsis until proven otherwise
+    // (the classic override needs an infection syndrome scoring 38+, so fever + hypotension alone
+    // read "infection unlikely, antibiotics not recommended yet")
+    if ((f.fever || f.rigors) && (f.hypotension || f.lactateElevated || f.vasopressorRequirement) &&
+        (g.cls === "unlikely" || g.cls === "possible" || g.cls === "none")) {
+      g.cls = "likely"; g.rule = "sepsis_phys";
       return;
     }
     if (f.liverDisease && (f.hematemesis || f.melena || f.gibPresentation) && g.cls !== "very_likely" && g.cls !== "likely") {
@@ -1106,7 +1263,7 @@
     var mods = GATE_V2_KEEP.filter(function (k) { return f[k]; });
     if (mods.length) { g.rule = "keep_modifier"; g.need = need; g.why = mods.map(function (k) { try { return lbl(k); } catch (e) { return k; } }).join(", "); return; }
     // A competing infection that DOES need antibiotics keeps them: within 30 points of the lead, or
-    // a time-critical one (decision status red) at 42+. The engine's lead can be wrong (viral
+    // a time-critical one (decision status red) at 42+ whose criteria are met. The engine's lead can be wrong (viral
     // hepatitis leading a leptospirosis or SBP picture); this stops a ranking miss from becoming
     // "no antibiotics".
     var rivalYes = null, rivalCond = null;
@@ -1116,7 +1273,9 @@
       if (v3 && rankV3Excluded(x, f)) return;   // smd_rank_v3: an excluded rival cannot hold antibiotics on
       var n = abxNeed(x), close = x.score >= lead.score - 30;
       var critical = x._syn && x._syn.decision && x._syn.decision.status === "red";
-      if (n === "YES" && (close || critical) && (!rivalYes || x.score > rivalYes.score)) rivalYes = x;
+      // a time-critical rival counts from any distance only when its criteria are met (x.matched);
+      // an unmatched one is keyword overlap and must be within the 30 points like any other
+      if (n === "YES" && (close || (critical && x.matched)) && (!rivalYes || x.score > rivalYes.score)) rivalYes = x;
       else if (n === "CONDITIONAL" && close && !rivalCond) rivalCond = x;
     });
     if (rivalYes) { g.rule = "keep_rival"; g.need = need; g.whyFor = rivalYes.name; return; }
@@ -1167,7 +1326,38 @@
     }
     var out = { cls: cls, topInf: topInf, topNi: topNi, lead: d.inf[0] || null };
     if (v2) gateV2Apply(out, d, f);
+    // smd_calib: non-diagnostic findings (fever alone) say so instead of "non-infectious diagnosis
+    // favored". Never replaces "infection likely / very likely" or a v2 rule, so a sepsis or
+    // neutropenia signal cannot be hidden behind "not enough information".
+    if (calibOn()) {
+      out.enough = enoughInfo(d, f);
+      if (!out.enough && (out.cls === "possible" || out.cls === "unlikely" || out.cls === "noninfective" || out.cls === "none") && !out.rule) out.cls = "insufficient";
+    }
     return out;
+  }
+  /* smd_calib (default OFF): Phase 4 of kb/validation/PLAN-DX-ABX-10.md, first part. ?calib=1|0.
+   * "Enough information" = the long-standing SMD_REASON.thresholdMet() rule, applied to the engine's
+   * own answer: 3+ clinical findings (age / sex / lab-value fields do not count), or one highly
+   * specific finding (IDF >= 1.7), or an infection whose criteria are met. */
+  function calibOn() {
+    try {
+      var q = /[?&]calib=([01])\b/.exec((window.location && location.search) || "");
+      if (q) return q[1] === "1";
+      return localStorage.getItem("smd_calib") === "1";
+    } catch (e) { return false; }
+  }
+  var CALIB_SKIP = { age: 1, sex: 1, ageOver50: 1 };
+  // a red-flag finding is never "not enough information": the answer to possible shock is urgency
+  var CALIB_RED = { hypotension: 1, lactateElevated: 1, raised_lactate: 1, vasopressorRequirement: 1, alteredSensorium: 1, hypoxia: 1,
+    neckStiffness: 1, focalNeuroDeficit: 1, seizure: 1, thunderclapHeadache: 1, ascendingWeakness: 1, petechialRash: 1, hematemesis: 1,
+    melena: 1, crepitusOrBullae: 1, neutropenia: 1, absoluteNeutrophilCountLow: 1, miosisSecretions: 1, organDysfunction: 1 };
+  function enoughInfo(d, f) {
+    var numeric = {};
+    (window.FIELD_GROUPS || []).forEach(function (g) { (g.fields || []).forEach(function (fl) { if (fl.type === "number" || fl.type === "select") numeric[fl.key] = 1; }); });
+    var keys = Object.keys(f || {}).filter(function (k) { return f[k] && !numeric[k] && !CALIB_SKIP[k]; });
+    if (keys.length >= 3 || keys.some(function (k) { return CALIB_RED[k]; })) return true;
+    computeIDF(); for (var i = 0; i < keys.length; i++) if ((IDF[keys[i]] || 0) >= 1.7) return true;
+    return d.inf.some(function (x) { return x.matched; });
   }
   var GATEINFO = {
     very_likely:  { t: "Infection very likely", c: "g-red",    ab: true },
@@ -1181,7 +1371,9 @@
     infection_conditional: { t: "Infection likely, antibiotics only if criteria met", c: "g-amber", ab: true },
     infection_specific:    { t: "Infection likely, specific therapy (not antibiotics)", c: "g-orange", ab: false },
     abx_prophylaxis:       { t: "Antibiotic prophylaxis indicated", c: "g-orange", ab: true },
-    rule_out_sbp:          { t: "Rule out spontaneous bacterial peritonitis", c: "g-amber", ab: true }
+    rule_out_sbp:          { t: "Rule out spontaneous bacterial peritonitis", c: "g-amber", ab: true },
+    // smd_calib only
+    insufficient:          { t: "Not enough information yet", c: "g-slate", ab: false }
   };
   function gateMsg(g) {
     var m = gateMsgRaw(g);
@@ -1196,7 +1388,7 @@
       g.rule === "keep_modifier" ? lead + " leads and does not need antibiotics on its own" + own + ", but these change that: " + g.why + ". Cover a bacterial infection empirically and reassess with cultures. " : "";
     switch (g.cls) {
       case "very_likely": return kept + "Infection leads the differential — empiric antimicrobial therapy is appropriate. Select the diagnosis to open its stewardship recommendation.";
-      case "likely": return kept + (g.rule === "sbp" ? "Can't-miss: spontaneous bacterial peritonitis. Cirrhosis with ascites plus fever, abdominal pain or encephalopathy: do a diagnostic paracentesis now and treat if ascitic neutrophils are 250/mm3 or more (at once if the patient is septic). " : "") +
+      case "likely": return kept + (g.rule === "sepsis_phys" ? "Can't-miss: fever with shock physiology and no non-infective cause leading. Treat as sepsis until proven otherwise: blood cultures, then antibiotics within the hour, and look for the source. " : "") + (g.rule === "sbp" ? "Can't-miss: spontaneous bacterial peritonitis. Cirrhosis with ascites plus fever, abdominal pain or encephalopathy: do a diagnostic paracentesis now and treat if ascitic neutrophils are 250/mm3 or more (at once if the patient is septic). " : "") +
         "Infection is the leading consideration — empiric therapy may be warranted after cultures. Confirm before prescribing.";
       case "infection_no_abx": return (lead ? lead + " leads, and it does not need antibiotics. " : "") + (g.why ? g.why + " " : "") +
         "Reassess if bacterial features, sepsis or immunosuppression appear.";
@@ -1204,6 +1396,7 @@
         (g.why ? ": " + g.why : ".") + " Check them before prescribing.";
       case "infection_specific": return (lead ? lead + " leads. " : "") + (g.why ? g.why + " " : "") +
         "Antibiotics only for a proven or strongly suspected bacterial co-infection.";
+      case "insufficient": return "These findings do not point to a diagnosis yet, so no infection or antibiotic call is made. The list below is only what they are compatible with. Add examination findings, vitals or key labs; the most useful next ones are suggested.";
       case "rule_out_sbp": return "Can't-miss: spontaneous bacterial peritonitis. Cirrhosis with ascites and abdominal pain or encephalopathy: do a diagnostic paracentesis now. Treat if ascitic neutrophils are 250/mm3 or more, or at once if fever, sepsis or shock develops.";
       case "abx_prophylaxis": return "Cirrhosis with gastrointestinal bleeding: short-course antibiotic prophylaxis is indicated (for example ceftriaxone 1 g daily for up to 7 days; Baveno VII). It lowers infection, rebleeding and mortality; it is not treatment of a diagnosed infection.";
       case "possible": return "Infection is in the differential but not dominant — pursue targeted investigations before antibiotics.";
@@ -1573,6 +1766,11 @@
     headInjury: ["head injury", "hit his head", "hit her head", "trauma to head", "fall on the head", "fell and hit"],
     alcoholExcess: ["alcohol abuse", "alcohol dependence", "alcohol excess", "heavy alcohol", "chronic alcohol", "heavy drinker", "chronic drinker", "binge drinking", "alcohol use disorder"],
     subacuteOnset: ["subacute", "insidious", "gradual onset", "gradually progressive", "over weeks"],
+    // smd_kb_v2 findings (only extracted when those keys exist)
+    knownGallstones: ["gallstone", "gall stone", "cholelithiasis", "gallbladder calculi", "gall bladder calculi", "gb calculi", "gb stones", "calculous cholecystitis"],
+    dilatedCBD: ["dilated cbd", "cbd dilated", "cbd dilatation", "dilated common bile duct", "common bile duct dilated", "biliary dilatation", "dilated intrahepatic",
+      "ihbrd", "cbd stone", "choledocholithiasis", "obstructive jaundice", "biliary obstruction"],
+    cholestaticLFT: ["cholestatic", "raised alp", "elevated alp", "raised alkaline phosphatase", "elevated alkaline phosphatase"],
     renalImpairment: ["acute kidney injury", " aki ", " aki,", " aki.", "renal failure", "renal impairment", "raised creatinine", "deranged renal", "kidney injury", "uraemi", "uremi"]
   };
   var FT_SYN_V2 = (function () {
@@ -2878,6 +3076,9 @@
     var discriminative = false;
     for (var fk in S.f) { if ((IDF[fk] || 0) >= 1.7) { discriminative = true; break; } }
     var ready = nFind >= 3 || discriminative || d.inf.some(function (x) { return x.matched; });
+    // smd_calib: the same rule the engine's answer uses, which also treats a red flag (hypotension,
+    // altered sensorium, neutropenia...) as enough, so a possible sepsis picture is never hidden here
+    if (calibOn()) ready = enoughInfo(d, S.f);
     var gateEl = root.querySelector("#dxGate"), polEl = root.querySelector("#dxPolicy"),
         chEl = root.querySelector("#dxChanged"), colEl = root.querySelector("#dxCols");
     var domEl = root.querySelector("#dxDom");
@@ -2898,9 +3099,15 @@
     }
 
     var g = gate(d), info = GATEINFO[g.cls];
+    // smd_calib: when the findings are not enough, name the most useful next ones on the card itself
+    var nextHtml = "";
+    if (g.cls === "insufficient") {
+      var nx = []; try { nx = suggestionKeys(d).slice(0, 5); } catch (e) {}
+      if (nx.length) nextHtml = '<div class="dx-gate-m dx-gate-next"><b>Most useful next:</b> ' + nx.map(function (k) { return esc(LABEL[k] || k); }).join(", ") + '</div>';
+    }
     root.querySelector("#dxGate").innerHTML =
       '<div class="dx-gate-card ' + info.c + '"><div class="dx-gate-t">' + esc(info.t) + '</div>' +
-      (gateMsg(g) ? '<div class="dx-gate-m">' + esc(gateMsg(g)) + '</div>' : '') +
+      (gateMsg(g) ? '<div class="dx-gate-m">' + esc(gateMsg(g)) + '</div>' : '') + nextHtml +
       '</div>';
     renderPolicy(g);
     renderChanged(d);
@@ -4055,6 +4262,8 @@
       document.body.classList.add("dx-lock");
     },
     _kbOpen: kbOpen, // test seam: Knowledge Library / global-search entry point (not user-facing API)
+    _calib: calibOn, // smd_calib on? (opd-emr.js withholds a provisional dx when information is insufficient)
+    _prior: priorOn, // smd_prior_v1 on? (opd-emr.js orders from the engine rank when it is)
     _rankV3: rankV3, // smd_rank_v3 on? (opd-emr.js clinicalRerank orders from the engine rank when it is)
     _assess: function () {
       var d = differential(), g = gate(d), info = GATEINFO[g.cls];
@@ -4115,6 +4324,11 @@
           suggestions: (function () { try { return suggestionKeys(d); } catch (e) { return []; } })() };
         // smd_gate_v2 only: why the gate moved and the message the workspace shows
         if (g.why || g.rule) { out.gate.why = g.why || ""; out.gate.rule = g.rule || null; out.gate.message = gateMsg(g); }
+        // smd_calib only: is there enough to rank at all, and what to ask next
+        if (g.enough != null) {
+          out.sufficiency = { enough: g.enough, next: (out.suggestions || []).slice(0, 6).map(function (k) { return { key: k, label: LABEL[k] || k }; }) };
+          if (g.cls === "insufficient") out.gate.message = gateMsg(g);
+        }
       } catch (e) { out = { gate: {}, infectious: [], nonInfectious: [], suggestions: [] }; }
       if (restore) S.f = restore;
       S.neg = restoreNeg;
