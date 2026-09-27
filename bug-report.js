@@ -1,4 +1,6 @@
-/* bug-report.js - shake the phone to report a bug, and the Bug Report Centre.
+/* bug-report.js - Help & Support: shake to report a bug, questions, feedback, one live chat centre.
+ * (2026-09-27: the Bug Report Centre, "Help & support" and "Send Feedback" became ONE centre,
+ *  window.SMD_HELP / SMD_BUGS; see the "Help & Support centre" section below.)
  * ============================================================================================
  * Owner request 2026-09-26: "shake the iphone to report a bug feature where bugs are directly save
  * in our server where user can point out the button or screen whatever and write what is the
@@ -8,7 +10,7 @@
  * Flow: shake -> the screen is captured (html2canvas, lazy) BEFORE any sheet appears -> "Point at
  * the problem" (tap the button or area; it is outlined on the screenshot) or "Whole screen" ->
  * "What went wrong?" -> sent to /api/support {action:"bug"} as a ticket of kind "bug" with a fix
- * promised within 24 hours -> the Bug Report Centre (sidebar) lists every report with its status,
+ * promised within 24 hours -> Help & Support (sidebar) lists every conversation with its status,
  * the time left, and the developer's replies; the doctor can answer back. Replies from the owner
  * arrive as a push (admin console, Support pane).
  *
@@ -199,6 +201,9 @@
     check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
     back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>',
     close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+    chat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/><path d="M8.5 11h7M8.5 14h4.5"/></svg>',
+    spark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z"/><path d="M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8Z"/></svg>',
+    send: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>',
     clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
   };
   function styleOnce() {
@@ -243,34 +248,64 @@
       "#bugrPick .bp-box{position:absolute;border:3px solid #e5484d;border-radius:8px;box-shadow:0 0 0 9999px rgba(8,12,18,.35);pointer-events:none;transition:all .12s}",
       "#" + C + "{position:fixed;inset:0;z-index:2147482990;display:none;flex-direction:column;background:var(--bg);color:var(--ink);font-family:var(--f)}",
       "#" + C + ".on{display:flex}",
-      "#" + C + " .bc-head{display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 12px;border-bottom:1px solid var(--line)}",
-      "#" + C + " .bc-head b{flex:1;font:800 19px var(--f)}",
-      "#" + C + " .bc-ic{width:40px;height:40px;border:0;border-radius:12px;background:var(--soft);color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer}",
+      "#" + C + " .bc-head{display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 10px;border-bottom:1px solid var(--line);background:var(--bg)}",
+      "#" + C + " .bc-ttl{flex:1;min-width:0}#" + C + " .bc-ttl b{display:block;font:800 18px/1.2 var(--f);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+      "#" + C + " .bc-ttl small{display:block;margin-top:3px;font:600 12px var(--f);color:var(--mut)}",
+      "#" + C + " .bc-ic{width:40px;height:40px;border:0;border-radius:12px;background:var(--soft);color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto}",
       "#" + C + " .bc-ic svg{width:20px;height:20px}",
-      "#" + C + " .bc-body{flex:1;overflow-y:auto;padding:14px 16px calc(env(safe-area-inset-bottom,0px) + 20px);-webkit-overflow-scrolling:touch}",
-      "#" + C + " .bc-new{width:100%;min-height:50px;border:0;border-radius:15px;background:linear-gradient(140deg,var(--acc),var(--acc2));color:#fff;font:800 15.5px var(--f);display:flex;gap:10px;align-items:center;justify-content:center;cursor:pointer}",
-      "#" + C + " .bc-new svg{width:20px;height:20px}",
-      "#" + C + " .bc-promise{font:500 13px/1.5 var(--f);color:var(--mut);margin:10px 2px 14px}",
-      "#" + C + " .bc-tg{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;background:var(--soft);margin-bottom:16px}",
+      "#" + C + " .bc-body{flex:1;overflow-y:auto;padding:16px 16px calc(env(safe-area-inset-bottom,0px) + 20px);-webkit-overflow-scrolling:touch;overscroll-behavior:contain}",
+      "#" + C + " .bc-body.chat{padding-bottom:12px;background:var(--soft)}",
+      "#" + C + " .hs-hero{padding:6px 2px 16px}",
+      "#" + C + " .hs-hi{font:700 15px var(--f);color:var(--mut)}#" + C + " .hs-q{font:800 26px/1.15 var(--f);letter-spacing:-.02em;margin:2px 0 10px}",
+      "#" + C + " .hs-team{display:flex;gap:8px;align-items:flex-start;font:500 13px/1.45 var(--f);color:var(--mut)}",
+      "#" + C + " .hs-live{width:9px;height:9px;border-radius:50%;background:var(--ok);flex:0 0 auto;margin-top:4px;box-shadow:0 0 0 3px rgba(31,157,99,.18)}",
+      "#" + C + " .hs-acts{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}",
+      "#" + C + " .hs-act{display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:15px;border-radius:18px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;box-shadow:0 1px 2px rgba(15,23,42,.05)}",
+      "#" + C + " .hs-act svg{width:24px;height:24px;color:#fff;background:linear-gradient(140deg,var(--acc),var(--acc2));padding:9px;border-radius:13px;flex:0 0 auto;box-sizing:content-box}",
+      "#" + C + " .hs-act b{display:block;font:800 15.5px var(--f)}#" + C + " .hs-act small{display:block;font:500 12.5px/1.4 var(--f);color:var(--mut);margin-top:2px}",
+      "#" + C + " .hs-sec{font:800 12px var(--f);letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin:0 2px 6px}",
+      "#" + C + " .bc-row{display:flex;gap:12px;align-items:flex-start;padding:13px 4px;border-bottom:1px solid var(--line);cursor:pointer}",
+      "#" + C + " .bc-kic{width:36px;height:36px;border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:var(--acc)}",
+      "#" + C + " .bc-kic svg{width:19px;height:19px}#" + C + " .bc-kic.k-bug{color:var(--red)}#" + C + " .bc-kic.k-feedback{color:var(--amber)}",
+      "#" + C + " .bc-row .m{flex:1;min-width:0}",
+      "#" + C + " .bc-row .r1{display:flex;gap:8px;align-items:baseline}#" + C + " .bc-row .r1 b{flex:1;min-width:0;font:700 14.5px/1.35 var(--f);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+      "#" + C + " .bc-row time{font:600 11.5px var(--f);color:var(--mut);flex:0 0 auto}",
+      "#" + C + " .bc-row .r2{display:flex;gap:8px;align-items:center;margin-top:3px}#" + C + " .bc-row .pv{flex:1;min-width:0;font:500 13px/1.4 var(--f);color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+      "#" + C + " .bc-row.unread .pv{color:var(--ink);font-weight:700}#" + C + " .bc-row.unread .r1 b{font-weight:800}",
+      "#" + C + " .bc-row .r3{display:flex;gap:6px;align-items:center;margin-top:6px}#" + C + " .chip{font:800 10.5px var(--f);text-transform:uppercase;letter-spacing:.04em;color:var(--mut);background:var(--soft);padding:4px 7px;border-radius:7px}",
+      "#" + C + " .bc-dot{width:10px;height:10px;border-radius:50%;background:var(--acc);flex:0 0 auto}",
+      "#" + C + " .bc-pill{font:800 11.5px var(--f);padding:4px 8px;border-radius:999px;background:var(--soft);color:var(--amber);white-space:nowrap}",
+      "#" + C + " .bc-pill.ok{color:var(--ok)}#" + C + " .bc-pill.late{color:var(--red)}",
+      "#" + C + " .bc-empty{text-align:center;color:var(--mut);font:500 14px/1.5 var(--f);padding:26px 12px}",
+      "#" + C + " .bc-tg{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;background:var(--soft);margin:20px 0 8px}",
       "#" + C + " .bc-tg div{flex:1;font:700 14px var(--f)}#" + C + " .bc-tg small{display:block;font:500 12.5px var(--f);color:var(--mut);margin-top:2px}",
       "#" + C + " .bc-sw{width:48px;height:28px;border-radius:14px;border:0;background:var(--line);position:relative;cursor:pointer;flex:0 0 auto}",
       "#" + C + " .bc-sw span{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .15s;box-shadow:0 1px 3px rgba(0,0,0,.3)}",
       "#" + C + " .bc-sw.on{background:var(--acc)}#" + C + " .bc-sw.on span{left:23px}",
-      "#" + C + " .bc-row{display:flex;gap:12px;align-items:center;padding:13px 4px;border-bottom:1px solid var(--line);cursor:pointer}",
-      "#" + C + " .bc-row .m{flex:1;min-width:0}",
-      "#" + C + " .bc-row b{display:block;font:700 14.5px/1.35 var(--f);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
-      "#" + C + " .bc-row small{display:block;font:500 12.5px var(--f);color:var(--mut);margin-top:3px}",
-      "#" + C + " .bc-dot{width:9px;height:9px;border-radius:50%;background:var(--red);flex:0 0 auto}",
-      "#" + C + " .bc-pill{font:800 11.5px var(--f);padding:5px 9px;border-radius:999px;background:var(--soft);color:var(--amber);white-space:nowrap}",
-      "#" + C + " .bc-pill.ok{color:var(--ok)}#" + C + " .bc-pill.late{color:var(--red)}",
-      "#" + C + " .bc-empty{text-align:center;color:var(--mut);font:500 14px/1.5 var(--f);padding:36px 12px}",
-      "#" + C + " .bc-msg{margin:8px 0;padding:10px 12px;border-radius:14px;max-width:86%;font:500 14px/1.45 var(--f);white-space:pre-wrap;background:var(--soft)}",
-      "#" + C + " .bc-msg.dev{margin-left:auto;background:var(--acc);color:#fff}",
-      "#" + C + " .bc-msg small{display:block;font:800 10.5px var(--f);opacity:.75;margin-bottom:3px}",
-      "#" + C + " .bc-shot{max-width:160px;border-radius:12px;border:1px solid var(--line);margin:4px 0 10px}",
-      "#" + C + " textarea{width:100%;box-sizing:border-box;min-height:80px;border-radius:14px;border:1px solid var(--line);background:var(--soft);color:var(--ink);font:500 15px/1.45 var(--f);padding:12px;margin-top:10px}",
-      "#" + C + " .bc-send{margin-top:8px;min-height:46px;width:100%;border:0;border-radius:14px;background:var(--acc);color:#fff;font:800 15px var(--f);cursor:pointer}",
-      "#" + C + " .bc-meta{font:500 12.5px/1.5 var(--f);color:var(--mut);margin:2px 0 10px}",
+      "#" + C + " .hs-note{font:500 12px var(--f);color:var(--mut);text-align:center;margin:10px 0 0}",
+      "#" + C + " .hs-thread{display:flex;flex-direction:column;gap:6px}",
+      "#" + C + " .hs-day{align-self:center;font:700 11.5px var(--f);color:var(--mut);background:var(--bg);padding:4px 10px;border-radius:999px;margin:8px 0 4px}",
+      "#" + C + " .hs-b{max-width:82%;padding:9px 12px 6px;border-radius:18px;font:500 15px/1.42 var(--f);box-shadow:0 1px 1px rgba(15,23,42,.06)}",
+      "#" + C + " .hs-b.them{align-self:flex-start;background:var(--bg);color:var(--ink);border-bottom-left-radius:6px}",
+      "#" + C + " .hs-b.me{align-self:flex-end;background:linear-gradient(140deg,var(--acc),var(--acc2));color:#fff;border-bottom-right-radius:6px}",
+      "#" + C + " .hs-b.pending{opacity:.7}",
+      "#" + C + " .hs-who{font:800 11px var(--f);color:var(--acc);margin-bottom:2px}",
+      "#" + C + " .hs-tx{white-space:pre-wrap;word-wrap:break-word}",
+      "#" + C + " .hs-ts{font:600 10.5px var(--f);opacity:.7;text-align:right;margin-top:3px}",
+      "#" + C + " .hs-bug{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:12px}",
+      "#" + C + " .hs-bug-h{display:flex;gap:8px;align-items:center;font:800 13.5px var(--f)}#" + C + " .hs-bug-h svg{width:18px;height:18px;color:var(--red)}",
+      "#" + C + " .hs-bug-l{font:500 12.5px/1.45 var(--f);color:var(--mut);margin-top:6px}",
+      "#" + C + " .bc-shot{max-width:150px;border-radius:12px;border:1px solid var(--line);margin-top:10px;display:block}",
+      "#" + C + " .hs-solved{display:flex;gap:8px;align-items:center;justify-content:center;font:600 12.5px var(--f);color:var(--ok);margin:14px 0 4px}#" + C + " .hs-solved svg{width:16px;height:16px}",
+      "#" + C + " .hs-comp{display:flex;gap:8px;align-items:flex-end;padding:10px 12px calc(env(safe-area-inset-bottom,0px) + 10px);border-top:1px solid var(--line);background:var(--bg)}",
+      "#" + C + " .hs-comp textarea{flex:1;min-height:42px;max-height:140px;resize:none;box-sizing:border-box;border-radius:21px;border:1px solid var(--line);background:var(--soft);color:var(--ink);font:500 15.5px/1.4 var(--f);padding:10px 14px}",
+      "#" + C + " .hs-send{width:42px;height:42px;border-radius:50%;border:0;background:var(--line);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;transition:background .15s}",
+      "#" + C + " .hs-send.ready{background:linear-gradient(140deg,var(--acc),var(--acc2))}#" + C + " .hs-send svg{width:20px;height:20px}",
+      "#hsToast{position:fixed;left:12px;right:12px;top:calc(env(safe-area-inset-top,0px) + 10px);z-index:2147482995;display:flex;gap:12px;align-items:center;text-align:left;padding:12px 14px;border:0;border-radius:18px;background:#0f172a;color:#fff;box-shadow:0 12px 30px rgba(0,0,0,.3);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;cursor:pointer;animation:hsIn .3s cubic-bezier(.2,.9,.3,1) both;transition:opacity .35s,transform .35s}",
+      "#hsToast.out{opacity:0;transform:translateY(-12px)}",
+      "@keyframes hsIn{from{transform:translateY(-16px);opacity:0}to{transform:none;opacity:1}}",
+      "#hsToast .hs-t-ic{width:36px;height:36px;border-radius:12px;background:#2fc4b0;color:#06201c;display:flex;align-items:center;justify-content:center;flex:0 0 auto}#hsToast .hs-t-ic svg{width:20px;height:20px}",
+      "#hsToast .hs-t-m{flex:1;min-width:0}#hsToast b{display:block;font:800 14px/1.3 inherit}#hsToast .hs-t-m span{display:block;font:500 13px/1.35 inherit;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
       "@media (prefers-reduced-motion:reduce){#" + R + " .bg-card{animation:none}}"
     ].join("\n");
     document.head.appendChild(st);
@@ -409,10 +444,10 @@
       '<div class="bg-t">Thank you. We are on it.</div>' +
       (t ? '<p class="bg-s">Your report <b>' + esc(t.id) + '</b> is with the StewardMD team.</p>'
          : '<p class="bg-s">You are offline, so the report is saved on this phone and will be sent as soon as you are connected.</p>') +
-      '<div class="bg-sla">' + ICO.clock + '<span>We will fix it within 24 hours and reply to you in the Bug Report Centre in the menu.</span></div>' +
-      '</div><div class="bg-foot"><button type="button" class="bg-btn" id="bgDone">Done</button><button type="button" class="bg-alt" id="bgOpenC">Open Bug Report Centre</button></div>');
+      '<div class="bg-sla">' + ICO.clock + '<span>We will fix it within 24 hours and reply to you in Help &amp; Support in the menu.</span></div>' +
+      '</div><div class="bg-foot"><button type="button" class="bg-btn" id="bgDone">Done</button><button type="button" class="bg-alt" id="bgOpenC">Open Help &amp; Support</button></div>');
     el.querySelector("#bgDone").onclick = closeReport;
-    el.querySelector("#bgOpenC").onclick = function () { closeReport(); openCentre(); };
+    el.querySelector("#bgOpenC").onclick = function () { closeReport(); openCentre(t ? { ticket: t.id } : null); };
   }
   function failStep(msg) {
     var el = sheet('<div class="bg-body"><div class="bg-grab"></div><div class="bg-t">Could not send</div><p class="bg-s">' + esc(msg) + '</p></div><div class="bg-foot"><button type="button" class="bg-btn" id="bgDone">OK</button></div>');
@@ -435,121 +470,295 @@
     }, Promise.resolve()).then(function () { lsSet(OUTBOX, JSON.stringify(left)); _flushing = false; if (sent) refresh(); return sent; });
   }
 
-  /* ── Bug Report Centre ───────────────────────────────────────────────────────────────────── */
-  var _tickets = [], _unread = 0, _open = null;
-  function bugs(ts) { return (ts || []).filter(function (t) { return t.kind === "bug"; }); }
+  /* ── Help & Support centre (one place: bugs, questions, feedback), live chat ─────────────────
+   * Owner 2026-09-27: "rather than having feedback, help and support, bug centre three different
+   * tabs, one single Help & support centre, world class, with real time chatting. I replied
+   * immediately but it never reached the user". Conversations are the support tickets
+   * (functions/_support.js, kinds bug | help | feedback). The chat is live: while it is open the
+   * app polls /api/support?live=1&after=<seq> (D1, strongly consistent) every few seconds, and more
+   * slowly in the background for the badge; a KV re-read is the fallback when live is unavailable. */
+  var _tickets = [], _unread = 0, _open = null, _compose = null, _seq = null, _live = true, _pollT = 0, _lastFull = 0;
+  var POLL_THREAD = 2500, POLL_LIST = 5000, POLL_BG = 30000, FULL_EVERY = 60000;
+  var KIND = { bug: { label: "Bug", icon: "bug" }, help: { label: "Question", icon: "chat" }, feedback: { label: "Feedback", icon: "spark" } };
   function unread() { return _unread; }
+  function kindOf(t) { return (t && KIND[t.kind]) ? t.kind : "help"; }
+  function byId(id) { return _tickets.filter(function (x) { return x.id === id; })[0] || null; }
+  function sortTickets() { _tickets.sort(function (a, b) { return (b.updatedAt || b.createdAt || 0) - (a.updatedAt || a.createdAt || 0); }); }
+  function countUnread() { _unread = _tickets.filter(function (t) { return t.userUnread; }).length; paintBadge(); }
   function refresh() {
     if (!user()) return Promise.resolve([]);
     return api("GET", "").then(function (r) {
-      _tickets = bugs(r && r.tickets);
-      _unread = _tickets.filter(function (t) { return t.userUnread; }).length;
-      paintBadge();
+      if (r && r.tickets) {
+        // Keep live-only state (seen receipts) across a full re-read.
+        var prev = {}; _tickets.forEach(function (t) { prev[t.id] = t; });
+        _tickets = r.tickets.map(function (t) { var p = prev[t.id]; if (p && p._seenAt && !t.supportSeenAt) t.supportSeenAt = p._seenAt; return t; });
+        sortTickets(); countUnread(); _lastFull = Date.now();
+      }
       return _tickets;
     }, function () { return _tickets; });
   }
   function paintBadge() {
     try {
-      var row = document.querySelector('[data-sbr-act="bugs"]'); if (!row) return;
-      var b = row.querySelector(".sbr-badge");
-      if (_unread) { if (!b) { b = document.createElement("span"); b.className = "sbr-badge"; row.appendChild(b); } b.textContent = String(_unread); }
-      else if (b) b.remove();
+      ['[data-sbr-act="help"]', '[data-sbr-act="bugs"]'].forEach(function (sel) {
+        var row = document.querySelector(sel); if (!row) return;
+        var b = row.querySelector(".sbr-badge");
+        if (_unread) { if (!b) { b = document.createElement("span"); b.className = "sbr-badge"; row.appendChild(b); } b.textContent = String(_unread); }
+        else if (b) b.remove();
+      });
     } catch (e) {}
   }
-  // "Fix due in 5 h" / "Overdue, we are on it" / "Fixed"
+  // "Fix due in 5 h" / "Overdue, we are on it" / "Fixed" (bugs); "Solved" / "Open" (the rest)
   function slaText(t, now) {
     now = now || Date.now();
-    if (t.status === "resolved") return { txt: "Fixed", cls: "ok" };
+    if (t.status === "resolved") return { txt: t.kind === "bug" ? "Fixed" : "Solved", cls: "ok" };
+    if (t.kind !== "bug") return { txt: t.status === "in_progress" ? "Working on it" : "Open", cls: "" };
     var left = (t.dueAt || (t.createdAt + 86400000)) - now;
     if (left <= 0) return { txt: "Overdue, we are on it", cls: "late" };
     var h = Math.ceil(left / 3600000);
-    // The developer picked it up from the admin Bug Centre ("Working on it").
     if (t.status === "in_progress") return { txt: h <= 1 ? "Working on it, due within the hour" : "Working on it, due in " + h + " h", cls: "" };
     return { txt: h <= 1 ? "Fix due within the hour" : "Fix due in " + h + " h", cls: "" };
   }
   function when(ts) { try { return new Date(ts).toLocaleString([], { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } }
-  function centreShell(inner, sub) {
+  function clock(ts) { try { return new Date(ts).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } }
+  function dayLabel(ts) {
+    try { var d = new Date(ts), n = new Date(); var y = new Date(n.getTime() - 86400000);
+      if (d.toDateString() === n.toDateString()) return "Today"; if (d.toDateString() === y.toDateString()) return "Yesterday";
+      return d.toLocaleDateString([], { day: "numeric", month: "short" }); } catch (e) { return ""; }
+  }
+  function firstName() {
+    try { var u = user(); var n = (u && (u.displayName || "")) || ""; n = n.replace(/^dr\.?\s+/i, "").split(/\s+/)[0]; return n ? "Dr " + n : ""; } catch (e) { return ""; }
+  }
+
+  /* ── live events ── */
+  function applyEvents(evs) {
+    var fresh = [], need = false;
+    (evs || []).forEach(function (e) {
+      var t = byId(e.ticket);
+      if (!t) { need = true; return; }   // a conversation this device has not seen yet (other device)
+      if (e.kind === "msg") {
+        var dup = (t.messages || []).some(function (m) { return m.from === e.sender && m.text === e.text && Math.abs((m.ts || 0) - e.ts) < 5000; });
+        if (!dup) { (t.messages = t.messages || []).push({ from: e.sender, text: e.text, ts: e.ts }); t.updatedAt = e.ts; if (e.sender === "support") { t.userUnread = true; fresh.push(t); } }
+      } else if (e.kind.indexOf("status:") === 0) { t.status = e.kind.slice(7); t.updatedAt = e.ts; if (t.status === "resolved") t.resolvedAt = e.ts; }
+      else if (e.kind === "read" && e.sender === "support") { t.supportSeenAt = e.ts; t._seenAt = e.ts; }
+      else if (e.kind === "new" && e.sender === "user") need = true;
+    });
+    sortTickets();
+    // A reply for the conversation that is open on screen is read the moment it lands.
+    fresh.forEach(function (t) { if (_open === t.id && centreOpen() && !document.hidden) { t.userUnread = false; api("POST", "", { action: "seen", id: t.id }); } });
+    countUnread();
+    var other = fresh.filter(function (t) { return !(_open === t.id && centreOpen()); });
+    if (other.length) notifyReply(other[other.length - 1]);
+    if (need) refresh().then(repaint);
+    if (evs && evs.length) repaint();
+  }
+  function poll() {
+    clearTimeout(_pollT); _pollT = 0;
+    if (!user()) { schedule(); return; }
+    var p;
+    if (!_live) p = (Date.now() - _lastFull > (centreOpen() ? POLL_LIST : POLL_BG) ? refresh().then(repaint) : Promise.resolve());
+    else if (_seq == null) p = api("GET", "?live=1").then(function (r) { if (r && r.ok) { _seq = +r.seq || 0; _live = r.live !== false; } });
+    else p = api("GET", "?live=1&after=" + _seq).then(function (r) {
+      if (!r || !r.ok) return;
+      if (r.live === false) { _live = false; return; }
+      _seq = Math.max(_seq, +r.seq || 0);
+      applyEvents(r.events);
+    });
+    // A full re-read now and then heals anything the live log missed (it is a fast path, not the record).
+    p.then(function () { if (Date.now() - _lastFull > FULL_EVERY && centreOpen()) return refresh().then(repaint); }, function () {})
+      .then(schedule, schedule);
+  }
+  function schedule() {
+    clearTimeout(_pollT);
+    if (document.hidden) { _pollT = 0; return; }   // resumes on visibilitychange
+    _pollT = setTimeout(poll, centreOpen() ? (_open || _compose ? POLL_THREAD : POLL_LIST) : POLL_BG);
+  }
+  function centreOpen() { var el = document.getElementById(C); return !!(el && el.classList.contains("on")); }
+  // A reply while the doctor is elsewhere in the app: a tappable banner, the way a messenger does it.
+  function notifyReply(t) {
+    try {
+      var old = document.getElementById("hsToast"); if (old) old.remove();
+      styleOnce();
+      var n = document.createElement("button"); n.type = "button"; n.id = "hsToast";
+      var last = (t.messages || [])[t.messages.length - 1] || {};
+      n.innerHTML = '<span class="hs-t-ic">' + ICO.chat + '</span><span class="hs-t-m"><b>StewardMD support replied</b><span>' + esc(String(last.text || "").slice(0, 90)) + "</span></span>";
+      n.onclick = function () { n.remove(); openCentre({ ticket: t.id }); };
+      document.body.appendChild(n);
+      setTimeout(function () { try { n.classList.add("out"); setTimeout(function () { n.remove(); }, 400); } catch (e) {} }, 7000);
+    } catch (e) {}
+  }
+
+  /* ── views ── */
+  function shell(title, inner, opts) {
+    opts = opts || {};
     var el = root(C);
-    el.innerHTML = '<div role="dialog" aria-modal="true" aria-label="Bug Report Centre" style="display:contents"><div class="bc-head">' + (sub ? '<button type="button" class="bc-ic" id="bcBack" aria-label="Back">' + ICO.back + "</button>" : "") +
-      "<b>" + (sub ? "Bug report" : "Bug Report Centre") + '</b><button type="button" class="bc-ic" id="bcClose" aria-label="Close">' + ICO.close + "</button></div>" +
-      '<div class="bc-body">' + inner + "</div></div>";
+    el.innerHTML = '<div role="dialog" aria-modal="true" aria-label="Help and Support" style="display:contents"><div class="bc-head">' +
+      (opts.back ? '<button type="button" class="bc-ic" id="bcBack" aria-label="Back">' + ICO.back + "</button>" : "") +
+      '<div class="bc-ttl"><b>' + title + "</b>" + (opts.sub ? "<small>" + opts.sub + "</small>" : "") + "</div>" +
+      '<button type="button" class="bc-ic" id="bcClose" aria-label="Close">' + ICO.close + "</button></div>" +
+      '<div class="bc-body' + (opts.chat ? " chat" : "") + '" id="bcBody">' + inner + "</div>" + (opts.foot || "") + "</div>";
     el.classList.add("on");
     el.querySelector("#bcClose").onclick = closeCentre;
-    var bk = el.querySelector("#bcBack"); if (bk) bk.onclick = function () { _open = null; renderList(); };
+    var bk = el.querySelector("#bcBack"); if (bk) bk.onclick = function () { _open = null; _compose = null; renderHome(); schedule(); };
     return el;
   }
-  function renderList() {
-    var shakeRow = '<div class="bc-tg"><div>Shake to report' + '<small>Shake your phone on any screen to report a problem</small></div>' +
-      '<button type="button" class="bc-sw' + (shakeOn() && (!needsPermission() || lsGet(PERM_KEY) === "granted") ? " on" : "") + '" id="bcShake" role="switch" aria-label="Shake to report"><span></span></button></div>';
-    var list = !user() ? '<div class="bc-empty">Sign in to see your bug reports and our replies.</div>'
-      : (!_tickets.length ? '<div class="bc-empty">No bug reports yet. When something does not work, shake your phone or tap Report a bug.</div>'
+  function repaint() {
+    if (!centreOpen()) return;
+    if (_open) paintThread(); else if (!_compose) renderHome();
+  }
+  function renderHome() {
+    _open = null; _compose = null;
+    var hi = firstName();
+    var shakeOk = shakeOn() && (!needsPermission() || lsGet(PERM_KEY) === "granted");
+    var convs = !user() ? '<div class="bc-empty">Sign in to talk to us and see your conversations.</div>'
+      : (!_tickets.length ? '<div class="bc-empty">No conversations yet. Whatever it is, a bug, a question or an idea, start one above and a real person from the team will answer.</div>'
       : _tickets.map(function (t) {
-          var s = slaText(t);
-          return '<div class="bc-row" data-bc="' + esc(t.id) + '">' + (t.userUnread ? '<span class="bc-dot" aria-label="New reply"></span>' : "") +
-            '<div class="m"><b>' + esc(String(t.subject || "").replace(/^Bug:\s*/, "")) + "</b><small>" + esc(t.id) + " · " + esc(when(t.createdAt)) + "</small></div>" +
-            '<span class="bc-pill ' + s.cls + '">' + esc(s.txt) + "</span></div>";
+          var s = slaText(t), k = KIND[kindOf(t)], last = (t.messages || []).filter(function (m) { return m.text; }).slice(-1)[0] || {};
+          var pv = last.text ? (last.from === "support" ? "StewardMD: " : "You: ") + last.text : "";
+          return '<div class="bc-row' + (t.userUnread ? " unread" : "") + '" data-bc="' + esc(t.id) + '"><span class="bc-kic k-' + kindOf(t) + '">' + ICO[k.icon] + "</span>" +
+            '<div class="m"><div class="r1"><b>' + esc(String(t.subject || "").replace(/^Bug:\s*/, "")) + "</b><time>" + esc(dayLabel(t.updatedAt || t.createdAt) === "Today" ? clock(t.updatedAt || t.createdAt) : dayLabel(t.updatedAt || t.createdAt)) + "</time></div>" +
+            '<div class="r2"><span class="pv">' + esc(pv.slice(0, 90)) + "</span>" + (t.userUnread ? '<span class="bc-dot" aria-label="New reply"></span>' : "") + "</div>" +
+            '<div class="r3"><span class="chip">' + k.label + '</span><span class="bc-pill ' + s.cls + '">' + esc(s.txt) + "</span></div></div></div>";
         }).join(""));
-    var el = centreShell('<button type="button" class="bc-new" id="bcNew">' + ICO.bug + "<span>Report a bug</span></button>" +
-      '<p class="bc-promise">Every report reaches the StewardMD team directly. We aim to fix each one within 24 hours and reply to you here.</p>' +
-      shakeRow + list);
-    el.querySelector("#bcNew").onclick = function () { closeCentre(); setTimeout(function () { report({ via: "centre" }); }, 120); };
+    var el = shell("Help &amp; Support",
+      '<div class="hs-hero"><div class="hs-hi">' + (hi ? "Hi " + esc(hi) + "," : "Hi,") + '</div><div class="hs-q">How can we help?</div>' +
+        '<div class="hs-team"><span class="hs-live"></span>Real people from the StewardMD team. Questions answered within hours, bugs fixed within 24 hours.</div></div>' +
+      '<div class="hs-acts">' +
+        '<button type="button" class="hs-act" data-new="bug">' + ICO.bug + '<span><b>Report a problem</b><small>Point at what is not working</small></span></button>' +
+        '<button type="button" class="hs-act" data-new="help">' + ICO.chat + '<span><b>Ask a question</b><small>Chat with the team</small></span></button>' +
+        '<button type="button" class="hs-act" data-new="feedback">' + ICO.spark + '<span><b>Share feedback or an idea</b><small>What should we build or change?</small></span></button>' +
+      "</div>" +
+      '<div class="hs-sec">Your conversations</div>' + convs +
+      '<div class="bc-tg"><div>Shake to report<small>Shake your phone on any screen to report a problem</small></div>' +
+        '<button type="button" class="bc-sw' + (shakeOk ? " on" : "") + '" id="bcShake" role="switch" aria-label="Shake to report"><span></span></button></div>' +
+      '<p class="hs-note">Solved conversations are kept for 30 days, then deleted.</p>');
+    Array.prototype.forEach.call(el.querySelectorAll("[data-new]"), function (b) {
+      b.onclick = function () {
+        var k = b.getAttribute("data-new");
+        if (k === "bug") { closeCentre(); setTimeout(function () { report({ via: "centre" }); }, 120); return; }
+        if (!user()) { toast("Sign in to talk to us."); return; }
+        _compose = k; paintCompose();
+      };
+    });
     el.querySelector("#bcShake").onclick = function () {
       var b = this;
       if (b.classList.contains("on")) { lsSet(SHAKE_KEY, "0"); b.classList.remove("on"); return; }
       enableShake().then(function (ok) { b.classList.toggle("on", ok); if (!ok) toast("Motion access was not allowed. Turn it on in Settings, then try again."); });
     };
-    Array.prototype.forEach.call(el.querySelectorAll("[data-bc]"), function (r) { r.onclick = function () { openTicket(r.getAttribute("data-bc")); }; });
+    Array.prototype.forEach.call(el.querySelectorAll("[data-bc]"), function (r) { r.onclick = function () { openThread(r.getAttribute("data-bc")); }; });
   }
-  function openTicket(id) {
-    var t = _tickets.filter(function (x) { return x.id === id; })[0]; if (!t) return;
-    _open = id;
-    var s = slaText(t);
-    var msgs = (t.messages || []).filter(function (m) { return m.text; }).map(function (m) {
-      var dev = m.from === "support";
-      return '<div class="bc-msg' + (dev ? " dev" : "") + '"><small>' + (dev ? "StewardMD developer" : "You") + " · " + esc(when(m.ts)) + "</small>" + esc(m.text) + "</div>";
-    }).join("");
-    var el = centreShell(
-      '<div class="bc-meta"><b>' + esc(t.id) + '</b> · <span class="bc-pill ' + s.cls + '">' + esc(s.txt) + "</span><br>" +
-      (t.bug && t.bug.element && t.bug.element.label ? "You pointed at: " + esc(t.bug.element.label) + "<br>" : "") + "Reported " + esc(when(t.createdAt)) + "</div>" +
-      (t.hasShot && t.status !== "resolved" ? '<img class="bc-shot" id="bcShot" alt="Your screenshot">' : "") +
-      msgs +
-      (t.status === "resolved" ? '<div class="bc-meta">Marked fixed. If it still happens, reply below and we will reopen it.</div>' : "") +
-      '<textarea id="bcTx" maxlength="2000" placeholder="Add more detail or reply to the developer"></textarea><button type="button" class="bc-send" id="bcSend">Send</button>', true);
-    el.querySelector("#bcSend").onclick = function () {
-      var tx = el.querySelector("#bcTx"), v = (tx.value || "").trim(); if (!v) return;
-      this.disabled = true;
-      api("POST", "", { action: "reply", id: id, text: v }).then(function (r) {
-        if (r && r.ok && r.ticket) { _tickets = _tickets.map(function (x) { return x.id === id ? r.ticket : x; }); openTicket(id); }
-        else toast("Could not send. Try again.");
-      }, function () { toast("You are offline. Try again once you are connected."); });
-    };
-    if (t.userUnread) { t.userUnread = false; _unread = Math.max(0, _unread - 1); paintBadge(); api("POST", "", { action: "seen", id: id }); }
-    var img = el.querySelector("#bcShot");
+  function composer(ph) {
+    return '<div class="hs-comp"><textarea id="bcTx" rows="1" maxlength="4000" placeholder="' + esc(ph) + '"></textarea>' +
+      '<button type="button" class="hs-send" id="bcSend" aria-label="Send">' + ICO.send + "</button></div>";
+  }
+  function wireComposer(el, onSend) {
+    var tx = el.querySelector("#bcTx"), btn = el.querySelector("#bcSend");
+    var grow = function () { tx.style.height = "auto"; tx.style.height = Math.min(140, tx.scrollHeight) + "px"; btn.classList.toggle("ready", !!tx.value.trim()); };
+    tx.addEventListener("input", grow); grow();
+    btn.onclick = function () { var v = (tx.value || "").trim(); if (!v || btn.disabled) return; onSend(v, tx, btn); };
+  }
+  function bubble(m, mine, tail) {
+    return '<div class="hs-b ' + (mine ? "me" : "them") + (m.pending ? " pending" : "") + '">' + (!mine && tail ? '<div class="hs-who">StewardMD support</div>' : "") +
+      '<div class="hs-tx">' + esc(m.text) + '</div><div class="hs-ts">' + esc(clock(m.ts)) + (m.status ? " · " + m.status : "") + "</div></div>";
+  }
+  function paintCompose() {
+    var k = _compose, intro = k === "feedback"
+      ? "Tell us what to improve, or an idea you would like us to build. We read every message."
+      : "Ask us anything about StewardMD. A real person from the team will reply here, usually within a few hours.";
+    var el = shell(k === "feedback" ? "Feedback or an idea" : "Ask a question",
+      '<div class="hs-thread">' + bubble({ text: intro, ts: Date.now() }, false, true) + "</div>",
+      { back: true, chat: true, sub: "The StewardMD team", foot: composer(k === "feedback" ? "Write your feedback" : "Write your question") });
+    wireComposer(el, function (v, tx, btn) {
+      btn.disabled = true;
+      api("POST", "", { action: "create", kind: k, text: v, platform: platform(), build: build() }).then(function (r) {
+        btn.disabled = false;
+        if (r && r.ok && r.ticket) { _tickets.unshift(r.ticket); _compose = null; openThread(r.ticket.id); }
+        else toast(r && r.error === "too-many" ? "You have started a lot of conversations today. Please add to an existing one." : r && r.error === "sign-in-required" ? "Sign in to talk to us." : "Could not send. Try again.");
+      }, function () { btn.disabled = false; toast("You are offline. Try again once you are connected."); });
+    });
+    setTimeout(function () { try { el.querySelector("#bcTx").focus(); } catch (e) {} }, 250);
+    schedule();
+  }
+  function openThread(id) {
+    var t = byId(id); if (!t) return;
+    _open = id; _compose = null;
+    paintThread(true);
+    if (t.userUnread) { t.userUnread = false; countUnread(); api("POST", "", { action: "seen", id: id }); }
+    schedule();
+  }
+  function paintThread(first) {
+    var t = byId(_open); if (!t) { renderHome(); return; }
+    var body = document.getElementById("bcBody");
+    var keep = body && !first ? { atEnd: body.scrollTop + body.clientHeight >= body.scrollHeight - 40, draft: (document.getElementById("bcTx") || {}).value || "" } : { atEnd: true, draft: "" };
+    var s = slaText(t), k = KIND[kindOf(t)];
+    var msgs = (t.messages || []).filter(function (m) { return m.text; });
+    var mineLast = -1; msgs.forEach(function (m, i) { if (m.from !== "support") mineLast = i; });
+    var seen = t.supportSeenAt || 0, html = "", lastDay = "";
+    msgs.forEach(function (m, i) {
+      var d = dayLabel(m.ts); if (d !== lastDay) { html += '<div class="hs-day">' + esc(d) + "</div>"; lastDay = d; }
+      var mine = m.from !== "support";
+      var mm = { text: m.text, ts: m.ts, pending: m.pending, status: mine && i === mineLast ? (m.pending ? "Sending" : (seen >= m.ts ? "Seen" : "Sent")) : "" };
+      html += bubble(mm, mine, !mine && (i === 0 || msgs[i - 1].from !== "support"));
+    });
+    var bugBox = "";
+    if (t.kind === "bug") {
+      bugBox = '<div class="hs-bug"><div class="hs-bug-h">' + ICO.bug + "<span>" + esc(s.txt) + "</span></div>" +
+        (t.bug && t.bug.element && t.bug.element.label ? '<div class="hs-bug-l">You pointed at: ' + esc(t.bug.element.label) + "</div>" : "") +
+        (t.hasShot && t.status !== "resolved" ? '<img class="bc-shot" id="bcShot" alt="Your screenshot">' : "") + "</div>";
+    }
+    var solved = t.status === "resolved" ? '<div class="hs-solved">' + ICO.check + "<span>" + (t.kind === "bug" ? "Marked fixed." : "Marked solved.") + " Still happening? Reply and we reopen it.</span></div>" : "";
+    var el = shell(esc(k.label) + " · " + esc(t.id), bugBox + '<div class="hs-thread">' + html + "</div>" + solved,
+      { back: true, chat: true, sub: '<span class="bc-pill ' + s.cls + '">' + esc(s.txt) + "</span>", foot: composer(t.status === "resolved" ? "Reply to reopen" : "Message") });
+    wireComposer(el, function (v, tx, btn) {
+      var pend = { from: "user", text: v, ts: Date.now(), pending: true };
+      (t.messages = t.messages || []).push(pend); tx.value = ""; paintThread();
+      api("POST", "", { action: "reply", id: t.id, text: v }).then(function (r) {
+        if (r && r.ok && r.ticket) { var i = _tickets.indexOf(t); if (i > -1) { r.ticket.supportSeenAt = t.supportSeenAt; _tickets[i] = r.ticket; } }
+        else { t.messages.splice(t.messages.indexOf(pend), 1); toast("Could not send. Try again."); }
+        paintThread();
+      }, function () { t.messages.splice(t.messages.indexOf(pend), 1); paintThread(); toast("You are offline. Try again once you are connected."); });
+    });
+    var tx2 = document.getElementById("bcTx"); if (tx2 && keep.draft) { tx2.value = keep.draft; tx2.dispatchEvent(new Event("input")); }
+    var b2 = document.getElementById("bcBody"); if (b2 && keep.atEnd) b2.scrollTop = b2.scrollHeight;
+    var img = document.getElementById("bcShot");
     if (img) {
-      var u = user();
+      var u = user(), id = t.id;
       if (u && u.getIdToken) u.getIdToken().then(function (tok) { return fetch("/api/support?shot=" + encodeURIComponent(id), { headers: { "Authorization": "Bearer " + tok } }); })
-        .then(function (r) { return r.ok ? r.blob() : null; }).then(function (b) { if (b && img.isConnected) img.src = URL.createObjectURL(b); else if (img) img.remove(); }, function () { img.remove(); });
+        .then(function (r) { return r.ok ? r.blob() : null; }).then(function (b) { if (b && img.isConnected) img.src = URL.createObjectURL(b); else if (img) img.remove(); }, function () { try { img.remove(); } catch (e) {} });
     }
   }
-  function openCentre() {
-    renderList();
-    flush().then(refresh).then(function () { var el = document.getElementById(C); if (el && el.classList.contains("on")) { if (_open) openTicket(_open); else renderList(); } });
+  // opts: { ticket: id } opens that conversation; { compose: "help"|"feedback" } starts one.
+  function openCentre(opts) {
+    opts = opts || {};
+    if (opts.compose && user()) { _compose = opts.compose === "feedback" ? "feedback" : "help"; paintCompose(); }
+    else renderHome();
+    flush().then(refresh).then(function () {
+      if (!centreOpen()) return;
+      if (opts.ticket && byId(opts.ticket)) openThread(opts.ticket); else repaint();
+    });
+    poll();
   }
-  function closeCentre() { var el = document.getElementById(C); if (el) { el.classList.remove("on"); el.innerHTML = ""; } _open = null; }
+  function closeCentre() { var el = document.getElementById(C); if (el) { el.classList.remove("on"); el.innerHTML = ""; } _open = null; _compose = null; schedule(); }
 
   /* ── boot ────────────────────────────────────────────────────────────────────────────────── */
   function boot() {
     bootShake();
-    window.addEventListener("online", function () { flush(); });
-    // A push tap opens https://stewardmd.in/#bugs
-    if (location.hash === "#bugs") setTimeout(openCentre, 900);
-    window.addEventListener("hashchange", function () { if (location.hash === "#bugs") openCentre(); });
-    // Badge + outbox once auth has resolved.
-    var n = 0, t = setInterval(function () { n++; if (user()) { clearInterval(t); flush().then(refresh); } else if (n > 40) clearInterval(t); }, 1500);
+    window.addEventListener("online", function () { flush(); poll(); });
+    document.addEventListener("visibilitychange", function () { if (!document.hidden) poll(); });
+    // A push tap opens https://stewardmd.in/#help (older pushes: #bugs)
+    var deep = function () { var h = location.hash; if (h === "#help" || h === "#bugs") openCentre(); };
+    setTimeout(deep, 900);
+    window.addEventListener("hashchange", deep);
+    // Badge + outbox + live feed once auth has resolved.
+    var n = 0, t = setInterval(function () { n++; if (user()) { clearInterval(t); flush().then(refresh).then(poll); } else if (n > 40) clearInterval(t); }, 1500);
   }
   if (document.readyState !== "loading") setTimeout(boot, 600);
   else document.addEventListener("DOMContentLoaded", function () { setTimeout(boot, 600); });
 
-  window.SMD_BUGS = { report: report, openCentre: openCentre, closeCentre: closeCentre, unread: unread, refresh: refresh,
-    enableShake: enableShake, _shake: onShake, _capture: capture, _detector: detector, _slaText: slaText, _describe: describe, _payload: payload };
+  var API = { report: report, openCentre: openCentre, closeCentre: closeCentre, unread: unread, refresh: refresh, poll: poll,
+    enableShake: enableShake, _shake: onShake, _capture: capture, _detector: detector, _slaText: slaText, _describe: describe, _payload: payload,
+    _state: function () { return { seq: _seq, live: _live, open: _open, compose: _compose, tickets: _tickets.length }; } };
+  window.SMD_BUGS = API;
+  window.SMD_HELP = API;
+  // The one place every "feedback" entry point in the app lands (sidebar, quick action, home.js).
+  window.SMD_openFeedback = function () { openCentre({ compose: "feedback" }); };
 })();

@@ -10326,6 +10326,20 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
 - **Owner accepted (2026-09-27)**: one test-split case (aggregate only) loses a needed antibiotic call on
   the text path in the v2 configs, so their `abxSens` floor is 138 (was 139). Not tuned against the test
   split. `smd_nlp_v2` stays OFF; `sepsis_afebrile` is live with gate v2.
+
+## 2026-09-27 - One Help & Support centre with live chat; replies must reach the doctor
+- **Context**: owner: three places (Feedback, Help & support, Bug Report Centre) for one job, and "I replied
+  immediately but it never reached the user or he received a notification". Two causes: the reply push
+  targeted the uid with its `fb:` namespace stripped (tokens are stored as `fb:<uid>`), so nothing was
+  sent; and the app only re-read tickets on open, from KV, which lags up to 60 s across edge locations.
+- **Decision**: one centre (sidebar `help`, More sheet, every Feedback entry) over the existing support
+  tickets with kinds bug | help | feedback. A D1 event log (`_support_live.js`) is the strongly
+  consistent fast path both sides poll by cursor; KV stays the record. Polling, not websockets: Pages
+  Functions have no socket server here, and a 2.5 s cursor poll against D1 is cheap and simple.
+- **Retention (owner)**: solved conversations expire 30 days after they were solved (KV TTL + index
+  filter); open ones stay; reopening restores the open TTL. Screenshots already go on fix.
+
+
 ## 2026-09-27 - SMS only as our approved DLT templates, and no patient name in any message
 - **Decision**: every patient/doctor SMS is built from one of our approved Vodafone Idea DLT templates
   (header MAIK, `functions/_followcare_sms.js` DLT, text verbatim) and sent through 2Factor's R1 API with
@@ -10358,6 +10372,26 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
   patient calls, so it must be the clinic that treated them.
 - **Open**: FollowCare's hospital is a free-text id the doctor types (`fc_doctors`), not an OPD clinic, so its
   Post-Visit template still has no callback number or doctor name; FollowCare stays WhatsApp only.
+
+## 2026-09-27 - Ophthalmós integrated as a module, behind a flag default OFF
+- **Context**: Ophthalmós (eye-imaging clinic trainer: OCT, disc, DR grading, ROP, case conference) was
+  built end-to-end in its own repo (`github.com/drmanojkurmana/ophthalmos`), not inside StewardMD.
+- **Decision**: integrate the finished module by copying its shipped client files
+  (`ophthalmos-core.js`, `ophthalmos-data.js`, `ophthalmos-stage.js`, `ophthalmos.js`,
+  `ophthalmos-screens.js`, `ophthalmos.css`, `ophthalmos/tracks.json`, `ophthalmos/decks/*.json`) into
+  this repo and wiring it exactly like [[RadioAnatome]] (`atlas`): Home tile, `home.js` action,
+  `swipe-back.js` back-handling, `scripts/build-www.sh` data copy. Gated behind `smd_ophthalmos`,
+  default OFF (query param or `localStorage === "1"` only): nothing in it is clinically signed off yet.
+- **Images kept off Cloudflare Pages**: the module's 6,241 WebP images (134 MB) are not committed here.
+  Pages caps a deploy at 20,000 files and this repo is already at ~19,400, so bundling them is not an
+  option; they need an R2 bucket and `window.SMD_OPHTHALMOS_IMG` before the flag can go on for real
+  users, same posture as RadioAnatome's own un-bundled slice images.
+- **Reversible**: the flag is OFF by default and the source repo remains the source of truth: future
+  edits happen there, then get re-synced into this repo's copies, never the other way around.
+- **Update (same day)**: images now hosted in R2 bucket `stewardmd-ophthalmos-img` (APAC) at `https://ophthalmos-img.stewardmd.in`, immutable cache headers; the flag stays OFF until ophthalmologist sign-off.
+- **Update (same day, owner)**: the owner turned Ophthalmós ON for all users before sign-off, with a
+  4px "To be verified · draft" mark on every screen (the hub's readable Beta note stays). Kill switch
+  `smd_ophthalmos="0"` / `?ophthalmos=0`. Sign-off of the ai_drafted teaching points and plans is still open.
 ## 2026-09-27 - `smd_rank_v3` ON by default (owner: "turn on smd_rank_v3")
 - **Decision**: the v3 differential order is the default; localStorage `smd_rank_v3 = "0"` or `?rankv3=0`
   keeps the classic order. CI checks the classic order as the `smd_rank_v3=0` configuration.

@@ -1092,6 +1092,7 @@
     // Onco Home: clinician-facing oncology reference workbench (search + tool grid over the
     // existing MEDCALC/KB/drugs — not the patient treatment-plan engine). Flag-gated inside SMD_ONCOHOME.open().
     atlas: function () { if (window.ATLAS && ATLAS.open) ATLAS.open(); else toast("RadioAnatome loading…"); },
+    ophthalmos: function () { if (window.OPHTHALMOS && OPHTHALMOS.open) OPHTHALMOS.open(); else toast("Ophthalmós loading…"); },
     oncohome: function () { if (window.SMD_ONCOHOME && SMD_ONCOHOME.open) SMD_ONCOHOME.open(); else toast("ONCQIS loading…"); },
     oncotree: function () { if (window.SMD_ONCOTREE && SMD_ONCOTREE.open) SMD_ONCOTREE.open(); else toast("OncoTree loading…"); },
     staging: function () { if (window.SMD_ONCOSTAGING && SMD_ONCOSTAGING.openList) SMD_ONCOSTAGING.openList(); else toast("Cancer Staging loading…"); },
@@ -2083,6 +2084,11 @@
     { act: "guidelines", ic: "book_2", tt: "Guides", sub: "Protocols" },
     { act: "atlas", ic: "body_system", tt: "RadioAnatome", sub: "Anatomy",
       eligible: function () { try { var q = (location.search.match(/[?&]atlas=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_atlas") !== "0"; } catch (e) { return true; } } },
+    // Ophthalmós (ophthalmos.js): eye-imaging clinic trainer. ON for all (owner decision 2026-09-27);
+    // kill switch smd_ophthalmos="0" or ?ophthalmos=0. Images load from R2 (ophthalmos-img.stewardmd.in);
+    // content is ai_drafted, so every screen carries a "To be verified · draft" mark until sign-off.
+    { act: "ophthalmos", ic: "eye", tt: "Ophthalmós", sub: "Eye imaging clinic",
+      eligible: function () { try { var q = (location.search.match(/[?&]ophthalmos=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_ophthalmos") !== "0"; } catch (e) { return true; } } },
     { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
     // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).
     { act: "hospital", ic: "local_hospital", tt: "Hospital", sub: "OPD · ICU · Ward", defOn: false },
@@ -2758,7 +2764,8 @@
         var a = b.getAttribute("data-mi");
         if (a === "display") return openDisplay();
         if (a === "notifprefs") return openNotifPrefs();
-        if (a === "help") { closeSheet(); return openHelp(); }
+        // One Help & Support centre (bug-report.js, 2026-09-27); the old sheet is the fallback only.
+        if (a === "help") { closeSheet(); if (window.SMD_HELP && SMD_HELP.openCentre) return SMD_HELP.openCentre(); return openHelp(); }
         if (a === "account") return openAccount();
         if (a === "subscription") return openSubscription();
         if (a === "aiusage") { closeSheet(); return openAiUsage(); }

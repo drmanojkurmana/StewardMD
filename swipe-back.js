@@ -141,6 +141,7 @@
   function canGoBack() {
     if (homeIsForeground()) return false;
     try { if (window.ATLAS && window.ATLAS.isOpen && window.ATLAS.isOpen()) return true; } catch (e) {}
+    try { if (window.OPHTHALMOS && window.OPHTHALMOS.isOpen && window.OPHTHALMOS.isOpen()) return true; } catch (e) {}
     try { if (window.FUNDX && window.FUNDX.isOpen && window.FUNDX.isOpen()) return true; } catch (e) {}
     if (topBackControl()) return true;
     return !!(engineActive() && typeof window._SMD_goBack === "function");
@@ -154,6 +155,7 @@
     if (document.getElementById("wsq-alert")) return true;
     // 0) FundX / Atlas AI full-screen overlay owns back while open.
     try { if (window.ATLAS && window.ATLAS.isOpen && window.ATLAS.isOpen()) { _last = now; return window.ATLAS.back() !== false; }
+    if (window.OPHTHALMOS && window.OPHTHALMOS.isOpen && window.OPHTHALMOS.isOpen()) { _last = now; return window.OPHTHALMOS.back() !== false; }
     if (window.FUNDX && window.FUNDX.isOpen && window.FUNDX.isOpen()) { _last = now; return window.FUNDX.back() !== false; } } catch (e) {}
     // 0b) home's bottom-sheet system (#hvSheet + #hvScrim): the More sheet, the settings sheets,
     // Customize tools, Account. Its rows are `.hv-mi` buttons and it ships NO back/close control, so

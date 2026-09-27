@@ -174,6 +174,15 @@ if [ -d atlas ]; then
     cp atlas/3d/manifest.json atlas/3d/index.json "$WWW/atlas/3d/" 2>/dev/null || true
   fi
 fi
+# Ophthalmós: ship tracks.json + decks/*.json (JSON only, no images -- the 6,241 WebP
+# fundus/OCT images stay off Pages, same reasoning as atlas above; images load from
+# window.SMD_OPHTHALMOS_IMG once an R2 bucket is provisioned).
+if [ -d ophthalmos ]; then
+  mkdir -p "$WWW/ophthalmos/decks"
+  cp ophthalmos/tracks.json "$WWW/ophthalmos/" 2>/dev/null || true
+  cp -R ophthalmos/decks/. "$WWW/ophthalmos/decks/"
+  echo "  ophthalmos: $(find "$WWW/ophthalmos" -type f | wc -l | tr -d ' ') files"
+fi
 [ -d clinical-pathways ] && mkdir -p "$WWW/clinical-pathways" && cp -R clinical-pathways/. "$WWW/clinical-pathways/"
 # CliniX clinical-learning content (catalog + skill packs + disease pathways + the media licence
 # registry). All plain JSON, fetched at runtime by clinix-content.js on first open. This copy is
