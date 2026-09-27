@@ -62,13 +62,30 @@
       st.cfg = cfg;
       return Promise.all(cfg.tracks.map(function (t) {
         return getJSON(t.deck).then(function (d) { st.decks[t.id] = d; });
-      }).concat((G.OPHTHALMOS._reads || []).map(function (r) { return r.load && r.load(); }))); // a read's load() never rejects
+      }).concat((G.OPHTHALMOS._reads || []).map(function (r) { return r.load && r.load(); }))  // a read's load() never rejects
+        .concat(G.OPHTHALMOS._learn ? [G.OPHTHALMOS._learn.load()] : [])); // nor does Learn's
     }).catch(function (e) { st.err = e; st.loading = null; throw e; });
     return st.loading;
   }
   function track(id) { for (var i = 0; i < st.cfg.tracks.length; i++) if (st.cfg.tracks[i].id === id) return st.cfg.tracks[i]; return null; }
   function level() { return st.prefs.level === "resident" ? "resident" : "foundation"; }
   function levelLocked(lv) { return D.levelLocked(st.cfg, lv || level(), isPro()); }
+  // Resident = Pro with one free trial per feature (ids in ophthalmos-data.js). Pro, or Resident unlocked by
+  // tracks.json access, runs straight away; an unused trial is recorded, saved, then runs; a spent one opens the paywall.
+  function trial(featureId) { return D.trialState(st.store, featureId, !levelLocked("resident")); }
+  function gate(featureId, run) {
+    var s = trial(featureId);
+    if (s === "used") return showPro();
+    if (s === "trial") { D.useTrial(st.store, featureId, today()); save(); }
+    return run();
+  }
+  function lockBadge(featureId) {
+    var s = trial(featureId);
+    return s === "open" ? "" : '<span class="oph-pro' + (s === "used" ? " used" : "") + '">' + ico("lock") + (s === "trial" ? "1 free trial" : "Trial used") + "</span>";
+  }
+  // Language (owner decision 2026-09-28): the Learn tab and lessons are English or Hindi; D.t falls back to English.
+  function lang() { return st.prefs && st.prefs.lang === "hi" ? "hi" : "en"; }
+  function t(obj) { return D.t(obj, lang()); }
   function drillTracks() { return st.cfg.tracks.filter(function (t) { return !t.selfRated; }); }
 
   /* ---------- shell ---------- */
@@ -92,7 +109,9 @@
   var DRAFT = '<p class="oph-draft">To be verified · draft</p>';
   function paint(html, focusSel) {
     var el = root();
+    el.removeAttribute("lang"); // Learn screens set lang="hi" after painting; everything else is English
     el.innerHTML = html + DRAFT;
+    if (!st.onBack) relabelBack(); // a screen with its own inner back (a question -> its bank) keeps its label
     var f = focusSel && el.querySelector(focusSel);
     try { (f || el.querySelector(".oph-back")).focus({ preventScroll: true }); } catch (e) {}
   }
@@ -116,7 +135,18 @@
   }
   // Simulators own an animation loop and sometimes an inner layer: st.onLeave stops the loop when
   // the view is left, st.onBack unwinds the inner layer (return true when it handled back).
-  function leave() { var f = st.onLeave; st.onLeave = null; st.onBack = null; if (f) try { f(); } catch (e) {} }
+  // st.ret: where back goes instead of the hub (a lesson's Test yourself / Go deeper returns to the lesson);
+  // any departure (leave) or hub render drops it.
+  function leave() { var f = st.onLeave; st.onLeave = null; st.onBack = null; st.ret = null; st.retLabel = null; if (f) try { f(); } catch (e) {} }
+  // st.ret with the screen-reader label of where it goes ("Back to lesson", in the lesson's language): the back
+  // button on screen now, and on every screen painted while st.ret holds, says so.
+  function setRet(fn, label, lang) { st.ret = fn; st.retLabel = label ? { t: label, lang: lang } : null; relabelBack(); }
+  function relabelBack() {
+    var b = st.ret && st.retLabel && $("smdOphthalmos") && $("smdOphthalmos").querySelector(".oph-top .oph-back");
+    if (!b) return;
+    b.setAttribute("aria-label", st.retLabel.t);
+    if (st.retLabel.lang) b.setAttribute("lang", st.retLabel.lang);
+  }
   function close() {
     leave();
     var el = $("smdOphthalmos");
@@ -134,9 +164,10 @@
     if (!isOpen()) return false;
     if (st.onBack && st.onBack()) return true;
     if (st.view === "hub") { close(); return true; }
+    var ret = st.ret;
     leave();
     st.session = null; st.caseRun = null; st.view = "hub";
-    renderHub();
+    if (ret) ret(); else renderHub();
     return true;
   }
 
@@ -355,7 +386,7 @@
     _tools: [], // calculator files register {id, title, sub, icon, src, open()} here (ophthalmos-tools.js)
     _reads: [], // reading files register {id, title, sub, icon, open(), line(), load()?, thumbs()?} here
     _st: st, _internal: { leave: leave, getJSON: getJSON, maikBtn: maikBtn, paint: paint, top: top, ico: ico, esc: esc, imgUrl: imgUrl, haptic: haptic, isPro: isPro, showPro: showPro,
-      save: save, ls: ls, today: today, fmt: fmt, track: track, level: level, levelLocked: levelLocked, drillTracks: drillTracks,
+      save: save, ls: ls, today: today, fmt: fmt, track: track, level: level, levelLocked: levelLocked, drillTracks: drillTracks, gate: gate, lockBadge: lockBadge, trial: trial, setRet: setRet, lang: lang, t: t,
       renderStats: renderStats, renderSources: renderSources, shortTitle: shortTitle, ACTIONS: ACTIONS, KEYS: KEYS,
       SESSION_SIZE: SESSION_SIZE, NEW_CAP: NEW_CAP } };
   // The layout layer (ophthalmos-screens.js) attaches renderHub and the drill.

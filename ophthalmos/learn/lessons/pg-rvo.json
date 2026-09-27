@@ -1,0 +1,256 @@
+{
+  "id": "pg-rvo",
+  "unit": "retina-pg",
+  "level": "resident",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Retinal vein occlusion",
+    "hi": "रेटिनल वेन ऑक्लूज़न"
+  },
+  "idea": {
+    "en": "A blocked retinal vein backs up blood and fluid. Sort it as branch or central, and ischaemic or not. Treat the oedema and watch for new vessels.",
+    "hi": "रेटिना की शिरा बंद हो तो खून और तरल पीछे जमा होने लगते हैं। इसे शाखा या सेंट्रल, और इस्कीमिक या नॉन-इस्कीमिक में बाँटें। सूजन का इलाज करें और नई नलियों पर नज़र रखें।"
+  },
+  "see": {
+    "img": "oct/rvo_2229254_1.webp",
+    "deckItem": {
+      "deck": "oct",
+      "id": "rvo_2229254_1"
+    },
+    "expect": "RVO",
+    "alt": {
+      "en": "Grey OCT cross-section. On the left the retina has normal thickness. From the middle to the right, it is swollen and full of large dark cysts. A dark pocket of fluid lies under it. The optic disc cup is at the right edge.",
+      "hi": "भूरा OCT क्रॉस-सेक्शन। बाईं ओर रेटिना की मोटाई सामान्य है। बीच से दाईं ओर यह सूजा हुआ है और बड़ी काली थैलियों से भरा है, और उसके नीचे तरल की एक काली थैली है। दाएँ किनारे पर ऑप्टिक डिस्क का कप है।"
+    },
+    "caption": {
+      "en": "A real OCT scan labelled retinal vein occlusion, with macular oedema.",
+      "hi": "एक असली OCT स्कैन, लेबल: रेटिनल वेन ऑक्लूज़न, मैक्युलर ईडिमा के साथ।"
+    },
+    "credit": "OCTDL, CC BY 4.0. Kulyabin M, et al. Sci Data 2024.",
+    "hotspots": [
+      {
+        "x": 0.57,
+        "y": 0.33,
+        "label": {
+          "en": "Cystoid oedema",
+          "hi": "सिस्टॉइड ईडिमा"
+        },
+        "note": {
+          "en": "Large intraretinal cysts that thicken the retina.",
+          "hi": "रेटिना के अंदर बड़ी थैलियाँ, जो उसे मोटा कर देती हैं।"
+        }
+      },
+      {
+        "x": 0.507,
+        "y": 0.537,
+        "label": {
+          "en": "Subretinal fluid",
+          "hi": "सबरेटिनल फ़्लूइड"
+        },
+        "note": {
+          "en": "A dark pocket under the retina. It is common in vein occlusion.",
+          "hi": "रेटिना के नीचे एक काली थैली। वेन ऑक्लूज़न में यह आम है।"
+        }
+      },
+      {
+        "x": 0.72,
+        "y": 0.3,
+        "label": {
+          "en": "Thick inner retina",
+          "hi": "मोटा अंदरूनी रेटिना"
+        },
+        "note": {
+          "en": "The inner layers are swollen and hard to tell apart.",
+          "hi": "अंदरूनी परतें सूजी हुई हैं और उन्हें अलग पहचानना मुश्किल है।"
+        }
+      },
+      {
+        "x": 0.25,
+        "y": 0.34,
+        "label": {
+          "en": "Unaffected retina",
+          "hi": "सामान्य रेटिना"
+        },
+        "note": {
+          "en": "Normal thickness on this side. A sharp change like this fits a vein's drainage area.",
+          "hi": "इस ओर मोटाई सामान्य है। ऐसा तीखा बदलाव किसी शिरा के इलाक़े से मेल खाता है।"
+        }
+      },
+      {
+        "x": 0.965,
+        "y": 0.55,
+        "label": {
+          "en": "Optic disc",
+          "hi": "ऑप्टिक डिस्क"
+        },
+        "note": {
+          "en": "The scan runs into the disc at its edge.",
+          "hi": "यह स्कैन किनारे पर डिस्क तक जाता है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "In [[rvo]], a clot blocks a retinal vein. BRVO happens at a crossing where an artery presses on a vein. CRVO happens at or behind the disc.",
+        "hi": "[[rvo]] में एक थक्का रेटिना की शिरा बंद कर देता है। BRVO उस जगह होता है जहाँ धमनी शिरा को दबाते हुए पार करती है। CRVO डिस्क पर या उसके पीछे होता है।"
+      },
+      {
+        "en": "CRVO shows haemorrhages in all four quadrants, with swollen, twisted veins. BRVO shows a wedge of flame haemorrhages that stops at the horizontal midline.",
+        "hi": "CRVO में चारों क्वाड्रेंट में हेमरेज और फूली, मुड़ी शिराएँ दिखती हैं। BRVO में लौ जैसे हेमरेज का एक तिकोना हिस्सा दिखता है जो बीच की आड़ी रेखा पर रुक जाता है।"
+      },
+      {
+        "en": "Ischaemic CRVO: poor vision, an [[rapd]], many cotton wool spots, and 10 or more disc areas of non-perfusion on angiography.",
+        "hi": "इस्कीमिक CRVO: कम नज़र, [[rapd]], कई कॉटन वूल स्पॉट, और एंजियोग्राफ़ी पर 10 या ज़्यादा डिस्क-क्षेत्र जितना खून-रहित हिस्सा।"
+      },
+      {
+        "en": "Ischaemic eyes risk new vessels on the iris and in the angle, classically within 3 months. This leads to [[neovascular-glaucoma]], the '90-day glaucoma'.",
+        "hi": "इस्कीमिक आँखों में आइरिस और एंगल पर नई नलियों का ख़तरा होता है, आम तौर पर 3 महीने के अंदर। इससे [[neovascular-glaucoma]] होता है, जिसे '90-दिन वाला ग्लूकोमा' कहते हैं।"
+      },
+      {
+        "en": "Macular oedema: anti-VEGF is first line, and a dexamethasone implant is an alternative. Panretinal laser is given once new vessels appear.",
+        "hi": "मैक्युलर ईडिमा: एंटी-VEGF पहली पसंद है, और डेक्सामेथासोन इम्प्लांट दूसरा विकल्प। नई नलियाँ दिखने पर पैनरेटिनल लेज़र दिया जाता है।"
+      },
+      {
+        "en": "Work-up: blood pressure, glucose, lipids, blood count and ESR, and eye pressure in both eyes.",
+        "hi": "जाँच: ब्लड प्रेशर, शुगर, लिपिड, ब्लड काउंट और ESR, और दोनों आँखों का दबाव।"
+      }
+    ],
+    "analogy": {
+      "en": "It is a traffic jam on the exit road. Cars pile up behind the block, spill onto the roadside, and the area floods. Clearing the flood (injections) helps, but the road may stay narrow.",
+      "hi": "यह निकलने वाली सड़क पर ट्रैफ़िक जाम जैसा है। रुकावट के पीछे गाड़ियाँ जमा होती हैं, सड़क के किनारे फैल जाती हैं, और इलाक़े में पानी भर जाता है। पानी निकालने (इंजेक्शन) से मदद मिलती है, पर सड़क संकरी रह सकती है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "On OCT: cystoid oedema with a thick inner retina, often with subretinal fluid.",
+      "hi": "OCT पर: मोटे अंदरूनी रेटिना के साथ सिस्टॉइड ईडिमा, अक्सर सबरेटिनल फ़्लूइड के साथ।"
+    },
+    {
+      "en": "Measure eye pressure in both eyes. Glaucoma is a treatable risk factor, especially for CRVO.",
+      "hi": "दोनों आँखों का दबाव नापें। ग्लूकोमा एक ऐसा ख़तरा है जिसका इलाज हो सकता है, ख़ासकर CRVO में।"
+    },
+    {
+      "en": "In ischaemic CRVO, look at the iris and do gonioscopy before you dilate.",
+      "hi": "इस्कीमिक CRVO में पुतली फैलाने से पहले आइरिस देखें और गोनियोस्कोपी करें।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "In ischaemic CRVO, check the iris and angle at each visit in the first months.",
+      "hi": "इस्कीमिक CRVO में शुरुआती महीनों में हर बार आइरिस और एंगल जाँचें।"
+    },
+    {
+      "en": "Share care with the family doctor. A vein occlusion is a marker of heart and vessel risk.",
+      "hi": "फ़ैमिली डॉक्टर के साथ मिलकर देखभाल करें। वेन ऑक्लूज़न दिल और नलियों के ख़तरे का संकेत है।"
+    },
+    {
+      "en": "Order clotting or inflammation tests only for young, bilateral or unusual cases.",
+      "hi": "थक्के या सूजन की ख़ास जाँचें सिर्फ़ कम उम्र, दोनों आँखों वाले या असामान्य मामलों में करवाएँ।"
+    }
+  ],
+  "remember": {
+    "en": "Block, bleed, swell, starve. Inject the oedema, laser the new vessels, and check pressure in both eyes.",
+    "hi": "रुकना, खून बहना, सूजना, भूखा रहना। सूजन में इंजेक्शन, नई नलियों पर लेज़र, और दोनों आँखों का दबाव जाँचें।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "What is the classic danger of ischaemic CRVO within 3 months?",
+        "hi": "इस्कीमिक CRVO में 3 महीने के अंदर आम ख़तरा क्या है?"
+      },
+      "o": [
+        {
+          "en": "Neovascular glaucoma",
+          "hi": "नियोवैस्कुलर ग्लूकोमा"
+        },
+        {
+          "en": "Cataract",
+          "hi": "मोतियाबिंद"
+        },
+        {
+          "en": "Macular hole",
+          "hi": "मैक्युलर होल"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "New vessels grow on the iris and close the angle, and the pressure rises.",
+        "hi": "आइरिस पर नई नलियाँ उगकर एंगल बंद करती हैं, और दबाव बढ़ जाता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "What is first line for macular oedema in RVO?",
+        "hi": "RVO में मैक्युलर ईडिमा के लिए पहली पसंद क्या है?"
+      },
+      "o": [
+        {
+          "en": "Laser to the whole periphery",
+          "hi": "पूरे बाहरी रेटिना पर लेज़र"
+        },
+        {
+          "en": "Anti-VEGF injections",
+          "hi": "एंटी-VEGF इंजेक्शन"
+        },
+        {
+          "en": "Observation for one year",
+          "hi": "एक साल निगरानी"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Trials such as BRAVO showed anti-VEGF improves vision in RVO oedema.",
+        "hi": "BRAVO जैसे ट्रायल में एंटी-VEGF से RVO की सूजन में नज़र सुधरी।"
+      }
+    },
+    {
+      "q": {
+        "en": "The haemorrhages of a BRVO typically:",
+        "hi": "BRVO के हेमरेज आम तौर पर:"
+      },
+      "o": [
+        {
+          "en": "Fill all four quadrants",
+          "hi": "चारों क्वाड्रेंट में फैले होते हैं"
+        },
+        {
+          "en": "Stop at the horizontal midline",
+          "hi": "बीच की आड़ी रेखा पर रुक जाते हैं"
+        },
+        {
+          "en": "Lie only on the disc",
+          "hi": "सिर्फ़ डिस्क पर होते हैं"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Branch veins drain the upper or lower retina, and the horizontal raphe divides them.",
+        "hi": "शाखा वाली शिराएँ ऊपरी या निचले रेटिना से खून ले जाती हैं, और बीच की आड़ी रेखा (raphe) उन्हें बाँटती है।"
+      }
+    }
+  ],
+  "test": {
+    "clinic": "oct",
+    "classes": [
+      "RVO"
+    ],
+    "mcqTopic": "retina"
+  },
+  "deeper": {
+    "note": "rvo"
+  },
+  "glossary": [
+    "rvo",
+    "rapd",
+    "neovascular-glaucoma"
+  ],
+  "sources": [
+    "The Central Vein Occlusion Study Group. Natural history and clinical management of central retinal vein occlusion. Arch Ophthalmol 1997;115(4):486-491.",
+    "Campochiaro PA, Heier JS, Feiner L, et al; BRAVO Investigators. Ranibizumab for macular edema following branch retinal vein occlusion: six-month primary end point results of a phase III study. Ophthalmology 2010;117(6):1102-1112.",
+    "Kovach JL, Bailey ST, Kim SJ, et al. Retinal Vein Occlusions Preferred Practice Pattern. Ophthalmology 2025;132(4):P303-P343.",
+    "Kulyabin M, et al. OCTDL: Optical Coherence Tomography Dataset for Image-Based Deep Learning Methods. Sci Data 2024. doi:10.17632/sncdhf53xc.4"
+  ]
+}

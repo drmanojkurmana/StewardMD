@@ -7,11 +7,21 @@
   "use strict";
   var O = G.OPHTHALMOS;
   if (!O || !O._internal) return;
-  var I = O._internal, st = O._st, C = G.OPHTHALMOS_CORE, A = I.ACTIONS, K = I.KEYS;
+  var I = O._internal, st = O._st, C = G.OPHTHALMOS_CORE, D = G.OPHTHALMOS_DATA, A = I.ACTIONS, K = I.KEYS;
   var ico = I.ico, esc = I.esc, fmt = I.fmt;
   var DECK = "mcq", SIZE = 20, NEW_CAP = 20, EXAM_N = 30, EXAM_SEC = 90;
   var LETTERS = ["A", "B", "C", "D"];
   var SHORT = { fundamentals: "Fundamentals" };
+  var DIFF = ["", "Easy", "Medium", "Hard"];
+  // The level's pool: MBBS sets leave out hard questions (d 3), Resident sets draw all (ophthalmos-data.js mcqPool).
+  function pool(items) { return D.mcqPool(items, I.level()); }
+  function levelLine() {
+    var lv = I.level(), name = esc(st.cfg.levels[lv].label);
+    return lv === "resident" ? name + ": all questions, hard clinical vignettes included." + (I.trial("mcq.resident") === "open" ? "" : " " + I.lockBadge("mcq.resident"))
+      : name + ": easy and medium questions. Switch to Resident on the home screen for hard ones.";
+  }
+  // Resident study sets are Pro with one free trial (owner decision 2026-09-28, feature mcq.resident); MBBS sets stay free.
+  function levelGate(run) { return I.level() === "resident" ? I.gate("mcq.resident", run) : run(); }
   var Q = { deck: null, loading: null, err: null, run: null, mode: "study", timer: 0 };
 
   function $(id) { return G.document.getElementById(id); }
@@ -45,6 +55,7 @@
   /* ---------- bank screen ---------- */
   function open() {
     stopTimer();
+    if (Q.mode === "exam" && I.trial("exam") !== "open") Q.mode = "study"; // a locked exam is picked on purpose, never carried over
     st.view = "mcq-bank";
     if (!Q.deck) {
       I.paint(I.top("Back to clinics", "Question bank", "Loading") + '<div class="oph-scroll oph-pad"><p class="oph-mut" aria-live="polite">Loading questions…</p></div>');
@@ -61,12 +72,12 @@
   function renderBank(focusSel) {
     stopTimer();
     st.view = "mcq-bank"; st.onBack = null;
-    var d = Q.deck, s = stats(), topics = Object.keys(d.topics), pro = I.isPro();
-    if (Q.mode === "exam" && !pro) Q.mode = "study"; // Pro lapsed: never leave a locked mode selected
+    var d = Q.deck, s = stats(), topics = Object.keys(d.topics), ex = I.trial("exam");
+    if (Q.mode === "exam" && ex === "used") Q.mode = "study"; // Pro lapsed or trial spent: never leave a locked mode selected
     var conf = st.store.conf[DECK] || {};
     var rows = topics.map(function (t) {
       var n = 0, seen = 0, due = 0, today = I.today(), row = conf[t] || {}, answered = 0, right = row[t] || 0, k;
-      d.items.forEach(function (it) { if (it.t !== t) return; n++; var c = cardOf(it.id); if (c) { seen++; if (c[3] <= today) due++; } });
+      pool(d.items).forEach(function (it) { if (it.t !== t) return; n++; var c = cardOf(it.id); if (c) { seen++; if (c[3] <= today) due++; } });
       for (k in row) answered += row[k];
       var line = fmt(seen) + " of " + fmt(n) + " seen" + (answered ? " · " + Math.round(right * 100 / answered) + "% right" : "") + (due ? " · <b>" + fmt(due) + " due</b>" : "");
       return '<li><button class="mcq-topic" data-act="mcqtopic" data-t="' + t + '"><span class="mcq-topic-b"><b>' + esc(topicLabel(t)) + '</b><span class="oph-small">' + line + "</span></span>" +
@@ -75,14 +86,14 @@
     var nf = Object.keys(flags()).length;
     var seg = '<div class="oph-seg" role="group" aria-label="Mode">' +
       '<button data-act="mcqmode" data-m="study" aria-pressed="' + (Q.mode === "study") + '">Study</button>' +
-      '<button data-act="mcqmode" data-m="exam" aria-pressed="' + (Q.mode === "exam") + '">Exam' + (pro ? "" : ' <span class="oph-pro">' + ico("lock") + "Pro</span>") + "</button></div>";
+      '<button data-act="mcqmode" data-m="exam" aria-pressed="' + (Q.mode === "exam") + '">Exam' + (ex === "open" ? "" : " " + I.lockBadge("exam")) + "</button></div>";
     var modeLine = Q.mode === "exam"
       ? EXAM_N + " questions, " + (EXAM_N * EXAM_SEC / 60) + " minutes, marked at the end."
       : "Each answer is marked at once, with its explanation.";
-    I.paint(I.top("Back to clinics", "Question bank", fmt(d.items.length) + " questions") +
+    I.paint(I.top("Back to clinics", "Question bank", fmt(pool(d.items).length) + " questions") +
       '<div class="oph-scroll oph-pad">' +
       '<div class="oph-levelrow">' + seg + '<span class="oph-small">' + modeLine + "</span></div>" +
-      '<section class="oph-today" aria-label="Today"><p class="oph-today-line">' +
+      '<section class="oph-today" aria-label="Today"><p class="oph-small mcq-level" id="mcqLevel">' + levelLine() + '</p><p class="oph-today-line">' +
       (s.due ? "<b>" + fmt(s.due) + "</b> " + (s.due === 1 ? "question" : "questions") + " due for review" : s.seen ? "No reviews due. Carry on with new questions." : "Start with a mixed set from every subspecialty.") + "</p>" +
       '<button class="oph-btn pri oph-wide" data-act="mcqstart">' + ico("play") + (Q.mode === "exam" ? " Start exam" : " Start questions") + "</button></section>" +
       '<h2 class="oph-h2">Subspecialties</h2><ul class="mcq-topics">' + rows + "</ul>" +
@@ -113,17 +124,20 @@
     renderQ();
     if (exam) startTimer();
   }
-  function startMixed() {
+  function startMixed(n) {
     if (Q.mode === "exam") {
-      if (!I.isPro()) { I.showPro(); return; }
-      var pool = Q.deck.items.slice(), out = [];
-      while (out.length < EXAM_N && pool.length) out.push(pool.splice(Math.floor(Math.random() * pool.length), 1)[0]);
-      return start(out, true);
+      // The timed exam is a Resident (Pro) feature: every difficulty, one free trial.
+      return I.gate("exam", function () {
+        var all = Q.deck.items.slice(), out = [];
+        while (out.length < EXAM_N && all.length) out.push(all.splice(Math.floor(Math.random() * all.length), 1)[0]);
+        start(out, true);
+      });
     }
-    start(session(Q.deck.items, SIZE, NEW_CAP), false);
+    n = n > 0 ? n : SIZE; // Today's plan asks MBBS for a few questions
+    levelGate(function () { start(session(pool(Q.deck.items), n, Math.min(n, NEW_CAP)), false); });
   }
   function startTopic(t) {
-    start(session(Q.deck.items.filter(function (it) { return it.t === t; }), SIZE, SIZE), false);
+    levelGate(function () { start(session(pool(Q.deck.items).filter(function (it) { return it.t === t; }), SIZE, SIZE), false); });
   }
 
   function renderQ() {
@@ -135,7 +149,7 @@
     var opts = it.o.map(function (o, k) {
       return '<button class="oph-ans" data-act="mcqans" data-k="' + k + '"' + (r.exam && picked === k ? ' data-state="picked"' : "") + '><span class="k" aria-hidden="true">' + LETTERS[k] + "</span>" + esc(o) + "</button>";
     }).join("");
-    I.paint(I.top("Back to question bank", "Question " + (r.i + 1) + " of " + r.items.length, (r.exam ? '<span id="mcqClock">' + clock() + "</span>" : esc(topicLabel(it.t))), // an exam does not name the subspecialty
+    I.paint(I.top("Back to question bank", "Question " + (r.i + 1) + " of " + r.items.length, (r.exam ? '<span id="mcqClock">' + clock() + "</span>" : esc(topicLabel(it.t)) + (it.d ? " · " + DIFF[it.d] : "")), // an exam does not name the subspecialty
         '<button class="oph-icon" data-act="mcqflag" aria-pressed="' + flagged + '" aria-label="' + (flagged ? "Remove flag" : "Flag this answer key") + '">' + ico("flag") + "</button>") +
       '<div class="oph-scroll oph-pad mcq-q" id="mcqPanel"><p class="mcq-stem" id="mcqStem">' + esc(it.q) + "</p>" +
       '<div class="oph-answers" role="group" aria-labelledby="mcqStem">' + opts + "</div>" +
@@ -254,10 +268,10 @@
   A.mcqbank = function () { renderBank(); };
   A.mcqmode = function (b) {
     var m = b.getAttribute("data-m");
-    if (m === "exam" && !I.isPro()) { I.showPro(); return; }
+    if (m === "exam" && I.trial("exam") === "used") { I.showPro(); return; }
     Q.mode = m; renderBank("[data-act=mcqmode][data-m=" + m + "]");
   };
-  A.mcqstart = startMixed;
+  A.mcqstart = function () { startMixed(); };
   A.mcqtopic = function (b) { startTopic(b.getAttribute("data-t")); };
   A.mcqone = function (b) { var it = Q.deck.byId[b.getAttribute("data-id")]; if (it) start([it], false); };
   A.mcqflagged = function () { start(Object.keys(flags()).map(function (id) { return Q.deck.byId[id]; }).filter(Boolean), false); };
@@ -290,7 +304,8 @@
     id: "mcq", title: "Question bank", sub: "Explained answers", icon: "list",
     line: function () { var s = stats(); return s.seen ? fmt(s.seen) + " answered" + (s.due ? " · <b>" + fmt(s.due) + " due</b>" : "") : "Mixed sets, topics, timed exam"; },
     open: open,
-    start: function () { Q.mode = "study"; open(); load().then(startMixed, function () {}); } // Today's plan
+    start: function (n) { Q.mode = "study"; open(); load().then(function () { startMixed(n); }, function () {}); }, // Today's plan
+    topic: function (t) { Q.mode = "study"; open(); load().then(function () { if (Q.deck.topics[t]) startTopic(t); }, function () {}); } // a lesson's "Test yourself"
   });
   O._mcq = Q; // read-only hook for the headless UI test
 })(typeof window !== "undefined" ? window : this);

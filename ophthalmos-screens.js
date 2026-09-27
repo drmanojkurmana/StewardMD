@@ -13,8 +13,17 @@
   }
   function modalityLine(t) { return t.modality; }
 
+  // Two tabs (owner decision 2026-09-28): Learn (ophthalmos-learn.js) and Test (this hub). The first open asks which;
+  // afterwards the last-used tab opens. Both homes and the first-run screen are the "hub" view, so back closes.
   function renderHub() {
-    st.view = "hub";
+    var L = O._learn;
+    st.ret = null;
+    if (L && D.firstRun(st.prefs)) return L.firstRun();
+    if (L && st.prefs.tab === "learn") return L.home();
+    return renderTest();
+  }
+  function renderTest() {
+    st.view = "hub"; st.onBack = null;
     var lv = I.level(), locked = I.levelLocked(lv), pro = I.isPro();
     var due = 0;
     if (!locked) I.drillTracks().forEach(function (t) { due += counts(t, lv).due; });
@@ -28,8 +37,9 @@
     var today;
     if (!locked) today = planHtml(lv, streak);
     else {
-      today = '<p class="oph-today-line">The Resident level uses the full classification for every clinic. It is part of StewardMD Pro.</p>' +
-        '<button class="oph-btn pri oph-wide" data-act="pro">' + ico("lock") + " Unlock Resident level</button>";
+      // Resident is Pro, visible with locks: each clinic, simulator and the timed exam has one free trial.
+      today = '<p class="oph-today-line">The Resident level uses the full classification for every clinic. It is part of StewardMD Pro; each clinic, simulator and the timed exam has one free trial.</p>' +
+        '<button class="oph-btn sec oph-wide" data-act="pro">' + ico("lock") + " See StewardMD Pro</button>";
     }
 
     var rows = st.cfg.tracks.map(function (t) {
@@ -42,7 +52,8 @@
         line = fmt(worked) + " of " + fmt(d.items.length) + " cases worked";
       } else {
         var c = counts(t, lv);
-        line = fmt(c.seen) + " of " + fmt(c.total) + " seen" + (c.due && !locked ? " · <b>" + fmt(c.due) + " waiting</b>" : "");
+        line = fmt(c.seen) + " of " + fmt(c.total) + " seen" + (c.due && !locked ? " · <b>" + fmt(c.due) + " waiting</b>" : "") +
+          (lv === "resident" ? " " + I.lockBadge("clinic." + t.id) : "");
       }
       var act = t.selfRated ? "cases" : "clinic";
       return '<li><button class="oph-clinic" data-act="' + act + '" data-t="' + t.id + '">' +
@@ -56,11 +67,11 @@
       '<div class="oph-title"><b class="oph-mark">Ophthalmós</b><span>Eye imaging clinic</span></div>' +
       '<button class="oph-icon" data-act="stats" aria-label="Your accuracy">' + ico("trend") + "</button>" +
       '<button class="oph-icon" data-act="sources" aria-label="Images and sources">' + ico("info") + "</button></div>" +
-      '<div class="oph-scroll oph-pad">' +
+      '<div class="oph-scroll oph-pad">' + (O._learn ? O._learn.tabs("test") : "") +
       '<div class="oph-levelrow"><div class="oph-seg" role="group" aria-label="Level">' + seg + "</div>" +
       '<span class="oph-small">' + esc(st.cfg.levels[lv].sub) + "</span></div>" +
       '<section class="oph-today" aria-label="Today">' + today + "</section>" +
-      '<h2 class="oph-h2">Clinics</h2><ul class="oph-clinics">' + rows + "</ul>" + bankRows() + readRows() + simRows() + toolRows() + fundxRow() +
+      '<h2 class="oph-h2">Clinics</h2><ul class="oph-clinics">' + rows + "</ul>" + bankRows() + (O._learn ? "" : readRows()) + simRows() + (O._learn ? "" : toolRows()) + fundxRow() +
       '<p class="oph-note">Beta: teaching points and plans await review by an ophthalmologist. ' +
       '<button class="oph-link" data-act="sources">Images and sources</button></p></div>');
   }
@@ -84,7 +95,8 @@
     if (!sims.length) return "";
     return '<h2 class="oph-h2">Simulators</h2><ul class="oph-clinics">' + sims.map(function (s) {
       var r = (st.store.sims || {})[s.id];
-      var line = s.line ? s.line(r) : r && r.n ? fmt(r.ok) + " of " + fmt(r.n) + " cases right" : "Not started";
+      var line = (s.line ? s.line(r) : r && r.n ? fmt(r.ok) + " of " + fmt(r.n) + " cases right" : "Not started") +
+        (I.level() === "resident" && s.startCase ? " " + I.lockBadge("sim." + s.id) : ""); // graded Resident cases: one free trial
       return '<li><button class="oph-clinic" data-act="sim" data-s="' + esc(s.id) + '">' +
         '<span class="oph-strip" aria-hidden="true"><span class="oph-tile">' + ico(s.icon) + "</span></span>" +
         '<span class="oph-clinic-b"><b>' + esc(s.title) + "</b><span>" + esc(s.sub) + '</span><span class="oph-small">' + line + "</span></span>" +
@@ -113,7 +125,7 @@
   function renderTools() {
     var tools = O._tools || [];
     st.view = "tools"; st.onBack = null;
-    I.paint(I.top("Back to clinics", "Clinical calculators", fmt(tools.length) + " tools") +
+    I.paint(I.top("Back", "Clinical calculators", fmt(tools.length) + " tools") +
       '<div class="oph-scroll oph-pad"><p class="oph-small oph-tools-note">For learning, not for clinical decisions. Each result shows its rule and source.</p>' +
       '<ul class="oph-clinics" aria-label="Calculators">' + tools.map(toolRow).join("") + "</ul></div>");
   }
@@ -165,22 +177,26 @@
     }
     return n;
   }
+  /* MBBS (owner decision 2026-09-28): lesson first, then a few images (5) and a few questions (5); no simulator.
+     Resident stays review-first. */
+  var FEW = 5;
   function planItems(lv) {
-    var d = I.today(), items = [], due = 0;
+    var d = I.today(), items = [], due = 0, mb = lv === "foundation" && O._learn;
+    if (mb) { var ls = O._learn.planItem(); if (ls) items.push(ls); }
     I.drillTracks().forEach(function (t) { due += counts(t, lv).due; });
     var done = reviewedToday(I.drillTracks().map(function (t) { return C.key(D.levelKey(t.id, lv), ""); }));
-    var target = Math.max(10, Math.min(20, due + done));
-    items.push({ act: "today", title: "Images", done: done >= target,
+    var target = mb ? FEW : Math.max(10, Math.min(20, due + done));
+    items.push({ act: "today", n: mb ? FEW : 0, title: "Images", done: done >= target,
       line: done >= target ? fmt(done) + " read today" : due ? fmt(due) + " waiting · " + fmt(done) + " of " + fmt(target) + " today" : "New referrals · " + fmt(done) + " of " + fmt(target) + " today" });
     (O._banks || []).forEach(function (b) {
       if (!b.start) return;
       var bd = 0, k;
       for (k in st.store.cards) if (k.indexOf(b.id + ":") === 0 && st.store.cards[k][3] <= d) bd++;
-      var bdone = reviewedToday([b.id + ":"]), bt = Math.max(10, Math.min(20, bd + bdone));
-      items.push({ act: "planbank", key: b.id, title: "Questions", done: bdone >= bt,
+      var bdone = reviewedToday([b.id + ":"]), bt = mb ? FEW : Math.max(10, Math.min(20, bd + bdone));
+      items.push({ act: "planbank", key: b.id, n: mb ? FEW : 0, title: "Questions", done: bdone >= bt,
         line: bdone >= bt ? fmt(bdone) + " answered today" : (bd ? fmt(bd) + " due · " : "") + fmt(bdone) + " of " + fmt(bt) + " today" });
     });
-    var sims = (O._sims || []).filter(function (s) { return s.startCase; });
+    var sims = mb ? [] : (O._sims || []).filter(function (s) { return s.startCase; });
     if (sims.length) {
       var s = sims[d % sims.length], r = (st.store.sims || {})[s.id], sdone = !!(r && r.last === d);
       items.push({ act: "plansim", key: s.id, title: s.title, done: sdone, line: sdone ? "Patient seen today" : "One graded patient" });
@@ -190,16 +206,17 @@
   function planHtml(lv, streak) {
     var items = planItems(lv), left = items.filter(function (x) { return !x.done; }), all = !left.length;
     var rows = items.map(function (x) {
-      return '<li><button class="oph-plan-row" data-act="' + x.act + '"' + (x.key ? ' data-k="' + esc(x.key) + '"' : "") + ' data-done="' + x.done + '">' +
+      return '<li><button class="oph-plan-row" data-act="' + x.act + '"' + (x.key ? ' data-k="' + esc(x.key) + '"' : "") + (x.n ? ' data-n="' + x.n + '"' : "") + ' data-done="' + x.done + '">' +
         '<span class="oph-plan-ck" aria-hidden="true">' + (x.done ? ico("check") : "") + "</span>" +
         '<span class="oph-plan-b"><b>' + esc(x.title) + "</b><span>" + x.line + "</span></span>" +
         '<span class="oph-chev" aria-hidden="true">' + ico("chev") + '</span><span class="oph-sr">' + (x.done ? "done" : "to do") + "</span></button></li>";
     }).join("");
     var nx = left[0];
+    function attrs(x) { return x ? (x.key ? ' data-k="' + esc(x.key) + '"' : "") + (x.n ? ' data-n="' + x.n + '"' : "") : ""; }
     return '<div class="oph-plan-h"><b>Today</b><span class="oph-mut">' + (all ? "Plan done" : fmt(items.length - left.length) + " of " + fmt(items.length) + " done") +
       (streak ? " · " + streak + (streak === 1 ? " day" : " days") + " in a row" : "") + "</span></div>" +
       '<ol class="oph-day">' + rows + "</ol>" +
-      '<button class="oph-btn pri oph-wide" data-act="' + (nx ? nx.act : "today") + '"' + (nx && nx.key ? ' data-k="' + esc(nx.key) + '"' : "") + ">" + ico("play") +
+      '<button class="oph-btn pri oph-wide" data-act="' + (nx ? nx.act : "today") + '"' + attrs(nx) + ">" + ico("play") +
       (all ? " Keep going with images" : " Start " + esc(nx.title.toLowerCase())) + "</button>";
   }
 
@@ -219,21 +236,31 @@
 
   // "Start clinic": everything waiting across clinics, least retrievable first per clinic, interleaved;
   // topped up with new referrals spread across clinics when fewer than the session size wait.
-  function startToday() {
+  // size: the plan's "a few images" (MBBS) asks for a short clinic; otherwise the full session.
+  function startToday(size) {
     if (lockedGate()) return;
-    var lv = I.level(), lists = I.drillTracks().map(function (t) { return buildFor(t, lv, I.SESSION_SIZE, 0); });
-    var q = interleave(lists).slice(0, I.SESSION_SIZE);
-    if (q.length < I.SESSION_SIZE) {
-      var room = I.SESSION_SIZE - q.length, per = Math.max(1, Math.ceil(room / lists.length));
+    size = size > 0 ? size : I.SESSION_SIZE;
+    var lv = I.level(), lists = I.drillTracks().map(function (t) { return buildFor(t, lv, size, 0); });
+    var q = interleave(lists).slice(0, size);
+    if (q.length < size) {
+      var room = size - q.length, per = Math.max(1, Math.ceil(room / lists.length));
       var fresh = interleave(I.drillTracks().map(function (t) { return buildFor(t, lv, per, per).filter(isNew(t, lv)); }));
       q = q.concat(fresh.slice(0, room));
     }
     run(q, "Today’s clinic");
   }
-  function startClinic(tid) {
-    if (lockedGate()) return;
-    var t = I.track(tid);
-    run(buildFor(t, I.level(), I.SESSION_SIZE, I.NEW_CAP), t.clinic);
+  // Resident clinics go through the trial gate. The gate is checked once here, never per patient, so a trial
+  // session runs its full 20 patients; a later start of the same clinic finds the trial used.
+  // classes (a lesson's "Test yourself"): only images whose dataset class is one of these.
+  function startClinic(tid, classes) {
+    var t = I.track(tid), go = function () {
+      if (!classes || !classes.length) return run(buildFor(t, I.level(), I.SESSION_SIZE, I.NEW_CAP), t.clinic);
+      var ld = D.levelDeck(t, st.decks[t.id], I.level());
+      ld = { id: ld.id, items: ld.items.filter(function (x) { return classes.indexOf(x.it.a) >= 0; }) };
+      run(C.buildSession(ld, st.store, I.today(), { size: 12, newCap: 12 }).map(function (x) { return { t: t.id, it: x.it }; }), t.clinic);
+    };
+    if (I.level() === "resident") return I.gate("clinic." + tid, go);
+    if (!lockedGate()) go();
   }
   // Weak-spots drill (stats screen): due cards of the two confused classes first, then new, up to 12.
   function startFocus(trackId, a, b) {
@@ -371,6 +398,9 @@
         }).join("") + "</ul>";
     }
     if (!right) contrast += examples(t, of);
+    // A lesson that teaches this image's class: "Learn this" opens it (ophthalmos-learn.js).
+    var les = !right && O._learn ? O._learn.lessonFor(t.id, fine) : null;
+    if (les) contrast += '<button class="oph-btn sec oph-learnthis" data-act="lesson" data-l="' + esc(les.id) + '">' + ico("book") + " Learn this: " + esc(les.title) + "</button>";
     var plan = t.plan && t.plan[fine] ? '<h3 class="oph-h3">Plan</h3><p class="oph-plan">' + esc(t.plan[fine]) + "</p>" : "";
     return '<div class="oph-reveal">' + verdict + ref +
       '<h3 class="oph-h3">Signs of ' + esc(t.labels[fine]) + '</h3><ul class="oph-signs">' + signs + "</ul>" +
@@ -510,18 +540,17 @@
   A.level = function (b) {
     var l = b.getAttribute("data-l");
     st.prefs.level = l; D.savePrefs(I.ls(), st.prefs);
-    renderHub();
-    if (D.levelLocked(st.cfg, l, I.isPro())) I.showPro();
+    renderHub(); // locked Resident content stays visible with its lock badges; the paywall opens on use
   };
   A.pro = function () { I.showPro(); };
-  A.today = startToday;
+  A.today = function (b) { startToday(b && b.getAttribute ? +b.getAttribute("data-n") : 0); };
   A.clinic = function (b) { startClinic(b.getAttribute("data-t")); };
   A.drill = function (b) { startFocus(b.getAttribute("data-t"), b.getAttribute("data-a"), b.getAttribute("data-b")); };
   A.cases = function (b) { var c = b && b.getAttribute && b.getAttribute("data-c"); startCases(c ? c.split(",") : null); };
   A.fundx = openFundx;
   A.read = function (b) { var id = b.getAttribute("data-r"); (O._reads || []).forEach(function (r) { if (r.id === id) r.open(); }); };
   A.bank = function (b) { var id = b.getAttribute("data-b"); (O._banks || []).forEach(function (x) { if (x.id === id) x.open(); }); };
-  A.planbank = function (b) { var k = b.getAttribute("data-k"); (O._banks || []).forEach(function (x) { if (x.id === k) x.start(); }); };
+  A.planbank = function (b) { var k = b.getAttribute("data-k"), n = +b.getAttribute("data-n") || 0; (O._banks || []).forEach(function (x) { if (x.id === k) x.start(n); }); };
   A.plansim = function (b) { var k = b.getAttribute("data-k"); (O._sims || []).forEach(function (x) { if (x.id === k) x.startCase(); }); };
   A.sim = function (b) { var id = b.getAttribute("data-s"); (O._sims || []).forEach(function (s) { if (s.id === id) s.open(); }); };
   A.tools = renderTools;
@@ -554,4 +583,5 @@
   };
 
   O._renderHub = renderHub;
+  O._startClinic = startClinic;
 })(typeof window !== "undefined" ? window : this);
