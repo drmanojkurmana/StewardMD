@@ -4999,7 +4999,7 @@
     setTimeout(renderImported, 60);
   }
 
-  window.DX = { open: open, openWorkspace: openWorkspace, close: close, reset: resetAll, importPatient: importPatient, restore: restore, addFindings: addFindings, findingCatalog: findingCatalog, _state: S, _ni: DDX_NI, _differential: differential,
+  window.DX = { _nlpCtx: function () { var c = nlpCtx(); return { syn: c.syn, numeric: c.numeric || {}, v2: !!c.v2 }; }, open: open, openWorkspace: openWorkspace, close: close, reset: resetAll, importPatient: importPatient, restore: restore, addFindings: addFindings, findingCatalog: findingCatalog, _state: S, _ni: DDX_NI, _differential: differential,
     _nextQuestions: nextQuestions,
     _differentiate: differentiate, _dxAsk: dxAskOn, _openAsk: openAsk, // smd_dx_ask
     _simple: simpleOn, // smd_dx_simple

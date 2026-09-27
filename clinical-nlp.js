@@ -111,8 +111,12 @@
   var BACKGROUND_V2 = { liverDisease: 1, cerebrovascularDisease: 1, malignancy: 1, immunocompromised: 1, anticoagulated: 1,
     nursingHomeResident: 1, hospitalizationLast90Days: 1, antibioticsLast90Days: 1, priorAntibiotics: 1, steroidUse: 1, knownCKD: 1 };
 
+  function spaceV2(s) { return s.replace(/[ \t\u00a0]*[\r\n]+[ \t\u00a0]*/g, ". ").replace(/[ \t\u00a0]+/g, " "); }
   function normalize(text, v2) {
     var s = " " + String(text || "").toLowerCase() + " ";
+    // round 19 (metamorphic tests): a line break ends a statement and repeated spaces are one space
+    // ("chest  pain" read nothing; 510 of 571 audit notes lost findings when their spaces were doubled)
+    if (v2) s = spaceV2(s);
     if (v2) PRE_V2.forEach(function (p) { s = s.replace(p[0], p[1]); });
     // expand abbreviations (slash-forms need literal replace before punctuation strip)
     ABBREV.forEach(function (p) {
@@ -146,7 +150,7 @@
     return -1;
   }
 
-  // v2: "no fever, cough, dysuria or diarrhoea" negates every short item of the list, not just the first.
+  // v2: "no fever, cough, dysuria or diarrhoea" negates every short item (5 words or fewer: "chest pain on exertion") of the list.
   var LIST_STOP_V2 = /\b(?:but|however|with|then|presents?|presented|has|had|reports?|complains?|noted|developed|now|since|for)\b/;
   // Guards: a head that is a complete idiom negates nothing ("no known allergies, fever and chills"; "no
   // significant history, cough for 3 days"), and a later item that states a duration turns the list into
@@ -157,7 +161,7 @@
     var st = Math.max(norm.lastIndexOf(".", idx - 1), norm.lastIndexOf(";", idx - 1), norm.lastIndexOf(":", idx - 1)) + 1;
     var en = norm.slice(idx).search(/[.,;:]| and | or | nor /), segs = norm.slice(st, en < 0 ? norm.length : idx + en).split(/,| and | or | nor /);
     if (segs.length < 2 || !/^\s*(?:(?:he|she|they|patient|the patient|pt|mother|father|family)\s+(?:also\s+)?)?(?:no|denies|denied|without|nil|negative for|not)\b/.test(segs[0]) || LIST_HEAD_SKIP_V2.test(segs[0]) || segs[0].replace(NEG_IDIOM_V2, "") !== segs[0]) return false;
-    for (var i = 1; i < segs.length; i++) { var w = segs[i].trim().split(/\s+/).filter(Boolean); if (w.length > 3 || LIST_STOP_V2.test(segs[i])) return false; }
+    for (var i = 1; i < segs.length; i++) { var w = segs[i].trim().split(/\s+/).filter(Boolean); if (w.length > 5 || LIST_STOP_V2.test(segs[i])) return false; }
     var rest = norm.slice(idx), se = rest.search(/[.;:]/);
     return !LIST_DUR_V2.test(se < 0 ? rest : rest.slice(0, se));
   }
@@ -199,7 +203,9 @@
         return;
       }
       var lab = (labels[key] || "").toLowerCase().replace(/\([^)]*\)/g, " ").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
-      if (lab.length >= 5 && lab.length <= 26) { var li = norm.indexOf(" " + lab + " "); if (li < 0) li = norm.indexOf(" " + lab + "s "); if (li >= 0) consider(key, li + 1, "label", lab); }
+      if (lab.length >= 5 && lab.length <= 26) { var li = norm.indexOf(" " + lab + " "); if (li < 0) li = norm.indexOf(" " + lab + "s "); if (li >= 0) consider(key, li + 1, "label", lab);
+        // round 19 (metamorphic tests): every later occurrence too, so "no erythema ... diffuse erythema" reads the same either way round
+        if (v2 && li >= 0) { var lj = li + 1, ln = 0; while (ln++ < 6 && (lj = norm.indexOf(" " + lab, lj + lab.length)) >= 0) { if (/[^a-z]/.test(norm.charAt(lj + 1 + lab.length) || " ")) alts[key].push({ idx: lj + 1, method: "label", srcText: lab }); } } }
     });
 
     // 3) fuzzy typo match against synonym vocabulary (safe: distance-gated, confirmation for red flags)
@@ -214,53 +220,83 @@
 
     // 4) numeric vitals → findings (uses raw text; punctuation like "/" and "%" preserved)
     var raw = " " + String(text || "").toLowerCase() + " ", m2;
+    if (v2) raw = spaceV2(raw);
     function vital(key, src) { consider(key, (raw.indexOf(src) || 0), "vitals", src); }
+    // round 19 (metamorphic tests): v2 reads the WORST value of a vital or lab the note gives (SOFA's rule), not the
+    // first one ("baseline creatinine 1.1 ... creatinine 4.2 today"; "HR 128 ... 88 after fluids"). dir 1 = highest,
+    // -1 = lowest; val(m) puts every match on one scale (units) or returns null to skip it. Classic: the first match.
+    var nv = function (x) { return parseFloat(String(x).replace(/,/g, "")); };
+    function pick(re, val, dir) {
+      if (!v2) return raw.match(re);
+      var g = new RegExp(re.source, re.flags.indexOf("g") < 0 ? re.flags + "g" : re.flags), m, best = null, bv = 0, v;
+      while ((m = g.exec(raw))) { v = val(m); if (v != null && !isNaN(v) && (best === null || (dir > 0 ? v > bv : v < bv))) { best = m; bv = v; } if (!m[0].length) g.lastIndex++; }
+      return best;
+    }
+    var V1 = function (m) { return +m[1]; };
+    var PLTV = function (m) { var q = nv(m[1]); return m[2] ? q * 100000 : q >= 1000 ? q : q * 1000; };
+    var CRV = function (m) { var c = nv(m[1]); return (m[2] && /mol/.test(m[2])) || c > 25 ? c / 88.4 : c; };
     // v2: a labelled BP wins, else the first PLAUSIBLE x/y (classic took the first x/y, so "GCS 13/15" hid the BP)
     if (v2) { m2 = raw.match(/\b(?:bp|blood pressure|b\.p\.?)\s*(?:of|is|was|=|:|-)?\s*(\d{2,3})\s*\/\s*(\d{2,3})/);
       if (!m2) { var bre = /(\d{2,3})\s*\/\s*(\d{2,3})/g, bm; while ((bm = bre.exec(raw))) { if (+bm[1] >= 60 && +bm[1] <= 300 && +bm[2] >= 30 && +bm[2] <= 200) { m2 = bm; break; } } } }
     else m2 = raw.match(/(\d{2,3})\s*\/\s*(\d{2,3})/);
-    if (m2) { var sys = +m2[1], dia = +m2[2]; if (sys >= 60 && sys <= 300 && dia >= 30 && dia <= 200) { if (sys >= 140 || dia >= 90) { vital("hypertensionHx", m2[0]); if (byKey.hypertensionHx) byKey.hypertensionHx.display = (sys >= 180 || dia >= 120 ? "Severe hypertension (BP " : "Hypertension (BP ") + sys + "/" + dia + ")"; } else if (sys < 90 || dia < 60) vital("hypotension", m2[0]); } }
-    if ((m2 = raw.match(/\b(?:spo2|sao2|sats?|saturation|saturating)\s*(?:at|of|is|=|:)?\s*(\d{2,3})\s*%?/))) { if (+m2[1] <= 100 && +m2[1] < 92) vital("hypoxia", m2[0]); }
-    if ((m2 = raw.match(v2 ? /\b(?:hr|heart rate|pulse(?: rate)?)\s*(?:of|is|was|=|:|-)?\s*(\d{2,3})\b/ : /\b(?:hr|heart rate|pulse|pr)\s*(?:of|is|=|:)?\s*(\d{2,3})\b/))) { if (+m2[1] > 100) vital("tachycardia", m2[0]); else if (+m2[1] < 60 && +m2[1] > 20) vital("bradycardia", m2[0]); }
-    if ((m2 = raw.match(/\b(?:rr|resp(?:iratory)? rate)\s*(?:of|is|=|:)?\s*(\d{1,2})\b/))) { if (+m2[1] > 22) vital("tachypnea", m2[0]); else if (+m2[1] < 10) vital("bradypnea", m2[0]); }
-    if ((m2 = raw.match(/\bgcs\s*(?:of|is|=|:)?\s*(?:e\d\s*v\d\s*m\d|\d{1,2})(?:\s*\/\s*15)?/))) { var g = (m2[0].match(/(\d{1,2})\s*\/\s*15/) || [])[1] || (m2[0].match(/\d{1,2}/) || [])[0]; if (g && +g < 15 && +g >= 3) vital("alteredSensorium", m2[0]); }
-    if ((m2 = raw.match(v2 ? /\b(?:temp(?:erature)?|febrile at)\s*(?:of|is|was|=|:|-)?\s*(\d{2,3}(?:\.\d)?)\s*(?:°\s*[cf]?|c\b|celsius|f\b|fahrenheit|deg)?/ : /\b(?:temp(?:erature)?|febrile at)\s*(?:of|is|=|:)?\s*(\d{2,3}(?:\.\d)?)\s*(?:c|celsius|f|fahrenheit|°|deg)/))) { var tv = +m2[1]; if ((tv >= 38 && tv <= 44) || (tv >= 100 && tv <= 110)) vital("fever", m2[0]); else if (tv > 0 && tv < 35) vital("hypothermia", m2[0]); }
+    var bpRead = function (m) { var sys = +m[1], dia = +m[2]; if (!(sys >= 60 && sys <= 300 && dia >= 30 && dia <= 200)) return;
+      if (sys >= 140 || dia >= 90) { vital("hypertensionHx", m[0]); if (byKey.hypertensionHx) byKey.hypertensionHx.display = (sys >= 180 || dia >= 120 ? "Severe hypertension (BP " : "Hypertension (BP ") + sys + "/" + dia + ")"; }
+      else if (sys < 90 || dia < 60) vital("hypotension", m[0]); };
+    if (m2) {
+      bpRead(m2);
+      // round 19: v2 also reads the lowest labelled BP ("BP 128/80 on arrival, 82/50 an hour later"): the worst one decides shock
+      if (v2 && m2[0].indexOf("/") > 0) { var BP_RE = /\b(?:bp|blood pressure|b\.p\.?)\s*(?:of|is|was|=|:|-)?\s*(\d{2,3})\s*\/\s*(\d{2,3})/;
+        var lo = pick(BP_RE, function (m) { return +m[1] >= 60 && +m[1] <= 300 && +m[2] >= 30 ? +m[1] : null; }, -1); if (lo && lo !== m2 && lo.index !== m2.index) bpRead(lo); }
+    }
+    if ((m2 = pick(/\b(?:spo2|sao2|sats?|saturation|saturating)\s*(?:at|of|is|=|:)?\s*(\d{2,3})\s*%?/, function (m) { return +m[1] <= 100 ? +m[1] : null; }, -1))) { if (+m2[1] <= 100 && +m2[1] < 92) vital("hypoxia", m2[0]); }
+    var HR_RE = v2 ? /\b(?:hr|heart rate|pulse(?: rate)?)\s*(?:of|is|was|=|:|-)?\s*(\d{2,3})\b/ : /\b(?:hr|heart rate|pulse|pr)\s*(?:of|is|=|:)?\s*(\d{2,3})\b/;
+    if ((m2 = pick(HR_RE, V1, 1)) && +m2[1] > 100) vital("tachycardia", m2[0]);
+    if ((m2 = pick(HR_RE, function (m) { return +m[1] > 20 ? +m[1] : null; }, -1)) && +m2[1] < 60 && +m2[1] > 20) vital("bradycardia", m2[0]);
+    var RR_RE = /\b(?:rr|resp(?:iratory)? rate)\s*(?:of|is|=|:)?\s*(\d{1,2})\b/;
+    if ((m2 = pick(RR_RE, V1, 1)) && +m2[1] > 22) vital("tachypnea", m2[0]);
+    if ((m2 = pick(RR_RE, function (m) { return +m[1] > 0 ? +m[1] : null; }, -1)) && +m2[1] < 10 && +m2[1] > 0) vital("bradypnea", m2[0]);
+    if ((m2 = pick(/\bgcs\s*(?:of|is|=|:)?\s*(?:e\d\s*v\d\s*m\d|\d{1,2})(?:\s*\/\s*15)?/, function (m) { var q = (m[0].match(/(\d{1,2})\s*\/\s*15/) || [])[1] || (m[0].match(/\d{1,2}/) || [])[0]; return q ? +q : null; }, -1))) { var g = (m2[0].match(/(\d{1,2})\s*\/\s*15/) || [])[1] || (m2[0].match(/\d{1,2}/) || [])[0]; if (g && +g < 15 && +g >= 3) vital("alteredSensorium", m2[0]); }
+    var T_RE = v2 ? /\b(?:temp(?:erature)?|febrile at)\s*(?:of|is|was|=|:|-)?\s*(\d{2,3}(?:\.\d)?)\s*(?:°\s*[cf]?|c\b|celsius|f\b|fahrenheit|deg)?/ : /\b(?:temp(?:erature)?|febrile at)\s*(?:of|is|=|:)?\s*(\d{2,3}(?:\.\d)?)\s*(?:c|celsius|f|fahrenheit|°|deg)/;
+    var TC = function (m) { var t = +m[1]; return t >= 90 ? (t - 32) / 1.8 : t > 0 ? t : null; }, tv;   // degrees C
+    if ((m2 = pick(T_RE, TC, 1))) { tv = +m2[1]; if ((tv >= 38 && tv <= 44) || (tv >= 100 && tv <= 110)) vital("fever", m2[0]); }
+    if ((m2 = pick(T_RE, TC, -1))) { tv = +m2[1]; if (tv > 0 && tv < 35) vital("hypothermia", m2[0]); }
 
     // 4b) v2: numeric labs, MAP and durations -> findings
     if (v2) {
       var num = function (x) { return parseFloat(String(x).replace(/,/g, "")); };
-      if ((m2 = raw.match(/\bmap\s*(?:of|is|was|=|:|-)?\s*(\d{2,3})\b/)) && +m2[1] < 65 && +m2[1] >= 20) vital("hypotension", m2[0]);
-      if ((m2 = raw.match(/\b(?:lactate|lactic acid)\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:\.\d+)?)\s*(mg)?/))) {
+      if ((m2 = pick(/\bmap\s*(?:of|is|was|=|:|-)?\s*(\d{2,3})\b/, V1, -1)) && +m2[1] < 65 && +m2[1] >= 20) vital("hypotension", m2[0]);
+      if ((m2 = pick(/\b(?:lactate|lactic acid)\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:\.\d+)?)\s*(mg)?/, function (m) { return nv(m[1]) / (m[2] ? 9 : 1); }, 1))) {
         var lac = num(m2[1]) / (m2[2] ? 9 : 1);                          // mg/dL -> mmol/L
         if (lac >= LAB_V2.lactate && lac < 40) vital("lactateElevated", m2[0]);
       }
-      if ((m2 = raw.match(/\b(?:anc|absolute neutrophil(?:s| count)?)\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:[.,]\d+)?)/))) {
+      if ((m2 = pick(/\b(?:anc|absolute neutrophil(?:s| count)?)\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:[.,]\d+)?)/, function (m) { var a = nv(m[1]); return a < 50 ? a * 1000 : a; }, -1))) {
         var anc = num(m2[1]); if (anc < 50) anc *= 1000;                  // 0.3 (x10^9/L) -> 300/uL
         if (anc < 500) vital("neutropenia", m2[0]); if (anc < 100) vital("absoluteNeutrophilCountLow", m2[0]);
       }
-      if ((m2 = raw.match(/\b(?:platelets?|plt|platelet count)\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:[.,]\d+)?)\s*(lakhs?|lacs?)?/))) {
+      if ((m2 = pick(/\b(?:platelets?|plt|platelet count)\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:[.,]\d+)?)\s*(lakhs?|lacs?)?/, PLTV, -1))) {
         var plt = num(m2[1]); plt = m2[2] ? plt * 100000 : plt >= 1000 ? plt : plt * 1000;
         if (plt > 0 && plt < LAB_V2.plateletsLow) vital("thrombocytopenia", m2[0]);
       }
-      if ((m2 = raw.match(/\b(?:creatinine|creat|s\.?\s?cr)\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:\.\d+)?)\s*(\u00b5mol|\u03bcmol|umol|mg)?/))) {
+      if ((m2 = pick(/\b(?:creatinine|creat|s\.?\s?cr)\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:\.\d+)?)\s*(\u00b5mol|\u03bcmol|umol|mg)?/, CRV, 1))) {
         var cr = num(m2[1]), umol = (m2[2] && /mol/.test(m2[2])) || cr > 25;
         if (umol ? cr >= LAB_V2.creatinineUmol : cr >= LAB_V2.creatinineMgDl) vital("renalImpairment", m2[0]);
       }
       // round 18: electrolytes and glucose (findings exist only under smd_kb_v2). Units inferred from the value.
-      if ((m2 = raw.match(/\b(?:serum\s+)?(?:sodium|na\+?)\b(?:\s*(?:level|value|mmol\/l|meq\/l))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-)?\s*(\d{2,3}(?:\.\d)?)\b/)) &&
+      if ((m2 = pick(/\b(?:serum\s+)?(?:sodium|na\+?)\b(?:\s*(?:level|value|mmol\/l|meq\/l))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-)?\s*(\d{2,3}(?:\.\d)?)\b/, function (m) { return +m[1] >= 90 && +m[1] <= 200 ? +m[1] : null; }, -1)) &&
           +m2[1] >= 90 && +m2[1] < 130) vital("sodiumLow", m2[0]);
-      if ((m2 = raw.match(/\b(?:serum\s+)?(?:potassium|k\+?)\b(?:\s*(?:level|value|mmol\/l|meq\/l))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-)?\s*(\d(?:\.\d{1,2})?)\b/)) &&
+      if ((m2 = pick(/\b(?:serum\s+)?(?:potassium|k\+?)\b(?:\s*(?:level|value|mmol\/l|meq\/l))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-)?\s*(\d(?:\.\d{1,2})?)\b/, function (m) { return +m[1] >= 1.5 && +m[1] <= 10 ? +m[1] : null; }, 1)) &&
           +m2[1] >= 6 && +m2[1] <= 10) vital("potassiumHigh", m2[0]);
-      if ((m2 = raw.match(/\b(?:(?:serum|corrected|adjusted|total)\s+)?(?:calcium|ca\+?)\b(?:\s*(?:level|value|corrected|mmol\/l|mg\/dl))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-)?\s*(\d{1,2}(?:\.\d{1,2})?)\b(?!\s*-\s*\d)/))) {   // not "CA 19-9"
+      if ((m2 = pick(/\b(?:(?:serum|corrected|adjusted|total)\s+)?(?:calcium|ca\+?)\b(?:\s*(?:level|value|corrected|mmol\/l|mg\/dl))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-)?\s*(\d{1,2}(?:\.\d{1,2})?)\b(?!\s*-\s*\d)/, function (m) { var c = +m[1]; return c > 5 ? c / 4 : c; }, 1))) {   // not "CA 19-9"
         var ca = +m2[1]; if (ca > 5 ? ca > 11 && ca < 25 : ca > 2.75 && ca < 5) vital("calciumHigh", m2[0]); }
-      if ((m2 = raw.match(/\b(?:(?:random|capillary|blood|plasma|serum|fasting)\s+)?(?:glucose|sugar|grbs|rbs|cbg|bsl|fbs|glycaemia|glycemia)\b(?:\s*(?:level|value|reading))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-)?\s*(\d{1,4}(?:\.\d{1,2})?)\s*(mg|mmol)?/))) {
-        var gl = +m2[1], mg = m2[2] ? /mg/.test(m2[2]) : gl > 40; if (!mg) gl = gl * 18;
-        if (gl > 0 && gl < 70) vital("glucoseLow", m2[0]); else if (gl > 600 && gl < 3000) { vital("glucoseVeryHigh", m2[0]); vital("glucoseHigh", m2[0]); } else if (gl >= 250 && gl < 3000) vital("glucoseHigh", m2[0]); }
+      var GLU_RE = /\b(?:(?:random|capillary|blood|plasma|serum|fasting)\s+)?(?:glucose|sugar|grbs|rbs|cbg|bsl|fbs|glycaemia|glycemia)\b(?:\s*(?:level|value|reading))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-)?\s*(\d{1,4}(?:\.\d{1,2})?)\s*(mg|mmol)?/;
+      var GLV = function (m) { var q = +m[1], mg = m[2] ? /mg/.test(m[2]) : q > 40; q = mg ? q : q * 18; return q > 0 && q < 3000 ? q : null; }, gl;   // mg/dL
+      if ((m2 = pick(GLU_RE, GLV, -1)) && (gl = GLV(m2)) < 70) vital("glucoseLow", m2[0]);
+      if ((m2 = pick(GLU_RE, GLV, 1)) && (gl = GLV(m2)) >= 250) { vital("glucoseHigh", m2[0]); if (gl > 600) vital("glucoseVeryHigh", m2[0]); }
       // liver enzymes and ascitic fluid (the findings exist only under smd_kb_v2; consider() drops invalid keys)
       var CONN = "(?:\\s*(?:count|level|levels|value))?\\s*(?:\\([^)\\d]{0,12}\\))?\\s*(?:of|is|was|at|=|:|-|\\()?\\s*";
-      if ((m2 = raw.match(new RegExp("\\b(?:alt|ast|sgpt|sgot|transaminases?)\\b" + CONN + "(\\d+(?:[.,]\\d+)?)"))) && num(m2[1]) >= 1000) vital("transaminasesVeryHigh", m2[0]);
-      if ((m2 = raw.match(new RegExp("\\b(?:alp|alkaline phosphatase)\\b" + CONN + "(\\d+(?:[.,]\\d+)?)"))) && num(m2[1]) >= 250) vital("cholestaticLFT", m2[0]);
-      if ((m2 = raw.match(/\bascitic\b[^.;\n]{0,40}?\b(?:pmn|neutrophils?|polymorphs?)\b\s*(?:count)?\s*(?:of|is|was|=|:|-)?\s*(\d+(?:[.,]\d+)?)/)) && num(m2[1]) >= 250) vital("asciticPMNHigh", m2[0]);
+      if ((m2 = pick(new RegExp("\\b(?:alt|ast|sgpt|sgot|transaminases?)\\b" + CONN + "(\\d+(?:[.,]\\d+)?)"), function (m) { return nv(m[1]); }, 1)) && num(m2[1]) >= 1000) vital("transaminasesVeryHigh", m2[0]);
+      if ((m2 = pick(new RegExp("\\b(?:alp|alkaline phosphatase)\\b" + CONN + "(\\d+(?:[.,]\\d+)?)"), function (m) { return nv(m[1]); }, 1)) && num(m2[1]) >= 250) vital("cholestaticLFT", m2[0]);
+      if ((m2 = pick(/\bascitic\b[^.;\n]{0,40}?\b(?:pmn|neutrophils?|polymorphs?)\b\s*(?:count)?\s*(?:of|is|was|=|:|-)?\s*(\d+(?:[.,]\d+)?)/, function (m) { return nv(m[1]); }, 1)) && num(m2[1]) >= 250) vital("asciticPMNHigh", m2[0]);
       // durations: fever for >= 7 days -> prolonged fever; an illness of 1 to 8 weeks -> subacute onset
       var WN = { a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, few: 3, several: 4 };
       var DUR = "(\\d{1,2}|a|an|one|two|three|four|five|six|seven|eight|nine|ten|few|several)\\s*-?\\s*(d|days?|wks?|weeks?|months?)\\b";
@@ -288,7 +324,8 @@
       // round 11: a swollen joint named ("right knee is markedly swollen", "first MTP joint is swollen")
       if ((m2 = norm.match(/\b(?:joint|knee|ankle|wrist|elbow|mtp|toe|shoulder|hip)\b[^.;,]{0,25}?\b(?:swollen|effusion)\b/))) consider("jointSwelling", m2.index, "compound", m2[0]);
       // round 10: 48 hours or more into a hospital stay (hospital-acquired territory)
-      if ((m2 = norm.match(/\b(?:admitted|hospitali[sz]ed|intubated|ventilated)\s+(\d{1,2}|two|three|four|five|six|seven|eight|nine|ten)\s*days?\s*(?:ago|earlier|previously|before)\b|\b(?:hospital|post-?operative|ward|icu)\s+day\s+(\d{1,2})\b|\bday\s+(\d{1,2})\s+of\s+(?:(?:a|an|the|his|her)\s+)?(?:[a-z-]+\s+){0,2}(?:admission|ventilation|hospital stay|stay)\b/))) {
+      var hdre = /\b(?:admitted|hospitali[sz]ed|intubated|ventilated)\s+(\d{1,2}|two|three|four|five|six|seven|eight|nine|ten)\s*days?\s*(?:ago|earlier|previously|before)\b|\b(?:hospital|post-?operative|ward|icu)\s+day\s+(\d{1,2})\b|\bday\s+(\d{1,2})\s+of\s+(?:(?:a|an|the|his|her)\s+)?(?:[a-z-]+\s+){0,2}(?:admission|ventilation|hospital stay|stay)\b/g;
+      while ((m2 = hdre.exec(norm))) {   // every mention (round 19): the first may be negated or under 48 h
         var hd = m2[1] ? (WN[m2[1]] || +m2[1]) : +(m2[2] || m2[3]);
         if (hd >= 2) consider("hospitalDay48", m2.index, "compound", m2[0]);
       }
@@ -301,11 +338,11 @@
       if (ill.d >= 7) consider("subacuteOnset", ill.i, "compound", ill.src);
       // new organ dysfunction (Sepsis-3): any ONE organ at a SOFA-2 threshold, or said in words
       var od = null;
-      if ((m2 = raw.match(/\bbilirubin\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:\.\d+)?)\s*(\u00b5mol|\u03bcmol|umol|mg)?/))) { var bil = num(m2[1]); if ((m2[2] && /mol/.test(m2[2])) || bil > 25 ? bil >= 34 : bil >= 2) od = od || m2[0]; }
-      if ((m2 = raw.match(/\b(?:creatinine|creat|s\.?\s?cr)\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:\.\d+)?)\s*(\u00b5mol|\u03bcmol|umol|mg)?/)) && !/\b(?:ckd|chronic kidney|dialysis)\b/.test(norm)) {
+      if ((m2 = pick(/\bbilirubin\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:\.\d+)?)\s*(\u00b5mol|\u03bcmol|umol|mg)?/, function (m) { var b = nv(m[1]); return (m[2] && /mol/.test(m[2])) || b > 25 ? b / 17.1 : b; }, 1))) { var bil = num(m2[1]); if ((m2[2] && /mol/.test(m2[2])) || bil > 25 ? bil >= 34 : bil >= 2) od = od || m2[0]; }
+      if ((m2 = pick(/\b(?:creatinine|creat|s\.?\s?cr)\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:\.\d+)?)\s*(\u00b5mol|\u03bcmol|umol|mg)?/, CRV, 1)) && !/\b(?:ckd|chronic kidney|dialysis)\b/.test(norm)) {
         var cr2 = num(m2[1]); if ((m2[2] && /mol/.test(m2[2])) || cr2 > 25 ? cr2 >= 177 : cr2 >= 2) od = od || m2[0]; }
-      if ((m2 = raw.match(/\b(?:platelets?|plt|platelet count)\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:[.,]\d+)?)\s*(lakhs?|lacs?)?/))) { var p2 = num(m2[1]); p2 = m2[2] ? p2 * 100000 : p2 >= 1000 ? p2 : p2 * 1000; if (p2 > 0 && p2 < 100000) od = od || m2[0]; }
-      if ((m2 = raw.match(/\bgcs\s*(?:of|is|was|=|:)?\s*(\d{1,2})\b/)) && +m2[1] >= 3 && +m2[1] <= 12) od = od || m2[0];
+      if ((m2 = pick(/\b(?:platelets?|plt|platelet count)\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:[.,]\d+)?)\s*(lakhs?|lacs?)?/, PLTV, -1))) { var p2 = num(m2[1]); p2 = m2[2] ? p2 * 100000 : p2 >= 1000 ? p2 : p2 * 1000; if (p2 > 0 && p2 < 100000) od = od || m2[0]; }
+      if ((m2 = pick(/\bgcs\s*(?:of|is|was|=|:)?\s*(\d{1,2})\b/, V1, -1)) && +m2[1] >= 3 && +m2[1] <= 12) od = od || m2[0];
       if ((m2 = norm.match(/\b(?:multi-?organ|organ (?:dysfunction|failure)|mods|end-organ|acute kidney injury|aki)\b/))) od = od || m2[0];
       if (od) vital("organDysfunction", od);
     }
@@ -344,7 +381,7 @@
       }
       // round 14: a ketone RESULT below the DKA threshold (3 mmol/L), trace or zero is not ketonaemia
       if (v2 && key === "ketonemia" && e.method !== "vitals") {
-        var kv = /^[^.;\d]{0,35}?(\d+(?:\.\d+)?)(\s*\+)?|^[^.;]{0,35}?\b(trace|nil|negative|absent)\b/.exec(norm.slice(e.idx + (e.srcText || "").length));
+        var kv = /^[^.;\d]{0,35}?(\d+(?:\.\d+)?)(\s*\+)?(?!\s*-?\s*(?:d|days?|wks?|weeks?|hours?|hrs?|months?|years?)\b)|^[^.;]{0,35}?\b(trace|nil|negative|absent)\b/.exec(norm.slice(e.idx + (e.srcText || "").length));   // not "for 2 days"
         if (kv && (kv[3] || (kv[1] != null && +kv[1] < 3 && !kv[2]))) r.polarity = "absent";   // "2+" on a dipstick is positive
       }
       if (v2 && hasWord(cl, FAMILY_V2)) r.temporality = "family";   // a relative's condition is not the patient's
@@ -383,7 +420,14 @@
 
     // 6) demographics (not engine findings — display only)
     var demo = {}, dm;
-    if ((dm = norm.match(v2 ? /\b(\d{1,3})\s*-?\s*(?:year|yr|y\/o|yo|years?)\b/ : /\b(\d{1,3})\s*(?:year|yr|y\/o|yo|years?)\b/)) || (dm = norm.match(/\b(\d{1,3})\s*(?:m|male|f|female)\b/)) ||
+    // round 19 (metamorphic tests): v2 prefers the explicit age ("64-year-old", "64 yo", "aged 64") and skips a duration
+    // ("type 2 diabetes for 18 years", "20 years ago"), which came first in some notes and made the age 18
+    if (v2) { var are = /\b(\d{1,3})\s*-?\s*(?:years?|yrs?)[\s-]*old\b|\b(\d{1,3})\s*(?:y\/o|yo|yr old)\b|\baged?\s*(\d{1,3})\b/, am = norm.match(are);
+      if (!am) { var yre = /\b(\d{1,3})\s*-?\s*(?:years?|yrs?|yr)\b/g, ym;
+        while ((ym = yre.exec(norm))) { var pre = norm.slice(Math.max(0, ym.index - 14), ym.index), post = norm.slice(ym.index + ym[0].length, ym.index + ym[0].length + 14);
+          if (!/\b(?:for|since|over|past|last|x|of|about|nearly|almost|diagnosed)\s*$/.test(pre) && !/^\s*(?:ago|history|back|duration|earlier|previously|before)\b/.test(post)) { am = [ym[0], ym[1]]; break; } } }
+      if (am) dm = [am[0], am[1] || am[2] || am[3]]; }
+    if ((v2 && dm) || (dm = norm.match(v2 ? /\b(\d{1,3})\s*-?\s*(?:year|yr|y\/o|yo|years?)\b/ : /\b(\d{1,3})\s*(?:year|yr|y\/o|yo|years?)\b/)) || (dm = norm.match(/\b(\d{1,3})\s*(?:m|male|f|female)\b/)) ||
         (v2 && (dm = norm.match(/\b(?:m|f)\s*\/\s*(\d{1,3})\b|\b(\d{1,3})\s*\/\s*(?:m|f)\b/)) && (dm = [dm[0], dm[1] || dm[2]]))) { var a = +dm[1]; if (a > 0 && a < 120) demo.age = a; }
     // v2: derived engine findings (age band; fever with urinary symptoms)
     if (v2) {

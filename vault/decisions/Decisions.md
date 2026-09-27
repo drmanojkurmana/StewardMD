@@ -10585,3 +10585,11 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   touches el.style, the browser re-serialises the style attribute with a space and the
   no-space selector silently stops matching.
 - Footer links 44px tap height. Checked at 320/375/390/430/820/1024: no horizontal scroll, no errors.
+
+## 2026-09-27 - Round 19: metamorphic invariance tests for the note reader (from Laya)
+- **Owner**: "use Worth borrowing (cheap, fits our code)" after reviewing github.com/NandhaKishorM/laya.
+- **Decision**: borrow Laya's evaluation method, not its model (a 322M to 421M encoder is too heavy for the
+  phone, untrained on medicine, and a server would carry PHI). `test/run-nlp-metamorphic.mjs --check` in CI;
+  the reader takes the worst value of each vital and lab, the explicit age, every mention of a label.
+- **Why**: doubled spaces had cost 510 of 571 notes findings; reversed order changed 50 notes (now 6).
+

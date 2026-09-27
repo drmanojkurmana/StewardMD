@@ -7,11 +7,11 @@ on:
   pull_request:
     branches: [main]
     paths: ['reasoning.js', 'app.js', 'clinical-nlp.js', 'clinical-vocab.js', 'dxmgmt.js', 'opd-emr.js', 'abx-wizard.js',
-      'kb/dist/**', 'kb/validation/**', 'test/run-dx-audit.mjs', 'test/run-gate-v2.mjs', 'test/run-rank-v3.mjs', 'test/run-kb-v2.mjs', 'test/run-calib.mjs', 'test/run-prior.mjs', 'test/run-dx-ask.mjs', 'test/run-dx-simple.mjs', 'reasoning-workspace.css', 'test/dx-heldout.json', 'test/dx-heldout-2.json', 'sw.js', 'index.html', '.github/workflows/dx-accuracy.yml']
+      'kb/dist/**', 'kb/validation/**', 'test/run-dx-audit.mjs', 'test/run-gate-v2.mjs', 'test/run-rank-v3.mjs', 'test/run-kb-v2.mjs', 'test/run-calib.mjs', 'test/run-prior.mjs', 'test/run-dx-ask.mjs', 'test/run-dx-simple.mjs', 'test/run-nlp-metamorphic.mjs', 'reasoning-workspace.css', 'test/dx-heldout.json', 'test/dx-heldout-2.json', 'sw.js', 'index.html', '.github/workflows/dx-accuracy.yml']
   push:
     branches: [main]
     paths: ['reasoning.js', 'app.js', 'clinical-nlp.js', 'clinical-vocab.js', 'dxmgmt.js', 'opd-emr.js', 'abx-wizard.js',
-      'kb/dist/**', 'kb/validation/**', 'test/run-dx-audit.mjs', 'test/run-gate-v2.mjs', 'test/run-rank-v3.mjs', 'test/run-kb-v2.mjs', 'test/run-calib.mjs', 'test/run-prior.mjs', 'test/run-dx-ask.mjs', 'test/run-dx-simple.mjs', 'reasoning-workspace.css', 'test/dx-heldout.json', 'test/dx-heldout-2.json', 'sw.js', 'index.html', '.github/workflows/dx-accuracy.yml']
+      'kb/dist/**', 'kb/validation/**', 'test/run-dx-audit.mjs', 'test/run-gate-v2.mjs', 'test/run-rank-v3.mjs', 'test/run-kb-v2.mjs', 'test/run-calib.mjs', 'test/run-prior.mjs', 'test/run-dx-ask.mjs', 'test/run-dx-simple.mjs', 'test/run-nlp-metamorphic.mjs', 'reasoning-workspace.css', 'test/dx-heldout.json', 'test/dx-heldout-2.json', 'sw.js', 'index.html', '.github/workflows/dx-accuracy.yml']
 permissions:
   contents: read
 jobs:
@@ -43,6 +43,8 @@ jobs:
         run: FLAGS=smd_calib=0 node test/run-dx-audit.mjs --check
       - name: Everything classic (all plan flags off)
         run: FLAGS=smd_gate_v2=0,smd_nlp_v2=0,smd_rank_v3=0,smd_kb_v2=0,smd_calib=0 node test/run-dx-audit.mjs --check
+      - name: Note reader invariance (same meaning, same findings; ceilings in kb/validation/nlp-metamorphic-floors.json)
+        run: node test/run-nlp-metamorphic.mjs --check
       - name: Knowledge-base additions behaviour (cholangitis vs viral hepatitis, SBP, note numbers)
         run: node test/run-kb-v2.mjs
       - name: Not enough information behaviour (engine, red flags, workspace, OPD, wizard)

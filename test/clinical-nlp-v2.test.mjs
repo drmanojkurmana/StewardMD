@@ -293,3 +293,20 @@ test("sodium, potassium, calcium and glucose values become findings; units infer
   assert.deepEqual(p("blood sugar 110"), []);
   assert.deepEqual(p("sodium 138, K 4.1"), []);
 });
+
+// round 19 (metamorphic tests, the Laya idea): the same meaning must give the same findings
+test("doubled spaces and line breaks read the same; long list items are negated; worst value wins; explicit age", () => {
+  const keys = ["chestPain", "exertionalChestPain", "orthopnea", "tachycardia", "hypotension", "renalImpairment", "thrombocytopenia", "fever", "ageOver50", "cough"];
+  const c19 = { valid: Object.fromEntries(keys.map((k) => [k, 1])), labels: {}, numeric: {}, v2: true,
+    syn: { chestPain: ["chest pain"], exertionalChestPain: ["chest pain on exertion"], orthopnea: ["orthopnoea"], cough: ["cough"], fever: ["fever"] } };
+  const p = (t) => NLP.extract(t, c19).present;
+  assert.ok(p("chest  pain for 2 days").includes("chestPain"), "two spaces");
+  assert.ok(p("Seen in clinic\nFever and cough").includes("fever"), "a line break ends a statement");
+  assert.ok(!p("No orthopnoea, cough or chest pain on exertion.").includes("exertionalChestPain"), "a four-word item is negated");
+  assert.ok(p("HR 88, later HR 128").includes("tachycardia"), "the worst heart rate");
+  assert.ok(p("BP 128/80 on arrival, BP 82/50 an hour later").includes("hypotension"), "the lowest labelled BP");
+  assert.ok(p("baseline creatinine 1.1 mg/dl; creatinine 4.2 mg/dl today").includes("renalImpairment"), "the highest creatinine");
+  assert.ok(p("platelets 180; platelets 60").includes("thrombocytopenia"), "the lowest platelets");
+  assert.ok(p("Type 2 diabetes for 18 years. 64-year-old man with fever").includes("ageOver50"), "the explicit age, not a duration");
+  assert.ok(!NLP.extract("HR 88, later HR 128", { ...c19, v2: false }).present.includes("tachycardia"), "classic reads the first value");
+});
