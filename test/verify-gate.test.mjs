@@ -66,14 +66,49 @@ test("paying but UNVERIFIED is still not Pro — verification gates money, not t
   assert.equal(isPro(ON, { pro: true, proExp: now + 90 * DAY }, now), false);
 });
 
-test("manual review PENDING gets full access while it is pending (owner decision)", () => {
-  // An intern/student uploaded a college ID. Review latency must not be a user-facing outage.
-  assert.equal(isPro(ON, { provUntil: now + 5 * DAY }, now), true);
-  assert.equal(isPro(ON, { provUntil: now - DAY }, now), false, "the pending window can expire");
+test("PENDING review alone no longer holds Pro; TRIAL_NEEDS_VERIFY=0 restores the old decision", () => {
+  /* Owner, 2026-09-27: "Only verified profiles get pro subscription for 7 days ... verification is
+   * mandatory, phone number or NMC or state MC id". This REVERSES the earlier "pending review gets
+   * full access" decision (logged in vault/decisions/Decisions.md). The old behaviour is kept behind
+   * the switch, and asserted here so turning it back is known to work. */
+  assert.equal(isPro(ON, { provUntil: now + 5 * DAY }, now), false, "pending, nothing verified: no free week");
   const a = accessState(ON, { provUntil: now + 5 * DAY }, now);
-  assert.equal(a.allowed, true);
-  assert.equal(a.pending, true);
-  assert.equal(a.verified, false, "pending is NOT verified — the prescription gate still sees false");
+  assert.equal(a.allowed, false);
+  assert.equal(a.pending, true, "still reported as pending, so the UI does not nag them to re-upload");
+  assert.equal(a.verified, false);
+  const OLD = { ...ON, TRIAL_NEEDS_VERIFY: "0" };
+  assert.equal(isPro(OLD, { provUntil: now + 5 * DAY }, now), true);
+  assert.equal(isPro(OLD, { provUntil: now - DAY }, now), false, "the pending window can expire");
+});
+
+test("a VERIFIED PHONE earns the free week; it is not a registration", () => {
+  const c = { phoneVerified: true, phoneVerifiedAt: now - DAY };
+  assert.equal(isPro(ON, c, now), true, "phone-verified: the week is on");
+  const a = accessState(ON, c, now);
+  assert.equal(a.verified, false, "phone-verified is NOT a registered doctor: prescribing still sees false");
+  assert.equal(a.phoneVerified, true);
+  assert.equal(a.freeProEndsAt, now - DAY + 7 * DAY);
+  assert.equal(isPro(ON, { phoneVerified: true, phoneVerifiedAt: now - 8 * DAY }, now), false, "and it ends after 7 days");
+  const e = entitlementState(ON, c, now);
+  assert.equal(e.pro, true); assert.equal(e.source, "phone-verified-week"); assert.equal(e.phoneVerified, true);
+  // Pending review PLUS a verified phone: the phone earns it.
+  assert.equal(isPro(ON, { provUntil: now + 5 * DAY, phoneVerified: true, phoneVerifiedAt: now }, now), true);
+});
+
+test("ONE week, from whichever verification came first - verifying the other later starts no second week", () => {
+  // Phone verified 8 days ago, registration verified today: the week ran out yesterday.
+  const c = { verified: true, verifiedAt: now, phoneVerified: true, phoneVerifiedAt: now - 8 * DAY };
+  assert.equal(isPro(ON, c, now), false);
+  // Registration first, phone later: still counted from the registration.
+  const d = { verified: true, verifiedAt: now - DAY, phoneVerified: true, phoneVerifiedAt: now };
+  assert.equal(accessState(ON, d, now).freeProEndsAt, now - DAY + 7 * DAY);
+  // A doctor verified before phone stamps existed is unaffected.
+  assert.equal(isPro(ON, { verified: true, verifiedAt: now - DAY }, now), true);
+});
+
+test("the skip trial (tapping Not now) no longer grants Pro to an unverified account", () => {
+  assert.equal(isPro(ON, { provUntil: now + 7 * DAY }, now), false);
+  assert.equal(entitlementState(ON, { provUntil: now + 7 * DAY }, now).reason, "unverified");
 });
 
 test("accessState reads claims only — no KV/Firestore call on the hot path", () => {
@@ -105,10 +140,14 @@ test("entitlementState explains WHY, so the UI can route to verification not to 
   assert.equal(fresh.source, "verified-free-week");
   assert.equal(fresh.daysLeft, 6);
 
+  // Pending review without a verified phone or registration: explained, not granted.
   const pend = entitlementState(ON, { provUntil: now + 3 * DAY }, now);
-  assert.equal(pend.pro, true);
-  assert.equal(pend.source, "pending-review");
+  assert.equal(pend.pro, false);
+  assert.equal(pend.reason, "unverified");
   assert.equal(pend.pendingReview, true);
+  const pendOld = entitlementState({ ...ON, TRIAL_NEEDS_VERIFY: "0" }, { provUntil: now + 3 * DAY }, now);
+  assert.equal(pendOld.pro, true);
+  assert.equal(pendOld.source, "pending-review");
 
   const over = entitlementState(ON, verified(30), now);
   assert.equal(over.pro, false);

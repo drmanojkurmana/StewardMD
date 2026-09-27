@@ -10279,6 +10279,27 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
   split or configuration. The first cut put abdominal pain in "tap first" and lost a time-critical
   case on the text path; clinical grounds (pain is a cardinal SBP symptom) put it back in "treat".
 
+## 2026-09-27 - Free Pro week: verified profiles only (REVERSES "pending review gets full access")
+- **Owner**: "Only verified profiles get pro subscription for 7 days ... verification is mandatory,
+  phone number or NMC or state MC id verification, to get eligible for 7 days free Pro trial."
+- **Before**: an unverified account could hold the week. Tapping "Not now" on the verify screen
+  stamped `provUntil` (the skip trial), and so did a certificate still awaiting manual review
+  (the earlier decision "manual review PENDING gets full access").
+- **Now** (`TRIAL_NEEDS_VERIFY`, default on): the week needs a verified mobile number OR a verified
+  registration. ONE week per account, counted from whichever verification came first. A doctor
+  whose certificate is pending review but whose phone is verified still gets it, through the phone.
+- **Unchanged**: `verified` still means "registered doctor", so a phone-only account can never
+  prescribe; paid Pro and the owner are unaffected; the one-week-per-doctor ledger still applies.
+- **Reversible**: `TRIAL_NEEDS_VERIFY = "0"` (env or KV `billing:cfg.flags`) restores provisional
+  access with no deploy. `test/verify-gate.test.mjs` asserts both sides.
+
+## 2026-09-27 - One Profile, and verification remembered per account
+- Three doors (Profile / Settings > Profile & StewardMD ID / Account & Verification) became one
+  Profile page behind `smd_profile_hub`.
+- A server-confirmed verification is now kept per account on the device and withdrawn only by an
+  explicit server "no". Previously any network failure at launch scored as "not verified" and
+  forced the verify screen on doctors already verified. See `verify.js` and
+  `test/run-verify-universal-ui.mjs`.
 ## 2026-09-27 - Extraction v2 round 2, and afebrile septic shock in gate v2
 - **Decision**: (1) `smd_nlp_v2` phrases must start a word (short ones also end one); negated lists and
   postfix "negative" negate; "N weeks ago" needs an onset word; noisy phrases dropped (diaphoresis as
