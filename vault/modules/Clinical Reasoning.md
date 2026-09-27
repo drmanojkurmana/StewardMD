@@ -80,6 +80,11 @@ added) and the numeric-field list. Off: 0 differences across 1,660 case-paths.
 - Gap: `opd-emr.js` `nlpCtx()` (scribe grounding) passes `syn: {}`, so that path gets no phrasing at all.
 - Tuning rule: mine misses with `SPLITS=train` only; held-out 2 (`test/dx-heldout-2.json`) is read in
   aggregate only. Held-out 1 is partly in-sample now (its misses shaped a few phrases).
+- Round 2 (2026-09-27): phrases must start a word (`findWord`; 4 letters or fewer must also end one), so
+  "hiv" no longer fires in "shivering"; negated lists (`negList`, guarded against idiom heads and run-on
+  durations) and postfix "negative" (`negAfter`); "N weeks ago" needs an onset word. Precision train
+  56 -> 60%, dev 52 -> 56%. Owner accepted `abxSens` 139 -> 138 on the text path (one test-split case,
+  aggregate only) for the v2 configs. Extraction audit: dump `DX.extractText` per case, score vs gold keys.
 
 ## Differential ordering v3 (`smd_rank_v3`, default OFF, 2026-09-27)
 
@@ -113,6 +118,8 @@ Results in `kb/validation/AUDIT-2026-09-26.md` (Round 4).
   `{enough, next}`. Workspace `recompute()` uses it for `ready`. `DX._calib()` lets `opd-emr.js`
   `askMaik()` skip the provisional dx and treatment. Wizard: `SEV.insufficient`. Test
   `test/run-calib.mjs`.
+- Gate v2 `sepsis_afebrile` (2026-09-27): no fever, low BP + lactate or pressors + confusion or fast
+  breathing, host over 50 / care home / immunocompromised, gate "possible" -> likely (possible septic shock).
 - Gate v2 additions found while building calib: `sepsis_phys` (fever/rigors + hypotension, lactate
   or pressors lifts unlikely/possible/none to likely) and the rival rule needs a time-critical rival
   to have MATCHED (not just scored 42+).

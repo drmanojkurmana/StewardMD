@@ -116,6 +116,39 @@
   // whole-word cue match — so "no" doesn't fire inside "known"/"now", "old" not inside "cold", etc.
   function hasWord(hay, arr) { for (var i = 0; i < arr.length; i++) { if (new RegExp("(^|[^a-z])" + esc(arr[i]) + "($|[^a-z])").test(hay)) return true; } return false; }
 
+  // v2: a phrase must start a word ("hiv" not inside "shivering", "stemi" not inside "systemically");
+  // a short one (4 letters or fewer) must also end one ("uti" not inside "utility"). Longer phrases may
+  // run on, so stems like "cirrho" and plurals still match.
+  function findWord(hay, sv) {
+    var from = 0, i, a = /[a-z]/.test(sv.charAt(0)), z = sv.length <= 4 && /[a-z]/.test(sv.charAt(sv.length - 1));
+    while ((i = hay.indexOf(sv, from)) >= 0) {
+      if (!(a && /[a-z]/.test(hay.charAt(i - 1))) && !(z && /[a-z]/.test(hay.charAt(i + sv.length)))) return i;
+      from = i + 1;
+    }
+    return -1;
+  }
+
+  // v2: "no fever, cough, dysuria or diarrhoea" negates every short item of the list, not just the first.
+  var LIST_STOP_V2 = /\b(?:but|however|with|then|presents?|presented|has|had|reports?|complains?|noted|developed|now|since|for)\b/;
+  // Guards: a head that is a complete idiom negates nothing ("no known allergies, fever and chills"; "no
+  // significant history, cough for 3 days"), and a later item that states a duration turns the list into
+  // a positive statement ("no vomiting, fever and cough for 3 days").
+  var LIST_HEAD_SKIP_V2 = /\b(?:allerg\w*|comorbid\w*|addictions?|complaints?|significant)\b|\bhistory\s*$/;
+  var LIST_DUR_V2 = /\b(?:for|since|x|over)\s+(?:the\s+)?(?:\d|a |an |one|two|three|four|five|six|seven|few|several|past|last)|\b\d+\s*(?:d|days?|wks?|weeks?|hours?|hrs?|months?)\b/;
+  function negList(norm, idx) {
+    var st = Math.max(norm.lastIndexOf(".", idx - 1), norm.lastIndexOf(";", idx - 1), norm.lastIndexOf(":", idx - 1)) + 1;
+    var en = norm.slice(idx).search(/[.,;:]| and | or | nor /), segs = norm.slice(st, en < 0 ? norm.length : idx + en).split(/,| and | or | nor /);
+    if (segs.length < 2 || !/^\s*(?:no|denies|denied|without|nil|negative for|not)\b/.test(segs[0]) || LIST_HEAD_SKIP_V2.test(segs[0])) return false;
+    for (var i = 1; i < segs.length; i++) { var w = segs[i].trim().split(/\s+/).filter(Boolean); if (w.length > 3 || LIST_STOP_V2.test(segs[i])) return false; }
+    var rest = norm.slice(idx), se = rest.search(/[.;:]/);
+    return !LIST_DUR_V2.test(se < 0 ? rest : rest.slice(0, se));
+  }
+  // v2: a result reported after the name ("ketones negative", "blood culture: nil growth")
+  function negAfter(norm, end) {
+    var m = /^[^,;.]{0,20}?\b(negative|nil|absent|not detected)\b/.exec(norm.slice(end));
+    return !!m && !/gram[- ]?$/.test(m[0].slice(0, m[0].length - m[1].length));   // "gram-negative" names an organism
+  }
+
   /* ctx = { valid:{key:1}, labels:{key:label}, syn:{key:[synonyms]} } (from reasoning.js) */
   function extract(text, ctx) {
     ctx = ctx || {}; var valid = ctx.valid || {}, labels = ctx.labels || {}, syn = ctx.syn || {};
@@ -137,7 +170,7 @@
     Object.keys(valid).forEach(function (key) {
       if (v2 && numeric[key]) return;   // v2: a bare "platelets" / "weight" is a lab name, not a finding
       var hitIdx = -1, hitSrc = "";
-      (syn[key] || []).forEach(function (sv) { var i = norm.indexOf(sv); if (i >= 0 && (hitIdx < 0 || i < hitIdx)) { hitIdx = i; hitSrc = sv; } });
+      (syn[key] || []).forEach(function (sv) { var i = v2 ? findWord(norm, sv) : norm.indexOf(sv); if (i >= 0 && (hitIdx < 0 || i < hitIdx)) { hitIdx = i; hitSrc = sv; } });
       if (hitIdx >= 0) { consider(key, hitIdx, "synonym", hitSrc); return; }
       var lab = (labels[key] || "").toLowerCase().replace(/\([^)]*\)/g, " ").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
       if (lab.length >= 5 && lab.length <= 26) { var li = norm.indexOf(" " + lab + " "); if (li < 0) li = norm.indexOf(" " + lab + "s "); if (li >= 0) consider(key, li + 1, "label", lab); }
@@ -202,9 +235,11 @@
         fB = maxDur(new RegExp("\\b" + DUR + "\\s*(?:of|history of)\\s*(?:[a-z-]+\\s*){0,2}(?:fever|pyrexia)", "g")), fv = fA.d >= fB.d ? fA : fB;
       if (fv.d >= 7) consider("prolongedFever", fv.i, "compound", fv.src);
       // the illness's own tempo: the longest stated duration up to 8 weeks (longer = chronic background,
-      // e.g. "PSA rising over 6 months", which must not hide "back pain for 3 weeks")
-      var ill = { d: 0, i: 0, src: "" }, ire = new RegExp("(?:\\b(?:for|since|over|past|last|x)\\s*(?:the\\s*)?(?:past|last)?\\s*" + DUR + ")|(?:\\b" + DUR + "\\s*(?:history|ago|of|duration))", "g"), im;
-      while ((im = ire.exec(norm))) { var idd = im[1] ? days(im[1], im[2]) : days(im[3], im[4]); if (idd <= 56 && idd > ill.d) ill = { d: idd, i: im.index, src: im[0].trim() }; }
+      // e.g. "PSA rising over 6 months", which must not hide "back pain for 3 weeks"). A bare "3 weeks
+      // ago" dates an event ("catheter changed 3 weeks ago"); it counts only after an onset word.
+      var ill = { d: 0, i: 0, src: "" }, ire = new RegExp("(?:\\b(?:for|since|over|past|last|x)\\s*(?:the\\s*)?(?:past|last)?\\s*" + DUR + ")|(?:\\b" + DUR + "\\s*(?:history|of|duration))" +
+        "|(?:\\b(?:started|began|begun|onset|developed|noticed|since)\\s*(?:about|around|nearly|over)?\\s*" + DUR + "\\s*ago)", "g"), im;
+      while ((im = ire.exec(norm))) { var idd = im[1] ? days(im[1], im[2]) : im[3] ? days(im[3], im[4]) : days(im[5], im[6]); if (idd <= 56 && idd > ill.d) ill = { d: idd, i: im.index, src: im[0].trim() }; }
       if (ill.d >= 7) consider("subacuteOnset", ill.i, "compound", ill.src);
       // new organ dysfunction (Sepsis-3): any ONE organ at a SOFA-2 threshold, or said in words
       var od = null;
@@ -225,6 +260,7 @@
       var e = byKey[key], cl = e.method === "vitals" ? (v2 ? clauseAround(raw, Math.max(0, e.idx)) : raw) : clauseAround(norm, e.idx);
       var polarity = "present", certainty = "explicit", temporality = "current", req = false;
       if (hasWord(cl, NEG) || (key === "fever" && hasWord(norm, AFEBRILE))) polarity = "absent";
+      else if (v2 && e.method !== "vitals" && (negList(norm, e.idx) || negAfter(norm, e.idx + (e.srcText || "").length))) polarity = "absent";
       if (hasWord(cl, EXCLUDE)) { polarity = "uncertain"; certainty = "possible"; req = true; }
       else if (hasWord(cl, CONSIDER) || cl.indexOf("?") >= 0) { certainty = "possible"; req = true; }
       if (hasWord(cl, TEMPORAL)) temporality = "historical";
