@@ -226,6 +226,13 @@ try {
   // leukocytosis is an ATS/IDSA HAP criterion: a new infiltrate after 48 h with a raised count, no fever
   const hapWbc = await cm(["hospitalDay48", "ageOver50", "tachypnea", "consolidation", "crepitations", "leukocytosis"]);
   ok(hapWbc.ab === true && hapWbc.rule === "hap_criteria", `defaults · day 5, new infiltrate + WBC >= 12,000, afebrile: antibiotics (${hapWbc.cls}, ${hapWbc.rule})`);
+  // round 72 (heldout4 tune): fever, shock, rigors and a white count of 22,000 is sepsis, even when TTP/HUS outscores the
+  // infections; a real thyroid storm (palpitations, weight loss) with fever and shock still explains it
+  const septic = await cm(["fever", "rigors", "alteredSensorium", "oliguria", "tachycardia", "hypotension", "tachypnea", "glucoseHigh", "leukocytosis",
+    "thrombocytopenia", "renalImpairment", "organDysfunction", "lactateElevated", "diabetesHx", "toxicAppearing"].concat(["malariaTestNegative"]));
+  ok(septic.ab === true, `defaults · febrile shock with rigors and leukocytosis, malaria negative: antibiotics (${septic.cls}, ${septic.rule})`);
+  const storm72 = await cm(["fever", "tachycardia", "hypotension", "alteredSensorium", "palpitations", "weightLoss", "leukocytosis", "toxicAppearing"]);
+  ok(storm72.ab === false, `defaults · thyroid storm with fever and low BP: no antibiotics (${storm72.cls}, ${storm72.rule})`);
   await load(BASE + "?gatev2=1&nlpv2=0");
   ok((await assessNeg(T(obstruction), obstNeg)).rule !== "ni_lead_afebrile", "classic extractor · raw-score check kept (it reads only a note's first mention of fever)");
   await load(BASE + "?gatev2=1&rankv3=0&kbv2=0");

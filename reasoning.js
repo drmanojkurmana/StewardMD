@@ -1565,6 +1565,9 @@
   }
   var FEVER_NI = { thyroid_storm: 1, alcohol_withdrawal: 1, ttp_hus: 1, serotonin_nms: 1, sle_flare: 1, vasculitis: 1, pancreatitis: 1,
     sarcoidosis: 1, heat_stroke: 1, drug_fever: 1, sjs_ten: 1, still_disease: 1 };
+  // non-infective causes of fever (or a fever-like picture) with shock: sepsis physiology does not override them
+  var SHOCK_FEVER_NI = { cardiogenic_shock: 1, hypovolemic_shock: 1, anaphylaxis: 1, adrenal_crisis: 1, tamponade: 1, aortic_dissection: 1,
+    aaa: 1, heat_stroke: 1, thyroid_storm: 1, serotonin_nms: 1, pancreatitis: 1, pe: 1, dka: 1 };
   var GATE_V2_KEEP = ["hypotension", "lactateElevated", "raised_lactate", "vasopressorRequirement",
     "immunocompromised", "neutropenia", "absoluteNeutrophilCountLow", "persistentBacteremia"];
   // YES | NO | CONDITIONAL | SPECIFIC (ASP "N/A": antiparasitic / antiviral, not antibacterial)
@@ -1612,6 +1615,15 @@
         (g.cls === "unlikely" || g.cls === "possible" || g.cls === "none")) {
       g.cls = "likely"; g.rule = "sepsis_phys";
       return;
+    }
+    // round 72 (heldout4 tune): the same when a non-infective diagnosis only OUTSCORES the infections, if it does not itself
+    // explain fever with shock. Rigors, a raised white count or a toxic look with shock is sepsis first (Surviving Sepsis
+    // 2021), not TTP/HUS or hyperglycaemia; it stands aside for the non-infective causes of fever with shock.
+    if ((f.fever || f.rigors) && (f.hypotension || f.lactateElevated || f.vasopressorRequirement) && (f.rigors || f.leukocytosis || f.toxicAppearing) &&
+        g.cls === "noninfective") {
+      // (a diagnosis the v3 order excludes, e.g. a thyroid storm with none of its anchors, does not count)
+      var nS = d.ni.reduce(function (m, x) { return (rankV3() && rankV3Excluded(x, f)) || (m && m.score >= x.score) ? m : x; }, null), nR = d.ni[0] || null;
+      if (!(nS && SHOCK_FEVER_NI[nS.id]) && !(nR && SHOCK_FEVER_NI[nR.id])) { g.cls = "likely"; g.rule = "sepsis_phys"; return; }
     }
     // afebrile septic shock (Sepsis-3): the old and frail often never mount a fever. Low BP with a raised
     // lactate or pressors plus a second qSOFA sign (confusion, fast breathing), while an infection is still
