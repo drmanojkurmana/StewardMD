@@ -70,3 +70,10 @@ test("rationale.json covers every key rationaleKeys can return, in both language
     assert.ok(!/—/.test(R[k].en + R[k].hi), "em-dash in " + k);
   });
 });
+
+test("acidosis rationale makes no prognosis or respiratory claim the data cannot back", () => {
+  const R = JSON.parse(readFileSync("tokos/rationale.json", "utf8"));
+  const a = R["acidosis.acidaemia_not_metabolic"].en, m = R["acidosis.metabolic"].en;
+  assert.ok(/pCO2/.test(a) && !/respiratory acidaemia|clears|quickly/i.test(a), a);
+  assert.ok(/CTU-UHB/.test(m) && /7\.00/.test(m) && !/the pattern linked/i.test(m), m);
+});
