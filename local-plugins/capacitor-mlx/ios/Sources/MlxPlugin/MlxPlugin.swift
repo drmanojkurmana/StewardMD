@@ -190,7 +190,7 @@ public class MlxPlugin: CAPPlugin, CAPBridgedPlugin {
 
     /**
      * Phase 1 of docs/MAIK_MLX_SPIKE.md. Drop an EMPTY marker file into the app's Documents:
-     *   Documents/maik-mlx-selftest        (runs the 8B, then the 27B, whichever are downloaded)
+     *   Documents/maik-mlx-selftest        (runs MAiK Prime's MLX build when it is downloaded)
      * The run logs "[MLX-PERF] SELFTEST ..." lines (load time, tok/s, prefill tok/s, peak memory and
      * the jetsam headroom before and after load), then deletes the marker so it never repeats.
      * It reads the MLX files where the capacitor-llama downloader put them, so download them from
@@ -206,9 +206,7 @@ public class MlxPlugin: CAPPlugin, CAPBridgedPlugin {
         // The flat names maik-models.js gives the MLX files ("<prefix>--<file>").
         let packs: [(String, [String])] = [
             ("tb8-mlx", ["config.json", "tokenizer.json", "tokenizer_config.json", "chat_template.jinja",
-                         "model.safetensors.index.json", "model.safetensors"]),
-            ("tb2-27b-mlx", ["config.json", "hadamard.json", "tokenizer.json", "tokenizer_config.json",
-                             "chat_template.jinja", "generation_config.json", "model.safetensors"])
+                         "model.safetensors.index.json", "model.safetensors"])
         ]
         let qs = ["first-line treatment of diabetic ketoacidosis in an adult",
                   "dose of IV magnesium sulphate in severe asthma in an adult"]

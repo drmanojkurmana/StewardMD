@@ -16,7 +16,9 @@ import PackageDescription
 // model_type "prism_hadamard_qwen35", which only the fork's MLXLLM registers
 // (Libraries/MLXLLM/Models/PrismHadamardQwen35.swift). Its model card warns an ordinary loader
 // "return[s] wrong output rather than an error". The fork also loads stock "qwen3" packs (Ternary
-// Bonsai 8B MLX), so one dependency serves both.
+// Bonsai 8B MLX). 2026-09-28: the 27B MLX build was dropped (owner: "Ignore 8gb model"), so only the
+// stock 8B is used now; the fork stays pinned as-is, and moving to ml-explore upstream is possible
+// later but would need its own pins verified.
 //
 // PINS (read from the repositories on 2026-09-28, not guessed):
 //   mlx-swift-lm  main 9f70e68dce563c90ad443fef470a713936bf6a4d (2026-09-27)

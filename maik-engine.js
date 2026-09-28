@@ -820,7 +820,7 @@
           '<div class="smd-nav-lbl">Faster iPhone engine (Labs)</div>' +
           '<div class="smd-nav-sub">' + (on
             ? "On. Models with a faster engine download it below. The standard engine stays as the fallback."
-            : "Try a faster engine built for iPhone with MAiK Prime and MAiK Max 2. Experimental, off by default.") + '</div>' +
+            : "Try a faster engine built for iPhone with MAiK Prime. Experimental, off by default.") + '</div>' +
         '</div>' +
         '<button class="smd-nav-sw' + (on ? " on" : "") + '" data-me-mlx="toggle" role="switch" aria-checked="' + on + '"' +
           ' aria-label="Faster iPhone engine"><span></span></button>' +
@@ -829,7 +829,7 @@
     if (!on) return head + '</div>';
     if (!M.hasMlx(id)) {
       return head + '<div style="font:500 12px/1.5 var(--sans,system-ui);color:var(--slate,#2d4356);margin-top:3px">' +
-        'Not available for the selected model. Select MAiK Prime or MAiK Max 2 to try it.</div></div>';
+        'Not available for the selected model. Select MAiK Prime to try it.</div></div>';
     }
     var main = M.mlxMainIdOf(id), st = M.state(main) || {}, ready = M.mlxInstalledCached(id);
     var size = M.fmtGB(M.mlxBytes(id));

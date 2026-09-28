@@ -364,9 +364,10 @@ show this").
 ## MLX on iPhone (2026-09-28, branch claude/twitter-post-meaning-6h0ikw, flag `smd_maik_mlx`, default OFF)
 iOS-only second engine; Android keeps llama.cpp. Decision: Decisions.md 2026-09-28. Runbook and go/no-go:
 `docs/MAIK_MLX_SPIKE.md`.
-- `maik-models.js`: `mlx:` file lists on `bonsai-ternary-8b` (2.32 GB, stock qwen3) and `bonsai2-27b`
-  (8.62 GB, `prism_hadamard_qwen35`, needs the Layr-Labs fork). Sub-pack ids `<id>#mlx:<file>`, flat names
-  `tb8-mlx--*` / `tb2-27b-mlx--*`. `mlxEnabled()` = flag + iOS; `mlxReady(id)` also needs every file verified.
+- `maik-models.js`: `mlx:` file list on `bonsai-ternary-8b` ONLY (2.32 GB, stock qwen3). The `bonsai2-27b`
+  MLX build (8.62 GB) was dropped (owner: "Ignore 8gb model"); MAiK Max 2 stays on llama.cpp. Sub-pack ids
+  `<id>#mlx:<file>`, flat names `tb8-mlx--*`. `mlxEnabled()` = flag + iOS; `mlxReady(id)` also needs every
+  file verified.
 - `maik-local.js`: `llama()` returns the Llama plugin itself when no Mlx plugin is linked (unchanged path);
   with Mlx linked it returns an adapter that forwards to the engine holding the model and listens on both.
   `engineFor(id, loadOpts)` picks; `ensureLoaded` releases the other engine (awaited) before loading; an MLX

@@ -10,6 +10,10 @@ has been measured, and the Swift has not yet been compiled. Rollout is Labs-only
 "Faster iPhone engine (Labs)" in MaiK Settings, Advanced (flag `smd_maik_mlx`, default OFF).
 Recovery point: commit `8f51b858` (before the link and the iOS 17 raise).
 
+**Scope (owner, 2026-09-28: "Ignore 8gb model"):** only MAiK Prime (`bonsai-ternary-8b`, 2.32 GB MLX
+build) has an MLX engine. The 8.62 GB MAiK Max 2 MLX build was removed from the registry, the plugin's
+self-test and the Settings text; MAiK Max 2 stays on llama.cpp. Notes below about the 27B are history.
+
 ## What prompted this
 
 The mlx.fast challenge (yukon.org/mlxfast) reported Ternary Bonsai 2 27B at 580 decode tok/s on an M5
@@ -128,7 +132,7 @@ On the owner's Mac, in order:
 2. Build the `App` scheme (CLAUDE.md). This is the FIRST compile of capacitor-mlx; fix what Xcode
    reports. The first resolve fetches the Layr-Labs forks and swift-transformers, and MLX compiles its
    Metal library, so expect a long first build.
-3. Install, verify the running bundle's `?v=` token (`mlx2`), turn the switch on, download the faster
+3. Install, verify the running bundle's `?v=` token (`mlx3`), turn the switch on, download the faster
    engine for MAiK Prime, ask a question, and read the `[MLX-PERF]` lines.
 4. If the build cannot be made to work, `git revert` the phase 4 commit (the one after `8f51b858`): that restores iOS 16.4 and unlinks MLX
    while keeping the JS (inert without the plugin).

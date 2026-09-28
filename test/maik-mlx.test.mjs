@@ -60,7 +60,9 @@ test("flag off by default, and on Android: MLX is inert", () => {
 test("registry: pinned, hashed, weights last, no name collisions", () => {
   const { M } = models();
   const withMlx = M.packIds().filter((id) => M.hasMlx(id));
-  assert.deepEqual(withMlx.sort(), ["bonsai-ternary-8b", "bonsai2-27b"]);
+  // Only MAiK Prime: the 8.62 GB MAiK Max 2 MLX build was dropped (owner, 2026-09-28).
+  assert.deepEqual(withMlx.sort(), ["bonsai-ternary-8b"]);
+  assert.equal(M.hasMlx("bonsai2-27b"), false);
   const ggufNames = new Set(M.packIds().flatMap((id) => M.PACKS[id].files.map((f) => f.name)));
   const seen = new Set();
   for (const id of withMlx) {
@@ -86,9 +88,6 @@ test("registry: pinned, hashed, weights last, no name collisions", () => {
   }
   // Exact byte totals, from the Hugging Face API and the files hashed at the pinned commits.
   assert.equal(M.mlxBytes("bonsai-ternary-8b"), 3118 + 11422650 + 348 + 4063 + 64065 + 2303661704);
-  assert.equal(M.mlxBytes("bonsai2-27b"), 58145 + 297903 + 12809320 + 17928 + 8952 + 202 + 8595477990);
-  // The 27B needs the Layr-Labs runtime: its Hadamard config must be one of the files.
-  assert.ok(M.mlxFiles("bonsai2-27b").some((f) => f.file === "hadamard.json"));
 });
 
 test("mlxReady only when every MLX file is verified; a moved hash un-readies it", () => {
@@ -259,7 +258,8 @@ test("capacitor-mlx keeps the JS contract and is linked into the iOS app on iOS 
   assert.ok(targets.length >= 4 && targets.every((v) => v >= 17), "all iOS targets >= 17: " + targets);
   // Selftest names must match what maik-models.js stores.
   const { M } = models();
-  for (const id of ["bonsai-ternary-8b", "bonsai2-27b"]) {
+  assert.ok(!plugin.includes('"tb2-27b-mlx"'), "the dropped 27B MLX build is not benchmarked");
+  for (const id of ["bonsai-ternary-8b"]) {
     for (const f of M.mlxFiles(id)) assert.ok(plugin.includes('"' + f.file + '"'), "selftest lists " + f.file);
     assert.ok(plugin.includes('"' + M.mlxFiles(id)[0].name.split("--")[0] + '"'), "selftest prefix for " + id);
   }

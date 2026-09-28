@@ -5,6 +5,13 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-28 · MLX for MAiK Prime only; the 8.62 GB MAiK Max 2 MLX build dropped
+
+**Decision.** Owner: "Ignore 8gb model". Only `bonsai-ternary-8b` keeps an `mlx:` build (2.32 GB, stock
+qwen3). `bonsai2-27b` has none and stays on llama.cpp. **Why.** 8.62 GB against 5.95 GB for its GGUF, likely
+beyond a 12 GB iPhone's jetsam limit, and it needed the fork's Hadamard runtime. **Trade-off.** No MLX for
+the largest model; the Layr-Labs fork stays pinned though the 8B would load on upstream. **Status:** done.
+
 ## 2026-09-28 · App moves to iOS 17 to link MLX; device measurement skipped (owner)
 
 **Decision.** Owner: "No need phase 1. Go with phase 4". `local-plugins/capacitor-mlx` is linked (root

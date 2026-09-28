@@ -152,8 +152,8 @@
    *
    * URLs are pinned to a Hugging Face COMMIT, not "main", so a file can never change under its hash.
    * Weights sha256 = the HF lfs oid; every small file was downloaded at that commit and hashed
-   * (2026-09-28). tokenizer.json's own hash matched its lfs oid, which checks the method. */
-  var MLX_TB2 = HF + "/prism-ml/Ternary-Bonsai-2-27B-mlx-2bit/resolve/fcba37d2117a7077eac6b613b2668d14d9779edd/";
+   * (2026-09-28). tokenizer.json's own hash matched its lfs oid, which checks the method.
+   * Only MAiK Prime has an MLX build: the 8.62 GB MAiK Max 2 one was dropped by the owner. */
   var MLX_TB8 = HF + "/prism-ml/Ternary-Bonsai-8B-mlx-2bit/resolve/9260b24298e4211e804663e9f519962cf59f34be/";
   function mlxF(base, prefix, file, bytes, sha) {
     return { file: file, name: prefix + "--" + file, url: base + file + "?download=true", bytes: bytes, sha256: sha };
@@ -444,21 +444,9 @@
         url: HF + "/prism-ml/Ternary-Bonsai-2-27B-gguf/resolve/main/Ternary-Bonsai-2-27B-PTQ1_0.gguf?download=true",
         bytes: 5946648928,   // exact: HF API size
         sha256: "53107f530aa52eb00912263ab1ee29bd199261c87cd7b4ad4ca1318c1fe33ee3"   // lfs.oid from the HF API
-      }],
-      /* MLX build for iPhone (flag smd_maik_mlx). model_type prism_hadamard_qwen35: ONLY the
-       * Layr-Labs mlx-swift-lm fork applies the Hadamard activation transform; an ordinary MLX loader
-       * returns wrong text, not an error (model card). 8.62 GB on disk (the vision tower is in the same
-       * safetensors and is skipped at load, ~7.7 GB resident), against 5.95 GB for the GGUF, so it
-       * will not fit every 12 GB phone: the load-time memory check decides, never this registry. */
-      mlx: [
-        mlxF(MLX_TB2, "tb2-27b-mlx", "config.json", 58145, "238de7c512cc56a733421e3fd011d88f8260739e3d00e32c5d65b7943cc9f837"),
-        mlxF(MLX_TB2, "tb2-27b-mlx", "hadamard.json", 297903, "7132a3ec364f0bdac1f08f905f24f0ad2f14245060f592637a0396826d3b5fe6"),
-        mlxF(MLX_TB2, "tb2-27b-mlx", "tokenizer.json", 12809320, "0997f410c57a1f4e53b09e4be8f4a172d90edd9564368fb0847030937229b9f3"),
-        mlxF(MLX_TB2, "tb2-27b-mlx", "tokenizer_config.json", 17928, "b11349aafa7cdc6a320767cf7ceb29ed82f7eda5d65e8e0819e76f0ce947bf27"),
-        mlxF(MLX_TB2, "tb2-27b-mlx", "chat_template.jinja", 8952, "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041"),
-        mlxF(MLX_TB2, "tb2-27b-mlx", "generation_config.json", 202, "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e"),
-        mlxF(MLX_TB2, "tb2-27b-mlx", "model.safetensors", 8595477990, "130de5925082c168b7866b2e91b52e44abbafc99017e3ca352b77b5b55a269ed")
-      ]
+      }]
+      // No MLX build (owner, 2026-09-28: "Ignore 8gb model"). Its MLX pack is 8.62 GB against 5.95 GB
+      // for this GGUF and needs the Layr-Labs Hadamard runtime; MAiK Max 2 stays on llama.cpp.
     },
     "bonsai-27b": {
       // LABS (audit T27, 2026-09-25): still downloadable, shown under the picker's collapsed "Labs"
@@ -747,7 +735,7 @@
    * on it unchanged, because as far as those are concerned it is just another pack with one file.
    */
   var VISION_SUFFIX = "#vision", DRAFT_SUFFIX = "#draft";   // the speed draft rides the same sub-pack machinery
-  var MLX_MARK = "#mlx:";   // "<id>#mlx:<file>": one file of the pack's MLX build (see MLX_TB2 above)
+  var MLX_MARK = "#mlx:";   // "<id>#mlx:<file>": one file of the pack's MLX build (see MLX_TB8 above)
   function isVisionId(id) { return String(id || "").slice(-VISION_SUFFIX.length) === VISION_SUFFIX; }
   function isDraftId(id) { return String(id || "").slice(-DRAFT_SUFFIX.length) === DRAFT_SUFFIX; }
   function isMlxId(id) { return String(id || "").indexOf(MLX_MARK) > 0; }
