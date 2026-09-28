@@ -5,6 +5,16 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-29 · Clinical Bulletins: verified-only display behind smd_kb_bulletins
+
+**Decision.** A new feature flag `smd_kb_bulletins` (default: `0`, query: `?bulletins=1`, stored in `localStorage`) controls whether recent clinical bulletins appear inside the Harrison Knowledge Library disease reader. Bedside display is strictly **verified-only**: an update appears on a disease page if and only if it has `verified = 1` and matches `disease_id`. Unverified AI summaries remain confined to the notification bell feed and admin verification queue.
+
+**Why.** Displaying unverified automated AI summaries directly within diagnostic and treatment views introduces unacceptable medicolegal and clinical risk. By requiring an authenticated physician or platform owner to attest each update (stamping `verified_by`, `verified_reg`, `verified_ts`, and confirming `disease_id`), we maintain zero unvetted prescription-altering guidance at the bedside while still delivering fast, post-approval trial intelligence.
+
+**Trade-off, stated plainly.** Unverified bulletins will not immediately enhance disease pages; there is a human-in-the-loop sign-off bottleneck in the Admin Console. The notification bell feed continues to show new guideline/FDA announcements chronologically as general medical awareness.
+
+**Status.** Phase 1 in progress. Schema migration `functions/db/0002_updates_signoff.sql` staged; endpoints and bedside rendering behind flag `smd_kb_bulletins`.
+
 ## 2026-09-26 · Medical Core ships its DETERMINISTIC half ON by default as BETA; the model half stays off
 
 **Decision.** `smd_medcore` defaults to `true` in `medcore-flags.js`. Owner's call. What that turns on for every

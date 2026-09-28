@@ -59,6 +59,11 @@ CREATE TABLE IF NOT EXISTS updates (
   content_hash    TEXT DEFAULT '',          -- SHA-256 of the metadata used for dedup
   auto            INTEGER NOT NULL DEFAULT 1,      -- 1=pipeline, 0=manual publish
   pinned          INTEGER NOT NULL DEFAULT 0,
+  verified        INTEGER NOT NULL DEFAULT 0,      -- 1=physician signed off, 0=unverified
+  verified_by     TEXT DEFAULT '',                 -- attesting clinician name / email
+  verified_reg    TEXT DEFAULT '',                 -- medical council registration number
+  verified_ts     INTEGER DEFAULT 0,               -- epoch ms of attestation
+  disease_id      TEXT DEFAULT '',                 -- linked StewardMD disease ID (e.g. PANCREATIC_CANCER)
   created_ts      INTEGER NOT NULL DEFAULT 0,
   updated_ts      INTEGER NOT NULL DEFAULT 0
 );
@@ -67,6 +72,7 @@ CREATE INDEX IF NOT EXISTS idx_updates_feed  ON updates(published_ts DESC);
 CREATE INDEX IF NOT EXISTS idx_updates_type  ON updates(type, published_ts DESC);
 CREATE INDEX IF NOT EXISTS idx_updates_ws    ON updates(workspace, published_ts DESC);
 CREATE INDEX IF NOT EXISTS idx_updates_branch ON updates(branch, published_ts DESC);
+CREATE INDEX IF NOT EXISTS idx_updates_disease ON updates(disease_id, verified);
 
 -- ---- Version history (What's-Changed lives here; diff populated in Phase 3) ----
 CREATE TABLE IF NOT EXISTS update_versions (

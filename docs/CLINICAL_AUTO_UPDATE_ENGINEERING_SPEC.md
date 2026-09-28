@@ -1,83 +1,146 @@
-# StewardMD Clinical Updates & Verification Pipeline (Phase 1 Engineering Spec)
-## Native Integration: Pipeline Crawler, Review Desk, and Verified Bedside Delivery
+# StewardMD Clinical Bulletins & Updates Ingestion Spec (Phase 1)
+## Verified Bedside Intelligence, D1 Updates Extension, and Admin Sign-Off
 
 **Module:** Medical Updates (`updates`)  
-**Feature Flag:** `smd_kb_bulletins` (default: `false`, query: `?bulletins=1`)  
-**Decision Record:** `vault/decisions/Decisions.md` (ADR-2026-09-29: Bedside Clinical Bulletins)  
-**Standard Compliance:** IEC 62304 Class B, ISO 13485, SaMD Non-Device CDS, GRADE Framework  
+**Feature Flag:** `smd_kb_bulletins` (default: `0`, query override: `?bulletins=1`, stored in `localStorage`)  
+**Decision Record:** `vault/decisions/Decisions.md` (`2026-09-29 · Clinical Bulletins: verified-only display behind smd_kb_bulletins`)  
+**Target:** Safe, human-attested practice-changing trial and regulatory alerts attached to Harrison disease pages without altering canonical knowledge base text.
 
 ---
 
-## 1. Architectural Baseline & Codebase Alignment
+## 1. Architectural Principles & Scope Boundaries
 
-This specification aligns the clinical update ingestion pipeline with the existing StewardMD architecture:
+### 1.1 Scope of Updates vs. Bedside Display
+1. **The Bell Feed (`/api/updates`):** Remains what it is today: a chronological public stream of new guidelines, FDA alerts, MedWatch notices, and clinical news shown in the notification bell for broad clinical awareness.
+2. **The Bedside Disease Reader (`reasoning.js`):** Strictly **VERIFIED-ONLY**. An update appears on a disease page if and only if:
+   * It is linked to that disease via `disease_id`.
+   * It has been attested by an authenticated physician or platform owner (`verified = 1`).
+   * The feature flag `smd_kb_bulletins` is active.
+   Unverified AI summaries are never rendered on bedside clinical disease screens.
 
-1. **Schema Migration:** Checked-in migration file `functions/db/0002_updates_signoff.sql` extending the `updates` table in D1.
-2. **API Routing:** Implemented directly inside the Cloudflare Pages catch-all router `functions/api/updates/[[path]].js` and data access layer `functions/_updates_repo.js`.
-3. **Pipeline Ingestion:** Native integration into `functions/_updates_pipeline.js` by adding OpenFDA and PubMed as source types in the `sources` table, preserving canonical deduplication (`doc_key`, `content_hash`).
-4. **Clinical Verification:** Extends the existing `review-desk.js` and `SMD_RX.verifiedInfo()` rather than building a detached secondary attestation system.
-5. **Bedside Rendering & Offline Caching:** Client-side cache in `localStorage` (`smd_kb_bulletins_cache`) populated on app launch, enabling instant offline display in `reasoning.js` behind the flag `smd_kb_bulletins`.
-6. **Regulatory Posture:** **Verified-only updates display at the bedside by default.** Unverified updates remain restricted to the Review Desk queue. Unverified live display with an asterisk (`*`) is an optional, owner-gated setting.
+### 1.2 Signer Identity & Non-Repudiation
+Client request bodies are never trusted for clinical credentials. The attesting physician's identity and registration number are derived server-side:
+* For Firebase ID token holders: extracted from the verified clinician record in KV (`icu:doctor:<uid>`) written by `verify-doctor.js`.
+* For Platform Owners: derived from verified email claims (`_fbauth.js` / `_adminauth.js`).
+* Requests lacking verified clinician or owner credentials return `403 Forbidden`.
 
 ---
 
-## 2. Database Migration (`functions/db/0002_updates_signoff.sql`)
+## 2. Database Schema & Migration
 
+### 2.1 Full Schema (`functions/db/updates_schema.sql`)
+The `updates` table includes the 5 tracking columns without fake defaults:
 ```sql
--- StewardMD — Medical Updates Verification & Disease Grounding (Migration 0002)
--- Apply: wrangler d1 execute stewardmd-updates --remote --file functions/db/0002_updates_signoff.sql
+CREATE TABLE IF NOT EXISTS updates (
+  id              TEXT PRIMARY KEY,
+  doc_key         TEXT NOT NULL,
+  source_id       TEXT DEFAULT '',
+  type            TEXT NOT NULL DEFAULT 'guideline',
+  organization    TEXT DEFAULT '',
+  workspace       TEXT NOT NULL DEFAULT 'internal_medicine',
+  branch          TEXT DEFAULT '',
+  title           TEXT NOT NULL,
+  body            TEXT DEFAULT '',
+  category        TEXT DEFAULT 'general',
+  published_ts    INTEGER NOT NULL DEFAULT 0,
+  importance      TEXT NOT NULL DEFAULT 'normal',
+  est_read_min    INTEGER DEFAULT 0,
+  summary         TEXT DEFAULT '',
+  summary_json    TEXT DEFAULT '',
+  official_url    TEXT DEFAULT '',
+  official_pdf_url TEXT DEFAULT '',
+  doi             TEXT DEFAULT '',
+  pmid            TEXT DEFAULT '',
+  keywords        TEXT DEFAULT '',
+  version         TEXT DEFAULT '',
+  content_hash    TEXT DEFAULT '',
+  auto            INTEGER NOT NULL DEFAULT 1,
+  pinned          INTEGER NOT NULL DEFAULT 0,
+  verified        INTEGER NOT NULL DEFAULT 0,
+  verified_by     TEXT DEFAULT '',
+  verified_reg    TEXT DEFAULT '',
+  verified_ts     INTEGER DEFAULT 0,
+  disease_id      TEXT DEFAULT '',
+  created_ts      INTEGER NOT NULL DEFAULT 0,
+  updated_ts      INTEGER NOT NULL DEFAULT 0
+);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_updates_dockey ON updates(doc_key);
+CREATE INDEX IF NOT EXISTS idx_updates_feed  ON updates(published_ts DESC);
+CREATE INDEX IF NOT EXISTS idx_updates_type  ON updates(type, published_ts DESC);
+CREATE INDEX IF NOT EXISTS idx_updates_ws    ON updates(workspace, published_ts DESC);
+CREATE INDEX IF NOT EXISTS idx_updates_branch ON updates(branch, published_ts DESC);
+CREATE INDEX IF NOT EXISTS idx_updates_disease ON updates(disease_id, verified);
+```
 
+### 2.2 Checked-In Migration (`functions/db/0002_updates_signoff.sql`)
+For migrating existing D1 production instances:
+```sql
 ALTER TABLE updates ADD COLUMN verified INTEGER NOT NULL DEFAULT 0;
 ALTER TABLE updates ADD COLUMN verified_by TEXT DEFAULT '';
 ALTER TABLE updates ADD COLUMN verified_reg TEXT DEFAULT '';
 ALTER TABLE updates ADD COLUMN verified_ts INTEGER DEFAULT 0;
 ALTER TABLE updates ADD COLUMN disease_id TEXT DEFAULT '';
-ALTER TABLE updates ADD COLUMN evidence_grade TEXT DEFAULT 'GRADE 1B';
-ALTER TABLE updates ADD COLUMN trial_phase TEXT DEFAULT 'Phase III RCT';
 
 CREATE INDEX IF NOT EXISTS idx_updates_disease ON updates(disease_id, verified);
-CREATE INDEX IF NOT EXISTS idx_updates_signoff ON updates(verified, published_ts DESC);
 ```
 
 ---
 
 ## 3. Data Access Layer (`functions/_updates_repo.js`)
 
-Add the sign-off mutation and verified-only query methods:
-
+### 3.1 Update `rowToItem`
+Include the new columns in the public projection:
 ```javascript
-/**
- * Attest an update with attending physician credentials.
- */
-export async function signoffUpdate(db, id, verifiedBy, verifiedReg) {
+export function rowToItem(r) {
+  if (!r) return null;
+  return {
+    id: r.id,
+    type: r.type,
+    category: r.category || typeCategory(r.type),
+    title: r.title,
+    body: r.body || (r.summary ? String(r.summary).slice(0, 240) : ""),
+    summary: r.summary || "",
+    organization: r.organization || r.source_id || "",
+    source: r.organization || r.source_id || "StewardMD",
+    workspace: r.workspace || "internal_medicine",
+    branch: r.branch || "",
+    importance: r.importance || "normal",
+    est_read_min: r.est_read_min || 0,
+    url: r.official_url || "",
+    version: r.version || "",
+    doi: r.doi || "",
+    pmid: r.pmid || "",
+    pinned: !!r.pinned,
+    auto: !!r.auto,
+    verified: !!r.verified,
+    verified_by: r.verified_by || "",
+    verified_reg: r.verified_reg || "",
+    verified_ts: r.verified_ts || 0,
+    disease_id: r.disease_id || "",
+    ts: r.published_ts || r.created_ts || 0,
+  };
+}
+```
+
+### 3.2 Add Sign-Off & Verified Listing Helpers
+```javascript
+// Attest an update with verified clinician credentials and bind to disease_id
+export async function signoffUpdate(env, id, { verifiedBy, verifiedReg, diseaseId }) {
+  if (!hasDb(env)) throw new Error("no-db");
   const now = Date.now();
-  const res = await db.prepare(`
-    UPDATE updates
-    SET verified = 1,
-        verified_by = ?,
-        verified_reg = ?,
-        verified_ts = ?,
-        updated_ts = ?
-    WHERE id = ?
-  `).bind(verifiedBy, verifiedReg, now, now, id).run();
-  
+  const res = await db(env).prepare(
+    "UPDATE updates SET verified = 1, verified_by = ?, verified_reg = ?, verified_ts = ?, disease_id = ?, updated_ts = ? WHERE id = ?"
+  ).bind(verifiedBy, verifiedReg, now, diseaseId, now, id).run();
   return (res.meta && res.meta.changes > 0);
 }
 
-/**
- * Fetch verified updates for a specific disease ID (with client-side caching header).
- */
-export async function listVerifiedByDisease(db, diseaseId) {
-  const rows = await db.prepare(`
-    SELECT id, title, body, summary, official_url, published_ts,
-           evidence_grade, trial_phase, verified_by, verified_reg, verified_ts
-    FROM updates
-    WHERE disease_id = ? AND verified = 1
-    ORDER BY published_ts DESC
-    LIMIT 3
-  `).bind(diseaseId).all();
-  
-  return rows.results || [];
+// Fetch all verified bulletins that carry a linked disease_id (used for client offline sync)
+export async function listVerifiedBulletins(env) {
+  if (!hasDb(env)) return [];
+  const rs = await db(env).prepare(
+    "SELECT * FROM updates WHERE verified = 1 AND disease_id != '' ORDER BY published_ts DESC LIMIT 100"
+  ).all();
+  return (rs.results || []).map(rowToItem);
 }
 ```
 
@@ -85,149 +148,168 @@ export async function listVerifiedByDisease(db, diseaseId) {
 
 ## 4. API Router Integration (`functions/api/updates/[[path]].js`)
 
-Add the `/api/updates/:id/signoff` and `/api/updates/by-disease/:diseaseId` routes into the existing `[[path]].js` router:
+All changes fit natively into the existing `[[path]].js` router using `parts` and `head`.
 
+### 4.1 Public Bedside Cache Endpoint (Above Admin Gate, Line ~226)
 ```javascript
-// Inside functions/api/updates/[[path]].js
-
-// Route: POST /api/updates/:id/signoff
-if (method === "POST" && path.length === 2 && path[1] === "signoff") {
-  if (!ownerOK(context)) return json({ ok: false, error: "Unauthorized" }, 401);
-  
-  const id = decodeURIComponent(path[0]);
-  const body = await context.request.json().catch(() => ({}));
-  const { verified_by, verified_reg } = body;
-
-  if (!verified_by || !verified_reg) {
-    return json({ ok: false, error: "Missing physician signature or registration" }, 400);
+  // GET /api/updates/verified -> returns all verified, disease-linked bulletins for bedside offline sync
+  if (method === "GET" && head === "verified") {
+    if (!repo.hasDb(env)) return json({ ok: true, items: [] });
+    const items = await repo.listVerifiedBulletins(env);
+    return json({ ok: true, items }, 200, PUB_CACHE);
   }
+```
 
-  const ok = await repo.signoffUpdate(context.env.UPDATES_DB, id, verified_by, verified_reg);
-  if (!ok) return json({ ok: false, error: "Update not found" }, 404);
+### 4.2 Gated Sign-Off Endpoint (Below Admin Gate, Line ~240)
+```javascript
+  // POST /api/updates/:id/signoff -> Attest an update and bind disease_id
+  if (method === "POST" && parts.length === 2 && parts[1] === "signoff") {
+    const id = decodeURIComponent(head);
+    if (!repo.hasDb(env)) return json({ error: "no-db" }, 501);
 
-  return json({ ok: true, id, verified: true, verified_by, verified_reg });
-}
+    // Derive signer identity server-side
+    const uid = await identify(request, env);
+    let verifiedBy = "", verifiedReg = "";
 
-// Route: GET /api/updates/by-disease/:diseaseId (Public bedside endpoint)
-if (method === "GET" && path.length === 2 && path[0] === "by-disease") {
-  const diseaseId = decodeURIComponent(path[1]);
-  const items = await repo.listVerifiedByDisease(context.env.UPDATES_DB, diseaseId);
-  return json({ ok: true, items }, 200, PUB_CACHE);
-}
+    if (uid) {
+      const kv = env.CASES_KV || env.GHIS_KV;
+      if (kv) {
+        const docRec = await kv.get("icu:doctor:" + uid, "json");
+        if (docRec && (docRec.status === "verified" || docRec.verified)) {
+          verifiedBy = docRec.name || docRec.doctorName || "";
+          verifiedReg = docRec.regNo || docRec.extractedRegNo || "";
+        }
+      }
+    }
+
+    // Fallback: If caller is platform owner via Google Auth or Admin Token
+    const isOwner = await ownerOK(request, env);
+    if (!verifiedBy && isOwner) {
+      verifiedBy = "Platform Owner";
+      verifiedReg = "OWNER";
+    }
+
+    if (!verifiedBy) {
+      return json({ error: "verified-clinician-or-owner-required" }, 403);
+    }
+
+    // Validate disease_id payload
+    let body = {}; try { body = await request.json(); } catch (e) {}
+    const diseaseId = String(body.disease_id || "").trim();
+    if (!diseaseId) {
+      return json({ error: "disease_id-required" }, 400);
+    }
+    if (!/^[A-Za-z0-9_.-]{2,80}$/.test(diseaseId)) {
+      return json({ error: "invalid-disease-id-format" }, 400);
+    }
+
+    const ok = await repo.signoffUpdate(env, id, { verifiedBy, verifiedReg, diseaseId });
+    if (!ok) return json({ error: "update-not-found" }, 404);
+
+    return json({ ok: true, id, verified: true, verified_by: verifiedBy, verified_reg: verifiedReg, disease_id: diseaseId });
+  }
 ```
 
 ---
 
-## 5. Pipeline Crawler Enhancement (`functions/_updates_pipeline.js`)
+## 5. Admin Console Sign-Off Section (`admin/updates.html`)
 
-Rather than creating a standalone script, extend the existing `sources` crawler. Add source entries with `parser_type = 'litapi'` (Europe PMC) or new parsers for OpenFDA:
+Inside `admin/updates.html`, add a clinical attestation section for unverified items:
+
+```html
+<div class="card" id="signoffDesk" style="border: 2px solid var(--tl);">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h2 style="margin:0; font:800 16px var(--f); color:var(--tl);">🩺 Clinical Sign-Off Desk</h2>
+    <button class="ghost" id="reloadSignoff" style="padding:6px 12px; font-size:12px;">↻ Reload</button>
+  </div>
+  <p class="hint" style="margin:4px 0 12px;">
+    Updates must be signed off by a verified clinician with a linked disease ID before appearing on bedside disease pages.
+  </p>
+  <div id="signoffQueue"></div>
+</div>
+```
 
 ```javascript
-// Inside functions/_updates_pipeline.js: Integrate with existing runPipeline()
-// 1. OpenFDA parser handler
-async function crawlOpenFDA(source) {
-  const url = source.rss_url || "https://api.fda.gov/drug/label.json?search=effective_time:[20260101+TO+20261231]&limit=10";
-  const r = await fetch(url);
-  if (!r.ok) return [];
-  const data = await r.json();
-  
-  return (data.results || []).map(entry => {
-    const brand = entry.openfda?.brand_name?.[0] || "Drug Label Update";
-    const generic = entry.openfda?.generic_name?.[0] || "";
-    const docKey = `fda:${entry.id || entry.set_id}`;
-    
-    return {
-      doc_key: docKey,
-      source_id: source.id,
-      type: "drug_approval",
-      title: `FDA Approval: ${brand} (${generic})`,
-      body: (entry.indications_and_usage?.[0] || "").slice(0, 500),
-      official_url: "https://www.fda.gov/drugs",
-      published_ts: Date.now(),
-      auto: 1,
-      verified: 0 // Ingested as unverified by default
-    };
+// Controller inside admin/updates.html
+function signoffItem(id) {
+  var diseaseInput = document.getElementById("disease_" + id);
+  var diseaseId = (diseaseInput ? diseaseInput.value : "").trim();
+  if (!diseaseId) {
+    alert("Please enter or select a target disease ID (e.g. PANCREATIC_CANCER).");
+    return;
+  }
+
+  fetch("/api/updates/" + encodeURIComponent(id) + "/signoff", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "X-Admin-Token": token() },
+    body: JSON.stringify({ disease_id: diseaseId })
+  }).then(function(r) { return r.json(); }).then(function(res) {
+    if (res.ok) {
+      alert("✓ Update verified and bound to " + res.disease_id);
+      loadSignoffQueue();
+    } else {
+      alert("Error: " + (res.error || "Failed"));
+    }
   });
 }
 ```
 
-Deduplication via `doc_key` and `content_hash` continues to be enforced by `_updates_pipeline.js`.
-
 ---
 
-## 6. Review Desk Integration (`review-desk.js`)
+## 6. Bedside UI & Offline Cache (`reasoning.js`)
 
-Extend the existing Review Desk (`review-desk.js`) by adding `updates` as a 4th review category alongside `protocols`, `kits`, and `consents`:
-
+### 6.1 Flag Convention
+Adheres to the standard StewardMD flag pattern (no `window.SMD_FLAGS`):
 ```javascript
-// Inside review-desk.js
-var KINDS = [
-  ["protocol", "Protocols"],
-  ["kit", "Specialty kits"],
-  ["consent", "Consent templates"],
-  ["update", "Clinical updates"] // Added
-];
-
-// Reuses existing clinician credentials via SMD_RX.verifiedInfo()
-function applySignoff(updateId) {
-  var creds = (G.SMD_RX && G.SMD_RX.verifiedInfo) ? G.SMD_RX.verifiedInfo() : null;
-  var name = creds ? creds.name : "";
-  var reg = creds ? creds.regNo : "";
-
-  return fetch("/api/updates/" + encodeURIComponent(updateId) + "/signoff", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ verified_by: name, verified_reg: reg })
-  }).then(function(r) { return r.json(); });
+function bulletinsFlagOn() {
+  try {
+    var q = (location.search.match(/[?&]bulletins=([^&]+)/) || [])[1];
+    if (q === "1" || q === "true") return true;
+    if (q === "0" || q === "false") return false;
+    return localStorage.getItem("smd_kb_bulletins") === "1";
+  } catch (e) { return false; }
 }
 ```
 
----
-
-## 7. Bedside UI & Offline Cache (`reasoning.js`)
-
-### 7.1 Offline Local Cache
-On app initialization, `home.js` or `reasoning.js` caches recent verified bulletins:
+### 6.2 Offline Sync
+On app startup (when online), sync verified bulletins to `localStorage`:
 ```javascript
-function syncBedsideBulletinsCache() {
+function syncBedsideBulletins() {
   if (!navigator.onLine) return;
-  fetch("/api/updates?limit=50&type=drug_approval,trial,guideline")
-    .then(r => r.json())
-    .then(d => {
-      if (d && d.items) {
+  fetch("/api/updates/verified")
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (d && d.ok && Array.isArray(d.items)) {
         localStorage.setItem("smd_kb_bulletins_cache", JSON.stringify(d.items));
       }
     }).catch(function() {});
 }
 ```
 
-### 7.2 Bedside Disease View Rendering
-When rendering a disease in the Harrison Knowledge Library:
+### 6.3 Bedside Disease Page Rendering
+When displaying a disease page in `reasoning.js`:
 ```javascript
 function renderBedsideBulletins(diseaseId) {
-  // Feature flag check
-  var flag = (window.SMD_FLAGS && window.SMD_FLAGS.smd_kb_bulletins) || 
-             (location.search.indexOf("bulletins=1") >= 0);
-  if (!flag) return "";
-
-  var cache = JSON.parse(localStorage.getItem("smd_kb_bulletins_cache") || "[]");
+  if (!bulletinsFlagOn() || !diseaseId) return "";
+  
+  var cache = [];
+  try { cache = JSON.parse(localStorage.getItem("smd_kb_bulletins_cache") || "[]"); } catch (e) {}
   var matched = cache.filter(function(it) {
-    return it.disease_id === diseaseId && it.verified === 1; // Verified-only for safety
+    return it.disease_id === diseaseId && it.verified;
   });
-
   if (!matched.length) return "";
 
   return matched.map(function(b) {
-    return '<div class="smd-kb-bulletin bulletin-verified">' +
+    return '<div class="smd-bulletin bulletin-verified" role="status">' +
       '<div class="bulletin-header">' +
-        '<span class="bulletin-pill">✓ Verified Clinical Bulletin</span>' +
-        '<span class="bulletin-date">' + new Date(b.published_ts).toLocaleDateString() + '</span>' +
+        '<span class="bulletin-pill">✓ Verified Practice-Changing Update</span>' +
+        '<span class="bulletin-date">' + new Date(b.ts || b.published_ts).toLocaleDateString() + '</span>' +
       '</div>' +
       '<div class="bulletin-headline"><strong>' + esc(b.title) + '</strong></div>' +
-      '<p class="bulletin-body">' + esc(b.body || b.summary) + '</p>' +
+      '<p class="bulletin-body">' + esc(b.summary || b.body) + '</p>' +
       '<div class="bulletin-footer">' +
-        (b.official_url ? '<a href="' + esc(b.official_url) + '" target="_blank" rel="noopener">Primary Evidence ↗</a>' : '') +
-        '<div class="bulletin-signed">Verified by ' + esc(b.verified_by) + ' (' + esc(b.verified_reg) + ')</div>' +
+        (b.url ? '<a href="' + esc(b.url) + '" target="_blank" rel="noopener">Source Evidence ↗</a>' : '') +
+        '<span class="bulletin-signed">Attested by ' + esc(b.verified_by) + ' (' + esc(b.verified_reg) + ')</span>' +
       '</div>' +
     '</div>';
   }).join("");
@@ -236,15 +318,11 @@ function renderBedsideBulletins(diseaseId) {
 
 ---
 
-## 8. Rollout Plan & Milestones
+## 7. Phase 1 Implementation Plan
 
-* **Phase 1 (Safe Attestation & Grounding):**
-  1. Commit `functions/db/0002_updates_signoff.sql`.
-  2. Implement `/signoff` and `/by-disease/:id` in `functions/api/updates/[[path]].js` and `functions/_updates_repo.js`.
-  3. Extend `review-desk.js` to show pending unverified updates.
-  4. Bedside display of verified-only updates behind flag `smd_kb_bulletins` with offline cache.
-* **Phase 2 (Automated Ingestion):**
-  1. Add OpenFDA source entries to `sources` table.
-  2. Map PubMed/Europe PMC queries to `parser_type = 'litapi'`.
-* **Phase 3 (Owner Policy Call on Unverified Tier):**
-  1. Review whether unverified updates with `*` should ever be displayed on bedside screens.
+1. **Database:** Verify `functions/db/updates_schema.sql` and run `functions/db/0002_updates_signoff.sql`.
+2. **Repository:** Update `rowToItem`, add `signoffUpdate` and `listVerifiedBulletins` to `functions/_updates_repo.js`.
+3. **Routing:** Add `/api/updates/verified` (public) and `/api/updates/:id/signoff` (gated) into `functions/api/updates/[[path]].js`.
+4. **Admin UI:** Add sign-off section with disease selector to `admin/updates.html`.
+5. **Bedside UI:** Add `syncBedsideBulletins` and `renderBedsideBulletins` behind flag `smd_kb_bulletins` in `reasoning.js`.
+6. **Tests:** Ensure test suite passes via `npm test`.
