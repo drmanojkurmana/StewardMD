@@ -616,3 +616,20 @@ test("vital-sign formats doctors type", () => {
   assert.ok(v.present.includes("fever") && v.present.includes("tachycardia"));
   assert.equal(r("45 F with fever").demographics.age, 45);
 });
+
+// round 46: lab abbreviations doctors type (Cr, K, T. bili); a bare glucose of 20 to 40 is ambiguous, so not read
+test("lab abbreviations and an ambiguous glucose", () => {
+  const c46 = { valid: { renalImpairment: 1, potassiumHigh: 1, glucoseLow: 1, glucoseHigh: 1, organDysfunction: 1 }, labels: {}, numeric: {}, v2: true, syn: {} };
+  const r = (t) => NLP.extract(t, c46).present;
+  assert.ok(r("Cr 2.8.").includes("renalImpairment"));
+  assert.ok(r("K 6.4.").includes("potassiumHigh"));
+  assert.ok(r("K+ 6.8.").includes("potassiumHigh"));
+  assert.ok(!r("CRP 48.").includes("renalImpairment"));
+  assert.ok(r("T. bili 4.2.").includes("organDysfunction"));
+  assert.ok(r("Total bilirubin 3.1 mg/dl.").includes("organDysfunction"));
+  const g = r("RBS 30.");
+  assert.ok(!g.includes("glucoseLow") && !g.includes("glucoseHigh"));
+  assert.ok(r("RBS 30 mg/dl.").includes("glucoseLow"));
+  assert.ok(r("RBS 480.").includes("glucoseHigh"));
+  assert.ok(r("RBS 2.8 mmol/l.").includes("glucoseLow"));
+});

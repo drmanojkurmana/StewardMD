@@ -142,6 +142,10 @@ try {
     shorthand: (t) => t.replace(/\bwithout\b/gi, "w/o").replace(/\bwith\b/gi, "w/").replace(/\babdominal\b/gi, "abd"),
     // round 41: an age stated up front changes only the age band
     age: (t) => "A 45-year-old man. " + t,
+    // round 46: lab abbreviations doctors type read the same as the full names
+    labs: (t) => t.replace(/\b(?:total\s+)?bilirubin\b/gi, (m) => /^total/i.test(m) ? "T. bili" : "bili")
+      .replace(/\bcreatinine\b/gi, "Cr").replace(/\bpotassium\b/gi, "K+").replace(/\bsodium\b/gi, "Na")
+      .replace(/\bha?emoglobin\b/gi, "Hb").replace(/\bplatelets?(?:\s+count)?\b/gi, "Plt").replace(/\brandom (?:blood )?glucose\b/gi, "RBS"),
   };
   const base = await read(texts.map((x) => x.t));
   for (const [name, fn] of Object.entries(T)) {
@@ -173,7 +177,7 @@ try {
   }
   const ceilings = (() => { try { return JSON.parse(readFileSync(CEIL_FILE, "utf8")); } catch { return {}; } })();
   if (WRITE) {
-    const ALL = ["probe.pos", "probe.neg", "probe.list", "probe.spelling", "probe.without", "chart.upper", "chart.spaces", "chart.neutral", "chart.lines", "chart.reversed", "chart.age", "chart.shorthand", "chart.bullets", "chart.semis", "engine.order", "engine.repeat"];
+    const ALL = ["probe.pos", "probe.neg", "probe.list", "probe.spelling", "probe.without", "chart.upper", "chart.spaces", "chart.neutral", "chart.lines", "chart.reversed", "chart.age", "chart.shorthand", "chart.bullets", "chart.semis", "chart.labs", "engine.order", "engine.repeat"];
     const out = {}; for (const k of ALL) out[k] = counts[k] || 0;
     writeFileSync(CEIL_FILE, JSON.stringify(out, null, 2) + "\n"); console.log("ceilings written");
   }

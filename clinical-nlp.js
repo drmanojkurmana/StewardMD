@@ -356,19 +356,21 @@
         var plt = num(m2[1]); plt = m2[2] ? plt * 100000 : plt >= 1000 ? plt : plt * 1000;
         if (plt > 0 && plt < LAB_V2.plateletsLow) vital("thrombocytopenia", m2[0]);
       }
-      if ((m2 = pick(/\b(?:creatinine|creat|s\.?\s?cr)\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:\.\d+)?)\s*(\u00b5mol|\u03bcmol|umol|mg)?/, CRV, 1))) {
+      if ((m2 = pick(/\b(?:creatinine|creat|s\.?\s?cr|cr)\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:\.\d+)?)\s*(\u00b5mol|\u03bcmol|umol|mg)?/, CRV, 1))) {
         var cr = num(m2[1]), umol = (m2[2] && /mol/.test(m2[2])) || cr > 25;
         if (umol ? cr >= LAB_V2.creatinineUmol : cr >= LAB_V2.creatinineMgDl) vital("renalImpairment", m2[0]);
       }
       // round 18: electrolytes and glucose (findings exist only under smd_kb_v2). Units inferred from the value.
       if ((m2 = pick(/\b(?:serum\s+)?(?:sodium|na\+?)\b(?:\s*(?:level|value|mmol\/l|meq\/l))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-)?\s*(\d{2,3}(?:\.\d)?)\b/, function (m) { return +m[1] >= 90 && +m[1] <= 200 ? +m[1] : null; }, -1)) &&
           +m2[1] >= 90 && +m2[1] < 130) vital("sodiumLow", m2[0]);
-      if ((m2 = pick(/\b(?:serum\s+)?(?:potassium|k\+?)\b(?:\s*(?:level|value|mmol\/l|meq\/l))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-)?\s*(\d(?:\.\d{1,2})?)\b/, function (m) { return +m[1] >= 1.5 && +m[1] <= 10 ? +m[1] : null; }, 1)) &&
+      if ((m2 = pick(/\b(?:serum\s+)?(?:potassium\b|k\+|k\b)(?:\s*(?:level|value|mmol\/l|meq\/l))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-)?\s*(\d(?:\.\d{1,2})?)\b/, function (m) { return +m[1] >= 1.5 && +m[1] <= 10 ? +m[1] : null; }, 1)) &&
           +m2[1] >= 6 && +m2[1] <= 10) vital("potassiumHigh", m2[0]);
       if ((m2 = pick(/\b(?:(?:serum|corrected|adjusted|total)\s+)?(?:calcium|ca\+?)\b(?:\s*(?:level|value|corrected|mmol\/l|mg\/dl))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-)?\s*(\d{1,2}(?:\.\d{1,2})?)\b(?!\s*-\s*\d)/, function (m) { var c = +m[1]; return c > 5 ? c / 4 : c; }, 1))) {   // not "CA 19-9"
         var ca = +m2[1]; if (ca > 5 ? ca > 11 && ca < 25 : ca > 2.75 && ca < 5) vital("calciumHigh", m2[0]); }
       var GLU_RE = /\b(?:(?:random|capillary|blood|plasma|serum|fasting)\s+)?(?:glucose|sugar|grbs|rbs|cbg|bsl|fbs|glycaemia|glycemia)\b(?:\s*(?:level|value|reading))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-)?\s*(\d{1,4}(?:\.\d{1,2})?)\s*(mg|mmol)?/;
-      var GLV = function (m) { var q = +m[1], mg = m[2] ? /mg/.test(m[2]) : q > 40; q = mg ? q : q * 18; return q > 0 && q < 3000 ? q : null; }, gl;   // mg/dL
+      // round 46: 20 to 40 with no unit is 20-40 mg/dL (hypoglycaemia, as Indian notes mean it) or mmol/L (hyperglycaemia):
+      // read neither rather than the wrong one
+      var GLV = function (m) { var q = +m[1], mg = m[2] ? /mg/.test(m[2]) : q > 40; if (!m[2] && q >= 20 && q <= 40) return null; q = mg ? q : q * 18; return q > 0 && q < 3000 ? q : null; }, gl;   // mg/dL
       if ((m2 = pick(GLU_RE, GLV, -1)) && (gl = GLV(m2)) < 70) vital("glucoseLow", m2[0]);
       if ((m2 = pick(GLU_RE, GLV, 1)) && (gl = GLV(m2)) >= 250) { vital("glucoseHigh", m2[0]); if (gl > 600) vital("glucoseVeryHigh", m2[0]); }
       // round 32: a low haemoglobin and a high INR, as the lab import reads them (the engine counts the entered value)
@@ -489,8 +491,8 @@
       if (ill.d >= 7) consider("subacuteOnset", ill.i, "compound", ill.src);
       // new organ dysfunction (Sepsis-3): any ONE organ at a SOFA-2 threshold, or said in words
       var od = null;
-      if ((m2 = pick(/\bbilirubin\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:\.\d+)?)\s*(\u00b5mol|\u03bcmol|umol|mg)?/, function (m) { var b = nv(m[1]); return (m[2] && /mol/.test(m[2])) || b > 25 ? b / 17.1 : b; }, 1))) { var bil = num(m2[1]); if ((m2[2] && /mol/.test(m2[2])) || bil > 25 ? bil >= 34 : bil >= 2) od = od || m2[0]; }
-      if ((m2 = pick(/\b(?:creatinine|creat|s\.?\s?cr)\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:\.\d+)?)\s*(\u00b5mol|\u03bcmol|umol|mg)?/, CRV, 1)) && !/\b(?:ckd|chronic kidney|dialysis)\b/.test(norm)) {
+      if ((m2 = pick(/\b(?:(?:total|t\.?|s\.?|serum)\s*)?(?:bilirubin|bili)\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:\.\d+)?)\s*(\u00b5mol|\u03bcmol|umol|mg)?/, function (m) { var b = nv(m[1]); return (m[2] && /mol/.test(m[2])) || b > 25 ? b / 17.1 : b; }, 1))) { var bil = num(m2[1]); if ((m2[2] && /mol/.test(m2[2])) || bil > 25 ? bil >= 34 : bil >= 2) od = od || m2[0]; }
+      if ((m2 = pick(/\b(?:creatinine|creat|s\.?\s?cr|cr)\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:\.\d+)?)\s*(\u00b5mol|\u03bcmol|umol|mg)?/, CRV, 1)) && !/\b(?:ckd|chronic kidney|dialysis)\b/.test(norm)) {
         var cr2 = num(m2[1]); if ((m2[2] && /mol/.test(m2[2])) || cr2 > 25 ? cr2 >= 177 : cr2 >= 2) od = od || m2[0]; }
       if ((m2 = pick(/\b(?:platelets?|plt|platelet count)\b(?:\s*(?:count|level|levels|value))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-|\()?\s*(\d+(?:[.,]\d+)?)\s*(lakhs?|lacs?)?/, PLTV, -1))) { var p2 = num(m2[1]); p2 = m2[2] ? p2 * 100000 : p2 >= 1000 ? p2 : p2 * 1000; if (p2 > 0 && p2 < 100000) od = od || m2[0]; }
       if ((m2 = pick(/\bgcs\s*(?:of|is|was|=|:)?\s*(\d{1,2})\b/, V1, -1)) && +m2[1] >= 3 && +m2[1] <= 12) od = od || m2[0];
