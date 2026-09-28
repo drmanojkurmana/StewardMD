@@ -1,15 +1,15 @@
 /* Ophthalmós: ophthalmology image reading trainer (StewardMD module).
-   Inherits RadioAnatome's reading-room system: always dark, because images are read the way
-   a clinician reads them on a device screen, and the palette below is the atlas palette.
+   White reading surface (owner, 2026-09-28): light tokens below, all text at least 4.5:1 on --op-bg and --op-s2.
+   Clinical photographs keep a black stage (.oph-stage, figure plates), the way they are read on a device screen;
+   line diagrams sit on white.
    Overlay contract mirrors .atlas-overlay: display:none when closed is load-bearing for
    swipe-back.js, safe-area insets applied once on the fixed overlay. */
 .oph-overlay {
-  --op-link: #8cc6ff; --op-link-line: rgba(140, 198, 255, .6);
-  --op-bg: #000; --op-s1: #121214; --op-s2: #1c1c1f; --op-s3: #2c2c30; --op-line: #34343a;
-  --op-text: #f2f2f4; --op-mut: #a8a8b0; --op-acc: #3b9dff; --op-ok: #34c759; --op-bad: #ff6961; --op-warn: #ffc05a;
-  /* fill behind white text (primary buttons, selected markers): white on it is 4.96:1 (4.68:1 hovered); white on
-     --op-acc is 2.82:1, so --op-acc stays the accent for text, bars and outlines on the dark surfaces */
-  --op-pri-fill: #1d6ed4; --op-pri-fill-hover: #2272da;
+  --op-link: #0a5cc2; --op-link-line: rgba(10, 92, 194, .45);
+  --op-bg: #fff; --op-s1: #f3f4f6; --op-s2: #e9ebef; --op-s3: #d9dde3; --op-line: #d3d7de;
+  --op-text: #15171c; --op-mut: #575c66; --op-acc: #0a66d0; --op-ok: #16722f; --op-bad: #c42b2b; --op-warn: #975700;
+  /* fill behind white text (primary buttons, selected markers): white on it is 4.96:1 (5.6:1 hovered) */
+  --op-pri-fill: #1d6ed4; --op-pri-fill-hover: #1a62bd;
   --op-ease: cubic-bezier(0.23, 1, 0.32, 1);
   --op-sheet: cubic-bezier(0.32, 0.72, 0, 1);
   position: fixed; inset: 0; z-index: 880;
@@ -18,13 +18,13 @@
   font-family: inherit; font-size: 16px; line-height: 1.45;
   padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px);
   -webkit-font-smoothing: antialiased;
-  color-scheme: dark;
+  color-scheme: light;
 }
 .oph-overlay.on { display: flex; }
 /* Draft mark (owner-specified 4px), pinned above the home indicator, never takes layout or taps. */
 .oph-draft { position: absolute; left: 0; right: 0; bottom: calc(2px + env(safe-area-inset-bottom, 0px)); margin: 0; font-size: 4px; line-height: 1; text-align: center; color: var(--op-mut); pointer-events: none; }
 body.oph-lock { overflow: hidden; }
-.oph-overlay ::selection { background: rgba(59, 157, 255, .35); color: #fff; }
+.oph-overlay ::selection { background: rgba(10, 102, 208, .22); color: var(--op-text); }
 .oph-overlay * { box-sizing: border-box; }
 .oph-overlay button { font: inherit; color: inherit; -webkit-tap-highlight-color: transparent; cursor: pointer; touch-action: manipulation; }
 .oph-overlay button:focus-visible, .oph-overlay [tabindex]:focus-visible { outline: 2px solid var(--op-acc); outline-offset: 2px; }
@@ -81,7 +81,7 @@ body.oph-lock { overflow: hidden; }
   transform-origin: 0 0; will-change: transform; -webkit-user-drag: none; }
 .oph-stage.zoomed { cursor: grab; }
 .oph-stage .oph-load { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  color: var(--op-mut); font-size: 14px; }
+  color: #a8a8b0; font-size: 14px; } /* on the black stage */
 .oph-stage .oph-load[hidden] { display: none; }
 
 /* ---- answers ---- */
@@ -96,9 +96,9 @@ body.oph-lock { overflow: hidden; }
 .oph-ans .k { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 20px; text-align: center;
   font-size: 13px; color: var(--op-mut); font-weight: 600; }
 .oph-ans .k .smd-ico { width: 18px; height: 18px; }
-.oph-ans[data-state="right"] { border-color: var(--op-ok); background: rgba(52, 199, 89, .12); }
+.oph-ans[data-state="right"] { border-color: var(--op-ok); background: rgba(26, 125, 56, .09); }
 .oph-ans[data-state="right"] .k { color: var(--op-ok); }
-.oph-ans[data-state="wrong"] { border-color: var(--op-bad); background: rgba(255, 105, 97, .12); }
+.oph-ans[data-state="wrong"] { border-color: var(--op-bad); background: rgba(196, 43, 43, .08); }
 .oph-ans[data-state="wrong"] .k { color: var(--op-bad); }
 .oph-ans[data-state="dim"] { opacity: .45; }
 .oph-answers.done .oph-ans { cursor: default; }
@@ -119,7 +119,7 @@ body.oph-lock { overflow: hidden; }
 .oph-reveal.pre { opacity: 0; transform: translateY(6px); }
 
 @media (hover: hover) and (pointer: fine) {
-  .oph-ans:not([data-state]):hover { border-color: #4a4a52; background: var(--op-s2); }
+  .oph-ans:not([data-state]):hover { border-color: #aeb3bc; background: var(--op-s2); }
   .oph-btn.sec:hover { background: var(--op-s3); }
   .oph-btn.pri:hover { background: var(--op-pri-fill-hover); }
   .oph-clinic:hover { background: var(--op-s1); }
@@ -215,9 +215,9 @@ body.oph-lock { overflow: hidden; }
 .oph-hm { display: grid; grid-template-rows: repeat(7, 1fr); grid-auto-flow: column; grid-auto-columns: 1fr; gap: 3px; height: 98px; margin: 10px 0 8px; overflow: hidden; }
 .oph-hm i { display: block; width: 100%; height: 100%; border-radius: 2px; }
 .oph-hm-0 { background: var(--op-s2); }
-.oph-hm-1 { background: rgba(59, 157, 255, .25); }
-.oph-hm-2 { background: rgba(59, 157, 255, .45); }
-.oph-hm-3 { background: rgba(59, 157, 255, .68); }
+.oph-hm-1 { background: rgba(10, 102, 208, .22); }
+.oph-hm-2 { background: rgba(10, 102, 208, .42); }
+.oph-hm-3 { background: rgba(10, 102, 208, .66); }
 .oph-hm-4 { background: var(--op-acc); }
 .oph-hm-legend { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--op-mut); margin: 0 0 4px; }
 .oph-hm-legend i { width: 11px; height: 11px; border-radius: 2px; }
