@@ -50,7 +50,8 @@
   function render() {
     var el = D && D.getElementById("smdReview"); if (!el) return;
     var body = el.querySelector(".kit-sheet-body"), top = body.scrollTop, dec = loadDecisions(), n = Object.keys(dec).length, html;
-    var kinds = KINDS.concat(S.deskOn ? [["bulletin", "Clinical updates"]] : []);
+    var pend = (S.deskOn && G.SMD_BULLETINS_DESK && G.SMD_BULLETINS_DESK.pendingTotal) ? G.SMD_BULLETINS_DESK.pendingTotal() : 0;
+    var kinds = KINDS.concat(S.deskOn ? [["bulletin", "Clinical updates" + (pend ? " (" + pend + ")" : "")]] : []);
     var tabs = '<div class="kit-row" role="tablist">' + kinds.map(function (k) { return '<button type="button" role="tab" class="kit-seg' + (S.kind === k[0] ? " on" : "") + '" data-rv-act="kind:' + k[0] + '" aria-selected="' + (S.kind === k[0]) + '">' + k[1] + "</button>"; }).join("") + "</div>";
     if (S.kind === "bulletin") {
       body.innerHTML = '<div class="kit dl">' + (G.SMD_BULLETINS_DESK ? G.SMD_BULLETINS_DESK.html(tabs) : tabs) + "</div>"; body.scrollTop = top;
@@ -93,7 +94,13 @@
     }
     el.classList.add("on"); D.documentElement.classList.add("kit-lock");
     if (G.SMD_RX && G.SMD_RX.verifiedInfo) G.SMD_RX.verifiedInfo().then(function (v) { if (v && v.verified && v.regNo) { S.reviewer.regNo = v.regNo; S.reviewer.verified = true; } }, function () {});
-    if (G.SMD_BULLETINS_DESK && !S.deskOn) G.SMD_BULLETINS_DESK.probe().then(function (on) { if (on) { S.deskOn = true; render(); } }, function () {});
+    if (G.SMD_BULLETINS_DESK && !S.deskOn) G.SMD_BULLETINS_DESK.probe().then(function (on) {
+      if (!on) { S.wantBulletin = false; return; }
+      S.deskOn = true;
+      if (S.wantBulletin) { S.wantBulletin = false; S.kind = "bulletin"; S.sel = ""; G.SMD_BULLETINS_DESK.reset(); }
+      render();
+    }, function () {});
+    else if (S.deskOn && S.wantBulletin) { S.wantBulletin = false; S.kind = "bulletin"; S.sel = ""; G.SMD_BULLETINS_DESK.reset(); }
     render();
   }
   function close() { var el = D && D.getElementById("smdReview"); if (el) el.classList.remove("on"); if (!(D.getElementById("smdKit") || {}).classList || !D.getElementById("smdKit").classList.contains("on")) D.documentElement.classList.remove("kit-lock"); }
@@ -144,7 +151,9 @@
   function onInput(e) { var el = e.target; if (el && el.id === "rv_q") { S.q = el.value; var pos = el.selectionStart; render(); var q = D.getElementById("rv_q"); if (q) { q.focus(); try { q.setSelectionRange(pos, pos); } catch (x) {} } } }
   if (D && D.addEventListener && !G.__smdReviewWired) { G.__smdReviewWired = true; D.addEventListener("click", onClick, false); D.addEventListener("input", onInput, false); }
 
-  var API = { open: open, close: close, _render: render, _buildExport: buildExport, DECISIONS: DECISIONS };
+  // Weekly review push (/?rvtab=bulletins) lands here: open the desk on the Clinical updates tab.
+  function openBulletins() { S.wantBulletin = true; open(); }
+  var API = { open: open, openBulletins: openBulletins, close: close, _render: render, _buildExport: buildExport, DECISIONS: DECISIONS };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_REVIEW = API;
 })(typeof window !== "undefined" ? window : globalThis);

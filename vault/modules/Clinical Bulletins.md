@@ -1,7 +1,7 @@
 ---
 tags: [module, clinical-content, review]
 status: built 2026-09-28 behind the flag; tables self-create on first use (no manual migration)
-flag: smd_kb_bulletins (client, default OFF; ?bulletins=1 on, ?bulletins=0 off)
+flag: smd_kb_bulletins (client, default ON since 2026-09-28; ?bulletins=0 or localStorage "0" turns it off on a device; server kill switch turns it off everywhere)
 ---
 # Clinical Bulletins
 
@@ -51,6 +51,17 @@ Journals and regulators feed the Review Desk automatically; a doctor still signs
   worded so it never implies the AI summary itself was reviewed.
 - Tests: `test/journal-intake.test.mjs`, `test/cdsco.test.mjs`, plus bell/draft/CDSCO steps in the UI harness.
 
+## Weekly review run (Saturday 09:00 IST)
+Worker cron `30 3 * * 6` posts `/api/updates/review-digest` (admin/cron token): runs the pipeline, counts what
+waits (new source items without a bulletin, drafts, source changes, reviews due in 30 days;
+`functions/_bulletins_review_digest.js` `pendingCounts`), then sends ONE native push to each ACTIVE signer's
+devices (`sendNativeToAll(..., { uid: "fb:<uid>" })`). Nothing is sent when nothing waits. The tap opens
+`/?rvtab=bulletins`: `native-push.js` `routeUrl` (warm) or `home.js` cold start -> `SMD_REVIEW.openBulletins()`.
+The Review Desk tab reads "Clinical updates (N)" from `/bulletins/me` `pending`. Recorded in
+`bulletin_settings.review_digest_ts` and `bulletin_audit` ('review_digest'). The daily 05:30 UTC crawl continues.
+Web push is payloadless broadcast only, so signers are reached through the native app. Worker changes deploy via
+`.github/workflows/deploy-worker.yml` (production environment).
+
 ## Key files
 `functions/_bulletins_api.js` (routes, mounted from `functions/api/updates/[[path]].js` above the owner gate),
 `functions/_bulletins_repo.js`, `functions/_bulletins_auth.js`, `functions/_bulletin_rules.js`,
@@ -71,7 +82,7 @@ Journals and regulators feed the Review Desk automatically; a doctor still signs
    isolate) on the first bulletins request, like `functions/_counters.js`. The `.sql` file stays for manual use
    (run it from the repo root: `wrangler d1 execute stewardmd-updates --remote --file functions/db/migrate_bulletins.sql`).
 2. Owner opens Review Desk > Clinical updates > Signers > Add me (check the pre-filled name, Reg. No., council).
-3. Sign a few on device with `?bulletins=1`; a second doctor reads them for wording; default-on only on approval.
+3. Default ON since 2026-09-28 (owner). Sign a few on device; a second doctor reads them for wording.
 
 ## Gotchas
 - Changing `canonicalFields` changes every hash and un-signs every live bulletin. Append only, with a plan.

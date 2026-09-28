@@ -212,6 +212,12 @@
       tools = '<div class="kit-row"><button type="button" class="kit-pill" data-bl-act="signers">' + ms("badge") + "Signers</button>" +
         '<button type="button" class="kit-pill" data-bl-act="kill">' + ms(me.killed ? "toggle_on" : "block") + (me.killed ? "Switch back on" : "Switch off for everyone") + "</button></div>";
     }
+    var pd = me.pending;
+    if (pd && pd.total) head += '<p class="kit-muted" role="status">Waiting for you: ' + [
+      pd.candidates ? pd.candidates + " new source item" + (pd.candidates === 1 ? "" : "s") : "",
+      pd.source_changed ? pd.source_changed + " source change" + (pd.source_changed === 1 ? "" : "s") : "",
+      pd.drafts ? pd.drafts + " draft" + (pd.drafts === 1 ? "" : "s") : "",
+      pd.review_due ? pd.review_due + " due for review" : ""].filter(Boolean).join(", ") + ".</p>";
     if (!me.canSign) {
       return head + '<p class="kit-muted">Practice updates appear on the disease page only after a registered doctor signs them. ' +
         (me.isOwner ? "You can manage signers. Add yourself to sign." : "You are not registered to sign.") + "</p>" + tools;
@@ -390,7 +396,7 @@
       toast("Signed. It shows on the disease page after the next sync.");
       DS.view = "list"; DS.cur = null; DS.saved = null; DS.queue = null; DS.msg = "Signed.";
       try { B().sync(true); } catch (e) {}
-      rerender();
+      probe().then(rerender);   // refresh the waiting count on the tab
     });
   }
 
@@ -480,7 +486,8 @@
   }
   if (D && D.addEventListener && !G.__smdBulletinDeskWired) { G.__smdBulletinDeskWired = true; D.addEventListener("click", onClick, false); D.addEventListener("input", onInput, false); }
 
-  var API = { probe: probe, html: html, reset: function () { DS.view = "list"; DS.queue = null; DS.cur = null; DS.msg = ""; }, _state: DS, _previewOf: previewOf,
+  function pendingTotal() { var p = DS.me && DS.me.pending; return (p && p.total) || 0; }
+  var API = { probe: probe, html: html, pendingTotal: pendingTotal, reset: function () { DS.view = "list"; DS.queue = null; DS.cur = null; DS.msg = ""; }, _state: DS, _previewOf: previewOf,
     _numbersIn: numbersIn, _suggestDiseases: suggestDiseases, _firstSentences: firstSentences };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_BULLETINS_DESK = API;

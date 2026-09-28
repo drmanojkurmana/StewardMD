@@ -36,6 +36,10 @@
         return;
       }
     } catch (e) {}
+    // Clinical Bulletins weekly review (/?rvtab=bulletins): open the Review Desk on the Clinical updates tab.
+    try {
+      if (url && /[?&]rvtab=bulletins\b/.test(String(url)) && window.SMD_REVIEW && window.SMD_REVIEW.openBulletins) { window.SMD_REVIEW.openBulletins(); return; }
+    } catch (e) {}
     // Medical Update deep link (/?u=<id>): open that guideline's card IN-APP (warm tap);
     // if the app isn't ready yet, fall through to navigate — the on-load handler opens it.
     try {

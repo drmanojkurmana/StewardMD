@@ -24,6 +24,7 @@ import { signerIdentity, ownerIdentity } from "./_bulletins_auth.js";
 import { ensureBulletinSchema } from "./_bulletins_schema.js";
 import { getUserClaims, lookupUidByEmail } from "./_fbadmin.js";
 import { lookup as cdscoLookup, refreshCdscoLists } from "./_cdsco.js";
+import { pendingCounts } from "./_bulletins_review_digest.js";
 
 const PUB_CACHE = "public, max-age=300";
 const RESERVED = ["me", "queue", "signers", "kill", "cdsco"];
@@ -105,8 +106,10 @@ export async function handleBulletins(context, parts) {
     try { killed = !(await repo.isEnabled(env)); } catch (e) {}
     const uid = s.ok ? s.uid : (o.ok ? o.uid : null);
     const prefill = o.ok ? await doctorPrefill(env, o.uid) : null;
+    let pending = null;
+    if (s.ok) { try { pending = await pendingCounts(env, now); } catch (e) {} }
     return json({
-      canSign: s.ok, reason: s.ok ? "" : s.reason, isOwner: o.ok, killed,
+      canSign: s.ok, reason: s.ok ? "" : s.reason, isOwner: o.ok, killed, pending,
       signer: s.ok ? { name: s.name, regNo: s.regNo, council: s.council } : null,
       self: o.ok ? Object.assign({ uid }, prefill || {}) : null,
     });

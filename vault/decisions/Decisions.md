@@ -5,6 +5,18 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-28 · Clinical Bulletins ON for everyone; Saturday review run notifies signers
+
+**Decision (owner: "turn it on by default"; "every Saturday 9am run ... notify reviewer doctors").**
+`smd_kb_bulletins` defaults ON; a device opts out with `?bulletins=0` or localStorage "0", and the Review Desk
+kill switch still turns it off everywhere. A weekly run (worker cron `30 3 * * 6`, 09:00 IST) crawls, then sends
+one native push to each active signer when anything waits, opening the Review Desk "Clinical updates" tab.
+**Why.** Signed updates are only useful if every doctor sees them; signers need a fixed weekly prompt.
+**Trade-off.** Every device now syncs the bulletin list (one small ETag request, at most every 6 hours). The
+push reaches signers on the native app only (web push here is payloadless broadcast). The owner chose default-on
+before a second doctor reviewed the first cards; no card shows until something is signed.
+**Status.** Built and tested; ships with the next push to main (the worker needs its deploy workflow).
+
 ## 2026-09-28 · Clinical Bulletins phase 2: automatic intake, still signed by a doctor
 
 **Decision (owner: "complete all phases ... auto updates from journal").** New journal trials (PubMed), new FDA

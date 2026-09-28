@@ -47,7 +47,7 @@
   //   the ward. Gated per hospital server-side; WSQ_TICK_OFF=1 on Pages stops it.
   // scheduled() branches on event.cron. Requires the secret UPDATES_ADMIN_TOKEN
   // (wrangler secret put UPDATES_ADMIN_TOKEN), matching the Pages project.
-  "triggers": { "crons": ["30 5 * * *", "0 6 * * 1", "*/15 * * * *", "30 3 * * *", "30 11 * * *", "0 * * * *", "*/5 * * * *"] },
+  "triggers": { "crons": ["30 5 * * *", "0 6 * * 1", "*/15 * * * *", "30 3 * * *", "30 11 * * *", "0 * * * *", "*/5 * * * *", "30 3 * * 6"] },
 
   // Edge rate limiting per client IP (protects the open, read-only API).
   "r2_buckets": [
