@@ -134,12 +134,15 @@ try {
     neutral: (t) => "Seen in the evening clinic. " + t + " Reviewed with the registrar.",
     lines: (t) => t.replace(/\. /g, ".\n"),   // one statement per line, as notes are often typed
     reversed: (t) => t.split(/(?<=\.)\s+/).reverse().join(" "),   // same statements, another order (tracked, not zero)
+    // round 41: an age stated up front changes only the age band
+    age: (t) => "A 45-year-old man. " + t,
   };
   const base = await read(texts.map((x) => x.t));
   for (const [name, fn] of Object.entries(T)) {
     const out = await read(texts.map((x) => fn(x.t)));
     texts.forEach((x, i) => {
-      const a = base[i], b = out[i]; if (a.join() === b.join()) return;
+      const strip = (arr) => name === "age" ? arr.filter((k) => k !== "ageOver50" && k !== "severeCriteria") : arr;   // the only age-dependent findings
+      const a = strip(base[i]), b = strip(out[i]); if (a.join() === b.join()) return;
       const gained = b.filter((k) => !a.includes(k)), lost = a.filter((k) => !b.includes(k));
       bump("chart." + name, x.open ? `${x.id}: +[${gained}] -[${lost}]` : null);
     });
@@ -164,7 +167,7 @@ try {
   }
   const ceilings = (() => { try { return JSON.parse(readFileSync(CEIL_FILE, "utf8")); } catch { return {}; } })();
   if (WRITE) {
-    const ALL = ["probe.pos", "probe.neg", "probe.list", "probe.spelling", "probe.without", "chart.upper", "chart.spaces", "chart.neutral", "chart.lines", "chart.reversed", "engine.order", "engine.repeat"];
+    const ALL = ["probe.pos", "probe.neg", "probe.list", "probe.spelling", "probe.without", "chart.upper", "chart.spaces", "chart.neutral", "chart.lines", "chart.reversed", "chart.age", "engine.order", "engine.repeat"];
     const out = {}; for (const k of ALL) out[k] = counts[k] || 0;
     writeFileSync(CEIL_FILE, JSON.stringify(out, null, 2) + "\n"); console.log("ceilings written");
   }
