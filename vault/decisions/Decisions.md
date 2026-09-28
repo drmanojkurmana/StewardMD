@@ -10685,3 +10685,9 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   blocks on unresolved VERIFY markers. A VERIFY *dose* still cannot activate by itself: it computes no final
   dose, so `dose_calculations_incomplete` blocks until the physician enters the dose. The review-desk
   approval check (`onco-protocol-review.js clinicalApprove`) was not changed.
+- **Owner, 2026-09-28: Dose calculator.** Doses come only from our monographs (worker/data/gold), only
+  unambiguous numbers become calculations, and every number is round-trip checked against its sentence.
+  Fixed-dose drugs show their dose marked "not weight-based"; results show the exact value plus a
+  practical rounded one; kidney (CrCl, dialysis switch) and liver (Child-Pugh) adjust in the same screen,
+  with the app's verified renal table taking precedence. Flag `smd_dose_calc` stays OFF until the owner
+  signs off the extraction review (owner: "Me, yes and start"). [[Dose Calculator]]

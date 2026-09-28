@@ -1082,7 +1082,7 @@
         '<button class="oe-btn ghost" data-oe-act="rx-summary" title="View, print, or share patient consultation summary">' + ms("print") + "Summary</button>" +
         saveBtn + authBtn + "</div>";
     }
-    return consultBar(st) + reviewPanel(st) + scribeClinicalPanels(st) + triageHtml + allergyHtml + notifHtml + vitalsSyncBanner() + maikAskBtn(st) + oncoApplyOrReviewPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
+    return consultBar(st) + reviewPanel(st) + scribeClinicalPanels(st) + triageHtml + allergyHtml + notifHtml + vitalsSyncBanner() + maikAskBtn(st) + doseCalcBtn(st) + oncoApplyOrReviewPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
   }
   // Oncology apply-protocol suggestion (near provisional diagnosis, above the accordion, same spot
   // as the other AI-assist panels): offers ONLY ACTIVE protocols already fetched into st.oncoProtocols
@@ -1100,6 +1100,18 @@
   function oncoTreeLaunchBtn() {
     if (!oncoNavOn() || !(G.SMD_ONCOTREE && G.SMD_ONCOTREE.open)) return "";
     return '<button class="oe-btn ghost oe-onco-tree" data-oe-act="onco-tree-open">' + ms("account_tree") + "Find protocol via OncoTree pathway</button>";
+  }
+  // Dose calculator for THIS patient (dose-calc.js, flag smd_dose_calc, default OFF). Prefills weight,
+  // height, age and sex from the consult; the calculator keeps nothing once closed.
+  function doseCalcBtn(st) {
+    if (!st.patient || !(G.SMD_DOSECALC && G.SMD_DOSECALC.on && G.SMD_DOSECALC.on())) return "";
+    return '<button class="oe-btn ghost oe-dosecalc" data-oe-act="dose-calc-open">' + ms("calculate") + "Dose calculator for this patient</button>";
+  }
+  function openDoseCalc() {
+    if (!(G.SMD_DOSECALC && st.patient)) return;
+    var p = st.patient, v = st.assessVals || {}, sx = String(p.sex || p.gender || "");
+    var age = parseFloat(String(p.age || "").replace(/[^0-9.]/g, ""));
+    G.SMD_DOSECALC.open({ source: p.name || "OPD patient", patient: { weight: v.Weight || "", height: v.Height || "", age: isFinite(age) ? age : "", ageUnit: "years", sex: /^m/i.test(sx) ? "M" : /^f/i.test(sx) ? "F" : "" } });
   }
   // "Let MaiK Ask" — optional AI-guided history taking (flag smd_maik_ask). Shown only when the feature
   // is on AND a complaint is documented (MaiK needs to know what to ask about). Delegates to SMD_MAIKASK.
@@ -2049,6 +2061,7 @@
     if (cmd === "proto-branch") { st.protoBranch = arg || "all"; if (st.protoBranch !== "oncology") st.protoOncoType = ""; paint(); return; }
     if (cmd === "onco-apply") return oncoApply(arg);
     if (cmd === "onco-tree-open") return openOncoTree();
+    if (cmd === "dose-calc-open") return openDoseCalc();
     if (cmd === "onco-override") return oncoSaveOverride(arg);
     if (cmd === "onco-create") return oncoCreateAndActivate();
     if (cmd === "onco-add-emr") return oncoAddToEmr();
