@@ -82,7 +82,7 @@ const server = http.createServer(async (req, res) => {
 });
 await new Promise((r) => server.listen(PORT, r));
 
-const chrome = spawn(CHROME, ["--headless=new", "--no-sandbox", "--disable-gpu", "--remote-debugging-port=" + DEBUG, "--user-data-dir=" + join(tmpdir(), "bulletins-chrome-" + process.pid), "--no-first-run", "about:blank"], { stdio: "ignore" });
+const chrome = spawn(CHROME, ["--headless=new", "--no-sandbox", "--disable-gpu", "--remote-debugging-port=" + DEBUG, "--user-data-dir=" + join(tmpdir(), "bulletins-chrome-" + process.pid), "--no-first-run", ...(process.env.CHROME_FLAGS || "").split(/\s+/).filter(Boolean), "about:blank"], { stdio: "ignore" });
 
 let ws, sid, seq = 0, failures = 0;
 const pending = new Map();
