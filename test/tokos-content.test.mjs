@@ -43,3 +43,12 @@ test("v2 cases carry layout, vignette from real fields only, suggested labels an
     assert.ok(!("weightG" in c.vignette), "birth weight is an outcome, not a vignette field");
   });
 });
+
+test("vignettes use only allowed keys, no risk factors while FIELD_OK is empty, and strips are clean", () => {
+  const allowed = ["age", "gravidity", "parity", "gestWeeks", "risks", "induced", "stage2Min"];
+  deck.cases.forEach((c) => {
+    Object.keys(c.vignette).forEach((k) => assert.ok(allowed.includes(k), c.id + " key " + k));
+    assert.deepEqual(c.vignette.risks, [], c.id + " risks");
+    assert.ok(c.stripQuality.fhrLossPct <= 15 && c.stripQuality.ucPresentPct >= 50, c.id + " strip quality");
+  });
+});

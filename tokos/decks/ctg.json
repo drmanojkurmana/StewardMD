@@ -27,7 +27,6 @@
     "parity": 0,
     "gestWeeks": 37,
     "risks": [],
-    "stage1Min": 70,
     "stage2Min": 5
    },
    "features": {
@@ -124,166 +123,10 @@
     "weightG": 2150
    },
    "acidosis": "normal",
-   "review": null
-  },
-  {
-   "id": "1004",
-   "svg": "ctg/1004.svg",
-   "layout": {
-    "W": 1500,
-    "H": 460,
-    "padL": 40,
-    "padR": 12,
-    "yTop": 12,
-    "hFhr": 280,
-    "gap": 30,
-    "hUc": 110,
-    "fhrMin": 50,
-    "fhrMax": 210,
-    "plotW": 1448,
-    "ucTop": 322,
-    "durationSec": 1800
+   "stripQuality": {
+    "fhrLossPct": 1.4,
+    "ucPresentPct": 97.8
    },
-   "archetypeSuggested": "normal_trace_normal_outcome",
-   "vignette": {
-    "age": 36,
-    "gravidity": 1,
-    "parity": 0,
-    "gestWeeks": 41,
-    "risks": [],
-    "stage1Min": 55,
-    "stage2Min": 10
-   },
-   "features": {
-    "variabilityBand": "normal",
-    "decelCount": 15,
-    "window": {
-     "minutes": 60
-    },
-    "quality": {
-     "lossPct": 1.2,
-     "suboptimal": false
-    },
-    "baseline": 135,
-    "baselineClass": "normal",
-    "variability": {
-     "reducedMin": 3,
-     "increasedMin": 9,
-     "assessedMin": 51,
-     "medianRange": 11,
-     "band": "normal"
-    },
-    "contractions": {
-     "count30": 3,
-     "per10": 1,
-     "tachysystole": false
-    },
-    "decels": [
-     {
-      "startSec": 1720,
-      "durationSec": 17.5,
-      "depth": 53,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2048,
-      "durationSec": 20,
-      "depth": 70,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2123,
-      "durationSec": 26.5,
-      "depth": 71,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2180,
-      "durationSec": 17.75,
-      "depth": 77,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2452,
-      "durationSec": 20.5,
-      "depth": 55,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2597,
-      "durationSec": 18.5,
-      "depth": 50,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3003,
-      "durationSec": 20.5,
-      "depth": 37,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3061,
-      "durationSec": 18.75,
-      "depth": 52,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3128,
-      "durationSec": 29.25,
-      "depth": 65,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3187,
-      "durationSec": 45,
-      "depth": 65,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3253,
-      "durationSec": 51.75,
-      "depth": 72,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3314,
-      "durationSec": 38.25,
-      "depth": 77,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3358,
-      "durationSec": 59.75,
-      "depth": 79,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3419,
-      "durationSec": 102,
-      "depth": 74,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3523,
-      "durationSec": 29.25,
-      "depth": 69,
-      "subtypeSuggested": "variable"
-     }
-    ],
-    "repetitive": false,
-    "figoSuggested": "normal"
-   },
-   "figo": "normal",
-   "outcome": {
-    "pH": 7.3,
-    "BE": -6.4,
-    "BDecf": 5.19,
-    "pCO2": 5.5,
-    "apgar1": 8,
-    "apgar5": 9,
-    "weightG": 3370
-   },
-   "acidosis": "normal",
    "review": null
   },
   {
@@ -311,7 +154,6 @@
     "parity": 2,
     "gestWeeks": 41,
     "risks": [],
-    "stage1Min": 60,
     "stage2Min": 10
    },
    "features": {
@@ -378,6 +220,107 @@
     "weightG": 3500
    },
    "acidosis": "normal",
+   "stripQuality": {
+    "fhrLossPct": 2.2,
+    "ucPresentPct": 95.8
+   },
+   "review": null
+  },
+  {
+   "id": "1035",
+   "svg": "ctg/1035.svg",
+   "layout": {
+    "W": 1500,
+    "H": 460,
+    "padL": 40,
+    "padR": 12,
+    "yTop": 12,
+    "hFhr": 280,
+    "gap": 30,
+    "hUc": 110,
+    "fhrMin": 50,
+    "fhrMax": 210,
+    "plotW": 1448,
+    "ucTop": 322,
+    "durationSec": 1800
+   },
+   "archetypeSuggested": "normal_trace_normal_outcome",
+   "vignette": {
+    "age": 30,
+    "gravidity": 1,
+    "parity": 1,
+    "gestWeeks": 38,
+    "risks": [],
+    "stage2Min": 10
+   },
+   "features": {
+    "variabilityBand": "normal",
+    "decelCount": 4,
+    "window": {
+     "minutes": 60
+    },
+    "quality": {
+     "lossPct": 2.8,
+     "suboptimal": false
+    },
+    "baseline": 145,
+    "baselineClass": "normal",
+    "variability": {
+     "reducedMin": 0,
+     "increasedMin": 20,
+     "assessedMin": 55,
+     "medianRange": 21,
+     "band": "normal"
+    },
+    "contractions": {
+     "count30": 10,
+     "per10": 3.3,
+     "tachysystole": false
+    },
+    "decels": [
+     {
+      "startSec": 664,
+      "durationSec": 16.5,
+      "depth": 36,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 2949,
+      "durationSec": 141,
+      "depth": 89,
+      "subtypeSuggested": "late"
+     },
+     {
+      "startSec": 3117,
+      "durationSec": 44.25,
+      "depth": 94,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 3167,
+      "durationSec": 23,
+      "depth": 69,
+      "subtypeSuggested": "variable"
+     }
+    ],
+    "repetitive": false,
+    "figoSuggested": "normal"
+   },
+   "figo": "normal",
+   "outcome": {
+    "pH": 7.28,
+    "BE": -6.8,
+    "BDecf": 5.36,
+    "pCO2": 5.8,
+    "apgar1": 5,
+    "apgar5": 8,
+    "weightG": 3580
+   },
+   "acidosis": "normal",
+   "stripQuality": {
+    "fhrLossPct": 5.6,
+    "ucPresentPct": 95.8
+   },
    "review": null
   },
   {
@@ -405,7 +348,6 @@
     "parity": 0,
     "gestWeeks": 42,
     "risks": [],
-    "stage1Min": 190,
     "stage2Min": 30
    },
    "features": {
@@ -532,6 +474,10 @@
     "weightG": 3720
    },
    "acidosis": "normal",
+   "stripQuality": {
+    "fhrLossPct": 1.3,
+    "ucPresentPct": 81.7
+   },
    "review": null
   },
   {
@@ -559,7 +505,6 @@
     "parity": 0,
     "gestWeeks": 37,
     "risks": [],
-    "stage1Min": 65,
     "stage2Min": 20
    },
    "features": {
@@ -686,124 +631,10 @@
     "weightG": 2700
    },
    "acidosis": "acidaemia_not_metabolic",
-   "review": null
-  },
-  {
-   "id": "1025",
-   "svg": "ctg/1025.svg",
-   "layout": {
-    "W": 1500,
-    "H": 460,
-    "padL": 40,
-    "padR": 12,
-    "yTop": 12,
-    "hFhr": 280,
-    "gap": 30,
-    "hUc": 110,
-    "fhrMin": 50,
-    "fhrMax": 210,
-    "plotW": 1448,
-    "ucTop": 322,
-    "durationSec": 1800
+   "stripQuality": {
+    "fhrLossPct": 2.1,
+    "ucPresentPct": 99.9
    },
-   "archetypeSuggested": "pathological_trace",
-   "vignette": {
-    "age": 26,
-    "gravidity": 1,
-    "parity": 0,
-    "gestWeeks": 41,
-    "risks": [],
-    "stage1Min": 162,
-    "stage2Min": 20
-   },
-   "features": {
-    "variabilityBand": "increased",
-    "decelCount": 8,
-    "window": {
-     "minutes": 60
-    },
-    "quality": {
-     "lossPct": 4.3,
-     "suboptimal": false
-    },
-    "baseline": 120,
-    "baselineClass": "normal",
-    "variability": {
-     "reducedMin": 0,
-     "increasedMin": 31,
-     "assessedMin": 54,
-     "medianRange": 27.3,
-     "band": "increased"
-    },
-    "contractions": {
-     "count30": 6,
-     "per10": 2,
-     "tachysystole": false
-    },
-    "decels": [
-     {
-      "startSec": 231,
-      "durationSec": 16.5,
-      "depth": 32,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2302,
-      "durationSec": 16.75,
-      "depth": 51,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2372,
-      "durationSec": 19.75,
-      "depth": 53,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2610,
-      "durationSec": 22.75,
-      "depth": 50,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3254,
-      "durationSec": 25.25,
-      "depth": 61,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3356,
-      "durationSec": 27,
-      "depth": 57,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3466,
-      "durationSec": 32.25,
-      "depth": 50,
-      "subtypeSuggested": "unclassified"
-     },
-     {
-      "startSec": 3582,
-      "durationSec": 17.75,
-      "depth": 52,
-      "subtypeSuggested": "variable"
-     }
-    ],
-    "repetitive": false,
-    "figoSuggested": "pathological"
-   },
-   "figo": "pathological",
-   "outcome": {
-    "pH": 7.34,
-    "BE": -4.4,
-    "BDecf": 3.56,
-    "pCO2": 5.3,
-    "apgar1": 9,
-    "apgar5": 9,
-    "weightG": 3600
-   },
-   "acidosis": "normal",
    "review": null
   },
   {
@@ -831,7 +662,6 @@
     "parity": 0,
     "gestWeeks": 39,
     "risks": [],
-    "stage1Min": 180,
     "stage2Min": 15
    },
    "features": {
@@ -910,172 +740,10 @@
     "weightG": 3200
    },
    "acidosis": "normal",
-   "review": null
-  },
-  {
-   "id": "1108",
-   "svg": "ctg/1108.svg",
-   "layout": {
-    "W": 1500,
-    "H": 460,
-    "padL": 40,
-    "padR": 12,
-    "yTop": 12,
-    "hFhr": 280,
-    "gap": 30,
-    "hUc": 110,
-    "fhrMin": 50,
-    "fhrMax": 210,
-    "plotW": 1448,
-    "ucTop": 322,
-    "durationSec": 1800
+   "stripQuality": {
+    "fhrLossPct": 12.5,
+    "ucPresentPct": 90.8
    },
-   "archetypeSuggested": "metabolic_acidosis",
-   "vignette": {
-    "age": 29,
-    "gravidity": 1,
-    "parity": 0,
-    "gestWeeks": 40,
-    "risks": [],
-    "stage1Min": 326,
-    "stage2Min": 25
-   },
-   "features": {
-    "variabilityBand": "increased",
-    "decelCount": 16,
-    "window": {
-     "minutes": 60
-    },
-    "quality": {
-     "lossPct": 11.9,
-     "suboptimal": false
-    },
-    "baseline": 135,
-    "baselineClass": "normal",
-    "variability": {
-     "reducedMin": 0,
-     "increasedMin": 21,
-     "assessedMin": 38,
-     "medianRange": 26.8,
-     "band": "increased"
-    },
-    "contractions": {
-     "count30": 1,
-     "per10": 0.3,
-     "tachysystole": false
-    },
-    "decels": [
-     {
-      "startSec": 1189,
-      "durationSec": 20.5,
-      "depth": 27,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2085,
-      "durationSec": 24.75,
-      "depth": 48,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2243,
-      "durationSec": 28.5,
-      "depth": 37,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2435,
-      "durationSec": 17,
-      "depth": 41,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2465,
-      "durationSec": 23,
-      "depth": 64,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2525,
-      "durationSec": 24.75,
-      "depth": 33,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2552,
-      "durationSec": 25.5,
-      "depth": 35,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2640,
-      "durationSec": 25.25,
-      "depth": 54,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2698,
-      "durationSec": 99.25,
-      "depth": 48,
-      "subtypeSuggested": "unclassified"
-     },
-     {
-      "startSec": 2842,
-      "durationSec": 30.5,
-      "depth": 43,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2915,
-      "durationSec": 33,
-      "depth": 44,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2986,
-      "durationSec": 62.25,
-      "depth": 55,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3096,
-      "durationSec": 60,
-      "depth": 50,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3200,
-      "durationSec": 59,
-      "depth": 49,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3310,
-      "durationSec": 63.75,
-      "depth": 50,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3432,
-      "durationSec": 42.5,
-      "depth": 50,
-      "subtypeSuggested": "unclassified"
-     }
-    ],
-    "repetitive": false,
-    "figoSuggested": "suspicious"
-   },
-   "figo": "suspicious",
-   "outcome": {
-    "pH": 7.02,
-    "BE": -15.5,
-    "BDecf": 12.81,
-    "pCO2": 8.5,
-    "apgar1": 7,
-    "apgar5": 8,
-    "weightG": 3200
-   },
-   "acidosis": "metabolic",
    "review": null
   },
   {
@@ -1103,7 +771,6 @@
     "parity": 0,
     "gestWeeks": 39,
     "risks": [],
-    "stage1Min": 190,
     "stage2Min": 20
    },
    "features": {
@@ -1206,6 +873,137 @@
     "weightG": 2670
    },
    "acidosis": "metabolic",
+   "stripQuality": {
+    "fhrLossPct": 13.7,
+    "ucPresentPct": 91.6
+   },
+   "review": null
+  },
+  {
+   "id": "1241",
+   "svg": "ctg/1241.svg",
+   "layout": {
+    "W": 1500,
+    "H": 460,
+    "padL": 40,
+    "padR": 12,
+    "yTop": 12,
+    "hFhr": 280,
+    "gap": 30,
+    "hUc": 110,
+    "fhrMin": 50,
+    "fhrMax": 210,
+    "plotW": 1448,
+    "ucTop": 322,
+    "durationSec": 1800
+   },
+   "archetypeSuggested": "metabolic_acidosis",
+   "vignette": {
+    "age": 28,
+    "gravidity": 1,
+    "parity": 0,
+    "gestWeeks": 39,
+    "risks": [],
+    "stage2Min": 20
+   },
+   "features": {
+    "variabilityBand": "increased",
+    "decelCount": 9,
+    "window": {
+     "minutes": 60
+    },
+    "quality": {
+     "lossPct": 17.3,
+     "suboptimal": false
+    },
+    "baseline": 140,
+    "baselineClass": "normal",
+    "variability": {
+     "reducedMin": 0,
+     "increasedMin": 29,
+     "assessedMin": 48,
+     "medianRange": 29.3,
+     "band": "increased"
+    },
+    "contractions": {
+     "count30": 8,
+     "per10": 2.7,
+     "tachysystole": false
+    },
+    "decels": [
+     {
+      "startSec": 204,
+      "durationSec": 16,
+      "depth": 58,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 578,
+      "durationSec": 19.75,
+      "depth": 64,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 823,
+      "durationSec": 22.25,
+      "depth": 37,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 847,
+      "durationSec": 22,
+      "depth": 69,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 3073,
+      "durationSec": 15.75,
+      "depth": 38,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 3210,
+      "durationSec": 29.25,
+      "depth": 50,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 3284,
+      "durationSec": 16,
+      "depth": 46,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 3353,
+      "durationSec": 25.75,
+      "depth": 29,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 3451,
+      "durationSec": 23.25,
+      "depth": 34,
+      "subtypeSuggested": "variable"
+     }
+    ],
+    "repetitive": false,
+    "figoSuggested": "suspicious"
+   },
+   "figo": "suspicious",
+   "outcome": {
+    "pH": 6.99,
+    "BE": -15.3,
+    "BDecf": 12.12,
+    "pCO2": 9.8,
+    "apgar1": 8,
+    "apgar5": 9,
+    "weightG": 2650
+   },
+   "acidosis": "metabolic",
+   "stripQuality": {
+    "fhrLossPct": 13.2,
+    "ucPresentPct": 97.4
+   },
    "review": null
   },
   {
@@ -1233,7 +1031,6 @@
     "parity": 0,
     "gestWeeks": 40,
     "risks": [],
-    "stage1Min": 175,
     "stage2Min": 10
    },
    "features": {
@@ -1354,208 +1151,10 @@
     "weightG": 3310
    },
    "acidosis": "acidaemia_not_metabolic",
-   "review": null
-  },
-  {
-   "id": "1046",
-   "svg": "ctg/1046.svg",
-   "layout": {
-    "W": 1500,
-    "H": 460,
-    "padL": 40,
-    "padR": 12,
-    "yTop": 12,
-    "hFhr": 280,
-    "gap": 30,
-    "hUc": 110,
-    "fhrMin": 50,
-    "fhrMax": 210,
-    "plotW": 1448,
-    "ucTop": 322,
-    "durationSec": 1800
+   "stripQuality": {
+    "fhrLossPct": 10.3,
+    "ucPresentPct": 83.7
    },
-   "archetypeSuggested": "fill",
-   "vignette": {
-    "age": 21,
-    "gravidity": 1,
-    "parity": 0,
-    "gestWeeks": 40,
-    "risks": [],
-    "stage1Min": 210,
-    "stage2Min": 20
-   },
-   "features": {
-    "variabilityBand": "normal",
-    "decelCount": 22,
-    "window": {
-     "minutes": 60
-    },
-    "quality": {
-     "lossPct": 1.5,
-     "suboptimal": false
-    },
-    "baseline": 130,
-    "baselineClass": "normal",
-    "variability": {
-     "reducedMin": 0,
-     "increasedMin": 18,
-     "assessedMin": 42,
-     "medianRange": 21.5,
-     "band": "normal"
-    },
-    "contractions": {
-     "count30": 4,
-     "per10": 1.3,
-     "tachysystole": false
-    },
-    "decels": [
-     {
-      "startSec": 230,
-      "durationSec": 31,
-      "depth": 35,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 429,
-      "durationSec": 41.75,
-      "depth": 47,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 719,
-      "durationSec": 28.5,
-      "depth": 75,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2304,
-      "durationSec": 16.75,
-      "depth": 45,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2428,
-      "durationSec": 21.25,
-      "depth": 38,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2450,
-      "durationSec": 18.5,
-      "depth": 52,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2507,
-      "durationSec": 19.75,
-      "depth": 44,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2528,
-      "durationSec": 16,
-      "depth": 43,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2567,
-      "durationSec": 17.5,
-      "depth": 62,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2602,
-      "durationSec": 18.5,
-      "depth": 48,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2624,
-      "durationSec": 50.75,
-      "depth": 50,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2745,
-      "durationSec": 54.25,
-      "depth": 49,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2834,
-      "durationSec": 67.75,
-      "depth": 57,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 2940,
-      "durationSec": 84.25,
-      "depth": 72,
-      "subtypeSuggested": "unclassified"
-     },
-     {
-      "startSec": 3143,
-      "durationSec": 42,
-      "depth": 46,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3219,
-      "durationSec": 20.25,
-      "depth": 49,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3257,
-      "durationSec": 35,
-      "depth": 36,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3294,
-      "durationSec": 19,
-      "depth": 33,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3336,
-      "durationSec": 18.75,
-      "depth": 32,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3419,
-      "durationSec": 20.25,
-      "depth": 49,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3455,
-      "durationSec": 23.5,
-      "depth": 40,
-      "subtypeSuggested": "variable"
-     },
-     {
-      "startSec": 3565,
-      "durationSec": 35,
-      "depth": 41,
-      "subtypeSuggested": "variable"
-     }
-    ],
-    "repetitive": true,
-    "figoSuggested": "suspicious"
-   },
-   "figo": "suspicious",
-   "outcome": {
-    "pH": 7.29,
-    "BE": -5.6,
-    "BDecf": 4.45,
-    "pCO2": 5.9,
-    "apgar1": 9,
-    "apgar5": 10,
-    "weightG": 3250
-   },
-   "acidosis": "normal",
    "review": null
   },
   {
@@ -1583,7 +1182,6 @@
     "parity": 0,
     "gestWeeks": 41,
     "risks": [],
-    "stage1Min": 200,
     "stage2Min": 10
    },
    "features": {
@@ -1650,6 +1248,330 @@
     "weightG": 3100
    },
    "acidosis": "acidaemia_not_metabolic",
+   "stripQuality": {
+    "fhrLossPct": 3.3,
+    "ucPresentPct": 96.3
+   },
+   "review": null
+  },
+  {
+   "id": "1022",
+   "svg": "ctg/1022.svg",
+   "layout": {
+    "W": 1500,
+    "H": 460,
+    "padL": 40,
+    "padR": 12,
+    "yTop": 12,
+    "hFhr": 280,
+    "gap": 30,
+    "hUc": 110,
+    "fhrMin": 50,
+    "fhrMax": 210,
+    "plotW": 1448,
+    "ucTop": 322,
+    "durationSec": 1800
+   },
+   "archetypeSuggested": "fill",
+   "vignette": {
+    "age": 34,
+    "gravidity": 3,
+    "parity": 1,
+    "gestWeeks": 39,
+    "risks": [],
+    "stage2Min": 5
+   },
+   "features": {
+    "variabilityBand": "normal",
+    "decelCount": 16,
+    "window": {
+     "minutes": 60
+    },
+    "quality": {
+     "lossPct": 1.8,
+     "suboptimal": false
+    },
+    "baseline": 135,
+    "baselineClass": "normal",
+    "variability": {
+     "reducedMin": 0,
+     "increasedMin": 13,
+     "assessedMin": 49,
+     "medianRange": 20,
+     "band": "normal"
+    },
+    "contractions": {
+     "count30": 14,
+     "per10": 4.7,
+     "tachysystole": false
+    },
+    "decels": [
+     {
+      "startSec": 88,
+      "durationSec": 29,
+      "depth": 62,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 341,
+      "durationSec": 40.75,
+      "depth": 55,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 1462,
+      "durationSec": 16.25,
+      "depth": 24,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 1627,
+      "durationSec": 30.75,
+      "depth": 49,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 2385,
+      "durationSec": 18.75,
+      "depth": 47,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 2671,
+      "durationSec": 23.75,
+      "depth": 52,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 2805,
+      "durationSec": 20.5,
+      "depth": 53,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 2851,
+      "durationSec": 15.5,
+      "depth": 22,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 2976,
+      "durationSec": 37.75,
+      "depth": 24,
+      "subtypeSuggested": "late"
+     },
+     {
+      "startSec": 3080,
+      "durationSec": 26,
+      "depth": 47,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 3184,
+      "durationSec": 21.75,
+      "depth": 67,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 3207,
+      "durationSec": 111.75,
+      "depth": 70,
+      "subtypeSuggested": "late"
+     },
+     {
+      "startSec": 3328,
+      "durationSec": 59.75,
+      "depth": 56,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 3390,
+      "durationSec": 73,
+      "depth": 49,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 3542,
+      "durationSec": 27.25,
+      "depth": 50,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 3572,
+      "durationSec": 28,
+      "depth": 49,
+      "subtypeSuggested": "variable"
+     }
+    ],
+    "repetitive": true,
+    "figoSuggested": "suspicious"
+   },
+   "figo": "suspicious",
+   "outcome": {
+    "pH": 7.28,
+    "BE": -3,
+    "BDecf": 1.53,
+    "pCO2": 7,
+    "apgar1": 10,
+    "apgar5": 10,
+    "weightG": 3580
+   },
+   "acidosis": "normal",
+   "stripQuality": {
+    "fhrLossPct": 3.3,
+    "ucPresentPct": 87.4
+   },
+   "review": null
+  },
+  {
+   "id": "1033",
+   "svg": "ctg/1033.svg",
+   "layout": {
+    "W": 1500,
+    "H": 460,
+    "padL": 40,
+    "padR": 12,
+    "yTop": 12,
+    "hFhr": 280,
+    "gap": 30,
+    "hUc": 110,
+    "fhrMin": 50,
+    "fhrMax": 210,
+    "plotW": 1448,
+    "ucTop": 322,
+    "durationSec": 1800
+   },
+   "archetypeSuggested": "fill",
+   "vignette": {
+    "age": 31,
+    "gravidity": 1,
+    "parity": 1,
+    "gestWeeks": 40,
+    "risks": [],
+    "stage2Min": 5
+   },
+   "features": {
+    "variabilityBand": "increased",
+    "decelCount": 13,
+    "window": {
+     "minutes": 60
+    },
+    "quality": {
+     "lossPct": 2.5,
+     "suboptimal": false
+    },
+    "baseline": 150,
+    "baselineClass": "normal",
+    "variability": {
+     "reducedMin": 0,
+     "increasedMin": 29,
+     "assessedMin": 51,
+     "medianRange": 29.5,
+     "band": "increased"
+    },
+    "contractions": {
+     "count30": 3,
+     "per10": 1,
+     "tachysystole": false
+    },
+    "decels": [
+     {
+      "startSec": 497,
+      "durationSec": 23.5,
+      "depth": 48,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 1557,
+      "durationSec": 24.25,
+      "depth": 71,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 1733,
+      "durationSec": 24.5,
+      "depth": 70,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 2138,
+      "durationSec": 41.25,
+      "depth": 84,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 2289,
+      "durationSec": 35.25,
+      "depth": 54,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 2483,
+      "durationSec": 25.75,
+      "depth": 84,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 2689,
+      "durationSec": 32,
+      "depth": 83,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 2996,
+      "durationSec": 48.5,
+      "depth": 82,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 3260,
+      "durationSec": 16,
+      "depth": 65,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 3278,
+      "durationSec": 82.75,
+      "depth": 56,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 3365,
+      "durationSec": 21,
+      "depth": 77,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 3454,
+      "durationSec": 78,
+      "depth": 42,
+      "subtypeSuggested": "variable"
+     },
+     {
+      "startSec": 3538,
+      "durationSec": 19,
+      "depth": 46,
+      "subtypeSuggested": "variable"
+     }
+    ],
+    "repetitive": false,
+    "figoSuggested": "suspicious"
+   },
+   "figo": "suspicious",
+   "outcome": {
+    "pH": 7.32,
+    "BE": -2.7,
+    "BDecf": 0.89,
+    "pCO2": 6.4,
+    "apgar1": 9,
+    "apgar5": 9,
+    "weightG": 3270
+   },
+   "acidosis": "normal",
+   "stripQuality": {
+    "fhrLossPct": 3.6,
+    "ucPresentPct": 60.7
+   },
    "review": null
   }
  ]

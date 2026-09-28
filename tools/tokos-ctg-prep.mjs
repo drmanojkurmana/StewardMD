@@ -229,6 +229,17 @@ export function twoPassBaseline(fhr) {
   return Math.round((stable.length ? mean(stable) : prelim) / 5) * 5;
 }
 
+// Quality of the 30-min strip the learner sees. A lost UC channel reads as flat 0 in this data (see the
+// review queue traces), so UC counts as present only where the sample is finite and above 0.
+export function stripQuality(fhr, uc) {
+  const pctOf = (n, d) => Math.round((n / d) * 1000) / 10;
+  let bad = 0, up = 0;
+  for (let i = 0; i < fhr.length; i++) if (!ok(fhr[i])) bad++;
+  for (let i = 0; i < uc.length; i++) if (Number.isFinite(uc[i]) && uc[i] > 0) up++;
+  return { fhrLossPct: fhr.length ? pctOf(bad, fhr.length) : 100, ucPresentPct: uc.length ? pctOf(up, uc.length) : 0 };
+}
+export const STRIP_MAX_FHR_LOSS = 15, STRIP_MIN_UC_PRESENT = 50;
+
 export function baselineClass(b) {
   if (b < 100) return "severe_bradycardia";
   if (b < 110) return "bradycardia";
@@ -419,8 +430,7 @@ export function vignetteFrom(c) {
   const v = { age: c["Age"], gravidity: c["Gravidity"], parity: c["Parity"], gestWeeks: c["Gest. weeks"], risks: [] };
   ["Diabetes", "Hypertension", "Preeclampsia", "Pyrexia", "Meconium"].forEach((k) => { if (FIELD_OK[k] && c[k] === 1) v.risks.push(k.toLowerCase()); });
   if (FIELD_OK.Induced && c["Induced"] != null) v.induced = c["Induced"] === 1;
-  // II.stage max in the data is 30 (paper: stage 2 <= 30 min), so minutes. I.stage has one outlier (393425): keep under 24 h.
-  if (c["I.stage"] != null && c["I.stage"] < 1440) v.stage1Min = c["I.stage"];
+  // II.stage max in the data is 30 (paper: stage 2 <= 30 min), so minutes. I.stage's unit is unconfirmed: not shown.
   if (c["II.stage"] != null) v.stage2Min = c["II.stage"];
   Object.keys(v).forEach((k) => { if (v[k] == null || Number.isNaN(v[k])) delete v[k]; });
   return v;
@@ -463,7 +473,7 @@ export async function mainV2() {
   //  CONFIRMED: Deliv. type: 1 = vaginal (506 records), 2 = caesarean (46 records). Paper: "506 intrapartum recordings
   //    delivered vaginally" (operative vaginal included) and "only 46 cesarean section (CS) deliveries"; counts match exactly.
   //  CONFIRMED (by value range): II.stage is in minutes: max over 552 records is 30, paper criterion "Duration of stage 2 <= 30 minutes".
-  //    I.stage assumed the same unit (median 220); one outlier (393425) is dropped in vignetteFrom.
+  //    I.stage: unit unconfirmed (median 220, one outlier 393425), so it is not shown.
   //  NOT CONFIRMED, so left out of FIELD_OK and never shown in a vignette:
   //    Diabetes, Hypertension, Preeclampsia, Pyrexia, Meconium, Liq. praecox, Induced: the paper names these as
   //    included factors ("gestational diabetes, preeclampsia, maternal fever (>37.5C), hypertension and meconium stained
@@ -474,7 +484,7 @@ export async function mainV2() {
   //    Rec. type: header 1/2/12/-1; paper says only "type of measurement (ultrasound or direct scalp electrode)": mapping unknown.
   //  Units NOT stated in either source: pCO2 (header median 7.0, range 0.7-12.3: consistent with kPa, not mmHg, but
   //    unconfirmed) and BDecf (median 4.13, range -3.4 to 26.11: mmol/L is the standard unit, unconfirmed).
-  //    Outcome numbers are shipped without units until a source states them.
+  //    The app shows pCO2 in kPa and BDecf in mmol/L and flags both in the review queue for the reviewer to confirm.
   mkdirSync(OUT_MEDIA_DIR, { recursive: true });
   const ids = (await fetchText("RECORDS")).trim().split("\n");
   const headers = (await pool(ids, async (id) => decodeHeader(await fetchText(id + ".hea")))).filter((h) => h.clinical["pH"] != null);
@@ -489,7 +499,10 @@ export async function mainV2() {
     const features = extractFIGOFeatures(fhr, uc, h.fs);
     if (!features || features.quality.suboptimal) return null;
     const n = Math.min(fhr.length, CFG.STRIP_MIN * 60 * h.fs);
-    return { id: h.record, h, fhr: fhr.slice(fhr.length - n), uc: uc.slice(uc.length - n), features, acidosis: acidosisClass(h.clinical) };
+    const sFhr = fhr.slice(fhr.length - n), sUc = uc.slice(uc.length - n);
+    const stripQ = stripQuality(sFhr, sUc);
+    if (stripQ.fhrLossPct > STRIP_MAX_FHR_LOSS || stripQ.ucPresentPct < STRIP_MIN_UC_PRESENT) return null;
+    return { id: h.record, h, fhr: sFhr, uc: sUc, features, stripQuality: stripQ, acidosis: acidosisClass(h.clinical) };
   })).filter(Boolean);
   const chosen = pickCases(cands);
   const cases = chosen.map((k) => {
@@ -500,13 +513,22 @@ export async function mainV2() {
       id: k.id, svg: "ctg/" + k.id + ".svg", layout, archetypeSuggested: k.archetypeSuggested,
       vignette: vignetteFrom(c), features: Object.assign({ variabilityBand: k.features.variability.band, decelCount: k.features.decels.length }, k.features), figo: k.features.figoSuggested,
       outcome: { pH: c["pH"], BE: c["BE"], BDecf: c["BDecf"], pCO2: c["pCO2"], apgar1: c["Apgar1"], apgar5: c["Apgar5"], weightG: c["Weight(g)"] },
-      acidosis: k.acidosis, review: null,
+      acidosis: k.acidosis, stripQuality: k.stripQuality, review: null,
     };
   });
   writeFileSync(OUT_DECK, JSON.stringify({ v: 2, id: "ctg", cases }, null, 1));
   mkdirSync("docs/tokos", { recursive: true });
-  writeFileSync("docs/tokos/review-queue.md", "# Tokós CTG review queue\n\nFor an obstetrician: confirm or correct each suggested label, then set `review` in `tokos/decks/ctg.json` to `{\"by\": \"<name>\", \"date\": \"YYYY-MM-DD\", \"figo\": \"...\", \"decelType\": \"...\" }`. Until then the app shows every label as rule-based.\n\n" +
-    cases.map((c) => "## " + c.id + " (" + c.archetypeSuggested + ")\n- Trace: `tokos/media/" + c.svg + "`\n- Suggested FIGO: " + c.figo + "; baseline " + c.features.baseline + " (" + c.features.baselineClass + "); variability " + c.features.variability.band + " (median range " + c.features.variability.medianRange + " bpm, reduced " + c.features.variability.reducedMin + " min); decelerations " + c.features.decels.map((d) => d.durationSec + " s " + d.subtypeSuggested).join(", ") + "; contractions " + c.features.contractions.per10 + " per 10 min\n- Outcome: pH " + c.outcome.pH + ", BDecf " + c.outcome.BDecf + ", acidosis " + c.acidosis + "\n").join("\n"));
+  const qNote = (k, c) => {
+    const sb = twoPassBaseline(k.fhr), hi = Array.from(k.fhr).filter((v) => v > 180).length;
+    const last5 = Array.from(k.fhr).slice(-5 * 60 * k.h.fs).filter((v) => v > 180).length;
+    const notes = [];
+    if (sb != null && Math.abs(sb - c.features.baseline) >= 10) notes.push("strip baseline " + sb + " differs from the " + c.features.window.minutes + " min baseline " + c.features.baseline);
+    if (hi) notes.push(hi + " samples above 180 bpm in the strip" + (last5 ? " (" + last5 + " in the last 5 min)" : ""));
+    return "strip FHR loss " + c.stripQuality.fhrLossPct + "%, UC present " + c.stripQuality.ucPresentPct + "%; " + (notes.length ? notes.join("; ") : "no artefact concern found by the checks") + ". Features are computed on the " + c.features.window.minutes + " min window.";
+  };
+  const decelText = (c) => (c.features.decels.length ? c.features.decels.map((d) => d.durationSec + " s " + d.subtypeSuggested + " (suggested)").join(", ") : "none");
+  writeFileSync("docs/tokos/review-queue.md", "# Tokós CTG review queue\n\nFor an obstetrician: confirm or correct each suggested label, then set `review` in `tokos/decks/ctg.json` to `{\"by\": \"<name>\", \"date\": \"YYYY-MM-DD\", \"figo\": \"...\", \"decelType\": \"...\" }`. Until then the app shows every label as rule-based.\n\nPlease also confirm units: the sources do not state them for pCO2 and BDecf. The app shows pCO2 in kPa (header median 7.0, range 0.7 to 12.3) and BDecf in mmol/L. Risk-factor and Induced fields are not shown because their 0/1 coding is unconfirmed.\n\n" +
+    cases.map((c, i) => "## " + c.id + " (" + c.archetypeSuggested + ")\n- Trace: `tokos/media/" + c.svg + "`\n- Suggested FIGO: " + c.figo + "; baseline " + c.features.baseline + " (" + c.features.baselineClass + "); variability " + c.features.variability.band + " (median range " + c.features.variability.medianRange + " bpm, reduced " + c.features.variability.reducedMin + " min); decelerations " + decelText(c) + "; contractions " + c.features.contractions.per10 + " per 10 min\n- Outcome: pH " + c.outcome.pH + ", BDecf " + c.outcome.BDecf + ", acidosis " + c.acidosis + "\n- Quality note: " + qNote(chosen[i], c) + "\n").join("\n"));
   console.log("wrote " + cases.length + " cases; archetypes: " + cases.map((c) => c.archetypeSuggested).join(", "));
 }
 

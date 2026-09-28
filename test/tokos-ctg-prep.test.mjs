@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, existsSync } from "node:fs";
-import { decodeHeader, decodeSignal, toPhysical, extractFeatures, renderTraceSvg } from "../tools/tokos-ctg-prep.mjs";
+import { decodeHeader, decodeSignal, toPhysical, extractFeatures, renderTraceSvg, stripQuality } from "../tools/tokos-ctg-prep.mjs";
 
 const SAMPLE_HEADER = `1001 2 4 19200
 1001.dat 16 100(0)/bpm 12 0 15050 20101 0 FHR
@@ -205,4 +205,11 @@ test("calibrated renderer breaks the path when decimation would skip a dropout s
 
 test("signalQuality of empty input is total loss, not NaN", () => {
   assert.deepEqual(signalQuality(new Float64Array(0)), { lossPct: 100, suboptimal: true });
+});
+
+test("stripQuality: FHR loss counts out-of-range samples, UC present counts finite samples above 0", () => {
+  const fhr = [140, 0, 140, 300, 140, 140, 140, 140, 140, 140];
+  const uc = [0, 0, 5, 10, NaN, 20, 0, 0, 0, 0];
+  assert.deepEqual(stripQuality(fhr, uc), { fhrLossPct: 20, ucPresentPct: 30 });
+  assert.deepEqual(stripQuality([], []), { fhrLossPct: 100, ucPresentPct: 0 });
 });
