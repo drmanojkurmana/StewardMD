@@ -52,3 +52,10 @@ test("vignettes use only allowed keys, no risk factors while FIELD_OK is empty, 
     assert.ok(c.stripQuality.fhrLossPct <= 15 && c.stripQuality.ucPresentPct >= 50, c.id + " strip quality");
   });
 });
+
+test("tracks.json declares the ctg track with a Hindi label", () => {
+  const tracks = JSON.parse(readFileSync("tokos/tracks.json", "utf8"));
+  assert.equal(tracks.tracks[0].id, "ctg");
+  assert.ok(tracks.tracks[0].labelHi.length > 0);
+  assert.deepEqual(tracks.access.freeLevels, ["mbbs"]);
+});
