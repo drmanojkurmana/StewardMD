@@ -221,8 +221,12 @@ try {
   // line that does not mention fever has not excluded it
   const wNote = await assessNeg(T(["ageOver50", "diarrhea", "nauseaVomiting", "dehydration"]), ["fever", "bloodyStool"]);
   ok(wNote.ab === false && wNote.rule === "watery_diarrhoea", `defaults · note "no fever, no blood" + watery diarrhoea: no antibiotics (${wNote.cls}, ${wNote.rule})`);
+  // (round 73: a line that does not mention fever still gets fluids when nothing in it points to severity or another cause;
+  // dehydration, low urine output, abdominal pain or distension keep the "antibiotics if criteria met" answer)
   const wLine = await assessNeg(T(["diarrhea", "nauseaVomiting"]), []);
-  ok(wLine.rule !== "watery_diarrhoea", `defaults · complaint line "loose stools and vomiting", fever not mentioned: not the fluids-only answer (${wLine.cls}, ${wLine.rule})`);
+  ok(wLine.ab === false && wLine.rule === "watery_diarrhoea", `defaults · complaint line "loose stools and vomiting", nothing severe: fluids (${wLine.cls}, ${wLine.rule})`);
+  const wDry = await assessNeg(T(["diarrhea", "nauseaVomiting", "dehydration"]), []);
+  ok(wDry.rule !== "watery_diarrhoea", `defaults · the same with dehydration, fever not mentioned: not the fluids-only answer (${wDry.cls}, ${wDry.rule})`);
   // leukocytosis is an ATS/IDSA HAP criterion: a new infiltrate after 48 h with a raised count, no fever
   const hapWbc = await cm(["hospitalDay48", "ageOver50", "tachypnea", "consolidation", "crepitations", "leukocytosis"]);
   ok(hapWbc.ab === true && hapWbc.rule === "hap_criteria", `defaults · day 5, new infiltrate + WBC >= 12,000, afebrile: antibiotics (${hapWbc.cls}, ${hapWbc.rule})`);

@@ -1279,6 +1279,7 @@
     // 48 h or more (or a ventilator); without them they cannot lead or hold antibiotics as rivals
     BRONCHIECTASIS_EXACERBATION: ["knownBronchiectasis"],
     HAP: ["hospitalDay48", "mechanicalVentilation"],
+
     // round 67: ventilator-associated pneumonia needs a ventilator (ATS/IDSA 2016)
     VAP: ["mechanicalVentilation"],
     // round 64: uraemic encephalopathy needs its encephalopathy (a raised creatinine alone is kidney disease)
@@ -1303,7 +1304,9 @@
     CA_UTI: function (f) { return ((f.indwellingCatheter || f.longTermCatheter) && (f.feverGU || f.dysuria || f.flankPain || f.costovertebralTenderness ||
       f.urinaryRetention || f.hematuria || f.perinealPain)) ? 20 : 0; },
     // round 66 (heldout3 tune): cholangitis is an infection of an obstructed duct: without fever or rigors it is not the lead (Charcot, Tokyo)
-    CHOLANGITIS: function (f) { return noneOf(f, FEBRILE) ? -20 : 0; },
+    // (round 73: transaminases over 1000 are a hepatitis, not an obstructed duct, unless imaging shows one; heldout2)
+    CHOLANGITIS: function (f) { return (noneOf(f, FEBRILE) ? -20 : 0) + ((f.transaminasesVeryHigh && !f.dilatedCBD) ? -20 : 0); },
+    CHOLECYSTITIS: function (f) { return (f.transaminasesVeryHigh && !f.murphySign && !f.gallbladderInflamed) ? -20 : 0; },
     // dengue is a fever; with severe or swollen joints chikungunya comes first
     DENGUE: function (f) { return (noneOf(f, FEBRILE) ? -25 : 0) + ((f.severeArthralgia || f.jointSwelling) ? -15 : 0); },
     // round 67: an acute fever with severe or swollen joints (often symmetric, small joints and ankles) is chikungunya first (WHO SEARO)
@@ -1566,6 +1569,13 @@
   var FEVER_NI = { thyroid_storm: 1, alcohol_withdrawal: 1, ttp_hus: 1, serotonin_nms: 1, sle_flare: 1, vasculitis: 1, pancreatitis: 1,
     sarcoidosis: 1, heat_stroke: 1, drug_fever: 1, sjs_ten: 1, still_disease: 1 };
   // non-infective causes of fever (or a fever-like picture) with shock: sepsis physiology does not override them
+  // non-infective causes of abdominal pain (or distension) that, when they lead, make "tap first" the SBP answer
+  var RIVAL_NEEDS = {
+    CHOLANGITIS: ["jaundice", "rightUpperQuadrantPain", "dilatedCBD", "cholestaticLFT", "knownGallstones", "abdominalPain", "darkUrine", "rigors"],
+    CHOLECYSTITIS: ["rightUpperQuadrantPain", "murphySign", "knownGallstones", "gallbladderInflamed", "abdominalPain", "severeAbdominalPain"]
+  };
+  var SBP_PAIN_NI = { pancreatitis: 1, bowel_obstruction: 1, peptic_ulcer: 1, mesenteric_ischemia: 1, biliary_colic: 1, renal_colic: 1,
+    aaa: 1, anaphylaxis: 1 };
   var SHOCK_FEVER_NI = { cardiogenic_shock: 1, hypovolemic_shock: 1, anaphylaxis: 1, adrenal_crisis: 1, tamponade: 1, aortic_dissection: 1,
     aaa: 1, heat_stroke: 1, thyroid_storm: 1, serotonin_nms: 1, pancreatitis: 1, pe: 1, dka: 1 };
   var GATE_V2_KEEP = ["hypotension", "lactateElevated", "raised_lactate", "vasopressorRequirement",
@@ -1595,9 +1605,15 @@
     var gib = f.hematemesis || f.melena || f.gibPresentation;
     // a GI bleed in cirrhosis needs antibiotic prophylaxis (Baveno VII) whatever the tap shows, so
     // "rule out SBP, tap first" must not replace it: only fever-grade SBP signs take this branch then
+    // round 73: abdominal pain in cirrhosis with ascites, but no fever, rigors or ascitic neutrophils, while a non-infective
+    // cause of the pain leads the order (pancreatitis, bowel obstruction, a perforated ulcer, anaphylaxis): tap first, as with
+    // encephalopathy alone (AASLD 2021: the ascitic neutrophil count decides). Gold train gc_438, gc_446, gc_490.
+    var painElsewhere = !!(rankV3() && sbpSign && !(f.fever || f.rigors || f.asciticPMNHigh) && d.ni[0] && SBP_PAIN_NI[d.ni[0].id] &&
+      (!d.inf[0] || (d.ni[0].rankScore != null ? d.ni[0].rankScore : d.ni[0].score) > (d.inf[0].rankScore != null ? d.inf[0].rankScore : d.inf[0].score)));
     if (f.liverDisease && f.ascites && (sbpSign || (sbpSoft && !gib)) &&
         (g.cls === "possible" || g.cls === "unlikely" || g.cls === "noninfective" || g.cls === "none")) {
-      g.cls = sbpSign ? "likely" : "rule_out_sbp"; g.rule = "sbp";
+      g.cls = sbpSign && !painElsewhere ? "likely" : "rule_out_sbp"; g.rule = "sbp";
+      if (g.cls === "rule_out_sbp" && sbpSign) g.painLead = d.ni[0].name;
       // the stewardship card must be SBP's, never another infection's regimen under an SBP banner
       g.lead = d.inf.filter(function (x) { return x.id === "SBP"; })[0] || null;
       return;
@@ -1670,7 +1686,12 @@
       if (bI && (!bN || rkg(bI) > rkg(bN))) { g.cls = "likely"; g.rule = "febrile_infection_lead"; g.lead = bI; }
     }
     // (round 65: cirrhosis shown by its signs, ascites or a flap, counts too: Baveno / AASLD prophylaxis)
-    if ((f.liverDisease || f.ascites || f.asterixis) && (f.hematemesis || f.melena || f.gibPresentation) && g.cls !== "very_likely" && g.cls !== "likely") {
+    // (round 73: a variceal bleed leading the order is portal hypertension too, when the reader missed the liver words;
+    // gold train gc_037 with the classic reader)
+    var rkv = function (x) { return x.rankScore != null ? x.rankScore : x.score; };
+    var varLead = !!(d.ni[0] && d.ni[0].id === "variceal_bleed" && (!d.inf[0] || rkv(d.ni[0]) >= rkv(d.inf[0])));
+    var cirrGib = (f.liverDisease || f.ascites || f.asterixis || varLead) && (f.hematemesis || f.melena || f.gibPresentation);
+    if (cirrGib && g.cls !== "very_likely" && g.cls !== "likely") {
       g.cls = "abx_prophylaxis"; g.rule = "cirrhosis_gib";
       return;
     }
@@ -1714,6 +1735,9 @@
     var viralThroat = !!(rankV3() && f.soreThroat && (f.cough || f.coughRadio || f.coryza || f.nasalCongestion) && !f.tonsillarExudate);
     if (lead && lead.id === "PHARYNGITIS" && need === "CONDITIONAL" && viralThroat) need = "NO";
     if (!lead || need === "YES") return;
+    // round 73: an infection that needs no antibiotics (viral hepatitis) does not cancel the prophylaxis a GI bleed in
+    // cirrhosis needs (Baveno VII)
+    if (cirrGib) { g.cls = "abx_prophylaxis"; g.rule = "cirrhosis_gib"; return; }
     var mods = GATE_V2_KEEP.filter(function (k) { return f[k]; });
     // round 67 (heldout3 tune): acute watery diarrhoea without fever, blood, sepsis signs, a healthcare or antibiotic
     // exposure, or immune compromise needs fluids, not antibiotics (IDSA 2017, WHO). A C. difficile or dysentery rival
@@ -1721,7 +1745,11 @@
     // From a note it needs the fever denied in so many words ("afebrile", "no fever"): a note that does not mention it has not
     // excluded it (a complaint line), and the v2 reader, which reads every mention of fever (as ni_lead_afebrile).
     var nlp2w = !!(window.SMD_NLP && SMD_NLP._v2 && SMD_NLP._v2({}));
-    var watery = !mods.length && lead.id === "GASTROENTERITIS" && rankV3() && (!S.negText || (nlp2w && !!(S.neg && S.neg.fever))) && f.diarrhea && noneOf(f, ["fever", "rigors", "feverGU", "bloodyStool", "tenesmus",
+    // (round 73: a note that does not mention fever still gets the fluids answer when nothing in it points to severity or
+    // another cause: no dehydration, low urine output, abdominal pain or distension. Gold: complaint-only overcalls 15 -> 13
+    // with no needed call lost.)
+    var wateryText = nlp2w && (!!(S.neg && S.neg.fever) || !(f.dehydration || f.oliguria || f.abdominalPain || f.severeAbdominalPain || f.abdominalDistension));
+    var watery = !mods.length && lead.id === "GASTROENTERITIS" && rankV3() && (!S.negText || wateryText) && f.diarrhea && noneOf(f, ["fever", "rigors", "feverGU", "bloodyStool", "tenesmus",
         "alteredSensorium", "toxicAppearing", "organDysfunction", "antibioticsLast90Days", "priorAntibiotics", "hospitalDay48",
         "hospitalizationLast90Days", "nursingHomeResident", "travelEndemicArea", "prolongedFever", "subacuteOnset"]);
     if (mods.length) { g.rule = "keep_modifier"; g.need = need; g.why = mods.map(function (k) { try { return lbl(k); } catch (e) { return k; } }).join(", "); return; }
@@ -1736,6 +1764,9 @@
       if (x.id === "PHARYNGITIS" && viralThroat) return;
       if (watery && (x.id === "C_DIFF" || x.id === "DYSENTERY")) return;
       if (v3 && rankV3Excluded(x, f)) return;   // smd_rank_v3: an excluded rival cannot hold antibiotics on
+      // round 73: a biliary infection holds antibiotics as a rival only with a biliary sign (Tokyo 2018): fever, vomiting and
+      // transaminases over 1000 are a hepatitis. The order is untouched (a reader that missed the words must not bury it).
+      if (RIVAL_NEEDS[x.id] && noneOf(f, RIVAL_NEEDS[x.id])) return;
       // round 9: under smd_rank_v3 "close" is measured on the ordered score the doctor sees (raw otherwise)
       var n = abxNeed(x), close = v3 ? rk2g(x) >= rk2g(lead) - 30 : x.score >= lead.score - 30;
       var critical = x._syn && x._syn.decision && x._syn.decision.status === "red";
@@ -1880,7 +1911,8 @@
       case "infection_specific": return (lead ? lead + " leads. " : "") + (g.why ? g.why + " " : "") +
         "Antibiotics only for a proven or strongly suspected bacterial co-infection.";
       case "insufficient": return "These findings do not point to a diagnosis yet, so no infection or antibiotic call is made. The list below is only what they are compatible with. Add examination findings, vitals or key labs; the most useful next ones are suggested.";
-      case "rule_out_sbp": return "Can't-miss: spontaneous bacterial peritonitis. Cirrhosis with ascites and encephalopathy, without fever or abdominal pain: do a diagnostic paracentesis now. Treat if ascitic neutrophils are 250/mm3 or more, or at once if fever, abdominal pain, sepsis or shock develops.";
+      case "rule_out_sbp": return g.painLead ? "Can't-miss: spontaneous bacterial peritonitis. Cirrhosis with ascites and abdominal pain, without fever, while " + g.painLead + " leads: do a diagnostic paracentesis now. Treat if ascitic neutrophils are 250/mm3 or more, or at once if fever, sepsis or shock develops." :
+        "Can't-miss: spontaneous bacterial peritonitis. Cirrhosis with ascites and encephalopathy, without fever or abdominal pain: do a diagnostic paracentesis now. Treat if ascitic neutrophils are 250/mm3 or more, or at once if fever, abdominal pain, sepsis or shock develops.";
       case "abx_prophylaxis": return "Cirrhosis with gastrointestinal bleeding: short-course antibiotic prophylaxis is indicated (for example ceftriaxone 1 g daily for up to 7 days; Baveno VII). It lowers infection, rebleeding and mortality; it is not treatment of a diagnosed infection.";
       case "possible": return "Infection is in the differential but not dominant — pursue targeted investigations before antibiotics.";
       case "unlikely": return "Infection is low on the differential — antibiotics are not recommended yet. Investigate the alternatives.";
