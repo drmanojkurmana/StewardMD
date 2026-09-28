@@ -43,10 +43,23 @@
 .ln-start-idea { font-size: 16px; line-height: 1.5; margin: 0 0 8px; color: var(--op-text); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
 .ln-start .oph-small { display: block; margin: 0 0 16px; }
 .ln-revise { margin-top: 12px; }
-.ln-unit { margin: 0 0 20px; }
+.ln-unit { margin: 0 0 12px; }
+.ln-unit[open] { margin-bottom: 20px; }
 .ln-unit-h { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 0 0 4px; }
 .ln-unit-h h3 { margin: 0; font-size: 17px; font-weight: 650; line-height: 1.3; }
 .ln-unit-h .oph-small { flex: 0 0 auto; }
+/* the unit's own disclosure header (a <summary>): title, level and progress, chevron */
+.ln-unit-sum { display: flex; align-items: center; gap: 12px; width: 100%; margin: 0; padding: 10px 2px; border-radius: 12px;
+  cursor: pointer; list-style: none; transition: background-color 160ms ease; }
+.ln-unit-sum::-webkit-details-marker { display: none; }
+.ln-unit-sum:active { background: var(--op-s1); }
+.ln-unit-sum:focus-visible { outline: 2px solid var(--op-acc); outline-offset: 2px; } /* a <summary> has no [tabindex] attribute, so the host's button/[tabindex] rule misses it */
+.ln-unit-b { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.ln-unit-sum h3 { margin: 0; font-size: 17px; font-weight: 650; line-height: 1.3; }
+.ln-unit-sum .oph-small { display: block; }
+.ln-unit-sum .oph-chev { flex: 0 0 auto; transition: transform 160ms var(--op-ease); }
+.ln-unit[open] > .ln-unit-sum .oph-chev { transform: rotate(90deg); }
+.ln-unit[open] .ln-lessons { margin-top: 4px; }
 .ln-lessons { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); }
 .ln-row { width: 100%; display: flex; align-items: center; gap: 14px; text-align: left; border: 0; background: transparent; color: inherit;
   min-height: 64px; padding: 10px 2px; border-radius: 12px; transition: transform 140ms var(--op-ease), background-color 160ms ease; }
@@ -195,7 +208,7 @@
 .oph-learnthis { min-height: 44px; margin-top: 12px; padding: 11px 16px; font-size: 15px; line-height: 1.35; text-align: left; height: auto; }
 
 @media (hover: hover) and (pointer: fine) {
-  .ln-choice:hover, .ln-row:hover, .ln-grow:hover { background: var(--op-s2); }
+  .ln-choice:hover, .ln-row:hover, .ln-grow:hover, .ln-unit-sum:hover { background: var(--op-s2); }
   .ln-lang:hover { background: var(--op-s3); }
   .ln-play:hover { background: var(--op-s3); }
   .ln-mfig .oph-credit a:hover { text-decoration-color: currentColor; }
@@ -206,6 +219,7 @@
 [lang="hi"] .ln-q, [lang="hi"] .ln-start-idea, [lang="hi"] .ln-choice-b span, [lang="hi"] .ln-grow span { line-height: 1.65; }
 @media (prefers-reduced-motion: reduce) {
   .ln-lang:active, .ln-choice:active, .ln-row:active, .ln-grow:active, .ln-hot:active .ln-dot, .ln-mpic:active, .ln-play:active { transform: none; }
+  .ln-unit-sum .oph-chev { transition: none; }
   .ln-play { display: none; } /* each animation's own reduced-motion rule shows its still frame: nothing to pause */
   .ln-sheetwrap.pre .ln-sheet { transform: none; opacity: 0; }
   .ln-sheet { transition: opacity 200ms ease; }
