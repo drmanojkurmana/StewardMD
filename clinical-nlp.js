@@ -252,7 +252,8 @@
       // round 29: the examination named ("fundoscopy shows choroidal tubercles") is not papilloedema unless it says swelling
       // (round 34: the swelling word must itself be affirmed: "optic discs normal, no pallor or oedema" is not)
       if (v2 && key === "papilledema" && /^(?:fundoscopy|optic dis[ck]s?)$/.test(srcText || "")) {
-        var fseg = norm.slice(idx, idx + 90).split(/[.;]/)[0], fsw = /\b(?:swoll\w*|swelling|oedema\w*|edema\w*|papill\w*|blurr\w*|raised|elevated|indistinct|hyperaemi\w*)\b/.exec(fseg);
+        // (round 57: "raised" / "elevated" only of the disc itself: "raised choroidal tubercles" is not disc swelling, train gc_401)
+        var fseg = norm.slice(idx, idx + 90).split(/[.;]/)[0], fsw = /\b(?:swoll\w*|swelling|oedema\w*|edema\w*|papill\w*|blurr\w*|indistinct|hyperaemi\w*)\b|\b(?:raised|elevated)\s+(?:optic\s+)?(?:dis[ck]s?|margins?)\b|\b(?:dis[ck]s?|margins?)\s+(?:(?:are|is|were|was)\s+)?(?:raised|elevated)\b/.exec(fseg);
         if (!fsw || /\b(?:no|not|without|nil|normal)\b/.test(fseg.slice(0, fsw.index))) return true;
       }
       // round 34: an intimal flap is aortic dissection, not a liver flap; symmetric brisk reflexes are not a focal deficit
@@ -268,6 +269,10 @@
       // round 34: palmar erythema is a liver sign, erythema nodosum / multiforme / ab igne are not a red infected skin
       if (v2 && key === "skinErythema" && /^erythema$/.test(srcText || "") && (/\bpalmar\s+$/.test(norm.slice(Math.max(0, idx - 8), idx)) ||
           /^\s*(?:nodosum|multiforme|ab igne|infectiosum|marginatum|toxicum)\b/.test(norm.slice(idx + 8, idx + 24)))) return true;
+      // round 58: a rapidly spreading petechial or purpuric rash is a bleeding or vasculitic rash, not spreading cellulitis
+      // (train gc_454, DIC)
+      if (v2 && key === "rapidlySpreadingErythema" && /^rapidly spreading$/.test(srcText || "") &&
+          /^\s*(?:[a-z-]+\s+){0,2}?(?:petechi\w*|purpur\w*|vesic\w*|bullous|maculopapular|urticari\w*)\b/.test(norm.slice(idx + 17, idx + 60))) return true;
       // round 47: "neutropenic precautions / protocol / diet" is a ward routine, not a neutrophil count (train gc_429)
       if (v2 && key === "neutropenia" && srcText === "neutropenic" && /^[\s-]*(?:precaution|protocol|diet|isolation|pathway)/.test(norm.slice(idx + 11, idx + 30))) return true;
       return false;

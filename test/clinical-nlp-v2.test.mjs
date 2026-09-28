@@ -745,3 +745,15 @@ test("CSF and other fluid glucose is not blood glucose", () => {
     "CSF: WBC 180/uL; protein 0.9 g/L; glucose 1.4 mmol/L.", "Pleural fluid glucose 40 mg/dl."]) assert.deepEqual(r(t), [], t);
   for (const t of ["CSF normal. Glucose 45 mg/dl.", "LP: CSF clear, glucose 30 mg/dl, blood glucose 45 mg/dl.", "Glucose 2.8 mmol/L.", "RBS 45 mg/dl."]) assert.deepEqual(r(t), ["glucoseLow"], t);
 });
+
+// round 58: "raised choroidal tubercles" is not disc swelling; a spreading petechial rash is not spreading cellulitis
+test("fundoscopy and spreading-rash guards", () => {
+  const cF = { valid: { papilledema: 1, rapidlySpreadingErythema: 1 }, labels: {}, numeric: {}, v2: true,
+    syn: { papilledema: ["papilloedema", "fundoscopy"], rapidlySpreadingErythema: ["rapidly spreading", "spreading erythema"] } };
+  const r = (t) => NLP.extract(t, cF).present;
+  assert.deepEqual(r("Fundoscopy shows two pale, raised choroidal tubercles."), []);
+  assert.deepEqual(r("Fundoscopy: raised optic discs with blurred margins."), ["papilledema"]);
+  assert.deepEqual(r("Fundoscopy: discs elevated."), ["papilledema"]);
+  assert.deepEqual(r("A rapidly spreading petechial and purpuric rash over the trunk."), []);
+  assert.deepEqual(r("Redness rapidly spreading up the leg."), ["rapidlySpreadingErythema"]);
+});
