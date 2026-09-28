@@ -30,9 +30,11 @@ the moment the text or its source changes.
 | S5 | **India first.** An FDA or EMA approval does not mean the drug is available or approved here. | Mandatory `india_status` chosen by the signer; shown on the card. |
 | S6 | **No invented evidence grades.** The signer picks the evidence *type* from a fixed list. A GRADE label appears only if the source guideline itself states it, typed in by the signer. | No defaults on evidence columns; enum validation. |
 | S7 | **Safety outranks novelty.** Withdrawals and boxed warnings sort first and render with more weight than efficacy news. | Sort order and card style by `kind`. |
-| S8 | **Everything expires.** Each bulletin has a review-due date (6, 12 or 24 months). Past it, it leaves the bedside until re-signed. | `review_due_ts` in the visibility predicate. |
-| S9 | **Identity comes from the server.** The signer's name, registration number and council are read from the verified-doctor record, never from the request body. | `signerIdentity()` (section 6). |
-| S10 | **Full audit.** Every draft, edit, signature, retraction and automatic hide is logged append-only. | `bulletin_audit` table. |
+| S8 | **Everything expires.** The signer picks a review interval (6, 12 or 24 months) as part of the signed content; the due date is fixed at the moment of signing. Past it, the bulletin leaves the bedside until re-signed. | `review_due_ts = signed_ts + review_months` in the visibility predicate. |
+| S9 | **Identity comes from the server.** The signer's name, registration number and council come from an owner-confirmed signer registry keyed by Firebase uid, never from the request body or a shared token. | `signerIdentity()` and `bulletin_signers` (section 6). |
+| S10 | **Full audit.** Every draft, edit, signature, retraction, kill-switch change and automatic hide is logged append-only. | `bulletin_audit` table. |
+| S11 | **Never imply completeness.** Coverage is partial by design. A disease with no bulletin shows nothing, never "No new updates". A device whose copy is too old says so instead of going silent. | Renderer rules (9.1). |
+| S12 | **Original wording.** Bulletins are written in the signer's own words. At most one sentence may be quoted (for example a label dose), in quotation marks, with the source. | Reviewer checklist, 8.1. Matches the copyright rule already in `updates_schema.sql`. |
 
 This plan makes no claim of conformity to IEC 62304, ISO 13485 or any regulatory classification. Whether
 the feature changes StewardMD's regulatory position is a question for the owner and counsel, not this doc.
@@ -52,7 +54,7 @@ a corner.
  updates (existing, pipeline-owned)         bulletins (new, physician-owned)
  ┌──────────────────────────────┐   1..n   ┌─────────────────────────────────────┐
  │ id, content_hash, title, ... │◄─────────│ update_id, source_hash, body_hash,  │
- └──────────────────────────────┘          │ signed_hash, status, review_due_ts  │
+ └──────────────────────────────┘          │ signed_hash, status, review_months  │
             ▲                              └───────────────┬─────────────────────┘
             │ bell feed (unchanged)                        │ n..m
             │                                    ┌─────────▼──────────┐
@@ -100,7 +102,8 @@ CREATE TABLE IF NOT EXISTS bulletins (
   source_date      TEXT NOT NULL,                 -- YYYY-MM-DD of the source, not of ingestion
   doi              TEXT NOT NULL DEFAULT '',
   pmid             TEXT NOT NULL DEFAULT '',
-  review_due_ts    INTEGER NOT NULL,              -- epoch ms
+  review_months    INTEGER NOT NULL,              -- 6 | 12 | 24, chosen by the signer, part of the signed content
+  review_due_ts    INTEGER NOT NULL DEFAULT 0,    -- set at signing: signed_ts + review_months; 0 while a draft
   body_hash        TEXT NOT NULL,                 -- sha256 of the canonical signed fields (5.2)
   signed_hash      TEXT NOT NULL DEFAULT '',      -- body_hash at the moment of signing
   signed_uid       TEXT NOT NULL DEFAULT '',
@@ -128,20 +131,38 @@ CREATE TABLE IF NOT EXISTS bulletin_audit (       -- append-only; no UPDATE or D
   bulletin_id TEXT NOT NULL,
   ts          INTEGER NOT NULL,
   actor_uid   TEXT NOT NULL DEFAULT '',           -- '' for system events
-  action      TEXT NOT NULL,                      -- draft | edit | sign | retract | source_deleted
+  action      TEXT NOT NULL,                      -- draft | edit | sign | retract | source_deleted | signer_add | signer_remove | kill_on | kill_off
   body_hash   TEXT NOT NULL DEFAULT '',
   detail      TEXT NOT NULL DEFAULT ''            -- <= 300 chars, never PHI
 );
 CREATE INDEX IF NOT EXISTS idx_audit_bulletin ON bulletin_audit(bulletin_id, ts DESC);
+
+CREATE TABLE IF NOT EXISTS bulletin_signers (     -- who may sign; owner-confirmed identity (section 6)
+  uid         TEXT PRIMARY KEY,                   -- Firebase uid
+  name        TEXT NOT NULL,                      -- as on the council register
+  reg_no      TEXT NOT NULL,
+  council     TEXT NOT NULL,
+  active      INTEGER NOT NULL DEFAULT 1,
+  added_by    TEXT NOT NULL,                      -- owner uid
+  added_ts    INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS bulletin_settings (    -- runtime switches that must act without a redeploy
+  key         TEXT PRIMARY KEY,                   -- 'enabled'
+  value       TEXT NOT NULL,
+  updated_by  TEXT NOT NULL DEFAULT '',
+  updated_ts  INTEGER NOT NULL DEFAULT 0
+);
 ```
 
 No column has a clinical default. `evidence_type`, `india_status`, `kind`, `source_date` and
-`review_due_ts` must be supplied.
+`review_months` must be supplied. A missing `bulletin_settings.enabled` row reads as enabled; the kill
+switch writes `'0'`.
 
 ### 5.2 Canonical hash
 
 `body_hash = sha256(JSON.stringify([kind, headline, what_changed, applies_to, evidence_type, evidence_note,
-regulator, india_status, source_label, source_url, source_date, doi, pmid, review_due_ts,
+regulator, india_status, source_label, source_url, source_date, doi, pmid, review_months,
 sortedDiseaseIds]))`, computed server-side with `crypto.subtle` in `functions/_bulletin_rules.js`. A fixed
 array order means no key-order ambiguity. Disease ids are part of the signed content: remapping a bulletin
 to another disease is a clinical change and needs a new signature.
@@ -155,6 +176,7 @@ WHERE b.status = 'signed'
   AND b.signed_hash = b.body_hash          -- S1/S2: not edited since signing
   AND b.source_hash = u.content_hash       -- S2: source unchanged since drafting
   AND b.review_due_ts > ?now               -- S8
+  AND COALESCE((SELECT value FROM bulletin_settings WHERE key = 'enabled'), '1') = '1'   -- kill switch
 ```
 
 The inner join to `updates` makes a deleted source hide its bulletins (S3). Writes do not need to remember
@@ -173,21 +195,33 @@ update's bulletins and writes a `source_deleted` audit row, so the queue shows w
 
 ## 6. Who can sign
 
+**Why a signer registry and not the verified-doctor KV record directly.** `icu:doctor:<uid>` has more than
+one shape. The auto-verify path writes `status: "verified"`, `name`, `regNo`, `council`
+(`verify-doctor.js:132`); the manual-review path writes `status: "pending"` with `extractedName`,
+`extractedRegNo` (`verify-doctor.js:528`), and an owner's later approval sets the Firebase claim without
+necessarily rewriting that record. `claims.regNo` is also absent for some verified doctors (`prescription.js`
+`verifiedInfo` falls back to `/api/verify-doctor` for exactly that case). Reading identity straight from KV
+would either lock out a manually approved owner or tempt a loose fallback. A small registry the owner
+confirms once is exact and auditable, and it is also how signing widens to other doctors later (D1).
+
 `functions/_bulletins_auth.js` exports `signerIdentity(request, env)`:
 
 1. `verifiedClaimsFor(request, env)` (Firebase ID token). **`X-Admin-Token` is never accepted** for any
    bulletin write: a shared token proves no identity, so it cannot back a signature.
-2. `verifiedEmailOf(claims)` is in `ownerEmails(env)` (reuse `_adminauth.js`).
-3. `claims.verified === true`, `claims.regNo` non-empty, `claims.traineeVerified` not set.
-4. KV `icu:doctor:<uid>` (`CASES_KV` or `GHIS_KV`, as `verify-doctor.js` does) has `status: "verified"`,
-   a `name`, and a `regNo` equal to `claims.regNo`.
+2. `claims.verified === true` and `claims.traineeVerified` not set (a live check: revoking a doctor's
+   verification revokes their signing).
+3. `bulletin_signers` has an `active = 1` row for `claims.sub`.
 
-Any failure returns `null`, and the route answers 403 with a reason code (`not-signed-in`,
-`not-owner`, `not-verified`, `trainee`, `no-doctor-record`, `reg-mismatch`) so the UI can say what to fix.
-Result: `{ uid, name, regNo, council }`, the only source of `signed_*` fields.
+Result: `{ uid, name, regNo, council }` from that row, the only source of `signed_*` fields. Any failure
+returns `null` and the route answers 403 with a reason code (`not-signed-in`, `not-verified`, `trainee`,
+`not-a-signer`) so the UI can say what to fix.
 
-Phase 1 limits signing to owners who are verified doctors (decision D1). Widening to an allowlist of
-reviewers later is one extra check in this function.
+**Managing signers** (owner only, Firebase login with an owner email, token refused):
+`POST /api/updates/bulletins/signers { uid, name, reg_no, council }` and
+`POST /api/updates/bulletins/signers/:uid/deactivate`. The Review Desk form pre-fills from whichever shape
+of `icu:doctor:<uid>` exists; the owner checks the values against the NMC register before saving. Adding and
+removing are audited. Deactivating a signer does not unsign their past bulletins (that is a retraction
+decision, made per bulletin).
 
 ## 7. API
 
@@ -199,23 +233,33 @@ returns before control can fall through to `ownerOK`, which would accept the adm
 
 | Method and path | Who | Behaviour |
 |---|---|---|
-| `GET /api/updates/bulletins` | public | `{ enabled, v, items }` of visible bulletins only (5.3), projected to display fields plus `disease_ids`. No uids, no drafts. `ETag` = sha256 of ids + `updated_ts`; `If-None-Match` gives 304. `Cache-Control: public, max-age=300`. Cap 500 rows. Env `BULLETINS_OFF=1` returns `{ enabled:false, items:[] }` (kill switch). No DB: `{ enabled:false, items:[] }`. |
+| `GET /api/updates/bulletins` | public | `{ enabled, v, items }` of visible bulletins only (5.3), projected to display fields plus `disease_ids`. No uids, no drafts. `ETag` = sha256 of ids + `updated_ts`; `If-None-Match` gives 304. `Cache-Control: public, max-age=300`. Cap 500 rows. Kill switch on (D1 setting, or env `BULLETINS_OFF=1` as a second layer) returns `{ enabled:false, items:[] }`. No DB: `{ enabled:false, items:[] }`. |
 | `GET /api/updates/bulletins/me` | signed-in | `{ canSign, reason, name, regNo }` for UI gating. |
 | `GET /api/updates/bulletins/queue` | signer | Groups: `source_changed`, `review_due` (within 30 days or past), `drafts`, `signed`, `candidates` (updates of the last 90 days with no bulletin, types safety_alert, drug_approval, guideline, trial). Each draft carries its `body_hash`. |
 | `POST /api/updates/bulletins` | signer | Create (no `id`) or edit a draft or signed bulletin. Validates (8.1), stores `source_hash` from the current `updates.content_hash`, recomputes `body_hash`. Editing a signed bulletin sets `status='draft'` and clears `signed_*` on the row (the audit keeps them). Returns the row. |
-| `POST /api/updates/bulletins/:id/sign` | signer | Body `{ body_hash, checklist: { source_read, numbers_match, india_checked } }`. 409 `changed` if `body_hash` differs from the row; 409 `source_changed` if `source_hash` differs from the update's current hash; 400 if any checklist item is not `true`. Sets `signed_*` from `signerIdentity`, `signed_hash = body_hash`, `status='signed'`. |
+| `POST /api/updates/bulletins/:id/sign` | signer | Body `{ body_hash, checklist: { source_read, numbers_match, india_checked, own_words } }`. 400 if any checklist item is not `true`. One conditional statement does the check and the write (below); 0 rows changed gives 409 `changed` or `source_changed` (re-read to tell which). Sets `signed_*` from `signerIdentity`, `signed_hash = body_hash`, `review_due_ts = now + review_months`, `status='signed'`. |
 | `POST /api/updates/bulletins/:id/retract` | signer | Body `{ reason }`, 10 to 300 chars. Sets `status='retracted'`. |
+| `POST /api/updates/bulletins/kill` | owner (Firebase) | Body `{ on: true \| false, reason }`. Writes `bulletin_settings.enabled`. Takes effect on the next request, no redeploy (a Pages env var change needs a new deployment, which is why the env var is only the second layer). |
 
-Every write appends one `bulletin_audit` row in the same D1 `batch` as the change, so the log and the state
-cannot diverge.
+**No check-then-write races.** Signing is a single conditional `UPDATE`:
+
+```sql
+UPDATE bulletins SET status='signed', signed_hash=body_hash, signed_uid=?, signed_name=?, signed_reg=?,
+       signed_council=?, signed_ts=?now, review_due_ts=?now + review_months * 2629800000, updated_ts=?now
+WHERE id=? AND body_hash=?previewed
+  AND source_hash = (SELECT content_hash FROM updates WHERE updates.id = bulletins.update_id)
+```
+
+The audit row is written in the same D1 `batch` with `INSERT ... SELECT ... FROM bulletins WHERE id=? AND
+signed_ts=?now AND signed_uid=?`, so it exists only if the sign actually happened. Every other write follows
+the same pattern: state change and audit row in one batch, audit conditioned on the change.
 
 ## 8. Validation and wording
 
 ### 8.1 Server validation (`_bulletin_rules.js`)
 
 - Lengths as in 5.1; trimmed; control characters stripped.
-- Enums for `kind`, `evidence_type`, `regulator`, `india_status`; `review_due_ts` must be 6, 12 or 24 months
-  from now (plus or minus a day).
+- Enums for `kind`, `evidence_type`, `regulator`, `india_status`; `review_months` in {6, 12, 24}.
 - `source_url` must parse as `https:`; `source_date` must be a real date not in the future.
 - 1 to 5 disease ids, each present in the generated `functions/_kb_disease_ids.js` (8.2).
 - App-facing text: reject an em-dash (house rule) with a message naming the field, rather than rewrite the
@@ -246,7 +290,8 @@ Check your local protocol before acting.
 
 "Not yet approved in India" and "India status not confirmed" render in the amber caution style. The footer
 line is fixed in code (S4). Links render only for `https:` URLs and open through the same external-link path
-the bell feed detail uses.
+the bell feed detail uses. The card is a `<section aria-label="Practice update">`, not `role="alert"`, so a
+screen reader does not interrupt the doctor every time a disease opens.
 
 ## 9. Client
 
@@ -254,13 +299,18 @@ the bell feed detail uses.
 
 - **Flag:** `smd_kb_bulletins`, default off. `?bulletins=1` or `localStorage smd_kb_bulletins = "1"` turns it
   on, `?bulletins=0` forces off. Same shape as `review-desk.js:77`.
-- **Sync:** when the flag is on and the device is online, at most every 6 hours: `GET /api/updates/bulletins`
-  with the stored ETag. Store `{ fetchedAt, etag, items }` in `localStorage smd_kb_bulletins_v1`
+- **Sync:** when the flag is on and the device is online, on launch and on resume, at most every 6 hours:
+  `GET (window.SMD_API_BASE || "") + "/api/updates/bulletins"` with the stored ETag. The base prefix is required:
+  the native app serves `www/` locally, so a bare `/api/...` would not reach the server (same pattern as
+  `account.js` `apiUrl`). `sw.js` already never caches `/api/` (line 94), so the service worker cannot mask a
+  retraction. Store `{ fetchedAt, etag, items }` in `localStorage smd_kb_bulletins_v1`
   (try/catch on every read and write). A response with `enabled:false` clears the cache (kill switch reaches
   every device on its next sync).
 - **Offline:** render from cache only if `fetchedAt` is within 7 days (decision D4) and the item's
-  `review_due_ts` is in the future. Older cache: render nothing. This bounds how long a retracted bulletin
-  can survive on a device that never comes online.
+  `review_due_ts` is in the future. This bounds how long a retracted bulletin can survive on a device that
+  never comes online. Older cache: no cards, and one muted line in their place, "Practice updates not shown:
+  last synced <date>. Connect to refresh." (S11: silence would read as "nothing has changed").
+- **No bulletin for this disease:** render nothing at all. Never "No new updates" (S11).
 - **`html(diseaseId)`:** filters by `disease_ids`, drops ids not in `KB_ENRICHMENT.byId`, sorts safety first
   then `source_date` desc, takes 3, escapes every field, returns the card markup. Pure and synchronous.
 - **`card(bulletin)`:** the single renderer, also used by the Review Desk preview (S1: the signer previews the
@@ -281,11 +331,16 @@ using its existing tokens; `?v=` tokens bumped for every changed file.
   this tab talks to the server, because a signature must be attested by the server to mean anything. This
   departure is logged as a decision (section 12).
 - Queue order: Source changed, Review due, Drafts, Candidates, Signed, Orphaned.
+- Source changed: shows what changed in the source (the pipeline's `update_versions.whats_changed_json` when
+  present, otherwise old and new source summary side by side), then the bulletin. If it still holds, the signer
+  re-signs through the same checklist; if not, edits or retracts. This keeps fail-closed cheap to recover from.
+- Signers (owner only): list, add from a pre-filled form (section 6), deactivate. Kill switch toggle with a
+  required reason.
 - Editor: source panel on top (update title, organisation, date, official link, the pipeline's AI summary
   labelled "AI summary, not reviewed"), then the fields with character counters, a disease picker searching
   `KB_ENRICHMENT.byId` (chips, 1 to 5), required selects, and a live preview from `SMD_BULLETINS.card`.
-- Sign: a sheet showing the preview, the three checklist items (all required), and "Sign as Dr <name>,
-  Reg. No. <regNo>". A 409 reloads the item and says "The text changed. Review it again before signing."
+- Sign: a sheet showing the preview, the four checklist items (all required: I read the primary source; every
+  number matches it; India status checked; written in my own words), and "Sign as Dr <name>, Reg. No. <regNo>". A 409 reloads the item and says "The text changed. Review it again before signing."
 - Retract: reason required.
 
 ## 10. Testing (per CLAUDE.md: unit AND headless browser before claiming anything works)
@@ -296,10 +351,15 @@ Uses the `node:sqlite` D1 shim pattern from `test/ai-counters-d1.test.mjs`; run 
 
 - Schema: `updates_schema.sql` alone and `updates_schema.sql` + `migrate_bulletins.sql` produce identical
   tables; the migration runs twice without error.
-- Auth: admin token only gives 403 on every bulletin write; owner without verified email, owner without
-  `verified` claim, trainee, non-owner verified doctor, owner with no KV record, and claim/KV reg mismatch each
-  give 403 with the right reason; a valid signer passes.
-- Identity: `signed_name` and `signed_reg` come from KV even when the body sends other values.
+- Auth: admin token only gives 403 on every bulletin write, signer management and the kill switch; no token,
+  unverified claim, trainee claim, and verified doctor not in `bulletin_signers` (or deactivated) each give 403
+  with the right reason; an active signer passes; a non-owner signer cannot add signers or use the kill switch.
+- Identity: `signed_name` and `signed_reg` come from `bulletin_signers` even when the body sends other values.
+- Races: two sign calls with the same previewed hash, one after an intervening edit: exactly one succeeds, and
+  exactly one `sign` audit row exists. A failed sign writes no audit row.
+- Review due: set at signing from `review_months`; a draft saved weeks earlier still gets the full interval.
+- Kill switch: setting `enabled='0'` empties the public list on the next request and writes an audit row;
+  env `BULLETINS_OFF=1` does the same.
 - Sign what you see: a stale `body_hash` gives 409 `changed`; a source hash change gives 409 `source_changed`;
   a missing checklist item gives 400.
 - Visibility: signed then edited is hidden; source `content_hash` changed by the pipeline is hidden and listed
@@ -318,11 +378,13 @@ Uses the `node:sqlite` D1 shim pattern from `test/ai-counters-d1.test.mjs`; run 
 Same harness style as `test/run-library-discover-ui.mjs`, with `/api/updates/bulletins` intercepted.
 
 - Flag off: no card and no request to `/api/updates/bulletins`.
-- Flag on: card appears above "Management / Treatment" for a mapped disease and not for others; safety sorts
+- Flag on: card appears above "Management / Treatment" for a mapped disease; a disease with no bulletin shows
+  no card and no "no updates" text; safety sorts
   first; at most 3; India caution line styled amber; widths 320, 390, 768 without horizontal overflow.
-- Cache 8 days old: nothing renders. Network blocked with a fresh cache: card renders. `enabled:false`
+- Cache 8 days old: no cards, the "not shown, last synced" line renders. Network blocked with a fresh cache: card renders. `enabled:false`
   response: cache cleared, card gone.
 - A `javascript:` URL in the cache renders as text, not a link. Unknown disease id is ignored.
+- The sync request goes to `SMD_API_BASE` + path when `SMD_API_BASE` is set.
 - Review Desk: `canSign:false` hides the tab; `canSign:true` shows it; preview markup equals the bedside card
   markup for the same bulletin; sign with an unticked checklist is blocked; a 409 shows the re-review message.
 
@@ -348,7 +410,8 @@ installing: a reinstall wipes device data, including SURGX notes.
 
 ## 12. Rollout and rollback
 
-1. Owner approves this plan and decisions D1 to D5. Log them in `vault/decisions/Decisions.md` (dated
+1. Owner approves this plan and decisions D1 to D5. After PR A is live, the owner adds themselves as the first
+   signer from the Review Desk form, checking name, registration number and council against the NMC register. Log them in `vault/decisions/Decisions.md` (dated
    heading, decision, why, trade-off, status), including the Review Desk server-backed departure. Tag a
    recovery point `pre-bulletins` on `main`.
 2. **PR A, server:** migration, `_bulletin_rules.js`, `_bulletins_repo.js`, `_bulletins_auth.js`, routes,
@@ -361,7 +424,8 @@ installing: a reinstall wipes device data, including SURGX notes.
 5. A second doctor reads those 10 cards for wording and safety (S4, S5) before any wider exposure.
 6. Default-on is a separate one-line commit, made only after owner approval.
 
-Rollback, fastest first: set `BULLETINS_OFF=1` in Cloudflare Pages (reaches devices on next sync, no release);
+Rollback, fastest first: kill switch from the Review Desk (next request, no redeploy; devices clear their copy
+on next sync); env `BULLETINS_OFF=1` in Cloudflare Pages (needs a redeploy);
 retract individual bulletins; flag default off; revert PR B; revert PR A (tables left in place, unused).
 
 Rough effort: PR A 1.5 days, PR B 2 days, device verification and review 1 day.
@@ -377,12 +441,17 @@ Rough effort: PR A 1.5 days, PR B 2 days, device verification and review 1 day.
 - Its Review Desk code treated `verifiedInfo()` (a Promise returning `{ verified, regNo }`) as synchronous with
   a `name` field, and sent no auth header.
 - `window.SMD_FLAGS` does not exist in this codebase.
+- Its revision `4c268847` fixed the await and the defaults but still let any verified app user sign, let the
+  admin token sign as "Platform Owner (OWNER)", and kept `verified` on the `updates` row, so a crawler rewrite
+  of that row would show new text under the old signature. Its branch is based on `5174f08f`, so checking its
+  `vault/decisions/Decisions.md` out over a newer tree would delete later decision entries; the decision entry
+  for this feature is written fresh when D1 to D5 are settled.
 
 ## 14. Owner decisions (recommended default first)
 
 | # | Question | Recommended | Alternative |
 |---|----------|-------------|-------------|
-| D1 | Who can sign? | Owners who are verified doctors | Owner-managed allowlist of verified doctors |
+| D1 | Who can sign? | Only doctors the owner adds to `bulletin_signers`; phase 1 starts with the owner alone | Add other verified doctors from day one |
 | D2 | Bell feed in phase 1? | Unchanged (news with source links) | Hide unreviewed items |
 | D3 | Default review interval | 12 months; signer may pick 6 or 24 | Fixed 12 months |
 | D4 | Offline cache max age | 7 days | 14 days (longer offline use, slower retraction) |
