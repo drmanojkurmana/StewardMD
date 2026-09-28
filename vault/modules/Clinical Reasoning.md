@@ -102,6 +102,11 @@ added) and the numeric-field list. Off: 0 differences across 1,660 case-paths.
   AND every later mention; a guard only in `consider` let a later mention bypass it and crashed the reader when
   the mention list did not exist yet). Gotcha: "residual" X is still present; "X-year-old" put "old" before the
   next words, so never use "old" as a past-tense cue.
+- Rounds 31 to 39 (2026-09-28): numeric `hemoglobin` / `inr` findings from stated values; `skipMention` guards
+  (palmar erythema, negated disc swelling, frothy urine, intimal flap, symmetric brisk reflexes); per-item "no" rule in
+  `negList`. Debug tools worth rebuilding: dump `nlpCtx()` from the page to JSON and call `SMD_NLP.extract` in Node;
+  group non-gold readings by source text. Gotcha: phrase tables are object literals, a repeated key silently keeps only
+  the last (`test/syn-tables.test.mjs` guards it).
 
 ## Differential ordering v3 (`smd_rank_v3`, default ON since 2026-09-27; `"0"` opts out)
 

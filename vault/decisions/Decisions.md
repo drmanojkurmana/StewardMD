@@ -10621,3 +10621,22 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   switch on); the same on the acute-fever rule (three needed calls from the complaint alone).
 - **Pending owner**: complaint-only overcall 16 (floor 14), complaint-only viral 5 (floor 4), unseen set 2
   overcall 2 (floor 1); opt-out configs listed in `kb/validation/AUDIT-2026-09-26.md`.
+
+## 2026-09-28 - Rounds 31 to 39: reading gaps, mention guards, table hygiene
+- **Decision**: keep improving the typed-note reader from two lists run on train/dev only: (1) every reading not in
+  the gold findings grouped by its trigger words (finds systematic misreads: "palmar erythema", "frothy urine",
+  "intimal flap"); (2) for typed misses the tapped findings get right, the findings missed and added. Each change is
+  audited against the committed baseline, ablated when an unseen set moves, and dropped if it costs a needed call.
+- **Kept**: numeric Hb and INR from stated values; pleuritic, joint, overdose, slow-breathing, GBS, sinusitis,
+  coronary-history and back-radiation phrasing; negated lists led by "without" / "are not"; an item without its own
+  "no" stays positive outside an "or" run. Three order-only discriminators (pancreatitis, hypertensive emergency,
+  hot joint).
+- **Dropped**: a punctuation-tolerant label match (unseen overcall), an "aspirate" typo exclusion (two unseen needed
+  calls), the aortic stenosis triad, AF and SVC discriminators, "alcohol-related cirrhosis" as alcohol excess (lost a
+  critical meningitis call from a complaint).
+- **Guard**: `test/syn-tables.test.mjs` (an object literal keeps only the last of a repeated key; one had silently
+  dropped the round 33 retention phrases).
+- **For the owner**: `afebrile`, `stable` and `oralIntake` carry weight in five diagnoses (tension headache, GERD chest
+  pain, biliary colic, stroke, MS) but are not in the finding catalog, so no chip or note can set them; only the audit's
+  gold keys reach them. Adding them as chips (tried under smd_kb_v2 as "General state") changed no audit number, so it
+  was not shipped; a UI decision.
