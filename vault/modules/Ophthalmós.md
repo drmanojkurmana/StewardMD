@@ -112,3 +112,30 @@ Owner: Learn | Test tabs, picked on first open (with the language), then the las
   first-run choice, Test hub, Learn Reference, a lesson picture, a hotspot, a "More pictures" media figure
   with its credit, and Hindi.
 
+
+## Learn units, Explore and lazy lessons (oph7, 2026-09-28)
+Synced byte-identical from module repo `feat/learn-units` (PR #23 there, integrating #18 to #22).
+- **Units:** 19 units, 107 lessons (was 3 and 14): Start here, then nine subjects, each an MBBS unit and a
+  Resident unit: retina, cornea and external eye, uveitis, neuro-ophthalmology, optics and refraction,
+  children's eyes and squint, lids, tear duct and orbit, glaucoma, lens and cataract. 267 glossary terms.
+  All `review: "ai_drafted"`; English and Hindi. Lessons with `test.sim` offer "Try the simulator".
+- **Explore:** `ophthalmos-explore.js` + `ophthalmos-explore.css`, loaded right after the Learn files: five
+  explorers on the Learn home (eye anatomy with a find-the-part quiz, how the eye focuses on the retinoscopy
+  optics model, visual pathway with a pure field model, pupil pathway on the neuro pupil model, guided fundus
+  and OCT tours). Progress in `store.explore`.
+- **Lessons load on open:** opening Ophthalmós fetches `learn/glossary.json`, `learn/media/credits.json` and
+  `learn/index.json` only. `index.json` carries a summary per lesson (`lessons: {id: {title, minutes, idea,
+  see, test?}}`, written by the module repo's `dev/learn-index.mjs`, never by hand); `lessons/<id>.json` is
+  fetched when the lesson opens and cached in memory. A spent Resident trial goes to the paywall without a fetch.
+- **Cache-bust:** every Ophthalmós tag in `index.html` is `?v=oph7` (the section above says oph6; superseded).
+- **Hosting:** `ophthalmos/learn/` now about 230 files in the bundle; `build-www.sh` already copies the folder
+  and the root `*.js` / `*.css` globs carry the Explore files.
+- **Sync check:** `test/ophthalmos-sync.json` holds the module commit and the sha256 of all 257 synced files;
+  `test/ophthalmos-module.test.mjs` fails on any drifted copy or any Ophthalmós file the module does not ship.
+  Regenerate it from the module repo after each sync.
+- **Tests:** `test/ophthalmos-module.test.mjs` (643 checks) adds byte identity, Explore wiring, the oph7 token,
+  index summaries and the build globs; `test/run-ophthalmos-10x-ui.mjs` (30 checks) adds all 19 units listed,
+  no lesson file fetched on open, every lesson file bundled and valid, a new-unit lesson opening, and the
+  visual pathway explorer rendering. Module repo: 130 unit tests, 41 headless UI steps.
+- **Owner items:** ophthalmologist and Hindi review lists are in module PR #23; the Learn home is now long
+  (107 rows, Explore below the units), see that PR.

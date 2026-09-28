@@ -1,0 +1,264 @@
+{
+  "id": "pg-rop-treat",
+  "unit": "peds-pg",
+  "level": "resident",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Treating ROP: who, how and for how long",
+    "hi": "ROP का इलाज: किसका, कैसे और कब तक"
+  },
+  "idea": {
+    "en": "Treat Type 1 [[rop]] within days. Laser ablates the avascular retina for good. An [[anti-vegf]] injection lets vessels keep growing, but ROP can come back late.",
+    "hi": "टाइप 1 [[rop]] का इलाज कुछ ही दिनों में करें। लेज़र बिना नली वाले रेटिना को हमेशा के लिए जला देता है। [[anti-vegf]] इंजेक्शन से नलियाँ बढ़ती रहती हैं, पर ROP देर से लौट सकता है।"
+  },
+  "see": {
+    "img": "rop/557_2021-11-02_L_21.webp",
+    "deckItem": {
+      "deck": "rop",
+      "id": "557_2021-11-02_L_21"
+    },
+    "expect": "laser",
+    "alt": {
+      "en": "Wide-field photo of a baby's left fundus. The pale disc is at the left edge, with thin vessels fanning out over orange retina. On the right, a band of retina is covered with many small pale round scars, packed close together.",
+      "hi": "एक शिशु की बाईं आँख के फ़ंडस की चौड़ी फ़ोटो। हल्के रंग की डिस्क बाएँ किनारे पर है, और पतली नलियाँ नारंगी रेटिना पर फैली हैं। दाईं ओर रेटिना की एक पट्टी पर बहुत से छोटे, हल्के, गोल निशान पास-पास भरे हैं।"
+    },
+    "caption": {
+      "en": "A real photo of a left eye after laser for ROP (born at 28 weeks, 880 g). Pale laser scars cover the periphery beyond the vessels.",
+      "hi": "ROP के लिए लेज़र के बाद एक बाईं आँख की असली फ़ोटो (28 हफ़्ते पर जन्म, 880 ग्राम)। नलियों से आगे बाहरी रेटिना पर लेज़र के हल्के निशान हैं।"
+    },
+    "credit": "ROP-VL, CC BY 4.0. ROP-VL open dataset, figshare 2025.",
+    "hotspots": [
+      {
+        "x": 0.05,
+        "y": 0.51,
+        "label": {
+          "en": "Optic disc",
+          "hi": "ऑप्टिक डिस्क"
+        },
+        "note": {
+          "en": "The vessels start here. In this left eye the disc sits at the left edge of the photo.",
+          "hi": "नलियाँ यहीं से शुरू होती हैं। इस बाईं आँख में डिस्क फ़ोटो के बाएँ किनारे पर है।"
+        }
+      },
+      {
+        "x": 0.22,
+        "y": 0.22,
+        "label": {
+          "en": "Retinal vessels",
+          "hi": "रेटिना की नलियाँ"
+        },
+        "note": {
+          "en": "They do not look wide or twisted in this photo. Wide, twisted vessels would suggest active plus disease.",
+          "hi": "इस फ़ोटो में ये चौड़ी या मुड़ी नहीं दिखतीं। चौड़ी, मुड़ी नलियाँ सक्रिय प्लस डिज़ीज़ की ओर इशारा करतीं।"
+        }
+      },
+      {
+        "x": 0.79,
+        "y": 0.6,
+        "label": {
+          "en": "Edge of the treated area",
+          "hi": "इलाज वाले हिस्से का किनारा"
+        },
+        "note": {
+          "en": "Laser starts where the vessels stop. Check here for untreated gaps (skip areas) and any new ridge.",
+          "hi": "लेज़र वहीं से शुरू होता है जहाँ नलियाँ रुकती हैं। यहाँ बिना इलाज वाली जगहें (skip areas) और कोई नई रिज जाँचें।"
+        }
+      },
+      {
+        "x": 0.85,
+        "y": 0.38,
+        "label": {
+          "en": "Laser scars",
+          "hi": "लेज़र के निशान"
+        },
+        "note": {
+          "en": "Rows of pale spots cover the avascular retina. Each spot is a small burn, so that retina stops making VEGF.",
+          "hi": "हल्के धब्बों की कतारें बिना नली वाले रेटिना को ढकती हैं। हर धब्बा एक छोटा जला निशान है, जिससे वह रेटिना VEGF बनाना बंद कर देता है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "The avascular retina is short of oxygen, so it makes [[vegf]]. VEGF drives the ridge and the new vessels of ROP.",
+        "hi": "बिना नली वाले रेटिना को ऑक्सीजन कम मिलती है, इसलिए वह [[vegf]] बनाता है। VEGF से ही ROP की रिज और नई नलियाँ बनती हैं।"
+      },
+      {
+        "en": "ETROP (2003) set who to treat. Type 1 is zone I, any stage, with [[plus-disease]], or zone I stage 3 without plus.",
+        "hi": "ETROP (2003) ने तय किया कि किसका इलाज हो। टाइप 1 है: ज़ोन I, कोई भी स्टेज, [[plus-disease]] के साथ, या ज़ोन I स्टेज 3 बिना प्लस।"
+      },
+      {
+        "en": "Type 1 also includes zone II, stage 2 or 3, with plus. Treat it within 48 to 72 hours.",
+        "hi": "ज़ोन II, स्टेज 2 या 3, प्लस के साथ, भी टाइप 1 है। इसका इलाज 48 से 72 घंटे में करें।"
+      },
+      {
+        "en": "Type 2 is zone I stage 1 or 2 without plus, or zone II stage 3 without plus. Watch it closely, and treat if it becomes Type 1.",
+        "hi": "टाइप 2 है: ज़ोन I स्टेज 1 या 2 बिना प्लस, या ज़ोन II स्टेज 3 बिना प्लस। इस पर कड़ी नज़र रखें, और टाइप 1 बने तो इलाज करें।"
+      },
+      {
+        "en": "Laser burns the whole avascular retina, spot by spot. Its effect is permanent, but it destroys that retina and is linked to more [[myopia]].",
+        "hi": "लेज़र पूरे बिना नली वाले रेटिना को एक-एक धब्बे से जलाता है। इसका असर स्थायी है, पर यह उस रेटिना को नष्ट करता है और ज़्यादा [[myopia]] से जुड़ा है।"
+      },
+      {
+        "en": "An [[anti-vegf]] injection goes into the eye. In BEAT-ROP (2011), bevacizumab cut recurrence in zone I stage 3 with plus, but not in zone II.",
+        "hi": "[[anti-vegf]] इंजेक्शन आँख के अंदर दिया जाता है। BEAT-ROP (2011) में बेवासिज़ुमैब से ज़ोन I स्टेज 3 प्लस में बीमारी का लौटना घटा, पर ज़ोन II में नहीं।"
+      },
+      {
+        "en": "In RAINBOW (2019), ranibizumab 0.2 mg had more success than laser, 80% against 66%. The difference just missed statistical significance.",
+        "hi": "RAINBOW (2019) में रैनिबिज़ुमैब 0.2 mg लेज़र से ज़्यादा सफल रहा, 80% बनाम 66%। यह अंतर सांख्यिकीय महत्व से थोड़ा ही चूका।"
+      },
+      {
+        "en": "After an injection, vessels keep growing, but ROP can reactivate weeks to months later. Follow until the retina is fully vascularised, or laser what is left.",
+        "hi": "इंजेक्शन के बाद नलियाँ बढ़ती रहती हैं, पर ROP हफ़्तों से महीनों बाद फिर सक्रिय हो सकता है। रेटिना में पूरी नलियाँ बनने तक देखते रहें, या बचे हिस्से पर लेज़र करें।"
+      }
+    ],
+    "analogy": {
+      "en": "Laser is like clearing a field so that nothing grows there again. An injection is like pulling the weeds. The field keeps growing, but the weeds may come back.",
+      "hi": "लेज़र एक खेत को ऐसे साफ़ करने जैसा है कि वहाँ फिर कुछ न उगे। इंजेक्शन खरपतवार उखाड़ने जैसा है। खेत बढ़ता रहता है, पर खरपतवार लौट सकती है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Before you call a lasered eye quiet, check for plus, a new ridge and skip areas at the laser edge.",
+      "hi": "लेज़र वाली आँख को शांत कहने से पहले प्लस, नई रिज और लेज़र के किनारे पर छूटी जगहें जाँचें।"
+    },
+    {
+      "en": "After anti-VEGF, look for reactivation: a new line or ridge, new vessels, or plus coming back.",
+      "hi": "एंटी-VEGF के बाद रिएक्टिवेशन देखें: नई रेखा या रिज, नई नलियाँ, या प्लस का लौटना।"
+    },
+    {
+      "en": "At later visits, look for [[myopia]], [[strabismus]] and [[amblyopia]]. All are more common after ROP.",
+      "hi": "बाद की विज़िट में [[myopia]], [[strabismus]] और [[amblyopia]] देखें। ROP के बाद ये सब ज़्यादा आम हैं।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Arrange treatment within 48 to 72 hours of finding Type 1 disease. Treat A-ROP as urgent.",
+      "hi": "टाइप 1 बीमारी मिलने के 48 से 72 घंटे में इलाज का इंतज़ाम करें। A-ROP को इमरजेंसी मानें।"
+    },
+    {
+      "en": "After an injection, tell the parents follow-up lasts months, and book the next visit before discharge.",
+      "hi": "इंजेक्शन के बाद माता-पिता को बताएँ कि फ़ॉलो-अप महीनों चलेगा, और छुट्टी से पहले अगली विज़िट बुक करें।"
+    },
+    {
+      "en": "Refer stage 4 or 5 to a vitreoretinal surgeon without delay.",
+      "hi": "स्टेज 4 या 5 को बिना देर किए विट्रियोरेटिनल सर्जन के पास भेजें।"
+    },
+    {
+      "en": "Check refraction and eye alignment in every treated child through childhood.",
+      "hi": "हर इलाज पाए बच्चे का रिफ़्रैक्शन और आँखों की सीध पूरे बचपन जाँचते रहें।"
+    }
+  ],
+  "remember": {
+    "en": "Type 1: treat within days. Laser is final, an injection may wear off. Follow the baby until the retina is complete.",
+    "hi": "टाइप 1: कुछ दिनों में इलाज। लेज़र स्थायी है, इंजेक्शन का असर जा सकता है। रेटिना पूरा होने तक बच्चे को देखते रहें।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which eye has Type 1 ROP?",
+        "hi": "किस आँख में टाइप 1 ROP है?"
+      },
+      "o": [
+        {
+          "en": "Zone II, stage 3, no plus",
+          "hi": "ज़ोन II, स्टेज 3, बिना प्लस"
+        },
+        {
+          "en": "Zone II, stage 2, with plus",
+          "hi": "ज़ोन II, स्टेज 2, प्लस के साथ"
+        },
+        {
+          "en": "Zone I, stage 1, no plus",
+          "hi": "ज़ोन I, स्टेज 1, बिना प्लस"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Zone II stage 2 or 3 with plus is Type 1. The other two are Type 2.",
+        "hi": "ज़ोन II स्टेज 2 या 3 प्लस के साथ टाइप 1 है। बाक़ी दोनों टाइप 2 हैं।"
+      }
+    },
+    {
+      "q": {
+        "en": "In BEAT-ROP, bevacizumab beat laser for recurrence in:",
+        "hi": "BEAT-ROP में बीमारी के लौटने के मामले में बेवासिज़ुमैब लेज़र से बेहतर रहा:"
+      },
+      "o": [
+        {
+          "en": "Zone I disease",
+          "hi": "ज़ोन I की बीमारी में"
+        },
+        {
+          "en": "Zone II disease",
+          "hi": "ज़ोन II की बीमारी में"
+        },
+        {
+          "en": "Stage 5 disease",
+          "hi": "स्टेज 5 की बीमारी में"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "The benefit was clear in zone I, but not in zone II.",
+        "hi": "फ़ायदा ज़ोन I में साफ़ था, पर ज़ोन II में नहीं।"
+      }
+    },
+    {
+      "q": {
+        "en": "Why is follow-up longer after anti-VEGF than after laser?",
+        "hi": "लेज़र के मुक़ाबले एंटी-VEGF के बाद फ़ॉलो-अप लंबा क्यों होता है?"
+      },
+      "o": [
+        {
+          "en": "The drug causes cataract",
+          "hi": "दवा से मोतियाबिंद होता है"
+        },
+        {
+          "en": "ROP can reactivate weeks to months later",
+          "hi": "ROP हफ़्तों से महीनों बाद फिर सक्रिय हो सकता है"
+        },
+        {
+          "en": "Laser must always follow an injection",
+          "hi": "इंजेक्शन के बाद हमेशा लेज़र ज़रूरी है"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "The vessels keep growing, and the disease can return late. Laser to what is left is an option, not a rule.",
+        "hi": "नलियाँ बढ़ती रहती हैं, और बीमारी देर से लौट सकती है। बचे हिस्से पर लेज़र एक विकल्प है, नियम नहीं।"
+      }
+    }
+  ],
+  "test": {
+    "clinic": "rop",
+    "classes": [
+      "laser",
+      "s3",
+      "arop"
+    ],
+    "mcqTopic": "peds"
+  },
+  "deeper": {
+    "note": "rop-treat"
+  },
+  "glossary": [
+    "rop",
+    "anti-vegf",
+    "vegf",
+    "plus-disease",
+    "myopia",
+    "strabismus",
+    "amblyopia"
+  ],
+  "sources": [
+    "Early Treatment for Retinopathy of Prematurity Cooperative Group. Revised indications for the treatment of retinopathy of prematurity: results of the Early Treatment for Retinopathy of Prematurity randomized trial. Arch Ophthalmol 2003;121(12):1684-1694.",
+    "Mintz-Hittner HA, Kennedy KA, Chuang AZ; BEAT-ROP Cooperative Group. Efficacy of intravitreal bevacizumab for stage 3+ retinopathy of prematurity. N Engl J Med 2011;364(7):603-615. doi:10.1056/NEJMoa1007374",
+    "Stahl A, Lepore D, Fielder A, et al. Ranibizumab versus laser therapy for the treatment of very low birthweight infants with retinopathy of prematurity (RAINBOW): an open-label randomised controlled trial. Lancet 2019;394(10208):1551-1559. doi:10.1016/S0140-6736(19)31344-3",
+    "Chiang MF, Quinn GE, Fielder AR, et al. International Classification of Retinopathy of Prematurity, Third Edition. Ophthalmology 2021;128(10):e51-e68.",
+    "Fierson WM; American Academy of Pediatrics Section on Ophthalmology, et al. Screening examination of premature infants for retinopathy of prematurity. Pediatrics 2018;142(6):e20183061.",
+    "Chen S, Wu Z, Huang J, Tan T, et al. ROP-VL: An Open Dataset Integrating Fundus Photograph and Clinical Knowledge for Retinopathy of Prematurity. figshare 2025. doi:10.6084/m9.figshare.30143461.v1"
+  ]
+}

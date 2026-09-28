@@ -1,0 +1,237 @@
+{
+  "id": "pg-retinoscopy",
+  "unit": "optics-pg",
+  "level": "resident",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Retinoscopy: meridians and cylinder",
+    "hi": "रेटिनोस्कोपी: मेरिडियन और सिलिंडर"
+  },
+  "idea": {
+    "en": "Neutralise each principal meridian, subtract the working distance, and read sphere and cylinder from the power cross. Use [[cycloplegia]] when accommodation could hide the answer.",
+    "hi": "हर मुख्य मेरिडियन को न्यूट्रल करें, काम की दूरी घटाएँ, और पावर क्रॉस से स्फ़ीयर और सिलिंडर पढ़ें। जब अकोमोडेशन जवाब छिपा सकता हो, तब [[cycloplegia]] का इस्तेमाल करें।"
+  },
+  "see": {
+    "diagram": "diagrams/optics-power-cross.svg",
+    "w": 480,
+    "h": 240,
+    "alt": {
+      "en": "Diagram. Left: a pupil with an upright streak and a yellow side-to-side arrow. Middle: a pupil with a flat streak and a blue up-and-down arrow. Right: a cross with a yellow horizontal arm and a blue vertical arm.",
+      "hi": "चित्र। बाएँ: खड़ी स्ट्रीक वाली पुतली और अगल-बगल जाता पीला तीर। बीच में: आड़ी स्ट्रीक वाली पुतली और ऊपर-नीचे जाता नीला तीर। दाएँ: एक क्रॉस, जिसकी आड़ी भुजा पीली और खड़ी भुजा नीली है।"
+    },
+    "caption": {
+      "en": "Sweep an upright streak sideways for the horizontal meridian, and a flat streak up and down for the vertical one. Record both on a power cross.",
+      "hi": "आड़े मेरिडियन के लिए खड़ी स्ट्रीक को अगल-बगल घुमाएँ, और खड़े मेरिडियन के लिए आड़ी स्ट्रीक को ऊपर-नीचे। दोनों को पावर क्रॉस पर लिखें।"
+    },
+    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.167,
+        "y": 0.438,
+        "label": {
+          "en": "Upright streak, swept sideways",
+          "hi": "खड़ी स्ट्रीक, अगल-बगल"
+        },
+        "note": {
+          "en": "This measures the horizontal (180) meridian. Here it is neutral with +3.00 D at 67 cm.",
+          "hi": "यह आड़ा (180) मेरिडियन नापता है। यहाँ 67 सेमी पर +3.00 D से न्यूट्रल है।"
+        }
+      },
+      {
+        "x": 0.479,
+        "y": 0.438,
+        "label": {
+          "en": "Flat streak, swept up and down",
+          "hi": "आड़ी स्ट्रीक, ऊपर-नीचे"
+        },
+        "note": {
+          "en": "This measures the vertical (90) meridian. Here it is neutral with +2.00 D.",
+          "hi": "यह खड़ा (90) मेरिडियन नापता है। यहाँ +2.00 D से न्यूट्रल है।"
+        }
+      },
+      {
+        "x": 0.925,
+        "y": 0.438,
+        "label": {
+          "en": "Horizontal arm: +1.50",
+          "hi": "आड़ी भुजा: +1.50"
+        },
+        "note": {
+          "en": "+3.00 minus 1.50 for the working distance.",
+          "hi": "+3.00 में से काम की दूरी के 1.50 घटाकर।"
+        }
+      },
+      {
+        "x": 0.833,
+        "y": 0.254,
+        "label": {
+          "en": "Vertical arm: +0.50",
+          "hi": "खड़ी भुजा: +0.50"
+        },
+        "note": {
+          "en": "+2.00 minus 1.50 for the working distance.",
+          "hi": "+2.00 में से काम की दूरी के 1.50 घटाकर।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "First find the principal meridians. Rotate the streak until the reflex band lines up with it.",
+        "hi": "पहले मुख्य मेरिडियन ढूँढें। स्ट्रीक को तब तक घुमाएँ जब तक रिफ़्लेक्स की पट्टी उसकी सीध में न आ जाए।"
+      },
+      {
+        "en": "Neutralise each meridian on its own. Sweep at right angles to the streak.",
+        "hi": "हर मेरिडियन को अलग से न्यूट्रल करें। स्ट्रीक से समकोण पर घुमाएँ।"
+      },
+      {
+        "en": "Subtract the working distance: 1.50 D at 67 cm, or 2.00 D at 50 cm.",
+        "hi": "काम की दूरी घटाएँ: 67 सेमी पर 1.50 D, या 50 सेमी पर 2.00 D।"
+      },
+      {
+        "en": "Example: horizontal +3.00 and vertical +2.00 at 67 cm. The net powers are +1.50 along 180 and +0.50 along 90.",
+        "hi": "उदाहरण: 67 सेमी पर आड़ा +3.00 और खड़ा +2.00। कुल ताक़त 180 पर +1.50 और 90 पर +0.50।"
+      },
+      {
+        "en": "Minus cylinder form: the sphere is the more plus meridian, +1.50. The cylinder is the difference, -1.00.",
+        "hi": "माइनस सिलिंडर रूप: स्फ़ीयर ज़्यादा प्लस वाला मेरिडियन है, +1.50। सिलिंडर दोनों का फ़र्क़ है, -1.00।"
+      },
+      {
+        "en": "The axis is the more plus meridian, 180. So the result is +1.50 / -1.00 x 180.",
+        "hi": "एक्सिस ज़्यादा प्लस वाला मेरिडियन है, 180। तो नतीजा है +1.50 / -1.00 x 180।"
+      },
+      {
+        "en": "Cyclopentolate 1% is the usual cycloplegic. It peaks in about 30 to 60 minutes and wears off within about a day.",
+        "hi": "साइक्लोपेंटोलेट 1% आम साइक्लोप्लेजिक है। इसका असर लगभग 30 से 60 मिनट में सबसे ज़्यादा होता है और लगभग एक दिन में उतर जाता है।"
+      },
+      {
+        "en": "Atropine is stronger and can last 1 to 2 weeks. It is kept for some young children, such as those with [[esotropia]].",
+        "hi": "एट्रोपिन ज़्यादा ताक़तवर है और 1 से 2 हफ़्ते तक चल सकता है। इसे कुछ छोटे बच्चों के लिए रखा जाता है, जैसे [[esotropia]] वाले।"
+      }
+    ],
+    "analogy": {
+      "en": "Two meridians are like two roads crossing at a junction. You measure the slope of each road on its own, then describe the junction by both.",
+      "hi": "दो मेरिडियन चौराहे पर मिलती दो सड़कों जैसे हैं। आप हर सड़क की ढलान अलग से नापते हैं, फिर दोनों से चौराहे का वर्णन करते हैं।"
+    }
+  },
+  "spot": [
+    {
+      "en": "A break between the reflex band and the streak means the streak is off a principal meridian.",
+      "hi": "अगर रिफ़्लेक्स की पट्टी और स्ट्रीक के बीच टूटन (break) हो, तो स्ट्रीक मुख्य मेरिडियन पर नहीं है।"
+    },
+    {
+      "en": "With oblique astigmatism, the meridians are not at 90 and 180. Record the true angles.",
+      "hi": "तिरछे एस्टिग्मैटिज़्म में मेरिडियन 90 और 180 पर नहीं होते। असली कोण लिखें।"
+    },
+    {
+      "en": "A scissors reflex or a dull, irregular reflex suggests keratoconus or a cloudy lens.",
+      "hi": "कैंची जैसा (scissors) या फीका, अनियमित रिफ़्लेक्स केराटोकोनस या धुंधले लेंस की ओर इशारा करता है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "In the simulator, neutralise both meridians, subtract 1.50 D and write the result in minus cylinder form.",
+      "hi": "सिम्युलेटर में दोनों मेरिडियन न्यूट्रल करें, 1.50 D घटाएँ और नतीजा माइनस सिलिंडर रूप में लिखें।"
+    },
+    {
+      "en": "Check your answer by its [[spherical-equivalent]]: +1.50 plus half of -1.00 gives +1.00 D.",
+      "hi": "अपने जवाब को उसके [[spherical-equivalent]] से जाँचें: +1.50 में -1.00 का आधा जोड़ें, तो +1.00 D।"
+    }
+  ],
+  "remember": {
+    "en": "Neutralise each meridian, subtract the working distance, then take the more plus meridian as the sphere and the axis.",
+    "hi": "हर मेरिडियन न्यूट्रल करें, काम की दूरी घटाएँ, फिर ज़्यादा प्लस वाले मेरिडियन को स्फ़ीयर और एक्सिस मानें।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "At 67 cm, the 90 meridian neutralises with +1.00 and the 180 with +4.00. The minus cylinder prescription is:",
+        "hi": "67 सेमी पर 90 मेरिडियन +1.00 से और 180 मेरिडियन +4.00 से न्यूट्रल होता है। माइनस सिलिंडर प्रिस्क्रिप्शन है:"
+      },
+      "o": [
+        {
+          "en": "+2.50 / -3.00 x 180",
+          "hi": "+2.50 / -3.00, एक्सिस 180"
+        },
+        {
+          "en": "+2.50 / -3.00 x 90",
+          "hi": "+2.50 / -3.00, एक्सिस 90"
+        },
+        {
+          "en": "+4.00 / -3.00 x 180",
+          "hi": "+4.00 / -3.00, एक्सिस 180"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Net powers are -0.50 along 90 and +2.50 along 180. The more plus meridian, 180, gives the sphere and the axis.",
+        "hi": "कुल ताक़त 90 पर -0.50 और 180 पर +2.50 है। ज़्यादा प्लस वाला मेरिडियन, 180, स्फ़ीयर और एक्सिस देता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which cycloplegic is usual for routine refraction in children?",
+        "hi": "बच्चों के सामान्य रिफ़्रैक्शन के लिए आम तौर पर कौन सा साइक्लोप्लेजिक इस्तेमाल होता है?"
+      },
+      "o": [
+        {
+          "en": "Cyclopentolate 1%",
+          "hi": "साइक्लोपेंटोलेट 1%"
+        },
+        {
+          "en": "Pilocarpine 2%",
+          "hi": "पाइलोकार्पिन 2%"
+        },
+        {
+          "en": "Phenylephrine 2.5% alone",
+          "hi": "सिर्फ़ फ़िनाइलएफ़्रिन 2.5%"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Cyclopentolate works within the visit and wears off in about a day. Phenylephrine dilates but does not stop focusing.",
+        "hi": "साइक्लोपेंटोलेट उसी विज़िट में असर करता है और लगभग एक दिन में उतर जाता है। फ़िनाइलएफ़्रिन पुतली फैलाता है, पर फ़ोकस नहीं रोकता।"
+      }
+    },
+    {
+      "q": {
+        "en": "What does a break between the reflex band and the streak mean?",
+        "hi": "रिफ़्लेक्स की पट्टी और स्ट्रीक के बीच टूटन का क्या मतलब है?"
+      },
+      "o": [
+        {
+          "en": "The streak is off a principal meridian",
+          "hi": "स्ट्रीक मुख्य मेरिडियन पर नहीं है"
+        },
+        {
+          "en": "The eye has no refractive error",
+          "hi": "आँख में कोई रिफ़्रैक्टिव एरर नहीं"
+        },
+        {
+          "en": "The working distance is wrong",
+          "hi": "काम की दूरी ग़लत है"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Rotate the streak until the band lines up. You are then on a principal meridian.",
+        "hi": "स्ट्रीक को तब तक घुमाएँ जब तक पट्टी सीध में न आ जाए। तब आप मुख्य मेरिडियन पर हैं।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "optics",
+    "sim": "retino"
+  },
+  "glossary": [
+    "cycloplegia",
+    "esotropia",
+    "spherical-equivalent"
+  ],
+  "sources": [
+    "Elkington AR, Frank HJ, Greaney MJ. Clinical Optics. 3rd ed. Oxford: Blackwell Science; 1999.",
+    "Jacobs DS, Afshari NA, Bishop RJ, et al. Refractive Errors Preferred Practice Pattern. Ophthalmology 2023;130(3):P1-P60. doi:10.1016/j.ophtha.2022.10.031"
+  ]
+}

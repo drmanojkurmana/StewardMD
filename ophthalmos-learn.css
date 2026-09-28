@@ -164,8 +164,9 @@
 .ln-mfig .oph-credit a:focus-visible, .ln-fig .oph-credit a:focus-visible { outline: 2px solid var(--op-acc); outline-offset: 2px; border-radius: 2px; }
 
 /* glossary: inline term, bottom sheet, list */
-.oph-overlay .ln-term { display: inline; padding: 10px 0; margin: -10px 0; border: 0; background: none; font: inherit; color: var(--op-link); cursor: pointer;
-  text-decoration: underline dotted; text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-color: var(--op-link-line); }
+.oph-overlay .ln-term { display: inline; padding: 10px 0; margin: -10px 0; color: var(--op-link); cursor: pointer; -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation; text-decoration: underline dotted; text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-color: var(--op-link-line); }
+.oph-overlay .ln-term:active { text-decoration-style: solid; text-decoration-color: currentColor; } /* press feedback: the underline firms up */
 .ln-sheetwrap { position: absolute; inset: 0; z-index: 4; }
 .ln-scrim { position: absolute; inset: 0; background: rgba(0, 0, 0, .6); transition: opacity 260ms var(--op-ease); }
 .ln-sheet { position: absolute; left: 0; right: 0; bottom: 0; max-width: 620px; margin: 0 auto; max-height: 80%; overflow-y: auto; overscroll-behavior: contain;

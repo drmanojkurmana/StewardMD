@@ -1,8 +1,8 @@
 # Learn content
 
-Start here, Unit 1 (retina and diabetic eye disease, MBBS) and Retina for residents: 14 AI-drafted lessons in English and Hindi, awaiting ophthalmologist review. Every lesson must pass `D.validateLesson` (`node --test test/learn.test.mjs test/learn-content.test.mjs` checks every file in `lessons/`).
+Start here, then nine subjects (retina, cornea and external eye, uveitis, neuro-ophthalmology, optics and refraction, children's eyes and squint, lids, tear duct and orbit, glaucoma, lens and cataract), each an MBBS unit and a Resident unit: 107 AI-drafted lessons in English and Hindi, awaiting ophthalmologist review. Every lesson must pass `D.validateLesson` (`node --test test/learn.test.mjs test/learn-content.test.mjs` checks every file in `lessons/`).
 
-- `index.json`: `{v: 1, review, units: [{id, title: {en, hi}, level: "mbbs" | "resident", lessons: [ids]}]}`; study order is every MBBS unit, then every Resident unit.
+- `index.json`: `{v: 1, review, units: [{id, title: {en, hi}, level: "mbbs" | "resident", lessons: [ids]}], lessons: {<id>: {title, minutes, idea, see: {img} | {diagram}, test?: {clinic, classes}}}}`; study order is every MBBS unit, then every Resident unit (keep every MBBS unit above every Resident unit). `lessons` holds the summaries the Learn home, Today's plan and "Learn this" render from, so opening Ophthalmós fetches no lesson file; a lesson file loads when it is opened. Never edit `lessons` by hand: run `node dev/learn-index.mjs` after adding or editing a lesson (the content test fails when it is out of step).
 - `lessons/<id>.json`: the lesson schema in `docs/DESIGN.md` (Learn section).
 - `glossary.json`: `{terms: {<id>: {term: {en, hi}, def: {en, hi}}}}`. Any lesson text may link a term as `[[id]]` or `[[id|shown words]]`.
 - `diagrams/<name>.svg`: unlabelled; give the root `<svg>` `width`, `height` and a `viewBox` so hotspots (x, y as fractions of the picture) land where they should, and put that viewBox width and height in the lesson as `see.w` and `see.h` (the frame takes its shape before the picture loads; the test checks they match).

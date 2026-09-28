@@ -1,0 +1,260 @@
+{
+  "id": "gl-fields",
+  "unit": "glaucoma",
+  "level": "mbbs",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "What the patient loses: the visual field",
+    "hi": "मरीज़ क्या खोता है: नज़र का दायरा"
+  },
+  "idea": {
+    "en": "Glaucoma leaves blind patches in the [[visual-field]]. They start away from the centre, so the patient notices late.",
+    "hi": "ग्लूकोमा [[visual-field]] में अंधे हिस्से छोड़ता है। ये बीच से दूर शुरू होते हैं, इसलिए मरीज़ को देर से पता चलता है।"
+  },
+  "see": {
+    "diagram": "diagrams/gl-field-loss.svg",
+    "w": 480,
+    "h": 192,
+    "alt": {
+      "en": "Three circles, each the field of a right eye, light grey where the eye sees. The first has only a small black blind spot right of centre. In the second, a black arc curves above the centre from the blind spot to the left edge. In the third, all is black except a small central island and a thin strip at the right edge.",
+      "hi": "तीन गोले, हर गोला एक दाईं आँख का दायरा है; जहाँ आँख देखती है वहाँ हल्का भूरा रंग है। पहले में बीच से दाईं ओर बस एक छोटा काला ब्लाइंड स्पॉट है। दूसरे में ब्लाइंड स्पॉट से बाएँ किनारे तक बीच के ऊपर एक काला मेहराब है। तीसरे में बीच के एक छोटे टापू और दाएँ किनारे की पतली पट्टी को छोड़कर सब काला है।"
+    },
+    "caption": {
+      "en": "The field of a right eye, from healthy (left) to early and then advanced glaucoma (right).",
+      "hi": "एक दाईं आँख का दायरा: स्वस्थ (बाएँ), फिर शुरुआती, फिर बढ़ा हुआ ग्लूकोमा (दाएँ)।"
+    },
+    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.183,
+        "y": 0.26,
+        "label": {
+          "en": "Healthy field",
+          "hi": "स्वस्थ दायरा"
+        },
+        "note": {
+          "en": "The eye sees everywhere except the normal blind spot.",
+          "hi": "सामान्य ब्लाइंड स्पॉट को छोड़कर आँख हर जगह देखती है।"
+        }
+      },
+      {
+        "x": 0.254,
+        "y": 0.52,
+        "label": {
+          "en": "Blind spot",
+          "hi": "ब्लाइंड स्पॉट"
+        },
+        "note": {
+          "en": "Everyone has one. It matches the [[optic-disc]], which has no light cells.",
+          "hi": "यह सबमें होता है। यह [[optic-disc]] से मेल खाता है, जहाँ रोशनी पकड़ने वाली कोशिकाएँ नहीं होतीं।"
+        }
+      },
+      {
+        "x": 0.495,
+        "y": 0.33,
+        "label": {
+          "en": "Arc-shaped patch",
+          "hi": "मेहराब जैसा हिस्सा"
+        },
+        "note": {
+          "en": "A curved [[scotoma]] above the centre. It follows the path of the lost nerve fibres.",
+          "hi": "बीच के ऊपर एक घुमावदार [[scotoma]]। यह खोए हुए तंतुओं के रास्ते पर चलता है।"
+        }
+      },
+      {
+        "x": 0.369,
+        "y": 0.44,
+        "label": {
+          "en": "Nasal step",
+          "hi": "नेज़ल स्टेप"
+        },
+        "note": {
+          "en": "The loss stops at the horizontal line, making a step on the nose side.",
+          "hi": "नुकसान आड़ी रेखा पर रुक जाता है, और नाक की ओर एक सीढ़ी जैसा बनता है।"
+        }
+      },
+      {
+        "x": 0.817,
+        "y": 0.5,
+        "label": {
+          "en": "Central island",
+          "hi": "बीच का टापू"
+        },
+        "note": {
+          "en": "Late on, only a small central area is left. Reading may still be possible.",
+          "hi": "आख़िर में बस बीच का छोटा हिस्सा बचता है। पढ़ना तब भी हो सकता है।"
+        }
+      },
+      {
+        "x": 0.946,
+        "y": 0.5,
+        "label": {
+          "en": "Outer strip",
+          "hi": "बाहरी पट्टी"
+        },
+        "note": {
+          "en": "A thin strip at the far side may last for a while.",
+          "hi": "दूर की ओर एक पतली पट्टी कुछ समय तक बची रह सकती है।"
+        }
+      }
+    ],
+    "more": [
+      "sim-glaucoma"
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Each part of the retina maps to a spot in the field. Lost nerve fibres leave a matching blind patch.",
+        "hi": "रेटिना का हर हिस्सा दायरे की एक जगह से जुड़ा है। तंतु मरें तो उसी जगह अंधा हिस्सा बनता है।"
+      },
+      {
+        "en": "Early damage makes an arc-shaped patch above or below the centre.",
+        "hi": "शुरुआती नुकसान बीच के ऊपर या नीचे मेहराब जैसा हिस्सा बनाता है।"
+      },
+      {
+        "en": "The patch stops at the horizontal line. This makes a step on the nose side.",
+        "hi": "यह हिस्सा आड़ी रेखा पर रुक जाता है। इससे नाक की ओर सीढ़ी जैसा बनता है।"
+      },
+      {
+        "en": "Late on, only a small central island is left. The patient may read 6/6 yet bump into things.",
+        "hi": "आख़िर में बस बीच का छोटा टापू बचता है। मरीज़ 6/6 पढ़ सकता है फिर भी चीज़ों से टकराता है।"
+      },
+      {
+        "en": "The other eye fills the gaps, so loss in one eye is easy to miss.",
+        "hi": "दूसरी आँख कमी को भर देती है, इसलिए एक आँख का नुकसान आसानी से छूट जाता है।"
+      }
+    ],
+    "analogy": {
+      "en": "It is like a torch beam that shrinks from the edges. You still see what is straight ahead, so you miss the dark around you.",
+      "hi": "यह टॉर्च की उस रोशनी जैसा है जो किनारों से सिकुड़ती है। सामने का तो दिखता रहता है, इसलिए आसपास का अँधेरा पता नहीं चलता।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Arc-shaped blind patch above or below the centre.",
+      "hi": "बीच के ऊपर या नीचे मेहराब जैसा अंधा हिस्सा।"
+    },
+    {
+      "en": "A step at the horizontal line on the nose side.",
+      "hi": "नाक की ओर आड़ी रेखा पर सीढ़ी।"
+    },
+    {
+      "en": "Late: a small central island.",
+      "hi": "आख़िर में: बीच का छोटा टापू।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Test each eye alone when you check fields at the bedside. This finds only large defects.",
+      "hi": "बिस्तर के पास दायरा जाँचते समय हर आँख अलग से देखें। इससे बस बड़े नुकसान पकड़ में आते हैं।"
+    },
+    {
+      "en": "Ask for formal [[perimetry]] when glaucoma is suspected.",
+      "hi": "ग्लूकोमा का शक हो तो [[perimetry]] करवाएँ।"
+    },
+    {
+      "en": "Ask about trips, falls and trouble on stairs.",
+      "hi": "ठोकर लगने, गिरने और सीढ़ियों पर परेशानी के बारे में पूछें।"
+    }
+  ],
+  "remember": {
+    "en": "Glaucoma steals the edges first. Test one eye at a time.",
+    "hi": "ग्लूकोमा पहले किनारे चुराता है। एक बार में एक आँख जाँचें।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Why do patients rarely notice early glaucoma?",
+        "hi": "मरीज़ों को शुरुआती ग्लूकोमा का पता कम क्यों चलता है?"
+      },
+      "o": [
+        {
+          "en": "Loss starts at the edges and the other eye fills in",
+          "hi": "नुकसान किनारों से शुरू होता है और दूसरी आँख कमी भर देती है"
+        },
+        {
+          "en": "It is always painful",
+          "hi": "इसमें हमेशा दर्द होता है"
+        },
+        {
+          "en": "Central vision goes first",
+          "hi": "पहले बीच की नज़र जाती है"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Early loss is off-centre, and the two fields overlap.",
+        "hi": "शुरुआती नुकसान बीच से हटकर होता है, और दोनों आँखों के दायरे एक-दूसरे पर चढ़े रहते हैं।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which field defect is typical of early glaucoma?",
+        "hi": "शुरुआती ग्लूकोमा में दायरे का कौन सा नुकसान आम है?"
+      },
+      "o": [
+        {
+          "en": "Loss of the right half of both fields",
+          "hi": "दोनों आँखों में दाएँ आधे हिस्से का नुकसान"
+        },
+        {
+          "en": "An arc-shaped patch above or below the centre",
+          "hi": "बीच के ऊपर या नीचे मेहराब जैसा हिस्सा"
+        },
+        {
+          "en": "One dark spot right at the centre",
+          "hi": "ठीक बीच में एक काला धब्बा"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Arc-shaped defects follow the nerve fibre paths around the macula.",
+        "hi": "मेहराब जैसे नुकसान मैक्युला के चारों ओर तंतुओं के रास्ते पर चलते हैं।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which test maps the field in detail?",
+        "hi": "कौन सा टेस्ट दायरे का पूरा नक़्शा बनाता है?"
+      },
+      "o": [
+        {
+          "en": "Perimetry",
+          "hi": "पेरिमेट्री"
+        },
+        {
+          "en": "Colour vision plates",
+          "hi": "रंग पहचानने की प्लेटें"
+        },
+        {
+          "en": "Pinhole",
+          "hi": "पिनहोल"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Perimetry tests many points in each eye and repeats over time.",
+        "hi": "पेरिमेट्री हर आँख में कई बिंदु जाँचती है और समय-समय पर दोहराई जाती है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "glaucoma"
+  },
+  "deeper": {
+    "note": "poag"
+  },
+  "glossary": [
+    "optic-disc",
+    "perimetry",
+    "scotoma",
+    "visual-field"
+  ],
+  "sources": [
+    "Gedde SJ, Bowden EC, Challa P, et al. Primary Open-Angle Glaucoma Preferred Practice Pattern. Ophthalmology 2026;133(4):P1-P103. PMID: 41665583",
+    "Pazos M, Traverso CE, Viswanathan A, et al. European Glaucoma Society Terminology and Guidelines for Glaucoma, 6th Edition. Br J Ophthalmol 2025;109(Suppl 1):1-212. PMID: 41026937",
+    "Weinreb RN, Aung T, Medeiros FA. The pathophysiology and treatment of glaucoma: a review. JAMA 2014;311(18):1901-1911. PMID: 24825645"
+  ]
+}

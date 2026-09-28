@@ -275,6 +275,11 @@
       if (!u || !u.title || typeof u.title.en !== "string") e.push("units[" + i + "].title: needs {en, hi}");
       if (!u || (u.level !== "mbbs" && u.level !== "resident")) e.push("units[" + i + "].level: mbbs or resident");
       if (!u || !Array.isArray(u.lessons)) e.push("units[" + i + "].lessons: a list of ids");
+      // Each listed lesson's summary (dev/learn-index.mjs): the lists render from it; the file loads on open.
+      else u.lessons.forEach(function (id) {
+        var m = ix.lessons && ix.lessons[id];
+        if (!m || !m.title || typeof m.title.en !== "string" || typeof m.minutes !== "number" || !m.see) e.push("lessons." + id + ": missing summary");
+      });
     });
     return e;
   }
