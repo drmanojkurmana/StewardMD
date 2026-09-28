@@ -122,8 +122,9 @@ export async function handleBulletins(context, parts) {
     if (sub === "signers" && method === "GET" && parts[2] === "lookup") {
       const email = cleanText(new URL(request.url).searchParams.get("email")).toLowerCase();
       if (!email) return json({ error: "email-required" }, 400);
-      let uid = null, claims = {};
-      try { uid = await lookupUidByEmail(env, email); } catch (e) {}
+      let found = null, claims = {};
+      try { found = await lookupUidByEmail(env, email); } catch (e) {}   // -> { uid, email, name } | null
+      const uid = found && found.uid;
       if (!uid) return json({ error: "no-account" }, 404);
       try { claims = (await getUserClaims(env, uid)) || {}; } catch (e) {}
       return json({ ok: true, uid, email, verified: claims.verified === true, prefill: await doctorPrefill(env, uid) });

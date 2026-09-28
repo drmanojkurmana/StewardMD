@@ -43,7 +43,8 @@ mock.module("../functions/_fbadmin.js", {
   namedExports: {
     ...realAdmin,
     getUserClaims: async (_e, uid) => ADMIN_CLAIMS[uid] || {},
-    lookupUidByEmail: async (_e, email) => UID_BY_EMAIL[email] || null,
+    // Same shape as the real helper: an object, not a bare uid (test/tenant-provision.test.mjs guards callers).
+    lookupUidByEmail: async (_e, email) => (UID_BY_EMAIL[email] ? { uid: UID_BY_EMAIL[email], email, name: "" } : null),
   },
 });
 
