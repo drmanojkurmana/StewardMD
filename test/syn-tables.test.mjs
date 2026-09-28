@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const src = readFileSync(join(dirname(fileURLToPath(import.meta.url)), "..", "reasoning.js"), "utf8").split("\n");
-const TABLES = ["FT_SYN", "FT_SYN_MORE", "FT_SYN_ADD_V2", "FT_SYN_ADD_V2_R8", "FT_SYN_ADD_V2_R10", "FT_SYN_ADD_V2_R11", "FT_SYN_ADD_V2_R16", "FT_SYN_ADD_V2_R21", "FT_SYN_ADD_V2_R47", "FT_SYN_ADD_V2_R48", "FT_SYN_ADD_V2_R52", "FT_SYN_ADD_V2_R53", "FT_SYN_ADD_V2_R60", "FT_SYN_ADD_V2_R67", "FT_SYN_ADD_V2_R71", "KB_V2_PATCH", "RANK_V3_R2", "RANK_V3_ANCHOR", "RANK_V3_DQ"];
+const TABLES = ["FT_SYN", "FT_SYN_MORE", "FT_SYN_ADD_V2", "FT_SYN_ADD_V2_R8", "FT_SYN_ADD_V2_R10", "FT_SYN_ADD_V2_R11", "FT_SYN_ADD_V2_R16", "FT_SYN_ADD_V2_R21", "FT_SYN_ADD_V2_R47", "FT_SYN_ADD_V2_R48", "FT_SYN_ADD_V2_R52", "FT_SYN_ADD_V2_R53", "FT_SYN_ADD_V2_R60", "FT_SYN_ADD_V2_R67", "FT_SYN_ADD_V2_R71", "KB_V2_PATCH", "KB_TESTS", "KB_TEST_ALT", "KB_TEST_ORDER", "RANK_V3_R2", "RANK_V3_ANCHOR", "RANK_V3_DQ"];
 
 for (const name of TABLES) {
   test(`${name}: no key written twice`, () => {

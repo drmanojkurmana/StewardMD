@@ -662,12 +662,13 @@
     if (kbV2()) groups.push({ group: "Hepatobiliary imaging / labs", fields: KB_V2_FIELDS });   // smd_kb_v2
     if (kbV2()) groups.push({ group: "Electrolytes / glucose", fields: KB_V2_LAB_FIELDS });   // smd_kb_v2 round 18
     if (kbV2()) groups.push({ group: "Bowel history", fields: KB_V2_HX_FIELDS });   // smd_kb_v2 round 22
+    if (kbTestsOn()) groups.push({ group: "Test results", fields: KB_TEST_FIELDS });   // smd_kb_tests round 72
     var fg = (window.FIELD_GROUPS || []);
     fg.forEach(function (g) { if (g && g.fields) groups.push({ group: g.group, fields: g.fields }); });
     groups.forEach(function (g) {
       g.fields.forEach(function (fl) {
         LABEL[fl.key] = fl.label; VALID[fl.key] = true;
-        FSYS[fl.key] = EXTRA_TAG[fl.key] || GROUP_TAG[g.group] || "GEN";
+        FSYS[fl.key] = KB_TEST_TAG[fl.key] || EXTRA_TAG[fl.key] || GROUP_TAG[g.group] || "GEN";
         // round 52 (smd_kb_v2 or smd_nlp_v2, whose reader finds these in notes): timing and exposure are no organ system;
         // filed under "Respiratory" they made a subacute fever after prior antibiotics a lung-dominant picture (train
         // gc_404: enteric fever lost its antibiotic answer)
@@ -692,6 +693,12 @@
       if (sp.id !== "systemic" || (sp.groups || []).indexOf("Electrolytes / glucose") >= 0) return sp;
       var c = {}; for (var k in sp) c[k] = sp[k];
       c.groups = (sp.groups || []).concat(["Electrolytes / glucose"]); return c;
+    });
+    // smd_kb_tests: the test results are listed under Systemic, as the lab values are
+    if (kbTestsOn()) SYSPICK = SYSPICK.map(function (sp) {
+      if (sp.id !== "systemic" || (sp.groups || []).indexOf("Test results") >= 0) return sp;
+      var c = {}; for (var k in sp) c[k] = sp[k];
+      c.groups = (sp.groups || []).concat(["Test results"]); return c;
     });
     return ONT;
   }
@@ -947,6 +954,119 @@
     _kbV2Applied = true;
     IDF = null; GIDF = null; ASSOC = {};   // specificity tables must see the new findings
   }
+
+  /* smd_kb_tests (round 72; default ON, localStorage "0" or ?kbtests=0 opts out): test results a doctor can TAP.
+   * The close calls that symptoms cannot settle (bacterial vs viral meningitis, stone vs pyelonephritis, SAH vs a
+   * haemorrhage in the brain, cholecystitis vs biliary colic, ACS vs heart failure) are settled at the bedside by one
+   * result. Each result below moves the diagnoses it bears on: for an infection a score modifier (and, for a positive
+   * diagnostic test, an alternative way to meet its criteria); for a non-infective diagnosis a finding weight. The
+   * findings exist only with the flag on, so notes and cases without them are unchanged. ai_drafted, pending
+   * clinician review. */
+  function kbTestsOn() {
+    try {
+      var q = /[?&]kbtests=([01])\b/.exec((window.location && location.search) || "");
+      if (q) return q[1] === "1";
+      return localStorage.getItem("smd_kb_tests") !== "0";
+    } catch (e) { return true; }
+  }
+  var KB_TEST_FIELDS = [
+    { key: "csfBacterialPattern", label: "CSF: neutrophils with low glucose (bacterial pattern)" },
+    { key: "csfViralPattern", label: "CSF: lymphocytes with normal glucose (viral pattern)" },
+    { key: "csfTbPattern", label: "CSF: lymphocytes, low glucose, high protein or ADA (TB / fungal pattern)" },
+    { key: "csfNormal", label: "CSF normal" },
+    { key: "malariaTestPositive", label: "Malaria smear / RDT positive (one species)" },
+    { key: "malariaTestNegative", label: "Malaria smear / RDT negative" },
+    { key: "dengueTestPositive", label: "Dengue NS1 or IgM positive" },
+    { key: "scrubTyphusTestPositive", label: "Scrub typhus IgM positive" },
+    { key: "leptoTestPositive", label: "Leptospira IgM / MAT positive" },
+    { key: "typhoidTestPositive", label: "Blood culture: Salmonella Typhi / Paratyphi" },
+    { key: "sputumAfbPositive", label: "Sputum AFB / CBNAAT (GeneXpert) positive" },
+    { key: "pleuralEffusionImaging", label: "Imaging: pleural effusion" },
+    { key: "hydronephrosisStone", label: "Imaging: hydronephrosis or ureteric stone" },
+    { key: "gallbladderInflamed", label: "Ultrasound: thick gallbladder wall / pericholecystic fluid" },
+    { key: "ctSubarachnoidBlood", label: "CT head: subarachnoid blood" },
+    { key: "ctIntracerebralBleed", label: "CT head: intracerebral haemorrhage" },
+    { key: "ctHeadNormal", label: "CT head: no bleed, infarct or mass" },
+    { key: "troponinRaised", label: "Troponin raised" },
+    { key: "ecgStElevation", label: "ECG: ST elevation" },
+    { key: "bnpRaised", label: "BNP / NT-proBNP raised" },
+    { key: "dDimerNormal", label: "D-dimer normal" },
+    { key: "lipaseHigh", label: "Lipase / amylase > 3x normal" },
+    { key: "pyuria", label: "Urine: pus cells or nitrite positive" },
+    { key: "tshSuppressed", label: "TSH suppressed / free T4 high" },
+    { key: "echoVegetation", label: "Echo: valve vegetation" }
+  ];
+  var KB_TEST_TAG = { csfBacterialPattern: "CNS", csfViralPattern: "CNS", csfTbPattern: "CNS", csfNormal: "CNS", malariaTestPositive: "ID",
+    malariaTestNegative: "ID", dengueTestPositive: "ID", scrubTyphusTestPositive: "ID", leptoTestPositive: "ID", typhoidTestPositive: "ID",
+    sputumAfbPositive: "RESP", pleuralEffusionImaging: "RESP", hydronephrosisStone: "GU", gallbladderInflamed: "HEP", ctSubarachnoidBlood: "CNS",
+    ctIntracerebralBleed: "CNS", ctHeadNormal: "CNS", troponinRaised: "CVS", ecgStElevation: "CVS", bnpRaised: "CVS", dDimerNormal: "RESP",
+    lipaseHigh: "GI", pyuria: "GU", tshSuppressed: "ENDO", echoVegetation: "CVS" };
+  // the positive diagnostic results carry the most weight in the specificity and organ-system logic
+  var KB_TEST_VH = ["csfBacterialPattern", "csfViralPattern", "csfTbPattern", "malariaTestPositive", "dengueTestPositive", "scrubTyphusTestPositive",
+    "leptoTestPositive", "typhoidTestPositive", "sputumAfbPositive", "hydronephrosisStone", "gallbladderInflamed", "ctSubarachnoidBlood",
+    "ctIntracerebralBleed", "ecgStElevation", "lipaseHigh", "echoVegetation"];
+  // result -> { diagnosis: effect }. Positive results that confirm an infection also meet its criteria (KB_TEST_ALT).
+  var KB_TESTS = {
+    csfBacterialPattern: { MENINGITIS: 30, VIRAL_MENINGITIS: -30, CNS_TB: -15, ENCEPHALITIS: -15, sah: -20, migraine: -30 },
+    csfViralPattern: { VIRAL_MENINGITIS: 25, ENCEPHALITIS: 10, MENINGITIS: -30, CNS_TB: -20, BRAIN_ABSCESS: -10 },
+    csfTbPattern: { CNS_TB: 30, MENINGITIS: -20, VIRAL_MENINGITIS: -30, ENCEPHALITIS: -10 },
+    csfNormal: { MENINGITIS: -40, VIRAL_MENINGITIS: -35, CNS_TB: -35, ENCEPHALITIS: -15, sah: -20 },
+    malariaTestPositive: { MALARIA: 30, MIXED_MALARIA: -20, DENGUE: -10, ENTERIC_FEVER: -10, SCRUB_TYPHUS: -10, LEPTOSPIROSIS: -10 },
+    malariaTestNegative: { MALARIA: -30, MIXED_MALARIA: -30 },
+    dengueTestPositive: { DENGUE: 30, CHIKUNGUNYA: -15, SCRUB_TYPHUS: -10, LEPTOSPIROSIS: -10 },
+    scrubTyphusTestPositive: { SCRUB_TYPHUS: 30, RICKETTSIAL_FEVER: -10, DENGUE: -10, LEPTOSPIROSIS: -10 },
+    leptoTestPositive: { LEPTOSPIROSIS: 30, DENGUE: -10, SCRUB_TYPHUS: -10, VIRAL_HEPATITIS: -10 },
+    typhoidTestPositive: { ENTERIC_FEVER: 35, MALARIA: -10, DENGUE: -10 },
+    sputumAfbPositive: { PULMONARY_TB: 35, CAP: -15, lung_cancer: -15 },
+    pleuralEffusionImaging: { pleural_effusion: 30, PULMONARY_TB: 5 },
+    // (an obstructed kidney with infection is a complicated UTI, EAU; KB_TEST_ORDER puts it before the stone when febrile)
+    hydronephrosisStone: { renal_colic: 35, COMPLICATED_UTI: 25, PYELONEPHRITIS: -25, CYSTITIS: -15 },
+    gallbladderInflamed: { CHOLECYSTITIS: 25, biliary_colic: -20, VIRAL_HEPATITIS: -15, pancreatitis: -10, peptic_ulcer: -10 },
+    ctSubarachnoidBlood: { sah: 50, ich: -25, ischemic_stroke: -25, migraine: -30, tension_ha: -30, MENINGITIS: -20 },
+    ctIntracerebralBleed: { ich: 50, sah: -20, ischemic_stroke: -30, migraine: -30, BRAIN_ABSCESS: -10 },
+    ctHeadNormal: { ich: -40, subdural: -40, brain_tumour: -35, sah: -15 },
+    troponinRaised: { acs: 25, pe: 5, heart_failure: 5, gerd_chest: -20, panic: -20 },
+    ecgStElevation: { acs: 25, pericarditis: 10, gerd_chest: -20, panic: -20 },
+    bnpRaised: { heart_failure: 25, copd_exac_ni: -10, asthma_exac: -10 },
+    dDimerNormal: { pe: -35, dvt: -35 },
+    lipaseHigh: { pancreatitis: 35, peptic_ulcer: -15, biliary_colic: -10, CHOLECYSTITIS: -10 },
+    pyuria: { CYSTITIS: 10, PYELONEPHRITIS: 10, COMPLICATED_UTI: 10, CA_UTI: 10, renal_colic: -5 },
+    tshSuppressed: { hyperthyroidism: 30, thyroid_storm: 20, pheo: -15, panic: -20 },
+    echoVegetation: { IE: 35 }
+  };
+  var KB_TEST_ALT = {
+    MENINGITIS: ["csfBacterialPattern"], VIRAL_MENINGITIS: ["csfViralPattern"], CNS_TB: ["csfTbPattern"],
+    MALARIA: ["malariaTestPositive"], DENGUE: ["dengueTestPositive"], SCRUB_TYPHUS: ["scrubTyphusTestPositive"],
+    LEPTOSPIROSIS: ["leptoTestPositive"], ENTERIC_FEVER: ["typhoidTestPositive"], PULMONARY_TB: ["sputumAfbPositive"],
+    CHOLECYSTITIS: [{ allOf: ["gallbladderInflamed", { anyOf: ["rightUpperQuadrantPain", "murphySign", "abdominalPain", "fever"] }] }],
+    COMPLICATED_UTI: [{ allOf: ["hydronephrosisStone", { anyOf: ["fever", "feverGU", "rigors", "dysuria", "pyuria"] }] }],
+    IE: [{ allOf: ["echoVegetation", { anyOf: ["fever", "prolongedFever", "rigors"] }] }]
+  };
+  // order-only (with smd_rank_v3): a febrile patient with an obstructed kidney has an infected obstructed kidney first
+  var KB_TEST_ORDER = {
+    renal_colic: function (f) { return (f.hydronephrosisStone && (f.fever || f.rigors || f.feverGU)) ? -40 : 0; },
+    // chest pain with ischaemic ECG changes and a raised troponin is an acute coronary syndrome, even when it has caused
+    // pulmonary oedema (heart failure is then its consequence, ESC 2023)
+    heart_failure: function (f) { return (f.troponinRaised && (f.ecgIschemia || f.ecgStElevation) && (f.chestPain || f.exertionalChestPain)) ? -20 : 0; }
+  };
+  var _kbTestsApplied = false;
+  function ensureKbTests() {
+    if (_kbTestsApplied || !(window.KB_CORE && KB_CORE.diseases) || !kbTestsOn()) return;
+    var D = KB_CORE.diseases;
+    Object.keys(KB_TESTS).forEach(function (k) {
+      Object.keys(KB_TESTS[k]).forEach(function (id) {
+        var d = D[id], v = KB_TESTS[k][id]; if (!d) return;
+        if (d.score) {
+          d.score.modifiers = (d.score.modifiers || []).concat([{ when: k, add: v }]);
+          if (v > 0 && d.assoc && d.assoc.indexOf(k) < 0) d.assoc.push(k);
+        } else if (d.find) d.find[k] = (d.find[k] || 0) + v;
+      });
+    });
+    Object.keys(KB_TEST_ALT).forEach(function (id) { var d = D[id]; if (d && d.rule) d.rule = { anyOf: [d.rule].concat(KB_TEST_ALT[id]) }; });
+    KB_TEST_VH.forEach(function (k) { FW_VERYHIGH[k] = 1; });
+    _kbTestsApplied = true;
+    IDF = null; GIDF = null; ASSOC = {};
+  }
   // KB "why this" reason interpolator — renders the declarative template (no eval).
   function kbRenderNode(node, e) {
     if (!node) return "";
@@ -1081,6 +1201,7 @@
   }
   function differential() {
     ensureKbV2();
+    ensureKbTests();
     mergeKbNiV2();
     buildOntology();
     S.fInf = infFindings();
@@ -1317,6 +1438,7 @@
     var anc = rankV3Anchor(r.id);
     if (anc && !anc.some(function (k) { return f[k]; })) adj -= 25;
     if (RANK_V3_R2[r.id]) adj += RANK_V3_R2[r.id](f) || 0;
+    if (_kbTestsApplied && KB_TEST_ORDER[r.id]) adj += KB_TEST_ORDER[r.id](f) || 0;   // smd_kb_tests round 72
     // 4. pertinent negatives from the note ("no neck stiffness", "chest clear"): each strong finding
     // of this diagnosis the note explicitly denies costs 12, at most 30
     var neg = S.neg || {}, nneg = 0;

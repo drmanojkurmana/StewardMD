@@ -238,3 +238,17 @@ skipped. Applied under `#dxOverlay.dx-simple` in `reasoning-workspace.css`:
 - Not done: the app font is Inter (the skill discourages it as a default); changing it is app-wide.
 - Also "Fever with urinary symptoms" is no longer suggested on top of fever in the standard view.
 - `test/run-dx-simple.mjs` asserts the accent, labels, pills, bars, watermark, separators and dark.
+
+## Test-result findings (`smd_kb_tests`, round 72, default ON; `"0"` or `?kbtests=0` opts out)
+- 25 tappable results in a "Test results" group (listed under Systemic): CSF pattern (bacterial, viral, TB, normal),
+  malaria smear/RDT positive or negative, dengue NS1/IgM, scrub typhus IgM, leptospira IgM, typhoid blood culture,
+  sputum AFB/CBNAAT, imaging (pleural effusion, hydronephrosis/stone, inflamed gallbladder, CT subarachnoid blood,
+  CT intracerebral bleed, CT normal), troponin, ECG ST elevation, BNP, D-dimer normal, lipase, urine pus cells, TSH,
+  echo vegetation.
+- Code: `KB_TEST_FIELDS`, `KB_TESTS` (result -> diagnosis effect), `KB_TEST_ALT` (a positive diagnostic test also
+  meets an infection's criteria), `KB_TEST_ORDER` (order-only, with rank v3), `ensureKbTests()` patches
+  `KB_CORE.diseases` once (called in `differential()` after `ensureKbV2()`), `KB_TEST_VH` joins `FW_VERYHIGH`.
+- Gotcha: the findings only exist with the flag on; with no result tapped the output is identical to the flag off
+  (browser test `test/run-kb-tests.mjs` checks this). The typed-note reader does NOT read test results yet (owner
+  asked to leave typed notes alone).
+- Measured on `test/dx-heldout-4.json` (independent writers who could tap test results), audit set `heldout4`.

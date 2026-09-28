@@ -52,7 +52,7 @@ const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/M
 const JOB = process.env.CLAUDE_JOB_DIR || "/tmp";
 const FLAGS = (process.env.FLAGS || "").split(",").map((s) => s.trim()).filter(Boolean).map((s) => s.split("="));
 const CONFIG = FLAGS.length ? FLAGS.map((f) => f.join("=")).sort().join(",") : "default";
-const SETS = (process.env.SETS || "gold,heldout,heldout2,heldout3").split(",");
+const SETS = (process.env.SETS || "gold,heldout,heldout2,heldout3,heldout4").split(",");
 const ADDNEW = process.argv.includes("--add-new-floors");   // record floors only for metrics that have none yet
 const CHECK = process.argv.includes("--check"), WRITE = process.argv.includes("--write-floors"), MISSES = process.argv.includes("--misses");
 const FLOORS = join(ROOT, "kb", "validation", "dx-floors.json");
@@ -74,6 +74,8 @@ if (SETS.includes("heldout")) JSON.parse(readFileSync(join(ROOT, "test", "dx-hel
 // printed in the audit and informed a few Phase-2 phrases, so it is no longer fully independent)
 if (SETS.includes("heldout2")) JSON.parse(readFileSync(join(ROOT, "test", "dx-heldout-2.json"), "utf8")).forEach((c) => cases.push({ set: "heldout2", c }));
 if (SETS.includes("heldout3")) JSON.parse(readFileSync(join(ROOT, "test", "dx-heldout-3.json"), "utf8")).forEach((c) => cases.push({ set: "heldout3", c }));
+// heldout4 (round 72): independent writers, tapped findings that may include test results (smd_kb_tests); tune / sealed
+if (SETS.includes("heldout4") && existsSync(join(ROOT, "test", "dx-heldout-4.json"))) JSON.parse(readFileSync(join(ROOT, "test", "dx-heldout-4.json"), "utf8")).forEach((c) => cases.push({ set: "heldout4", c }));
 
 // start the static server if nothing answers at BASE (same pattern as run-reason-api.mjs)
 let serveProc = null;
@@ -129,7 +131,7 @@ try {
   if (!(await ready())) throw new Error("engine did not load at " + BASE);
   // flags are read by the engine at call time from localStorage; set them, then reload so any
   // load-time reader sees them too
-  await ev(`${lit(FLAGS)}.forEach(function(kv){localStorage.setItem(kv[0],kv[1]);}); ["smd_gate_v2","smd_nlp_v2","smd_rank_v3","smd_kb_v2","smd_calib","smd_prior_v1"].forEach(function(k){ if(!${lit(FLAGS.map((f) => f[0]))}.includes(k)) localStorage.removeItem(k); }); localStorage.removeItem("smd_prior_counts"); return 1`);
+  await ev(`${lit(FLAGS)}.forEach(function(kv){localStorage.setItem(kv[0],kv[1]);}); ["smd_gate_v2","smd_nlp_v2","smd_rank_v3","smd_kb_v2","smd_calib","smd_prior_v1","smd_kb_tests"].forEach(function(k){ if(!${lit(FLAGS.map((f) => f[0]))}.includes(k)) localStorage.removeItem(k); }); localStorage.removeItem("smd_prior_counts"); return 1`);
   await call("Page.navigate", { url: BASE });
   if (!(await ready())) throw new Error("engine did not reload");
   await ev(`DX.findingCatalog(); return 1`);
