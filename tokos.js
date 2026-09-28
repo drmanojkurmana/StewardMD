@@ -9,7 +9,7 @@
   var C = G.TOKOS_CORE, D = G.TOKOS_DATA, S = G.TOKOS_STAGE;
   var BASE = G.SMD_TOKOS_BASE || "/tokos/";
 
-  var st = { view: "hub", cfg: null, decks: {}, rationale: null, store: null, prefs: null, loading: null, err: null, session: null, svg: {}, _cal: null, _stage: null, _ro: null };
+  var st = { view: "hub", cfg: null, decks: {}, rationale: null, store: null, prefs: null, loading: null, err: null, session: null, svg: {}, _cal: null, _stage: null, _ro: null, _prevFocus: null };
 
   function $(id) { return G.document.getElementById(id); }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
@@ -249,7 +249,7 @@
         '<div class="tok-zoom"><button type="button" class="tok-icon" data-act="zoom" aria-label="' + esc(w.zoomIn) + '" title="' + esc(w.zoomHint) + '">' + (icoH("plus") || "+") + '</button><button type="button" class="tok-icon tok-fit" data-act="fit">' + esc(w.fit) + "</button></div>" +
         '<div class="tok-seg sm" role="group" aria-label="' + esc(w.lineGroup) + '">' +
           '<button type="button" data-act="line" data-l="1" aria-pressed="true">' + esc(fmt(w.lineN, { n: 1 })) + '</button><button type="button" data-act="line" data-l="2" aria-pressed="false">' + esc(fmt(w.lineN, { n: 2 })) + "</button></div>" +
-        '<div class="tok-zoom"><button type="button" class="tok-icon tok-step" data-act="nudge" data-d="-1"></button><button type="button" class="tok-icon tok-step" data-act="nudge" data-d="1"></button></div>' +
+        '<div class="tok-zoom">' + stepBtn(-1, "bpm", 1) + stepBtn(1, "bpm", 1) + "</div>" +
       "</div>" +
       '<div class="tok-pad" id="tokChecklist">' + renderChecklist(c) + "</div></div>";
   }
@@ -321,14 +321,18 @@
     o.textContent = moved ? st._cal.readout(st.prefs.lang) : W().calPrompt;
     o.classList.toggle("idle", !moved);
   }
+  // One stepper button's label and text for a caliper mode and line; used by the first render and by syncCal.
+  function stepLabel(d, m, n) { var w = W(); return fmt(m === "bpm" ? (d > 0 ? w.bpmUp : w.bpmDown) : (d > 0 ? w.timeUp : w.timeDown), { n: n }); }
+  function stepText(d, m) { return (d > 0 ? "+1" : "\u22121") + "<small>" + esc(m === "bpm" ? "bpm" : W().s) + "</small>"; }
+  function stepBtn(d, m, n) { return '<button type="button" class="tok-icon tok-step" data-act="nudge" data-d="' + d + '" aria-label="' + esc(stepLabel(d, m, n)) + '">' + stepText(d, m) + "</button>"; }
   function syncCal() {
     var el = $("smdTokos"); if (!el || !st._cal) return;
-    var w = W(), m = st._cal.state().mode, n = st.calLine || 1;
+    var m = st._cal.state().mode, n = st.calLine || 1;
     [].forEach.call(el.querySelectorAll("[data-act=line]"), function (x) { x.setAttribute("aria-pressed", String(+x.getAttribute("data-l") === n)); });
     [].forEach.call(el.querySelectorAll("[data-act=nudge]"), function (x) {
-      var up = x.getAttribute("data-d") === "1";
-      x.setAttribute("aria-label", fmt(m === "bpm" ? (up ? w.bpmUp : w.bpmDown) : (up ? w.timeUp : w.timeDown), { n: n }));
-      x.innerHTML = (up ? "+1" : "\u22121") + "<small>" + esc(m === "bpm" ? "bpm" : w.s) + "</small>";
+      var d = +x.getAttribute("data-d");
+      x.setAttribute("aria-label", stepLabel(d, m, n));
+      x.innerHTML = stepText(d, m);
     });
     var svg = $("tokTrace"), lines = svg ? svg.querySelectorAll(".tk-cal-line") : [];
     [].forEach.call(lines, function (l, i) { l.classList.toggle("tk-cal-sel", i === n - 1); });
@@ -431,7 +435,9 @@
   }
 
   function open() {
-    root().classList.add("on");
+    var el = root();
+    if (!el.classList.contains("on")) { try { st._prevFocus = G.document.activeElement; } catch (e) { st._prevFocus = null; } }
+    el.classList.add("on");
     G.document.body.classList.add("tok-noscroll");
     try { if (G.SMD_hideHome) G.SMD_hideHome(); } catch (e) {}
     st.view = "hub";
@@ -447,7 +453,8 @@
     if (el) { el.classList.remove("on"); el.innerHTML = ""; }
     G.document.body.classList.remove("tok-noscroll");
     try { if (G.SMD_showHome) G.SMD_showHome(); } catch (e) {}
-    st.view = "hub";
+    try { if (st._prevFocus && st._prevFocus.focus) st._prevFocus.focus(); } catch (e) {}
+    st._prevFocus = null; st.view = "hub";
   }
   function back() {
     if (!isOpen()) return false;
@@ -455,6 +462,15 @@
     if (st.view === "reveal" || st.view === "clinic") { st.view = "hub"; render(); return true; }
     return false;
   }
+
+  // Escape unwinds one layer like swipe-back (mirrors Ophthalmós); MaiK above us owns Escape while it is open.
+  function maikOpen() { try { return G.document.body.classList.contains("maik-open"); } catch (e) { return false; } }
+  if (G.document && G.document.addEventListener)
+    G.document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape" || !isOpen() || maikOpen()) return;
+      e.preventDefault();
+      back();
+    });
 
   var API = { open: open, close: close, back: back, isOpen: isOpen, _st: st, _render: render };
   // ES5 getters for the UI test: the live caliper and stage handles of the mounted trace.

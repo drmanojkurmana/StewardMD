@@ -74,7 +74,9 @@ try {
   ok(await ev(`return document.activeElement && document.activeElement.getAttribute('data-act') === 'lang';`) === true, "focus stays on the language toggle after it re-renders");
   await key("Enter", "Enter", 13, "\r");
   ok(await until(`return !document.querySelector('#smdTokos').hasAttribute('lang');`), "language toggles back to English");
-  await ev(`document.querySelector('[data-act=clinic]').click(); return 1;`);
+  // Same tick as the click: the trace (and syncCal) has not mounted yet, so this reads the first markup.
+  const steps0 = await ev(`document.querySelector('[data-act=clinic]').click(); return [].map.call(document.querySelectorAll('[data-act=nudge]'), function(b){ return b.getAttribute('aria-label') + '|' + b.textContent; }).join(';');`);
+  ok(steps0 === "Move line 1 down 1 bpm|\u22121bpm;Move line 1 up 1 bpm|+1bpm", "caliper steppers carry text and an aria-label in the first markup: " + steps0);
   ok(await until(`return document.querySelectorAll('.tok-q').length === 5;`), "MBBS checklist has 5 questions");
   ok(await ev(`return document.querySelector('[data-act=reveal]').disabled;`) === true, "submit disabled until every question is answered");
 
@@ -117,6 +119,16 @@ try {
   ok(await ev(`var t=document.querySelector('.tok-reveal').textContent; return /pH: \\d\\.\\d+/.test(t) && !/[\\u0966-\\u096F]/.test(t);`) === true, "Hindi reveal keeps pH as ASCII digits");
   ok(await ev(`var t=document.querySelector('.tok-reveal').textContent; return /जन्म का वज़न/.test(t) && !/Weight|Baseline:/.test(t);`) === true, "Hindi reveal labels are translated (R17)");
   await ev(`TOKOS._st.prefs.lang='en'; TOKOS._render(); return 1;`);
+
+  // Escape unwinds one layer: reveal -> hub, then hub -> closed
+  // app.js closes its modals on every Escape; this harness wiped <body>, so give it the stubs it expects.
+  await ev(`(typeof MODAL_IDS !== 'undefined' ? MODAL_IDS : []).concat('modalBackdrop').forEach(function(id){ if(!document.getElementById(id)){ var d=document.createElement('div'); d.id=id; d.hidden=true; document.body.appendChild(d); } }); document.activeElement && document.activeElement.blur && document.activeElement.blur(); return 1;`);
+  await key("Escape", "Escape", 27);
+  ok(await until(`return TOKOS.isOpen() && TOKOS._st.view === 'hub' && !!document.querySelector('.tok-clinic');`, 3000), "Escape from the reveal returns to the hub");
+  await key("Escape", "Escape", 27);
+  ok(await until(`return !TOKOS.isOpen();`, 3000), "Escape from the hub closes Tokós");
+  await ev(`TOKOS.open(); return 1;`);
+  await until(`return !!document.querySelector('[data-act=clinic]');`);
 
   // Offline: failed load shows an error with Try again, and recovers
   await ev(`window.__f=window.fetch; window.fetch=function(){return Promise.reject(new Error('offline'));}; TOKOS._st.cfg=null; TOKOS._st.loading=null; TOKOS.close(); TOKOS.open(); return 1;`);
