@@ -511,3 +511,15 @@ test("round 37 readings", () => {
   assert.ok(p("two alcohol-related admissions this year").includes("alcoholExcess"));
   assert.ok(!p("known alcohol-related cirrhosis").includes("alcoholExcess"));
 });
+
+// round 38: items with their own "no" end the negation for an item without one, unless it sits in an "or" run
+test("per-item negation: an item without its own no is present unless joined by or", () => {
+  const c38 = { valid: { fever: 1, neckStiffness: 1, alteredSensorium: 1, seizure: 1, cough: 1, hemoptysis: 1 }, labels: {}, numeric: {}, v2: true,
+    syn: { fever: ["fever"], neckStiffness: ["neck stiffness"], alteredSensorium: ["altered sensorium"], seizure: ["seizure"], cough: ["cough"], hemoptysis: ["haemoptysis"] } };
+  const r = (t) => NLP.extract(t, c38);
+  const b = r("No fever, no neck stiffness, altered sensorium after seizure.");
+  assert.deepEqual(b.present.sort(), ["alteredSensorium", "seizure"]);
+  assert.ok(b.absent.includes("fever") && b.absent.includes("neckStiffness"));
+  assert.deepEqual(r("No preceding trauma, no cough, fever, or haemoptysis").present, []);
+  assert.deepEqual(r("No cough, fever or haemoptysis").present, []);
+});

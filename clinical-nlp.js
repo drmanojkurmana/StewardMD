@@ -177,6 +177,14 @@
       if (!item(segs[k])) break;
     }
     if (!ok) return false;
+    // round 38: when items carry their own "no" ("No fever, no neck stiffness, altered sensorium after seizure"), an item
+    // without one is negated only inside an "or" / "nor" run ("no preceding trauma, no cough, fever, or haemoptysis")
+    var lastSeg = segs[segs.length - 1], hs = k >= 0 && k < segs.length - 1 && NEG_LIST_LEAD_V2.test(segs[k]) ? k : 0;
+    if (!/^\s*(?:no|not|nil|nor|without)\b/.test(lastSeg) && segs.slice(hs + 1, -1).some(function (x) { return /^\s*(?:no|not|nil|without)\b/.test(x); })) {
+      var parts = norm.slice(st, en < 0 ? norm.length : idx + en).split(/(,| and | or | nor )/), sepB = parts.length > 2 ? parts[parts.length - 2] : "";
+      var tail = norm.slice(idx), te = tail.search(/[.;:]/);
+      if (!/^ (?:or|nor) $/.test(sepB) && !/\b(?:or|nor)\b/.test(te < 0 ? tail : tail.slice(0, te))) return false;
+    }
     var rest = norm.slice(idx), se = rest.search(/[.;:]/);
     return !LIST_DUR_V2.test(se < 0 ? rest : rest.slice(0, se));
   }
