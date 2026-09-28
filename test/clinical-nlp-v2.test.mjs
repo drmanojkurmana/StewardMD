@@ -493,3 +493,21 @@ test("rounds 35 and 36 readings", () => {
   assert.ok(p("brisk reflexes on the right with an upgoing plantar").includes("focalNeuroDeficit"));
   assert.ok(!p("pain reaching maximal intensity within 6 hours").includes("nauseaVomiting"));
 });
+
+// round 37: coronary history by event, sinusitis features, "severe ... headache", reduced urine output, and
+// "alcohol-related cirrhosis" names a cause (not current drinking)
+test("round 37 readings", () => {
+  const c37 = { valid: { knownCAD: 1, unilateralFacialPain: 1, doubleSickening: 1, symptomsOver10Days: 1, headacheSevere: 1, oliguria: 1, alcoholExcess: 1 },
+    labels: {}, numeric: {}, v2: true, syn: {} };
+  const p = (t) => NLP.extract(t, c37).present;
+  assert.ok(p("prior anterior MI with a drug-eluting stent 4 years ago").includes("knownCAD"));
+  assert.ok(p("Facial pain and purulent nasal discharge for 11 days, worsening after initial improvement").includes("doubleSickening"));
+  assert.ok(p("Facial pain and purulent nasal discharge for 11 days").includes("symptomsOver10Days"));
+  assert.ok(!p("nasal congestion for 4 days").includes("symptomsOver10Days"));
+  assert.ok(p("developed worsening right-sided facial pain").includes("unilateralFacialPain"));
+  assert.ok(p("New, severe left-sided headache for 3 weeks").includes("headacheSevere"));
+  assert.ok(p("Urine output over the last day was noticeably reduced").includes("oliguria"));
+  assert.ok(!p("urine output not reduced").includes("oliguria"));
+  assert.ok(p("two alcohol-related admissions this year").includes("alcoholExcess"));
+  assert.ok(!p("known alcohol-related cirrhosis").includes("alcoholExcess"));
+});

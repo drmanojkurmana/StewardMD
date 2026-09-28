@@ -2128,6 +2128,10 @@
     malignancy: ["mediastinal mass", "paratracheal mass", "hilar mass", "lung mass", "pulmonary mass", "space-occupying lesion"],
     // round 29: gait words for ataxia, and the spelled variants the stricter typo matcher (clinical-nlp.js) no longer reaches
     tachypnea: ["tachypneic", "tachypnoeic", "tachypnoea"], photophobia: ["photophobic"],
+    // round 37: bleeding, drinking, behaviour and sinus phrasing
+    hematemesis: ["coffee-ground vomit", "coffee ground vomit", "coffee-ground material", "coffee ground material", "coffee-ground emesis", "vomited blood", "haematemesis"],
+    behavioralChange: ["irritability", "getting lost", "wandering at night"],
+    facialPain: ["facial pain", "face pain", "facial pressure", "cheek pain", "pain over the cheek", "pain over the cheeks", "maxillary pain", "sinus pain", "pain over the sinuses", "maxillary tenderness", "frontal sinus tenderness"],
     // round 36: pigment in the urine said as a colour
     darkUrine: ["cola-coloured", "cola coloured", "cola-colored", "darkening urine", "darkening of the urine", "coca-cola"],
     // round 33: pharyngitis signs, tick bites, a full bladder (label-only findings had no phrasing)

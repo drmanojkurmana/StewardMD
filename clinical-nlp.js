@@ -419,6 +419,25 @@
       // round 36: tingling with weakness of both legs is the ascending (Guillain-Barre) picture
       var gbre = /\b(?:tingling|paraesthesi\w*|paresthesi\w*|pins and needles|numbness)\b[^.;]{0,50}?\bweakness\b[^.;]{0,25}?\b(?:both legs|both lower limbs|legs|lower limbs)\b|\b(?:ascending|distal-to-proximal)\s+(?:sensory\s+)?(?:tingling|numbness|weakness)\b/g;
       while ((m2 = gbre.exec(norm))) consider("ascendingWeakness", m2.index, "compound", m2[0]);
+      // round 37: coronary history said by event ("prior anterior MI with a drug-eluting stent")
+      var cadre = /\b(?:prior|previous|old|known|past)\s+(?:anterior|inferior|lateral|posterior|non-st-elevation|st-elevation)?\s*(?:mi|myocardial infarction|stemi|nstemi)\b|\b(?:drug-eluting|bare-metal)\s+stents?\b|\bcoronary\s+(?:stenting|angioplasty|bypass)\b|\bpci\b/g;
+      while ((m2 = cadre.exec(norm))) consider("knownCAD", m2.index, "compound", m2[0]);
+      // round 37: "alcohol-related seizures / admissions" is alcohol excess; "alcohol-related cirrhosis" names the cause of the
+      // liver disease, not current drinking (read as excess, it put withdrawal above meningitis in a febrile confused cirrhotic)
+      var alre = /\balcohol[- ](?:related|induced)\b(?!\s+(?:cirrhosis|liver|hepatitis|chronic liver|cirrhotic))/g;
+      while ((m2 = alre.exec(norm))) consider("alcoholExcess", m2.index, "compound", m2[0]);
+      // round 37: sinusitis features (one side, a second worsening, more than 10 days)
+      var ufre = /\b(?:right|left|one)[- ]sided\s+(?:facial|maxillary|cheek)\s+pain\b|\b(?:facial|maxillary|cheek)\s+pain\b[^.;]{0,20}?\bon the (?:right|left)\b|\b(?:right|left)\s+(?:maxillary|cheek)\s+pain\b/g;
+      while ((m2 = ufre.exec(norm))) consider("unilateralFacialPain", m2.index, "compound", m2[0]);
+      var dsre = /\bworsening after (?:an?\s+)?(?:initial\s+)?improvement\b|\b(?:felt|feel|feeling|started to feel|was getting|got)\s+better\b[^.;]{0,60}?\bthen\b[^.;]{0,50}?\bwors\w*|\bdouble sickening\b|\bsecond(?:ary)? worsening\b/g;
+      while ((m2 = dsre.exec(norm))) consider("doubleSickening", m2.index, "compound", m2[0]);
+      var s10 = /\b(?:facial pain|nasal discharge|nasal congestion|blocked nose|sinus\w*|purulent nasal|rhinorrh\w*)\b[^.;]{0,40}?\bfor\s+(\d{1,2})\s+days\b|\b(\d{1,2})\s+days\s+of\s+(?:[a-z-]+\s+){0,3}(?:facial pain|nasal discharge|nasal congestion|sinus\w*)/g;
+      while ((m2 = s10.exec(norm))) if (+(m2[1] || m2[2]) >= 10) consider("symptomsOver10Days", m2.index, "compound", m2[0]);
+      // round 37: "severe left-sided headache" (words between); "urine output ... was noticeably reduced"
+      var shre = /\b(?:severe|excruciating|intense|unbearable|worst)\b[^.;,]{0,25}?\bheadache\b/g;
+      while ((m2 = shre.exec(norm))) consider("headacheSevere", m2.index, "compound", m2[0]);
+      var uore = /\burine output\b[^.;]{0,40}?\b(?:reduced|decreased|low|fallen|dropped|declin\w*|poor|diminished)\b/g;
+      while ((m2 = uore.exec(norm))) if (!/\b(?:not|no|never)\b/.test(m2[0])) consider("oliguria", m2.index, "compound", m2[0]);   // not "urine output not reduced"
       // round 10: 48 hours or more into a hospital stay (hospital-acquired territory)
       var hdre = /\b(?:admitted|hospitali[sz]ed|intubated|ventilated)\s+(\d{1,2}|two|three|four|five|six|seven|eight|nine|ten)\s*days?\s*(?:ago|earlier|previously|before)\b|\b(?:hospital|post-?operative|ward|icu)\s+day\s+(\d{1,2})\b|\bday\s+(\d{1,2})\s+of\s+(?:(?:a|an|the|his|her)\s+)?(?:[a-z-]+\s+){0,2}(?:admission|ventilation|hospital stay|stay)\b/g;
       while ((m2 = hdre.exec(norm))) {   // every mention (round 19): the first may be negated or under 48 h
