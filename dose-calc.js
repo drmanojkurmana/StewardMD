@@ -325,6 +325,9 @@
     var s = D.createElement("style"); s.id = "dcCss";
     s.textContent = [
       "#doseCalc{--dc-bg:#f4f7f6;--dc-panel:#fff;--dc-ink:#12202a;--dc-mut:#5b6b75;--dc-line:#dce4e2;--dc-acc:#0f766e;--dc-acc-soft:#e3f2ef;--dc-warn:#9a5b00;--dc-warn-soft:#fff3dd;--dc-bad:#b42318;--dc-bad-soft:#fdecea;--dc-f:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;--dc-mono:ui-monospace,'SF Mono',Menlo,monospace;position:fixed;inset:0;z-index:10050;background:var(--dc-bg);color:var(--dc-ink);font:15px/1.45 var(--dc-f);display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}",
+      // The rule above sets display:flex, which beats the UA [hidden]{display:none}: without this line a
+      // "closed" calculator stayed on screen and swallowed every tap (SMD-MSCQX9).
+      "#doseCalc[hidden]{display:none!important}",
       "body.dark #doseCalc,body.v3-dark #doseCalc{--dc-bg:#0d1417;--dc-panel:#151f23;--dc-ink:#e3ecea;--dc-mut:#93a4a8;--dc-line:#26363b;--dc-acc:#37b8a6;--dc-acc-soft:#153430;--dc-warn:#f0b454;--dc-warn-soft:#352812;--dc-bad:#ff7b6e;--dc-bad-soft:#3a1714}",
       "#doseCalc .dc-top{display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 10px;border-bottom:1px solid var(--dc-line);background:var(--dc-panel)}",
       "#doseCalc .dc-x{border:0;background:none;color:var(--dc-acc);font:600 16px var(--dc-f);padding:6px 4px;min-height:40px;cursor:pointer}",
