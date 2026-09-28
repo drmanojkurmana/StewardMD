@@ -81,6 +81,19 @@ const CASES = {
   // (the tapped findings of dev gc_490 and dev gc_095)
   boringPain: ["severeAbdominalPain", "backPain", "nauseaVomiting", "abdominalDistension", "ascites", "jaundice", "liverDisease", "alcoholExcess", "dehydration", "tachycardia", "tachypnea"],
   htnLung: ["headacheSevere", "visualDisturbance", "papilledema", "dyspnea", "orthopnea", "raisedJVP", "bilateralCrackles", "legSwellingBilateral", "alteredSensorium", "chestPain", "hypertensionHx"],
+  // round 64 (heldout3 tune half)
+  copdFlare: ["ageOver50", "knownCOPD", "increasedDyspnea", "wheeze", "tachypnea", "hypoxia"],
+  creatOnly: ["ageOver50", "renalImpairment"],
+  dtPicture: ["alcoholExcess", "alteredSensorium", "behavioralChange", "fever", "tachycardia", "tachypnea"],
+  compUti: ["fever", "dysuria", "urinaryFrequency", "flankPain", "costovertebralTenderness", "feverGU", "complicatedUTIRisk", "tachycardia"],
+  // round 66 (heldout3 tune half)
+  cathUti: ["ageOver50", "indwellingCatheter", "feverGU", "alteredSensorium", "tachycardia"],
+  afebChol: ["jaundice", "rightUpperQuadrantPain", "dilatedCBD", "nauseaVomiting"],
+  // round 67 / 68 (heldout3 tune half)
+  chikJoints: ["fever", "headache", "retroorbitalPain", "myalgiaArthralgia", "polyarthralgia", "severeArthralgia", "jointSwelling", "thrombocytopenia"],
+  stoneFlank: ["flankPain", "hematuria", "urinaryFrequency", "costovertebralTenderness"],
+  husPicture: ["bloodyStool", "diarrhea", "oliguria", "renalImpairment", "thrombocytopenia", "facialSwelling"],
+  neuroBladder: ["focalNeuroDeficit", "urinaryFrequency", "subacuteOnset"],
   // round 47 (the typed reading of train gc_135)
   malariaHlh: ["fever", "headache", "rigors", "toxicAppearing", "hepatosplenomegaly", "nightSweats", "nauseaVomiting", "jaundice", "paroxysmalFever", "travelEndemicArea",
     "splenomegaly", "myalgiaArthralgia", "tachycardia", "thrombocytopenia", "organDysfunction"],
@@ -116,6 +129,7 @@ try {
   ok(on.shockPneumonia.order.indexOf("SEVERE_CAP") < on.shockPneumonia.order.indexOf("CAP"), `on  · pneumonia with shock: severe CAP above non-severe CAP (#${on.shockPneumonia.order.indexOf("SEVERE_CAP") + 1} vs #${on.shockPneumonia.order.indexOf("CAP") + 1})`);
   ok(on.tb.order.indexOf("PULMONARY_TB") < on.tb.order.indexOf("CAP"), `on  · weeks of cough, weight loss, night sweats: TB above CAP (#${on.tb.order.indexOf("PULMONARY_TB") + 1} vs #${on.tb.order.indexOf("CAP") + 1})`);
   const pos = (k, id) => on[k].order.indexOf(id) + 1;
+  const posN = (k, id) => pos(k, id) || 99;   // absent from the list counts as last
   ok(pos("ruqFever", "CHOLECYSTITIS") < pos("ruqFever", "biliary_colic"), `on  · RUQ pain + Murphy + fever: cholecystitis above biliary colic (#${pos("ruqFever", "CHOLECYSTITIS")} vs #${pos("ruqFever", "biliary_colic")})`);
   ok(pos("copdNoPus", "copd_exac_ni") < pos("copdNoPus", "COPD_EXACERBATION"), `on  · COPD flare without purulent sputum or fever: non-infective first (#${pos("copdNoPus", "copd_exac_ni")} vs #${pos("copdNoPus", "COPD_EXACERBATION")})`);
   ok(on.bleedLowPlt.order[0] === "itp", `on  · bleeding + low platelets alone, afebrile: ITP leads (${on.bleedLowPlt.order.slice(0, 3).join(", ")})`);
@@ -130,6 +144,16 @@ try {
   ok(pos("slowK", "hyperkalemia") < pos("slowK", "hypovolemic_shock"), `on  · renal failure with a slow pulse and low BP: hyperkalaemia above volume-loss shock (#${pos("slowK", "hyperkalemia")} vs #${pos("slowK", "hypovolemic_shock")})`);
   ok(pos("acuteCrackles", "ild") > pos("acuteCrackles", "CAP"), `on  · fever + purulent sputum + bilateral crackles: pneumonia above interstitial lung disease (#${pos("acuteCrackles", "CAP")} vs #${pos("acuteCrackles", "ild")})`);
   ok(pos("boringPain", "pancreatitis") < pos("boringPain", "VIRAL_HEPATITIS"), `on  · severe abdominal pain through to the back in a drinker: pancreatitis above hepatitis (#${pos("boringPain", "pancreatitis")} vs #${pos("boringPain", "VIRAL_HEPATITIS")})`);
+  ok(posN("copdFlare", "ACUTE_BRONCHITIS") > posN("copdFlare", "copd_exac_ni"), `on  · known COPD, more breathless: COPD exacerbation above acute bronchitis (#${pos("copdFlare", "copd_exac_ni")} vs #${pos("copdFlare", "ACUTE_BRONCHITIS")})`);
+  ok(posN("creatOnly", "uraemic_enceph") > posN("creatOnly", "ckd"), `on  · a raised creatinine alone: kidney disease above uraemic encephalopathy (#${pos("creatOnly", "ckd")} vs #${pos("creatOnly", "uraemic_enceph")})`);
+  ok(Math.min(posN("dtPicture", "alcohol_withdrawal"), posN("dtPicture", "delirium_tremens")) < posN("dtPicture", "ENCEPHALITIS"), `on  · a confused, agitated heavy drinker: alcohol withdrawal above encephalitis (#${pos("dtPicture", "alcohol_withdrawal")} / DT #${pos("dtPicture", "delirium_tremens")} vs #${pos("dtPicture", "ENCEPHALITIS")})`);
+  ok(posN("compUti", "COMPLICATED_UTI") <= 2, `on  · febrile upper UTI in a complicated host: complicated UTI in the top two (#${pos("compUti", "COMPLICATED_UTI")}; top: ${on.compUti.order.slice(0, 3).join(", ")})`);
+  ok(posN("cathUti", "CA_UTI") <= 1, `on  · fever with an indwelling catheter: catheter-associated UTI leads (#${pos("cathUti", "CA_UTI")})`);
+  ok(posN("afebChol", "CHOLANGITIS") > 1, `on  · painful jaundice without fever: cholangitis is not the lead (#${pos("afebChol", "CHOLANGITIS")})`);
+  ok(posN("chikJoints", "CHIKUNGUNYA") === 1, `on  · fever with severe, swollen joints: chikungunya leads (#${pos("chikJoints", "CHIKUNGUNYA")}; top: ${on.chikJoints.order.slice(0, 3).join(", ")})`);
+  ok(posN("stoneFlank", "renal_colic") < posN("stoneFlank", "PYELONEPHRITIS"), `on  · afebrile flank pain with haematuria: colic above pyelonephritis (#${pos("stoneFlank", "renal_colic")} vs #${pos("stoneFlank", "PYELONEPHRITIS")})`);
+  ok(posN("husPicture", "ttp_hus") < posN("husPicture", "DYSENTERY"), `on  · afebrile bloody diarrhoea, low platelets, kidney failure: HUS above dysentery (#${pos("husPicture", "ttp_hus")} vs #${pos("husPicture", "DYSENTERY")})`);
+  ok(posN("neuroBladder", "CYSTITIS") > 1, `on  · urinary frequency with a spinal cord deficit, no dysuria: cystitis does not lead (#${pos("neuroBladder", "CYSTITIS")})`);
   ok(pos("malariaHlh", "MALARIA") < pos("malariaHlh", "HLH"), `on  · fever with rigors after travel to an endemic area, big spleen: malaria above HLH (#${pos("malariaHlh", "MALARIA")} vs #${pos("malariaHlh", "HLH")})`);
   ok(pos("htnLung", "htn_emergency") <= 2, `on  · papilloedema with pulmonary oedema: hypertensive emergency in the top two (#${pos("htnLung", "htn_emergency")}; it was 5th)`);
   // default ON since 2026-09-27 (owner decision); localStorage "0" is the opt-out

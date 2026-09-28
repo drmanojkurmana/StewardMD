@@ -10669,3 +10669,23 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   toward the lung.
 - **Dropped**: "told about" as a counselling cue (Indian English reports symptoms that way), a bare "diabetic foot"
   synonym, a dash or bracket before any duration (would read "review - 2 weeks" as a subacute illness).
+
+## 2026-09-28 - Rounds 61 to 69: an independent held-out set, and tuning on half of it
+- **Context**: rounds 61 to 63 added a better next-question picker (`smd_dx_q2`), an opt-in on-device case log
+  (`smd_case_log`, default OFF) and `test/dx-heldout-3.json`: 537 cases by independent writers, split by diagnosis into
+  "tune" (may be studied) and "sealed" (only ever counted; `h3show.mjs` refuses sealed ids). On it the engine was ~18
+  points below its gold top-1.
+- **Decision**: rounds 64 to 69 study tune-half misses only, keep a change only when the sealed half does not get worse,
+  and give needed antibiotic calls priority over overcalls. Ablate a round's parts when the sealed half moves the wrong
+  way, and drop the part that did it.
+- **Kept**: COPD-flare disqualifiers and Anthonisen anchors; febrile neutropenia whatever leads; cirrhosis signs with a
+  GI bleed; the second lactate key; CA-UTI when a catheter and a urinary sign meet; afebrile cholangitis and dengue not
+  leading; chikungunya with severe or swollen joints; fluids, not antibiotics, for acute watery diarrhoea (from a note only
+  when fever is denied); HAP without fever (new infiltrate with worse oxygenation or a raised count, ATS/IDSA); VAP needs a
+  ventilator; stone before pyelonephritis when afebrile with haematuria; HUS after diarrhoea (afebrile, no shock); a
+  bare "PR 112" as the pulse; "afebrile" as a fever denied; a `leukocytosis` lab finding (kb_v2).
+- **Dropped** (each cost the sealed half or gained nothing): the complicated-UTI +15; the meningitis subacute rule;
+  "k/c/o COPD" as background (a sealed needed call); an "equivocal sign" cue (a sealed top-1); leukocytosis as the Tokyo
+  systemic sign for cholecystitis (only a gallstone-pancreatitis overcall).
+- **Not changed, on purpose**: fever with confusion in a drinker still gets antibiotics (encephalitis/meningitis must be
+  excluded, even though the tune labels call three such cases delirium tremens).

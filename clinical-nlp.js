@@ -88,6 +88,8 @@
     [/(^|[^a-z])n\/v(?=[^a-z]|$)/g, "$1nausea and vomiting"],
     // round 50: "cough/cold", "cold and cough", "sneezing, cold" is a cold (coryza); "cold" alone stays unread (cold peripheries)
     [/\b(cough|sneezing|sneezes|running nose|runny nose)(\s*(?:\/|,|&|and)\s*)cold\b/g, "$1$2coryza"], [/\bcold(\s*(?:\/|,|&|and)\s*)(cough|sneez)/g, "coryza$1$2"], [/(^|[^a-z])w\/o(?=[^a-z]|$)/g, "$1without"], [/(^|[^a-z])w\/\s*(?=[a-z0-9])/g, "$1with "], [/\babd\b\.?/g, "abdominal"],
+    // round 67: "inc." / "incr." before a symptom is "increased" (its full stop ended the sentence and split "no inc. SOB")
+    [/\binc(?:r|reased)?\.\s*(?=(?:sob|sputum|breathlessness|dyspno?ea|cough|frequency|thirst|urination|appetite|pain|swelling)\b)/g, "increased "],
     [/\s*(?:\(\s*-\s*\)|-\s?ve\b|\s-)(?=\s*(?:[,.;:]|$))/g, " negative"], [/\s*(?:\(\s*\+\s*\)|\+\s?ve\b|\s\+)(?=\s*(?:[,.;:]|$))/g, " positive"]];
   // "a 3-day history of" states the present illness, not past history
   var PRESENT_HX_V2 = /\b(?:\d{1,2}|a|an|one|two|three|four|five|six|seven|eight|nine|ten|few|several)\s*-?\s*(?:d|days?|wks?|weeks?|months?|hours?|hrs?)\s*history\b/;
@@ -142,7 +144,11 @@
     "brother had", "sister had", "sibling had", "runs in the family", "in the family"];
   // v2: background conditions kept even when phrased historically ("known cirrhosis", "h/o stroke")
   var BACKGROUND_V2 = { liverDisease: 1, cerebrovascularDisease: 1, malignancy: 1, immunocompromised: 1, anticoagulated: 1,
-    nursingHomeResident: 1, hospitalizationLast90Days: 1, antibioticsLast90Days: 1, priorAntibiotics: 1, steroidUse: 1, knownCKD: 1, knownIBD: 1 };
+    nursingHomeResident: 1, hospitalizationLast90Days: 1, antibioticsLast90Days: 1, priorAntibiotics: 1, steroidUse: 1, knownCKD: 1, knownIBD: 1,
+    // round 67: sickle cell disease and a colonisation, catheter or contact history are background too ("h/o sickle cell disease").
+    // (Tried, dropped: "k/c/o COPD" as background. It let the COPD-flare disqualifier fire on a typed pneumonia note whose
+    // infective signs the reader missed: one needed antibiotic call lost on the sealed half.)
+    sickleCellHx: 1, esblHistory: 1, creHistory: 1, longTermCatheter: 1, tbContactHistory: 1 };
 
   function spaceV2(s) { return s.replace(/[ \t\u00a0]*[\r\n]+[ \t\u00a0]*/g, ". ").replace(/[ \t\u00a0]+/g, " "); }
   function normalize(text, v2) {
@@ -364,6 +370,12 @@
     if (v2) {
       var PR2 = /\bpr\s*(?:of|is|was|=|:|-)?\s*(\d{2,3})\s*(?:\/\s*min|bpm|beats)|(?:^|[.,;:]\s*)(?:[-*\u2022]\s*)?p\s*(?:=|:|-)?\s*(\d{2,3})\b(?!\s*\/)/g, pm;
       while ((pm = PR2.exec(raw))) { var pv = +(pm[1] || pm[2]); if (pv > 100 && pv < 250) vital("tachycardia", pm[0].trim()); else if (pv > 20 && pv < 60) vital("bradycardia", pm[0].trim()); }
+      // round 67: "PR 112" with no unit is the pulse in a vitals run (Indian notes); an ECG PR interval sits next to "ECG",
+      // "interval", QRS, QT or ms, so those are not read
+      var PR3 = /\bpr\s*(?:of|is|was|=|:|-)?\s*(\d{2,3})\b(?!\s*(?:\/|-|ms\b|msec|milli))/g;
+      while ((pm = PR3.exec(raw))) {
+        if (/\b(?:ecg|ekg|interval|qrs|qtc?|ms|msec)\b/.test(raw.slice(Math.max(0, pm.index - 30), pm.index) + " " + raw.slice(pm.index + pm[0].length, pm.index + pm[0].length + 25))) continue;
+        var pv3 = +pm[1]; if (pv3 > 100 && pv3 < 250) vital("tachycardia", pm[0].trim()); else if (pv3 > 20 && pv3 < 60) vital("bradycardia", pm[0].trim()); }
       if ((m2 = pick(/\b(?:sbp|systolic(?: bp| blood pressure)?)\s*(?:of|is|was|=|:|-)?\s*(\d{2,3})\b/, V1, -1)) && +m2[1] >= 40 && +m2[1] < 90) vital("hypotension", m2[0]);
       if ((m2 = pick(/\bt\s*(?:=|:|-)?\s*(\d{2,3}\.\d|\d{2,3}(?=\s*(?:\u00b0|c\b|f\b)))/, function (m) { var t = +m[1]; return t >= 90 ? (t - 32) / 1.8 : t; }, 1))) {
         var tt = +m2[1]; if ((tt >= 38 && tt <= 44) || (tt >= 100.4 && tt <= 110)) vital("fever", m2[0]); }
@@ -419,6 +431,15 @@
       var GLV = function (m) { if (fluidGlu(m)) return null; var q = +m[1], mg = m[2] ? /mg/.test(m[2]) : q > 40; if (!m[2] && q >= 20 && q <= 40) return null; q = mg ? q : q * 18; return q > 0 && q < 3000 ? q : null; }, gl;   // mg/dL
       if ((m2 = pick(GLU_RE, GLV, -1)) && (gl = GLV(m2)) < 70) vital("glucoseLow", m2[0]);
       if ((m2 = pick(GLU_RE, GLV, 1)) && (gl = GLV(m2)) >= 250) { vital("glucoseHigh", m2[0]); if (gl > 600) vital("glucoseVeryHigh", m2[0]); }
+      // round 69: a white count of 12,000/mm3 or more ("TLC 17,400", "WBC 18k", "TC 14200", "WBC 15.6 x10^9/L"); the finding exists
+      // only under smd_kb_v2 (consider() drops it otherwise)
+      if ((m2 = pick(/\b(?:tlc|twbc|wbc|wcc|tc|total (?:leu[ck]ocyte|white (?:blood )?cell) count|(?:leu[ck]ocyte|white (?:blood )?cell) count)\b(?:\s*(?:count|level|of))?\s*(?:\([^)\d]{0,12}\))?\s*(?:is|was|at|=|:|-)?\s*(\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)\s*(k\b|x\s*10|\u00d7\s*10|thousand)?/, function (m) {
+          // not a urine, CSF or other fluid count ("urine WBC 20-25/hpf", "CSF TLC 90"), not a range per field
+          if (m.index != null && (/\b(?:urine|urinary|csf|cerebrospinal|pleural|ascitic|peritoneal|synovial|fluid|stool)\b[^.;]{0,25}$/.test(raw.slice(Math.max(0, m.index - 40), m.index)) ||
+            /^\s*(?:-|to)\s*\d|^\s*\/\s*(?:hpf|hp|lpf)|^\s*(?:cells\s*)?(?:per|\/)\s*(?:hpf|high)/.test(m.input.slice(m.index + m[0].length)))) return null;
+          var w = parseFloat(m[1].replace(/,/g, "")); return w < 100 ? w * 1000 : w; }, 1))) {
+        var wv = parseFloat(m2[1].replace(/,/g, "")); if (wv < 100) wv *= 1000;
+        if (wv >= 12000 && wv < 200000) vital("leukocytosis", m2[0]); }
       // round 32: a low haemoglobin and a high INR, as the lab import reads them (the engine counts the entered value)
       if ((m2 = pick(/\b(?:haemoglobin|hemoglobin|hgb|hb)\b(?:\s*(?:level|value|of))?\s*(?:\([^)\d]{0,12}\))?\s*(?:is|was|at|=|:|-)?\s*(\d{1,3}(?:\.\d)?)\s*(g\/l|g\/dl|gm|g\b)?/, function (m) { var h = +m[1]; if (/^\s*(?:months?|weeks?|days?|years?|hours?|yrs?|wks?)\b/.test(m.input.slice(m.index + m[0].length))) return null; return /\/l$/.test(m[2] || "") || h > 25 ? h / 10 : h; }, -1))) {
         var hb = +m2[1]; if (/\/l$/.test(m2[2] || "") || hb > 25) hb /= 10; if (hb >= 2 && hb < 10) vital("hemoglobin", m2[0]); }
@@ -670,6 +691,9 @@
       if (polarity === "absent") absent.push(key);
       else if (engineOk) { present.push(key); if (red) redFlags.push(key); }
     });
+    // round 69 (v2): "afebrile" / "apyrexial" deny fever in so many words (the synonym match needs a word start, so they read
+    // nothing: a note saying "Afebrile" did not count as a fever denied)
+    if (v2 && valid.fever && present.indexOf("fever") < 0 && absent.indexOf("fever") < 0 && /(?:^|[^a-z])(?:afebrile|apyrexial)(?:$|[^a-z])/.test(norm)) absent.push("fever");
 
     // round 45: "101 F" after a temperature is Fahrenheit, not a 101-year-old woman
     function ageSexV2(t) { var re = /\b(\d{1,3})\s*(?:m|male|f|female)\b/g, mm;

@@ -193,8 +193,39 @@ try {
   // round 47: a sore throat with cough or coryza and no exudate is viral (IDSA): no "antibiotics if criteria met"
   const vThroat = await cm(["soreThroat", "fever", "cough", "coryza"]);
   ok(vThroat.ab === false, `defaults · sore throat + fever + cough + coryza: no antibiotics (${vThroat.cls}, ${vThroat.rule})`);
+  // round 65 (heldout3 tune): febrile neutropenia whatever leads; cirrhosis signs with a GI bleed; the second lactate key
+  const fnLeuk = await cm(["fever", "tachycardia", "mucocutaneousBleeding", "petechialRash", "splenomegaly", "thrombocytopenia", "neutropenia", "subacuteOnset"]);
+  ok(fnLeuk.ab === true, `defaults · fever + ANC < 500 with a leukaemia picture: antibiotics (${fnLeuk.cls}, ${fnLeuk.rule})`);
+  const vb = await cm(["hematemesis", "tachycardia", "asterixis", "alteredSensorium", "jaundice", "ascites", "thrombocytopenia"]);
+  ok(vb.rule === "cirrhosis_gib", `defaults · GI bleed with ascites and a flap (no "liver disease" tapped): cirrhosis prophylaxis (${vb.cls}, ${vb.rule})`);
+  const cauti = await cm(["indwellingCatheter", "urinaryRetention", "alteredSensorium", "hypotension", "tachycardia", "tachypnea", "ageOver50", "diabetesHx", "complicatedUTIRisk", "renalImpairment", "raised_lactate", "organDysfunction"]);
+  ok(cauti.ab === true, `defaults · afebrile shock with "raised lactate" and a catheter: antibiotics (${cauti.cls}, ${cauti.rule})`);
+  const copd = await cm(["ageOver50", "knownCOPD", "diabetesHx", "increasedDyspnea", "coughRadio", "wheeze", "tachypnea", "hypoxia", "glucoseHigh"]);
+  ok(copd.ab === false, `defaults · COPD flare, white sputum, no fever or focal signs: no antibiotics (${copd.cls}, ${copd.rule})`);
   const gas = await cm(["soreThroat", "fever", "tonsillarExudate", "tenderCervicalNodes"]);
   ok(gas.ab === true, `defaults · sore throat + fever + exudate + tender nodes: antibiotics if criteria met (${gas.cls})`);
+  // round 67 (heldout3 tune): acute watery diarrhoea needs fluids; a real rival (cystitis) still holds antibiotics;
+  // afebrile hospital-acquired pneumonia (a new infiltrate with worsening oxygenation after 48 h)
+  const watery = await cm(["ageOver50", "diabetesHx", "diarrhea", "nauseaVomiting", "abdominalPain", "dehydration"]);
+  ok(watery.ab === false && watery.rule === "watery_diarrhoea", `defaults · afebrile watery diarrhoea: no antibiotics (${watery.cls}, ${watery.rule})`);
+  const wateryAbx = await cm(["diarrhea", "nauseaVomiting", "abdominalPain", "dehydration", "antibioticsLast90Days"]);
+  ok(wateryAbx.rule !== "watery_diarrhoea", `defaults · watery diarrhoea after antibiotics: not the fluids-only answer (${wateryAbx.cls}, ${wateryAbx.rule})`);
+  const hapAfeb = await cm(["hospitalDay48", "ageOver50", "alteredSensorium", "tachypnea", "hypoxia", "tachycardia", "crepitations", "consolidation", "worseningOxygenation"]);
+  ok(hapAfeb.ab === true, `defaults · afebrile, day 7: new infiltrate + worsening oxygenation: antibiotics (${hapAfeb.cls}, ${hapAfeb.rule})`);
+  // round 68 (heldout3 tune): afebrile flank pain with haematuria is a stone; HUS after diarrhoea (antibiotics harm STEC-HUS)
+  const stone = await cm(["flankPain", "hematuria", "urinaryFrequency", "costovertebralTenderness"]);
+  ok(stone.ab === false, `defaults · afebrile flank pain + haematuria, no dysuria: no antibiotics (${stone.cls}, ${stone.rule})`);
+  const hus = await cm(["bloodyStool", "diarrhea", "oliguria", "renalImpairment", "thrombocytopenia", "facialSwelling"]);
+  ok(hus.ab === false, `defaults · afebrile, bloody diarrhoea then low platelets and kidney failure: no antibiotics (${hus.cls}, ${hus.rule})`);
+  // round 69: from a note (negatives passed), watery diarrhoea is fluids-only only when the note denies fever; a complaint
+  // line that does not mention fever has not excluded it
+  const wNote = await assessNeg(T(["ageOver50", "diarrhea", "nauseaVomiting", "dehydration"]), ["fever", "bloodyStool"]);
+  ok(wNote.ab === false && wNote.rule === "watery_diarrhoea", `defaults · note "no fever, no blood" + watery diarrhoea: no antibiotics (${wNote.cls}, ${wNote.rule})`);
+  const wLine = await assessNeg(T(["diarrhea", "nauseaVomiting"]), []);
+  ok(wLine.rule !== "watery_diarrhoea", `defaults · complaint line "loose stools and vomiting", fever not mentioned: not the fluids-only answer (${wLine.cls}, ${wLine.rule})`);
+  // leukocytosis is an ATS/IDSA HAP criterion: a new infiltrate after 48 h with a raised count, no fever
+  const hapWbc = await cm(["hospitalDay48", "ageOver50", "tachypnea", "consolidation", "crepitations", "leukocytosis"]);
+  ok(hapWbc.ab === true && hapWbc.rule === "hap_criteria", `defaults · day 5, new infiltrate + WBC >= 12,000, afebrile: antibiotics (${hapWbc.cls}, ${hapWbc.rule})`);
   await load(BASE + "?gatev2=1&nlpv2=0");
   ok((await assessNeg(T(obstruction), obstNeg)).rule !== "ni_lead_afebrile", "classic extractor · raw-score check kept (it reads only a note's first mention of fever)");
   await load(BASE + "?gatev2=1&rankv3=0&kbv2=0");

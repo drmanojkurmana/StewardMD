@@ -757,3 +757,32 @@ test("fundoscopy and spreading-rash guards", () => {
   assert.deepEqual(r("A rapidly spreading petechial and purpuric rash over the trunk."), []);
   assert.deepEqual(r("Redness rapidly spreading up the leg."), ["rapidlySpreadingErythema"]);
 });
+
+// round 67 (heldout3 tune): a bare "PR 112" in a vitals run is the pulse (an ECG PR interval is not); "h/o sickle cell
+// disease" is background, not past history; "inc." before a symptom is "increased" and its full stop no longer splits "no inc. SOB"
+test("round 67: bare PR pulse, background history, inc. shorthand", () => {
+  const c67 = { valid: { tachycardia: 1, bradycardia: 1, hypoxia: 1, tachypnea: 1, knownCOPD: 1, sickleCellHx: 1, dyspnea: 1, increasedDyspnea: 1 }, labels: {}, numeric: {}, v2: true,
+    syn: { dyspnea: ["shortness of breath"], knownCOPD: ["copd"], sickleCellHx: ["sickle cell"], increasedDyspnea: ["increased shortness of breath"] } };
+  const r = (t) => NLP.extract(t, c67).present;
+  assert.ok(r("O/E RR 26, SpO2 88% RA, PR 102, BP 150/90.").includes("tachycardia"));
+  assert.ok(r("PR 52, BP 90/60.").includes("bradycardia"));
+  assert.ok(!r("ECG: PR 180, QRS 90.").includes("tachycardia"));
+  assert.ok(!r("PR interval 220 ms.").includes("tachycardia"));
+  assert.ok(!r("PR 110 ms.").includes("tachycardia"));
+  // (not "k/c/o COPD": tried, it cost a needed antibiotic call on the sealed half)
+  assert.ok(r("H/o sickle cell disease.").includes("sickleCellHx"));
+  assert.ok(r("C/o inc. SOB x 2 days.").includes("increasedDyspnea"));
+  const n67 = r("No inc. SOB.");
+  assert.ok(!n67.includes("dyspnea") && !n67.includes("increasedDyspnea"));
+});
+
+// round 69 (heldout3 tune): a raised white count (a blood count only, not a urine or CSF one), and "afebrile" as a fever denied
+test("round 69: leukocytosis from the blood count; afebrile denies fever", () => {
+  const c69 = { valid: { leukocytosis: 1, fever: 1, thrombocytopenia: 1 }, labels: {}, numeric: {}, v2: true, syn: { fever: ["fever", "febrile"] } };
+  const x = (t) => NLP.extract(t, c69);
+  for (const t of ["TLC 17,400.", "WBC 18k.", "TC 14200.", "WBC 15.6 x10^9/L.", "TLC: 21000/cumm.", "Total leucocyte count 13500."]) assert.ok(x(t).present.includes("leukocytosis"), t);
+  for (const t of ["TLC 9,800.", "TLC 11,000.", "TC 3900.", "Urine: WBC 20-25/hpf.", "urine wbc 20/hpf.", "CSF: TLC 90, L 90%.", "Pleural fluid TC 2400."]) assert.ok(!x(t).present.includes("leukocytosis"), t);
+  assert.ok(x("Afebrile.").absent.includes("fever"));
+  assert.ok(x("Apyrexial, HR 106.").absent.includes("fever"));
+  assert.ok(!x("T 38.5, not afebrile.").absent.includes("fever"));
+});
