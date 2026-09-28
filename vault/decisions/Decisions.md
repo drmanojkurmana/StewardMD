@@ -10662,3 +10662,8 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   reopening the door if the answer is Pro.
 - **Owner, 2026-09-28:** CliniX lessons no longer show "Draft, pending clinician review"
   (`clinix-screens.js sourceLine`); sources still shown, and "Clinician reviewed" only on approved content.
+- **Owner, 2026-09-28 ("keep everything open, it is my app and my responsibility"):** CliniX shows all
+  content whatever its review status (`clinix-model.js isRenderable`: only `deprecated` is withheld), with
+  no draft, pending or "Awaiting clinical review" notes anywhere. Supersedes the "unreviewed content never
+  reaches a student" invariant in `vault/modules/CliniX.md`. The licence-gate escape hatch
+  (`smd_clinix_uncleared_media`) was NOT flipped: that change was blocked pending the owner's explicit call.

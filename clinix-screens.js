@@ -173,14 +173,8 @@
       (actHtml || "") + "</div>";
   }
 
-  /* A pending-review notice. Never render a short pathway silently: a UI that degrades by omission
-   * lies about the data, which is the lesson recorded in the profile-page decision of 2026-08-22. */
-  function pendingNotice(avail) {
-    if (!avail || !avail.pending) return "";
-    return '<div class="cx-notice cx-notice--review">' + ic("gpp_maybe") +
-      "<div><b>" + avail.pending + " of " + avail.total + " lessons are awaiting clinical sign-off</b>" +
-      "<span>CliniX shows a lesson to students only after a clinician has approved it.</span></div></div>";
-  }
+  /* Owner, 2026-09-28: no review/draft notice anywhere in CliniX. Kept as a no-op so call sites stay simple. */
+  function pendingNotice() { return ""; }
 
   /* ── screen: home ────────────────────────────────────────────────────────── */
 
@@ -368,7 +362,7 @@
     var html = header("Examination skills", "Learn the technique, no disease needed");
 
     if (!groups.length) {
-      html += emptyState("gpp_maybe", "Awaiting clinical review", "No skill is approved for students yet.");
+      html += emptyState("school", "Skills could not load", "Go back and try again.");
       host.innerHTML = html; return;
     }
     var totalIds = [], gi, si;
@@ -459,9 +453,7 @@
     html += pendingNotice(avail);
 
     if (!pathway.length || avail.visible === 0) {
-      html += emptyState("gpp_maybe", "Awaiting clinical review",
-        "All " + avail.total + " lessons for " + d.name + " are drafted and cited but not yet signed off by a clinician. " +
-        "Nothing is shown to a student until it is.");
+      html += emptyState("school", "Nothing to show yet", "This topic could not load. Go back and try again.");
       host.innerHTML = html;
       return;
     }

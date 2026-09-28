@@ -2581,12 +2581,12 @@ window.openExternal = function (u) {
      licence gates), and store before screens (screens read window.SMD_CLINIX_PROGRESS at mount).
      Content itself is NOT bundled here - it is lazily fetched from /clinix/*.json on first open,
      deliberately unlike kardiox-content-pack.js which parses 1.9 MB on every page load. -->
-<script src="/clinix-flags.js?v=cx14r925b927-session" defer></script>
+<script src="/clinix-flags.js?v=cx14r925c928-session" defer></script>
 <!-- The other 13 CliniX scripts (lexicon, model, dx, content, diagrams, audio, store, tutor, engine,
      physiology, profile, examiner, screens; ~590 KB) are NOT tagged here: clinix.js loads them in
      order on the first open (flag smd_clinix_lazy, default ON). Their ?v= tokens live in clinix.js
      SCRIPTS - bump the token THERE when you edit one of them. -->
-<script src="/clinix.js?v=cx13-lazy1-own3" defer></script>
+<script src="/clinix.js?v=cx13-lazy1-own4" defer></script>
 <!-- SURGX (SURGˣ) · Surgical Intelligence (additive, flag-gated smd_surgx; ON for testers, flip to
      false before any non-tester release - see surgx-flags.js). Scoped #surgxRoot + .sgx-* +
      SMD_SURGX_* globals. Flag off = clinix-style total no-op: surgx.js never mounts the root and

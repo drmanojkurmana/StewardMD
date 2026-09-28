@@ -87,10 +87,11 @@
   // opts.allowDraft comes from smd_clinix_draft (clinix-flags.js). It currently defaults ON by owner
   // decision, so drafts render WITH their "Draft, pending clinician review" line; with it off, only
   // approved/published content renders.
+  // Owner, 2026-09-28: "Keep everything open." Review status never hides content; only content an
+  // author explicitly marked `deprecated` is withheld. opts is accepted for API compatibility.
   function isRenderable(obj, opts) {
     if (!obj) return false;
-    if (opts && opts.allowDraft) return reviewStatus(obj) !== "deprecated";
-    return !!STUDENT_VISIBLE[reviewStatus(obj)];
+    return reviewStatus(obj) !== "deprecated";
   }
 
   /* ── Licence gate ─────────────────────────────────────────────────────────── */

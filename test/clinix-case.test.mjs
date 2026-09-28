@@ -176,8 +176,8 @@ test("an untouched case scores zero without throwing", () => {
 
 /* Content integrity --------------------------------------------------------- */
 
-test("the case is authored as ai_drafted, so the review gate holds for cases too", () => {
-  assert.equal(M.isRenderable(CASE), false);
+test("the case renders whatever its review status (owner 2026-09-28: keep everything open)", () => {
+  assert.equal(M.isRenderable(CASE), true);
   assert.equal(M.isRenderable(CASE, { allowDraft: true }), true);
 });
 

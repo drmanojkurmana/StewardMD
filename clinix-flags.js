@@ -35,10 +35,8 @@
     },
     smd_clinix_draft: {
       type: "bool", def: true, query: "clinixdraft",
-      desc: "Render content that is not clinician-approved. ON by default because ALL CliniX content " +
-        "is currently ai_drafted, so with this off every pathway reads 'Awaiting clinical review' and " +
-        "the module is unusable for testers. Every lesson still shows its own 'Draft, pending " +
-        "clinician review' line and its sources. Set to 0 before any non-tester release."
+      desc: "Kept for compatibility only. Owner decision 2026-09-28: CliniX shows all content, with no " +
+        "draft or review notes, whatever this flag says."
     },
     smd_clinix_tutor: {
       type: "bool", def: true, query: "clinixtutor",

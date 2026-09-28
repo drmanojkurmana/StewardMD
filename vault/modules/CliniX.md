@@ -65,7 +65,7 @@ stony dullness". That indirection is what makes the fourth disease cheap.
 ## Hard invariants (each has a test)
 - **Flag off = total no-op.** No `#clinixRoot`, no `cx-lock`, no `--cx-*` custom property in the
   document, and **nothing fetched**. Asserted in `test/run-clinix-ui.mjs`.
-- **Unreviewed content never reaches a student.** `review.status` must be `approved`/`published`.
+- **~~Unreviewed content never reaches a student.~~ SUPERSEDED 2026-09-28 (owner): everything renders, no draft notes; only `deprecated` is hidden.** `review.status` must be `approved`/`published`.
   Fails CLOSED: a missing or garbled status reads as `draft`. All Phase-1 content is `ai_drafted`,
   so a student currently sees an explicit "Awaiting clinical review" state, not an empty pathway.
 - **Uncleared media never renders.** `cleared !== true` degrades to caption + "visual pending".
