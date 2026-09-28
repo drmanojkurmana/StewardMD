@@ -721,3 +721,18 @@ test("fever duration after a dash, colon or bracket, a fortnight, a range", () =
   for (const t of ["Fever for 2-3 days.", "Fever for 5 days."]) assert.ok(!r(t).includes("prolongedFever"), t);
   assert.ok(r("Cough - 3 weeks.").includes("prolongedCough2Weeks"));
 });
+
+// round 56: a normal examination in words is a pertinent negative; a present mention of the key still wins
+test("normal examination phrases deny what they rule out", () => {
+  const cE = { valid: { crepitations: 1, wheeze: 1, neckStiffness: 1, focalNeuroDeficit: 1, dehydration: 1 }, labels: {}, numeric: {}, v2: true,
+    syn: { crepitations: ["crepitation", "crepts"], wheeze: ["wheeze"], neckStiffness: ["neck stiff"], focalNeuroDeficit: ["hemiparesis"], dehydration: ["dehydrat"] } };
+  const r = (t) => NLP.extract(t, cE);
+  assert.deepEqual(r("Chest clear.").absent.sort(), ["crepitations", "wheeze"]);
+  assert.deepEqual(r("RS: NVBS, no added sounds.").absent.sort(), ["crepitations", "wheeze"]);
+  assert.deepEqual(r("Neck supple.").absent, ["neckStiffness"]);
+  assert.deepEqual(r("No focal neurological deficit.").absent, ["focalNeuroDeficit"]);
+  assert.deepEqual(r("Well hydrated.").absent, ["dehydration"]);
+  assert.deepEqual(r("Chest not clear.").absent, []);
+  const mix = r("Chest clear except right basal crepitations.");
+  assert.ok(mix.present.includes("crepitations") && mix.absent.includes("wheeze"));
+});

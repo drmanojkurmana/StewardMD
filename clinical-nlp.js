@@ -470,6 +470,14 @@
       // "UPT positive"); not the obstetric score alone ("G2P2L2, tubectomy done" is parity, not a pregnancy)
       var pgre = /\b(?:g\d{1,2}\s*p\d{1,2}\w*|primi(?:gravida)?|multi(?:gravida)?)\b[^.;]{0,20}?\b\d{1,2}\s*(?:\+\s*\d\s*)?(?:weeks?|wks?)\b|\b(?:pog|period of gestation)\b|\b\d{1,2}\s*(?:weeks?|wks?)\s*(?:of\s+)?amenorrh?oea\b|\b(?:upt|urine pregnancy test)\s*(?:is\s*|was\s*|:\s*)?(?:positive|\+\s*ve|\+)/g;
       while ((m2 = pgre.exec(norm))) consider("pregnancy", m2.index, "compound", m2[0]);
+      // round 56: normal findings in words are pertinent negatives for the v3 order ("chest clear", "NVBS", "neck supple",
+      // "no focal neurological deficit", "well hydrated"). Not "afebrile" (a fever history with "afebrile now" is common)
+      // and not "oriented" (a delirium that has cleared)
+      [[/\b(?:chest|lungs?|lung fields?)\s+(?:(?:is|are|was|were)\s+)?(?:clinically\s+)?clear\b|\bclear chest\b|\bnvbs\b|\bnormal vesicular breath(?:ing)? sounds?\b|\bno added (?:breath )?sounds\b/g,
+        ["crepitations", "bilateralCrackles", "wheeze"]], [/\bneck (?:is |was )?supple\b/g, ["neckStiffness"]],
+       [/\b(?:no|without)\s+(?:any\s+)?focal (?:neurological |neurologic |motor )?deficits?\b|\bnfnd\b|\bnon-?focal\b/g, ["focalNeuroDeficit"]],
+       [/\bwell hydrated\b/g, ["dehydration"]]].forEach(function (nx) {
+        var nm; while ((nm = nx[0].exec(norm))) nx[1].forEach(function (k) { consider(k, nm.index, "normal", nm[0]); }); });
       // round 27: the overdose scene ("found drowsy beside empty blister packs", "possible sedative co-ingestion", "found
       // unresponsive, a used syringe beside him")
       var odre = /\b(?:empty|emptied)\s+(?:[a-z-]+\s+){0,3}?(?:blisters?|blister packs?|strips?|packets?|pill bottles?|pills|tablets?|medication|medicines?)\b|\bco-?ingestion\b/g, odn = 0;
@@ -556,6 +564,8 @@
       // abnormal vital "absent"; v2 scopes it to the vital's own clause like every other finding
       var cl = e.method === "vitals" ? (v2 ? clauseAround(raw, Math.max(0, e.idx)) : raw) : clauseAround(norm, e.idx);
       var r = { polarity: "present", certainty: "explicit", temporality: "current", req: false };
+      // round 56: a normal examination said in words denies what it rules out (a present mention of the key still wins)
+      if (v2 && e.method === "normal") { r.polarity = "absent"; return r; }
       if (v2 && e.method !== "vitals") cl = cl.replace(NEG_IDIOM_V2, " ").replace(RECENT_V2, " ");
       // round 40 (v2): a cue AFTER the finding does not negate it ("fever without rigors", "mild nausea without vomiting",
       // "papilloedema without choroidal tubercles"); what precedes it does, and so do postfix forms ("neck stiffness was
