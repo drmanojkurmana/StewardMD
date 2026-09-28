@@ -98,11 +98,12 @@ export function renderTraceSvg(fhr, uc, fs) {
   const yFhr = (v) => PAD + H_FHR - ((Math.min(Math.max(v, 50), 210) - 50) / 160) * H_FHR;
   const yUc = (v) => H_FHR + 40 + H_UC - (Math.min(Math.max(v, 0), 100) / 100) * H_UC;
   function path(samples, yFn) {
-    let d = "";
+    let d = "", pen = false;
     for (let i = 0; i < samples.length; i++) {
       const v = samples[i];
-      if (v < 50 && yFn === yFhr) { d += " "; continue; } // gap on dropout, don't draw a false flat line
-      d += (d.endsWith(" ") || !d ? "M" : "L") + x(i).toFixed(1) + "," + yFn(v).toFixed(1) + " ";
+      if (v < 50 && yFn === yFhr) { pen = false; continue; } // gap on dropout, don't draw a false flat line
+      d += (pen ? "L" : "M") + x(i).toFixed(1) + "," + yFn(v).toFixed(1) + " ";
+      pen = true;
     }
     return d.trim();
   }
@@ -187,14 +188,13 @@ async function main() {
     "ctu-uhb-ctgdb": {
       licence: "ODC-BY 1.0", route: "adapted",
       source: "https://physionet.org/content/ctu-uhb-ctgdb/1.0.0/",
-      citation: "Chudacek V, Spilka J, Bursa M, et al. Open access intrapartum CTG database. BMC Pregnancy Childbirth. 2014;14:16.",
-      changes: "Decoded from WFDB signal format; baseline/variability/deceleration features computed by a simplified rule-based script, not an expert annotation; rendered as an SVG line trace of the last 10 minutes before delivery.",
+      citation: "Chudáček V, Spilka J, Bursa M, et al. Open access intrapartum CTG database. BMC Pregnancy Childbirth. 2014;14:16.",
+      changes: "Decoded from WFDB signal format; baseline/variability/deceleration features computed by a simplified rule-based script, not an expert annotation; features are computed over the last 60 minutes before delivery; the strip shows the last 30 minutes, rendered as an SVG line trace on a calibrated grid.",
     },
   }, null, 2));
   console.log("wrote " + cases.length + " cases");
 }
 
-if (import.meta.url === "file://" + process.argv[1]) main().catch((e) => { console.error(e); process.exit(1); });
 
 // Tunable constants. A reviewing obstetrician may change the UC_* and QUALITY_* values; the FIGO
 // thresholds are from the FIGO 2015 classification table and change only with the guideline.
@@ -211,6 +211,7 @@ const mean = (a) => a.reduce((s, x) => s + x, 0) / a.length;
 const pct = (sorted, p) => sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * p))];
 
 export function signalQuality(fhr) {
+  if (!fhr.length) return { lossPct: 100, suboptimal: true };
   let bad = 0;
   for (let i = 0; i < fhr.length; i++) if (!ok(fhr[i])) bad++;
   const lossPct = Math.round((bad / fhr.length) * 1000) / 10;
@@ -368,7 +369,7 @@ export function renderCalibratedTraceSvg(fhr, uc, fs) {
   L.plotW = L.W - L.padL - L.padR;
   L.ucTop = L.yTop + L.hFhr + L.gap;
   L.durationSec = fhr.length / fs;
-  const x = (i) => L.padL + (i / Math.max(1, fhr.length - 1)) * L.plotW;
+  const x = (i) => L.padL + ((i / fs) / L.durationSec) * L.plotW;
   const yUc = (v) => L.ucTop + L.hUc - (Math.min(Math.max(v, 0), 100) / 100) * L.hUc;
   const f1 = (n) => n.toFixed(1);
   const right = L.W - L.padR, bottom = L.ucTop + L.hUc;
@@ -396,7 +397,9 @@ export function renderCalibratedTraceSvg(fhr, uc, fs) {
   function path(s, yFn, isFhr) {
     let d = "", pen = false;
     for (let i = 0; i < s.length; i += step) {
-      if (isFhr && !(s[i] >= CFG.FHR_MIN && s[i] <= CFG.FHR_MAX)) { pen = false; continue; }
+      let bad = false;
+      if (isFhr) for (let j = i; j < Math.min(s.length, i + step); j++) if (!(s[j] >= CFG.FHR_MIN && s[j] <= CFG.FHR_MAX)) bad = true;
+      if (bad) { pen = false; continue; }
       d += (pen ? "L" : "M") + f1(x(i)) + "," + f1(yFn(s[i])) + " ";
       pen = true;
     }
@@ -407,3 +410,5 @@ export function renderCalibratedTraceSvg(fhr, uc, fs) {
   const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + L.W + " " + L.H + '" width="' + L.W + '" height="' + L.H + '" class="tk-svg">' + g + "</svg>";
   return { svg, layout: L };
 }
+
+if (import.meta.url === "file://" + process.argv[1]) main().catch((e) => { console.error(e); process.exit(1); });

@@ -186,3 +186,23 @@ test("calibrated renderer breaks the FHR path on dropout and on values over 210"
   const d = /class="tk-fhr" d="([^"]*)"/.exec(svg)[1];
   assert.equal((d.match(/M/g) || []).length, 3);
 });
+
+test("v1 renderTraceSvg emits 1 M and 5 L on a clean trace, 2 M on a dropout", () => {
+  const uc = new Float64Array(6).fill(10);
+  const d1 = /<path d="([^"]*)"[^>]*#ff6b6b/.exec(renderTraceSvg(Float64Array.from([140, 141, 142, 143, 144, 145]), uc, 4))[1];
+  assert.equal((d1.match(/M/g) || []).length, 1);
+  assert.equal((d1.match(/L/g) || []).length, 5);
+  const d2 = /<path d="([^"]*)"[^>]*#ff6b6b/.exec(renderTraceSvg(Float64Array.from([140, 141, 0, 143, 144, 145]), uc, 4))[1];
+  assert.equal((d2.match(/M/g) || []).length, 2);
+});
+
+test("calibrated renderer breaks the path when decimation would skip a dropout sample", () => {
+  const fhr = Float64Array.from([140, 140, 140, 0, 140, 140, 140, 140]);
+  const { svg } = renderCalibratedTraceSvg(fhr, new Float64Array(8).fill(10), 4);
+  const d = /class="tk-fhr" d="([^"]*)"/.exec(svg)[1];
+  assert.equal((d.match(/M/g) || []).length, 2);
+});
+
+test("signalQuality of empty input is total loss, not NaN", () => {
+  assert.deepEqual(signalQuality(new Float64Array(0)), { lossPct: 100, suboptimal: true });
+});

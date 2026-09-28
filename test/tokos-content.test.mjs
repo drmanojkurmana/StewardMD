@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
 
 const deck = JSON.parse(readFileSync("tokos/decks/ctg.json", "utf8"));
 const credits = JSON.parse(readFileSync("tokos/media/credits.json", "utf8"));
@@ -20,4 +20,14 @@ test("ctg.json has a plausible, licence-attributable case set", () => {
 test("every case's data source is credited", () => {
   assert.ok(credits["ctu-uhb-ctgdb"]);
   assert.equal(credits["ctu-uhb-ctgdb"].licence, "ODC-BY 1.0");
+});
+
+test("credits carry the citation and PhysioNet source, and no case SVG embeds a <style>", () => {
+  const c = credits["ctu-uhb-ctgdb"];
+  assert.ok(c.citation.includes("BMC Pregnancy Childbirth"));
+  assert.ok(c.citation.includes("2014;14:16"));
+  assert.equal(c.source, "https://physionet.org/content/ctu-uhb-ctgdb/1.0.0/");
+  readdirSync("tokos/media/ctg").forEach((f) => {
+    assert.ok(!readFileSync("tokos/media/ctg/" + f, "utf8").includes("<style"), f + " has <style");
+  });
 });
