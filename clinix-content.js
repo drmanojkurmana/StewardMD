@@ -25,13 +25,13 @@
   function flag(k) { var f = flags(); return !!(f && f.bool(k)); }
   function model() { try { return G.SMD_CLINIX_MODEL || null; } catch (e) { return null; } }
 
-  // Owner, 2026-09-27: "Don't lock anything behind draft". Draft content always renders (with its
-  // "Draft, pending clinician review" line). Only an explicit smd_clinix_draft=0 (author preview of
-  // the student-only view) hides it; a missing flags module never does.
+  // Owner, 2026-09-27/28: "Don't lock anything behind draft". Draft content ALWAYS renders, with its
+  // "Draft, pending clinician review" line. The smd_clinix_draft flag no longer hides anything: a
+  // device that had it switched off (an old author-mode toggle) showed "Awaiting clinical review"
+  // on every pathway. Only `deprecated` content is withheld (clinix-model.js isRenderable).
   function gateOpts() {
-    var f = flags();
     return {
-      allowDraft: f ? f.bool("smd_clinix_draft") : true,
+      allowDraft: true,
       allowUncleared: flag("smd_clinix_uncleared_media")
     };
   }

@@ -10654,3 +10654,9 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   the index drift, so the module's content test fails whenever the index is out of step with the lessons.
 - **Verified**: module repo headless UI step (no lesson request on open; one fetch per lesson; failure path),
   and StewardMD `test/run-ophthalmos-10x-ui.mjs` in the real app.
+- **Owner, 2026-09-28: CliniX draft never locks.** `clinix-content.js gateOpts()` is `allowDraft: true`
+  regardless of `smd_clinix_draft` (a device with the old author toggle off showed "Awaiting clinical
+  review" on every pathway). **Pro "sign in again" fix:** `account.js` no longer stores a guest
+  `/billing/status` verdict as a signed-in account's state (pro-notice.js read it as signed out), the
+  account-restore reseed now fires `smd:pro`, and CliniX asks the server once before showing a Pro lock,
+  reopening the door if the answer is Pro.

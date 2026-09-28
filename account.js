@@ -86,7 +86,9 @@
       var h = t ? { "Authorization": "Bearer " + t } : {};
       return fetch(apiUrl("/api/billing/status"), { headers: h }).then(function (r) { return r.json(); });
     }).then(function (d) {
-      _proState = d || null;
+      // A guest verdict for a signed-in client is not about this account: keeping it as the state made
+      // pro-notice.js read signedIn:false and ask a Pro doctor to sign in again.
+      if (!(d && hadUser && d.signedIn === false)) _proState = d || null;
       // A signed-in client that the server could not identify (no token yet, or a token it failed to
       // verify) gets the GUEST verdict: pro:false, signedIn:false. That is not a verdict about this
       // account, so it must not flip the cache. Keep the last known answer and let the next sync decide.
@@ -144,7 +146,14 @@
     return function () { try { window.removeEventListener("smd:pro", h); } catch (e) {} };
   }
   window.SMD_PRO = { isPro: isPro, isProSync: isProSync, tierSync: tierSync, hasEarlyAccess: hasEarlyAccess, EARLY_ACCESS_TIERS: EARLY_ACCESS_TIERS.slice(), proState: proState, sync: syncStatus, onProChange: onProChange, proKnown: proKnown, TEST_PRO_EMAILS: [] };
-  onChange(function () { try { _pro = loadProCache(); _proKnown = loadProCacheRaw() !== null; _tier = loadTierCache(); } catch (e) {} try { syncStatus(); } catch (e) {} });   // reseed for this uid, then refresh
+  onChange(function () {
+    var was = _pro;
+    try { _pro = loadProCache(); _proKnown = loadProCacheRaw() !== null; _tier = loadTierCache(); _proState = null; } catch (e) {}
+    // The account restored after first paint: gates that rendered from the anonymous seed must hear
+    // that this uid's cached verdict is different, not wait for the network.
+    if (was !== _pro) { try { window.dispatchEvent(new CustomEvent("smd:pro", { detail: { pro: _pro, known: _proKnown } })); } catch (e) {} }
+    try { syncStatus(); } catch (e) {}
+  });   // reseed for this uid, then refresh   // reseed for this uid, then refresh
 
   /* -------- Anti-sharing device lock --------
    * Register this device on sign-in + resume. When the server (DEVICE_LOCK_ON) reports we are no longer

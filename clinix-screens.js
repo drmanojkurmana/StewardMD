@@ -57,7 +57,22 @@
    * every door (system card, disease/module open, resume), so a stale screen cannot leak content. */
   function isPro() { try { return !!(window.SMD_PRO && SMD_PRO.isProSync && SMD_PRO.isProSync()); } catch (e) { return false; } }
   function locked(system) { return M() ? M().systemLocked(system, isPro()) : !(system && system.free === true); }
-  function showLocked() {
+  /* A Pro account must never be told to sign in again. isProSync() is the LAST KNOWN verdict, which
+   * is false on a fresh install or before the account restores, so a lock decision is only final
+   * after one live /billing/status answer: ask the server first, and retry the door if it says Pro. */
+  function showLocked(retry) {
+    try {
+      if (window.SMD_PRO && SMD_PRO.isPro && typeof retry === "function") {
+        SMD_PRO.isPro().then(function (pro) {
+          if (pro) { try { retry(); } catch (e) {} return; }
+          noticeLocked();
+        }, noticeLocked);
+        return;
+      }
+    } catch (e) {}
+    noticeLocked();
+  }
+  function noticeLocked() {
     try { if (window.SMD_PRO_NOTICE && SMD_PRO_NOTICE.show) { SMD_PRO_NOTICE.show("clinix"); return; } } catch (e) {}
     try { if (window.SMD_PRO && SMD_PRO.openPaywall) { SMD_PRO.openPaywall("clinix"); return; } } catch (e) {}
     toast("This system is part of StewardMD Pro");
@@ -3368,7 +3383,7 @@
   /* ── actions ─────────────────────────────────────────────────────────────── */
 
   function openDisease(id) {
-    if (diseaseLocked(id)) { haptic("light"); showLocked(); return; }
+    if (diseaseLocked(id)) { haptic("light"); showLocked(function () { if (!diseaseLocked(id)) openDisease(id); }); return; }
     state.diseaseId = id;
     state.loading = true;
     go("disease");
@@ -3378,7 +3393,7 @@
       // vivaAnswer's state.vivaCurrent !== cur check).
       if (state.diseaseId !== id) return;
       state.loading = false;
-      if (built && locked(built.system)) { state.built = null; back(); showLocked(); return; }
+      if (built && locked(built.system)) { state.built = null; back(); showLocked(function () { if (!locked(built.system)) openDisease(id); }); return; }
       state.built = built;
       if (!built) { toast("Could not load this topic"); back(); return; }
       repaint();
@@ -3879,7 +3894,11 @@
       case "cx-back": haptic("light"); back(); return;
 
       case "cx-system":
-        if (locked(C() && C().systemById(state.catalog, id))) { haptic("light"); showLocked(); return; }
+        if (locked(C() && C().systemById(state.catalog, id))) {
+          haptic("light");
+          showLocked(function () { if (!locked(C() && C().systemById(state.catalog, id))) { state.systemId = id; go("system"); } });
+          return;
+        }
         state.systemId = id; haptic("tap"); go("system"); return;
       case "cx-disease": haptic("tap"); openDisease(id); return;
       case "cx-chapter": state.chapterId = id; haptic("tap"); go("chapter"); return;
@@ -4221,7 +4240,7 @@
       // disease while this fetch was in flight.
       if (state.diseaseId !== pos.diseaseId) return;
       if (!built) { toast("Could not load that topic"); return; }
-      if (locked(built.system)) { showLocked(); return; }
+      if (locked(built.system)) { showLocked(function () { if (!locked(built.system)) resume(); }); return; }
       state.built = built;
       state.systemId = built.system.id;
       go("disease");
