@@ -85,13 +85,24 @@
   // v2: phrases the abbreviation table would otherwise mangle ("cva" -> "stroke")
   var PRE_V2 = [[/\bcva\s*(?:angle\s*)?tender(?:ness)?\b/g, "costovertebral angle tenderness"], [/\bcva\s*angle\b/g, "costovertebral angle"],
     // round 42: shorthand ("fever w/o rigors", "w/ cough", "abd pain"; a trailing sign: "fever -", "cough (-)", "vomiting +ve")
-    [/(^|[^a-z])n\/v(?=[^a-z]|$)/g, "$1nausea and vomiting"], [/(^|[^a-z])w\/o(?=[^a-z]|$)/g, "$1without"], [/(^|[^a-z])w\/\s*(?=[a-z0-9])/g, "$1with "], [/\babd\b\.?/g, "abdominal"],
+    [/(^|[^a-z])n\/v(?=[^a-z]|$)/g, "$1nausea and vomiting"],
+    // round 50: "cough/cold", "cold and cough", "sneezing, cold" is a cold (coryza); "cold" alone stays unread (cold peripheries)
+    [/\b(cough|sneezing|sneezes|running nose|runny nose)(\s*(?:\/|,|&|and)\s*)cold\b/g, "$1$2coryza"], [/\bcold(\s*(?:\/|,|&|and)\s*)(cough|sneez)/g, "coryza$1$2"], [/(^|[^a-z])w\/o(?=[^a-z]|$)/g, "$1without"], [/(^|[^a-z])w\/\s*(?=[a-z0-9])/g, "$1with "], [/\babd\b\.?/g, "abdominal"],
     [/\s*(?:\(\s*-\s*\)|-\s?ve\b|\s-)(?=\s*(?:[,.;:]|$))/g, " negative"], [/\s*(?:\(\s*\+\s*\)|\+\s?ve\b|\s\+)(?=\s*(?:[,.;:]|$))/g, " positive"]];
   // "a 3-day history of" states the present illness, not past history
   var PRESENT_HX_V2 = /\b(?:\d{1,2}|a|an|one|two|three|four|five|six|seven|eight|nine|ten|few|several)\s*-?\s*(?:d|days?|wks?|weeks?|months?|hours?|hrs?)\s*history\b/;
   // round 47: "history of fever for 5 days" / "h/o cough since 2 weeks" / "h/o vomiting since morning" (how Indian notes
   // open the present illness) is the present illness; "history of MI 2 weeks ago" and "for 10 years" stay past history
-  var PRESENT_DUR_V2 = /\bhistory of\b[^.;]*?(?:\b(?:for|since|x)\s*(?:the\s+)?(?:past\s+|last\s+)?(?:\d{1,2}|a|an|one|two|three|four|five|six|seven|eight|nine|ten|few|several|couple of)\s*-?\s*(?:d|days?|wks?|weeks?|hours?|hrs?)\b(?!\s*(?:ago|back|before|earlier|previously))|\bsince\s+(?:yesterday|morning|this morning|last night|today|the morning)\b)/;
+  var PRESENT_DUR_V2 = /\bhistory of\b[^.;,]*?(?:\b(?:for|since|x)\s*(?:the\s+)?(?:past\s+|last\s+)?(?:\d{1,2}|a|an|one|two|three|four|five|six|seven|eight|nine|ten|few|several|couple of)\s*-?\s*(?:d|days?|wks?|weeks?|hours?|hrs?)\b(?!\s*(?:ago|back|before|earlier|previously))|\bsince\s+(?:yesterday|morning|this morning|last night|today|the morning)\b)/;
+  // round 50: read from the governing "history of" to the end of the sentence, so "h/o fever with chills x 5 days" (the
+  // clause ends at "with") is dated too; a comma between them ends it ("h/o TB treated, cough x 3 weeks" stays past)
+  function presentDurV2(norm, idx) {
+    var hs = norm.lastIndexOf("history of", idx);
+    // only a finding that "history of" itself governs: a comma, or another past cue in between ("on a background of"), ends it
+    if (hs < 0 || /[.;,]|\b(?:background of|known case of|past|previous|prior|old)\b/.test(norm.slice(hs + 10, idx))) return false;
+    var se = norm.slice(idx).search(/[.;]/);
+    return PRESENT_DUR_V2.test(norm.slice(hs, se < 0 ? norm.length : idx + se));
+  }
   // round 8: "on a background of 3 days of fever" is the present illness too (days/weeks/hours only;
   // "background of 10 years of diabetes" stays past history)
   var PRESENT_BG_V2 = /\bbackground of\s*(?:a|an|the)?\s*(?:\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten|few|several|couple of)\s*-?\s*(?:d|days?|wks?|weeks?|hours?|hrs?)\b/;
@@ -326,8 +337,9 @@
     var PLTV = function (m) { var q = nv(m[1]); return m[2] ? q * 100000 : q >= 1000 ? q : q * 1000; };
     var CRV = function (m) { var c = nv(m[1]); return (m[2] && /mol/.test(m[2])) || c > 25 ? c / 88.4 : c; };
     // v2: a labelled BP wins, else the first PLAUSIBLE x/y (classic took the first x/y, so "GCS 13/15" hid the BP)
-    if (v2) { m2 = raw.match(/\b(?:bp|blood pressure|b\.p\.?)\s*(?:of|is|was|=|:|-)?\s*(\d{2,3})\s*\/\s*(\d{2,3})/);
-      if (!m2) { var bre = /(\d{2,3})\s*\/\s*(\d{2,3})/g, bm; while ((bm = bre.exec(raw))) { if (+bm[1] >= 60 && +bm[1] <= 300 && +bm[2] >= 30 && +bm[2] <= 200) { m2 = bm; break; } } } }
+    // round 51: whole numbers only, so a typo ("BP 1200/80") is not read as 200/80 from inside it
+    if (v2) { m2 = raw.match(/\b(?:bp|blood pressure|b\.p\.?)\s*(?:of|is|was|=|:|-)?\s*(\d{2,3})\s*\/\s*(\d{2,3})(?![\d])/);
+      if (!m2) { var bre = /(^|[^\d.])(\d{2,3})\s*\/\s*(\d{2,3})(?![\d])/g, bm; while ((bm = bre.exec(raw))) { if (+bm[2] >= 60 && +bm[2] <= 300 && +bm[3] >= 30 && +bm[3] <= 200) { m2 = [bm[0].slice(bm[1].length), bm[2], bm[3]]; m2.index = bm.index + bm[1].length; break; } } } }
     else m2 = raw.match(/(\d{2,3})\s*\/\s*(\d{2,3})/);
     var bpRead = function (m) { var sys = +m[1], dia = +m[2]; if (!(sys >= 60 && sys <= 300 && dia >= 30 && dia <= 200)) return;
       if (sys >= 140 || dia >= 90) { vital("hypertensionHx", m[0]); if (byKey.hypertensionHx) byKey.hypertensionHx.display = (sys >= 180 || dia >= 120 ? "Severe hypertension (BP " : "Hypertension (BP ") + sys + "/" + dia + ")"; }
@@ -335,7 +347,7 @@
     if (m2) {
       bpRead(m2);
       // round 19: v2 also reads the lowest labelled BP ("BP 128/80 on arrival, 82/50 an hour later"): the worst one decides shock
-      if (v2 && m2[0].indexOf("/") > 0) { var BP_RE = /\b(?:bp|blood pressure|b\.p\.?)\s*(?:of|is|was|=|:|-)?\s*(\d{2,3})\s*\/\s*(\d{2,3})/;
+      if (v2 && m2[0].indexOf("/") > 0) { var BP_RE = /\b(?:bp|blood pressure|b\.p\.?)\s*(?:of|is|was|=|:|-)?\s*(\d{2,3})\s*\/\s*(\d{2,3})(?![\d])/;
         var lo = pick(BP_RE, function (m) { return +m[1] >= 60 && +m[1] <= 300 && +m[2] >= 30 ? +m[1] : null; }, -1); if (lo && lo !== m2 && lo.index !== m2.index) bpRead(lo); }
     }
     if ((m2 = pick(v2 ? /\b(?:spo2|sao2|sats?|saturation|saturating)\s*(?:at|of|is|was|=|:|-)?\s*(\d{2,3})\s*%?/ : /\b(?:spo2|sao2|sats?|saturation|saturating)\s*(?:at|of|is|=|:)?\s*(\d{2,3})\s*%?/, function (m) { return +m[1] <= 100 ? +m[1] : null; }, -1))) { if (+m2[1] <= 100 && +m2[1] < 92) vital("hypoxia", m2[0]); }
@@ -564,7 +576,7 @@
       if (hasWord(tcl, TEMPORAL)) r.temporality = "historical";
       // v2: "a 3-day history of fever" is the PRESENT illness; classic read "history of" as past history
       // and dropped everything in that clause
-      if (v2 && r.temporality === "historical" && (PRESENT_HX_V2.test(cl) || PRESENT_BG_V2.test(cl) || PRESENT_DUR_V2.test(cl)) && !/\b(?:known case of|past|previous|prior|resolved|status post)\b|(?:^|[^-])\bold\b/.test(cl)) r.temporality = "current";
+      if (v2 && r.temporality === "historical" && (PRESENT_HX_V2.test(cl) || PRESENT_BG_V2.test(cl) || presentDurV2(norm, e.idx)) && !/\b(?:known case of|past|previous|prior|resolved|status post)\b|(?:^|[^-])\bold\b/.test(cl)) r.temporality = "current";
       // round 14: "clinically improving" / "resolved completely, no residual deficit" IS the finding: resolution and the
       // "no" of "no residual" do not cancel it; only a negation right before it does ("not improving on")
       if (v2 && key === "clinicallyImproving" && e.method !== "vitals") {

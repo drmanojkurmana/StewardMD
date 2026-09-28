@@ -672,3 +672,26 @@ test("safety-net advice is not a finding", () => {
   assert.deepEqual(r("Mother told about fever and loose motions since 2 days.").sort(), ["diarrhea", "fever"]);
   assert.deepEqual(r("Chest pain since morning. Return if breathless."), ["chestPain"]);
 });
+
+// round 50: "h/o fever with chills x 5 days" is dated from "history of" to the sentence end; "cough/cold" is coryza
+test("history dated past a with, and a cold with a cough", () => {
+  const c50 = { valid: { fever: 1, rigors: 1, coryza: 1, cough: 1 }, labels: {}, numeric: {}, v2: true,
+    syn: { fever: ["fever"], rigors: ["chills", "rigors"], coryza: ["coryza", "running nose"], cough: ["cough"] } };
+  const r = (t) => NLP.extract(t, c50);
+  assert.ok(r("H/o fever with chills/rigors x 5 days.").present.includes("fever"));
+  for (const t of ["Fever/cough/cold since 3 days.", "Cold and cough for 2 days.", "Sneezing, cold since yesterday."]) assert.ok(r(t).present.includes("coryza"), t);
+  assert.ok(!r("Cold peripheries.").present.includes("coryza"));
+  assert.ok(r("No cough/cold.").absent.includes("coryza"));
+});
+
+// round 51: a BP typo is not read from inside a longer number ("BP 1200/80" is not 200/80)
+test("blood pressure is read from whole numbers only", () => {
+  const cB = { valid: { hypertensionHx: 1, hypotension: 1 }, labels: {}, numeric: {}, v2: true, syn: {} };
+  const r = (t) => NLP.extract(t, cB).present;
+  assert.deepEqual(r("BP 1200/80."), []);
+  assert.deepEqual(r("Vitals: 1200/80."), []);
+  assert.deepEqual(r("BP 150/90."), ["hypertensionHx"]);
+  assert.deepEqual(r("BP 70/40."), ["hypotension"]);
+  assert.deepEqual(r("Date 12/10/2026."), []);
+  assert.ok(r("GCS 13/15, BP 88/50.").includes("hypotension"));
+});
