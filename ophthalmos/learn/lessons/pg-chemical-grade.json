@@ -1,0 +1,245 @@
+{
+  "id": "pg-chemical-grade",
+  "unit": "cornea-pg",
+  "level": "resident",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Grading a chemical injury",
+    "hi": "केमिकल चोट की ग्रेडिंग"
+  },
+  "idea": {
+    "en": "Irrigate first, grade second. Damage to the [[limbus]] predicts the outcome, because the [[limbal-stem-cells]] rebuild the corneal surface.",
+    "hi": "पहले पानी से धोएँ, फिर ग्रेड करें। [[limbus]] को हुआ नुकसान नतीजा बताता है, क्योंकि [[limbal-stem-cells]] ही कॉर्निया की सतह दोबारा बनाती हैं।"
+  },
+  "see": {
+    "img": "cases/6.webp",
+    "deckItem": {
+      "deck": "cases",
+      "id": "6"
+    },
+    "expect": "corneal conjunctivalization",
+    "alt": {
+      "en": "Slit-lamp photo of an eye whose cornea is covered by grey-white tissue, so the iris cannot be seen. A thick red vessel runs in from the left edge onto the cornea, with fine branching vessels in the centre. A denser white patch sits in the lower left.",
+      "hi": "एक आँख की स्लिट लैंप फ़ोटो, जिसका कॉर्निया भूरे-सफ़ेद ऊतक से ढका है, इसलिए आइरिस नहीं दिखती। एक मोटी लाल नस बाएँ किनारे से कॉर्निया पर आती है, और बीच में पतली शाखाओं वाली नसें हैं। नीचे बाईं ओर एक घना सफ़ेद धब्बा है।"
+    },
+    "caption": {
+      "en": "A real slit-lamp photo of corneal conjunctivalization, the end stage when limbal stem cells fail. The cause is not stated; a chemical burn is one cause.",
+      "hi": "कॉर्निया पर कंजंक्टाइवा फैलने (corneal conjunctivalization) की असली स्लिट लैंप फ़ोटो, जो लिंबल स्टेम सेल ख़त्म होने का आख़िरी चरण है। कारण नहीं बताया गया; केमिकल से जलना एक कारण है।"
+    },
+    "credit": "OphthalVQA, CC BY 4.0. Xu P, et al. Br J Ophthalmol 2024.",
+    "hotspots": [
+      {
+        "x": 0.22,
+        "y": 0.49,
+        "label": {
+          "en": "Vessel crossing onto the cornea",
+          "hi": "कॉर्निया पर आती नस"
+        },
+        "note": {
+          "en": "A thick conjunctival vessel has grown in over the lost limbus.",
+          "hi": "एक मोटी कंजंक्टाइवा की नस ख़त्म हुए लिंबस के ऊपर से अंदर आ गई है।"
+        }
+      },
+      {
+        "x": 0.375,
+        "y": 0.63,
+        "label": {
+          "en": "Fine branching vessels",
+          "hi": "पतली शाखाओं वाली नसें"
+        },
+        "note": {
+          "en": "Smaller new vessels spread across the central cornea.",
+          "hi": "छोटी नई नसें कॉर्निया के बीच में फैल गई हैं।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.3,
+        "label": {
+          "en": "Opaque surface",
+          "hi": "धुंधली सतह"
+        },
+        "note": {
+          "en": "Grey-white conjunctival tissue covers the cornea. The iris cannot be seen through it.",
+          "hi": "भूरा-सफ़ेद कंजंक्टाइवा का ऊतक कॉर्निया को ढके है। इसके पार आइरिस नहीं दिखती।"
+        }
+      },
+      {
+        "x": 0.2,
+        "y": 0.67,
+        "label": {
+          "en": "White scar",
+          "hi": "सफ़ेद दाग़"
+        },
+        "note": {
+          "en": "A denser white patch in the lower cornea, a sign of deeper scarring.",
+          "hi": "कॉर्निया के निचले हिस्से में घना सफ़ेद धब्बा, जो गहरे दाग़ का संकेत है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Alkali burns are the most dangerous. They soak deep into the eye, while acids tend to stay nearer the surface.",
+        "hi": "क्षार (alkali) से जलना सबसे ख़तरनाक है। यह आँख में गहराई तक घुसता है, जबकि अम्ल (acid) ज़्यादातर सतह के पास रहता है।"
+      },
+      {
+        "en": "Roper-Hall, building on Hughes, grades by corneal haze and limbal ischaemia. Grade I is surface damage only, with no ischaemia.",
+        "hi": "रोपर-हॉल ने, ह्यूज़ के काम पर, कॉर्निया की धुंध और लिंबस की इस्कीमिया से ग्रेड बनाया। ग्रेड I में सिर्फ़ सतह को नुकसान होता है, इस्कीमिया नहीं।"
+      },
+      {
+        "en": "Grade IV has an opaque cornea that hides the iris, and more than half the limbus is ischaemic.",
+        "hi": "ग्रेड IV में कॉर्निया इतना धुंधला होता है कि आइरिस छिप जाती है, और आधे से ज़्यादा लिंबस इस्कीमिक होता है।"
+      },
+      {
+        "en": "Dua grades by clock hours of limbal damage and the percent of [[conjunctiva]] involved. Grade VI is all 12 clock hours and all the conjunctiva.",
+        "hi": "डुआ का ग्रेड लिंबस के नुकसान के घड़ी-घंटों और प्रभावित [[conjunctiva]] के प्रतिशत से बनता है। ग्रेड VI में पूरे 12 घड़ी-घंटे और पूरा कंजंक्टाइवा प्रभावित होता है।"
+      },
+      {
+        "en": "Dua splits up the severe end, which Roper-Hall lumps into grade IV. Outlook falls as the grade rises.",
+        "hi": "डुआ गंभीर चोटों को अलग-अलग बाँटता है, जिन्हें रोपर-हॉल ग्रेड IV में एक साथ रखता है। ग्रेड जितना ऊँचा, नतीजा उतना ख़राब।"
+      },
+      {
+        "en": "When the stem cells fail, conjunctiva and vessels creep over the cornea. The photo shows this end stage.",
+        "hi": "जब स्टेम सेल ख़त्म होती हैं, तो कंजंक्टाइवा और नसें कॉर्निया पर फैल जाती हैं। फ़ोटो यही आख़िरी चरण दिखाती है।"
+      }
+    ],
+    "analogy": {
+      "en": "The limbus is the nursery that grows new surface cells. Burn the nursery, and weeds from next door take over the field.",
+      "hi": "लिंबस वह नर्सरी है जहाँ सतह की नई कोशिकाएँ उगती हैं। नर्सरी जल जाए, तो पड़ोस की खरपतवार पूरे खेत पर छा जाती है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Check the pH in both eyes. White, bloodless vessels at the limbus mean ischaemia, not a quiet eye.",
+      "hi": "दोनों आँखों का pH जाँचें। लिंबस पर सफ़ेद, बिना खून वाली नसें इस्कीमिया हैं, शांत आँख नहीं।"
+    },
+    {
+      "en": "Count the clock hours of limbal damage, and estimate the percent of conjunctiva involved.",
+      "hi": "लिंबस के नुकसान के घड़ी-घंटे गिनें, और प्रभावित कंजंक्टाइवा का प्रतिशत आँकें।"
+    },
+    {
+      "en": "Late signs: vessels on the cornea, a surface defect that will not heal, [[symblepharon]] and dry eye.",
+      "hi": "बाद के लक्षण: कॉर्निया पर नसें, न भरने वाला सतह का घाव, [[symblepharon]] और सूखी आँख।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Irrigate at once with plenty of clean water or saline, for at least 15 to 30 minutes. Evert the lids and sweep the fornices.",
+      "hi": "तुरंत ढेर सारे साफ़ पानी या सलाइन से कम से कम 15 से 30 मिनट धोएँ। पलकें पलटें और पलकों के अंदर के कोने (fornices) साफ़ करें।"
+    },
+    {
+      "en": "Recheck the pH until it is neutral. Then grade, record and refer the same day.",
+      "hi": "pH न्यूट्रल होने तक बार-बार जाँचें। फिर ग्रेड करें, लिखें और उसी दिन रेफ़र करें।"
+    },
+    {
+      "en": "Acute care, led by a specialist, aims to calm inflammation, heal the surface and prevent symblepharon. An [[amniotic-membrane]] can help.",
+      "hi": "शुरुआती इलाज विशेषज्ञ की देखरेख में होता है: सूजन शांत करना, सतह भरना और सिम्ब्लेफ़ेरॉन रोकना। [[amniotic-membrane]] मदद कर सकती है।"
+    },
+    {
+      "en": "Later, lost limbal stem cells must be restored before any corneal graft can survive.",
+      "hi": "बाद में, कोई भी कॉर्निया ग्राफ़्ट टिके, इसके लिए पहले लिंबल स्टेम सेल वापस लानी होती हैं।"
+    }
+  ],
+  "remember": {
+    "en": "Water first. Then count limbal clock hours: the more limbus lost, the worse the outlook.",
+    "hi": "पहले पानी। फिर लिंबस के घड़ी-घंटे गिनें: जितना ज़्यादा लिंबस गया, उतना ख़राब नतीजा।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "What comes first in a chemical injury?",
+        "hi": "केमिकल चोट में सबसे पहले क्या करें?"
+      },
+      "o": [
+        {
+          "en": "Check visual acuity",
+          "hi": "नज़र जाँचें"
+        },
+        {
+          "en": "Grade the burn",
+          "hi": "जलन को ग्रेड करें"
+        },
+        {
+          "en": "Irrigate",
+          "hi": "पानी से धोएँ"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "Every minute of contact adds damage. Irrigate first, then examine and grade.",
+        "hi": "संपर्क का हर मिनट नुकसान बढ़ाता है। पहले धोएँ, फिर जाँचें और ग्रेड करें।"
+      }
+    },
+    {
+      "q": {
+        "en": "The Dua classification grades a burn by:",
+        "hi": "डुआ वर्गीकरण जलन को किससे ग्रेड करता है?"
+      },
+      "o": [
+        {
+          "en": "Corneal haze only",
+          "hi": "सिर्फ़ कॉर्निया की धुंध"
+        },
+        {
+          "en": "Limbal clock hours and percent of conjunctiva involved",
+          "hi": "लिंबस के घड़ी-घंटे और प्रभावित कंजंक्टाइवा का प्रतिशत"
+        },
+        {
+          "en": "Eye pressure and pH",
+          "hi": "आँख का दबाव और pH"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Dua counts limbal clock hours and conjunctival spread. Roper-Hall uses corneal haze and limbal ischaemia.",
+        "hi": "डुआ लिंबस के घड़ी-घंटे और कंजंक्टाइवा का फैलाव गिनता है। रोपर-हॉल कॉर्निया की धुंध और लिंबस की इस्कीमिया देखता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Why does limbal damage predict the outcome?",
+        "hi": "लिंबस का नुकसान नतीजा क्यों बताता है?"
+      },
+      "o": [
+        {
+          "en": "The limbus holds the stem cells of the corneal surface",
+          "hi": "लिंबस में कॉर्निया की सतह की स्टेम सेल होती हैं"
+        },
+        {
+          "en": "The limbus drains the aqueous",
+          "hi": "लिंबस एक्वियस निकालता है"
+        },
+        {
+          "en": "The limbus makes the tears",
+          "hi": "लिंबस आँसू बनाता है"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Without limbal stem cells, the cornea cannot renew its surface, and conjunctiva grows over it.",
+        "hi": "लिंबल स्टेम सेल के बिना कॉर्निया अपनी सतह नई नहीं बना पाता, और कंजंक्टाइवा उस पर फैल जाता है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "cornea"
+  },
+  "deeper": {
+    "note": "trauma"
+  },
+  "glossary": [
+    "limbus",
+    "limbal-stem-cells",
+    "conjunctiva",
+    "symblepharon",
+    "amniotic-membrane"
+  ],
+  "sources": [
+    "Roper-Hall MJ. Thermal and chemical burns. Trans Ophthalmol Soc U K 1965;85:631-653.",
+    "Dua HS, King AJ, Joseph A. A new classification of ocular surface burns. Br J Ophthalmol 2001;85(11):1379-1383.",
+    "Xu P, Chen X, Zhao Z, Shi D. Unveiling the clinical incapabilities: a benchmarking study of GPT-4V(ision) for ophthalmic multimodal image analysis. Br J Ophthalmol 2024. doi:10.1136/bjo-2023-325054"
+  ]
+}

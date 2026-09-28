@@ -1,0 +1,245 @@
+{
+  "id": "ant-uveitis",
+  "unit": "uveitis",
+  "level": "mbbs",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "How anterior uveitis presents",
+    "hi": "एंटीरियर यूवाइटिस कैसे सामने आता है"
+  },
+  "idea": {
+    "en": "Anterior [[uveitis]] gives a painful red eye, [[photophobia]] and blurred vision. The pupil is often small or irregular.",
+    "hi": "एंटीरियर [[uveitis]] में आँख लाल और दर्द भरी होती है, [[photophobia]] होता है और नज़र धुंधली होती है। पुतली अक्सर छोटी या टेढ़ी-मेढ़ी होती है।"
+  },
+  "see": {
+    "img": "cases/9.webp",
+    "deckItem": {
+      "deck": "cases",
+      "id": "9"
+    },
+    "expect": "anterior uveitis",
+    "alt": {
+      "en": "Close-up slit-lamp photo of a brown eye. The pupil is not round. It has a large part on the left and a notch at its upper right. The lens behind the pupil looks grey. The white of the eye looks fairly quiet.",
+      "hi": "भूरी आँख की पास से ली गई स्लिट लैंप फ़ोटो। पुतली गोल नहीं है: बाईं ओर बड़ा हिस्सा है और ऊपर दाईं किनारी पर एक खाँचा है। पुतली के पीछे लेंस धूसर दिखता है। आँख का सफ़ेद हिस्सा काफ़ी शांत दिखता है।"
+    },
+    "caption": {
+      "en": "A real photo of an eye with anterior uveitis. The iris is stuck to the lens at one point, so the pupil is irregular. The lens is also denser than normal.",
+      "hi": "एंटीरियर यूवाइटिस वाली आँख की असली फ़ोटो। आइरिस एक जगह लेंस से चिपका है, इसलिए पुतली टेढ़ी-मेढ़ी है। लेंस भी सामान्य से ज़्यादा घना है।"
+    },
+    "credit": "OphthalVQA, CC BY 4.0. Xu P, et al. Br J Ophthalmol 2024.",
+    "hotspots": [
+      {
+        "x": 0.4,
+        "y": 0.3,
+        "label": {
+          "en": "Irregular pupil",
+          "hi": "टेढ़ी-मेढ़ी पुतली"
+        },
+        "note": {
+          "en": "The pupil is not a clean circle. It has a large part and a small part.",
+          "hi": "पुतली साफ़ गोल नहीं है। इसका एक बड़ा हिस्सा है और एक छोटा हिस्सा।"
+        }
+      },
+      {
+        "x": 0.505,
+        "y": 0.3,
+        "label": {
+          "en": "Iris stuck to the lens",
+          "hi": "लेंस से चिपका आइरिस"
+        },
+        "note": {
+          "en": "At this notch the edge of the iris is stuck to the lens. It is a sign of past or present inflammation.",
+          "hi": "इस खाँचे पर आइरिस की किनारी लेंस से चिपकी है। यह पुरानी या अभी की सूजन का संकेत है।"
+        }
+      },
+      {
+        "x": 0.45,
+        "y": 0.42,
+        "label": {
+          "en": "Grey lens",
+          "hi": "धूसर लेंस"
+        },
+        "note": {
+          "en": "The lens behind the pupil looks dense and grey. Long-lasting uveitis, and its steroid treatment, can both cause cataract.",
+          "hi": "पुतली के पीछे लेंस घना और धूसर दिखता है। लंबा चलने वाला यूवाइटिस और उसका स्टेरॉयड इलाज, दोनों मोतियाबिंद कर सकते हैं।"
+        }
+      },
+      {
+        "x": 0.75,
+        "y": 0.55,
+        "label": {
+          "en": "Edge of the cornea",
+          "hi": "कॉर्निया की किनारी"
+        },
+        "note": {
+          "en": "Look here for a ciliary flush, a red ring that hugs the cornea. In this photo the white looks fairly quiet.",
+          "hi": "सिलियरी फ़्लश के लिए यहाँ देखें, यानी कॉर्निया से सटा लाल घेरा। इस फ़ोटो में सफ़ेद हिस्सा काफ़ी शांत दिखता है।"
+        }
+      }
+    ],
+    "more": [
+      "red-eye-map"
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "The iris and the ciliary body are inflamed. Their muscles go into spasm, so the eye aches.",
+        "hi": "आइरिस और सिलियरी बॉडी में सूजन है। उनकी मांसपेशियाँ ऐंठ जाती हैं, इसलिए आँख में दर्द होता है।"
+      },
+      {
+        "en": "Light makes the inflamed iris move, and that hurts. This is why light feels painful.",
+        "hi": "रोशनी में सूजा हुआ आइरिस हिलता है, और इससे दर्द होता है। इसीलिए रोशनी चुभती है।"
+      },
+      {
+        "en": "Vessels around the edge of the cornea widen. They make a red ring called a [[ciliary-flush]].",
+        "hi": "कॉर्निया की किनारी के चारों ओर की नलियाँ फैल जाती हैं। ये एक लाल घेरा बनाती हैं जिसे [[ciliary-flush]] कहते हैं।"
+      },
+      {
+        "en": "White cells and protein leak into the [[anterior-chamber]]. Vision turns blurred or misty.",
+        "hi": "सफ़ेद कोशिकाएँ और प्रोटीन [[anterior-chamber]] में रिस आते हैं। नज़र धुंधली या धुएँ जैसी हो जाती है।"
+      },
+      {
+        "en": "The sticky iris can glue to the lens. These spots are [[posterior-synechiae]], and the pupil turns small or irregular.",
+        "hi": "चिपचिपा आइरिस लेंस से चिपक सकता है। इन जगहों को [[posterior-synechiae]] कहते हैं, और पुतली छोटी या टेढ़ी-मेढ़ी हो जाती है।"
+      }
+    ],
+    "analogy": {
+      "en": "Think of a sprained ankle. It is swollen and red, and it hurts to move. The inflamed iris hurts every time light makes it move.",
+      "hi": "मोच आए टखने के बारे में सोचिए। वह सूजा और लाल होता है, और हिलाने पर दर्द होता है। सूजा हुआ आइरिस भी हर बार दर्द करता है जब रोशनी उसे हिलाती है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "A painful red eye with light sensitivity, not just a gritty feeling.",
+      "hi": "लाल, दर्द भरी आँख जिसमें रोशनी चुभे, सिर्फ़ किरकिरापन नहीं।"
+    },
+    {
+      "en": "Redness is worst in a ring around the cornea, not out at the edges of the white.",
+      "hi": "लाली कॉर्निया के चारों ओर घेरे में सबसे ज़्यादा होती है, सफ़ेद हिस्से के बाहरी किनारों पर नहीं।"
+    },
+    {
+      "en": "Usually one eye at a time. Attacks often come back, sometimes in the other eye.",
+      "hi": "आमतौर पर एक बार में एक आँख। हमले अक्सर लौटते हैं, कभी-कभी दूसरी आँख में।"
+    },
+    {
+      "en": "The eye may water, but there is no sticky pus.",
+      "hi": "आँख से पानी आ सकता है, पर चिपचिपा मवाद नहीं होता।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Check vision in each eye. Compare the two pupils with a torch.",
+      "hi": "हर आँख की नज़र जाँचें। टॉर्च से दोनों पुतलियों की तुलना करें।"
+    },
+    {
+      "en": "Ask if this has happened before, and ask about back pain or joint pain.",
+      "hi": "पूछें कि क्या पहले भी ऐसा हुआ है, और कमर या जोड़ों के दर्द के बारे में पूछें।"
+    },
+    {
+      "en": "Refer the same day to an [[ophthalmologist]].",
+      "hi": "उसी दिन [[ophthalmologist]] के पास भेजें।"
+    }
+  ],
+  "remember": {
+    "en": "Painful red eye, light hurts, odd or small pupil, blurred vision: think anterior uveitis and refer today.",
+    "hi": "लाल, दर्द भरी आँख, रोशनी चुभे, छोटी या टेढ़ी पुतली, धुंधली नज़र: एंटीरियर यूवाइटिस सोचें और आज ही भेजें।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which points most to anterior uveitis rather than conjunctivitis?",
+        "hi": "कंजंक्टिवाइटिस के बजाय एंटीरियर यूवाइटिस की ओर सबसे ज़्यादा क्या इशारा करता है?"
+      },
+      "o": [
+        {
+          "en": "Sticky yellow discharge",
+          "hi": "चिपचिपा पीला मवाद"
+        },
+        {
+          "en": "Pain with light sensitivity and a ciliary flush",
+          "hi": "दर्द, रोशनी से चुभन और सिलियरी फ़्लश"
+        },
+        {
+          "en": "Itchy eyes every spring",
+          "hi": "हर बसंत में आँखों में खुजली"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Conjunctivitis is gritty, with discharge. Deep pain, light sensitivity and a red ring round the cornea point inside the eye.",
+        "hi": "कंजंक्टिवाइटिस में किरकिरापन और मवाद होता है। गहरा दर्द, रोशनी से चुभन और कॉर्निया के चारों ओर लाल घेरा आँख के अंदर की ओर इशारा करते हैं।"
+      }
+    },
+    {
+      "q": {
+        "en": "Why is the pupil irregular in this photo?",
+        "hi": "इस फ़ोटो में पुतली टेढ़ी-मेढ़ी क्यों है?"
+      },
+      "o": [
+        {
+          "en": "The iris is stuck to the lens at one point",
+          "hi": "आइरिस एक जगह लेंस से चिपका है"
+        },
+        {
+          "en": "The cornea is torn",
+          "hi": "कॉर्निया फटा है"
+        },
+        {
+          "en": "The optic nerve is swollen",
+          "hi": "ऑप्टिक नर्व सूजी है"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Posterior synechiae hold parts of the pupil edge in place. When the rest moves, the pupil looks notched.",
+        "hi": "पोस्टीरियर साइनेकी पुतली की किनारी के कुछ हिस्सों को जकड़े रखती हैं। बाकी हिस्सा हिलता है, तो पुतली में खाँचा दिखता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Acute anterior uveitis usually affects:",
+        "hi": "एक्यूट एंटीरियर यूवाइटिस आमतौर पर किसे प्रभावित करता है?"
+      },
+      "o": [
+        {
+          "en": "Both eyes at the same time, every time",
+          "hi": "हर बार दोनों आँखें एक साथ"
+        },
+        {
+          "en": "Only children under five",
+          "hi": "सिर्फ़ पाँच साल से छोटे बच्चे"
+        },
+        {
+          "en": "One eye, often in repeat attacks",
+          "hi": "एक आँख, अक्सर बार-बार हमलों में"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "Typical acute anterior uveitis hits one eye. Attacks may return, in the same eye or the other one.",
+        "hi": "आम एक्यूट एंटीरियर यूवाइटिस एक आँख में होता है। हमले लौट सकते हैं, उसी आँख में या दूसरी में।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "uveitis"
+  },
+  "deeper": {
+    "note": "uveitis"
+  },
+  "glossary": [
+    "uveitis",
+    "photophobia",
+    "ciliary-flush",
+    "anterior-chamber",
+    "posterior-synechiae",
+    "ophthalmologist"
+  ],
+  "sources": [
+    "Read RW, et al. Acute Anterior Uveitis. EyeWiki, American Academy of Ophthalmology. Updated August 2026. https://eyewiki.org/Acute_Anterior_Uveitis",
+    "Jabs DA, Nussenblatt RB, Rosenbaum JT; Standardization of Uveitis Nomenclature (SUN) Working Group. Standardization of uveitis nomenclature for reporting clinical data. Results of the First International Workshop. Am J Ophthalmol 2005;140(3):509-516.",
+    "Xu P, Chen X, Zhao Z, Shi D. Unveiling the clinical incapabilities: a benchmarking study of GPT-4V(ision) for ophthalmic multimodal image analysis. Br J Ophthalmol 2024. doi:10.1136/bjo-2023-325054"
+  ]
+}

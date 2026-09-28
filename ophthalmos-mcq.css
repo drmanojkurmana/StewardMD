@@ -29,3 +29,5 @@
 .mcq-foot2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 @media (hover: hover) and (pointer: fine) { .mcq-topic:hover, .mcq-hit:hover { background: var(--op-s1); } }
 @media (prefers-reduced-motion: reduce) { .mcq-topic, .mcq-hit { transition: none; } .mcq-topic:active, .mcq-hit:active { transform: none; } }
+
+.mcq-level { margin: 0 0 6px; }

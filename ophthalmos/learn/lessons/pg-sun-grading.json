@@ -1,0 +1,267 @@
+{
+  "id": "pg-sun-grading",
+  "unit": "uveitis-pg",
+  "level": "resident",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "SUN: naming and grading uveitis",
+    "hi": "SUN: यूवाइटिस का नाम और ग्रेड"
+  },
+  "idea": {
+    "en": "Describe [[uveitis]] the SUN way: where it is, how it started, how long it lasts and how active it is. Grade it by counting [[anterior-chamber]] cells in a 1 mm by 1 mm beam.",
+    "hi": "[[uveitis]] को SUN के तरीक़े से लिखें: कहाँ है, कैसे शुरू हुआ, कितने समय से है और कितना सक्रिय है। ग्रेड के लिए 1 mm x 1 mm बीम में [[anterior-chamber]] की कोशिकाएँ गिनें।"
+  },
+  "see": {
+    "diagram": "diagrams/ac-cell-grade.svg",
+    "w": 480,
+    "h": 330,
+    "alt": {
+      "en": "Six square boxes in two rows. Each box stands for a slit beam 1 mm high and 1 mm wide. The first box is empty. The next boxes hold more and more small pale dots, and the last one is crowded.",
+      "hi": "दो पंक्तियों में छह चौकोर डिब्बे। हर डिब्बा 1 mm ऊँची और 1 mm चौड़ी स्लिट बीम है। पहला डिब्बा ख़ाली है। अगले डिब्बों में छोटे हल्के बिंदु बढ़ते जाते हैं, और आख़िरी डिब्बा भरा हुआ है।"
+    },
+    "caption": {
+      "en": "Anterior chamber cells in a 1 mm by 1 mm beam, from grade 0 to 4+. Tap a box to see its cell count.",
+      "hi": "1 mm x 1 mm बीम में एंटीरियर चैंबर की कोशिकाएँ, ग्रेड 0 से 4+ तक। हर डिब्बे पर टैप करके उसकी गिनती देखें।"
+    },
+    "credit": "Original diagram, MAIKNOWLEDGE LLP.",
+    "hotspots": [
+      {
+        "x": 0.294,
+        "y": 0.418,
+        "label": {
+          "en": "Grade 0",
+          "hi": "ग्रेड 0"
+        },
+        "note": {
+          "en": "Fewer than 1 cell in the field. SUN calls this inactive.",
+          "hi": "फ़ील्ड में 1 से कम कोशिका। SUN इसे निष्क्रिय (inactive) कहता है।"
+        }
+      },
+      {
+        "x": 0.606,
+        "y": 0.418,
+        "label": {
+          "en": "Grade 0.5+",
+          "hi": "ग्रेड 0.5+"
+        },
+        "note": {
+          "en": "1 to 5 cells. This box shows 3.",
+          "hi": "1 से 5 कोशिकाएँ। इस डिब्बे में 3 हैं।"
+        }
+      },
+      {
+        "x": 0.919,
+        "y": 0.418,
+        "label": {
+          "en": "Grade 1+",
+          "hi": "ग्रेड 1+"
+        },
+        "note": {
+          "en": "6 to 15 cells. This box shows 11.",
+          "hi": "6 से 15 कोशिकाएँ। इस डिब्बे में 11 हैं।"
+        }
+      },
+      {
+        "x": 0.294,
+        "y": 0.903,
+        "label": {
+          "en": "Grade 2+",
+          "hi": "ग्रेड 2+"
+        },
+        "note": {
+          "en": "16 to 25 cells. This box shows 21.",
+          "hi": "16 से 25 कोशिकाएँ। इस डिब्बे में 21 हैं।"
+        }
+      },
+      {
+        "x": 0.606,
+        "y": 0.903,
+        "label": {
+          "en": "Grade 3+",
+          "hi": "ग्रेड 3+"
+        },
+        "note": {
+          "en": "26 to 50 cells. This box shows 38.",
+          "hi": "26 से 50 कोशिकाएँ। इस डिब्बे में 38 हैं।"
+        }
+      },
+      {
+        "x": 0.919,
+        "y": 0.903,
+        "label": {
+          "en": "Grade 4+",
+          "hi": "ग्रेड 4+"
+        },
+        "note": {
+          "en": "More than 50 cells. This box shows 72. At this level you estimate, not count.",
+          "hi": "50 से ज़्यादा कोशिकाएँ। इस डिब्बे में 72 हैं। इतनी कोशिकाओं का अंदाज़ा लगाते हैं, गिनती नहीं।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "SUN 2005 names uveitis by where the inflammation is centred. Anterior means the anterior chamber. Intermediate means the vitreous.",
+        "hi": "SUN 2005 यूवाइटिस का नाम इस पर रखता है कि सूजन मुख्य रूप से कहाँ है। एंटीरियर का मतलब एंटीरियर चैंबर। इंटरमीडिएट का मतलब विट्रियस।"
+      },
+      {
+        "en": "Posterior means the retina or choroid. Panuveitis means the anterior chamber, the vitreous and the retina or choroid, all together.",
+        "hi": "पोस्टीरियर का मतलब रेटिना या कोरॉइड। पैनयूवाइटिस का मतलब एंटीरियर चैंबर, विट्रियस और रेटिना या कोरॉइड, सब एक साथ।"
+      },
+      {
+        "en": "Onset is sudden or insidious. Duration is limited if it lasts 3 months or less, and persistent if longer.",
+        "hi": "शुरुआत अचानक (sudden) या धीरे-धीरे (insidious) होती है। 3 महीने या कम चले तो अवधि सीमित (limited) है, ज़्यादा चले तो लगातार (persistent)।"
+      },
+      {
+        "en": "Course: acute is sudden and limited. Recurrent means attacks with 3 months or more of quiet, off treatment, between them.",
+        "hi": "कोर्स: एक्यूट यानी अचानक और सीमित। रिकरेंट यानी ऐसे दौरे जिनके बीच इलाज के बिना 3 महीने या ज़्यादा शांति रहे।"
+      },
+      {
+        "en": "Chronic means the disease persists and relapses within 3 months of stopping treatment.",
+        "hi": "क्रॉनिक यानी बीमारी बनी रहती है और इलाज रोकने के 3 महीने के अंदर लौट आती है।"
+      },
+      {
+        "en": "Grade [[flare]] from 0 to 4+. 1+ is faint. 2+ is moderate, with iris and lens clear. 3+ is marked, with them hazy. 4+ is intense, with fibrin.",
+        "hi": "[[flare]] का ग्रेड 0 से 4+ तक होता है। 1+ हल्का है। 2+ मध्यम है, आइरिस और लेंस साफ़ दिखते हैं। 3+ ज़्यादा है, वे धुंधले दिखते हैं। 4+ बहुत तेज़ है, फ़ाइब्रिन के साथ।"
+      },
+      {
+        "en": "Activity: inactive means grade 0 cells. Worsening means a two-step rise in grade, or a rise from 3+ to 4+.",
+        "hi": "सक्रियता: निष्क्रिय यानी ग्रेड 0 कोशिकाएँ। बिगड़ना यानी ग्रेड में दो कदम की बढ़त, या 3+ से 4+ होना।"
+      },
+      {
+        "en": "Improved means a two-step fall, or a fall to grade 0. Remission means inactive for 3 months or more after all eye treatment stops.",
+        "hi": "सुधार यानी दो कदम की गिरावट, या ग्रेड 0 तक आना। रेमिशन यानी आँख का सारा इलाज बंद होने के बाद 3 महीने या ज़्यादा निष्क्रिय रहना।"
+      }
+    ],
+    "analogy": {
+      "en": "It is like a weather report. You say where the storm is, when it began, how long it lasts and how hard it rains. Counting cells is counting raindrops on one small window.",
+      "hi": "यह मौसम की रिपोर्ट जैसा है। आप बताते हैं कि तूफ़ान कहाँ है, कब शुरू हुआ, कितना चलेगा और बारिश कितनी तेज़ है। कोशिकाएँ गिनना एक छोटी खिड़की पर बारिश की बूँदें गिनने जैसा है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Darken the room. Use a bright beam 1 mm high and 1 mm wide at high power, aimed through the anterior chamber.",
+      "hi": "कमरे में अँधेरा करें। तेज़ बीम, 1 mm ऊँची और 1 mm चौड़ी, हाई मैग्निफ़िकेशन पर एंटीरियर चैंबर के बीच से डालें।"
+    },
+    {
+      "en": "Count the cells floating in that one field. Above 50, estimate.",
+      "hi": "उसी एक फ़ील्ड में तैरती कोशिकाएँ गिनें। 50 से ज़्यादा हों तो अंदाज़ा लगाएँ।"
+    },
+    {
+      "en": "Grade flare by how clearly you see the iris and lens through the glowing beam.",
+      "hi": "फ़्लेयर का ग्रेड इससे तय करें कि चमकती बीम के पार आइरिस और लेंस कितने साफ़ दिखते हैं।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Write each note in SUN terms. For example: left acute anterior uveitis, cells 2+, flare 1+.",
+      "hi": "हर नोट SUN के शब्दों में लिखें। जैसे: बाईं आँख, एक्यूट एंटीरियर यूवाइटिस, कोशिकाएँ 2+, फ़्लेयर 1+।"
+    },
+    {
+      "en": "Judge a treatment by a two-step change. A one-step change may be just the difference between observers.",
+      "hi": "इलाज का असर दो कदम के बदलाव से आँकें। एक कदम का बदलाव सिर्फ़ जाँचने वालों का फ़र्क़ हो सकता है।"
+    },
+    {
+      "en": "Call it remission only after 3 months of inactive disease off all eye treatment.",
+      "hi": "रेमिशन तभी कहें जब आँख का सारा इलाज बंद होने के बाद 3 महीने तक बीमारी निष्क्रिय रहे।"
+    }
+  ],
+  "remember": {
+    "en": "Site, onset, duration, course, then cells. Beam counts: under 1, 1 to 5, 6 to 15, 16 to 25, 26 to 50, over 50.",
+    "hi": "जगह, शुरुआत, अवधि, कोर्स, फिर कोशिकाएँ। बीम में गिनती: 1 से कम, 1 से 5, 6 से 15, 16 से 25, 26 से 50, 50 से ज़्यादा।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "A 1 mm by 1 mm beam shows 20 cells. What is the grade?",
+        "hi": "1 mm x 1 mm बीम में 20 कोशिकाएँ हैं। ग्रेड क्या है?"
+      },
+      "o": [
+        {
+          "en": "1+",
+          "hi": "ग्रेड 1+"
+        },
+        {
+          "en": "2+",
+          "hi": "ग्रेड 2+"
+        },
+        {
+          "en": "3+",
+          "hi": "ग्रेड 3+"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "16 to 25 cells is grade 2+.",
+        "hi": "16 से 25 कोशिकाएँ ग्रेड 2+ है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Uveitis comes back 6 weeks after treatment stops, again and again. What is the SUN course?",
+        "hi": "इलाज रोकने के 6 हफ़्ते बाद यूवाइटिस बार-बार लौट आता है। SUN के हिसाब से कोर्स क्या है?"
+      },
+      "o": [
+        {
+          "en": "Acute",
+          "hi": "एक्यूट"
+        },
+        {
+          "en": "Recurrent",
+          "hi": "रिकरेंट"
+        },
+        {
+          "en": "Chronic",
+          "hi": "क्रॉनिक"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "Relapse within 3 months of stopping treatment is chronic. Recurrent needs 3 months or more of quiet off treatment.",
+        "hi": "इलाज रोकने के 3 महीने के अंदर लौटना क्रॉनिक है। रिकरेंट के लिए इलाज के बिना 3 महीने या ज़्यादा शांति चाहिए।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which change counts as worsening activity?",
+        "hi": "कौन सा बदलाव बिगड़ती सक्रियता माना जाता है?"
+      },
+      "o": [
+        {
+          "en": "Cells 1+ to 2+",
+          "hi": "कोशिकाएँ 1+ से 2+"
+        },
+        {
+          "en": "Cells 1+ to 3+",
+          "hi": "कोशिकाएँ 1+ से 3+"
+        },
+        {
+          "en": "Cells 2+ to 1+",
+          "hi": "कोशिकाएँ 2+ से 1+"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Worsening is a two-step rise, or a rise from 3+ to 4+. A single step is not enough.",
+        "hi": "बिगड़ना यानी दो कदम की बढ़त, या 3+ से 4+ होना। एक कदम काफ़ी नहीं है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "uveitis"
+  },
+  "deeper": {
+    "note": "uveitis"
+  },
+  "glossary": [
+    "uveitis",
+    "anterior-chamber",
+    "flare"
+  ],
+  "sources": [
+    "Jabs DA, Nussenblatt RB, Rosenbaum JT; Standardization of Uveitis Nomenclature (SUN) Working Group. Standardization of uveitis nomenclature for reporting clinical data. Results of the First International Workshop. Am J Ophthalmol 2005;140(3):509-516.",
+    "Standardization of Uveitis Nomenclature (SUN) Working Group. Development of classification criteria for the uveitides. Am J Ophthalmol 2021;228:96-105."
+  ]
+}

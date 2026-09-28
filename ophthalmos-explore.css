@@ -1,0 +1,183 @@
+/* Ophthalmós Explore (ophthalmos-explore.js): five interactive explorers on the Learn tab. Same reading room:
+   black stage, the picture or the model first, controls below (beside it on a tablet in landscape), 44 px targets. */
+
+/* Learn home: the Explore section */
+.ex-home-h { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.ex-home-h .oph-h2 { margin-bottom: 10px; }
+.ex-thumb { flex: 0 0 56px; width: 56px; height: 56px; border-radius: 10px; overflow: hidden; background: var(--op-s2); }
+.ex-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ex-row .oph-clinic-b > span:not(.oph-small) { white-space: normal; }
+.ex-done { display: inline-flex; align-items: center; gap: 4px; color: var(--op-ok); font-weight: 600; }
+.ex-done .smd-ico { width: 14px; height: 14px; }
+
+/* frame */
+.ex-wrap { max-width: 1040px; margin: 0 auto; padding-top: 4px; }
+.ex-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.ex-stage, .ex-panel { min-width: 0; }
+.ex-panel { display: flex; flex-direction: column; gap: 14px; }
+.ex-seg { display: flex; flex-wrap: wrap; }
+.ex-seg button { min-height: 44px; justify-content: center; }
+.ex-seg.ex-full { width: 100%; margin-bottom: 12px; }
+.ex-seg.ex-full button { flex: 1 1 0; padding: 0 8px; }
+.ex-figwrap { margin: 0 0 12px; }
+.ex-fig { position: relative; background: #000; border-radius: 12px; overflow: hidden; }
+.ex-fig svg { display: block; width: 100%; height: auto; }
+.ex-cap { margin-top: 8px; font-size: 13px; line-height: 1.45; color: var(--op-mut); }
+.ex-cap .oph-credit { display: inline; }
+.ex-cap .oph-credit a { color: var(--op-link); text-decoration: underline; text-underline-offset: 2px; text-decoration-color: var(--op-link-line); overflow-wrap: anywhere; }
+.ex-cap .oph-credit a:focus-visible { outline: 2px solid var(--op-acc); outline-offset: 2px; border-radius: 2px; }
+.ex-load { margin: 0; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.ex-h3 { font-size: 13px; letter-spacing: 0; font-weight: 650; color: var(--op-mut); margin: 4px 0 -4px; }
+.ex-info { background: var(--op-s1); border-radius: 14px; padding: 14px 16px; }
+.ex-info h2 { margin: 0 0 6px; font-size: 19px; line-height: 1.3; font-weight: 700; letter-spacing: -0.01em; text-wrap: balance; }
+.ex-info p { margin: 0; font-size: 16px; line-height: 1.55; text-wrap: pretty; }
+.ex-info p + p { margin-top: 8px; }
+[lang="hi"] .ex-info p, [lang="hi"] .ex-explain { line-height: 1.75; }
+.ex-info .oph-small { display: block; margin-bottom: 2px; }
+.ex-info .oph-verdict { margin: 10px 0 0; }
+.ex-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ex-row2 > span:empty { display: block; }
+.ex-ctlrow { display: flex; flex-direction: column; gap: 6px; }
+.ex-ctlrow .ex-seg { align-self: stretch; }
+.ex-ctlrow .ex-seg button { flex: 1 1 0; }
+.ex-ai { display: flex; gap: 6px; align-items: flex-start; margin: 20px 0 0; }
+.ex-ai .smd-ico { width: 16px; height: 16px; margin-top: 1px; flex: 0 0 auto; }
+.ex-end { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--op-line); display: grid; gap: 10px; max-width: 34em; }
+.ex-end .ln-h { margin: 0 0 4px; }
+.ex-end .oph-small { margin: -4px 0 6px; }
+
+/* chips: wrap, 44 px, the pressed one filled */
+.ex-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.ex-chips button, .ex-sites button { min-height: 44px; padding: 0 14px; border-radius: 22px; border: 1px solid var(--op-line); background: var(--op-s1);
+  color: var(--op-text); font-size: 14px; font-weight: 600; line-height: 1.25; text-align: left;
+  transition: transform 140ms var(--op-ease), background-color 160ms ease, border-color 160ms ease; }
+.ex-chips button:active, .ex-sites button:active { transform: scale(0.97); }
+.ex-chips button[aria-pressed="true"], .ex-sites button[aria-pressed="true"] { background: var(--op-pri-fill); border-color: transparent; color: #fff; }
+
+/* 1. anatomy: the section lights the chosen part, every other part dims */
+.ex-xs { cursor: pointer; touch-action: manipulation; }
+.ex-xs:focus-visible { outline: 2px solid var(--op-acc); outline-offset: 2px; }
+.ex-xs [data-part] { transition: opacity 180ms var(--op-ease); }
+.ex-xs.sel [data-part] { opacity: .22; }
+.ex-xs.sel [data-part].on { opacity: 1; }
+.ex-xs [data-part="visual-axis"] { pointer-events: none; }
+.ex-photo { margin: 0 auto; }
+.ex-photo-img { display: block; width: 100%; height: auto; border-radius: 12px; background: #000; }
+.ex-photo .ln-hot[aria-pressed="true"] .ln-dot { background: var(--op-pri-fill); }
+.ex-quizbtn { margin-top: 2px; }
+.ex-quiz h2 { font-size: 22px; }
+.ex-keys { margin-top: 10px !important; }
+
+/* 2. focus: ray diagram, the blurred view, readouts, range controls */
+.ex-ray { background: var(--op-s1); }
+.ex-ray .ex-ball { fill: #16181c; stroke: #8e8e96; stroke-width: 1.5; }
+.ex-ray .ex-retina { fill: none; stroke: var(--op-acc); stroke-width: 3; stroke-linecap: round; }
+.ex-ray .ex-cornea { fill: none; stroke: #d8dce3; stroke-width: 2.5; }
+.ex-ray .ex-irisl { stroke: #a0724a; stroke-width: 4; stroke-linecap: round; }
+.ex-ray .ex-lensb { fill: rgba(216, 220, 227, .16); stroke: #d8dce3; stroke-width: 1.5; }
+.ex-ray .ex-rayv { fill: none; stroke: #f2f2f4; stroke-width: 1.4; stroke-opacity: .9; }
+.ex-ray .ex-rayh { fill: none; stroke: var(--op-warn); stroke-width: 1.4; stroke-dasharray: 5 4; }
+.ex-ray .ghost { stroke-opacity: .35; stroke-dasharray: 3 3; }
+.ex-ray .ex-fdot { stroke: #000; stroke-width: 1.5; }
+.ex-ray .ex-fdot.ok { fill: var(--op-ok); }
+.ex-ray .ex-fdot.off { fill: var(--op-bad); }
+.ex-ray .ex-fdot.h { fill-opacity: .85; }
+.ex-ray .ex-glass { fill: rgba(140, 198, 255, .2); stroke: var(--op-link); stroke-width: 1.5; }
+.ex-ray .ex-target { fill: #f2f2f4; }
+.ex-pic svg { max-height: 44vh; margin: 0 auto; }
+.ex-read { display: grid; gap: 8px; margin: 0 0 4px; }
+.ex-read p { margin: 0; display: flex; flex-direction: column; gap: 1px; }
+.ex-read b { font-size: 16px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.ex-explain { margin: 0; font-size: 16px; line-height: 1.6; background: var(--op-s1); border-radius: 14px; padding: 14px 16px; text-wrap: pretty; }
+.ex-ctl { display: block; }
+.ex-ctl-h { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 15px; }
+.ex-ctl-h b { font-weight: 650; }
+.ex-ctl-h output { color: var(--op-mut); font-variant-numeric: tabular-nums; }
+.ex-ctl input[type="range"] { -webkit-appearance: none; appearance: none; display: block; width: 100%; height: 44px; margin: 0; background: transparent; cursor: pointer; }
+.ex-ctl input[type="range"]:focus { outline: none; }
+.ex-ctl input[type="range"]:focus-visible { outline: 2px solid var(--op-acc); outline-offset: 2px; border-radius: 8px; }
+.ex-ctl input[type="range"]::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: var(--op-s3); }
+.ex-ctl input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; margin-top: -11px; border: 0; border-radius: 50%;
+  background: #f2f2f4; box-shadow: 0 1px 4px rgba(0, 0, 0, .6); transition: transform 140ms var(--op-ease); }
+.ex-ctl input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.08); }
+.ex-ctl input[type="range"]::-moz-range-track { height: 6px; border-radius: 3px; background: var(--op-s3); }
+.ex-ctl input[type="range"]::-moz-range-thumb { width: 28px; height: 28px; border: 0; border-radius: 50%; background: #f2f2f4; box-shadow: 0 1px 4px rgba(0, 0, 0, .6); }
+.ex-wear .smd-ico { width: 18px; height: 18px; }
+.ex-wear[aria-pressed="false"] .smd-ico { opacity: .35; }
+
+/* 3. visual pathway: two computed field charts, then the schematic with its tap spots */
+.ex-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.ex-fields figure { margin: 0; }
+.ex-fields svg { display: block; width: 100%; max-width: 180px; height: auto; margin: 0 auto; }
+.ex-fields figcaption { margin-top: 6px; text-align: center; font-size: 14px; line-height: 1.4; }
+.ex-fields figcaption b { display: block; font-weight: 650; }
+.ex-fields figcaption span { color: var(--op-mut); }
+.ex-fl { fill: rgba(255, 192, 90, .42); }
+.ex-fr { fill: rgba(59, 157, 255, .5); }
+.ex-flost { fill: #050506; stroke: #050506; stroke-width: .5; }
+.ex-frim { fill: none; stroke: #8e8e96; stroke-width: 1; }
+.ex-fx { stroke: rgba(242, 242, 244, .35); stroke-width: .6; }
+.ex-ffix { fill: #f2f2f4; }
+.ex-defect h2 { font-size: 20px; }
+.ex-key { margin: 10px 0 12px; line-height: 1.45; }
+.ex-path { background: var(--op-s1); }
+.ex-path svg { max-height: 58vh; margin: 0 auto; }
+.ex-path .ex-eye { fill: #1c1c1f; stroke: #d8dce3; stroke-width: 1.5; }
+.ex-path .ex-pb, .ex-path .ex-pa { fill: none; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+.ex-path .ex-pb { stroke: #3b9dff; }
+.ex-path .ex-pa { stroke: var(--op-warn); }
+.ex-path .ex-lgn { fill: #2c2c30; stroke: #a8a8b0; stroke-width: 1.2; }
+.ex-path .ex-cortex { fill: none; stroke: #a8a8b0; stroke-width: 6; stroke-linecap: round; }
+.ex-path .ex-lesion circle { fill: rgba(255, 105, 97, .22); stroke: var(--op-bad); stroke-width: 2; }
+.ex-path .ex-lesion path { stroke: var(--op-bad); stroke-width: 2.6; stroke-linecap: round; }
+.ex-spot { position: absolute; width: 40px; height: 40px; margin: 0; padding: 0; border: 0; background: transparent; border-radius: 50%; transform: translate(-50%, -50%); }
+.ex-spot:active { background: rgba(242, 242, 244, .12); }
+.ex-sites { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ex-sites button { border-radius: 12px; padding: 8px 12px; }
+.ex-mid { padding: 12px 0; }
+
+/* 4. pupil pathway */
+.ex-face .ex-skin { fill: #b98a6a; }
+.ex-face .ex-sclera { fill: #efe9e1; }
+.ex-face .ex-irisc { fill: #5b3c24; stroke: #3a2616; stroke-width: 1.5; }
+.ex-face .ex-pupc { fill: #050505; }
+.ex-face .ex-glint { fill: #fff; }
+.ex-face .ex-lid { fill: #b98a6a; }
+.ex-face .ex-lidm { fill: none; stroke: #6e4c38; stroke-width: 2; stroke-linecap: round; }
+.ex-face .ex-beam { fill: rgba(255, 236, 170, .38); }
+.ex-mmrow { display: grid; grid-template-columns: 1fr 1fr; margin: 0 0 12px; text-align: center; font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.ex-flow ol { list-style: none; margin: 6px 0 14px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.ex-flow li { display: flex; flex-direction: column; justify-content: center; padding: 8px 10px; border-radius: 10px; background: var(--op-s1); font-size: 13px; line-height: 1.3; border: 1px solid transparent; }
+.ex-flow li:not(:last-child)::after { content: none; }
+.ex-flow li.bad { border-color: var(--op-bad); background: rgba(255, 105, 97, .1); }
+.ex-dmg { display: inline-flex; align-items: center; gap: 4px; font-style: normal; font-weight: 700; color: var(--op-bad); margin-top: 2px; }
+.ex-dmg .smd-ico { width: 14px; height: 14px; }
+.ex-flow .ex-h3 { margin: 0; }
+
+/* 5. guided tours: a spotlight moves over the real picture */
+.ex-tour img { display: block; width: 100%; height: 100%; object-fit: fill; }
+.ex-tour svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.ex-tour .ex-dim { fill: rgba(0, 0, 0, .58); transition: opacity 240ms ease; }
+.ex-tour .ex-spotc { transition: transform 360ms cubic-bezier(0.77, 0, 0.175, 1), opacity 240ms ease; }
+.ex-tour .ex-ring { fill: none; stroke: #fff; stroke-width: 2; vector-effect: non-scaling-stroke; }
+.ex-tour.err { aspect-ratio: auto !important; background: var(--op-s1); }
+.ex-tstep h2 { font-size: 21px; }
+
+@media (hover: hover) and (pointer: fine) {
+  .ex-chips button:not([aria-pressed="true"]):hover, .ex-sites button:not([aria-pressed="true"]):hover { background: var(--op-s2); }
+  .ex-spot:hover { background: rgba(242, 242, 244, .08); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ex-tour .ex-spotc { transition: opacity 240ms ease; }
+  .ex-chips button:active, .ex-sites button:active { transform: none; }
+}
+
+/* tablet landscape: the model on the left stays in view while the controls scroll on the right */
+@media (min-width: 900px) and (orientation: landscape) {
+  #exScroll.oph-pad { padding-left: max(24px, calc((100% - 1040px) / 2)); padding-right: max(24px, calc((100% - 1040px) / 2)); }
+  .ex-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+  .ex-stage { position: sticky; top: 0; }
+  .ex-pic svg { max-height: 34vh; }
+  .ex-path svg { max-height: 46vh; }
+  .ex-fields svg { max-width: 150px; }
+}

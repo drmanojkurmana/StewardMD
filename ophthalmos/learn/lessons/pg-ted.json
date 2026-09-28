@@ -1,0 +1,274 @@
+{
+  "id": "pg-ted",
+  "unit": "orbit-pg",
+  "level": "resident",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Thyroid eye disease: activity and severity",
+    "hi": "थायरॉइड आई डिज़ीज़: एक्टिविटी और सीवेरिटी"
+  },
+  "idea": {
+    "en": "Two questions guide [[thyroid-eye-disease]]: is it active, and how severe is it? Drugs work in the active phase. Surgery waits until it is quiet.",
+    "hi": "[[thyroid-eye-disease]] में दो सवाल रास्ता दिखाते हैं: क्या यह सक्रिय है, और कितनी गंभीर है? दवाएँ सक्रिय दौर में काम करती हैं। सर्जरी बीमारी शांत होने तक रुकती है।"
+  },
+  "see": {
+    "diagram": "diagrams/pg-ted.svg",
+    "w": 480,
+    "h": 280,
+    "alt": {
+      "en": "Diagram: a CT-style slice through both orbits, seen from the front. The nose and sinus cells are in the middle. In the left orbit the four eye muscles are thin, with space around the optic nerve in the centre. In the right orbit the muscles are thick and press on the nerve, which has a red ring.",
+      "hi": "चित्र: सामने से देखा गया दोनों ऑर्बिट का CT जैसा टुकड़ा। बीच में नाक और साइनस के खाने हैं। बाएँ ऑर्बिट में चारों मांसपेशियाँ पतली हैं, और बीच में ऑप्टिक नर्व के चारों ओर जगह है। दाएँ ऑर्बिट में मांसपेशियाँ मोटी हैं और नर्व को दबा रही हैं, जिसके चारों ओर लाल घेरा है।"
+    },
+    "caption": {
+      "en": "Normal orbit (left) and thyroid eye disease (right). Swollen muscles crowd the optic nerve at the back of the orbit.",
+      "hi": "सामान्य ऑर्बिट (बाएँ) और थायरॉइड आई डिज़ीज़ (दाएँ)। सूजी मांसपेशियाँ ऑर्बिट के पिछले हिस्से में ऑप्टिक नर्व को घेर लेती हैं।"
+    },
+    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.271,
+        "y": 0.429,
+        "label": {
+          "en": "Normal optic nerve",
+          "hi": "सामान्य ऑप्टिक नर्व"
+        },
+        "note": {
+          "en": "Fat all round it. Nothing presses on it.",
+          "hi": "इसके चारों ओर चर्बी है। इस पर कुछ नहीं दबता।"
+        }
+      },
+      {
+        "x": 0.3625,
+        "y": 0.436,
+        "label": {
+          "en": "Normal medial rectus",
+          "hi": "सामान्य मीडियल रेक्टस"
+        },
+        "note": {
+          "en": "A thin muscle along the inner wall.",
+          "hi": "अंदर की दीवार के साथ एक पतली मांसपेशी।"
+        }
+      },
+      {
+        "x": 0.733,
+        "y": 0.579,
+        "label": {
+          "en": "Swollen inferior rectus",
+          "hi": "सूजी इन्फ़ीरियर रेक्टस"
+        },
+        "note": {
+          "en": "The inferior rectus is the muscle most often enlarged, then the medial. A tight inferior rectus limits upgaze.",
+          "hi": "सबसे ज़्यादा इन्फ़ीरियर रेक्टस मोटी होती है, फिर मीडियल। तनी हुई इन्फ़ीरियर रेक्टस ऊपर देखने में रुकावट डालती है।"
+        }
+      },
+      {
+        "x": 0.654,
+        "y": 0.436,
+        "label": {
+          "en": "Swollen medial rectus",
+          "hi": "सूजी मीडियल रेक्टस"
+        },
+        "note": {
+          "en": "Fat muscle bellies near the apex leave the nerve no room.",
+          "hi": "एपेक्स के पास मोटी मांसपेशियाँ नर्व के लिए जगह नहीं छोड़तीं।"
+        }
+      },
+      {
+        "x": 0.75,
+        "y": 0.4,
+        "label": {
+          "en": "Crowded optic nerve",
+          "hi": "घिरी हुई ऑप्टिक नर्व"
+        },
+        "note": {
+          "en": "This is dysthyroid optic neuropathy. It can occur with little proptosis.",
+          "hi": "यही डिसथायरॉइड ऑप्टिक न्यूरोपैथी है। यह कम प्रॉप्टोसिस में भी हो सकती है।"
+        }
+      },
+      {
+        "x": 0.546,
+        "y": 0.464,
+        "label": {
+          "en": "Ethmoid sinus",
+          "hi": "एथमॉइड साइनस"
+        },
+        "note": {
+          "en": "Decompression removes the inner wall or floor. The swollen tissue then moves into the sinus.",
+          "hi": "डीकम्प्रेशन में अंदर की दीवार या फ़र्श हटाया जाता है। फिर सूजा ऊतक साइनस में खिसक जाता है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Antibodies against the TSH receptor drive swelling of the eye muscles and fat. The eye is pushed forward.",
+        "hi": "TSH रिसेप्टर के ख़िलाफ़ बनी एंटीबॉडी आँख की मांसपेशियों और चर्बी में सूजन लाती हैं। आँख आगे धकेल दी जाती है।"
+      },
+      {
+        "en": "Activity: at the first visit, score the [[clinical-activity-score]] out of 7. A score of 3 or more means active.",
+        "hi": "एक्टिविटी: पहली बार में [[clinical-activity-score]] 7 में से गिनें। 3 या ज़्यादा अंक मतलब सक्रिय।"
+      },
+      {
+        "en": "Severity is mild, moderate-to-severe, or sight-threatening. Sight-threatening means [[dysthyroid-optic-neuropathy]] or a breaking-down cornea.",
+        "hi": "गंभीरता हल्की, मध्यम-से-गंभीर, या नज़र के लिए ख़तरनाक होती है। ख़तरनाक मतलब [[dysthyroid-optic-neuropathy]] या टूटता हुआ कॉर्निया।"
+      },
+      {
+        "en": "Everyone: stop smoking, keep thyroid levels normal, and use lubricants. In mild disease, selenium for 6 months helps where selenium is low.",
+        "hi": "हर मरीज़: धूम्रपान बंद, थायरॉइड का स्तर सामान्य, और लुब्रिकेंट ड्रॉप। हल्की बीमारी में, जहाँ सेलेनियम कम है, 6 महीने सेलेनियम मदद करता है।"
+      },
+      {
+        "en": "IV methylprednisolone 4.5 g in 12 weekly doses, plus mycophenolate, is first line for active moderate-to-severe disease. Teprotumumab is one second-line choice.",
+        "hi": "सक्रिय मध्यम-से-गंभीर बीमारी में पहली पसंद है: IV मिथाइलप्रेडनिसोलोन 4.5 g, 12 हफ़्तों में हफ़्तेवार, साथ में माइकोफ़ेनोलेट। टेप्रोटुमुमैब एक दूसरी-पंक्ति का विकल्प है।"
+      },
+      {
+        "en": "Optic neuropathy: give high-dose IV steroid at once. If there is no clear response within 2 weeks, do urgent [[orbital-decompression]].",
+        "hi": "ऑप्टिक न्यूरोपैथी: तुरंत ज़्यादा डोज़ का IV स्टेरॉयड दें। 2 हफ़्तों में साफ़ सुधार न हो, तो तुरंत [[orbital-decompression]] करें।"
+      },
+      {
+        "en": "Radioiodine can make the eyes worse. Cover it with low-dose oral prednisone, especially when risk factors are present.",
+        "hi": "रेडियोआयोडीन से आँखें और बिगड़ सकती हैं। इसके साथ कम डोज़ की प्रेडनिसोन गोली दें, ख़ासकर जब रिस्क फ़ैक्टर हों।"
+      },
+      {
+        "en": "Repair surgery waits until the disease is inactive. Do it in order: decompression, then squint, then lids.",
+        "hi": "सुधार की सर्जरी बीमारी के शांत होने तक रुकती है। क्रम से करें: पहले डीकम्प्रेशन, फिर भेंगापन, फिर पलकें।"
+      }
+    ],
+    "analogy": {
+      "en": "It is a fire, then a scar. While the fire burns, use water: steroids and other drugs. Once it is out, rebuild the house: walls, then doors, then paint.",
+      "hi": "पहले आग, फिर निशान। जब तक आग जल रही है, पानी डालें: स्टेरॉयड और दूसरी दवाएँ। आग बुझने पर घर दोबारा बनाएँ: पहले दीवारें, फिर दरवाज़े, फिर रंग।"
+    }
+  },
+  "spot": [
+    {
+      "en": "[[clinical-activity-score]] points: pain behind the eye, pain on movement, red lids, red conjunctiva, swollen lids, chemosis, swollen caruncle.",
+      "hi": "[[clinical-activity-score]] के अंक: आँख के पीछे दर्द, हिलाने पर दर्द, लाल पलकें, लाल कंजंक्टाइवा, सूजी पलकें, कीमोसिस, सूजा कैरंकल।"
+    },
+    {
+      "en": "Optic neuropathy: falling vision, poor colour vision, an [[rapd]] or a swollen disc. The eye may look quiet.",
+      "hi": "ऑप्टिक न्यूरोपैथी: गिरती नज़र, कमज़ोर रंग पहचान, [[rapd]] या सूजी डिस्क। आँख शांत भी दिख सकती है।"
+    },
+    {
+      "en": "Corneal breakdown: the lids cannot close over the cornea, and it ulcerates. This is also sight-threatening.",
+      "hi": "कॉर्निया का टूटना: पलकें कॉर्निया को ढक नहीं पातीं, और उसमें अल्सर बन जाता है। यह भी नज़र के लिए ख़तरनाक है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Check vision, colour vision and pupils at every visit, even when the eye looks quiet.",
+      "hi": "हर बार नज़र, रंग पहचान और पुतलियाँ जाँचें, तब भी जब आँख शांत दिखे।"
+    },
+    {
+      "en": "Work with the endocrinologist. Avoid both high and low thyroid levels.",
+      "hi": "एंडोक्राइनोलॉजिस्ट के साथ मिलकर काम करें। थायरॉइड का स्तर न ज़्यादा हो, न कम।"
+    },
+    {
+      "en": "Ask about smoking at every visit. Smoking makes the eye disease worse.",
+      "hi": "हर बार धूम्रपान के बारे में पूछें। धूम्रपान आँख की बीमारी को बिगाड़ता है।"
+    },
+    {
+      "en": "During IV steroids, check liver tests, sugar and blood pressure. Keep the total course under 8 g.",
+      "hi": "IV स्टेरॉयड के दौरान लिवर की जाँच, शुगर और ब्लड प्रेशर देखें। पूरे कोर्स की कुल मात्रा 8 g से कम रखें।"
+    }
+  ],
+  "remember": {
+    "en": "Active? How severe? Treat activity with drugs, the nerve as an emergency, and the scars with surgery in order.",
+    "hi": "सक्रिय है? कितनी गंभीर? सक्रियता का इलाज दवा से, नर्व का इमरजेंसी में, और बचे निशानों का सर्जरी से, क्रम में।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "At the first visit, the Clinical Activity Score is 4 out of 7. What does this mean?",
+        "hi": "पहली बार में क्लिनिकल एक्टिविटी स्कोर 7 में से 4 है। इसका क्या मतलब है?"
+      },
+      "o": [
+        {
+          "en": "Active disease",
+          "hi": "सक्रिय बीमारी"
+        },
+        {
+          "en": "Inactive disease",
+          "hi": "शांत बीमारी"
+        },
+        {
+          "en": "Optic neuropathy",
+          "hi": "ऑप्टिक न्यूरोपैथी"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "A score of 3 or more out of 7 means active. Active disease can respond to drugs.",
+        "hi": "7 में से 3 या ज़्यादा मतलब सक्रिय। सक्रिय बीमारी पर दवाएँ असर कर सकती हैं।"
+      }
+    },
+    {
+      "q": {
+        "en": "In EUGOGO 2021, what is first line for active moderate-to-severe disease?",
+        "hi": "EUGOGO 2021 में सक्रिय मध्यम-से-गंभीर बीमारी के लिए पहली पसंद क्या है?"
+      },
+      "o": [
+        {
+          "en": "Orbital radiotherapy alone",
+          "hi": "सिर्फ़ ऑर्बिटल रेडियोथेरेपी"
+        },
+        {
+          "en": "IV methylprednisolone with mycophenolate",
+          "hi": "IV मिथाइलप्रेडनिसोलोन के साथ माइकोफ़ेनोलेट"
+        },
+        {
+          "en": "Squint surgery",
+          "hi": "भेंगेपन की सर्जरी"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "The guideline advises 4.5 g of IV methylprednisolone over 12 weeks, with mycophenolate.",
+        "hi": "गाइडलाइन 12 हफ़्तों में 4.5 g IV मिथाइलप्रेडनिसोलोन, माइकोफ़ेनोलेट के साथ, की सलाह देती है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Vision stays poor with an RAPD after 2 weeks of high-dose IV steroid. What next?",
+        "hi": "ज़्यादा डोज़ के IV स्टेरॉयड के 2 हफ़्ते बाद भी नज़र कम है और RAPD है। अब क्या?"
+      },
+      "o": [
+        {
+          "en": "Urgent orbital decompression",
+          "hi": "तुरंत ऑर्बिटल डीकम्प्रेशन"
+        },
+        {
+          "en": "Selenium tablets",
+          "hi": "सेलेनियम की गोलियाँ"
+        },
+        {
+          "en": "Wait for the disease to burn out",
+          "hi": "बीमारी के अपने आप शांत होने का इंतज़ार"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Optic neuropathy that does not respond needs room made at the apex quickly.",
+        "hi": "जो ऑप्टिक न्यूरोपैथी दवा से न सुधरे, उसके लिए एपेक्स पर जल्दी जगह बनानी पड़ती है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "orbit"
+  },
+  "deeper": {
+    "note": "orbit"
+  },
+  "glossary": [
+    "thyroid-eye-disease",
+    "clinical-activity-score",
+    "dysthyroid-optic-neuropathy",
+    "orbital-decompression",
+    "rapd"
+  ],
+  "sources": [
+    "Bartalena L, Kahaly GJ, Baldeschi L, et al. The 2021 European Group on Graves' orbitopathy (EUGOGO) clinical practice guidelines for the medical management of Graves' orbitopathy. Eur J Endocrinol 2021;185(4):G43-G67. doi:10.1530/EJE-21-0479",
+    "Marcocci C, Kahaly GJ, Krassas GE, et al. Selenium and the course of mild Graves' orbitopathy. N Engl J Med 2011;364(20):1920-1931. doi:10.1056/NEJMoa1012985",
+    "Douglas RS, Kahaly GJ, Patel A, et al. Teprotumumab for the treatment of active thyroid eye disease. N Engl J Med 2020;382(4):341-352. doi:10.1056/NEJMoa1910434"
+  ]
+}

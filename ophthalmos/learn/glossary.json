@@ -1,0 +1,2676 @@
+{
+  "v": 1,
+  "review": "ai_drafted",
+  "terms": {
+    "cornea": {
+      "term": {
+        "en": "cornea",
+        "hi": "कॉर्निया (cornea)"
+      },
+      "def": {
+        "en": "The clear dome at the front of the eye. It does most of the focusing.",
+        "hi": "आँख के सामने का साफ़, पारदर्शी गुंबद। रोशनी को फ़ोकस करने का सबसे ज़्यादा काम यही करता है।"
+      }
+    },
+    "iris": {
+      "term": {
+        "en": "iris",
+        "hi": "आइरिस (iris)"
+      },
+      "def": {
+        "en": "The coloured ring of muscle behind the cornea. It controls how much light gets in.",
+        "hi": "कॉर्निया के पीछे का रंगीन, मांसपेशी वाला घेरा। यह तय करता है कि कितनी रोशनी अंदर जाए।"
+      }
+    },
+    "pupil": {
+      "term": {
+        "en": "pupil",
+        "hi": "पुतली (pupil)"
+      },
+      "def": {
+        "en": "The round opening in the centre of the iris. It looks black because the eye is dark inside.",
+        "hi": "आइरिस के बीच का गोल छेद। आँख अंदर से अँधेरी होती है, इसलिए यह काला दिखता है।"
+      }
+    },
+    "lens": {
+      "term": {
+        "en": "lens",
+        "hi": "लेंस (lens)"
+      },
+      "def": {
+        "en": "The clear, flexible disc behind the iris. It changes shape to focus on near or far things.",
+        "hi": "आइरिस के पीछे साफ़, लचीली चकती। पास या दूर की चीज़ पर फ़ोकस करने के लिए यह अपना आकार बदलती है।"
+      }
+    },
+    "vitreous": {
+      "term": {
+        "en": "vitreous",
+        "hi": "विट्रियस (vitreous)"
+      },
+      "def": {
+        "en": "The clear jelly that fills the eye behind the lens.",
+        "hi": "लेंस के पीछे आँख को भरने वाली साफ़ जेली।"
+      }
+    },
+    "retina": {
+      "term": {
+        "en": "retina",
+        "hi": "रेटिना (retina)"
+      },
+      "def": {
+        "en": "The thin layer of nerve tissue lining the back of the eye. It turns light into nerve signals.",
+        "hi": "आँख के पीछे अंदर की ओर बिछी नसों की पतली परत। यह रोशनी को नसों के संकेत में बदलती है।"
+      }
+    },
+    "macula": {
+      "term": {
+        "en": "macula",
+        "hi": "मैक्युला (macula)"
+      },
+      "def": {
+        "en": "The small central area of the retina, about 5 mm wide. It gives sharp detail and colour.",
+        "hi": "रेटिना का छोटा, बीच वाला हिस्सा, लगभग 5 मिमी चौड़ा। बारीक चीज़ें और रंग यही दिखाता है।"
+      }
+    },
+    "fovea": {
+      "term": {
+        "en": "fovea",
+        "hi": "फ़ोविया (fovea)"
+      },
+      "def": {
+        "en": "The tiny pit in the centre of the macula. It holds only cones, so it sees the sharpest.",
+        "hi": "मैक्युला के ठीक बीच का छोटा गड्ढा। यहाँ सिर्फ़ कोन कोशिकाएँ होती हैं, इसलिए सबसे साफ़ यहीं दिखता है।"
+      }
+    },
+    "optic-disc": {
+      "term": {
+        "en": "optic disc",
+        "hi": "ऑप्टिक डिस्क (optic disc)"
+      },
+      "def": {
+        "en": "The pale oval where the optic nerve leaves the eye. It has no light cells, so it is the blind spot.",
+        "hi": "वह हल्के रंग का अंडाकार हिस्सा जहाँ से ऑप्टिक नर्व आँख से निकलती है। यहाँ रोशनी पकड़ने वाली कोशिकाएँ नहीं होतीं, इसलिए यही ब्लाइंड स्पॉट है।"
+      }
+    },
+    "optic-nerve": {
+      "term": {
+        "en": "optic nerve",
+        "hi": "ऑप्टिक नर्व (optic nerve)"
+      },
+      "def": {
+        "en": "The cable of about a million nerve fibres that carries signals from the eye to the brain.",
+        "hi": "लगभग दस लाख नस-तंतुओं का केबल, जो आँख से दिमाग तक संकेत ले जाता है।"
+      }
+    },
+    "choroid": {
+      "term": {
+        "en": "choroid",
+        "hi": "कोरॉइड (choroid)"
+      },
+      "def": {
+        "en": "The layer of blood vessels between the retina and the sclera. It feeds the outer retina.",
+        "hi": "रेटिना और स्क्लेरा के बीच खून की नलियों की परत। यह रेटिना की बाहरी परतों को पोषण देती है।"
+      }
+    },
+    "sclera": {
+      "term": {
+        "en": "sclera",
+        "hi": "स्क्लेरा (sclera)"
+      },
+      "def": {
+        "en": "The tough white outer coat of the eye. It keeps the eye's shape.",
+        "hi": "आँख की मज़बूत, सफ़ेद बाहरी परत। यह आँख का आकार बनाए रखती है।"
+      }
+    },
+    "photoreceptor": {
+      "term": {
+        "en": "photoreceptor",
+        "hi": "फ़ोटोरिसेप्टर (photoreceptor)"
+      },
+      "def": {
+        "en": "A light-sensing cell in the retina. There are two kinds: rods and cones.",
+        "hi": "रेटिना की रोशनी पकड़ने वाली कोशिका। ये दो तरह की होती हैं: रॉड और कोन।"
+      }
+    },
+    "rod": {
+      "term": {
+        "en": "rod",
+        "hi": "रॉड कोशिका (rod)"
+      },
+      "def": {
+        "en": "A photoreceptor that works in dim light. It does not see colour.",
+        "hi": "कम रोशनी में काम करने वाली फ़ोटोरिसेप्टर कोशिका। यह रंग नहीं पहचानती।"
+      }
+    },
+    "cone": {
+      "term": {
+        "en": "cone",
+        "hi": "कोन कोशिका (cone)"
+      },
+      "def": {
+        "en": "A photoreceptor that works in bright light. It sees colour and fine detail.",
+        "hi": "तेज़ रोशनी में काम करने वाली फ़ोटोरिसेप्टर कोशिका। यह रंग और बारीक चीज़ें पहचानती है।"
+      }
+    },
+    "rpe": {
+      "term": {
+        "en": "retinal pigment epithelium (RPE)",
+        "hi": "रेटिनल पिगमेंट एपिथीलियम (RPE)"
+      },
+      "def": {
+        "en": "A single layer of dark cells under the photoreceptors. It feeds them and clears their waste.",
+        "hi": "फ़ोटोरिसेप्टर के नीचे गहरे रंग की कोशिकाओं की एक परत। यह उन्हें पोषण देती है और उनका कचरा साफ़ करती है।"
+      }
+    },
+    "ganglion-cell": {
+      "term": {
+        "en": "ganglion cell",
+        "hi": "गैंग्लियन कोशिका (ganglion cell)"
+      },
+      "def": {
+        "en": "A nerve cell in the inner retina. Its long fibre runs to the disc and forms the optic nerve.",
+        "hi": "रेटिना की अंदरूनी परत की नस-कोशिका। इसका लंबा तंतु डिस्क तक जाकर ऑप्टिक नर्व बनाता है।"
+      }
+    },
+    "nerve-fibre-layer": {
+      "term": {
+        "en": "nerve fibre layer",
+        "hi": "नर्व फ़ाइबर लेयर (nerve fibre layer)"
+      },
+      "def": {
+        "en": "The innermost layer of the retina. It is made of ganglion cell fibres on their way to the disc.",
+        "hi": "रेटिना की सबसे अंदर की परत। यह डिस्क की ओर जाते गैंग्लियन कोशिकाओं के तंतुओं से बनती है।"
+      }
+    },
+    "fundus": {
+      "term": {
+        "en": "fundus",
+        "hi": "फ़ंडस (fundus)"
+      },
+      "def": {
+        "en": "The inside back of the eye, seen through the pupil: retina, disc, macula and vessels.",
+        "hi": "पुतली से दिखने वाला आँख का अंदरूनी पिछला हिस्सा: रेटिना, डिस्क, मैक्युला और खून की नलियाँ।"
+      }
+    },
+    "fundus-photo": {
+      "term": {
+        "en": "fundus photo",
+        "hi": "फ़ंडस फ़ोटो (fundus photo)"
+      },
+      "def": {
+        "en": "A colour photo of the back of the eye, taken with a special camera.",
+        "hi": "एक ख़ास कैमरे से ली गई आँख के पिछले हिस्से की रंगीन फ़ोटो।"
+      }
+    },
+    "oct": {
+      "term": {
+        "en": "OCT scan",
+        "hi": "OCT स्कैन (optical coherence tomography)"
+      },
+      "def": {
+        "en": "Optical coherence tomography. It uses light, not X-rays, to show the retina in cross-section, like a slice of cake.",
+        "hi": "ऑप्टिकल कोहेरेंस टोमोग्राफ़ी। यह एक्स-रे नहीं, रोशनी से रेटिना का आड़ा कटा हिस्सा दिखाती है, जैसे केक का एक टुकड़ा।"
+      }
+    },
+    "capillary": {
+      "term": {
+        "en": "capillary",
+        "hi": "कैपिलरी (capillary)"
+      },
+      "def": {
+        "en": "The tiniest blood vessel. Its wall is one cell thick, so oxygen and food pass through it.",
+        "hi": "सबसे बारीक खून की नली। इसकी दीवार एक ही कोशिका जितनी पतली होती है, इसलिए ऑक्सीजन और पोषण इसके पार जाते हैं।"
+      }
+    },
+    "artery": {
+      "term": {
+        "en": "artery",
+        "hi": "धमनी (artery)"
+      },
+      "def": {
+        "en": "A vessel that brings blood in. Retinal arteries look thinner and lighter red than veins.",
+        "hi": "खून अंदर लाने वाली नली। रेटिना की धमनियाँ नसों से पतली और हल्के लाल रंग की दिखती हैं।"
+      }
+    },
+    "vein": {
+      "term": {
+        "en": "vein",
+        "hi": "शिरा (vein)"
+      },
+      "def": {
+        "en": "A vessel that takes blood away. Retinal veins look wider and darker than arteries.",
+        "hi": "खून वापस ले जाने वाली नली। रेटिना की शिराएँ धमनियों से चौड़ी और गहरे रंग की दिखती हैं।"
+      }
+    },
+    "arcades": {
+      "term": {
+        "en": "vascular arcades",
+        "hi": "वैस्कुलर आर्केड (vascular arcades)"
+      },
+      "def": {
+        "en": "The big vessels that curve above and below the macula, like two arches.",
+        "hi": "मैक्युला के ऊपर और नीचे मेहराब की तरह घूमने वाली बड़ी खून की नलियाँ।"
+      }
+    },
+    "cup": {
+      "term": {
+        "en": "cup",
+        "hi": "कप (cup)"
+      },
+      "def": {
+        "en": "The pale central hollow of the optic disc. The pink ring around it is the rim.",
+        "hi": "ऑप्टिक डिस्क के बीच का हल्के रंग का गड्ढा। इसके चारों ओर का गुलाबी घेरा रिम कहलाता है।"
+      }
+    },
+    "diabetes": {
+      "term": {
+        "en": "diabetes",
+        "hi": "मधुमेह (diabetes)"
+      },
+      "def": {
+        "en": "Diabetes mellitus: a long-term illness with high blood sugar.",
+        "hi": "डायबिटीज़ मेलिटस: लंबे समय तक चलने वाली बीमारी जिसमें खून में शुगर ज़्यादा रहती है।"
+      }
+    },
+    "diabetic-retinopathy": {
+      "term": {
+        "en": "diabetic retinopathy",
+        "hi": "मधुमेह रेटिनोपैथी (diabetic retinopathy)"
+      },
+      "def": {
+        "en": "Damage to the small vessels of the retina caused by diabetes.",
+        "hi": "मधुमेह की वजह से रेटिना की छोटी खून की नलियों को होने वाला नुकसान।"
+      }
+    },
+    "microaneurysm": {
+      "term": {
+        "en": "microaneurysm",
+        "hi": "माइक्रोएन्यूरिज़्म (microaneurysm)"
+      },
+      "def": {
+        "en": "A tiny bulge in a weak capillary wall. It is the smallest red dot and the first sign of diabetic retinopathy.",
+        "hi": "कमज़ोर कैपिलरी की दीवार में छोटा सा उभार। यह सबसे छोटा लाल बिंदु है और मधुमेह रेटिनोपैथी का पहला संकेत है।"
+      }
+    },
+    "haemorrhage": {
+      "term": {
+        "en": "haemorrhage",
+        "hi": "हेमरेज (haemorrhage)"
+      },
+      "def": {
+        "en": "Bleeding. In the retina it shows as red dots, blots or flame shapes.",
+        "hi": "खून बहना। रेटिना में यह लाल बिंदु, धब्बे या लौ के आकार में दिखता है।"
+      }
+    },
+    "hard-exudate": {
+      "term": {
+        "en": "hard exudate",
+        "hi": "हार्ड एक्सुडेट (hard exudate)"
+      },
+      "def": {
+        "en": "A yellow, waxy deposit with sharp edges. It is fat left behind when leaked fluid dries up.",
+        "hi": "तीखे किनारों वाला पीला, मोम जैसा जमाव। यह रिसे हुए तरल के सूखने के बाद बची चर्बी है।"
+      }
+    },
+    "cotton-wool-spot": {
+      "term": {
+        "en": "cotton wool spot",
+        "hi": "कॉटन वूल स्पॉट (cotton wool spot)"
+      },
+      "def": {
+        "en": "A soft, pale, fluffy patch. It marks a tiny area of nerve fibres that lost its blood supply.",
+        "hi": "रुई जैसा मुलायम, हल्के रंग का धब्बा। यह नस-तंतुओं के उस छोटे हिस्से को दिखाता है जिसकी खून की सप्लाई रुक गई।"
+      }
+    },
+    "new-vessels": {
+      "term": {
+        "en": "new vessels",
+        "hi": "नई खून की नलियाँ (new vessels)"
+      },
+      "def": {
+        "en": "Fragile, abnormal vessels that grow when the retina is short of oxygen. They bleed easily. The medical word is neovascularisation.",
+        "hi": "कमज़ोर, असामान्य नलियाँ जो रेटिना में ऑक्सीजन की कमी होने पर उगती हैं। ये आसानी से फट जाती हैं। डॉक्टरी शब्द: नियोवैस्कुलराइज़ेशन (neovascularisation)।"
+      }
+    },
+    "ischaemia": {
+      "term": {
+        "en": "ischaemia",
+        "hi": "इस्कीमिया (ischaemia)"
+      },
+      "def": {
+        "en": "Too little blood flow, so the tissue is short of oxygen.",
+        "hi": "खून का बहाव कम होना, जिससे ऊतक (tissue) को ऑक्सीजन कम मिलती है।"
+      }
+    },
+    "npdr": {
+      "term": {
+        "en": "non-proliferative diabetic retinopathy (NPDR)",
+        "hi": "नॉन-प्रोलिफ़ेरेटिव डायबिटिक रेटिनोपैथी (NPDR)"
+      },
+      "def": {
+        "en": "Diabetic retinopathy without new vessels. It is graded mild, moderate or severe.",
+        "hi": "बिना नई नलियों वाली मधुमेह रेटिनोपैथी। इसे माइल्ड, मॉडरेट या सीवियर में बाँटा जाता है।"
+      }
+    },
+    "pdr": {
+      "term": {
+        "en": "proliferative diabetic retinopathy (PDR)",
+        "hi": "प्रोलिफ़ेरेटिव डायबिटिक रेटिनोपैथी (PDR)"
+      },
+      "def": {
+        "en": "The late stage: new vessels have grown, or blood has leaked into the vitreous or in front of the retina.",
+        "hi": "आख़िरी चरण: नई नलियाँ उग आई हैं, या खून विट्रियस में या रेटिना के सामने आ गया है।"
+      }
+    },
+    "icdr": {
+      "term": {
+        "en": "ICDR scale",
+        "hi": "ICDR स्केल (International Clinical Diabetic Retinopathy scale)"
+      },
+      "def": {
+        "en": "The International Clinical Diabetic Retinopathy scale. It sorts an eye into 5 grades, from none to proliferative.",
+        "hi": "इंटरनेशनल क्लिनिकल डायबिटिक रेटिनोपैथी स्केल। यह आँख को 5 ग्रेड में बाँटता है: कोई रेटिनोपैथी नहीं से लेकर प्रोलिफ़ेरेटिव तक।"
+      }
+    },
+    "quadrant": {
+      "term": {
+        "en": "quadrant",
+        "hi": "क्वाड्रेंट (quadrant)"
+      },
+      "def": {
+        "en": "One of four quarters of the retina, split by a vertical and a horizontal line.",
+        "hi": "रेटिना के चार हिस्सों में से एक, जिन्हें एक खड़ी और एक आड़ी रेखा बाँटती है।"
+      }
+    },
+    "venous-beading": {
+      "term": {
+        "en": "venous beading",
+        "hi": "वीनस बीडिंग (venous beading)"
+      },
+      "def": {
+        "en": "A vein that swells and narrows in turn, like a string of beads. It signals severe oxygen shortage.",
+        "hi": "ऐसी शिरा जो बारी-बारी से फूलती और पतली होती है, जैसे मोतियों की माला। यह ऑक्सीजन की भारी कमी का संकेत है।"
+      }
+    },
+    "irma": {
+      "term": {
+        "en": "IRMA",
+        "hi": "IRMA (रेटिना के अंदर की असामान्य बारीक नलियाँ)"
+      },
+      "def": {
+        "en": "Intraretinal microvascular abnormality: twisted small vessels inside the retina, next to closed capillaries. They are not yet new vessels.",
+        "hi": "इंट्रारेटिनल माइक्रोवैस्कुलर एब्नॉर्मैलिटी: बंद कैपिलरी के पास रेटिना के अंदर मुड़ी-तुड़ी छोटी नलियाँ। ये अभी नई नलियाँ नहीं हैं।"
+      }
+    },
+    "vegf": {
+      "term": {
+        "en": "VEGF",
+        "hi": "VEGF (नई नलियाँ उगाने वाला संकेत)"
+      },
+      "def": {
+        "en": "Vascular endothelial growth factor. The oxygen-starved retina releases it. It makes vessels leak and new vessels grow.",
+        "hi": "वैस्कुलर एंडोथीलियल ग्रोथ फ़ैक्टर। ऑक्सीजन की कमी वाला रेटिना इसे छोड़ता है। इससे नलियाँ रिसती हैं और नई नलियाँ उगती हैं।"
+      }
+    },
+    "anti-vegf": {
+      "term": {
+        "en": "anti-VEGF injection",
+        "hi": "एंटी-VEGF इंजेक्शन (anti-VEGF)"
+      },
+      "def": {
+        "en": "A medicine injected into the eye that blocks VEGF. It dries leaks and shrinks new vessels.",
+        "hi": "आँख में लगाई जाने वाली दवा जो VEGF को रोकती है। इससे रिसाव सूखता है और नई नलियाँ सिकुड़ती हैं।"
+      }
+    },
+    "prp": {
+      "term": {
+        "en": "panretinal laser (PRP)",
+        "hi": "पैनरेटिनल लेज़र (PRP)"
+      },
+      "def": {
+        "en": "Panretinal photocoagulation: many small laser burns on the outer retina. The starved retina needs less oxygen, so new vessels shrink.",
+        "hi": "पैनरेटिनल फ़ोटोकोएगुलेशन: रेटिना के बाहरी हिस्से पर लेज़र के कई छोटे निशान। इससे भूखे रेटिना की ऑक्सीजन की ज़रूरत घटती है और नई नलियाँ सिकुड़ती हैं।"
+      }
+    },
+    "oedema": {
+      "term": {
+        "en": "oedema",
+        "hi": "सूजन (oedema)"
+      },
+      "def": {
+        "en": "Swelling caused by fluid building up in a tissue.",
+        "hi": "ऊतक में तरल जमा होने से आई सूजन।"
+      }
+    },
+    "dme": {
+      "term": {
+        "en": "diabetic macular oedema (DME)",
+        "hi": "डायबिटिक मैक्युलर ईडिमा (DME)"
+      },
+      "def": {
+        "en": "Swelling of the macula from fluid that leaks out of damaged vessels in diabetes.",
+        "hi": "मधुमेह में ख़राब नलियों से रिसे तरल के कारण मैक्युला में सूजन।"
+      }
+    },
+    "centre-involving": {
+      "term": {
+        "en": "centre-involving",
+        "hi": "सेंटर-इन्वॉल्विंग (centre-involving)"
+      },
+      "def": {
+        "en": "Oedema that reaches the central 1 mm of the macula. This type most often blurs vision.",
+        "hi": "ऐसी सूजन जो मैक्युला के बीच के 1 मिमी तक पहुँच जाए। इसी से अक्सर नज़र धुंधली होती है।"
+      }
+    },
+    "ophthalmologist": {
+      "term": {
+        "en": "ophthalmologist",
+        "hi": "नेत्र रोग विशेषज्ञ (ophthalmologist)"
+      },
+      "def": {
+        "en": "A medical doctor who treats eye diseases and does eye surgery.",
+        "hi": "आँखों की बीमारियों का इलाज और ऑपरेशन करने वाले डॉक्टर।"
+      }
+    },
+    "amd": {
+      "term": {
+        "en": "age-related macular degeneration (AMD)",
+        "hi": "एज-रिलेटेड मैक्युलर डिजनरेशन (AMD)"
+      },
+      "def": {
+        "en": "Wear and damage of the macula in people over 50. It blurs central vision.",
+        "hi": "50 साल से ऊपर के लोगों में मैक्युला का घिसना और ख़राब होना। इससे बीच की नज़र धुंधली होती है।"
+      }
+    },
+    "drusen": {
+      "term": {
+        "en": "drusen",
+        "hi": "ड्रूज़न (drusen)"
+      },
+      "def": {
+        "en": "Small yellow deposits under the RPE. They are the mark of dry AMD.",
+        "hi": "RPE के नीचे छोटे पीले जमाव। ये ड्राई AMD की पहचान हैं।"
+      }
+    },
+    "dry-amd": {
+      "term": {
+        "en": "dry AMD",
+        "hi": "ड्राई AMD (dry AMD)"
+      },
+      "def": {
+        "en": "The slow type of AMD, with drusen and gradual thinning of the macula.",
+        "hi": "AMD का धीमा प्रकार, जिसमें ड्रूज़न होते हैं और मैक्युला धीरे-धीरे पतला होता है।"
+      }
+    },
+    "wet-amd": {
+      "term": {
+        "en": "wet AMD",
+        "hi": "वेट AMD (wet AMD)"
+      },
+      "def": {
+        "en": "The fast type of AMD. New vessels under the macula leak fluid or blood. It needs quick treatment.",
+        "hi": "AMD का तेज़ प्रकार। मैक्युला के नीचे नई नलियाँ तरल या खून रिसाती हैं। इसका जल्दी इलाज ज़रूरी है।"
+      }
+    },
+    "amsler-grid": {
+      "term": {
+        "en": "Amsler grid",
+        "hi": "एम्सलर ग्रिड (Amsler grid)"
+      },
+      "def": {
+        "en": "A square of straight lines with a dot in the centre. Wavy or missing lines warn of macula trouble.",
+        "hi": "सीधी रेखाओं का एक चौकोर जाल, बीच में एक बिंदु। रेखाएँ टेढ़ी या ग़ायब दिखें तो मैक्युला में गड़बड़ी का संकेत है।"
+      }
+    },
+    "intraretinal-fluid": {
+      "term": {
+        "en": "intraretinal fluid",
+        "hi": "इंट्रारेटिनल फ़्लूइड (intraretinal fluid)"
+      },
+      "def": {
+        "en": "Fluid pockets, or cysts, inside the layers of the retina. On OCT they look dark.",
+        "hi": "रेटिना की परतों के अंदर तरल की थैलियाँ या सिस्ट। OCT पर ये काली दिखती हैं।"
+      }
+    },
+    "subretinal-fluid": {
+      "term": {
+        "en": "subretinal fluid",
+        "hi": "सबरेटिनल फ़्लूइड (subretinal fluid)"
+      },
+      "def": {
+        "en": "Fluid collected under the retina, between the retina and the RPE.",
+        "hi": "रेटिना के नीचे, रेटिना और RPE के बीच जमा तरल।"
+      }
+    },
+    "cst": {
+      "term": {
+        "en": "central subfield thickness (CST)",
+        "hi": "सेंट्रल सबफ़ील्ड थिकनेस (CST)"
+      },
+      "def": {
+        "en": "The OCT machine's average retinal thickness in the central 1 mm of the macula.",
+        "hi": "मैक्युला के बीच के 1 मिमी में रेटिना की औसत मोटाई, जो OCT मशीन नापती है।"
+      }
+    },
+    "steroid-implant": {
+      "term": {
+        "en": "steroid implant",
+        "hi": "स्टेरॉयड इम्प्लांट (steroid implant)"
+      },
+      "def": {
+        "en": "A tiny slow-release steroid pellet placed in the vitreous. It can raise eye pressure and speed up cataract.",
+        "hi": "विट्रियस में रखी जाने वाली छोटी स्टेरॉयड गोली जो धीरे-धीरे दवा छोड़ती है। इससे आँख का दबाव बढ़ सकता है और मोतियाबिंद जल्दी बन सकता है।"
+      }
+    },
+    "rvo": {
+      "term": {
+        "en": "retinal vein occlusion (RVO)",
+        "hi": "रेटिनल वेन ऑक्लूज़न (RVO)"
+      },
+      "def": {
+        "en": "A blocked retinal vein. A branch vein block is BRVO; a central vein block is CRVO.",
+        "hi": "रेटिना की शिरा का बंद होना। शाखा वाली शिरा बंद हो तो BRVO; मुख्य (सेंट्रल) शिरा बंद हो तो CRVO।"
+      }
+    },
+    "rapd": {
+      "term": {
+        "en": "RAPD",
+        "hi": "RAPD (रिलेटिव एफ़ेरेंट प्यूपिलरी डिफ़ेक्ट)"
+      },
+      "def": {
+        "en": "Relative afferent pupillary defect. In the swinging torch test, the pupils dilate when the light moves to the damaged eye.",
+        "hi": "रिलेटिव एफ़ेरेंट प्यूपिलरी डिफ़ेक्ट। टॉर्च को एक आँख से दूसरी पर घुमाने पर, ख़राब आँख पर रोशनी आते ही पुतलियाँ फैल जाती हैं।"
+      }
+    },
+    "neovascular-glaucoma": {
+      "term": {
+        "en": "neovascular glaucoma",
+        "hi": "नियोवैस्कुलर ग्लूकोमा (neovascular glaucoma)"
+      },
+      "def": {
+        "en": "High eye pressure caused by new vessels that block the eye's drainage angle. It is painful and hard to treat.",
+        "hi": "आँख के पानी निकलने वाले कोने (angle) को नई नलियाँ बंद कर दें तो आँख का दबाव बढ़ जाता है। यह दर्दनाक होता है और इसका इलाज मुश्किल है।"
+      }
+    },
+    "hyperreflective-foci": {
+      "term": {
+        "en": "hyperreflective foci",
+        "hi": "हाइपररिफ़्लेक्टिव फ़ोसाई (hyperreflective foci)"
+      },
+      "def": {
+        "en": "Small bright dots inside the retina on OCT. They may be lipid or inflammatory cells.",
+        "hi": "OCT पर रेटिना के अंदर छोटे चमकीले बिंदु। ये चर्बी या सूजन वाली कोशिकाएँ हो सकती हैं।"
+      }
+    },
+    "dril": {
+      "term": {
+        "en": "DRIL",
+        "hi": "DRIL (रेटिना की अंदरूनी परतों का बिखरना)"
+      },
+      "def": {
+        "en": "Disorganisation of the retinal inner layers: on OCT the inner layer borders cannot be told apart. It predicts poorer vision.",
+        "hi": "रेटिना की अंदरूनी परतों का बिखर जाना: OCT पर इन परतों की सीमाएँ अलग नहीं दिखतीं। इससे नज़र कम सुधरने का अंदाज़ा मिलता है।"
+      }
+    },
+    "ellipsoid-zone": {
+      "term": {
+        "en": "ellipsoid zone",
+        "hi": "एलिप्सॉइड ज़ोन (ellipsoid zone)"
+      },
+      "def": {
+        "en": "A bright line in the outer retina on OCT. When it is whole, the photoreceptors are healthy.",
+        "hi": "OCT पर रेटिना की बाहरी परत में एक चमकीली रेखा। यह पूरी हो तो फ़ोटोरिसेप्टर ठीक हैं।"
+      }
+    },
+    "myopia": {
+      "term": {
+        "en": "short sight (myopia)",
+        "hi": "निकट दृष्टि (myopia)"
+      },
+      "def": {
+        "en": "Far things look blurred because light focuses in front of the retina.",
+        "hi": "दूर की चीज़ें धुंधली दिखती हैं, क्योंकि रोशनी रेटिना से पहले ही फ़ोकस हो जाती है।"
+      }
+    },
+    "screening": {
+      "term": {
+        "en": "screening",
+        "hi": "स्क्रीनिंग (screening)"
+      },
+      "def": {
+        "en": "Checking people who have no symptoms, to find disease early.",
+        "hi": "जिन लोगों में कोई लक्षण नहीं हैं, उनकी जाँच करना ताकि बीमारी जल्दी पकड़ में आए।"
+      }
+    },
+    "dilating-drops": {
+      "term": {
+        "en": "dilating drops",
+        "hi": "पुतली फैलाने वाली दवा (dilating drops)"
+      },
+      "def": {
+        "en": "Eye drops that widen the pupil for a full view of the retina. Vision stays blurred for a few hours, so the patient should not drive.",
+        "hi": "आँख की बूँदें जो पुतली को फैलाती हैं ताकि पूरा रेटिना दिखे। कुछ घंटे नज़र धुंधली रहती है, इसलिए मरीज़ को गाड़ी नहीं चलानी चाहिए।"
+      }
+    },
+    "vitreous-haemorrhage": {
+      "term": {
+        "en": "vitreous haemorrhage",
+        "hi": "विट्रियस हेमरेज (vitreous haemorrhage)"
+      },
+      "def": {
+        "en": "Bleeding into the vitreous jelly. It causes sudden floaters or dark, cloudy vision.",
+        "hi": "विट्रियस जेली में खून आ जाना। इससे अचानक तैरते धब्बे दिखते हैं या नज़र काली-धुंधली हो जाती है।"
+      }
+    },
+    "uveitis": {
+      "term": {
+        "en": "uveitis",
+        "hi": "यूवाइटिस (uveitis)"
+      },
+      "def": {
+        "en": "Inflammation inside the eye, in the uvea and nearby parts. It can cause pain, redness and blurred vision.",
+        "hi": "आँख के अंदर सूजन, यूविया और आसपास के हिस्सों में। इससे दर्द, लाली और धुंधला दिखना हो सकता है।"
+      }
+    },
+    "anterior-chamber": {
+      "term": {
+        "en": "anterior chamber",
+        "hi": "एंटीरियर चैंबर (anterior chamber)"
+      },
+      "def": {
+        "en": "The fluid-filled space between the cornea and the iris.",
+        "hi": "कॉर्निया और आइरिस के बीच की, तरल से भरी जगह।"
+      }
+    },
+    "flare": {
+      "term": {
+        "en": "flare",
+        "hi": "फ़्लेयर (flare)"
+      },
+      "def": {
+        "en": "A hazy glow in the slit beam as it crosses the anterior chamber. Protein has leaked into the fluid, like dust in a sunbeam.",
+        "hi": "स्लिट बीम एंटीरियर चैंबर से गुज़रे तो धुंधली चमक दिखती है। तरल में प्रोटीन रिस गया है, जैसे धूप की किरण में धूल।"
+      }
+    },
+    "posterior-synechiae": {
+      "term": {
+        "en": "posterior synechiae",
+        "hi": "पोस्टीरियर साइनेकी (posterior synechiae)"
+      },
+      "def": {
+        "en": "Spots where the iris sticks to the lens. The pupil then widens unevenly and looks notched.",
+        "hi": "वे जगहें जहाँ आइरिस लेंस से चिपक जाती है। तब पुतली असमान फैलती है और कटी-फटी दिखती है।"
+      }
+    },
+    "hypopyon": {
+      "term": {
+        "en": "hypopyon",
+        "hi": "हाइपोपियॉन (hypopyon)"
+      },
+      "def": {
+        "en": "A pale layer of white cells that settles at the bottom of the anterior chamber.",
+        "hi": "सफ़ेद कोशिकाओं की हल्की परत, जो एंटीरियर चैंबर के नीचे बैठ जाती है।"
+      }
+    },
+    "cycloplegic": {
+      "term": {
+        "en": "cycloplegic drops",
+        "hi": "साइक्लोप्लेजिक ड्रॉप्स (cycloplegic)"
+      },
+      "def": {
+        "en": "Drops that relax the focusing muscle and widen the pupil. In uveitis they ease pain and stop the iris sticking to the lens.",
+        "hi": "ड्रॉप्स जो फ़ोकस करने वाली मांसपेशी को ढीला करती हैं और पुतली फैलाती हैं। यूवाइटिस में ये दर्द घटाती हैं और आइरिस को लेंस से चिपकने से रोकती हैं।"
+      }
+    },
+    "steroid-response": {
+      "term": {
+        "en": "steroid response",
+        "hi": "स्टेरॉयड रिस्पॉन्स (steroid response)"
+      },
+      "def": {
+        "en": "A rise in eye pressure caused by steroid treatment. It is common and needs regular pressure checks.",
+        "hi": "स्टेरॉयड इलाज से आँख का दबाव बढ़ना। यह आम है, इसलिए दबाव बार-बार जाँचना ज़रूरी है।"
+      }
+    },
+    "cystoid-macular-oedema": {
+      "term": {
+        "en": "cystoid macular oedema (CMO)",
+        "hi": "सिस्टॉइड मैक्युलर ईडिमा (CMO)"
+      },
+      "def": {
+        "en": "Fluid pockets in the macula, like a honeycomb. It is the commonest cause of lasting vision loss in uveitis. It can also blur sight weeks after cataract surgery.",
+        "hi": "मैक्युला में मधुमक्खी के छत्ते जैसी तरल की थैलियाँ। यूवाइटिस में लंबे समय तक नज़र घटने का यह सबसे आम कारण है। मोतियाबिंद ऑपरेशन के हफ़्तों बाद भी इससे नज़र धुंधली हो सकती है।"
+      }
+    },
+    "igra": {
+      "term": {
+        "en": "IGRA",
+        "hi": "आईजीआरए (IGRA)"
+      },
+      "def": {
+        "en": "Interferon gamma release assay: a blood test for TB infection. It cannot tell old infection from active disease.",
+        "hi": "इंटरफ़ेरॉन गामा रिलीज़ एसे: TB संक्रमण के लिए खून की जाँच। यह पुराने संक्रमण और सक्रिय बीमारी में फ़र्क़ नहीं कर पाती।"
+      }
+    },
+    "hla-b27": {
+      "term": {
+        "en": "HLA-B27",
+        "hi": "एचएलए-बी27 (HLA-B27)"
+      },
+      "def": {
+        "en": "A gene marker linked to sudden, recurring anterior uveitis and to back and joint disease.",
+        "hi": "एक जीन मार्कर, जो अचानक और बार-बार होने वाले एंटीरियर यूवाइटिस और कमर व जोड़ों की बीमारी से जुड़ा है।"
+      }
+    },
+    "biologic": {
+      "term": {
+        "en": "biologic drug",
+        "hi": "बायोलॉजिक दवा (biologic)"
+      },
+      "def": {
+        "en": "A made-to-order antibody that blocks one immune signal. Adalimumab, which blocks TNF, is one example.",
+        "hi": "ख़ास तौर पर बनाई गई एंटीबॉडी, जो इम्यून सिस्टम का एक संकेत रोकती है। TNF को रोकने वाली एडालिमुमैब (adalimumab) इसका एक उदाहरण है।"
+      }
+    },
+    "masquerade-syndrome": {
+      "term": {
+        "en": "masquerade syndrome",
+        "hi": "मास्करेड सिंड्रोम (masquerade syndrome)"
+      },
+      "def": {
+        "en": "A disease that looks like uveitis but is something else, such as a cancer, an infection or a hidden foreign body.",
+        "hi": "ऐसी बीमारी जो यूवाइटिस जैसी दिखती है पर कुछ और होती है, जैसे कैंसर, संक्रमण या छिपा हुआ बाहरी टुकड़ा।"
+      }
+    },
+    "vitreous-biopsy": {
+      "term": {
+        "en": "vitreous biopsy",
+        "hi": "विट्रियस बायोप्सी (vitreous biopsy)"
+      },
+      "def": {
+        "en": "A sample of the vitreous jelly taken in theatre. It is sent for cells, markers and germs.",
+        "hi": "ऑपरेशन थिएटर में विट्रियस जेली का नमूना लेना। इसे कोशिकाओं, मार्कर और कीटाणुओं की जाँच के लिए भेजा जाता है।"
+      }
+    },
+    "vitreoretinal-lymphoma": {
+      "term": {
+        "en": "vitreoretinal lymphoma",
+        "hi": "विट्रियोरेटिनल लिम्फ़ोमा (vitreoretinal lymphoma)"
+      },
+      "def": {
+        "en": "A cancer of immune cells inside the eye. It often goes with lymphoma of the brain.",
+        "hi": "आँख के अंदर इम्यून कोशिकाओं का कैंसर। अक्सर इसके साथ दिमाग़ में भी लिम्फ़ोमा होता है।"
+      }
+    },
+    "retinoblastoma": {
+      "term": {
+        "en": "retinoblastoma",
+        "hi": "रेटिनोब्लास्टोमा (retinoblastoma)"
+      },
+      "def": {
+        "en": "A cancer of the retina in young children. It can be cured when found early, while it is still inside the eye.",
+        "hi": "छोटे बच्चों में रेटिना का कैंसर। जल्दी पकड़ा जाए, जब तक यह आँख के अंदर है, तो ठीक हो सकता है।"
+      }
+    },
+    "endophthalmitis": {
+      "term": {
+        "en": "endophthalmitis",
+        "hi": "एंडॉफ़्थैल्माइटिस (endophthalmitis)"
+      },
+      "def": {
+        "en": "Infection inside the eye, usually after surgery, an injection or an injury. It is an emergency.",
+        "hi": "आँख के अंदर संक्रमण, आम तौर पर ऑपरेशन, इंजेक्शन या चोट के बाद। यह इमरजेंसी है।"
+      }
+    },
+    "intraocular-foreign-body": {
+      "term": {
+        "en": "intraocular foreign body (IOFB)",
+        "hi": "इंट्राऑक्युलर फ़ॉरेन बॉडी (IOFB)"
+      },
+      "def": {
+        "en": "A piece of metal, glass or other material lodged inside the eye after an injury. It must be found and removed.",
+        "hi": "चोट के बाद आँख के अंदर फँसा धातु, काँच या किसी और चीज़ का टुकड़ा। उसे ढूँढकर निकालना ज़रूरी है।"
+      }
+    },
+    "keratitis": {
+      "term": {
+        "en": "keratitis",
+        "hi": "केराटाइटिस"
+      },
+      "def": {
+        "en": "Inflammation of the cornea. Infection is the most serious cause.",
+        "hi": "कॉर्निया की सूजन। इसका सबसे गंभीर कारण संक्रमण है।"
+      }
+    },
+    "corneal-ulcer": {
+      "term": {
+        "en": "corneal ulcer",
+        "hi": "कॉर्निया का अल्सर"
+      },
+      "def": {
+        "en": "A patch where the surface of the cornea is lost and the tissue under it is inflamed, often from infection.",
+        "hi": "कॉर्निया की सतह का ऐसा हिस्सा जो उतर गया है और नीचे का ऊतक सूजा है, अक्सर संक्रमण से।"
+      }
+    },
+    "acanthamoeba": {
+      "term": {
+        "en": "Acanthamoeba",
+        "hi": "एकैंथअमीबा"
+      },
+      "def": {
+        "en": "A tiny amoeba found in water and soil. It can infect the cornea, mostly in contact lens users.",
+        "hi": "पानी और मिट्टी में मिलने वाला एक छोटा अमीबा। यह कॉर्निया में संक्रमण कर सकता है, ज़्यादातर कॉन्टैक्ट लेंस पहनने वालों में।"
+      }
+    },
+    "fluorescein": {
+      "term": {
+        "en": "fluorescein",
+        "hi": "फ़्लोरेसीन"
+      },
+      "def": {
+        "en": "An orange dye that glows green in blue light. It shows where the surface of the cornea is broken.",
+        "hi": "एक नारंगी रंग जो नीली रोशनी में हरा चमकता है। यह दिखाता है कि कॉर्निया की सतह कहाँ टूटी है।"
+      }
+    },
+    "steroid-drops": {
+      "term": {
+        "en": "steroid drops",
+        "hi": "स्टेरॉयड ड्रॉप्स"
+      },
+      "def": {
+        "en": "Eye drops that calm inflammation. They can make an infection worse and raise eye pressure, so an eye specialist should guide them.",
+        "hi": "सूजन शांत करने वाली आँख की बूँदें। ये संक्रमण बढ़ा सकती हैं और आँख का दबाव बढ़ा सकती हैं, इसलिए इन्हें आँख के विशेषज्ञ की सलाह से ही दें।"
+      }
+    },
+    "hsv": {
+      "term": {
+        "en": "herpes simplex virus (HSV)",
+        "hi": "हर्पीज़ सिम्प्लेक्स वायरस (HSV)"
+      },
+      "def": {
+        "en": "A common virus. After the first infection it hides in a nerve and can flare up again in the eye.",
+        "hi": "एक आम वायरस। पहले संक्रमण के बाद यह नस में छिप जाता है और बाद में आँख में फिर भड़क सकता है।"
+      }
+    },
+    "dendritic-ulcer": {
+      "term": {
+        "en": "dendritic ulcer",
+        "hi": "डेंड्रिटिक अल्सर"
+      },
+      "def": {
+        "en": "A branching ulcer on the surface of the cornea, with small bulbs at its ends. It is the classic sign of herpes simplex.",
+        "hi": "कॉर्निया की सतह पर शाखाओं वाला अल्सर, जिसके सिरों पर छोटे गोले होते हैं। यह हर्पीज़ सिम्प्लेक्स की पहचान है।"
+      }
+    },
+    "stroma": {
+      "term": {
+        "en": "corneal stroma",
+        "hi": "कॉर्निया का स्ट्रोमा"
+      },
+      "def": {
+        "en": "The thick middle layer of the cornea. A scar here can blur vision for good.",
+        "hi": "कॉर्निया की मोटी बीच वाली परत। यहाँ का दाग़ नज़र को हमेशा के लिए धुंधला कर सकता है।"
+      }
+    },
+    "limbus": {
+      "term": {
+        "en": "limbus",
+        "hi": "लिंबस"
+      },
+      "def": {
+        "en": "The ring where the clear cornea meets the white sclera. The stem cells of the corneal surface live here.",
+        "hi": "वह घेरा जहाँ साफ़ कॉर्निया सफ़ेद स्क्लेरा से मिलता है। कॉर्निया की सतह की स्टेम सेल यहीं रहती हैं।"
+      }
+    },
+    "limbal-stem-cells": {
+      "term": {
+        "en": "limbal stem cells",
+        "hi": "लिंबल स्टेम सेल"
+      },
+      "def": {
+        "en": "Stem cells at the limbus that renew the surface of the cornea. If they fail, conjunctiva and vessels grow over the cornea.",
+        "hi": "लिंबस की स्टेम सेल, जो कॉर्निया की सतह को नया बनाती हैं। ये ख़त्म हों तो कंजंक्टाइवा और नसें कॉर्निया पर फैल जाती हैं।"
+      }
+    },
+    "symblepharon": {
+      "term": {
+        "en": "symblepharon",
+        "hi": "सिम्ब्लेफ़ेरॉन"
+      },
+      "def": {
+        "en": "A scar band that sticks the inner lining of the eyelid to the eyeball.",
+        "hi": "एक दाग़ वाली पट्टी जो पलक की अंदरूनी परत को आँख के गोले से चिपका देती है।"
+      }
+    },
+    "amniotic-membrane": {
+      "term": {
+        "en": "amniotic membrane",
+        "hi": "एम्नियोटिक मेम्ब्रेन"
+      },
+      "def": {
+        "en": "A thin layer from the placenta, used as a patch on the eye surface. It calms inflammation and helps healing.",
+        "hi": "आँवल (placenta) की एक पतली परत, जिसे आँख की सतह पर पैच की तरह लगाते हैं। यह सूजन शांत करती है और भरने में मदद करती है।"
+      }
+    },
+    "conjunctiva": {
+      "term": {
+        "en": "conjunctiva",
+        "hi": "कंजंक्टाइवा"
+      },
+      "def": {
+        "en": "The thin, clear skin that covers the white of the eye and the inside of the lids.",
+        "hi": "पतली, साफ़ झिल्ली जो आँख के सफ़ेद हिस्से और पलकों के अंदर को ढकती है।"
+      }
+    },
+    "dry-eye": {
+      "term": {
+        "en": "dry eye disease",
+        "hi": "ड्राई आई रोग"
+      },
+      "def": {
+        "en": "A long-term disease of the tear film and eye surface. Eyes feel gritty or burn, and vision blurs on and off.",
+        "hi": "आँसू की परत और आँख की सतह का लंबा चलने वाला रोग। आँखों में किरकिरी या जलन होती है, और नज़र बीच-बीच में धुंधली होती है।"
+      }
+    },
+    "tear-film": {
+      "term": {
+        "en": "tear film",
+        "hi": "आँसू की परत"
+      },
+      "def": {
+        "en": "The thin layer of tears over the eye. It has an oily top, a watery middle and a mucus base.",
+        "hi": "आँख पर आँसू की पतली परत। इसमें ऊपर तेल, बीच में पानी और नीचे म्यूकस होता है।"
+      }
+    },
+    "meibomian-glands": {
+      "term": {
+        "en": "meibomian glands",
+        "hi": "मीबोमियन ग्रंथियाँ"
+      },
+      "def": {
+        "en": "Oil glands in the eyelids. Their oil forms the top layer of the tear film and slows drying.",
+        "hi": "पलकों में तेल बनाने वाली ग्रंथियाँ। इनका तेल आँसू की सबसे ऊपरी परत बनाता है और आँसू को जल्दी सूखने से रोकता है।"
+      }
+    },
+    "conjunctivitis": {
+      "term": {
+        "en": "conjunctivitis",
+        "hi": "कंजंक्टिवाइटिस (conjunctivitis)"
+      },
+      "def": {
+        "en": "Inflammation of the conjunctiva. The eye turns pink or red, often with discharge, but vision stays normal.",
+        "hi": "कंजंक्टिवा की सूजन। आँख गुलाबी या लाल हो जाती है, अक्सर कीचड़ के साथ, पर नज़र ठीक रहती है।"
+      }
+    },
+    "subconjunctival-haemorrhage": {
+      "term": {
+        "en": "subconjunctival haemorrhage",
+        "hi": "सबकंजंक्टिवल हेमरेज (subconjunctival haemorrhage)"
+      },
+      "def": {
+        "en": "Blood trapped under the conjunctiva. It looks like a flat red patch on the white of the eye.",
+        "hi": "कंजंक्टिवा के नीचे फँसा खून। यह आँख के सफ़ेद हिस्से पर एक सपाट लाल धब्बे जैसा दिखता है।"
+      }
+    },
+    "ciliary-flush": {
+      "term": {
+        "en": "ciliary flush",
+        "hi": "सिलियरी फ़्लश (ciliary flush)"
+      },
+      "def": {
+        "en": "A ring of redness right around the cornea. It warns of disease inside the eye or in the cornea.",
+        "hi": "कॉर्निया के ठीक चारों ओर लाली का घेरा। यह आँख के अंदर या कॉर्निया की बीमारी की चेतावनी है।"
+      }
+    },
+    "photophobia": {
+      "term": {
+        "en": "photophobia",
+        "hi": "फ़ोटोफ़ोबिया (photophobia)"
+      },
+      "def": {
+        "en": "Pain or strong discomfort in light. The patient screws up the eye or turns away from a lamp.",
+        "hi": "रोशनी में दर्द या बहुत बेचैनी। मरीज़ आँख सिकोड़ता है या लैंप से मुँह फेर लेता है।"
+      }
+    },
+    "fornix": {
+      "term": {
+        "en": "fornix",
+        "hi": "फ़ॉर्निक्स (fornix)"
+      },
+      "def": {
+        "en": "The deep fold where the conjunctiva turns from the back of the lid onto the eyeball. Grit and chemicals can hide here.",
+        "hi": "वह गहरी तह जहाँ कंजंक्टिवा पलक के पीछे से मुड़कर आँख के गोले पर आती है। कण और केमिकल यहाँ छिप सकते हैं।"
+      }
+    },
+    "follicles": {
+      "term": {
+        "en": "follicles",
+        "hi": "फ़ॉलिकल (follicles)"
+      },
+      "def": {
+        "en": "Small pale bumps on the inside of the lids. They point to a virus or chlamydia.",
+        "hi": "पलकों के अंदर छोटे, हल्के रंग के दाने। ये वायरस या क्लैमाइडिया की ओर इशारा करते हैं।"
+      }
+    },
+    "open-globe": {
+      "term": {
+        "en": "open globe injury",
+        "hi": "ओपन ग्लोब चोट (open globe injury)"
+      },
+      "def": {
+        "en": "An injury that cuts or bursts right through the wall of the eye. It needs surgery as soon as possible.",
+        "hi": "ऐसी चोट जो आँख की दीवार को पूरी तरह काट दे या फाड़ दे। इसमें जल्द से जल्द ऑपरेशन चाहिए।"
+      }
+    },
+    "hyphaema": {
+      "term": {
+        "en": "hyphaema",
+        "hi": "हाइफ़ीमा (hyphaema)"
+      },
+      "def": {
+        "en": "Blood in the front chamber of the eye, between the cornea and the iris. It often settles as a red level.",
+        "hi": "आँख के आगे वाले कक्ष में, कॉर्निया और आइरिस के बीच खून। यह अक्सर नीचे बैठकर एक लाल परत बनाता है।"
+      }
+    },
+    "alkali": {
+      "term": {
+        "en": "alkali",
+        "hi": "क्षार (alkali)"
+      },
+      "def": {
+        "en": "A chemical such as lime (chuna), cement or drain cleaner. It soaks deep into the eye and does more harm than acid.",
+        "hi": "चूना, सीमेंट या नाली साफ़ करने वाला केमिकल जैसा पदार्थ। यह आँख में गहराई तक जाता है और तेज़ाब से ज़्यादा नुकसान करता है।"
+      }
+    },
+    "irrigation": {
+      "term": {
+        "en": "irrigation",
+        "hi": "आँख धोना (irrigation)"
+      },
+      "def": {
+        "en": "Washing the eye with a steady flow of clean water or saline. It is the first treatment for a chemical splash.",
+        "hi": "साफ़ पानी या सलाइन की लगातार धार से आँख धोना। केमिकल गिरने पर यही पहला इलाज है।"
+      }
+    },
+    "eye-shield": {
+      "term": {
+        "en": "eye shield",
+        "hi": "आई शील्ड (eye shield)"
+      },
+      "def": {
+        "en": "A hard cover taped over an injured eye. It rests on the bone around the eye, not on the eye itself.",
+        "hi": "चोट लगी आँख पर टेप से लगाया जाने वाला सख़्त कवर। यह आँख के चारों ओर की हड्डी पर टिकता है, आँख पर नहीं।"
+      }
+    },
+    "anticoagulant": {
+      "term": {
+        "en": "blood thinner (anticoagulant)",
+        "hi": "खून पतला करने की दवा (anticoagulant)"
+      },
+      "def": {
+        "en": "A medicine that slows blood clotting, such as warfarin. People who take it bruise and bleed more easily.",
+        "hi": "ऐसी दवा जो खून का थक्का बनना धीमा करती है, जैसे वारफ़रिन। इसे लेने वालों को आसानी से नील पड़ते और खून बहता है।"
+      }
+    },
+    "artificial-tears": {
+      "term": {
+        "en": "artificial tears",
+        "hi": "आर्टिफ़िशियल टियर्स (artificial tears)"
+      },
+      "def": {
+        "en": "Lubricating eye drops that add to the tear film. They ease dryness and are safe to use often.",
+        "hi": "चिकनाई देने वाली आई ड्रॉप जो आँसू की परत को बढ़ाती है। ये सूखापन कम करती हैं और बार-बार डालना सुरक्षित है।"
+      }
+    },
+    "epithelium": {
+      "term": {
+        "en": "corneal epithelium",
+        "hi": "कॉर्निया की एपिथीलियम (corneal epithelium)"
+      },
+      "def": {
+        "en": "The thin outer skin of cells on the cornea. It heals fast when scratched, but a break lets germs in.",
+        "hi": "कॉर्निया के ऊपर कोशिकाओं की पतली बाहरी परत। खरोंच लगे तो यह जल्दी भरती है, पर टूटी जगह से कीटाणु अंदर जा सकते हैं।"
+      }
+    },
+    "uvea": {
+      "term": {
+        "en": "uvea",
+        "hi": "यूविया (uvea)"
+      },
+      "def": {
+        "en": "The middle coat of the eye, rich in blood vessels. It has three parts: the iris, the ciliary body and the choroid.",
+        "hi": "आँख की बीच वाली परत, जिसमें खून की बहुत नलियाँ हैं। इसके तीन हिस्से हैं: आइरिस, सिलियरी बॉडी और कोरॉइड।"
+      }
+    },
+    "ciliary-body": {
+      "term": {
+        "en": "ciliary body",
+        "hi": "सिलियरी बॉडी (ciliary body)"
+      },
+      "def": {
+        "en": "The ring of tissue just behind the iris. It makes the clear fluid in the front of the eye and helps the lens focus.",
+        "hi": "आइरिस के ठीक पीछे ऊतक का घेरा। यह आँख के आगे का साफ़ तरल बनाता है और लेंस को फ़ोकस करने में मदद करता है।"
+      }
+    },
+    "slit-lamp": {
+      "term": {
+        "en": "slit lamp",
+        "hi": "स्लिट लैंप (slit lamp)"
+      },
+      "def": {
+        "en": "An eye microscope with a thin, bright beam of light. It shows the front of the eye in fine detail.",
+        "hi": "आँख का माइक्रोस्कोप, जिसमें रोशनी की पतली, तेज़ किरण होती है। यह आँख का अगला हिस्सा बारीकी से दिखाता है।"
+      }
+    },
+    "keratic-precipitates": {
+      "term": {
+        "en": "keratic precipitates (KPs)",
+        "hi": "केराटिक प्रेसिपिटेट (KPs)"
+      },
+      "def": {
+        "en": "Clumps of white cells stuck to the back of the cornea. Large, greasy ones are called mutton-fat KPs.",
+        "hi": "कॉर्निया की पिछली सतह पर चिपके सफ़ेद कोशिकाओं के गुच्छे। बड़े, चिकने दिखने वाले गुच्छों को मटन-फ़ैट KPs कहते हैं।"
+      }
+    },
+    "floaters": {
+      "term": {
+        "en": "floaters",
+        "hi": "फ़्लोटर्स (floaters)"
+      },
+      "def": {
+        "en": "Specks, threads or cobwebs that drift across the vision. They are shadows of things floating in the vitreous.",
+        "hi": "नज़र के आगे तैरते धब्बे, धागे या जाले। ये विट्रियस में तैरती चीज़ों की परछाइयाँ हैं।"
+      }
+    },
+    "vitritis": {
+      "term": {
+        "en": "vitritis",
+        "hi": "विट्राइटिस (vitritis)"
+      },
+      "def": {
+        "en": "Inflammatory cells in the vitreous jelly. They make the view of the retina hazy.",
+        "hi": "विट्रियस जेली में सूजन वाली कोशिकाएँ। इनसे रेटिना धुंधला दिखता है।"
+      }
+    },
+    "snowballs": {
+      "term": {
+        "en": "snowballs",
+        "hi": "स्नोबॉल (snowballs)"
+      },
+      "def": {
+        "en": "White clumps of inflammatory cells in the lower vitreous. They are a sign of intermediate uveitis.",
+        "hi": "नीचे वाले विट्रियस में सूजन वाली कोशिकाओं के सफ़ेद गुच्छे। ये इंटरमीडिएट यूवाइटिस का संकेत हैं।"
+      }
+    },
+    "toxoplasmosis": {
+      "term": {
+        "en": "toxoplasmosis",
+        "hi": "टॉक्सोप्लाज़्मोसिस (toxoplasmosis)"
+      },
+      "def": {
+        "en": "Infection with a tiny parasite, Toxoplasma. In the eye it makes a white patch of retinitis, often beside an old scar.",
+        "hi": "टॉक्सोप्लाज़्मा नाम के छोटे परजीवी का संक्रमण। आँख में यह रेटिना पर सफ़ेद सूजा हुआ धब्बा बनाता है, अक्सर किसी पुराने निशान के पास।"
+      }
+    },
+    "sarcoidosis": {
+      "term": {
+        "en": "sarcoidosis",
+        "hi": "सारकॉइडोसिस (sarcoidosis)"
+      },
+      "def": {
+        "en": "A disease in which small clumps of immune cells form in organs. The lungs, skin and eyes are often hit.",
+        "hi": "एक बीमारी जिसमें अंगों में प्रतिरक्षा कोशिकाओं के छोटे गुच्छे बन जाते हैं। अक्सर फेफड़े, त्वचा और आँखें प्रभावित होती हैं।"
+      }
+    },
+    "ankylosing-spondylitis": {
+      "term": {
+        "en": "ankylosing spondylitis",
+        "hi": "एंकिलॉसिंग स्पॉन्डिलाइटिस (ankylosing spondylitis)"
+      },
+      "def": {
+        "en": "Long-term inflammation of the spine. It causes low back pain and stiffness that is worst in the morning.",
+        "hi": "रीढ़ की लंबी चलने वाली सूजन। इससे कमर में दर्द और अकड़न होती है, जो सुबह सबसे ज़्यादा होती है।"
+      }
+    },
+    "jia": {
+      "term": {
+        "en": "juvenile idiopathic arthritis (JIA)",
+        "hi": "जुवेनाइल इडियोपैथिक आर्थराइटिस (JIA)"
+      },
+      "def": {
+        "en": "Joint inflammation that starts before age 16 and lasts. Its uveitis is often painless, so these children need regular eye checks.",
+        "hi": "जोड़ों की सूजन जो 16 साल से पहले शुरू होकर लंबी चलती है। इसका यूवाइटिस अक्सर बिना दर्द के होता है, इसलिए इन बच्चों की आँखें नियमित जाँचनी चाहिए।"
+      }
+    },
+    "glaucoma": {
+      "term": {
+        "en": "glaucoma",
+        "hi": "ग्लूकोमा (glaucoma)"
+      },
+      "def": {
+        "en": "Damage to the optic nerve, with a large cup and loss of side vision. High eye pressure is the main risk.",
+        "hi": "ऑप्टिक नर्व का नुकसान, जिसमें कप बड़ा होता है और किनारे की नज़र घटती है। आँख का ज़्यादा प्रेशर इसका मुख्य ख़तरा है।"
+      }
+    },
+    "cataract": {
+      "term": {
+        "en": "cataract",
+        "hi": "मोतियाबिंद (cataract)"
+      },
+      "def": {
+        "en": "Clouding of the lens. Vision turns blurred or dim, and surgery can fix it.",
+        "hi": "लेंस का धुंधला हो जाना। नज़र धुंधली या फीकी हो जाती है, और ऑपरेशन से ठीक हो सकती है।"
+      }
+    },
+    "iop": {
+      "term": {
+        "en": "eye pressure (IOP)",
+        "hi": "आँख का प्रेशर (IOP)"
+      },
+      "def": {
+        "en": "The fluid pressure inside the eye, in mmHg. Most healthy eyes read about 10 to 21.",
+        "hi": "आँख के अंदर के पानी का दबाव, mmHg में। ज़्यादातर स्वस्थ आँखों में यह लगभग 10 से 21 होता है।"
+      }
+    },
+    "band-keratopathy": {
+      "term": {
+        "en": "band keratopathy",
+        "hi": "बैंड केराटोपैथी (band keratopathy)"
+      },
+      "def": {
+        "en": "A chalky white band of calcium across the middle of the cornea. It can follow years of uveitis, mostly in children.",
+        "hi": "कॉर्निया के बीच में कैल्शियम की चॉक जैसी सफ़ेद पट्टी। यह सालों के यूवाइटिस के बाद हो सकती है, ज़्यादातर बच्चों में।"
+      }
+    },
+    "dioptre": {
+      "term": {
+        "en": "dioptre",
+        "hi": "डायोप्टर (dioptre)"
+      },
+      "def": {
+        "en": "The unit of focusing power. It is 1 divided by the focal length in metres. A 2 D lens focuses at 50 cm.",
+        "hi": "फ़ोकस की ताक़त की इकाई। यह 1 भाग फ़ोकल लंबाई (मीटर में) है। 2 D का लेंस 50 सेमी पर फ़ोकस करता है।"
+      }
+    },
+    "emmetropia": {
+      "term": {
+        "en": "emmetropia",
+        "hi": "एमेट्रोपिया (emmetropia)"
+      },
+      "def": {
+        "en": "A normal focus. With the eye relaxed, light from far away focuses exactly on the retina.",
+        "hi": "सामान्य फ़ोकस। आँख आराम में हो, तो दूर की रोशनी ठीक रेटिना पर फ़ोकस होती है।"
+      }
+    },
+    "accommodation": {
+      "term": {
+        "en": "accommodation",
+        "hi": "अकोमोडेशन (accommodation)"
+      },
+      "def": {
+        "en": "The eye's extra focusing for near things. The ciliary muscle lets the lens get rounder.",
+        "hi": "पास की चीज़ों के लिए आँख का अतिरिक्त फ़ोकस। सिलियरी मांसपेशी लेंस को ज़्यादा गोल होने देती है।"
+      }
+    },
+    "hyperopia": {
+      "term": {
+        "en": "long sight (hyperopia)",
+        "hi": "दूर दृष्टि (hyperopia)"
+      },
+      "def": {
+        "en": "Light focuses behind the retina because the eye is short or weak. Near things blur first.",
+        "hi": "आँख छोटी या कमज़ोर होने से रोशनी रेटिना के पीछे फ़ोकस होती है। पहले पास की चीज़ें धुंधली होती हैं।"
+      }
+    },
+    "astigmatism": {
+      "term": {
+        "en": "astigmatism",
+        "hi": "एस्टिग्मैटिज़्म (astigmatism)"
+      },
+      "def": {
+        "en": "The cornea or lens is curved more in one direction. Light focuses as two lines, so all distances blur.",
+        "hi": "कॉर्निया या लेंस एक दिशा में ज़्यादा मुड़ा होता है। रोशनी दो रेखाओं में फ़ोकस होती है, इसलिए हर दूरी धुंधली दिखती है।"
+      }
+    },
+    "presbyopia": {
+      "term": {
+        "en": "presbyopia",
+        "hi": "प्रेस्बायोपिया (presbyopia)"
+      },
+      "def": {
+        "en": "Loss of near focus with age. The lens stiffens, and after about 40 reading needs a plus lens.",
+        "hi": "उम्र के साथ पास का फ़ोकस घटना। लेंस सख़्त हो जाता है, और लगभग 40 के बाद पढ़ने के लिए प्लस लेंस चाहिए।"
+      }
+    },
+    "retinoscopy": {
+      "term": {
+        "en": "retinoscopy",
+        "hi": "रेटिनोस्कोपी (retinoscopy)"
+      },
+      "def": {
+        "en": "A way to measure the eye's focus by watching the light reflex in the pupil. The patient does not need to answer.",
+        "hi": "पुतली में रोशनी का रिफ़्लेक्स देखकर आँख का फ़ोकस नापने का तरीका। मरीज़ को जवाब देने की ज़रूरत नहीं।"
+      }
+    },
+    "cycloplegia": {
+      "term": {
+        "en": "cycloplegia",
+        "hi": "साइक्लोप्लेजिया (cycloplegia)"
+      },
+      "def": {
+        "en": "Eye drops such as cyclopentolate stop the focusing muscle for a while. This shows the full refractive error.",
+        "hi": "साइक्लोपेंटोलेट जैसी बूँदें फ़ोकस करने वाली मांसपेशी को कुछ देर के लिए रोक देती हैं। इससे पूरा रिफ़्रैक्टिव एरर दिखता है।"
+      }
+    },
+    "amblyopia": {
+      "term": {
+        "en": "lazy eye (amblyopia)",
+        "hi": "लेज़ी आई (amblyopia)"
+      },
+      "def": {
+        "en": "Poor vision in an eye that looks healthy. The brain did not get a clear picture from it in early childhood.",
+        "hi": "ऐसी आँख में कम नज़र जो स्वस्थ दिखती है। बचपन में दिमाग को उससे साफ़ तस्वीर नहीं मिली।"
+      }
+    },
+    "esotropia": {
+      "term": {
+        "en": "esotropia",
+        "hi": "एसोट्रोपिया (esotropia)"
+      },
+      "def": {
+        "en": "An eye that turns in, toward the nose. It is a kind of squint.",
+        "hi": "नाक की ओर, अंदर मुड़ी आँख। यह भेंगेपन का एक प्रकार है।"
+      }
+    },
+    "anisometropia": {
+      "term": {
+        "en": "anisometropia",
+        "hi": "एनाइसोमेट्रोपिया (anisometropia)"
+      },
+      "def": {
+        "en": "The two eyes need very different glasses. The blurrier eye can become lazy.",
+        "hi": "दोनों आँखों को बहुत अलग नंबर का चश्मा चाहिए। ज़्यादा धुंधली आँख लेज़ी हो सकती है।"
+      }
+    },
+    "aniseikonia": {
+      "term": {
+        "en": "aniseikonia",
+        "hi": "एनाइसेकोनिया (aniseikonia)"
+      },
+      "def": {
+        "en": "The two eyes see images of different sizes. Unequal glasses are a common cause.",
+        "hi": "दोनों आँखें अलग-अलग आकार की तस्वीरें देखती हैं। असमान चश्मा इसका आम कारण है।"
+      }
+    },
+    "spherical-equivalent": {
+      "term": {
+        "en": "spherical equivalent",
+        "hi": "स्फ़ीरिकल इक्विवेलेंट (spherical equivalent)"
+      },
+      "def": {
+        "en": "The sphere plus half the cylinder. It gives one number for a prescription.",
+        "hi": "स्फ़ीयर + सिलिंडर का आधा। यह प्रिस्क्रिप्शन को एक संख्या में बताता है।"
+      }
+    },
+    "vertex-distance": {
+      "term": {
+        "en": "vertex distance",
+        "hi": "वर्टेक्स डिस्टेंस (vertex distance)"
+      },
+      "def": {
+        "en": "The gap between the back of a spectacle lens and the cornea. It is often about 12 mm.",
+        "hi": "चश्मे के लेंस के पिछले हिस्से और कॉर्निया के बीच की दूरी। यह अक्सर लगभग 12 मिमी होती है।"
+      }
+    },
+    "prism-dioptre": {
+      "term": {
+        "en": "prism dioptre",
+        "hi": "प्रिज़्म डायोप्टर (prism dioptre)"
+      },
+      "def": {
+        "en": "The unit of prism power. One prism dioptre moves an image 1 cm at a distance of 1 m.",
+        "hi": "प्रिज़्म की ताक़त की इकाई। एक प्रिज़्म डायोप्टर 1 मीटर की दूरी पर तस्वीर को 1 सेमी खिसकाता है।"
+      }
+    },
+    "microbial-keratitis": {
+      "term": {
+        "en": "microbial keratitis",
+        "hi": "माइक्रोबियल केराटाइटिस (microbial keratitis)"
+      },
+      "def": {
+        "en": "An infection of the cornea by bacteria, fungi or Acanthamoeba. It is an eye emergency.",
+        "hi": "बैक्टीरिया, फ़ंगस या अकैंथअमीबा से कॉर्निया का इन्फ़ेक्शन। यह आँख की इमरजेंसी है।"
+      }
+    },
+    "orthokeratology": {
+      "term": {
+        "en": "orthokeratology (ortho-k)",
+        "hi": "ऑर्थोकेराटोलॉजी (ortho-k)"
+      },
+      "def": {
+        "en": "Rigid contact lenses worn at night that flatten the cornea. They correct myopia for the day and can slow its growth.",
+        "hi": "रात में पहने जाने वाले सख़्त कॉन्टैक्ट लेंस, जो कॉर्निया को चपटा करते हैं। ये दिन भर मायोपिया ठीक रखते हैं और उसकी बढ़त धीमी कर सकते हैं।"
+      }
+    },
+    "retinal-detachment": {
+      "term": {
+        "en": "retinal detachment",
+        "hi": "रेटिनल डिटैचमेंट (retinal detachment)"
+      },
+      "def": {
+        "en": "The retina lifts off the back wall of the eye. It causes flashes, floaters or a curtain, and needs urgent care.",
+        "hi": "रेटिना आँख की पिछली दीवार से अलग हो जाता है। इससे चमक, फ़्लोटर या परदा दिखता है, और तुरंत इलाज चाहिए।"
+      }
+    },
+    "chiasm": {
+      "term": {
+        "en": "optic chiasm",
+        "hi": "ऑप्टिक कियाज़्म (optic chiasm)"
+      },
+      "def": {
+        "en": "The X-shaped crossing under the brain. Fibres from the nasal half of each retina cross to the other side here.",
+        "hi": "दिमाग के नीचे X जैसा क्रॉसिंग। यहाँ हर रेटिना के नाक वाले आधे हिस्से के तंतु दूसरी ओर जाते हैं।"
+      }
+    },
+    "optic-tract": {
+      "term": {
+        "en": "optic tract",
+        "hi": "ऑप्टिक ट्रैक्ट (optic tract)"
+      },
+      "def": {
+        "en": "The band of fibres from the chiasm to the LGN. Each tract carries the opposite half of the world from both eyes.",
+        "hi": "कियाज़्म से LGN तक तंतुओं की पट्टी। हर ट्रैक्ट दोनों आँखों से दुनिया का उलटी ओर वाला आधा हिस्सा ले जाता है।"
+      }
+    },
+    "lgn": {
+      "term": {
+        "en": "LGN",
+        "hi": "LGN (लैटरल जेनिकुलेट न्यूक्लियस)"
+      },
+      "def": {
+        "en": "Lateral geniculate nucleus: a relay station deep in the brain. The optic tract ends here, and the optic radiation starts here.",
+        "hi": "लैटरल जेनिकुलेट न्यूक्लियस: दिमाग के अंदर एक रिले स्टेशन। ऑप्टिक ट्रैक्ट यहाँ ख़त्म होता है और ऑप्टिक रेडिएशन यहीं से शुरू होता है।"
+      }
+    },
+    "optic-radiation": {
+      "term": {
+        "en": "optic radiation",
+        "hi": "ऑप्टिक रेडिएशन (optic radiation)"
+      },
+      "def": {
+        "en": "The fan of fibres from the LGN to the visual cortex. Its lower fibres loop forward in the temporal lobe.",
+        "hi": "LGN से विज़ुअल कॉर्टेक्स तक फैले तंतु। इसके निचले तंतु टेम्पोरल लोब में आगे की ओर लूप बनाते हैं।"
+      }
+    },
+    "visual-cortex": {
+      "term": {
+        "en": "visual cortex",
+        "hi": "विज़ुअल कॉर्टेक्स (visual cortex)"
+      },
+      "def": {
+        "en": "The part of the brain at the very back of the head. It receives what the eyes see.",
+        "hi": "सिर के बिल्कुल पीछे दिमाग का हिस्सा। आँखें जो देखती हैं, वह यहाँ पहुँचता है।"
+      }
+    },
+    "visual-field": {
+      "term": {
+        "en": "visual field",
+        "hi": "दृष्टि-क्षेत्र (visual field)"
+      },
+      "def": {
+        "en": "All the space one eye can see while it looks straight ahead, from the centre to the edges.",
+        "hi": "सीधा देखते हुए एक आँख जितनी जगह देख पाती है, बीच से किनारों तक।"
+      }
+    },
+    "hemianopia": {
+      "term": {
+        "en": "hemianopia",
+        "hi": "हेमियानोपिया (hemianopia)"
+      },
+      "def": {
+        "en": "Loss of half of the visual field, on one side of an up-and-down line through the centre.",
+        "hi": "दृष्टि-क्षेत्र के आधे हिस्से का चले जाना, बीच से गुज़रती खड़ी रेखा की एक ओर।"
+      }
+    },
+    "homonymous": {
+      "term": {
+        "en": "homonymous",
+        "hi": "होमोनिमस (homonymous)"
+      },
+      "def": {
+        "en": "On the same side in both eyes. A homonymous field loss means damage behind the chiasm.",
+        "hi": "दोनों आँखों में एक ही ओर। होमोनिमस कमी का मतलब है कि चोट कियाज़्म के पीछे है।"
+      }
+    },
+    "quadrantanopia": {
+      "term": {
+        "en": "quadrantanopia",
+        "hi": "क्वाड्रेंटानोपिया (quadrantanopia)"
+      },
+      "def": {
+        "en": "Loss of one quarter of the visual field.",
+        "hi": "दृष्टि-क्षेत्र के एक चौथाई हिस्से का चले जाना।"
+      }
+    },
+    "perimetry": {
+      "term": {
+        "en": "perimetry",
+        "hi": "पेरिमेट्री (perimetry)"
+      },
+      "def": {
+        "en": "A machine test that maps the visual field point by point. The patient presses a button when a light appears.",
+        "hi": "मशीन से होने वाली जाँच जो दृष्टि-क्षेत्र का नक़्शा बिंदु-दर-बिंदु बनाती है। रोशनी दिखने पर मरीज़ बटन दबाता है।"
+      }
+    },
+    "pretectal-nucleus": {
+      "term": {
+        "en": "pretectal nucleus",
+        "hi": "प्रीटेक्टल न्यूक्लियस (pretectal nucleus)"
+      },
+      "def": {
+        "en": "A small group of nerve cells in the midbrain. It passes the pupil light signal to both sides.",
+        "hi": "मिडब्रेन में नर्व कोशिकाओं का छोटा समूह। यह पुतली का रोशनी वाला संकेत दोनों ओर भेजता है।"
+      }
+    },
+    "edinger-westphal": {
+      "term": {
+        "en": "Edinger-Westphal nucleus",
+        "hi": "एडिंगर-वेस्टफ़ाल न्यूक्लियस (Edinger-Westphal nucleus)"
+      },
+      "def": {
+        "en": "Nerve cells in the midbrain that send the signal to make the pupil small. It travels out in the third nerve.",
+        "hi": "मिडब्रेन की नर्व कोशिकाएँ जो पुतली छोटी करने का संकेत भेजती हैं। यह संकेत तीसरी नर्व से बाहर जाता है।"
+      }
+    },
+    "third-nerve": {
+      "term": {
+        "en": "third nerve",
+        "hi": "तीसरी नर्व (third nerve)"
+      },
+      "def": {
+        "en": "The oculomotor nerve, cranial nerve III. It moves four eye muscles, lifts the lid and makes the pupil small.",
+        "hi": "ऑक्यूलोमोटर नर्व, क्रेनियल नर्व III। यह आँख की चार मांसपेशियाँ चलाती है, पलक उठाती है और पुतली छोटी करती है।"
+      }
+    },
+    "fourth-nerve": {
+      "term": {
+        "en": "fourth nerve",
+        "hi": "चौथी नर्व (fourth nerve)"
+      },
+      "def": {
+        "en": "The trochlear nerve, cranial nerve IV. It supplies the superior oblique, which turns the eye down when it looks in.",
+        "hi": "ट्रॉक्लियर नर्व, क्रेनियल नर्व IV। यह सुपीरियर ऑब्लीक को चलाती है, जो अंदर देखती आँख को नीचे घुमाती है।"
+      }
+    },
+    "sixth-nerve": {
+      "term": {
+        "en": "sixth nerve",
+        "hi": "छठी नर्व (sixth nerve)"
+      },
+      "def": {
+        "en": "The abducens nerve, cranial nerve VI. It supplies the lateral rectus, which turns the eye out.",
+        "hi": "एब्ड्यूसेंस नर्व, क्रेनियल नर्व VI। यह लैटरल रेक्टस को चलाती है, जो आँख बाहर घुमाती है।"
+      }
+    },
+    "anisocoria": {
+      "term": {
+        "en": "anisocoria",
+        "hi": "एनिसोकोरिया (anisocoria)"
+      },
+      "def": {
+        "en": "Pupils of unequal size.",
+        "hi": "दोनों पुतलियों का आकार अलग होना।"
+      }
+    },
+    "horner-syndrome": {
+      "term": {
+        "en": "Horner syndrome",
+        "hi": "हॉर्नर सिंड्रोम (Horner syndrome)"
+      },
+      "def": {
+        "en": "Damage to the sympathetic nerves of the eye. It gives a small pupil, a slightly droopy lid and less sweating on that side.",
+        "hi": "आँख की सिम्पैथेटिक नसों को नुक़सान। इसमें छोटी पुतली, थोड़ी झुकी पलक और उस ओर कम पसीना होता है।"
+      }
+    },
+    "ptosis": {
+      "term": {
+        "en": "ptosis",
+        "hi": "टोसिस (ptosis)"
+      },
+      "def": {
+        "en": "A droopy upper eyelid. The lid edge sits lower than normal and may cover the pupil.",
+        "hi": "ऊपरी पलक का झुकना। पलक का किनारा सामान्य से नीचे रहता है और पुतली को ढक सकता है।"
+      }
+    },
+    "aneurysm": {
+      "term": {
+        "en": "aneurysm",
+        "hi": "एन्यूरिज़्म (aneurysm)"
+      },
+      "def": {
+        "en": "A weak, bulging spot in an artery wall. It can press on a nerve or burst and bleed.",
+        "hi": "धमनी की दीवार में कमज़ोर, फूली जगह। यह नर्व को दबा सकती है या फटकर ख़ून बहा सकती है।"
+      }
+    },
+    "optic-neuritis": {
+      "term": {
+        "en": "optic neuritis",
+        "hi": "ऑप्टिक न्यूराइटिस (optic neuritis)"
+      },
+      "def": {
+        "en": "Inflammation of the optic nerve. Vision drops over days, usually in one eye, and moving the eye hurts.",
+        "hi": "ऑप्टिक नर्व की सूजन। कुछ दिनों में नज़र घटती है, आम तौर पर एक आँख में, और आँख घुमाने पर दर्द होता है।"
+      }
+    },
+    "multiple-sclerosis": {
+      "term": {
+        "en": "multiple sclerosis (MS)",
+        "hi": "मल्टीपल स्क्लेरोसिस (MS)"
+      },
+      "def": {
+        "en": "A disease in which the immune system damages the coat of nerve fibres in the brain and spinal cord.",
+        "hi": "एक बीमारी जिसमें शरीर की रक्षा प्रणाली दिमाग और रीढ़ की नसों के तंतुओं की परत को नुक़सान पहुँचाती है।"
+      }
+    },
+    "papilloedema": {
+      "term": {
+        "en": "papilloedema",
+        "hi": "पैपिलीडीमा (papilloedema)"
+      },
+      "def": {
+        "en": "Swelling of both optic discs caused by high pressure inside the skull.",
+        "hi": "खोपड़ी के अंदर ज़्यादा दबाव से दोनों ऑप्टिक डिस्क की सूजन।"
+      }
+    },
+    "intracranial-pressure": {
+      "term": {
+        "en": "intracranial pressure",
+        "hi": "इंट्राक्रैनियल प्रेशर (intracranial pressure)"
+      },
+      "def": {
+        "en": "The pressure of the fluid inside the skull.",
+        "hi": "खोपड़ी के अंदर के तरल का दबाव।"
+      }
+    },
+    "iih": {
+      "term": {
+        "en": "IIH",
+        "hi": "IIH (इडियोपैथिक इंट्राक्रैनियल हाइपरटेंशन)"
+      },
+      "def": {
+        "en": "Idiopathic intracranial hypertension: high pressure in the skull with no tumour or other cause found. It most often affects young women with obesity.",
+        "hi": "इडियोपैथिक इंट्राक्रैनियल हाइपरटेंशन: खोपड़ी में ज़्यादा दबाव, बिना किसी गाँठ या दूसरे कारण के। यह ज़्यादातर मोटापे वाली जवान महिलाओं में होता है।"
+      }
+    },
+    "lumbar-puncture": {
+      "term": {
+        "en": "lumbar puncture",
+        "hi": "लम्बर पंक्चर (lumbar puncture)"
+      },
+      "def": {
+        "en": "A needle placed between the bones of the lower back. It measures the pressure of the brain fluid and takes a sample.",
+        "hi": "कमर के निचले हिस्से की हड्डियों के बीच डाली गई सुई। इससे दिमाग के तरल का दबाव नापा जाता है और नमूना लिया जाता है।"
+      }
+    },
+    "diplopia": {
+      "term": {
+        "en": "double vision",
+        "hi": "दोहरा दिखना (diplopia)"
+      },
+      "def": {
+        "en": "Seeing two of one thing. If it goes when one eye is covered, the eyes are not lined up.",
+        "hi": "एक चीज़ का दो दिखना। अगर एक आँख ढकने पर यह चला जाए, तो आँखें एक सीध में नहीं हैं।"
+      }
+    },
+    "nmosd": {
+      "term": {
+        "en": "NMOSD",
+        "hi": "NMOSD (न्यूरोमाइलाइटिस ऑप्टिका स्पेक्ट्रम डिसऑर्डर)"
+      },
+      "def": {
+        "en": "Neuromyelitis optica spectrum disorder: an immune disease, often with AQP4 antibodies. It attacks the optic nerves and spinal cord.",
+        "hi": "न्यूरोमाइलाइटिस ऑप्टिका स्पेक्ट्रम डिसऑर्डर: शरीर की रक्षा प्रणाली की बीमारी, अक्सर AQP4 एंटीबॉडी के साथ। यह ऑप्टिक नर्व और रीढ़ की हड्डी की नसों पर हमला करती है।"
+      }
+    },
+    "mogad": {
+      "term": {
+        "en": "MOGAD",
+        "hi": "MOGAD (MOG एंटीबॉडी वाली बीमारी)"
+      },
+      "def": {
+        "en": "MOG antibody disease: an immune disease that can inflame both optic nerves, often with swollen discs.",
+        "hi": "MOG एंटीबॉडी वाली बीमारी: शरीर की रक्षा प्रणाली की बीमारी, जो दोनों ऑप्टिक नर्व में सूजन ला सकती है, अक्सर सूजी डिस्क के साथ।"
+      }
+    },
+    "naion": {
+      "term": {
+        "en": "NAION",
+        "hi": "NAION (नॉन-आर्टेराइटिक इस्कीमिक ऑप्टिक न्यूरोपैथी)"
+      },
+      "def": {
+        "en": "Non-arteritic ischaemic optic neuropathy: a small stroke of the optic nerve head. It is not caused by inflamed arteries.",
+        "hi": "नॉन-आर्टेराइटिक इस्कीमिक ऑप्टिक न्यूरोपैथी: ऑप्टिक नर्व के सिरे का छोटा स्ट्रोक। यह सूजी धमनियों से नहीं होता।"
+      }
+    },
+    "gca": {
+      "term": {
+        "en": "giant cell arteritis (GCA)",
+        "hi": "जायंट सेल आर्टेराइटिस (GCA)"
+      },
+      "def": {
+        "en": "Inflammation of large and medium arteries in people over 50. Without quick steroids it can blind both eyes.",
+        "hi": "50 से ज़्यादा उम्र के लोगों में बड़ी और मध्यम धमनियों की सूजन। जल्दी स्टेरॉयड न मिलें तो दोनों आँखों की नज़र जा सकती है।"
+      }
+    },
+    "orbital-cellulitis": {
+      "term": {
+        "en": "orbital cellulitis",
+        "hi": "ऑर्बिटल सेल्युलाइटिस (orbital cellulitis)"
+      },
+      "def": {
+        "en": "Infection of the tissues around the eye, behind the orbital septum. The eye bulges, moving it hurts, and sight can be lost.",
+        "hi": "ऑर्बिटल सेप्टम के पीछे, आँख के आसपास के ऊतकों का संक्रमण। आँख बाहर आती है, उसे घुमाने में दर्द होता है, और नज़र जा सकती है।"
+      }
+    },
+    "subperiosteal-abscess": {
+      "term": {
+        "en": "subperiosteal abscess",
+        "hi": "सबपेरिऑस्टियल एब्सेस (subperiosteal abscess)"
+      },
+      "def": {
+        "en": "Pus trapped between an orbital bone and its thin lining. It often sits on the inner wall, next to the ethmoid sinus.",
+        "hi": "ऑर्बिट की हड्डी और उसकी पतली परत के बीच फँसा पस। यह अक्सर अंदर की दीवार पर, एथमॉइड साइनस के पास होता है।"
+      }
+    },
+    "cavernous-sinus-thrombosis": {
+      "term": {
+        "en": "cavernous sinus thrombosis",
+        "hi": "कैवर्नस साइनस थ्रॉम्बोसिस (cavernous sinus thrombosis)"
+      },
+      "def": {
+        "en": "A clot, often infected, in the large vein channel behind both orbits. It can reach both eyes and can kill.",
+        "hi": "दोनों ऑर्बिट के पीछे की बड़ी शिरा-नली में थक्का, अक्सर संक्रमण के साथ। यह दोनों आँखों तक पहुँच सकता है और जानलेवा है।"
+      }
+    },
+    "mucormycosis": {
+      "term": {
+        "en": "mucormycosis",
+        "hi": "म्यूकरमाइकोसिस (mucormycosis)"
+      },
+      "def": {
+        "en": "A fast fungal infection that kills tissue and leaves black crusts. It strikes people with poorly controlled diabetes or weak immunity.",
+        "hi": "तेज़ी से फैलने वाला फफूंद का संक्रमण, जो ऊतक को मारकर काली पपड़ी छोड़ता है। यह बेकाबू डायबिटीज़ या कमज़ोर इम्युनिटी वाले लोगों को होता है।"
+      }
+    },
+    "thyroid-eye-disease": {
+      "term": {
+        "en": "thyroid eye disease",
+        "hi": "थायरॉइड आई डिज़ीज़ (thyroid eye disease)"
+      },
+      "def": {
+        "en": "An autoimmune swelling of the eye muscles and orbital fat, usually with Graves' disease. The eyes bulge and the lids pull back.",
+        "hi": "आँख की मांसपेशियों और ऑर्बिट की चर्बी की ऑटोइम्यून सूजन, आम तौर पर ग्रेव्स डिज़ीज़ के साथ। आँखें बाहर आती हैं और पलकें पीछे खिंच जाती हैं।"
+      }
+    },
+    "clinical-activity-score": {
+      "term": {
+        "en": "Clinical Activity Score",
+        "hi": "क्लिनिकल एक्टिविटी स्कोर (Clinical Activity Score)"
+      },
+      "def": {
+        "en": "A 7-point check of pain, redness and swelling in thyroid eye disease. A score of 3 or more means the disease is active.",
+        "hi": "थायरॉइड आई डिज़ीज़ में दर्द, लाली और सूजन की 7 अंकों वाली जाँच। 3 या ज़्यादा अंक का मतलब है कि बीमारी सक्रिय है।"
+      }
+    },
+    "dysthyroid-optic-neuropathy": {
+      "term": {
+        "en": "dysthyroid optic neuropathy",
+        "hi": "डिसथायरॉइड ऑप्टिक न्यूरोपैथी (dysthyroid optic neuropathy)"
+      },
+      "def": {
+        "en": "Damage to the optic nerve when swollen eye muscles squeeze it at the back of the orbit. It is an emergency.",
+        "hi": "जब सूजी हुई मांसपेशियाँ ऑर्बिट के पिछले हिस्से में ऑप्टिक नर्व को दबाती हैं, तो उसे नुकसान होता है। यह इमरजेंसी है।"
+      }
+    },
+    "orbital-decompression": {
+      "term": {
+        "en": "orbital decompression",
+        "hi": "ऑर्बिटल डीकम्प्रेशन (orbital decompression)"
+      },
+      "def": {
+        "en": "Surgery that removes part of the orbit's bony wall or fat. This gives the swollen tissue more room.",
+        "hi": "सर्जरी जिसमें ऑर्बिट की हड्डी की दीवार या चर्बी का कुछ हिस्सा निकाला जाता है। इससे सूजे ऊतक को ज़्यादा जगह मिलती है।"
+      }
+    },
+    "proptosis": {
+      "term": {
+        "en": "proptosis",
+        "hi": "प्रॉप्टोसिस (proptosis)"
+      },
+      "def": {
+        "en": "The eye pushed forward, out of the orbit. It is measured in millimetres with an exophthalmometer.",
+        "hi": "आँख का आगे की ओर, ऑर्बिट से बाहर धकेला जाना। इसे एक्सऑफ़्थैल्मोमीटर से मिलीमीटर में नापते हैं।"
+      }
+    },
+    "b-scan": {
+      "term": {
+        "en": "B-scan",
+        "hi": "बी-स्कैन (B-scan ultrasound)"
+      },
+      "def": {
+        "en": "An ultrasound picture of the eye and orbit in cross-section. It works even when you cannot see inside the eye.",
+        "hi": "आँख और ऑर्बिट की आड़ी कटी अल्ट्रासाउंड तस्वीर। यह तब भी काम करती है जब आँख के अंदर दिख न रहा हो।"
+      }
+    },
+    "rhabdomyosarcoma": {
+      "term": {
+        "en": "rhabdomyosarcoma",
+        "hi": "रैबडोमायोसार्कोमा (rhabdomyosarcoma)"
+      },
+      "def": {
+        "en": "A fast-growing cancer of muscle-type cells. It is the commonest primary orbital cancer in children.",
+        "hi": "मांसपेशी जैसी कोशिकाओं का तेज़ी से बढ़ने वाला कैंसर। बच्चों में ऑर्बिट का यह सबसे आम प्राइमरी कैंसर है।"
+      }
+    },
+    "seidel-test": {
+      "term": {
+        "en": "Seidel test",
+        "hi": "साइडल टेस्ट (Seidel test)"
+      },
+      "def": {
+        "en": "Strong fluorescein dye is put on a wound and viewed in blue light. A leak shows as a clear stream running through the dye.",
+        "hi": "घाव पर गाढ़ा फ़्लोरेसीन रंग लगाकर नीली रोशनी में देखते हैं। रिसाव हो तो रंग के बीच से साफ़ पानी की धार बहती दिखती है।"
+      }
+    },
+    "sympathetic-ophthalmia": {
+      "term": {
+        "en": "sympathetic ophthalmia",
+        "hi": "सिम्पेथेटिक ऑफ़्थैल्मिया (sympathetic ophthalmia)"
+      },
+      "def": {
+        "en": "A rare inflammation of both eyes after an injury to one eye. The body attacks eye proteins that the injury exposed.",
+        "hi": "एक आँख की चोट के बाद दोनों आँखों की एक दुर्लभ सूजन। शरीर उन आँख-प्रोटीन पर हमला करता है जो चोट से खुल गए।"
+      }
+    },
+    "occlusion": {
+      "term": {
+        "en": "occlusion",
+        "hi": "ऑक्लूज़न (occlusion)"
+      },
+      "def": {
+        "en": "Covering the better eye with a patch, so the brain has to use the weaker eye.",
+        "hi": "बेहतर आँख को पैच से ढकना, ताकि दिमाग को कमज़ोर आँख इस्तेमाल करनी पड़े।"
+      }
+    },
+    "penalisation": {
+      "term": {
+        "en": "penalisation",
+        "hi": "पेनलाइज़ेशन (penalisation)"
+      },
+      "def": {
+        "en": "Blurring the better eye on purpose, often with atropine drops, so the weaker eye does the work.",
+        "hi": "बेहतर आँख को जान-बूझकर धुंधला करना, अक्सर एट्रोपीन ड्रॉप से, ताकि काम कमज़ोर आँख करे।"
+      }
+    },
+    "dichoptic": {
+      "term": {
+        "en": "dichoptic treatment",
+        "hi": "डाइकॉप्टिक इलाज (dichoptic)"
+      },
+      "def": {
+        "en": "Showing each eye a different picture at the same time, as in some screen games or films for lazy eye.",
+        "hi": "एक ही समय पर हर आँख को अलग तस्वीर दिखाना, जैसे लेज़ी आई के लिए कुछ स्क्रीन गेम या फ़िल्मों में।"
+      }
+    },
+    "strabismus": {
+      "term": {
+        "en": "strabismus",
+        "hi": "भेंगापन (strabismus)"
+      },
+      "def": {
+        "en": "Squint. The two eyes do not point at the same thing.",
+        "hi": "भेंगापन। दोनों आँखें एक ही चीज़ की ओर नहीं देखतीं।"
+      }
+    },
+    "rop": {
+      "term": {
+        "en": "retinopathy of prematurity (ROP)",
+        "hi": "रेटिनोपैथी ऑफ़ प्रीमैच्योरिटी (ROP)"
+      },
+      "def": {
+        "en": "A disease of babies born too early. The retinal vessels have not finished growing, and they can grow wrongly.",
+        "hi": "समय से पहले जन्मे बच्चों की बीमारी। रेटिना की नलियाँ पूरी नहीं बढ़ी होतीं, और ग़लत ढंग से बढ़ सकती हैं।"
+      }
+    },
+    "plus-disease": {
+      "term": {
+        "en": "plus disease",
+        "hi": "प्लस डिज़ीज़ (plus disease)"
+      },
+      "def": {
+        "en": "Wide, twisted vessels near the disc in ROP. It means the disease is active and severe.",
+        "hi": "ROP में डिस्क के पास चौड़ी, मुड़ी हुई नलियाँ। इसका मतलब है बीमारी सक्रिय और गंभीर है।"
+      }
+    },
+    "a-rop": {
+      "term": {
+        "en": "aggressive ROP (A-ROP)",
+        "hi": "एग्रेसिव ROP (A-ROP)"
+      },
+      "def": {
+        "en": "A fast, severe form of ROP with marked plus disease and flat new vessels. It needs urgent treatment.",
+        "hi": "ROP का तेज़ और गंभीर रूप, जिसमें साफ़ प्लस डिज़ीज़ और सपाट नई नलियाँ होती हैं। इसका इलाज तुरंत चाहिए।"
+      }
+    },
+    "ora-serrata": {
+      "term": {
+        "en": "ora serrata",
+        "hi": "ओरा सेराटा (ora serrata)"
+      },
+      "def": {
+        "en": "The wavy front edge of the retina, where it ends near the base of the iris.",
+        "hi": "रेटिना का आगे वाला लहरदार किनारा, जहाँ वह आइरिस की जड़ के पास ख़त्म होता है।"
+      }
+    },
+    "leukocoria": {
+      "term": {
+        "en": "white pupil (leukocoria)",
+        "hi": "सफ़ेद पुतली (leukocoria)"
+      },
+      "def": {
+        "en": "A pupil that looks white instead of black or red. In a child it needs urgent referral.",
+        "hi": "पुतली जो काली या लाल के बजाय सफ़ेद दिखे। बच्चे में इसके लिए तुरंत रेफ़र करना होता है।"
+      }
+    },
+    "enucleation": {
+      "term": {
+        "en": "enucleation",
+        "hi": "एन्यूक्लिएशन (enucleation)"
+      },
+      "def": {
+        "en": "Surgery to remove the whole eye.",
+        "hi": "पूरी आँख निकालने की सर्जरी।"
+      }
+    },
+    "chalazion": {
+      "term": {
+        "en": "chalazion",
+        "hi": "कलेज़ियन (chalazion)"
+      },
+      "def": {
+        "en": "A firm, painless lump in the eyelid. It forms when an oil gland in the lid gets blocked.",
+        "hi": "पलक में एक सख़्त, बिना दर्द की गाँठ। यह तब बनती है जब पलक की तेल ग्रंथि बंद हो जाती है।"
+      }
+    },
+    "meibomian-gland": {
+      "term": {
+        "en": "meibomian gland",
+        "hi": "मीबोमियन ग्रंथि (meibomian gland)"
+      },
+      "def": {
+        "en": "One of a row of oil glands inside each eyelid. Their oil stops tears from drying too fast.",
+        "hi": "हर पलक के अंदर तेल ग्रंथियों की एक कतार में से एक। इनका तेल आँसुओं को जल्दी सूखने से रोकता है।"
+      }
+    },
+    "entropion": {
+      "term": {
+        "en": "entropion",
+        "hi": "एन्ट्रोपियन (entropion)"
+      },
+      "def": {
+        "en": "The eyelid edge turns in toward the eye, so the lashes rub the cornea.",
+        "hi": "पलक का किनारा आँख की ओर अंदर मुड़ जाता है, जिससे पलकों के बाल कॉर्निया से रगड़ते हैं।"
+      }
+    },
+    "ectropion": {
+      "term": {
+        "en": "ectropion",
+        "hi": "एक्ट्रोपियन (ectropion)"
+      },
+      "def": {
+        "en": "The eyelid edge turns out, away from the eye. The eye waters and the inner lining of the lid turns red.",
+        "hi": "पलक का किनारा आँख से दूर, बाहर की ओर मुड़ जाता है। आँख से पानी आता है और पलक की अंदरूनी परत लाल हो जाती है।"
+      }
+    },
+    "trichiasis": {
+      "term": {
+        "en": "trichiasis",
+        "hi": "ट्राइकियासिस (trichiasis)"
+      },
+      "def": {
+        "en": "Eyelashes grow toward the eye and rub it, even though the lid is in the right place.",
+        "hi": "पलक सही जगह पर होती है, फिर भी पलकों के बाल आँख की ओर उगकर उसे रगड़ते हैं।"
+      }
+    },
+    "trachoma": {
+      "term": {
+        "en": "trachoma",
+        "hi": "ट्रेकोमा (trachoma)"
+      },
+      "def": {
+        "en": "An eye infection spread by flies and touch. Repeated attacks scar the inside of the lid and turn the lashes in.",
+        "hi": "मक्खियों और छूने से फैलने वाला आँख का संक्रमण। बार-बार होने पर यह पलक के अंदर निशान छोड़ता है और बाल अंदर मुड़ जाते हैं।"
+      }
+    },
+    "nldo": {
+      "term": {
+        "en": "blocked tear duct",
+        "hi": "बंद आँसू की नली (NLDO)"
+      },
+      "def": {
+        "en": "Nasolacrimal duct obstruction. The tube that drains tears into the nose is blocked, so the eye waters.",
+        "hi": "नेज़ोलैक्रिमल डक्ट ऑब्स्ट्रक्शन। आँसुओं को नाक में ले जाने वाली नली बंद होती है, इसलिए आँख से पानी आता है।"
+      }
+    },
+    "dacryocystitis": {
+      "term": {
+        "en": "dacryocystitis",
+        "hi": "डैक्रियोसिस्टाइटिस (dacryocystitis)"
+      },
+      "def": {
+        "en": "Infection of the tear sac. It causes a painful red swelling below the inner corner of the eye.",
+        "hi": "आँसू की थैली का संक्रमण। इससे आँख के अंदरूनी कोने के नीचे दर्द वाली लाल सूजन होती है।"
+      }
+    },
+    "congenital-glaucoma": {
+      "term": {
+        "en": "congenital glaucoma",
+        "hi": "जन्मजात ग्लूकोमा (congenital glaucoma)"
+      },
+      "def": {
+        "en": "High eye pressure in a baby. The eye waters, fears light and the cornea grows large and hazy.",
+        "hi": "शिशु की आँख में ज़्यादा दबाव। आँख से पानी आता है, रोशनी से चुभन होती है, और कॉर्निया बड़ा और धुंधला हो जाता है।"
+      }
+    },
+    "orbital-septum": {
+      "term": {
+        "en": "orbital septum",
+        "hi": "ऑर्बिटल सेप्टम (orbital septum)"
+      },
+      "def": {
+        "en": "A thin sheet of tissue from the bony rim of the orbit to the eyelid. It keeps lid infections out of the orbit.",
+        "hi": "ऑर्बिट के हड्डी वाले किनारे से पलक तक ऊतक की पतली परत। यह पलक के संक्रमण को ऑर्बिट में जाने से रोकती है।"
+      }
+    },
+    "exophthalmometer": {
+      "term": {
+        "en": "exophthalmometer",
+        "hi": "एक्सऑफ़्थैल्मोमीटर (exophthalmometer)"
+      },
+      "def": {
+        "en": "A ruler with mirrors that rests on the outer rims of the orbits. It shows how far each eye sits forward, in mm.",
+        "hi": "शीशों वाला एक पैमाना जो ऑर्बिट के बाहरी किनारों पर टिकता है। यह बताता है कि हर आँख कितने मिलीमीटर आगे है।"
+      }
+    },
+    "congenital-cataract": {
+      "term": {
+        "en": "congenital cataract",
+        "hi": "जन्मजात मोतियाबिंद (congenital cataract)"
+      },
+      "def": {
+        "en": "A cloudy lens that a baby is born with, or gets in the first months of life.",
+        "hi": "धुंधला लेंस जो बच्चे में जन्म से हो, या जीवन के पहले महीनों में हो जाए।"
+      }
+    },
+    "red-reflex": {
+      "term": {
+        "en": "red reflex",
+        "hi": "रेड रिफ़्लेक्स (red reflex)"
+      },
+      "def": {
+        "en": "The red-orange glow seen in the pupil through an ophthalmoscope. It is light bouncing back from the retina.",
+        "hi": "ऑफ़्थैल्मोस्कोप से पुतली में दिखने वाली लाल-नारंगी चमक। यह रेटिना से लौटती रोशनी है।"
+      }
+    },
+    "hirschberg": {
+      "term": {
+        "en": "corneal light reflex test (Hirschberg test)",
+        "hi": "कॉर्निया पर रोशनी की चमक का टेस्ट (Hirschberg test)"
+      },
+      "def": {
+        "en": "Shine a torch at both eyes from in front. The bright dot should sit in the same place in each pupil.",
+        "hi": "सामने से दोनों आँखों पर टॉर्च डालें। चमकीला बिंदु दोनों पुतलियों में एक ही जगह होना चाहिए।"
+      }
+    },
+    "epicanthus": {
+      "term": {
+        "en": "epicanthal fold",
+        "hi": "एपिकैंथल फ़ोल्ड (epicanthal fold)"
+      },
+      "def": {
+        "en": "A fold of skin over the inner corner of the eye. It hides the white near the nose, so straight eyes can look crossed.",
+        "hi": "आँख के अंदरूनी कोने पर त्वचा की सिलवट। यह नाक के पास की सफ़ेदी छिपाती है, इसलिए सीधी आँखें भी भेंगी लग सकती हैं।"
+      }
+    },
+    "exotropia": {
+      "term": {
+        "en": "exotropia",
+        "hi": "एक्सोट्रोपिया (exotropia)"
+      },
+      "def": {
+        "en": "A squint in which one eye turns out, toward the ear.",
+        "hi": "भेंगापन जिसमें एक आँख बाहर, कान की ओर मुड़ जाती है।"
+      }
+    },
+    "hypertropia": {
+      "term": {
+        "en": "hypertropia",
+        "hi": "हाइपरट्रोपिया (hypertropia)"
+      },
+      "def": {
+        "en": "A squint in which one eye sits higher than the other.",
+        "hi": "भेंगापन जिसमें एक आँख दूसरी से ऊपर रहती है।"
+      }
+    },
+    "tropia": {
+      "term": {
+        "en": "tropia",
+        "hi": "ट्रोपिया (tropia)"
+      },
+      "def": {
+        "en": "A squint that shows while both eyes are open. One eye is turned all or part of the time.",
+        "hi": "ऐसा भेंगापन जो दोनों आँखें खुली होने पर भी दिखे। एक आँख हमेशा या कभी-कभी मुड़ी रहती है।"
+      }
+    },
+    "phoria": {
+      "term": {
+        "en": "phoria",
+        "hi": "फ़ोरिया (phoria)"
+      },
+      "def": {
+        "en": "A hidden squint. The eyes stay straight while both look, and one drifts only when it is covered.",
+        "hi": "छिपा हुआ भेंगापन। दोनों आँखें साथ देखें तो सीधी रहती हैं, और ढकने पर ही एक आँख खिसकती है।"
+      }
+    },
+    "nystagmus": {
+      "term": {
+        "en": "nystagmus",
+        "hi": "निस्टैग्मस (nystagmus)"
+      },
+      "def": {
+        "en": "Eyes that keep wobbling or jerking on their own, again and again.",
+        "hi": "आँखें जो अपने आप बार-बार काँपती या झटके से हिलती रहती हैं।"
+      }
+    },
+    "preterm": {
+      "term": {
+        "en": "preterm baby",
+        "hi": "प्रीटर्म शिशु (preterm baby)"
+      },
+      "def": {
+        "en": "A baby born before 37 weeks of pregnancy.",
+        "hi": "गर्भावस्था के 37 हफ़्ते पूरे होने से पहले जन्मा बच्चा।"
+      }
+    },
+    "gestational-age": {
+      "term": {
+        "en": "gestational age",
+        "hi": "गर्भकालीन उम्र (gestational age)"
+      },
+      "def": {
+        "en": "How many weeks of pregnancy had passed when the baby was born.",
+        "hi": "बच्चे के जन्म के समय गर्भावस्था के कितने हफ़्ते पूरे हुए थे।"
+      }
+    },
+    "indirect-ophthalmoscope": {
+      "term": {
+        "en": "indirect ophthalmoscope",
+        "hi": "इनडायरेक्ट ऑफ़्थैल्मोस्कोप (indirect ophthalmoscope)"
+      },
+      "def": {
+        "en": "A bright lamp worn on the head and used with a hand-held lens. It shows the whole retina, out to the edges.",
+        "hi": "सिर पर पहना जाने वाला तेज़ लैंप, जिसे हाथ के लेंस के साथ इस्तेमाल करते हैं। यह किनारों तक पूरा रेटिना दिखाता है।"
+      }
+    },
+    "aqueous": {
+      "term": {
+        "en": "aqueous",
+        "hi": "एक्वियस (aqueous)"
+      },
+      "def": {
+        "en": "The clear fluid in the front of the eye. It feeds the lens and cornea, then drains away.",
+        "hi": "आँख के अगले हिस्से का साफ़ पानी। यह लेंस और कॉर्निया को पोषण देकर बाहर निकल जाता है।"
+      }
+    },
+    "trabecular-meshwork": {
+      "term": {
+        "en": "trabecular meshwork",
+        "hi": "ट्रैबेक्युलर मेशवर्क (trabecular meshwork)"
+      },
+      "def": {
+        "en": "A sieve in the angle. Most aqueous drains out through it.",
+        "hi": "एंगल में एक छलनी। ज़्यादातर एक्वियस इसी से बाहर निकलता है।"
+      }
+    },
+    "schlemm-canal": {
+      "term": {
+        "en": "Schlemm canal",
+        "hi": "श्लेम कैनाल (Schlemm canal)"
+      },
+      "def": {
+        "en": "A thin channel behind the meshwork. It carries aqueous to the veins.",
+        "hi": "मेशवर्क के पीछे एक पतली नली। यह एक्वियस को नसों तक ले जाती है।"
+      }
+    },
+    "angle": {
+      "term": {
+        "en": "drainage angle",
+        "hi": "ड्रेनेज एंगल (angle)"
+      },
+      "def": {
+        "en": "The corner where the iris meets the cornea. The eye's drain sits here.",
+        "hi": "वह कोना जहाँ आइरिस और कॉर्निया मिलते हैं। आँख का निकास यहीं है।"
+      }
+    },
+    "cdr": {
+      "term": {
+        "en": "cup-to-disc ratio (CDR)",
+        "hi": "कप-डिस्क अनुपात (CDR)"
+      },
+      "def": {
+        "en": "Cup height divided by disc height. A bigger ratio can mean glaucoma.",
+        "hi": "कप की ऊँचाई को डिस्क की ऊँचाई से भाग। बड़ा अनुपात ग्लूकोमा का इशारा हो सकता है।"
+      }
+    },
+    "nrr": {
+      "term": {
+        "en": "neuroretinal rim",
+        "hi": "न्यूरोरेटिनल रिम (rim)"
+      },
+      "def": {
+        "en": "The pink ring of nerve fibres around the cup. Glaucoma thins it.",
+        "hi": "कप के चारों ओर तंत्रिका-तंतुओं का गुलाबी घेरा। ग्लूकोमा इसे पतला करता है।"
+      }
+    },
+    "isnt": {
+      "term": {
+        "en": "ISNT rule",
+        "hi": "ISNT नियम (ISNT rule)"
+      },
+      "def": {
+        "en": "In most healthy discs the rim is widest below, then above, then on the nose side, then on the ear side.",
+        "hi": "ज़्यादातर स्वस्थ डिस्क में रिम नीचे सबसे चौड़ा, फिर ऊपर, फिर नाक की ओर, फिर कान की ओर होता है।"
+      }
+    },
+    "disc-haemorrhage": {
+      "term": {
+        "en": "disc haemorrhage",
+        "hi": "डिस्क हेमरेज (disc haemorrhage)"
+      },
+      "def": {
+        "en": "A small flame of blood at the disc edge. In glaucoma it warns that damage may be getting worse.",
+        "hi": "डिस्क के किनारे पर लौ जैसा छोटा खून। ग्लूकोमा में यह चेतावनी है कि नुकसान बढ़ रहा हो सकता है।"
+      }
+    },
+    "scotoma": {
+      "term": {
+        "en": "scotoma",
+        "hi": "स्कोटोमा (scotoma)"
+      },
+      "def": {
+        "en": "A patch of the field where sight is lost or dim.",
+        "hi": "दायरे का वह हिस्सा जहाँ नज़र नहीं है या धुंधली है।"
+      }
+    },
+    "tonometry": {
+      "term": {
+        "en": "tonometry",
+        "hi": "टोनोमेट्री (tonometry)"
+      },
+      "def": {
+        "en": "Measuring eye pressure. Goldmann tonometry at the slit lamp is the standard.",
+        "hi": "आँख का प्रेशर नापना। स्लिट लैंप पर गोल्डमैन टोनोमेट्री मानक है।"
+      }
+    },
+    "gonioscopy": {
+      "term": {
+        "en": "gonioscopy",
+        "hi": "गोनियोस्कोपी (gonioscopy)"
+      },
+      "def": {
+        "en": "Looking at the drainage angle through a contact lens with mirrors.",
+        "hi": "शीशों वाले कॉन्टैक्ट लेंस से ड्रेनेज एंगल को देखना।"
+      }
+    },
+    "poag": {
+      "term": {
+        "en": "primary open-angle glaucoma (POAG)",
+        "hi": "प्राइमरी ओपन-एंगल ग्लूकोमा (POAG)"
+      },
+      "def": {
+        "en": "Glaucoma with an open angle and no other cause. It is slow and painless.",
+        "hi": "खुले एंगल वाला ग्लूकोमा, जिसका कोई दूसरा कारण न हो। यह धीमा और बिना दर्द का होता है।"
+      }
+    },
+    "angle-closure": {
+      "term": {
+        "en": "angle closure",
+        "hi": "एंगल क्लोज़र (angle closure)"
+      },
+      "def": {
+        "en": "The iris blocks the drain. Pressure can rise fast.",
+        "hi": "आइरिस निकास बंद कर देती है। प्रेशर तेज़ी से बढ़ सकता है।"
+      }
+    },
+    "ohtn": {
+      "term": {
+        "en": "ocular hypertension",
+        "hi": "ओक्युलर हाइपरटेंशन (ocular hypertension)"
+      },
+      "def": {
+        "en": "Eye pressure above normal while the disc and field are still healthy.",
+        "hi": "आँख का प्रेशर सामान्य से ज़्यादा, पर डिस्क और दायरा अभी स्वस्थ।"
+      }
+    },
+    "cct": {
+      "term": {
+        "en": "corneal thickness (CCT)",
+        "hi": "कॉर्निया की मोटाई (CCT)"
+      },
+      "def": {
+        "en": "Central corneal thickness. A thin cornea makes pressure read low and adds risk.",
+        "hi": "कॉर्निया के बीच की मोटाई। पतला कॉर्निया प्रेशर कम दिखाता है और ख़तरा बढ़ाता है।"
+      }
+    },
+    "pga": {
+      "term": {
+        "en": "prostaglandin drop",
+        "hi": "प्रोस्टाग्लैंडिन ड्रॉप (prostaglandin drop)"
+      },
+      "def": {
+        "en": "A common first drop for glaucoma, such as latanoprost, used once at night. It helps fluid drain out.",
+        "hi": "ग्लूकोमा की आम पहली ड्रॉप, जैसे लैटानोप्रोस्ट, रात को एक बार। यह पानी निकलने में मदद करती है।"
+      }
+    },
+    "beta-blocker": {
+      "term": {
+        "en": "beta-blocker drops",
+        "hi": "बीटा-ब्लॉकर ड्रॉप्स (beta-blocker drops)"
+      },
+      "def": {
+        "en": "Drops such as timolol that cut fluid production. Avoid them in asthma and a slow heart rate.",
+        "hi": "टिमोलोल जैसी ड्रॉप्स जो पानी बनना घटाती हैं। दमा और धीमी धड़कन में इन्हें न दें।"
+      }
+    },
+    "slt": {
+      "term": {
+        "en": "laser trabeculoplasty (SLT)",
+        "hi": "लेज़र ट्रैबेक्युलोप्लास्टी (SLT)"
+      },
+      "def": {
+        "en": "Selective laser trabeculoplasty: a quick clinic laser to the meshwork that helps fluid drain.",
+        "hi": "सेलेक्टिव लेज़र ट्रैबेक्युलोप्लास्टी: मेशवर्क पर क्लिनिक में होने वाला छोटा लेज़र, जो निकास बढ़ाता है।"
+      }
+    },
+    "lpi": {
+      "term": {
+        "en": "laser iridotomy",
+        "hi": "लेज़र इरिडोटॉमी (laser iridotomy)"
+      },
+      "def": {
+        "en": "A small laser hole in the outer iris. Fluid can then bypass the pupil, and the angle opens.",
+        "hi": "बाहरी आइरिस में लेज़र से छोटा छेद। इससे पानी पुतली को छोड़कर आगे जाता है और एंगल खुलता है।"
+      }
+    },
+    "trabeculectomy": {
+      "term": {
+        "en": "trabeculectomy",
+        "hi": "ट्रैबेक्युलेक्टॉमी (trabeculectomy)"
+      },
+      "def": {
+        "en": "Surgery that makes a new drain under the conjunctiva, forming a small blister called a bleb.",
+        "hi": "ऑपरेशन जो कंजंक्टाइवा के नीचे नया निकास बनाता है, जिससे ब्लेब नाम का छोटा फफोला बनता है।"
+      }
+    },
+    "target-iop": {
+      "term": {
+        "en": "target pressure",
+        "hi": "टारगेट प्रेशर (target pressure)"
+      },
+      "def": {
+        "en": "The pressure range chosen for one eye, low enough to stop more damage.",
+        "hi": "किसी एक आँख के लिए चुना गया प्रेशर का दायरा, जो आगे का नुकसान रोकने लायक़ कम हो।"
+      }
+    },
+    "pupil-block": {
+      "term": {
+        "en": "pupil block",
+        "hi": "प्यूपिल ब्लॉक (pupil block)"
+      },
+      "def": {
+        "en": "Aqueous cannot pass between the iris and lens. It pushes the iris forward onto the drain.",
+        "hi": "एक्वियस आइरिस और लेंस के बीच से नहीं निकल पाता। यह आइरिस को आगे निकास पर धकेलता है।"
+      }
+    },
+    "pas": {
+      "term": {
+        "en": "peripheral anterior synechiae (PAS)",
+        "hi": "पेरिफ़ेरल एंटीरियर साइनेकी (PAS)"
+      },
+      "def": {
+        "en": "Scars that stick the outer iris to the angle wall. They stay shut when pressed.",
+        "hi": "निशान जो बाहरी आइरिस को एंगल की दीवार से चिपका देते हैं। दबाने पर भी ये नहीं खुलते।"
+      }
+    },
+    "pxf": {
+      "term": {
+        "en": "pseudoexfoliation",
+        "hi": "स्यूडोएक्सफ़ोलिएशन (pseudoexfoliation)"
+      },
+      "def": {
+        "en": "Flaky white material on the lens and in the angle. It raises pressure and weakens the zonules.",
+        "hi": "लेंस पर और एंगल में पपड़ी जैसा सफ़ेद पदार्थ। यह प्रेशर बढ़ाता है और ज़ोन्यूल्स को कमज़ोर करता है।"
+      }
+    },
+    "capsule": {
+      "term": {
+        "en": "lens capsule",
+        "hi": "लेंस कैप्सूल (capsule)"
+      },
+      "def": {
+        "en": "The thin clear bag around the lens. The new lens is placed inside it.",
+        "hi": "लेंस के चारों ओर पतली, साफ़ थैली। नया लेंस इसी के अंदर रखा जाता है।"
+      }
+    },
+    "lens-cortex": {
+      "term": {
+        "en": "lens cortex",
+        "hi": "लेंस का कॉर्टेक्स (cortex)"
+      },
+      "def": {
+        "en": "The softer outer layers of the lens, between the capsule and the core.",
+        "hi": "लेंस की नरम बाहरी परतें, कैप्सूल और बीच के हिस्से के बीच।"
+      }
+    },
+    "lens-nucleus": {
+      "term": {
+        "en": "lens nucleus",
+        "hi": "लेंस का न्यूक्लियस (nucleus)"
+      },
+      "def": {
+        "en": "The hard central core of the lens. It grows denser and more yellow with age.",
+        "hi": "लेंस का सख़्त बीच का हिस्सा। उम्र के साथ यह घना और पीला होता जाता है।"
+      }
+    },
+    "zonules": {
+      "term": {
+        "en": "zonules",
+        "hi": "ज़ोन्यूल्स (zonules)"
+      },
+      "def": {
+        "en": "Fine fibres that hang the lens from the ciliary body.",
+        "hi": "पतले रेशे जो लेंस को सिलियरी बॉडी से टाँगे रखते हैं।"
+      }
+    },
+    "nuclear-cataract": {
+      "term": {
+        "en": "nuclear cataract",
+        "hi": "न्यूक्लियर कैटरेक्ट (nuclear cataract)"
+      },
+      "def": {
+        "en": "The central core turns yellow or brown. Distance blurs, and near may improve for a while.",
+        "hi": "बीच का हिस्सा पीला या भूरा होता है। दूर का धुंधला होता है, और पास का कुछ समय सुधर सकता है।"
+      }
+    },
+    "cortical-cataract": {
+      "term": {
+        "en": "cortical cataract",
+        "hi": "कॉर्टिकल कैटरेक्ट (cortical cataract)"
+      },
+      "def": {
+        "en": "White spokes in the outer lens that point to the centre. They cause glare.",
+        "hi": "बाहरी लेंस में सफ़ेद तीलियाँ जो बीच की ओर इशारा करती हैं। इनसे चौंध होती है।"
+      }
+    },
+    "psc": {
+      "term": {
+        "en": "posterior subcapsular cataract (PSC)",
+        "hi": "पोस्टीरियर सबकैप्सुलर कैटरेक्ट (PSC)"
+      },
+      "def": {
+        "en": "A plaque at the back of the lens. It is common with steroids and diabetes, and it hurts reading.",
+        "hi": "लेंस के पीछे एक परत। यह स्टेरॉयड और मधुमेह में आम है, और पढ़ने में दिक़्क़त देती है।"
+      }
+    },
+    "visual-acuity": {
+      "term": {
+        "en": "visual acuity",
+        "hi": "विज़ुअल एक्युइटी (visual acuity)"
+      },
+      "def": {
+        "en": "How small a letter one eye can read, tested one eye at a time.",
+        "hi": "एक आँख कितने छोटे अक्षर पढ़ सकती है, एक बार में एक आँख जाँचकर।"
+      }
+    },
+    "pinhole": {
+      "term": {
+        "en": "pinhole test",
+        "hi": "पिनहोल टेस्ट (pinhole)"
+      },
+      "def": {
+        "en": "Reading through a tiny hole. If sight improves, glasses may help.",
+        "hi": "छोटे छेद से पढ़ना। नज़र सुधरे तो चश्मे से मदद हो सकती है।"
+      }
+    },
+    "iol": {
+      "term": {
+        "en": "lens implant (IOL)",
+        "hi": "कृत्रिम लेंस (IOL)"
+      },
+      "def": {
+        "en": "The clear artificial lens put in the eye during cataract surgery.",
+        "hi": "मोतियाबिंद ऑपरेशन में आँख में लगाया जाने वाला साफ़ नकली लेंस।"
+      }
+    },
+    "phaco": {
+      "term": {
+        "en": "phaco",
+        "hi": "फ़ेको (phaco)"
+      },
+      "def": {
+        "en": "Phacoemulsification: surgery that breaks up the lens with ultrasound through a tiny cut.",
+        "hi": "फ़ेकोइमल्सिफ़िकेशन: ऑपरेशन जो छोटे चीरे से अल्ट्रासाउंड द्वारा लेंस को तोड़कर निकालता है।"
+      }
+    },
+    "msics": {
+      "term": {
+        "en": "small-incision surgery (MSICS)",
+        "hi": "स्मॉल-इंसीज़न सर्जरी (MSICS)"
+      },
+      "def": {
+        "en": "Manual small-incision cataract surgery. The lens comes out whole through a self-sealing tunnel.",
+        "hi": "मैनुअल स्मॉल-इंसीज़न कैटरेक्ट सर्जरी। लेंस पूरा, ख़ुद बंद होने वाली सुरंग से निकलता है।"
+      }
+    },
+    "capsulorhexis": {
+      "term": {
+        "en": "capsulorhexis",
+        "hi": "कैप्सुलोरेक्सिस (capsulorhexis)"
+      },
+      "def": {
+        "en": "A round opening made in the front capsule to reach the lens.",
+        "hi": "लेंस तक पहुँचने के लिए आगे के कैप्सूल में बनाया गया गोल छेद।"
+      }
+    },
+    "biometry": {
+      "term": {
+        "en": "biometry",
+        "hi": "बायोमेट्री (biometry)"
+      },
+      "def": {
+        "en": "Measuring the eye before surgery to choose the implant power.",
+        "hi": "कृत्रिम लेंस की पावर चुनने के लिए ऑपरेशन से पहले आँख का नाप।"
+      }
+    },
+    "axial-length": {
+      "term": {
+        "en": "axial length",
+        "hi": "एक्सियल लेंथ (axial length)"
+      },
+      "def": {
+        "en": "The length of the eye from front to back, about 23 to 24 mm in most adults.",
+        "hi": "आगे से पीछे तक आँख की लंबाई, ज़्यादातर वयस्कों में लगभग 23 से 24 mm।"
+      }
+    },
+    "keratometry": {
+      "term": {
+        "en": "keratometry",
+        "hi": "केराटोमेट्री (keratometry)"
+      },
+      "def": {
+        "en": "Measuring the curve, and so the power, of the cornea.",
+        "hi": "कॉर्निया का घुमाव, और इसलिए उसकी पावर, नापना।"
+      }
+    },
+    "pco": {
+      "term": {
+        "en": "posterior capsule opacification (PCO)",
+        "hi": "पोस्टीरियर कैप्सूल ओपेसिफ़िकेशन (PCO)"
+      },
+      "def": {
+        "en": "Haze on the back capsule months or years after surgery. A laser clears it.",
+        "hi": "ऑपरेशन के महीनों या सालों बाद पिछले कैप्सूल पर धुंध। लेज़र इसे साफ़ करता है।"
+      }
+    },
+    "yag": {
+      "term": {
+        "en": "YAG laser capsulotomy",
+        "hi": "YAG लेज़र कैप्सुलोटॉमी (YAG)"
+      },
+      "def": {
+        "en": "A laser that makes an opening in a hazy back capsule.",
+        "hi": "लेज़र जो धुंधले पिछले कैप्सूल में छेद बनाता है।"
+      }
+    },
+    "pcr": {
+      "term": {
+        "en": "posterior capsule rupture",
+        "hi": "पोस्टीरियर कैप्सूल रप्चर (capsule rupture)"
+      },
+      "def": {
+        "en": "A tear in the back capsule during surgery. Vitreous may come forward.",
+        "hi": "ऑपरेशन के दौरान पिछले कैप्सूल का फटना। विट्रियस आगे आ सकता है।"
+      }
+    },
+    "phacomorphic": {
+      "term": {
+        "en": "phacomorphic glaucoma",
+        "hi": "फ़ेकोमॉर्फ़िक ग्लूकोमा (phacomorphic glaucoma)"
+      },
+      "def": {
+        "en": "A swollen cataract pushes the iris forward and closes the angle.",
+        "hi": "सूजा मोतियाबिंद आइरिस को आगे धकेलकर एंगल बंद कर देता है।"
+      }
+    },
+    "phacolytic": {
+      "term": {
+        "en": "phacolytic glaucoma",
+        "hi": "फ़ेकोलिटिक ग्लूकोमा (phacolytic glaucoma)"
+      },
+      "def": {
+        "en": "Protein leaks from a very ripe cataract and clogs an open drain.",
+        "hi": "बहुत पके मोतियाबिंद से प्रोटीन रिसकर खुले निकास को जाम कर देता है।"
+      }
+    }
+  }
+}

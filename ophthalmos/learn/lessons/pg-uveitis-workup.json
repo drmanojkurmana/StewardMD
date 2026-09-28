@@ -1,0 +1,251 @@
+{
+  "id": "pg-uveitis-workup",
+  "unit": "uveitis-pg",
+  "level": "resident",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Uveitis work-up: aimed, not a shotgun",
+    "hi": "यूवाइटिस की जाँच: निशाना साधकर, अंधाधुंध नहीं"
+  },
+  "idea": {
+    "en": "Pick tests from the pattern of [[uveitis]], not from a long fixed list. Before any strong immune treatment, rule out syphilis and TB.",
+    "hi": "जाँचें [[uveitis]] के पैटर्न से चुनें, किसी लंबी तय सूची से नहीं। कोई भी तेज़ इम्यून इलाज शुरू करने से पहले सिफ़िलिस और TB को ख़ारिज करें।"
+  },
+  "see": {
+    "img": "cases/9.webp",
+    "deckItem": {
+      "deck": "cases",
+      "id": "9"
+    },
+    "expect": "anterior uveitis",
+    "alt": {
+      "en": "Slit-lamp photo of a brown iris. The pupil is irregular, with two lobes. Its edge is notched and held in at a few points. The lens behind it looks grey and hazy.",
+      "hi": "भूरी आइरिस की स्लिट-लैम्प फ़ोटो। पुतली टेढ़ी-मेढ़ी है, दो हिस्सों वाली। इसका किनारा कुछ जगहों पर कटा और अंदर खिंचा है। पीछे का लेंस भूरा-धुंधला दिखता है।"
+    },
+    "caption": {
+      "en": "A real slit-lamp photo of anterior uveitis. Posterior synechiae make the pupil irregular.",
+      "hi": "एंटीरियर यूवाइटिस की एक असली स्लिट-लैम्प फ़ोटो। पोस्टीरियर साइनेकी से पुतली टेढ़ी-मेढ़ी हो गई है।"
+    },
+    "credit": "OphthalVQA, CC BY 4.0. Xu P, et al. Br J Ophthalmol 2024.",
+    "hotspots": [
+      {
+        "x": 0.498,
+        "y": 0.301,
+        "label": {
+          "en": "Posterior synechia",
+          "hi": "पोस्टीरियर साइनेकिया"
+        },
+        "note": {
+          "en": "Here the iris edge is stuck to the lens, so it could not widen. A pale speck sits at the notch.",
+          "hi": "यहाँ आइरिस का किनारा लेंस से चिपका है, इसलिए यह फैल नहीं पाया। कटाव पर एक हल्का धब्बा है।"
+        }
+      },
+      {
+        "x": 0.423,
+        "y": 0.451,
+        "label": {
+          "en": "Scalloped lower edge",
+          "hi": "नीचे का लहरदार किनारा"
+        },
+        "note": {
+          "en": "The pupil margin is uneven here, from more adhesions.",
+          "hi": "यहाँ पुतली का किनारा असमान है, और चिपकावों के कारण।"
+        }
+      },
+      {
+        "x": 0.53,
+        "y": 0.43,
+        "label": {
+          "en": "Irregular pupil",
+          "hi": "टेढ़ी-मेढ़ी पुतली"
+        },
+        "note": {
+          "en": "The pupil has two lobes, not a round shape. Stuck parts stay put while free parts widen.",
+          "hi": "पुतली गोल नहीं, दो हिस्सों वाली है। चिपके हिस्से वहीं रहते हैं, और खुले हिस्से फैल जाते हैं।"
+        }
+      },
+      {
+        "x": 0.37,
+        "y": 0.34,
+        "label": {
+          "en": "Hazy lens",
+          "hi": "धुंधला लेंस"
+        },
+        "note": {
+          "en": "The lens looks grey and dense. Cataract often follows uveitis and steroid drops.",
+          "hi": "लेंस भूरा और घना दिखता है। यूवाइटिस और स्टेरॉयड ड्रॉप्स के बाद अक्सर मोतियाबिंद हो जाता है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Every test should answer a question. Choose tests from the history, the exam and the SUN pattern.",
+        "hi": "हर जाँच को किसी सवाल का जवाब देना चाहिए। जाँचें इतिहास, जाँच के नतीजे और SUN पैटर्न से चुनें।"
+      },
+      {
+        "en": "A first attack of one-sided, non-granulomatous anterior uveitis in a well person needs little testing. Many still check syphilis.",
+        "hi": "किसी स्वस्थ व्यक्ति में एक आँख के नॉन-ग्रैन्युलोमेटस एंटीरियर यूवाइटिस के पहले दौरे में कम जाँच चाहिए। फिर भी कई डॉक्टर सिफ़िलिस जाँचते हैं।"
+      },
+      {
+        "en": "Test more when it is granulomatous, bilateral, recurrent, posterior or not settling on treatment.",
+        "hi": "ज़्यादा जाँच तब करें जब यह ग्रैन्युलोमेटस, दोनों आँखों में, बार-बार होने वाला, पोस्टीरियर हो, या इलाज से ठीक न हो।"
+      },
+      {
+        "en": "[[hla-b27]] fits sudden attacks in one eye at a time, often with back pain. It guides the search for joint disease.",
+        "hi": "[[hla-b27]] एक बार में एक आँख के अचानक दौरों से मेल खाता है, अक्सर कमर दर्द के साथ। यह जोड़ों की बीमारी खोजने में मदद करता है।"
+      },
+      {
+        "en": "Syphilis can mimic any uveitis, and it is curable. Test for it in almost every patient.",
+        "hi": "सिफ़िलिस किसी भी यूवाइटिस की नक़ल कर सकता है, और इसका पूरा इलाज है। लगभग हर मरीज़ में इसकी जाँच करें।"
+      },
+      {
+        "en": "TB is common in India. Do an [[igra]] or Mantoux test and a chest X-ray before systemic steroid or immune drugs.",
+        "hi": "भारत में TB आम है। सिस्टमिक स्टेरॉयड या इम्यून दवाओं से पहले [[igra]] या मैनटू टेस्ट और छाती का एक्स-रे कराएँ।"
+      },
+      {
+        "en": "Think of sarcoid with large mutton-fat deposits on the cornea, iris nodules or vitreous snowballs. Check serum ACE and image the chest.",
+        "hi": "कॉर्निया पर बड़े मटन-फ़ैट जमाव, आइरिस पर गाँठें या विट्रियस में स्नोबॉल हों तो सारकॉइड सोचें। सीरम ACE जाँचें और छाती की इमेजिंग कराएँ।"
+      },
+      {
+        "en": "Imaging finds hidden damage. OCT shows [[cystoid-macular-oedema]]. Fluorescein angiography shows leaking vessels and a leaking disc.",
+        "hi": "इमेजिंग छिपा नुकसान दिखाती है। OCT पर [[cystoid-macular-oedema]] दिखता है। फ़्लोरेसीन एंजियोग्राफ़ी पर रिसती नलियाँ और रिसती डिस्क दिखती हैं।"
+      }
+    ],
+    "analogy": {
+      "en": "A good detective questions the likely suspects. A shotgun panel arrests the whole street. You get false leads, high bills and lost time.",
+      "hi": "अच्छा जासूस उन्हीं से पूछताछ करता है जिन पर शक बनता है। अंधाधुंध जाँच पूरी गली को गिरफ़्तार करने जैसी है। झूठे सुराग़ मिलते हैं, ख़र्च बढ़ता है और समय जाता है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Look for [[posterior-synechiae]]: a notched pupil that widens unevenly, as in this photo.",
+      "hi": "[[posterior-synechiae]] ढूँढें: कटी-फटी पुतली जो असमान फैलती है, जैसे इस फ़ोटो में।"
+    },
+    {
+      "en": "Large, greasy deposits on the back of the cornea and iris nodules mean granulomatous disease. Think of TB, sarcoid and syphilis.",
+      "hi": "कॉर्निया के पीछे बड़े, चिकने जमाव और आइरिस पर गाँठें ग्रैन्युलोमेटस बीमारी बताते हैं। TB, सारकॉइड और सिफ़िलिस सोचें।"
+    },
+    {
+      "en": "Always dilate and check the fundus. Front signs may be the tip of a panuveitis.",
+      "hi": "हमेशा पुतली फैलाकर फ़ंडस देखें। आगे के संकेत पैनयूवाइटिस का सिर्फ़ सिरा हो सकते हैं।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Ask about back pain, joints, skin, bowel, cough, TB contact and sexual history.",
+      "hi": "कमर दर्द, जोड़ों, त्वचा, आँतों, खाँसी, TB के संपर्क और यौन इतिहास के बारे में पूछें।"
+    },
+    {
+      "en": "Send syphilis serology and TB tests before systemic steroid or immune drugs.",
+      "hi": "सिस्टमिक स्टेरॉयड या इम्यून दवाओं से पहले सिफ़िलिस सीरोलॉजी और TB की जाँच भेजें।"
+    },
+    {
+      "en": "Get an OCT whenever vision drops, to look for macular oedema.",
+      "hi": "जब भी नज़र घटे, मैक्युलर ईडिमा देखने के लिए OCT कराएँ।"
+    }
+  ],
+  "remember": {
+    "en": "Test by pattern, not by panel. Rule out syphilis and TB before you suppress the immune system.",
+    "hi": "जाँच पैटर्न से करें, लंबी सूची से नहीं। इम्यून सिस्टम दबाने से पहले सिफ़िलिस और TB ख़ारिज करें।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "A healthy young man has his first attack of one-sided, non-granulomatous anterior uveitis. What is sensible?",
+        "hi": "एक स्वस्थ नौजवान को पहली बार एक आँख में नॉन-ग्रैन्युलोमेटस एंटीरियर यूवाइटिस हुआ है। क्या समझदारी है?"
+      },
+      "o": [
+        {
+          "en": "A panel of 20 blood tests",
+          "hi": "20 ख़ून की जाँचों का पैनल"
+        },
+        {
+          "en": "Little testing, often with syphilis serology",
+          "hi": "कम जाँच, अक्सर सिफ़िलिस सीरोलॉजी के साथ"
+        },
+        {
+          "en": "Chest CT and brain MRI",
+          "hi": "छाती का CT और दिमाग़ का MRI"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "A first mild attack rarely needs a panel. Test more if it recurs, is bilateral or granulomatous, or involves the back of the eye.",
+        "hi": "पहले हल्के दौरे में शायद ही पैनल चाहिए। दोबारा हो, दोनों आँखों में हो, ग्रैन्युलोमेटस हो या पीछे तक पहुँचे तो ज़्यादा जाँच करें।"
+      }
+    },
+    {
+      "q": {
+        "en": "In India, what must you rule out before systemic immune drugs?",
+        "hi": "भारत में सिस्टमिक इम्यून दवाओं से पहले क्या ख़ारिज करना ज़रूरी है?"
+      },
+      "o": [
+        {
+          "en": "TB and syphilis",
+          "hi": "TB और सिफ़िलिस"
+        },
+        {
+          "en": "Vitamin D deficiency",
+          "hi": "विटामिन D की कमी"
+        },
+        {
+          "en": "Dry eye",
+          "hi": "ड्राई आई"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Both are common and treatable. Immune drugs without their treatment can make them much worse.",
+        "hi": "दोनों आम हैं और इनका इलाज है। इनके इलाज के बिना इम्यून दवाएँ इन्हें बहुत बिगाड़ सकती हैं।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which test best shows cystoid macular oedema?",
+        "hi": "सिस्टॉइड मैक्युलर ईडिमा सबसे अच्छी तरह कौन सी जाँच दिखाती है?"
+      },
+      "o": [
+        {
+          "en": "OCT",
+          "hi": "OCT स्कैन"
+        },
+        {
+          "en": "Chest X-ray",
+          "hi": "छाती का एक्स-रे"
+        },
+        {
+          "en": "HLA-B27",
+          "hi": "HLA-B27 जाँच"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "OCT shows the fluid pockets in cross-section, and it is quick and repeatable.",
+        "hi": "OCT तरल की थैलियाँ क्रॉस-सेक्शन में दिखाता है, और यह जल्दी और बार-बार किया जा सकता है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "uveitis"
+  },
+  "deeper": {
+    "note": "uveitis"
+  },
+  "glossary": [
+    "uveitis",
+    "hla-b27",
+    "igra",
+    "cystoid-macular-oedema",
+    "posterior-synechiae"
+  ],
+  "sources": [
+    "Standardization of Uveitis Nomenclature (SUN) Working Group. Classification criteria for syphilitic uveitis. Am J Ophthalmol 2021;228:182-191.",
+    "Standardization of Uveitis Nomenclature (SUN) Working Group. Classification criteria for tubercular uveitis. Am J Ophthalmol 2021;228:142-151.",
+    "Standardization of Uveitis Nomenclature (SUN) Working Group. Classification criteria for sarcoidosis-associated uveitis. Am J Ophthalmol 2021;228:220-230.",
+    "Standardization of Uveitis Nomenclature (SUN) Working Group. Classification criteria for spondyloarthritis/HLA-B27-associated anterior uveitis. Am J Ophthalmol 2021;228:117-125.",
+    "Xu P, Chen X, Zhao Z, Shi D. Unveiling the clinical incapabilities: a benchmarking study of GPT-4V(ision) for ophthalmic multimodal image analysis. Br J Ophthalmol 2024. doi:10.1136/bjo-2023-325054"
+  ]
+}

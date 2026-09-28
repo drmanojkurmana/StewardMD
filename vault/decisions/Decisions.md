@@ -10586,6 +10586,14 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   the plugin module) and returns iOS's completion handler on `SMDBackgroundURLSessionDone`. A local
   notification says when a model finished while the app was in the background. Uncompiled here:
   build on the Mac and watch a download with the phone locked.
+- **Root cause of damaged MaiK models on iOS (owner follow-up, same day).** `ModelDownloader`
+  special-cased only HTTP 200, so any other reply to a part (403 from an expired signed Hugging Face
+  CDN link, 416, 5xx: an error page) was written into the model at that part's offset and marked
+  committed. Backgrounding the app makes iOS defer and retry parts after those links expire, so the
+  "completed" file had error pages stitched in. Parts are now committed only as a 206 whose
+  Content-Range starts at the part offset with exactly the promised byte count; anything else is
+  re-requested from the original resolve URL (fresh signed link), up to 5 tries per part. The native
+  hash check remains the backstop. Android's DownloadManager fails on HTTP errors and is unaffected.
 - **The grey edge tab (SMD-15) is iOS's Picture-in-Picture stash handle**, not app UI; one report showed
   a live camera feed in the PiP window. `swipe-back.js` now opts every app `<video>` out of PiP, leaves
   PiP on removal or backgrounding, and stops a removed camera preview's stream.
@@ -10617,3 +10625,32 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   `ownerProduced` in `clinix-diagrams.js ATLAS_IMAGES`, so they render. "Don't lock anything behind
   draft": draft content always renders (a missing flags module no longer hides it); only an explicit
   `smd_clinix_draft=0` author preview does.
+
+## 2026-09-28 - Ophthalmós Learn tab ships in the bundle (Pages + native), not R2
+- **Context**: the Learn tab (module repo PR #17, `feat/learn` a22a8cd) adds `ophthalmos/learn/`: 14
+  bilingual lessons (English/Hindi), index, glossary, 5 original SVG diagrams and a 42-item media library
+  (17 photos, 17 illustrations, 8 animations) with `media/credits.json`, 65 files, about 1.9 MB.
+- **Decision**: ship it with the app, not on R2. The Pages upload is about 15,333 files before and about
+  15,400 after (cap 20,000), and 1.9 MB is small for the native bundle, so lessons, diagrams and "More
+  pictures" work offline. `scripts/build-www.sh` copies the whole `ophthalmos/learn/` (minus README.md).
+  Lessons load everything from `SMD_OPHTHALMOS_BASE` (default `/ophthalmos/`); the fundus/OCT deck images
+  in lessons still come from R2 (`ophthalmos-img.stewardmd.in`). `functions/_middleware.js` 404s
+  `/ophthalmos/` on the web by design (native-only app), unchanged.
+- **Owner decisions carried in this build**: Learn | Test tabs chosen on first open; MBBS lessons free,
+  Resident lessons Pro with one trial (`learn.resident`); Resident question-bank sets gated by trial feature
+  `mcq.resident`; primary button fill `--op-pri-fill #1d6ed4` (white text 4.96:1, was 2.82:1); back buttons
+  say where they go ("Back to lesson"). Lesson content is ai_drafted, pending ophthalmologist sign-off.
+
+## 2026-09-28 - Ophthalmós Learn loads lessons on open, from a generated index
+- **Context**: the Learn units (module repo PR #23, integrating #18 to #22) take Learn from 14 to 107 lessons.
+  The engine fetched every lesson file when Ophthalmós opened: 1.56 MB and 107 requests before the Learn home
+  could render, on a phone, every open.
+- **Decision**: `ophthalmos/learn/index.json` carries a summary per lesson (title, minutes, idea, picture, clinic
+  and classes), generated from the lesson files by the module repo's `dev/learn-index.mjs`; the Learn home,
+  Today's plan, "Learn this" and Revise titles render from it. A lesson file is fetched when it is opened,
+  with a loading line and Try again on failure, and cached in memory. Opening fetches index.json (102 KB,
+  24 KB gzipped) and no lesson file.
+- **Why not the alternatives**: keeping eager loading scales linearly with content; hand-maintained titles in
+  the index drift, so the module's content test fails whenever the index is out of step with the lessons.
+- **Verified**: module repo headless UI step (no lesson request on open; one fetch per lesson; failure path),
+  and StewardMD `test/run-ophthalmos-10x-ui.mjs` in the real app.

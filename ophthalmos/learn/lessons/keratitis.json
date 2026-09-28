@@ -1,0 +1,265 @@
+{
+  "id": "keratitis",
+  "unit": "cornea",
+  "level": "mbbs",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Corneal ulcer: an eye emergency",
+    "hi": "कॉर्निया का अल्सर: आँख की इमरजेंसी"
+  },
+  "idea": {
+    "en": "A painful red eye with a white spot on the cornea is a [[corneal-ulcer]] until proved otherwise. Refer the same day, and never give [[steroid-drops]].",
+    "hi": "दर्द भरी लाल आँख और कॉर्निया पर सफ़ेद धब्बा, जब तक उल्टा साबित न हो, [[corneal-ulcer]] है। उसी दिन भेजें, और कभी [[steroid-drops]] न दें।"
+  },
+  "see": {
+    "img": "cases/5.webp",
+    "deckItem": {
+      "deck": "cases",
+      "id": "5"
+    },
+    "expect": "corneal ulcer",
+    "alt": {
+      "en": "Close-up photo of a very red, swollen eye. The cornea is grey and hazy. A large white patch with a rough, glistening surface lies over the lower part of the cornea, below the pupil. A second small white patch sits to the right.",
+      "hi": "बहुत लाल, सूजी हुई आँख की पास से ली गई फ़ोटो। कॉर्निया स्लेटी और धुंधला है। पुतली के नीचे, कॉर्निया के निचले हिस्से पर खुरदुरी, चमकती सतह वाला बड़ा सफ़ेद धब्बा है। दाईं ओर एक और छोटा सफ़ेद धब्बा है।"
+    },
+    "caption": {
+      "en": "A real photo of severe keratitis with a corneal ulcer. The white patch is infected, dead tissue in the cornea.",
+      "hi": "गंभीर केराटाइटिस के साथ कॉर्निया के अल्सर (corneal ulcer) की असली फ़ोटो। सफ़ेद धब्बा कॉर्निया का संक्रमित, मरा हुआ ऊतक है।"
+    },
+    "credit": "OphthalVQA, CC BY 4.0. Xu P, et al. Br J Ophthalmol 2024.",
+    "hotspots": [
+      {
+        "x": 0.41,
+        "y": 0.63,
+        "label": {
+          "en": "Ulcer",
+          "hi": "अल्सर (ulcer)"
+        },
+        "note": {
+          "en": "A large white patch below the pupil. Germs are eating into the cornea here. It will stain with fluorescein.",
+          "hi": "पुतली के नीचे बड़ा सफ़ेद धब्बा। यहाँ कीटाणु कॉर्निया को खा रहे हैं। यह फ़्लोरेसीन से रंग पकड़ेगा।"
+        }
+      },
+      {
+        "x": 0.3,
+        "y": 0.33,
+        "label": {
+          "en": "Hazy cornea",
+          "hi": "धुंधला कॉर्निया"
+        },
+        "note": {
+          "en": "The whole cornea looks grey and cloudy. It is swollen with fluid, so the iris is hard to see.",
+          "hi": "पूरा कॉर्निया स्लेटी और धुंधला दिखता है। यह तरल से सूजा है, इसलिए आइरिस मुश्किल से दिखती है।"
+        }
+      },
+      {
+        "x": 0.66,
+        "y": 0.54,
+        "label": {
+          "en": "Second white patch",
+          "hi": "दूसरा सफ़ेद धब्बा"
+        },
+        "note": {
+          "en": "A smaller white spot away from the main ulcer. Note every patch and its size for the eye team.",
+          "hi": "मुख्य अल्सर से दूर एक छोटा सफ़ेद धब्बा। आँख की टीम के लिए हर धब्बा और उसका आकार लिखें।"
+        }
+      },
+      {
+        "x": 0.14,
+        "y": 0.45,
+        "label": {
+          "en": "Intense redness",
+          "hi": "बहुत तेज़ लाली"
+        },
+        "note": {
+          "en": "The whole white is deep red, right up to the cornea. Compare this with the pale limbus in simple conjunctivitis.",
+          "hi": "पूरा सफ़ेद हिस्सा गहरा लाल है, कॉर्निया तक। इसे साधारण कंजंक्टिवाइटिस के हल्के लिम्बस से मिलाएँ।"
+        }
+      },
+      {
+        "x": 0.75,
+        "y": 0.85,
+        "label": {
+          "en": "Swollen conjunctiva",
+          "hi": "सूजी कंजंक्टिवा"
+        },
+        "note": {
+          "en": "The conjunctiva is puffy and shiny with fluid. The eye is badly inflamed.",
+          "hi": "कंजंक्टिवा तरल से फूली और चमकदार है। आँख में बहुत ज़्यादा सूजन है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "The [[epithelium]] keeps germs out of the cornea. A scratch, a contact lens or a dry surface breaks it.",
+        "hi": "[[epithelium]] कीटाणुओं को कॉर्निया से बाहर रखती है। खरोंच, कॉन्टैक्ट लेंस या सूखी सतह इसे तोड़ देती है।"
+      },
+      {
+        "en": "Bacteria, fungi or other germs get in. They eat the tissue and cause [[keratitis]], a white patch of infection.",
+        "hi": "बैक्टीरिया, फ़ंगस या दूसरे कीटाणु अंदर आ जाते हैं। वे ऊतक को खाते हैं और [[keratitis]] करते हैं, संक्रमण का सफ़ेद धब्बा।"
+      },
+      {
+        "en": "In India, a scratch from a plant, like paddy, sugarcane or a twig, often leads to fungal infection.",
+        "hi": "भारत में पौधे से लगी खरोंच, जैसे धान, गन्ना या टहनी, अक्सर फ़ंगल इन्फ़ेक्शन करती है।"
+      },
+      {
+        "en": "Contact lens wearers are at high risk, mostly if they sleep in lenses or rinse them in tap water. [[acanthamoeba]] is one cause.",
+        "hi": "कॉन्टैक्ट लेंस पहनने वालों को बड़ा ख़तरा है, ख़ासकर अगर वे लेंस पहनकर सोते हैं या नल के पानी से धोते हैं। [[acanthamoeba]] एक कारण है।"
+      },
+      {
+        "en": "An ulcer can scar the cornea or burst through it. The eye can be lost within days.",
+        "hi": "अल्सर कॉर्निया पर निशान छोड़ सकता है या उसके आर-पार छेद कर सकता है। कुछ ही दिनों में आँख जा सकती है।"
+      }
+    ],
+    "analogy": {
+      "en": "Think of a crack in a windscreen that lets rain in. Once water gets inside the glass, it spreads and clouds it. The ulcer spreads the same way, so it must be treated fast.",
+      "hi": "कार के शीशे की दरार के बारे में सोचिए, जिससे बारिश अंदर आती है। एक बार पानी शीशे के अंदर गया, तो फैलकर उसे धुंधला कर देता है। अल्सर भी ऐसे ही फैलता है, इसलिए तुरंत इलाज चाहिए।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Pain, [[photophobia]], watering and blurred vision in one red eye.",
+      "hi": "एक लाल आँख में दर्द, [[photophobia]], पानी आना और धुंधली नज़र।"
+    },
+    {
+      "en": "A white or grey spot on the cornea, with redness packed around the limbus.",
+      "hi": "कॉर्निया पर सफ़ेद या स्लेटी धब्बा, और लिम्बस के चारों ओर जमा लाली।"
+    },
+    {
+      "en": "A drop of [[fluorescein]] turns the ulcer bright green under blue light. It shows where the surface is broken.",
+      "hi": "[[fluorescein]] की एक बूँद नीली रोशनी में अल्सर को चमकीला हरा कर देती है। यह दिखाती है कि सतह कहाँ टूटी है।"
+    },
+    {
+      "en": "A pale level of pus at the bottom of the iris, a [[hypopyon]], means severe infection.",
+      "hi": "आइरिस के नीचे पस की हल्की परत, [[hypopyon]], गंभीर इन्फ़ेक्शन का संकेत है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Refer to an eye specialist the same day. The team scrapes the ulcer to find the germ, then treats it.",
+      "hi": "उसी दिन आँख के विशेषज्ञ के पास भेजें। टीम कीटाणु पहचानने के लिए अल्सर को खुरचती है, फिर इलाज करती है।"
+    },
+    {
+      "en": "Never give steroid drops. They can make a fungal or herpes ulcer much worse.",
+      "hi": "कभी स्टेरॉयड ड्रॉप न दें। ये फ़ंगल या हर्पीस के अल्सर को बहुत बिगाड़ सकते हैं।"
+    },
+    {
+      "en": "Do not patch the eye shut. A patch keeps germs warm and wet.",
+      "hi": "आँख पर पट्टी बाँधकर बंद न करें। पट्टी कीटाणुओं को गर्म और गीला रखती है।"
+    },
+    {
+      "en": "Take out a contact lens. Send the lens and its case with the patient.",
+      "hi": "कॉन्टैक्ट लेंस निकालें। लेंस और उसका केस मरीज़ के साथ भेजें।"
+    },
+    {
+      "en": "Ask about plant injury and home remedies. Advise against putting anything else into the eye.",
+      "hi": "पौधे से चोट और घरेलू नुस्ख़ों के बारे में पूछें। आँख में और कुछ भी न डालने की सलाह दें।"
+    }
+  ],
+  "remember": {
+    "en": "Painful red eye plus a white spot means corneal ulcer. Refer today, no steroids, no patch.",
+    "hi": "दर्द भरी लाल आँख और सफ़ेद धब्बा मतलब कॉर्निया का अल्सर। आज ही भेजें, स्टेरॉयड नहीं, पट्टी नहीं।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "A farmer has a painful red eye three days after a paddy leaf hit it. There is a grey-white spot on the cornea. What is most likely?",
+        "hi": "धान की पत्ती लगने के तीन दिन बाद एक किसान की आँख लाल है और दर्द है। कॉर्निया पर स्लेटी-सफ़ेद धब्बा है। सबसे संभावित क्या है?"
+      },
+      "o": [
+        {
+          "en": "Allergic conjunctivitis",
+          "hi": "एलर्जी वाला कंजंक्टिवाइटिस"
+        },
+        {
+          "en": "Fungal corneal ulcer",
+          "hi": "फ़ंगल कॉर्निया अल्सर"
+        },
+        {
+          "en": "Subconjunctival haemorrhage",
+          "hi": "सबकंजंक्टिवल हेमरेज"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Injury from plant matter is a classic cause of fungal keratitis in India. He needs same-day referral.",
+        "hi": "पौधे से लगी चोट भारत में फ़ंगल केराटाइटिस का जाना-माना कारण है। उसे उसी दिन भेजना है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which drop must you never give for a suspected corneal ulcer?",
+        "hi": "कॉर्निया के अल्सर के शक में कौन सा ड्रॉप कभी नहीं देना चाहिए?"
+      },
+      "o": [
+        {
+          "en": "Fluorescein to stain it",
+          "hi": "रंग के लिए फ़्लोरेसीन"
+        },
+        {
+          "en": "A steroid drop",
+          "hi": "स्टेरॉयड ड्रॉप"
+        },
+        {
+          "en": "Sterile saline",
+          "hi": "स्टेराइल सलाइन"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Steroids weaken the defence against germs. Fungal and herpes ulcers can spread fast and perforate.",
+        "hi": "स्टेरॉयड कीटाणुओं से लड़ने की ताक़त घटाते हैं। फ़ंगल और हर्पीस के अल्सर तेज़ी से फैलकर छेद कर सकते हैं।"
+      }
+    },
+    {
+      "q": {
+        "en": "What does fluorescein show on the cornea?",
+        "hi": "फ़्लोरेसीन कॉर्निया पर क्या दिखाता है?"
+      },
+      "o": [
+        {
+          "en": "Where the surface is broken, as green under blue light",
+          "hi": "नीली रोशनी में हरे रंग से, कि सतह कहाँ टूटी है"
+        },
+        {
+          "en": "The eye pressure",
+          "hi": "आँख का दबाव"
+        },
+        {
+          "en": "Which germ is causing it",
+          "hi": "कौन सा कीटाणु कारण है"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "The dye sticks where the epithelium is missing. Only a scraping tells you the germ.",
+        "hi": "रंग वहीं चिपकता है जहाँ एपिथीलियम नहीं है। कीटाणु सिर्फ़ खुरचकर की गई जाँच से पता चलता है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "cornea"
+  },
+  "deeper": {
+    "note": "keratitis"
+  },
+  "glossary": [
+    "corneal-ulcer",
+    "steroid-drops",
+    "epithelium",
+    "keratitis",
+    "acanthamoeba",
+    "photophobia",
+    "fluorescein",
+    "hypopyon"
+  ],
+  "sources": [
+    "Rhee MK, Ahmad S, Amescua G, et al. Bacterial Keratitis Preferred Practice Pattern. Ophthalmology 2024;131(4):P87-P133.",
+    "Srinivasan M, Gonzales CA, George C, et al. Epidemiology and aetiological diagnosis of corneal ulceration in Madurai, south India. Br J Ophthalmol 1997;81(11):965-971.",
+    "Prajna NV, Krishnan T, Mascarenhas J, et al. The Mycotic Ulcer Treatment Trial: a randomized trial comparing natamycin vs voriconazole. JAMA Ophthalmol 2013;131(4):422-429.",
+    "Xu P, Chen X, Zhao Z, Shi D. Unveiling the clinical incapabilities: a benchmarking study of GPT-4V(ision) for ophthalmic multimodal image analysis. Br J Ophthalmol 2024. doi:10.1136/bjo-2023-325054"
+  ]
+}
