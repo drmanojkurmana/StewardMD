@@ -66,24 +66,30 @@
   function checklistFor(c, level) {
     var q = ["uc", "baseline", "variability", "decels", "figo"];
     if (level !== "resident") return q;
-    if (c.review && c.review.decelType) q.push("decelType");
+    if (rev(c.review || {}, "decelType", "decelType")) q.push("decelType");
     q.push("action");
     return q;
   }
+  /* A reviewer's label (case.review.<field>) wins over the rule for every graded field: uc, baselineClass,
+     variability, decels, decelType, figo (action always follows figo). A value outside QUESTIONS is ignored. */
+  function rev(r, field, q) { return r[field] != null && QUESTIONS[q].indexOf(r[field]) >= 0 ? r[field] : null; }
   function truthFor(c) {
     var f = c.features, r = c.review || {}, maxD = 0;
     (f.decels || []).forEach(function (d) { if (d.durationSec > maxD) maxD = d.durationSec; });
-    var figo = r.figo || c.figo;
+    var figo = rev(r, "figo", "figo") || c.figo;
     var t = {
-      uc: f.contractions.tachysystole ? "tachysystole" : "normal",
-      baseline: r.baselineClass || f.baselineClass,
-      variability: r.variability || f.variability.band,
-      decels: !f.decels || !f.decels.length ? "none" : maxD > 300 ? "over5" : maxD >= 180 ? "prolonged" : "present",
+      uc: rev(r, "uc", "uc") || (f.contractions.tachysystole ? "tachysystole" : "normal"),
+      baseline: rev(r, "baselineClass", "baseline") || f.baselineClass,
+      variability: rev(r, "variability", "variability") || f.variability.band,
+      decels: rev(r, "decels", "decels") || (!f.decels || !f.decels.length ? "none" : maxD > 300 ? "over5" : maxD >= 180 ? "prolonged" : "present"),
       figo: figo, action: figo
     };
-    if (r.decelType) t.decelType = r.decelType;
+    if (rev(r, "decelType", "decelType")) t.decelType = r.decelType;
     return t;
   }
+  // Complete review: the obstetrician confirmed every graded field of this case and set review.complete = true.
+  // Only then does the reveal drop the "Rule-based, pending obstetrician review" banner.
+  function reviewComplete(c) { return !!(c && c.review && c.review.complete === true); }
   function gradeChecklist(ids, answers, truth) {
     var perQ = {}, m = 0;
     ids.forEach(function (q) { perQ[q] = answers[q] === truth[q]; if (perQ[q]) m++; });
@@ -112,7 +118,7 @@
     levelLocked: levelLocked, trialState: trialState, useTrial: useTrial,
     loadStore: loadStore, saveStore: saveStore, loadPrefs: loadPrefs, savePrefs: savePrefs,
     today: today,
-    QUESTIONS: QUESTIONS, checklistFor: checklistFor, truthFor: truthFor, gradeChecklist: gradeChecklist, rationaleKeys: rationaleKeys
+    QUESTIONS: QUESTIONS, checklistFor: checklistFor, truthFor: truthFor, reviewComplete: reviewComplete, gradeChecklist: gradeChecklist, rationaleKeys: rationaleKeys
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   else G.TOKOS_DATA = API;

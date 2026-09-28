@@ -379,7 +379,7 @@
     return top(w.backHub, (st.prefs.lang === "hi" ? st.cfg.tracks[0].labelHi : st.cfg.tracks[0].labelEn), caseLine()) +
       '<div class="tok-scroll"><div class="tok-reveal tok-pad">' +
       '<p class="tok-score" tabindex="-1"><b>' + res.matches + "<small>/" + res.ids.length + "</small></b> " + esc(w.match) + "</p>" +
-      (c.review ? "" : '<p class="tok-rule">' + icoH("info") + "<span>" + esc(w.rule) + "</span></p>") +
+      (D.reviewComplete(c) ? "" : '<p class="tok-rule">' + icoH("info") + "<span>" + esc(w.rule) + "</span></p>") +
       '<ol class="tok-concord">' + rows + "</ol>" +
       '<section class="tok-block"><h3>' + esc(w.features) + "</h3><dl>" +
         kv(w.baseline, num(f.baseline, "bpm")) +

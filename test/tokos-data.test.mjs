@@ -80,3 +80,20 @@ test("rationaleKeys picks the teaching points this case shows, always ending wit
   assert.ok(k.includes("baseline.tachycardia") && k.includes("decels.prolonged") && k.includes("acidosis.metabolic") && k.includes("risk.pyrexia"));
   assert.equal(k[k.length - 1], "trace_vs_outcome");
 });
+
+test("every graded field is overridable by the reviewer; action follows figo; invalid values fall back to the rule", () => {
+  const review = { uc: "tachysystole", baselineClass: "normal", variability: "reduced", decels: "present", decelType: "late", figo: "pathological" };
+  const t = D.truthFor(Object.assign({}, baseCase, { review }));
+  assert.deepEqual([t.uc, t.baseline, t.variability, t.decels, t.decelType, t.figo, t.action],
+    ["tachysystole", "normal", "reduced", "present", "late", "pathological", "pathological"]);
+  const bad = D.truthFor(Object.assign({}, baseCase, { review: { variability: "Reduced", figo: "abnormal", decelType: "x" } }));
+  assert.deepEqual([bad.variability, bad.figo, bad.decelType], ["normal", "suspicious", undefined]);
+  assert.ok(!D.checklistFor(Object.assign({}, baseCase, { review: { decelType: "x" } }), "resident").includes("decelType"));
+});
+
+test("reviewComplete: only review.complete === true counts; partial labels keep the rule-based banner", () => {
+  assert.equal(D.reviewComplete(baseCase), false);
+  assert.equal(D.reviewComplete(Object.assign({}, baseCase, { review: { by: "Dr X", figo: "normal" } })), false);
+  assert.equal(D.reviewComplete(Object.assign({}, baseCase, { review: { complete: "yes" } })), false);
+  assert.equal(D.reviewComplete(Object.assign({}, baseCase, { review: { by: "Dr X", date: "2026-10-01", complete: true } })), true);
+});
