@@ -29,6 +29,48 @@
     "too-many": "has more than 5 diseases", "em-dash": "contains an em-dash; use a comma or full stop",
   };
 
+  // "Draft from source": suggestions only. The signer rewrites in their own words and checks every number;
+  // India status is never pre-filled (it must be a conscious choice), and nothing is ever signed automatically.
+  var TYPE_EVID = { safety_alert: "regulatory_safety", drug_approval: "regulatory_approval", guideline: "guideline", trial: "rct" };
+  var REGS = [["FDA", /\bFDA\b|Food and Drug Administration/i], ["EMA", /\bEMA\b|European Medicines Agency/i], ["MHRA", /\bMHRA\b/i],
+    ["CDSCO", /\bCDSCO\b/i], ["WHO", /\bWHO\b|World Health Organi[sz]ation/i], ["ICMR", /\bICMR\b|Indian Council of Medical Research/i]];
+  function firstSentences(s, max) {
+    s = String(s || "").replace(/\*\*/g, "").replace(/^[\s\u2022*-]+/gm, "").replace(/\s+/g, " ").trim();
+    if (s.length <= max) return s;
+    var cut = s.slice(0, max), end = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf("; "));
+    return (end > Math.min(60, max / 2) ? cut.slice(0, end + 1) : cut.replace(/\s+\S*$/, "")).trim();
+  }
+  // Numbers a signer must check against the source (percentages, ratios, intervals, doses, counts).
+  function numbersIn(s) {
+    var out = [], seen = {};
+    String(s || "").replace(/\b(?:HR|RR|OR|NNT|ARR|CI|P)\b[^.;,]{0,24}?\d[\d.,\u2013-]*%?|\d[\d.,]*\s?(?:%|(?:mg\/kg|mg|mcg|g|mL|ml|units?|IU|months?|weeks?|days?|years?|patients|participants)\b)|\d+\.\d+/gi, function (m) {
+      m = m.trim(); if (!seen[m] && out.length < 12) { seen[m] = 1; out.push(m); } return m;
+    });
+    return out;
+  }
+  // Library diseases named in the source text: whole-word match on the disease name, longest names first.
+  function suggestDiseases(text, have) {
+    var b = (G.KB_ENRICHMENT && G.KB_ENRICHMENT.byId) || {}, t = " " + String(text || "").toLowerCase().replace(/[^a-z0-9]+/g, " ") + " ", out = [];
+    Object.keys(b).map(function (k) { return [k, String((b[k] && b[k].name) || "")]; })
+      .filter(function (x) { return x[1].length >= 5; })
+      .sort(function (x, y) { return y[1].length - x[1].length; })
+      .forEach(function (x) {
+        if (out.length >= 6 || (have || []).indexOf(x[0]) >= 0) return;
+        var n = " " + x[1].toLowerCase().replace(/[^a-z0-9]+/g, " ").trim() + " ";
+        if (t.indexOf(n) >= 0 && !out.some(function (o) { return (" " + o[1].toLowerCase() + " ").indexOf(n) >= 0; })) out.push(x);
+      });
+    return out;
+  }
+  function draftFromSource(c) {
+    var s = c._src || {}, text = [s.title, s.summary].join(" ");
+    c.headline = c.headline || String(s.title || "").slice(0, 120);
+    c.what_changed = firstSentences(s.summary, 400);
+    c.evidence_type = c.evidence_type || TYPE_EVID[s.type] || "";
+    if (!c.regulator) { for (var i = 0; i < REGS.length; i++) if (REGS[i][1].test([s.org, s.title].join(" "))) { c.regulator = REGS[i][0]; break; } }
+    c._drafted = true;
+    c._suggest = suggestDiseases(text, c.disease_ids);
+  }
+
   var DS = { me: null, probing: null, view: "list", queue: null, loading: false, cur: null, saved: null, msg: "", busy: false, dq: "", signers: null, look: null };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
@@ -81,7 +123,7 @@
       evidence_type: "", evidence_note: "", regulator: "", india_status: "", source_label: c.organization || "",
       source_url: B() && B()._httpsUrl(c.official_url) ? c.official_url : "", source_date: isoDate(c.published_ts),
       doi: c.doi || "", pmid: c.pmid || "", review_months: 12, disease_ids: [],
-      _src: { title: c.title, org: c.organization, url: c.official_url, date: c.published_ts, summary: c.summary },
+      _src: { title: c.title, org: c.organization, url: c.official_url, date: c.published_ts, summary: c.summary, type: c.type },
     };
   }
   function fromItem(it) {
@@ -189,6 +231,8 @@
     }
     return '<div class="kit-field wide"><span class="kit-fl">Diseases this applies to (1 to 5)</span><div class="kit-row">' +
       c.disease_ids.map(function (d) { return '<button type="button" class="kit-pill" data-bl-act="undz:' + esc(d) + '" aria-label="Remove ' + esc(diseaseName(d)) + '">' + esc(diseaseName(d)) + " " + ms("close") + "</button>"; }).join("") + "</div>" +
+      ((c._suggest || []).filter(function (x) { return c.disease_ids.indexOf(x[0]) < 0; }).length ? '<div class="kit-row"><span class="kit-fl">Named in the source:</span>' +
+        c._suggest.filter(function (x) { return c.disease_ids.indexOf(x[0]) < 0; }).map(function (x) { return '<button type="button" class="kit-pill" data-bl-act="dz:' + esc(x[0]) + '">' + ms("add") + esc(x[1]) + "</button>"; }).join("") + "</div>" : "") +
       '<input id="bl_dq" type="search" class="kit-inp" placeholder="Search the library" autocomplete="off" value="' + esc(DS.dq) + '">' +
       (hits.length ? '<div class="rv-list">' + hits.map(function (h) { return rowBtn("dz:" + h[0], h[1], h[0]); }).join("") + "</div>" : "") + "</div>";
   }
@@ -202,6 +246,8 @@
     return '<button type="button" class="kit-link" data-bl-act="back">' + ms("arrow_back") + "Back to the queue</button>" +
       '<h2 class="dl-h">' + (c.id ? "Edit bulletin" : "New bulletin") + "</h2>" +
       (DS.msg ? '<p class="kit-muted" role="alert">' + esc(DS.msg) + "</p>" : "") + sourcePanel(c) +
+      ((c._src || {}).summary && !c.id ? '<div class="kit-row"><button type="button" class="kit-pill" data-bl-act="draft">' + ms("edit_note") + "Draft from source</button></div>" : "") +
+      (c._drafted ? '<p class="bl-drafted" role="status">Drafted from the AI summary. Rewrite it in your own words and check every number against the primary source before signing. India status is yours to set.</p>' : "") +
       '<div class="kit-grid">' +
       field("bl_kind", "Type", sel("bl_kind", kinds, c.kind, true)) +
       field("bl_india_status", "India status", sel("bl_india_status", india, c.india_status, true), true) +
@@ -218,6 +264,11 @@
       field("bl_doi", "DOI (optional)", txt("bl_doi", c.doi, 100)) +
       field("bl_pmid", "PMID (optional)", txt("bl_pmid", c.pmid, 10)) +
       diseasePicker(c) + "</div>" +
+      (function () {
+        var nums = numbersIn(c.what_changed + " " + c.applies_to + " " + c.headline);
+        return nums.length ? '<div class="bl-nums"><span class="kit-fl">Numbers to check against the source</span><div class="kit-row">' +
+          nums.map(function (n) { return '<span class="bl-num">' + esc(n) + "</span>"; }).join("") + "</div></div>" : "";
+      })() +
       '<p class="kit-fl">Preview, exactly as the disease page will show it</p><div class="bl-preview">' + Bk.card(previewOf(c)) + "</div>" +
       '<div class="kit-row"><button type="button" class="kit-add" data-bl-act="save"' + (DS.busy ? " disabled" : "") + ">" + ms("save") + "Save draft</button>" +
       '<button type="button" class="kit-pill" data-bl-act="savesign"' + (DS.busy ? " disabled" : "") + ">" + ms("verified") + "Save and sign</button>" +
@@ -264,9 +315,17 @@
       '<div class="kit-row"><button type="button" class="' + (on ? "kit-clear" : "kit-add") + '" data-bl-act="killgo">' + (on ? "Switch off now" : "Switch on") + "</button></div>";
   }
 
+  function deskCSS() {
+    if (!D || D.getElementById("smdBulletinDeskCss")) return;
+    var s = D.createElement("style"); s.id = "smdBulletinDeskCss";
+    s.textContent = ".bl-drafted{margin:8px 0;padding:8px 10px;border-radius:10px;background:rgba(180,83,9,.1);color:#92400e;font-size:13px;font-weight:600}" +
+      ".bl-nums{margin:8px 0}.bl-num{display:inline-block;margin:2px 4px 2px 0;padding:2px 8px;border-radius:999px;background:rgba(180,83,9,.12);color:#92400e;font:600 12px var(--sans,system-ui)}" +
+      "body.dark .bl-drafted,body.dark .bl-num{color:#fbbf24}";
+    (D.head || D.documentElement).appendChild(s);
+  }
   function html(tabs) {
     if (!B()) return tabs + '<p class="kit-muted">Not available in this build.</p>';
-    B().injectCSS();
+    B().injectCSS(); deskCSS();
     if (DS.view === "edit" && DS.cur) return editView();
     if (DS.view === "sign" && DS.saved) return signView();
     if (DS.view === "signers") return signersView();
@@ -328,6 +387,7 @@
     }
     if (cmd === "dz") { if (DS.cur && DS.cur.disease_ids.length < 5 && DS.cur.disease_ids.indexOf(arg) < 0) DS.cur.disease_ids.push(arg); DS.dq = ""; rerender(); return; }
     if (cmd === "undz") { if (DS.cur) DS.cur.disease_ids = DS.cur.disease_ids.filter(function (x) { return x !== arg; }); rerender(); return; }
+    if (cmd === "draft") { if (DS.cur) draftFromSource(DS.cur); rerender(); return; }
     if (cmd === "save") { save(false); return; }
     if (cmd === "savesign") { save(true); return; }
     if (cmd === "signgo") { signGo(); return; }
@@ -385,7 +445,8 @@
   }
   if (D && D.addEventListener && !G.__smdBulletinDeskWired) { G.__smdBulletinDeskWired = true; D.addEventListener("click", onClick, false); D.addEventListener("input", onInput, false); }
 
-  var API = { probe: probe, html: html, reset: function () { DS.view = "list"; DS.queue = null; DS.cur = null; DS.msg = ""; }, _state: DS, _previewOf: previewOf };
+  var API = { probe: probe, html: html, reset: function () { DS.view = "list"; DS.queue = null; DS.cur = null; DS.msg = ""; }, _state: DS, _previewOf: previewOf,
+    _numbersIn: numbersIn, _suggestDiseases: suggestDiseases, _firstSentences: firstSentences };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_BULLETINS_DESK = API;
 })(typeof window !== "undefined" ? window : globalThis);

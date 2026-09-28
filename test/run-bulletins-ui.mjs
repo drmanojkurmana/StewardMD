@@ -68,12 +68,16 @@ const server = http.createServer(async (req, res) => {
     return sendJson(res, 200, { enabled: true, v: 1, items: ITEMS }, { ETag: etag, "Cache-Control": "public, max-age=300" });
   }
   if (p === "/api/updates/bulletins/me") return sendJson(res, 200, st.me);
-  if (p === "/api/updates/bulletins/queue") return sendJson(res, 200, { ok: true, killed: false, items: [QUEUE_ITEM], candidates: [{ id: "u2", type: "safety_alert", title: "Candidate source", organization: "FDA", official_url: "https://example.org/u2", published_ts: NOW - DAY }] });
+  if (p === "/api/updates/bulletins/queue") return sendJson(res, 200, { ok: true, killed: false, items: [QUEUE_ITEM], candidates: [{ id: "u2", type: "safety_alert", title: "Candidate source", organization: "U.S. Food and Drug Administration", official_url: "https://example.org/u2", published_ts: NOW - DAY,
+    summary: "In adults with Acute Bronchitis the drug cut symptom days (HR 0.72; 95% CI 0.61-0.85), 12.5% vs 17.3%, at 10 mg daily for 12 weeks. A second sentence that is long enough to push the draft beyond the four hundred character limit so that the cut lands on a full stop rather than the middle of a word, which keeps the draft readable for the doctor who must rewrite it anyway before signing it for the disease page." }] });
   if (p === "/api/updates/bulletins" && req.method === "POST") { const b = await readBody(req); return sendJson(res, 200, { ok: true, item: Object.assign({}, QUEUE_ITEM, b, { body_hash: "b".repeat(64), state: "draft" }) }); }
   if (p === "/api/updates/bulletins/signers" && req.method === "GET") return sendJson(res, 200, { ok: true, signers: [{ uid: "u-owner", name: "Manoj Kurmana", reg_no: "APMC-1", council: "Andhra Pradesh Medical Council", active: 1 }] });
   if (p === "/api/updates/bulletins/signers" && req.method === "POST") { st.signerBodies.push(await readBody(req)); return sendJson(res, 200, { ok: true }); }
   if (p === "/api/updates/bulletins/kill") { st.killBodies.push(await readBody(req)); return sendJson(res, 200, { ok: true, killed: true }); }
   if (/^\/api\/updates\/bulletins\/[^/]+\/sign$/.test(p)) { st.signBodies.push(await readBody(req)); return sendJson(res, st.signResp.status, st.signResp.body); }
+  if (p === "/api/updates" && req.method === "GET") return sendJson(res, 200, { enabled: true, nextCursor: null, items: [
+    { id: "u9", type: "drug_approval", category: "approval", title: "Signed source item", summary: "AI summary.", ts: NOW - DAY, signed_bulletin: true, workspace: "internal_medicine" },
+    { id: "u8", type: "trial", category: "study", title: "Unsigned source item", summary: "AI summary.", ts: NOW - 2 * DAY, signed_bulletin: false, workspace: "internal_medicine" }] });
   if (p.startsWith("/api/")) return sendJson(res, 404, { error: "not-mocked" });
   let file = normalize(join(ROOT, p === "/" ? "index.html" : p));
   if (!file.startsWith(ROOT)) { res.writeHead(403); return res.end(); }
@@ -240,6 +244,31 @@ try {
   ok(st.killBodies.length === 0, "switch-off refuses a reason under 10 characters");
   await ev(`document.getElementById('bl_kreason').value='Checking a reported wording error';document.querySelector('#smdReview [data-bl-act="killgo"]').click();true`); await sleep(500);
   ok(st.killBodies.length === 1 && st.killBodies[0].killed === true, "switch-off posts killed:true with the reason", st.killBodies);
+
+  /* 11. Draft from source: suggestions only, India status left to the signer, numbers flagged */
+  await until(`!!document.querySelector('#smdReview [data-bl-act="new:u2"]')`);
+  await ev(`document.querySelector('#smdReview [data-bl-act="new:u2"]').click();true`);
+  ok(await until(`!!document.querySelector('#smdReview [data-bl-act="draft"]')`), "a new bulletin offers Draft from source");
+  ok(await ev(`document.getElementById('bl_what_changed').value===''`), "nothing is pre-written before the signer asks");
+  await ev(`document.querySelector('#smdReview [data-bl-act="draft"]').click();true`);
+  ok(await until(`document.getElementById('bl_what_changed').value.indexOf('Acute Bronchitis')>=0`), "Draft fills What changed from the source summary");
+  ok(await ev(`(function(){var v=document.getElementById('bl_what_changed').value;return v.length<=400&&/\.$/.test(v)})()`), "draft is cut at a full stop within 400 characters");
+  ok(await ev(`!!document.querySelector('#smdReview .bl-drafted')&&/own words/.test(document.querySelector('#smdReview .bl-drafted').textContent)`), "draft banner asks for the signer's own words");
+  ok(await ev(`document.getElementById('bl_india_status').value===''`), "India status is never pre-filled");
+  ok(await ev(`document.getElementById('bl_evidence_type').value==='regulatory_safety'&&document.getElementById('bl_regulator').value==='FDA'`), "evidence type and regulator suggested from the source");
+  const nums = await ev(`Array.from(document.querySelectorAll('#smdReview .bl-num')).map(function(n){return n.textContent})`);
+  ok(Array.isArray(nums) && ["HR 0.72", "12.5%", "17.3%", "10 mg", "12 weeks"].every((n) => nums.indexOf(n) >= 0), "numbers to check are listed", nums);
+  ok(await ev(`!!document.querySelector('#smdReview [data-bl-act="dz:ACUTE_BRONCHITIS"]')`), "a library disease named in the source is suggested");
+  ok(await ev(`SMD_BULLETINS_DESK._state.cur.disease_ids.length===0`), "suggestions are not added until the signer taps them");
+  await ev(`document.querySelector('#smdReview [data-bl-act="dz:ACUTE_BRONCHITIS"]').click();true`);
+  ok(await until(`SMD_BULLETINS_DESK._state.cur.disease_ids.indexOf('ACUTE_BRONCHITIS')>=0&&document.getElementById('bl_what_changed').value.indexOf('Acute Bronchitis')>=0`), "tapping a suggestion adds it and keeps the typed text");
+  await shot("desk-draft-from-source");
+  await ev("SMD_REVIEW.close();true");
+
+  /* 12. bell feed: the signed-bulletin marker, worded so it never implies the AI text was reviewed */
+  await ev("window.SMD_openUpdate&&SMD_openUpdate('u9');true");
+  ok(await until(`!!document.querySelector('.fd-card[data-uid="u9"]')`), "bell feed renders");
+  ok(await ev(`(function(){var s=document.querySelector('.fd-card[data-uid="u9"] .fd-signed');return !!s&&s.textContent==='Signed bulletin in Library'&&!document.querySelector('.fd-card[data-uid="u8"] .fd-signed')})()`), "only the item with a live bulletin carries the marker");
 } catch (e) {
   console.error(e); failures++;
 } finally {
