@@ -53,6 +53,7 @@ const rules = await import("../functions/_bulletin_rules.js");
 const updatesRepo = await import("../functions/_updates_repo.js");
 const { KB_DISEASE_IDS } = await import("../functions/_kb_disease_ids.js");
 const { loadDiseaseIds } = await import("../kb/tools/build-disease-ids.mjs");
+const { BULLETIN_DDL } = await import("../functions/_bulletins_schema.js");
 
 const SCHEMA = readFileSync(new URL("../functions/db/updates_schema.sql", import.meta.url), "utf8");
 const MIGRATION = readFileSync(new URL("../functions/db/migrate_bulletins.sql", import.meta.url), "utf8");
@@ -441,14 +442,33 @@ test("kill switch: D1 setting empties the list on the next request and is audite
   assert.deepEqual([envOff.data.enabled, envOff.data.items.length], [false, 0]);
 });
 
-test("fail closed: no bulletin tables (migration not applied) gives enabled:false, not an error", { skip: SKIP }, async () => {
+test("schema on first use: the runtime DDL builds exactly the tables and indexes of migrate_bulletins.sql", { skip: SKIP }, () => {
+  const a = new DatabaseSync(":memory:"); a.exec(MIGRATION);
+  const b = new DatabaseSync(":memory:"); for (const s of BULLETIN_DDL) b.exec(s); for (const s of BULLETIN_DDL) b.exec(s);
+  const shape = (db) => {
+    const objs = db.prepare("SELECT type, name, tbl_name FROM sqlite_master WHERE name NOT LIKE 'sqlite_%' ORDER BY name").all();
+    return objs.map((o) => ({ o, cols: o.type === "table" ? db.prepare("PRAGMA table_xinfo(" + o.name + ")").all() : db.prepare("PRAGMA index_xinfo(" + o.name + ")").all() }));
+  };
+  assert.deepEqual(JSON.parse(JSON.stringify(shape(b))), JSON.parse(JSON.stringify(shape(a))));
+  assert.equal(shape(a).length, 9);
+});
+
+test("schema on first use: a database without the bulletin tables gets them on the first request", { skip: SKIP }, async () => {
   const D = d1();
   D._db.exec(SCHEMA.replace(/-- BEGIN bulletins[\s\S]*?-- END bulletins/, ""));
   const r = await call({ UPDATES_DB: D }, "GET", "bulletins");
   assert.equal(r.status, 200);
-  assert.deepEqual([r.data.enabled, r.data.items.length], [false, 0]);
+  assert.deepEqual([r.data.enabled, r.data.items.length], [true, 0]);
+  assert.equal(D._db.prepare("SELECT count(*) AS n FROM sqlite_master WHERE name = 'bulletin_signers'").get().n, 1);
   const none = await call({}, "GET", "bulletins");
   assert.deepEqual([none.status, none.data.enabled], [200, false]);
+});
+
+test("fail closed: if D1 refuses, the public list is enabled:false, never an error", { skip: SKIP }, async () => {
+  const broken = { prepare: () => { throw new Error("d1 down"); }, batch: async () => { throw new Error("d1 down"); } };
+  const r = await call({ UPDATES_DB: broken }, "GET", "bulletins");
+  assert.equal(r.status, 200);
+  assert.deepEqual([r.data.enabled, r.data.items.length], [false, 0]);
 });
 
 /* ---------------- retraction + audit ---------------- */
@@ -480,10 +500,9 @@ test("queue: lists candidates without a bulletin and flags orphaned disease ids"
   assert.ok(pub.data.items[0].disease_ids.includes("REMOVED_FROM_KB"), "server passes it through; the client drops unknown ids");
 });
 
-test("fail closed: signer routes without bulletin tables answer a clean 500, never an unhandled throw", { skip: SKIP }, async () => {
-  const D = d1();
-  D._db.exec(SCHEMA.replace(/-- BEGIN bulletins[\s\S]*?-- END bulletins/, ""));
-  const r = await call({ UPDATES_DB: D }, "GET", "bulletins/queue", { tok: "tok-owner-doc" });
+test("fail closed: signer routes answer a clean 500 when D1 refuses, never an unhandled throw", { skip: SKIP }, async () => {
+  const broken = { prepare: () => { throw new Error("d1 down"); }, batch: async () => { throw new Error("d1 down"); } };
+  const r = await call({ UPDATES_DB: broken }, "GET", "bulletins/queue", { tok: "tok-owner-doc" });
   assert.equal(r.status, 500);
   assert.deepEqual(r.data, { error: "server_error" });
 });

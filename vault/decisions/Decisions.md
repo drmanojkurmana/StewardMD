@@ -23,8 +23,9 @@ verified user or the shared admin token sign. `icu:doctor:<uid>` has two shapes 
 identity comes from an owner-confirmed registry instead.
 **Trade-off.** A human bottleneck: nothing shows until signed, and a source change hides a bulletin until it
 is re-signed. Offline for more than 7 days shows a "not shown, last synced" line instead of updates.
-**Status.** Built behind the flag (server + client + tests); migration `functions/db/migrate_bulletins.sql`
-to apply on the remote D1; default-on only after owner approval. Plan: `docs/CLINICAL_AUTO_UPDATE_ENGINEERING_SPEC.md`;
+**Status.** Built behind the flag (server + client + tests). Tables self-create on first use
+(`functions/_bulletins_schema.js`, as `_counters.js` does); `functions/db/migrate_bulletins.sql` is the manual copy.
+Default-on only after owner approval. Plan: `docs/CLINICAL_AUTO_UPDATE_ENGINEERING_SPEC.md`;
 module note [[Clinical Bulletins]].
 
 ## 2026-09-27 · Antibiogram review round 4: clinical antibiograms, one answer for console and reasoning

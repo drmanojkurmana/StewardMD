@@ -1,7 +1,7 @@
 # Clinical Bulletins: physician-signed practice updates on the disease page
 
 Status: BUILT behind flag `smd_kb_bulletins` (default off), 2026-09-28. Owner decisions D1 to D5 settled
-(section 14). Remote D1 migration not yet applied. Module note: `vault/modules/Clinical Bulletins.md`.
+(section 14). No manual migration: tables self-create on first use (`functions/_bulletins_schema.js`). Module note: `vault/modules/Clinical Bulletins.md`.
 Deviations from the plan text, all deliberate: routes live in `functions/_bulletins_api.js`, dispatched from
 `[[path]].js` above the owner gate; card styles are injected by `bulletins.js` (one renderer, one style, so the
 Review Desk preview matches the bedside exactly) instead of `knowledge-library.css`; the card sits directly

@@ -13,11 +13,13 @@
  *   POST /api/updates/bulletins/signers/:uid/deactivate owner
  *   POST /api/updates/bulletins/kill                   owner: { killed, reason } kill switch, no redeploy
  *
+ * Tables are created on first use (functions/_bulletins_schema.js); no manual migration is needed.
  * Plan: docs/CLINICAL_AUTO_UPDATE_ENGINEERING_SPEC.md.
  */
 import * as repo from "./_bulletins_repo.js";
 import { validateDraft, bodyHash, publicProjection, sha256Hex, cleanText, knownDiseaseIds } from "./_bulletin_rules.js";
 import { signerIdentity, ownerIdentity } from "./_bulletins_auth.js";
+import { ensureBulletinSchema } from "./_bulletins_schema.js";
 import { getUserClaims, lookupUidByEmail } from "./_fbadmin.js";
 
 const PUB_CACHE = "public, max-age=300";
@@ -76,10 +78,11 @@ export async function handleBulletins(context, parts) {
     if (!repo.hasDb(env) || String(env.BULLETINS_OFF || "") === "1") return json({ enabled: false, items: [] });
     let items;
     try {
+      await ensureBulletinSchema(env.UPDATES_DB);
       if (!(await repo.isEnabled(env))) return json({ enabled: false, items: [] });
       items = (await repo.listVisible(env, now, 500)).map((r) => publicProjection(r, r.disease_ids));
     } catch (e) {
-      return json({ enabled: false, items: [] });                       // tables missing (migration not applied): fail closed
+      return json({ enabled: false, items: [] });                       // any D1 failure: fail closed
     }
     const etag = '"' + (await sha256Hex(items.map((i) => i.id + ":" + i.updated_ts + ":" + i.signed_ts + ":" + i.review_due_ts).join("|"))).slice(0, 32) + '"';
     const inm = (request.headers.get("If-None-Match") || "").replace(/^W\//, "");
@@ -88,6 +91,7 @@ export async function handleBulletins(context, parts) {
   }
 
   if (!repo.hasDb(env)) return json({ error: "no-db" }, 501);
+  await ensureBulletinSchema(env.UPDATES_DB);   // throws to the router's catch (clean 500) if D1 refuses
 
   /* ---------- who am I ---------- */
   if (method === "GET" && sub === "me") {

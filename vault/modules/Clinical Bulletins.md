@@ -1,6 +1,6 @@
 ---
 tags: [module, clinical-content, review]
-status: built 2026-09-28 behind the flag; migration not yet applied to the remote D1
+status: built 2026-09-28 behind the flag; tables self-create on first use (no manual migration)
 flag: smd_kb_bulletins (client, default OFF; ?bulletins=1 on, ?bulletins=0 off)
 ---
 # Clinical Bulletins
@@ -36,14 +36,16 @@ Decision: `vault/decisions/Decisions.md` (2026-09-28). Signing happens in the [[
 
 ## Tests
 - `test/bulletins.test.mjs` (in `npm test`): schema parity, auth (token never signs), registry identity,
-  sign-what-you-see, races, each visibility condition (mutation-checked), kill switch, fail-closed without tables,
+  sign-what-you-see, races, each visibility condition (mutation-checked), kill switch, tables self-create, fail closed if D1 refuses,
   audit, disease-id drift.
 - `node test/run-bulletins-ui.mjs`: headless Chromium. Flag off/on, order and cap, placement above At a glance,
   India line, widths 320/390/768, stale copy, offline, kill switch, `SMD_API_BASE`, Review Desk tab gating,
   preview = bedside renderer, checklist, 409 path. Screenshots in `$TMPDIR/stewardmd-bulletins/`.
 
 ## To go live
-1. `wrangler d1 execute stewardmd-updates --remote --file functions/db/migrate_bulletins.sql`
+1. Nothing to migrate: `functions/_bulletins_schema.js` runs the same DDL (CREATE ... IF NOT EXISTS, once per
+   isolate) on the first bulletins request, like `functions/_counters.js`. The `.sql` file stays for manual use
+   (run it from the repo root: `wrangler d1 execute stewardmd-updates --remote --file functions/db/migrate_bulletins.sql`).
 2. Owner opens Review Desk > Clinical updates > Signers > Add me (check the pre-filled name, Reg. No., council).
 3. Sign a few on device with `?bulletins=1`; a second doctor reads them for wording; default-on only on approval.
 
