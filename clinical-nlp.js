@@ -416,18 +416,20 @@
       if ((m2 = pick(/\bascitic\b[^.;\n]{0,40}?\b(?:pmn|neutrophils?|polymorphs?)\b\s*(?:count)?\s*(?:of|is|was|=|:|-)?\s*(\d+(?:[.,]\d+)?)/, function (m) { return nv(m[1]); }, 1)) && num(m2[1]) >= 250) vital("asciticPMNHigh", m2[0]);
       // durations: fever for >= 7 days -> prolonged fever; an illness of 1 to 8 weeks -> subacute onset
       var WN = { a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, few: 3, several: 4 };
-      var DUR = "(\\d{1,2}|a|an|one|two|three|four|five|six|seven|eight|nine|ten|few|several)\\s*-?\\s*(d|days?|wks?|weeks?|months?)\\b";
-      var days = function (n, u) { var v = /^\d/.test(n) ? +n : (WN[n] || 0); return /^w/.test(u) ? v * 7 : /^m/.test(u) ? v * 30 : v; };
+      // round 55: a range reads its lower bound ("7-10 days" is prolonged, "2-3 days" is not), and a fortnight is 14 days
+      var DUR = "(\\d{1,2}|a|an|one|two|three|four|five|six|seven|eight|nine|ten|few|several)(?:\\s*(?:-|to)\\s*\\d{1,2})?\\s*-?\\s*(d|days?|wks?|weeks?|months?|fortnights?)\\b";
+      var days = function (n, u) { var v = /^\d/.test(n) ? +n : (WN[n] || 0); return /^w/.test(u) ? v * 7 : /^m/.test(u) ? v * 30 : /^f/.test(u) ? v * 14 : v; };
       // longest duration a pattern states, and where (negation is then read from that clause)
       var maxDur = function (re) { var best = { d: 0, i: 0, src: "" }, mm; while ((mm = re.exec(norm))) { var dd = days(mm[1], mm[2]); if (dd > best.d) best = { d: dd, i: mm.index, src: mm[0].trim() }; } return best; };
-      var fA = maxDur(new RegExp("\\b(?:fever|pyrexia|febrile)\\b[^.;]{0,30}?(?:for|since|x|of|over|past|last)\\s*(?:the\\s*)?(?:past|last)?\\s*" + DUR, "g")),
+      // (round 55: also a dash, a colon or a bracket, as structured notes write it: "Fever - 7 days", "Fever (10 days)")
+      var fA = maxDur(new RegExp("\\b(?:fever|pyrexia|febrile)\\b[^.;]{0,30}?(?:for|since|x|of|over|past|last|-|\\u2013|:|\\()\\s*(?:the\\s*)?(?:past|last)?\\s*" + DUR, "g")),
         fB = maxDur(new RegExp("\\b" + DUR + "\\s*(?:of|history of)\\s*(?:[a-z-]+\\s*){0,2}(?:fever|pyrexia)", "g")), fv = fA.d >= fB.d ? fA : fB;
       // round 13 (v2): the fever later in the same list ("three weeks of worsening headache, low-grade fever and ...");
       // no other number in between, so "3 weeks of cough and 2 days of fever" stays 2 days
       var fC = maxDur(new RegExp("\\b" + DUR + "\\s*(?:of|history of)\\s*[^.;\\d]{0,45}?\\b(?:fever|pyrexia)", "g")); if (fC.d > fv.d) fv = fC;
       if (fv.d >= 7) consider("prolongedFever", fv.i, "compound", fv.src);
       // round 10: a cough of 2 weeks or more (the TB screening threshold); "chronic / persistent cough" says it in words
-      var cA = maxDur(new RegExp("\\bcough(?:ing)?\\b[^.;]{0,30}?(?:for|since|x|of|over|past|last)\\s*(?:the\\s*)?(?:past|last)?\\s*(?:about|around|nearly|~)?\\s*" + DUR, "g")),
+      var cA = maxDur(new RegExp("\\bcough(?:ing)?\\b[^.;]{0,30}?(?:for|since|x|of|over|past|last|-|\\u2013|:|\\()\\s*(?:the\\s*)?(?:past|last)?\\s*(?:about|around|nearly|~)?\\s*" + DUR, "g")),
         cB = maxDur(new RegExp("\\b" + DUR + "\\s*(?:of|history of)\\s*(?:[a-z-]+\\s*){0,3}cough", "g")),
         cC = maxDur(new RegExp("\\bcough\\s*(?:began|started|since)\\s*(?:about|around|nearly|~)?\\s*" + DUR, "g")), cv = [cA, cB, cC].sort(function (x, y) { return y.d - x.d; })[0];
       if (cv.d >= 14) consider("prolongedCough2Weeks", cv.i, "compound", cv.src);

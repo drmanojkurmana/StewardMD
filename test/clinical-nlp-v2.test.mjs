@@ -712,3 +712,12 @@ test("pregnancy from gestation, POG and a positive UPT", () => {
   for (const t of ["G2P1L1 at 28 weeks POG.", "Primi at 32 weeks.", "30 weeks of amenorrhoea.", "POG 24 weeks.", "LMP 2 months back, UPT positive."]) assert.deepEqual(r(t), ["pregnancy"], t);
   for (const t of ["UPT negative.", "G2P2L2, tubectomy done.", "Not pregnant."]) assert.deepEqual(r(t), [], t);
 });
+
+// round 55: fever durations as structured notes write them; a range reads its lower bound
+test("fever duration after a dash, colon or bracket, a fortnight, a range", () => {
+  const cD = { valid: { fever: 1, prolongedFever: 1, prolongedCough2Weeks: 1, cough: 1 }, labels: {}, numeric: {}, v2: true, syn: { fever: ["fever"], cough: ["cough"] } };
+  const r = (t) => NLP.extract(t, cD).present;
+  for (const t of ["Fever for a fortnight.", "Fever - 7 days.", "Fever (10 days).", "Fever: 8 days.", "Fever for 7-10 days."]) assert.ok(r(t).includes("prolongedFever"), t);
+  for (const t of ["Fever for 2-3 days.", "Fever for 5 days."]) assert.ok(!r(t).includes("prolongedFever"), t);
+  assert.ok(r("Cough - 3 weeks.").includes("prolongedCough2Weeks"));
+});

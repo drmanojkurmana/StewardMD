@@ -10655,3 +10655,17 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
 - **For the owner**: "watery stools" is not read as diarrhoea only because the gate gives fever with diarrhoea
   gastroenteritis's "antibiotics if criteria met", which the audit counts as antibiotics (one unseen overcall).
   Pending floors are in `kb/validation/AUDIT-2026-09-26.md`.
+
+## 2026-09-28 - Rounds 49 to 55: real-note robustness probes
+- **Decision**: keep hunting reader gaps with small generic probes run in the browser (safety-net advice, slash lists,
+  implausible vitals, drug-named history, exposures, obstetric shorthand, duration formats); a gap is fixed only when
+  the fix is textbook-plain, then audited in all eight configs.
+- **Kept**: a sentence-scoped safety-net cue ("return if ...", "warning signs", "counselled regarding") and its
+  invariance family `probe.safetyNet`; "cough/cold" as coryza; "history of" dated to the sentence end for the finding it
+  governs; whole-number BP; named antibiotic courses as prior exposure (not "started on"); antihypertensives,
+  transplant immunosuppressants and ART; exposure and pregnancy phrasing; durations after a dash, colon or bracket.
+- **Engine fix**: `subacuteOnset`, `priorAntibiotics`, `mdrRisk`, `hospitalDay48` are "general", not "Respiratory"
+  (`FSYS_GEN_V2`, under smd_kb_v2 or smd_nlp_v2). They sat in the Respiratory field group and tilted subacute fevers
+  toward the lung.
+- **Dropped**: "told about" as a counselling cue (Indian English reports symptoms that way), a bare "diabetic foot"
+  synonym, a dash or bracket before any duration (would read "review - 2 weeks" as a subacute illness).

@@ -114,6 +114,10 @@ added) and the numeric-field list. Off: 0 differences across 1,660 case-paths.
   Two keys for one finding (pleuriticPain / pleuriticChestPain, splenomegaly / hepatosplenomegaly) double count in the
   non-infective KB when both are read. To attribute an audit change to one synonym, a worktree-only localStorage switch
   that drops table entries per key or per value, then the audit per switch (unseen sets as counts only).
+- Rounds 49 to 55 (2026-09-28): `safetyNetV2` (advice text is hypothetical to the end of its sentence), `presentDurV2`,
+  whole-number BP, a named-antibiotic-course compound, pregnancy and duration formats. Gotcha: an organ-system tag comes
+  from the field GROUP a key sits in (`GROUP_TAG`), so timing or exposure keys filed under "Respiratory" count toward a
+  lung-dominant picture unless `EXTRA_TAG` / `FSYS_GEN_V2` says otherwise (`dominantSystems` gives +6 / -12).
 
 ## Differential ordering v3 (`smd_rank_v3`, default ON since 2026-09-27; `"0"` opts out)
 
