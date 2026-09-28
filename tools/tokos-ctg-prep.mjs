@@ -411,4 +411,101 @@ export function renderCalibratedTraceSvg(fhr, uc, fs) {
   return { svg, layout: L };
 }
 
-if (import.meta.url === "file://" + process.argv[1]) main().catch((e) => { console.error(e); process.exit(1); });
+// Only real header fields. Birth weight and sex are outcomes: they go in the reveal, not the vignette.
+// FIELD_OK lists the coded fields whose meaning was confirmed from the two sources (see mainV2 comment).
+// None of the 0/1 codings could be confirmed, so no coded field is shown in the vignette.
+const FIELD_OK = {};
+export function vignetteFrom(c) {
+  const v = { age: c["Age"], gravidity: c["Gravidity"], parity: c["Parity"], gestWeeks: c["Gest. weeks"], risks: [] };
+  ["Diabetes", "Hypertension", "Preeclampsia", "Pyrexia", "Meconium"].forEach((k) => { if (FIELD_OK[k] && c[k] === 1) v.risks.push(k.toLowerCase()); });
+  if (FIELD_OK.Induced && c["Induced"] != null) v.induced = c["Induced"] === 1;
+  // II.stage max in the data is 30 (paper: stage 2 <= 30 min), so minutes. I.stage has one outlier (393425): keep under 24 h.
+  if (c["I.stage"] != null && c["I.stage"] < 1440) v.stage1Min = c["I.stage"];
+  if (c["II.stage"] != null) v.stage2Min = c["II.stage"];
+  Object.keys(v).forEach((k) => { if (v[k] == null || Number.isNaN(v[k])) delete v[k]; });
+  return v;
+}
+
+// Pick 12 teaching cases: a spread of archetypes where the dataset has them, then fill by pH band.
+// Archetypes are SUGGESTIONS for the reviewer (docs/tokos/review-queue.md), never shown as confirmed.
+const WANT = [
+  ["normal_trace_normal_outcome", 3, (f, a) => f.figoSuggested === "normal" && a === "normal"],
+  ["decelerations", 2, (f) => f.decels.length > 0 && f.figoSuggested !== "pathological"],
+  ["pathological_trace", 2, (f) => f.figoSuggested === "pathological"],
+  ["metabolic_acidosis", 2, (f, a) => a === "metabolic"],
+  ["baseline_abnormal", 1, (f) => f.baselineClass !== "normal"],
+  ["tachysystole", 1, (f) => f.contractions.tachysystole],
+  ["reduced_variability", 1, (f) => f.variability.band === "reduced"],
+];
+export function pickCases(cands) {
+  const used = new Set(), out = [];
+  WANT.forEach(([arch, n, test]) => {
+    cands.filter((k) => !used.has(k.id) && test(k.features, k.acidosis)).slice(0, n).forEach((k) => { used.add(k.id); out.push(Object.assign({ archetypeSuggested: arch }, k)); });
+  });
+  cands.filter((k) => !used.has(k.id)).slice(0, 12 - out.length).forEach((k) => out.push(Object.assign({ archetypeSuggested: "fill" }, k)));
+  return out.slice(0, 12);
+}
+
+// Runs fn over items, 6 at a time, keeping result order.
+async function pool(items, fn, n = 6) {
+  const out = new Array(items.length);
+  let i = 0;
+  await Promise.all(Array.from({ length: n }, async () => { while (i < items.length) { const j = i++; out[j] = await fn(items[j]); } }));
+  return out;
+}
+
+export async function mainV2() {
+  // Header field codings, checked 2026-09-29 against https://physionet.org/content/ctu-uhb-ctgdb/1.0.0/ and
+  // Chudacek 2014, BMC Pregnancy Childbirth 14:16 (incl. Additional file 3). Neither source has a field-by-field
+  // coding table for the .hea files. What is and is not confirmed:
+  //  CONFIRMED: Deliv. type: 1 = vaginal (506 records), 2 = caesarean (46 records). Paper: "506 intrapartum recordings
+  //    delivered vaginally" (operative vaginal included) and "only 46 cesarean section (CS) deliveries"; counts match exactly.
+  //  CONFIRMED (by value range): II.stage is in minutes: max over 552 records is 30, paper criterion "Duration of stage 2 <= 30 minutes".
+  //    I.stage assumed the same unit (median 220); one outlier (393425) is dropped in vignetteFrom.
+  //  NOT CONFIRMED, so left out of FIELD_OK and never shown in a vignette:
+  //    Diabetes, Hypertension, Preeclampsia, Pyrexia, Meconium, Liq. praecox, Induced: the paper names these as
+  //    included factors ("gestational diabetes, preeclampsia, maternal fever (>37.5C), hypertension and meconium stained
+  //    fluid"; "induced delivery") but never states the 0/1 coding, and Additional file 3 counts do not reconcile with the
+  //    .hea values (e.g. paper Diabetes 394 of 506 vs header Diabetes=1 in 37 of 552; paper Hypertension 6 vs header 44).
+  //    Presentation: paper says O = occipital, B = breech (16 B in total) but the header holds 1/2/3 (499/18/32, 3 missing): mapping unknown.
+  //    Sex: paper says only "sex"; header 1/2 (286/266): mapping unknown (used nowhere).
+  //    Rec. type: header 1/2/12/-1; paper says only "type of measurement (ultrasound or direct scalp electrode)": mapping unknown.
+  //  Units NOT stated in either source: pCO2 (header median 7.0, range 0.7-12.3: consistent with kPa, not mmHg, but
+  //    unconfirmed) and BDecf (median 4.13, range -3.4 to 26.11: mmol/L is the standard unit, unconfirmed).
+  //    Outcome numbers are shipped without units until a source states them.
+  mkdirSync(OUT_MEDIA_DIR, { recursive: true });
+  const ids = (await fetchText("RECORDS")).trim().split("\n");
+  const headers = (await pool(ids, async (id) => decodeHeader(await fetchText(id + ".hea")))).filter((h) => h.clinical["pH"] != null);
+  // Stage A (headers only): up to 12 per pH band, so the .dat downloads stay under ~36 files.
+  const band = (ph) => (ph >= 7.2 ? 0 : ph >= 7.05 ? 1 : 2);
+  const perBand = [[], [], []];
+  headers.forEach((h) => { const b = band(h.clinical["pH"]); if (perBand[b].length < 12) perBand[b].push(h); });
+  // Stage B: features for each candidate, in memory only.
+  const cands = (await pool(perBand.flat(), async (h) => {
+    const raw = decodeSignal(await fetchBuf(h.record + ".dat"), h);
+    const fhr = toPhysical(raw[0], h.signals[0]), uc = toPhysical(raw[1], h.signals[1]);
+    const features = extractFIGOFeatures(fhr, uc, h.fs);
+    if (!features || features.quality.suboptimal) return null;
+    const n = Math.min(fhr.length, CFG.STRIP_MIN * 60 * h.fs);
+    return { id: h.record, h, fhr: fhr.slice(fhr.length - n), uc: uc.slice(uc.length - n), features, acidosis: acidosisClass(h.clinical) };
+  })).filter(Boolean);
+  const chosen = pickCases(cands);
+  const cases = chosen.map((k) => {
+    const { svg, layout } = renderCalibratedTraceSvg(k.fhr, k.uc, k.h.fs);
+    writeFileSync(OUT_MEDIA_DIR + "/" + k.id + ".svg", svg);
+    const c = k.h.clinical;
+    return {
+      id: k.id, svg: "ctg/" + k.id + ".svg", layout, archetypeSuggested: k.archetypeSuggested,
+      vignette: vignetteFrom(c), features: Object.assign({ variabilityBand: k.features.variability.band, decelCount: k.features.decels.length }, k.features), figo: k.features.figoSuggested,
+      outcome: { pH: c["pH"], BE: c["BE"], BDecf: c["BDecf"], pCO2: c["pCO2"], apgar1: c["Apgar1"], apgar5: c["Apgar5"], weightG: c["Weight(g)"] },
+      acidosis: k.acidosis, review: null,
+    };
+  });
+  writeFileSync(OUT_DECK, JSON.stringify({ v: 2, id: "ctg", cases }, null, 1));
+  mkdirSync("docs/tokos", { recursive: true });
+  writeFileSync("docs/tokos/review-queue.md", "# Tokós CTG review queue\n\nFor an obstetrician: confirm or correct each suggested label, then set `review` in `tokos/decks/ctg.json` to `{\"by\": \"<name>\", \"date\": \"YYYY-MM-DD\", \"figo\": \"...\", \"decelType\": \"...\" }`. Until then the app shows every label as rule-based.\n\n" +
+    cases.map((c) => "## " + c.id + " (" + c.archetypeSuggested + ")\n- Trace: `tokos/media/" + c.svg + "`\n- Suggested FIGO: " + c.figo + "; baseline " + c.features.baseline + " (" + c.features.baselineClass + "); variability " + c.features.variability.band + " (median range " + c.features.variability.medianRange + " bpm, reduced " + c.features.variability.reducedMin + " min); decelerations " + c.features.decels.map((d) => d.durationSec + " s " + d.subtypeSuggested).join(", ") + "; contractions " + c.features.contractions.per10 + " per 10 min\n- Outcome: pH " + c.outcome.pH + ", BDecf " + c.outcome.BDecf + ", acidosis " + c.acidosis + "\n").join("\n"));
+  console.log("wrote " + cases.length + " cases; archetypes: " + cases.map((c) => c.archetypeSuggested).join(", "));
+}
+
+if (import.meta.url === "file://" + process.argv[1]) mainV2().catch((e) => { console.error(e); process.exit(1); });
