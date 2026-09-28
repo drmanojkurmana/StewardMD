@@ -75,6 +75,11 @@ const server = http.createServer(async (req, res) => {
   if (p === "/api/updates/bulletins/signers" && req.method === "POST") { st.signerBodies.push(await readBody(req)); return sendJson(res, 200, { ok: true }); }
   if (p === "/api/updates/bulletins/kill") { st.killBodies.push(await readBody(req)); return sendJson(res, 200, { ok: true, killed: true }); }
   if (/^\/api\/updates\/bulletins\/[^/]+\/sign$/.test(p)) { st.signBodies.push(await readBody(req)); return sendJson(res, st.signResp.status, st.signResp.body); }
+  if (p === "/api/updates/bulletins/cdsco") {
+    const q = new URL(req.url, "http://x").searchParams.get("q") || "";
+    const checked = [{ year: 2026, title: "List 2026", fetched_ts: NOW }, { year: 2020, title: "List 2020", fetched_ts: NOW - DAY }];
+    return sendJson(res, 200, { ok: true, q, checked, matches: /rimegepant/i.test(q) ? [{ list: "List of New Drugs approved in year 2025", year: 2025, date: "2025-03-27", excerpt: "...7. Rimegepant Oral disintegrating tablets (ODT) 75 mg For Acute treatment of migraine..." }] : [] });
+  }
   if (p === "/api/updates" && req.method === "GET") return sendJson(res, 200, { enabled: true, nextCursor: null, items: [
     { id: "u9", type: "drug_approval", category: "approval", title: "Signed source item", summary: "AI summary.", ts: NOW - DAY, signed_bulletin: true, workspace: "internal_medicine" },
     { id: "u8", type: "trial", category: "study", title: "Unsigned source item", summary: "AI summary.", ts: NOW - 2 * DAY, signed_bulletin: false, workspace: "internal_medicine" }] });
@@ -263,6 +268,11 @@ try {
   await ev(`document.querySelector('#smdReview [data-bl-act="dz:ACUTE_BRONCHITIS"]').click();true`);
   ok(await until(`SMD_BULLETINS_DESK._state.cur.disease_ids.indexOf('ACUTE_BRONCHITIS')>=0&&document.getElementById('bl_what_changed').value.indexOf('Acute Bronchitis')>=0`), "tapping a suggestion adds it and keeps the typed text");
   await shot("desk-draft-from-source");
+  await ev(`document.getElementById('bl_cq').value='rimegepant';document.querySelector('#smdReview [data-bl-act="cdsco"]').click();true`);
+  ok(await until(`/Found in the CDSCO lists\./.test((document.querySelector('#smdReview .bl-cdsco.found')||{}).textContent||'')&&document.querySelector('#smdReview .bl-cdsco').textContent.indexOf('approved 2025-03-27')>=0`), "CDSCO check shows the matching entry and its approval date");
+  ok(await ev(`document.getElementById('bl_india_status').value===''`), "a CDSCO match never sets India status by itself");
+  await ev(`document.getElementById('bl_cq').value='camizestrant';document.querySelector('#smdReview [data-bl-act="cdsco"]').click();true`);
+  ok(await until(`/Not found in the CDSCO new-drug lists for 2020 to 2026 .*does not prove it is unapproved/.test((document.querySelector('#smdReview .bl-cdsco')||{}).textContent||'')`), "a miss says which lists were checked and that absence proves nothing");
   await ev("SMD_REVIEW.close();true");
 
   /* 12. bell feed: the signed-bulletin marker, worded so it never implies the AI text was reviewed */

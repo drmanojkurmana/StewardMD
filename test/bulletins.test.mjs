@@ -450,7 +450,7 @@ test("schema on first use: the runtime DDL builds exactly the tables and indexes
     return objs.map((o) => ({ o, cols: o.type === "table" ? db.prepare("PRAGMA table_xinfo(" + o.name + ")").all() : db.prepare("PRAGMA index_xinfo(" + o.name + ")").all() }));
   };
   assert.deepEqual(JSON.parse(JSON.stringify(shape(b))), JSON.parse(JSON.stringify(shape(a))));
-  assert.equal(shape(a).length, 9);
+  assert.equal(shape(a).length, 10);
 });
 
 test("schema on first use: a database without the bulletin tables gets them on the first request", { skip: SKIP }, async () => {

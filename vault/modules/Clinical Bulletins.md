@@ -27,6 +27,30 @@ Decision: `vault/decisions/Decisions.md` (2026-09-28). Signing happens in the [[
   6 hours, to `localStorage smd_kb_bulletins_v1`. Copy older than 7 days: no cards, a "last synced" line.
   A disease with no bulletin shows nothing (never "no updates"). `enabled:false` from the server drops the copy.
 
+## Phase 2: automatic intake (2026-09-28)
+Journals and regulators feed the Review Desk automatically; a doctor still signs every bulletin.
+- **PubMed** (`functions/_pubmed.js`, parser `pubmed`): E-utilities esearch (last 7 days, newest first, no
+  retractions/errata) + efetch structured abstracts. NCBI pacing 360 ms and one 429 retry (a live run hit 429
+  without it); `NCBI_API_KEY` optional. Europe PMC answered 503 from the build sandbox, so trials use PubMed.
+- **openFDA** (`functions/_openfda.js`, parser `openfda`): original NDA (type 1/2/4) or BLA approvals dated in
+  the last 30 days, applied in code (openFDA's search matched a 2022 Mounjaro approval for a 2026 window);
+  indication from `drug/label`; https approval letters. ANDAs, new dosage forms and tentative approvals dropped.
+- **Sources** (`functions/_journal_sources.js`): openFDA approvals, NEJM/Lancet/JAMA/BMJ trials, cardiology
+  (Circulation/EHJ/JACC), oncology (JCO/Lancet Oncol/JAMA Oncol). Seeded once by `runPipeline`
+  (`bulletin_settings.seed_journal_sources_v1`), so an admin delete or disable sticks. SQL copy:
+  `functions/db/seed_sources_journals.sql`. Daily via the worker cron `30 5 * * *` -> `/api/updates/sync`.
+- **CDSCO** (`functions/_cdsco.js`): the yearly "new drugs approved" PDFs (2020 on, via the download JSP's
+  iframe) are converted with Workers AI `toMarkdown` into `cdsco_lists` during the daily sync (at most 3 a run;
+  current and previous year weekly). Review Desk "Check" shows the matching entry and approval date, or "not
+  found in the lists for <years>", which proves nothing. It never sets India status. Owner can force
+  `POST /api/updates/bulletins/cdsco/refresh`.
+- **Drafting aids** (`bulletins-desk.js`): "Draft from source" (headline, What changed cut at a full stop,
+  evidence type, regulator; never India status), a banner asking for the signer's own words, "Numbers to check",
+  and library diseases named in the source as tap-to-add suggestions.
+- **Bell**: items with a live bulletin show "Signed bulletin in Library" (`signed_bulletin` from `getFeed`),
+  worded so it never implies the AI summary itself was reviewed.
+- Tests: `test/journal-intake.test.mjs`, `test/cdsco.test.mjs`, plus bell/draft/CDSCO steps in the UI harness.
+
 ## Key files
 `functions/_bulletins_api.js` (routes, mounted from `functions/api/updates/[[path]].js` above the owner gate),
 `functions/_bulletins_repo.js`, `functions/_bulletins_auth.js`, `functions/_bulletin_rules.js`,

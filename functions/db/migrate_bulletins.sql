@@ -73,4 +73,12 @@ CREATE TABLE IF NOT EXISTS bulletin_settings (    -- runtime switches that must 
   updated_by  TEXT NOT NULL DEFAULT '',
   updated_ts  INTEGER NOT NULL DEFAULT 0
 );
+CREATE TABLE IF NOT EXISTS cdsco_lists (          -- CDSCO yearly "new drugs approved" lists (functions/_cdsco.js)
+  year        INTEGER PRIMARY KEY,
+  url         TEXT NOT NULL,
+  title       TEXT NOT NULL,
+  release     TEXT NOT NULL DEFAULT '',
+  fetched_ts  INTEGER NOT NULL DEFAULT 0,
+  text        TEXT NOT NULL DEFAULT ''
+);
 -- END bulletins

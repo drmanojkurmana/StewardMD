@@ -61,6 +61,28 @@
       });
     return out;
   }
+  // CDSCO lookup: evidence for the signer's India choice, never the choice itself.
+  function cdscoQuery(c) {
+    if (c._cq != null) return c._cq;
+    var m = String((c._src || {}).title || "").match(/\(([^)]{4,80})\)/);
+    return m ? m[1] : "";
+  }
+  function cdscoPanel(c) {
+    var r = c._cdsco, out = '<div class="kit-field wide"><span class="kit-fl">Check the CDSCO new-drug lists (generic name)</span><div class="kit-row">' +
+      '<input id="bl_cq" class="kit-inp" maxlength="160" value="' + esc(cdscoQuery(c)) + '" autocomplete="off">' +
+      '<button type="button" class="kit-pill" data-bl-act="cdsco">' + ms("search") + "Check</button></div>";
+    if (r && r.error) out += '<p class="kit-muted" role="status">' + esc(r.error) + "</p>";
+    else if (r && !(r.checked || []).length) out += '<p class="kit-muted" role="status">The CDSCO lists have not been downloaded yet. They refresh with the daily sync.</p>';
+    else if (r && r.matches.length) out += '<div class="bl-cdsco found" role="status"><b>Found in the CDSCO lists.</b> Choose "Approved by CDSCO" only if it is the same drug, form and indication.<ul>' +
+      r.matches.map(function (m) { return "<li>" + esc(m.list) + (m.date ? ", approved " + esc(m.date) : "") + ": " + esc(m.excerpt) + "</li>"; }).join("") + "</ul></div>";
+    else if (r) {
+      var yrs = r.checked.map(function (x) { return x.year; }), upd = Math.max.apply(null, r.checked.map(function (x) { return x.fetched_ts || 0; }));
+      out += '<div class="bl-cdsco" role="status"><b>Not found</b> in the CDSCO new-drug lists for ' + esc(Math.min.apply(null, yrs) + " to " + Math.max.apply(null, yrs)) +
+        " (updated " + esc(isoDate(upd)) + "). That does not prove it is unapproved in India: older approvals and new strengths are published elsewhere.</div>";
+    }
+    return out + "</div>";
+  }
+
   function draftFromSource(c) {
     var s = c._src || {}, text = [s.title, s.summary].join(" ");
     c.headline = c.headline || String(s.title || "").slice(0, 120);
@@ -172,6 +194,7 @@
     ["headline", "what_changed", "applies_to", "evidence_note", "source_label", "source_url", "source_date", "doi", "pmid",
       "kind", "evidence_type", "regulator", "india_status", "review_months"].forEach(function (k) { c[k] = val("bl_" + k); });
     c.review_months = Number(c.review_months) || 12;
+    if (D.getElementById("bl_cq")) c._cq = val("bl_cq");
   }
 
   /* ---------------- views ---------------- */
@@ -251,6 +274,7 @@
       '<div class="kit-grid">' +
       field("bl_kind", "Type", sel("bl_kind", kinds, c.kind, true)) +
       field("bl_india_status", "India status", sel("bl_india_status", india, c.india_status, true), true) +
+      cdscoPanel(c) +
       field("bl_headline", "Headline (up to 120 characters)", txt("bl_headline", c.headline, 120), true) +
       field("bl_what_changed", "What changed (up to 400)", txt("bl_what_changed", c.what_changed, 400, 4), true) +
       field("bl_applies_to", "Applies to (population)", txt("bl_applies_to", c.applies_to, 200), true) +
@@ -319,6 +343,7 @@
     if (!D || D.getElementById("smdBulletinDeskCss")) return;
     var s = D.createElement("style"); s.id = "smdBulletinDeskCss";
     s.textContent = ".bl-drafted{margin:8px 0;padding:8px 10px;border-radius:10px;background:rgba(180,83,9,.1);color:#92400e;font-size:13px;font-weight:600}" +
+      ".bl-cdsco{margin:6px 0;padding:8px 10px;border-radius:10px;background:rgba(100,116,139,.1);font-size:13px}.bl-cdsco.found{background:rgba(15,118,110,.1)}.bl-cdsco ul{margin:6px 0 0;padding-left:18px}" +
       ".bl-nums{margin:8px 0}.bl-num{display:inline-block;margin:2px 4px 2px 0;padding:2px 8px;border-radius:999px;background:rgba(180,83,9,.12);color:#92400e;font:600 12px var(--sans,system-ui)}" +
       "body.dark .bl-drafted,body.dark .bl-num{color:#fbbf24}";
     (D.head || D.documentElement).appendChild(s);
@@ -388,6 +413,16 @@
     if (cmd === "dz") { if (DS.cur && DS.cur.disease_ids.length < 5 && DS.cur.disease_ids.indexOf(arg) < 0) DS.cur.disease_ids.push(arg); DS.dq = ""; rerender(); return; }
     if (cmd === "undz") { if (DS.cur) DS.cur.disease_ids = DS.cur.disease_ids.filter(function (x) { return x !== arg; }); rerender(); return; }
     if (cmd === "draft") { if (DS.cur) draftFromSource(DS.cur); rerender(); return; }
+    if (cmd === "cdsco" && DS.cur) {
+      var cq = String(DS.cur._cq || "").trim();
+      if (cq.length < 4) { DS.cur._cdsco = { error: "Type at least 4 letters of the generic name." }; rerender(); return; }
+      var cur = DS.cur;
+      api("GET", "/cdsco?q=" + encodeURIComponent(cq)).then(function (r) {
+        cur._cdsco = r.status === 200 ? r.data : { error: errText(r) };
+        rerender();
+      });
+      return;
+    }
     if (cmd === "save") { save(false); return; }
     if (cmd === "savesign") { save(true); return; }
     if (cmd === "signgo") { signGo(); return; }

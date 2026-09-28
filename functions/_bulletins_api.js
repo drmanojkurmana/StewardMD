@@ -12,6 +12,8 @@
  *   POST /api/updates/bulletins/signers                owner: add or update a signer
  *   POST /api/updates/bulletins/signers/:uid/deactivate owner
  *   POST /api/updates/bulletins/kill                   owner: { killed, reason } kill switch, no redeploy
+ *   GET  /api/updates/bulletins/cdsco?q=               signer: look a drug up in the stored CDSCO new-drug lists
+ *   POST /api/updates/bulletins/cdsco/refresh          owner: refresh those lists now (also runs with the daily sync)
  *
  * Tables are created on first use (functions/_bulletins_schema.js); no manual migration is needed.
  * Plan: docs/CLINICAL_AUTO_UPDATE_ENGINEERING_SPEC.md.
@@ -21,9 +23,10 @@ import { validateDraft, bodyHash, publicProjection, sha256Hex, cleanText, knownD
 import { signerIdentity, ownerIdentity } from "./_bulletins_auth.js";
 import { ensureBulletinSchema } from "./_bulletins_schema.js";
 import { getUserClaims, lookupUidByEmail } from "./_fbadmin.js";
+import { lookup as cdscoLookup, refreshCdscoLists } from "./_cdsco.js";
 
 const PUB_CACHE = "public, max-age=300";
-const RESERVED = ["me", "queue", "signers", "kill"];
+const RESERVED = ["me", "queue", "signers", "kill", "cdsco"];
 const CHECKLIST = ["source_read", "numbers_match", "india_checked", "own_words"];
 
 function json(obj, status, cache, extra) {
@@ -147,6 +150,20 @@ export async function handleBulletins(context, parts) {
       return json({ ok: true });
     }
     return json({ error: "bad-request" }, 400);
+  }
+
+  /* ---------- CDSCO lists: refresh (owner), lookup (signer) ---------- */
+  if (sub === "cdsco" && method === "POST" && parts[2] === "refresh") {
+    const o = await ownerIdentity(request, env);
+    if (!o.ok) return json({ error: "forbidden", reason: o.reason }, o.reason === "not-signed-in" ? 401 : 403);
+    return json(await refreshCdscoLists(env));
+  }
+  if (sub === "cdsco" && method === "GET") {
+    const s0 = await signerIdentity(request, env);
+    if (!s0.ok) return json({ error: "forbidden", reason: s0.reason }, s0.reason === "not-signed-in" ? 401 : 403);
+    const q = cleanText(new URL(request.url).searchParams.get("q")).slice(0, 160);
+    if (q.length < 4) return json({ error: "query-too-short" }, 400);
+    return json(Object.assign({ ok: true, q }, await cdscoLookup(env, q)));
   }
 
   /* ---------- retract: any active signer, or an owner ---------- */

@@ -400,7 +400,15 @@ After `build-www`, `cap sync` and a native build: verify the running bundle's `?
 proxy (CLAUDE.md, iOS section), then open a mapped disease with `?bulletins=1`. Stage the whole flow before
 installing: a reinstall wipes device data, including SURGX notes.
 
-## 11. Phase 2 sketch (not built now; recorded so phase 1 fits it)
+## 11. Phase 2 (BUILT 2026-09-28; see vault/modules/Clinical Bulletins.md "Phase 2")
+
+Built as sketched below, with these specifics: PubMed E-utilities for trials (Europe PMC was unreachable from
+the build sandbox); openFDA `drugsfda` original NDA/BLA approvals in a 30-day window, rule applied in code;
+FDA safety communications were already enabled (MedWatch RSS); CDSCO lists read from the yearly PDFs and shown
+as evidence in the Review Desk, never setting India status; "Draft from source" fills from the pipeline's
+summary rather than a new AI call; the bell marker reads "Signed bulletin in Library".
+
+Original sketch:
 
 - Ingestion only ever creates `updates` rows and appears under Candidates. Nothing reaches the bedside
   without the phase 1 signing path.

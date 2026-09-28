@@ -13,6 +13,7 @@ export const BULLETIN_DDL = [
   "CREATE INDEX IF NOT EXISTS idx_audit_bulletin ON bulletin_audit(bulletin_id, ts DESC)",
   "CREATE TABLE IF NOT EXISTS bulletin_signers ( uid TEXT PRIMARY KEY, name TEXT NOT NULL, reg_no TEXT NOT NULL, council TEXT NOT NULL, active INTEGER NOT NULL DEFAULT 1, added_by TEXT NOT NULL, added_ts INTEGER NOT NULL )",
   "CREATE TABLE IF NOT EXISTS bulletin_settings ( key TEXT PRIMARY KEY, value TEXT NOT NULL, updated_by TEXT NOT NULL DEFAULT '', updated_ts INTEGER NOT NULL DEFAULT 0 )",
+  "CREATE TABLE IF NOT EXISTS cdsco_lists ( year INTEGER PRIMARY KEY, url TEXT NOT NULL, title TEXT NOT NULL, release TEXT NOT NULL DEFAULT '', fetched_ts INTEGER NOT NULL DEFAULT 0, text TEXT NOT NULL DEFAULT '' )",
 ];
 
 const _ready = new WeakMap();

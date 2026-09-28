@@ -18,6 +18,7 @@ import { fetchLitApi } from "./_litapi.js";
 import { fetchPubMed } from "./_pubmed.js";
 import { fetchOpenFdaApprovals } from "./_openfda.js";
 import { seedJournalSourcesOnce } from "./_journal_sources.js";
+import { refreshCdscoLists } from "./_cdsco.js";
 import { tinyfishSearch } from "./_search.js";
 
 const UA = "StewardMD/1.0 (+https://stewardmd.in)";
@@ -215,6 +216,8 @@ export async function runPipeline(env) {
     if (acc.items && acc.items.length) total.items = total.items.concat(acc.items);
   }
   await repo.pruneCrawlLogs(env, parseInt(env.UPDATES_CRAWL_LOG_KEEP, 10) || 500);
+  // CDSCO new-drug lists for the Review Desk India check. Best-effort; needs the Workers AI binding.
+  try { total.cdsco = await refreshCdscoLists(env); } catch (e) { total.cdsco = { ok: false, reason: String((e && e.message) || e).slice(0, 80) }; }
   total.ok = true;
   total.added = total.new + total.updated;   // back-compat with the old {added} response
   return total;
