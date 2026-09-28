@@ -27,7 +27,7 @@ test("internal directories are 404, on every host - Pages serves the repo root",
   for (const host of ["stewardmd.in", "stewardmd.pages.dev"]) {
     for (const path of ["/design/sheet.html", "/design/ask-maik-widgets-variants.png",
                         "/vault/Home.md", "/ios/App/App.xcodeproj/project.pbxproj",
-                        "/scripts/build-www.sh", "/.github/workflows/ci.yml"]) {
+                        "/scripts/build-www.sh", "/tools/tokos-ctg-prep.mjs", "/.github/workflows/ci.yml"]) {
       const c = ctx(path, { host });
       const r = await onRequest(c);
       assert.equal(r.status, 404, `${host}${path} must not be publicly served`);
