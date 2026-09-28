@@ -104,6 +104,21 @@
   var TEST_AFTER_V2 = /^\s*(?:\d\s*)?(?:serology|status|test(?:ing)?|screen(?:ing)?|antibod(?:y|ies)|antigen|rapid test|elisa|pcr|ab|ag)?\s*(?:is\s+|was\s+|:\s*)?(?:pending|awaited|sent|requested|ordered|unknown|non-?\s?reactive|not reactive)\b/;
   // round 8: a plan or a condition, not a finding: "blood cultures if febrile", "CXR reserved for hypoxia"
   var COND_V2 = /\b(?:if|unless|in case of|reserved for|watch for|monitor for|look(?:ing)? for|to exclude)\s+(?:(?:any|new|the|a|an|worsening|persistent|further)\s+)?$/;
+  // round 49: safety-netting and counselling name findings the patient does NOT have yet, and a list after the cue is all
+  // hypothetical ("return if breathlessness, chest pain or confusion"; "warning signs: bleeding, abdominal pain";
+  // "counselled regarding danger signs such as seizures"). Scope: the sentence, up to a turn ("but", "then", "now").
+  var SAFETY_V2 = [/\b(?:return|come back|revisit|re-?consult|review|report|seek|sos|come to|go to|contact|call)\b[^.;!?]{0,40}?\b(?:if|when|in case|should)\b/,
+    /\b(?:watch(?:ing)?\s+(?:out\s+)?for|look(?:ing)?\s+out\s+for|warning\s+signs?|danger\s+signs?|red\s+flags?|alarm\s+(?:signs?|symptoms?|features?)|report\s+any|signs?\s+to\s+watch)\b/,
+    /\b(?:explained|counsell?ed|educated|advised|briefed)\b[^.;!?]{0,30}?\b(?:about|regarding|on)\b/];
+  function safetyNetV2(norm, idx) {
+    var st = Math.max(norm.lastIndexOf(".", idx - 1), norm.lastIndexOf(";", idx - 1), norm.lastIndexOf("!", idx - 1), norm.lastIndexOf("?", idx - 1)) + 1;
+    var seg = norm.slice(st, idx);
+    for (var i = 0; i < SAFETY_V2.length; i++) {
+      var m = SAFETY_V2[i].exec(seg);
+      if (m && !/\b(?:but|however|then|now|presents?|presented|since|despite)\b/.test(seg.slice(m.index + m[0].length))) return true;
+    }
+    return false;
+  }
   // round 8: a stopped drug or habit ("self-discontinued warfarin", "stopped alcohol 8 months ago") is past, not current
   var STOPPED_BEFORE_V2 = /\b(?:discontinued|stopped|stopping|ceased|withheld|held|quit|off)\s+(?:(?:his|her|the|all|regular)\s+)?$/;
   // round 8: a later mention that is a lab name with its value ("serum ketones (bhb) 1.2") is read by the numeric parser, not here
@@ -540,7 +555,8 @@
       // round 13: "constipation rather than diarrhoea", "instead of fever": the named alternative is absent
       else if (v2 && e.method !== "vitals" && /\b(?:rather than|instead of)\s+(?:[a-z-]+\s+){0,2}$/.test(norm.slice(Math.max(0, e.idx - 40), e.idx))) r.polarity = "absent";
       else if (v2 && e.method !== "vitals" && (negList(norm, e.idx) || negAfter(norm, e.idx + (e.srcText || "").length))) r.polarity = "absent";
-      else if (v2 && e.method !== "vitals" && (TEST_AFTER_V2.test(norm.slice(e.idx + (e.srcText || "").length, e.idx + (e.srcText || "").length + 40)) || COND_V2.test(norm.slice(Math.max(0, e.idx - 40), e.idx)))) r.polarity = "uncertain";
+      else if (v2 && e.method !== "vitals" && (TEST_AFTER_V2.test(norm.slice(e.idx + (e.srcText || "").length, e.idx + (e.srcText || "").length + 40)) || COND_V2.test(norm.slice(Math.max(0, e.idx - 40), e.idx)) ||
+        safetyNetV2(norm, e.idx))) r.polarity = "uncertain";
       if (hasWord(cl, EXCLUDE)) { r.polarity = "uncertain"; r.certainty = "possible"; r.req = true; }
       else if (hasWord(cl, CONSIDER) || cl.indexOf("?") >= 0) { r.certainty = "possible"; r.req = true; }
       // round 41 (v2): the "old" of an age ("a 30-year-old febrile man", "61-year-old cotton farmer") is not a past-history cue

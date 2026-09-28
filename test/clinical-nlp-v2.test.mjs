@@ -659,3 +659,16 @@ test("neutropenic precautions are not neutropenia", () => {
   assert.ok(r("He is neutropenic.").includes("neutropenia"));
   assert.ok(r("Febrile neutropenia.").includes("neutropenia"));
 });
+
+// round 49: safety-netting names findings the patient does not have; a turn back to the patient is read again
+test("safety-net advice is not a finding", () => {
+  const cS = { valid: { dyspnea: 1, chestPain: 1, alteredSensorium: 1, rash: 1, nauseaVomiting: 1, fever: 1, diarrhea: 1 }, labels: {}, numeric: {}, v2: true,
+    syn: { dyspnea: ["breathless"], chestPain: ["chest pain"], alteredSensorium: ["confusion"], rash: ["rash"], nauseaVomiting: ["vomiting"], fever: ["fever"], diarrhea: ["loose motion"] } };
+  const r = (t) => NLP.extract(t, cS).present;
+  assert.deepEqual(r("Return if breathless, chest pain or confusion."), []);
+  assert.deepEqual(r("Advised to report any rash."), []);
+  assert.deepEqual(r("Warning signs explained: rash, vomiting."), []);
+  assert.deepEqual(r("She was told to return if fever persisted, but she now has rash and vomiting.").sort(), ["nauseaVomiting", "rash"]);
+  assert.deepEqual(r("Mother told about fever and loose motions since 2 days.").sort(), ["diarrhea", "fever"]);
+  assert.deepEqual(r("Chest pain since morning. Return if breathless."), ["chestPain"]);
+});

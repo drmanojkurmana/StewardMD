@@ -135,6 +135,12 @@ try {
   const evn = await read(EVD.map((x) => "No " + x[0].charAt(0).toLowerCase() + x[0].slice(1)));
   EVD.forEach((x, i) => { if (evn[i].includes(x[1])) bump("probe.everydayNeg", `${x[1]}: "No ${x[0]}"`); });
   counts["probe.everydayPhrases"] = EVD.length;
+  // round 49: safety-netting names findings the patient does not have ("return if chest pain or confusion"); the turn
+  // back to the patient ("but she now has rash") and reported symptoms stay read. [text, must read, must not read]
+  const SN = JSON.parse(readFileSync(join(ROOT, "test", "nlp-safety-net.json"), "utf8"));
+  const sno = await read(SN.map((x) => x[0]));
+  SN.forEach((x, i) => { const miss = x[1].filter((k) => !sno[i].includes(k)), extra = x[2].filter((k) => sno[i].includes(k));
+    if (miss.length || extra.length) bump("probe.safetyNet", `"${x[0]}" missing [${miss}] read [${extra}]`); });
 
   // ---- chart texts: meaning-preserving edits ----
   const T = {
@@ -186,7 +192,7 @@ try {
   }
   const ceilings = (() => { try { return JSON.parse(readFileSync(CEIL_FILE, "utf8")); } catch { return {}; } })();
   if (WRITE) {
-    const ALL = ["probe.pos", "probe.neg", "probe.list", "probe.spelling", "probe.without", "probe.everyday", "probe.everydayNeg", "chart.upper", "chart.spaces", "chart.neutral", "chart.lines", "chart.reversed", "chart.age", "chart.shorthand", "chart.bullets", "chart.semis", "chart.labs", "engine.order", "engine.repeat"];
+    const ALL = ["probe.pos", "probe.neg", "probe.list", "probe.spelling", "probe.without", "probe.everyday", "probe.everydayNeg", "probe.safetyNet", "chart.upper", "chart.spaces", "chart.neutral", "chart.lines", "chart.reversed", "chart.age", "chart.shorthand", "chart.bullets", "chart.semis", "chart.labs", "engine.order", "engine.repeat"];
     const out = {}; for (const k of ALL) out[k] = counts[k] || 0;
     writeFileSync(CEIL_FILE, JSON.stringify(out, null, 2) + "\n"); console.log("ceilings written");
   }
