@@ -47,6 +47,10 @@ const STUB = `
       return Promise.resolve({ exists: true, data: function () { return window.__profile; } }); },
     set: function (o) { Object.assign(window.__saved, o); Object.assign(window.__profile, o); return Promise.resolve(); }
   }; } }; } }; } }; } };
+  // The app lazy-loads the real Firebase SDK, and when that finishes it assigns window.SMD_AUTH /
+  // SMD_DB, replacing these stubs with a signed-out account (~1 run in 10 here). Pin the stubs.
+  window.__smdFbBooted = true;
+  ["SMD_AUTH", "SMD_DB"].forEach(function (k) { var v = window[k]; try { Object.defineProperty(window, k, { configurable: true, get: function () { return v; }, set: function () {} }); } catch (e) {} });
   var _f = window.fetch;
   window.fetch = function (u, o) {
     u = String(u);
