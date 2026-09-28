@@ -29,15 +29,20 @@ Decision: `vault/decisions/Decisions.md` (2026-09-28). Signing happens in the [[
 
 ## Phase 2: automatic intake (2026-09-28)
 Journals and regulators feed the Review Desk automatically; a doctor still signs every bulletin.
-- **PubMed** (`functions/_pubmed.js`, parser `pubmed`): E-utilities esearch (last 7 days, newest first, no
-  retractions/errata) + efetch structured abstracts. NCBI pacing 360 ms and one 429 retry (a live run hit 429
+- **PubMed** (`functions/_pubmed.js`, parser `pubmed`): E-utilities esearch by MeSH date (`datetype=mhda`, last 7
+  days, newest first, no retractions/errata) + efetch structured abstracts. MeSH date, not publication date,
+  because many journals get the trial publication type only at MEDLINE indexing, weeks later. NCBI pacing 360 ms and one 429 retry (a live run hit 429
   without it); `NCBI_API_KEY` optional. Europe PMC answered 503 from the build sandbox, so trials use PubMed.
 - **openFDA** (`functions/_openfda.js`, parser `openfda`): original NDA (type 1/2/4) or BLA approvals dated in
   the last 30 days, applied in code (openFDA's search matched a 2022 Mounjaro approval for a 2026 window);
   indication from `drug/label`; https approval letters. ANDAs, new dosage forms and tentative approvals dropped.
-- **Sources** (`functions/_journal_sources.js`): openFDA approvals, NEJM/Lancet/JAMA/BMJ trials, cardiology
-  (Circulation/EHJ/JACC), oncology (JCO/Lancet Oncol/JAMA Oncol). Seeded once by `runPipeline`
-  (`bulletin_settings.seed_journal_sources_v1`), so an admin delete or disable sticks. SQL copy:
+- **Sources** (`functions/_journal_sources.js`): batch 1: openFDA approvals, NEJM/Lancet/JAMA/BMJ trials,
+  cardiology (Circulation/EHJ/JACC), oncology (JCO/Lancet Oncol/JAMA Oncol). Batch 2: Annals/JAMA IM/Nature
+  Medicine/NEJM Evidence trials, guidelines in major journals, Lancet specialty trials, IM specialty trials
+  (Diabetes Care, Kidney Int, JASN, AJRCCM, Chest, Gastroenterology, Hepatology, CID, ICM, CCM, Blood, ARD),
+  Indian journals (IJMR, NMJI, JAPI, Lancet Reg Health SE Asia, Indian Pediatr), and meta-analyses in the big six.
+  Each batch is seeded once by `runPipeline` (`bulletin_settings.seed_journal_sources_v<N>`), so a new batch
+  reaches existing sites and an admin delete or disable sticks. SQL copy:
   `functions/db/seed_sources_journals.sql`. Daily via the worker cron `30 5 * * *` -> `/api/updates/sync`.
 - **CDSCO** (`functions/_cdsco.js`): the yearly "new drugs approved" PDFs (2020 on, via the download JSP's
   iframe) are converted with Workers AI `toMarkdown` into `cdsco_lists` during the daily sync (at most 3 a run;

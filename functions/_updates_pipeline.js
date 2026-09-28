@@ -5,7 +5,7 @@
  *   • parser_type='head' → conditional GET (If-None-Match / If-Modified-Since) of the
  *                          guideline page; unchanged (304 / same ETag+Length) → STOP.
  *   • parser_type='litapi' → Europe PMC query (guidelines).   'pubmed' → PubMed query (journal trials,
- *     last 7 days).   'openfda' → new FDA drug/biologic approvals (last 30 days). All three share one
+ *     indexed or added in the last 7 days).   'openfda' → new FDA drug/biologic approvals (last 30 days). All three share one
  *     list crawler: same doc_key dedup, content-hash skip, per-source cap and AI budget.
  * Journal sources are seeded once (functions/_journal_sources.js) before the first crawl that sees them.
  * AI summarization runs ONLY for a genuinely new or content-hash-changed document.
@@ -182,7 +182,7 @@ async function crawlListSource(env, source, budget, tag, fetchList) {
   const maxNew = Math.max(1, parseInt(env.UPDATES_MAX_NEW_PER_SOURCE, 10) || 8);
   for (const it of results) {
     if (acc.new + acc.updated >= maxNew) break;
-    if (budget.left <= 0) break;
+    if (budget.left <= 0) { acc.budgetReached = true; break; }   // the rest waits for the next run (still in window)
     const docKey = it.docKey;
     const hash = await sha256hex(it.title + "|" + it.abstract);
     const existing = await repo.getByDocKey(env, docKey);
@@ -196,7 +196,7 @@ async function crawlListSource(env, source, budget, tag, fetchList) {
     acc[res.mode]++;
     if (res.item) acc.items.push(res.item);
   }
-  await repo.addCrawlLog(env, { source_id: source.id, status: (acc.new || acc.updated) ? (acc.updated ? "updated" : "new") : "unchanged", detail: `new=${acc.new} updated=${acc.updated} unchanged=${acc.unchanged} err=${acc.errors} (${tag})`, ai_used: acc.ai });
+  await repo.addCrawlLog(env, { source_id: source.id, status: (acc.new || acc.updated) ? (acc.updated ? "updated" : "new") : (acc.budgetReached ? "skipped" : "unchanged"), detail: `new=${acc.new} updated=${acc.updated} unchanged=${acc.unchanged} err=${acc.errors} (${tag})` + (acc.budgetReached ? " AI budget reached; rest next run" : ""), ai_used: acc.ai });
   return acc;
 }
 

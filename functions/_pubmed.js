@@ -2,7 +2,12 @@
  *
  * A `pubmed` source's `query` column holds a PubMed query, e.g.
  *   ("N Engl J Med"[ta] OR "Lancet"[ta]) AND "Randomized Controlled Trial"[pt] NOT "Comment"[pt]
- * esearch (JSON) finds PMIDs published in the last `days` (reldate + datetype=pdat, newest first), efetch
+ * esearch (JSON) finds PMIDs whose MeSH date is in the last `days` (reldate + datetype=mhda, newest first), efetch
+ * WHY mhda, not the publication date: many journals get "Randomized Controlled Trial"[pt] only when MEDLINE
+ * indexes the paper, weeks after publication, so a publication-date window never saw them (live, 2026-09-28:
+ * Lancet specialty trials 0 by pdat, 4 by mhda; general 0 vs 3). MHDA equals the entry date until a paper is
+ * indexed, so brand-new papers are still caught, and it is never in the future (print dates can be). A paper
+ * that re-enters the window when indexed is skipped by doc_key, with no AI call.
  * (XML) returns titles, structured abstracts, DOIs and dates. Same output shape as _litapi.js fetchLitApi,
  * so the pipeline treats both alike, and the same doc_key scheme (doi: first, then pmid:), so a paper found
  * by both sources is one update.
@@ -93,7 +98,7 @@ export async function fetchPubMed(query, opts) {
   const days = Math.max(1, Math.min(60, opts.days || 7));
   const limit = Math.max(1, Math.min(25, opts.limit || 12));
   const q = "(" + query + ") NOT (\"Retracted Publication\"[pt] OR \"Published Erratum\"[pt])";
-  const s = await ncbiFetch(EUTILS + "esearch.fcgi?db=pubmed&retmode=json&sort=pub_date&datetype=pdat&reldate=" + days +
+  const s = await ncbiFetch(EUTILS + "esearch.fcgi?db=pubmed&retmode=json&sort=pub_date&datetype=mhda&reldate=" + days +
     "&retmax=" + limit + "&term=" + encodeURIComponent(q) + params(opts.env), { headers: { "User-Agent": UA, "Accept": "application/json" } }, opts.env);
   if (!s.ok) throw new Error("PubMed esearch HTTP " + s.status);
   const ids = (((await s.json()) || {}).esearchresult || {}).idlist || [];

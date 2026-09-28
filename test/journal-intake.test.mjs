@@ -29,7 +29,7 @@ mock.module("../functions/_search.js", { namedExports: { tinyfishSearch: async (
 
 const { parsePubmedXml, fetchPubMed } = await import("../functions/_pubmed.js");
 const { selectNewApprovals, fetchOpenFdaApprovals } = await import("../functions/_openfda.js");
-const { seedJournalSourcesOnce, JOURNAL_SOURCES, SEED_KEY } = await import("../functions/_journal_sources.js");
+const { seedJournalSourcesOnce, JOURNAL_SOURCES, SEED_KEY, seedKey } = await import("../functions/_journal_sources.js");
 const { runPipeline } = await import("../functions/_updates_pipeline.js");
 
 const LONG = "x".repeat(320);
@@ -78,7 +78,7 @@ test("PubMed fetch: last 7 days, newest first, retractions excluded, abstract re
   try {
     const out = await fetchPubMed('"N Engl J Med"[ta]', { days: 7, limit: 12, env: { NCBI_API_KEY: "k1" } });
     const s = decodeURIComponent(seen[0]);
-    for (const part of ["reldate=7", "datetype=pdat", "sort=pub_date", "retmax=12", "tool=stewardmd", "email=", "api_key=k1", 'NOT ("Retracted Publication"[pt] OR "Published Erratum"[pt])']) assert.ok(s.indexOf(part) >= 0, part);
+    for (const part of ["reldate=7", "datetype=mhda", "sort=pub_date", "retmax=12", "tool=stewardmd", "email=", "api_key=k1", 'NOT ("Retracted Publication"[pt] OR "Published Erratum"[pt])']) assert.ok(s.indexOf(part) >= 0, part);
     assert.match(seen[1], /efetch\.fcgi\?db=pubmed&retmode=xml&rettype=abstract&id=111,222,333/);
     assert.deepEqual(out.map((o) => o.docKey), ["pmid:222", "doi:10.1056/A1"], "short abstract dropped; newest first (222 is dated 17 Sep, 111 is 16 Sep)");
     assert.equal(out[1].url, "https://doi.org/10.1056/A1");
@@ -177,16 +177,30 @@ function d1() {
 test("seeding: journal sources are added once; an owner's deletion or disable sticks", { skip: SKIP }, async () => {
   const D = d1(); D._db.exec(SCHEMA.replace(/-- BEGIN bulletins[\s\S]*?-- END bulletins/, ""));   // pre-bulletins database
   const env = { UPDATES_DB: D };
-  assert.equal(await seedJournalSourcesOnce(env), true);
+  assert.deepEqual(await seedJournalSourcesOnce(env), [1, 2]);
   const ids = () => D._db.prepare("SELECT id FROM sources ORDER BY id").all().map((r) => r.id);
   assert.deepEqual(ids(), JOURNAL_SOURCES.map((s) => s.id).sort());
   D._db.prepare("DELETE FROM sources WHERE id = 'pubmed-cardio'").run();
   D._db.prepare("UPDATE sources SET enabled = 0 WHERE id = 'pubmed-onc'").run();
-  assert.equal(await seedJournalSourcesOnce(env), false);
+  assert.deepEqual(await seedJournalSourcesOnce(env), []);
   assert.ok(ids().indexOf("pubmed-cardio") < 0, "deleted source is not re-added");
   assert.equal(D._db.prepare("SELECT enabled FROM sources WHERE id = 'pubmed-onc'").get().enabled, 0);
   assert.equal(D._db.prepare("SELECT value FROM bulletin_settings WHERE key = ?").get(SEED_KEY).value, "1");
   for (const s of JOURNAL_SOURCES) if (s.parser_type === "pubmed") assert.match(s.query, /NOT \("Comment"\[pt\] OR "Letter"\[pt\] OR "Editorial"\[pt\]\)$/, s.id);
+});
+
+test("seeding: a later batch reaches a site that already has batch 1, without restoring its deletions", { skip: SKIP }, async () => {
+  const D = d1(); D._db.exec(SCHEMA);
+  const env = { UPDATES_DB: D };
+  const b1 = JOURNAL_SOURCES.filter((s) => s.seed === 1);
+  for (const s of b1) if (s.id !== "pubmed-cardio") D._db.prepare("INSERT INTO sources (id, name, query, parser_type, type, enabled, created_ts) VALUES (?,?,?,?,?,1,1)").run(s.id, s.name, s.query, s.parser_type, s.type);
+  D._db.prepare("INSERT INTO bulletin_settings (key, value) VALUES (?, '1')").run(seedKey(1));    // production state after batch 1, cardio deleted
+  assert.deepEqual(await seedJournalSourcesOnce(env), [2]);
+  const ids = D._db.prepare("SELECT id FROM sources").all().map((r) => r.id);
+  for (const s of JOURNAL_SOURCES.filter((x) => x.seed === 2)) assert.ok(ids.indexOf(s.id) >= 0, s.id + " added");
+  assert.ok(ids.indexOf("pubmed-cardio") < 0, "batch 1 deletion still respected");
+  assert.equal(new Set(JOURNAL_SOURCES.map((s) => s.id)).size, JOURNAL_SOURCES.length, "ids are unique");
+  for (const s of JOURNAL_SOURCES) assert.ok(Number.isInteger(s.seed) && s.seed >= 1, s.id + " has a batch");
 });
 
 test("pipeline: journal + FDA items become updates and Review Desk candidates; a rerun makes no AI call", { skip: SKIP }, async () => {
@@ -213,7 +227,9 @@ test("pipeline: journal + FDA items become updates and Review Desk candidates; a
     assert.ok(keys.indexOf("fda:NDA220359") >= 0 && keys.indexOf("fda:BLA761463") >= 0);
     assert.ok(keys.indexOf("fda:NDA215866") < 0, "old approval with a new supplement is not news");
     assert.equal(rows.find((r) => r.doc_key === "fda:NDA220359").type, "drug_approval");
-    assert.equal(rows.find((r) => r.doc_key === "doi:10.1056/A1").type, "trial");
+    // A paper several sources return is stored once, typed by the first source to reach it (lowest priority number).
+    const firstPubmed = JOURNAL_SOURCES.filter((x) => x.parser_type === "pubmed").sort((x, y) => x.priority - y.priority)[0];
+    assert.equal(rows.find((r) => r.doc_key === "doi:10.1056/A1").type, firstPubmed.type);
     const firstAi = AI_CALLS;
     assert.equal(firstAi, rows.length, "one summary per new item");
     const logs = D._db.prepare("SELECT source_id, detail FROM crawl_logs").all();
@@ -225,7 +241,25 @@ test("pipeline: journal + FDA items become updates and Review Desk candidates; a
 
     const { listCandidates } = await import("../functions/_bulletins_repo.js");
     const cands = await listCandidates(env, Date.now() - 90 * 86400000, 50);
-    assert.ok(cands.some((c) => c.id && c.type === "drug_approval") && cands.some((c) => c.type === "trial"), "new items are Review Desk candidates");
+    assert.ok(cands.some((c) => c.id && c.type === "drug_approval") && cands.some((c) => c.type === firstPubmed.type), "new items are Review Desk candidates");
     assert.equal(D._db.prepare("SELECT count(*) AS n FROM bulletins").get().n, 0, "nothing is published to a disease page automatically");
+  } finally { restore(); }
+});
+
+test("pipeline: when the AI budget runs out, later sources log 'skipped ... AI budget reached', not 'unchanged'", { skip: SKIP }, async () => {
+  const D = d1(); D._db.exec(SCHEMA);
+  const env = { UPDATES_DB: D, UPDATES_MAX_AI_PER_RUN: "1" };
+  withFetch((url) => {
+    if (url.indexOf("esearch.fcgi") >= 0) return jsonRes({ esearchresult: { idlist: ["111", "222"] } });
+    if (url.indexOf("efetch.fcgi") >= 0) return textRes(XML);
+    if (url.indexOf("drugsfda.json") >= 0) return jsonRes({ meta: { results: { total: 0 } }, results: [] });
+    throw new Error("unexpected " + url);
+  });
+  try {
+    AI_CALLS = 0;
+    await runPipeline(env);
+    assert.equal(AI_CALLS, 1);
+    const logs = D._db.prepare("SELECT status, detail FROM crawl_logs WHERE detail LIKE '%(pubmed)%'").all();
+    assert.ok(logs.some((l) => l.status === "skipped" && /AI budget reached; rest next run$/.test(l.detail)), JSON.stringify(logs.slice(0, 3)));
   } finally { restore(); }
 });
