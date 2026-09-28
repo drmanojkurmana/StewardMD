@@ -165,3 +165,24 @@ test("acidosisClass follows the Low criteria and never invents a missing value",
   assert.equal(acidosisClass({ pH: 7.25, BDecf: 3 }), "normal");
   assert.equal(acidosisClass({}), "unknown");
 });
+
+import { renderCalibratedTraceSvg, yForBpm } from "../tools/tokos-ctg-prep.mjs";
+
+test("calibrated renderer: 110/160 band, amber 100 line, one major line per minute, no <style>", () => {
+  const fhr = new Float64Array(30 * 60 * 4).fill(140), uc = new Float64Array(30 * 60 * 4).fill(10);
+  const { svg, layout } = renderCalibratedTraceSvg(fhr, uc, 4);
+  assert.ok(!/<style/i.test(svg), "inline SVG must not carry a <style> element");
+  assert.ok(svg.includes('class="tk-band"'));
+  assert.equal((svg.match(/class="tk-line-normal"/g) || []).length, 2);
+  assert.equal((svg.match(/class="tk-line-100"/g) || []).length, 1);
+  assert.equal((svg.match(/class="tk-grid-major-t"/g) || []).length, 31);
+  assert.equal(layout.durationSec, 1800);
+  assert.ok(svg.includes('y1="' + yForBpm(layout, 110).toFixed(1) + '"'));
+});
+
+test("calibrated renderer breaks the FHR path on dropout and on values over 210", () => {
+  const fhr = Float64Array.from([140, 141, 0, 0, 142, 143, 250, 144, 145]);
+  const { svg } = renderCalibratedTraceSvg(fhr, new Float64Array(9).fill(10), 4);
+  const d = /class="tk-fhr" d="([^"]*)"/.exec(svg)[1];
+  assert.equal((d.match(/M/g) || []).length, 3);
+});

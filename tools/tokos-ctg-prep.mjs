@@ -354,3 +354,56 @@ export function extractFIGOFeatures(fhrAll, ucAll, fs) {
     repetitive, figoSuggested: figo,
   };
 }
+
+// Calibrated grid: a horizontal line every 10 bpm (major every 30), shaded 110 to 160 band, amber
+// line at 100 (severe bradycardia), a major vertical line every minute and a minor one every 30 s.
+// Colours live in tokos.css (tk-* classes) so the trace follows the monitor or paper theme and the
+// inline SVG never carries a <style>. Axis numbers only: all words are in the bilingual HTML around it.
+export const LAYOUT = { W: 1500, H: 460, padL: 40, padR: 12, yTop: 12, hFhr: 280, gap: 30, hUc: 110, fhrMin: 50, fhrMax: 210 };
+export function yForBpm(L, bpm) {
+  return L.yTop + L.hFhr - ((Math.min(Math.max(bpm, L.fhrMin), L.fhrMax) - L.fhrMin) / (L.fhrMax - L.fhrMin)) * L.hFhr;
+}
+export function renderCalibratedTraceSvg(fhr, uc, fs) {
+  const L = Object.assign({}, LAYOUT);
+  L.plotW = L.W - L.padL - L.padR;
+  L.ucTop = L.yTop + L.hFhr + L.gap;
+  L.durationSec = fhr.length / fs;
+  const x = (i) => L.padL + (i / Math.max(1, fhr.length - 1)) * L.plotW;
+  const yUc = (v) => L.ucTop + L.hUc - (Math.min(Math.max(v, 0), 100) / 100) * L.hUc;
+  const f1 = (n) => n.toFixed(1);
+  const right = L.W - L.padR, bottom = L.ucTop + L.hUc;
+  let g = '<rect class="tk-bg" x="0" y="0" width="' + L.W + '" height="' + L.H + '"/>';
+  g += '<rect class="tk-band" x="' + L.padL + '" y="' + f1(yForBpm(L, 160)) + '" width="' + L.plotW + '" height="' + f1(yForBpm(L, 110) - yForBpm(L, 160)) + '"/>';
+  for (let bpm = 60; bpm <= 200; bpm += 10) {
+    const y = f1(yForBpm(L, bpm));
+    g += '<line class="' + (bpm % 30 === 0 ? "tk-grid-major" : "tk-grid-minor") + '" x1="' + L.padL + '" y1="' + y + '" x2="' + right + '" y2="' + y + '"/>';
+    if (bpm % 20 === 0) g += '<text class="tk-axis" x="' + (L.padL - 4) + '" y="' + y + '" text-anchor="end" dominant-baseline="middle">' + bpm + "</text>";
+  }
+  [110, 160].forEach((b) => { const y = f1(yForBpm(L, b)); g += '<line class="tk-line-normal" x1="' + L.padL + '" y1="' + y + '" x2="' + right + '" y2="' + y + '"/>'; });
+  const y100 = f1(yForBpm(L, 100));
+  g += '<line class="tk-line-100" x1="' + L.padL + '" y1="' + y100 + '" x2="' + right + '" y2="' + y100 + '"/>';
+  for (let u = 0; u <= 100; u += 25) { const y = f1(yUc(u)); g += '<line class="tk-grid-minor" x1="' + L.padL + '" y1="' + y + '" x2="' + right + '" y2="' + y + '"/>'; }
+  const mins = Math.floor(L.durationSec / 60);
+  for (let m = 0; m <= mins; m++) {
+    const xm = f1(L.padL + ((m * 60) / L.durationSec) * L.plotW);
+    g += '<line class="tk-grid-major-t" x1="' + xm + '" y1="' + L.yTop + '" x2="' + xm + '" y2="' + bottom + '"/>';
+    if (m % 5 === 0) g += '<text class="tk-axis" x="' + xm + '" y="' + (L.H - 4) + '" text-anchor="middle">' + m + "</text>";
+    if (m < mins) { const xh = f1(L.padL + ((m * 60 + 30) / L.durationSec) * L.plotW); g += '<line class="tk-grid-minor-t" x1="' + xh + '" y1="' + L.yTop + '" x2="' + xh + '" y2="' + bottom + '"/>'; }
+  }
+  // 2 Hz is enough to see variability on a phone and halves the file. ponytail: plain decimation;
+  // switch to min/max per bucket if a reviewer sees variability flattened at full zoom.
+  const step = Math.max(1, Math.round(fs / 2));
+  function path(s, yFn, isFhr) {
+    let d = "", pen = false;
+    for (let i = 0; i < s.length; i += step) {
+      if (isFhr && !(s[i] >= CFG.FHR_MIN && s[i] <= CFG.FHR_MAX)) { pen = false; continue; }
+      d += (pen ? "L" : "M") + f1(x(i)) + "," + f1(yFn(s[i])) + " ";
+      pen = true;
+    }
+    return d.trim();
+  }
+  g += '<path class="tk-fhr" d="' + path(fhr, (v) => yForBpm(L, v), true) + '"/>';
+  g += '<path class="tk-uc" d="' + path(uc, yUc, false) + '"/>';
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + L.W + " " + L.H + '" width="' + L.W + '" height="' + L.H + '" class="tk-svg">' + g + "</svg>";
+  return { svg, layout: L };
+}
