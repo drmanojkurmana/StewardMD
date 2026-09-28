@@ -3720,7 +3720,37 @@
     renderCompare(d);
   }
 
+  // smd_case_log (round 62, default OFF; "1" opts in): when a doctor selects a diagnosis, keep an anonymous record ON THIS
+  // DEVICE ONLY so a real validation set can grow: the finding keys tapped (true only, no values), the keys denied, the
+  // chosen diagnosis, the engine's top five and gate, and the month. No note text, no numbers, no identifiers, nothing
+  // sent anywhere; DX.caseLogExport() hands the doctor a JSON file to share if they choose.
+  var CASE_LOG_KEY = "smd_case_log_v1", CASE_LOG_MAX = 2000;
+  function caseLogOn() { try { return localStorage.getItem("smd_case_log") === "1"; } catch (e) { return false; } }
+  function caseLogRead() { try { var a = JSON.parse(localStorage.getItem(CASE_LOG_KEY) || "[]"); return Array.isArray(a) ? a : []; } catch (e) { return []; } }
+  function caseLogRecord(id) {
+    if (!caseLogOn() || !id) return;
+    var d = differential(), rk = function (x) { return x.rankScore != null ? x.rankScore : x.score; };
+    var all = [].concat(d.inf || [], d.ni || []).sort(function (a, b) { return rk(b) - rk(a); });
+    var g = null; try { g = gate(d).cls; } catch (e) {}
+    var now = new Date(), month = now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2);
+    var rec = { v: 1, month: month, chosen: String(id),
+      findings: Object.keys(S.f || {}).filter(function (k) { return S.f[k] === true && VALID[k]; }).sort(),
+      denied: Object.keys(S.neg || {}).filter(function (k) { return S.neg[k] && VALID[k]; }).sort(),
+      top5: all.slice(0, 5).map(function (x) { return x.id; }), gate: g };
+    var log = caseLogRead(); log.push(rec); if (log.length > CASE_LOG_MAX) log = log.slice(-CASE_LOG_MAX);
+    try { localStorage.setItem(CASE_LOG_KEY, JSON.stringify(log)); } catch (e) {}
+  }
+  function caseLogExport() {
+    var json = JSON.stringify({ format: "stewardmd-case-log", v: 1, cases: caseLogRead() }, null, 1);
+    try {
+      var blob = new Blob([json], { type: "application/json" }), url = URL.createObjectURL(blob), a = document.createElement("a");
+      a.href = url; a.download = "stewardmd-case-log.json"; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+    } catch (e) {}
+    return json;
+  }
   function selectDx(id) {
+    try { caseLogRecord(id); } catch (e) {}
     // infectious -> open the full StewardMD disease page with current findings
     var syn = window.SYNDROMES || {};
     if (syn[id]) {
@@ -5223,6 +5253,8 @@
   window.DX = { _nlpCtx: function () { var c = nlpCtx(); return { syn: c.syn, numeric: c.numeric || {}, v2: !!c.v2 }; }, open: open, openWorkspace: openWorkspace, close: close, reset: resetAll, importPatient: importPatient, restore: restore, addFindings: addFindings, findingCatalog: findingCatalog, _state: S, _ni: DDX_NI, _differential: differential,
     _nextQuestions: nextQuestions,
     _differentiate: differentiate, _dxAsk: dxAskOn, _openAsk: openAsk, // smd_dx_ask
+    caseLog: caseLogRead, caseLogExport: caseLogExport, caseLogClear: function () { try { localStorage.removeItem(CASE_LOG_KEY); } catch (e) {} return true; },   // smd_case_log
+    _caseLogOn: caseLogOn, _selectDx: selectDx,
     _simple: simpleOn, // smd_dx_simple
     _ftSynV2: function () { return FT_SYN_V2; }, // read-only: the v2 phrase table (extraction audits)
     // PURE: free text -> present engine finding keys, using the engine's OWN synonym set (FT_SYN) so
