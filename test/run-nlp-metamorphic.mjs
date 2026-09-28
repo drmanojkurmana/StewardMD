@@ -134,6 +134,12 @@ try {
     neutral: (t) => "Seen in the evening clinic. " + t + " Reviewed with the registrar.",
     lines: (t) => t.replace(/\. /g, ".\n"),   // one statement per line, as notes are often typed
     reversed: (t) => t.split(/(?<=\.)\s+/).reverse().join(" "),   // same statements, another order (tracked, not zero)
+    // round 43: statements joined by semicolons
+    semis: (t) => t.replace(/\.\s+(?=[A-Z])/g, "; "),
+    // round 43: one statement per bullet line ("- Fever for 3 days")
+    bullets: (t) => t.split(/(?<=\.)\s+/).map((x) => "- " + x.replace(/\.$/, "")).join("\n"),
+    // round 42: doctors' shorthand reads the same as the words
+    shorthand: (t) => t.replace(/\bwithout\b/gi, "w/o").replace(/\bwith\b/gi, "w/").replace(/\babdominal\b/gi, "abd"),
     // round 41: an age stated up front changes only the age band
     age: (t) => "A 45-year-old man. " + t,
   };
@@ -167,7 +173,7 @@ try {
   }
   const ceilings = (() => { try { return JSON.parse(readFileSync(CEIL_FILE, "utf8")); } catch { return {}; } })();
   if (WRITE) {
-    const ALL = ["probe.pos", "probe.neg", "probe.list", "probe.spelling", "probe.without", "chart.upper", "chart.spaces", "chart.neutral", "chart.lines", "chart.reversed", "chart.age", "engine.order", "engine.repeat"];
+    const ALL = ["probe.pos", "probe.neg", "probe.list", "probe.spelling", "probe.without", "chart.upper", "chart.spaces", "chart.neutral", "chart.lines", "chart.reversed", "chart.age", "chart.shorthand", "chart.bullets", "chart.semis", "engine.order", "engine.repeat"];
     const out = {}; for (const k of ALL) out[k] = counts[k] || 0;
     writeFileSync(CEIL_FILE, JSON.stringify(out, null, 2) + "\n"); console.log("ceilings written");
   }

@@ -559,3 +559,30 @@ test("an age phrase does not make the findings beside it past history", () => {
   assert.ok(r("A 61-year-old cotton farmer.").findings.some((f) => f.canonicalFindingId === "ruralExposure" && f.temporality === "current"));
   assert.ok(r("A 70 year old with an old stroke.").findings.some((f) => f.canonicalFindingId === "cerebrovascularDisease" && f.temporality === "historical"));
 });
+
+// round 42: shorthand reads as the words ("w/o", "w/", "abd", a trailing "-" / "(+)" / "-ve")
+test("doctors' shorthand", () => {
+  const c42 = { valid: { fever: 1, rigors: 1, abdominalPain: 1, nauseaVomiting: 1, cough: 1, weightLoss: 1 }, labels: {}, numeric: {}, v2: true,
+    syn: { fever: ["fever"], rigors: ["rigors"], abdominalPain: ["abdominal pain"], nauseaVomiting: ["vomiting"], cough: ["cough"], weightLoss: ["weight loss"] } };
+  const r = (t) => NLP.extract(t, c42);
+  const a = r("Fever w/o rigors.");
+  assert.ok(a.present.includes("fever") && a.absent.includes("rigors"));
+  const b = r("Abd pain +, vomiting +, fever -");
+  assert.ok(b.present.includes("abdominalPain") && b.present.includes("nauseaVomiting") && b.absent.includes("fever"));
+  const c = r("Cough (+), fever (-).");
+  assert.ok(c.present.includes("cough") && c.absent.includes("fever"));
+  assert.ok(r("Fever - 3 days.").present.includes("fever"));   // a dash inside a phrase is not a sign
+  assert.ok(r("frail over the past year w/ 8 kg unintentional weight loss").findings.some((f) => f.canonicalFindingId === "weightLoss" && f.temporality === "current"));
+});
+
+// round 43: a bullet or number opening a statement is not part of it (negated lists kept their head)
+test("bullet lines read like sentences", () => {
+  const c43 = { valid: { fever: 1, cough: 1, dysuria: 1, headache: 1 }, labels: {}, numeric: {}, v2: true,
+    syn: { fever: ["fever"], cough: ["cough"], dysuria: ["dysuria"], headache: ["headache"] } };
+  const r = (t) => NLP.extract(t, c43);
+  const a = r("- No fever, cough or dysuria\n- Headache for 2 days");
+  assert.deepEqual(a.present, ["headache"]);
+  assert.ok(["fever", "cough", "dysuria"].every((k) => a.absent.includes(k)));
+  assert.deepEqual(r("1. Headache for 3 days. 2. No cough.").present, ["headache"]);
+  assert.ok(r("* fever\n* no cough").present.includes("fever"));
+});

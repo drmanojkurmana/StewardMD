@@ -82,7 +82,10 @@
     } catch (e) { return true; }
   }
   // v2: phrases the abbreviation table would otherwise mangle ("cva" -> "stroke")
-  var PRE_V2 = [[/\bcva\s*(?:angle\s*)?tender(?:ness)?\b/g, "costovertebral angle tenderness"], [/\bcva\s*angle\b/g, "costovertebral angle"]];
+  var PRE_V2 = [[/\bcva\s*(?:angle\s*)?tender(?:ness)?\b/g, "costovertebral angle tenderness"], [/\bcva\s*angle\b/g, "costovertebral angle"],
+    // round 42: shorthand ("fever w/o rigors", "w/ cough", "abd pain"; a trailing sign: "fever -", "cough (-)", "vomiting +ve")
+    [/(^|[^a-z])w\/o(?=[^a-z]|$)/g, "$1without"], [/(^|[^a-z])w\/\s*(?=[a-z0-9])/g, "$1with "], [/\babd\b\.?/g, "abdominal"],
+    [/\s*(?:\(\s*-\s*\)|-\s?ve\b|\s-)(?=\s*(?:[,.;:]|$))/g, " negative"], [/\s*(?:\(\s*\+\s*\)|\+\s?ve\b|\s\+)(?=\s*(?:[,.;:]|$))/g, " positive"]];
   // "a 3-day history of" states the present illness, not past history
   var PRESENT_HX_V2 = /\b(?:\d{1,2}|a|an|one|two|three|four|five|six|seven|eight|nine|ten|few|several)\s*-?\s*(?:d|days?|wks?|weeks?|months?|hours?|hrs?)\s*history\b/;
   // round 8: "on a background of 3 days of fever" is the present illness too (days/weeks/hours only;
@@ -117,6 +120,9 @@
     // round 19 (metamorphic tests): a line break ends a statement and repeated spaces are one space
     // ("chest  pain" read nothing; 510 of 571 audit notes lost findings when their spaces were doubled)
     if (v2) s = spaceV2(s);
+    // round 43: a bullet marker opening a statement ("- No fever, cough or dysuria") is not part of it: 155 notes read
+    // differently as bullets (negated lists lost their head)
+    if (v2) s = s.replace(/(^\s*|[.;:]\s+)(?:[-*\u2022\u00b7\u2013>]+|\d{1,2}[.)])\s+(?=[a-z(])/g, "$1");
     if (v2) PRE_V2.forEach(function (p) { s = s.replace(p[0], p[1]); });
     // expand abbreviations (slash-forms need literal replace before punctuation strip)
     ABBREV.forEach(function (p) {
