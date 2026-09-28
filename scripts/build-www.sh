@@ -97,6 +97,8 @@ if [ -d assets/vendor ]; then mkdir -p "$WWW/assets/vendor"; cp -R assets/vendor
 # Drugs Database can only search the 109-molecule formulary in drugs.js and answers "No drugs match"
 # for molecules whose full monograph is sitting in the bundle beside it.
 [ -f data/clinical-supplement.json.gz ] && cp data/clinical-supplement.json.gz "$WWW/"
+# Dose calculator rules (scripts/build-dose-rules.mjs), loaded lazily by the calculator.
+[ -f data/dose-rules.json.gz ] && cp data/dose-rules.json.gz "$WWW/"
 [ -f data/clinical-index.js ] && cp data/clinical-index.js "$WWW/"
 
 # ── 4c. WardSynQ clinical surface ─────────────────────────────────────────────
