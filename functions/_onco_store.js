@@ -89,7 +89,9 @@ function _activationGate(plan, opts) {
   const ev = plan.evidenceSnapshot || tmpl.evidence || null;
   if (!(ev && ev.core && ev.core.length)) blockers.push("source_evidence_missing");
   if (!((tmpl.clearanceChecks || []).length)) blockers.push("clearance_info_missing");
-  if ((tmpl.verifyFields || []).length || _deepHasVerify(tmpl)) blockers.push("unresolved_verify");
+  // Owner, 2026-09-28: unresolved VERIFY markers in the template no longer block activation. A VERIFY
+  // DOSE still cannot activate on its own: it computes no final dose, so dose_calculations_incomplete
+  // above blocks it until the physician enters the dose (a confirmed override supplies `final`).
   // Owner, 2026-09-28: review status (draft / experimental / in_review) no longer blocks activation.
   // A RETIRED protocol still does. Every other blocker above and below (doses, evidence, clearance,
   // unresolved VERIFY fields, physician confirmation) is unchanged, so activation is never automatic.

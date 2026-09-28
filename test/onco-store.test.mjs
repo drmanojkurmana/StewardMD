@@ -383,8 +383,8 @@ test("Phase F: _activationGate PASSES only with doses complete + evidence + clea
   g = ONCO._activationGate(clone({ lockedTemplate: { clearanceChecks: [] } }), { physicianConfirmed: true });
   assert.ok(g.blockers.indexOf("clearance_info_missing") >= 0);
 
-  g = ONCO._activationGate(clone({ lockedTemplate: { drugs: [{ id: "drugA", dosePerUnit: "VERIFY" }] } }), { physicianConfirmed: true });
-  assert.ok(g.blockers.indexOf("unresolved_verify") >= 0, "a nested VERIFY sentinel blocks activation");
+  g = ONCO._activationGate(clone({ lockedTemplate: { notes: "VERIFY", verifyFields: ["notes"] } }), { physicianConfirmed: true });
+  assert.equal(g.ok, true, "owner 2026-09-28: a VERIFY marker outside the doses no longer blocks activation");
 
   g = ONCO._activationGate(clone({ top: { calculatedDoses: [{ drugId: "drugA", final: null }] } }), { physicianConfirmed: true });
   assert.ok(g.blockers.indexOf("dose_calculations_incomplete") >= 0);
@@ -410,7 +410,9 @@ test("Phase F: confirmPlan gate BLOCKS on missing evidence/clearance and on an u
 
   const verifyTmpl = { id: "fx-v", version: "1.0", cycles: 1, clearanceChecks: ["CBC"], evidence: { core: [{ source: "x" }] }, drugs: [{ id: "drugA", basis: "flat", dosePerUnit: "VERIFY" }] };
   const p2 = await ONCO.createPlan({}, { protocolId: "fx-v", patientParams: {} }, verifyTmpl, io);
-  await assert.rejects(() => ONCO.confirmPlan({}, p2.planId, { overrides: [], physicianConfirmed: true }, io), /activation_blocked:.*unresolved_verify/);
+  // A VERIFY DOSE computes no final dose, so it is still blocked, now as an incomplete dose rather than
+  // as an unresolved VERIFY (owner 2026-09-28 opened the VERIFY gate; the dose check stays).
+  await assert.rejects(() => ONCO.confirmPlan({}, p2.planId, { overrides: [], physicianConfirmed: true }, io), /activation_blocked:.*dose_calculations_incomplete/);
 });
 
 test("Phase F: legacy array-form confirmPlan stays un-gated (back-compat for the data-layer), so existing flows are unchanged", async () => {

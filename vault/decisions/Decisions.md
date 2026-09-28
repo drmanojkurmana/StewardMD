@@ -10681,3 +10681,7 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   server `functions/_onco_store.js _activationGate` now blocks only `protocol_retired`). Every other
   activation blocker is unchanged: complete dose calculations, source evidence, clearance checks,
   unresolved VERIFY fields, and physician confirmation.
+- **Owner, 2026-09-28: oncology VERIFY gate opened.** `functions/_onco_store.js _activationGate` no longer
+  blocks on unresolved VERIFY markers. A VERIFY *dose* still cannot activate by itself: it computes no final
+  dose, so `dose_calculations_incomplete` blocks until the physician enters the dose. The review-desk
+  approval check (`onco-protocol-review.js clinicalApprove`) was not changed.

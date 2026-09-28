@@ -116,7 +116,8 @@ test("SAFETY: the usable-protocol gate refuses only RETIRED protocols (owner 202
   const srv = readFileSync(join(ROOT, "functions/_onco_store.js"), "utf8");
   assert.match(srv, /blockers\.push\("protocol_retired"\)/);
   assert.match(srv, /blockers\.push\("physician_confirmation_missing"\)/);
-  assert.match(srv, /blockers\.push\("unresolved_verify"\)/);
+  assert.doesNotMatch(srv, /blockers\.push\("unresolved_verify"\)/, "VERIFY gate opened (owner 2026-09-28)");
+  assert.match(srv, /blockers\.push\("dose_calculations_incomplete"\)/);
 });
 
 test("SAFETY: writes stay doubly gated regardless of any client flag", () => {
