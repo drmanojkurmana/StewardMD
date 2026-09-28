@@ -1424,6 +1424,21 @@
   // bronchiectasis from a note, so the classic-reader configuration keeps its old behaviour)
   var ANCHOR_V2_ONLY = { HAP: 1, BRONCHIECTASIS_EXACERBATION: 1, VAP: 1 };
   function rankV3Anchor(id) { if (ANCHOR_V2_ONLY[id] && !(window.SMD_NLP && SMD_NLP._v2 && SMD_NLP._v2({}))) return null; return RANK_V3_ANCHOR[id]; }
+  // round 76: the ordered score the gate compares, with the v3 evidence applied even when the displayed order is the classic
+  // one (smd_rank_v3=0 changes the order the doctor sees, not what the antibiotic gate knows)
+  var GATE_RANK = {};   // per gate() call (reset there): the v3 score of each candidate when the order is the classic one
+  function gateRank(r) {
+    if (!r) return 0;
+    if (rankV3()) return r.rankScore != null ? r.rankScore : r.score;
+    var key = (r.inf ? "i:" : "n:") + r.id;
+    if (GATE_RANK[key] == null) {
+      var c = { id: r.id, score: r.score, rankScore: r.rankScore, supporting: r.supporting, inf: r.inf, _syn: r._syn };
+      rankV3Adjust(c); GATE_RANK[key] = c.rankScore;
+    }
+    return GATE_RANK[key];
+  }
+  // a sore throat with viral features (cough, coryza, a blocked nose) and no tonsillar exudate (IDSA 2012)
+  function viralThroatOf(f) { return !!(f.soreThroat && (f.cough || f.coughRadio || f.coryza || f.nasalCongestion) && !f.tonsillarExudate); }
   function rankV3Excluded(r, f) {
     if (RANK_V3_DQ[r.id] && RANK_V3_DQ[r.id](f)) return true;
     var anc = rankV3Anchor(r.id);
@@ -1572,7 +1587,10 @@
   // non-infective causes of abdominal pain (or distension) that, when they lead, make "tap first" the SBP answer
   var RIVAL_NEEDS = {
     CHOLANGITIS: ["jaundice", "rightUpperQuadrantPain", "dilatedCBD", "cholestaticLFT", "knownGallstones", "abdominalPain", "darkUrine", "rigors"],
-    CHOLECYSTITIS: ["rightUpperQuadrantPain", "murphySign", "knownGallstones", "gallbladderInflamed", "abdominalPain", "severeAbdominalPain"]
+    CHOLECYSTITIS: ["rightUpperQuadrantPain", "murphySign", "knownGallstones", "gallbladderInflamed", "abdominalPain", "severeAbdominalPain"],
+    // round 76: its criteria need right upper quadrant pain and a liver lesion (fever, travel and jaundice are a malaria too;
+    // gold train gc_070)
+    AMOEBIC_LIVER_ABSCESS: ["rightUpperQuadrantPain", "singleLesion", "abdominalPain", "severeAbdominalPain", "abdominalDiscomfort"]
   };
   var SBP_PAIN_NI = { pancreatitis: 1, bowel_obstruction: 1, peptic_ulcer: 1, mesenteric_ischemia: 1, biliary_colic: 1, renal_colic: 1,
     aaa: 1, anaphylaxis: 1 };
@@ -1608,8 +1626,8 @@
     // round 73: abdominal pain in cirrhosis with ascites, but no fever, rigors or ascitic neutrophils, while a non-infective
     // cause of the pain leads the order (pancreatitis, bowel obstruction, a perforated ulcer, anaphylaxis): tap first, as with
     // encephalopathy alone (AASLD 2021: the ascitic neutrophil count decides). Gold train gc_438, gc_446, gc_490.
-    var painElsewhere = !!(rankV3() && sbpSign && !(f.fever || f.rigors || f.asciticPMNHigh) && d.ni[0] && SBP_PAIN_NI[d.ni[0].id] &&
-      (!d.inf[0] || (d.ni[0].rankScore != null ? d.ni[0].rankScore : d.ni[0].score) > (d.inf[0].rankScore != null ? d.inf[0].rankScore : d.inf[0].score)));
+    var painElsewhere = !!(sbpSign && !(f.fever || f.rigors || f.asciticPMNHigh) && d.ni[0] && SBP_PAIN_NI[d.ni[0].id] &&
+      (!d.inf[0] || gateRank(d.ni[0]) > gateRank(d.inf[0])));
     if (f.liverDisease && f.ascites && (sbpSign || (sbpSoft && !gib)) &&
         (g.cls === "possible" || g.cls === "unlikely" || g.cls === "noninfective" || g.cls === "none")) {
       g.cls = sbpSign && !painElsewhere ? "likely" : "rule_out_sbp"; g.rule = "sbp";
@@ -1638,7 +1656,7 @@
     if ((f.fever || f.rigors) && (f.hypotension || f.lactateElevated || f.vasopressorRequirement) && (f.rigors || f.leukocytosis || f.toxicAppearing) &&
         g.cls === "noninfective") {
       // (a diagnosis the v3 order excludes, e.g. a thyroid storm with none of its anchors, does not count)
-      var nS = d.ni.reduce(function (m, x) { return (rankV3() && rankV3Excluded(x, f)) || (m && m.score >= x.score) ? m : x; }, null), nR = d.ni[0] || null;
+      var nS = d.ni.reduce(function (m, x) { return rankV3Excluded(x, f) || (m && m.score >= x.score) ? m : x; }, null), nR = d.ni[0] || null;
       if (!(nS && SHOCK_FEVER_NI[nS.id]) && !(nR && SHOCK_FEVER_NI[nR.id])) { g.cls = "likely"; g.rule = "sepsis_phys"; return; }
     }
     // afebrile septic shock (Sepsis-3): the old and frail often never mount a fever. Low BP with a raised
@@ -1678,9 +1696,10 @@
     // It needs enough information (the smd_calib sufficiency rule, flag or not): fever alone is not an infection call.
     // And the v2 reader: "subacute" and "prolonged fever" come from its duration parsing, which the classic one lacks.
     // (round 25: night sweats with weight loss, the B-symptom pair, is a chronic picture even without a stated duration)
-    if (weak && febrile && rankV3() && !gib && !(f.subacuteOnset || f.prolongedFever || f.prolongedFeverUnexplained || (f.weightLoss && f.nightSweats)) && enoughInfo(d, f) &&
+    // (round 76: with the classic order too, measured with the v3 evidence: gateRank)
+    if (weak && febrile && !gib && !(f.subacuteOnset || f.prolongedFever || f.prolongedFeverUnexplained || (f.weightLoss && f.nightSweats)) && enoughInfo(d, f) &&
         !!(window.SMD_NLP && SMD_NLP._v2 && SMD_NLP._v2({}))) {
-      var rkg = function (x) { return x.rankScore != null ? x.rankScore : x.score; };
+      var rkg = gateRank;
       var bI = d.inf.reduce(function (m, x) { return !m || rkg(x) > rkg(m) ? x : m; }, null);
       var bN = d.ni.reduce(function (m, x) { return !m || rkg(x) > rkg(m) ? x : m; }, null);
       if (bI && (!bN || rkg(bI) > rkg(bN))) { g.cls = "likely"; g.rule = "febrile_infection_lead"; g.lead = bI; }
@@ -1688,8 +1707,12 @@
     // (round 65: cirrhosis shown by its signs, ascites or a flap, counts too: Baveno / AASLD prophylaxis)
     // (round 73: a variceal bleed leading the order is portal hypertension too, when the reader missed the liver words;
     // gold train gc_037 with the classic reader)
-    var rkv = function (x) { return x.rankScore != null ? x.rankScore : x.score; };
-    var varLead = !!(d.ni[0] && d.ni[0].id === "variceal_bleed" && (!d.inf[0] || rkv(d.ni[0]) >= rkv(d.inf[0])));
+    var rkv = gateRank;
+    // (round 76: with a cause or sign of portal hypertension, alcohol excess, a big spleen, low platelets, or jaundice with
+    // encephalopathy: a B12 deficiency whose "denies melena or hematemesis" the classic reader missed is not a variceal
+    // bleed; gold train gc_101)
+    var varLead = !!(d.ni[0] && d.ni[0].id === "variceal_bleed" && (!d.inf[0] || rkv(d.ni[0]) >= rkv(d.inf[0])) &&
+      (f.alcoholExcess || f.splenomegaly || f.hepatosplenomegaly || f.thrombocytopenia || (f.jaundice && (f.alteredSensorium || f.asterixis))));
     var cirrGib = (f.liverDisease || f.ascites || f.asterixis || varLead) && (f.hematemesis || f.melena || f.gibPresentation);
     if (cirrGib && g.cls !== "very_likely" && g.cls !== "likely") {
       g.cls = "abx_prophylaxis"; g.rule = "cirrhosis_gib";
@@ -1699,9 +1722,10 @@
     // no host modifier: the classic MAX-score thresholds still read "infection likely" whenever an
     // infection matched and scored close (renal colic vs pyelonephritis, lung cancer vs TB, an IBD
     // flare vs dysentery). Only the order-aware reading can see that the non-infective cause leads.
-    if ((g.cls === "very_likely" || g.cls === "likely") && !(f.fever || f.rigors || f.feverGU || f.highFeverGI) &&
+    // (round 76: never for cirrhosis with a GI bleed: prophylaxis stands whatever leads, Baveno VII)
+    if ((g.cls === "very_likely" || g.cls === "likely") && !(f.fever || f.rigors || f.feverGU || f.highFeverGI) && !cirrGib &&
         !GATE_V2_KEEP.some(function (k) { return f[k]; }) && !f.organDysfunction) {
-      var rk2 = function (x) { return x.rankScore != null ? x.rankScore : x.score; };
+      var rk2 = gateRank;
       var bestI = d.inf.reduce(function (m, x) { return !m || rk2(x) > rk2(m) ? x : m; }, null);
       var bestN = d.ni.reduce(function (m, x) { return !m || rk2(x) > rk2(m) ? x : m; }, null);
       // round 9 (2026-09-27): with smd_rank_v3 the ORDER is the reviewed reading, so a non-infective lead there is
@@ -1710,7 +1734,7 @@
       // It also needs the v2 extractor, which reads every mention: the classic one reads only the first, so "denies
       // fever at home ... temp 39" reads afebrile there (classic extractor + this: needed antibiotics 109 -> 107).
       var nlp2 = !!(window.SMD_NLP && SMD_NLP._v2 && SMD_NLP._v2({}));
-      if (bestN && bestI && rk2(bestN) > rk2(bestI) && ((rankV3() && nlp2) || bestN.score >= bestI.score)) {
+      if (bestN && bestI && rk2(bestN) > rk2(bestI) && (nlp2 || bestN.score >= bestI.score)) {
         g.cls = "noninfective"; g.rule = "ni_lead_afebrile"; g.why = bestN.name;
         return;
       }
@@ -1719,9 +1743,9 @@
     // vasculitis, pancreatitis...) leads the v3 order by 10+ with no shock physiology or host modifier: it explains
     // the fever. Leukaemia, lymphoma and other cancers are NOT on the list (fever there is neutropenic until shown
     // otherwise: train gc_044 endocarditis behind leukaemia), nor gout (a septic joint needs a tap to exclude).
-    if ((g.cls === "very_likely" || g.cls === "likely") && rankV3() &&
+    if ((g.cls === "very_likely" || g.cls === "likely") && !cirrGib &&
         !GATE_V2_KEEP.some(function (k) { return f[k]; })) {
-      var rk3 = function (x) { return x.rankScore != null ? x.rankScore : x.score; };
+      var rk3 = gateRank;
       var bI = d.inf.reduce(function (m, x) { return !m || rk3(x) > rk3(m) ? x : m; }, null);
       var bN = d.ni.reduce(function (m, x) { return !m || rk3(x) > rk3(m) ? x : m; }, null);
       if (bN && bI && FEVER_NI[bN.id] && rk3(bN) >= rk3(bI) + 10) { g.cls = "noninfective"; g.rule = "ni_explains_fever"; g.why = bN.name; return; }
@@ -1731,8 +1755,9 @@
     var lead = g.lead, need = abxNeed(lead);
     // round 47: a sore throat with viral features (cough, coryza, a blocked nose) and no tonsillar exudate is viral: IDSA
     // (2012) advises neither a strep test nor antibiotics, so pharyngitis holds no "antibiotics if criteria met".
-    // Under smd_rank_v3 only: in the classic order that conditional answer was the net under a needed call (unseen set)
-    var viralThroat = !!(rankV3() && f.soreThroat && (f.cough || f.coughRadio || f.coryza || f.nasalCongestion) && !f.tonsillarExudate);
+    // (round 76: with the classic order too. It had been smd_rank_v3 only, because in the classic order that conditional answer
+    // was the net under a needed call; the febrile-infection-lead rule now reads the v3 evidence there, which covers it)
+    var viralThroat = viralThroatOf(f);
     if (lead && lead.id === "PHARYNGITIS" && need === "CONDITIONAL" && viralThroat) need = "NO";
     if (!lead || need === "YES") return;
     // round 73: an infection that needs no antibiotics (viral hepatitis) does not cancel the prophylaxis a GI bleed in
@@ -1749,7 +1774,7 @@
     // another cause: no dehydration, low urine output, abdominal pain or distension. Gold: complaint-only overcalls 15 -> 13
     // with no needed call lost.)
     var wateryText = nlp2w && (!!(S.neg && S.neg.fever) || !(f.dehydration || f.oliguria || f.abdominalPain || f.severeAbdominalPain || f.abdominalDistension));
-    var watery = !mods.length && lead.id === "GASTROENTERITIS" && rankV3() && (!S.negText || wateryText) && f.diarrhea && noneOf(f, ["fever", "rigors", "feverGU", "bloodyStool", "tenesmus",
+    var watery = !mods.length && lead.id === "GASTROENTERITIS" && (!S.negText || wateryText) && f.diarrhea && noneOf(f, ["fever", "rigors", "feverGU", "bloodyStool", "tenesmus",
         "alteredSensorium", "toxicAppearing", "organDysfunction", "antibioticsLast90Days", "priorAntibiotics", "hospitalDay48",
         "hospitalizationLast90Days", "nursingHomeResident", "travelEndemicArea", "prolongedFever", "subacuteOnset"]);
     if (mods.length) { g.rule = "keep_modifier"; g.need = need; g.why = mods.map(function (k) { try { return lbl(k); } catch (e) { return k; } }).join(", "); return; }
@@ -1758,17 +1783,19 @@
     // hepatitis leading a leptospirosis or SBP picture); this stops a ranking miss from becoming
     // "no antibiotics".
     var rivalYes = null, rivalCond = null;
-    var v3 = rankV3(), rk2g = function (y) { return y.rankScore != null ? y.rankScore : y.score; };
     d.inf.forEach(function (x) {
       if (x === lead || x.score < 42) return;
       if (x.id === "PHARYNGITIS" && viralThroat) return;
       if (watery && (x.id === "C_DIFF" || x.id === "DYSENTERY")) return;
-      if (v3 && rankV3Excluded(x, f)) return;   // smd_rank_v3: an excluded rival cannot hold antibiotics on
+      if (rankV3Excluded(x, f)) return;   // smd_rank_v3 knowledge: an excluded rival cannot hold antibiotics on
       // round 73: a biliary infection holds antibiotics as a rival only with a biliary sign (Tokyo 2018): fever, vomiting and
       // transaminases over 1000 are a hepatitis. The order is untouched (a reader that missed the words must not bury it).
       if (RIVAL_NEEDS[x.id] && noneOf(f, RIVAL_NEEDS[x.id])) return;
       // round 9: under smd_rank_v3 "close" is measured on the ordered score the doctor sees (raw otherwise)
-      var n = abxNeed(x), close = v3 ? rk2g(x) >= rk2g(lead) - 30 : x.score >= lead.score - 30;
+      // round 76: with the classic order (smd_rank_v3=0) the gate still measures it with the v3 evidence (gateRank), without
+      // reordering the list, as it already used rankV3Excluded: a common cold must not hold antibiotics for a leptospirosis
+      // that has none of its exposures
+      var n = abxNeed(x), close = gateRank(x) >= gateRank(lead) - 30;
       var critical = x._syn && x._syn.decision && x._syn.decision.status === "red";
       // a time-critical rival counts from any distance only when its criteria are met (x.matched);
       // an unmatched one is keyword overlap and must be within the 30 points like any other
@@ -1784,8 +1811,10 @@
   }
 
   /* Infection gate — keyed off whether infection LEADS overall */
+  var CLASSIC_VIRAL = { URTI: 1, CHIKUNGUNYA: 1, VIRAL_HEPATITIS: 1 };
   function gate(d) {
     var v2 = gateV2();
+    GATE_RANK = {};
     // MAX score across each column — order-independent, so the specificity
     // re-rank (which can change which candidate sits at [0]) leaves the infection
     // gate + antibiotic decision byte-identical to the classic ordering.
@@ -1824,8 +1853,27 @@
     if (febrileNeutropenia && topInf >= 30 && topInf >= topNi - 8) {
       if (cls === "noninfective" || cls === "unlikely" || cls === "possible") cls = "likely";
     }
-    var out = { cls: cls, topInf: topInf, topNi: topNi, lead: d.inf[0] || null };
-    if (v2) gateV2Apply(out, d, f);
+    // round 76: with the classic order (smd_rank_v3=0) the v2 gate works on the v3 order of the same candidates (gateRank):
+    // the switch changes the order the doctor sees, not what the antibiotic decision knows
+    var dg = d;
+    if (v2 && !rankV3()) {
+      var byG = function (a, b) { return (gateRank(b) - gateRank(a)) || (b.score - a.score) || a.name.localeCompare(b.name); };
+      dg = { inf: d.inf.slice().sort(byG), ni: d.ni.slice().sort(byG) };
+    }
+    var out = { cls: cls, topInf: topInf, topNi: topNi, lead: dg.inf[0] || null };
+    // round 76 (classic gate, smd_gate_v2=0): the reader now recognises a common cold and chikungunya, which the classic gate,
+    // treating every likely infection as an antibiotic indication, answered with antibiotics. A common cold, chikungunya or
+    // acute viral hepatitis lead (ASP "Need antibiotics? NO"), with no competing infection that needs antibiotics within 30
+    // points (the smd_gate_v2 rival reach), no host modifier (immune compromise, a recent antibiotic or hospital stay...) and
+    // no sepsis physiology or neutropenia, reads "infection likely, antibiotics not indicated". Only these: the classic gate
+    // otherwise stays as it was (it is the kill switch for smd_gate_v2, which carries the general rule).
+    if (!v2 && (cls === "likely" || cls === "very_likely") && !sepsisPhys && !febrileNeutropenia && !GATE_V2_KEEP.some(function (k) { return f[k]; })) {
+      var vLead = d.inf.reduce(function (m, x) { return m && m.score >= x.score ? m : x; }, null);
+      // (a rival the v3 knowledge excludes, a pneumonia with no lower-respiratory sign, does not count)
+      var abxRival = d.inf.some(function (x) { return x !== vLead && abxNeed(x) !== "NO" && x.score >= 42 && x.score >= vLead.score - 30 && !rankV3Excluded(x, f); });
+      if (vLead && CLASSIC_VIRAL[vLead.id] && abxNeed(vLead) === "NO" && !abxRival) { out.cls = "infection_no_abx"; out.lead = vLead; out.why = abxWhy(vLead); }
+    }
+    if (v2) gateV2Apply(out, dg, f);
     // smd_calib: non-diagnostic findings (fever alone) say so instead of "non-infectious diagnosis
     // favored". Never replaces "infection likely / very likely" or a v2 rule, so a sepsis or
     // neutropenia signal cannot be hidden behind "not enough information".
@@ -2173,7 +2221,7 @@
   var FT_SYN = {
     dyspnea:["sob","breathless","short of breath","dyspn"], alteredSensorium:["confus","drowsy","gcs","obtunded","unconscious","altered sensorium","altered mental"],
     neckStiffness:["neck stiff","stiff neck","meningism","nuchal"], headache:["headache","h/a"], fever:["fever","febrile","pyrexia"],
-    seizure:["seizure","convuls","fits"], hypotension:["hypotens","low bp","septic shock","shock"], hemoptysis:["hemoptysis","coughing blood"],
+    seizure:["seizure","convuls","fits"], hypotension:["hypotens","low bp","low blood pressure","septic shock","shock"], hemoptysis:["hemoptysis","coughing blood"],
     chestPain:["chest pain"], pleuriticChestPain:["pleuritic"], photophobia:["photophobia"], nauseaVomiting:["vomit","nausea"],
     diarrhea:["diarrhea","diarrhoea","loose stool"], dysuria:["dysuria","burning urine"], flankPain:["flank pain","loin pain"],
     jaundice:["jaundice","icterus"], cough:["cough"], hypoxia:["hypoxia","desaturat","spo2"], tachycardia:["tachycard"],

@@ -30,14 +30,19 @@ const JOB = process.env.CLAUDE_JOB_DIR || "/tmp";
 const keys = (id) => JSON.parse(readFileSync(join(ROOT, "kb", "validation", "cases", id + ".json"), "utf8")).findings;
 
 // fixture -> [classic class, v2 class, v2 ab, v2 message must match]
+// (round 76: the classic gate answers a common-cold or chikungunya lead with nothing needing antibiotics close behind
+// "infection_no_abx" (gc_242: the common cold leads its tapped findings); with ?rankv3=0 the v2 gate still reads the v3
+// evidence, so a pneumonia with no lower-respiratory sign no longer holds antibiotics for a cold (gc_149))
 const FIX = [
   ["gc_118", "dengue", "very_likely", "infection_no_abx", false, /Dengue Fever leads, and it does not need antibiotics/],
-  ["gc_242", "acute bronchitis", "very_likely", "infection_no_abx", false, /does not need antibiotics/],
+  ["gc_242", "acute bronchitis", "infection_no_abx", "infection_no_abx", false, /does not need antibiotics/],
   ["gc_137", "pharyngitis", "very_likely", "infection_conditional", true, /Antibiotics only if its criteria are met: .*Centor/],
   ["gc_070", "uncomplicated malaria (no bacterial rival meets its criteria)", "very_likely", "infection_specific", false, /Malaria leads\. .*ANTIMALARIAL/],
-  ["gc_110", "chikungunya with rickettsial fever matched close behind", "very_likely", "very_likely", true, /leads and does not need antibiotics on its own, but Rickettsial Fever .* is competitive and does/],
+  // (round 76: the v2 gate reads the v3 evidence with ?rankv3=0 too, so the rickettsial fever behind this chikungunya, with none
+  // of its features, no longer holds antibiotics: gold labels it no antibiotics)
+  ["gc_110", "chikungunya, rickettsial fever behind it without its features", "very_likely", "infection_no_abx", false, /Chikungunya leads, and it does not need antibiotics/],
   ["gc_390", "chikungunya in a neutropenic host", "very_likely", "very_likely", true, /these change that: .*Neutropenia/],
-  ["gc_149", "URTI with pneumonia competitive", "likely", "likely", true, /Community Acquired Pneumonia .* is competitive/],
+  ["gc_149", "URTI, pneumonia with no lower-respiratory sign", "likely", "infection_no_abx", false, /Upper Respiratory Tract Infection .* leads, and it does not need antibiotics/],
   ["gc_152", "viral vs bacterial meningitis", "very_likely", "very_likely", true, null],
   ["gc_143", "SBP (fever)", "noninfective", "likely", true, /Can't-miss: spontaneous bacterial peritonitis/],
   // 2026-09-27: "rule out SBP" is tap first, antibiotics on the result (EASL 2018 / AASLD 2021)
@@ -89,13 +94,25 @@ try {
   await ev(`localStorage.removeItem("smd_gate_v2"); return 1`);
   for (const [id, what, classic] of FIX) {
     const g = await assess(keys(id));
-    ok(g.cls === classic && g.why === undefined && g.rule === undefined && g.message === undefined, `off · ${what} (${id}): classic "${classic}" (${g.cls}), no v2 fields`);
+    // (a round 76 classic "infection_no_abx" carries its reason, as v2's does; no v2 rule either way)
+    ok(g.cls === classic && !g.rule && (classic === "infection_no_abx" ? /VIRAL|viral/.test(g.why || "") : g.why === undefined && g.message === undefined),
+      `off · ${what} (${id}): classic "${classic}" (${g.cls}), no v2 fields`);
   }
   const fn = { fever: true, neutropenia: true };
   const fnOff = await assess(fn);
   const spOff = await assess({ fever: true, hypotension: true });
   ok(spOff.ab === false, `off · fever + hypotension alone: classic gate withholds antibiotics ("${spOff.cls}"), the gap v2 closes`);
   ok(fnOff.ab === true, `off · fever + "Neutropenia (ANC <500)" -> antibiotics (${fnOff.cls}; the syndrome itself scores on this key)`);
+  // round 76: the classic gate's viral exception is only for a common cold or chikungunya lead, never over a host modifier
+  const TT = (ks) => Object.fromEntries(ks.map((k) => [k, true]));
+  const chikOff = await assess(TT(["fever", "polyarthralgia", "severeArthralgia", "rash"]));
+  ok(chikOff.cls === "infection_no_abx" && chikOff.ab === false, `off · chikungunya picture: classic gate, no antibiotics (${chikOff.cls})`);
+  const chikImm = await assess(TT(["fever", "polyarthralgia", "severeArthralgia", "rash", "immunocompromised"]));
+  ok(chikImm.ab === true, `off · the same in an immunocompromised host: antibiotics kept (${chikImm.cls})`);
+  const chikShock = await assess(TT(["fever", "polyarthralgia", "severeArthralgia", "rash", "hypotension"]));
+  ok(chikShock.ab === true, `off · the same with low blood pressure: sepsis physiology keeps antibiotics (${chikShock.cls})`);
+  const dengOff = await assess(keys("gc_118"));
+  ok(dengOff.cls === "very_likely", `off · dengue: the classic answer is unchanged (only a cold or chikungunya) (${dengOff.cls})`);
 
   // ---- 2. flag ON --------------------------------------------------------------------------
   // the fixtures were written against the classic order (?rankv3=0); v3's own effect on the gate is
@@ -239,6 +256,24 @@ try {
   ok(storm72.ab === false, `defaults · thyroid storm with fever and low BP: no antibiotics (${storm72.cls}, ${storm72.rule})`);
   await load(BASE + "?gatev2=1&nlpv2=0");
   ok((await assessNeg(T(obstruction), obstNeg)).rule !== "ni_lead_afebrile", "classic extractor · raw-score check kept (it reads only a note's first mention of fever)");
+  // round 76: a variceal bleed that leads only by the order (no liver words read) needs a cause or sign of portal hypertension
+  const vNo = await cm(["hematemesis", "melena", "jaundice"]);
+  ok(vNo.rule !== "cirrhosis_gib" && vNo.ab === false, `defaults · haematemesis, melaena, jaundice, no liver history: not cirrhosis prophylaxis (${vNo.cls}, ${vNo.rule})`);
+  const vAlc = await cm(["hematemesis", "melena", "jaundice", "alcoholExcess"]);
+  ok(vAlc.cls === "abx_prophylaxis" && vAlc.rule === "cirrhosis_gib", `defaults · the same with alcohol excess: prophylaxis (${vAlc.cls}, ${vAlc.rule})`);
+  // round 76: "low blood pressure" is hypotension to the reader
+  const lbp = JSON.parse(await ev(`return JSON.stringify(DX.extractText("4 days of productive cough with rigors, then a rapid collapse with low blood pressure at home").present);`));
+  ok(lbp.indexOf("hypotension") >= 0, `reader · "low blood pressure" reads hypotension (${lbp.join(",")})`);
+  await load(BASE + "?gatev2=1&nlpv2=0");
+  // round 76: with the classic reader a recorded saturation is not hypoxia (only a value under 92% is)
+  const sat = JSON.parse(await ev(`return JSON.stringify([DX.extractText("Vitals: hr 88, rr 16, spo2 98").present, DX.extractText("Vitals: hr 110, spo2 86").present]);`));
+  ok(sat[0].indexOf("hypoxia") < 0 && sat[1].indexOf("hypoxia") >= 0, `classic reader · "spo2 98" is not hypoxia, "spo2 86" is (${sat[0].join(",")} / ${sat[1].join(",")})`);
+  await load(BASE + "?gatev2=1&rankv3=0");
+  // round 76: with the classic order the gate still reads the v3 evidence (rival reach, exclusions, febrile infection lead)
+  const pros = await cm(["fever", "perinealPain", "urinaryRetention", "leukocytosis", "diabetesHx"]);
+  ok(pros.ab === true && pros.rule === "febrile_infection_lead", `classic order · febrile prostatitis picture: infection likely (${pros.cls}, ${pros.rule})`);
+  const chikR0 = await assess(keys("gc_250"));
+  ok(chikR0.ab === false, `classic order · chikungunya (gc_250), rickettsial fever with none of its features behind it: no antibiotics (${chikR0.cls}, ${chikR0.rule})`);
   await load(BASE + "?gatev2=1&rankv3=0&kbv2=0");
   ok(fnOn.ab === true && fnOn.cls === fnOff.cls, `on  · fever + "Neutropenia (ANC <500)" unchanged by v2 (${fnOn.cls})`);
 

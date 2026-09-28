@@ -285,6 +285,9 @@
     }
     function consider(key, idx, method, srcText, display) {
       if (!valid[key]) return;
+      // round 76: a recorded saturation of 95% or more is not hypoxia; the classic reader took the bare word "spo2" for it
+      // (every chart with "spo2 98" read hypoxia). Gold marks hypoxia at 93% or below, never at 94% or above (train/dev).
+      if (key === "hypoxia" && srcText === "spo2" && /^\s*(?:at|of|is|was|=|:|-)?\s*(?:9[5-9]|100)(?!\d)/.test(norm.slice(idx + 4, idx + 24))) return;
       if (v2 && skipMention(key, idx, srcText)) return;
       if (v2) (alts[key] = alts[key] || []).push({ idx: idx, method: method, srcText: srcText || "" });
       if (byKey[key] && byKey[key].conf >= 0.9) return;
