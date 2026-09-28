@@ -5,6 +5,10 @@
  *   gold    - kb/validation/cases.json + cases/*.json (engine keys + chart narrative)
  *   heldout - test/dx-heldout.json (doctor-style text only; independent author)
  *   heldout2 - test/dx-heldout-2.json (same, written later; only ever read in aggregate)
+ *   heldout3 - test/dx-heldout-3.json (537 cases over all 153 diagnoses, written 2026-09-28 by independent writers
+ *              from clinical knowledge, with no access to the engine or the other sets; a note AND the tapped
+ *              findings, so every path is measured). Split by diagnosis: "tune" (may be studied case by case)
+ *              and "sealed" (only ever counted, never inspected or used to tune)
  * Three input paths per case:
  *   cur - curated engine keys -> SMD_REASON.assess (what a doctor tapping findings gets)
  *   txt - the full chart as text (complaint, history, exam, vitals, labs, imaging, micro)
@@ -48,7 +52,8 @@ const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/M
 const JOB = process.env.CLAUDE_JOB_DIR || "/tmp";
 const FLAGS = (process.env.FLAGS || "").split(",").map((s) => s.trim()).filter(Boolean).map((s) => s.split("="));
 const CONFIG = FLAGS.length ? FLAGS.map((f) => f.join("=")).sort().join(",") : "default";
-const SETS = (process.env.SETS || "gold,heldout,heldout2").split(",");
+const SETS = (process.env.SETS || "gold,heldout,heldout2,heldout3").split(",");
+const ADDNEW = process.argv.includes("--add-new-floors");   // record floors only for metrics that have none yet
 const CHECK = process.argv.includes("--check"), WRITE = process.argv.includes("--write-floors"), MISSES = process.argv.includes("--misses");
 const FLOORS = join(ROOT, "kb", "validation", "dx-floors.json");
 
@@ -68,6 +73,7 @@ if (SETS.includes("heldout")) JSON.parse(readFileSync(join(ROOT, "test", "dx-hel
 // heldout2: written after Phase 2 began, never inspected case by case (the first held-out set's misses were
 // printed in the audit and informed a few Phase-2 phrases, so it is no longer fully independent)
 if (SETS.includes("heldout2")) JSON.parse(readFileSync(join(ROOT, "test", "dx-heldout-2.json"), "utf8")).forEach((c) => cases.push({ set: "heldout2", c }));
+if (SETS.includes("heldout3")) JSON.parse(readFileSync(join(ROOT, "test", "dx-heldout-3.json"), "utf8")).forEach((c) => cases.push({ set: "heldout3", c }));
 
 // start the static server if nothing answers at BASE (same pattern as run-reason-api.mjs)
 let serveProc = null;
@@ -157,7 +163,7 @@ try {
     if (j.__err) j.err = j.__err;   // the page threw (a note-reader crash): count it, never drop it silently
     const st = exp.stewardship || {};
     Object.assign(j, {
-      id: c.id, set, split: splits[c.id] || "unassigned", expect: (exp.acceptableIds || [])[0], dx: exp.diagnosis,
+      id: c.id, set, split: c.split || splits[c.id] || "unassigned", expect: (exp.acceptableIds || [])[0], dx: exp.diagnosis,
       abx: typeof c.abx === "boolean" ? c.abx : !!(st.antibiotics && st.antibiotics.length),
     });
     j.critical = CRITICAL.includes(String(j.expect || "").toUpperCase());
@@ -246,6 +252,11 @@ try {
     ["absent", "abxSens", "overcall", "critical", "noAbxInf", "specific", "opdTop1"].forEach((q) => { if (m[q] != null) flat[`${k}.${q}`] = m[q]; });
   }
   const floors = existsSync(FLOORS) ? JSON.parse(readFileSync(FLOORS, "utf8")) : {};
+  if (ADDNEW && !WRITE && floors[CONFIG]) {
+    const f0 = floors[CONFIG] || (floors[CONFIG] = {}); let n = 0;
+    for (const [k, v] of Object.entries(flat)) if (!(k in f0)) { f0[k] = v; n++; }
+    if (n) { writeFileSync(FLOORS, JSON.stringify(floors, null, 2) + "\n"); console.log(`new floors recorded for ${CONFIG}: ${n}`); }
+  }
   if (WRITE) {
     floors[CONFIG] = flat;
     writeFileSync(FLOORS, JSON.stringify(floors, null, 1) + "\n");
