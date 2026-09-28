@@ -50,16 +50,20 @@ try {
   await ev(`try{localStorage.removeItem("smd_tokos"); localStorage.setItem("smd_home_tools", JSON.stringify({tokos:true}));}catch(e){} return 1;`);
   await load(BASE);
   ok(await ev(tile) === false, "flag off: the Tokós home tile is absent");
+  // flag off: no other entry opens it either (ACT.tokos is the one door for tile, deep link and MaiK tool chip)
+  await ev(`SMD_openRoute("tokos"); return 1;`); await sleep(400);
+  ok(await ev(`return !TOKOS.isOpen();`) === true, "flag off: stewardmd://tokos (SMD_openRoute) does not open Tokós");
 
   // flag on: tile shows and opens Tokós
   await ev(`localStorage.setItem("smd_tokos","1"); return 1;`);
   await load(BASE);
   ok(await until(tile, 10000), "flag on (smd_tokos=1): the Tokós home tile renders");
-  await ev(`document.querySelector('.rnav-tile[data-act=tokos]').click(); return 1;`);
+  await ev(`var t=document.querySelector('.rnav-tile[data-act=tokos]'); t.focus(); t.click(); return 1;`);
   ok(await until(`return TOKOS.isOpen() && !!document.getElementById("smdTokos");`, 10000), "tile opens the Tokós overlay");
   ok(await until(`return !!document.querySelector('#smdTokos .tok-clinic[data-t=ctg]');`, 20000), "hub shows the CTG clinic");
   await ev(`TOKOS.back(); return 1;`);
   ok(await until(`return !TOKOS.isOpen();`, 5000), "back() closes Tokós and returns to home");
+  ok(await ev(`var a=document.activeElement; return !!(a && a.matches && a.matches('.rnav-tile[data-act=tokos]'));`) === true, "closing Tokós returns focus to the tile that opened it");
   ok(await ev(`return !document.getElementById("smdTokos") || !document.getElementById("smdTokos").offsetParent;`) === true, "overlay is gone");
 
   // URL override

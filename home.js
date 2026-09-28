@@ -1095,7 +1095,13 @@
     // existing MEDCALC/KB/drugs — not the patient treatment-plan engine). Flag-gated inside SMD_ONCOHOME.open().
     atlas: function () { if (window.ATLAS && ATLAS.open) ATLAS.open(); else toast("RadioAnatome loading…"); },
     ophthalmos: function () { if (window.OPHTHALMOS && OPHTHALMOS.open) OPHTHALMOS.open(); else toast("Ophthalmós loading…"); },
-    tokos: function () { if (window.TOKOS && TOKOS.open) TOKOS.open(); else toast("Tokós loading…"); },
+    // Tokós stays shut while its flag is off, whatever the entry (tile, stewardmd://tokos, MaiK tool chip):
+    // a quiet no-op, like SURGX/CliniX/PGLOG, decided by the same eligible() that hides the tile.
+    tokos: function () {
+      var t = HOME_TOOLS.filter(function (x) { return x.act === "tokos"; })[0];
+      if (!t || !homeToolEligible(t)) return;
+      if (window.TOKOS && TOKOS.open) TOKOS.open(); else toast("Tokós loading…");
+    },
     oncohome: function () { if (window.SMD_ONCOHOME && SMD_ONCOHOME.open) SMD_ONCOHOME.open(); else toast("ONCQIS loading…"); },
     oncotree: function () { if (window.SMD_ONCOTREE && SMD_ONCOTREE.open) SMD_ONCOTREE.open(); else toast("OncoTree loading…"); },
     staging: function () { if (window.SMD_ONCOSTAGING && SMD_ONCOSTAGING.openList) SMD_ONCOSTAGING.openList(); else toast("Cancer Staging loading…"); },
