@@ -1,5 +1,5 @@
 /* Ophthalmós Explore (ophthalmos-explore.js): five interactive explorers on the Learn tab. Same reading room:
-   black stage, the picture or the model first, controls below (beside it on a tablet in landscape), 44 px targets. */
+   models on a light plate, photographs on black, the picture or the model first, controls below (beside it on a tablet in landscape), 44 px targets. */
 
 /* Learn home: the Explore section */
 .ex-home-h { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
@@ -20,7 +20,7 @@
 .ex-seg.ex-full { width: 100%; margin-bottom: 12px; }
 .ex-seg.ex-full button { flex: 1 1 0; padding: 0 8px; }
 .ex-figwrap { margin: 0 0 12px; }
-.ex-fig { position: relative; background: #000; border-radius: 12px; overflow: hidden; }
+.ex-fig { position: relative; background: var(--op-s1); border-radius: 12px; overflow: hidden; }
 .ex-fig svg { display: block; width: 100%; height: auto; }
 .ex-cap { margin-top: 8px; font-size: 13px; line-height: 1.45; color: var(--op-mut); }
 .ex-cap .oph-credit { display: inline; }
@@ -70,20 +70,20 @@
 
 /* 2. focus: ray diagram, the blurred view, readouts, range controls */
 .ex-ray { background: var(--op-s1); }
-.ex-ray .ex-ball { fill: #16181c; stroke: #8e8e96; stroke-width: 1.5; }
+.ex-ray .ex-ball { fill: #fff; stroke: #767680; stroke-width: 1.5; }
 .ex-ray .ex-retina { fill: none; stroke: var(--op-acc); stroke-width: 3; stroke-linecap: round; }
-.ex-ray .ex-cornea { fill: none; stroke: #d8dce3; stroke-width: 2.5; }
+.ex-ray .ex-cornea { fill: none; stroke: #4a525e; stroke-width: 2.5; }
 .ex-ray .ex-irisl { stroke: #a0724a; stroke-width: 4; stroke-linecap: round; }
-.ex-ray .ex-lensb { fill: rgba(216, 220, 227, .16); stroke: #d8dce3; stroke-width: 1.5; }
-.ex-ray .ex-rayv { fill: none; stroke: #f2f2f4; stroke-width: 1.4; stroke-opacity: .9; }
-.ex-ray .ex-rayh { fill: none; stroke: var(--op-warn); stroke-width: 1.4; stroke-dasharray: 5 4; }
+.ex-ray .ex-lensb { fill: rgba(74, 82, 94, .1); stroke: #4a525e; stroke-width: 1.5; }
+.ex-ray .ex-rayv { fill: none; stroke: #2b3139; stroke-width: 1.4; stroke-opacity: .9; }
+.ex-ray .ex-rayh { fill: none; stroke: #d48806; stroke-width: 1.4; stroke-dasharray: 5 4; }
 .ex-ray .ghost { stroke-opacity: .35; stroke-dasharray: 3 3; }
-.ex-ray .ex-fdot { stroke: #000; stroke-width: 1.5; }
+.ex-ray .ex-fdot { stroke: #fff; stroke-width: 1.5; }
 .ex-ray .ex-fdot.ok { fill: var(--op-ok); }
 .ex-ray .ex-fdot.off { fill: var(--op-bad); }
 .ex-ray .ex-fdot.h { fill-opacity: .85; }
-.ex-ray .ex-glass { fill: rgba(140, 198, 255, .2); stroke: var(--op-link); stroke-width: 1.5; }
-.ex-ray .ex-target { fill: #f2f2f4; }
+.ex-ray .ex-glass { fill: rgba(10, 92, 194, .1); stroke: var(--op-link); stroke-width: 1.5; }
+.ex-ray .ex-target { fill: #2b3139; }
 .ex-pic svg { max-height: 44vh; margin: 0 auto; }
 .ex-read { display: grid; gap: 8px; margin: 0 0 4px; }
 .ex-read p { margin: 0; display: flex; flex-direction: column; gap: 1px; }
@@ -98,10 +98,10 @@
 .ex-ctl input[type="range"]:focus-visible { outline: 2px solid var(--op-acc); outline-offset: 2px; border-radius: 8px; }
 .ex-ctl input[type="range"]::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: var(--op-s3); }
 .ex-ctl input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; margin-top: -11px; border: 0; border-radius: 50%;
-  background: #f2f2f4; box-shadow: 0 1px 4px rgba(0, 0, 0, .6); transition: transform 140ms var(--op-ease); }
+  background: #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, .12), 0 1px 4px rgba(0, 0, 0, .3); transition: transform 140ms var(--op-ease); }
 .ex-ctl input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.08); }
 .ex-ctl input[type="range"]::-moz-range-track { height: 6px; border-radius: 3px; background: var(--op-s3); }
-.ex-ctl input[type="range"]::-moz-range-thumb { width: 28px; height: 28px; border: 0; border-radius: 50%; background: #f2f2f4; box-shadow: 0 1px 4px rgba(0, 0, 0, .6); }
+.ex-ctl input[type="range"]::-moz-range-thumb { width: 28px; height: 28px; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, .12), 0 1px 4px rgba(0, 0, 0, .3); }
 .ex-wear .smd-ico { width: 18px; height: 18px; }
 .ex-wear[aria-pressed="false"] .smd-ico { opacity: .35; }
 
@@ -116,22 +116,22 @@
 .ex-fr { fill: rgba(59, 157, 255, .5); }
 .ex-flost { fill: #050506; stroke: #050506; stroke-width: .5; }
 .ex-frim { fill: none; stroke: #8e8e96; stroke-width: 1; }
-.ex-fx { stroke: rgba(242, 242, 244, .35); stroke-width: .6; }
-.ex-ffix { fill: #f2f2f4; }
+.ex-fx { stroke: rgba(21, 23, 28, .3); stroke-width: .6; }
+.ex-ffix { fill: #15171c; }
 .ex-defect h2 { font-size: 20px; }
 .ex-key { margin: 10px 0 12px; line-height: 1.45; }
 .ex-path { background: var(--op-s1); }
 .ex-path svg { max-height: 58vh; margin: 0 auto; }
-.ex-path .ex-eye { fill: #1c1c1f; stroke: #d8dce3; stroke-width: 1.5; }
+.ex-path .ex-eye { fill: #fff; stroke: #4a525e; stroke-width: 1.5; }
 .ex-path .ex-pb, .ex-path .ex-pa { fill: none; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
-.ex-path .ex-pb { stroke: #3b9dff; }
-.ex-path .ex-pa { stroke: var(--op-warn); }
-.ex-path .ex-lgn { fill: #2c2c30; stroke: #a8a8b0; stroke-width: 1.2; }
-.ex-path .ex-cortex { fill: none; stroke: #a8a8b0; stroke-width: 6; stroke-linecap: round; }
-.ex-path .ex-lesion circle { fill: rgba(255, 105, 97, .22); stroke: var(--op-bad); stroke-width: 2; }
+.ex-path .ex-pb { stroke: #1f7ae0; }
+.ex-path .ex-pa { stroke: #d48806; }
+.ex-path .ex-lgn { fill: #e9ebef; stroke: #767680; stroke-width: 1.2; }
+.ex-path .ex-cortex { fill: none; stroke: #8a8f99; stroke-width: 6; stroke-linecap: round; }
+.ex-path .ex-lesion circle { fill: rgba(196, 43, 43, .14); stroke: var(--op-bad); stroke-width: 2; }
 .ex-path .ex-lesion path { stroke: var(--op-bad); stroke-width: 2.6; stroke-linecap: round; }
 .ex-spot { position: absolute; width: 40px; height: 40px; margin: 0; padding: 0; border: 0; background: transparent; border-radius: 50%; transform: translate(-50%, -50%); }
-.ex-spot:active { background: rgba(242, 242, 244, .12); }
+.ex-spot:active { background: rgba(21, 23, 28, .1); }
 .ex-sites { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .ex-sites button { border-radius: 12px; padding: 8px 12px; }
 .ex-mid { padding: 12px 0; }
@@ -149,12 +149,13 @@
 .ex-flow ol { list-style: none; margin: 6px 0 14px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
 .ex-flow li { display: flex; flex-direction: column; justify-content: center; padding: 8px 10px; border-radius: 10px; background: var(--op-s1); font-size: 13px; line-height: 1.3; border: 1px solid transparent; }
 .ex-flow li:not(:last-child)::after { content: none; }
-.ex-flow li.bad { border-color: var(--op-bad); background: rgba(255, 105, 97, .1); }
+.ex-flow li.bad { border-color: var(--op-bad); background: rgba(196, 43, 43, .07); }
 .ex-dmg { display: inline-flex; align-items: center; gap: 4px; font-style: normal; font-weight: 700; color: var(--op-bad); margin-top: 2px; }
 .ex-dmg .smd-ico { width: 14px; height: 14px; }
 .ex-flow .ex-h3 { margin: 0; }
 
 /* 5. guided tours: a spotlight moves over the real picture */
+.ex-tour { background: #000; }
 .ex-tour img { display: block; width: 100%; height: 100%; object-fit: fill; }
 .ex-tour svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .ex-tour .ex-dim { fill: rgba(0, 0, 0, .58); transition: opacity 240ms ease; }
@@ -165,7 +166,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .ex-chips button:not([aria-pressed="true"]):hover, .ex-sites button:not([aria-pressed="true"]):hover { background: var(--op-s2); }
-  .ex-spot:hover { background: rgba(242, 242, 244, .08); }
+  .ex-spot:hover { background: rgba(21, 23, 28, .06); }
 }
 @media (prefers-reduced-motion: reduce) {
   .ex-tour .ex-spotc { transition: opacity 240ms ease; }
