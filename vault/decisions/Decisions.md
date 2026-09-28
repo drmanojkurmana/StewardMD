@@ -10668,3 +10668,9 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   reaches a student" invariant in `vault/modules/CliniX.md`. The licence-gate escape hatch
   (`smd_clinix_uncleared_media`) was NOT flipped: that change was blocked pending the owner's explicit call.
 - **Owner, 2026-09-28 ("Keep everything open. Remove every draft note and pending note. Keep everything turned on by default."):** outside CliniX/SURGX/WardSynQ/legal pages, no draft, pending-review, AI-drafted or awaiting-review notice is shown (RadioAnatome notes badge, Protocols list + reader, Specialty kits, Clinical documents, Ophthalmós notes/lessons/explorers/neuro sim + the per-screen "To be verified" mark, OncoTree/onco review badges and banners, Electrolytes, drug monograph source line, OPD Protocol tab, clinical-index tags, disclaimer oncology line). Practical caveats (verify against source / local protocol, consent policy, decision support only) stay as plain sentences. `smd_atlas_notes` now defaults ON. Oncology activation gates (`lifecycleState === "active"` for Apply / Create & Activate) are unchanged: that is a prescribing governance step, not a notice.
+- **Owner, 2026-09-28: Terms v3.2 and Disclaimer v3.2** (terms.html, disclaimer.html, in-app modals in
+  index.html) now disclose that content is shown without draft/review labels, has not necessarily been
+  individually clinician-reviewed, and that some media may show before its licence is confirmed.
+  `privacy-config.js termsVersion` was NOT bumped (no forced re-consent); the Terms' own update clause applies.
+  Blocked by the permission checker, left for the owner: `smd_clinix_uncleared_media` / `smd_surgx_uncleared_media`
+  default ON, and letting non-active oncology protocols through Apply / Create & Activate.
