@@ -906,6 +906,9 @@
     biliary_colic: { find: { knownGallstones: 20, transaminasesVeryHigh: -10, severeAbdominalPain: 10 } },   // round 28: colic is severe pain
     pancreatitis: { find: { knownGallstones: 8 } },
     // round 18: the metabolic emergencies read their defining lab value
+    // round 30: chest pain and breathlessness are not migraine; hypertensive emergency brings pulmonary oedema
+    migraine: { find: { chestPain: -10, dyspnea: -8 } },
+    htn_emergency: { find: { dyspnea: 8 } },
     hyponatremia: { find: { sodiumLow: 40, headache: 8 } },   // round 29: headache is a symptom of hyponatraemia
     hyperkalemia: { find: { potassiumHigh: 40 } },
     hypercalcemia: { find: { calciumHigh: 40 } },

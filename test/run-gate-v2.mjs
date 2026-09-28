@@ -185,6 +185,10 @@ try {
   const chole = await cm(["fever", "rightUpperQuadrantPain", "murphySign", "nauseaVomiting"]);
   ok(chole.ab === true, `defaults · fever + RUQ pain + Murphy sign: antibiotics (${chole.cls}, ${chole.rule})`);
   ok((await cm(["rightUpperQuadrantPain", "murphySign", "nauseaVomiting"])).rule !== "cholecystitis_signs", "defaults · the same without fever: the rule stands aside");
+  // round 30 (tried, dropped): silencing a rival that rests only on fever, headache and aches cost a needed call
+  // with the prior switch on; a fever with an eschar must keep antibiotics either way
+  const scrub = await cm(["fever", "headache", "myalgiaArthralgia", "eschar"]);
+  ok(scrub.ab === true, `defaults · the same fever with an eschar: antibiotics (${scrub.cls}, ${scrub.rule})`);
   await load(BASE + "?gatev2=1&nlpv2=0");
   ok((await assessNeg(T(obstruction), obstNeg)).rule !== "ni_lead_afebrile", "classic extractor · raw-score check kept (it reads only a note's first mention of fever)");
   await load(BASE + "?gatev2=1&rankv3=0&kbv2=0");

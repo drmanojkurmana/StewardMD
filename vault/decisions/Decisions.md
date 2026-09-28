@@ -10606,3 +10606,18 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   Missing a needed antibiotic in an acute febrile infection is the dangerous error.
 - **Pending owner**: complaint-only overcall 14 -> 20 (viral 4 -> 7), unseen set 2 overcall 1 -> 2.
 
+
+## 2026-09-28 - Rounds 26 to 30: typed-note reading precision (smd_nlp_v2)
+- **Decision**: the note reader negates a "non-" prefix, reads negated lists that start mid-sentence behind a
+  clause lead ("and has no ..."), reads every mention of its new compound patterns, and its typo matcher takes one
+  edit with the same first letter (not a real word one letter from a synonym). Mention guards
+  ("unresponsive to <treatment>", "fundoscopy" without swelling) go through one `skipMention` check for the first
+  and every later mention. The audit fails `--check` when a case throws in the page.
+- **Why**: the old two-edit typo match invented about 120 findings across train/dev ("drenching" as retching,
+  "following" as yellowing, "palpation" as palpitations); first-mention compounds were order-dependent.
+  Typed top-1 286 -> 312, top-3 383 -> 401, typed overcall 49 -> 43; unseen sets unchanged.
+- **Tried and dropped**: a two-system tag for "Vascular / GI" style labels (tapped top-1 410 -> 407); silencing an
+  antibiotic-needing rival that rests only on fever, headache and aches (cost a needed call with the prior
+  switch on); the same on the acute-fever rule (three needed calls from the complaint alone).
+- **Pending owner**: complaint-only overcall 16 (floor 14), complaint-only viral 5 (floor 4), unseen set 2
+  overcall 2 (floor 1); opt-out configs listed in `kb/validation/AUDIT-2026-09-26.md`.

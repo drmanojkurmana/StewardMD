@@ -95,6 +95,13 @@ added) and the numeric-field list. Off: 0 differences across 1,660 case-paths.
   aseptic meningitis, nephrotic, AKI, thyroid storm). To find label-only keys, dump `nlpCtx()` (valid, syn).
 - Round 13 (2026-09-27): list negation allows a subject ("He denies X, Y or Z"); "rather than X" is absent; gate
   `ni_explains_fever` (`FEVER_NI` list; no cancers, no gout).
+- Rounds 26 to 29 (2026-09-28): "non-" prefix negates; pressure-type chest pain, girdle pain, CURB-65 >= 3 with
+  a pneumonia chest (`severeCriteria`), swollen tender calf, overdose scene; negated lists may start mid-sentence
+  behind a clause lead (`NEG_LIST_LEAD_V2`; a bare "no X" inside a list does not negate what follows); typo
+  matcher: one edit, same first letter, `FUZZY_STOP_V2`. Mention guards live in `skipMention` (read for the first
+  AND every later mention; a guard only in `consider` let a later mention bypass it and crashed the reader when
+  the mention list did not exist yet). Gotcha: "residual" X is still present; "X-year-old" put "old" before the
+  next words, so never use "old" as a past-tense cue.
 
 ## Differential ordering v3 (`smd_rank_v3`, default ON since 2026-09-27; `"0"` opts out)
 
