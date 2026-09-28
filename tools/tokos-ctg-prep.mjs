@@ -1,4 +1,5 @@
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, readFileSync, existsSync } from "node:fs";
+import { createRequire } from "node:module";
 
 export function decodeHeader(text) {
   const lines = text.split("\n").map((l) => l.replace(/\r$/, ""));
@@ -526,10 +527,63 @@ export async function mainV2() {
     if (hi) notes.push(hi + " samples above 180 bpm in the strip" + (last5 ? " (" + last5 + " in the last 5 min)" : ""));
     return "strip FHR loss " + c.stripQuality.fhrLossPct + "%, UC present " + c.stripQuality.ucPresentPct + "%; " + (notes.length ? notes.join("; ") : "no artefact concern found by the checks") + ". Features are computed on the " + c.features.window.minutes + " min window.";
   };
-  const decelText = (c) => (c.features.decels.length ? c.features.decels.map((d) => d.durationSec + " s " + d.subtypeSuggested + " (suggested)").join(", ") : "none");
-  writeFileSync("docs/tokos/review-queue.md", "# Tokós CTG review queue\n\nFor an obstetrician: confirm or correct each suggested label, then set `review` in `tokos/decks/ctg.json` to `{\"by\": \"<name>\", \"date\": \"YYYY-MM-DD\", \"figo\": \"...\", \"decelType\": \"...\" }`. Until then the app shows every label as rule-based.\n\nPlease also confirm units: the sources do not state them for pCO2 and BDecf. The app shows pCO2 in kPa (header median 7.0, range 0.7 to 12.3) and BDecf in mmol/L. Risk-factor and Induced fields are not shown because their 0/1 coding is unconfirmed.\n\n" +
-    cases.map((c, i) => "## " + c.id + " (" + c.archetypeSuggested + ")\n- Trace: `tokos/media/" + c.svg + "`\n- Suggested FIGO: " + c.figo + "; baseline " + c.features.baseline + " (" + c.features.baselineClass + "); variability " + c.features.variability.band + " (median range " + c.features.variability.medianRange + " bpm, reduced " + c.features.variability.reducedMin + " min); decelerations " + decelText(c) + "; contractions " + c.features.contractions.per10 + " per 10 min\n- Outcome: pH " + c.outcome.pH + ", BDecf " + c.outcome.BDecf + ", acidosis " + c.acidosis + "\n- Quality note: " + qNote(chosen[i], c) + "\n").join("\n"));
+  writeReviewQueue(cases, cases.map((c, i) => qNote(chosen[i], c)));
   console.log("wrote " + cases.length + " cases; archetypes: " + cases.map((c) => c.archetypeSuggested).join(", "));
 }
 
-if (import.meta.url === "file://" + process.argv[1]) mainV2().catch((e) => { console.error(e); process.exit(1); });
+// ---------- docs/tokos/review-queue.md: the obstetrician's sign-off instrument ----------
+const QUEUE = "docs/tokos/review-queue.md";
+// Everything from this line down is hand-maintained; a regeneration keeps it as it is.
+export const HAND_MARK = "<!-- hand-maintained below: tools/tokos-ctg-prep.mjs keeps this section on regeneration -->";
+
+export function reviewQueueMd(cases, qNotes, rationaleKeys, hand) {
+  const Q = createRequire(import.meta.url)("../tokos-data.js").QUESTIONS;
+  const vals = (q) => Q[q].map((v) => "`" + v + "`").join(", ");
+  const decelText = (c) => (c.features.decels.length ? c.features.decels.map((d) => d.durationSec + " s " + d.subtypeSuggested + " (suggested)").join(", ") : "none");
+  const head = [
+    "# Tokós CTG review queue", "",
+    "For an obstetrician: confirm or correct each suggested label below, and the teaching text listed under Content to review. Until a case has a complete review the app shows its labels as \"Rule-based, pending obstetrician review\", and the `smd_tokos` flag stays off until every case has one.", "",
+    "## How to record a review", "",
+    "Set `review` on the case in `tokos/decks/ctg.json`. Every field the app reads:", "",
+    "- `by`, `date` (`YYYY-MM-DD`): who reviewed and when.",
+    "- `uc`: " + vals("uc") + ". Contractions answer.",
+    "- `baselineClass`: " + vals("baseline") + ". Baseline answer.",
+    "- `variability`: " + vals("variability") + ". Variability answer.",
+    "- `decels`: " + vals("decels") + ". Decelerations answer.",
+    "- `decelType`: " + vals("decelType") + ". Setting it also turns on the Resident deceleration type question for this case.",
+    "- `figo`: " + vals("figo") + ". Overall category; the Resident Next step answer follows it.",
+    "- `complete`: `true` only when every graded field above was checked for this case (a field left out means you agree with the suggested label). This is the only thing that removes the rule-based banner.", "",
+    "A field left out keeps the suggested label. A value not in its list is ignored and the suggested label is used.", "",
+    "## Content to review", "",
+    "- `tokos/rationale.json`: all " + rationaleKeys.length + " teaching points shown under Why on the reveal, English and Hindi: " + rationaleKeys.map((k) => "`" + k + "`").join(", ") + ".",
+    "- `tokos.js`, `L10N.en.opts` and `L10N.hi.opts`: the checklist option labels, and under `action` the three FIGO next-step strings graded at Resident level.",
+    "- `tokos-calipers.js`, `WORDS`: the caliper verdict text (variability bands for a bpm range, deceleration length bands for a time span), English and Hindi.", "",
+    "## Units and fields", "",
+    "Please also confirm units: the sources do not state them for pCO2 and BDecf. The app shows pCO2 in kPa (header median 7.0, range 0.7 to 12.3) and BDecf in mmol/L. Risk-factor and Induced fields are not shown because their 0/1 coding is unconfirmed.", "",
+  ].join("\n");
+  const body = cases.map((c, i) => "## " + c.id + " (" + c.archetypeSuggested + ")\n- Trace: `tokos/media/" + c.svg + "`\n- Suggested FIGO: " + c.figo + "; baseline " + c.features.baseline + " (" + c.features.baselineClass + "); variability " + c.features.variability.band + " (median range " + c.features.variability.medianRange + " bpm, reduced " + c.features.variability.reducedMin + " min); decelerations " + decelText(c) + "; contractions " + c.features.contractions.per10 + " per 10 min\n- Outcome: pH " + c.outcome.pH + ", BDecf " + c.outcome.BDecf + ", acidosis " + c.acidosis + "\n- Quality note: " + qNotes[i] + "\n").join("\n");
+  return head + "\n" + body + "\n" + (hand || HAND_MARK + "\n");
+}
+function writeReviewQueue(cases, qNotes) {
+  const old = existsSync(QUEUE) ? readFileSync(QUEUE, "utf8") : "";
+  const at = old.indexOf(HAND_MARK);
+  const R = JSON.parse(readFileSync("tokos/rationale.json", "utf8"));
+  writeFileSync(QUEUE, reviewQueueMd(cases, qNotes, Object.keys(R).filter((k) => k !== "v" && k !== "review"), at >= 0 ? old.slice(at) : null));
+}
+// --queue-only: rewrite the queue from the committed deck without touching the network, the deck or the SVGs.
+// Quality notes need the raw signal, so they are carried over from the current queue file.
+function queueOnly() {
+  const cases = JSON.parse(readFileSync(OUT_DECK, "utf8")).cases, old = readFileSync(QUEUE, "utf8");
+  const notes = cases.map((c) => {
+    const m = new RegExp("^## " + c.id + " \\(.*\\n(?:- .*\\n)*?- Quality note: (.*)", "m").exec(old);
+    if (!m) throw new Error("no quality note for " + c.id + " in " + QUEUE + "; run the full pipeline");
+    return m[1];
+  });
+  writeReviewQueue(cases, notes);
+  console.log("rewrote " + QUEUE + " for " + cases.length + " cases");
+}
+
+if (import.meta.url === "file://" + process.argv[1]) {
+  if (process.argv.includes("--queue-only")) queueOnly();
+  else mainV2().catch((e) => { console.error(e); process.exit(1); });
+}

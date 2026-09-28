@@ -1,6 +1,29 @@
 # Tokós CTG review queue
 
-For an obstetrician: confirm or correct each suggested label, then set `review` in `tokos/decks/ctg.json` to `{"by": "<name>", "date": "YYYY-MM-DD", "figo": "...", "decelType": "..." }`. Until then the app shows every label as rule-based.
+For an obstetrician: confirm or correct each suggested label below, and the teaching text listed under Content to review. Until a case has a complete review the app shows its labels as "Rule-based, pending obstetrician review", and the `smd_tokos` flag stays off until every case has one.
+
+## How to record a review
+
+Set `review` on the case in `tokos/decks/ctg.json`. Every field the app reads:
+
+- `by`, `date` (`YYYY-MM-DD`): who reviewed and when.
+- `uc`: `normal`, `tachysystole`. Contractions answer.
+- `baselineClass`: `severe_bradycardia`, `bradycardia`, `normal`, `tachycardia`. Baseline answer.
+- `variability`: `reduced`, `normal`, `increased`. Variability answer.
+- `decels`: `none`, `present`, `prolonged`, `over5`. Decelerations answer.
+- `decelType`: `early`, `late`, `variable`, `prolonged`. Setting it also turns on the Resident deceleration type question for this case.
+- `figo`: `normal`, `suspicious`, `pathological`. Overall category; the Resident Next step answer follows it.
+- `complete`: `true` only when every graded field above was checked for this case (a field left out means you agree with the suggested label). This is the only thing that removes the rule-based banner.
+
+A field left out keeps the suggested label. A value not in its list is ignored and the suggested label is used.
+
+## Content to review
+
+- `tokos/rationale.json`: all 14 teaching points shown under Why on the reveal, English and Hindi: `baseline.tachycardia`, `baseline.bradycardia`, `baseline.severe_bradycardia`, `variability.reduced`, `variability.increased`, `decels.present`, `decels.prolonged`, `decels.over5`, `uc.tachysystole`, `acidosis.metabolic`, `acidosis.acidaemia_not_metabolic`, `risk.pyrexia`, `risk.preeclampsia`, `trace_vs_outcome`.
+- `tokos.js`, `L10N.en.opts` and `L10N.hi.opts`: the checklist option labels, and under `action` the three FIGO next-step strings graded at Resident level.
+- `tokos-calipers.js`, `WORDS`: the caliper verdict text (variability bands for a bpm range, deceleration length bands for a time span), English and Hindi.
+
+## Units and fields
 
 Please also confirm units: the sources do not state them for pCO2 and BDecf. The app shows pCO2 in kPa (header median 7.0, range 0.7 to 12.3) and BDecf in mmol/L. Risk-factor and Induced fields are not shown because their 0/1 coding is unconfirmed.
 
@@ -76,6 +99,7 @@ Please also confirm units: the sources do not state them for pCO2 and BDecf. The
 - Outcome: pH 7.32, BDecf 0.89, acidosis normal
 - Quality note: strip FHR loss 3.6%, UC present 60.7%; no artefact concern found by the checks. Features are computed on the 60 min window.
 
+<!-- hand-maintained below: tools/tokos-ctg-prep.mjs keeps this section on regeneration -->
 ## Pipeline check of the rendered traces (not clinical sign-off)
 
 All 12 SVGs were rendered and looked at on 2026-09-29. Candidates now also need, on the 30 min strip, FHR loss of at most 15% and UC present (finite and above 0) in at least 50% of samples. Grid, band, lines, ticks and paths all draw; no clipped scale.

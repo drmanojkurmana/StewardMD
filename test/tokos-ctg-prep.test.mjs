@@ -213,3 +213,17 @@ test("stripQuality: FHR loss counts out-of-range samples, UC present counts fini
   assert.deepEqual(stripQuality(fhr, uc), { fhrLossPct: 20, ucPresentPct: 30 });
   assert.deepEqual(stripQuality([], []), { fhrLossPct: 100, ucPresentPct: 0 });
 });
+
+import { reviewQueueMd, HAND_MARK } from "../tools/tokos-ctg-prep.mjs";
+test("review queue: documents every review field the app reads, lists the content to review, keeps the hand-maintained section", () => {
+  const deck = JSON.parse(readFileSync("tokos/decks/ctg.json", "utf8"));
+  const hand = HAND_MARK + "\n## Pipeline check\n- kept note\n";
+  const md = reviewQueueMd(deck.cases, deck.cases.map(() => "q"), ["a.b", "c.d"], hand);
+  assert.ok(md.includes("`date`"));
+  for (const f of ["by", "uc", "baselineClass", "variability", "decels", "decelType", "figo", "complete"]) assert.ok(md.includes("- `" + f + "`"), f);
+  assert.ok(md.includes("## Content to review") && md.includes("all 2 teaching points") && md.includes("tokos-calipers.js") && md.includes("L10N.en.opts"));
+  assert.ok(md.endsWith(hand), "hand-maintained section kept verbatim at the end");
+  assert.ok(reviewQueueMd(deck.cases, deck.cases.map(() => "q"), [], null).endsWith(HAND_MARK + "\n"), "a fresh queue gets an empty hand-maintained section");
+  const committed = readFileSync("docs/tokos/review-queue.md", "utf8");
+  assert.ok(committed.includes(HAND_MARK) && committed.includes("## How to record a review"), "committed queue carries the generated header and the marker");
+});
