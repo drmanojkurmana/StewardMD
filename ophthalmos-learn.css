@@ -1,4 +1,4 @@
-/* Ophthalmós Learn (ophthalmos-learn.js): the same reading room, tuned for a first-year student.
+/* Ophthalmós Learn (ophthalmos-learn.js): the same white reading room (photos on black plates, diagrams on white), tuned for a first-year student.
    Calm, generous spacing, one idea per screen, 17 px lesson body on 1.6 leading (1.75 for Hindi), ~34em measure. */
 
 /* Hindi: the host ships Inter (Latin) plus Noto Sans Devanagari; system Devanagari faces are the fallback. */
@@ -35,6 +35,7 @@
 /* Learn home: the next lesson, then the units as a progress map */
 .ln-start { background: var(--op-s1); border-radius: 16px; overflow: hidden; }
 .ln-start-img { height: 148px; background: #000; }
+.ln-start-img.diagram { background: #fff; border-bottom: 1px solid var(--op-line); }
 .ln-start-img img { display: block; width: 100%; height: 100%; object-fit: contain; } /* never crop a clinical picture */
 .ln-start-b { padding: 16px; }
 .ln-start-t { font-size: 22px; line-height: 1.25; font-weight: 700; letter-spacing: -0.015em; margin: 0 0 8px; text-wrap: balance; }
@@ -67,7 +68,7 @@
 .ln-lessons li + li .ln-row { border-top: 1px solid var(--op-s2); border-radius: 0; }
 .ln-num { flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%; background: var(--op-s2); color: var(--op-mut);
   display: inline-flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 650; font-variant-numeric: tabular-nums; }
-.ln-row[data-done="true"] .ln-num { background: var(--op-ok); color: var(--op-bg); } /* 9.5:1; white on green is 2.2:1 */
+.ln-row[data-done="true"] .ln-num { background: var(--op-ok); color: #fff; } /* white on the light theme's green is 5.3:1 */
 .ln-num .smd-ico { width: 16px; height: 16px; }
 .ln-row-b { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
 .ln-row-b b { font-size: 16px; font-weight: 650; line-height: 1.35; }
@@ -79,6 +80,7 @@
 .ln-art { max-width: 34em; margin: 0 auto; padding-top: 8px; font-size: 17px; line-height: 1.6; }
 [lang="hi"] .ln-art, .ln-art[lang="hi"] { line-height: 1.75; }
 .ln-banner { height: 168px; margin: 4px 0 16px; border-radius: 14px; overflow: hidden; background: #000; }
+.ln-banner.diagram { background: #fff; box-shadow: inset 0 0 0 1px var(--op-line); }
 .ln-banner img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .ln-title { font-size: 28px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em; margin: 8px 0 8px; text-wrap: balance; }
 .ln-meta { margin: 0; font-size: 14px; color: var(--op-mut); }
@@ -109,7 +111,7 @@
 .ln-foot > span:empty + .oph-btn { grid-column: 1 / -1; } /* step 1: Next alone takes the row */
 /* text scrolling under the footer fades out instead of being sliced */
 .ln-foot::before, .ln-rfoot::before { content: ""; position: absolute; left: 0; right: 0; top: -24px; height: 24px; pointer-events: none;
-  background: linear-gradient(rgba(0, 0, 0, 0), var(--op-bg)); }
+  background: linear-gradient(rgba(255, 255, 255, 0), var(--op-bg)); }
 .ln-rfoot { position: relative; }
 #lnScroll { padding-bottom: 24px; }
 .ln-foot > * { max-width: 100%; }
@@ -127,6 +129,7 @@
 .ln-pic:not([style]) { min-height: 160px; }
 .ln-pic-b { display: block; width: 100%; padding: 0; border: 0; background: #000; border-radius: 12px; overflow: hidden; cursor: zoom-in; }
 .ln-pic-b img { display: block; width: 100%; height: auto; }
+.ln-pic.diagram .ln-pic-b { background: #fff; box-shadow: inset 0 0 0 1px var(--op-line); }
 .ln-pic.err { min-height: 0; aspect-ratio: auto !important; width: 100% !important; background: var(--op-s1); border-radius: 12px; }
 .ln-imgerr { margin: 0; padding: 20px 16px; font-size: 15px; color: var(--op-text); }
 .ln-hot { position: absolute; width: 44px; height: 44px; margin: 0; padding: 0; border: 0; background: transparent; transform: translate(-50%, -50%);
@@ -181,16 +184,16 @@
   touch-action: manipulation; text-decoration: underline dotted; text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-color: var(--op-link-line); }
 .oph-overlay .ln-term:active { text-decoration-style: solid; text-decoration-color: currentColor; } /* press feedback: the underline firms up */
 .ln-sheetwrap { position: absolute; inset: 0; z-index: 4; }
-.ln-scrim { position: absolute; inset: 0; background: rgba(0, 0, 0, .6); transition: opacity 260ms var(--op-ease); }
+.ln-scrim { position: absolute; inset: 0; background: rgba(0, 0, 0, .4); transition: opacity 260ms var(--op-ease); }
 .ln-sheet { position: absolute; left: 0; right: 0; bottom: 0; max-width: 620px; margin: 0 auto; max-height: 80%; overflow-y: auto; overscroll-behavior: contain;
-  background: var(--op-s2); border-radius: 20px 20px 0 0; padding: 8px 20px calc(20px + env(safe-area-inset-bottom, 0px));
-  box-shadow: 0 -8px 32px rgba(0, 0, 0, .5); transition: transform 280ms var(--op-sheet); }
+  background: var(--op-bg); border-radius: 20px 20px 0 0; padding: 8px 20px calc(20px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, .18); transition: transform 280ms var(--op-sheet); }
 .ln-sheetwrap.pre .ln-scrim { opacity: 0; }
 .ln-sheetwrap.pre .ln-sheet { transform: translateY(100%); }
 .ln-sheetwrap.out .ln-scrim, .ln-sheetwrap.out .ln-sheet { transition-duration: 180ms; }
 .ln-grab { width: 36px; height: 5px; border-radius: 3px; background: var(--op-s3); margin: 0 auto 14px; }
 .ln-sheet h2 { font-size: 22px; line-height: 1.25; font-weight: 700; margin: 0 0 8px; }
-.ln-sheet .oph-btn.sec { background: var(--op-s3); }
+.ln-sheet .oph-btn.sec { background: var(--op-s2); }
 .ln-sheet p { font-size: 17px; line-height: 1.6; margin: 0 0 20px; }
 .ln-sheetwrap[lang="hi"] .ln-sheet p { line-height: 1.75; }
 .ln-gloss { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); }

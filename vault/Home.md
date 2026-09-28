@@ -17,6 +17,7 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[Antibiogram]] - validated Indian antibiograms (institutions, ICMR, NARS-Net, state networks, studies) by specimen and setting; pooled India/regions; sources census; own-hospital import; feeds the console and reasoning
 - [[Clinical Documents]] - certificates, referral letter, consent forms (En/Te/Hi), handouts, MLC intimation, MCCD draft, I-PASS handover
 - [[Review Desk]] - clinicians approve AI-drafted content and export decisions; weekly guideline source watch
+- [[Clinical Bulletins]] - physician-signed practice updates on the disease reader; signing tab in the Review Desk (flag `smd_kb_bulletins`, default OFF)
 - [[Colleagues]] - wave 2 (OFF until the owner turns it on): referrals and handovers between verified doctors, case rooms, a hospital's own kit version, kit history per patient
 - [[OpenMed-Evaluation]] - which OpenMed PII/NER models fit StewardMD, and the India-ID redaction shipped from it
 - [[Medical Core]] — the small ML decision layer under ICU/Ward. Phase 1 (deterministic: what

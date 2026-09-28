@@ -138,6 +138,16 @@ try {
   ok(!/feverGU/.test(gu), `on  · 'Fever with urinary symptoms' is not suggested on top of fever (${gu})`);
   const chrome = await ev(`return [].map.call(document.querySelectorAll('#dxTop, .dx-col-h, .dx-col-sub, .dx-card.open .dx-d-row>b, #dxChanged, #dxGo, .dx-section-intro, .dx-hosp-l'),function(e){return e.innerText;}).join(' ')`);
   ok(!/—/.test(chrome), "on  · no em-dash in the plain-view text");
+  // round 20 (smd_calib): a lead less than 15 points ahead of the runner-up is labelled a close call and names it
+  const FIX = [HEP, MEN, ["fever", "cough", "crepitations"], ["chestPain", "diaphoresis"], ["fever", "cough"], ["fever", "dysuria", "flankPain"],
+    ["headache", "photophobia", "nauseaVomiting"], ["fever", "neckStiffness", "photophobia", "headacheSevere", "alteredSensorium"]];
+  const seen = { close: 0, clear: 0 };
+  for (const f of FIX) {
+    await open(f); const t = (await view()).top;
+    if (/Leading, but close/.test(t)) { seen.close++; ok(/fits nearly as well \(\d+ vs \d+\)/.test(t) && !/Clear lead/.test(t), `on  · close call names the runner-up (${f.join("+")})`); }
+    else if (/Most likely/.test(t)) { seen.clear++; ok(/Clear lead/.test(t), `on  · a clear lead says so (${f.join("+")})`); }
+  }
+  ok(seen.close > 0 && seen.clear > 0, `on  · both labels occur across the fixtures (close ${seen.close}, clear ${seen.clear})`);
   ok(v.wide && (await ev(`var j=document.querySelector('[data-dx-jump="dxIntake"]'); j.click(); var b=document.querySelector('#dxOverlay .dx-body'); return b.scrollWidth<=b.clientWidth+1;`)) === true, "on  · no horizontal overflow at 390px (review and intake)");
   const dark = await ev(`document.body.classList.add('dark'); var c=getComputedStyle(document.querySelector('#dxOverlay')).backgroundColor; var ev=document.querySelector('#dxOverlay .ev-wrap'); var e=ev?getComputedStyle(ev).backgroundColor:''; document.body.classList.remove('dark'); return c+'|'+e;`);
   ok(!/^rgb\(0, 0, 0\)/.test(dark) && !/rgb\(255, 255, 255\)$/.test(dark), `slop · dark mode is off-black, and "Know more" follows the theme (${dark})`);
@@ -154,6 +164,11 @@ try {
   const ask = await ev(`var h=document.querySelector('.dx-row-head[data-id="VIRAL_HEPATITIS"]'); h.click(); document.querySelector('.dx-card.open .dx-select[data-sel]').click(); return !!document.querySelector('#dxAskCard');`);
   ok(ask === true, "on  · Select on a plain card still asks the differentiating questions");
 
+  // ---- 4. smd_calib off: the classic "Most likely" / "Closest fits" only ------------------------
+  ok(await load(BASE + "?dxsimple=1&calib=0"), "app + KB load with ?dxsimple=1&calib=0");
+  let anyLabel = false;
+  for (const f of [["fever", "cough"], HEP, MEN]) { await open(f); const t = (await view()).top; if (/Leading, but close|Clear lead/.test(t)) anyLabel = true; }
+  ok(!anyLabel, "calib off · no close-call or clear-lead label (the change is reversible)");
   console.log(fails === 0 ? "\nALL GREEN: plain view" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); setTimeout(() => process.exit(fails === 0 ? 0 : 1), 300); }

@@ -69,6 +69,10 @@ try {
   // Close clears patient values.
   await click('#doseCalc [data-dc=close]');
   ok(await ev(`document.getElementById('doseCalc').hidden === true && !document.body.classList.contains('smd-dosecalc-open')`), 'close hides the calculator');
+  // SMD-MSCQX9: the overlay's own display:flex beat the [hidden] attribute, so after Close it stayed on
+  // screen and swallowed every tap (the sidebar button included). Check what is really painted.
+  ok(await ev(`getComputedStyle(document.getElementById('doseCalc')).display === 'none'`), 'SMD-MSCQX9 closed calculator is not painted');
+  ok(await ev(`(()=>{const e=document.elementFromPoint(30,40);return !!e && !e.closest('#doseCalc')})()`), 'SMD-MSCQX9 taps reach the app behind after Close');
   // 2) Drug page button
   const btn = await ev(`SMD_DOSECALC.buttonHTML('Amikacin')`);
   ok(/data-dosecalc-drug="Amikacin"/.test(btn), 'drug page button rendered when the flag is on');
@@ -85,7 +89,7 @@ try {
   ok(await ev(`+getComputedStyle(document.getElementById('doseCalc')).zIndex > 10000`), 'calculator stacks above #icuRoot (z-index 10000)');
   await shot('prefilled');
   await key('Enter'); await ev(`document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape'}));1`);
-  ok(await ev(`document.getElementById('doseCalc').hidden === true`), 'Escape closes');
+  ok(await ev(`getComputedStyle(document.getElementById('doseCalc')).display === 'none'`), 'Escape closes');
   // 4) Flag off: no entry points
   ok(await ev(`(()=>{history.replaceState(null,'','/?dosecalc=0');return SMD_DOSECALC.buttonHTML('Amikacin')===''&&!SMD_DOSECALC.on()})()`), 'flag off: no drug page button');
   // 5) Page layout: no horizontal overflow at 390 px

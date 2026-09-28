@@ -1524,6 +1524,18 @@
       ".hv-mi.hv-at-row{padding:0;gap:0;align-items:stretch}.hv-at-open{flex:1;min-width:0;display:flex;align-items:center;gap:13px;text-align:left;background:transparent;border:none;padding:12px 8px;color:var(--hink);cursor:pointer;font:inherit}.hv-at-open .ml{font:700 14.5px var(--hfont);min-width:0}.hv-at-open .mc{font:500 12px var(--hfont);color:var(--hmut);margin-top:2px}",
       ".hv-at-pin{flex:0 0 46px;border:none;background:transparent;color:var(--hmut);cursor:pointer;display:flex;align-items:center;justify-content:center;border-left:1px solid var(--hbd)}.hv-at-pin .rds-icon{font-size:20px;color:inherit;width:auto;transform:rotate(30deg);font-variation-settings:'FILL' 0}.hv-at-pin.on{color:var(--hp)}.hv-at-pin.on .rds-icon{transform:none;font-variation-settings:'FILL' 1}",
       ".hv-at-none{font:600 13.5px var(--hfont);color:var(--hmut);text-align:center;padding:26px 0}",
+      // The Home tile's sphere at list size, holding the tool's own icon (listIcon). The sheet lives
+      // outside #homeV2, so the tile rules in redesign-system.css do not reach it: sized here.
+      ".hv-tbadge{flex:0 0 40px;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;color:#fff;background:radial-gradient(circle at 34% 26%,#2f9184 0%,#12564a 52%,#06231e 100%);box-shadow:inset 0 2px 5px rgba(255,255,255,.26),inset 0 -5px 9px rgba(0,0,0,.4),0 4px 9px -4px rgba(8,40,35,.55)}",
+      ".hv-tbadge::before{content:'';position:absolute;top:9%;left:21%;width:34%;height:26%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.55),rgba(255,255,255,0) 70%);pointer-events:none}",
+      ".hv-mi .hv-tbadge .rds-icon{font-size:21px;width:auto;color:#fff;font-variation-settings:'FILL' 0,'GRAD' 0,'opsz' 24,'wght' 500}",
+      ".hv-tbadge svg{width:22px;height:22px;color:#fff;stroke:currentColor;fill:none;overflow:visible;stroke-linecap:round;stroke-linejoin:round}.hv-tbadge svg *{vector-effect:non-scaling-stroke}",
+      ".hv-tbadge svg,.hv-tbadge svg *:not([fill]):not(.pupil):not(.p):not(.n):not(.beam){stroke-width:2}.hv-tbadge svg .pupil,.hv-tbadge svg .p,.hv-tbadge svg .n,.hv-tbadge svg .beam{stroke:none}",
+      ".hv-tbadge .ai-ox{width:26px;height:26px}.hv-tbadge .ai-ox .ox-shut{display:none}",
+      // Solid parts drawn with a class, not a fill attribute (as on the Home tile).
+      ".hv-tbadge .ai-eye .pupil,.hv-tbadge .ai-derm .p,.hv-tbadge .ai-oncotree .n{fill:#eafff8;stroke:none}.hv-tbadge .ai-cxr .beam{fill:rgba(138,255,234,.5);stroke:none}",
+      ".hv-tbadge .ai-brandmark{width:auto;height:auto;max-width:25px;max-height:25px;object-fit:contain;filter:brightness(0) invert(1)}.hv-tbadge .ai-sknx-img{max-width:28px;max-height:28px;filter:none}.hv-tbadge .ai-surgx-img{filter:brightness(0) invert(.85)}",
+      ".hv-tbadge.locked{background:var(--hbd);box-shadow:none}.hv-tbadge.locked::before{display:none}.hv-mi .hv-tbadge.locked .rds-icon{color:var(--hmut)}",
       ".hv-mi .rds-icon{font-size:22px;color:var(--hp);width:22px;text-align:center}",
       ".hv-tog{flex:0 0 auto;width:42px;height:25px;border-radius:13px;background:var(--hbd);position:relative;transition:background .15s}",
       ".hv-tog:after{content:'';position:absolute;top:3px;left:3px;width:19px;height:19px;border-radius:50%;background:#fff;transition:left .15s;box-shadow:0 1px 2px rgba(0,0,0,.2)}.hv-tog.on{background:var(--hp)}.hv-tog.on:after{left:20px}",
@@ -2354,6 +2366,14 @@
     var h = 0, a = String(t.act || ""); for (var i = 0; i < a.length; i++) h = (h * 31 + a.charCodeAt(i)) % 997;
     return '<span class="rds-icon ai-live" data-live="' + liveMotion(t.ic) + '" style="--live-d:-' + ((h % 23) / 10).toFixed(1) + 's" aria-hidden="true">' + t.ic + '</span>';
   }
+  /* The tool's own icon, as on its Home tile, in a small badge for the All tools / Customize lists
+   * (owner 2026-09-28: "use their original icons here"). Those lists used the generic Material
+   * glyph, which is not the tool's icon at all, and Ophthalmós's "eye" is not a Material glyph, so
+   * it printed the word EYE. Static: a list of moving icons is noise. */
+  function listIcon(t, locked) {
+    var inner = locked ? '<span class="rds-icon">lock</span>' : ((t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : '<span class="rds-icon">' + t.ic + '</span>');
+    return '<span class="hv-tbadge' + (locked ? ' locked' : '') + '" data-tb="' + t.act + '" aria-hidden="true">' + inner + '</span>';
+  }
   function homeToolTile(t, locked) {
     var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : (locked ? ric(t.ic) : liveIcon(t));
     // A1: the Specialty Kits tile names the doctor's own kit once one is known (profile or chosen).
@@ -2389,7 +2409,7 @@
     var rows = "", TOOLS = orderedHomeTools();
     for (var i = 0; i < TOOLS.length; i++) {
       var t = TOOLS[i]; if (!homeToolEligible(t)) continue;
-      rows += '<button class="hv-mi hv-tool-tog" data-tool="' + t.act + '">' + ric(t.ic) +
+      rows += '<button class="hv-mi hv-tool-tog" data-tool="' + t.act + '">' + listIcon(t, false) +
         '<div class="ml">' + t.tt + '<div class="mc">' + t.sub + '</div></div>' +
         '<span class="hv-tog' + (homeToolVisible(t) ? ' on' : '') + '"></span>' +
         '<span class="hv-drag" aria-label="Drag to reorder">' + DRAG_DOTS + '</span></button>';
@@ -2416,7 +2436,7 @@
     for (var i = 0; i < TOOLS.length; i++) {
       var t = TOOLS[i], locked = roleLocked(t.act), on = homeToolVisible(t);
       rows += '<div class="hv-mi hv-at-row" data-at="' + t.act + '" data-q="' + smdEsc((t.tt + " " + t.sub).toLowerCase()) + '">' +
-        '<button type="button" class="hv-at-open" data-at-open="' + t.act + '"' + (locked ? ' aria-label="' + smdEsc(t.tt) + ', locked for your role"' : '') + '>' + ric(locked ? "lock" : t.ic) +
+        '<button type="button" class="hv-at-open" data-at-open="' + t.act + '"' + (locked ? ' aria-label="' + smdEsc(t.tt) + ', locked for your role"' : '') + '>' + listIcon(t, locked) +
           '<div class="ml">' + smdEsc(t.tt) + '<div class="mc">' + smdEsc(t.sub) + '</div></div></button>' +
         '<button type="button" class="hv-at-pin' + (on ? " on" : "") + '" data-at-pin="' + t.act + '" aria-pressed="' + on + '" aria-label="' + (on ? "Remove from Home" : "Add to Home") + '" title="' + (on ? "On Home" : "Add to Home") + '">' + ric(on ? "push_pin" : "push_pin") + '</button></div>';
     }
@@ -9813,6 +9833,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var badge = it.importance === "critical" ? '<span class="ntf-hi crit">Critical</span>' : (it.importance === "high" ? '<span class="ntf-hi">Important</span>' : "");
     var read = it.est_read_min ? '<span class="fd-read">' + it.est_read_min + ' min</span>' : "";
     var ws = it.workspace ? '<span class="fd-ws">' + nEsc(WSLBL[it.workspace] || it.workspace) + '</span>' : "";
+    // A doctor signed a Clinical Bulletin from this item; the card text itself is still the AI summary.
+    var signed = it.signed_bulletin ? '<span class="fd-signed">Signed bulletin in Library</span>' : "";
     var org = it.organization || it.source || "";
     var prev = String(it.summary || it.body || "");
     var lead = prev.split("\n")[0].replace(/\*\*/g, "").replace(/^[•\-\*]\s+/, "");   // lead sentence, markdown stripped for the teaser; full bullets render in detail
@@ -9823,7 +9845,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       '<div class="ntf-title">' + nEsc(it.title) + '</div>' +
       (org ? '<div class="fd-org">' + nEsc(org) + '</div>' : "") +
       (prev ? '<div class="ntf-body">' + nEsc(lead.slice(0, 220)) + (more ? "…" : "") + '</div>' : "") +
-      '<div class="fd-meta">' + ws + read + '<span class="fd-open">Open ›</span></div></div>';
+      '<div class="fd-meta">' + ws + read + signed + '<span class="fd-open">Open ›</span></div></div>';
   }
   function renderFeed() {
     var body = _notifRoot && _notifRoot.querySelector("#ntfFeed"); if (!body) return;
@@ -10625,6 +10647,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       ".fd-card{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:12px 14px;border-left:4px solid var(--teal,#0a9396);cursor:pointer;transition:transform .08s ease,box-shadow .12s ease}",
       ".fd-card:hover,.fd-card:focus{box-shadow:0 3px 14px rgba(0,0,0,.08);outline:none}.fd-card:active{transform:scale(.995)}",
       ".fd-card.hi{border-left-color:#ef4444}",
+      ".fd-signed{font:600 11px var(--sans,system-ui);color:#0f766e;background:rgba(15,118,110,.1);border-radius:999px;padding:2px 8px;white-space:nowrap}",
       ".fd-org{font:700 12px var(--sans,system-ui);color:var(--teal,#0a9396);margin-top:3px}",
       ".fd-meta{display:flex;align-items:center;gap:10px;margin-top:9px;flex-wrap:wrap}",
       ".fd-ws{font:600 11px var(--sans,system-ui);color:var(--slate-soft,#888);background:var(--teal-soft,#e0f2f1);border-radius:6px;padding:2px 8px}",

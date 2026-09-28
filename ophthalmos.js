@@ -119,6 +119,16 @@
       '<div class="oph-title"><b>' + title + "</b>" + (sub ? "<span>" + sub + "</span>" : "") + "</div>" + (right || "") + "</div>";
   }
 
+  // The overlay is white: dark status-bar icons while it is open (Capacitor "LIGHT" = dark text), the host's
+  // own theme back on close. Web and older hosts have no StatusBar plugin: nothing to do.
+  function statusBar(onWhite) {
+    try {
+      if (!onWhite && G.SMD_THEME_REVEAL && G.SMD_THEME_REVEAL.syncSystemUI) return G.SMD_THEME_REVEAL.syncSystemUI();
+      var SB = G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.StatusBar;
+      if (SB && SB.setStyle) SB.setStyle({ style: "LIGHT" });
+      if (SB && SB.setBackgroundColor) { try { SB.setBackgroundColor({ color: "#ffffff" }); } catch (e) {} }
+    } catch (e) {}
+  }
   function open() {
     var el = root();
     if (!el.classList.contains("on")) { try { st._prevFocus = G.document.activeElement; } catch (e) { st._prevFocus = null; } }
@@ -127,6 +137,7 @@
     st.prefs = D.loadPrefs(ls());
     el.classList.add("on");
     G.document.body.classList.add("oph-lock");
+    statusBar(true);
     st.view = "hub";
     if (st.cfg && !st.err) return renderHub();
     paint(top("Close", "Ophthalmós", "Loading tracks…") + '<div class="oph-scroll oph-pad"><p class="oph-mut" aria-busy="true">Loading image decks…</p></div>');
@@ -151,6 +162,7 @@
     var el = $("smdOphthalmos");
     if (el) { el.classList.remove("on"); el.innerHTML = ""; }
     G.document.body.classList.remove("oph-lock");
+    statusBar(false);
     try { if (G.SMD_showHome) G.SMD_showHome(); } catch (e) {}
     try { if (st._prevFocus && st._prevFocus.focus) st._prevFocus.focus(); } catch (e) {}
     st._prevFocus = null; st.session = null; st.caseRun = null; st.view = "hub";

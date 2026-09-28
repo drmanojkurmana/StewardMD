@@ -88,6 +88,7 @@ step('build kb.clinical', 'build-kb-clinical.mjs', [tx, dump, VERSION], {
 
 // 3. Source-JSON-derived artifacts (always runnable).
 step('build kb.enrichment', 'build-kb-enrichment.mjs', [VERSION]);
+step('build bulletin disease ids', 'build-disease-ids.mjs');
 step('build kb.expanded', 'build-kb-expanded.mjs', [VERSION]);
 step('build kb.rag', 'build-kb-rag-bundle.mjs', [VERSION]);
 step('build kb.index', 'build-kb-index.mjs');

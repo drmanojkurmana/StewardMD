@@ -79,9 +79,10 @@ try {
   const gateBtn = `try{DX.openWorkspace();}catch(e){} DX.reset(); DX.addFindings(["fever","headache","neckStiffness"]); var b=document.querySelector('#dxPolicy .dx-select'); if(!b) return 'none'; b.click(); return 'ok';`;
 
   // ---- 2. ON: engine -------------------------------------------------------------------------
-  // the scripted scenarios below were written against the classic order (?rankv3=0); the default
+  // the scripted scenarios below were written against the classic order (?rankv3=0) and before the tappable test results
+  // (?kbtests=0, round 72: a test-result question would come first); the default
   // (smd_rank_v3 ON since 2026-09-27) is exercised in section 5
-  ok(await load(BASE + "?dxask=1&kbv2=1&rankv3=0"), "app + KB load with ?dxask=1&kbv2=1&rankv3=0");
+  ok(await load(BASE + "?dxask=1&kbv2=1&rankv3=0&kbtests=0"), "app + KB load with ?dxask=1&kbv2=1&rankv3=0&kbtests=0");
   const before = await ev(`return JSON.stringify(SMD_REASON.assess({fever:true,jaundice:true,nauseaVomiting:true}))`);
   const d = await diff("VIRAL_HEPATITIS", HEP);
   const after = await ev(`return JSON.stringify(SMD_REASON.assess({fever:true,jaundice:true,nauseaVomiting:true}))`);
@@ -100,7 +101,7 @@ try {
   // ---- 3. ON: the panel ----------------------------------------------------------------------
   const gb = await ev(gateBtn), pg = await panel();
   ok(gb === "ok" && !pg.on && !pg.ws, `panel · meningitis: the policy card's "Open full stewardship page" opens the page directly, no questions (${gb})`);
-  await load(BASE + "?dxask=1&kbv2=1&rankv3=0");
+  await load(BASE + "?dxask=1&kbv2=1&rankv3=0&kbtests=0");
   await selectIn(HEP, "VIRAL_HEPATITIS");
   let p = await panel();
   ok(p.on && p.ws && p.chrome && !p.selBtn, "inline · Select opens the questions inside the card; workspace header and tabs stay, Select button is replaced");

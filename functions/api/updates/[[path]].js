@@ -18,6 +18,8 @@
  *   POST   /api/updates/sources                 -> { ok }  create/update source     (admin)
  *   DELETE /api/updates/sources/:id             -> { ok }                           (admin)
  *   DELETE /api/updates/:id                     -> { ok }                           (admin)
+ *   /api/updates/bulletins/*                    -> Clinical Bulletins (functions/_bulletins_api.js; own auth,
+ *                                                  mounted BEFORE the owner gate so X-Admin-Token never applies)
  */
 import { sendPushToAll, pushEnabled } from "../../_webpush.js";
 import { sendNativeToAll, nativePushEnabled } from "../../_nativepush.js";
@@ -28,6 +30,9 @@ import { runPipeline } from "../../_updates_pipeline.js";
 import { classifyDocument } from "../../_summarize.js";
 import { tinyfishSearch } from "../../_search.js";
 import { buildDigest } from "../../_digest.js";
+import { handleBulletins } from "../../_bulletins_api.js";
+import { retractForDeletedUpdate } from "../../_bulletins_repo.js";
+import { sha256Hex } from "../../_bulletin_rules.js";
 
 const json = (obj, status = 200, cache = "no-store") => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": cache }
@@ -148,7 +153,7 @@ async function migrateKvToD1(env) {
       workspace: "internal_medicine", title: String(x.title || "").slice(0, 240), body: String(x.body || "").slice(0, 240),
       category: normCategory(x.category), published_ts: x.ts || Date.now(), importance: normImportance(x.importance),
       est_read_min: 1, summary: String(x.body || ""), summary_json: "", official_url: x.url || "",
-      content_hash: "", auto: x.auto ? 1 : 0, pinned: x.pinned ? 1 : 0,
+      content_hash: await sha256Hex([x.title || "", x.body || "", x.url || ""].join("\n")), auto: x.auto ? 1 : 0, pinned: x.pinned ? 1 : 0,
     });
     imported++;
   }
@@ -224,6 +229,12 @@ export async function onRequest(context) {
     return json({ error: "bad-request" }, 400);
   }
 
+  /* ---------- Clinical Bulletins (own auth; must stay above the owner gate) ---------- */
+  if (head === "bulletins") {
+    try { return await handleBulletins(context, parts); }
+    catch (e) { try { console.warn("[bulletins] server error", String((e && e.message) || e).slice(0, 200)); } catch (_e) {} return json({ error: "server_error" }, 500); }
+  }
+
   /* ---------------- admin gate (everything below) ---------------- */
   if (!(await ownerOK(request, env))) return json({ error: "unauthorised" }, 401);
 
@@ -287,7 +298,7 @@ export async function onRequest(context) {
         id, name: String(body.name || id).slice(0, 120), workspace: normWorkspace(body.workspace), branch: normBranch(body.branch),
         type: normType(body.type) || "guideline", query: String(body.query || "").slice(0, 600), homepage: String(body.homepage || "").slice(0, 400),
         guideline_page: String(body.guideline_page || "").slice(0, 400), rss_url: String(body.rss_url || "").slice(0, 400),
-        parser_type: (["head", "litapi", "rss"].indexOf(body.parser_type) >= 0 ? body.parser_type : "rss"), priority: parseInt(body.priority, 10) || 100,
+        parser_type: (["head", "litapi", "rss", "pubmed", "openfda"].indexOf(body.parser_type) >= 0 ? body.parser_type : "rss"), priority: parseInt(body.priority, 10) || 100,
         enabled: body.enabled ? 1 : 0,
       });
       return json({ ok: true, id });
@@ -312,7 +323,8 @@ export async function onRequest(context) {
         category, published_ts: Date.now(), importance: normImportance(body.importance),
         est_read_min: Math.max(1, Math.round(bodyText.split(/\s+/).length / 200)) || 1,
         summary: bodyText, summary_json: summaryJson, official_url: String(body.url || "").slice(0, 500),
-        content_hash: "", auto: 0, pinned: !!body.pinned,
+        // Hashed so a re-publish with new text is a detectable source change (un-signs its bulletins).
+        content_hash: await sha256Hex([title, bodyText, String(body.url || "")].join("\n")), auto: 0, pinned: !!body.pinned,
       };
       // Re-publishing the SAME url updates the existing item (upgrade its content) instead of failing
       // on the doc_key UNIQUE constraint. A genuinely new item is inserted AND pushed; an update is not
@@ -332,6 +344,8 @@ export async function onRequest(context) {
       return json({ ok: true });
     }
     if (method === "DELETE" && head) {
+      // Its bulletins cannot show once the source is gone (inner join); record why for the review queue.
+      try { await retractForDeletedUpdate(env, head, Date.now()); } catch (e) {}   // bulletins tables may not exist yet
       await repo.deleteUpdate(env, head);
       return json({ ok: true });
     }
