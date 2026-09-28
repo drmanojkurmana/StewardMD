@@ -704,3 +704,11 @@ test("a named antibiotic course is prior exposure", () => {
     "Worsening despite oral antibiotics.", "The last treated with oral co-amoxiclav.", "Given 2 doses of azithromycin."]) assert.deepEqual(r(t).sort(), ["antibioticsLast90Days", "priorAntibiotics"], t);
   for (const t of ["Has not received any antibiotics.", "Started on IV ceftriaxone in casualty.", "Plan: ceftriaxone 2 g IV."]) assert.deepEqual(r(t), [], t);
 });
+
+// round 54: pregnancy as Indian notes write it; the obstetric score alone is parity, not a pregnancy
+test("pregnancy from gestation, POG and a positive UPT", () => {
+  const cP = { valid: { pregnancy: 1 }, labels: {}, numeric: {}, v2: true, syn: { pregnancy: ["pregnant"] } };
+  const r = (t) => NLP.extract(t, cP).present;
+  for (const t of ["G2P1L1 at 28 weeks POG.", "Primi at 32 weeks.", "30 weeks of amenorrhoea.", "POG 24 weeks.", "LMP 2 months back, UPT positive."]) assert.deepEqual(r(t), ["pregnancy"], t);
+  for (const t of ["UPT negative.", "G2P2L2, tubectomy done.", "Not pregnant."]) assert.deepEqual(r(t), [], t);
+});

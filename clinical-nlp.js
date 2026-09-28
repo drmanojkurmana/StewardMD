@@ -464,6 +464,10 @@
       var pabre = new RegExp("\\b(?:received|completed|took|taken|was given|were given|had been given|been given|was on|were on|been on|treated with|prescribed|despite|courses? of|doses? of)\\s+" +
         "(?:(?:a|an|two|three|several|\\d+|short|full|\\d+-day|day|course|courses|of|empiric|empirical|outpatient|oral|iv|intravenous|im|some|the)\\s+){0,6}(?:" + ABX_V2 + ")\\b", "g");
       while ((m2 = pabre.exec(norm))) { consider("priorAntibiotics", m2.index, "compound", m2[0]); consider("antibioticsLast90Days", m2.index, "compound", m2[0]); }
+      // round 54: pregnancy as Indian notes write it ("G2P1L1 at 28 weeks POG", "primi at 32 weeks", "30 weeks of amenorrhoea",
+      // "UPT positive"); not the obstetric score alone ("G2P2L2, tubectomy done" is parity, not a pregnancy)
+      var pgre = /\b(?:g\d{1,2}\s*p\d{1,2}\w*|primi(?:gravida)?|multi(?:gravida)?)\b[^.;]{0,20}?\b\d{1,2}\s*(?:\+\s*\d\s*)?(?:weeks?|wks?)\b|\b(?:pog|period of gestation)\b|\b\d{1,2}\s*(?:weeks?|wks?)\s*(?:of\s+)?amenorrh?oea\b|\b(?:upt|urine pregnancy test)\s*(?:is\s*|was\s*|:\s*)?(?:positive|\+\s*ve|\+)/g;
+      while ((m2 = pgre.exec(norm))) consider("pregnancy", m2.index, "compound", m2[0]);
       // round 27: the overdose scene ("found drowsy beside empty blister packs", "possible sedative co-ingestion", "found
       // unresponsive, a used syringe beside him")
       var odre = /\b(?:empty|emptied)\s+(?:[a-z-]+\s+){0,3}?(?:blisters?|blister packs?|strips?|packets?|pill bottles?|pills|tablets?|medication|medicines?)\b|\bco-?ingestion\b/g, odn = 0;

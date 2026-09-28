@@ -2254,6 +2254,12 @@
     immunocompromised: ["renal transplant", "kidney transplant", "liver transplant", "transplant patient", "tacrolimus", "mycophenolate", "azathioprine",
       "cyclosporine", "ciclosporin", "on art", "on haart", "antiretroviral", "plhiv", "biologic therapy", "infliximab", "adalimumab"]
   };
+  // round 53 (2026-09-28): exposure phrasing (leptospirosis, enteric fever, scrub typhus)
+  var FT_SYN_ADD_V2_R53 = {
+    waterExposure: ["rodent exposure", "exposure to rats", "rats at home", "rat infestation", "rodents at home"],
+    contaminatedFoodWaterExposure: ["well water", "unboiled water", "river water", "tap water outside", "unpasteuri", "raw milk", "pani puri", "golgappa"],
+    ruralExposure: ["trekking", "trekked", "hiking in", "jungle", "in the forest", "forest area", "gardening", "bushes", "undergrowth"]
+  };
   var FT_SYN_V2 = (function () {
     var o = {};
     Object.keys(FT_SYN).forEach(function (k) { var drop = FT_SYN_DROP_V2[k] || []; o[k] = FT_SYN[k].filter(function (x) { return drop.indexOf(x) < 0; }); });
@@ -2266,6 +2272,7 @@
     Object.keys(FT_SYN_ADD_V2_R47).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R47[k]); });
     Object.keys(FT_SYN_ADD_V2_R48).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R48[k]); });
     Object.keys(FT_SYN_ADD_V2_R52).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R52[k]); });
+    Object.keys(FT_SYN_ADD_V2_R53).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R53[k]); });
     return o;
   })();
   // the extraction context: classic exactly as before; v2 adds the cleaned table and the numeric-field list
