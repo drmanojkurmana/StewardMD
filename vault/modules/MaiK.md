@@ -361,3 +361,20 @@ show this").
   "Pathophysiology"), PMC acute pancreatitis the Revised Atlanta severity figure. Limit: AAFP's older GIF
   algorithms are drawn by script and dropped as GIFs, so those pages still show nothing or a photo.
 
+## MLX on iPhone (2026-09-28, branch claude/twitter-post-meaning-6h0ikw, flag `smd_maik_mlx`, default OFF)
+iOS-only second engine; Android keeps llama.cpp. Decision: Decisions.md 2026-09-28. Runbook and go/no-go:
+`docs/MAIK_MLX_SPIKE.md`.
+- `maik-models.js`: `mlx:` file lists on `bonsai-ternary-8b` (2.32 GB, stock qwen3) and `bonsai2-27b`
+  (8.62 GB, `prism_hadamard_qwen35`, needs the Layr-Labs fork). Sub-pack ids `<id>#mlx:<file>`, flat names
+  `tb8-mlx--*` / `tb2-27b-mlx--*`. `mlxEnabled()` = flag + iOS; `mlxReady(id)` also needs every file verified.
+- `maik-local.js`: `llama()` returns the Llama plugin itself when no Mlx plugin is linked (unchanged path);
+  with Mlx linked it returns an adapter that forwards to the engine holding the model and listens on both.
+  `engineFor(id, loadOpts)` picks; `ensureLoaded` releases the other engine (awaited) before loading; an MLX
+  load failure sets `_mlxOff[id]` and loads the GGUF.
+- `maik-engine.js`: "Faster iPhone engine (Labs)" row under Advanced (`mlxRowHTML`, `data-me-mlx`).
+- `local-plugins/capacitor-mlx`: NOT in package.json (iOS 17 floor). Pins: mlx-swift-lm `9f70e68`,
+  mlx-swift `0f4fe40`. DEBUG self-benchmark marker `Documents/maik-mlx-selftest`. Uncompiled as of writing.
+- Gotcha: the live progress patcher unsubscribes when an emitted id has no `[data-me-status]` element, so the
+  MLX row carries hidden status hooks for every small MLX file. `rerender()` now ignores a detached section
+  (a delete emits before its promise settles, and the patcher has already redrawn).
+

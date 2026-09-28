@@ -800,6 +800,49 @@
       '</div>';
   }
 
+  /* FASTER iPHONE ENGINE (MLX), Labs. Rendered only when SMD_MAIK_MODELS.mlxEnabled() (flag
+   * smd_maik_mlx = "1" on an iPhone), so nobody else ever sees it. The MLX files are extra to the
+   * pack's standard download, which stays as the fallback: maik-local.js answers on the standard
+   * engine whenever MLX cannot load. Progress rides the live patcher through the weights sub-pack's
+   * status/bar hooks; the small files get hidden status hooks so the patcher does not mistake their
+   * updates for "section gone" and unsubscribe. Its buttons use data-me-mlx, not data-me-actions, so
+   * the patcher never swaps them for single-file ones. */
+  function mlxRowHTML() {
+    var M = window.SMD_MAIK_MODELS;
+    if (!M || !M.mlxEnabled || !M.mlxEnabled()) return "";
+    var id = M.activePack ? M.activePack() : PACK_ID;
+    var head = '<div style="padding:10px 14px 12px;border-bottom:1px solid var(--line,#e2e8f0)">' +
+      '<div style="font:700 13px/1.3 var(--sans,system-ui)">Faster iPhone engine (Labs)</div>';
+    if (!M.hasMlx(id)) {
+      return head + '<div style="font:500 12px/1.5 var(--sans,system-ui);color:var(--slate,#2d4356);margin-top:3px">' +
+        'Not available for the selected model. Select MAiK Prime or MAiK Max 2 to try it.</div></div>';
+    }
+    var main = M.mlxMainIdOf(id), st = M.state(main) || {}, ready = M.mlxInstalledCached(id);
+    var size = M.fmtGB(M.mlxBytes(id));
+    var busy = !!(st.downloading || st.queued || (M.mlxBusy && M.mlxBusy(id)));
+    var status = ready ? "Ready. Answers on this phone use the faster engine. If it cannot start, the standard engine answers."
+      : st.queued ? (st.note || "Waiting") + " · " + size
+      : st.downloading ? (st.frac * 100).toFixed(1) + "% of " + size
+      : st.frac > 0 ? "Paused at " + (st.frac * 100).toFixed(1) + "% · tap Download to resume"
+      : "Extra download of " + size + ", on top of the standard model, which stays as the fallback. Experimental: it may not fit on every phone.";
+    var hidden = M.mlxIdsOf(id).filter(function (s) { return s !== main; })
+      .map(function (s) { return '<span hidden data-me-status="' + esc(s) + '"></span>'; }).join("");
+    var btns = ready
+      ? '<button type="button" class="smd-nav-btn" data-me-mlx="remove" data-me-id="' + esc(id) + '" style="margin:0;flex:1">Remove faster engine</button>'
+      : busy
+        ? '<button type="button" class="smd-nav-btn" data-me-mlx="pause" data-me-id="' + esc(id) + '" style="margin:0;flex:1">Pause</button>'
+        : '<button type="button" class="smd-nav-btn" data-me-mlx="get" data-me-id="' + esc(id) + '" style="margin:0;flex:1">Download (' + esc(size) + ')</button>' +
+          (st.frac > 0 ? '<button type="button" class="smd-nav-btn" data-me-mlx="remove" data-me-id="' + esc(id) + '" style="margin:0;flex:1">Remove</button>' : "");
+    return head +
+      '<div data-me-status="' + esc(main) + '" style="font:500 12px/1.5 var(--sans,system-ui);color:var(--slate,#2d4356);margin-top:3px">' + esc(status) + '</div>' +
+      '<div data-me-bar="' + esc(main) + '">' + (busy || (st.frac > 0 && !ready)
+        ? '<div style="height:4px;border-radius:2px;background:var(--line,#e2e8f0);overflow:hidden;margin-top:6px">' +
+            '<div style="height:100%;width:' + ((st.frac || 0) * 100).toFixed(1) + '%;background:var(--teal,#0e6e63)"></div></div>'
+        : "") + '</div>' + hidden +
+      '<div style="display:flex;gap:8px;margin-top:8px">' + btns + '</div>' +
+    '</div>';
+  }
+
   /* The per-phone cloud kill switch (reasoning.js aiBase). Shown so the tester can flip it and read
    * the count: with it ON, any feature that reports "Could not reach MaiK" while the Local engine is
    * selected is a leak, and the counter says how many attempts were stopped. Lives under Advanced,
@@ -1002,6 +1045,7 @@
         '<summary style="list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:11px 14px;font:700 13px/1.3 var(--sans,system-ui);color:var(--slate-soft,#5a7184)">' +
           '<span class="mk-grp-cv" aria-hidden="true" style="font-size:10px">▸</span><span style="flex:1">Advanced</span>' +
           '<span style="font:500 11.5px/1 var(--sans,system-ui)">Block cloud AI (test)</span></summary>' +
+        mlxRowHTML() +
         cloudBlockHTML() +
       '</details>';
   }
@@ -1126,7 +1170,9 @@
 
   function rerender(anchor, root) {
     var host = anchor && anchor.closest ? anchor.closest(".me-seg") : null;
-    if (!host) return;
+    // A detached section was already replaced by the live patcher's own rerender (a delete emits
+    // before its promise settles); setting outerHTML on it throws NoModificationAllowedError.
+    if (!host || !host.parentNode) return;
     host.outerHTML = settingsHTML();
     var fresh = (root && root.querySelector(".me-seg")) || document.querySelector(".me-seg");
     if (fresh && fresh.parentNode) wireSettings(fresh.parentNode);
@@ -1191,6 +1237,24 @@
         if (line) { var tmp = document.createElement("div"); tmp.innerHTML = capsHTML(); var fresh = tmp.querySelector("[data-me-device]"); if (fresh) line.textContent = fresh.textContent; }
       }, function () {});
     } catch (e) {}
+    root.querySelectorAll("[data-me-mlx]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var M = window.SMD_MAIK_MODELS, id = b.getAttribute("data-me-id");
+        if (!M || !M.ensureMlx || !id) return;
+        if (b.getAttribute("data-me-mlx") === "pause") {
+          M.mlxIdsOf(id).forEach(function (sid) { if (M.cancel) M.cancel(sid); });
+          return;
+        }
+        if (b.getAttribute("data-me-mlx") === "remove") {
+          return M.removeMlx(id).then(function () { toast("Faster engine removed."); rerender(b, root); });
+        }
+        var p = M.ensureMlx(id);
+        rerender(b, root);             // flip to Pause at once
+        return p.then(function () { toast("Faster iPhone engine ready."); }, function (e) {
+          if (String((e && e.message) || e) !== "cancelled") toast("Download stopped. Tap Download to resume.");
+        });
+      });
+    });
     root.querySelectorAll("[data-me-model]").forEach(function (b) {
       b.addEventListener("click", function () {
         var act = b.getAttribute("data-me-model");

@@ -5,6 +5,24 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-28 · MLX as a second on-device engine on iPhone; Android keeps llama.cpp (PROPOSED, flag off)
+
+**Decision.** iOS gets MLX (`local-plugins/capacitor-mlx`, `Capacitor.Plugins.Mlx`) for packs with an MLX
+build (MAiK Prime `bonsai-ternary-8b`, MAiK Max 2 `bonsai2-27b`); every other pack, every image question and
+all of Android stay on llama.cpp. `maik-local.js` hands out one adapter from `llama()` that forwards to
+whichever engine holds the model; MLX is chosen only when flag `smd_maik_mlx` = "1", on iOS, with every MLX
+file hash-verified and the plugin linked. Any MLX load failure answers on llama.cpp and deletes nothing. MLX
+files ride the existing native downloader as one-file sub-packs (`<id>#mlx:<file>`), pinned to HF commits.
+**Why.** Owner, after the mlx.fast result (Ternary Bonsai 2 27B, 580 tok/s on an M5 Mac): "ios version have
+MLX AND ANDROID HAVE EXISTING ONE", then "go ahead do all phases". Most of that speed is speculative decoding
+(14.2 tokens per round); plain MLX is ~29 to 47 tok/s on M5 Pro/Max. A phone will be well below either.
+**Trade-off.** MLX needs iOS 17 (the app ships 16.4): linking it drops iOS 16 users, so the plugin is built but
+NOT linked until the owner decides. The 27B MLX build is 8.62 GB against 5.95 GB for the GGUF and may not fit a
+12 GB iPhone; the 27B also needs the Layr-Labs mlx-swift-lm fork (an ordinary loader returns wrong text
+silently). MLX files are an extra download on top of the GGUF, which stays as the fallback. The Swift is
+uncompiled (no Xcode in the cloud session). **Status:** JS + tests done (`test/maik-mlx.test.mjs`,
+`test/run-maik-mlx-ui.mjs`); spike and go/no-go in `docs/MAIK_MLX_SPIKE.md` are the gate. No drafter yet.
+
 ## 2026-09-27 · Antibiogram review round 4: clinical antibiograms, one answer for console and reasoning
 
 **Decision.** A clinical antibiogram (laboratory results combined with patient response) never answers a
