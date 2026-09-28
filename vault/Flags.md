@@ -235,6 +235,12 @@ default (ON) is what you get.
 | `smd_review_desk` | **ON** | The Review Desk ([[Review Desk]]). Its Home tile is defOn false (reviewers add it). Local only. Force off with `?review=0`. |
 | `smd_kits_share` | **ON** | [[Colleagues]]: referrals, handovers, case rooms, hospital kit versions, kit history, review sync, and the Home "Colleagues" tile. Server route also defaults on (env `KITS_SHARE_ON=0` is its kill switch). Off per device with `smd_kits_share = "0"` or `?share=0`. |
 
+### Dose Calculator  <sub>1 ON · 0 OFF</sub>  <small>(added 2026-09-28)</small>
+
+| Flag | Def | Why |
+|---|---|---|
+| `smd_dose_calc` | **ON** | [[Dose Calculator]]. Owner 2026-09-28: monograph doses are verified, so the calculator ships on. Off per device with `smd_dose_calc = "0"` or `?dosecalc=0`. |
+
 ### Insulin  <sub>3 ON · 0 OFF</sub>
 
 | Flag | Def | Why |

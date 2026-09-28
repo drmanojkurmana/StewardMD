@@ -1053,14 +1053,16 @@
     kxinbox: function () { if (window.SMD_SHARE && SMD_SHARE.openInbox) SMD_SHARE.openInbox(); else toast("Loading…"); },
     speckit: function () { if (window.SMD_KITS && SMD_KITS.open) SMD_KITS.open(); else toast("Specialty kits loading…"); },
     icdsearch: function () { if (window.SMD_ICD) SMD_ICD.open(); },
+    dosecalc: function () { if (window.SMD_DOSECALC) SMD_DOSECALC.open({ source: "Drugs" }); else toast("Dose calculator loading…"); },
     drugmenu: function () {
       openSheet('<div class="hv-sh-t">Drugs &amp; Interactions</div>' +
         mi("pills", "Drug Database", "Brands · doses · spectrum · cautions", "db") +
-        mi("interact", "Interaction Checker", "Check drug–drug interactions", "ix"));
+        mi("interact", "Interaction Checker", "Check drug–drug interactions", "ix") +
+        (doseCalcOn() ? mi("pills", "Dose calculator", "Dose for a patient's weight, kidney and liver", "dose") : ""));
       sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
         b.addEventListener("click", function () {
           var a = b.getAttribute("data-mi"); closeSheet();
-          setTimeout(function () { if (a === "ix") ACT.interactions(); else ACT.drugs(); }, 70);
+          setTimeout(function () { if (a === "ix") ACT.interactions(); else if (a === "dose") ACT.dosecalc(); else ACT.drugs(); }, 70);
         });
       });
     },
@@ -1304,7 +1306,8 @@
     },
     followcare: function () { if (window.FollowCare && FollowCare.open) FollowCare.open(); else toast("FollowCare loading…"); },
     maitri: function () { if (window.FollowCare && FollowCare.maitri) FollowCare.maitri(); else if (window.FollowCare && FollowCare.open) FollowCare.open(); else toast("MAiTRI loading…"); },
-    customizetools: function () { openToolsCustomize(); }
+    customizetools: function () { openToolsCustomize(); },
+    alltools: function () { openAllTools(); }
   };
   // Globals so other modules (e.g. Ward Sync / ghis-ward.js) can open the Connect surfaces directly.
   try { window.SMD_openConnectEmr = function (proto) { try { ACT.connect(proto); } catch (e) {} }; } catch (e) {}
@@ -1508,6 +1511,12 @@
       "@media(hover:hover){.rds-hospital button.hv-tile:hover{border-color:var(--hp);box-shadow:0 6px 18px rgba(0,0,0,.07)}}@media(max-width:360px){.rds-hospital-sheet .hv-sheet-wrap{padding-left:16px;padding-right:16px}.rds-hospital .hv-tile{padding:14px}}@media(prefers-reduced-motion:reduce){.rds-hospital-sheet,.rds-hospital .hv-tile,.rds-hospital .hv-t2b{transition:none}.rds-hospital .hv-tile:active,.rds-hospital .hv-t2b:active{transform:none}}",
       // Customize-tools sheet (Add Tool): row toggles.
       ".hv-sub2{font:500 12.5px var(--hfont);color:var(--hmut);margin:-6px 0 14px}",
+      // All tools sheet: open from the row, pin to Home from the row's right edge.
+      ".hv-at-bar{display:flex;gap:8px;align-items:center;margin:0 0 6px}.hv-at-q{flex:1;min-width:0;box-sizing:border-box;border:1.5px solid var(--hbd);border-radius:12px;padding:11px 13px;font:500 15px var(--hfont);color:var(--hink);background:var(--hbg);-webkit-appearance:none}.hv-at-q:focus{outline:none;border-color:var(--hp)}",
+      ".hv-at-cust{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;min-height:44px;padding:0 12px;border:1.5px solid var(--hbd);border-radius:12px;background:var(--hbg);color:var(--hink);font:700 13px var(--hfont);cursor:pointer}.hv-at-cust .rds-icon{font-size:18px;color:var(--hp);width:auto}",
+      ".hv-mi.hv-at-row{padding:0;gap:0;align-items:stretch}.hv-at-open{flex:1;min-width:0;display:flex;align-items:center;gap:13px;text-align:left;background:transparent;border:none;padding:12px 8px;color:var(--hink);cursor:pointer;font:inherit}.hv-at-open .ml{font:700 14.5px var(--hfont);min-width:0}.hv-at-open .mc{font:500 12px var(--hfont);color:var(--hmut);margin-top:2px}",
+      ".hv-at-pin{flex:0 0 46px;border:none;background:transparent;color:var(--hmut);cursor:pointer;display:flex;align-items:center;justify-content:center;border-left:1px solid var(--hbd)}.hv-at-pin .rds-icon{font-size:20px;color:inherit;width:auto;transform:rotate(30deg);font-variation-settings:'FILL' 0}.hv-at-pin.on{color:var(--hp)}.hv-at-pin.on .rds-icon{transform:none;font-variation-settings:'FILL' 1}",
+      ".hv-at-none{font:600 13.5px var(--hfont);color:var(--hmut);text-align:center;padding:26px 0}",
       ".hv-mi .rds-icon{font-size:22px;color:var(--hp);width:22px;text-align:center}",
       ".hv-tog{flex:0 0 auto;width:42px;height:25px;border-radius:13px;background:var(--hbd);position:relative;transition:background .15s}",
       ".hv-tog:after{content:'';position:absolute;top:3px;left:3px;width:19px;height:19px;border-radius:50%;background:#fff;transition:left .15s;box-shadow:0 1px 2px rgba(0,0,0,.2)}.hv-tog.on{background:var(--hp)}.hv-tog.on:after{left:20px}",
@@ -2026,6 +2035,10 @@
   // eligible(): flag/entitlement gate — a locked/off tool never shows and never appears in Customize.
   // defOn: shown by default; users show/hide via the "Add Tool" -> Customize sheet (saved on device,
   // key smd_home_tools). feat: dark "signature" badge. Icons are Material Symbols (ric).
+  function doseCalcOn() {
+    if (window.SMD_DOSECALC && SMD_DOSECALC.on) return SMD_DOSECALC.on();
+    try { var q = (location.search.match(/[?&]dosecalc=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_dose_calc") !== "0"; } catch (e) { return true; }
+  }
   var HOME_TOOLS = [
     { act: "retinalscan", ic: "visibility", tt: "FundX AI", sub: "Retinal scan", feat: true, beta: true, anim: "eye",
       eligible: function () { return expTileOn("smd_fundx", "fundx", null); } },
@@ -2103,6 +2116,10 @@
     { act: "askai", ic: "auto_awesome", tt: "Ask MaiK", sub: "AI assistant", defOn: false },
     { act: "drugmenu", ic: "medication", tt: "Drugs", sub: "Database · interactions", defOn: false },
     { act: "calculators", ic: "calculate", tt: "Calculators", sub: "Scores · doses", defOn: false },
+    // Dose calculator (dose-calc.js). Flag smd_dose_calc, DEFAULT ON (owner 2026-09-28); "0" hides it.
+    // Read directly: home.js loads before dose-calc.js.
+    { act: "dosecalc", ic: "medication", tt: "Dose calculator", sub: "Dose for a patient", defOn: false,
+      eligible: function () { return doseCalcOn(); } },
     { act: "dosing", ic: "vaccines", tt: "Bedside dosing", sub: "Insulin · electrolytes", defOn: false },
     { act: "insulin", ic: "water_drop", tt: "Insulin", sub: "Dose · convert", defOn: false },
     { act: "syndromes", ic: "coronavirus", tt: "Syndromes", sub: "Reference", defOn: false },
@@ -2346,8 +2363,11 @@
       if (roleLocked(t.act)) lockedHtml += homeToolTile(t, true); else html += homeToolTile(t);
     }
     html += lockedHtml;
-    html += '<button class="rnav-tile addtool" data-act="customizetools" aria-label="Add or customise tools">' +
-      '<span class="rnav-badge">' + ric("add") + '</span><span class="rnav-tile-tt">Add Tool</span><span class="rnav-tile-sub">Customize</span></button>';
+    // Tester (owner, 2026-09-28): "I only want 3 tools on my home screen, but at times I need the
+    // others" - so the last tile is the whole list, and a tool opens from there without being
+    // pinned to Home first. Pinning and reordering live inside the same sheet.
+    html += '<button class="rnav-tile addtool" data-act="alltools" aria-label="All tools">' +
+      '<span class="rnav-badge">' + ric("apps") + '</span><span class="rnav-tile-tt">All tools</span><span class="rnav-tile-sub">Open any tool</span></button>';
     return html;
   }
   // The tier verdict arrives from /api/billing/status after first paint, so a Physician Pro on a
@@ -2373,6 +2393,52 @@
         var tg = b.querySelector(".hv-tog"); if (tg) tg.classList.toggle("on", now);
         var g = document.getElementById("rnavToolsGrid"); if (g) g.innerHTML = renderHomeToolsGrid();
       });
+    });
+  }
+
+  /* All tools: every tool the app can open, in one list, each opening from here. A pin on each row
+   * adds it to (or removes it from) Home, so Home can stay at the three tools someone uses every
+   * day while the rest are one tap away. Filter box for a long list; "Customize" opens the existing
+   * reorder sheet. Role-locked tools are listed too, and explain themselves on tap (openRoleLock). */
+  function openAllTools() {
+    var TOOLS = orderedHomeTools().filter(homeToolEligible), rows = "";
+    for (var i = 0; i < TOOLS.length; i++) {
+      var t = TOOLS[i], locked = roleLocked(t.act), on = homeToolVisible(t);
+      rows += '<div class="hv-mi hv-at-row" data-at="' + t.act + '" data-q="' + smdEsc((t.tt + " " + t.sub).toLowerCase()) + '">' +
+        '<button type="button" class="hv-at-open" data-at-open="' + t.act + '"' + (locked ? ' aria-label="' + smdEsc(t.tt) + ', locked for your role"' : '') + '>' + ric(locked ? "lock" : t.ic) +
+          '<div class="ml">' + smdEsc(t.tt) + '<div class="mc">' + smdEsc(t.sub) + '</div></div></button>' +
+        '<button type="button" class="hv-at-pin' + (on ? " on" : "") + '" data-at-pin="' + t.act + '" aria-pressed="' + on + '" aria-label="' + (on ? "Remove from Home" : "Add to Home") + '" title="' + (on ? "On Home" : "Add to Home") + '">' + ric(on ? "push_pin" : "push_pin") + '</button></div>';
+    }
+    openSheet('<div class="hv-sh-t">All tools</div>' +
+      '<div class="hv-sub2">Tap a tool to open it. Pin ' + ric("push_pin") + ' the ones you use every day to keep them on Home.</div>' +
+      '<div class="hv-at-bar"><input type="search" id="hvAtQ" class="hv-at-q" placeholder="Find a tool" autocomplete="off" autocorrect="off" autocapitalize="off" aria-label="Find a tool">' +
+      '<button type="button" class="hv-at-cust" data-at-cust="1">' + ric("tune") + ' Customize</button></div>' +
+      '<div class="hv-at-list">' + rows + '</div><div class="hv-at-none" hidden>No tool matches.</div>');
+    var sh = sheetEl();
+    sh.querySelectorAll("[data-at-open]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var a = b.getAttribute("data-at-open");
+        closeSheet();
+        if (roleLocked(a)) { openRoleLock(a); return; }
+        setTimeout(function () { try { if (ACT[a]) ACT[a](); } catch (e) {} }, 60);
+      });
+    });
+    sh.querySelectorAll("[data-at-pin]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var t = homeToolByAct(b.getAttribute("data-at-pin")); if (!t) return;
+        var now = !homeToolVisible(t), p = homeToolPrefs(); p[t.act] = now;
+        try { localStorage.setItem("smd_home_tools", JSON.stringify(p)); } catch (e2) {}
+        b.classList.toggle("on", now); b.setAttribute("aria-pressed", String(now)); b.setAttribute("aria-label", now ? "Remove from Home" : "Add to Home");
+        var g = document.getElementById("rnavToolsGrid"); if (g) g.innerHTML = renderHomeToolsGrid();
+        toast(now ? t.tt + " added to Home" : t.tt + " removed from Home");
+      });
+    });
+    var cust = sh.querySelector("[data-at-cust]"); if (cust) cust.addEventListener("click", function () { openToolsCustomize(); });
+    var q = sh.querySelector("#hvAtQ");
+    if (q) q.addEventListener("input", function () {
+      var v = q.value.trim().toLowerCase(), n = 0;
+      sh.querySelectorAll(".hv-at-row").forEach(function (r) { var hit = !v || r.getAttribute("data-q").indexOf(v) >= 0; r.hidden = !hit; if (hit) n++; });
+      var none = sh.querySelector(".hv-at-none"); if (none) none.hidden = n > 0;
     });
   }
 

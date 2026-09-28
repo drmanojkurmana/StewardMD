@@ -208,6 +208,17 @@
     }).then(function (r) { return r.json().catch(function () { return { ok: false, error: "bad-response" }; }); });
   }
 
+  /* What to say when the request never got an answer (the .catch branches). This used to be
+   * "You are offline" for every rejection, which also covered "not signed in" and a failed token
+   * refresh, on a phone with full signal (owner screenshot, 2026-09-28: the same wording on the
+   * profile sheet, fixed there on 09-26). Only say offline when the phone says so. */
+  function failText(e) {
+    var code = String((e && (e.code || e.message)) || "");
+    if (/signin-required|sign-in-required/i.test(code)) return "Sign in to verify your number.";
+    try { if (navigator.onLine === false) return "You are offline. Try again once you are connected."; } catch (x) {}
+    return "Couldn't reach StewardMD. Check your connection and try again.";
+  }
+
   var ERR = {
     "bad-phone": "Enter a valid mobile number with the country code.",
     "too-soon": "A code was just sent. Wait a moment before asking again.",
@@ -430,7 +441,7 @@
       }
       state.step = "code"; state.channel = r.channel || "whatsapp"; state.to = r.to || ""; state.fellBack = !!r.fellBack; state.sentAt = Date.now();
       render();
-    }).catch(function () { busy(false); failed("You are offline. Try again once you are connected."); });
+    }).catch(function (e) { busy(false); failed(failText(e)); });
   }
   // A failed send re-renders the phone step, but on the code step keeps what was typed (the earlier
   // code is still valid) and only repaints the footer with the new budget.
@@ -470,7 +481,7 @@
       var t = document.querySelector("#" + ROOT_ID + " .phv-t"); if (t) t.textContent = "Number verified";
       setTimeout(function () { close(); toast("Mobile number verified"); }, 650);
       try { document.dispatchEvent(new CustomEvent("smd:phone-verified", { detail: { phone: state.phone } })); } catch (e) {}
-    }).catch(function () { busy(false, "phvVerify", "Verify"); showErr("You are offline. Try again once you are connected."); });
+    }).catch(function (e) { busy(false, "phvVerify", "Verify"); showErr(failText(e)); });
   }
 
   /* ── should we ask? ───────────────────────────────────────────────────────────────────────── */
@@ -572,5 +583,5 @@
   if (document.readyState !== "loading") setTimeout(start, 900);
   else document.addEventListener("DOMContentLoaded", function () { setTimeout(start, 900); });
 
-  window.SMD_PHONE_VERIFY = { open: open, close: close, needed: needed, check: check, FLAG: FLAG, _state: function () { return state; }, _reset: function () { _asked = false; }, _start: start, _fit: fitViewport };
+  window.SMD_PHONE_VERIFY = { open: open, close: close, needed: needed, check: check, FLAG: FLAG, _state: function () { return state; }, _reset: function () { _asked = false; }, _start: start, _fit: fitViewport, _failText: failText };
 })();

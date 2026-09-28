@@ -111,6 +111,20 @@ function loadClient() {
   return win.SMD_BUGS;
 }
 
+test("a request that got no answer says offline only when the phone is offline (owner, 2026-09-28)", () => {
+  const SRC = readFileSync(new URL("../bug-report.js", import.meta.url), "utf8");
+  const load = (onLine) => {
+    const win = { addEventListener() {}, innerWidth: 390, innerHeight: 844, devicePixelRatio: 3 };
+    const doc = { readyState: "loading", addEventListener() {}, getElementById: () => null, querySelectorAll: () => [], head: { appendChild() {} }, body: {} };
+    new Function("window", "document", "location", "navigator", "localStorage", SRC)(win, doc, { hash: "" }, { userAgent: "UA", onLine }, { getItem: () => null, setItem() {} });
+    return win.SMD_BUGS._failText;
+  };
+  assert.match(load(false)(new TypeError("Failed to fetch")), /You are offline/, "offline: the phone says so");
+  assert.doesNotMatch(load(true)(new TypeError("Failed to fetch")), /offline/i, "online with full signal: never blame the connection as 'offline'");
+  assert.match(load(true)(new TypeError("Failed to fetch")), /Couldn't reach StewardMD/, "online: says the request did not get through");
+  assert.equal(/toast\("You are offline/.test(SRC), false, "no hard-coded offline toast is left in the client");
+});
+
 test("shake detector: three hard swings within a second fire once; a bump, a slow tilt or a desk drop do not", () => {
   const B = loadClient();
   let fired = 0; const s = B._detector(() => fired++);

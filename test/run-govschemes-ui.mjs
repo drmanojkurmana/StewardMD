@@ -54,7 +54,7 @@ try {
   ok(await ev(`return !!(window.SMD_GOVSCHEMES_FLAGS);`) === true, "govschemes-flags.js loaded (window.SMD_GOVSCHEMES_FLAGS present)");
   ok(await ev(`return window.SMD_GOVSCHEMES_FLAGS.bool("smd_govt_schemes");`) === false, "(a) flag OFF without ?gs=1");
   ok(await ev(`return typeof window.SMD_GOVSCHEMES;`) === "object", "govschemes.js loaded (window.SMD_GOVSCHEMES present)");
-  await ev(`document.querySelector('[data-act="customizetools"]').click(); return 1;`);
+  await ev(`SMD_openRoute('customizetools'); return 1;`);
   await sleep(200);
   ok(await ev(`return !document.querySelector('#hvSheet [data-tool="govschemes"]');`) === true, "(b) Govt Schemes entry ABSENT from Add Tool sheet without ?gs=1");
   await ev(`document.getElementById("hvScrim").click(); return 1;`);
@@ -74,7 +74,7 @@ try {
   // ---- (a)/(b) flag ON, tile present: reload with ?gs=1 ----
   await navigate(BASE + "?gs=1");
   ok(await ev(`return window.SMD_GOVSCHEMES_FLAGS.bool("smd_govt_schemes");`) === true, "(a) flag ON with ?gs=1");
-  await ev(`document.querySelector('[data-act="customizetools"]').click(); return 1;`);
+  await ev(`SMD_openRoute('customizetools'); return 1;`);
   await sleep(200);
   const gsRow = await ev(`var r=document.querySelector('#hvSheet [data-tool="govschemes"]'); return r ? r.textContent : null;`);
   ok(!!gsRow && /Govt Schemes/.test(gsRow), `(b) Govt Schemes entry PRESENT in Add Tool sheet with ?gs=1 (row: ${JSON.stringify(gsRow)})`);
