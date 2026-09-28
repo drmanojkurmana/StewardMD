@@ -75,14 +75,14 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2-icdsug1-scribe18-proto3-kits2-fr1-assign1-edit1">
 <link rel="stylesheet" href="/atlas.css?v=atlas6">
 <link rel="stylesheet" href="/atlas3d.css?v=a3d6-fr1">
-<link rel="stylesheet" href="/ophthalmos.css?v=oph8">
-<link rel="stylesheet" href="/ophthalmos-mcq.css?v=oph8">
-<link rel="stylesheet" href="/ophthalmos-notes.css?v=oph8">
-<link rel="stylesheet" href="/ophthalmos-retino.css?v=oph8">
-<link rel="stylesheet" href="/ophthalmos-neuro.css?v=oph8">
-<link rel="stylesheet" href="/ophthalmos-tools.css?v=oph8">
-<link rel="stylesheet" href="/ophthalmos-learn.css?v=oph8">
-<link rel="stylesheet" href="/ophthalmos-explore.css?v=oph8">
+<link rel="stylesheet" href="/ophthalmos.css?v=oph9">
+<link rel="stylesheet" href="/ophthalmos-mcq.css?v=oph9">
+<link rel="stylesheet" href="/ophthalmos-notes.css?v=oph9">
+<link rel="stylesheet" href="/ophthalmos-retino.css?v=oph9">
+<link rel="stylesheet" href="/ophthalmos-neuro.css?v=oph9">
+<link rel="stylesheet" href="/ophthalmos-tools.css?v=oph9">
+<link rel="stylesheet" href="/ophthalmos-learn.css?v=oph9">
+<link rel="stylesheet" href="/ophthalmos-explore.css?v=oph9">
 <link rel="stylesheet" href="/onco-home.css?v=op8-qafit3-fr1">
 <link rel="stylesheet" href="/oncotree.css?v=nccn-nav8-tbfit1-fr1">
 <link rel="stylesheet" href="/protocol-sheet.css?v=ps5-fr1">
@@ -1911,7 +1911,7 @@ html.smd-splash-v2 #splash .splash-module-pill{
       <p>The drug, dosage, interaction, and monograph content in StewardMD's drug database is <strong>AI-summarised and structured from official sources</strong> (openFDA / FDA, EMA, SmPC, BNF, WHO). Doses are reproduced from the source labels but may contain transcription or summarisation errors. <strong>Always verify every dose, indication, contraindication, and interaction against the primary source</strong> before prescribing. Do not rely on it as the sole basis for any prescribing decision.</p>
 
       <div class="smd-modal-section">AI, imaging &amp; oncology features</div>
-      <p>AI output (MaiK, image and ECG analysis, oncology pathways) can be incomplete or wrong ("hallucinated") and is decision support only. Image and signal analysis is <strong>not</strong> a radiology, pathology, or cardiology report and <strong>may miss findings, including malignancy</strong>. Oncology protocols are <strong>Beta and AI-drafted</strong> and must be confirmed by a qualified oncologist. Any prescription you generate is authored and issued by you, on your own responsibility. Verify everything against primary sources before acting. See the <a role="button" tabindex="0" style="cursor:pointer;text-decoration:underline" onclick="return openExternal('https://stewardmd.in/disclaimer')"><strong>full Disclaimer</strong></a>.</p>
+      <p>AI output (MaiK, image and ECG analysis, oncology pathways) can be incomplete or wrong ("hallucinated") and is decision support only. Image and signal analysis is <strong>not</strong> a radiology, pathology, or cardiology report and <strong>may miss findings, including malignancy</strong>. Oncology protocols must be confirmed by a qualified oncologist. Any prescription you generate is authored and issued by you, on your own responsibility. Verify everything against primary sources before acting. See the <a role="button" tabindex="0" style="cursor:pointer;text-decoration:underline" onclick="return openExternal('https://stewardmd.in/disclaimer')"><strong>full Disclaimer</strong></a>.</p>
 
       <div class="smd-modal-section">Educational purpose only</div>
       <p>StewardMD is an <strong>educational clinical reasoning aid</strong> built from published guideline references for self-study and teaching discussion. It has <strong>not been clinically validated</strong> or peer-reviewed as a direct patient care tool.</p>
@@ -2254,12 +2254,12 @@ window.openExternal = function (u) {
 <script defer src="/medlist.js?v=ddiaudit20260925-fr2-mlwrap1-ledger1-qa7"></script>
 <script defer src="/ghis-meds.js?v=gold363"></script>
 <script defer src="/interactions.js?v=ddiaudit20260925"></script>
-<script src="/api.js?v=ddiaudit20260925-monofit1-fr2-gold1" defer></script>
+<script src="/api.js?v=ddiaudit20260925-monofit1-fr2-gold1-nodraft1" defer></script>
 <!-- Offline drug database (native + Pro only; no-op on web). Loads after api.js so it can
      route MEDAPI drug searches to the local SQLite copy when offline. -->
 <script src="/fflate.min.js" defer></script>
 <script src="/offline-db.js?v=gold363" defer></script>
-<script src="/offline-clinical.js?v=gold367-syn1" defer></script>
+<script src="/offline-clinical.js?v=gold367-syn1-idx4" defer></script>
 <!-- KB data (KB_CORE/CLINICAL/ENRICHMENT/EXPANDED, ~4.8MB) is LAZY-loaded AFTER first paint
      so the branded loading splash appears fast. Reasoning uses closure fallbacks until it's
      ready; StewardRAG awaits window.SMD_KB_READY. -->
@@ -2279,11 +2279,11 @@ window.openExternal = function (u) {
 <!-- Knowledge Library Protocols tab: clinical protocols across specialties (kb/clinical-protocols/).
      Flag smd_kb_protocols (default ON, ?kbproto=0 hides it). The kb-protocols.js ?v= token is kept in
      step with the content hash by scripts/build-clinical-protocols.mjs. -->
-<script src="/kb-protocols-flags.js?v=kbpf2" defer></script>
-<script src="/kb-protocols.js?v=kbp5.01580d845968" defer></script>
+<script src="/kb-protocols-flags.js?v=kbpf3" defer></script>
+<script src="/kb-protocols.js?v=kbp6.01580d845968" defer></script>
 <!-- Clinical documents (certificates, consent forms, handouts, MLC, MCCD draft). Flag smd_clinical_docs
      (default ON, ?docs=0). Token kept in step with kb/documents/documents.json by scripts/build-documents.mjs. -->
-<script src="/clinical-docs.js?v=docs3.598e7e3c41bc" defer></script>
+<script src="/clinical-docs.js?v=docs4.598e7e3c41bc" defer></script>
 <!-- Clinical review desk: clinicians approve or comment on AI-drafted protocols, kits and consent templates,
      then export the decisions (applied with scripts/apply-reviews.mjs). Flag smd_review_desk (default ON). -->
 <script src="/review-desk.js?v=rev2" defer></script>
@@ -2294,8 +2294,8 @@ window.openExternal = function (u) {
      OPD EMR Specialty tab + Home tile. Flag smd_specialty_kits (default ON, ?kits=0 hides both). The
      specialty-kits.js ?v= token is kept in step with the kit + WHO growth data hashes by
      scripts/build-specialty-kits.mjs. -->
-<script src="/specialty-kits-flags.js?v=kitsf1" defer></script>
-<script src="/specialty-kits.js?v=kits7.286fc2ed2b" defer></script>
+<script src="/specialty-kits-flags.js?v=kitsf2" defer></script>
+<script src="/specialty-kits.js?v=kits8.286fc2ed2b" defer></script>
 <script src="/renal-dose.js?v=rd1" defer></script>
 <!-- Privacy PR-A: SMD_PRIVACY config (version constants) + consent gate / versioned Privacy Notice
      (SMD_CONSENT). Loads after reasoning.js so it can guard SMD_AI. Reversible via localStorage
@@ -2337,7 +2337,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/ambig-abbrev.js?v=gold1057-lang" defer></script><script src="/kb/ai/maik-brain.js?v=brain-ambig1-find1" defer></script>
 <script src="/kb/ai/maik-evidence.js?v=gold1052-brain-audA" defer></script>
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
-<script src="/electrolytes.js?v=bug808-nodupe-focus1-fr1-worksheet1-carepath1" defer></script>
+<script src="/electrolytes.js?v=bug808-nodupe-focus1-fr1-worksheet1-carepath1-nodraft1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
 <script src="/abdm.js?v=abdm1" defer></script>
 <!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb-fr1-mkbg1-dim1"><script src="/maik-atmosphere.js?v=2-energy1-mkbg1" defer></script><script src="/maik-companion.js?v=2a" defer></script><script src="/thinking-orbs.js?v=3-gradientorb" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir-kbprev1-energy1-buddy2-kits3-fr1-kxon1-flagrel925-mtretail1-mkclose1-ptcard1-roles1-pfopen1-roleios1-hub1-phonehub1-pfdraw1-helpcentre1-phoneok1-qa16-stream1-corrupt1-live1-knife1-ox2" defer></script><script src="/role-features.js?v=roles3-roleios1" defer></script><script src="/profile-setup.js?v=pfs5-kbsheet1-savefix1-roles1" defer></script><script src="/phone-verify.js?v=phv6-hw-roles1-phonehub1-phoneok1-claimfresh1" defer></script><script src="/bug-report.js?v=bug4-realtime" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm3" defer></script>
@@ -2597,9 +2597,9 @@ window.openExternal = function (u) {
      (ws-surgery.js, loaded above at the workspaces block) onto its seven-band spine, so the
      surgical decision engine has exactly one home and parity is structural.
      Content is NOT bundled - it is lazily fetched from /surgx/*.json on first open. -->
-<script src="/surgx-flags.js?v=sg13r925-backup" defer></script>
-<script src="/surgx-model.js?v=sg16-confirm" defer></script>
-<script src="/surgx-content.js?v=sg1" defer></script>
+<script src="/surgx-flags.js?v=sg14-allopen" defer></script>
+<script src="/surgx-model.js?v=sg17-allopen" defer></script>
+<script src="/surgx-content.js?v=sg2-allopen" defer></script>
 <script src="/surgx-note-schema.js?v=sg1" defer></script>
 <script src="/surgx-store.js?v=sg13-backup" defer></script>
 <script src="/surgx-entitlement.js?v=sg10-nogate" defer></script>
@@ -2608,7 +2608,7 @@ window.openExternal = function (u) {
 <script src="/surgx-backup.js?v=sgbk2-enc" defer></script>
 <script src="/surgx-evidence.js?v=hardlocal3" defer></script>
 <script src="/surgx-diagrams.js?v=sg1" defer></script>
-<script src="/surgx-screens.js?v=hardlocal3" defer></script>
+<script src="/surgx-screens.js?v=hardlocal3-allopen1" defer></script>
 <script src="/surgx.js?v=sg1" defer></script>
 <!-- NMC Logbook (PG digital logbook) - additive, flag-gated smd_pglog, DEFAULT ON for testers, same
      owner decision as clinix/surgx (see pglog-flags.js, which is the authority); force either way
@@ -2712,7 +2712,7 @@ window.openExternal = function (u) {
 <!-- Oncology treatment-plan matrix + read-only dose drawer + Phase 4 apply/review/override panels
      (flag smd_onco_protocols, default OFF), rendered inside the opd-emr.js Oncology/Assess tabs.
      Loaded before opd-emr.js so window.SMD_ONCOUI is present when it renders. -->
-<script src="/onco-protocols.js?v=op1-draftwarn" defer></script>
+<script src="/onco-protocols.js?v=op1-draftwarn-nodraft1" defer></script>
 <!-- Oncology Phase 5: nurse execution view ("Today's Chemotherapy" - clearance banner, give-list,
      administration record). Reads confirmed doses off the plan/cycle only - never calculates.
      Loaded before opd-emr.js so window.SMD_ONCONURSE is present when it renders. -->
@@ -2723,7 +2723,7 @@ window.openExternal = function (u) {
 <script src="/onco-protocol-report.js?v=onco1" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=hardlocal3-opdcols1-imm1-r6-1-scribe18-sid1-nerdx1-nodash1-proto3-kits3-sttfb2-assign1-edit1-rankv3a-calib1-prior1" defer></script>
+<script src="/opd-emr.js?v=hardlocal3-opdcols1-imm1-r6-1-scribe18-sid1-nerdx1-nodash1-proto3-kits3-sttfb2-assign1-edit1-rankv3a-calib1-prior1-nodraft1" defer></script>
 <!-- My Clinic — on-device EMR for personal clinics (reuses opd-emr's form; flag smd_personal_clinic). -->
 <script src="/personal-clinic.js?v=gold6" defer></script>
 <!-- Shared Clinic — multi-device encrypted EMR for clinics/small hospitals with no EMR (flag
@@ -2782,7 +2782,7 @@ window.openExternal = function (u) {
 <script src="/assets/vendor/motion.min.js?v=motion10" defer></script>
 <script src="/oncotree-engine.js?v=ot5" defer></script>
 <script src="/oncotree-recommend.js?v=ot5" defer></script>
-<script src="/oncotree.js?v=nccn-nav9-ci1-handoff1" defer></script>
+<script src="/oncotree.js?v=nccn-nav9-ci1-handoff1-nodraft1" defer></script>
 <script src="/protocol-sheet.js?v=ps6-fr1" defer></script>
 <script src="/protocol-maker.js?v=pm2" defer></script>
 <!-- StewardMD ID · the account's permanent SMD-XXXXXX handle. The ID itself is
@@ -3096,21 +3096,21 @@ window.openExternal = function (u) {
   else boot();
 })();
 </script>
-<script src="/atlas.js?v=atlas3" defer></script>
+<script src="/atlas.js?v=atlas4" defer></script>
 <script src="/atlas3d.js?v=a3d18" defer></script>
-<script src="/ophthalmos-core.js?v=oph8" defer></script>
-<script src="/ophthalmos-data.js?v=oph8" defer></script>
-<script src="/ophthalmos-stage.js?v=oph8" defer></script>
-<script src="/ophthalmos.js?v=oph8" defer></script>
-<script src="/ophthalmos-screens.js?v=oph8" defer></script>
-<script src="/ophthalmos-mcq.js?v=oph8" defer></script>
-<script src="/ophthalmos-notes.js?v=oph8" defer></script>
-<script src="/ophthalmos-retino-model.js?v=oph8" defer></script>
-<script src="/ophthalmos-retino.js?v=oph8" defer></script>
-<script src="/ophthalmos-neuro.js?v=oph8" defer></script>
-<script src="/ophthalmos-tools-model.js?v=oph8" defer></script>
-<script src="/ophthalmos-tools.js?v=oph8" defer></script>
-<script src="/ophthalmos-learn.js?v=oph8" defer></script>
-<script src="/ophthalmos-explore.js?v=oph8" defer></script>
+<script src="/ophthalmos-core.js?v=oph9" defer></script>
+<script src="/ophthalmos-data.js?v=oph9" defer></script>
+<script src="/ophthalmos-stage.js?v=oph9" defer></script>
+<script src="/ophthalmos.js?v=oph9" defer></script>
+<script src="/ophthalmos-screens.js?v=oph9" defer></script>
+<script src="/ophthalmos-mcq.js?v=oph9" defer></script>
+<script src="/ophthalmos-notes.js?v=oph9" defer></script>
+<script src="/ophthalmos-retino-model.js?v=oph9" defer></script>
+<script src="/ophthalmos-retino.js?v=oph9" defer></script>
+<script src="/ophthalmos-neuro.js?v=oph9" defer></script>
+<script src="/ophthalmos-tools-model.js?v=oph9" defer></script>
+<script src="/ophthalmos-tools.js?v=oph9" defer></script>
+<script src="/ophthalmos-learn.js?v=oph9" defer></script>
+<script src="/ophthalmos-explore.js?v=oph9" defer></script>
 </body>
 </html>
