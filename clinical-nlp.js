@@ -322,6 +322,10 @@
       var GLV = function (m) { var q = +m[1], mg = m[2] ? /mg/.test(m[2]) : q > 40; q = mg ? q : q * 18; return q > 0 && q < 3000 ? q : null; }, gl;   // mg/dL
       if ((m2 = pick(GLU_RE, GLV, -1)) && (gl = GLV(m2)) < 70) vital("glucoseLow", m2[0]);
       if ((m2 = pick(GLU_RE, GLV, 1)) && (gl = GLV(m2)) >= 250) { vital("glucoseHigh", m2[0]); if (gl > 600) vital("glucoseVeryHigh", m2[0]); }
+      // round 32: a low haemoglobin and a high INR, as the lab import reads them (the engine counts the entered value)
+      if ((m2 = pick(/\b(?:haemoglobin|hemoglobin|hgb|hb)\b(?:\s*(?:level|value|of))?\s*(?:\([^)\d]{0,12}\))?\s*(?:is|was|at|=|:|-)?\s*(\d{1,3}(?:\.\d)?)\s*(g\/l|g\/dl|gm|g\b)?/, function (m) { var h = +m[1]; if (/^\s*(?:months?|weeks?|days?|years?|hours?|yrs?|wks?)\b/.test(m.input.slice(m.index + m[0].length))) return null; return /\/l$/.test(m[2] || "") || h > 25 ? h / 10 : h; }, -1))) {
+        var hb = +m2[1]; if (/\/l$/.test(m2[2] || "") || hb > 25) hb /= 10; if (hb >= 2 && hb < 10) vital("hemoglobin", m2[0]); }
+      if ((m2 = pick(/\binr\b\s*(?:of|is|was|at|=|:|-)?\s*(\d{1,2}(?:\.\d{1,2})?)\b/, V1, 1)) && +m2[1] >= 1.5 && +m2[1] < 20) vital("inr", m2[0]);
       // liver enzymes and ascitic fluid (the findings exist only under smd_kb_v2; consider() drops invalid keys)
       var CONN = "(?:\\s*(?:count|level|levels|value))?\\s*(?:\\([^)\\d]{0,12}\\))?\\s*(?:of|is|was|at|=|:|-|\\()?\\s*";
       if ((m2 = pick(new RegExp("\\b(?:alt|ast|sgpt|sgot|transaminases?)\\b" + CONN + "(\\d+(?:[.,]\\d+)?)"), function (m) { return nv(m[1]); }, 1)) && num(m2[1]) >= 1000) vital("transaminasesVeryHigh", m2[0]);
@@ -374,6 +378,10 @@
       while ((m2 = odre.exec(norm))) { consider("drugOverdose", m2.index, "compound", m2[0]); odn++; }
       if (!odn && /\b(?:paraphernalia|syringes?|heroin|fentanyl|opioids?|opiates?)\b/.test(norm)) { var fdre = /\bfound\b[^.;]{0,40}?\b(?:unresponsive|unrousable|unarousable|obtunded|unconscious|slumped|collapsed)\b/g;
         while ((m2 = fdre.exec(norm))) consider("drugOverdose", m2.index, "compound", m2[0]); }
+      // round 32: a head strike or a fall said in words ("knocked his head on the sink", "a minor fall backwards"); the
+      // bare word "fall" is dropped under v2 ("a fall in blood pressure")
+      var hire = /\b(?:knocked|hit|banged|struck|bumped|bashed)\s+(?:his|her|their|the)\s+head\b|\b(?:minor|recent|mechanical|unwitnessed|witnessed|ground-level|a)\s+fall\b(?!\s+(?:in|of)\b)|\bfell\s+(?:down|over|backwards|forwards|from|off|and)\b|\bslipped\s+(?:and|in|on)\b/g;
+      while ((m2 = hire.exec(norm))) consider("headInjury", m2.index, "compound", m2[0]);
       // round 10: 48 hours or more into a hospital stay (hospital-acquired territory)
       var hdre = /\b(?:admitted|hospitali[sz]ed|intubated|ventilated)\s+(\d{1,2}|two|three|four|five|six|seven|eight|nine|ten)\s*days?\s*(?:ago|earlier|previously|before)\b|\b(?:hospital|post-?operative|ward|icu)\s+day\s+(\d{1,2})\b|\bday\s+(\d{1,2})\s+of\s+(?:(?:a|an|the|his|her)\s+)?(?:[a-z-]+\s+){0,2}(?:admission|ventilation|hospital stay|stay)\b/g;
       while ((m2 = hdre.exec(norm))) {   // every mention (round 19): the first may be negated or under 48 h

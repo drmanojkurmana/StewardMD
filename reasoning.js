@@ -2128,6 +2128,8 @@
     malignancy: ["mediastinal mass", "paratracheal mass", "hilar mass", "lung mass", "pulmonary mass", "space-occupying lesion"],
     // round 29: gait words for ataxia, and the spelled variants the stricter typo matcher (clinical-nlp.js) no longer reaches
     tachypnea: ["tachypneic", "tachypnoeic", "tachypnoea"], photophobia: ["photophobic"],
+    // round 32: urine output said falling in other words
+    oliguria: ["declining urine output", "falling urine output", "poor urine output", "diminished urine output", "urine output is low", "urine output was low"],
     ataxia: ["ataxic", "staggering gait", "wide-based gait", "broad-based gait", "truncal ataxia", "gait ataxia", "cannot walk heel to toe", "poor coordination", "impaired coordination"],
     // round 26
     persistentBacteremia: ["two of two blood culture", "2/2 blood culture", "both blood culture sets", "all blood culture sets", "3/3 blood culture", "three of three blood culture",

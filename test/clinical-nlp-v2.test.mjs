@@ -426,3 +426,20 @@ test("the typo matcher does not turn real words into findings", () => {
   assert.ok(p("fundoscopy shows bilateral disc swelling").includes("papilledema"));
   assert.ok(p("palpitaton for a week").includes("palpitations"));   // a real typo still reads
 });
+
+// round 32: a low haemoglobin and a high INR (as the lab import reads them); a head strike or a fall in words
+test("round 32 readings", () => {
+  const c32 = { valid: { hemoglobin: 1, inr: 1, headInjury: 1, oliguria: 1 }, labels: {}, numeric: { hemoglobin: 1, inr: 1 }, v2: true,
+    syn: { oliguria: ["declining urine output"] } };
+  const p = (t) => NLP.extract(t, c32).present;
+  assert.ok(p("Labs: hemoglobin 6.2 g/dL").includes("hemoglobin"));
+  assert.ok(p("Hb 82 g/L").includes("hemoglobin"));
+  assert.ok(!p("Hb 13.5").includes("hemoglobin"));
+  assert.ok(!p("last documented Hb 6 months ago was 12").includes("hemoglobin"));
+  assert.ok(p("INR 2.4").includes("inr"));
+  assert.ok(!p("INR 1.1").includes("inr"));
+  assert.ok(p("slipped in the bathroom and knocked his head on the sink").includes("headInjury"));
+  assert.ok(p("a minor fall backwards from standing height").includes("headInjury"));
+  assert.ok(!p("a fall in blood pressure overnight").includes("headInjury"));
+  assert.ok(p("declining urine output over 6 weeks").includes("oliguria"));
+});
