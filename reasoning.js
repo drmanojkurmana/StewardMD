@@ -3971,12 +3971,12 @@
     renderCompare(d);
   }
 
-  // smd_case_log (round 62, default OFF; "1" opts in): when a doctor selects a diagnosis, keep an anonymous record ON THIS
+  // smd_case_log (round 62; default ON since 2026-09-28, owner: "turn on all"; "0" opts out): when a doctor selects a diagnosis, keep an anonymous record ON THIS
   // DEVICE ONLY so a real validation set can grow: the finding keys tapped (true only, no values), the keys denied, the
   // chosen diagnosis, the engine's top five and gate, and the month. No note text, no numbers, no identifiers, nothing
   // sent anywhere; DX.caseLogExport() hands the doctor a JSON file to share if they choose.
   var CASE_LOG_KEY = "smd_case_log_v1", CASE_LOG_MAX = 2000;
-  function caseLogOn() { try { return localStorage.getItem("smd_case_log") === "1"; } catch (e) { return false; } }
+  function caseLogOn() { try { return localStorage.getItem("smd_case_log") !== "0"; } catch (e) { return false; } }
   function caseLogRead() { try { var a = JSON.parse(localStorage.getItem(CASE_LOG_KEY) || "[]"); return Array.isArray(a) ? a : []; } catch (e) { return []; } }
   function caseLogRecord(id) {
     if (!caseLogOn() || !id) return;

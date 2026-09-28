@@ -1,4 +1,4 @@
-/* StewardMD - opt-in on-device case log (smd_case_log, default OFF), real browser.
+/* StewardMD - on-device case log (smd_case_log, default ON since 2026-09-28; "0" opts out), real browser.
  *   off: selecting a diagnosis records nothing
  *   on : one record per selection, with the tapped finding keys (true only), denied keys, the chosen diagnosis, the
  *        engine's top five, the gate and the month; no note text, no numeric values, no identifiers
@@ -50,12 +50,13 @@ try {
   sessionId = (await call("Target.attachToTarget", { targetId, flatten: true })).result.sessionId;
   await call("Runtime.enable");
   ok(await load(BASE), "app + KB load");
-  await ev(`localStorage.removeItem("smd_case_log"); DX.caseLogClear(); DX.findingCatalog(); return 1`);
+  await ev(`localStorage.setItem("smd_case_log","0"); DX.caseLogClear(); DX.findingCatalog(); return 1`);
   const pick = `var S=DX._state; S.f={fever:true, rigors:true, travelEndemicArea:true, age:34}; S.neg={cough:true}; DX._selectDx("MALARIA"); return JSON.stringify(DX.caseLog());`;
-  ok(await ev(`return DX._caseLogOn()`) === false, "default · the case log is off");
+  ok(await ev(`return DX._caseLogOn()`) === false, "opt-out · \"0\" turns the case log off");
   ok(JSON.parse(await ev(pick)).length === 0, "off · selecting a diagnosis records nothing");
   ok(await load(BASE), "reload");
-  await ev(`localStorage.setItem("smd_case_log","1"); DX.findingCatalog(); return 1`);
+  await ev(`localStorage.removeItem("smd_case_log"); DX.findingCatalog(); return 1`);
+  ok(await ev(`return DX._caseLogOn()`) === true, "default · the case log is on");
   const log = JSON.parse(await ev(pick));
   ok(log.length === 1, `on  · one record per selection (${log.length})`);
   const r = log[0] || {};
