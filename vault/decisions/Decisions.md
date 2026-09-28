@@ -10660,3 +10660,5 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   `/billing/status` verdict as a signed-in account's state (pro-notice.js read it as signed out), the
   account-restore reseed now fires `smd:pro`, and CliniX asks the server once before showing a Pro lock,
   reopening the door if the answer is Pro.
+- **Owner, 2026-09-28:** CliniX lessons no longer show "Draft, pending clinician review"
+  (`clinix-screens.js sourceLine`); sources still shown, and "Clinician reviewed" only on approved content.

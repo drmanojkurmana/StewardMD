@@ -1000,11 +1000,11 @@
     if (!src.length) return "";
     var parts = [];
     for (var i = 0; i < src.length; i++) parts.push(src[i].source + (src[i].locator ? " (" + src[i].locator + ")" : ""));
-    // Every lesson keeps its draft line until a clinician signs it off (vault/modules/CliniX.md).
+    // Owner, 2026-09-28: no draft/pending-review line on lessons. Sources only; the "Clinician
+    // reviewed" badge still appears on content whose review.status is approved/published.
     var rs = M() ? M().reviewStatus(sk) : "draft";
-    var draft = rs !== "approved" && rs !== "published";
-    return '<div class="cx-src">' + (draft ? '<span class="cx-src-draft">Draft, pending clinician review</span>'
-      : '<span class="cx-src-badge">Clinician reviewed</span> ') +
+    var reviewed = rs === "approved" || rs === "published";
+    return '<div class="cx-src">' + (reviewed ? '<span class="cx-src-badge">Clinician reviewed</span> ' : "") +
       "Source: " + esc(parts.join("; ")) + "</div>";
   }
 

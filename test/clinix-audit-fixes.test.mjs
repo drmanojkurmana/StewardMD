@@ -76,7 +76,7 @@ test("licence gate: atlas photos are not rendered without a licence record", () 
 test("review gate: no screen builds a pathway or lesson with a hard-coded allowDraft:true", () => {
   const src = read("clinix-screens.js");
   assert.doesNotMatch(src, /allowDraft:\s*true/);
-  assert.match(src, /Draft, pending clinician review/, "every draft lesson keeps its draft line");
+  assert.doesNotMatch(src, /Draft, pending clinician review/, "owner 2026-09-28: no draft line on lessons");
 });
 
 test("review gate: draft content is never locked (owner 2026-09-27)", () => {
