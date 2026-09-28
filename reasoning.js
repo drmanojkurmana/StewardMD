@@ -2260,6 +2260,13 @@
     contaminatedFoodWaterExposure: ["well water", "unboiled water", "river water", "tap water outside", "unpasteuri", "raw milk", "pani puri", "golgappa"],
     ruralExposure: ["trekking", "trekked", "hiking in", "jungle", "in the forest", "forest area", "gardening", "bushes", "undergrowth"]
   };
+  // round 60 (2026-09-28): comorbidity shorthand in Indian notes ("RVD positive", "PLHA", "k/c/o CLD", "ALD", "on MHD").
+  // RVD only with a positive or case word: it is also right ventricular dysfunction.
+  var FT_SYN_ADD_V2_R60 = {
+    immunocompromised: ["retroviral disease", "retroviral positive", "rvd positive", "rvd reactive", "rvd +ve", "case of rvd", "plha"],
+    liverDisease: ["cld", "ald", "chronic liver disease", "alcoholic liver disease"],
+    dialysisDependent: ["on mhd", "on hd", "maintenance hd"]
+  };
   var FT_SYN_V2 = (function () {
     var o = {};
     Object.keys(FT_SYN).forEach(function (k) { var drop = FT_SYN_DROP_V2[k] || []; o[k] = FT_SYN[k].filter(function (x) { return drop.indexOf(x) < 0; }); });
@@ -2273,6 +2280,7 @@
     Object.keys(FT_SYN_ADD_V2_R48).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R48[k]); });
     Object.keys(FT_SYN_ADD_V2_R52).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R52[k]); });
     Object.keys(FT_SYN_ADD_V2_R53).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R53[k]); });
+    Object.keys(FT_SYN_ADD_V2_R60).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R60[k]); });
     return o;
   })();
   // the extraction context: classic exactly as before; v2 adds the cleaned table and the numeric-field list
