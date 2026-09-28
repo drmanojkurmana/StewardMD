@@ -136,3 +136,6 @@ jobs:
         run: CHROME="$(command -v google-chrome || command -v chromium)" CHROME_FLAGS="--disable-dev-shm-usage" node test/run-clinix-ui.mjs
       - name: CliniX case/sandbox harness
         run: CHROME="$(command -v google-chrome || command -v chromium)" CHROME_FLAGS="--disable-dev-shm-usage" node test/run-clinix-case-ui.mjs
+      # Clinical Bulletins (signed practice updates on the disease reader + Review Desk signing tab).
+      - name: Clinical Bulletins UI harness
+        run: CHROME="$(command -v google-chrome || command -v chromium)" CHROME_FLAGS="--disable-dev-shm-usage" node test/run-bulletins-ui.mjs

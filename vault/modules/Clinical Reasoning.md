@@ -85,6 +85,39 @@ added) and the numeric-field list. Off: 0 differences across 1,660 case-paths.
   durations) and postfix "negative" (`negAfter`); "N weeks ago" needs an onset word. Precision train
   56 -> 60%, dev 52 -> 56%. Owner accepted `abxSens` 139 -> 138 on the text path (one test-split case,
   aggregate only) for the v2 configs. Extraction audit: dump `DX.extractText` per case, score vs gold keys.
+- Rounds 8 and 10 (2026-09-27): every mention of a finding is read (`alts` in `extract`; a clean current one
+  wins), course idioms (`NEG_IDIOM_V2`), recent time (`RECENT_V2`), tests (`TEST_AFTER_V2`), plans (`COND_V2`),
+  stopped drugs and settled symptoms (temporality "resolved"), derived cough >= 2 weeks, bilateral crackles,
+  exertional chest pain, hospital day >= 2. Phrasing tables `FT_SYN_ADD_V2_R8` / `_R10` in `reasoning.js`.
+- Round 9 (2026-09-27): gate `ni_lead_afebrile` trusts the v3 order when the v2 extractor is on.
+- Round 11 (2026-09-27): `FT_SYN_ADD_V2_R11` phrasing for label-only catalog findings; derived severe
+  abdominal / loin pain and a named swollen joint. Round 12: five `RANK_V3_R2` discriminators (hepatitis,
+  aseptic meningitis, nephrotic, AKI, thyroid storm). To find label-only keys, dump `nlpCtx()` (valid, syn).
+- Round 13 (2026-09-27): list negation allows a subject ("He denies X, Y or Z"); "rather than X" is absent; gate
+  `ni_explains_fever` (`FEVER_NI` list; no cancers, no gout).
+- Rounds 26 to 29 (2026-09-28): "non-" prefix negates; pressure-type chest pain, girdle pain, CURB-65 >= 3 with
+  a pneumonia chest (`severeCriteria`), swollen tender calf, overdose scene; negated lists may start mid-sentence
+  behind a clause lead (`NEG_LIST_LEAD_V2`; a bare "no X" inside a list does not negate what follows); typo
+  matcher: one edit, same first letter, `FUZZY_STOP_V2`. Mention guards live in `skipMention` (read for the first
+  AND every later mention; a guard only in `consider` let a later mention bypass it and crashed the reader when
+  the mention list did not exist yet). Gotcha: "residual" X is still present; "X-year-old" put "old" before the
+  next words, so never use "old" as a past-tense cue.
+- Rounds 31 to 39 (2026-09-28): numeric `hemoglobin` / `inr` findings from stated values; `skipMention` guards
+  (palmar erythema, negated disc swelling, frothy urine, intimal flap, symmetric brisk reflexes); per-item "no" rule in
+  `negList`. Debug tools worth rebuilding: dump `nlpCtx()` from the page to JSON and call `SMD_NLP.extract` in Node;
+  group non-gold readings by source text. Gotcha: phrase tables are object literals, a repeated key silently keeps only
+  the last (`test/syn-tables.test.mjs` guards it).
+- Rounds 40 to 48 (2026-09-28): invariance families (shorthand, bullets, semicolons, age, lab abbreviations) and an
+  everyday-wording recall probe (`test/nlp-everyday-phrases.json`, run as `probe.everyday` / `probe.everydayNeg`).
+  Gotcha: a catalog finding WITHOUT synonyms is matched by its label only when a space follows it, so "Sore throat."
+  at a sentence end read nothing; give every finding its own words in a synonym table (`FT_SYN_ADD_V2_R47`, `_R48`).
+  Two keys for one finding (pleuriticPain / pleuriticChestPain, splenomegaly / hepatosplenomegaly) double count in the
+  non-infective KB when both are read. To attribute an audit change to one synonym, a worktree-only localStorage switch
+  that drops table entries per key or per value, then the audit per switch (unseen sets as counts only).
+- Rounds 49 to 55 (2026-09-28): `safetyNetV2` (advice text is hypothetical to the end of its sentence), `presentDurV2`,
+  whole-number BP, a named-antibiotic-course compound, pregnancy and duration formats. Gotcha: an organ-system tag comes
+  from the field GROUP a key sits in (`GROUP_TAG`), so timing or exposure keys filed under "Respiratory" count toward a
+  lung-dominant picture unless `EXTRA_TAG` / `FSYS_GEN_V2` says otherwise (`dominantSystems` gives +6 / -12).
 
 ## Differential ordering v3 (`smd_rank_v3`, default ON since 2026-09-27; `"0"` opts out)
 
@@ -205,3 +238,17 @@ skipped. Applied under `#dxOverlay.dx-simple` in `reasoning-workspace.css`:
 - Not done: the app font is Inter (the skill discourages it as a default); changing it is app-wide.
 - Also "Fever with urinary symptoms" is no longer suggested on top of fever in the standard view.
 - `test/run-dx-simple.mjs` asserts the accent, labels, pills, bars, watermark, separators and dark.
+
+## Test-result findings (`smd_kb_tests`, round 72, default ON; `"0"` or `?kbtests=0` opts out)
+- 25 tappable results in a "Test results" group (listed under Systemic): CSF pattern (bacterial, viral, TB, normal),
+  malaria smear/RDT positive or negative, dengue NS1/IgM, scrub typhus IgM, leptospira IgM, typhoid blood culture,
+  sputum AFB/CBNAAT, imaging (pleural effusion, hydronephrosis/stone, inflamed gallbladder, CT subarachnoid blood,
+  CT intracerebral bleed, CT normal), troponin, ECG ST elevation, BNP, D-dimer normal, lipase, urine pus cells, TSH,
+  echo vegetation.
+- Code: `KB_TEST_FIELDS`, `KB_TESTS` (result -> diagnosis effect), `KB_TEST_ALT` (a positive diagnostic test also
+  meets an infection's criteria), `KB_TEST_ORDER` (order-only, with rank v3), `ensureKbTests()` patches
+  `KB_CORE.diseases` once (called in `differential()` after `ensureKbV2()`), `KB_TEST_VH` joins `FW_VERYHIGH`.
+- Gotcha: the findings only exist with the flag on; with no result tapped the output is identical to the flag off
+  (browser test `test/run-kb-tests.mjs` checks this). The typed-note reader does NOT read test results yet (owner
+  asked to leave typed notes alone).
+- Measured on `test/dx-heldout-4.json` (independent writers who could tap test results), audit set `heldout4`.

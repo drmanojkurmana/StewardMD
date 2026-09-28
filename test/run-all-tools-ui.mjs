@@ -70,9 +70,32 @@ try {
   await ev(`(()=>{const q=document.getElementById('hvAtQ');q.value='zzzz';q.dispatchEvent(new Event('input',{bubbles:true}))})();1`);
   ok(await ev(`!document.querySelector('#hvSheet .hv-at-none').hidden`), 'no match says so');
   await ev(`(()=>{const q=document.getElementById('hvAtQ');q.value='';q.dispatchEvent(new Event('input',{bubbles:true}))})();1`);
+  // Owner 2026-09-28: "use their original icons here". Each row carries the icon from its Home tile
+  // (brand mark / drawn icon / glyph), in the Home sphere; Ophthalmos printed the word EYE before.
+  const icons = await ev(`(()=>{const sig=el=>{if(!el)return null;const i=el.querySelector('img');if(i)return 'img:'+i.getAttribute('src');const s=el.querySelector('svg');if(s)return 'svg:'+s.getAttribute('class');const g=el.querySelector('.rds-icon');return g?'glyph:'+g.textContent.trim():null};
+    const home={};document.querySelectorAll('#rnavToolsGrid .rnav-tile:not(.addtool)').forEach(t=>home[t.dataset.act]=sig(t.querySelector('.rnav-badge')));
+    return [...document.querySelectorAll('#hvSheet .hv-at-row')].map(r=>{const b=r.querySelector('.hv-tbadge');const rc=b&&b.getBoundingClientRect();return {act:r.dataset.at,list:sig(b),home:home[r.dataset.at],round:!!b&&getComputedStyle(b).borderRadius==='50%',w:rc&&Math.round(rc.width)}})})()`);
+  ok(icons.every((x) => x.list && x.round && x.w === 40), 'every row has its icon in a 40px round badge');
+  const onHome = icons.filter((x) => x.home);
+  const diff = onHome.filter((x) => x.home !== x.list);
+  ok(onHome.length >= 3 && diff.length === 0, `each row's icon is the same as its Home tile (${onHome.length} compared)` + (diff.length ? ' ' + JSON.stringify(diff) : ''));
+  const oph = icons.find((x) => x.act === 'ophthalmos');
+  ok(!oph || /svg:ai-anim ai-ox/.test(oph.list), 'Ophthalmos shows its eye mark: ' + JSON.stringify(oph));
+  ok(!/\bEYE\b/.test(await ev(`document.getElementById('hvSheet').innerText`)), 'no stray "EYE" text in the list');
+  const brands = icons.filter((x) => /^img:\/(clinix|surgx|maitri)/.test(x.list || '')).map((x) => x.act);
+  ok(brands.length >= 2, 'brand logos (CliniX, SURGX, MAiTRI) are used, not generic symbols: ' + brands.join(','));
+  // Solid parts (tree nodes, pupil) are drawn by class; without the fill they vanish from the list.
+  const fills = await ev(`[...document.querySelectorAll('#hvSheet .hv-tbadge .n, #hvSheet .hv-tbadge .pupil')].map(e=>getComputedStyle(e).fill)`);
+  ok(fills.length > 0 && fills.every((f) => f !== 'none'), 'solid parts of the drawn icons are filled: ' + fills.length);
+  const loaded = await ev(`[...document.querySelectorAll('#hvSheet .hv-tbadge img')].every(i=>i.complete&&i.naturalWidth>0)`);
+  ok(loaded, 'the logo images load');
   await shot('alltools');
+  await ev(`document.querySelector('#hvSheet .hv-at-row[data-at="ophthalmos"]')?.scrollIntoView({block:'center'});1`);
+  await shot('alltools-2');
   ok(!/—/.test(await ev(`document.getElementById('hvSheet').innerText`)), 'no em dash');
   await ev(`document.querySelector('#hvSheet [data-at-cust]').click();1`);
   ok(await until(`/Customize tools/.test(document.querySelector('#hvSheet').innerText)&&!!document.querySelector('#hvSheet .hv-tool-tog')`), 'Customize inside the sheet opens the reorder sheet');
+  ok(await ev(`[...document.querySelectorAll('#hvSheet .hv-tool-tog')].every(r=>!!r.querySelector('.hv-tbadge'))`), 'Customize tools shows the same icons');
+  await shot('customize');
 } catch (e) { console.log('FAIL', e.message); failures++; } finally { try { ws.close(); } catch {} chrome.kill(); server.close(); }
 console.log(failures ? failures + ' failed' : 'all passed'); process.exit(failures ? 1 : 0);

@@ -25,7 +25,7 @@
 .oph-article ul { margin: 0 0 14px; padding: 0 0 0 20px; }
 .oph-article li { margin: 6px 0; padding-left: 2px; }
 .oph-article li::marker { color: var(--op-mut); }
-.oph-article strong { font-weight: 650; color: #fff; }
+.oph-article strong { font-weight: 650; color: var(--op-text); }
 .oph-article .oph-npearl { background: var(--op-s1); border-radius: 14px; padding: 14px 16px; margin: 20px 0; }
 .oph-npearl > b { font-weight: 700; }
 
@@ -57,11 +57,12 @@
 
 /* ---- enlarged image: the clinic stage over the note ---- */
 /* Opacity only: a transform here would shrink the stage the zoom model measures on open. */
-.oph-zoom { position: absolute; inset: 0; z-index: 2; background: #000; display: flex; flex-direction: column;
+.oph-zoom { position: absolute; inset: 0; z-index: 2; background: var(--op-bg); display: flex; flex-direction: column;
   transition: opacity 200ms var(--op-ease); }
 .oph-zoom.pre { opacity: 0; }
 .oph-zoom.out { transition-duration: 150ms; }
 .oph-zoom .oph-stage { flex: 1 1 auto; min-height: 0; }
+.oph-zoom .oph-stage.ln-zdiag { background: #fff; } /* a line diagram is drawn for white; photos keep the black stage */
 .oph-zcap { flex: 0 0 auto; margin: 0; padding: 10px 16px calc(14px + env(safe-area-inset-bottom, 0px)); font-size: 14px; line-height: 1.45;
   color: var(--op-mut); max-height: 30vh; overflow-y: auto; overscroll-behavior: contain; }
 .oph-draft { z-index: 3; }

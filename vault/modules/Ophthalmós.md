@@ -151,3 +151,20 @@ bumped to `?v=oph8`.
   language choice. No new i18n strings (reuses the MBBS/Resident and "{d} of {n} done" chrome strings).
 - Module repo: 130 unit tests, 42 headless UI steps (one new step covers default state, toggling, keyboard
   activation, persistence and Hindi). `test/ophthalmos-sync.json` regenerated at module commit `0850e21`.
+
+## White theme (oph10, 2026-09-28)
+Owner asked for a white background, no white-on-white text, and every diagram to work on it. Edited here
+directly (like the 2026-09-28 open-content edit) and `test/ophthalmos-sync.json` hashes regenerated, so
+**port the same change to the module repo** before the next sync or it will be overwritten.
+- `--op-*` tokens in `ophthalmos.css` are now light (`--op-bg #fff`, text `#15171c`, muted `#575c66`; every
+  text token is at least 4.5:1 on `--op-bg`/`--op-s1`). `color-scheme: light`.
+- **Photos keep a black plate** (`.oph-stage`, `.ln-banner`, `.ln-pic-b`, `.ln-mpic`, `.ln-anim`, `.oph-fig-b`,
+  explore tours/photos): clinical images are drawn/read on black. Simulator canvases (retinoscopy, neuro) paint
+  their own black stage.
+- **Line diagrams sit on white:** `.diagram` / `.ln-zdiag` containers are white; the 73 `ophthalmos/learn/diagrams/*.svg`
+  were recoloured (light strokes to dark ink, faint white washes to faint ink washes, cream cells and beams darkened).
+  Media illustrations/animations were drawn with their own backgrounds and are unchanged. Explore ray, pathway and
+  field models recoloured in `ophthalmos-explore.css`.
+- Status bar: `ophthalmos.js` sets dark status-bar icons on open and hands back to `SMD_THEME_REVEAL.syncSystemUI()`
+  on close (a dark-mode host would otherwise show a white clock on the white overlay).
+- Cache token `?v=oph10`.

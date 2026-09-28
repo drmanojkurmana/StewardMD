@@ -5,6 +5,10 @@
  *   gold    - kb/validation/cases.json + cases/*.json (engine keys + chart narrative)
  *   heldout - test/dx-heldout.json (doctor-style text only; independent author)
  *   heldout2 - test/dx-heldout-2.json (same, written later; only ever read in aggregate)
+ *   heldout3 - test/dx-heldout-3.json (537 cases over all 153 diagnoses, written 2026-09-28 by independent writers
+ *              from clinical knowledge, with no access to the engine or the other sets; a note AND the tapped
+ *              findings, so every path is measured). Split by diagnosis: "tune" (may be studied case by case)
+ *              and "sealed" (only ever counted, never inspected or used to tune)
  * Three input paths per case:
  *   cur - curated engine keys -> SMD_REASON.assess (what a doctor tapping findings gets)
  *   txt - the full chart as text (complaint, history, exam, vitals, labs, imaging, micro)
@@ -48,7 +52,8 @@ const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/M
 const JOB = process.env.CLAUDE_JOB_DIR || "/tmp";
 const FLAGS = (process.env.FLAGS || "").split(",").map((s) => s.trim()).filter(Boolean).map((s) => s.split("="));
 const CONFIG = FLAGS.length ? FLAGS.map((f) => f.join("=")).sort().join(",") : "default";
-const SETS = (process.env.SETS || "gold,heldout,heldout2").split(",");
+const SETS = (process.env.SETS || "gold,heldout,heldout2,heldout3,heldout4").split(",");
+const ADDNEW = process.argv.includes("--add-new-floors");   // record floors only for metrics that have none yet
 const CHECK = process.argv.includes("--check"), WRITE = process.argv.includes("--write-floors"), MISSES = process.argv.includes("--misses");
 const FLOORS = join(ROOT, "kb", "validation", "dx-floors.json");
 
@@ -68,6 +73,9 @@ if (SETS.includes("heldout")) JSON.parse(readFileSync(join(ROOT, "test", "dx-hel
 // heldout2: written after Phase 2 began, never inspected case by case (the first held-out set's misses were
 // printed in the audit and informed a few Phase-2 phrases, so it is no longer fully independent)
 if (SETS.includes("heldout2")) JSON.parse(readFileSync(join(ROOT, "test", "dx-heldout-2.json"), "utf8")).forEach((c) => cases.push({ set: "heldout2", c }));
+if (SETS.includes("heldout3")) JSON.parse(readFileSync(join(ROOT, "test", "dx-heldout-3.json"), "utf8")).forEach((c) => cases.push({ set: "heldout3", c }));
+// heldout4 (round 72): independent writers, tapped findings that may include test results (smd_kb_tests); tune / sealed
+if (SETS.includes("heldout4") && existsSync(join(ROOT, "test", "dx-heldout-4.json"))) JSON.parse(readFileSync(join(ROOT, "test", "dx-heldout-4.json"), "utf8")).forEach((c) => cases.push({ set: "heldout4", c }));
 
 // start the static server if nothing answers at BASE (same pattern as run-reason-api.mjs)
 let serveProc = null;
@@ -123,7 +131,7 @@ try {
   if (!(await ready())) throw new Error("engine did not load at " + BASE);
   // flags are read by the engine at call time from localStorage; set them, then reload so any
   // load-time reader sees them too
-  await ev(`${lit(FLAGS)}.forEach(function(kv){localStorage.setItem(kv[0],kv[1]);}); ["smd_gate_v2","smd_nlp_v2","smd_rank_v3","smd_kb_v2","smd_calib","smd_prior_v1"].forEach(function(k){ if(!${lit(FLAGS.map((f) => f[0]))}.includes(k)) localStorage.removeItem(k); }); localStorage.removeItem("smd_prior_counts"); return 1`);
+  await ev(`${lit(FLAGS)}.forEach(function(kv){localStorage.setItem(kv[0],kv[1]);}); ["smd_gate_v2","smd_nlp_v2","smd_rank_v3","smd_kb_v2","smd_calib","smd_prior_v1","smd_kb_tests"].forEach(function(k){ if(!${lit(FLAGS.map((f) => f[0]))}.includes(k)) localStorage.removeItem(k); }); localStorage.removeItem("smd_prior_counts"); return 1`);
   await call("Page.navigate", { url: BASE });
   if (!(await ready())) throw new Error("engine did not reload");
   await ev(`DX.findingCatalog(); return 1`);
@@ -137,7 +145,7 @@ try {
       function ok(x){ return !!x && (acc.indexOf(String(x.id).toLowerCase())>=0 || acc.some(function(a){return a && String(x.name||'').toLowerCase().indexOf(a)>=0;})); }
       function run(f){ var ab=negOf(f); var a=ab?SMD_REASON.assess(f,{absent:ab}):SMD_REASON.assess(f); var all=[].concat(a.infectious||[],a.nonInfectious||[]).sort(function(x,y){return ((y.rank!=null?y.rank:y.confidence)-(x.rank!=null?x.rank:x.confidence))||(y.confidence-x.confidence);});
         var pos=0; for(var i=0;i<all.length;i++){ if(ok(all[i])){pos=i+1;break;} }
-        return { gate:a.gate.cls, ab:!!a.gate.ab, top1:all[0]?all[0].name:null, conf:all[0]?all[0].confidence:0, pos:pos, n:Object.keys(f).length, top3:all.slice(0,3).map(function(x){return x.name+'('+x.confidence+')';}) }; }
+        return { gate:a.gate.cls, ab:!!a.gate.ab, top1:all[0]?all[0].name:null, conf:all[0]?all[0].confidence:0, margin:all[1]?all[0].confidence-all[1].confidence:100, pos:pos, n:Object.keys(f).length, top3:all.slice(0,3).map(function(x){return x.name+'('+x.confidence+')';}) }; }
       // the text path keeps the note's explicit negatives when the engine can use them (smd_rank_v3), as OPD Ask MaiK does
       var useNeg=!!(DX._rankV3&&DX._rankV3()&&DX.extractText), NEG={};
       function fromText(t){ var ks, ab=[]; if(useNeg){ var e=DX.extractText(t); ks=e.present; ab=e.absent; } else ks=DX.findingsFromText(t)||[]; var f={}; ks.forEach(function(k){f[k]=true;}); NEG[JSON.stringify(Object.keys(f))]=ab; return f; }
@@ -154,9 +162,10 @@ try {
       var lead=String(c.acc[0]||'').toUpperCase(); var asp=(window.ASP_DATA||{})[lead];
       return JSON.stringify({cur:cur, txt:txt, pc:pc, extractRecall:rec, extractPrecision:prec, aspNeed: asp? asp.needAbx : null});`);
     const j = r && r[0] === "{" ? JSON.parse(r) : { err: String(r) };
+    if (j.__err) j.err = j.__err;   // the page threw (a note-reader crash): count it, never drop it silently
     const st = exp.stewardship || {};
     Object.assign(j, {
-      id: c.id, set, split: splits[c.id] || "unassigned", expect: (exp.acceptableIds || [])[0], dx: exp.diagnosis,
+      id: c.id, set, split: c.split || splits[c.id] || "unassigned", expect: (exp.acceptableIds || [])[0], dx: exp.diagnosis,
       abx: typeof c.abx === "boolean" ? c.abx : !!(st.antibiotics && st.antibiotics.length),
     });
     j.critical = CRITICAL.includes(String(j.expect || "").toUpperCase());
@@ -195,12 +204,26 @@ try {
       // smd_calib: "not enough information" should land on the cases the engine would get wrong
       const I = S.filter((x) => x[path].gate === "insufficient"), E = S.filter((x) => x[path].gate !== "insufficient");
       if (I.length) m.insufficient = { n: I.length, top1: I.filter((x) => x[path].pos === 1).length, restTop1: E.filter((x) => x[path].pos === 1).length, restN: E.length };
+      // round 20 (idea from Laya: calibration and abstention): is the lead's score honest? ECE and Brier of the top-1
+      // score read as a probability, and top-1 accuracy for a clear lead (margin >= 15 over the runner-up, the
+      // threshold chosen on train) against a close call. Informational: printed, not a floor.
+      const Q = S.filter((x) => x[path].pos != null && x[path].conf != null);
+      if (Q.length) {
+        let ece = 0, brier = 0;
+        [[0, 50], [50, 70], [70, 85], [85, 95], [95, 101]].forEach(([lo, hi]) => { const b = Q.filter((x) => x[path].conf >= lo && x[path].conf < hi); if (!b.length) return;
+          ece += b.length / Q.length * Math.abs(b.filter((x) => x[path].pos === 1).length / b.length - b.reduce((a, x) => a + x[path].conf, 0) / b.length / 100); });
+        Q.forEach((x) => { brier += (x[path].conf / 100 - (x[path].pos === 1 ? 1 : 0)) ** 2; });
+        const clear = Q.filter((x) => x[path].margin >= 15), close = Q.filter((x) => !(x[path].margin >= 15));
+        m.honesty = { ece: Math.round(1000 * ece) / 10, brier: Math.round(1000 * brier / Q.length) / 1000, clearN: clear.length, clearTop1: clear.filter((x) => x[path].pos === 1).length,
+          closeN: close.length, closeTop1: close.filter((x) => x[path].pos === 1).length, closeTop3: close.filter((x) => x[path].pos && x[path].pos <= 3).length };
+      }
       metrics[set + "." + path] = m;
       const sp = (k) => m[k] ? `${k} ${Math.round(100 * m[k].top1 / m[k].n)}/${Math.round(100 * m[k].top3 / m[k].n)}` : "";
       console.log(`${(set + " " + { cur: "keys", txt: "text", pc: "complaint" }[path]).padEnd(18)} top1 ${pct(m.all.top1, m.all.n)} top3 ${pct(m.all.top3, m.all.n)} absent ${m.absent}` +
         `  [top1/top3 % ${["train", "dev", "test"].map(sp).filter(Boolean).join(" · ")}]`);
       console.log(`${"".padEnd(18)} gate: abx when indicated ${pct(m.abxSens, m.abxN)} · when not ${pct(m.overcall, m.overN)} · critical ${pct(m.critical, m.critN)} · viral/self-limited ${pct(m.noAbxInf, m.noAbxN)} · malaria as specific therapy ${pct(m.specific, m.specN)}` +
         (m.opdTop1 != null ? ` · OPD rerank top1 ${pct(m.opdTop1, m.all.n)}` : ""));
+      if (m.honesty) { const h = m.honesty; console.log(`${"".padEnd(18)} score honesty: clear lead ${pct(h.clearTop1, h.clearN)} right · close call ${pct(h.closeTop1, h.closeN)} right (top-3 ${pct(h.closeTop3, h.closeN)}) · ECE ${h.ece} · Brier ${h.brier}`); }
       if (m.insufficient) console.log(`${"".padEnd(18)} not enough information: ${m.insufficient.n} cases (top1 among them ${pct(m.insufficient.top1, m.insufficient.n)}; top1 on the rest ${pct(m.insufficient.restTop1, m.insufficient.restN)})`);
     }
   }
@@ -231,12 +254,19 @@ try {
     ["absent", "abxSens", "overcall", "critical", "noAbxInf", "specific", "opdTop1"].forEach((q) => { if (m[q] != null) flat[`${k}.${q}`] = m[q]; });
   }
   const floors = existsSync(FLOORS) ? JSON.parse(readFileSync(FLOORS, "utf8")) : {};
+  if (ADDNEW && !WRITE && floors[CONFIG]) {
+    const f0 = floors[CONFIG] || (floors[CONFIG] = {}); let n = 0;
+    for (const [k, v] of Object.entries(flat)) if (!(k in f0)) { f0[k] = v; n++; }
+    if (n) { writeFileSync(FLOORS, JSON.stringify(floors, null, 2) + "\n"); console.log(`new floors recorded for ${CONFIG}: ${n}`); }
+  }
   if (WRITE) {
     floors[CONFIG] = flat;
     writeFileSync(FLOORS, JSON.stringify(floors, null, 1) + "\n");
     console.log(`floors written for ${CONFIG} -> ${FLOORS}`);
   }
   if (CHECK) {
+    const errs = rows.filter((r) => r.err);
+    if (errs.length) { console.log(`ERRORS: ${errs.length} case(s) threw in the page (first: ${errs[0].id}: ${String(errs[0].err).slice(0, 120)})`); exitCode = 1; }
     const f = floors[CONFIG];
     if (!f) { console.log(`no floors recorded for config ${CONFIG}`); exitCode = 1; }
     else {

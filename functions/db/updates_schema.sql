@@ -116,3 +116,76 @@ CREATE TABLE IF NOT EXISTS digests (
   summary_json TEXT DEFAULT '',
   created_ts  INTEGER NOT NULL DEFAULT 0
 );
+
+-- ---- Clinical Bulletins (physician-signed, disease reader). Kept identical to migrate_bulletins.sql. ----
+-- BEGIN bulletins
+CREATE TABLE IF NOT EXISTS bulletins (
+  id               TEXT PRIMARY KEY,              -- "b<base36ts><rand>"
+  update_id        TEXT NOT NULL,                 -- updates.id this bulletin was written from
+  source_hash      TEXT NOT NULL DEFAULT '',      -- updates.content_hash when the draft was last saved
+  status           TEXT NOT NULL DEFAULT 'draft', -- draft | signed | retracted
+  kind             TEXT NOT NULL,                 -- safety | approval | guideline | trial
+  headline         TEXT NOT NULL,
+  what_changed     TEXT NOT NULL,
+  applies_to       TEXT NOT NULL DEFAULT '',
+  evidence_type    TEXT NOT NULL,                 -- regulatory_approval | regulatory_safety | guideline | rct | meta_analysis
+  evidence_note    TEXT NOT NULL DEFAULT '',
+  regulator        TEXT NOT NULL DEFAULT '',
+  india_status     TEXT NOT NULL,                 -- cdsco_approved | not_approved_india | not_applicable | unknown
+  source_label     TEXT NOT NULL,
+  source_url       TEXT NOT NULL,                 -- https only
+  source_date      TEXT NOT NULL,                 -- YYYY-MM-DD of the source
+  doi              TEXT NOT NULL DEFAULT '',
+  pmid             TEXT NOT NULL DEFAULT '',
+  review_months    INTEGER NOT NULL,              -- 6 | 12 | 24, part of the signed content
+  review_due_ts    INTEGER NOT NULL DEFAULT 0,    -- set at signing: signed_ts + review_months
+  body_hash        TEXT NOT NULL,                 -- sha256 of the canonical signed fields
+  signed_hash      TEXT NOT NULL DEFAULT '',      -- body_hash at the moment of signing
+  signed_uid       TEXT NOT NULL DEFAULT '',
+  signed_name      TEXT NOT NULL DEFAULT '',
+  signed_reg       TEXT NOT NULL DEFAULT '',
+  signed_council   TEXT NOT NULL DEFAULT '',
+  signed_ts        INTEGER NOT NULL DEFAULT 0,
+  retract_reason   TEXT NOT NULL DEFAULT '',
+  created_uid      TEXT NOT NULL DEFAULT '',
+  created_ts       INTEGER NOT NULL DEFAULT 0,
+  updated_ts       INTEGER NOT NULL DEFAULT 0
+);
+CREATE INDEX IF NOT EXISTS idx_bulletins_update ON bulletins(update_id);
+CREATE INDEX IF NOT EXISTS idx_bulletins_status ON bulletins(status, updated_ts DESC);
+
+CREATE TABLE IF NOT EXISTS bulletin_diseases (
+  bulletin_id TEXT NOT NULL,
+  disease_id  TEXT NOT NULL,                      -- key of KB_ENRICHMENT.byId, case preserved
+  PRIMARY KEY (bulletin_id, disease_id)
+);
+CREATE INDEX IF NOT EXISTS idx_bd_disease ON bulletin_diseases(disease_id);
+
+CREATE TABLE IF NOT EXISTS bulletin_audit (       -- append-only: nothing in the code updates or deletes it
+  id          TEXT PRIMARY KEY,
+  bulletin_id TEXT NOT NULL,                      -- '' for signer and kill-switch events
+  ts          INTEGER NOT NULL,
+  actor_uid   TEXT NOT NULL DEFAULT '',
+  action      TEXT NOT NULL,                      -- draft | edit | sign | retract | source_deleted | signer_add | signer_remove | kill_on | kill_off
+  body_hash   TEXT NOT NULL DEFAULT '',
+  detail      TEXT NOT NULL DEFAULT ''
+);
+CREATE INDEX IF NOT EXISTS idx_audit_bulletin ON bulletin_audit(bulletin_id, ts DESC);
+
+CREATE TABLE IF NOT EXISTS bulletin_signers (     -- who may sign; identity confirmed by an owner
+  uid         TEXT PRIMARY KEY,
+  name        TEXT NOT NULL,
+  reg_no      TEXT NOT NULL,
+  council     TEXT NOT NULL,
+  active      INTEGER NOT NULL DEFAULT 1,
+  added_by    TEXT NOT NULL,
+  added_ts    INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS bulletin_settings (    -- runtime switches that must act without a redeploy
+  key         TEXT PRIMARY KEY,                   -- 'enabled': missing or '1' = on, '0' = kill switch
+  value       TEXT NOT NULL,
+  updated_by  TEXT NOT NULL DEFAULT '',
+  updated_ts  INTEGER NOT NULL DEFAULT 0
+);
+-- END bulletins

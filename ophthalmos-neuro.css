@@ -1,5 +1,5 @@
 /* Ophthalmós neuro-ophthalmology simulator and pupil lab (docs/DESIGN.md, Simulators).
-   Same world as the encounter: black stage on top, panel below, stage left on tablet landscape.
+   Same world as the encounter: black stage (the simulated patient) on top, panel below, stage left on tablet landscape.
    Uses the --op-* tokens that .oph-overlay defines. */
 .nr-screen { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
 .nr-stage { position: relative; flex: 0 0 auto; height: clamp(210px, 34vh, 300px); background: #000; overflow: hidden;
@@ -31,7 +31,7 @@
 .nr-field label, .nr-lab { font-size: 13px; font-weight: 550; color: var(--op-mut); }
 .nr-field select, .nr-sel {
   -webkit-appearance: none; appearance: none; width: 100%; min-height: 48px; border-radius: 12px; border: 1px solid var(--op-line);
-  background: var(--op-s1) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a8a8b0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center / 16px;
+  background: var(--op-s1) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23575c66' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center / 16px;
   color: var(--op-text); font: inherit; font-size: 15px; padding: 0 40px 0 14px; text-overflow: ellipsis; }
 .nr-sel { min-height: 44px; font-size: 14px; }
 .nr-panel option, .nr-panel optgroup { background-color: var(--op-s1); color: var(--op-text); }
@@ -56,7 +56,7 @@
   transition: transform 140ms var(--op-ease), background-color 160ms ease, border-color 160ms ease; }
 .nr-tog .smd-ico { width: 16px; height: 16px; }
 .nr-tog .nr-tick { display: none; color: var(--op-acc); }
-.nr-tog[aria-pressed="true"] { border-color: var(--op-acc); background: rgba(59, 157, 255, .14); }
+.nr-tog[aria-pressed="true"] { border-color: var(--op-acc); background: rgba(10, 102, 208, .1); }
 .nr-tog[aria-pressed="true"] .nr-tick { display: inline-flex; }
 .nr-pad button:active, .nr-tog:active, .nr-panel .oph-seg button:active { transform: scale(0.97); }
 
@@ -82,8 +82,8 @@
 .nr-hessf { margin: 0; }
 .nr-hessf svg { display: block; width: 100%; height: auto; background: var(--op-s1); border-radius: 12px; }
 .nr-hessf .g line { stroke: var(--op-line); stroke-width: .6; }
-.nr-hessf .i rect { fill: none; stroke: #6a6a72; stroke-width: .8; stroke-dasharray: 3 3; }
-.nr-hessf .f polygon { fill: rgba(59, 157, 255, .1); stroke: var(--op-acc); stroke-width: 1.4; stroke-linejoin: round; }
+.nr-hessf .i rect { fill: none; stroke: #8a8f99; stroke-width: .8; stroke-dasharray: 3 3; }
+.nr-hessf .f polygon { fill: rgba(10, 102, 208, .1); stroke: var(--op-acc); stroke-width: 1.4; stroke-linejoin: round; }
 .nr-hessf .f circle { fill: var(--op-acc); }
 .nr-hessf figcaption { margin-top: 6px; font-size: 13px; font-weight: 600; text-align: center; }
 
@@ -107,7 +107,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .nr-hint { display: block; }
-  .nr-pad button:not([aria-pressed="true"]):hover, .nr-tog:not([aria-pressed="true"]):hover { background: var(--op-s2); border-color: #4a4a52; }
+  .nr-pad button:not([aria-pressed="true"]):hover, .nr-tog:not([aria-pressed="true"]):hover { background: var(--op-s2); border-color: #aeb3bc; }
   .nr-panel .oph-seg button:not([aria-pressed="true"]):hover { color: var(--op-text); background: var(--op-s2); }
 }
 
