@@ -410,3 +410,19 @@ test("a finding whose first mention is skipped still reads a later mention", () 
   const r = NLP.extract("fever unresponsive to paracetamol; later found unresponsive at home", c);
   assert.ok(r.present.includes("alteredSensorium"));
 });
+
+// round 29: the typo matcher takes one edit, the same first letter, and never a real word
+test("the typo matcher does not turn real words into findings", () => {
+  const c29 = { valid: { nauseaVomiting: 1, jaundice: 1, palpitations: 1, focalNeuroDeficit: 1, papilledema: 1, dysphagia: 1 }, labels: {}, numeric: {}, v2: true,
+    syn: { nauseaVomiting: ["retching"], jaundice: ["yellowing"], palpitations: ["palpitation"], focalNeuroDeficit: ["slurred"], papilledema: ["fundoscopy", "papilloedema"],
+      dysphagia: ["dysphagia"] } };
+  const p = (t) => NLP.extract(t, c29).present;
+  assert.deepEqual(p("drenching night sweats"), []);
+  assert.deepEqual(p("over the following days"), []);
+  assert.deepEqual(p("palpation of the left lower quadrant"), []);
+  assert.deepEqual(p("blurred vision"), []);
+  assert.deepEqual(p("expressive dysphasia"), []);
+  assert.deepEqual(p("fundoscopy shows choroidal tubercles"), []);
+  assert.ok(p("fundoscopy shows bilateral disc swelling").includes("papilledema"));
+  assert.ok(p("palpitaton for a week").includes("palpitations"));   // a real typo still reads
+});

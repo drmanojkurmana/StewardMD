@@ -159,6 +159,8 @@
   var NEG_LIST_HEAD_V2 = /^\s*(?:(?:he|she|they|patient|the patient|pt|mother|father|family)\s+(?:also\s+)?)?(?:(?:has|have|had|there (?:is|was|were|are)|with)\s+)?(?:no|denies|denied|without|nil|negative for|not)\b/;
   var NEG_LIST_LEAD_V2 = /^\s*(?:(?:he|she|they|patient|the patient|pt)\s+(?:also\s+)?)?(?:has|have|had|there (?:is|was|were|are)|with)\s+(?:no|nil|not)\b/;
   var LIST_DUR_V2 = /\b(?:for|since|x|over)\s+(?:the\s+)?(?:\d|a |an |one|two|three|four|five|six|seven|few|several|past|last)|\b\d+\s*(?:d|days?|wks?|weeks?|hours?|hrs?|months?)\b/;
+  // real words one letter from a synonym (round 29): never read as a typo of it
+  var FUZZY_STOP_V2 = { dysphasia: 1, dysphasic: 1, drooping: 1, blurred: 1, palpation: 1, hypodense: 1, hyperdense: 1, following: 1, hypotensive: 1, hypertensive: 1, waking: 1 };
   function negList(norm, idx) {
     var st = Math.max(norm.lastIndexOf(".", idx - 1), norm.lastIndexOf(";", idx - 1), norm.lastIndexOf(":", idx - 1)) + 1;
     var en = norm.slice(idx).search(/[.,;:]| and | or | nor /), segs = norm.slice(st, en < 0 ? norm.length : idx + en).split(/,| and | or | nor /);
@@ -192,11 +194,19 @@
     var byKey = {};  // key → { idx, method, srcText, display }
     var alts = {};   // v2: key → every mention [{ idx, method, srcText }], read when the first is negated / historical
 
-    function consider(key, idx, method, srcText, display) {
-      if (!valid[key]) return;
+    // mentions that are not the finding at all (read the same way for the first and every later mention)
+    function skipMention(key, idx, srcText) {
+      // round 29: the examination named ("fundoscopy shows choroidal tubercles") is not papilloedema unless it says swelling
+      if (v2 && key === "papilledema" && /^(?:fundoscopy|optic dis[ck]s?)$/.test(srcText || "") &&
+          !/\b(?:swoll\w*|swelling|oedema\w*|edema\w*|papill\w*|blurr\w*|raised|elevated|indistinct|hyperaemi\w*)\b/.test(norm.slice(idx, idx + 70).split(/[.;]/)[0])) return true;
       // round 28: "unresponsive to antibiotics / cell-wall agents / paracetamol" is about a treatment, not the sensorium
       if (v2 && key === "alteredSensorium" && /^(?:un|non-?)responsive$/.test(srcText || "") &&
-          /^\s+to\s+(?!voice|pain|painful|verbal|stimul|command|touch|sternal|call|name)/.test(norm.slice(idx + srcText.length, idx + srcText.length + 30))) return;
+          /^\s+to\s+(?!voice|pain|painful|verbal|stimul|command|touch|sternal|call|name)/.test(norm.slice(idx + srcText.length, idx + srcText.length + 30))) return true;
+      return false;
+    }
+    function consider(key, idx, method, srcText, display) {
+      if (!valid[key]) return;
+      if (v2 && skipMention(key, idx, srcText)) return;
       if (v2) (alts[key] = alts[key] || []).push({ idx: idx, method: method, srcText: srcText || "" });
       if (byKey[key] && byKey[key].conf >= 0.9) return;
       byKey[key] = { idx: idx, method: method, srcText: srcText || "", display: display || labels[key] || key,
@@ -215,7 +225,7 @@
         consider(key, hitIdx, "synonym", hitSrc);
         // v2: later mentions of the same finding, so a negated first one does not hide them
         if (v2) (syn[key] || []).forEach(function (sv) { var from = 0, j, n = 0;
-          while (n++ < 6 && (j = findWord(norm.slice(from), sv)) >= 0) { j += from; if (j !== hitIdx) { if (!byKey[key]) consider(key, j, "synonym", sv); else (alts[key] = alts[key] || []).push({ idx: j, method: "synonym", srcText: sv }); } from = j + sv.length; } });
+          while (n++ < 6 && (j = findWord(norm.slice(from), sv)) >= 0) { j += from; if (j !== hitIdx) { if (!byKey[key]) consider(key, j, "synonym", sv); else if (!skipMention(key, j, sv)) (alts[key] = alts[key] || []).push({ idx: j, method: "synonym", srcText: sv }); } from = j + sv.length; } });
         return;
       }
       var lab = (labels[key] || "").toLowerCase().replace(/\([^)]*\)/g, " ").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
@@ -229,8 +239,12 @@
     Object.keys(valid).forEach(function (key) {
       if (byKey[key] || (v2 && numeric[key])) return;
       var best = 99, bestSrc = "";
-      (syn[key] || []).forEach(function (sv) { if (sv.indexOf(" ") >= 0 || sv.length < 6) return; tokens.forEach(function (tk) { var d = lev(tk, sv); if (d < best) { best = d; bestSrc = tk; } }); });
-      var thresh = bestSrc.length >= 9 ? 2 : 1;
+      (syn[key] || []).forEach(function (sv) { if (sv.indexOf(" ") >= 0 || sv.length < 6) return; tokens.forEach(function (tk) {
+        // round 29 (v2): a typo keeps the first letter and is a real misspelling, not another word ("drenching" is not
+        // "retching", "following" is not "yellowing", "palpation" is not "palpitation", "hypotensive" is not hypertension)
+        if (v2 && (tk.charAt(0) !== sv.charAt(0) || FUZZY_STOP_V2[tk])) return;
+        var d = lev(tk, sv); if (d < best) { best = d; bestSrc = tk; } }); });
+      var thresh = v2 ? 1 : bestSrc.length >= 9 ? 2 : 1;
       if (best <= thresh) { var idx = norm.indexOf(bestSrc); consider(key, idx < 0 ? 0 : idx, "fuzzy", bestSrc); if (byKey[key]) byKey[key]._fuzzy = true; }
     });
 

@@ -906,7 +906,7 @@
     biliary_colic: { find: { knownGallstones: 20, transaminasesVeryHigh: -10, severeAbdominalPain: 10 } },   // round 28: colic is severe pain
     pancreatitis: { find: { knownGallstones: 8 } },
     // round 18: the metabolic emergencies read their defining lab value
-    hyponatremia: { find: { sodiumLow: 40 } },
+    hyponatremia: { find: { sodiumLow: 40, headache: 8 } },   // round 29: headache is a symptom of hyponatraemia
     hyperkalemia: { find: { potassiumHigh: 40 } },
     hypercalcemia: { find: { calciumHigh: 40 } },
     myeloma: { find: { calciumHigh: 12 } },
@@ -2115,6 +2115,9 @@
       "puffy face", "facial puffiness", "puffiness of the face", "face and arm swelling", "facial and arm swelling"],   // not periorbital: that is also orbital cellulitis
     increasedSputumVolume: ["larger in volume", "increase in sputum", "more sputum than usual", "greater volume of sputum"],
     malignancy: ["mediastinal mass", "paratracheal mass", "hilar mass", "lung mass", "pulmonary mass", "space-occupying lesion"],
+    // round 29: gait words for ataxia, and the spelled variants the stricter typo matcher (clinical-nlp.js) no longer reaches
+    tachypnea: ["tachypneic", "tachypnoeic", "tachypnoea"], photophobia: ["photophobic"],
+    ataxia: ["ataxic", "staggering gait", "wide-based gait", "broad-based gait", "truncal ataxia", "gait ataxia", "cannot walk heel to toe", "poor coordination", "impaired coordination"],
     // round 26
     persistentBacteremia: ["two of two blood culture", "2/2 blood culture", "both blood culture sets", "all blood culture sets", "3/3 blood culture", "three of three blood culture",
       "all three blood culture", "multiple positive blood cultures", "repeatedly positive blood cultures"],

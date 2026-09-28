@@ -154,6 +154,7 @@ try {
       var lead=String(c.acc[0]||'').toUpperCase(); var asp=(window.ASP_DATA||{})[lead];
       return JSON.stringify({cur:cur, txt:txt, pc:pc, extractRecall:rec, extractPrecision:prec, aspNeed: asp? asp.needAbx : null});`);
     const j = r && r[0] === "{" ? JSON.parse(r) : { err: String(r) };
+    if (j.__err) j.err = j.__err;   // the page threw (a note-reader crash): count it, never drop it silently
     const st = exp.stewardship || {};
     Object.assign(j, {
       id: c.id, set, split: splits[c.id] || "unassigned", expect: (exp.acceptableIds || [])[0], dx: exp.diagnosis,
@@ -251,6 +252,8 @@ try {
     console.log(`floors written for ${CONFIG} -> ${FLOORS}`);
   }
   if (CHECK) {
+    const errs = rows.filter((r) => r.err);
+    if (errs.length) { console.log(`ERRORS: ${errs.length} case(s) threw in the page (first: ${errs[0].id}: ${String(errs[0].err).slice(0, 120)})`); exitCode = 1; }
     const f = floors[CONFIG];
     if (!f) { console.log(`no floors recorded for config ${CONFIG}`); exitCode = 1; }
     else {
