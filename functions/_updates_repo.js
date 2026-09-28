@@ -40,6 +40,8 @@ export function rowToItem(r) {
     pmid: r.pmid || "",
     pinned: !!r.pinned,
     auto: !!r.auto,
+    // A live, doctor-signed Clinical Bulletin exists for this item (the item's own text is still the AI summary).
+    signed_bulletin: !!r.signed_bulletin,
     ts: r.published_ts || r.created_ts || 0,
   };
 }
@@ -73,9 +75,14 @@ export async function getFeed(env, opts) {
     binds.push(p, p, cid);
   }
   const limit = Math.max(1, Math.min(50, parseInt(opts.limit, 10) || 20));
-  const sql = "SELECT * FROM updates" + (where.length ? " WHERE " + where.join(" AND ") : "") +
-    " ORDER BY published_ts DESC, id DESC LIMIT ?";
-  const rs = await db(env).prepare(sql).bind(...binds, limit + 1).all();
+  const tail = (where.length ? " WHERE " + where.join(" AND ") : "") + " ORDER BY published_ts DESC, id DESC LIMIT ?";
+  // Flag items that have a LIVE signed bulletin (same rule as functions/_bulletins_repo.js listVisible).
+  // Falls back to the plain query when the bulletin tables do not exist yet.
+  const SIGNED = "EXISTS (SELECT 1 FROM bulletins b WHERE b.update_id = updates.id AND b.status = 'signed' AND b.signed_hash = b.body_hash " +
+    "AND b.source_hash = updates.content_hash AND b.review_due_ts > ?) AS signed_bulletin";
+  let rs;
+  try { rs = await db(env).prepare("SELECT *, " + SIGNED + " FROM updates" + tail).bind(Date.now(), ...binds, limit + 1).all(); }
+  catch (e) { rs = await db(env).prepare("SELECT * FROM updates" + tail).bind(...binds, limit + 1).all(); }
   const rows = (rs.results || []).slice();
   let nextCursor = null;
   if (rows.length > limit) {

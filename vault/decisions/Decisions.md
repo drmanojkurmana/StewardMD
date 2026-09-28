@@ -43,6 +43,21 @@ silently). MLX files are an extra download on top of the GGUF, which stays as th
 uncompiled (no Xcode in the cloud session). **Status:** JS + tests done (`test/maik-mlx.test.mjs`,
 `test/run-maik-mlx-ui.mjs`); spike and go/no-go in `docs/MAIK_MLX_SPIKE.md` are the gate. No drafter yet.
 
+## 2026-09-28 · Clinical Bulletins phase 2: automatic intake, still signed by a doctor
+
+**Decision (owner: "complete all phases ... auto updates from journal").** New journal trials (PubMed), new FDA
+approvals (openFDA) and CDSCO's yearly new-drug lists are fetched automatically every day. They reach the bell
+feed and the Review Desk queue on their own; they reach a disease page only as a bulletin a registered doctor
+signs (phase 1 rule, unchanged). Drafting aids suggest, never decide: India status is never pre-filled and a
+CDSCO match is shown as evidence only.
+**Why.** Automatic intake removes the lag; the signature keeps AI text off the bedside. Specific calls: PubMed
+over Europe PMC for trials (Europe PMC gave 503 from the sandbox; PubMed is the source of record); the openFDA
+new-approval rule is applied in code because its search matched a 2022 approval for a 2026 window; the bell
+marker says "Signed bulletin in Library" because the bell text is still the AI summary.
+**Trade-off.** More items in the queue than a doctor will sign; the queue is the filter. CDSCO lists are PDFs
+converted by Workers AI, so a conversion slip could hide a match; the panel says a miss proves nothing.
+**Status.** Built and tested; ships with the next push to main.
+
 ## 2026-09-28 · Clinical Bulletins: physician-signed practice updates on the disease reader
 
 **Decision (owner, D1 to D5).** Practice updates appear on the Knowledge Library disease reader only after a

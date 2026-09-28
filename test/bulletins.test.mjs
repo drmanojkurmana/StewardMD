@@ -450,7 +450,7 @@ test("schema on first use: the runtime DDL builds exactly the tables and indexes
     return objs.map((o) => ({ o, cols: o.type === "table" ? db.prepare("PRAGMA table_xinfo(" + o.name + ")").all() : db.prepare("PRAGMA index_xinfo(" + o.name + ")").all() }));
   };
   assert.deepEqual(JSON.parse(JSON.stringify(shape(b))), JSON.parse(JSON.stringify(shape(a))));
-  assert.equal(shape(a).length, 9);
+  assert.equal(shape(a).length, 10);
 });
 
 test("schema on first use: a database without the bulletin tables gets them on the first request", { skip: SKIP }, async () => {
@@ -505,4 +505,24 @@ test("fail closed: signer routes answer a clean 500 when D1 refuses, never an un
   const r = await call({ UPDATES_DB: broken }, "GET", "bulletins/queue", { tok: "tok-owner-doc" });
   assert.equal(r.status, 500);
   assert.deepEqual(r.data, { error: "server_error" });
+});
+
+test("bell feed: signed_bulletin marks only items with a LIVE bulletin, and the feed still works without bulletin tables", { skip: SKIP }, async () => {
+  const env = await fresh();
+  await ownerSigner(env);
+  const a = await signedBulletin(env);                                  // on u1
+  const flag = async () => {
+    const r = await call(env, "GET", "?limit=20");
+    return Object.fromEntries(r.data.items.map((i) => [i.id, i.signed_bulletin]));
+  };
+  assert.deepEqual(await flag(), { u1: true, u2: false });
+  env.UPDATES_DB._db.prepare("UPDATE updates SET content_hash = 'h1-changed' WHERE id = 'u1'").run();
+  assert.deepEqual(await flag(), { u1: false, u2: false }, "source changed: no longer live, no longer flagged");
+  const D = d1();
+  D._db.exec(SCHEMA.replace(/-- BEGIN bulletins[\s\S]*?-- END bulletins/, ""));
+  await updatesRepo.insertUpdate({ UPDATES_DB: D }, { id: "x1", doc_key: "k", title: "T", content_hash: "h" });
+  const r = await call({ UPDATES_DB: D }, "GET", "?limit=5");
+  assert.equal(r.status, 200);
+  assert.deepEqual(r.data.items.map((i) => [i.id, i.signed_bulletin]), [["x1", false]]);
+  void a;
 });

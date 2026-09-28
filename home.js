@@ -9822,6 +9822,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var badge = it.importance === "critical" ? '<span class="ntf-hi crit">Critical</span>' : (it.importance === "high" ? '<span class="ntf-hi">Important</span>' : "");
     var read = it.est_read_min ? '<span class="fd-read">' + it.est_read_min + ' min</span>' : "";
     var ws = it.workspace ? '<span class="fd-ws">' + nEsc(WSLBL[it.workspace] || it.workspace) + '</span>' : "";
+    // A doctor signed a Clinical Bulletin from this item; the card text itself is still the AI summary.
+    var signed = it.signed_bulletin ? '<span class="fd-signed">Signed bulletin in Library</span>' : "";
     var org = it.organization || it.source || "";
     var prev = String(it.summary || it.body || "");
     var lead = prev.split("\n")[0].replace(/\*\*/g, "").replace(/^[•\-\*]\s+/, "");   // lead sentence, markdown stripped for the teaser; full bullets render in detail
@@ -9832,7 +9834,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       '<div class="ntf-title">' + nEsc(it.title) + '</div>' +
       (org ? '<div class="fd-org">' + nEsc(org) + '</div>' : "") +
       (prev ? '<div class="ntf-body">' + nEsc(lead.slice(0, 220)) + (more ? "…" : "") + '</div>' : "") +
-      '<div class="fd-meta">' + ws + read + '<span class="fd-open">Open ›</span></div></div>';
+      '<div class="fd-meta">' + ws + read + signed + '<span class="fd-open">Open ›</span></div></div>';
   }
   function renderFeed() {
     var body = _notifRoot && _notifRoot.querySelector("#ntfFeed"); if (!body) return;
@@ -10634,6 +10636,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       ".fd-card{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:12px 14px;border-left:4px solid var(--teal,#0a9396);cursor:pointer;transition:transform .08s ease,box-shadow .12s ease}",
       ".fd-card:hover,.fd-card:focus{box-shadow:0 3px 14px rgba(0,0,0,.08);outline:none}.fd-card:active{transform:scale(.995)}",
       ".fd-card.hi{border-left-color:#ef4444}",
+      ".fd-signed{font:600 11px var(--sans,system-ui);color:#0f766e;background:rgba(15,118,110,.1);border-radius:999px;padding:2px 8px;white-space:nowrap}",
       ".fd-org{font:700 12px var(--sans,system-ui);color:var(--teal,#0a9396);margin-top:3px}",
       ".fd-meta{display:flex;align-items:center;gap:10px;margin-top:9px;flex-wrap:wrap}",
       ".fd-ws{font:600 11px var(--sans,system-ui);color:var(--slate-soft,#888);background:var(--teal-soft,#e0f2f1);border-radius:6px;padding:2px 8px}",
