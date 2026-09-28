@@ -39,11 +39,12 @@ const STUB = `
   window.SMD_AUTH = {
     currentUser: { uid: "u-doc-1", displayName: "Dr Asha Rao", email: "asha@hospital.org",
       getIdToken: function () { return Promise.resolve("tok"); },
-      getIdTokenResult: function () { return Promise.resolve({ claims: window.__claims }); } },
+      getIdTokenResult: function (force) { window.__forced = (window.__forced || 0) + (force ? 1 : 0); return Promise.resolve({ claims: force && window.__freshClaims ? window.__freshClaims : window.__claims }); } },
     onAuthStateChanged: function (cb) { setTimeout(function () { cb(window.SMD_AUTH.currentUser); }, 0); }
   };
   window.SMD_DB = { collection: function () { return { doc: function () { return { collection: function () { return { doc: function () { return {
-    get: function () { return Promise.resolve({ exists: true, data: function () { return window.__profile; } }); },
+    get: function () { if (window.__dbFail === "reject") return Promise.reject(new Error("unavailable")); if (window.__dbFail === "hang") return new Promise(function () {});
+      return Promise.resolve({ exists: true, data: function () { return window.__profile; } }); },
     set: function (o) { Object.assign(window.__saved, o); Object.assign(window.__profile, o); return Promise.resolve(); }
   }; } }; } }; } }; } };
   var _f = window.fetch;
@@ -184,6 +185,21 @@ try {
   await ev(`SMD_PHONE_VERIFY._reset(); window.__claims = { phoneVerified: true }; return 1;`);
   await ev(`SMD_PHONE_VERIFY.check(); return 1;`); await sleep(900);
   ok(await on() === false, "a verified claim means it never asks");
+
+  // ── owner 2026-09-28: Profile said Verified, the sheet still asked ──
+  // The cached token predates the claim; a fresh token carries it. Refresh before asking.
+  await ev(`try{localStorage.removeItem("smd_phone_verified_u-doc-1")}catch(e){} delete window.__profile.phoneVerifiedAt; window.__claims = {}; window.__freshClaims = { phoneVerified: true }; window.__forced = 0; window.__dbFail = "reject"; SMD_PHONE_VERIFY._reset(); SMD_PHONE_VERIFY.check(); return 1;`); await sleep(900);
+  ok(await on() === false, "a stale cached token is refreshed before asking; the fresh claim says verified, so it does not ask");
+  ok(await ev(`return window.__forced`) >= 1, "(it forced one token refresh)");
+  // No claim even on a fresh token, and the profile read FAILS: can't tell, so it does not nag.
+  await ev(`try{localStorage.removeItem("smd_phone_verified_u-doc-1")}catch(e){} window.__freshClaims = null; window.__dbFail = "reject"; SMD_PHONE_VERIFY._reset(); SMD_PHONE_VERIFY.check(); return 1;`); await sleep(900);
+  ok(await on() === false, "a profile read that fails is not taken as unverified");
+  await ev(`window.__dbFail = "hang"; SMD_PHONE_VERIFY._reset(); var r = null; SMD_PHONE_VERIFY.needed(function (y) { window.__hangAns = y; }); return 1;`); await sleep(9000);
+  ok(await ev(`return window.__hangAns`) === false, "a profile read that hangs gives up after a few seconds and does not ask");
+  // A readable profile with no verification still asks, as before.
+  await ev(`window.__dbFail = null; SMD_PHONE_VERIFY._reset(); SMD_PHONE_VERIFY.check(); return 1;`); await sleep(900);
+  ok(await on() === true, "an account that really is unverified is still asked");
+  await ev(`SMD_PHONE_VERIFY.close(); window.__claims = {}; return 1;`); await sleep(300);
 
   // ── the SMS-instead path and the server fallback flag ──
   await ev(`try{localStorage.removeItem("smd_phone_verified_u-doc-1")}catch(e){} window.__claims = {}; window.__calls = []; SMD_PHONE_VERIFY._reset(); SMD_PHONE_VERIFY.open("9876543210"); return 1;`); await sleep(300);
