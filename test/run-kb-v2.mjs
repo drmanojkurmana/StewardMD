@@ -62,7 +62,8 @@ try {
   // ---- 1. OFF --------------------------------------------------------------------------------
   ok(await load(BASE + "?kbv2=0"), "app + KB load with ?kbv2=0");
   const c0 = await q(CHARCOT, "CHOLANGITIS");
-  ok(!c0.m && c0.gate === "possible", `off · fever + jaundice + RUQ pain: cholangitis NOT matched (${c0.s}), gate "${c0.gate}" (the defect)`);
+  // the matching defect stands; since round 23 the acute-fever rule (gate v2, v3 order) calls it "likely" anyway
+  ok(!c0.m && (c0.gate === "possible" || c0.gate === "likely"), `off · fever + jaundice + RUQ pain: cholangitis NOT matched (${c0.s}), gate "${c0.gate}" (the defect)`);
   const s0 = await q(["fever", "ascites", "liverDisease"], "SBP");
   ok(!s0.m, `off · fever + ascites in cirrhosis: SBP not matched (${s0.s})`);
   ok(!(await catalogHas("dilatedCBD")), "off · the new findings are not in the catalog");
@@ -85,6 +86,10 @@ try {
   ok(s2.m && s2.s > s1.s - 10, `on  · ascitic neutrophils >= 250: SBP matched without fever (${s2.s})`);
   const cy = await q(["fever", "dysuria", "urinaryFrequency"], "CYSTITIS");
   ok(!cy.m, `on  · fever with dysuria is not simple cystitis (cystitis matched: ${cy.m})`);
+  // round 52: timing and exposure are no organ system (they sat in the "Respiratory" group and made a subacute fever after
+  // prior antibiotics a lung-dominant picture)
+  const ef = await q(["fever", "prolongedFever", "abdominalDiscomfort", "headache", "subacuteOnset", "priorAntibiotics", "antibioticsLast90Days"], "ENTERIC_FEVER");
+  ok(ef.lead === "ENTERIC_FEVER" && ef.s >= 70 && (ef.gate === "likely" || ef.gate === "very_likely"), `on  · 10 days of fever with abdominal discomfort after two antibiotic courses: enteric fever leads (${ef.s}, ${ef.gate})`);
 
   // ---- 3. the note's numbers (with smd_nlp_v2) --------------------------------------------------
   ok(await load(BASE + "?kbv2=1&nlpv2=1"), "app + KB load with ?kbv2=1&nlpv2=1");

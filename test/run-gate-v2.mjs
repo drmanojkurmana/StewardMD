@@ -30,14 +30,19 @@ const JOB = process.env.CLAUDE_JOB_DIR || "/tmp";
 const keys = (id) => JSON.parse(readFileSync(join(ROOT, "kb", "validation", "cases", id + ".json"), "utf8")).findings;
 
 // fixture -> [classic class, v2 class, v2 ab, v2 message must match]
+// (round 76: the classic gate answers a common-cold or chikungunya lead with nothing needing antibiotics close behind
+// "infection_no_abx" (gc_242: the common cold leads its tapped findings); with ?rankv3=0 the v2 gate still reads the v3
+// evidence, so a pneumonia with no lower-respiratory sign no longer holds antibiotics for a cold (gc_149))
 const FIX = [
   ["gc_118", "dengue", "very_likely", "infection_no_abx", false, /Dengue Fever leads, and it does not need antibiotics/],
-  ["gc_242", "acute bronchitis", "very_likely", "infection_no_abx", false, /does not need antibiotics/],
+  ["gc_242", "acute bronchitis", "infection_no_abx", "infection_no_abx", false, /does not need antibiotics/],
   ["gc_137", "pharyngitis", "very_likely", "infection_conditional", true, /Antibiotics only if its criteria are met: .*Centor/],
   ["gc_070", "uncomplicated malaria (no bacterial rival meets its criteria)", "very_likely", "infection_specific", false, /Malaria leads\. .*ANTIMALARIAL/],
-  ["gc_110", "chikungunya with rickettsial fever matched close behind", "very_likely", "very_likely", true, /leads and does not need antibiotics on its own, but Rickettsial Fever .* is competitive and does/],
+  // (round 76: the v2 gate reads the v3 evidence with ?rankv3=0 too, so the rickettsial fever behind this chikungunya, with none
+  // of its features, no longer holds antibiotics: gold labels it no antibiotics)
+  ["gc_110", "chikungunya, rickettsial fever behind it without its features", "very_likely", "infection_no_abx", false, /Chikungunya leads, and it does not need antibiotics/],
   ["gc_390", "chikungunya in a neutropenic host", "very_likely", "very_likely", true, /these change that: .*Neutropenia/],
-  ["gc_149", "URTI with pneumonia competitive", "likely", "likely", true, /Community Acquired Pneumonia .* is competitive/],
+  ["gc_149", "URTI, pneumonia with no lower-respiratory sign", "likely", "infection_no_abx", false, /Upper Respiratory Tract Infection .* leads, and it does not need antibiotics/],
   ["gc_152", "viral vs bacterial meningitis", "very_likely", "very_likely", true, null],
   ["gc_143", "SBP (fever)", "noninfective", "likely", true, /Can't-miss: spontaneous bacterial peritonitis/],
   // 2026-09-27: "rule out SBP" is tap first, antibiotics on the result (EASL 2018 / AASLD 2021)
@@ -89,13 +94,25 @@ try {
   await ev(`localStorage.removeItem("smd_gate_v2"); return 1`);
   for (const [id, what, classic] of FIX) {
     const g = await assess(keys(id));
-    ok(g.cls === classic && g.why === undefined && g.rule === undefined && g.message === undefined, `off · ${what} (${id}): classic "${classic}" (${g.cls}), no v2 fields`);
+    // (a round 76 classic "infection_no_abx" carries its reason, as v2's does; no v2 rule either way)
+    ok(g.cls === classic && !g.rule && (classic === "infection_no_abx" ? /VIRAL|viral/.test(g.why || "") : g.why === undefined && g.message === undefined),
+      `off · ${what} (${id}): classic "${classic}" (${g.cls}), no v2 fields`);
   }
   const fn = { fever: true, neutropenia: true };
   const fnOff = await assess(fn);
   const spOff = await assess({ fever: true, hypotension: true });
   ok(spOff.ab === false, `off · fever + hypotension alone: classic gate withholds antibiotics ("${spOff.cls}"), the gap v2 closes`);
   ok(fnOff.ab === true, `off · fever + "Neutropenia (ANC <500)" -> antibiotics (${fnOff.cls}; the syndrome itself scores on this key)`);
+  // round 76: the classic gate's viral exception is only for a common cold or chikungunya lead, never over a host modifier
+  const TT = (ks) => Object.fromEntries(ks.map((k) => [k, true]));
+  const chikOff = await assess(TT(["fever", "polyarthralgia", "severeArthralgia", "rash"]));
+  ok(chikOff.cls === "infection_no_abx" && chikOff.ab === false, `off · chikungunya picture: classic gate, no antibiotics (${chikOff.cls})`);
+  const chikImm = await assess(TT(["fever", "polyarthralgia", "severeArthralgia", "rash", "immunocompromised"]));
+  ok(chikImm.ab === true, `off · the same in an immunocompromised host: antibiotics kept (${chikImm.cls})`);
+  const chikShock = await assess(TT(["fever", "polyarthralgia", "severeArthralgia", "rash", "hypotension"]));
+  ok(chikShock.ab === true, `off · the same with low blood pressure: sepsis physiology keeps antibiotics (${chikShock.cls})`);
+  const dengOff = await assess(keys("gc_118"));
+  ok(dengOff.cls === "very_likely", `off · dengue: the classic answer is unchanged (only a cold or chikungunya) (${dengOff.cls})`);
 
   // ---- 2. flag ON --------------------------------------------------------------------------
   // the fixtures were written against the classic order (?rankv3=0); v3's own effect on the gate is
@@ -143,10 +160,120 @@ try {
   // so an URTI picture (gc_149, gold: URTI, no antibiotics) reads "only if pharyngitis criteria are met"
   ok(await load(BASE + "?gatev2=1"), "app + KB load with ?gatev2=1 (v3 order, the default)");
   const urtiV3 = await assess(keys("gc_149"));
-  ok(urtiV3.cls === "infection_conditional" && urtiV3.rule !== "keep_rival", `on + v3 · URTI with pneumonia only keyword-close (gc_149): conditional, not "likely" (${urtiV3.cls})`);
+  // round 47: its sore throat comes with cough and coryza, so pharyngitis no longer holds even the conditional answer
+  ok(urtiV3.cls === "infection_no_abx" && urtiV3.rule !== "keep_rival", `on + v3 · URTI with pneumonia only keyword-close (gc_149): no antibiotics, not "likely" (${urtiV3.cls})`);
   // default ON since 2026-09-27 (smd_kb_v2): SBP with fever matches the knowledge base itself
   const sbpDefault = await assess(keys("gc_143"));
   ok(sbpDefault.ab === true, `defaults · SBP (fever) gc_143: antibiotics yes (${sbpDefault.cls})`);
+  // round 9: under the v3 order (and the v2 extractor) a non-infective lead is enough; the raw-score check
+  // stays for the classic order. Gastroenteritis scores 81 on diarrhoea alone behind a bowel obstruction (train gc_192).
+  const obstruction = ["diarrhea", "abdominalPain", "abdominalDistension", "abdominalDiscomfort"];
+  // with the note's explicit negatives, as the typed-note path passes them ("no fever, weight loss or blood in stool")
+  const obstNeg = ["fever", "weightLoss", "bloodyStool", "malignancy", "lymphadenopathy", "jointSwelling"];
+  const assessNeg = async (f, ab) => JSON.parse(await ev(`return JSON.stringify(SMD_REASON.assess(${lit(f)}, { absent: ${lit(ab)} }).gate);`));
+  const obst = await assessNeg(T(obstruction), obstNeg);
+  ok(obst.ab === false && obst.rule === "ni_lead_afebrile", `defaults · afebrile bowel obstruction leading the order: no antibiotics (${obst.cls}, ${obst.rule})`);
+  ok((await assess(T(obstruction.concat(["fever", "rigors"])))).rule !== "ni_lead_afebrile", "defaults · the same with fever: the rule stands aside");
+  // round 13: a non-infective cause of fever leading the order by 10+ explains the fever (train gc_234, thyroid storm);
+  // leukaemia never does (fever there is neutropenic until shown otherwise)
+  const storm = ["palpitations", "atrialFibHx", "fever", "alteredSensorium", "weightLoss", "nightSweats", "diarrhea", "nauseaVomiting", "focalNeuroDeficit",
+    "behavioralChange", "hypertensionHx", "tachycardia", "tachypnea"], stormNeg = ["chestPain", "raisedJVP", "crepitations", "consolidation", "neckStiffness"];
+  const st = await assessNeg(T(storm), stormNeg);
+  ok(st.ab === false && st.rule === "ni_explains_fever" && /explains the fever/.test(st.message || "") && !/\u2014/.test(st.message || ""), `defaults · febrile thyroid storm leading by a clear margin: no antibiotics (${st.cls}, ${st.rule})`);
+  ok((await assessNeg(T(storm.concat(["hypotension", "lactateElevated"])), stormNeg)).rule !== "ni_explains_fever", "defaults · the same with shock physiology: the rule stands aside");
+  // round 16: infections treated on the clinical picture, whatever the scores say
+  const cm = async (ks) => assess(T(ks));
+  const murmur = await cm(["fever", "newMurmur", "weightLoss", "nightSweats", "petechialRash", "mucocutaneousBleeding", "thrombocytopenia"]);
+  ok(murmur.ab === true && murmur.rule === "fever_murmur" && /three sets of blood cultures/.test(murmur.message || ""), `defaults · fever + new murmur behind a leukaemia picture: endocarditis, antibiotics (${murmur.cls}, ${murmur.rule})`);
+  const uti = await cm(["fever", "rigors", "dysuria", "urinaryFrequency", "feverGU", "diabetesHx", "ageOver50"]);
+  ok(uti.ab === true, `defaults · febrile UTI in a diabetic man: antibiotics (${uti.cls}, ${uti.rule})`);
+  const hap = await cm(["hospitalDay48", "fever", "purulentSecretions", "worseningOxygenation", "knownHeartFailure", "orthopnea", "legSwellingBilateral", "bilateralCrackles", "raisedJVP"]);
+  ok(hap.ab === true && hap.rule === "hap_criteria", `defaults · HAP criteria met with heart failure leading: antibiotics (${hap.cls}, ${hap.rule})`);
+  const vap = await cm(["hospitalDay48", "mechanicalVentilation", "consolidation", "purulentSecretions", "worseningOxygenation", "focalNeuroDeficit"]);
+  ok(vap.ab === true, `defaults · ventilated, new infiltrate, purulent secretions, no fever: VAP criteria, antibiotics (${vap.cls}, ${vap.rule})`);
+  const dys = await cm(["fever", "diarrhea", "bloodyStool", "abdominalPain"]);
+  ok(dys.ab === true, `defaults · fever with bloody diarrhoea: dysentery, antibiotics (${dys.cls}, ${dys.rule})`);
+  ok((await cm(["diarrhea", "bloodyStool", "abdominalPain"])).rule !== "febrile_dysentery", "defaults · bloody diarrhoea without fever: the rule stands aside");
+  ok((await cm(["fever", "diarrhea", "bloodyStool", "abdominalPain", "knownIBD"])).rule !== "febrile_dysentery", "defaults · the same in known IBD: a flare first, the dysentery rule stands aside");
+  // round 23: an acute fever with an infection leading the v3 order is a likely infection; not a subacute fever
+  const cell = await cm(["fever", "legSwellingUnilateral", "skinErythema", "rapidlySpreadingErythema"]);
+  ok(cell.ab === true, `defaults · short note, fever + red spreading swollen leg: antibiotics (${cell.cls}, ${cell.rule})`);
+  const sub = await cm(["fever", "subacuteOnset", "weightLoss", "nightSweats", "cough"]);
+  ok(sub.rule !== "febrile_infection_lead", `defaults · subacute fever with weight loss: work-up, not the acute-fever rule (${sub.cls})`);
+  const chole = await cm(["fever", "rightUpperQuadrantPain", "murphySign", "nauseaVomiting"]);
+  ok(chole.ab === true, `defaults · fever + RUQ pain + Murphy sign: antibiotics (${chole.cls}, ${chole.rule})`);
+  ok((await cm(["rightUpperQuadrantPain", "murphySign", "nauseaVomiting"])).rule !== "cholecystitis_signs", "defaults · the same without fever: the rule stands aside");
+  // round 30 (tried, dropped): silencing a rival that rests only on fever, headache and aches cost a needed call
+  // with the prior switch on; a fever with an eschar must keep antibiotics either way
+  const scrub = await cm(["fever", "headache", "myalgiaArthralgia", "eschar"]);
+  ok(scrub.ab === true, `defaults · the same fever with an eschar: antibiotics (${scrub.cls}, ${scrub.rule})`);
+  // round 47: a sore throat with cough or coryza and no exudate is viral (IDSA): no "antibiotics if criteria met"
+  const vThroat = await cm(["soreThroat", "fever", "cough", "coryza"]);
+  ok(vThroat.ab === false, `defaults · sore throat + fever + cough + coryza: no antibiotics (${vThroat.cls}, ${vThroat.rule})`);
+  // round 65 (heldout3 tune): febrile neutropenia whatever leads; cirrhosis signs with a GI bleed; the second lactate key
+  const fnLeuk = await cm(["fever", "tachycardia", "mucocutaneousBleeding", "petechialRash", "splenomegaly", "thrombocytopenia", "neutropenia", "subacuteOnset"]);
+  ok(fnLeuk.ab === true, `defaults · fever + ANC < 500 with a leukaemia picture: antibiotics (${fnLeuk.cls}, ${fnLeuk.rule})`);
+  const vb = await cm(["hematemesis", "tachycardia", "asterixis", "alteredSensorium", "jaundice", "ascites", "thrombocytopenia"]);
+  ok(vb.rule === "cirrhosis_gib", `defaults · GI bleed with ascites and a flap (no "liver disease" tapped): cirrhosis prophylaxis (${vb.cls}, ${vb.rule})`);
+  const cauti = await cm(["indwellingCatheter", "urinaryRetention", "alteredSensorium", "hypotension", "tachycardia", "tachypnea", "ageOver50", "diabetesHx", "complicatedUTIRisk", "renalImpairment", "raised_lactate", "organDysfunction"]);
+  ok(cauti.ab === true, `defaults · afebrile shock with "raised lactate" and a catheter: antibiotics (${cauti.cls}, ${cauti.rule})`);
+  const copd = await cm(["ageOver50", "knownCOPD", "diabetesHx", "increasedDyspnea", "coughRadio", "wheeze", "tachypnea", "hypoxia", "glucoseHigh"]);
+  ok(copd.ab === false, `defaults · COPD flare, white sputum, no fever or focal signs: no antibiotics (${copd.cls}, ${copd.rule})`);
+  const gas = await cm(["soreThroat", "fever", "tonsillarExudate", "tenderCervicalNodes"]);
+  ok(gas.ab === true, `defaults · sore throat + fever + exudate + tender nodes: antibiotics if criteria met (${gas.cls})`);
+  // round 67 (heldout3 tune): acute watery diarrhoea needs fluids; a real rival (cystitis) still holds antibiotics;
+  // afebrile hospital-acquired pneumonia (a new infiltrate with worsening oxygenation after 48 h)
+  const watery = await cm(["ageOver50", "diabetesHx", "diarrhea", "nauseaVomiting", "abdominalPain", "dehydration"]);
+  ok(watery.ab === false && watery.rule === "watery_diarrhoea", `defaults · afebrile watery diarrhoea: no antibiotics (${watery.cls}, ${watery.rule})`);
+  const wateryAbx = await cm(["diarrhea", "nauseaVomiting", "abdominalPain", "dehydration", "antibioticsLast90Days"]);
+  ok(wateryAbx.rule !== "watery_diarrhoea", `defaults · watery diarrhoea after antibiotics: not the fluids-only answer (${wateryAbx.cls}, ${wateryAbx.rule})`);
+  const hapAfeb = await cm(["hospitalDay48", "ageOver50", "alteredSensorium", "tachypnea", "hypoxia", "tachycardia", "crepitations", "consolidation", "worseningOxygenation"]);
+  ok(hapAfeb.ab === true, `defaults · afebrile, day 7: new infiltrate + worsening oxygenation: antibiotics (${hapAfeb.cls}, ${hapAfeb.rule})`);
+  // round 68 (heldout3 tune): afebrile flank pain with haematuria is a stone; HUS after diarrhoea (antibiotics harm STEC-HUS)
+  const stone = await cm(["flankPain", "hematuria", "urinaryFrequency", "costovertebralTenderness"]);
+  ok(stone.ab === false, `defaults · afebrile flank pain + haematuria, no dysuria: no antibiotics (${stone.cls}, ${stone.rule})`);
+  const hus = await cm(["bloodyStool", "diarrhea", "oliguria", "renalImpairment", "thrombocytopenia", "facialSwelling"]);
+  ok(hus.ab === false, `defaults · afebrile, bloody diarrhoea then low platelets and kidney failure: no antibiotics (${hus.cls}, ${hus.rule})`);
+  // round 69: from a note (negatives passed), watery diarrhoea is fluids-only only when the note denies fever; a complaint
+  // line that does not mention fever has not excluded it
+  const wNote = await assessNeg(T(["ageOver50", "diarrhea", "nauseaVomiting", "dehydration"]), ["fever", "bloodyStool"]);
+  ok(wNote.ab === false && wNote.rule === "watery_diarrhoea", `defaults · note "no fever, no blood" + watery diarrhoea: no antibiotics (${wNote.cls}, ${wNote.rule})`);
+  // (round 73: a line that does not mention fever still gets fluids when nothing in it points to severity or another cause;
+  // dehydration, low urine output, abdominal pain or distension keep the "antibiotics if criteria met" answer)
+  const wLine = await assessNeg(T(["diarrhea", "nauseaVomiting"]), []);
+  ok(wLine.ab === false && wLine.rule === "watery_diarrhoea", `defaults · complaint line "loose stools and vomiting", nothing severe: fluids (${wLine.cls}, ${wLine.rule})`);
+  const wDry = await assessNeg(T(["diarrhea", "nauseaVomiting", "dehydration"]), []);
+  ok(wDry.rule !== "watery_diarrhoea", `defaults · the same with dehydration, fever not mentioned: not the fluids-only answer (${wDry.cls}, ${wDry.rule})`);
+  // leukocytosis is an ATS/IDSA HAP criterion: a new infiltrate after 48 h with a raised count, no fever
+  const hapWbc = await cm(["hospitalDay48", "ageOver50", "tachypnea", "consolidation", "crepitations", "leukocytosis"]);
+  ok(hapWbc.ab === true && hapWbc.rule === "hap_criteria", `defaults · day 5, new infiltrate + WBC >= 12,000, afebrile: antibiotics (${hapWbc.cls}, ${hapWbc.rule})`);
+  // round 72 (heldout4 tune): fever, shock, rigors and a white count of 22,000 is sepsis, even when TTP/HUS outscores the
+  // infections; a real thyroid storm (palpitations, weight loss) with fever and shock still explains it
+  const septic = await cm(["fever", "rigors", "alteredSensorium", "oliguria", "tachycardia", "hypotension", "tachypnea", "glucoseHigh", "leukocytosis",
+    "thrombocytopenia", "renalImpairment", "organDysfunction", "lactateElevated", "diabetesHx", "toxicAppearing"].concat(["malariaTestNegative"]));
+  ok(septic.ab === true, `defaults · febrile shock with rigors and leukocytosis, malaria negative: antibiotics (${septic.cls}, ${septic.rule})`);
+  const storm72 = await cm(["fever", "tachycardia", "hypotension", "alteredSensorium", "palpitations", "weightLoss", "leukocytosis", "toxicAppearing"]);
+  ok(storm72.ab === false, `defaults · thyroid storm with fever and low BP: no antibiotics (${storm72.cls}, ${storm72.rule})`);
+  await load(BASE + "?gatev2=1&nlpv2=0");
+  ok((await assessNeg(T(obstruction), obstNeg)).rule !== "ni_lead_afebrile", "classic extractor · raw-score check kept (it reads only a note's first mention of fever)");
+  // round 76: a variceal bleed that leads only by the order (no liver words read) needs a cause or sign of portal hypertension
+  const vNo = await cm(["hematemesis", "melena", "jaundice"]);
+  ok(vNo.rule !== "cirrhosis_gib" && vNo.ab === false, `defaults · haematemesis, melaena, jaundice, no liver history: not cirrhosis prophylaxis (${vNo.cls}, ${vNo.rule})`);
+  const vAlc = await cm(["hematemesis", "melena", "jaundice", "alcoholExcess"]);
+  ok(vAlc.cls === "abx_prophylaxis" && vAlc.rule === "cirrhosis_gib", `defaults · the same with alcohol excess: prophylaxis (${vAlc.cls}, ${vAlc.rule})`);
+  // round 76: "low blood pressure" is hypotension to the reader
+  const lbp = JSON.parse(await ev(`return JSON.stringify(DX.extractText("4 days of productive cough with rigors, then a rapid collapse with low blood pressure at home").present);`));
+  ok(lbp.indexOf("hypotension") >= 0, `reader · "low blood pressure" reads hypotension (${lbp.join(",")})`);
+  await load(BASE + "?gatev2=1&nlpv2=0");
+  // round 76: with the classic reader a recorded saturation is not hypoxia (only a value under 92% is)
+  const sat = JSON.parse(await ev(`return JSON.stringify([DX.extractText("Vitals: hr 88, rr 16, spo2 98").present, DX.extractText("Vitals: hr 110, spo2 86").present]);`));
+  ok(sat[0].indexOf("hypoxia") < 0 && sat[1].indexOf("hypoxia") >= 0, `classic reader · "spo2 98" is not hypoxia, "spo2 86" is (${sat[0].join(",")} / ${sat[1].join(",")})`);
+  await load(BASE + "?gatev2=1&rankv3=0");
+  // round 76: with the classic order the gate still reads the v3 evidence (rival reach, exclusions, febrile infection lead)
+  const pros = await cm(["fever", "perinealPain", "urinaryRetention", "leukocytosis", "diabetesHx"]);
+  ok(pros.ab === true && pros.rule === "febrile_infection_lead", `classic order · febrile prostatitis picture: infection likely (${pros.cls}, ${pros.rule})`);
+  const chikR0 = await assess(keys("gc_250"));
+  ok(chikR0.ab === false, `classic order · chikungunya (gc_250), rickettsial fever with none of its features behind it: no antibiotics (${chikR0.cls}, ${chikR0.rule})`);
   await load(BASE + "?gatev2=1&rankv3=0&kbv2=0");
   ok(fnOn.ab === true && fnOn.cls === fnOff.cls, `on  · fever + "Neutropenia (ANC <500)" unchanged by v2 (${fnOn.cls})`);
 
