@@ -98,7 +98,8 @@ try {
   const baseRead = await read(probe.map((p) => p.s + "."));
   const live = probe.filter((p, i) => baseRead[i].includes(p.k));   // only phrases the reader finds on their own
   counts["probe.findings"] = live.length;
-  const POS = ["Has {s}.", "Complains of {s}.", "C/o {s}.", "{s} noted.", "{S}. Seen in the evening clinic.", "Seen in clinic.\n{S} for 2 days."];
+  const POS = ["Has {s}.", "Complains of {s}.", "C/o {s}.", "{s} noted.", "{S}. Seen in the evening clinic.", "Seen in clinic.\n{S} for 2 days.",
+    "{S} in a 45-year-old man."];   // round 41: the "old" of an age is not a past-history cue
   const NEG = ["No {s}.", "Denies {s}.", "Negative for {s}.", "Without {s}.", "He denies {s}.", "{S}: absent.", "No evidence of {s}.", "No signs of {s}.",
     "Nil {s}.", "{S} ruled out.", "{S} was not elicited.", "{S}: none."];
   const fill = (tpl, s) => tpl.replace("{s}", s).replace("{S}", s.charAt(0).toUpperCase() + s.slice(1));

@@ -549,3 +549,13 @@ test("negation scope: without after the finding, postfix forms, idioms", () => {
   assert.ok(r("fever not responding to paracetamol").present.includes("fever"));
   assert.ok(r("He denies fever").absent.includes("fever"));
 });
+
+// round 41: the "old" of an age is not a past-history cue
+test("an age phrase does not make the findings beside it past history", () => {
+  const c41 = { valid: { fever: 1, ruralExposure: 1, cerebrovascularDisease: 1 }, labels: {}, numeric: {}, v2: true,
+    syn: { fever: ["febrile"], ruralExposure: ["farmer"], cerebrovascularDisease: ["stroke"] } };
+  const r = (t) => NLP.extract(t, c41);
+  assert.ok(r("A 30-year-old febrile man.").findings.some((f) => f.canonicalFindingId === "fever" && f.temporality === "current"));
+  assert.ok(r("A 61-year-old cotton farmer.").findings.some((f) => f.canonicalFindingId === "ruralExposure" && f.temporality === "current"));
+  assert.ok(r("A 70 year old with an old stroke.").findings.some((f) => f.canonicalFindingId === "cerebrovascularDisease" && f.temporality === "historical"));
+});

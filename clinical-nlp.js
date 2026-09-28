@@ -517,6 +517,8 @@
       else if (v2 && e.method !== "vitals" && (TEST_AFTER_V2.test(norm.slice(e.idx + (e.srcText || "").length, e.idx + (e.srcText || "").length + 40)) || COND_V2.test(norm.slice(Math.max(0, e.idx - 40), e.idx)))) r.polarity = "uncertain";
       if (hasWord(cl, EXCLUDE)) { r.polarity = "uncertain"; r.certainty = "possible"; r.req = true; }
       else if (hasWord(cl, CONSIDER) || cl.indexOf("?") >= 0) { r.certainty = "possible"; r.req = true; }
+      // round 41 (v2): the "old" of an age ("a 30-year-old febrile man", "61-year-old cotton farmer") is not a past-history cue
+      if (v2) tcl = tcl.replace(/\b\d{1,3}\s*-?\s*(?:years?|yrs?|yr)[\s-]*old\b/g, " ").replace(/\byear[\s-]old\b/g, " ");
       if (hasWord(tcl, TEMPORAL)) r.temporality = "historical";
       // v2: "a 3-day history of fever" is the PRESENT illness; classic read "history of" as past history
       // and dropped everything in that clause
