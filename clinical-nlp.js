@@ -318,14 +318,23 @@
       if (v2 && m2[0].indexOf("/") > 0) { var BP_RE = /\b(?:bp|blood pressure|b\.p\.?)\s*(?:of|is|was|=|:|-)?\s*(\d{2,3})\s*\/\s*(\d{2,3})/;
         var lo = pick(BP_RE, function (m) { return +m[1] >= 60 && +m[1] <= 300 && +m[2] >= 30 ? +m[1] : null; }, -1); if (lo && lo !== m2 && lo.index !== m2.index) bpRead(lo); }
     }
-    if ((m2 = pick(/\b(?:spo2|sao2|sats?|saturation|saturating)\s*(?:at|of|is|=|:)?\s*(\d{2,3})\s*%?/, function (m) { return +m[1] <= 100 ? +m[1] : null; }, -1))) { if (+m2[1] <= 100 && +m2[1] < 92) vital("hypoxia", m2[0]); }
+    if ((m2 = pick(v2 ? /\b(?:spo2|sao2|sats?|saturation|saturating)\s*(?:at|of|is|was|=|:|-)?\s*(\d{2,3})\s*%?/ : /\b(?:spo2|sao2|sats?|saturation|saturating)\s*(?:at|of|is|=|:)?\s*(\d{2,3})\s*%?/, function (m) { return +m[1] <= 100 ? +m[1] : null; }, -1))) { if (+m2[1] <= 100 && +m2[1] < 92) vital("hypoxia", m2[0]); }
     var HR_RE = v2 ? /\b(?:hr|heart rate|pulse(?: rate)?)\s*(?:of|is|was|=|:|-)?\s*(\d{2,3})\b/ : /\b(?:hr|heart rate|pulse|pr)\s*(?:of|is|=|:)?\s*(\d{2,3})\b/;
     if ((m2 = pick(HR_RE, V1, 1)) && +m2[1] > 100) vital("tachycardia", m2[0]);
     if ((m2 = pick(HR_RE, function (m) { return +m[1] > 20 ? +m[1] : null; }, -1)) && +m2[1] < 60 && +m2[1] > 20) vital("bradycardia", m2[0]);
+    // round 45 (v2): pulse as "PR 124/min" (a rate unit; "PR interval" is not) or "P 112" opening a vitals item; systolic
+    // alone ("SBP 82"); temperature as "T 38.9" (a decimal or a unit, so "T2DM" is not)
+    if (v2) {
+      var PR2 = /\bpr\s*(?:of|is|was|=|:|-)?\s*(\d{2,3})\s*(?:\/\s*min|bpm|beats)|(?:^|[.,;:]\s*)(?:[-*\u2022]\s*)?p\s*(?:=|:|-)?\s*(\d{2,3})\b(?!\s*\/)/g, pm;
+      while ((pm = PR2.exec(raw))) { var pv = +(pm[1] || pm[2]); if (pv > 100 && pv < 250) vital("tachycardia", pm[0].trim()); else if (pv > 20 && pv < 60) vital("bradycardia", pm[0].trim()); }
+      if ((m2 = pick(/\b(?:sbp|systolic(?: bp| blood pressure)?)\s*(?:of|is|was|=|:|-)?\s*(\d{2,3})\b/, V1, -1)) && +m2[1] >= 40 && +m2[1] < 90) vital("hypotension", m2[0]);
+      if ((m2 = pick(/\bt\s*(?:=|:|-)?\s*(\d{2,3}\.\d|\d{2,3}(?=\s*(?:\u00b0|c\b|f\b)))/, function (m) { var t = +m[1]; return t >= 90 ? (t - 32) / 1.8 : t; }, 1))) {
+        var tt = +m2[1]; if ((tt >= 38 && tt <= 44) || (tt >= 100.4 && tt <= 110)) vital("fever", m2[0]); }
+    }
     var RR_RE = /\b(?:rr|resp(?:iratory)? rate)\s*(?:of|is|=|:)?\s*(\d{1,2})\b/;
     if ((m2 = pick(RR_RE, V1, 1)) && +m2[1] > 22) vital("tachypnea", m2[0]);
     if ((m2 = pick(RR_RE, function (m) { return +m[1] > 0 ? +m[1] : null; }, -1)) && +m2[1] < 10 && +m2[1] > 0) vital("bradypnea", m2[0]);
-    if ((m2 = pick(/\bgcs\s*(?:of|is|=|:)?\s*(?:e\d\s*v\d\s*m\d|\d{1,2})(?:\s*\/\s*15)?/, function (m) { var q = (m[0].match(/(\d{1,2})\s*\/\s*15/) || [])[1] || (m[0].match(/\d{1,2}/) || [])[0]; return q ? +q : null; }, -1))) { var g = (m2[0].match(/(\d{1,2})\s*\/\s*15/) || [])[1] || (m2[0].match(/\d{1,2}/) || [])[0]; if (g && +g < 15 && +g >= 3) vital("alteredSensorium", m2[0]); }
+    if ((m2 = pick(/\bgcs\s*(?:of|is|=|:)?\s*(?:e\d\s*v\d\s*m\d|\d{1,2})(?:\s*\/\s*15)?/, function (m) { var evm = v2 && /e(\d)\s*v(\d)\s*m(\d)/.exec(m[0]); if (evm) return +evm[1] + +evm[2] + +evm[3]; var q = (m[0].match(/(\d{1,2})\s*\/\s*15/) || [])[1] || (m[0].match(/\d{1,2}/) || [])[0]; return q ? +q : null; }, -1))) { var evm2 = v2 && /e(\d)\s*v(\d)\s*m(\d)/.exec(m2[0]); var g = evm2 ? +evm2[1] + +evm2[2] + +evm2[3] : (m2[0].match(/(\d{1,2})\s*\/\s*15/) || [])[1] || (m2[0].match(/\d{1,2}/) || [])[0]; if (g && +g < 15 && +g >= 3) vital("alteredSensorium", m2[0]); }
     var T_RE = v2 ? /\b(?:temp(?:erature)?|febrile at)\s*(?:of|is|was|=|:|-)?\s*(\d{2,3}(?:\.\d)?)\s*(?:°\s*[cf]?|c\b|celsius|f\b|fahrenheit|deg)?/ : /\b(?:temp(?:erature)?|febrile at)\s*(?:of|is|=|:)?\s*(\d{2,3}(?:\.\d)?)\s*(?:c|celsius|f|fahrenheit|°|deg)/;
     var TC = function (m) { var t = +m[1]; return t >= 90 ? (t - 32) / 1.8 : t > 0 ? t : null; }, tv;   // degrees C
     if ((m2 = pick(T_RE, TC, 1))) { tv = +m2[1]; if ((tv >= 38 && tv <= 44) || (tv >= 100 && tv <= 110)) vital("fever", m2[0]); }
@@ -588,6 +597,10 @@
       else if (engineOk) { present.push(key); if (red) redFlags.push(key); }
     });
 
+    // round 45: "101 F" after a temperature is Fahrenheit, not a 101-year-old woman
+    function ageSexV2(t) { var re = /\b(\d{1,3})\s*(?:m|male|f|female)\b/g, mm;
+      while ((mm = re.exec(t))) { if (!/\b(?:temp\w*|t|febrile|fever|pyrexia\w*|spiking)\b[^.;,]{0,14}$/.test(t.slice(Math.max(0, mm.index - 24), mm.index)) && !/^\s*(?:\u00b0|ahrenheit)/.test(t.slice(mm.index + mm[0].length))) return mm; }
+      return null; }
     // 6) demographics (not engine findings — display only)
     var demo = {}, dm;
     // round 19 (metamorphic tests): v2 prefers the explicit age ("64-year-old", "64 yo", "aged 64") and skips a duration
@@ -597,7 +610,7 @@
         while ((ym = yre.exec(norm))) { var pre = norm.slice(Math.max(0, ym.index - 14), ym.index), post = norm.slice(ym.index + ym[0].length, ym.index + ym[0].length + 14);
           if (!/\b(?:for|since|over|past|last|x|of|about|nearly|almost|diagnosed)\s*$/.test(pre) && !/^\s*(?:ago|history|back|duration|earlier|previously|before)\b/.test(post)) { am = [ym[0], ym[1]]; break; } } }
       if (am) dm = [am[0], am[1] || am[2] || am[3]]; }
-    if ((v2 && dm) || (dm = norm.match(v2 ? /\b(\d{1,3})\s*-?\s*(?:year|yr|y\/o|yo|years?)\b/ : /\b(\d{1,3})\s*(?:year|yr|y\/o|yo|years?)\b/)) || (dm = norm.match(/\b(\d{1,3})\s*(?:m|male|f|female)\b/)) ||
+    if ((v2 && dm) || (dm = norm.match(v2 ? /\b(\d{1,3})\s*-?\s*(?:year|yr|y\/o|yo|years?)\b/ : /\b(\d{1,3})\s*(?:year|yr|y\/o|yo|years?)\b/)) || (dm = v2 ? ageSexV2(norm) : norm.match(/\b(\d{1,3})\s*(?:m|male|f|female)\b/)) ||
         (v2 && (dm = norm.match(/\b(?:m|f)\s*\/\s*(\d{1,3})\b|\b(\d{1,3})\s*\/\s*(?:m|f)\b/)) && (dm = [dm[0], dm[1] || dm[2]]))) { var a = +dm[1]; if (a > 0 && a < 120) demo.age = a; }
     // v2: derived engine findings (age band; fever with urinary symptoms)
     if (v2) {

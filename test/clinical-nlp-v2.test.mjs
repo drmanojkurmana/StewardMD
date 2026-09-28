@@ -599,3 +599,20 @@ test("contractions, never and neither-nor negate", () => {
   assert.ok(n.absent.includes("fever") && n.absent.includes("cough"));
   assert.ok(r("She has never had a headache like this before.").present.includes("headache"));
 });
+
+// round 45: vital-sign formats ("Temp 101F" is Fahrenheit, not a 101-year-old woman)
+test("vital-sign formats doctors type", () => {
+  const c45 = { valid: { fever: 1, tachycardia: 1, hypoxia: 1, hypotension: 1, alteredSensorium: 1, ageOver50: 1 }, labels: {}, numeric: {}, v2: true, syn: {} };
+  const r = (t) => NLP.extract(t, c45);
+  const t101 = r("Temp 101F.");
+  assert.ok(t101.present.includes("fever") && !t101.present.includes("ageOver50") && t101.demographics.age === undefined);
+  assert.ok(r("T 38.9.").present.includes("fever"));
+  assert.ok(!r("T2DM for 10 years.").present.includes("fever"));
+  assert.ok(r("PR 124/min.").present.includes("tachycardia"));
+  assert.ok(r("SpO2- 89%.").present.includes("hypoxia"));
+  assert.ok(r("GCS E2V3M5.").present.includes("alteredSensorium"));
+  assert.ok(r("SBP 82.").present.includes("hypotension"));
+  const v = r("Vitals: T 38.4, P 112, BP 90/60, RR 26, SpO2 91%.");
+  assert.ok(v.present.includes("fever") && v.present.includes("tachycardia"));
+  assert.equal(r("45 F with fever").demographics.age, 45);
+});
