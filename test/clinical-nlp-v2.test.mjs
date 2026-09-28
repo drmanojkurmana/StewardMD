@@ -786,3 +786,18 @@ test("round 69: leukocytosis from the blood count; afebrile denies fever", () =>
   assert.ok(x("Apyrexial, HR 106.").absent.includes("fever"));
   assert.ok(!x("T 38.5, not afebrile.").absent.includes("fever"));
 });
+
+// round 71 (heldout3 tune): urine red cells, urea without a creatinine, a measured urine output, and RR 22 (the qSOFA threshold)
+test("round 71: urine RBC, urea, urine output volume, RR 22", () => {
+  const c71 = { valid: { hematuria: 1, renalImpairment: 1, oliguria: 1, tachypnea: 1, hypoxia: 1, potassiumHigh: 1, hemoglobin: 1 }, labels: {}, numeric: {}, v2: true, syn: {} };
+  const p = (t) => NLP.extract(t, c71).present;
+  for (const t of ["Urine: RBC 30-40/hpf, pus cells 3-4.", "urine RBC 8-10.", "Urine R/M: plenty pus cells, RBC 15-20/hpf."]) assert.ok(p(t).includes("hematuria"), t);
+  for (const t of ["urine RBC 2-3/hpf.", "Urine RBC nil.", "Hb 9, RBC count 3.2."]) assert.ok(!p(t).includes("hematuria"), t);
+  assert.ok(p("K 6.8, urea 190.").includes("renalImpairment"));
+  assert.ok(p("BUN 62.").includes("renalImpairment"));
+  assert.ok(!p("Urea 60.").includes("renalImpairment"));
+  assert.ok(p("Urine output 100 ml in last 6 hrs.").includes("oliguria"));
+  assert.ok(!p("Urine output 600 ml in 12 hrs.").includes("oliguria"));
+  assert.ok(p("RR 22.").includes("tachypnea") && !p("RR 20.").includes("tachypnea"));
+  assert.ok(!p("SpO2 93% RA.").includes("hypoxia") && p("SpO2 91%.").includes("hypoxia"));   // (below 94% was tried and dropped)
+});

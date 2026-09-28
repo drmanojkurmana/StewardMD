@@ -2374,6 +2374,13 @@
     purulentSputum: ["thick yellow sputum", "sputum thick yellow", "sputum yellow", "sputum is yellow", "sputum now yellow", "sputum turned yellow",
       "sputum became yellow", "sputum green", "sputum turned green"]
   };
+  // round 71 (heldout3 tune): "wt loss", "urine output very less", "reddish urine"
+  var FT_SYN_ADD_V2_R71 = {
+    weightLoss: ["wt loss", "wt down", "weight down", "wt reduced", "weight reduced"],
+    oliguria: ["urine output very less", "urine output less", "urine output is less", "very little urine", "passes little urine",
+      "passing very little urine", "passes very little urine", "passing little urine"],
+    hematuria: ["reddish urine", "pinkish urine", "red coloured urine", "red colored urine", "reddish coloured urine", "reddish colored urine"]
+  };
   var FT_SYN_V2 = (function () {
     var o = {};
     Object.keys(FT_SYN).forEach(function (k) { var drop = FT_SYN_DROP_V2[k] || []; o[k] = FT_SYN[k].filter(function (x) { return drop.indexOf(x) < 0; }); });
@@ -2389,6 +2396,7 @@
     Object.keys(FT_SYN_ADD_V2_R53).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R53[k]); });
     Object.keys(FT_SYN_ADD_V2_R60).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R60[k]); });
     Object.keys(FT_SYN_ADD_V2_R67).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R67[k]); });
+    Object.keys(FT_SYN_ADD_V2_R71).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R71[k]); });
     return o;
   })();
   // the extraction context: classic exactly as before; v2 adds the cleaned table and the numeric-field list

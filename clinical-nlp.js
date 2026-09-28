@@ -361,7 +361,7 @@
       if (v2 && m2[0].indexOf("/") > 0) { var BP_RE = /\b(?:bp|blood pressure|b\.p\.?)\s*(?:of|is|was|=|:|-)?\s*(\d{2,3})\s*\/\s*(\d{2,3})(?![\d])/;
         var lo = pick(BP_RE, function (m) { return +m[1] >= 60 && +m[1] <= 300 && +m[2] >= 30 ? +m[1] : null; }, -1); if (lo && lo !== m2 && lo.index !== m2.index) bpRead(lo); }
     }
-    if ((m2 = pick(v2 ? /\b(?:spo2|sao2|sats?|saturation|saturating)\s*(?:at|of|is|was|=|:|-)?\s*(\d{2,3})\s*%?/ : /\b(?:spo2|sao2|sats?|saturation|saturating)\s*(?:at|of|is|=|:)?\s*(\d{2,3})\s*%?/, function (m) { return +m[1] <= 100 ? +m[1] : null; }, -1))) { if (+m2[1] <= 100 && +m2[1] < 92) vital("hypoxia", m2[0]); }
+    if ((m2 = pick(v2 ? /\b(?:spo2|sao2|sats?|saturation|saturating)\s*(?:at|of|is|was|=|:|-)?\s*(\d{2,3})\s*%?/ : /\b(?:spo2|sao2|sats?|saturation|saturating)\s*(?:at|of|is|=|:)?\s*(\d{2,3})\s*%?/, function (m) { return +m[1] <= 100 ? +m[1] : null; }, -1))) { if (+m2[1] <= 100 && +m2[1] < 92) vital("hypoxia", m2[0]); }   // (round 71 tried below 94% in v2: it cost gold and sealed typed top-1)
     var HR_RE = v2 ? /\b(?:hr|heart rate|pulse(?: rate)?)\s*(?:of|is|was|=|:|-)?\s*(\d{2,3})\b/ : /\b(?:hr|heart rate|pulse|pr)\s*(?:of|is|=|:)?\s*(\d{2,3})\b/;
     if ((m2 = pick(HR_RE, V1, 1)) && +m2[1] > 100) vital("tachycardia", m2[0]);
     if ((m2 = pick(HR_RE, function (m) { return +m[1] > 20 ? +m[1] : null; }, -1)) && +m2[1] < 60 && +m2[1] > 20) vital("bradycardia", m2[0]);
@@ -381,7 +381,8 @@
         var tt = +m2[1]; if ((tt >= 38 && tt <= 44) || (tt >= 100.4 && tt <= 110)) vital("fever", m2[0]); }
     }
     var RR_RE = /\b(?:rr|resp(?:iratory)? rate)\s*(?:of|is|=|:)?\s*(\d{1,2})\b/;
-    if ((m2 = pick(RR_RE, V1, 1)) && +m2[1] > 22) vital("tachypnea", m2[0]);
+    // (round 71, v2: 22 or more, the qSOFA threshold; the classic reader keeps "more than 22")
+    if ((m2 = pick(RR_RE, V1, 1)) && (v2 ? +m2[1] >= 22 : +m2[1] > 22)) vital("tachypnea", m2[0]);
     if ((m2 = pick(RR_RE, function (m) { return +m[1] > 0 ? +m[1] : null; }, -1)) && +m2[1] < 10 && +m2[1] > 0) vital("bradypnea", m2[0]);
     if ((m2 = pick(/\bgcs\s*(?:of|is|=|:)?\s*(?:e\d\s*v\d\s*m\d|\d{1,2})(?:\s*\/\s*15)?/, function (m) { var evm = v2 && /e(\d)\s*v(\d)\s*m(\d)/.exec(m[0]); if (evm) return +evm[1] + +evm[2] + +evm[3]; var q = (m[0].match(/(\d{1,2})\s*\/\s*15/) || [])[1] || (m[0].match(/\d{1,2}/) || [])[0]; return q ? +q : null; }, -1))) { var evm2 = v2 && /e(\d)\s*v(\d)\s*m(\d)/.exec(m2[0]); var g = evm2 ? +evm2[1] + +evm2[2] + +evm2[3] : (m2[0].match(/(\d{1,2})\s*\/\s*15/) || [])[1] || (m2[0].match(/\d{1,2}/) || [])[0]; if (g && +g < 15 && +g >= 3) vital("alteredSensorium", m2[0]); }
     var T_RE = v2 ? /\b(?:temp(?:erature)?|febrile at)\s*(?:of|is|was|=|:|-)?\s*(\d{2,3}(?:\.\d)?)\s*(?:°\s*[cf]?|c\b|celsius|f\b|fahrenheit|deg)?/ : /\b(?:temp(?:erature)?|febrile at)\s*(?:of|is|=|:)?\s*(\d{2,3}(?:\.\d)?)\s*(?:c|celsius|f|fahrenheit|°|deg)/;
@@ -431,6 +432,15 @@
       var GLV = function (m) { if (fluidGlu(m)) return null; var q = +m[1], mg = m[2] ? /mg/.test(m[2]) : q > 40; if (!m[2] && q >= 20 && q <= 40) return null; q = mg ? q : q * 18; return q > 0 && q < 3000 ? q : null; }, gl;   // mg/dL
       if ((m2 = pick(GLU_RE, GLV, -1)) && (gl = GLV(m2)) < 70) vital("glucoseLow", m2[0]);
       if ((m2 = pick(GLU_RE, GLV, 1)) && (gl = GLV(m2)) >= 250) { vital("glucoseHigh", m2[0]); if (gl > 600) vital("glucoseVeryHigh", m2[0]); }
+      // round 71: red cells in the urine at 5/hpf or more (or "plenty", "many", "numerous") are haematuria; urea of 100 mg/dL
+      // or more (BUN 50) is kidney impairment when no creatinine is given; a measured urine output under 35 mL/h
+      // (about 0.5 mL/kg/h, KDIGO) or 400 mL a day is oliguria
+      if ((m2 = pick(/\b(?:urine|urinary|u\/r|r\/m|r\/e)\b[^.;]{0,40}?\brbcs?\b\s*(?:[:=-]\s*)?(\d{1,3}|plenty|many|numerous|loaded|full field|plenty of)\b|\brbcs?\b\s*(?:[:=-]\s*)?(\d{1,3})\s*(?:(?:-|to)\s*\d{1,3}\s*)?\/\s*hpf/, function (m) {
+          var v = m[1] || m[2]; return /^\d/.test(v) ? +v : 99; }, 1)) && (/^\d/.test(m2[1] || m2[2]) ? +(m2[1] || m2[2]) >= 5 : true)) vital("hematuria", m2[0]);
+      if (!/\b(?:creatinine|creat|s\.?\s?cr)\b/.test(raw) && (m2 = pick(/\b(?:blood urea|b\.?\s?urea|s\.?\s?urea|urea|bun)\b\s*(?:level|value)?\s*(?:of|is|was|=|:|-)?\s*(\d{2,3})(?!\s*mmol)/, function (m) { return +m[1]; }, 1)) &&
+          (/\bbun\b/.test(m2[0]) ? +m2[1] >= 50 : +m2[1] >= 100)) vital("renalImpairment", m2[0]);
+      if ((m2 = pick(/\b(?:urine output|uop|u\/o)\b[^.;\d]{0,20}?(\d{1,4})\s*(?:ml|cc)\s*(?:in|over|\/|per)\s*(?:the\s+)?(?:last\s+|past\s+)?(\d{1,2})\s*(?:h|hrs?|hours?)\b/, function (m) { return +m[2] > 0 ? +m[1] / +m[2] : null; }, -1)) &&
+          +m2[2] > 0 && +m2[1] / +m2[2] < 35) vital("oliguria", m2[0]);
       // round 69: a white count of 12,000/mm3 or more ("TLC 17,400", "WBC 18k", "TC 14200", "WBC 15.6 x10^9/L"); the finding exists
       // only under smd_kb_v2 (consider() drops it otherwise)
       if ((m2 = pick(/\b(?:tlc|twbc|wbc|wcc|tc|total (?:leu[ck]ocyte|white (?:blood )?cell) count|(?:leu[ck]ocyte|white (?:blood )?cell) count)\b(?:\s*(?:count|level|of))?\s*(?:\([^)\d]{0,12}\))?\s*(?:is|was|at|=|:|-)?\s*(\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)\s*(k\b|x\s*10|\u00d7\s*10|thousand)?/, function (m) {

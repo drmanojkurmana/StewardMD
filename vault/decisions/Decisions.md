@@ -10670,7 +10670,7 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
 - **Dropped**: "told about" as a counselling cue (Indian English reports symptoms that way), a bare "diabetic foot"
   synonym, a dash or bracket before any duration (would read "review - 2 weeks" as a subacute illness).
 
-## 2026-09-28 - Rounds 61 to 69: an independent held-out set, and tuning on half of it
+## 2026-09-28 - Rounds 61 to 71: an independent held-out set, and tuning on half of it
 - **Context**: rounds 61 to 63 added a better next-question picker (`smd_dx_q2`), an opt-in on-device case log
   (`smd_case_log`, default OFF) and `test/dx-heldout-3.json`: 537 cases by independent writers, split by diagnosis into
   "tune" (may be studied) and "sealed" (only ever counted; `h3show.mjs` refuses sealed ids). On it the engine was ~18
@@ -10689,3 +10689,7 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   systemic sign for cholecystitis (only a gallstone-pancreatitis overcall).
 - **Not changed, on purpose**: fever with confusion in a drinker still gets antibiotics (encephalitis/meningitis must be
   excluded, even though the tune labels call three such cases delirium tremens).
+- **Rounds 70 to 71**: malaria below a stated bacterial source; uraemia needs no other cause of confusion; reader RR 22
+  (qSOFA), urine RBC counts, urea without a creatinine, a measured urine output, "wt loss". Dropped: SpO2 below 94%
+  (cost gold and sealed). Neutral and left alone: subacute onset from 8 rather than 7 days, a BP reading of 160/100
+  rather than 140/90 as a hypertension history.
