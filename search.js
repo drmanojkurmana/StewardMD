@@ -102,6 +102,7 @@
     { act: "theme", tt: "Appearance", sub: "Theme and dark mode", kw: "dark mode light theme colour appearance" },
     { act: "about", tt: "About StewardMD", sub: "Version and licence", kw: "about version" },
     { act: "drugs", tt: "Drugs database", sub: "Generics, brands, prices", kw: "drug database brands prices" },
+    { act: "alltools", tt: "All tools", sub: "Every tool in one list, open any of them", kw: "all tools list open every tool" },
     { act: "customizetools", tt: "Customize home tools", sub: "Show, hide, reorder tiles", kw: "customize tiles reorder home" }
   ];
   function route(act) { return function () { if (G.SMD_openRoute) G.SMD_openRoute(act); }; }

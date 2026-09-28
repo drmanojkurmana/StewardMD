@@ -9,3 +9,13 @@ September 2026: `home.js` owns home-grid and Customize-tools list ordering. Save
 - No clinical actions or eligibility flags change. Native devices require a new bundle or an authorized OTA release.
 
 Verification: `node test/run-swipe-reorder-fix-ui.mjs` covers the shared list/grid path and persistence; `node test/run-home-reorder-touch.mjs` uses actual Chrome CDP touch input to cover scroll cancellation, horizontal placement, edit persistence, pointer cancellation, auto-scroll, and keyboard reordering. Chrome touch emulation is not physical iPhone verification.
+
+## All tools sheet (2026-09-28)
+Tester: "I only want 3 tools on Home, but at times I need the others." The last grid tile is now
+**All tools** (`data-act="alltools"`, `home.js` `openAllTools`), replacing "Add Tool". It lists every
+eligible tool (`orderedHomeTools()`), each row opens the tool directly (no pinning needed); the pin at
+the row's right edge adds/removes it from Home (`smd_home_tools`); a filter box; **Customize** inside
+the sheet opens the old reorder sheet (`openToolsCustomize`, still `ACT.customizetools`, reachable from
+search). Role-locked tools are listed and explain themselves on tap. Search lists "All tools" too
+(`search.js` EXTRA_TOOLS). Test: `test/run-all-tools-ui.mjs`; `run-home-sheet-drag-handle.mjs` and
+`run-govschemes-ui.mjs` reach Customize through the new route.
