@@ -1902,7 +1902,7 @@
     palpitations:["palpitation"], syncope:["syncope","collapse","fainted"], backPain:["back pain"], focalNeuroDeficit:["weakness","hemiparesis","facial droop","slurred","focal deficit"],
     crepitations:["crackle","crepitation","creps"], consolidation:["consolidation"], purulentSputum:["purulent sputum","productive cough","sputum"],
     calfTenderness:["calf tender","calf pain"], legSwellingUnilateral:["calf swelling","leg swelling","unilateral leg"], legSwellingBilateral:["bilateral leg","pedal edema","ankle swelling","peripheral edema"],
-    abdominalPain:["abdominal pain","belly pain","abdo pain","epigastric pain"], rightUpperQuadrantPain:["right upper quadrant","ruq pain"], flankPain:["flank pain","loin pain"],
+    abdominalPain:["abdominal pain","belly pain","abdo pain","epigastric pain"], rightUpperQuadrantPain:["right upper quadrant","ruq pain"],
     polyuriaPolydipsia:["polyuria","polydipsia"], ketonemia:["ketone","ketoacidosis"], orthopnea:["orthopnoea","orthopnea","pnd"],
     exertionalChestPain:["exertional","on exertion"], ecgIschemia:["st elevation","ischemic ecg","ischaemic ecg"], thunderclapHeadache:["thunderclap","worst headache","worst-ever"],
     hematuria:["hematuria","haematuria","blood in urine"], jointSwelling:["swollen joint","hot joint","joint swelling"],
@@ -2128,11 +2128,12 @@
     malignancy: ["mediastinal mass", "paratracheal mass", "hilar mass", "lung mass", "pulmonary mass", "space-occupying lesion"],
     // round 29: gait words for ataxia, and the spelled variants the stricter typo matcher (clinical-nlp.js) no longer reaches
     tachypnea: ["tachypneic", "tachypnoeic", "tachypnoea"], photophobia: ["photophobic"],
+    // round 36: pigment in the urine said as a colour
+    darkUrine: ["cola-coloured", "cola coloured", "cola-colored", "darkening urine", "darkening of the urine", "coca-cola"],
     // round 33: pharyngitis signs, tick bites, a full bladder (label-only findings had no phrasing)
     tonsillarExudate: ["tonsillar exudate", "tonsillar exudates", "exudative tonsillitis", "exudate on the tonsils", "exudates on the tonsils", "pus on the tonsils", "white patches on the tonsils"],
     tenderCervicalNodes: ["tender cervical nodes", "tender cervical lymph nodes", "tender anterior cervical", "tender neck glands", "tender cervical lymphadenopathy", "tender submandibular nodes"],
     tickExposure: ["tick bite", "tick bites", "bitten by a tick", "removing ticks", "removed ticks", "removed a tick", "ticks from"],
-    urinaryRetention: ["distended bladder", "palpable bladder", "bladder distension", "bladder distention", "has not passed urine", "not passed urine"],
     // round 32: urine output said falling in other words
     oliguria: ["declining urine output", "falling urine output", "poor urine output", "diminished urine output", "urine output is low", "urine output was low"],
     ataxia: ["ataxic", "staggering gait", "wide-based gait", "broad-based gait", "truncal ataxia", "gait ataxia", "cannot walk heel to toe", "poor coordination", "impaired coordination"],
@@ -2149,7 +2150,9 @@
     erythemaAtSite: ["redness over the pacemaker", "red, discharging swelling over the", "redness and discharge over", "red swelling over the pacemaker", "erythema at the insertion",
       "redness at the insertion", "red and tender exit site", "exit-site redness", "exit site redness"],
     dysuria: ["painful obstructed micturition", "pain on passing urine", "painful voiding", "burning when passing urine"],
-    urinaryRetention: ["obstructed micturition", "poor stream", "straining to void"],
+    urinaryRetention: ["obstructed micturition", "poor stream", "straining to void",
+      // round 33 (merged here in round 36: a second urinaryRetention key in this literal had silently replaced the first)
+      "distended bladder", "palpable bladder", "bladder distension", "bladder distention", "has not passed urine", "not passed urine"],
     knownIBD: ["ulcerative colitis", "crohn's", "crohns", "crohn disease", "inflammatory bowel disease", "known ibd", "ibd flare"]
   };
   var FT_SYN_V2 = (function () {

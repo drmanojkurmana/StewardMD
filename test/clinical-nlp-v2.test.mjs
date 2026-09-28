@@ -467,3 +467,29 @@ test("round 34 mention guards", () => {
   assert.ok(!p("frothy urine for 3 weeks").includes("seizure"));
   assert.ok(p("frothing at the mouth and tongue biting").includes("seizure"));
 });
+
+// rounds 35 and 36: pain worse on breathing, several joints, extra doses, slow breathing, tingling with weak legs,
+// lists led by "without" / "are not", "has not passed urine", an intimal flap, symmetric brisk reflexes
+test("rounds 35 and 36 readings", () => {
+  const c36 = { valid: { pleuriticChestPain: 1, pleuriticPain: 1, jointSwelling: 1, polyarthralgia: 1, drugOverdose: 1, bradypnea: 1, ascendingWeakness: 1,
+    orthopnea: 1, calfTenderness: 1, fever: 1, rash: 1, headache: 1, urinaryRetention: 1, asterixis: 1, focalNeuroDeficit: 1, nauseaVomiting: 1 },
+    labels: {}, numeric: {}, v2: true,
+    syn: { orthopnea: ["orthopnoea"], calfTenderness: ["calf pain"], fever: ["fever"], rash: ["rash"], headache: ["headache"],
+      urinaryRetention: ["distended bladder", "not passed urine"], asterixis: ["flap"], focalNeuroDeficit: ["brisk reflexes"], nauseaVomiting: ["retching"] } };
+  const r = (t) => NLP.extract(t, c36);
+  const p = (t) => r(t).present;
+  assert.ok(p("It is clearly worse when she lies flat at night and on deep inspiration").includes("pleuriticChestPain"));
+  const ra = p("symmetrical pain and swelling affecting the metacarpophalangeal joints");
+  assert.ok(ra.includes("jointSwelling") && ra.includes("polyarthralgia"));
+  assert.ok(p("She took two extra oxycodone doses today").includes("drugOverdose"));
+  assert.ok(p("Chest clear with quiet, shallow, slow respiratory effort").includes("bradypnea"));
+  assert.ok(p("3 days of tingling and mild weakness in both legs").includes("ascendingWeakness"));
+  assert.deepEqual(p("palpitations at night, and are not accompanied by orthopnoea, calf pain or fever"), []);
+  const w = r("fever, without rash, headache or vomiting");
+  assert.ok(w.present.includes("fever") && w.absent.includes("rash") && w.absent.includes("headache"));
+  assert.ok(p("he has not passed urine for 10 hours and has a distended bladder").includes("urinaryRetention"));
+  assert.ok(!p("CT: intimal flap in the ascending aorta").includes("asterixis"));
+  assert.ok(!p("Fine tremor, brisk reflexes").includes("focalNeuroDeficit"));
+  assert.ok(p("brisk reflexes on the right with an upgoing plantar").includes("focalNeuroDeficit"));
+  assert.ok(!p("pain reaching maximal intensity within 6 hours").includes("nauseaVomiting"));
+});

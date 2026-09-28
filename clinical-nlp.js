@@ -101,7 +101,7 @@
   var STOPPED_BEFORE_V2 = /\b(?:discontinued|stopped|stopping|ceased|withheld|held|quit|off)\s+(?:(?:his|her|the|all|regular)\s+)?$/;
   // round 8: a later mention that is a lab name with its value ("serum ketones (bhb) 1.2") is read by the numeric parser, not here
   var LAB_VALUE_AFTER_V2 = /^\s*(?:\([^)]{0,30}\)\s*)?(?:level\s*|of\s*|is\s*|was\s*|=|:|-)?\s*\d/;
-  var NEG_IDIOM_V2 = /\b(?:not|no|without)\s+(?:(?:been|yet|fully|much|any)\s+)?(?:responding|responded|response|responsive|improving|improved|improvement|settling|settled|resolving|resolved|resolution|relieved|relief|relieving|subsiding|subsided|better|controlled|reducing|reduced|abating|abated|remitting)\b/g;
+  var NEG_IDIOM_V2 = /\b(?:not|no|without)\s+(?:(?:been|yet|fully|much|any)\s+)?(?:responding|responded|response|responsive|improving|improved|improvement|settling|settled|resolving|resolved|resolution|relieved|relief|relieving|subsiding|subsided|better|controlled|reducing|reduced|abating|abated|remitting)\b|\bnot\s+(?:passed|passing)\s+(?:any\s+)?urine\b|\bnot\s+opened\s+(?:his\s+|her\s+|their\s+)?bowels\b/g;
   // v2 numeric thresholds (clinical definitions, chosen on the train/dev split: see PLAN-DX-ABX-10.md)
   var LAB_V2 = { lactate: 2, plateletsLow: 150000, creatinineMgDl: 1.5, creatinineUmol: 133 };
   // explicit family-history phrasing only: "mother reports high fever" (a child's note) is the patient's fever
@@ -157,10 +157,10 @@
   // a positive statement ("no vomiting, fever and cough for 3 days").
   var LIST_HEAD_SKIP_V2 = /\b(?:allerg\w*|comorbid\w*|addictions?|complaints?|significant)\b|\bhistory\s*$/;
   var NEG_LIST_HEAD_V2 = /^\s*(?:(?:he|she|they|patient|the patient|pt|mother|father|family)\s+(?:also\s+)?)?(?:(?:has|have|had|there (?:is|was|were|are)|with)\s+)?(?:no|denies|denied|without|nil|negative for|not)\b/;
-  var NEG_LIST_LEAD_V2 = /^\s*(?:(?:he|she|they|patient|the patient|pt)\s+(?:also\s+)?)?(?:has|have|had|there (?:is|was|were|are)|with)\s+(?:no|nil|not)\b/;
+  var NEG_LIST_LEAD_V2 = /^\s*(?:(?:he|she|they|patient|the patient|pt)\s+(?:also\s+)?)?(?:(?:has|have|had|there (?:is|was|were|are)|with)\s+(?:no|nil|not)\b|without\b|(?:is|are|was|were)\s+not\b)/;
   var LIST_DUR_V2 = /\b(?:for|since|x|over)\s+(?:the\s+)?(?:\d|a |an |one|two|three|four|five|six|seven|few|several|past|last)|\b\d+\s*(?:d|days?|wks?|weeks?|hours?|hrs?|months?)\b/;
   // real words one letter from a synonym (round 29): never read as a typo of it
-  var FUZZY_STOP_V2 = { dysphasia: 1, dysphasic: 1, drooping: 1, blurred: 1, palpation: 1, hypodense: 1, hyperdense: 1, following: 1, hypotensive: 1, hypertensive: 1, waking: 1 };
+  var FUZZY_STOP_V2 = { dysphasia: 1, dysphasic: 1, drooping: 1, blurred: 1, palpation: 1, hypodense: 1, hyperdense: 1, following: 1, hypotensive: 1, hypertensive: 1, waking: 1, reaching: 1 };
   function negList(norm, idx) {
     var st = Math.max(norm.lastIndexOf(".", idx - 1), norm.lastIndexOf(";", idx - 1), norm.lastIndexOf(":", idx - 1)) + 1;
     var en = norm.slice(idx).search(/[.,;:]| and | or | nor /), segs = norm.slice(st, en < 0 ? norm.length : idx + en).split(/,| and | or | nor /);
@@ -202,6 +202,11 @@
         var fseg = norm.slice(idx, idx + 90).split(/[.;]/)[0], fsw = /\b(?:swoll\w*|swelling|oedema\w*|edema\w*|papill\w*|blurr\w*|raised|elevated|indistinct|hyperaemi\w*)\b/.exec(fseg);
         if (!fsw || /\b(?:no|not|without|nil|normal)\b/.test(fseg.slice(0, fsw.index))) return true;
       }
+      // round 34: an intimal flap is aortic dissection, not a liver flap; symmetric brisk reflexes are not a focal deficit
+      if (v2 && key === "asterixis" && srcText === "flap" && (/\b(?:intimal|dissection|dissecting)\b[^.;]{0,15}$/.test(norm.slice(Math.max(0, idx - 25), idx)) ||
+          /^\s*(?:valve|wound|graft|surgery|of skin)\b/.test(norm.slice(idx + 4, idx + 20)))) return true;
+      if (v2 && key === "focalNeuroDeficit" && srcText === "brisk reflexes" &&
+          !/\b(?:right|left|unilateral|one side|asymmetric\w*)\b/.test(norm.slice(Math.max(0, idx - 40), idx + 60).split(/[.;]/).slice(-2).join(" "))) return true;
       // round 34: "frothy urine / sputum" is proteinuria or pulmonary oedema, not a seizure ("frothing at the mouth" is)
       if (v2 && key === "seizure" && /^froth/.test(srcText || "") && /^y\b/.test(norm.slice(idx + 5, idx + 7))) return true;
       // round 28: "unresponsive to antibiotics / cell-wall agents / paracetamol" is about a treatment, not the sensorium
@@ -400,6 +405,20 @@
       while ((m2 = txre.exec(norm))) { var xo = m2[0].search(/exudat/); consider("tonsillarExudate", m2.index + (/^tonsil/.test(m2[0]) ? xo : 0), "compound", m2[0]); }
       var tcre = /\btender\b[^.;]{0,30}?\bcervical\s+(?:lymph\s+)?(?:nodes?|lymphadenopathy|glands?)\b|\bcervical\s+(?:lymph\s+)?(?:nodes?|glands?)\b[^.;]{0,20}?\btender\b/g;
       while ((m2 = tcre.exec(norm))) consider("tenderCervicalNodes", m2.index + Math.max(0, m2[0].search(/\btender\b/)), "compound", m2[0]);
+      // round 36: pain made worse by breathing said with words between ("worse when she lies flat and on deep inspiration")
+      var plre = /\bworse\b[^.;]{0,40}?\bon\s+(?:deep\s+)?(?:inspiration|breathing|a deep breath)\b|\bdeep breaths?\s+(?:hurt|hurts|are painful)\b/g;
+      while ((m2 = plre.exec(norm))) { consider("pleuriticChestPain", m2.index, "compound", m2[0]); consider("pleuriticPain", m2.index, "compound", m2[0]); }
+      // round 36: several joints named as painful or swollen ("pain and swelling affecting the metacarpophalangeal joints")
+      var jre = /\b(pain and swelling|swelling and pain|swelling|pain)\s+(?:affecting|of|in|involving)\s+(?:the\s+)?(?:small\s+joints|metacarpophalangeal|proximal interphalangeal|mcps?|pips?|wrists|hands|fingers|knuckles)\b/g;
+      while ((m2 = jre.exec(norm))) { if (/swelling/.test(m2[1])) consider("jointSwelling", m2.index, "compound", m2[0]); if (/pain/.test(m2[1])) consider("polyarthralgia", m2.index, "compound", m2[0]); }
+      // round 36: extra doses taken ("took two extra oxycodone doses"); slow shallow breathing
+      var xdre = /\btook\s+(?:[a-z0-9-]+\s+){0,2}extra\b|\bextra\s+(?:[a-z-]+\s+){0,2}doses?\b/g;
+      while ((m2 = xdre.exec(norm))) consider("drugOverdose", m2.index, "compound", m2[0]);
+      var bpre = /\bslow\b[^.;]{0,15}?\b(?:respirat\w*(?:\s+effort)?|breathing|breaths)\b/g;
+      while ((m2 = bpre.exec(norm))) consider("bradypnea", m2.index, "compound", m2[0]);
+      // round 36: tingling with weakness of both legs is the ascending (Guillain-Barre) picture
+      var gbre = /\b(?:tingling|paraesthesi\w*|paresthesi\w*|pins and needles|numbness)\b[^.;]{0,50}?\bweakness\b[^.;]{0,25}?\b(?:both legs|both lower limbs|legs|lower limbs)\b|\b(?:ascending|distal-to-proximal)\s+(?:sensory\s+)?(?:tingling|numbness|weakness)\b/g;
+      while ((m2 = gbre.exec(norm))) consider("ascendingWeakness", m2.index, "compound", m2[0]);
       // round 10: 48 hours or more into a hospital stay (hospital-acquired territory)
       var hdre = /\b(?:admitted|hospitali[sz]ed|intubated|ventilated)\s+(\d{1,2}|two|three|four|five|six|seven|eight|nine|ten)\s*days?\s*(?:ago|earlier|previously|before)\b|\b(?:hospital|post-?operative|ward|icu)\s+day\s+(\d{1,2})\b|\bday\s+(\d{1,2})\s+of\s+(?:(?:a|an|the|his|her)\s+)?(?:[a-z-]+\s+){0,2}(?:admission|ventilation|hospital stay|stay)\b/g;
       while ((m2 = hdre.exec(norm))) {   // every mention (round 19): the first may be negated or under 48 h
