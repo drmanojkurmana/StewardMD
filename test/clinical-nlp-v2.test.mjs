@@ -633,3 +633,29 @@ test("lab abbreviations and an ambiguous glucose", () => {
   assert.ok(r("RBS 480.").includes("glucoseHigh"));
   assert.ok(r("RBS 2.8 mmol/l.").includes("glucoseLow"));
 });
+
+// round 47: "h/o fever for 5 days" opens the present illness (Indian notes); "for 10 years" and "2 weeks ago" stay past
+test("history of a finding for days is the present illness", () => {
+  const c47 = { valid: { fever: 1, cough: 1, hypertensionHx: 1, nauseaVomiting: 1 }, labels: {}, numeric: {}, v2: true,
+    syn: { fever: ["fever"], cough: ["cough"], hypertensionHx: ["hypertension"], nauseaVomiting: ["nausea", "vomiting"] } };
+  const r = (t) => NLP.extract(t, c47);
+  for (const t of ["h/o fever for 5 days.", "History of fever for 5 days with cough.", "h/o fever x 3 days.", "h/o fever since yesterday."])
+    assert.ok(r(t).present.includes("fever"), t);
+  assert.ok(r("h/o cough since 2 weeks.").present.includes("cough"));
+  const past = r("History of hypertension for 10 years.").findings.find((f) => f.canonicalFindingId === "hypertensionHx");
+  assert.equal(past.temporality, "historical");
+  assert.ok(!r("History of fever 2 weeks ago.").present.includes("fever"));
+  assert.ok(!r("Past history of fever for 3 days last year.").present.includes("fever"));
+  assert.ok(r("N/V since morning.").present.includes("nauseaVomiting"));
+  assert.ok(r("No n/v.").absent.includes("nauseaVomiting"));
+});
+
+// round 47: "neutropenic precautions / protocol" is a ward routine, not a neutrophil count
+test("neutropenic precautions are not neutropenia", () => {
+  const cN = { valid: { neutropenia: 1 }, labels: {}, numeric: {}, v2: true, syn: { neutropenia: ["neutropenia", "neutropenic"] } };
+  const r = (t) => NLP.extract(t, cN).present;
+  assert.ok(!r("Per neutropenic-precaution protocol, cultures drawn.").includes("neutropenia"));
+  assert.ok(!r("Neutropenic precautions started.").includes("neutropenia"));
+  assert.ok(r("He is neutropenic.").includes("neutropenia"));
+  assert.ok(r("Febrile neutropenia.").includes("neutropenia"));
+});

@@ -143,7 +143,8 @@ try {
   // so an URTI picture (gc_149, gold: URTI, no antibiotics) reads "only if pharyngitis criteria are met"
   ok(await load(BASE + "?gatev2=1"), "app + KB load with ?gatev2=1 (v3 order, the default)");
   const urtiV3 = await assess(keys("gc_149"));
-  ok(urtiV3.cls === "infection_conditional" && urtiV3.rule !== "keep_rival", `on + v3 · URTI with pneumonia only keyword-close (gc_149): conditional, not "likely" (${urtiV3.cls})`);
+  // round 47: its sore throat comes with cough and coryza, so pharyngitis no longer holds even the conditional answer
+  ok(urtiV3.cls === "infection_no_abx" && urtiV3.rule !== "keep_rival", `on + v3 · URTI with pneumonia only keyword-close (gc_149): no antibiotics, not "likely" (${urtiV3.cls})`);
   // default ON since 2026-09-27 (smd_kb_v2): SBP with fever matches the knowledge base itself
   const sbpDefault = await assess(keys("gc_143"));
   ok(sbpDefault.ab === true, `defaults · SBP (fever) gc_143: antibiotics yes (${sbpDefault.cls})`);
@@ -189,6 +190,11 @@ try {
   // with the prior switch on; a fever with an eschar must keep antibiotics either way
   const scrub = await cm(["fever", "headache", "myalgiaArthralgia", "eschar"]);
   ok(scrub.ab === true, `defaults · the same fever with an eschar: antibiotics (${scrub.cls}, ${scrub.rule})`);
+  // round 47: a sore throat with cough or coryza and no exudate is viral (IDSA): no "antibiotics if criteria met"
+  const vThroat = await cm(["soreThroat", "fever", "cough", "coryza"]);
+  ok(vThroat.ab === false, `defaults · sore throat + fever + cough + coryza: no antibiotics (${vThroat.cls}, ${vThroat.rule})`);
+  const gas = await cm(["soreThroat", "fever", "tonsillarExudate", "tenderCervicalNodes"]);
+  ok(gas.ab === true, `defaults · sore throat + fever + exudate + tender nodes: antibiotics if criteria met (${gas.cls})`);
   await load(BASE + "?gatev2=1&nlpv2=0");
   ok((await assessNeg(T(obstruction), obstNeg)).rule !== "ni_lead_afebrile", "classic extractor · raw-score check kept (it reads only a note's first mention of fever)");
   await load(BASE + "?gatev2=1&rankv3=0&kbv2=0");

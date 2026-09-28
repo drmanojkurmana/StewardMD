@@ -6,6 +6,7 @@
  *          "He denies {s}." / "{s}: absent."                                   -> the finding is NOT read
  *   list   "No {a}, {b} or {c}." in every order                                -> none of them is read
  *   filler "{s}. Seen in the evening clinic."                                  -> still read
+ *   everyday  test/nlp-everyday-phrases.json ("Loose motions.", "On dialysis.")  -> read; "No {phrase}" is not
  * Chart texts (gold train + dev listed case by case; test and held-out sets reported as counts only):
  *   upper case, doubled spaces, a neutral sentence before and after            -> the same findings
  * USAGE: BASE=http://localhost:8804/ CHROME=<chrome> node test/run-nlp-metamorphic.mjs [--check]
@@ -126,6 +127,14 @@ try {
   const litems = []; tri.forEach((g) => PERM.forEach((o) => litems.push({ g, text: `No ${g[o[0]].s}, ${g[o[1]].s} or ${g[o[2]].s}.` })));
   const lout = await read(litems.map((x) => x.text));
   litems.forEach((x, i) => { const hit = x.g.filter((p) => lout[i].includes(p.k)).map((p) => p.k); if (hit.length) bump("probe.list", `${hit.join(",")}: "${x.text}"`); });
+  // round 47: everyday wordings a doctor types ("Shortness of breath since 2 days.", "Loose motions", "On dialysis.",
+  // "Sore throat.") from test/nlp-everyday-phrases.json: each is read, and "No {phrase}" is not read as present
+  const EVD = JSON.parse(readFileSync(join(ROOT, "test", "nlp-everyday-phrases.json"), "utf8"));
+  const evo = await read(EVD.map((x) => x[0]));
+  EVD.forEach((x, i) => { if (!evo[i].includes(x[1])) bump("probe.everyday", `${x[1]}: "${x[0]}" -> [${evo[i]}]`); });
+  const evn = await read(EVD.map((x) => "No " + x[0].charAt(0).toLowerCase() + x[0].slice(1)));
+  EVD.forEach((x, i) => { if (evn[i].includes(x[1])) bump("probe.everydayNeg", `${x[1]}: "No ${x[0]}"`); });
+  counts["probe.everydayPhrases"] = EVD.length;
 
   // ---- chart texts: meaning-preserving edits ----
   const T = {
@@ -177,7 +186,7 @@ try {
   }
   const ceilings = (() => { try { return JSON.parse(readFileSync(CEIL_FILE, "utf8")); } catch { return {}; } })();
   if (WRITE) {
-    const ALL = ["probe.pos", "probe.neg", "probe.list", "probe.spelling", "probe.without", "chart.upper", "chart.spaces", "chart.neutral", "chart.lines", "chart.reversed", "chart.age", "chart.shorthand", "chart.bullets", "chart.semis", "chart.labs", "engine.order", "engine.repeat"];
+    const ALL = ["probe.pos", "probe.neg", "probe.list", "probe.spelling", "probe.without", "probe.everyday", "probe.everydayNeg", "chart.upper", "chart.spaces", "chart.neutral", "chart.lines", "chart.reversed", "chart.age", "chart.shorthand", "chart.bullets", "chart.semis", "chart.labs", "engine.order", "engine.repeat"];
     const out = {}; for (const k of ALL) out[k] = counts[k] || 0;
     writeFileSync(CEIL_FILE, JSON.stringify(out, null, 2) + "\n"); console.log("ceilings written");
   }

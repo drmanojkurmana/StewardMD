@@ -107,6 +107,13 @@ added) and the numeric-field list. Off: 0 differences across 1,660 case-paths.
   `negList`. Debug tools worth rebuilding: dump `nlpCtx()` from the page to JSON and call `SMD_NLP.extract` in Node;
   group non-gold readings by source text. Gotcha: phrase tables are object literals, a repeated key silently keeps only
   the last (`test/syn-tables.test.mjs` guards it).
+- Rounds 40 to 48 (2026-09-28): invariance families (shorthand, bullets, semicolons, age, lab abbreviations) and an
+  everyday-wording recall probe (`test/nlp-everyday-phrases.json`, run as `probe.everyday` / `probe.everydayNeg`).
+  Gotcha: a catalog finding WITHOUT synonyms is matched by its label only when a space follows it, so "Sore throat."
+  at a sentence end read nothing; give every finding its own words in a synonym table (`FT_SYN_ADD_V2_R47`, `_R48`).
+  Two keys for one finding (pleuriticPain / pleuriticChestPain, splenomegaly / hepatosplenomegaly) double count in the
+  non-infective KB when both are read. To attribute an audit change to one synonym, a worktree-only localStorage switch
+  that drops table entries per key or per value, then the audit per switch (unseen sets as counts only).
 
 ## Differential ordering v3 (`smd_rank_v3`, default ON since 2026-09-27; `"0"` opts out)
 

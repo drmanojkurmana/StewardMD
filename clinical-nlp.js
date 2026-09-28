@@ -85,10 +85,13 @@
   // v2: phrases the abbreviation table would otherwise mangle ("cva" -> "stroke")
   var PRE_V2 = [[/\bcva\s*(?:angle\s*)?tender(?:ness)?\b/g, "costovertebral angle tenderness"], [/\bcva\s*angle\b/g, "costovertebral angle"],
     // round 42: shorthand ("fever w/o rigors", "w/ cough", "abd pain"; a trailing sign: "fever -", "cough (-)", "vomiting +ve")
-    [/(^|[^a-z])w\/o(?=[^a-z]|$)/g, "$1without"], [/(^|[^a-z])w\/\s*(?=[a-z0-9])/g, "$1with "], [/\babd\b\.?/g, "abdominal"],
+    [/(^|[^a-z])n\/v(?=[^a-z]|$)/g, "$1nausea and vomiting"], [/(^|[^a-z])w\/o(?=[^a-z]|$)/g, "$1without"], [/(^|[^a-z])w\/\s*(?=[a-z0-9])/g, "$1with "], [/\babd\b\.?/g, "abdominal"],
     [/\s*(?:\(\s*-\s*\)|-\s?ve\b|\s-)(?=\s*(?:[,.;:]|$))/g, " negative"], [/\s*(?:\(\s*\+\s*\)|\+\s?ve\b|\s\+)(?=\s*(?:[,.;:]|$))/g, " positive"]];
   // "a 3-day history of" states the present illness, not past history
   var PRESENT_HX_V2 = /\b(?:\d{1,2}|a|an|one|two|three|four|five|six|seven|eight|nine|ten|few|several)\s*-?\s*(?:d|days?|wks?|weeks?|months?|hours?|hrs?)\s*history\b/;
+  // round 47: "history of fever for 5 days" / "h/o cough since 2 weeks" / "h/o vomiting since morning" (how Indian notes
+  // open the present illness) is the present illness; "history of MI 2 weeks ago" and "for 10 years" stay past history
+  var PRESENT_DUR_V2 = /\bhistory of\b[^.;]*?(?:\b(?:for|since|x)\s*(?:the\s+)?(?:past\s+|last\s+)?(?:\d{1,2}|a|an|one|two|three|four|five|six|seven|eight|nine|ten|few|several|couple of)\s*-?\s*(?:d|days?|wks?|weeks?|hours?|hrs?)\b(?!\s*(?:ago|back|before|earlier|previously))|\bsince\s+(?:yesterday|morning|this morning|last night|today|the morning)\b)/;
   // round 8: "on a background of 3 days of fever" is the present illness too (days/weeks/hours only;
   // "background of 10 years of diabetes" stays past history)
   var PRESENT_BG_V2 = /\bbackground of\s*(?:a|an|the)?\s*(?:\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten|few|several|couple of)\s*-?\s*(?:d|days?|wks?|weeks?|hours?|hrs?)\b/;
@@ -239,6 +242,8 @@
       // round 34: palmar erythema is a liver sign, erythema nodosum / multiforme / ab igne are not a red infected skin
       if (v2 && key === "skinErythema" && /^erythema$/.test(srcText || "") && (/\bpalmar\s+$/.test(norm.slice(Math.max(0, idx - 8), idx)) ||
           /^\s*(?:nodosum|multiforme|ab igne|infectiosum|marginatum|toxicum)\b/.test(norm.slice(idx + 8, idx + 24)))) return true;
+      // round 47: "neutropenic precautions / protocol / diet" is a ward routine, not a neutrophil count (train gc_429)
+      if (v2 && key === "neutropenia" && srcText === "neutropenic" && /^[\s-]*(?:precaution|protocol|diet|isolation|pathway)/.test(norm.slice(idx + 11, idx + 30))) return true;
       return false;
     }
     function consider(key, idx, method, srcText, display) {
@@ -543,7 +548,7 @@
       if (hasWord(tcl, TEMPORAL)) r.temporality = "historical";
       // v2: "a 3-day history of fever" is the PRESENT illness; classic read "history of" as past history
       // and dropped everything in that clause
-      if (v2 && r.temporality === "historical" && (PRESENT_HX_V2.test(cl) || PRESENT_BG_V2.test(cl)) && !/\b(?:known case of|past|previous|prior|resolved|status post)\b|(?:^|[^-])\bold\b/.test(cl)) r.temporality = "current";
+      if (v2 && r.temporality === "historical" && (PRESENT_HX_V2.test(cl) || PRESENT_BG_V2.test(cl) || PRESENT_DUR_V2.test(cl)) && !/\b(?:known case of|past|previous|prior|resolved|status post)\b|(?:^|[^-])\bold\b/.test(cl)) r.temporality = "current";
       // round 14: "clinically improving" / "resolved completely, no residual deficit" IS the finding: resolution and the
       // "no" of "no residual" do not cancel it; only a negation right before it does ("not improving on")
       if (v2 && key === "clinicallyImproving" && e.method !== "vitals") {

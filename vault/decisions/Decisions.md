@@ -10640,3 +10640,18 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   pain, biliary colic, stroke, MS) but are not in the finding catalog, so no chip or note can set them; only the audit's
   gold keys reach them. Adding them as chips (tried under smd_kb_v2 as "General state") changed no audit number, so it
   was not shipped; a UI decision.
+
+## 2026-09-28 - Rounds 40 to 48: invariance families and an everyday-wording probe
+- **Decision**: after round 39 the analysis uses the train split only (dev had been used for 13 rounds and is now
+  optimistic); new reading work comes from generic probes rather than benchmark misses. Laya's metamorphic method
+  got more families in `test/run-nlp-metamorphic.mjs` (shorthand, bullets, semicolons, an age up front, lab
+  abbreviations), and a recall probe of everyday wordings (`test/nlp-everyday-phrases.json`) was added.
+- **Kept**: negation scope ("fever without rigors"), the age's "old" is not past history, w/o, w/, abd and trailing
+  +/- signs, bullets, contractions, "never", "neither ... nor", vital-sign and lab formats (Temp 101F is not a
+  101-year-old woman; a bare glucose of 20 to 40 is ambiguous, so not read), synonyms for the 55 label-only findings,
+  "h/o X for N days" as the present illness, and two textbook engine rules (viral sore throat, HLH vs malaria).
+- **Dropped**: a negation window (unseen cost), synonyms that misread ("red spots", "frothy discoloration of urine",
+  "blood-tinged sputum", "splenic tip", pleuriticPain double count), a C. difficile anchor (an unseen needed call).
+- **For the owner**: "watery stools" is not read as diarrhoea only because the gate gives fever with diarrhoea
+  gastroenteritis's "antibiotics if criteria met", which the audit counts as antibiotics (one unseen overcall).
+  Pending floors are in `kb/validation/AUDIT-2026-09-26.md`.

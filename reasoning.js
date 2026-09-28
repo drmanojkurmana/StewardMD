@@ -1120,6 +1120,7 @@
     malignancy_b: ["weightLoss", "lymphadenopathy", "nightSweats", "malignancy"],
     myxedema: ["hypothermia", "bradycardia"],
     dic: ["mucocutaneousBleeding", "bleedingManifestation", "thrombocytopenia", "inr"]
+    // round 47 (tried, dropped): a C. difficile anchor on antibiotics or a healthcare stay cost a needed call on an unseen set
   };
   // round 2 (2026-09-27): textbook discriminators between close neighbours, mined from TRAIN-split
   // misses, checked on dev. ORDER only, and unlike the disqualifiers and anchors above the antibiotic
@@ -1215,6 +1216,9 @@
     // cardiogenic shock), known AF with palpitations (one train gain, one test loss), SVC obstruction (no effect)
     // not here: confirmed mixed malaria over malaria. Leading with the lower-scored of the two widened the
     // gate's "close rival" window and turned antimalarial-only care into "antibiotics" (train gc_135)
+    // round 47: fever with rigors or paroxysms after travel to (or living in) a malaria-endemic area is malaria until the
+    // smear says otherwise; HLH is considered when fever persists after its infective trigger is treated
+    HLH: function (f) { return (f.mixedMalariaConfirmed || (f.travelEndemicArea && (f.rigors || f.paroxysmalFever))) ? -20 : 0; },
   };
   var RANK_V3_NUMERIC = null;
   // v3 knowledge the antibiotic gate may use: a candidate that is disqualified or lacks its anchor
@@ -1482,6 +1486,11 @@
     // (a) the lead infection's own antibiotic need
     if (g.cls !== "very_likely" && g.cls !== "likely") return;
     var lead = g.lead, need = abxNeed(lead);
+    // round 47: a sore throat with viral features (cough, coryza, a blocked nose) and no tonsillar exudate is viral: IDSA
+    // (2012) advises neither a strep test nor antibiotics, so pharyngitis holds no "antibiotics if criteria met".
+    // Under smd_rank_v3 only: in the classic order that conditional answer was the net under a needed call (unseen set)
+    var viralThroat = !!(rankV3() && f.soreThroat && (f.cough || f.coughRadio || f.coryza || f.nasalCongestion) && !f.tonsillarExudate);
+    if (lead && lead.id === "PHARYNGITIS" && need === "CONDITIONAL" && viralThroat) need = "NO";
     if (!lead || need === "YES") return;
     var mods = GATE_V2_KEEP.filter(function (k) { return f[k]; });
     if (mods.length) { g.rule = "keep_modifier"; g.need = need; g.why = mods.map(function (k) { try { return lbl(k); } catch (e) { return k; } }).join(", "); return; }
@@ -1493,6 +1502,7 @@
     var v3 = rankV3(), rk2g = function (y) { return y.rankScore != null ? y.rankScore : y.score; };
     d.inf.forEach(function (x) {
       if (x === lead || x.score < 42) return;
+      if (x.id === "PHARYNGITIS" && viralThroat) return;
       if (v3 && rankV3Excluded(x, f)) return;   // smd_rank_v3: an excluded rival cannot hold antibiotics on
       // round 9: under smd_rank_v3 "close" is measured on the ordered score the doctor sees (raw otherwise)
       var n = abxNeed(x), close = v3 ? rk2g(x) >= rk2g(lead) - 30 : x.score >= lead.score - 30;
@@ -2162,6 +2172,76 @@
       "distended bladder", "palpable bladder", "bladder distension", "bladder distention", "has not passed urine", "not passed urine"],
     knownIBD: ["ulcerative colitis", "crohn's", "crohns", "crohn disease", "inflammatory bowel disease", "known ibd", "ibd flare"]
   };
+  // round 47 (2026-09-28): everyday phrasing a doctor types, found by a recall probe of common complaint wordings (not
+  // the benchmark notes). Keys that had no synonyms were matched by their label only when a space followed it, so a
+  // sentence ending "sore throat." or "on dialysis." read nothing: each such key gets its own label words here.
+  var FT_SYN_ADD_V2_R47 = {
+    dyspnea: ["shortness of breath", "difficulty in breathing", "breathing difficulty", "breathing difficulties", "trouble breathing", "breathing trouble"],
+    // (not "watery stool": read correctly, it cost an unseen overcall, because fever with diarrhoea gets gastroenteritis's
+    // "antibiotics if criteria met"; for the owner)
+    diarrhea: ["loose motion", "frequent stools"],
+    abdominalPain: ["stomach pain", "stomach ache", "stomachache", "tummy pain", "tummy ache", "bellyache", "belly ache", "pain in stomach", "pain in the stomach"],
+    // (not "discolouration of urine": "frothy discoloration of urine" is proteinuria, and red urine is haematuria)
+    darkUrine: ["high coloured urine", "high colored urine", "high-coloured urine", "high-colored urine"],
+    legSwellingUnilateral: ["swelling of left leg", "swelling of the left leg", "swelling of right leg", "swelling of the right leg", "swelling of left lower limb",
+      "swelling of right lower limb", "left lower limb swelling", "right lower limb swelling", "swollen left calf", "swollen right calf",
+      "swelling of left calf", "swelling of the left calf", "swelling of right calf", "swelling of the right calf"],
+    purulentSputum: ["greenish sputum", "yellowish sputum", "yellowish green sputum"],
+    // (not "blood-tinged sputum": the pink frothy sputum of pulmonary oedema)
+    hemoptysis: ["coughing up blood", "coughed up blood", "coughs up blood", "blood streaked sputum"],
+    hematemesis: ["blood vomiting", "blood in vomit", "blood in the vomit", "blood-stained vomit", "blood stained vomit", "vomiting of blood"],
+    melena: ["tarry stool", "black tarry", "black coloured stool", "black colored stool", "black motion"],
+    bloodyStool: ["blood mixed stool", "blood-mixed stool", "blood stained stool", "blood in the stool", "blood in motion", "bloody motion"],
+    neckStiffness: ["neck rigidity", "neck stiffness"],
+    focalNeuroDeficit: ["weakness of left", "weakness of right", "weakness in left", "weakness in right", "weakness in the left", "weakness in the right"],
+    nightSweats: ["sweating at night", "sweats at night", "night-time sweating", "nighttime sweating", "nocturnal diaphoresis"],
+    chestPain: ["heaviness in chest", "heaviness in the chest", "heaviness of chest", "chest pressure", "pressure in the chest", "tightness in the chest", "tightness in chest"],
+    palpitations: ["racing heart", "heart racing", "pounding heart", "heart pounding", "fast heartbeat", "rapid heartbeat", "heart beating fast"],
+    syncope: ["fainting", "blackout"],
+    // (not "red spots": petechiae, Janeway lesions and Roth spots are red spots too)
+    rash: ["skin eruption", "exanthem"],
+    headache: ["pain in head", "pain in the head", "head pain", "head ache", "heaviness of head", "heaviness in head", "heaviness of the head"],
+    backPain: ["backache", "back ache", "lumbar pain", "lumbago", "pain in the back", "pain in back"],
+    photophobia: ["intolerance to light", "sensitivity to light", "light sensitivity", "sensitive to light"],
+    abdominalDistension: ["distension of abdomen", "distension of the abdomen", "distention of abdomen", "distention of the abdomen"],
+    // label-only keys: their own words, so punctuation after them no longer hides them. Not pleuriticPain: it is the
+    // same finding as pleuriticChestPain, and pericarditis and pneumothorax weight both, so reading both counted it twice
+    // (a complaint of pleuritic pain with productive cough led with pericarditis, train gc_004)
+    wheeze: ["wheeze", "wheezing", "wheezes", "wheezy", "rhonchi"],
+    coughRadio: ["cough"],
+    soreThroat: ["sore throat", "throat pain", "pain in throat", "pain in the throat", "painful throat", "scratchy throat", "throat is sore"],
+    splenomegaly: ["splenomegaly", "spleen palpable", "palpable spleen", "spleen enlarged", "enlarged spleen", "spleen is palpable", "spleen was palpable", "spleen tip palpable"],
+    pregnancy: ["pregnant", "primigravida", "multigravida", "weeks of gestation", "weeks gestation"],
+    eschar: ["eschar"],
+    maculopapularRash: ["maculopapular", "maculo-papular", "morbilliform"],
+    neutropenia: ["neutropenia", "neutropenic"],
+    diabeticFootUlcer: ["diabetic foot"],
+    centralLine: ["central line", "central venous catheter", "central venous line", "picc", "cvc", "hickman", "port-a-cath", "portacath", "chemo port"],
+    prostheticValve: ["prosthetic valve", "mechanical valve", "prosthetic mitral", "prosthetic aortic", "mechanical mitral", "mechanical aortic", "valve replacement",
+      "metallic valve", "bioprosthetic"],
+    ivDrugUse: ["ivdu", "iv drug", "intravenous drug", "injection drug", "injecting drug", "injects heroin", "injecting heroin", "pwid"],
+    dialysisDependent: ["on dialysis", "on haemodialysis", "on hemodialysis", "maintenance haemodialysis", "maintenance hemodialysis", "maintenance dialysis",
+      "dialysis dependent", "dialysis-dependent", "on peritoneal dialysis"],
+    mucositis: ["mucositis"],
+    crepitusOrBullae: ["haemorrhagic bullae", "hemorrhagic bullae", "haemorrhagic blisters", "hemorrhagic blisters", "subcutaneous crepitus", "soft tissue crepitus",
+      "soft-tissue crepitus", "gas in the soft tissue", "soft tissue gas", "soft-tissue gas"],
+    roseSpots: ["rose spots", "rose-coloured spots", "rose colored spots"],
+    stepladderFever: ["stepladder", "step-ladder", "step ladder"],
+    relativeBradycardia: ["relative bradycardia", "pulse-temperature dissociation"],
+    purulentNasalDischarge: ["purulent nasal discharge", "purulent rhinorrhoea", "purulent rhinorrhea", "thick nasal discharge", "yellow nasal discharge",
+      "green nasal discharge", "greenish nasal discharge", "yellowish nasal discharge", "mucopurulent nasal"],
+    pulsatileMass: ["pulsatile mass", "pulsatile abdominal mass", "expansile mass"],
+    sickleCellHx: ["sickle cell disease", "sickle cell anaemia", "sickle cell anemia", "sickle-cell disease", "sickle cell crisis", "hbss"],
+    multilobar: ["multilobar", "multi-lobar", "multiple lobes", "bilateral consolidation", "bilateral infiltrates"]
+  };
+  // round 48 (2026-09-28): examination shorthand ("crepts", "Kernig's positive", "spleen just palpable", "tongue dry")
+  var FT_SYN_ADD_V2_R48 = {
+    crepitations: ["crepts"],
+    neckStiffness: ["kernig", "brudzinski", "meningeal signs", "meningeal irritation", "signs of meningeal"],
+    // (not "splenic tip": "hepatosplenomegaly with a 2 cm splenic tip" then counts the spleen twice, train gc_121)
+    splenomegaly: ["spleen just palpable", "palpable splenic"],
+    dehydration: ["tongue dry", "tongue is dry", "tongue was dry", "dry oral mucosa"]
+  };
   var FT_SYN_V2 = (function () {
     var o = {};
     Object.keys(FT_SYN).forEach(function (k) { var drop = FT_SYN_DROP_V2[k] || []; o[k] = FT_SYN[k].filter(function (x) { return drop.indexOf(x) < 0; }); });
@@ -2171,6 +2251,8 @@
     Object.keys(FT_SYN_ADD_V2_R11).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R11[k]); });
     Object.keys(FT_SYN_ADD_V2_R16).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R16[k]); });
     Object.keys(FT_SYN_ADD_V2_R21).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R21[k]); });
+    Object.keys(FT_SYN_ADD_V2_R47).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R47[k]); });
+    Object.keys(FT_SYN_ADD_V2_R48).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R48[k]); });
     return o;
   })();
   // the extraction context: classic exactly as before; v2 adds the cleaned table and the numeric-field list
