@@ -77,6 +77,10 @@ const CASES = {
   slowK: ["renalImpairment", "bradycardia", "oliguria", "hypotension"],
   // round 17
   acuteCrackles: ["fever", "cough", "purulentSputum", "bilateralCrackles", "dyspnea", "hypoxia", "tachypnea"],
+  // round 31
+  // (the tapped findings of dev gc_490 and dev gc_095)
+  boringPain: ["severeAbdominalPain", "backPain", "nauseaVomiting", "abdominalDistension", "ascites", "jaundice", "liverDisease", "alcoholExcess", "dehydration", "tachycardia", "tachypnea"],
+  htnLung: ["headacheSevere", "visualDisturbance", "papilledema", "dyspnea", "orthopnea", "raisedJVP", "bilateralCrackles", "legSwellingBilateral", "alteredSensorium", "chestPain", "hypertensionHx"],
 };
 
 try {
@@ -122,6 +126,8 @@ try {
   ok(pos("hhsDry", "hhs") < pos("hhsDry", "hypercalcemia"), `on  · a dry, confused diabetic after polyuria, no ketones: HHS above hypercalcaemia (#${pos("hhsDry", "hhs")})`);
   ok(pos("slowK", "hyperkalemia") < pos("slowK", "hypovolemic_shock"), `on  · renal failure with a slow pulse and low BP: hyperkalaemia above volume-loss shock (#${pos("slowK", "hyperkalemia")} vs #${pos("slowK", "hypovolemic_shock")})`);
   ok(pos("acuteCrackles", "ild") > pos("acuteCrackles", "CAP"), `on  · fever + purulent sputum + bilateral crackles: pneumonia above interstitial lung disease (#${pos("acuteCrackles", "CAP")} vs #${pos("acuteCrackles", "ild")})`);
+  ok(pos("boringPain", "pancreatitis") < pos("boringPain", "VIRAL_HEPATITIS"), `on  · severe abdominal pain through to the back in a drinker: pancreatitis above hepatitis (#${pos("boringPain", "pancreatitis")} vs #${pos("boringPain", "VIRAL_HEPATITIS")})`);
+  ok(pos("htnLung", "htn_emergency") <= 2, `on  · papilloedema with pulmonary oedema: hypertensive emergency in the top two (#${pos("htnLung", "htn_emergency")}; it was 5th)`);
   // default ON since 2026-09-27 (owner decision); localStorage "0" is the opt-out
   ok(await load(BASE + "?gatev2=0"), "app + KB load without ?rankv3");
   ok(await ev(`return DX._rankV3()`) === true, "default · DX._rankV3() is on without any flag");

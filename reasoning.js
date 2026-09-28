@@ -1205,6 +1205,14 @@
     // round 17 (2026-09-27): interstitial lung disease is subacute and afebrile; bilateral crackles with fever or shock
     // and no subacute course are pneumonia or oedema (train gc_013, gc_052, gc_308)
     ild: function (f) { return ((f.fever || f.rigors || f.hypotension || f.lactateElevated) && !f.subacuteOnset) ? -20 : 0; },
+    // round 31 (2026-09-28, train confusion pairs, checked on dev). Severe abdominal pain boring through to the back
+    pancreatitis: function (f) { return (f.severeAbdominalPain && f.backPain) ? 15 : 0; },
+    // retinal swelling with pulmonary oedema is the hypertensive emergency itself (target organs: eye, lung)
+    htn_emergency: function (f) { return (f.papilledema && (f.bilateralCrackles || f.orthopnea || f.raisedJVP)) ? 20 : 0; },
+    // a red, hot, SWOLLEN joint is arthritis (crystal or septic) before cellulitis
+    CELLULITIS: function (f) { return f.jointSwelling ? -15 : 0; },
+    // tried in round 31 and dropped: the aortic stenosis triad (a complaint of crushing chest pain with near-collapse is
+    // cardiogenic shock), known AF with palpitations (one train gain, one test loss), SVC obstruction (no effect)
     // not here: confirmed mixed malaria over malaria. Leading with the lower-scored of the two widened the
     // gate's "close rival" window and turned antimalarial-only care into "antibiotics" (train gc_135)
   };
