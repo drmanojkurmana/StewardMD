@@ -437,7 +437,9 @@ const WANT = [
   ["tachysystole", 1, (f) => f.contractions.tachysystole],
   ["reduced_variability", 1, (f) => f.variability.band === "reduced"],
 ];
-export function pickCases(cands) {
+export function pickCases(candsIn) {
+  // Prefer traces with a contraction in the strip window, then the least signal loss (Array.sort is stable).
+  const cands = candsIn.slice().sort((a, b) => (a.features.contractions.count30 > 0 ? 0 : 1) - (b.features.contractions.count30 > 0 ? 0 : 1) || a.features.quality.lossPct - b.features.quality.lossPct);
   const used = new Set(), out = [];
   WANT.forEach(([arch, n, test]) => {
     cands.filter((k) => !used.has(k.id) && test(k.features, k.acidosis)).slice(0, n).forEach((k) => { used.add(k.id); out.push(Object.assign({ archetypeSuggested: arch }, k)); });
@@ -476,10 +478,10 @@ export async function mainV2() {
   mkdirSync(OUT_MEDIA_DIR, { recursive: true });
   const ids = (await fetchText("RECORDS")).trim().split("\n");
   const headers = (await pool(ids, async (id) => decodeHeader(await fetchText(id + ".hea")))).filter((h) => h.clinical["pH"] != null);
-  // Stage A (headers only): up to 12 per pH band, so the .dat downloads stay under ~36 files.
+  // Stage A (headers only): up to 30 per pH band (about 90 .dat files, under 15 MB, in memory only).
   const band = (ph) => (ph >= 7.2 ? 0 : ph >= 7.05 ? 1 : 2);
   const perBand = [[], [], []];
-  headers.forEach((h) => { const b = band(h.clinical["pH"]); if (perBand[b].length < 12) perBand[b].push(h); });
+  headers.forEach((h) => { const b = band(h.clinical["pH"]); if (perBand[b].length < 30) perBand[b].push(h); });
   // Stage B: features for each candidate, in memory only.
   const cands = (await pool(perBand.flat(), async (h) => {
     const raw = decodeSignal(await fetchBuf(h.record + ".dat"), h);
