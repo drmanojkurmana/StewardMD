@@ -736,3 +736,12 @@ test("normal examination phrases deny what they rule out", () => {
   const mix = r("Chest clear except right basal crepitations.");
   assert.ok(mix.present.includes("crepitations") && mix.absent.includes("wheeze"));
 });
+
+// round 57: a body-fluid glucose is not the blood glucose (CSF glucose read as hypoglycaemia in meningitis notes)
+test("CSF and other fluid glucose is not blood glucose", () => {
+  const cG = { valid: { glucoseLow: 1, glucoseHigh: 1 }, labels: {}, numeric: {}, v2: true, syn: {} };
+  const r = (t) => NLP.extract(t, cG).present;
+  for (const t of ["csf glucose 62 mg/dL.", "Labs: protein 0.92 g/L (elevated); glucose 3.4 mmol/L (CSF:serum ratio normal at 0.55).",
+    "CSF: WBC 180/uL; protein 0.9 g/L; glucose 1.4 mmol/L.", "Pleural fluid glucose 40 mg/dl."]) assert.deepEqual(r(t), [], t);
+  for (const t of ["CSF normal. Glucose 45 mg/dl.", "LP: CSF clear, glucose 30 mg/dl, blood glucose 45 mg/dl.", "Glucose 2.8 mmol/L.", "RBS 45 mg/dl."]) assert.deepEqual(r(t), ["glucoseLow"], t);
+});

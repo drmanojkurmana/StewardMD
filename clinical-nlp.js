@@ -402,7 +402,16 @@
       var GLU_RE = /\b(?:(?:random|capillary|blood|plasma|serum|fasting)\s+)?(?:glucose|sugar|grbs|rbs|cbg|bsl|fbs|glycaemia|glycemia)\b(?:\s*(?:level|value|reading))?\s*(?:\([^)\d]{0,12}\))?\s*(?:of|is|was|at|=|:|-)?\s*(\d{1,4}(?:\.\d{1,2})?)\s*(mg|mmol)?/;
       // round 46: 20 to 40 with no unit is 20-40 mg/dL (hypoglycaemia, as Indian notes mean it) or mmol/L (hyperglycaemia):
       // read neither rather than the wrong one
-      var GLV = function (m) { var q = +m[1], mg = m[2] ? /mg/.test(m[2]) : q > 40; if (!m[2] && q >= 20 && q <= 40) return null; q = mg ? q : q * 18; return q > 0 && q < 3000 ? q : null; }, gl;   // mg/dL
+      // round 57: a body-fluid glucose is not the blood glucose ("csf glucose 62 mg/dL", "glucose 3.4 mmol/L (CSF:serum ratio
+      // 0.55)", a CSF result string): it read as hypoglycaemia in meningitis notes. Blood, serum, plasma, capillary, RBS, GRBS
+      // and CBG say blood.
+      var fluidGlu = function (m) {
+        if (m.index == null || /^\s*(?:random|capillary|blood|plasma|serum|fasting|grbs|rbs|cbg|bsl|fbs)\b/.test(m[0])) return false;
+        var pre = raw.slice(Math.max(0, m.index - 200), m.index), post = raw.slice(m.index + m[0].length, m.index + m[0].length + 30);
+        var seg = pre.slice(Math.max(pre.lastIndexOf(". "), pre.lastIndexOf(".\n")) + 1);
+        return /\b(?:csf|cerebrospinal|pleural|ascitic|peritoneal|synovial|fluid)\b[^0-9]{0,15}$/.test(seg) || /\b(?:csf|cerebrospinal)\b/.test(seg) || /\b(?:csf|ratio)\b/.test(post);
+      };
+      var GLV = function (m) { if (fluidGlu(m)) return null; var q = +m[1], mg = m[2] ? /mg/.test(m[2]) : q > 40; if (!m[2] && q >= 20 && q <= 40) return null; q = mg ? q : q * 18; return q > 0 && q < 3000 ? q : null; }, gl;   // mg/dL
       if ((m2 = pick(GLU_RE, GLV, -1)) && (gl = GLV(m2)) < 70) vital("glucoseLow", m2[0]);
       if ((m2 = pick(GLU_RE, GLV, 1)) && (gl = GLV(m2)) >= 250) { vital("glucoseHigh", m2[0]); if (gl > 600) vital("glucoseVeryHigh", m2[0]); }
       // round 32: a low haemoglobin and a high INR, as the lab import reads them (the engine counts the entered value)
