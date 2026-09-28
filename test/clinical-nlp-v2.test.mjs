@@ -695,3 +695,12 @@ test("blood pressure is read from whole numbers only", () => {
   assert.deepEqual(r("Date 12/10/2026."), []);
   assert.ok(r("GCS 13/15, BP 88/50.").includes("hypotension"));
 });
+
+// round 52: a named antibiotic course before this visit is prior antibiotic exposure; today's plan is not
+test("a named antibiotic course is prior exposure", () => {
+  const cA = { valid: { priorAntibiotics: 1, antibioticsLast90Days: 1 }, labels: {}, numeric: {}, v2: true, syn: {} };
+  const r = (t) => NLP.extract(t, cA).present;
+  for (const t of ["Took amoxicillin for 3 days last week.", "Received a course of IV cefuroxime perioperatively.", "Recently completed a 10-day course of IV piperacillin-tazobactam.",
+    "Worsening despite oral antibiotics.", "The last treated with oral co-amoxiclav.", "Given 2 doses of azithromycin."]) assert.deepEqual(r(t).sort(), ["antibioticsLast90Days", "priorAntibiotics"], t);
+  for (const t of ["Has not received any antibiotics.", "Started on IV ceftriaxone in casualty.", "Plan: ceftriaxone 2 g IV."]) assert.deepEqual(r(t), [], t);
+});

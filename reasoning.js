@@ -618,6 +618,7 @@
   var EXTRA_TAG = { headache:"CNS",thunderclapHeadache:"CNS",chestPain:"CVS",pleuriticChestPain:"RESP",exertionalChestPain:"CVS",dyspnea:"RESP",orthopnea:"CVS",palpitations:"CVS",backPain:"MSK",visualDisturbance:"CNS",polyarthralgia:"MSK",legSwellingUnilateral:"CVS",legSwellingBilateral:"CVS",calfTenderness:"CVS",raisedJVP:"CVS",bilateralCrackles:"RESP",asterixis:"HEP",ecgIschemia:"CVS",ketonemia:"ENDO",polyuriaPolydipsia:"ENDO",knownCAD:"CVS",knownHeartFailure:"CVS",hypertensionHx:"CVS",diabetesHx:"ENDO",steroidUse:"ENDO",drugOverdose:"TOX",anticoagulated:"HEME",atrialFibHx:"CVS",pulsatileMass:"CVS",hematemesis:"GI",hematuria:"GU",jointSwelling:"MSK",ascendingWeakness:"CNS",rigidity:"TOX",hypothermia:"GEN",bradycardia:"CVS",bradypnea:"RESP",miosisSecretions:"TOX",mucocutaneousBleeding:"HEME",oliguria:"RENAL",mucosalLesions:"DERM",facialSwelling:"GEN",sickleCellHx:"HEME",headInjury:"CNS",alcoholExcess:"GEN",ataxia:"CNS",proteinuria:"RENAL",jaundice:"HEP",rightUpperQuadrantPain:"HEP",murphySign:"HEP",ascites:"HEP",flankPain:"GU",dysuria:"GU",feverGU:"GU",costovertebralTenderness:"GU",
     knownGallstones:"HEP",dilatedCBD:"HEP",transaminasesVeryHigh:"HEP",cholestaticLFT:"HEP",asciticPMNHigh:"HEP" };
   var FSYS = {}; // findingKey -> organ tag (populated in buildOntology)
+  var FSYS_GEN_V2 = { subacuteOnset: 1, priorAntibiotics: 1, mdrRisk: 1, hospitalDay48: 1 };
 
   function dzTag(systemStr) {
     var s = String(systemStr || "").toLowerCase();
@@ -667,6 +668,10 @@
       g.fields.forEach(function (fl) {
         LABEL[fl.key] = fl.label; VALID[fl.key] = true;
         FSYS[fl.key] = EXTRA_TAG[fl.key] || GROUP_TAG[g.group] || "GEN";
+        // round 52 (smd_kb_v2 or smd_nlp_v2, whose reader finds these in notes): timing and exposure are no organ system;
+        // filed under "Respiratory" they made a subacute fever after prior antibiotics a lung-dominant picture (train
+        // gc_404: enteric fever lost its antibiotic answer)
+        if (FSYS_GEN_V2[fl.key] && (kbV2() || !!(window.SMD_NLP && SMD_NLP._v2 && SMD_NLP._v2({})))) FSYS[fl.key] = "GEN";
       });
     });
     ONT = groups;
@@ -2215,7 +2220,8 @@
     eschar: ["eschar"],
     maculopapularRash: ["maculopapular", "maculo-papular", "morbilliform"],
     neutropenia: ["neutropenia", "neutropenic"],
-    diabeticFootUlcer: ["diabetic foot"],
+    // (not a bare "diabetic foot": "fever first attributed to a diabetic foot/urinary focus", train gc_280)
+    diabeticFootUlcer: ["diabetic foot ulcer", "diabetic foot infection", "diabetic foot wound", "diabetic foot sepsis"],
     centralLine: ["central line", "central venous catheter", "central venous line", "picc", "cvc", "hickman", "port-a-cath", "portacath", "chemo port"],
     prostheticValve: ["prosthetic valve", "mechanical valve", "prosthetic mitral", "prosthetic aortic", "mechanical mitral", "mechanical aortic", "valve replacement",
       "metallic valve", "bioprosthetic"],
@@ -2242,6 +2248,12 @@
     splenomegaly: ["spleen just palpable", "palpable splenic"],
     dehydration: ["tongue dry", "tongue is dry", "tongue was dry", "dry oral mucosa"]
   };
+  // round 52 (2026-09-28): history a doctor writes as the drug ("on amlodipine", "on tacrolimus post renal transplant", "on ART")
+  var FT_SYN_ADD_V2_R52 = {
+    hypertensionHx: ["amlodipine", "telmisartan", "losartan", "olmesartan", "cilnidipine", "chlorthalidone", "hydrochlorothiazide"],
+    immunocompromised: ["renal transplant", "kidney transplant", "liver transplant", "transplant patient", "tacrolimus", "mycophenolate", "azathioprine",
+      "cyclosporine", "ciclosporin", "on art", "on haart", "antiretroviral", "plhiv", "biologic therapy", "infliximab", "adalimumab"]
+  };
   var FT_SYN_V2 = (function () {
     var o = {};
     Object.keys(FT_SYN).forEach(function (k) { var drop = FT_SYN_DROP_V2[k] || []; o[k] = FT_SYN[k].filter(function (x) { return drop.indexOf(x) < 0; }); });
@@ -2253,6 +2265,7 @@
     Object.keys(FT_SYN_ADD_V2_R21).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R21[k]); });
     Object.keys(FT_SYN_ADD_V2_R47).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R47[k]); });
     Object.keys(FT_SYN_ADD_V2_R48).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R48[k]); });
+    Object.keys(FT_SYN_ADD_V2_R52).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R52[k]); });
     return o;
   })();
   // the extraction context: classic exactly as before; v2 adds the cleaned table and the numeric-field list

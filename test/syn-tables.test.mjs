@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const src = readFileSync(join(dirname(fileURLToPath(import.meta.url)), "..", "reasoning.js"), "utf8").split("\n");
-const TABLES = ["FT_SYN", "FT_SYN_MORE", "FT_SYN_ADD_V2", "FT_SYN_ADD_V2_R8", "FT_SYN_ADD_V2_R10", "FT_SYN_ADD_V2_R11", "FT_SYN_ADD_V2_R16", "FT_SYN_ADD_V2_R21", "FT_SYN_ADD_V2_R47", "FT_SYN_ADD_V2_R48", "KB_V2_PATCH", "RANK_V3_R2"];
+const TABLES = ["FT_SYN", "FT_SYN_MORE", "FT_SYN_ADD_V2", "FT_SYN_ADD_V2_R8", "FT_SYN_ADD_V2_R10", "FT_SYN_ADD_V2_R11", "FT_SYN_ADD_V2_R16", "FT_SYN_ADD_V2_R21", "FT_SYN_ADD_V2_R47", "FT_SYN_ADD_V2_R48", "FT_SYN_ADD_V2_R52", "KB_V2_PATCH", "RANK_V3_R2"];
 
 for (const name of TABLES) {
   test(`${name}: no key written twice`, () => {

@@ -455,6 +455,15 @@
       while ((m2 = ulre.exec(norm))) consider("legSwellingUnilateral", m2.index, "compound", m2[0]);
       var ctre = /\bcalf\b[^.;]{0,30}?\btender(?:ness)?\b|\btender(?:ness)?\s+(?:over|in|of)\s+(?:the\s+)?(?:right\s+|left\s+)?calf\b/g;
       while ((m2 = ctre.exec(norm))) consider("calfTenderness", m2.index, "compound", m2[0]);
+      // round 52: a named antibiotic course before this visit ("received a course of IV cefuroxime", "completed a 10-day
+      // course of piperacillin-tazobactam", "treated with oral co-amoxiclav", "worsening despite oral antibiotics"). Not
+      // "started on", which is as often today's plan.
+      var ABX_V2 = "antibiotics?|amox[iy]cillin|(?:co-?)?amoxiclav|augmentin|ampicillin|penicillin|(?:flu)?cloxacillin|piperacillin(?:-tazobactam)?|pip-?taz[a-z]*|" +
+        "azithromycin|clarithromycin|erythromycin|doxycycline|minocycline|(?:cipro|levo|o|moxi|nor)floxacin|cef[a-z]{3,}|cephalexin|nitrofurantoin|trimethoprim|" +
+        "co-?trimoxazole|metronidazole|tinidazole|clindamycin|linezolid|vancomycin|teicoplanin|meropenem|imipenem|ertapenem|gentamicin|amikacin|colistin|fosfomycin";
+      var pabre = new RegExp("\\b(?:received|completed|took|taken|was given|were given|had been given|been given|was on|were on|been on|treated with|prescribed|despite|courses? of|doses? of)\\s+" +
+        "(?:(?:a|an|two|three|several|\\d+|short|full|\\d+-day|day|course|courses|of|empiric|empirical|outpatient|oral|iv|intravenous|im|some|the)\\s+){0,6}(?:" + ABX_V2 + ")\\b", "g");
+      while ((m2 = pabre.exec(norm))) { consider("priorAntibiotics", m2.index, "compound", m2[0]); consider("antibioticsLast90Days", m2.index, "compound", m2[0]); }
       // round 27: the overdose scene ("found drowsy beside empty blister packs", "possible sedative co-ingestion", "found
       // unresponsive, a used syringe beside him")
       var odre = /\b(?:empty|emptied)\s+(?:[a-z-]+\s+){0,3}?(?:blisters?|blister packs?|strips?|packets?|pill bottles?|pills|tablets?|medication|medicines?)\b|\bco-?ingestion\b/g, odn = 0;
