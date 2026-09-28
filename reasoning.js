@@ -4363,6 +4363,12 @@
     d.ni.forEach(function (r) { m[r.id] = { score: r.score, name: r.name, inf: false, rank: r.rankScore != null ? r.rankScore : r.score }; });
     return { map: m, d: d };
   }
+  // smd_dx_q2 (round 61): the next-finding questions ranked by how evenly they split the leading diagnoses. "0" opts out.
+  var Q2_HEAD = 8, Q2_TEMP = 8, Q2_RISE = 3;
+  function dxQ2On() {
+    try { var q = /[?&]dxq2=([01])\b/.exec((window.location && location.search) || ""); if (q) return q[1] === "1";
+      return localStorage.getItem("smd_dx_q2") !== "0"; } catch (e) { return true; }
+  }
   function nextQuestions(limit) {
     buildOntology();
     limit = limit || 5;
@@ -4375,7 +4381,16 @@
     head.forEach(function (r) { (r.missing || []).forEach(function (k) { if (k && !S.f[k] && VALID[k]) cand[k] = true; }); });
     var keys = Object.keys(cand);
     if (!keys.length) keys = GENERAL.filter(function (k) { return !S.f[k]; });   // fallback: offer core vitals
-    var out = [];
+    var out = [], q2 = dxQ2On(), q2Head = [], q2W = {};
+    if (q2) {
+      q2Head = combined.slice().sort(function (a, b) { return (b.rankScore != null ? b.rankScore : b.score) - (a.rankScore != null ? a.rankScore : a.score); }).slice(0, Q2_HEAD);
+      var q2Top = q2Head.length ? (q2Head[0].rankScore != null ? q2Head[0].rankScore : q2Head[0].score) : 0, q2Z = 0;
+      q2Head.forEach(function (r) { var w = Math.exp(((r.rankScore != null ? r.rankScore : r.score) - q2Top) / Q2_TEMP); q2W[r.id] = w; q2Z += w; });
+      q2Head.forEach(function (r) { q2W[r.id] /= q2Z; });
+      q2Head.forEach(function (r) { (r.missing || []).forEach(function (k) { if (k && !S.f[k] && VALID[k] && !(S.neg && S.neg[k])) cand[k] = true; }); });
+      keys = Object.keys(cand).filter(function (k) { return !(S.neg && S.neg[k]); });
+      if (!keys.length) keys = GENERAL.filter(function (k) { return !S.f[k]; });
+    }
     keys.forEach(function (k) {
       var sim = scoreMapFor(k);
       var gapChange = 0;
@@ -4391,6 +4406,12 @@
         if (Math.abs(dlt) > Math.abs(maxDelta)) maxDelta = dlt;
       });
       var value = gapChange * 2 + moved.length + Math.abs(maxDelta) * 0.5;
+      // smd_dx_q2: rank the question by how evenly it splits the weighted leading diagnoses (information-gain style), so
+      // it is one the patient may well answer "yes" to and that separates the leaders either way; the old value breaks ties
+      if (q2) {
+        var py = 0; q2Head.forEach(function (r) { var r0 = (base.map[r.id] || {}).rank || 0, r1 = (sim.map[r.id] || {}).rank || 0; if (r1 - r0 >= Q2_RISE) py += q2W[r.id]; });
+        value = (py > 0 ? 40 * py * (1 - py) : 0) + value * 0.1;
+      }
       if (value > 0) out.push({ key: k, label: lbl(k), value: Math.round(value * 10) / 10,
         discriminates: !!(A && B && gapChange >= 3), raises: maxDelta > 0, moves: moved.slice(0, 4) });
     });
