@@ -16,7 +16,7 @@ async function ensureServer() {
   for (let i = 0; i < 30; i++) { try { await fetch(BASE); return; } catch { await sleep(200); } }
 }
 await ensureServer();
-const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${PORT}`, `--user-data-dir=${userDir}`, "--no-first-run", "--no-default-browser-check"], { stdio: "ignore" });
+const chrome = spawn(CHROME, ["--headless=new", "--no-sandbox", `--remote-debugging-port=${PORT}`, `--user-data-dir=${userDir}`, "--no-first-run", "--no-default-browser-check"], { stdio: "ignore" });
 
 let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = [];
 const call = (m, p) => { const i = msgId++; return new Promise(r => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
