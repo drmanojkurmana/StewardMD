@@ -434,6 +434,9 @@
       // liver disease, not current drinking (read as excess, it put withdrawal above meningitis in a febrile confused cirrhotic)
       var alre = /\balcohol[- ](?:related|induced)\b(?!\s+(?:cirrhosis|liver|hepatitis|chronic liver|cirrhotic))/g;
       while ((m2 = alre.exec(norm))) consider("alcoholExcess", m2.index, "compound", m2[0]);
+      // round 39: pain that goes through to the back ("epigastric pain radiating to the back", "boring through to the back")
+      var bkre = /\bpain\b[^.;]{0,50}?\b(?:radiat\w*|going|goes|boring|bores|through)\s+(?:(?:in)?to|through)\s+(?:to\s+)?the\s+back\b/g;
+      while ((m2 = bkre.exec(norm))) consider("backPain", m2.index, "compound", m2[0]);
       // round 37: sinusitis features (one side, a second worsening, more than 10 days)
       var ufre = /\b(?:right|left|one)[- ]sided\s+(?:facial|maxillary|cheek)\s+pain\b|\b(?:facial|maxillary|cheek)\s+pain\b[^.;]{0,20}?\bon the (?:right|left)\b|\b(?:right|left)\s+(?:maxillary|cheek)\s+pain\b/g;
       while ((m2 = ufre.exec(norm))) consider("unilateralFacialPain", m2.index, "compound", m2[0]);

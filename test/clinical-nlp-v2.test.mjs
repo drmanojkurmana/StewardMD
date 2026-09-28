@@ -523,3 +523,12 @@ test("per-item negation: an item without its own no is present unless joined by 
   assert.deepEqual(r("No preceding trauma, no cough, fever, or haemoptysis").present, []);
   assert.deepEqual(r("No cough, fever or haemoptysis").present, []);
 });
+
+// round 39: pain through to the back
+test("pain radiating or boring through to the back is back pain", () => {
+  const c39 = { valid: { backPain: 1 }, labels: {}, numeric: {}, v2: true, syn: {} };
+  const p = (t) => NLP.extract(t, c39).present;
+  assert.ok(p("Severe epigastric pain radiating to the back for 12 hours").includes("backPain"));
+  assert.ok(p("severe, constant epigastric pain boring through to the back").includes("backPain"));
+  assert.ok(!p("no pain radiating to the back").includes("backPain"));
+});

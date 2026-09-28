@@ -2128,6 +2128,9 @@
     malignancy: ["mediastinal mass", "paratracheal mass", "hilar mass", "lung mass", "pulmonary mass", "space-occupying lesion"],
     // round 29: gait words for ataxia, and the spelled variants the stricter typo matcher (clinical-nlp.js) no longer reaches
     tachypnea: ["tachypneic", "tachypnoeic", "tachypnoea"], photophobia: ["photophobic"],
+    // round 39: pain shown rather than said; erythema nodosum is a rash (not red infected skin)
+    abdominalPain: ["clutching her abdomen", "clutching his abdomen", "clutching their abdomen", "holding her abdomen", "holding his abdomen"],
+    rash: ["erythema nodosum", "red nodules", "tender nodules over", "nodular rash"],
     // round 37: bleeding, drinking, behaviour and sinus phrasing
     hematemesis: ["coffee-ground vomit", "coffee ground vomit", "coffee-ground material", "coffee ground material", "coffee-ground emesis", "vomited blood", "haematemesis"],
     behavioralChange: ["irritability", "getting lost", "wandering at night"],
