@@ -2128,6 +2128,11 @@
     malignancy: ["mediastinal mass", "paratracheal mass", "hilar mass", "lung mass", "pulmonary mass", "space-occupying lesion"],
     // round 29: gait words for ataxia, and the spelled variants the stricter typo matcher (clinical-nlp.js) no longer reaches
     tachypnea: ["tachypneic", "tachypnoeic", "tachypnoea"], photophobia: ["photophobic"],
+    // round 33: pharyngitis signs, tick bites, a full bladder (label-only findings had no phrasing)
+    tonsillarExudate: ["tonsillar exudate", "tonsillar exudates", "exudative tonsillitis", "exudate on the tonsils", "exudates on the tonsils", "pus on the tonsils", "white patches on the tonsils"],
+    tenderCervicalNodes: ["tender cervical nodes", "tender cervical lymph nodes", "tender anterior cervical", "tender neck glands", "tender cervical lymphadenopathy", "tender submandibular nodes"],
+    tickExposure: ["tick bite", "tick bites", "bitten by a tick", "removing ticks", "removed ticks", "removed a tick", "ticks from"],
+    urinaryRetention: ["distended bladder", "palpable bladder", "bladder distension", "bladder distention", "has not passed urine", "not passed urine"],
     // round 32: urine output said falling in other words
     oliguria: ["declining urine output", "falling urine output", "poor urine output", "diminished urine output", "urine output is low", "urine output was low"],
     ataxia: ["ataxic", "staggering gait", "wide-based gait", "broad-based gait", "truncal ataxia", "gait ataxia", "cannot walk heel to toe", "poor coordination", "impaired coordination"],

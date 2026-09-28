@@ -443,3 +443,13 @@ test("round 32 readings", () => {
   assert.ok(!p("a fall in blood pressure overnight").includes("headInjury"));
   assert.ok(p("declining urine output over 6 weeks").includes("oliguria"));
 });
+
+// round 33: tonsillar exudate and tender neck nodes said with words between
+test("tonsillar exudate and tender cervical nodes with words between", () => {
+  const c33 = { valid: { tonsillarExudate: 1, tenderCervicalNodes: 1 }, labels: {}, numeric: {}, v2: true, syn: {} };
+  const p = (t) => NLP.extract(t, c33).present;
+  assert.ok(p("Oropharynx shows markedly erythematous tonsils with bilateral confluent white-yellow exudate").includes("tonsillarExudate"));
+  assert.ok(p("Tender, enlarged anterior cervical lymph nodes bilaterally").includes("tenderCervicalNodes"));
+  assert.ok(!p("tonsils normal, no exudate").includes("tonsillarExudate"));
+  assert.ok(!p("cervical lymph nodes palpable, not tender").includes("tenderCervicalNodes"));
+});

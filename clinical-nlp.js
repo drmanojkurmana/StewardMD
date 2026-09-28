@@ -229,7 +229,10 @@
         return;
       }
       var lab = (labels[key] || "").toLowerCase().replace(/\([^)]*\)/g, " ").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
-      if (lab.length >= 5 && lab.length <= 26) { var li = norm.indexOf(" " + lab + " "); if (li < 0) li = norm.indexOf(" " + lab + "s "); if (li >= 0) consider(key, li + 1, "label", lab);
+      if (lab.length >= 5 && lab.length <= 26) { var li = norm.indexOf(" " + lab + " "); if (li < 0) li = norm.indexOf(" " + lab + "s ");
+        // (round 33 tried letting punctuation follow a label, "sore throat,": right in principle, but one more antibiotic
+        // overcall on the unseen notes and "erythema," reads palmar erythema as skin; not kept)
+        if (li >= 0) consider(key, li + 1, "label", lab);
         // round 19 (metamorphic tests): every later occurrence too, so "no erythema ... diffuse erythema" reads the same either way round
         if (v2 && li >= 0) { var lj = li + 1, ln = 0; while (ln++ < 6 && (lj = norm.indexOf(" " + lab, lj + lab.length)) >= 0) { if (/[^a-z]/.test(norm.charAt(lj + 1 + lab.length) || " ")) (alts[key] = alts[key] || []).push({ idx: lj + 1, method: "label", srcText: lab }); } } }
     });
@@ -382,6 +385,13 @@
       // bare word "fall" is dropped under v2 ("a fall in blood pressure")
       var hire = /\b(?:knocked|hit|banged|struck|bumped|bashed)\s+(?:his|her|their|the)\s+head\b|\b(?:minor|recent|mechanical|unwitnessed|witnessed|ground-level|a)\s+fall\b(?!\s+(?:in|of)\b)|\bfell\s+(?:down|over|backwards|forwards|from|off|and)\b|\bslipped\s+(?:and|in|on)\b/g;
       while ((m2 = hire.exec(norm))) consider("headInjury", m2.index, "compound", m2[0]);
+      // round 33: exudate on the tonsils and tender neck nodes said with words between ("tonsils with bilateral confluent
+      // white-yellow exudate"; "tender, enlarged anterior cervical lymph nodes")
+      var txre = /\btonsils?\b[^.;]{0,50}?\bexudates?\b|\bexudates?\b[^.;]{0,30}?\btonsils?\b/g;
+      // read at the sign word itself, so "tonsils normal, no exudate" takes its "no"
+      while ((m2 = txre.exec(norm))) { var xo = m2[0].search(/exudat/); consider("tonsillarExudate", m2.index + (/^tonsil/.test(m2[0]) ? xo : 0), "compound", m2[0]); }
+      var tcre = /\btender\b[^.;]{0,30}?\bcervical\s+(?:lymph\s+)?(?:nodes?|lymphadenopathy|glands?)\b|\bcervical\s+(?:lymph\s+)?(?:nodes?|glands?)\b[^.;]{0,20}?\btender\b/g;
+      while ((m2 = tcre.exec(norm))) consider("tenderCervicalNodes", m2.index + Math.max(0, m2[0].search(/\btender\b/)), "compound", m2[0]);
       // round 10: 48 hours or more into a hospital stay (hospital-acquired territory)
       var hdre = /\b(?:admitted|hospitali[sz]ed|intubated|ventilated)\s+(\d{1,2}|two|three|four|five|six|seven|eight|nine|ten)\s*days?\s*(?:ago|earlier|previously|before)\b|\b(?:hospital|post-?operative|ward|icu)\s+day\s+(\d{1,2})\b|\bday\s+(\d{1,2})\s+of\s+(?:(?:a|an|the|his|her)\s+)?(?:[a-z-]+\s+){0,2}(?:admission|ventilation|hospital stay|stay)\b/g;
       while ((m2 = hdre.exec(norm))) {   // every mention (round 19): the first may be negated or under 48 h
