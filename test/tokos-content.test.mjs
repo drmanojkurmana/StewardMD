@@ -59,3 +59,14 @@ test("tracks.json declares the ctg track with a Hindi label", () => {
   assert.ok(tracks.tracks[0].labelHi.length > 0);
   assert.deepEqual(tracks.access.freeLevels, ["mbbs"]);
 });
+
+test("rationale.json covers every key rationaleKeys can return, in both languages, with no em-dash", () => {
+  const R = JSON.parse(readFileSync("tokos/rationale.json", "utf8"));
+  const keys = ["baseline.tachycardia", "baseline.bradycardia", "baseline.severe_bradycardia", "variability.reduced", "variability.increased",
+    "decels.present", "decels.prolonged", "decels.over5", "uc.tachysystole", "acidosis.metabolic", "acidosis.acidaemia_not_metabolic",
+    "risk.pyrexia", "risk.preeclampsia", "trace_vs_outcome"];
+  keys.forEach((k) => {
+    assert.ok(R[k] && R[k].en && R[k].hi, "missing " + k);
+    assert.ok(!/—/.test(R[k].en + R[k].hi), "em-dash in " + k);
+  });
+});
