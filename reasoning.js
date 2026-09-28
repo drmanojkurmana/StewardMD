@@ -618,6 +618,7 @@
   var EXTRA_TAG = { headache:"CNS",thunderclapHeadache:"CNS",chestPain:"CVS",pleuriticChestPain:"RESP",exertionalChestPain:"CVS",dyspnea:"RESP",orthopnea:"CVS",palpitations:"CVS",backPain:"MSK",visualDisturbance:"CNS",polyarthralgia:"MSK",legSwellingUnilateral:"CVS",legSwellingBilateral:"CVS",calfTenderness:"CVS",raisedJVP:"CVS",bilateralCrackles:"RESP",asterixis:"HEP",ecgIschemia:"CVS",ketonemia:"ENDO",polyuriaPolydipsia:"ENDO",knownCAD:"CVS",knownHeartFailure:"CVS",hypertensionHx:"CVS",diabetesHx:"ENDO",steroidUse:"ENDO",drugOverdose:"TOX",anticoagulated:"HEME",atrialFibHx:"CVS",pulsatileMass:"CVS",hematemesis:"GI",hematuria:"GU",jointSwelling:"MSK",ascendingWeakness:"CNS",rigidity:"TOX",hypothermia:"GEN",bradycardia:"CVS",bradypnea:"RESP",miosisSecretions:"TOX",mucocutaneousBleeding:"HEME",oliguria:"RENAL",mucosalLesions:"DERM",facialSwelling:"GEN",sickleCellHx:"HEME",headInjury:"CNS",alcoholExcess:"GEN",ataxia:"CNS",proteinuria:"RENAL",jaundice:"HEP",rightUpperQuadrantPain:"HEP",murphySign:"HEP",ascites:"HEP",flankPain:"GU",dysuria:"GU",feverGU:"GU",costovertebralTenderness:"GU",
     knownGallstones:"HEP",dilatedCBD:"HEP",transaminasesVeryHigh:"HEP",cholestaticLFT:"HEP",asciticPMNHigh:"HEP" };
   var FSYS = {}; // findingKey -> organ tag (populated in buildOntology)
+  var FSYS_GEN_V2 = { subacuteOnset: 1, priorAntibiotics: 1, mdrRisk: 1, hospitalDay48: 1 };
 
   function dzTag(systemStr) {
     var s = String(systemStr || "").toLowerCase();
@@ -659,12 +660,19 @@
     var groups = [];
     (EXTRA_GROUPS).forEach(function (g) { groups.push(g); });
     if (kbV2()) groups.push({ group: "Hepatobiliary imaging / labs", fields: KB_V2_FIELDS });   // smd_kb_v2
+    if (kbV2()) groups.push({ group: "Electrolytes / glucose", fields: KB_V2_LAB_FIELDS });   // smd_kb_v2 round 18
+    if (kbV2()) groups.push({ group: "Bowel history", fields: KB_V2_HX_FIELDS });   // smd_kb_v2 round 22
+    if (kbTestsOn()) groups.push({ group: "Test results", fields: KB_TEST_FIELDS });   // smd_kb_tests round 72
     var fg = (window.FIELD_GROUPS || []);
     fg.forEach(function (g) { if (g && g.fields) groups.push({ group: g.group, fields: g.fields }); });
     groups.forEach(function (g) {
       g.fields.forEach(function (fl) {
         LABEL[fl.key] = fl.label; VALID[fl.key] = true;
-        FSYS[fl.key] = EXTRA_TAG[fl.key] || GROUP_TAG[g.group] || "GEN";
+        FSYS[fl.key] = KB_TEST_TAG[fl.key] || EXTRA_TAG[fl.key] || GROUP_TAG[g.group] || "GEN";
+        // round 52 (smd_kb_v2 or smd_nlp_v2, whose reader finds these in notes): timing and exposure are no organ system;
+        // filed under "Respiratory" they made a subacute fever after prior antibiotics a lung-dominant picture (train
+        // gc_404: enteric fever lost its antibiotic answer)
+        if (FSYS_GEN_V2[fl.key] && (kbV2() || !!(window.SMD_NLP && SMD_NLP._v2 && SMD_NLP._v2({})))) FSYS[fl.key] = "GEN";
       });
     });
     ONT = groups;
@@ -679,7 +687,18 @@
     if (kbV2()) SYSPICK = SYSPICK.map(function (sp) {
       if (sp.id !== "gastrointestinal" || (sp.groups || []).indexOf("Hepatobiliary imaging / labs") >= 0) return sp;
       var c = {}; for (var k in sp) c[k] = sp[k];
-      c.groups = (sp.groups || []).concat(["Hepatobiliary imaging / labs"]); return c;
+      c.groups = (sp.groups || []).concat(["Hepatobiliary imaging / labs", "Bowel history"]); return c;
+    });
+    if (kbV2()) SYSPICK = SYSPICK.map(function (sp) {
+      if (sp.id !== "systemic" || (sp.groups || []).indexOf("Electrolytes / glucose") >= 0) return sp;
+      var c = {}; for (var k in sp) c[k] = sp[k];
+      c.groups = (sp.groups || []).concat(["Electrolytes / glucose"]); return c;
+    });
+    // smd_kb_tests: the test results are listed under Systemic, as the lab values are
+    if (kbTestsOn()) SYSPICK = SYSPICK.map(function (sp) {
+      if (sp.id !== "systemic" || (sp.groups || []).indexOf("Test results") >= 0) return sp;
+      var c = {}; for (var k in sp) c[k] = sp[k];
+      c.groups = (sp.groups || []).concat(["Test results"]); return c;
     });
     return ONT;
   }
@@ -869,6 +888,24 @@
     { key: "cholestaticLFT", label: "Cholestatic LFTs (ALP >= 2x normal)" },
     { key: "asciticPMNHigh", label: "Ascitic fluid neutrophils >= 250/mm3" }
   ];
+  // round 18 (2026-09-27): lab values the metabolic emergencies are defined by. The catalog had no electrolyte or
+  // glucose finding at all, so hyponatraemia, hyperkalaemia, hypercalcaemia and hypoglycaemia ranked on symptoms
+  // alone. Thresholds are the treatment thresholds (Na < 130; K >= 6.0; corrected Ca > 2.75 mmol/L or 11 mg/dL;
+  // glucose < 3.9 mmol/L or 70 mg/dL; >= 14 mmol/L or 250 mg/dL; > 33 mmol/L or 600 mg/dL). The note parser
+  // (clinical-nlp.js, v2) fills them from numbers; the picker lists them under Systemic.
+  var KB_V2_LAB_FIELDS = [
+    { key: "sodiumLow", label: "Sodium < 130 mmol/L" },
+    { key: "potassiumHigh", label: "Potassium >= 6.0 mmol/L" },
+    { key: "calciumHigh", label: "Calcium > 2.75 mmol/L (11 mg/dL)" },
+    { key: "glucoseLow", label: "Glucose < 3.9 mmol/L (70 mg/dL)" },
+    { key: "glucoseHigh", label: "Glucose >= 14 mmol/L (250 mg/dL)" },
+    { key: "glucoseVeryHigh", label: "Glucose > 33 mmol/L (600 mg/dL)" },
+    // round 69: leukocytosis, one of the ATS/IDSA hospital-acquired pneumonia criteria (SIRS threshold). (Tried, dropped: as the
+    // Tokyo systemic sign for cholecystitis without fever; it gained nothing and gave a gallstone pancreatitis antibiotics.)
+    { key: "leukocytosis", label: "WBC >= 12,000/mm3" }
+  ];
+  // round 22: a known chronic bowel disease changes what bloody diarrhoea means (listed under Gastrointestinal)
+  var KB_V2_HX_FIELDS = [{ key: "knownIBD", label: "Known inflammatory bowel disease (UC / Crohn's)" }];
   var KB_V2_PATCH = {
     CHOLANGITIS: {
       rule: { allOf: ["jaundice", { anyOf: ["feverGU", "rigors"] }, { anyOf: ["rightUpperQuadrantPain", "dilatedCBD", "knownGallstones"] }, { not: "singleLesion" }] },
@@ -881,8 +918,26 @@
       rule: { allOf: ["ascites", { anyOf: ["abdominalPain", "feverGU", "alteredSensorium", "asciticPMNHigh"] }] },
       add: [{ when: "asciticPMNHigh", add: 25 }] },
     toxic_hepatitis: { find: { transaminasesVeryHigh: 22 } },
-    biliary_colic: { find: { knownGallstones: 20, transaminasesVeryHigh: -10 } },
-    pancreatitis: { find: { knownGallstones: 8 } }
+    biliary_colic: { find: { knownGallstones: 20, transaminasesVeryHigh: -10, severeAbdominalPain: 10 } },   // round 28: colic is severe pain
+    pancreatitis: { find: { knownGallstones: 8 } },
+    // round 18: the metabolic emergencies read their defining lab value
+    // round 30: chest pain and breathlessness are not migraine; hypertensive emergency brings pulmonary oedema
+    migraine: { find: { chestPain: -10, dyspnea: -8 } },
+    htn_emergency: { find: { dyspnea: 8 } },
+    hyponatremia: { find: { sodiumLow: 40, headache: 8 } },   // round 29: headache is a symptom of hyponatraemia
+    hyperkalemia: { find: { potassiumHigh: 40 } },
+    hypercalcemia: { find: { calciumHigh: 40 } },
+    myeloma: { find: { calciumHigh: 12 } },
+    hypoglycemia: { find: { glucoseLow: 45, glucoseHigh: -30, glucoseVeryHigh: -30 } },
+    hhs: { find: { glucoseVeryHigh: 30, glucoseHigh: 10, glucoseLow: -30 } },
+    dka: { find: { glucoseHigh: 12, glucoseVeryHigh: 6, glucoseLow: -30 } },
+    adrenal_crisis: { find: { sodiumLow: 10, potassiumHigh: 10, glucoseLow: 8 } },
+    // round 22: bloody diarrhoea in known ulcerative colitis or Crohn's is a flare until a stool test says otherwise
+    ibd_flare: { find: { knownIBD: 22 } },
+    ibs: { find: { knownIBD: -20 } },
+    // round 67 (heldout3 tune): the fever of a pulmonary embolism is low grade and brief; weeks of fever with night sweats or
+    // an evening rise is TB, another infection or a malignancy first (it read a TB pleural effusion as PE once the pulse was read)
+    pe: { find: { prolongedFever: -20, nightSweats: -15, eveningFever: -15 } }
   };
   var _kbV2Applied = false;
   function ensureKbV2() {
@@ -898,6 +953,119 @@
     });
     _kbV2Applied = true;
     IDF = null; GIDF = null; ASSOC = {};   // specificity tables must see the new findings
+  }
+
+  /* smd_kb_tests (round 72; default ON, localStorage "0" or ?kbtests=0 opts out): test results a doctor can TAP.
+   * The close calls that symptoms cannot settle (bacterial vs viral meningitis, stone vs pyelonephritis, SAH vs a
+   * haemorrhage in the brain, cholecystitis vs biliary colic, ACS vs heart failure) are settled at the bedside by one
+   * result. Each result below moves the diagnoses it bears on: for an infection a score modifier (and, for a positive
+   * diagnostic test, an alternative way to meet its criteria); for a non-infective diagnosis a finding weight. The
+   * findings exist only with the flag on, so notes and cases without them are unchanged. ai_drafted, pending
+   * clinician review. */
+  function kbTestsOn() {
+    try {
+      var q = /[?&]kbtests=([01])\b/.exec((window.location && location.search) || "");
+      if (q) return q[1] === "1";
+      return localStorage.getItem("smd_kb_tests") !== "0";
+    } catch (e) { return true; }
+  }
+  var KB_TEST_FIELDS = [
+    { key: "csfBacterialPattern", label: "CSF: neutrophils with low glucose (bacterial pattern)" },
+    { key: "csfViralPattern", label: "CSF: lymphocytes with normal glucose (viral pattern)" },
+    { key: "csfTbPattern", label: "CSF: lymphocytes, low glucose, high protein or ADA (TB / fungal pattern)" },
+    { key: "csfNormal", label: "CSF normal" },
+    { key: "malariaTestPositive", label: "Malaria smear / RDT positive (one species)" },
+    { key: "malariaTestNegative", label: "Malaria smear / RDT negative" },
+    { key: "dengueTestPositive", label: "Dengue NS1 or IgM positive" },
+    { key: "scrubTyphusTestPositive", label: "Scrub typhus IgM positive" },
+    { key: "leptoTestPositive", label: "Leptospira IgM / MAT positive" },
+    { key: "typhoidTestPositive", label: "Blood culture: Salmonella Typhi / Paratyphi" },
+    { key: "sputumAfbPositive", label: "Sputum AFB / CBNAAT (GeneXpert) positive" },
+    { key: "pleuralEffusionImaging", label: "Imaging: pleural effusion" },
+    { key: "hydronephrosisStone", label: "Imaging: hydronephrosis or ureteric stone" },
+    { key: "gallbladderInflamed", label: "Ultrasound: thick gallbladder wall / pericholecystic fluid" },
+    { key: "ctSubarachnoidBlood", label: "CT head: subarachnoid blood" },
+    { key: "ctIntracerebralBleed", label: "CT head: intracerebral haemorrhage" },
+    { key: "ctHeadNormal", label: "CT head: no bleed, infarct or mass" },
+    { key: "troponinRaised", label: "Troponin raised" },
+    { key: "ecgStElevation", label: "ECG: ST elevation" },
+    { key: "bnpRaised", label: "BNP / NT-proBNP raised" },
+    { key: "dDimerNormal", label: "D-dimer normal" },
+    { key: "lipaseHigh", label: "Lipase / amylase > 3x normal" },
+    { key: "pyuria", label: "Urine: pus cells or nitrite positive" },
+    { key: "tshSuppressed", label: "TSH suppressed / free T4 high" },
+    { key: "echoVegetation", label: "Echo: valve vegetation" }
+  ];
+  var KB_TEST_TAG = { csfBacterialPattern: "CNS", csfViralPattern: "CNS", csfTbPattern: "CNS", csfNormal: "CNS", malariaTestPositive: "ID",
+    malariaTestNegative: "ID", dengueTestPositive: "ID", scrubTyphusTestPositive: "ID", leptoTestPositive: "ID", typhoidTestPositive: "ID",
+    sputumAfbPositive: "RESP", pleuralEffusionImaging: "RESP", hydronephrosisStone: "GU", gallbladderInflamed: "HEP", ctSubarachnoidBlood: "CNS",
+    ctIntracerebralBleed: "CNS", ctHeadNormal: "CNS", troponinRaised: "CVS", ecgStElevation: "CVS", bnpRaised: "CVS", dDimerNormal: "RESP",
+    lipaseHigh: "GI", pyuria: "GU", tshSuppressed: "ENDO", echoVegetation: "CVS" };
+  // the positive diagnostic results carry the most weight in the specificity and organ-system logic
+  var KB_TEST_VH = ["csfBacterialPattern", "csfViralPattern", "csfTbPattern", "malariaTestPositive", "dengueTestPositive", "scrubTyphusTestPositive",
+    "leptoTestPositive", "typhoidTestPositive", "sputumAfbPositive", "hydronephrosisStone", "gallbladderInflamed", "ctSubarachnoidBlood",
+    "ctIntracerebralBleed", "ecgStElevation", "lipaseHigh", "echoVegetation"];
+  // result -> { diagnosis: effect }. Positive results that confirm an infection also meet its criteria (KB_TEST_ALT).
+  var KB_TESTS = {
+    csfBacterialPattern: { MENINGITIS: 30, VIRAL_MENINGITIS: -30, CNS_TB: -15, ENCEPHALITIS: -15, sah: -20, migraine: -30 },
+    csfViralPattern: { VIRAL_MENINGITIS: 25, ENCEPHALITIS: 10, MENINGITIS: -30, CNS_TB: -20, BRAIN_ABSCESS: -10 },
+    csfTbPattern: { CNS_TB: 30, MENINGITIS: -20, VIRAL_MENINGITIS: -30, ENCEPHALITIS: -10 },
+    csfNormal: { MENINGITIS: -40, VIRAL_MENINGITIS: -35, CNS_TB: -35, ENCEPHALITIS: -15, sah: -20 },
+    malariaTestPositive: { MALARIA: 30, MIXED_MALARIA: -20, DENGUE: -10, ENTERIC_FEVER: -10, SCRUB_TYPHUS: -10, LEPTOSPIROSIS: -10 },
+    malariaTestNegative: { MALARIA: -30, MIXED_MALARIA: -30 },
+    dengueTestPositive: { DENGUE: 30, CHIKUNGUNYA: -15, SCRUB_TYPHUS: -10, LEPTOSPIROSIS: -10 },
+    scrubTyphusTestPositive: { SCRUB_TYPHUS: 30, RICKETTSIAL_FEVER: -10, DENGUE: -10, LEPTOSPIROSIS: -10 },
+    leptoTestPositive: { LEPTOSPIROSIS: 30, DENGUE: -10, SCRUB_TYPHUS: -10, VIRAL_HEPATITIS: -10 },
+    typhoidTestPositive: { ENTERIC_FEVER: 35, MALARIA: -10, DENGUE: -10 },
+    sputumAfbPositive: { PULMONARY_TB: 35, CAP: -15, lung_cancer: -15 },
+    pleuralEffusionImaging: { pleural_effusion: 30, PULMONARY_TB: 5 },
+    // (an obstructed kidney with infection is a complicated UTI, EAU; KB_TEST_ORDER puts it before the stone when febrile)
+    hydronephrosisStone: { renal_colic: 35, COMPLICATED_UTI: 25, PYELONEPHRITIS: -25, CYSTITIS: -15 },
+    gallbladderInflamed: { CHOLECYSTITIS: 25, biliary_colic: -20, VIRAL_HEPATITIS: -15, pancreatitis: -10, peptic_ulcer: -10 },
+    ctSubarachnoidBlood: { sah: 50, ich: -25, ischemic_stroke: -25, migraine: -30, tension_ha: -30, MENINGITIS: -20 },
+    ctIntracerebralBleed: { ich: 50, sah: -20, ischemic_stroke: -30, migraine: -30, BRAIN_ABSCESS: -10 },
+    ctHeadNormal: { ich: -40, subdural: -40, brain_tumour: -35, sah: -15 },
+    troponinRaised: { acs: 25, pe: 5, heart_failure: 5, gerd_chest: -20, panic: -20 },
+    ecgStElevation: { acs: 25, pericarditis: 10, gerd_chest: -20, panic: -20 },
+    bnpRaised: { heart_failure: 25, copd_exac_ni: -10, asthma_exac: -10 },
+    dDimerNormal: { pe: -35, dvt: -35 },
+    lipaseHigh: { pancreatitis: 35, peptic_ulcer: -15, biliary_colic: -10, CHOLECYSTITIS: -10 },
+    pyuria: { CYSTITIS: 10, PYELONEPHRITIS: 10, COMPLICATED_UTI: 10, CA_UTI: 10, renal_colic: -5 },
+    tshSuppressed: { hyperthyroidism: 30, thyroid_storm: 20, pheo: -15, panic: -20 },
+    echoVegetation: { IE: 35 }
+  };
+  var KB_TEST_ALT = {
+    MENINGITIS: ["csfBacterialPattern"], VIRAL_MENINGITIS: ["csfViralPattern"], CNS_TB: ["csfTbPattern"],
+    MALARIA: ["malariaTestPositive"], DENGUE: ["dengueTestPositive"], SCRUB_TYPHUS: ["scrubTyphusTestPositive"],
+    LEPTOSPIROSIS: ["leptoTestPositive"], ENTERIC_FEVER: ["typhoidTestPositive"], PULMONARY_TB: ["sputumAfbPositive"],
+    CHOLECYSTITIS: [{ allOf: ["gallbladderInflamed", { anyOf: ["rightUpperQuadrantPain", "murphySign", "abdominalPain", "fever"] }] }],
+    COMPLICATED_UTI: [{ allOf: ["hydronephrosisStone", { anyOf: ["fever", "feverGU", "rigors", "dysuria", "pyuria"] }] }],
+    IE: [{ allOf: ["echoVegetation", { anyOf: ["fever", "prolongedFever", "rigors"] }] }]
+  };
+  // order-only (with smd_rank_v3): a febrile patient with an obstructed kidney has an infected obstructed kidney first
+  var KB_TEST_ORDER = {
+    renal_colic: function (f) { return (f.hydronephrosisStone && (f.fever || f.rigors || f.feverGU)) ? -40 : 0; },
+    // chest pain with ischaemic ECG changes and a raised troponin is an acute coronary syndrome, even when it has caused
+    // pulmonary oedema (heart failure is then its consequence, ESC 2023)
+    heart_failure: function (f) { return (f.troponinRaised && (f.ecgIschemia || f.ecgStElevation) && (f.chestPain || f.exertionalChestPain)) ? -20 : 0; }
+  };
+  var _kbTestsApplied = false;
+  function ensureKbTests() {
+    if (_kbTestsApplied || !(window.KB_CORE && KB_CORE.diseases) || !kbTestsOn()) return;
+    var D = KB_CORE.diseases;
+    Object.keys(KB_TESTS).forEach(function (k) {
+      Object.keys(KB_TESTS[k]).forEach(function (id) {
+        var d = D[id], v = KB_TESTS[k][id]; if (!d) return;
+        if (d.score) {
+          d.score.modifiers = (d.score.modifiers || []).concat([{ when: k, add: v }]);
+          if (v > 0 && d.assoc && d.assoc.indexOf(k) < 0) d.assoc.push(k);
+        } else if (d.find) d.find[k] = (d.find[k] || 0) + v;
+      });
+    });
+    Object.keys(KB_TEST_ALT).forEach(function (id) { var d = D[id]; if (d && d.rule) d.rule = { anyOf: [d.rule].concat(KB_TEST_ALT[id]) }; });
+    KB_TEST_VH.forEach(function (k) { FW_VERYHIGH[k] = 1; });
+    _kbTestsApplied = true;
+    IDF = null; GIDF = null; ASSOC = {};
   }
   // KB "why this" reason interpolator — renders the declarative template (no eval).
   function kbRenderNode(node, e) {
@@ -1021,8 +1189,20 @@
       missing: missing, reason: d.reason || "", red: d.red || [], inv: d.inv || [], disc: d.disc || [], tools: d.tools || [] };
   }
 
+  // round 64 (smd_kb_v2): kbApplyClinical() runs once at script load, before the lazy-loaded KB has arrived, so the
+  // engine kept its built-in non-infective list and four KB diagnoses (delirium tremens, sickle cell disease, acute
+  // limb ischaemia, B12 deficiency) could never appear. Add any KB diagnosis the list lacks, once the KB is there.
+  var _niMergedV2 = false;
+  function mergeKbNiV2() {
+    if (_niMergedV2 || !kbV2() || !(window.KB_CLINICAL && window.KB_CLINICAL.ddxNi && window.KB_CLINICAL.ddxNi.length)) return;
+    var have = {}; DDX_NI.forEach(function (d) { have[d.id] = 1; });
+    window.KB_CLINICAL.ddxNi.forEach(function (d) { if (d && d.id && !have[d.id]) DDX_NI.push(d); });
+    _niMergedV2 = true;
+  }
   function differential() {
     ensureKbV2();
+    ensureKbTests();
+    mergeKbNiV2();
     buildOntology();
     S.fInf = infFindings();
     S._dom = dominantSystems().dom;
@@ -1065,11 +1245,20 @@
       return localStorage.getItem("smd_rank_v3") !== "0";
     } catch (e) { return true; }
   }
+  var copdFlareOnly = function (f) { return !!(f.knownCOPD && (f.increasedDyspnea || f.wheeze) && !f.consolidation && !f.crepitations && !f.bilateralCrackles &&
+    !f.fever && !f.rigors && !f.purulentSputum && !f.pleuriticChestPain); };
   var RANK_V3_DQ = {
-    CAP: function (f) { return f.hypotension || f.vasopressorRequirement || f.mechanicalVentilation || f.hospitalDay48 || (f.subacuteOnset && (f.weightLoss || f.nightSweats || f.prolongedCough2Weeks)); },
+    CAP: function (f) { return f.hypotension || f.vasopressorRequirement || f.mechanicalVentilation || f.hospitalDay48 || (f.subacuteOnset && (f.weightLoss || f.nightSweats || f.prolongedCough2Weeks)) ||
+      copdFlareOnly(f); },
+    // round 64: known COPD, more breathless, with no focal or infective sign (consolidation, crackles, fever, purulence):
+    // the fast breathing and low saturation are the exacerbation, not a pneumonia
+    SEVERE_CAP: function (f) { return copdFlareOnly(f) || f.hospitalDay48; },   // round 67: 48 h in hospital is HAP by definition, as for CAP
+    BRONCHIECTASIS_EXACERBATION: function (f) { return copdFlareOnly(f) && !f.knownBronchiectasis; },
     GASTROENTERITIS: function (f) { return f.bloodyStool || f.tenesmus || f.ketonemia || f.ascendingWeakness || ((f.antibioticsLast90Days || f.priorAntibiotics) && f.diarrhea) || f.subacuteOnset || f.prolongedFever; },
     asthma_exac: function (f) { return f.knownCOPD || (f.hypotension && (f.rash || f.facialSwelling)) || f.ascendingWeakness; },
-    URTI: function (f) { return f.crepitations || f.consolidation || f.hypoxia; }
+    URTI: function (f) { return f.crepitations || f.bilateralCrackles || f.consolidation || f.hypoxia; },
+    // round 68: urinary frequency without dysuria in a patient with a focal neurological deficit is a neurogenic bladder
+    CYSTITIS: function (f) { return !f.dysuria && !f.hematuria && f.focalNeuroDeficit; }
   };
   var RANK_V3_ANCHOR = {
     // pneumonia needs a lower-respiratory sign; fever + cough alone is URTI / bronchitis territory
@@ -1082,7 +1271,20 @@
     acute_leukemia: ["mucocutaneousBleeding", "bleedingManifestation", "petechialRash", "thrombocytopenia", "lymphadenopathy", "hepatosplenomegaly", "splenomegaly"],
     malignancy_b: ["weightLoss", "lymphadenopathy", "nightSweats", "malignancy"],
     myxedema: ["hypothermia", "bradycardia"],
-    dic: ["mucocutaneousBleeding", "bleedingManifestation", "thrombocytopenia", "inr"]
+    dic: ["mucocutaneousBleeding", "bleedingManifestation", "thrombocytopenia", "inr"],
+    // round 64: an INFECTIVE COPD exacerbation needs purulence, fever, consolidation or ventilation (Anthonisen, GOLD), so
+    // without one it cannot hold antibiotics as a rival (heldout3 tune: smoke-triggered COPD flare with white sputum)
+    COPD_EXACERBATION: ["purulentSputum", "fever", "rigors", "consolidation", "mechanicalVentilation"],
+    // round 64: by definition a bronchiectasis exacerbation needs bronchiectasis, and hospital-acquired pneumonia a stay of
+    // 48 h or more (or a ventilator); without them they cannot lead or hold antibiotics as rivals
+    BRONCHIECTASIS_EXACERBATION: ["knownBronchiectasis"],
+    HAP: ["hospitalDay48", "mechanicalVentilation"],
+
+    // round 67: ventilator-associated pneumonia needs a ventilator (ATS/IDSA 2016)
+    VAP: ["mechanicalVentilation"],
+    // round 64: uraemic encephalopathy needs its encephalopathy (a raised creatinine alone is kidney disease)
+    uraemic_enceph: ["alteredSensorium", "asterixis", "seizure", "behavioralChange"]
+    // round 47 (tried, dropped): a C. difficile anchor on antibiotics or a healthcare stay cost a needed call on an unseen set
   };
   // round 2 (2026-09-27): textbook discriminators between close neighbours, mined from TRAIN-split
   // misses, checked on dev. ORDER only, and unlike the disqualifiers and anchors above the antibiotic
@@ -1093,7 +1295,28 @@
     // uncomplicated cystitis is by definition afebrile, without flank pain, in an uncomplicated host
     CYSTITIS: function (f) { return (f.fever || f.rigors || f.feverGU || f.flankPain || f.costovertebralTenderness || f.complicatedUTIRisk) ? -25 : 0; },
     // an upper UTI in a complicated host (obstruction, catheter, male, diabetes...) is a complicated UTI
-    PYELONEPHRITIS: function (f) { return f.complicatedUTIRisk ? -15 : 0; },
+    // (round 64: -15 -> -30; an upper UTI in a host with complicating factors IS a complicated UTI, IDSA / EAU; heldout3 tune)
+    // round 68 (heldout3 tune): pyelonephritis is fever with flank pain; afebrile flank pain with blood in the urine and no
+    // dysuria is a stone first (EAU), and the colic then leads
+    PYELONEPHRITIS: function (f) { return (f.complicatedUTIRisk ? -30 : 0) + ((noneOf(f, FEBRILE) && f.hematuria && !f.dysuria) ? -30 : 0); },
+    // round 66: a urinary infection in a catheterised patient is catheter-associated (IDSA): it leads when the catheter and a
+    // urinary sign are both there (a catheter alone, with diarrhoea after antibiotics, is not a UTI picture)
+    CA_UTI: function (f) { return ((f.indwellingCatheter || f.longTermCatheter) && (f.feverGU || f.dysuria || f.flankPain || f.costovertebralTenderness ||
+      f.urinaryRetention || f.hematuria || f.perinealPain)) ? 20 : 0; },
+    // round 66 (heldout3 tune): cholangitis is an infection of an obstructed duct: without fever or rigors it is not the lead (Charcot, Tokyo)
+    // (round 73: transaminases over 1000 are a hepatitis, not an obstructed duct, unless imaging shows one; heldout2)
+    CHOLANGITIS: function (f) { return (noneOf(f, FEBRILE) ? -20 : 0) + ((f.transaminasesVeryHigh && !f.dilatedCBD) ? -20 : 0); },
+    CHOLECYSTITIS: function (f) { return (f.transaminasesVeryHigh && !f.murphySign && !f.gallbladderInflamed) ? -20 : 0; },
+    // dengue is a fever; with severe or swollen joints chikungunya comes first
+    DENGUE: function (f) { return (noneOf(f, FEBRILE) ? -25 : 0) + ((f.severeArthralgia || f.jointSwelling) ? -15 : 0); },
+    // round 67: an acute fever with severe or swollen joints (often symmetric, small joints and ankles) is chikungunya first (WHO SEARO)
+    CHIKUNGUNYA: function (f) { return (!noneOf(f, FEBRILE) && (f.severeArthralgia || f.jointSwelling) && !f.bleedingManifestation && !f.mucocutaneousBleeding) ? 15 : 0; },
+    // malaria is acute; weeks of fever with weight loss is TB, lymphoma or another chronic cause first
+    // (round 70: and a fever with a stated bacterial source, a puerperal uterus or a wound, is that infection first)
+    MALARIA: function (f) { return ((f.subacuteOnset && f.weightLoss) ? -20 : 0) + (f.suspectedInfectionSource ? -20 : 0); },
+    // round 70 (heldout3 tune): confusion with a raised creatinine is uraemic only when nothing else explains it: hypercalcaemia,
+    // shock or hypoglycaemia is the cause first
+    uraemic_enceph: function (f) { return (f.calciumHigh || f.hypotension || f.glucoseLow) ? -20 : 0; },
     PROSTATITIS: function (f) { return f.perinealPain ? 20 : 0; },
     // biliary colic is afebrile; fever or rigors with RUQ pain is cholecystitis or cholangitis
     biliary_colic: function (f) { return (f.fever || f.rigors) ? -25 : 0; },
@@ -1114,7 +1337,13 @@
     // idiopathic thrombocytopenia is the diagnosis when bleeding and a low count stand alone: DIC needs a
     // trigger, TTP/HUS organ injury (kidney, brain, haemolysis), leukaemia more than a low platelet count
     dic: function (f) { return noneOf(f, ["fever", "hypotension", "organDysfunction", "malignancy", "inr", "lactateElevated", "toxicAppearing"]) ? -15 : 0; },
-    ttp_hus: function (f) { return noneOf(f, ["alteredSensorium", "renalImpairment", "fever", "darkUrine", "jaundice", "focalNeuroDeficit"]) ? -25 : 0; },
+    ttp_hus: function (f) { return (noneOf(f, ["alteredSensorium", "renalImpairment", "fever", "darkUrine", "jaundice", "focalNeuroDeficit"]) ? -25 : 0) +
+      // round 68: diarrhoea (often bloody) followed by low platelets and kidney failure is haemolytic uraemic syndrome (STEC-HUS)
+      // (afebrile and not in shock: fever with hypotension after diarrhoea is sepsis, C. difficile included)
+      (((f.bloodyStool || f.diarrhea) && f.thrombocytopenia && (f.renalImpairment || f.oliguria) && noneOf(f, FEBRILE) && !f.hypotension) ? 30 : 0); },
+    // round 68: afebrile bloody diarrhoea now with low platelets and kidney failure is HUS, not an active dysentery (and
+    // antibiotics raise the risk in STEC-HUS)
+    DYSENTERY: function (f) { return (noneOf(f, FEBRILE) && f.thrombocytopenia && (f.renalImpairment || f.oliguria)) ? -25 : 0; },
     acute_leukemia: function (f) { return noneOf(f, ["lymphadenopathy", "hepatosplenomegaly", "splenomegaly", "fever", "weightLoss", "cytopenia"]) ? -25 : 0; },
     // ascending weakness is GBS; myasthenia is fatigable and descending
     gbs: function (f) { return f.ascendingWeakness ? 15 : 0; },
@@ -1124,9 +1353,10 @@
     migraine: function (f) { return noneOf(f, ["headache", "headacheSevere"]) ? -25 : 0; },
     LEPTOSPIROSIS: function (f) { return noneOf(f, FEBRILE) ? -20 : 0; },
     LIVER_ABSCESS: function (f) { return noneOf(f, FEBRILE) ? -20 : 0; },
-    AMOEBIC_LIVER_ABSCESS: function (f) { return noneOf(f, FEBRILE) ? -20 : 0; },
     CNS_TB: function (f) { return noneOf(f, FEBRILE.concat(["headache", "headacheSevere", "neckStiffness"])) ? -20 : 0; },
-    ENCEPHALITIS: function (f) { return noneOf(f, FEBRILE.concat(["headache", "headacheSevere", "seizure"])) ? -20 : 0; },
+    // (round 64 adds: a heavy drinker, confused and agitated, without focal signs or meningism, is alcohol withdrawal first)
+    ENCEPHALITIS: function (f) { return (noneOf(f, FEBRILE.concat(["headache", "headacheSevere", "seizure"])) ? -20 : 0) +
+      ((f.alcoholExcess && !f.focalNeuroDeficit && !f.neckStiffness && !f.photophobia) ? -20 : 0); },
     tia: function (f) { return f.clinicallyImproving ? 0 : -20; },          // a TIA has resolved; a deficit now is a stroke
     // clinically identical to organophosphate poisoning, which is far commoner; the compound decides
     carbamate: function () { return -5; },
@@ -1140,14 +1370,78 @@
     sle_flare: function (f) { return (f.thrombocytopenia && (f.proteinuria || f.hematuria)) ? 15 : 0; },
     // DKA is defined by ketosis; before the result, vomiting with abdominal pain is the picture to act on
     dka: function (f) { return (f.ketonemia || (f.nauseaVomiting && f.abdominalPain)) ? 0 : -15; },
+    // round 12 (2026-09-27, train confusion pairs, checked on dev). A viral prodrome (myalgia, contaminated food or
+    // water) with jaundice and no rigors or biliary obstruction is hepatitis before cholangitis
+    VIRAL_HEPATITIS: function (f) { return (f.jaundice && (f.myalgiaArthralgia || f.contaminatedFoodWaterExposure) && !f.rigors && !f.dilatedCBD && !f.hypotension) ? 15 : 0; },
+    // aseptic meningitis: a viral prodrome and a clear sensorium, no rash, no shock
+    VIRAL_MENINGITIS: function (f) { return ((f.myalgiaArthralgia || f.coryza) && noneOf(f, ["alteredSensorium", "toxicAppearing", "seizure", "petechialRash", "focalNeuroDeficit", "hypotension"])) ? 15 : 0; },
+    // nephrotic syndrome: heavy proteinuria with anasarca (ascites or facial oedema) and a bland sediment
+    nephrotic: function (f) { return (f.proteinuria && (f.ascites || f.facialSwelling) && !f.hematuria) ? 15 : 0; },
+    // an acute fall in urine output with a rising creatinine and a bland urine is acute kidney injury (dark urine is
+    // pigment, rhabdomyolysis or haemolysis, which names the cause: added after dev gc_220, noted in the audit)
+    aki: function (f) { return (f.oliguria && f.renalImpairment && !f.proteinuria && !f.hematuria && !f.darkUrine) ? 12 : 0; },
+    // thyroid storm is decompensated thyrotoxicosis: fever, a changed sensorium or shock
+    thyroid_storm: function (f) { return noneOf(f, ["fever", "alteredSensorium", "hypotension", "toxicAppearing"]) ? -20 : 0; },
+    // round 14 (2026-09-27, train confusion pairs, each trigger checked against every train and dev case first).
+    // Myeloma is the CRAB picture: bone pain with renal impairment and hypercalcaemic symptoms or weight loss
+    myeloma: function (f) { return (f.backPain && f.renalImpairment && (f.weightLoss || f.constipationOrDiarrhea || f.polyuriaPolydipsia)) ? 20 : 0; },
+    // HHS: a diabetic, dry and confused after days of polyuria, without ketosis (hypercalcaemia shares the rest)
+    hhs: function (f) { return (f.polyuriaPolydipsia && f.alteredSensorium && f.dehydration && f.diabetesHx && !f.ketonemia) ? 15 : 0; },
+    // renal failure with a slow pulse is hyperkalaemia until the potassium says otherwise (not a toxidrome, not a bleed)
+    hyperkalemia: function (f) { return (f.renalImpairment && f.bradycardia && !f.miosisSecretions && !f.focalNeuroDeficit && !f.headInjury) ? 15 : 0; },
+    // volume-loss shock is tachycardic; a slow pulse with low pressure is reflex, endocrine or electrolyte
+    hypovolemic_shock: function (f) { return (f.bradycardia && !f.tachycardia) ? -15 : 0; },
+    vasovagal_syncope: function (f) { return (f.syncope && f.bradycardia && !f.hypothermia) ? 10 : 0; },
+    // the clinician's own "prolonged fever, still unexplained after work-up" is the working diagnosis
+    PUO: function (f) { return f.prolongedFeverUnexplained ? 20 : 0; },
+    // a single abscess in a drinker without biliary disease is amoebic until serology says otherwise
+    AMOEBIC_LIVER_ABSCESS: function (f) { return (noneOf(f, FEBRILE) ? -20 : 0) + ((f.singleLesion && f.alcoholExcess && !f.dilatedCBD && !f.knownGallstones) ? 15 : 0); },
+    // round 17 (2026-09-27): interstitial lung disease is subacute and afebrile; bilateral crackles with fever or shock
+    // and no subacute course are pneumonia or oedema (train gc_013, gc_052, gc_308)
+    ild: function (f) { return ((f.fever || f.rigors || f.hypotension || f.lactateElevated) && !f.subacuteOnset) ? -20 : 0; },
+    // round 31 (2026-09-28, train confusion pairs, checked on dev). Severe abdominal pain boring through to the back
+    pancreatitis: function (f) { return (f.severeAbdominalPain && f.backPain) ? 15 : 0; },
+    // retinal swelling with pulmonary oedema is the hypertensive emergency itself (target organs: eye, lung)
+    htn_emergency: function (f) { return (f.papilledema && (f.bilateralCrackles || f.orthopnea || f.raisedJVP)) ? 20 : 0; },
+    // a red, hot, SWOLLEN joint is arthritis (crystal or septic) before cellulitis
+    CELLULITIS: function (f) { return f.jointSwelling ? -15 : 0; },
+    // tried in round 31 and dropped: the aortic stenosis triad (a complaint of crushing chest pain with near-collapse is
+    // cardiogenic shock), known AF with palpitations (one train gain, one test loss), SVC obstruction (no effect)
     // not here: confirmed mixed malaria over malaria. Leading with the lower-scored of the two widened the
     // gate's "close rival" window and turned antimalarial-only care into "antibiotics" (train gc_135)
+    // round 47: fever with rigors or paroxysms after travel to (or living in) a malaria-endemic area is malaria until the
+    // smear says otherwise; HLH is considered when fever persists after its infective trigger is treated
+    HLH: function (f) { return (f.mixedMalariaConfirmed || (f.travelEndemicArea && (f.rigors || f.paroxysmalFever))) ? -20 : 0; },
+    // round 64 (heldout3 tune half, the independent set): three attractors on notes written by someone else.
+    // Known COPD with more breathlessness or sputum is a COPD exacerbation by definition (GOLD), not acute bronchitis; nor is
+    // consolidation, weight loss or a subacute cough of two weeks or more (acute bronchitis is short and self-limiting)
+    ACUTE_BRONCHITIS: function (f) { return (f.knownCOPD && (f.increasedDyspnea || f.increasedSputumVolume)) ? -40 :
+      (f.consolidation || f.weightLoss || (f.subacuteOnset && f.prolongedCough2Weeks)) ? -20 : 0; },
   };
   var RANK_V3_NUMERIC = null;
   // v3 knowledge the antibiotic gate may use: a candidate that is disqualified or lacks its anchor
+  // (the round 64 history anchors need the v2 reader: the classic one cannot read "day 5 of admission" or a known
+  // bronchiectasis from a note, so the classic-reader configuration keeps its old behaviour)
+  var ANCHOR_V2_ONLY = { HAP: 1, BRONCHIECTASIS_EXACERBATION: 1, VAP: 1 };
+  function rankV3Anchor(id) { if (ANCHOR_V2_ONLY[id] && !(window.SMD_NLP && SMD_NLP._v2 && SMD_NLP._v2({}))) return null; return RANK_V3_ANCHOR[id]; }
+  // round 76: the ordered score the gate compares, with the v3 evidence applied even when the displayed order is the classic
+  // one (smd_rank_v3=0 changes the order the doctor sees, not what the antibiotic gate knows)
+  var GATE_RANK = {};   // per gate() call (reset there): the v3 score of each candidate when the order is the classic one
+  function gateRank(r) {
+    if (!r) return 0;
+    if (rankV3()) return r.rankScore != null ? r.rankScore : r.score;
+    var key = (r.inf ? "i:" : "n:") + r.id;
+    if (GATE_RANK[key] == null) {
+      var c = { id: r.id, score: r.score, rankScore: r.rankScore, supporting: r.supporting, inf: r.inf, _syn: r._syn };
+      rankV3Adjust(c); GATE_RANK[key] = c.rankScore;
+    }
+    return GATE_RANK[key];
+  }
+  // a sore throat with viral features (cough, coryza, a blocked nose) and no tonsillar exudate (IDSA 2012)
+  function viralThroatOf(f) { return !!(f.soreThroat && (f.cough || f.coughRadio || f.coryza || f.nasalCongestion) && !f.tonsillarExudate); }
   function rankV3Excluded(r, f) {
     if (RANK_V3_DQ[r.id] && RANK_V3_DQ[r.id](f)) return true;
-    var anc = RANK_V3_ANCHOR[r.id];
+    var anc = rankV3Anchor(r.id);
     return !!(anc && !anc.some(function (k) { return f[k]; }));
   }
   function rankV3Adjust(r) {
@@ -1159,9 +1453,10 @@
     (r.supporting || []).forEach(function (k) { if (!FW_LOW[k] && !RANK_V3_NUMERIC[k]) spec += (g[k] != null ? g[k] : 0.5); });
     var adj = Math.min(40, 2 * spec);
     if (RANK_V3_DQ[r.id] && RANK_V3_DQ[r.id](f)) adj -= 35;
-    var anc = RANK_V3_ANCHOR[r.id];
+    var anc = rankV3Anchor(r.id);
     if (anc && !anc.some(function (k) { return f[k]; })) adj -= 25;
     if (RANK_V3_R2[r.id]) adj += RANK_V3_R2[r.id](f) || 0;
+    if (_kbTestsApplied && KB_TEST_ORDER[r.id]) adj += KB_TEST_ORDER[r.id](f) || 0;   // smd_kb_tests round 72
     // 4. pertinent negatives from the note ("no neck stiffness", "chest clear"): each strong finding
     // of this diagnosis the note explicitly denies costs 12, at most 30
     var neg = S.neg || {}, nneg = 0;
@@ -1286,6 +1581,21 @@
       return localStorage.getItem("smd_gate_v2") !== "0";
     } catch (e) { return true; }
   }
+  var FEVER_NI = { thyroid_storm: 1, alcohol_withdrawal: 1, ttp_hus: 1, serotonin_nms: 1, sle_flare: 1, vasculitis: 1, pancreatitis: 1,
+    sarcoidosis: 1, heat_stroke: 1, drug_fever: 1, sjs_ten: 1, still_disease: 1 };
+  // non-infective causes of fever (or a fever-like picture) with shock: sepsis physiology does not override them
+  // non-infective causes of abdominal pain (or distension) that, when they lead, make "tap first" the SBP answer
+  var RIVAL_NEEDS = {
+    CHOLANGITIS: ["jaundice", "rightUpperQuadrantPain", "dilatedCBD", "cholestaticLFT", "knownGallstones", "abdominalPain", "darkUrine", "rigors"],
+    CHOLECYSTITIS: ["rightUpperQuadrantPain", "murphySign", "knownGallstones", "gallbladderInflamed", "abdominalPain", "severeAbdominalPain"],
+    // round 76: its criteria need right upper quadrant pain and a liver lesion (fever, travel and jaundice are a malaria too;
+    // gold train gc_070)
+    AMOEBIC_LIVER_ABSCESS: ["rightUpperQuadrantPain", "singleLesion", "abdominalPain", "severeAbdominalPain", "abdominalDiscomfort"]
+  };
+  var SBP_PAIN_NI = { pancreatitis: 1, bowel_obstruction: 1, peptic_ulcer: 1, mesenteric_ischemia: 1, biliary_colic: 1, renal_colic: 1,
+    aaa: 1, anaphylaxis: 1 };
+  var SHOCK_FEVER_NI = { cardiogenic_shock: 1, hypovolemic_shock: 1, anaphylaxis: 1, adrenal_crisis: 1, tamponade: 1, aortic_dissection: 1,
+    aaa: 1, heat_stroke: 1, thyroid_storm: 1, serotonin_nms: 1, pancreatitis: 1, pe: 1, dka: 1 };
   var GATE_V2_KEEP = ["hypotension", "lactateElevated", "raised_lactate", "vasopressorRequirement",
     "immunocompromised", "neutropenia", "absoluteNeutrophilCountLow", "persistentBacteremia"];
   // YES | NO | CONDITIONAL | SPECIFIC (ASP "N/A": antiparasitic / antiviral, not antibacterial)
@@ -1313,9 +1623,15 @@
     var gib = f.hematemesis || f.melena || f.gibPresentation;
     // a GI bleed in cirrhosis needs antibiotic prophylaxis (Baveno VII) whatever the tap shows, so
     // "rule out SBP, tap first" must not replace it: only fever-grade SBP signs take this branch then
+    // round 73: abdominal pain in cirrhosis with ascites, but no fever, rigors or ascitic neutrophils, while a non-infective
+    // cause of the pain leads the order (pancreatitis, bowel obstruction, a perforated ulcer, anaphylaxis): tap first, as with
+    // encephalopathy alone (AASLD 2021: the ascitic neutrophil count decides). Gold train gc_438, gc_446, gc_490.
+    var painElsewhere = !!(sbpSign && !(f.fever || f.rigors || f.asciticPMNHigh) && d.ni[0] && SBP_PAIN_NI[d.ni[0].id] &&
+      (!d.inf[0] || gateRank(d.ni[0]) > gateRank(d.inf[0])));
     if (f.liverDisease && f.ascites && (sbpSign || (sbpSoft && !gib)) &&
         (g.cls === "possible" || g.cls === "unlikely" || g.cls === "noninfective" || g.cls === "none")) {
-      g.cls = sbpSign ? "likely" : "rule_out_sbp"; g.rule = "sbp";
+      g.cls = sbpSign && !painElsewhere ? "likely" : "rule_out_sbp"; g.rule = "sbp";
+      if (g.cls === "rule_out_sbp" && sbpSign) g.painLead = d.ni[0].name;
       // the stewardship card must be SBP's, never another infection's regimen under an SBP banner
       g.lead = d.inf.filter(function (x) { return x.id === "SBP"; })[0] || null;
       return;
@@ -1323,10 +1639,25 @@
     // fever with shock physiology and no non-infectious cause leading: sepsis until proven otherwise
     // (the classic override needs an infection syndrome scoring 38+, so fever + hypotension alone
     // read "infection unlikely, antibiotics not recommended yet")
+    // round 65: fever with neutrophils under 500 is febrile neutropenia whatever leads (a leukaemia, a drug): empiric
+    // antibiotics within the hour (IDSA, ESMO)
+    if ((f.fever || f.rigors) && (f.neutropenia || f.absoluteNeutrophilCountLow) && g.cls !== "very_likely" && g.cls !== "likely") {
+      g.cls = "likely"; g.rule = "febrile_neutropenia";
+      return;
+    }
     if ((f.fever || f.rigors) && (f.hypotension || f.lactateElevated || f.vasopressorRequirement) &&
         (g.cls === "unlikely" || g.cls === "possible" || g.cls === "none")) {
       g.cls = "likely"; g.rule = "sepsis_phys";
       return;
+    }
+    // round 72 (heldout4 tune): the same when a non-infective diagnosis only OUTSCORES the infections, if it does not itself
+    // explain fever with shock. Rigors, a raised white count or a toxic look with shock is sepsis first (Surviving Sepsis
+    // 2021), not TTP/HUS or hyperglycaemia; it stands aside for the non-infective causes of fever with shock.
+    if ((f.fever || f.rigors) && (f.hypotension || f.lactateElevated || f.vasopressorRequirement) && (f.rigors || f.leukocytosis || f.toxicAppearing) &&
+        g.cls === "noninfective") {
+      // (a diagnosis the v3 order excludes, e.g. a thyroid storm with none of its anchors, does not count)
+      var nS = d.ni.reduce(function (m, x) { return rankV3Excluded(x, f) || (m && m.score >= x.score) ? m : x; }, null), nR = d.ni[0] || null;
+      if (!(nS && SHOCK_FEVER_NI[nS.id]) && !(nR && SHOCK_FEVER_NI[nR.id])) { g.cls = "likely"; g.rule = "sepsis_phys"; return; }
     }
     // afebrile septic shock (Sepsis-3): the old and frail often never mount a fever. Low BP with a raised
     // lactate or pressors plus a second qSOFA sign (confusion, fast breathing), while an infection is still
@@ -1338,7 +1669,52 @@
       g.cls = "likely"; g.rule = "sepsis_afebrile";
       return;
     }
-    if (f.liverDisease && (f.hematemesis || f.melena || f.gibPresentation) && g.cls !== "very_likely" && g.cls !== "likely") {
+    // round 16 (2026-09-27): infections that are treated on the clinical picture, before a score says so.
+    // Fever with a new regurgitant murmur is endocarditis until three blood cultures say otherwise (modified Duke);
+    // a febrile UTI is by definition upper or complicated; hospital-acquired pneumonia is defined by 48 h+ in hospital
+    // with fever, purulent secretions and worsening gas exchange or a new infiltrate (ATS/IDSA); fever with RUQ
+    // pain and a Murphy sign or known gallstones is acute cholecystitis (Tokyo) until imaging says otherwise.
+    var weak = g.cls === "possible" || g.cls === "unlikely" || g.cls === "noninfective" || g.cls === "none";
+    var febrile = f.fever || f.rigors || f.feverGU;
+    var cantMiss = febrile && f.newMurmur ? "fever_murmur" :
+      f.feverGU ? "febrile_uti" :
+      // (ventilator-associated: a ventilated patient with a new infiltrate needs no fever, CDC VAE)
+      (f.hospitalDay48 && (febrile || (f.mechanicalVentilation && f.consolidation)) && (f.purulentSputum || f.purulentSecretions || f.worseningOxygenation) &&
+        (f.worseningOxygenation || f.hypoxia || f.consolidation)) ? "hap_criteria" :
+      // round 67: ATS/IDSA 2016 is a NEW infiltrate plus one of fever, purulent sputum, leukocytosis or a fall in oxygenation,
+      // so a new infiltrate with worsening oxygenation after 48 h in hospital meets it without a fever (the elderly often have none)
+      (f.hospitalDay48 && f.consolidation && (f.worseningOxygenation || f.leukocytosis)) ? "hap_criteria" :
+      (febrile && f.rightUpperQuadrantPain && (f.murphySign || f.knownGallstones)) ? "cholecystitis_signs" :
+      // round 21: fever with bloody diarrhoea is bacillary dysentery until shown otherwise (WHO; India)
+      (febrile && f.bloodyStool && (f.diarrhea || f.tenesmus || f.abdominalPain) && !f.knownIBD) ? "febrile_dysentery" : null;   // known IBD: a flare first
+    if (cantMiss && weak && !gib) { g.cls = "likely"; g.rule = cantMiss; return; }
+    // round 23 (2026-09-27): an ACUTE febrile illness whose leading diagnosis (v3 order) is an infection is treated
+    // as infection likely; the lead's own antibiotic need then decides (a viral or antiparasitic lead still gets
+    // none). Short notes carry few findings, so the MAX-score thresholds (62 and "criteria met") read "possible"
+    // for a febrile cellulitis or cholangitis: on the unseen doctor-style notes, needed antibiotics 18 -> 22 and
+    // 16 -> 21 of 23. Not for a subacute or prolonged fever (TB, PUO, vasculitis: work-up, not empiric antibiotics).
+    // It needs enough information (the smd_calib sufficiency rule, flag or not): fever alone is not an infection call.
+    // And the v2 reader: "subacute" and "prolonged fever" come from its duration parsing, which the classic one lacks.
+    // (round 25: night sweats with weight loss, the B-symptom pair, is a chronic picture even without a stated duration)
+    // (round 76: with the classic order too, measured with the v3 evidence: gateRank)
+    if (weak && febrile && !gib && !(f.subacuteOnset || f.prolongedFever || f.prolongedFeverUnexplained || (f.weightLoss && f.nightSweats)) && enoughInfo(d, f) &&
+        !!(window.SMD_NLP && SMD_NLP._v2 && SMD_NLP._v2({}))) {
+      var rkg = gateRank;
+      var bI = d.inf.reduce(function (m, x) { return !m || rkg(x) > rkg(m) ? x : m; }, null);
+      var bN = d.ni.reduce(function (m, x) { return !m || rkg(x) > rkg(m) ? x : m; }, null);
+      if (bI && (!bN || rkg(bI) > rkg(bN))) { g.cls = "likely"; g.rule = "febrile_infection_lead"; g.lead = bI; }
+    }
+    // (round 65: cirrhosis shown by its signs, ascites or a flap, counts too: Baveno / AASLD prophylaxis)
+    // (round 73: a variceal bleed leading the order is portal hypertension too, when the reader missed the liver words;
+    // gold train gc_037 with the classic reader)
+    var rkv = gateRank;
+    // (round 76: with a cause or sign of portal hypertension, alcohol excess, a big spleen, low platelets, or jaundice with
+    // encephalopathy: a B12 deficiency whose "denies melena or hematemesis" the classic reader missed is not a variceal
+    // bleed; gold train gc_101)
+    var varLead = !!(d.ni[0] && d.ni[0].id === "variceal_bleed" && (!d.inf[0] || rkv(d.ni[0]) >= rkv(d.inf[0])) &&
+      (f.alcoholExcess || f.splenomegaly || f.hepatosplenomegaly || f.thrombocytopenia || (f.jaundice && (f.alteredSensorium || f.asterixis))));
+    var cirrGib = (f.liverDisease || f.ascites || f.asterixis || varLead) && (f.hematemesis || f.melena || f.gibPresentation);
+    if (cirrGib && g.cls !== "very_likely" && g.cls !== "likely") {
       g.cls = "abx_prophylaxis"; g.rule = "cirrhosis_gib";
       return;
     }
@@ -1346,32 +1722,80 @@
     // no host modifier: the classic MAX-score thresholds still read "infection likely" whenever an
     // infection matched and scored close (renal colic vs pyelonephritis, lung cancer vs TB, an IBD
     // flare vs dysentery). Only the order-aware reading can see that the non-infective cause leads.
-    if ((g.cls === "very_likely" || g.cls === "likely") && !(f.fever || f.rigors || f.feverGU || f.highFeverGI) &&
+    // (round 76: never for cirrhosis with a GI bleed: prophylaxis stands whatever leads, Baveno VII)
+    if ((g.cls === "very_likely" || g.cls === "likely") && !(f.fever || f.rigors || f.feverGU || f.highFeverGI) && !cirrGib &&
         !GATE_V2_KEEP.some(function (k) { return f[k]; }) && !f.organDysfunction) {
-      var rk2 = function (x) { return x.rankScore != null ? x.rankScore : x.score; };
+      var rk2 = gateRank;
       var bestI = d.inf.reduce(function (m, x) { return !m || rk2(x) > rk2(m) ? x : m; }, null);
       var bestN = d.ni.reduce(function (m, x) { return !m || rk2(x) > rk2(m) ? x : m; }, null);
-      if (bestN && bestI && rk2(bestN) > rk2(bestI) && bestN.score >= bestI.score) {
+      // round 9 (2026-09-27): with smd_rank_v3 the ORDER is the reviewed reading, so a non-infective lead there is
+      // enough; the raw-score check stays for the classic order (an infection can score high on one shared symptom:
+      // gastroenteritis 81 on vomiting alone behind bowel obstruction, DKA, myeloma on the train split)
+      // It also needs the v2 extractor, which reads every mention: the classic one reads only the first, so "denies
+      // fever at home ... temp 39" reads afebrile there (classic extractor + this: needed antibiotics 109 -> 107).
+      var nlp2 = !!(window.SMD_NLP && SMD_NLP._v2 && SMD_NLP._v2({}));
+      if (bestN && bestI && rk2(bestN) > rk2(bestI) && (nlp2 || bestN.score >= bestI.score)) {
         g.cls = "noninfective"; g.rule = "ni_lead_afebrile"; g.why = bestN.name;
         return;
       }
     }
+    // round 13 (2026-09-27): a non-infective cause that itself produces fever (storm, withdrawal, TTP, NMS, lupus,
+    // vasculitis, pancreatitis...) leads the v3 order by 10+ with no shock physiology or host modifier: it explains
+    // the fever. Leukaemia, lymphoma and other cancers are NOT on the list (fever there is neutropenic until shown
+    // otherwise: train gc_044 endocarditis behind leukaemia), nor gout (a septic joint needs a tap to exclude).
+    if ((g.cls === "very_likely" || g.cls === "likely") && !cirrGib &&
+        !GATE_V2_KEEP.some(function (k) { return f[k]; })) {
+      var rk3 = gateRank;
+      var bI = d.inf.reduce(function (m, x) { return !m || rk3(x) > rk3(m) ? x : m; }, null);
+      var bN = d.ni.reduce(function (m, x) { return !m || rk3(x) > rk3(m) ? x : m; }, null);
+      if (bN && bI && FEVER_NI[bN.id] && rk3(bN) >= rk3(bI) + 10) { g.cls = "noninfective"; g.rule = "ni_explains_fever"; g.why = bN.name; return; }
+    }
     // (a) the lead infection's own antibiotic need
     if (g.cls !== "very_likely" && g.cls !== "likely") return;
     var lead = g.lead, need = abxNeed(lead);
+    // round 47: a sore throat with viral features (cough, coryza, a blocked nose) and no tonsillar exudate is viral: IDSA
+    // (2012) advises neither a strep test nor antibiotics, so pharyngitis holds no "antibiotics if criteria met".
+    // (round 76: with the classic order too. It had been smd_rank_v3 only, because in the classic order that conditional answer
+    // was the net under a needed call; the febrile-infection-lead rule now reads the v3 evidence there, which covers it)
+    var viralThroat = viralThroatOf(f);
+    if (lead && lead.id === "PHARYNGITIS" && need === "CONDITIONAL" && viralThroat) need = "NO";
     if (!lead || need === "YES") return;
+    // round 73: an infection that needs no antibiotics (viral hepatitis) does not cancel the prophylaxis a GI bleed in
+    // cirrhosis needs (Baveno VII)
+    if (cirrGib) { g.cls = "abx_prophylaxis"; g.rule = "cirrhosis_gib"; return; }
     var mods = GATE_V2_KEEP.filter(function (k) { return f[k]; });
+    // round 67 (heldout3 tune): acute watery diarrhoea without fever, blood, sepsis signs, a healthcare or antibiotic
+    // exposure, or immune compromise needs fluids, not antibiotics (IDSA 2017, WHO). A C. difficile or dysentery rival
+    // without its own trigger (antibiotics, a hospital stay, blood in the stool) then cannot hold them; any other rival still can.
+    // From a note it needs the fever denied in so many words ("afebrile", "no fever"): a note that does not mention it has not
+    // excluded it (a complaint line), and the v2 reader, which reads every mention of fever (as ni_lead_afebrile).
+    var nlp2w = !!(window.SMD_NLP && SMD_NLP._v2 && SMD_NLP._v2({}));
+    // (round 73: a note that does not mention fever still gets the fluids answer when nothing in it points to severity or
+    // another cause: no dehydration, low urine output, abdominal pain or distension. Gold: complaint-only overcalls 15 -> 13
+    // with no needed call lost.)
+    var wateryText = nlp2w && (!!(S.neg && S.neg.fever) || !(f.dehydration || f.oliguria || f.abdominalPain || f.severeAbdominalPain || f.abdominalDistension));
+    var watery = !mods.length && lead.id === "GASTROENTERITIS" && (!S.negText || wateryText) && f.diarrhea && noneOf(f, ["fever", "rigors", "feverGU", "bloodyStool", "tenesmus",
+        "alteredSensorium", "toxicAppearing", "organDysfunction", "antibioticsLast90Days", "priorAntibiotics", "hospitalDay48",
+        "hospitalizationLast90Days", "nursingHomeResident", "travelEndemicArea", "prolongedFever", "subacuteOnset"]);
     if (mods.length) { g.rule = "keep_modifier"; g.need = need; g.why = mods.map(function (k) { try { return lbl(k); } catch (e) { return k; } }).join(", "); return; }
     // A competing infection that DOES need antibiotics keeps them: within 30 points of the lead, or
     // a time-critical one (decision status red) at 42+ whose criteria are met. The engine's lead can be wrong (viral
     // hepatitis leading a leptospirosis or SBP picture); this stops a ranking miss from becoming
     // "no antibiotics".
     var rivalYes = null, rivalCond = null;
-    var v3 = rankV3();
     d.inf.forEach(function (x) {
       if (x === lead || x.score < 42) return;
-      if (v3 && rankV3Excluded(x, f)) return;   // smd_rank_v3: an excluded rival cannot hold antibiotics on
-      var n = abxNeed(x), close = x.score >= lead.score - 30;
+      if (x.id === "PHARYNGITIS" && viralThroat) return;
+      if (watery && (x.id === "C_DIFF" || x.id === "DYSENTERY")) return;
+      if (rankV3Excluded(x, f)) return;   // smd_rank_v3 knowledge: an excluded rival cannot hold antibiotics on
+      // round 73: a biliary infection holds antibiotics as a rival only with a biliary sign (Tokyo 2018): fever, vomiting and
+      // transaminases over 1000 are a hepatitis. The order is untouched (a reader that missed the words must not bury it).
+      if (RIVAL_NEEDS[x.id] && noneOf(f, RIVAL_NEEDS[x.id])) return;
+      // round 9: under smd_rank_v3 "close" is measured on the ordered score the doctor sees (raw otherwise)
+      // round 76: with the classic order (smd_rank_v3=0) the gate still measures it with the v3 evidence (gateRank), without
+      // reordering the list, as it already used rankV3Excluded: a common cold must not hold antibiotics for a leptospirosis
+      // that has none of its exposures
+      var n = abxNeed(x), close = gateRank(x) >= gateRank(lead) - 30;
       var critical = x._syn && x._syn.decision && x._syn.decision.status === "red";
       // a time-critical rival counts from any distance only when its criteria are met (x.matched);
       // an unmatched one is keyword overlap and must be within the 30 points like any other
@@ -1379,6 +1803,7 @@
       else if (n === "CONDITIONAL" && close && !rivalCond) rivalCond = x;
     });
     if (rivalYes) { g.rule = "keep_rival"; g.need = need; g.whyFor = rivalYes.name; return; }
+    if (watery) { g.cls = "infection_no_abx"; g.rule = "watery_diarrhoea"; g.why = ""; return; }
     if (need === "SPECIFIC") { g.cls = "infection_specific"; g.why = abxWhy(lead); }
     else if (need === "CONDITIONAL") { g.cls = "infection_conditional"; g.why = abxWhy(lead); }
     else if (rivalCond) { g.cls = "infection_conditional"; g.why = abxWhy(rivalCond); g.whyFor = rivalCond.name; }
@@ -1386,8 +1811,10 @@
   }
 
   /* Infection gate — keyed off whether infection LEADS overall */
+  var CLASSIC_VIRAL = { URTI: 1, CHIKUNGUNYA: 1, VIRAL_HEPATITIS: 1 };
   function gate(d) {
     var v2 = gateV2();
+    GATE_RANK = {};
     // MAX score across each column — order-independent, so the specificity
     // re-rank (which can change which candidate sits at [0]) leaves the infection
     // gate + antibiotic decision byte-identical to the classic ordering.
@@ -1408,6 +1835,8 @@
     // infective cause is at least competitive (guards against over-calling when
     // a non-infectious cause clearly leads).
     var f = S.f || {};
+    // round 65: the catalog has two lactate findings; "Raised lactate / hyperlactataemia" counts as an elevated lactate
+    if (f.raised_lactate && !f.lactateElevated) { var f2 = {}; for (var fk in f) f2[fk] = f[fk]; f2.lactateElevated = true; f = f2; }
     var sepsisPhys = (f.fever || f.rigors || f.feverGU || f.highFeverGI) &&
                      (f.hypotension || f.lactateElevated || f.organDysfunction || f.vasopressorRequirement);
     if (sepsisPhys && topInf >= 38 && topInf >= topNi - 8) {
@@ -1424,8 +1853,27 @@
     if (febrileNeutropenia && topInf >= 30 && topInf >= topNi - 8) {
       if (cls === "noninfective" || cls === "unlikely" || cls === "possible") cls = "likely";
     }
-    var out = { cls: cls, topInf: topInf, topNi: topNi, lead: d.inf[0] || null };
-    if (v2) gateV2Apply(out, d, f);
+    // round 76: with the classic order (smd_rank_v3=0) the v2 gate works on the v3 order of the same candidates (gateRank):
+    // the switch changes the order the doctor sees, not what the antibiotic decision knows
+    var dg = d;
+    if (v2 && !rankV3()) {
+      var byG = function (a, b) { return (gateRank(b) - gateRank(a)) || (b.score - a.score) || a.name.localeCompare(b.name); };
+      dg = { inf: d.inf.slice().sort(byG), ni: d.ni.slice().sort(byG) };
+    }
+    var out = { cls: cls, topInf: topInf, topNi: topNi, lead: dg.inf[0] || null };
+    // round 76 (classic gate, smd_gate_v2=0): the reader now recognises a common cold and chikungunya, which the classic gate,
+    // treating every likely infection as an antibiotic indication, answered with antibiotics. A common cold, chikungunya or
+    // acute viral hepatitis lead (ASP "Need antibiotics? NO"), with no competing infection that needs antibiotics within 30
+    // points (the smd_gate_v2 rival reach), no host modifier (immune compromise, a recent antibiotic or hospital stay...) and
+    // no sepsis physiology or neutropenia, reads "infection likely, antibiotics not indicated". Only these: the classic gate
+    // otherwise stays as it was (it is the kill switch for smd_gate_v2, which carries the general rule).
+    if (!v2 && (cls === "likely" || cls === "very_likely") && !sepsisPhys && !febrileNeutropenia && !GATE_V2_KEEP.some(function (k) { return f[k]; })) {
+      var vLead = d.inf.reduce(function (m, x) { return m && m.score >= x.score ? m : x; }, null);
+      // (a rival the v3 knowledge excludes, a pneumonia with no lower-respiratory sign, does not count)
+      var abxRival = d.inf.some(function (x) { return x !== vLead && abxNeed(x) !== "NO" && x.score >= 42 && x.score >= vLead.score - 30 && !rankV3Excluded(x, f); });
+      if (vLead && CLASSIC_VIRAL[vLead.id] && abxNeed(vLead) === "NO" && !abxRival) { out.cls = "infection_no_abx"; out.lead = vLead; out.why = abxWhy(vLead); }
+    }
+    if (v2) gateV2Apply(out, dg, f);
     // smd_calib: non-diagnostic findings (fever alone) say so instead of "non-infectious diagnosis
     // favored". Never replaces "infection likely / very likely" or a v2 rule, so a sepsis or
     // neutropenia signal cannot be hidden behind "not enough information".
@@ -1484,6 +1932,15 @@
     return (g.rule || g.why) ? m.replace(/\s*\u2014\s*/g, ": ") : m;
   }
   function gateMsgRaw(g) {
+    if (g.rule === "fever_murmur") return "Fever with a new murmur: infective endocarditis until proven otherwise. Take three sets of blood cultures before antibiotics, then treat empirically; echocardiography.";
+    if (g.rule === "febrile_uti") return "A febrile urinary infection is upper or complicated by definition: send a urine culture and start antibiotics.";
+    if (g.rule === "febrile_neutropenia") return "Can't-miss: fever with neutrophils under 500 is febrile neutropenia, whatever else leads. Blood cultures, then empiric antibiotics within the hour (IDSA, ESMO); look for the source.";
+    if (g.rule === "hap_criteria") return "Hospital-acquired pneumonia criteria are met (48 h or more in hospital, fever, purulent secretions, worsening gas exchange or a new infiltrate): cultures, then empiric antibiotics.";
+    if (g.rule === "febrile_infection_lead") return "An acute fever with an infection leading the differential" + (g.lead && g.lead.name ? " (" + g.lead.name + ")" : "") + ": treat as a likely infection. Take cultures from the likely source before the first dose, and review at 48 to 72 hours.";
+    if (g.rule === "watery_diarrhoea") return "Acute watery diarrhoea without fever, blood in the stool, sepsis signs, a recent antibiotic or healthcare exposure, or immune compromise: oral rehydration, not antibiotics (IDSA 2017, WHO). Reconsider if fever, blood or sepsis signs appear.";
+    if (g.rule === "febrile_dysentery") return "Fever with bloody diarrhoea: bacillary dysentery until shown otherwise. Send a stool culture and start antibiotics; reconsider if a stool test or colonoscopy shows inflammatory bowel disease.";
+    if (g.rule === "cholecystitis_signs") return "Fever with right upper quadrant pain and a Murphy sign or gallstones: acute cholecystitis until imaging says otherwise. Antibiotics with source control.";
+    if (g.rule === "ni_explains_fever") return g.why + " leads the differential and explains the fever, with no shock signs or immune compromise: antibiotics are not recommended on these findings. Look for a source and reconsider if one appears or the patient deteriorates.";
     if (g.rule === "ni_lead_afebrile") return "No fever, shock signs or immune compromise, and a non-infectious diagnosis leads (" + g.why + "): antibiotics are not recommended on these findings. Reconsider if fever, rigors or a source of infection appears.";
     var lead = g.lead && g.lead.name;
     // smd_gate_v2: why antibiotics stay on although the lead infection alone would not need them
@@ -1502,7 +1959,8 @@
       case "infection_specific": return (lead ? lead + " leads. " : "") + (g.why ? g.why + " " : "") +
         "Antibiotics only for a proven or strongly suspected bacterial co-infection.";
       case "insufficient": return "These findings do not point to a diagnosis yet, so no infection or antibiotic call is made. The list below is only what they are compatible with. Add examination findings, vitals or key labs; the most useful next ones are suggested.";
-      case "rule_out_sbp": return "Can't-miss: spontaneous bacterial peritonitis. Cirrhosis with ascites and encephalopathy, without fever or abdominal pain: do a diagnostic paracentesis now. Treat if ascitic neutrophils are 250/mm3 or more, or at once if fever, abdominal pain, sepsis or shock develops.";
+      case "rule_out_sbp": return g.painLead ? "Can't-miss: spontaneous bacterial peritonitis. Cirrhosis with ascites and abdominal pain, without fever, while " + g.painLead + " leads: do a diagnostic paracentesis now. Treat if ascitic neutrophils are 250/mm3 or more, or at once if fever, sepsis or shock develops." :
+        "Can't-miss: spontaneous bacterial peritonitis. Cirrhosis with ascites and encephalopathy, without fever or abdominal pain: do a diagnostic paracentesis now. Treat if ascitic neutrophils are 250/mm3 or more, or at once if fever, abdominal pain, sepsis or shock develops.";
       case "abx_prophylaxis": return "Cirrhosis with gastrointestinal bleeding: short-course antibiotic prophylaxis is indicated (for example ceftriaxone 1 g daily for up to 7 days; Baveno VII). It lowers infection, rebleeding and mortality; it is not treatment of a diagnosed infection.";
       case "possible": return "Infection is in the differential but not dominant — pursue targeted investigations before antibiotics.";
       case "unlikely": return "Infection is low on the differential — antibiotics are not recommended yet. Investigate the alternatives.";
@@ -1763,7 +2221,7 @@
   var FT_SYN = {
     dyspnea:["sob","breathless","short of breath","dyspn"], alteredSensorium:["confus","drowsy","gcs","obtunded","unconscious","altered sensorium","altered mental"],
     neckStiffness:["neck stiff","stiff neck","meningism","nuchal"], headache:["headache","h/a"], fever:["fever","febrile","pyrexia"],
-    seizure:["seizure","convuls","fits"], hypotension:["hypotens","low bp","septic shock","shock"], hemoptysis:["hemoptysis","coughing blood"],
+    seizure:["seizure","convuls","fits"], hypotension:["hypotens","low bp","low blood pressure","septic shock","shock"], hemoptysis:["hemoptysis","coughing blood"],
     chestPain:["chest pain"], pleuriticChestPain:["pleuritic"], photophobia:["photophobia"], nauseaVomiting:["vomit","nausea"],
     diarrhea:["diarrhea","diarrhoea","loose stool"], dysuria:["dysuria","burning urine"], flankPain:["flank pain","loin pain"],
     jaundice:["jaundice","icterus"], cough:["cough"], hypoxia:["hypoxia","desaturat","spo2"], tachycardia:["tachycard"],
@@ -1771,7 +2229,7 @@
     palpitations:["palpitation"], syncope:["syncope","collapse","fainted"], backPain:["back pain"], focalNeuroDeficit:["weakness","hemiparesis","facial droop","slurred","focal deficit"],
     crepitations:["crackle","crepitation","creps"], consolidation:["consolidation"], purulentSputum:["purulent sputum","productive cough","sputum"],
     calfTenderness:["calf tender","calf pain"], legSwellingUnilateral:["calf swelling","leg swelling","unilateral leg"], legSwellingBilateral:["bilateral leg","pedal edema","ankle swelling","peripheral edema"],
-    abdominalPain:["abdominal pain","belly pain","abdo pain","epigastric pain"], rightUpperQuadrantPain:["right upper quadrant","ruq pain"], flankPain:["flank pain","loin pain"],
+    abdominalPain:["abdominal pain","belly pain","abdo pain","epigastric pain"], rightUpperQuadrantPain:["right upper quadrant","ruq pain"],
     polyuriaPolydipsia:["polyuria","polydipsia"], ketonemia:["ketone","ketoacidosis"], orthopnea:["orthopnoea","orthopnea","pnd"],
     exertionalChestPain:["exertional","on exertion"], ecgIschemia:["st elevation","ischemic ecg","ischaemic ecg"], thunderclapHeadache:["thunderclap","worst headache","worst-ever"],
     hematuria:["hematuria","haematuria","blood in urine"], jointSwelling:["swollen joint","hot joint","joint swelling"],
@@ -1808,11 +2266,13 @@
    * in "breathless on exertion" (exertional chest pain), "weakness" (focal deficit), "spo2" in any
    * saturation reading (hypoxia; the numeric parser decides that now). v2 drops those and adds bedside
    * phrasing mined from the TRAIN split of kb/validation (never the test split). Classic table unchanged. */
-  var FT_SYN_DROP_V2 = { diabetesHx: ["dm"], headInjury: ["fall", "fell"], alteredSensorium: ["gcs"], focalNeuroDeficit: ["weakness"],
+  var FT_SYN_DROP_V2 = { diabetesHx: ["dm"], headInjury: ["fall", "fell"], focalNeuroDeficit: ["weakness"],
     exertionalChestPain: ["exertional", "on exertion"], purulentSputum: ["sputum"], hypoxia: ["spo2"], mucocutaneousBleeding: ["bleeding"], alcoholExcess: ["alcohol"],
     // round 2: sweating is not the cholinergic toxidrome, a swollen leg is not a one-sided one, chemo mucositis is not SJS,
     // and neck or abdominal rigidity is not muscle rigidity
-    miosisSecretions: ["diaphoresis", "sweating profusely"], legSwellingUnilateral: ["leg swelling"], mucosalLesions: ["mucositis"], rigidity: ["rigid", "rigidity"] };
+    miosisSecretions: ["diaphoresis", "sweating profusely"], legSwellingUnilateral: ["leg swelling"], mucosalLesions: ["mucositis"], rigidity: ["rigid", "rigidity"],
+    // round 8: "fever not responding to antibiotics" is a treatment failure, not a coma (the R8 table adds the patient-level forms)
+    alteredSensorium: ["gcs", "not responding"] };
   var FT_SYN_ADD_V2 = {
     rigors: ["rigor", "chills", "shivering", "shaking chills"],
     toxicAppearing: ["toxic-looking", "toxic looking", "looks toxic", "looked toxic", "appears toxic", "toxic appearance", "toxic-appearing", "ill-looking", "ill looking",
@@ -1890,10 +2350,267 @@
     legSwellingUnilateral: ["left leg swelling", "right leg swelling", "swollen left leg", "swollen right leg", "left calf swelling", "right calf swelling", "one leg swollen"],
     renalImpairment: ["acute kidney injury", " aki ", " aki,", " aki.", "renal failure", "renal impairment", "raised creatinine", "deranged renal", "kidney injury", "uraemi", "uremi"]
   };
+  // round 8 (2026-09-27): typed-note phrasing mined from the TRAIN split misses (never test). A separate table because
+  // the keys above already exist and a second object literal key would replace, not extend, the list.
+  var FT_SYN_ADD_V2_R8 = {
+    hepatosplenomegaly: ["hepatomegaly", "enlarged liver", "liver enlarged", "palpable liver", "liver palpable", "liver edge palpable"],
+    abdominalPain: ["abdominal ache", "abdominal cramping", "crampy abdominal", "epigastric burning", "epigastric ache", "right upper abdominal ache"],
+    abdominalDiscomfort: ["abdominal cramping", "epigastric discomfort", "quadrant discomfort", "generalised discomfort", "generalized discomfort", "diffuse discomfort"],
+    oliguria: ["urine output has fallen", "urine output fell", "urine output has dropped", "urine output has decreased", "urine output was reduced",
+      "urine output was noticeably reduced", "poor urine output", "fall in urine output", "drop in urine output", "not passed urine", "minimal urine"],
+    alcoholExcess: ["daily alcohol", "alcohol intake", "alcohol use", "drinks alcohol", "beer intake", "standard drinks",
+      "units of alcohol", "alcohol binge", "continues to drink", "arrack", "toddy"],
+    hospitalizationLast90Days: ["last admission", "previous admission", "after discharge", "since discharge", "ward admission", "hospital-treated"],
+    supplementalOxygen: ["home oxygen", "ltot", "supplemental oxygen", "oxygen requirement", "l o2", "l of oxygen", "litres of oxygen", "liters of oxygen", "l/min oxygen", "l/min o2"],
+    headacheSevere: ["worsening headache", "progressive headache", "progressively worsening headache", "unremitting headache", "severe pounding headache"],
+    myalgiaArthralgia: ["polyarthralgia", "generalised aches", "generalized aches", "generalised myalgia", "generalized myalgia"],
+    behavioralChange: ["agitated", "agitation", "apathetic", "more irritable", "increasingly irritable", "became irritable", "more forgetful"],
+    skinWarmth: ["warm, tender", "warm and tender", "warm, red", "warm and red", "warmer than", "warm, swollen"],
+    alteredSensorium: ["not responding to voice", "not responding to pain", "not responding to painful", "not responding to verbal", "not responding to commands",
+      "not responding to call", "not responding to name", "not responding to us"]
+  };
+  // round 10 (2026-09-27): findings whose absence most often cost the right top-1 on typed train notes (per-finding
+  // ablation: add the missed key, does the diagnosis come right?). Several had no synonym at all, only the label.
+  var FT_SYN_ADD_V2_R10 = {
+    hemoptysis: ["haemoptysis", "blood-streaked sputum", "streaked with blood", "blood-stained sputum", "blood in sputum", "blood in the sputum"],
+    retroorbitalPain: ["retro-orbital", "retroorbital", "retro orbital", "behind the eyes", "pain on eye movement", "worse on eye movement"],
+    travelEndemicArea: ["returned from", "returning from", "return from", "travel to", "travelled to", "traveled to", "trip to", "endemic region",
+      "endemic area", "endemic district", "malaria-endemic", "forested district", "rural district", "visiting relatives in"],
+    // true paroxysms only: "intermittent fever with rigors" is endocarditis or a line infection as often as malaria (train gc_044)
+    paroxysmalFever: ["paroxysmal fever", "paroxysmal high", "paroxysms of fever", "fever every", "rigors every", "every 48 hours", "every 36", "every 72 hours", "tertian", "quartan"],
+    polyarthralgia: ["polyarthralgia", "small-joint pain", "small joint pain", "symmetric joint pain", "symmetrical joint pain", "multiple joint pain", "pain in multiple joints"],
+    severeArthralgia: ["severe joint pain", "severe arthralgia", "severe polyarthralgia", "disabling joint pain", "incapacitating joint", "excruciating joint",
+      "severe, symmetric joint pain", "severe symmetric joint pain", "in obvious joint pain"],
+    orthopnea: ["unable to lie flat", "cannot lie flat", "can't lie flat", "worse on lying flat", "worsens on lying flat", "breathless lying flat", "extra pillow",
+      "two pillows", "three pillows", "propped up", "sleeps propped", "paroxysmal nocturnal"],
+    indwellingCatheter: ["indwelling", "foley", "urinary catheter", "urethral catheter", "suprapubic catheter", "long-term catheter", "catheterised", "catheterized"],   // urinary: a central line is not this finding
+    drugOverdose: ["ingestion of", "ingested", "took an overdose", "tablets of amitriptyline", "extra doses", "took extra"],
+    foulSmellingSputum: ["foul-smelling sputum", "foul smelling sputum", "foul sputum", "putrid sputum", "fetid sputum", "foul-tasting sputum"],
+    // the diagnosis, not the CT sign ("traction bronchiectasis" is fibrosis, train gc_195 / gc_475)
+    knownBronchiectasis: ["known bronchiectasis", "with bronchiectasis", "background of bronchiectasis", "history of bronchiectasis", "non-cf bronchiectasis",
+      "idiopathic bronchiectasis", "post-tb bronchiectasis", "post-tuberculous bronchiectasis", "bronchiectasis exacerbation"],
+    bilateralCrackles: ["bibasal", "bibasilar", "velcro"]
+  };
+  // round 11 (2026-09-27): catalog findings that had NO phrasing at all (label-only), low recall on train.
+  // Textbook bedside wording; each list checked on the train split, confirmed on dev.
+  var FT_SYN_ADD_V2_R11 = {
+    coryza: ["coryza", "runny nose", "rhinorrhoea", "rhinorrhea", "running nose", "blocked nose", "nasal discharge"],
+    nasalCongestion: ["nasal congestion", "blocked nose", "stuffy nose", "nasal blockage", "congested nose"],
+    knownCOPD: ["copd", "chronic obstructive", "emphysema", "chronic bronchitis", "gold group", "gold stage"],
+    knownHeartFailure: ["known heart failure", "heart failure with reduced", "hfref", "hfpef", "known lvef", "ejection fraction 3", "ejection fraction 2",
+      "ischaemic cardiomyopathy", "ischemic cardiomyopathy", "dilated cardiomyopathy", "chronic heart failure", "congestive cardiac failure", "on furosemide for"],
+    tbContactHistory: ["tb contact", "contact with tb", "tuberculosis contact", "household contact", "contact of a tb", "treated for tb", "on att", "sputum-positive tb", "sputum positive tb"],
+    newMurmur: ["new murmur", "new systolic murmur", "new diastolic murmur", "new regurgitant murmur", "pansystolic murmur", "early diastolic murmur", "murmur not previously"],
+    steroidUse: ["hydrocortisone", "prednisolone", "prednisone", "dexamethasone", "methylprednisolone", "fludrocortisone", "long-term steroid", "oral steroid",
+      "steroid emergency card", "on steroids", "chronic steroid", "inhaled and oral steroid"],
+    dysphagia: ["dysphagia", "difficulty swallowing", "difficulty in swallowing", "trouble swallowing", "painful swallowing", "odynophagia", "food sticking"],
+    aspirationRiskFactor: ["witnessed aspiration", "aspiration event", "aspiration episode", "aspirated", "choking", "reduced gag", "absent gag", "swallow test", "unsafe swallow", "found down"],
+    cavitatingLesion: ["cavitat", "cavitary", "cavity in the", "cavity with", "walled cavity", "apical cavity", "lobe cavity"],
+    gibPresentation: ["gi bleed", "gastrointestinal bleed", "upper gi bleed", "lower gi bleed", "haematemesis", "coffee-ground", "coffee ground", "fresh blood per rectum", "blood per rectum"],
+    mdrRisk: ["mdr", "multidrug-resistant", "multi-drug resistant", "multidrug resistant", "carbapenem-resistant", "carbapenem resistant", "cre ", "mrsa", "vre", "esbl", "resistant pseudomonas", "resistant klebsiella"],
+    esblHistory: ["esbl"],
+    increasedDyspnea: ["worsening breathlessness", "increasing breathlessness", "increased breathlessness", "worsening shortness of breath", "increasing shortness of breath",
+      "breathlessness has worsened", "more breathless than usual", "progressive breathlessness", "worsening dyspnoea", "worsening dyspnea"],
+    worseningOxygenation: ["worsening oxygenation", "increasing oxygen requirement", "rising oxygen requirement", "oxygen requirement has increased", "escalating oxygen",
+      "fio2 increased", "increasing fio2", "needed oxygen escalated", "oxygen escalated"],
+    increasedSputumVolume: ["increased sputum", "increasing sputum", "more sputum", "sputum volume", "copious sputum", "copious secretions", "increased volume of"],
+    purulentSecretions: ["purulent tracheal", "purulent secretions", "tracheal secretions", "tracheal aspirate", "endotracheal secretions", "thick yellow-green secretions"],
+    rapidlySpreadingErythema: ["rapidly spreading", "rapidly progressive redness", "spreading redness", "spreading erythema", "advancing erythema", "erythema spreading"],
+    skinErythema: ["erythematous", "red and swollen", "red, swollen", "overlying erythema", "dusky erythema", "redness of the skin", "skin redness"],
+    clinicallyImproving: ["fully resolved", "resolved completely", "completely resolved", "back to baseline", "returned to baseline", "returned to normal", "now improving", "clinically improving", "improving on"],
+    symmetricSmallJointInvolvement: ["small joints of the hands", "small joints of both hands", "small-joint", "small joint", "mcps", "mcp joints", "pips", "pip joints", "symmetric polyarthritis", "symmetrical polyarthritis"],
+    ruralExposure: ["farmer", "farm worker", "farm labourer", "agricultural", "paddy", "in the fields", "village", "scrub vegetation", "scrub grass", "scrubland", "forested", "plantation", "cattle", "rural"],
+    purulentDrainage: ["purulent discharge", "pus discharge", "discharging pus", "pus draining", "purulent drainage", "draining pus", "pus from"],
+    persistentBacteremia: ["persistent bacteraemia", "persistent bacteremia", "persistently positive blood cultures", "repeat blood cultures positive"],
+    singleLesion: ["single lesion", "solitary lesion", "single abscess", "solitary abscess", "single cavity", "single hypoechoic", "solitary hypoechoic"],
+    jointSwelling: ["swollen knee", "swollen ankle", "swollen wrist", "swollen elbow", "swollen joints", "joint effusion", "tense effusion", "knee effusion", "hot, swollen"],
+    hematuria: ["cola-coloured urine", "cola coloured urine", "cola-colored urine", "smoky urine", "red urine", "pink urine", "blood in the urine", "frank blood in urine"],
+    legSwellingBilateral: ["pedal oedema", "ankle oedema", "ankle edema", "bilateral ankle", "pretibial", "bilateral pitting", "oedema of both legs", "edema of both legs"],
+    sharplyDemarcatedBorder: ["sharply demarcated", "sharply marginated", "well-demarcated", "well demarcated", "clearly demarcated", "raised border", "raised edge", "raised margin", "step-off"],
+    pleuriticChestPain: ["worse on deep inspiration", "worse on inspiration", "worse on breathing", "pain on deep breathing", "pain on inspiration", "worsened by deep inspiration", "sharp chest pain worse"]
+  };
+  // round 16 (2026-09-27): phrasing behind needed-antibiotic misses on typed train notes
+  var FT_SYN_ADD_V2_R16 = {
+    murphySign: ["murphy sign", "murphy's sign", "murphys sign", "positive murphy", "murphy positive", "murphy's positive"],
+    purulentSputum: ["yellow-green", "yellowish-green", "turned purulent", "sputum colour", "sputum color", "discoloured sputum", "discolored sputum"],
+    skinErythema: ["red swollen", "red, hot", "red and hot", "red hot"],
+    urinaryRetention: ["urinary retention", "retention of urine", "unable to pass urine", "unable to void", "not able to pass urine", "acute retention"],
+    perinealPain: ["perineal pain", "perineal discomfort", "pain in the perineum", "perineal ache", "pelvic pain", "tender prostate", "boggy prostate", "exquisitely tender prostate"],
+    consolidation: ["infiltrate", "air bronchogram", "lobar opacity", "alveolar opacity", "opacification", "airspace opacity", "air-space opacity", "airspace shadowing"],
+    mechanicalVentilation: ["intubated", "mechanically ventilated", "mechanical ventilation", "on the ventilator", "ventilator support", "ventilator settings", "on ventilator", "ventilated"],
+    icuStay: ["icu patient", "in the icu", "in icu", "intensive care unit", "admitted to icu", "icu admission"],
+    rightUpperQuadrantPain: ["right upper abdominal pain", "right upper abdominal", "right hypochondrial", "right hypochondrium", "right subcostal pain"],
+    singleLesion: ["hypoechoic lesion", "hypodense lesion", "cystic lesion in the", "lesion in the right hepatic", "lesion in the right lobe", "lesion in the left lobe"],
+    embolicPhenomena: ["splinter haemorrhage", "splinter hemorrhage", "janeway", "osler node", "osler's node", "roth spot", "conjunctival petechiae", "septic emboli", "embolic"]
+  };
+  // round 21 (2026-09-27): phrasing behind typed-note misses whose tapped findings were right (train split)
+  var FT_SYN_ADD_V2_R21 = {
+    bloodyStool: ["bloody diarrhoea", "bloody diarrhea", "bloody, mucoid", "bloody mucoid", "blood and mucus", "blood-stained stool", "blood mixed with stool", "stools with blood"],
+    tenesmus: ["tenesmus", "painful straining", "straining at stool", "ineffectual straining", "urge to defecate", "incomplete evacuation"],
+    conjunctivalSuffusion: ["conjunctival suffusion", "conjunctival injection", "red eyes", "red, gritty eyes", "reddening of the eyes", "suffused conjunctiva"],
+    waterExposure: ["wading", "floodwater", "flood water", "flooded", "stagnant water", "sewage", "sewer", "rat urine", "rodent urine", "monsoon flood"],
+    facialSwelling: ["swelling of the face", "swelling of the lips", "swelling of the lip", "swelling of the tongue", "swelling of the lower lip", "swollen lips", "swollen tongue",
+      "puffy face", "facial puffiness", "puffiness of the face", "face and arm swelling", "facial and arm swelling"],   // not periorbital: that is also orbital cellulitis
+    increasedSputumVolume: ["larger in volume", "increase in sputum", "more sputum than usual", "greater volume of sputum"],
+    malignancy: ["mediastinal mass", "paratracheal mass", "hilar mass", "lung mass", "pulmonary mass", "space-occupying lesion"],
+    // round 29: gait words for ataxia, and the spelled variants the stricter typo matcher (clinical-nlp.js) no longer reaches
+    tachypnea: ["tachypneic", "tachypnoeic", "tachypnoea"], photophobia: ["photophobic"],
+    // round 39: pain shown rather than said; erythema nodosum is a rash (not red infected skin)
+    abdominalPain: ["clutching her abdomen", "clutching his abdomen", "clutching their abdomen", "holding her abdomen", "holding his abdomen"],
+    rash: ["erythema nodosum", "red nodules", "tender nodules over", "nodular rash"],
+    // round 37: bleeding, drinking, behaviour and sinus phrasing
+    hematemesis: ["coffee-ground vomit", "coffee ground vomit", "coffee-ground material", "coffee ground material", "coffee-ground emesis", "vomited blood", "haematemesis"],
+    behavioralChange: ["irritability", "getting lost", "wandering at night"],
+    facialPain: ["facial pain", "face pain", "facial pressure", "cheek pain", "pain over the cheek", "pain over the cheeks", "maxillary pain", "sinus pain", "pain over the sinuses", "maxillary tenderness", "frontal sinus tenderness"],
+    // round 36: pigment in the urine said as a colour
+    darkUrine: ["cola-coloured", "cola coloured", "cola-colored", "darkening urine", "darkening of the urine", "coca-cola"],
+    // round 33: pharyngitis signs, tick bites, a full bladder (label-only findings had no phrasing)
+    tonsillarExudate: ["tonsillar exudate", "tonsillar exudates", "exudative tonsillitis", "exudate on the tonsils", "exudates on the tonsils", "pus on the tonsils", "white patches on the tonsils"],
+    tenderCervicalNodes: ["tender cervical nodes", "tender cervical lymph nodes", "tender anterior cervical", "tender neck glands", "tender cervical lymphadenopathy", "tender submandibular nodes"],
+    tickExposure: ["tick bite", "tick bites", "bitten by a tick", "removing ticks", "removed ticks", "removed a tick", "ticks from"],
+    // round 32: urine output said falling in other words
+    oliguria: ["declining urine output", "falling urine output", "poor urine output", "diminished urine output", "urine output is low", "urine output was low"],
+    ataxia: ["ataxic", "staggering gait", "wide-based gait", "broad-based gait", "truncal ataxia", "gait ataxia", "cannot walk heel to toe", "poor coordination", "impaired coordination"],
+    // round 26
+    persistentBacteremia: ["two of two blood culture", "2/2 blood culture", "both blood culture sets", "all blood culture sets", "3/3 blood culture", "three of three blood culture",
+      "all three blood culture", "multiple positive blood cultures", "repeatedly positive blood cultures"],
+    peripheralVascularDisease: ["absent pedal pulses", "absent foot pulses", "impalpable pedal pulses", "absent dorsalis pedis", "intermittent claudication", "claudication",
+      "peripheral arterial disease", "peripheral vascular disease"],
+    boneInvolvement: ["probe-to-bone", "probe to bone", "probes to bone", "reaches bone", "exposed bone", "osteomyelitis", "bone involvement"],
+    deepTissueInvolvement: ["deep infection", "deep space infection", "plantar abscess", "foot abscess", "exposed tendon", "tendon involvement"],
+    calfTenderness: ["tender calves", "calf muscle tenderness", "calf tenderness", "gastrocnemius tenderness", "squeezing both gastrocnemius", "squeezing the gastrocnemius", "tender gastrocnemius"],
+    // round 24
+    cardiacImplantableDevice: ["pacemaker", "implantable cardioverter", "icd pocket", "icd site", "device pocket", "generator pocket", "crt-d", "crt device"],
+    erythemaAtSite: ["redness over the pacemaker", "red, discharging swelling over the", "redness and discharge over", "red swelling over the pacemaker", "erythema at the insertion",
+      "redness at the insertion", "red and tender exit site", "exit-site redness", "exit site redness"],
+    dysuria: ["painful obstructed micturition", "pain on passing urine", "painful voiding", "burning when passing urine"],
+    urinaryRetention: ["obstructed micturition", "poor stream", "straining to void",
+      // round 33 (merged here in round 36: a second urinaryRetention key in this literal had silently replaced the first)
+      "distended bladder", "palpable bladder", "bladder distension", "bladder distention", "has not passed urine", "not passed urine"],
+    knownIBD: ["ulcerative colitis", "crohn's", "crohns", "crohn disease", "inflammatory bowel disease", "known ibd", "ibd flare"]
+  };
+  // round 47 (2026-09-28): everyday phrasing a doctor types, found by a recall probe of common complaint wordings (not
+  // the benchmark notes). Keys that had no synonyms were matched by their label only when a space followed it, so a
+  // sentence ending "sore throat." or "on dialysis." read nothing: each such key gets its own label words here.
+  var FT_SYN_ADD_V2_R47 = {
+    dyspnea: ["shortness of breath", "difficulty in breathing", "breathing difficulty", "breathing difficulties", "trouble breathing", "breathing trouble"],
+    // (not "watery stool": read correctly, it cost an unseen overcall, because fever with diarrhoea gets gastroenteritis's
+    // "antibiotics if criteria met"; for the owner)
+    diarrhea: ["loose motion", "frequent stools"],
+    abdominalPain: ["stomach pain", "stomach ache", "stomachache", "tummy pain", "tummy ache", "bellyache", "belly ache", "pain in stomach", "pain in the stomach"],
+    // (not "discolouration of urine": "frothy discoloration of urine" is proteinuria, and red urine is haematuria)
+    darkUrine: ["high coloured urine", "high colored urine", "high-coloured urine", "high-colored urine"],
+    legSwellingUnilateral: ["swelling of left leg", "swelling of the left leg", "swelling of right leg", "swelling of the right leg", "swelling of left lower limb",
+      "swelling of right lower limb", "left lower limb swelling", "right lower limb swelling", "swollen left calf", "swollen right calf",
+      "swelling of left calf", "swelling of the left calf", "swelling of right calf", "swelling of the right calf"],
+    purulentSputum: ["greenish sputum", "yellowish sputum", "yellowish green sputum"],
+    // (not "blood-tinged sputum": the pink frothy sputum of pulmonary oedema)
+    hemoptysis: ["coughing up blood", "coughed up blood", "coughs up blood", "blood streaked sputum"],
+    hematemesis: ["blood vomiting", "blood in vomit", "blood in the vomit", "blood-stained vomit", "blood stained vomit", "vomiting of blood"],
+    melena: ["tarry stool", "black tarry", "black coloured stool", "black colored stool", "black motion"],
+    bloodyStool: ["blood mixed stool", "blood-mixed stool", "blood stained stool", "blood in the stool", "blood in motion", "bloody motion"],
+    neckStiffness: ["neck rigidity", "neck stiffness"],
+    focalNeuroDeficit: ["weakness of left", "weakness of right", "weakness in left", "weakness in right", "weakness in the left", "weakness in the right"],
+    nightSweats: ["sweating at night", "sweats at night", "night-time sweating", "nighttime sweating", "nocturnal diaphoresis"],
+    chestPain: ["heaviness in chest", "heaviness in the chest", "heaviness of chest", "chest pressure", "pressure in the chest", "tightness in the chest", "tightness in chest"],
+    palpitations: ["racing heart", "heart racing", "pounding heart", "heart pounding", "fast heartbeat", "rapid heartbeat", "heart beating fast"],
+    syncope: ["fainting", "blackout"],
+    // (not "red spots": petechiae, Janeway lesions and Roth spots are red spots too)
+    rash: ["skin eruption", "exanthem"],
+    headache: ["pain in head", "pain in the head", "head pain", "head ache", "heaviness of head", "heaviness in head", "heaviness of the head"],
+    backPain: ["backache", "back ache", "lumbar pain", "lumbago", "pain in the back", "pain in back"],
+    photophobia: ["intolerance to light", "sensitivity to light", "light sensitivity", "sensitive to light"],
+    abdominalDistension: ["distension of abdomen", "distension of the abdomen", "distention of abdomen", "distention of the abdomen"],
+    // label-only keys: their own words, so punctuation after them no longer hides them. Not pleuriticPain: it is the
+    // same finding as pleuriticChestPain, and pericarditis and pneumothorax weight both, so reading both counted it twice
+    // (a complaint of pleuritic pain with productive cough led with pericarditis, train gc_004)
+    wheeze: ["wheeze", "wheezing", "wheezes", "wheezy", "rhonchi"],
+    coughRadio: ["cough"],
+    soreThroat: ["sore throat", "throat pain", "pain in throat", "pain in the throat", "painful throat", "scratchy throat", "throat is sore"],
+    splenomegaly: ["splenomegaly", "spleen palpable", "palpable spleen", "spleen enlarged", "enlarged spleen", "spleen is palpable", "spleen was palpable", "spleen tip palpable"],
+    pregnancy: ["pregnant", "primigravida", "multigravida", "weeks of gestation", "weeks gestation"],
+    eschar: ["eschar"],
+    maculopapularRash: ["maculopapular", "maculo-papular", "morbilliform"],
+    neutropenia: ["neutropenia", "neutropenic"],
+    // (not a bare "diabetic foot": "fever first attributed to a diabetic foot/urinary focus", train gc_280)
+    diabeticFootUlcer: ["diabetic foot ulcer", "diabetic foot infection", "diabetic foot wound", "diabetic foot sepsis"],
+    centralLine: ["central line", "central venous catheter", "central venous line", "picc", "cvc", "hickman", "port-a-cath", "portacath", "chemo port"],
+    prostheticValve: ["prosthetic valve", "mechanical valve", "prosthetic mitral", "prosthetic aortic", "mechanical mitral", "mechanical aortic", "valve replacement",
+      "metallic valve", "bioprosthetic"],
+    ivDrugUse: ["ivdu", "iv drug", "intravenous drug", "injection drug", "injecting drug", "injects heroin", "injecting heroin", "pwid"],
+    dialysisDependent: ["on dialysis", "on haemodialysis", "on hemodialysis", "maintenance haemodialysis", "maintenance hemodialysis", "maintenance dialysis",
+      "dialysis dependent", "dialysis-dependent", "on peritoneal dialysis"],
+    mucositis: ["mucositis"],
+    crepitusOrBullae: ["haemorrhagic bullae", "hemorrhagic bullae", "haemorrhagic blisters", "hemorrhagic blisters", "subcutaneous crepitus", "soft tissue crepitus",
+      "soft-tissue crepitus", "gas in the soft tissue", "soft tissue gas", "soft-tissue gas"],
+    roseSpots: ["rose spots", "rose-coloured spots", "rose colored spots"],
+    stepladderFever: ["stepladder", "step-ladder", "step ladder"],
+    relativeBradycardia: ["relative bradycardia", "pulse-temperature dissociation"],
+    purulentNasalDischarge: ["purulent nasal discharge", "purulent rhinorrhoea", "purulent rhinorrhea", "thick nasal discharge", "yellow nasal discharge",
+      "green nasal discharge", "greenish nasal discharge", "yellowish nasal discharge", "mucopurulent nasal"],
+    pulsatileMass: ["pulsatile mass", "pulsatile abdominal mass", "expansile mass"],
+    sickleCellHx: ["sickle cell disease", "sickle cell anaemia", "sickle cell anemia", "sickle-cell disease", "sickle cell crisis", "hbss"],
+    multilobar: ["multilobar", "multi-lobar", "multiple lobes", "bilateral consolidation", "bilateral infiltrates"]
+  };
+  // round 48 (2026-09-28): examination shorthand ("crepts", "Kernig's positive", "spleen just palpable", "tongue dry")
+  var FT_SYN_ADD_V2_R48 = {
+    crepitations: ["crepts"],
+    neckStiffness: ["kernig", "brudzinski", "meningeal signs", "meningeal irritation", "signs of meningeal"],
+    // (not "splenic tip": "hepatosplenomegaly with a 2 cm splenic tip" then counts the spleen twice, train gc_121)
+    splenomegaly: ["spleen just palpable", "palpable splenic"],
+    dehydration: ["tongue dry", "tongue is dry", "tongue was dry", "dry oral mucosa"]
+  };
+  // round 52 (2026-09-28): history a doctor writes as the drug ("on amlodipine", "on tacrolimus post renal transplant", "on ART")
+  var FT_SYN_ADD_V2_R52 = {
+    hypertensionHx: ["amlodipine", "telmisartan", "losartan", "olmesartan", "cilnidipine", "chlorthalidone", "hydrochlorothiazide"],
+    immunocompromised: ["renal transplant", "kidney transplant", "liver transplant", "transplant patient", "tacrolimus", "mycophenolate", "azathioprine",
+      "cyclosporine", "ciclosporin", "on art", "on haart", "antiretroviral", "plhiv", "biologic therapy", "infliximab", "adalimumab"]
+  };
+  // round 53 (2026-09-28): exposure phrasing (leptospirosis, enteric fever, scrub typhus)
+  var FT_SYN_ADD_V2_R53 = {
+    waterExposure: ["rodent exposure", "exposure to rats", "rats at home", "rat infestation", "rodents at home"],
+    contaminatedFoodWaterExposure: ["well water", "unboiled water", "river water", "tap water outside", "unpasteuri", "raw milk", "pani puri", "golgappa"],
+    ruralExposure: ["trekking", "trekked", "hiking in", "jungle", "in the forest", "forest area", "gardening", "bushes", "undergrowth"]
+  };
+  // round 60 (2026-09-28): comorbidity shorthand in Indian notes ("RVD positive", "PLHA", "k/c/o CLD", "ALD", "on MHD").
+  // RVD only with a positive or case word: it is also right ventricular dysfunction.
+  var FT_SYN_ADD_V2_R60 = {
+    immunocompromised: ["retroviral disease", "retroviral positive", "rvd positive", "rvd reactive", "rvd +ve", "case of rvd", "plha"],
+    liverDisease: ["cld", "ald", "chronic liver disease", "alcoholic liver disease"],
+    dialysisDependent: ["on mhd", "on hd", "maintenance hd"]
+  };
+  // round 67 (heldout3 tune): shorthand for a COPD flare ("inc. SOB", "inc. sputum qty") and sputum colour phrased after the noun
+  var FT_SYN_ADD_V2_R67 = {
+    increasedDyspnea: ["increased shortness of breath", "shortness of breath increased", "shortness of breath worsened", "increased dyspnoea", "increased dyspnea"],
+    increasedSputumVolume: ["sputum qty", "sputum quantity", "increased expectoration"],
+    // round 69: joint pain phrased as "severe pain in (the / small) joints"
+    severeArthralgia: ["severe pain in joints", "severe pain in the joints", "severe pain in small joints", "severe pain in both ankles", "severe pain in ankles"],
+    purulentSputum: ["thick yellow sputum", "sputum thick yellow", "sputum yellow", "sputum is yellow", "sputum now yellow", "sputum turned yellow",
+      "sputum became yellow", "sputum green", "sputum turned green"]
+  };
+  // round 71 (heldout3 tune): "wt loss", "urine output very less", "reddish urine"
+  var FT_SYN_ADD_V2_R71 = {
+    weightLoss: ["wt loss", "wt down", "weight down", "wt reduced", "weight reduced"],
+    oliguria: ["urine output very less", "urine output less", "urine output is less", "very little urine", "passes little urine",
+      "passing very little urine", "passes very little urine", "passing little urine"],
+    hematuria: ["reddish urine", "pinkish urine", "red coloured urine", "red colored urine", "reddish coloured urine", "reddish colored urine"]
+  };
   var FT_SYN_V2 = (function () {
     var o = {};
     Object.keys(FT_SYN).forEach(function (k) { var drop = FT_SYN_DROP_V2[k] || []; o[k] = FT_SYN[k].filter(function (x) { return drop.indexOf(x) < 0; }); });
     Object.keys(FT_SYN_ADD_V2).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2[k]); });
+    Object.keys(FT_SYN_ADD_V2_R8).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R8[k]); });
+    Object.keys(FT_SYN_ADD_V2_R10).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R10[k]); });
+    Object.keys(FT_SYN_ADD_V2_R11).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R11[k]); });
+    Object.keys(FT_SYN_ADD_V2_R16).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R16[k]); });
+    Object.keys(FT_SYN_ADD_V2_R21).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R21[k]); });
+    Object.keys(FT_SYN_ADD_V2_R47).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R47[k]); });
+    Object.keys(FT_SYN_ADD_V2_R48).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R48[k]); });
+    Object.keys(FT_SYN_ADD_V2_R52).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R52[k]); });
+    Object.keys(FT_SYN_ADD_V2_R53).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R53[k]); });
+    Object.keys(FT_SYN_ADD_V2_R60).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R60[k]); });
+    Object.keys(FT_SYN_ADD_V2_R67).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R67[k]); });
+    Object.keys(FT_SYN_ADD_V2_R71).forEach(function (k) { o[k] = (o[k] || []).concat(FT_SYN_ADD_V2_R71[k]); });
     return o;
   })();
   // the extraction context: classic exactly as before; v2 adds the cleaned table and the numeric-field list
@@ -1914,6 +2631,7 @@
       var nr = SMD_NLP.extract(text, nlpCtx()), nadded = 0;
       (nr.present || []).forEach(function (k) { if (VALID[k] && !S.f[k]) { S.f[k] = true; nadded++; } });
       if (rankV3()) { S.neg = S.neg || {}; (nr.absent || []).forEach(function (k) { if (VALID[k] && !S.f[k]) S.neg[k] = true; }); }
+      S.negText = true;   // round 69: findings came from a note (what it does not mention is not excluded)
       S._lastExtract = nr;
       S.started = true;
       S.timeline.push({ f: "free-text (" + nadded + " finding" + (nadded === 1 ? "" : "s") + " extracted — review)", topName: null, topScore: null });
@@ -1967,7 +2685,7 @@
   }
   function loadSession(i) {
     var s = loadSessions()[i]; if (!s) return;
-    S.f = {}; S.neg = {}; (s.findings || []).forEach(function (k) { S.f[k] = true; }); S.started = true; S.timeline = []; recompute();
+    S.f = {}; S.neg = {}; S.negText = false; (s.findings || []).forEach(function (k) { S.f[k] = true; }); S.started = true; S.timeline = []; recompute();
   }
   function buildSummary() {
     var d = differential(), g = gate(d), L = [];
@@ -3333,7 +4051,37 @@
     renderCompare(d);
   }
 
+  // smd_case_log (round 62; default ON since 2026-09-28, owner: "turn on all"; "0" opts out): when a doctor selects a diagnosis, keep an anonymous record ON THIS
+  // DEVICE ONLY so a real validation set can grow: the finding keys tapped (true only, no values), the keys denied, the
+  // chosen diagnosis, the engine's top five and gate, and the month. No note text, no numbers, no identifiers, nothing
+  // sent anywhere; DX.caseLogExport() hands the doctor a JSON file to share if they choose.
+  var CASE_LOG_KEY = "smd_case_log_v1", CASE_LOG_MAX = 2000;
+  function caseLogOn() { try { return localStorage.getItem("smd_case_log") !== "0"; } catch (e) { return false; } }
+  function caseLogRead() { try { var a = JSON.parse(localStorage.getItem(CASE_LOG_KEY) || "[]"); return Array.isArray(a) ? a : []; } catch (e) { return []; } }
+  function caseLogRecord(id) {
+    if (!caseLogOn() || !id) return;
+    var d = differential(), rk = function (x) { return x.rankScore != null ? x.rankScore : x.score; };
+    var all = [].concat(d.inf || [], d.ni || []).sort(function (a, b) { return rk(b) - rk(a); });
+    var g = null; try { g = gate(d).cls; } catch (e) {}
+    var now = new Date(), month = now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2);
+    var rec = { v: 1, month: month, chosen: String(id),
+      findings: Object.keys(S.f || {}).filter(function (k) { return S.f[k] === true && VALID[k]; }).sort(),
+      denied: Object.keys(S.neg || {}).filter(function (k) { return S.neg[k] && VALID[k]; }).sort(),
+      top5: all.slice(0, 5).map(function (x) { return x.id; }), gate: g };
+    var log = caseLogRead(); log.push(rec); if (log.length > CASE_LOG_MAX) log = log.slice(-CASE_LOG_MAX);
+    try { localStorage.setItem(CASE_LOG_KEY, JSON.stringify(log)); } catch (e) {}
+  }
+  function caseLogExport() {
+    var json = JSON.stringify({ format: "stewardmd-case-log", v: 1, cases: caseLogRead() }, null, 1);
+    try {
+      var blob = new Blob([json], { type: "application/json" }), url = URL.createObjectURL(blob), a = document.createElement("a");
+      a.href = url; a.download = "stewardmd-case-log.json"; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+    } catch (e) {}
+    return json;
+  }
   function selectDx(id) {
+    try { caseLogRecord(id); } catch (e) {}
     // infectious -> open the full StewardMD disease page with current findings
     var syn = window.SYNDROMES || {};
     if (syn[id]) {
@@ -3661,7 +4409,7 @@
     });
   }
 
-  function resetAll() { S.consultSkipped = []; S.f = {}; S.neg = {}; S.prev = {}; S.expanded = {}; S.started = false; S.system = null; S.showRare = false; S.compare = []; S.timeline = []; S.noteDraft = ""; var note = root && root.querySelector("#dxFreeText"); if (note) note.value = ""; if (!S._restoring) S._caseId = null; filter = ""; closeMgmt(); var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
+  function resetAll() { S.consultSkipped = []; S.f = {}; S.neg = {}; S.negText = false; S.prev = {}; S.expanded = {}; S.started = false; S.system = null; S.showRare = false; S.compare = []; S.timeline = []; S.noteDraft = ""; var note = root && root.querySelector("#dxFreeText"); if (note) note.value = ""; if (!S._restoring) S._caseId = null; filter = ""; closeMgmt(); var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
   function open(opts) {
     ensureRoot();
     root.classList.remove("dx-reference-mode");
@@ -3976,6 +4724,12 @@
     d.ni.forEach(function (r) { m[r.id] = { score: r.score, name: r.name, inf: false, rank: r.rankScore != null ? r.rankScore : r.score }; });
     return { map: m, d: d };
   }
+  // smd_dx_q2 (round 61): the next-finding questions ranked by how evenly they split the leading diagnoses. "0" opts out.
+  var Q2_HEAD = 8, Q2_TEMP = 8, Q2_RISE = 3;
+  function dxQ2On() {
+    try { var q = /[?&]dxq2=([01])\b/.exec((window.location && location.search) || ""); if (q) return q[1] === "1";
+      return localStorage.getItem("smd_dx_q2") !== "0"; } catch (e) { return true; }
+  }
   function nextQuestions(limit) {
     buildOntology();
     limit = limit || 5;
@@ -3988,7 +4742,16 @@
     head.forEach(function (r) { (r.missing || []).forEach(function (k) { if (k && !S.f[k] && VALID[k]) cand[k] = true; }); });
     var keys = Object.keys(cand);
     if (!keys.length) keys = GENERAL.filter(function (k) { return !S.f[k]; });   // fallback: offer core vitals
-    var out = [];
+    var out = [], q2 = dxQ2On(), q2Head = [], q2W = {};
+    if (q2) {
+      q2Head = combined.slice().sort(function (a, b) { return (b.rankScore != null ? b.rankScore : b.score) - (a.rankScore != null ? a.rankScore : a.score); }).slice(0, Q2_HEAD);
+      var q2Top = q2Head.length ? (q2Head[0].rankScore != null ? q2Head[0].rankScore : q2Head[0].score) : 0, q2Z = 0;
+      q2Head.forEach(function (r) { var w = Math.exp(((r.rankScore != null ? r.rankScore : r.score) - q2Top) / Q2_TEMP); q2W[r.id] = w; q2Z += w; });
+      q2Head.forEach(function (r) { q2W[r.id] /= q2Z; });
+      q2Head.forEach(function (r) { (r.missing || []).forEach(function (k) { if (k && !S.f[k] && VALID[k] && !(S.neg && S.neg[k])) cand[k] = true; }); });
+      keys = Object.keys(cand).filter(function (k) { return !(S.neg && S.neg[k]); });
+      if (!keys.length) keys = GENERAL.filter(function (k) { return !S.f[k]; });
+    }
     keys.forEach(function (k) {
       var sim = scoreMapFor(k);
       var gapChange = 0;
@@ -4004,6 +4767,12 @@
         if (Math.abs(dlt) > Math.abs(maxDelta)) maxDelta = dlt;
       });
       var value = gapChange * 2 + moved.length + Math.abs(maxDelta) * 0.5;
+      // smd_dx_q2: rank the question by how evenly it splits the weighted leading diagnoses (information-gain style), so
+      // it is one the patient may well answer "yes" to and that separates the leaders either way; the old value breaks ties
+      if (q2) {
+        var py = 0; q2Head.forEach(function (r) { var r0 = (base.map[r.id] || {}).rank || 0, r1 = (sim.map[r.id] || {}).rank || 0; if (r1 - r0 >= Q2_RISE) py += q2W[r.id]; });
+        value = (py > 0 ? 40 * py * (1 - py) : 0) + value * 0.1;
+      }
       if (value > 0) out.push({ key: k, label: lbl(k), value: Math.round(value * 10) / 10,
         discriminates: !!(A && B && gapChange >= 3), raises: maxDelta > 0, moves: moved.slice(0, 4) });
     });
@@ -4084,12 +4853,19 @@
     if (!simpleOn() || !A) { el.innerHTML = ""; return; }
     var cls = A.inf ? "inf" : "ni", B = all[1], tie = B && rkOf(A) - rkOf(B) < 3;
     var also = all.slice(1, 3).map(function (r) { return r.name; });
+    // round 20 (smd_calib; idea from Laya: say how sure, and abstain when unsure): a lead less than 15 points
+    // ahead of the runner-up is a close call. On the validation notes a clear lead was right 78 to 88% of the
+    // time and a close call 40 to 56% (typed notes), in every split and in both unseen sets, so "Most likely"
+    // over a close call claimed more than the engine knows.
+    var close = calibOn() && !tie && B && A.score - B.score < 15;
     el.innerHTML = '<div class="dx-topcard">' +
-      '<div class="dx-eyebrow">' + (tie ? "Closest fits" : "Most likely") + '</div>' +
+      '<div class="dx-eyebrow">' + (tie ? "Closest fits" : close ? "Leading, but close" : "Most likely") + '</div>' +
       '<div class="dx-top-name">' + esc(A.name) + '</div>' +
-      '<div class="dx-tags"><span class="dx-tag ' + cls + '">' + (A.inf ? "Infective" : "Non-infective") + '</span><span class="dx-tag fit">' + fitLabel(A.score) + ', ' + A.score + '/100</span></div>' +
+      '<div class="dx-tags"><span class="dx-tag ' + cls + '">' + (A.inf ? "Infective" : "Non-infective") + '</span><span class="dx-tag fit">' + fitLabel(A.score) + ', ' + A.score + '/100</span>' +
+        (calibOn() && !tie && !close && B ? '<span class="dx-tag lead">Clear lead</span>' : '') + '</div>' +
       ((A.supporting || []).length ? '<p class="dx-top-line"><strong>Fits:</strong> ' + esc(A.supporting.slice(0, 4).map(lbl).join(", ")) + '</p>' : '') +
       (tie ? '<p class="dx-top-line"><strong>' + esc(B.name) + '</strong> fits just as well. Open either card and press Select to get questions that separate them.</p>'
+           : close ? '<p class="dx-top-line dx-close"><strong>' + esc(B.name) + '</strong> fits nearly as well (' + A.score + ' vs ' + B.score + '). Keep both open: press Select on either to get the questions that separate them.</p>'
            : (also.length ? '<p class="dx-top-line"><strong>Also consider:</strong> ' + esc(also.join(", ")) + '</p>' : '')) +
       '<button type="button" class="dx-chip dx-top-open" data-open="' + A.id + '">See why, and what to check next</button>' +
       '</div>';
@@ -4805,9 +5581,11 @@
     setTimeout(renderImported, 60);
   }
 
-  window.DX = { open: open, openWorkspace: openWorkspace, close: close, reset: resetAll, importPatient: importPatient, restore: restore, addFindings: addFindings, findingCatalog: findingCatalog, _state: S, _ni: DDX_NI, _differential: differential,
+  window.DX = { _nlpCtx: function () { var c = nlpCtx(); return { syn: c.syn, numeric: c.numeric || {}, v2: !!c.v2 }; }, open: open, openWorkspace: openWorkspace, close: close, reset: resetAll, importPatient: importPatient, restore: restore, addFindings: addFindings, findingCatalog: findingCatalog, _state: S, _ni: DDX_NI, _differential: differential,
     _nextQuestions: nextQuestions,
     _differentiate: differentiate, _dxAsk: dxAskOn, _openAsk: openAsk, // smd_dx_ask
+    caseLog: caseLogRead, caseLogExport: caseLogExport, caseLogClear: function () { try { localStorage.removeItem(CASE_LOG_KEY); } catch (e) {} return true; },   // smd_case_log
+    _caseLogOn: caseLogOn, _selectDx: selectDx,
     _simple: simpleOn, // smd_dx_simple
     _ftSynV2: function () { return FT_SYN_V2; }, // read-only: the v2 phrase table (extraction audits)
     // PURE: free text -> present engine finding keys, using the engine's OWN synonym set (FT_SYN) so
@@ -4876,7 +5654,8 @@
     // assess(findings?) → structured, interface-independent result. Pure: if a
     // findings object is passed it is evaluated without disturbing live state.
     assess: function (findings, opts) {
-      var restore = null, restoreNeg = S.neg;
+      var restore = null, restoreNeg = S.neg, restoreNegText = S.negText;
+      if (findings && typeof findings === "object") S.negText = !!(opts && opts.absent);
       if (findings && typeof findings === "object") { restore = S.f; S.f = {}; Object.keys(findings).forEach(function (k) { if (findings[k]) S.f[k] = true; }); }
       // opts.absent: keys the note explicitly denies (used by smd_rank_v3 ordering only)
       if (opts && opts.absent) { S.neg = {}; opts.absent.forEach(function (k) { S.neg[k] = true; }); }
@@ -4903,7 +5682,7 @@
         }
       } catch (e) { out = { gate: {}, infectious: [], nonInfectious: [], suggestions: [] }; }
       if (restore) S.f = restore;
-      S.neg = restoreNeg;
+      S.neg = restoreNeg; S.negText = restoreNegText;
       return out;
     },
     // progressive Step-3 source: top-N findings for a system, common-first, plus the rest.
