@@ -43,7 +43,9 @@
     ixErr: { en: "The lessons did not load. Check the connection and try again. Reference below still works.", hi: "पाठ लोड नहीं हुए। इंटरनेट कनेक्शन देखकर फिर कोशिश करें। नीचे Reference अभी भी काम करता है।" },
     retry: { en: "Try again", hi: "फिर कोशिश करें" },
     none: { en: "No lessons yet. They are being written; Reference below and the Test tab are ready now.", hi: "अभी कोई पाठ नहीं है। पाठ लिखे जा रहे हैं; नीचे Reference और Test tab अभी तैयार हैं।" },
-    lessonErr: { en: "This lesson did not load.", hi: "यह पाठ लोड नहीं हुआ।" }, lessonErrRow: { en: "Did not load. Tap to try again", hi: "लोड नहीं हुआ। फिर कोशिश के लिए छुएँ" },
+    lessonErr: { en: "This lesson did not load.", hi: "यह पाठ लोड नहीं हुआ।" },
+    lessonErrHint: { en: "Check the connection and try again.", hi: "इंटरनेट कनेक्शन देखकर फिर कोशिश करें।" },
+    loadingLesson: { en: "Loading the lesson…", hi: "पाठ लोड हो रहा है…" },
     stepOf: { en: "Step {i} of {n}", hi: "चरण {i} / {n}" }, next: { en: "Next", hi: "आगे" }, prev: { en: "Previous", hi: "पीछे" },
     closeLesson: { en: "Close lesson", hi: "पाठ बंद करें" },
     idea: { en: "The idea", hi: "मूल बात" }, see: { en: "See it", hi: "देखें" }, why: { en: "Why it happens", hi: "ऐसा क्यों होता है" },
@@ -62,6 +64,7 @@
     comesBack: { en: "The line above comes back in Revise in a few days, just before you would forget it.", hi: "ऊपर वाली बात कुछ दिनों में दोहराएँ में फिर आएगी, ठीक भूलने से पहले।" },
     testYourself: { en: "Test yourself", hi: "खुद को परखें" },
     testClinic: { en: "{c}: real images of this", hi: "{c}: इसकी असली images" }, testBank: { en: "Question bank: questions on this topic", hi: "Question bank: इस विषय के प्रश्न" },
+    trySim: { en: "Try the simulator", hi: "Simulator पर अभ्यास करें" }, simLine: { en: "Simulator: {t}", hi: "Simulator: {t}" },
     goDeeper: { en: "Go deeper", hi: "और गहराई से" }, deeperNote: { en: "Study note: {t}", hi: "अध्ययन नोट: {t}" },
     nextLesson: { en: "Next lesson", hi: "अगला पाठ" }, backLearn: { en: "Back to Learn", hi: "सीखें पर वापस" },
     recall: { en: "Say the one thing to remember from this lesson, then check.", hi: "इस पाठ की ज़रूरी बात मन में बोलें, फिर जाँचें।" },
@@ -88,31 +91,37 @@
     return D.glossParts(D.t(obj, L())).map(function (p) { return p.text != null ? p.text : p.shown || termText(p.term); }).join("");
   }
   function termText(id) { var g = W.gloss && W.gloss[id]; return g ? D.t(g.term, L()) : id; }
-  // Rich text: escaped, [[term]] links become buttons that open the glossary sheet.
+  // Rich text: escaped, [[term]] links open the glossary sheet. Each is an inline span with button semantics, not a
+  // <button>: a button is an atomic box, so a long term ("corneal light reflex test (Hirschberg test)") jumped to its
+  // own centred lines instead of wrapping with the sentence. Enter and Space open it (termKey).
   function rich(obj) {
     var h = D.glossParts(D.t(obj, L())).map(function (p) {
       if (p.text != null) return esc(p.text);
       var label = esc(p.shown || termText(p.term));
-      return W.gloss && W.gloss[p.term] ? '<button class="ln-term" data-act="lngloss" data-g="' + esc(p.term) + '" aria-haspopup="dialog">' + label + "</button>" : label;
+      return W.gloss && W.gloss[p.term] ? '<span class="ln-term" role="button" tabindex="0" data-act="lngloss" data-g="' + esc(p.term) + '" aria-haspopup="dialog">' + label + "</span>" : label;
     }).join("");
     return fell(obj) ? '<span lang="en">' + h + "</span>" : h;
   }
 
   /* ---------- data ---------- */
   // media: the image library by id (learn/media/credits.json); svg: fetched animation sources by id; n: SVG instance count.
-  var W = { ix: null, err: null, loading: null, lessons: {}, bad: {}, gloss: null, media: null, svg: {}, n: 0, paused: {},
+  var W = { ix: null, err: null, loading: null, lessons: {}, bad: {}, inflight: {}, gloss: null, media: null, svg: {}, n: 0, paused: {},
     les: null, step: 0, picks: {}, hot: {}, sheet: null, zoom: null, rev: null, again: null };
+  // A lesson file loads when it is opened (the lists render from index.json's summaries) and stays cached in
+  // W.lessons. Never rejects: a failed or invalid lesson is W.bad[id]. It waits for load(): validation needs the
+  // glossary and the image library.
   function fetchLesson(id) {
-    return I.getJSON("learn/lessons/" + id + ".json").then(function (l) {
+    if (W.lessons[id]) return Promise.resolve();
+    if (W.inflight[id]) return W.inflight[id];
+    return (W.inflight[id] = Promise.resolve(W.loading).then(function () { return I.getJSON("learn/lessons/" + id + ".json"); }).then(function (l) {
       var e = D.validateLesson(l, W.gloss, W.media);
       if (l && l.id !== id) e.push("id does not match the file name");
       if (e.length) { W.bad[id] = 1; try { G.console.warn("Ophthalmós Learn: lesson " + id + " is invalid", e); } catch (x) {} return; }
       W.lessons[id] = l; delete W.bad[id];
-    }, function () { W.bad[id] = 1; });
+    }, function () { W.bad[id] = 1; }).then(function () { delete W.inflight[id]; }));
   }
-  // Never rejects: a failed index is W.err (the Learn home offers a retry), a failed lesson is W.bad[id].
-  // ponytail: every lesson file loads at open (the home lists titles, "Learn this" needs test links); if lessons grow
-  // past a few hundred, put title/minutes/test into index.json and load lessons on demand.
+  // Never rejects: a failed index is W.err (the Learn home offers a retry). Loads the glossary, the image library
+  // and index.json only; no lesson file.
   function load() {
     if (W.loading) return W.loading;
     W.err = null;
@@ -124,9 +133,6 @@
         var e = D.validateIndex(ix);
         if (e.length) throw new Error(e[0]);
         W.ix = ix;
-        var ids = [];
-        ix.units.forEach(function (u) { ids = ids.concat(u.lessons); });
-        return Promise.all(ids.map(fetchLesson));
       })
       .then(function () { W.loading = null; }, function (e) { W.err = e; W.ix = null; W.loading = null; });
     return W.loading;
@@ -136,6 +142,8 @@
     for (var i = 0; i < u.length; i++) if (u[i].lessons.indexOf(id) >= 0) return u[i];
     return null;
   }
+  // A lesson's summary in index.json (dev/learn-index.mjs): title, minutes, idea, see {img | diagram}, test {clinic, classes}?.
+  function meta(id) { return (W.ix && W.ix.lessons && W.ix.lessons[id]) || null; }
   function allIds() { var out = []; D.learnUnits(W.ix).forEach(function (u) { out = out.concat(u.lessons); }); return out; }
   function doneCount(ids) { return ids.filter(function (id) { return D.lessonDone(st.store, id); }).length; }
   function imgSrc(see) { return see.img ? I.imgUrl(see.img) : BASE + "learn/" + see.diagram; }
@@ -193,7 +201,7 @@
   /* ---------- first run: Learn or Test, and the language ---------- */
   function firstRun() {
     st.view = "hub"; st.onBack = null; W.again = firstRun;
-    var first = W.ix && D.nextLesson(W.ix, st.store), fl = first && W.lessons[first.id];
+    var first = W.ix && D.nextLesson(W.ix, st.store), fl = first && meta(first.id);
     var lthumb = fl && fl.see.img ? '<img src="' + esc(I.imgUrl(fl.see.img)) + '" alt="" loading="lazy" decoding="async">' : tile("book");
     var tthumb = (st.cfg.tracks || []).slice(0, 3).map(function (t) {
       var d = st.decks[t.id], x = d && d.thumbs && d.thumbs[0];
@@ -224,7 +232,7 @@
     else if (!allIds().length) body = '<section class="oph-today"><p class="oph-today-line">' + s("none") + "</p></section>";
     else body = startCard() + reviseRow() + unitsHtml();
     paint(markTop(s("homeSub")) +
-      '<div class="oph-scroll oph-pad ln-home"><div class="ln-col">' + tabs("learn") + body + referenceHtml() +
+      '<div class="oph-scroll oph-pad ln-home"><div class="ln-col">' + tabs("learn") + body + (O._explore ? O._explore.homeHtml() : "") + referenceHtml() +
       '<p class="oph-note">' + s("draft") + "</p></div></div>", focusSel);
   }
 
@@ -235,24 +243,20 @@
         '<p class="ln-start-idea">' + s("allDone") + "</p>" +
         '<button class="oph-btn pri oph-wide" data-act="lntab" data-t="test">' + ico("target") + " " + s("goTest") + "</button></div></section>";
     }
-    var l = W.lessons[nx.id], res = nx.level === "resident";
+    var l = meta(nx.id), res = nx.level === "resident";
     var head = res ? '<p class="ln-start-idea">' + s("mbbsDone") + " " + s("residentNudge") + "</p>" : "";
-    if (!l) {
-      return '<section class="ln-start"><div class="ln-start-b">' + head + '<p class="ln-start-idea">' + s("lessonErr") + "</p>" +
-        '<button class="oph-btn sec oph-wide" data-act="lesson" data-l="' + esc(nx.id) + '">' + ico("refresh") + " " + s("retry") + "</button></div></section>";
-    }
-    var see = l.see, u = unitOf(l.id);
+    var see = l.see, u = unitOf(nx.id);
     return '<section class="ln-start" aria-label="' + (anyDone ? s("upNext") : s("startHere")) + '">' +
       '<div class="ln-start-img' + (see.img ? "" : " diagram") + '" aria-hidden="true"><img src="' + esc(imgSrc(see)) + '" alt="" decoding="async"></div>' +
       '<div class="ln-start-b">' + head +
       '<h2 class="ln-start-t" id="lnStartH">' + tx(l.title) + "</h2>" +
       '<p class="ln-start-idea">' + esc(plain(l.idea)) + "</p>" +
       '<p class="oph-small">' + s("min", { n: l.minutes }) + (u ? " · " + tx(u.title) : "") + (res ? " " + badge("learn.resident") : "") + "</p>" +
-      '<button class="oph-btn pri oph-wide" data-act="lesson" data-l="' + esc(l.id) + '">' + ico("play") + " " + (anyDone ? s("cont") : s("startHere")) + "</button></div></section>";
+      '<button class="oph-btn pri oph-wide" data-act="lesson" data-l="' + esc(nx.id) + '">' + ico("play") + " " + (anyDone ? s("cont") : s("startHere")) + "</button></div></section>";
   }
 
   function reviseRow() {
-    var n = D.learnDue(st.store, I.today()).filter(function (id) { return W.lessons[id]; }).length;
+    var n = D.learnDue(st.store, I.today()).filter(meta).length;
     if (!n) return "";
     return '<ul class="oph-clinics ln-revise">' + row("lnrevise", "", tile("refresh"), s("revise"), s("reviseDue", { n: fmt(n) }), "") + "</ul>";
   }
@@ -267,8 +271,8 @@
         out += '<section class="ln-unit" aria-label="' + esc(plain(u.title)) + '"><div class="ln-unit-h"><h3>' + tx(u.title) + '</h3><span class="oph-small">' +
           s("ofDone", { d: fmt(doneCount(u.lessons)), n: fmt(u.lessons.length) }) + '</span></div><ol class="ln-lessons">' +
           u.lessons.map(function (id, i) {
-            var l = W.lessons[id], dn = D.lessonDone(st.store, id);
-            var title = l ? tx(l.title) : s("lessonErr"), line = l ? s("min", { n: l.minutes }) + (dn ? " · " + s("done") : "") : s("lessonErrRow");
+            var l = meta(id), dn = D.lessonDone(st.store, id);
+            var title = tx(l.title), line = s("min", { n: l.minutes }) + (dn ? " · " + s("done") : "");
             return '<li><button class="ln-row" data-act="lesson" data-l="' + esc(id) + '" data-done="' + dn + '">' +
               '<span class="ln-num" aria-hidden="true">' + (dn ? ico("check") : i + 1) + "</span>" +
               '<span class="ln-row-b"><b>' + title + '</b><span class="oph-small">' + line + (lv === "resident" ? " " + badge("learn.resident") : "") + "</span></span>" +
@@ -301,20 +305,24 @@
     return a;
   }
   function openLesson(id) {
-    var l = W.lessons[id];
-    if (!l) return retryLesson(id);
+    var l = W.lessons[id], u = unitOf(id), res = u ? u.level === "resident" : l && l.level === "resident";
+    if (res && I.trial("learn.resident") === "used") return I.gate("learn.resident", function () {}); // the paywall; nothing to fetch
+    if (!l) return fetchOpen(id);
     var go = function () { I.leave(); st.session = null; W.les = l; W.picks = {}; W.hot = {}; W.act = null; prefetchSvgs(l); renderStep(0, true); };
-    if (l.level === "resident") return I.gate("learn.resident", go);
+    if (res) return I.gate("learn.resident", go);
     go();
   }
-  function retryLesson(id) {
+  // The lesson file is fetched on open: the loading line, then the lesson, or "did not load" with Try again.
+  function fetchOpen(id) {
     I.leave();
-    st.view = "lesson-err"; st.onBack = null; W.again = function () { retryLesson(id); };
-    paint(I.top(s("backLearn"), s("learn"), "", langBtn()) + '<div class="oph-scroll oph-pad"><div class="ln-col"><p role="status" class="oph-mut">' + s("loading") + "</p></div></div>");
+    st.view = "lesson-load"; st.onBack = null; W.again = function () { fetchOpen(id); };
+    var top = function () { var m = meta(id); return I.top(st.prefs.tab === "test" ? s("backTest") : s("backLearn"), m ? tx(m.title) : s("learn"), "", langBtn()); };
+    paint(top() + '<div class="oph-scroll oph-pad"><div class="ln-col"><p role="status" class="oph-mut">' + s("loadingLesson") + "</p></div></div>");
+    delete W.bad[id];
     fetchLesson(id).then(function () {
-      if (st.view !== "lesson-err") return;
+      if (st.view !== "lesson-load") return;
       if (W.lessons[id]) return openLesson(id);
-      paint(I.top(s("backLearn"), s("learn"), "", langBtn()) + '<div class="oph-scroll oph-pad"><div class="ln-col"><p>' + s("lessonErr") + "</p>" +
+      paint(top() + '<div class="oph-scroll oph-pad"><div class="ln-col"><p role="alert">' + s("lessonErr") + " " + s("lessonErrHint") + "</p>" +
         '<button class="oph-btn pri" data-act="lesson" data-l="' + esc(id) + '">' + ico("refresh") + " " + s("retry") + "</button></div></div>", ".oph-btn");
     });
   }
@@ -417,14 +425,16 @@
     var test = tr && st.decks[t.clinic]
       ? '<button class="oph-btn pri oph-wide" data-act="lntest">' + ico("target") + " " + s("testYourself") + '</button><p class="oph-small">' + s("testClinic", { c: tr.clinic }) + "</p>"
       : bank ? '<button class="oph-btn pri oph-wide" data-act="lntest">' + ico("target") + " " + s("testYourself") + '</button><p class="oph-small">' + s("testBank") + "</p>" : "";
+    var sm = null; (O._sims || []).forEach(function (x) { if (t.sim && x.id === t.sim) sm = x; });
+    var sim = sm ? '<button class="oph-btn sec oph-wide" data-act="lnsim" data-s="' + esc(sm.id) + '">' + ico("target") + " " + s("trySim") + '</button><p class="oph-small" lang="en">' + s("simLine", { t: sm.title }) + "</p>" : "";
     var note = l.deeper && noteFor(l.deeper.note);
     var deeper = note ? '<button class="oph-btn sec oph-wide" data-act="lndeeper" data-n="' + esc(l.deeper.note) + '">' + ico("book") + " " + s("goDeeper") + '</button><p class="oph-small" lang="en">' + s("deeperNote", { t: note.title }) + "</p>" : "";
-    var nx = D.nextLesson(W.ix, st.store), nl = nx && W.lessons[nx.id];
-    var more = nl ? '<button class="oph-nextnote" data-act="lesson" data-l="' + esc(nl.id) + '"><span class="oph-small">' + s("nextLesson") +
-      (nl.level === "resident" ? " " + badge("learn.resident") : "") + "</span><b>" + tx(nl.title) + '</b><span class="oph-chev" aria-hidden="true">' + ico("chev") + "</span></button>" : "";
+    var nx = D.nextLesson(W.ix, st.store), nl = nx && meta(nx.id);
+    var more = nl ? '<button class="oph-nextnote" data-act="lesson" data-l="' + esc(nx.id) + '"><span class="oph-small">' + s("nextLesson") +
+      (nx.level === "resident" ? " " + badge("learn.resident") : "") + "</span><b>" + tx(nl.title) + '</b><span class="oph-chev" aria-hidden="true">' + ico("chev") + "</span></button>" : "";
     return '<div class="ln-done"><p class="oph-verdict ok">' + ico("check") + "<span>" + s("lessonDone") + "</span></p>" +
       '<h1 class="ln-title">' + tx(l.title) + '</h1><p class="ln-remember">' + rich(l.remember) + '</p><p class="oph-small">' + s("comesBack") + "</p></div>" +
-      '<div class="ln-done-act">' + test + deeper + more +
+      '<div class="ln-done-act">' + test + sim + deeper + more +
       '<button class="oph-btn sec oph-wide ln-backlearn" data-act="lnexit">' + s("backLearn") + "</button></div>";
   }
   function bankFor(t) { var b = null; if (t && t.mcqTopic) (O._banks || []).forEach(function (x) { if (x.topic) b = x; }); return b; }
@@ -621,7 +631,7 @@
 
   /* ---------- Revise: each finished lesson's remember line as a recall card (deck key "learn") ---------- */
   function revise() {
-    var ids = D.learnDue(st.store, I.today()).filter(function (id) { return W.lessons[id]; });
+    var ids = D.learnDue(st.store, I.today()).filter(meta);
     W.rev = { ids: ids, i: 0, shown: false };
     renderRevise();
   }
@@ -633,10 +643,16 @@
         '<div class="oph-scroll oph-pad"><div class="ln-col ln-art"><p class="oph-verdict ok">' + ico("check") + "<span>" + (r.ids.length ? s("reviseDone") : s("reviseEmpty")) + "</span></p>" +
         '<button class="oph-btn pri oph-wide" data-act="back">' + s("backLearn") + "</button></div></div>", focusSel || ".oph-btn.pri");
     }
-    var l = W.lessons[r.ids[r.i]];
+    var id = r.ids[r.i], l = W.lessons[id], ans = "";
+    if (!l && !W.bad[id]) fetchLesson(id).then(function () { if (st.view === "lnrevise" && W.rev === r && r.ids[r.i] === id && r.shown) renderRevise(); });
+    if (r.shown) {
+      ans = l ? '<p class="ln-remember">' + rich(l.remember) + "</p>"
+        : W.bad[id] ? '<p role="alert">' + s("lessonErr") + " " + s("lessonErrHint") + '</p><button class="oph-btn sec" data-act="lnshow">' + ico("refresh") + " " + s("retry") + "</button>"
+        : '<p role="status" class="oph-mut">' + s("loadingLesson") + "</p>";
+    }
     paint(I.top(s("backLearn"), s("revise"), s("xOfY", { i: r.i + 1, n: r.ids.length }), langBtn()) +
-      '<div class="oph-scroll oph-pad"><article class="ln-art"><p class="oph-small">' + s("recall") + '</p><h1 class="ln-title">' + tx(l.title) + "</h1>" +
-      (r.shown ? '<p class="ln-remember">' + rich(l.remember) + "</p>" : "") + "</article></div>" +
+      '<div class="oph-scroll oph-pad"><article class="ln-art"><p class="oph-small">' + s("recall") + '</p><h1 class="ln-title">' + tx(meta(id).title) + "</h1>" +
+      ans + "</article></div>" +
       '<div class="oph-foot ln-rfoot">' + (r.shown
         ? '<div class="ln-rate"><button class="oph-btn sec" data-act="lnrate" data-g="1">' + s("again") + '</button><button class="oph-btn pri" data-act="lnrate" data-g="3">' + s("gotIt") + "</button></div>"
         : '<button class="oph-btn pri oph-wide" data-act="lnshow">' + s("showAnswer") + "</button>") + "</div>",
@@ -656,19 +672,19 @@
   function planItem() {
     if (!W.ix) return null;
     var d = I.today(), today = null, id;
-    for (id in st.store.learn) if (st.store.learn[id].day === d && W.lessons[id]) today = id;
-    var nx = D.nextLesson(W.ix, st.store), nl = nx && nx.level === "mbbs" && W.lessons[nx.id];
-    if (today) return { act: "lesson", key: nl ? nl.id : today, title: "Lesson", done: true, line: "Done today: " + esc(D.t(W.lessons[today].title, "en")) };
-    if (nl) return { act: "lesson", key: nl.id, title: "Lesson", done: false, line: esc(D.t(nl.title, "en")) + " · " + nl.minutes + " min" };
-    var due = D.learnDue(st.store, d).filter(function (x) { return W.lessons[x]; }).length;
+    for (id in st.store.learn) if (st.store.learn[id].day === d && meta(id)) today = id;
+    var nx = D.nextLesson(W.ix, st.store), nl = nx && nx.level === "mbbs" && meta(nx.id);
+    if (today) return { act: "lesson", key: nl ? nx.id : today, title: "Lesson", done: true, line: "Done today: " + esc(D.t(meta(today).title, "en")) };
+    if (nl) return { act: "lesson", key: nx.id, title: "Lesson", done: false, line: esc(D.t(nl.title, "en")) + " · " + nl.minutes + " min" };
+    var due = D.learnDue(st.store, d).filter(meta).length;
     return due ? { act: "lnrevise", title: "Revise", done: false, line: fmt(due) + (due === 1 ? " lesson" : " lessons") + " to revise" } : null;
   }
   // "Learn this" after a wrong clinic answer: the first lesson (study order) whose test covers the image's class.
   function lessonFor(trackId, cls) {
     var ids = W.ix ? allIds() : [];
     for (var i = 0; i < ids.length; i++) {
-      var l = W.lessons[ids[i]], t = l && l.test;
-      if (t && t.clinic === trackId && (!t.classes || t.classes.indexOf(cls) >= 0)) return { id: l.id, title: plain(l.title) };
+      var l = meta(ids[i]), t = l && l.test;
+      if (t && t.clinic === trackId && (!t.classes || t.classes.indexOf(cls) >= 0)) return { id: ids[i], title: plain(l.title) };
     }
     return null;
   }
@@ -701,7 +717,7 @@
   A.lnsheetclose = closeSheet;
   A.lnglossary = function () { glossList(); };
   A.lnrevise = function () { revise(); };
-  A.lnshow = function () { if (W.rev) { W.rev.shown = true; renderRevise(); } };
+  A.lnshow = function () { var r = W.rev; if (r) { if (r.ids[r.i]) delete W.bad[r.ids[r.i]]; r.shown = true; renderRevise(); } }; // again: retries a failed load
   A.lnrate = function (b) { rate(+b.getAttribute("data-g")); };
   // Back from Test yourself / Go deeper returns to the lesson step it left (st.ret, read by O.back).
   function lessonRet() {
@@ -717,11 +733,22 @@
     // The paywall (a spent Resident trial) leaves the lesson on screen: repaint it. An empty clinic falls back to the hub.
     if (st.view === "lesson") ret(); else if (st.view !== "hub") I.setRet(ret, D.t(STR.backLesson, L()), L());
   };
+  A.lnsim = function (b) {
+    var ret = lessonRet(), id = b.getAttribute("data-s");
+    I.leave();
+    (O._sims || []).forEach(function (x) { if (x.id === id) x.open(); });
+    if (st.view !== "hub") I.setRet(ret, D.t(STR.backLesson, L()), L());
+  };
   A.lndeeper = function (b) { var ret = lessonRet(); A.note(b); I.setRet(ret, D.t(STR.backLesson, L()), L()); };
 
   function typing(e) { var n = e.target && e.target.tagName; return n === "INPUT" || n === "TEXTAREA"; }
+  function termKey(e) {
+    var el = e.target;
+    if ((e.key !== "Enter" && e.key !== " ") || !el || !el.classList || !el.classList.contains("ln-term")) return false;
+    e.preventDefault(); A.lngloss(el); return true;
+  }
   K.lesson = function (e) {
-    if (W.sheet || typing(e)) return;
+    if (W.sheet || typing(e) || termKey(e)) return;
     if (W.zoom) {
       if (e.key === "+" || e.key === "=") { e.preventDefault(); W.zoom._z.zoomBy(1.25); }
       else if (e.key === "-") { e.preventDefault(); W.zoom._z.zoomBy(0.8); }
@@ -735,10 +762,10 @@
   };
   K.lnrevise = function (e) {
     var r = W.rev;
-    if (W.sheet || !r || r.i >= r.ids.length) return;
+    if (W.sheet || !r || r.i >= r.ids.length || termKey(e)) return;
     if (!r.shown && e.key === " " && !(e.target && e.target.tagName === "BUTTON")) { e.preventDefault(); A.lnshow(); }
     else if (r.shown && (e.key === "1" || e.key === "2")) { e.preventDefault(); rate(e.key === "1" ? C.AGAIN : C.GOOD); }
   };
 
-  O._learn = { load: load, home: home, firstRun: firstRun, tabs: tabs, planItem: planItem, lessonFor: lessonFor, _w: W };
+  O._learn = { load: load, home: home, firstRun: firstRun, tabs: tabs, planItem: planItem, lessonFor: lessonFor, meta: meta, _w: W };
 })(typeof window !== "undefined" ? window : this);

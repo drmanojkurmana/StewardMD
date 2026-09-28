@@ -1,0 +1,239 @@
+{
+  "id": "pg-orbital-mass",
+  "unit": "orbit-pg",
+  "level": "resident",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Orbital mass: an approach",
+    "hi": "ऑर्बिट में गाँठ: जाँच का तरीका"
+  },
+  "idea": {
+    "en": "Age, speed and pain point to the cause of one-sided [[proptosis]]. Examine and measure, then image: CT for bone, MRI for soft tissue.",
+    "hi": "एक आँख के [[proptosis]] में उम्र, रफ़्तार और दर्द कारण की ओर इशारा करते हैं। जाँचें और नापें, फिर इमेजिंग करें: हड्डी के लिए CT, नरम ऊतक के लिए MRI।"
+  },
+  "see": {
+    "img": "cases/58.webp",
+    "deckItem": {
+      "deck": "cases",
+      "id": "58"
+    },
+    "expect": "solid orbital mass",
+    "alt": {
+      "en": "B-scan ultrasound of a right eye. On the left is the black, echo-free inside of the eye. A bright curved band marks the eye wall and the orbital fat. Behind it lies a rounded, greyer area with a clear edge.",
+      "hi": "दाईं आँख का बी-स्कैन अल्ट्रासाउंड। बाईं ओर आँख का काला, बिना गूँज वाला अंदरूनी हिस्सा है। एक चमकीली मुड़ी पट्टी आँख की दीवार और ऑर्बिट की चर्बी दिखाती है। उसके पीछे साफ़ किनारे वाला एक गोल, कुछ गहरा भूरा हिस्सा है।"
+    },
+    "caption": {
+      "en": "A real B-scan: a solid orbital mass behind the eye. It gives weaker echoes than the fat around it and has clear borders.",
+      "hi": "एक असली बी-स्कैन: आँख के पीछे ऑर्बिट की ठोस गाँठ (solid orbital mass)। इसकी गूँज आसपास की चर्बी से कमज़ोर है और किनारे साफ़ हैं।"
+    },
+    "credit": "OphthalVQA, CC BY 4.0. Xu P, et al. Br J Ophthalmol 2024.",
+    "hotspots": [
+      {
+        "x": 0.15,
+        "y": 0.5,
+        "label": {
+          "en": "Inside the eye",
+          "hi": "आँख का अंदरूनी हिस्सा"
+        },
+        "note": {
+          "en": "Clear vitreous sends back no echoes, so it is black.",
+          "hi": "साफ़ विट्रियस से कोई गूँज नहीं लौटती, इसलिए यह काला है।"
+        }
+      },
+      {
+        "x": 0.42,
+        "y": 0.5,
+        "label": {
+          "en": "Eye wall and orbital fat",
+          "hi": "आँख की दीवार और ऑर्बिट की चर्बी"
+        },
+        "note": {
+          "en": "The bright band is the back of the eye and the fat behind it. Fat gives strong echoes.",
+          "hi": "चमकीली पट्टी आँख का पिछला हिस्सा और उसके पीछे की चर्बी है। चर्बी तेज़ गूँज देती है।"
+        }
+      },
+      {
+        "x": 0.6,
+        "y": 0.56,
+        "label": {
+          "en": "Solid mass",
+          "hi": "ठोस गाँठ"
+        },
+        "note": {
+          "en": "A rounded area with weaker echoes than fat. Fine bright specks lie inside it.",
+          "hi": "चर्बी से कमज़ोर गूँज वाला एक गोल हिस्सा। इसके अंदर बारीक चमकीले कण हैं।"
+        }
+      },
+      {
+        "x": 0.6,
+        "y": 0.37,
+        "label": {
+          "en": "Clear border",
+          "hi": "साफ़ किनारा"
+        },
+        "note": {
+          "en": "A sharp edge fits a slow, walled lesion. It does not prove the mass is benign.",
+          "hi": "तीखा किनारा धीमी, घिरी हुई गाँठ से मेल खाता है। पर इससे यह साबित नहीं होता कि गाँठ बिनाइन है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "History: how fast, how painful, and how old is the patient? Days with pain suggest inflammation, infection or a fast cancer.",
+        "hi": "हिस्ट्री: कितनी तेज़, कितना दर्द, और मरीज़ की उम्र क्या है? दर्द के साथ कुछ दिनों में बढ़ना सूजन, संक्रमण या तेज़ कैंसर की ओर इशारा करता है।"
+      },
+      {
+        "en": "Exam: is the eye pushed straight forward, or to one side? Straight forward suggests a mass inside the muscle cone.",
+        "hi": "जाँच: आँख सीधी आगे धकेली गई है, या एक तरफ़? सीधी आगे का मतलब है कि गाँठ शायद मांसपेशियों के कोन के अंदर है।"
+      },
+      {
+        "en": "Measure with a Hertel exophthalmometer. Check pulsation, vision, colour vision, [[rapd]], eye movements and the disc.",
+        "hi": "हर्टेल एक्सऑफ़्थैल्मोमीटर से नापें। धड़कन, नज़र, रंग पहचान, [[rapd]], आँख की हरकत और डिस्क जाँचें।"
+      },
+      {
+        "en": "Image: CT shows bone and calcium, and MRI shows soft tissue and the optic nerve. A [[b-scan]] is a quick bedside first look.",
+        "hi": "इमेजिंग: CT हड्डी और कैल्शियम दिखाता है, और MRI नरम ऊतक और ऑप्टिक नर्व। [[b-scan]] बिस्तर के पास पहली जल्दी जाँच है।"
+      },
+      {
+        "en": "Children: dermoid cyst, infantile haemangioma, optic nerve glioma with NF1, and [[rhabdomyosarcoma]]. A mass that grows in days needs urgent biopsy.",
+        "hi": "बच्चे: डर्मॉइड सिस्ट, इन्फ़ैंटाइल हीमैंजियोमा, NF1 के साथ ऑप्टिक नर्व ग्लायोमा, और [[rhabdomyosarcoma]]। दिनों में बढ़ने वाली गाँठ की तुरंत बायोप्सी चाहिए।"
+      },
+      {
+        "en": "Adults: cavernous venous malformation, lymphoma, meningioma, metastasis and lacrimal gland tumours. A pleomorphic adenoma must come out whole, never biopsied.",
+        "hi": "वयस्क: कैवर्नस वीनस मैलफ़ॉर्मेशन, लिम्फ़ोमा, मेनिन्जियोमा, मेटास्टेसिस और आँसू ग्रंथि के ट्यूमर। प्लियोमॉर्फ़िक एडिनोमा को पूरा निकालना है, कभी बायोप्सी नहीं।"
+      }
+    ],
+    "analogy": {
+      "en": "It is a lump in a packed suitcase. Where the clothes bulge tells you where it sits. How fast it grew tells you what it might be.",
+      "hi": "यह भरे हुए सूटकेस में एक गाँठ जैसा है। कपड़े कहाँ उभरे हैं, इससे पता चलता है कि वह कहाँ है। वह कितनी तेज़ी से बढ़ी, इससे पता चलता है कि वह क्या हो सकती है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "A mass up and out, in the lacrimal gland, pushes the eye down and in.",
+      "hi": "ऊपर और बाहर, आँसू ग्रंथि में गाँठ, आँख को नीचे और अंदर की ओर धकेलती है।"
+    },
+    {
+      "en": "Red flags: fast growth, pain, a new [[rapd]], or a child whose mass grew in days.",
+      "hi": "ख़तरे के संकेत: तेज़ बढ़त, दर्द, नया [[rapd]], या बच्चा जिसकी गाँठ दिनों में बढ़ी।"
+    },
+    {
+      "en": "Pulsation suggests a vascular lesion or a gap in the orbital roof, as in NF1.",
+      "hi": "धड़कन किसी नली वाली गाँठ या ऑर्बिट की छत में कमी की ओर इशारा करती है, जैसे NF1 में।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "In a child with fast proptosis, image the same day and arrange a biopsy.",
+      "hi": "तेज़ प्रॉप्टोसिस वाले बच्चे में उसी दिन इमेजिंग करें और बायोप्सी का इंतज़ाम करें।"
+    },
+    {
+      "en": "Do not biopsy a suspected pleomorphic adenoma. Refer for complete removal with its capsule.",
+      "hi": "प्लियोमॉर्फ़िक एडिनोमा के शक पर बायोप्सी न करें। कैप्सूल समेत पूरा निकालने के लिए रेफ़र करें।"
+    },
+    {
+      "en": "Avoid steroids before a biopsy when lymphoma is possible. They can hide the diagnosis.",
+      "hi": "लिम्फ़ोमा की संभावना हो तो बायोप्सी से पहले स्टेरॉयड न दें। ये निदान को छिपा सकते हैं।"
+    }
+  ],
+  "remember": {
+    "en": "Age, speed, pain, direction. Image before you cut, never biopsy a pleomorphic adenoma, and never wait on a fast mass in a child.",
+    "hi": "उम्र, रफ़्तार, दर्द, दिशा। काटने से पहले इमेजिंग करें, प्लियोमॉर्फ़िक एडिनोमा की बायोप्सी कभी नहीं, और बच्चे की तेज़ बढ़ती गाँठ पर कभी इंतज़ार नहीं।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "A 7-year-old has proptosis that grew over 10 days. What must be ruled out first?",
+        "hi": "7 साल के बच्चे का प्रॉप्टोसिस 10 दिनों में बढ़ा है। सबसे पहले किसे रूल आउट करना है?"
+      },
+      "o": [
+        {
+          "en": "Dermoid cyst",
+          "hi": "डर्मॉइड सिस्ट"
+        },
+        {
+          "en": "Rhabdomyosarcoma",
+          "hi": "रैबडोमायोसार्कोमा"
+        },
+        {
+          "en": "Cavernous venous malformation",
+          "hi": "कैवर्नस वीनस मैलफ़ॉर्मेशन"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Rhabdomyosarcoma is the main primary orbital cancer of children. It grows fast and needs urgent biopsy.",
+        "hi": "रैबडोमायोसार्कोमा बच्चों में ऑर्बिट का मुख्य प्राइमरी कैंसर है। यह तेज़ी से बढ़ता है और इसकी तुरंत बायोप्सी चाहिए।"
+      }
+    },
+    {
+      "q": {
+        "en": "A painless lacrimal gland mass has grown slowly for a year. What should you avoid?",
+        "hi": "आँसू ग्रंथि की बिना दर्द वाली गाँठ एक साल से धीरे-धीरे बढ़ रही है। किससे बचना चाहिए?"
+      },
+      "o": [
+        {
+          "en": "A CT scan",
+          "hi": "CT स्कैन"
+        },
+        {
+          "en": "Cutting into it for a biopsy",
+          "hi": "बायोप्सी के लिए उसमें चीरा लगाना"
+        },
+        {
+          "en": "Referral to an orbit surgeon",
+          "hi": "ऑर्बिट सर्जन को रेफ़र करना"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "A pleomorphic adenoma can seed and come back if its capsule is cut. Remove it whole.",
+        "hi": "प्लियोमॉर्फ़िक एडिनोमा का कैप्सूल कटे तो वह फैलकर दोबारा आ सकता है। उसे पूरा निकालें।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which scan best shows bone erosion or calcium in an orbital mass?",
+        "hi": "ऑर्बिट की गाँठ में हड्डी का घिसना या कैल्शियम कौन-सा स्कैन सबसे अच्छा दिखाता है?"
+      },
+      "o": [
+        {
+          "en": "CT",
+          "hi": "CT स्कैन"
+        },
+        {
+          "en": "B-scan",
+          "hi": "बी-स्कैन"
+        },
+        {
+          "en": "OCT",
+          "hi": "OCT स्कैन"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "CT shows bone best. MRI is better for soft tissue and the optic nerve.",
+        "hi": "CT हड्डी सबसे अच्छी दिखाता है। नरम ऊतक और ऑप्टिक नर्व के लिए MRI बेहतर है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "orbit"
+  },
+  "deeper": {
+    "note": "orbit"
+  },
+  "glossary": [
+    "proptosis",
+    "rapd",
+    "b-scan",
+    "rhabdomyosarcoma"
+  ],
+  "sources": [
+    "Shields JA, Shields CL, Scartozzi R. Survey of 1264 patients with orbital tumors and simulating lesions: The 2002 Montgomery Lecture, part 1. Ophthalmology 2004;111(5):997-1008. doi:10.1016/j.ophtha.2003.01.002",
+    "Xu P, Chen X, Zhao Z, Shi D. Unveiling the clinical incapabilities: a benchmarking study of GPT-4V(ision) for ophthalmic multimodal image analysis. Br J Ophthalmol 2024;108(10):1384-1389. doi:10.1136/bjo-2023-325054"
+  ]
+}

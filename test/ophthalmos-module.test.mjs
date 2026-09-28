@@ -4,6 +4,7 @@
 import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join, relative } from "node:path";
+import { createHash } from "node:crypto";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -107,6 +108,46 @@ for (const [name, count] of Object.entries(DECKS)) {
 {
   const src = readFileSync(join(ROOT, "scripts/build-www.sh"), "utf8");
   ok("build-www.sh copies ophthalmos/learn", /cp -R ophthalmos\/learn\b/.test(src));
+}
+
+// Byte identity with the module repo: test/ophthalmos-sync.json holds the sha256 of every synced file at the module
+// commit it names. Every copy must match, and no Ophthalmós file may exist here that the module does not ship.
+{
+  const sync = JSON.parse(readFileSync(join(ROOT, "test/ophthalmos-sync.json"), "utf8"));
+  const sha = (f) => createHash("sha256").update(readFileSync(join(ROOT, f))).digest("hex");
+  const listed = Object.keys(sync.files);
+  ok("ophthalmos-sync.json names its module commit and lists the synced files", /^[0-9a-f]{40}$/.test(sync.commit) && listed.length > 200);
+  for (const f of listed) ok("byte-identical to the module repo: " + f, existsSync(join(ROOT, f)) && sha(f) === sync.files[f]);
+  const walk = (d) => readdirSync(join(ROOT, d), { withFileTypes: true }).filter((e) => !e.name.startsWith(".")).flatMap((e) => e.isDirectory() ? walk(d + "/" + e.name) : [d + "/" + e.name]);
+  const here = readdirSync(ROOT).filter((f) => /^ophthalmos[\w-]*\.(js|css)$/.test(f)).concat(walk("ophthalmos"));
+  const extra = here.filter((f) => !(f in sync.files));
+  ok("no Ophthalmós file here that the module does not ship" + (extra.length ? ": " + extra.slice(0, 5).join(", ") : ""), extra.length === 0);
+}
+
+// Explore (ophthalmos-explore.js / .css) loads right after Learn; every Ophthalmós tag carries the oph7 token.
+{
+  const html = readFileSync(join(ROOT, "index.html"), "utf8");
+  const learnJs = html.indexOf("/ophthalmos-learn.js"), exJs = html.indexOf("/ophthalmos-explore.js");
+  const learnCss = html.indexOf("/ophthalmos-learn.css"), exCss = html.indexOf("/ophthalmos-explore.css");
+  ok("index.html loads ophthalmos-explore.js right after ophthalmos-learn.js", exJs > learnJs && learnJs > 0 && html.indexOf("<script", learnJs) === html.lastIndexOf("<script", exJs));
+  ok("index.html loads ophthalmos-explore.css after ophthalmos-learn.css", exCss > learnCss && learnCss > 0);
+  const tags = [...html.matchAll(/\/ophthalmos[\w-]*\.(?:js|css)\?v=([\w.-]+)/g)];
+  ok("every Ophthalmós tag in index.html is ?v=oph7 (" + tags.length + " tags)", tags.length === 22 && tags.every((m) => m[1] === "oph7"));
+}
+
+// Learn loads lessons on open: index.json carries a summary for every listed lesson (title, minutes, picture).
+{
+  const ix = JSON.parse(readFileSync(join(ROOT, "ophthalmos/learn/index.json"), "utf8"));
+  const ids = ix.units.flatMap((u) => u.lessons), m = ix.lessons || {};
+  ok("learn/index.json lists the 19 units and 107 lessons", ix.units.length === 19 && ids.length === 107);
+  ok("learn/index.json has a summary for every listed lesson", ids.every((id) => m[id] && m[id].title && m[id].title.en && m[id].minutes > 0 && m[id].see && (m[id].see.img || m[id].see.diagram)));
+}
+
+// scripts/build-www.sh: root *.js and *.css by glob (so ophthalmos-explore.js / .css ship) and the learn tree.
+{
+  const src = readFileSync(join(ROOT, "scripts/build-www.sh"), "utf8");
+  ok("build-www.sh copies every root *.js (ophthalmos-explore.js)", /for f in \*\.js; do/.test(src));
+  ok("build-www.sh copies every root *.css (ophthalmos-explore.css)", /for f in \*\.css; do/.test(src));
 }
 
 console.log(fail === 0 ? "ALL " + pass + " PASS" : pass + " pass / " + fail + " FAIL");

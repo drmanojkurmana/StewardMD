@@ -1,0 +1,244 @@
+{
+  "id": "pg-gl-target",
+  "unit": "glaucoma-pg",
+  "level": "resident",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Target pressure and when to step up",
+    "hi": "टारगेट प्रेशर और इलाज कब बढ़ाएँ"
+  },
+  "idea": {
+    "en": "Set a [[target-iop]] for each eye at diagnosis. Step up treatment when the eye gets worse, not only when the number is high.",
+    "hi": "पहचान के समय हर आँख के लिए [[target-iop]] तय करें। इलाज तब बढ़ाएँ जब आँख बिगड़े, सिर्फ़ तब नहीं जब नंबर ज़्यादा हो।"
+  },
+  "see": {
+    "img": "rfmid/va-395.webp",
+    "deckItem": {
+      "deck": "rfmid",
+      "id": "va-395"
+    },
+    "expect": "ODC",
+    "alt": {
+      "en": "Colour photo of the back of a right eye. The disc at the right is small and bright, with a pale cup that fills much of it. The macula is a darker area left of centre. Vessels arch above and below.",
+      "hi": "एक दाईं आँख के पिछले हिस्से की रंगीन फ़ोटो। दाईं ओर की डिस्क छोटी और चमकीली है, और हल्का कप उसका बड़ा हिस्सा भरता है। मैक्युला बीच से बाईं ओर गहरा हिस्सा है। नसें ऊपर और नीचे मेहराब बनाती हैं।"
+    },
+    "caption": {
+      "en": "A real fundus photo labelled optic disc cupping. Treatment targets are set for the eye in front of you.",
+      "hi": "एक असली फ़ंडस फ़ोटो, लेबल: ऑप्टिक डिस्क कपिंग (optic disc cupping)। टारगेट सामने वाली आँख के हिसाब से तय होता है।"
+    },
+    "credit": "RFMiD 2.0, CC BY 4.0. Panchal S, et al. Data 2023.",
+    "hotspots": [
+      {
+        "x": 0.78,
+        "y": 0.49,
+        "label": {
+          "en": "Cupped disc",
+          "hi": "कप वाली डिस्क"
+        },
+        "note": {
+          "en": "Record the rim now. Later photos and OCT are judged against this baseline.",
+          "hi": "अभी रिम दर्ज करें। बाद की फ़ोटो और OCT इसी बेसलाइन से तौले जाते हैं।"
+        }
+      },
+      {
+        "x": 0.47,
+        "y": 0.53,
+        "label": {
+          "en": "Macula",
+          "hi": "मैक्युला"
+        },
+        "note": {
+          "en": "Damage near fixation needs a lower target and closer follow-up.",
+          "hi": "फ़िक्सेशन के पास नुकसान हो तो टारगेट और कम, और जाँच जल्दी-जल्दी।"
+        }
+      },
+      {
+        "x": 0.7,
+        "y": 0.22,
+        "label": {
+          "en": "Upper arcade",
+          "hi": "ऊपर की नसें"
+        },
+        "note": {
+          "en": "Fibres here serve the lower field. Match rim loss to field loss.",
+          "hi": "यहाँ के तंतु नीचे के दायरे को देखते हैं। रिम का नुकसान दायरे के नुकसान से मिलाएँ।"
+        }
+      },
+      {
+        "x": 0.72,
+        "y": 0.72,
+        "label": {
+          "en": "Lower arcade",
+          "hi": "नीचे की नसें"
+        },
+        "note": {
+          "en": "Fibres here serve the upper field, often hit first.",
+          "hi": "यहाँ के तंतु ऊपर के दायरे को देखते हैं, जिस पर अक्सर पहले असर होता है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "The AAO guideline suggests a first target about 20% to 30% below the pre-treatment pressure.",
+        "hi": "AAO की गाइडलाइन कहती है कि पहला टारगेट इलाज से पहले के प्रेशर से लगभग 20% से 30% कम रखें।"
+      },
+      {
+        "en": "Aim lower if damage is advanced, pressure was very high, or the patient is young.",
+        "hi": "अगर नुकसान ज़्यादा है, प्रेशर बहुत ज़्यादा था, या मरीज़ जवान है, तो टारगेट और कम रखें।"
+      },
+      {
+        "en": "In EMGT, each 1 mmHg of lowering cut the risk of progression by about 10%.",
+        "hi": "EMGT में प्रेशर हर 1 mmHg घटने पर बीमारी बढ़ने का ख़तरा लगभग 10% कम हुआ।"
+      },
+      {
+        "en": "In LiGHT, [[slt]] first worked as well as drops. At 3 years, 74% of patients needed no drops.",
+        "hi": "LiGHT में पहले [[slt]] देना ड्रॉप्स जितना असरदार रहा। 3 साल पर 74% मरीज़ों को ड्रॉप्स की ज़रूरत नहीं पड़ी।"
+      },
+      {
+        "en": "Judge progression with repeat fields and OCT, by event or trend. Confirm a change before acting.",
+        "hi": "बीमारी बढ़ी या नहीं, यह बार-बार फ़ील्ड और OCT से, घटना या रुझान देखकर तय करें। कुछ करने से पहले बदलाव की पुष्टि करें।"
+      },
+      {
+        "en": "To step up: check drop use first, then add or switch drugs, laser, or surgery.",
+        "hi": "इलाज बढ़ाने के लिए: पहले देखें कि ड्रॉप्स ठीक से डल रही हैं, फिर दवा जोड़ें या बदलें, लेज़र, या ऑपरेशन।"
+      }
+    ],
+    "analogy": {
+      "en": "A target is like a speed limit set for one road. You still slow down if the road ahead looks dangerous.",
+      "hi": "टारगेट किसी एक सड़क की गति सीमा जैसा है। आगे सड़क ख़तरनाक दिखे तो आप फिर भी धीमे चलते हैं।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Progression on fields or OCT despite reaching target: lower the target.",
+      "hi": "टारगेट पाने के बाद भी फ़ील्ड या OCT पर बढ़ोतरी: टारगेट और घटाएँ।"
+    },
+    {
+      "en": "Wide swings in pressure between visits: think of missed drops.",
+      "hi": "हर जाँच में प्रेशर का बहुत ऊपर-नीचे होना: छूटी ड्रॉप्स के बारे में सोचें।"
+    },
+    {
+      "en": "A new disc bleed: look harder for progression.",
+      "hi": "डिस्क पर नया खून: बढ़ोतरी को ध्यान से देखें।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Write the target in the notes and review it at each visit.",
+      "hi": "टारगेट नोट्स में लिखें और हर जाँच पर उसकी समीक्षा करें।"
+    },
+    {
+      "en": "Ask about missed drops before adding a new one.",
+      "hi": "नई ड्रॉप जोड़ने से पहले छूटी ड्रॉप्स के बारे में पूछें।"
+    },
+    {
+      "en": "Refer early for surgery if loss is fast or the target cannot be met.",
+      "hi": "नुकसान तेज़ हो या टारगेट न मिले तो ऑपरेशन के लिए जल्दी रेफ़र करें।"
+    }
+  ],
+  "remember": {
+    "en": "Set the target at diagnosis, 20 to 30% lower to start. Progression, not the number alone, drives change.",
+    "hi": "टारगेट पहचान के समय तय करें, शुरुआत में 20 से 30% कम। बदलाव का फ़ैसला बीमारी के बढ़ने से होता है, सिर्फ़ नंबर से नहीं।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Untreated IOP is 30 mmHg. What is a reasonable first target?",
+        "hi": "बिना इलाज IOP 30 mmHg है। पहला उचित टारगेट क्या है?"
+      },
+      "o": [
+        {
+          "en": "About 21 to 24 mmHg",
+          "hi": "लगभग 21 से 24 mmHg"
+        },
+        {
+          "en": "28 mmHg",
+          "hi": "लगभग 28 mmHg"
+        },
+        {
+          "en": "Under 10 mmHg for everyone",
+          "hi": "सबके लिए 10 mmHg से कम"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "20% to 30% below 30 gives about 21 to 24 mmHg, then adjust to the disease.",
+        "hi": "30 से 20% से 30% कम लगभग 21 से 24 mmHg होता है, फिर बीमारी के हिसाब से बदलें।"
+      }
+    },
+    {
+      "q": {
+        "en": "IOP is at target, but fields show confirmed progression. What next?",
+        "hi": "IOP टारगेट पर है, पर फ़ील्ड में बढ़ोतरी की पुष्टि हुई है। आगे क्या?"
+      },
+      "o": [
+        {
+          "en": "No change, the target is met",
+          "hi": "कोई बदलाव नहीं, टारगेट मिल गया"
+        },
+        {
+          "en": "Lower the target and step up treatment",
+          "hi": "टारगेट घटाएँ और इलाज बढ़ाएँ"
+        },
+        {
+          "en": "Stop treatment",
+          "hi": "इलाज बंद करें"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "The target was too high for this eye. Progression drives the change.",
+        "hi": "यह टारगेट इस आँख के लिए ज़्यादा था। बदलाव बीमारी के बढ़ने से तय होता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "What did the LiGHT trial show?",
+        "hi": "LiGHT शोध ने क्या दिखाया?"
+      },
+      "o": [
+        {
+          "en": "SLT first is a valid first-line option",
+          "hi": "पहले SLT देना एक सही पहला विकल्प है"
+        },
+        {
+          "en": "SLT damages the angle",
+          "hi": "SLT एंगल को नुकसान पहुँचाता है"
+        },
+        {
+          "en": "Drops never work",
+          "hi": "ड्रॉप्स कभी काम नहीं करतीं"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "SLT first matched drops, and most patients were drop-free at 3 years.",
+        "hi": "पहले SLT ड्रॉप्स जितना असरदार रहा, और 3 साल पर ज़्यादातर मरीज़ बिना ड्रॉप्स के थे।"
+      }
+    }
+  ],
+  "test": {
+    "clinic": "rfmid",
+    "classes": [
+      "ODC"
+    ],
+    "mcqTopic": "glaucoma"
+  },
+  "deeper": {
+    "note": "poag"
+  },
+  "glossary": [
+    "slt",
+    "target-iop"
+  ],
+  "sources": [
+    "Gedde SJ, Bowden EC, Challa P, et al. Primary Open-Angle Glaucoma Preferred Practice Pattern. Ophthalmology 2026;133(4):P1-P103. PMID: 41665583",
+    "Leske MC, Heijl A, Hussein M, et al. Factors for glaucoma progression and the effect of treatment: the Early Manifest Glaucoma Trial. Arch Ophthalmol 2003;121(1):48-56. PMID: 12523884",
+    "Gazzard G, Konstantakopoulou E, Garway-Heath D, et al. Selective laser trabeculoplasty versus eye drops for first-line treatment of ocular hypertension and glaucoma (LiGHT): a multicentre randomised controlled trial. Lancet 2019;393(10180):1505-1516. PMID: 30862377",
+    "Pazos M, Traverso CE, Viswanathan A, et al. European Glaucoma Society Terminology and Guidelines for Glaucoma, 6th Edition. Br J Ophthalmol 2025;109(Suppl 1):1-212. PMID: 41026937",
+    "Panchal S, Naik A, Kokare M, et al. Retinal Fundus Multi-Disease Image Dataset (RFMiD) 2.0: A Dataset of Frequently and Rarely Identified Diseases. Data 2023;8(2):29. doi:10.3390/data8020029"
+  ]
+}

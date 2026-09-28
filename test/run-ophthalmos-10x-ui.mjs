@@ -1,7 +1,7 @@
 /* Ophthalmós in the REAL app (headless Chrome): every feature synced from the module repo is wired (incl. the
- * Learn tab: first-run choice, Reference, a lesson, a hotspot, Hindi),
+ * Learn tab: first-run choice, every unit, lessons loaded on open, Explore, Reference, a lesson, a hotspot, Hindi),
  * opens, and loads its data; images come from the R2 domain; Ask MaiK reaches the host; no uncaught errors.
- * The module's own behaviour is tested in its repo (test/run-ui.mjs, 19 steps); this checks the integration.
+ * The module's own behaviour is tested in its repo (test/run-ui.mjs, 41 steps); this checks the integration.
  *
  * USAGE: node test/run-ophthalmos-10x-ui.mjs   (BASE=http://localhost:8996/ to use a running server)
  */
@@ -27,6 +27,8 @@ const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${PORT}
 let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = [];
 const call = (m, p) => { const i = msgId++; return new Promise(r => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
+// Like ev, for a promise-returning body.
+const evp = async (e) => { const r = await call("Runtime.evaluate", { expression: `(async function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, awaitPromise: true, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
 const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(200); } return false; };
 let fails = 0; const ok = (c, m) => { console.log((c ? "✅ " : "❌ ") + m); if (!c) fails++; };
 
@@ -86,7 +88,23 @@ try {
   // Learn tab: home with Start here and Reference (notes, calculators, glossary)
   await ev(`document.querySelector('#smdOphthalmos [data-act=lntab][data-t=learn]').click(); return 1;`);
   ok(await until(`return !!document.querySelector('#smdOphthalmos .ln-home .ln-start [data-act=lesson]');`, 20000), "Learn tab opens with a Start here lesson");
-  ok(await ev(`var W=OPHTHALMOS._learn._w, ids=[]; W.ix.units.forEach(function(u){ids=ids.concat(u.lessons);}); return ids.length > 0 && Object.keys(W.bad).length === 0 && ids.every(function(id){return !!W.lessons[id];}) ? true : "rejected: " + Object.keys(W.bad).join(",");`) === true, "every lesson in learn/index.json loads and passes validation");
+  // Lessons load on open: the hub lists every unit from index.json and has fetched no lesson file.
+  ok(await ev(`var W=OPHTHALMOS._learn._w, u=document.querySelectorAll('#smdOphthalmos .ln-home .ln-unit'), n=0; W.ix.units.forEach(function(x){n+=x.lessons.length;}); return W.ix.units.length === 19 && u.length === 19 && document.querySelectorAll('#smdOphthalmos .ln-home .ln-row').length === n && n === 107;`) === true, "Learn home lists all 19 units and 107 lessons");
+  ok(await ev(`return performance.getEntriesByType("resource").filter(function(e){return /\\/learn\\/lessons\\//.test(e.name);}).length;`) === 0, "opening Learn fetched no lesson file (index.json only)");
+  ok(await evp(`var W=OPHTHALMOS._learn._w, D=window.OPHTHALMOS_DATA, bad=[], ids=[]; W.ix.units.forEach(function(u){ids=ids.concat(u.lessons);});
+    await Promise.all(ids.map(function(id){ return fetch("/ophthalmos/learn/lessons/" + id + ".json").then(function(r){return r.json();}).then(function(l){ if (l.id !== id || D.validateLesson(l, W.gloss, W.media).length) bad.push(id); }, function(){ bad.push(id); }); }));
+    return bad.length === 0 ? true : "rejected: " + bad.join(",");`) === true, "every lesson file in learn/index.json is bundled and passes validation");
+  // a lesson from a new unit opens (fetched on open)
+  await ev(`document.querySelector('#smdOphthalmos .ln-row[data-l="keratitis"]').click(); return 1;`);
+  ok(await until(`var t=document.querySelector('#smdOphthalmos .ln-title'); return OPHTHALMOS._st.view === "lesson" && !!t && t.textContent === OPHTHALMOS._learn.meta("keratitis").title.en;`, 15000), "a new-unit lesson (Cornea: keratitis) opens");
+  await ev(`OPHTHALMOS._internal.ACTIONS.lnexit(); return 1;`);
+  await until(`return OPHTHALMOS._st.view === "hub" && !!document.querySelector('#smdOphthalmos .ln-home');`);
+  // an explorer opens and renders from its model
+  ok(await ev(`return document.querySelectorAll('#smdOphthalmos [data-act=exopen]').length;`) === 5, "Learn home lists the five explorers");
+  await ev(`document.querySelector('#smdOphthalmos [data-act=exopen][data-x=pathway]').click(); return 1;`);
+  ok(await until(`var f=document.getElementById("exFields"); return OPHTHALMOS._st.view === "explore" && !!f && f.querySelectorAll("svg").length === 2 && /hemianopia/i.test(f.textContent) && !!document.querySelector("#exPath svg");`, 15000), "Visual pathway explorer opens: two field charts and the pathway drawn from its model");
+  await ev(`OPHTHALMOS.back(); return 1;`);
+  await until(`return OPHTHALMOS._st.view === "hub" && !!document.querySelector('#smdOphthalmos .ln-start [data-act=lesson]');`);
   ok(await ev(`return ["read","tools","lnglossary"].every(function(a){return !!document.querySelector('#smdOphthalmos .ln-home [data-act=' + a + ']');});`) === true, "Learn Reference lists notes, calculators and the glossary");
   await ev(`document.querySelector('#smdOphthalmos .ln-home [data-act=read]').click(); return 1;`);
   ok(await until(`return OPHTHALMOS._st.view === "notes" && document.querySelectorAll('#smdOphthalmos [data-act=note]').length === 30;`, 15000), "notes list opens with 30 notes");

@@ -1,0 +1,248 @@
+{
+  "id": "peds-rop-what",
+  "unit": "peds",
+  "level": "mbbs",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "ROP: what it is and why",
+    "hi": "ROP: यह क्या है और क्यों होता है"
+  },
+  "idea": {
+    "en": "The retina of a [[preterm]] is not finished. Its vessels stop short of the edge. In [[rop]], abnormal vessels grow at that border and can pull the retina off.",
+    "hi": "[[preterm]] में रेटिना अधूरा होता है। उसकी खून की नलियाँ किनारे तक नहीं पहुँचतीं। [[rop]] में उस सीमा पर असामान्य नलियाँ उगती हैं और रेटिना को खींचकर उखाड़ सकती हैं।"
+  },
+  "see": {
+    "img": "rop/282_2021-07-08_L_13.webp",
+    "deckItem": {
+      "deck": "rop",
+      "id": "282_2021-07-08_L_13"
+    },
+    "expect": "s3",
+    "alt": {
+      "en": "Wide-field photo of a preterm baby's left eye. The optic disc is near the top. Thin red vessels run down from it and stop at a pale curved line near the bottom. Below the line, the retina is grey and has no vessels.",
+      "hi": "समय से पहले जन्मे बच्चे की बाईं आँख की चौड़ी फ़ोटो। ऑप्टिक डिस्क ऊपर के पास है। पतली लाल नलियाँ इससे नीचे जाती हैं और नीचे के पास एक हल्की मुड़ी रेखा पर रुक जाती हैं। रेखा के नीचे रेटिना धूसर है और उसमें नलियाँ नहीं हैं।"
+    },
+    "caption": {
+      "en": "A real photo of a baby born at 24 weeks, weighing 600 g, graded stage 3 ROP. Vessels stop at a ridge, with bare retina beyond it.",
+      "hi": "24 हफ़्ते पर 600 ग्राम वज़न के साथ जन्मे बच्चे की असली फ़ोटो, ग्रेड: स्टेज 3 ROP। नलियाँ एक उभार (ridge) पर रुकती हैं, और उसके आगे रेटिना खाली है।"
+    },
+    "credit": "ROP-VL, CC BY 4.0. ROP-VL open dataset, figshare 30143461.",
+    "hotspots": [
+      {
+        "x": 0.464,
+        "y": 0.1,
+        "label": {
+          "en": "Optic disc",
+          "hi": "ऑप्टिक डिस्क"
+        },
+        "note": {
+          "en": "Retinal vessels start here. Before birth, they grow outward from the disc toward the edge.",
+          "hi": "रेटिना की नलियाँ यहीं से शुरू होती हैं। जन्म से पहले ये डिस्क से किनारे की ओर बढ़ती हैं।"
+        }
+      },
+      {
+        "x": 0.43,
+        "y": 0.29,
+        "label": {
+          "en": "Retinal vessels",
+          "hi": "रेटिना की नलियाँ"
+        },
+        "note": {
+          "en": "Thin vessels spread down toward the edge. They have not reached it yet.",
+          "hi": "पतली नलियाँ नीचे किनारे की ओर फैलती हैं। वे अभी वहाँ तक नहीं पहुँचीं।"
+        }
+      },
+      {
+        "x": 0.52,
+        "y": 0.785,
+        "label": {
+          "en": "The border (ridge)",
+          "hi": "सीमा (ridge)"
+        },
+        "note": {
+          "en": "Vessels stop at this pale line. In stage 3, new vessels grow out of the ridge into the jelly.",
+          "hi": "नलियाँ इस हल्की रेखा पर रुक जाती हैं। स्टेज 3 में इस उभार से नई नलियाँ जेली में उगती हैं।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.9,
+        "label": {
+          "en": "Retina with no vessels",
+          "hi": "बिना नलियों का रेटिना"
+        },
+        "note": {
+          "en": "This part has no blood supply yet. As it grows, it runs short of oxygen and sends out VEGF.",
+          "hi": "इस हिस्से में अभी खून नहीं पहुँचता। बढ़ते हुए इसे ऑक्सीजन कम पड़ती है और यह VEGF छोड़ता है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Retinal vessels grow from the [[optic-disc]] out to the edge. They reach it only near the due date.",
+        "hi": "रेटिना की नलियाँ [[optic-disc]] से किनारे की ओर बढ़ती हैं। वे पूरे समय के आसपास ही वहाँ पहुँचती हैं।"
+      },
+      {
+        "en": "So a baby born early has a retina with no vessels at its edge.",
+        "hi": "इसलिए समय से पहले जन्मे बच्चे के रेटिना के किनारे पर नलियाँ नहीं होतीं।"
+      },
+      {
+        "en": "After birth, extra oxygen and other changes stop normal vessel growth for a while.",
+        "hi": "जन्म के बाद ज़्यादा ऑक्सीजन और दूसरे बदलाव कुछ समय के लिए सामान्य नलियों का बढ़ना रोक देते हैं।"
+      },
+      {
+        "en": "Later, the bare edge of the retina runs short of oxygen. It releases [[vegf]].",
+        "hi": "बाद में रेटिना के खाली किनारे को ऑक्सीजन कम पड़ती है। वह [[vegf]] छोड़ता है।"
+      },
+      {
+        "en": "VEGF makes [[new-vessels]] grow at the border, into the vitreous jelly. Scar tissue can then pull the retina off.",
+        "hi": "VEGF सीमा पर विट्रियस जेली में [[new-vessels]] उगाता है। फिर दाग़ वाला ऊतक रेटिना को खींचकर उखाड़ सकता है।"
+      },
+      {
+        "en": "This [[retinal-detachment]] can blind the child. Timely [[screening]] and treatment prevent most of this blindness.",
+        "hi": "यह [[retinal-detachment]] बच्चे को अंधा कर सकता है। समय पर [[screening]] और इलाज इस अंधेपन का ज़्यादातर हिस्सा रोक देते हैं।"
+      }
+    ],
+    "analogy": {
+      "en": "Think of a garden hose that has not yet reached the far flower bed. The dry bed calls for water. Weak, leaky pipes then sprout at the end of the hose. They do more harm than good.",
+      "hi": "सोचिए बगीचे का पाइप अभी दूर वाली क्यारी तक नहीं पहुँचा। सूखी क्यारी पानी माँगती है। तब पाइप के सिरे पर कमज़ोर, रिसने वाली नलियाँ निकल आती हैं। वे फ़ायदे से ज़्यादा नुकसान करती हैं।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Risk is highest in the babies born earliest and smallest.",
+      "hi": "सबसे पहले और सबसे कम वज़न पर जन्मे बच्चों में ख़तरा सबसे ज़्यादा है।"
+    },
+    {
+      "en": "Oxygen without close monitoring, infection and poor weight gain raise the risk further.",
+      "hi": "बिना ध्यान से निगरानी के ऑक्सीजन, संक्रमण और वज़न कम बढ़ना ख़तरा और बढ़ाते हैं।"
+    },
+    {
+      "en": "Early ROP has no outside signs. The eye looks normal, so only an eye exam finds it.",
+      "hi": "शुरुआती ROP का बाहर कोई संकेत नहीं होता। आँख सामान्य दिखती है, इसलिए सिर्फ़ आँख की जाँच से पता चलता है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Give oxygen only as needed, with the target levels set by the newborn care team.",
+      "hi": "ऑक्सीजन सिर्फ़ ज़रूरत भर दें, नवजात देखभाल टीम के तय किए स्तर के अनुसार।"
+    },
+    {
+      "en": "Make sure every at-risk baby gets its screening eye exam on time.",
+      "hi": "पक्का करें कि हर जोखिम वाले बच्चे की आँख की जाँच समय पर हो।"
+    },
+    {
+      "en": "Most ROP settles by itself. Severe disease is treated with laser or [[anti-vegf]].",
+      "hi": "ज़्यादातर ROP अपने आप ठीक हो जाता है। गंभीर बीमारी का इलाज लेज़र या [[anti-vegf]] से होता है।"
+    }
+  ],
+  "remember": {
+    "en": "ROP grows at the border of an unfinished retina. Oxygen and VEGF drive bad vessels, and timely screening prevents blindness.",
+    "hi": "ROP अधूरे रेटिना की सीमा पर बढ़ता है। ऑक्सीजन और VEGF खराब नलियाँ उगाते हैं, और समय पर जाँच अंधेपन को रोकती है।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Why does ROP happen only in babies born early?",
+        "hi": "ROP सिर्फ़ समय से पहले जन्मे बच्चों में क्यों होता है?"
+      },
+      "o": [
+        {
+          "en": "Their retina has no vessels at the edge yet",
+          "hi": "उनके रेटिना के किनारे पर अभी नलियाँ नहीं होतीं"
+        },
+        {
+          "en": "Their cornea is cloudy",
+          "hi": "उनका कॉर्निया धुंधला होता है"
+        },
+        {
+          "en": "They cannot close their eyes",
+          "hi": "वे आँखें बंद नहीं कर पाते"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Retinal vessels reach the edge only near the due date. The bare edge is where ROP starts.",
+        "hi": "रेटिना की नलियाँ पूरे समय के आसपास ही किनारे तक पहुँचती हैं। खाली किनारे पर ही ROP शुरू होता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which signal from the oxygen-starved retina drives the abnormal vessels?",
+        "hi": "ऑक्सीजन की कमी वाले रेटिना का कौन सा संकेत असामान्य नलियाँ उगाता है?"
+      },
+      "o": [
+        {
+          "en": "Insulin",
+          "hi": "इंसुलिन"
+        },
+        {
+          "en": "VEGF",
+          "hi": "वीईजीएफ़ (VEGF)"
+        },
+        {
+          "en": "Adrenaline",
+          "hi": "एड्रेनालिन"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "VEGF makes new, leaky vessels grow at the border.",
+        "hi": "VEGF सीमा पर नई, रिसने वाली नलियाँ उगाता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "How does ROP blind a child?",
+        "hi": "ROP बच्चे को अंधा कैसे करता है?"
+      },
+      "o": [
+        {
+          "en": "Scar tissue pulls the retina off",
+          "hi": "दाग़ वाला ऊतक रेटिना को खींचकर उखाड़ देता है"
+        },
+        {
+          "en": "It dries the cornea",
+          "hi": "यह कॉर्निया को सुखा देता है"
+        },
+        {
+          "en": "It weakens the eye muscles",
+          "hi": "यह आँख की माँसपेशियों को कमज़ोर करता है"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "New vessels and scar tissue grow into the jelly. They can pull the retina away, which is stage 4 or 5.",
+        "hi": "नई नलियाँ और दाग़ वाला ऊतक जेली में बढ़ते हैं। वे रेटिना को खींचकर उखाड़ सकते हैं, जो स्टेज 4 या 5 है।"
+      }
+    }
+  ],
+  "test": {
+    "clinic": "rop",
+    "classes": [
+      "s2",
+      "s3"
+    ],
+    "mcqTopic": "peds"
+  },
+  "deeper": {
+    "note": "rop-classify"
+  },
+  "glossary": [
+    "preterm",
+    "rop",
+    "optic-disc",
+    "vegf",
+    "new-vessels",
+    "retinal-detachment",
+    "screening",
+    "anti-vegf"
+  ],
+  "sources": [
+    "Hellström A, Smith LE, Dammann O. Retinopathy of prematurity. Lancet 2013;382(9902):1445-1457. doi:10.1016/S0140-6736(13)60178-6",
+    "Chiang MF, Quinn GE, Fielder AR, et al. International Classification of Retinopathy of Prematurity, Third Edition. Ophthalmology 2021;128(10):e51-e68. doi:10.1016/j.ophtha.2021.05.031"
+  ]
+}

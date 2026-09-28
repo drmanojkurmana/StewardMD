@@ -1,0 +1,265 @@
+{
+  "id": "pg-keratitis-workup",
+  "unit": "cornea-pg",
+  "level": "resident",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Microbial keratitis: the work-up",
+    "hi": "माइक्रोबियल केराटाइटिस: जाँच कैसे करें"
+  },
+  "idea": {
+    "en": "A painful red eye with a white spot on the cornea is [[keratitis]] until proven otherwise. Take the history, read the ulcer, scrape when the rules say so, and treat the same day.",
+    "hi": "दर्द वाली लाल आँख में कॉर्निया पर सफ़ेद धब्बा हो, तो जब तक उल्टा साबित न हो, उसे [[keratitis]] मानें। इतिहास लें, अल्सर को पढ़ें, नियम कहें तो स्क्रैपिंग करें, और उसी दिन इलाज शुरू करें।"
+  },
+  "see": {
+    "img": "cases/5.webp",
+    "deckItem": {
+      "deck": "cases",
+      "id": "5"
+    },
+    "expect": "corneal ulcer",
+    "alt": {
+      "en": "Slit-lamp photo of a very red, swollen eye. The cornea is hazy. A dense white patch fills the lower middle of the cornea, and a smaller white patch sits to its right.",
+      "hi": "बहुत लाल, सूजी आँख की स्लिट लैंप फ़ोटो। कॉर्निया धुंधला है। कॉर्निया के निचले बीच वाले हिस्से में घना सफ़ेद धब्बा है, और उसके दाईं ओर एक छोटा सफ़ेद धब्बा है।"
+    },
+    "caption": {
+      "en": "A real slit-lamp photo: severe keratitis with a corneal ulcer.",
+      "hi": "एक असली स्लिट लैंप फ़ोटो: कॉर्निया के अल्सर (corneal ulcer) के साथ गंभीर केराटाइटिस।"
+    },
+    "credit": "OphthalVQA, CC BY 4.0. Xu P, et al. Br J Ophthalmol 2024.",
+    "hotspots": [
+      {
+        "x": 0.35,
+        "y": 0.59,
+        "label": {
+          "en": "Dense white infiltrate",
+          "hi": "घना सफ़ेद इन्फ़िल्ट्रेट"
+        },
+        "note": {
+          "en": "The ulcer bed. It is large and close to the centre, so scrape it before treatment.",
+          "hi": "यह अल्सर की जगह है। यह बड़ा है और बीच के पास है, इसलिए इलाज से पहले स्क्रैपिंग करें।"
+        }
+      },
+      {
+        "x": 0.66,
+        "y": 0.54,
+        "label": {
+          "en": "A second white patch",
+          "hi": "दूसरा सफ़ेद धब्बा"
+        },
+        "note": {
+          "en": "A separate lesion. More than one infiltrate is another reason to take smears and cultures.",
+          "hi": "एक अलग घाव। एक से ज़्यादा इन्फ़िल्ट्रेट होना भी स्मीयर और कल्चर भेजने का कारण है।"
+        }
+      },
+      {
+        "x": 0.33,
+        "y": 0.4,
+        "label": {
+          "en": "Hazy cornea",
+          "hi": "धुंधला कॉर्निया"
+        },
+        "note": {
+          "en": "The cornea is swollen and grey, so the iris looks dim behind it.",
+          "hi": "कॉर्निया सूजा और भूरा है, इसलिए पीछे आइरिस धुंधली दिखती है।"
+        }
+      },
+      {
+        "x": 0.1,
+        "y": 0.55,
+        "label": {
+          "en": "Intense redness",
+          "hi": "बहुत ज़्यादा लाली"
+        },
+        "note": {
+          "en": "The whole conjunctiva is red. A quiet white eye would argue against infection.",
+          "hi": "पूरा कंजंक्टाइवा लाल है। शांत सफ़ेद आँख संक्रमण के ख़िलाफ़ इशारा करती।"
+        }
+      },
+      {
+        "x": 0.62,
+        "y": 0.9,
+        "label": {
+          "en": "Swollen conjunctiva",
+          "hi": "सूजा कंजंक्टाइवा"
+        },
+        "note": {
+          "en": "The lower conjunctiva bulges and shines. This is chemosis from severe inflammation.",
+          "hi": "निचला कंजंक्टाइवा फूला और चमकदार है। यह तेज़ सूजन से होने वाला केमोसिस है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Most infections need a break in the corneal surface. Contact lenses, injury and a poor eye surface open that door.",
+        "hi": "ज़्यादातर संक्रमण के लिए कॉर्निया की सतह में दरार चाहिए। कॉन्टैक्ट लेंस, चोट और कमज़ोर आँख की सतह यह दरवाज़ा खोलते हैं।"
+      },
+      {
+        "en": "Ask about lens wear and water on lenses. Ask about injury with plant matter, past herpes, eye surgery and steroid drops.",
+        "hi": "लेंस पहनने और लेंस पर पानी लगने के बारे में पूछें। पौधे या लकड़ी से चोट, पहले हर्पीज़, आँख के ऑपरेशन और स्टेरॉयड ड्रॉप्स के बारे में पूछें।"
+      },
+      {
+        "en": "Bacterial ulcers grow fast. They show a dense white infiltrate, a surface defect, discharge and often a [[hypopyon]].",
+        "hi": "बैक्टीरिया वाले अल्सर तेज़ी से बढ़ते हैं। इनमें घना सफ़ेद इन्फ़िल्ट्रेट, सतह पर घाव, स्राव और अक्सर [[hypopyon]] दिखता है।"
+      },
+      {
+        "en": "Fungal ulcers often follow plant injury. They look dry, grey and raised, with feathery edges and small satellite spots.",
+        "hi": "फफूंद वाले अल्सर अक्सर पौधे से चोट के बाद होते हैं। ये सूखे, भूरे और उभरे दिखते हैं, पंख जैसे किनारों और आसपास छोटे धब्बों (satellite lesions) के साथ।"
+      },
+      {
+        "en": "[[acanthamoeba]] hurts far more than it looks. Look for a ring infiltrate and swollen corneal nerves in radial lines.",
+        "hi": "[[acanthamoeba]] में दर्द दिखने से कहीं ज़्यादा होता है। छल्ले जैसा इन्फ़िल्ट्रेट और कॉर्निया की सूजी नसें (radial perineuritis) देखें।"
+      },
+      {
+        "en": "The AAO advises smears and cultures before treatment for some ulcers. These are ulcers 2 mm or larger within 3 mm of the centre.",
+        "hi": "AAO कुछ अल्सर में इलाज से पहले स्मीयर और कल्चर की सलाह देता है। ये वे अल्सर हैं जो 2 mm या बड़े हों और बीच से 3 mm के अंदर हों।"
+      },
+      {
+        "en": "Also scrape if there are 1+ cells in the front chamber, deep melting, several lesions, past surgery or atypical signs. This echoes the '1, 2, 3' rule.",
+        "hi": "आगे के कक्ष में 1+ कोशिकाएँ, गहरा गलना, कई घाव, पहले ऑपरेशन या असामान्य लक्षण हों तो भी स्क्रैपिंग करें। यही '1, 2, 3' नियम है।"
+      }
+    ],
+    "analogy": {
+      "en": "Treat it like a crime scene. Collect the evidence (the scrape) before you clean up (the drops), or the culprit gets harder to find.",
+      "hi": "इसे अपराध की जगह की तरह देखें। सफ़ाई (ड्रॉप्स) से पहले सबूत (स्क्रैपिंग) इकट्ठा करें, वरना अपराधी को ढूँढना मुश्किल हो जाता है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Stain with [[fluorescein]]. Measure the surface defect and the infiltrate in two directions, and note depth and thinning.",
+      "hi": "[[fluorescein]] से रंगें। सतह के घाव और इन्फ़िल्ट्रेट को दो दिशाओं में नापें, और गहराई और पतलापन लिखें।"
+    },
+    {
+      "en": "Check the front chamber for cells and a hypopyon. Record vision and draw the ulcer at every visit.",
+      "hi": "आगे के कक्ष में कोशिकाएँ और हाइपोपियन देखें। हर बार नज़र लिखें और अल्सर का चित्र बनाएँ।"
+    },
+    {
+      "en": "Feathery edges and satellites point to fungus. Severe pain in a lens wearer points to Acanthamoeba.",
+      "hi": "पंख जैसे किनारे और आसपास के धब्बे फफूंद की ओर इशारा करते हैं। लेंस पहनने वाले में बहुत तेज़ दर्द एकैंथअमीबा की ओर इशारा करता है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Scrape with a sterile blade or needle. Send Gram and KOH smears and cultures, and special media if the picture is atypical.",
+      "hi": "जीवाणु-रहित ब्लेड या सुई से स्क्रैपिंग करें। ग्राम और KOH स्मीयर और कल्चर भेजें, और तस्वीर असामान्य हो तो ख़ास मीडिया भी।"
+    },
+    {
+      "en": "Start intensive broad-spectrum topical treatment the same day, by local protocol. Do not wait for the culture result.",
+      "hi": "स्थानीय प्रोटोकॉल के हिसाब से उसी दिन तेज़, व्यापक असर वाला (broad-spectrum) ड्रॉप इलाज शुरू करें। कल्चर की रिपोर्ट का इंतज़ार न करें।"
+    },
+    {
+      "en": "Stop lens wear, and send the lenses and case for culture. Avoid steroid mixtures in an undiagnosed [[corneal-ulcer]].",
+      "hi": "लेंस पहनना बंद कराएँ, और लेंस और केस कल्चर के लिए भेजें। बिना पहचाने [[corneal-ulcer]] में स्टेरॉयड वाली मिली-जुली दवा न दें।"
+    },
+    {
+      "en": "See severe ulcers daily at first, until they are stable or better. Send thinning or perforation to a cornea surgeon.",
+      "hi": "गंभीर अल्सर को शुरू में रोज़ देखें, जब तक वह स्थिर या बेहतर न हो। पतला होना या छेद हो तो कॉर्निया सर्जन के पास भेजें।"
+    }
+  ],
+  "remember": {
+    "en": "Read the ulcer. Scrape the big central ones before the first drop, treat the same day, and see severe ulcers daily.",
+    "hi": "अल्सर को पढ़ें। बड़े, बीच वाले अल्सर में पहली बूँद से पहले स्क्रैपिंग करें, उसी दिन इलाज करें, और गंभीर अल्सर को रोज़ देखें।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which ulcer needs smears and cultures before treatment?",
+        "hi": "किस अल्सर में इलाज से पहले स्मीयर और कल्चर चाहिए?"
+      },
+      "o": [
+        {
+          "en": "A 1 mm peripheral ulcer with a quiet chamber",
+          "hi": "शांत कक्ष के साथ किनारे पर 1 mm का अल्सर"
+        },
+        {
+          "en": "A 3 mm ulcer 2 mm from the centre",
+          "hi": "बीच से 2 mm दूर 3 mm का अल्सर"
+        },
+        {
+          "en": "A healed scar with no stain",
+          "hi": "बिना रंग पकड़े भरा हुआ दाग़"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "It is 2 mm or larger and within 3 mm of the centre. That makes it sight threatening.",
+        "hi": "यह 2 mm या बड़ा है और बीच से 3 mm के अंदर है। इसलिए इससे नज़र को ख़तरा है।"
+      }
+    },
+    {
+      "q": {
+        "en": "A farmer has a dry, grey, raised ulcer with feathery edges after a leaf scratch. The likely cause?",
+        "hi": "पत्ते की खरोंच के बाद एक किसान में सूखा, भूरा, उभरा, पंख जैसे किनारों वाला अल्सर है। संभावित कारण?"
+      },
+      "o": [
+        {
+          "en": "Bacteria",
+          "hi": "बैक्टीरिया"
+        },
+        {
+          "en": "Fungus",
+          "hi": "फफूंद"
+        },
+        {
+          "en": "Acanthamoeba",
+          "hi": "एकैंथअमीबा"
+        },
+        {
+          "en": "Herpes simplex",
+          "hi": "हर्पीज़ सिम्प्लेक्स"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Plant injury with feathery edges and a dry raised look is the classic fungal picture.",
+        "hi": "पौधे से चोट, पंख जैसे किनारे और सूखा उभरा रूप फफूंद की आम पहचान है।"
+      }
+    },
+    {
+      "q": {
+        "en": "How often should a severe ulcer be seen at first?",
+        "hi": "गंभीर अल्सर को शुरू में कितनी बार देखें?"
+      },
+      "o": [
+        {
+          "en": "Daily",
+          "hi": "रोज़"
+        },
+        {
+          "en": "Weekly",
+          "hi": "हर हफ़्ते"
+        },
+        {
+          "en": "Only when cultures return",
+          "hi": "सिर्फ़ कल्चर की रिपोर्ट आने पर"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Severe ulcers can melt within a day. Daily review lets you change course early.",
+        "hi": "गंभीर अल्सर एक दिन में गल सकता है। रोज़ देखने से आप जल्दी इलाज बदल सकते हैं।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "cornea"
+  },
+  "deeper": {
+    "note": "keratitis"
+  },
+  "glossary": [
+    "keratitis",
+    "hypopyon",
+    "acanthamoeba",
+    "fluorescein",
+    "corneal-ulcer"
+  ],
+  "sources": [
+    "Rhee MK, Ahmad S, Amescua G, et al; American Academy of Ophthalmology Preferred Practice Pattern Cornea/External Disease Panel. Bacterial Keratitis Preferred Practice Pattern. Ophthalmology 2024;131(4):P87-P133.",
+    "Vital MC, Belloso M, Prager TC, Lanier JD. Classifying the severity of corneal ulcers by using the \"1, 2, 3\" rule. Cornea 2007;26(1):16-20.",
+    "Xu P, Chen X, Zhao Z, Shi D. Unveiling the clinical incapabilities: a benchmarking study of GPT-4V(ision) for ophthalmic multimodal image analysis. Br J Ophthalmol 2024. doi:10.1136/bjo-2023-325054"
+  ]
+}

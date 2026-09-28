@@ -10616,3 +10616,17 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   Resident lessons Pro with one trial (`learn.resident`); Resident question-bank sets gated by trial feature
   `mcq.resident`; primary button fill `--op-pri-fill #1d6ed4` (white text 4.96:1, was 2.82:1); back buttons
   say where they go ("Back to lesson"). Lesson content is ai_drafted, pending ophthalmologist sign-off.
+
+## 2026-09-28 - Ophthalmós Learn loads lessons on open, from a generated index
+- **Context**: the Learn units (module repo PR #23, integrating #18 to #22) take Learn from 14 to 107 lessons.
+  The engine fetched every lesson file when Ophthalmós opened: 1.56 MB and 107 requests before the Learn home
+  could render, on a phone, every open.
+- **Decision**: `ophthalmos/learn/index.json` carries a summary per lesson (title, minutes, idea, picture, clinic
+  and classes), generated from the lesson files by the module repo's `dev/learn-index.mjs`; the Learn home,
+  Today's plan, "Learn this" and Revise titles render from it. A lesson file is fetched when it is opened,
+  with a loading line and Try again on failure, and cached in memory. Opening fetches index.json (102 KB,
+  24 KB gzipped) and no lesson file.
+- **Why not the alternatives**: keeping eager loading scales linearly with content; hand-maintained titles in
+  the index drift, so the module's content test fails whenever the index is out of step with the lessons.
+- **Verified**: module repo headless UI step (no lesson request on open; one fetch per lesson; failure path),
+  and StewardMD `test/run-ophthalmos-10x-ui.mjs` in the real app.
