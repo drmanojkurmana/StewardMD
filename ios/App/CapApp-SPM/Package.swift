@@ -4,7 +4,7 @@ import PackageDescription
 // DO NOT MODIFY THIS FILE - managed by Capacitor CLI commands
 let package = Package(
     name: "CapApp-SPM",
-    platforms: [.iOS(.v16)],
+    platforms: [.iOS(.v17)],
     products: [
         .library(
             name: "CapApp-SPM",
@@ -37,6 +37,7 @@ let package = Package(
         .package(name: "StewardmdCapacitorFundxDepth", path: "../../../local-plugins/capacitor-fundx-depth"),
         .package(name: "StewardmdCapacitorIap", path: "../../../local-plugins/capacitor-iap"),
         .package(name: "StewardmdCapacitorLlama", path: "../../../local-plugins/capacitor-llama"),
+        .package(name: "StewardmdCapacitorMlx", path: "../../../local-plugins/capacitor-mlx"),
         .package(name: "StewardmdCapacitorSknxVision", path: "../../../local-plugins/capacitor-sknx-vision"),
         .package(name: "StewardmdCapacitorVisionOcr", path: "../../../local-plugins/capacitor-vision-ocr"),
         .package(name: "StewardmdCapacitorWatchBridge", path: "../../../local-plugins/capacitor-watch-bridge"),
@@ -74,6 +75,7 @@ let package = Package(
                 .product(name: "StewardmdCapacitorFundxDepth", package: "StewardmdCapacitorFundxDepth"),
                 .product(name: "StewardmdCapacitorIap", package: "StewardmdCapacitorIap"),
                 .product(name: "StewardmdCapacitorLlama", package: "StewardmdCapacitorLlama"),
+                .product(name: "StewardmdCapacitorMlx", package: "StewardmdCapacitorMlx"),
                 .product(name: "StewardmdCapacitorSknxVision", package: "StewardmdCapacitorSknxVision"),
                 .product(name: "StewardmdCapacitorVisionOcr", package: "StewardmdCapacitorVisionOcr"),
                 .product(name: "StewardmdCapacitorWatchBridge", package: "StewardmdCapacitorWatchBridge"),

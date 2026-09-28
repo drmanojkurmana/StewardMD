@@ -138,6 +138,26 @@
    * (different backbone vocabularies) carry none. */
   var DRAFT_GEMMA3 = { name: "gemma-3-270m-it-Q8_0.gguf", url: HF + "/unsloth/gemma-3-270m-it-GGUF/resolve/main/gemma-3-270m-it-Q8_0.gguf?download=true", bytes: 291546144 };
   var DRAFT_QWEN3 = { name: "Qwen3-0.6B-Q8_0.gguf", url: HF + "/Qwen/Qwen3-0.6B-GGUF/resolve/main/Qwen3-0.6B-Q8_0.gguf?download=true", bytes: 639446688 };
+
+  /* MLX ON iPHONE (owner, 2026-09-28: "ios version have MLX and android have existing one"). Flag
+   * smd_maik_mlx, default OFF; iOS only; needs the separate capacitor-mlx plugin linked (it is not,
+   * until the owner raises the app to iOS 17 - MLX will not build below it). See
+   * docs/MAIK_MLX_SPIKE.md and vault/decisions/Decisions.md 2026-09-28.
+   *
+   * An MLX model is a DIRECTORY (weights + config + tokenizer), while the native downloader moves one
+   * file per pack. So each file is its own one-file sub-pack "<id>#mlx:<file>", stored flat as
+   * "<prefix>--<file>", and the capacitor-mlx plugin links them back into a directory at load. The
+   * pack's GGUF stays the fallback: MLX is used only when every file below is verified on disk, and
+   * any MLX load failure answers on llama.cpp instead (maik-local.js).
+   *
+   * URLs are pinned to a Hugging Face COMMIT, not "main", so a file can never change under its hash.
+   * Weights sha256 = the HF lfs oid; every small file was downloaded at that commit and hashed
+   * (2026-09-28). tokenizer.json's own hash matched its lfs oid, which checks the method.
+   * Only MAiK Prime has an MLX build: the 8.62 GB MAiK Max 2 one was dropped by the owner. */
+  var MLX_TB8 = HF + "/prism-ml/Ternary-Bonsai-8B-mlx-2bit/resolve/9260b24298e4211e804663e9f519962cf59f34be/";
+  function mlxF(base, prefix, file, bytes, sha) {
+    return { file: file, name: prefix + "--" + file, url: base + file + "?download=true", bytes: bytes, sha256: sha };
+  }
   var PACKS = {
     /* FLAGSHIP: StewardMD's OWN model (weights replaced 2026-08-31; the pack previously pointed at
      * the upstream MedPsy 1.7B base). This is our LoRA fine-tune of that base, trained on the
@@ -355,7 +375,17 @@
         url: HF + "/prism-ml/Ternary-Bonsai-8B-gguf/resolve/main/Ternary-Bonsai-8B-Q2_0_g64.gguf?download=true",
         bytes: 2310125920,   // exact: HF API size
         sha256: "e17b298d84ee78797916ae5c2ecc8211469cc65cccfe3080cd9a9bb503fbc55e"   // lfs.oid from the HF API
-      }]
+      }],
+      /* MLX build for iPhone (flag smd_maik_mlx): same Ternary Bonsai 8B weights, MLX affine 2-bit
+       * g128, stock "qwen3" model type, so the ordinary MLX loader runs it. 2.32 GB in all. */
+      mlx: [
+        mlxF(MLX_TB8, "tb8-mlx", "config.json", 3118, "c9a8bbb4b2b682d0e2d2bf4f537d699e1a569d757b2918c480e82a0c77b060ba"),
+        mlxF(MLX_TB8, "tb8-mlx", "tokenizer.json", 11422650, "be75606093db2094d7cd20f3c2f385c212750648bd6ea4fb2bf507a6a4c55506"),
+        mlxF(MLX_TB8, "tb8-mlx", "tokenizer_config.json", 348, "579073f506a3f85caed232bb91617cfb93028408d1f43ffaf66f3fc1aee9a9af"),
+        mlxF(MLX_TB8, "tb8-mlx", "chat_template.jinja", 4063, "30a75d10e60b57e2f260420163dd59720dacf9f63b9a8de070d65dd80a7b30f7"),
+        mlxF(MLX_TB8, "tb8-mlx", "model.safetensors.index.json", 64065, "178ab2bf39b603d669f730e569045e69886e117a392f4c75cd148f1733add0b4"),
+        mlxF(MLX_TB8, "tb8-mlx", "model.safetensors", 2303661704, "f43270cbae86830b7eecb25bb8a0a0a005a81f180b68868dc39c755cebfff362")
+      ]
     },
     "bonsai-8b": {
       // LABS (audit T27, 2026-09-25): still downloadable, shown under the picker's collapsed "Labs"
@@ -415,6 +445,8 @@
         bytes: 5946648928,   // exact: HF API size
         sha256: "53107f530aa52eb00912263ab1ee29bd199261c87cd7b4ad4ca1318c1fe33ee3"   // lfs.oid from the HF API
       }]
+      // No MLX build (owner, 2026-09-28: "Ignore 8gb model"). Its MLX pack is 8.62 GB against 5.95 GB
+      // for this GGUF and needs the Layr-Labs Hadamard runtime; MAiK Max 2 stays on llama.cpp.
     },
     "bonsai-27b": {
       // LABS (audit T27, 2026-09-25): still downloadable, shown under the picker's collapsed "Labs"
@@ -703,9 +735,12 @@
    * on it unchanged, because as far as those are concerned it is just another pack with one file.
    */
   var VISION_SUFFIX = "#vision", DRAFT_SUFFIX = "#draft";   // the speed draft rides the same sub-pack machinery
+  var MLX_MARK = "#mlx:";   // "<id>#mlx:<file>": one file of the pack's MLX build (see MLX_TB8 above)
   function isVisionId(id) { return String(id || "").slice(-VISION_SUFFIX.length) === VISION_SUFFIX; }
   function isDraftId(id) { return String(id || "").slice(-DRAFT_SUFFIX.length) === DRAFT_SUFFIX; }
+  function isMlxId(id) { return String(id || "").indexOf(MLX_MARK) > 0; }
   function baseIdOf(id) {
+    if (isMlxId(id)) return String(id).slice(0, String(id).indexOf(MLX_MARK));
     if (isVisionId(id)) return String(id).slice(0, -VISION_SUFFIX.length);
     if (isDraftId(id)) return String(id).slice(0, -DRAFT_SUFFIX.length);
     return String(id);
@@ -734,6 +769,65 @@
   }
   function hasDraft(id) { return !!draftFile(id); }
 
+  /* ── MLX build (iOS only, flag smd_maik_mlx, default OFF) ──
+   * mlxEnabled() is the one switch: the flag AND an iOS device. Android never takes this path; it
+   * keeps llama.cpp. Everything below is inert while it is false: no row, no download, no load. */
+  var MLX_FLAG = "smd_maik_mlx";
+  function mlxEnabled() { return lget(MLX_FLAG) === "1" && platformName() === "ios"; }
+  /** Can this device run MLX at all: an iPhone whose build links capacitor-mlx. Offers the Labs switch. */
+  function mlxAvailable() {
+    try { var c = cap(); return platformName() === "ios" && !!(c && c.Plugins && c.Plugins.Mlx); } catch (e) { return false; }
+  }
+  /** The Labs switch. Off leaves any downloaded MLX files in place (Remove deletes them). */
+  function setMlxEnabled(on) { if (on) lset(MLX_FLAG, "1"); else lrem(MLX_FLAG); return mlxEnabled(); }
+  function mlxFiles(id) { var p = PACKS[baseIdOf(id)]; return (p && p.mlx) || []; }
+  function hasMlx(id) { return mlxFiles(id).length > 0; }
+  /** One sub-pack id per MLX file, weights LAST so the small files are in place before the long one. */
+  function mlxIdsOf(id) {
+    var base = baseIdOf(id);
+    return mlxFiles(base).slice().sort(function (a, b) { return (a.bytes || 0) - (b.bytes || 0); })
+      .map(function (f) { return base + MLX_MARK + f.file; });
+  }
+  /** The weights sub-pack: the one that takes the time, so the UI shows its progress. */
+  function mlxMainIdOf(id) { var ids = mlxIdsOf(id); return ids.length ? ids[ids.length - 1] : ""; }
+  function mlxBytes(id) { return mlxFiles(id).reduce(function (s, f) { return s + (f.bytes || 0); }, 0); }
+  function mlxInstalledCached(id) {
+    var ids = mlxIdsOf(id);
+    return ids.length > 0 && ids.every(function (s) { return installedCached(s); });
+  }
+  /** MLX answers for this pack only when the flag is on, on iOS, and every file is verified on disk. */
+  function mlxReady(id) { return mlxEnabled() && hasMlx(id) && mlxInstalledCached(id); }
+  /** Download every missing MLX file, one after another through the ordinary queue. */
+  var _mlxBusy = {};   // base id -> true while ensureMlx() is walking its files
+  function ensureMlx(id) {
+    var base = baseIdOf(id);
+    if (!hasMlx(base)) return Promise.reject(new Error("no MLX build for: " + id));
+    if (_mlxBusy[base]) return Promise.reject(new Error("already downloading"));
+    _mlxBusy[base] = true;
+    var done = function () { delete _mlxBusy[base]; emit(mlxMainIdOf(base)); };
+    return mlxIdsOf(base).reduce(function (chain, sid) {
+      return chain.then(function () { return installedCached(sid) ? null : ensure(sid, null); });
+    }, Promise.resolve()).then(function () { done(); return { installed: true }; }, function (e) { done(); throw e; });
+  }
+  function mlxBusy(id) { return !!_mlxBusy[baseIdOf(id)]; }
+  function removeMlx(id) {
+    return mlxIdsOf(id).reduce(function (chain, sid) {
+      return chain.then(function () { return remove(sid).catch(function () {}); });
+    }, Promise.resolve());
+  }
+  /** { files: { "config.json": "/abs/path", ... } } for the capacitor-mlx plugin's load(). */
+  function mlxPaths(id) {
+    var base = baseIdOf(id), out = {};
+    return mlxFiles(base).reduce(function (chain, f) {
+      return chain.then(function () {
+        return pathFor(base + MLX_MARK + f.file).then(function (p) {
+          if (!p) throw new Error("MLX file missing: " + f.file);
+          out[f.file] = p;
+        });
+      });
+    }, Promise.resolve()).then(function () { return { files: out }; });
+  }
+
   function pack(id) {
     if (isVisionId(id)) {
       var base = PACKS[baseIdOf(id)], vf = base && base.vision;
@@ -747,6 +841,13 @@
       if (!df) throw new Error("no draft pack for: " + id);
       return { label: baseD.label + " speed draft", actual: df.name + " (speculative-decoding draft)", tier: baseD.tier,
                files: [df], draftOf: baseIdOf(id) };
+    }
+    if (isMlxId(id)) {
+      var baseM = PACKS[baseIdOf(id)], want = String(id).slice(String(id).indexOf(MLX_MARK) + MLX_MARK.length);
+      var mf = baseM && (baseM.mlx || []).filter(function (f) { return f.file === want; })[0];
+      if (!mf) throw new Error("no MLX file for: " + id);
+      return { label: baseM.label + " iPhone engine", actual: baseM.actual + " (MLX " + want + ")", tier: baseM.tier,
+               files: [mf], mlxOf: baseIdOf(id) };
     }
     var p = PACKS[id]; if (!p) throw new Error("unknown pack: " + id); return p;
   }
@@ -803,6 +904,8 @@
     // one, and if it is not adopted here the UI reports it as absent and offers to start a second.
     var ids = Object.keys(PACKS);
     Object.keys(PACKS).forEach(function (b) { if (PACKS[b].vision) ids.push(b + VISION_SUFFIX); });
+    // MLX files too, but only where MLX is on: with the flag off nothing ever started one.
+    if (mlxEnabled()) Object.keys(PACKS).forEach(function (b) { ids = ids.concat(mlxIdsOf(b)); });
     return ids.reduce(function (chain, id) {
       return chain.then(function (found) {
         if (_state[id] && _state[id].downloading) return found;
@@ -1396,6 +1499,10 @@
     PACKS: PACKS, GUIDE_INTRO: GUIDE_INTRO, DEVICE_WARNING: DEVICE_WARNING, DEVICE_SUPPORTED: DEVICE_SUPPORTED,
     hasVision: hasVision, visionFile: visionFile, visionIdOf: visionIdOf, isVisionId: isVisionId, baseIdOf: baseIdOf,
     hasDraft: hasDraft, draftFile: draftFile, draftIdOf: draftIdOf, isDraftId: isDraftId,
+    // MLX build for iPhone (2026-09-28, flag smd_maik_mlx)
+    MLX_FLAG: MLX_FLAG, mlxEnabled: mlxEnabled, mlxAvailable: mlxAvailable, setMlxEnabled: setMlxEnabled, hasMlx: hasMlx, mlxFiles: mlxFiles, mlxIdsOf: mlxIdsOf,
+    mlxMainIdOf: mlxMainIdOf, isMlxId: isMlxId, mlxBytes: mlxBytes, mlxInstalledCached: mlxInstalledCached,
+    mlxReady: mlxReady, ensureMlx: ensureMlx, mlxBusy: mlxBusy, removeMlx: removeMlx, mlxPaths: mlxPaths,
     activeId: activeId, queuedIds: queuedIds, SUBDIR: SUBDIR, CHUNK_BYTES: CHUNK_BYTES, CHUNK_TRIES: CHUNK_TRIES, KEY_ACTIVE: KEY_ACTIVE,
     totalBytes: totalBytes, sizeLabel: sizeLabel,
     installed: installed, installedCached: installedCached,

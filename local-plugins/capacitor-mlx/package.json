@@ -1,0 +1,19 @@
+{
+  "name": "@stewardmd/capacitor-mlx",
+  "version": "0.1.0",
+  "description": "iOS-only MLX engine for MaiK's on-device answers, beside capacitor-llama. Same JS contract as the Llama plugin (load/generate/cancel/release, llamaToken events). The prompt and the answer never leave the device.",
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    }
+  },
+  "files": [
+    "ios/Sources",
+    "Package.swift",
+    "package.json",
+    "README.md"
+  ],
+  "author": "StewardMD",
+  "license": "MIT",
+  "_vendored": "StewardMD-authored local plugin, linked from the root package.json since 2026-09-28 (the app moved to iOS 17, MLX's floor). See Package.swift and docs/MAIK_MLX_SPIKE.md. No Android side: Android keeps capacitor-llama."
+}
