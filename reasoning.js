@@ -3581,6 +3581,7 @@
         '<div class="dx-mgmt-badge">Disease reference · ' + (inf ? "infective" : "non-infective") + '</div>' +
         '<h2 class="dx-mgmt-name">' + esc(name) + '</h2>' +
         (system ? '<div class="dx-mgmt-sys">' + esc(system) + '</div>' : '') + '</section>' +
+        (window.SMD_BULLETINS ? SMD_BULLETINS.html(id) : '') +   // signed practice updates (bulletins.js; flag smd_kb_bulletins, default off)
         '<div class="dx-reader-glance"><h3>At a glance</h3>' +
           (reason ? '<p>' + medFormat(reason) + '</p>' : '') +
           (H && H.redFlags && H.redFlags.length ? '<section class="dx-reader-alert"><h4>Red flags</h4>' + evList(H.redFlags, "danger") + '</section>' : '') +

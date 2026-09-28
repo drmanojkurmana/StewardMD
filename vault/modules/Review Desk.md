@@ -42,6 +42,10 @@ With [[Colleagues]] on, "Send to StewardMD" posts the decisions (`kx_reviews/<ui
 Reg. No. and verified state come from the ID token, not the phone. The owner downloads
 `GET /api/kits/reviews/all` (owner only) and runs `node scripts/apply-reviews.mjs <file>` on it as is.
 
+## Clinical updates tab (2026-09-28)
+A fourth tab, shown only to registered bulletin signers and owners, drawn by `bulletins-desk.js`. It is the
+signing desk for [[Clinical Bulletins]] and, unlike the tabs above, reads and writes the server directly.
+
 Key files: `review-desk.js`, `clinical-docs.css` (styles), `scripts/apply-reviews.mjs`,
 `scripts/check-guideline-updates.mjs`, tests in `test/kit-tools-docs.test.mjs` and
 `test/run-specialty-kits-ui.mjs`.

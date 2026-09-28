@@ -10,6 +10,8 @@
  * changes" feedback to vault/handoff/review-feedback.md. Nothing is uploaded from here (wave 2 syncs it).
  * Decisions are kept on this phone (content ids and comments only, never patient data).
  * Flag: smd_review_desk (default ON, reachable from Home > Add Tool > Review content). Buildless ES5.
+ * A fourth tab, "Clinical updates", appears only for registered bulletin signers and owners; it is drawn by
+ * bulletins-desk.js (SMD_BULLETINS_DESK) and, unlike the tabs above, talks to the server.
  */
 (function (root) {
   "use strict";
@@ -29,7 +31,7 @@
     return { schema: 1, app: "StewardMD review desk", exportedAt: now || new Date().toISOString(), reviewer: { name: reviewer.name || "", regNo: reviewer.regNo || "", speciality: reviewer.speciality || "", verified: !!reviewer.verified }, decisions: list };
   }
 
-  var S = { kind: "protocol", sel: "", items: { protocol: null, kit: null, consent: null }, reviewer: { name: "", regNo: "", speciality: "", verified: false }, q: "" };
+  var S = { deskOn: false, kind: "protocol", sel: "", items: { protocol: null, kit: null, consent: null }, reviewer: { name: "", regNo: "", speciality: "", verified: false }, q: "" };
   function loadItems(kind) {
     if (S.items[kind]) return Promise.resolve(S.items[kind]);
     var p = kind === "protocol" ? (G.SMD_KBPROTO && G.SMD_KBPROTO.loadIndex ? G.SMD_KBPROTO.loadIndex().then(function (idx) { return (idx.protocols || []).map(function (x) { return { id: x.id, title: x.title, sub: (G.SMD_KBPROTO.subjectLabel ? G.SMD_KBPROTO.subjectLabel(x.subject) : x.subject), status: x.status }; }); }) : Promise.resolve([]))
@@ -48,7 +50,12 @@
   function render() {
     var el = D && D.getElementById("smdReview"); if (!el) return;
     var body = el.querySelector(".kit-sheet-body"), top = body.scrollTop, dec = loadDecisions(), n = Object.keys(dec).length, html;
-    var tabs = '<div class="kit-row" role="tablist">' + KINDS.map(function (k) { return '<button type="button" role="tab" class="kit-seg' + (S.kind === k[0] ? " on" : "") + '" data-rv-act="kind:' + k[0] + '" aria-selected="' + (S.kind === k[0]) + '">' + k[1] + "</button>"; }).join("") + "</div>";
+    var kinds = KINDS.concat(S.deskOn ? [["bulletin", "Clinical updates"]] : []);
+    var tabs = '<div class="kit-row" role="tablist">' + kinds.map(function (k) { return '<button type="button" role="tab" class="kit-seg' + (S.kind === k[0] ? " on" : "") + '" data-rv-act="kind:' + k[0] + '" aria-selected="' + (S.kind === k[0]) + '">' + k[1] + "</button>"; }).join("") + "</div>";
+    if (S.kind === "bulletin") {
+      body.innerHTML = '<div class="kit dl">' + (G.SMD_BULLETINS_DESK ? G.SMD_BULLETINS_DESK.html(tabs) : tabs) + "</div>"; body.scrollTop = top;
+      return;
+    }
     var list = S.items[S.kind];
     if (!list) { loadItems(S.kind).then(render); html = tabs + '<p class="kit-muted">Loading…</p>'; }
     else if (S.sel) {
@@ -86,6 +93,7 @@
     }
     el.classList.add("on"); D.documentElement.classList.add("kit-lock");
     if (G.SMD_RX && G.SMD_RX.verifiedInfo) G.SMD_RX.verifiedInfo().then(function (v) { if (v && v.verified && v.regNo) { S.reviewer.regNo = v.regNo; S.reviewer.verified = true; } }, function () {});
+    if (G.SMD_BULLETINS_DESK && !S.deskOn) G.SMD_BULLETINS_DESK.probe().then(function (on) { if (on) { S.deskOn = true; render(); } }, function () {});
     render();
   }
   function close() { var el = D && D.getElementById("smdReview"); if (el) el.classList.remove("on"); if (!(D.getElementById("smdKit") || {}).classList || !D.getElementById("smdKit").classList.contains("on")) D.documentElement.classList.remove("kit-lock"); }
@@ -102,7 +110,7 @@
     var b = e.target && e.target.closest && e.target.closest("[data-rv-act]"); if (!b || !b.closest("#smdReview")) return;
     var act = b.getAttribute("data-rv-act"), i = act.indexOf(":"), cmd = i < 0 ? act : act.slice(0, i), arg = i < 0 ? "" : act.slice(i + 1);
     if (cmd === "close") { close(); return; }
-    if (cmd === "kind") { S.kind = arg; S.sel = ""; render(); return; }
+    if (cmd === "kind") { S.kind = arg; S.sel = ""; if (arg === "bulletin" && G.SMD_BULLETINS_DESK) G.SMD_BULLETINS_DESK.reset(); render(); return; }
     if (cmd === "sel") { S.sel = arg; render(); D.querySelector("#smdReview .kit-sheet-body").scrollTop = 0; return; }
     if (cmd === "back") { S.sel = ""; render(); return; }
     if (cmd === "read") {
@@ -136,7 +144,7 @@
   function onInput(e) { var el = e.target; if (el && el.id === "rv_q") { S.q = el.value; var pos = el.selectionStart; render(); var q = D.getElementById("rv_q"); if (q) { q.focus(); try { q.setSelectionRange(pos, pos); } catch (x) {} } } }
   if (D && D.addEventListener && !G.__smdReviewWired) { G.__smdReviewWired = true; D.addEventListener("click", onClick, false); D.addEventListener("input", onInput, false); }
 
-  var API = { open: open, close: close, _buildExport: buildExport, DECISIONS: DECISIONS };
+  var API = { open: open, close: close, _render: render, _buildExport: buildExport, DECISIONS: DECISIONS };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_REVIEW = API;
 })(typeof window !== "undefined" ? window : globalThis);

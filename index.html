@@ -2278,7 +2278,7 @@ window.openExternal = function (u) {
 <link rel="stylesheet" href="/clinical-docs.css?v=docs2">
 <script src="/icu-monitor-parser.js?v=hardlocal3" defer></script>
 <script src="/phi-india.js?v=phiindia1" defer></script>
-<script src="/reasoning.js?v=hardlocal4-clinix1-figs1-tex1-kbchip1-kbexists1-kbopen1-kbopen2-us1-safetyux1-kbtitle1-kbbrand2-phiindia1-ci1-audA-fr1-abg6-sttfb2-gatev2a-nlpv2a-rankv3a-kbv2a-calib1-prior1-dxask2-why1-simple1-taste1-on1-gate1-over1-nlp2r-abgr4-rank2-rankon-allon" defer></script>
+<script src="/reasoning.js?v=hardlocal4-clinix1-figs1-tex1-kbchip1-kbexists1-kbopen1-kbopen2-us1-safetyux1-kbtitle1-kbbrand2-phiindia1-ci1-audA-fr1-abg6-sttfb2-gatev2a-nlpv2a-rankv3a-kbv2a-calib1-prior1-dxask2-why1-simple1-taste1-on1-gate1-over1-nlp2r-abgr4-rank2-rankon-allon-bl1" defer></script>
 <!-- Knowledge Library Protocols tab: clinical protocols across specialties (kb/clinical-protocols/).
      Flag smd_kb_protocols (default ON, ?kbproto=0 hides it). The kb-protocols.js ?v= token is kept in
      step with the content hash by scripts/build-clinical-protocols.mjs. -->
@@ -2289,7 +2289,11 @@ window.openExternal = function (u) {
 <script src="/clinical-docs.js?v=docs4.598e7e3c41bc" defer></script>
 <!-- Clinical review desk: clinicians approve or comment on AI-drafted protocols, kits and consent templates,
      then export the decisions (applied with scripts/apply-reviews.mjs). Flag smd_review_desk (default ON). -->
-<script src="/review-desk.js?v=rev2" defer></script>
+<script src="/review-desk.js?v=rev3-bl1" defer></script>
+<!-- Clinical Bulletins: signed practice updates on the disease reader (flag smd_kb_bulletins, default off)
+     + the Review Desk signing tab. docs/CLINICAL_AUTO_UPDATE_ENGINEERING_SPEC.md -->
+<script src="/bulletins.js?v=bl1" defer></script>
+<script src="/bulletins-desk.js?v=bl1" defer></script>
 <!-- Colleagues (wave 2): referrals, handovers, case rooms, the hospital's version of a kit, kit history.
      Flag smd_kits_share (default OFF, ?share=1); server route /api/kits is off until KITS_SHARE_ON=1. -->
 <script src="/kits-share.js?v=share3-wa1" defer></script>

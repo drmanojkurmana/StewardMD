@@ -1,6 +1,12 @@
 # Clinical Bulletins: physician-signed practice updates on the disease page
 
-Status: PLAN, awaiting owner approval. Nothing here is built.
+Status: BUILT behind flag `smd_kb_bulletins` (default off), 2026-09-28. Owner decisions D1 to D5 settled
+(section 14). Remote D1 migration not yet applied. Module note: `vault/modules/Clinical Bulletins.md`.
+Deviations from the plan text, all deliberate: routes live in `functions/_bulletins_api.js`, dispatched from
+`[[path]].js` above the owner gate; card styles are injected by `bulletins.js` (one renderer, one style, so the
+Review Desk preview matches the bedside exactly) instead of `knowledge-library.css`; the card sits directly
+under the disease title, above "At a glance" (which holds the Management summary); the signing UI is its own
+file, `bulletins-desk.js`.
 Supersedes: `docs/CLINICAL_AUTO_UPDATE_ENGINEERING_SPEC.md` and `functions/db/0002_updates_signoff.sql`
 on `feature/clinical-update-spec` (both dropped; reasons in section 13).
 Module notes to read first: `vault/modules/Review Desk.md`, `vault/modules/Knowledge Library.md`,
@@ -451,8 +457,8 @@ Rough effort: PR A 1.5 days, PR B 2 days, device verification and review 1 day.
 
 | # | Question | Recommended | Alternative |
 |---|----------|-------------|-------------|
-| D1 | Who can sign? | Only doctors the owner adds to `bulletin_signers`; phase 1 starts with the owner alone | Add other verified doctors from day one |
-| D2 | Bell feed in phase 1? | Unchanged (news with source links) | Hide unreviewed items |
-| D3 | Default review interval | 12 months; signer may pick 6 or 24 | Fixed 12 months |
-| D4 | Offline cache max age | 7 days | 14 days (longer offline use, slower retraction) |
-| D5 | Signatures per bulletin | One | Two for safety alerts |
+| D1 | Who can sign? | **Decided:** the owner, and verified doctors the owner adds to `bulletin_signers` | |
+| D2 | Bell feed in phase 1? | **Decided:** unchanged (news with source links) | |
+| D3 | Default review interval | **Decided:** 12 months; signer may pick 6 or 24 | |
+| D4 | Offline cache max age | **Decided:** 7 days | |
+| D5 | Signatures per bulletin | **Decided:** one | |

@@ -5,6 +5,28 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-28 · Clinical Bulletins: physician-signed practice updates on the disease reader
+
+**Decision (owner, D1 to D5).** Practice updates appear on the Knowledge Library disease reader only after a
+registered doctor signs them. Signers are the owner and verified doctors the owner adds (`bulletin_signers`,
+confirmed against the NMC register; the admin token can never sign). The bell feed is unchanged. Review is
+due 12 months after signing by default (6 or 24 selectable). A phone stops showing its offline copy 7 days
+after its last sync. One signature per bulletin. Flag `smd_kb_bulletins`, default OFF (`?bulletins=1`).
+Signed text lives in its own `bulletins` table, not as a `verified` flag on `updates`; a signature is bound to
+a hash of the exact wording and to the source's `content_hash`, so any edit, source change, due review,
+deletion or the kill switch takes it off the bedside without any write having to remember to reset it.
+The Review Desk "Clinical updates" tab talks to the server, unlike its other tabs (local decisions, JSON
+export), because a signature only means something if the server attests who made it.
+**Why.** Unreviewed AI summaries must not sit beside treatment content. A `verified` column on `updates`
+(the other design reviewed) would have carried an old signature onto text the crawler rewrote, and let any
+verified user or the shared admin token sign. `icu:doctor:<uid>` has two shapes (auto vs manual review), so
+identity comes from an owner-confirmed registry instead.
+**Trade-off.** A human bottleneck: nothing shows until signed, and a source change hides a bulletin until it
+is re-signed. Offline for more than 7 days shows a "not shown, last synced" line instead of updates.
+**Status.** Built behind the flag (server + client + tests); migration `functions/db/migrate_bulletins.sql`
+to apply on the remote D1; default-on only after owner approval. Plan: `docs/CLINICAL_AUTO_UPDATE_ENGINEERING_SPEC.md`;
+module note [[Clinical Bulletins]].
+
 ## 2026-09-27 · Antibiogram review round 4: clinical antibiograms, one answer for console and reasoning
 
 **Decision.** A clinical antibiogram (laboratory results combined with patient response) never answers a
