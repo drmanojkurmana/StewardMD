@@ -475,21 +475,38 @@
 
   /* ── should we ask? ───────────────────────────────────────────────────────────────────────── */
   // cb(needed:boolean, phone:string). Signed in, flag on, not snoozed, no phoneVerified claim.
+  var PROFILE_WAIT_MS = 8000;
   function needed(cb) {
     var u = user();
     if (!u || !flagOn()) { cb(false, ""); return; }
     try { if (sessionStorage.getItem(SNOOZE)) { cb(false, ""); return; } } catch (e) {}
     try { if (localStorage.getItem(doneKey(u.uid))) { cb(false, ""); return; } } catch (e) {}
-    var claims = (typeof u.getIdTokenResult === "function") ? u.getIdTokenResult().then(function (r) { return (r && r.claims) || {}; }).catch(function () { return {}; }) : Promise.resolve({});
-    claims.then(function (c) {
-      if (c && c.phoneVerified === true) { try { localStorage.setItem(doneKey(u.uid), "1"); } catch (e) {} cb(false, ""); return; }
-      var ref = docRef();
-      if (!ref) { cb(true, ""); return; }
-      ref.get().then(function (snap) {
-        var d = (snap && snap.exists && snap.data()) || {};
-        if (d.phoneVerifiedAt) { cb(false, ""); return; }   // verified from another device before claims refreshed
-        cb(true, d.phone || "");
-      }).catch(function () { cb(true, ""); });
+    /* Owner 2026-09-28 (screenshot): Profile said "Verified" and this sheet still asked. getIdTokenResult()
+     * answers from the CACHED token, which can predate the phoneVerified claim (set server-side when the
+     * code was accepted, possibly on another device); and the profile-doc fallback read failed (the
+     * iOS WebView Firestore hang), which counted as "not verified". Now: no claim on the cached token
+     * -> force one refresh (a fresh token carries the server's current claims); a profile read that
+     * fails or hangs means "can't tell", so we do not ask (next app-open checks again). */
+    var claimsOf = function (force) {
+      if (typeof u.getIdTokenResult !== "function") return Promise.resolve({});
+      return u.getIdTokenResult(!!force).then(function (r) { return (r && r.claims) || {}; }).catch(function () { return null; });
+    };
+    var verified = function (c) { return !!(c && c.phoneVerified === true); };
+    var yes = function () { try { localStorage.setItem(doneKey(u.uid), "1"); } catch (e) {} cb(false, ""); };
+    claimsOf(false).then(function (c) {
+      if (verified(c)) { yes(); return; }
+      return claimsOf(true).then(function (c2) {
+        if (verified(c2)) { yes(); return; }
+        var ref = docRef();
+        if (!ref) { cb(c2 !== null, ""); return; }      // no profile store: trust a fresh token's "no"
+        var settled = false, fin = function (need, phone) { if (settled) return; settled = true; cb(need, phone || ""); };
+        setTimeout(function () { fin(false); }, PROFILE_WAIT_MS);
+        ref.get().then(function (snap) {
+          var d = (snap && snap.exists && snap.data()) || {};
+          if (d.phoneVerifiedAt) { fin(false); return; }   // verified from another device before claims refreshed
+          fin(true, d.phone || "");
+        }).catch(function () { fin(false); });
+      });
     });
   }
 

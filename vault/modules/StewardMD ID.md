@@ -78,6 +78,12 @@ for the unverified/pending reasons, so no call site can open the wrong door.
   soft-fails `no-channel` and the sheet says "cannot send codes right now". The sheet is the six-slot OTP
   design (marching ring, pop-in digits, shake/sweep, WebOTP + one-time-code autofill); it waits for
   `#verifyGate` AND the onboarding tour (`.smdt-wel`/`.smdt-card`). See Decisions 2026-09-19.
+- **Asked while already verified (owner, 2026-09-28).** `needed()` read the claim from the CACHED token
+  (`getIdTokenResult()` without force), which can predate `phoneVerified`; the fallback profile-doc read
+  then failed (iOS WebView Firestore hang) and a failure counted as "not verified", so the sheet opened
+  while Profile (on a refreshed token) said Verified. Now: no claim -> one `getIdTokenResult(true)`; a
+  profile read that rejects or takes > 8 s (`PROFILE_WAIT_MS`) means "can't tell" -> do not ask.
+  Covered in `test/run-phone-verify-ui.mjs` (fails on the old code).
 - **Two client readers of "is this account Pro", and they can disagree.** `pro-badge.js` reads the
   `pro` CLAIM; `SMD_PRO_NOTICE.reason()` / the paywall's verify-bounce read the `/billing/status`
   payload `account.js` cached at sign-in. A verification landing mid-session must call
