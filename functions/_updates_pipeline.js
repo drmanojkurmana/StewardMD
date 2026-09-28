@@ -4,6 +4,10 @@
  *   • parser_type='rss'  → fetch feed, parse items, hash each, dedup by doc_key.
  *   • parser_type='head' → conditional GET (If-None-Match / If-Modified-Since) of the
  *                          guideline page; unchanged (304 / same ETag+Length) → STOP.
+ *   • parser_type='litapi' → Europe PMC query (guidelines).   'pubmed' → PubMed query (journal trials,
+ *     last 7 days).   'openfda' → new FDA drug/biologic approvals (last 30 days). All three share one
+ *     list crawler: same doc_key dedup, content-hash skip, per-source cap and AI budget.
+ * Journal sources are seeded once (functions/_journal_sources.js) before the first crawl that sees them.
  * AI summarization runs ONLY for a genuinely new or content-hash-changed document.
  * Every source writes a crawl_logs row. Results are cached in D1 and shared by all users.
  */
@@ -11,6 +15,9 @@ import * as repo from "./_updates_repo.js";
 import { summarizeDocument, diffDocument } from "./_summarize.js";
 import { clean, sha256hex, itemHashInput, parseRss, keepItem } from "./_updates_util.js";
 import { fetchLitApi } from "./_litapi.js";
+import { fetchPubMed } from "./_pubmed.js";
+import { fetchOpenFdaApprovals } from "./_openfda.js";
+import { seedJournalSourcesOnce } from "./_journal_sources.js";
 import { tinyfishSearch } from "./_search.js";
 
 const UA = "StewardMD/1.0 (+https://stewardmd.in)";
@@ -149,11 +156,26 @@ async function crawlHeadSource(env, source, budget) {
 // Literature-API source (Europe PMC): auto-discovers individual published guideline
 // documents via source.query, then summarizes each abstract into a rich card.
 async function crawlLitApiSource(env, source, budget) {
-  const acc = { new: 0, updated: 0, unchanged: 0, errors: 0, ai: 0, items: [] };
   const query = source.query || source.rss_url;
-  if (!query) { await repo.addCrawlLog(env, { source_id: source.id, status: "skipped", detail: "no query" }); return acc; }
+  return crawlListSource(env, source, budget, "litapi", query ? () => fetchLitApi(query, { limit: 12 }) : null);
+}
+// PubMed (journal trials): source.query is a PubMed query; last 7 days, newest first.
+async function crawlPubMedSource(env, source, budget) {
+  const query = source.query || "";
+  return crawlListSource(env, source, budget, "pubmed", query ? () => fetchPubMed(query, { days: 7, limit: 12, env }) : null);
+}
+// openFDA: new NDA/BLA approvals in the last 30 days (no query needed). Wider than the daily cadence so a
+// few failed runs lose nothing; already-stored approvals are skipped by doc_key without an AI call.
+async function crawlOpenFdaSource(env, source, budget) {
+  return crawlListSource(env, source, budget, "openfda", () => fetchOpenFdaApprovals({ days: 30, env }));
+}
+
+// Shared by the list-style sources: fetch -> dedup by doc_key -> skip unchanged hash -> summarize new/changed.
+async function crawlListSource(env, source, budget, tag, fetchList) {
+  const acc = { new: 0, updated: 0, unchanged: 0, errors: 0, ai: 0, items: [] };
+  if (!fetchList) { await repo.addCrawlLog(env, { source_id: source.id, status: "skipped", detail: "no query" }); return acc; }
   let results;
-  try { results = await fetchLitApi(query, { limit: 12 }); }
+  try { results = await fetchList(); }
   catch (e) { await repo.addCrawlLog(env, { source_id: source.id, status: "error", detail: String(e && e.message || e).slice(0, 200) }); acc.errors++; return acc; }
 
   const maxNew = Math.max(1, parseInt(env.UPDATES_MAX_NEW_PER_SOURCE, 10) || 8);
@@ -173,15 +195,17 @@ async function crawlLitApiSource(env, source, budget) {
     acc[res.mode]++;
     if (res.item) acc.items.push(res.item);
   }
-  await repo.addCrawlLog(env, { source_id: source.id, status: (acc.new || acc.updated) ? (acc.updated ? "updated" : "new") : "unchanged", detail: `new=${acc.new} updated=${acc.updated} unchanged=${acc.unchanged} err=${acc.errors} (litapi)`, ai_used: acc.ai });
+  await repo.addCrawlLog(env, { source_id: source.id, status: (acc.new || acc.updated) ? (acc.updated ? "updated" : "new") : "unchanged", detail: `new=${acc.new} updated=${acc.updated} unchanged=${acc.unchanged} err=${acc.errors} (${tag})`, ai_used: acc.ai });
   return acc;
 }
 
-function crawlFor(parser) { return parser === "litapi" ? crawlLitApiSource : (parser === "head" ? crawlHeadSource : crawlRssSource); }
+const CRAWLERS = { litapi: crawlLitApiSource, pubmed: crawlPubMedSource, openfda: crawlOpenFdaSource, head: crawlHeadSource };
+function crawlFor(parser) { return CRAWLERS[parser] || crawlRssSource; }
 
 // Entry point. Iterates enabled sources; bounds total AI calls per run. Returns a tally.
 export async function runPipeline(env) {
   if (!repo.hasDb(env)) return { ok: false, error: "no-db" };
+  try { await seedJournalSourcesOnce(env); } catch (e) {}   // best-effort; never blocks the crawl
   const sources = await repo.listSources(env, true);
   const total = { new: 0, updated: 0, unchanged: 0, errors: 0, ai: 0, sources: sources.length, items: [] };
   const budget = { left: Math.max(1, parseInt(env.UPDATES_MAX_AI_PER_RUN, 10) || 20) };
