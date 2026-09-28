@@ -10613,3 +10613,7 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
 - **Owner, 2026-09-27:** keep drug doses in presentation text and ward-round scripts as authored; turn the
   AI case patient ON, now on its own `/clinix-patient` endpoint and the `clinix` quota bucket.
 - **CliniX scripts lazy-load on first open** (`clinix.js SCRIPTS`, flag `smd_clinix_lazy`, default on).
+- **Owner, 2026-09-27:** the 18 atlas photos are owner-created ("no licence needed"): recorded as
+  `ownerProduced` in `clinix-diagrams.js ATLAS_IMAGES`, so they render. "Don't lock anything behind
+  draft": draft content always renders (a missing flags module no longer hides it); only an explicit
+  `smd_clinix_draft=0` author preview does.

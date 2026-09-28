@@ -66,6 +66,8 @@ test("licence gate: atlas photos are not rendered without a licence record", () 
   const src = read("clinix-screens.js");
   assert.match(src, /function atlasCleared\(/);
   assert.match(src, /if \(atlas && !atlasCleared\(atlas\)\) atlas = null;/);
+  const D = read("clinix-diagrams.js");
+  assert.equal((D.match(/ownerProduced: true/g) || []).length, 18, "all 18 owner-produced photos are recorded as such");
   assert.doesNotMatch(src, /Verified Bedside Photo/);
 });
 
@@ -77,9 +79,10 @@ test("review gate: no screen builds a pathway or lesson with a hard-coded allowD
   assert.match(src, /Draft, pending clinician review/, "every draft lesson keeps its draft line");
 });
 
-test("review gate: content fails closed when the flags module is absent", () => {
+test("review gate: draft content is never locked (owner 2026-09-27)", () => {
   const src = read("clinix-content.js");
-  assert.match(src, /allowDraft: flag\("smd_clinix_draft"\)/);
+  assert.match(src, /allowDraft: f \? f\.bool\("smd_clinix_draft"\) : true/);
+  assert.equal(F.DEFS.smd_clinix_draft.def, true);
 });
 
 test("review gate: nothing claims clinician approval that was never given", () => {

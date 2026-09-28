@@ -601,7 +601,8 @@
     if (flag("smd_clinix_uncleared_media")) return true;
     var md = M();
     if (!md || !a) return false;
-    return md.mediaRenderable({ kind: "image", cleared: a.cleared === true, src: a.src, licence: a.licence, attribution: a.attribution,
+    var src = a.src && a.src.charAt(0) !== "/" && !/^https?:/.test(a.src) ? "/" + a.src : a.src;   // repo-local path
+    return md.mediaRenderable({ kind: "image", cleared: a.cleared === true, src: src, licence: a.licence, attribution: a.attribution,
       sourceUrl: a.sourceUrl, commonsVerified: a.commonsVerified === true, ownerProduced: a.ownerProduced === true }, {});
   }
 

@@ -25,12 +25,13 @@
   function flag(k) { var f = flags(); return !!(f && f.bool(k)); }
   function model() { try { return G.SMD_CLINIX_MODEL || null; } catch (e) { return null; } }
 
-  // Author-mode options, read fresh each call. smd_clinix_draft defaults ON (owner release decision
-  // 2026-09-26, clinix-flags.js), so drafts show WITH their "Draft, pending clinician review" line.
-  // The gate itself fails CLOSED: no flags module means no drafts.
+  // Owner, 2026-09-27: "Don't lock anything behind draft". Draft content always renders (with its
+  // "Draft, pending clinician review" line). Only an explicit smd_clinix_draft=0 (author preview of
+  // the student-only view) hides it; a missing flags module never does.
   function gateOpts() {
+    var f = flags();
     return {
-      allowDraft: flag("smd_clinix_draft"),
+      allowDraft: f ? f.bool("smd_clinix_draft") : true,
       allowUncleared: flag("smd_clinix_uncleared_media")
     };
   }
