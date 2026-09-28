@@ -532,3 +532,20 @@ test("pain radiating or boring through to the back is back pain", () => {
   assert.ok(p("severe, constant epigastric pain boring through to the back").includes("backPain"));
   assert.ok(!p("no pain radiating to the back").includes("backPain"));
 });
+
+// round 40: "X without Y" never negates X; postfix forms still negate; course idioms after X still do not
+test("negation scope: without after the finding, postfix forms, idioms", () => {
+  const c40 = { valid: { fever: 1, rigors: 1, nauseaVomiting: 1, neckStiffness: 1, calfTenderness: 1, rash: 1, papilledema: 1 }, labels: {}, numeric: {}, v2: true,
+    syn: { fever: ["fever"], rigors: ["rigors"], nauseaVomiting: ["nausea", "vomiting"], neckStiffness: ["neck stiff"], calfTenderness: ["calf tender"],
+      rash: ["rash"], papilledema: ["papilledema"] } };
+  const r = (t) => NLP.extract(t, c40);
+  const a = r("fever without rigors");
+  assert.ok(a.present.includes("fever") && a.absent.includes("rigors"));
+  assert.ok(r("mild nausea without vomiting").present.includes("nauseaVomiting"));
+  assert.ok(r("bilateral early papilledema without frank choroidal tubercles").present.includes("papilledema"));
+  assert.ok(r("neck stiffness was not elicited").absent.includes("neckStiffness"));
+  assert.ok(r("calf tenderness: none").absent.includes("calfTenderness"));
+  assert.ok(r("rash not seen").absent.includes("rash"));
+  assert.ok(r("fever not responding to paracetamol").present.includes("fever"));
+  assert.ok(r("He denies fever").absent.includes("fever"));
+});

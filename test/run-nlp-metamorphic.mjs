@@ -100,13 +100,18 @@ try {
   counts["probe.findings"] = live.length;
   const POS = ["Has {s}.", "Complains of {s}.", "C/o {s}.", "{s} noted.", "{S}. Seen in the evening clinic.", "Seen in clinic.\n{S} for 2 days."];
   const NEG = ["No {s}.", "Denies {s}.", "Negative for {s}.", "Without {s}.", "He denies {s}.", "{S}: absent.", "No evidence of {s}.", "No signs of {s}.",
-    "Nil {s}.", "{S} ruled out."];
+    "Nil {s}.", "{S} ruled out.", "{S} was not elicited.", "{S}: none."];
   const fill = (tpl, s) => tpl.replace("{s}", s).replace("{S}", s.charAt(0).toUpperCase() + s.slice(1));
   for (const [name, tpls, want] of [["pos", POS, true], ["neg", NEG, false]]) {
     const items = []; live.forEach((p) => tpls.forEach((tpl) => items.push({ p, text: fill(tpl, p.s) })));
     const out = await read(items.map((x) => x.text));
     items.forEach((x, i) => { if (out[i].includes(x.p.k) !== want) bump("probe." + name, `${x.p.k}: "${x.text}"`); });
   }
+  // round 40: "A without B" keeps A and negates B (a cue after a finding does not negate it)
+  const wi = []; for (let i = 0; i + 1 < live.length; i += 2) if (live[i].k !== live[i + 1].k && !live[i].s.includes(live[i + 1].s) && !live[i + 1].s.includes(live[i].s) &&
+    !live[i].s.split(" ").some((w) => w.length > 4 && live[i + 1].s.includes(w))) wi.push({ a: live[i], b: live[i + 1], text: fill("{S} without {b}.", live[i].s).replace("{b}", live[i + 1].s) });
+  const wout = await read(wi.map((x) => x.text));
+  wi.forEach((x, i) => { if (!wout[i].includes(x.a.k) || wout[i].includes(x.b.k)) bump("probe.without", `${x.a.k}/${x.b.k}: "${x.text}"`); });
   // British / American spelling of the same phrase (notes in India are mostly British spelling)
   const SPELL = [[/haem/g, "hem"], [/hem(?!i)/g, "haem"], [/oedema/g, "edema"], [/(^|[^o])edema/g, "$1oedema"], [/oea/g, "ea"], [/diarrhea/g, "diarrhoea"],
     [/anaem/g, "anem"], [/anem/g, "anaem"], [/colour/g, "color"], [/color/g, "colour"], [/oesoph/g, "esoph"], [/esoph/g, "oesoph"], [/aemia/g, "emia"], [/([^a])emia/g, "$1aemia"]];
@@ -158,7 +163,7 @@ try {
   }
   const ceilings = (() => { try { return JSON.parse(readFileSync(CEIL_FILE, "utf8")); } catch { return {}; } })();
   if (WRITE) {
-    const ALL = ["probe.pos", "probe.neg", "probe.list", "probe.spelling", "chart.upper", "chart.spaces", "chart.neutral", "chart.lines", "chart.reversed", "engine.order", "engine.repeat"];
+    const ALL = ["probe.pos", "probe.neg", "probe.list", "probe.spelling", "probe.without", "chart.upper", "chart.spaces", "chart.neutral", "chart.lines", "chart.reversed", "engine.order", "engine.repeat"];
     const out = {}; for (const k of ALL) out[k] = counts[k] || 0;
     writeFileSync(CEIL_FILE, JSON.stringify(out, null, 2) + "\n"); console.log("ceilings written");
   }

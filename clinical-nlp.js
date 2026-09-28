@@ -129,6 +129,13 @@
   }
 
   // clause the match index falls in, so negation/temporal cues don't leak across "," / "and" / "with"
+  function clauseBounds(norm, idx) {
+    var breaks = /[.,;]| and | with | but | then | however |, /g, start = 0, end = norm.length, m;
+    while ((m = breaks.exec(norm))) { if (m.index + m[0].length <= idx) start = m.index + m[0].length; else { end = m.index; break; } }
+    return [start, end];
+  }
+  // round 40: postfix negation, right after the finding in its clause
+  var POSTFIX_NEG_V2 = /^\s*(?:[:\-\u2013]\s*)?(?:(?:is|was|were|are|has been|have been)\s+)?(?:not\s+(?:present|seen|heard|elicited|found|noted|felt|palpable|detected|demonstrated|appreciated|evident|identified|observed|reported|visuali[sz]ed)\b|absent\b|none\b|nil\b|negative\b|denied\b|denies\b)|^\s*[:\-\u2013]\s*no\b/;
   function clauseAround(norm, idx) {
     var breaks = /[.,;]| and | with | but | then | however |, /g, start = 0, end = norm.length, m;
     while ((m = breaks.exec(norm))) { if (m.index + m[0].length <= idx) start = m.index + m[0].length; else { end = m.index; break; } }
@@ -483,8 +490,23 @@
       var cl = e.method === "vitals" ? (v2 ? clauseAround(raw, Math.max(0, e.idx)) : raw) : clauseAround(norm, e.idx);
       var r = { polarity: "present", certainty: "explicit", temporality: "current", req: false };
       if (v2 && e.method !== "vitals") cl = cl.replace(NEG_IDIOM_V2, " ").replace(RECENT_V2, " ");
+      // round 40 (v2): a cue AFTER the finding does not negate it ("fever without rigors", "mild nausea without vomiting",
+      // "papilloedema without choroidal tubercles"); what precedes it does, and so do postfix forms ("neck stiffness was
+      // not elicited", "calf tenderness: none", "chest pain - denied")
+      var negHit, tcl = cl;
+      if (v2 && e.method !== "vitals") {
+        var cb = clauseBounds(norm, e.idx), sl = (e.srcText || "").length;
+        var pre = norm.slice(cb[0], e.idx).replace(NEG_IDIOM_V2, " ").replace(RECENT_V2, " "), post = norm.slice(e.idx + sl, Math.max(cb[1], e.idx + sl)).replace(/^[a-z]*/, "");
+        // a later cue other than "without" still reads as before (the clause); "X without Y" never negates X
+        var postNoWithout = post.replace(/\bwithout\b.*$/, " ").replace(NEG_IDIOM_V2, " ").replace(RECENT_V2, " ");
+        // a past-tense cue after "without" belongs to the other, negated finding ("fever without previous stroke")
+        tcl = norm.slice(cb[0], Math.max(cb[1], e.idx + sl)).replace(/\bwithout\b.*$/, " ").replace(NEG_IDIOM_V2, " ").replace(RECENT_V2, " ");
+        // a compound may carry its own "not" ("knee not swollen"); only its first clause, as before
+        var inner = e.method === "compound" ? norm.slice(e.idx, e.idx + sl).split(/[.,;]| and | with | but | then | however /)[0].replace(NEG_IDIOM_V2, " ") : "";
+        negHit = hasWord(pre, NEG) || hasWord(inner, NEG) || POSTFIX_NEG_V2.test(post) || hasWord(postNoWithout, NEG);
+      } else negHit = hasWord(cl, NEG);
       // v2: a measured temperature of 38 or more is fever even if "afebrile" appears elsewhere in the note
-      if (hasWord(cl, NEG) || (key === "fever" && !(v2 && e.method === "vitals") && hasWord(norm, AFEBRILE))) r.polarity = "absent";
+      if (negHit || (key === "fever" && !(v2 && e.method === "vitals") && hasWord(norm, AFEBRILE))) r.polarity = "absent";
       // round 26: "non-erythematous", "non-tender", "non-productive": a "non-" prefix negates the word it is fused to
       else if (v2 && e.method !== "vitals" && /\bnon[-\s]?$/.test(norm.slice(Math.max(0, e.idx - 4), e.idx))) r.polarity = "absent";
       // round 28: "caught before any organ failure", "prior to any bleeding": not (yet) there
@@ -495,7 +517,7 @@
       else if (v2 && e.method !== "vitals" && (TEST_AFTER_V2.test(norm.slice(e.idx + (e.srcText || "").length, e.idx + (e.srcText || "").length + 40)) || COND_V2.test(norm.slice(Math.max(0, e.idx - 40), e.idx)))) r.polarity = "uncertain";
       if (hasWord(cl, EXCLUDE)) { r.polarity = "uncertain"; r.certainty = "possible"; r.req = true; }
       else if (hasWord(cl, CONSIDER) || cl.indexOf("?") >= 0) { r.certainty = "possible"; r.req = true; }
-      if (hasWord(cl, TEMPORAL)) r.temporality = "historical";
+      if (hasWord(tcl, TEMPORAL)) r.temporality = "historical";
       // v2: "a 3-day history of fever" is the PRESENT illness; classic read "history of" as past history
       // and dropped everything in that clause
       if (v2 && r.temporality === "historical" && (PRESENT_HX_V2.test(cl) || PRESENT_BG_V2.test(cl)) && !/\b(?:known case of|past|previous|prior|resolved|status post)\b|(?:^|[^-])\bold\b/.test(cl)) r.temporality = "current";
