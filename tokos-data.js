@@ -52,11 +52,67 @@
 
   function today(now) { var d = new Date(now); return C.dayNum(d.getTime(), d.getTimezoneOffset()); }
 
+  /* ---------- FIGO checklist (v2). MBBS: 5 reading questions. Resident: plus the FIGO action, and the
+     deceleration type only where an obstetrician confirmed it (case.review.decelType). ---------- */
+  var QUESTIONS = {
+    uc: ["normal", "tachysystole"],
+    baseline: ["severe_bradycardia", "bradycardia", "normal", "tachycardia"],
+    variability: ["reduced", "normal", "increased"],
+    decels: ["none", "present", "prolonged", "over5"],
+    decelType: ["early", "late", "variable", "prolonged"],
+    figo: ["normal", "suspicious", "pathological"],
+    action: ["normal", "suspicious", "pathological"] // answer ids reuse the category; labels carry the FIGO action text
+  };
+  function checklistFor(c, level) {
+    var q = ["uc", "baseline", "variability", "decels", "figo"];
+    if (level !== "resident") return q;
+    if (c.review && c.review.decelType) q.push("decelType");
+    q.push("action");
+    return q;
+  }
+  function truthFor(c) {
+    var f = c.features, r = c.review || {}, maxD = 0;
+    (f.decels || []).forEach(function (d) { if (d.durationSec > maxD) maxD = d.durationSec; });
+    var figo = r.figo || c.figo;
+    var t = {
+      uc: f.contractions.tachysystole ? "tachysystole" : "normal",
+      baseline: r.baselineClass || f.baselineClass,
+      variability: r.variability || f.variability.band,
+      decels: !f.decels || !f.decels.length ? "none" : maxD > 300 ? "over5" : maxD >= 180 ? "prolonged" : "present",
+      figo: figo, action: figo
+    };
+    if (r.decelType) t.decelType = r.decelType;
+    return t;
+  }
+  function gradeChecklist(ids, answers, truth) {
+    var perQ = {}, m = 0;
+    ids.forEach(function (q) { perQ[q] = answers[q] === truth[q]; if (perQ[q]) m++; });
+    var pct = ids.length ? m / ids.length : 0, g;
+    if (pct < 0.5) g = C.AGAIN;
+    else if (!perQ.figo) g = C.HARD; // the overall category is the clinically critical call
+    else if (pct < 0.8) g = C.HARD;
+    else if (pct < 1) g = C.GOOD;
+    else g = C.EASY;
+    return { matches: m, total: ids.length, pct: pct, grade: g, perQ: perQ };
+  }
+  function rationaleKeys(c) {
+    var t = truthFor(c), k = [];
+    if (t.baseline !== "normal") k.push("baseline." + t.baseline);
+    if (t.variability !== "normal") k.push("variability." + t.variability);
+    if (t.decels !== "none") k.push("decels." + t.decels);
+    if (t.uc === "tachysystole") k.push("uc.tachysystole");
+    if (c.acidosis === "metabolic" || c.acidosis === "acidaemia_not_metabolic") k.push("acidosis." + c.acidosis);
+    ((c.vignette && c.vignette.risks) || []).forEach(function (r) { if (r === "pyrexia" || r === "preeclampsia") k.push("risk." + r); });
+    k.push("trace_vs_outcome");
+    return k;
+  }
+
   var API = {
     STORE_KEY: STORE_KEY, PREF_KEY: PREF_KEY,
     levelLocked: levelLocked, trialState: trialState, useTrial: useTrial,
     loadStore: loadStore, saveStore: saveStore, loadPrefs: loadPrefs, savePrefs: savePrefs,
-    today: today
+    today: today,
+    QUESTIONS: QUESTIONS, checklistFor: checklistFor, truthFor: truthFor, gradeChecklist: gradeChecklist, rationaleKeys: rationaleKeys
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   else G.TOKOS_DATA = API;
