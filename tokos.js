@@ -13,6 +13,7 @@
 
   function $(id) { return G.document.getElementById(id); }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function icoH(n) { var i = ico(n); return i ? '<span class="tok-i" aria-hidden="true">' + i + "</span>" : ""; }
   function ico(n) { try { if (!G.ICONS || !G.ICONS.get || (G.ICONS.has && !G.ICONS.has(n))) return ""; return G.ICONS.get(n); } catch (e) { return ""; } }
   function isPro() { try { return !!(G.SMD_PRO && G.SMD_PRO.isProSync && G.SMD_PRO.isProSync()); } catch (e) { return false; } }
   function showPro() {
@@ -77,8 +78,11 @@
       loading: "Loading cases…", loadErr: "Could not load Tokós. Check your connection.", tryAgain: "Try again", traceLoading: "Loading trace…", traceErr: "Could not load this trace.",
       caseOf: "Case {i} of {n}", answered: "{a} of {n} answered", match: "match the key", matchOne: "Match", noMatch: "No match",
       gest: "Gestation", fit: "Fit", zoomIn: "Zoom in", zoomHint: "Pinch or double-tap the strip to zoom",
-      pH: "pH", bdecf: "BDecf", pco2: "pCO2", apgar: "Apgar at 1 and 5 min", weight: "Birth weight", window: "in the last {m} min", longest: "longest {s} s", per10: "per 10 min",
-      doneLine: "{n} cases read in this session.", emptyLine: "No cases are due. New and due cases come back tomorrow.", backToHub: "Back to Tokós" },
+      pH: "pH", bdecf: "BDecf", pco2: "pCO2", apgar: "Apgar at 1 and 5 min", weight: "Birth weight", window: "in the last {m} min", longest: "longest {s}\u00a0s", per10: "per 10 min",
+      doneLine: "{n} cases read in this session.", emptyLine: "No cases are due. New and due cases come back tomorrow.", backToHub: "Back to Tokós",
+      draft: "To be verified, draft", traceAria: "CTG trace, last {m} min", calPrompt: "Drag a line, or use the buttons below, to measure",
+      lineGroup: "Caliper line", lineN: "Line {n}", s: "s",
+      bpmDown: "Move line {n} down 1 bpm", bpmUp: "Move line {n} up 1 bpm", timeDown: "Move line {n} 1 second earlier", timeUp: "Move line {n} 1 second later" },
     hi: { contractions: "संकुचन", baseline: "बेसलाइन हृदय गति", variability: "परिवर्तनशीलता", decels: "डिसेलेरेशन", decelType: "डिसेलेरेशन का प्रकार",
       figo: "कुल वर्गीकरण (FIGO 2015)", action: "अगला कदम", submit: "मेरी रीडिंग जांचें", next: "अगला केस", done: "सत्र पूरा", caliper: "कैलिपर",
       bpmMode: "bpm मापें", timeMode: "समय मापें", grid: "1 बड़ा खाना = 1 मिनट", quality: "सिग्नल गुणवत्ता", rule: "नियम-आधारित, प्रसूति विशेषज्ञ की समीक्षा बाकी",
@@ -101,8 +105,11 @@
       loading: "केस लोड हो रहे हैं…", loadErr: "Tokós लोड नहीं हो सका। अपना कनेक्शन जांचें।", tryAgain: "फिर कोशिश करें", traceLoading: "ट्रेस लोड हो रहा है…", traceErr: "यह ट्रेस लोड नहीं हो सका।",
       caseOf: "केस {i} / {n}", answered: "{n} में से {a} उत्तर दिए", match: "उत्तर से मेल", matchOne: "मेल", noMatch: "मेल नहीं",
       gest: "गर्भकाल", fit: "पूरा", zoomIn: "ज़ूम करें", zoomHint: "ज़ूम के लिए स्ट्रिप पर पिंच या डबल-टैप करें",
-      pH: "pH", bdecf: "BDecf (बेस डेफिसिट)", pco2: "pCO2", apgar: "अपगार, 1 और 5 मिनट पर", weight: "जन्म का वज़न", window: "आखिरी {m} मिनट में", longest: "सबसे लंबा {s} s", per10: "प्रति 10 मिनट",
-      doneLine: "इस सत्र में {n} केस पढ़े।", emptyLine: "अभी कोई केस बाकी नहीं। नए और बाकी केस कल आएंगे।", backToHub: "Tokós पर वापस" }
+      pH: "pH", bdecf: "BDecf (बेस डेफिसिट)", pco2: "pCO2", apgar: "अपगार, 1 और 5 मिनट पर", weight: "जन्म का वज़न", window: "आखिरी {m} मिनट में", longest: "सबसे लंबा {s}\u00a0सेकंड", per10: "प्रति 10 मिनट",
+      doneLine: "इस सत्र में {n} केस पढ़े।", emptyLine: "अभी कोई केस बाकी नहीं। नए और बाकी केस कल आएंगे।", backToHub: "Tokós पर वापस",
+      draft: "सत्यापन बाकी, ड्राफ़्ट", traceAria: "CTG ट्रेस, आखिरी {m} मिनट", calPrompt: "मापने के लिए रेखा खींचें, या नीचे के बटन इस्तेमाल करें",
+      lineGroup: "कैलिपर रेखा", lineN: "रेखा {n}", s: "सेकंड",
+      bpmDown: "रेखा {n} को 1 bpm नीचे करें", bpmUp: "रेखा {n} को 1 bpm ऊपर करें", timeDown: "रेखा {n} को 1 सेकंड पहले करें", timeUp: "रेखा {n} को 1 सेकंड बाद करें" }
   };
   var QLABEL = { uc: "contractions", baseline: "baseline", variability: "variability", decels: "decels", decelType: "decelType", figo: "figo", action: "action" };
   function W() { return L10N[st.prefs && st.prefs.lang === "hi" ? "hi" : "en"]; }
@@ -128,7 +135,6 @@
     return '<div class="tok-top"><button type="button" class="tok-back" data-act="back" aria-label="' + esc(backLabel) + '">' + (chev ? '<span class="tok-flip">' + chev + "</span>" : "‹") + "</button>" +
       '<div class="tok-title"><b' + (title === "Tokós" ? ' translate="no"' : "") + ">" + esc(title) + "</b>" + (sub ? "<span>" + esc(sub) + "</span>" : "") + "</div>" + (right || "") + "</div>";
   }
-  var DRAFT = '<div class="tok-draft" aria-hidden="true">To be verified, draft</div>';
 
   function unmountTrace() {
     if (st._ro) { try { st._ro.disconnect(); } catch (e) {} st._ro = null; }
@@ -136,19 +142,31 @@
     st._cal = null; st._stage = null;
   }
 
-  function render() {
+  // Focus: a new view starts at its back button (or at focusSel, e.g. the score after submit); a re-render of
+  // the same view (language, level, retry) puts focus back on the control that caused it.
+  function focusKey(a) {
+    if (!a || !a.getAttribute || !a.getAttribute("data-act")) return null;
+    return ["data-act", "data-q", "data-o", "data-v", "data-m", "data-l", "data-d"].map(function (k) { var v = a.getAttribute(k); return v == null ? "" : "[" + k + '="' + v + '"]'; }).join("");
+  }
+  function render(focusSel) {
     var el = $("smdTokos");
     if (!el) return;
+    var same = st._shown === st.view, a = G.document.activeElement, key = a && el.contains(a) ? focusKey(a) : null;
     unmountTrace();
     var html;
     if (st.view === "clinic") html = renderClinic();
     else if (st.view === "reveal") html = renderReveal();
     else html = renderHub();
-    el.innerHTML = html + DRAFT;
+    el.innerHTML = html;
+    var sc = el.querySelector(".tok-scroll");
+    if (sc) sc.insertAdjacentHTML("beforeend", '<p class="tok-draft">' + esc(W().draft) + "</p>");
     if (st.prefs && st.prefs.lang === "hi") el.setAttribute("lang", "hi"); else el.removeAttribute("lang");
     bind(el);
+    st._shown = st.view;
     if (st.view === "clinic" && current()) mountTrace(current());
-    try { var b = el.querySelector(".tok-back"); if (b) b.focus({ preventScroll: true }); } catch (e) {}
+    if (typeof focusSel !== "string") focusSel = null; // render is also a promise callback (value or Error)
+    var f = (focusSel && el.querySelector(focusSel)) || (same && key && el.querySelector(key)) || el.querySelector(".tok-back");
+    try { if (f) f.focus({ preventScroll: true }); } catch (e) {}
   }
 
   /* ---------- hub ---------- */
@@ -159,7 +177,7 @@
     var lang = st.prefs.lang, tr = st.cfg.tracks[0];
     var t = lang === "hi" ? tr.labelHi : tr.labelEn;
     var locked = levelLocked("resident"), ts = trial("clinic.ctg");
-    var proBadge = !locked ? "" : '<span class="tok-pro' + (ts === "used" ? " used" : "") + '">' + ico("lock") + esc(ts === "used" ? w.pro : w.freeTry) + "</span>";
+    var proBadge = !locked ? "" : '<span class="tok-pro' + (ts === "used" ? " used" : "") + '">' + icoH("lock") + esc(ts === "used" ? w.pro : w.freeTry) + "</span>";
     var deck = st.decks.ctg, cnt = C.counts({ id: "ctg." + level(), items: deck.cases.map(function (c) { return { id: c.id }; }) }, st.store, today());
     var n = Math.min(12, cnt.due + cnt.fresh);
     var lv = level();
@@ -197,7 +215,7 @@
     // R9: risks stay [] until the header codings are confirmed; the chips render nothing today.
     var chips = (v.risks || []).map(function (r) { return '<span class="tok-chip">' + esc(w.risks[r] || r) + "</span>"; }).join("");
     if (v.induced) chips += '<span class="tok-chip">' + esc(w.induced) + "</span>";
-    return '<section class="tok-vignette" aria-label="' + esc(w.vignette) + '"><div class="tok-vrow">' + cells.join("") + "</div>" + (chips ? '<div class="tok-chips">' + chips + "</div>" : "") + "</section>";
+    return '<section class="tok-vignette" tabindex="-1" aria-label="' + esc(w.vignette) + '"><div class="tok-vrow">' + cells.join("") + "</div>" + (chips ? '<div class="tok-chips">' + chips + "</div>" : "") + "</section>";
   }
 
   function renderChecklist(c) {
@@ -223,10 +241,15 @@
       '<div class="tok-strip-head tok-pad"><span>' + esc(w.grid) + '</span><span class="tok-quality' + (sig != null && sig < 90 ? " low" : "") + '">' + esc(w.quality) + " " + (sig == null ? esc(w.notRecorded) : sig + "%") + "</span></div>" +
       '<div class="tok-hold">' +
         '<div class="tok-stage" id="tokStage" style="aspect-ratio:' + L.W + " / " + L.H + '"><div class="tok-loading-trace" id="tokTraceSlot" aria-busy="true">' + esc(w.traceLoading) + "</div></div>" +
-        '<div class="tok-cal-bar tok-pad"><div class="tok-seg sm" role="group" aria-label="' + esc(w.caliper) + '">' +
+        '<output id="tokCalOut" class="tok-read tok-pad idle" aria-live="polite">' + esc(w.calPrompt) + "</output>" +
+      "</div>" +
+      '<div class="tok-cal-bar tok-pad">' +
+        '<div class="tok-seg sm" role="group" aria-label="' + esc(w.caliper) + '">' +
           '<button type="button" data-act="cal" data-m="bpm" aria-pressed="true">' + esc(w.bpmMode) + '</button><button type="button" data-act="cal" data-m="time" aria-pressed="false">' + esc(w.timeMode) + "</button></div>" +
-          '<div class="tok-zoom"><button type="button" class="tok-icon" data-act="zoom" aria-label="' + esc(w.zoomIn) + '" title="' + esc(w.zoomHint) + '">' + (ico("plus") || "+") + '</button><button type="button" class="tok-icon tok-fit" data-act="fit">' + esc(w.fit) + "</button></div>" +
-          '<output id="tokCalOut" class="tok-read" aria-live="polite"></output></div>' +
+        '<div class="tok-zoom"><button type="button" class="tok-icon" data-act="zoom" aria-label="' + esc(w.zoomIn) + '" title="' + esc(w.zoomHint) + '">' + (icoH("plus") || "+") + '</button><button type="button" class="tok-icon tok-fit" data-act="fit">' + esc(w.fit) + "</button></div>" +
+        '<div class="tok-seg sm" role="group" aria-label="' + esc(w.lineGroup) + '">' +
+          '<button type="button" data-act="line" data-l="1" aria-pressed="true">' + esc(fmt(w.lineN, { n: 1 })) + '</button><button type="button" data-act="line" data-l="2" aria-pressed="false">' + esc(fmt(w.lineN, { n: 2 })) + "</button></div>" +
+        '<div class="tok-zoom"><button type="button" class="tok-icon tok-step" data-act="nudge" data-d="-1"></button><button type="button" class="tok-icon tok-step" data-act="nudge" data-d="1"></button></div>' +
       "</div>" +
       '<div class="tok-pad" id="tokChecklist">' + renderChecklist(c) + "</div></div>";
   }
@@ -237,11 +260,13 @@
     var slot = $("tokTraceSlot"); if (!slot) return;
     var p = st.svg[c.svg] ? Promise.resolve(st.svg[c.svg]) : fetch(BASE + "media/" + c.svg).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); });
     p.then(function (txt) {
-      st.svg[c.svg] = txt;
       var stage = $("tokStage"); if (!stage || current() !== c || st.view !== "clinic") return;
-      stage.innerHTML = txt;
-      var svg = stage.querySelector("svg"), L = c.layout; svg.id = "tokTrace"; svg.setAttribute("data-src", c.svg);
-      svg.setAttribute("role", "img"); svg.setAttribute("aria-label", "CTG, " + L.durationSec / 60 + " min");
+      var svg = safeSvg(txt);
+      if (!svg) throw new Error("unsafe svg");
+      st.svg[c.svg] = txt;
+      stage.innerHTML = ""; stage.appendChild(svg);
+      var L = c.layout; svg.id = "tokTrace"; svg.setAttribute("data-src", c.svg);
+      svg.setAttribute("role", "img"); svg.setAttribute("aria-label", fmt(W().traceAria, { m: L.durationSec / 60 }));
       // bpm labels sit inside the plot so a legible size is never clipped by the narrow left margin
       // and every other FHR label is dropped (40 bpm steps) so they never collide at phone width.
       [].forEach.call(svg.querySelectorAll(".tk-axis"), function (t) {
@@ -256,12 +281,64 @@
       }
       st._stage = S.attach(stage, svg); st._stage.reset();
       if (G.ResizeObserver) { st._ro = new G.ResizeObserver(function () { if (st._stage) st._stage.reset(); }); st._ro.observe(stage); }
-      var out = $("tokCalOut");
-      st._cal = G.TOKOS_CALIPERS.attach(svg, L, function () { var o = $("tokCalOut"); if (o && st._cal) o.textContent = st._cal.readout(st.prefs.lang); });
-      if (out) out.textContent = st._cal.readout(st.prefs.lang);
+      // Neutral start: the lines sit a few bpm either side of this strip's baseline, and the readout
+      // prompts instead of showing a verdict until the learner moves a line (drag or stepper).
+      st.calMoved = { bpm: false, time: false }; st.calLine = 1;
+      st._cal = G.TOKOS_CALIPERS.attach(svg, L, function (s, reason, key) {
+        if (reason === "drag") { st.calMoved[s.mode] = true; st.calLine = key === "y2" || key === "x2" ? 2 : 1; syncCal(); }
+        calOut();
+      });
+      var K = G.TOKOS_CALIPERS, b = (c.features && c.features.baseline) || 140;
+      st._cal.set("y1", K.yForBpm(L, b + 8)); st._cal.set("y2", K.yForBpm(L, b - 8));
+      st._cal.set("x1", L.padL + L.plotW * 0.46); st._cal.set("x2", L.padL + L.plotW * 0.54);
+      syncCal(); calOut();
     }).catch(function () {
       var s2 = $("tokStage"); if (s2) s2.innerHTML = '<div class="tok-err tok-err-trace" role="alert"><p>' + esc(W().traceErr) + '</p><button type="button" class="tok-btn sec" data-act="retrace">' + esc(W().tryAgain) + "</button></div>";
     });
+  }
+
+  // Our own renderer's SVG, still parsed as data: anything scriptable is refused and only the <svg> element is adopted.
+  function safeSvg(txt) {
+    try {
+      var doc = new G.DOMParser().parseFromString(txt, "image/svg+xml"), r = doc.documentElement;
+      if (!r || r.localName !== "svg" || doc.getElementsByTagName("parsererror").length) return null;
+      if (r.getElementsByTagName("script").length || r.getElementsByTagName("foreignObject").length) return null;
+      var all = [r].concat([].slice.call(r.getElementsByTagName("*")));
+      for (var i = 0; i < all.length; i++) {
+        for (var j = 0; j < all[i].attributes.length; j++) {
+          var at = all[i].attributes[j];
+          if (/^on/i.test(at.name) || (/href$/i.test(at.name) && /^\s*javascript:/i.test(at.value))) return null;
+        }
+      }
+      return G.document.importNode(r, true);
+    } catch (e) { return null; }
+  }
+
+  /* ---------- calipers: readout, line choice, keyboard steppers ---------- */
+  function calOut() {
+    var o = $("tokCalOut"); if (!o || !st._cal) return;
+    var m = st._cal.state().mode, moved = st.calMoved && st.calMoved[m];
+    o.textContent = moved ? st._cal.readout(st.prefs.lang) : W().calPrompt;
+    o.classList.toggle("idle", !moved);
+  }
+  function syncCal() {
+    var el = $("smdTokos"); if (!el || !st._cal) return;
+    var w = W(), m = st._cal.state().mode, n = st.calLine || 1;
+    [].forEach.call(el.querySelectorAll("[data-act=line]"), function (x) { x.setAttribute("aria-pressed", String(+x.getAttribute("data-l") === n)); });
+    [].forEach.call(el.querySelectorAll("[data-act=nudge]"), function (x) {
+      var up = x.getAttribute("data-d") === "1";
+      x.setAttribute("aria-label", fmt(m === "bpm" ? (up ? w.bpmUp : w.bpmDown) : (up ? w.timeUp : w.timeDown), { n: n }));
+      x.innerHTML = (up ? "+1" : "\u22121") + "<small>" + esc(m === "bpm" ? "bpm" : w.s) + "</small>";
+    });
+    var svg = $("tokTrace"), lines = svg ? svg.querySelectorAll(".tk-cal-line") : [];
+    [].forEach.call(lines, function (l, i) { l.classList.toggle("tk-cal-sel", i === n - 1); });
+  }
+  function nudge(d) {
+    var c = current(); if (!st._cal || !c) return;
+    var K = G.TOKOS_CALIPERS, L = c.layout, s = st._cal.state(), k = (s.mode === "bpm" ? "y" : "x") + (st.calLine || 1);
+    if (s.mode === "bpm") st._cal.set(k, K.yForBpm(L, Math.round(K.bpmAt(L, s[k])) + d));
+    else { var sec = Math.min(Math.max(Math.round(K.secAt(L, s[k])) + d, 0), L.durationSec); st._cal.set(k, L.padL + (sec / L.durationSec) * L.plotW); }
+    st.calMoved[s.mode] = true; calOut();
   }
 
   // Answering updates the checklist in place: the mounted trace, its zoom and the calipers stay put,
@@ -286,7 +363,7 @@
     var c = current(), w = W(), res = st.session.result, t = res.truth, o = c.outcome || {}, f = c.features, i = 0;
     var rows = res.ids.map(function (id) {
       var ok = res.perQ[id], mine = w.opts[id][st.session.answers[id]], key = w.opts[id][t[id]];
-      return '<li class="tok-row ' + (ok ? "ok" : "no") + '" style="--i:' + (i++) + '"><div class="tok-row-h"><b>' + esc(w[QLABEL[id]]) + '</b><span class="tok-mark">' + (ico(ok ? "check" : "x") || (ok ? "+" : "-")) + "<span>" + esc(ok ? w.matchOne : w.noMatch) + "</span></span></div>" +
+      return '<li class="tok-row ' + (ok ? "ok" : "no") + '" style="--i:' + (i++) + '"><div class="tok-row-h"><b>' + esc(w[QLABEL[id]]) + '</b><span class="tok-mark">' + icoH(ok ? "check" : "x") + "<span>" + esc(ok ? w.matchOne : w.noMatch) + "</span></span></div>" +
         (ok ? '<p class="tok-ans">' + esc(key) + "</p>"
             : '<p class="tok-ans mine"><span>' + esc(w.yours) + "</span>" + esc(mine) + '</p><p class="tok-ans key"><span>' + esc(w.key) + "</span>" + esc(key) + "</p>") + "</li>";
     }).join("");
@@ -297,8 +374,8 @@
     // Review Focus: the two .tok-block sections stay separate: what the trace showed, then what was recorded at birth.
     return top(w.backHub, (st.prefs.lang === "hi" ? st.cfg.tracks[0].labelHi : st.cfg.tracks[0].labelEn), caseLine()) +
       '<div class="tok-scroll"><div class="tok-reveal tok-pad">' +
-      '<p class="tok-score"><b>' + res.matches + "<small>/" + res.ids.length + "</small></b> " + esc(w.match) + "</p>" +
-      (c.review ? "" : '<p class="tok-rule">' + (ico("info") || "") + "<span>" + esc(w.rule) + "</span></p>") +
+      '<p class="tok-score" tabindex="-1"><b>' + res.matches + "<small>/" + res.ids.length + "</small></b> " + esc(w.match) + "</p>" +
+      (c.review ? "" : '<p class="tok-rule">' + icoH("info") + "<span>" + esc(w.rule) + "</span></p>") +
       '<ol class="tok-concord">' + rows + "</ol>" +
       '<section class="tok-block"><h3>' + esc(w.features) + "</h3><dl>" +
         kv(w.baseline, num(f.baseline, "bpm")) +
@@ -326,7 +403,7 @@
     save();
     st.session.done++;
     st.session.result = { ids: ids, perQ: g.perQ, truth: t, matches: g.matches, ivl: card[3] - today() };
-    st.view = "reveal"; render();
+    st.view = "reveal"; render(".tok-score");
     try { var sc = $("smdTokos").querySelector(".tok-scroll"); if (sc) sc.scrollTop = 0; } catch (e) {}
   }
 
@@ -338,8 +415,10 @@
       if (act === "clinic") { if (level() === "resident") gate("clinic.ctg", startSession); else startSession(); }
       else if (act === "ans") answer(b);
       else if (act === "reveal") submit();
-      else if (act === "next") { st.session.i++; st.session.answers = {}; st.session.result = null; st.view = "clinic"; render(); }
-      else if (act === "cal") { if (st._cal) st._cal.setMode(b.getAttribute("data-m")); [].forEach.call(el.querySelectorAll("[data-act=cal]"), function (x) { x.setAttribute("aria-pressed", String(x === b)); }); }
+      else if (act === "next") { st.session.i++; st.session.answers = {}; st.session.result = null; st.view = "clinic"; render(".tok-vignette"); }
+      else if (act === "cal") { if (st._cal) st._cal.setMode(b.getAttribute("data-m")); [].forEach.call(el.querySelectorAll("[data-act=cal]"), function (x) { x.setAttribute("aria-pressed", String(x === b)); }); syncCal(); calOut(); }
+      else if (act === "line") { st.calLine = +b.getAttribute("data-l"); syncCal(); }
+      else if (act === "nudge") nudge(+b.getAttribute("data-d"));
       else if (act === "zoom") { if (st._stage) st._stage.zoomBy(2); }
       else if (act === "fit") { if (st._stage) st._stage.reset(); }
       else if (act === "retrace") { var s = $("tokStage"); if (s) s.innerHTML = '<div class="tok-loading-trace" id="tokTraceSlot" aria-busy="true">' + esc(W().traceLoading) + "</div>"; mountTrace(current()); }

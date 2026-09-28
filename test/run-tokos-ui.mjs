@@ -22,6 +22,7 @@ let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = [];
 const call = (m, p) => { const i = msgId++; return new Promise(r => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
 const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(200); } return false; };
+const key = async (k, code, vk, text) => { await call("Input.dispatchKeyEvent", { type: "keyDown", key: k, code, windowsVirtualKeyCode: vk, nativeVirtualKeyCode: vk, text }); await call("Input.dispatchKeyEvent", { type: "keyUp", key: k, code, windowsVirtualKeyCode: vk, nativeVirtualKeyCode: vk }); };
 let fails = 0; const ok = (c, m) => { console.log((c ? "✅ " : "❌ ") + m); if (!c) fails++; };
 
 try {
@@ -67,12 +68,26 @@ try {
   // MBBS: 5 questions; submit disabled until all answered
   await ev(`localStorage.removeItem("smd_tokos_v1"); localStorage.setItem("smd_tokos_prefs", JSON.stringify({level:"mbbs",lang:"en",tab:"test"})); TOKOS.close(); TOKOS.open(); return 1;`);
   await until(`return !!document.querySelector('[data-act=clinic]');`);
+  // Re-rendering the same view keeps focus on the control that caused it (not the back button)
+  await ev(`document.querySelector('[data-act=lang]').focus(); return 1;`); await key("Enter", "Enter", 13, "\r");
+  ok(await until(`return document.documentElement && document.querySelector('#smdTokos').getAttribute('lang') === 'hi';`), "language toggle works from the keyboard");
+  ok(await ev(`return document.activeElement && document.activeElement.getAttribute('data-act') === 'lang';`) === true, "focus stays on the language toggle after it re-renders");
+  await key("Enter", "Enter", 13, "\r");
+  ok(await until(`return !document.querySelector('#smdTokos').hasAttribute('lang');`), "language toggles back to English");
   await ev(`document.querySelector('[data-act=clinic]').click(); return 1;`);
   ok(await until(`return document.querySelectorAll('.tok-q').length === 5;`), "MBBS checklist has 5 questions");
   ok(await ev(`return document.querySelector('[data-act=reveal]').disabled;`) === true, "submit disabled until every question is answered");
 
   // Calipers read the same before and after zoom (drag in screen space, measured in viewBox units)
   ok(await until(`return !!(TOKOS._cal && document.getElementById('tokTrace'));`), "calipers attached to the inline trace");
+  ok(await ev(`var t=document.getElementById('tokCalOut').textContent; return !/Range|Span/.test(t) && /Drag a line/.test(t);`) === true, "calipers start neutral: a prompt, no verdict, before the learner measures");
+  ok(await ev(`var L=TOKOS._st.session.list[TOKOS._st.session.i].c.layout, s=TOKOS._cal.state(); return Math.abs(s.y1-TOKOS_CALIPERS.yForBpm(L,160))>1 && Math.abs(s.y2-TOKOS_CALIPERS.yForBpm(L,110))>1;`) === true, "calipers do not start on the 110/160 band");
+  // Keyboard only: line 1 stepper, focus + Enter three times
+  await ev(`document.querySelector('[data-act=nudge][data-d="1"]').focus(); return 1;`);
+  for (let i = 0; i < 3; i++) await key("Enter", "Enter", 13, "\r");
+  const rk = await ev(`return document.getElementById('tokCalOut').textContent;`);
+  ok(/^Range: 19 bpm/.test(rk), "keyboard stepper (focus + Enter) moves line 1 and updates the readout: " + rk);
+  ok(await ev(`return document.querySelector('[data-act=nudge][data-d="1"]').getAttribute('aria-label') === 'Move line 1 up 1 bpm';`) === true, "stepper carries a localized aria-label");
   const drag = async (key, bpm) => ev(`var svg=document.getElementById('tokTrace'), K=TOKOS_CALIPERS, L=TOKOS._st.session.list[TOKOS._st.session.i].c.layout;
     var hit=[].filter.call(svg.querySelectorAll('.tk-cal-hit'),function(h){return h.getAttribute('data-key')==='${key}';})[0];
     var m=svg.getScreenCTM(), from=svg.createSVGPoint(); from.x=L.padL+L.plotW/2; from.y=+hit.getAttribute('y1'); from=from.matrixTransform(m);
@@ -108,6 +123,16 @@ try {
   ok(await until(`return !!document.querySelector('.tok-err [data-act=retry]');`), "offline load shows Try again");
   await ev(`window.fetch=window.__f; document.querySelector('[data-act=retry]').click(); return 1;`);
   ok(await until(`return !!document.querySelector('[data-act=clinic]');`), "Try again recovers");
+
+  // A fetched SVG with anything scriptable is refused and the trace error with Try again shows instead
+  await ev(`localStorage.removeItem("smd_tokos_v1"); TOKOS.close(); TOKOS.open(); return 1;`);
+  await until(`return !!document.querySelector('[data-act=clinic]');`);
+  await ev(`document.querySelector('[data-act=clinic]').click(); return 1;`);
+  await until(`return !!TOKOS._cal;`);
+  await ev(`var c=TOKOS._st.session.list[0].c; window.__good=TOKOS._st.svg[c.svg]; TOKOS._st.svg[c.svg]='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect width="10" height="10" onclick="window.__pwn=1"/></svg>'; TOKOS._render(); return 1;`);
+  ok(await until(`return !!document.querySelector('.tok-err-trace [data-act=retrace]');`), "an SVG with an on* attribute is refused (trace error + Try again)");
+  await ev(`var c=TOKOS._st.session.list[0].c; TOKOS._st.svg[c.svg]=window.__good; document.querySelector('[data-act=retrace]').click(); return 1;`);
+  ok(await until(`return !!document.getElementById('tokTrace');`), "Try again mounts the trace");
 
   ok(errors.length === 0, "no uncaught Tokós errors" + (errors.length ? ": " + errors.slice(0, 3).join(" | ") : ""));
   console.log(fails === 0 ? "\nALL GREEN" : `\n${fails} FAILED`);

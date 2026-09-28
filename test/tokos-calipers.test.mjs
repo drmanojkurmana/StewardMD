@@ -26,3 +26,9 @@ test("readouts use a colon, no em-dash, and ASCII digits in Hindi", () => {
   const t = K.readout(L, { mode: "time", x1: L.padL, x2: L.padL + (200 / L.durationSec) * L.plotW, y1: 0, y2: 0 }, "en");
   assert.match(t, /^Span: 3 min 20 s \(200 s\), prolonged/);
 });
+
+test("Hindi time readout keeps number and unit together (सेकंड, non-breaking space)", () => {
+  const hi = K.readout(L, { mode: "time", x1: L.padL, x2: L.padL + (83 / L.durationSec) * L.plotW, y1: 0, y2: 0 }, "hi");
+  assert.ok(/1 मिनट 23 सेकंड \(83 सेकंड\)/.test(hi), hi);
+  assert.ok(!/\d s\b/.test(hi), hi);
+});

@@ -5,10 +5,10 @@
   "use strict";
   var NS = "http://www.w3.org/2000/svg";
   var WORDS = {
-    en: { range: "Range", span: "Span", min: "min", s: "s", reduced: "reduced (below 5)", normal: "normal (5 to 25)", increased: "increased (above 25)",
-      short: "shorter than a deceleration (under 15 s)", decel: "deceleration length (15 s to 3 min)", prolonged: "prolonged (3 to 5 min)", over5: "over 5 min" },
-    hi: { range: "रेंज", span: "अवधि", min: "मिनट", s: "सेकंड", reduced: "कम (5 से कम)", normal: "सामान्य (5 से 25)", increased: "अधिक (25 से ऊपर)",
-      short: "डिसेलेरेशन से छोटा (15 s से कम)", decel: "डिसेलेरेशन जितना (15 s से 3 मिनट)", prolonged: "लंबा (3 से 5 मिनट)", over5: "5 मिनट से अधिक" }
+    en: { nb: " ", range: "Range", span: "Span", min: "min", s: "s", reduced: "reduced (below 5)", normal: "normal (5 to 25)", increased: "increased (above 25)",
+      short: "shorter than a deceleration (under 15\u00a0s)", decel: "deceleration length (15\u00a0s to 3\u00a0min)", prolonged: "prolonged (3 to 5\u00a0min)", over5: "over 5\u00a0min" },
+    hi: { nb: "\u00a0", range: "रेंज", span: "अवधि", min: "मिनट", s: "सेकंड", reduced: "कम (5 से कम)", normal: "सामान्य (5 से 25)", increased: "अधिक (25 से ऊपर)",
+      short: "डिसेलेरेशन से छोटा (15\u00a0सेकंड से कम)", decel: "डिसेलेरेशन जितना (15\u00a0सेकंड से 3\u00a0मिनट)", prolonged: "लंबा (3 से 5\u00a0मिनट)", over5: "5\u00a0मिनट से अधिक" }
   };
   function yForBpm(L, bpm) { return L.yTop + L.hFhr - ((Math.min(Math.max(bpm, L.fhrMin), L.fhrMax) - L.fhrMin) / (L.fhrMax - L.fhrMin)) * L.hFhr; }
   function bpmAt(L, y) { return L.fhrMax - ((y - L.yTop) / L.hFhr) * (L.fhrMax - L.fhrMin); }
@@ -23,7 +23,8 @@
     }
     var s = deltaSec(L, st.x1, st.x2), m = Math.floor(s / 60), r = s % 60;
     var label = s < 15 ? w.short : s < 180 ? w.decel : s <= 300 ? w.prolonged : w.over5;
-    return w.span + ": " + (m ? m + " " + w.min + " " : "") + r + " " + w.s + " (" + s + " s), " + label;
+    // number and unit are glued with w.nb (a non-breaking space in Hindi) so "83 सेकंड" never wraps apart
+    return w.span + ": " + (m ? m + w.nb + w.min + " " : "") + r + w.nb + w.s + " (" + s + w.nb + w.s + "), " + label;
   }
   function toViewBox(svg, clientX, clientY) {
     var p = svg.createSVGPoint(); p.x = clientX; p.y = clientY;
@@ -43,7 +44,7 @@
           var p = toViewBox(svg, ev.clientX, ev.clientY), f = hit.getAttribute("data-key"); // y1/y2 in bpm mode, x1/x2 in time mode
           if (st.mode === "bpm") st[f] = Math.min(Math.max(p.y, L.yTop), L.yTop + L.hFhr);
           else st[f] = Math.min(Math.max(p.x, L.padL), L.padL + L.plotW);
-          draw();
+          draw("drag", f);
         }
         function up() { hit.removeEventListener("pointermove", move); hit.removeEventListener("pointerup", up); hit.removeEventListener("pointercancel", up); }
         hit.addEventListener("pointermove", move); hit.addEventListener("pointerup", up); hit.addEventListener("pointercancel", up);
@@ -57,10 +58,11 @@
         else { l.setAttribute("y1", L.yTop); l.setAttribute("y2", L.yTop + L.hFhr); l.setAttribute("x1", v); l.setAttribute("x2", v); }
       });
     }
-    function draw() {
+    // onChange(st, reason, key): reason is "drag" when the learner moved line `key` by pointer
+    function draw(reason, key) {
       a[1].setAttribute("data-key", st.mode === "bpm" ? "y1" : "x1"); b[1].setAttribute("data-key", st.mode === "bpm" ? "y2" : "x2");
       place(a, st.mode === "bpm" ? st.y1 : st.x1); place(b, st.mode === "bpm" ? st.y2 : st.x2);
-      if (onChange) onChange(st);
+      if (onChange) onChange(st, reason, key);
     }
     draw();
     return {
