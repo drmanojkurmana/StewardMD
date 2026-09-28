@@ -10419,6 +10419,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     } catch (e) {}
   }
   try { window.SMD_openUpdate = openUpdate; } catch (e) {}
+  // Cold-start tap on the weekly Clinical Bulletins review push (/?rvtab=bulletins): open the Review Desk tab.
+  try {
+    if (/[?&]rvtab=bulletins\b/.test(location.search || "")) {
+      window.addEventListener("load", function () { setTimeout(function () { try { if (window.SMD_REVIEW && SMD_REVIEW.openBulletins) SMD_REVIEW.openBulletins(); } catch (e) {} }, 1600); });   // after Home's entrance fade
+    }
+  } catch (e) {}
   // Cold-start tap: the app opened at /?u=<id> — open that card once the shell is up.
   try {
     var _um = (location.search || "").match(/[?&]u=([^&]+)/);

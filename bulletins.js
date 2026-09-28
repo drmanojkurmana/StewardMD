@@ -8,7 +8,8 @@
  * Rules (docs/CLINICAL_AUTO_UPDATE_ENGINEERING_SPEC.md): nothing when the flag is off; nothing from a copy
  * older than 7 days (a one-line notice instead, never silence that reads as "nothing changed"); never a
  * "no updates" line for a disease without bulletins; unknown disease ids ignored; links only for https.
- * Flag: smd_kb_bulletins, default OFF. ?bulletins=1 turns it on, ?bulletins=0 forces off. Buildless ES5.
+ * Flag: smd_kb_bulletins, default ON (owner, 2026-09-28). ?bulletins=0 or localStorage "0" turns it off on this device;
+ * the server kill switch (Review Desk, bulletin_settings) turns it off everywhere. Buildless ES5.
  */
 (function (root) {
   "use strict";
@@ -33,8 +34,8 @@
       var q = (G.location.search.match(/[?&]bulletins=([^&]+)/) || [])[1];
       if (q === "1" || q === "true") return true;
       if (q === "0" || q === "false") return false;
-      return G.localStorage.getItem(LS_FLAG) === "1";
-    } catch (e) { return false; }
+      return G.localStorage.getItem(LS_FLAG) !== "0";
+    } catch (e) { return true; }
   }
 
   function readCache() {

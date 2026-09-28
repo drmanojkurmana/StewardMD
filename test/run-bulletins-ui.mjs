@@ -125,18 +125,23 @@ try {
   await call("Page.enable"); await call("Network.enable");
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
 
-  /* 1. flag off: no request, no card */
-  ok(await load(""), "app and KB load");
-  await ev("try{localStorage.removeItem('smd_kb_bulletins');localStorage.removeItem('smd_kb_bulletins_v1')}catch(e){};true");
+  /* 1. opted out on this device (localStorage "0", or ?bulletins=0): no request, no card */
+  ok(await load("?bulletins=0"), "app and KB load");
+  await ev("try{localStorage.setItem('smd_kb_bulletins','0');localStorage.removeItem('smd_kb_bulletins_v1')}catch(e){};true");
   await load("");
   await sleep(800);
-  ok(st.hits === 0, "flag off: no request to /api/updates/bulletins", st.hits);
+  ok(st.hits === 0, "opted out: no request to /api/updates/bulletins", st.hits);
   await openDisease(DIS); await sleep(300);
-  ok(await ev(`!document.querySelector('#dxMgmt .smd-bl')`), "flag off: no card on the disease page");
+  ok(await ev(`!document.querySelector('#dxMgmt .smd-bl')`), "opted out: no card on the disease page");
+  await ev("try{localStorage.removeItem('smd_kb_bulletins')}catch(e){};true");
+  await load("?bulletins=0");
+  await sleep(800);
+  ok(st.hits === 0, "?bulletins=0 forces off even without the stored opt-out", st.hits);
 
-  /* 2. flag on: sync, then the card */
-  await load("?bulletins=1");
-  ok(await until("!!(SMD_BULLETINS._readCache()&&SMD_BULLETINS._readCache().items.length)"), "flag on: syncs on launch and stores the copy");
+  /* 2. default ON: no parameter, no stored setting -> sync, then the card */
+  await load("");
+  ok(await ev("SMD_BULLETINS.flagOn()===true"), "on by default");
+  ok(await until("!!(SMD_BULLETINS._readCache()&&SMD_BULLETINS._readCache().items.length)"), "default on: syncs on launch and stores the copy");
   ok(st.hits >= 1, "flag on: one request made", st.hits);
   await openDisease(DIS); await sleep(300);
   const shown = await ev(`${cardsIn}.map(function(c){return c.querySelector('.smd-bl-h').textContent})`);
@@ -208,7 +213,7 @@ try {
   await sleep(600);
   ok(await ev(`!!document.querySelector('#smdReview.on')&&!document.querySelector('#smdReview [data-rv-act="kind:bulletin"]')`), "Review Desk: no Clinical updates tab for a non-signer");
   await ev("SMD_REVIEW.close();true");
-  st.me = { canSign: true, isOwner: true, killed: false, signer: { name: "Manoj Kurmana", regNo: "APMC-1", council: "Andhra Pradesh Medical Council" }, self: { uid: "u-owner", name: "Manoj Kurmana", reg_no: "APMC-1", council: "Andhra Pradesh Medical Council" } };
+  st.me = { canSign: true, isOwner: true, killed: false, pending: { candidates: 1, drafts: 1, source_changed: 0, review_due: 0, total: 2 }, signer: { name: "Manoj Kurmana", regNo: "APMC-1", council: "Andhra Pradesh Medical Council" }, self: { uid: "u-owner", name: "Manoj Kurmana", reg_no: "APMC-1", council: "Andhra Pradesh Medical Council" } };
   await ev("SMD_REVIEW.open();true");
   ok(await until(`!!document.querySelector('#smdReview [data-rv-act="kind:bulletin"]')`), "Review Desk: tab appears for a signer");
   await ev(`document.querySelector('#smdReview [data-rv-act="kind:bulletin"]').click();true`);
@@ -279,6 +284,16 @@ try {
   await ev("window.SMD_openUpdate&&SMD_openUpdate('u9');true");
   ok(await until(`!!document.querySelector('.fd-card[data-uid="u9"]')`), "bell feed renders");
   ok(await ev(`(function(){var s=document.querySelector('.fd-card[data-uid="u9"] .fd-signed');return !!s&&s.textContent==='Signed bulletin in Library'&&!document.querySelector('.fd-card[data-uid="u8"] .fd-signed')})()`), "only the item with a live bulletin carries the marker");
+
+  /* 13. the Saturday review push: tapping it (cold start at /?rvtab=bulletins) opens the Clinical updates tab */
+  await load("?rvtab=bulletins");
+  ok(await until(`!!document.querySelector('#smdReview.on')&&(document.querySelector('#smdReview [data-rv-act="kind:bulletin"]')||{}).getAttribute&&document.querySelector('#smdReview [data-rv-act="kind:bulletin"]').getAttribute('aria-selected')==='true'`, 20000), "the review link opens the Review Desk on Clinical updates");
+  ok(await ev(`document.querySelector('#smdReview [data-rv-act="kind:bulletin"]').textContent.trim()==='Clinical updates (2)'`), "the tab shows how many items wait");
+  ok(await until(`/Waiting for you: 1 new source item, 1 draft\./.test(document.querySelector('#smdReview').textContent)`), "the queue says what is waiting");
+  await sleep(2500);
+  const top = await ev(`(function(){var e=document.elementFromPoint(innerWidth/2,innerHeight/2);var r=e&&e.closest('#smdReview');var o=[];for(var n=e;n&&n!==document.body&&o.length<6;n=n.parentElement)o.push((n.id?'#'+n.id:n.tagName)+'.'+String(n.className).split(' ')[0]+':z'+getComputedStyle(n).zIndex+':o'+getComputedStyle(n).opacity);return r?'ok':o.join(' < ')})()`);
+  ok(top === "ok", "the Review Desk sheet is on top once the app has started", top);
+  await shot("desk-from-review-push");
 } catch (e) {
   console.error(e); failures++;
 } finally {

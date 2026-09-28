@@ -570,6 +570,10 @@ export default {
       ctx.waitUntil(post("/api/followcare/admin/run-voice"));     // AI voice fallback — morning window (no-op until a hospital enables voice)
       return;
     }
+    if (event.cron === "30 3 * * 6") {                     // Saturday 09:00 IST: Clinical Bulletins weekly review run
+      ctx.waitUntil(post("/api/updates/review-digest"));   // fresh crawl, then push each registered signer what waits
+      return;
+    }
     if (event.cron === "30 11 * * *") {                    // FollowCare: AI voice fallback — evening window (17:00 IST)
       ctx.waitUntil(post("/api/followcare/admin/run-voice"));
       return;

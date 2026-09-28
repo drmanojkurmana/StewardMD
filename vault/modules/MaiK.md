@@ -361,3 +361,26 @@ show this").
   "Pathophysiology"), PMC acute pancreatitis the Revised Atlanta severity figure. Limit: AAFP's older GIF
   algorithms are drawn by script and dropped as GIFs, so those pages still show nothing or a photo.
 
+## MLX on iPhone (2026-09-28, branch claude/twitter-post-meaning-6h0ikw, flag `smd_maik_mlx`, default OFF)
+iOS-only second engine; Android keeps llama.cpp. Decision: Decisions.md 2026-09-28. Runbook and go/no-go:
+`docs/MAIK_MLX_SPIKE.md`.
+- `maik-models.js`: `mlx:` file list on `bonsai-ternary-8b` ONLY (2.32 GB, stock qwen3). The `bonsai2-27b`
+  MLX build (8.62 GB) was dropped (owner: "Ignore 8gb model"); MAiK Max 2 stays on llama.cpp. Sub-pack ids
+  `<id>#mlx:<file>`, flat names `tb8-mlx--*`. `mlxEnabled()` = flag + iOS; `mlxReady(id)` also needs every
+  file verified.
+- `maik-local.js`: `llama()` returns the Llama plugin itself when no Mlx plugin is linked (unchanged path);
+  with Mlx linked it returns an adapter that forwards to the engine holding the model and listens on both.
+  `engineFor(id, loadOpts)` picks; `ensureLoaded` releases the other engine (awaited) before loading; an MLX
+  load failure sets `_mlxOff[id]` and loads the GGUF.
+- `maik-engine.js`: "Faster iPhone engine (Labs)" row under Advanced (`mlxRowHTML`, `data-me-mlx`).
+- `local-plugins/capacitor-mlx`: LINKED (package.json + CapApp-SPM) since the owner's phase 4 call; the app
+  is on iOS 17.0 for it (every iPhone `IPHONEOS_DEPLOYMENT_TARGET` must stay >= 17 or `cap sync` writes
+  `.v16` back into CapApp-SPM). Pins: mlx-swift-lm `9f70e68`, mlx-swift `0f4fe40`. DEBUG self-benchmark
+  marker `Documents/maik-mlx-selftest`. Uncompiled as of writing; package-lock.json not yet regenerated.
+- Labs switch: "Faster iPhone engine (Labs)" under Advanced (`data-me-mlx="toggle"`), shown when
+  `SMD_MAIK_MODELS.mlxAvailable()` (iPhone + Mlx plugin). No background grace on MLX by design (GPU work is
+  refused in the background); no MTP drafter yet.
+- Gotcha: the live progress patcher unsubscribes when an emitted id has no `[data-me-status]` element, so the
+  MLX row carries hidden status hooks for every small MLX file. `rerender()` now ignores a detached section
+  (a delete emits before its promise settles, and the patcher has already redrawn).
+

@@ -481,7 +481,51 @@
   }
 
   function cap() { try { return (typeof window !== "undefined" && window.Capacitor) || null; } catch (e) { return null; } }
-  function llama() { var c = cap(); return (c && c.Plugins && c.Plugins.Llama) || null; }
+  /* TWO NATIVE ENGINES ON iOS (owner, 2026-09-28): llama.cpp (capacitor-llama, every pack, both
+   * platforms) and MLX (capacitor-mlx, iOS only, only packs with an MLX build, flag smd_maik_mlx).
+   * Android and any build without the Mlx plugin get the Llama plugin object itself, exactly as
+   * before. With Mlx linked, llama() returns one adapter that forwards each call to whichever engine
+   * holds the model NOW, so every caller that took llama() before ensureLoaded() picked the engine
+   * still reaches the right one. Both plugins emit the same events (llamaToken, llamaReleased,
+   * llamaError) with the same payloads, and the adapter listens on both. */
+  var _engine = "llama";          // "llama" | "mlx": the engine that holds, or is about to hold, the model
+  var _mlxOff = {};               // packId -> true: MLX failed to load it this session, stay on llama.cpp
+  var _adapter = null;
+  function plugins() { var c = cap(); return (c && c.Plugins) || null; }
+  function activePlugin() {
+    var P = plugins(); if (!P) return null;
+    return (_engine === "mlx" && P.Mlx) ? P.Mlx : (P.Llama || null);
+  }
+  function llama() {
+    var P = plugins();
+    if (!P || !P.Llama) return null;
+    if (!P.Mlx) return P.Llama;
+    if (!_adapter) {
+      var fwd = function (m) { return function (a) { return activePlugin()[m](a); }; };
+      _adapter = {
+        available: fwd("available"), load: fwd("load"), generate: fwd("generate"),
+        cancel: fwd("cancel"), release: fwd("release"),
+        // Images are llama.cpp only (engineFor() never picks MLX for a vision load).
+        generateWithImage: function (a) { return plugins().Llama.generateWithImage(a); },
+        addListener: function (name, cb) {
+          var P2 = plugins();
+          var hs = [P2.Llama, P2.Mlx].map(function (p) {
+            try { return Promise.resolve(p.addListener(name, cb)); } catch (e) { return Promise.resolve(null); }
+          });
+          return { remove: function () { hs.forEach(function (h) { h.then(function (r) { if (r && r.remove) r.remove(); }, function () {}); }); } };
+        }
+      };
+    }
+    return _adapter;
+  }
+  /** Which engine should hold this pack. MLX only when every condition holds; otherwise llama.cpp. */
+  function engineFor(packId, loadOpts) {
+    if (loadOpts && loadOpts.vision) return "llama";
+    if (_mlxOff[packId]) return "llama";
+    var P = plugins(), M = models();
+    if (!P || !P.Mlx || !M || !M.mlxReady) return "llama";
+    try { return M.mlxReady(packId) ? "mlx" : "llama"; } catch (e) { return "llama"; }
+  }
   function models() { try { return window.SMD_MAIK_MODELS || null; } catch (e) { return null; } }
 
   function clip(s, n) {
@@ -662,6 +706,19 @@
     watchRelease(L);
     if (!L) return Promise.reject(new Error("on-device inference needs the native app"));
     if (!M) return Promise.reject(new Error("model manager unavailable"));
+    /* ENGINE SWITCH. Only one model may be resident: two multi-GB models is a jetsam kill. So the
+     * engine that holds a model is released, and that release is AWAITED, before the other loads. */
+    var wantEngine = engineFor(packId, loadOpts);
+    if (wantEngine !== _engine) {
+      var prev = activePlugin();
+      _engine = wantEngine;
+      _loadedPack = null;
+      _warmed = null;
+      return Promise.resolve()
+        .then(function () { return (prev && prev.release) ? prev.release() : null; })
+        .then(null, function () { return null; })
+        .then(function () { return ensureLoaded(packId, loadOpts); });
+    }
     if (_loadedPack === packId) {
       // The plugin drops the model on app pause, so confirm it is still resident before answering.
       return L.available().then(function (a) {
@@ -703,7 +760,7 @@
         var avail = 0, need = 0;
         try {
           avail = (a && Number(a.availableMemory)) || 0;
-          need = (M.totalBytes(packId) || 0) + draftBytes(M, packId);
+          need = _engine === "mlx" ? (M.mlxBytes(packId) || 0) : (M.totalBytes(packId) || 0) + draftBytes(M, packId);
           // An image answer also maps the vision projector (0.6 to 1 GB, not mmap'd, freed after the
           // answer): count it when this load is for one (audit T61, 2026-09-25).
           if (loadOpts && loadOpts.vision) { var cv = M.caps ? M.caps(packId) : null; need += (cv && cv.visionBytes) || 0; }
@@ -723,8 +780,13 @@
         }
         return null;
       })
-      .then(function () { return Promise.all([M.pathFor(packId), draftPathFor(packId)]); }).then(function (pp) {
+      .then(function () {
+        if (_engine === "mlx") return M.mlxPaths(packId).then(function (mp) { return [mp, ""]; });
+        return Promise.all([M.pathFor(packId), draftPathFor(packId)]);
+      }).then(function (pp) {
       function loadAt(n) {
+        // MLX takes the model directory's files and a context size; the llama.cpp knobs do not apply.
+        if (_engine === "mlx") return L.load({ files: pp[0].files, nCtx: n }).then(function (r) { pk._ctx = n; return r; });
         return L.load({ path: pp[0], nCtx: n,
           // perf plan #4: a q8_0 KV cache halves the cache and the memory traffic per decoded token;
           // flash attention is what makes a quantised V cache legal. A pack may opt out (kvQ8: false).
@@ -737,7 +799,16 @@
       // A bigger window the device then refuses falls back to the proven size rather than failing.
       var base = pk.nCtx || 4096, want = wantCtx(packId, pk, _mem);
       return want > base ? loadAt(want).catch(function () { return loadAt(base); }) : loadAt(base);
-    }).then(function () { _loadedPack = packId; fetchDraftOnce(packId); return null; }, function (err) {
+    }).then(function () { _loadedPack = packId; if (_engine !== "mlx") fetchDraftOnce(packId); return null; }, function (err) {
+      /* MLX NEVER COSTS AN ANSWER. Any MLX load failure (too little memory, a runtime that rejects the
+       * files) switches this pack back to llama.cpp for the session and loads the GGUF instead. The
+       * MLX files are NOT deleted here: a failure is not proof they are corrupt, and the GGUF must
+       * never be removed for an MLX fault, which the corrupt-model branch below would do. */
+      if (_engine === "mlx") {
+        _mlxOff[packId] = true;
+        _loadedPack = null;
+        return ensureLoaded(packId, loadOpts);
+      }
       /* A CORRUPT MODEL IS A DEAD END UNLESS WE CLEAR IT.
        *
        * llama.cpp rejects a structurally bad file and the plugin reports "model-corrupted". Nothing
@@ -2795,7 +2866,9 @@
     warm: tracked(warm), isDebugBuild: isDebugBuild, debugProbed: debugProbed, cancel: cancel, release: release,
     sheetOpened: sheetOpened, sheetClosed: sheetClosed, setIdleMs: setIdleMs,
     vivaJudge: tracked(vivaJudge), opdSuggest: tracked(opdSuggest), parseJsonLoose: parseJsonLoose,
-    VIVA_SYS: VIVA_SYS, OPD_SYS: OPD_SYS, webAnswer: tracked(webAnswer), WEB_SYS: WEB_SYS, SCRIBE_SYS: SCRIBE_SYS
+    VIVA_SYS: VIVA_SYS, OPD_SYS: OPD_SYS, webAnswer: tracked(webAnswer), WEB_SYS: WEB_SYS, SCRIBE_SYS: SCRIBE_SYS,
+    // Which native engine holds the model ("llama" | "mlx") and which one a pack would get (2026-09-28).
+    engine: function () { return _engine; }, engineFor: engineFor
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_MAIK_LOCAL = API;

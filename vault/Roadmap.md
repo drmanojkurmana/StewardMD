@@ -165,6 +165,7 @@ Engineering that is deliberately NOT started:
 - [ ] The 4B packs take tens of seconds per structured pass on an iPhone 15 Pro. Measure Scribe refine latency on device and consider raising refineEveryChunks (or drafting only on Stop) for packs above ~2 GB
 - [ ] MedGemma 4B returned prose instead of JSON for a Telugu Scribe dictation in at least one run; measure the JSON-adherence rate per pack and record it as a caps.json score rather than the current 0/1/2 guess
 
+- [ ] **MLX on iPhone (2026-09-28, flag `smd_maik_mlx`, linked, app on iOS 17):** `npm install` to regenerate package-lock.json; first Xcode compile of `local-plugins/capacitor-mlx`; first run on a phone (`docs/MAIK_MLX_SPIKE.md` Phase 4 steps); then the MTP drafter (238.9 MB) and KV reuse, each measured on a phone.
 - **Bonsai 2 27B (PrismML, 2026-09-17):** needs PrismML's llama.cpp fork (PTQ1_0/PQ2_0 + Hadamard runtime); mainline b10502 in `capacitor-llama` rejects the files. Adopt by moving the plugin to the fork (iOS xcframework + Android submodule) or when mainline carries the types. See Decisions 2026-09-19.
 
 ## MaiK Scribe quota accounting (2026-09-19, server side landed)

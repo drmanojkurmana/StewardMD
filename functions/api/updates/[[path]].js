@@ -14,6 +14,7 @@
  *   GET    /api/updates/crawl-logs              -> { logs }                         (admin)
  *   POST   /api/updates                         -> { ok, item }  manual publish     (admin)
  *   POST   /api/updates/sync                    -> { ok, ...tally }  run pipeline    (admin/cron)
+ *   POST   /api/updates/review-digest           -> { ok, counts, notified }  weekly: pipeline + notify bulletin signers (admin/cron, Sat 09:00 IST)
  *   POST   /api/updates/migrate                 -> { ok, imported }  KV -> D1        (admin, one-time)
  *   POST   /api/updates/sources                 -> { ok }  create/update source     (admin)
  *   DELETE /api/updates/sources/:id             -> { ok }                           (admin)
@@ -33,6 +34,7 @@ import { buildDigest } from "../../_digest.js";
 import { handleBulletins } from "../../_bulletins_api.js";
 import { retractForDeletedUpdate } from "../../_bulletins_repo.js";
 import { sha256Hex } from "../../_bulletin_rules.js";
+import { runWeeklyReview } from "../../_bulletins_review_digest.js";
 
 const json = (obj, status = 200, cache = "no-store") => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": cache }
@@ -246,6 +248,16 @@ export async function onRequest(context) {
       const res = await runPipeline(env);
       if (res && res.items && res.items.length) firePushForItems(context, res.items);
       return json(res.ok === false ? { ok: false, ...res } : { ok: true, ...res });
+    }
+
+    // Weekly Clinical Bulletins review: fresh crawl, then one push to each registered signer if anything waits.
+    if (method === "POST" && head === "review-digest") {
+      if (!repo.hasDb(env)) return json({ error: "no-db" }, 501);
+      let items = [];
+      const res = await runWeeklyReview(env, { runPipeline: async (e) => { const p = await runPipeline(e); items = (p && p.items) || []; return p; } });
+      if (items.length) firePushForItems(context, items);
+      const p = res.pipeline || {};
+      return json(Object.assign({}, res, { pipeline: { ok: p.ok, new: p.new, updated: p.updated, errors: p.errors, cdsco: p.cdsco } }));
     }
 
     // AI push box: given a link and/or a note, fetch the page and let Gemini classify it into a
