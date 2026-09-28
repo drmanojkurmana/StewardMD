@@ -10691,3 +10691,5 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   practical rounded one; kidney (CrCl, dialysis switch) and liver (Child-Pugh) adjust in the same screen,
   with the app's verified renal table taking precedence. Flag `smd_dose_calc` stays OFF until the owner
   signs off the extraction review (owner: "Me, yes and start"). [[Dose Calculator]]
+- **Owner, 2026-09-28 ("The doses in our database drug monograph are already verified, use the same"):**
+  `smd_dose_calc` defaults ON; the calculator's "UNDER REVIEW" pill is removed. Kill switch `smd_dose_calc = "0"`.

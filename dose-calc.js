@@ -8,8 +8,8 @@
  *
  * Data: dose-rules.json.gz, built from worker/data/gold by scripts/build-dose-rules.mjs (only
  * unambiguous numbers are rules; everything else is shown as the monograph wrote it). Loaded lazily.
- * Flag: smd_dose_calc ("1" on; default OFF until the owner signs off the extraction review), or
- * ?dosecalc=1. Patient values stay in memory on this device: never stored, sent or logged.
+ * Flag: smd_dose_calc, DEFAULT ON (owner 2026-09-28: the monograph doses are verified). Off per device
+ * with smd_dose_calc = "0" or ?dosecalc=0. Patient values stay in memory on this device: never stored, sent or logged.
  *
  * The engine (compute, crcl, ibw, ...) is pure and exported for node tests; the UI is below it.
  */
@@ -280,7 +280,7 @@
   var FLAG = "smd_dose_calc";
   function on() {
     try { var m = (location.search.match(/[?&]dosecalc=([^&]+)/) || [])[1]; if (m != null) return m === "1" || m === "on" || m === "true"; } catch (e) {}
-    try { return localStorage.getItem(FLAG) === "1"; } catch (e) { return false; }
+    try { return localStorage.getItem(FLAG) !== "0"; } catch (e) { return true; }
   }
 
   /* ================================ PATIENTS ================================ */
@@ -328,7 +328,7 @@
       "body.dark #doseCalc,body.v3-dark #doseCalc{--dc-bg:#0d1417;--dc-panel:#151f23;--dc-ink:#e3ecea;--dc-mut:#93a4a8;--dc-line:#26363b;--dc-acc:#37b8a6;--dc-acc-soft:#153430;--dc-warn:#f0b454;--dc-warn-soft:#352812;--dc-bad:#ff7b6e;--dc-bad-soft:#3a1714}",
       "#doseCalc .dc-top{display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 10px;border-bottom:1px solid var(--dc-line);background:var(--dc-panel)}",
       "#doseCalc .dc-x{border:0;background:none;color:var(--dc-acc);font:600 16px var(--dc-f);padding:6px 4px;min-height:40px;cursor:pointer}",
-      "#doseCalc .dc-t{flex:1;font:700 17px var(--dc-f)}#doseCalc .dc-beta{font:700 10px var(--dc-f);letter-spacing:.06em;color:var(--dc-warn);background:var(--dc-warn-soft);border-radius:999px;padding:3px 8px}",
+      "#doseCalc .dc-t{flex:1;font:700 17px var(--dc-f)}",
       "#doseCalc .dc-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 16px calc(env(safe-area-inset-bottom,0px) + 30px);display:flex;flex-direction:column;gap:14px}",
       "#doseCalc .dc-card{background:var(--dc-panel);border:1px solid var(--dc-line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}",
       "#doseCalc h3{margin:0;font:700 13px var(--dc-f);letter-spacing:.06em;text-transform:uppercase;color:var(--dc-mut)}",
@@ -499,7 +499,7 @@
     css();
     if (!root) {
       root = D.createElement("div"); root.id = "doseCalc"; root.setAttribute("role", "dialog"); root.setAttribute("aria-modal", "true"); root.setAttribute("aria-label", "Dose calculator");
-      root.innerHTML = '<div class="dc-top"><button class="dc-x" data-dc="close" aria-label="Close dose calculator">‹ Close</button><div class="dc-t">Dose calculator</div><span class="dc-beta">UNDER REVIEW</span></div><div class="dc-body"></div>';
+      root.innerHTML = '<div class="dc-top"><button class="dc-x" data-dc="close" aria-label="Close dose calculator">‹ Close</button><div class="dc-t">Dose calculator</div></div><div class="dc-body"></div>';
       root.addEventListener("click", onClick);
       root.addEventListener("input", onInput);
       root.addEventListener("change", onInput);

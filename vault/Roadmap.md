@@ -217,7 +217,7 @@ Plan: `kb/validation/PLAN-DX-ABX-10.md` (baseline audit `kb/validation/AUDIT-202
 ## Dose calculator (started 2026-09-28, owner request)
 Weight/age/kidney/liver-aware doses from our monographs, reached from the Drugs tile, each drug page,
 patient screens (ICU, Ward Sync, OPD) and All tools/search. Owner reviews the extraction; dialysis
-switch in scope. Behind flag `smd_dose_calc` (default OFF until the owner signs off).
+switch in scope. Behind flag `smd_dose_calc` (default ON since 2026-09-28).
 - **Phase 1 (done 2026-09-28):** `scripts/lib/dose-parse.mjs` + `scripts/build-dose-rules.mjs` ->
   `data/dose-rules.json.gz` (1,532 monographs: 362 per-kg, 64 per-m2, 906 fixed, 200 text; 209 with
   numeric renal bands, 243 with dialysis notes, 88 with Child-Pugh rules; 0 round-trip rejections).
@@ -230,6 +230,6 @@ switch in scope. Behind flag `smd_dose_calc` (default OFF until the owner signs 
   renal table first) and liver (Child-Pugh) in the same screen.
 - **Phase 4 (done 2026-09-28):** Drugs sheet, All tools + search, drug page button, ICU (patient + per
   drug), OPD. `test/run-dose-calc-ui.mjs`. See [[Dose Calculator]].
-- **Phase 5 (waiting on the owner):** finish the review marks, fix anything marked wrong, then flip
-  `smd_dose_calc` default ON and drop the "UNDER REVIEW" pill.
+- **Phase 5 (done 2026-09-28):** owner confirmed the monograph doses are verified; `smd_dose_calc`
+  now defaults ON and the "UNDER REVIEW" pill is gone. The review page stays for spot checks.
 Gotcha: our levothyroxine record says 1.6 mcg/kg/day (the owner's example used 1.7).

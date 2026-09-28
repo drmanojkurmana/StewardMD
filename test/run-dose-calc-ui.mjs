@@ -40,7 +40,7 @@ try {
   await call('Page.navigate', { url: `http://localhost:${PORT}/?dosecalc=1` });
   ok(await until('!!window.SMD_DOSECALC && !!window.SMD_openRoute', 30000), 'app loaded with the dose calculator');
   // Flag OFF by default: without ?dosecalc=1 and no localStorage the calculator reports off.
-  ok(await ev(`(()=>{try{localStorage.removeItem('smd_dose_calc')}catch(e){};return SMD_DOSECALC.on()})()`) === true, 'flag on via ?dosecalc=1');
+  ok(await ev(`(()=>{try{localStorage.removeItem('smd_dose_calc')}catch(e){};history.replaceState(null,'','/');const a=SMD_DOSECALC.on();localStorage.setItem('smd_dose_calc','0');const b=SMD_DOSECALC.on();localStorage.removeItem('smd_dose_calc');history.replaceState(null,'','/?dosecalc=1');return a===true&&b===false})()`) === true, 'flag DEFAULT ON; smd_dose_calc=0 turns it off');
   // 1) Drugs sheet -> Dose calculator
   await ev(`SMD_openRoute('drugmenu');1`);
   ok(await until(`!!document.querySelector('[data-mi=dose]')`, 5000), 'Drugs sheet lists "Dose calculator"');

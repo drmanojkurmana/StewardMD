@@ -2037,7 +2037,7 @@
   // key smd_home_tools). feat: dark "signature" badge. Icons are Material Symbols (ric).
   function doseCalcOn() {
     if (window.SMD_DOSECALC && SMD_DOSECALC.on) return SMD_DOSECALC.on();
-    try { var q = (location.search.match(/[?&]dosecalc=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_dose_calc") === "1"; } catch (e) { return false; }
+    try { var q = (location.search.match(/[?&]dosecalc=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_dose_calc") !== "0"; } catch (e) { return true; }
   }
   var HOME_TOOLS = [
     { act: "retinalscan", ic: "visibility", tt: "FundX AI", sub: "Retinal scan", feat: true, beta: true, anim: "eye",
@@ -2116,8 +2116,8 @@
     { act: "askai", ic: "auto_awesome", tt: "Ask MaiK", sub: "AI assistant", defOn: false },
     { act: "drugmenu", ic: "medication", tt: "Drugs", sub: "Database · interactions", defOn: false },
     { act: "calculators", ic: "calculate", tt: "Calculators", sub: "Scores · doses", defOn: false },
-    // Dose calculator (dose-calc.js). Flag smd_dose_calc, DEFAULT OFF until the owner signs off the
-    // extraction review. Read directly: home.js loads before dose-calc.js.
+    // Dose calculator (dose-calc.js). Flag smd_dose_calc, DEFAULT ON (owner 2026-09-28); "0" hides it.
+    // Read directly: home.js loads before dose-calc.js.
     { act: "dosecalc", ic: "medication", tt: "Dose calculator", sub: "Dose for a patient", defOn: false,
       eligible: function () { return doseCalcOn(); } },
     { act: "dosing", ic: "vaccines", tt: "Bedside dosing", sub: "Insulin · electrolytes", defOn: false },

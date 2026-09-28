@@ -8,12 +8,10 @@ adjusted weight in obesity, kidney (CrCl bands, dialysis) and liver (Child-Pugh)
 2026-09-28 ("55 kg, levothyroxine, 1.6 mcg/kg x 55 kg").
 
 ## Flag + default
-- `smd_dose_calc`: **DEFAULT OFF** until the owner signs off the extraction review. On with
-  `localStorage.smd_dose_calc = "1"` or `?dosecalc=1`; `?dosecalc=0` forces off.
+- `smd_dose_calc`: **DEFAULT ON** (owner 2026-09-28: "The doses in our database drug monograph are
+  already verified"). Off per device with `localStorage.smd_dose_calc = "0"` or `?dosecalc=0`.
 - While OFF: no Drugs-sheet row, no Home/All tools/search entry, no drug-page button, no ICU/OPD button.
   `dose-calc.js` still loads (small) but the rules file is only fetched when the calculator opens.
-- The "UNDER REVIEW" pill in the header is for the review period; remove it at sign-off (owner rule
-  2026-09-28: no pending-review notices on shipped features).
 
 ## Key files
 - `scripts/lib/dose-parse.mjs`: text -> rules. Only unambiguous numbers become rules; every number is
