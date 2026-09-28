@@ -17,13 +17,15 @@ stage are copied from [[Ophthalmós]].
   from `swipe-back.js` (canGoBack and goBack) and by the module's own Escape handler.
 - **Flag + default:** `smd_tokos`, client, default **OFF** (hidden). Show with `localStorage.smd_tokos = "1"` or
   `?tokos=1` for the current load. Gating is inline in `home.js` `eligible()`, same as `atlas` and `ophthalmos`.
-  With the flag off the tile does not render.
+  With the flag off the tile does not render, and `ACT.tokos` (the one door for the tile, `stewardmd://tokos`
+  and the MaiK tool chip) is a quiet no-op, decided by the same `eligible()`.
 - **Files:** `tokos-core.js` (FSRS-6, sessions), `tokos-data.js` (levels, trial, persistence `smd_tokos_v1` and
   `smd_tokos_prefs`, FIGO checklist, grading), `tokos-stage.js` (zoom), `tokos-calipers.js` (bpm and time
-  calipers in viewBox units), `tokos.js` (shell, screens), `tokos.css`. Load tags in `index.html` at `?v=tok1`.
+  calipers in viewBox units), `tokos.js` (shell, screens), `tokos.css`. Load tags in `index.html` at `?v=tok2`.
 - **Data:** `tokos/tracks.json`, `tokos/decks/ctg.json`, `tokos/rationale.json` (en and hi),
   `tokos/media/ctg/*.svg`, `tokos/media/credits.json`. `scripts/build-www.sh` copies the whole `tokos/`
-  directory. `tools/tokos-ctg-prep.mjs` and `docs/tokos/` are authoring only and do not ship.
+  directory. `tools/tokos-ctg-prep.mjs` and `docs/tokos/` are authoring only and do not ship; `functions/_middleware.js`
+  404s `/tools/` and `/docs/` on every host.
 - **Levels:** MBBS (free) gets a 5 question checklist: contractions, baseline, variability, decelerations, FIGO
   category. Resident (Pro, one free trial per feature, `clinic.ctg`) adds the FIGO action, and the deceleration
   type only where an obstetrician confirmed it (`case.review.decelType`). The trial gate runs before any fetch.
@@ -35,7 +37,8 @@ stage are copied from [[Ophthalmós]].
 
 Computed in `tools/tokos-ctg-prep.mjs` over the last 60 minutes of each record (the strip shows the last 30):
 FIGO category, baseline class, variability class, deceleration subtype, acidosis class, tachysystole flag, signal
-quality. All show as "Rule-based, pending obstetrician review" until `case.review` is set. Learners are graded on
+quality. Each case shows "Rule-based, pending obstetrician review" until its review is complete
+(`TOKOS_DATA.reviewComplete`: `case.review.complete === true`). Learners are graded on
 deceleration subtype only where `case.review.decelType` exists. Tachysystole is a separate flag and never raises
 the FIGO category. Numerals (pH, bpm, seconds, kPa, mmol/L, Apgar) stay plain ASCII digits in Hindi.
 
@@ -52,10 +55,28 @@ range (max minus min over-called increased variability on real records).
 ## Reviewer workflow
 
 1. Obstetrician opens `docs/tokos/review-queue.md`: suggested label, outcome and quality note per case.
-2. Confirm or correct, then set `review` in `tokos/decks/ctg.json` to
-   `{"by": "<name>", "date": "YYYY-MM-DD", "figo": "...", "decelType": "..."}`.
-3. Labels for that case stop reading "rule-based" and Resident grading of deceleration type turns on.
-The flag stays OFF until this is done for the cases the owner wants live.
+2. Confirm or correct, then set `review` on the case in `tokos/decks/ctg.json`. Every graded field is
+   overridable (`truthFor`): `uc`, `baselineClass`, `variability`, `decels`, `decelType`, `figo` (the Resident
+   action follows `figo`), plus `by`, `date`, and `complete: true` once every graded field was checked. The field
+   list and allowed values are generated into the queue header from `TOKOS_DATA.QUESTIONS`.
+3. A `decelType` turns on Resident grading of deceleration type; `complete: true` removes the rule-based banner.
+4. The queue also lists the text to review: `tokos/rationale.json` (14 teaching points), the checklist option and
+   FIGO action strings (`tokos.js` `L10N.*.opts`) and the caliper verdicts (`tokos-calipers.js` `WORDS`).
+5. Regenerate the queue header without the network or touching the deck and SVGs:
+   `node tools/tokos-ctg-prep.mjs --queue-only`. Everything below the `hand-maintained below` marker is kept.
+
+## Launch gate
+
+`smd_tokos` must NOT default on until every case in `tokos/decks/ctg.json` has a complete review
+(`review.complete === true`). Known content issues that gate it:
+
+- 1495: the strip shows bradycardia (last third at 70 to 90 bpm; strip baseline 125 against the 60 min
+  baseline 155) while the key is "suspicious".
+- 1031 and 1020: keyed normal while the rule counts short "variable" dips (9 and 4 of them, 15 to 92 s long).
+- 1035 and 1036: parked. 1035 is keyed normal with FHR at 180 to 200 bpm from 13 min; 1036 has 359 samples above
+  180 bpm in the last 5 min. Either may be artefact.
+- Features and keys are computed on the last 60 min while the learner sees the last 30 min, so a key can rest
+  on events that are not on screen.
 
 ## Known limits
 
