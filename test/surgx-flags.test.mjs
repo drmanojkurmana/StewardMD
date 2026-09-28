@@ -20,13 +20,11 @@ test("flags: the registry defines every SURGX flag with a type, default and desc
   assert.ok(keys.length >= 6);
 });
 
-test("flags: every SURGX flag defaults ON except the notes-verify lock and the licence gate (owner decision 2026-09-28)", () => {
+test("flags: every SURGX flag defaults ON except the notes-verify lock (owner decision 2026-09-28)", () => {
   // "Keep everything open, keep everything turned on by default." smd_surgx_notes_verify is the one
   // exception: its ON state RESTRICTS Notes, so leaving it OFF is what keeps Notes open.
   for (const k of Object.keys(F.DEFS)) {
     if (k === "smd_surgx_notes_verify") { assert.equal(F.DEFS[k].def, false, k); continue; }
-    // The licence-gate escape hatch stays OFF until the owner makes that specific call.
-    if (k === "smd_surgx_uncleared_media") { assert.equal(F.DEFS[k].def, false, k); continue; }
     assert.equal(F.DEFS[k].def, true, k + " must default ON");
   }
 });

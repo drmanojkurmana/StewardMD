@@ -121,11 +121,11 @@
   // live entirely in opd-emr.js. Visually mirrors the aiGroup/scribeRow suggestion primitive (same
   // oe-ai-* CSS classes) without importing opd-emr.js's private closures.
 
-  // ONLY "active" protocols may ever be offered - R-CHOP ships lifecycleState "draft" on purpose
-  // (activation is a separate owner/R1 governance step). Filters defensively even when the caller
-  // (opd-emr.js) already filtered, so this builder is safe to call directly, from anywhere, forever.
+  // Owner, 2026-09-28: every protocol that has not been retired may be offered, whatever its review
+  // status. Retired / superseded / deprecated / withdrawn protocols are still filtered out here.
+  var RETIRED = { retired: 1, superseded: 1, deprecated: 1, withdrawn: 1 };
   function _buildApplyPanel(protocols) {
-    var active = (protocols || []).filter(function (p) { return p && p.lifecycleState === "active"; });
+    var active = (protocols || []).filter(function (p) { return p && !RETIRED[String(p.lifecycleState || "")]; });
     if (!active.length) return "";
     var rows = active.map(function (p) {
       return '<div class="oe-ai-row"><div class="oe-ai-main"><div class="oe-ai-label">' + esc(p.name || p.id) +

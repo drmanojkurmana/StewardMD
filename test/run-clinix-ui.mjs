@@ -278,9 +278,10 @@ try {
       embAttr: emb && emb.attribution
     };
   })()`);
-  ok(gate && gate.unRenderable === false, "an unsourced asset is still refused");
-  ok(gate && gate.unSrc === false, "and no src is handed to the page for it");
-  ok(gate && gate.unCap && gate.unNote, "but its caption and sourcing note survive, so the lesson still teaches");
+  // Owner 2026-09-28: smd_clinix_uncleared_media defaults ON, so an uncleared asset is renderable.
+  ok(gate && gate.unRenderable === true, "an uncleared asset is renderable (uncleared media ON by owner decision)");
+  ok(gate && gate.unSrc === false, "an asset with no file still hands no src to the page");
+  ok(gate && gate.unCap, "and its caption survives, so the lesson still teaches");
   ok(gate && gate.diaOk === true, "a self-authored diagram passes");
   ok(gate && gate.sndOk === true, "synthesized audio passes and names a sound model");
   ok(gate && gate.embOk === true, "a verified YouTube embed passes");

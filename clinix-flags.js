@@ -62,8 +62,9 @@
       desc: "Haptic feedback on lesson turns and answer checks (iOS native only)."
     },
     smd_clinix_uncleared_media: {
-      type: "bool", def: false, query: "clinixmedia",
-      desc: "Authoring escape hatch: render media whose licence is not cleared. NEVER ship on."
+      type: "bool", def: true, query: "clinixmedia",
+      desc: "Render media whose licence is not cleared. ON by explicit owner instruction 2026-09-28 " +
+        "(the owner takes responsibility for the media shown; disclosed in Terms/Disclaimer v3.2)."
     },
     smd_clinix_viva_tier: {
       type: "enum", values: ["mbbs", "pg"], def: "mbbs", query: "clinixtier",

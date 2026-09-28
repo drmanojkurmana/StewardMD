@@ -10674,3 +10674,10 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   `privacy-config.js termsVersion` was NOT bumped (no forced re-consent); the Terms' own update clause applies.
   Blocked by the permission checker, left for the owner: `smd_clinix_uncleared_media` / `smd_surgx_uncleared_media`
   default ON, and letting non-active oncology protocols through Apply / Create & Activate.
+- **Owner, 2026-09-28 (explicit permission granted):** `smd_clinix_uncleared_media` and
+  `smd_surgx_uncleared_media` default ON (disclosed in Terms/Disclaimer v3.2). Oncology Apply / Create &
+  Activate no longer requires `lifecycleState === "active"`: any protocol that is not retired / superseded
+  / deprecated / withdrawn can be applied (`opd-emr.js oncoUsable`, `onco-protocols.js _buildApplyPanel`,
+  server `functions/_onco_store.js _activationGate` now blocks only `protocol_retired`). Every other
+  activation blocker is unchanged: complete dose calculations, source evidence, clearance checks,
+  unresolved VERIFY fields, and physician confirmation.

@@ -2584,7 +2584,7 @@ window.openExternal = function (u) {
      licence gates), and store before screens (screens read window.SMD_CLINIX_PROGRESS at mount).
      Content itself is NOT bundled here - it is lazily fetched from /clinix/*.json on first open,
      deliberately unlike kardiox-content-pack.js which parses 1.9 MB on every page load. -->
-<script src="/clinix-flags.js?v=cx14r925c928-session" defer></script>
+<script src="/clinix-flags.js?v=cx14r925d928-media" defer></script>
 <!-- The other 13 CliniX scripts (lexicon, model, dx, content, diagrams, audio, store, tutor, engine,
      physiology, profile, examiner, screens; ~590 KB) are NOT tagged here: clinix.js loads them in
      order on the first open (flag smd_clinix_lazy, default ON). Their ?v= tokens live in clinix.js
@@ -2600,7 +2600,7 @@ window.openExternal = function (u) {
      (ws-surgery.js, loaded above at the workspaces block) onto its seven-band spine, so the
      surgical decision engine has exactly one home and parity is structural.
      Content is NOT bundled - it is lazily fetched from /surgx/*.json on first open. -->
-<script src="/surgx-flags.js?v=sg14-allopen2" defer></script>
+<script src="/surgx-flags.js?v=sg14-allopen3-media" defer></script>
 <script src="/surgx-model.js?v=sg17-allopen" defer></script>
 <script src="/surgx-content.js?v=sg2-allopen" defer></script>
 <script src="/surgx-note-schema.js?v=sg1" defer></script>
@@ -2715,7 +2715,7 @@ window.openExternal = function (u) {
 <!-- Oncology treatment-plan matrix + read-only dose drawer + Phase 4 apply/review/override panels
      (flag smd_onco_protocols, default OFF), rendered inside the opd-emr.js Oncology/Assess tabs.
      Loaded before opd-emr.js so window.SMD_ONCOUI is present when it renders. -->
-<script src="/onco-protocols.js?v=op1-draftwarn-nodraft1" defer></script>
+<script src="/onco-protocols.js?v=op1-draftwarn-nodraft1-apply1" defer></script>
 <!-- Oncology Phase 5: nurse execution view ("Today's Chemotherapy" - clearance banner, give-list,
      administration record). Reads confirmed doses off the plan/cycle only - never calculates.
      Loaded before opd-emr.js so window.SMD_ONCONURSE is present when it renders. -->
@@ -2726,7 +2726,7 @@ window.openExternal = function (u) {
 <script src="/onco-protocol-report.js?v=onco1" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=hardlocal3-opdcols1-imm1-r6-1-scribe18-sid1-nerdx1-nodash1-proto3-kits3-sttfb2-assign1-edit1-rankv3a-calib1-prior1-nodraft1" defer></script>
+<script src="/opd-emr.js?v=hardlocal3-opdcols1-imm1-r6-1-scribe18-sid1-nerdx1-nodash1-proto3-kits3-sttfb2-assign1-edit1-rankv3a-calib1-prior1-nodraft1-oncoapply1" defer></script>
 <!-- My Clinic — on-device EMR for personal clinics (reuses opd-emr's form; flag smd_personal_clinic). -->
 <script src="/personal-clinic.js?v=gold6" defer></script>
 <!-- Shared Clinic — multi-device encrypted EMR for clinics/small hospitals with no EMR (flag

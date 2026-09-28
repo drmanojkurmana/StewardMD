@@ -1560,7 +1560,11 @@
   // protocols (lifecycleState:draft + experimental:true). "active" is never set by promotion, so real
   // clinical activation stays a separate human decision - this only opens the owner/device test path.
   function oncoProtoLibOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_onco_protolib")); } catch (e) { return false; } }
-  function oncoUsable(p) { return !!(p && (p.lifecycleState === "active" || (oncoProtoLibOn() && p.experimental))); }
+  // Owner, 2026-09-28: review status no longer restricts Apply. Any protocol that has not been
+  // retired (retired / superseded / deprecated) can be applied; every dose, evidence, clearance,
+  // VERIFY and physician-confirmation check in the activation gate still applies.
+  var ONCO_RETIRED = { retired: 1, superseded: 1, deprecated: 1, withdrawn: 1 };
+  function oncoUsable(p) { return !!(p && !ONCO_RETIRED[String(p.lifecycleState || "")]); }
   function toast(m) { try { (G.toast || G.SMD_toast) && (G.toast || G.SMD_toast)(m); } catch (e) {} }
   function root() { var el = document.getElementById("smdOpdEmr"); if (!el) { el = document.createElement("div"); el.id = "smdOpdEmr"; document.body.appendChild(el); } return el; }
   var st = freshState();

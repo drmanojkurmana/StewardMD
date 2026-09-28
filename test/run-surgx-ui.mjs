@@ -217,10 +217,10 @@ try {
   /* ── 5. THE LICENCE GATE, the other way ────────────────────────────────── */
   await clickText("#surgxRoot .sgx-tab", "Steps");
   await sleep(300);
-  ok((await ev("!!document.querySelector('#surgxRoot .sgx-media.pending')")) === true,
-    "LICENCE GATE: an uncleared asset renders as caption + 'visual pending', never a blank or a broken image");
-  ok((await ev("!document.querySelector('#surgxRoot .sgx-media.pending img')")) === true,
-    "and no image element is emitted for it");
+  ok((await ev("!document.querySelector('#surgxRoot .sgx-media.pending')")) === true,
+    "ALL ON: smd_surgx_uncleared_media defaults ON (owner 2026-09-28), so no 'visual pending' placeholder is shown");
+  ok((await ev("![...document.querySelectorAll('#surgxRoot .sgx-media img')].some(i => !i.getAttribute('src'))")) === true,
+    "and no broken (src-less) image element is emitted");
   ok((await ev("!/pending clinician review|awaiting clinical/i.test(document.querySelector('#surgxRoot .sgx-wrap').textContent)")) === true,
     "ALL OPEN: no draft or pending-review notice on the procedure (draft flag off)");
 

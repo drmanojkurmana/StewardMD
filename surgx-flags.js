@@ -46,9 +46,9 @@
         "decision 2026-09-28). Off = the case runs entirely on its authored reasoning."
     },
     smd_surgx_uncleared_media: {
-      type: "bool", def: false, query: "surgxmedia",
-      desc: "Authoring escape hatch: render media whose licence is not cleared. Left OFF pending the " +
-        "owner's explicit call (2026-09-28): turning it on bypasses the licence gate."
+      type: "bool", def: true, query: "surgxmedia",
+      desc: "Render media whose licence is not cleared. ON by explicit owner instruction 2026-09-28 " +
+        "(the owner takes responsibility for the media shown; disclosed in Terms/Disclaimer v3.2)."
     },
     smd_surgx_haptics: {
       type: "bool", def: true, query: "surgxhaptics",

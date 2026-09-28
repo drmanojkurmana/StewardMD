@@ -125,15 +125,16 @@ function fixtureActiveTemplate() {
   return Object.assign({}, RCHOP, { id: "fixture-active", name: "Fixture Active Protocol", version: "1.0", lifecycleState: "active" });
 }
 
-test("_buildApplyPanel offers an ACTIVE protocol and never a draft one (defensive filter)", () => {
+test("_buildApplyPanel offers active AND draft protocols, never a retired one (owner 2026-09-28)", () => {
   const active = fixtureActiveTemplate();
-  const html = ONCOUI._buildApplyPanel([active, RCHOP]);   // RCHOP ships lifecycleState "draft"
+  const retired = Object.assign({}, active, { id: "retired-x", lifecycleState: "retired" });
+  const html = ONCOUI._buildApplyPanel([active, RCHOP, retired]);   // RCHOP ships lifecycleState "draft"
   assert.ok(html.indexOf('data-oe-act="onco-apply:' + active.id + '"') >= 0, "the active protocol is offered");
-  assert.ok(html.indexOf("onco-apply:" + RCHOP.id) < 0, "the draft protocol (rchop) is never offered");
+  assert.ok(html.indexOf('data-oe-act="onco-apply:' + RCHOP.id + '"') >= 0, "the draft protocol (rchop) is offered");
+  assert.ok(html.indexOf("onco-apply:retired-x") < 0, "a retired protocol is never offered");
 });
 
-test("_buildApplyPanel offers nothing when there are zero active protocols (matches the real repo today)", () => {
-  assert.equal(ONCOUI._buildApplyPanel([RCHOP]), "", "only a draft protocol on file -> nothing offered");
+test("_buildApplyPanel offers nothing when there is no usable protocol", () => {
   assert.equal(ONCOUI._buildApplyPanel([]), "");
   assert.equal(ONCOUI._buildApplyPanel(null), "");
 });
@@ -189,12 +190,12 @@ test("_buildReviewPanel enables Create & Activate once every staged override car
   assert.ok(html.indexOf("Renal impairment") >= 0, "the override reason is shown in the review line");
 });
 
-test("opd-emr.js assessTab (write mode, oncoFlagOn) offers the apply panel for an ACTIVE protocol only", () => {
+test("opd-emr.js assessTab (write mode, oncoFlagOn) offers the apply panel for active and draft protocols", () => {
   const active = fixtureActiveTemplate();
   const state = { tab: "assess", writeOn: true, assessVals: {}, oncoProtocols: [active, RCHOP], patient: {}, loading: false, error: "" };
   const html = OPDEMR._render(state);
   assert.ok(html.indexOf('data-oe-act="onco-apply:' + active.id + '"') >= 0, "active protocol offered near the assessment");
-  assert.ok(html.indexOf("onco-apply:" + RCHOP.id) < 0, "draft protocol not offered");
+  assert.ok(html.indexOf('data-oe-act="onco-apply:' + RCHOP.id + '"') >= 0, "draft protocol offered too (owner 2026-09-28)");
 });
 
 /* Phase 5 gap-fix unit tests: the DOCTOR per-cycle control panel (create cycle / pre-chemo
