@@ -43,23 +43,26 @@ function kase(over) {
 
 /* ── gate 1: review, and it must fail CLOSED ──────────────────────────────── */
 
-test("review gate: only approved and published render by default", () => {
+test("review gate: ALWAYS OPEN, every status renders by default except deprecated (2026-09-28)", () => {
   assert.equal(M.isRenderable({ review: { status: "approved" } }), true);
   assert.equal(M.isRenderable({ review: { status: "published" } }), true);
-  assert.equal(M.isRenderable({ review: { status: "ai_drafted" } }), false);
-  assert.equal(M.isRenderable({ review: { status: "draft" } }), false);
-  assert.equal(M.isRenderable({ review: { status: "in_review" } }), false);
+  assert.equal(M.isRenderable({ review: { status: "ai_drafted" } }), true);
+  assert.equal(M.isRenderable({ review: { status: "draft" } }), true);
+  assert.equal(M.isRenderable({ review: { status: "in_review" } }), true);
+  assert.equal(M.isRenderable({ review: { status: "ai_drafted" } }, { allowDraft: false }), true);
+  assert.equal(M.isRenderable({ review: { status: "deprecated" } }), false);
 });
 
-test("review gate: a missing, empty or garbled status reads as draft, never as approved", () => {
+test("review gate: a missing, empty or garbled status reads as draft (and still renders)", () => {
   assert.equal(M.reviewStatus({}), "draft");
   assert.equal(M.reviewStatus(null), "draft");
   assert.equal(M.reviewStatus({ review: {} }), "draft");
   assert.equal(M.reviewStatus({ review: { status: "" } }), "draft");
   assert.equal(M.reviewStatus({ review: { status: "APPROVED!!" } }), "draft");
   assert.equal(M.reviewStatus({ review: { status: 42 } }), "draft");
-  assert.equal(M.isRenderable({}), false);
-  assert.equal(M.isRenderable({ review: { status: "aproved" } }), false);
+  assert.equal(M.isRenderable({}), true);
+  assert.equal(M.isRenderable({ review: { status: "aproved" } }), true);
+  assert.equal(M.isRenderable(null), false);
 });
 
 test("review gate: a bare string status is accepted, case-insensitively", () => {
@@ -193,8 +196,9 @@ test("an absent band compiles empty rather than being dropped or reordered", () 
   assert.equal(c.bands.filter((b) => b.items.length).length, 1);
 });
 
-test("compileProtocol applies the review gate", () => {
-  assert.equal(M.compileProtocol(protocol({ review: { status: "ai_drafted" } })), null);
+test("compileProtocol: the review gate is open, ai_drafted compiles with or without allowDraft", () => {
+  assert.ok(M.compileProtocol(protocol({ review: { status: "ai_drafted" } })));
+  assert.equal(M.compileProtocol(protocol({ review: { status: "deprecated" } })), null);
   assert.ok(M.compileProtocol(protocol({ review: { status: "ai_drafted" } }), { allowDraft: true }));
 });
 
@@ -313,11 +317,15 @@ test("procedure: steps compile in authored order and roll structures at risk upw
   assert.equal(chap("criticalSafety").lines.length, 1);
 });
 
-test("procedure: an unreviewed step is DROPPED and COUNTED, never silently omitted", () => {
-  const steps = { "step.a": step({ id: "step.a" }), "step.b": step({ id: "step.b", review: { status: "ai_drafted" } }) };
-  const c = M.compileProcedure(procedure({ steps: [{ ref: "step.a" }, { ref: "step.b" }] }), steps);
-  assert.equal(c.chapters.find((x) => x.id === "steps").steps.length, 1);
-  assert.equal(c.pendingSteps, 1, "the UI must be able to say how much is hidden");
+test("procedure: an unreviewed step RENDERS; only a deprecated step is dropped and counted", () => {
+  const steps = {
+    "step.a": step({ id: "step.a" }),
+    "step.b": step({ id: "step.b", review: { status: "ai_drafted" } }),
+    "step.c": step({ id: "step.c", review: { status: "deprecated" } })
+  };
+  const c = M.compileProcedure(procedure({ steps: [{ ref: "step.a" }, { ref: "step.b" }, { ref: "step.c" }] }), steps);
+  assert.equal(c.chapters.find((x) => x.id === "steps").steps.length, 2);
+  assert.equal(c.pendingSteps, 1);
 });
 
 test("procedure: chapter order is fixed by the model, not by the content", () => {

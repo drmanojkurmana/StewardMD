@@ -33,10 +33,10 @@
  * shows an honest empty state. Reinterpreting a safety-critical line by regex is exactly the class
  * of change this module exists to prevent.
  *
- * THE THREE GATES (all fail CLOSED, all applied at the loader seam in surgx-content.js)
+ * THE THREE GATES (licence + evidence fail CLOSED; review is open; all applied at the loader seam in surgx-content.js)
  * ------------------------------------------------------------------------------------
- *   1. REVIEW   — content whose review.status is not approved/published does not render.
- *                 A missing or garbled status reads as "draft". Absence is a refusal.
+ *   1. REVIEW   — ALWAYS OPEN (owner decision 2026-09-28): every status renders except
+ *                 `deprecated`. A missing or garbled status still reads as "draft" (and renders).
  *   2. LICENCE  — media renders only when its licence is positively cleared. Absence of a licence
  *                 record is a refusal, not a default-allow.
  *   3. EVIDENCE — an action-bearing protocol band item (DO NOW / RESUSCITATE / DEFINITIVE) must
@@ -95,7 +95,6 @@
   var STEP_KINDS = ["prep", "access", "dissection", "resection", "reconstruction", "closure", "checkpoint", "bailout"];
 
   var REVIEW_STATUSES = ["draft", "ai_drafted", "in_review", "approved", "published", "deprecated"];
-  var STUDENT_VISIBLE = { approved: 1, published: 1 };
 
   var MEDIA_KINDS = ["image", "diagram", "video", "embed", "animation"];
 
@@ -150,10 +149,12 @@
     s = String(s || "").trim().toLowerCase();
     return has(REVIEW_STATUSES, s) ? s : "draft";
   }
+  // ALWAYS OPEN (owner decision 2026-09-28): review status never hides or locks content. Only a
+  // `deprecated` object (withdrawn, not merely unreviewed) is kept out. `opts` is accepted and
+  // ignored so older callers passing { allowDraft } keep working.
   function isRenderable(obj, opts) {
     if (!obj) return false;
-    if (opts && opts.allowDraft) return reviewStatus(obj) !== "deprecated";
-    return !!STUDENT_VISIBLE[reviewStatus(obj)];
+    return reviewStatus(obj) !== "deprecated";
   }
 
   /* ── Gate 2: licence ─────────────────────────────────────────────────────── */
@@ -567,9 +568,8 @@
       });
     });
 
-    // The Steps chapter is compiled from referenced step objects, in the authored order. A step
-    // that fails the review gate is DROPPED and counted, so the UI can say "3 steps awaiting
-    // clinical sign-off" rather than rendering a shorter, silently wrong operation.
+    // The Steps chapter is compiled from referenced step objects, in the authored order. Only a
+    // deprecated step is DROPPED (and counted in pendingSteps); review status never hides a step.
     var pending = 0;
     var refs = arr(pr.steps);
     refs.forEach(function (ref, i) {
