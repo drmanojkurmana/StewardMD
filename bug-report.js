@@ -41,6 +41,13 @@
   function platform() { try { var c = window.Capacitor; return (c && (c.getPlatform ? c.getPlatform() : c.platform)) || "web"; } catch (e) { return "web"; } }
   function build() { try { return (window.SMD_OTA && SMD_OTA.versionLabel && SMD_OTA.versionLabel()) || ""; } catch (e) { return ""; } }
 
+  /* A request that got no answer at all (fetch or the token refresh rejected). Offline only when the
+   * phone says so; a server or token problem on a good connection must not send the doctor to check
+   * their Wi-Fi (owner, 2026-09-28; same fix as the profile sheet on 09-26). */
+  function failText(e) {
+    try { if (navigator.onLine === false) return "You are offline. Try again once you are connected."; } catch (x) {}
+    return "Couldn't reach StewardMD. Check your connection and try again.";
+  }
   function api(method, path, body, signal) {
     var u = user();
     if (!u || typeof u.getIdToken !== "function") return Promise.resolve({ ok: false, error: "sign-in-required", status: 401 });
@@ -731,7 +738,7 @@
         btn.disabled = false;
         if (r && r.ok && r.ticket) { _tickets.unshift(r.ticket); _compose = null; openThread(r.ticket.id); }
         else toast(r && r.error === "too-many" ? "You have started a lot of conversations today. Please add to an existing one." : r && r.error === "sign-in-required" ? "Sign in to talk to us." : "Could not send. Try again.");
-      }, function () { btn.disabled = false; toast("You are offline. Try again once you are connected."); });
+      }, function (e) { btn.disabled = false; toast(failText(e)); });
     });
     setTimeout(function () { try { el.querySelector("#bcTx").focus(); } catch (e) {} }, 250);
     schedule();
@@ -789,7 +796,7 @@
         if (r && r.ok && r.ticket) { var i = _tickets.indexOf(t); if (i > -1) { r.ticket.supportSeenAt = t.supportSeenAt; _tickets[i] = r.ticket; } }
         else { t.messages.splice(t.messages.indexOf(pend), 1); toast("Could not send. Try again."); }
         paintThread();
-      }, function () { t.messages.splice(t.messages.indexOf(pend), 1); paintThread(); toast("You are offline. Try again once you are connected."); });
+      }, function (e) { t.messages.splice(t.messages.indexOf(pend), 1); paintThread(); toast(failText(e)); });
     });
     var tx2 = document.getElementById("bcTx"); if (tx2 && keep.draft) { tx2.value = keep.draft; tx2.dispatchEvent(new Event("input")); }
     var b2 = document.getElementById("bcBody"); if (b2 && keep.atEnd) b2.scrollTop = b2.scrollHeight;
@@ -831,7 +838,7 @@
 
   var API = { report: report, openCentre: openCentre, closeCentre: closeCentre, unread: unread, refresh: refresh, poll: poll,
     enableShake: enableShake, _shake: onShake, _capture: capture, _detector: detector, _slaText: slaText, _describe: describe, _payload: payload,
-    _state: function () { return { seq: _seq, live: _live, open: _open, compose: _compose, tickets: _tickets.length }; } };
+    _state: function () { return { seq: _seq, live: _live, open: _open, compose: _compose, tickets: _tickets.length }; }, _failText: failText };
   window.SMD_BUGS = API;
   window.SMD_HELP = API;
   // The one place every "feedback" entry point in the app lands (sidebar, quick action, home.js).
