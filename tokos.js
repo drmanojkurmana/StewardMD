@@ -1,16 +1,19 @@
 /* Tokós: OBGYN CTG reading trainer, a StewardMD module. DOM layer, ES5.
    Host contract mirrors Ophthalmós: open() hides home, close() restores it, back() unwinds
    one layer (swipe-back.js and Escape call it). Content is ai_drafted; every screen carries
-   the draft footer until clinical review (see .tok-draft below, matches .oph-draft). */
+   the draft footer until clinical review (.tok-draft, same treatment as .oph-draft).
+   Clinic flow: hub -> clinic (vignette, inline trace with calipers, FIGO checklist) -> reveal
+   (concordance, trace features, recorded outcome, why) -> next case -> session done. */
 (function (G) {
   "use strict";
   var C = G.TOKOS_CORE, D = G.TOKOS_DATA, S = G.TOKOS_STAGE;
   var BASE = G.SMD_TOKOS_BASE || "/tokos/";
 
-  var st = { view: "hub", cfg: null, decks: {}, store: null, prefs: null, loading: null, err: null, session: null, caseIdx: 0 };
+  var st = { view: "hub", cfg: null, decks: {}, rationale: null, store: null, prefs: null, loading: null, err: null, session: null, svg: {}, _cal: null, _stage: null, _ro: null };
 
   function $(id) { return G.document.getElementById(id); }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function ico(n) { try { if (!G.ICONS || !G.ICONS.get || (G.ICONS.has && !G.ICONS.has(n))) return ""; return G.ICONS.get(n); } catch (e) { return ""; } }
   function isPro() { try { return !!(G.SMD_PRO && G.SMD_PRO.isProSync && G.SMD_PRO.isProSync()); } catch (e) { return false; } }
   function showPro() {
     try { if (G.SMD_PRO_NOTICE && G.SMD_PRO_NOTICE.show) return G.SMD_PRO_NOTICE.show("tokos"); } catch (e) {}
@@ -41,13 +44,72 @@
   function loadAll() {
     if (st.loading) return st.loading;
     st.err = null;
-    st.loading = getJSON("tracks.json").then(function (cfg) {
-      st.cfg = cfg;
-      return Promise.all(cfg.tracks.map(function (t) { return getJSON(t.deck).then(function (d) { st.decks[t.id] = d; }); }));
+    st.loading = Promise.all([getJSON("tracks.json"), getJSON("rationale.json")]).then(function (res) {
+      var cfg = res[0];
+      st.rationale = res[1];
+      return Promise.all(cfg.tracks.map(function (t) { return getJSON(t.deck).then(function (d) { st.decks[t.id] = d; }); })).then(function () { st.cfg = cfg; });
     }).catch(function (e) { st.err = e; st.loading = null; throw e; });
     return st.loading;
   }
 
+  /* ---------- words. Numbers stay plain ASCII digits in both languages; only labels translate. ---------- */
+  var L10N = {
+    en: { contractions: "Contractions", baseline: "Baseline heart rate", variability: "Variability", decels: "Decelerations", decelType: "Deceleration type",
+      figo: "Overall (FIGO 2015)", action: "Next step", submit: "Check my reading", next: "Next case", done: "Session done", caliper: "Calipers",
+      bpmMode: "Measure bpm", timeMode: "Measure time", grid: "1 major square = 1 minute", quality: "Signal quality", rule: "Rule-based, pending obstetrician review",
+      yours: "Yours", key: "Answer", features: "Trace features", outcome: "Recorded outcome at birth", why: "Why", notRecorded: "not recorded", nextReview: "Next review in",
+      days: "days", day: "day", vignette: "Patient", weeks: "weeks", age: "Age", gp: "G/P", stage1: "First stage", stage2: "Second stage", min: "min", induced: "Induced labour",
+      risks: { diabetes: "Diabetes", hypertension: "Hypertension", preeclampsia: "Pre-eclampsia", pyrexia: "Maternal fever", meconium: "Meconium" },
+      opts: {
+        uc: { normal: "5 or fewer in 10 min", tachysystole: "More than 5 in 10 min (tachysystole)" },
+        baseline: { severe_bradycardia: "Below 100", bradycardia: "100 to 109", normal: "110 to 160", tachycardia: "Above 160" },
+        variability: { reduced: "Below 5 bpm", normal: "5 to 25 bpm", increased: "Above 25 bpm" },
+        decels: { none: "None", present: "Present, under 3 min", prolonged: "Prolonged, 3 to 5 min", over5: "Over 5 min" },
+        decelType: { early: "Early", late: "Late", variable: "Variable", prolonged: "Prolonged" },
+        figo: { normal: "Normal", suspicious: "Suspicious", pathological: "Pathological" },
+        action: { normal: "No intervention needed to improve fetal oxygenation", suspicious: "Correct reversible causes, monitor closely or add other methods", pathological: "Act now: correct reversible causes, add other methods, or expedite delivery if that is not possible" }
+      },
+      // v2 design pass additions (hub, states, reveal labels)
+      close: "Close", backHub: "Back to Tokós", sub: "Intrapartum CTG, FIGO 2015", clinicSub: "12 real traces from labour ward records", toRead: "to read today", caughtUp: "All caught up for today",
+      freeTry: "1 free try", pro: "Pro", level: "Level", langBtn: "हिन्दी", langLabel: "Language: switch to Hindi",
+      how: "Read the last 30 minutes of the strip, answer the checklist, then compare with the key and the recorded outcome at birth.",
+      source: "Traces: CTU-UHB intrapartum CTG database (Chudáček et al. 2014, PhysioNet, ODC-BY 1.0).",
+      loading: "Loading cases…", loadErr: "Could not load Tokós. Check your connection.", tryAgain: "Try again", traceLoading: "Loading trace…", traceErr: "Could not load this trace.",
+      caseOf: "Case {i} of {n}", answered: "{a} of {n} answered", match: "match the key", matchOne: "Match", noMatch: "No match",
+      gest: "Gestation", fit: "Fit", zoomIn: "Zoom in", zoomHint: "Pinch or double-tap the strip to zoom",
+      pH: "pH", bdecf: "BDecf", pco2: "pCO2", apgar: "Apgar at 1 and 5 min", weight: "Birth weight", window: "in the last {m} min", longest: "longest {s} s", per10: "per 10 min",
+      doneLine: "{n} cases read in this session.", emptyLine: "No cases are due. New and due cases come back tomorrow.", backToHub: "Back to Tokós" },
+    hi: { contractions: "संकुचन", baseline: "बेसलाइन हृदय गति", variability: "परिवर्तनशीलता", decels: "डिसेलेरेशन", decelType: "डिसेलेरेशन का प्रकार",
+      figo: "कुल वर्गीकरण (FIGO 2015)", action: "अगला कदम", submit: "मेरी रीडिंग जांचें", next: "अगला केस", done: "सत्र पूरा", caliper: "कैलिपर",
+      bpmMode: "bpm मापें", timeMode: "समय मापें", grid: "1 बड़ा खाना = 1 मिनट", quality: "सिग्नल गुणवत्ता", rule: "नियम-आधारित, प्रसूति विशेषज्ञ की समीक्षा बाकी",
+      yours: "आपका", key: "उत्तर", features: "ट्रेस की विशेषताएं", outcome: "जन्म के समय दर्ज परिणाम", why: "क्यों", notRecorded: "दर्ज नहीं", nextReview: "अगली समीक्षा",
+      days: "दिन में", day: "दिन में", vignette: "मरीज़", weeks: "सप्ताह", age: "आयु", gp: "G/P", stage1: "पहला चरण", stage2: "दूसरा चरण", min: "मिनट", induced: "प्रेरित प्रसव",
+      risks: { diabetes: "मधुमेह", hypertension: "उच्च रक्तचाप", preeclampsia: "प्री-एक्लेम्पसिया", pyrexia: "माँ को बुखार", meconium: "मेकोनियम" },
+      opts: {
+        uc: { normal: "10 मिनट में 5 या कम", tachysystole: "10 मिनट में 5 से अधिक (टैकीसिस्टोल)" },
+        baseline: { severe_bradycardia: "100 से कम", bradycardia: "100 से 109", normal: "110 से 160", tachycardia: "160 से अधिक" },
+        variability: { reduced: "5 bpm से कम", normal: "5 से 25 bpm", increased: "25 bpm से अधिक" },
+        decels: { none: "कोई नहीं", present: "मौजूद, 3 मिनट से कम", prolonged: "लंबा, 3 से 5 मिनट", over5: "5 मिनट से अधिक" },
+        decelType: { early: "अर्ली", late: "लेट", variable: "वेरिएबल", prolonged: "प्रोलॉन्ग्ड" },
+        figo: { normal: "सामान्य", suspicious: "संदिग्ध", pathological: "पैथोलॉजिकल" },
+        action: { normal: "भ्रूण ऑक्सीजनेशन सुधारने के लिए किसी हस्तक्षेप की आवश्यकता नहीं", suspicious: "प्रतिवर्ती कारणों को ठीक करें, कड़ी निगरानी रखें या अन्य तरीके जोड़ें", pathological: "तुरंत कार्रवाई: प्रतिवर्ती कारण ठीक करें, अन्य तरीके जोड़ें, या संभव न हो तो प्रसव शीघ्र कराएं" }
+      },
+      close: "बंद करें", backHub: "Tokós पर वापस", sub: "प्रसव के दौरान CTG, FIGO 2015", clinicSub: "लेबर वार्ड रिकॉर्ड से 12 असली ट्रेस", toRead: "आज पढ़ने हैं", caughtUp: "आज के सभी केस पूरे",
+      freeTry: "1 मुफ़्त प्रयास", pro: "Pro", level: "स्तर", langBtn: "English", langLabel: "भाषा: अंग्रेज़ी में बदलें",
+      how: "स्ट्रिप के आखिरी 30 मिनट पढ़ें, चेकलिस्ट का उत्तर दें, फिर उत्तर कुंजी और जन्म के समय दर्ज परिणाम से मिलाएं।",
+      source: "ट्रेस: CTU-UHB इंट्रापार्टम CTG डेटाबेस (Chudáček et al. 2014, PhysioNet, ODC-BY 1.0)।",
+      loading: "केस लोड हो रहे हैं…", loadErr: "Tokós लोड नहीं हो सका। अपना कनेक्शन जांचें।", tryAgain: "फिर कोशिश करें", traceLoading: "ट्रेस लोड हो रहा है…", traceErr: "यह ट्रेस लोड नहीं हो सका।",
+      caseOf: "केस {i} / {n}", answered: "{n} में से {a} उत्तर दिए", match: "उत्तर से मेल", matchOne: "मेल", noMatch: "मेल नहीं",
+      gest: "गर्भकाल", fit: "पूरा", zoomIn: "ज़ूम करें", zoomHint: "ज़ूम के लिए स्ट्रिप पर पिंच या डबल-टैप करें",
+      pH: "pH", bdecf: "BDecf (बेस डेफिसिट)", pco2: "pCO2", apgar: "अपगार, 1 और 5 मिनट पर", weight: "जन्म का वज़न", window: "आखिरी {m} मिनट में", longest: "सबसे लंबा {s} s", per10: "प्रति 10 मिनट",
+      doneLine: "इस सत्र में {n} केस पढ़े।", emptyLine: "अभी कोई केस बाकी नहीं। नए और बाकी केस कल आएंगे।", backToHub: "Tokós पर वापस" }
+  };
+  var QLABEL = { uc: "contractions", baseline: "baseline", variability: "variability", decels: "decels", decelType: "decelType", figo: "figo", action: "action" };
+  function W() { return L10N[st.prefs && st.prefs.lang === "hi" ? "hi" : "en"]; }
+  function fmt(s, o) { return String(s).replace(/\{(\w+)\}/g, function (m, k) { return o[k] == null ? m : o[k]; }); }
+  function num(v, unit) { return v == null || v !== v ? W().notRecorded : String(v) + (unit ? " " + unit : ""); } // plain ASCII digits in both languages
+
+  /* ---------- frame ---------- */
   function root() {
     var el = $("smdTokos");
     if (!el) {
@@ -61,68 +123,231 @@
     el.setAttribute("aria-label", "Tokós");
     return el;
   }
+  function top(backLabel, title, sub, right) {
+    var chev = ico("chev");
+    return '<div class="tok-top"><button type="button" class="tok-back" data-act="back" aria-label="' + esc(backLabel) + '">' + (chev ? '<span class="tok-flip">' + chev + "</span>" : "‹") + "</button>" +
+      '<div class="tok-title"><b' + (title === "Tokós" ? ' translate="no"' : "") + ">" + esc(title) + "</b>" + (sub ? "<span>" + esc(sub) + "</span>" : "") + "</div>" + (right || "") + "</div>";
+  }
+  var DRAFT = '<div class="tok-draft" aria-hidden="true">To be verified, draft</div>';
 
-  function render() {
-    var root = $("smdTokos");
-    if (!root) return;
-    if (st.view === "hub") root.innerHTML = renderHub();
-    else if (st.view === "clinic") root.innerHTML = renderClinic();
-    else if (st.view === "reveal") root.innerHTML = renderReveal();
-    bind(root);
+  function unmountTrace() {
+    if (st._ro) { try { st._ro.disconnect(); } catch (e) {} st._ro = null; }
+    if (st._cal) { try { st._cal.destroy(); } catch (e) {} }
+    st._cal = null; st._stage = null;
   }
 
+  function render() {
+    var el = $("smdTokos");
+    if (!el) return;
+    unmountTrace();
+    var html;
+    if (st.view === "clinic") html = renderClinic();
+    else if (st.view === "reveal") html = renderReveal();
+    else html = renderHub();
+    el.innerHTML = html + DRAFT;
+    if (st.prefs && st.prefs.lang === "hi") el.setAttribute("lang", "hi"); else el.removeAttribute("lang");
+    bind(el);
+    if (st.view === "clinic" && current()) mountTrace(current());
+    try { var b = el.querySelector(".tok-back"); if (b) b.focus({ preventScroll: true }); } catch (e) {}
+  }
+
+  /* ---------- hub ---------- */
   function renderHub() {
-    if (st.err) return '<div class="tok-err">Could not load Tokós. <button data-act="retry">Try again</button></div>';
-    if (!st.cfg) return '<div class="tok-loading">Loading...</div>';
-    var lang = st.prefs.lang;
-    var t = lang === "hi" ? st.cfg.tracks[0].labelHi : st.cfg.tracks[0].labelEn;
-    var locked = levelLocked("resident");
-    return '<div class="tok-hub">' +
-      '<h1>Tokós</h1>' +
-      '<button class="tok-clinic" data-act="clinic" data-t="ctg">' + esc(t) +
-      (locked ? '<span class="tok-lock">Pro</span>' : "") + "</button>" +
-      '<div class="tok-draft">To be verified, draft</div>' +
+    var w = W();
+    if (st.err) return top(w.close, "Tokós", w.sub) + '<div class="tok-scroll tok-pad"><div class="tok-err" role="alert"><p>' + esc(w.loadErr) + '</p><button type="button" class="tok-btn sec" data-act="retry">' + esc(w.tryAgain) + "</button></div></div>";
+    if (!st.cfg) return top(w.close, "Tokós", w.sub) + '<div class="tok-scroll tok-pad"><div class="tok-loading" aria-busy="true"><span class="tok-sk tok-sk-a"></span><span class="tok-sk tok-sk-b"></span><span class="tok-sk tok-sk-c"></span><span class="tok-sr">' + esc(w.loading) + "</span></div></div>";
+    var lang = st.prefs.lang, tr = st.cfg.tracks[0];
+    var t = lang === "hi" ? tr.labelHi : tr.labelEn;
+    var locked = levelLocked("resident"), ts = trial("clinic.ctg");
+    var proBadge = !locked ? "" : '<span class="tok-pro' + (ts === "used" ? " used" : "") + '">' + ico("lock") + esc(ts === "used" ? w.pro : w.freeTry) + "</span>";
+    var deck = st.decks.ctg, cnt = C.counts({ id: "ctg." + level(), items: deck.cases.map(function (c) { return { id: c.id }; }) }, st.store, today());
+    var n = Math.min(12, cnt.due + cnt.fresh);
+    var lv = level();
+    return top(w.close, "Tokós", w.sub, '<button type="button" class="tok-lang" data-act="lang" aria-label="' + esc(w.langLabel) + '" lang="' + (lang === "hi" ? "en" : "hi") + '">' + esc(w.langBtn) + "</button>") +
+      '<div class="tok-scroll tok-pad">' +
+      '<div class="tok-seg" role="group" aria-label="' + esc(w.level) + '">' +
+        '<button type="button" data-act="level" data-v="mbbs" aria-pressed="' + (lv === "mbbs") + '">MBBS</button>' +
+        '<button type="button" data-act="level" data-v="resident" aria-pressed="' + (lv === "resident") + '">Resident' + proBadge + "</button></div>" +
+      '<button type="button" class="tok-clinic" data-act="clinic" data-t="ctg">' +
+        '<span class="tok-tile" aria-hidden="true">' + ico("pulse") + "</span>" +
+        '<span class="tok-clinic-b"><b>' + esc(t) + "</b><span>" + esc(w.clinicSub) + '</span><span class="tok-due">' + (n ? "<b>" + n + "</b> " + esc(w.toRead) : esc(w.caughtUp)) + "</span></span>" +
+        '<span class="tok-chev" aria-hidden="true">' + ico("chev") + "</span></button>" +
+      '<p class="tok-note">' + esc(w.how) + "</p>" +
+      '<p class="tok-note tok-src">' + esc(w.source) + "</p>" +
       "</div>";
+  }
+
+  /* ---------- clinic ---------- */
+  function startSession() {
+    var deck = st.decks.ctg, lv = level();
+    var sched = { id: "ctg." + lv, items: deck.cases.map(function (c) { return { id: c.id, a: c.figo, c: c }; }) };
+    st.session = { list: C.buildSession(sched, st.store, today(), { size: 12, newCap: 12 }), i: 0, answers: {}, result: null, done: 0 };
+    st.view = "clinic"; render();
+  }
+  function current() { var s = st.session; return s && s.list[s.i] ? s.list[s.i].c : null; }
+  function caseLine() { var s = st.session; return fmt(W().caseOf, { i: s.i + 1, n: s.list.length }); }
+
+  function renderVignette(c) {
+    var v = c.vignette || {}, w = W(), cells = [];
+    function cell(val, label) { cells.push('<div class="tok-vc"><b>' + val + "</b><span>" + esc(label) + "</span></div>"); }
+    if (v.gestWeeks != null) cell(esc(v.gestWeeks) + " <small>" + esc(w.weeks) + "</small>", w.gest);
+    if (v.age != null) cell(esc(v.age), w.age);
+    if (v.gravidity != null && v.parity != null) cell(esc(v.gravidity + "/" + v.parity), w.gp);
+    if (v.stage2Min != null) cell(esc(v.stage2Min) + " <small>" + esc(w.min) + "</small>", w.stage2);
+    // R9: risks stay [] until the header codings are confirmed; the chips render nothing today.
+    var chips = (v.risks || []).map(function (r) { return '<span class="tok-chip">' + esc(w.risks[r] || r) + "</span>"; }).join("");
+    if (v.induced) chips += '<span class="tok-chip">' + esc(w.induced) + "</span>";
+    return '<section class="tok-vignette" aria-label="' + esc(w.vignette) + '"><div class="tok-vrow">' + cells.join("") + "</div>" + (chips ? '<div class="tok-chips">' + chips + "</div>" : "") + "</section>";
+  }
+
+  function renderChecklist(c) {
+    var w = W(), ids = D.checklistFor(c, level()), a = st.session.answers, n = 0;
+    var q = ids.map(function (id) {
+      if (a[id]) n++;
+      return '<fieldset class="tok-q" data-q="' + id + '"><legend>' + esc(w[QLABEL[id]]) + '</legend><div class="tok-opts">' +
+        D.QUESTIONS[id].map(function (o) {
+          var on = a[id] === o;
+          return '<button type="button" class="tok-opt' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="ans" data-q="' + id + '" data-o="' + o + '">' + esc(w.opts[id][o]) + "</button>";
+        }).join("") + "</div></fieldset>";
+    }).join("");
+    return q + '<div class="tok-foot"><span class="tok-count" aria-live="polite">' + esc(fmt(w.answered, { a: n, n: ids.length })) + "</span>" +
+      '<button type="button" class="tok-btn pri" data-act="reveal"' + (n === ids.length ? "" : " disabled") + ">" + esc(w.submit) + "</button></div>";
   }
 
   function renderClinic() {
-    var deck = st.decks.ctg, c = deck.cases[st.caseIdx];
-    if (!c) { st.view = "hub"; return renderHub(); }
-    return '<div class="tok-clinic-view">' +
-      '<div class="tok-stage" id="tokStage"><img id="tokTrace" src="' + BASE + "media/" + c.svg + '" alt="CTG trace"/></div>' +
-      '<div class="tok-q">Baseline rate band? Variability? Any decelerations sustained 15s or more?</div>' +
-      '<button class="tok-btn" data-act="reveal">Reveal</button>' +
-      '</div>';
+    var c = current(), w = W();
+    if (!c) return renderDone();
+    var L = c.layout, q = c.stripQuality || {}, sig = q.fhrLossPct == null ? null : Math.round(100 - q.fhrLossPct); // R16: the displayed strip
+    return top(w.backHub, (st.prefs.lang === "hi" ? st.cfg.tracks[0].labelHi : st.cfg.tracks[0].labelEn), caseLine()) +
+      '<div class="tok-scroll tok-clinic-view">' + '<div class="tok-pad">' + renderVignette(c) + "</div>" +
+      '<div class="tok-strip-head tok-pad"><span>' + esc(w.grid) + '</span><span class="tok-quality' + (sig != null && sig < 90 ? " low" : "") + '">' + esc(w.quality) + " " + (sig == null ? esc(w.notRecorded) : sig + "%") + "</span></div>" +
+      '<div class="tok-hold">' +
+        '<div class="tok-stage" id="tokStage" style="aspect-ratio:' + L.W + " / " + L.H + '"><div class="tok-loading-trace" id="tokTraceSlot" aria-busy="true">' + esc(w.traceLoading) + "</div></div>" +
+        '<div class="tok-cal-bar tok-pad"><div class="tok-seg sm" role="group" aria-label="' + esc(w.caliper) + '">' +
+          '<button type="button" data-act="cal" data-m="bpm" aria-pressed="true">' + esc(w.bpmMode) + '</button><button type="button" data-act="cal" data-m="time" aria-pressed="false">' + esc(w.timeMode) + "</button></div>" +
+          '<div class="tok-zoom"><button type="button" class="tok-icon" data-act="zoom" aria-label="' + esc(w.zoomIn) + '" title="' + esc(w.zoomHint) + '">' + (ico("plus") || "+") + '</button><button type="button" class="tok-icon tok-fit" data-act="fit">' + esc(w.fit) + "</button></div>" +
+          '<output id="tokCalOut" class="tok-read" aria-live="polite"></output></div>' +
+      "</div>" +
+      '<div class="tok-pad" id="tokChecklist">' + renderChecklist(c) + "</div></div>";
   }
 
-  function renderReveal() {
-    var deck = st.decks.ctg, c = deck.cases[st.caseIdx];
-    // Review Focus: trace-based features and the real outcome are shown as separate blocks,
-    // never combined into one sentence implying one predicts the other.
-    return '<div class="tok-reveal">' +
-      '<div class="tok-block"><h3>Computed trace features</h3>' +
-      "<p>Baseline: " + c.features.baseline + " bpm</p>" +
-      "<p>Variability: " + esc(c.features.variabilityBand) + "</p>" +
-      "<p>Decelerations (≥15s): " + c.features.decelCount + "</p></div>" +
-      '<div class="tok-block"><h3>Actual recorded outcome</h3>' +
-      "<p>Umbilical artery pH: " + c.outcome.pH + "</p>" +
-      "<p>Base excess: " + c.outcome.BE + "</p>" +
-      "<p>Apgar: " + c.outcome.apgar1 + " / " + c.outcome.apgar5 + "</p></div>" +
-      '<button class="tok-btn" data-act="next">Next case</button>' +
-      "</div>";
-  }
-
-  function bind(root) {
-    root.onclick = function (e) {
-      var el = e.target.closest("[data-act]");
-      if (!el) return;
-      var act = el.getAttribute("data-act");
-      if (act === "clinic") gate("clinic." + el.getAttribute("data-t"), function () {
-        st.caseIdx = 0; st.view = "clinic"; render();
+  // Inline SVG so the calipers can map pointer positions into viewBox units. Our own generated file
+  // (Task 1c): class names only, no <style>, no scripts.
+  function mountTrace(c) {
+    var slot = $("tokTraceSlot"); if (!slot) return;
+    var p = st.svg[c.svg] ? Promise.resolve(st.svg[c.svg]) : fetch(BASE + "media/" + c.svg).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); });
+    p.then(function (txt) {
+      st.svg[c.svg] = txt;
+      var stage = $("tokStage"); if (!stage || current() !== c || st.view !== "clinic") return;
+      stage.innerHTML = txt;
+      var svg = stage.querySelector("svg"), L = c.layout; svg.id = "tokTrace"; svg.setAttribute("data-src", c.svg);
+      svg.setAttribute("role", "img"); svg.setAttribute("aria-label", "CTG, " + L.durationSec / 60 + " min");
+      // bpm labels sit inside the plot so a legible size is never clipped by the narrow left margin
+      // and every other FHR label is dropped (40 bpm steps) so they never collide at phone width.
+      [].forEach.call(svg.querySelectorAll(".tk-axis"), function (t) {
+        t.setAttribute("x", L.padL + 6); t.setAttribute("text-anchor", "start");
+        var v = +t.textContent; if (+t.getAttribute("y") < L.yTop + L.hFhr + 1 && v % 40) t.setAttribute("class", "tk-axis tk-axis-odd");
       });
-      else if (act === "reveal") { st.view = "reveal"; render(); }
-      else if (act === "next") { st.caseIdx++; st.view = "clinic"; render(); }
-      else if (act === "retry") { st.loading = null; loadAll().then(render).catch(render); }
+      // Non-scaling strokes ignore the stage's CSS scale, so the stage publishes it as --k and the
+      // stroke and label sizes divide by it: the lines and labels keep one on-screen size at every zoom.
+      if (G.MutationObserver) {
+        var mo = new G.MutationObserver(function () { var m = /scale\(([\d.]+)\)/.exec(svg.style.transform); stage.style.setProperty("--k", m ? m[1] : 1); });
+        mo.observe(svg, { attributes: true, attributeFilter: ["style"] });
+      }
+      st._stage = S.attach(stage, svg); st._stage.reset();
+      if (G.ResizeObserver) { st._ro = new G.ResizeObserver(function () { if (st._stage) st._stage.reset(); }); st._ro.observe(stage); }
+      var out = $("tokCalOut");
+      st._cal = G.TOKOS_CALIPERS.attach(svg, L, function () { var o = $("tokCalOut"); if (o && st._cal) o.textContent = st._cal.readout(st.prefs.lang); });
+      if (out) out.textContent = st._cal.readout(st.prefs.lang);
+    }).catch(function () {
+      var s2 = $("tokStage"); if (s2) s2.innerHTML = '<div class="tok-err tok-err-trace" role="alert"><p>' + esc(W().traceErr) + '</p><button type="button" class="tok-btn sec" data-act="retrace">' + esc(W().tryAgain) + "</button></div>";
+    });
+  }
+
+  // Answering updates the checklist in place: the mounted trace, its zoom and the calipers stay put,
+  // and keyboard focus stays on the option just pressed.
+  function answer(el) {
+    var q = el.getAttribute("data-q"), o = el.getAttribute("data-o"), c = current();
+    st.session.answers[q] = o;
+    var fs = el.closest(".tok-q");
+    [].forEach.call(fs.querySelectorAll("[data-act=ans]"), function (b) { var on = b === el; b.classList.toggle("on", on); b.setAttribute("aria-pressed", String(on)); });
+    var ids = D.checklistFor(c, level()), n = ids.filter(function (id) { return st.session.answers[id]; }).length;
+    var box = $("tokChecklist");
+    box.querySelector(".tok-count").textContent = fmt(W().answered, { a: n, n: ids.length });
+    box.querySelector("[data-act=reveal]").disabled = n !== ids.length;
+  }
+
+  /* ---------- reveal ---------- */
+  function kv(label, value, sub) {
+    // The hidden ": " keeps "pH: 7.31" readable as one phrase for screen readers and copy-paste.
+    return '<div class="tok-kv"><dt>' + esc(label) + '<span class="tok-sr">: </span></dt><dd>' + esc(value) + (sub ? "<small>" + esc(sub) + "</small>" : "") + "</dd></div>";
+  }
+  function renderReveal() {
+    var c = current(), w = W(), res = st.session.result, t = res.truth, o = c.outcome || {}, f = c.features, i = 0;
+    var rows = res.ids.map(function (id) {
+      var ok = res.perQ[id], mine = w.opts[id][st.session.answers[id]], key = w.opts[id][t[id]];
+      return '<li class="tok-row ' + (ok ? "ok" : "no") + '" style="--i:' + (i++) + '"><div class="tok-row-h"><b>' + esc(w[QLABEL[id]]) + '</b><span class="tok-mark">' + (ico(ok ? "check" : "x") || (ok ? "+" : "-")) + "<span>" + esc(ok ? w.matchOne : w.noMatch) + "</span></span></div>" +
+        (ok ? '<p class="tok-ans">' + esc(key) + "</p>"
+            : '<p class="tok-ans mine"><span>' + esc(w.yours) + "</span>" + esc(mine) + '</p><p class="tok-ans key"><span>' + esc(w.key) + "</span>" + esc(key) + "</p>") + "</li>";
+    }).join("");
+    var maxD = 0; (f.decels || []).forEach(function (d) { if (d.durationSec > maxD) maxD = d.durationSec; });
+    var winM = f.window && f.window.minutes;
+    var why = D.rationaleKeys(c).map(function (k) { var r = st.rationale && st.rationale[k]; return r ? "<li>" + esc(r[st.prefs.lang] || r.en) + "</li>" : ""; }).join("");
+    var apgar = o.apgar1 == null && o.apgar5 == null ? w.notRecorded : num(o.apgar1) + " / " + num(o.apgar5);
+    // Review Focus: the two .tok-block sections stay separate: what the trace showed, then what was recorded at birth.
+    return top(w.backHub, (st.prefs.lang === "hi" ? st.cfg.tracks[0].labelHi : st.cfg.tracks[0].labelEn), caseLine()) +
+      '<div class="tok-scroll"><div class="tok-reveal tok-pad">' +
+      '<p class="tok-score"><b>' + res.matches + "<small>/" + res.ids.length + "</small></b> " + esc(w.match) + "</p>" +
+      (c.review ? "" : '<p class="tok-rule">' + (ico("info") || "") + "<span>" + esc(w.rule) + "</span></p>") +
+      '<ol class="tok-concord">' + rows + "</ol>" +
+      '<section class="tok-block"><h3>' + esc(w.features) + "</h3><dl>" +
+        kv(w.baseline, num(f.baseline, "bpm")) +
+        kv(w.variability, num(f.variability && f.variability.medianRange, "bpm"), f.variability && w.opts.variability[f.variability.band]) +
+        kv(w.decels, num(f.decels ? f.decels.length : null), (winM ? fmt(w.window, { m: winM }) : "") + (maxD ? ", " + fmt(w.longest, { s: Math.round(maxD) }) : "")) +
+        kv(w.contractions, num(f.contractions && f.contractions.per10), w.per10) + "</dl></section>" +
+      '<section class="tok-block"><h3>' + esc(w.outcome) + "</h3><dl>" +
+        kv(w.pH, num(o.pH)) + kv(w.bdecf, num(o.BDecf, "mmol/L")) + kv(w.pco2, num(o.pCO2, "kPa")) + kv(w.apgar, apgar) + kv(w.weight, num(o.weightG, "g")) + "</dl></section>" +
+      (why ? '<section class="tok-why"><h3>' + esc(w.why) + "</h3><ul>" + why + "</ul></section>" : "") +
+      '<p class="tok-next">' + esc(w.nextReview) + " <b>" + res.ivl + "</b> " + esc(res.ivl === 1 ? w.day : w.days) + "</p>" +
+      '</div><div class="tok-foot tok-pad"><button type="button" class="tok-btn pri" data-act="next">' + esc(w.next) + "</button></div></div>";
+  }
+  function renderDone() {
+    var w = W(), n = st.session ? st.session.done : 0;
+    return top(w.backHub, n ? w.done : "Tokós", "") + '<div class="tok-scroll tok-pad"><div class="tok-done">' +
+      '<p class="tok-done-h">' + esc(n ? w.done : w.caughtUp) + "</p><p>" + esc(n ? fmt(w.doneLine, { n: n }) : w.emptyLine) + "</p>" +
+      '<button type="button" class="tok-btn pri" data-act="hub">' + esc(w.backToHub) + "</button></div></div>";
+  }
+
+  function submit() {
+    var c = current(), ids = D.checklistFor(c, level()), t = D.truthFor(c);
+    var g = D.gradeChecklist(ids, st.session.answers, t);
+    var card = C.review(st.store, "ctg." + level(), c.id, g.grade, today());
+    Object.keys(t).forEach(function (q) { if (ids.indexOf(q) >= 0) C.recordAnswer(st.store, "ctg." + level() + "." + q, t[q], st.session.answers[q]); });
+    save();
+    st.session.done++;
+    st.session.result = { ids: ids, perQ: g.perQ, truth: t, matches: g.matches, ivl: card[3] - today() };
+    st.view = "reveal"; render();
+    try { var sc = $("smdTokos").querySelector(".tok-scroll"); if (sc) sc.scrollTop = 0; } catch (e) {}
+  }
+
+  function bind(el) {
+    el.onclick = function (e) {
+      var b = e.target.closest("[data-act]");
+      if (!b || b.disabled) return;
+      var act = b.getAttribute("data-act");
+      if (act === "clinic") { if (level() === "resident") gate("clinic.ctg", startSession); else startSession(); }
+      else if (act === "ans") answer(b);
+      else if (act === "reveal") submit();
+      else if (act === "next") { st.session.i++; st.session.answers = {}; st.session.result = null; st.view = "clinic"; render(); }
+      else if (act === "cal") { if (st._cal) st._cal.setMode(b.getAttribute("data-m")); [].forEach.call(el.querySelectorAll("[data-act=cal]"), function (x) { x.setAttribute("aria-pressed", String(x === b)); }); }
+      else if (act === "zoom") { if (st._stage) st._stage.zoomBy(2); }
+      else if (act === "fit") { if (st._stage) st._stage.reset(); }
+      else if (act === "retrace") { var s = $("tokStage"); if (s) s.innerHTML = '<div class="tok-loading-trace" id="tokTraceSlot" aria-busy="true">' + esc(W().traceLoading) + "</div>"; mountTrace(current()); }
+      else if (act === "hub") { st.view = "hub"; render(); }
+      else if (act === "back") back();
+      else if (act === "lang") { st.prefs.lang = st.prefs.lang === "hi" ? "en" : "hi"; D.savePrefs(ls(), st.prefs); render(); }
+      else if (act === "level") { var v = b.getAttribute("data-v") || (st.prefs.level === "resident" ? "mbbs" : "resident"); if (v !== st.prefs.level) { st.prefs.level = v; D.savePrefs(ls(), st.prefs); render(); } }
+      else if (act === "retry") { st.loading = null; st.err = null; render(); loadAll().then(render).catch(render); }
     };
   }
 
@@ -133,11 +358,12 @@
     st.view = "hub";
     st.store = D.loadStore(ls());
     st.prefs = D.loadPrefs(ls());
+    render();
     if (!st.cfg && !st.loading) loadAll().then(render).catch(render);
-    else render();
   }
   function isOpen() { var el = $("smdTokos"); return !!(el && el.classList.contains("on")); }
   function close() {
+    unmountTrace();
     var el = $("smdTokos");
     if (el) { el.classList.remove("on"); el.innerHTML = ""; }
     G.document.body.classList.remove("tok-noscroll");
@@ -151,5 +377,9 @@
     return false;
   }
 
-  G.TOKOS = { open: open, close: close, back: back, isOpen: isOpen, _st: st };
+  var API = { open: open, close: close, back: back, isOpen: isOpen, _st: st, _render: render };
+  // ES5 getters for the UI test: the live caliper and stage handles of the mounted trace.
+  Object.defineProperty(API, "_cal", { get: function () { return st._cal; } });
+  Object.defineProperty(API, "_stage", { get: function () { return st._stage; } });
+  G.TOKOS = API;
 })(typeof window !== "undefined" ? window : this);
