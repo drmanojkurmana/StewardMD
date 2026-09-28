@@ -74,3 +74,94 @@ test("renderTraceSvg produces a well-formed SVG that skips dropout instead of dr
   assert.ok(svg.includes('role="img"'));
   assert.equal((svg.match(/<path/g) || []).length, 2);
 });
+
+import {
+  CFG, signalQuality, twoPassBaseline, baselineClass, detectContractions, detectDecels,
+  minuteVariability, decelSubtype, acidosisClass, extractFIGOFeatures,
+} from "../tools/tokos-ctg-prep.mjs";
+
+const FS = 4;
+// n minutes of FHR: 140 bpm with a 12 bpm peak-to-trough wave (normal variability) or flat (reduced).
+function fhrMinutes(spec) {
+  const out = [];
+  spec.forEach(([mins, kind]) => {
+    for (let i = 0; i < mins * 60 * FS; i++) out.push(kind === "flat" ? 140 : 140 + 6 * Math.sin((2 * Math.PI * i) / (FS * 20)));
+  });
+  return Float64Array.from(out);
+}
+const restUc = (mins) => new Float64Array(mins * 60 * FS).fill(10);
+
+test("signalQuality reports percent loss and flags over 30%", () => {
+  const f = Float64Array.from([...new Array(60).fill(140), ...new Array(40).fill(0)]);
+  assert.deepEqual(signalQuality(f), { lossPct: 40, suboptimal: true });
+  assert.equal(signalQuality(new Float64Array(100).fill(140)).suboptimal, false);
+});
+
+test("twoPassBaseline ignores recurrent deep decelerations", () => {
+  const f = fhrMinutes([[30, "wave"]]);
+  for (let k = 0; k < 10; k++) for (let i = 0; i < 40 * FS; i++) f[k * 180 * FS + i] = 90; // ten 40 s drops to 90
+  assert.equal(twoPassBaseline(f), 140);
+});
+
+test("baselineClass uses FIGO bands", () => {
+  assert.equal(baselineClass(95), "severe_bradycardia");
+  assert.equal(baselineClass(105), "bradycardia");
+  assert.equal(baselineClass(140), "normal");
+  assert.equal(baselineClass(165), "tachycardia");
+});
+
+test("reduced variability for 55 of 60 min is pathological; 20 of 60 is not", () => {
+  const a = extractFIGOFeatures(fhrMinutes([[55, "flat"], [5, "wave"]]), restUc(60), FS);
+  assert.equal(a.variability.reducedMin, 55);
+  assert.equal(a.figoSuggested, "pathological");
+  const b = extractFIGOFeatures(fhrMinutes([[20, "flat"], [40, "wave"]]), restUc(60), FS);
+  assert.equal(b.variability.reducedMin, 20);
+  assert.notEqual(b.figoSuggested, "pathological");
+});
+
+test("a single artifact spike does not flip a minute's variability band", () => {
+  const f = fhrMinutes([[10, "wave"]]);
+  for (let m = 0; m < 10; m++) f[m * 60 * FS + 30] = 205; // one spike per minute, still inside 50-210
+  assert.equal(minuteVariability(f, FS, []).band, "normal");
+});
+
+test("a single deceleration over 5 min is pathological; 3 to 5 min is suspicious", () => {
+  const long = fhrMinutes([[60, "wave"]]);
+  for (let i = 20 * 60 * FS; i < 20 * 60 * FS + 320 * FS; i++) long[i] = 90;
+  assert.equal(extractFIGOFeatures(long, restUc(60), FS).figoSuggested, "pathological");
+  const mid = fhrMinutes([[60, "wave"]]);
+  for (let i = 20 * 60 * FS; i < 20 * 60 * FS + 200 * FS; i++) mid[i] = 90;
+  assert.equal(extractFIGOFeatures(mid, restUc(60), FS).figoSuggested, "suspicious");
+});
+
+test("tachysystole is a separate flag, not an FHR category driver", () => {
+  const uc = restUc(60);
+  for (let s = 0; s < 3600; s += 100) for (let i = s * FS; i < (s + 60) * FS; i++) uc[i] = 60; // 6 per 10 min
+  const f = extractFIGOFeatures(fhrMinutes([[60, "wave"]]), uc, FS);
+  assert.equal(f.contractions.tachysystole, true);
+  assert.equal(f.figoSuggested, "normal");
+});
+
+test("detectContractions measures above resting tone, so drift does not create contractions", () => {
+  const uc = new Float64Array(600 * FS);
+  for (let i = 0; i < uc.length; i++) uc[i] = 10 + (i / uc.length) * 12; // slow drift of 12 units, no contraction
+  assert.equal(detectContractions(uc, FS).length, 0);
+  for (let i = 100 * FS; i < 160 * FS; i++) uc[i] += 30; // one 60 s contraction
+  assert.equal(detectContractions(uc, FS).length, 1);
+});
+
+test("decelSubtype: late when the nadir lags the contraction peak by over 20 s", () => {
+  const c = [{ start: 0, end: 60 * FS, peak: 30 * FS }];
+  assert.equal(decelSubtype({ start: 20 * FS, end: 90 * FS, nadir: 60 * FS, durationSec: 70 }, c, FS), "late");
+  assert.equal(decelSubtype({ start: 0, end: 60 * FS, nadir: 32 * FS, durationSec: 60 }, c, FS), "early");
+  assert.equal(decelSubtype({ start: 25 * FS, end: 50 * FS, nadir: 35 * FS, durationSec: 25 }, c, FS), "variable");
+  assert.equal(decelSubtype({ start: 0, end: 200 * FS, nadir: 60 * FS, durationSec: 200 }, c, FS), "prolonged");
+});
+
+test("acidosisClass follows the Low criteria and never invents a missing value", () => {
+  assert.equal(acidosisClass({ pH: 7.0, BDecf: 14 }), "metabolic");
+  assert.equal(acidosisClass({ pH: 7.15, BDecf: 6 }), "acidaemia_not_metabolic");
+  assert.equal(acidosisClass({ pH: 7.1 }), "acidaemia_unspecified");
+  assert.equal(acidosisClass({ pH: 7.25, BDecf: 3 }), "normal");
+  assert.equal(acidosisClass({}), "unknown");
+});

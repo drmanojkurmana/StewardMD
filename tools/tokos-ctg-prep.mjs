@@ -195,3 +195,162 @@ async function main() {
 }
 
 if (import.meta.url === "file://" + process.argv[1]) main().catch((e) => { console.error(e); process.exit(1); });
+
+// Tunable constants. A reviewing obstetrician may change the UC_* and QUALITY_* values; the FIGO
+// thresholds are from the FIGO 2015 classification table and change only with the guideline.
+export const CFG = {
+  WINDOW_MIN: 60, STRIP_MIN: 30, FHR_MIN: 50, FHR_MAX: 210,
+  UC_PROMINENCE: 15, UC_MIN_SEC: 30,          // rise above the 10th-percentile resting tone; min duration at half height
+  DECEL_DROP: 15, DECEL_MIN_SEC: 15,
+  PROLONGED_SEC: 180, PATH_DECEL_SEC: 300,    // FIGO: prolonged over 3 min; pathological over 5 min
+  RED_VAR_PATH_MIN: 50, INC_VAR_PATH_MIN: 30, // FIGO: reduced over 50 min, increased over 30 min
+  QUALITY_SUBOPTIMAL_PCT: 30,                 // Tokós threshold, not a FIGO number
+};
+const ok = (v) => v >= CFG.FHR_MIN && v <= CFG.FHR_MAX;
+const mean = (a) => a.reduce((s, x) => s + x, 0) / a.length;
+const pct = (sorted, p) => sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * p))];
+
+export function signalQuality(fhr) {
+  let bad = 0;
+  for (let i = 0; i < fhr.length; i++) if (!ok(fhr[i])) bad++;
+  const lossPct = Math.round((bad / fhr.length) * 1000) / 10;
+  return { lossPct, suboptimal: lossPct > CFG.QUALITY_SUBOPTIMAL_PCT };
+}
+
+// Pass 1: mean of the interquartile samples. Pass 2: mean of samples within 10 bpm of pass 1,
+// which drops decelerations and accelerations. Rounded to 5 bpm as FIGO reports baseline.
+export function twoPassBaseline(fhr) {
+  const v = Array.from(fhr).filter(ok).sort((a, b) => a - b);
+  if (!v.length) return null;
+  const q1 = pct(v, 0.25), q3 = pct(v, 0.75);
+  const prelim = mean(v.filter((x) => x >= q1 && x <= q3));
+  const stable = v.filter((x) => Math.abs(x - prelim) <= 10);
+  return Math.round((stable.length ? mean(stable) : prelim) / 5) * 5;
+}
+
+export function baselineClass(b) {
+  if (b < 100) return "severe_bradycardia";
+  if (b < 110) return "bradycardia";
+  if (b > 160) return "tachycardia";
+  return "normal";
+}
+
+export function detectContractions(uc, fs) {
+  const rest = pct(Array.from(uc).sort((a, b) => a - b), 0.1);
+  const half = rest + CFG.UC_PROMINENCE / 2, top = rest + CFG.UC_PROMINENCE;
+  const out = [];
+  let start = -1, peak = -1;
+  for (let i = 0; i <= uc.length; i++) {
+    const above = i < uc.length && uc[i] >= half;
+    if (above) {
+      if (start < 0) { start = i; peak = i; }
+      if (uc[i] > uc[peak]) peak = i;
+    } else if (start >= 0) {
+      if (uc[peak] >= top && i - start >= CFG.UC_MIN_SEC * fs) out.push({ start, end: i, peak });
+      start = -1;
+    }
+  }
+  return out;
+}
+
+export function detectDecels(fhr, fs, baseline) {
+  const out = [];
+  let start = -1, nadir = -1;
+  for (let i = 0; i <= fhr.length; i++) {
+    const low = i < fhr.length && ok(fhr[i]) && fhr[i] <= baseline - CFG.DECEL_DROP;
+    if (low) {
+      if (start < 0) { start = i; nadir = i; }
+      if (fhr[i] < fhr[nadir]) nadir = i;
+    } else if (start >= 0) {
+      const durationSec = (i - start) / fs;
+      if (durationSec >= CFG.DECEL_MIN_SEC) out.push({ start, end: i, nadir, durationSec, depth: Math.round(baseline - fhr[nadir]) });
+      start = -1;
+    }
+  }
+  return out;
+}
+
+// Per-minute amplitude of valid samples outside decelerations, as the 5th-to-95th percentile range:
+// a plain max-min range read 2 of 5 real CTU-UHB records (1001, 1002) as "increased" because single
+// artifact spikes inflate it; the trimmed range put all 5 in the normal band (11 to 24 bpm), checked
+// 2026-09-29. A minute counts only when at least 60% of it is usable. band is FIGO's: reduced < 5,
+// normal 5 to 25, increased > 25.
+// ponytail: FIGO's "reduced for over 3 min during decelerations" criterion is not computed; add it
+// if a reviewer disagrees with a case where it would have applied.
+export function minuteVariability(fhr, fs, decels) {
+  const inDecel = new Uint8Array(fhr.length);
+  decels.forEach((d) => inDecel.fill(1, d.start, d.end));
+  const win = fs * 60, ranges = [];
+  let reducedMin = 0, increasedMin = 0;
+  for (let i = 0; i + win <= fhr.length; i += win) {
+    const seg = [];
+    for (let j = i; j < i + win; j++) if (ok(fhr[j]) && !inDecel[j]) seg.push(fhr[j]);
+    if (seg.length < win * 0.6) continue;
+    seg.sort((a, b) => a - b);
+    const r = pct(seg, 0.95) - pct(seg, 0.05);
+    ranges.push(r);
+    if (r < 5) reducedMin++;
+    else if (r > 25) increasedMin++;
+  }
+  const sorted = ranges.slice().sort((a, b) => a - b);
+  const medianRange = sorted.length ? pct(sorted, 0.5) : 0;
+  const band = medianRange < 5 ? "reduced" : medianRange > 25 ? "increased" : "normal";
+  return { reducedMin, increasedMin, assessedMin: ranges.length, medianRange: Math.round(medianRange * 10) / 10, band };
+}
+
+// Advisory only (Global Constraints): learners are never graded on this unless a reviewer confirmed it.
+export function decelSubtype(d, contractions, fs) {
+  if (d.durationSec >= CFG.PROLONGED_SEC) return "prolonged";
+  if ((d.nadir - d.start) / fs < 30) return "variable";
+  const c = contractions.find((k) => d.start <= k.end && d.end >= k.start - 30 * fs);
+  if (!c) return "unclassified";
+  const lag = (d.nadir - c.peak) / fs;
+  if (lag > 20) return "late";
+  if (Math.abs(lag) <= 15) return "early";
+  return "unclassified";
+}
+
+// Low criteria (as used in the CTU-UHB literature): metabolic acidosis = pH < 7.05 and BDecf >= 12 mmol/L.
+export function acidosisClass(c) {
+  if (c.pH == null || Number.isNaN(c.pH)) return "unknown";
+  if (c.pH >= 7.2) return "normal";
+  if (c.BDecf == null || Number.isNaN(c.BDecf)) return "acidaemia_unspecified";
+  return c.pH < 7.05 && c.BDecf >= 12 ? "metabolic" : "acidaemia_not_metabolic";
+}
+
+export function extractFIGOFeatures(fhrAll, ucAll, fs) {
+  const n = Math.min(fhrAll.length, CFG.WINDOW_MIN * 60 * fs);
+  const fhr = fhrAll.slice(fhrAll.length - n), uc = ucAll.slice(ucAll.length - n);
+  const quality = signalQuality(fhr);
+  if (quality.lossPct > 70) return null;
+  const baseline = twoPassBaseline(fhr);
+  const bClass = baselineClass(baseline);
+  const decels = detectDecels(fhr, fs, baseline);
+  const variability = minuteVariability(fhr, fs, decels);
+  const contr = detectContractions(uc, fs);
+  // Tachysystole: over 5 per 10 min averaged over the last 30 min (FIGO).
+  const last30 = n - Math.min(n, 30 * 60 * fs);
+  const count30 = contr.filter((c) => c.start >= last30).length;
+  const minutes30 = (n - last30) / fs / 60;
+  const per10 = minutes30 ? Math.round((count30 / minutes30) * 100) / 10 : 0;
+  // Repetitive: decelerations with more than 50% of contractions (FIGO).
+  const withDecel = contr.filter((c) => decels.some((d) => d.start >= c.start - 30 * fs && d.start <= c.end + 60 * fs)).length;
+  const repetitive = contr.length > 0 && withDecel / contr.length > 0.5;
+  const maxDecel = decels.reduce((m, d) => Math.max(m, d.durationSec), 0);
+
+  let figo = "normal";
+  if (baseline < 100 || variability.reducedMin > CFG.RED_VAR_PATH_MIN || variability.increasedMin > CFG.INC_VAR_PATH_MIN || maxDecel > CFG.PATH_DECEL_SEC) {
+    figo = "pathological";
+  } else if (bClass !== "normal" || variability.band !== "normal" || repetitive || maxDecel >= CFG.PROLONGED_SEC) {
+    figo = "suspicious";
+  }
+  // ponytail: "repetitive late or prolonged decelerations for over 30 min" (pathological) needs typed
+  // decelerations; left to the reviewer via case.review.figo until subtype is validated.
+  return {
+    window: { minutes: Math.round(n / fs / 60) },
+    quality, baseline, baselineClass: bClass, variability,
+    contractions: { count30, per10, tachysystole: per10 > 5 },
+    decels: decels.map((d) => ({ startSec: Math.round(d.start / fs), durationSec: d.durationSec, depth: d.depth, subtypeSuggested: decelSubtype(d, contr, fs) })),
+    repetitive, figoSuggested: figo,
+  };
+}
