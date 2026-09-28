@@ -88,6 +88,16 @@ for the unverified/pending reasons, so no call site can open the wrong door.
   token's email (`_adminauth.js` owner list). `verified` stays false unless they really verified,
   because `verified` also unlocks the prescription pad. Do not "fix" an owner's `unverified` badge by
   writing a `verified` claim.
+- **The manual-review email says who the account is (2026-09-28).** Owner, screenshot of a student
+  review from an Apple Hide My Email account: "How can I know who is it? No name no details". The
+  email only showed the token email and what Gemini read, and a student card was read with the
+  registration-CERTIFICATE prompt (no name back). Now `verify-doctor.js` `toManual()` calls
+  `functions/_review_contact.js` `gatherReviewContact()` (profile doc + lifecycle record, 2.5 s cap
+  each, best effort) and the email gets a "Who is this" block: profile name, mobile (OTP-verified >
+  profile-verified > typed) with WhatsApp/Call links, a real (anchored or Google) email, college,
+  SMD ID, provider, and a note when the address is an Apple relay. Students/interns use the
+  `trainee` Gemini prompt (name + college + course + years, no ID numbers). All email values are
+  HTML-escaped. `test/verify-review-contact.test.mjs`.
 - **Auto-verification asks the register for the digit CORE first** (`_verify_match.js`
   `nmcQueriesFor`), falls through to the D1 mirror on an EMPTY answer, and treats Gemini's confidence
   as a 0.5 floor once number and name matched. The matching rules are pure and tested there; keep
