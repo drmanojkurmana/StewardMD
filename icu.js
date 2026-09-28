@@ -3587,6 +3587,8 @@
       var out = '<div class="icu-sec-lbl">' + ico("syringe", "💊") + ' Current treatment' +
         (tx.length ? ' <span style="color:var(--muted);font-weight:600">· ' + tx.length + ' running</span>' : "") + '</div>' +
         '<button class="icu-btn" data-icu-act="txadd">＋ Add treatment</button>' +
+        // Dose calculator (flag smd_dose_calc): this patient's weight, age, sex, height and creatinine prefilled.
+        (window.SMD_DOSECALC && SMD_DOSECALC.on() ? ' <button class="icu-btn" data-icu-act="dosecalc">Dose for this patient</button>' : "") +
         txPresetBarHTML(tx);
       if (!tx.length) {
         out += '<div class="icu-card" style="margin-top:12px"><div class="icu-empty">No treatment recorded yet. Tap ＋ Add treatment to add antibiotics, fluids or supportive drugs — from the drug database or your own.</div></div>';
@@ -3605,6 +3607,7 @@
                 (dsg ? '<div style="font-family:var(--mono,monospace);font-size:12.5px;color:var(--primary);margin-top:2px">' + esc(dsg) + '</div>' : "") +
                 '<div style="font:600 10.5px var(--font);color:var(--muted);margin-top:3px">' +
                   [(x.by ? "added by " + esc(x.by) : ""), (x.ts ? "running since " + esc(fmtAgo(x.ts)) : "")].filter(Boolean).join(" · ") + '</div></div>' +
+                (window.SMD_DOSECALC && SMD_DOSECALC.on() ? '<button class="icu-tip" data-icu-act="dosecalc:' + encodeURIComponent(x.name) + '" title="Dose for this patient" aria-label="Dose of ' + esc(x.name) + ' for this patient" style="font:700 11.5px var(--font);color:var(--primary);flex:0 0 auto">Dose</button>' : "") +
                 '<button class="icu-tip" data-icu-act="txdel:' + encodeURIComponent(x.id) + '" title="Remove treatment" aria-label="Remove ' + esc(x.name) + '" style="color:var(--danger);font-size:15px;flex:0 0 auto">' + ico("trash","🗑") + '</button>' +
               '</div>';
             }).join("") + '</div>';
@@ -9005,6 +9008,12 @@
       case "infdupupd": if (_infDup) { ingestInfusion(Object.assign({}, _infDup.rec, { replaceIndex: _infDup.idx })); if (window.toast) toast(_infDup.rec.drug + " updated."); _infDup = null; } closeForm(); paint(); break;
       case "infdupsep": if (_infDup) { ingestInfusion(_infDup.rec); if (window.toast) toast(_infDup.rec.drug + " added as a separate line."); _infDup = null; } closeForm(); paint(); break;
       // ---- Current Treatment (editable; any doctor add/remove; group changes → timeline) ----
+      case "dosecalc": {
+        // Opens above #icuRoot with this patient's numbers; arg (optional) is a running drug's name.
+        if (window.SMD_DOSECALC) { var _dp = STATE.patient || {}, _dl = (STATE.labs && STATE.labs.recent) || {}, _dsc = _dl.creat; if (_dsc && typeof _dsc === "object") _dsc = _dsc.value != null ? _dsc.value : _dsc.v;
+          SMD_DOSECALC.open({ source: _dp.name || "ICU patient", drug: arg ? decodeURIComponent(arg) : null, patient: { weight: _dp.weightKg, age: _dp.age, ageUnit: "years", sex: _dp.sex === "M" || _dp.sex === "F" ? _dp.sex : "", height: _dp.heightCm, scr: _dsc } }); }
+        break;
+      }
       case "txadd": _txDraft = { name: "", dose: "", route: "", freq: "", cat: "other" }; _txHits = []; openTxForm(); break;
       case "txcat": txSyncInputs(); if (_txDraft) _txDraft.cat = arg; openTxForm(); break;
       case "txfreq": txSyncInputs(); if (_txDraft) _txDraft.freq = (_txDraft.freq === arg ? "" : arg); openTxForm(); break;
