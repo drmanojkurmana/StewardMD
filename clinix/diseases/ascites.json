@@ -142,6 +142,15 @@
   "cases": [
     {
       "id": "case.ascites.narayan",
+      "initialVitals": {
+        "hr": 88,
+        "bpSystolic": 108,
+        "bpDiastolic": 68,
+        "rr": 18,
+        "spo2": 98,
+        "temp": 37.0,
+        "gcs": 15
+      },
       "title": "A farmer whose belly has been swelling for three months",
       "opening": "Narayan Reddy, 54, has come to the medical outpatient department with abdominal swelling. He is sitting with his hands resting on a visibly distended abdomen. Introduce yourself and take a history.",
       "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
@@ -470,8 +479,7 @@
         "answer": "Decompensated alcoholic cirrhosis with moderate-volume, high-SAAG ascites, no spontaneous bacterial peritonitis, and early hepatic encephalopathy.",
         "accept": [
           "cirrhosis",
-          "decompensated",
-          "alcoholic"
+          "alcoholic cirrhosis"
         ],
         "minMatch": 1
       },

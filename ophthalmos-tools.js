@@ -378,7 +378,7 @@
   function open(t) {
     cur = { t: t, v: clone(mem[t.id] || t.init), bad: {}, shown: {} };
     st.view = "tool-" + t.id;
-    I.paint(I.top("Back to clinics", esc(t.title), esc(t.sub)) +
+    I.paint(I.top("Back to calculators", esc(t.title), esc(t.sub)) +
       '<div class="oph-scroll" id="tlScroll"><div class="tl-wrap">' +
       '<div class="tl-sumwrap"><section class="tl-sum" id="tlSum" aria-label="Result"></section></div>' +
       '<div class="tl-form" id="tlForm">' + formHtml() + "</div>" +

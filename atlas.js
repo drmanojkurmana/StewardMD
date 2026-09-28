@@ -2248,16 +2248,16 @@
     if (i) { stopCoast(); setSlice(i); }
   }
 
-  /* ---------- clinical notes (flag smd_atlas_notes, default OFF) ---------- */
-  // Same flag shape as atlas3d.js enabled(): ?atlasnotes=1|0 wins, else localStorage, else OFF.
+  /* ---------- clinical notes (flag smd_atlas_notes, default ON: owner decision 2026-09-28) ---------- */
+  // ?atlasnotes=1|0 wins, else localStorage "0"/"off"/"false" turns it off, else ON.
   var NOTES_KEY = "smd_atlas_notes", NOTES_Q = "atlasnotes";
   function notesOn() {
     try {
       var m = (G.location && G.location.search || "").match(new RegExp("[?&]" + NOTES_Q + "=([^&]+)"));
       if (m) return m[1] === "1" || m[1] === "on" || m[1] === "true";
       var v = G.localStorage && G.localStorage.getItem(NOTES_KEY);
-      return v === "1" || v === "on" || v === "true";
-    } catch (e) { return false; }
+      return !(v === "0" || v === "off" || v === "false");
+    } catch (e) { return true; }
   }
   var _notesP = null;
   function loadNotes() {
@@ -2272,9 +2272,7 @@
     }
     var n = (st.notes.notes || {})[id];
     if (!n || (!n.clinical && !n.imaging)) return '<p class="atlas-def">No clinical note for this structure yet.</p>';
-    var rv = n.review || st.notes.review;
-    return (rv !== "reviewed" ? '<p class="atlas-badge" role="note">Draft, pending clinical review</p>' : "") +
-      (n.clinical ? '<h3 class="atlas-note-h">Clinical</h3><p class="atlas-def">' + esc(n.clinical) + "</p>" : "") +
+    return (n.clinical ? '<h3 class="atlas-note-h">Clinical</h3><p class="atlas-def">' + esc(n.clinical) + "</p>" : "") +
       (n.imaging ? '<h3 class="atlas-note-h">Imaging</h3><p class="atlas-def">' + esc(n.imaging) + "</p>" : "");
   }
   function sheetOpen() { var el = $("atlasSheet"); return !!(el && el.classList.contains("on")); }

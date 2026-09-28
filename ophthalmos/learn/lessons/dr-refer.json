@@ -1,0 +1,253 @@
+{
+  "id": "dr-refer",
+  "unit": "retina",
+  "level": "mbbs",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "When to refer, and what the patient should do",
+    "hi": "कब रेफ़र करें, और मरीज़ क्या करे"
+  },
+  "idea": {
+    "en": "The grade sets the next step. Mild disease needs a yearly check. More than mild needs an [[ophthalmologist]], and [[pdr]] needs one urgently.",
+    "hi": "ग्रेड से अगला क़दम तय होता है। माइल्ड बीमारी में साल में एक बार जाँच काफ़ी है। उससे ज़्यादा हो तो [[ophthalmologist]] को दिखाना है, और [[pdr]] में तुरंत।"
+  },
+  "see": {
+    "img": "dr/20230116163015015001.webp",
+    "deckItem": {
+      "deck": "dr",
+      "id": "20230116163015015001"
+    },
+    "expect": "4",
+    "alt": {
+      "en": "Colour fundus photo of a left eye. The disc is left of centre. Large dark red patches of blood lie beside and below the macula. Small pale fluffy spots sit near the top.",
+      "hi": "एक बाईं आँख की रंगीन फ़ंडस फ़ोटो। डिस्क बीच से बाईं ओर है। मैक्युला के दाईं ओर और नीचे खून के बड़े गहरे लाल धब्बे हैं, और ऊपर की ओर छोटे, हल्के, रुई जैसे धब्बे हैं।"
+    },
+    "caption": {
+      "en": "A real photo of a left eye graded proliferative diabetic retinopathy. This eye needs urgent care.",
+      "hi": "एक बाईं आँख की असली फ़ोटो, ग्रेड: प्रोलिफ़ेरेटिव डायबिटिक रेटिनोपैथी। इस आँख को तुरंत इलाज चाहिए।"
+    },
+    "credit": "Retino (MedFMC), CC0 1.0. Wang D, et al. Sci Data 2023.",
+    "hotspots": [
+      {
+        "x": 0.6,
+        "y": 0.63,
+        "label": {
+          "en": "Large haemorrhage",
+          "hi": "बड़ा हेमरेज"
+        },
+        "note": {
+          "en": "A big patch of blood. In diabetes, bleeding this large suggests fragile new vessels. Refer urgently.",
+          "hi": "खून का बड़ा धब्बा। मधुमेह में इतना बड़ा खून बहना कमज़ोर नई नलियों की ओर इशारा करता है। तुरंत रेफ़र करें।"
+        }
+      },
+      {
+        "x": 0.63,
+        "y": 0.84,
+        "label": {
+          "en": "More bleeding",
+          "hi": "और खून"
+        },
+        "note": {
+          "en": "A second patch of blood lower down.",
+          "hi": "नीचे की ओर खून का दूसरा धब्बा।"
+        }
+      },
+      {
+        "x": 0.375,
+        "y": 0.15,
+        "label": {
+          "en": "Cotton wool spot",
+          "hi": "कॉटन वूल स्पॉट"
+        },
+        "note": {
+          "en": "A pale fluffy patch. A small area here has lost its blood supply.",
+          "hi": "हल्का, रुई जैसा धब्बा। यहाँ एक छोटे हिस्से की खून की सप्लाई रुक गई है।"
+        }
+      },
+      {
+        "x": 0.43,
+        "y": 0.47,
+        "label": {
+          "en": "Disc",
+          "hi": "डिस्क"
+        },
+        "note": {
+          "en": "Zoom here and along the big vessels to look for fine new vessels.",
+          "hi": "बारीक नई नलियाँ ढूँढने के लिए यहाँ और बड़ी नलियों के साथ-साथ ज़ूम करें।"
+        }
+      }
+    ],
+    "more": [
+      "sim-diabetic-retinopathy"
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "No retinopathy or mild NPDR, with no macular swelling: check again in 12 months.",
+        "hi": "कोई रेटिनोपैथी नहीं या माइल्ड NPDR, और मैक्युला में सूजन नहीं: 12 महीने बाद फिर जाँच।"
+      },
+      {
+        "en": "Moderate NPDR: refer to an eye specialist. Review every 6 to 12 months, or every 3 to 6 months if there is swelling away from the centre.",
+        "hi": "मॉडरेट NPDR: आँख के विशेषज्ञ को रेफ़र करें। हर 6 से 12 महीने पर जाँच, या बीच से दूर सूजन हो तो हर 3 से 6 महीने पर।"
+      },
+      {
+        "en": "Severe NPDR: urgent referral. Laser may be offered, especially if follow-up is uncertain.",
+        "hi": "सीवियर NPDR: तुरंत रेफ़र करें। लेज़र दिया जा सकता है, ख़ासकर अगर मरीज़ का दोबारा आना पक्का न हो।"
+      },
+      {
+        "en": "PDR, or [[centre-involving]] macular swelling: urgent treatment. PDR is treated with [[prp]] or [[anti-vegf]] injections.",
+        "hi": "PDR, या मैक्युला के बीच तक सूजन ([[centre-involving]]): तुरंत इलाज। PDR का इलाज [[prp]] या [[anti-vegf]] से होता है।"
+      },
+      {
+        "en": "Same day: sudden loss of vision, a shower of new floaters, or a dark curtain. These can mean a [[vitreous-haemorrhage]] or a detached retina.",
+        "hi": "उसी दिन: अचानक नज़र चली जाए, नए तैरते धब्बों की बौछार हो, या काला पर्दा दिखे। इसका मतलब [[vitreous-haemorrhage]] या रेटिना का उखड़ना हो सकता है।"
+      }
+    ],
+    "analogy": {
+      "en": "A yearly eye check is like pressing the test button on a smoke alarm. You cannot wait for smoke, because early retinopathy makes no noise.",
+      "hi": "साल में एक बार आँख की जाँच धुएँ के अलार्म का टेस्ट बटन दबाने जैसी है। धुआँ दिखने का इंतज़ार नहीं कर सकते, क्योंकि शुरुआती रेटिनोपैथी कोई आवाज़ नहीं करती।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Yearly check: grade 0 or 1 with a dry macula.",
+      "hi": "साल में एक बार जाँच: ग्रेड 0 या 1, और मैक्युला सूखा।"
+    },
+    {
+      "en": "Refer: grade 2, or any macular swelling.",
+      "hi": "रेफ़र करें: ग्रेड 2, या मैक्युला में कोई भी सूजन।"
+    },
+    {
+      "en": "Urgent: grade 3, grade 4, or swelling at the centre.",
+      "hi": "तुरंत: ग्रेड 3, ग्रेड 4, या बीच में सूजन।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Tell the patient to keep blood sugar, blood pressure and cholesterol in the range agreed with their doctor.",
+      "hi": "मरीज़ को बताएँ कि शुगर, ब्लड प्रेशर और कोलेस्ट्रॉल को डॉक्टर के बताए दायरे में रखें।"
+    },
+    {
+      "en": "Advise them to stop smoking, and to keep every eye visit even when vision feels fine.",
+      "hi": "सलाह दें कि धूम्रपान छोड़ें, और नज़र ठीक लगे तब भी आँख की हर जाँच पर आएँ।"
+    },
+    {
+      "en": "First eye check: at diagnosis in type 2 diabetes, and within 5 years of diagnosis in type 1. A woman with diabetes who becomes pregnant needs one early in pregnancy.",
+      "hi": "पहली आँख जाँच: टाइप 2 मधुमेह में पता चलते ही, और टाइप 1 में पता चलने के 5 साल के अंदर। मधुमेह वाली महिला गर्भवती हो, तो गर्भावस्था की शुरुआत में ही जाँच करवाए।"
+    },
+    {
+      "en": "Warn that [[dilating-drops]] blur vision for a few hours. The patient should not drive home.",
+      "hi": "बताएँ कि [[dilating-drops]] से कुछ घंटे नज़र धुंधली रहती है। मरीज़ ख़ुद गाड़ी चलाकर घर न जाए।"
+    }
+  ],
+  "remember": {
+    "en": "Sugar, pressure, cholesterol, and a yearly eye check. Sudden loss of vision means the same day.",
+    "hi": "शुगर, प्रेशर, कोलेस्ट्रॉल, और साल में एक बार आँख की जाँच। अचानक नज़र जाए, तो उसी दिन।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Mild NPDR with no macular swelling. When is the next check?",
+        "hi": "माइल्ड NPDR, मैक्युला में सूजन नहीं। अगली जाँच कब?"
+      },
+      "o": [
+        {
+          "en": "In 1 month",
+          "hi": "1 महीने में"
+        },
+        {
+          "en": "In 12 months",
+          "hi": "12 महीने में"
+        },
+        {
+          "en": "No more checks needed",
+          "hi": "अब जाँच की ज़रूरत नहीं"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Mild disease with a dry macula can wait a year, but checks must continue.",
+        "hi": "सूखे मैक्युला के साथ माइल्ड बीमारी में एक साल रुक सकते हैं, पर जाँच जारी रहनी चाहिए।"
+      }
+    },
+    {
+      "q": {
+        "en": "There are new vessels on the disc. What is needed?",
+        "hi": "डिस्क पर नई नलियाँ हैं। क्या करना चाहिए?"
+      },
+      "o": [
+        {
+          "en": "Review in 1 year",
+          "hi": "1 साल बाद जाँच"
+        },
+        {
+          "en": "New glasses",
+          "hi": "नया चश्मा"
+        },
+        {
+          "en": "Urgent referral for treatment",
+          "hi": "इलाज के लिए तुरंत रेफ़र"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "New vessels mean PDR. Laser or injections lower the risk of severe vision loss.",
+        "hi": "नई नलियाँ मतलब PDR। लेज़र या इंजेक्शन से गंभीर रूप से नज़र जाने का ख़तरा घटता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "When should a person with type 2 diabetes have their first eye check?",
+        "hi": "टाइप 2 मधुमेह वाले व्यक्ति की पहली आँख जाँच कब होनी चाहिए?"
+      },
+      "o": [
+        {
+          "en": "At diagnosis",
+          "hi": "पता चलते ही"
+        },
+        {
+          "en": "After 5 years",
+          "hi": "5 साल बाद"
+        },
+        {
+          "en": "Only when vision drops",
+          "hi": "सिर्फ़ तब जब नज़र घटे"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Type 2 diabetes is often present for years before it is found, so the eyes may already be affected.",
+        "hi": "टाइप 2 मधुमेह पता चलने से पहले अक्सर सालों से मौजूद रहता है, इसलिए आँखों पर पहले से असर हो सकता है।"
+      }
+    }
+  ],
+  "test": {
+    "clinic": "dr",
+    "classes": [
+      "2",
+      "3",
+      "4"
+    ],
+    "mcqTopic": "retina"
+  },
+  "deeper": {
+    "note": "pdr"
+  },
+  "glossary": [
+    "ophthalmologist",
+    "pdr",
+    "centre-involving",
+    "prp",
+    "anti-vegf",
+    "vitreous-haemorrhage",
+    "dilating-drops"
+  ],
+  "sources": [
+    "Lim JI, Kim SJ, Bailey ST, et al. Diabetic Retinopathy Preferred Practice Pattern. Ophthalmology 2025;132(4):P75-P162.",
+    "Diabetic Retinopathy Study Research Group. Photocoagulation treatment of proliferative diabetic retinopathy: clinical application of Diabetic Retinopathy Study (DRS) findings, DRS report number 8. Ophthalmology 1981;88(7):583-600.",
+    "Writing Committee for the Diabetic Retinopathy Clinical Research Network; Gross JG, Glassman AR, Jampol LM, et al. Panretinal photocoagulation vs intravitreous ranibizumab for proliferative diabetic retinopathy: a randomized clinical trial. JAMA 2015;314(20):2137-2146.",
+    "Wang D, et al. MedFMC: A Real-world Dataset and Benchmark for Foundation Model Adaptation in Medical Image Classification. Sci Data 2023. doi:10.1038/s41597-023-02460-0"
+  ]
+}

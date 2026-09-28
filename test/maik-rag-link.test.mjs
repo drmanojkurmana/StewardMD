@@ -142,6 +142,21 @@ test("the header disclaimer tells the truth in each state, and never says 'no so
   assert.doesNotMatch(off, /Knowledge Base/i, "disconnected: must not imply the KB was used");
 });
 
+test("SMD-16: the start screen's knowledge card promises citations only when the engine gives them", () => {
+  const E = loadEngine(true);
+  E.setPref("local");
+  E.setRagLinked(false);
+  assert.match(E.knowSub(), /not cited/i, "on-device, book off: says it is not cited (as the footer says no sources)");
+  assert.doesNotMatch(E.knowSub(), /Cited, page-level/i);
+  E.setRagLinked(true);
+  assert.match(E.knowSub(), /knowledge base/i, "on-device, book on: names the knowledge base");
+  E.setPref("rag");
+  assert.match(E.knowSub(), /knowledge base/i);
+  E.setPref("cloud");
+  assert.match(E.knowSub(), /Cited, page-level answers/, "cloud keeps the citation promise");
+  E.setRagLinked(true);
+});
+
 /* REQUIREMENT 11 (owner, 2026-09-20): with the link off, buildPackage() must not run at all.
  * home.js is a 9k-line UI module with no unit harness, so this asserts the guard at source level -
  * the same approach maik-engine.test.mjs uses for its source invariants. What matters is that the

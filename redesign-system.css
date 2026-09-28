@@ -877,6 +877,8 @@ html body.v3-dark #homeV2.rnav .rnav-tab-maik .rds-icon {
   /* CliniX mark: a slow breathing pulse on the home tile only - the module's own hero banner
      uses the same clinix-logo.png with no animation class, so it sits still while read. */
   #homeV2.rnav .ai-clinix-img { animation: cxBreathe 3.2s ease-in-out infinite; }
+  /* Every brand mark breathes the same way (2026-09-27, "all clinical tool icons"), except SURGX. */
+  #homeV2.rnav .rnav-badge .ai-brandmark:not(.ai-surgx-img):not(.ai-clinix-img) { animation: cxBreathe 3.6s ease-in-out infinite; animation-delay: -1.2s; }
   @keyframes cxBreathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.07); } }
 }
 
@@ -884,8 +886,84 @@ html body.v3-dark #homeV2.rnav .rnav-tab-maik .rds-icon {
 /* Energy (2026-09-25): the looping tile icons pause while the home is not what is on screen
  * (home.js refreshTileAnim sets .hv-still) and per icon when scrolled out of view (.ai-offscreen).
  * A paused CSS animation costs nothing per frame; wherever an icon can be seen it animates as before. */
-#homeV2.hv-still .ai-anim, #homeV2.hv-still .ai-anim *, #homeV2.hv-still .ai-clinix-img, #homeV2.hv-still .tx-tile-lungs,
+#homeV2.hv-still .ai-anim, #homeV2.hv-still .ai-anim *, #homeV2.hv-still .ai-clinix-img, #homeV2.hv-still .tx-tile-lungs, #homeV2.hv-still .ai-live, #homeV2.hv-still .ai-brandmark,
 #homeV2 .ai-offscreen, #homeV2 .ai-offscreen * { animation-play-state: paused !important; }
+
+/* Ophthalmós eye (owner, 2026-09-27: "an eye closing and opening", "more premium and stylish").
+ * 5.6 s: open and glancing, a natural blink (fast down, softer up) into the closed-lid crescent,
+ * open, the pupil tightens and relaxes; the iris fibres turn slowly the whole time and the glow
+ * breathes. transform-box: view-box so the lid squeeze and the pupil share the eye's centre. */
+#homeV2.rnav .rnav-badge .ai-ox { width: 36px; height: 36px; filter: drop-shadow(0 1px 2px rgba(0,0,0,.28)); }
+#homeV2.rnav .ai-ox .ox-open, #homeV2.rnav .ai-ox .ox-pupil, #homeV2.rnav .ai-ox .ox-fibres, #homeV2.rnav .ai-ox .ox-glow { transform-box: view-box; transform-origin: 16px 16.4px; }
+#homeV2.rnav .ai-ox .ox-shut { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  #homeV2.rnav .ai-ox .ox-open { animation: oxLid 5.6s cubic-bezier(.55,0,.3,1) infinite; }
+  #homeV2.rnav .ai-ox .ox-shut { animation: oxShut 5.6s linear infinite; }
+  #homeV2.rnav .ai-ox .ox-look { animation: oxLook 5.6s ease-in-out infinite; }
+  #homeV2.rnav .ai-ox .ox-pupil { animation: oxPupil 5.6s ease-in-out infinite; }
+  #homeV2.rnav .ai-ox .ox-fibres { animation: oxTurn 16s linear infinite; }
+  #homeV2.rnav .ai-ox .ox-glow { animation: oxGlow 5.6s ease-in-out infinite; }
+  @keyframes oxLid { 0%, 43%, 53.5%, 100% { transform: scaleY(1); opacity: 1; } 45.3%, 50% { transform: scaleY(.05); opacity: 0; } }
+  @keyframes oxShut { 0%, 44.6%, 50.7%, 100% { opacity: 0; } 45.3%, 50% { opacity: 1; } }
+  @keyframes oxLook { 0%, 9%, 39%, 57%, 100% { transform: translateX(0); } 16%, 30% { transform: translateX(-2.4px); } 65%, 80% { transform: translateX(2.4px); } }
+  @keyframes oxPupil { 0%, 55%, 100% { transform: scale(1); } 60%, 68% { transform: scale(.66); } 16%, 30% { transform: scale(1.12); } }
+  @keyframes oxTurn { to { transform: rotate(360deg); } }
+  @keyframes oxGlow { 0%, 100% { transform: scale(.92); opacity: .7; } 50% { transform: scale(1.08); opacity: 1; } }
+}
+
+/* SURGX: "should shine like a sharp knife" (owner, 2026-09-27; replaces the earlier static brief).
+ * A narrow streak of light runs across the mark itself - clipped to the logo by a mask of the same
+ * PNG, so it glints on the blade, not the sphere - fast, then rests, like light catching an edge.
+ * The logo box is 38px tall at 368:512, so the mask is sized auto x 38px, centred like the img. */
+#homeV2.rnav .rnav-tile[data-act="surgx"] .rnav-badge::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 28px; height: 38px; transform: translate(-50%, -50%);
+  pointer-events: none; opacity: 0;
+  background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.35) 45%, #fff 49%, #fff 51%, rgba(220,248,255,.45) 55%, transparent 60%) no-repeat;
+  background-size: 300% 100%; background-position: 130% 0;
+  -webkit-mask: url(/surgx-logo.png) center / auto 38px no-repeat; mask: url(/surgx-logo.png) center / auto 38px no-repeat;
+}
+/* Steel, not white: the blade rests a brushed silver so the white glint has something to cross. */
+#homeV2.rnav .rnav-tile[data-act="surgx"] .ai-surgx-img { filter: brightness(0) invert(.8) drop-shadow(0 2px 3px rgba(0,0,0,.35)); }
+@media (prefers-reduced-motion: no-preference) {
+  #homeV2.rnav .rnav-tile[data-act="surgx"] .rnav-badge::after { animation: surgxGlint 3.4s cubic-bezier(.5,0,.2,1) infinite; animation-delay: .8s; }
+  #homeV2.rnav .rnav-tile[data-act="surgx"] .ai-surgx-img { animation: surgxEdge 3.4s ease-in-out infinite; animation-delay: .8s; }
+  @keyframes surgxGlint { 0% { opacity: 1; background-position: 130% 0; } 22% { opacity: 1; background-position: -30% 0; } 23%, 100% { opacity: 0; background-position: -30% 0; } }
+  @keyframes surgxEdge { 0%, 6%, 30%, 100% { filter: brightness(0) invert(.8) drop-shadow(0 2px 3px rgba(0,0,0,.35)); }
+    13% { filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(215,248,255,1)) drop-shadow(0 2px 3px rgba(0,0,0,.35)); } }
+}
+#homeV2.hv-still .rnav-tile[data-act="surgx"] .rnav-badge::after, #homeV2 .rnav-badge:has(.ai-offscreen)::after { animation-play-state: paused !important; }
+
+/* Lively Clinical Tools glyphs (owner, 2026-09-27: "just like oncotree make all clinical tool icons
+ * have motion or lively"). One small motion per kind of tool, set by home.js liveIcon() as
+ * data-live; --live-d staggers each tool so the grid never moves in unison. Transforms and opacity
+ * only (compositor work, no layout); paused with the other tile icons by the energy rule above. */
+#homeV2.rnav .rnav-badge .ai-live { display: inline-block; transform-origin: 50% 55%; will-change: transform; }
+@media (prefers-reduced-motion: no-preference) {
+  #homeV2.rnav .ai-live { animation: liveFloat 3.4s ease-in-out infinite; animation-delay: var(--live-d, 0s); }
+  #homeV2.rnav .ai-live[data-live="beat"] { animation: liveBeat 1.6s ease-in-out infinite; animation-delay: var(--live-d, 0s); }
+  #homeV2.rnav .ai-live[data-live="pulse"] { animation: livePulse 2.6s ease-in-out infinite; animation-delay: var(--live-d, 0s); }
+  #homeV2.rnav .ai-live[data-live="tilt"] { animation: liveTilt 3.2s ease-in-out infinite; animation-delay: var(--live-d, 0s); }
+  #homeV2.rnav .ai-live[data-live="sparkle"] { animation: liveSparkle 2.8s ease-in-out infinite; animation-delay: var(--live-d, 0s); }
+  #homeV2.rnav .ai-live[data-live="blink"] { animation: liveBlink 3.6s ease-in-out infinite; animation-delay: var(--live-d, 0s); }
+  #homeV2.rnav .ai-live[data-live="flip"] { animation: liveFlip 4s ease-in-out infinite; animation-delay: var(--live-d, 0s); }
+  #homeV2.rnav .ai-live[data-live="bounce"] { animation: liveBounce 2.4s ease-in-out infinite; animation-delay: var(--live-d, 0s); }
+  #homeV2.rnav .ai-live[data-live="rise"] { animation: liveRise 3s ease-in-out infinite; animation-delay: var(--live-d, 0s); }
+  #homeV2.rnav .ai-live[data-live="spin"] { animation: liveSpin 8s linear infinite; }
+  #homeV2.rnav .ai-live[data-live="listen"] { animation: liveListen 1.8s ease-in-out infinite; animation-delay: var(--live-d, 0s); }
+  #homeV2.rnav .ai-live[data-live="sweep"] { animation: liveSweep 3.6s ease-in-out infinite; animation-delay: var(--live-d, 0s); }
+  @keyframes liveFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2.5px); } }
+  @keyframes liveBeat { 0%,40%,100% { transform: scale(1); } 12% { transform: scale(1.16); } 24% { transform: scale(1.04); } 30% { transform: scale(1.12); } }
+  @keyframes livePulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.09); opacity: .86; } }
+  @keyframes liveTilt { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-9deg); } 75% { transform: rotate(9deg); } }
+  @keyframes liveSparkle { 0%,100% { transform: rotate(0) scale(1); opacity: 1; } 50% { transform: rotate(18deg) scale(1.14); opacity: .8; } }
+  @keyframes liveBlink { 0%,86%,100% { transform: scaleY(1); } 92% { transform: scaleY(.15); } }
+  @keyframes liveFlip { 0%,70%,100% { transform: perspective(80px) rotateY(0); } 85% { transform: perspective(80px) rotateY(180deg); } }
+  @keyframes liveBounce { 0%,100% { transform: translateY(0); } 30% { transform: translateY(-4px); } 50% { transform: translateY(0); } 65% { transform: translateY(-1.5px); } }
+  @keyframes liveRise { 0% { transform: translate(-2px,2px); opacity: .7; } 60% { transform: translate(1px,-2px); opacity: 1; } 100% { transform: translate(-2px,2px); opacity: .7; } }
+  @keyframes liveSpin { to { transform: rotate(360deg); } }
+  @keyframes liveListen { 0%,100% { transform: scale(1); text-shadow: 0 0 0 rgba(255,255,255,0); } 50% { transform: scale(1.08); text-shadow: 0 0 10px rgba(180,255,240,.75); } }
+  @keyframes liveSweep { 0%,100% { transform: translateX(0) rotate(0); } 30% { transform: translateX(-2px) rotate(-6deg); } 70% { transform: translateX(2px) rotate(6deg); } }
+}
 
 /* iPad / Tablet layout expansions */
 @media (min-width: 768px) {

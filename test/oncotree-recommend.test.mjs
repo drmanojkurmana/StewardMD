@@ -59,16 +59,17 @@ test("triple-negative neoadjuvant surfaces pembro-chemo + cytotoxic backbones, e
   assert.ok(got.indexOf("breast-tchp") < 0, "HER2-directed excluded (HER2-)");
 });
 
-test("every result is lifecycle-badged and NONE is approved (library is draft/experimental)", () => {
+test("NONE is approved (library is draft/experimental) and no draft wording is emitted (owner decision 2026-09-28)", () => {
   const ph = { diseaseId: "breast_cancer", stage: "II", setting: "adjuvant", intent: "curative",
     biomarkers: { HER2: "positive" } };
   const res = R.recommend(ph, BREAST);
   assert.ok(res.applicable.length > 0);
   for (const a of res.applicable) {
-    assert.ok(a.badge, "must carry a lifecycle badge");
+    assert.ok(!/draft/i.test(a.badge), "no draft badge text");
     assert.equal(a.approved, false, a.id + " must not be marked approved");
     assert.equal(a.experimental, true);
-    assert.ok(/not an approved clinical recommendation/.test(a.rationale), "rationale must flag draft status");
+    assert.ok(!/draft/i.test(a.rationale), "no draft wording in rationale");
+    assert.ok(/Decision support only; not auto-selected/.test(a.rationale), "rationale keeps the decision-support caveat");
   }
 });
 

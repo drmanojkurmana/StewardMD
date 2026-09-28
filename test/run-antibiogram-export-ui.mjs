@@ -1,19 +1,7 @@
-// Real-browser test of the antibiogram rebuild: the full app in headless Chrome at 390px.
-//   Antibiogram screen (v2): sources, strata chips, heatmap, cell sheet with its source, %R toggle,
-//     pooled India view, Sources tab (census + a source's own consistency checks), My hospital
-//     import (summary CSV, checked, saved on the device, used as a profile, removed)
-//   one shared profile picker (reasoning, console, screen)
-//   Stewardship console: syndrome-matched specimen (urine for pyelonephritis, blood for sepsis),
-//     isolate numbers, AWaRe, provenance on tap
-//   Syndrome reasoning: the resistance panel for the lead diagnosis, link to the full antibiogram
-//   flag smd_abg_v2 = "0": the previous resistance view still works on the new data
-//   kill switch smd_abg_data = "0": console and reasoning fall back to the built-in national summary
-//   keyboard access to every figure, search feedback, breakpoint notes, CSV contents, print label,
-//   a % resistant import caught before it is saved as % susceptible
-//   no em dash in the new screens
-//   redesign (flag smd_abg_pro): three one-line tabs, Sources beside the exports with a way back,
-//     plain drug names; flag off restores the previous look
-//   node test/run-antibiogram-ui.mjs      (CHROME=/path/to/chrome to override the browser)
+// Real-browser test of the antibiogram QA fixes (sheet 2026-09-27), full app in headless Chrome at 375px:
+//   SMD-13 nothing on Resistance past the screen edge; SMD-12 PDF letterhead + portrait-fit table + CSV
+//   header; SMD-11 From/To period pickers stored as "Jan 2025 to Dec 2025".
+//   node test/run-antibiogram-export-ui.mjs   (PDF_OUT=dir also writes the PDF HTML for a look)
 import { spawn } from 'node:child_process';
 import http from 'node:http';
 import { existsSync, readFile } from 'node:fs';

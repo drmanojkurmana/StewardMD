@@ -182,13 +182,14 @@
       '<div class="ot-opts">' + opts + "</div></div>";
   }
 
-  // Protocol card - references an EXISTING protocol; lifecycle badge is unmistakable; never approved-looking for drafts.
+  // Protocol card - references an EXISTING protocol; only an ACTIVE protocol shows a badge, so a non-active one never looks approved.
   function protocolCardHtml(ref, match) {
     var p = st.protocols[ref];
     if (!p) return '<div class="ot-card ot-card-missing">' + esc(ref) + ' - protocol not loaded</div>';
-    var badge = (match && match.badge) || (p.experimental ? "BETA · AI-DRAFTED" : (p.lifecycleState || "draft").toUpperCase());
-    var approved = match ? match.approved : (p.lifecycleState === "active");
-    var cls = "ot-badge " + (approved ? "ok" : (p.experimental ? "exp" : "draft"));
+    var approved = match ? match.approved : (p.lifecycleState === "active" && !p.experimental);
+    // Owner decision 2026-09-28: no draft / AI-drafted labels. Only an ACTIVE protocol carries a badge.
+    var badge = approved ? ((match && match.badge) || "ACTIVE") : "";
+    var cls = "ot-badge ok";
     var ctx = [];
     if (p.stage) ctx.push("Stage " + asArr(p.stage).join("/"));
     if (p.treatmentSetting) ctx.push(asArr(p.treatmentSetting).join("/"));
@@ -198,7 +199,7 @@
       ? '<div class="ot-card-verify">' + ms("error") + "Needs verification: " + esc(match.unconfirmed.join(", ")) + "</div>" : "";
     return '<div class="ot-card">' +
       '<div class="ot-card-top"><div class="ot-card-name">' + esc(p.name || ref) + "</div>" +
-        '<span class="' + cls + '">' + esc(badge) + "</span></div>" +
+        (badge ? '<span class="' + cls + '">' + esc(badge) + "</span>" : "") + "</div>" +
       '<div class="ot-card-ctx">' + esc(ctx.join(" · ")) + (cyc ? '<span class="ot-card-cyc">' + esc(cyc) + "</span>" : "") + "</div>" +
       (p.version ? '<div class="ot-card-ver">Protocol v' + esc(p.version) + " · " + esc(ref) + "</div>" : "") +
       unconf +
@@ -307,7 +308,7 @@
         match = {
           id: r,
           name: proto.name || r,
-          badge: (proto.lifecycleState || "DRAFT").toUpperCase(),
+          badge: proto.lifecycleState === "active" ? "ACTIVE" : "",
           approved: proto.lifecycleState === "active",
           rationale: "Curated guideline regimen for " + (node.title || node.name) + ". Review clinical parameters prior to order verification."
         };
@@ -504,7 +505,7 @@
   function protocolDetailHtml(ref) {
     var p = resolveProto(ref);
     if (!p) return '<div class="ot-empty">Protocol not loaded.</div>';
-    var badge = p.experimental ? "BETA · AI-DRAFTED" : (p.lifecycleState || "draft").toUpperCase();
+    var badge = (p.lifecycleState === "active" && !p.experimental) ? "ACTIVE" : "";
     var drugs = asArr(p.drugs).map(function (d) {
       var freq = d.frequency || (d.dosesPerDay > 1 ? ({ 2: "BID", 3: "TID", 4: "QID" }[d.dosesPerDay] || d.dosesPerDay + "x/day") : "");
       var dm = asArr(d.days).length ? "D" + (d.days.length === 1 ? d.days[0] : d.days[0] + "-" + d.days[d.days.length - 1]) : "";
@@ -513,8 +514,8 @@
     var src = p.source ? [p.source.nccn, p.source.textbook].filter(Boolean).join(" · ") : "";
     return '<div class="ot-detail">' +
       '<button class="ot-back" data-ot-act="close-proto">' + ms("arrow_back") + "Back to options</button>" +
-      '<div class="ot-detail-head"><h2>' + esc(p.name || ref) + '</h2><span class="ot-badge ' + (p.experimental ? "exp" : "draft") + '">' + esc(badge) + "</span></div>" +
-      '<div class="ot-detail-warn">' + ms("info") + "AI-drafted (Beta). Decision support only. Verify against your institutional protocol; the physician and dose engine own dosing.</div>" +
+      '<div class="ot-detail-head"><h2>' + esc(p.name || ref) + "</h2>" + (badge ? '<span class="ot-badge ok">' + esc(badge) + "</span>" : "") + "</div>" +
+      '<div class="ot-detail-warn">' + ms("info") + "Decision support only. Verify against your institutional protocol; the physician and dose engine own dosing.</div>" +
       '<div class="ot-detail-meta">' +
         (p.diseaseId ? '<div><b>Disease</b>' + esc(p.diseaseId) + "</div>" : "") +
         (p.stage ? '<div><b>Stage</b>' + esc(asArr(p.stage).join(", ")) + "</div>" : "") +
@@ -543,7 +544,7 @@
       '<div class="ot-sel-icon">' + ms("check_circle") + "</div>" +
       "<h2>Protocol selected</h2>" +
       '<div class="ot-sel-name">' + esc(p.name || s.protocolId) + '</div>' +
-      '<div class="ot-badge ' + (p.experimental ? "exp" : "draft") + '">' + esc(s.badge) + "</div>" +
+      (s.badge ? '<div class="ot-badge ok">' + esc(s.badge) + "</div>" : "") +
       '<div class="ot-sel-note">' + ms("info") + "Recorded the physician's selection. This does NOT activate a treatment plan or compute a dose. Continue in the existing StewardMD oncology workflow, where the dose engine and physician confirmation apply.</div>" +
       '<div class="ot-sel-payload"><b>Handoff</b>' +
         "<div>Protocol: " + esc(s.protocolId) + " v" + esc(s.protocolVersion || "-") + "</div>" +
@@ -713,7 +714,7 @@
       });
       lines.push("");
     }
-    lines.push("Decision support only - DRAFT. The physician decides; the dose engine computes doses.");
+    lines.push("Decision support only. The physician decides; the dose engine computes doses.");
     return lines.join("\n");
   }
   // ---- NCCN GUIDELINES NAVIGATOR (interactive horizontal multi-column flowchart) --------------
@@ -1689,7 +1690,7 @@
       viewToggle +
       crumbsHtml() +
       '<div class="ot-scroll' + (isNavScrollLocked ? " ot-scroll-nav" : "") + '" id="otBody">' + bodyHtml() + "</div>" +
-      '<div class="ot-disclaimer">Decision support. DRAFT navigator + protocols. Not an approved clinical order; the physician decides and the existing dose engine computes doses.</div>' +
+      '<div class="ot-disclaimer">Decision support. Not an approved clinical order; the physician decides and the existing dose engine computes doses.</div>' +
       superpowerModalHtml() +
       "</div>";
   }
@@ -2237,7 +2238,7 @@
     st.selection = {
       protocolId: ref, protocolVersion: p.version || p.protocolVersion || null,
       guideline: st.guideline, navigatorVersion: (st.graph && st.graph.navigatorVersion) || null,
-      badge: p.experimental ? "BETA · AI-DRAFTED" : ((p.lifecycleState || "draft").toUpperCase()),
+      badge: (p.lifecycleState === "active" && !p.experimental) ? "ACTIVE" : "",
       phenotype: state ? state.phenotype : {}, answers: JSON.parse(JSON.stringify(st.answers)),
       pathway: state ? state.activePathIds.slice() : []
     };

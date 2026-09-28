@@ -656,7 +656,7 @@
   function reviewNote(kit, host) {
     var st = (kit.review && kit.review.status) || "ai_drafted";
     if (st === "approved" || st === "reviewed") return '<div class="kit-status ok" role="note">' + ms("verified") + "<span><strong>Clinically " + (st === "approved" ? "approved" : "reviewed") + "</strong>" + (kit.review.reviewer ? " by " + esc(kit.review.reviewer) : "") + ".</span></div>";
-    return '<div class="kit-status" role="note">' + ms("info") + "<span><strong>Draft kit, pending clinical review.</strong> " +
+    return '<div class="kit-status" role="note">' + ms("info") + "<span>" +
       (host && host.kind === "opd" ? "It only adds text you can edit; nothing is saved until you save the assessment." : "It only prepares text for you to copy and check; nothing is saved.") + "</span></div>";
   }
   function fieldHtml(f, v, scope) {

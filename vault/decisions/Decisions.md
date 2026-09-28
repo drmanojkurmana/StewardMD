@@ -10571,6 +10571,21 @@ which used to be all teal). The footer moved from dark (#0B1220) to Apple-light 
 black "Steward" can sit on it; the white MaiK wordmark there is rendered black via
 `filter:brightness(0)` (no dark asset exists).
 
+## 2026-09-28 - Doctor OTP is SMS from MAIK only (no voice fallback); phone-verify stamps the profile server-side
+- **Decision**: `sendDlt` always sends from `DLT_SENDER` ("MAIK", the header every DLT template is registered
+  under); `dltConfigured` needs only FOLLOWCARE_SMS_PROVIDER=twofactor + TWOFACTOR_API_KEY. TWOFACTOR_SENDER now
+  feeds only the legacy TSMS path. A refused DLT send is `console.warn`ed (template + 2Factor's answer, number and
+  key redacted). The doctor OTP no longer falls back to 2Factor's V1 OTP route unless TWOFACTOR_TEMPLATE_OTP names
+  an approved 2Factor OTP SMS template: unnamed, that route rings the doctor (0 OTP templates on 2Factor).
+- **Why**: the owner got the login OTP as a call again after #1294. Production's TWOFACTOR_SENDER was not MAIK
+  (my tests hard-coded MAIK), 2Factor refused each DLT send, and the silent V1 fallback phoned instead.
+- **Decision**: POST /api/auth/phone-verify writes phone, phoneVerifiedNumber ("+" + digits) and phoneVerifiedAt
+  to users/{uid}/profile/self with the admin credential. The app's own Firestore SDK write never lands in the
+  iOS WebView, so Profile stayed "Checking" / "Not verified" after a correct code. Client: the verified number goes
+  into this device's profile cache at once (smd:phone-verified detail), the server read is bounded at 10 s, a
+  Profile whose reads both fail paints the Mobile number row from the phoneVerified claim, and tapping a VERIFIED
+  row opens "Number verified" (Done / Change number) instead of the Send-code step.
+
 ## 2026-09-27 - Marketing site: Apple-style phone layer
 Owner: "make it mobile compatible and best to watch and get same experience like apple website on
 mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_site/index.html`:
@@ -10693,3 +10708,129 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   (qSOFA), urine RBC counts, urea without a creatinine, a measured urine output, "wt loss". Dropped: SpO2 below 94%
   (cost gold and sealed). Neutral and left alone: subacute onset from 8 rather than 7 days, a BP reading of 160/100
   rather than 140/90 as a hypertension history.
+
+## 2026-09-27 — QA bug sheet (SMD-01..16): decisions taken while fixing
+
+- **Model integrity is hashed natively (SMD-03).** Reverses the "no full SHA on device" note in
+  `maik-models.js`: that rule was about reading 2.5 GB back through the JS bridge. The llama plugin now
+  has `modelVerify` (iOS CryptoKit / Android MessageDigest, streamed in 8 MiB reads off the inference
+  thread). `nativeDownload()` marks a pack installed only when the hash equals the registry sha256; a
+  mismatch deletes and re-downloads once, a second mismatch stops. Packs with no registry hash, and
+  native builds without `modelVerify`, keep size + sidecar + loader checks. `remove()` now emits.
+- **No silent cloud fallback, kept.** The sheet asked for a corrupt on-device model to fall back to
+  MaiK Cloud automatically. That contradicts 2026-09-11 (Local is a hard policy, never a silent cloud
+  call), so the chat offers two explicit taps instead: "Download it again" and "Switch to MaiK Cloud
+  and ask again". Owner to decide if Local should ever fall back on its own.
+- **iOS background downloads (SMD-04).** Already a background URLSession; what was missing was
+  `application(_:handleEventsForBackgroundURLSession:)`. AppDelegate now recreates the session by ObjC
+  runtime name (`LlamaPlugin.ModelDownloader.wakeForBackgroundEvents`, the app target does not import
+  the plugin module) and returns iOS's completion handler on `SMDBackgroundURLSessionDone`. A local
+  notification says when a model finished while the app was in the background. Uncompiled here:
+  build on the Mac and watch a download with the phone locked.
+- **Root cause of damaged MaiK models on iOS (owner follow-up, same day).** `ModelDownloader`
+  special-cased only HTTP 200, so any other reply to a part (403 from an expired signed Hugging Face
+  CDN link, 416, 5xx: an error page) was written into the model at that part's offset and marked
+  committed. Backgrounding the app makes iOS defer and retry parts after those links expire, so the
+  "completed" file had error pages stitched in. Parts are now committed only as a 206 whose
+  Content-Range starts at the part offset with exactly the promised byte count; anything else is
+  re-requested from the original resolve URL (fresh signed link), up to 5 tries per part. The native
+  hash check remains the backstop. Android's DownloadManager fails on HTTP errors and is unaffected.
+- **The grey edge tab (SMD-15) is iOS's Picture-in-Picture stash handle**, not app UI; one report showed
+  a live camera feed in the PiP window. `swipe-back.js` now opts every app `<video>` out of PiP, leaves
+  PiP on removal or backgrounding, and stops a removed camera preview's stream.
+- **Antibiogram PDF (SMD-12)** splits tables past 14 antibiotics into stacked blocks with lab-code heads
+  rather than shrinking type or switching to landscape (the native renderer is fixed portrait).
+- **MaiK start card (SMD-16)** promises citations only when the answering engine gives them
+  (`SMD_MAIK_ENGINE.knowSub()`), in the same terms as the footer.
+
+## 2026-09-27 CliniX audit fixes (branch claude/clinix-module-audit-d5n7jp)
+- **Review gate fails closed again.** `clinix-content.js gateOpts()` reads `smd_clinix_draft` (default ON,
+  owner release decision unchanged) instead of defaulting to allow when the flags module is missing, and
+  the four screen fallbacks that rebuilt pathways with a hard-coded `allowDraft: true` are gone. Every
+  draft lesson shows "Draft, pending clinician review" again (60d19c27 had replaced it with a
+  "Clinical Reference" badge).
+- **The five presentations are `ai_drafted`, not `approved`.** 978acba3 had self-declared them approved
+  by a "Clinical Review Team" that never reviewed them. They still render (draft flag), with the draft line.
+- **The LLM case patient is behind `smd_clinix_ai_patient`, default OFF.** The Phase 5 design is a
+  deterministic patient; 978acba3 added a generated reply on the doctor's MaiK quota and prompt without a
+  recorded decision. Owner call to turn it on (and it would want a server `clinix-patient` mode first).
+- **Atlas photos (`clinix-diagrams.js ATLAS_IMAGES`, 18 files) pass the licence gate** like any hosted
+  image. They cite PMC / ResearchGate / StatPearls with no licence record, so they are refused today and
+  the diagram shows alone; `smd_clinix_uncleared_media` previews them. Clearing them = add licence,
+  attribution and `commonsVerified` / `ownerProduced` per entry.
+- **Mastery counts days with a CORRECT answer** (`okDays`), not days the skill was merely seen.
+- **Owner, 2026-09-27:** keep drug doses in presentation text and ward-round scripts as authored; turn the
+  AI case patient ON, now on its own `/clinix-patient` endpoint and the `clinix` quota bucket.
+- **CliniX scripts lazy-load on first open** (`clinix.js SCRIPTS`, flag `smd_clinix_lazy`, default on).
+- **Owner, 2026-09-27:** the 18 atlas photos are owner-created ("no licence needed"): recorded as
+  `ownerProduced` in `clinix-diagrams.js ATLAS_IMAGES`, so they render. "Don't lock anything behind
+  draft": draft content always renders (a missing flags module no longer hides it); only an explicit
+  `smd_clinix_draft=0` author preview does.
+
+## 2026-09-28 - Ophthalmós Learn tab ships in the bundle (Pages + native), not R2
+- **Context**: the Learn tab (module repo PR #17, `feat/learn` a22a8cd) adds `ophthalmos/learn/`: 14
+  bilingual lessons (English/Hindi), index, glossary, 5 original SVG diagrams and a 42-item media library
+  (17 photos, 17 illustrations, 8 animations) with `media/credits.json`, 65 files, about 1.9 MB.
+- **Decision**: ship it with the app, not on R2. The Pages upload is about 15,333 files before and about
+  15,400 after (cap 20,000), and 1.9 MB is small for the native bundle, so lessons, diagrams and "More
+  pictures" work offline. `scripts/build-www.sh` copies the whole `ophthalmos/learn/` (minus README.md).
+  Lessons load everything from `SMD_OPHTHALMOS_BASE` (default `/ophthalmos/`); the fundus/OCT deck images
+  in lessons still come from R2 (`ophthalmos-img.stewardmd.in`). `functions/_middleware.js` 404s
+  `/ophthalmos/` on the web by design (native-only app), unchanged.
+- **Owner decisions carried in this build**: Learn | Test tabs chosen on first open; MBBS lessons free,
+  Resident lessons Pro with one trial (`learn.resident`); Resident question-bank sets gated by trial feature
+  `mcq.resident`; primary button fill `--op-pri-fill #1d6ed4` (white text 4.96:1, was 2.82:1); back buttons
+  say where they go ("Back to lesson"). Lesson content is ai_drafted, pending ophthalmologist sign-off.
+
+## 2026-09-28 - Ophthalmós Learn loads lessons on open, from a generated index
+- **Context**: the Learn units (module repo PR #23, integrating #18 to #22) take Learn from 14 to 107 lessons.
+  The engine fetched every lesson file when Ophthalmós opened: 1.56 MB and 107 requests before the Learn home
+  could render, on a phone, every open.
+- **Decision**: `ophthalmos/learn/index.json` carries a summary per lesson (title, minutes, idea, picture, clinic
+  and classes), generated from the lesson files by the module repo's `dev/learn-index.mjs`; the Learn home,
+  Today's plan, "Learn this" and Revise titles render from it. A lesson file is fetched when it is opened,
+  with a loading line and Try again on failure, and cached in memory. Opening fetches index.json (102 KB,
+  24 KB gzipped) and no lesson file.
+- **Why not the alternatives**: keeping eager loading scales linearly with content; hand-maintained titles in
+  the index drift, so the module's content test fails whenever the index is out of step with the lessons.
+- **Verified**: module repo headless UI step (no lesson request on open; one fetch per lesson; failure path),
+  and StewardMD `test/run-ophthalmos-10x-ui.mjs` in the real app.
+- **Owner, 2026-09-28: CliniX draft never locks.** `clinix-content.js gateOpts()` is `allowDraft: true`
+  regardless of `smd_clinix_draft` (a device with the old author toggle off showed "Awaiting clinical
+  review" on every pathway). **Pro "sign in again" fix:** `account.js` no longer stores a guest
+  `/billing/status` verdict as a signed-in account's state (pro-notice.js read it as signed out), the
+  account-restore reseed now fires `smd:pro`, and CliniX asks the server once before showing a Pro lock,
+  reopening the door if the answer is Pro.
+- **Owner, 2026-09-28:** CliniX lessons no longer show "Draft, pending clinician review"
+  (`clinix-screens.js sourceLine`); sources still shown, and "Clinician reviewed" only on approved content.
+- **Owner, 2026-09-28 ("keep everything open, it is my app and my responsibility"):** CliniX shows all
+  content whatever its review status (`clinix-model.js isRenderable`: only `deprecated` is withheld), with
+  no draft, pending or "Awaiting clinical review" notes anywhere. Supersedes the "unreviewed content never
+  reaches a student" invariant in `vault/modules/CliniX.md`. The licence-gate escape hatch
+  (`smd_clinix_uncleared_media`) was NOT flipped: that change was blocked pending the owner's explicit call.
+- **Owner, 2026-09-28 ("Keep everything open. Remove every draft note and pending note. Keep everything turned on by default."):** outside CliniX/SURGX/WardSynQ/legal pages, no draft, pending-review, AI-drafted or awaiting-review notice is shown (RadioAnatome notes badge, Protocols list + reader, Specialty kits, Clinical documents, Ophthalmós notes/lessons/explorers/neuro sim + the per-screen "To be verified" mark, OncoTree/onco review badges and banners, Electrolytes, drug monograph source line, OPD Protocol tab, clinical-index tags, disclaimer oncology line). Practical caveats (verify against source / local protocol, consent policy, decision support only) stay as plain sentences. `smd_atlas_notes` now defaults ON. Oncology activation gates (`lifecycleState === "active"` for Apply / Create & Activate) are unchanged: that is a prescribing governance step, not a notice.
+- **Owner, 2026-09-28: Terms v3.2 and Disclaimer v3.2** (terms.html, disclaimer.html, in-app modals in
+  index.html) now disclose that content is shown without draft/review labels, has not necessarily been
+  individually clinician-reviewed, and that some media may show before its licence is confirmed.
+  `privacy-config.js termsVersion` was NOT bumped (no forced re-consent); the Terms' own update clause applies.
+  Blocked by the permission checker, left for the owner: `smd_clinix_uncleared_media` / `smd_surgx_uncleared_media`
+  default ON, and letting non-active oncology protocols through Apply / Create & Activate.
+- **Owner, 2026-09-28 (explicit permission granted):** `smd_clinix_uncleared_media` and
+  `smd_surgx_uncleared_media` default ON (disclosed in Terms/Disclaimer v3.2). Oncology Apply / Create &
+  Activate no longer requires `lifecycleState === "active"`: any protocol that is not retired / superseded
+  / deprecated / withdrawn can be applied (`opd-emr.js oncoUsable`, `onco-protocols.js _buildApplyPanel`,
+  server `functions/_onco_store.js _activationGate` now blocks only `protocol_retired`). Every other
+  activation blocker is unchanged: complete dose calculations, source evidence, clearance checks,
+  unresolved VERIFY fields, and physician confirmation.
+- **Owner, 2026-09-28: oncology VERIFY gate opened.** `functions/_onco_store.js _activationGate` no longer
+  blocks on unresolved VERIFY markers. A VERIFY *dose* still cannot activate by itself: it computes no final
+  dose, so `dose_calculations_incomplete` blocks until the physician enters the dose. The review-desk
+  approval check (`onco-protocol-review.js clinicalApprove`) was not changed.
+- **Owner, 2026-09-28: Dose calculator.** Doses come only from our monographs (worker/data/gold), only
+  unambiguous numbers become calculations, and every number is round-trip checked against its sentence.
+  Fixed-dose drugs show their dose marked "not weight-based"; results show the exact value plus a
+  practical rounded one; kidney (CrCl, dialysis switch) and liver (Child-Pugh) adjust in the same screen,
+  with the app's verified renal table taking precedence. Flag `smd_dose_calc` stays OFF until the owner
+  signs off the extraction review (owner: "Me, yes and start"). [[Dose Calculator]]
+- **Owner, 2026-09-28 ("The doses in our database drug monograph are already verified, use the same"):**
+  `smd_dose_calc` defaults ON; the calculator's "UNDER REVIEW" pill is removed. Kill switch `smd_dose_calc = "0"`.

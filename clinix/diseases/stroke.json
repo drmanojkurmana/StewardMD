@@ -226,6 +226,17 @@
   "cases": [
     {
       "id": "case.stroke.raghunath",
+      "initialVitals": {
+        "hr": 88,
+        "bpSystolic": 178,
+        "bpDiastolic": 100,
+        "rr": 16,
+        "spo2": 97,
+        "temp": 37.0,
+        "gcs": 15
+      },
+      "arrhythmia": "afib",
+      "pulseCharacter": "irregularly_irregular",
       "title": "A man found on the floor by his wife",
       "opening": "Raghunath Iyer, 58, is brought in by his wife, who found him on the bedroom floor two hours ago, unable to move his right side. He is alert and can speak, though his speech is a little slurred. Introduce yourself and take a history from him and his wife.",
       "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
@@ -573,7 +584,7 @@
           "ischaemic stroke",
           "cva",
           "cerebrovascular accident",
-          "internal capsule"
+          "cerebral infarction"
         ],
         "minMatch": 1
       },

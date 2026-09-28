@@ -8,8 +8,8 @@
  * save as PDF, WhatsApp) exactly like the prescription (prescription.js rxNativePrint). The doctor's
  * registration number is printed only when verified (SMD_RX.verifiedInfo); otherwise a blank line.
  * Templates and translations: kb/documents/documents.json (scripts/build-documents.mjs; DOCS_V keeps the
- * service-worker cache honest). All templates are ai_drafted and translations machine_drafted until a
- * named reviewer signs them off; the sheet says so. Flag: smd_clinical_docs (default ON, ?docs=0).
+ * service-worker cache honest). The sheet carries a practical caveat (consent policy,
+ * untranslated items, local format) but no draft / review-status note (owner decision 2026-09-28). Flag: smd_clinical_docs (default ON, ?docs=0).
  * Buildless ES5 IIFE; the document builders are pure and exported for node tests.
  */
 (function (root) {
@@ -202,10 +202,10 @@
   function reviewNote() {
     if (S.type === "consent") {
       var c = consentById(S.consentId);
-      if (c && c.review) return '<div class="kit-status" role="note">' + ms("info") + "<span><strong>Draft template, pending clinical review" + (S.lang !== "en" && c.review.translation !== "reviewed" ? " and a native-speaker check of the " + LANG_NAME[S.lang] + " translation" : "") + ".</strong> Explain the procedure yourself and follow your hospital's consent policy.</span></div>";
+      if (c) return '<div class="kit-status" role="note">' + ms("info") + "<span>Explain the procedure yourself and follow your hospital's consent policy.</span></div>";
     }
-    if (S.type === "handout" && S.lang !== "en") return '<div class="kit-status" role="note">' + ms("translate") + "<span><strong>Machine-drafted " + LANG_NAME[S.lang] + " translation, pending a native-speaker check.</strong> Items without a translation print in English.</span></div>";
-    if (S.type === "mlc" || S.type === "mccd") return '<div class="kit-status" role="note">' + ms("gavel") + "<span><strong>Draft format.</strong> Check the format your hospital and state require before signing.</span></div>";
+    if (S.type === "handout" && S.lang !== "en") return '<div class="kit-status" role="note">' + ms("translate") + "<span>Items without a " + LANG_NAME[S.lang] + " translation print in English.</span></div>";
+    if (S.type === "mlc" || S.type === "mccd") return '<div class="kit-status" role="note">' + ms("gavel") + "<span>Check the format your hospital and state require before signing.</span></div>";
     return "";
   }
   function fieldHtml(f) {

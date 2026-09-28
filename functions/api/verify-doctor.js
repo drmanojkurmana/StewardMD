@@ -29,6 +29,7 @@ import { clearBudgetCache } from "../_aibudget.js";
 import { reconcileVerifiedClaim } from "../_verify_claim.js";
 import { normalizeVerifyRole, isTraineeVerifyRole, recordVerifiedRole } from "../_entitlement.js";
 import { regCandidates, nmcNameOf, nmcQueriesFor, pickMatch, uniqueNameMatch, autoVerifyOk, normName } from "../_verify_match.js";
+import { gatherReviewContact, contactHtml, escHtml } from "../_review_contact.js";
 // Re-exported: test/verify-cert-recognition.test.mjs imports these from here.
 export { regCandidates, nmcNameOf };
 
@@ -179,7 +180,21 @@ async function geminiExtract(env, imageB64, mime, mode) {
     "number, date of birth or address — omit them entirely.\n" +
     "- looks_valid: false only if this is clearly not an identity document.\n" +
     "- confidence: 0..1.";
-  const prompt = mode === "id" ? idPrompt : certPrompt;
+  // Trainee mode (student / intern): a college or internship ID card, not a registration
+  // certificate. The cert prompt read the 2026-09-28 student card as "not a certificate" and
+  // returned no name, so the review email named nobody. Name + college only, no ID numbers.
+  const traineePrompt =
+    "This is an Indian medical college student ID card, or an internship / hospital ID card for a " +
+    "medical intern. It may be a phone photo of poor quality; read it as carefully as you can (OCR).\n" +
+    "Return STRICT JSON only, no prose: {\"full_name\": string, \"institution\": string, \"course\": string, " +
+    "\"years\": string, \"looks_valid\": boolean, \"confidence\": number}\n" +
+    "- full_name: the person's name as printed.\n" +
+    "- institution: the college, university or hospital name as printed, with the city if shown.\n" +
+    "- course: the course if printed (e.g. MBBS). years: the batch or validity years if printed.\n" +
+    "- Do NOT output any Aadhaar number, date of birth or address.\n" +
+    "- looks_valid: false only if this is clearly not a college, internship or hospital ID.\n" +
+    "- confidence: 0..1. Use \"\" for any field you cannot read.";
+  const prompt = mode === "id" ? idPrompt : mode === "trainee" ? traineePrompt : certPrompt;
   const model = env.VERIFY_GEMINI_MODEL || GEMINI_MODEL_DEFAULT;
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${env.GEMINI_API_KEY}`;
   let res, data = {}, text = "", httpOk = false;
@@ -208,7 +223,9 @@ async function geminiExtract(env, imageB64, mime, mode) {
     regNo: String(p.registration_number || "").trim(),   // "" in id mode
     name: String(p.full_name || "").trim(),
     council: String(p.state_medical_council || "").trim(),
-    year: String(p.year || "").trim(),
+    year: String(p.year || p.years || "").trim(),
+    institution: String(p.institution || "").trim(),   // trainee mode only
+    course: String(p.course || "").trim(),             // trainee mode only
     looksValid: p.looks_valid !== false,
     confidence: typeof p.confidence === "number" ? p.confidence : 0,
     httpOk: httpOk,
@@ -311,7 +328,7 @@ async function signAction(secret, uid, action) {
   return Array.from(sig, (b) => b.toString(16).padStart(2, "0")).join("");
 }
 
-async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime, attach, regNo, role }) {
+async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime, attach, regNo, role, contact }) {
   const trainee = isTraineeVerifyRole(role);
   if (!env.RESEND_API_KEY) return;
   const support = env.SUPPORT_EMAIL || "support@stewardmd.in";
@@ -346,16 +363,21 @@ async function emailSupport(env, { uid, email, extracted, reason, imageB64, mime
     headers: { "Authorization": `Bearer ${env.RESEND_API_KEY}`, "Content-Type": "application/json" },
     body: JSON.stringify(Object.assign({
       from, to: [support],
-      subject: `[StewardMD] Manual verification — ${regForAction || email || "unknown"} (${reason})`,
+      // A name beats a privaterelay address in the inbox list: the subject is what the owner scans.
+      // One line, bounded: the profile name is user-typed, and a newline would fail the whole send.
+      subject: `[StewardMD] Manual verification — ${String(regForAction || (contact && contact.name) || extracted.name || email || "unknown").replace(/\s+/g, " ").trim().slice(0, 80)} (${reason})`,
+      // Every value is escaped: the name and council are read off a user-supplied image.
       html:
-        `<h2>Doctor verification needs manual review</h2><p><b>Reason:</b> ${reason}</p>` +
-        `<table cellpadding="6"><tr><td><b>UID</b></td><td>${uid}</td></tr>` +
-        `<tr><td><b>Google email</b></td><td>${email}</td></tr>` +
-        `<tr><td><b>Role</b></td><td>${role || "doctor"}</td></tr>` +
-        `<tr><td><b>Reg no</b></td><td>${regForAction || "—"}</td></tr>` +
-        `<tr><td><b>Name read</b></td><td>${extracted.name || "—"}</td></tr>` +
-        `<tr><td><b>Council</b></td><td>${extracted.council || "—"}</td></tr>` +
-        `<tr><td><b>Confidence</b></td><td>${extracted.confidence}</td></tr></table>` +
+        `<h2>Doctor verification needs manual review</h2><p><b>Reason:</b> ${escHtml(reason)}</p>` +
+        `<table cellpadding="6"><tr><td><b>UID</b></td><td>${escHtml(uid)}</td></tr>` +
+        `<tr><td><b>Sign-in email</b></td><td>${escHtml(email)}</td></tr>` +
+        `<tr><td><b>Role</b></td><td>${escHtml(role || "doctor")}</td></tr>` +
+        `<tr><td><b>Reg no</b></td><td>${escHtml(regForAction || "—")}</td></tr>` +
+        `<tr><td><b>Name read</b></td><td>${escHtml(extracted.name || "—")}</td></tr>` +
+        (extracted.institution ? `<tr><td><b>College read</b></td><td>${escHtml([extracted.institution, extracted.course, extracted.year].filter(Boolean).join(" · "))}</td></tr>` : "") +
+        `<tr><td><b>Council</b></td><td>${escHtml(extracted.council || "—")}</td></tr>` +
+        `<tr><td><b>Confidence</b></td><td>${escHtml(extracted.confidence)}</td></tr></table>` +
+        (contact ? contactHtml(contact) : "") +
         idNote + buttons,
     }, attach ? { attachments: [{ filename: `cert-${uid}.${ext}`, content: imageB64 }] } : {})),
   });
@@ -454,10 +476,10 @@ export async function onRequest(context) {
   const email = decodePayload(idToken).email || "";
 
   // 2. Gemini extraction — certificate (reg+name) or ID (name only)
-  let ex; try { ex = await geminiExtract(env, imageB64, mime, idMode ? "id" : "cert"); }
+  let ex; try { ex = await geminiExtract(env, imageB64, mime, idMode ? "id" : isTraineeVerifyRole(role) ? "trainee" : "cert"); }
   catch (e) { ex = { regNo: "", name: "", council: "", year: "", looksValid: false, confidence: 0, httpOk: false }; }
   const effReg = idMode ? typedReg : ex.regNo;   // reg used for the NMC lookup
-  console.log("[verify] uid", uid, "mode:", idMode ? "id" : "cert", "extracted:", JSON.stringify({ hasReg: !!ex.regNo, hasName: !!ex.name, looksValid: ex.looksValid, confidence: ex.confidence, httpOk: ex.httpOk }));
+  console.log("[verify] uid", uid, "mode:", idMode ? "id" : isTraineeVerifyRole(role) ? "trainee" : "cert", "extracted:", JSON.stringify({ hasReg: !!ex.regNo, hasName: !!ex.name, looksValid: ex.looksValid, confidence: ex.confidence, httpOk: ex.httpOk }));
 
   // Provisional access: on manual review the doctor still gets in for 7 days, but the
   // prescription generator stays locked (no verified claim) until approved.
@@ -506,11 +528,16 @@ export async function onRequest(context) {
     try { if (store) await store.put(doctorKey(uid), JSON.stringify({
       uid, email, status: "pending", reason, role,
       extractedRegNo: effReg, extractedName: ex.name, council: ex.council || "",
+      extractedInstitution: ex.institution || "",
       confidence: (ex && typeof ex.confidence === "number") ? ex.confidence : null,
       via: idMode ? "id" : "cert", photoKey, photoMime: mime, lookup: lookupDiag,
       provisionalUntil, trialFps, updatedAt: new Date().toISOString(),
     })); } catch (e) {}
-    try { await emailSupport(env, { uid, email, extracted: ex, reason, imageB64, mime, attach: !idMode, regNo: effReg, role }); } catch (e) {}
+    // Name, mobile and real email from the profile / lifecycle record, so an Apple Hide My Email
+    // account with nothing read off its card still names someone the owner can contact.
+    let contact = null;
+    try { contact = await gatherReviewContact(env, uid, { email, token: decodePayload(idToken) }); } catch (e) {}
+    try { await emailSupport(env, { uid, email, extracted: ex, reason, imageB64, mime, attach: !idMode, regNo: effReg, role, contact }); } catch (e) {}
     return json({ status: "pending_review", reason, provisionalUntil, provisionalDays: pendingOk ? PROVISIONAL_DAYS : 0, ...(pendingOk ? {} : { trialUsed: true }) });
   };
 

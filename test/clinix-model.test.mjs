@@ -33,19 +33,17 @@ function skill(over) {
 
 /* Review gate --------------------------------------------------------------- */
 
-test("review gate: only approved/published reach a student", () => {
-  assert.equal(M.isRenderable(skill({ review: { status: "approved" } })), true);
-  assert.equal(M.isRenderable(skill({ review: { status: "published" } })), true);
-  assert.equal(M.isRenderable(skill({ review: { status: "ai_drafted" } })), false);
-  assert.equal(M.isRenderable(skill({ review: { status: "draft" } })), false);
-  assert.equal(M.isRenderable(skill({ review: { status: "in_review" } })), false);
+test("open: every review status renders except deprecated (owner 2026-09-28)", () => {
+  for (const st of ["approved", "published", "ai_drafted", "draft", "in_review"]) {
+    assert.equal(M.isRenderable(skill({ review: { status: st } })), true, st);
+  }
   assert.equal(M.isRenderable(skill({ review: { status: "deprecated" } })), false);
 });
 
-test("review gate: a missing/garbled review status fails CLOSED as draft", () => {
+test("open: a missing/garbled review status reads as draft and still renders", () => {
   assert.equal(M.reviewStatus({}), "draft");
   assert.equal(M.reviewStatus({ review: { status: "totally-made-up" } }), "draft");
-  assert.equal(M.isRenderable({}), false);
+  assert.equal(M.isRenderable({}), true);
 });
 
 test("review gate: the draft flag opens everything except deprecated", () => {
@@ -456,11 +454,13 @@ test("buildPathway: the review gate applies per skill, and an empty chapter is m
       { id: "treatment", title: "Treatment", skills: ["draft"] }
     ]
   };
+  skills.dep = skill({ id: "dep", review: { status: "deprecated" } });
+  disease.chapters[1].skills = ["dep"];
   const p = M.buildPathway(disease, skills);
-  assert.equal(p[0].count, 1, "the draft skill is filtered out");
-  assert.equal(p[1].count, 0);
+  assert.equal(p[0].count, 2, "a draft skill is shown (owner 2026-09-28)");
+  assert.equal(p[1].count, 0, "only a deprecated skill is filtered out");
   assert.equal(p[1].empty, true, "the chapter still appears in the rail so the pathway keeps its shape");
-  assert.deepEqual(M.pathwaySkillIds(p), ["ok"]);
+  assert.deepEqual(M.pathwaySkillIds(p), ["ok", "draft"]);
 });
 
 /* Pro lock: one system is free, the rest need Pro --------------------------- */
@@ -492,5 +492,5 @@ test("buildPathway: with the draft flag on, an author sees everything", () => {
   const skills = { "draft": skill({ id: "draft", review: { status: "ai_drafted" } }) };
   const disease = { id: "copd", name: "COPD", system: "respiratory", chapters: [{ id: "history", title: "History", skills: ["draft"] }] };
   assert.equal(M.buildPathway(disease, skills, { allowDraft: true })[0].count, 1);
-  assert.equal(M.buildPathway(disease, skills)[0].count, 0);
+  assert.equal(M.buildPathway(disease, skills)[0].count, 1, "and so does everyone else (owner 2026-09-28)");
 });

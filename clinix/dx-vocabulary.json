@@ -186,7 +186,15 @@
    "n": "Cor pulmonale",
    "s": "cvs",
    "syn": [
-    "right heart failure"
+    "pulmonary heart disease"
+   ]
+  },
+  {
+   "n": "Right heart failure",
+   "s": "cvs",
+   "syn": [
+    "right ventricular failure",
+    "right sided heart failure"
    ]
   },
   {
@@ -241,12 +249,28 @@
    ]
   },
   {
+   "n": "Pulmonary stenosis",
+   "s": "cvs",
+   "syn": [
+    "pulmonary valve stenosis"
+   ]
+  },
+  {
+   "n": "Left atrial myxoma",
+   "s": "cvs",
+   "syn": [
+    "myxoma",
+    "atrial myxoma"
+   ]
+  },
+  {
    "n": "Infective endocarditis",
    "s": "cvs",
    "syn": [
     "ie",
     "bacterial endocarditis",
-    "sabe"
+    "sabe",
+    "endocarditis"
    ]
   },
   {
@@ -402,6 +426,16 @@
    ]
   },
   {
+   "n": "Innocent murmur",
+   "s": "cvs",
+   "syn": [
+    "functional murmur",
+    "flow murmur",
+    "still murmur",
+    "stills murmur"
+   ]
+  },
+  {
    "n": "Tetralogy of Fallot",
    "s": "cvs",
    "syn": [
@@ -459,7 +493,10 @@
    "s": "resp",
    "syn": [
     "status asthmaticus",
-    "severe asthma"
+    "severe asthma",
+    "acute asthma",
+    "asthma attack",
+    "asthma exacerbation"
    ]
   },
   {
@@ -495,7 +532,9 @@
    "syn": [
     "pulmonary tb",
     "ptb",
-    "koch"
+    "koch",
+    "tuberculosis",
+    "tb"
    ]
   },
   {
@@ -515,6 +554,24 @@
   {
    "n": "Pleural effusion",
    "s": "resp"
+  },
+  {
+   "n": "Tuberculous pleural effusion",
+   "s": "resp",
+   "syn": [
+    "tb effusion",
+    "tb pleural effusion",
+    "tubercular pleural effusion",
+    "tuberculous pleurisy"
+   ]
+  },
+  {
+   "n": "Parapneumonic effusion",
+   "s": "resp",
+   "syn": [
+    "parapneumonic",
+    "parapneumonic pleural effusion"
+   ]
   },
   {
    "n": "Empyema thoracis",
@@ -742,7 +799,8 @@
    "s": "gi",
    "syn": [
     "intestinal tb",
-    "abdominal koch"
+    "abdominal koch",
+    "tuberculous peritonitis"
    ]
   },
   {
@@ -759,7 +817,8 @@
    "syn": [
     "cld",
     "cirrhosis",
-    "decompensated liver disease"
+    "decompensated liver disease",
+    "decompensated cirrhosis"
    ]
   },
   {
@@ -767,7 +826,8 @@
    "s": "hepbil",
    "syn": [
     "ald",
-    "alcoholic hepatitis"
+    "alcoholic hepatitis",
+    "alcoholic cirrhosis"
    ]
   },
   {
@@ -821,6 +881,15 @@
   {
    "n": "Portal hypertension",
    "s": "hepbil"
+  },
+  {
+   "n": "Congestive hepatopathy",
+   "s": "hepbil",
+   "syn": [
+    "congestive hepatomegaly",
+    "nutmeg liver",
+    "cardiac hepatopathy"
+   ]
   },
   {
    "n": "Spontaneous bacterial peritonitis",
@@ -878,6 +947,14 @@
   {
    "n": "Autoimmune hepatitis",
    "s": "hepbil"
+  },
+  {
+   "n": "Budd Chiari syndrome",
+   "s": "hepbil",
+   "syn": [
+    "hepatic vein thrombosis",
+    "hepatic venous outflow obstruction"
+   ]
   },
   {
    "n": "Haemochromatosis",
@@ -992,7 +1069,9 @@
    "syn": [
     "cerebral infarction",
     "cva",
-    "stroke"
+    "stroke",
+    "cerebrovascular accident",
+    "cardioembolic stroke"
    ]
   },
   {
@@ -1016,6 +1095,16 @@
    "s": "neuro",
    "syn": [
     "tia"
+   ]
+  },
+  {
+   "n": "Todd paresis",
+   "s": "neuro",
+   "syn": [
+    "todd",
+    "todd paralysis",
+    "todds paralysis",
+    "postictal paresis"
    ]
   },
   {
@@ -1078,14 +1167,26 @@
    "s": "neuro",
    "syn": [
     "gbs",
-    "aidp"
+    "aidp",
+    "guillain",
+    "guillain barre",
+    "demyelinating polyradiculoneuropathy",
+    "acute inflammatory demyelinating polyradiculoneuropathy"
+   ]
+  },
+  {
+   "n": "Chronic inflammatory demyelinating polyneuropathy",
+   "s": "neuro",
+   "syn": [
+    "cidp"
    ]
   },
   {
    "n": "Myasthenia gravis",
    "s": "neuro",
    "syn": [
-    "mg"
+    "mg",
+    "myasthenia"
    ]
   },
   {
@@ -1103,6 +1204,13 @@
    ]
   },
   {
+   "n": "Hypokalaemic periodic paralysis",
+   "s": "neuro",
+   "syn": [
+    "periodic paralysis"
+   ]
+  },
+  {
    "n": "Multiple sclerosis",
    "s": "neuro",
    "syn": [
@@ -1115,7 +1223,41 @@
    "s": "neuro",
    "syn": [
     "parkinsonism",
-    "parkinsons"
+    "parkinsons",
+    "parkinson",
+    "parkinsons disease",
+    "idiopathic parkinson disease",
+    "idiopathic parkinsons disease"
+   ]
+  },
+  {
+   "n": "Drug induced parkinsonism",
+   "s": "neuro"
+  },
+  {
+   "n": "Vascular parkinsonism",
+   "s": "neuro"
+  },
+  {
+   "n": "Progressive supranuclear palsy",
+   "s": "neuro",
+   "syn": [
+    "psp",
+    "progressive supranuclear"
+   ]
+  },
+  {
+   "n": "Multiple system atrophy",
+   "s": "neuro",
+   "syn": [
+    "msa"
+   ]
+  },
+  {
+   "n": "Essential tremor",
+   "s": "neuro",
+   "syn": [
+    "benign essential tremor"
    ]
   },
   {
@@ -1136,14 +1278,47 @@
    ]
   },
   {
+   "n": "Spinal epidural abscess",
+   "s": "neuro",
+   "syn": [
+    "epidural abscess"
+   ]
+  },
+  {
    "n": "Transverse myelitis",
-   "s": "neuro"
+   "s": "neuro",
+   "syn": [
+    "myelitis"
+   ]
+  },
+  {
+   "n": "Subacute combined degeneration of the cord",
+   "s": "neuro",
+   "syn": [
+    "subacute combined degeneration",
+    "b12 myelopathy"
+   ]
   },
   {
    "n": "Cerebellar ataxia",
    "s": "neuro",
    "syn": [
     "ataxia"
+   ]
+  },
+  {
+   "n": "Sensory ataxia",
+   "s": "neuro",
+   "syn": [
+    "posterior column ataxia",
+    "dorsal column ataxia"
+   ]
+  },
+  {
+   "n": "Vestibular ataxia",
+   "s": "neuro",
+   "syn": [
+    "vestibular disorder"
    ]
   },
   {
@@ -1155,8 +1330,27 @@
    "s": "neuro",
    "syn": [
     "facial palsy",
-    "bells palsy",
     "third nerve palsy"
+   ]
+  },
+  {
+   "n": "Bell palsy",
+   "s": "neuro",
+   "syn": [
+    "bells palsy",
+    "bell",
+    "idiopathic facial palsy",
+    "idiopathic facial nerve palsy",
+    "lmn facial palsy",
+    "lower motor neurone facial palsy"
+   ]
+  },
+  {
+   "n": "Ramsay Hunt syndrome",
+   "s": "neuro",
+   "syn": [
+    "ramsay hunt",
+    "herpes zoster oticus"
    ]
   },
   {
@@ -1392,7 +1586,6 @@
    "n": "Megaloblastic anaemia",
    "s": "heme",
    "syn": [
-    "b12 deficiency",
     "folate deficiency",
     "macrocytic anaemia"
    ]
@@ -1536,6 +1729,13 @@
    "s": "heme",
    "syn": [
     "polycythemia"
+   ]
+  },
+  {
+   "n": "Primary myelofibrosis",
+   "s": "heme",
+   "syn": [
+    "myelofibrosis"
    ]
   },
   {
@@ -1716,6 +1916,28 @@
    ]
   },
   {
+   "n": "Tuberculous spondylitis",
+   "s": "id",
+   "syn": [
+    "pott",
+    "pott spine",
+    "potts spine",
+    "pott disease",
+    "potts disease",
+    "spinal tuberculosis",
+    "tb spine",
+    "caries spine"
+   ]
+  },
+  {
+   "n": "Poliomyelitis",
+   "s": "id",
+   "syn": [
+    "polio",
+    "acute poliomyelitis"
+   ]
+  },
+  {
    "n": "Rheumatoid arthritis",
    "s": "rheum",
    "syn": [
@@ -1873,7 +2095,8 @@
    "s": "onc",
    "syn": [
     "hcc",
-    "liver cancer"
+    "liver cancer",
+    "hepatoma"
    ]
   },
   {
@@ -1940,6 +2163,15 @@
    "syn": [
     "oral cancer",
     "laryngeal carcinoma"
+   ]
+  },
+  {
+   "n": "Parotid tumour",
+   "s": "onc",
+   "syn": [
+    "parotid",
+    "parotid tumor",
+    "parotid neoplasm"
    ]
   },
   {
@@ -2463,10 +2695,27 @@
   },
   {
    "n": "Vitamin B12 deficiency",
-   "s": "misc"
+   "s": "misc",
+   "syn": [
+    "b12 deficiency",
+    "cobalamin deficiency"
+   ]
   },
   {
    "n": "Vitamin D deficiency",
+   "s": "misc"
+  },
+  {
+   "n": "Otitis media",
+   "s": "misc",
+   "syn": [
+    "acute otitis media",
+    "chronic suppurative otitis media",
+    "csom"
+   ]
+  },
+  {
+   "n": "Cholesteatoma",
    "s": "misc"
   },
   {
@@ -2498,6 +2747,511 @@
    "syn": [
     "adr",
     "drug toxicity"
+   ]
+  }
+ ],
+ "groups": [
+  {
+   "label": "Tuberculosis",
+   "t": [
+    "tuberculosis",
+    "tb",
+    "tuberculous",
+    "tubercular",
+    "koch"
+   ],
+   "dx": [
+    "Pulmonary tuberculosis",
+    "Miliary tuberculosis",
+    "Multidrug resistant tuberculosis",
+    "Tuberculous pleural effusion",
+    "Abdominal tuberculosis",
+    "Tuberculous meningitis",
+    "Tuberculous spondylitis"
+   ]
+  },
+  {
+   "label": "Heart failure",
+   "t": [
+    "heart failure",
+    "cardiac failure"
+   ],
+   "dx": [
+    "Congestive cardiac failure",
+    "Heart failure with reduced ejection fraction",
+    "Heart failure with preserved ejection fraction",
+    "Acute decompensated heart failure",
+    "Right heart failure"
+   ]
+  },
+  {
+   "label": "A cardiac cause",
+   "t": [
+    "cardiac"
+   ],
+   "dx": [
+    "Congestive cardiac failure",
+    "Heart failure with reduced ejection fraction",
+    "Heart failure with preserved ejection fraction",
+    "Acute decompensated heart failure",
+    "Right heart failure",
+    "Cor pulmonale",
+    "Constrictive pericarditis",
+    "Tricuspid regurgitation"
+   ]
+  },
+  {
+   "label": "Venous congestion",
+   "t": [
+    "congestive"
+   ],
+   "dx": [
+    "Congestive hepatopathy",
+    "Right heart failure",
+    "Congestive cardiac failure"
+   ]
+  },
+  {
+   "label": "Pneumonia",
+   "t": [
+    "pneumonia"
+   ],
+   "dx": [
+    "Community acquired pneumonia",
+    "Hospital acquired pneumonia",
+    "Ventilator associated pneumonia",
+    "Aspiration pneumonia"
+   ]
+  },
+  {
+   "label": "Malignancy",
+   "t": [
+    "malignancy",
+    "malignant",
+    "cancer",
+    "carcinoma",
+    "tumour",
+    "tumor",
+    "neoplasm",
+    "metastasis",
+    "metastatic"
+   ],
+   "dx": [
+    "Carcinoma of the lung",
+    "Carcinoma of the breast",
+    "Carcinoma of the stomach",
+    "Colorectal carcinoma",
+    "Hepatocellular carcinoma",
+    "Carcinoma of the pancreas",
+    "Carcinoma of the oesophagus",
+    "Carcinoma of the cervix",
+    "Carcinoma of the ovary",
+    "Carcinoma of the prostate",
+    "Renal cell carcinoma",
+    "Carcinoma of the urinary bladder",
+    "Carcinoma of the thyroid",
+    "Head and neck carcinoma",
+    "Parotid tumour",
+    "Malignant pleural effusion",
+    "Metastatic carcinoma of unknown primary",
+    "Superior vena cava obstruction",
+    "Tumour lysis syndrome",
+    "Febrile neutropenia",
+    "Hodgkin lymphoma",
+    "Non Hodgkin lymphoma",
+    "Multiple myeloma",
+    "Acute lymphoblastic leukaemia",
+    "Acute myeloid leukaemia",
+    "Chronic myeloid leukaemia",
+    "Chronic lymphocytic leukaemia",
+    "Space occupying lesion"
+   ]
+  },
+  {
+   "label": "Lymphoma",
+   "t": [
+    "lymphoma"
+   ],
+   "dx": [
+    "Hodgkin lymphoma",
+    "Non Hodgkin lymphoma"
+   ]
+  },
+  {
+   "label": "Pulmonary embolism",
+   "t": [
+    "embolism"
+   ],
+   "dx": [
+    "Pulmonary embolism"
+   ]
+  },
+  {
+   "label": "An abscess",
+   "t": [
+    "abscess"
+   ],
+   "dx": [
+    "Lung abscess",
+    "Amoebic liver abscess",
+    "Brain abscess",
+    "Spinal epidural abscess"
+   ]
+  },
+  {
+   "label": "Pleural effusion",
+   "t": [
+    "effusion"
+   ],
+   "dx": [
+    "Pleural effusion",
+    "Parapneumonic effusion",
+    "Empyema thoracis",
+    "Tuberculous pleural effusion",
+    "Malignant pleural effusion"
+   ]
+  },
+  {
+   "label": "Nephrotic syndrome",
+   "t": [
+    "nephrotic"
+   ],
+   "dx": [
+    "Nephrotic syndrome",
+    "Nephrotic syndrome of childhood"
+   ]
+  },
+  {
+   "label": "Alcoholic liver disease",
+   "t": [
+    "alcoholic"
+   ],
+   "dx": [
+    "Alcoholic liver disease",
+    "Chronic liver disease"
+   ]
+  },
+  {
+   "label": "Chronic liver disease",
+   "t": [
+    "liver disease"
+   ],
+   "dx": [
+    "Chronic liver disease",
+    "Alcoholic liver disease"
+   ]
+  },
+  {
+   "label": "A primary liver cause",
+   "t": [
+    "hepatic"
+   ],
+   "dx": [
+    "Budd Chiari syndrome",
+    "Hepatocellular carcinoma",
+    "Acute liver failure"
+   ]
+  },
+  {
+   "label": "Hepatitis",
+   "t": [
+    "hepatitis"
+   ],
+   "dx": [
+    "Acute viral hepatitis",
+    "Chronic hepatitis B",
+    "Chronic hepatitis C",
+    "Autoimmune hepatitis",
+    "Drug induced liver injury"
+   ]
+  },
+  {
+   "label": "Another anaemia",
+   "t": [
+    "anaemia",
+    "anemia"
+   ],
+   "dx": [
+    "Iron deficiency anaemia",
+    "Megaloblastic anaemia",
+    "Anaemia of chronic disease",
+    "Aplastic anaemia",
+    "Autoimmune haemolytic anaemia",
+    "Sickle cell disease",
+    "Thalassaemia major",
+    "G6PD deficiency",
+    "Hereditary spherocytosis"
+   ]
+  },
+  {
+   "label": "Gastrointestinal blood loss",
+   "t": [
+    "gastrointestinal",
+    "gi bleed",
+    "gi blood loss",
+    "gastrointestinal bleed"
+   ],
+   "dx": [
+    "Upper gastrointestinal bleed",
+    "Lower gastrointestinal bleed",
+    "Peptic ulcer disease"
+   ]
+  },
+  {
+   "label": "Peptic ulcer disease",
+   "t": [
+    "ulcer"
+   ],
+   "dx": [
+    "Peptic ulcer disease"
+   ]
+  },
+  {
+   "label": "Anaemia of chronic disease",
+   "t": [
+    "chronic disease"
+   ],
+   "dx": [
+    "Anaemia of chronic disease"
+   ]
+  },
+  {
+   "label": "Colorectal carcinoma",
+   "t": [
+    "colonic"
+   ],
+   "dx": [
+    "Colorectal carcinoma"
+   ]
+  },
+  {
+   "label": "Obstructive jaundice",
+   "t": [
+    "obstructive"
+   ],
+   "dx": [
+    "Obstructive jaundice",
+    "Choledocholithiasis",
+    "Carcinoma of the pancreas"
+   ]
+  },
+  {
+   "label": "Gallstones",
+   "t": [
+    "gallstone",
+    "gallstones"
+   ],
+   "dx": [
+    "Cholelithiasis",
+    "Choledocholithiasis"
+   ]
+  },
+  {
+   "label": "A pancreatic cause",
+   "t": [
+    "pancreas",
+    "pancreatic"
+   ],
+   "dx": [
+    "Carcinoma of the pancreas",
+    "Acute pancreatitis",
+    "Chronic pancreatitis"
+   ]
+  },
+  {
+   "label": "Vitamin B12 deficiency",
+   "t": [
+    "b12"
+   ],
+   "dx": [
+    "Vitamin B12 deficiency",
+    "Subacute combined degeneration of the cord",
+    "Megaloblastic anaemia"
+   ]
+  },
+  {
+   "label": "A demyelinating neuropathy",
+   "t": [
+    "demyelinating"
+   ],
+   "dx": [
+    "Guillain Barre syndrome",
+    "Chronic inflammatory demyelinating polyneuropathy"
+   ]
+  },
+  {
+   "label": "A spinal cord lesion",
+   "t": [
+    "spinal cord"
+   ],
+   "dx": [
+    "Spinal cord compression",
+    "Transverse myelitis",
+    "Spinal epidural abscess"
+   ]
+  },
+  {
+   "label": "Haemorrhagic stroke",
+   "t": [
+    "haemorrhage",
+    "hemorrhage"
+   ],
+   "dx": [
+    "Haemorrhagic stroke",
+    "Subarachnoid haemorrhage"
+   ]
+  },
+  {
+   "label": "Cardioembolic stroke",
+   "t": [
+    "cardioembolic"
+   ],
+   "dx": [
+    "Ischaemic stroke"
+   ]
+  },
+  {
+   "label": "A seizure",
+   "t": [
+    "seizure",
+    "seizures"
+   ],
+   "dx": [
+    "Seizure disorder",
+    "Status epilepticus",
+    "Todd paresis"
+   ]
+  },
+  {
+   "label": "A drug induced cause",
+   "t": [
+    "drug induced"
+   ],
+   "dx": [
+    "Drug induced parkinsonism",
+    "Drug induced liver injury",
+    "Adverse drug reaction"
+   ]
+  },
+  {
+   "label": "Vascular parkinsonism",
+   "t": [
+    "vascular"
+   ],
+   "dx": [
+    "Vascular parkinsonism"
+   ]
+  },
+  {
+   "label": "A Parkinson plus syndrome",
+   "t": [
+    "parkinson plus"
+   ],
+   "dx": [
+    "Progressive supranuclear palsy",
+    "Multiple system atrophy"
+   ]
+  },
+  {
+   "label": "Herpes zoster",
+   "t": [
+    "zoster"
+   ],
+   "dx": [
+    "Ramsay Hunt syndrome",
+    "Herpes zoster"
+   ]
+  },
+  {
+   "label": "Rheumatic fever or rheumatic heart disease",
+   "t": [
+    "rheumatic"
+   ],
+   "dx": [
+    "Rheumatic heart disease",
+    "Acute rheumatic fever"
+   ]
+  },
+  {
+   "label": "Aortic regurgitation (Austin Flint)",
+   "t": [
+    "austin flint"
+   ],
+   "dx": [
+    "Aortic regurgitation"
+   ]
+  },
+  {
+   "label": "Acute rheumatic carditis (Carey Coombs)",
+   "t": [
+    "carey coombs"
+   ],
+   "dx": [
+    "Acute rheumatic fever"
+   ]
+  },
+  {
+   "label": "Innocent murmur",
+   "t": [
+    "still"
+   ],
+   "dx": [
+    "Innocent murmur"
+   ]
+  },
+  {
+   "label": "Tricuspid regurgitation",
+   "t": [
+    "tricuspid"
+   ],
+   "dx": [
+    "Tricuspid regurgitation"
+   ]
+  },
+  {
+   "label": "Constrictive pericarditis",
+   "t": [
+    "constrictive"
+   ],
+   "dx": [
+    "Constrictive pericarditis"
+   ]
+  },
+  {
+   "label": "An infective cause",
+   "t": [
+    "infective"
+   ],
+   "dx": [
+    "Acute viral hepatitis",
+    "Amoebic liver abscess",
+    "Malaria",
+    "Enteric fever",
+    "Kala azar",
+    "Infectious mononucleosis",
+    "Leptospirosis"
+   ]
+  },
+  {
+   "label": "Aortic dissection",
+   "t": [
+    "dissection"
+   ],
+   "dx": [
+    "Aortic dissection"
+   ]
+  },
+  {
+   "label": "Myocardial infarction",
+   "t": [
+    "myocardial infarction",
+    "mi",
+    "heart attack"
+   ],
+   "dx": [
+    "ST elevation myocardial infarction",
+    "Non ST elevation myocardial infarction",
+    "Acute coronary syndrome"
    ]
   }
  ]

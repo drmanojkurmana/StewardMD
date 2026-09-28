@@ -39,7 +39,8 @@
         turn: 0,
         type: "findings_summary",
         question: "Examiner: You have completed your physical examination. What were your key positive and negative findings in this patient?",
-        context: "Initial findings synthesis"
+        context: "Initial findings synthesis",
+        expectedPoints: findingPoints(caseState)
       };
     }
 
@@ -50,7 +51,9 @@
         turn: 1,
         type: "differential_rationale",
         question: "Examiner: You have prioritized " + topDx + ". What specific findings on your examination support this diagnosis over the alternatives?",
-        context: "Defending primary differential"
+        context: "Defending primary differential",
+        expectedPoints: findingPoints(caseState).concat(diagnosisPoints(rawCase)),
+        needed: 2
       };
     }
 
@@ -63,7 +66,9 @@
           turn: 2,
           type: "contradiction_challenge",
           question: "Examiner: " + contradictionQ.question,
-          context: "Testing clinical coherence"
+          context: "Testing clinical coherence",
+          expectedPoints: sentences(contradictionQ.expectedExplanation),
+          needed: 1
         };
       }
 
@@ -72,7 +77,8 @@
         turn: 2,
         type: "dynamic_maneuver",
         question: "Examiner: How would you use a dynamic physiological maneuver (such as handgrip, Valsalva, or respiration) to confirm the hemodynamic significance of your findings?",
-        context: "Physiological maneuvers"
+        context: "Physiological maneuvers",
+        expectedPoints: MANEUVER_POINTS.slice()
       };
     }
 
@@ -82,7 +88,8 @@
         turn: 3,
         type: "investigation_priority",
         question: "Examiner: What is the single most urgent investigation you would order right now, and what specific abnormality would change your immediate management within the next hour?",
-        context: "Investigation prioritization and emergency management"
+        context: "Investigation prioritization and emergency management",
+        expectedPoints: investigationPoints(rawCase)
       };
     }
 
@@ -92,12 +99,125 @@
         turn: 4,
         type: "red_flags_safety",
         question: "Examiner: What clinical red flags or deterioration markers must the ward team monitor for in this patient overnight?",
-        context: "Patient safety and disposition"
+        context: "Patient safety and disposition",
+        expectedPoints: RED_FLAG_POINTS.slice()
       };
     }
 
     vivaSession.status = "completed";
     return null;
+  }
+
+  /* ── 1b. What a good answer contains ─────────────────────────────────────── */
+
+  /* A viva answer is marked on CONTENT: each turn carries the concepts a competent answer names,
+   * and the score is the share of them the student actually mentions. Length, confidence and
+   * filler earn nothing, so "banana" five times is a fail, not honours. */
+
+  var MANEUVER_POINTS = [
+    "handgrip afterload", "valsalva preload", "squatting venous return", "standing preload",
+    "inspiration right sided carvallo", "expiration left sided", "murmur louder intensity",
+    "murmur softer quieter", "hepatojugular reflux abdominojugular", "mitral regurgitation",
+    "aortic stenosis", "hypertrophic cardiomyopathy obstruction"
+  ];
+
+  var GENERIC_INVESTIGATIONS = [
+    "ecg electrocardiogram", "troponin", "chest xray radiograph", "echocardiogram echo",
+    "arterial blood gas abg", "blood culture", "full blood count haemoglobin", "glucose",
+    "electrolytes potassium sodium", "renal function creatinine urea", "lactate", "ct scan", "mri",
+    "ultrasound", "management change treatment"
+  ];
+
+  var RED_FLAG_POINTS = [
+    "hypotension blood pressure falling", "hypoxia oxygen saturation spo2", "respiratory rate tachypnoea",
+    "heart rate tachycardia arrhythmia", "urine output oliguria", "conscious gcs confusion drowsy",
+    "chest pain", "breathlessness worsening", "fever sepsis", "bleeding", "early warning news score",
+    "escalate senior icu", "telemetry monitoring", "fluid balance"
+  ];
+
+  var STOP = {};
+  ("the and for with that this was were are has have had not but his her its any all our your you " +
+   "from into over under than then them they there their which what when where who why how would " +
+   "could should will can may might must also very more most some such each other only just been " +
+   "being patient findings finding examination exam noted note normal").split(" ").forEach(function (w) { STOP[w] = 1; });
+
+  /* Tiny synonym folding so "raised JVP" meets "JVP elevated". */
+  var SYN = {
+    raised: "elevat", high: "elevat", increased: "elevat", elevated: "elevat", elevation: "elevat",
+    reduced: "reduc", decreased: "reduc", diminished: "reduc", low: "reduc",
+    xray: "xray", cxr: "xray", radiograph: "xray", ekg: "ecg", electrocardiogram: "ecg",
+    echocardiography: "echo", echocardiogram: "echo", saturation: "spo2", sats: "spo2", oxygen: "spo2",
+    tachypnea: "tachypnoea", hypoxaemia: "hypoxia", hypoxemia: "hypoxia", louder: "loud", softer: "soft", quieter: "soft"
+  };
+
+  function stems(text) {
+    var words = String(text || "").toLowerCase().replace(/x-ray/g, "xray").replace(/[^a-z0-9]+/g, " ").split(" ");
+    var out = [];
+    for (var i = 0; i < words.length; i++) {
+      var w = words[i];
+      if (w.length < 3 || STOP[w]) continue;
+      if (SYN[w]) w = SYN[w];
+      w = w.length > 6 ? w.slice(0, 6) : w;
+      if (out.indexOf(w) < 0) out.push(w);
+    }
+    return out;
+  }
+
+  function sentences(text) {
+    return String(text || "").split(/[.;]\s+|\.$/).map(function (x) { return x.trim(); }).filter(function (x) { return x.length > 2; });
+  }
+
+  function findingPoints(caseState) {
+    var rawCase = caseState.rawCase || {};
+    var pts = [];
+    (rawCase.positiveFindings || []).forEach(function (f) { pts.push(String(f)); });
+    var revealed = caseState.examRevealed || {};
+    var src = Object.keys(revealed).length ? revealed : (rawCase.exam || {});
+    var abnormal = Object.keys(src).filter(function (k) { return src[k] && src[k].abnormal === true; });
+    var keys = abnormal.length ? abnormal : Object.keys(src);
+    for (var i = 0; i < keys.length; i++) {
+      var f = src[keys[i]];
+      sentences(f && (f.finding || (typeof f === "string" ? f : ""))).forEach(function (x) { pts.push(x); });
+    }
+    (rawCase.importantNegatives || []).forEach(function (f) { pts.push(String(f)); });
+    return pts;
+  }
+
+  function diagnosisPoints(rawCase) {
+    var d = rawCase.correctDiagnosis || rawCase.diagnosis;
+    if (d && typeof d === "object") return (d.accept || []).map(String).concat(d.answer ? [String(d.answer)] : []);
+    return d ? [String(d)] : [];
+  }
+
+  function investigationPoints(rawCase) {
+    var pts = [];
+    var ix = rawCase.investigations || {};
+    (rawCase.essentialInvestigations || []).forEach(function (id) {
+      var e = ix[id];
+      pts.push(String(id).replace(/[._-]+/g, " ") + (e && e.title ? " " + e.title : ""));
+    });
+    return pts.concat(GENERIC_INVESTIGATIONS);
+  }
+
+  /* One concept counts as named when enough of its content words appear: any one word for a short
+   * concept, about 40% of them for a long authored sentence. */
+  function pointHit(point, answerStems) {
+    var ps = stems(point);
+    if (!ps.length) return false;
+    var hits = 0;
+    for (var i = 0; i < ps.length; i++) if (answerStems.indexOf(ps[i]) >= 0) hits++;
+    var need = ps.length <= 3 ? 1 : Math.ceil(ps.length * 0.4);
+    return hits >= need;
+  }
+
+  function scoreContent(turnObj, ans) {
+    var points = (turnObj && turnObj.expectedPoints) || [];
+    var aStems = stems(ans);
+    if (!aStems.length || !points.length) return { fraction: 0, matched: [], missed: points.slice(0, 2) };
+    var matched = [], missed = [];
+    for (var i = 0; i < points.length; i++) (pointHit(points[i], aStems) ? matched : missed).push(points[i]);
+    var needed = Math.max(1, Math.min(turnObj.needed || 3, points.length));
+    return { fraction: Math.min(1, matched.length / needed), matched: matched, missed: missed };
   }
 
   /* ── 2. Check for Clinical Contradictions ────────────────────────────────── */
@@ -166,8 +286,12 @@
       };
     }
 
-    var scoreDelta = 20;
-    var feedback = "Good clinical articulation.";
+    var content = scoreContent(turnObj, ans);
+    var scoreDelta = Math.round(20 * content.fraction);
+    var feedback;
+    if (scoreDelta >= 15) feedback = "Good clinical articulation: the key points are there.";
+    else if (scoreDelta > 0) feedback = "Partly there. Also address: " + content.missed.slice(0, 2).join("; ") + ".";
+    else feedback = "That does not answer the question. A good answer would address: " + content.missed.slice(0, 2).join("; ") + ".";
     var isSafe = true;
 
     // Safety checks: check for dangerous omissions or lethal errors
@@ -187,6 +311,7 @@
       answer: answerText,
       feedback: feedback,
       score: scoreDelta,
+      matchedPoints: content.matched.length,
       safe: isSafe
     });
 
@@ -235,6 +360,7 @@
     createVivaSession: createVivaSession,
     getNextQuestion: getNextQuestion,
     checkContradictions: checkContradictions,
+    scoreContent: scoreContent,
     evaluateAnswer: evaluateAnswer,
     finalizeViva: finalizeViva
   };

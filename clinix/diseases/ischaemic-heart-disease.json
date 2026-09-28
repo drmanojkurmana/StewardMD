@@ -231,6 +231,15 @@
   "cases": [
     {
       "id": "case.ihd.arvind",
+      "initialVitals": {
+        "hr": 104,
+        "bpSystolic": 148,
+        "bpDiastolic": 94,
+        "rr": 22,
+        "spo2": 95,
+        "temp": 37.0,
+        "gcs": 15
+      },
       "title": "A man with crushing chest pain since breakfast",
       "opening": "Arvind Mehta, 58, has been brought to the emergency department by his family with severe chest pain that began two hours ago. He is sweaty and anxious. Introduce yourself and take a history.",
       "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
@@ -498,10 +507,9 @@
       "diagnosis": {
         "answer": "ST-elevation myocardial infarction, anterior wall (left anterior descending territory), in a patient with poorly controlled hypertension, diabetes, dyslipidaemia, active smoking and a strong family history of premature coronary disease, with preceding two months of new exertional angina (unstable angina evolving to STEMI).",
         "accept": [
-          "st-elevation",
           "stemi",
-          "myocardial infarction",
-          "mi"
+          "st elevation myocardial infarction",
+          "anterior wall mi"
         ],
         "minMatch": 1
       },

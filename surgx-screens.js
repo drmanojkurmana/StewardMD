@@ -189,7 +189,7 @@
   }
   /* ONE meta strip instead of three stacked banners.
    *
-   * Draft state, source currency and the educational framing all have to be on the screen, but
+   * Source currency and the educational framing all have to be on the screen, but
    * three full-width banners above every protocol pushed the RED FLAGS band below the fold on a
    * 390px phone - which defeats the entire point of the seven-band spine. They are compressed into
    * a row of small pills, and only a genuinely urgent fact (overdue review) is promoted back to a
@@ -197,12 +197,7 @@
   function metaStrip(compiled, extra) {
     var ev = EV();
     var pills = [], promoted = "";
-    var status = compiled.review;
-
-    if (status !== "approved" && status !== "published") {
-      pills.push('<span class="sgx-pill warn" title="Every recommendation here carries its source. Verify before acting.">' +
-        ic("edit_note") + " Draft, pending clinician review</span>");
-    }
+    // No review-status pill (owner decision 2026-09-28): content is shown open, sources still shown.
     if (extra) pills.push(extra);
 
     if (ev) {
@@ -301,7 +296,7 @@
     }
     if (!state.protoIndex.length) {
       return head("Protocols", "02") +
-        emptyState("emergency", "No protocols available", "Content is awaiting clinical review, or the surgical engine did not load.");
+        emptyState("emergency", "No protocols available", "Protocols could not be loaded. Check your connection and try again.");
     }
     var groups = {}, order = [];
     state.protoIndex.forEach(function (p) {
@@ -341,7 +336,7 @@
     }
     if (state.proto.__failed) {
       return head("Protocol", "02") + emptyState("block", "Not available",
-        "This protocol is either awaiting clinical review or its source engine is not loaded on this build.");
+        "This protocol could not be loaded. Check your connection and try again.");
     }
     return renderProtocol(state.proto);
   }
@@ -484,7 +479,7 @@
     }
     if (!state.procList.length) {
       return head("Procedures", "03") +
-        emptyState("surgical", "No procedures available", "Content is awaiting clinical review.");
+        emptyState("surgical", "No procedures available", "Procedures could not be loaded. Check your connection and try again.");
     }
     var rows = state.procList.map(function (p) {
       return '<button class="sgx-row" data-sgx="go" data-r="procedure/' + attr(p.id) + '">' +
@@ -519,7 +514,7 @@
     }
     if (state.proc.__failed) {
       return head("Procedure", "03") + emptyState("block", "Not available",
-        "This procedure is awaiting clinical review.");
+        "This procedure could not be loaded. Check your connection and try again.");
     }
     return renderProcedure(state.proc);
   }
@@ -529,8 +524,8 @@
       return c.lines.length || c.steps.length || c.media.length;
     });
     if (!tabs.length) {
-      return head(p.title, "03") + emptyState("hourglass_empty", "Nothing cleared yet",
-        "Every chapter of this procedure is awaiting clinical review.");
+      return head(p.title, "03") + emptyState("hourglass_empty", "No content",
+        "This procedure has no chapters to show.");
     }
     var active = null;
     tabs.forEach(function (c) { if (c.id === state.procTab) active = c; });
@@ -543,17 +538,11 @@
 
     var body = "";
     body += metaStrip(p, '<span class="sgx-pill">' + ic("school") + " Educational reference</span>");
-    if (p.pendingSteps) {
-      // Hidden content IS promoted to a banner: a procedure that is quietly short is a lie about
-      // the operation.
-      body += '<div class="sgx-banner warn">' + ic("hourglass_empty") + " " + p.pendingSteps +
-        " step" + (p.pendingSteps === 1 ? " is" : "s are") + " awaiting clinical sign-off and are not shown.</div>";
-    }
 
     if (active.id === "steps") {
       body += '<div class="sgx-card">' + (active.steps.length
         ? active.steps.map(renderStep).join("")
-        : '<div class="sgx-empty">No steps are cleared for display yet.</div>') + "</div>";
+        : '<div class="sgx-empty">No steps are listed for this procedure.</div>') + "</div>";
     } else {
       body += '<div class="sgx-card"><h4>' + esc(active.title) + "</h4>" +
         (active.lines.length
@@ -732,7 +721,7 @@
       return head("Cases", "05") + loading();
     }
     if (!state.caseList.length) {
-      return head("Cases", "05") + emptyState("psychology", "No cases available", "Content is awaiting clinical review.");
+      return head("Cases", "05") + emptyState("psychology", "No cases available", "Cases could not be loaded. Check your connection and try again.");
     }
     var lv = caseLevel();
     if (!M()) return head("Cases", "05") + errorState("SURGX did not finish loading.");
@@ -777,7 +766,7 @@
       return head("Case", "05") + loading();
     }
     if (state.kase.__failed) {
-      return head("Case", "05") + emptyState("block", "Not available", "This case is awaiting clinical review.");
+      return head("Case", "05") + emptyState("block", "Not available", "This case could not be loaded. Check your connection and try again.");
     }
     return renderCase(state.kase);
   }

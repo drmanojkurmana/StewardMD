@@ -1,7 +1,6 @@
 /* Specialty kits - feature flag (mirrors kb-protocols-flags.js). Resolution:
  * ?kits= query -> localStorage -> default. DEFAULT ON: the kits are additive (a Specialty tab in the OPD
- * EMR and a Home tile); a kit only adds editable text to the assessment and every kit shows its review
- * status (content ai_drafted pending clinical review). Force off per device with ?kits=0 or
+ * EMR and a Home tile); a kit only adds editable text to the assessment and every kit is shown. Force off per device with ?kits=0 or
  * localStorage smd_specialty_kits=0. Exposes window.SMD_KITS_FLAGS. No PHI, no network. */
 (function () {
   "use strict";
@@ -10,7 +9,7 @@
   var Q = (function () { try { return new URLSearchParams(G.location && G.location.search || ""); } catch (e) { return { get: function () { return null; } }; } })();
 
   var DEFS = {
-    smd_specialty_kits: { type: "bool", def: true, query: "kits", desc: "Specialty kits (O&G, Paediatrics, Orthopaedics, Ophthalmology, ENT, Dermatology, Psychiatry, Dental): OPD Specialty tab + Home tile. DEFAULT ON; content ai_drafted pending clinical review. Force off per device with ?kits=0." }
+    smd_specialty_kits: { type: "bool", def: true, query: "kits", desc: "Specialty kits (O&G, Paediatrics, Orthopaedics, Ophthalmology, ENT, Dermatology, Psychiatry, Dental): OPD Specialty tab + Home tile. DEFAULT ON; every kit shown. Force off per device with ?kits=0." }
   };
 
   function raw(key) {

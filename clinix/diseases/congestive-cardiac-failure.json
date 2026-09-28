@@ -238,6 +238,16 @@
   "cases": [
     {
       "id": "case.ccf.dinesh",
+      "initialVitals": {
+        "hr": 112,
+        "bpSystolic": 108,
+        "bpDiastolic": 78,
+        "rr": 28,
+        "spo2": 90,
+        "temp": 36.9,
+        "gcs": 15
+      },
+      "pulseCharacter": "low_volume",
       "title": "A man who has put on five kilos in a week",
       "opening": "Dinesh Rao, 64, a known hypertensive, has been brought to the emergency department by his son. He is sitting bolt upright, breathing rapidly, and looks unwell. Introduce yourself and take a history.",
       "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
@@ -557,7 +567,8 @@
         "accept": [
           "congestive cardiac failure",
           "heart failure",
-          "ccf"
+          "ccf",
+          "hfref"
         ],
         "minMatch": 1
       },

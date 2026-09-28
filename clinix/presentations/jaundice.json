@@ -7,15 +7,14 @@
   "system": "abdomen",
   "estMinutes": 45,
   "review": {
-    "status": "approved",
-    "reviewer": "Clinical Review Team"
+    "status": "ai_drafted"
   },
   "layers": {
     "recognise": {
       "redFlags": [
         "Hepatic Encephalopathy (altered sleep-wake rhythm, confusion, drowsiness, asterixis / flapping tremor)",
         "Spontaneous bleeding, purpura, hematemesis, or melena with coagulopathy (INR > 1.5)",
-        "Charcot's Triad (Jaundice + High fever with rigors + Severe RUQ abdominal pain) indicating acute ascending cholangitis — life-threatening sepsis",
+        "Charcot's Triad (Jaundice + High fever with rigors + Severe RUQ abdominal pain) indicating acute ascending cholangitis; life-threatening sepsis",
         "Reynolds' Pentad (Charcot's triad + Shock + Mental confusion) indicating toxic acute obstructive cholangitis",
         "Oliguria, rapid rise in serum creatinine, and refractory hyponatremia in advanced cirrhosis (Hepatorenal Syndrome)",
         "Hypoglycemia in acute liver failure (due to failure of hepatic glycogenolysis and gluconeogenesis)"
@@ -138,11 +137,11 @@
     },
     "skills": [
       "skill.gen.jaundice",
-      "skill.gen.stigmata",
-      "skill.exam.abdo.inspection",
-      "skill.exam.abdo.liver",
-      "skill.exam.abdo.spleen",
-      "skill.exam.abdo.ascites",
+      "skill.exam.gi.cld_stigmata",
+      "skill.exam.gi.inspection",
+      "skill.exam.gi.liver",
+      "skill.exam.gi.spleen",
+      "skill.exam.gi.ascites",
       "skill.gen.vitals"
     ],
     "examPearls": [
@@ -156,7 +155,7 @@
       },
       {
         "topic": "Asterixis (Flapping Tremor) Physiology",
-        "text": "Asterixis is NOT a true rhythmic tremor. It is 'negative myoclonus' — a sudden, brief, involuntary lapse of muscle contraction in an outstretched limb held in sustained posture. Test by asking the patient to extend arms forward, spread fingers, and dorsiflex wrists for 30 seconds."
+        "text": "Asterixis is NOT a true rhythmic tremor. It is 'negative myoclonus'; a sudden, brief, involuntary lapse of muscle contraction in an outstretched limb held in sustained posture. Test by asking the patient to extend arms forward, spread fingers, and dorsiflex wrists for 30 seconds."
       }
     ]
   }

@@ -10,7 +10,7 @@
  *   - A MutationObserver on #sbrefBody adds a fifth "Protocols" button to whatever tab row app.js
  *     just rendered (openRef, SB.abgOrg re-renders), so the tab is reachable from every tab.
  * Flag: smd_kb_protocols (kb-protocols-flags.js, default ON, ?kbproto=0 to hide).
- * Every protocol shows its review status. Decision support only; nothing here is an order.
+ * Every protocol shows its source caveat. Decision support only; nothing here is an order.
  * window.SMD_KBPROTO. Buildless ES5 IIFE.
  */
 (function (root) {
@@ -131,7 +131,6 @@
     st.view = "list"; st.openId = null;
     var idx = st.index;
     var total = idx ? idx.count : 0, nSubj = idx ? idx.subjects.length : 0;
-    var drafts = idx ? idx.protocols.filter(function (p) { return p.status === "ai_drafted"; }).length : 0;
     var intro = '<header class="kblib-tool-intro">' + brandHTML() +
       '<span class="kblib-tool-kicker">Bedside clinical protocols</span><h1>Protocols</h1>' +
       "<p>" + (idx ? "<strong>" + plural(total, "protocol") + "</strong> across " + plural(nSubj, "subject") + ", " : "Stepwise protocols ") +
@@ -144,9 +143,8 @@
         : '<div class="kbp-empty" aria-busy="true">Loading protocols…</div>'));
       return;
     }
-    var notice = drafts
-      ? '<div class="kbp-status kbp-status-ai_drafted" role="note"><strong>' + (drafts === total ? "All protocols are drafts" : drafts + " of " + total + " protocols are drafts") +
-        " pending clinical review.</strong> They were compiled with AI assistance from the guidelines each one cites. Verify doses and thresholds against the source and your local protocol before use.</div>"
+    var notice = total
+      ? '<div class="kbp-status kbp-status-note" role="note">Each protocol cites the guidelines it follows. Verify doses and thresholds against the source and your local protocol before use.</div>'
       : "";
     var chip = function (key, label, count) {
       var on = st.subject === key;
@@ -201,8 +199,8 @@
     var r = p.review || {}, date = fmtDate(r.compiled);
     if (r.status === "approved") return '<div class="kbp-status kbp-status-approved" role="note"><strong>Approved</strong>' + (r.reviewer ? " by " + esc(r.reviewer) : "") + ". Still verify against the cited source and your local protocol.</div>";
     if (r.status === "reviewed") return '<div class="kbp-status kbp-status-reviewed" role="note"><strong>Clinically reviewed</strong>' + (r.reviewer ? " by " + esc(r.reviewer) : "") + ". Verify against the cited source and your local protocol.</div>";
-    return '<div class="kbp-status kbp-status-ai_drafted" role="note"><strong>Draft, pending clinical review.</strong> Compiled' + (date ? " " + date : "") +
-      " with AI assistance from the guidelines cited below. Verify every dose and threshold against the source and your local protocol before use.</div>";
+    return '<div class="kbp-status kbp-status-note" role="note">' + (date ? "Compiled " + date + " from the guidelines cited below. " : "") +
+      "Verify every dose and threshold against the source and your local protocol before use.</div>";
   }
   /** The protocol reader as an HTML string. Shared by the Knowledge Library and the OPD Protocol tab.
    *  opts.idPrefix  prefix for section ids (jump targets), so two readers in one DOM never collide

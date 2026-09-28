@@ -743,4 +743,48 @@ console.log(`\nmaik-models: ${pass} passed, ${fail} failed`);
   ok("no pack carries a rag flag: grounding eligibility is the CAPS.kb capability, read by maik-local.js", Object.keys(M.PACKS).every((id) => !M.PACKS[id].rag));
 }
 
+/* ── SMD-03 (QA sheet 2026-09-27): never "Downloaded" before the hash passes ─────────────────────
+ * Settings said "Downloaded, Selected" while chat said the file was damaged and removed. The native
+ * plugin now hashes the finished file (modelVerify); a mismatch re-downloads once on its own, a
+ * second mismatch fails without marking the pack installed, and remove() tells the UI at once. */
+async function hashRun(shas) {
+  const SIZE = 2489894976, calls = { start: 0, verify: 0, del: 0 };
+  const Llama = {
+    downloadStart: async () => { calls.start++; return { id: "7" + calls.start }; },
+    downloadStatus: async () => ({ state: "done", bytes: SIZE, total: SIZE, onDisk: SIZE }),
+    downloadCancel: async () => {},
+    modelPath: async () => ({ path: "/x/m.gguf", bytes: 0, partial: false, freeBytes: 50e9 }),
+    modelDelete: async () => { calls.del++; return { ok: true }; },
+    modelVerify: async () => { const h = shas[Math.min(calls.verify, shas.length - 1)]; calls.verify++; return { sha256: h, bytes: SIZE }; }
+  };
+  const win = { Capacitor: { isNativePlatform: () => true, Plugins: { Llama, Filesystem: {} } } };
+  const ls = fakeLS();
+  new Function("window", "localStorage", "Buffer", SRC)(win, ls, Buffer);
+  const M = win.SMD_MAIK_MODELS, want = M.PACKS["maik-mxcore"].files[0].sha256;
+  const notes = [];
+  let err = null, res = null;
+  try { res = await M.ensure("maik-mxcore", (f, n) => { if (n) notes.push(n); }); } catch (e) { err = e; }
+  return { M, ls, calls, want, notes, err, res };
+}
+{
+  const probe = await hashRun(["0".repeat(64)]);
+  const want = probe.want;
+  const r1 = await hashRun([want]);
+  ok("SMD-03 a download whose hash matches the registry is marked installed", r1.res && r1.res.installed === true && r1.ls._s["smd_maik_pack_maik-mxcore"] === "1");
+  ok("SMD-03 the finished file was hashed natively before it was marked", r1.calls.verify === 1);
+  ok("SMD-03 the user is told the file is being checked", r1.notes.some((n) => /Checking the downloaded file/i.test(n)));
+  const r2 = await hashRun(["f".repeat(64), want]);
+  ok("SMD-03 a damaged download is deleted and fetched again on its own, once", r2.calls.del >= 1 && r2.calls.start === 2 && r2.calls.verify === 2);
+  ok("SMD-03 after a clean second download it is marked installed", r2.res && r2.res.installed === true && r2.ls._s["smd_maik_pack_maik-mxcore"] === "1");
+  ok("SMD-03 the re-download is explained", r2.notes.some((n) => /damaged in transit/i.test(n)));
+  ok("SMD-03 the first attempt failed in probe too (no marker)", !probe.ls._s["smd_maik_pack_maik-mxcore"] && !!probe.err);
+  const r3 = await hashRun(["f".repeat(64), "e".repeat(64)]);
+  ok("SMD-03 two damaged downloads in a row stop with a plain message and are NOT marked installed", !!r3.err && /damaged twice/i.test(r3.err.message) && !r3.ls._s["smd_maik_pack_maik-mxcore"]);
+  ok("SMD-03 Settings never reads Downloaded after a failed check", r3.M.installedCached("maik-mxcore") === false && r3.M.state("maik-mxcore").done !== true);
+  // remove() tells subscribers, so an open Settings page drops "Downloaded" at once.
+  let told = 0; r1.M.subscribe((id) => { if (id === "maik-mxcore") told++; });
+  await r1.M.remove("maik-mxcore");
+  ok("SMD-03 remove() notifies the UI", told >= 1 && r1.M.installedCached("maik-mxcore") === false);
+}
+
 process.exit(fail ? 1 : 0);

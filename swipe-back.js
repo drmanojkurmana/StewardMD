@@ -414,3 +414,48 @@
 
   window.SMD_SWIPE_BACK = { goBack: goBack, hardwareBack: hardwareBack, drawerIsOpen: drawerIsOpen, canGoBack: canGoBack, openMenuAtHome: openMenuAtHome, edgeSwipeAction: edgeSwipeAction, enabled: enable, engineActive: engineActive, syncHandle: syncHandle };
 })();
+
+/* SMD-15 (QA sheet 2026-09-27): the grey "<" / ">" tab parked on the screen edge in the reports is
+ * iOS's Picture-in-Picture stash handle, and one report shows the PiP window itself holding a live
+ * camera feed. No app video should ever float over the app, so: every <video> opts out of PiP,
+ * leaves PiP if it gets there anyway (on removal, or when the app hides), and a camera preview that
+ * is taken off the screen and not put back releases the camera. */
+(function () {
+  "use strict";
+  var D = document;
+  function arm(v) {
+    try { v.disablePictureInPicture = true; v.setAttribute("disablepictureinpicture", ""); v.setAttribute("playsinline", ""); v.setAttribute("webkit-playsinline", ""); } catch (e) {}
+  }
+  function unPip(v) {
+    try { if (D.pictureInPictureElement === v && D.exitPictureInPicture) D.exitPictureInPicture().catch(function () {}); } catch (e) {}
+    try { if (v.webkitPresentationMode === "picture-in-picture" && v.webkitSetPresentationMode) v.webkitSetPresentationMode("inline"); } catch (e) {}
+  }
+  function gone(v) {
+    unPip(v);
+    // A preview may be moved (removed and re-inserted in the same tick): only a video still detached
+    // a moment later is finished with, and only then is its camera stream stopped.
+    setTimeout(function () {
+      if (v.isConnected) return;
+      try { var s = v.srcObject; if (s && s.getTracks) s.getTracks().forEach(function (t) { try { t.stop(); } catch (e) {} }); v.srcObject = null; } catch (e) {}
+    }, 600);
+  }
+  function each(node, fn) {
+    if (!node || node.nodeType !== 1) return;
+    if (node.tagName === "VIDEO") fn(node);
+    else if (node.getElementsByTagName) { var l = node.getElementsByTagName("video"); for (var i = 0; i < l.length; i++) fn(l[i]); }
+  }
+  function start() {
+    each(D.body, arm);
+    if (window.MutationObserver) new MutationObserver(function (ms) {
+      for (var i = 0; i < ms.length; i++) {
+        var a = ms[i].addedNodes, r = ms[i].removedNodes, j;
+        for (j = 0; j < a.length; j++) each(a[j], arm);
+        for (j = 0; j < r.length; j++) each(r[j], gone);
+      }
+    }).observe(D.body, { childList: true, subtree: true });
+    D.addEventListener("visibilitychange", function () { if (D.hidden) each(D.body, unPip); });
+    D.addEventListener("enterpictureinpicture", function (e) { try { unPip(e.target); } catch (x) {} }, true);
+  }
+  if (D.body) start(); else D.addEventListener("DOMContentLoaded", start);
+  window.SMD_PIP_GUARD = { arm: arm, gone: gone };
+})();

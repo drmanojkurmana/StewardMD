@@ -17,22 +17,23 @@ const draftOf = (over) => ({
   calculatedDoses: [{ drugId: "doxorubicin", final: 100 }], overrides: []
 });
 
-// Calm styling (Beta / AI-drafted), but the safety line MUST persist on the dose-review screen: the
-// physician still has to see the dose is AI-drafted + needs verification before prescribing (R1).
-test("draft (experimental) -> review panel shows the AI-drafted / verify note", () => {
+// Owner decision 2026-09-28: no Beta / AI-drafted wording. The practical safety line still persists on
+// the dose-review screen: decision support only, verify before prescribing (R1).
+test("draft (experimental) -> review panel shows the verify note, no draft wording", () => {
   const html = UI._buildReviewPanel(draftOf({ experimental: true }));
-  assert.match(html, /AI-drafted/i);
-  assert.match(html, /Beta/i);
+  assert.doesNotMatch(html, /AI-drafted/i);
+  assert.doesNotMatch(html, /Beta/i);
+  assert.match(html, /Decision support only/);
   assert.match(html, /verify/i);
 });
 
 test("lifecycleState draft (not experimental) -> also shows the note", () => {
   const html = UI._buildReviewPanel(draftOf({ lifecycleState: "draft" }));
-  assert.match(html, /AI-drafted/i);
+  assert.match(html, /Decision support only/);
   assert.match(html, /verify/i);
 });
 
 test("active protocol -> NO draft note", () => {
   const html = UI._buildReviewPanel(draftOf({ lifecycleState: "active" }));
-  assert.doesNotMatch(html, /AI-drafted/i);
+  assert.doesNotMatch(html, /Decision support only/);
 });

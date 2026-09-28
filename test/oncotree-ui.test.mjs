@@ -89,7 +89,7 @@ test("mid-pathway renders the progress rail + the current question", () => {
   noPlaceholders(html);
 });
 
-test("HER2 positive: outcome shows applicable HER2 protocol cards with unmistakable DRAFT badges", () => {
+test("HER2 positive: outcome shows applicable HER2 protocol cards, no draft badges (owner decision 2026-09-28)", () => {
   assert.ok(HER2_PATH.nodeId, "the graph still reaches a treatment node carrying protocols");
   reset(HER2_PATH.answers);
   const html = UI._bodyHtml();
@@ -97,8 +97,8 @@ test("HER2 positive: outcome shows applicable HER2 protocol cards with unmistaka
   // At least one of the node's OWN protocol refs must be rendered - whichever they are today.
   assert.ok(HER2_PATH.refs.some(r => html.indexOf(r) >= 0 || (PROTOS[r] && html.indexOf(PROTOS[r].name) >= 0)),
     "a protocol card appears for one of " + HER2_PATH.refs.join(", "));
-  assert.ok(/EXPERIMENTAL DRAFT/.test(html), "lifecycle badge is unmistakable");
-  assert.ok(/ot-badge exp/.test(html), "draft badge styled distinctly");
+  assert.ok(!/DRAFT/i.test(html.replace(/data-[a-z-]+="[^"]*"/g, "")), "no draft badge or label");
+  assert.ok(!/ot-badge (exp|draft)/.test(html), "no draft badge element");
   noPlaceholders(html);
 });
 
@@ -122,13 +122,13 @@ test("excluded-pathways panel explains WHY via disabledBy when expanded", () => 
   noPlaceholders(html);
 });
 
-test("protocol detail view renders the regimen table + a DRAFT warning, never a bare approval", () => {
+test("protocol detail view renders the regimen table + a verify caveat, no draft wording", () => {
   reset({ n_histology: ["invasive"], n_stage: ["s2"], n_setting: ["neoadjuvant"], n_her2: ["pos"], n_hr2p: ["neg"] });
   UI._st.openedProtocol = "breast-tchp";
   const html = UI._bodyHtml();
   assert.ok(/Regimen/.test(html));
-  // R1 safety semantics (calm wording): the draft must still read as AI-drafted + decision-support + verify.
-  assert.ok(/AI-drafted/i.test(html));
+  // Owner decision 2026-09-28: no AI-drafted / Beta label; the decision-support + verify caveat stays.
+  assert.ok(!/AI-drafted|BETA/i.test(html));
   assert.ok(/decision support/i.test(html));
   assert.ok(/verify/i.test(html));
   assert.ok(/Back to options/.test(html));

@@ -1,7 +1,7 @@
 /* Ophthalmós notes: short cited study notes, illustrated with real images from the clinic decks. ES5.
    Registers in OPHTHALMOS._reads. Layers: hub -> notes list -> reader -> enlarged image; back()
    unwinds one at a time through st.onBack. Read state: store.read[id] = the day the note was read
-   to the end. Content: ophthalmos/notes.json (review "ai_drafted" until ophthalmologist sign-off).
+   to the end. Content: ophthalmos/notes.json.
    Loaded after ophthalmos-screens.js. */
 (function (G) {
   "use strict";
@@ -37,7 +37,7 @@
     I.leave();
     st.view = "notes";
     if (!N) {
-      return I.paint(I.top("Back to clinics", "Study notes", "Could not load") +
+      return I.paint(I.top("Back", "Study notes", "Could not load") +
         '<div class="oph-scroll oph-pad"><p>The notes did not load. Check the connection and try again.</p>' +
         '<button class="oph-btn pri" data-act="notesretry">' + ico("refresh") + " Try again</button></div>");
     }
@@ -55,7 +55,7 @@
           '<span class="oph-chev" aria-hidden="true">' + ico("chev") + "</span></button></li>";
       }).join("") + "</ul>";
     }).join("");
-    I.paint(I.top("Back to clinics", "Study notes", fmt(readCount()) + " of " + fmt(n) + " read") +
+    I.paint(I.top("Back", "Study notes", fmt(readCount()) + " of " + fmt(n) + " read") +
       '<div class="oph-scroll oph-pad"><p class="oph-lede">What to look for, how it is graded and what to do next, each note illustrated with real images from the clinics and cited to the guideline it follows.</p>' +
       body + '<p class="oph-note">' + esc(N.reviewNote) + "</p></div>", focusId ? '[data-n="' + focusId + '"]' : null);
     var f = focusId && G.document.querySelector('[data-n="' + focusId + '"]');
@@ -107,7 +107,7 @@
       '<div class="oph-scroll oph-pad" id="ophRead"><article class="oph-article" aria-labelledby="ophNT">' +
       '<h1 id="ophNT">' + esc(n.title) + "</h1>" +
       '<p class="oph-meta">' + n.minutes + " min read · " + imgCount(n) + (imgCount(n) === 1 ? " real image" : " real images") +
-      '<span class="oph-draftline">' + ico("info") + "AI-drafted from the cited sources, awaiting ophthalmologist review</span></p>" +
+      "</p>" +
       n.blocks.map(block).join("") +
       '<section class="oph-practise" aria-label="Practise this">' + practiseHtml(n) + "</section>" +
       '<h2 class="oph-nh" id="ophSrc">Sources</h2><ol class="oph-refs">' + srcs + "</ol>" +
@@ -128,7 +128,7 @@
       io = new G.IntersectionObserver(function (es) { if (es[0].isIntersecting) markRead(n.id); }, { root: scroller });
       io.observe(end);
     } else markRead(n.id);
-    st.onBack = function () { if (zoomEl) { closeZoom(); return true; } openList(n.id); return true; };
+    st.onBack = function () { if (zoomEl) { closeZoom(); return true; } if (st.ret) return false; openList(n.id); return true; }; // st.ret: opened from a lesson
     st.onLeave = function () { if (io) io.disconnect(); io = null; if (zoomEl) { zoomEl.remove(); zoomEl = null; } };
   }
 
@@ -189,6 +189,7 @@
 
   O._reads.push({
     id: "notes", title: "Study notes", icon: "book", load: load, open: function () { openList(); },
+    find: function (id) { return N ? N.notes.filter(function (x) { return x.id === id; })[0] || null : null; }, // a lesson's "Go deeper"
     sub: "Signs, grading, next steps",
     line: function () { return N ? fmt(readCount()) + " of " + fmt(N.notes.length) + " read" : "Did not load. Open to try again"; },
     // One image from each of the first notes that use different decks: the row shows the range of modalities.

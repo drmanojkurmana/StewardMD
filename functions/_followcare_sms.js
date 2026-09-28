@@ -16,7 +16,9 @@
  * and the content-template id. Live tests 2026-09-27 from MAIK: a name without peid/ctid came back DLT-CNT-REJECT;
  * msg + peid + ctid delivered only when 2Factor's own text matching accepted it (Appointment Confirmation it
  * refused, "Missing templatename value"); name + vars + peid + ctid DELIVERED. Needs FOLLOWCARE_SMS_PROVIDER=
- * twofactor, TWOFACTOR_API_KEY and TWOFACTOR_SENDER=MAIK (the only approved header).
+ * twofactor and TWOFACTOR_API_KEY. The header is always DLT_SENDER (MAIK): every template here is registered
+ * under it, so TWOFACTOR_SENDER (the legacy TSMS path's header) is not read here. It used to be, and a
+ * production value other than MAIK refused every OTP, which then went out as a 2Factor voice call (2026-09-28).
  *
  * Env (owner provisions ONE provider):
  *   FOLLOWCARE_SMS_PROVIDER = "twofactor" | "msg91" | "twilio" | "gupshup" | "" (off)
@@ -93,6 +95,7 @@ export async function sendTwoFactor(env, to, msg) {
 // link ({#uro#}); `plain` names its approved twin without the link, which sendDlt uses when there is no link.
 // Links must be CTA-whitelisted on Vilpower: https://stewardmd.in/queue? and /followcare? (dynamic, 2026-09-27).
 export var DLT_PEID = "1101720950000098192";   // MAIKNOWLEDGE LLP's DLT entity id (Vilpower); public, not a secret
+export var DLT_SENDER = "MAIK";                // the DLT header all of these templates are registered under
 export var DLT = {
   otp: { tpl: "STEWARDMD_OTP", ctid: "1177178791267832947", text: "Your OTP for login to StewardMD is {#num#}. Valid for {#num#} minutes. Do not share this OTP with anyone. -StewardMD" },
   appt_confirm: { tpl: "APPT_CONFIRM_DETAILED", ctid: "1177178791454063563", plain: "appt_confirm_plain", text: "Dear {#alp#}, your appointment with Dr. {#alp#} at {#alp#} is confirmed for {#alp#} at {#alp#}. View details: {#uro#} -StewardMD" },
@@ -121,7 +124,7 @@ export function dltText(key, slots) {
   }
   return out;
 }
-export function dltConfigured(env) { return smsProvider(env) === "twofactor" && !!(env.TWOFACTOR_API_KEY && env.TWOFACTOR_SENDER); }
+export function dltConfigured(env) { return smsProvider(env) === "twofactor" && !!env.TWOFACTOR_API_KEY; }
 // -> { ok, providerId?, skipped?, reason?, status?, detail? }. Never throws.
 export async function sendDlt(env, toE164, key, slots) {
   if (!dltConfigured(env)) return { ok: false, skipped: true, reason: "not_configured" };
@@ -134,13 +137,16 @@ export async function sendDlt(env, toE164, key, slots) {
   var to = toDialable(toE164, env.FOLLOWCARE_DEFAULT_CC);
   if (!to || to.length < 10) return { ok: false, reason: "bad_number" };
   // R1 takes "91XXXXXXXXXX" (2Factor's API docs), unlike the TSMS endpoint above, which wants 10 digits.
-  var form = new URLSearchParams({ module: "TRANS_SMS", apikey: env.TWOFACTOR_API_KEY, to: to, from: env.TWOFACTOR_SENDER, templatename: DLT[key].tpl });
+  var form = new URLSearchParams({ module: "TRANS_SMS", apikey: env.TWOFACTOR_API_KEY, to: to, from: DLT_SENDER, templatename: DLT[key].tpl });
   slots.forEach(function (v, i) { form.set("var" + (i + 1), String(v == null ? "" : v).replace(/\s+/g, " ").trim()); });
   form.set("peid", DLT_PEID); form.set("ctid", DLT[key].ctid);
   try {
     var r = await fetch("https://2factor.in/API/R1/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: form.toString() });
     var text = await r.text(); var j = {}; try { j = JSON.parse(text); } catch (e) {}
     var ok = r.ok && String(j.Status || "").toLowerCase() === "success";
+    // A refusal is logged (template name and 2Factor's answer, never the number or the key): a silent
+    // one is how the OTP fell through to a voice call unnoticed.
+    if (!ok) { try { console.warn("[sms/dlt] 2Factor refused " + DLT[key].tpl + " (HTTP " + r.status + "): " + text.slice(0, 200).replace(/\d{10,}/g, "[num]").split(env.TWOFACTOR_API_KEY).join("[key]")); } catch (x) {} }
     return { ok: ok, providerId: j.Details || null, status: r.status, detail: ok ? null : text.slice(0, 200) };
   } catch (e) {
     try { console.warn("[sms/dlt] send exception", String(e && e.message || e)); } catch (x) {}

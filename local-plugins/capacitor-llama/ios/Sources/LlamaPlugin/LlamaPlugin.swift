@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 import os.log
 import Capacitor
+import CryptoKit
 
 /**
  * On-device LLM inference for MaiK's offline answer engine.
@@ -77,7 +78,8 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "downloadStatus", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "downloadCancel", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "modelPath", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "modelDelete", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "modelDelete", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "modelVerify", returnType: CAPPluginReturnPromise)
     ]
 
     private let engine = LlamaEngine()
@@ -532,6 +534,41 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
             call.reject("Missing name", LlamaErr.badArguments.rawValue); return
         }
         call.resolve(["ok": ModelDownloader.shared.delete(name: name)])
+    }
+
+    /**
+     * SHA-256 of a downloaded model, computed natively (QA sheet SMD-03, 2026-09-27).
+     *
+     * The JS side never marks a pack "Downloaded" until this matches the registry's hash. Hashing in
+     * JS would mean reading 2.5 GB back through the bridge (why maik-models.js avoided it); here the
+     * file is streamed in 8 MiB reads on a background queue, so memory stays flat and the UI thread
+     * is untouched. Resolves { sha256, bytes }; rejects when the file is missing or unreadable.
+     */
+    @objc func modelVerify(_ call: CAPPluginCall) {
+        guard let name = call.getString("name"), !name.isEmpty else {
+            call.reject("Missing name", LlamaErr.badArguments.rawValue); return
+        }
+        let url = ModelDownloader.pathFor(name)
+        DispatchQueue.global(qos: .utility).async {
+            guard let fh = try? FileHandle(forReadingFrom: url) else {
+                call.reject("model file not found", "model-missing"); return
+            }
+            defer { try? fh.close() }
+            var hasher = SHA256()
+            var total: Int64 = 0
+            while true {
+                let more: Bool = autoreleasepool {
+                    let d = fh.readData(ofLength: 8 << 20)
+                    if d.isEmpty { return false }
+                    hasher.update(data: d)
+                    total += Int64(d.count)
+                    return true
+                }
+                if !more { break }
+            }
+            let hex = hasher.finalize().map { String(format: "%02x", $0) }.joined()
+            call.resolve(["sha256": hex, "bytes": total])
+        }
     }
 
     // MARK: - Storage

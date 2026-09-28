@@ -39,13 +39,18 @@ const STUB = `
   window.SMD_AUTH = {
     currentUser: { uid: "u-doc-1", displayName: "Dr Asha Rao", email: "asha@hospital.org",
       getIdToken: function () { return Promise.resolve("tok"); },
-      getIdTokenResult: function () { return Promise.resolve({ claims: window.__claims }); } },
+      getIdTokenResult: function (force) { window.__forced = (window.__forced || 0) + (force ? 1 : 0); return Promise.resolve({ claims: force && window.__freshClaims ? window.__freshClaims : window.__claims }); } },
     onAuthStateChanged: function (cb) { setTimeout(function () { cb(window.SMD_AUTH.currentUser); }, 0); }
   };
   window.SMD_DB = { collection: function () { return { doc: function () { return { collection: function () { return { doc: function () { return {
-    get: function () { return Promise.resolve({ exists: true, data: function () { return window.__profile; } }); },
+    get: function () { if (window.__dbFail === "reject") return Promise.reject(new Error("unavailable")); if (window.__dbFail === "hang") return new Promise(function () {});
+      return Promise.resolve({ exists: true, data: function () { return window.__profile; } }); },
     set: function (o) { Object.assign(window.__saved, o); Object.assign(window.__profile, o); return Promise.resolve(); }
   }; } }; } }; } }; } };
+  // The app lazy-loads the real Firebase SDK, and when that finishes it assigns window.SMD_AUTH /
+  // SMD_DB, replacing these stubs with a signed-out account (~1 run in 10 here). Pin the stubs.
+  window.__smdFbBooted = true;
+  ["SMD_AUTH", "SMD_DB"].forEach(function (k) { var v = window[k]; try { Object.defineProperty(window, k, { configurable: true, get: function () { return v; }, set: function () {} }); } catch (e) {} });
   var _f = window.fetch;
   window.fetch = function (u, o) {
     u = String(u);
@@ -169,8 +174,10 @@ try {
   ok(/not right/.test(await text()) && /4 tries left/.test(await text()), "a wrong code shows the tries left");
   ok(await ev(`var s=document.getElementById("phvSlots"); return s.classList.contains("bad") && document.getElementById("phvCode").value==="";`) === true, "the row shakes red and clears for another try");
   ok(await on() === true, "and the sheet stays open");
+  await ev(`window.__pvEv = null; document.addEventListener("smd:phone-verified", function (e) { window.__pvEv = e.detail && e.detail.phone; }, { once: true }); return 1;`);
   await type("phvCode", "482913"); await sleep(300);
   ok(await ev(`var s=document.getElementById("phvSlots"); return !!(s && s.classList.contains("ok"));`) === true, "the six slots sweep green on the right code");
+  ok(await ev(`return window.__pvEv;`) === "+91 98765 43210", "smd:phone-verified carries the verified number (Profile paints it without a read)");
   if (process.env.SHOT) { const shot = await call("Page.captureScreenshot", { format: "png" }); (await import("node:fs")).writeFileSync(process.env.SHOT.replace(/\.png$/, "-ok.png"), Buffer.from(shot.result.data, "base64")); }
   await sleep(1200);
   ok(await on() === false, "six correct digits verify automatically and close the sheet");
@@ -182,6 +189,21 @@ try {
   await ev(`SMD_PHONE_VERIFY._reset(); window.__claims = { phoneVerified: true }; return 1;`);
   await ev(`SMD_PHONE_VERIFY.check(); return 1;`); await sleep(900);
   ok(await on() === false, "a verified claim means it never asks");
+
+  // ── owner 2026-09-28: Profile said Verified, the sheet still asked ──
+  // The cached token predates the claim; a fresh token carries it. Refresh before asking.
+  await ev(`try{localStorage.removeItem("smd_phone_verified_u-doc-1")}catch(e){} delete window.__profile.phoneVerifiedAt; window.__claims = {}; window.__freshClaims = { phoneVerified: true }; window.__forced = 0; window.__dbFail = "reject"; SMD_PHONE_VERIFY._reset(); SMD_PHONE_VERIFY.check(); return 1;`); await sleep(900);
+  ok(await on() === false, "a stale cached token is refreshed before asking; the fresh claim says verified, so it does not ask");
+  ok(await ev(`return window.__forced`) >= 1, "(it forced one token refresh)");
+  // No claim even on a fresh token, and the profile read FAILS: can't tell, so it does not nag.
+  await ev(`try{localStorage.removeItem("smd_phone_verified_u-doc-1")}catch(e){} window.__freshClaims = null; window.__dbFail = "reject"; SMD_PHONE_VERIFY._reset(); SMD_PHONE_VERIFY.check(); return 1;`); await sleep(900);
+  ok(await on() === false, "a profile read that fails is not taken as unverified");
+  await ev(`window.__dbFail = "hang"; SMD_PHONE_VERIFY._reset(); var r = null; SMD_PHONE_VERIFY.needed(function (y) { window.__hangAns = y; }); return 1;`); await sleep(9000);
+  ok(await ev(`return window.__hangAns`) === false, "a profile read that hangs gives up after a few seconds and does not ask");
+  // A readable profile with no verification still asks, as before.
+  await ev(`window.__dbFail = null; SMD_PHONE_VERIFY._reset(); SMD_PHONE_VERIFY.check(); return 1;`); await sleep(900);
+  ok(await on() === true, "an account that really is unverified is still asked");
+  await ev(`SMD_PHONE_VERIFY.close(); window.__claims = {}; return 1;`); await sleep(300);
 
   // ── the SMS-instead path and the server fallback flag ──
   await ev(`try{localStorage.removeItem("smd_phone_verified_u-doc-1")}catch(e){} window.__claims = {}; window.__calls = []; SMD_PHONE_VERIFY._reset(); SMD_PHONE_VERIFY.open("9876543210"); return 1;`); await sleep(300);
@@ -236,6 +258,23 @@ try {
   ok(/already verified on another StewardMD account/.test(await text()), "phone-in-use at Verify shows the same sentence");
   ok(await ev(`try{return localStorage.getItem("smd_phone_verified_u-doc-1")}catch(e){return null}`) !== "1", "and the device is not marked verified");
   await ev(`window.__inUseAtVerify = false; SMD_PHONE_VERIFY.close(); return 1;`);
+
+  // ── a number already verified: Profile opens the sheet on that, not on Send code (owner, 2026-09-28:
+  // "on pressing it again sends the code") ──
+  await ev(`window.__calls = []; SMD_PHONE_VERIFY._reset(); SMD_PHONE_VERIFY.open("+91 98765 43210", { verified: true }); return 1;`); await sleep(300);
+  const done = await text();
+  ok(/Number verified/.test(done) && /\+91 98765 43210 is verified on this account/.test(done), "a verified number opens on Number verified, naming it");
+  ok(await ev(`return !document.getElementById("phvSend") && !document.getElementById("phvCode");`) === true && await ev(`return window.__calls.length;`) === 0, "no Send button, no code step, nothing sent");
+  ok(!/—/.test(done), "no em-dash on it");
+  if (process.env.SHOT) { const shot = await call("Page.captureScreenshot", { format: "png" }); (await import("node:fs")).writeFileSync(process.env.SHOT.replace(/\.png$/, "-verified.png"), Buffer.from(shot.result.data, "base64")); }
+  await click("phvChange"); await sleep(300);
+  ok(await ev(`var i=document.getElementById("phvPhone"); return i && i.value;`) === "+91 98765 43210" && await ev(`return window.__calls.length;`) === 0, "Change number goes to the number step, filled in, still nothing sent");
+  await ev(`SMD_PHONE_VERIFY.open("+91 98765 43210", { verified: true }); return 1;`); await sleep(300);
+  await click("phvDone"); await sleep(200);
+  ok(await on() === false, "Done closes it");
+  await ev(`SMD_PHONE_VERIFY.open("+91 98765 43210"); return 1;`); await sleep(300);
+  ok(await ev(`return !!document.getElementById("phvSend");`) === true, "opened without verified (an unverified number): the Send code step, as before");
+  await ev(`SMD_PHONE_VERIFY.close(); return 1;`);
 
   // ── kill switches ──
   await ev(`try{sessionStorage.clear(); localStorage.setItem("smd_phone_verify","0")}catch(e){} SMD_PHONE_VERIFY._reset(); SMD_PHONE_VERIFY.check(); return 1;`); await sleep(900);

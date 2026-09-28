@@ -104,8 +104,28 @@
   }
   // Your own StewardMD ID, so you can give it to colleagues (minted on first open if you had none).
   function meHtml() {
-    return S.me ? '<p class="kit-muted sh-me">Your StewardMD ID: <b>' + esc(S.me) + '</b> <button type="button" class="kit-link" data-sh-act="copyid">' + ms("content_copy") + "Copy</button><br>Colleagues can send to this ID or to your sign-in email.</p>"
-      : '<p class="kit-muted sh-me">Colleagues can send to your sign-in email. Your StewardMD ID appears here once it is ready.</p>';
+    var nudge = S.sentKind ? '<div class="kit-row sh-wa-nudge"><span class="kit-muted">' + (S.sentKind === "referral" ? "Referral" : "Handover") + ' sent. Let them know:</span> <button type="button" class="kit-link" data-sh-act="wa-nudge">' + ms("chat") + "Tell them on WhatsApp</button></div>" : "";
+    return nudge + (S.me ? '<p class="kit-muted sh-me">Your StewardMD ID: <b>' + esc(S.me) + '</b> <button type="button" class="kit-link" data-sh-act="copyid">' + ms("content_copy") + "Copy</button><br>Colleagues can send to this ID or to your sign-in email.</p>" +
+        '<div class="kit-row"><button type="button" class="kit-add" data-sh-act="wa-invite">' + ms("chat") + 'Invite on WhatsApp</button><button type="button" class="kit-link" data-sh-act="share-id">' + ms("ios_share") + "Share my ID</button></div>"
+      : '<p class="kit-muted sh-me">Colleagues can send to your sign-in email. Your StewardMD ID appears here once it is ready.</p>');
+  }
+  /* SMD-08 (QA sheet 2026-09-27): reach colleagues through WhatsApp. Only an invite (your ID and the
+   * app link) or a nudge ("I sent you a referral, open StewardMD") ever goes to WhatsApp: patient
+   * details stay inside StewardMD, because a wa.me link carries its text in the URL and CLAUDE.md
+   * forbids PHI in URLs or messages. */
+  var APP_LINK = "https://stewardmd.in/";
+  function inviteText() { return "Add me on StewardMD so we can send each other referrals and handovers. My StewardMD ID is " + S.me + ". " + APP_LINK; }
+  function nudgeText(kind) { return "I have sent you a " + (kind === "referral" ? "referral" : "handover") + " on StewardMD. Open the app to see it: " + APP_LINK; }
+  function waOpen(text) {
+    var u = "https://wa.me/?text=" + encodeURIComponent(text);
+    try { var w = G.open(u, "_blank", "noopener"); if (w) return; } catch (e) {}
+    try { G.location.href = u; } catch (e) {}
+  }
+  function shareText(text) {
+    var P = G.Capacitor && G.Capacitor.Plugins;
+    if (G.SMD_IS_NATIVE && P && P.Share && P.Share.share) { P.Share.share({ title: "StewardMD", text: text, dialogTitle: "Share" }).catch(function () {}); return; }
+    if (G.navigator && G.navigator.share) { G.navigator.share({ title: "StewardMD", text: text }).catch(function () {}); return; }
+    copyText(text);
   }
   function loadMe() {
     try { var id = G.SMD_STEWARD_ID && G.SMD_STEWARD_ID.my && G.SMD_STEWARD_ID.my(); if (id) { S.me = id; return; } } catch (e) {}
@@ -187,7 +207,7 @@
     S.busy = true; render();
     api("POST", "msg/send", { kind: c.kind, to: isEmail ? { email: to } : { smdId: to }, kitId: c.kitId || "", urgency: c.urgency || "", payload: c.payload }).then(function (r) {
       S.busy = false;
-      if (r.status === 200) { toast(c.kind === "referral" ? "Referral sent." : "Handover sent. You will see when it is acknowledged."); S.compose = null; S.view = "inbox"; S.tab = "out"; loadInbox(); }
+      if (r.status === 200) { toast(c.kind === "referral" ? "Referral sent." : "Handover sent. You will see when it is acknowledged."); S.sentKind = c.kind === "referral" ? "referral" : "handover"; S.compose = null; S.view = "inbox"; S.tab = "out"; loadInbox(); }
       else { c.to = to; render(); toast(errText(r.body.error)); }
     });
   }
@@ -243,6 +263,9 @@
     if (cmd === "close") { close(); return; }
     if (cmd === "inbox") { S.view = "inbox"; S.cur = null; loadInbox(); return; }
     if (cmd === "copyid") { if (S.me) copyText(S.me); return; }
+    if (cmd === "wa-invite") { if (S.me) waOpen(inviteText()); return; }
+    if (cmd === "share-id") { if (S.me) shareText(inviteText()); return; }
+    if (cmd === "wa-nudge") { waOpen(nudgeText(S.sentKind)); S.sentKind = null; render(); return; }
     if (cmd === "tab") { S.tab = arg; render(); return; }
     if (cmd === "msg") { openMsg(arg); return; }
     if (cmd === "case") { openCase(arg); return; }

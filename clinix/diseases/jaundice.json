@@ -132,6 +132,15 @@
   "cases": [
     {
       "id": "case.jaundice.fatima",
+      "initialVitals": {
+        "hr": 118,
+        "bpSystolic": 96,
+        "bpDiastolic": 60,
+        "rr": 24,
+        "spo2": 96,
+        "temp": 39.4,
+        "gcs": 15
+      },
       "title": "A woman with fever, right-sided pain and yellow eyes",
       "opening": "Fatima Sheikh, 58, has been brought to the emergency department by her son. She looks unwell and is shivering under a blanket despite the warm weather. Introduce yourself and take a history.",
       "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
@@ -305,7 +314,12 @@
       },
       "diagnosis": {
         "answer": "Acute ascending cholangitis, with Charcot's triad of fever with rigors, right upper quadrant pain and jaundice, secondary to an impacted common bile duct stone.",
-        "accept": ["cholangitis", "charcot", "cbd stone", "obstructive jaundice"],
+        "accept": [
+          "cholangitis",
+          "ascending cholangitis",
+          "cbd stone",
+          "obstructive jaundice"
+        ],
         "minMatch": 1
       },
       "managementModel": {

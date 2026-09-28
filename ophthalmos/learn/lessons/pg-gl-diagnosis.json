@@ -1,0 +1,248 @@
+{
+  "id": "pg-gl-diagnosis",
+  "unit": "glaucoma-pg",
+  "level": "resident",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Diagnosing POAG: structure, function, pressure, angle",
+    "hi": "POAG की पहचान: बनावट, काम, प्रेशर, एंगल"
+  },
+  "idea": {
+    "en": "Diagnose [[poag]] from matching disc and field damage, with an open angle on [[gonioscopy]]. Pressure is a risk factor, not the definition.",
+    "hi": "[[poag]] की पहचान आपस में मेल खाते डिस्क और दायरे के नुकसान से करें, और [[gonioscopy]] में एंगल खुला हो। प्रेशर ख़तरा है, परिभाषा नहीं।"
+  },
+  "see": {
+    "img": "disc/Im637_g_ACRIMA.webp",
+    "deckItem": {
+      "deck": "disc",
+      "id": "Im637_g_ACRIMA"
+    },
+    "expect": "glaucoma",
+    "alt": {
+      "en": "Close colour photo of an optic disc. A pale cup sits left of centre. A vessel bends sharply at the cup edge. A pale crescent with a thin dark line lies at the far left of the disc. Large vessels run down from the lower right.",
+      "hi": "एक ऑप्टिक डिस्क की पास से ली गई रंगीन फ़ोटो। बीच से बाईं ओर हल्के रंग का कप है। कप के किनारे पर एक नस तेज़ी से मुड़ती है। डिस्क के बिल्कुल बाईं ओर पतली काली रेखा वाला हल्का अर्धचंद्र है। बड़ी नसें नीचे दाईं ओर से नीचे जाती हैं।"
+    },
+    "caption": {
+      "en": "A real photo of an optic disc labelled glaucoma. Note the cup edge, the bending vessel and the pale crescent.",
+      "hi": "एक असली फ़ोटो, लेबल: ग्लूकोमा। कप का किनारा, मुड़ती नस और हल्का अर्धचंद्र देखें।"
+    },
+    "credit": "ACRIMA, CC BY 4.0. Diaz-Pinto A, et al. Biomed Eng Online 2019.",
+    "hotspots": [
+      {
+        "x": 0.38,
+        "y": 0.42,
+        "label": {
+          "en": "Pale cup",
+          "hi": "हल्का कप"
+        },
+        "note": {
+          "en": "Judge cup size against disc size. A small disc with this cup is more worrying.",
+          "hi": "कप का आकार डिस्क के आकार से तौलें। छोटी डिस्क में इतना कप ज़्यादा चिंता की बात है।"
+        }
+      },
+      {
+        "x": 0.41,
+        "y": 0.57,
+        "label": {
+          "en": "Vessel bend",
+          "hi": "नस का मोड़"
+        },
+        "note": {
+          "en": "Sharp bending marks the true cup edge. Use vessels, not colour, to find it.",
+          "hi": "तेज़ मोड़ कप का असली किनारा दिखाता है। किनारा रंग से नहीं, नसों से पहचानें।"
+        }
+      },
+      {
+        "x": 0.2,
+        "y": 0.45,
+        "label": {
+          "en": "Peripapillary atrophy",
+          "hi": "डिस्क के पास ऊतक की कमी"
+        },
+        "note": {
+          "en": "Atrophy next to the disc is linked with glaucoma and its progression.",
+          "hi": "डिस्क के पास ऊतक की कमी ग्लूकोमा और उसके बढ़ने से जुड़ी है।"
+        }
+      },
+      {
+        "x": 0.63,
+        "y": 0.45,
+        "label": {
+          "en": "Remaining rim",
+          "hi": "बचा हुआ रिम"
+        },
+        "note": {
+          "en": "Trace the rim all round and compare with the field.",
+          "hi": "रिम को चारों ओर देखें और दायरे से मिलाएँ।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Structure: examine the disc at the slit lamp, then image the [[nerve-fibre-layer]] with [[oct]].",
+        "hi": "बनावट: स्लिट लैंप पर डिस्क देखें, फिर [[oct]] से [[nerve-fibre-layer]] की तस्वीर लें।"
+      },
+      {
+        "en": "Function: standard automated [[perimetry]], usually a 24-2 test. Repeat to confirm a new defect.",
+        "hi": "काम: स्टैंडर्ड ऑटोमेटेड [[perimetry]], आमतौर पर 24-2 टेस्ट। नए नुकसान की पुष्टि के लिए दोहराएँ।"
+      },
+      {
+        "en": "Pressure: use Goldmann [[tonometry]] and note the time. Measure [[cct]]; thin corneas read falsely low.",
+        "hi": "प्रेशर: गोल्डमैन [[tonometry]] करें और समय लिखें। [[cct]] नापें; पतला कॉर्निया प्रेशर को ग़लत तरीक़े से कम दिखाता है।"
+      },
+      {
+        "en": "Angle: always do [[gonioscopy]]. Only an open angle fits POAG.",
+        "hi": "एंगल: हमेशा [[gonioscopy]] करें। POAG तभी है जब एंगल खुला हो।"
+      },
+      {
+        "en": "In [[ohtn]], OHTS found drops cut 5-year conversion to POAG from 9.5% to 4.4%. Weigh age, CCT, cup and pressure before treating.",
+        "hi": "[[ohtn]] में OHTS ने पाया कि ड्रॉप्स से 5 साल में POAG बनना 9.5% से घटकर 4.4% हुआ। इलाज से पहले उम्र, CCT, कप और प्रेशर को तौलें।"
+      }
+    ],
+    "analogy": {
+      "en": "Diagnosis is like a court case. The disc and field are the witnesses who must agree; pressure is the motive, not the proof.",
+      "hi": "पहचान एक अदालती मामले जैसी है। डिस्क और दायरा गवाह हैं जिन्हें एक बात कहनी चाहिए; प्रेशर इरादा है, सबूत नहीं।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Disc, nerve fibre layer and field defects that match each other.",
+      "hi": "डिस्क, नर्व फ़ाइबर लेयर और दायरे के नुकसान जो आपस में मेल खाते हों।"
+    },
+    {
+      "en": "Open angle, with no secondary cause found.",
+      "hi": "खुला एंगल, और कोई दूसरा कारण नहीं।"
+    },
+    {
+      "en": "OCT colour codes compare with a normal database. Check for scan artefacts.",
+      "hi": "OCT के रंग सामान्य आँकड़ों से तुलना करते हैं। स्कैन की ग़लतियाँ जाँचें।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Photograph or draw the disc at baseline.",
+      "hi": "शुरुआत में डिस्क की फ़ोटो लें या चित्र बनाएँ।"
+    },
+    {
+      "en": "Get reliable baseline fields early, and repeat them often in the first two years.",
+      "hi": "शुरू में भरोसेमंद बेसलाइन फ़ील्ड लें, और पहले दो साल बार-बार दोहराएँ।"
+    },
+    {
+      "en": "Look for secondary causes: steroids, trauma, [[pxf]] and pigment dispersion.",
+      "hi": "दूसरे कारण ढूँढें: स्टेरॉयड, चोट, [[pxf]] और पिगमेंट डिस्पर्शन।"
+    }
+  ],
+  "remember": {
+    "en": "POAG means matching disc and field loss with an open angle. Pressure is a risk, not the rule.",
+    "hi": "POAG का मतलब है खुले एंगल के साथ मेल खाता डिस्क और दायरे का नुकसान। प्रेशर ख़तरा है, नियम नहीं।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which finding is required before you call glaucoma POAG?",
+        "hi": "ग्लूकोमा को POAG कहने से पहले क्या ज़रूरी है?"
+      },
+      "o": [
+        {
+          "en": "IOP over 21 mmHg",
+          "hi": "IOP 21 mmHg से ज़्यादा"
+        },
+        {
+          "en": "An open angle on gonioscopy",
+          "hi": "गोनियोस्कोपी में खुला एंगल"
+        },
+        {
+          "en": "A family history",
+          "hi": "परिवार में बीमारी"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "POAG needs an open angle. High pressure is common but not required.",
+        "hi": "POAG के लिए खुला एंगल ज़रूरी है। ज़्यादा प्रेशर आम है, पर ज़रूरी नहीं।"
+      }
+    },
+    {
+      "q": {
+        "en": "CCT is 480 microns and IOP reads 20 mmHg. How should you read this?",
+        "hi": "CCT 480 माइक्रॉन है और IOP 20 mmHg है। इसे कैसे समझें?"
+      },
+      "o": [
+        {
+          "en": "True IOP may be higher than it reads",
+          "hi": "असली IOP दिखने से ज़्यादा हो सकता है"
+        },
+        {
+          "en": "True IOP is lower",
+          "hi": "असली IOP कम है"
+        },
+        {
+          "en": "CCT has no effect",
+          "hi": "CCT का कोई असर नहीं"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "A thin cornea gives falsely low readings and is itself a risk factor.",
+        "hi": "पतला कॉर्निया प्रेशर कम दिखाता है और ख़ुद भी एक ख़तरा है।"
+      }
+    },
+    {
+      "q": {
+        "en": "In OHTS, what did treatment do to 5-year conversion?",
+        "hi": "OHTS में इलाज से 5 साल में बीमारी बनने पर क्या असर पड़ा?"
+      },
+      "o": [
+        {
+          "en": "No change",
+          "hi": "कोई बदलाव नहीं"
+        },
+        {
+          "en": "About halved it, 9.5% to 4.4%",
+          "hi": "लगभग आधा, 9.5% से 4.4%"
+        },
+        {
+          "en": "Cut it to zero",
+          "hi": "शून्य कर दिया"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Treatment roughly halved the risk, so most people with raised pressure did not convert either way.",
+        "hi": "इलाज ने ख़तरा लगभग आधा किया; वैसे भी ज़्यादा प्रेशर वाले ज़्यादातर लोगों में बीमारी नहीं बनी।"
+      }
+    }
+  ],
+  "test": {
+    "clinic": "disc",
+    "classes": [
+      "glaucoma",
+      "normal"
+    ],
+    "mcqTopic": "glaucoma"
+  },
+  "deeper": {
+    "note": "disc-glaucoma"
+  },
+  "glossary": [
+    "cct",
+    "gonioscopy",
+    "nerve-fibre-layer",
+    "oct",
+    "ohtn",
+    "perimetry",
+    "poag",
+    "pxf",
+    "tonometry"
+  ],
+  "sources": [
+    "Gedde SJ, Bowden EC, Challa P, et al. Primary Open-Angle Glaucoma Preferred Practice Pattern. Ophthalmology 2026;133(4):P1-P103. PMID: 41665583",
+    "Gedde SJ, Kolomeyer NN, Challa P, et al. Primary Open-Angle Glaucoma Suspect Preferred Practice Pattern. Ophthalmology 2026;133(4):P104-P152. PMID: 41665582",
+    "Kass MA, Heuer DK, Higginbotham EJ, et al. The Ocular Hypertension Treatment Study: a randomized trial determines that topical ocular hypotensive medication delays or prevents the onset of primary open-angle glaucoma. Arch Ophthalmol 2002;120(6):701-713. PMID: 12049574",
+    "Pazos M, Traverso CE, Viswanathan A, et al. European Glaucoma Society Terminology and Guidelines for Glaucoma, 6th Edition. Br J Ophthalmol 2025;109(Suppl 1):1-212. PMID: 41026937",
+    "Diaz-Pinto A, et al. CNNs for automatic glaucoma assessment using fundus images: an extensive validation. Biomed Eng Online 2019. doi:10.6084/m9.figshare.7613135"
+  ]
+}

@@ -778,6 +778,15 @@
   "cases": [
     {
       "id": "case.effusion.deepak",
+      "initialVitals": {
+        "hr": 96,
+        "bpSystolic": 110,
+        "bpDiastolic": 70,
+        "rr": 22,
+        "spo2": 95,
+        "temp": 37.8,
+        "gcs": 15
+      },
       "title": "A laborer with three weeks of breathlessness and evening fever",
       "opening": "Deepak Sharma, 28, has walked into the outpatient department, breathless after climbing the stairs. He looks thin and unwell. Introduce yourself and take a history.",
       "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
@@ -1140,9 +1149,9 @@
       "diagnosis": {
         "answer": "Tuberculous pleural effusion, right side, exudative and lymphocyte-predominant with a raised ADA, pending microbiological confirmation.",
         "accept": [
-          "tuberculous",
+          "tuberculous pleural effusion",
           "tb effusion",
-          "tuberculosis"
+          "pleural effusion"
         ],
         "minMatch": 1
       },

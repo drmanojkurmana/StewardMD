@@ -1,0 +1,247 @@
+{
+  "id": "pg-gl-aac",
+  "unit": "glaucoma-pg",
+  "level": "resident",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Treating acute angle closure",
+    "hi": "एक्यूट एंगल क्लोज़र का इलाज"
+  },
+  "idea": {
+    "en": "Break the attack with drugs, then relieve [[pupil-block]] with [[lpi]] in both eyes. Lens extraction is a strong option for [[angle-closure]].",
+    "hi": "दवाओं से दौरा तोड़ें, फिर दोनों आँखों में [[lpi]] से [[pupil-block]] हटाएँ। [[angle-closure]] में लेंस निकालना एक मज़बूत विकल्प है।"
+  },
+  "see": {
+    "diagram": "diagrams/gl-pupil-block.svg",
+    "w": 480,
+    "h": 150,
+    "alt": {
+      "en": "Two small diagrams of the upper front of the eye. Left: the iris bows forward over the red drain. Fluid is trapped behind it, and a red arrow pushes forward. Right: after laser, the iris is flat with a gap near its root. A dashed arrow passes through the gap and up to an open drain.",
+      "hi": "आँख के ऊपरी अगले हिस्से के दो छोटे चित्र। बाएँ: आइरिस आगे उभरकर लाल निकास को ढकती है, उसके पीछे पानी फँसा है और एक लाल तीर आगे धकेल रहा है। दाएँ: लेज़र के बाद आइरिस सीधी है और उसकी जड़ के पास एक छेद है। टूटी रेखा वाला तीर छेद से होकर खुले निकास तक जाता है।"
+    },
+    "caption": {
+      "en": "Left: pupil block pushes the iris onto the drain. Right: a laser iridotomy lets fluid bypass the pupil.",
+      "hi": "बाएँ: प्यूपिल ब्लॉक आइरिस को निकास पर धकेलता है। दाएँ: लेज़र इरिडोटॉमी से पानी पुतली को छोड़कर आगे निकल जाता है।"
+    },
+    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.173,
+        "y": 0.25,
+        "label": {
+          "en": "Closed drain",
+          "hi": "बंद निकास"
+        },
+        "note": {
+          "en": "The iris lies on the meshwork, so pressure climbs.",
+          "hi": "आइरिस मेशवर्क पर टिकी है, इसलिए प्रेशर बढ़ता है।"
+        }
+      },
+      {
+        "x": 0.217,
+        "y": 0.62,
+        "label": {
+          "en": "Trapped fluid",
+          "hi": "फँसा पानी"
+        },
+        "note": {
+          "en": "Aqueous builds up behind the iris and bows it forward.",
+          "hi": "आइरिस के पीछे एक्वियस जमा होकर उसे आगे उभार देता है।"
+        }
+      },
+      {
+        "x": 0.229,
+        "y": 0.81,
+        "label": {
+          "en": "Iris on lens",
+          "hi": "लेंस पर आइरिस"
+        },
+        "note": {
+          "en": "The site of [[pupil-block]]. A mid-dilated pupil makes it worse.",
+          "hi": "[[pupil-block]] की जगह। आधी फैली पुतली इसे बढ़ाती है।"
+        }
+      },
+      {
+        "x": 0.707,
+        "y": 0.5,
+        "label": {
+          "en": "Iridotomy",
+          "hi": "इरिडोटॉमी"
+        },
+        "note": {
+          "en": "A small hole in the outer iris. Fluid now passes straight to the front.",
+          "hi": "बाहरी आइरिस में छोटा छेद। अब पानी सीधे आगे जाता है।"
+        }
+      },
+      {
+        "x": 0.673,
+        "y": 0.25,
+        "label": {
+          "en": "Drain open again",
+          "hi": "निकास फिर खुला"
+        },
+        "note": {
+          "en": "The iris falls back and the angle opens, unless PAS have formed.",
+          "hi": "आइरिस पीछे हटती है और एंगल खुल जाता है, जब तक PAS न बने हों।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Confirm the diagnosis. Clear corneal oedema if needed, then check both angles with [[gonioscopy]].",
+        "hi": "पहचान पक्की करें। ज़रूरत हो तो कॉर्निया की सूजन घटाएँ, फिर [[gonioscopy]] से दोनों एंगल देखें।"
+      },
+      {
+        "en": "Lower pressure fast: acetazolamide by vein or mouth, a topical beta-blocker and alpha-agonist, and a steroid drop.",
+        "hi": "प्रेशर तेज़ी से घटाएँ: एसिटाज़ोलामाइड नस या मुँह से, आँख में बीटा-ब्लॉकर और अल्फ़ा-एगोनिस्ट, और स्टेरॉयड ड्रॉप।"
+      },
+      {
+        "en": "Once pressure falls, pilocarpine can pull the iris off the angle.",
+        "hi": "प्रेशर घटने पर पाइलोकार्पीन आइरिस को एंगल से खींच सकता है।"
+      },
+      {
+        "en": "If pressure stays high, consider mannitol by vein or oral glycerol. Check heart, kidney and sugar status first.",
+        "hi": "अगर प्रेशर फिर भी ज़्यादा रहे, तो नस से मैनिटॉल या मुँह से ग्लिसरॉल पर विचार करें। पहले दिल, किडनी और शुगर की स्थिति देखें।"
+      },
+      {
+        "en": "Then do [[lpi]] in the affected eye and in the fellow eye. Without it, about half of fellow eyes have an attack within 5 years.",
+        "hi": "फिर प्रभावित आँख और दूसरी आँख, दोनों में [[lpi]] करें। इसके बिना लगभग आधी दूसरी आँखों में 5 साल के अंदर दौरा पड़ता है।"
+      },
+      {
+        "en": "EAGLE studied people aged 50 or over with [[angle-closure]] and high pressure, or angle-closure glaucoma. Clear-lens extraction beat laser iridotomy as first treatment.",
+        "hi": "EAGLE: 50 साल या ज़्यादा उम्र में, ज़्यादा प्रेशर वाले प्राइमरी [[angle-closure]] या एंगल क्लोज़र ग्लूकोमा के पहले इलाज में साफ़ लेंस निकालना लेज़र इरिडोटॉमी से बेहतर रहा।"
+      }
+    ],
+    "analogy": {
+      "en": "Drugs empty the flooded room; the laser cuts a new doorway so it cannot flood again.",
+      "hi": "दवाएँ पानी भरे कमरे को ख़ाली करती हैं; लेज़र एक नया दरवाज़ा काटता है ताकि कमरा फिर न भरे।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Recheck pressure within an hour of treatment.",
+      "hi": "इलाज के एक घंटे के अंदर प्रेशर फिर जाँचें।"
+    },
+    {
+      "en": "A pressure that will not fall suggests PAS or a lens cause.",
+      "hi": "प्रेशर न घटे तो PAS या लेंस की वजह सोचें।"
+    },
+    {
+      "en": "Look at the fellow eye: a narrow angle there confirms the cause.",
+      "hi": "दूसरी आँख देखें: वहाँ संकरा एंगल कारण की पुष्टि करता है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Watch for side effects: acetazolamide can upset salts and acid balance, and mannitol can strain the heart.",
+      "hi": "साइड इफ़ेक्ट पर नज़र रखें: एसिटाज़ोलामाइड नमक और अम्ल का संतुलन बिगाड़ सकता है, और मैनिटॉल दिल पर बोझ डाल सकता है।"
+    },
+    {
+      "en": "Do not start with pilocarpine when the pressure is very high; the iris muscle may not respond.",
+      "hi": "बहुत ज़्यादा प्रेशर में शुरुआत पाइलोकार्पीन से न करें; आइरिस की मांसपेशी जवाब नहीं दे सकती।"
+    },
+    {
+      "en": "Check the disc and field once the eye settles, to stage any glaucoma.",
+      "hi": "आँख शांत होने पर डिस्क और फ़ील्ड देखें, ताकि ग्लूकोमा की स्थिति तय हो।"
+    }
+  ],
+  "remember": {
+    "en": "Drugs to break the attack, laser to both eyes, and think of the lens.",
+    "hi": "दौरा तोड़ने को दवा, दोनों आँखों में लेज़र, और लेंस के बारे में सोचें।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "After an acute attack in one eye, what should the fellow eye get?",
+        "hi": "एक आँख में एक्यूट दौरे के बाद दूसरी आँख को क्या मिलना चाहिए?"
+      },
+      "o": [
+        {
+          "en": "Nothing unless symptoms start",
+          "hi": "लक्षण न हों तो कुछ नहीं"
+        },
+        {
+          "en": "Laser peripheral iridotomy",
+          "hi": "लेज़र पेरिफ़ेरल इरिडोटॉमी"
+        },
+        {
+          "en": "Pilocarpine for life",
+          "hi": "ज़िंदगी भर पाइलोकार्पीन"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "The fellow eye has a high risk of its own attack. Laser prevents it.",
+        "hi": "दूसरी आँख में भी दौरे का ज़्यादा ख़तरा है। लेज़र इसे रोकता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Why may pilocarpine fail at an IOP of 60 mmHg?",
+        "hi": "IOP 60 mmHg पर पाइलोकार्पीन काम क्यों नहीं कर सकता?"
+      },
+      "o": [
+        {
+          "en": "The iris sphincter is ischaemic and cannot respond",
+          "hi": "आइरिस की मांसपेशी में खून कम है और वह जवाब नहीं दे पाती"
+        },
+        {
+          "en": "It raises the pressure",
+          "hi": "यह प्रेशर बढ़ाता है"
+        },
+        {
+          "en": "It dilates the pupil",
+          "hi": "यह पुतली फैलाता है"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Lower the pressure first, then pilocarpine can work.",
+        "hi": "पहले प्रेशर घटाएँ, फिर पाइलोकार्पीन काम कर सकता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "What did EAGLE compare?",
+        "hi": "EAGLE ने किसकी तुलना की?"
+      },
+      "o": [
+        {
+          "en": "Two glaucoma drops",
+          "hi": "दो ग्लूकोमा ड्रॉप्स"
+        },
+        {
+          "en": "Clear-lens extraction versus laser iridotomy",
+          "hi": "साफ़ लेंस निकालना बनाम लेज़र इरिडोटॉमी"
+        },
+        {
+          "en": "SLT versus drops",
+          "hi": "SLT बनाम ड्रॉप्स"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Lens extraction gave better results as first treatment in the trial group.",
+        "hi": "शोध समूह में पहले इलाज के रूप में लेंस निकालने के नतीजे बेहतर रहे।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "glaucoma"
+  },
+  "glossary": [
+    "angle-closure",
+    "gonioscopy",
+    "lpi",
+    "pupil-block"
+  ],
+  "sources": [
+    "Gedde SJ, Chopra V, Vinod K, et al. Primary Angle-Closure Disease Preferred Practice Pattern. Ophthalmology 2026;133(4):P153-P201. PMID: 41665581",
+    "Boey PY, Singhal S, Perera SA, Aung T. Conventional and emerging treatments in the management of acute primary angle closure. Clin Ophthalmol 2012;6:417-424. PMID: 22536030",
+    "Azuara-Blanco A, Burr J, Ramsay C, et al. Effectiveness of early lens extraction for the treatment of primary angle-closure glaucoma (EAGLE): a randomised controlled trial. Lancet 2016;388(10052):1389-1397. PMID: 27707497",
+    "Pazos M, Traverso CE, Viswanathan A, et al. European Glaucoma Society Terminology and Guidelines for Glaucoma, 6th Edition. Br J Ophthalmol 2025;109(Suppl 1):1-212. PMID: 41026937"
+  ]
+}

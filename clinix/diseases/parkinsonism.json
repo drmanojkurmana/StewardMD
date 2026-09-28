@@ -146,6 +146,15 @@
   "cases": [
     {
       "id": "case.parkinsonism.subhash",
+      "initialVitals": {
+        "hr": 78,
+        "bpSystolic": 132,
+        "bpDiastolic": 82,
+        "rr": 16,
+        "spo2": 98,
+        "temp": 36.8,
+        "gcs": 15
+      },
       "title": "A retired clerk whose handwriting has shrunk",
       "opening": "Subhash Rao, 68, has come to the neurology outpatient department with his daughter. He sits quietly in the chair with his right hand resting and trembling gently in his lap, his face still and unblinking. Introduce yourself and take a history.",
       "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
@@ -381,7 +390,7 @@
         "answer": "Idiopathic Parkinson's disease, asymmetric right-sided rest tremor, rigidity and bradykinesia with no red flags for a secondary cause or Parkinson-plus syndrome, functionally Hoehn and Yahr stage II.",
         "accept": [
           "parkinson",
-          "idiopathic"
+          "parkinson disease"
         ],
         "minMatch": 1
       },

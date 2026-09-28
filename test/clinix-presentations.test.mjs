@@ -33,7 +33,10 @@ test("each presentation file exists and conforms to CliniX 2.0 schema", () => {
     assert.ok(p.title && p.title.length > 5, `${p.id} must have a descriptive title`);
     assert.ok(p.subtitle && p.subtitle.length > 10, `${p.id} must have a subtitle`);
     assert.ok(typeof p.estMinutes === "number" && p.estMinutes >= 30, `${p.id} must have valid estMinutes >= 30`);
-    assert.equal(p.review && p.review.status, "approved", `${p.id} review status must be approved`);
+    // Honest review state: these were AI-drafted and have no clinician sign-off yet (2026-09-27 audit).
+    // They render through the smd_clinix_draft gate with the draft line, like every other lesson.
+    assert.ok(p.review && ["ai_drafted", "in_review", "approved", "published"].indexOf(p.review.status) >= 0, `${p.id} must carry a review status`);
+    assert.notEqual(p.review.reviewer, "Clinical Review Team", `${p.id} must not name a reviewer who never reviewed it`);
 
     // Validate Layers
     assert.ok(p.layers, `${p.id} must have layers`);

@@ -128,6 +128,17 @@
   "cases": [
     {
       "id": "case.hepatomegaly.savitri",
+      "initialVitals": {
+        "hr": 104,
+        "bpSystolic": 128,
+        "bpDiastolic": 78,
+        "rr": 22,
+        "spo2": 95,
+        "temp": 36.9,
+        "gcs": 15
+      },
+      "arrhythmia": "afib",
+      "pulseCharacter": "irregularly_irregular",
       "title": "A woman with a tender, throbbing liver",
       "opening": "Savitri Joshi, 68, has been referred from the medicine ward for an abdominal examination. She is sitting propped up on two pillows and looks mildly breathless. Introduce yourself and take a history.",
       "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
@@ -408,9 +419,9 @@
       "diagnosis": {
         "answer": "Tender, pulsatile congestive hepatomegaly secondary to right heart failure from severe tricuspid regurgitation, decompensated by new atrial fibrillation and recent diuretic withdrawal.",
         "accept": [
-          "congestive",
+          "right heart failure",
           "heart failure",
-          "right heart"
+          "congestive hepatomegaly"
         ],
         "minMatch": 1
       },

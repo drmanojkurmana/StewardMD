@@ -1334,6 +1334,15 @@
     return "Grounded \u00b7 AI-generated, verify independently";
   }
 
+  /** SMD-16: the start screen's knowledge card promises what the answering engine delivers, in the
+   *  same terms as the footer (discLabel): only a grounded engine is promised citations. */
+  function knowSub() {
+    var e = effective();
+    if (e === "local") return ragLinked() ? "Answers from the StewardMD knowledge base" : "Quick answers on this phone, not cited";
+    if (e === "rag") return "Answers from the StewardMD knowledge base";
+    return "Cited, page-level answers";
+  }
+
   function syncDisc() {
     try {
       var el = document.querySelector("#maikSheet .maik-disc span");
@@ -1628,7 +1637,7 @@
     settingsHTML: settingsHTML, wireSettings: wireSettings, modelRowHTML: modelRowHTML,
     options: options, currentOptionId: currentOptionId, chipLabel: chipLabel, chipHTML: chipHTML,
     selectOption: selectOption, adoptPackWhenReady: adoptPackWhenReady, pendingPack: pendingPack,
-    discLabel: discLabel, syncDisc: syncDisc,
+    discLabel: discLabel, syncDisc: syncDisc, knowSub: knowSub,
     // RAG link: maik-local.js reads ragLinked() in ragEligible() to decide whether to retrieve.
     KEY_RAG_LINK: KEY_RAG_LINK, ragLinked: ragLinked, setRagLinked: setRagLinked, ragLinkHTML: ragLinkHTML,
     warmIfLocal: warmIfLocal,

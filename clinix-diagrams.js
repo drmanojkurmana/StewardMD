@@ -1992,94 +1992,114 @@
     "diagram.sensorylevel":  { title: "Spinal cord sensory levels & dermatomes", render: sensoryLevel, interactive: true }
   };
 
+  /* Owner-produced (owner, 2026-09-27: "I have created them, no licence needed"). ownerProduced is
+   * the licence gate's record for that (clinix-model.js isOwnerProduced), so they render. */
   var ATLAS_IMAGES = {
     "diagram.cranial": {
       src: "clinix-cranial-nerves-brainstem.jpg",
+      ownerProduced: true, cleared: true, licence: "StewardMD original (owner-produced)", attribution: "StewardMD",
       title: "Cranial Nerves: Ventral Brainstem Anatomy (CN I-XII)",
       desc: "Authentic anatomical map (OpenStax / NCBI StatPearls) showing superficial origins of all 12 pairs of cranial nerves on the ventral surface of the brainstem and skull base."
     },
     "diagram.liverpalp": {
       src: "clinix-liver-palpation.jpg",
+      ownerProduced: true, cleared: true, licence: "StewardMD original (owner-produced)", attribution: "StewardMD",
       title: "Liver Palpation: Authentic Bedside Technique",
       desc: "Left hand lifting right posterior 10th-11th ribs forward; right hand placed flat in RIF advancing toward costal margin on expiration."
     },
     "diagram.facialpalsy": {
       src: "clinix-facialpalsy1.jpg",
+      ownerProduced: true, cleared: true, licence: "StewardMD original (owner-produced)", attribution: "StewardMD",
       title: "Facial Palsy: Clinical Bedside Verification",
       desc: "Authentic clinical photos: Complete unilateral hemifacial paralysis in LMN Bell's palsy vs forehead wrinkling preserved in UMN stroke."
     },
     "diagram.cngaze": {
       src: "clinix-gazepositions.jpg",
+      ownerProduced: true, cleared: true, licence: "StewardMD original (owner-produced)", attribution: "StewardMD",
       title: "Six Cardinal Gaze Positions: Clinical Motility",
       desc: "Authentic patient motility series isolating extraocular recti and obliques (CN III, IV, VI)."
     },
     "diagram.barrel": {
       src: "clinix-barrelchest.jpg",
+      ownerProduced: true, cleared: true, licence: "StewardMD original (owner-produced)", attribution: "StewardMD",
       title: "Barrel Chest in Emphysematous COPD",
       desc: "Authentic clinical photograph demonstrating increased anteroposterior thoracic diameter (AP ratio 1:1)."
     },
     "diagram.percussion.technique": {
       src: "clinix-resp-technique-panel.jpg",
+      ownerProduced: true, cleared: true, licence: "StewardMD original (owner-produced)", attribution: "StewardMD",
       title: "Bedside Percussion & Palpation Technique",
       desc: "Authentic clinical panel showing pleximeter finger placement in intercostal space and loose-wrist percussion stroke."
     },
     "diagram.clubbing": {
       src: "clinix-schamroth-sign.jpg",
+      ownerProduced: true, cleared: true, licence: "StewardMD original (owner-produced)", attribution: "StewardMD",
       title: "Schamroth Sign: Authentic Clinical Photograph",
       desc: "Authentic clinical photograph (NCBI PMC / ResearchGate): Panel A shows complete obliteration of the diamond window in clubbed fingers. Panel B shows the normal diamond-shaped window (arrowhead) in healthy fingers."
     },
     "diagram.shiftingdullness": {
       src: "clinix-ascites2.jpg",
+      ownerProduced: true, cleared: true, licence: "StewardMD original (owner-produced)", attribution: "StewardMD",
       title: "Ascites: Shifting Dullness Technique",
       desc: "Authentic clinical photo: Flank dullness shifting gravitationally when patient turns 45° to lateral decubitus."
     },
     "diagram.precordium": {
       src: "clinix-precordium-inspection.jpg",
+      ownerProduced: true, cleared: true, licence: "StewardMD original (owner-produced)", attribution: "StewardMD",
       title: "Precordial Surface Anatomy & Inspection",
       desc: "Authentic clinical photograph of anterior thoracic landmarks and cardiac auscultation areas."
     },
     "diagram.auscultareas": {
       src: "clinix-apexbeat1.jpg",
+      ownerProduced: true, cleared: true, licence: "StewardMD original (owner-produced)", attribution: "StewardMD",
       title: "Locating Apex Beat & Auscultation Areas",
       desc: "Authentic clinical palpation locating the 5th intercostal space midclavicular line."
     },
     "diagram.cn5": {
       src: "clinix-cn5-motor-corneal.jpg",
+      ownerProduced: true, cleared: true, licence: "StewardMD original (owner-produced)", attribution: "StewardMD",
       title: "Trigeminal Nerve (CN V): Motor & Corneal Reflex",
       desc: "Authentic bedside examination of temporalis/masseter clench and afferent corneal reflex."
     },
     "diagram.kidney": {
       src: "clinix-kidney-ballottement.jpg",
+      ownerProduced: true, cleared: true, licence: "StewardMD original (owner-produced)", attribution: "StewardMD",
       title: "Renal Ballottement Technique",
       desc: "Authentic bimanual examination of the renal angle: posterior hand flicking kidney anteriorly onto resting anterior hand."
     },
     "diagram.abdausc": {
       src: "clinix-abdomen-auscultation.jpg",
+      ownerProduced: true, cleared: true, licence: "StewardMD original (owner-produced)", attribution: "StewardMD",
       title: "Abdominal Auscultation & Bowel Sounds",
       desc: "Authentic clinical stethoscope placement for peristaltic bowel sounds and renal artery bruits."
     },
     "diagram.heartfailure": {
       src: "clinix-heartfailure-signs.jpg",
+      ownerProduced: true, cleared: true, licence: "StewardMD original (owner-produced)", attribution: "StewardMD",
       title: "Congestive Heart Failure Bedside Triad",
       desc: "Authentic clinical signs: Elevated jugular venous pulse (JVP), bilateral pitting pedal edema, and hepatomegaly."
     },
     "diagram.consolidation": {
       src: "clinix-consolidation-triad.jpg",
+      ownerProduced: true, cleared: true, licence: "StewardMD original (owner-produced)", attribution: "StewardMD",
       title: "Lobar Consolidation Physical Signs",
       desc: "Authentic clinical signs: Dull percussion note, bronchial breath sounds, increased tactile fremitus and whispered pectoriloquy."
     },
     "diagram.pallor": {
       src: "clinix-pallor.jpg",
+      ownerProduced: true, cleared: true, licence: "StewardMD original (owner-produced)", attribution: "StewardMD",
       title: "General Examination: Conjunctival Pallor",
       desc: "Authentic clinical photo showing severe paleness of lower palpebral conjunctiva in anemia (Hb < 7 g/dL)."
     },
     "diagram.bpcuff": {
       src: "clinix-bpcuff.jpg",
+      ownerProduced: true, cleared: true, licence: "StewardMD original (owner-produced)", attribution: "StewardMD",
       title: "Blood Pressure Measurement & Cuff Placement",
       desc: "Authentic clinical method: Bladder center over brachial artery, lower edge 2.5 cm above antecubital fossa."
     },
     "diagram.handhygiene": {
       src: "clinix-handhygiene.jpg",
+      ownerProduced: true, cleared: true, licence: "StewardMD original (owner-produced)", attribution: "StewardMD",
       title: "WHO 6-Step Hand Hygiene Technique",
       desc: "Authentic bedside infection control: Palm to palm, interlaced fingers, back of fingers, thumb rotation, and fingertips."
     }

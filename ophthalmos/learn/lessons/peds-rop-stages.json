@@ -1,0 +1,269 @@
+{
+  "id": "peds-rop-stages",
+  "unit": "peds",
+  "level": "mbbs",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "ROP stages 1 to 5",
+    "hi": "ROP के स्टेज 1 से 5"
+  },
+  "idea": {
+    "en": "ICROP3 grades [[rop]] by the border. It goes from line to ridge to new vessels, then partial and total [[retinal-detachment]]. [[plus-disease]] means it is active.",
+    "hi": "ICROP3 [[rop]] को सीमा के बदलाव से ग्रेड करता है। यह रेखा से उभार, फिर नई नलियों, फिर आंशिक और पूरे [[retinal-detachment]] तक जाता है। [[plus-disease]] का मतलब है कि बीमारी सक्रिय है।"
+  },
+  "see": {
+    "img": "rop/669_2022-12-08_L_10.webp",
+    "deckItem": {
+      "deck": "rop",
+      "id": "669_2022-12-08_L_10"
+    },
+    "expect": "s3",
+    "alt": {
+      "en": "Wide-field photo of a preterm baby's left eye. Red vessels cross the lower left of the picture and run toward the right. On the right, a thick white ridge curves from top to bottom. Its edge looks ragged. Beyond it, the retina is pale grey.",
+      "hi": "समय से पहले जन्मे बच्चे की बाईं आँख की चौड़ी फ़ोटो। लाल नलियाँ तस्वीर के नीचे-बाएँ हिस्से से दाईं ओर जाती हैं। दाईं ओर एक मोटा सफ़ेद उभार ऊपर से नीचे तक मुड़ता है। इसका किनारा खुरदरा दिखता है। इसके आगे रेटिना हल्का धूसर है।"
+    },
+    "caption": {
+      "en": "A real photo of a baby born at 26 weeks, weighing 900 g, graded stage 3 ROP. A thick, ragged ridge marks the border.",
+      "hi": "26 हफ़्ते पर 900 ग्राम वज़न के साथ जन्मे बच्चे की असली फ़ोटो, ग्रेड: स्टेज 3 ROP। एक मोटा, खुरदरा उभार सीमा बनाता है।"
+    },
+    "credit": "ROP-VL, CC BY 4.0. ROP-VL open dataset, figshare 30143461.",
+    "hotspots": [
+      {
+        "x": 0.4,
+        "y": 0.72,
+        "label": {
+          "en": "Retina with vessels",
+          "hi": "नलियों वाला रेटिना"
+        },
+        "note": {
+          "en": "Behind the border, vessels have grown normally.",
+          "hi": "सीमा के पीछे नलियाँ सामान्य रूप से बढ़ी हैं।"
+        }
+      },
+      {
+        "x": 0.68,
+        "y": 0.64,
+        "label": {
+          "en": "Vessels meet the ridge",
+          "hi": "नलियाँ उभार तक"
+        },
+        "note": {
+          "en": "Vessels branch and crowd as they reach the ridge.",
+          "hi": "उभार तक पहुँचते हुए नलियाँ शाखाएँ बनाती हैं और घनी हो जाती हैं।"
+        }
+      },
+      {
+        "x": 0.79,
+        "y": 0.3,
+        "label": {
+          "en": "Thick ridge",
+          "hi": "मोटा उभार"
+        },
+        "note": {
+          "en": "A raised ridge is stage 2. Here it is thick and ragged.",
+          "hi": "उभरा हुआ उभार स्टेज 2 है। यहाँ यह मोटा और खुरदरा है।"
+        }
+      },
+      {
+        "x": 0.81,
+        "y": 0.55,
+        "label": {
+          "en": "New vessel tissue",
+          "hi": "नई नलियों का ऊतक"
+        },
+        "note": {
+          "en": "Fluffy tissue growing off the ridge into the jelly makes this stage 3.",
+          "hi": "उभार से जेली में उगता रुई जैसा ऊतक इसे स्टेज 3 बनाता है।"
+        }
+      },
+      {
+        "x": 0.92,
+        "y": 0.42,
+        "label": {
+          "en": "Retina with no vessels",
+          "hi": "बिना नलियों का रेटिना"
+        },
+        "note": {
+          "en": "Beyond the ridge the retina is bare and grey.",
+          "hi": "उभार के आगे रेटिना खाली और धूसर है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Stage 1: a thin, flat white line between retina with vessels and retina without.",
+        "hi": "स्टेज 1: नलियों वाले और बिना नलियों वाले रेटिना के बीच एक पतली, सपाट सफ़ेद रेखा।"
+      },
+      {
+        "en": "Stage 2: the line grows into a ridge, with height and width.",
+        "hi": "स्टेज 2: रेखा ऊँचाई और चौड़ाई वाले उभार (ridge) में बदल जाती है।"
+      },
+      {
+        "en": "Stage 3: [[new-vessels]] grow from the ridge into the vitreous jelly.",
+        "hi": "स्टेज 3: उभार से विट्रियस जेली में [[new-vessels]] उगती हैं।"
+      },
+      {
+        "en": "Stage 4: scar tissue pulls part of the retina off. In 4A the [[fovea]] is still attached, and in 4B it is off too.",
+        "hi": "स्टेज 4: दाग़ वाला ऊतक रेटिना का कुछ हिस्सा उखाड़ देता है। 4A में [[fovea]] अभी जुड़ा है, और 4B में वह भी उखड़ गया है।"
+      },
+      {
+        "en": "Stage 5: the whole retina is detached. Sight in that eye is usually lost.",
+        "hi": "स्टेज 5: पूरा रेटिना उखड़ गया है। उस आँख की नज़र आमतौर पर चली जाती है।"
+      },
+      {
+        "en": "[[plus-disease]]: wide, twisted vessels near the disc. It means the ROP is active and may need treatment.",
+        "hi": "[[plus-disease]]: डिस्क के पास चौड़ी, मुड़ी हुई नलियाँ। इसका मतलब है कि ROP सक्रिय है और इलाज चाहिए हो सकता है।"
+      }
+    ],
+    "analogy": {
+      "en": "Think of a crack in a wall. First there is a faint line, then a raised seam. Then weeds push out of it. At last the plaster peels off, first in part and then all of it.",
+      "hi": "दीवार की दरार के बारे में सोचें। पहले एक हल्की रेखा होती है, फिर उभरी हुई सीवन। फिर उसमें से घास निकलती है। आख़िर में प्लास्टर उखड़ता है, पहले थोड़ा और फिर पूरा।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Look at the border first: a flat line, a raised ridge, or fluffy new vessels.",
+      "hi": "पहले सीमा देखें: सपाट रेखा, उभरा हुआ उभार, या रुई जैसी नई नलियाँ।"
+    },
+    {
+      "en": "Then look near the disc. Wide, twisty vessels there mean plus disease.",
+      "hi": "फिर डिस्क के पास देखें। वहाँ चौड़ी, टेढ़ी नलियों का मतलब प्लस डिज़ीज़ है।"
+    },
+    {
+      "en": "Also note the zone, or how far back the disease sits. Disease near the disc, in zone I, is the most dangerous.",
+      "hi": "ज़ोन भी देखें, यानी बीमारी कितनी पीछे है। डिस्क के पास, ज़ोन I में, बीमारी सबसे ख़तरनाक है।"
+    },
+    {
+      "en": "Aggressive ROP can skip the usual stages and get worse within days.",
+      "hi": "एग्रेसिव ROP (aggressive ROP) सामान्य स्टेज छोड़कर कुछ ही दिनों में बिगड़ सकता है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Record the stage, zone and plus disease at every exam, in ICROP3 terms, so the next examiner can compare.",
+      "hi": "हर जाँच में स्टेज, ज़ोन और प्लस डिज़ीज़ ICROP3 शब्दों में लिखें, ताकि अगला डॉक्टर तुलना कर सके।"
+    },
+    {
+      "en": "The [[ophthalmologist]] decides treatment from the stage, zone and plus. Severe ROP is treated within days, with laser or [[anti-vegf]].",
+      "hi": "[[ophthalmologist]] स्टेज, ज़ोन और प्लस देखकर इलाज तय करते हैं। गंभीर ROP का इलाज कुछ ही दिनों में, लेज़र या [[anti-vegf]] से होता है।"
+    },
+    {
+      "en": "Stages 4 and 5 need retina surgery, and the results are often poor. Screening aims to treat before this.",
+      "hi": "स्टेज 4 और 5 में रेटिना की सर्जरी चाहिए, और नतीजे अक्सर अच्छे नहीं होते। जाँच का मक़सद इससे पहले इलाज करना है।"
+    }
+  ],
+  "remember": {
+    "en": "Line, ridge, new vessels, part off, all off: stages 1 to 5. Then check the disc vessels for plus.",
+    "hi": "रेखा, उभार, नई नलियाँ, थोड़ा उखड़ा, पूरा उखड़ा: स्टेज 1 से 5। फिर प्लस के लिए डिस्क की नलियाँ देखें।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "A raised ridge with new vessels growing from it into the vitreous is:",
+        "hi": "उभरा हुआ उभार, जिससे नई नलियाँ विट्रियस में उग रही हैं, है:"
+      },
+      "o": [
+        {
+          "en": "Stage 1",
+          "hi": "स्टेज 1"
+        },
+        {
+          "en": "Stage 2",
+          "hi": "स्टेज 2"
+        },
+        {
+          "en": "Stage 3",
+          "hi": "स्टेज 3"
+        },
+        {
+          "en": "Stage 4",
+          "hi": "स्टेज 4"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "New vessels growing out of the ridge define stage 3.",
+        "hi": "उभार से बाहर उगती नई नलियाँ स्टेज 3 की पहचान हैं।"
+      }
+    },
+    {
+      "q": {
+        "en": "Stage 4B means:",
+        "hi": "स्टेज 4B का मतलब है:"
+      },
+      "o": [
+        {
+          "en": "Partial detachment that includes the fovea",
+          "hi": "आंशिक डिटैचमेंट जिसमें फ़ोविया भी शामिल है"
+        },
+        {
+          "en": "Total detachment",
+          "hi": "पूरा डिटैचमेंट"
+        },
+        {
+          "en": "A flat white line",
+          "hi": "सपाट सफ़ेद रेखा"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Stage 4 is partial detachment. 4A spares the fovea, and 4B involves it.",
+        "hi": "स्टेज 4 आंशिक डिटैचमेंट है। 4A में फ़ोविया बचा रहता है, और 4B में वह भी शामिल है।"
+      }
+    },
+    {
+      "q": {
+        "en": "What is plus disease?",
+        "hi": "प्लस डिज़ीज़ क्या है?"
+      },
+      "o": [
+        {
+          "en": "Wide, twisted vessels near the disc",
+          "hi": "डिस्क के पास चौड़ी, मुड़ी नलियाँ"
+        },
+        {
+          "en": "A white pupil",
+          "hi": "सफ़ेद पुतली"
+        },
+        {
+          "en": "Bleeding in the vitreous",
+          "hi": "विट्रियस में खून"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Plus disease shows the ROP is active. It weighs heavily in the decision to treat.",
+        "hi": "प्लस डिज़ीज़ दिखाता है कि ROP सक्रिय है। इलाज के फ़ैसले में इसका बड़ा वज़न है।"
+      }
+    }
+  ],
+  "test": {
+    "clinic": "rop",
+    "classes": [
+      "s1",
+      "s2",
+      "s3",
+      "s4",
+      "s5"
+    ],
+    "mcqTopic": "peds"
+  },
+  "deeper": {
+    "note": "rop-classify"
+  },
+  "glossary": [
+    "rop",
+    "retinal-detachment",
+    "plus-disease",
+    "new-vessels",
+    "fovea",
+    "ophthalmologist",
+    "anti-vegf"
+  ],
+  "sources": [
+    "Chiang MF, Quinn GE, Fielder AR, et al. International Classification of Retinopathy of Prematurity, Third Edition. Ophthalmology 2021;128(10):e51-e68. doi:10.1016/j.ophtha.2021.05.031"
+  ]
+}

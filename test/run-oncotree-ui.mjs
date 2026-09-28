@@ -65,7 +65,7 @@ try {
   ok((await ev(`return (document.querySelector(".ot-step-title")||{}).textContent||"";`) || "").indexOf("Hormone receptor") >= 0, "HER2+ routes through the hormone-receptor question");
   await clickAct(`[data-ot-act="answer"][data-ot-opt="neg"]`);
   ok(Number(await ev(`return document.querySelectorAll(".ot-card").length;`)) > 0, "HER2-positive outcome shows applicable protocol cards");
-  ok(await ev(`return !!document.querySelector(".ot-badge.exp");`) === true, "protocol cards carry an unmistakable EXPERIMENTAL badge");
+  ok(await ev(`return !document.querySelector(".ot-badge.exp, .ot-badge.draft") && !/DRAFT|BETA/.test(document.querySelector(".ot-outcome").textContent||"");`) === true, "protocol cards carry no draft / Beta badge (owner decision 2026-09-28)");
   ok((await ev(`return document.querySelector(".ot-outcome").textContent||"";`) || "").toLowerCase().indexOf("her2-positive") >= 0, "outcome is the HER2-positive branch");
 
   // disabledBy explanation
@@ -77,7 +77,7 @@ try {
   // protocol detail
   await clickAct(`[data-ot-act="view-proto"]`);
   ok(await ev(`return !!document.querySelector(".ot-drugs");`) === true, "protocol detail shows the regimen table");
-  ok((await ev(`return document.querySelector(".ot-detail-warn").textContent||"";`) || "").indexOf("Verify against your institutional protocol") >= 0, "detail carries a DRAFT/AI-drafted verify-against-protocol warning");
+  ok((await ev(`return document.querySelector(".ot-detail-warn").textContent||"";`) || "").indexOf("Verify against your institutional protocol") >= 0, "detail carries the verify-against-protocol caveat");
 
   // select -> handoff
   await clickAct(`[data-ot-act="select-proto"]`);

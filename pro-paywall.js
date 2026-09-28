@@ -112,14 +112,16 @@
 
   function close() { if (_root) { try { _root.remove(); } catch (e) {} _root = null; document.body.style.overflow = ""; } }
 
+  // SMD-09: plan text uses the Apple system font (--pp-f), and the sheet stops below the status bar
+  // and Dynamic Island so the StewardMD Pro title is never cut off.
   function shell(inner) {
-    return '<div id="proPay" style="position:fixed;inset:0;z-index:760;background:rgba(6,14,20,.5);display:flex;align-items:flex-end;justify-content:center;font-family:var(--sans,system-ui)">' +
-      '<div role="dialog" aria-label="StewardMD Pro" style="background:var(--paper,#f6f7f5);color:var(--ink,#14202b);width:100%;max-width:520px;max-height:94vh;overflow:auto;border-radius:20px 20px 0 0;box-shadow:0 -12px 44px rgba(0,0,0,.28)">' + inner + '</div></div>';
+    return '<div id="proPay" style="--pp-f:-apple-system,BlinkMacSystemFont,\'SF Pro Text\',\'SF Pro Display\',system-ui,\'Helvetica Neue\',sans-serif;position:fixed;inset:0;z-index:760;background:rgba(6,14,20,.5);display:flex;align-items:flex-end;justify-content:center;font-family:var(--pp-f);-webkit-font-smoothing:antialiased">' +
+      '<div role="dialog" aria-label="StewardMD Pro" style="background:var(--paper,#f6f7f5);color:var(--ink,#14202b);width:100%;max-width:520px;max-height:calc(100vh - env(safe-area-inset-top, 0px) - 14px);max-height:calc(100dvh - env(safe-area-inset-top, 0px) - 14px);overflow:auto;border-radius:20px 20px 0 0;box-shadow:0 -12px 44px rgba(0,0,0,.28)">' + inner + '</div></div>';
   }
   function header(sub) {
     return '<div style="position:sticky;top:0;background:var(--paper,#f6f7f5);padding:16px 18px 8px;display:flex;align-items:flex-start;gap:10px;z-index:2">' +
-      '<div style="flex:1"><div style="font:800 20px var(--serif,Georgia,serif);color:var(--ink)">StewardMD <span style="color:var(--teal,#0e6e63)">Pro</span></div>' +
-      (sub ? '<div style="font:500 12.5px var(--sans);color:var(--slate-soft,#5a7184);margin-top:2px">' + sub + '</div>' : '') + '</div>' +
+      '<div style="flex:1"><div style="font:800 20px var(--pp-f);color:var(--ink)">StewardMD <span style="color:var(--teal,#0e6e63)">Pro</span></div>' +
+      (sub ? '<div style="font:500 12.5px var(--pp-f);color:var(--slate-soft,#5a7184);margin-top:2px">' + sub + '</div>' : '') + '</div>' +
       '<button data-pp="close" aria-label="Close" style="flex:none;width:34px;height:34px;border-radius:50%;border:none;background:var(--panel,#fff);color:var(--slate,#2d4356);font-size:18px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.1)">' + ppIco("close") + '</button></div>';
   }
   /* PRICING IS SERVER TRUTH. Every number below is derived from /api/billing/plans:
@@ -152,7 +154,7 @@
   function cycleToggle() {
     function seg(id, label) {
       var on = _cycle === id;
-      return '<button data-pp="cycle" data-cycle="' + id + '" aria-pressed="' + (on ? "true" : "false") + '" style="flex:1;min-height:44px;padding:9px 6px;border:none;border-radius:9px;background:' + (on ? "var(--teal,#0e6e63)" : "transparent") + ';color:' + (on ? "#fff" : "var(--slate,#2d4356)") + ';font:800 12.5px var(--sans);cursor:pointer">' + label + '</button>';
+      return '<button data-pp="cycle" data-cycle="' + id + '" aria-pressed="' + (on ? "true" : "false") + '" style="flex:1;min-height:44px;padding:9px 6px;border:none;border-radius:9px;background:' + (on ? "var(--teal,#0e6e63)" : "transparent") + ';color:' + (on ? "#fff" : "var(--slate,#2d4356)") + ';font:800 12.5px var(--pp-f);cursor:pointer">' + label + '</button>';
     }
     return '<div role="group" aria-label="Billing period" style="margin:8px 18px 6px;display:flex;gap:4px;background:var(--panel,#eef2f0);border:1px solid var(--line,#d7dee3);border-radius:11px;padding:3px">' + seg("monthly", "Monthly") + seg("annual", "Annual") + '</div>';
   }
@@ -162,21 +164,21 @@
     var badge = TIER_BADGE[id] || (t.popular ? "MOST POPULAR" : "");
     var note = TIER_NOTE[id] || "";
     return '<button data-pp="tier" data-tier="' + id + '" aria-pressed="' + (on ? "true" : "false") + '" style="width:100%;text-align:left;border:2px solid ' + (on ? "var(--teal,#0e6e63)" : "var(--line,#d7dee3)") + ';background:' + (on ? "var(--teal-soft,#e3f1ee)" : "var(--panel,#fff)") + ';border-radius:14px;padding:13px 13px 11px;cursor:pointer;position:relative;margin-bottom:10px">' +
-      (badge ? '<span style="position:absolute;top:-9px;left:12px;font:800 9px var(--sans);letter-spacing:.05em;color:#fff;background:' + (t.premium ? "var(--gold,#b9852a)" : "var(--teal,#0e6e63)") + ';border-radius:999px;padding:3px 9px">' + esc(badge) + '</span>' : '') +
+      (badge ? '<span style="position:absolute;top:-9px;left:12px;font:800 9px var(--pp-f);letter-spacing:.05em;color:#fff;background:' + (t.premium ? "var(--gold,#b9852a)" : "var(--teal,#0e6e63)") + ';border-radius:999px;padding:3px 9px">' + esc(badge) + '</span>' : '') +
       '<div style="display:flex;align-items:center;gap:8px">' +
-        '<div style="font:800 15px var(--sans);color:var(--ink);flex:1">' + esc(t.label) + (t.requiresVerify ? '<span style="font:600 10.5px var(--sans);color:var(--slate-soft)"> · verified trainee</span>' : '') + '</div>' +
-        (pct ? '<span style="flex:none;font:800 10px var(--sans);letter-spacing:.03em;color:var(--green,#1c7a4a);background:var(--green-bg,#e7f5ec);border:1px solid var(--green-line,#aedcc1);border-radius:999px;padding:3px 8px">SAVE ' + pct + '%</span>' : '') +
+        '<div style="font:800 15px var(--pp-f);color:var(--ink);flex:1">' + esc(t.label) + (t.requiresVerify ? '<span style="font:600 10.5px var(--pp-f);color:var(--slate-soft)"> · verified trainee</span>' : '') + '</div>' +
+        (pct ? '<span style="flex:none;font:800 10px var(--pp-f);letter-spacing:.03em;color:var(--green,#1c7a4a);background:var(--green-bg,#e7f5ec);border:1px solid var(--green-line,#aedcc1);border-radius:999px;padding:3px 8px">SAVE ' + pct + '%</span>' : '') +
       '</div>' +
       '<div style="display:flex;align-items:baseline;gap:8px;margin-top:5px">' +
-        '<span style="font:800 22px var(--serif,Georgia,serif);color:var(--ink)">' + inr(tierPrice(t)) + '</span>' +
-        '<span style="font:700 11.5px var(--sans);color:var(--slate-soft)">' + tierPer(t) + '</span>' +
-        (strike ? '<span style="font:600 12px var(--sans);color:var(--slate-soft);text-decoration:line-through">' + inr(strike) + '</span>' : '') +
+        '<span style="font:800 22px var(--pp-f);color:var(--ink)">' + inr(tierPrice(t)) + '</span>' +
+        '<span style="font:700 11.5px var(--pp-f);color:var(--slate-soft)">' + tierPer(t) + '</span>' +
+        (strike ? '<span style="font:600 12px var(--pp-f);color:var(--slate-soft);text-decoration:line-through">' + inr(strike) + '</span>' : '') +
       '</div>' +
-      '<div style="font:700 13px/1.4 var(--sans);color:var(--teal,#0e6e63);margin-top:4px">' + esc(perDayLine(id, t)) + '</div>' +
-      (spendLine(id, t) ? '<div style="font:600 11.5px/1.4 var(--sans);color:var(--slate,#2d4356);margin-top:3px">' + esc(spendLine(id, t)) + '</div>' : '') +
-      (TIER_BENEFIT[id] ? '<div style="font:700 12px/1.45 var(--sans);color:var(--ink);margin-top:4px">' + esc(TIER_BENEFIT[id]) + '</div>' : '') +
-      (note ? '<div style="font:600 11px/1.4 var(--sans);color:var(--slate,#2d4356);margin-top:2px">' + esc(note) + '</div>' : '') +
-      '<div style="font:500 11.5px/1.45 var(--sans);color:var(--slate-soft);margin-top:5px">' + esc(TIER_BLURB[id] || "") + '</div>' +
+      '<div style="font:700 13px/1.4 var(--pp-f);color:var(--teal,#0e6e63);margin-top:4px">' + esc(perDayLine(id, t)) + '</div>' +
+      (spendLine(id, t) ? '<div style="font:600 11.5px/1.4 var(--pp-f);color:var(--slate,#2d4356);margin-top:3px">' + esc(spendLine(id, t)) + '</div>' : '') +
+      (TIER_BENEFIT[id] ? '<div style="font:700 12px/1.45 var(--pp-f);color:var(--ink);margin-top:4px">' + esc(TIER_BENEFIT[id]) + '</div>' : '') +
+      (note ? '<div style="font:600 11px/1.4 var(--pp-f);color:var(--slate,#2d4356);margin-top:2px">' + esc(note) + '</div>' : '') +
+      '<div style="font:500 11.5px/1.45 var(--pp-f);color:var(--slate-soft);margin-top:5px">' + esc(TIER_BLURB[id] || "") + '</div>' +
       '</button>';
   }
 
@@ -187,8 +189,8 @@
   // does not open on the two cheapest cards.
   function moreTiersLink() {
     if (!TIER_QUIET.filter(function (id) { return tierOf(id); }).length) return "";
-    if (_showAll) return '<div style="padding:0 18px 4px;font:600 11px var(--sans);color:var(--slate-soft)">Trainee and resident plans need a verified registration.</div>';
-    return '<div style="padding:0 18px 10px"><button data-pp="showall" style="width:100%;min-height:44px;background:none;border:none;padding:6px;font:700 12.5px var(--sans);color:var(--teal,#0e6e63);text-decoration:underline;cursor:pointer;text-align:center">I\u2019m a student or resident</button></div>';
+    if (_showAll) return '<div style="padding:0 18px 4px;font:600 11px var(--pp-f);color:var(--slate-soft)">Trainee and resident plans need a verified registration.</div>';
+    return '<div style="padding:0 18px 10px"><button data-pp="showall" style="width:100%;min-height:44px;background:none;border:none;padding:6px;font:700 12.5px var(--pp-f);color:var(--teal,#0e6e63);text-decoration:underline;cursor:pointer;text-align:center">I\u2019m a student or resident</button></div>';
   }
 
   /* Onco add-on: available on EVERY tier, because browsing oncology is free for everyone and the
@@ -200,25 +202,25 @@
     var trialDays = +(a.trialDays || 0);
     return '<div style="margin:2px 18px 10px;padding:12px 13px;border:1px solid var(--line,#d7dee3);border-radius:12px;background:var(--panel,#fff)">' +
       '<div style="display:flex;align-items:center;gap:8px">' + ppIco("plus") +
-      '<div style="flex:1;font:800 13px var(--sans);color:var(--ink)">Oncology AI add-on</div>' +
-      '<div style="font:800 13px var(--sans);color:var(--ink)">+' + inr(a.amount) + '<span style="font:600 10.5px var(--sans);color:var(--slate-soft)">/month</span></div></div>' +
-      '<div style="font:500 11.5px/1.5 var(--sans);color:var(--slate-soft);margin-top:5px">Protocols, staging and toxicity are free on every plan. This adds the AI that reads the evidence with you: evidence overlay, protocol recommendations and higher onco AI limits.' +
+      '<div style="flex:1;font:800 13px var(--pp-f);color:var(--ink)">Oncology AI add-on</div>' +
+      '<div style="font:800 13px var(--pp-f);color:var(--ink)">+' + inr(a.amount) + '<span style="font:600 10.5px var(--pp-f);color:var(--slate-soft)">/month</span></div></div>' +
+      '<div style="font:500 11.5px/1.5 var(--pp-f);color:var(--slate-soft);margin-top:5px">Protocols, staging and toxicity are free on every plan. This adds the AI that reads the evidence with you: evidence overlay, protocol recommendations and higher onco AI limits.' +
       (trialDays ? ' Everyone gets a ' + trialDays + '-day trial first.' : '') + '</div>' +
-      '<div style="font:700 12px var(--sans);color:var(--teal,#0e6e63);margin-top:4px">' + esc("₹" + Math.round((a.amount / 100) / 30).toLocaleString("en-IN") + " a day.") + (ADDON_SPEND.onco ? ' <span style="font:600 11.5px var(--sans);color:var(--slate,#2d4356)">' + esc(ADDON_SPEND.onco) + '</span>' : '') + '</div>' +
-      '<button data-pp="buy-addon" data-addon="onco" style="margin-top:9px;width:100%;min-height:44px;border:1.5px solid var(--teal,#0e6e63);background:transparent;color:var(--teal,#0e6e63);border-radius:10px;padding:10px;font:800 12.5px var(--sans);cursor:pointer">Add to any plan</button></div>';
+      '<div style="font:700 12px var(--pp-f);color:var(--teal,#0e6e63);margin-top:4px">' + esc("₹" + Math.round((a.amount / 100) / 30).toLocaleString("en-IN") + " a day.") + (ADDON_SPEND.onco ? ' <span style="font:600 11.5px var(--pp-f);color:var(--slate,#2d4356)">' + esc(ADDON_SPEND.onco) + '</span>' : '') + '</div>' +
+      '<button data-pp="buy-addon" data-addon="onco" style="margin-top:9px;width:100%;min-height:44px;border:1.5px solid var(--teal,#0e6e63);background:transparent;color:var(--teal,#0e6e63);border-radius:10px;padding:10px;font:800 12.5px var(--pp-f);cursor:pointer">Add to any plan</button></div>';
   }
 
   function tokenStore() {
     var tk = _plans && _plans.tokens; if (!tk) return "";
     var packs = ["boost", "plus", "power"].filter(function (k) { return tk[k]; });
     if (!packs.length) return "";
-    return '<div style="padding:8px 18px 4px"><div style="font:800 13px var(--serif,Georgia,serif);color:var(--ink)">MaiK Token top-ups</div>' +
-      '<div style="font:500 11px var(--sans);color:var(--slate-soft);margin:2px 0 8px">One wallet for all AI. Buy once, spend on anything.</div>' +
+    return '<div style="padding:8px 18px 4px"><div style="font:800 13px var(--pp-f);color:var(--ink)">MaiK Token top-ups</div>' +
+      '<div style="font:500 11px var(--pp-f);color:var(--slate-soft);margin:2px 0 8px">One wallet for all AI. Buy once, spend on anything.</div>' +
       '<div style="display:flex;gap:8px">' + packs.map(function (k) {
         var p = tk[k], strike = (p.regular && p.regular > p.amount) ? p.regular : 0;
         return '<button data-pp="token" data-pack="' + k + '" style="flex:1;text-align:left;border:2px solid ' + (p.popular ? "var(--teal,#0e6e63)" : "var(--line,#d7dee3)") + ';border-radius:12px;padding:10px;background:var(--panel,#fff);cursor:pointer">' +
-          '<div style="font:800 15px var(--sans);color:var(--ink)">' + (p.mt >= 1000000 ? (p.mt / 1000000) + "M" : Math.round(p.mt / 1000) + "k") + '</div><div style="font:500 9px var(--sans);color:var(--slate-soft)">MaiK Tokens</div>' +
-          '<div style="margin-top:5px">' + (strike ? '<span style="font:600 10px var(--sans);color:var(--slate-soft);text-decoration:line-through">' + inr(strike) + '</span> ' : '') + '<span style="font:800 13px var(--sans);color:var(--teal,#0e6e63)">' + inr(p.amount) + '</span></div></button>';
+          '<div style="font:800 15px var(--pp-f);color:var(--ink)">' + (p.mt >= 1000000 ? (p.mt / 1000000) + "M" : Math.round(p.mt / 1000) + "k") + '</div><div style="font:500 9px var(--pp-f);color:var(--slate-soft)">MaiK Tokens</div>' +
+          '<div style="margin-top:5px">' + (strike ? '<span style="font:600 10px var(--pp-f);color:var(--slate-soft);text-decoration:line-through">' + inr(strike) + '</span> ' : '') + '<span style="font:800 13px var(--pp-f);color:var(--teal,#0e6e63)">' + inr(p.amount) + '</span></div></button>';
       }).join("") + '</div></div>';
   }
   /* Sticky CTA. It always states exactly what the tap does: the tier, the amount, and the period,
@@ -235,21 +237,21 @@
     return '<div style="position:sticky;bottom:0;z-index:3;background:var(--paper,#f6f7f5);border-top:1px solid var(--line,#d7dee3);padding:10px 18px calc(12px + env(safe-area-inset-bottom,0px))">' + inner + '</div>';
   }
   function ctaBlock() {
-    if (!fbUser()) return ctaBar('<button data-pp="signin" style="width:100%;min-height:48px;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--sans);cursor:pointer">Sign in to subscribe</button>');
-    if (plat() === "ios" && !iosNativeIap()) return ctaBar('<button disabled style="width:100%;min-height:48px;padding:14px;border:none;border-radius:13px;background:var(--line,#d7dee3);color:var(--slate,#2d4356);font:800 14px var(--sans)">Subscriptions coming soon on iOS</button>');
+    if (!fbUser()) return ctaBar('<button data-pp="signin" style="width:100%;min-height:48px;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--pp-f);cursor:pointer">Sign in to subscribe</button>');
+    if (plat() === "ios" && !iosNativeIap()) return ctaBar('<button disabled style="width:100%;min-height:48px;padding:14px;border:none;border-radius:13px;background:var(--line,#d7dee3);color:var(--slate,#2d4356);font:800 14px var(--pp-f)">Subscriptions coming soon on iOS</button>');
     var t = tierOf(_tier);
     var via = plat() === "ios" ? "the App Store" : "PhonePe \u00b7 UPI / cards / netbanking";
-    return ctaBar('<button data-pp="buy" style="width:100%;min-height:48px;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 14.5px var(--sans);cursor:pointer">' + esc(ctaLabel()) + '</button>' +
-      '<div style="font:500 10.5px/1.5 var(--sans);color:var(--slate-soft);text-align:center;margin-top:6px">Cancel anytime' + (t ? " \u00b7 " + esc(perDayTxt(t)) : "") + '<br>Secure payment via ' + via + '</div>');
+    return ctaBar('<button data-pp="buy" style="width:100%;min-height:48px;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 14.5px var(--pp-f);cursor:pointer">' + esc(ctaLabel()) + '</button>' +
+      '<div style="font:500 10.5px/1.5 var(--pp-f);color:var(--slate-soft);text-align:center;margin-top:6px">Cancel anytime' + (t ? " \u00b7 " + esc(perDayTxt(t)) : "") + '<br>Secure payment via ' + via + '</div>');
   }
 
   // Institution coupon redeem — a doctor whose hospital paid enters the code to unlock Pro.
   function redeemBlock() {
     return '<div style="padding:2px 18px 22px"><div style="border-top:1px solid var(--line,#d7dee3);padding-top:12px">' +
-      '<div style="font:700 12.5px var(--sans);color:var(--slate,#2d4356);margin-bottom:7px">Have an institution code?</div>' +
-      '<div style="display:flex;gap:8px"><input id="pp-code" placeholder="Enter code" autocapitalize="characters" spellcheck="false" style="flex:1;padding:11px 12px;border:1.5px solid var(--line,#d7dee3);border-radius:11px;font:600 14px var(--sans);letter-spacing:.06em;text-transform:uppercase;background:var(--panel,#fff);color:var(--ink)">' +
-      '<button data-pp="redeem" style="flex:none;padding:11px 16px;border:none;border-radius:11px;background:var(--slate,#2d4356);color:#fff;font:800 13px var(--sans);cursor:pointer">Redeem</button></div>' +
-      '<div id="pp-code-msg" style="font:600 11.5px var(--sans);margin-top:6px;min-height:14px"></div></div></div>';
+      '<div style="font:700 12.5px var(--pp-f);color:var(--slate,#2d4356);margin-bottom:7px">Have an institution code?</div>' +
+      '<div style="display:flex;gap:8px"><input id="pp-code" placeholder="Enter code" autocapitalize="characters" spellcheck="false" style="flex:1;padding:11px 12px;border:1.5px solid var(--line,#d7dee3);border-radius:11px;font:600 14px var(--pp-f);letter-spacing:.06em;text-transform:uppercase;background:var(--panel,#fff);color:var(--ink)">' +
+      '<button data-pp="redeem" style="flex:none;padding:11px 16px;border:none;border-radius:11px;background:var(--slate,#2d4356);color:#fff;font:800 13px var(--pp-f);cursor:pointer">Redeem</button></div>' +
+      '<div id="pp-code-msg" style="font:600 11.5px var(--pp-f);margin-top:6px;min-height:14px"></div></div></div>';
   }
   function redeem() {
     var inp = _root && _root.querySelector("#pp-code"), msg = _root && _root.querySelector("#pp-code-msg");
@@ -279,8 +281,8 @@
     var promoOn = _status && _status.promo;
     var isPaid = _status && _status.pro && !promoOn;
     var banner = "";
-    if (promoOn) banner = '<div style="margin:6px 18px 4px;padding:11px 13px;border-radius:12px;background:var(--green-bg,#e7f5ec);border:1px solid var(--green-line,#aedcc1);font:600 12.5px/1.5 var(--sans);color:var(--green,#1c7a4a)">' + ppIco("spark") + ' Launch period: Pro is <b>free for everyone until ' + esc(fdate(_status.promoUntil || _status.until)) + '</b>. Subscribe anytime to keep it after.</div>';
-    else if (isPaid) banner = '<div style="margin:6px 18px 4px;padding:11px 13px;border-radius:12px;background:var(--teal-soft,#e3f1ee);border:1px solid var(--teal,#0e6e63);font:700 12.5px var(--sans);color:var(--teal,#0e6e63)">' + ppIco("check") + ' Pro active' + (_status.until ? ' until ' + esc(fdate(_status.until)) : '') + '. Thank you!</div>';
+    if (promoOn) banner = '<div style="margin:6px 18px 4px;padding:11px 13px;border-radius:12px;background:var(--green-bg,#e7f5ec);border:1px solid var(--green-line,#aedcc1);font:600 12.5px/1.5 var(--pp-f);color:var(--green,#1c7a4a)">' + ppIco("spark") + ' Launch period: Pro is <b>free for everyone until ' + esc(fdate(_status.promoUntil || _status.until)) + '</b>. Subscribe anytime to keep it after.</div>';
+    else if (isPaid) banner = '<div style="margin:6px 18px 4px;padding:11px 13px;border-radius:12px;background:var(--teal-soft,#e3f1ee);border:1px solid var(--teal,#0e6e63);font:700 12.5px var(--pp-f);color:var(--teal,#0e6e63)">' + ppIco("check") + ' Pro active' + (_status.until ? ' until ' + esc(fdate(_status.until)) : '') + '. Thank you!</div>';
 
     var ios = plat() === "ios", body;
     if (_plans && _plans.tiers) {
@@ -291,7 +293,7 @@
         (_showAll ? '<div style="padding:0 18px 2px">' + cardsFor(TIER_QUIET) + '</div>' : "") +
         moreTiersLink() + addonRow() + tokenStore();
     } else {
-      body = '<div style="padding:20px 18px;text-align:center;color:var(--slate-soft);font:500 13px var(--sans)">Loading plans…</div>';
+      body = '<div style="padding:20px 18px;text-align:center;color:var(--slate-soft);font:500 13px var(--pp-f)">Loading plans…</div>';
     }
     var sub = promoOn ? "Everything unlocked, free until the launch period ends" : (isPaid ? "You’re a Pro member" : "Choose your plan");
     // The CTA is LAST in the DOM so position:sticky pins it to the bottom of the scrolling sheet.
@@ -445,7 +447,7 @@
       return;
     }
     var div = document.createElement("div");
-    div.innerHTML = shell(header("") + '<div style="padding:40px;text-align:center;color:var(--slate-soft);font:500 13px var(--sans)">Loading…</div>');
+    div.innerHTML = shell(header("") + '<div style="padding:40px;text-align:center;color:var(--slate-soft);font:500 13px var(--pp-f)">Loading…</div>');
     _root = div.firstChild; document.body.appendChild(_root); document.body.style.overflow = "hidden";
     _root.querySelector('[data-pp="close"]').onclick = close;
     loadAndPaint();
@@ -462,7 +464,7 @@
     var title = info.feature === "scribe" ? "MaiK Voice Scribe consults" : info.feature === "msg" ? "Clinic Messaging" : info.feature === "dict" ? "Dictation credits" : "Patient credits";
     var unitWord = info.feature === "scribe" ? "consults" : info.feature === "dict" ? "credits" : "patients";
     var lines = (c.lines || []).map(function (t) {
-      return '<div style="font:500 13px/1.6 var(--sans);color:var(--slate,#2d4356);margin-top:4px">' + esc(t) + '</div>';
+      return '<div style="font:500 13px/1.6 var(--pp-f);color:var(--slate,#2d4356);margin-top:4px">' + esc(t) + '</div>';
     }).join("");
     /* ANTI-STEERING: on iOS the store price is the ONLY price that may appear, and no stewardmd.in
      * purchase link may appear at all. Not a style choice - in the India storefront a "cheaper on the
@@ -474,7 +476,7 @@
      * functions/_quota.js COMPARE, keyed by pack / tier, so there is exactly one place to edit it and
      * a price with no line renders nothing rather than getting one invented for it here. */
     var cmp = function (t) {
-      return t ? '<div data-pp-compare="1" style="margin-top:5px;font:500 9.5px/1.35 var(--sans);color:var(--slate-soft)">' + esc(t) + '</div>' : '';
+      return t ? '<div data-pp-compare="1" style="margin-top:5px;font:500 9.5px/1.35 var(--pp-f);color:var(--slate-soft)">' + esc(t) + '</div>' : '';
     };
     /* Clinic Messaging subscriptions. Same anti-steering gate as the packs: on iOS the store price is
      * the only price that may render, and no stewardmd.in link may render at all. */
@@ -482,30 +484,30 @@
       var web = webOk && t.webAmount > 0 && t.webAmount < t.amount ? t.webAmount : 0;
       return '<button data-pp="msgtier" data-msgtier="' + esc(t.key) + '" style="width:100%;text-align:left;border:2px solid ' + (t.popular ? "var(--teal,#0e6e63)" : "var(--line,#d7dee3)") + ';border-radius:12px;padding:11px 13px;background:var(--panel,#fff);cursor:pointer;margin-top:8px">' +
         '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px">' +
-        '<div style="font:800 14px var(--sans);color:var(--ink)">' + esc(t.label) + '</div>' +
-        '<div style="font:800 14px var(--sans);color:var(--teal,#0e6e63)">' + inr(web || t.amount) + '<span style="font:600 10px var(--sans);color:var(--slate-soft)"> a month</span></div>' +
+        '<div style="font:800 14px var(--pp-f);color:var(--ink)">' + esc(t.label) + '</div>' +
+        '<div style="font:800 14px var(--pp-f);color:var(--teal,#0e6e63)">' + inr(web || t.amount) + '<span style="font:600 10px var(--pp-f);color:var(--slate-soft)"> a month</span></div>' +
         '</div>' +
-        '<div style="margin-top:3px;font:500 11.5px/1.45 var(--sans);color:var(--slate,#2d4356)">' + esc(t.units) + ' patients a month. ' + esc(t.line || "") + '</div>' +
+        '<div style="margin-top:3px;font:500 11.5px/1.45 var(--pp-f);color:var(--slate,#2d4356)">' + esc(t.units) + ' patients a month. ' + esc(t.line || "") + '</div>' +
         cmp(t.compare) +
         '</button>';
     }).join("");
     var cards = packs.map(function (p) {
       var web = webOk && p.webAmount > 0 && p.webAmount < p.amount ? p.webAmount : 0;
       return '<button data-pp="qpack" data-qpack="' + esc(p.key) + '" style="flex:1;text-align:left;border:2px solid ' + (p.popular ? "var(--teal,#0e6e63)" : "var(--line,#d7dee3)") + ';border-radius:12px;padding:11px;background:var(--panel,#fff);cursor:pointer">' +
-        '<div style="font:800 17px var(--sans);color:var(--ink)">' + esc(p.units) + '</div>' +
-        '<div style="font:500 9.5px var(--sans);color:var(--slate-soft)">' + unitWord + '</div>' +
-        '<div style="margin-top:6px;font:800 13px var(--sans);color:var(--teal,#0e6e63)">' + inr(web || p.amount) + '</div>' +
-        (p.perUnit > 0 ? '<div style="font:500 9.5px var(--sans);color:var(--slate-soft)">' + esc("₹" + (web ? Math.round(web / 100 / p.units) : p.perUnit)) + ' each</div>' : '') +
+        '<div style="font:800 17px var(--pp-f);color:var(--ink)">' + esc(p.units) + '</div>' +
+        '<div style="font:500 9.5px var(--pp-f);color:var(--slate-soft)">' + unitWord + '</div>' +
+        '<div style="margin-top:6px;font:800 13px var(--pp-f);color:var(--teal,#0e6e63)">' + inr(web || p.amount) + '</div>' +
+        (p.perUnit > 0 ? '<div style="font:500 9.5px var(--pp-f);color:var(--slate-soft)">' + esc("₹" + (web ? Math.round(web / 100 / p.units) : p.perUnit)) + ' each</div>' : '') +
         cmp(p.compare) +
         '</button>';
     }).join("");
     var inner = header(title) +
-      (c.alert ? '<div style="padding:6px 18px 0"><div style="padding:11px 13px;border-radius:12px;background:var(--amber-bg,#fff4e0);border:1px solid var(--amber-line,#f0d090);font:700 12.5px/1.5 var(--sans);color:var(--ink)">' + esc(c.alert) + '</div></div>' : '') +
-      '<div style="padding:6px 18px 2px"><div style="font:800 17px/1.4 var(--serif,Georgia,serif);color:var(--ink)">' + esc(c.headline || "") + '</div>' + lines + '</div>' +
-      (c.price ? '<div style="padding:10px 18px 2px"><div style="padding:11px 13px;border-radius:12px;background:var(--teal-soft,#e3f1ee);border:1px solid var(--teal,#0e6e63);font:700 13px/1.5 var(--sans);color:var(--teal,#0e6e63)">' + esc(c.price) + '</div></div>' : '') +
+      (c.alert ? '<div style="padding:6px 18px 0"><div style="padding:11px 13px;border-radius:12px;background:var(--amber-bg,#fff4e0);border:1px solid var(--amber-line,#f0d090);font:700 12.5px/1.5 var(--pp-f);color:var(--ink)">' + esc(c.alert) + '</div></div>' : '') +
+      '<div style="padding:6px 18px 2px"><div style="font:800 17px/1.4 var(--pp-f);color:var(--ink)">' + esc(c.headline || "") + '</div>' + lines + '</div>' +
+      (c.price ? '<div style="padding:10px 18px 2px"><div style="padding:11px 13px;border-radius:12px;background:var(--teal-soft,#e3f1ee);border:1px solid var(--teal,#0e6e63);font:700 13px/1.5 var(--pp-f);color:var(--teal,#0e6e63)">' + esc(c.price) + '</div></div>' : '') +
       (tiers ? '<div style="padding:8px 18px 2px">' + tiers + '</div>' : '') +
       (cards ? '<div style="padding:12px 18px 2px;display:flex;gap:8px">' + cards + '</div>' : '') +
-      '<div style="padding:10px 18px 22px;font:500 11.5px/1.5 var(--sans);color:var(--slate-soft);text-align:center">' + esc(c.expiry || "") + '</div>';
+      '<div style="padding:10px 18px 22px;font:500 11.5px/1.5 var(--pp-f);color:var(--slate-soft);text-align:center">' + esc(c.expiry || "") + '</div>';
     var div = document.createElement("div");
     div.innerHTML = shell(inner);
     _root = div.firstChild; document.body.appendChild(_root); document.body.style.overflow = "hidden";
@@ -520,10 +522,10 @@
     var mt = (typeof info.creditsMt === "number") ? info.creditsMt : ((typeof info.credits === "number") ? Math.round(info.credits * 2000) : null);
     var msg = info.message || "You've used today's MaiK Tokens.";
     var inner = header("Today's MaiK Tokens are used up") +
-      '<div style="padding:6px 18px 4px"><div style="padding:13px 14px;border-radius:12px;background:var(--amber-bg,#fff4e0);border:1px solid var(--amber-line,#f0d090);font:600 13px/1.6 var(--sans);color:var(--ink)">' + ppIco("bell") + ' ' + esc(msg) + '</div></div>' +
-      '<div style="padding:8px 18px 2px;font:500 12.5px/1.6 var(--sans);color:var(--slate-soft)">Your allowance resets at <b>' + esc(resetTxt) + '</b>.' + (mt != null ? ' MaiK Token balance: <b>' + esc(mt.toLocaleString("en-IN")) + '</b>.' : '') + '</div>' +
-      '<div style="padding:14px 18px 22px"><button data-pp="ailimit-upgrade" style="width:100%;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--sans);cursor:pointer">Add MaiK Tokens or upgrade</button>' +
-      '<div style="font:500 11.5px/1.5 var(--sans);color:var(--slate-soft);text-align:center;margin-top:8px">Or wait for the daily reset. No charge.</div></div>';
+      '<div style="padding:6px 18px 4px"><div style="padding:13px 14px;border-radius:12px;background:var(--amber-bg,#fff4e0);border:1px solid var(--amber-line,#f0d090);font:600 13px/1.6 var(--pp-f);color:var(--ink)">' + ppIco("bell") + ' ' + esc(msg) + '</div></div>' +
+      '<div style="padding:8px 18px 2px;font:500 12.5px/1.6 var(--pp-f);color:var(--slate-soft)">Your allowance resets at <b>' + esc(resetTxt) + '</b>.' + (mt != null ? ' MaiK Token balance: <b>' + esc(mt.toLocaleString("en-IN")) + '</b>.' : '') + '</div>' +
+      '<div style="padding:14px 18px 22px"><button data-pp="ailimit-upgrade" style="width:100%;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--pp-f);cursor:pointer">Add MaiK Tokens or upgrade</button>' +
+      '<div style="font:500 11.5px/1.5 var(--pp-f);color:var(--slate-soft);text-align:center;margin-top:8px">Or wait for the daily reset. No charge.</div></div>';
     var div = document.createElement("div");
     div.innerHTML = shell(inner);
     _root = div.firstChild; document.body.appendChild(_root); document.body.style.overflow = "hidden";

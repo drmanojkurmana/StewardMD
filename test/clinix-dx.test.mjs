@@ -153,9 +153,12 @@ test("every shipped case is passable by its own model differential", () => {
     if (!accept.length) continue;
     // Take the model answer down to a focused list: the first few terms plus the true diagnosis.
     const picks = [];
+    // Each term as the vocabulary entry a student would actually pick: the entry it names, or for
+    // an umbrella term ("malignancy", "tuberculosis") the first member of its family. Picking the
+    // raw fragment ("gi bleed") is not something the picker lets a student do.
     for (const t of accept) {
       const e = DX.findByTerm(VOCAB, t);
-      const name = e ? e.n : t;
+      const name = e ? e.n : (DX.conceptsFor(VOCAB, t, { differential: true })[0] || t);
       if (!picks.some((p) => p.toLowerCase() === name.toLowerCase())) picks.push(name);
       if (picks.length >= 4) break;
     }
@@ -166,7 +169,7 @@ test("every shipped case is passable by its own model differential", () => {
       if (!picks.some((p) => p.toLowerCase() === name.toLowerCase())) picks.push(name);
     }
     const r = DX.scoreDifferential(c, picks, VOCAB);
-    if (!r.correct) failures.push(`${id}: picked [${picks.join(", ")}] -> matched ${r.matched.length}/${r.need}, ` +
+    if (!r.correct) failures.push(`${id}: picked [${picks.join(", ")}] -> ideas ${r.ideas}/${r.need}, ` +
       `truth ${r.hasTruth}, shotgun ${r.shotgun}, missed [${r.missed.join(", ")}]`);
   }
   assert.deepEqual(failures, [], "a case the author's own answer cannot pass is a content bug");

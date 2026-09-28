@@ -108,6 +108,11 @@ try {
   ok(/SAVE 58%/.test(phyA), "SAVE 58% computed from regular");
   ok(/₹21 a day\. Less than a samosa, and it runs your clinic\./.test(phyA), "per-day hero line, annual");
   ok(/Runs your clinic: queue, billing, recovery calls, and notes that think with you\./.test(phyA), "benefit line");
+  // SMD-09: every piece of text on the plans sheet uses the Apple system font (no serif prices or title),
+  // and the sheet is capped below the status bar / Dynamic Island (safe-area aware).
+  const fonts = await ev(`var bad=[];document.querySelectorAll("#proPay *").forEach(function(e){if(!e.childNodes.length||![].some.call(e.childNodes,function(n){return n.nodeType===3&&n.textContent.trim()}))return;var f=getComputedStyle(e).fontFamily;if(!/-apple-system|system-ui/.test(f)||/Georgia|serif\b(?!-)/i.test(f.replace(/sans-serif/g,"")))bad.push(e.textContent.trim().slice(0,20)+": "+f)});return JSON.stringify(bad.slice(0,4))`);
+  ok(fonts === "[]", "SMD-09 all plan text uses the Apple system font: " + fonts);
+  ok(await ev(`var d=document.querySelector("#proPay [role=dialog]");return /safe-area-inset-top/.test(d.getAttribute("style"))&&d.getBoundingClientRect().top>=10`) === true, "SMD-09 the sheet stops below the status bar (safe-area aware max height)");
   ok(/MaiK Voice Scribe writes the note, then offers the differentials worth considering\./.test(phyA), "second line");
   ok(/Subscribe to Physician · ₹7,490\/year/.test(String(await ctaText())), "CTA: " + JSON.stringify(await ctaText()));
   ok(/Less than one family dinner a month\./.test(phyA), "everyday-spend line, yearly");

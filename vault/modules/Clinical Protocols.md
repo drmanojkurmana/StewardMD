@@ -1,6 +1,6 @@
 ---
 tags: [module, kb, clinical-content]
-status: built 2026-09-25 (flag ON). Content ai_drafted, PENDING clinical review.
+status: built 2026-09-25 (flag ON). Content ai_drafted; no draft/pending note on screen (owner decision 2026-09-28).
 flag: smd_kb_protocols (client, def:true, ?kbproto=0 hides it)
 ---
 # Clinical Protocols (Knowledge Library "Protocols" tab)

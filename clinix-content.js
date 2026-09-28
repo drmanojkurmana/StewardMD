@@ -25,11 +25,13 @@
   function flag(k) { var f = flags(); return !!(f && f.bool(k)); }
   function model() { try { return G.SMD_CLINIX_MODEL || null; } catch (e) { return null; } }
 
-  // Author-mode options. Released to open by owner decision 2026-09-26: defaults to true unless explicitly false.
+  // Owner, 2026-09-27/28: "Don't lock anything behind draft". Draft content ALWAYS renders, with its
+  // "Draft, pending clinician review" line. The smd_clinix_draft flag no longer hides anything: a
+  // device that had it switched off (an old author-mode toggle) showed "Awaiting clinical review"
+  // on every pathway. Only `deprecated` content is withheld (clinix-model.js isRenderable).
   function gateOpts() {
-    var f = flags();
     return {
-      allowDraft: f ? f.bool("smd_clinix_draft") : true,
+      allowDraft: true,
       allowUncleared: flag("smd_clinix_uncleared_media")
     };
   }
@@ -71,7 +73,10 @@
   function loadCatalog() {
     if (cache.catalog) return Promise.resolve(cache.catalog);
     return getJSON("manifest.json", { noVersion: true, fresh: true }).then(function (j) {
-      cache.catalog = j || { contentVersion: "", systems: [], skillPacks: [] };
+      // A failed fetch is NOT cached: the stub is returned for this call only, so the next open
+      // after the network recovers fetches the real catalog instead of an empty one forever.
+      if (!j) return { contentVersion: "", systems: [], skillPacks: [], _failed: true };
+      cache.catalog = j;
       return cache.catalog;
     });
   }
@@ -81,7 +86,8 @@
     if (cache.media) return Promise.resolve(cache.media);
     return loadCatalog().then(function () {
       return getJSON("media/manifest.json").then(function (j) {
-        cache.media = (j && j.media) || {};
+        if (!j || !j.media) return null;   // not cached: retried on the next load
+        cache.media = j.media;
         return cache.media;
       });
     });
@@ -108,7 +114,8 @@
       for (var i = 0; i < list.length; i++) if (list[i].id === id) entry = list[i];
       if (!entry) return null;
       return getJSON(entry.file).then(function (j) {
-        cache.packs[id] = (j && j.skills) || {};
+        if (!j || !j.skills) return null;   // not cached: retried on the next load
+        cache.packs[id] = j.skills;
         return cache.packs[id];
       });
     });
@@ -150,11 +157,14 @@
 
       return Promise.all(jobs).then(function (res) {
         var disease = res[0];
-        var media = res[1] || {};
-        if (!disease) return null;
+        var media = res[1];
+        // Every part or nothing: a missing pack paints empty chapters, and a missing media registry
+        // gates every figure. Neither is cached, so the next open retries the whole set.
+        if (!disease || !media) return null;
+        for (var r = 2; r < res.length; r++) if (!res[r]) return null;
 
         var skills = {};
-        for (var k = 2; k < res.length; k++) if (res[k]) copyInto(skills, res[k]);
+        for (var k = 2; k < res.length; k++) copyInto(skills, res[k]);
         // Disease-local skills win, so a disease can specialise a shared skill id if it ever needs to.
         if (disease.skills) copyInto(skills, disease.skills);
 
@@ -184,14 +194,16 @@
   function loadAllSkills(pro) {
     return loadCatalog().then(function (cat) {
       var M = model();
-      var packs = M ? M.openPackIds(cat, !!pro) : (cat.skillPacks || []).map(function (p) { return p.id; });
+      if (!M) return null;   // the Pro lock lives in the model: no model, no packs (fails closed)
+      var packs = M.openPackIds(cat, !!pro);
       var key = packs.join(",");
       if (_allCache && _allCache.key === key) return _allCache;
       var jobs = [loadMedia()];
       for (var i = 0; i < packs.length; i++) jobs.push(loadPack(packs[i]));
       return Promise.all(jobs).then(function (res) {
-        var media = res[0] || {}, skills = {};
-        for (var k = 1; k < res.length; k++) if (res[k]) copyInto(skills, res[k]);
+        var media = res[0], skills = {};
+        if (!media) return null;
+        for (var k = 1; k < res.length; k++) { if (!res[k]) return null; copyInto(skills, res[k]); }
         _allCache = { key: key, disease: null, system: null, skills: skills, media: media };
         return _allCache;
       });
@@ -351,26 +363,32 @@
 
   /* ── Presentations (Symptom-first clinical approaches) ─────────────────── */
 
-  function loadPresentation(id) {
-    if (cache.presentations && cache.presentations[id]) return Promise.resolve(cache.presentations[id]);
+  /* `pro` scopes the skill rows exactly as the Skills library does, so a Pro reader sees the real
+   * titles of cardiovascular / neurology / abdomen skills and a free reader cannot reach them. */
+  function loadPresentation(id, pro) {
+    var ck = id + (pro ? ":pro" : "");
+    if (cache.presentations && cache.presentations[ck]) return Promise.resolve(cache.presentations[ck]);
     if (!cache.presentations) cache.presentations = {};
     return loadCatalog().then(function (cat) {
       var entry = null, list = cat.presentations || [];
       for (var i = 0; i < list.length; i++) if (list[i].id === id) entry = list[i];
       if (!entry) return null;
-      var jobs = [getJSON(entry.file), loadMedia(), loadAllSkills()];
+      var M = model();
+      if (!M || !M.isRenderable(entry, gateOpts())) return null;   // review gate on the catalog row
+      var jobs = [getJSON(entry.file), loadMedia(), loadAllSkills(pro)];
       return Promise.all(jobs).then(function (res) {
         var pres = res[0];
-        var media = res[1] || {};
-        var allSk = res[2] || { skills: {} };
-        if (!pres) return null;
+        var media = res[1];
+        var allSk = res[2];
+        // ...and on the file itself, so a catalog row cannot vouch for content it does not match.
+        if (!pres || !media || !allSk || !M.isRenderable(pres, gateOpts())) return null;
         var built = {
           id: pres.id,
           presentation: pres,
           skills: allSk.skills || {},
           media: media
         };
-        cache.presentations[id] = built;
+        cache.presentations[ck] = built;
         return built;
       });
     }).catch(function () { return null; });
@@ -381,8 +399,9 @@
       var list = (cat && cat.presentations) || [];
       var M = model(), opts = gateOpts();
       var out = [];
+      if (!M) return out;   // fails closed, like every other gate
       for (var i = 0; i < list.length; i++) {
-        if (!M || M.isRenderable(list[i], opts)) out.push(list[i]);
+        if (M.isRenderable(list[i], opts)) out.push(list[i]);
       }
       return out;
     });

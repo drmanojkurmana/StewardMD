@@ -133,6 +133,15 @@
   "cases": [
     {
       "id": "case.ataxia.dinesh",
+      "initialVitals": {
+        "hr": 76,
+        "bpSystolic": 128,
+        "bpDiastolic": 78,
+        "rr": 16,
+        "spo2": 98,
+        "temp": 36.8,
+        "gcs": 15
+      },
       "title": "A man who keeps missing the last step",
       "opening": "Dinesh Rao, 58, has come with six months of increasingly unsteady walking. His wife says he seems clumsier in the evenings and once fell reaching for the tap with his eyes closed while washing his face. Introduce yourself and take a history.",
       "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
@@ -363,9 +372,9 @@
       "diagnosis": {
         "answer": "Sensory ataxia from a posterior column/large-fibre sensory process, most likely subacute combined degeneration of the cord secondary to vitamin B12 deficiency in a longstanding strict vegetarian, a treatable cause.",
         "accept": [
-          "sensory ataxia",
           "subacute combined degeneration",
-          "b12 deficiency"
+          "b12 deficiency",
+          "sensory ataxia"
         ],
         "minMatch": 1
       },

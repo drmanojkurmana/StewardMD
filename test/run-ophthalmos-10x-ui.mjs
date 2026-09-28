@@ -1,6 +1,7 @@
-/* Ophthalmós in the REAL app (headless Chrome): every feature synced from the module repo is wired,
+/* Ophthalmós in the REAL app (headless Chrome): every feature synced from the module repo is wired (incl. the
+ * Learn tab: first-run choice, every unit, lessons loaded on open, Explore, Reference, a lesson, a hotspot, Hindi),
  * opens, and loads its data; images come from the R2 domain; Ask MaiK reaches the host; no uncaught errors.
- * The module's own behaviour is tested in its repo (test/run-ui.mjs, 19 steps); this checks the integration.
+ * The module's own behaviour is tested in its repo (test/run-ui.mjs, 41 steps); this checks the integration.
  *
  * USAGE: node test/run-ophthalmos-10x-ui.mjs   (BASE=http://localhost:8996/ to use a running server)
  */
@@ -26,6 +27,8 @@ const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${PORT}
 let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = [];
 const call = (m, p) => { const i = msgId++; return new Promise(r => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
+// Like ev, for a promise-returning body.
+const evp = async (e) => { const r = await call("Runtime.evaluate", { expression: `(async function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, awaitPromise: true, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
 const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(200); } return false; };
 let fails = 0; const ok = (c, m) => { console.log((c ? "✅ " : "❌ ") + m); if (!c) fails++; };
 
@@ -43,18 +46,22 @@ try {
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   await call("Page.navigate", { url: BASE });
   ok(await until(`return !!(window.OPHTHALMOS && OPHTHALMOS._renderHub && window.SMD_showHome);`, 30000), "app loads with Ophthalmós");
-  await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{localStorage.removeItem("smd_ophthalmos_v1");}catch(e){} return 1;`);
+  await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{localStorage.removeItem("smd_ophthalmos_v1"); localStorage.removeItem("smd_ophthalmos_prefs");}catch(e){} return 1;`);
 
   // registries: every feature file registered itself
   ok(await ev(`return OPHTHALMOS._sims.map(function(s){return s.id;}).join(",");`) === "retino,neuro", "simulators registered: retinoscopy, neuro-ophthalmology");
   ok(await ev(`return OPHTHALMOS._banks.length === 1 && OPHTHALMOS._reads.length === 1 && OPHTHALMOS._tools.length === 6;`) === true, "question bank, notes and six calculators registered");
 
-  // hub: Today's plan and every section
+  // first run: the learner picks Learn or Test (and the language); pick Test to reach the clinics hub
   await ev(`SMD_showHome(); OPHTHALMOS.open(); return 1;`);
-  ok(await until(`return document.querySelectorAll("#smdOphthalmos .oph-clinic[data-t]").length === 6;`, 20000), "hub lists the six clinics (incl. general retina, RFMiD)");
-  ok(await ev(`return document.querySelectorAll("#smdOphthalmos .oph-plan-row").length === 3;`) === true, "Today's plan: images, questions, one simulator patient");
-  ok(await ev(`return ["Questions","Notes","Simulators","Tools"].every(function(h){return [].some.call(document.querySelectorAll("#smdOphthalmos .oph-h2"), function(e){return e.textContent===h;});});`) === true, "hub sections: Questions, Notes, Simulators, Tools");
-  ok(await ev(`return !!document.querySelector("#smdOphthalmos .oph-draft");`) === true, "draft mark on the hub");
+  ok(await until(`return !!document.querySelector("#smdOphthalmos .ln-first") && document.querySelectorAll("#smdOphthalmos [data-act=lnpick]").length === 2;`, 20000), "first open asks Learn or Test");
+  await ev(`document.querySelector('#smdOphthalmos [data-act=lnpick][data-t=test]').click(); return 1;`);
+
+  // Test hub (MBBS level by default): Today's plan and every section; notes and tools live under Learn > Reference
+  ok(await until(`return document.querySelectorAll("#smdOphthalmos .oph-clinic[data-t]").length === 6;`, 20000), "Test hub lists the six clinics (incl. general retina, RFMiD)");
+  ok(await ev(`return [].map.call(document.querySelectorAll("#smdOphthalmos .oph-plan-b b"), function(b){return b.textContent;}).join(",");`) === "Lesson,Images,Questions", "MBBS Today's plan is lesson-first: lesson, images, questions");
+  ok(await ev(`return ["Questions","Simulators"].every(function(h){return [].some.call(document.querySelectorAll("#smdOphthalmos .oph-h2"), function(e){return e.textContent===h;});});`) === true, "Test hub sections: Questions, Simulators");
+  ok(await ev(`return !document.querySelector("#smdOphthalmos .oph-draft") && !/To be verified|AI-drafted|await review/.test(document.querySelector("#smdOphthalmos").textContent);`) === true, "no draft mark or review note on the hub (owner decision 2026-09-28)");
 
   // an encounter: the image comes from R2, Ask MaiK reaches the host after answering
   await ev(`document.querySelector('#smdOphthalmos [data-act=clinic][data-t=oct]').click(); return 1;`);
@@ -67,27 +74,67 @@ try {
   await ev(`document.querySelector('#smdOphthalmos [data-act=bank][data-b=mcq]').click(); return 1;`);
   ok(await until(`return document.querySelectorAll('#smdOphthalmos .mcq-topic').length === 10;`, 20000), "question bank loads 3,035 questions in ten subspecialties");
   await ev(`OPHTHALMOS.back(); return 1;`);
-
-  // notes: list, then a note with a real image
-  await ev(`document.querySelector('#smdOphthalmos [data-act=read]').click(); return 1;`);
-  ok(await until(`return OPHTHALMOS._st.view === "notes" && document.querySelectorAll('#smdOphthalmos [data-act=note]').length === 30;`, 15000), "notes list opens with 30 notes");
-  await ev(`document.querySelector('#smdOphthalmos [data-act=note]').click(); return 1;`);
-  ok(await until(`return OPHTHALMOS._st.view === "note" && [].some.call(document.querySelectorAll('#smdOphthalmos img'), function(i){ return i.naturalWidth > 0; });`, 20000), "a note opens with a real image from R2");
-  await ev(`OPHTHALMOS.back(); OPHTHALMOS.back(); return 1;`);
   await until(`return OPHTHALMOS._st.view === "hub";`);
 
-  // simulators and tools open
+  // simulators open
   await ev(`document.querySelector('#smdOphthalmos [data-act=sim][data-s=retino]').click(); return 1;`);
   ok(await until(`return !!document.getElementById("retCv") && OPHTHALMOS._st.view === "sim-retino";`), "retinoscopy opens with its canvas");
   await ev(`OPHTHALMOS.back(); return 1;`);
   await ev(`document.querySelector('#smdOphthalmos [data-act=sim][data-s=neuro]').click(); return 1;`);
   ok(await until(`return OPHTHALMOS._st.view === "neuro" && !!document.querySelector("#smdOphthalmos canvas");`), "neuro-ophthalmology opens with its canvas");
   await ev(`OPHTHALMOS.back(); return 1;`);
-  await ev(`document.querySelector('#smdOphthalmos [data-act=tools]').click(); return 1;`);
+  await until(`return OPHTHALMOS._st.view === "hub";`);
+
+  // Learn tab: home with Start here and Reference (notes, calculators, glossary)
+  await ev(`document.querySelector('#smdOphthalmos [data-act=lntab][data-t=learn]').click(); return 1;`);
+  ok(await until(`return !!document.querySelector('#smdOphthalmos .ln-home .ln-start [data-act=lesson]');`, 20000), "Learn tab opens with a Start here lesson");
+  // Lessons load on open: the hub lists every unit from index.json and has fetched no lesson file.
+  ok(await ev(`var W=OPHTHALMOS._learn._w, u=document.querySelectorAll('#smdOphthalmos .ln-home .ln-unit'), n=0; W.ix.units.forEach(function(x){n+=x.lessons.length;}); return W.ix.units.length === 19 && u.length === 19 && document.querySelectorAll('#smdOphthalmos .ln-home .ln-row').length === n && n === 107;`) === true, "Learn home lists all 19 units and 107 lessons");
+  ok(await ev(`return performance.getEntriesByType("resource").filter(function(e){return /\\/learn\\/lessons\\//.test(e.name);}).length;`) === 0, "opening Learn fetched no lesson file (index.json only)");
+  ok(await evp(`var W=OPHTHALMOS._learn._w, D=window.OPHTHALMOS_DATA, bad=[], ids=[]; W.ix.units.forEach(function(u){ids=ids.concat(u.lessons);});
+    await Promise.all(ids.map(function(id){ return fetch("/ophthalmos/learn/lessons/" + id + ".json").then(function(r){return r.json();}).then(function(l){ if (l.id !== id || D.validateLesson(l, W.gloss, W.media).length) bad.push(id); }, function(){ bad.push(id); }); }));
+    return bad.length === 0 ? true : "rejected: " + bad.join(",");`) === true, "every lesson file in learn/index.json is bundled and passes validation");
+  // a lesson from a new unit opens (fetched on open)
+  await ev(`document.querySelector('#smdOphthalmos .ln-row[data-l="keratitis"]').click(); return 1;`);
+  ok(await until(`var t=document.querySelector('#smdOphthalmos .ln-title'); return OPHTHALMOS._st.view === "lesson" && !!t && t.textContent === OPHTHALMOS._learn.meta("keratitis").title.en;`, 15000), "a new-unit lesson (Cornea: keratitis) opens");
+  await ev(`OPHTHALMOS._internal.ACTIONS.lnexit(); return 1;`);
+  await until(`return OPHTHALMOS._st.view === "hub" && !!document.querySelector('#smdOphthalmos .ln-home');`);
+  // an explorer opens and renders from its model
+  ok(await ev(`return document.querySelectorAll('#smdOphthalmos [data-act=exopen]').length;`) === 5, "Learn home lists the five explorers");
+  await ev(`document.querySelector('#smdOphthalmos [data-act=exopen][data-x=pathway]').click(); return 1;`);
+  ok(await until(`var f=document.getElementById("exFields"); return OPHTHALMOS._st.view === "explore" && !!f && f.querySelectorAll("svg").length === 2 && /hemianopia/i.test(f.textContent) && !!document.querySelector("#exPath svg");`, 15000), "Visual pathway explorer opens: two field charts and the pathway drawn from its model");
+  await ev(`OPHTHALMOS.back(); return 1;`);
+  await until(`return OPHTHALMOS._st.view === "hub" && !!document.querySelector('#smdOphthalmos .ln-start [data-act=lesson]');`);
+  ok(await ev(`return ["read","tools","lnglossary"].every(function(a){return !!document.querySelector('#smdOphthalmos .ln-home [data-act=' + a + ']');});`) === true, "Learn Reference lists notes, calculators and the glossary");
+  await ev(`document.querySelector('#smdOphthalmos .ln-home [data-act=read]').click(); return 1;`);
+  ok(await until(`return OPHTHALMOS._st.view === "notes" && document.querySelectorAll('#smdOphthalmos [data-act=note]').length === 30;`, 15000), "notes list opens with 30 notes");
+  await ev(`document.querySelector('#smdOphthalmos [data-act=note]').click(); return 1;`);
+  ok(await until(`return OPHTHALMOS._st.view === "note" && [].some.call(document.querySelectorAll('#smdOphthalmos img'), function(i){ return i.naturalWidth > 0; });`, 20000), "a note opens with a real image from R2");
+  await ev(`OPHTHALMOS.back(); OPHTHALMOS.back(); return 1;`);
+  await until(`return OPHTHALMOS._st.view === "hub";`);
+  await ev(`document.querySelector('#smdOphthalmos .ln-home [data-act=tools]').click(); return 1;`);
   ok(await until(`return document.querySelectorAll('#smdOphthalmos [data-act=tool]').length === 6;`), "clinical calculators list opens with six tools");
+  await ev(`OPHTHALMOS.back(); return 1;`);
+  await until(`return OPHTHALMOS._st.view === "hub" && !!document.querySelector('#smdOphthalmos .ln-start [data-act=lesson]');`);
+
+  // a lesson: its picture loads (bundled diagram or R2 image), a hotspot reveals, then Hindi
+  await ev(`document.querySelector('#smdOphthalmos .ln-start [data-act=lesson]').click(); return 1;`);
+  ok(await until(`var i=document.querySelector('#smdOphthalmos .ln-banner img'); return OPHTHALMOS._st.view === "lesson" && !!(i && i.complete && i.naturalWidth > 0);`, 20000), "a lesson opens and its picture loads");
+  for (let n = 0; n < 8 && !(await ev(`return !!document.querySelector('#smdOphthalmos [data-act=lnhot]');`)); n++) {
+    await ev(`var b=document.querySelector('#smdOphthalmos [data-act=lnnext]'); if (b && !b.disabled) b.click(); return 1;`);
+    await sleep(300);
+  }
+  await ev(`document.querySelector('#smdOphthalmos [data-act=lnhot][data-k="0"]').click(); return 1;`);
+  ok(await until(`var h=document.querySelector('#smdOphthalmos [data-act=lnhot][data-k="0"]'), i=document.getElementById("lnImg"); return !!h && h.getAttribute("aria-expanded") === "true" && !!(i && i.naturalWidth > 0) && document.getElementById("lnHotList").textContent.trim().length > 0;`), "See it: hotspot 1 reveals its label on a loaded picture");
+  await ev(`var i=document.querySelector('#smdOphthalmos .ln-more .ln-mpic img'); if (i) i.scrollIntoView(); return 1;`);
+  ok(await until(`var f=document.querySelector('#smdOphthalmos .ln-more .ln-mfig'), i=f && f.querySelector('img'), c=f && f.querySelector('.oph-credit'); return !!(i && i.naturalWidth > 0 && /\\/ophthalmos\\/learn\\/media\\//.test(i.currentSrc || i.src) && c && c.textContent.trim().length > 3);`, 15000), "More pictures: a learn/media figure loads from the bundle with its credit");
+  await ev(`document.querySelector('#smdOphthalmos [data-act=lnlang]').click(); return 1;`);
+  ok(await until(`var r=document.getElementById("smdOphthalmos"); return r.getAttribute("lang") === "hi" && OPHTHALMOS._st.view === "lesson" && /[\\u0900-\\u097F]/.test(r.querySelector(".ln-h").textContent);`), "Hindi: the lesson re-renders in Hindi on the same step");
+  await ev(`OPHTHALMOS._internal.leave(); OPHTHALMOS._renderHub(); return 1;`);
+  ok(await until(`var t=document.querySelector('#smdOphthalmos [data-act=lntab][data-t=learn]'); return !!t && t.textContent.indexOf("सीखें") >= 0;`), "Hindi is kept on the Learn home");
   await ev(`OPHTHALMOS.close(); return 1;`);
 
   ok(errors.length === 0, "no uncaught Ophthalmós errors" + (errors.length ? ": " + errors.slice(0, 3).join(" | ") : ""));
-  console.log(fails === 0 ? "\nALL GREEN — Ophthalmós 10x wired into the app" : `\n${fails} FAILED`);
+  console.log(fails === 0 ? "\nALL GREEN — Ophthalmós 10x + Learn wired into the app" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }

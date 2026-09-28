@@ -89,11 +89,13 @@ function _activationGate(plan, opts) {
   const ev = plan.evidenceSnapshot || tmpl.evidence || null;
   if (!(ev && ev.core && ev.core.length)) blockers.push("source_evidence_missing");
   if (!((tmpl.clearanceChecks || []).length)) blockers.push("clearance_info_missing");
-  if ((tmpl.verifyFields || []).length || _deepHasVerify(tmpl)) blockers.push("unresolved_verify");
-  // Defense-in-depth (R1): an EXPERIMENTAL / non-active (draft) protocol can never be activated, even if
-  // one is ever added to the server template registry. Today ONCO_PROTOCOLS only holds active templates,
-  // but this makes the invariant explicit at the activation gate rather than resting on that omission.
-  if (tmpl.experimental === true || (tmpl.lifecycleState && tmpl.lifecycleState !== "active")) blockers.push("protocol_not_active");
+  // Owner, 2026-09-28: unresolved VERIFY markers in the template no longer block activation. A VERIFY
+  // DOSE still cannot activate on its own: it computes no final dose, so dose_calculations_incomplete
+  // above blocks it until the physician enters the dose (a confirmed override supplies `final`).
+  // Owner, 2026-09-28: review status (draft / experimental / in_review) no longer blocks activation.
+  // A RETIRED protocol still does. Every other blocker above and below (doses, evidence, clearance,
+  // unresolved VERIFY fields, physician confirmation) is unchanged, so activation is never automatic.
+  if (["retired", "superseded", "deprecated", "withdrawn"].indexOf(String(tmpl.lifecycleState || "")) >= 0) blockers.push("protocol_retired");
   if (!opts.physicianConfirmed) blockers.push("physician_confirmation_missing");
   return { ok: blockers.length === 0, blockers: blockers };
 }

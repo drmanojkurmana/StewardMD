@@ -20,17 +20,24 @@ echo "CliniX bundle check: $WWW"
 
 for f in clinix.js clinix-flags.js clinix-model.js clinix-content.js clinix-store.js \
          clinix-tutor.js clinix-diagrams.js clinix-audio.js clinix-screens.js \
-         clinix-engine.js clinix-physiology.js clinix-profile.js clinix-examiner.js clinix.css; do
+         clinix-engine.js clinix-physiology.js clinix-profile.js clinix-examiner.js \
+         clinix-lexicon.js clinix-dx.js clinix.css; do
   [ -f "$WWW/$f" ] && say "$f" "ok" || bad "$f" "root glob in build-www.sh"
 done
 
 for f in manifest.json skills/core.json skills/respiratory.json \
-         diseases/copd.json diseases/pleural-effusion.json media/manifest.json; do
+         diseases/copd.json diseases/pleural-effusion.json media/manifest.json \
+         dx-vocabulary.json presentations/breathlessness.json; do
   [ -f "$WWW/clinix/$f" ] && say "clinix/$f" "ok" || bad "clinix/$f" "cp -R clinix in build-www.sh"
 done
 
+# Only clinix-flags.js and clinix.js are tagged in index.html; clinix.js lazy-loads the rest from
+# its SCRIPTS list, so every listed file must exist in www/ or the first open fails on a device.
 n=$(grep -c 'clinix.*\.js?v=' "$WWW/index.html" 2>/dev/null || echo 0)
-[ "$n" -ge 7 ] && say "index.html script tags" "$n" || bad "index.html script tags" "expected >=7, got $n"
+[ "$n" -ge 2 ] && say "index.html script tags" "$n" || bad "index.html script tags" "expected clinix-flags.js + clinix.js, got $n"
+for f in $(grep -o '"/clinix-[a-z]*\.js?v=' "$WWW/clinix.js" | tr -d '"/' | sed 's/?v=//'); do
+  [ -f "$WWW/$f" ] && say "lazy: $f" "ok" || bad "lazy: $f" "listed in clinix.js SCRIPTS but missing"
+done
 grep -q 'clinix\.css?v=' "$WWW/index.html" && say "index.html css link" "ok" || bad "index.html css link" "add the <link>"
 grep -q 'act: "clinix"' "$WWW/home.js" && say "home tile (HOME_TOOLS)" "ok" || bad "home tile" "home.js ACT + HOME_TOOLS"
 grep -q 'id: "clinix"' "$WWW/sidebar-redesign.js" && say "Settings toggle" "ok" || bad "Settings toggle" "sidebar-redesign.js TOGGLES"

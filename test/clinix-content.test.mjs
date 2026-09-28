@@ -295,19 +295,15 @@ test("the viva pool spans more than one difficulty level", () => {
 
 /* Safety invariants --------------------------------------------------------- */
 
-test("SAFETY: nothing in the shipped pack is student-visible until it is reviewed", () => {
+test("OPEN: every shipped skill and disease renders (owner 2026-09-28: nothing locked behind review)", () => {
   const shared = loadAllSkills();
   const localAll = {};
   for (const file of ALL_DISEASES) Object.assign(localAll, loadDisease(file).localSkills);
   const { disease } = loadDisease("diseases/copd.json");
   const skills = Object.assign({}, shared, localAll);
-  const visible = Object.keys(skills).filter((id) => M.isRenderable(skills[id]));
-  assert.deepEqual(
-    visible, [],
-    "These skills would reach a student without clinical sign-off: " + visible.join(", ") +
-    ". Content is authored as ai_drafted and the owner flips it to approved after review."
-  );
-  assert.equal(M.isRenderable(disease), false, "the disease itself is also unreviewed");
+  const hidden = Object.keys(skills).filter((id) => !M.isRenderable(skills[id]));
+  assert.deepEqual(hidden, [], "hidden by review status: " + hidden.join(", "));
+  assert.equal(M.isRenderable(disease), true);
 });
 
 test("SAFETY: with the author flag on, the same content is fully visible", () => {

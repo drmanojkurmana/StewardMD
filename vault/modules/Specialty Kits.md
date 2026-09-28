@@ -1,6 +1,6 @@
 ---
 tags: [module, opd, clinical-content]
-status: built 2026-09-25 (flag ON), 26 kits. Content ai_drafted, PENDING clinical review.
+status: built 2026-09-25 (flag ON), 26 kits. Content ai_drafted; no draft/pending note on screen (owner decision 2026-09-28).
 flag: smd_specialty_kits (client, def:true, ?kits=0 hides the OPD tab, the Home tile and the sheet)
 ---
 # Specialty Kits

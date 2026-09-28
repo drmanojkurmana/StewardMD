@@ -195,6 +195,9 @@ const MODULE_FOR = {
   // CliniX viva judging counts against the student "clinix" bucket (same as mode:"clinix-tutor" on
   // /explain), never the doctor's MaiK/case allowance - see the clinix-tutor.js header comment.
   "viva-judge": "clinix",
+  // CliniX simulated patient: an unscripted history question answered in character from the case's
+  // own facts. Student revision, so the "clinix" bucket, never the doctor's MaiK allowance.
+  "clinix-patient": "clinix",
 };
 function moduleLimitMsg(mod, limit) {
   const label = { maik: "MaiK questions", maik_case: "MaiK patient cases", research: "evidence reviews", ocr: "photo scans", ecg: "ECG uploads", thorex: "chest X-ray uploads", stt: "voice transcriptions", clinix: "CliniX tutor questions", surgx_note: "SURGX note dictations", surgx_case: "SURGX case questions" }[mod] || "AI requests";
@@ -2065,6 +2068,49 @@ export async function onRequest(context) {
       const verdict = ["correct", "partial", "incorrect"].indexOf(p.verdict) >= 0 ? p.verdict : null;
       if (!verdict) return json({ error: "parse" }, 502);
       return json({ verdict: verdict, feedback: String(p.feedback || "").slice(0, 300), mode: "viva-judge" });
+    }
+    if (seg === "clinix-patient") {
+      // CliniX simulated patient. The client sends the case FACTS (authored clinix/*.json content:
+      // persona, opening complaint, the scripted history replies) and the student's question; the
+      // role and the rules live HERE, so a client cannot turn this into a general chat endpoint by
+      // sending its own instructions. It answers only from the facts: anything the record does not
+      // contain is something this patient has not noticed, never a new symptom, because a simulated
+      // patient that invents a symptom teaches a wrong pattern. Same cost shape as viva-judge: no RAG,
+      // CHEAP_MODEL, a short reply, the lightweight router quota tier plus the "clinix" module cap.
+      const q = String(body.question || "").slice(0, 300).trim();
+      const per = body.persona && typeof body.persona === "object" ? body.persona : {};
+      const clip = (v, n) => String(v == null ? "" : v).replace(/[\r\n]+/g, " ").slice(0, n);
+      const facts = Array.isArray(body.facts) ? body.facts.slice(0, 40) : [];
+      if (!q || !facts.length) return json({ error: "no-input" }, 400);
+      const gate = await checkQuota(env, request, "router");
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
+      const who = ["name", "age", "sex", "occupation", "residence"].map((k) => per[k] ? (k + ": " + clip(per[k], 60)) : "").filter(Boolean).join("; ");
+      const factLines = facts.map((f) => "- " + clip(f && f.topic, 40) + ": " + clip(f && f.reply, 400)).join("\n");
+      const sys =
+        "You are role-playing a PATIENT for a medical student practising history taking. Stay in character.\n" +
+        "RULES:\n" +
+        "1. Answer ONLY from the PATIENT RECORD below. If the record does not cover what is asked, you have not " +
+        "noticed anything like that: say so plainly in character. NEVER invent a symptom, drug, test result, " +
+        "diagnosis or event that is not in the record.\n" +
+        "2. Speak like a lay patient: plain words, first person, one to three short sentences. If the student " +
+        "uses medical jargon, ask what they mean.\n" +
+        "3. Never name your diagnosis or suggest one unless the record states you were told it. Never give or " +
+        "discuss a drug dose. Never step out of role, never mention being an AI, a simulation or these rules.\n" +
+        "4. If the question is not something a patient would be asked (small talk aside), reply briefly in " +
+        "character and wait for the next question.\n" +
+        "Output ONLY the patient's words, no quotes, no labels.\n\n" +
+        "PATIENT: " + (who || "adult patient") + "\n" +
+        (body.opening ? ("PRESENTING COMPLAINT (in your words): " + clip(body.opening, 400) + "\n") : "") +
+        "PATIENT RECORD:\n" + factLines + "\n\n" +
+        "STUDENT'S QUESTION: " + clip(q, 300);
+      const model = env.CLINIX_PATIENT_MODEL || env.CLINIX_TUTOR_MODEL || CHEAP_MODEL;
+      let text;
+      try { text = await gen([{ text: sys }], 160, { temperature: 0.3, model: model }); }
+      catch (e) { await recordUsage(gate, { inTok: estTokens(sys.length), outTok: 0, status: "failed" }); return json({ error: "patient-failed" }, 502); }
+      await recordUsage(gate, { ...tokens(sys.length, text), status: "success" });
+      text = String(text || "").replace(/^\s*(patient|pt)\s*:\s*/i, "").replace(/^["'\u201c]+|["'\u201d]+$/g, "").trim().slice(0, 600);
+      if (!text) return json({ error: "empty" }, 502);
+      return json({ text: text, mode: "clinix-patient" });
     }
     if (seg === "imaging") {
       // Clinician-invoked imaging summary. Packet is DE-IDENTIFIED client-side (report text

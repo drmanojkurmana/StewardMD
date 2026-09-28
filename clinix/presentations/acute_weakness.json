@@ -7,17 +7,16 @@
   "system": "neurology",
   "estMinutes": 50,
   "review": {
-    "status": "approved",
-    "reviewer": "Clinical Review Team"
+    "status": "ai_drafted"
   },
   "layers": {
     "recognise": {
       "redFlags": [
-        "Sudden onset focal neurological deficit (face drooping, arm drift, speech disturbance — BE-FAST / Cincinnati prehospital criteria)",
+        "Sudden onset focal neurological deficit (face drooping, arm drift, speech disturbance; BE-FAST / Cincinnati prehospital criteria)",
         "Fluctuating sensorium or rapid drop in GCS (Glasgow Coma Scale) signaling expanding intracranial hematoma, cerebral edema, or uncal herniation",
         "Signs of impending brain herniation (Cushing triad: hypertension, bradycardia, irregular respirations; unilateral blown unreactive pupil)",
         "Acute respiratory muscle weakness with Single Breath Count < 20 or forced vital capacity < 15 mL/kg in acute polyradiculoneuropathy (GBS) or myasthenia",
-        "Sudden back pain followed by rapid bilateral leg weakness, sensory level on trunk, and acute urinary retention (acute spinal cord compression — surgical emergency)",
+        "Sudden back pain followed by rapid bilateral leg weakness, sensory level on trunk, and acute urinary retention (acute spinal cord compression; surgical emergency)",
         "Fever, severe headache, neck stiffness, and focal deficit (bacterial meningitis, brain abscess, or herpes encephalitis)"
       ],
       "vitalsPriorities": [
@@ -147,13 +146,11 @@
       ]
     },
     "skills": [
-      "skill.exam.neuro.cranial_nerves",
-      "skill.exam.neuro.motor_tone",
-      "skill.exam.neuro.motor_power",
+      "skill.exam.neuro.cn7",
+      "skill.exam.neuro.tone_power",
       "skill.exam.neuro.reflexes",
-      "skill.exam.neuro.plantar",
       "skill.exam.neuro.sensory",
-      "skill.exam.neuro.coordination",
+      "skill.exam.neuro.cerebellar",
       "skill.gen.vitals"
     ],
     "examPearls": [

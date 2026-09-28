@@ -1,0 +1,254 @@
+{
+  "id": "pg-retinoblastoma",
+  "unit": "peds-pg",
+  "level": "resident",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Retinoblastoma: refer fast, never cut in",
+    "hi": "रेटिनोब्लास्टोमा: जल्दी भेजें, कभी चीरा नहीं"
+  },
+  "idea": {
+    "en": "A white pupil or a new squint in a young child can be [[retinoblastoma]]. Image it, never biopsy it, and refer to an eye cancer centre within the week.",
+    "hi": "छोटे बच्चे में सफ़ेद पुतली या नया भेंगापन [[retinoblastoma]] हो सकता है। इमेजिंग करें, कभी बायोप्सी न करें, और एक हफ़्ते के अंदर आँख के कैंसर केंद्र भेजें।"
+  },
+  "see": {
+    "img": "cases/60.webp",
+    "deckItem": {
+      "deck": "cases",
+      "id": "60"
+    },
+    "expect": "retinoblastoma",
+    "alt": {
+      "en": "Grey ultrasound B-scan of a right eye. The probe is at the left edge. The middle of the eye is dark. On the right, a round mass rises from the back wall of the eye. It has a bright rim and bright spots inside.",
+      "hi": "दाईं आँख का भूरा अल्ट्रासाउंड बी-स्कैन। प्रोब बाएँ किनारे पर है। आँख का बीच का हिस्सा काला है। दाईं ओर आँख की पिछली दीवार से एक गोल गाँठ उठी है, जिसका किनारा चमकीला है और अंदर चमकीले धब्बे हैं।"
+    },
+    "caption": {
+      "en": "A real B-scan with a likely diagnosis of retinoblastoma. A mushroom-shaped mass with clear borders is joined to the retina.",
+      "hi": "एक असली बी-स्कैन, संभावित निदान रेटिनोब्लास्टोमा। साफ़ किनारों वाली, मशरूम जैसी गाँठ रेटिना से जुड़ी है।"
+    },
+    "credit": "OphthalVQA, CC BY 4.0. Xu P, et al. Br J Ophthalmol 2024.",
+    "hotspots": [
+      {
+        "x": 0.69,
+        "y": 0.45,
+        "label": {
+          "en": "Rounded mass",
+          "hi": "गोल गाँठ"
+        },
+        "note": {
+          "en": "A mushroom-shaped mass with clear borders sits in front of the eye wall.",
+          "hi": "आँख की दीवार के आगे साफ़ किनारों वाली, मशरूम जैसी गाँठ है।"
+        }
+      },
+      {
+        "x": 0.765,
+        "y": 0.6,
+        "label": {
+          "en": "Bright echoes",
+          "hi": "चमकीली गूँजें"
+        },
+        "note": {
+          "en": "Very bright spots inside the mass. In a child, this suggests calcium and strongly supports retinoblastoma.",
+          "hi": "गाँठ के अंदर बहुत चमकीले धब्बे। बच्चे में यह कैल्शियम का इशारा है और रेटिनोब्लास्टोमा की ओर मज़बूती से इशारा करता है।"
+        }
+      },
+      {
+        "x": 0.855,
+        "y": 0.42,
+        "label": {
+          "en": "Back wall of the eye",
+          "hi": "आँख की पिछली दीवार"
+        },
+        "note": {
+          "en": "The mass rises from here and is joined to the retina. The bright tissue behind is the orbit.",
+          "hi": "गाँठ यहीं से उठती है और रेटिना से जुड़ी है। पीछे का चमकीला ऊतक ऑर्बिट है।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.42,
+        "label": {
+          "en": "Vitreous",
+          "hi": "विट्रियस"
+        },
+        "note": {
+          "en": "Dark means few echoes. The gel in front of the mass looks clear in this view.",
+          "hi": "काले का मतलब है कम गूँजें। इस दृश्य में गाँठ के आगे का जेल साफ़ दिखता है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "[[retinoblastoma]] starts when both copies of the RB1 gene are lost in a retinal cell. It is the commonest eye cancer of young children.",
+        "hi": "[[retinoblastoma]] तब शुरू होता है जब रेटिना की किसी कोशिका में RB1 जीन की दोनों कॉपी ख़राब हो जाती हैं। यह छोटे बच्चों की आँख का सबसे आम कैंसर है।"
+      },
+      {
+        "en": "In heritable disease, one faulty RB1 copy is in every cell. All bilateral and about 15% of unilateral cases are heritable.",
+        "hi": "वंशानुगत (heritable) बीमारी में RB1 की एक ख़राब कॉपी हर कोशिका में होती है। दोनों आँखों वाले सभी और एक आँख वाले लगभग 15% मामले वंशानुगत हैं।"
+      },
+      {
+        "en": "It shows as [[leukocoria]] or a [[strabismus]]. Later signs are a red, painful eye, high pressure or a bulging eye.",
+        "hi": "यह [[leukocoria]] या [[strabismus]] के रूप में दिखता है। बाद के संकेत हैं लाल, दर्द वाली आँख, बढ़ा दबाव या बाहर निकली आँख।"
+      },
+      {
+        "en": "A [[b-scan]] shows a mass with bright calcium echoes. MRI of the orbits and brain stages the disease.",
+        "hi": "[[b-scan]] में चमकीली कैल्शियम गूँजों वाली गाँठ दिखती है। ऑर्बिट और दिमाग का MRI बीमारी का स्टेज बताता है।"
+      },
+      {
+        "en": "Avoid CT when you can. Its radiation raises the risk of second cancers in heritable disease.",
+        "hi": "जहाँ हो सके, CT से बचें। इसका रेडिएशन वंशानुगत बीमारी में दूसरे कैंसर का ख़तरा बढ़ाता है।"
+      },
+      {
+        "en": "Never biopsy the eye or open it with surgery. Cutting in can seed tumour outside the eye.",
+        "hi": "आँख की कभी बायोप्सी न करें और सर्जरी से उसे न खोलें। चीरा लगाने से ट्यूमर आँख के बाहर फैल सकता है।"
+      },
+      {
+        "en": "The IIRC groups each eye from A to E. Group A is small tumours away from the fovea and disc. Group E is an eye that cannot be saved.",
+        "hi": "IIRC हर आँख को A से E ग्रुप में बाँटता है। ग्रुप A में फ़ोविया और डिस्क से दूर छोटे ट्यूमर होते हैं। ग्रुप E वह आँख है जिसे बचाया नहीं जा सकता।"
+      },
+      {
+        "en": "Treatment may be chemotherapy into a vein or the eye's artery, laser or cryotherapy, or [[enucleation]]. The order of aims is life, then eye, then sight.",
+        "hi": "इलाज में नस में या आँख की धमनी में कीमोथेरेपी, लेज़र या क्रायोथेरेपी, या [[enucleation]] हो सकते हैं। लक्ष्य का क्रम है: जान, फिर आँख, फिर नज़र।"
+      }
+    ],
+    "analogy": {
+      "en": "It is like a fire in a sealed room. While the door stays shut, the fire can be put out. Opening the door to take a look lets it spread.",
+      "hi": "यह एक बंद कमरे में लगी आग जैसा है। जब तक दरवाज़ा बंद है, आग बुझाई जा सकती है। झाँकने के लिए दरवाज़ा खोलने से आग फैल जाती है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Every child with a new squint needs a dilated fundus exam.",
+      "hi": "नए भेंगेपन वाले हर बच्चे की पुतली फैलाकर फ़ंडस जाँच ज़रूरी है।"
+    },
+    {
+      "en": "Ask about a white pupil in photos. A parent who has seen it is right until proven otherwise.",
+      "hi": "फ़ोटो में सफ़ेद पुतली के बारे में पूछें। जिस माता-पिता ने यह देखा है, वे तब तक सही हैं जब तक उल्टा साबित न हो।"
+    },
+    {
+      "en": "Other causes of a white reflex include Coats disease, persistent fetal vasculature, ROP, toxocara, cataract and coloboma.",
+      "hi": "सफ़ेद रिफ़्लेक्स के दूसरे कारण हैं: कोट्स डिज़ीज़, पर्सिस्टेंट फ़ीटल वैस्कुलेचर, ROP, टॉक्सोकारा, मोतियाबिंद और कोलोबोमा।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Refer the same week to an ocular oncology centre. Do not reassure and wait.",
+      "hi": "उसी हफ़्ते ऑक्युलर ऑन्कोलॉजी केंद्र भेजें। तसल्ली देकर इंतज़ार न करें।"
+    },
+    {
+      "en": "Offer RB1 genetic testing and counselling to every family.",
+      "hi": "हर परिवार को RB1 जीन जाँच और काउंसलिंग दें।"
+    },
+    {
+      "en": "Screen brothers, sisters and future children of heritable cases with dilated eye exams from birth.",
+      "hi": "वंशानुगत मामलों में भाई-बहनों और आगे होने वाले बच्चों की जन्म से पुतली फैलाकर जाँच करें।"
+    },
+    {
+      "en": "Follow heritable survivors for life, as second cancers such as sarcomas can occur.",
+      "hi": "वंशानुगत बीमारी से बचे लोगों को जीवन भर देखें, क्योंकि सार्कोमा जैसे दूसरे कैंसर हो सकते हैं।"
+    }
+  ],
+  "remember": {
+    "en": "White pupil or new squint: dilate. Image it, never cut in. Refer this week, and test the genes.",
+    "hi": "सफ़ेद पुतली या नया भेंगापन: पुतली फैलाकर देखें। इमेजिंग करें, कभी चीरा नहीं। इसी हफ़्ते भेजें, और जीन जाँच करवाएँ।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "A 2-year-old has a white pupil and a calcified mass on B-scan. What next?",
+        "hi": "2 साल के बच्चे की पुतली सफ़ेद है और बी-स्कैन में कैल्शियम वाली गाँठ है। आगे क्या?"
+      },
+      "o": [
+        {
+          "en": "Fine-needle biopsy to confirm",
+          "hi": "पक्का करने के लिए फ़ाइन-नीडल बायोप्सी"
+        },
+        {
+          "en": "Urgent referral to an ocular oncology centre",
+          "hi": "ऑक्युलर ऑन्कोलॉजी केंद्र में तुरंत भेजना"
+        },
+        {
+          "en": "Repeat the B-scan in 3 months",
+          "hi": "3 महीने बाद फिर बी-स्कैन"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Biopsy can spread the tumour. Delay costs the eye and can cost the life.",
+        "hi": "बायोप्सी से ट्यूमर फैल सकता है। देर से आँख जा सकती है, और जान भी।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which retinoblastoma is always heritable?",
+        "hi": "कौन सा रेटिनोब्लास्टोमा हमेशा वंशानुगत होता है?"
+      },
+      "o": [
+        {
+          "en": "Bilateral",
+          "hi": "दोनों आँखों वाला"
+        },
+        {
+          "en": "Unilateral in a girl",
+          "hi": "लड़की में एक आँख वाला"
+        },
+        {
+          "en": "Unilateral after age 5",
+          "hi": "5 साल के बाद एक आँख वाला"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "All bilateral cases carry a germline RB1 change. About 15% of unilateral cases do too.",
+        "hi": "दोनों आँखों वाले सभी मामलों में जर्मलाइन RB1 बदलाव होता है। एक आँख वाले लगभग 15% में भी।"
+      }
+    },
+    {
+      "q": {
+        "en": "Why is MRI preferred to CT for staging?",
+        "hi": "स्टेजिंग के लिए CT से ज़्यादा MRI क्यों पसंद किया जाता है?"
+      },
+      "o": [
+        {
+          "en": "CT cannot show calcium",
+          "hi": "CT कैल्शियम नहीं दिखा सकता"
+        },
+        {
+          "en": "CT radiation raises second cancer risk in heritable disease",
+          "hi": "वंशानुगत बीमारी में CT का रेडिएशन दूसरे कैंसर का ख़तरा बढ़ाता है"
+        },
+        {
+          "en": "MRI is quicker in young children",
+          "hi": "छोटे बच्चों में MRI जल्दी होता है"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "CT shows calcium well, but its radiation adds to the risk of second cancers.",
+        "hi": "CT कैल्शियम अच्छे से दिखाता है, पर उसका रेडिएशन दूसरे कैंसर का ख़तरा बढ़ाता है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "peds"
+  },
+  "deeper": {
+    "note": "retinoblastoma"
+  },
+  "glossary": [
+    "retinoblastoma",
+    "leukocoria",
+    "strabismus",
+    "b-scan",
+    "enucleation"
+  ],
+  "sources": [
+    "Dimaras H, Kimani K, Dimba EA, et al. Retinoblastoma. Lancet 2012;379(9824):1436-1446. doi:10.1016/S0140-6736(11)61137-9",
+    "Dimaras H, Corson TW, Cobrinik D, et al. Retinoblastoma. Nat Rev Dis Primers 2015;1:15021. doi:10.1038/nrdp.2015.21",
+    "Murphree AL. Intraocular retinoblastoma: the case for a new group classification. Ophthalmol Clin North Am 2005;18(1):41-53.",
+    "Xu P, Chen X, Zhao Z, Shi D. Unveiling the clinical incapabilities: a benchmarking study of GPT-4V(ision) for ophthalmic multimodal image analysis. Br J Ophthalmol 2024;108(10):1384-1389. doi:10.1136/bjo-2023-325054"
+  ]
+}

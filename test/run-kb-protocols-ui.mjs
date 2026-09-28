@@ -85,7 +85,7 @@ try{
  ok(await ev(`document.querySelectorAll('.kbp-reader .kbp-sec:not(.kbp-drugs):not(.kbp-sources)').length===${body.sections.length}`),'every section renders');
  ok(await ev(`document.querySelectorAll('.kbp-drug').length===${(body.drugs||[]).length}`),'every drug row renders');
  ok(await ev(`document.querySelectorAll('.kbp-sources a[target="_blank"][rel="noopener"]').length===${body.sources.length}`),'sources link out safely');
- ok(await ev(`/pending clinical review/i.test(document.querySelector('.kbp-reader .kbp-status').textContent)`)===(body.review.status==='ai_drafted'),'reader states the review status');
+ ok(await ev(`(()=>{const t=document.querySelector('.kbp-reader .kbp-status').textContent;return !/pending clinical review|Draft/i.test(t)&&/Verify every dose/.test(t)})()`),'reader shows the verify caveat, no draft / pending-review note');
  ok(await ev(`document.querySelector('#sbrefBody').scrollTop===0`),'reader starts at the top');
  ok(await ev(`!/[\\u2013\\u2014]/.test(document.querySelector('#sbrefBody').innerText)`),'no em or en dash on screen');
  await shot('reader-390');

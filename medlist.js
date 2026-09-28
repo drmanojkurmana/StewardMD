@@ -841,8 +841,15 @@
     // the same drug group + screen as one medicine (strength stays on the product row).
     if (r.generic) { parsed.generic = cleanGeneric(r.generic) || String(r.generic).toLowerCase(); parsed.confidence = "high"; }
     if (r.brand) parsed.brand = r.brand;
-    if (uiAdd(parsed, "index")) toast("Added " + cap(r.generic || r.brand || "medicine"));
+    if (uiAdd(parsed, "index")) {
+      var msg = "Added " + cap(r.generic || r.brand || "medicine");
+      // SMD-07: inside the index sheet the note shows by the search bar (the bottom toast sits under
+      // the keyboard) and the search clears for the next medicine.
+      if (_onIndexAdded && _onIndexAdded(msg)) return;
+      toast(msg);
+    }
   }
+  var _onIndexAdded = null;
   // Merge worker brand hits into the local list, deduped by resolved generic.
   function mergeWorker(local, workerRows) {
     var out = local.slice();
@@ -864,7 +871,22 @@
     var input = el("input", { cls: "ml-search-input", type: "text",
       placeholder: "Search generic, brand, or class…", attrs: { "data-ml-index-input": "1", autocomplete: "off", autocapitalize: "none", spellcheck: "false" } });
     input.value = _indexState.value || "";
-    bar.appendChild(input);
+    var clr = el("button", { cls: "ml-search-clear", html: "&#x2715;", attrs: { type: "button", "aria-label": "Clear search", "data-ml-index-clear": "1" } });
+    var added = el("div", { cls: "ml-added", attrs: { role: "status", "aria-live": "polite", "data-ml-index-added": "1" } });
+    var field = el("div", { cls: "ml-search-field" });
+    field.appendChild(input); field.appendChild(clr);
+    bar.appendChild(field); bar.appendChild(added);
+    function syncClear() { clr.hidden = !input.value; }
+    clr.addEventListener("click", function () { input.value = ""; run(); try { input.focus(); } catch (_) {} });
+    var addedTimer = null;
+    _onIndexAdded = function (msg) {
+      if (!input.isConnected) return false;
+      added.textContent = msg; added.classList.add("on");
+      clearTimeout(addedTimer); addedTimer = setTimeout(function () { added.classList.remove("on"); }, 1800);
+      input.value = ""; run();
+      try { input.focus(); } catch (_) {}                   // keep the keyboard up for the next one
+      return true;
+    };
     s.wrap.insertBefore(bar, s.body);
     var out = el("div"); s.body.appendChild(out);
 
@@ -903,6 +925,7 @@
       var seq = ++_indexState.reqSeq;
       var q = input.value.trim();
       _indexState.value = input.value;
+      syncClear();
       if (!q) { drawRows([], ""); return; }
       var catalog = window.SMD_DDI_CATALOG;
       var local = catalog ? catalog.local(q) : ((window.MEDDRUGS && window.MEDDRUGS.searchIndex) ? window.MEDDRUGS.searchIndex(q) : []);
@@ -965,7 +988,7 @@
       if (draft.route) entry.route = draft.route;
       if (draft.freq) entry.freq = draft.freq;
       if (draft.indication) entry.indication = draft.indication;
-      if (uiAdd(entry, "index")) { toast("Added " + cap(r.generic || r.brand || "medicine")); s.scrim.remove(); s.sheet.remove(); }
+      if (uiAdd(entry, "index")) { var am = "Added " + cap(r.generic || r.brand || "medicine"); s.scrim.remove(); s.sheet.remove(); if (!(_onIndexAdded && _onIndexAdded(am))) toast(am); }
     });
     s.foot.appendChild(el("button", { cls: "ml-sheet-cancel", text: "Cancel", attrs: { type: "button" } })).addEventListener("click", function () { s.scrim.remove(); s.sheet.remove(); });
     s.foot.appendChild(addBtn);
@@ -1848,6 +1871,9 @@
 "@media(min-width:900px){.ml-sheet-tall{height:78vh;max-height:78vh}}",
 // fixed search bar (input stays put while the suggestion list below it scrolls)
 ".ml-searchbar{flex:0 0 auto;padding:2px 16px 12px;border-bottom:1px solid var(--line,#d7dee3)}",
+".ml-search-field{position:relative}.ml-search-field .ml-search-input{padding-right:44px}",
+".ml-search-clear{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:32px;height:32px;border:0;border-radius:50%;background:rgba(120,130,140,.16);color:var(--ink,#14202b);font:700 13px var(--sans);display:flex;align-items:center;justify-content:center;cursor:pointer}.ml-search-clear[hidden]{display:none}",
+".ml-added{height:0;overflow:hidden;opacity:0;font:700 12.5px var(--sans);color:#0f766e;transition:opacity .2s,height .2s,margin .2s}.ml-added.on{height:18px;margin-top:8px;opacity:1}",
 ".ml-search-hint{font:600 11px var(--sans);color:var(--slate-soft,#5a7184);margin:9px 2px 2px}",
 ".ml-sheet-foot{padding:12px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line,#d7dee3);display:flex;gap:10px}",
 ".ml-sheet-foot .ml-check-btn{min-height:48px;font-size:14px}",

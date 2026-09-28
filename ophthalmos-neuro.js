@@ -3,7 +3,7 @@
    pathways as strength factors, a pupil and lid model, Hering's law, Hess chart and grading.
    Every condition is data (a lesion), so combinations need no new code.
    Node (tests): module.exports. Browser: window.OPHTHALMOS_NEURO, then part 2 registers the UI in
-   OPHTHALMOS._sims. Teaching text is AI-drafted and awaits ophthalmologist review. */
+   OPHTHALMOS._sims. */
 (function (G) {
   "use strict";
 
@@ -201,7 +201,7 @@
   }
 
   /* ---------- conditions (data) ---------- */
-  // Teaching text: AI-drafted, to be verified by an ophthalmologist before the module leaves Beta.
+  // Teaching text.
   var CONDITIONS = [
     { id: "normal", practice: true, group: "none", name: "Normal examination", bilateral: true, lesion: {},
       look: "Full ductions and versions, straight eyes in every gaze, level lids, equal pupils that constrict to light (direct and consensual) and to near.",
@@ -538,7 +538,7 @@
   function sideOf(c, side) { return c.bilateral ? "B" : side; }
   function condLabel(id, side, grade) { var c = N.BY[id]; return c.bilateral ? c.name : N.label(id, side, c.grades ? grade : null); }
   function resLocked() { return I.levelLocked("resident"); }
-  function levelName(lv) { try { return st.cfg.levels[lv].label; } catch (e) { return lv === "resident" ? "Resident" : "Foundation"; } }
+  function levelName(lv) { try { return st.cfg.levels[lv].label; } catch (e) { return lv === "resident" ? "Resident" : "MBBS"; } }
 
   /* ---------- patient and exam state ---------- */
   function setPatient(P, instant) {
@@ -639,7 +639,8 @@
       segBtn("nrtab", "", "motility", "Eye movements", U.tab) + segBtn("nrtab", "", "pupils", "Pupils", U.tab) + "</div>" +
       '<div id="nrTools">' + (U.tab === "motility" ? motilityHtml() : pupilHtml()) + "</div>" +
       '<p class="nr-hint">Keys: arrows move the target (Shift for bigger steps), 0 straight ahead, C cover, T tilt, N near, L lift lids, S swing the light, D room light.</p></section>';
-    if (U.mode === "practice") h += '<section id="nrFind" aria-label="What the model shows">' + practiceFindings() + "</section>";
+    if (U.mode === "practice") h += (guided() ? '<ol class="oph-guide" id="nrGuide" aria-label="Next steps">' + guideHtml() + "</ol>" : "") +
+      '<section id="nrFind" aria-label="What the model shows">' + practiceFindings() + "</section>";
     else h += '<section id="nrSign" aria-label="Your diagnosis">' + (U.cse.res ? signedHtml() : answerHtml()) + "</section>";
     return h;
   }
@@ -766,19 +767,34 @@
   function noteHtml(c, side) {
     return '<h3 class="oph-h3">What to look for</h3><p class="nr-p">' + esc(N.sideText(c.look, side)) + "</p>" +
       '<h3 class="oph-h3">Where the lesion is</h3><p class="nr-p">' + esc(c.site) + "</p>" +
-      '<p class="oph-pearl">' + esc(c.pearl) + '</p><p class="oph-small">AI-drafted teaching, to be verified by an ophthalmologist.</p>';
+      '<p class="oph-pearl">' + esc(c.pearl) + "</p>";
   }
   function practiceFindings() {
     var p = U.prac, c = N.BY[p.id];
     return '<h2 class="oph-h2">What the model shows</h2>' + findingsList(U.P) + nineHtml(U.P) + hessHtml(U.P) + noteHtml(c, p.side);
   }
 
+  // MBBS guided practice: the key tests for the condition on show, numbered, ticked as they are done (U.log),
+  // the first one not yet done marked as the next step.
+  function guided() { return U.mode === "practice" && I.level() !== "resident"; }
+  function guideHtml() {
+    var c = N.BY[U.prac.id], keys = c.key && c.key.length ? c.key : ["gaze", "cover", "swing"], at = -1;
+    return keys.map(function (x, i) {
+      var done = !!U.log[x], now = !done && at < 0;
+      if (now) at = i;
+      return '<li data-s="' + (done ? "done" : now ? "now" : "todo") + '"' + (now ? ' aria-current="step"' : "") + "><b>" + KEYT[x][0] + ".</b> " + esc(KEYT[x][1]) + (done ? '<span class="oph-sr">, done</span>' : "") + "</li>";
+    }).join("");
+  }
+
   /* ---------- case mode ---------- */
-  function caseLocked() { return I.level() === "resident" && resLocked(); }
+  // Resident cases are Pro with one free trial (sim.neuro); the trial case stays open until "Next case".
+  function caseLocked() { return I.level() === "resident" && resLocked() && !(U.cse && U.cse.trial); }
   function lockedHtml() {
+    var tr = I.trial("sim.neuro") === "trial";
     return '<div class="nr-locked"><p>Resident cases add pupil-sparing and partial third nerve palsies, the cavernous sinus, one-and-a-half, dorsal midbrain, skew deviation, Adie and Argyll Robertson pupils and bilateral INO. They are part of StewardMD Pro.</p>' +
-      '<button type="button" class="oph-btn pri oph-wide" data-act="nrpro">' + ico("lock") + " Unlock Resident cases</button>" +
-      '<button type="button" class="oph-btn sec oph-wide" data-act="nrfound">Foundation cases instead</button></div>';
+      (tr ? '<button type="button" class="oph-btn pri oph-wide" data-act="nrtrial">Start a Resident case ' + I.lockBadge("sim.neuro") + "</button>"
+        : '<button type="button" class="oph-btn pri oph-wide" data-act="nrpro">' + ico("lock") + " Unlock Resident cases</button>" + '<p class="oph-small">' + I.lockBadge("sim.neuro") + "</p>") +
+      '<button type="button" class="oph-btn sec oph-wide" data-act="nrfound">' + esc(levelName("foundation")) + " cases instead</button></div>";
   }
   function startCase(first) {
     var lv = I.level(), ids = N.pool(lv).filter(function (id) { return id !== U.last; });
@@ -951,6 +967,7 @@
     return { obs: s.join(" "), why: why ? "Why: " + why.charAt(0).toLowerCase() + why.slice(1) + "." : "" };
   }
   function say(evt) {
+    var gd = $("nrGuide"); if (gd) gd.innerHTML = guideHtml();
     var l = $("nrLive"); if (!l) return;
     var d = describe(evt);
     l.innerHTML = esc(d.obs) + (d.why ? ' <span class="nr-why">' + esc(d.why) + "</span>" : "");
@@ -1047,7 +1064,11 @@
     var e = $("nrErr"); if (e) e.textContent = "";
   };
   A.nrsign = signOff;
-  A.nrnext = function () { startCase(); };
+  A.nrnext = function () {
+    if (I.level() === "resident" && resLocked()) { U.cse = null; freshExam(); setPatient(practicePatient(), true); renderPanel(".nr-mode [aria-pressed=true]"); setSub(); return; } // trial case done
+    startCase();
+  };
+  A.nrtrial = function () { I.gate("sim.neuro", function () { startCase(); U.cse.trial = true; renderPanel(".nr-mode [aria-pressed=true]"); syncControls(); }); };
   A.nrpro = function () { I.showPro(); };
   A.nrfound = function () {
     st.prefs.level = "foundation"; DATA.savePrefs(I.ls(), st.prefs);

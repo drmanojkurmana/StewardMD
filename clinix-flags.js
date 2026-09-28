@@ -35,10 +35,8 @@
     },
     smd_clinix_draft: {
       type: "bool", def: true, query: "clinixdraft",
-      desc: "Render content that is not clinician-approved. ON by default because ALL CliniX content " +
-        "is currently ai_drafted, so with this off every pathway reads 'Awaiting clinical review' and " +
-        "the module is unusable for testers. Every lesson still shows its own 'Draft, pending " +
-        "clinician review' line and its sources. Set to 0 before any non-tester release."
+      desc: "Kept for compatibility only. Owner decision 2026-09-28: CliniX shows all content, with no " +
+        "draft or review notes, whatever this flag says."
     },
     smd_clinix_tutor: {
       type: "bool", def: true, query: "clinixtutor",
@@ -46,13 +44,27 @@
         "Turned ON by owner decision 2026-08-26: the feature is complete and read through the " +
         "registry, so the default is the only thing that was holding it back."
     },
+    smd_clinix_ai_patient: {
+      type: "bool", def: true, query: "clinixaipatient",
+      desc: "Let MaiK role-play the case patient for a question the script does not match. ON by owner " +
+        "decision 2026-09-27, once it ran on its own server endpoint (/clinix-patient: the role and " +
+        "rules live server side, answers only from the case's authored facts, never a new symptom, " +
+        "CliniX quota bucket, cheap model). Scripted matches are still answered deterministically " +
+        "first; ?clinixaipatient=0 restores the scripted fallback plus did-you-mean only."
+    },
+    smd_clinix_lazy: {
+      type: "bool", def: true, query: "clinixlazy",
+      desc: "Load the CliniX scripts on the first open instead of on every app launch (2026-09-27). " +
+        "Off = the old eager load at startup (clinix.js). Either way flag-off CliniX loads nothing."
+    },
     smd_clinix_haptics: {
       type: "bool", def: true, query: "clinixhaptics",
       desc: "Haptic feedback on lesson turns and answer checks (iOS native only)."
     },
     smd_clinix_uncleared_media: {
-      type: "bool", def: false, query: "clinixmedia",
-      desc: "Authoring escape hatch: render media whose licence is not cleared. NEVER ship on."
+      type: "bool", def: true, query: "clinixmedia",
+      desc: "Render media whose licence is not cleared. ON by explicit owner instruction 2026-09-28 " +
+        "(the owner takes responsibility for the media shown; disclosed in Terms/Disclaimer v3.2)."
     },
     smd_clinix_viva_tier: {
       type: "enum", values: ["mbbs", "pg"], def: "mbbs", query: "clinixtier",
@@ -65,7 +77,7 @@
       desc: "Spoken viva: MaiK speaks the question aloud (native TTS) and the student answers by " +
         "voice (on-device Whisper via SMD_VOICE, same STT already used by MaiK Ask - falls back to " +
         "the device's default on-device recognizer if Whisper is not built for this platform). " +
-        "Off by default; a student opts in per device."
+        "On by default; a student can turn it off per device."
     }
   };
 
@@ -75,7 +87,9 @@
   function rawQuery(alias) {
     if (!alias) return null;
     var m = search().match(new RegExp("[?&]" + alias + "=([^&]+)"));
-    return m ? decodeURIComponent(m[1]) : null;
+    if (!m) return null;
+    // A malformed escape (?clinix=%E0) must not throw out of every isOn()/bool() call.
+    try { return decodeURIComponent(m[1]); } catch (e) { return null; }
   }
 
   function coerce(def, raw) {

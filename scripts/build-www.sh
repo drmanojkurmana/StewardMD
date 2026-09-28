@@ -97,6 +97,8 @@ if [ -d assets/vendor ]; then mkdir -p "$WWW/assets/vendor"; cp -R assets/vendor
 # Drugs Database can only search the 109-molecule formulary in drugs.js and answers "No drugs match"
 # for molecules whose full monograph is sitting in the bundle beside it.
 [ -f data/clinical-supplement.json.gz ] && cp data/clinical-supplement.json.gz "$WWW/"
+# Dose calculator rules (scripts/build-dose-rules.mjs), loaded lazily by the calculator.
+[ -f data/dose-rules.json.gz ] && cp data/dose-rules.json.gz "$WWW/"
 [ -f data/clinical-index.js ] && cp data/clinical-index.js "$WWW/"
 
 # ── 4c. WardSynQ clinical surface ─────────────────────────────────────────────
@@ -182,6 +184,11 @@ if [ -d ophthalmos ]; then
   cp ophthalmos/tracks.json "$WWW/ophthalmos/" 2>/dev/null || true
   cp ophthalmos/notes.json "$WWW/ophthalmos/" 2>/dev/null || true
   cp -R ophthalmos/decks/. "$WWW/ophthalmos/decks/"
+  # Learn tab (ophthalmos-learn.js): index, glossary, lessons, diagrams and the ~1.6 MB media library
+  # (photos, illustrations, animations + credits.json). Small, so it ships in the bundle and works offline;
+  # the fundus/OCT deck images stay on R2. 107 lessons in 19 units; the app reads index.json at open and fetches a
+  # lesson file only when it is opened. ophthalmos-explore.js / .css (Learn > Explore) ship with the root *.js / *.css.
+  [ -d ophthalmos/learn ] && cp -R ophthalmos/learn "$WWW/ophthalmos/" && rm -f "$WWW/ophthalmos/learn/README.md"
   echo "  ophthalmos: $(find "$WWW/ophthalmos" -type f | wc -l | tr -d ' ') files"
 fi
 [ -d clinical-pathways ] && mkdir -p "$WWW/clinical-pathways" && cp -R clinical-pathways/. "$WWW/clinical-pathways/"

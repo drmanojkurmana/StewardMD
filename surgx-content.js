@@ -8,7 +8,8 @@
  * clinician who never taps the tile pays nothing.
  *
  * THE GATES ARE APPLIED HERE, AT THE SEAM, so no screen can forget them:
- *   - review gate  -> content that is not clinician-approved does not come back
+ *   - review gate  -> ALWAYS OPEN (owner decision 2026-09-28): every review status comes back,
+ *                     only `deprecated` is withheld. Independent of flags and of the flags module.
  *   - licence gate -> uncleared media comes back as caption + "visual pending", never a blank
  *
  * PROTOCOLS COME FROM TWO PLACES AND LOOK IDENTICAL DOWNSTREAM:
@@ -31,10 +32,12 @@
   function flag(k) { var f = flags(); return !!(f && f.bool(k)); }
   function model() { try { return G.SMD_SURGX_MODEL || null; } catch (e) { return null; } }
 
-  // Read fresh each call so toggling a flag does not need a reload.
+  // Read fresh each call so toggling a flag does not need a reload. allowDraft is hard-wired TRUE
+  // (owner decision 2026-09-28): the review gate is always open, whatever smd_surgx_draft says and
+  // even when surgx-flags.js failed to load.
   function gateOpts() {
     return {
-      allowDraft: flag("smd_surgx_draft"),
+      allowDraft: true,
       allowUncleared: flag("smd_surgx_uncleared_media")
     };
   }
@@ -141,8 +144,7 @@
             subtitle: entry.subtitle || "", category: entry.category || "surgical_emergency",
             review: entry.review || "draft",
             sourced: true,
-            // The review gate applies to the INDEX too, so a draft protocol is not advertised to
-            // a reader who could not open it anyway.
+            // Only a deprecated protocol is withheld from the index; review status never hides one.
             hidden: !M.isRenderable({ review: { status: entry.review } }, opts)
           });
         }
@@ -311,9 +313,8 @@
 
   /* ── availability (honest partial states) ────────────────────────────────── */
 
-  /* How much of this procedure is actually available to this reader. Screens use it to say
-   * "4 of 22 steps awaiting clinical sign-off" instead of rendering a mysteriously short
-   * operation, which is the difference between a gap and a lie. */
+  /* How much of this procedure is actually available to this reader. With the review gate always
+   * open (2026-09-28) only a deprecated step is counted as not visible. */
   function availability(built) {
     var M = model();
     if (!M || !built) return { total: 0, visible: 0, pending: 0 };

@@ -208,6 +208,17 @@
     }).then(function (r) { return r.json().catch(function () { return { ok: false, error: "bad-response" }; }); });
   }
 
+  /* What to say when the request never got an answer (the .catch branches). This used to be
+   * "You are offline" for every rejection, which also covered "not signed in" and a failed token
+   * refresh, on a phone with full signal (owner screenshot, 2026-09-28: the same wording on the
+   * profile sheet, fixed there on 09-26). Only say offline when the phone says so. */
+  function failText(e) {
+    var code = String((e && (e.code || e.message)) || "");
+    if (/signin-required|sign-in-required/i.test(code)) return "Sign in to verify your number.";
+    try { if (navigator.onLine === false) return "You are offline. Try again once you are connected."; } catch (x) {}
+    return "Couldn't reach StewardMD. Check your connection and try again.";
+  }
+
   var ERR = {
     "bad-phone": "Enter a valid mobile number with the country code.",
     "too-soon": "A code was just sent. Wait a moment before asking again.",
@@ -279,6 +290,24 @@
   /* ── render ───────────────────────────────────────────────────────────────────────────────── */
   function render() {
     var el = root(); el.classList.add("on"); bindViewport();
+    // Opened from Profile on a number that is already verified: say so. Sending a code is only one tap
+    // away (Change number), never the first thing a tap on a verified row does (owner, 2026-09-28).
+    if (state.step === "done") {
+      el.innerHTML = '<div class="phv-card">' +
+        '<div class="phv-head"><div class="phv-grab"></div>' +
+          '<div class="phv-mark">' + ICO.check + '</div>' +
+          '<div class="phv-t">Number verified</div></div>' +
+        '<div class="phv-body">' +
+          '<p class="phv-s"><b>' + esc(state.phone) + '</b> is verified on this account. Colleagues and FollowCare reach you here.</p>' +
+        '</div>' +
+        '<div class="phv-foot">' +
+          '<div class="phv-acts"><button type="button" class="phv-btn phv-go" id="phvDone"><span>Done</span></button></div>' +
+          '<div class="phv-subacts"><button type="button" class="phv-alt" id="phvChange">' + ICO.phone + '<span>Change number</span></button></div>' +
+        '</div></div>';
+      el.querySelector("#phvDone").addEventListener("click", close);
+      el.querySelector("#phvChange").addEventListener("click", function () { state.step = "phone"; render(); });
+      return;
+    }
     if (state.step === "phone") {
       el.innerHTML = '<div class="phv-card">' +
         '<div class="phv-head"><div class="phv-grab"></div>' +
@@ -412,7 +441,7 @@
       }
       state.step = "code"; state.channel = r.channel || "whatsapp"; state.to = r.to || ""; state.fellBack = !!r.fellBack; state.sentAt = Date.now();
       render();
-    }).catch(function () { busy(false); failed("You are offline. Try again once you are connected."); });
+    }).catch(function (e) { busy(false); failed(failText(e)); });
   }
   // A failed send re-renders the phone step, but on the code step keeps what was typed (the earlier
   // code is still valid) and only repaints the footer with the new budget.
@@ -451,27 +480,44 @@
       setMsg("done", "Verified.");
       var t = document.querySelector("#" + ROOT_ID + " .phv-t"); if (t) t.textContent = "Number verified";
       setTimeout(function () { close(); toast("Mobile number verified"); }, 650);
-      try { document.dispatchEvent(new CustomEvent("smd:phone-verified")); } catch (e) {}
-    }).catch(function () { busy(false, "phvVerify", "Verify"); showErr("You are offline. Try again once you are connected."); });
+      try { document.dispatchEvent(new CustomEvent("smd:phone-verified", { detail: { phone: state.phone } })); } catch (e) {}
+    }).catch(function (e) { busy(false, "phvVerify", "Verify"); showErr(failText(e)); });
   }
 
   /* ── should we ask? ───────────────────────────────────────────────────────────────────────── */
   // cb(needed:boolean, phone:string). Signed in, flag on, not snoozed, no phoneVerified claim.
+  var PROFILE_WAIT_MS = 8000;
   function needed(cb) {
     var u = user();
     if (!u || !flagOn()) { cb(false, ""); return; }
     try { if (sessionStorage.getItem(SNOOZE)) { cb(false, ""); return; } } catch (e) {}
     try { if (localStorage.getItem(doneKey(u.uid))) { cb(false, ""); return; } } catch (e) {}
-    var claims = (typeof u.getIdTokenResult === "function") ? u.getIdTokenResult().then(function (r) { return (r && r.claims) || {}; }).catch(function () { return {}; }) : Promise.resolve({});
-    claims.then(function (c) {
-      if (c && c.phoneVerified === true) { try { localStorage.setItem(doneKey(u.uid), "1"); } catch (e) {} cb(false, ""); return; }
-      var ref = docRef();
-      if (!ref) { cb(true, ""); return; }
-      ref.get().then(function (snap) {
-        var d = (snap && snap.exists && snap.data()) || {};
-        if (d.phoneVerifiedAt) { cb(false, ""); return; }   // verified from another device before claims refreshed
-        cb(true, d.phone || "");
-      }).catch(function () { cb(true, ""); });
+    /* Owner 2026-09-28 (screenshot): Profile said "Verified" and this sheet still asked. getIdTokenResult()
+     * answers from the CACHED token, which can predate the phoneVerified claim (set server-side when the
+     * code was accepted, possibly on another device); and the profile-doc fallback read failed (the
+     * iOS WebView Firestore hang), which counted as "not verified". Now: no claim on the cached token
+     * -> force one refresh (a fresh token carries the server's current claims); a profile read that
+     * fails or hangs means "can't tell", so we do not ask (next app-open checks again). */
+    var claimsOf = function (force) {
+      if (typeof u.getIdTokenResult !== "function") return Promise.resolve({});
+      return u.getIdTokenResult(!!force).then(function (r) { return (r && r.claims) || {}; }).catch(function () { return null; });
+    };
+    var verified = function (c) { return !!(c && c.phoneVerified === true); };
+    var yes = function () { try { localStorage.setItem(doneKey(u.uid), "1"); } catch (e) {} cb(false, ""); };
+    claimsOf(false).then(function (c) {
+      if (verified(c)) { yes(); return; }
+      return claimsOf(true).then(function (c2) {
+        if (verified(c2)) { yes(); return; }
+        var ref = docRef();
+        if (!ref) { cb(c2 !== null, ""); return; }      // no profile store: trust a fresh token's "no"
+        var settled = false, fin = function (need, phone) { if (settled) return; settled = true; cb(need, phone || ""); };
+        setTimeout(function () { fin(false); }, PROFILE_WAIT_MS);
+        ref.get().then(function (snap) {
+          var d = (snap && snap.exists && snap.data()) || {};
+          if (d.phoneVerifiedAt) { fin(false); return; }   // verified from another device before claims refreshed
+          fin(true, d.phone || "");
+        }).catch(function () { fin(false); });
+      });
     });
   }
 
@@ -482,7 +528,8 @@
       setTimeout(function () { fitViewport(undefined); }, 120); setTimeout(function () { fitViewport(undefined); }, 420);
     }, true);
   } catch (e) {}
-  function open(phone) { state = { phone: phone || state.phone || "", step: "phone", channel: "", to: "", sentAt: 0, busy: false, left: state.left || null }; render(); }
+  // opts.verified: Profile says this number is already verified, so open on that, not on Send code.
+  function open(phone, opts) { phone = phone || state.phone || ""; state = { phone: phone, step: opts && opts.verified && phone ? "done" : "phone", channel: "", to: "", sentAt: 0, busy: false, left: state.left || null }; render(); }
 
   var _asked = false;
   function check() {
@@ -536,5 +583,5 @@
   if (document.readyState !== "loading") setTimeout(start, 900);
   else document.addEventListener("DOMContentLoaded", function () { setTimeout(start, 900); });
 
-  window.SMD_PHONE_VERIFY = { open: open, close: close, needed: needed, check: check, FLAG: FLAG, _state: function () { return state; }, _reset: function () { _asked = false; }, _start: start, _fit: fitViewport };
+  window.SMD_PHONE_VERIFY = { open: open, close: close, needed: needed, check: check, FLAG: FLAG, _state: function () { return state; }, _reset: function () { _asked = false; }, _start: start, _fit: fitViewport, _failText: failText };
 })();

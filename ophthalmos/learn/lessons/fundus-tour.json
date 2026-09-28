@@ -1,0 +1,264 @@
+{
+  "id": "fundus-tour",
+  "unit": "retina",
+  "level": "mbbs",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "A tour of the fundus photo",
+    "hi": "फ़ंडस फ़ोटो की सैर"
+  },
+  "idea": {
+    "en": "A normal [[fundus]] has four landmarks: the disc, the vessels, the macula and the fovea. Find them in the same order every time.",
+    "hi": "सामान्य [[fundus]] में चार पहचान वाली जगहें होती हैं: डिस्क, नलियाँ, मैक्युला और फ़ोविया। इन्हें हर बार एक ही क्रम में ढूँढें।"
+  },
+  "see": {
+    "img": "dr/20230116164555665002.webp",
+    "deckItem": {
+      "deck": "dr",
+      "id": "20230116164555665002"
+    },
+    "expect": "0",
+    "alt": {
+      "en": "Colour fundus photo of a healthy right eye. The pale optic disc is right of centre with a whiter cup inside it. Vessels curve above and below a darker macula on the left, which has a small dark centre.",
+      "hi": "एक स्वस्थ दाईं आँख की रंगीन फ़ंडस फ़ोटो। हल्के रंग की ऑप्टिक डिस्क बीच से दाईं ओर है, उसके अंदर ज़्यादा सफ़ेद कप है। नलियाँ बाईं ओर के गहरे मैक्युला के ऊपर और नीचे घूमती हैं, जिसका बीच छोटा और गहरा है।"
+    },
+    "caption": {
+      "en": "A real fundus photo of a healthy right eye, graded no retinopathy.",
+      "hi": "एक स्वस्थ दाईं आँख की असली फ़ंडस फ़ोटो, ग्रेड: कोई रेटिनोपैथी नहीं।"
+    },
+    "credit": "Retino (MedFMC), CC0 1.0. Wang D, et al. Sci Data 2023.",
+    "hotspots": [
+      {
+        "x": 0.664,
+        "y": 0.49,
+        "label": {
+          "en": "Optic disc (rim)",
+          "hi": "ऑप्टिक डिस्क (रिम)"
+        },
+        "note": {
+          "en": "The pink ring of the disc is healthy nerve tissue. Its edge should be sharp.",
+          "hi": "डिस्क का गुलाबी घेरा स्वस्थ नस-ऊतक है। इसका किनारा साफ़ होना चाहिए।"
+        }
+      },
+      {
+        "x": 0.612,
+        "y": 0.462,
+        "label": {
+          "en": "Cup",
+          "hi": "कप (cup)"
+        },
+        "note": {
+          "en": "The paler hollow in the middle of the disc. A cup that grows over time can mean glaucoma.",
+          "hi": "डिस्क के बीच का ज़्यादा सफ़ेद गड्ढा। अगर समय के साथ कप बढ़े, तो यह ग्लूकोमा का संकेत हो सकता है।"
+        }
+      },
+      {
+        "x": 0.545,
+        "y": 0.262,
+        "label": {
+          "en": "Upper arcade",
+          "hi": "ऊपरी आर्केड"
+        },
+        "note": {
+          "en": "A big vessel curving over the top of the macula.",
+          "hi": "मैक्युला के ऊपर से घूमती एक बड़ी नली।"
+        }
+      },
+      {
+        "x": 0.586,
+        "y": 0.739,
+        "label": {
+          "en": "Lower arcade",
+          "hi": "निचला आर्केड"
+        },
+        "note": {
+          "en": "A big vessel curving under the macula. Follow it back to the disc.",
+          "hi": "मैक्युला के नीचे से घूमती एक बड़ी नली। इसे पीछे डिस्क तक देखें।"
+        }
+      },
+      {
+        "x": 0.435,
+        "y": 0.58,
+        "label": {
+          "en": "Macula",
+          "hi": "मैक्युला (macula)"
+        },
+        "note": {
+          "en": "The round, slightly darker zone between the arcades. No big vessels cross it.",
+          "hi": "आर्केड के बीच का गोल, थोड़ा गहरा हिस्सा। कोई बड़ी नली इसे पार नहीं करती।"
+        }
+      },
+      {
+        "x": 0.404,
+        "y": 0.528,
+        "label": {
+          "en": "Fovea",
+          "hi": "फ़ोविया (fovea)"
+        },
+        "note": {
+          "en": "The darkest spot in the centre of the macula. It is about two and a half disc widths from the disc.",
+          "hi": "मैक्युला के बीच का सबसे गहरा बिंदु। यह डिस्क से लगभग ढाई डिस्क जितनी दूरी पर है।"
+        }
+      }
+    ],
+    "more": [
+      "fundus-map",
+      "optic-disc"
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Start at the [[optic-disc]]. It is a pale oval where the optic nerve leaves. The paler hollow inside it is the [[cup]].",
+        "hi": "[[optic-disc]] से शुरू करें। यह हल्के रंग का अंडाकार है जहाँ से ऑप्टिक नर्व निकलती है। इसके अंदर का ज़्यादा सफ़ेद गड्ढा [[cup]] है।"
+      },
+      {
+        "en": "Follow the vessels out of the disc. An [[artery]] is thinner and lighter red. A [[vein]] is wider and darker.",
+        "hi": "डिस्क से निकलती नलियों को देखें। [[artery]] पतली और हल्की लाल होती है। [[vein]] चौड़ी और गहरी होती है।"
+      },
+      {
+        "en": "The big vessels curve above and below the macula. These curves are the [[arcades]].",
+        "hi": "बड़ी नलियाँ मैक्युला के ऊपर और नीचे घूमती हैं। इन घुमावों को [[arcades]] कहते हैं।"
+      },
+      {
+        "en": "Between the arcades lies the [[macula]]. It looks a little darker, because its cells hold more pigment.",
+        "hi": "आर्केड के बीच [[macula]] होता है। यह थोड़ा गहरा दिखता है, क्योंकि इसकी कोशिकाओं में रंग (pigment) ज़्यादा होता है।"
+      },
+      {
+        "en": "In the middle of the macula is the [[fovea]]. In young eyes it may show a tiny bright reflex.",
+        "hi": "मैक्युला के बीच में [[fovea]] है। कम उम्र की आँखों में यहाँ एक छोटी सी चमक दिख सकती है।"
+      }
+    ],
+    "analogy": {
+      "en": "Think of a tree seen from above. The disc is the trunk and the vessels are the branches. The macula is the clear patch of ground that the branches reach around but never cover.",
+      "hi": "ऊपर से देखे गए एक पेड़ के बारे में सोचिए। डिस्क तना है और नलियाँ शाखाएँ। मैक्युला ज़मीन का वह ख़ाली हिस्सा है जिसके चारों ओर शाखाएँ जाती हैं, पर उसे कभी ढकती नहीं।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Disc: pale and round, with a sharp edge and a pink rim around a paler cup.",
+      "hi": "डिस्क: हल्के रंग की और गोल, साफ़ किनारा, और ज़्यादा सफ़ेद कप के चारों ओर गुलाबी रिम।"
+    },
+    {
+      "en": "Vessels: arteries are about two-thirds the width of the veins beside them.",
+      "hi": "नलियाँ: धमनियाँ अपने पास की शिराओं से लगभग दो-तिहाई चौड़ी होती हैं।"
+    },
+    {
+      "en": "Macula: a darker zone on the ear side of the disc, with no big vessels.",
+      "hi": "मैक्युला: डिस्क के कान वाली ओर गहरा हिस्सा, जिसमें बड़ी नलियाँ नहीं होतीं।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Zoom in and trace one big vessel from the disc to the edge of the photo.",
+      "hi": "ज़ूम करें और एक बड़ी नली को डिस्क से फ़ोटो के किनारे तक देखें।"
+    },
+    {
+      "en": "Say the four landmarks aloud in order: disc, vessels, macula, fovea.",
+      "hi": "चारों पहचान वाली जगहें क्रम से ज़ोर से बोलें: डिस्क, नलियाँ, मैक्युला, फ़ोविया।"
+    },
+    {
+      "en": "In the screening clinic, find the fovea in five normal photos before you grade them.",
+      "hi": "स्क्रीनिंग क्लिनिक में, ग्रेड करने से पहले पाँच सामान्य फ़ोटो में फ़ोविया ढूँढें।"
+    }
+  ],
+  "remember": {
+    "en": "Disc, vessels, macula, fovea. Say it as: Doctors Visit My Friend.",
+    "hi": "डिस्क, नलियाँ, मैक्युला, फ़ोविया (Disc, Vessels, Macula, Fovea)। याद रखें: Doctors Visit My Friend।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which retinal vessel is wider and darker?",
+        "hi": "रेटिना की कौन सी नली चौड़ी और गहरी होती है?"
+      },
+      "o": [
+        {
+          "en": "Artery",
+          "hi": "धमनी"
+        },
+        {
+          "en": "Vein",
+          "hi": "शिरा"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Veins carry blood that has given up its oxygen, so they look darker. They are also wider.",
+        "hi": "शिराओं में ऑक्सीजन दे चुका खून होता है, इसलिए वे गहरी दिखती हैं। वे चौड़ी भी होती हैं।"
+      }
+    },
+    {
+      "q": {
+        "en": "The disc is on the right of this photo. Which eye is it?",
+        "hi": "इस फ़ोटो में डिस्क दाईं ओर है। यह कौन सी आँख है?"
+      },
+      "o": [
+        {
+          "en": "Left eye",
+          "hi": "बाईं आँख"
+        },
+        {
+          "en": "Right eye",
+          "hi": "दाईं आँख"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "The disc sits on the nose side of the macula. A disc on the right means a right eye.",
+        "hi": "डिस्क मैक्युला से नाक की ओर होती है। डिस्क दाईं ओर हो, तो यह दाईं आँख है।"
+      }
+    },
+    {
+      "q": {
+        "en": "What is the pale hollow in the middle of the disc called?",
+        "hi": "डिस्क के बीच के हल्के रंग के गड्ढे को क्या कहते हैं?"
+      },
+      "o": [
+        {
+          "en": "Fovea",
+          "hi": "फ़ोविया"
+        },
+        {
+          "en": "Cup",
+          "hi": "कप"
+        },
+        {
+          "en": "Macula",
+          "hi": "मैक्युला"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "The cup is inside the disc. The fovea and macula are away from the disc, on the ear side.",
+        "hi": "कप डिस्क के अंदर होता है। फ़ोविया और मैक्युला डिस्क से दूर, कान वाली ओर होते हैं।"
+      }
+    }
+  ],
+  "test": {
+    "clinic": "dr",
+    "classes": [
+      "0"
+    ],
+    "mcqTopic": "retina"
+  },
+  "deeper": {
+    "note": "disc-glaucoma"
+  },
+  "glossary": [
+    "fundus",
+    "optic-disc",
+    "cup",
+    "artery",
+    "vein",
+    "arcades",
+    "macula",
+    "fovea"
+  ],
+  "sources": [
+    "Wang D, et al. MedFMC: A Real-world Dataset and Benchmark for Foundation Model Adaptation in Medical Image Classification. Sci Data 2023. doi:10.1038/s41597-023-02460-0",
+    "Remington LA. Clinical Anatomy and Physiology of the Visual System. 3rd ed. St Louis: Elsevier Butterworth-Heinemann; 2012.",
+    "Jonas JB, Gusek GC, Naumann GO. Optic disc, cup and neuroretinal rim size, configuration and correlations in normal eyes. Invest Ophthalmol Vis Sci 1988;29(7):1151-1158."
+  ]
+}

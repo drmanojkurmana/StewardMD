@@ -19,8 +19,11 @@
   function wdD() { return WDS[R.wd]; }
 
   /* ---------- state ---------- */
-  function newPatient(mode) {
-    var lv = I.level(), res = lv === "resident" && !I.levelLocked(lv);
+  // res: a Resident patient. Practice uses Resident patients only when Resident is open (Pro); a graded
+  // Resident case also runs on the one free trial (startCase).
+  function resOpen() { return I.level() === "resident" && !I.levelLocked("resident"); }
+  function newPatient(mode, res) {
+    if (res == null) res = resOpen();
     var cs = M.makeCase(res ? "resident" : "foundation", (Date.now() ^ Math.floor(Math.random() * 1e9)) >>> 0);
     R.mode = mode; R.cs = cs; R.rx = cs.rx; R.lens = 0; R.streak = 90; R.s = 0;
     R.readings = []; R.layer = null; R.result = null; R.entry = { s: 0, c: 0, ax: 180 };
@@ -37,7 +40,7 @@
     teardown();
     st.view = VIEW;
     var cse = R.mode === "case";
-    var sub = cse ? "Patient " + R.n + " · " + (R.cs.level === "resident" ? "Resident" : "Foundation") : "Practice";
+    var sub = cse ? "Patient " + R.n + " · " + esc(st.cfg.levels[R.cs.level].label) : "Practice";
     var ctx = "Pupil " + R.cs.pupil + " mm · " + (R.cs.haze ? "hazy media · " : "") + R.wd + " cm";
     var card = cse || R.layer === "result"
       ? '<div class="oph-card-l"><b>' + (R.layer === "result" ? "Patient " + esc(rxStr(R.rx)) : "Find the refraction") + "</b><span>" + ctx + "</span></div>"
@@ -72,6 +75,7 @@
       }).join("") + "</div></div>" +
       '<div class="ret-acts"><button class="oph-btn sec" data-act="retrec">' + ico("check") + " Record neutral</button>" +
       '<button class="oph-btn sec ret-auto" data-act="retauto" aria-pressed="' + R.auto + '">Auto sweep</button></div>' +
+      (guided() ? '<ol class="oph-guide" id="retGuide" aria-label="Next steps">' + guideHtml() + "</ol>" : "") +
       (cse ? "" : '<div class="ret-row ret-wd"><span id="retWdL">Distance</span><output>' + dstr(wdD()) + ' D</output><div class="oph-seg" role="group" aria-labelledby="retWdL">' +
         [67, 50].map(function (w) { return '<button data-act="retwd" data-w="' + w + '" aria-pressed="' + (R.wd === w) + '">' + w + " cm</button>"; }).join("") + "</div></div>") +
       '<div class="ret-cross" id="retCross">' + cross() + "</div>" +
@@ -82,8 +86,8 @@
     if (R.layer === "result") return '<div class="ret-foot2"><button class="oph-btn sec" data-act="retpractice">Practice</button><button class="oph-btn pri" data-act="retcase">Next patient</button></div>';
     if (R.layer === "entry") return '<button class="oph-btn pri oph-wide" data-act="retsubmit">Sign off prescription</button>';
     if (R.mode === "case") return '<button class="oph-btn pri oph-wide" data-act="retsign">Write the prescription</button>';
-    var lk = I.levelLocked();
-    return '<button class="oph-btn pri oph-wide" data-act="retcase">' + (lk ? ico("lock") + " " : "") + "Start a graded patient</button>";
+    var badge = I.level() === "resident" ? I.lockBadge("sim.retino") : "";
+    return '<button class="oph-btn pri oph-wide" data-act="retcase">Start a graded patient' + (badge ? " " + badge : "") + "</button>";
   }
 
   // The power cross the learner is building: one line per recorded meridian, labelled with the neutral lens.
@@ -149,6 +153,24 @@
     if (Math.abs(rf.breakDeg) >= 5) s += ", band " + Math.round(Math.abs(rf.breakDeg)) + "° " + (rf.breakDeg > 0 ? "counterclockwise" : "clockwise") + " of the streak";
     return s + (rf.bright < 0.55 ? ", dull and slow." : ".");
   }
+  // MBBS guided practice: a numbered next-step list read from the model state (recorded meridians, the
+  // band against the streak, the reflex), the current step marked, earlier steps ticked.
+  var GUIDE = ["Turn the streak until the band lines up with it", "Neutralize: with motion add plus, against add minus",
+    "Record neutral", "Turn the streak 90° and neutralize the other meridian, then record it", "Write the prescription, taking off the working distance"];
+  function guided() { return R.mode === "practice" && I.level() !== "resident"; }
+  function guideStep() {
+    var n = R.readings.length, rf = R.rf;
+    if (n >= 2) return 4;
+    if (n === 1) return 3;
+    if (!rf) return 0;
+    return rf.motion === "neutral" ? 2 : Math.abs(rf.breakDeg) >= 5 ? 0 : 1;
+  }
+  function guideHtml() {
+    var at = guideStep();
+    return GUIDE.map(function (t, i) {
+      return '<li data-s="' + (i < at ? "done" : i === at ? "now" : "todo") + '"' + (i === at ? ' aria-current="step"' : "") + ">" + t + (i < at ? '<span class="oph-sr">, done</span>' : "") + "</li>";
+    }).join("");
+  }
   function coach(rf) {
     if (rf.motion === "neutral") return "Neutral in the " + rf.meridian + "° meridian at " + dstr(R.lens) + " D. Record it, then turn the streak 90°.";
     if (Math.abs(rf.breakDeg) >= 5) return "The band is " + Math.round(Math.abs(rf.breakDeg)) + "° off the streak. Turn the streak " + (rf.breakDeg > 0 ? "counterclockwise" : "clockwise") + " until they line up: that is a principal meridian.";
@@ -167,6 +189,7 @@
     if (cv) cv.setAttribute("aria-label", "Retinoscopic reflex. " + said);
     // Announce once the two-finger rotate ends, not at gesture rate.
     if (so && !R.rot) { var txt = R.mode === "case" ? said : coach(R.rf); if (txt !== R.said) { so.textContent = txt; R.said = txt; } }
+    var gd = $("retGuide"); if (gd && gd.getAttribute("data-at") !== String(guideStep())) { gd.innerHTML = guideHtml(); gd.setAttribute("data-at", String(guideStep())); }
     if (!R.raf) draw();
   }
 
@@ -298,13 +321,14 @@
     R.readings = keep.slice(-2);
     I.haptic(R.rf.motion === "neutral" ? "success" : "light");
     var c = $("retCross"); if (c) c.innerHTML = cross();
+    update();
     if (R.mode !== "case" && R.rf.motion !== "neutral") {
       var so = $("retStatus"); if (so) { so.textContent = "Recorded, but the " + m + "° meridian is not neutral yet: " + describe(R.rf); R.said = so.textContent; }
     }
   }
   function startCase() {
-    if (I.levelLocked()) { I.showPro(); return; }
-    newPatient("case"); render();
+    if (I.level() !== "resident") { newPatient("case", false); return render(); }
+    I.gate("sim.retino", function () { newPatient("case", true); render(); });
   }
   function fillFromReadings() {
     var r = R.readings.slice().sort(function (a, b) { return b.lens - a.lens; }), hi = r[0], lo = r[1] || r[0];

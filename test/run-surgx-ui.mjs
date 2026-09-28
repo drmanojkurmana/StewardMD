@@ -118,9 +118,12 @@ try {
 
   /* ── 2. FLAG ON: mount + home ──────────────────────────────────────────── */
   console.log("\n--- flag ON ---");
-  await attach(BASE + "?surgx=1");
+  // surgxdraft=0 on purpose: the review gate is ALWAYS OPEN (owner decision 2026-09-28), so every
+  // section below must still render with the draft flag forced off.
+  await attach(BASE + "?surgx=1&surgxdraft=0");
 
   ok((await ev("window.SURGX.isOn()")) === true, "SURGX.isOn() is true with ?surgx=1");
+  ok((await ev("SMD_SURGX_FLAGS.bool('smd_surgx_draft')")) === false, "the draft flag is forced OFF for this run");
   await ev("window.SURGX.open()");
   ok(await waitFor("#surgxRoot .sgx-sec"), "#surgxRoot mounts and the home screen renders");
   ok((await ev("document.getElementById('surgxRoot').classList.contains('sgx-open')")) === true, "the overlay is open");
@@ -177,8 +180,8 @@ try {
   // Provenance is not optional.
   ok((await ev("document.querySelector('#surgxRoot .sgx-wrap').textContent.includes('Source:')")) === true,
     "action items carry a visible source line");
-  ok((await ev("document.querySelector('#surgxRoot .sgx-wrap').textContent.includes('Draft, pending clinician review')")) === true,
-    "draft content says so on the screen, every time");
+  ok((await ev("!/pending clinician review|awaiting clinical/i.test(document.querySelector('#surgxRoot .sgx-wrap').textContent)")) === true,
+    "ALL OPEN: no draft or pending-review notice on the protocol");
 
   // Calculators are reached, never duplicated.
   ok((await ev("!!document.querySelector('#surgxRoot [data-sgx=\"calc\"]')")) === true,
@@ -214,10 +217,12 @@ try {
   /* ── 5. THE LICENCE GATE, the other way ────────────────────────────────── */
   await clickText("#surgxRoot .sgx-tab", "Steps");
   await sleep(300);
-  ok((await ev("!!document.querySelector('#surgxRoot .sgx-media.pending')")) === true,
-    "LICENCE GATE: an uncleared asset renders as caption + 'visual pending', never a blank or a broken image");
-  ok((await ev("!document.querySelector('#surgxRoot .sgx-media.pending img')")) === true,
-    "and no image element is emitted for it");
+  ok((await ev("!document.querySelector('#surgxRoot .sgx-media.pending')")) === true,
+    "ALL ON: smd_surgx_uncleared_media defaults ON (owner 2026-09-28), so no 'visual pending' placeholder is shown");
+  ok((await ev("![...document.querySelectorAll('#surgxRoot .sgx-media img')].some(i => !i.getAttribute('src'))")) === true,
+    "and no broken (src-less) image element is emitted");
+  ok((await ev("!/pending clinician review|awaiting clinical/i.test(document.querySelector('#surgxRoot .sgx-wrap').textContent)")) === true,
+    "ALL OPEN: no draft or pending-review notice on the procedure (draft flag off)");
 
   /* ── 6. EVIDENCE ───────────────────────────────────────────────────────── */
   console.log("\n--- 04 evidence ---");
@@ -355,28 +360,20 @@ try {
     ok((await ev("document.querySelector('#surgxRoot [data-sgx=\"notefinal\"]').disabled")) === false,
       "and finalise unlocks");
 
+    /* Finalise now asks through window.confirm() (the arm-then-tap-again flow was replaced; see
+     * surgx-screens.js act === "notefinal"). A native dialog blocks Runtime.evaluate in headless
+     * Chrome, so the harness answers it by stubbing confirm/alert: first DECLINE, then accept. */
+    await ev("(window.__sgxConfirm = false, window.confirm = function () { return window.__sgxConfirm; }, window.alert = function () {}, 1)");
     await ev("document.querySelector('#surgxRoot [data-sgx=\"notefinal\"]').click()");
-    await sleep(200);
-    ok((await ev("(SMD_SURGX_SCREENS._state().armed||{}).key === 'notefinal:'")) === true,
-      "FINALISE GATE: the first press ARMS rather than finalising - a clinical record is never one tap");
+    await sleep(300);
     ok((await ev("!!document.querySelector('#surgxRoot #sgxNotePreview').textContent.includes('DRAFT')")) === true,
-      "and the note is still a draft after that first press");
+      "FINALISE GATE: declining the sign confirmation leaves the note a draft - a clinical record is never one tap");
 
-    /* THE REGRESSION THIS EXISTS FOR (Pixel 9, 2026-08-26): the armed flag used to be a data-armed
-     * ATTRIBUTE on the button, so any repaint - the assessment probe resolving, a status refresh, a
-     * save completing - replaced the element and silently disarmed it. The second tap then re-armed
-     * instead of acting, an unwinnable loop that presented as "I confirmed and nothing happened".
-     * Force a repaint mid-confirmation and prove the arm survives it. */
-    await ev("SMD_SURGX_SCREENS._state(); (window.SMD_SURGX_SCREENS.go ? 0 : 0); document.querySelector('#surgxRoot') && SMD_SURGX_SCREENS._state()");
-    await ev("(function(){ var S=window.SURGX; S.open(location.hash ? location.hash : 'note/' + SMD_SURGX_STORE.listNotes()[0].id); return 1; })()");
-    await sleep(400);
-    ok((await ev("(SMD_SURGX_SCREENS._state().armed||{}).key === 'notefinal:'")) === true,
-      "REPAINT: the confirmation is still armed after the screen redraws");
-
+    await ev("(window.__sgxConfirm = true, 1)");
     await ev("document.querySelector('#surgxRoot [data-sgx=\"notefinal\"]').click()");
     await sleep(700);
     ok((await ev("!document.querySelector('#surgxRoot #sgxNotePreview').textContent.includes('DRAFT - NOT VERIFIED')")) === true,
-      "the second press finalises it");
+      "accepting the confirmation finalises it");
     ok((await ev("document.querySelector('#surgxRoot #sgxNotePreview').textContent.includes('Finalised by')")) === true,
       "and the note records who finalised it");
 

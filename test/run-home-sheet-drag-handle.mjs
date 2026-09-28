@@ -54,15 +54,18 @@ try {
   for (let i = 0; i < 60; i++) { await sleep(400); if (await ev(`return document.body.classList.contains("ui-v2") && !!window.SB;`) === true) { ready = true; break; } }
   ok(ready, "app boots (home.js loaded, window.SB present)");
 
-  // Open the sheet via the real "Add Tool" tile — same path a user taps.
+  // Open the sheet the way a user does: the "All tools" tile, then its Customize button
+  // (the tile replaced "Add Tool" on 2026-09-28; Customize lives inside the All tools sheet).
   const opened = await J(`
-    var b = document.querySelector('[data-act="customizetools"]');
-    if (!b) return JSON.stringify({ err: "no Add Tool tile" });
+    var b = document.querySelector('[data-act="alltools"]');
+    if (!b) return JSON.stringify({ err: "no All tools tile" });
     b.click();
     return JSON.stringify({ ok: true });
   `);
   await sleep(400);
-  ok(opened.ok === true, "the 'Add Tool' tile opens the Customize tools sheet");
+  await J(`var c = document.querySelector('#hvSheet [data-at-cust]'); if (c) c.click(); return "1";`);
+  await sleep(400);
+  ok(opened.ok === true, "the 'All tools' tile, then Customize, opens the Customize tools sheet");
   ok(await sheetOn() === true, "sheet is open (#hvSheet.on)");
 
   // Case 1 (THE BUG): sheet scrolled down, drag from the DEDICATED grab handle → must still close.
@@ -71,7 +74,7 @@ try {
   ok(await sheetOn() === false, "scrolled down + drag from the grab handle closes the sheet (was broken: handle was gated behind scrollTop==0)");
 
   // Reopen, re-verify still open before the next case.
-  await ev(`document.querySelector('[data-act="customizetools"]').click();`); await sleep(400);
+  await ev(`SMD_openRoute('customizetools');`); await sleep(400);
   ok(await sheetOn() === true, "sheet reopens for the next case");
 
   // Case 2 (regression guard): sheet scrolled down, drag from the CONTENT area (a toggle row) →

@@ -1,7 +1,7 @@
 {
   "_comment": "CliniX catalog. Small on purpose: the app fetches this first, then only the packs the student actually opens. Modelled on atlas/modules.json, deliberately NOT on kardiox-content-pack.js (a 1.9 MB array parsed on every page load).",
   "schemaVersion": 1,
-  "contentVersion": "0.9.0-r1-verified",
+  "contentVersion": "0.9.2-audit",
   "updated": "2026-08-22",
   "skillPacks": [
     {
@@ -43,7 +43,7 @@
       "subtitle": "Acute vs chronic dyspnoea, red flags, high-yield discriminators, and step-by-step diagnostic reasoning",
       "file": "presentations/breathlessness.json",
       "estMinutes": 45,
-      "review": "approved"
+      "review": "ai_drafted"
     },
     {
       "id": "chest_pain",
@@ -51,7 +51,7 @@
       "subtitle": "STEMI vs NSTEMI, Aortic Dissection, Pulmonary Embolism, Tension Pneumothorax, and Esophageal Rupture",
       "file": "presentations/chest_pain.json",
       "estMinutes": 50,
-      "review": "approved"
+      "review": "ai_drafted"
     },
     {
       "id": "acute_weakness",
@@ -59,7 +59,7 @@
       "subtitle": "Acute hemiplegia, paraplegia, quadriplegia, stroke vs mimics, neuroaxis localization, and emergency triage",
       "file": "presentations/acute_weakness.json",
       "estMinutes": 50,
-      "review": "approved"
+      "review": "ai_drafted"
     },
     {
       "id": "jaundice",
@@ -67,7 +67,7 @@
       "subtitle": "Pre-hepatic, hepatocellular, and cholestatic jaundice, acute liver failure triage, and hepatic stigmata",
       "file": "presentations/jaundice.json",
       "estMinutes": 45,
-      "review": "approved"
+      "review": "ai_drafted"
     },
     {
       "id": "acute_abdomen",
@@ -75,7 +75,7 @@
       "subtitle": "Peritonitis, hollow viscus perforation, bowel obstruction, acute vascular ischemia, and medical mimics",
       "file": "presentations/acute_abdomen.json",
       "estMinutes": 50,
-      "review": "approved"
+      "review": "ai_drafted"
     }
   ],
   "systems": [
@@ -216,7 +216,8 @@
       "icon": "gastroenterology",
       "skillPacks": [
         "core",
-        "abdomen"
+        "abdomen",
+        "general"
       ],
       "diseases": [
         {

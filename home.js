@@ -1053,14 +1053,16 @@
     kxinbox: function () { if (window.SMD_SHARE && SMD_SHARE.openInbox) SMD_SHARE.openInbox(); else toast("Loading…"); },
     speckit: function () { if (window.SMD_KITS && SMD_KITS.open) SMD_KITS.open(); else toast("Specialty kits loading…"); },
     icdsearch: function () { if (window.SMD_ICD) SMD_ICD.open(); },
+    dosecalc: function () { if (window.SMD_DOSECALC) SMD_DOSECALC.open({ source: "Drugs" }); else toast("Dose calculator loading…"); },
     drugmenu: function () {
       openSheet('<div class="hv-sh-t">Drugs &amp; Interactions</div>' +
         mi("pills", "Drug Database", "Brands · doses · spectrum · cautions", "db") +
-        mi("interact", "Interaction Checker", "Check drug–drug interactions", "ix"));
+        mi("interact", "Interaction Checker", "Check drug–drug interactions", "ix") +
+        (doseCalcOn() ? mi("pills", "Dose calculator", "Dose for a patient's weight, kidney and liver", "dose") : ""));
       sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
         b.addEventListener("click", function () {
           var a = b.getAttribute("data-mi"); closeSheet();
-          setTimeout(function () { if (a === "ix") ACT.interactions(); else ACT.drugs(); }, 70);
+          setTimeout(function () { if (a === "ix") ACT.interactions(); else if (a === "dose") ACT.dosecalc(); else ACT.drugs(); }, 70);
         });
       });
     },
@@ -1304,7 +1306,8 @@
     },
     followcare: function () { if (window.FollowCare && FollowCare.open) FollowCare.open(); else toast("FollowCare loading…"); },
     maitri: function () { if (window.FollowCare && FollowCare.maitri) FollowCare.maitri(); else if (window.FollowCare && FollowCare.open) FollowCare.open(); else toast("MAiTRI loading…"); },
-    customizetools: function () { openToolsCustomize(); }
+    customizetools: function () { openToolsCustomize(); },
+    alltools: function () { openAllTools(); }
   };
   // Globals so other modules (e.g. Ward Sync / ghis-ward.js) can open the Connect surfaces directly.
   try { window.SMD_openConnectEmr = function (proto) { try { ACT.connect(proto); } catch (e) {} }; } catch (e) {}
@@ -1508,6 +1511,12 @@
       "@media(hover:hover){.rds-hospital button.hv-tile:hover{border-color:var(--hp);box-shadow:0 6px 18px rgba(0,0,0,.07)}}@media(max-width:360px){.rds-hospital-sheet .hv-sheet-wrap{padding-left:16px;padding-right:16px}.rds-hospital .hv-tile{padding:14px}}@media(prefers-reduced-motion:reduce){.rds-hospital-sheet,.rds-hospital .hv-tile,.rds-hospital .hv-t2b{transition:none}.rds-hospital .hv-tile:active,.rds-hospital .hv-t2b:active{transform:none}}",
       // Customize-tools sheet (Add Tool): row toggles.
       ".hv-sub2{font:500 12.5px var(--hfont);color:var(--hmut);margin:-6px 0 14px}",
+      // All tools sheet: open from the row, pin to Home from the row's right edge.
+      ".hv-at-bar{display:flex;gap:8px;align-items:center;margin:0 0 6px}.hv-at-q{flex:1;min-width:0;box-sizing:border-box;border:1.5px solid var(--hbd);border-radius:12px;padding:11px 13px;font:500 15px var(--hfont);color:var(--hink);background:var(--hbg);-webkit-appearance:none}.hv-at-q:focus{outline:none;border-color:var(--hp)}",
+      ".hv-at-cust{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;min-height:44px;padding:0 12px;border:1.5px solid var(--hbd);border-radius:12px;background:var(--hbg);color:var(--hink);font:700 13px var(--hfont);cursor:pointer}.hv-at-cust .rds-icon{font-size:18px;color:var(--hp);width:auto}",
+      ".hv-mi.hv-at-row{padding:0;gap:0;align-items:stretch}.hv-at-open{flex:1;min-width:0;display:flex;align-items:center;gap:13px;text-align:left;background:transparent;border:none;padding:12px 8px;color:var(--hink);cursor:pointer;font:inherit}.hv-at-open .ml{font:700 14.5px var(--hfont);min-width:0}.hv-at-open .mc{font:500 12px var(--hfont);color:var(--hmut);margin-top:2px}",
+      ".hv-at-pin{flex:0 0 46px;border:none;background:transparent;color:var(--hmut);cursor:pointer;display:flex;align-items:center;justify-content:center;border-left:1px solid var(--hbd)}.hv-at-pin .rds-icon{font-size:20px;color:inherit;width:auto;transform:rotate(30deg);font-variation-settings:'FILL' 0}.hv-at-pin.on{color:var(--hp)}.hv-at-pin.on .rds-icon{transform:none;font-variation-settings:'FILL' 1}",
+      ".hv-at-none{font:600 13.5px var(--hfont);color:var(--hmut);text-align:center;padding:26px 0}",
       ".hv-mi .rds-icon{font-size:22px;color:var(--hp);width:22px;text-align:center}",
       ".hv-tog{flex:0 0 auto;width:42px;height:25px;border-radius:13px;background:var(--hbd);position:relative;transition:background .15s}",
       ".hv-tog:after{content:'';position:absolute;top:3px;left:3px;width:19px;height:19px;border-radius:50%;background:#fff;transition:left .15s;box-shadow:0 1px 2px rgba(0,0,0,.2)}.hv-tog.on{background:var(--hp)}.hv-tog.on:after{left:20px}",
@@ -2026,6 +2035,10 @@
   // eligible(): flag/entitlement gate — a locked/off tool never shows and never appears in Customize.
   // defOn: shown by default; users show/hide via the "Add Tool" -> Customize sheet (saved on device,
   // key smd_home_tools). feat: dark "signature" badge. Icons are Material Symbols (ric).
+  function doseCalcOn() {
+    if (window.SMD_DOSECALC && SMD_DOSECALC.on) return SMD_DOSECALC.on();
+    try { var q = (location.search.match(/[?&]dosecalc=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_dose_calc") !== "0"; } catch (e) { return true; }
+  }
   var HOME_TOOLS = [
     { act: "retinalscan", ic: "visibility", tt: "FundX AI", sub: "Retinal scan", feat: true, beta: true, anim: "eye",
       eligible: function () { return expTileOn("smd_fundx", "fundx", null); } },
@@ -2087,7 +2100,7 @@
     // Ophthalmós (ophthalmos.js): eye-imaging clinic trainer. ON for all (owner decision 2026-09-27);
     // kill switch smd_ophthalmos="0" or ?ophthalmos=0. Images load from R2 (ophthalmos-img.stewardmd.in);
     // content is ai_drafted, so every screen carries a "To be verified · draft" mark until sign-off.
-    { act: "ophthalmos", ic: "eye", tt: "Ophthalmós", sub: "Eye imaging clinic",
+    { act: "ophthalmos", ic: "eye", anim: "ophthalmos", tt: "Ophthalmós", sub: "Eye imaging clinic",
       eligible: function () { try { var q = (location.search.match(/[?&]ophthalmos=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_ophthalmos") !== "0"; } catch (e) { return true; } } },
     { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
     // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).
@@ -2103,6 +2116,10 @@
     { act: "askai", ic: "auto_awesome", tt: "Ask MaiK", sub: "AI assistant", defOn: false },
     { act: "drugmenu", ic: "medication", tt: "Drugs", sub: "Database · interactions", defOn: false },
     { act: "calculators", ic: "calculate", tt: "Calculators", sub: "Scores · doses", defOn: false },
+    // Dose calculator (dose-calc.js). Flag smd_dose_calc, DEFAULT ON (owner 2026-09-28); "0" hides it.
+    // Read directly: home.js loads before dose-calc.js.
+    { act: "dosecalc", ic: "medication", tt: "Dose calculator", sub: "Dose for a patient", defOn: false,
+      eligible: function () { return doseCalcOn(); } },
     { act: "dosing", ic: "vaccines", tt: "Bedside dosing", sub: "Insulin · electrolytes", defOn: false },
     { act: "insulin", ic: "water_drop", tt: "Insulin", sub: "Dose · convert", defOn: false },
     { act: "syndromes", ic: "coronavirus", tt: "Syndromes", sub: "Reference", defOn: false },
@@ -2235,6 +2252,40 @@
     ecg: '<svg class="ai-anim ai-ecg" viewBox="0 0 48 24"><path d="M0 12 H11 l2.5 -8 3 16 2.5 -8 H27 l2.5 -7 3 14 2.5 -7 H48"/></svg>',
     derm: '<img class="ai-brandmark ai-sknx-img" src="/sknx-mark.png?v=sx2" alt="SknX AI" width="38" height="38">',
     cxr: '<svg class="ai-anim ai-cxr" viewBox="0 0 24 24"><path d="M12 4v9"/><path d="M12 8c-1-2-3.2-2.4-4.6-1.3C6 8 5 10.2 5 13.2A2.9 2.9 0 0 0 10.8 14"/><path d="M12 8c1-2 3.2-2.4 4.6-1.3C18 8 19 10.2 19 13.2A2.9 2.9 0 0 1 13.2 14"/><rect class="beam" x="2" y="3" width="3.4" height="18"/></svg>',
+    // Ophthalmós (owner, 2026-09-27: "an eye closing and opening", then "more premium and stylish").
+    // A fashion-plate eye: the upper lid is a tapered crescent (thick at the centre, vanishing at the
+    // corners), the lower lid a fine line; sclera shaded under the lid; iris with limbal ring, slowly
+    // turning fibres and a soft glow; pupil with a large and a small catchlight; five tapered lashes.
+    // Blinks into a matching closed-lid crescent with lashes swept down. Motion in redesign-system.css
+    // (.ai-ox); a still open eye under reduced motion. Lashes: one tapered shape placed by transform.
+    ophthalmos: (function () {
+      var lash = function (x, y, a, l) { return '<path d="M-.7 0Q-.35 ' + (-l * .5) + ' 0 ' + (-l) + 'Q.35 ' + (-l * .5) + ' .7 0Z" transform="translate(' + x + ' ' + y + ') rotate(' + a + ')" fill="#fff" stroke="none"/>'; };
+      return '<svg class="ai-anim ai-ox" viewBox="0 0 32 32" aria-hidden="true"><defs>' +
+        '<radialGradient id="oxIris" cx="40%" cy="36%" r="64%"><stop offset="0" stop-color="#d6fff6"/><stop offset=".42" stop-color="#4fd1b3"/><stop offset=".8" stop-color="#0f6b5b"/><stop offset="1" stop-color="#083f36"/></radialGradient>' +
+        '<radialGradient id="oxGlow"><stop offset=".55" stop-color="rgba(140,255,230,.4)"/><stop offset="1" stop-color="rgba(140,255,230,0)"/></radialGradient>' +
+        '<clipPath id="oxClip"><path d="M3 16C8 7.4 24 7.4 29 16C24 24.6 8 24.6 3 16Z"/></clipPath></defs>' +
+        '<g class="ox-open">' +
+          '<g clip-path="url(#oxClip)">' +
+            '<path d="M3 16C8 7.4 24 7.4 29 16C24 24.6 8 24.6 3 16Z" fill="rgba(255,255,255,.17)" stroke="none"/>' +
+            '<path d="M3 16C8 7.4 24 7.4 29 16C24 11.4 8 11.4 3 16Z" fill="rgba(0,0,0,.2)" stroke="none"/>' +
+            '<g class="ox-look">' +
+              '<circle class="ox-glow" cx="16" cy="16.4" r="8.6" fill="url(#oxGlow)" stroke="none"/>' +
+              '<circle cx="16" cy="16.4" r="6.4" fill="url(#oxIris)" stroke="none"/>' +
+              '<circle class="ox-fibres" cx="16" cy="16.4" r="4.6" fill="none" stroke="rgba(255,255,255,.34)" stroke-width="2.4" stroke-dasharray=".5 1.15"/>' +
+              '<circle cx="16" cy="16.4" r="6.4" fill="none" stroke="rgba(3,28,24,.9)" stroke-width="1.1"/>' +
+              '<circle class="ox-pupil" cx="16" cy="16.4" r="2.9" fill="#03171a" stroke="none"/>' +
+              '<circle cx="18.2" cy="14.1" r="1.5" fill="#fff" stroke="none"/><circle cx="14.3" cy="18.6" r=".75" fill="rgba(255,255,255,.85)" stroke="none"/>' +
+            '</g>' +
+          '</g>' +
+          '<path d="M3.6 16.7C8.6 23.9 23.4 23.9 28.4 16.7" fill="none" stroke="rgba(255,255,255,.72)" stroke-width="1.3" stroke-linecap="round"/>' +
+          '<path d="M3 16C8 7.2 24 7.2 29 16C24 9.7 8 9.7 3 16Z" fill="#fff" stroke="none"/>' +
+          lash(7.2, 11.3, -40, 3.4) + lash(11.35, 9.6, -19, 2.7) + lash(16, 9, 0, 3.6) + lash(20.65, 9.6, 19, 2.7) + lash(24.8, 11.3, 40, 3.4) +
+        '</g>' +
+        '<g class="ox-shut">' +
+          '<path d="M3.4 15.6C9 21.8 23 21.8 28.6 15.6C23 19.4 9 19.4 3.4 15.6Z" fill="#fff" stroke="none"/>' +
+          lash(7.7, 18.2, 220, 3.2) + lash(11.6, 19.6, 200, 2.5) + lash(16, 20.1, 180, 3.3) + lash(20.4, 19.6, 160, 2.5) + lash(24.3, 18.2, 140, 3.2) +
+        '</g></svg>';
+    })(),
     oncotree: '<svg class="ai-anim ai-oncotree" viewBox="0 0 24 24"><path class="branch" d="M12 5v4M12 9c0 0-5 1-5 6M12 9c0 0 5 1 5 6"/><circle class="n n0" cx="12" cy="4.5" r="1.9"/><circle class="n n1" cx="7" cy="16" r="1.9"/><circle class="n n2" cx="17" cy="16" r="1.9"/></svg>',
     // Brand marks share .ai-brandmark: ONE optical box in CSS, rather than the 48/38/34px inline
     // sizes these carried, which made three logos sitting side by side three different weights.
@@ -2246,8 +2297,8 @@
     // SURGX: the real owner-supplied monogram (surgx-logo.png), same pattern as maitri/clinix above.
     // brightness(0) invert(1) forces it WHITE on this dark badge regardless of the source colour,
     // which works because the PNG is alpha-masked rather than a white-background image.
-    // Deliberately STATIC - the module's design brief is "not gamified", and an animating badge on
-    // a surgical tile reads wrong.
+    // Not a loop of motion but a blade glint (owner, 2026-09-27: "SurgX should shine like a sharp
+    // knife"): redesign-system.css sweeps a streak of light across the mark, clipped to its shape.
     surgx: '<img class="ai-brandmark ai-surgx-img" src="/surgx-logo.png" alt="">'
   };
   /* Role box (owner, 2026-09-26): tools outside the user's role stay on Home but locked, after the
@@ -2268,8 +2319,32 @@
     });
   }
   try { window.SMD_openRoleLock = openRoleLock; } catch (e) {}
+  /* Lively tiles (owner, 2026-09-27: "just like oncotree make all clinical tool icons have motion").
+   * Every glyph tile gets a small motion that fits what it is: a heartbeat for the heart tools, a
+   * page turn for documents, a sparkle for MaiK. CSS lives in redesign-system.css (.ai-live); it runs
+   * only with reduced motion off, pauses off screen and under overlays (refreshTileAnim), and is
+   * staggered per tool so the grid never bobs in unison. Locked tiles and SURGX (static by its
+   * brief) stay still. */
+  var LIVE_MOTION = {
+    beat: ["ecg_heart", "monitor_heart", "cardiology", "favorite", "vital_signs"],
+    pulse: ["health_and_safety", "local_hospital", "medical_services", "vaccines", "water_drop", "rate_review", "coronavirus", "emergency"],
+    tilt: ["medication", "science", "biotech", "stethoscope", "calculate", "medication_liquid", "pill"],
+    sparkle: ["auto_awesome"],
+    blink: ["photo_camera", "eye", "visibility"],
+    flip: ["description", "book_2", "history_edu", "school", "menu_book"],
+    bounce: ["groups", "support_agent", "diversity_3"],
+    rise: ["stairs", "trending_up"],
+    spin: ["hub", "sync"],
+    listen: ["mic", "record_voice_over"],
+    sweep: ["search", "neurology", "psychology", "body_system", "oncology"]
+  };
+  function liveMotion(ic) { for (var k in LIVE_MOTION) if (LIVE_MOTION[k].indexOf(ic) >= 0) return k; return "float"; }
+  function liveIcon(t) {
+    var h = 0, a = String(t.act || ""); for (var i = 0; i < a.length; i++) h = (h * 31 + a.charCodeAt(i)) % 997;
+    return '<span class="rds-icon ai-live" data-live="' + liveMotion(t.ic) + '" style="--live-d:-' + ((h % 23) / 10).toFixed(1) + 's" aria-hidden="true">' + t.ic + '</span>';
+  }
   function homeToolTile(t, locked) {
-    var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : ric(t.ic);
+    var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : (locked ? ric(t.ic) : liveIcon(t));
     // A1: the Specialty Kits tile names the doctor's own kit once one is known (profile or chosen).
     if (t.act === "speckit") { var mk = ""; try { mk = (window.SMD_KITS && SMD_KITS.myLabel) ? SMD_KITS.myLabel() : ""; } catch (e) {} if (mk) t = { act: t.act, ic: t.ic, tt: t.tt, sub: "My kit: " + mk, defOn: t.defOn, feat: t.feat }; }
     // BETA chip: these models are clinically unvalidated, so the label rides the tile on EVERY path
@@ -2288,8 +2363,11 @@
       if (roleLocked(t.act)) lockedHtml += homeToolTile(t, true); else html += homeToolTile(t);
     }
     html += lockedHtml;
-    html += '<button class="rnav-tile addtool" data-act="customizetools" aria-label="Add or customise tools">' +
-      '<span class="rnav-badge">' + ric("add") + '</span><span class="rnav-tile-tt">Add Tool</span><span class="rnav-tile-sub">Customize</span></button>';
+    // Tester (owner, 2026-09-28): "I only want 3 tools on my home screen, but at times I need the
+    // others" - so the last tile is the whole list, and a tool opens from there without being
+    // pinned to Home first. Pinning and reordering live inside the same sheet.
+    html += '<button class="rnav-tile addtool" data-act="alltools" aria-label="All tools">' +
+      '<span class="rnav-badge">' + ric("apps") + '</span><span class="rnav-tile-tt">All tools</span><span class="rnav-tile-sub">Open any tool</span></button>';
     return html;
   }
   // The tier verdict arrives from /api/billing/status after first paint, so a Physician Pro on a
@@ -2315,6 +2393,52 @@
         var tg = b.querySelector(".hv-tog"); if (tg) tg.classList.toggle("on", now);
         var g = document.getElementById("rnavToolsGrid"); if (g) g.innerHTML = renderHomeToolsGrid();
       });
+    });
+  }
+
+  /* All tools: every tool the app can open, in one list, each opening from here. A pin on each row
+   * adds it to (or removes it from) Home, so Home can stay at the three tools someone uses every
+   * day while the rest are one tap away. Filter box for a long list; "Customize" opens the existing
+   * reorder sheet. Role-locked tools are listed too, and explain themselves on tap (openRoleLock). */
+  function openAllTools() {
+    var TOOLS = orderedHomeTools().filter(homeToolEligible), rows = "";
+    for (var i = 0; i < TOOLS.length; i++) {
+      var t = TOOLS[i], locked = roleLocked(t.act), on = homeToolVisible(t);
+      rows += '<div class="hv-mi hv-at-row" data-at="' + t.act + '" data-q="' + smdEsc((t.tt + " " + t.sub).toLowerCase()) + '">' +
+        '<button type="button" class="hv-at-open" data-at-open="' + t.act + '"' + (locked ? ' aria-label="' + smdEsc(t.tt) + ', locked for your role"' : '') + '>' + ric(locked ? "lock" : t.ic) +
+          '<div class="ml">' + smdEsc(t.tt) + '<div class="mc">' + smdEsc(t.sub) + '</div></div></button>' +
+        '<button type="button" class="hv-at-pin' + (on ? " on" : "") + '" data-at-pin="' + t.act + '" aria-pressed="' + on + '" aria-label="' + (on ? "Remove from Home" : "Add to Home") + '" title="' + (on ? "On Home" : "Add to Home") + '">' + ric(on ? "push_pin" : "push_pin") + '</button></div>';
+    }
+    openSheet('<div class="hv-sh-t">All tools</div>' +
+      '<div class="hv-sub2">Tap a tool to open it. Pin ' + ric("push_pin") + ' the ones you use every day to keep them on Home.</div>' +
+      '<div class="hv-at-bar"><input type="search" id="hvAtQ" class="hv-at-q" placeholder="Find a tool" autocomplete="off" autocorrect="off" autocapitalize="off" aria-label="Find a tool">' +
+      '<button type="button" class="hv-at-cust" data-at-cust="1">' + ric("tune") + ' Customize</button></div>' +
+      '<div class="hv-at-list">' + rows + '</div><div class="hv-at-none" hidden>No tool matches.</div>');
+    var sh = sheetEl();
+    sh.querySelectorAll("[data-at-open]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var a = b.getAttribute("data-at-open");
+        closeSheet();
+        if (roleLocked(a)) { openRoleLock(a); return; }
+        setTimeout(function () { try { if (ACT[a]) ACT[a](); } catch (e) {} }, 60);
+      });
+    });
+    sh.querySelectorAll("[data-at-pin]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var t = homeToolByAct(b.getAttribute("data-at-pin")); if (!t) return;
+        var now = !homeToolVisible(t), p = homeToolPrefs(); p[t.act] = now;
+        try { localStorage.setItem("smd_home_tools", JSON.stringify(p)); } catch (e2) {}
+        b.classList.toggle("on", now); b.setAttribute("aria-pressed", String(now)); b.setAttribute("aria-label", now ? "Remove from Home" : "Add to Home");
+        var g = document.getElementById("rnavToolsGrid"); if (g) g.innerHTML = renderHomeToolsGrid();
+        toast(now ? t.tt + " added to Home" : t.tt + " removed from Home");
+      });
+    });
+    var cust = sh.querySelector("[data-at-cust]"); if (cust) cust.addEventListener("click", function () { openToolsCustomize(); });
+    var q = sh.querySelector("#hvAtQ");
+    if (q) q.addEventListener("input", function () {
+      var v = q.value.trim().toLowerCase(), n = 0;
+      sh.querySelectorAll(".hv-at-row").forEach(function (r) { var hit = !v || r.getAttribute("data-q").indexOf(v) >= 0; r.hidden = !hit; if (hit) n++; });
+      var none = sh.querySelector(".hv-at-none"); if (none) none.hidden = n > 0;
     });
   }
 
@@ -2580,7 +2704,7 @@
       if (h.classList.contains("hv-still") !== still) h.classList.toggle("hv-still", still);
       if (still || !_aiSeen || typeof IntersectionObserver !== "function") return;
       if (!_aiIO) _aiIO = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target.classList.toggle("ai-offscreen", !e.isIntersecting); }); });
-      var els = h.querySelectorAll(".ai-anim, .ai-clinix-img, .tx-tile-lungs");
+      var els = h.querySelectorAll(".ai-anim, .ai-clinix-img, .tx-tile-lungs, .ai-live, .ai-brandmark");
       for (var i = 0; i < els.length; i++) if (!_aiSeen.has(els[i])) { _aiSeen.add(els[i]); _aiIO.observe(els[i]); }
     }
     function scheduleFab() { if (_fabRaf) return; _fabRaf = requestAnimationFrame(function () { _fabRaf = 0; if (_fabScrolling) return; try { refreshTileAnim(); } catch (e) {} if (fab && fab.isConnected) refreshFab(); }); }
@@ -3610,6 +3734,18 @@
     if (!u || typeof u.getIdTokenResult !== "function") { paint(true); return; }
     u.getIdTokenResult().then(function (r) { paint(!!(r && r.claims && r.claims.phoneVerified === true)); }, function () { paint(true); });
   }
+  // A code just verified: put the number on this device's copy of the profile at once, so Profile paints
+  // Verified even when neither read below answers (owner, 2026-09-28: verified, and Profile still said
+  // Checking). The server stamps the same fields on the profile doc (functions/api/auth phone-verify).
+  document.addEventListener("smd:phone-verified", function (e) {
+    try {
+      var p = e && e.detail && e.detail.phone, u = window.SMD_AUTH && SMD_AUTH.currentUser;
+      if (!p || !u) return;
+      var k = "smd_profile_cache:" + u.uid, c = JSON.parse(localStorage.getItem(k) || "null") || {};
+      c.phone = p; c.phoneVerifiedNumber = p; c.phoneVerifiedAt = Date.now();
+      localStorage.setItem(k, JSON.stringify(c));
+    } catch (x) {}
+  });
   // The one Profile page is permanent (owner, 2026-09-27: "hardcode this change"). The flag that used
   // to gate it (smd_profile_hub) is retired; the old three-door layout is gone from every entry point.
   function profileHubOn() { return true; }
@@ -3624,12 +3760,13 @@
           // Adding or changing the number always goes through the WhatsApp / SMS code, so "Verified"
           // can never sit next to a number nobody proved. Profile comes back once it is done.
           var cur = ""; try { cur = (s.querySelector("#pfPhoneNum") || { getAttribute: function () { return ""; } }).getAttribute("data-num") || ""; } catch (e) {}
+          var hubEl = s.querySelector(".hv-pf"), isVerified = !!(hubEl && hubEl._phone);
           closeSheet();
           if (!acctWireHub._phoneBack) {
             acctWireHub._phoneBack = true;
             document.addEventListener("smd:phone-verified", function () { setTimeout(function () { try { openAccount(); } catch (e) {} }, 800); });
           }
-          setTimeout(function () { try { if (window.SMD_PHONE_VERIFY && SMD_PHONE_VERIFY.open) SMD_PHONE_VERIFY.open(cur); } catch (e) {} }, 80);
+          setTimeout(function () { try { if (window.SMD_PHONE_VERIFY && SMD_PHONE_VERIFY.open) SMD_PHONE_VERIFY.open(cur, { verified: isVerified }); } catch (e) {} }, 80);
         }
         else if (k === "subscription") { try { openSubscription(); } catch (e) {} }
         else if (k === "aiusage") { closeSheet(); try { openAiUsage(); } catch (e) {} }
@@ -3749,6 +3886,21 @@
     }
     function offline(msg, why) {
       ["regno", "hospital", "city", "phone", "degree", "speciality"].forEach(function (k) { setRow(k, "", { placeholder: msg, edit: false }); });
+      // The Mobile number row only paints from the profile doc, so without this it said Checking for
+      // good. The account's phoneVerified claim is the server's own answer; show that instead.
+      try {
+        var hub = card.closest(".hv-pf") || card, pv = hub.querySelector("#pfPhoneVal"), pn = hub.querySelector("#pfPhoneNum");
+        if (pv && pn && pn.textContent === "Checking…") {
+          pn.textContent = "Number not loaded"; pv.textContent = ""; pv.className = "hub-v";
+          var cu = window.SMD_AUTH && SMD_AUTH.currentUser;
+          if (cu && typeof cu.getIdTokenResult === "function") cu.getIdTokenResult().then(function (r) {
+            var ok = !!(r && r.claims && r.claims.phoneVerified === true);
+            if (pn.textContent !== "Number not loaded") return;   // a read answered after all
+            pv.textContent = ok ? "Verified" : "Not verified"; pv.className = "hub-v " + (ok ? "ok" : "warn");
+            hub._phone = ok; hubCta(hub);
+          }, function () {});
+        }
+      } catch (e) {}
       // ONE note, ever. This used to append unconditionally, so any second call (the auth watcher
       // re-renders, and the .catch() below can fire after the !fdb branch already ran) stacked a
       // second "Couldn't load your details" row underneath the first — visible in the wild.
@@ -3872,14 +4024,20 @@
     (function viaServer() {
       var u = null; try { u = SMD_AUTH && SMD_AUTH.currentUser; } catch (e) {}
       if (!u || typeof u.getIdToken !== "function") { failed({ code: "no-user" }); return; }
+      // Bounded like the SDK read: a token refresh or fetch that never settles must still let the
+      // "both failed" answer through, or every row waits on Loading / Checking for good.
+      var srvDone = false;
+      setTimeout(function () { if (!srvDone) { srvDone = true; failed({ code: "server-timeout" }); } }, 10000);
+      var srvFail = function (e) { if (srvDone) return; srvDone = true; failed(e); };
       u.getIdToken().then(function (tok) {
         return fetch((window.SMD_API_BASE || "") + "/api/auth/my-profile", {
           method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: "{}"
         });
       }).then(function (r) { return r.json(); }).then(function (j) {
         if (!j || !j.ok) throw { code: (j && j.error) || "server" };
+        srvDone = true;
         fresh(wrap(j.profile, j.exists));
-      }).catch(function (e) { failed(e); });
+      }).catch(srvFail);
     })();
 
     function onData(snap) {
@@ -5785,7 +5943,7 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 .maik-collapsed{position:relative}
 /* streaming caret + thinking dots (kept, retokenized) */
 .maik-streaming{font:500 12.5px/1.55 'Inter';color:var(--mk-ink)}
-.maik-caret{display:inline-block;width:6px;height:13px;background:var(--mk-acc);margin-left:2px;vertical-align:text-bottom;animation:maikBlink 1s steps(2) infinite}
+.maik-caret{display:inline-block;width:2px;height:1.05em;border-radius:1px;background:var(--mk-acc);margin-left:2px;vertical-align:-.15em;animation:maikCaret 1.1s ease-in-out infinite}@keyframes maikCaret{0%,100%{opacity:1}50%{opacity:.15}}.maik-streaming .maik-sin{animation:maikSin .22s ease-out both}@keyframes maikSin{from{opacity:0}to{opacity:1}}#maikSheet .maik-fu{animation:maikSin .3s ease-out both}@media(prefers-reduced-motion:reduce){.maik-caret,.maik-streaming .maik-sin,#maikSheet .maik-fu{animation:none}}
 @keyframes maikBlink{0%,100%{opacity:1}50%{opacity:0}}
 .maik-thinking{color:var(--mk-mut);font:500 12.5px 'Inter'}
 .maik-thinking .d{display:inline-block;animation:maikThink 1.3s ease-in-out infinite}
@@ -6262,7 +6420,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         ["cDrug", "What investigations next?", "Targeted workup"]
       ] : [
         ["cAssess", "Start a clinical assessment", "Guided differential & workup"],
-        ["cKnow", "Ask a knowledge question", "Cited, page-level answers"],
+        ["cKnow", "Ask a knowledge question", (function () { try { return window.SMD_MAIK_ENGINE.knowSub(); } catch (e) { return "Cited, page-level answers"; } })()],   // SMD-16: matches the engine, as the footer does
         ["cDrug", "Open Drug Index & calculators", "Doses, spectrum, tools"]
       ];
       var cardHTML = cards.map(function (c, i) {
@@ -7073,6 +7231,27 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         });
         think.appendChild(onBtn); scroll(); return;
       }
+      if (r && r.error && /model-corrupted|corrupt/i.test(String(r.error))) {
+        // SMD-03: a damaged model is a dead end without a way out from here. Two taps, both explicit:
+        // download it again (the file is already removed and the pack unmarked), or switch this
+        // conversation to MaiK Cloud. Never a silent cloud call (decision 2026-09-11, Local is a hard
+        // policy), so the cloud is one tap, not automatic.
+        think.innerHTML = '<div class="maik-welcome">The on-device model file was damaged, so it has been removed. Download it again, or ask this with MaiK Cloud.</div>';
+        var row = document.createElement("div"); row.style.cssText = "display:flex;gap:8px;flex-wrap:wrap;margin-top:8px";
+        var dl = document.createElement("button"); dl.className = "maik-chip"; dl.textContent = "Download it again";
+        dl.addEventListener("click", function () {
+          var M = window.SMD_MAIK_MODELS, pid = r.pack || (M && M.activePack && M.activePack());
+          try { if (M && M.ensure && pid) { M.ensure(pid).catch(function () {}); dl.textContent = "Downloading in the background"; dl.disabled = true; } } catch (e) {}
+        });
+        var cl = document.createElement("button"); cl.className = "maik-chip"; cl.textContent = "Switch to MaiK Cloud and ask again";
+        cl.addEventListener("click", function () {
+          try { if (window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.setPref) SMD_MAIK_ENGINE.setPref("cloud"); } catch (e) {}
+          try { qEl.value = question || ""; } catch (e) {}
+          send();
+        });
+        row.appendChild(dl); row.appendChild(cl); think.appendChild(row);
+        maikBuddyCue("error"); scroll(); return;
+      }
       if (r && r.error) { think.innerHTML = '<div class="maik-welcome">' + maikErrorNotice(r) + '</div>'; maikBuddyCue("error"); return; }
       var md = (r && r.text) ? String(r.text).trim() : "";
       var _refine = maikParseRefine(md); md = _refine.text;   // strip the @@REFINE@@ block; its chips render below
@@ -7503,8 +7682,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               if (_maikStopped || _streamFinal) return;
               var _accS = maikStripRefine(_paintAcc).replace(/@@\s*MORE\s*@@/gi, "\n\n");   // hide the @@REFINE@@ / @@MORE@@ markers while streaming
               var rn = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(_accS) : maikEscH(_accS);
-              _live().innerHTML = '<div class="maik-streaming">' + rn + '<span class="maik-caret"></span></div>';   // live bubble, so the typewriter continues even after close→reopen
-              try { scroll(); } catch (e) {}
+              // SMD-02 (QA sheet 2026-09-27): no flicker, no jumping. Only the blocks that changed are
+              // replaced (normally just the last paragraph), the caret sits at the end of the text rather
+              // than on a line of its own, the box never shrinks mid-stream, and the view follows the
+              // answer only while the doctor is already at the bottom.
+              var _bd = document.getElementById("maikBody"), _pin = !_bd || (_bd.scrollHeight - _bd.scrollTop - _bd.clientHeight) < 96;
+              maikPatchStream(_live(), rn);   // live bubble, so the typewriter continues even after close→reopen
+              if (_pin) { try { scroll(); } catch (e) {} }
             };
             if (!_paintedOnce) { _paintedOnce = true; paint(); } else { _paintT = setTimeout(paint, 50); }
           };
@@ -8062,7 +8246,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       runClinical(q, q, depth, active, topic);
     }
     // test hook (dev/regression harnesses only — closures are otherwise unreachable)
-    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state, parked: !!_mkdState.parked } : null; }, docCue: maikDocCue, docClassify: maikDocClassify, route: maikRoute, calcFor: maikCalcFor, calcHTML: maikCalcHTML, toolChipsHTML: maikToolChipsHTML, webChipEl: maikWebChipEl, turns: function () { return _maikTurns.slice(); }, clearCache: function () { _maikCache = {}; }, companion: function () { return _mkc ? _mkc.state() : null; }, buddySet: function (v) { maikBuddySet(v); } }; } catch (e) {}
+    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state, parked: !!_mkdState.parked } : null; }, docCue: maikDocCue, docClassify: maikDocClassify, route: maikRoute, calcFor: maikCalcFor, calcHTML: maikCalcHTML, toolChipsHTML: maikToolChipsHTML, webChipEl: maikWebChipEl, turns: function () { return _maikTurns.slice(); }, clearCache: function () { _maikCache = {}; }, companion: function () { return _mkc ? _mkc.state() : null; }, buddySet: function (v) { maikBuddySet(v); }, patchStream: (typeof maikPatchStream === "function" ? maikPatchStream : null) }; } catch (e) {}
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
     if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; maikRestoreThread(); scroll(); } else { emptyState(); }
     /* A REOPENED CONVERSATION (owner, 2026-09-24): a saved thread comes back as HTML, which carries
@@ -8449,6 +8633,37 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
      *   done   success the answer is complete (iOS notification pattern, two soft knocks)
      *   error  error   generation failed or was refused
      *   pick   selection  choosing a model / flipping the Knowledge Base switch */
+    /* Streamed answer painter (SMD-02). Keeps one .maik-streaming box, swaps only the trailing blocks
+     * that differ from the new render, hangs the caret on the last text block, and ratchets the box's
+     * min-height so a re-flowing last line never makes the card jump. The final render replaces the
+     * whole bubble, which drops the box and its min-height with it. */
+    function maikPatchStream(host, html) {
+      if (!host) return;
+      var box = host.firstElementChild;
+      if (!box || host.children.length !== 1 || !box.classList.contains("maik-streaming")) { host.innerHTML = '<div class="maik-streaming"></div>'; box = host.firstElementChild; }
+      var caret = box.querySelector(".maik-caret"); if (caret && caret.parentNode) caret.parentNode.removeChild(caret);
+      var tmp = document.createElement("div"); tmp.innerHTML = html;
+      var o = box.childNodes, n = tmp.childNodes, i = 0, had = o.length;
+      // A block that faded in carries .maik-sin, which the fresh render lacks: compare without it.
+      var same = function (a, b) {
+        if (a.nodeType !== 1 || !a.classList.contains("maik-sin")) return a.isEqualNode(b);
+        var cls = a.getAttribute("class");
+        a.classList.remove("maik-sin"); if (!a.classList.length) a.removeAttribute("class");   // class="" != no class
+        var r = a.isEqualNode(b); a.setAttribute("class", cls); return r;
+      };
+      while (i < o.length && i < n.length && same(o[i], n[i])) i++;
+      while (box.childNodes.length > i) box.removeChild(box.lastChild);
+      [].slice.call(tmp.childNodes, i).forEach(function (x, k) {
+        // Only a block that did not exist before fades in; the growing last block is swapped silently.
+        if (i + k >= had && x.nodeType === 1 && x.classList) x.classList.add("maik-sin");
+        box.appendChild(x);
+      });
+      var tail = box.lastElementChild;
+      while (tail && tail.lastElementChild && /^(UL|OL|LI|BLOCKQUOTE|DIV)$/.test(tail.tagName)) tail = tail.lastElementChild;
+      var c = document.createElement("span"); c.className = "maik-caret";
+      (tail && !/^(TABLE|THEAD|TBODY|TR|HR|PRE|IMG)$/.test(tail.tagName) ? tail : box).appendChild(c);
+      var h = box.offsetHeight; if (h > (box._mh || 0)) { box._mh = h; box.style.minHeight = h + "px"; }
+    }
     var MAIK_HAPTIC = { send: "medium", stop: "heavy", start: "light", done: "success", error: "error", pick: "selection" };
     function maikHaptic(kind) {
       var fn = MAIK_HAPTIC[kind] || "light";

@@ -8,18 +8,16 @@
  * Resolution order: ?query param -> localStorage -> default. Persistence is localStorage only.
  * Dual export: module.exports for node tests, window.SMD_SURGX_FLAGS for the browser.
  *
- * PUBLIC-RELEASE-GATE: smd_surgx is the master flag. It defaults ON because the app is currently
- * distributed only to the owner and testers (the same owner decision recorded in clinix-flags.js
- * on 2026-08-23) - gating it off would only cost testers time, and every screen carries its own
- * provenance and draft state, so nothing claims to be approved that is not.
- * RELEASED (2026-09-25, owner decision): SURGX is on for ALL users by default and is no longer
- * labelled Beta. smd_surgx_draft stays ON because the authored content is still ai_drafted; every
- * screen keeps its own draft line and sources until R1 clinical sign-off. Do not remove that line.
+ * smd_surgx is the master flag. RELEASED (2026-09-25, owner decision): SURGX is on for ALL users
+ * by default and is no longer labelled Beta.
  *
- * smd_surgx_draft is the flag that matters for safety: with it OFF, the runtime refuses to render
- * any content object whose review.status is not approved/published. The authored SURGX protocols,
- * procedures and cases are currently "ai_drafted" pending R1 clinical sign-off, so the draft flag
- * is how an author or tester sees them at all.
+ * ALL OPEN, ALL ON (2026-09-28, explicit owner decision, owner takes responsibility): every SURGX
+ * flag defaults ON, and the review gate is always open in surgx-model.js / surgx-content.js, so
+ * content renders whatever its review.status (only `deprecated` is withheld) and no screen shows a
+ * draft or pending-review notice. smd_surgx_draft no longer affects rendering; it is kept, ON, so
+ * existing localStorage / ?surgxdraft= values stay harmless.
+ * Exception: smd_surgx_notes_verify stays OFF, because its ON state is a LOCK (it would restrict
+ * Surgical Notes to verified registrations), which contradicts "keep everything open".
  */
 (function () {
   "use strict";
@@ -33,9 +31,9 @@
     },
     smd_surgx_draft: {
       type: "bool", def: true, query: "surgxdraft",
-      desc: "Render content that is not clinician-approved. ON by default because the authored " +
-        "SURGX content is ai_drafted; with it off every section reads 'Awaiting clinical review'. " +
-        "Every screen still shows its own draft line and its sources. Set to 0 before release."
+      desc: "Legacy. The review gate is always open (owner decision 2026-09-28): content renders " +
+        "whatever its review status, only deprecated content is withheld. This flag no longer " +
+        "changes rendering and defaults ON."
     },
     smd_surgx_notes: {
       type: "bool", def: true, query: "surgxnotes",
@@ -43,13 +41,14 @@
         "(surgx-entitlement.js) - a student never reaches an operative-note authoring surface."
     },
     smd_surgx_mentor: {
-      type: "bool", def: false, query: "surgxmentor",
-      desc: "Senior Surgeon Mode: MaiK challenge turns inside a case (Phase 2). Off = the case " +
-        "runs entirely on its authored reasoning, which is the default and fully playable."
+      type: "bool", def: true, query: "surgxmentor",
+      desc: "Senior Surgeon Mode: MaiK challenge turns inside a case. ON by default (owner " +
+        "decision 2026-09-28). Off = the case runs entirely on its authored reasoning."
     },
     smd_surgx_uncleared_media: {
-      type: "bool", def: false, query: "surgxmedia",
-      desc: "Authoring escape hatch: render media whose licence is not cleared. NEVER ship on."
+      type: "bool", def: true, query: "surgxmedia",
+      desc: "Render media whose licence is not cleared. ON by explicit owner instruction 2026-09-28 " +
+        "(the owner takes responsibility for the media shown; disclosed in Terms/Disclaimer v3.2)."
     },
     smd_surgx_haptics: {
       type: "bool", def: true, query: "surgxhaptics",

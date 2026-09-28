@@ -571,35 +571,35 @@ try {
   ok(await ev(`var sh=document.getElementById('atlasSheet'); return !sh.classList.contains('side') && sh.getBoundingClientRect().bottom>=innerHeight-1`), "below 900 px (820 wide) it stays a bottom sheet");
   await ev(`ATLAS.close(); return 1;`);
 
-  // ---------------- B5: clinical notes, flag both ways ----------------
+  // ---------------- B5: clinical notes, flag both ways (default ON, owner decision 2026-09-28) ----------------
   const noteSpy = `window.__nf=0; var of=window.fetch; window.fetch=function(u){ if(/\\/atlas\\/notes\\.json/.test(String(u))) window.__nf++; return of.apply(this, arguments); }; return 1;`;
   await viewport(390, 844, true);
   await ev(`try{localStorage.removeItem('smd_atlas_notes')}catch(e){} ` + noteSpy);
   await ev(`ATLAS.openAt(${JSON.stringify(MOD)}, 'liver', ${REF}); return 1;`); await ready();
-  await until(`return !!document.querySelector('#atlasSheet [data-tab=definition]')`);
-  ok(await ev(`return !document.querySelector('#atlasSheet [data-tab=clinical]') && window.__nf===0 && performance.getEntriesByType('resource').every(function(r){return !/\\/atlas\\/notes\\.json/.test(r.name)})`), "notes flag OFF by default: no Clinical tab and notes.json is never fetched");
-  await ev(`ATLAS.close(); return 1;`);
-  ok(await attach(BASE + "?atlasnotes=1"), "app reloads with ?atlasnotes=1");
-  await clearIntro(); await settleZoom();
-  await ev(noteSpy);
-  await ev(`ATLAS.openAt(${JSON.stringify(MOD)}, 'liver', ${REF}); return 1;`); await ready();
-  ok(await until(`return !!document.querySelector('#atlasSheet [data-tab=clinical]')`), "flag ON (?atlasnotes=1): the structure sheet has a Clinical tab");
+  ok(await until(`return !!document.querySelector('#atlasSheet [data-tab=clinical]')`), "notes flag ON by default: the structure sheet has a Clinical tab");
   await ev(`document.querySelector('#atlasSheet [data-tab=clinical]').click(); return 1;`);
   const NOTES = JSON.parse(readFileSync(join(HERE, "../atlas/notes.json"), "utf8")).notes.liver;
-  ok(await until(`var b=document.querySelector('#atlasSheet .atlas-sheet-body'); return !!b && /Draft, pending clinical review/.test(b.textContent) && b.textContent.indexOf(${JSON.stringify(NOTES.clinical.slice(0, 40))})>=0 && b.textContent.indexOf(${JSON.stringify(NOTES.imaging.slice(0, 40))})>=0`), "the Clinical tab shows the clinical and imaging notes under a Draft, pending clinical review badge");
-  ok(await ev(`return window.__nf===1`), "notes.json is fetched once, only when the flag is on");
+  ok(await until(`var b=document.querySelector('#atlasSheet .atlas-sheet-body'); return !!b && b.textContent.indexOf(${JSON.stringify(NOTES.clinical.slice(0, 40))})>=0 && b.textContent.indexOf(${JSON.stringify(NOTES.imaging.slice(0, 40))})>=0`), "the Clinical tab shows the clinical and imaging notes");
+  ok(await ev(`var b=document.querySelector('#atlasSheet .atlas-sheet-body'); return !/Draft|pending clinical review/i.test(b.textContent) && !b.querySelector('.atlas-badge')`), "no draft / pending-review badge on the notes");
+  ok(await ev(`return window.__nf===1`), "notes.json is fetched once");
   await ev(`var sh=document.getElementById('atlasSheet'); sh.classList.add('full'); ATLAS._draw(); return 1;`); await sleep(350);
   await shot("390-notes-tab.png");
-  await ev(`ATLAS.close(); try{localStorage.setItem('smd_atlas_notes','1')}catch(e){} return 1;`);
-  ok(await attach(BASE), "reload with localStorage smd_atlas_notes=1 and no query");
+  await ev(`ATLAS.close(); try{localStorage.setItem('smd_atlas_notes','0')}catch(e){} return 1;`);
+  ok(await attach(BASE), "reload with localStorage smd_atlas_notes=0 and no query");
+  await clearIntro(); await settleZoom();
+  await ev(noteSpy);
+  await ev(`ATLAS.openAt(${JSON.stringify(MOD)}, 'kidney', 5); return 1;`); await ready();
+  await until(`return !!document.querySelector('#atlasSheet [data-tab=definition]')`);
+  ok(await ev(`return !document.querySelector('#atlasSheet [data-tab=clinical]') && window.__nf===0 && performance.getEntriesByType('resource').every(function(r){return !/\\/atlas\\/notes\\.json/.test(r.name)})`), "localStorage=0 turns it off: no Clinical tab and notes.json is never fetched");
+  ok(await attach(BASE + "?atlasnotes=1"), "reload with ?atlasnotes=1 over localStorage=0");
   await clearIntro(); await settleZoom();
   await ev(`ATLAS.openAt(${JSON.stringify(MOD)}, 'kidney', 5); return 1;`); await ready();
-  ok(await until(`return !!document.querySelector('#atlasSheet [data-tab=clinical]')`), "flag ON via localStorage");
-  ok(await attach(BASE + "?atlasnotes=0"), "reload with ?atlasnotes=0 over localStorage=1");
+  ok(await until(`return !!document.querySelector('#atlasSheet [data-tab=clinical]')`), "?atlasnotes=1 wins over localStorage=0");
+  ok(await attach(BASE + "?atlasnotes=0"), "reload with ?atlasnotes=0");
   await clearIntro(); await settleZoom();
   await ev(`ATLAS.openAt(${JSON.stringify(MOD)}, 'kidney', 5); return 1;`); await ready();
   await until(`return !!document.querySelector('#atlasSheet [data-tab=definition]')`);
-  ok(await ev(`return !document.querySelector('#atlasSheet [data-tab=clinical]')`), "?atlasnotes=0 wins over localStorage: no tab");
+  ok(await ev(`return !document.querySelector('#atlasSheet [data-tab=clinical]')`), "?atlasnotes=0 hides the tab");
   await ev(`try{localStorage.removeItem('smd_atlas_notes')}catch(e){} ATLAS.close(); return 1;`);
 
   // ---------------- 3D flag off: the catalog and openAt do not depend on the 3D layer ----------------

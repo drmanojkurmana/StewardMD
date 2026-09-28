@@ -7,8 +7,7 @@
   "system": "cardiovascular",
   "estMinutes": 50,
   "review": {
-    "status": "approved",
-    "reviewer": "Clinical Review Team"
+    "status": "ai_drafted"
   },
   "layers": {
     "recognise": {
@@ -56,8 +55,8 @@
           "Non-ischemic: Acute Pericarditis, Myocarditis, Aortic Valve Stenosis, Hypertrophic Cardiomyopathy (HOCM)"
         ],
         "aortic_vascular": [
-          "Stanford Type A Aortic Dissection (involving ascending aorta — surgical emergency)",
-          "Stanford Type B Aortic Dissection (descending aorta — medical management unless complicated)",
+          "Stanford Type A Aortic Dissection (involving ascending aorta; surgical emergency)",
+          "Stanford Type B Aortic Dissection (descending aorta; medical management unless complicated)",
           "Thoracic Aortic Aneurysm expansion or impending rupture"
         ],
         "pulmonary_pleural": [
@@ -155,7 +154,7 @@
       "skill.exam.cvs.inspection",
       "skill.exam.cvs.jvp",
       "skill.exam.cvs.pulse",
-      "skill.exam.cvs.apexbeat",
+      "skill.exam.cvs.apex",
       "skill.exam.cvs.heartsounds",
       "skill.exam.cvs.murmurs",
       "skill.exam.resp.auscultation"

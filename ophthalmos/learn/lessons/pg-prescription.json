@@ -1,0 +1,260 @@
+{
+  "id": "pg-prescription",
+  "unit": "optics-pg",
+  "level": "resident",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Working with a prescription",
+    "hi": "प्रिस्क्रिप्शन के साथ काम"
+  },
+  "idea": {
+    "en": "Transpose cylinders, find the [[spherical-equivalent]], correct for [[vertex-distance]] above about 4 D, and use Prentice's rule for prism.",
+    "hi": "सिलिंडर ट्रांसपोज़ करें, [[spherical-equivalent]] निकालें, लगभग 4 D से ऊपर [[vertex-distance]] का सुधार करें, और प्रिज़्म के लिए प्रेंटिस का नियम इस्तेमाल करें।"
+  },
+  "see": {
+    "diagram": "diagrams/optics-prentice.svg",
+    "w": 480,
+    "h": 240,
+    "alt": {
+      "en": "Diagram in two halves. Left: a convex lens with a blue ray entering below its centre. The ray bends up toward the axis. A triangle below has its base at the top. Right: a concave lens with a yellow ray entering below its centre. It bends down, away from the axis. A triangle below has its base at the bottom.",
+      "hi": "दो हिस्सों वाला चित्र। बाएँ: कॉनवेक्स लेंस, जिसके केंद्र से नीचे एक नीली किरण आती है। किरण ऊपर, धुरी की ओर मुड़ती है। नीचे के त्रिकोण का आधार ऊपर है। दाएँ: कॉनकेव लेंस, जिसके केंद्र से नीचे एक पीली किरण आती है। वह नीचे, धुरी से दूर मुड़ती है। नीचे के त्रिकोण का आधार नीचे है।"
+    },
+    "caption": {
+      "en": "Away from its optical centre, every lens acts as a prism. Below a plus lens it is base up. Below a minus lens it is base down.",
+      "hi": "ऑप्टिकल सेंटर से हटकर हर लेंस प्रिज़्म की तरह काम करता है। प्लस लेंस के नीचे यह बेस-अप है। माइनस लेंस के नीचे बेस-डाउन।"
+    },
+    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.208,
+        "y": 0.396,
+        "label": {
+          "en": "Optical centre",
+          "hi": "ऑप्टिकल सेंटर"
+        },
+        "note": {
+          "en": "A ray through here is not bent. There is no prism here.",
+          "hi": "यहाँ से गुज़रती किरण मुड़ती नहीं। यहाँ कोई प्रिज़्म नहीं।"
+        }
+      },
+      {
+        "x": 0.208,
+        "y": 0.579,
+        "label": {
+          "en": "Below the centre",
+          "hi": "केंद्र से नीचे"
+        },
+        "note": {
+          "en": "Look through a point below the centre, and the ray is bent.",
+          "hi": "केंद्र से नीचे के किसी बिंदु से देखें, तो किरण मुड़ जाती है।"
+        }
+      },
+      {
+        "x": 0.417,
+        "y": 0.413,
+        "label": {
+          "en": "Bent toward the base",
+          "hi": "आधार की ओर मुड़ी"
+        },
+        "note": {
+          "en": "A prism bends light toward its base. Here the ray bends up, so the prism is base up.",
+          "hi": "प्रिज़्म रोशनी को अपने आधार की ओर मोड़ता है। यहाँ किरण ऊपर मुड़ती है, इसलिए प्रिज़्म बेस-अप है।"
+        }
+      },
+      {
+        "x": 0.292,
+        "y": 0.854,
+        "label": {
+          "en": "Base-up prism",
+          "hi": "बेस-अप प्रिज़्म"
+        },
+        "note": {
+          "en": "Below a plus lens: base up. Prism in prism dioptres equals cm times D.",
+          "hi": "प्लस लेंस के नीचे: बेस-अप। प्रिज़्म (प्रिज़्म डायोप्टर में) = सेमी x D।"
+        }
+      },
+      {
+        "x": 0.917,
+        "y": 0.746,
+        "label": {
+          "en": "Bent down",
+          "hi": "नीचे मुड़ी"
+        },
+        "note": {
+          "en": "Below a minus lens, the ray bends down, away from the centre.",
+          "hi": "माइनस लेंस के नीचे किरण नीचे, केंद्र से दूर मुड़ती है।"
+        }
+      },
+      {
+        "x": 0.792,
+        "y": 0.854,
+        "label": {
+          "en": "Base-down prism",
+          "hi": "बेस-डाउन प्रिज़्म"
+        },
+        "note": {
+          "en": "Below a minus lens: base down.",
+          "hi": "माइनस लेंस के नीचे: बेस-डाउन।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Transposition: add the cylinder to the sphere, change the cylinder's sign, and turn the axis by 90 degrees.",
+        "hi": "ट्रांसपोज़िशन: सिलिंडर को स्फ़ीयर में जोड़ें, सिलिंडर का चिह्न बदलें, और एक्सिस को 90 डिग्री घुमाएँ।"
+      },
+      {
+        "en": "Example: +1.00 / -2.00 x 90 becomes -1.00 / +2.00 x 180. Both describe the same lens.",
+        "hi": "उदाहरण: +1.00 / -2.00 x 90 बन जाता है -1.00 / +2.00 x 180। दोनों एक ही लेंस हैं।"
+      },
+      {
+        "en": "The [[spherical-equivalent]] is the sphere plus half the cylinder. For +1.00 / -2.00 x 90 it is 0.00 D.",
+        "hi": "[[spherical-equivalent]] = स्फ़ीयर + सिलिंडर का आधा। +1.00 / -2.00 x 90 के लिए यह 0.00 D है।"
+      },
+      {
+        "en": "Moving a lens changes its effect. The effective power is F / (1 - dF), with d in metres moved toward the eye.",
+        "hi": "लेंस खिसकाने से उसका असर बदलता है। प्रभावी ताक़त = F / (1 - dF), जहाँ d आँख की ओर खिसकाई दूरी है, मीटर में।"
+      },
+      {
+        "en": "So a -10.00 D lens at 12 mm equals about -8.93 D at the cornea. A +10.00 D lens equals about +11.36 D.",
+        "hi": "इसलिए 12 मिमी पर -10.00 D लेंस कॉर्निया पर लगभग -8.93 D के बराबर है। +10.00 D लेंस लगभग +11.36 D के बराबर।"
+      },
+      {
+        "en": "A high myope needs a weaker contact lens, and a high hyperope a stronger one. Below about 4 D, the change is under 0.25 D.",
+        "hi": "हाई मायोपिया में कॉन्टैक्ट लेंस कम ताक़त का, और हाई हाइपरोपिया में ज़्यादा ताक़त का चाहिए। लगभग 4 D से नीचे बदलाव 0.25 D से कम है।"
+      },
+      {
+        "en": "Prentice's rule: prism in [[prism-dioptre]]s equals decentration in cm times lens power in D.",
+        "hi": "प्रेंटिस का नियम: प्रिज़्म ([[prism-dioptre]] में) = विकेंद्रण (सेमी में) x लेंस की ताक़त (D में)।"
+      },
+      {
+        "en": "Example: at 5 mm below the centre of a +4.00 D lens, prism is 0.5 x 4. That is 2 prism dioptres, base up.",
+        "hi": "उदाहरण: +4.00 D लेंस के केंद्र से 5 मिमी नीचे प्रिज़्म = 0.5 x 4। यानी 2 प्रिज़्म डायोप्टर, बेस-अप।"
+      }
+    ],
+    "analogy": {
+      "en": "Think of a lens as a stack of thin prisms. Near the centre they are almost flat. Toward the edge they tilt more, so they bend light more.",
+      "hi": "लेंस को पतले प्रिज़्मों का ढेर समझिए। केंद्र के पास वे लगभग सपाट हैं। किनारे की ओर वे ज़्यादा झुके हैं, इसलिए रोशनी को ज़्यादा मोड़ते हैं।"
+    }
+  },
+  "spot": [
+    {
+      "en": "New high-power glasses and double vision or strain: check where the optical centres sit.",
+      "hi": "नया तेज़ ताक़त वाला चश्मा और दोहरा दिखना या खिंचाव: देखें कि ऑप्टिकल सेंटर कहाँ हैं।"
+    },
+    {
+      "en": "When converting glasses to contact lenses above about 4 D, always correct for vertex distance.",
+      "hi": "लगभग 4 D से ऊपर चश्मे से कॉन्टैक्ट लेंस में बदलते समय, हमेशा वर्टेक्स डिस्टेंस का सुधार करें।"
+    },
+    {
+      "en": "Two prescriptions that look different may be the same lens, in plus and minus cylinder form.",
+      "hi": "दो अलग दिखने वाले प्रिस्क्रिप्शन प्लस और माइनस सिलिंडर रूप में एक ही लेंस हो सकते हैं।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Transpose -3.00 / +1.50 x 45 to minus cylinder form. The answer is -1.50 / -1.50 x 135.",
+      "hi": "-3.00 / +1.50 x 45 को माइनस सिलिंडर रूप में बदलें। जवाब है -1.50 / -1.50 x 135।"
+    },
+    {
+      "en": "Work out the contact lens power for -8.00 D glasses at 12 mm. It is about -7.30 D, so order -7.25 D.",
+      "hi": "12 मिमी पर -8.00 D चश्मे के लिए कॉन्टैक्ट लेंस की ताक़त निकालें। यह लगभग -7.30 D है, इसलिए -7.25 D मँगाएँ।"
+    }
+  ],
+  "remember": {
+    "en": "Transpose: add, flip the sign, turn 90. Vertex matters above 4 D. Prentice: prism equals cm times D.",
+    "hi": "ट्रांसपोज़: जोड़ें, चिह्न बदलें, 90 घुमाएँ। 4 D से ऊपर वर्टेक्स मायने रखता है। प्रेंटिस: प्रिज़्म = सेमी x D।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Transpose +2.00 / -1.00 x 30.",
+        "hi": "+2.00 / -1.00 x 30 को ट्रांसपोज़ करें।"
+      },
+      "o": [
+        {
+          "en": "+1.00 / +1.00 x 120",
+          "hi": "+1.00 / +1.00, एक्सिस 120"
+        },
+        {
+          "en": "+3.00 / +1.00 x 120",
+          "hi": "+3.00 / +1.00, एक्सिस 120"
+        },
+        {
+          "en": "+1.00 / -1.00 x 120",
+          "hi": "+1.00 / -1.00, एक्सिस 120"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "+2.00 plus -1.00 is +1.00. The cylinder becomes +1.00, and 30 plus 90 is 120.",
+        "hi": "+2.00 में -1.00 जोड़ें तो +1.00। सिलिंडर +1.00 बनता है, और 30 + 90 = 120।"
+      }
+    },
+    {
+      "q": {
+        "en": "Glasses of -10.00 D sit at 12 mm. Which contact lens power is closest?",
+        "hi": "-10.00 D का चश्मा 12 मिमी पर है। कौन सी कॉन्टैक्ट लेंस ताक़त सबसे पास है?"
+      },
+      "o": [
+        {
+          "en": "-9.00 D",
+          "hi": "-9.00 डायोप्टर"
+        },
+        {
+          "en": "-10.00 D",
+          "hi": "-10.00 डायोप्टर"
+        },
+        {
+          "en": "-11.25 D",
+          "hi": "-11.25 डायोप्टर"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "-10 divided by (1 + 0.12) is about -8.93 D, so about -9.00 D.",
+        "hi": "-10 भाग (1 + 0.12) लगभग -8.93 D है, यानी लगभग -9.00 D।"
+      }
+    },
+    {
+      "q": {
+        "en": "Looking 1 cm below the centre of a -6.00 D lens gives:",
+        "hi": "-6.00 D लेंस के केंद्र से 1 सेमी नीचे देखने पर मिलता है:"
+      },
+      "o": [
+        {
+          "en": "6 prism dioptres base down",
+          "hi": "6 प्रिज़्म डायोप्टर बेस-डाउन"
+        },
+        {
+          "en": "6 prism dioptres base up",
+          "hi": "6 प्रिज़्म डायोप्टर बेस-अप"
+        },
+        {
+          "en": "0.6 prism dioptres base down",
+          "hi": "0.6 प्रिज़्म डायोप्टर बेस-डाउन"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "1 cm x 6 D is 6 prism dioptres. Below a minus lens the base is down.",
+        "hi": "1 सेमी x 6 D = 6 प्रिज़्म डायोप्टर। माइनस लेंस के नीचे बेस नीचे होता है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "optics"
+  },
+  "glossary": [
+    "spherical-equivalent",
+    "vertex-distance",
+    "prism-dioptre"
+  ],
+  "sources": [
+    "Elkington AR, Frank HJ, Greaney MJ. Clinical Optics. 3rd ed. Oxford: Blackwell Science; 1999.",
+    "Atchison DA, Smith G. Optics of the Human Eye. Oxford: Butterworth-Heinemann; 2000."
+  ]
+}

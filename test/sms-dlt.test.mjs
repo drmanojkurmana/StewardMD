@@ -122,7 +122,8 @@ test("sendDlt reports 2Factor's refusal, and never throws on a network failure",
 
 test("sendDlt sends nothing when unconfigured, mis-filled or to a bad number", () =>
   withFetch(() => { throw new Error("must not be called"); }, async (calls) => {
-    assert.equal(dltConfigured({ FOLLOWCARE_SMS_PROVIDER: "twofactor", TWOFACTOR_API_KEY: "k" }), false, "no sender header");
+    assert.equal(dltConfigured({ FOLLOWCARE_SMS_PROVIDER: "twofactor", TWOFACTOR_API_KEY: "k" }), true, "the header is DLT_SENDER, not TWOFACTOR_SENDER");
+    assert.equal(dltConfigured({ FOLLOWCARE_SMS_PROVIDER: "twofactor", TWOFACTOR_SENDER: "MAIK" }), false, "no key");
     assert.equal(dltConfigured({ FOLLOWCARE_SMS_PROVIDER: "msg91", TWOFACTOR_API_KEY: "k", TWOFACTOR_SENDER: "MAIK" }), false, "2Factor only");
     assert.equal(dltConfigured(ENV), true);
     assert.deepEqual(await sendDlt({}, "9876543210", "otp", ["1", "10"]), { ok: false, skipped: true, reason: "not_configured" });

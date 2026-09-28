@@ -10,6 +10,14 @@ tags: [infra]
 - **KV** — `MAIK_KV` (via `usageKv()`): MaiK metering + the [[AI Control Center]] rollups + all the runtime-editable knobs (`ai:model:override`, `ai:limits`, `ai:budget:daily`, `ai:emergency`, `ai:abuse:threshold`).
 - **D1** — drug gold data. **R2** — FollowCare media, KardiQ X models bucket (`stewardmd-kardiox-models`, public India weights), on-demand assets.
 
+## Apple Hide My Email (private relay) delivery
+Mail to `@privaterelay.appleid.com` is rejected by Apple unless the sender is registered: Apple
+Developer > Certificates, Identifiers & Profiles > Services > Sign in with Apple for Email
+Communication. Register the domain `stewardmd.in` (DKIM from Resend signs as the From domain) and/or
+the From addresses (`noreply@`, `verify@`). Until then every Apple-relay user misses the verified /
+failed / welcome / promo emails, and `anchor-email.js` asks them for a real address instead.
+Status as of 2026-09-28: not confirmed registered (anchor-email.js says relay mail "BOUNCES").
+
 ## Coming-soon gate
 `functions/_middleware.js` 503s public browser page-views to a coming-soon page; `/api/*`, the native app (`X-SMD-App`, currently inert), cron (`X-Admin-Token`), and the `/realapp` cookie pass through. This is why "AI/etc not working in app" until a native rebuild+reinstall.
 

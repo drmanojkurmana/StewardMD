@@ -1,4 +1,6 @@
 import Foundation
+import UIKit
+import UserNotifications
 
 /**
  * Background model download: CHUNKED, PARALLEL, and entirely inside one background URLSession.
@@ -326,6 +328,33 @@ final class ModelDownloader: NSObject, URLSessionDownloadDelegate {
         }
         try? FileManager.default.removeItem(at: Self.sidecarFor(name))
         print("[llama-dl] \(name): complete, \(Self.sizeOf(name)) bytes on disk")
+        // SMD-04: say so when the phone is locked or the app is in the background. The app still has
+        // to be opened once for the integrity check (JS hashCheck) before the model is marked ready.
+        DispatchQueue.main.async {
+            guard UIApplication.shared.applicationState != .active else { return }
+            let c = UNMutableNotificationContent()
+            c.title = "MaiK model downloaded"
+            c.body = "Open StewardMD to finish setting it up."
+            UNUserNotificationCenter.current().add(UNNotificationRequest(identifier: "llama-dl-" + name, content: c, trigger: nil))
+        }
+    }
+
+    /* SMD-04 (QA sheet 2026-09-27: downloads only moved with the app open). iOS finishes background
+     * parts without the app, but hands them over only to a live session with this identifier. When
+     * it relaunches the app in the background for that, AppDelegate calls this (by name, through the
+     * ObjC runtime, since the app target does not import this module) to recreate the session, so the
+     * finished parts are written into the model file right away instead of at the next launch. */
+    @objc static func wakeForBackgroundEvents() {
+        _ = shared.session
+        shared.adoptExistingTasks()
+    }
+
+    /// iOS has delivered every queued event: return its completion handler (held by AppDelegate).
+    func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
+        let id = session.configuration.identifier
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: Notification.Name("SMDBackgroundURLSessionDone"), object: id)
+        }
     }
 
     // MARK: - URLSessionDownloadDelegate
@@ -351,8 +380,28 @@ final class ModelDownloader: NSObject, URLSessionDownloadDelegate {
 
         // MUST act synchronously: `location` is deleted as soon as this returns.
 
-        // The origin ignored Range, so this body is the ENTIRE file. Use it and stop the siblings.
-        if code == 200, partStr != "w" {
+        let got: Int64 = {
+            guard let a = try? FileManager.default.attributesOfItem(atPath: location.path) else { return 0 }
+            return (a[.size] as? Int64) ?? 0
+        }()
+        lock.lock(); let knownTotal = jobs[name]?.total ?? 0; lock.unlock()
+
+        /* WHY MODELS CAME OUT DAMAGED (owner, 2026-09-27: "once I go to other app and come back it
+         * completes download but gets damaged"). Only HTTP 200 used to be special-cased, so EVERY other
+         * response - a 403 from an expired signed CDN link, a 416, a 5xx, an HTML/XML error page - was
+         * written into the model at this part's offset and the part marked committed. Hugging Face
+         * redirects each request to a signed CDN URL that expires; when the app is backgrounded iOS
+         * defers and retries parts later, by which time those links are stale, so the retries come
+         * back as small error bodies and the "finished" model has them stitched in. A truncated part
+         * was accepted too, since its length was never checked.
+         *
+         * Now a part is committed ONLY when it is a 206 whose Content-Range starts at this part's
+         * offset and whose body is exactly the promised length. Anything else is discarded and the
+         * part is requested again from the ORIGINAL (Hugging Face) URL, which issues a fresh signed
+         * link. JS hashCheck() is the second line of defence, not the first. */
+
+        // The origin ignored Range, so this body is the ENTIRE file - but only if it really is.
+        if code == 200, partStr != "w", knownTotal > 0, got == knownTotal {
             print("[llama-dl] \(name): origin ignored Range (http 200), falling back to a single stream")
             let dest = Self.pathFor(name)
             try? FileManager.default.removeItem(at: dest)
@@ -371,6 +420,10 @@ final class ModelDownloader: NSObject, URLSessionDownloadDelegate {
         }
 
         if partStr == "w" {                      // unknown-size single stream
+            guard code == 200 else {
+                lock.lock(); jobs[name]?.state = "paused"; jobs[name]?.error = "http \(code)"; lock.unlock()
+                print("[llama-dl] \(name): single stream answered http \(code), not saved"); return
+            }
             let dest = Self.pathFor(name)
             try? FileManager.default.removeItem(at: dest)
             try? FileManager.default.moveItem(at: location, to: dest)
@@ -381,6 +434,23 @@ final class ModelDownloader: NSObject, URLSessionDownloadDelegate {
 
         guard let part = Int(partStr) else { return }
         let offset = Int64(part) * Self.chunkBytes
+
+        // Validate before a single byte touches the model file.
+        let cr = (downloadTask.response as? HTTPURLResponse)?.value(forHTTPHeaderField: "Content-Range") ?? ""
+        var crStart: Int64 = -1, crEnd: Int64 = -1, crTotal: Int64 = 0
+        if let m = cr.range(of: #"bytes (\d+)-(\d+)/(\d+)"#, options: .regularExpression) {
+            let nums = cr[m].split(whereSeparator: { !$0.isNumber }).compactMap { Int64($0) }
+            if nums.count == 3 { crStart = nums[0]; crEnd = nums[1]; crTotal = nums[2] }
+        }
+        let total = knownTotal > 0 ? knownTotal : crTotal
+        let want = total > 0 ? min(Self.chunkBytes, total - offset) : Self.chunkBytes
+        let valid = code == 206 && crStart == offset && crEnd - crStart + 1 == want && got == want
+        if !valid {
+            print("[llama-dl] \(name) part \(part): rejected (http \(code), range '\(cr)', \(got) bytes, want \(want)) - fetching it again")
+            requeue(name: name, part: part, from: downloadTask, total: total)
+            return
+        }
+        if knownTotal == 0 && crTotal > 0 { lock.lock(); jobs[name]?.total = crTotal; lock.unlock() }
 
         // Write the part straight into the final file at its own offset, then let the temp go. This is
         // why peak disk is (in-flight parts x chunk) and not a second copy of the whole model.
@@ -407,6 +477,41 @@ final class ModelDownloader: NSObject, URLSessionDownloadDelegate {
         }
         lock.unlock()
         if allDone { finish(name) }
+    }
+
+    /// Tries per part before the transfer is reported as failed (it stays resumable).
+    static let partTries = 5
+    private var tries: [String: Int] = [:]
+
+    /** Ask for one part again. Built from the ORIGINAL url (the Hugging Face resolve link), never the
+     *  redirected CDN url, so every retry gets a freshly signed link instead of the expired one. */
+    private func requeue(name: String, part: Int, from task: URLSessionTask, total: Int64) {
+        let key = "\(name)#\(part)"
+        lock.lock()
+        let n = (tries[key] ?? 0) + 1
+        tries[key] = n
+        let url = jobs[name]?.url ?? task.originalRequest?.url
+        if n > Self.partTries {
+            jobs[name]?.state = "paused"
+            jobs[name]?.error = "part \(part) kept failing"
+            jobs[name]?.inflight[part] = nil
+            lock.unlock()
+            print("[llama-dl] \(name) part \(part): gave up after \(Self.partTries) tries; Download resumes it later")
+            return
+        }
+        jobs[name]?.inflight[part] = 0
+        lock.unlock()
+        guard let u = url else { return }
+        let from = Int64(part) * Self.chunkBytes
+        var r = URLRequest(url: u)
+        if total > 0 {
+            r.setValue("bytes=\(from)-\(min(from + Self.chunkBytes, total) - 1)", forHTTPHeaderField: "Range")
+        } else if let orig = task.originalRequest?.value(forHTTPHeaderField: "Range") {
+            r.setValue(orig, forHTTPHeaderField: "Range")
+        } else { return }
+        let t = session.downloadTask(with: r)
+        t.taskDescription = key
+        t.resume()
     }
 
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {

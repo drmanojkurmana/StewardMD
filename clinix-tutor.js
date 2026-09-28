@@ -63,16 +63,26 @@
   /* Drug-dose units only. Deliberately does NOT match the numbers a respiratory lesson legitimately
    * contains: saturation targets (88 to 92 percent), PaCO2 thresholds in mmHg, FEV1 percentages,
    * an FEV1/FVC ratio of 0.7, pack-years, Harrison page numbers, or "three months in two years". */
-  var DOSE_UNIT = /\b\d+(?:\.\d+)?\s*(?:mg|mcg|µg|microgram|micrograms|gram|grams|\bg\b|ml|millilitre|milliliter|unit|units|iu|puff|puffs|nebule|nebules)\b/i;
-  var DOSE_PER_KG = /\b\d+(?:\.\d+)?\s*(?:mg|mcg|g|ml|units?)\s*(?:\/|per)\s*kg\b/i;
-  var DOSE_FREQ = /\b(?:od|bd|tds|qds|bid|tid|qid|q\d+\s*h|q\d+\s*hourly)\b/i;
+  // A quantity: digits (with a decimal or a range, "300-600") or a spelled-out small number.
+  var QTY = "(?:\\d+(?:[.,]\\d+)?(?:\\s*(?:-|to)\\s*\\d+(?:[.,]\\d+)?)?|one|two|three|four|five|six|eight|ten|half)";
+  // No leading \b before the unit on purpose: "1g", "500mg" and "2g IV" have no word boundary
+  // between the digit and the unit, which is exactly how "1g ceftriaxone" used to slip through.
+  var DOSE_UNIT = new RegExp("(?:^|[^a-z0-9.])" + QTY + "\\s*(?:mgs?|milligrams?|mcg|µg|ug|micrograms?|grams?|gm|g|ml|mls|millilitres?|milliliters?|units?|iu|mmol|meq|puffs?|nebules?|tablets?|tabs?|capsules?|caps|drops|l\\/min|litres? per minute|liters? per minute)(?![a-z-])(?!\\s*\\/\\s*(?:dl|l|100|mmol)\\b)", "i");
+  // The lookaheads keep lab values out: "7 g/dL" and "2.5 mg/dL" are concentrations, not doses,
+  // and "gram-negative" is a stain.
+  var DOSE_PER_KG = /\d+(?:\.\d+)?\s*(?:mg|mcg|g|ml|units?)\s*(?:\/|per)\s*kg\b/i;
+  // Abbreviated frequencies are only ever regimen shorthand, so any number anywhere makes them one.
+  var DOSE_FREQ = /\b(?:od|bd|tds|qds|bid|tid|qid|qhs|nocte|mane|stat|q\s*\d+(?:\s*-\s*\d+)?\s*(?:h|hr|hrs|hourly)|q\s*\d+\s*hourly)\b/i;
+  // Spelled-out frequencies are ordinary English ("twice a year"), so they count only when a
+  // quantity sits just before them: "doxycycline 100 twice a day", "500 once daily".
+  var DOSE_FREQ_WORDS = /\b\d+(?:\.\d+)?\b[^.;\n]{0,24}\b(?:once|twice|thrice|three times|four times)\s+(?:a\s+day|daily|per\s+day|a\s+week|weekly)\b|\b\d+(?:\.\d+)?\b[^.;\n]{0,24}\bevery\s+\d+(?:\s*(?:-|to)\s*\d+)?\s*(?:hours?|hrs?)\b/i;
 
   function looksLikeDose(text) {
     var s = String(text || "");
     if (DOSE_PER_KG.test(s)) return true;
     if (DOSE_UNIT.test(s)) return true;
-    // A frequency abbreviation next to any number is a regimen even without an explicit unit.
     if (DOSE_FREQ.test(s) && /\d/.test(s)) return true;
+    if (DOSE_FREQ_WORDS.test(s)) return true;
     return false;
   }
 
@@ -85,8 +95,8 @@
   }
 
   var DOSE_REFUSAL =
-    "I am not going to give you a dose here. Doses in CliniX live in the lesson's treatment section, " +
-    "which is referenced and reviewed by a clinician, and they still have to be checked against your " +
+    "I am not going to give you a dose here. Doses belong to the lesson's referenced treatment section, " +
+    "and they always have to be checked against your " +
     "current national or institutional guideline before you ever prescribe. Ask me about the drug " +
     "class, when you would reach for it, or how it works, and I will teach you that.";
 
@@ -146,11 +156,16 @@
     function send(pkg) {
       var opts = { depth: "concise", mode: "clinix-tutor" };
       if (onDelta && G.SMD_AI.explainGroundedStream) {
+        var held = false;
         return G.SMD_AI.explainGroundedStream(pkg, opts, function (accumulated) {
-          // onDelta receives the ACCUMULATED text, not a delta (maik-local.js:9). Sanitising each
-          // frame would flicker a partial dose into view, so the guard runs on the FINAL text only
-          // and the stream shows markers-stripped text.
-          onDelta(stripMarkers(accumulated));
+          // onDelta receives the ACCUMULATED text, not a delta (maik-local.js:9). The guard runs on
+          // EVERY frame: the first frame that reads as a dose blanks the partial and nothing after
+          // it is shown, so a dose is never on screen, not even for the length of the stream. The
+          // final text is sanitised again below and replaced wholesale with the refusal.
+          if (held) return;
+          var t = stripMarkers(accumulated);
+          if (looksLikeDose(t)) { held = true; onDelta(""); return; }
+          onDelta(t);
         });
       }
       return G.SMD_AI.explainGrounded(pkg, opts);
@@ -167,7 +182,9 @@
           });
       } else {
         // No RAG available: the ungrounded path still teaches, it just cannot cite StewardMD content.
-        call = G.SMD_AI.explain ? G.SMD_AI.explain(prompt, question) : Promise.resolve({ error: "ai-off" });
+        // It still goes out as mode:"clinix-tutor", so it gets TUTOR_SYS and the student's own
+        // quota rather than the doctor-facing legacy /explain summary path.
+        call = send({ question: prompt });
       }
     } catch (e) {
       call = Promise.resolve({ error: "server" });
@@ -243,27 +260,40 @@
     return lines.join("\n");
   }
 
-  function answerAsPatient(caseDef, question) {
-    widenScope();
-    var fallback = (caseDef && caseDef.fallback) || "I am not sure what you mean, doctor. Can you ask that a different way?";
-    if (!available()) return Promise.resolve({ error: "ai-off", text: fallback });
-    var prompt = buildPatientPrompt(caseDef, question);
-    var call;
-    try {
-      if (G.SMD_AI && G.SMD_AI.explain) {
-        call = G.SMD_AI.explain(prompt, question);
-      } else if (G.SMD_AI && G.SMD_AI.explainGrounded) {
-        call = G.SMD_AI.explainGrounded({ question: prompt }, { depth: "concise", mode: "clinix-tutor" });
-      } else {
-        call = Promise.resolve({ error: "ai-off" });
-      }
-    } catch (e) {
-      call = Promise.resolve({ error: "server" });
+  /* The case facts, shaped for /clinix-patient. The server owns the role and the rules; the client
+   * only ever sends authored case content plus the student's question. */
+  function patientPayload(caseDef) {
+    caseDef = caseDef || {};
+    var p = caseDef.patient || {}, facts = [], hist = caseDef.history || {};
+    for (var k in hist) {
+      if (Object.prototype.hasOwnProperty.call(hist, k) && hist[k] && hist[k].reply) facts.push({ topic: k, reply: String(hist[k].reply) });
     }
-    return call.then(function (r) {
+    return {
+      persona: { name: p.name || "", age: p.age || "", sex: p.sex || "", occupation: p.occupation || "", residence: p.residence || "" },
+      opening: caseDef.opening || "",
+      facts: facts
+    };
+  }
+
+  function patientAvailable() {
+    try { return !!(G.SMD_AI && G.SMD_AI.clinixPatient); } catch (e) { return false; }
+  }
+
+  function answerAsPatient(caseDef, question) {
+    var fallback = (caseDef && caseDef.fallback) || "I am not sure what you mean, doctor. Can you ask that a different way?";
+    if (!patientAvailable()) return Promise.resolve({ error: "ai-off", text: fallback });
+    var payload = patientPayload(caseDef);
+    if (!payload.facts.length) return Promise.resolve({ error: "no-facts", text: fallback });
+    var call;
+    try { call = G.SMD_AI.clinixPatient(payload, question); }
+    catch (e) { call = Promise.resolve({ error: "server" }); }
+    return Promise.resolve(call).then(function (r) {
       if (!r || r.error) return { error: (r && r.error) || "server", text: fallback };
       var s = sanitize(r.text || "");
-      return { text: s.text || fallback, blocked: s.blocked };
+      // A patient never quotes a dose back; if the model did, fall back to the scripted line
+      // rather than show the teaching refusal in the patient's voice.
+      if (s.blocked) return { text: fallback, blocked: true };
+      return { text: s.text || fallback, blocked: false };
     }).catch(function () {
       return { error: "server", text: fallback };
     });
@@ -284,6 +314,8 @@
     // browser
     answer: answer,
     answerAsPatient: answerAsPatient,
+    patientAvailable: patientAvailable,
+    patientPayload: patientPayload,
     judgeVivaAnswer: judgeVivaAnswer,
     vivaAvailable: vivaAvailable,
     available: available,

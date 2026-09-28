@@ -1,7 +1,7 @@
 ---
 tags: [module, surgery, education, documentation]
-status: RELEASED to all users 2026-09-25 (owner decision), no longer labelled Beta; MVP built; content still ai_drafted pending R1 clinical sign-off, so every screen keeps its draft line
-flag: smd_surgx (client, def:true for all users, ?surgx=0 hides) + smd_surgx_draft (def:true; stays on while content is ai_drafted) + smd_surgx_notes (def:true, role-gated at runtime) + smd_surgx_mentor (def:false) + smd_surgx_uncleared_media (def:false, NEVER ship on) + smd_surgx_haptics (def:true)
+status: RELEASED to all users 2026-09-25 (owner decision), no longer labelled Beta; MVP built; ALL OPEN 2026-09-28 (owner decision): review gate always open, no draft/pending notices
+flag: smd_surgx (client, def:true for all users, ?surgx=0 hides) + smd_surgx_draft (def:true, legacy, no longer affects rendering) + smd_surgx_notes (def:true, role-gated at runtime) + smd_surgx_mentor (def:true) + smd_surgx_uncleared_media (def:false, licence gate; owner call pending) + smd_surgx_haptics (def:true) + smd_surgx_dest_drive/_emr (def:true) + smd_surgx_notes_verify (def:false, its ON state is a lock)
 ---
 # SURGX (SURGˣ · Surgical Intelligence)
 
@@ -47,9 +47,17 @@ in a shared pack fails the build rather than quietly costing more at procedure 2
 - `surgx/**` - content as data. 24 files, 240 KB total.
 - `functions/api/ai/_surgx-note.js` - the note extraction prompt + server whitelist.
 
+**Owner decision 2026-09-28 (explicit, final, owner takes responsibility):** "Keep everything open.
+Remove every draft note and pending note. Keep everything turned on by default." Review gate always
+open (only `deprecated` hidden); the "Draft, pending clinician review" pill, the "awaiting clinical
+review / sign-off" empty states and the pending-steps banner are removed (genuine load failures now
+say "could not be loaded"); every SURGX flag defaults ON except `smd_surgx_notes_verify` (ON = lock).
+Unfinalised operative notes are still stamped DRAFT: that is the note verification gate, not review.
+
 ## The three gates (each fails CLOSED, each has a test both ways)
-1. **REVIEW** - `review.status` not approved/published does not render. Missing or garbled reads as
-   `draft`. Absence is a refusal.
+1. **REVIEW** - ALWAYS OPEN since 2026-09-28: every status renders, only `deprecated` is withheld,
+   regardless of `smd_surgx_draft` or a missing flags module (`gateOpts().allowDraft` is hard-wired).
+   Missing or garbled still reads as `draft` (and renders).
 2. **LICENCE** - media renders only when positively cleared. `cleared + licence + attribution` is NOT
    enough for a hosted external file; it must also pass `isCommonsVerified` or `isOwnerProduced`.
    Uncleared renders caption + "visual pending", never a blank.

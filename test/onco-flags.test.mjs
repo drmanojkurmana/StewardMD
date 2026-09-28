@@ -107,14 +107,17 @@ test("SAFETY: every experimental protocol is lifecycleState:draft, so it renders
     "an experimental protocol with a non-draft lifecycle would not render the EXPERIMENTAL DRAFT badge");
 });
 
-test("SAFETY: the usable-protocol gate still requires active OR experimental, nothing looser", () => {
-  // opd-emr.js oncoUsable() is what the flag actually opens. If that predicate ever widens, the
-  // flag stops meaning what this file says it means.
+test("SAFETY: the usable-protocol gate refuses only RETIRED protocols (owner 2026-09-28)", () => {
+  // Review status no longer restricts Apply; a retired / superseded / deprecated / withdrawn protocol
+  // is still never offered, and the server activation gate keeps every dose/evidence/VERIFY/confirm check.
   const emr = readFileSync(join(ROOT, "opd-emr.js"), "utf8");
-  const line = emr.split("\n").find(l => l.indexOf("function oncoUsable") >= 0) || "";
-  assert.ok(line, "oncoUsable() not found in opd-emr.js");
-  assert.ok(/lifecycleState === "active"/.test(line), "must still require active...");
-  assert.ok(/oncoProtoLibOn\(\) && p\.experimental/.test(line), "...or experimental behind the flag");
+  assert.match(emr, /var ONCO_RETIRED = \{ retired: 1, superseded: 1, deprecated: 1, withdrawn: 1 \};/);
+  assert.match(emr, /function oncoUsable\(p\) \{ return !!\(p && !ONCO_RETIRED\[/);
+  const srv = readFileSync(join(ROOT, "functions/_onco_store.js"), "utf8");
+  assert.match(srv, /blockers\.push\("protocol_retired"\)/);
+  assert.match(srv, /blockers\.push\("physician_confirmation_missing"\)/);
+  assert.doesNotMatch(srv, /blockers\.push\("unresolved_verify"\)/, "VERIFY gate opened (owner 2026-09-28)");
+  assert.match(srv, /blockers\.push\("dose_calculations_incomplete"\)/);
 });
 
 test("SAFETY: writes stay doubly gated regardless of any client flag", () => {

@@ -468,6 +468,7 @@ html.cx-lock .ghis-ward-fab { display: none !important; }
 #clinixRoot .cx-pt { align-self: flex-start; max-width: 92%; padding: 12px 14px; background: var(--cx-surface); border: 1px solid var(--cx-line); border-radius: 16px 16px 16px 4px; font-size: 15px; line-height: 1.5; }
 #clinixRoot .cx-pt-who { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cx-faint); margin-bottom: 4px; }
 #clinixRoot .cx-pt--unmatched { color: var(--cx-muted); font-style: italic; }
+#clinixRoot .cx-pt--pending { color: var(--cx-muted); opacity: .75; }
 
 #clinixRoot .cx-row--done { background: var(--cx-surface-2); }
 #clinixRoot .cx-finding { display: block; margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--cx-ink); }
@@ -1024,6 +1025,8 @@ html.cx-lock .mc-overlay { z-index: 1300; }
 #clinixRoot .cx-mcq-t { flex: 1 1 auto; min-width: 0; }
 #clinixRoot .cx-mcq-opt--right { border-color: var(--cx-primary); }
 #clinixRoot .cx-mcq-opt--harm { border-color: var(--cx-bad); background: var(--cx-bad-bg); }
+#clinixRoot .cx-mcq-opt--wrong { border-color: var(--cx-warn); }
+#clinixRoot .cx-mcq-why { display: block; font-size: 12.5px; color: var(--cx-muted); margin-top: 2px; }
 
 /* ── Physiology sandbox: waveforms, state banner and the reasoning panel ──────
  * The sandbox now separates a derived readout (rewritten on every slider move) from the controls

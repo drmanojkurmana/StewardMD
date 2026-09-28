@@ -23,10 +23,8 @@ test("draft mode is ON by default, because ALL content is ai_drafted", () => {
   assert.equal(F.bool("smd_clinix_draft"), true);
 });
 
-test("uncleared media stays OFF - that one is a licence question, not a review question", () => {
-  // Unlike the review gate, this cannot be waived by an owner decision: rendering media whose
-  // licence is unverified is a rights problem regardless of who the audience is.
-  assert.equal(F.bool("smd_clinix_uncleared_media"), false);
+test("uncleared media is ON by explicit owner instruction (2026-09-28, disclosed in Terms v3.2)", () => {
+  assert.equal(F.bool("smd_clinix_uncleared_media"), true);
 });
 
 /* Was "OFF by default, so a lesson is deterministic content only". Owner turned it ON on

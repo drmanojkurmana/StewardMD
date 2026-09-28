@@ -1,7 +1,7 @@
 ---
 tags: [module, education, respiratory]
-status: RELEASED to all users 2026-09-25 (owner decision), no longer labelled Beta; phases 1,2,3,5,6,7,8 built (2 diseases); content still ai_drafted pending R1 clinical sign-off, so every lesson keeps its "Draft, pending clinician review" line
-flag: smd_clinix (client, def:TRUE for all users since 2026-09-25, ?clinix=0 hides) + smd_clinix_draft (def:TRUE; must stay on while content is ai_drafted, else every pathway reads "Awaiting clinical review") + smd_clinix_tutor (def:TRUE) + smd_clinix_uncleared_media (def:false, NEVER ship on) + smd_clinix_haptics (def:true)
+status: RELEASED to all users 2026-09-25 (owner decision), no longer labelled Beta; phases 1-3,5-9 built (22 diseases in 5 systems, 5 presentations, 6 skill packs); content still ai_drafted pending R1 clinical sign-off, so every lesson keeps its "Draft, pending clinician review" line
+flag: smd_clinix (client, def:TRUE for all users since 2026-09-25, ?clinix=0 hides) + smd_clinix_draft (def:TRUE; must stay on while content is ai_drafted, else every pathway reads "Awaiting clinical review") + smd_clinix_tutor (def:TRUE) + smd_clinix_ai_patient (def:TRUE, owner 2026-09-27; server /clinix-patient) + smd_clinix_lazy (def:TRUE) + smd_clinix_uncleared_media (def:false, NEVER ship on) + smd_clinix_haptics (def:true) + smd_clinix_viva_voice (def:true)
 ---
 # CliniX
 
@@ -52,7 +52,7 @@ stony dullness". That indirection is what makes the fourth disease cheap.
   answers only above `ANSWER_AT`; between `SUGGEST_AT` and `ANSWER_AT` it offers a did-you-mean
   instead of guessing. `clinix-model.js` falls back to the original literal-cue matcher when the
   lexicon is absent, so the module is optional.
-- `clinix-dx.js` + `clinix/dx-vocabulary.json` — the 365-diagnosis picker (17 systems, synonyms),
+- `clinix-dx.js` + `clinix/dx-vocabulary.json` — the 393-diagnosis picker (17 systems, synonyms, concept groups),
   the graded hint ladder, differential/diagnosis marking (by CONCEPT, so "heart failure" / "CCF" /
   "cardiac failure" count once) and the management MCQ with its harmful distractors.
 - `clinix-physiology.js` — the sandbox engine. Ventricular-arterial coupling for the cardiovascular
@@ -65,7 +65,7 @@ stony dullness". That indirection is what makes the fourth disease cheap.
 ## Hard invariants (each has a test)
 - **Flag off = total no-op.** No `#clinixRoot`, no `cx-lock`, no `--cx-*` custom property in the
   document, and **nothing fetched**. Asserted in `test/run-clinix-ui.mjs`.
-- **Unreviewed content never reaches a student.** `review.status` must be `approved`/`published`.
+- **~~Unreviewed content never reaches a student.~~ SUPERSEDED 2026-09-28 (owner): everything renders, no draft notes; only `deprecated` is hidden.** `review.status` must be `approved`/`published`.
   Fails CLOSED: a missing or garbled status reads as `draft`. All Phase-1 content is `ai_drafted`,
   so a student currently sees an explicit "Awaiting clinical review" state, not an empty pathway.
 - **Uncleared media never renders.** `cleared !== true` degrades to caption + "visual pending".
@@ -275,3 +275,35 @@ the moment it is listed.
 Deps: [[Medical Knowledge Base]] (`kb/reference/*` grounding) · [[MaiK]] (Phase 2 tutor via
 `SMD_AI.explainGroundedStream`) · [[AI Control Center]] (Phase 2 needs a `clinix` entry in
 `AI_MODULES`) · `SMD_KU` / [[StewardMD ID]] (engagement ledger).
+
+## Audit 2026-09-27 (see [[Decisions]])
+Found the module unusable on a device while 388 unit tests were green: `clinix-screens.js` called an
+undefined `flag()` (removed in 978acba3), shadowed `M()` with `var M`, and used an undeclared `done`, so
+every pathway and lesson drew "Something went wrong". **The unit suite cannot see screen-level
+ReferenceErrors; `test/run-clinix-ui.mjs` (29 failures at the time) can. Run it before claiming a CliniX
+change works.** Fixed alongside: dose guard (runs on every streamed frame; catches "1g", "mmol", "twice
+daily"), concept-based diagnosis marking, lexicon small-talk false positives, case `initialVitals` for
+all 22 cases, physiology presets vs their notes, failed fetches no longer cached, presentation skill ids,
+abdomen system now loads the `general` pack (pallor), typed text survives repaints, Spotter timer
+stopped on navigation. Regression tests: `test/clinix-audit-fixes.test.mjs`, `test/clinix-tutor-stream.test.mjs`.
+
+### Round 2 (same day)
+- **Lazy loading.** Only `clinix-flags.js` + `clinix.js` are tagged in `index.html`; `clinix.js SCRIPTS`
+  loads the other 13 files in order on first open. **Their `?v=` tokens now live in `clinix.js`, bump
+  them there.** `smd_clinix_lazy=0` restores eager loading. Sign-out before first open is handled by
+  `clinix.js wipeUnloaded()`.
+- **AI patient ON (owner).** `/clinix-patient` (`functions/api/ai/[[path]].js`) owns the role and rules;
+  the client sends only authored case facts (`clinix-tutor.js patientPayload`). `clinix` bucket, cheap
+  model (`CLINIX_PATIENT_MODEL` overrides). Scripted matches are still answered first; a dose in the
+  reply falls back to the case's scripted line.
+- **Diagnosis marking by concept** (`clinix-dx.js resolve/satisfies`), ambiguous abbreviations resolve
+  to nothing, breadth counts ideas, wrong MCQ picks cost marks and are shown with reasons.
+- **Audio** ends on the audio clock after `resume()` settles; finished handles are disconnected.
+- **CI** runs both CliniX browser harnesses (`clinix-ui` job).
+- **Doses in presentation/script text: owner chose to KEEP them (2026-09-27).**
+
+**Open for the owner:** clinician sign-off of the `ai_drafted` content; licence records for the 18 atlas
+photos; whether non-respiratory presentations should be Pro. The Pro lock is
+client-only (content ships in the bundle); any caller can send `mode:"clinix-tutor"` to use the 60/day
+`clinix` bucket (`functions/api/ai/[[path]].js:1567`), which has no role check.
+

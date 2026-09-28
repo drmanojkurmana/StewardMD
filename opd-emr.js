@@ -1082,7 +1082,7 @@
         '<button class="oe-btn ghost" data-oe-act="rx-summary" title="View, print, or share patient consultation summary">' + ms("print") + "Summary</button>" +
         saveBtn + authBtn + "</div>";
     }
-    return consultBar(st) + reviewPanel(st) + scribeClinicalPanels(st) + triageHtml + allergyHtml + notifHtml + vitalsSyncBanner() + maikAskBtn(st) + oncoApplyOrReviewPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
+    return consultBar(st) + reviewPanel(st) + scribeClinicalPanels(st) + triageHtml + allergyHtml + notifHtml + vitalsSyncBanner() + maikAskBtn(st) + doseCalcBtn(st) + oncoApplyOrReviewPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
   }
   // Oncology apply-protocol suggestion (near provisional diagnosis, above the accordion, same spot
   // as the other AI-assist panels): offers ONLY ACTIVE protocols already fetched into st.oncoProtocols
@@ -1100,6 +1100,18 @@
   function oncoTreeLaunchBtn() {
     if (!oncoNavOn() || !(G.SMD_ONCOTREE && G.SMD_ONCOTREE.open)) return "";
     return '<button class="oe-btn ghost oe-onco-tree" data-oe-act="onco-tree-open">' + ms("account_tree") + "Find protocol via OncoTree pathway</button>";
+  }
+  // Dose calculator for THIS patient (dose-calc.js, flag smd_dose_calc, default OFF). Prefills weight,
+  // height, age and sex from the consult; the calculator keeps nothing once closed.
+  function doseCalcBtn(st) {
+    if (!st.patient || !(G.SMD_DOSECALC && G.SMD_DOSECALC.on && G.SMD_DOSECALC.on())) return "";
+    return '<button class="oe-btn ghost oe-dosecalc" data-oe-act="dose-calc-open">' + ms("calculate") + "Dose calculator for this patient</button>";
+  }
+  function openDoseCalc() {
+    if (!(G.SMD_DOSECALC && st.patient)) return;
+    var p = st.patient, v = st.assessVals || {}, sx = String(p.sex || p.gender || "");
+    var age = parseFloat(String(p.age || "").replace(/[^0-9.]/g, ""));
+    G.SMD_DOSECALC.open({ source: p.name || "OPD patient", patient: { weight: v.Weight || "", height: v.Height || "", age: isFinite(age) ? age : "", ageUnit: "years", sex: /^m/i.test(sx) ? "M" : /^f/i.test(sx) ? "F" : "" } });
   }
   // "Let MaiK Ask" — optional AI-guided history taking (flag smd_maik_ask). Shown only when the feature
   // is on AND a complaint is documented (MaiK needs to know what to ask about). Delegates to SMD_MAIKASK.
@@ -1255,7 +1267,7 @@
       ? "Oncology regimens: verify doses, BSA/AUC/carboplatin target, eligibility and local protocol before administering. Assign attaches the regimen to this patient as a draft and records it in the timeline."
       : br === "all"
         ? "Reference protocols: verify every dose against the cited source and your local protocol." + (oncOn ? " Assign (oncology only) attaches a draft plan to this patient and records it in the timeline." : "")
-        : "Reference protocols compiled from the cited guidelines, pending clinical review. Verify every dose against the source and your local protocol.";
+        : "Reference protocols compiled from the cited guidelines. Verify every dose against the source and your local protocol.";
     var typePicker = "";
     if (br === "oncology" && onc.length) {
       var seen = {}, types = [];
@@ -1560,7 +1572,11 @@
   // protocols (lifecycleState:draft + experimental:true). "active" is never set by promotion, so real
   // clinical activation stays a separate human decision - this only opens the owner/device test path.
   function oncoProtoLibOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_onco_protolib")); } catch (e) { return false; } }
-  function oncoUsable(p) { return !!(p && (p.lifecycleState === "active" || (oncoProtoLibOn() && p.experimental))); }
+  // Owner, 2026-09-28: review status no longer restricts Apply. Any protocol that has not been
+  // retired (retired / superseded / deprecated) can be applied; every dose, evidence, clearance,
+  // VERIFY and physician-confirmation check in the activation gate still applies.
+  var ONCO_RETIRED = { retired: 1, superseded: 1, deprecated: 1, withdrawn: 1 };
+  function oncoUsable(p) { return !!(p && !ONCO_RETIRED[String(p.lifecycleState || "")]); }
   function toast(m) { try { (G.toast || G.SMD_toast) && (G.toast || G.SMD_toast)(m); } catch (e) {} }
   function root() { var el = document.getElementById("smdOpdEmr"); if (!el) { el = document.createElement("div"); el.id = "smdOpdEmr"; document.body.appendChild(el); } return el; }
   var st = freshState();
@@ -2045,6 +2061,7 @@
     if (cmd === "proto-branch") { st.protoBranch = arg || "all"; if (st.protoBranch !== "oncology") st.protoOncoType = ""; paint(); return; }
     if (cmd === "onco-apply") return oncoApply(arg);
     if (cmd === "onco-tree-open") return openOncoTree();
+    if (cmd === "dose-calc-open") return openDoseCalc();
     if (cmd === "onco-override") return oncoSaveOverride(arg);
     if (cmd === "onco-create") return oncoCreateAndActivate();
     if (cmd === "onco-add-emr") return oncoAddToEmr();

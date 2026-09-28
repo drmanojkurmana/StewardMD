@@ -1,0 +1,255 @@
+{
+  "id": "neuro-fields",
+  "unit": "neuro",
+  "level": "mbbs",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Read the field, find the lesion",
+    "hi": "दृष्टि-क्षेत्र पढ़ें, घाव खोजें"
+  },
+  "idea": {
+    "en": "The shape of the [[visual-field]] loss tells you where the pathway is damaged. One eye means the nerve. Both outer halves mean the [[chiasm]]. The same half in both eyes means behind the chiasm.",
+    "hi": "[[visual-field]] में कमी का आकार बताता है कि रास्ता कहाँ ख़राब है। एक आँख का मतलब नर्व। दोनों बाहरी आधे हिस्सों का मतलब [[chiasm]]। दोनों आँखों में एक ही ओर का आधा हिस्सा हो तो चोट कियाज़्म के पीछे है।"
+  },
+  "see": {
+    "diagram": "diagrams/neuro-fields.svg",
+    "w": 480,
+    "h": 460,
+    "alt": {
+      "en": "Left: a simple pathway seen from above, with six red marks from the eye to the back of the brain. Right: for each mark, a pair of round field charts. The left eye's chart is on the left. Red shows the part of the field that is lost.",
+      "hi": "बाईं ओर: ऊपर से देखा गया सरल रास्ता, आँख से दिमाग के पिछले हिस्से तक छह लाल निशानों के साथ। दाईं ओर: हर निशान के लिए गोल चार्ट की एक जोड़ी। बाईं आँख का चार्ट बाईं ओर है। लाल रंग दृष्टि-क्षेत्र का खोया हुआ हिस्सा दिखाता है।"
+    },
+    "caption": {
+      "en": "Each row is one damage site on the patient's right side, and the loss it causes. Fields are drawn as the patient sees them.",
+      "hi": "हर पंक्ति मरीज़ की दाईं ओर चोट की एक जगह और उससे होने वाली कमी दिखाती है। दृष्टि-क्षेत्र वैसे बने हैं जैसे मरीज़ देखता है।"
+    },
+    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.838,
+        "y": 0.152,
+        "label": {
+          "en": "Right optic nerve",
+          "hi": "दाईं ऑप्टिक नर्व"
+        },
+        "note": {
+          "en": "The right eye is blind. The left eye's field is full.",
+          "hi": "दाईं आँख से कुछ नहीं दिखता। बाईं आँख का पूरा दृष्टि-क्षेत्र ठीक है।"
+        }
+      },
+      {
+        "x": 0.58,
+        "y": 0.3,
+        "label": {
+          "en": "Chiasm",
+          "hi": "कियाज़्म (chiasm)"
+        },
+        "note": {
+          "en": "Both outer halves are lost. This bitemporal hemianopia often comes from a pituitary tumour.",
+          "hi": "दोनों बाहरी आधे हिस्से चले जाते हैं। यह बाइटेम्पोरल हेमियानोपिया अक्सर पिट्यूटरी की गाँठ से होता है।"
+        }
+      },
+      {
+        "x": 0.58,
+        "y": 0.448,
+        "label": {
+          "en": "Right optic tract",
+          "hi": "दायाँ ऑप्टिक ट्रैक्ट"
+        },
+        "note": {
+          "en": "The left half is lost in both eyes. This is a left homonymous hemianopia.",
+          "hi": "दोनों आँखों में बायाँ आधा हिस्सा चला जाता है। यह बायाँ होमोनिमस हेमियानोपिया है।"
+        }
+      },
+      {
+        "x": 0.58,
+        "y": 0.566,
+        "label": {
+          "en": "Right temporal lobe",
+          "hi": "दायाँ टेम्पोरल लोब"
+        },
+        "note": {
+          "en": "The upper left quarter is lost in both eyes: 'pie in the sky'.",
+          "hi": "दोनों आँखों में ऊपर का बायाँ चौथाई हिस्सा चला जाता है: 'आसमान में पाई'।"
+        }
+      },
+      {
+        "x": 0.58,
+        "y": 0.773,
+        "label": {
+          "en": "Right parietal lobe",
+          "hi": "दायाँ पैराइटल लोब"
+        },
+        "note": {
+          "en": "The lower left quarter is lost in both eyes.",
+          "hi": "दोनों आँखों में नीचे का बायाँ चौथाई हिस्सा चला जाता है।"
+        }
+      },
+      {
+        "x": 0.58,
+        "y": 0.891,
+        "label": {
+          "en": "Right occipital cortex",
+          "hi": "दायाँ ऑक्सिपिटल कॉर्टेक्स"
+        },
+        "note": {
+          "en": "The left half is lost, but the centre is often spared. This is macular sparing.",
+          "hi": "बायाँ आधा चला जाता है, पर बीच का हिस्सा अक्सर बच जाता है। इसे मैक्युलर स्पेयरिंग कहते हैं।"
+        }
+      }
+    ],
+    "more": [
+      "visual-pathway"
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "In front of the chiasm, each [[optic-nerve]] carries one eye. Damage there gives loss in that eye only.",
+        "hi": "कियाज़्म से आगे हर [[optic-nerve]] एक आँख के तंतु ले जाती है। वहाँ चोट से सिर्फ़ उसी आँख में कमी होती है।"
+      },
+      {
+        "en": "The crossing nasal fibres carry both outer fields. Pressure on the chiasm takes both outer halves: bitemporal [[hemianopia]].",
+        "hi": "पार करते नाक वाले तंतु दोनों बाहरी दृश्य ले जाते हैं। कियाज़्म पर दबाव से दोनों बाहरी आधे चले जाते हैं: बाइटेम्पोरल [[hemianopia]]।"
+      },
+      {
+        "en": "Behind the chiasm, each side carries the opposite half of the world from both eyes. Damage gives a [[homonymous]] loss on the other side.",
+        "hi": "कियाज़्म के पीछे हर ओर दोनों आँखों से उलटी ओर का आधा हिस्सा जाता है। चोट से दूसरी ओर [[homonymous]] कमी होती है।"
+      },
+      {
+        "en": "In the temporal lobe, the Meyer loop carries the upper field. Damage gives an upper [[quadrantanopia]], 'pie in the sky'.",
+        "hi": "टेम्पोरल लोब में मेयर लूप ऊपर का दृश्य ले जाता है। चोट से ऊपर का [[quadrantanopia]] होता है, 'आसमान में पाई'।"
+      },
+      {
+        "en": "In the parietal lobe, the fibres carry the lower field. Damage gives a lower quadrantanopia.",
+        "hi": "पैराइटल लोब के तंतु नीचे का दृश्य ले जाते हैं। चोट से नीचे का क्वाड्रेंटानोपिया होता है।"
+      },
+      {
+        "en": "The tip of the occipital lobe often gets blood from two arteries. So a stroke there may spare the central field.",
+        "hi": "ऑक्सिपिटल लोब की नोक को अक्सर दो धमनियों से खून मिलता है। इसलिए वहाँ स्ट्रोक में बीच का दृश्य बच सकता है।"
+      }
+    ],
+    "analogy": {
+      "en": "Think of a railway line that splits into branches. Which stations lose their trains tells you where the track is broken.",
+      "hi": "सोचिए, एक रेल लाइन आगे शाखाओं में बँटती है। किन स्टेशनों पर ट्रेन नहीं पहुँचती, इससे पता चलता है कि पटरी कहाँ टूटी है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Damage behind the chiasm on the right takes the left half of the world. The loss is opposite the lesion.",
+      "hi": "कियाज़्म के पीछे दाईं ओर चोट हो तो दुनिया का बायाँ आधा चला जाता है। कमी घाव की उलटी ओर होती है।"
+    },
+    {
+      "en": "Test each eye alone. A loss with a straight edge at the vertical midline points to the chiasm or behind it.",
+      "hi": "हर आँख को अलग से जाँचें। अगर कमी का किनारा बीच की खड़ी रेखा पर सीधा हो, तो चोट कियाज़्म पर या उसके पीछे है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Check fields by confrontation: sit face to face, cover one eye each, and compare their field with yours.",
+      "hi": "आमने-सामने बैठकर जाँचें: दोनों एक-एक आँख ढकें, और मरीज़ का दृष्टि-क्षेत्र अपने से मिलाएँ।"
+    },
+    {
+      "en": "Confirm and record the loss with [[perimetry]]. Send any new hemianopia for urgent brain imaging.",
+      "hi": "[[perimetry]] से कमी की पुष्टि करें और उसे दर्ज करें। कोई भी नया हेमियानोपिया हो तो दिमाग की जल्दी जाँच (scan) करवाएँ।"
+    }
+  ],
+  "remember": {
+    "en": "One eye: the nerve. Both outer halves: the chiasm. Same half in both eyes: behind the chiasm, on the other side.",
+    "hi": "एक आँख: नर्व। दोनों बाहरी आधे: कियाज़्म। दोनों आँखों में एक ही आधा: कियाज़्म के पीछे, दूसरी ओर।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "A patient has bitemporal hemianopia. Where is the lesion?",
+        "hi": "मरीज़ को बाइटेम्पोरल हेमियानोपिया है। घाव कहाँ है?"
+      },
+      "o": [
+        {
+          "en": "Optic nerve",
+          "hi": "ऑप्टिक नर्व"
+        },
+        {
+          "en": "Chiasm",
+          "hi": "कियाज़्म"
+        },
+        {
+          "en": "Occipital lobe",
+          "hi": "ऑक्सिपिटल लोब"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "The crossing nasal fibres carry both outer fields. They cross at the chiasm.",
+        "hi": "पार करते नाक वाले तंतु दोनों बाहरी दृश्य ले जाते हैं। वे कियाज़्म पर पार करते हैं।"
+      }
+    },
+    {
+      "q": {
+        "en": "An upper left quadrantanopia in both eyes points to:",
+        "hi": "दोनों आँखों में ऊपर का बायाँ क्वाड्रेंटानोपिया इशारा करता है:"
+      },
+      "o": [
+        {
+          "en": "The right temporal lobe",
+          "hi": "दाएँ टेम्पोरल लोब की ओर"
+        },
+        {
+          "en": "The left temporal lobe",
+          "hi": "बाएँ टेम्पोरल लोब की ओर"
+        },
+        {
+          "en": "The right parietal lobe",
+          "hi": "दाएँ पैराइटल लोब की ओर"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "The Meyer loop in the right temporal lobe carries the upper left field.",
+        "hi": "दाएँ टेम्पोरल लोब का मेयर लूप ऊपर-बाएँ का दृश्य ले जाता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "A right occipital stroke usually gives:",
+        "hi": "दाएँ ऑक्सिपिटल स्ट्रोक से आम तौर पर होता है:"
+      },
+      "o": [
+        {
+          "en": "Blindness of the right eye",
+          "hi": "दाईं आँख का अंधापन"
+        },
+        {
+          "en": "Left homonymous hemianopia, often sparing the centre",
+          "hi": "बायाँ होमोनिमस हेमियानोपिया, अक्सर बीच का हिस्सा बचा हुआ"
+        },
+        {
+          "en": "Bitemporal hemianopia",
+          "hi": "बाइटेम्पोरल हेमियानोपिया"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "The right cortex sees the left world. Its tip often has a second blood supply, so the centre may be spared.",
+        "hi": "दायाँ कॉर्टेक्स बाईं दुनिया देखता है। उसकी नोक को अक्सर दूसरी जगह से भी खून मिलता है, इसलिए बीच का हिस्सा बच सकता है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "neuro"
+  },
+  "glossary": [
+    "visual-field",
+    "chiasm",
+    "optic-nerve",
+    "hemianopia",
+    "homonymous",
+    "quadrantanopia",
+    "perimetry"
+  ],
+  "sources": [
+    "Liu GT, Volpe NJ, Galetta SL. Liu, Volpe, and Galetta's Neuro-Ophthalmology: Diagnosis and Management. 3rd ed. Philadelphia: Elsevier; 2019.",
+    "Remington LA. Clinical Anatomy and Physiology of the Visual System. 3rd ed. St Louis: Elsevier Butterworth-Heinemann; 2012."
+  ]
+}

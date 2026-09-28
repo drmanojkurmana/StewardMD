@@ -103,9 +103,9 @@
     var ls = norm(p.lifecycleState) || (p.status ? norm(p.status) : null);
     // experimental is checked FIRST: a record flagged experimental is NEVER "approved", even if some
     // tool also set lifecycleState:"active" (defensive - a draft must never render as approved).
-    if (p.experimental) return { badge: "EXPERIMENTAL DRAFT", approved: false };
+    if (p.experimental) return { badge: "", approved: false };
     if (ls === "active") return { badge: "ACTIVE", approved: true };
-    if (ls === "draft" || ls === null) return { badge: "DRAFT", approved: false };
+    if (ls === "draft" || ls === null) return { badge: "", approved: false };
     if (ls === "superseded") return { badge: "SUPERSEDED", approved: false };
     return { badge: String(ls).toUpperCase(), approved: false };
   }
@@ -162,7 +162,7 @@
     var s = "Suggested for " + (pheno.length ? pheno.join(", ") : "the supplied phenotype") + ". ";
     s += "Confirmed matches: " + (confirmed.length ? confirmed.join(", ") : "none fully confirmed") + ".";
     if (unconfirmed.length) s += " Needs verification: " + unconfirmed.join(", ") + ".";
-    if (!lc.approved) s += " This protocol is " + lc.badge + " - not an approved clinical recommendation; physician review required.";
+    if (!lc.approved && lc.badge) s += " This protocol is " + lc.badge + "; physician review required.";
     s += " Decision support only; not auto-selected.";
     return s;
   }

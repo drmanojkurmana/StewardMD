@@ -137,6 +137,15 @@
   "cases": [
     {
       "id": "case.cnpalsy.farida",
+      "initialVitals": {
+        "hr": 78,
+        "bpSystolic": 118,
+        "bpDiastolic": 76,
+        "rr": 16,
+        "spo2": 99,
+        "temp": 36.9,
+        "gcs": 15
+      },
       "title": "A woman who woke up with a drooping mouth",
       "opening": "Farida Sheikh, 34, noticed when she woke up two days ago that the right side of her mouth was drooping and she could not close her right eye properly. Introduce yourself and take a history.",
       "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
@@ -341,7 +350,7 @@
         "accept": [
           "bell",
           "facial palsy",
-          "lmn facial"
+          "lmn facial palsy"
         ],
         "minMatch": 1
       },

@@ -159,3 +159,12 @@ html body #maikSheet.maik-polished .maik-side-hd .maik-side-logo{height:26px;mar
 html body #maikSheet.maik-polished #maikSideClose{margin-left:auto;flex:0 0 44px;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center}
 /* Offline notice above the composer (audit T31). */
 html body #maikSheet .maik-offline{margin:0 4px 6px;padding:8px 12px;border-radius:12px;font:600 12.5px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--mk-ink);background:var(--mk-soft,rgba(148,163,184,.14));border:1px solid var(--mk-bd)}
+/* SMD-01 (QA sheet 2026-09-27): the header controls were flat tints that vanished into the aurora
+   gradient. Raised Liquid Glass instead: a frosted fill from the sheet's own background (so it
+   follows light and dark), a hairline edge, a lit top rim and a soft drop shadow; pressing sinks it.
+   !important because a global rule clears every MaiK button's shadow with !important (this
+   selector is more specific, so it wins). The press haptic comes from haptics.js (global, respects the user's setting). */
+html body #maikSheet.maik-polished .maik-hd-btn:not(#maikClose){background:color-mix(in srgb,var(--mk-bg) 58%,transparent);-webkit-backdrop-filter:blur(18px) saturate(180%);backdrop-filter:blur(18px) saturate(180%);border:1px solid color-mix(in srgb,var(--mk-ink) 14%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 1px 2px rgba(0,0,0,.10),0 6px 16px -6px rgba(0,0,0,.28)!important;color:var(--mk-ink)}
+html body #maikSheet.maik-polished .maik-hd-btn:not(#maikClose):active{transform:scale(.94);background:color-mix(in srgb,var(--mk-bg) 78%,transparent)!important;box-shadow:inset 0 1px 2px rgba(0,0,0,.18),0 1px 2px rgba(0,0,0,.10)!important}
+html body #maikSheet.maik-polished #maikClose{box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 1px 2px rgba(0,0,0,.14),0 6px 16px -6px rgba(0,0,0,.35)!important}
+@media(prefers-reduced-transparency:reduce){html body #maikSheet.maik-polished .maik-hd-btn:not(#maikClose){-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--mk-bg)}}

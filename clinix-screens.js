@@ -43,6 +43,7 @@
   function C() { try { return window.SMD_CLINIX_CONTENT || null; } catch (e) { return null; } }
   function M() { try { return window.SMD_CLINIX_MODEL || null; } catch (e) { return null; } }
   function P() { try { return window.SMD_CLINIX_PROGRESS || null; } catch (e) { return null; } }
+  function flag(k) { try { return !!(window.SMD_CLINIX_FLAGS && SMD_CLINIX_FLAGS.bool(k)); } catch (e) { return false; } }
   function readMode() {
     try {
       if (typeof window !== "undefined" && window.localStorage) {
@@ -55,8 +56,23 @@
   /* Pro lock: one system is free (manifest `free: true`), the rest need Pro. Decided at render and at
    * every door (system card, disease/module open, resume), so a stale screen cannot leak content. */
   function isPro() { try { return !!(window.SMD_PRO && SMD_PRO.isProSync && SMD_PRO.isProSync()); } catch (e) { return false; } }
-  function locked(system) { return M() ? M().systemLocked(system, isPro()) : false; }
-  function showLocked() {
+  function locked(system) { return M() ? M().systemLocked(system, isPro()) : !(system && system.free === true); }
+  /* A Pro account must never be told to sign in again. isProSync() is the LAST KNOWN verdict, which
+   * is false on a fresh install or before the account restores, so a lock decision is only final
+   * after one live /billing/status answer: ask the server first, and retry the door if it says Pro. */
+  function showLocked(retry) {
+    try {
+      if (window.SMD_PRO && SMD_PRO.isPro && typeof retry === "function") {
+        SMD_PRO.isPro().then(function (pro) {
+          if (pro) { try { retry(); } catch (e) {} return; }
+          noticeLocked();
+        }, noticeLocked);
+        return;
+      }
+    } catch (e) {}
+    noticeLocked();
+  }
+  function noticeLocked() {
     try { if (window.SMD_PRO_NOTICE && SMD_PRO_NOTICE.show) { SMD_PRO_NOTICE.show("clinix"); return; } } catch (e) {}
     try { if (window.SMD_PRO && SMD_PRO.openPaywall) { SMD_PRO.openPaywall("clinix"); return; } } catch (e) {}
     toast("This system is part of StewardMD Pro");
@@ -157,11 +173,8 @@
       (actHtml || "") + "</div>";
   }
 
-  /* A pending-review notice. Never render a short pathway silently: a UI that degrades by omission
-   * lies about the data, which is the lesson recorded in the profile-page decision of 2026-08-22. */
-  function pendingNotice(avail) {
-    return "";
-  }
+  /* Owner, 2026-09-28: no review/draft notice anywhere in CliniX. Kept as a no-op so call sites stay simple. */
+  function pendingNotice() { return ""; }
 
   /* ── screen: home ────────────────────────────────────────────────────────── */
 
@@ -346,11 +359,10 @@
     var b = state.skillsAll;
     if (!b) { host.innerHTML = header("Examination skills", "Learn the technique itself") + skeleton(); return; }
     var groups = C().skillGroups(b);
-    if (!groups.length) groups = C().skillGroups(b, { allowDraft: true });
     var html = header("Examination skills", "Learn the technique, no disease needed");
 
     if (!groups.length) {
-      html += emptyState("school", "Skills library updating", "No skill is available yet.");
+      html += emptyState("school", "Skills could not load", "Go back and try again.");
       host.innerHTML = html; return;
     }
     var totalIds = [], gi, si;
@@ -405,16 +417,20 @@
   /* Open a skill on its own: no disease, so no emphasis overlay. */
   function openSkillLesson(skillId) {
     var b = state.skillsAll;
-    if (!b) return;
+    if (!b) {
+      // Reached from a presentation before the Skills library was ever opened: load it, then open.
+      C().loadAllSkills(isPro()).then(function (all) {
+        if (!all) { toast("Could not load the skill library"); return; }
+        state.skillsAll = all;
+        openSkillLesson(skillId);
+      });
+      return;
+    }
     state.built = b;
     state.diseaseId = null;
     state.chapterId = null;
     state.skillId = skillId;
     state.turns = C().lessonFor(b, skillId, null);
-    if (!state.turns.length && b && b.skills && b.skills[skillId]) {
-      var M = SMD_CLINIX_MODEL;
-      if (M) state.turns = M.compileLesson(b.skills[skillId], null);
-    }
     state.turnIndex = 0;
     state.answered = {}; state.revealed = {}; state.tutorLog = [];
     state.diaFocus = "both"; state.diaZone = null; state.diaMode = null; state.diaView = "both";
@@ -433,17 +449,11 @@
     var avail = C().availability(b);
     var d = b.disease;
 
-    if (!pathway.length || (avail && avail.visible === 0)) {
-      var M = SMD_CLINIX_MODEL;
-      if (M) pathway = M.buildPathway(d, b.skills, { allowDraft: true });
-    }
-
     var html = header(d.name, d.oneLine);
     html += pendingNotice(avail);
 
-    if (!pathway.length) {
-      html += emptyState("hourglass_top", "Pathway in preparation",
-        "The clinical pathway for " + d.name + " is being updated.");
+    if (!pathway.length || avail.visible === 0) {
+      html += emptyState("school", "Nothing to show yet", "This topic could not load. Go back and try again.");
       host.innerHTML = html;
       return;
     }
@@ -460,6 +470,7 @@
     for (var i = 0; i < pathway.length; i++) {
       var c = pathway[i];
       var cComp = P() ? P().competency(c.skillIds) : { mastered: 0, total: c.count };
+      var done = c.count > 0 && cComp.mastered === c.count;
       var emptyChapter = c.empty && (!c.skills || !c.skills.length);
       html += '<li class="cx-rail-item' + (emptyChapter ? " cx-rail-item--empty" : "") + (done ? " cx-rail-item--done" : "") + '">' +
         '<button type="button" class="cx-rail-btn" data-act="cx-chapter" data-id="' + esc(c.id) + '"' + (emptyChapter ? " disabled" : "") + ">" +
@@ -504,10 +515,6 @@
   function renderChapter(host) {
     var b = state.built;
     var pathway = C().pathwayFor(b);
-    if (!pathway.length && b && b.disease && b.skills) {
-      var M = SMD_CLINIX_MODEL;
-      if (M) pathway = M.buildPathway(b.disease, b.skills, { allowDraft: true });
-    }
     var ch = null;
     for (var i = 0; i < pathway.length; i++) if (pathway[i].id === state.chapterId) ch = pathway[i];
     if (!ch) { host.innerHTML = header("Chapter") + emptyState("error", "Chapter not found", "Go back to the pathway."); return; }
@@ -554,7 +561,7 @@
 
   function renderLesson(host) {
     var b = state.built;
-    var sk = C().skill(b, state.skillId) || (b && b.skills && b.skills[state.skillId]);
+    var sk = C().skill(b, state.skillId);
     if (!sk || !state.turns.length) {
       host.innerHTML = header("Lesson") + emptyState("error", "Lesson unavailable", "This skill is not available yet.");
       return;
@@ -597,6 +604,15 @@
     return "Look first";
   }
 
+  function atlasCleared(a) {
+    if (flag("smd_clinix_uncleared_media")) return true;
+    var md = M();
+    if (!md || !a) return false;
+    var src = a.src && a.src.charAt(0) !== "/" && !/^https?:/.test(a.src) ? "/" + a.src : a.src;   // repo-local path
+    return md.mediaRenderable({ kind: "image", cleared: a.cleared === true, src: src, licence: a.licence, attribution: a.attribution,
+      sourceUrl: a.sourceUrl, commonsVerified: a.commonsVerified === true, ownerProduced: a.ownerProduced === true }, {});
+  }
+
   function showTurn(t) {
     var m = C().media(state.built, t.media);
     // A secondary media turn sits right after the primary one (both up front, before teaching -
@@ -612,6 +628,12 @@
     // 1. Self-authored inline SVG. Always clearable, inherits the theme, and can be interactive.
     if (m.renderable && m.inline && m.diagramId && window.SMD_CLINIX_DIAGRAMS && SMD_CLINIX_DIAGRAMS.has(m.diagramId)) {
       var atlas = (window.SMD_CLINIX_DIAGRAMS.getAtlas && window.SMD_CLINIX_DIAGRAMS.getAtlas(m.diagramId)) || null;
+      // The companion photo is a hosted third-party FILE, not part of the self-authored diagram, so
+      // it passes the same licence gate as any other image (clinix-model.js mediaRenderable). The
+      // atlas entries name PMC / ResearchGate / StatPearls sources but carry no licence record, so
+      // today they are refused and the diagram shows alone. smd_clinix_uncleared_media (authoring
+      // only, never shipped on) previews them.
+      if (atlas && !atlasCleared(atlas)) atlas = null;
       var svg = SMD_CLINIX_DIAGRAMS.render(m.diagramId, {
         focus: state.diaFocus, selected: state.diaZone, mode: state.diaMode, view: state.diaView
       });
@@ -632,11 +654,12 @@
               '<div class="cx-dia-dual-slide cx-dia-dual-slide--atlas">' +
                 '<div class="cx-dia-art-wrap">' +
                   '<img src="' + esc(atlas.src) + '" alt="' + esc(atlas.title) + '" class="cx-dia-art-img" loading="lazy" />' +
-                  '<div class="cx-dia-art-badge"><span class="cx-badge-dot"></span> Verified Bedside Photo</div>' +
+                  '<div class="cx-dia-art-badge"><span class="cx-badge-dot"></span> Clinical photo</div>' +
                 '</div>' +
                 '<div class="cx-dia-art-meta">' +
                   '<div class="cx-dia-art-title">' + esc(atlas.title) + '</div>' +
                   '<div class="cx-dia-art-desc">' + esc(atlas.desc) + '</div>' +
+                  (atlas.attribution ? '<div class="cx-media-src">' + esc(atlas.attribution) + (atlas.licence ? " \u00b7 " + esc(atlas.licence) : "") + '</div>' : "") +
                 '</div>' +
               '</div>' +
               '<div class="cx-dia-dual-slide cx-dia-dual-slide--svg">' +
@@ -969,7 +992,11 @@
     if (!src.length) return "";
     var parts = [];
     for (var i = 0; i < src.length; i++) parts.push(src[i].source + (src[i].locator ? " (" + src[i].locator + ")" : ""));
-    return '<div class="cx-src"><span class="cx-src-badge">Clinical Reference</span> ' +
+    // Owner, 2026-09-28: no draft/pending-review line on lessons. Sources only; the "Clinician
+    // reviewed" badge still appears on content whose review.status is approved/published.
+    var rs = M() ? M().reviewStatus(sk) : "draft";
+    var reviewed = rs === "approved" || rs === "published";
+    return '<div class="cx-src">' + (reviewed ? '<span class="cx-src-badge">Clinician reviewed</span> ' : "") +
       "Source: " + esc(parts.join("; ")) + "</div>";
   }
 
@@ -1468,6 +1495,16 @@
         }
         html += "</div>";
       }
+      var notIndicated = [];
+      for (var wi = 0; wi < (r.plan.wrong || []).length; wi++) if (!r.plan.wrong[wi].harm) notIndicated.push(r.plan.wrong[wi]);
+      if (notIndicated.length) {
+        html += '<div class="cx-sec-h">Not indicated for this patient</div><div class="cx-mcq">';
+        for (var ni = 0; ni < notIndicated.length; ni++) {
+          html += '<div class="cx-mcq-opt cx-mcq-opt--wrong"><span class="cx-mcq-box">' + ic("block") + '</span><span class="cx-mcq-t">' +
+            esc(notIndicated[ni].text) + (notIndicated[ni].reason ? '<span class="cx-mcq-why">' + esc(notIndicated[ni].reason) + "</span>" : "") + "</span></div>";
+        }
+        html += "</div>";
+      }
       if (r.plan.missed.length) {
         html += '<div class="cx-sec-h">What you left out</div><div class="cx-mcq">';
         for (var pmi = 0; pmi < r.plan.missed.length; pmi++) {
@@ -1565,24 +1602,35 @@
       if (state.caseTaken.asked.indexOf(hit.key) < 0) state.caseTaken.asked.push(hit.key);
       haptic("tap");
       repaint();
-    } else if (flag("smd_clinix_tutor") && window.SMD_CLINIX_TUTOR && SMD_CLINIX_TUTOR.available()) {
+    } else if (flag("smd_clinix_ai_patient") && window.SMD_CLINIX_TUTOR && SMD_CLINIX_TUTOR.patientAvailable && SMD_CLINIX_TUTOR.patientAvailable()) {
       var entry = { q: text, a: "Thinking…", pending: true };
+      var taken = state.caseTaken;   // captured: a restarted case must not be credited with this reply
       state.caseLog.push(entry);
       haptic("tap");
       repaint();
+      var near = res;   // the lexicon's near misses, offered if MaiK cannot answer
       SMD_CLINIX_TUTOR.answerAsPatient(cd, text).then(function (res) {
         entry.pending = false;
-        entry.a = (res && res.text) || M().unmatchedReply(cd);
+        if (state.caseDef !== cd || state.caseTaken !== taken) return;
+        if (!res || res.error || res.blocked) {
+          // No generated reply: behave exactly like the deterministic patient.
+          entry.a = M().unmatchedReply(cd);
+          entry.unmatched = true;
+          if (near && near.suggestions) for (var ns = 0; ns < near.suggestions.length; ns++) state.caseSuggest.push(near.suggestions[ns].key);
+          repaint();
+          return;
+        }
+        entry.a = res.text;
         // If student question matches cues of any uncredited history topic, credit it
         var normQ = M().normalizeAnswer(text);
         var hist = (cd && cd.history) || {};
         for (var k in hist) {
-          if (hist[k] && state.caseTaken.asked.indexOf(k) < 0) {
+          if (hist[k] && taken.asked.indexOf(k) < 0) {
             var cues = hist[k].cues || [];
             for (var ci = 0; ci < cues.length; ci++) {
               var nc = M().normalizeAnswer(cues[ci]);
               if (nc && (" " + normQ + " ").indexOf(" " + nc + " ") >= 0) {
-                state.caseTaken.asked.push(k);
+                taken.asked.push(k);
                 break;
               }
             }
@@ -1591,6 +1639,7 @@
         repaint();
       }).catch(function () {
         entry.pending = false;
+        if (state.caseDef !== cd || state.caseTaken !== taken) return;
         entry.a = M().unmatchedReply(cd);
         entry.unmatched = true;
         repaint();
@@ -1679,13 +1728,13 @@
       r.dxPick = dx.scoreDiagnosis(state.caseDef, state.caseTaken.dxPick, state.dxVocab);
       // The picker is the authority when it was used: keyword marking of free text cannot see a
       // synonym the vocabulary knows about ("CCF" for congestive cardiac failure).
-      if (r.dxPick.correct) r.diagnosis.correct = true;
+      r.diagnosis.correct = r.dxPick.correct === true;
     }
     if (dx && state.caseTaken.planPicks && state.planOpts) {
       r.plan = dx.scorePlan(state.caseDef, state.caseTaken.planPicks, state.planOpts);
     }
     if (r.ddx && r.ddx.shotgun) r.verdict = r.verdict === "good" ? "right-answer-thin-workup" : r.verdict;
-    if (r.plan && r.plan.harmful.length) r.verdict = "incomplete";
+    if (r.plan && (r.plan.harmful.length || r.plan.correct === false)) r.verdict = "incomplete";
     state.caseResult = r;
     if (P()) {
       // Choosing to examine a relevant finding is a real clinical decision, but tapping to reveal
@@ -2149,10 +2198,16 @@
     state.presentationTab = "redflags";
     state.loading = true;
     go("presentation");
-    C().loadPresentation(id).then(function (built) {
+    state.presentationBuilt = null;
+    C().loadPresentation(id, isPro()).then(function (built) {
       if (state.presentationId !== id) return;
-      state.presentationBuilt = built;
       state.loading = false;
+      if (!built) {
+        toast("Could not load this presentation");
+        if (state.stack[state.stack.length - 1] === "presentation") back();
+        return;
+      }
+      state.presentationBuilt = built;
       repaint();
     });
   }
@@ -2167,7 +2222,7 @@
     var layers = p.layers || {};
     var tab = state.presentationTab || "redflags";
 
-    var html = header(p.title, p.subtitle, "cx-presentations");
+    var html = header(p.title, p.subtitle, "cx-back");
 
     // Action banner: Present Case to Consultant
     html += '<div class="cx-sec"><div class="cx-notice" style="background:var(--cx-teach-soft);border:1px solid rgba(29,78,216,.2);margin-bottom:12px;">' +
@@ -2593,7 +2648,7 @@
     var sd = state.scriptData;
     if (!sd) { host.innerHTML = header("Presentation Script") + emptyState("error", "No script available", "Select a case or presentation first."); return; }
 
-    var html = header(sd.title, "Formal spoken presentation for examiners & ward rounds", "cx-presentation");
+    var html = header(sd.title, "Formal spoken presentation for examiners & ward rounds", "cx-back");
 
     html += '<div class="cx-script-bar">' +
       '<button type="button" class="cx-btn cx-btn--primary" style="flex:1;" data-act="cx-script-copy">' + ic("content_copy") + ' Copy Full Script</button>' +
@@ -2812,6 +2867,7 @@
       state.spotterSeconds--;
       if (state.spotterSeconds <= 0) {
         stopSpotterTimer();
+        if (state.stack[state.stack.length - 1] !== "spotter") return;
         if (state.spotterAnswers[state.spotterIndex] == null) {
           state.spotterAnswers[state.spotterIndex] = -1;
           haptic("fail");
@@ -3039,10 +3095,74 @@
 
   function openSoundLab() {
     state.diaMode = "all";
+    // SMD-05: build the audio context and the noise buffer now, and wake the output on the finger's
+    // first contact (pointerdown), so the click that follows plays at once.
+    try { if (window.SMD_CLINIX_AUDIO && SMD_CLINIX_AUDIO.prewarm) SMD_CLINIX_AUDIO.prewarm(); } catch (e) {}
+    if (!openSoundLab._armed) {
+      openSoundLab._armed = true;
+      document.addEventListener("pointerdown", function (e) {
+        var b = e.target && e.target.closest && e.target.closest('[data-act="cx-audio"]');
+        if (b) { try { SMD_CLINIX_AUDIO.unlock(); } catch (x) {} }
+      }, true);
+    }
     go("soundlab");
   }
 
+  /* SMD-06: a live phonocardiogram-style trace of the sound that is playing, drawn from the audio
+   * output itself (an AnalyserNode), scrolling right to left. Cardiac sounds mark S1 and S2 where the
+   * engine schedules them; breath sounds mark inspiration and expiration. Stops when the sound stops
+   * or the card leaves the screen. */
+  function waveMarks(h, from, to) {
+    var s = h.spec || {}, out = [], k, t;
+    var cardiac = s.type === "cardiac" || !!s.cardiac || !!s.bpm || !!s.systole || !!s.sysLen;
+    if (cardiac) {
+      var cyc = s.period || s.cycle || 0.85, sys = s.systole || s.sysLen || 0.3;
+      for (k = 0, t = h.startsAt; t < to && t < h.endsAt; k++, t = h.startsAt + k * cyc) {
+        if (t >= from) out.push({ t: t, l: "S1" });
+        if (t + sys >= from && t + sys < to) out.push({ t: t + sys, l: "S2" });
+      }
+    } else {
+      var br = (s.insp || 1) + (s.gap || 0) + (s.exp || 1) + (s.rest || 0);
+      for (k = 0, t = h.startsAt; t < to && t < h.endsAt; k++, t = h.startsAt + k * br) {
+        if (t >= from) out.push({ t: t, l: "In" });
+        var te = t + (s.insp || 1) + (s.gap || 0);
+        if (te >= from && te < to) out.push({ t: te, l: "Ex" });
+      }
+    }
+    return out;
+  }
+  function startWave(cv, kind) {
+    var A = window.SMD_CLINIX_AUDIO; if (!A || !A.current || !cv.getContext) return;
+    var g = cv.getContext("2d"), dpr = Math.min(window.devicePixelRatio || 1, 3), hist = [], buf = null, SPAN = 3;
+    var cs = getComputedStyle(cv), ink = cs.color || "#0f766e";
+    function size() { var r = cv.getBoundingClientRect(); cv.width = Math.max(1, Math.round(r.width * dpr)); cv.height = Math.max(1, Math.round(r.height * dpr)); }
+    size();
+    (function frame() {
+      if (!cv.isConnected) return;
+      var h = A.current(); if (!h || h.kind !== kind || !h.analyser) return;
+      var now = A.now(), W = cv.width, H = cv.height, mid = H / 2;
+      if (!buf) buf = new Float32Array(h.analyser.fftSize);
+      h.analyser.getFloatTimeDomainData(buf);
+      var pk = 0; for (var i = 0; i < buf.length; i++) { var a = Math.abs(buf[i]); if (a > pk) pk = a; }
+      hist.push({ t: now, v: Math.min(1, pk * 1.6) });
+      while (hist.length && hist[0].t < now - SPAN) hist.shift();
+      g.clearRect(0, 0, W, H);
+      g.globalAlpha = .25; g.fillStyle = ink; g.fillRect(0, mid - dpr * .5, W, dpr); g.globalAlpha = 1;
+      g.fillStyle = ink;
+      var bw = Math.max(dpr, W / (SPAN * 60));
+      hist.forEach(function (p) { var x = W - (now - p.t) / SPAN * W, hh = Math.max(dpr, p.v * (mid - 12 * dpr)); g.fillRect(x - bw, mid - hh, bw, hh * 2); });
+      g.font = (10 * dpr) + "px -apple-system,system-ui,sans-serif"; g.textAlign = "center";
+      waveMarks(h, now - SPAN, now).forEach(function (m) {
+        var x = W - (now - m.t) / SPAN * W;
+        g.globalAlpha = .5; g.fillRect(x, 10 * dpr, dpr, H - 20 * dpr); g.globalAlpha = 1;
+        g.fillText(m.l, x, 9 * dpr);
+      });
+      requestAnimationFrame(frame);
+    })();
+  }
+
   function renderSoundLab(host) {
+    try { if (window.SMD_CLINIX_AUDIO && SMD_CLINIX_AUDIO.prewarm) SMD_CLINIX_AUDIO.prewarm(); } catch (e) {}
     var html = header("Auscultation Sound Lab", "Acoustics & Real Audio Reference", "cx-back");
 
     var filter = state.diaMode || "all";
@@ -3073,7 +3193,8 @@
             (s.ytVideoId ? '<button type="button" class="cx-btn cx-btn--ghost" style="padding:6px 10px;font-size:12.5px;color:#c00;border-color:rgba(204,0,0,0.35);" data-act="cx-sound-yt" data-id="' + esc(s.kind) + '">' +
               ic(isYtActive ? "expand_less" : "smart_display") + ' ' + (isYtActive ? "Hide" : "Real (" + esc(s.ytChannel || "YouTube") + ")") + '</button>' : '') +
           '</div></div>' +
-        '<div style="font-size:13px;color:var(--cx-muted);line-height:1.45;margin-bottom:6px;">' + esc(s.desc) + '</div>';
+        '<div style="font-size:13px;color:var(--cx-muted);line-height:1.45;margin-bottom:6px;">' + esc(s.desc) + '</div>' +
+        (isPlaying ? '<canvas class="cx-wave" data-wave="' + esc(s.kind) + '" role="img" aria-label="Live waveform of the ' + esc(s.label) + ' sound" style="display:block;width:100%;height:72px;margin-top:6px;border-radius:10px;background:color-mix(in srgb,var(--cx-accent,#0f766e) 7%,transparent);color:var(--cx-accent,#0f766e)"></canvas>' : "");
 
       if (isYtActive && s.ytVideoId) {
         var shimUrl = YT_SHIM + "?v=" + esc(s.ytVideoId) + (s.ytStart ? "&start=" + s.ytStart : "");
@@ -3090,6 +3211,7 @@
 
     html += '</div></div>';
     host.innerHTML = html;
+    var wv = host.querySelector("canvas.cx-wave"); if (wv) startWave(wv, wv.getAttribute("data-wave"));
   }
 
   /* ── router ──────────────────────────────────────────────────────────────── */
@@ -3112,8 +3234,10 @@
     if (!h || !fn) return;
     var prev = 0;
     try { prev = h.scrollTop || 0; } catch (e) {}
+    var typed = keepScroll && key !== "viva" ? snapshotTyped(h, key) : null;
     try {
       fn(h);
+      if (typed) restoreTyped(h, key, typed);
     } catch (e) {
       // Swallowing this silently left a BLANK screen, which reads as "nothing opens" and sent the
       // owner and me hunting in the wrong place. A screen that fails must say so.
@@ -3129,11 +3253,53 @@
     try { h.scrollTop = keepScroll ? prev : 0; } catch (_) {}
   }
 
+  /* A repaint rewrites the whole screen, which replaces every <input>/<textarea> with a fresh empty
+   * one. Anything that repaints while the student is typing (a streamed tutor reply, a MaiK case
+   * reply, the YouTube fallback timer) used to erase what they had typed. The typed text, focus and
+   * caret are carried across a REPAINT of the same step only: the stamp includes the lesson turn and
+   * case phase, so the next question never inherits the previous answer. A value the renderer
+   * itself filled in (from state) always wins. */
+  // Free-typing composers only. State-driven fields (the diagnosis search, the viva answer, the ABG
+  // inputs) are re-rendered from state on purpose and must not be overridden by a stale DOM value.
+  var KEEP_TYPED = { cxAnswer: 1, cxTutorQ: 1, cxCaseQ: 1, cxCaseText: 1 };
+  function typedStamp(key) {
+    return key + "|" + state.turnIndex + "|" + (state.caseDef && state.caseDef.id || "") + "|" + (state.casePhase || "") + "|" + (state.skillId || "");
+  }
+  function snapshotTyped(h, key) {
+    var out = { stamp: typedStamp(key), fields: [] };
+    try {
+      var els = h.querySelectorAll("textarea[id], input[id]");
+      for (var i = 0; i < els.length; i++) {
+        var el = els[i];
+        if (!KEEP_TYPED[el.id]) continue;
+        var foc = document.activeElement === el;
+        if (!el.value && !foc) continue;
+        var f = { id: el.id, value: el.value, focused: foc, a: null, b: null };
+        try { f.a = el.selectionStart; f.b = el.selectionEnd; } catch (e) {}
+        out.fields.push(f);
+      }
+    } catch (e) {}
+    return out.fields.length ? out : null;
+  }
+  function restoreTyped(h, key, snap) {
+    if (!snap || snap.stamp !== typedStamp(key)) return;
+    for (var i = 0; i < snap.fields.length; i++) {
+      var f = snap.fields[i], el = document.getElementById(f.id);
+      if (!el || !h.contains(el)) continue;
+      if (!el.value && f.value) el.value = f.value;
+      if (f.focused) {
+        try { el.focus({ preventScroll: true }); } catch (e) { try { el.focus(); } catch (_) {} }
+        try { if (f.a != null) el.setSelectionRange(f.a, f.b); } catch (e) {}
+      }
+    }
+  }
+
   function go(key) {
     key = String(key || "");
     if (!SCREENS[key]) return;
     stopAudio();
     vivaStopListening();
+    if (key !== "spotter") stopSpotterTimer();
     if (state.stack[state.stack.length - 1] !== key) state.stack.push(key);
     show(key);
   }
@@ -3143,12 +3309,13 @@
   function back() {
     stopTimer();
     stopAudio();
+    stopSpotterTimer();
     if (state.stack.length <= 1) { haptic("light"); closeMod(); return; }
     state.stack.pop();
     show(state.stack[state.stack.length - 1] || "home");
   }
 
-  function closeMod() { stopAudio(); vivaStopListening(); try { if (window.CLINIX && CLINIX.close) CLINIX.close(); } catch (e) {} }
+  function closeMod() { stopAudio(); vivaStopListening(); stopSpotterTimer(); try { if (window.CLINIX && CLINIX.close) CLINIX.close(); } catch (e) {} }
 
   /* Audio must never outlive the screen that started it. A breath sound still playing after the
    * student has moved on is disorienting and reads as a bug. */
@@ -3199,7 +3366,8 @@
       state.audioKind = kind;
       SMD_CLINIX_AUDIO.play(kind, { breaths: 3, onEnd: function () {
         state.audioKind = null;
-        if (state.stack[state.stack.length - 1] === "lesson" || state.stack[state.stack.length - 1] === "sandbox") repaint();
+        var top = state.stack[state.stack.length - 1];
+        if (top === "lesson" || top === "sandbox" || top === "soundlab") repaint();   // soundlab: the Stop button and trace go when the sound ends
       } });
     } catch (e) { state.audioKind = null; }
   }
@@ -3207,7 +3375,7 @@
   /* ── actions ─────────────────────────────────────────────────────────────── */
 
   function openDisease(id) {
-    if (diseaseLocked(id)) { haptic("light"); showLocked(); return; }
+    if (diseaseLocked(id)) { haptic("light"); showLocked(function () { if (!diseaseLocked(id)) openDisease(id); }); return; }
     state.diseaseId = id;
     state.loading = true;
     go("disease");
@@ -3217,7 +3385,7 @@
       // vivaAnswer's state.vivaCurrent !== cur check).
       if (state.diseaseId !== id) return;
       state.loading = false;
-      if (built && locked(built.system)) { state.built = null; back(); showLocked(); return; }
+      if (built && locked(built.system)) { state.built = null; back(); showLocked(function () { if (!locked(built.system)) openDisease(id); }); return; }
       state.built = built;
       if (!built) { toast("Could not load this topic"); back(); return; }
       repaint();
@@ -3227,17 +3395,6 @@
   function openLesson(skillId) {
     state.skillId = skillId;
     state.turns = C().lessonFor(state.built, skillId, state.chapterId);
-    if (!state.turns.length && state.built && state.built.skills && state.built.skills[skillId]) {
-      var M = SMD_CLINIX_MODEL;
-      if (M) {
-        var emphasis = null;
-        var chs = (state.built.disease && state.built.disease.chapters) || [];
-        for (var i = 0; i < chs.length; i++) {
-          if (chs[i].id === state.chapterId && chs[i].emphasis) { emphasis = chs[i].emphasis[skillId]; break; }
-        }
-        state.turns = M.compileLesson(state.built.skills[skillId], emphasis);
-      }
-    }
     state.turnIndex = 0;
     state.answered = {};
     state.revealed = {};
@@ -3729,7 +3886,11 @@
       case "cx-back": haptic("light"); back(); return;
 
       case "cx-system":
-        if (locked(C() && C().systemById(state.catalog, id))) { haptic("light"); showLocked(); return; }
+        if (locked(C() && C().systemById(state.catalog, id))) {
+          haptic("light");
+          showLocked(function () { if (!locked(C() && C().systemById(state.catalog, id))) { state.systemId = id; go("system"); } });
+          return;
+        }
         state.systemId = id; haptic("tap"); go("system"); return;
       case "cx-disease": haptic("tap"); openDisease(id); return;
       case "cx-chapter": state.chapterId = id; haptic("tap"); go("chapter"); return;
@@ -3795,8 +3956,8 @@
         haptic("tap"); return;
       }
       case "cx-watch-sound": {
-        var vid = el.getAttribute("data-vid") || "";
-        var start = parseInt(el.getAttribute("data-start") || "0", 10);
+        var vid = t.getAttribute("data-vid") || "";
+        var start = parseInt(t.getAttribute("data-start") || "0", 10);
         var url = "https://www.youtube.com/watch?v=" + vid + (start ? "&t=" + start + "s" : "");
         openExternal(url);
         haptic("tap"); return;
@@ -4058,7 +4219,6 @@
       }
       case "cx-chief-retry": openChief(); return;
       case "cx-soundlab": haptic("tap"); openSoundLab(); return;
-      case "cx-sound-filter": state.diaMode = id; haptic("tap"); repaint(); return;
     }
   }
 
@@ -4072,7 +4232,7 @@
       // disease while this fetch was in flight.
       if (state.diseaseId !== pos.diseaseId) return;
       if (!built) { toast("Could not load that topic"); return; }
-      if (locked(built.system)) { showLocked(); return; }
+      if (locked(built.system)) { showLocked(function () { if (!locked(built.system)) resume(); }); return; }
       state.built = built;
       state.systemId = built.system.id;
       go("disease");

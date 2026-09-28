@@ -22,25 +22,55 @@
   var AC = null;
   var noiseBuf = null;
   var active = [];          // live handles, so a screen change can stop everything
+  var END_TAIL = 0.2;       // seconds past the last scheduled event before a sound counts as over
 
   function ctx() {
     if (AC) return AC;
     try {
       var C = window.AudioContext || window.webkitAudioContext;
       if (!C) return null;
-      AC = new C();
+      try { AC = new C({ latencyHint: "interactive" }); } catch (e1) { AC = new C(); }
     } catch (e) { return null; }
     return AC;
   }
 
-  function available() { return !!(window.AudioContext || window.webkitAudioContext); }
+  // typeof guard: node (tests) has no window, and a bare reference would throw a ReferenceError.
+  function available() { return typeof window !== "undefined" && !!(window.AudioContext || window.webkitAudioContext); }
+
+  /* The promise of the most recent ctx.resume(), or null when none is pending. play() waits on it
+   * before timing the end of a sound: on iOS the output takes ~2 s to wake (SMD-05), and a timer
+   * started before that would clear the Stop button and trace while the sound is still playing. */
+  var resuming = null;
 
   /* iOS will not start an AudioContext outside a user gesture, and leaves it "suspended".
    * Every play() is triggered by a tap, so resuming here is legitimate and required. */
   function unlock() {
     var c = ctx();
-    if (c && c.state === "suspended") { try { c.resume(); } catch (e) {} }
+    if (c && c.state !== "running") {
+      try {
+        var p = c.resume();
+        if (p && typeof p.then === "function") {
+          var mine = p;
+          resuming = p;
+          var clear = function () { if (resuming === mine) resuming = null; };
+          p.then(clear, clear);
+        }
+      } catch (e) {}
+    }
+    // SMD-05 (QA sheet 2026-09-27: "taking 2 seconds"): iOS keeps the audio hardware asleep until
+    // something actually plays. A one-sample silent buffer inside the tap wakes the output route, so
+    // the real sound scheduled a moment later starts at once instead of after the wake-up.
+    if (c && !unlock._woke) {
+      try { var b = c.createBuffer(1, 1, c.sampleRate), src = c.createBufferSource(); src.buffer = b; src.connect(c.destination); src.start(0); unlock._woke = true; } catch (e) {}
+    }
     return c;
+  }
+  /* Called when a screen with sounds opens: builds the context (it may start suspended, which is
+   * fine) and the shared noise buffer, so the first tap does no set-up work at all. */
+  function prewarm() {
+    var c = ctx(); if (!c) return false;
+    try { noise(c); } catch (e) {}
+    return true;
   }
 
   // One reusable 4-second white-noise buffer. Breath sounds are all shaped noise, so everything
@@ -609,10 +639,13 @@
 
     var master = c.createGain();
     master.gain.value = typeof opts.volume === "number" ? opts.volume : 0.9;
-    master.connect(c.destination);
+    // SMD-06: an analyser on the output drives the live waveform, so the trace is the sound itself.
+    var analyser = null;
+    try { analyser = c.createAnalyser(); analyser.fftSize = 2048; analyser.smoothingTimeConstant = 0; master.connect(analyser); analyser.connect(c.destination); }
+    catch (e) { analyser = null; master.connect(c.destination); }
 
     var count = opts.breaths || opts.cycles || opts.beats || (isCardiac ? 4 : 3);
-    var t = c.currentTime + 0.08, total = 0, i;
+    var t = c.currentTime + (c.state === "running" ? 0.03 : 0.06), total = 0, i;
     for (i = 0; i < count; i++) {
       var len;
       if (isCardiac) {
@@ -627,26 +660,74 @@
       total += len;
     }
 
-    var timer = null;
-    if (opts.onEnd) timer = setTimeout(opts.onEnd, (total + 0.2) * 1000);
+    /* END OF SOUND, timed on the AUDIO clock, not the wall clock.
+     * It used to be setTimeout(onEnd, total) started here, before resume() had settled. On iOS the
+     * output takes ~2 s to wake (SMD-05) and ctx.currentTime does not move until it does, so the UI's
+     * Stop button and trace cleared ~2 s before the sound finished. Now: wait for the pending resume,
+     * then poll until ctx.currentTime passes the last scheduled event. A handle ends exactly once,
+     * either naturally (onEnd fires, nodes are disconnected, it leaves `active`) or by stop() (onEnd
+     * never fires). STALL_MS caps a clock that never advances or a resume that never settles (route
+     * lost, context interrupted), so a dead context cannot leave the Stop button up forever. */
+    var endAt = t + total + END_TAIL;
+    var timer = null, done = false, playedAt = Date.now();
+    var STALL_MS = (total + END_TAIL) * 1000 + 15000;
+
+    function unlink() {
+      for (var j = active.length - 1; j >= 0; j--) if (active[j] === handle) active.splice(j, 1);
+    }
+    function disconnectAll() {
+      try { master.disconnect(); } catch (e) {}
+      if (analyser) { try { analyser.disconnect(); } catch (e) {} }
+    }
+    function finish() {
+      if (done) return;
+      done = true;
+      if (timer) { clearTimeout(timer); timer = null; }
+      unlink();
+      disconnectAll();
+      if (opts.onEnd) { try { opts.onEnd(); } catch (e) {} }
+    }
+    function check() {
+      timer = null;
+      if (done) return;
+      var left = endAt - c.currentTime;
+      if (left <= 0 || Date.now() - playedAt > STALL_MS) { finish(); return; }
+      timer = setTimeout(check, Math.max(60, Math.ceil(left * 1000)));
+    }
+    function arm() {
+      if (done) return;
+      if (timer) { clearTimeout(timer); timer = null; }
+      check();
+    }
 
     var handle = {
       cycle: isCardiac ? (s.period || s.cycle || 0.85) : (s.insp + (s.gap || 0) + s.exp + s.rest),
-      spec: s,
+      spec: s, kind: kind, analyser: analyser, startsAt: t, endsAt: t + total,
+      ended: function () { return done; },
       stop: function () {
+        if (done) return;          // idempotent, and a no-op once the sound has ended by itself
+        done = true;
+        if (timer) { clearTimeout(timer); timer = null; }
+        unlink();
         try { master.gain.setTargetAtTime(0.0001, c.currentTime, 0.02); } catch (e) {}
-        try { setTimeout(function () { try { master.disconnect(); } catch (e) {} }, 200); } catch (e) {}
-        if (timer) clearTimeout(timer);
-        for (var j = active.length - 1; j >= 0; j--) if (active[j] === handle) active.splice(j, 1);
+        // let the 20 ms fade finish before cutting the graph, or the cut clicks
+        try { setTimeout(disconnectAll, 200); } catch (e) { disconnectAll(); }
       }
     };
     active.push(handle);
+
+    var pending = c.state === "running" ? null : resuming;
+    if (pending) {
+      timer = setTimeout(check, STALL_MS + 1);   // backstop only: a resume that never settles
+      pending.then(arm, arm);
+    } else arm();
     return handle;
   }
 
   function stopAll() {
-    for (var i = active.length - 1; i >= 0; i--) { try { active[i].stop(); } catch (e) {} }
+    var list = active.slice();
     active = [];
+    for (var i = list.length - 1; i >= 0; i--) { try { list[i].stop(); } catch (e) {} }
   }
 
   /* ── Phase 12: Real + Synthetic Clinical Audio Registry ───────────────── */
@@ -692,6 +773,9 @@
   var API = {
     KINDS: KINDS, has: has, available: available,
     play: play, stopAll: stopAll, labelOf: labelOf, hintOf: hintOf,
+    unlock: unlock, prewarm: prewarm,
+    current: function () { return active.length ? active[active.length - 1] : null; },
+    now: function () { return AC ? AC.currentTime : 0; },
     AUDIO_REGISTRY: AUDIO_REGISTRY,
     getAudioMetadata: getAudioMetadata,
     listAudioAssets: listAudioAssets,

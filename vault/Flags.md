@@ -235,6 +235,12 @@ default (ON) is what you get.
 | `smd_review_desk` | **ON** | The Review Desk ([[Review Desk]]). Its Home tile is defOn false (reviewers add it). Local only. Force off with `?review=0`. |
 | `smd_kits_share` | **ON** | [[Colleagues]]: referrals, handovers, case rooms, hospital kit versions, kit history, review sync, and the Home "Colleagues" tile. Server route also defaults on (env `KITS_SHARE_ON=0` is its kill switch). Off per device with `smd_kits_share = "0"` or `?share=0`. |
 
+### Dose Calculator  <sub>1 ON · 0 OFF</sub>  <small>(added 2026-09-28)</small>
+
+| Flag | Def | Why |
+|---|---|---|
+| `smd_dose_calc` | **ON** | [[Dose Calculator]]. Owner 2026-09-28: monograph doses are verified, so the calculator ships on. Off per device with `smd_dose_calc = "0"` or `?dosecalc=0`. |
+
 ### Insulin  <sub>3 ON · 0 OFF</sub>
 
 | Flag | Def | Why |
@@ -348,6 +354,7 @@ Set in Cloudflare (env or the billing-cfg KV, which wins). These are not `localS
 |---|---|---|
 | `VERIFY_REQUIRED_FOR_PRO` | **ON** | Pro requires a verified NMC/SMC registration (`_entitlement.js` `isPro`). Set `0` to restore the pre-2026-08-27 launch-promo free-for-all with no deploy; `test/entitlement-trial.test.mjs` pins that path. |
 | `TRIAL_NEEDS_VERIFY` | **ON** (`"0"` = off) | Owner 2026-09-27: the 7-day free Pro week goes ONLY to a verified profile, meaning a verified mobile number (`phoneVerified`) OR a verified NMC/SMC registration (`verified` / `traineeVerified`). One week, from whichever came first (`phoneVerifiedAt` vs `verifiedAt`). `provUntil` alone (the "Not now" skip trial, or a certificate still pending review) no longer unlocks Pro. A phone-only account is `phoneVerified`, never `verified`, so prescribing is unchanged. `_entitlement.js` `trialNeedsVerify` / `weekStart`; `test/verify-gate.test.mjs`. `"0"` restores provisional Pro. |
+| `smd_first_resources` | **ON** (`"0"` = off) | Bug SMD-DVVJVN (owner 2026-09-27, "like a game, ask then auto-download"): on the native app, once Home is on screen, `first-resources.js` asks ONCE to download the voice model (`SMD_VOICE.pickModel`) and the MaiK pack `recommend()` rates "ok" for this phone; Download now queues both as background downloads. Answer kept in `smd_first_resources_asked`; never changes which engine answers (the pack serves the offline stand-in). `test/run-first-resources-ui.mjs`. |
 | `TRIAL_ONCE_ON` | **OFF** | Free Pro week once per DOCTOR (`_trial_ledger.js`): a reg no / verified phone / native device id that already had a week on another account gets none (verified, `trialDenied`). KV flag from /admin Billing: `1` enforce, `shadow` record + log only, else off. Needs secret `TRIAL_PEPPER`; without it the ledger is off. Seed first: `POST /api/verifications/trial-backfill`. Plan: [[One-Time-Trial]]. |
 | `VERIFY_NAME_ONLY_MATCH` | **OFF** | Auto-verify a certificate whose registration NUMBER could not be read but whose NAME could, when the register returns exactly ONE agreeing row (council-narrowed). A loosening of the rule, so the owner turns it on; `_verify_match.js` `uniqueNameMatch`, added 2026-09-02. Everything else in that change (core-first queries, D1 on empty, initials, 0.5 confidence floor) is unconditional. |
 | `VERIFIED_PRO_DAYS` | `7` | Length of the free Pro window a doctor earns by verifying. |
