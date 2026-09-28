@@ -44,3 +44,6 @@ adjusted weight in obesity, kidney (CrCl bands, dialysis) and liver (Child-Pugh)
 - `home.js` loads before `dose-calc.js`: HOME_TOOLS `eligible` reads the flag directly (`doseCalcOn`).
 - Regenerate the rules after any monograph edit: `node scripts/build-dose-rules.mjs`, then bump `VER`
   in `dose-calc.js` (the `?v=` on the gz fetch).
+- `#doseCalc` sets `display:flex`, which beats the browser's `[hidden]{display:none}`. The stylesheet
+  needs `#doseCalc[hidden]{display:none!important}`, or a closed calculator stays painted and eats every tap
+  (SMD-MSCQX9, iOS 2026-09-28). The UI test checks computed display and `elementFromPoint`, not `.hidden`.
