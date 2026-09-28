@@ -29,6 +29,8 @@ jobs:
           node-version: '24'
       - name: Shipped config (defaults since 2026-09-27; everything ON except the prevalence prior, a user switch)
         run: node test/run-dx-audit.mjs --check
+      - name: Opt-out, no tappable test results (smd_kb_tests=0)
+        run: FLAGS=smd_kb_tests=0 node test/run-dx-audit.mjs --check
       - name: Prevalence prior switched on by the user (smd_prior_v1=1)
         run: FLAGS=smd_prior_v1=1 node test/run-dx-audit.mjs --check
       - name: Opt-out, classic antibiotic gate (smd_gate_v2=0)
@@ -59,3 +61,7 @@ jobs:
         run: node test/run-rank-v3.mjs
       - name: Antibiotic gate v2 behaviour (engine, workspace, wizard; flag on and off)
         run: node test/run-gate-v2.mjs
+      - name: Tappable test results (smd_kb_tests; each result settles its close call, none tapped = unchanged)
+        run: node test/run-kb-tests.mjs
+      - name: On-device case log (smd_case_log; keys only, no text or identifiers)
+        run: node test/run-case-log.mjs
