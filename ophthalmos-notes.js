@@ -1,7 +1,7 @@
 /* Ophthalmós notes: short cited study notes, illustrated with real images from the clinic decks. ES5.
    Registers in OPHTHALMOS._reads. Layers: hub -> notes list -> reader -> enlarged image; back()
    unwinds one at a time through st.onBack. Read state: store.read[id] = the day the note was read
-   to the end. Content: ophthalmos/notes.json (review "ai_drafted" until ophthalmologist sign-off).
+   to the end. Content: ophthalmos/notes.json.
    Loaded after ophthalmos-screens.js. */
 (function (G) {
   "use strict";
@@ -107,7 +107,7 @@
       '<div class="oph-scroll oph-pad" id="ophRead"><article class="oph-article" aria-labelledby="ophNT">' +
       '<h1 id="ophNT">' + esc(n.title) + "</h1>" +
       '<p class="oph-meta">' + n.minutes + " min read · " + imgCount(n) + (imgCount(n) === 1 ? " real image" : " real images") +
-      '<span class="oph-draftline">' + ico("info") + "AI-drafted from the cited sources, awaiting ophthalmologist review</span></p>" +
+      "</p>" +
       n.blocks.map(block).join("") +
       '<section class="oph-practise" aria-label="Practise this">' + practiseHtml(n) + "</section>" +
       '<h2 class="oph-nh" id="ophSrc">Sources</h2><ol class="oph-refs">' + srcs + "</ol>" +

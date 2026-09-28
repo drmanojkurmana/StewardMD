@@ -88,7 +88,7 @@ try{
  ok(await until(`!!document.querySelector('#smdOpdEmr .kbp-embed .kbp-reader h1')`),'clinical protocol opens inside the OPD tab');
  const doc=JSON.parse(readFileSync(repo+`kb/clinical-protocols/${sepsis.id}.json`,'utf8'));
  ok(await ev(`document.querySelector('#smdOpdEmr .kbp-reader h1').textContent===${JSON.stringify(doc.title)}&&document.querySelectorAll('#smdOpdEmr .kbp-reader .kbp-sec:not(.kbp-drugs):not(.kbp-sources)').length===${doc.sections.length}`),'reader shows title and every section');
- ok(await ev(`/pending clinical review/i.test(document.querySelector('#smdOpdEmr .kbp-status').textContent)`),'reader states the draft review status');
+ ok(await ev(`(()=>{const t=document.querySelector('#smdOpdEmr .kbp-status').textContent;return !/pending clinical review|Draft/i.test(t)&&/Verify every dose/.test(t)})()`),'reader shows the verify caveat, no draft / pending-review note');
  ok(await ev(`document.querySelector('#smdOpdEmr .oe-proto-back').matches('[aria-label^="Back"]')`),'Back control is recognisable to swipe-back');
  ok(await ev(`(()=>{const c=document.querySelector('#smdOpdEmr .oe-canvas');return c.scrollWidth<=c.clientWidth+1})()`),'reader: no horizontal overflow at 390px');
  await ev(`document.querySelector('#smdOpdEmr [data-kbp-jump="oeKbpSources"]').click()`);await sleep(700);

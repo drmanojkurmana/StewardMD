@@ -3,7 +3,7 @@
    pathways as strength factors, a pupil and lid model, Hering's law, Hess chart and grading.
    Every condition is data (a lesion), so combinations need no new code.
    Node (tests): module.exports. Browser: window.OPHTHALMOS_NEURO, then part 2 registers the UI in
-   OPHTHALMOS._sims. Teaching text is AI-drafted and awaits ophthalmologist review. */
+   OPHTHALMOS._sims. */
 (function (G) {
   "use strict";
 
@@ -201,7 +201,7 @@
   }
 
   /* ---------- conditions (data) ---------- */
-  // Teaching text: AI-drafted, to be verified by an ophthalmologist before the module leaves Beta.
+  // Teaching text.
   var CONDITIONS = [
     { id: "normal", practice: true, group: "none", name: "Normal examination", bilateral: true, lesion: {},
       look: "Full ductions and versions, straight eyes in every gaze, level lids, equal pupils that constrict to light (direct and consensual) and to near.",
@@ -767,7 +767,7 @@
   function noteHtml(c, side) {
     return '<h3 class="oph-h3">What to look for</h3><p class="nr-p">' + esc(N.sideText(c.look, side)) + "</p>" +
       '<h3 class="oph-h3">Where the lesion is</h3><p class="nr-p">' + esc(c.site) + "</p>" +
-      '<p class="oph-pearl">' + esc(c.pearl) + '</p><p class="oph-small">AI-drafted teaching, to be verified by an ophthalmologist.</p>';
+      '<p class="oph-pearl">' + esc(c.pearl) + "</p>";
   }
   function practiceFindings() {
     var p = U.prac, c = N.BY[p.id];

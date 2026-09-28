@@ -104,9 +104,8 @@
     }
     return el;
   }
-  // Owner-specified draft mark on every screen until ophthalmologist sign-off; the readable
-  // disclosure is the hub's Beta note.
-  var DRAFT = '<p class="oph-draft">To be verified · draft</p>';
+  // The per-screen "To be verified · draft" mark was removed (owner decision 2026-09-28: no draft notes).
+  var DRAFT = "";
   function paint(html, focusSel) {
     var el = root();
     el.removeAttribute("lang"); // Learn screens set lang="hi" after painting; everything else is English

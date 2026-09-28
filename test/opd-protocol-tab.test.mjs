@@ -83,7 +83,8 @@ test("an open clinical protocol renders the shared reader inside the tab with a 
   assert.ok(html.includes('data-oe-act="proto-close"') && html.includes('aria-label="Back to protocols"'));
   assert.ok(html.includes('id="oeKbpSources"'), "embedded ids are prefixed so they never collide with the Knowledge Library");
   assert.equal(count(html, /class="kbp-sec kbp-k-/g), SEPSIS.sections.length);
-  assert.match(html, /pending clinical review/i);
+  assert.doesNotMatch(html, /pending clinical review|Draft,/i);
+  assert.match(html, /Verify every dose and threshold against the source/);
 });
 
 test("flags: oncology off keeps clinical protocols; both off says so", () => {

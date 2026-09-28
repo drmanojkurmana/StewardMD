@@ -72,7 +72,7 @@
       '<span class="oph-small">' + esc(st.cfg.levels[lv].sub) + "</span></div>" +
       '<section class="oph-today" aria-label="Today">' + today + "</section>" +
       '<h2 class="oph-h2">Clinics</h2><ul class="oph-clinics">' + rows + "</ul>" + bankRows() + (O._learn ? "" : readRows()) + simRows() + (O._learn ? "" : toolRows()) + fundxRow() +
-      '<p class="oph-note">Beta: teaching points and plans await review by an ophthalmologist. ' +
+      '<p class="oph-note">' +
       '<button class="oph-link" data-act="sources">Images and sources</button></p></div>');
   }
 

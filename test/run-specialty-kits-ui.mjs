@@ -300,11 +300,11 @@ try{
  ok(await until(`!!document.querySelector('#smdDocs iframe.dl-frame')&&/Medical leave certificate/.test(document.querySelector('#smdDocs iframe.dl-frame').srcdoc)`),'the preview shows the certificate');
  ok(!/[–—]/.test(await ev(`document.querySelector('#smdDocs').innerText`)),'documents: no em or en dash on screen');
  await shot('docs-leave-390');
- // Consent form in Telugu and a handout in Hindi: the preview is in that script and says it is machine-drafted.
+ // Consent form in Telugu and a handout in Hindi: the preview is in that script, with no draft note.
  await click('#smdDocs [data-dl-act="back"]'); await click('#smdDocs [data-dl-act="type:consent"]');
  await until(`!!document.querySelector('#smdDocs [data-dl-act="lang:te"]')`);
  await click('#smdDocs [data-dl-act="lang:te"]'); await click('#smdDocs [data-dl-act="consent:caesarean-section"]');
- ok(await until(`/native-speaker check of the Telugu/.test(document.querySelector('#smdDocs').textContent)`),'a Telugu consent form says its translation needs a native-speaker check');
+ ok(await until(`/consent policy/.test(document.querySelector('#smdDocs').textContent)&&!/native-speaker check|pending clinical review|Draft template/.test(document.querySelector('#smdDocs').textContent)`),'a Telugu consent form keeps the consent-policy caveat, no draft / pending-review note');
  ok(await ev(`(()=>{const el=document.querySelector('#smdDocs [data-dl-f="risks"], #smdDocs #dl_risks');if(!el)return false;el.value='Placenta accreta risk discussed';el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));return true})()`),'consent form has a box for procedure-specific risks');
  await click('#smdDocs [data-dl-act="preview"]');
  ok(await until(`/[\u0C00-\u0C7F]{4}/.test((document.querySelector('#smdDocs iframe.dl-frame')||{}).srcdoc||'')&&/Kit Patient/.test(document.querySelector('#smdDocs iframe.dl-frame').srcdoc)`),'consent preview is in Telugu with the patient named');

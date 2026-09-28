@@ -1,7 +1,7 @@
 /* StewardMD — Electrolyte Correction Engine (standalone full-page ICU module).
    Self-contained overlay; does NOT touch the ICU dashboard. window.ELYTE.open().
    Decision support only — conservative, guideline-referenced; verify against local
-   protocol and clinical context. Pending clinician review. */
+   protocol and clinical context. */
 (function () {
   "use strict";
 
@@ -316,7 +316,7 @@
     +     '<button type="button" class="ece-expand" data-act="more-labs" aria-controls="eceExtraLabs" aria-expanded="'+(S.moreLabs?"true":"false")+'">'+(S.moreLabs?'Show fewer lab values':'Add more lab values')+' <span aria-hidden="true">'+(S.moreLabs?'−':'+')+'</span></button></div></section>'
     +   '<section class="ece-sec ece-risks"><h2>Risk factors</h2><div class="ece-toggles'+(S.moreRisks?' expanded':'')+'" id="eceRiskFactors" role="group" aria-label="Risk factors">'+PT_TOGGLES.map(function(t){return '<button type="button" class="ece-tog'+(S.pt[t.k]?" on":"")+'" data-tog="'+t.k+'" aria-pressed="'+(S.pt[t.k]?"true":"false")+'">'+(S.pt[t.k]?'✓ ':'')+esc(t.l)+'</button>';}).join("")+'</div><button type="button" class="ece-risk-add" data-act="risk-list" aria-controls="eceRiskFactors" aria-expanded="'+(S.moreRisks?"true":"false")+'">'+(S.moreRisks?'Done adding factors':'+ Add factor')+'</button></section>'
     +   '<div id="eceResults">'+(S.analyzed?results():'')+'</div>'
-    +   '<div class="ece-disc">Decision support only — conservative, guideline-referenced values. Verify every dose & rate against local protocol and the clinical context. Pending clinician review.</div>'
+    +   '<div class="ece-disc">Decision support only. Conservative, guideline-referenced values. Verify every dose & rate against local protocol and the clinical context.</div>'
     + '</div>'
     + '<div class="ece-cta"><button class="ece-go" data-act="analyze">Analyze & Generate ICU Recommendations</button></div>';
   }

@@ -830,7 +830,7 @@
     return '<div class="db-qf">' + items.map(function (p) { return '<div><div class="db-qf-k">' + esc(p[0]) + '</div><div class="db-qf-v">' + esc((p[1] || "—").slice(0, 90)) + '</div></div>'; }).join("") + '</div>';
   }
   function stSections(s, openKeys) {
-    var html = '<div class="db-msrc">℞ <b>Structured from official FDA label (openFDA / DailyMed)</b><span>Faithful summary — pending clinician review; US labelling, verify against local guidance.</span></div>';
+    var html = '<div class="db-msrc">℞ <b>Structured from official FDA label (openFDA / DailyMed)</b><span>Faithful summary. US labelling, verify against local guidance.</span></div>';
     ST_SECS.forEach(function (sec) {
       var v = s[sec[1]]; if (!v) return; var op = openKeys[sec[1]];
       html += '<div class="db-msec db-msec-' + sec[1] + '"><button class="db-msec-h' + (op ? " open" : "") + '">' + esc(sec[0]) + '<span class="db-msec-x">' + dbIco("chev") + '</span></button><div class="db-msec-b"' + (op ? "" : ' style="display:none"') + '>' + esc(v) + '</div></div>';

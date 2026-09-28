@@ -61,7 +61,7 @@ try {
   ok(await until(`return document.querySelectorAll("#smdOphthalmos .oph-clinic[data-t]").length === 6;`, 20000), "Test hub lists the six clinics (incl. general retina, RFMiD)");
   ok(await ev(`return [].map.call(document.querySelectorAll("#smdOphthalmos .oph-plan-b b"), function(b){return b.textContent;}).join(",");`) === "Lesson,Images,Questions", "MBBS Today's plan is lesson-first: lesson, images, questions");
   ok(await ev(`return ["Questions","Simulators"].every(function(h){return [].some.call(document.querySelectorAll("#smdOphthalmos .oph-h2"), function(e){return e.textContent===h;});});`) === true, "Test hub sections: Questions, Simulators");
-  ok(await ev(`return !!document.querySelector("#smdOphthalmos .oph-draft");`) === true, "draft mark on the hub");
+  ok(await ev(`return !document.querySelector("#smdOphthalmos .oph-draft") && !/To be verified|AI-drafted|await review/.test(document.querySelector("#smdOphthalmos").textContent);`) === true, "no draft mark or review note on the hub (owner decision 2026-09-28)");
 
   // an encounter: the image comes from R2, Ask MaiK reaches the host after answering
   await ev(`document.querySelector('#smdOphthalmos [data-act=clinic][data-t=oct]').click(); return 1;`);

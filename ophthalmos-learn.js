@@ -37,8 +37,6 @@
     reference: { en: "Reference", hi: "संदर्भ" }, glossary: { en: "Glossary", hi: "शब्दावली" }, nTerms: { en: "{n} terms", hi: "{n} शब्द" },
     glossSub: { en: "Words used in the lessons", hi: "पाठों में आए शब्द" },
     calc: { en: "Clinical calculators", hi: "Clinical calculators" }, nTools: { en: "{n} tools", hi: "{n} tools" },
-    draft: { en: "Beta: lessons are AI-drafted from the cited sources and await review by an ophthalmologist.", hi: "Beta: ये पाठ AI ने दिए गए स्रोतों से तैयार किए हैं और अभी ophthalmologist की समीक्षा बाकी है।" },
-    aiDraft: { en: "AI-drafted from the cited sources, awaiting ophthalmologist review", hi: "AI द्वारा स्रोतों से तैयार, ophthalmologist की समीक्षा बाकी" },
     loading: { en: "Loading lessons…", hi: "पाठ लोड हो रहे हैं…" },
     ixErr: { en: "The lessons did not load. Check the connection and try again. Reference below still works.", hi: "पाठ लोड नहीं हुए। इंटरनेट कनेक्शन देखकर फिर कोशिश करें। नीचे Reference अभी भी काम करता है।" },
     retry: { en: "Try again", hi: "फिर कोशिश करें" },
@@ -233,7 +231,7 @@
     else body = startCard() + reviseRow() + unitsHtml();
     paint(markTop(s("homeSub")) +
       '<div class="oph-scroll oph-pad ln-home"><div class="ln-col">' + tabs("learn") + body + (O._explore ? O._explore.homeHtml() : "") + referenceHtml() +
-      '<p class="oph-note">' + s("draft") + "</p></div></div>", focusSel);
+      "</div></div>", focusSel);
     wireUnits();
   }
 
@@ -370,8 +368,7 @@
       body = '<div class="ln-banner' + (l.see.img ? "" : " diagram") + '" aria-hidden="true"><img src="' + esc(imgSrc(l.see)) + '" alt="" decoding="async"></div>' +
         '<h1 class="ln-title">' + tx(l.title) + "</h1>" +
         '<p class="ln-meta">' + s("min", { n: l.minutes }) + " · " + s(l.level) + "</p>" +
-        '<p class="ln-idea">' + rich(l.idea) + "</p>" +
-        '<p class="oph-draftline ln-ai">' + ico("info") + "<span>" + s("aiDraft") + "</span></p>";
+        '<p class="ln-idea">' + rich(l.idea) + "</p>";
     } else if (k === "see") body = seeHtml(l);
     else if (k === "why") {
       body = '<h2 class="ln-h">' + s("why") + '</h2><ol class="ln-steps">' + l.why.steps.map(function (x) { return "<li>" + rich(x) + "</li>"; }).join("") + "</ol>" +

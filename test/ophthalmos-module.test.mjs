@@ -124,7 +124,7 @@ for (const [name, count] of Object.entries(DECKS)) {
   ok("no Ophthalmós file here that the module does not ship" + (extra.length ? ": " + extra.slice(0, 5).join(", ") : ""), extra.length === 0);
 }
 
-// Explore (ophthalmos-explore.js / .css) loads right after Learn; every Ophthalmós tag carries the oph8 token.
+// Explore (ophthalmos-explore.js / .css) loads right after Learn; every Ophthalmós tag carries the oph9 token.
 {
   const html = readFileSync(join(ROOT, "index.html"), "utf8");
   const learnJs = html.indexOf("/ophthalmos-learn.js"), exJs = html.indexOf("/ophthalmos-explore.js");
@@ -132,7 +132,7 @@ for (const [name, count] of Object.entries(DECKS)) {
   ok("index.html loads ophthalmos-explore.js right after ophthalmos-learn.js", exJs > learnJs && learnJs > 0 && html.indexOf("<script", learnJs) === html.lastIndexOf("<script", exJs));
   ok("index.html loads ophthalmos-explore.css after ophthalmos-learn.css", exCss > learnCss && learnCss > 0);
   const tags = [...html.matchAll(/\/ophthalmos[\w-]*\.(?:js|css)\?v=([\w.-]+)/g)];
-  ok("every Ophthalmós tag in index.html is ?v=oph8 (" + tags.length + " tags)", tags.length === 22 && tags.every((m) => m[1] === "oph8"));
+  ok("every Ophthalmós tag in index.html is ?v=oph9 (" + tags.length + " tags)", tags.length === 22 && tags.every((m) => m[1] === "oph9"));
 }
 
 // Learn loads lessons on open: index.json carries a summary for every listed lesson (title, minutes, picture).

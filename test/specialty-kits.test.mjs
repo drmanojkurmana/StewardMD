@@ -336,7 +336,7 @@ test("every kit renders for the OPD host and the standalone host without undefin
         assert.ok(html.includes(host.queueTests ? "Add 0 to investigations" : "Copy 0 tests"), kit.id + " add button");
       }
       assert.equal(html.includes("Calculators</h3>"), host.kind === "standalone" && kit.calculators.length > 0);
-      assert.ok(html.includes("pending clinical review") || kit.review.status !== "ai_drafted");
+      assert.ok(!/pending clinical review|Draft kit/i.test(html), kit.id + " carries no draft / pending-review note");
     });
   });
 });

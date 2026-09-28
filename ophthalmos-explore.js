@@ -3,8 +3,7 @@
    Part 1 is pure (no DOM): the visual-field model (a lesion site -> the field each eye loses) and the focus model
    (axial length, astigmatism, age and a trial lens -> where the focus falls, the blur, the correcting lens), built on
    the retinoscopy optics model. Node (tests): module.exports. Browser: window.OPHTHALMOS_EXPLORE, then part 2
-   registers the screens (O._explore) and the Learn home lists them. Teaching text is AI-drafted and awaits
-   ophthalmologist review. */
+   registers the screens (O._explore) and the Learn home lists them. */
 (function (G) {
   "use strict";
   var R = G.OPHTHALMOS_RETINO || (typeof require === "function" ? require("./ophthalmos-retino-model.js") : null);
@@ -119,7 +118,6 @@
     testYourself: { en: "Test yourself", hi: "खुद को परखें" },
     testBank: { en: "Question bank: {t}", hi: "Question bank: {t}" }, testClinic: { en: "{c}: real images", hi: "{c}: असली images" },
     testNeuro: { en: "Pupil lab in the neuro-ophthalmology simulator", hi: "Neuro-ophthalmology simulator की pupil lab" },
-    aiDraft: { en: "AI-drafted from standard texts, awaiting ophthalmologist review.", hi: "AI द्वारा मानक पुस्तकों से तैयार, ophthalmologist की समीक्षा बाकी।" },
     loading: { en: "Loading the picture…", hi: "तस्वीर लोड हो रही है…" },
     imgErr: { en: "The picture did not load. Check the connection and try again.", hi: "तस्वीर लोड नहीं हुई। कनेक्शन देखकर फिर कोशिश करें।" },
     retry: { en: "Try again", hi: "फिर कोशिश करें" },
@@ -250,7 +248,7 @@
     LW().again = function (f) { open(id, f); }; // the language pill repaints this explorer in place
     I.paint(I.top(raw("backLearn"), s(x.title), s(x.line), langBtn()) +
       '<div class="oph-scroll oph-pad" id="exScroll"><div class="ex-wrap" data-x="' + id + '">' + body + endHtml(x) +
-      '<p class="oph-small ex-ai">' + ico("info") + "<span>" + s("aiDraft") + "</span></p></div></div>", focusSel);
+      "</div></div>", focusSel);
     if (L() === "hi") $("smdOphthalmos").setAttribute("lang", "hi");
     var sc = $("exScroll");
     EX.painted = id; sc.scrollTop = keep;

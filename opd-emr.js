@@ -1255,7 +1255,7 @@
       ? "Oncology regimens: verify doses, BSA/AUC/carboplatin target, eligibility and local protocol before administering. Assign attaches the regimen to this patient as a draft and records it in the timeline."
       : br === "all"
         ? "Reference protocols: verify every dose against the cited source and your local protocol." + (oncOn ? " Assign (oncology only) attaches a draft plan to this patient and records it in the timeline." : "")
-        : "Reference protocols compiled from the cited guidelines, pending clinical review. Verify every dose against the source and your local protocol.";
+        : "Reference protocols compiled from the cited guidelines. Verify every dose against the source and your local protocol.";
     var typePicker = "";
     if (br === "oncology" && onc.length) {
       var seen = {}, types = [];
