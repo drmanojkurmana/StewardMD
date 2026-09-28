@@ -453,3 +453,17 @@ test("tonsillar exudate and tender cervical nodes with words between", () => {
   assert.ok(!p("tonsils normal, no exudate").includes("tonsillarExudate"));
   assert.ok(!p("cervical lymph nodes palpable, not tender").includes("tenderCervicalNodes"));
 });
+
+// round 34: palmar erythema is a liver sign; negated disc swelling is not papilloedema; frothy urine is not a seizure
+test("round 34 mention guards", () => {
+  const c34 = { valid: { skinErythema: 1, papilledema: 1, seizure: 1 }, labels: { skinErythema: "Erythema" }, numeric: {}, v2: true,
+    syn: { papilledema: ["fundoscopy", "papilloedema"], seizure: ["froth", "seizure"] } };
+  const p = (t) => NLP.extract(t, c34).present;
+  assert.ok(!p("Stigmata of chronic liver disease: palmar erythema and spider naevi.").includes("skinErythema"));
+  assert.ok(!p("No erythema of the leg. Palmar erythema noted.").includes("skinErythema"));
+  assert.ok(p("Diffuse erythema of the left leg.").includes("skinErythema"));
+  assert.ok(!p("Fundoscopy: optic discs appear normal, no pallor or oedema").includes("papilledema"));
+  assert.ok(p("Fundoscopy shows bilateral papilloedema").includes("papilledema"));
+  assert.ok(!p("frothy urine for 3 weeks").includes("seizure"));
+  assert.ok(p("frothing at the mouth and tongue biting").includes("seizure"));
+});

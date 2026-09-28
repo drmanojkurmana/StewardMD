@@ -197,11 +197,19 @@
     // mentions that are not the finding at all (read the same way for the first and every later mention)
     function skipMention(key, idx, srcText) {
       // round 29: the examination named ("fundoscopy shows choroidal tubercles") is not papilloedema unless it says swelling
-      if (v2 && key === "papilledema" && /^(?:fundoscopy|optic dis[ck]s?)$/.test(srcText || "") &&
-          !/\b(?:swoll\w*|swelling|oedema\w*|edema\w*|papill\w*|blurr\w*|raised|elevated|indistinct|hyperaemi\w*)\b/.test(norm.slice(idx, idx + 70).split(/[.;]/)[0])) return true;
+      // (round 34: the swelling word must itself be affirmed: "optic discs normal, no pallor or oedema" is not)
+      if (v2 && key === "papilledema" && /^(?:fundoscopy|optic dis[ck]s?)$/.test(srcText || "")) {
+        var fseg = norm.slice(idx, idx + 90).split(/[.;]/)[0], fsw = /\b(?:swoll\w*|swelling|oedema\w*|edema\w*|papill\w*|blurr\w*|raised|elevated|indistinct|hyperaemi\w*)\b/.exec(fseg);
+        if (!fsw || /\b(?:no|not|without|nil|normal)\b/.test(fseg.slice(0, fsw.index))) return true;
+      }
+      // round 34: "frothy urine / sputum" is proteinuria or pulmonary oedema, not a seizure ("frothing at the mouth" is)
+      if (v2 && key === "seizure" && /^froth/.test(srcText || "") && /^y\b/.test(norm.slice(idx + 5, idx + 7))) return true;
       // round 28: "unresponsive to antibiotics / cell-wall agents / paracetamol" is about a treatment, not the sensorium
       if (v2 && key === "alteredSensorium" && /^(?:un|non-?)responsive$/.test(srcText || "") &&
           /^\s+to\s+(?!voice|pain|painful|verbal|stimul|command|touch|sternal|call|name)/.test(norm.slice(idx + srcText.length, idx + srcText.length + 30))) return true;
+      // round 34: palmar erythema is a liver sign, erythema nodosum / multiforme / ab igne are not a red infected skin
+      if (v2 && key === "skinErythema" && /^erythema$/.test(srcText || "") && (/\bpalmar\s+$/.test(norm.slice(Math.max(0, idx - 8), idx)) ||
+          /^\s*(?:nodosum|multiforme|ab igne|infectiosum|marginatum|toxicum)\b/.test(norm.slice(idx + 8, idx + 24)))) return true;
       return false;
     }
     function consider(key, idx, method, srcText, display) {
@@ -234,7 +242,7 @@
         // overcall on the unseen notes and "erythema," reads palmar erythema as skin; not kept)
         if (li >= 0) consider(key, li + 1, "label", lab);
         // round 19 (metamorphic tests): every later occurrence too, so "no erythema ... diffuse erythema" reads the same either way round
-        if (v2 && li >= 0) { var lj = li + 1, ln = 0; while (ln++ < 6 && (lj = norm.indexOf(" " + lab, lj + lab.length)) >= 0) { if (/[^a-z]/.test(norm.charAt(lj + 1 + lab.length) || " ")) (alts[key] = alts[key] || []).push({ idx: lj + 1, method: "label", srcText: lab }); } } }
+        if (v2 && li >= 0) { var lj = li + 1, ln = 0; while (ln++ < 6 && (lj = norm.indexOf(" " + lab, lj + lab.length)) >= 0) { if (/[^a-z]/.test(norm.charAt(lj + 1 + lab.length) || " ")) if (!skipMention(key, lj + 1, lab)) (alts[key] = alts[key] || []).push({ idx: lj + 1, method: "label", srcText: lab }); } } }
     });
 
     // 3) fuzzy typo match against synonym vocabulary (safe: distance-gated, confirmation for red flags)
