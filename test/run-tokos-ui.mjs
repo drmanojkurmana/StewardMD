@@ -55,10 +55,13 @@ try {
   await ev(`localStorage.setItem("smd_tokos_v1", JSON.stringify({v:1,cards:{},conf:{},days:{},trials:{"clinic.ctg":1}})); TOKOS.close(); TOKOS.open(); return 1;`);
   await until(`return !!document.querySelector('.tok-clinic');`);
   let paywallShown = false;
+  await ev(`window.__fc = 0; var of = window.fetch; window.fetch = function(){ window.__fc++; return of.apply(this, arguments); }; return 1;`);
   await ev(`window.SMD_PRO_NOTICE = { show: function(){ window.__paywall = true; } }; return 1;`);
   await ev(`document.querySelector('[data-act=clinic]').click(); return 1;`);
   paywallShown = await ev(`return !!window.__paywall;`);
   ok(paywallShown === true, "spent trial hits the paywall (checked before any fetch)");
+  ok(await ev(`return window.__fc === 0;`) === true, "spent trial fires no new fetch");
+  ok(await ev(`return !document.querySelector('.tok-clinic-view');`) === true, "spent trial does not open the clinic");
 
   ok(errors.length === 0, "no uncaught Tokós errors" + (errors.length ? ": " + errors.slice(0, 3).join(" | ") : ""));
   console.log(fails === 0 ? "\nALL GREEN" : `\n${fails} FAILED`);

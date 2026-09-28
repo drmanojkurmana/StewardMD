@@ -87,7 +87,7 @@
 
   function renderClinic() {
     var deck = st.decks.ctg, c = deck.cases[st.caseIdx];
-    if (!c) return renderHub();
+    if (!c) { st.view = "hub"; return renderHub(); }
     return '<div class="tok-clinic-view">' +
       '<div class="tok-stage" id="tokStage"><img id="tokTrace" src="' + BASE + "media/" + c.svg + '" alt="CTG trace"/></div>' +
       '<div class="tok-q">Baseline rate band? Variability? Any decelerations sustained 15s or more?</div>' +
@@ -128,7 +128,7 @@
 
   function open() {
     root().classList.add("on");
-    G.document.body.classList.add("tok-lock");
+    G.document.body.classList.add("tok-noscroll");
     try { if (G.SMD_hideHome) G.SMD_hideHome(); } catch (e) {}
     st.view = "hub";
     st.store = D.loadStore(ls());
@@ -140,7 +140,7 @@
   function close() {
     var el = $("smdTokos");
     if (el) { el.classList.remove("on"); el.innerHTML = ""; }
-    G.document.body.classList.remove("tok-lock");
+    G.document.body.classList.remove("tok-noscroll");
     try { if (G.SMD_showHome) G.SMD_showHome(); } catch (e) {}
     st.view = "hub";
   }
