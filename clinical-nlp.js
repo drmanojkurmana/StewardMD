@@ -40,6 +40,7 @@
 
   // ── negation / uncertainty / temporality cue words ──
   var NEG = ["no", "not", "denies", "denied", "without", "absent", "nil", "negative for", "free of", "ruled out"];
+  var NEG_V2 = NEG.concat(["neither", "nor"]);   // round 44 ("never" is read separately: "never had a headache like this")
   var AFEBRILE = ["afebrile"]; // implicit "no fever"
   var CONSIDER = ["possible", "possibly", "probable", "likely", "suspected", "suspect", "query", "?", "impression"];
   var EXCLUDE = ["rule out", "r/o", "to exclude", "cannot exclude"];
@@ -123,6 +124,8 @@
     // round 43: a bullet marker opening a statement ("- No fever, cough or dysuria") is not part of it: 155 notes read
     // differently as bullets (negated lists lost their head)
     if (v2) s = s.replace(/(^\s*|[.;:]\s+)(?:[-*\u2022\u00b7\u2013>]+|\d{1,2}[.)])\s+(?=[a-z(])/g, "$1");
+    // round 44: contractions negate ("doesn't have fever", "didn't", "hasn't", "isn't"; curly apostrophes too)
+    if (v2) s = s.replace(/\bcan[\u2019']t\b/g, "can not").replace(/\bwon[\u2019']t\b/g, "will not").replace(/n[\u2019']t\b/g, " not");
     if (v2) PRE_V2.forEach(function (p) { s = s.replace(p[0], p[1]); });
     // expand abbreviations (slash-forms need literal replace before punctuation strip)
     ABBREV.forEach(function (p) {
@@ -509,7 +512,8 @@
         tcl = norm.slice(cb[0], Math.max(cb[1], e.idx + sl)).replace(/\bwithout\b.*$/, " ").replace(NEG_IDIOM_V2, " ").replace(RECENT_V2, " ");
         // a compound may carry its own "not" ("knee not swollen"); only its first clause, as before
         var inner = e.method === "compound" ? norm.slice(e.idx, e.idx + sl).split(/[.,;]| and | with | but | then | however /)[0].replace(NEG_IDIOM_V2, " ") : "";
-        negHit = hasWord(pre, NEG) || hasWord(inner, NEG) || POSTFIX_NEG_V2.test(post) || hasWord(postNoWithout, NEG);
+        negHit = hasWord(pre, NEG_V2) || hasWord(inner, NEG) || POSTFIX_NEG_V2.test(post) || hasWord(postNoWithout, NEG) ||
+          (/\bnever\b/.test(pre) && !/\b(?:like (?:this|that|it)|such|before|anything like|so (?:bad|severe))\b/.test(norm.slice(cb[0], Math.max(cb[1], e.idx + sl))));
       } else negHit = hasWord(cl, NEG);
       // v2: a measured temperature of 38 or more is fever even if "afebrile" appears elsewhere in the note
       if (negHit || (key === "fever" && !(v2 && e.method === "vitals") && hasWord(norm, AFEBRILE))) r.polarity = "absent";

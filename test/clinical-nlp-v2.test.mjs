@@ -586,3 +586,16 @@ test("bullet lines read like sentences", () => {
   assert.deepEqual(r("1. Headache for 3 days. 2. No cough.").present, ["headache"]);
   assert.ok(r("* fever\n* no cough").present.includes("fever"));
 });
+
+// round 44: contractions, never, neither/nor negate ("never had a headache like this" does not)
+test("contractions, never and neither-nor negate", () => {
+  const c44 = { valid: { fever: 1, cough: 1, dyspnea: 1, headache: 1 }, labels: {}, numeric: {}, v2: true,
+    syn: { fever: ["fever"], cough: ["cough"], dyspnea: ["breathless"], headache: ["headache"] } };
+  const r = (t) => NLP.extract(t, c44);
+  for (const t of ["He doesn't have fever.", "He doesn’t have fever.", "He hasn't had fever.", "Never had fever."]) assert.ok(r(t).absent.includes("fever"), t);
+  assert.ok(r("She didn't have any cough.").absent.includes("cough"));
+  assert.ok(r("She isn't breathless.").absent.includes("dyspnea"));
+  const n = r("Neither fever nor cough.");
+  assert.ok(n.absent.includes("fever") && n.absent.includes("cough"));
+  assert.ok(r("She has never had a headache like this before.").present.includes("headache"));
+});

@@ -101,7 +101,7 @@ try {
   const POS = ["Has {s}.", "Complains of {s}.", "C/o {s}.", "{s} noted.", "{S}. Seen in the evening clinic.", "Seen in clinic.\n{S} for 2 days.",
     "{S} in a 45-year-old man."];   // round 41: the "old" of an age is not a past-history cue
   const NEG = ["No {s}.", "Denies {s}.", "Negative for {s}.", "Without {s}.", "He denies {s}.", "{S}: absent.", "No evidence of {s}.", "No signs of {s}.",
-    "Nil {s}.", "{S} ruled out.", "{S} was not elicited.", "{S}: none."];
+    "Nil {s}.", "{S} ruled out.", "{S} was not elicited.", "{S}: none.", "He doesn't have {s}.", "She didn\u2019t have any {s}.", "Never had {s}."];
   const fill = (tpl, s) => tpl.replace("{s}", s).replace("{S}", s.charAt(0).toUpperCase() + s.slice(1));
   for (const [name, tpls, want] of [["pos", POS, true], ["neg", NEG, false]]) {
     const items = []; live.forEach((p) => tpls.forEach((tpl) => items.push({ p, text: fill(tpl, p.s) })));
