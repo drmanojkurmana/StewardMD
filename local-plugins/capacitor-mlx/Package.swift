@@ -4,15 +4,13 @@ import PackageDescription
 // StewardmdCapacitorMlx: MaiK's second on-device engine, iOS only (owner, 2026-09-28: "ios version
 // have MLX and android have existing one"). Android keeps capacitor-llama.
 //
-// NOT LINKED INTO THE APP YET. This package is deliberately absent from the root package.json, so
-// `npx cap sync` does not pull it and today's iOS build is unchanged. Two reasons, both owner calls:
-//   1. PLATFORM FLOOR. mlx-swift and mlx-swift-lm declare .iOS(.v17). The app ships
-//      IPHONEOS_DEPLOYMENT_TARGET 16.4 and ios/App/CapApp-SPM declares .iOS(.v16); SwiftPM refuses a
-//      dependency whose floor is above its consumer's. Linking this means raising the whole app to
-//      iOS 17, which drops every iOS 16 user, not only MaiK users.
-//   2. TOOLCHAIN. The pinned mlx-swift declares swift-tools-version 6.3. Build with the Xcode on the
-//      owner's Mac (CLAUDE.md, DEVELOPER_DIR), not CommandLineTools.
-// docs/MAIK_MLX_SPIKE.md has the exact linking steps and the go/no-go measurements.
+// LINKED (owner, 2026-09-28: "No need phase 1. Go with phase 4"): root package.json and
+// ios/App/CapApp-SPM list it, and the app's IPHONEOS_DEPLOYMENT_TARGET is 17.0, because mlx-swift and
+// mlx-swift-lm declare .iOS(.v17) and SwiftPM refuses a dependency whose floor is above its
+// consumer's. That raise dropped iOS 16 for the whole app. The pinned mlx-swift declares
+// swift-tools-version 6.3: build with the Xcode on the owner's Mac (CLAUDE.md, DEVELOPER_DIR).
+// Recovery: the commit before the link, 8f51b858 on branch claude/twitter-post-meaning-6h0ikw.
+// docs/MAIK_MLX_SPIKE.md has the rollout notes.
 //
 // WHY THE LAYR-LABS FORKS, not ml-explore upstream: Ternary Bonsai 2 27B's MLX pack declares
 // model_type "prism_hadamard_qwen35", which only the fork's MLXLLM registers

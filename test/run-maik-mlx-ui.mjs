@@ -5,7 +5,8 @@
  * clicking. Proves what the unit tests cannot: the row's markup, its buttons and the live patcher
  * work together in a browser.
  *
- *   1. Flag off (default): no MLX row.              2. Android with the flag on: no MLX row.
+ *   1. No Mlx plugin: no row. Linked build, flag off (default): the Labs switch, off; flipping it
+ *      sets and clears smd_maik_mlx.                2. Android with the flag on: no MLX row.
  *   3. iPhone + flag on + MAiK Prime: row with a Download button and the exact size.
  *   4. Download: every MLX file goes through the native downloader, weights last, and the row flips
  *      to Pause at once, then to Ready when the last file verifies.
@@ -61,7 +62,7 @@ const ev = async (expr) => {
 let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 
 /** A fresh document on the served origin with the stub bridge, then the real scripts. */
-async function boot({ platform, flag, pack }) {
+async function boot({ platform, flag, pack, mlx = true }) {
   await call("Page.navigate", { url: BASE + "googlefee613d97f77b414.html?" + Math.random() });
   await sleep(300);
   return ev(`
@@ -75,6 +76,7 @@ async function boot({ platform, flag, pack }) {
     const started = new Set();
     window.Capacitor = { isNativePlatform: () => true, getPlatform: () => ${JSON.stringify(platform)}, Plugins: {
       Filesystem: {},
+      ...(${JSON.stringify(mlx)} ? { Mlx: { available: async () => ({ available: true }) } } : {}),
       Llama: {
         available: async () => ({ available: true, availableMemory: 0 }),
         modelPath: async ({ name }) => ({ path: "/docs/maik-models/" + name, bytes: started.has(name) ? size(name).bytes : 0, partial: false, freeBytes: 60e9 }),
@@ -106,9 +108,22 @@ const btn = (sel) => ev(`const b = document.querySelector(${JSON.stringify(sel)}
 try {
   await call("Page.enable"); await call("Runtime.enable");
 
-  // 1. Flag off (default).
-  const b1 = await boot({ platform: "ios", flag: null, pack: "bonsai-ternary-8b" }); ok(b1 === true, "booted real scripts (flag off): " + JSON.stringify(b1));
-  ok(!/Faster iPhone engine/.test(await ev(`return document.body.textContent`)), "flag off: no MLX row");
+  // 1. A build without the Mlx plugin: nothing, even with the flag.
+  const b1 = await boot({ platform: "ios", flag: null, pack: "bonsai-ternary-8b", mlx: false }); ok(b1 === true, "booted real scripts: " + JSON.stringify(b1));
+  ok(!/Faster iPhone engine/.test(await ev(`return document.body.textContent`)), "no Mlx plugin: no row");
+
+  // 1b. Linked build, flag off (default): the Labs switch, off, and nothing to download yet.
+  await boot({ platform: "ios", flag: null, pack: "bonsai-ternary-8b" });
+  ok(await ev(`const b = document.querySelector('[data-me-mlx="toggle"]'); return b ? b.getAttribute("aria-checked") : null`) === "false", "Labs switch shown, off by default");
+  ok(await btn('[data-me-mlx="get"]') === null, "switch off: no Download button");
+  await ev(`document.querySelector('[data-me-mlx="toggle"]').click(); return true;`);
+  await sleep(100);
+  ok(await ev(`return localStorage.getItem("smd_maik_mlx")`) === "1", "switch on sets the flag");
+  ok(await ev(`const b = document.querySelector('[data-me-mlx="toggle"]'); return b ? b.getAttribute("aria-checked") : null`) === "true", "switch reads on after rerender");
+  ok(/Download/.test(await btn('[data-me-mlx="get"]') || ""), "switch on: Download offered");
+  await ev(`document.querySelector('[data-me-mlx="toggle"]').click(); return true;`);
+  await sleep(100);
+  ok(await ev(`return localStorage.getItem("smd_maik_mlx")`) === null, "switch off clears the flag");
 
   // 2. Android, flag on.
   await boot({ platform: "android", flag: "1", pack: "bonsai-ternary-8b" });

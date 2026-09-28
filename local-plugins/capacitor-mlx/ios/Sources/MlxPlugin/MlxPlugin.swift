@@ -70,9 +70,10 @@ public class MlxPlugin: CAPPlugin, CAPBridgedPlugin {
 
     public override func load() {
         runSelfTestIfRequested()
-        // Backgrounded: drop the model unless an answer is being written. The llama plugin's 25 s
-        // background grace is not repeated here yet; an MLX answer cut by backgrounding is simply
-        // asked again (see docs/MAIK_MLX_SPIKE.md, follow-ups).
+        // Backgrounded: stop and drop the model. capacitor-llama's 25 s background grace is NOT
+        // copied on purpose: MLX runs every step on the GPU, and iOS refuses GPU command buffers
+        // from a backgrounded app, so a "finish in the background" answer would fail, not finish.
+        // The answer stops where it was, as capacitor-llama's does once its grace runs out.
         NotificationCenter.default.addObserver(
             self, selector: #selector(appDidEnterBackground),
             name: UIApplication.didEnterBackgroundNotification, object: nil)

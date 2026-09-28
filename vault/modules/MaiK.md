@@ -372,8 +372,13 @@ iOS-only second engine; Android keeps llama.cpp. Decision: Decisions.md 2026-09-
   `engineFor(id, loadOpts)` picks; `ensureLoaded` releases the other engine (awaited) before loading; an MLX
   load failure sets `_mlxOff[id]` and loads the GGUF.
 - `maik-engine.js`: "Faster iPhone engine (Labs)" row under Advanced (`mlxRowHTML`, `data-me-mlx`).
-- `local-plugins/capacitor-mlx`: NOT in package.json (iOS 17 floor). Pins: mlx-swift-lm `9f70e68`,
-  mlx-swift `0f4fe40`. DEBUG self-benchmark marker `Documents/maik-mlx-selftest`. Uncompiled as of writing.
+- `local-plugins/capacitor-mlx`: LINKED (package.json + CapApp-SPM) since the owner's phase 4 call; the app
+  is on iOS 17.0 for it (every iPhone `IPHONEOS_DEPLOYMENT_TARGET` must stay >= 17 or `cap sync` writes
+  `.v16` back into CapApp-SPM). Pins: mlx-swift-lm `9f70e68`, mlx-swift `0f4fe40`. DEBUG self-benchmark
+  marker `Documents/maik-mlx-selftest`. Uncompiled as of writing; package-lock.json not yet regenerated.
+- Labs switch: "Faster iPhone engine (Labs)" under Advanced (`data-me-mlx="toggle"`), shown when
+  `SMD_MAIK_MODELS.mlxAvailable()` (iPhone + Mlx plugin). No background grace on MLX by design (GPU work is
+  refused in the background); no MTP drafter yet.
 - Gotcha: the live progress patcher unsubscribes when an emitted id has no `[data-me-status]` element, so the
   MLX row carries hidden status hooks for every small MLX file. `rerender()` now ignores a detached section
   (a delete emits before its promise settles, and the patcher has already redrawn).

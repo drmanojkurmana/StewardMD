@@ -786,6 +786,12 @@
    * keeps llama.cpp. Everything below is inert while it is false: no row, no download, no load. */
   var MLX_FLAG = "smd_maik_mlx";
   function mlxEnabled() { return lget(MLX_FLAG) === "1" && platformName() === "ios"; }
+  /** Can this device run MLX at all: an iPhone whose build links capacitor-mlx. Offers the Labs switch. */
+  function mlxAvailable() {
+    try { var c = cap(); return platformName() === "ios" && !!(c && c.Plugins && c.Plugins.Mlx); } catch (e) { return false; }
+  }
+  /** The Labs switch. Off leaves any downloaded MLX files in place (Remove deletes them). */
+  function setMlxEnabled(on) { if (on) lset(MLX_FLAG, "1"); else lrem(MLX_FLAG); return mlxEnabled(); }
   function mlxFiles(id) { var p = PACKS[baseIdOf(id)]; return (p && p.mlx) || []; }
   function hasMlx(id) { return mlxFiles(id).length > 0; }
   /** One sub-pack id per MLX file, weights LAST so the small files are in place before the long one. */
@@ -1506,7 +1512,7 @@
     hasVision: hasVision, visionFile: visionFile, visionIdOf: visionIdOf, isVisionId: isVisionId, baseIdOf: baseIdOf,
     hasDraft: hasDraft, draftFile: draftFile, draftIdOf: draftIdOf, isDraftId: isDraftId,
     // MLX build for iPhone (2026-09-28, flag smd_maik_mlx)
-    MLX_FLAG: MLX_FLAG, mlxEnabled: mlxEnabled, hasMlx: hasMlx, mlxFiles: mlxFiles, mlxIdsOf: mlxIdsOf,
+    MLX_FLAG: MLX_FLAG, mlxEnabled: mlxEnabled, mlxAvailable: mlxAvailable, setMlxEnabled: setMlxEnabled, hasMlx: hasMlx, mlxFiles: mlxFiles, mlxIdsOf: mlxIdsOf,
     mlxMainIdOf: mlxMainIdOf, isMlxId: isMlxId, mlxBytes: mlxBytes, mlxInstalledCached: mlxInstalledCached,
     mlxReady: mlxReady, ensureMlx: ensureMlx, mlxBusy: mlxBusy, removeMlx: removeMlx, mlxPaths: mlxPaths,
     activeId: activeId, queuedIds: queuedIds, SUBDIR: SUBDIR, CHUNK_BYTES: CHUNK_BYTES, CHUNK_TRIES: CHUNK_TRIES, KEY_ACTIVE: KEY_ACTIVE,

@@ -809,10 +809,24 @@
    * the patcher never swaps them for single-file ones. */
   function mlxRowHTML() {
     var M = window.SMD_MAIK_MODELS;
-    if (!M || !M.mlxEnabled || !M.mlxEnabled()) return "";
+    if (!M || !M.mlxEnabled) return "";
+    var on = M.mlxEnabled();
+    // LABS ROLLOUT (owner, 2026-09-28: phase 4): the switch shows on any iPhone build that links
+    // capacitor-mlx, default off. A tester turns it on here; nobody else is ever moved to MLX.
+    if (!on && !(M.mlxAvailable && M.mlxAvailable())) return "";
     var id = M.activePack ? M.activePack() : PACK_ID;
-    var head = '<div style="padding:10px 14px 12px;border-bottom:1px solid var(--line,#e2e8f0)">' +
-      '<div style="font:700 13px/1.3 var(--sans,system-ui)">Faster iPhone engine (Labs)</div>';
+    var sw = '<div class="smd-nav-row">' +
+        '<div class="smd-nav-rl">' +
+          '<div class="smd-nav-lbl">Faster iPhone engine (Labs)</div>' +
+          '<div class="smd-nav-sub">' + (on
+            ? "On. Models with a faster engine download it below. The standard engine stays as the fallback."
+            : "Try a faster engine built for iPhone with MAiK Prime and MAiK Max 2. Experimental, off by default.") + '</div>' +
+        '</div>' +
+        '<button class="smd-nav-sw' + (on ? " on" : "") + '" data-me-mlx="toggle" role="switch" aria-checked="' + on + '"' +
+          ' aria-label="Faster iPhone engine"><span></span></button>' +
+      '</div>';
+    var head = '<div style="padding:4px 14px 12px;border-bottom:1px solid var(--line,#e2e8f0)">' + sw;
+    if (!on) return head + '</div>';
     if (!M.hasMlx(id)) {
       return head + '<div style="font:500 12px/1.5 var(--sans,system-ui);color:var(--slate,#2d4356);margin-top:3px">' +
         'Not available for the selected model. Select MAiK Prime or MAiK Max 2 to try it.</div></div>';
@@ -1240,7 +1254,16 @@
     root.querySelectorAll("[data-me-mlx]").forEach(function (b) {
       b.addEventListener("click", function () {
         var M = window.SMD_MAIK_MODELS, id = b.getAttribute("data-me-id");
-        if (!M || !M.ensureMlx || !id) return;
+        if (!M || !M.ensureMlx) return;
+        if (b.getAttribute("data-me-mlx") === "toggle") {
+          var nowOn = M.setMlxEnabled(!M.mlxEnabled());
+          // Turning it off releases MLX at the next answer (maik-local.js engineFor), and stops any
+          // MLX download in flight.
+          if (!nowOn) M.mlxIdsOf(M.activePack()).forEach(function (sid) { if (M.cancel) M.cancel(sid); });
+          toast(nowOn ? "Faster iPhone engine on." : "Faster iPhone engine off.");
+          return rerender(b, root);
+        }
+        if (!id) return;
         if (b.getAttribute("data-me-mlx") === "pause") {
           M.mlxIdsOf(id).forEach(function (sid) { if (M.cancel) M.cancel(sid); });
           return;

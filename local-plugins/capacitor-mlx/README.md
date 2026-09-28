@@ -3,8 +3,9 @@
 iOS-only MLX engine for MaiK's on-device answers, beside capacitor-llama. Android has no MLX side and
 keeps llama.cpp.
 
-Not linked into the app: MLX needs iOS 17 and the app ships 16.4. See `Package.swift` for the pins
-and `docs/MAIK_MLX_SPIKE.md` for how to link it, how to benchmark it, and the go/no-go criteria.
+Linked into the app since 2026-09-28; the app's iOS floor moved to 17.0 for it (MLX's floor). Used
+only when a Labs tester turns on "Faster iPhone engine" in MaiK Settings, Advanced (flag
+`smd_maik_mlx`). See `Package.swift` for the pins and `docs/MAIK_MLX_SPIKE.md` for the rollout.
 
 JS contract (same as `Capacitor.Plugins.Llama` for these calls, so `maik-local.js` can use either):
 

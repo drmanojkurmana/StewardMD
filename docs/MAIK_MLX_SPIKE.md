@@ -1,9 +1,14 @@
 # MaiK on MLX (iPhone): spike, linking and go/no-go
 
 Owner request, 2026-09-28: "ios version have MLX AND ANDROID HAVE EXISTING ONE", then "go ahead do all
-phases". Android keeps llama.cpp (capacitor-llama). iOS gets MLX as a second engine for the packs that
-have an MLX build, with llama.cpp as the fallback. Everything is behind flag `smd_maik_mlx` (default
-OFF), and the native plugin is not linked into the app yet (see "Blockers").
+phases", then **"No need phase 1. Go with phase 4"**. Android keeps llama.cpp (capacitor-llama). iOS
+gets MLX as a second engine for the packs that have an MLX build, with llama.cpp as the fallback.
+
+**Status (2026-09-28):** capacitor-mlx is LINKED and the app's iOS floor is 17.0. The Phase 1 device
+measurement was skipped by the owner, so nothing about MLX speed, memory or answer quality on an iPhone
+has been measured, and the Swift has not yet been compiled. Rollout is Labs-only: a tester turns on
+"Faster iPhone engine (Labs)" in MaiK Settings, Advanced (flag `smd_maik_mlx`, default OFF).
+Recovery point: commit `8f51b858` (before the link and the iOS 17 raise).
 
 ## What prompted this
 
@@ -22,13 +27,14 @@ Mac, 505% over its baseline. Read from the challenge and the engine repo
 A phone moves memory several times slower than an M5 Mac, and every decoded token reads the whole
 model. Expect tens of tok/s on an iPhone at best, not hundreds. That is what the spike measures.
 
-## Blockers (owner decisions, not code)
+## Owner decisions taken, and what they cost
 
-1. **iOS 17 floor.** mlx-swift and mlx-swift-lm declare `.iOS(.v17)`. The app ships
-   `IPHONEOS_DEPLOYMENT_TARGET` 16.4 and CapApp-SPM declares `.iOS(.v16)`. SwiftPM will not build a
-   dependency whose floor is above its consumer's, so linking capacitor-mlx means raising the WHOLE app
-   to iOS 17. Every iOS 16 user loses the app, not only MaiK. Every phone the on-device models support
-   (`DEVICE_SUPPORTED` in maik-models.js) already runs iOS 18 or later.
+1. **iOS 17 floor (TAKEN).** mlx-swift and mlx-swift-lm declare `.iOS(.v17)`, and SwiftPM will not
+   build a dependency whose floor is above its consumer's. The app's four iPhone
+   `IPHONEOS_DEPLOYMENT_TARGET` settings moved 16.4 -> 17.0 and CapApp-SPM to `.iOS(.v17)`. Every iOS 16
+   user loses app updates, not only MaiK. Capacitor's CLI regenerates CapApp-SPM's floor from the FIRST
+   `IPHONEOS_DEPLOYMENT_TARGET` in project.pbxproj, so all of them must stay >= 17 (pinned by
+   test/maik-mlx.test.mjs).
 2. **The 27B MLX build is 8.62 GB**, against 5.95 GB for the GGUF MaiK uses now. Vision weights inside
    it are skipped at load (about 7.7 GB resident), plus KV cache. It may not fit in the jetsam limit of a
    12 GB iPhone. The load-time memory check decides; when it refuses, MaiK answers on llama.cpp.
@@ -46,7 +52,8 @@ model. Expect tens of tok/s on an iPhone at best, not hundreds. That is what the
 | One-file sub-packs `<id>#mlx:<file>`, downloaded by the existing native downloader, hash-checked | `maik-models.js` (`ensureMlx`, `mlxReady`, `mlxPaths`) | unit + browser tested |
 | Engine adapter: one `llama()` object that forwards to Llama or Mlx; MLX only when ready; images always llama.cpp; any MLX load failure answers on llama.cpp and deletes nothing | `maik-local.js` (`engineFor`, adapter, `ensureLoaded`) | unit-tested, mutation-checked |
 | Settings row "Faster iPhone engine (Labs)" under Advanced, only with the flag on an iPhone | `maik-engine.js` (`mlxRowHTML`) | headless Chromium test |
-| Native plugin `Capacitor.Plugins.Mlx`: available/load/generate/cancel/release, same events as Llama, DEBUG self-benchmark | `local-plugins/capacitor-mlx/` | **not compiled** (no Xcode in the cloud session); not linked |
+| Native plugin `Capacitor.Plugins.Mlx`: available/load/generate/cancel/release, same events as Llama, DEBUG self-benchmark | `local-plugins/capacitor-mlx/` | linked (package.json, CapApp-SPM); **not yet compiled** (no Xcode in the cloud session) |
+| Labs switch "Faster iPhone engine (Labs)", shown only on an iPhone build with the plugin | `maik-engine.js` (`mlxRowHTML`, `data-me-mlx="toggle"`), `maik-models.js` (`mlxAvailable`, `setMlxEnabled`) | headless Chromium test |
 
 Tests: `test/maik-mlx.test.mjs` (unit), `node test/run-maik-mlx-ui.mjs` (headless Chromium).
 
@@ -57,7 +64,10 @@ Pins (read from the repositories, 2026-09-28):
 - Ternary Bonsai 2 27B MLX: HF `prism-ml/Ternary-Bonsai-2-27B-mlx-2bit` @ `fcba37d2117a7077eac6b613b2668d14d9779edd`
 - Ternary Bonsai 8B MLX: HF `prism-ml/Ternary-Bonsai-8B-mlx-2bit` @ `9260b24298e4211e804663e9f519962cf59f34be`
 
-## Phase 1: the spike (owner's Mac + a 12 GB iPhone)
+## Phase 1: the spike (SKIPPED by the owner, 2026-09-28)
+
+Kept as the recipe for checking MLX on a phone when that is wanted. Steps 1 and 2 (linking) are done in
+the repo.
 
 Do this before anything ships. Everything below is on a throwaway branch or a local build.
 
@@ -104,20 +114,41 @@ Continue to Phase 4 only if ALL hold, per pack:
 If the 8B passes and the 27B does not fit, ship MLX for the 8B only: drop the `mlx:` block from
 `bonsai2-27b` in maik-models.js.
 
-## Phase 4: rollout (after a GO and owner approval)
+## Phase 4: rollout (started 2026-09-28, owner: "Go with phase 4")
 
-1. Owner approves the iOS 17 floor. Link capacitor-mlx in the real package.json and the Xcode project.
-2. Keep the flag default OFF for one release; turn it on for Labs testers only.
-3. Then: the MTP drafter (238.9 MB, 4% of the 27B, under `DRAFT_MAX_RATIO`) through the fork's
-   runner, the 25 s background grace that capacitor-llama has, and KV prefix reuse across questions.
-   Each of these is measured on a phone before it is kept.
-4. After one release in production with no MLX-caused failures: consider making MLX the default for
-   packs that passed, and remove the recovery flag after that (a recovery switch that outlives its
-   release becomes a mode).
+Done in the repo:
+1. capacitor-mlx linked: root package.json, `ios/App/CapApp-SPM/Package.swift`, app on iOS 17.0.
+   `package-lock.json` is NOT updated (the cloud session could not run npm install): run `npm install`
+   on the Mac before `npx cap sync ios`.
+2. Flag default OFF; a Labs switch in MaiK Settings, Advanced, on iPhone builds that link the plugin.
+
+On the owner's Mac, in order:
+1. `npm install`, `scripts/build-www.sh`, `npx cap sync ios`. Confirm CapApp-SPM still reads
+   `.iOS(.v17)` and lists StewardmdCapacitorMlx.
+2. Build the `App` scheme (CLAUDE.md). This is the FIRST compile of capacitor-mlx; fix what Xcode
+   reports. The first resolve fetches the Layr-Labs forks and swift-transformers, and MLX compiles its
+   Metal library, so expect a long first build.
+3. Install, verify the running bundle's `?v=` token (`mlx2`), turn the switch on, download the faster
+   engine for MAiK Prime, ask a question, and read the `[MLX-PERF]` lines.
+4. If the build cannot be made to work, `git revert` the phase 4 commit (the one after `8f51b858`): that restores iOS 16.4 and unlinks MLX
+   while keeping the JS (inert without the plugin).
+
+Not done, and why:
+- **MTP drafter** (the source of most of the mlx.fast speed). The fork drives it only from inside its
+  continuous-batching engine (`Libraries/MLXLMCommon/ContinuousBatchingV2/MTP/`), with no public
+  single-stream API. Wiring it means porting that path; worth doing only once plain MLX has been seen
+  working on a phone.
+- **Background grace** like capacitor-llama's 25 s: deliberately not copied. MLX runs every step on
+  the GPU and iOS refuses GPU work from a backgrounded app, so the answer would fail rather than
+  finish. MLX cancels and releases on background.
+- **KV prefix reuse** across questions: not in the plain generate path; every MLX question prefills
+  in full.
+- **Default on**: not before MLX has run on real phones. A recovery flag that outlives its release
+  becomes a mode, so remove `smd_maik_mlx` only after MLX has been the default for one release.
 
 ## Undo
 
 - Flag off: `smd_maik_mlx` unset or `"0"`. Nothing MLX runs; downloaded MLX files stay until removed
   from Settings.
-- Unlink: remove the package.json line, `npx cap sync ios`, restore the deployment target from the
-  `pre-mlx-ios17` tag.
+- Unlink: `git revert` the phase 4 commit (restores iOS 16.4 and removes the package.json and CapApp-SPM
+  lines), then `npm install` and `npx cap sync ios`.

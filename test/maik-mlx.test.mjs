@@ -9,8 +9,9 @@
  *     linked and the load is not for images. Anything else answers on llama.cpp.
  *  4. MLX never costs an answer: an MLX load failure falls back to the GGUF on llama.cpp and deletes
  *     nothing.
- *  5. The native plugin keeps the JS contract (method and event names) and stays unlinked until the
- *     owner raises the app to iOS 17 (static checks; no Xcode here). */
+ *  5. The native plugin keeps the JS contract (method and event names) and is linked into the iOS
+ *     app, which is on iOS 17 for it (owner, phase 4). Static checks; no Xcode here.
+ *  6. Labs switch: shown on an iPhone build with the plugin, off by default; setMlxEnabled flips it. */
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -228,9 +229,9 @@ test("a streamed MLX answer reaches answer()'s listener through the adapter, the
   assert.equal(listeners.Mlx.size + listeners.Llama.size, 0, "listeners removed on both plugins");
 });
 
-/* ── native plugin: contract and "not linked yet" (static; no Xcode in CI) ── */
+/* ── native plugin: contract and linking (static; no Xcode in CI) ── */
 
-test("capacitor-mlx keeps the JS contract and is not linked into the app", () => {
+test("capacitor-mlx keeps the JS contract and is linked into the iOS app on iOS 17", () => {
   const plugin = read("local-plugins/capacitor-mlx/ios/Sources/MlxPlugin/MlxPlugin.swift");
   const engine = read("local-plugins/capacitor-mlx/ios/Sources/MlxPlugin/MlxEngine.swift");
   const pkg = read("local-plugins/capacitor-mlx/Package.swift");
@@ -246,13 +247,40 @@ test("capacitor-mlx keeps the JS contract and is not linked into the app", () =>
   assert.match(pkg, /Layr-Labs\/mlx-swift-lm\.git", revision: "[0-9a-f]{40}"/, "fork pinned to a full commit");
   assert.match(pkg, /Layr-Labs\/mlx-swift\.git", revision: "[0-9a-f]{40}"/);
   const rootPkg = JSON.parse(read("package.json"));
-  const deps = { ...(rootPkg.dependencies || {}), ...(rootPkg.devDependencies || {}) };
-  assert.equal(Object.values(deps).some((v) => String(v).includes("capacitor-mlx")), false,
-    "not linked until the owner raises the app to iOS 17");
+  assert.equal(rootPkg.dependencies["@stewardmd/capacitor-mlx"], "file:local-plugins/capacitor-mlx");
+  const spm = read("ios/App/CapApp-SPM/Package.swift");
+  assert.match(spm, /platforms: \[\.iOS\(\.v17\)\]/, "CapApp-SPM at MLX's floor");
+  assert.match(spm, /\.package\(name: "StewardmdCapacitorMlx", path: "\.\.\/\.\.\/\.\.\/local-plugins\/capacitor-mlx"\)/);
+  assert.match(spm, /\.product\(name: "StewardmdCapacitorMlx", package: "StewardmdCapacitorMlx"\)/);
+  // Capacitor's CLI reads the FIRST IPHONEOS_DEPLOYMENT_TARGET when it regenerates CapApp-SPM, so
+  // every iPhone target must be at 17 or above, or `cap sync` writes .v16 back and the build breaks.
+  const pbx = read("ios/App/App.xcodeproj/project.pbxproj");
+  const targets = [...pbx.matchAll(/IPHONEOS_DEPLOYMENT_TARGET = ([0-9.]+);/g)].map((m) => Number(m[1]));
+  assert.ok(targets.length >= 4 && targets.every((v) => v >= 17), "all iOS targets >= 17: " + targets);
   // Selftest names must match what maik-models.js stores.
   const { M } = models();
   for (const id of ["bonsai-ternary-8b", "bonsai2-27b"]) {
     for (const f of M.mlxFiles(id)) assert.ok(plugin.includes('"' + f.file + '"'), "selftest lists " + f.file);
     assert.ok(plugin.includes('"' + M.mlxFiles(id)[0].name.split("--")[0] + '"'), "selftest prefix for " + id);
   }
+});
+
+test("Labs switch: offered only on an iPhone build with the Mlx plugin, off by default", () => {
+  const plain = models({ platform: "ios" });
+  assert.equal(plain.M.mlxAvailable(), false, "no Mlx plugin: no switch");
+  // models() never adds an Mlx plugin; build one device the way the linked build exposes it.
+  const ls = fakeLS();
+  const win = { Capacitor: { isNativePlatform: () => true, getPlatform: () => "ios", Plugins: { Llama: {}, Mlx: {}, Filesystem: {} } }, localStorage: ls };
+  new Function("window", "localStorage", "setTimeout", MODELS_SRC)(win, ls, () => 0);
+  const M = win.SMD_MAIK_MODELS;
+  assert.equal(M.mlxAvailable(), true);
+  assert.equal(M.mlxEnabled(), false, "off by default");
+  assert.equal(M.setMlxEnabled(true), true);
+  assert.equal(ls.getItem("smd_maik_mlx"), "1");
+  assert.equal(M.setMlxEnabled(false), false);
+  assert.equal(ls.getItem("smd_maik_mlx"), null);
+  const android = new Function("window", "localStorage", "setTimeout", MODELS_SRC);
+  const lsA = fakeLS(), winA = { Capacitor: { isNativePlatform: () => true, getPlatform: () => "android", Plugins: { Llama: {}, Mlx: {} } }, localStorage: lsA };
+  android(winA, lsA, () => 0);
+  assert.equal(winA.SMD_MAIK_MODELS.mlxAvailable(), false, "never on Android");
 });
