@@ -81,7 +81,7 @@ test("review gate: no screen builds a pathway or lesson with a hard-coded allowD
 
 test("review gate: draft content is never locked (owner 2026-09-27)", () => {
   const src = read("clinix-content.js");
-  assert.match(src, /allowDraft: f \? f\.bool\("smd_clinix_draft"\) : true/);
+  assert.match(src, /allowDraft: true,/);
   assert.equal(F.DEFS.smd_clinix_draft.def, true);
 });
 

@@ -234,6 +234,7 @@
     paint(markTop(s("homeSub")) +
       '<div class="oph-scroll oph-pad ln-home"><div class="ln-col">' + tabs("learn") + body + (O._explore ? O._explore.homeHtml() : "") + referenceHtml() +
       '<p class="oph-note">' + s("draft") + "</p></div></div>", focusSel);
+    wireUnits();
   }
 
   function startCard() {
@@ -261,15 +262,40 @@
     return '<ul class="oph-clinics ln-revise">' + row("lnrevise", "", tile("refresh"), s("revise"), s("reviseDue", { n: fmt(n) }), "") + "</ul>";
   }
 
+  // The unit holding the learner's next lesson opens by default (a brand new user: the first unit,
+  // since nextLesson's first unfinished lesson is that unit's first). null once every lesson is done.
+  function defaultUnitId() {
+    var nx = D.nextLesson(W.ix, st.store), u = nx && unitOf(nx.id);
+    return u ? u.id : null;
+  }
+  // Open state: the learner's own toggle (st.prefs.units, remembered like the tab and language), else the default.
+  function unitOpen(u, defId) {
+    var pu = st.prefs.units;
+    if (pu && Object.prototype.hasOwnProperty.call(pu, u.id)) return !!pu[u.id];
+    return u.id === defId;
+  }
+  function setUnitOpen(id, open) {
+    if (!st.prefs.units) st.prefs.units = {};
+    st.prefs.units[id] = !!open;
+    D.savePrefs(I.ls(), st.prefs);
+  }
+  // <details>/<summary>: native disclosure semantics and keyboard support, no custom aria-expanded wiring needed.
+  function wireUnits() {
+    Array.prototype.forEach.call(G.document.querySelectorAll(".ln-unit[data-u]"), function (d) {
+      d.addEventListener("toggle", function () { setUnitOpen(d.getAttribute("data-u"), d.open); });
+    });
+  }
   function unitsHtml() {
-    var out = "";
+    var out = "", defId = defaultUnitId();
     ["mbbs", "resident"].forEach(function (lv) {
       var us = W.ix.units.filter(function (u) { return u.level === lv; });
       if (!us.length) return;
       out += '<h2 class="oph-h2">' + s(lv) + "</h2>";
       us.forEach(function (u) {
-        out += '<section class="ln-unit" aria-label="' + esc(plain(u.title)) + '"><div class="ln-unit-h"><h3>' + tx(u.title) + '</h3><span class="oph-small">' +
-          s("ofDone", { d: fmt(doneCount(u.lessons)), n: fmt(u.lessons.length) }) + '</span></div><ol class="ln-lessons">' +
+        var hmeta = s(lv) + " · " + s("ofDone", { d: fmt(doneCount(u.lessons)), n: fmt(u.lessons.length) }) + (lv === "resident" ? " " + badge("learn.resident") : "");
+        out += '<details class="ln-unit" data-u="' + esc(u.id) + '"' + (unitOpen(u, defId) ? " open" : "") + '>' +
+          '<summary class="ln-unit-sum"><span class="ln-unit-b"><h3>' + tx(u.title) + '</h3><span class="oph-small">' + hmeta + "</span></span>" +
+          '<span class="oph-chev" aria-hidden="true">' + ico("chev") + '</span></summary><ol class="ln-lessons">' +
           u.lessons.map(function (id, i) {
             var l = meta(id), dn = D.lessonDone(st.store, id);
             var title = tx(l.title), line = s("min", { n: l.minutes }) + (dn ? " · " + s("done") : "");
@@ -277,7 +303,7 @@
               '<span class="ln-num" aria-hidden="true">' + (dn ? ico("check") : i + 1) + "</span>" +
               '<span class="ln-row-b"><b>' + title + '</b><span class="oph-small">' + line + (lv === "resident" ? " " + badge("learn.resident") : "") + "</span></span>" +
               '<span class="oph-chev" aria-hidden="true">' + ico("chev") + '</span><span class="oph-sr">' + (dn ? s("done") : s("toDo")) + "</span></button></li>";
-          }).join("") + "</ol></section>";
+          }).join("") + "</ol></details>";
       });
     });
     return out;

@@ -127,7 +127,7 @@ try {
     "no content is fetched with the flag off");
 
   /* ── 2. FLAG ON: the module mounts and the home screen renders ─────────── */
-  console.log("\n--- flag ON, review gate CLOSED (student view) ---");
+  console.log("\n--- flag ON, draft flag OFF (must not lock) ---");
   await attach(BASE + "?clinix=1&clinixdraft=0");
 
   ok((await ev("window.CLINIX.isOn()")) === true, "CLINIX.isOn() is true with ?clinix=1");
@@ -158,14 +158,14 @@ try {
     if (await ev("!!document.querySelector('#clinixRoot .cx-state, #clinixRoot .cx-rail')")) break;
     await sleep(250);
   }
-  ok((await ev("!!document.querySelector('#clinixRoot .cx-state')")) === true,
-    "REVIEW GATE: with content still ai_drafted, a student sees the pending-review state");
-  ok((await ev("document.querySelector('#clinixRoot .cx-state').textContent.includes('Awaiting clinical review')")) === true,
-    "and the reason is stated explicitly rather than showing an empty pathway");
-  ok((await ev("!document.querySelector('#clinixRoot .cx-rail-btn:not([disabled])')")) === true,
-    "no lesson is reachable");
-  ok((await ev("!document.querySelector('#clinixRoot [data-act=\"cx-case\"]')")) === true,
-    "REVIEW GATE: an unreviewed simulated patient is not offered either");
+  // Owner 2026-09-28: "Don't lock anything behind draft". Even a device with smd_clinix_draft
+  // switched off (an old author-mode toggle) must see the pathway, never "Awaiting clinical review".
+  ok((await ev("!!document.querySelector('#clinixRoot .cx-rail')")) === true,
+    "NO DRAFT LOCK: with smd_clinix_draft off, the ai_drafted pathway still renders");
+  ok((await ev("!(document.querySelector('#clinixRoot .cx-state') && document.querySelector('#clinixRoot .cx-state').textContent.includes('Awaiting clinical review'))")) === true,
+    "and no 'Awaiting clinical review' lock is shown");
+  ok((await ev("!!document.querySelector('#clinixRoot .cx-rail-btn:not([disabled])')")) === true,
+    "lessons are reachable");
 
   /* ── 4. AUTHOR MODE: the same content becomes visible ──────────────────── */
   console.log("\n--- flag ON, author mode (review gate OPEN) ---");
