@@ -1188,7 +1188,11 @@
     // round 67: an acute fever with severe or swollen joints (often symmetric, small joints and ankles) is chikungunya first (WHO SEARO)
     CHIKUNGUNYA: function (f) { return (!noneOf(f, FEBRILE) && (f.severeArthralgia || f.jointSwelling) && !f.bleedingManifestation && !f.mucocutaneousBleeding) ? 15 : 0; },
     // malaria is acute; weeks of fever with weight loss is TB, lymphoma or another chronic cause first
-    MALARIA: function (f) { return (f.subacuteOnset && f.weightLoss) ? -20 : 0; },
+    // (round 70: and a fever with a stated bacterial source, a puerperal uterus or a wound, is that infection first)
+    MALARIA: function (f) { return ((f.subacuteOnset && f.weightLoss) ? -20 : 0) + (f.suspectedInfectionSource ? -20 : 0); },
+    // round 70 (heldout3 tune): confusion with a raised creatinine is uraemic only when nothing else explains it: hypercalcaemia,
+    // shock or hypoglycaemia is the cause first
+    uraemic_enceph: function (f) { return (f.calciumHigh || f.hypotension || f.glucoseLow) ? -20 : 0; },
     PROSTATITIS: function (f) { return f.perinealPain ? 20 : 0; },
     // biliary colic is afebrile; fever or rigors with RUQ pain is cholecystitis or cholangitis
     biliary_colic: function (f) { return (f.fever || f.rigors) ? -25 : 0; },

@@ -94,6 +94,8 @@ const CASES = {
   stoneFlank: ["flankPain", "hematuria", "urinaryFrequency", "costovertebralTenderness"],
   husPicture: ["bloodyStool", "diarrhea", "oliguria", "renalImpairment", "thrombocytopenia", "facialSwelling"],
   neuroBladder: ["focalNeuroDeficit", "urinaryFrequency", "subacuteOnset"],
+  // round 70 (heldout3 tune half)
+  puerperal: ["fever", "rigors", "abdominalPain", "tachycardia", "hypotension", "tachypnea", "alteredSensorium", "suspectedInfectionSource", "raised_lactate", "thrombocytopenia", "organDysfunction"],
   // round 47 (the typed reading of train gc_135)
   malariaHlh: ["fever", "headache", "rigors", "toxicAppearing", "hepatosplenomegaly", "nightSweats", "nauseaVomiting", "jaundice", "paroxysmalFever", "travelEndemicArea",
     "splenomegaly", "myalgiaArthralgia", "tachycardia", "thrombocytopenia", "organDysfunction"],
@@ -154,6 +156,7 @@ try {
   ok(posN("stoneFlank", "renal_colic") < posN("stoneFlank", "PYELONEPHRITIS"), `on  · afebrile flank pain with haematuria: colic above pyelonephritis (#${pos("stoneFlank", "renal_colic")} vs #${pos("stoneFlank", "PYELONEPHRITIS")})`);
   ok(posN("husPicture", "ttp_hus") < posN("husPicture", "DYSENTERY"), `on  · afebrile bloody diarrhoea, low platelets, kidney failure: HUS above dysentery (#${pos("husPicture", "ttp_hus")} vs #${pos("husPicture", "DYSENTERY")})`);
   ok(posN("neuroBladder", "CYSTITIS") > 1, `on  · urinary frequency with a spinal cord deficit, no dysuria: cystitis does not lead (#${pos("neuroBladder", "CYSTITIS")})`);
+  ok(Math.min(posN("puerperal", "SEPSIS"), posN("puerperal", "SEPTIC_SHOCK")) < posN("puerperal", "MALARIA"), `on  · fever and shock with a stated bacterial source: sepsis above malaria (#${pos("puerperal", "SEPSIS")} vs #${pos("puerperal", "MALARIA")})`);
   ok(pos("malariaHlh", "MALARIA") < pos("malariaHlh", "HLH"), `on  · fever with rigors after travel to an endemic area, big spleen: malaria above HLH (#${pos("malariaHlh", "MALARIA")} vs #${pos("malariaHlh", "HLH")})`);
   ok(pos("htnLung", "htn_emergency") <= 2, `on  · papilloedema with pulmonary oedema: hypertensive emergency in the top two (#${pos("htnLung", "htn_emergency")}; it was 5th)`);
   // default ON since 2026-09-27 (owner decision); localStorage "0" is the opt-out
