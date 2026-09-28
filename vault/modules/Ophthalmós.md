@@ -17,8 +17,8 @@ just before it would be forgotten. Interaction modelled the same way as [[RadioA
   encounter layout: hub, encounter, summary, case conference), `ophthalmos.css`
 - **Flag + default:** `smd_ophthalmos`, default **ON** for all users (owner decision
   2026-09-27). Kill switch: `localStorage.smd_ophthalmos = "0"` or `?ophthalmos=0` for the
-  current load. Content is still ai_drafted, so every screen carries a 4px "To be verified ·
-  draft" mark (owner-specified) and the hub keeps the readable Beta note. No
+  current load. Content is still ai_drafted, but the per-screen "To be verified · draft" mark and every
+  Beta / AI-drafted / awaiting-review note were removed (owner decision 2026-09-28). No
   client flag registry file exists for this module, same as `atlas` (RadioAnatome): the
   gating lives inline in `home.js`'s `eligible()`, not in a `*-flags.js` registry.
 - **Data:** `ophthalmos/tracks.json` (levels, access, sources/credits) and

@@ -1,6 +1,6 @@
 ---
 tags: [module, opd, documents, clinical-content]
-status: built 2026-09-25 (flag ON). Templates ai_drafted, translations machine_drafted, PENDING review.
+status: built 2026-09-25 (flag ON). Templates ai_drafted, translations machine_drafted; no draft/pending note on screen (owner decision 2026-09-28).
 flag: smd_clinical_docs (client, def:true, ?docs=0 hides the Home tile and the kit button)
 ---
 # Clinical Documents
