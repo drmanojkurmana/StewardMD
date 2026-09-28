@@ -139,3 +139,15 @@ Synced byte-identical from module repo `feat/learn-units` (PR #23 there, integra
   visual pathway explorer rendering. Module repo: 130 unit tests, 41 headless UI steps.
 - **Owner items:** ophthalmologist and Hindi review lists are in module PR #23; the Learn home is now long
   (107 rows, Explore below the units), see that PR.
+
+## Learn home: collapsible units (oph8, 2026-09-28)
+Synced byte-identical from module repo `feat/learn-collapsible-units` (PR #24 there), fixing the "Learn home
+is long" item above. `ophthalmos-learn.js` + `ophthalmos-learn.css` only; every Ophthalmós tag in `index.html`
+bumped to `?v=oph8`.
+- Each unit is a `<details>`/`<summary>` disclosure (title, level, "{d} of {n} done" progress, chevron) around
+  the existing lesson rows; native keyboard and expanded/collapsed semantics, no new markup pattern elsewhere.
+  All units collapse by default except the one holding the learner's next lesson (the first unit for a new
+  learner); the learner's own opens/closes persist in `smd_ophthalmos_prefs.units`, alongside the tab and
+  language choice. No new i18n strings (reuses the MBBS/Resident and "{d} of {n} done" chrome strings).
+- Module repo: 130 unit tests, 42 headless UI steps (one new step covers default state, toggling, keyboard
+  activation, persistence and Hindi). `test/ophthalmos-sync.json` regenerated at module commit `0850e21`.
