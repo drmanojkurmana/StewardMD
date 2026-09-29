@@ -1,0 +1,1977 @@
+{
+ "v": 1,
+ "id": "hc-biometry",
+ "review": "ai_drafted",
+ "title": {
+  "en": "Fetal head circumference",
+  "hi": "भ्रूण के सिर की परिधि"
+ },
+ "source": {
+  "dataset": "HC18",
+  "url": "https://zenodo.org/records/1322001",
+  "doi": "10.5281/zenodo.1322001",
+  "licence": "CC BY 4.0",
+  "credit": "hc18",
+  "paper": "van den Heuvel TLA, de Bruijn D, de Korte CL, van Ginneken B. Automated measurement of fetal head circumference using 2D ultrasound images. PLoS ONE. 2018;13(8):e0200412. doi:10.1371/journal.pone.0200412",
+  "labelledBy": "Ground truth is the ellipse the examining sonographer drew on the outer edge of the skull during the scan (paper, Materials and methods)."
+ },
+ "coordinates": "Ellipse and image coordinates are in pixels of the bundled WebP (canvas convention: pixel i covers [i, i+1), origin top-left, y down). a >= b are semi-axes. angleDeg is the major-axis angle from +x toward +y (clockwise on screen), in (-90, 90]. hcMm is the dataset's HC; hcFromEllipseMm recomputes it from the stored ellipse with Ramanujan's second approximation, mmPerPx being the dataset pixel size divided by the resize scale.",
+ "perimeter": "pi (a + b) (1 + 3h / (10 + sqrt(4 - 3h))), h = ((a - b) / (a + b))^2 (Ramanujan, second approximation); it reproduced the dataset HC to 0.01 mm on the three images checked by hand and within 0.5 percent on every image in this deck.",
+ "gaFromHc": {
+  "formula": "GA (weeks) = 8.96 + 0.540 x HC + 0.0003 x HC^3, HC in cm",
+  "coefficients": {
+   "c0": 8.96,
+   "c1": 0.54,
+   "c3": 0.0003
+  },
+  "validHcMm": [
+   68,
+   360
+  ],
+  "tolerance2SD": [
+   {
+    "hcMm": [
+     68,
+     144
+    ],
+    "sd2Weeks": 1.19
+   },
+   {
+    "hcMm": [
+     151,
+     219
+    ],
+    "sd2Weeks": 1.48
+   },
+   {
+    "hcMm": [
+     224,
+     280
+    ],
+    "sd2Weeks": 2.06
+   },
+   {
+    "hcMm": [
+     284,
+     325
+    ],
+    "sd2Weeks": 2.98
+   },
+   {
+    "hcMm": [
+     328,
+     360
+    ],
+    "sd2Weeks": 3.2
+   }
+  ],
+  "toleranceGap": "An HC between two tabulated ranges takes the wider (next) tolerance.",
+  "source": {
+   "primary": "Hadlock FP, Deter RL, Harrist RB, Park SK. Estimating fetal age: computer-assisted analysis of multiple fetal growth parameters. Radiology. 1984;152(2):497-501.",
+   "verifiedAgainst": "Hologic SuperSonic MACH Obstetrical References, PM.LAB.175-A (Oct 2020), section GA by HC - Hadlock1984: 64 of 64 tabulated rows reproduced to within 0.0006 week; the +/-2 SD column gives the tolerance bands. Secondary source; the paper itself was paywalled.",
+   "url": "https://www.hologic.com/file/37096/download?token=a-BSqXqL"
+  }
+ },
+ "cases": [
+  {
+   "id": "hc-001",
+   "img": "hc-biometry/hc-001.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.068105,
+   "hcMm": 68.41,
+   "ellipse": {
+    "cx": 311.4,
+    "cy": 253.5,
+    "a": 183.6,
+    "b": 134.2,
+    "angleDeg": 17.4
+   },
+   "hcFromEllipseMm": 68.41,
+   "gaWeeks": 12.8,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-002",
+   "img": "hc-biometry/hc-002.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.142387,
+   "hcMm": 187.51,
+   "ellipse": {
+    "cx": 305.5,
+    "cy": 211.9,
+    "a": 240.6,
+    "b": 176.1,
+    "angleDeg": -3.7
+   },
+   "hcFromEllipseMm": 187.52,
+   "gaWeeks": 21.1,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-003",
+   "img": "hc-biometry/hc-003.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.150472,
+   "hcMm": 172.92,
+   "ellipse": {
+    "cx": 342.6,
+    "cy": 257.7,
+    "a": 202.9,
+    "b": 161.7,
+    "angleDeg": 12.8
+   },
+   "hcFromEllipseMm": 172.9,
+   "gaWeeks": 19.8,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-004",
+   "img": "hc-biometry/hc-004.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.119018,
+   "hcMm": 119.77,
+   "ellipse": {
+    "cx": 311.4,
+    "cy": 199.5,
+    "a": 181.4,
+    "b": 137.4,
+    "angleDeg": -4.8
+   },
+   "hcFromEllipseMm": 119.77,
+   "gaWeeks": 15.9,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-005",
+   "img": "hc-biometry/hc-005.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.407911,
+   "hcMm": 288.16,
+   "ellipse": {
+    "cx": 343.4,
+    "cy": 179,
+    "a": 126,
+    "b": 98,
+    "angleDeg": -22.2
+   },
+   "hcFromEllipseMm": 288.18,
+   "gaWeeks": 31.7,
+   "gaTol2SDWeeks": 2.98,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-006",
+   "img": "hc-biometry/hc-006.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.146774,
+   "hcMm": 180.89,
+   "ellipse": {
+    "cx": 299.2,
+    "cy": 213.5,
+    "a": 225.1,
+    "b": 164.9,
+    "angleDeg": 3.2
+   },
+   "hcFromEllipseMm": 180.9,
+   "gaWeeks": 20.5,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-007",
+   "img": "hc-biometry/hc-007.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.146768,
+   "hcMm": 169.61,
+   "ellipse": {
+    "cx": 324.6,
+    "cy": 222.1,
+    "a": 207.4,
+    "b": 158.8,
+    "angleDeg": 3.3
+   },
+   "hcFromEllipseMm": 169.59,
+   "gaWeeks": 19.6,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-008",
+   "img": "hc-biometry/hc-008.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.072099,
+   "hcMm": 82.49,
+   "ellipse": {
+    "cx": 362.8,
+    "cy": 208.1,
+    "a": 205.1,
+    "b": 157.5,
+    "angleDeg": 2.4
+   },
+   "hcFromEllipseMm": 82.49,
+   "gaWeeks": 13.6,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-009",
+   "img": "hc-biometry/hc-009.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.218002,
+   "hcMm": 244.82,
+   "ellipse": {
+    "cx": 302.8,
+    "cy": 188.7,
+    "a": 196,
+    "b": 160.6,
+    "angleDeg": -11
+   },
+   "hcFromEllipseMm": 244.83,
+   "gaWeeks": 26.6,
+   "gaTol2SDWeeks": 2.06,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-010",
+   "img": "hc-biometry/hc-010.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.164362,
+   "hcMm": 177.13,
+   "ellipse": {
+    "cx": 301.6,
+    "cy": 246.9,
+    "a": 189.9,
+    "b": 152.1,
+    "angleDeg": -3
+   },
+   "hcFromEllipseMm": 177.13,
+   "gaWeeks": 20.2,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-011",
+   "img": "hc-biometry/hc-011.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.117877,
+   "hcMm": 164.96,
+   "ellipse": {
+    "cx": 328.1,
+    "cy": 221,
+    "a": 257.9,
+    "b": 184.5,
+    "angleDeg": 1.2
+   },
+   "hcFromEllipseMm": 164.96,
+   "gaWeeks": 19.2,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-012",
+   "img": "hc-biometry/hc-012.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.086216,
+   "hcMm": 72.65,
+   "ellipse": {
+    "cx": 318.2,
+    "cy": 208.6,
+    "a": 152,
+    "b": 114.9,
+    "angleDeg": 48.9
+   },
+   "hcFromEllipseMm": 72.64,
+   "gaWeeks": 13,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-013",
+   "img": "hc-biometry/hc-013.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.178159,
+   "hcMm": 194.6,
+   "ellipse": {
+    "cx": 258.2,
+    "cy": 218.4,
+    "a": 197,
+    "b": 149,
+    "angleDeg": -1.5
+   },
+   "hcFromEllipseMm": 194.59,
+   "gaWeeks": 21.7,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-014",
+   "img": "hc-biometry/hc-014.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.180617,
+   "hcMm": 174.13,
+   "ellipse": {
+    "cx": 311,
+    "cy": 175.3,
+    "a": 166,
+    "b": 140.3,
+    "angleDeg": -16.4
+   },
+   "hcFromEllipseMm": 174.11,
+   "gaWeeks": 19.9,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-015",
+   "img": "hc-biometry/hc-015.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.147401,
+   "hcMm": 146.4,
+   "ellipse": {
+    "cx": 314.4,
+    "cy": 200.9,
+    "a": 172.7,
+    "b": 142.7,
+    "angleDeg": 8.7
+   },
+   "hcFromEllipseMm": 146.38,
+   "gaWeeks": 17.8,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-016",
+   "img": "hc-biometry/hc-016.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.242337,
+   "hcMm": 300,
+   "ellipse": {
+    "cx": 307.1,
+    "cy": 198.5,
+    "a": 213.8,
+    "b": 179.5,
+    "angleDeg": 1.3
+   },
+   "hcFromEllipseMm": 300,
+   "gaWeeks": 33.3,
+   "gaTol2SDWeeks": 2.98,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-017",
+   "img": "hc-biometry/hc-017.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.18115,
+   "hcMm": 183.1,
+   "ellipse": {
+    "cx": 325.8,
+    "cy": 252.1,
+    "a": 174.5,
+    "b": 146.7,
+    "angleDeg": 2.6
+   },
+   "hcFromEllipseMm": 183.14,
+   "gaWeeks": 20.7,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-018",
+   "img": "hc-biometry/hc-018.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.130967,
+   "hcMm": 170.96,
+   "ellipse": {
+    "cx": 344.8,
+    "cy": 218.3,
+    "a": 233.1,
+    "b": 180.8,
+    "angleDeg": -1
+   },
+   "hcFromEllipseMm": 170.98,
+   "gaWeeks": 19.7,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-019",
+   "img": "hc-biometry/hc-019.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.142363,
+   "hcMm": 94.35,
+   "ellipse": {
+    "cx": 369,
+    "cy": 164.4,
+    "a": 117.9,
+    "b": 92.2,
+    "angleDeg": -5.9
+   },
+   "hcFromEllipseMm": 94.32,
+   "gaWeeks": 14.3,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-020",
+   "img": "hc-biometry/hc-020.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.225162,
+   "hcMm": 268.8,
+   "ellipse": {
+    "cx": 305.2,
+    "cy": 204.5,
+    "a": 198,
+    "b": 181.8,
+    "angleDeg": -19.2
+   },
+   "hcFromEllipseMm": 268.78,
+   "gaWeeks": 29.3,
+   "gaTol2SDWeeks": 2.06,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-021",
+   "img": "hc-biometry/hc-021.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.18,
+   "hcMm": 178.3,
+   "ellipse": {
+    "cx": 318.4,
+    "cy": 236.5,
+    "a": 172.7,
+    "b": 141.8,
+    "angleDeg": -2
+   },
+   "hcFromEllipseMm": 178.28,
+   "gaWeeks": 20.3,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-022",
+   "img": "hc-biometry/hc-022.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.158616,
+   "hcMm": 166.8,
+   "ellipse": {
+    "cx": 320.1,
+    "cy": 231.7,
+    "a": 192,
+    "b": 140.8,
+    "angleDeg": -11
+   },
+   "hcFromEllipseMm": 166.82,
+   "gaWeeks": 19.4,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-023",
+   "img": "hc-biometry/hc-023.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.068415,
+   "hcMm": 75.9,
+   "ellipse": {
+    "cx": 336.2,
+    "cy": 176.8,
+    "a": 191.5,
+    "b": 161,
+    "angleDeg": -8.7
+   },
+   "hcFromEllipseMm": 75.91,
+   "gaWeeks": 13.2,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-024",
+   "img": "hc-biometry/hc-024.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.294671,
+   "hcMm": 210.86,
+   "ellipse": {
+    "cx": 312.7,
+    "cy": 208.2,
+    "a": 123.4,
+    "b": 103.9,
+    "angleDeg": -2
+   },
+   "hcFromEllipseMm": 210.81,
+   "gaWeeks": 23.2,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-025",
+   "img": "hc-biometry/hc-025.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.132622,
+   "hcMm": 175.08,
+   "ellipse": {
+    "cx": 309.2,
+    "cy": 194,
+    "a": 233.8,
+    "b": 185,
+    "angleDeg": -2.3
+   },
+   "hcFromEllipseMm": 175.08,
+   "gaWeeks": 20,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-026",
+   "img": "hc-biometry/hc-026.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.115435,
+   "hcMm": 158.52,
+   "ellipse": {
+    "cx": 317.7,
+    "cy": 216.7,
+    "a": 257.1,
+    "b": 176.3,
+    "angleDeg": 6.8
+   },
+   "hcFromEllipseMm": 158.54,
+   "gaWeeks": 18.7,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-027",
+   "img": "hc-biometry/hc-027.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.267624,
+   "hcMm": 317.62,
+   "ellipse": {
+    "cx": 301.6,
+    "cy": 229,
+    "a": 215.2,
+    "b": 160.5,
+    "angleDeg": -0.4
+   },
+   "hcFromEllipseMm": 317.55,
+   "gaWeeks": 35.7,
+   "gaTol2SDWeeks": 2.98,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-028",
+   "img": "hc-biometry/hc-028.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.148034,
+   "hcMm": 185.41,
+   "ellipse": {
+    "cx": 317.2,
+    "cy": 189.9,
+    "a": 224,
+    "b": 173.1,
+    "angleDeg": -1.1
+   },
+   "hcFromEllipseMm": 185.44,
+   "gaWeeks": 20.9,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-029",
+   "img": "hc-biometry/hc-029.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.126637,
+   "hcMm": 172,
+   "ellipse": {
+    "cx": 346.8,
+    "cy": 221.2,
+    "a": 248.8,
+    "b": 180.8,
+    "angleDeg": 10.4
+   },
+   "hcFromEllipseMm": 171.99,
+   "gaWeeks": 19.8,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-030",
+   "img": "hc-biometry/hc-030.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.104373,
+   "hcMm": 101.5,
+   "ellipse": {
+    "cx": 286.8,
+    "cy": 243.1,
+    "a": 172.4,
+    "b": 136.1,
+    "angleDeg": 3.5
+   },
+   "hcFromEllipseMm": 101.51,
+   "gaWeeks": 14.8,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-031",
+   "img": "hc-biometry/hc-031.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.241361,
+   "hcMm": 280.65,
+   "ellipse": {
+    "cx": 306.9,
+    "cy": 219.2,
+    "a": 207.2,
+    "b": 161.5,
+    "angleDeg": 4.2
+   },
+   "hcFromEllipseMm": 280.64,
+   "gaWeeks": 30.7,
+   "gaTol2SDWeeks": 2.98,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-032",
+   "img": "hc-biometry/hc-032.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.20509,
+   "hcMm": 180.08,
+   "ellipse": {
+    "cx": 291.1,
+    "cy": 219.7,
+    "a": 156.9,
+    "b": 121.5,
+    "angleDeg": 33.4
+   },
+   "hcFromEllipseMm": 180.1,
+   "gaWeeks": 20.4,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-033",
+   "img": "hc-biometry/hc-033.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.156306,
+   "hcMm": 168.5,
+   "ellipse": {
+    "cx": 338.2,
+    "cy": 207.9,
+    "a": 190.4,
+    "b": 151.6,
+    "angleDeg": -3
+   },
+   "hcFromEllipseMm": 168.48,
+   "gaWeeks": 19.5,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-034",
+   "img": "hc-biometry/hc-034.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.113838,
+   "hcMm": 79.32,
+   "ellipse": {
+    "cx": 340.6,
+    "cy": 207.8,
+    "a": 124.3,
+    "b": 96.7,
+    "angleDeg": 50.7
+   },
+   "hcFromEllipseMm": 79.35,
+   "gaWeeks": 13.4,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-035",
+   "img": "hc-biometry/hc-035.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.257369,
+   "hcMm": 228.17,
+   "ellipse": {
+    "cx": 347.5,
+    "cy": 221.9,
+    "a": 156.3,
+    "b": 125,
+    "angleDeg": 5.2
+   },
+   "hcFromEllipseMm": 228.15,
+   "gaWeeks": 24.8,
+   "gaTol2SDWeeks": 2.06,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-036",
+   "img": "hc-biometry/hc-036.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.148414,
+   "hcMm": 176.52,
+   "ellipse": {
+    "cx": 343,
+    "cy": 237.9,
+    "a": 216.9,
+    "b": 159.5,
+    "angleDeg": 3.5
+   },
+   "hcFromEllipseMm": 176.52,
+   "gaWeeks": 20.1,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-037",
+   "img": "hc-biometry/hc-037.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.273913,
+   "hcMm": 163.1,
+   "ellipse": {
+    "cx": 272.4,
+    "cy": 286.7,
+    "a": 102.9,
+    "b": 86.2,
+    "angleDeg": 42.7
+   },
+   "hcFromEllipseMm": 163.04,
+   "gaWeeks": 19.1,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-038",
+   "img": "hc-biometry/hc-038.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.142992,
+   "hcMm": 69.76,
+   "ellipse": {
+    "cx": 435.4,
+    "cy": 232.1,
+    "a": 87.2,
+    "b": 67.5,
+    "angleDeg": -15.5
+   },
+   "hcFromEllipseMm": 69.78,
+   "gaWeeks": 12.8,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-039",
+   "img": "hc-biometry/hc-039.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.168412,
+   "hcMm": 189.4,
+   "ellipse": {
+    "cx": 291.6,
+    "cy": 209.7,
+    "a": 197.5,
+    "b": 159.4,
+    "angleDeg": 7.5
+   },
+   "hcFromEllipseMm": 189.37,
+   "gaWeeks": 21.2,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-040",
+   "img": "hc-biometry/hc-040.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.169536,
+   "hcMm": 173.3,
+   "ellipse": {
+    "cx": 295.1,
+    "cy": 267.2,
+    "a": 182.7,
+    "b": 141.4,
+    "angleDeg": -4.5
+   },
+   "hcFromEllipseMm": 173.32,
+   "gaWeeks": 19.9,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-041",
+   "img": "hc-biometry/hc-041.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.140586,
+   "hcMm": 123.32,
+   "ellipse": {
+    "cx": 313.6,
+    "cy": 180.6,
+    "a": 156.6,
+    "b": 121.5,
+    "angleDeg": -8.4
+   },
+   "hcFromEllipseMm": 123.32,
+   "gaWeeks": 16.2,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-042",
+   "img": "hc-biometry/hc-042.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.276893,
+   "hcMm": 291.4,
+   "ellipse": {
+    "cx": 337.3,
+    "cy": 233.3,
+    "a": 181,
+    "b": 153.4,
+    "angleDeg": 5.3
+   },
+   "hcFromEllipseMm": 291.39,
+   "gaWeeks": 32.1,
+   "gaTol2SDWeeks": 2.98,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-043",
+   "img": "hc-biometry/hc-043.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.158193,
+   "hcMm": 181.73,
+   "ellipse": {
+    "cx": 329.4,
+    "cy": 232.3,
+    "a": 204.5,
+    "b": 159.8,
+    "angleDeg": 2.8
+   },
+   "hcFromEllipseMm": 181.73,
+   "gaWeeks": 20.6,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-044",
+   "img": "hc-biometry/hc-044.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.145528,
+   "hcMm": 170.08,
+   "ellipse": {
+    "cx": 297,
+    "cy": 217.7,
+    "a": 205.3,
+    "b": 165.7,
+    "angleDeg": 19.4
+   },
+   "hcFromEllipseMm": 170.1,
+   "gaWeeks": 19.6,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-045",
+   "img": "hc-biometry/hc-045.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.129268,
+   "hcMm": 84.21,
+   "ellipse": {
+    "cx": 322.4,
+    "cy": 211.8,
+    "a": 117.1,
+    "b": 89.3,
+    "angleDeg": -25.2
+   },
+   "hcFromEllipseMm": 84.2,
+   "gaWeeks": 13.7,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-046",
+   "img": "hc-biometry/hc-046.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.190833,
+   "hcMm": 255.8,
+   "ellipse": {
+    "cx": 293.9,
+    "cy": 210.3,
+    "a": 235,
+    "b": 190.5,
+    "angleDeg": 2.1
+   },
+   "hcFromEllipseMm": 255.79,
+   "gaWeeks": 27.8,
+   "gaTol2SDWeeks": 2.06,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-047",
+   "img": "hc-biometry/hc-047.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.197701,
+   "hcMm": 177.76,
+   "ellipse": {
+    "cx": 313,
+    "cy": 238.9,
+    "a": 157.6,
+    "b": 127.9,
+    "angleDeg": 16.9
+   },
+   "hcFromEllipseMm": 177.8,
+   "gaWeeks": 20.2,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-048",
+   "img": "hc-biometry/hc-048.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.152237,
+   "hcMm": 165.61,
+   "ellipse": {
+    "cx": 262.4,
+    "cy": 181.2,
+    "a": 201.7,
+    "b": 142,
+    "angleDeg": 2.4
+   },
+   "hcFromEllipseMm": 165.62,
+   "gaWeeks": 19.3,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-049",
+   "img": "hc-biometry/hc-049.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.09697,
+   "hcMm": 73.7,
+   "ellipse": {
+    "cx": 300.8,
+    "cy": 286,
+    "a": 129.7,
+    "b": 112,
+    "angleDeg": -13.3
+   },
+   "hcFromEllipseMm": 73.73,
+   "gaWeeks": 13.1,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-050",
+   "img": "hc-biometry/hc-050.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.208028,
+   "hcMm": 197.77,
+   "ellipse": {
+    "cx": 277.2,
+    "cy": 247,
+    "a": 169.6,
+    "b": 131.9,
+    "angleDeg": 0.2
+   },
+   "hcFromEllipseMm": 197.81,
+   "gaWeeks": 22,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-051",
+   "img": "hc-biometry/hc-051.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.171804,
+   "hcMm": 174.6,
+   "ellipse": {
+    "cx": 297.9,
+    "cy": 191.8,
+    "a": 173.3,
+    "b": 149.8,
+    "angleDeg": -0.1
+   },
+   "hcFromEllipseMm": 174.62,
+   "gaWeeks": 20,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-052",
+   "img": "hc-biometry/hc-052.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.137052,
+   "hcMm": 153.4,
+   "ellipse": {
+    "cx": 306.1,
+    "cy": 236.9,
+    "a": 196.5,
+    "b": 158.8,
+    "angleDeg": 1.3
+   },
+   "hcFromEllipseMm": 153.41,
+   "gaWeeks": 18.3,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-053",
+   "img": "hc-biometry/hc-053.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.249424,
+   "hcMm": 307,
+   "ellipse": {
+    "cx": 292.6,
+    "cy": 224.1,
+    "a": 209.4,
+    "b": 181.9,
+    "angleDeg": 19
+   },
+   "hcFromEllipseMm": 307,
+   "gaWeeks": 34.2,
+   "gaTol2SDWeeks": 2.98,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-054",
+   "img": "hc-biometry/hc-054.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.167367,
+   "hcMm": 183.85,
+   "ellipse": {
+    "cx": 284.5,
+    "cy": 225.7,
+    "a": 200.8,
+    "b": 146.7,
+    "angleDeg": 5.9
+   },
+   "hcFromEllipseMm": 183.82,
+   "gaWeeks": 20.8,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-055",
+   "img": "hc-biometry/hc-055.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.157454,
+   "hcMm": 171.25,
+   "ellipse": {
+    "cx": 323.1,
+    "cy": 254,
+    "a": 193.5,
+    "b": 151.4,
+    "angleDeg": 3.7
+   },
+   "hcFromEllipseMm": 171.24,
+   "gaWeeks": 19.7,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-056",
+   "img": "hc-biometry/hc-056.webp",
+   "w": 640,
+   "h": 441,
+   "mmPerPx": 0.091321,
+   "hcMm": 97.1,
+   "ellipse": {
+    "cx": 305.8,
+    "cy": 210.9,
+    "a": 182.1,
+    "b": 155.8,
+    "angleDeg": 28.9
+   },
+   "hcFromEllipseMm": 97.09,
+   "gaWeeks": 14.5,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-057",
+   "img": "hc-biometry/hc-057.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.276137,
+   "hcMm": 272.8,
+   "ellipse": {
+    "cx": 308.8,
+    "cy": 220.1,
+    "a": 177.9,
+    "b": 135.1,
+    "angleDeg": -16.8
+   },
+   "hcFromEllipseMm": 272.8,
+   "gaWeeks": 29.8,
+   "gaTol2SDWeeks": 2.06,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-058",
+   "img": "hc-biometry/hc-058.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.1992,
+   "hcMm": 178.85,
+   "ellipse": {
+    "cx": 351.1,
+    "cy": 182.7,
+    "a": 157.6,
+    "b": 127.4,
+    "angleDeg": 12.3
+   },
+   "hcFromEllipseMm": 178.86,
+   "gaWeeks": 20.3,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-059",
+   "img": "hc-biometry/hc-059.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.155208,
+   "hcMm": 167.17,
+   "ellipse": {
+    "cx": 321.5,
+    "cy": 208.1,
+    "a": 188.3,
+    "b": 153.7,
+    "angleDeg": -11.8
+   },
+   "hcFromEllipseMm": 167.19,
+   "gaWeeks": 19.4,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-060",
+   "img": "hc-biometry/hc-060.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.083983,
+   "hcMm": 76.8,
+   "ellipse": {
+    "cx": 331.9,
+    "cy": 225,
+    "a": 162.4,
+    "b": 127.6,
+    "angleDeg": 6.9
+   },
+   "hcFromEllipseMm": 76.79,
+   "gaWeeks": 13.2,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-061",
+   "img": "hc-biometry/hc-061.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.186697,
+   "hcMm": 216.8,
+   "ellipse": {
+    "cx": 326.5,
+    "cy": 190.5,
+    "a": 205.2,
+    "b": 163.2,
+    "angleDeg": 0.6
+   },
+   "hcFromEllipseMm": 216.78,
+   "gaWeeks": 23.7,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-062",
+   "img": "hc-biometry/hc-062.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.148962,
+   "hcMm": 175.62,
+   "ellipse": {
+    "cx": 374.8,
+    "cy": 231.4,
+    "a": 208.3,
+    "b": 165.8,
+    "angleDeg": -2.3
+   },
+   "hcFromEllipseMm": 175.64,
+   "gaWeeks": 20.1,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-063",
+   "img": "hc-biometry/hc-063.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.132962,
+   "hcMm": 159.9,
+   "ellipse": {
+    "cx": 322.7,
+    "cy": 229.4,
+    "a": 219.7,
+    "b": 160.9,
+    "angleDeg": 0.9
+   },
+   "hcFromEllipseMm": 159.93,
+   "gaWeeks": 18.8,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-064",
+   "img": "hc-biometry/hc-064.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.28089,
+   "hcMm": 327.57,
+   "ellipse": {
+    "cx": 315.8,
+    "cy": 235.9,
+    "a": 204.3,
+    "b": 165.9,
+    "angleDeg": -0.3
+   },
+   "hcFromEllipseMm": 327.56,
+   "gaWeeks": 37.2,
+   "gaTol2SDWeeks": 3.2,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-065",
+   "img": "hc-biometry/hc-065.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.178706,
+   "hcMm": 186.25,
+   "ellipse": {
+    "cx": 381,
+    "cy": 232.7,
+    "a": 186.8,
+    "b": 143.5,
+    "angleDeg": -8.9
+   },
+   "hcFromEllipseMm": 186.24,
+   "gaWeeks": 21,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-066",
+   "img": "hc-biometry/hc-066.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.16964,
+   "hcMm": 172.39,
+   "ellipse": {
+    "cx": 305.1,
+    "cy": 212.3,
+    "a": 178.6,
+    "b": 143.9,
+    "angleDeg": -0.2
+   },
+   "hcFromEllipseMm": 172.37,
+   "gaWeeks": 19.8,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-067",
+   "img": "hc-biometry/hc-067.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.186239,
+   "hcMm": 105.62,
+   "ellipse": {
+    "cx": 334.4,
+    "cy": 241.9,
+    "a": 99.3,
+    "b": 80.8,
+    "angleDeg": 31.1
+   },
+   "hcFromEllipseMm": 105.65,
+   "gaWeeks": 15,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-068",
+   "img": "hc-biometry/hc-068.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.351525,
+   "hcMm": 284,
+   "ellipse": {
+    "cx": 336.5,
+    "cy": 231.1,
+    "a": 137.4,
+    "b": 119.4,
+    "angleDeg": 84.1
+   },
+   "hcFromEllipseMm": 283.95,
+   "gaWeeks": 31.2,
+   "gaTol2SDWeeks": 2.98,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-069",
+   "img": "hc-biometry/hc-069.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.19672,
+   "hcMm": 180.6,
+   "ellipse": {
+    "cx": 325.4,
+    "cy": 191.1,
+    "a": 162.3,
+    "b": 129,
+    "angleDeg": 12.4
+   },
+   "hcFromEllipseMm": 180.62,
+   "gaWeeks": 20.5,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-070",
+   "img": "hc-biometry/hc-070.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.179209,
+   "hcMm": 169,
+   "ellipse": {
+    "cx": 315.9,
+    "cy": 247.3,
+    "a": 168.3,
+    "b": 130.7,
+    "angleDeg": 9.4
+   },
+   "hcFromEllipseMm": 169,
+   "gaWeeks": 19.5,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-071",
+   "img": "hc-biometry/hc-071.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.123245,
+   "hcMm": 80.7,
+   "ellipse": {
+    "cx": 263.1,
+    "cy": 266.4,
+    "a": 108.9,
+    "b": 99.4,
+    "angleDeg": 64.1
+   },
+   "hcFromEllipseMm": 80.69,
+   "gaWeeks": 13.5,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-072",
+   "img": "hc-biometry/hc-072.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.247786,
+   "hcMm": 234,
+   "ellipse": {
+    "cx": 346.8,
+    "cy": 256.4,
+    "a": 169.5,
+    "b": 129.8,
+    "angleDeg": -8.9
+   },
+   "hcFromEllipseMm": 234.01,
+   "gaWeeks": 25.4,
+   "gaTol2SDWeeks": 2.06,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-073",
+   "img": "hc-biometry/hc-073.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.132761,
+   "hcMm": 176.7,
+   "ellipse": {
+    "cx": 308.7,
+    "cy": 206,
+    "a": 236.2,
+    "b": 185.9,
+    "angleDeg": -0.7
+   },
+   "hcFromEllipseMm": 176.68,
+   "gaWeeks": 20.2,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-074",
+   "img": "hc-biometry/hc-074.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.130568,
+   "hcMm": 163.9,
+   "ellipse": {
+    "cx": 334.5,
+    "cy": 227.3,
+    "a": 227.6,
+    "b": 169.9,
+    "angleDeg": 1.7
+   },
+   "hcFromEllipseMm": 163.91,
+   "gaWeeks": 19.1,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-075",
+   "img": "hc-biometry/hc-075.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.093097,
+   "hcMm": 70.51,
+   "ellipse": {
+    "cx": 422.8,
+    "cy": 255.2,
+    "a": 131.2,
+    "b": 109.3,
+    "angleDeg": 56.8
+   },
+   "hcFromEllipseMm": 70.49,
+   "gaWeeks": 12.9,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-076",
+   "img": "hc-biometry/hc-076.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.238291,
+   "hcMm": 191.9,
+   "ellipse": {
+    "cx": 261.8,
+    "cy": 250.2,
+    "a": 140.9,
+    "b": 114.7,
+    "angleDeg": -21.1
+   },
+   "hcFromEllipseMm": 191.85,
+   "gaWeeks": 21.4,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-077",
+   "img": "hc-biometry/hc-077.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.161266,
+   "hcMm": 173.85,
+   "ellipse": {
+    "cx": 326.1,
+    "cy": 195,
+    "a": 189.6,
+    "b": 152.5,
+    "angleDeg": 2.4
+   },
+   "hcFromEllipseMm": 173.83,
+   "gaWeeks": 19.9,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-078",
+   "img": "hc-biometry/hc-078.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.126841,
+   "hcMm": 132.49,
+   "ellipse": {
+    "cx": 302.1,
+    "cy": 238.7,
+    "a": 183.6,
+    "b": 148,
+    "angleDeg": -5.3
+   },
+   "hcFromEllipseMm": 132.52,
+   "gaWeeks": 16.8,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-079",
+   "img": "hc-biometry/hc-079.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.250153,
+   "hcMm": 294.92,
+   "ellipse": {
+    "cx": 307.4,
+    "cy": 193.9,
+    "a": 207.1,
+    "b": 167.1,
+    "angleDeg": -13.7
+   },
+   "hcFromEllipseMm": 294.92,
+   "gaWeeks": 32.6,
+   "gaTol2SDWeeks": 2.98,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-080",
+   "img": "hc-biometry/hc-080.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.183482,
+   "hcMm": 182.49,
+   "ellipse": {
+    "cx": 292.4,
+    "cy": 183.9,
+    "a": 177.7,
+    "b": 137.6,
+    "angleDeg": 1.4
+   },
+   "hcFromEllipseMm": 182.48,
+   "gaWeeks": 20.6,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-081",
+   "img": "hc-biometry/hc-081.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.159835,
+   "hcMm": 170.47,
+   "ellipse": {
+    "cx": 320.7,
+    "cy": 225.1,
+    "a": 192.4,
+    "b": 145.4,
+    "angleDeg": 0
+   },
+   "hcFromEllipseMm": 170.44,
+   "gaWeeks": 19.7,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-082",
+   "img": "hc-biometry/hc-082.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.080923,
+   "hcMm": 88.51,
+   "ellipse": {
+    "cx": 323.5,
+    "cy": 234.1,
+    "a": 194.2,
+    "b": 152.7,
+    "angleDeg": 5.1
+   },
+   "hcFromEllipseMm": 88.51,
+   "gaWeeks": 13.9,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-083",
+   "img": "hc-biometry/hc-083.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.264083,
+   "hcMm": 260.8,
+   "ellipse": {
+    "cx": 344.7,
+    "cy": 201.2,
+    "a": 174,
+    "b": 139.4,
+    "angleDeg": 28.9
+   },
+   "hcFromEllipseMm": 260.8,
+   "gaWeeks": 28.4,
+   "gaTol2SDWeeks": 2.06,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-084",
+   "img": "hc-biometry/hc-084.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.143993,
+   "hcMm": 178,
+   "ellipse": {
+    "cx": 309.7,
+    "cy": 199.5,
+    "a": 227,
+    "b": 164,
+    "angleDeg": 1.6
+   },
+   "hcFromEllipseMm": 178.03,
+   "gaWeeks": 20.3,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-085",
+   "img": "hc-biometry/hc-085.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.132565,
+   "hcMm": 166.4,
+   "ellipse": {
+    "cx": 328.9,
+    "cy": 196.5,
+    "a": 226.1,
+    "b": 171.6,
+    "angleDeg": 2.8
+   },
+   "hcFromEllipseMm": 166.41,
+   "gaWeeks": 19.3,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-086",
+   "img": "hc-biometry/hc-086.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.111815,
+   "hcMm": 75.23,
+   "ellipse": {
+    "cx": 324.8,
+    "cy": 260.4,
+    "a": 116,
+    "b": 97.8,
+    "angleDeg": -46.8
+   },
+   "hcFromEllipseMm": 75.24,
+   "gaWeeks": 13.2,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-087",
+   "img": "hc-biometry/hc-087.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.266471,
+   "hcMm": 201.9,
+   "ellipse": {
+    "cx": 300.7,
+    "cy": 236.2,
+    "a": 135.2,
+    "b": 105,
+    "angleDeg": 47.2
+   },
+   "hcFromEllipseMm": 201.88,
+   "gaWeeks": 22.3,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-088",
+   "img": "hc-biometry/hc-088.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.183288,
+   "hcMm": 174.81,
+   "ellipse": {
+    "cx": 227.2,
+    "cy": 242.2,
+    "a": 168.2,
+    "b": 134.5,
+    "angleDeg": 0.7
+   },
+   "hcFromEllipseMm": 174.84,
+   "gaWeeks": 20,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-089",
+   "img": "hc-biometry/hc-089.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.155324,
+   "hcMm": 155.6,
+   "ellipse": {
+    "cx": 262.6,
+    "cy": 257.2,
+    "a": 178.3,
+    "b": 139.3,
+    "angleDeg": -9.6
+   },
+   "hcFromEllipseMm": 155.56,
+   "gaWeeks": 18.5,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-090",
+   "img": "hc-biometry/hc-090.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.371324,
+   "hcMm": 313.22,
+   "ellipse": {
+    "cx": 306.3,
+    "cy": 175.1,
+    "a": 148.3,
+    "b": 119.4,
+    "angleDeg": 6.9
+   },
+   "hcFromEllipseMm": 313.2,
+   "gaWeeks": 35.1,
+   "gaTol2SDWeeks": 2.98,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-091",
+   "img": "hc-biometry/hc-091.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.156853,
+   "hcMm": 184.5,
+   "ellipse": {
+    "cx": 267.1,
+    "cy": 177.9,
+    "a": 201.1,
+    "b": 172.8,
+    "angleDeg": -10.2
+   },
+   "hcFromEllipseMm": 184.51,
+   "gaWeeks": 20.8,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-092",
+   "img": "hc-biometry/hc-092.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.147665,
+   "hcMm": 171.69,
+   "ellipse": {
+    "cx": 326,
+    "cy": 238.2,
+    "a": 211,
+    "b": 157.1,
+    "angleDeg": 3.4
+   },
+   "hcFromEllipseMm": 171.68,
+   "gaWeeks": 19.7,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-093",
+   "img": "hc-biometry/hc-093.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.143953,
+   "hcMm": 99.4,
+   "ellipse": {
+    "cx": 394.2,
+    "cy": 222.9,
+    "a": 122.4,
+    "b": 96.6,
+    "angleDeg": 27.5
+   },
+   "hcFromEllipseMm": 99.38,
+   "gaWeeks": 14.6,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-094",
+   "img": "hc-biometry/hc-094.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.325392,
+   "hcMm": 277.6,
+   "ellipse": {
+    "cx": 316.8,
+    "cy": 234.6,
+    "a": 152.1,
+    "b": 118.4,
+    "angleDeg": -3.1
+   },
+   "hcFromEllipseMm": 277.59,
+   "gaWeeks": 30.4,
+   "gaTol2SDWeeks": 2.06,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-095",
+   "img": "hc-biometry/hc-095.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.137305,
+   "hcMm": 179.59,
+   "ellipse": {
+    "cx": 281.4,
+    "cy": 226,
+    "a": 242.4,
+    "b": 170.8,
+    "angleDeg": 3
+   },
+   "hcFromEllipseMm": 179.58,
+   "gaWeeks": 20.4,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-096",
+   "img": "hc-biometry/hc-096.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.143534,
+   "hcMm": 167.75,
+   "ellipse": {
+    "cx": 332.6,
+    "cy": 216.4,
+    "a": 208.8,
+    "b": 161.7,
+    "angleDeg": 7.5
+   },
+   "hcFromEllipseMm": 167.74,
+   "gaWeeks": 19.4,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-097",
+   "img": "hc-biometry/hc-097.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.087324,
+   "hcMm": 77.75,
+   "ellipse": {
+    "cx": 276.3,
+    "cy": 247.5,
+    "a": 151.3,
+    "b": 131.8,
+    "angleDeg": -58.6
+   },
+   "hcFromEllipseMm": 77.76,
+   "gaWeeks": 13.3,
+   "gaTol2SDWeeks": 1.19,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-098",
+   "img": "hc-biometry/hc-098.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.252525,
+   "hcMm": 223.8,
+   "ellipse": {
+    "cx": 318.3,
+    "cy": 229.7,
+    "a": 157.7,
+    "b": 123.4,
+    "angleDeg": -0.8
+   },
+   "hcFromEllipseMm": 223.84,
+   "gaWeeks": 24.4,
+   "gaTol2SDWeeks": 2.06,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-099",
+   "img": "hc-biometry/hc-099.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.139378,
+   "hcMm": 176.2,
+   "ellipse": {
+    "cx": 327.4,
+    "cy": 214.1,
+    "a": 232.3,
+    "b": 167.4,
+    "angleDeg": -0.6
+   },
+   "hcFromEllipseMm": 176.17,
+   "gaWeeks": 20.1,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  },
+  {
+   "id": "hc-100",
+   "img": "hc-biometry/hc-100.webp",
+   "w": 640,
+   "h": 432,
+   "mmPerPx": 0.159008,
+   "hcMm": 161.36,
+   "ellipse": {
+    "cx": 346.9,
+    "cy": 199.8,
+    "a": 177.8,
+    "b": 144.4,
+    "angleDeg": 3.9
+   },
+   "hcFromEllipseMm": 161.38,
+   "gaWeeks": 18.9,
+   "gaTol2SDWeeks": 1.48,
+   "review": "ai_drafted"
+  }
+ ]
+}
