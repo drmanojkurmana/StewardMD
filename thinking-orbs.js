@@ -88,8 +88,8 @@
     return { dots: visible, lines: visLines };
   }
 
-  // Orb colour palettes. "classic" is the original multicolour flow; the others are calmer families
-  // that sit with the teal brand. Chosen with ThinkingOrbs.setPalette(name) (kept in localStorage
+  // Orb colour palettes. "ocean" is the default (owner pick 2026-09-29); "classic" is the original multicolour
+  // flow; teal and graphite are the other calm options. Chosen with ThinkingOrbs.setPalette(name) (kept in localStorage
   // smd_orb_palette). Each palette lists [dark-theme, light-theme] stops; the last stop repeats the first.
   var PALETTES = {
     classic: {
@@ -112,7 +112,7 @@
       light: [[30, 41, 59], [71, 85, 105], [13, 148, 136], [51, 65, 85], [100, 116, 139], [30, 41, 59]]
     }
   };
-  var paletteName = "classic", drawPalette = null;   // drawPalette: a mount's own palette for the frame being painted
+  var paletteName = "ocean", drawPalette = null;   // drawPalette: a mount's own palette for the frame being painted
   try { var pn = localStorage.getItem("smd_orb_palette"); if (pn && PALETTES[pn]) paletteName = pn; } catch (e) {}
 
   function getGradientColor(x, y, z, size, tSec, dark) {

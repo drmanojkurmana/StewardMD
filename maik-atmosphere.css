@@ -54,22 +54,23 @@ html body:not(.dark):not(.v3-dark) #maikSheet :is(.maik-logo,.maik-side-logo,.ma
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.24) 0%, rgba(34, 211, 238, 0.18) 45%, rgba(244, 63, 94, 0.08) 65%, transparent 75%);
+  background: radial-gradient(circle, rgba(45, 212, 191, 0.24) 0%, rgba(56, 189, 248, 0.18) 45%, rgba(37, 99, 235, 0.08) 65%, transparent 75%);
   transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1);
   animation: maikOrbAura 3.5s ease-in-out infinite alternate;
 }
 .maik-orb-main:hover {
   transform: scale(1.08);
 }
+/* Halo follows the "ocean" orb palette (teal -> sky -> blue), so it fuses with the orb and the teal brand. */
 @keyframes maikOrbAura {
   0% {
-    background: radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, rgba(34, 211, 238, 0.18) 45%, rgba(244, 63, 94, 0.08) 65%, transparent 75%);
+    background: radial-gradient(circle, rgba(45, 212, 191, 0.25) 0%, rgba(56, 189, 248, 0.18) 45%, rgba(37, 99, 235, 0.08) 65%, transparent 75%);
   }
   50% {
-    background: radial-gradient(circle, rgba(34, 211, 238, 0.25) 0%, rgba(244, 63, 94, 0.20) 45%, rgba(52, 211, 153, 0.10) 65%, transparent 75%);
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(96, 165, 250, 0.20) 45%, rgba(45, 212, 191, 0.10) 65%, transparent 75%);
   }
   100% {
-    background: radial-gradient(circle, rgba(244, 63, 94, 0.25) 0%, rgba(168, 85, 247, 0.18) 45%, rgba(34, 211, 238, 0.10) 65%, transparent 75%);
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.25) 0%, rgba(45, 212, 191, 0.18) 45%, rgba(56, 189, 248, 0.10) 65%, transparent 75%);
   }
 }
 .maik-thinking-orb {
@@ -80,7 +81,7 @@ html body:not(.dark):not(.v3-dark) #maikSheet :is(.maik-logo,.maik-side-logo,.ma
   transition: transform .2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .maik-thinking-orb.active-orb {
-  filter: drop-shadow(0 2px 14px rgba(168, 85, 247, 0.45)) drop-shadow(0 0 8px rgba(34, 211, 238, 0.40));
+  filter: drop-shadow(0 2px 14px rgba(56, 189, 248, 0.40)) drop-shadow(0 0 8px rgba(45, 212, 191, 0.40));
 }
 @media (prefers-reduced-motion: reduce) {
   .maik-orb-main, .maik-thinking-orb { transition: none; animation: none; }
