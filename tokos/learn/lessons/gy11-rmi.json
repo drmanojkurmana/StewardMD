@@ -1,0 +1,243 @@
+{
+  "id": "gy11-rmi",
+  "unit": "gy11",
+  "level": "mbbs",
+  "minutes": 6,
+  "review": "ai_drafted",
+  "title": {
+    "en": "The risk of malignancy index",
+    "hi": "रिस्क ऑफ़ मैलिग्नेंसी इंडेक्स"
+  },
+  "idea": {
+    "en": "[[rmi|RMI I]] multiplies three numbers: ultrasound score, menopausal score and CA-125. A high result sends the woman to a gynaecological oncology team. Use 250 as NICE does, and know the older cut-off of 200.",
+    "hi": "[[rmi|RMI I]] तीन संख्याओं का गुणा है: अल्ट्रासाउंड स्कोर, रजोनिवृत्ति स्कोर और CA-125। ऊँचा नतीजा महिला को गाइनेकोलॉजिकल ऑन्कोलॉजी टीम के पास भेजता है। NICE की तरह 250 इस्तेमाल करें, और पुरानी सीमा 200 भी जानें।"
+  },
+  "see": {
+    "diagram": "diagrams/gy11-rmi.svg",
+    "w": 480,
+    "h": 230,
+    "alt": {
+      "en": "Three boxes joined by cross signs, then an equals sign and a red circle. The blue box holds five dots for ultrasound features. The amber box holds a small and a large circle for menopausal status. The green box holds three rising bars for the CA-125 level. A red tick on the scale below marks the referral threshold.",
+      "hi": "गुणा के चिह्नों से जुड़े तीन डिब्बे, फिर बराबर का चिह्न और एक लाल गोला। नीले डिब्बे में अल्ट्रासाउंड लक्षणों के पाँच बिंदु। पीले डिब्बे में रजोनिवृत्ति स्थिति के लिए एक छोटा और एक बड़ा गोला। हरे डिब्बे में CA-125 स्तर के लिए तीन बढ़ती पट्टियाँ। नीचे पैमाने पर लाल निशान रेफ़रल सीमा दिखाता है।"
+    },
+    "caption": {
+      "en": "RMI I equals U times M times CA-125.",
+      "hi": "RMI I बराबर U गुणा M गुणा CA-125।"
+    },
+    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.129,
+        "y": 0.478,
+        "label": {
+          "en": "U: ultrasound score",
+          "hi": "U: अल्ट्रासाउंड स्कोर"
+        },
+        "note": {
+          "en": "One point for each: multilocular cyst, solid areas, metastases, ascites, bilateral lesions. U is 0 for no feature, 1 for one feature, 3 for two to five.",
+          "hi": "हर एक पर एक अंक: बहुकक्षीय सिस्ट, ठोस हिस्से, मेटास्टेसिस, जलोदर, दोनों ओर के घाव। कोई लक्षण नहीं तो U 0, एक लक्षण पर 1, दो से पाँच पर 3।"
+        }
+      },
+      {
+        "x": 0.388,
+        "y": 0.478,
+        "label": {
+          "en": "M: menopausal status",
+          "hi": "M: रजोनिवृत्ति स्थिति"
+        },
+        "note": {
+          "en": "1 if premenopausal, 3 if postmenopausal. Postmenopausal means no period for more than 1 year, or a woman over 50 who has had a hysterectomy.",
+          "hi": "रजोनिवृत्ति से पहले 1, बाद में 3। बाद का मतलब 1 साल से अधिक माहवारी नहीं, या 50 से ऊपर की वह महिला जिसकी हिस्टेरेक्टॉमी हुई हो।"
+        }
+      },
+      {
+        "x": 0.646,
+        "y": 0.478,
+        "label": {
+          "en": "CA-125",
+          "hi": "CA-125"
+        },
+        "note": {
+          "en": "The serum level in IU/mL, entered as it is.",
+          "hi": "सीरम स्तर IU/mL में, जैसा है वैसा।"
+        }
+      },
+      {
+        "x": 0.883,
+        "y": 0.478,
+        "label": {
+          "en": "Result",
+          "hi": "नतीजा"
+        },
+        "note": {
+          "en": "NICE refers RMI I of 250 or more to a specialist multidisciplinary team. The ICMR consensus refers RMI 1 above 250 to a gynaecological oncologist. Jacobs' original cut-off of 200 had 78% sensitivity and 87% specificity.",
+          "hi": "NICE 250 या अधिक RMI I को विशेषज्ञ बहुविषयक टीम को भेजता है। ICMR सहमति दस्तावेज़ 250 से ऊपर RMI 1 को गाइनेकोलॉजिकल ऑन्कोलॉजिस्ट को भेजता है। जैकब्स की मूल सीमा 200 पर संवेदनशीलता 78% और विशिष्टता 87% थी।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Ultrasound score U: give 1 point for each of multilocular cyst, solid areas, metastases, ascites and bilateral lesions. U = 0 if the score is 0, 1 if it is 1, and 3 if it is 2 to 5.",
+        "hi": "अल्ट्रासाउंड स्कोर U: बहुकक्षीय सिस्ट, ठोस हिस्से, मेटास्टेसिस, जलोदर और दोनों ओर के घावों में हर एक पर 1 अंक। स्कोर 0 हो तो U = 0, 1 हो तो 1, और 2 से 5 हो तो 3।"
+      },
+      {
+        "en": "Menopausal score M: 1 for premenopausal, 3 for postmenopausal.",
+        "hi": "रजोनिवृत्ति स्कोर M: रजोनिवृत्ति से पहले 1, बाद में 3।"
+      },
+      {
+        "en": "RMI I = U x M x CA-125. Example 1: postmenopausal, multilocular and bilateral (U = 3), CA-125 40. RMI = 3 x 3 x 40 = 360. Refer.",
+        "hi": "RMI I = U x M x CA-125। उदाहरण 1: रजोनिवृत्त, बहुकक्षीय और दोनों ओर (U = 3), CA-125 40। RMI = 3 x 3 x 40 = 360। रेफ़र करें।"
+      },
+      {
+        "en": "Example 2: premenopausal, solid area only (U = 1), CA-125 20. RMI = 1 x 1 x 20 = 20. Low.",
+        "hi": "उदाहरण 2: रजोनिवृत्ति से पहले, केवल ठोस हिस्सा (U = 1), CA-125 20। RMI = 1 x 1 x 20 = 20। निम्न।"
+      },
+      {
+        "en": "Threshold: NICE refers 250 or more. ICMR refers above 250 for RMI 1. The original Jacobs cut-off is 200, and the ICMR text notes the best cut-off for practice is still uncertain.",
+        "hi": "सीमा: NICE 250 या अधिक पर रेफ़र करता है। ICMR RMI 1 में 250 से ऊपर रेफ़र करता है। मूल जैकब्स सीमा 200 है, और ICMR पाठ के अनुसार व्यवहार में सबसे अच्छी सीमा अभी अनिश्चित है।"
+      },
+      {
+        "en": "No index is accurate enough on its own. A complex adnexal mass is referred whatever the RMI says.",
+        "hi": "कोई भी सूचकांक अकेले पर्याप्त सटीक नहीं है। जटिल एडनेक्सल गाँठ RMI कुछ भी कहे, रेफ़र होती है।"
+      }
+    ],
+    "analogy": {
+      "en": "RMI is like a school admission score that adds marks from three tests. A very low total is safe, a very high total gets a specialist, and anything unusual is judged by a person, not only the score.",
+      "hi": "RMI तीन परीक्षाओं के अंक जोड़ने वाले स्कूल के दाख़िले के स्कोर जैसा है। बहुत कम कुल अंक सुरक्षित, बहुत अधिक कुल अंक पर विशेषज्ञ, और कुछ भी असामान्य हो तो केवल स्कोर से नहीं, व्यक्ति से तय होता है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "U = 3 whenever two or more features are present, and not more.",
+      "hi": "दो या अधिक लक्षण हों तो हमेशा U = 3, इससे ज़्यादा नहीं।"
+    },
+    {
+      "en": "Menopausal status can change a result from low to high, since M multiplies by 3.",
+      "hi": "रजोनिवृत्ति स्थिति नतीजे को निम्न से उच्च कर सकती है, क्योंकि M से 3 गुना होता है।"
+    },
+    {
+      "en": "RMI needs the ultrasound first. Do not order CA-125 alone as a screening test.",
+      "hi": "RMI के लिए पहले अल्ट्रासाउंड चाहिए। CA-125 को अकेले स्क्रीनिंग जाँच के रूप में न लिखें।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Calculate three RMI values by hand, then check them in the RMI tool from the test link.",
+      "hi": "तीन RMI मान हाथ से निकालें, फिर टेस्ट लिंक के RMI टूल में जाँचें।"
+    },
+    {
+      "en": "Write both thresholds beside the result in your notes: 200 (Jacobs), 250 (NICE, ICMR).",
+      "hi": "अपने नोट्स में नतीजे के पास दोनों सीमाएँ लिखें: 200 (जैकब्स), 250 (NICE, ICMR)।"
+    }
+  ],
+  "remember": {
+    "en": "RMI I = U x M x CA-125. U 0, 1 or 3. M 1 or 3. Refer at 250 or more (NICE), older cut-off 200.",
+    "hi": "RMI I = U x M x CA-125। U 0, 1 या 3। M 1 या 3। 250 या अधिक पर रेफ़र (NICE), पुरानी सीमा 200।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "A postmenopausal woman has a multilocular, bilateral mass and CA-125 of 40 IU/mL. What is the RMI I?",
+        "hi": "रजोनिवृत्त महिला में बहुकक्षीय, दोनों ओर की गाँठ और CA-125 40 IU/mL है। RMI I क्या है?"
+      },
+      "o": [
+        {
+          "en": "40",
+          "hi": "40"
+        },
+        {
+          "en": "120",
+          "hi": "120"
+        },
+        {
+          "en": "360",
+          "hi": "360"
+        },
+        {
+          "en": "13",
+          "hi": "13"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "Two features give U = 3, postmenopausal gives M = 3, so 3 x 3 x 40 = 360.",
+        "hi": "दो लक्षण से U = 3, रजोनिवृत्त से M = 3, इसलिए 3 x 3 x 40 = 360।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which item is NOT part of the ultrasound score U?",
+        "hi": "अल्ट्रासाउंड स्कोर U का हिस्सा कौन सा नहीं है?"
+      },
+      "o": [
+        {
+          "en": "Ascites",
+          "hi": "जलोदर"
+        },
+        {
+          "en": "Bilateral lesions",
+          "hi": "दोनों ओर के घाव"
+        },
+        {
+          "en": "Menopausal status",
+          "hi": "रजोनिवृत्ति स्थिति"
+        },
+        {
+          "en": "Solid areas",
+          "hi": "ठोस हिस्से"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "Menopausal status is the separate M multiplier.",
+        "hi": "रजोनिवृत्ति स्थिति अलग M गुणक है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which RMI I result does NICE refer to a specialist team?",
+        "hi": "NICE किस RMI I नतीजे को विशेषज्ञ टीम को भेजता है?"
+      },
+      "o": [
+        {
+          "en": "50",
+          "hi": "50"
+        },
+        {
+          "en": "120",
+          "hi": "120"
+        },
+        {
+          "en": "250 or more",
+          "hi": "250 या अधिक"
+        },
+        {
+          "en": "Any result",
+          "hi": "कोई भी नतीजा"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "NICE refers RMI I of 250 or greater.",
+        "hi": "NICE 250 या उससे अधिक RMI I को रेफ़र करता है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "gy-benign",
+    "tool": "rmi",
+    "explorer": "ovarian-triage"
+  },
+  "glossary": [
+    "rmi"
+  ],
+  "sources": [
+    "National Institute for Health and Care Excellence. Ovarian cancer: recognition and initial management. NICE guideline CG122 (recommendations 1.2.1 and 1.2.2, and the appendix on the risk of malignancy index I).",
+    "Indian Council of Medical Research. Consensus Document for Management of Epithelial Ovarian Cancer. New Delhi: ICMR (icmr.gov.in)."
+  ],
+  "competencies": [
+    "OG34.2"
+  ]
+}
