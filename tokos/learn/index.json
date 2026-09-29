@@ -35,7 +35,8 @@
     "ob2-visit-monitoring",
     "ob2-danger-signs",
     "ob2-maternal-perinatal-stats",
-    "ob2-case-record-plan"
+    "ob2-case-record-plan",
+    "ob2-national-programmes"
    ]
   },
   {
@@ -123,7 +124,11 @@
     "ob7-thyroid",
     "ob7-hiv",
     "ob7-hepb",
-    "ob7-syphilis"
+    "ob7-syphilis",
+    "ob7-preexisting",
+    "ob7-uti",
+    "ob7-surgical",
+    "ob7-precautions"
    ]
   },
   {
@@ -189,7 +194,9 @@
     "ob11-ectopic-dx",
     "ob11-ectopic-manage",
     "ob11-molar",
-    "ob11-hyperemesis"
+    "ob11-hyperemesis",
+    "ob11-rpl",
+    "ob11-gtn"
    ]
   },
   {
@@ -288,7 +295,8 @@
     "gy5-fibroid-treat",
     "gy5-endometriosis",
     "gy5-endo-care",
-    "gy5-adenomyosis"
+    "gy5-adenomyosis",
+    "gy5-hysterectomy"
    ]
   },
   {
@@ -336,7 +344,10 @@
     "gy8-iucd",
     "gy8-pills-injection",
     "gy8-emergency",
-    "gy8-sterilisation-programme"
+    "gy8-sterilisation-programme",
+    "gy8-tubal-minilap",
+    "gy8-lap-sterilisation",
+    "gy8-iucd-technique"
    ]
   },
   {
@@ -900,6 +911,23 @@
    },
    "see": {
     "diagram": "diagrams/ob2-case-record-plan.svg"
+   },
+   "test": {
+    "mcqTopic": "ob-antenatal"
+   }
+  },
+  "ob2-national-programmes": {
+   "title": {
+    "en": "National programmes: JSY, JSSK, SUMAN, Anaemia Mukt Bharat and registration",
+    "hi": "राष्ट्रीय कार्यक्रम: JSY, JSSK, SUMAN, एनीमिया मुक्त भारत और पंजीकरण"
+   },
+   "minutes": 6,
+   "idea": {
+    "en": "[[jsy]] pays for institutional delivery, [[jssk]] makes the care free, [[suman]] guarantees respectful care with no denial, and [[amb]] fights anaemia. Every birth and death is registered within 21 days.",
+    "hi": "[[jsy]] संस्थागत प्रसव के लिए नकद सहायता देती है, [[jssk]] देखभाल मुफ़्त बनाती है, [[suman]] बिना इनकार के सम्मानजनक देखभाल की गारंटी देती है, और [[amb]] एनीमिया से लड़ती है। हर जन्म और मृत्यु का 21 दिन में पंजीकरण होता है।"
+   },
+   "see": {
+    "diagram": "diagrams/ob2-national-programmes.svg"
    },
    "test": {
     "mcqTopic": "ob-antenatal"
@@ -1570,6 +1598,74 @@
     "mcqTopic": "ob-medical"
    }
   },
+  "ob7-preexisting": {
+   "title": {
+    "en": "Pre-existing disease: plan the pregnancy, review the drugs",
+    "hi": "पहले से मौजूद रोग: गर्भावस्था की योजना बनाएँ, दवाएँ जाँचें"
+   },
+   "minutes": 6,
+   "idea": {
+    "en": "Diabetes, chronic hypertension, [[valproate]] for epilepsy and other long-term conditions are managed best before conception: control the disease, change unsafe drugs and start the right folic acid.",
+    "hi": "मधुमेह, दीर्घकालिक उच्च रक्तचाप, मिर्गी के लिए [[valproate]] और अन्य दीर्घकालिक रोगों का प्रबंधन गर्भधारण से पहले सबसे अच्छा होता है: रोग नियंत्रित करें, असुरक्षित दवाएँ बदलें और सही फ़ोलिक एसिड शुरू करें।"
+   },
+   "see": {
+    "diagram": "diagrams/ob7-preexisting.svg"
+   },
+   "test": {
+    "mcqTopic": "ob-medical"
+   }
+  },
+  "ob7-uti": {
+   "title": {
+    "en": "Urinary infection in pregnancy: screen, treat, admit pyelonephritis",
+    "hi": "गर्भावस्था में मूत्र संक्रमण: जाँच, इलाज, पायलोनेफ़्राइटिस में भर्ती"
+   },
+   "minutes": 6,
+   "idea": {
+    "en": "Screen every pregnant woman for [[asymptomatic-bacteriuria]] with a urine culture and treat it, because untreated it can become [[pyelonephritis]], a common reason for admission in pregnancy.",
+    "hi": "हर गर्भवती महिला की [[asymptomatic-bacteriuria]] के लिए मूत्र कल्चर से जाँच करें और इलाज करें, क्योंकि इलाज न हो तो यह [[pyelonephritis]] बन सकता है, जो गर्भावस्था में भर्ती का आम कारण है।"
+   },
+   "see": {
+    "diagram": "diagrams/ob7-uti.svg"
+   },
+   "test": {
+    "mcqTopic": "ob-medical"
+   }
+  },
+  "ob7-surgical": {
+   "title": {
+    "en": "Surgical emergencies in pregnancy: do not delay the operation",
+    "hi": "गर्भावस्था में शल्य आपात: ऑपरेशन में देरी न करें"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "A pregnant woman must never be denied or delayed medically necessary surgery. [[appendicitis]] and gallstone disease are treated by operation, and the obstetric team is consulted.",
+    "hi": "गर्भवती महिला को चिकित्सकीय रूप से ज़रूरी ऑपरेशन से कभी मना या विलंबित नहीं करना चाहिए। [[appendicitis]] और पित्ताशय की पथरी का इलाज ऑपरेशन से होता है, और प्रसूति टीम से परामर्श लिया जाता है।"
+   },
+   "see": {
+    "diagram": "diagrams/ob7-surgical.svg"
+   },
+   "test": {
+    "mcqTopic": "ob-medical"
+   }
+  },
+  "ob7-precautions": {
+   "title": {
+    "en": "Standard precautions against HIV and hepatitis, and how to counsel",
+    "hi": "HIV और हेपेटाइटिस से बचाव की मानक सावधानियाँ और परामर्श"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Treat every patient as possibly infected: use [[standard-precautions]] every time, and counsel the woman that a device like an IUCD does not protect against HIV.",
+    "hi": "हर मरीज़ को संभावित संक्रमित मानें: हर बार [[standard-precautions]] अपनाएँ, और महिला को बताएँ कि IUCD जैसा साधन HIV से बचाव नहीं करता।"
+   },
+   "see": {
+    "diagram": "diagrams/ob7-precautions.svg"
+   },
+   "test": {
+    "mcqTopic": "ob-medical"
+   }
+  },
   "ob8-preterm-what": {
    "title": {
     "en": "Preterm labour: who is at risk and how to check the cervix",
@@ -2015,6 +2111,40 @@
    },
    "see": {
     "diagram": "diagrams/ob11-hyperemesis.svg"
+   },
+   "test": {
+    "mcqTopic": "ob-early"
+   }
+  },
+  "ob11-rpl": {
+   "title": {
+    "en": "Recurrent pregnancy loss: define it, look for the treatable causes",
+    "hi": "बार-बार गर्भपात: परिभाषा और इलाज योग्य कारणों की खोज"
+   },
+   "minutes": 6,
+   "idea": {
+    "en": "[[rpl]] is the loss of two or more pregnancies. Look for [[aps]], which is treatable, and give steady supportive care.",
+    "hi": "[[rpl]] का मतलब है दो या अधिक गर्भावस्थाओं का नष्ट होना। [[aps]] खोजें, जो इलाज योग्य है, और लगातार सहयोगी देखभाल दें।"
+   },
+   "see": {
+    "diagram": "diagrams/ob11-rpl.svg"
+   },
+   "test": {
+    "mcqTopic": "ob-early"
+   }
+  },
+  "ob11-gtn": {
+   "title": {
+    "en": "Gestational trophoblastic disease: classify, stage and score",
+    "hi": "गर्भावस्थाजन्य ट्रोफ़ोब्लास्टिक रोग: वर्गीकरण, स्टेजिंग और स्कोर"
+   },
+   "minutes": 6,
+   "idea": {
+    "en": "GTD covers moles and the malignant tumours: invasive mole, [[choriocarcinoma]] and rare placental-site tumours. GTN is staged by FIGO anatomy (I to IV) and risk-scored by the [[who-score]].",
+    "hi": "GTD में मोल और घातक ट्यूमर आते हैं: इन्वेसिव मोल, [[choriocarcinoma]] और दुर्लभ प्लेसेंटल-साइट ट्यूमर। GTN को FIGO शारीरिक स्थिति (I से IV) से स्टेज किया जाता है और [[who-score]] से जोखिम-अंक दिए जाते हैं।"
+   },
+   "see": {
+    "diagram": "diagrams/ob11-gtn.svg"
    },
    "test": {
     "mcqTopic": "ob-early"
@@ -2716,6 +2846,23 @@
     "mcqTopic": "gy-benign"
    }
   },
+  "gy5-hysterectomy": {
+   "title": {
+    "en": "Hysterectomy for benign disease: choosing the route",
+    "hi": "सौम्य रोग में हिस्टेरेक्टॉमी: रास्ता चुनना"
+   },
+   "minutes": 5,
+   "idea": {
+    "en": "Before you observe or assist at a hysterectomy, know the three routes and why the vaginal route is chosen first when feasible. Laparoscopic is the next choice, and open abdominal remains for some women.",
+    "hi": "हिस्टेरेक्टॉमी देखने या उसमें सहायता से पहले तीन रास्ते और यह जानें कि संभव हो तो योनि मार्ग पहले क्यों चुना जाता है। अगला विकल्प लैप्रोस्कोपिक है, और कुछ महिलाओं के लिए खुला पेट का ऑपरेशन बना रहता है।"
+   },
+   "see": {
+    "diagram": "diagrams/gy5-hysterectomy.svg"
+   },
+   "test": {
+    "mcqTopic": "gy-benign"
+   }
+  },
   "gy6-floor": {
    "title": {
     "en": "What holds the pelvic organs up",
@@ -3019,6 +3166,57 @@
    },
    "see": {
     "diagram": "diagrams/gy8-sterilisation.svg"
+   },
+   "test": {
+    "mcqTopic": "gy-contraception"
+   }
+  },
+  "gy8-tubal-minilap": {
+   "title": {
+    "en": "Tubal ligation by minilaparotomy: consent, timing and the steps you assist",
+    "hi": "मिनीलैप से नलबंदी: सहमति, समय और वे चरण जिनमें आप सहायता करते हैं"
+   },
+   "minutes": 6,
+   "idea": {
+    "en": "For an observed or assisted [[minilap]] tubal ligation, know the consent rules, the timing window, the site of occlusion and the recovery checks. The technique is the modified Pomeroy.",
+    "hi": "देखे या सहायता किए जा रहे [[minilap]] नलबंदी में सहमति के नियम, समय की खिड़की, अवरोध का स्थान और रिकवरी की जाँचें जानें। तकनीक modified Pomeroy है।"
+   },
+   "see": {
+    "diagram": "diagrams/gy8-tubal-minilap.svg"
+   },
+   "test": {
+    "mcqTopic": "gy-contraception"
+   }
+  },
+  "gy8-lap-sterilisation": {
+   "title": {
+    "en": "Laparoscopic sterilisation: rings, pressure and safety limits",
+    "hi": "लैप्रोस्कोपिक नलबंदी: रिंग, दबाव और सुरक्षा सीमाएँ"
+   },
+   "minutes": 6,
+   "idea": {
+    "en": "Laparoscopic tubal ligation uses [[falope-ring]] occlusion, CO2 pneumoperitoneum below 15 mmHg and a head-down tilt of no more than 15 degrees. It is not done with a second-trimester abortion or in the postpartum period.",
+    "hi": "लैप्रोस्कोपिक नलबंदी में [[falope-ring]] से अवरोध, 15 mmHg से कम CO2 दबाव और 15 डिग्री से अधिक सिर-नीचे झुकाव नहीं होता। यह दूसरी तिमाही के गर्भपात के साथ या प्रसवोत्तर काल में नहीं की जाती।"
+   },
+   "see": {
+    "diagram": "diagrams/gy8-lap-sterilisation.svg"
+   },
+   "test": {
+    "mcqTopic": "gy-contraception"
+   }
+  },
+  "gy8-iucd-technique": {
+   "title": {
+    "en": "Inserting and removing a Cu-T 380A: the no-touch steps",
+    "hi": "Cu-T 380A डालना और निकालना: नो-टच चरण"
+   },
+   "minutes": 7,
+   "idea": {
+    "en": "Insert the Cu-T 380A with a no-touch technique: cleanse, hold the cervix with a [[volsellum]], sound the uterus once with a [[uterine-sound]], load, release by withdrawal, cut the strings at 3 to 4 cm. Practise on a model first.",
+    "hi": "Cu-T 380A नो-टच तकनीक से डालें: सफ़ाई करें, [[volsellum]] से गर्भाशय ग्रीवा पकड़ें, [[uterine-sound]] से गर्भाशय एक बार नापें, लोड करें, विदड्रॉल से छोड़ें, धागे 3 से 4 cm पर काटें। पहले मॉडल पर अभ्यास करें।"
+   },
+   "see": {
+    "diagram": "diagrams/gy8-iucd-technique.svg"
    },
    "test": {
     "mcqTopic": "gy-contraception"
