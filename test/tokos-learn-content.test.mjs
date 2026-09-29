@@ -5,17 +5,17 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { build, unitKey, LICENCES } from "../tools/tokos-learn-index.mjs";
+import { build, unitKey, LICENCES, coverage, coverageMd } from "../tools/tokos-learn-index.mjs";
 
 const FX = fileURLToPath(new URL("./fixtures/specialty-fixture/learn/", import.meta.url));
 const LEARN = fileURLToPath(new URL("../tokos/learn/", import.meta.url));
 
-test("units run in syllabus order: Obstetrics MBBS, Obstetrics Resident, Gynaecology MBBS, Gynaecology Resident", () => {
+test("units run in syllabus order, MBBS before Resident: Obstetrics MBBS, Gynaecology MBBS, Obstetrics Resident, Gynaecology Resident", () => {
   const ids = ["gyr1", "gy2", "ob10", "obr1", "ob2", "gy10", "zz"];
-  assert.deepEqual(ids.sort((a, b) => { const x = unitKey(a), y = unitKey(b); return x[0] - y[0] || x[1] - y[1]; }), ["ob2", "ob10", "obr1", "gy2", "gy10", "gyr1", "zz"]);
+  assert.deepEqual(ids.sort((a, b) => { const x = unitKey(a), y = unitKey(b); return x[0] - y[0] || x[1] - y[1]; }), ["ob2", "ob10", "gy2", "gy10", "obr1", "gyr1", "zz"]);
 });
 
-test("builder on the fixture: units, lesson summaries, a unioned glossary (first definition wins) and one media list", () => {
+test("builder on the fixture: units, lesson summaries, a unioned glossary (a collision keeps the fuller definition) and one media list", () => {
   const r = build(FX);
   assert.deepEqual(r.errors, []);
   assert.deepEqual(r.index.units.map((u) => u.id), ["fx1", "fxr1"]);
@@ -41,4 +41,8 @@ test("the real tokos/learn, when present, is valid and its built files are in st
   assert.deepEqual(read("glossary.json"), JSON.parse(JSON.stringify(r.glossary)));
   if (existsSync(LEARN + "media")) assert.deepEqual(read("media/credits.json"), JSON.parse(JSON.stringify(r.credits)));
   assert.ok(!/—/.test(JSON.stringify([r.index, r.glossary])), "no em-dash");
+  const root = fileURLToPath(new URL("../", import.meta.url)), cov = coverage(root, r.competencies);
+  assert.ok(cov.total === 142 && cov.covered >= cov.byLesson && cov.covered <= cov.total);
+  assert.equal(readFileSync(root + "docs/tokos/competency-coverage.md", "utf8"), coverageMd(cov), "run node tools/tokos-learn-index.mjs");
+  for (const m of r.credits.items) assert.ok(existsSync(LEARN + "media/" + m.file), m.id + " resolves against media/");
 });

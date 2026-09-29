@@ -1,8 +1,11 @@
 // Builds the Learn files the app reads from the content agents' unit files (authoring only; never shipped):
 //   <dir>/units/<unitId>.json  -> <dir>/index.json      {v: 1, review, units: [{id, title, level, lessons}], lessons: {id: summary}}
-//   unit glossaries            -> <dir>/glossary.json   {v: 1, review, terms} (first definition wins, in unit order)
-//   media/credits-<unitId>.json -> <dir>/media/credits.json {v: 1, items} (one entry per media id)
-// Units run in syllabus order: ob1..ob12, obr1..obr8, gy1..gy12, gyr1..gyr8, then any other id alphabetically.
+//   unit glossaries            -> <dir>/glossary.json   {v: 1, review, terms} (a term two units define keeps the fuller
+//                                 definition; every such collision is listed in the build output)
+//   media/credits-<unitId>.json + ../explorer/credits.json -> <dir>/media/credits.json {v: 1, items} (one entry per media id;
+//                                 file paths resolve against media/: "diagrams/x.svg" becomes "../diagrams/x.svg")
+//   lesson competencies + competency-map.json + the OSCE pack -> docs/tokos/competency-coverage.md (see coverage())
+// Units run in syllabus order, MBBS before Resident: ob1..ob12, gy1..gy12, obr1..obr8, gyr1..gyr8, then any other id.
 // Every lesson must validate (specialty-data.js validateLesson) and every media file must exist with a permitted licence.
 // Usage: node tools/tokos-learn-index.mjs [learnDir]   (default tokos/learn). Exit 1 on any error; nothing is written then.
 import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
@@ -12,7 +15,7 @@ import { createRequire } from "node:module";
 
 const D = createRequire(import.meta.url)("../specialty-data.js");
 export const LICENCES = /^(CC0|CC BY \d\.\d|CC BY-SA \d\.\d|ODC-BY 1\.0|Public domain|Original, MAIKNOWLEDGE LLP)$/;
-const ORDER = ["ob", "obr", "gy", "gyr"];
+const ORDER = ["ob", "gy", "obr", "gyr"];
 
 export function unitKey(id) {
   const m = /^([a-z]+)(\d+)$/.exec(id), g = m ? ORDER.indexOf(m[1]) : -1;
@@ -22,7 +25,9 @@ function cmp(a, b) { const x = unitKey(a), y = unitKey(b); return x[0] - y[0] ||
 // What a list needs before the lesson loads (the same summary Ophthalmós's learn index writes, plus test targets).
 export function summary(l) {
   const out = { title: l.title, minutes: l.minutes, idea: l.idea, see: l.see.img ? { img: l.see.img } : { diagram: l.see.diagram } };
-  if (l.test && (l.test.clinic || l.test.mcqTopic || l.test.sim || l.test.tool)) out.test = Object.fromEntries(["clinic", "classes", "mcqTopic", "sim", "tool"].filter((k) => l.test[k] != null).map((k) => [k, l.test[k]]));
+  const TK = ["clinic", "classes", "mcqTopic", "sim", "tool", "explorer"];
+  if (l.test && TK.some((k) => k !== "classes" && l.test[k])) out.test = Object.fromEntries(TK.filter((k) => l.test[k] != null).map((k) => [k, l.test[k]]));
+  if (l.review && l.review.verify) out.verify = l.review.verify.length;
   return out;
 }
 const readJSON = (p) => JSON.parse(readFileSync(p, "utf8"));
@@ -30,15 +35,25 @@ const readJSON = (p) => JSON.parse(readFileSync(p, "utf8"));
 export function build(dir) {
   const errors = [], unitsDir = join(dir, "units"), mediaDir = join(dir, "media");
   const ids = existsSync(unitsDir) ? readdirSync(unitsDir).filter((f) => f.endsWith(".json")).map((f) => f.slice(0, -5)).sort(cmp) : [];
-  const terms = {}, items = {}, lessons = {}, units = [];
+  const terms = {}, from = {}, collisions = [], items = {}, lessons = {}, units = [], comp = {};
+  const size = (v) => JSON.stringify(v.def || "").length;
   for (const id of ids) {
     const u = readJSON(join(unitsDir, id + ".json"));
     if (u.id !== id) errors.push(`units/${id}.json: id ${u.id} does not match the file name`);
-    for (const [k, v] of Object.entries(u.glossary || {})) if (!terms[k]) terms[k] = v;
+    for (const [k, v] of Object.entries(u.glossary || {})) {
+      if (!terms[k]) { terms[k] = v; from[k] = id; continue; }
+      if (JSON.stringify(terms[k]) === JSON.stringify(v)) continue;
+      const keep = size(v) > size(terms[k]) ? id : from[k];
+      collisions.push({ id: k, units: [from[k], id], kept: keep });
+      if (keep === id) { terms[k] = v; from[k] = id; }
+    }
     units.push({ id, title: u.title, level: u.level, lessons: u.lessons || [] });
   }
-  const cf = existsSync(mediaDir) ? readdirSync(mediaDir).filter((f) => /^credits-[a-z0-9-]+\.json$/.test(f)).sort() : [];
-  for (const f of cf) for (const m of readJSON(join(mediaDir, f)).items || []) {
+  const cf = existsSync(mediaDir) ? readdirSync(mediaDir).filter((f) => /^credits-[a-z0-9-]+\.json$/.test(f)).sort().map((f) => [join(mediaDir, f), ""]) : [];
+  const ex = join(dir, "..", "explorer", "credits.json");
+  if (existsSync(ex)) cf.push([ex, "../../explorer/"]);
+  for (const [f, pre] of cf) for (const m0 of readJSON(f).items || []) {
+    const m = { ...m0, file: pre + (/^diagrams\//.test(m0.file || "") ? "../" : "") + (m0.file || "") };
     if (items[m.id] && JSON.stringify(items[m.id]) !== JSON.stringify(m)) errors.push(`media ${m.id}: two different entries (${f})`);
     items[m.id] = m;
     if (!LICENCES.test(m.licence || "")) errors.push(`media ${m.id}: licence "${m.licence}" is not permitted`);
@@ -53,10 +68,38 @@ export function build(dir) {
     if (l.see && l.see.diagram && !existsSync(join(dir, l.see.diagram))) e.push(`${l.see.diagram} missing`);
     if (e.length) errors.push(`${lid}: ${e.join("; ")}`);
     else lessons[lid] = summary(l);
+    for (const c of l.competencies || []) (comp[c] = comp[c] || []).push(lid);
   }
   const index = { v: 1, review: "ai_drafted", units, lessons };
   errors.push(...D.validateIndex(index).map((x) => "index: " + x));
-  return { index, glossary: { v: 1, review: "ai_drafted", terms }, credits: { v: 1, items: Object.values(items) }, errors };
+  return { index, glossary: { v: 1, review: "ai_drafted", terms }, credits: { v: 1, items: Object.values(items) }, collisions, competencies: comp, errors };
+}
+
+// NMC OG competencies taught somewhere: a lesson listing the code in `competencies`, a shipped tool/drill/explorer/clinic the
+// competency map names (items "tool:edd", "clinic:ctg" ...), or an O&G OSCE station tagged with the code. Unit-level map
+// entries alone do not count (a unit named in the map may not have the lesson yet).
+export function coverage(root, lessonComp) {
+  const J = (p) => readJSON(join(root, p));
+  const all = J("tokos/learn/competencies.json").items.map((x) => x.code), map = J("tokos/learn/competency-map.json").map;
+  const osce = {};
+  const pack = join(root, "clinix/systems/obgyn.json");
+  if (existsSync(pack)) for (const c of readFileSync(pack, "utf8").match(/"OG\d+\.\d+"/g) || []) osce[c.slice(1, -1)] = 1;
+  const shipped = (it) => { const [k, id] = it.split(":"); return k === "clinic" ? existsSync(join(root, "tokos/decks", id + ".json")) : existsSync(join(root, "tokos-models", k + "-" + id + ".js")); };
+  const rows = all.map((code) => {
+    const m = map[code] || {}, les = lessonComp[code] || [], items = (m.items || []).filter(shipped), os = osce[code] ? ["OSCE"] : [];
+    return { code, lessons: les, items, osce: !!osce[code], units: m.units || [], covered: !!(les.length || items.length || os.length) };
+  });
+  return { total: all.length, covered: rows.filter((r) => r.covered).length, byLesson: rows.filter((r) => r.lessons.length).length, rows };
+}
+export function coverageMd(c) {
+  const pct = (n) => (100 * n / c.total).toFixed(1);
+  const gaps = c.rows.filter((r) => !r.covered);
+  return `# Tokós: NMC CBME 2024 OG competency coverage\n\nGenerated by tools/tokos-learn-index.mjs; do not edit by hand. review: ai_drafted (the mapping is AI-drafted and goes to the clinical reviewer).\n\n` +
+    `A competency counts as taught when a lesson lists it in \`competencies\`, a shipped tool, drill, explorer or clinic is mapped to it in tokos/learn/competency-map.json, or an O&G OSCE station (clinix/systems/obgyn.json) is tagged with it.\n\n` +
+    `- Taught: ${c.covered} of ${c.total} (${pct(c.covered)}%)\n- By at least one lesson: ${c.byLesson} of ${c.total} (${pct(c.byLesson)}%)\n- Not taught yet: ${gaps.length}\n\n` +
+    `## Not taught yet\n\n| Code | Units named in the map |\n|---|---|\n` + gaps.map((r) => `| ${r.code} | ${r.units.join(", ") || "none"} |`).join("\n") +
+    `\n\n## All competencies\n\n| Code | Lessons | Tools, drills, explorers, clinics | OSCE |\n|---|---|---|---|\n` +
+    c.rows.map((r) => `| ${r.code} | ${r.lessons.join(", ")} | ${r.items.join(", ")} | ${r.osce ? "yes" : ""} |`).join("\n") + "\n";
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
@@ -66,5 +109,8 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const out = (p, o) => writeFileSync(join(dir, p), JSON.stringify(o, null, 1) + "\n");
   out("index.json", r.index); out("glossary.json", r.glossary);
   if (existsSync(join(dir, "media"))) out("media/credits.json", r.credits);
-  console.log(`index.json: ${r.index.units.length} units, ${Object.keys(r.index.lessons).length} lessons; ${Object.keys(r.glossary.terms).length} terms; ${r.credits.items.length} media`);
+  const root = join(dir, "..", ".."), cov = coverage(root, r.competencies);
+  if (existsSync(join(root, "docs"))) writeFileSync(join(root, "docs/tokos/competency-coverage.md"), coverageMd(cov));
+  for (const c of r.collisions) console.log(`glossary ${c.id}: defined in ${c.units.join(" and ")}, kept ${c.kept}`);
+  console.log(`index.json: ${r.index.units.length} units, ${Object.keys(r.index.lessons).length} lessons; ${Object.keys(r.glossary.terms).length} terms; ${r.credits.items.length} media; competencies ${cov.covered}/${cov.total} (${(100 * cov.covered / cov.total).toFixed(1)}%), by lesson ${cov.byLesson}`);
 }
