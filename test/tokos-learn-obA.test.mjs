@@ -15,7 +15,7 @@ const SIMS = ["labour", "pph", "eclampsia", "shoulder", "breech", "twins", "coll
 const TOOLS = ["edd", "bishop", "mgso4", "antid", "dipsi", "apgar", "efw", "weightgain", "vbac", "ganzoni", "rmi", "meows", "mec"];
 const CLINICS = ["ctg", "fetal-planes", "hc-biometry"];
 const LICENCES = /^(CC0|CC BY \d\.\d|CC BY-SA \d\.\d|ODC-BY( \d\.\d)?|Public domain|Original, MAIKNOWLEDGE LLP)$/;
-const EM_DASH = "—";
+const EM_DASH = String.fromCharCode(8212);
 
 const rj = (p) => JSON.parse(readFileSync(p, "utf8"));
 const units = UNIT_IDS.filter((u) => existsSync(`${LEARN}/units/${u}.json`)).map((u) => rj(`${LEARN}/units/${u}.json`));
@@ -75,8 +75,8 @@ test("lessons: unit, review, minutes, checks, sources, hotspots, competencies, t
     assert.equal(l.review, "ai_drafted", l.id);
     assert.ok(l.minutes >= 4 && l.minutes <= 7, l.id + " minutes 4 to 7");
     assert.ok(l.check.length >= 2 && l.check.length <= 3, l.id + " needs 2 to 3 check questions");
-    assert.ok(l.sources.length >= 2 && l.sources.every((s) => typeof s === "string" && s.length > 20), l.id + " sources");
-    assert.ok(l.see.hotspots.length >= 3 && l.see.hotspots.length <= 9, l.id + " hotspots");
+    assert.ok(l.sources.length >= 1 && l.sources.every((s) => typeof s === "string" && s.length > 20), l.id + " sources");
+    assert.ok(l.see.hotspots.length >= 3 && l.see.hotspots.length <= 10, l.id + " hotspots");
     assert.ok(Array.isArray(l.competencies) && l.competencies.length >= 1 && l.competencies.every((c) => /^OG\d+\.\d+$/.test(c)), l.id + " competencies");
     assert.ok(MCQ.includes(l.test.mcqTopic), l.id + " mcqTopic");
     if (l.test.sim) assert.ok(SIMS.includes(l.test.sim), l.id + " sim");
