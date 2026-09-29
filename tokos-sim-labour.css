@@ -1,0 +1,91 @@
+/* Tokós labour room simulator (tokos-sim-labour.js). Scoped under .tok-root; colours come from tokos.css tokens,
+   so the monitor (dark) and paper (light) themes both apply. FIGO class colours match the CTG clinic verdicts:
+   normal = --tk-ok, suspicious = --tk-warn, pathological = --tk-bad. Shape and colour are never the only signal:
+   the class is also written in words beside the chart and in the chart's label. */
+.tok-root .lb-i { display: inline-flex; flex: 0 0 auto; }
+.tok-root .lb-i .smd-ico { width: 16px; height: 16px; }
+.tok-root .lb-sr { position: absolute !important; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* picker */
+.tok-root .lb-lede { font-size: 17px; line-height: 1.5; margin: 8px 0 0; max-width: 60ch; }
+.tok-root .lb-scn .sp-row-b > span:not(.sp-small) { -webkit-line-clamp: unset; display: block; line-height: 1.45; }
+.tok-root .lb-scn .sp-row-b .sp-small .sp-pro { margin-left: 0; }
+.tok-root .lb-how { margin: 16px 0 0; line-height: 1.5; max-width: 62ch; }
+
+/* status line: elapsed time and stage on the left, the CTG class on the right */
+.tok-root .lb-run .sp-col { padding-bottom: 8px; }
+.tok-root .lb-status { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin: 4px 0 10px; }
+.tok-root .lb-clock span, .tok-root .lb-stage span { display: block; font-size: 13px; color: var(--tk-mut); }
+.tok-root .lb-clock b { display: block; font-size: 26px; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1.15; }
+.tok-root .lb-stage { text-align: right; }
+.tok-root .lb-fig { display: inline-block; margin-top: 3px; padding: 4px 10px; border-radius: 999px; font-size: 14px; font-weight: 700;
+  background: color-mix(in srgb, currentColor 14%, transparent); transition: color 200ms ease, background-color 200ms ease; }
+.tok-root .lb-fig.normal { color: var(--tk-ok); }
+.tok-root .lb-fig.suspicious { color: var(--tk-warn); }
+.tok-root .lb-fig.pathological { color: var(--tk-bad); }
+.tok-root .lb-delay { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; font-size: 14px; font-weight: 600; color: var(--tk-warn); }
+
+/* chart: the chart paper (trace background), hairline grid, cervix in the accent, head in text colour */
+.tok-root .lb-chart { margin: 0; background: var(--tk-trace-bg); border-radius: 14px; box-shadow: inset 0 0 0 1px var(--tk-line); padding: 8px 6px 6px; }
+.tok-root .lb-chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.tok-root .lb-grid { stroke: var(--tk-grid); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.tok-root .lb-grid-k { stroke: var(--tk-grid-major); }
+.tok-root .lb-grid-v { stroke-dasharray: 2 3; }
+.tok-root .lb-ax { font-size: 9px; fill: var(--tk-axis); font-variant-numeric: tabular-nums; }
+.tok-root .lb-dil { fill: none; stroke: var(--tk-acc); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.tok-root .lb-dil-dot { fill: var(--tk-acc); }
+.tok-root .lb-st { fill: none; stroke: var(--tk-text); stroke-width: 2; stroke-dasharray: 5 3; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.tok-root .lb-st-dot { fill: var(--tk-trace-bg); stroke: var(--tk-text); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.tok-root .lb-uc { fill: var(--tk-uc); }
+.tok-root .lb-uc.over { fill: var(--tk-bad); stroke: var(--tk-text); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.tok-root .lb-f.normal { fill: var(--tk-ok); }
+.tok-root .lb-f.suspicious { fill: var(--tk-warn); }
+.tok-root .lb-f.pathological { fill: var(--tk-bad); }
+.tok-root .lb-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; padding: 6px 4px 0; font-size: 12px; color: var(--tk-mut); }
+.tok-root .lb-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.tok-root .lb-legend .lb-hrs { margin-left: auto; }
+.tok-root .lb-k { display: inline-block; width: 16px; height: 0; border-top: 2.5px solid var(--tk-acc); }
+.tok-root .lb-k.st { border-top: 2px dashed var(--tk-text); }
+.tok-root .lb-k.uc { width: 8px; height: 10px; border: 0; background: var(--tk-uc); border-radius: 1px; }
+.tok-root .lb-k.f { width: 16px; height: 8px; border: 0; border-radius: 2px; background: linear-gradient(90deg, var(--tk-ok) 0 33%, var(--tk-warn) 33% 66%, var(--tk-bad) 66%); }
+.tok-root .lb-link { display: inline-flex; align-items: center; min-height: 44px; margin: 2px 0 0; padding: 0 2px; border: 0; background: none;
+  color: var(--sp-link); font-size: 15px; font-weight: 600; text-decoration: underline; text-decoration-color: var(--sp-link-line); text-underline-offset: 3px; }
+
+/* observations: warn and bad cells carry their colour on the value only */
+.tok-root .lb-vitals { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.tok-root .lb-vitals dd { font-size: 16px; overflow-wrap: anywhere; }
+.tok-root .lb-vitals .lb-warn dd { color: var(--tk-warn); }
+.tok-root .lb-vitals .lb-bad dd { color: var(--tk-bad); }
+
+/* what happened: newest first; this step's events in full colour */
+.tok-root .lb-feed { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.tok-root .lb-feed li { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); gap: 10px; font-size: 14px; line-height: 1.45; color: var(--tk-mut); }
+.tok-root .lb-feed li.new { color: var(--tk-text); font-weight: 600; }
+.tok-root .lb-feed time { font-variant-numeric: tabular-nums; color: var(--tk-mut); font-weight: 500; }
+
+/* actions: two columns, 52 px targets; delivery decisions sit last, full width */
+.tok-root .lb-acts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.tok-root .lb-act { padding: 0 12px; font-size: 15px; line-height: 1.2; }
+.tok-root .lb-act.lb-deliver:not([disabled]) { box-shadow: inset 0 0 0 1.5px var(--tk-bad); }
+
+/* time advance: thumb reach, one row of three */
+.tok-root .lb-foot { border-top: 1px solid var(--tk-line); }
+.tok-root .lb-wait-h { margin: 0 auto 6px; max-width: 720px; font-size: 13px; font-weight: 600; color: var(--tk-mut); }
+.tok-root .lb-waits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; max-width: 720px; margin: 0 auto; }
+.tok-root .lb-waits .sp-btn { padding: 0 8px; font-variant-numeric: tabular-nums; }
+
+/* debrief */
+.tok-root .lb-verdict { font-size: 22px; margin: 8px 0 4px; }
+.tok-root .lb-verdict:focus { outline: none; } /* focus lands here for screen readers; it is not a control */
+.tok-root .lb-verdict.mid { color: var(--tk-warn); }
+.tok-root .lb-born { margin: 0 0 14px; font-size: 15px; color: var(--tk-mut); }
+.tok-root .lb-learn { font-size: 16px; line-height: 1.5; gap: 10px; }
+.tok-root .lb-tl { margin-top: 20px; }
+.tok-root .lb-tl summary { padding: 12px 0; font-size: 15px; font-weight: 650; cursor: pointer; }
+.tok-root .lb-tl summary::marker { color: var(--tk-mut); }
+.tok-root .lb-tl .lb-feed li { color: var(--tk-text); font-weight: 400; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tok-root .lb-fig { transition: none; }
+  .tok-root .lb-act:active, .tok-root .lb-waits .sp-btn:active, .tok-root .lb-scn:active { transform: none; }
+}

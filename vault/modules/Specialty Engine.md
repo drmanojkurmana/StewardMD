@@ -37,6 +37,14 @@ drills, notes, explorers). Extracted from [[Ophthalmós]] without changing Ophth
   logic is shared; the engine test fails on any "ophthalmos" or host name in engine files, non-ES5 code, or an unscoped
   CSS rule), `test/run-specialty-ui.mjs` (fixture host in `test/fixtures/specialty-fixture/`, 40 headless checks).
 
+- **Tokós labour room screen:** `tokos-sim-labour.js` + `.css` (loaded by `tokos-loader.js` after `tokos-ctg.js`) registers
+  `labour` with `host.registerSim` from a `_syncers` hook once `window.TOKOS_MODELS.labour` is loaded (the model id
+  `drill-labour` must be listed in `tokos/models.json`). Picker (Resident scenarios gated by trial `drill.labour`), run
+  (chart, observations, actions from `actions(state)`, 15/30/60-minute waits stepped in 5-minute ticks, a birth decision
+  needs a second tap), debrief (`outcome(state)`); recorded as `store.sims.labour` + FSRS `drill:labour`. "See a CTG like
+  this" runs `startClinic("ctg", {classes:[figo]})` with `setRet` back to the same labour. Pure helpers are
+  `module.exports` under node (`test/tokos-sim-labour.test.mjs`); UI test `test/run-tokos-labour-ui.mjs`.
+
 ## Gotchas
 - Screens that repaint for the language pill go through `st.again`; a screen that sets `st.onBack` must set it inside
   its own render, or a repaint (which calls `leave()`) loses it (fixed for calculators and answered questions).
