@@ -22,7 +22,7 @@ function cmp(a, b) { const x = unitKey(a), y = unitKey(b); return x[0] - y[0] ||
 // What a list needs before the lesson loads (the same summary Ophthalmós's learn index writes, plus test targets).
 export function summary(l) {
   const out = { title: l.title, minutes: l.minutes, idea: l.idea, see: l.see.img ? { img: l.see.img } : { diagram: l.see.diagram } };
-  if (l.test && (l.test.clinic || l.test.mcqTopic || l.test.sim || l.test.tool)) out.test = Object.fromEntries(["clinic", "classes", "mcqTopic", "sim", "tool"].filter((k) => l.test[k] != null).map((k) => [k, l.test[k]]));
+  if (l.test && (l.test.clinic || l.test.mcqTopic || l.test.sim || l.test.tool || l.test.explorer)) out.test = Object.fromEntries(["clinic", "classes", "mcqTopic", "sim", "tool", "explorer"].filter((k) => l.test[k] != null).map((k) => [k, l.test[k]]));
   return out;
 }
 const readJSON = (p) => JSON.parse(readFileSync(p, "utf8"));

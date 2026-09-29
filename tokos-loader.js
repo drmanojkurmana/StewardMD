@@ -7,9 +7,9 @@
 (function (G) {
   "use strict";
   var V = "tok4";
-  var CSS = ["specialty.css", "tokos.css"];
+  var CSS = ["specialty.css", "tokos.css", "tokos-explore-ui.css"];
   var JS = ["specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "specialty-learn.js", "specialty-bank.js",
-    "specialty-explore.js", "specialty-tools.js", "specialty-notes.js", "tokos.js", "tokos-calipers.js", "tokos-ctg.js"];
+    "specialty-explore.js", "specialty-tools.js", "specialty-notes.js", "tokos.js", "tokos-calipers.js", "tokos-ctg.js", "tokos-explore-ui.js"];
   var BASE = G.SMD_TOKOS_BASE || "/tokos/";
   var loading = null;
 
