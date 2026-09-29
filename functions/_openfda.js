@@ -6,11 +6,14 @@
  * here: an NDA or BLA whose ORIGINAL submission was APPROVED inside the window. ANDAs (generics) are
  * excluded. NDA review classes kept: TYPE 1 (new molecular entity), TYPE 2 (new active ingredient),
  * TYPE 4 (new combination); every BLA is kept (biologic class codes are often blank).
- * For each approval, drug/label gives the indication text the summary is written from.
+ * For each approval, drug/label gives the indication text the summary is written from; when openFDA has no label
+ * yet, the approval letter PDF is read with TinyFish Fetch (free) and its indication sentence used instead.
  *
  * No key needed (openFDA allows 240 requests a minute and 1,000 a day per IP); env.OPENFDA_API_KEY raises it.
  * A run makes at most MAX_PAGES + one label call per new approval.
  */
+import { tinyfishFetch } from "./_search.js";
+
 const BASE = "https://api.fda.gov/drug/";
 const UA = "StewardMD/1.0 (+https://stewardmd.in)";
 const PAGE = 100, MAX_PAGES = 6;
@@ -22,6 +25,16 @@ function https(u) { return String(u || "").replace(/^http:\/\/(www\.)?accessdata
 function key(env) { return env && env.OPENFDA_API_KEY ? "&api_key=" + encodeURIComponent(env.OPENFDA_API_KEY) : ""; }
 function one(a) { return Array.isArray(a) && a.length ? String(a[0]) : ""; }
 function title(s) { return String(s || "").toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase()); }
+
+/** Pure: the indication sentence(s) from an FDA approval letter's text. Letters say either
+ * "<Drug> is indicated for ..." or "This NDA provides for the use of <Drug> ... for ..." (checked on real 2026
+ * letters: Isembyld, Pixclara, Orzeyful). Returns "" when neither is found. */
+export function pickIndication(text) {
+  const flat = String(text || "").replace(/\s+/g, " ");
+  const sentences = flat.split(/(?<=\.)\s+(?=[A-Z])/);
+  const hit = sentences.filter((x) => /\bis indicated\b|\bare indicated\b|provides for the use of\b/i.test(x)).slice(0, 2);
+  return hit.join(" ").slice(0, 1200).trim();
+}
 
 /** Pure: pick new approvals out of drugsfda results. Exported for tests. */
 export function selectNewApprovals(results, fromYmd, toYmd) {
@@ -88,6 +101,15 @@ export async function fetchOpenFdaApprovals(opts) {
       const l = await getJson(BASE + 'label.json?search=openfda.application_number:"' + a.application + '"&limit=1' + key(opts.env));
       indication = one(((l.results || [])[0] || {}).indications_and_usage).replace(/^\s*\d*\s*INDICATIONS\s*(AND|&)\s*USAGE\s*/i, "").slice(0, 3000);
     } catch (e) {}
+    // No label in openFDA yet (common for the first weeks): read the approval letter PDF with TinyFish Fetch.
+    let fromLetter = false;
+    if (!indication && /\.pdf($|\?)/i.test(a.url) && opts.env && opts.env.TINYFISH_API_KEY) {
+      try {
+        const f = await tinyfishFetch(opts.env, [a.url], { perUrlTimeoutMs: 60000 });
+        indication = pickIndication(f.results[0] && f.results[0].text);
+        fromLetter = !!indication;
+      } catch (e) {}
+    }
     const name = title(a.brand) + (a.generic ? " (" + a.generic + ")" : "");
     const facts = [
       "FDA approval of a new " + (a.application.indexOf("BLA") === 0 ? "biologic" : "drug application") + ": " + name + ".",
@@ -95,7 +117,7 @@ export async function fetchOpenFdaApprovals(opts) {
       a.classDesc ? "FDA review class: " + a.classDesc + "." : "",
       a.pharmClass ? "Established pharmacologic class: " + a.pharmClass + "." : "",
       a.route || a.form ? "Route and form: " + [a.route, a.form].filter(Boolean).join(", ").toLowerCase() + "." : "",
-      indication ? "Indications and usage (FDA label): " + indication : "Indication not yet in openFDA; see the approval letter.",
+      indication ? (fromLetter ? "Indication (FDA approval letter): " : "Indications and usage (FDA label): ") + indication : "Indication not yet in openFDA; see the approval letter.",
     ].filter(Boolean).join(" ");
     out.push(Object.assign({}, a, {
       docKey: "fda:" + a.application, title: "FDA approves " + name, abstract: facts,

@@ -146,3 +146,33 @@ test("routes: lookup is for signers; refresh is for owners; the admin token does
     assert.equal(r.status, 200); assert.equal(r.data.ok, true);
   } finally { globalThis.fetch = realFetch; }
 });
+
+test("refresh: TinyFish Fetch reads the PDFs (free), no Workers AI needed; Workers AI is only the fallback", { skip: SKIP }, async () => {
+  const tinyCalls = [];
+  const base = () => { mockNet(); const inner = globalThis.fetch; globalThis.fetch = async (url, init) => {
+    if (String(url) === "https://api.fetch.tinyfish.ai") {
+      const body = JSON.parse(init.body); tinyCalls.push({ key: init.headers["X-API-Key"], body });
+      const y = (body.urls[0].match(/year%20(\d{4})%20till/) || [])[1];
+      if (TINY_FAIL) return { ok: false, status: 502, json: async () => ({}) };
+      return { ok: true, status: 200, json: async () => ({ results: [{ url: body.urls[0], final_url: body.urls[0], title: "List", text: TEXT[y] }], errors: [] }) };
+    }
+    return inner(url, init);
+  }; };
+  let TINY_FAIL = false, aiCalls = 0;
+  const countingAi = { toMarkdown: async (x) => { aiCalls++; return ai().toMarkdown(x); } };
+  try {
+    base();
+    const env = { UPDATES_DB: d1(), TINYFISH_API_KEY: "tf-key" };                       // no AI binding at all
+    const r = await refreshCdscoLists(env, { now: Date.parse("2026-09-28T00:00:00Z") });
+    assert.deepEqual([r.ok, r.fetched, r.errors.length], [true, 3, 0]);
+    assert.equal(tinyCalls.length, 3);
+    assert.equal(tinyCalls[0].key, "tf-key");
+    assert.equal(tinyCalls[0].body.format, "markdown");
+    assert.match(tinyCalls[0].body.urls[0], /^https:\/\/cdsco\.gov\.in\/.*\.pdf$/);
+    assert.equal((await lookup(env, "rimegepant")).matches[0].date, "2025-03-27", "text read through TinyFish is searchable");
+    TINY_FAIL = true;
+    const env2 = { UPDATES_DB: d1(), TINYFISH_API_KEY: "tf-key", AI: countingAi };
+    const r2 = await refreshCdscoLists(env2, { now: Date.parse("2026-09-28T00:00:00Z") });
+    assert.deepEqual([r2.fetched, aiCalls], [3, 3], "TinyFish down: Workers AI reads them instead");
+  } finally { globalThis.fetch = realFetch; }
+});

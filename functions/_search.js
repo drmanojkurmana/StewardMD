@@ -84,3 +84,31 @@ export async function tinyfishSearch(env, query) {
     return second.filter((x) => isTrustedUrl(x.url)).slice(0, 8);
   } catch (e) { return []; }
 }
+
+/* TinyFish FETCH (free, like search; 150 URLs a minute on the free tier; docs.tinyfish.ai/fetch-api/reference):
+ * POST https://api.fetch.tinyfish.ai { urls (max 10), format } -> { results: [{ url, final_url, title, text, ... }], errors }.
+ * It reads PDFs and renders JavaScript pages, so the Medical Updates pipeline uses it to read regulator PDFs
+ * (CDSCO new-drug lists, FDA approval letters) without spending Workers AI. Same key as search. Never throws:
+ * no key or any failure returns { results: [], errors } and the caller falls back. Only fetch URLs the caller
+ * already trusts (these are regulator documents, not open web). */
+export async function tinyfishFetch(env, urls, opts) {
+  const key = env && env.TINYFISH_API_KEY;
+  const list = (Array.isArray(urls) ? urls : [urls]).map((u) => String(u || "")).filter((u) => /^https:\/\//i.test(u)).slice(0, 10);
+  if (!key || !list.length) return { results: [], errors: [{ error: key ? "no-urls" : "no-key" }] };
+  opts = opts || {};
+  try {
+    const body = { urls: list, format: "markdown" };
+    if (opts.ttl != null) body.ttl = opts.ttl;
+    if (opts.perUrlTimeoutMs) body.per_url_timeout_ms = opts.perUrlTimeoutMs;
+    const r = await fetchWithTimeout("https://api.fetch.tinyfish.ai", {
+      method: "POST", headers: { "X-API-Key": key, "Content-Type": "application/json" }, body: JSON.stringify(body),
+    }, opts.timeoutMs || 150000);
+    if (!r.ok) return { results: [], errors: [{ error: "http-" + r.status }] };
+    const j = await r.json();
+    const results = ((j && j.results) || []).map((x) => ({
+      url: String(x.url || ""), final_url: String(x.final_url || x.url || ""), title: String(x.title || ""),
+      text: typeof x.text === "string" ? x.text : (x.text ? JSON.stringify(x.text) : ""), published_date: x.published_date || null,
+    })).filter((x) => x.text);
+    return { results, errors: (j && j.errors) || [] };
+  } catch (e) { return { results: [], errors: [{ error: String((e && e.message) || e).slice(0, 80) }] }; }
+}

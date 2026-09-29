@@ -25,10 +25,11 @@ mock.module("../functions/_summarize.js", {
     classifyDocument: async () => ({ ok: false }),
   },
 });
-mock.module("../functions/_search.js", { namedExports: { tinyfishSearch: async () => [] } });
+const realSearch = await import("../functions/_search.js");
+mock.module("../functions/_search.js", { namedExports: { ...realSearch, tinyfishSearch: async () => [] } });
 
 const { parsePubmedXml, fetchPubMed } = await import("../functions/_pubmed.js");
-const { selectNewApprovals, fetchOpenFdaApprovals } = await import("../functions/_openfda.js");
+const { selectNewApprovals, fetchOpenFdaApprovals, pickIndication } = await import("../functions/_openfda.js");
 const { seedJournalSourcesOnce, JOURNAL_SOURCES, SEED_KEY, seedKey } = await import("../functions/_journal_sources.js");
 const { runPipeline } = await import("../functions/_updates_pipeline.js");
 
@@ -261,5 +262,32 @@ test("pipeline: when the AI budget runs out, later sources log 'skipped ... AI b
     assert.equal(AI_CALLS, 1);
     const logs = D._db.prepare("SELECT status, detail FROM crawl_logs WHERE detail LIKE '%(pubmed)%'").all();
     assert.ok(logs.some((l) => l.status === "skipped" && /AI budget reached; rest next run$/.test(l.detail)), JSON.stringify(logs.slice(0, 3)));
+  } finally { restore(); }
+});
+
+test("approval letter: the indication sentence, in either wording FDA uses", () => {
+  const letter = "Dear Dr Smith: Please refer to your application. We have completed our review.\n" +
+    "This NDA provides for the use of Orzeyful (oveporexton) tablets for the treatment of narcolepsy\ntype 1 (narcolepsy with cataplexy) in adult patients. APPROVAL & LABELING We have completed our review.";
+  assert.equal(pickIndication(letter), "This NDA provides for the use of Orzeyful (oveporexton) tablets for the treatment of narcolepsy type 1 (narcolepsy with cataplexy) in adult patients.");
+  assert.equal(pickIndication("Isembyld is indicated for the treatment of spinal muscular atrophy (SMA) in adults. Other text."), "Isembyld is indicated for the treatment of spinal muscular atrophy (SMA) in adults.");
+  assert.equal(pickIndication("Nothing relevant here."), "");
+});
+
+test("openFDA: no label yet -> the approval letter is read with TinyFish Fetch; no key -> the old note", async () => {
+  const letterUrl = "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2026/220359Orig1s000ltr.pdf";
+  let tiny = 0;
+  withFetch((url, init) => {
+    if (url === "https://api.fetch.tinyfish.ai") { tiny++; assert.deepEqual(JSON.parse(init.body).urls, [letterUrl]); return jsonRes({ results: [{ url: letterUrl, text: "We approve. ETCAMAH is indicated for adults with HR-positive, HER2-negative advanced breast cancer. Sincerely." }] }); }
+    if (url.indexOf("drugsfda.json") >= 0) return jsonRes({ meta: { results: { total: 1 } }, results: [APPS[1]] });
+    if (url.indexOf("label.json") >= 0) return jsonRes({ error: { code: "NOT_FOUND" } }, 404);
+    throw new Error("unexpected " + url);
+  });
+  try {
+    const withKey = await fetchOpenFdaApprovals({ days: 30, now: Date.parse("2026-09-28T00:00:00Z"), env: { TINYFISH_API_KEY: "tf" } });
+    assert.equal(tiny, 1);
+    assert.match(withKey[0].abstract, /Indication \(FDA approval letter\): ETCAMAH is indicated for adults with HR-positive, HER2-negative advanced breast cancer\./);
+    const noKey = await fetchOpenFdaApprovals({ days: 30, now: Date.parse("2026-09-28T00:00:00Z"), env: {} });
+    assert.equal(tiny, 1, "no TinyFish call without the key");
+    assert.match(noKey[0].abstract, /Indication not yet in openFDA; see the approval letter\./);
   } finally { restore(); }
 });

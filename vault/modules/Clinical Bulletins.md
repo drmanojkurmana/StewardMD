@@ -35,7 +35,8 @@ Journals and regulators feed the Review Desk automatically; a doctor still signs
   without it); `NCBI_API_KEY` optional. Europe PMC answered 503 from the build sandbox, so trials use PubMed.
 - **openFDA** (`functions/_openfda.js`, parser `openfda`): original NDA (type 1/2/4) or BLA approvals dated in
   the last 30 days, applied in code (openFDA's search matched a 2022 Mounjaro approval for a 2026 window);
-  indication from `drug/label`; https approval letters. ANDAs, new dosage forms and tentative approvals dropped.
+  indication from `drug/label`, or, when openFDA has no label yet, from the approval letter PDF read with
+  TinyFish Fetch (`pickIndication`: "is indicated for" / "provides for the use of"); https approval letters. ANDAs, new dosage forms and tentative approvals dropped.
 - **Sources** (`functions/_journal_sources.js`): batch 1: openFDA approvals, NEJM/Lancet/JAMA/BMJ trials,
   cardiology (Circulation/EHJ/JACC), oncology (JCO/Lancet Oncol/JAMA Oncol). Batch 2: Annals/JAMA IM/Nature
   Medicine/NEJM Evidence trials, guidelines in major journals, Lancet specialty trials, IM specialty trials
@@ -45,10 +46,14 @@ Journals and regulators feed the Review Desk automatically; a doctor still signs
   reaches existing sites and an admin delete or disable sticks. SQL copy:
   `functions/db/seed_sources_journals.sql`. Daily via the worker cron `30 5 * * *` -> `/api/updates/sync`.
 - **CDSCO** (`functions/_cdsco.js`): the yearly "new drugs approved" PDFs (2020 on, via the download JSP's
-  iframe) are converted with Workers AI `toMarkdown` into `cdsco_lists` during the daily sync (at most 3 a run;
+  iframe) are read with TinyFish Fetch (free; Workers AI `toMarkdown` only as the fallback) into `cdsco_lists`
+  during the daily sync (at most 3 a run;
   current and previous year weekly). Review Desk "Check" shows the matching entry and approval date, or "not
   found in the lists for <years>", which proves nothing. It never sets India status. Owner can force
   `POST /api/updates/bulletins/cdsco/refresh`.
+- **TinyFish** (`functions/_search.js`): search (already used to enrich drug and safety summaries) and
+  `tinyfishFetch` (POST api.fetch.tinyfish.ai, max 10 URLs, markdown; free, 150 URLs/min) for regulator PDFs.
+  Same `TINYFISH_API_KEY` secret. No key: CDSCO falls back to Workers AI and openFDA keeps the "see the letter" note.
 - **Drafting aids** (`bulletins-desk.js`): "Draft from source" (headline, What changed cut at a full stop,
   evidence type, regulator; never India status), a banner asking for the signer's own words, "Numbers to check",
   and library diseases named in the source as tap-to-add suggestions.

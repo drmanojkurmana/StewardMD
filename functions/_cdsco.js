@@ -1,13 +1,16 @@
 /* StewardMD - CDSCO "new drugs approved" lists, for the India status of a Clinical Bulletin.
  *
  * CDSCO publishes one PDF per year (2020 to the current year) on its Approved New Drugs page. The daily
- * pipeline (runPipeline) refreshes them into D1 (cdsco_lists) through Workers AI toMarkdown, at most
+ * pipeline (runPipeline) refreshes them into D1 (cdsco_lists), reading each PDF with TinyFish Fetch (free) or,
+ * failing that, Workers AI toMarkdown, at most
  * MAX_PER_RUN PDFs a run; the Review Desk looks a drug up in the stored text. The signer still CHOOSES the
  * India status: a match is shown as evidence (the list line and its approval date), and a miss is shown as
  * "not in these lists", which does not prove a drug is unapproved (older approvals and new strengths are
  * published elsewhere). Checked by hand on 2026-09-28: the page lists yearly PDFs through a download JSP
  * that answers with an iframe to the file; the 2025 PDF has numbered entries with dd.mm.yyyy dates.
  */
+import { tinyfishFetch } from "./_search.js";
+
 const PAGE = "https://cdsco.gov.in/opencms/opencms/en/Approval_new/Approved-New-Drugs/";
 const ORIGIN = "https://cdsco.gov.in";
 const UA = "Mozilla/5.0 (compatible; StewardMD/1.0; +https://stewardmd.in)";
@@ -79,7 +82,14 @@ export async function lookup(env, query) {
   return { checked: lists.map((l) => ({ title: l.title, year: l.year, release: l.release, fetched_ts: l.fetched_ts })), matches: matches.slice(0, 8) };
 }
 
+// PDF -> text. TinyFish Fetch first (free, reads PDFs, no Workers AI); Workers AI toMarkdown as the fallback.
 async function pdfText(env, url) {
+  if (env.TINYFISH_API_KEY) {
+    const f = await tinyfishFetch(env, [url], { perUrlTimeoutMs: 100000 });
+    const t = f.results[0] && f.results[0].text;
+    if (t && t.length > 50) return String(t).replace(/[ \t]+/g, " ").slice(0, 400000);
+  }
+  if (!env.AI || typeof env.AI.toMarkdown !== "function") throw new Error("cdsco pdf: tinyfish failed and no Workers AI");
   const r = await fetch(url, { headers: { "User-Agent": UA } });
   if (!r.ok) throw new Error("cdsco pdf HTTP " + r.status);
   const buf = await r.arrayBuffer();
@@ -89,10 +99,11 @@ async function pdfText(env, url) {
   return String(conv.data).replace(/[ \t]+/g, " ").slice(0, 400000);
 }
 
-/** Refresh stale or missing yearly lists. Best-effort; returns a tally. Needs env.AI (Workers AI). */
+/** Refresh stale or missing yearly lists. Best-effort; returns a tally. Needs TinyFish (TINYFISH_API_KEY) or Workers AI. */
 export async function refreshCdscoLists(env, opts) {
   opts = opts || {};
-  if (!env || !env.UPDATES_DB || !env.AI || typeof env.AI.toMarkdown !== "function") return { ok: false, reason: "no-ai-or-db" };
+  const canRead = env && (env.TINYFISH_API_KEY || (env.AI && typeof env.AI.toMarkdown === "function"));
+  if (!env || !env.UPDATES_DB || !canRead) return { ok: false, reason: "no-ai-or-db" };
   const now = opts.now || Date.now();
   const page = await fetch(PAGE, { headers: { "User-Agent": UA } });
   if (!page.ok) return { ok: false, reason: "page-" + page.status };
