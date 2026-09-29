@@ -105,6 +105,39 @@ async function ev(expression) {
 const ok = (pass, label, detail) => { console.log((pass ? "PASS " : "FAIL ") + label + (pass || detail == null ? "" : "  " + JSON.stringify(detail))); if (!pass) failures++; };
 async function waitFor(fn, ms = 5000) { const t = Date.now(); while (Date.now() - t < ms) { if (fn()) return true; await sleep(50); } return false; }
 const noSideScroll = `(function(){var b=document.querySelector('#smdReview .kit-sheet-body');return !!b&&b.scrollWidth<=b.clientWidth+1&&document.documentElement.scrollWidth<=innerWidth})()`;
+// Design audit of the signing desk (WCAG 2.2 AA): text contrast against the real painted background (4.5:1, or 3:1
+// for large text), and tap targets of at least 44 x 44 px for every control a doctor taps. Disabled controls and
+// icon glyphs are exempt. Returns the offenders so a failure names them.
+const AUDIT = `(function(){
+  var root=document.querySelector('#smdReview .kit-sheet-body');
+  function parse(c){var m=/rgba?\\(([^)]+)\\)/.exec(c);if(m){var p=m[1].split(/[ ,\\/]+/).filter(Boolean).map(Number);return [p[0],p[1],p[2],p.length>3?p[3]:1]}
+    m=/color\\(srgb ([^)]+)\\)/.exec(c);if(m){var q=m[1].split(/[ \\/]+/).filter(Boolean).map(Number);return [q[0]*255,q[1]*255,q[2]*255,q.length>3?q[3]:1]}return null}
+  function lum(c){var a=[c[0],c[1],c[2]].map(function(v){v/=255;return v<=0.04045?v/12.92:Math.pow((v+0.055)/1.055,2.4)});return 0.2126*a[0]+0.7152*a[1]+0.0722*a[2]}
+  function over(t,b){var a=t[3];return [t[0]*a+b[0]*(1-a),t[1]*a+b[1]*(1-a),t[2]*a+b[2]*(1-a),1]}
+  function bg(el){var st=[];for(var n=el;n;n=n.parentElement){var c=parse(getComputedStyle(n).backgroundColor);if(c&&c[3]>0){st.push(c);if(c[3]>=1)break}}var b=[255,255,255,1];for(var i=st.length-1;i>=0;i--)b=over(st[i],b);return b}
+  function shown(el){var r=el.getBoundingClientRect(),cs=getComputedStyle(el);return r.width>0&&r.height>0&&cs.visibility!=='hidden'&&!el.closest('details:not([open]) > :not(summary)')}
+  var low=[],small=[];
+  root.querySelectorAll('*').forEach(function(el){
+    if(!shown(el)||el.closest('.material-symbols-outlined,[disabled],[aria-disabled=true],.bl-preview'))return;
+    var txt=Array.from(el.childNodes).filter(function(n){return n.nodeType===3&&n.textContent.trim()}).map(function(n){return n.textContent.trim()}).join(' ');
+    if(!txt)return;
+    var cs=getComputedStyle(el),fg=parse(cs.color),b=bg(el);if(!fg)return;fg=over(fg,b);
+    var L1=lum(fg),L2=lum(b),r=(Math.max(L1,L2)+0.05)/(Math.min(L1,L2)+0.05),px=parseFloat(cs.fontSize),w=parseInt(cs.fontWeight,10);
+    var need=(px>=24||(px>=18.66&&w>=700))?3:4.5;
+    if(r<need)low.push(txt.slice(0,40)+' ['+(el.className||el.tagName)+'] '+r.toFixed(2));
+  });
+  root.querySelectorAll('button,a[href],summary,input,textarea,select').forEach(function(el){
+    if(!shown(el)||el.disabled||el.closest('.bl-preview'))return;
+    var t=el.type==='checkbox'?el.closest('label'):el;var r=t.getBoundingClientRect();
+    if(r.height<43.5||r.width<43.5)small.push((el.getAttribute('data-bl-act')||el.id||el.textContent.trim().slice(0,24))+' '+Math.round(r.width)+'x'+Math.round(r.height));
+  });
+  return {low:low,small:small};
+})()`;
+async function audit(label) {
+  const r = await ev(AUDIT);
+  ok(r && !r.low.length, "design audit, " + label + ": text contrast meets WCAG AA", r && r.low);
+  ok(r && !r.small.length, "design audit, " + label + ": every tap target is at least 44 x 44 px", r && r.small);
+}
 async function until(expr, ms = 15000) { const t = Date.now(); while (Date.now() - t < ms) { try { if (await ev(expr)) return true; } catch (e) {} await sleep(150); } return false; }
 async function shot(name) { await mkdir(SHOTS, { recursive: true }); const r = await call("Page.captureScreenshot", { format: "png" }); await writeFile(join(SHOTS, name + ".png"), Buffer.from(r.result.data, "base64")); }
 async function load(query) {
@@ -224,7 +257,7 @@ try {
   ok(await until(`!!document.querySelector('#smdReview [data-bl-act="edit:b-draft"]')&&!!document.querySelector('#smdReview [data-bl-act="new:u2"]')`), "queue lists the draft and the new source");
   ok(await ev(`!!document.querySelector('#smdReview [data-bl-act="filter:todo"][aria-pressed="true"]')&&/To do\\s*2/.test(document.querySelector('#smdReview [data-bl-act="filter:todo"]').textContent)`), "queue opens on To do, with its count");
   ok(await ev(`(function(){var c=document.querySelector('#smdReview [data-bl-act="new:u2"]').closest('.bl-q');return c.classList.contains('bl-k-safety')&&c.querySelector('.bl-type').textContent==='Safety alert'&&/U\\.S\\. Food and Drug Administration \u00b7 \\d+ \\w{3} \\d{4}/.test(c.querySelector('.bl-meta').textContent)&&!!c.querySelector('[data-bl-act="skip:u2"]')})()`), "a source card shows its type, who and when, with Write update and Skip");
-  await ev(`document.querySelector('#smdReview [data-bl-act="new:u2"]').scrollIntoView({block:'center'});true`); await shot("desk-queue");
+  await ev(`document.querySelector('#smdReview [data-bl-act="new:u2"]').scrollIntoView({block:'center'});true`); await shot("desk-queue"); await audit("queue");
   await call("Emulation.setDeviceMetricsOverride", { width: 320, height: 700, deviceScaleFactor: 1, mobile: true }); await sleep(200);
   ok(await ev(noSideScroll), "queue fits 320px without sideways scrolling");
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 1, mobile: true }); await sleep(150);
@@ -243,7 +276,7 @@ try {
   ok(await ev(`['1','2','3'].map(function(n){return document.getElementById('bl_s'+n).textContent}).join('|')==='1Read the source|2Write it in your own words|3Classify'`), "editor runs in the order of the work: read, write, classify");
   ok(await ev(`!!document.querySelector('#smdReview [data-bl-act="set:kind:approval"][aria-pressed="true"]')&&!!document.querySelector('#smdReview [data-bl-act="set:india_status:cdsco_approved"][aria-pressed="true"]')&&!!document.querySelector('#smdReview [data-bl-act="set:review_months:12"][aria-pressed="true"]')&&!document.querySelector('#smdReview select')`), "saved choices show as pressed chips, no dropdowns");
   ok(await ev(`/Ready to sign/.test(document.getElementById('bl_bar_s').textContent)&&getComputedStyle(document.querySelector('#smdReview .bl-bar')).position==='sticky'`), "the bottom bar says a complete draft is ready");
-  await shot("desk-editor-top");
+  await shot("desk-editor-top"); await audit("editor");
   await call("Emulation.setDeviceMetricsOverride", { width: 320, height: 700, deviceScaleFactor: 1, mobile: true }); await sleep(200);
   ok(await ev(noSideScroll), "editor fits 320px without sideways scrolling");
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 1, mobile: true }); await sleep(150);
@@ -262,7 +295,7 @@ try {
   ok(await ev(`document.querySelector('#smdReview [data-bl-act="signgo"]').disabled===true&&/3 of 4 done/.test(document.getElementById('bl_ck_s').textContent)`), "three of four ticked: still locked, and it says so");
   await ev(`document.querySelectorAll('#smdReview .bl-ck input')[3].click();true`); await sleep(250);   // buttons fade opacity over 90 ms
   ok(await ev(`document.querySelector('#smdReview [data-bl-act="signgo"]').disabled===false&&getComputedStyle(document.querySelector('#smdReview [data-bl-act="signgo"]')).opacity==='1'&&/All four confirmed/.test(document.getElementById('bl_ck_s').textContent)`), "all four ticked: Sign unlocks");
-  await shot("desk-sign-sheet");
+  await shot("desk-sign-sheet"); await audit("sign sheet");
   await ev(`document.querySelector('#smdReview [data-bl-act="signgo"]').click();true`);
   ok(await until(`document.querySelector('#smdReview').textContent.indexOf('The text changed. Review it again before signing.')>=0`), "a 409 sends the signer back to review the text");
   const sent = st.signBodies[0] || {};
@@ -340,11 +373,11 @@ try {
   ok(await ev(`/1 left: India status/.test(document.getElementById('bl_bar_s').textContent)`), "only India status is left", await ev(`document.getElementById('bl_bar_s').textContent`));
   await ev(`document.querySelector('#smdReview [data-bl-act="jump"]').click();true`); await sleep(200);
   ok(await ev(`document.getElementById('bl_sec_india_status').classList.contains('bl-flash')&&document.activeElement&&document.activeElement.getAttribute('data-bl-act')==='set:india_status:cdsco_approved'`), "tapping the gap list jumps to India status");
-  await shot("desk-editor-classify");
+  await shot("desk-editor-classify"); await audit("classify");
   await ev(`document.querySelector('#smdReview [data-bl-act="set:india_status:unknown"]').click();true`);
   ok(await until(`SMD_BULLETINS_DESK._state.cur.india_status==='unknown'&&document.querySelector('#smdReview [data-bl-act="set:india_status:unknown"]').getAttribute('aria-pressed')==='true'&&/Ready to sign/.test(document.getElementById('bl_bar_s').textContent)`), "one tap sets India status and the bar turns ready");
   ok(await ev(`document.getElementById('bl_what_changed').value.indexOf('[b]Acute Bronchitis[/b]')>=0&&document.getElementById('bl_headline').value==='Headline for the [b]draft[/b]'`), "a chip tap keeps everything typed");
-  await ev("document.body.classList.add('dark');true"); await sleep(150); await shot("desk-editor-dark");
+  await ev("document.body.classList.add('dark');true"); await sleep(150); await shot("desk-editor-dark"); await audit("editor, dark mode");
   ok(await ev(`(function(){var c=getComputedStyle(document.querySelector('#smdReview .bl-chip.on'));return c.color!==c.backgroundColor})()`), "dark mode: chips stay readable");
   await ev("document.body.classList.remove('dark');true");
   await ev("SMD_REVIEW.close();true");

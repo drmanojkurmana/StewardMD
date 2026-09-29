@@ -350,7 +350,7 @@
       pd.source_changed ? pd.source_changed + " source change" + (pd.source_changed === 1 ? "" : "s") : "",
       pd.drafts ? pd.drafts + " draft" + (pd.drafts === 1 ? "" : "s") : "",
       pd.review_due ? pd.review_due + " due for review" : ""].filter(Boolean).join(", ") + "." : "Nothing waiting for you.";
-    head += '<div class="bl-sum"><p class="bl-sum-h">' + esc(waiting) + '</p><p class="kit-muted">Nothing reaches a disease page until a doctor signs it.</p></div>';
+    head += '<div class="bl-sum"><h2 class="bl-sum-h" tabindex="-1">' + esc(waiting) + '</h2><p class="kit-muted">Nothing reaches a disease page until a doctor signs it.</p></div>';
     if (!me.canSign) {
       return head + '<p class="kit-muted">' + (me.isOwner ? "You can manage signers. Add yourself to sign." : "You are not registered to sign.") + "</p>" + tools;
     }
@@ -557,7 +557,7 @@
     // queue
     "#smdReview .bl-sum{display:flex;flex-direction:column;gap:2px}#smdReview .bl-sum-h{margin:0;font:700 16px/1.35 var(--q-sans);color:var(--on-surface);text-wrap:balance}",
     "#smdReview .bl-seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:14px;background:var(--sc-low)}",
-    "#smdReview .bl-seg button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border:0;border-radius:10px;background:transparent;color:var(--on-surface-variant);font:650 14px var(--q-sans);cursor:pointer}",
+    "#smdReview .bl-seg button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;border:0;border-radius:10px;background:transparent;color:var(--on-surface-variant);font:650 14px var(--q-sans);cursor:pointer}",
     "#smdReview .bl-seg button[aria-pressed=true]{background:var(--sc-lowest);color:var(--on-surface);box-shadow:0 1px 3px rgba(20,32,43,.14)}",
     "#smdReview .bl-badge{min-width:24px;padding:1px 7px;border-radius:999px;background:var(--sc-high);color:var(--on-surface-variant);font:700 12px/1.5 var(--q-sans);font-variant-numeric:tabular-nums}",
     "#smdReview .bl-seg button[aria-pressed=true] .bl-badge{background:var(--primary);color:var(--on-primary)}",
@@ -575,9 +575,9 @@
     "#smdReview .bl-q-s{margin:0;color:var(--on-surface-variant);font:400 13.5px/1.45 var(--q-sans);overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}",
     "#smdReview .bl-q-n{display:flex;align-items:flex-start;gap:6px;margin:0;color:var(--on-surface-variant);font:600 13px/1.4 var(--q-sans)}#smdReview .bl-q-n .kit-ic{font-size:18px}",
     "#smdReview .bl-q-n.warn{color:var(--bl-amber)}#smdReview .bl-q-n.ok{color:var(--primary)}",
-    "#smdReview .bl-q-act{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}#smdReview .bl-q-act button{min-height:44px}",
+    "#smdReview .bl-q-act{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}#smdReview .bl-q-act button{min-height:48px}",
     "#smdReview .bl-undo{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 4px 4px 14px;border-radius:12px;background:var(--on-surface);color:var(--bg);font:500 13.5px/1.4 var(--q-sans)}",
-    "#smdReview .bl-undo .kit-link{min-height:44px;padding:6px 12px;color:var(--bg);font-weight:750;text-decoration:underline}",
+    "#smdReview .bl-undo .kit-link{min-height:48px;padding:6px 12px;color:var(--bg);font-weight:750;text-decoration:underline}",
     "#smdReview .bl-empty{display:flex;flex-direction:column;align-items:center;gap:6px;padding:28px 16px;text-align:center;color:var(--on-surface-variant);font:500 14px/1.5 var(--q-sans)}",
     "#smdReview .bl-empty p{margin:0;max-width:34ch}#smdReview .bl-empty .kit-ic{font-size:36px;color:var(--primary)}",
     "#smdReview .bl-tools{display:flex;flex-direction:column;gap:8px;margin-top:10px;padding-top:12px;border-top:1px solid var(--sc-high)}",
@@ -586,7 +586,7 @@
     "#smdReview .bl-step{gap:12px}#smdReview .bl-step-h{display:flex;align-items:center;gap:10px;margin:0;color:var(--on-surface);font:700 16px/1.3 var(--q-sans)}",
     "#smdReview .bl-n{display:inline-flex;flex:0 0 auto;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--primary);color:var(--on-primary);font:750 13px var(--q-sans)}",
     "#smdReview .bl-src-t{margin:0;color:var(--on-surface);font:650 15px/1.45 var(--q-sans);overflow-wrap:anywhere}",
-    "#smdReview .bl-fold{border-top:1px solid var(--sc-high)}#smdReview .bl-fold>summary{display:flex;align-items:center;gap:8px;min-height:44px;list-style:none;cursor:pointer;color:var(--on-surface);font:650 14px var(--q-sans)}",
+    "#smdReview .bl-fold{border-top:1px solid var(--sc-high)}#smdReview .bl-fold>summary{display:flex;align-items:center;gap:8px;min-height:48px;list-style:none;cursor:pointer;color:var(--on-surface);font:650 14px var(--q-sans)}",
     "#smdReview .bl-fold>summary::-webkit-details-marker{display:none}#smdReview .bl-fold-l{flex:0 0 auto}",
     "#smdReview .bl-fold-s{flex:1 1 auto;min-width:0;color:var(--on-surface-variant);font:500 12.5px var(--q-sans);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
     "#smdReview .bl-chev{margin-left:auto;color:var(--on-surface-variant);transition:transform .15s}#smdReview .bl-fold[open]>summary .bl-chev{transform:rotate(180deg)}",
@@ -598,23 +598,23 @@
     "#smdReview .bl-cnt{flex:0 0 auto;color:var(--on-surface-variant);font:600 12px var(--q-sans);font-variant-numeric:tabular-nums}#smdReview .bl-cnt.bad{color:var(--error)}",
     "#smdReview .bl-grp{display:flex;flex-direction:column;gap:6px;min-width:0;border-radius:12px}#smdReview .bl-hint{color:var(--on-surface-variant);font:500 12.5px/1.4 var(--q-sans)}",
     "#smdReview .bl-chips{display:flex;flex-wrap:wrap;gap:8px}",
-    "#smdReview .bl-chip{display:inline-flex;align-items:center;gap:4px;max-width:100%;min-height:44px;padding:8px 14px;border:1px solid var(--outline-variant);border-radius:999px;background:var(--surface);color:var(--on-surface);font:600 14px/1.25 var(--q-sans);text-align:left;overflow-wrap:anywhere;cursor:pointer}",
+    "#smdReview .bl-chip{display:inline-flex;align-items:center;gap:4px;max-width:100%;min-height:48px;padding:8px 14px;border:1px solid var(--outline-variant);border-radius:999px;background:var(--surface);color:var(--on-surface);font:600 14px/1.25 var(--q-sans);text-align:left;overflow-wrap:anywhere;cursor:pointer}",
     "#smdReview .bl-chip .kit-ic{font-size:18px}#smdReview .bl-chip.on{border-color:var(--primary);background:color-mix(in srgb,var(--primary) 14%,var(--sc-lowest));color:var(--primary)}",
     "#smdReview .bl-hits{display:flex;flex-direction:column;border:1px solid var(--outline-variant);border-radius:12px;overflow:hidden}",
-    "#smdReview .bl-hit{display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 12px;border:0;border-top:1px solid var(--sc-high);background:var(--sc-lowest);color:var(--on-surface);font:500 14px/1.3 var(--q-sans);text-align:left;cursor:pointer}#smdReview .bl-hit:first-child{border-top:0}#smdReview .bl-hit .kit-ic{color:var(--primary)}",
+    "#smdReview .bl-hit{display:flex;align-items:center;gap:8px;min-height:48px;padding:8px 12px;border:0;border-top:1px solid var(--sc-high);background:var(--sc-lowest);color:var(--on-surface);font:500 14px/1.3 var(--q-sans);text-align:left;cursor:pointer}#smdReview .bl-hit:first-child{border-top:0}#smdReview .bl-hit .kit-ic{color:var(--primary)}",
     "#smdReview .bl-cdsco{margin:6px 0;padding:8px 10px;border-radius:10px;background:var(--sc-low);font:500 13px/1.45 var(--q-sans)}#smdReview .bl-cdsco.found{background:color-mix(in srgb,var(--primary) 10%,var(--sc-lowest))}#smdReview .bl-cdsco ul{margin:6px 0 0;padding-left:18px}",
     "#smdReview .bl-fmt{display:flex;align-items:center;gap:6px;flex-wrap:wrap}",
-    "#smdReview .bl-fmt-b{min-width:44px;min-height:44px;border:1px solid var(--outline-variant);border-radius:10px;background:var(--sc-lowest);color:var(--on-surface);font:15px var(--q-sans);cursor:pointer}#smdReview .bl-fmt-hint{flex:1 1 160px;font-size:12px}",
+    "#smdReview .bl-fmt-b{min-width:48px;min-height:48px;border:1px solid var(--outline-variant);border-radius:10px;background:var(--sc-lowest);color:var(--on-surface);font:15px var(--q-sans);cursor:pointer}#smdReview .bl-fmt-hint{flex:1 1 160px;font-size:12px}",
     "#smdReview .bl-vlinks{display:flex;flex-wrap:wrap;gap:8px}",
-    "#smdReview .bl-vlink{display:inline-flex;align-items:center;min-height:44px;padding:4px 14px;border-radius:999px;border:1px solid var(--primary);color:var(--primary);font:650 13.5px var(--q-sans);text-decoration:none}",
+    "#smdReview .bl-vlink{display:inline-flex;align-items:center;min-height:48px;padding:4px 14px;border-radius:999px;border:1px solid var(--primary);color:var(--primary);font:650 13.5px var(--q-sans);text-decoration:none}",
     "#smdReview .bl-vlink[aria-disabled=true]{border-color:var(--outline-variant);color:var(--on-surface-variant);pointer-events:none}",
     "#smdReview .bl-nums:empty{display:none}#smdReview .bl-nums{display:flex;flex-direction:column;gap:6px}",
     "#smdReview .bl-num{display:inline-block;padding:3px 9px;border-radius:999px;background:var(--bl-amber-bg);color:var(--bl-amber);font:650 12.5px var(--q-sans);font-variant-numeric:tabular-nums}",
     // bottom bar
     "#smdReview .bl-bar{position:sticky;bottom:calc(-28px - env(safe-area-inset-bottom,0px));z-index:3;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:4px -16px 0;padding:8px 16px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--outline-variant);background:var(--bg);box-shadow:0 -6px 18px rgba(20,32,43,.08)}",
-    "#smdReview .bl-bar-s{flex:1 1 200px;min-width:0}#smdReview .bl-bar-b{display:flex;flex:1 1 250px;gap:8px}#smdReview .bl-bar-b button{flex:1 1 auto;justify-content:center;min-height:46px}",
-    "#smdReview .bl-left{display:flex;align-items:center;gap:6px;width:100%;min-height:40px;padding:2px 0;border:0;background:transparent;color:var(--error);font:500 13.5px/1.35 var(--q-sans);text-align:left;cursor:pointer}#smdReview .bl-left span{min-width:0}",
-    "#smdReview .bl-ready{display:flex;align-items:center;gap:6px;min-height:40px;color:var(--primary);font:650 14px var(--q-sans)}",
+    "#smdReview .bl-bar-s{flex:1 1 200px;min-width:0}#smdReview .bl-bar-b{display:flex;flex:1 1 250px;gap:8px}#smdReview .bl-bar-b button{flex:1 1 auto;justify-content:center;min-height:48px}",
+    "#smdReview .bl-left{display:flex;align-items:center;gap:6px;width:100%;min-height:48px;padding:2px 0;border:0;background:transparent;color:var(--error);font:500 13.5px/1.35 var(--q-sans);text-align:left;cursor:pointer}#smdReview .bl-left span{min-width:0}",
+    "#smdReview .bl-ready{display:flex;align-items:center;gap:6px;min-height:48px;color:var(--primary);font:650 14px var(--q-sans)}",
     // sign sheet
     "#smdReview .bl-cks{display:flex;flex-direction:column;gap:8px;min-width:0;margin:0;padding:0;border:0}#smdReview .bl-cks legend{margin-bottom:8px;padding:0}",
     "#smdReview .bl-ck{display:flex;align-items:flex-start;gap:12px;min-height:52px;padding:12px 14px;border:1px solid var(--outline-variant);border-radius:14px;background:var(--sc-lowest);color:var(--on-surface);font:500 14.5px/1.45 var(--q-sans);cursor:pointer}",
@@ -624,6 +624,7 @@
     "#smdReview .bl-signbtn{width:100%;justify-content:center;min-height:52px;font-size:15px;text-align:center}#smdReview .bl-signbar .bl-ck-s{flex:1 1 100%}",
     // focus and the jump highlight
     "#smdReview :is(.bl-chip,.bl-seg button,.bl-q button,.bl-bar button,.bl-fold>summary,.bl-vlink,.bl-hit,.bl-fmt-b,.bl-undo button):focus-visible,#smdReview .bl-ck:has(input:focus-visible){outline:3px solid color-mix(in srgb,var(--primary) 55%,transparent);outline-offset:2px}",
+    "#smdReview [tabindex='-1']:focus{outline:none}",
     "@keyframes blFlash{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--error) 55%,transparent)}100%{box-shadow:0 0 0 12px transparent}}",
     "#smdReview .bl-flash{outline:2px solid var(--error);outline-offset:3px;animation:blFlash .9s ease-out 2}",
     "@media (prefers-reduced-motion:reduce){#smdReview .bl-flash{animation:none}#smdReview .bl-chev{transition:none}}",
@@ -659,6 +660,7 @@
       if (thenSign) { DS.saved = Object.assign({}, DS.cur); DS.ck = {}; DS.view = "sign"; }
       else say("Draft saved. It is not on the disease page until you sign it.", "ok");
       rerender();
+      if (thenSign) scrollTop();
     });
   }
   function signGo() {
@@ -671,11 +673,12 @@
       if (r.status !== 200) {
         say(errText(r));
         if (r.status === 409) { DS.view = "edit"; DS.queue = null; }
-        rerender(); return;
+        rerender(); if (r.status === 409) scrollTop(); return;
       }
       toast("Signed. It shows on the disease page after the next sync.");
       DS.view = "list"; DS.cur = null; DS.saved = null; DS.queue = null; say("Signed. It shows on the disease page after the next sync.", "ok");
       try { B().sync(true); } catch (e) {}
+      rerender(); scrollTop();
       probe().then(rerender);   // refresh the waiting count on the tab
     });
   }
@@ -687,6 +690,7 @@
       DS.undo = id; say("");
       if (p && p.candidates) { p.candidates--; p.total = Math.max(0, (p.total || 1) - 1); }
       rerender();
+      var u = D.querySelector('#smdReview [data-bl-act="unskip:' + id + '"]'); if (u) { try { u.focus({ preventScroll: true }); } catch (e) {} }
     } else { DS.undo = null; rerender(); }
     api("POST", "/skip", { update_id: id, undo: !!undo }).then(function (r) {
       if (r.status !== 200) { say(errText(r)); DS.undo = null; DS.queue = null; probe().then(rerender); return; }
@@ -699,8 +703,8 @@
     var b = e.target && e.target.closest && e.target.closest("[data-bl-act]"); if (!b || !b.closest("#smdReview")) return;
     var act = b.getAttribute("data-bl-act"), i = act.indexOf(":"), cmd = i < 0 ? act : act.slice(0, i), arg = i < 0 ? "" : act.slice(i + 1);
     if (cmd !== "back" && cmd !== "toedit") collect();
-    if (cmd === "back") { DS.view = "list"; DS.cur = null; say(""); DS.look = null; DS.queue = null; DS.undo = null; rerender(); return; }
-    if (cmd === "toedit") { DS.view = "edit"; say(""); rerender(); return; }
+    if (cmd === "back") { DS.view = "list"; DS.cur = null; say(""); DS.look = null; DS.queue = null; DS.undo = null; rerender(); scrollTop(); return; }
+    if (cmd === "toedit") { DS.view = "edit"; say(""); rerender(); scrollTop(); return; }
     if (cmd === "filter") { DS.filter = arg === "live" ? "live" : "todo"; DS.undo = null; say(""); rerender(); return; }
     if (cmd === "skip") { skip(arg, false); return; }
     if (cmd === "unskip") { skip(arg, true); return; }
@@ -787,7 +791,12 @@
       });
     }
   }
-  function scrollTop() { var b = D.querySelector("#smdReview .kit-sheet-body"); if (b) b.scrollTop = 0; }
+  // A new screen scrolls to its top and takes focus on its heading, so screen readers and keyboards land there too.
+  function scrollTop() {
+    var b = D.querySelector("#smdReview .kit-sheet-body"); if (b) b.scrollTop = 0;
+    var h = D.querySelector("#smdReview .dl-h, #smdReview .bl-sum-h");
+    if (h) { h.setAttribute("tabindex", "-1"); try { h.focus({ preventScroll: true }); } catch (e) {} }
+  }
   function onInput(e) {
     var el = e.target; if (!el || !el.id || el.id.indexOf("bl_") !== 0) return;
     if (el.id === "bl_dq") {

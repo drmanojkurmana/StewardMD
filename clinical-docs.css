@@ -23,6 +23,9 @@
 #smdReview .rv-pill.ok { background: color-mix(in srgb, var(--primary) 16%, var(--sc-lowest)); color: var(--primary); }
 #smdReview .rv-pill.mine { background: color-mix(in srgb, var(--secondary) 18%, var(--sc-lowest)); color: var(--on-surface); }
 #smdReview .kit-add[disabled] { opacity: .5; cursor: default; }
+/* Tap targets: home.js autoFitD zooms the app to 0.95 on 340-399 px phones (most iPhones), so 48 px renders
+   at about 45.6 px, above the 44 pt minimum. Checked by the design audit in test/run-bulletins-ui.mjs. */
+#smdReview :is(.kit-seg, .kit-link, .kit-pill, .kit-add, .kit-clear, .kit-inp) { min-height: 48px; }
 
 /* Colleagues sheet (kits-share.js, wave 2): above Documents (12040) because "Send to a colleague" opens
    from there; far below the Rx pad (16000). Rows reuse the review-desk list styles. */
