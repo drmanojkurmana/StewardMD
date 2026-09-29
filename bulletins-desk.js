@@ -70,7 +70,7 @@
   function cdscoPanel(c) {
     var r = c._cdsco, out = '<div class="kit-field wide"><span class="kit-fl">Check the CDSCO new-drug lists (generic name)</span><div class="kit-row">' +
       '<input id="bl_cq" class="kit-inp" maxlength="160" value="' + esc(cdscoQuery(c)) + '" autocomplete="off">' +
-      '<button type="button" class="kit-pill" data-bl-act="cdsco">' + ms("search") + "Check</button></div>";
+      '<button type="button" class="kit-pill" data-bl-act="cdsco">' + ms("search") + "Search lists</button></div>";
     if (r && r.error) out += '<p class="kit-muted" role="status">' + esc(r.error) + "</p>";
     else if (r && !(r.checked || []).length) out += '<p class="kit-muted" role="status">The CDSCO lists have not been downloaded yet. They refresh with the daily sync.</p>';
     else if (r && r.matches.length) out += '<div class="bl-cdsco found" role="status"><b>Found in the CDSCO lists.</b> Choose "Approved by CDSCO" only if it is the same drug, form and indication.<ul>' +
@@ -94,7 +94,7 @@
   }
 
   var DS = { me: null, probing: null, view: "list", queue: null, loading: false, cur: null, saved: null, msg: "", msgKind: "", busy: false, dq: "", signers: null, look: null,
-    filter: "todo", undo: null, open: {}, ck: {} };
+    filter: "todo", undo: null, open: {}, ck: {}, queueErr: "", busyAct: "" };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
   function ms(n) { return '<span class="material-symbols-outlined kit-ic" aria-hidden="true">' + n + "</span>"; }
@@ -129,7 +129,8 @@
     DS.loading = true;
     return api("GET", "/queue").then(function (r) {
       DS.loading = false;
-      if (r.status === 200) DS.queue = r.data; else say("Could not load the queue (" + (r.data.reason || r.data.error || r.status) + ").");
+      if (r.status === 200) { DS.queue = r.data; DS.queueErr = ""; }
+      else DS.queueErr = r.status === 0 ? "No connection. The queue loads when you are back online." : "Could not load the queue (" + (r.data.reason || r.data.error || r.status) + ").";
       rerender();
     });
   }
@@ -231,7 +232,7 @@
     if (d.error === "checklist-incomplete") return "Tick every item before signing.";
     if (d.reason === "not-a-signer") return "You are not registered as a signer.";
     if (d.error === "offline") return "No connection. Try again when online.";
-    return "Could not save (" + (d.error || r.status) + ").";
+    return "Could not save (" + (d.error || r.status) + "). Try again in a minute.";
   }
   function say(text, kind) { DS.msg = text || ""; DS.msgKind = kind || "err"; }
   function msgHtml() {
@@ -258,7 +259,7 @@
   }
 
   /* ---------------- what is still missing (mirrors validateDraft in functions/_bulletin_rules.js) ---------------- */
-  var LIM = { headline: [10, 120], what_changed: [20, 400], applies_to: [0, 200], evidence_note: [0, 120] };
+  var LIM = { headline: [10, 120], what_changed: [20, 400], applies_to: [0, 200], evidence_note: [0, 120], source_label: [3, 160] };
   function visLen(s) { return B().plain(String(s || "").replace(/\s+/g, " ").trim()).length; }
   function realDate(s) {
     s = String(s || "");
@@ -269,22 +270,28 @@
   // In page order, so the first entry is the one nearest the top.
   function missing(c) {
     var out = [];
-    function add(k, label, target, src) { out.push({ k: k, label: label, target: target, src: !!src }); }
-    function textBad(k) { var n = visLen(c[k]), L = LIM[k]; return (L[0] && n < L[0]) || n > L[1] || String(c[k] || "").indexOf("\u2014") >= 0; }
-    var sl = visLen(c.source_label), su = String(c.source_url || "").trim();
-    if (sl < 3 || sl > 160 || String(c.source_label || "").indexOf("\u2014") >= 0) add("source_label", "Source name", "bl_source_label", true);
-    if (su.length < 12 || !B()._httpsUrl(su)) add("source_url", "Source link", "bl_source_url", true);
-    if (!realDate(c.source_date)) add("source_date", "Source date", "bl_source_date", true);
-    if (c.doi && !/^10\.\d{4,9}\/\S+$/.test(String(c.doi).trim())) add("doi", "DOI", "bl_doi", true);
-    if (c.pmid && !/^\d{1,10}$/.test(String(c.pmid).trim())) add("pmid", "PMID", "bl_pmid", true);
-    if (textBad("headline")) add("headline", "Headline", "bl_headline");
-    if (textBad("what_changed")) add("what_changed", "What changed", "bl_what_changed");
-    if (textBad("applies_to")) add("applies_to", "Applies to", "bl_applies_to");
+    // fix: something is entered but wrong (too long, an em-dash, a bad link, DOI, PMID or date). Otherwise it is
+    // simply not filled in yet (including a headline still being typed), which is not shown as an error.
+    function add(k, label, target, src, fix) { out.push({ k: k, label: label, target: target, src: !!src, fix: !!fix }); }
+    function text(k, label, target, src) {
+      var v = String(c[k] || ""), n = visLen(v), L = LIM[k] || [3, 160];
+      if (n > L[1] || v.indexOf("\u2014") >= 0) add(k, label, target, src, true);
+      else if (L[0] && n < L[0]) add(k, label, target, src, false);
+    }
+    var su = String(c.source_url || "").trim(), sd = String(c.source_date || "").trim();
+    text("source_label", "Source name", "bl_source_label", true);
+    if (su.length < 12 || !B()._httpsUrl(su)) add("source_url", "Source link", "bl_source_url", true, !!su);
+    if (!realDate(sd)) add("source_date", "Source date", "bl_source_date", true, !!sd);
+    if (c.doi && !/^10\.\d{4,9}\/\S+$/.test(String(c.doi).trim())) add("doi", "DOI", "bl_doi", true, true);
+    if (c.pmid && !/^\d{1,10}$/.test(String(c.pmid).trim())) add("pmid", "PMID", "bl_pmid", true, true);
+    text("headline", "Headline", "bl_headline");
+    text("what_changed", "What changed", "bl_what_changed");
+    text("applies_to", "Applies to", "bl_applies_to");
     if (!(c.disease_ids || []).length) add("disease_ids", "Diseases", "bl_dq");
     if (!c.kind) add("kind", "Type", "bl_sec_kind");
     if (!c.india_status) add("india_status", "India status", "bl_sec_india_status");
     if (!c.evidence_type) add("evidence_type", "Evidence", "bl_sec_evidence_type");
-    if (textBad("evidence_note")) add("evidence_note", "Evidence note", "bl_evidence_note");
+    text("evidence_note", "Evidence note", "bl_evidence_note");
     return out;
   }
 
@@ -315,8 +322,8 @@
   }
   function qCard(kind, attn, top, title, sub, note, acts) {
     var kc = (B().KIND || {})[kind] ? kind : "other";
-    return '<article class="bl-q bl-k-' + kc + (attn ? " attn" : "") + '">' + '<div class="bl-q-top">' + top + "</div>" +
-      '<h4 class="bl-q-t">' + esc(title) + "</h4>" + (sub ? '<p class="bl-q-s">' + esc(sub) + "</p>" : "") +
+    return '<article class="bl-q bl-k-' + kc + (attn ? " attn" : "") + '">' + '<h4 class="bl-q-t">' + esc(title) + "</h4>" +
+      '<p class="bl-q-top">' + top + "</p>" + (sub ? '<p class="bl-q-s">' + esc(sub) + "</p>" : "") +
       (note ? '<p class="bl-q-n ' + note[1] + '">' + ms(note[2]) + "<span>" + esc(note[0]) + "</span></p>" : "") +
       '<div class="bl-q-act">' + acts + "</div></article>";
   }
@@ -354,7 +361,14 @@
     if (!me.canSign) {
       return head + '<p class="kit-muted">' + (me.isOwner ? "You can manage signers. Add yourself to sign." : "You are not registered to sign.") + "</p>" + tools;
     }
-    if (!q) { if (!DS.loading) loadQueue(); return head + '<p class="kit-muted" role="status">Loading…</p>' + tools; }
+    if (!q && DS.queueErr) {
+      return head + '<div class="bl-banner err" role="alert">' + ms("cloud_off") + "<span>" + esc(DS.queueErr) + '</span></div><button type="button" class="kit-clear bl-retry" data-bl-act="retry">' + ms("refresh") + "Try again</button>" + tools;
+    }
+    if (!q) {
+      if (!DS.loading) loadQueue();
+      var sk = '<div class="bl-q bl-sk" aria-hidden="true"><span class="bl-sk-l w80"></span><span class="bl-sk-l w50"></span><span class="bl-sk-l w90"></span><span class="bl-sk-b"></span></div>';
+      return head + '<p class="bl-vh" role="status">Loading the queue</p><div class="bl-ql">' + sk + sk + "</div>" + tools;
+    }
     var items = q.items || [], cands = q.candidates || [], soon = Date.now() + 30 * 86400000;
     var check = items.filter(function (i) { return bucket(i, soon) === "check"; }), drafts = items.filter(function (i) { return bucket(i, soon) === "draft"; }),
       live = items.filter(function (i) { return bucket(i, soon) === "live"; });
@@ -376,14 +390,15 @@
     var srcMiss = miss.some(function (m) { return m.src; });
     var srcSum = [c.source_label, fmtDate(c.source_date), c.doi ? "DOI" : "", c.pmid ? "PMID" : ""].filter(Boolean).join(", ");
     return '<section class="kit-card bl-step" aria-labelledby="bl_s1">' + stepHead(1, "bl_s1", "Read the source") +
-      '<div class="bl-q-top">' + typeChip(c.kind || TYPE_KIND[s.type] || "") + metaLine(s.org, s.date) + "</div>" +
       '<p class="bl-src-t">' + esc(s.title || c.source_label || "") + "</p>" +
+      '<p class="bl-q-top">' + typeChip(c.kind || TYPE_KIND[s.type] || "") + metaLine(s.org, s.date) + "</p>" +
       (ch.length ? '<div class="bl-banner warn">' + ms("sync_problem") + "<div><b>What changed in the source</b><ul>" + ch.map(function (x) { return "<li>" + esc(x.topic || "") + ": " + esc(x.previous || "") + " to " + esc(x.current || "") + "</li>"; }).join("") + "</ul></div></div>" : "") +
       verifyLinks(c) +
       (s.summary ? fold("ai", DS.open.ai, '<span class="bl-fold-l">AI summary, not reviewed</span>', '<p class="kit-muted bl-ai">' + esc(String(s.summary).slice(0, 1500)) + "</p>") : "") +
       (s.summary && isNew && !c._drafted ? '<div class="bl-draftbox"><button type="button" class="kit-add" data-bl-act="draft">' + ms("edit_note") + "Draft from source</button>" +
         '<span class="kit-muted">Fills a first draft from the AI summary. You rewrite it and check every number.</span></div>' : "") +
-      fold("src", DS.open.src || srcMiss, '<span class="bl-fold-l">Source details</span><span class="bl-fold-s">' + esc(srcMiss ? "needs a look" : "filled in: " + srcSum) + "</span>",
+      fold("src", DS.open.src || srcMiss, '<span class="bl-fold-l">Source details</span><span class="bl-fold-s' + (srcMiss ? " miss" : "") + '">' +
+        esc(srcMiss ? "check: " + names(miss.filter(function (m) { return m.src; })) : "filled in: " + srcSum) + "</span>",
         '<div class="kit-grid bl-srcgrid">' +
         field("bl_source_label", "Source name (journal, regulator notice)", txt("bl_source_label", c.source_label, 160), true) +
         field("bl_source_url", "Source link (https)", txt("bl_source_url", c.source_url, 500), true) +
@@ -434,10 +449,12 @@
       tfield("evidence_note", "Evidence note (optional, only a grade the source states)", c.evidence_note, 160, 0, "For example: Class I, level A") +
       "</section>";
   }
+  function names(list) { var n = list.map(function (m) { return m.label; }); return n.slice(0, 3).join(", ") + (n.length > 3 ? " and " + (n.length - 3) + " more" : ""); }
   function barStatus(miss) {
     if (!miss.length) return '<span class="bl-ready">' + ms("check_circle") + "Ready to sign</span>";
-    var names = miss.map(function (m) { return m.label; }), shown = names.slice(0, 3).join(", ") + (names.length > 3 ? " and " + (names.length - 3) + " more" : "");
-    return '<button type="button" class="bl-left" data-bl-act="jump">' + ms("error") + "<span><b>" + miss.length + " left:</b> " + esc(shown) + "</span></button>";
+    var fix = miss.filter(function (m) { return m.fix; }), fill = miss.filter(function (m) { return !m.fix; });
+    var t = fix.length ? "<b>Fix:</b> " + esc(names(fix)) + (fill.length ? ", then " + fill.length + " more to fill in" : "") : "<b>" + fill.length + " to fill in:</b> " + esc(names(fill));
+    return '<button type="button" class="bl-left' + (fix.length ? " fix" : "") + '" data-bl-act="jump">' + ms(fix.length ? "error" : "checklist") + "<span>" + t + "</span>" + ms("arrow_forward") + "</button>";
   }
 
   function diseasePicker(c) {
@@ -457,7 +474,7 @@
       (sug.length ? '<span class="bl-hint">Named in the source, tap to add:</span><div class="bl-chips">' + sug.map(function (x) {
         return '<button type="button" class="bl-chip" data-bl-act="dz:' + esc(x[0]) + '">' + ms("add") + esc(x[1]) + "</button>";
       }).join("") + "</div>" : "") +
-      '<input id="bl_dq" type="search" class="kit-inp" placeholder="Search the library to add a disease" autocomplete="off" value="' + esc(DS.dq) + '"' + (c.disease_ids.length >= 5 ? " disabled" : "") + ">" +
+      '<input id="bl_dq" type="search" class="kit-inp" placeholder="' + (c.disease_ids.length >= 5 ? "Five is the limit. Remove one to add another." : "Search the library to add a disease") + '" autocomplete="off" value="' + esc(DS.dq) + '"' + (c.disease_ids.length >= 5 ? " disabled" : "") + ">" +
       (hits.length ? '<div class="bl-hits">' + hits.map(function (h) { return '<button type="button" class="bl-hit" data-bl-act="dz:' + esc(h[0]) + '">' + ms("add") + "<span>" + esc(h[1]) + "</span></button>"; }).join("") + "</div>" : "") + "</div>";
   }
 
@@ -472,8 +489,8 @@
         ? field("bl_rreason", "Why is it being retracted? (10 to 300 characters)", txt("bl_rreason", "", 300, 2), true) + '<div class="kit-row"><button type="button" class="kit-clear bl-danger" data-bl-act="retractgo">Retract now</button></div>'
         : '<button type="button" class="kit-clear bl-danger" data-bl-act="retract">' + ms("remove_circle") + "Retract this update</button>") + "</div>" : "") +
       '<div class="bl-bar"><div class="bl-bar-s" id="bl_bar_s" aria-live="polite">' + (DS._bar = barStatus(miss)) + "</div>" +
-      '<div class="bl-bar-b"><button type="button" class="kit-clear" data-bl-act="save"' + (DS.busy ? " disabled" : "") + ">Save draft</button>" +
-      '<button type="button" class="kit-add" data-bl-act="savesign"' + (DS.busy ? " disabled" : "") + ">" + ms("verified") + "Preview and sign</button></div></div></div>";
+      '<div class="bl-bar-b"><button type="button" class="kit-clear" data-bl-act="save"' + (DS.busy ? " disabled" : "") + ">" + (DS.busy && DS.busyAct === "save" ? "Saving…" : "Save draft") + "</button>" +
+      '<button type="button" class="kit-add" data-bl-act="savesign"' + (DS.busy ? " disabled" : "") + ">" + ms("verified") + (DS.busy && DS.busyAct === "savesign" ? "Saving…" : "Preview and sign") + "</button></div></div></div>";
   }
   // Counters, the missing list, the numbers and the preview follow typing without a re-render (keeps focus and keyboard).
   function refreshLive() {
@@ -493,8 +510,8 @@
     if (m.src && !D.querySelector('#smdReview details[data-bl-open="src"][open]')) { DS.open.src = true; rerender(); }
     var el = D.getElementById(m.target); if (!el) return;
     try { el.scrollIntoView({ block: "center", behavior: "smooth" }); } catch (e) { try { el.scrollIntoView(); } catch (x) {} }
-    el.classList.remove("bl-flash"); void el.offsetWidth; el.classList.add("bl-flash");
-    setTimeout(function () { el.classList.remove("bl-flash"); }, 2400);
+    el.classList.remove("bl-flash", "bad"); void el.offsetWidth; el.classList.add("bl-flash"); if (m.fix) el.classList.add("bad");
+    setTimeout(function () { el.classList.remove("bl-flash", "bad"); }, 2400);
     var f = /^(INPUT|TEXTAREA)$/.test(el.tagName) ? el : el.querySelector("button");
     if (f) { try { f.focus({ preventScroll: true }); } catch (e) {} }
   }
@@ -514,7 +531,7 @@
       '<p class="kit-muted">Your name, registration number and today\'s date appear with the update. Any later edit takes it off the disease page until it is signed again.</p>' +
       '<div class="bl-bar bl-signbar"><p id="bl_ck_s" class="bl-ck-s' + (all ? " ok" : "") + '" role="status">' + esc(ckStatus(n)) + "</p>" +
       '<button type="button" class="kit-add bl-signbtn" data-bl-act="signgo"' + (DS.busy || !all ? " disabled" : "") + ">" + ms("verified") +
-      "Sign as " + esc(/^dr\.?\s/i.test(s.name || "") ? s.name : "Dr " + (s.name || "")) + ", Reg. No. " + esc(s.regNo || "") + "</button></div>";
+      (DS.busy ? "Signing…" : "Sign as " + esc(/^dr\.?\s/i.test(s.name || "") ? s.name : "Dr " + (s.name || "")) + ", Reg. No. " + esc(s.regNo || "")) + "</button></div>";
   }
 
   function signersView() {
@@ -544,11 +561,11 @@
   }
 
   // Styles ride on the Review Desk tokens (specialty-kits.css: --primary, --sc-*, --outline-variant, --error, body.dark).
-  // Type colours match the disease-page card: safety red, approval teal, guideline indigo, trial blue.
+  // Type colour means what it means on the disease-page card (bulletins.js): red for a safety alert, the accent otherwise.
   var DESK_CSS = [
-    "#smdReview{--bl-safety:#b42318;--bl-approval:var(--primary);--bl-guideline:#4338ca;--bl-trial:#1d4ed8;--bl-other:#565e74;--bl-amber:#8a5300;--bl-amber-bg:#fff4e0}",
-    "body.dark #smdReview{--bl-safety:#ffb4ab;--bl-guideline:#b4bcff;--bl-trial:#9cc2ff;--bl-other:#bec6e0;--bl-amber:#f5c26b;--bl-amber-bg:#33270f}",
-    "#smdReview .bl-k-safety{--bl-c:var(--bl-safety)}#smdReview .bl-k-approval{--bl-c:var(--bl-approval)}#smdReview .bl-k-guideline{--bl-c:var(--bl-guideline)}#smdReview .bl-k-trial{--bl-c:var(--bl-trial)}#smdReview .bl-k-other{--bl-c:var(--bl-other)}",
+    "#smdReview{--bl-safety:#b91c1c;--bl-amber:#8a5300;--bl-amber-bg:#fff4e0}",
+    "body.dark #smdReview{--bl-safety:#fca5a5;--bl-amber:#f5c26b;--bl-amber-bg:#33270f}",
+    "#smdReview .bl-q,#smdReview .bl-type{--bl-c:var(--primary)}#smdReview .bl-k-safety{--bl-c:var(--bl-safety)}#smdReview .bl-k-other{--bl-c:var(--on-surface-variant)}",
     // banners and messages
     "#smdReview .bl-banner{display:flex;align-items:flex-start;gap:8px;margin:0;padding:10px 12px;border-radius:12px;background:var(--sc-low);color:var(--on-surface);font:600 13px/1.45 var(--q-sans)}",
     "#smdReview .bl-banner .kit-ic{font-size:19px;flex:0 0 auto}#smdReview .bl-banner ul{margin:4px 0 0;padding-left:18px;font-weight:500}",
@@ -557,29 +574,32 @@
     // queue
     "#smdReview .bl-sum{display:flex;flex-direction:column;gap:2px}#smdReview .bl-sum-h{margin:0;font:700 16px/1.35 var(--q-sans);color:var(--on-surface);text-wrap:balance}",
     "#smdReview .bl-seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:14px;background:var(--sc-low)}",
-    "#smdReview .bl-seg button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;border:0;border-radius:10px;background:transparent;color:var(--on-surface-variant);font:650 14px var(--q-sans);cursor:pointer}",
+    "#smdReview .bl-seg button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;border:0;border-radius:10px;background:transparent;color:var(--on-surface-variant);font:650 14px var(--q-sans);cursor:pointer;transition:background-color .15s,color .15s}",
     "#smdReview .bl-seg button[aria-pressed=true]{background:var(--sc-lowest);color:var(--on-surface);box-shadow:0 1px 3px rgba(20,32,43,.14)}",
-    "#smdReview .bl-badge{min-width:24px;padding:1px 7px;border-radius:999px;background:var(--sc-high);color:var(--on-surface-variant);font:700 12px/1.5 var(--q-sans);font-variant-numeric:tabular-nums}",
+    "#smdReview .bl-badge{min-width:24px;padding:1px 7px;border-radius:999px;background:var(--sc-high);color:var(--on-surface-variant);font:700 12.5px/1.5 var(--q-sans);font-variant-numeric:tabular-nums}",
     "#smdReview .bl-seg button[aria-pressed=true] .bl-badge{background:var(--primary);color:var(--on-primary)}",
-    "#smdReview .bl-gh{display:flex;align-items:center;gap:8px;margin:6px 0 0;color:var(--on-surface-variant);font:700 12px/1.3 var(--q-sans);letter-spacing:.06em;text-transform:uppercase}",
+    "#smdReview .bl-gh{display:flex;align-items:center;gap:8px;margin:10px 0 0;color:var(--on-surface-variant);font:700 12.5px/1.3 var(--q-sans);letter-spacing:.05em;text-transform:uppercase}",
     "#smdReview .bl-gn{padding:0 7px;border-radius:999px;background:var(--sc-high);font-variant-numeric:tabular-nums;letter-spacing:0}",
     "#smdReview .bl-ql{display:flex;flex-direction:column;gap:10px}",
-    "#smdReview .bl-q{position:relative;display:flex;flex-direction:column;gap:6px;min-width:0;padding:12px 14px 12px 18px;border:1px solid var(--outline-variant);border-radius:14px;background:var(--sc-lowest);overflow:hidden}",
-    "#smdReview .bl-q::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--bl-c)}",
+    "#smdReview .bl-q{display:flex;flex-direction:column;gap:4px;min-width:0;padding:14px;border:1px solid var(--outline-variant);border-radius:14px;background:var(--sc-lowest)}",
     "#smdReview .bl-q.attn{border-color:color-mix(in srgb,var(--bl-amber) 45%,var(--outline-variant))}",
-    "#smdReview .bl-q-top{display:flex;flex-wrap:wrap;align-items:center;gap:2px 10px;min-width:0}",
-    "#smdReview .bl-type{display:inline-flex;align-items:center;gap:6px;color:var(--bl-c);font:750 11.5px/1.4 var(--q-sans);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}",
-    "#smdReview .bl-type::before{content:'';width:8px;height:8px;border-radius:50%;background:currentColor}",
+    "#smdReview .bl-q-top{display:flex;flex-wrap:wrap;align-items:center;gap:2px 12px;min-width:0;margin:0}",
+    "#smdReview .bl-type{display:inline-flex;align-items:center;gap:6px;color:var(--bl-c);font:650 12.5px/1.4 var(--q-sans);white-space:nowrap}",
+    "#smdReview .bl-type::before{content:'';width:7px;height:7px;border-radius:50%;background:currentColor}",
     "#smdReview .bl-meta{min-width:0;color:var(--on-surface-variant);font:500 12.5px/1.4 var(--q-sans);overflow-wrap:anywhere}",
     "#smdReview .bl-q-t{margin:0;color:var(--on-surface);font:650 15px/1.4 var(--q-sans);overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}",
-    "#smdReview .bl-q-s{margin:0;color:var(--on-surface-variant);font:400 13.5px/1.45 var(--q-sans);overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}",
+    "#smdReview .bl-q-s{margin:2px 0 0;color:var(--on-surface-variant);font:400 13px/1.45 var(--q-sans);overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}",
     "#smdReview .bl-q-n{display:flex;align-items:flex-start;gap:6px;margin:0;color:var(--on-surface-variant);font:600 13px/1.4 var(--q-sans)}#smdReview .bl-q-n .kit-ic{font-size:18px}",
     "#smdReview .bl-q-n.warn{color:var(--bl-amber)}#smdReview .bl-q-n.ok{color:var(--primary)}",
-    "#smdReview .bl-q-act{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}#smdReview .bl-q-act button{min-height:48px}",
-    "#smdReview .bl-undo{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 4px 4px 14px;border-radius:12px;background:var(--on-surface);color:var(--bg);font:500 13.5px/1.4 var(--q-sans)}",
+    "#smdReview .bl-q-act{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}#smdReview .bl-q-act button{min-height:48px}",
+    "#smdReview .bl-undo{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 4px 4px 14px;border-radius:12px;background:var(--on-surface);color:var(--bg);font:500 14px/1.4 var(--q-sans)}",
     "#smdReview .bl-undo .kit-link{min-height:48px;padding:6px 12px;color:var(--bg);font-weight:750;text-decoration:underline}",
     "#smdReview .bl-empty{display:flex;flex-direction:column;align-items:center;gap:6px;padding:28px 16px;text-align:center;color:var(--on-surface-variant);font:500 14px/1.5 var(--q-sans)}",
     "#smdReview .bl-empty p{margin:0;max-width:34ch}#smdReview .bl-empty .kit-ic{font-size:36px;color:var(--primary)}",
+    "#smdReview .bl-sk{gap:10px}#smdReview .bl-sk-l,#smdReview .bl-sk-b{display:block;height:12px;border-radius:6px;background:var(--sc-high)}#smdReview .bl-sk-b{width:128px;height:48px;border-radius:12px;margin-top:6px}",
+    "#smdReview .bl-sk-l.w80{width:80%;height:15px}#smdReview .bl-sk-l.w50{width:50%}#smdReview .bl-sk-l.w90{width:90%}",
+    "@keyframes blPulse{50%{opacity:.55}}#smdReview .bl-sk>*{animation:blPulse 1.4s ease-in-out infinite}",
+    "#smdReview .bl-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}#smdReview .bl-retry{align-self:flex-start}",
     "#smdReview .bl-tools{display:flex;flex-direction:column;gap:8px;margin-top:10px;padding-top:12px;border-top:1px solid var(--sc-high)}",
     // editor
     "#smdReview .bl-editor{display:flex;flex-direction:column;gap:12px}#smdReview .bl-editor>.kit-link{align-self:flex-start}",
@@ -588,36 +608,37 @@
     "#smdReview .bl-src-t{margin:0;color:var(--on-surface);font:650 15px/1.45 var(--q-sans);overflow-wrap:anywhere}",
     "#smdReview .bl-fold{border-top:1px solid var(--sc-high)}#smdReview .bl-fold>summary{display:flex;align-items:center;gap:8px;min-height:48px;list-style:none;cursor:pointer;color:var(--on-surface);font:650 14px var(--q-sans)}",
     "#smdReview .bl-fold>summary::-webkit-details-marker{display:none}#smdReview .bl-fold-l{flex:0 0 auto}",
-    "#smdReview .bl-fold-s{flex:1 1 auto;min-width:0;color:var(--on-surface-variant);font:500 12.5px var(--q-sans);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+    "#smdReview .bl-fold-s{flex:1 1 auto;min-width:0;color:var(--on-surface-variant);font:500 12.5px var(--q-sans);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#smdReview .bl-fold-s.miss{color:var(--bl-amber);font-weight:650}",
     "#smdReview .bl-chev{margin-left:auto;color:var(--on-surface-variant);transition:transform .15s}#smdReview .bl-fold[open]>summary .bl-chev{transform:rotate(180deg)}",
     "#smdReview .bl-fold[open]>summary{margin-bottom:6px}#smdReview .bl-ai{white-space:pre-line}",
-    "#smdReview .bl-prevd,#smdReview .bl-retract{padding:0 14px;border:1px solid var(--outline-variant);border-radius:16px;background:var(--sc-lowest)}#smdReview .bl-prevd[open]{padding-bottom:14px}",
-    "#smdReview .bl-retract{padding:10px 14px;display:flex;flex-direction:column;gap:8px}#smdReview .bl-danger{color:var(--error);border-color:color-mix(in srgb,var(--error) 40%,var(--outline-variant))}",
+    "#smdReview .bl-prevd{border-bottom:1px solid var(--sc-high)}#smdReview .bl-prevd[open]{padding-bottom:12px}",
+    "#smdReview .bl-retract{display:flex;flex-direction:column;gap:8px}#smdReview .bl-danger{align-self:flex-start;color:var(--error);border-color:color-mix(in srgb,var(--error) 40%,var(--outline-variant))}",
     "#smdReview .bl-draftbox{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:12px;border-radius:12px;background:color-mix(in srgb,var(--primary) 7%,var(--sc-lowest))}#smdReview .bl-draftbox .kit-muted{flex:1 1 180px}",
     "#smdReview .bl-lab{display:flex;align-items:baseline;justify-content:space-between;gap:8px}",
-    "#smdReview .bl-cnt{flex:0 0 auto;color:var(--on-surface-variant);font:600 12px var(--q-sans);font-variant-numeric:tabular-nums}#smdReview .bl-cnt.bad{color:var(--error)}",
+    "#smdReview .bl-cnt{flex:0 0 auto;color:var(--on-surface-variant);font:600 12.5px var(--q-sans);font-variant-numeric:tabular-nums}#smdReview .bl-cnt.bad{color:var(--error)}",
     "#smdReview .bl-grp{display:flex;flex-direction:column;gap:6px;min-width:0;border-radius:12px}#smdReview .bl-hint{color:var(--on-surface-variant);font:500 12.5px/1.4 var(--q-sans)}",
     "#smdReview .bl-chips{display:flex;flex-wrap:wrap;gap:8px}",
     "#smdReview .bl-chip{display:inline-flex;align-items:center;gap:4px;max-width:100%;min-height:48px;padding:8px 14px;border:1px solid var(--outline-variant);border-radius:999px;background:var(--surface);color:var(--on-surface);font:600 14px/1.25 var(--q-sans);text-align:left;overflow-wrap:anywhere;cursor:pointer}",
-    "#smdReview .bl-chip .kit-ic{font-size:18px}#smdReview .bl-chip.on{border-color:var(--primary);background:color-mix(in srgb,var(--primary) 14%,var(--sc-lowest));color:var(--primary)}",
+    "@media (hover:hover){#smdReview .bl-chip:hover,#smdReview .bl-hit:hover{border-color:var(--primary)}}#smdReview .bl-chip .kit-ic{font-size:18px}#smdReview .bl-chip.on{border-color:var(--primary);background:color-mix(in srgb,var(--primary) 14%,var(--sc-lowest));color:var(--primary)}",
     "#smdReview .bl-hits{display:flex;flex-direction:column;border:1px solid var(--outline-variant);border-radius:12px;overflow:hidden}",
     "#smdReview .bl-hit{display:flex;align-items:center;gap:8px;min-height:48px;padding:8px 12px;border:0;border-top:1px solid var(--sc-high);background:var(--sc-lowest);color:var(--on-surface);font:500 14px/1.3 var(--q-sans);text-align:left;cursor:pointer}#smdReview .bl-hit:first-child{border-top:0}#smdReview .bl-hit .kit-ic{color:var(--primary)}",
     "#smdReview .bl-cdsco{margin:6px 0;padding:8px 10px;border-radius:10px;background:var(--sc-low);font:500 13px/1.45 var(--q-sans)}#smdReview .bl-cdsco.found{background:color-mix(in srgb,var(--primary) 10%,var(--sc-lowest))}#smdReview .bl-cdsco ul{margin:6px 0 0;padding-left:18px}",
     "#smdReview .bl-fmt{display:flex;align-items:center;gap:6px;flex-wrap:wrap}",
-    "#smdReview .bl-fmt-b{min-width:48px;min-height:48px;border:1px solid var(--outline-variant);border-radius:10px;background:var(--sc-lowest);color:var(--on-surface);font:15px var(--q-sans);cursor:pointer}#smdReview .bl-fmt-hint{flex:1 1 160px;font-size:12px}",
+    "#smdReview .bl-fmt-b{min-width:48px;min-height:48px;border:1px solid var(--outline-variant);border-radius:10px;background:var(--sc-lowest);color:var(--on-surface);font:15px var(--q-sans);cursor:pointer}#smdReview .bl-fmt-hint{flex:1 1 160px;font-size:12.5px}",
     "#smdReview .bl-vlinks{display:flex;flex-wrap:wrap;gap:8px}",
-    "#smdReview .bl-vlink{display:inline-flex;align-items:center;min-height:48px;padding:4px 14px;border-radius:999px;border:1px solid var(--primary);color:var(--primary);font:650 13.5px var(--q-sans);text-decoration:none}",
+    "#smdReview .bl-vlink{display:inline-flex;align-items:center;min-height:48px;padding:4px 14px;border-radius:999px;border:1px solid var(--primary);color:var(--primary);font:650 14px var(--q-sans);text-decoration:none}",
     "#smdReview .bl-vlink[aria-disabled=true]{border-color:var(--outline-variant);color:var(--on-surface-variant);pointer-events:none}",
     "#smdReview .bl-nums:empty{display:none}#smdReview .bl-nums{display:flex;flex-direction:column;gap:6px}",
     "#smdReview .bl-num{display:inline-block;padding:3px 9px;border-radius:999px;background:var(--bl-amber-bg);color:var(--bl-amber);font:650 12.5px var(--q-sans);font-variant-numeric:tabular-nums}",
     // bottom bar
-    "#smdReview .bl-bar{position:sticky;bottom:calc(-28px - env(safe-area-inset-bottom,0px));z-index:3;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:4px -16px 0;padding:8px 16px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--outline-variant);background:var(--bg);box-shadow:0 -6px 18px rgba(20,32,43,.08)}",
+    "#smdReview .bl-bar{position:sticky;bottom:calc(-28px - env(safe-area-inset-bottom,0px));z-index:3;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:4px -16px 0;padding:8px 16px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--outline-variant);background:var(--bg)}",
     "#smdReview .bl-bar-s{flex:1 1 200px;min-width:0}#smdReview .bl-bar-b{display:flex;flex:1 1 250px;gap:8px}#smdReview .bl-bar-b button{flex:1 1 auto;justify-content:center;min-height:48px}",
-    "#smdReview .bl-left{display:flex;align-items:center;gap:6px;width:100%;min-height:48px;padding:2px 0;border:0;background:transparent;color:var(--error);font:500 13.5px/1.35 var(--q-sans);text-align:left;cursor:pointer}#smdReview .bl-left span{min-width:0}",
+    "#smdReview .bl-left{display:flex;align-items:center;gap:8px;width:100%;min-height:48px;padding:2px 0;border:0;background:transparent;color:var(--on-surface);font:500 14px/1.35 var(--q-sans);text-align:left;cursor:pointer}",
+    "#smdReview .bl-left span:not(.kit-ic){flex:1 1 auto;min-width:0}#smdReview .bl-left .kit-ic{color:var(--primary)}#smdReview .bl-left.fix,#smdReview .bl-left.fix .kit-ic{color:var(--error)}",
     "#smdReview .bl-ready{display:flex;align-items:center;gap:6px;min-height:48px;color:var(--primary);font:650 14px var(--q-sans)}",
     // sign sheet
     "#smdReview .bl-cks{display:flex;flex-direction:column;gap:8px;min-width:0;margin:0;padding:0;border:0}#smdReview .bl-cks legend{margin-bottom:8px;padding:0}",
-    "#smdReview .bl-ck{display:flex;align-items:flex-start;gap:12px;min-height:52px;padding:12px 14px;border:1px solid var(--outline-variant);border-radius:14px;background:var(--sc-lowest);color:var(--on-surface);font:500 14.5px/1.45 var(--q-sans);cursor:pointer}",
+    "#smdReview .bl-ck{display:flex;align-items:flex-start;gap:12px;min-height:52px;padding:12px 14px;border:1px solid var(--outline-variant);border-radius:14px;background:var(--sc-lowest);color:var(--on-surface);font:500 15px/1.45 var(--q-sans);cursor:pointer;transition:background-color .15s,border-color .15s}",
     "#smdReview .bl-ck input{flex:0 0 auto;width:22px;height:22px;margin:1px 0 0;accent-color:var(--primary)}",
     "#smdReview .bl-ck:has(input:checked){border-color:var(--primary);background:color-mix(in srgb,var(--primary) 9%,var(--sc-lowest))}",
     "#smdReview .bl-ck-s{margin:0;color:var(--on-surface-variant);font:600 13px/1.4 var(--q-sans)}#smdReview .bl-ck-s.ok{color:var(--primary)}",
@@ -625,9 +646,9 @@
     // focus and the jump highlight
     "#smdReview :is(.bl-chip,.bl-seg button,.bl-q button,.bl-bar button,.bl-fold>summary,.bl-vlink,.bl-hit,.bl-fmt-b,.bl-undo button):focus-visible,#smdReview .bl-ck:has(input:focus-visible){outline:3px solid color-mix(in srgb,var(--primary) 55%,transparent);outline-offset:2px}",
     "#smdReview [tabindex='-1']:focus{outline:none}",
-    "@keyframes blFlash{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--error) 55%,transparent)}100%{box-shadow:0 0 0 12px transparent}}",
-    "#smdReview .bl-flash{outline:2px solid var(--error);outline-offset:3px;animation:blFlash .9s ease-out 2}",
-    "@media (prefers-reduced-motion:reduce){#smdReview .bl-flash{animation:none}#smdReview .bl-chev{transition:none}}",
+    "@keyframes blFlash{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--fl) 50%,transparent)}100%{box-shadow:0 0 0 12px transparent}}",
+    "#smdReview .bl-flash{--fl:var(--primary);outline:2px solid var(--fl);outline-offset:3px;animation:blFlash .9s cubic-bezier(.16,1,.3,1) 2}#smdReview .bl-flash.bad{--fl:var(--error)}",
+    "@media (prefers-reduced-motion:reduce){#smdReview .bl-flash,#smdReview .bl-sk>*{animation:none}#smdReview .bl-chev,#smdReview .bl-ck,#smdReview .bl-seg button{transition:none}}",
   ].join("");
   function deskCSS() {
     if (!D || D.getElementById("smdBulletinDeskCss")) return;
@@ -650,7 +671,7 @@
     var c = DS.cur, miss = missing(c), body = {};
     if (miss.length) { jump(); return; }   // the bottom bar already names every gap
     Object.keys(c).forEach(function (k) { if (k.charAt(0) !== "_" && k !== "state" && k !== "body_hash") body[k] = c[k]; });
-    DS.busy = true; say(""); rerender();
+    DS.busy = true; DS.busyAct = thenSign ? "savesign" : "save"; say(""); rerender();
     return api("POST", "", body).then(function (r) {
       DS.busy = false;
       if (r.status !== 200) { say(errText(r)); rerender(); return; }
@@ -707,6 +728,7 @@
     if (cmd === "toedit") { DS.view = "edit"; say(""); rerender(); scrollTop(); return; }
     if (cmd === "filter") { DS.filter = arg === "live" ? "live" : "todo"; DS.undo = null; say(""); rerender(); return; }
     if (cmd === "skip") { skip(arg, false); return; }
+    if (cmd === "retry") { DS.queueErr = ""; rerender(); return; }
     if (cmd === "unskip") { skip(arg, true); return; }
     if (cmd === "new") {
       var cand = ((DS.queue && DS.queue.candidates) || []).filter(function (x) { return x.id === arg; })[0];

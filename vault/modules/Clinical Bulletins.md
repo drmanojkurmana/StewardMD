@@ -95,6 +95,12 @@ Web push is payloadless broadcast only, so signers are reached through the nativ
 - **Bottom bar** (sticky): "Ready to sign" or "N left: ..." (`missing()`, a mirror of `validateDraft`); tapping it
   scrolls to and flashes the first gap. Save / Preview and sign send nothing while a gap remains.
 - **Sign sheet**: preview, four large checklist rows, Sign locked until all four are ticked ("3 of 4 done").
+- **Polish pass (Impeccable, 2026-09-29)**: targets are 48 px because `home.js autoFitD` zooms the app to 0.95 on
+  340-399 px phones (44 px rendered as 42). The bar says "N to fill in" in neutral text and turns red ("Fix: ...") only for
+  a wrong entry (too long, em-dash, bad link/DOI/PMID/date). Type colour = the disease card's meaning (red safety, accent
+  otherwise), shown under the title, no coloured stripe. Queue loading shows a skeleton; a failed load shows Try again
+  (it used to re-request on every render). The harness audits WCAG AA contrast (text and placeholders) and 44 px
+  targets on every desk screen, light and dark.
 
 ## Key files
 `functions/_bulletins_api.js` (routes, mounted from `functions/api/updates/[[path]].js` above the owner gate),

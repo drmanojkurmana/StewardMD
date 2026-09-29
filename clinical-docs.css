@@ -26,6 +26,11 @@
 /* Tap targets: home.js autoFitD zooms the app to 0.95 on 340-399 px phones (most iPhones), so 48 px renders
    at about 45.6 px, above the 44 pt minimum. Checked by the design audit in test/run-bulletins-ui.mjs. */
 #smdReview :is(.kit-seg, .kit-link, .kit-pill, .kit-add, .kit-clear, .kit-inp) { min-height: 48px; }
+/* Browser surfaces carry the palette too: caret, selection, placeholder (4.5:1) and a visible text-field focus ring. */
+#smdReview ::selection { background: color-mix(in srgb, var(--primary) 26%, transparent); }
+#smdReview .kit-inp { caret-color: var(--primary); }
+#smdReview .kit-inp::placeholder { color: color-mix(in srgb, var(--on-surface-variant) 80%, var(--surface)); opacity: 1; }
+#smdReview .kit-inp:focus-visible { outline: 2px solid color-mix(in srgb, var(--primary) 55%, transparent); outline-offset: 1px; }
 
 /* Colleagues sheet (kits-share.js, wave 2): above Documents (12040) because "Send to a colleague" opens
    from there; far below the Rx pad (16000). Rows reuse the review-desk list styles. */

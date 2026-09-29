@@ -44,7 +44,7 @@ const ITEMS = [
 ];
 
 // ---- mock state the test flips between steps ----
-const st = { saves: 0, skipBodies: [], killBodies: [], signerBodies: [], mode: "items", hits: 0, lastInm: "", lastHost: "", me: { canSign: false, isOwner: false }, signBodies: [], signResp: { status: 409, body: { error: "changed" } } };
+const st = { queueHits: 0, queueFail: false, saves: 0, skipBodies: [], killBodies: [], signerBodies: [], mode: "items", hits: 0, lastInm: "", lastHost: "", me: { canSign: false, isOwner: false }, signBodies: [], signResp: { status: 409, body: { error: "changed" } } };
 const QUEUE_ITEM = Object.assign(bl("b-draft", { source_date: "2026-09-02" }), {
   update_id: "u1", review_months: 12, state: "draft", body_hash: "a".repeat(64), status: "draft", orphaned: [],
   signed_name: "", signed_reg: "", signed_council: "", signed_ts: 0, review_due_ts: 0, u_title: "Source item title", u_org: "FDA", u_url: "https://example.org/u1", u_published_ts: NOW - 5 * DAY, u_summary: "AI summary text",
@@ -68,6 +68,7 @@ const server = http.createServer(async (req, res) => {
     return sendJson(res, 200, { enabled: true, v: 1, items: ITEMS }, { ETag: etag, "Cache-Control": "public, max-age=300" });
   }
   if (p === "/api/updates/bulletins/me") return sendJson(res, 200, st.me);
+  if (p === "/api/updates/bulletins/queue" && (st.queueHits++, st.queueFail)) return sendJson(res, 500, { error: "boom" });
   if (p === "/api/updates/bulletins/queue") return sendJson(res, 200, { ok: true, killed: false, items: [QUEUE_ITEM], candidates: [{ id: "u2", type: "safety_alert", title: "Candidate source", organization: "U.S. Food and Drug Administration", official_url: "http://example.org/u2", doi: "10.1056/NEJMoa2605659", pmid: "42748429", published_ts: NOW - DAY,
     summary: "In adults with Acute Bronchitis the drug cut symptom days (HR 0.72; 95% CI 0.61-0.85), 12.5% vs 17.3%, at 10 mg daily for 12 weeks. A second sentence that is long enough to push the draft beyond the four hundred character limit so that the cut lands on a full stop rather than the middle of a word, which keeps the draft readable for the doctor who must rewrite it anyway before signing it for the disease page." }] });
   if (p === "/api/updates/bulletins/skip" && req.method === "POST") { const b = await readBody(req); st.skipBodies.push(b); return sendJson(res, 200, { ok: true, update_id: b.update_id, skipped: !b.undo }); }
@@ -125,6 +126,10 @@ const AUDIT = `(function(){
     var L1=lum(fg),L2=lum(b),r=(Math.max(L1,L2)+0.05)/(Math.min(L1,L2)+0.05),px=parseFloat(cs.fontSize),w=parseInt(cs.fontWeight,10);
     var need=(px>=24||(px>=18.66&&w>=700))?3:4.5;
     if(r<need)low.push(txt.slice(0,40)+' ['+(el.className||el.tagName)+'] '+r.toFixed(2));
+  });
+  root.querySelectorAll('input[placeholder],textarea[placeholder]').forEach(function(el){
+    if(!shown(el)||el.disabled||el.value)return;var fg=parse(getComputedStyle(el,'::placeholder').color),b=bg(el);if(!fg)return;fg=over(fg,b);
+    var L1=lum(fg),L2=lum(b),r=(Math.max(L1,L2)+0.05)/(Math.min(L1,L2)+0.05);if(r<4.5)low.push('placeholder '+el.id+' '+r.toFixed(2));
   });
   root.querySelectorAll('button,a[href],summary,input,textarea,select').forEach(function(el){
     if(!shown(el)||el.disabled||el.closest('.bl-preview'))return;
@@ -271,6 +276,14 @@ try {
   ok(await until(`/Nothing is live yet/.test(document.querySelector('#smdReview').textContent)&&!document.querySelector('#smdReview [data-bl-act="edit:b-draft"]')`), "Live shows only what is on the disease page");
   await ev(`document.querySelector('#smdReview [data-bl-act="filter:todo"]').click();true`);
   await until(`!!document.querySelector('#smdReview [data-bl-act="edit:b-draft"]')`);
+  st.queueFail = true; const qh = st.queueHits;
+  await ev("SMD_BULLETINS_DESK._state.queue=null;SMD_REVIEW._render();true");
+  ok(await until(`!!document.querySelector('#smdReview [data-bl-act="retry"]')&&/Could not load the queue/.test(document.querySelector('#smdReview .bl-banner.err').textContent)`), "a failed queue load says so and offers Try again");
+  await sleep(1200);
+  ok(st.queueHits - qh === 1, "a failed load is not retried in a loop", st.queueHits - qh);
+  st.queueFail = false;
+  await ev(`document.querySelector('#smdReview [data-bl-act="retry"]').click();true`);
+  ok(await until(`!!document.querySelector('#smdReview [data-bl-act="edit:b-draft"]')`), "Try again loads the queue");
   await ev(`document.querySelector('#smdReview [data-bl-act="edit:b-draft"]').click();true`);
   ok(await until(`!!document.querySelector('#smdReview .bl-preview .smd-bl')`), "editor shows a live preview");
   ok(await ev(`['1','2','3'].map(function(n){return document.getElementById('bl_s'+n).textContent}).join('|')==='1Read the source|2Write it in your own words|3Classify'`), "editor runs in the order of the work: read, write, classify");
@@ -334,7 +347,7 @@ try {
   ok(await ev(`document.getElementById('bl_open_doi').getAttribute('href')==='https://doi.org/10.1001/jama.2026.12627'&&!document.getElementById('bl_open_pmid').hasAttribute('href')&&document.getElementById('bl_open_pmid').getAttribute('aria-disabled')==='true'`), "links follow edits; an empty PMID disables its link");
   ok(await until(`!!document.querySelector('#smdReview [data-bl-act="draft"]')`), "a new bulletin offers Draft from source");
   ok(await ev(`document.getElementById('bl_what_changed').value===''`), "nothing is pre-written before the signer asks");
-  ok(await ev(`/4 left: What changed, Diseases, India status and 1 more/.test(document.getElementById('bl_bar_s').textContent)`), "the bottom bar names what is still missing", await ev(`document.getElementById('bl_bar_s').textContent`));
+  ok(await ev(`/4 to fill in: What changed, Diseases, India status and 1 more/.test(document.getElementById('bl_bar_s').textContent)`), "the bottom bar names what is still missing", await ev(`document.getElementById('bl_bar_s').textContent`));
   const savesBefore = st.saves;
   await ev(`document.querySelector('#smdReview [data-bl-act="save"]').click();true`); await sleep(400);
   ok(st.saves === savesBefore && await ev(`document.activeElement&&document.activeElement.id==='bl_what_changed'&&document.getElementById('bl_what_changed').classList.contains('bl-flash')`), "Save with gaps sends nothing and takes the doctor to the first gap");
@@ -370,13 +383,17 @@ try {
   await ev(`document.getElementById('bl_cq').value='camizestrant';document.querySelector('#smdReview [data-bl-act="cdsco"]').click();true`);
   ok(await until(`/Not found in the CDSCO new-drug lists for 2020 to 2026 .*does not prove it is unapproved/.test((document.querySelector('#smdReview .bl-cdsco')||{}).textContent||'')`), "a miss says which lists were checked and that absence proves nothing");
   // the bar points at the one gap left; tapping it goes there; one tap on a chip fills it
-  ok(await ev(`/1 left: India status/.test(document.getElementById('bl_bar_s').textContent)`), "only India status is left", await ev(`document.getElementById('bl_bar_s').textContent`));
+  ok(await ev(`/1 to fill in: India status/.test(document.getElementById('bl_bar_s').textContent)`), "only India status is left", await ev(`document.getElementById('bl_bar_s').textContent`));
   await ev(`document.querySelector('#smdReview [data-bl-act="jump"]').click();true`); await sleep(200);
   ok(await ev(`document.getElementById('bl_sec_india_status').classList.contains('bl-flash')&&document.activeElement&&document.activeElement.getAttribute('data-bl-act')==='set:india_status:cdsco_approved'`), "tapping the gap list jumps to India status");
   await shot("desk-editor-classify"); await audit("classify");
   await ev(`document.querySelector('#smdReview [data-bl-act="set:india_status:unknown"]').click();true`);
   ok(await until(`SMD_BULLETINS_DESK._state.cur.india_status==='unknown'&&document.querySelector('#smdReview [data-bl-act="set:india_status:unknown"]').getAttribute('aria-pressed')==='true'&&/Ready to sign/.test(document.getElementById('bl_bar_s').textContent)`), "one tap sets India status and the bar turns ready");
   ok(await ev(`document.getElementById('bl_what_changed').value.indexOf('[b]Acute Bronchitis[/b]')>=0&&document.getElementById('bl_headline').value==='Headline for the [b]draft[/b]'`), "a chip tap keeps everything typed");
+  await ev(`(function(){var a=document.getElementById('bl_applies_to');a.value='Adults \u2014 over 65';a.dispatchEvent(new Event('input',{bubbles:true}));return true})()`);
+  ok(await ev(`!!document.querySelector('#bl_bar_s .bl-left.fix')&&/Fix: Applies to/.test(document.getElementById('bl_bar_s').textContent)`), "a wrong entry (an em-dash) is flagged as Fix, in red");
+  await ev(`(function(){var a=document.getElementById('bl_applies_to');a.value='';a.dispatchEvent(new Event('input',{bubbles:true}));return true})()`);
+  ok(await ev(`/Ready to sign/.test(document.getElementById('bl_bar_s').textContent)`), "clearing it returns the bar to ready");
   await ev("document.body.classList.add('dark');true"); await sleep(150); await shot("desk-editor-dark"); await audit("editor, dark mode");
   ok(await ev(`(function(){var c=getComputedStyle(document.querySelector('#smdReview .bl-chip.on'));return c.color!==c.backgroundColor})()`), "dark mode: chips stay readable");
   await ev("document.body.classList.remove('dark');true");
