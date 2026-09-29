@@ -168,3 +168,17 @@ directly (like the 2026-09-28 open-content edit) and `test/ophthalmos-sync.json`
 - Status bar: `ophthalmos.js` sets dark status-bar icons on open and hands back to `SMD_THEME_REVEAL.syncSystemUI()`
   on close (a dark-mode host would otherwise show a white clock on the white overlay).
 - Cache token `?v=oph10`.
+
+## Follows the app's light / dark mode (oph11, 2026-09-29)
+Owner: "white or black should be linked to system, just like dark mode and light mode". The app's mode is `body.dark`
+(theme-sync.js ties it to the phone's setting). Light = the oph10 white tokens (default). Dark = the pre-oph10
+reading-room palette, restored by **`oph-theme-dark.css`** (StewardMD-side, `body.dark .oph-overlay ...`; named
+`oph-*` so the sync test's `ophthalmos*.css` = module-file rule does not claim it, and a module re-sync never
+overwrites it). In dark mode the 73 Learn line diagrams keep their white card (drawn for white); photos are on black in
+both modes. Switching mode while Ophthalmos is open follows at once (pure CSS).
+- `ophthalmos.js` `statusBar()`: on a dark host it hands the status bar to `SMD_THEME_REVEAL.syncSystemUI()` instead of
+  forcing dark icons over a black overlay. Edited here, sha updated in `test/ophthalmos-sync.json`: **port to the
+  module repo** with the oph10 change.
+- All 22 Ophthalmos tags moved to `?v=oph11` (test expects one shared token).
+- Test: `test/run-ophthalmos-theme-ui.mjs` (both modes, live switch, contrast audit of every visible text on welcome,
+  test hub, simulator, stats, learn home, lesson; diagram card white; photo stage black; status bar).
