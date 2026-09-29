@@ -467,6 +467,27 @@ async function pool(items, fn, n = 6) {
   return out;
 }
 
+// Deck case for one scanned record k = {id, h, fhr, uc, features, stripQuality, acidosis, archetypeSuggested}; writes its SVG.
+function caseFrom(k) {
+  const { svg, layout } = renderCalibratedTraceSvg(k.fhr, k.uc, k.h.fs);
+  writeFileSync(OUT_MEDIA_DIR + "/" + k.id + ".svg", svg);
+  const c = k.h.clinical;
+  return {
+    id: k.id, svg: "ctg/" + k.id + ".svg", layout, archetypeSuggested: k.archetypeSuggested,
+    vignette: vignetteFrom(c), features: Object.assign({ variabilityBand: k.features.variability.band, decelCount: k.features.decels.length }, k.features), figo: k.features.figoSuggested,
+    outcome: { pH: c["pH"], BE: c["BE"], BDecf: c["BDecf"], pCO2: c["pCO2"], apgar1: c["Apgar1"], apgar5: c["Apgar5"], weightG: c["Weight(g)"] },
+    acidosis: k.acidosis, stripQuality: k.stripQuality, qualityNote: "", review: null,
+  };
+}
+function stripQualityNote(k, c) {
+  const sb = twoPassBaseline(k.fhr), hi = Array.from(k.fhr).filter((v) => v > 180).length;
+  const last5 = Array.from(k.fhr).slice(-5 * 60 * k.h.fs).filter((v) => v > 180).length;
+  const notes = [];
+  if (sb != null && Math.abs(sb - c.features.baseline) >= 10) notes.push("strip baseline " + sb + " differs from the " + c.features.window.minutes + " min baseline " + c.features.baseline);
+  if (hi) notes.push(hi + " samples above 180 bpm in the strip" + (last5 ? " (" + last5 + " in the last 5 min)" : ""));
+  return "strip FHR loss " + c.stripQuality.fhrLossPct + "%, UC present " + c.stripQuality.ucPresentPct + "%; " + (notes.length ? notes.join("; ") : "no artefact concern found by the checks") + ". Features are computed on the " + c.features.window.minutes + " min window.";
+}
+
 export async function mainV2() {
   // Header field codings, checked 2026-09-29 against https://physionet.org/content/ctu-uhb-ctgdb/1.0.0/ and
   // Chudacek 2014, BMC Pregnancy Childbirth 14:16 (incl. Additional file 3). Neither source has a field-by-field
@@ -506,31 +527,111 @@ export async function mainV2() {
     return { id: h.record, h, fhr: sFhr, uc: sUc, features, stripQuality: stripQ, acidosis: acidosisClass(h.clinical) };
   })).filter(Boolean);
   const chosen = pickCases(cands);
-  const cases = chosen.map((k) => {
-    const { svg, layout } = renderCalibratedTraceSvg(k.fhr, k.uc, k.h.fs);
-    writeFileSync(OUT_MEDIA_DIR + "/" + k.id + ".svg", svg);
-    const c = k.h.clinical;
-    return {
-      id: k.id, svg: "ctg/" + k.id + ".svg", layout, archetypeSuggested: k.archetypeSuggested,
-      vignette: vignetteFrom(c), features: Object.assign({ variabilityBand: k.features.variability.band, decelCount: k.features.decels.length }, k.features), figo: k.features.figoSuggested,
-      outcome: { pH: c["pH"], BE: c["BE"], BDecf: c["BDecf"], pCO2: c["pCO2"], apgar1: c["Apgar1"], apgar5: c["Apgar5"], weightG: c["Weight(g)"] },
-      acidosis: k.acidosis, stripQuality: k.stripQuality, qualityNote: "", review: null,
-    };
-  });
-  const qNote = (k, c) => {
-    const sb = twoPassBaseline(k.fhr), hi = Array.from(k.fhr).filter((v) => v > 180).length;
-    const last5 = Array.from(k.fhr).slice(-5 * 60 * k.h.fs).filter((v) => v > 180).length;
-    const notes = [];
-    if (sb != null && Math.abs(sb - c.features.baseline) >= 10) notes.push("strip baseline " + sb + " differs from the " + c.features.window.minutes + " min baseline " + c.features.baseline);
-    if (hi) notes.push(hi + " samples above 180 bpm in the strip" + (last5 ? " (" + last5 + " in the last 5 min)" : ""));
-    return "strip FHR loss " + c.stripQuality.fhrLossPct + "%, UC present " + c.stripQuality.ucPresentPct + "%; " + (notes.length ? notes.join("; ") : "no artefact concern found by the checks") + ". Features are computed on the " + c.features.window.minutes + " min window.";
-  };
+  const cases = chosen.map(caseFrom);
   // The quality note needs the raw signal, so it is written into the deck too: the Review Desk shows it per case.
-  cases.forEach((c, i) => { c.qualityNote = qNote(chosen[i], c); });
+  cases.forEach((c, i) => { c.qualityNote = stripQualityNote(chosen[i], c); });
   writeFileSync(OUT_DECK, JSON.stringify({ v: 2, id: "ctg", cases }, null, 1));
   mkdirSync("docs/tokos", { recursive: true });
   writeReviewQueue(cases, cases.map((c) => c.qualityNote));
   console.log("wrote " + cases.length + " cases; archetypes: " + cases.map((c) => c.archetypeSuggested).join(", "));
+}
+
+// ---------- extension: scan all 552 records for the archetypes the first 90 did not give ----------
+// FIGO 2015 sinusoidal pattern (guideline text read 2026-09-29): a regular, smooth, undulating signal resembling a
+// sine wave, amplitude 5-15 bpm, 3-5 cycles per minute, lasting more than 30 min, with absent accelerations.
+// Detection is a screen for the reviewer, not a diagnosis: 5-minute blocks pass when at least half of the detrended
+// power sits at 3-5 cycles per minute, the peak-to-trough range (5th to 95th percentile) is 5-15 bpm, and there is no
+// acceleration (15 bpm above baseline for 15 s); 7 blocks in a row (35 min) count as "found", 3 in a row as "near".
+export const SINUS = { CPM_MIN: 3, CPM_MAX: 5, AMP_MIN: 5, AMP_MAX: 15, BLOCK_MIN: 5, MIN_BLOCKS: 7, NEAR_BLOCKS: 3, BAND_FRAC: 0.5, MIN_VALID: 0.85 };
+
+export function detectSinusoidalLike(fhrAll, fs, baseline) {
+  const n = Math.min(fhrAll.length, CFG.WINDOW_MIN * 60 * fs);
+  const fhr = fhrAll.slice(fhrAll.length - n);
+  const sec = Math.floor(n / fs), B = SINUS.BLOCK_MIN * 60, nb = Math.floor(sec / B);
+  const x = new Float64Array(sec); // 1 Hz series: mean of the valid samples in each second
+  for (let t = 0; t < sec; t++) {
+    let sum = 0, c = 0;
+    for (let j = 0; j < fs; j++) { const v = fhr[t * fs + j]; if (ok(v)) { sum += v; c++; } }
+    x[t] = c ? sum / c : NaN;
+  }
+  const flags = [];
+  for (let k = 0; k < nb; k++) {
+    const seg = Array.from(x.subarray(k * B, (k + 1) * B));
+    if (seg.filter(Number.isFinite).length < B * SINUS.MIN_VALID) { flags.push(false); continue; }
+    for (let i = 0; i < B; i++) { // fill dropouts by linear interpolation (nearest value at the ends)
+      if (Number.isFinite(seg[i])) continue;
+      let l = i - 1, r = i + 1;
+      while (l >= 0 && !Number.isFinite(seg[l])) l--;
+      while (r < B && !Number.isFinite(seg[r])) r++;
+      seg[i] = l < 0 ? seg[r] : r >= B ? seg[l] : seg[l] + ((seg[r] - seg[l]) * (i - l)) / (r - l);
+    }
+    const pre = [0]; seg.forEach((v, i) => pre.push(pre[i] + v));
+    const d = seg.map((v, i) => { const a = Math.max(0, i - 30), b = Math.min(B, i + 31); return v - (pre[b] - pre[a]) / (b - a); }); // minus a 61 s centred mean
+    let band = 0, all = 0;
+    for (let f = 0.6; f <= 10.001; f += 0.2) {
+      const w = (2 * Math.PI * f) / 60; let re = 0, im = 0;
+      for (let t = 0; t < B; t++) { re += d[t] * Math.cos(w * t); im += d[t] * Math.sin(w * t); }
+      const pw = re * re + im * im; all += pw;
+      if (f >= SINUS.CPM_MIN - 0.001 && f <= SINUS.CPM_MAX + 0.001) band += pw;
+    }
+    const s = d.slice().sort((a, b) => a - b), amp = pct(s, 0.95) - pct(s, 0.05);
+    let run = 0, accel = false;
+    for (let t = 0; t < B; t++) { if (seg[t] >= baseline + 15) { if (++run >= 15) accel = true; } else run = 0; }
+    flags.push(all > 0 && band / all >= SINUS.BAND_FRAC && amp >= SINUS.AMP_MIN && amp <= SINUS.AMP_MAX && !accel);
+  }
+  let longest = 0, cur = 0;
+  flags.forEach((f) => { cur = f ? cur + 1 : 0; longest = Math.max(longest, cur); });
+  return { blocks: flags.length, longestRunBlocks: longest, minutes: longest * SINUS.BLOCK_MIN, found: longest >= SINUS.MIN_BLOCKS, near: longest >= SINUS.NEAR_BLOCKS };
+}
+
+// Adds up to maxNew cases to the committed deck (the first 12 stay byte for byte as they are) from a scan of every
+// record, in memory. Prints what the scan found. Run --queue-only afterwards to refresh docs/tokos/review-queue.md.
+export async function mainExtend(maxNew = 8) {
+  const deckText = readFileSync(OUT_DECK, "utf8");
+  const deck = JSON.parse(deckText);
+  if (JSON.stringify(deck, null, 1) !== deckText) throw new Error(OUT_DECK + " does not round-trip through JSON.stringify(_, null, 1); refusing to rewrite it");
+  const have = new Set(deck.cases.map((c) => c.id));
+  mkdirSync(OUT_MEDIA_DIR, { recursive: true });
+  const ids = (await fetchText("RECORDS")).trim().split("\n");
+  const headers = (await pool(ids, async (id) => decodeHeader(await fetchText(id + ".hea")))).filter((h) => h.clinical["pH"] != null);
+  const scan = { records: ids.length, withPH: headers.length, decoded: 0, extracted: 0, gatePassed: 0, tachysystole: 0, reduced: 0, sinusoidalFound: 0, sinusoidalNear: 0, maxLongestRunBlocks: 0 };
+  const cands = (await pool(headers, async (h) => {
+    const raw = decodeSignal(await fetchBuf(h.record + ".dat"), h);
+    scan.decoded++;
+    const fhrAll = toPhysical(raw[0], h.signals[0]), ucAll = toPhysical(raw[1], h.signals[1]);
+    const features = extractFIGOFeatures(fhrAll, ucAll, h.fs);
+    if (!features) return null;
+    scan.extracted++;
+    if (features.quality.suboptimal) return null;
+    const n = Math.min(fhrAll.length, CFG.STRIP_MIN * 60 * h.fs);
+    const sFhr = fhrAll.slice(fhrAll.length - n), sUc = ucAll.slice(ucAll.length - n);
+    const stripQ = stripQuality(sFhr, sUc);
+    if (stripQ.fhrLossPct > STRIP_MAX_FHR_LOSS || stripQ.ucPresentPct < STRIP_MIN_UC_PRESENT) return null;
+    scan.gatePassed++;
+    const sinus = detectSinusoidalLike(fhrAll, h.fs, features.baseline);
+    scan.maxLongestRunBlocks = Math.max(scan.maxLongestRunBlocks, sinus.longestRunBlocks);
+    // per10 above 8 is more likely a noisy toco than 8 real contractions in 10 min, so it is not offered as tachysystole.
+    const tachy = features.contractions.tachysystole && features.contractions.per10 <= 8, red = features.variability.band === "reduced";
+    if (tachy) scan.tachysystole++;
+    if (red) scan.reduced++;
+    if (sinus.found) scan.sinusoidalFound++;
+    else if (sinus.near) scan.sinusoidalNear++;
+    if (!(tachy || red || sinus.found) || have.has(h.record)) return null;
+    return { id: h.record, h, fhr: sFhr, uc: sUc, features, stripQuality: stripQ, acidosis: acidosisClass(h.clinical), sinus, tachy, red };
+  })).filter(Boolean);
+  const order = (a, b) => (a.features.contractions.count30 > 0 ? 0 : 1) - (b.features.contractions.count30 > 0 ? 0 : 1) || a.features.quality.lossPct - b.features.quality.lossPct;
+  const used = new Set(), out = [];
+  const take = (arch, n, test) => cands.filter((k) => !used.has(k.id) && test(k)).sort(order).slice(0, n).forEach((k) => { used.add(k.id); out.push(Object.assign({ archetypeSuggested: arch }, k)); });
+  take("sinusoidal_like", 2, (k) => k.sinus.found);
+  take("tachysystole", 3, (k) => k.tachy);
+  take("reduced_variability", 3, (k) => k.red);
+  take("tachysystole", maxNew - out.length, (k) => k.tachy);
+  take("reduced_variability", maxNew - out.length, (k) => k.red);
+  const fresh = out.slice(0, maxNew).map((k) => { const c = caseFrom(k); c.qualityNote = stripQualityNote(k, c); return c; });
+  deck.cases.push(...fresh);
+  writeFileSync(OUT_DECK, JSON.stringify(deck, null, 1));
+  console.log("scan " + JSON.stringify(scan));
+  console.log("added " + fresh.length + ": " + fresh.map((c) => c.id + " " + c.archetypeSuggested + " figo " + c.figo + " per10 " + c.features.contractions.per10 + " var " + c.features.variability.band + " pH " + c.outcome.pH).join("; "));
 }
 
 // ---------- docs/tokos/review-queue.md: the obstetrician's sign-off instrument ----------
@@ -587,5 +688,6 @@ function queueOnly() {
 
 if (import.meta.url === "file://" + process.argv[1]) {
   if (process.argv.includes("--queue-only")) queueOnly();
+  else if (process.argv.includes("--extend")) mainExtend().catch((e) => { console.error(e); process.exit(1); });
   else mainV2().catch((e) => { console.error(e); process.exit(1); });
 }
