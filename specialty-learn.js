@@ -63,7 +63,7 @@
       testClinic: T("{c}: real cases of this", "{c}: इसके असली केस"), testBank: T("Question bank: questions on this topic", "प्रश्न बैंक: इस विषय के प्रश्न"),
       trySim: T("Try the drill", "ड्रिल पर अभ्यास करें"), simLine: T("Drill: {t}", "ड्रिल: {t}"),
       tryTool: T("Try the calculator", "कैलकुलेटर आज़माएँ"), toolLine: T("Calculator: {t}", "कैलकुलेटर: {t}"),
-      goDeeper: T("Go deeper", "और गहराई से"), deeperNote: T("Study note: {t}", "अध्ययन नोट: {t}"),
+      goDeeper: T("Go deeper", "और गहराई से"), tryExplorer: T("Explore it", "इसे खोजें"), explorerLine: T("Explorer: {t}", "एक्सप्लोरर: {t}"), deeperNote: T("Study note: {t}", "अध्ययन नोट: {t}"),
       nextLesson: T("Next lesson", "अगला पाठ"), backLearn: T("Back to Learn", "सीखें पर वापस"),
       recall: T("Say the one thing to remember from this lesson, then check.", "इस पाठ की ज़रूरी बात मन में बोलें, फिर जाँचें।"),
       showAnswer: T("Show answer", "उत्तर देखें"), again: T("Again", "फिर से"), gotIt: T("Got it", "याद था"),
@@ -340,7 +340,7 @@
       if (key === "idea") {
         body = '<div class="ln-banner' + (l.see.img ? "" : " diagram") + '" aria-hidden="true"><img src="' + esc(imgSrc(l.see)) + '" alt="" decoding="async"></div>' +
           '<h1 class="ln-title">' + tx(l.title) + "</h1>" +
-          '<p class="ln-meta">' + s("min", { n: l.minutes }) + " · " + s(l.level) + (l.review === "ai_drafted" && cfg.draft ? " · " + s("draftMark") : "") + "</p>" +
+          '<p class="ln-meta">' + s("min", { n: l.minutes }) + " · " + s(l.level) + (D.reviewStatus(l.review) === "ai_drafted" && cfg.draft ? " · " + s("draftMark") : "") + "</p>" +
           '<p class="ln-idea">' + rich(l.idea) + "</p>";
       } else if (key === "see") body = seeHtml(l);
       else if (key === "why") {
@@ -419,21 +419,25 @@
     function find(list, id) { var r = null; list.forEach(function (x) { if (!r && id && x.id === id) r = x; }); return r; }
     function doneHtml(l) {
       var t = l.test || {}, spec = t.clinic && I.clinic(t.clinic), bank = bankFor(t);
-      var test = spec && st.decks[t.clinic]
+      var test = spec && (spec.pending || st.decks[t.clinic])
         ? '<button type="button" class="sp-btn pri sp-wide" data-act="lntest">' + ico("target") + " " + s("testYourself") + '</button><p class="sp-small">' + s("testClinic", { c: D.t(spec.title, L()) }) + "</p>"
         : bank ? '<button type="button" class="sp-btn pri sp-wide" data-act="lntest">' + ico("target") + " " + s("testYourself") + '</button><p class="sp-small">' + s("testBank") + "</p>" : "";
       var sm = find(host._sims, t.sim);
       var sim = sm ? '<button type="button" class="sp-btn sec sp-wide" data-act="lnsim" data-s="' + esc(sm.id) + '">' + ico("target") + " " + s("trySim") + '</button><p class="sp-small">' + s("simLine", { t: D.t(sm.title, L()) }) + "</p>" : "";
       var tl = find(host._tools, t.tool);
       var tool = tl ? '<button type="button" class="sp-btn sec sp-wide" data-act="lntool" data-s="' + esc(tl.id) + '">' + ico("calc") + " " + s("tryTool") + '</button><p class="sp-small">' + s("toolLine", { t: D.t(tl.title, L()) }) + "</p>" : "";
+      var ex = t.explorer && find(host._explore, t.explorer);
+      var explorer = ex ? '<button type="button" class="sp-btn sec sp-wide" data-act="lnexplore" data-s="' + esc(ex.id) + '">' + ico("compass") + " " + s("tryExplorer") + '</button><p class="sp-small">' + s("explorerLine", { t: D.t(ex.title, L()) }) + "</p>" : "";
       var note = l.deeper && noteFor(l.deeper.note);
+      // Without a study note, a lesson's own deeper.text {en, hi} is shown on the finish screen.
+      var deepText = !note && l.deeper && l.deeper.text ? '<section class="ln-deeper" aria-labelledby="lnDeepH"><h2 class="sp-h2" id="lnDeepH">' + s("goDeeper") + "</h2><p>" + rich(l.deeper.text) + "</p></section>" : "";
       var deeper = note ? '<button type="button" class="sp-btn sec sp-wide" data-act="lndeeper" data-n="' + esc(l.deeper.note) + '">' + ico("book") + " " + s("goDeeper") + '</button><p class="sp-small">' + s("deeperNote", { t: D.t(note.title, L()) }) + "</p>" : "";
       var nx = D.nextLesson(W.ix, st.store), nl = nx && meta(nx.id);
       var more = nl ? '<button type="button" class="sp-nextnote" data-act="lesson" data-l="' + esc(nx.id) + '"><span class="sp-small">' + s("nextLesson") +
         (nx.level === "resident" ? " " + badge("learn.resident") : "") + "</span><b>" + tx(nl.title) + '</b><span class="sp-chev" aria-hidden="true">' + ico("chev") + "</span></button>" : "";
       return '<div class="ln-done"><p class="sp-verdict ok">' + (ico("check") || "✓") + "<span>" + s("lessonDone") + "</span></p>" +
-        '<h1 class="ln-title">' + tx(l.title) + '</h1><p class="ln-remember">' + rich(l.remember) + '</p><p class="sp-small">' + s("comesBack") + "</p></div>" +
-        '<div class="ln-done-act">' + test + sim + tool + deeper + more +
+        '<h1 class="ln-title">' + tx(l.title) + '</h1><p class="ln-remember">' + rich(l.remember) + '</p><p class="sp-small">' + s("comesBack") + "</p></div>" + deepText +
+        '<div class="ln-done-act">' + test + sim + tool + explorer + deeper + more +
         I.maikBtn("I am learning " + D.t(cfg.subtitle || cfg.title, "en") + ". Lesson: " + D.t(l.title, "en") + ". Key point: " + D.glossParts(D.t(l.remember, "en")).map(function (p) { return p.text != null ? p.text : p.shown || p.term; }).join("") +
           " Explain this in more depth, with a clinical example.") +
         '<button type="button" class="sp-btn sec sp-wide ln-backlearn" data-act="lnexit">' + s("backLearn") + "</button></div>";
@@ -726,12 +730,13 @@
       var l = W.les, t = l && l.test, ret = lessonRet(), b = bankFor(t);
       if (!t) return;
       I.leave();
-      if (t.clinic && I.clinic(t.clinic) && st.decks[t.clinic]) I.startClinic(t.clinic, { classes: t.classes });
+      if (t.clinic && I.clinic(t.clinic) && (I.clinic(t.clinic).pending || st.decks[t.clinic])) I.startClinic(t.clinic, { classes: t.classes });
       else if (b) b.topic(t.mcqTopic);
       afterJump(ret); // the paywall leaves the lesson on screen: repaint it
     };
     A.lnsim = function (b) { var ret = lessonRet(), x = find(host._sims, b.getAttribute("data-s")); I.leave(); if (x) x.open(); afterJump(ret); };
     A.lntool = function (b) { var ret = lessonRet(), x = find(host._tools, b.getAttribute("data-s")); I.leave(); if (x) x.open(); afterJump(ret); };
+    A.lnexplore = function (b) { var ret = lessonRet(), id = b.getAttribute("data-s"); if (!host._exploreUI) return; I.leave(); host._exploreUI.open(id); afterJump(ret); };
     A.lndeeper = function (b) { var ret = lessonRet(); if (A.note) A.note(b); afterJump(ret); };
 
     function typing(e) { var n = e.target && e.target.tagName; return n === "INPUT" || n === "TEXTAREA"; }

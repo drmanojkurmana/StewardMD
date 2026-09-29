@@ -6,7 +6,7 @@
    Kill switch (same rule as the home tile in home.js): localStorage smd_tokos = "0" or ?tokos=0 for this load. */
 (function (G) {
   "use strict";
-  var V = "tok4";
+  var V = "tok5";
   var CSS = ["specialty.css", "tokos.css"];
   var JS = ["specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "specialty-learn.js", "specialty-bank.js",
     "specialty-explore.js", "specialty-tools.js", "specialty-notes.js", "tokos.js", "tokos-calipers.js", "tokos-ctg.js"];

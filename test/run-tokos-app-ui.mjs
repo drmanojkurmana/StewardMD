@@ -55,14 +55,24 @@ try {
   await load(BASE);
   // lazy loading: app boot requests the loader and no engine or Tokós file
   const ENG = /\/(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?\.(js|css)|tokos(-core|-data|-stage|-ctg|-calipers)?\.(js|css)|tokos-models\/)/;
-  ok(reqs.some((u) => /tokos-loader\.js\?v=tok4/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads tokos-loader.js and no engine or Tokós file" + (reqs.filter((u) => ENG.test(u)).length ? ": " + reqs.filter((u) => ENG.test(u)).join(", ") : ""));
+  ok(reqs.some((u) => /tokos-loader\.js\?v=tok5/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads tokos-loader.js and no engine or Tokós file" + (reqs.filter((u) => ENG.test(u)).length ? ": " + reqs.filter((u) => ENG.test(u)).join(", ") : ""));
   ok(await until(tile, 10000), "default (no flag): the Tokós home tile renders without being added from Add Tool");
   await ev(`var t=document.querySelector('.rnav-tile[data-act=tokos]'); t.focus(); t.click(); return 1;`);
   ok(await until(`return TOKOS.isOpen() && !!document.getElementById("smdTokos");`, 10000), "tile opens the Tokós overlay");
   ok(await until(`return !!document.querySelector('#smdTokos [data-act=pick][data-t=test]');`, 20000), "first open loads Tokós and asks Learn or Test");
-  ok(await ev(`return !!window.SPECIALTY_CORE;`) === true && reqs.some((u) => /specialty-shell\.js\?v=tok4/.test(u)) && reqs.some((u) => /tokos-ctg\.js\?v=tok4/.test(u)), "the engine and Tokós loaded on open, at the loader's token");
+  ok(await ev(`return !!window.SPECIALTY_CORE;`) === true && reqs.some((u) => /specialty-shell\.js\?v=tok5/.test(u)) && reqs.some((u) => /tokos-ctg\.js\?v=tok5/.test(u)), "the engine and Tokós loaded on open, at the loader's token");
   await ev(`document.querySelector('#smdTokos [data-act=pick][data-t=test]').click(); return 1;`);
   ok(await until(`return !!document.querySelector('#smdTokos [data-act=clinic][data-t=ctg]');`, 20000), "hub shows the CTG clinic");
+  // Tokós 2.0 wiring: every model in tokos/models.json is listed (13 tools, 6 drills + labour + the OSCE link, 6 explorers),
+  // the two built clinics are pending entries after CTG, and a pending clinic opens its "next update" screen.
+  ok(await until(`var T=TOKOS; return T._tools.length === 13 && T._sims.length === 8 && T._explore.length === 6;`, 20000), "all 13 calculators, 6 drills + labour + OSCE and 6 explorers are listed: " + await ev(`var T=TOKOS; return [T._tools.length, T._sims.map(function(x){return x.id;}).join(","), T._explore.length].join(" | ");`));
+  ok(await ev(`return TOKOS._clinics.map(function(x){return x.id+(x.pending?"*":"");}).join(",");`) === "ctg,fetal-planes*,hc-biometry*", "clinics: CTG, then fetal planes and HC pending");
+  ok(await ev(`return !!document.querySelector('#smdTokos [data-act=clinic][data-t=fetal-planes]') && !!document.querySelector('#smdTokos [data-act=sim][data-s=osce]');`) === true, "Test hub rows for the pending fetal-planes clinic and the OSCE link");
+  await ev(`document.querySelector('#smdTokos [data-act=clinic][data-t=fetal-planes]').click(); return 1;`);
+  ok(await until(`return TOKOS._st.view === "clinicsoon";`, 5000), "a pending clinic opens its next-update screen");
+  await ev(`TOKOS._explore.filter(function(x){return x.id==="popq";})[0].open(TOKOS); return 1;`);
+  ok(await until(`return TOKOS._st.view === "explore" && /next update/.test(document.getElementById("smdTokos").textContent);`, 5000), "a pending explorer opens its next-update screen with sources");
+  await ev(`for (var i = 0; i < 5 && TOKOS._st.view !== "hub"; i++) TOKOS.back(); return 1;`);
   await ev(`TOKOS.back(); return 1;`);
   ok(await until(`return !TOKOS.isOpen();`, 5000), "back() closes Tokós and returns to home");
   ok(await ev(`var a=document.activeElement; return !!(a && a.matches && a.matches('.rnav-tile[data-act=tokos]'));`) === true, "closing Tokós returns focus to the tile that opened it");
@@ -75,7 +85,7 @@ try {
   await ev(`SMD_REVIEW.open(); return 1;`);
   await until(`return !!document.querySelector('#smdReview [data-rv-act="kind:tokos"]');`, 10000);
   await ev(`document.querySelector('#smdReview [data-rv-act="kind:tokos"]').click(); return 1;`);
-  ok(await until(`return document.querySelectorAll('#smdReview .rv-row').length === 15;`, 10000), "Review Desk Tokós tab lists 12 cases and 3 text blocks");
+  ok(await until(`return document.querySelectorAll('#smdReview .rv-row').length === 19;`, 10000), "Review Desk Tokós tab lists 16 cases (4 added in Tokós 2.0) and 3 text blocks");
   ok(await ev(`var r=document.querySelector('#smdReview [data-rv-act="sel:case-1031"]'); return !!r && /Tokós CTG case 1031/.test(r.textContent) && /Pending review/.test(r.textContent);`) === true, "a case row is titled and pending review");
   await ev(`document.querySelector('#smdReview [data-rv-act="sel:case-1031"]').click(); return 1;`);
   ok(await until(`var t=document.querySelector('#smdReview .rv-tok'); return !!t && /FIGO category/.test(t.textContent) && /Baseline/.test(t.textContent) && /Variability/.test(t.textContent) && /Decelerations/.test(t.textContent) && /Contractions/.test(t.textContent) && /Acidosis class/.test(t.textContent) && /Signal quality/.test(t.textContent);`), "case detail shows the labels to confirm and the quality note");

@@ -46,7 +46,9 @@
     sessionDone: T("Session done", "सत्र पूरा"), caughtUp: T("All caught up for today", "आज के सभी केस पूरे"),
     doneLine: T("{n} cases read in this session.", "इस सत्र में {n} केस पढ़े।"), emptyLine: T("No cases are due. New and due cases come back tomorrow.", "अभी कोई केस बाकी नहीं। नए और बाकी केस कल आएंगे।"),
     tomorrow: T("{n} will be waiting tomorrow. Spaced review brings each case back just before you would forget it.", "कल {n} बाकी होंगे। अंतराल पर दोहराना हर केस को ठीक भूलने से पहले वापस लाता है।"),
-    progress: T("Your progress", "आपकी प्रगति"), sources: T("Sources and credits", "स्रोत और श्रेय"), sourcesSub: T("Open data, cited rules", "खुला डेटा, उद्धृत नियम"),
+    progress: T("Your progress", "आपकी प्रगति"), sources: T("Sources and credits", "स्रोत और श्रेय"),
+    clinicSoon: T("Cases are ready; this clinic's screen comes in the next update.", "केस तैयार हैं; इस क्लिनिक की स्क्रीन अगले अपडेट में आएगी।"),
+    clinicSoonLong: T("The cases for this clinic are prepared and cited. The screen to practise them arrives in the next update of the app.", "इस क्लिनिक के केस तैयार और उद्धृत हैं। इनका अभ्यास करने की स्क्रीन ऐप के अगले अपडेट में आएगी।"), sourcesSub: T("Open data, cited rules", "खुला डेटा, उद्धृत नियम"),
     noAnswers: T("No answers yet. Start a lesson or a clinic to see your memory, forecast and activity build up here.", "अभी कोई उत्तर नहीं। यहाँ अपनी याददाश्त, पूर्वानुमान और गतिविधि देखने के लिए कोई पाठ या क्लिनिक शुरू करें।"),
     start: T("Start", "शुरू करें"), answers: T("{n} answers", "{n} उत्तर"), right: T("{p}% right", "{p}% सही"), active: T("{n} days active", "{n} दिन सक्रिय"), active1: T("1 day active", "1 दिन सक्रिय"),
     memory: T("Memory now", "अभी की याददाश्त"), recall: T("{p}% predicted recall", "{p}% याद रहने का अनुमान"), notStarted: T("not started", "शुरू नहीं"),
@@ -226,13 +228,16 @@
     }
 
     /* ---------- data ---------- */
+    // Clinics whose screen has shipped. A pending clinic ({pending: true}) is listed with a "next update" screen and
+    // never enters a session, Today's plan or the memory stats; the real plugin replaces it (registerClinic).
+    function live() { return host._clinics.filter(function (x) { return !x.pending; }); }
     function clinic(id) { for (var i = 0; i < host._clinics.length; i++) if (host._clinics[i].id === id) return host._clinics[i]; return null; }
     function loadAll() {
       if (st.loading) return st.loading;
       st.err = null;
       st.loading = getJSON(cfg.config || "tracks.json").then(function (c) {
         st.cfg = c;
-        return Promise.all(host._clinics.map(function (x) { return getJSON(x.deck).then(function (d) { st.decks[x.id] = d; }); })
+        return Promise.all(live().map(function (x) { return getJSON(x.deck).then(function (d) { st.decks[x.id] = d; }); })
           .concat(host._reads.concat(host._banks).map(function (r) { return r.load && r.load(); })) // a read's or bank's load() never rejects
           .concat(host._learn ? [host._learn.load()] : [])); // nor does Learn's
       }).catch(function (e) { st.err = e; st.loading = null; throw e; });
@@ -339,6 +344,7 @@
 
     function clinicRows(lv) {
       return host._clinics.map(function (x) {
+        if (x.pending) return row("clinic", ' data-t="' + esc(x.id) + '"', tile(x.icon || "pulse"), tx(x.title), x.sub ? tx(x.sub) : "", s("clinicSoon"));
         var c = clinicCounts(x, lv), line = s("seenLine", { s: fmt(c.seen), n: fmt(c.total) }) +
           (c.due && !levelLocked(lv) ? " · <b>" + s("waiting", { d: fmt(c.due) }) + "</b>" : "") + (lv === "resident" ? " " + lockBadge("clinic." + x.id) : "");
         return row("clinic", ' data-t="' + esc(x.id) + '"', x.thumb ? x.thumb(host) : tile(x.icon || "pulse"), tx(x.title), x.sub ? tx(x.sub) : "", line);
@@ -387,10 +393,10 @@
     function planItems(lv) {
       var d = today(), items = [], mb = lv === "mbbs";
       if (host._learn) { var li = host._learn.planItem(); if (li) items.push(li); }
-      if (host._clinics.length) {
+      if (live().length) {
         var due = 0;
-        host._clinics.forEach(function (x) { due += clinicCounts(x, lv).due; });
-        var done = reviewedToday(host._clinics.map(function (x) { return D.levelKey(x.id, lv) + ":"; }));
+        live().forEach(function (x) { due += clinicCounts(x, lv).due; });
+        var done = reviewedToday(live().map(function (x) { return D.levelKey(x.id, lv) + ":"; }));
         var target = mb ? FEW : Math.max(10, Math.min(20, due + done));
         items.push({ act: "today", n: mb ? FEW : 0, title: raw("planCases"), done: done >= target,
           line: done >= target ? s("casesDone", { x: fmt(done) }) : due ? s("casesLine", { d: fmt(due), x: fmt(done), n: fmt(target) }) : s("casesNew", { x: fmt(done), n: fmt(target) }) });
@@ -426,16 +432,31 @@
         (streakN ? " · " + (streakN === 1 ? s("streak1") : s("streak", { n: fmt(streakN) })) : "") + "</span></div>" +
         '<ol class="sp-day">' + rows + "</ol>" +
         (nx ? '<button type="button" class="sp-btn pri sp-wide" data-act="' + nx.act + '"' + attrs(nx) + ">" + ico("play") + " " + s("startX", { t: nx.title }) + "</button>"
-          : host._clinics.length ? '<button type="button" class="sp-btn sec sp-wide" data-act="today">' + ico("play") + " " + s("keepGoing") + "</button>" : "");
+          : live().length ? '<button type="button" class="sp-btn sec sp-wide" data-act="today">' + ico("play") + " " + s("keepGoing") + "</button>" : "");
     }
 
     /* ---------- clinics: the engine runs the session, the plugin renders each case ---------- */
-    function registerClinic(spec) { if (!clinic(spec.id)) host._clinics.push(spec); return spec; }
+    function registerClinic(spec) {
+      var old = clinic(spec.id), i = host._clinics.indexOf(old);
+      if (old && !old.pending) return spec;
+      if (old) host._clinics[i] = spec; else if (spec.pending) host._clinics.push(spec);
+      else host._clinics.splice(host._clinics.indexOf(host._clinics.filter(function (x) { return x.pending; })[0]) >>> 0, 0, spec); // shipped clinics list first
+      return spec;
+    }
+    function soonClinic(spec) {
+      leave();
+      st.view = "clinicsoon"; st.again = function () { soonClinic(spec); };
+      var src = spec.source ? '<p class="sp-note">' + (spec.source.url ? '<a href="' + esc(spec.source.url) + '" target="_blank" rel="noopener noreferrer">' + tx(spec.source.name) + "</a>" : tx(spec.source.name)) + "</p>" : "";
+      paint(top(raw("back"), tx(spec.title), spec.sub ? tx(spec.sub) : "", langBtn()) +
+        '<div class="sp-scroll sp-pad"><div class="sp-col"><section class="sp-today"><p class="sp-today-line">' + s("clinicSoonLong") + "</p></section>" + src + "</div></div>");
+      return true;
+    }
     // Resident clinics go through the trial gate once per session, never per case.
     function startClinic(id, opts) {
       var spec = clinic(id);
       opts = opts || {};
       if (!spec) return false;
+      if (spec.pending) return soonClinic(spec);
       var go = function () {
         var lv = level(), items = clinicItems(spec);
         if (opts.only) items = items.filter(function (x) { return opts.only.indexOf(String(x.id)) >= 0; });
@@ -450,11 +471,12 @@
     // "Cases" in Today's plan: every clinic's due cases, interleaved, topped up with new ones.
     function startToday(size) {
       if (levelLocked()) return showPro();
-      if (!host._clinics.length) return false;
-      var spec = host._clinics[0];
-      if (host._clinics.length > 1) {
+      var cl = live();
+      if (!cl.length) return false;
+      var spec = cl[0];
+      if (cl.length > 1) {
         var best = null, lv = level();
-        host._clinics.forEach(function (x) { var c = clinicCounts(x, lv); if (!best || c.due > best.due) best = { x: x, due: c.due }; });
+        cl.forEach(function (x) { var c = clinicCounts(x, lv); if (!best || c.due > best.due) best = { x: x, due: c.due }; });
         spec = best.x;
       }
       return startClinic(spec.id, { size: size > 0 ? size : SESSION_SIZE });
@@ -492,7 +514,7 @@
       if (!enabled()) return false;
       open();
       return loadAll().then(function () {
-        var spec = clinic(clinicId || cfg.caseClinic || (host._clinics[0] && host._clinics[0].id));
+        var spec = clinic(clinicId || cfg.caseClinic || (live()[0] && live()[0].id));
         if (!spec || !isOpen()) return false;
         var it = clinicItems(spec).filter(function (x) { return String(x.id) === String(caseId); })[0];
         if (!it) { renderHub(); return false; }
@@ -520,7 +542,7 @@
       return bits.join(" · ");
     }
     function memoryHtml(lv) {
-      var rows = host._clinics.map(function (x) { return [tx(x.title), D.levelKey(x.id, lv)]; })
+      var rows = live().map(function (x) { return [tx(x.title), D.levelKey(x.id, lv)]; })
         .concat(host._banks.map(function (b) { return [tx(b.title), b.id]; }))
         .concat(host._learn ? [[s("lessonsKey"), "learn"]] : []).map(function (r) {
           var rec = C.recall(st.store, r[1], today()), pct = rec.meanR == null ? null : Math.round(rec.meanR * 100);
@@ -649,7 +671,11 @@
       for (var i = 0; i < host._sims.length; i++) if (host._sims[i].id === x.id) { host._sims[i] = x; return x; }
       host._sims.push(x); return x;
     };
-    host.registerExplorer = function (x) { if (!host._explore.some(function (y) { return y.id === x.id; })) host._explore.push(x); return x; };
+    // An explorer's own UI replaces the pending entry the explore feature lists for its model.
+    host.registerExplorer = function (x) {
+      for (var i = 0; i < host._explore.length; i++) if (host._explore[i].id === x.id) { if (host._explore[i].pending) host._explore[i] = x; return x; }
+      host._explore.push(x); return x;
+    };
     // Repaint the current screen (language, content reload); the hub when a screen has no repaint of its own.
     host._render = function (f) { if (!isOpen()) return; if (st.again) st.again(typeof f === "string" ? f : null); else renderHub(); };
     host._internal = I;

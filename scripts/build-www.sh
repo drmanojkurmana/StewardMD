@@ -217,6 +217,9 @@ fi
 # Tokós (tokos.js on the specialty engine): tracks, decks, rationale and CTG trace SVGs. Root tokos-*.js / tokos.css are globbed;
 # the tokos/ DATA directory is not. tools/tokos-ctg-prep.mjs and docs/tokos are authoring only and do not ship.
 [ -d tokos ] && mkdir -p "$WWW/tokos" && cp -R tokos/. "$WWW/tokos/"
+# Learn authoring inputs (unit files, per-unit credits, the NMC competency list and map) are folded into learn/index.json,
+# glossary.json and media/credits.json by tools/tokos-learn-index.mjs; the app never reads them.
+rm -rf "$WWW/tokos/learn/units" "$WWW/tokos/learn/media"/credits-*.json "$WWW/tokos/learn/competencies.json" "$WWW/tokos/learn/competency-map.json"
 # Tokós models (tokos-models/*.js, listed in tokos/models.json and loaded on first open by tokos-loader.js): a
 # subdirectory, so the root *.js glob misses it. The engine files (specialty-*.js, specialty.css) are root globs.
 [ -d tokos-models ] && mkdir -p "$WWW/tokos-models" && cp -R tokos-models/. "$WWW/tokos-models/"

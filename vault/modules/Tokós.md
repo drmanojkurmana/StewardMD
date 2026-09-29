@@ -11,7 +11,7 @@ question bank, calculators, drills, Explore and notes as their content lands. `t
 `tokos-ctg.js` is the CTG clinic plugin (the pure checklist and key logic, `window.TOKOS_CTG`, used by the Review Desk and
 `scripts/apply-reviews.mjs`); `tokos-core.js`, `tokos-data.js` and `tokos-stage.js` are gone. Lazy loading: the app loads
 only `tokos-loader.js` at boot (`window.TOKOS` is a stand-in with the same surface; `TOKOS_LOADER.load()`); the first open
-injects `specialty*.{js,css}`, `tokos.css`, `tokos.js`, `tokos-calipers.js`, `tokos-ctg.js` at `?v=tok4`, then the ordered
+injects `specialty*.{js,css}`, `tokos.css`, `tokos.js`, `tokos-calipers.js`, `tokos-ctg.js` at `?v=tok5`, then the ordered
 model list in `tokos/models.json` (`tokos-models/<id>.js`; `build-www.sh` copies `tokos-models/`). Learn content goes in
 `tokos/learn/units/*.json`, `lessons/`, `media/credits-<unit>.json`; `node tools/tokos-learn-index.mjs` builds
 `index.json`, `glossary.json` and `media/credits.json` (checked by `test/tokos-learn-content.test.mjs`). The sections below

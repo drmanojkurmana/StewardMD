@@ -293,6 +293,8 @@ body.sp-lock { overflow: hidden; }
 .sp-root .ln-foot { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: relative; }
 .sp-root .ln-foot > span:empty { display: none; }
 .sp-root .ln-foot > span:empty + .sp-btn { grid-column: 1 / -1; }
+.sp-root .ln-deeper { margin: 8px 0 0; }
+.sp-root .ln-deeper p { margin: 0; line-height: 1.55; text-wrap: pretty; }
 .sp-root .ln-done-act { display: grid; gap: 4px; margin-top: 20px; }
 .sp-root .ln-done-act > .sp-small { margin: 0 0 14px; }
 .sp-root .ln-backlearn { margin-top: 8px; }
