@@ -4,7 +4,7 @@ import { createRequire } from "node:module";
 import { readFileSync } from "node:fs";
 
 export const load = (id) => createRequire(import.meta.url)(`../tokos-models/tool-${id}.js`);
-const bi = (x, where) => { assert.ok(x && typeof x.en === "string" && x.en && typeof x.hi === "string" && x.hi, `${where} needs en and hi`); assert.ok(!/[—–]/.test(x.en + x.hi), `${where} must not contain dashes used as em-dash`); };
+const bi = (x, where) => { assert.ok(x && typeof x.en === "string" && x.en && typeof x.hi === "string" && x.hi, `${where} needs en and hi`); assert.ok(!/[\u2014\u2013]/.test(x.en + x.hi), `${where} must not contain dashes used as em-dash`); };
 
 export function shape(m, id) {
   assert.ok(!/\u2014/.test(readFileSync(new URL(`../tokos-models/tool-${id}.js`, import.meta.url), "utf8")), "no em-dash in model file");
