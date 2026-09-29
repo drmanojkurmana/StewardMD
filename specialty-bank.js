@@ -127,7 +127,7 @@
       fresh: T("Start with a mixed set.", "एक मिश्रित सेट से शुरू करें।"), startQ: T("Start questions", "प्रश्न शुरू करें"), startExam: T("Start exam", "परीक्षा शुरू करें"),
       topics: T("Topics", "विषय"), obstetrics: T("Obstetrics", "प्रसूति"), gynaecology: T("Gynaecology", "स्त्री रोग"),
       topicLine: T("{n} questions", "{n} प्रश्न"), topicAns: T("{a} answered · {p}% right", "{a} उत्तर · {p}% सही"),
-      search: T("Search", "खोजें"), searchPh: T("Word or phrase, for example eclampsia", "शब्द या वाक्यांश, जैसे eclampsia"),
+      search: T("Search", "खोजें"), searchPh: T("Word or phrase, for example eclampsia…", "शब्द या वाक्यांश, जैसे eclampsia…"),
       searching: T("Searching: {d} of {n} topics loaded", "खोज: {n} में से {d} विषय लोड हुए"), noHit: T("No question mentions that.", "किसी प्रश्न में यह नहीं मिला।"),
       flagged: T("{n} flagged.", "{n} चिह्नित।"), reviewFlagged: T("Review flagged", "चिह्नित देखें"),
       qOf: T("Question {i} of {n}", "प्रश्न {i} / {n}"), left: T("{t} left", "{t} बाकी"),
@@ -336,8 +336,20 @@
         '<div class="sp-scroll sp-pad mcq-q" id="mcqPanel"><div class="sp-col"><p class="mcq-stem" id="mcqStem">' + en(it.q) + "</p>" +
         '<div class="sp-answers" role="group" aria-labelledby="mcqStem">' + o + "</div>" +
         '<div id="mcqNote" aria-live="polite"></div></div></div>' +
-        '<div class="sp-foot"><button type="button" class="sp-btn pri sp-wide" data-act="mcqnext" id="mcqNext"' + (r.exam ? "" : " hidden") + ">" +
-        (r.i + 1 < r.items.length ? s("nextQ") : r.exam ? s("finishMark") : s("finish")) + "</button></div>", ".sp-ans");
+        '<div class="sp-foot"><button type="button" class="sp-btn pri sp-wide" data-act="mcqnext" id="mcqNext"' + (r.exam || r.done ? "" : " hidden") + ">" +
+        (r.i + 1 < r.items.length ? s("nextQ") : r.exam ? s("finishMark") : s("finish")) + "</button></div>", r.done ? "#mcqNext" : ".sp-ans");
+      if (!r.exam && r.done) marked(it, picked); // a repaint (language) keeps the answered state
+    }
+    function marked(it, key) {
+      var box = G.document.querySelector("#mcqPanel .sp-answers");
+      if (box) box.classList.add("done");
+      [].forEach.call(G.document.querySelectorAll("#mcqPanel .sp-ans"), function (b) {
+        var j = +b.getAttribute("data-k");
+        b.setAttribute("data-state", j === it.a ? "right" : j === key ? "wrong" : "dim");
+        b.setAttribute("aria-disabled", "true");
+        if (j === it.a) b.querySelector(".k").innerHTML = ico("check") || LETTERS[j];
+      });
+      $("mcqNote").innerHTML = explain(it, key === it.a, key);
     }
 
     function answer(key) {
@@ -355,16 +367,8 @@
       r.done = true; r.picks[r.i] = key;
       var right = key === it.a;
       mark(it, right);
-      var box = G.document.querySelector("#mcqPanel .sp-answers");
-      if (box) box.classList.add("done");
-      [].forEach.call(G.document.querySelectorAll("#mcqPanel .sp-ans"), function (b) {
-        var j = +b.getAttribute("data-k");
-        b.setAttribute("data-state", j === it.a ? "right" : j === key ? "wrong" : "dim");
-        b.setAttribute("aria-disabled", "true");
-        if (j === it.a) b.querySelector(".k").innerHTML = ico("check") || LETTERS[j];
-      });
+      marked(it, key);
       I.haptic(right ? "success" : "error");
-      $("mcqNote").innerHTML = explain(it, right, key);
       var nx = $("mcqNext"); nx.hidden = false;
       try { nx.focus({ preventScroll: true }); } catch (e) {}
     }

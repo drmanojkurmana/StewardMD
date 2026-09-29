@@ -86,6 +86,9 @@ try {
   ok(await ev(`return !!FIXTURE._mcq.items['fx-a'] && !FIXTURE._mcq.items['fx-b'];`) === true, "only that topic's file loaded");
   await ev(`document.querySelector('[data-act=mcqans]').click(); return 1;`);
   ok(await until(`return !!document.querySelector('.mcq-x');`), "answer marked with an explanation block");
+  await ev(`document.querySelector('[data-act=lang]').click(); return 1;`);
+  ok(await ev(`return !!document.querySelector('.mcq-x') && !document.getElementById('mcqNext').hidden && !!document.querySelector('#mcqPanel .sp-ans[data-state]');`) === true, "a language switch keeps the answered question (state, explanation, Next)");
+  await ev(`document.querySelector('[data-act=lang]').click(); return 1;`);
   ok(await ev(`return FIXTURE._mcq.run.items.every(function(it){return it.d !== 3;});`) === true, "MBBS set has no hard questions");
   await ev(`FIXTURE._mcq.run = {items:[FIXTURE._mcq.items['fx-a'].filter(function(x){return x.id==='q4';})[0], FIXTURE._mcq.items['fx-a'].filter(function(x){return x.id==='q2';})[0]], i:0, exam:false, picks:[], done:false, t0:Date.now(), limit:0}; FIXTURE._render(); document.querySelector('[data-act=mcqans]').click(); return 1;`);
   ok(await until(`return /no explanation/.test(document.getElementById('mcqNote').textContent);`), "an empty explanation says so");
@@ -106,7 +109,9 @@ try {
   ok(await ev(`return /62/.test(document.querySelector('.tl-big b').textContent) && document.querySelector('.tl-band').getAttribute('data-band') === 'caution';`) === true, "worked example 2 gives 62, caution band");
   await ev(`var i=document.getElementById('tl-a'); i.focus(); i.value='500'; i.dispatchEvent(new Event('input',{bubbles:true})); i.blur(); return 1;`);
   ok(await until(`return /Use 0 to 100/.test(document.getElementById('tl-a-e').textContent) && document.getElementById('tl-a').getAttribute('aria-invalid') === 'true';`), "out-of-range input shows its error by the field");
-  await ev(`FIXTURE.back(); FIXTURE.back(); return 1;`);
+  await ev(`document.querySelector('[data-act=lang]').click(); document.querySelector('[data-act=lang]').click(); FIXTURE.back(); return 1;`);
+  ok(await until(`return FIXTURE._st.view === 'tools' && !!document.querySelector('[data-act=tool][data-s=fx-sum]');`), "back from a calculator returns to the list, also after a language switch");
+  await ev(`FIXTURE.back(); return 1;`);
   // drill: intro, stages, branching, result
   await until(`return FIXTURE._st.view === 'hub';`);
   await ev(`FIXTURE._internal.renderTest(); document.querySelector('[data-act=sim][data-s=fx-drill]').click(); return 1;`);

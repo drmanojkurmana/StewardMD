@@ -81,8 +81,10 @@
     if (!Array.isArray(m.examples) || !m.examples.length) e.push("examples: at least one pinned from the source");
     return e;
   }
-  function same(a, b) {
-    if (typeof a === "number" && typeof b === "number") return Math.abs(a - b) < 1e-9;
+  // A number within tol; a bilingual {en, hi} result against a pinned English string; otherwise equal as JSON.
+  function same(a, b, tol) {
+    if (typeof a === "number" && typeof b === "number") return Math.abs(a - b) <= (tol > 0 ? tol : 1e-9);
+    if (a && typeof a === "object" && typeof a.en === "string" && typeof b === "string") return a.en === b;
     return JSON.stringify(a) === JSON.stringify(b);
   }
   // Every pinned example against compute: [{i, ok, got, expect}]. expect is the result's value (a number, within the
@@ -92,8 +94,8 @@
       var r;
       try { r = m.compute(x.values); } catch (err) { return { i: i, ok: false, got: String(err), expect: x.expect }; }
       var ok = !!r && r.ok !== false;
-      if (ok && x.expect && typeof x.expect === "object") Object.keys(x.expect).forEach(function (k) { if (!same(r[k], x.expect[k])) ok = false; });
-      else if (ok) ok = typeof x.tol === "number" && typeof r.value === "number" ? Math.abs(r.value - x.expect) <= x.tol : same(r.value, x.expect);
+      if (ok && x.expect && typeof x.expect === "object") Object.keys(x.expect).forEach(function (k) { if (!same(r[k], x.expect[k], x.tol)) ok = false; });
+      else if (ok) ok = same(r.value, x.expect, x.tol);
       return { i: i, ok: ok, got: r && (r.ok === false ? r.error : r.value), expect: x.expect };
     });
   }
@@ -217,7 +219,7 @@
       K.models("tool").forEach(function (m) {
         if (host._tools.some(function (x) { return x.id === m.id; })) return;
         host._tools.push({ id: m.id, title: m.title, sub: m.sub || STR[m.group] || null, icon: m.icon || "calc",
-          src: (m.sources && m.sources[0] && m.sources[0].label) || "", open: function () { open(m); } });
+          src: (m.sources && m.sources[0] && m.sources[0].label) || "", open: function (fromList) { open(m, fromList === true); } });
       });
     });
     host._syncModels();
@@ -236,7 +238,7 @@
       };
       return '<div class="tl-f" id="tlf-' + esc(inp.id) + '"><label class="tl-l" for="' + id + '">' + lab + "</label>" +
         '<div class="tl-in">' + (inp.step ? stp(-1) : "") + '<div class="tl-box">' +
-        '<input id="' + id + '" data-k="' + esc(inp.id) + '" type="text" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="done" value="' + esc(fmtVal(inp, v)) + '" aria-describedby="' + e + '">' +
+        '<input id="' + id + '" name="' + esc(inp.id) + '" data-k="' + esc(inp.id) + '" type="text" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="done" value="' + esc(fmtVal(inp, v)) + '" aria-describedby="' + e + '">' +
         (inp.unit ? '<span class="tl-u" aria-hidden="true">' + esc(inp.unit) + "</span>" : "") + "</div>" + (inp.step ? stp(1) : "") +
         '</div><p class="tl-e" id="' + e + '" aria-live="polite"></p></div>';
     }
@@ -255,7 +257,7 @@
     function dateHtml(inp, v) {
       var id = "tl-" + inp.id;
       return '<div class="tl-f" id="tlf-' + esc(inp.id) + '"><label class="tl-l" for="' + id + '">' + I.tx(inp.label) + '</label><div class="tl-box tl-datebox">' +
-        '<input id="' + id + '" data-k="' + esc(inp.id) + '" type="date" value="' + esc(v || "") + '" aria-describedby="' + id + '-e"></div><p class="tl-e" id="' + id + '-e" aria-live="polite"></p></div>';
+        '<input id="' + id + '" name="' + esc(inp.id) + '" data-k="' + esc(inp.id) + '" type="date" value="' + esc(v || "") + '" aria-describedby="' + id + '-e"></div><p class="tl-e" id="' + id + '-e" aria-live="polite"></p></div>';
     }
     function formHtml() {
       return cur.m.inputs.map(function (inp) {
@@ -271,10 +273,12 @@
       if (msg) { box.setAttribute("data-bad", ""); inp.setAttribute("aria-invalid", "true"); } else { box.removeAttribute("data-bad"); inp.removeAttribute("aria-invalid"); }
     }
 
-    function open(m) {
+    // fromList: opened from the calculator list, so back returns there (from a lesson, back returns to the lesson).
+    function open(m, fromList) {
       I.leave();
       cur = { m: m, v: mem[m.id] || initial(m), bad: {}, shown: {} };
-      st.view = "tool"; st.again = function () { open(m); };
+      st.view = "tool"; st.again = function () { open(m, fromList); };
+      st.onBack = fromList ? function () { I.leave(); I.renderTools(); return true; } : null;
       var ex = (m.examples || []).map(function (x, i) { return '<button type="button" class="sp-btn sec tl-ex" data-act="tex" data-i="' + i + '">' + s("example", { n: i + 1 }) + "</button>"; }).join("");
       I.paint(I.top(K.raw("backTools"), I.tx(m.title), m.group ? s(m.group) : "", I.langBtn()) +
         '<div class="sp-scroll" id="tlScroll"><div class="tl-wrap">' +

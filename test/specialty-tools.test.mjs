@@ -51,6 +51,8 @@ test("runExamples: every pinned example matches compute", () => {
   assert.equal(T.runExamples(Object.assign({}, tool, { examples: [{ values: { a: 1, b: 1 }, expect: 2.4, tol: 0.5 }] }))[0].ok, true, "tol");
   const str = Object.assign({}, tool, { compute: () => ({ ok: true, value: "2026-10-06", label: { en: "EDD" } }), examples: [{ values: {}, expect: "2026-10-06" }] });
   assert.equal(T.runExamples(str)[0].ok, true, "a string value such as a date");
+  const obj = Object.assign({}, tool, { examples: [{ values: { a: 20, b: 10.5, mode: "double", flag: true }, expect: { value: 61.9, label: "Sum" }, tol: 0.2 }] });
+  assert.equal(T.runExamples(obj)[0].ok, true, "expect as {value, label}: tol on numbers, an English string against a bilingual label");
 });
 
 test("validateDrill: stages, options, next ids and reachability", () => {

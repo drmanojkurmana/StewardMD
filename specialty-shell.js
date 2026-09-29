@@ -48,7 +48,7 @@
     tomorrow: T("{n} will be waiting tomorrow. Spaced review brings each case back just before you would forget it.", "कल {n} बाकी होंगे। अंतराल पर दोहराना हर केस को ठीक भूलने से पहले वापस लाता है।"),
     progress: T("Your progress", "आपकी प्रगति"), sources: T("Sources and credits", "स्रोत और श्रेय"), sourcesSub: T("Open data, cited rules", "खुला डेटा, उद्धृत नियम"),
     noAnswers: T("No answers yet. Start a lesson or a clinic to see your memory, forecast and activity build up here.", "अभी कोई उत्तर नहीं। यहाँ अपनी याददाश्त, पूर्वानुमान और गतिविधि देखने के लिए कोई पाठ या क्लिनिक शुरू करें।"),
-    start: T("Start", "शुरू करें"), answers: T("{n} answers", "{n} उत्तर"), right: T("{p}% right", "{p}% सही"), active: T("{n} days active", "{n} दिन सक्रिय"),
+    start: T("Start", "शुरू करें"), answers: T("{n} answers", "{n} उत्तर"), right: T("{p}% right", "{p}% सही"), active: T("{n} days active", "{n} दिन सक्रिय"), active1: T("1 day active", "1 दिन सक्रिय"),
     memory: T("Memory now", "अभी की याददाश्त"), recall: T("{p}% predicted recall", "{p}% याद रहने का अनुमान"), notStarted: T("not started", "शुरू नहीं"),
     recallNote: T("Predicted recall is the memory model's estimate of how much of what you have seen you would get right today.", "याद रहने का अनुमान मेमोरी मॉडल का आकलन है कि आपने जो देखा है उसमें से आज आप कितना सही करेंगे।"),
     next7: T("Next 7 days", "अगले 7 दिन"), dueWeek: T("{n} reviews due, including anything overdue today.", "{n} दोहराने बाकी, आज के छूटे हुए भी मिलाकर।"), nothingWeek: T("Nothing due in the next week.", "अगले हफ़्ते कुछ बाकी नहीं।"),
@@ -515,7 +515,8 @@
       if (sn) bits.push(sn === 1 ? s("streak1") : s("streak", { n: fmt(sn) }));
       bits.push(s("answers", { n: fmt(total) }));
       if (conf) bits.push(s("right", { p: Math.round(ok * 100 / conf) }));
-      bits.push(s("active", { n: fmt(Object.keys(st.store.days).length) }));
+      var da = Object.keys(st.store.days).length;
+      bits.push(da === 1 ? s("active1") : s("active", { n: fmt(da) }));
       return bits.join(" · ");
     }
     function memoryHtml(lv) {
@@ -622,7 +623,7 @@
     // Back from a calculator returns to the list; leave() first so the calculator keeps its last values.
     ACTIONS.tool = function (b) {
       var id = b.getAttribute("data-s");
-      host._tools.forEach(function (x) { if (x.id === id) { x.open(); st.onBack = function () { leave(); renderTools(); return true; }; } });
+      host._tools.forEach(function (x) { if (x.id === id) x.open(true); });
     };
 
     // Escape unwinds one layer like swipe-back; MaiK above the overlay owns Escape while it is open.
