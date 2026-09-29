@@ -36,6 +36,13 @@ the promotional series, and the mobile-number OTP that reuses the FollowCare sen
   `PROMO_SERIES_ON=1`.
 
 ## Gotchas
+- **Spam traits removed (2026-09-30).** Owner's welcome test to an Apple relay inbox went to Gmail spam
+  with SPF/DKIM/DMARC all passing. Fixed on our side: (1) `/api/email-test` (owner console "Send a test
+  onboarding email") now passes a uid (the account's via `lookupUidByEmail`, else `preview-uid`), so its
+  copies carry the Unsubscribe link + `List-Unsubscribe` headers like a real sign-up's; (2) no invisible
+  `&#847;&zwnj;&nbsp;` filler after the preheader; (3) the welcome quotes no price (the Pro tile says
+  "A week free when you verify."); prices stay in the upsell and promo series. Pinned by
+  `test/email-deliverability.test.mjs`.
 - **No em-dash in any email** (CLAUDE.md); `test/email-template.test.mjs` fails the build on one.
 - **The logo URL must be a file that is actually served.** `mark-teal.png` is in the repo but 404s on
   stewardmd.in; `logo.png` (same mark, 368px) is live. Check with curl before switching.

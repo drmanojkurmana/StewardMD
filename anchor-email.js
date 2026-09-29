@@ -1,6 +1,7 @@
 /* anchor-email.js — classify an account's email as a deliverable anchor (SMD_ANCHOR).
- * Apple "Hide My Email" gives an @privaterelay.appleid.com proxy (or an empty email) that BOUNCES,
- * so those accounts must add a real, verified email. Pure + testable. */
+ * Apple "Hide My Email" gives an @privaterelay.appleid.com proxy (or an empty email). Our senders are
+ * registered with Apple's relay, so mail does arrive, but relayed mail often lands in Gmail spam (owner
+ * 2026-09-30), so those accounts are asked to add a real, verified email. Pure + testable. */
 (function () {
   "use strict";
   var PROXY_RE = /@(?:[^@]*\.)?appleid\.com$/i;   // exactly appleid.com or *.appleid.com (incl. privaterelay); NOT other domains that merely end in "appleid.com"

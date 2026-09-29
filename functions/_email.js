@@ -123,14 +123,15 @@ function footer(o) {
 
 /* Assemble the page. bodyHtml is anything built from the components above; `title` renders as the
  * headline unless opts.noHeadline. Width 600 like every major brand mail; single column so it reads
- * identically on a phone. */
+ * identically on a phone. The hidden preheader is the preview text only: no invisible filler after it
+ * (a bulk-mail trait, and it leaked into the plain-text part; owner 2026-09-30, relayed mail in spam). */
 export function renderEmail(o) {
   o = o || {};
   var head = '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="x-apple-disable-message-reformatting"><meta name="color-scheme" content="light"><meta name="supported-color-schemes" content="light"><title>' + esc(o.title || "StewardMD") + '</title>' +
     '<style>body{margin:0;padding:0;background:' + PAGE + '} img{border:0;outline:none;text-decoration:none} a{color:' + TEAL + '} @media (max-width:640px){.smd-h1{font-size:30px !important} .smd-pad{padding-left:20px !important;padding-right:20px !important}}</style></head>';
   return head +
     '<body style="margin:0;padding:0;background:' + PAGE + ';-webkit-text-size-adjust:100%">' +
-    (o.preheader ? '<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;font-size:1px;line-height:1px">' + esc(o.preheader) + '&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;</div>' : "") +
+    (o.preheader ? '<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;font-size:1px;line-height:1px">' + esc(o.preheader) + '</div>' : "") +
     '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:' + PAGE + '"><tr><td align="center" style="padding:28px 12px 36px">' +
       '<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:28px">' +
         '<tr><td class="smd-pad" style="padding:44px 32px 0;text-align:center">' +
@@ -304,8 +305,9 @@ export function emailFailed(env, { email, name, reason }) {
 
 /* ── lifecycle (marketing: carries unsubscribe) ──────────────────────────────────────────────── */
 
+// No price here (owner 2026-09-30): the welcome is the first mail an address ever gets from us, and a
+// price line reads as promotional to Gmail. Prices live in the day-3 upsell and the promo series.
 export function emailWelcome(env, { email, name, uid }) {
-  var p = dayPrices(env);
   return sendBranded(env, {
     to: email, uid: uid, kind: "marketing",
     subject: "Welcome to StewardMD.",
@@ -316,7 +318,7 @@ export function emailWelcome(env, { email, name, uid }) {
       hero({ eyebrow: "Step one", big: "Verify.", small: "Upload your registration certificate or enter your registration number with a photo ID. About a minute, checked against the medical register." }) +
       tile({ eyebrow: "Always free", title: "Reason, score, check.", text: "Live differentials, every risk score and calculator, drug interaction checks and antimicrobial stewardship. Offline, on the ward, no signal needed." }) +
       tile({ eyebrow: "MaiK AI", title: "Ask the case.", text: "Grounded answers with citations, imaging reads from a photo, and a scribe that turns dictation into a structured note." }) +
-      tile({ eyebrow: "Pro", title: "From " + inr(p.pro.day) + " a day.", text: "Less than a roadside chai. Verified doctors get it free for 7 days.", link: "See what Pro unlocks", href: APP + "/?pro=1" }) +
+      tile({ eyebrow: "Pro", title: "A week free when you verify.", text: "Verified doctors get every Pro feature free for their first 7 days.", link: "See what Pro unlocks", href: APP + "/?pro=1" }) +
       ctaRow("Verify my registration", APP, "Open StewardMD", APP),
   });
 }

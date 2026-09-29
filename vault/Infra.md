@@ -24,8 +24,11 @@ Communication.
   gmail.com. To write to a relay address by hand, set Gmail's "Send mail as" SMTP to Resend
   (`smtp.resend.com`, port 465, user `resend`, password = a Resend API key).
 - A new From address (e.g. `FROM_EMAIL` override) must be added there first, or relay users silently
-  miss it. `anchor-email.js` comment and its "Add a real email" card still say relay mail cannot arrive;
-  that predates the registration.
+  miss it.
+- **Relayed mail passes auth but can still land in Gmail spam** (owner test 2026-09-30: SPF/DKIM/DMARC
+  all PASS, Gmail judged it on content/reputation). Gmail sees Apple as the sender and a per-user relay
+  alias with no history, so stewardmd.in's reputation barely carries. Don't rely on email alone for
+  Apple relay users; the "Add a real email" card (steward-id-onboard.js) now says exactly that.
 
 ## Coming-soon gate
 `functions/_middleware.js` 503s public browser page-views to a coming-soon page; `/api/*`, the native app (`X-SMD-App`, currently inert), cron (`X-Admin-Token`), and the `/realapp` cookie pass through. This is why "AI/etc not working in app" until a native rebuild+reinstall.

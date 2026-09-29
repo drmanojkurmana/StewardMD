@@ -1,5 +1,5 @@
 /* steward-id-onboard.js — on sign-in, ensure a universal StewardMD ID + a verified anchor email.
- * Gated by smd_steward_id (default OFF). Primary remedy for Apple Hide-My-Email is linking Google;
+ * Gated by smd_steward_id (default ON since 2026-08-26). Primary remedy for Apple Hide-My-Email is linking Google;
  * fallback is a typed email verified by the /api/auth/anchor-* OTP. */
 (function () {
   "use strict";
@@ -105,7 +105,7 @@
     shell().innerHTML =
       '<div class="smdonb-card">' +
         '<div class="smdonb-h">Add a real email</div>' +
-        '<div class="smdonb-sub">Apple’s private relay address can’t receive messages from StewardMD (verification codes, results, account alerts). Please link a real email to keep your account fully working.</div>' +
+        '<div class="smdonb-sub">Emails to Apple’s Hide My Email address often land in spam, so you can miss verification results and account alerts. Link a real email to keep your account fully working.</div>' +
         '<button class="smdonb-btn" data-onb="google">Continue with Google</button>' +
         '<div class="smdonb-or">or enter an email</div>' +
         '<label class="smdonb-lbl">Email</label><input class="smdonb-in" id="onbEmail" type="email" inputmode="email" autocomplete="email" placeholder="you@hospital.org">' +
