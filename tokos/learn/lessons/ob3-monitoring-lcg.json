@@ -1,0 +1,266 @@
+{
+  "id": "ob3-monitoring-lcg",
+  "unit": "ob3",
+  "level": "mbbs",
+  "minutes": 6,
+  "review": "ai_drafted",
+  "competencies": [
+    "OG13.3"
+  ],
+  "title": {
+    "en": "Watching labour: the Labour Care Guide",
+    "hi": "प्रसव की निगरानी: Labour Care Guide"
+  },
+  "idea": {
+    "en": "The [[lcg]] is started at 5 cm. It says how often to check the baby's heart, contractions, the mother and the cervix, and it gives alert values so problems are caught early.",
+    "hi": "[[lcg]] 5 सेमी पर शुरू की जाती है। यह बताती है कि बच्चे की धड़कन, संकुचन, माँ और सर्विक्स कितनी बार जाँचने हैं, और alert मान देती है ताकि समस्याएँ जल्दी पकड़ी जाएँ।"
+  },
+  "see": {
+    "diagram": "diagrams/ob3-monitoring-lcg.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "The top half shows four rows of dots along a time axis. Row one, red: many evenly spaced dots, closer together at the far right. Row two, amber: evenly spaced dots. Row three, purple: five widely spaced dots. Row four: three dark crosses spaced widely. The lower half shows five blue horizontal bars, each shorter than the one above, and at the right two red bars, a long one above a shorter one.",
+      "hi": "ऊपर के आधे भाग में समय-अक्ष पर बिंदुओं की चार पंक्तियाँ हैं। पहली, लाल: बराबर दूरी वाले कई बिंदु, दाईं ओर पास-पास। दूसरी, पीली: बराबर दूरी के बिंदु। तीसरी, बैंगनी: दूर-दूर पाँच बिंदु। चौथी: दूर-दूर तीन गहरे क्रॉस। नीचे के आधे भाग में पाँच नीली क्षैतिज पट्टियाँ हैं, हर एक ऊपर वाली से छोटी, और दाईं ओर दो लाल पट्टियाँ, ऊपर लंबी और नीचे छोटी।"
+    },
+    "caption": {
+      "en": "How often each check is made, and how long the cervix may stay at each dilatation before an alert.",
+      "hi": "हर जाँच कितनी बार होती है, और alert से पहले सर्विक्स हर फैलाव पर कितनी देर रह सकता है।"
+    },
+    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.417,
+        "y": 0.167,
+        "label": {
+          "en": "Fetal heart",
+          "hi": "भ्रूण की धड़कन"
+        },
+        "note": {
+          "en": "Listen for at least a minute after a contraction, every 30 minutes in the first stage and every 5 minutes in the second stage. Alert if below 110 or 160 and above. Turn her to her left, then call a senior.",
+          "hi": "संकुचन के बाद कम से कम एक मिनट सुनिए, पहली अवस्था में हर 30 मिनट और दूसरी अवस्था में हर 5 मिनट। 110 से कम या 160 और ऊपर हो तो alert। उसे बाईं करवट लिटाएँ, फिर वरिष्ठ को बुलाएँ।"
+        }
+      },
+      {
+        "x": 0.417,
+        "y": 0.273,
+        "label": {
+          "en": "Contractions",
+          "hi": "संकुचन"
+        },
+        "note": {
+          "en": "Count in 10 minutes and time their length, every 30 minutes in the first stage. Alert if 2 or fewer or more than 5 in 10 minutes, or if they last under 20 or over 60 seconds.",
+          "hi": "10 मिनट में गिनिए और उनकी अवधि नापिए, पहली अवस्था में हर 30 मिनट। 10 मिनट में 2 या कम या 5 से ज़्यादा हों, या 20 सेकंड से कम या 60 से ज़्यादा चलें तो alert।"
+        }
+      },
+      {
+        "x": 0.417,
+        "y": 0.38,
+        "label": {
+          "en": "Mother",
+          "hi": "माँ"
+        },
+        "note": {
+          "en": "Pulse, blood pressure, temperature and urine, every 4 hours. Alert: pulse below 60 or 120 and above, systolic BP below 80 or 140 and above, diastolic 90 and above, temperature below 35.0 or 37.5 and above, protein or acetone 2+.",
+          "hi": "नब्ज़, ब्लड प्रेशर, तापमान और पेशाब, हर 4 घंटे। Alert: नब्ज़ 60 से कम या 120 और ऊपर, सिस्टोलिक बीपी 80 से कम या 140 और ऊपर, डायस्टोलिक 90 और ऊपर, तापमान 35.0 से कम या 37.5 और ऊपर, प्रोटीन या एसिटोन 2+।"
+        }
+      },
+      {
+        "x": 0.417,
+        "y": 0.507,
+        "label": {
+          "en": "Cervix",
+          "hi": "सर्विक्स"
+        },
+        "note": {
+          "en": "A gentle vaginal examination with consent every 4 hours, unless something indicates sooner. Fewer examinations lowers infection risk.",
+          "hi": "सहमति के साथ हर 4 घंटे पर कोमल vaginal जाँच, जब तक कि कोई कारण जल्दी की माँग न करे। कम जाँचों से संक्रमण का जोखिम घटता है।"
+        }
+      },
+      {
+        "x": 0.313,
+        "y": 0.653,
+        "label": {
+          "en": "At 5 cm",
+          "hi": "5 सेमी पर"
+        },
+        "note": {
+          "en": "Alert if the cervix stays at 5 cm for 6 hours or more.",
+          "hi": "सर्विक्स 5 सेमी पर 6 घंटे या ज़्यादा रुका रहे तो alert।"
+        }
+      },
+      {
+        "x": 0.146,
+        "y": 0.92,
+        "label": {
+          "en": "At 9 cm",
+          "hi": "9 सेमी पर"
+        },
+        "note": {
+          "en": "The allowed time shrinks as labour moves on: 6 h at 5 cm, 5 h at 6, 3 h at 7, 2.5 h at 8 and 2 h at 9 cm.",
+          "hi": "आगे बढ़ते प्रसव में मिलने वाला समय घटता जाता है: 5 सेमी पर 6 घंटे, 6 पर 5 घंटे, 7 पर 3 घंटे, 8 पर 2.5 घंटे और 9 सेमी पर 2 घंटे।"
+        }
+      },
+      {
+        "x": 0.792,
+        "y": 0.673,
+        "label": {
+          "en": "Second stage",
+          "hi": "दूसरी अवस्था"
+        },
+        "note": {
+          "en": "Alert if the birth is not complete by 3 hours in a first labour and 2 hours in later labours, from the start of active pushing.",
+          "hi": "सक्रिय ज़ोर लगाने की शुरुआत से पहले प्रसव में 3 घंटे और बाद के प्रसवों में 2 घंटे तक जन्म पूरा न हो तो alert।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "The [[lcg]] replaces the older partograph. It is started when the woman is in active labour, at 5 cm or more, in any parity and with intact or ruptured membranes. Before that, women still need care and support.",
+        "hi": "[[lcg]] ने पुराने partograph की जगह ली है। यह तब शुरू होती है जब महिला सक्रिय प्रसव में हो, 5 सेमी या ज़्यादा, किसी भी parity में और झिल्लियाँ साबुत हों या फटी। उससे पहले भी महिला को देखभाल और सहारा चाहिए।"
+      },
+      {
+        "en": "It records the baby (heart rate and its pattern, moulding), the woman (pulse, BP, temperature, urine) and labour (contractions, cervical dilatation, descent), along with her care, pain relief and companion.",
+        "hi": "यह बच्चे (धड़कन और उसका पैटर्न, moulding), महिला (नब्ज़, बीपी, तापमान, पेशाब) और प्रसव (संकुचन, सर्विक्स का फैलाव, descent) के साथ उसकी देखभाल, दर्द-राहत और साथी को दर्ज करती है।"
+      },
+      {
+        "en": "Each entry has an alert value. When a value is reached, ask for help from a senior and follow local guidelines. An alert asks for review, not an instant caesarean.",
+        "hi": "हर प्रविष्टि का एक alert मान है। मान पहुँचने पर वरिष्ठ से मदद माँगिए और स्थानीय दिशानिर्देश मानिए। alert का मतलब समीक्षा है, तुरंत सीज़ेरियन नहीं।"
+      },
+      {
+        "en": "Many healthy women progress slower than 1 cm an hour and still have a normal birth, which is why the guide no longer uses a fixed 1 cm an hour line.",
+        "hi": "कई स्वस्थ महिलाएँ 1 सेमी प्रति घंटा से धीमी बढ़ती हैं और फिर भी सामान्य प्रसव होता है, इसीलिए यह गाइड अब 1 सेमी प्रति घंटा की तय रेखा नहीं लेती।"
+      }
+    ],
+    "analogy": {
+      "en": "Think of the dashboard of a car: you watch each gauge at its own rhythm, and a warning light asks you to stop and check, not to abandon the trip.",
+      "hi": "एक कार के डैशबोर्ड की सोचिए: आप हर गेज को उसकी अपनी लय पर देखते हैं, और चेतावनी बत्ती आपसे रुककर जाँचने को कहती है, यात्रा छोड़ने को नहीं।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Fetal heart 100 beats a minute after a contraction: turn her left, listen again and call a senior.",
+      "hi": "संकुचन के बाद भ्रूण की धड़कन 100 प्रति मिनट: उसे बाईं करवट लिटाएँ, फिर सुनें और वरिष्ठ को बुलाएँ।"
+    },
+    {
+      "en": "Maternal pulse rising steadily: she may be in pain, dehydrated, febrile or bleeding.",
+      "hi": "माँ की नब्ज़ लगातार बढ़ रही है: उसे दर्द हो सकता है, पानी की कमी, बुख़ार या रक्तस्राव।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Fill in a practice guide for a labour of your choice, plotting each parameter at the right time.",
+      "hi": "अपनी पसंद के एक प्रसव के लिए अभ्यास गाइड भरिए और हर पैरामीटर सही समय पर दर्ज कीजिए।"
+    },
+    {
+      "en": "Learn the alert values for the cervix by heart: 6, 5, 3, 2.5 and 2 hours at 5, 6, 7, 8 and 9 cm.",
+      "hi": "cervix के alert मान याद कर लीजिए: 5, 6, 7, 8 और 9 सेमी पर 6, 5, 3, 2.5 और 2 घंटे।"
+    }
+  ],
+  "remember": {
+    "en": "Start at 5 cm. FHR and contractions every 30 minutes, mother and cervix every 4 hours, FHR every 5 minutes at the end.",
+    "hi": "5 सेमी पर शुरू कीजिए। धड़कन और संकुचन हर 30 मिनट, माँ और सर्विक्स हर 4 घंटे, और अंत में धड़कन हर 5 मिनट।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "How often is the fetal heart rate checked in the active first stage in the Labour Care Guide?",
+        "hi": "Labour Care Guide में सक्रिय पहली अवस्था में भ्रूण की धड़कन कितनी बार जाँची जाती है?"
+      },
+      "o": [
+        {
+          "en": "Every 5 minutes",
+          "hi": "हर 5 मिनट"
+        },
+        {
+          "en": "Every 30 minutes",
+          "hi": "हर 30 मिनट"
+        },
+        {
+          "en": "Every 4 hours",
+          "hi": "हर 4 घंटे"
+        },
+        {
+          "en": "Every hour",
+          "hi": "हर घंटे"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Every 30 minutes in the first stage, and every 5 minutes in the second stage.",
+        "hi": "पहली अवस्था में हर 30 मिनट, और दूसरी अवस्था में हर 5 मिनट।"
+      }
+    },
+    {
+      "q": {
+        "en": "What is the alert time for a cervix stuck at 5 cm?",
+        "hi": "5 सेमी पर अटके सर्विक्स के लिए alert का समय क्या है?"
+      },
+      "o": [
+        {
+          "en": "2 hours",
+          "hi": "2 घंटे"
+        },
+        {
+          "en": "3 hours",
+          "hi": "3 घंटे"
+        },
+        {
+          "en": "6 hours",
+          "hi": "6 घंटे"
+        },
+        {
+          "en": "12 hours",
+          "hi": "12 घंटे"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "6 hours at 5 cm. The allowed time falls to 5, 3, 2.5 and 2 hours at 6, 7, 8 and 9 cm.",
+        "hi": "5 सेमी पर 6 घंटे। 6, 7, 8 और 9 सेमी पर समय घटकर 5, 3, 2.5 और 2 घंटे हो जाता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which fetal heart value triggers an alert?",
+        "hi": "भ्रूण की धड़कन का कौन-सा मान alert देता है?"
+      },
+      "o": [
+        {
+          "en": "130 beats per minute",
+          "hi": "130 धड़कन प्रति मिनट"
+        },
+        {
+          "en": "150",
+          "hi": "150"
+        },
+        {
+          "en": "108",
+          "hi": "108"
+        },
+        {
+          "en": "140",
+          "hi": "140"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "Below 110 or 160 and above triggers an alert. Turn the woman to her left, then call a senior.",
+        "hi": "110 से कम या 160 और ऊपर पर alert होता है। महिला को बाईं करवट लिटाइए, फिर वरिष्ठ को बुलाइए।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "ob-labour",
+    "sim": "labour"
+  },
+  "glossary": [
+    "lcg"
+  ],
+  "sources": [
+    "World Health Organization. WHO Labour Care Guide: user's manual (2020). Alert values and frequency of observations (Tables for Sections 3 to 5). The guide's text and chart are not reproduced here.",
+    "National Medical Commission. CBME curriculum 2024, Obstetrics and Gynaecology: OG13.3, monitoring of labour including partogram and labour care guide."
+  ]
+}
