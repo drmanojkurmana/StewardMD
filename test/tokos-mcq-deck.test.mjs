@@ -1,14 +1,18 @@
 // Tokós question bank: the shipped deck (tokos/decks/mcq.json) and the pure helpers of tools/tokos-build-mcq.mjs.
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { difficulty, cleanText, cleanExplanation, expFlags, buildRepair, tableTopic, keywordTopic, SUBTOPICS, FLAG_LEGEND } from "../tools/tokos-build-mcq.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const RAW = readFileSync(path.join(HERE, "..", "tokos", "decks", "mcq.json"), "utf8");
-const deck = JSON.parse(RAW);
+const DIR = path.join(HERE, "..", "tokos", "decks", "mcq");
+const index = JSON.parse(readFileSync(path.join(DIR, "index.json"), "utf8"));
+const files = Object.fromEntries(index.topics.map((t) => [t.id, JSON.parse(readFileSync(path.join(DIR, path.basename(t.file)), "utf8"))]));
+const RAW = readdirSync(DIR).map((f) => readFileSync(path.join(DIR, f), "utf8")).join("\n");
+// the whole bank as one object, for the item-level checks below
+const deck = { ...index, items: index.topics.flatMap((t) => files[t.id].items) };
 const CONTRACT = ["ob-antenatal", "ob-labour", "ob-medical", "ob-haemorrhage", "ob-hypertension", "ob-fetal", "ob-puerperium", "ob-early", "ob-operative",
   "gy-menstrual", "gy-infection", "gy-benign", "gy-oncology", "gy-fertility", "gy-contraception", "gy-urogyn", "gy-anatomy"];
 const DEVANAGARI = /[ऀ-ॿ]/;
@@ -28,10 +32,32 @@ test("deck header records source, licence text and commit", () => {
   assert.equal(deck.subject, "Gynaecology & Obstetrics");
 });
 
+test("split deck: single-file deck gone, index and topic files agree, total 9196", () => {
+  assert.ok(!existsSync(path.join(DIR, "..", "mcq.json")), "old single-file deck must be removed");
+  assert.deepEqual(readdirSync(DIR).sort(), ["index.json", ...CONTRACT.map((id) => id + ".json")].sort());
+  assert.equal(index.counts.total, 9196);
+  assert.equal(deck.items.length, 9196);
+  assert.deepEqual(index.counts, { total: 9196, d1: deck.items.filter((i) => i.d === 1).length, d2: deck.items.filter((i) => i.d === 2).length, d3: deck.items.filter((i) => i.d === 3).length });
+  assert.equal(index.counts.d1 + index.counts.d2 + index.counts.d3, index.counts.total);
+  let sum = 0;
+  for (const t of index.topics) {
+    assert.equal(t.file, `mcq/${t.id}.json`);
+    const f = files[t.id];
+    assert.deepEqual(Object.keys(f).sort(), ["items", "topic"]);
+    assert.equal(f.topic, t.id);
+    assert.equal(f.items.length, t.count, t.id);
+    assert.ok(f.items.every((i) => i.t === t.id), "every item of " + t.id + " has t == topic");
+    sum += t.count;
+  }
+  assert.equal(sum, index.counts.total);
+  assert.ok(Math.max(...readdirSync(DIR).map((f) => readFileSync(path.join(DIR, f)).length)) < 1_000_000, "each file under 1 MB");
+  assert.equal(index.items, undefined, "index carries no items");
+});
+
 test("topics are exactly the 17 contract subtopics with English and Hindi titles", () => {
-  assert.deepEqual(deck.topics.map((t) => t.id), CONTRACT);
+  assert.deepEqual(index.topics.map((t) => t.id), CONTRACT);
   assert.deepEqual(SUBTOPICS.map((t) => t.id), CONTRACT);
-  for (const t of deck.topics) {
+  for (const t of index.topics) {
     assert.ok(t.title.en && t.title.hi, t.id);
     assert.match(t.title.hi, DEVANAGARI, t.id);
     assert.ok(t.group === "obstetrics" || t.group === "gynaecology", t.id);
@@ -75,7 +101,7 @@ test("text is clean: no HTML tags, entities, em or en dash, no source artefacts"
     assert.ok(!/<\/?[a-z][a-z0-9]*(\s[^<>]*)?\/?>/i.test(t), "html in " + t.slice(0, 60));
     assert.ok(!/&(amp|lt|gt|quot|nbsp|#\d+);/.test(t), "entity in " + t.slice(0, 60));
   }
-  assert.ok(!/[\u2013\u2014]/.test(RAW), "dash in deck");
+  assert.ok(!/[\u2013\u2014]/.test(RAW), "dash in deck files");
   assert.ok(!texts.some((t) => /[a-z]deg\b/.test(t)), "deg artefact");
   const bag = texts.join(" ").toLowerCase();
   assert.ok(!/\baboion\b|\binfeility\b|\bantepaum\b|\bhypeension\b/.test(bag), "dropped-rt words repaired");

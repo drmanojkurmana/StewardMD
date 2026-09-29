@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Tokós question bank builder. Dev-only, never shipped.
 //
-// Builds tokos/decks/mcq.json from MedMCQA, subject "Gynaecology & Obstetrics" (port of the Ophthalmós
+// Builds tokos/decks/mcq/index.json + tokos/decks/mcq/<subtopic>.json from MedMCQA, subject "Gynaecology & Obstetrics" (port of the Ophthalmós
 // pipeline/build_mcq.py + pipeline/tag_difficulty.mjs to Node, with Tokós subtopics and doubtful-key flags).
 //
 // SOURCE (pinned, see SOURCE below)
@@ -20,13 +20,14 @@
 //
 // Pipeline: keep subject -> strip HTML and whitespace -> repair the dataset's dropped "rt" letters ("aboion" -> "abortion")
 // -> drop broken/no-key/figure-dependent items -> exact + same-key de-duplicate -> map to the 17 subtopics -> difficulty ->
-// doubtful-key flags -> tokos/decks/mcq.json. Deterministic, no network.
+// doubtful-key flags -> tokos/decks/mcq/ (index + 17 topic files). Deterministic, no network.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
-export const OUT = path.join(ROOT, "tokos", "decks", "mcq.json");
+// Split deck: index.json (metadata, counts, topic list) + one small file per subtopic, so a phone parses only what it opens.
+export const OUT_DIR = path.join(ROOT, "tokos", "decks", "mcq");
 const SUBJECT = "Gynaecology & Obstetrics";
 
 export const SOURCE = {
@@ -476,16 +477,20 @@ function main() {
   if (!dir) { console.error("set MEDMCQA_DIR (see the GET THE DATA block at the top of this script)"); process.exit(1); }
   const { items, stats } = build(readRows(dir));
   const sum = summarize(items);
-  const deck = {
+  const index = {
     id: "mcq", v: 1, ...SOURCE, subject: SUBJECT,
-    topics: SUBTOPICS.map(({ id, title, group }) => ({ id, title, group })),
+    counts: { total: sum.total, d1: sum.byLevel[1], d2: sum.byLevel[2], d3: sum.byLevel[3] },
+    topics: SUBTOPICS.map(({ id, title, group }) => ({ id, title, group, count: sum.byTopic[id], file: `mcq/${id}.json` })),
     flagLegend: FLAG_LEGEND,
     stats: { ...sum, build: stats },
-    items,
   };
-  fs.mkdirSync(path.dirname(OUT), { recursive: true });
-  const body = JSON.stringify(deck);
-  fs.writeFileSync(OUT, body);
+  fs.rmSync(OUT_DIR, { recursive: true, force: true });
+  fs.rmSync(path.join(ROOT, "tokos", "decks", "mcq.json"), { force: true }); // the old single-file deck
+  fs.mkdirSync(OUT_DIR, { recursive: true });
+  let bytes = 0, biggest = 0;
+  const write = (name, obj) => { const body = JSON.stringify(obj); bytes += Buffer.byteLength(body); biggest = Math.max(biggest, Buffer.byteLength(body)); fs.writeFileSync(path.join(OUT_DIR, name), body); };
+  write("index.json", index);
+  for (const id of SUB_IDS) write(`${id}.json`, { topic: id, items: items.filter((it) => it.t === id) });
   console.log(JSON.stringify({ read: stats.read, repairWords: stats.repairWords, repairedStrings: stats.repairedStrings, drop: stats.drop, afterDrops: stats.afterDrops, dup: stats.dup, afterDedupe: stats.afterDedupe }, null, 1));
   console.log("difficulty:", JSON.stringify(sum.byLevel), "with explanation:", sum.withExplanation, "flagged:", sum.flagged, JSON.stringify(sum.flags));
   const pad = (s, n) => String(s).padEnd(n);
@@ -496,7 +501,7 @@ function main() {
     console.log(pad(id, 18), pad(sum.byTopic[id], 7), pad(b.table, 7), pad(b.keyword, 8), b.fallback);
   }
   console.log(`table-mapped ${tb}, keyword-mapped ${kw}, fallback (no keyword signal) ${fb}`);
-  console.log(`wrote ${path.relative(ROOT, OUT)} ${(Buffer.byteLength(body) / 1e6).toFixed(2)} MB, ${items.length} items`);
+  console.log(`wrote ${path.relative(ROOT, OUT_DIR)}/ (index + ${SUB_IDS.length} topic files) ${(bytes / 1e6).toFixed(2)} MB total, largest file ${(biggest / 1e6).toFixed(2)} MB, ${items.length} items`);
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main();
