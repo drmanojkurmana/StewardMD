@@ -1,0 +1,78 @@
+/* Tokós fetal ultrasound clinics (tokos-clinic-us.js): plane naming and head circumference. Builds on tokos.css
+   (tok-* buttons, options, reveal rows and blocks) and its two themes. The scan itself is always dark, like the
+   scanner's screen, so the overlay colours are fixed for the image, not the theme: the learner's ellipse is sky and
+   dashed, the sonographer's is amber and solid (told apart by line style as well as colour). */
+.tok-root { --tus-you: #38bdf8; --tus-truth: #fcd34d; --tus-img: #000; }
+
+/* ---- the image: sticky above the controls, zoomed by the engine stage ---- */
+.tok-root .tus-hold { position: sticky; top: 0; z-index: 2; background: var(--tk-bg); padding-bottom: 6px; box-shadow: 0 1px 0 var(--tk-line); }
+.tok-root .tus-stage { position: relative; width: 100%; max-height: 52vh; background: var(--tus-img); overflow: hidden; touch-action: none;
+  user-select: none; -webkit-user-select: none; outline: none; }
+.tok-root .tus-stage:focus-visible { box-shadow: inset 0 0 0 3px var(--tk-acc); }
+.tok-root .tus-stage svg { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; display: block; }
+.tok-root .tus-stage.zoomed { cursor: grab; }
+.tok-root .tus-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 8px; min-height: 52px; }
+.tok-root .tus-bar .sp-small { color: var(--tk-mut); }
+.tok-root .tus-live { padding-top: 0; font-size: 16px; font-variant-numeric: tabular-nums; }
+.tok-root .tus-err { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  padding: 16px; text-align: center; color: #f2f2f4; }
+.tok-root .tus-err .tok-btn { width: auto; }
+
+/* ---- overlay (SVG, image px; --tus-k = screen px per image px, so lines and handles keep one on-screen size) ---- */
+.tok-root .tus-ell, .tok-root .tus-truth { fill: none; vector-effect: none; }
+.tok-root .tus-ell { stroke: var(--tus-you); stroke-width: calc(2.5px / var(--tus-k, 1)); stroke-dasharray: calc(7px / var(--tus-k, 1)) calc(4px / var(--tus-k, 1)); }
+.tok-root .tus-truth { stroke: var(--tus-truth); stroke-width: calc(2.5px / var(--tus-k, 1)); }
+.tok-root .tus-axis { stroke: var(--tus-you); stroke-opacity: .5; stroke-width: calc(1px / var(--tus-k, 1)); }
+.tok-root .tus-hit { fill: transparent; cursor: grab; }
+.tok-root .tus-dot { fill: var(--tus-img); stroke: var(--tus-you); stroke-width: calc(2.5px / var(--tus-k, 1)); pointer-events: none; }
+.tok-root .tus-h-c .tus-dot { fill: var(--tus-you); }
+.tok-root .tus-h-r .tus-dot { stroke-dasharray: calc(3px / var(--tus-k, 1)) calc(2px / var(--tus-k, 1)); }
+.tok-root .tus-dragging .tus-hit { cursor: grabbing; }
+
+/* ---- HC controls ---- */
+.tok-root .tus-how { margin: 12px 0 10px; font-size: 15px; line-height: 1.5; max-width: 65ch; text-wrap: pretty; }
+.tok-root .tus-ctl { display: grid; gap: 10px; }
+.tok-root .tus-modes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.tok-root .tus-modes button { min-height: 44px; padding: 0 4px; font-size: 14px; }
+.tok-root .tus-steps { display: flex; justify-content: center; gap: 12px; }
+.tok-root .tus-step { width: 52px; height: 52px; font-size: 22px; font-variant-numeric: tabular-nums; }
+.tok-root .tus-note { margin: 10px 0 0; color: var(--tk-mut); }
+
+/* ---- plane question ---- */
+.tok-root .tus-q .tok-opts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.tok-root .tus-q .tok-opt { text-align: left; padding: 10px 12px; line-height: 1.3; }
+
+/* ---- reveal ---- */
+.tok-root .tus-verdict { align-items: center; }
+.tok-root .tus-verdict:focus { outline: none; } /* programmatic focus target for screen readers, not a control */
+.tok-root .tus-verdict b { font-size: 30px; }
+.tok-root .tus-verdict .tok-i .smd-ico { width: 28px; height: 28px; }
+.tok-root .tus-verdict.ok, .tok-root .tus-verdict.ok b, .tok-root .tus-verdict.on b { color: var(--tk-ok); }
+.tok-root .tus-verdict.close b { color: var(--tk-warn); }
+.tok-root .tus-verdict.no, .tok-root .tus-verdict.no b, .tok-root .tus-verdict.off b { color: var(--tk-bad); }
+.tok-root .tus-fine { margin: 6px 0 0; }
+.tok-root .tus-thumb { width: 100%; background: var(--tus-img); border-radius: 12px; overflow: hidden; margin-top: 8px; }
+.tok-root .tus-thumb img { width: 100%; height: 100%; display: block; object-fit: contain; }
+.tok-root .tus-credit { font-size: 13px; line-height: 1.5; color: var(--tk-mut); margin: 8px 0 0; overflow-wrap: anywhere; }
+.tok-root .tus-credit a, .tok-root .tus-src a { color: var(--sp-link); text-decoration-color: var(--sp-link-line); }
+.tok-root .tus-src { margin-top: 12px; font-size: 13px; color: var(--tk-mut); }
+.tok-root .tus-src summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 600; color: var(--tk-text); }
+.tok-root .tus-src ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; line-height: 1.45; overflow-wrap: anywhere; }
+.tok-root .tus-draft { margin: 8px 0 0; font-size: 12px; color: var(--tk-mut); }
+.tok-root .tus-legend { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; font-size: 13px; color: var(--tk-mut); }
+.tok-root .tus-legend > span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.tok-root .tus-k { display: inline-block; width: 22px; height: 0; border-top: 3px solid var(--tus-you); vertical-align: middle; }
+.tok-root .tus-k-you { border-top-style: dashed; }
+.tok-root .tus-k-truth { border-top-color: var(--tus-truth); }
+.tok-root .tus-ga { margin: 0 0 4px; font-size: 16px; color: var(--tk-mut); }
+.tok-root .tus-ga b { font-size: 28px; font-weight: 750; color: var(--tk-text); font-variant-numeric: tabular-nums; }
+.tok-root .tok-block .sp-small { margin: 6px 0 8px; color: var(--tk-mut); }
+.tok-root .tok-block .tus-src { margin-bottom: 8px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tok-root .tus-stage svg { transition: none !important; }
+}
+@media (min-width: 760px) {
+  .tok-root .tus-view > .tok-pad, .tok-root .tus-bar { padding-left: max(16px, calc((100% - 720px) / 2)); padding-right: max(16px, calc((100% - 720px) / 2)); }
+  .tok-root .tus-q .tok-opts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
