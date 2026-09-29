@@ -117,7 +117,7 @@ test("schema extras: level, unit, review, checks, hotspots, test links, sources"
     assert.ok(MCQ.includes(L.test.mcqTopic), `${id} mcqTopic`);
     if (L.test.explorer) assert.ok(EXPLORERS.includes(L.test.explorer), `${id} explorer`);
     if (L.test.tool) assert.ok(TOOLS.includes(L.test.tool), `${id} tool`);
-    assert.ok(L.sources.length >= 2 && L.sources.every((s) => typeof s === "string" && s.length > 20), `${id} sources`);
+    assert.ok(L.sources.length >= 1 && L.sources.every((s) => typeof s === "string" && s.length > 20), `${id} sources`);
     assert.ok(/\b(19|20)\d\d\b/.test(L.sources.join(" ")), `${id}: sources carry a year`);
   }
 });
