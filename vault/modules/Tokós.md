@@ -14,8 +14,18 @@ only `tokos-loader.js` at boot (`window.TOKOS` is a stand-in with the same surfa
 injects `specialty*.{js,css}`, `tokos.css`, `tokos.js`, `tokos-calipers.js`, `tokos-ctg.js` at `?v=tok5`, then the ordered
 model list in `tokos/models.json` (`tokos-models/<id>.js`; `build-www.sh` copies `tokos-models/`). Learn content goes in
 `tokos/learn/units/*.json`, `lessons/`, `media/credits-<unit>.json`; `node tools/tokos-learn-index.mjs` builds
-`index.json`, `glossary.json` and `media/credits.json` (checked by `test/tokos-learn-content.test.mjs`). The sections below
-describe the CTG clinic, unchanged in behaviour.
+`index.json`, `glossary.json` and `media/credits.json` (checked by `test/tokos-learn-content.test.mjs`) and
+`docs/tokos/competency-coverage.md` (NMC OG codes taught; 131 of 142 at integration).
+
+**Integrated 2026-09-30 (branch `feat/tokos2`):** 40 units / 227 lessons, 9,196-question bank, 13 calculators, 6 drills,
+labour room simulator (`tokos-sim-labour.js`), 6 explorers (`tokos-explore-ui.js`), CTG + fetal planes + HC biometry
+clinics (`tokos-clinic-us.js`), and an "OSCE and viva stations" entry that calls `CLINIX.openDeep("tokos-osce")`. The loader
+also injects those three UI files. Lessons can carry `review: {status, verify: [...]}` (claims written without the source
+open; `SPECIALTY_DATA.reviewStatus()` reads either form); `deeper.text` renders on the lesson finish screen.
+**Review Desk (Tokós tab):** besides the CTG cases and text blocks, one item per unit (verify-first units at the top), bank
+topic (flagged keys), drill, the labour room, calculator, explorer and ultrasound clinic. `scripts/apply-reviews.mjs`
+approves each in its own file (lessons, `tokos/drill/*.json` + rebuild, model `review:` line, deck `review`) and records
+every approval in `tokos/reviews.json`, which the desk reads for status. The sections below describe the CTG clinic.
 
 OBGYN CTG reading trainer. A learner reads a real intrapartum CTG strip (last 30 minutes, calipers and zoom on
 the inline trace), works a FIGO checklist, then sees the reveal: the rule-based FIGO category, the real outcome

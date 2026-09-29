@@ -27,7 +27,7 @@ export function summary(l) {
   const out = { title: l.title, minutes: l.minutes, idea: l.idea, see: l.see.img ? { img: l.see.img } : { diagram: l.see.diagram } };
   const TK = ["clinic", "classes", "mcqTopic", "sim", "tool", "explorer"];
   if (l.test && TK.some((k) => k !== "classes" && l.test[k])) out.test = Object.fromEntries(TK.filter((k) => l.test[k] != null).map((k) => [k, l.test[k]]));
-  if (l.review && l.review.verify) out.verify = l.review.verify.length;
+  if (l.review && l.review.verify) out.verify = l.review.verify; // the claims Review Desk lists first
   return out;
 }
 const readJSON = (p) => JSON.parse(readFileSync(p, "utf8"));

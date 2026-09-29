@@ -82,7 +82,32 @@ try {
   await ev(`SMD_REVIEW.open(); return 1;`);
   await until(`return !!document.querySelector('#smdReview [data-rv-act="kind:tokos"]');`, 10000);
   await ev(`document.querySelector('#smdReview [data-rv-act="kind:tokos"]').click(); return 1;`);
-  ok(await until(`return document.querySelectorAll('#smdReview .rv-row').length === 19;`, 10000), "Review Desk Tokós tab lists 16 cases (4 added in Tokós 2.0) and 3 text blocks");
+  // 16 CTG cases + 3 text blocks, plus Tokós 2.0: 40 units, 17 bank topics, 6 drills, the labour room, 13 calculators,
+  // 6 explorers, 2 ultrasound clinics; the units holding claims to verify come first
+  ok(await until(`return document.querySelectorAll('#smdReview .rv-row').length === 104;`, 20000), "Review Desk Tokós tab lists every Tokós content item: " + await ev(`return document.querySelectorAll('#smdReview .rv-row').length;`));
+  ok(await ev(`var r=document.querySelectorAll('#smdReview .rv-row'); return r[0].getAttribute("data-rv-act") + "," + r[1].getAttribute("data-rv-act");`) === "sel:unit-ob9,sel:unit-ob12", "units with claims to verify are listed first");
+  await ev(`document.querySelector('#smdReview [data-rv-act="sel:unit-ob12"]').click(); return 1;`);
+  await until(`return !!document.querySelector('#smdReview [data-rv-act="read"]');`);
+  await ev(`document.querySelector('#smdReview [data-rv-act="read"]').click(); return 1;`);
+  ok(await until(`var t=document.querySelector('#smdReview .rv-text'); return !!t && /^Verify first/.test(t.querySelector(".rv-s").textContent) && /FIGO 2015 baseline/.test(t.textContent);`, 5000), "Read it on a unit lists its verify claims first, then each lesson");
+  await ev(`document.querySelector('#smdReview [data-rv-act="back"]').click(); return 1;`);
+  await ev(`document.querySelector('#smdReview [data-rv-act="sel:tool-mgso4"]').click(); return 1;`);
+  await until(`return !!document.querySelector('#smdReview [data-rv-act="read"]');`);
+  await ev(`document.querySelector('#smdReview [data-rv-act="read"]').click(); return 1;`);
+  ok(await until(`var t=document.querySelector('#smdReview .rv-text'); return !!t && /Worked example/.test(t.textContent) && /Source/.test(t.textContent);`, 5000), "a calculator shows its worked examples and sources");
+  await ev(`document.querySelector('#smdReview [data-rv-act="back"]').click(); return 1;`);
+  await ev(`document.querySelector('#smdReview [data-rv-act="sel:bank-ob-labour"]').click(); return 1;`);
+  await until(`return !!document.querySelector('#smdReview [data-rv-act="read"]');`);
+  await ev(`document.querySelector('#smdReview [data-rv-act="read"]').click(); return 1;`);
+  ok(await until(`var t=document.querySelector('#smdReview .rv-text'); return !!t && /Flags: /.test(t.textContent) && /Key: /.test(t.textContent);`, 10000), "a bank topic lists its flagged answer keys");
+  await ev(`document.querySelector('#smdReview [data-rv-act="back"]').click(); return 1;`);
+  await until(`return !!document.querySelector('#smdReview [data-rv-act="sel:clinic-fetal-planes"]');`);
+  await ev(`document.querySelector('#smdReview [data-rv-act="sel:clinic-fetal-planes"]').click(); return 1;`);
+  await until(`return !!document.querySelector('#smdReview [data-rv-act="read"]');`);
+  await ev(`document.querySelector('#smdReview [data-rv-act="read"]').click(); return 1;`);
+  ok(await until(`var t=document.querySelector('#smdReview .rv-text'); return !!t && /transthalamic/i.test(t.textContent) && /ISUOG/.test(t.textContent);`, 5000), "the fetal planes clinic shows its teaching points and sources");
+  await ev(`document.querySelector('#smdReview [data-rv-act="back"]').click(); return 1;`);
+  await until(`return !!document.querySelector('#smdReview [data-rv-act="sel:case-1031"]');`);
   ok(await ev(`var r=document.querySelector('#smdReview [data-rv-act="sel:case-1031"]'); return !!r && /Tokós CTG case 1031/.test(r.textContent) && /Pending review/.test(r.textContent);`) === true, "a case row is titled and pending review");
   await ev(`document.querySelector('#smdReview [data-rv-act="sel:case-1031"]').click(); return 1;`);
   ok(await until(`var t=document.querySelector('#smdReview .rv-tok'); return !!t && /FIGO category/.test(t.textContent) && /Baseline/.test(t.textContent) && /Variability/.test(t.textContent) && /Decelerations/.test(t.textContent) && /Contractions/.test(t.textContent) && /Acidosis class/.test(t.textContent) && /Signal quality/.test(t.textContent);`), "case detail shows the labels to confirm and the quality note");

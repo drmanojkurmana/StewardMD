@@ -373,6 +373,61 @@ test("review desk: Tokós items, one per case and per text block, state from the
   assert.ok(items.every((i) => AR.validateExport({ schema: 1, reviewer: { name: "a" }, decisions: [{ kind: "tokos", id: i.id, decision: "approve", at: "2026-09-30T00:00:00Z" }] }).length === 0), "every Tokós id passes the export check");
 });
 
+/* ---- Tokós 2.0 content in the Review Desk: every content type is an item, verify-first units lead ---- */
+function tokosMoreInput() {
+  const J = (f) => JSON.parse(readFileSync(join(ROOT, f), "utf8"));
+  const models = {};
+  for (const id of J("tokos/models.json").models) { const m = require("../tokos-models/" + id + ".js"); if (m && m.id) models[m.id] = m; }
+  return { learn: J("tokos/learn/index.json"), bank: J("tokos/decks/mcq/index.json"), models, ledger: J("tokos/reviews.json").items };
+}
+test("review desk: Tokós 2.0 items per content type, verify-first units at the top, ids pass the export check", () => {
+  const x = tokosMoreInput(), more = REV._tokosMore(x);
+  const by = (re) => more.filter((i) => re.test(i.id)).length;
+  assert.equal(by(/^unit-/), x.learn.units.length);
+  assert.equal(by(/^bank-/), x.bank.topics.length);
+  assert.equal(by(/^drill-/), 6); assert.equal(by(/^sim-labour$/), 1); assert.equal(by(/^tool-/), 13); assert.equal(by(/^explorer-/), 6); assert.equal(by(/^clinic-/), 2);
+  assert.ok(more.every((i) => i.status === "ai_drafted"), "nothing approved yet");
+  const deck = JSON.parse(readFileSync(join(ROOT, "tokos/decks/ctg.json"), "utf8")), rat = JSON.parse(readFileSync(join(ROOT, "tokos/rationale.json"), "utf8"));
+  const all = REV._tokosItems(deck, rat, x), verify = more.filter((i) => i.verify).map((i) => i.id);
+  assert.deepEqual(verify, ["unit-ob9", "unit-ob12"]);
+  assert.deepEqual(all.slice(0, 2).map((i) => i.id), verify, "units with claims to verify come first");
+  assert.equal(all.length, deck.cases.length + 3 + more.length);
+  assert.ok(all.every((i) => AR.validateExport({ schema: 1, reviewer: { name: "a" }, decisions: [{ kind: "tokos", id: i.id, decision: "approve", at: "2026-09-30T00:00:00Z" }] }).length === 0), "every Tokós id passes the export check");
+  const again = REV._tokosMore({ ...x, ledger: { "tool-edd": { status: "reviewed", reviewer: "Dr X" } } });
+  assert.equal(again.find((i) => i.id === "tool-edd").status, "reviewed");
+});
+test("apply-reviews: approving each Tokós 2.0 type rewrites only its review and records the ledger", () => {
+  const at = "2026-10-01T09:00:00Z", ids = ["unit-ob9", "drill-pph", "sim-labour", "tool-edd", "explorer-popq", "clinic-fetal-planes", "bank-gy-urogyn", "tool-nope"];
+  const x = { schema: 1, reviewer: { name: "Dr Obs", regNo: "55", verified: true }, decisions: ids.map((id) => ({ kind: "tokos", id, decision: "approve", at })) };
+  assert.deepEqual(AR.validateExport(x), []);
+  const p = AR.plan(x, { root: ROOT }), line = "Dr Obs, Reg. No. 55, 2026-10-01", rel = (u) => u.file.slice(ROOT.length + 1);
+  assert.deepEqual(p.skipped.map((d) => d.id), ["tool-nope"]);
+  const files = p.updates.filter((u) => !u.ledger);
+  const lessons = files.filter((u) => /learn\/lessons/.test(u.file));
+  assert.equal(lessons.length, JSON.parse(readFileSync(join(ROOT, "tokos/learn/units/ob9.json"), "utf8")).lessons.length);
+  lessons.forEach((u) => {
+    const before = JSON.parse(readFileSync(u.file, "utf8")), after = JSON.parse(u.text);
+    assert.equal(after.review.status, "reviewed"); assert.equal(after.review.reviewer, line);
+    if (before.review.verify) assert.deepEqual(after.review.verify, before.review.verify, "verify claims kept");
+    delete before.review; delete after.review; assert.deepEqual(after, before, rel(u));
+  });
+  const one = (f) => files.find((u) => rel(u) === f);
+  assert.equal(JSON.parse(one("tokos/drill/pph.json").text).review, "reviewed"); assert.equal(one("tokos/drill/pph.json").build, "tools/tokos-build-drills.mjs");
+  assert.equal(JSON.parse(one("tokos/decks/fetal-planes.json").text).review, "reviewed");
+  for (const f of ["tokos-models/drill-labour.js", "tokos-models/tool-edd.js", "tokos-models/explorer-popq.js"]) {
+    const t = one(f).text; assert.ok(t.includes('review: "reviewed", reviewedBy: "' + line + '"') && !t.includes('review: "ai_drafted"'), f);
+    assert.equal(t.replace('review: "reviewed", reviewedBy: "' + line + '"', 'review: "ai_drafted"'), readFileSync(join(ROOT, f), "utf8"), f + ": nothing else changes");
+  }
+  const ledger = JSON.parse(p.updates.filter((u) => u.ledger).pop().text);
+  assert.deepEqual(Object.keys(ledger.items), ids.slice(0, 7)); assert.equal(ledger.items["bank-gy-urogyn"].reviewer, line);
+  // a second approval of a recorded item is skipped
+  const dir = mkdtempSync(join(tmpdir(), "tokrev-")); mkdirSync(join(dir, "tokos/decks/mcq"), { recursive: true });
+  writeFileSync(join(dir, "tokos/decks/mcq/index.json"), readFileSync(join(ROOT, "tokos/decks/mcq/index.json")));
+  writeFileSync(join(dir, "tokos/reviews.json"), JSON.stringify(ledger));
+  const again = AR.plan({ ...x, decisions: [x.decisions[6]] }, { root: dir });
+  assert.equal(again.updates.length, 0); assert.match(again.skipped[0].why, /already reviewed by Dr Obs/);
+});
+
 /* ================================ source watch ================================ */
 test("source watch: collects cited URLs, fingerprints visible text only, and classifies changes", () => {
   const s = SW.collectSources();

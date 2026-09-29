@@ -13,6 +13,9 @@
  * The Tokós tab lists the CTG trainer's pending approvals: one item per case in tokos/decks/ctg.json (the
  * suggested labels a doctor confirms) and one per teaching text block (rationale, checklist wording, caliper
  * verdicts). "Read it" opens a case straight in Tokós (TOKOS.openCase, which loads Tokós first) and shows a text block here.
+ * Tokós 2.0 adds one item per Learn unit, question-bank topic (its key flags), drill, the labour simulator, calculator,
+ * explorer and ultrasound clinic (teaching points); their state comes from tokos/reviews.json (apply-reviews.mjs writes
+ * it). Units holding lessons with review.verify (numbers written without the source open) are listed first.
  * A fifth tab, "Clinical updates", appears only for registered bulletin signers and owners; it is drawn by
  * bulletins-desk.js (SMD_BULLETINS_DESK) and, unlike the tabs above, talks to the server.
  */
@@ -34,18 +37,49 @@
     return { schema: 1, app: "StewardMD review desk", exportedAt: now || new Date().toISOString(), reviewer: { name: reviewer.name || "", regNo: reviewer.regNo || "", speciality: reviewer.speciality || "", verified: !!reviewer.verified }, decisions: list };
   }
 
-  var S = { deskOn: false, kind: "protocol", sel: "", showText: false, items: { protocol: null, kit: null, consent: null, tokos: null }, reviewer: { name: "", regNo: "", speciality: "", verified: false }, q: "" };
+  var S = { deskOn: false, kind: "protocol", sel: "", showText: false, items: { protocol: null, kit: null, consent: null, tokos: null }, tokosBank: {}, reviewer: { name: "", regNo: "", speciality: "", verified: false }, q: "" };
 
   /* ---------- Tokós (CTG trainer) ---------- */
   var TOK_TEXT = [["rationale", "review", "Tokós teaching points", "The Why notes on the answer screen, English and Hindi"],
     ["checklist", "reviewChecklist", "Tokós checklist wording", "Answer options and the three FIGO next steps, English and Hindi"],
     ["calipers", "reviewCalipers", "Tokós caliper verdicts", "What the calipers say about a range or a span, English and Hindi"]];
-  /** Pure: one item per CTG case (reviewed when review.complete === true) and per text block (rationale.json review state). */
-  function tokosItems(deck, rat) {
+  /** Pure: one item per CTG case (reviewed when review.complete === true) and per text block (rationale.json review state).
+   * With `more` ({learn, bank, models, ledger}): the Tokós 2.0 items too, verify-first units at the top. */
+  function tokosItems(deck, rat, more) {
     var cases = ((deck && deck.cases) || []).map(function (c) {
       return { id: "case-" + c.id, title: "Tokós CTG case " + c.id, sub: "Suggested FIGO category: " + c.figo + ((c.features && c.features.decels || []).length ? ", " + c.features.decels.length + " decelerations" : ""), status: c.review && c.review.complete === true ? "reviewed" : "ai_drafted", c: c };
     });
-    return cases.concat(TOK_TEXT.map(function (t) { return { id: t[0], title: t[2], sub: t[3], status: ((rat && rat[t[1]]) || {}).status || "ai_drafted" }; }));
+    var ctg = cases.concat(TOK_TEXT.map(function (t) { return { id: t[0], title: t[2], sub: t[3], status: ((rat && rat[t[1]]) || {}).status || "ai_drafted" }; }));
+    if (!more) return ctg;
+    var rest = tokosMore(more);
+    return rest.filter(function (x) { return x.verify; }).concat(ctg, rest.filter(function (x) { return !x.verify; }));
+  }
+  var LEVEL = { mbbs: "MBBS", resident: "Resident" };
+  /** Pure: the Tokós 2.0 items. learn = learn/index.json, bank = decks/mcq/index.json, models = window.TOKOS_MODELS,
+   * ledger = reviews.json items. Order: units (syllabus order), bank topics, drills, labour room, calculators, explorers, clinics. */
+  function tokosMore(x) {
+    var L = x.learn || { units: [], lessons: {} }, M = x.models || {}, led = x.ledger || {}, out = [];
+    function add(id, title, sub, extra) {
+      var it = { id: id, title: title, sub: sub, status: (led[id] && led[id].status) || "ai_drafted" };
+      for (var k in extra || {}) it[k] = extra[k];
+      out.push(it);
+    }
+    (L.units || []).forEach(function (u) {
+      var v = 0;
+      u.lessons.forEach(function (l) { v += ((L.lessons[l] || {}).verify || []).length; });
+      add("unit-" + u.id, "Tokós lessons: " + u.title.en, u.lessons.length + " lessons, " + (LEVEL[u.level] || u.level) + (v ? "; " + v + " claim" + (v === 1 ? "" : "s") + " to verify first" : ""), v ? { verify: v } : null);
+    });
+    ((x.bank && x.bank.topics) || []).forEach(function (t) { add("bank-" + t.id, "Tokós questions: " + t.title.en, t.count + " questions (MedMCQA); confirm the flagged answer keys"); });
+    function kind(k) { return Object.keys(M).map(function (id) { return M[id]; }).filter(function (m) { return m && m.kind === k; }).sort(function (a, b) { return a.id < b.id ? -1 : 1; }); }
+    kind("drill").forEach(function (m) {
+      if (m.stages) add("drill-" + m.id, "Tokós drill: " + m.title.en, "Emergency drill, " + m.stages.length + " steps, " + (LEVEL[m.level] || m.level));
+      else if (m.init) add("sim-labour", "Tokós labour room: " + m.title.en, "Simulator settings: progress curves, oxytocin steps, scenarios");
+    });
+    kind("tool").forEach(function (m) { add("tool-" + m.id, "Tokós calculator: " + m.title.en, (m.sources || []).length + " source" + ((m.sources || []).length === 1 ? "" : "s") + ", " + (m.examples || []).length + " worked examples"); });
+    kind("explorer").forEach(function (m) { add("explorer-" + m.id, "Tokós explorer: " + m.title.en, (m.sources || []).length + " sources, rules and teaching text"); });
+    add("clinic-fetal-planes", "Tokós clinic: fetal ultrasound planes", "Teaching points per plane (ISUOG), English and Hindi");
+    add("clinic-hc-biometry", "Tokós clinic: fetal head circumference", "Teaching points, HC scoring bands and GA from HC");
+    return out;
   }
   function words(s) { var w = String(s || "").replace(/_/g, " ").replace(/\./g, ": "); return w.charAt(0).toUpperCase() + w.slice(1); }
   function tokosCaseHtml(c) {
@@ -75,15 +109,66 @@
     if (id === "rationale") Object.keys(R).filter(function (k) { return k !== "v" && !/^review/.test(k); }).forEach(function (k) { rows.push([words(k), R[k].en, R[k].hi]); });
     else if (id === "checklist") { var L = G.TOKOS_CTG && G.TOKOS_CTG.L10N; if (L) Object.keys(L.en.opts).forEach(function (q) { Object.keys(L.en.opts[q]).forEach(function (v) { rows.push([words(q) + ": " + words(v), L.en.opts[q][v], (L.hi.opts[q] || {})[v]]); }); }); }
     else if (id === "calipers") { var W = G.TOKOS_CALIPERS && G.TOKOS_CALIPERS.WORDS; if (W) ["reduced", "normal", "increased", "short", "decel", "prolonged", "over5"].forEach(function (k) { rows.push([words(k), W.en[k], W.hi[k]]); }); }
+    else rows = tokosMoreRows(id);
+    if (rows === null) return '<p class="kit-muted">Loading…</p>';
     if (!rows.length) return '<p class="kit-muted">This text could not be loaded here. Open Tokós once, then try again.</p>';
     return '<ol class="rv-text">' + rows.map(function (r) { return '<li><span class="rv-s">' + esc(r[0]) + "</span><p>" + esc(r[1]) + '</p><p lang="hi">' + esc(r[2] || "") + "</p></li>"; }).join("") + "</ol>";
+  }
+  // Rows [label, English, Hindi] for a Tokós 2.0 item; null while a bank topic file loads (it repaints when done).
+  function tokosMoreRows(id) {
+    var M = G.TOKOS_MODELS || {}, m, rows = [], L = S.tokosLearn;
+    function tt(o) { return o && typeof o === "object" ? o : { en: o == null ? "" : String(o), hi: "" }; }
+    function srcs(list) { (list || []).forEach(function (x) { rows.push(["Source", x.label || x.url || String(x), ""]); }); }
+    if (/^unit-/.test(id) && L) {
+      var u = (L.units || []).filter(function (x) { return "unit-" + x.id === id; })[0];
+      if (u) u.lessons.forEach(function (lid) {
+        var l = L.lessons[lid] || {};
+        (l.verify || []).forEach(function (v) { rows.push(["Verify first: " + (l.title || {}).en, v, ""]); });
+      });
+      if (u) u.lessons.forEach(function (lid) { var l = L.lessons[lid] || {}; rows.push([lid, tt(l.title).en + ". " + tt(l.idea).en, tt(l.title).hi + (tt(l.idea).hi ? "। " + tt(l.idea).hi : "")]); });
+    } else if (/^bank-/.test(id)) {
+      var tid = id.slice(5), f = S.tokosBank[tid];
+      if (f === undefined) {
+        S.tokosBank[tid] = null;
+        G.fetch((G.SMD_TOKOS_BASE || "/tokos/") + "decks/mcq/" + tid + ".json").then(function (r) { return r.ok ? r.json() : { items: [] }; }).then(function (d) { S.tokosBank[tid] = d.items || []; render(); }, function () { S.tokosBank[tid] = []; render(); });
+        return null;
+      }
+      if (f === null) return null;
+      f.filter(function (q) { return q.flags && q.flags.length; }).forEach(function (q) { rows.push(["Flags: " + q.flags.join(", "), q.q + " Key: " + (q.o || [])[q.a], q.exp ? "Explanation: " + String(q.exp).slice(0, 300) : ""]); });
+      if (!rows.length && f.length) rows.push(["No flagged keys", f.length + " questions; none carries a key flag. Sample a few in Tokós.", ""]);
+    } else if (/^drill-/.test(id) && (m = M[id.slice(6)]) && m.stages) {
+      m.stages.forEach(function (st) {
+        var ok = (st.options || []).filter(function (o) { return o.correct; })[0];
+        rows.push([st.id, tt(st.prompt).en + (ok ? " Answer: " + tt(ok.text).en + " " + tt(ok.feedback).en : ""), tt(st.prompt).hi + (ok ? " " + tt(ok.text).hi : "")]);
+      });
+      srcs(m.sources);
+    } else if (id === "sim-labour" && (m = M.labour)) {
+      Object.keys(m.SCENARIOS || {}).forEach(function (k) { var sc = m.SCENARIOS[k]; rows.push(["Scenario " + k + " (" + sc.level + ")", tt(sc.brief).en, tt(sc.brief).hi]); });
+      rows.push(["Oxytocin steps", JSON.stringify(m.OXY_STEPS), ""]);
+      rows.push(["Labour progress (Zhang 2010)", JSON.stringify(m.ZHANG), ""]);
+      srcs(m.sources);
+    } else if (/^(tool|explorer)-/.test(id) && (m = M[id.replace(/^(tool|explorer)-/, "")])) {
+      (m.examples || []).forEach(function (e) { rows.push(["Worked example", JSON.stringify(e.values) + " gives " + JSON.stringify(e.expect), ""]); });
+      if (m.subtitle) rows.push(["What it shows", tt(m.subtitle).en, tt(m.subtitle).hi]);
+      srcs(m.sources);
+    } else if (/^clinic-/.test(id) && G.TOKOS_US) {
+      var U = G.TOKOS_US;
+      if (id === "clinic-fetal-planes") Object.keys(U.PLANES).forEach(function (k) { U.PLANES[k].points.forEach(function (pt) { rows.push([words(k), pt.en, pt.hi]); }); });
+      else { U.HC_POINTS.points.forEach(function (pt) { rows.push(["Head circumference", pt.en, pt.hi]); }); U.HC_BANDS.forEach(function (b) { rows.push(["Scoring band " + b.id, "Error up to " + b.maxPct + "% of the sonographer's HC (Tokós choice, not a guideline)", ""]); }); }
+      Object.keys(U.SOURCES).forEach(function (k) { rows.push(["Source", U.SOURCES[k].label, ""]); });
+    }
+    return rows;
   }
   // Tokós loads lazily (tokos-loader.js): its code (checklist words, suggested labels, caliper words) loads with the tab.
   function loadTokos() {
     var base = G.SMD_TOKOS_BASE || "/tokos/", L = G.TOKOS_LOADER;
     function j(p) { return G.fetch(base + p).then(function (r) { if (!r.ok) throw new Error(p + " " + r.status); return r.json(); }); }
     var code = L && L.load ? L.load().then(null, function () {}) : Promise.resolve();
-    return Promise.all([j("decks/ctg.json"), j("rationale.json"), code]).then(function (res) { S.tokosRat = res[1]; return tokosItems(res[0], res[1]); });
+    function soft(p) { return j(p).then(null, function () { return null; }); } // Tokós 2.0 files: a missing one lists nothing
+    return Promise.all([j("decks/ctg.json"), j("rationale.json"), code, soft("learn/index.json"), soft("decks/mcq/index.json"), soft("reviews.json")]).then(function (res) {
+      S.tokosRat = res[1]; S.tokosLearn = res[3];
+      return tokosItems(res[0], res[1], { learn: res[3], bank: res[4], models: G.TOKOS_MODELS, ledger: res[5] && res[5].items });
+    });
   }
   function loadItems(kind) {
     if (S.items[kind]) return Promise.resolve(S.items[kind]);
@@ -214,7 +299,7 @@
 
   // Weekly review push (/?rvtab=bulletins) lands here: open the desk on the Clinical updates tab.
   function openBulletins() { S.wantBulletin = true; open(); }
-  var API = { open: open, openBulletins: openBulletins, close: close, _render: render, _buildExport: buildExport, _tokosItems: tokosItems, DECISIONS: DECISIONS };
+  var API = { open: open, openBulletins: openBulletins, close: close, _render: render, _buildExport: buildExport, _tokosItems: tokosItems, _tokosMore: tokosMore, DECISIONS: DECISIONS };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_REVIEW = API;
 })(typeof window !== "undefined" ? window : globalThis);
