@@ -1,7 +1,7 @@
 ---
 tags: [module, education, obgyn]
-status: built 2026-09-29, flag OFF; content ai_drafted pending obstetrician review (docs/tokos/review-queue.md)
-flag: smd_tokos (client, def:false, ?tokos=1 shows)
+status: built 2026-09-29, ON for all during testing (owner decision 2026-09-29); content ai_drafted pending obstetrician review in the Review Desk
+flag: smd_tokos (client, def:true, "0" or ?tokos=0 hides it)
 ---
 # Tokós
 
@@ -10,18 +10,21 @@ the inline trace), works a FIGO checklist, then sees the reveal: the rule-based 
 (pH, base deficit, Apgar) as a separate block, and a rationale per answer. FSRS-6 spaced repetition and the zoom
 stage are copied from [[Ophthalmós]].
 
-- **Status (2026-09-29):** built on branch `feat/tokos`, flag OFF, content `ai_drafted`, pending obstetrician
-  review through `docs/tokos/review-queue.md`. 12 real traces from CTU-UHB (ODC-BY 1.0, credits in
+- **Status (2026-09-29):** built on branch `feat/tokos`. ON for all users while the app is in testing (owner
+  decision 2026-09-29), content `ai_drafted`, pending obstetrician review in the Review Desk (Tokós tab). 12 real traces from CTU-UHB (ODC-BY 1.0, credits in
   `tokos/media/credits.json`). Every screen carries the "To be verified, draft" footer (`.tok-draft`).
-- **Entry points:** Home tile `tokos` · `TOKOS.open()` · overlay `#smdTokos.tok-root` · `TOKOS.back()` is called
+- **Entry points:** Home tile `tokos` · `TOKOS.open()` · `TOKOS.openCase(id)` (Review Desk "Read it": opens straight
+  into one case, same kill switch and Resident trial gate) · overlay `#smdTokos.tok-root` · `TOKOS.back()` is called
   from `swipe-back.js` (canGoBack and goBack) and by the module's own Escape handler.
-- **Flag + default:** `smd_tokos`, client, default **OFF** (hidden). Show with `localStorage.smd_tokos = "1"` or
-  `?tokos=1` for the current load. Gating is inline in `home.js` `eligible()`, same as `atlas` and `ophthalmos`.
-  With the flag off the tile does not render, and `ACT.tokos` (the one door for the tile, `stewardmd://tokos`
-  and the MaiK tool chip) is a quiet no-op, decided by the same `eligible()`.
+- **Flag + default:** `smd_tokos`, client, default **ON** (owner decision 2026-09-29, the app is in testing). Kill
+  switch `localStorage.smd_tokos = "0"` or `?tokos=0` for the current load. Gating is inline in `home.js`
+  `eligible()` (`!== "0"`), same as `atlas` and `ophthalmos`; the tile has no `defOn: false`, so it shows on Home by
+  default. With the kill switch set the tile does not render, and `ACT.tokos` (the one door for the tile,
+  `stewardmd://tokos` and the MaiK tool chip) is a quiet no-op, decided by the same `eligible()`. `TOKOS.openCase`
+  repeats the same check in `tokos.js`.
 - **Files:** `tokos-core.js` (FSRS-6, sessions), `tokos-data.js` (levels, trial, persistence `smd_tokos_v1` and
   `smd_tokos_prefs`, FIGO checklist, grading), `tokos-stage.js` (zoom), `tokos-calipers.js` (bpm and time
-  calipers in viewBox units), `tokos.js` (shell, screens), `tokos.css`. Load tags in `index.html` at `?v=tok2`.
+  calipers in viewBox units), `tokos.js` (shell, screens), `tokos.css`. Load tags in `index.html` at `?v=tok3`.
 - **Data:** `tokos/tracks.json`, `tokos/decks/ctg.json`, `tokos/rationale.json` (en and hi),
   `tokos/media/ctg/*.svg`, `tokos/media/credits.json`. `scripts/build-www.sh` copies the whole `tokos/`
   directory. `tools/tokos-ctg-prep.mjs` and `docs/tokos/` are authoring only and do not ship; `functions/_middleware.js`
@@ -30,8 +33,10 @@ stage are copied from [[Ophthalmós]].
   category. Resident (Pro, one free trial per feature, `clinic.ctg`) adds the FIGO action, and the deceleration
   type only where an obstetrician confirmed it (`case.review.decelType`). The trial gate runs before any fetch.
 - **Tests:** `test/tokos-*.test.mjs` (core, data, stage, calipers, content, wiring), `test/run-tokos-ui.mjs`
-  (module UI), `test/run-tokos-app-ui.mjs` (real app: tile absent with flag off, opens with flag on, hub shows the
-  CTG clinic, back returns home, no uncaught errors).
+  (module UI), `test/run-tokos-app-ui.mjs` (real app: tile shows and opens by default, hub shows the CTG clinic, back
+  returns home; Review Desk Tokós tab lists the items and Read it opens a case; `smd_tokos="0"` and `?tokos=0` hide
+  the tile and block every entry; no uncaught errors). Review Desk and apply tests for Tokós are in
+  `test/kit-tools-docs.test.mjs`.
 
 ## Rule-based labels
 
@@ -54,26 +59,37 @@ range (max minus min over-called increased variability on real records).
 
 ## Reviewer workflow
 
-1. Obstetrician opens `docs/tokos/review-queue.md`: suggested label, outcome and quality note per case.
-2. Confirm or correct, then set `review` on the case in `tokos/decks/ctg.json`. Every graded field is
-   overridable (`truthFor`): `uc`, `baselineClass`, `variability`, `decels`, `decelType`, `figo` (the Resident
-   action follows `figo`), plus `by`, `date`, and `complete: true` once every graded field was checked. The field
-   list and allowed values are generated into the queue header from `TOKOS_DATA.QUESTIONS`.
-3. A `decelType` turns on Resident grading of deceleration type; `complete: true` removes the rule-based banner.
-4. The queue also lists the text to review: `tokos/rationale.json` (14 teaching points), the checklist option and
-   FIGO action strings (`tokos.js` `L10N.*.opts`) and the caliper verdicts (`tokos-calipers.js` `WORDS`).
-5. Regenerate the queue header without the network or touching the deck and SVGs:
-   `node tools/tokos-ctg-prep.mjs --queue-only`. Everything below the `hand-maintained below` marker is kept.
+1. The obstetrician opens Review Desk (Home > Add Tool > Review content), Tokós tab. Items: one per case
+   (`case-<id>`, "Tokós CTG case <id>": the suggested FIGO category, baseline, variability, decelerations with
+   suggested subtypes, contractions, acidosis class and the signal quality note, `case.qualityNote`), and three text
+   blocks: `rationale` (the 14 teaching points in `tokos/rationale.json`), `checklist` (`tokos.js` `L10N.*.opts`,
+   including the FIGO next-step strings) and `calipers` (`tokos-calipers.js` `WORDS`). "Read it" opens a case in
+   Tokós (`TOKOS.openCase`) and shows a text block inline.
+2. Approve, Approve after minor edits, or Needs changes, with comments; export (or Send to StewardMD).
+3. The owner runs `node scripts/apply-reviews.mjs <file.json>`. Approve on a case sets its `review` in
+   `tokos/decks/ctg.json` to `{ by: "<name>, Reg. No. <n>", date, uc, baselineClass, variability, decels, figo,
+   decelType (only when every deceleration has the same suggested subtype), acidosis, complete: true }`
+   (`TOKOS_DATA.suggestedReview`), so `truthFor` grades against it and the banner drops. ctg.json is rewritten with
+   `JSON.stringify(deck, null, 1)`, the form the prep tool writes; the script refuses if the file is not in that form.
+   Approve on a text block sets `review` / `reviewChecklist` / `reviewCalipers` in `tokos/rationale.json` to
+   `reviewed`. Approve-minor and Needs changes go to `vault/handoff/review-feedback.md`; a corrected label is then
+   set by hand in the case's `review` (every graded field is overridable, see `truthFor`).
+4. Review state shown in the desk comes from the content: a case is reviewed when `review.complete === true`, a text
+   block when its review object in `rationale.json` says `reviewed`.
+5. `docs/tokos/review-queue.md` stays as the pipeline notes (field reference, suggested labels, quality notes, the
+   hand-maintained pipeline check). Regenerate its header with `node tools/tokos-ctg-prep.mjs --queue-only` (reads
+   `case.qualityNote` from the deck; the full run writes it).
 
-## Launch gate
+## Review gate
 
-`smd_tokos` must NOT default on until every case in `tokos/decks/ctg.json` has a complete review
-(`review.complete === true`). Known content issues that gate it:
+Tokós is ON for all during testing, but its labels stay rule-based until approved in the Review Desk: every case shows
+"Rule-based, pending obstetrician review" until its `review.complete === true`, and every screen keeps the "To be
+verified, draft" footer. Known content issues a reviewer should settle:
 
 - 1495: the strip shows bradycardia (last third at 70 to 90 bpm; strip baseline 125 against the 60 min
   baseline 155) while the key is "suspicious".
 - 1031 and 1020: keyed normal while the rule counts short "variable" dips (9 and 4 of them, 15 to 92 s long).
-- 1035 and 1036: parked. 1035 is keyed normal with FHR at 180 to 200 bpm from 13 min; 1036 has 359 samples above
+- 1035 and 1036: 1035 is keyed normal with FHR at 180 to 200 bpm from 13 min; 1036 has 359 samples above
   180 bpm in the last 5 min. Either may be artefact.
 - Features and keys are computed on the last 60 min while the learner sees the last 30 min, so a key can rest
   on events that are not on screen.

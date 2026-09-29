@@ -1,5 +1,6 @@
-/* Tokós in the REAL app (headless Chrome): flag off hides the tile; flag on shows it, it opens Tokós, the hub shows the
- * CTG clinic, back() returns to home, no uncaught Tokós errors. The module's own behaviour is in test/run-tokos-ui.mjs.
+/* Tokós in the REAL app (headless Chrome): ON by default, the tile opens Tokós, the hub shows the CTG clinic, back()
+ * returns to home; the Review Desk Tokós tab lists the cases and text blocks and Read it opens a case; smd_tokos="0"
+ * and ?tokos=0 hide the tile and block every entry; no uncaught Tokós errors. SHOTS=<dir> saves screenshots. The module's own behaviour is in test/run-tokos-ui.mjs.
  * USAGE: node test/run-tokos-app-ui.mjs   (BASE=http://localhost:8996/ to use a running server)
  */
 import { spawn } from "node:child_process";
@@ -45,19 +46,13 @@ try {
   const tile = `return !!document.querySelector('.rnav-tile[data-act=tokos]');`;
   const load = async (url) => { await call("Page.navigate", { url }); await until(`return !!(window.TOKOS && window.SMD_showHome);`, 30000); await ev(clean); await ev(`SMD_showHome(); return 1;`); await sleep(600); };
 
-  // flag off (default): no tile
-  await call("Page.navigate", { url: BASE }); await until(`return !!(window.TOKOS && window.SMD_showHome);`, 30000);
-  await ev(`try{localStorage.removeItem("smd_tokos"); localStorage.setItem("smd_home_tools", JSON.stringify({tokos:true}));}catch(e){} return 1;`);
-  await load(BASE);
-  ok(await ev(tile) === false, "flag off: the Tokós home tile is absent");
-  // flag off: no other entry opens it either (ACT.tokos is the one door for tile, deep link and MaiK tool chip)
-  await ev(`SMD_openRoute("tokos"); return 1;`); await sleep(400);
-  ok(await ev(`return !TOKOS.isOpen();`) === true, "flag off: stewardmd://tokos (SMD_openRoute) does not open Tokós");
+  const shot = async (name) => { const r = await call("Page.captureScreenshot", { format: "png" }); if (r.result && process.env.SHOTS) (await import("node:fs")).writeFileSync(join(process.env.SHOTS, name + ".png"), Buffer.from(r.result.data, "base64")); };
 
-  // flag on: tile shows and opens Tokós
-  await ev(`localStorage.setItem("smd_tokos","1"); return 1;`);
+  // default (owner decision 2026-09-29, ON for all): no flag set, the tile shows and opens Tokós
+  await call("Page.navigate", { url: BASE }); await until(`return !!(window.TOKOS && window.SMD_showHome);`, 30000);
+  await ev(`try{localStorage.removeItem("smd_tokos"); localStorage.removeItem("smd_home_tools"); localStorage.removeItem("smd_review_decisions");}catch(e){} return 1;`);
   await load(BASE);
-  ok(await until(tile, 10000), "flag on (smd_tokos=1): the Tokós home tile renders");
+  ok(await until(tile, 10000), "default (no flag): the Tokós home tile renders without being added from Add Tool");
   await ev(`var t=document.querySelector('.rnav-tile[data-act=tokos]'); t.focus(); t.click(); return 1;`);
   ok(await until(`return TOKOS.isOpen() && !!document.getElementById("smdTokos");`, 10000), "tile opens the Tokós overlay");
   ok(await until(`return !!document.querySelector('#smdTokos .tok-clinic[data-t=ctg]');`, 20000), "hub shows the CTG clinic");
@@ -65,11 +60,51 @@ try {
   ok(await until(`return !TOKOS.isOpen();`, 5000), "back() closes Tokós and returns to home");
   ok(await ev(`var a=document.activeElement; return !!(a && a.matches && a.matches('.rnav-tile[data-act=tokos]'));`) === true, "closing Tokós returns focus to the tile that opened it");
   ok(await ev(`return !document.getElementById("smdTokos") || !document.getElementById("smdTokos").offsetParent;`) === true, "overlay is gone");
+  await ev(`SMD_openRoute("tokos"); return 1;`);
+  ok(await until(`return TOKOS.isOpen();`, 5000), "default: stewardmd://tokos (SMD_openRoute) opens Tokós");
+  await ev(`TOKOS.close(); return 1;`);
 
-  // URL override
+  // Review Desk: the Tokós tab lists one item per case and per text block; Read it opens that case in Tokós
+  await ev(`SMD_REVIEW.open(); return 1;`);
+  await until(`return !!document.querySelector('#smdReview [data-rv-act="kind:tokos"]');`, 10000);
+  await ev(`document.querySelector('#smdReview [data-rv-act="kind:tokos"]').click(); return 1;`);
+  ok(await until(`return document.querySelectorAll('#smdReview .rv-row').length === 15;`, 10000), "Review Desk Tokós tab lists 12 cases and 3 text blocks");
+  ok(await ev(`var r=document.querySelector('#smdReview [data-rv-act="sel:case-1031"]'); return !!r && /Tokós CTG case 1031/.test(r.textContent) && /Pending review/.test(r.textContent);`) === true, "a case row is titled and pending review");
+  await ev(`document.querySelector('#smdReview [data-rv-act="sel:case-1031"]').click(); return 1;`);
+  ok(await until(`var t=document.querySelector('#smdReview .rv-tok'); return !!t && /FIGO category/.test(t.textContent) && /Baseline/.test(t.textContent) && /Variability/.test(t.textContent) && /Decelerations/.test(t.textContent) && /Contractions/.test(t.textContent) && /Acidosis class/.test(t.textContent) && /Signal quality/.test(t.textContent);`), "case detail shows the labels to confirm and the quality note");
+  await shot("review-desk-tokos-case-390");
+  await ev(`document.querySelector('#smdReview [data-rv-act="read"]').click(); return 1;`);
+  ok(await until(`return TOKOS.isOpen() && TOKOS._st.view === "clinic" && TOKOS._st.session.list.length === 1 && TOKOS._st.session.list[0].c.id === "1031";`, 20000), "Read it opens Tokós straight into case 1031");
+  ok(await ev(`var r=document.getElementById("smdTokos").getBoundingClientRect(), e=document.elementFromPoint(r.left+r.width/2, r.top+r.height/2); return !!(e && e.closest("#smdTokos"));`) === true, "Tokós sits above the Review Desk");
+  await ev(`TOKOS.back(); TOKOS.back(); return 1;`);
+  ok(await until(`return !TOKOS.isOpen() && document.querySelector('#smdReview.on') && getComputedStyle(document.getElementById('smdReview')).display !== 'none';`, 5000), "closing Tokós returns to the Review Desk");
+  await ev(`document.querySelector('#smdReview [data-rv-act="back"]').click(); return 1;`);
+  await until(`return !!document.querySelector('#smdReview [data-rv-act="sel:rationale"]');`);
+  await ev(`document.querySelector('#smdReview [data-rv-act="sel:rationale"]').click(); return 1;`);
+  await until(`return !!document.querySelector('#smdReview [data-rv-act="read"]');`);
+  await ev(`document.querySelector('#smdReview [data-rv-act="read"]').click(); return 1;`);
+  ok(await until(`return document.querySelectorAll('#smdReview .rv-text li').length === 14;`), "Read it on the teaching points shows all 14, English and Hindi");
+  await shot("review-desk-tokos-text-390");
+  ok(await ev(`return document.querySelector('#smdReview [data-rv-act="read"]').getAttribute('aria-expanded') === 'true';`) === true, "the text toggle reports its state");
+  ok(!/[–—]/.test(await ev(`return document.querySelector('#smdReview').innerText;`)), "review desk Tokós tab: no em or en dash on screen");
+  await ev(`document.getElementById('rv_dec').value='approve'; document.getElementById('rv_name').value='Dr Test'; document.querySelector('#smdReview [data-rv-act="save"]').click(); return 1;`);
+  ok(await until(`return (JSON.parse(localStorage.getItem('smd_review_decisions')||'{}')['tokos:rationale']||{}).decision === 'approve';`), "a Tokós decision is saved like other content (kind tokos)");
+  await ev(`localStorage.removeItem('smd_review_decisions'); SMD_REVIEW.close(); return 1;`);
+
+  // kill switch smd_tokos="0": no tile, and no other entry opens it (ACT.tokos is the one door; openCase checks the same flag)
+  await ev(`localStorage.setItem("smd_tokos","0"); return 1;`);
+  await load(BASE);
+  ok(await ev(tile) === false, "smd_tokos=0: the Tokós home tile is absent");
+  await ev(`SMD_openRoute("tokos"); return 1;`); await sleep(400);
+  ok(await ev(`return !TOKOS.isOpen();`) === true, "smd_tokos=0: stewardmd://tokos (SMD_openRoute) does not open Tokós");
+  ok(await ev(`return TOKOS.openCase("1031") === false && !TOKOS.isOpen();`) === true, "smd_tokos=0: TOKOS.openCase is blocked");
+
+  // URL kill switch
   await ev(`localStorage.removeItem("smd_tokos"); return 1;`);
-  await load(BASE + "?tokos=1");
-  ok(await until(tile, 10000), "?tokos=1 shows the tile without the flag");
+  await load(BASE + "?tokos=0");
+  ok(await ev(tile) === false, "?tokos=0 hides the tile without the flag");
+  await ev(`SMD_openRoute("tokos"); return 1;`); await sleep(400);
+  ok(await ev(`return !TOKOS.isOpen();`) === true, "?tokos=0: the route is blocked");
 
   ok(errors.length === 0, "no uncaught Tokós errors" + (errors.length ? ": " + errors.slice(0, 3).join(" | ") : ""));
   console.log(fails === 0 ? "\nALL GREEN: Tokós wired into the app" : `\n${fails} FAILED`);

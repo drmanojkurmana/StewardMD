@@ -446,6 +446,21 @@
     render();
     if (!st.cfg && !st.loading) loadAll().then(render).catch(render);
   }
+  // Review Desk "Read it": open Tokós straight into one case of the CTG deck. Same kill switch as the home
+  // tile (home.js eligible(): smd_tokos="0" or ?tokos=0 blocks it) and the same Resident trial gate.
+  function enabled() {
+    try { var q = (G.location.search.match(/[?&]tokos=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return G.localStorage.getItem("smd_tokos") !== "0"; } catch (e) { return true; }
+  }
+  function openCase(id) {
+    if (!enabled()) return false;
+    open();
+    return loadAll().then(function () {
+      var c = (st.decks.ctg.cases || []).filter(function (x) { return x.id === String(id); })[0];
+      if (!c || !isOpen()) return false;
+      var run = function () { st.session = { list: [{ id: c.id, a: c.figo, c: c }], i: 0, answers: {}, result: null, done: 0 }; st.view = "clinic"; render(); return true; };
+      return level() === "resident" ? gate("clinic.ctg", run) === true : run();
+    }, function () { render(); return false; });
+  }
   function isOpen() { var el = $("smdTokos"); return !!(el && el.classList.contains("on")); }
   function close() {
     unmountTrace();
@@ -472,7 +487,7 @@
       back();
     });
 
-  var API = { open: open, close: close, back: back, isOpen: isOpen, _st: st, _render: render };
+  var API = { open: open, openCase: openCase, close: close, back: back, isOpen: isOpen, L10N: L10N, _st: st, _render: render };
   // ES5 getters for the UI test: the live caliper and stage handles of the mounted trace.
   Object.defineProperty(API, "_cal", { get: function () { return st._cal; } });
   Object.defineProperty(API, "_stage", { get: function () { return st._stage; } });
