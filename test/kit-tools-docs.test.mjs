@@ -346,7 +346,7 @@ test("apply-reviews: Tokós case approve writes the approved labels into that ca
   assert.ok(!("decelType" in after.cases.find((c) => c.id === "1028").review), "mixed suggested subtypes: no decelType");
   assert.equal(JSON.stringify(after, null, 1), deckOut, "deck keeps its generated form");
   after.cases.forEach((c, i) => { if (c.id !== "1031" && c.id !== "1028") assert.deepEqual(c, before.cases[i]); else { c.review = null; assert.deepEqual(c, before.cases[i]); } });
-  const TD = require("../tokos-data.js"), rc = JSON.parse(deckOut).cases.find((c) => c.id === "1031");
+  const TD = require("../tokos-ctg.js"), rc = JSON.parse(deckOut).cases.find((c) => c.id === "1031");
   assert.equal(TD.reviewComplete(rc), true); assert.equal(TD.truthFor(rc).figo, "normal"); assert.ok(TD.checklistFor(rc, "resident").includes("decelType"));
   // rationale: only its review object changes, in place
   const r = p.updates[2];

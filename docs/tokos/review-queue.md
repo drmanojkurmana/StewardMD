@@ -22,7 +22,7 @@ A field left out keeps the suggested label. A value not in its list is ignored a
 ## Content to review
 
 - `tokos/rationale.json`: all 14 teaching points shown under Why on the reveal, English and Hindi: `baseline.tachycardia`, `baseline.bradycardia`, `baseline.severe_bradycardia`, `variability.reduced`, `variability.increased`, `decels.present`, `decels.prolonged`, `decels.over5`, `uc.tachysystole`, `acidosis.metabolic`, `acidosis.acidaemia_not_metabolic`, `risk.pyrexia`, `risk.preeclampsia`, `trace_vs_outcome`.
-- `tokos.js`, `L10N.en.opts` and `L10N.hi.opts`: the checklist option labels, and under `action` the three FIGO next-step strings graded at Resident level.
+- `tokos-ctg.js`, `L10N.en.opts` and `L10N.hi.opts`: the checklist option labels, and under `action` the three FIGO next-step strings graded at Resident level.
 - `tokos-calipers.js`, `WORDS`: the caliper verdict text (variability bands for a bpm range, deceleration length bands for a time span), English and Hindi.
 
 ## Units and fields

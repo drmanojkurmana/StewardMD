@@ -2121,10 +2121,11 @@
     // content is ai_drafted, so every screen carries a "To be verified · draft" mark until sign-off.
     { act: "ophthalmos", ic: "eye", anim: "ophthalmos", tt: "Ophthalmós", sub: "Eye imaging clinic",
       eligible: function () { try { var q = (location.search.match(/[?&]ophthalmos=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_ophthalmos") !== "0"; } catch (e) { return true; } } },
-    // Tokós (tokos.js): OBGYN CTG clinic trainer. ON for all while the app is in testing (owner decision
+    // Tokós (tokos.js on the specialty engine, loaded on first open by tokos-loader.js): Obstetrics and Gynaecology
+    // learning (Learn, CTG clinic, questions, drills, calculators). ON for all while the app is in testing (owner decision
     // 2026-09-29); kill switch smd_tokos="0" or ?tokos=0. Labels stay "rule-based, pending review" until an
     // obstetrician approves each case in the Review Desk.
-    { act: "tokos", ic: "monitor_heart", tt: "Tokós", sub: "CTG clinic",
+    { act: "tokos", ic: "monitor_heart", tt: "Tokós", sub: "Obstetrics and gynae",
       eligible: function () { try { var q = (location.search.match(/[?&]tokos=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_tokos") !== "0"; } catch (e) { return true; } } },
     { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
     // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).

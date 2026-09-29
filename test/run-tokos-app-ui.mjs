@@ -28,7 +28,7 @@ const ev = async (e) => { const r = await call("Runtime.evaluate", { expression:
 // Like ev, for a promise-returning body.
 const evp = async (e) => { const r = await call("Runtime.evaluate", { expression: `(async function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, awaitPromise: true, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
 const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(200); } return false; };
-let fails = 0; const ok = (c, m) => { console.log((c ? "✅ " : "❌ ") + m); if (!c) fails++; };
+const reqs = []; let fails = 0; const ok = (c, m) => { console.log((c ? "✅ " : "❌ ") + m); if (!c) fails++; };
 
 try {
   let ver, t = 0; while (t++ < 60) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
@@ -36,11 +36,12 @@ try {
   ws.onmessage = (e) => {
     const m = JSON.parse(e.data);
     if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); }
+    if (m.method === "Network.requestWillBeSent") reqs.push(m.params.request.url);
     if (m.method === "Runtime.exceptionThrown") { const d = m.params.exceptionDetails; if (/tokos|TOKOS/i.test(JSON.stringify(d))) errors.push((d.exception && d.exception.description) || d.text); }
   };
   const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
-  await call("Runtime.enable", {});
+  await call("Runtime.enable", {}); await call("Network.enable", {});
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
   const tile = `return !!document.querySelector('.rnav-tile[data-act=tokos]');`;
@@ -50,12 +51,18 @@ try {
 
   // default (owner decision 2026-09-29, ON for all): no flag set, the tile shows and opens Tokós
   await call("Page.navigate", { url: BASE }); await until(`return !!(window.TOKOS && window.SMD_showHome);`, 30000);
-  await ev(`try{localStorage.removeItem("smd_tokos"); localStorage.removeItem("smd_home_tools"); localStorage.removeItem("smd_review_decisions");}catch(e){} return 1;`);
+  await ev(`try{localStorage.removeItem("smd_tokos"); localStorage.removeItem("smd_tokos_prefs"); localStorage.removeItem("smd_home_tools"); localStorage.removeItem("smd_review_decisions");}catch(e){} return 1;`);
   await load(BASE);
+  // lazy loading: app boot requests the loader and no engine or Tokós file
+  const ENG = /\/(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?\.(js|css)|tokos(-core|-data|-stage|-ctg|-calipers)?\.(js|css)|tokos-models\/)/;
+  ok(reqs.some((u) => /tokos-loader\.js\?v=tok4/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads tokos-loader.js and no engine or Tokós file" + (reqs.filter((u) => ENG.test(u)).length ? ": " + reqs.filter((u) => ENG.test(u)).join(", ") : ""));
   ok(await until(tile, 10000), "default (no flag): the Tokós home tile renders without being added from Add Tool");
   await ev(`var t=document.querySelector('.rnav-tile[data-act=tokos]'); t.focus(); t.click(); return 1;`);
   ok(await until(`return TOKOS.isOpen() && !!document.getElementById("smdTokos");`, 10000), "tile opens the Tokós overlay");
-  ok(await until(`return !!document.querySelector('#smdTokos .tok-clinic[data-t=ctg]');`, 20000), "hub shows the CTG clinic");
+  ok(await until(`return !!document.querySelector('#smdTokos [data-act=pick][data-t=test]');`, 20000), "first open loads Tokós and asks Learn or Test");
+  ok(await ev(`return !!window.SPECIALTY_CORE;`) === true && reqs.some((u) => /specialty-shell\.js\?v=tok4/.test(u)) && reqs.some((u) => /tokos-ctg\.js\?v=tok4/.test(u)), "the engine and Tokós loaded on open, at the loader's token");
+  await ev(`document.querySelector('#smdTokos [data-act=pick][data-t=test]').click(); return 1;`);
+  ok(await until(`return !!document.querySelector('#smdTokos [data-act=clinic][data-t=ctg]');`, 20000), "hub shows the CTG clinic");
   await ev(`TOKOS.back(); return 1;`);
   ok(await until(`return !TOKOS.isOpen();`, 5000), "back() closes Tokós and returns to home");
   ok(await ev(`var a=document.activeElement; return !!(a && a.matches && a.matches('.rnav-tile[data-act=tokos]'));`) === true, "closing Tokós returns focus to the tile that opened it");

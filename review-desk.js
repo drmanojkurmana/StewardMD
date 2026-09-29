@@ -12,7 +12,7 @@
  * Flag: smd_review_desk (default ON, reachable from Home > Add Tool > Review content). Buildless ES5.
  * The Tokós tab lists the CTG trainer's pending approvals: one item per case in tokos/decks/ctg.json (the
  * suggested labels a doctor confirms) and one per teaching text block (rationale, checklist wording, caliper
- * verdicts). "Read it" opens a case straight in Tokós (TOKOS.openCase) and shows a text block here.
+ * verdicts). "Read it" opens a case straight in Tokós (TOKOS.openCase, which loads Tokós first) and shows a text block here.
  * A fifth tab, "Clinical updates", appears only for registered bulletin signers and owners; it is drawn by
  * bulletins-desk.js (SMD_BULLETINS_DESK) and, unlike the tabs above, talks to the server.
  */
@@ -49,8 +49,8 @@
   }
   function words(s) { var w = String(s || "").replace(/_/g, " ").replace(/\./g, ": "); return w.charAt(0).toUpperCase() + w.slice(1); }
   function tokosCaseHtml(c) {
-    var TD = G.TOKOS_DATA, sug = TD && TD.suggestedReview ? TD.suggestedReview(c) : { figo: c.figo, acidosis: c.acidosis };
-    var opts = (G.TOKOS && G.TOKOS.L10N && G.TOKOS.L10N.en.opts) || {}, f = c.features || {}, o = c.outcome || {};
+    var TD = G.TOKOS_CTG, sug = TD && TD.suggestedReview ? TD.suggestedReview(c) : { figo: c.figo, acidosis: c.acidosis };
+    var opts = (TD && TD.L10N && TD.L10N.en.opts) || {}, f = c.features || {}, o = c.outcome || {};
     // "Present, under 3 min" when the checklist label already names the class, else "Normal (110 to 160)"
     function opt(q, v) { var o = opts[q] && opts[q][v], w = words(v); return !o ? w : o.toLowerCase().indexOf(w.toLowerCase()) === 0 ? o : w + " (" + o + ")"; }
     var types = {}, maxD = 0;
@@ -73,15 +73,17 @@
   function tokosTextHtml(id) {
     var R = S.tokosRat || {}, rows = [];
     if (id === "rationale") Object.keys(R).filter(function (k) { return k !== "v" && !/^review/.test(k); }).forEach(function (k) { rows.push([words(k), R[k].en, R[k].hi]); });
-    else if (id === "checklist") { var L = G.TOKOS && G.TOKOS.L10N; if (L) Object.keys(L.en.opts).forEach(function (q) { Object.keys(L.en.opts[q]).forEach(function (v) { rows.push([words(q) + ": " + words(v), L.en.opts[q][v], (L.hi.opts[q] || {})[v]]); }); }); }
+    else if (id === "checklist") { var L = G.TOKOS_CTG && G.TOKOS_CTG.L10N; if (L) Object.keys(L.en.opts).forEach(function (q) { Object.keys(L.en.opts[q]).forEach(function (v) { rows.push([words(q) + ": " + words(v), L.en.opts[q][v], (L.hi.opts[q] || {})[v]]); }); }); }
     else if (id === "calipers") { var W = G.TOKOS_CALIPERS && G.TOKOS_CALIPERS.WORDS; if (W) ["reduced", "normal", "increased", "short", "decel", "prolonged", "over5"].forEach(function (k) { rows.push([words(k), W.en[k], W.hi[k]]); }); }
     if (!rows.length) return '<p class="kit-muted">This text could not be loaded here. Open Tokós once, then try again.</p>';
     return '<ol class="rv-text">' + rows.map(function (r) { return '<li><span class="rv-s">' + esc(r[0]) + "</span><p>" + esc(r[1]) + '</p><p lang="hi">' + esc(r[2] || "") + "</p></li>"; }).join("") + "</ol>";
   }
+  // Tokós loads lazily (tokos-loader.js): its code (checklist words, suggested labels, caliper words) loads with the tab.
   function loadTokos() {
-    var base = G.SMD_TOKOS_BASE || "/tokos/";
+    var base = G.SMD_TOKOS_BASE || "/tokos/", L = G.TOKOS_LOADER;
     function j(p) { return G.fetch(base + p).then(function (r) { if (!r.ok) throw new Error(p + " " + r.status); return r.json(); }); }
-    return Promise.all([j("decks/ctg.json"), j("rationale.json")]).then(function (res) { S.tokosRat = res[1]; return tokosItems(res[0], res[1]); });
+    var code = L && L.load ? L.load().then(null, function () {}) : Promise.resolve();
+    return Promise.all([j("decks/ctg.json"), j("rationale.json"), code]).then(function (res) { S.tokosRat = res[1]; return tokosItems(res[0], res[1]); });
   }
   function loadItems(kind) {
     if (S.items[kind]) return Promise.resolve(S.items[kind]);

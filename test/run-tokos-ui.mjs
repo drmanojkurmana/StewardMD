@@ -38,11 +38,15 @@ try {
   await call("Runtime.enable", {});
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   await call("Page.navigate", { url: BASE });
-  ok(await until(`return !!(window.TOKOS_CORE && window.TOKOS_DATA && window.TOKOS_STAGE);`, 15000), "core/data/stage libraries load");
+  // Tokós loads lazily (tokos-loader.js): load the engine and Tokós files first, then drive the module.
+  await until(`return !!window.TOKOS_LOADER;`, 15000); await ev(`TOKOS_LOADER.load(); return 1;`);
+  ok(await until(`return !!(window.SPECIALTY_CORE && window.SPECIALTY_DATA && window.SPECIALTY_STAGE && window.TOKOS_CTG && window.TOKOS && !!TOKOS._internal);`, 15000), "engine core/data/stage and the CTG clinic load on demand");
 
   await ev(`try{localStorage.removeItem("smd_tokos_v1");localStorage.removeItem("smd_tokos_prefs");}catch(e){} document.body.innerHTML='<div id="smdTokos"></div>'; return 1;`);
   await ev(`TOKOS.open(); return 1;`);
-  ok(await until(`return !!document.querySelector('.tok-clinic');`, 10000), "hub renders the CTG clinic entry");
+  ok(await until(`return !!document.querySelector('[data-act=pick][data-t=test]');`, 10000), "first open asks Learn or Test");
+  await ev(`document.querySelector('[data-act=pick][data-t=test]').click(); return 1;`);
+  ok(await until(`return !!document.querySelector('[data-act=clinic][data-t=ctg]');`, 10000), "hub renders the CTG clinic entry");
 
   await ev(`document.querySelector('[data-act=clinic]').click(); return 1;`);
   ok(await until(`return !!document.getElementById('tokTrace');`), "clinic opens with a trace image");
@@ -54,8 +58,8 @@ try {
   ok(await ev(`var b=document.querySelectorAll('.tok-block'); return b.length===2;`) === true, "trace features and real outcome are two separate blocks (Review Focus)");
 
   // Spent-trial gate: must not fetch when the trial is already used.
-  await ev(`localStorage.setItem("smd_tokos_v1", JSON.stringify({v:1,cards:{},conf:{},days:{},trials:{"clinic.ctg":1}})); localStorage.setItem("smd_tokos_prefs", JSON.stringify({level:"resident",lang:"en"})); TOKOS.close(); TOKOS.open(); return 1;`);
-  await until(`return !!document.querySelector('.tok-clinic');`);
+  await ev(`localStorage.setItem("smd_tokos_v1", JSON.stringify({v:1,cards:{},conf:{},days:{},trials:{"clinic.ctg":1}})); localStorage.setItem("smd_tokos_prefs", JSON.stringify({level:"resident",lang:"en",tab:"test"})); TOKOS.close(); TOKOS.open(); return 1;`);
+  await until(`return !!document.querySelector('[data-act=clinic][data-t=ctg]');`);
   let paywallShown = false;
   await ev(`window.__fc = 0; var of = window.fetch; window.fetch = function(){ window.__fc++; return of.apply(this, arguments); }; return 1;`);
   await ev(`window.SMD_PRO_NOTICE = { show: function(){ window.__paywall = true; } }; return 1;`);
@@ -124,7 +128,7 @@ try {
   // app.js closes its modals on every Escape; this harness wiped <body>, so give it the stubs it expects.
   await ev(`(typeof MODAL_IDS !== 'undefined' ? MODAL_IDS : []).concat('modalBackdrop').forEach(function(id){ if(!document.getElementById(id)){ var d=document.createElement('div'); d.id=id; d.hidden=true; document.body.appendChild(d); } }); document.activeElement && document.activeElement.blur && document.activeElement.blur(); return 1;`);
   await key("Escape", "Escape", 27);
-  ok(await until(`return TOKOS.isOpen() && TOKOS._st.view === 'hub' && !!document.querySelector('.tok-clinic');`, 3000), "Escape from the reveal returns to the hub");
+  ok(await until(`return TOKOS.isOpen() && TOKOS._st.view === 'hub' && !!document.querySelector('[data-act=clinic][data-t=ctg]');`, 3000), "Escape from the reveal returns to the hub");
   await key("Escape", "Escape", 27);
   ok(await until(`return !TOKOS.isOpen();`, 3000), "Escape from the hub closes Tokós");
   await ev(`TOKOS.open(); return 1;`);
@@ -132,7 +136,7 @@ try {
 
   // Offline: failed load shows an error with Try again, and recovers
   await ev(`window.__f=window.fetch; window.fetch=function(){return Promise.reject(new Error('offline'));}; TOKOS._st.cfg=null; TOKOS._st.loading=null; TOKOS.close(); TOKOS.open(); return 1;`);
-  ok(await until(`return !!document.querySelector('.tok-err [data-act=retry]');`), "offline load shows Try again");
+  ok(await until(`return !!document.querySelector('.sp-err [data-act=retry]');`), "offline load shows Try again");
   await ev(`window.fetch=window.__f; document.querySelector('[data-act=retry]').click(); return 1;`);
   ok(await until(`return !!document.querySelector('[data-act=clinic]');`), "Try again recovers");
 

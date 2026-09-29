@@ -1,10 +1,9 @@
-/* Tokós: CTG reading trainer (StewardMD module), sibling of Ophthalmós.
-   Two themes, both from the use scene. Monitor (dark, default): the trace reads the way a labour-ward
-   fetal monitor shows it, green FHR on black. Paper (light): the trace reads the way the printout does,
-   dark ink on a red grid. The host resolves the system preference and the in-app choice into body.dark
-   (body.v3-dark on v3 screens; vault/modules/Appearance.md, graphite-dark.css), so the paper theme
-   keys off that marker. A prefers-color-scheme query would contradict an in-app choice, so none is used.
-   Overlay contract mirrors .oph-overlay: display:none when closed is load-bearing for swipe-back.js. */
+/* Tokós: the Obstetrics and Gynaecology module on the specialty engine (specialty.css draws every shared screen).
+   This file sets Tokós's palette on its root (.tok-root) and styles the CTG clinic.
+   Two themes, both from the use scene. Monitor (dark): the trace reads the way a labour-ward fetal monitor shows it,
+   green FHR on black. Paper (light): the way the printout reads, dark ink on a red grid. The host resolves the system
+   preference and the in-app choice into body.dark (body.v3-dark on v3 screens), so the paper theme keys off that
+   marker; a prefers-color-scheme query would contradict an in-app choice, so none is used. */
 .tok-root {
   --tk-bg: #000; --tk-s1: #121214; --tk-s2: #1c1c1f; --tk-s3: #2c2c30; --tk-line: #34343a;
   --tk-text: #f2f2f4; --tk-mut: #a8a8b0; --tk-ok: #34c759; --tk-bad: #ff6961; --tk-warn: #ffc05a;
@@ -14,12 +13,13 @@
   --tk-trace-bg: #05070a; --tk-grid: #16202c; --tk-grid-major: #2a3a4d; --tk-band: rgba(16, 185, 129, .07);
   --tk-normal: #10b981; --tk-amber: #f59e0b; --tk-fhr: #3ee07a; --tk-uc: #fb7185; --tk-axis: #8b98a9; --tk-cal: #38bdf8;
   --tk-ease: cubic-bezier(0.23, 1, 0.32, 1);
-  position: fixed; inset: 0; z-index: 880;
-  background: var(--tk-bg); color: var(--tk-text);
-  display: none; flex-direction: column; overflow: hidden;
-  font-family: inherit; font-size: 16px; line-height: 1.45;
-  padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px);
-  -webkit-font-smoothing: antialiased; color-scheme: dark;
+  /* the engine's tokens, from the palette above */
+  --sp-bg: var(--tk-bg); --sp-s1: var(--tk-s1); --sp-s2: var(--tk-s2); --sp-s3: var(--tk-s3); --sp-line: var(--tk-line);
+  --sp-text: var(--tk-text); --sp-mut: var(--tk-mut); --sp-acc: var(--tk-acc); --sp-ok: var(--tk-ok); --sp-bad: var(--tk-bad); --sp-warn: var(--tk-warn);
+  --sp-link: #7dd3fc; --sp-link-line: rgba(125, 211, 252, .45);
+  --sp-pri: var(--tk-acc); --sp-on-pri: var(--tk-on-acc); --sp-pri-hover: #67cdf9; --sp-acc-soft: var(--tk-acc-soft);
+  --sp-tile-bg: var(--tk-trace-bg); --sp-tile-fg: var(--tk-fhr); --sp-plate: #000; --sp-card: var(--tk-s3); --sp-on-ok: #04210d;
+  color-scheme: dark;
 }
 body:not(.dark):not(.v3-dark) .tok-root {
   --tk-bg: #fbf9f4; --tk-s1: #f2eee4; --tk-s2: #e8e2d4; --tk-s3: #d6ceba; --tk-line: #d9d1bf;
@@ -27,35 +27,24 @@ body:not(.dark):not(.v3-dark) .tok-root {
   --tk-acc: #0e6f86; --tk-on-acc: #fff; --tk-acc-soft: rgba(14, 111, 134, .1);
   --tk-trace-bg: #fffdf8; --tk-grid: #f4d3d0; --tk-grid-major: #e3a19b; --tk-band: rgba(15, 118, 110, .07);
   --tk-normal: #0f766e; --tk-amber: #b45309; --tk-fhr: #16181d; --tk-uc: #1e3a8a; --tk-axis: #6b6259; --tk-cal: #0e6f86;
+  --sp-link: #0e6f86; --sp-link-line: rgba(14, 111, 134, .45); --sp-pri-hover: #0b5c70; --sp-card: #fffdf8; --sp-on-ok: #fff;
+  --sp-tile-bg: #fffdf8; --sp-tile-fg: #b42318;
   color-scheme: light;
 }
-.tok-root.on { display: flex; }
-body.tok-noscroll { overflow: hidden; }
-.tok-root * { box-sizing: border-box; }
-.tok-root ::selection { background: var(--tk-acc-soft); color: var(--tk-text); }
-.tok-root button { font: inherit; color: inherit; -webkit-tap-highlight-color: transparent; cursor: pointer; touch-action: manipulation; }
-.tok-root button:focus-visible, .tok-root [tabindex]:focus-visible { outline: 2px solid var(--tk-acc); outline-offset: 2px; }
-.tok-root .smd-ico { width: 20px; height: 20px; flex: 0 0 auto; }
-.tok-root output, .tok-count, .tok-score, .tok-kv dd, .tok-vc b, .tok-quality, .tok-due b { font-variant-numeric: tabular-nums; }
+/* engine tiles on Tokós: the trace-paper tile with a hairline, like the monitor's own screen */
+.tok-root .sp-tile { box-shadow: inset 0 0 0 1px var(--tk-line); }
+.tok-root output, .tok-count, .tok-score, .tok-kv dd, .tok-vc b, .tok-quality { font-variant-numeric: tabular-nums; }
 .tok-sr { position: absolute !important; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-/* Draft mark: last line of every screen's scroll, readable and announced (AA muted text). */
-.tok-draft { margin: 20px 16px 0; font-size: 12px; line-height: 1.4; text-align: center; color: var(--tk-mut); }
 .tok-i { display: inline-flex; }
 .tok-pad { padding-left: 16px; padding-right: 16px; }
 .tok-scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
   scrollbar-width: thin; scrollbar-color: var(--tk-s3) transparent; padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
 
-/* ---- top bar (same geometry as .oph-top) ---- */
-.tok-top { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; padding: calc(8px + env(safe-area-inset-top, 0px)) 12px 8px; }
-.tok-back, .tok-icon { width: 44px; height: 44px; flex: 0 0 auto; border-radius: 50%; border: 0; background: var(--tk-s2); color: var(--tk-text);
+/* ---- icon buttons on the clinic (zoom, fit, steppers) ---- */
+.tok-icon { width: 44px; height: 44px; flex: 0 0 auto; border-radius: 50%; border: 0; background: var(--tk-s2); color: var(--tk-text);
   display: inline-flex; align-items: center; justify-content: center; font-size: 24px; line-height: 1;
   transition: transform 140ms var(--tk-ease), background-color 140ms ease; }
-.tok-back:active, .tok-icon:active { transform: scale(0.94); }
-.tok-flip { display: inline-flex; transform: rotate(180deg); }
-.tok-title { flex: 1 1 auto; min-width: 0; }
-.tok-title b { display: block; font-size: 17px; font-weight: 650; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.tok-title span { display: block; font-size: 13px; color: var(--tk-mut); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.tok-lang { min-height: 44px; padding: 0 14px; border-radius: 22px; border: 1px solid var(--tk-line); background: transparent; font-size: 15px; font-weight: 600; }
+.tok-icon:active { transform: scale(0.94); }
 
 /* ---- buttons ---- */
 .tok-btn { width: 100%; min-height: 52px; border-radius: 14px; border: 0; padding: 0 20px; font-weight: 650; font-size: 16px;
@@ -79,46 +68,15 @@ body.tok-noscroll { overflow: hidden; }
 .tok-pro .smd-ico { width: 14px; height: 14px; }
 .tok-pro.used { color: var(--tk-mut); }
 
-/* ---- hub ---- */
-.tok-root .tok-seg[role="group"]:first-child { margin: 8px 0 20px; }
-.tok-clinic { width: 100%; display: flex; align-items: center; gap: 14px; text-align: left; border: 1px solid var(--tk-line); background: var(--tk-s1);
-  padding: 14px 12px 14px 14px; border-radius: 16px; transition: transform 140ms var(--tk-ease), background-color 160ms ease; }
-.tok-clinic:active { transform: scale(0.985); background: var(--tk-s2); }
-.tok-tile { width: 48px; height: 48px; flex: 0 0 auto; border-radius: 12px; background: var(--tk-trace-bg); color: var(--tk-fhr);
-  display: inline-flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 1px var(--tk-line); }
-.tok-tile .smd-ico { width: 26px; height: 26px; }
-.tok-clinic-b { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
-.tok-clinic-b > b { font-size: 17px; font-weight: 650; }
-.tok-clinic-b > span { font-size: 13px; color: var(--tk-mut); }
-.tok-clinic-b .tok-due { margin-top: 4px; font-size: 14px; color: var(--tk-text); }
-.tok-due b { color: var(--tk-acc); font-weight: 700; }
-.tok-chev { color: var(--tk-mut); display: inline-flex; }
-.tok-note { font-size: 14px; color: var(--tk-mut); margin: 20px 2px 0; line-height: 1.5; max-width: 60ch; }
-.tok-src { font-size: 12px; margin-top: 10px; }
-
-/* ---- loading / error / done ---- */
-.tok-loading { display: grid; gap: 12px; padding-top: 8px; }
-.tok-sk { display: block; border-radius: 12px; background: var(--tk-s1); }
-.tok-sk-a { width: 200px; height: 50px; }
-.tok-sk-b { height: 80px; border-radius: 16px; }
-.tok-sk-c { width: 80%; height: 40px; }
-@media (prefers-reduced-motion: no-preference) { .tok-sk { animation: tok-pulse 1.2s ease-in-out infinite alternate; } }
-@keyframes tok-pulse { from { opacity: 1; } to { opacity: .55; } }
-.tok-err { padding: 32px 4px; text-align: left; }
-.tok-err p { margin: 0 0 16px; font-size: 16px; }
 .tok-err-trace { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 8px 16px; text-align: center; }
 .tok-err-trace p { margin: 0; font-size: 14px; }
 .tok-err-trace .tok-btn { width: auto; min-height: 44px; }
-.tok-done { padding-top: 24px; }
-.tok-done-h { font-size: 24px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 6px; }
-.tok-done p { color: var(--tk-mut); margin: 0 0 24px; }
-.tok-done .tok-done-h { color: var(--tk-text); margin-bottom: 6px; }
 
 /* ---- clinic: patient strip ---- */
 /* keyboard focus never lands under the pinned trace or the pinned submit bar */
 .tok-clinic-view { scroll-padding-top: 190px; scroll-padding-bottom: 120px; }
-.tok-block h3, .tok-why h3, .tok-done-h { text-wrap: balance; }
-.tok-why li, .tok-note { text-wrap: pretty; }
+.tok-block h3, .tok-why h3 { text-wrap: balance; }
+.tok-why li { text-wrap: pretty; }
 .tok-vignette { margin: 2px 0 10px; }
 .tok-vrow { display: flex; flex-wrap: wrap; row-gap: 8px; background: var(--tk-s1); border-radius: 14px; padding: 10px 4px; }
 .tok-vc { flex: 1 1 auto; display: flex; flex-direction: column; align-items: flex-start; padding: 0 10px; min-width: 0; }
@@ -215,6 +173,7 @@ body.tok-noscroll { overflow: hidden; }
 .tok-next { font-size: 14px; color: var(--tk-mut); margin: 20px 0 0; }
 .tok-next b { color: var(--tk-text); }
 .tok-reveal + .tok-foot { margin-top: 8px; }
+.tok-reveal .tok-learnthis { margin-top: 16px; }
 
 /* The reveal is the one authored moment: rows settle in quickly, in reading order. */
 @media (prefers-reduced-motion: no-preference) {
@@ -225,9 +184,8 @@ body.tok-noscroll { overflow: hidden; }
 @keyframes tok-rise { from { opacity: 0; transform: translateY(6px); } }
 @media (hover: hover) and (pointer: fine) {
   .tok-opt:not([aria-pressed="true"]):hover { background: var(--tk-s2); }
-  .tok-back:hover, .tok-icon:hover, .tok-lang:hover { background: var(--tk-s3); }
+  .tok-icon:hover { background: var(--tk-s3); }
   .tok-seg button[aria-pressed="false"]:hover { color: var(--tk-text); }
-  .tok-clinic:hover { background: var(--tk-s2); }
   .tok-btn.sec:hover { background: var(--tk-s3); }
 }
 @media (prefers-reduced-motion: reduce) {

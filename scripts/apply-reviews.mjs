@@ -17,7 +17,7 @@
  *   changes         written to the feedback note; status unchanged
  * Tokós (kind "tokos", no build step: build-www.sh copies tokos/ as is):
  *   case-<id>       approve sets that case's review in tokos/decks/ctg.json to { by, date, the suggested labels as
- *                   approved (TOKOS_DATA.suggestedReview), complete: true }. ctg.json is machine-generated with
+ *                   approved (TOKOS_CTG.suggestedReview, tokos-ctg.js), complete: true }. ctg.json is machine-generated with
  *                   JSON.stringify(deck, null, 1), so it is rewritten the same way; the script first checks the file
  *                   is exactly that form, so every byte outside the case's review stays the same.
  *   rationale, checklist, calipers
@@ -43,7 +43,7 @@ export const KINDS = {
 };
 // Tokós text blocks: review-desk id -> the top-level key of tokos/rationale.json that holds its review.
 export const TOKOS_TEXT = { rationale: "review", checklist: "reviewChecklist", calipers: "reviewCalipers" };
-const TOKOS_DATA = createRequire(import.meta.url)("../tokos-data.js");
+const TOKOS_CTG = createRequire(import.meta.url)("../tokos-ctg.js");
 const DECISIONS = ["approve", "approve-minor", "changes"];
 const FEEDBACK = "vault/handoff/review-feedback.md";
 const ID_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
@@ -127,7 +127,7 @@ export function tokosCaseReview(text, caseId, reviewer, at) {
   const deck = JSON.parse(text);
   if (JSON.stringify(deck, null, 1) !== text) throw new Error("tokos/decks/ctg.json is not in its generated form (JSON.stringify(deck, null, 1)); regenerate or fix it first");
   const c = deck.cases.find((k) => k.id === caseId);
-  const review = { by: reviewerName(reviewer), date: String(at).slice(0, 10), ...TOKOS_DATA.suggestedReview(c), complete: true };
+  const review = { by: reviewerName(reviewer), date: String(at).slice(0, 10), ...TOKOS_CTG.suggestedReview(c), complete: true };
   c.review = review;
   return { review, text: JSON.stringify(deck, null, 1) };
 }

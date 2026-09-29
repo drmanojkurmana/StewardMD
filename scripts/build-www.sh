@@ -214,9 +214,12 @@ fi
 # already copies, so there is nothing extra to do for it.
 [ -d surgx ] && mkdir -p "$WWW/surgx" && cp -R surgx/. "$WWW/surgx/"
 
-# Tokós (tokos.js): tracks, decks, rationale and CTG trace SVGs. Root tokos-*.js / tokos.css are globbed;
+# Tokós (tokos.js on the specialty engine): tracks, decks, rationale and CTG trace SVGs. Root tokos-*.js / tokos.css are globbed;
 # the tokos/ DATA directory is not. tools/tokos-ctg-prep.mjs and docs/tokos are authoring only and do not ship.
 [ -d tokos ] && mkdir -p "$WWW/tokos" && cp -R tokos/. "$WWW/tokos/"
+# Tokós models (tokos-models/*.js, listed in tokos/models.json and loaded on first open by tokos-loader.js): a
+# subdirectory, so the root *.js glob misses it. The engine files (specialty-*.js, specialty.css) are root globs.
+[ -d tokos-models ] && mkdir -p "$WWW/tokos-models" && cp -R tokos-models/. "$WWW/tokos-models/"
 
 # NMC Logbook curriculum packs + assessment templates. Same rule and the same failure mode as clinix
 # and surgx above: the root *.js glob copies the module code, DATA DIRECTORIES ARE NOT COPIED. Without

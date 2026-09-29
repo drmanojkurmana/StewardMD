@@ -539,7 +539,7 @@ const QUEUE = "docs/tokos/review-queue.md";
 export const HAND_MARK = "<!-- hand-maintained below: tools/tokos-ctg-prep.mjs keeps this section on regeneration -->";
 
 export function reviewQueueMd(cases, qNotes, rationaleKeys, hand) {
-  const Q = createRequire(import.meta.url)("../tokos-data.js").QUESTIONS;
+  const Q = createRequire(import.meta.url)("../tokos-ctg.js").QUESTIONS;
   const vals = (q) => Q[q].map((v) => "`" + v + "`").join(", ");
   const decelText = (c) => (c.features.decels.length ? c.features.decels.map((d) => d.durationSec + " s " + d.subtypeSuggested + " (suggested)").join(", ") : "none");
   const head = [
@@ -559,7 +559,7 @@ export function reviewQueueMd(cases, qNotes, rationaleKeys, hand) {
     "A field left out keeps the suggested label. A value not in its list is ignored and the suggested label is used.", "",
     "## Content to review", "",
     "- `tokos/rationale.json`: all " + rationaleKeys.length + " teaching points shown under Why on the reveal, English and Hindi: " + rationaleKeys.map((k) => "`" + k + "`").join(", ") + ".",
-    "- `tokos.js`, `L10N.en.opts` and `L10N.hi.opts`: the checklist option labels, and under `action` the three FIGO next-step strings graded at Resident level.",
+    "- `tokos-ctg.js`, `L10N.en.opts` and `L10N.hi.opts`: the checklist option labels, and under `action` the three FIGO next-step strings graded at Resident level.",
     "- `tokos-calipers.js`, `WORDS`: the caliper verdict text (variability bands for a bpm range, deceleration length bands for a time span), English and Hindi.", "",
     "## Units and fields", "",
     "Please also confirm units: the sources do not state them for pCO2 and BDecf. The app shows pCO2 in kPa (header median 7.0, range 0.7 to 12.3) and BDecf in mmol/L. Risk-factor and Induced fields are not shown because their 0/1 coding is unconfirmed.", "",
