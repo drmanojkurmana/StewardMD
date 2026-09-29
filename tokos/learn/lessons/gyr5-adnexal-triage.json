@@ -1,0 +1,254 @@
+{
+  "id": "gyr5-adnexal-triage",
+  "unit": "gyr5",
+  "level": "resident",
+  "minutes": 6,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Adnexal mass: IOTA rules, RMI and referral",
+    "hi": "एडनेक्सल गाँठ: IOTA नियम, RMI और रेफ़रल"
+  },
+  "idea": {
+    "en": "Classify every adnexal mass with ultrasound rules and the RMI. Send high-risk masses to a gynaecological oncologist before surgery.",
+    "hi": "हर एडनेक्सल गाँठ को अल्ट्रासाउंड नियमों और RMI से वर्गीकृत करें। ज़्यादा जोखिम वाली गाँठों को सर्जरी से पहले गायनी ऑन्कोलॉजिस्ट को भेजें।"
+  },
+  "see": {
+    "diagram": "diagrams/gyr5-adnexal-triage.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "Two masses side by side. On the left a smooth round thin-walled cyst with a shadow below it. On the right an irregular red mass with solid areas and finger-like projections, and fluid pooled underneath. A green arrow points away from the cyst and a red arrow from the mass.",
+      "hi": "दो गाँठें साथ-साथ। बाईं ओर चिकना गोल पतली दीवार वाला सिस्ट जिसके नीचे छाया है। दाईं ओर अनियमित लाल गाँठ जिसमें ठोस हिस्से और उँगली जैसे उभार हैं और नीचे तरल जमा है। एक हरा तीर सिस्ट से दूर और एक लाल तीर गाँठ से दूर जाता है।"
+    },
+    "caption": {
+      "en": "A unilocular cyst with shadows suggests benign disease. Solid areas, papillae and ascites suggest cancer.",
+      "hi": "छाया वाला एकल-कक्षीय सिस्ट सौम्य बीमारी सुझाता है। ठोस हिस्से, पैपिला और ascites कैंसर सुझाते हैं।"
+    },
+    "credit": "Original diagram, Tokos (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.25,
+        "y": 0.43,
+        "label": {
+          "en": "Unilocular cyst",
+          "hi": "एकल-कक्षीय सिस्ट"
+        },
+        "note": {
+          "en": "B-rule 1. Smooth, thin wall, no solid part and no flow suggests a benign mass.",
+          "hi": "B-नियम 1। चिकनी, पतली दीवार, ठोस हिस्सा नहीं और रक्त प्रवाह नहीं, सौम्य गाँठ सुझाते हैं।"
+        }
+      },
+      {
+        "x": 0.72,
+        "y": 0.3,
+        "label": {
+          "en": "Papillary structures",
+          "hi": "पैपिलरी संरचनाएँ"
+        },
+        "note": {
+          "en": "M-rule 3. Four or more papillary structures suggest malignancy.",
+          "hi": "M-नियम 3। चार या ज़्यादा पैपिलरी संरचनाएँ घातकता सुझाती हैं।"
+        }
+      },
+      {
+        "x": 0.71,
+        "y": 0.49,
+        "label": {
+          "en": "Irregular solid part",
+          "hi": "अनियमित ठोस हिस्सा"
+        },
+        "note": {
+          "en": "M-rule 1. An irregular solid tumour. Add strong colour Doppler flow as M-rule 5.",
+          "hi": "M-नियम 1। अनियमित ठोस ट्यूमर। तेज़ कलर डॉप्लर प्रवाह M-नियम 5 के रूप में जोड़ें।"
+        }
+      },
+      {
+        "x": 0.79,
+        "y": 0.81,
+        "label": {
+          "en": "Ascites",
+          "hi": "पेट में पानी"
+        },
+        "note": {
+          "en": "M-rule 2, and one point in the [[rmi]] ultrasound score.",
+          "hi": "M-नियम 2, और [[rmi]] के अल्ट्रासाउंड स्कोर में एक अंक।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.96,
+        "label": {
+          "en": "Where to go",
+          "hi": "कहाँ भेजें"
+        },
+        "note": {
+          "en": "Low risk: manage locally. High risk or RMI 250 or more: a specialist MDT.",
+          "hi": "कम जोखिम: स्थानीय प्रबंधन। ज़्यादा जोखिम या RMI 250 या ज़्यादा: विशेषज्ञ MDT।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Start with an ultrasound and apply the [[iota-rules]]. There are five benign features (B-rules) and five malignant features (M-rules).",
+        "hi": "अल्ट्रासाउंड से शुरू करें और [[iota-rules]] लगाएँ। पाँच सौम्य लक्षण (B-नियम) और पाँच घातक लक्षण (M-नियम) हैं।"
+      },
+      {
+        "en": "B-rules: unilocular cyst, solid parts under 7 mm, acoustic shadows, smooth multilocular mass under 100 mm, and no blood flow.",
+        "hi": "B-नियम: एकल-कक्षीय सिस्ट, 7 mm से छोटे ठोस हिस्से, ध्वनिक छाया, 100 mm से छोटी चिकनी बहु-कक्षीय गाँठ, और रक्त प्रवाह नहीं।"
+      },
+      {
+        "en": "M-rules: irregular solid tumour, ascites, at least four papillary structures, irregular multilocular-solid tumour of 100 mm or more, and very strong colour Doppler.",
+        "hi": "M-नियम: अनियमित ठोस ट्यूमर, ascites, कम से कम चार पैपिलरी संरचनाएँ, 100 mm या ज़्यादा की अनियमित बहु-कक्षीय ठोस गाँठ, और बहुत तेज़ कलर डॉप्लर।"
+      },
+      {
+        "en": "Only M-features suggest cancer and only B-features suggest a benign mass. Mixed or no features are inconclusive. The rules applied to 76% of tumours, with sensitivity 95% and specificity 91% on validation.",
+        "hi": "सिर्फ़ M-लक्षण कैंसर और सिर्फ़ B-लक्षण सौम्य गाँठ सुझाते हैं। मिश्रित या कोई लक्षण नहीं हो तो नतीजा अनिर्णायक है। नियम 76% ट्यूमर पर लागू हुए, और मान्यता में संवेदनशीलता 95% तथा विशिष्टता 91% रही।"
+      },
+      {
+        "en": "For inconclusive masses, ask an expert sonographer. The IOTA risk model gives a percentage: below 1% is very low and 30% or more is high.",
+        "hi": "अनिर्णायक गाँठों में विशेषज्ञ सोनोग्राफ़र से पूछें। IOTA रिस्क मॉडल प्रतिशत देता है: 1% से कम बहुत कम और 30% या ज़्यादा ऊँचा है।"
+      },
+      {
+        "en": "[[rmi]] I equals U times M times CA125 (NICE CG122, 2026). U scores one point each for multilocular cyst, solid areas, metastases, ascites and bilateral lesions. U is 0 for none, 1 for one feature, and 3 for two to five.",
+        "hi": "[[rmi]] I बराबर U गुणा M गुणा CA125 (NICE CG122, 2026)। U में बहु-कक्षीय सिस्ट, ठोस हिस्से, मेटास्टेसिस, ascites और दोनों तरफ़ के घाव में से हर एक का एक अंक। U शून्य के लिए 0, एक लक्षण के लिए 1, और दो से पाँच के लिए 3।"
+      },
+      {
+        "en": "M is 1 before the menopause and 3 after it. After the menopause means no period for over 1 year, or over 50 with a hysterectomy. Refer every woman with an RMI I of 250 or more to a specialist MDT.",
+        "hi": "M रजोनिवृत्ति से पहले 1 और उसके बाद 3 है। रजोनिवृत्ति के बाद का मतलब एक साल से ज़्यादा माहवारी नहीं, या 50 से ऊपर की उम्र में हिस्टेरेक्टॉमी। RMI I 250 या ज़्यादा वाली हर महिला को विशेषज्ञ MDT को भेजें।"
+      },
+      {
+        "en": "Under 40, add AFP and beta-hCG to CA125 to find non-epithelial tumours. If the scan, CA125 and clinical state suggest cancer, do CT of the abdomen and pelvis.",
+        "hi": "40 से कम उम्र में CA125 के साथ AFP और बीटा-hCG जोड़ें, ताकि गैर-एपिथीलियल ट्यूमर मिलें। स्कैन, CA125 और नैदानिक हालत कैंसर सुझाएँ तो पेट और श्रोणि का CT कराएँ।"
+      }
+    ],
+    "analogy": {
+      "en": "The IOTA rules read the mass. The RMI reads the woman and her blood test. Two independent votes before you choose a surgeon.",
+      "hi": "IOTA नियम गाँठ को पढ़ते हैं। RMI महिला और उसकी ख़ून की जाँच को पढ़ता है। सर्जन चुनने से पहले दो स्वतंत्र मत।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Solid parts, papillae, ascites and bilateral masses raise the score.",
+      "hi": "ठोस हिस्से, पैपिला, ascites और दोनों तरफ़ की गाँठें स्कोर बढ़ाती हैं।"
+    },
+    {
+      "en": "CA125 alone does not decide. It is one third of the RMI.",
+      "hi": "अकेला CA125 निर्णय नहीं करता। यह RMI का एक तिहाई है।"
+    },
+    {
+      "en": "A young woman with a solid mass needs AFP and beta-hCG as well.",
+      "hi": "ठोस गाँठ वाली युवा महिला को AFP और बीटा-hCG भी चाहिए।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Report the mass using IOTA terms, then calculate the RMI I with the tool.",
+      "hi": "गाँठ को IOTA शब्दों में लिखें, फिर टूल से RMI I निकालें।"
+    },
+    {
+      "en": "Refer RMI I 250 or more, or a high IOTA risk, to a specialist MDT before surgery.",
+      "hi": "RMI I 250 या ज़्यादा, या ऊँचा IOTA जोखिम, हो तो सर्जरी से पहले विशेषज्ञ MDT को भेजें।"
+    },
+    {
+      "en": "Get a tissue diagnosis before chemotherapy in all but exceptional cases.",
+      "hi": "अपवाद के सिवा कीमोथेरेपी से पहले ऊतक निदान कराएँ।"
+    }
+  ],
+  "remember": {
+    "en": "RMI I equals U times M times CA125. Refer at 250 or more. Ten IOTA rules split the rest.",
+    "hi": "RMI I बराबर U गुणा M गुणा CA125। 250 या ज़्यादा पर रेफ़र करें। बाक़ी को IOTA के दस नियम बाँटते हैं।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which is an IOTA M-rule (sign of malignancy)?",
+        "hi": "इनमें से कौन-सा IOTA M-नियम (घातकता का संकेत) है?"
+      },
+      "o": [
+        {
+          "en": "Unilocular cyst",
+          "hi": "एकल-कक्षीय सिस्ट"
+        },
+        {
+          "en": "At least four papillary structures",
+          "hi": "कम से कम चार पैपिलरी संरचनाएँ"
+        },
+        {
+          "en": "Acoustic shadows",
+          "hi": "ध्वनिक छाया"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "The other two are B-rules that suggest a benign mass.",
+        "hi": "बाक़ी दो B-नियम हैं जो सौम्य गाँठ सुझाते हैं।"
+      }
+    },
+    {
+      "q": {
+        "en": "A postmenopausal woman has an ultrasound score of 3, CA125 of 100 IU/ml. What is the RMI I?",
+        "hi": "एक रजोनिवृत्त महिला का अल्ट्रासाउंड स्कोर 3 है और CA125 100 IU/ml है। RMI I क्या है?"
+      },
+      "o": [
+        {
+          "en": "300",
+          "hi": "स्कोर 300"
+        },
+        {
+          "en": "900",
+          "hi": "स्कोर 900"
+        },
+        {
+          "en": "100",
+          "hi": "स्कोर 100"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "U is 3, M is 3 and CA125 is 100: 3 times 3 times 100 is 900. That is 250 or more.",
+        "hi": "U 3 है, M 3 है और CA125 100 है: 3 गुणा 3 गुणा 100 बराबर 900। यह 250 या ज़्यादा है।"
+      }
+    },
+    {
+      "q": {
+        "en": "At what RMI I does NICE CG122 say to refer to a specialist MDT?",
+        "hi": "NICE CG122 किस RMI I पर विशेषज्ञ MDT को रेफ़र करने को कहता है?"
+      },
+      "o": [
+        {
+          "en": "250 or more",
+          "hi": "250 या ज़्यादा"
+        },
+        {
+          "en": "50 or more",
+          "hi": "50 या ज़्यादा"
+        },
+        {
+          "en": "1000 or more",
+          "hi": "1000 या ज़्यादा"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "The threshold is an RMI I of 250 or more.",
+        "hi": "सीमा RMI I 250 या ज़्यादा है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "gy-oncology",
+    "explorer": "ovarian-triage",
+    "tool": "rmi"
+  },
+  "glossary": [
+    "iota-rules",
+    "rmi"
+  ],
+  "sources": [
+    "National Institute for Health and Care Excellence. Ovarian cancer: recognition and initial management (CG122), last updated 15 April 2026, with appendix on RMI I",
+    "Timmerman D, Testa AC, Bourne T, et al. Simple ultrasound-based rules for the diagnosis of ovarian cancer. Ultrasound Obstet Gynecol 2008. PMID 18504770",
+    "Van Calster B, et al. Predicting the risk of malignancy in adnexal masses based on the Simple Rules from the International Ovarian Tumor Analysis group. Am J Obstet Gynecol 2016. PMID 26800772"
+  ]
+}

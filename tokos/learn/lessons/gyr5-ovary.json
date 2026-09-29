@@ -1,0 +1,256 @@
+{
+  "id": "gyr5-ovary",
+  "unit": "gyr5",
+  "level": "resident",
+  "minutes": 6,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Ovarian cancer: surgery, chemotherapy and PARP maintenance",
+    "hi": "डिम्बग्रंथि कैंसर: सर्जरी, कीमोथेरेपी और PARP रखरखाव"
+  },
+  "idea": {
+    "en": "Aim for complete resection. Use interval surgery when primary surgery cannot be complete. Test for BRCA and use PARP maintenance.",
+    "hi": "पूरी सर्जरी का लक्ष्य रखें। प्राथमिक सर्जरी पूरी न हो सके तो इंटरवल सर्जरी अपनाएँ। BRCA जाँचें और PARP रखरखाव दें।"
+  },
+  "see": {
+    "diagram": "diagrams/gyr5-ovary.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "Two abdomen outlines. On the left a red ovarian mass, an omentum band with red dots and dots on the upper peritoneum. On the right the same outline is clean, with a green tick and a purple tablet.",
+      "hi": "पेट की दो रूपरेखाएँ। बाईं ओर लाल डिम्बग्रंथि गाँठ, लाल बिंदुओं वाली ओमेंटम की पट्टी और ऊपरी पेरिटोनियम पर बिंदु हैं। दाईं ओर वही रूपरेखा साफ़ है, हरा टिक और बैंगनी गोली के साथ।"
+    },
+    "caption": {
+      "en": "The goal is a clean abdomen after surgery, then a tablet to keep it clean in BRCA-mutated disease.",
+      "hi": "लक्ष्य सर्जरी के बाद साफ़ पेट है, और BRCA म्यूटेटेड रोग में उसे साफ़ रखने के लिए एक गोली।"
+    },
+    "credit": "Original diagram, Tokos (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.19,
+        "y": 0.67,
+        "label": {
+          "en": "Ovarian primary",
+          "hi": "प्राथमिक डिम्बग्रंथि गाँठ"
+        },
+        "note": {
+          "en": "Get tissue for histology before chemotherapy in all but exceptional cases.",
+          "hi": "अपवाद के सिवा कीमोथेरेपी से पहले हिस्टोलॉजी के लिए ऊतक लें।"
+        }
+      },
+      {
+        "x": 0.28,
+        "y": 0.42,
+        "label": {
+          "en": "Omentum",
+          "hi": "ओमेंटम"
+        },
+        "note": {
+          "en": "Infracolic omentectomy is part of staging surgery.",
+          "hi": "इन्फ्राकोलिक ओमेंटेक्टॉमी स्टेजिंग सर्जरी का हिस्सा है।"
+        }
+      },
+      {
+        "x": 0.28,
+        "y": 0.3,
+        "label": {
+          "en": "Peritoneal deposits",
+          "hi": "पेरिटोनियल जमाव"
+        },
+        "note": {
+          "en": "Biopsy all deposits. Aim for [[cytoreduction|complete cytoreduction]].",
+          "hi": "सभी जमाव की बायोप्सी लें। [[cytoreduction|पूर्ण साइटोरिडक्शन]] का लक्ष्य रखें।"
+        }
+      },
+      {
+        "x": 0.76,
+        "y": 0.42,
+        "label": {
+          "en": "Clean abdomen",
+          "hi": "साफ़ पेट"
+        },
+        "note": {
+          "en": "Complete resection of all macroscopic disease is the strongest predictor of survival.",
+          "hi": "सारे दिखने वाले रोग की पूरी सर्जरी जीवन-अवधि का सबसे मज़बूत संकेतक है।"
+        }
+      },
+      {
+        "x": 0.9,
+        "y": 0.82,
+        "label": {
+          "en": "PARP tablet",
+          "hi": "PARP गोली"
+        },
+        "note": {
+          "en": "Olaparib maintenance for BRCA-mutated disease after a response to platinum.",
+          "hi": "प्लैटिनम पर असर के बाद BRCA म्यूटेटेड रोग में ओलापारिब रखरखाव।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Work-up: CA125, ultrasound, then CT of the abdomen and pelvis. Get histology before chemotherapy unless exceptional (NICE CG122, 2026).",
+        "hi": "जाँच: CA125, अल्ट्रासाउंड, फिर पेट और श्रोणि का CT। अपवाद के सिवा कीमोथेरेपी से पहले हिस्टोलॉजी लें (NICE CG122, 2026)।"
+      },
+      {
+        "en": "Optimal staging for apparent stage I is a midline laparotomy, TAH and BSO, infracolic omentectomy, peritoneal biopsies and retroperitoneal node assessment.",
+        "hi": "प्रत्यक्ष स्टेज I में सर्वोत्तम स्टेजिंग है मध्य-रेखा लैपरोटोमी, TAH और BSO, इन्फ्राकोलिक ओमेंटेक्टॉमी, पेरिटोनियल बायोप्सी और रेट्रोपेरिटोनियल नोड आकलन।"
+      },
+      {
+        "en": "Give no adjuvant chemotherapy to low-risk stage I (grade 1 or 2, stage IA or IB). Give 6 cycles of carboplatin for grade 3 or stage IC.",
+        "hi": "कम जोखिम वाले स्टेज I (ग्रेड 1 या 2, स्टेज IA या IB) में सहायक कीमोथेरेपी न दें। ग्रेड 3 या स्टेज IC में कार्बोप्लैटिन के 6 चक्र दें।"
+      },
+      {
+        "en": "In advanced disease, aim for complete resection of all macroscopic disease, before chemotherapy or after neoadjuvant chemotherapy.",
+        "hi": "उन्नत रोग में सारे दिखने वाले रोग की पूरी सर्जरी का लक्ष्य रखें, कीमोथेरेपी से पहले या नियोएडजुवेंट कीमोथेरेपी के बाद।"
+      },
+      {
+        "en": "EORTC 55971 (670 women, stage IIIC or IV): neoadjuvant chemotherapy with interval surgery was not inferior to primary surgery. The hazard ratio for death was 0.98.",
+        "hi": "EORTC 55971 (670 महिलाएँ, स्टेज IIIC या IV): इंटरवल सर्जरी के साथ नियोएडजुवेंट कीमोथेरेपी प्राथमिक सर्जरी से कमतर नहीं रही। मृत्यु का हैज़र्ड अनुपात 0.98 था।"
+      },
+      {
+        "en": "Residual tumour of 1 cm or less was reached in 41.6% after primary surgery and 80.6% after interval surgery. Complete resection was the strongest predictor of survival.",
+        "hi": "1 cm या कम अवशेष ट्यूमर प्राथमिक सर्जरी के बाद 41.6% और इंटरवल सर्जरी के बाद 80.6% में मिला। पूरी सर्जरी जीवन-अवधि का सबसे मज़बूत संकेतक थी।"
+      },
+      {
+        "en": "First-line chemotherapy is paclitaxel with a platinum. Do not give intraperitoneal chemotherapy outside a trial.",
+        "hi": "पहली पंक्ति की कीमोथेरेपी पैक्लिटैक्सेल के साथ प्लैटिनम है। ट्रायल के बाहर इंट्रापेरिटोनियल कीमोथेरेपी न दें।"
+      },
+      {
+        "en": "Test for BRCA. In SOLO1, olaparib after platinum in BRCA-mutated advanced disease gave 3-year progression-free survival of 60% versus 27%. At 7 years, 67.0% versus 46.5% were alive.",
+        "hi": "BRCA जाँचें। SOLO1 में BRCA म्यूटेटेड उन्नत रोग में प्लैटिनम के बाद ओलापारिब से 3 साल का प्रोग्रेशन-मुक्त जीवन 60% बनाम 27% रहा। 7 साल पर 67.0% बनाम 46.5% जीवित थे।"
+      },
+      {
+        "en": "[[parp-inhibitor|PARP inhibitor]] maintenance options in NICE include olaparib for BRCA mutation, niraparib, and rucaparib, each under its own appraisal.",
+        "hi": "NICE में [[parp-inhibitor|PARP इनहिबिटर]] रखरखाव के विकल्पों में BRCA म्यूटेशन में ओलापारिब, निराबारिब और रुकापारिब शामिल हैं, हर एक अपने मूल्यांकन के तहत।"
+      }
+    ],
+    "analogy": {
+      "en": "Surgery clears the room, chemotherapy scrubs what is left, and a PARP tablet locks the door in BRCA-mutated disease.",
+      "hi": "सर्जरी कमरा ख़ाली करती है, कीमोथेरेपी बचा हुआ साफ़ करती है, और PARP गोली BRCA म्यूटेटेड रोग में दरवाज़ा बंद करती है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "A raised CA125 with ascites and omental disease on CT suggests advanced disease.",
+      "hi": "CT पर बढ़ा CA125, ascites और ओमेंटम का रोग उन्नत रोग सुझाते हैं।"
+    },
+    {
+      "en": "Bulky stage IIIC or IV disease that cannot be cleared may go to neoadjuvant chemotherapy.",
+      "hi": "बड़ा स्टेज IIIC या IV रोग जो साफ़ न हो सके, नियोएडजुवेंट कीमोथेरेपी में जा सकता है।"
+    },
+    {
+      "en": "A BRCA mutation changes maintenance and family counselling.",
+      "hi": "BRCA म्यूटेशन रखरखाव और पारिवारिक परामर्श बदल देता है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Decide primary or interval surgery at the MDT. Aim for no macroscopic residual.",
+      "hi": "MDT में प्राथमिक या इंटरवल सर्जरी तय करें। कोई दिखने वाला अवशेष न रहे, यह लक्ष्य रखें।"
+    },
+    {
+      "en": "Send BRCA and other biomarker tests, and offer genetic counselling.",
+      "hi": "BRCA और दूसरी बायोमार्कर जाँचें भेजें, और जेनेटिक परामर्श दें।"
+    },
+    {
+      "en": "See the Oncology module: Carboplatin plus Paclitaxel every 3 Weeks, with Bevacizumab (GOG-218), Dose-dense Paclitaxel, and Olaparib or Niraparib maintenance.",
+      "hi": "ऑन्कोलॉजी मॉड्यूल देखें: हर 3 हफ़्ते कार्बोप्लैटिन प्लस पैक्लिटैक्सेल, बेवासिज़ुमैब (GOG-218) के साथ, डोज़-डेंस पैक्लिटैक्सेल, और ओलापारिब या निराबारिब रखरखाव।"
+    }
+  ],
+  "remember": {
+    "en": "Histology first, complete resection always, paclitaxel with platinum, and a PARP inhibitor if BRCA-mutated.",
+    "hi": "पहले हिस्टोलॉजी, हमेशा पूरी सर्जरी, प्लैटिनम के साथ पैक्लिटैक्सेल, और BRCA म्यूटेटेड हो तो PARP इनहिबिटर।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "What is the surgical objective in advanced ovarian cancer (NICE)?",
+        "hi": "उन्नत डिम्बग्रंथि कैंसर में सर्जरी का उद्देश्य क्या है (NICE)?"
+      },
+      "o": [
+        {
+          "en": "Complete resection of all macroscopic disease",
+          "hi": "सारे दिखने वाले रोग की पूरी सर्जरी"
+        },
+        {
+          "en": "Biopsy only",
+          "hi": "सिर्फ़ बायोप्सी"
+        },
+        {
+          "en": "Removal of the uterus only",
+          "hi": "सिर्फ़ गर्भाशय निकालना"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "This applies before chemotherapy or after neoadjuvant chemotherapy.",
+        "hi": "यह कीमोथेरेपी से पहले या नियोएडजुवेंट कीमोथेरेपी के बाद, दोनों में लागू है।"
+      }
+    },
+    {
+      "q": {
+        "en": "What did EORTC 55971 show?",
+        "hi": "EORTC 55971 ने क्या दिखाया?"
+      },
+      "o": [
+        {
+          "en": "Neoadjuvant chemotherapy with interval surgery was not inferior to primary surgery",
+          "hi": "इंटरवल सर्जरी के साथ नियोएडजुवेंट कीमोथेरेपी प्राथमिक सर्जरी से कमतर नहीं थी"
+        },
+        {
+          "en": "Primary surgery was clearly better",
+          "hi": "प्राथमिक सर्जरी साफ़ बेहतर थी"
+        },
+        {
+          "en": "Chemotherapy alone was best",
+          "hi": "सिर्फ़ कीमोथेरेपी सबसे अच्छी थी"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "The hazard ratio for death was 0.98.",
+        "hi": "मृत्यु का हैज़र्ड अनुपात 0.98 था।"
+      }
+    },
+    {
+      "q": {
+        "en": "In SOLO1, what was 3-year progression-free survival with olaparib versus placebo?",
+        "hi": "SOLO1 में ओलापारिब बनाम प्लेसीबो पर 3 साल का प्रोग्रेशन-मुक्त जीवन कितना था?"
+      },
+      "o": [
+        {
+          "en": "60% versus 27%",
+          "hi": "60% बनाम 27%"
+        },
+        {
+          "en": "30% versus 27%",
+          "hi": "30% बनाम 27%"
+        },
+        {
+          "en": "90% versus 60%",
+          "hi": "90% बनाम 60%"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "The hazard ratio for progression or death was 0.30.",
+        "hi": "प्रोग्रेशन या मृत्यु का हैज़र्ड अनुपात 0.30 था।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "gy-oncology"
+  },
+  "glossary": [
+    "cytoreduction",
+    "parp-inhibitor"
+  ],
+  "sources": [
+    "National Institute for Health and Care Excellence. Ovarian cancer: recognition and initial management (CG122), last updated 15 April 2026, with appendix on RMI I",
+    "Vergote I, Trope CG, Amant F, et al. Neoadjuvant chemotherapy or primary surgery in stage IIIC or IV ovarian cancer (EORTC 55971). N Engl J Med 2010. PMID 20818904",
+    "Moore K, Colombo N, Scambia G, et al. Maintenance olaparib in patients with newly diagnosed advanced ovarian cancer (SOLO1). N Engl J Med 2018. PMID 30345884; 7-year overall survival, J Clin Oncol 2023. PMID 36082969"
+  ]
+}
