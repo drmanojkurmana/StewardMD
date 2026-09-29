@@ -88,27 +88,35 @@
     return { dots: visible, lines: visLines };
   }
 
-  // Modern AI dynamic flowing multi-color gradient palette (Gemini / Apple Intelligence style)
-  var GRAD_DARK = [
-    [34, 211, 238],   // Electric Cyan (#22d3ee)
-    [99, 102, 241],   // Indigo (#6366f1)
-    [168, 85, 247],   // Neon Purple (#a855f7)
-    [244, 63, 94],    // Hot Coral / Rose (#f43f5e)
-    [52, 211, 153],   // Luminescent Mint (#34d399)
-    [34, 211, 238]    // Loop back to Cyan
-  ];
-
-  var GRAD_LIGHT = [
-    [14, 165, 233],   // Vibrant Sky Blue (#0ea5e9)
-    [79, 70, 229],    // Deep Indigo (#4f46e5)
-    [147, 51, 234],   // Royal Purple (#9333ea)
-    [225, 29, 72],    // Coral Crimson (#e11d48)
-    [13, 148, 136],   // Teal Mint (#0d9488)
-    [14, 165, 233]    // Loop back
-  ];
+  // Orb colour palettes. "classic" is the original multicolour flow; the others are calmer families
+  // that sit with the teal brand. Chosen with ThinkingOrbs.setPalette(name) (kept in localStorage
+  // smd_orb_palette). Each palette lists [dark-theme, light-theme] stops; the last stop repeats the first.
+  var PALETTES = {
+    classic: {
+      dark: [[34, 211, 238], [99, 102, 241], [168, 85, 247], [244, 63, 94], [52, 211, 153], [34, 211, 238]],
+      light: [[14, 165, 233], [79, 70, 229], [147, 51, 234], [225, 29, 72], [13, 148, 136], [14, 165, 233]]
+    },
+    // A. Teal glow: one hue family, from mint through teal to deep green.
+    teal: {
+      dark: [[94, 234, 212], [45, 212, 191], [20, 184, 166], [16, 185, 129], [153, 246, 228], [94, 234, 212]],
+      light: [[15, 118, 110], [13, 148, 136], [20, 184, 166], [4, 120, 87], [17, 94, 89], [15, 118, 110]]
+    },
+    // B. Ocean: teal drifting into clear blue, a little cooler and brighter.
+    ocean: {
+      dark: [[45, 212, 191], [34, 211, 238], [56, 189, 248], [96, 165, 250], [103, 232, 249], [45, 212, 191]],
+      light: [[13, 148, 136], [8, 145, 178], [2, 132, 199], [37, 99, 235], [14, 116, 144], [13, 148, 136]]
+    },
+    // C. Graphite: silver and slate with one teal highlight; the quietest of the three.
+    graphite: {
+      dark: [[226, 232, 240], [148, 163, 184], [45, 212, 191], [203, 213, 225], [100, 116, 139], [226, 232, 240]],
+      light: [[30, 41, 59], [71, 85, 105], [13, 148, 136], [51, 65, 85], [100, 116, 139], [30, 41, 59]]
+    }
+  };
+  var paletteName = "classic", drawPalette = null;   // drawPalette: a mount's own palette for the frame being painted
+  try { var pn = localStorage.getItem("smd_orb_palette"); if (pn && PALETTES[pn]) paletteName = pn; } catch (e) {}
 
   function getGradientColor(x, y, z, size, tSec, dark) {
-    var palette = dark ? GRAD_DARK : GRAD_LIGHT;
+    var palette = PALETTES[drawPalette || paletteName][dark ? "dark" : "light"];
     var cx = size / 2, cy = size / 2;
     var dx = (x - cx) / (size / 2 || 1);
     var dy = (y - cy) / (size / 2 || 1);
@@ -624,7 +632,9 @@
       var frameFn = MODES[mode] || frameGlobe;
       var dark = options.dark != null ? options.dark : isDocDark();
       var frame = frameFn(size, tSec, options.opts || {});
+      drawPalette = options.palette && PALETTES[options.palette] ? options.palette : null;
       paintFrame(ctx, frame, dark, tSec, size);
+      drawPalette = null;
     }
 
     function loop() {
@@ -795,6 +805,9 @@
     getOrbClusterHTML: getOrbClusterHTML,
     getStateForStage: getStateForStage,
     MODES: Object.keys(MODES),
+    PALETTES: Object.keys(PALETTES),
+    palette: function () { return paletteName; },
+    setPalette: function (n) { if (!PALETTES[n]) return false; paletteName = n; try { localStorage.setItem("smd_orb_palette", n); } catch (e) {} return true; },
     setDark: function (d) {
       globalDark = d;
       activeMounts.forEach(function (m) { try { m.setDark(d); } catch (e) {} });
