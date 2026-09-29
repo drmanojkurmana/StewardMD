@@ -2,9 +2,9 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
 
-const S = createRequire(import.meta.url)("../tokos-stage.js");
+const S = createRequire(import.meta.url)("../specialty-stage.js");
 
-test("fit contains a wide OCT scan in a phone-width stage", () => {
+test("fit contains a wide scan in a phone-width stage", () => {
   const f = S.fit(390, 300, 1024, 381);
   assert.equal(Math.round(f.w), 390);
   assert.ok(f.h <= 300);

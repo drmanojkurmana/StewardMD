@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
 
-const C = createRequire(import.meta.url)("../tokos-core.js");
+const C = createRequire(import.meta.url)("../specialty-core.js");
 
 // Reference values from ts-fsrs 5.4.2 fsrs(generatorParameters()).next_state(...) (FSRS-6 defaults).
 // A 5,000-case random comparison against the library showed zero difference; these pin it.
