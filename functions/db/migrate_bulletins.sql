@@ -81,4 +81,9 @@ CREATE TABLE IF NOT EXISTS cdsco_lists (          -- CDSCO yearly "new drugs app
   fetched_ts  INTEGER NOT NULL DEFAULT 0,
   text        TEXT NOT NULL DEFAULT ''
 );
+CREATE TABLE IF NOT EXISTS bulletin_skips (       -- source items a signer marked "not for the disease page"
+  update_id   TEXT PRIMARY KEY,
+  uid         TEXT NOT NULL,
+  ts          INTEGER NOT NULL
+);
 -- END bulletins

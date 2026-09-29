@@ -79,6 +79,23 @@ The Review Desk tab reads "Clinical updates (N)" from `/bulletins/me` `pending`.
 Web push is payloadless broadcast only, so signers are reached through the native app. Worker changes deploy via
 `.github/workflows/deploy-worker.yml` (production environment).
 
+## Signing desk (Review Desk tab, `bulletins-desk.js`, rebuilt 2026-09-29)
+- **Queue = inbox.** To do / Live switch with counts. To do groups: Check again (source changed, review due or
+  due within 30 days, source removed, disease gone from the library), Your drafts, New from journals and
+  regulators. Cards: coloured type (safety red, approval teal, guideline indigo, trial blue), source and date,
+  title, a one-line teaser, then Write update / Skip or Continue / Check again. Owner tools sit at the bottom.
+- **Skip** (`POST /api/updates/bulletins/skip {update_id, undo}`, signer only): a row in `bulletin_skips` takes the
+  source item out of `listCandidates`, so it leaves the queue and the Saturday count for every signer. Undo
+  (the snackbar) deletes the row. Both are audited.
+- **Editor** in the order of the work: 1 Read the source (links, AI summary folded, "Draft from source" offered
+  once so it never overwrites a rewrite, source fields folded as "filled in", opened when one needs a look),
+  2 Write (B/I/U, live counters that ignore the markers, numbers to check, diseases), 3 Classify (one-tap chips
+  for type, India status, evidence, regulator, review interval; CDSCO check under India status).
+  Preview is folded; fold state survives re-renders (`toggle` listener, capture phase).
+- **Bottom bar** (sticky): "Ready to sign" or "N left: ..." (`missing()`, a mirror of `validateDraft`); tapping it
+  scrolls to and flashes the first gap. Save / Preview and sign send nothing while a gap remains.
+- **Sign sheet**: preview, four large checklist rows, Sign locked until all four are ticked ("3 of 4 done").
+
 ## Key files
 `functions/_bulletins_api.js` (routes, mounted from `functions/api/updates/[[path]].js` above the owner gate),
 `functions/_bulletins_repo.js`, `functions/_bulletins_auth.js`, `functions/_bulletin_rules.js`,
@@ -92,7 +109,8 @@ Web push is payloadless broadcast only, so signers are reached through the nativ
   audit, disease-id drift.
 - `node test/run-bulletins-ui.mjs`: headless Chromium. Flag off/on, order and cap, placement above At a glance,
   India line, widths 320/390/768, stale copy, offline, kill switch, `SMD_API_BASE`, Review Desk tab gating,
-  preview = bedside renderer, checklist, 409 path. Screenshots in `$TMPDIR/stewardmd-bulletins/`.
+  preview = bedside renderer, checklist, 409 path; desk inbox, Skip/Undo, chips, the bottom bar's gap list and
+  jump, Sign locked until four ticks, desk at 320px, dark mode. Screenshots in `$TMPDIR/stewardmd-bulletins/`.
 
 ## To go live
 1. Nothing to migrate: `functions/_bulletins_schema.js` runs the same DDL (CREATE ... IF NOT EXISTS, once per

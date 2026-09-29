@@ -44,7 +44,7 @@ const ITEMS = [
 ];
 
 // ---- mock state the test flips between steps ----
-const st = { killBodies: [], signerBodies: [], mode: "items", hits: 0, lastInm: "", lastHost: "", me: { canSign: false, isOwner: false }, signBodies: [], signResp: { status: 409, body: { error: "changed" } } };
+const st = { saves: 0, skipBodies: [], killBodies: [], signerBodies: [], mode: "items", hits: 0, lastInm: "", lastHost: "", me: { canSign: false, isOwner: false }, signBodies: [], signResp: { status: 409, body: { error: "changed" } } };
 const QUEUE_ITEM = Object.assign(bl("b-draft", { source_date: "2026-09-02" }), {
   update_id: "u1", review_months: 12, state: "draft", body_hash: "a".repeat(64), status: "draft", orphaned: [],
   signed_name: "", signed_reg: "", signed_council: "", signed_ts: 0, review_due_ts: 0, u_title: "Source item title", u_org: "FDA", u_url: "https://example.org/u1", u_published_ts: NOW - 5 * DAY, u_summary: "AI summary text",
@@ -70,7 +70,8 @@ const server = http.createServer(async (req, res) => {
   if (p === "/api/updates/bulletins/me") return sendJson(res, 200, st.me);
   if (p === "/api/updates/bulletins/queue") return sendJson(res, 200, { ok: true, killed: false, items: [QUEUE_ITEM], candidates: [{ id: "u2", type: "safety_alert", title: "Candidate source", organization: "U.S. Food and Drug Administration", official_url: "http://example.org/u2", doi: "10.1056/NEJMoa2605659", pmid: "42748429", published_ts: NOW - DAY,
     summary: "In adults with Acute Bronchitis the drug cut symptom days (HR 0.72; 95% CI 0.61-0.85), 12.5% vs 17.3%, at 10 mg daily for 12 weeks. A second sentence that is long enough to push the draft beyond the four hundred character limit so that the cut lands on a full stop rather than the middle of a word, which keeps the draft readable for the doctor who must rewrite it anyway before signing it for the disease page." }] });
-  if (p === "/api/updates/bulletins" && req.method === "POST") { const b = await readBody(req); return sendJson(res, 200, { ok: true, item: Object.assign({}, QUEUE_ITEM, b, { body_hash: "b".repeat(64), state: "draft" }) }); }
+  if (p === "/api/updates/bulletins/skip" && req.method === "POST") { const b = await readBody(req); st.skipBodies.push(b); return sendJson(res, 200, { ok: true, update_id: b.update_id, skipped: !b.undo }); }
+  if (p === "/api/updates/bulletins" && req.method === "POST") { st.saves++; const b = await readBody(req); return sendJson(res, 200, { ok: true, item: Object.assign({}, QUEUE_ITEM, b, { body_hash: "b".repeat(64), state: "draft" }) }); }
   if (p === "/api/updates/bulletins/signers" && req.method === "GET") return sendJson(res, 200, { ok: true, signers: [{ uid: "u-owner", name: "Manoj Kurmana", reg_no: "APMC-1", council: "Andhra Pradesh Medical Council", active: 1 }] });
   if (p === "/api/updates/bulletins/signers" && req.method === "POST") { st.signerBodies.push(await readBody(req)); return sendJson(res, 200, { ok: true }); }
   if (p === "/api/updates/bulletins/kill") { st.killBodies.push(await readBody(req)); return sendJson(res, 200, { ok: true, killed: true }); }
@@ -102,6 +103,8 @@ async function ev(expression) {
   return r.result && r.result.result ? r.result.result.value : undefined;
 }
 const ok = (pass, label, detail) => { console.log((pass ? "PASS " : "FAIL ") + label + (pass || detail == null ? "" : "  " + JSON.stringify(detail))); if (!pass) failures++; };
+async function waitFor(fn, ms = 5000) { const t = Date.now(); while (Date.now() - t < ms) { if (fn()) return true; await sleep(50); } return false; }
+const noSideScroll = `(function(){var b=document.querySelector('#smdReview .kit-sheet-body');return !!b&&b.scrollWidth<=b.clientWidth+1&&document.documentElement.scrollWidth<=innerWidth})()`;
 async function until(expr, ms = 15000) { const t = Date.now(); while (Date.now() - t < ms) { try { if (await ev(expr)) return true; } catch (e) {} await sleep(150); } return false; }
 async function shot(name) { await mkdir(SHOTS, { recursive: true }); const r = await call("Page.captureScreenshot", { format: "png" }); await writeFile(join(SHOTS, name + ".png"), Buffer.from(r.result.data, "base64")); }
 async function load(query) {
@@ -219,8 +222,31 @@ try {
   ok(await until(`!!document.querySelector('#smdReview [data-rv-act="kind:bulletin"]')`), "Review Desk: tab appears for a signer");
   await ev(`document.querySelector('#smdReview [data-rv-act="kind:bulletin"]').click();true`);
   ok(await until(`!!document.querySelector('#smdReview [data-bl-act="edit:b-draft"]')&&!!document.querySelector('#smdReview [data-bl-act="new:u2"]')`), "queue lists the draft and the new source");
+  ok(await ev(`!!document.querySelector('#smdReview [data-bl-act="filter:todo"][aria-pressed="true"]')&&/To do\\s*2/.test(document.querySelector('#smdReview [data-bl-act="filter:todo"]').textContent)`), "queue opens on To do, with its count");
+  ok(await ev(`(function(){var c=document.querySelector('#smdReview [data-bl-act="new:u2"]').closest('.bl-q');return c.classList.contains('bl-k-safety')&&c.querySelector('.bl-type').textContent==='Safety alert'&&/U\\.S\\. Food and Drug Administration \u00b7 \\d+ \\w{3} \\d{4}/.test(c.querySelector('.bl-meta').textContent)&&!!c.querySelector('[data-bl-act="skip:u2"]')})()`), "a source card shows its type, who and when, with Write update and Skip");
+  await ev(`document.querySelector('#smdReview [data-bl-act="new:u2"]').scrollIntoView({block:'center'});true`); await shot("desk-queue");
+  await call("Emulation.setDeviceMetricsOverride", { width: 320, height: 700, deviceScaleFactor: 1, mobile: true }); await sleep(200);
+  ok(await ev(noSideScroll), "queue fits 320px without sideways scrolling");
+  await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 1, mobile: true }); await sleep(150);
+  await ev(`document.querySelector('#smdReview [data-bl-act="skip:u2"]').click();true`);
+  ok(await until(`!document.querySelector('#smdReview [data-bl-act="new:u2"]')&&!!document.querySelector('#smdReview [data-bl-act="unskip:u2"]')`), "Skip takes the item off the queue at once and offers Undo");
+  ok(await waitFor(() => st.skipBodies.length === 1) && st.skipBodies[0].update_id === "u2" && st.skipBodies[0].undo === false, "Skip posts the source item", st.skipBodies);
+  await ev(`document.querySelector('#smdReview [data-bl-act="unskip:u2"]').click();true`);
+  ok(await until(`!!document.querySelector('#smdReview [data-bl-act="new:u2"]')`), "Undo puts it back");
+  ok(await waitFor(() => st.skipBodies.length === 2) && st.skipBodies[1].undo === true, "Undo posts undo:true", st.skipBodies);
+  await ev(`document.querySelector('#smdReview [data-bl-act="filter:live"]').click();true`);
+  ok(await until(`/Nothing is live yet/.test(document.querySelector('#smdReview').textContent)&&!document.querySelector('#smdReview [data-bl-act="edit:b-draft"]')`), "Live shows only what is on the disease page");
+  await ev(`document.querySelector('#smdReview [data-bl-act="filter:todo"]').click();true`);
+  await until(`!!document.querySelector('#smdReview [data-bl-act="edit:b-draft"]')`);
   await ev(`document.querySelector('#smdReview [data-bl-act="edit:b-draft"]').click();true`);
   ok(await until(`!!document.querySelector('#smdReview .bl-preview .smd-bl')`), "editor shows a live preview");
+  ok(await ev(`['1','2','3'].map(function(n){return document.getElementById('bl_s'+n).textContent}).join('|')==='1Read the source|2Write it in your own words|3Classify'`), "editor runs in the order of the work: read, write, classify");
+  ok(await ev(`!!document.querySelector('#smdReview [data-bl-act="set:kind:approval"][aria-pressed="true"]')&&!!document.querySelector('#smdReview [data-bl-act="set:india_status:cdsco_approved"][aria-pressed="true"]')&&!!document.querySelector('#smdReview [data-bl-act="set:review_months:12"][aria-pressed="true"]')&&!document.querySelector('#smdReview select')`), "saved choices show as pressed chips, no dropdowns");
+  ok(await ev(`/Ready to sign/.test(document.getElementById('bl_bar_s').textContent)&&getComputedStyle(document.querySelector('#smdReview .bl-bar')).position==='sticky'`), "the bottom bar says a complete draft is ready");
+  await shot("desk-editor-top");
+  await call("Emulation.setDeviceMetricsOverride", { width: 320, height: 700, deviceScaleFactor: 1, mobile: true }); await sleep(200);
+  ok(await ev(noSideScroll), "editor fits 320px without sideways scrolling");
+  await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 1, mobile: true }); await sleep(150);
   // same renderer as the bedside: identical structure for the same bulletin
   const struct = (sel) => `Array.from(document.querySelectorAll('${sel} *')).map(function(e){return e.tagName+'.'+e.className}).join('|')`;
   await ev(`(function(){var d=document.createElement('div');d.id='blCmp';d.innerHTML=SMD_BULLETINS.card(SMD_BULLETINS_DESK._previewOf(SMD_BULLETINS_DESK._state.cur));document.body.appendChild(d);return true})()`);
@@ -229,9 +255,15 @@ try {
   await ev(`document.querySelector('#smdReview [data-bl-act="savesign"]').click();true`);
   ok(await until(`!!document.querySelector('#smdReview [data-bl-act="signgo"]')`), "Save and sign opens the sign sheet");
   ok(await ev(`(function(){var b=document.querySelector('#smdReview [data-bl-act="signgo"]').cloneNode(true);Array.from(b.querySelectorAll('.material-symbols-outlined')).forEach(function(i){i.remove()});return /^Sign as Dr Manoj Kurmana, Reg\\. No\\. APMC-1$/.test(b.textContent.trim())})()`), "sign button names the signer");
+  ok(await ev(`document.querySelector('#smdReview [data-bl-act="signgo"]').disabled===true`), "Sign stays locked while the checklist is empty");
   await ev(`document.querySelector('#smdReview [data-bl-act="signgo"]').click();true`); await sleep(300);
   ok(st.signBodies.length === 0 && await ev(`document.querySelector('#smdReview').textContent.indexOf('Tick every item before signing.')>=0`), "cannot sign with the checklist unticked");
-  await ev(`Array.from(document.querySelectorAll('#smdReview input[type=checkbox]')).forEach(function(c){c.checked=true});document.querySelector('#smdReview [data-bl-act="signgo"]').click();true`);
+  await ev(`Array.from(document.querySelectorAll('#smdReview .bl-ck input')).slice(0,3).forEach(function(c){c.click()});true`);
+  ok(await ev(`document.querySelector('#smdReview [data-bl-act="signgo"]').disabled===true&&/3 of 4 done/.test(document.getElementById('bl_ck_s').textContent)`), "three of four ticked: still locked, and it says so");
+  await ev(`document.querySelectorAll('#smdReview .bl-ck input')[3].click();true`); await sleep(250);   // buttons fade opacity over 90 ms
+  ok(await ev(`document.querySelector('#smdReview [data-bl-act="signgo"]').disabled===false&&getComputedStyle(document.querySelector('#smdReview [data-bl-act="signgo"]')).opacity==='1'&&/All four confirmed/.test(document.getElementById('bl_ck_s').textContent)`), "all four ticked: Sign unlocks");
+  await shot("desk-sign-sheet");
+  await ev(`document.querySelector('#smdReview [data-bl-act="signgo"]').click();true`);
   ok(await until(`document.querySelector('#smdReview').textContent.indexOf('The text changed. Review it again before signing.')>=0`), "a 409 sends the signer back to review the text");
   const sent = st.signBodies[0] || {};
   ok(sent.body_hash === "b".repeat(64) && ["source_read", "numbers_match", "india_checked", "own_words"].every((k) => sent.checklist && sent.checklist[k] === true), "sign request carries the previewed hash and the full checklist", sent);
@@ -269,12 +301,17 @@ try {
   ok(await ev(`document.getElementById('bl_open_doi').getAttribute('href')==='https://doi.org/10.1001/jama.2026.12627'&&!document.getElementById('bl_open_pmid').hasAttribute('href')&&document.getElementById('bl_open_pmid').getAttribute('aria-disabled')==='true'`), "links follow edits; an empty PMID disables its link");
   ok(await until(`!!document.querySelector('#smdReview [data-bl-act="draft"]')`), "a new bulletin offers Draft from source");
   ok(await ev(`document.getElementById('bl_what_changed').value===''`), "nothing is pre-written before the signer asks");
+  ok(await ev(`/4 left: What changed, Diseases, India status and 1 more/.test(document.getElementById('bl_bar_s').textContent)`), "the bottom bar names what is still missing", await ev(`document.getElementById('bl_bar_s').textContent`));
+  const savesBefore = st.saves;
+  await ev(`document.querySelector('#smdReview [data-bl-act="save"]').click();true`); await sleep(400);
+  ok(st.saves === savesBefore && await ev(`document.activeElement&&document.activeElement.id==='bl_what_changed'&&document.getElementById('bl_what_changed').classList.contains('bl-flash')`), "Save with gaps sends nothing and takes the doctor to the first gap");
   await ev(`document.querySelector('#smdReview [data-bl-act="draft"]').click();true`);
   ok(await until(`document.getElementById('bl_what_changed').value.indexOf('Acute Bronchitis')>=0`), "Draft fills What changed from the source summary");
   ok(await ev(`(function(){var v=document.getElementById('bl_what_changed').value;return v.length<=400&&/\.$/.test(v)})()`), "draft is cut at a full stop within 400 characters");
   ok(await ev(`!!document.querySelector('#smdReview .bl-drafted')&&/own words/.test(document.querySelector('#smdReview .bl-drafted').textContent)`), "draft banner asks for the signer's own words");
-  ok(await ev(`document.getElementById('bl_india_status').value===''`), "India status is never pre-filled");
-  ok(await ev(`document.getElementById('bl_evidence_type').value==='regulatory_safety'&&document.getElementById('bl_regulator').value==='FDA'`), "evidence type and regulator suggested from the source");
+  ok(await ev(`!document.querySelector('#smdReview [data-bl-act="draft"]')`), "Draft from source is offered once, so it never overwrites the rewrite");
+  ok(await ev(`SMD_BULLETINS_DESK._state.cur.india_status===''&&!document.querySelector('#smdReview [data-bl-act^="set:india_status:"][aria-pressed="true"]')`), "India status is never pre-filled");
+  ok(await ev(`SMD_BULLETINS_DESK._state.cur.evidence_type==='regulatory_safety'&&SMD_BULLETINS_DESK._state.cur.regulator==='FDA'&&!!document.querySelector('#smdReview [data-bl-act="set:evidence_type:regulatory_safety"][aria-pressed="true"]')&&!!document.querySelector('#smdReview [data-bl-act="set:regulator:FDA"][aria-pressed="true"]')`), "evidence type and regulator suggested from the source");
   const nums = await ev(`Array.from(document.querySelectorAll('#smdReview .bl-num')).map(function(n){return n.textContent})`);
   ok(Array.isArray(nums) && ["HR 0.72", "12.5%", "17.3%", "10 mg", "12 weeks"].every((n) => nums.indexOf(n) >= 0), "numbers to check are listed", nums);
   ok(await ev(`!!document.querySelector('#smdReview [data-bl-act="dz:ACUTE_BRONCHITIS"]')`), "a library disease named in the source is suggested");
@@ -290,13 +327,26 @@ try {
   await ev(`document.querySelector('#smdReview [data-bl-act="fmt:i"]').click();true`);
   ok(await until(`document.getElementById('bl_headline').value.indexOf('[i]Safe[/i]')===0`), "Italic works on the headline too");
   ok(await ev(`(function(){var h=document.querySelector('#smdReview .bl-preview .smd-bl-h');return !!h.querySelector('i')&&!h.querySelector('img')&&h.textContent.indexOf('<img')>=0})()`), "typed HTML stays text; only B/I/U become formatting");
-  await ev(`(function(){var h=document.getElementById('bl_headline');h.value='Headline for the draft';h.dispatchEvent(new Event('input',{bubbles:true}));return true})()`);
+  await ev(`(function(){var h=document.getElementById('bl_headline');h.value='Headline for the [b]draft[/b]';h.dispatchEvent(new Event('input',{bubbles:true}));return true})()`);
+  ok(await ev(`document.getElementById('bl_cnt_headline').textContent==='22 / 120'`), "the headline counter counts what the reader sees, not the B/I/U markers");
+  ok(await ev(`document.querySelector('#smdReview .bl-preview .smd-bl-h').textContent==='Headline for the draft'`), "the preview follows typing without a re-render");
   await shot("desk-draft-from-source");
   await ev(`document.getElementById('bl_cq').value='rimegepant';document.querySelector('#smdReview [data-bl-act="cdsco"]').click();true`);
   ok(await until(`/Found in the CDSCO lists\./.test((document.querySelector('#smdReview .bl-cdsco.found')||{}).textContent||'')&&document.querySelector('#smdReview .bl-cdsco').textContent.indexOf('approved 2025-03-27')>=0`), "CDSCO check shows the matching entry and its approval date");
-  ok(await ev(`document.getElementById('bl_india_status').value===''`), "a CDSCO match never sets India status by itself");
+  ok(await ev(`SMD_BULLETINS_DESK._state.cur.india_status===''`), "a CDSCO match never sets India status by itself");
   await ev(`document.getElementById('bl_cq').value='camizestrant';document.querySelector('#smdReview [data-bl-act="cdsco"]').click();true`);
   ok(await until(`/Not found in the CDSCO new-drug lists for 2020 to 2026 .*does not prove it is unapproved/.test((document.querySelector('#smdReview .bl-cdsco')||{}).textContent||'')`), "a miss says which lists were checked and that absence proves nothing");
+  // the bar points at the one gap left; tapping it goes there; one tap on a chip fills it
+  ok(await ev(`/1 left: India status/.test(document.getElementById('bl_bar_s').textContent)`), "only India status is left", await ev(`document.getElementById('bl_bar_s').textContent`));
+  await ev(`document.querySelector('#smdReview [data-bl-act="jump"]').click();true`); await sleep(200);
+  ok(await ev(`document.getElementById('bl_sec_india_status').classList.contains('bl-flash')&&document.activeElement&&document.activeElement.getAttribute('data-bl-act')==='set:india_status:cdsco_approved'`), "tapping the gap list jumps to India status");
+  await shot("desk-editor-classify");
+  await ev(`document.querySelector('#smdReview [data-bl-act="set:india_status:unknown"]').click();true`);
+  ok(await until(`SMD_BULLETINS_DESK._state.cur.india_status==='unknown'&&document.querySelector('#smdReview [data-bl-act="set:india_status:unknown"]').getAttribute('aria-pressed')==='true'&&/Ready to sign/.test(document.getElementById('bl_bar_s').textContent)`), "one tap sets India status and the bar turns ready");
+  ok(await ev(`document.getElementById('bl_what_changed').value.indexOf('[b]Acute Bronchitis[/b]')>=0&&document.getElementById('bl_headline').value==='Headline for the [b]draft[/b]'`), "a chip tap keeps everything typed");
+  await ev("document.body.classList.add('dark');true"); await sleep(150); await shot("desk-editor-dark");
+  ok(await ev(`(function(){var c=getComputedStyle(document.querySelector('#smdReview .bl-chip.on'));return c.color!==c.backgroundColor})()`), "dark mode: chips stay readable");
+  await ev("document.body.classList.remove('dark');true");
   await ev("SMD_REVIEW.close();true");
 
   /* 12. bell feed: the signed-bulletin marker, worded so it never implies the AI text was reviewed */

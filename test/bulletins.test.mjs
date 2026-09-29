@@ -450,7 +450,7 @@ test("schema on first use: the runtime DDL builds exactly the tables and indexes
     return objs.map((o) => ({ o, cols: o.type === "table" ? db.prepare("PRAGMA table_xinfo(" + o.name + ")").all() : db.prepare("PRAGMA index_xinfo(" + o.name + ")").all() }));
   };
   assert.deepEqual(JSON.parse(JSON.stringify(shape(b))), JSON.parse(JSON.stringify(shape(a))));
-  assert.equal(shape(a).length, 10);
+  assert.equal(shape(a).length, 11);
 });
 
 test("schema on first use: a database without the bulletin tables gets them on the first request", { skip: SKIP }, async () => {
@@ -537,4 +537,20 @@ test("formatting: [b]/[i]/[u] markers do not count toward length limits, but are
   assert.ok(rules.validateDraft(draft({ headline: "[b][/b]" })).errors.some((e) => e.field === "headline" && e.code === "required"));
   const plain = rules.validateDraft(draft()).value, bold = rules.validateDraft(draft({ headline: "[b]" + draft().headline + "[/b]" })).value;
   assert.notEqual(await rules.bodyHash(plain), await rules.bodyHash(bold), "adding emphasis is a change that needs a new signature");
+});
+
+test("skip: a signer takes a source item off the queue (and can undo); audited; not a signer, no skip", { skip: SKIP }, async () => {
+  const env = await fresh();
+  await ownerSigner(env);
+  const cands = async () => (await call(env, "GET", "bulletins/queue", { tok: "tok-owner-doc" })).data.candidates.map((c) => c.id).sort();
+  assert.deepEqual(await cands(), ["u1", "u2"]);
+  const s = await call(env, "POST", "bulletins/skip", { tok: "tok-owner-doc", body: { update_id: "u2" } });
+  assert.deepEqual([s.status, s.data.skipped], [200, true]);
+  assert.deepEqual(await cands(), ["u1"]);
+  assert.equal((await call(env, "POST", "bulletins/skip", { tok: "tok-owner-doc", body: { update_id: "u2", undo: true } })).status, 200);
+  assert.deepEqual(await cands(), ["u1", "u2"]);
+  assert.equal((await call(env, "POST", "bulletins/skip", { tok: "tok-doc2", body: { update_id: "u1" } })).status, 403);
+  assert.equal((await call(env, "POST", "bulletins/skip", { admin: "admintok-123456", body: { update_id: "u1" } })).status, 401);
+  assert.equal((await call(env, "POST", "bulletins/skip", { tok: "tok-owner-doc", body: { update_id: "nope" } })).status, 404);
+  assert.deepEqual([auditRows(env, "skip").length, auditRows(env, "unskip").length], [1, 1]);
 });
