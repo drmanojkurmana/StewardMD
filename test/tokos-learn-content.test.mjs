@@ -5,6 +5,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
+import { normalize } from "node:path";
 import { build, unitKey, LICENCES, coverage, coverageMd } from "../tools/tokos-learn-index.mjs";
 
 const FX = fileURLToPath(new URL("./fixtures/specialty-fixture/learn/", import.meta.url));
@@ -45,4 +46,9 @@ test("the real tokos/learn, when present, is valid and its built files are in st
   assert.ok(cov.total === 142 && cov.covered >= cov.byLesson && cov.covered <= cov.total);
   assert.equal(readFileSync(root + "docs/tokos/competency-coverage.md", "utf8"), coverageMd(cov), "run node tools/tokos-learn-index.mjs");
   for (const m of r.credits.items) assert.ok(existsSync(LEARN + "media/" + m.file), m.id + " resolves against media/");
+  // every picture shipped with Learn (lesson diagrams and unit media) has a credit entry
+  const credited = new Set(r.credits.items.map((m) => normalize(LEARN + "media/" + m.file)));
+  const files = readdirSync(LEARN + "diagrams").map((f) => LEARN + "diagrams/" + f)
+    .concat(readdirSync(LEARN + "media", { withFileTypes: true }).filter((d) => d.isDirectory()).flatMap((d) => readdirSync(LEARN + "media/" + d.name).map((f) => LEARN + "media/" + d.name + "/" + f)));
+  assert.deepEqual(files.map(normalize).filter((f) => !credited.has(f)), [], "uncredited Learn media");
 });

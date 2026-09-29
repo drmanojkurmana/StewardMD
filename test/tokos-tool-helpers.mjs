@@ -8,7 +8,7 @@ const bi = (x, where) => { assert.ok(x && typeof x.en === "string" && x.en && ty
 
 export function shape(m, id) {
   assert.ok(!/\u2014/.test(readFileSync(new URL(`../tokos-models/tool-${id}.js`, import.meta.url), "utf8")), "no em-dash in model file");
-  assert.equal(m.id, id); assert.equal(m.kind, "tool"); assert.equal(m.review, "ai_drafted");
+  assert.equal(m.id, id); assert.equal(m.kind, "tool"); assert.ok(["ai_drafted", "reviewed"].includes(m.review));
   assert.ok(["obstetrics", "gynaecology"].includes(m.group)); assert.ok(["mbbs", "resident"].includes(m.level));
   bi(m.title, "title");
   assert.ok(m.sources.length >= 1 && m.sources.every((s) => s.label && /^https:\/\//.test(s.url)), "sources with https url");

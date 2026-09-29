@@ -20,12 +20,12 @@ for (const [name, deck, dir] of [["fetal-planes", fetal, "fetal-planes"], ["hc-b
   test(name + ": deck shape, unique ids, at most " + MAX_IMAGES + " images", () => {
     assert.equal(deck.v, 1);
     assert.equal(deck.id, name);
-    assert.equal(deck.review, "ai_drafted");
+    assert.ok(["ai_drafted", "reviewed"].includes(deck.review && typeof deck.review === "object" ? deck.review.status : deck.review));
     assert.ok(deck.title.en && deck.title.hi);
     assert.ok(deck.cases.length >= 50 && deck.cases.length <= MAX_IMAGES, "case count " + deck.cases.length);
     assert.equal(new Set(deck.cases.map((c) => c.id)).size, deck.cases.length);
     deck.cases.forEach((c) => {
-      assert.equal(c.review, "ai_drafted");
+      assert.ok(["ai_drafted", "reviewed"].includes(c.review && typeof c.review === "object" ? c.review.status : c.review));
       assert.ok(c.w > 0 && c.h > 0);
       assert.equal(c.img, dir + "/" + c.id + ".webp");
     });

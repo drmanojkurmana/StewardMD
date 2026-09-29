@@ -12,7 +12,7 @@ const data = JSON.parse(readFileSync(join(dirname(fileURLToPath(import.meta.url)
 test("model contract", () => {
   assert.equal(P.id, "palm-coein");
   assert.equal(P.kind, "explorer");
-  assert.equal(P.review, "ai_drafted");
+  assert.ok(["ai_drafted", "reviewed"].includes(P.review && typeof P.review === "object" ? P.review.status : P.review));
   assert.ok(P.sources.length >= 5 && P.sources.every((s) => s.label && /^https:\/\//.test(s.url)));
   assert.deepEqual(P.codes, ["P", "A", "L", "M", "C", "O", "E", "I", "N"]);
   assert.deepEqual(P.categories.filter((c) => c.group === "structural").map((c) => c.code), ["P", "A", "L", "M"]);
@@ -87,13 +87,13 @@ test("bleedingPattern: FIGO System 1 limits, 24 to 38 days, up to 8 days, range 
 });
 
 test("vignettes file: 12 or more, original, ai_drafted, English and Hindi", () => {
-  assert.equal(data.review, "ai_drafted");
+  assert.ok(["ai_drafted", "reviewed"].includes(data.review && typeof data.review === "object" ? data.review.status : data.review));
   assert.match(data.origin, /Original teaching scenarios/);
   assert.ok(data.vignettes.length >= 12, "count " + data.vignettes.length);
   const ids = new Set(data.vignettes.map((v) => v.id));
   assert.equal(ids.size, data.vignettes.length, "unique ids");
   for (const v of data.vignettes) {
-    assert.equal(v.review, "ai_drafted");
+    assert.ok(["ai_drafted", "reviewed"].includes(v.review && typeof v.review === "object" ? v.review.status : v.review));
     for (const k of ["title", "stem", "teach"]) {
       assert.ok(v[k].en.trim() && /[ऀ-ॿ]/.test(v[k].hi), v.id + " " + k);
       assert.ok(!DASH.test(v[k].en + v[k].hi), v.id + " no dash");

@@ -105,7 +105,7 @@ test("schema extras: level, unit, review, checks, hotspots, test links, sources"
   for (const { unit, id, L } of lessons) {
     for (const k of Object.keys(L)) assert.ok(keys.includes(k), `${id}: unknown key ${k}`);
     for (const k of keys) assert.ok(k in L, `${id}: missing ${k}`);
-    assert.equal(L.unit, unit); assert.equal(L.level, "resident"); assert.equal(L.review, "ai_drafted");
+    assert.equal(L.unit, unit); assert.equal(L.level, "resident"); assert.ok(["ai_drafted", "reviewed"].includes(L.review && typeof L.review === "object" ? L.review.status : L.review));
     assert.ok(Number.isInteger(L.minutes) && L.minutes >= 3 && L.minutes <= 8, id);
     assert.ok(L.why.steps.length >= 3 && L.spot.length >= 2 && L.todo.length >= 1, id);
     assert.ok(L.see.hotspots.length >= 3, `${id} hotspots`);

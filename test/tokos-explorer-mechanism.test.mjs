@@ -17,7 +17,7 @@ const ORDER = ["engagement", "descent", "flexion", "internal-rotation", "extensi
 test("model contract", () => {
   assert.equal(M.id, "mechanism");
   assert.equal(M.kind, "explorer");
-  assert.equal(M.review, "ai_drafted");
+  assert.ok(["ai_drafted", "reviewed"].includes(M.review && typeof M.review === "object" ? M.review.status : M.review));
   assert.ok(M.title.en && M.title.hi);
   assert.ok(M.sources.length >= 3 && M.sources.every((s) => s.label && /^https:\/\//.test(s.url)));
 });

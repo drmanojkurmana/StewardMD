@@ -9,7 +9,7 @@ const end = (results) => S.walk(results).end;
 test("model contract and guideline versions", () => {
   assert.equal(S.id, "cervical-screening");
   assert.equal(S.kind, "explorer");
-  assert.equal(S.review, "ai_drafted");
+  assert.ok(["ai_drafted", "reviewed"].includes(S.review && typeof S.review === "object" ? S.review.status : S.review));
   assert.equal(S.guideline.algorithm.year, 2016);
   assert.equal(S.guideline.algorithm.version, "26 August 2016");
   assert.equal(S.guideline.current.year, 2025);

@@ -50,7 +50,7 @@ test("every obR unit exists with lessons and only resident, ai_drafted lessons",
   });
   lessons.forEach((l) => {
     assert.equal(l.level, "resident");
-    assert.equal(l.review, "ai_drafted");
+    assert.ok(["ai_drafted", "reviewed"].includes(l.review && typeof l.review === "object" ? l.review.status : l.review));
     assert.ok(l.minutes >= 4 && l.minutes <= 7, l.id + " minutes");
   });
 });

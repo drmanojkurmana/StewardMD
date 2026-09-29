@@ -92,7 +92,7 @@ test("every plane has cited, bilingual teaching points; every image has a credit
     for (const c of deck.cases) {
       assert.ok(credits[key].files[c.img], c.id + " credited");
       assert.ok(existsSync("tokos/media/" + c.img), c.id + " image bundled");
-      assert.equal(c.review, "ai_drafted");
+      assert.ok(["ai_drafted", "reviewed"].includes(c.review && typeof c.review === "object" ? c.review.status : c.review));
     }
   }
 });

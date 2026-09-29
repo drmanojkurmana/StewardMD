@@ -51,7 +51,7 @@ test("every lesson passes D.validateLesson with the unit glossary and media", ()
     assert.deepEqual(D.validateLesson(l, glossary, media), [], f);
     assert.equal(l.id + ".json", f);
     assert.equal(l.level, "mbbs");
-    assert.equal(l.review, "ai_drafted", f + " review");
+    assert.ok(["ai_drafted", "reviewed"].includes(l.review && typeof l.review === "object" ? l.review.status : l.review), f + " review");
     assert.ok(MCQ.indexOf(l.test.mcqTopic) >= 0, f + " mcqTopic");
     if (l.test.explorer) assert.ok(EXPLORERS.indexOf(l.test.explorer) >= 0, f + " explorer id");
     assert.ok(l.check.length >= 2 && l.check.length <= 3, f + " has 2 to 3 check questions");
@@ -118,7 +118,7 @@ test("every media file has a credit with a permitted licence, and every credit h
       assert.ok(it.alt && it.alt.en && it.alt.hi && it.caption && it.caption.en && it.caption.hi, it.id + " alt and caption en+hi");
       assert.ok(it.w > 0 && it.h > 0, it.id + " size");
       if (it.route !== "original") assert.ok(/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/.test(it.source) && it.author, it.id + " needs source and author");
-      assert.ok(it.file.indexOf(u + "/") === 0, it.id + " lives under its unit folder");
+      assert.ok(it.file.indexOf(u + "/") === 0 || /^\.\.\/diagrams\/[a-z0-9-]+\.svg$/.test(it.file), it.id + " lives under its unit folder (or is a lesson diagram)");
     }
   }
 });

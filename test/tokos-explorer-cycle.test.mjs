@@ -10,7 +10,7 @@ const lens = Array.from({ length: 15 }, (_, i) => 21 + i);
 test("model contract", () => {
   assert.equal(C.id, "cycle");
   assert.equal(C.kind, "explorer");
-  assert.equal(C.review, "ai_drafted");
+  assert.ok(["ai_drafted", "reviewed"].includes(C.review && typeof C.review === "object" ? C.review.status : C.review));
   assert.ok(C.sources.length >= 4 && C.sources.every((s) => s.label && /^https:\/\//.test(s.url)));
   assert.match(C.notes.relative.en, /not assay values/);
   assert.match(C.notes.relative.hi, /relative/);

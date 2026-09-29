@@ -44,7 +44,7 @@ test("every lesson passes validateLesson", () => {
 
 test("lessons are drafted, sourced, linked to practice and have 2 or 3 checks", () => {
   lessons.forEach((l) => {
-    assert.equal(typeof l.review === "object" ? l.review.status : l.review, "ai_drafted", l.id);
+    assert.ok(["ai_drafted", "reviewed"].includes(typeof l.review === "object" ? l.review.status : l.review), l.id);
     if (typeof l.review === "object") assert.ok(l.review.verify.length && l.review.verify.every((v) => typeof v === "string" && v.length > 10), l.id + " verify");
     assert.equal(l.level, "mbbs", l.id);
     assert.ok(l.sources.length >= 1 && l.sources.every((s) => typeof s === "string" && s.length > 20), l.id + " sources");

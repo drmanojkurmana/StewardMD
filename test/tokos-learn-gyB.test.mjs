@@ -50,7 +50,7 @@ test("every lesson passes validateLesson with the merged glossary and media map"
 
 test("review is ai_drafted, minutes 4 to 7, 2 to 3 checks, sources present, test links are known ids", () => {
   lessons.forEach(({ id, l }) => {
-    assert.equal(l.review, "ai_drafted", id);
+    assert.ok(["ai_drafted", "reviewed"].includes(l.review && typeof l.review === "object" ? l.review.status : l.review), id);
     assert.ok(l.minutes >= 4 && l.minutes <= 7, id + " minutes");
     assert.ok(l.check.length >= 2 && l.check.length <= 3, id + " checks");
     assert.ok(l.sources.length >= 1, id + " sources");

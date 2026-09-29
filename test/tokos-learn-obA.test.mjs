@@ -72,7 +72,7 @@ test("lessons: unit, review, minutes, checks, sources, hotspots, competencies, t
     assert.ok(u && l.unit === u.id, l.id + " unit mismatch");
     assert.ok(l.id.startsWith(l.unit + "-"), l.id + " prefix");
     assert.equal(l.level, "mbbs");
-    assert.equal(l.review, "ai_drafted", l.id);
+    assert.ok(["ai_drafted", "reviewed"].includes(l.review && typeof l.review === "object" ? l.review.status : l.review), l.id);
     assert.ok(l.minutes >= 4 && l.minutes <= 7, l.id + " minutes 4 to 7");
     assert.ok(l.check.length >= 2 && l.check.length <= 3, l.id + " needs 2 to 3 check questions");
     assert.ok(l.sources.length >= 1 && l.sources.every((s) => typeof s === "string" && s.length > 20), l.id + " sources");

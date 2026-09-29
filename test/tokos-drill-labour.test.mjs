@@ -207,7 +207,7 @@ test("FHR classes match the CTG clinic deck categories", () => {
 });
 
 test("model contract: id, kind, bilingual text, sources, review, no em-dash, ASCII numerals in Hindi", () => {
-  assert.equal(L.id, "labour"); assert.equal(L.kind, "drill"); assert.equal(L.review, "ai_drafted");
+  assert.equal(L.id, "labour"); assert.equal(L.kind, "drill"); assert.ok(["ai_drafted", "reviewed"].includes(L.review && typeof L.review === "object" ? L.review.status : L.review));
   assert.ok(L.sources.length >= 4 && L.sources.every((x) => x.label && x.url.startsWith("https://")));
   const texts = [L.title, ...Object.values(L.TEXT), ...Object.values(L.SCENARIOS).map((x) => x.brief)];
   for (const t of texts) {

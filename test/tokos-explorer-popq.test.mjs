@@ -11,7 +11,7 @@ const st = (o) => Q.stage(Object.assign({}, base, o));
 test("model contract", () => {
   assert.equal(Q.id, "popq");
   assert.equal(Q.kind, "explorer");
-  assert.equal(Q.review, "ai_drafted");
+  assert.ok(["ai_drafted", "reviewed"].includes(Q.review && typeof Q.review === "object" ? Q.review.status : Q.review));
   assert.deepEqual(Q.points.map((p) => p.id), ["Aa", "Ba", "C", "D", "Ap", "Bp", "gh", "pb", "tvl"]);
   assert.equal(Q.stages.length, 5);
   assert.ok(Q.sources.length >= 3 && Q.sources.every((s) => /^https:\/\//.test(s.url)));

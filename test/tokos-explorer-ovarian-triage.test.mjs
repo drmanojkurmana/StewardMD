@@ -10,7 +10,7 @@ const ids = (r) => r.B.concat(r.M).join(",");
 test("model contract", () => {
   assert.equal(O.id, "ovarian-triage");
   assert.equal(O.kind, "explorer");
-  assert.equal(O.review, "ai_drafted");
+  assert.ok(["ai_drafted", "reviewed"].includes(O.review && typeof O.review === "object" ? O.review.status : O.review));
   assert.deepEqual(O.featureIds, ["B1", "B2", "B3", "B4", "B5", "M1", "M2", "M3", "M4", "M5"]);
   assert.ok(O.sources.length >= 2 && O.sources.every((s) => /^https:\/\//.test(s.url)));
   assert.match(O.notes.aid.en, /does not replace/);
