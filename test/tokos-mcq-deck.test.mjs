@@ -34,7 +34,7 @@ test("deck header records source, licence text and commit", () => {
 
 test("split deck: single-file deck gone, index and topic files agree, total 9196", () => {
   assert.ok(!existsSync(path.join(DIR, "..", "mcq.json")), "old single-file deck must be removed");
-  assert.deepEqual(readdirSync(DIR).sort(), ["index.json", ...CONTRACT.map((id) => id + ".json")].sort());
+  assert.deepEqual(readdirSync(DIR).sort(), ["index.json", "search.json", ...CONTRACT.map((id) => id + ".json")].sort());
   assert.equal(index.counts.total, 9196);
   assert.equal(deck.items.length, 9196);
   assert.deepEqual(index.counts, { total: 9196, d1: deck.items.filter((i) => i.d === 1).length, d2: deck.items.filter((i) => i.d === 2).length, d3: deck.items.filter((i) => i.d === 3).length });
@@ -50,7 +50,7 @@ test("split deck: single-file deck gone, index and topic files agree, total 9196
     sum += t.count;
   }
   assert.equal(sum, index.counts.total);
-  assert.ok(Math.max(...readdirSync(DIR).map((f) => readFileSync(path.join(DIR, f)).length)) < 1_000_000, "each file under 1 MB");
+  assert.ok(Math.max(...readdirSync(DIR).filter((f) => f !== "search.json").map((f) => readFileSync(path.join(DIR, f)).length)) < 1_000_000, "each topic file under 1 MB (search.json has its own cap)");
   assert.equal(index.items, undefined, "index carries no items");
 });
 

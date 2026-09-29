@@ -24,6 +24,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { writeSearch } from "./tokos-build-mcq-search.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 // Split deck: index.json (metadata, counts, topic list) + one small file per subtopic, so a phone parses only what it opens.
@@ -491,6 +492,8 @@ function main() {
   const write = (name, obj) => { const body = JSON.stringify(obj); bytes += Buffer.byteLength(body); biggest = Math.max(biggest, Buffer.byteLength(body)); fs.writeFileSync(path.join(OUT_DIR, name), body); };
   write("index.json", index);
   for (const id of SUB_IDS) write(`${id}.json`, { topic: id, items: items.filter((it) => it.t === id) });
+  const searchBytes = writeSearch(OUT_DIR); // the compact search index over the topic files just written
+  console.log(`wrote search.json ${(searchBytes / 1e6).toFixed(2)} MB`);
   console.log(JSON.stringify({ read: stats.read, repairWords: stats.repairWords, repairedStrings: stats.repairedStrings, drop: stats.drop, afterDrops: stats.afterDrops, dup: stats.dup, afterDedupe: stats.afterDedupe }, null, 1));
   console.log("difficulty:", JSON.stringify(sum.byLevel), "with explanation:", sum.withExplanation, "flagged:", sum.flagged, JSON.stringify(sum.flags));
   const pad = (s, n) => String(s).padEnd(n);

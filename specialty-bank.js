@@ -66,6 +66,62 @@
     for (var i = 0; i < items.length && out.length < cap; i++) if (hay(items[i]).indexOf(term) !== -1) out.push(items[i]);
     return out;
   }
+  /* Search index (search.json, built from the topic files by the bank build tool): {v, topics:[id], start:[first ordinal of each topic], ids:[id], p:[preview], w:{stem: "delta,delta,..." base36}}.
+     Items are numbered in topic order; a query stem matches every index stem it prefixes; all query words must hit. */
+  var STOP = "the and for are was were with that this from which not but all any has had have its can may will who what when how than then them they their there these those been being into onto also such only most more less over under one two per via due are each both either other own out off use used using following true false correct incorrect statement statements regarding about following following among between during after before while does did his her she you your our not none above below same very".split(" ");
+  var STOPSET = {}; STOP.forEach(function (w) { STOPSET[w] = 1; });
+  function stem(w) {
+    if (w.length > 5 && /ies$/.test(w)) return w.slice(0, -3) + "y";
+    if (w.length > 5 && /ing$/.test(w)) return w.slice(0, -3);
+    if (w.length > 4 && /ed$/.test(w)) return w.slice(0, -2);
+    if (w.length > 4 && /es$/.test(w)) return w.slice(0, -2);
+    if (w.length > 3 && /[^su]s$/.test(w)) return w.slice(0, -1);
+    return w;
+  }
+  // Distinct stems of a text, stopwords and single letters removed, in order of first appearance.
+  function tokens(text) {
+    var m = String(text || "").toLowerCase().match(/[a-z0-9]+/g) || [], seen = {}, out = [];
+    m.forEach(function (w) {
+      if (w.length < 2 || STOPSET[w]) return;
+      w = stem(w);
+      if (!seen[w]) { seen[w] = 1; out.push(w); }
+    });
+    return out;
+  }
+  function decodePostings(str) { var n = 0; return str.split(",").map(function (x) { n += parseInt(x, 36); return n; }); }
+  // Hits as [{id, t, p}] (item id, topic id, preview), in bank order, at most max.
+  function searchIndex(sx, term, max) {
+    term = String(term || "").trim();
+    var qs = term.length < 3 ? [] : tokens(term), keys = sx && sx.w ? Object.keys(sx.w) : [], cap = max || 25, cur = null, out = [], i, j;
+    if (!qs.length) return [];
+    qs.forEach(function (q) {
+      var mark = {}, any = false;
+      keys.forEach(function (k) { if (k.indexOf(q) === 0) decodePostings(sx.w[k]).forEach(function (o) { mark[o] = 1; any = true; }); });
+      cur = cur === null ? mark : Object.keys(cur).reduce(function (a, o) { if (mark[o]) a[o] = 1; return a; }, {});
+      if (!any) cur = {};
+    });
+    var ords = Object.keys(cur).map(Number).sort(function (a, b) { return a - b; });
+    for (i = 0; i < ords.length && out.length < cap; i++) {
+      for (j = sx.start.length - 1; j > 0 && sx.start[j] > ords[i]; j--);
+      out.push({ id: sx.ids[ords[i]], t: sx.topics[j], p: sx.p[ords[i]] });
+    }
+    return out;
+  }
+  // Draw n exam questions loading at most two topic files at a time: ids are topic ids in draw order, load(id) resolves a topic's items,
+  // pool filters to the level, keep(items) may release them. Takes ceil(n / per) from each topic, more topics if a pool runs short.
+  function examDraw(ids, load, pool, n, per, rnd, progress) {
+    var out = [], quota = Math.ceil(n / Math.max(1, per)), at = 0;
+    function step() {
+      if (out.length >= n || at >= ids.length) return Promise.resolve(out);
+      var pair = ids.slice(at, at + 2); at += 2;
+      return Promise.all(pair.map(load)).then(function (lists) {
+        lists.forEach(function (l) { out = out.concat(examPick(pool(l), Math.min(quota, n - out.length), rnd)); });
+        if (progress) progress(Math.min(at, ids.length), ids.length);
+        return step();
+      });
+    }
+    return step();
+  }
   function examPick(items, n, rnd) {
     var all = items.slice(), out = [];
     rnd = rnd || Math.random;
@@ -97,7 +153,7 @@
   }
 
   var PURE = { EXAM_N: EXAM_N, EXAM_SEC: EXAM_SEC, topics: topics, explanation: explanation, validateIndex: validateIndex, validateItems: validateItems,
-    byTopic: byTopic, search: search, examPick: examPick, examTopics: examTopics, dueTopics: dueTopics };
+    byTopic: byTopic, search: search, tokens: tokens, stem: stem, searchIndex: searchIndex, examDraw: examDraw, examPick: examPick, examTopics: examTopics, dueTopics: dueTopics };
   if (typeof module !== "undefined" && module.exports) { module.exports = PURE; return; }
   var SP = G.SPECIALTY || (G.SPECIALTY = {});
   if (!SP.features) SP.features = {};
@@ -108,7 +164,7 @@
     opts = opts || {};
     var I = host._internal, st = host._st, cfg = host.cfg, C = G.SPECIALTY_CORE, D = G.SPECIALTY_DATA, A = I.ACTIONS, K = I.KEYS;
     var ico = I.ico, esc = I.esc, fmt = I.fmt;
-    var DECK = opts.id || "mcq", INDEX = opts.index || "decks/mcq/index.json", SIZE = 20, NEW_CAP = 20, MIX_TOPICS = 3;
+    var DECK = opts.id || "mcq", INDEX = opts.index || "decks/mcq/index.json", SEARCH = opts.search || null, SIZE = 20, NEW_CAP = 20, MIX_TOPICS = 3;
     var LETTERS = ["A", "B", "C", "D"];
     function T(en, hi) { return { en: en, hi: hi }; }
     var STR = {
@@ -151,7 +207,7 @@
     function rawS(key) { return D.t(STR[key], L()); }
     function en(text) { return L() === "hi" ? '<span lang="en">' + esc(text) + "</span>" : esc(text); }
 
-    var Q = { ix: null, missing: false, err: null, loading: null, items: {}, inflight: {}, run: null, mode: "study", timer: 0, searchId: 0 };
+    var Q = { ix: null, missing: false, err: null, loading: null, items: {}, inflight: {}, sx: null, sxLoad: null, run: null, mode: "study", timer: 0, searchId: 0 };
     function $(id) { return G.document.getElementById(id); }
     function flags() { return st.store.flags || (st.store.flags = {}); }
     function topicList() { return Q.ix ? topics(Q.ix) : []; }
@@ -172,17 +228,21 @@
       }, function (e) { if (e && e.status === 404) Q.missing = true; else Q.err = e; }).then(function () { Q.loading = null; return Q.ix; });
       return Q.loading;
     }
-    function loadTopic(id) {
+    // keep === false: read the file without caching it (the timed exam holds two topic files at a time).
+    function loadTopic(id, keep) {
       if (Q.items[id]) return Promise.resolve(Q.items[id]);
-      if (Q.inflight[id]) return Q.inflight[id];
+      if (keep !== false && Q.inflight[id]) return Q.inflight[id];
       var t = topicOf(id);
       if (!t || !t.file) return Promise.reject(new Error("no topic " + id));
-      return (Q.inflight[id] = I.getJSON("decks/" + t.file).then(function (f) {
+      var pr = I.getJSON("decks/" + t.file).then(function (f) {
+        var items = (f.items || []).filter(function (it) { return it.t === id || it.t == null; });
+        items.forEach(function (it) { if (it.t == null) it.t = id; });
+        if (keep === false) return items;
         delete Q.inflight[id];
-        Q.items[id] = (f.items || []).filter(function (it) { return it.t === id || it.t == null; });
-        Q.items[id].forEach(function (it) { if (it.t == null) it.t = id; });
-        return Q.items[id];
-      }, function (e) { delete Q.inflight[id]; throw e; }));
+        return (Q.items[id] = items);
+      }, function (e) { delete Q.inflight[id]; throw e; });
+      if (keep !== false) Q.inflight[id] = pr;
+      return pr;
     }
     // Load several topics, calling back with progress; resolves with their items.
     function loadTopics(ids, progress) {
@@ -191,6 +251,10 @@
       return Promise.all(ids.map(function (id) {
         return loadTopic(id).then(function (x) { n++; if (progress) progress(ids.filter(function (y) { return Q.items[y]; }).length, ids.length); return x; });
       })).then(function (lists) { var out = []; lists.forEach(function (l) { out = out.concat(l); }); return out; });
+    }
+    function loadSearch() {
+      if (Q.sx) return Promise.resolve(Q.sx);
+      return Q.sxLoad || (Q.sxLoad = I.getJSON(SEARCH).then(function (x) { Q.sx = x; return x; }, function (e) { Q.sxLoad = null; throw e; }));
     }
     function itemById(id) { var r = null, t; for (t in Q.items) Q.items[t].forEach(function (it) { if (!r && String(it.id) === String(id)) r = it; }); return r; }
     function stats() {
@@ -268,22 +332,31 @@
       if (inp) inp.addEventListener("input", function () { G.clearTimeout(tm); tm = G.setTimeout(function () { runSearch(inp.value); }, 200); });
     }
 
-    // Search loads the topic files it has not seen yet, one by one, and lists hits as they arrive.
+    // With a search index (opts.search) the search reads only that file and lists previews; a topic file loads when a result opens.
+    // Without one, it loads the topic files it has not seen yet, one by one, and lists hits as they arrive.
     function runSearch(term) {
       var out = $("mcqResults"), stat = $("mcqSearchS"), id = ++Q.searchId, ids = topicList().map(function (t) { return t.id; });
       if (!out) return;
+      if (String(term || "").trim().length < 3) { out.innerHTML = ""; stat.textContent = ""; return; }
+      function row(id2, q, t) { return '<li><button type="button" class="mcq-hit" data-act="mcqone" data-id="' + esc(id2) + '" data-t="' + esc(t) + '"><span>' + en(q) + '</span><span class="sp-small">' + topicLabel(t) + "</span></button></li>"; }
+      if (SEARCH) {
+        stat.textContent = D.t(STR.loading, L());
+        return loadSearch().then(function (sx) {
+          if (id !== Q.searchId || !$("mcqResults")) return;
+          var hits = searchIndex(sx, term);
+          out.innerHTML = hits.map(function (h) { return row(h.id, h.p, h.t); }).join("");
+          stat.textContent = hits.length ? "" : D.t(STR.noHit, L());
+        }, function () { if (id === Q.searchId) stat.textContent = D.t(STR.loadErr, L()); });
+      }
       function paintHits() {
         if (id !== Q.searchId || !$("mcqResults")) return;
         var have = [], x;
         for (x in Q.items) have = have.concat(Q.items[x]);
         var hits = search(have, term);
-        out.innerHTML = hits.length ? hits.map(function (it) {
-          return '<li><button type="button" class="mcq-hit" data-act="mcqone" data-id="' + esc(it.id) + '"><span>' + en(it.q) + '</span><span class="sp-small">' + topicLabel(it.t) + "</span></button></li>";
-        }).join("") : "";
+        out.innerHTML = hits.map(function (it) { return row(it.id, it.q, it.t); }).join("");
         var d = ids.filter(function (y) { return Q.items[y]; }).length;
         stat.textContent = d < ids.length ? D.t(STR.searching, L()).replace("{d}", d).replace("{n}", ids.length) : hits.length ? "" : D.t(STR.noHit, L());
       }
-      if (String(term || "").trim().length < 3) { out.innerHTML = ""; stat.textContent = ""; return; }
       paintHits();
       ids.reduce(function (p, tid) { return p.then(function () { if (id !== Q.searchId) return; return loadTopic(tid).then(paintHits, function () {}); }); }, Promise.resolve()).then(paintHits);
     }
@@ -301,9 +374,10 @@
       if (Q.mode === "exam") {
         // The timed exam is a Resident (Pro) feature: every difficulty, one free trial. The gate runs before any fetch.
         return I.gate("exam", function () {
-          var ids = examTopics(topicList(), 6);
+          var ts = topicList(), ids = examTopics(ts, ts.length);
           wait(s("loading"));
-          loadTopics(ids, progressLine).then(function (all) { if (st.view === "mcq-load") start(examPick(all, EXAM_N), true); }, failed);
+          // the exam takes every difficulty (Pro); two topic files in memory at a time; 6 topics feed the exam, the rest only if a pool runs short
+          examDraw(ids, function (t) { return loadTopic(t, false); }, function (l) { return l; }, EXAM_N, 6, null, function (d) { progressLine(Math.min(d, 6), Math.min(6, ids.length)); }).then(function (all) { if (st.view === "mcq-load") start(all, true); }, failed);
         });
       }
       n = n > 0 ? n : SIZE;
@@ -465,7 +539,13 @@
     };
     A.mcqstart = function () { startMixed(); };
     A.mcqtopic = function (b) { startTopic(b.getAttribute("data-t")); };
-    A.mcqone = function (b) { var it = itemById(b.getAttribute("data-id")); if (it) start([it], false); };
+    A.mcqone = function (b) {
+      var it = itemById(b.getAttribute("data-id")), t = b.getAttribute("data-t");
+      if (it) return start([it], false);
+      if (!t) return;
+      wait(s("loading"));
+      loadTopic(t).then(function () { var x = itemById(b.getAttribute("data-id")); if (st.view === "mcq-load") { if (x) start([x], false); else renderBank(); } }, failed);
+    };
     A.mcqflagged = function () {
       var f = flags(), ids = [], x;
       for (x in f) if (typeof f[x] === "string" && ids.indexOf(f[x]) < 0 && topicOf(f[x])) ids.push(f[x]);

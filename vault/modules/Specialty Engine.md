@@ -28,7 +28,7 @@ drills, notes, explorers). Extracted from [[Ophthalmós]] without changing Ophth
   `"end"` finishes; overall and per-stage timers; `score(attempt)`; recorded as `store.sims[id]` and an FSRS card
   `drill:<id>`. A model with `init/step` and no stages is listed with a "screen coming" placeholder until its UI registers.
 - **Question bank format:** `decks/mcq/index.json` (topics with `count` and `file`) plus `decks/mcq/<topic>.json`; topic
-  files load on demand (search and the timed exam load lazily with progress). Items `{id, q, o[4], a, exp, t, d, flags?}`;
+  files load on demand. Bank config `search: "decks/mcq/search.json"` (Tokós) switches search to a compact inverted index (`tools/tokos-build-mcq-search.mjs`, run by the bank build): search fetches only that file and lists previews, a topic file loads when a result opens; without it (Ophthalmós) search loads every topic file. The timed exam draws through `examDraw`, two topic files in memory at a time, uncached. Items `{id, q, o[4], a, exp, t, d, flags?}`;
   an empty `exp` says the source has none; `flags` show the index's `flagLegend`. MBBS draws d 1 and 2. Trials:
   `bank.resident`, `exam`. The topic of each answered question is kept in `store.mcqT` so due reviews find their file.
 - **Learn:** `learn/index.json` (built by the host's builder, e.g. `tools/tokos-learn-index.mjs`), `glossary.json`,
