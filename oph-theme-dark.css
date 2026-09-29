@@ -1,0 +1,86 @@
+/* Ophthalmós follows the app's light / dark mode (owner, 2026-09-29: "white or black should be linked to
+   system, just like dark mode and light mode"). The app's mode is body.dark, which theme-sync.js keeps in
+   step with the phone's own setting.
+
+   Light is the default (oph10 tokens in ophthalmos.css). This file restores the reading-room dark palette
+   Ophthalmós had before oph10, only under body.dark. It lives in StewardMD, not the module repo, so a
+   module re-sync does not overwrite it.
+
+   In dark mode, clinical photographs are on black as always. The 73 Learn line diagrams are drawn for white,
+   so they keep their white card in dark mode too (like a printed figure). */
+
+body.dark .oph-overlay {
+  --op-link: #8cc6ff; --op-link-line: rgba(140, 198, 255, .6);
+  --op-bg: #000; --op-s1: #121214; --op-s2: #1c1c1f; --op-s3: #2c2c30; --op-line: #34343a;
+  --op-text: #f2f2f4; --op-mut: #a8a8b0; --op-acc: #3b9dff; --op-ok: #34c759; --op-bad: #ff6961; --op-warn: #ffc05a;
+  /* fill behind white text: white on it is 4.96:1 (4.68:1 hovered); white on --op-acc is 2.82:1 */
+  --op-pri-fill: #1d6ed4; --op-pri-fill-hover: #2272da;
+  color-scheme: dark;
+}
+body.dark .oph-overlay ::selection { background: rgba(59, 157, 255, .35); color: #fff; }
+
+/* ophthalmos.css */
+body.dark .oph-overlay .oph-ans[data-state="right"] { background: rgba(52, 199, 89, .12); }
+body.dark .oph-overlay .oph-ans[data-state="wrong"] { background: rgba(255, 105, 97, .12); }
+body.dark .oph-overlay .oph-hm-1 { background: rgba(59, 157, 255, .25); }
+body.dark .oph-overlay .oph-hm-2 { background: rgba(59, 157, 255, .45); }
+body.dark .oph-overlay .oph-hm-3 { background: rgba(59, 157, 255, .68); }
+@media (hover: hover) and (pointer: fine) {
+  body.dark .oph-overlay .oph-ans:not([data-state]):hover { border-color: #4a4a52; }
+  body.dark .oph-overlay .nr-pad button:not([aria-pressed="true"]):hover,
+  body.dark .oph-overlay .nr-tog:not([aria-pressed="true"]):hover { border-color: #4a4a52; }
+  body.dark .oph-overlay .ex-spot:hover { background: rgba(242, 242, 244, .08); }
+}
+
+/* ophthalmos-mcq.css */
+body.dark .oph-overlay .oph-ans[data-state="picked"] { background: rgba(59, 157, 255, .12); }
+
+/* ophthalmos-learn.css (the .diagram cards stay white on purpose) */
+body.dark .oph-overlay .ln-row[data-done="true"] .ln-num { color: var(--op-bg); }
+body.dark .oph-overlay .ln-scrim { background: rgba(0, 0, 0, .6); }
+body.dark .oph-overlay .ln-sheet { background: var(--op-s2); box-shadow: 0 -8px 32px rgba(0, 0, 0, .5); }
+body.dark .oph-overlay .ln-sheet .oph-btn.sec { background: var(--op-s3); }
+
+/* ophthalmos-notes.css (an enlarged line diagram keeps its white stage) */
+body.dark .oph-overlay .oph-article strong { color: #fff; }
+body.dark .oph-overlay .oph-zoom { background: #000; }
+
+/* ophthalmos-neuro.css */
+body.dark .oph-overlay .nr-tog[aria-pressed="true"] { background: rgba(59, 157, 255, .14); }
+body.dark .oph-overlay .nr-hessf .i rect { stroke: #6a6a72; }
+body.dark .oph-overlay .nr-hessf .f polygon { fill: rgba(59, 157, 255, .1); }
+
+/* ophthalmos-tools.css */
+body.dark .oph-overlay .tl-rop td.c1 { background: rgba(255, 105, 97, .14); }
+body.dark .oph-overlay .tl-rop td.c2 { background: rgba(255, 192, 90, .12); }
+body.dark .oph-overlay .tl-um td.s2 { color: #d4d4da; }
+body.dark .oph-overlay .tl-um td.s4 { background: #3d3d44; }
+body.dark .oph-overlay .tl-um td.here { background: rgba(59, 157, 255, .22); }
+body.dark .oph-overlay .tl-lrow[aria-current="true"] { background: rgba(59, 157, 255, .16); }
+
+/* ophthalmos-explore.css: the models go back on the black plate with light strokes */
+body.dark .oph-overlay .ex-fig { background: #000; }
+body.dark .oph-overlay .ex-ray .ex-ball { fill: #16181c; stroke: #8e8e96; }
+body.dark .oph-overlay .ex-ray .ex-cornea { stroke: #d8dce3; }
+body.dark .oph-overlay .ex-ray .ex-lensb { fill: rgba(216, 220, 227, .16); stroke: #d8dce3; }
+body.dark .oph-overlay .ex-ray .ex-rayv { stroke: #f2f2f4; }
+body.dark .oph-overlay .ex-ray .ex-rayh { stroke: var(--op-warn); }
+body.dark .oph-overlay .ex-ray .ex-fdot { stroke: #000; }
+body.dark .oph-overlay .ex-ray .ex-glass { fill: rgba(140, 198, 255, .2); }
+body.dark .oph-overlay .ex-ray .ex-target { fill: #f2f2f4; }
+body.dark .oph-overlay .ex-fx { stroke: rgba(242, 242, 244, .35); }
+body.dark .oph-overlay .ex-ffix { fill: #f2f2f4; }
+body.dark .oph-overlay .ex-path .ex-eye { fill: #1c1c1f; stroke: #d8dce3; }
+body.dark .oph-overlay .ex-path .ex-pb { stroke: #3b9dff; }
+body.dark .oph-overlay .ex-path .ex-pa { stroke: var(--op-warn); }
+body.dark .oph-overlay .ex-path .ex-lgn { fill: #2c2c30; stroke: #a8a8b0; }
+body.dark .oph-overlay .ex-path .ex-cortex { stroke: #a8a8b0; }
+body.dark .oph-overlay .ex-path .ex-lesion circle { fill: rgba(255, 105, 97, .22); }
+body.dark .oph-overlay .ex-spot:active { background: rgba(242, 242, 244, .12); }
+body.dark .oph-overlay .ex-flow li.bad { background: rgba(255, 105, 97, .1); }
+body.dark .oph-overlay .ln-foot::before, body.dark .oph-overlay .ln-rfoot::before { background: linear-gradient(rgba(0, 0, 0, 0), var(--op-bg)); }
+body.dark .oph-overlay .ex-ctl input[type="range"]::-webkit-slider-thumb { background: #f2f2f4; box-shadow: 0 1px 4px rgba(0, 0, 0, .6); }
+body.dark .oph-overlay .ex-ctl input[type="range"]::-moz-range-thumb { background: #f2f2f4; box-shadow: 0 1px 4px rgba(0, 0, 0, .6); }
+body.dark .oph-overlay .nr-field select, body.dark .oph-overlay .nr-sel {
+  background: var(--op-s1) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a8a8b0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center / 16px;
+}
