@@ -8,8 +8,9 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { mkdirSync, writeFileSync } from "node:fs";
 const HERE = dirname(fileURLToPath(import.meta.url));
-const BASE = (process.env.BASE || "http://localhost:8993/").replace(/\/?$/, "/");
-const PORT = 9413, userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/tokos-explore-ui-chrome";
+// BASE (a running server) or PORT (the server this harness starts) and CHROME_PORT override the defaults, so parallel sessions do not collide.
+const BASE = (process.env.BASE || "http://localhost:" + (process.env.PORT || 8993) + "/").replace(/\/?$/, "/");
+const PORT = +(process.env.CHROME_PORT || 9413), userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/tokos-explore-ui-chrome-" + PORT;
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const SHOTS = process.env.SHOTS || "";
 if (SHOTS) mkdirSync(SHOTS, { recursive: true });
@@ -68,7 +69,8 @@ try {
   ok(await ev(`return TOKOS_LOADER.JS.indexOf("tokos-explore-ui.js") > TOKOS_LOADER.JS.indexOf("tokos.js") && TOKOS_LOADER.CSS.indexOf("tokos-explore-ui.css") >= 0;`) === true, "loader lists the explorer UI after the host, and its stylesheet");
   await ev(`TOKOS_LOADER.load(); return 1;`);
   ok(await until(`return !!(window.TOKOS && TOKOS._exploreUI && window.TOKOS_EXPLORE_UI);`, 15000), "explorer UI loads with the engine");
-  ok(await ev(`return TOKOS._explore.length;`) === 0, "no explorer is listed before its model loads");
+  // tokos/models.json now lists the explorers, so they may already be loaded here: only a loaded model is listed.
+  ok(await ev(`return TOKOS._explore.every(function (x) { return !!(window.TOKOS_MODELS || {})[x.id]; });`) === true, "no explorer is listed before its model loads");
 
   // the models (integration lists them in tokos/models.json), then the engine's model sync registers the screens
   await ev(`window.__m=0; ${JSON.stringify(IDS)}.forEach(function(id){var s=document.createElement("script"); s.src="/tokos-models/explorer-"+id+".js"; s.onload=function(){window.__m++;}; document.head.appendChild(s);}); return 1;`);

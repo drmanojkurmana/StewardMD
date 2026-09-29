@@ -4,8 +4,9 @@ import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 const HERE = dirname(fileURLToPath(import.meta.url));
-const BASE = (process.env.BASE || "http://localhost:8997/").replace(/\/?$/, "/");
-const PORT = 9396, userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/specialty-ui-chrome";
+// BASE (a running server) or PORT (the server this harness starts) and CHROME_PORT override the defaults, so parallel sessions do not collide.
+const BASE = (process.env.BASE || "http://localhost:" + (process.env.PORT || 8997) + "/").replace(/\/?$/, "/");
+const PORT = +(process.env.CHROME_PORT || 9396), userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/specialty-ui-chrome-" + PORT;
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
 let serveProc = null;

@@ -8,8 +8,9 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { mkdirSync, writeFileSync } from "node:fs";
 const HERE = dirname(fileURLToPath(import.meta.url));
-const BASE = (process.env.BASE || "http://localhost:8993/").replace(/\/?$/, "/");
-const PORT = 9393, userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/tokos-labour-ui-chrome";
+// BASE (a running server) or PORT (the server this harness starts) and CHROME_PORT override the defaults, so parallel sessions do not collide.
+const BASE = (process.env.BASE || "http://localhost:" + (process.env.PORT || 8993) + "/").replace(/\/?$/, "/");
+const PORT = +(process.env.CHROME_PORT || 9393), userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/tokos-labour-ui-chrome-" + PORT;
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const SHOTS = process.env.SHOTS || "";
 

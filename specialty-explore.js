@@ -37,26 +37,10 @@
     var STR = {
       explore: T("Explore", "खोजें"), nExplored: T("{d} of {n} explored", "{n} में से {d} देखे"), explored: T("Explored", "देख लिया"), notYet: T("Not explored yet", "अभी नहीं देखा"),
       backLearn: T("Back to Learn", "सीखें पर वापस"), backExplore: T("Back to explorer", "एक्सप्लोरर पर वापस"), keepGoing: T("Keep going", "आगे बढ़ें"),
-      testYourself: T("Test yourself", "खुद को परखें"), lessonL: T("Lesson: {t}", "पाठ: {t}"),
-      soon: T("Screen in the next update", "स्क्रीन अगले अपडेट में"), sources: T("Sources", "स्रोत"),
-      soonLong: T("This explorer's logic is built and cited. Its interactive screen arrives in the next update of the app.", "इस एक्सप्लोरर का तर्क तैयार और उद्धृत है। इसकी इंटरैक्टिव स्क्रीन ऐप के अगले अपडेट में आएगी।")
+      testYourself: T("Test yourself", "खुद को परखें"), lessonL: T("Lesson: {t}", "पाठ: {t}")
     };
     function L() { return I.lang(); }
     function s(key, v) { return esc(D.t(STR[key], L())).replace(/\{(\w)\}/g, function (m, x) { return v && v[x] != null ? String(v[x]) : m; }); }
-    // Every explorer model (kind "explorer" in the host's models global) is listed; until its own UI registers
-    // (host.registerExplorer replaces a pending entry) it opens a "next update" screen with its sources.
-    function syncModels() {
-      var all = (cfg.models && G[cfg.models]) || {}, id;
-      for (id in all) if (Object.prototype.hasOwnProperty.call(all, id) && all[id] && all[id].kind === "explorer" && !by(all[id].id)) pending(all[id]);
-    }
-    function pending(m) {
-      host._explore.push({ id: m.id, title: m.title, line: m.subtitle || STR.soon, icon: m.icon, level: m.level, pending: true, open: function () {
-        frame(m.id, '<section class="sp-today"><p class="sp-today-line">' + s("soonLong") + '</p></section><h2 class="sp-h2">' + s("sources") + '</h2><ol class="tl-refs">' +
-          (m.sources || []).map(function (x) { return "<li>" + (x.url ? '<a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.label || x.url) + "</a>" : esc(x.label || String(x))) + "</li>"; }).join("") + "</ol>");
-      } });
-    }
-    if (host._syncers) host._syncers.push(syncModels);
-    syncModels();
     function list() { return host._explore.filter(function (x) { return !validateExplorer(x).length; }); }
     function by(id) { var r = null; host._explore.forEach(function (x) { if (x.id === id) r = x; }); return r; }
     var EX = { id: null, painted: null };

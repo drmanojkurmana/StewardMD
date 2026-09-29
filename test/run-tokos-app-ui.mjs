@@ -8,8 +8,9 @@ import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 const HERE = dirname(fileURLToPath(import.meta.url));
-const BASE = (process.env.BASE || "http://localhost:8996/").replace(/\/?$/, "/");
-const PORT = 9398, userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/tokos-app-chrome";
+// BASE (a running server) or PORT (the server this harness starts) and CHROME_PORT override the defaults, so parallel sessions do not collide.
+const BASE = (process.env.BASE || "http://localhost:" + (process.env.PORT || 8996) + "/").replace(/\/?$/, "/");
+const PORT = +(process.env.CHROME_PORT || 9398), userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/tokos-app-chrome-" + PORT;
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
 let serveProc = null;
@@ -63,16 +64,12 @@ try {
   ok(await ev(`return !!window.SPECIALTY_CORE;`) === true && reqs.some((u) => /specialty-shell\.js\?v=tok5/.test(u)) && reqs.some((u) => /tokos-ctg\.js\?v=tok5/.test(u)), "the engine and Tokós loaded on open, at the loader's token");
   await ev(`document.querySelector('#smdTokos [data-act=pick][data-t=test]').click(); return 1;`);
   ok(await until(`return !!document.querySelector('#smdTokos [data-act=clinic][data-t=ctg]');`, 20000), "hub shows the CTG clinic");
-  // Tokós 2.0 wiring: every model in tokos/models.json is listed (13 tools, 6 drills + labour + the OSCE link, 6 explorers),
-  // the two built clinics are pending entries after CTG, and a pending clinic opens its "next update" screen.
-  ok(await until(`var T=TOKOS; return T._tools.length === 13 && T._sims.length === 8 && T._explore.length === 6;`, 20000), "all 13 calculators, 6 drills + labour + OSCE and 6 explorers are listed: " + await ev(`var T=TOKOS; return [T._tools.length, T._sims.map(function(x){return x.id;}).join(","), T._explore.length].join(" | ");`));
-  ok(await ev(`return TOKOS._clinics.map(function(x){return x.id+(x.pending?"*":"");}).join(",");`) === "ctg,fetal-planes*,hc-biometry*", "clinics: CTG, then fetal planes and HC pending");
-  ok(await ev(`return !!document.querySelector('#smdTokos [data-act=clinic][data-t=fetal-planes]') && !!document.querySelector('#smdTokos [data-act=sim][data-s=osce]');`) === true, "Test hub rows for the pending fetal-planes clinic and the OSCE link");
-  await ev(`document.querySelector('#smdTokos [data-act=clinic][data-t=fetal-planes]').click(); return 1;`);
-  ok(await until(`return TOKOS._st.view === "clinicsoon";`, 5000), "a pending clinic opens its next-update screen");
-  await ev(`TOKOS._explore.filter(function(x){return x.id==="popq";})[0].open(TOKOS); return 1;`);
-  ok(await until(`return TOKOS._st.view === "explore" && /next update/.test(document.getElementById("smdTokos").textContent);`, 5000), "a pending explorer opens its next-update screen with sources");
-  await ev(`for (var i = 0; i < 5 && TOKOS._st.view !== "hub"; i++) TOKOS.back(); return 1;`);
+  // Tokós 2.0 wiring: every model in tokos/models.json is listed with its own screen (13 tools, 6 drills + the labour room
+  // + the OSCE link, 6 explorers) and the three clinics are registered.
+  ok(await until(`var T=TOKOS; return T._tools.length === 13 && T._sims.length === 8 && T._explore.length === 6;`, 20000), "all 13 calculators, 6 drills + labour + OSCE and 6 explorers are listed: " + await ev(`var T=TOKOS; return [T._tools.length, T._sims.map(function(x){return x.id;}).join(","), T._explore.map(function(x){return x.id;}).join(",")].join(" | ");`));
+  ok(await ev(`return !TOKOS._sims.some(function(x){return x.pending;});`) === true, "the labour room has its own screen (no placeholder)");
+  ok(await ev(`return TOKOS._clinics.map(function(x){return x.id;}).join(",");`) === "ctg,fetal-planes,hc-biometry", "clinics: CTG, fetal planes, HC biometry");
+  ok(await ev(`return !!document.querySelector('#smdTokos [data-act=sim][data-s=osce]');`) === true, "Test hub lists the OSCE link");
   await ev(`TOKOS.back(); return 1;`);
   ok(await until(`return !TOKOS.isOpen();`, 5000), "back() closes Tokós and returns to home");
   ok(await ev(`var a=document.activeElement; return !!(a && a.matches && a.matches('.rnav-tile[data-act=tokos]'));`) === true, "closing Tokós returns focus to the tile that opened it");

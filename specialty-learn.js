@@ -419,7 +419,7 @@
     function find(list, id) { var r = null; list.forEach(function (x) { if (!r && id && x.id === id) r = x; }); return r; }
     function doneHtml(l) {
       var t = l.test || {}, spec = t.clinic && I.clinic(t.clinic), bank = bankFor(t);
-      var test = spec && (spec.pending || st.decks[t.clinic])
+      var test = spec && st.decks[t.clinic]
         ? '<button type="button" class="sp-btn pri sp-wide" data-act="lntest">' + ico("target") + " " + s("testYourself") + '</button><p class="sp-small">' + s("testClinic", { c: D.t(spec.title, L()) }) + "</p>"
         : bank ? '<button type="button" class="sp-btn pri sp-wide" data-act="lntest">' + ico("target") + " " + s("testYourself") + '</button><p class="sp-small">' + s("testBank") + "</p>" : "";
       var sm = find(host._sims, t.sim);
@@ -730,7 +730,7 @@
       var l = W.les, t = l && l.test, ret = lessonRet(), b = bankFor(t);
       if (!t) return;
       I.leave();
-      if (t.clinic && I.clinic(t.clinic) && (I.clinic(t.clinic).pending || st.decks[t.clinic])) I.startClinic(t.clinic, { classes: t.classes });
+      if (t.clinic && I.clinic(t.clinic) && st.decks[t.clinic]) I.startClinic(t.clinic, { classes: t.classes });
       else if (b) b.topic(t.mcqTopic);
       afterJump(ret); // the paywall leaves the lesson on screen: repaint it
     };
