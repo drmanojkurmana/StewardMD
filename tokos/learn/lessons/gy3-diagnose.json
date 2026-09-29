@@ -1,0 +1,287 @@
+{
+  "id": "gy3-diagnose",
+  "unit": "gy3",
+  "level": "mbbs",
+  "minutes": 6,
+  "review": "ai_drafted",
+  "competencies": [
+    "OG30.1"
+  ],
+  "title": {
+    "en": "Diagnosing PCOS: two of three, and rule out the rest",
+    "hi": "PCOS की पहचान: तीन में से दो, और बाकी कारण हटाइए"
+  },
+  "idea": {
+    "en": "In adults you need two of three features: irregular cycles, androgen excess, and polycystic ovaries (or a high AMH). Always exclude other causes first.",
+    "hi": "वयस्कों में तीन में से दो लक्षण चाहिए: अनियमित चक्र, एंड्रोजन की अधिकता, और पॉलीसिस्टिक अंडाशय (या ऊँचा AMH)। पहले हमेशा दूसरे कारण खारिज कीजिए।"
+  },
+  "see": {
+    "diagram": "diagrams/gy3-diagnose.svg",
+    "w": 480,
+    "h": 380,
+    "alt": {
+      "en": "Three overlapping circles: blue with a wavy line for irregular cycles, red with hair strokes for androgen excess, and lavender with small follicles for polycystic ovaries. Beside them, a column of four small round icons: a green thyroid, a teal pituitary, an amber adrenal gland and three lines for other tests.",
+      "hi": "आपस में मिलते तीन गोले: टेढ़ी रेखा वाला नीला गोला अनियमित चक्र के लिए, बाल की रेखाओं वाला लाल गोला एंड्रोजन की अधिकता के लिए, और छोटे फॉलिकल वाला बैंगनी गोला पॉलीसिस्टिक अंडाशय के लिए। उनके बगल में चार छोटे गोल चिह्नों की एक कतार: हरी थायरॉइड, हरी-नीली पिट्यूटरी, सुनहरी एड्रीनल ग्रंथि और बाकी जाँचों के लिए तीन रेखाएँ।"
+    },
+    "caption": {
+      "en": "Any two circles, with other causes excluded, make the diagnosis. The four icons on the right are the causes to exclude.",
+      "hi": "कोई भी दो गोले, बाकी कारण हटाने के बाद, निदान बनाते हैं। दाईं ओर के चार चिह्न वे कारण हैं जिन्हें हटाना है।"
+    },
+    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.208,
+        "y": 0.289,
+        "label": {
+          "en": "Irregular cycles",
+          "hi": "अनियमित चक्र"
+        },
+        "note": {
+          "en": "Cycles shorter than 21 or longer than 35 days, or fewer than 8 cycles a year, from 3 years after menarche onward.",
+          "hi": "माहवारी के 3 साल बाद से 21 दिन से छोटे या 35 दिन से लंबे चक्र, या साल में 8 से कम चक्र।"
+        }
+      },
+      {
+        "x": 0.558,
+        "y": 0.284,
+        "label": {
+          "en": "Androgen excess",
+          "hi": "एंड्रोजन की अधिकता"
+        },
+        "note": {
+          "en": "Clinical (hirsutism, acne, hair loss) or biochemical (high total or free testosterone).",
+          "hi": "क्लिनिकल (हर्सुटिज़्म, मुँहासे, बाल झड़ना) या बायोकेमिकल (ऊँचा कुल या मुक्त टेस्टोस्टेरोन)।"
+        }
+      },
+      {
+        "x": 0.396,
+        "y": 0.779,
+        "label": {
+          "en": "Polycystic ovaries",
+          "hi": "पॉलीसिस्टिक अंडाशय"
+        },
+        "note": {
+          "en": "20 or more follicles in at least one ovary, or ovarian volume of 10 mL or more, or a raised AMH.",
+          "hi": "कम से कम एक अंडाशय में 20 या ज़्यादा फॉलिकल, या 10 मिली या ज़्यादा आयतन, या बढ़ा हुआ AMH।"
+        }
+      },
+      {
+        "x": 0.396,
+        "y": 0.311,
+        "label": {
+          "en": "Cycles plus androgens",
+          "hi": "चक्र और एंड्रोजन"
+        },
+        "note": {
+          "en": "Irregular cycles with androgen excess are enough. No scan or AMH is needed.",
+          "hi": "अनियमित चक्र और एंड्रोजन की अधिकता काफ़ी हैं। स्कैन या AMH की ज़रूरत नहीं।"
+        }
+      },
+      {
+        "x": 0.396,
+        "y": 0.468,
+        "label": {
+          "en": "Any two of three",
+          "hi": "तीन में से कोई दो"
+        },
+        "note": {
+          "en": "Two of the three features, with other causes excluded, give the diagnosis.",
+          "hi": "तीन में से दो लक्षण, बाकी कारण हटाने के बाद, निदान देते हैं।"
+        }
+      },
+      {
+        "x": 0.854,
+        "y": 0.184,
+        "label": {
+          "en": "TSH",
+          "hi": "TSH"
+        },
+        "note": {
+          "en": "Excludes thyroid disease.",
+          "hi": "थायरॉइड रोग को हटाता है।"
+        }
+      },
+      {
+        "x": 0.854,
+        "y": 0.395,
+        "label": {
+          "en": "Prolactin",
+          "hi": "प्रोलैक्टिन"
+        },
+        "note": {
+          "en": "Excludes hyperprolactinaemia.",
+          "hi": "हाइपरप्रोलैक्टिनीमिया को हटाता है।"
+        }
+      },
+      {
+        "x": 0.854,
+        "y": 0.605,
+        "label": {
+          "en": "17-hydroxyprogesterone",
+          "hi": "17-हाइड्रॉक्सीप्रोजेस्टेरोन"
+        },
+        "note": {
+          "en": "Excludes non-classic congenital adrenal hyperplasia.",
+          "hi": "नॉन-क्लासिक कंजेनिटल एड्रीनल हाइपरप्लेसिया को हटाता है।"
+        }
+      },
+      {
+        "x": 0.854,
+        "y": 0.816,
+        "label": {
+          "en": "FSH and others",
+          "hi": "FSH और अन्य"
+        },
+        "note": {
+          "en": "FSH checks for ovarian failure. If signs are severe or sudden, think of Cushing syndrome or an androgen-secreting tumour.",
+          "hi": "FSH अंडाशय की विफलता जाँचता है। लक्षण गंभीर या अचानक हों, तो कुशिंग सिंड्रोम या एंड्रोजन बनाने वाले ट्यूमर के बारे में सोचिए।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "The 2023 international guideline keeps the Rotterdam idea: two of three features, after other causes are excluded. AMH can now stand in for the ultrasound in adults.",
+        "hi": "2023 के अंतर्राष्ट्रीय दिशानिर्देश रॉटरडैम की सोच बनाए रखते हैं: तीन में से दो लक्षण, बाकी कारण हटाने के बाद। वयस्कों में अब AMH अल्ट्रासाउंड की जगह ले सकता है।"
+      },
+      {
+        "en": "Irregular cycles depend on the years since menarche. Normal in the first year. From 1 to under 3 years: shorter than 21 or longer than 45 days. From 3 years on: shorter than 21 or longer than 35 days, or fewer than 8 cycles a year. Any single cycle over 90 days counts. No periods by 15 also counts.",
+        "hi": "अनियमित चक्र माहवारी शुरू होने के बाद के सालों पर निर्भर करते हैं। पहले साल में सामान्य। 1 से 3 साल से कम: 21 दिन से छोटा या 45 दिन से लंबा। 3 साल के बाद: 21 दिन से छोटा या 35 दिन से लंबा, या साल में 8 से कम चक्र। कोई भी एक चक्र 90 दिन से लंबा हो तो गिना जाता है। 15 साल तक माहवारी न आना भी गिना जाता है।"
+      },
+      {
+        "en": "Step 1: irregular cycles plus clinical hyperandrogenism (hirsutism) gives the diagnosis. Step 2: if there are no clinical signs, test testosterone (total and free; mass spectrometry is best). Step 3: if only one of the two is present, adults need a scan or AMH.",
+        "hi": "चरण 1: अनियमित चक्र और क्लिनिकल हाइपरएंड्रोजेनिज़्म (हर्सुटिज़्म) निदान देते हैं। चरण 2: क्लिनिकल संकेत न हों, तो टेस्टोस्टेरोन जाँचिए (कुल और मुक्त; मास स्पेक्ट्रोमेट्री सबसे अच्छी है)। चरण 3: दोनों में से सिर्फ़ एक हो, तो वयस्कों में स्कैन या AMH चाहिए।"
+      },
+      {
+        "en": "A transvaginal scan is the most accurate. Count 2 to 9 mm follicles. If the machine is old or the scan is abdominal, use ovarian volume of 10 mL or more, or 10 or more follicles in one section. Use either the scan or AMH, not both, to avoid over-diagnosis. AMH is never used alone.",
+        "hi": "ट्रांसवजाइनल स्कैन सबसे सटीक है। 2 से 9 मिमी के फॉलिकल गिनिए। मशीन पुरानी हो या स्कैन पेट के ऊपर से हो, तो 10 मिली या ज़्यादा आयतन, या एक सेक्शन में 10 या ज़्यादा फॉलिकल इस्तेमाल कीजिए। ज़्यादा निदान से बचने के लिए स्कैन या AMH में से एक ही इस्तेमाल कीजिए, दोनों नहीं। AMH को कभी अकेले इस्तेमाल न कीजिए।"
+      },
+      {
+        "en": "The combined pill lowers androgen levels. If you must test, stop the pill for at least 3 months and use other contraception.",
+        "hi": "कंबाइंड गोली एंड्रोजन का स्तर घटा देती है। जाँच ज़रूरी हो, तो गोली कम से कम 3 महीने बंद कीजिए और दूसरा गर्भनिरोधक इस्तेमाल कीजिए।"
+      },
+      {
+        "en": "In teenagers, do not use a scan or AMH. Ovaries often look polycystic in normal teens. If she has only one feature, call her \"at risk\" and reassess by 8 years after menarche.",
+        "hi": "किशोरियों में स्कैन या AMH इस्तेमाल न कीजिए। सामान्य किशोरियों में भी अंडाशय अक्सर पॉलीसिस्टिक दिखते हैं। सिर्फ़ एक लक्षण हो, तो उसे \"जोखिम में\" कहिए और माहवारी शुरू होने के 8 साल के भीतर दोबारा आँकिए।"
+      }
+    ],
+    "analogy": {
+      "en": "Think of a fitness test with three events. You qualify by passing any two. But first check that a different problem, such as thyroid disease, is not the real reason you are slow.",
+      "hi": "तीन खेलों वाली फ़िटनेस जाँच सोचिए। कोई भी दो पास करने पर आप योग्य हैं। पर पहले यह जाँच लीजिए कि आपकी धीमी गति का असली कारण कोई और समस्या, जैसे थायरॉइड रोग, तो नहीं है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "A 15-year-old with irregular cycles and no androgen signs: too early to call it PCOS. Call her \"at risk\" and reassess.",
+      "hi": "15 साल की लड़की को अनियमित चक्र हैं और एंड्रोजन के संकेत नहीं: PCOS कहना जल्दबाज़ी है। उसे \"जोखिम में\" कहिए और दोबारा आँकिए।"
+    },
+    {
+      "en": "Rapid, severe hirsutism or a deep voice: think of a tumour, not PCOS.",
+      "hi": "तेज़ और गंभीर हर्सुटिज़्म या भारी आवाज़: ट्यूमर के बारे में सोचिए, PCOS के बारे में नहीं।"
+    },
+    {
+      "en": "A testosterone level taken while on the pill is not reliable.",
+      "hi": "गोली लेते समय लिया गया टेस्टोस्टेरोन स्तर भरोसेमंद नहीं होता।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "List the tests that exclude other causes: TSH, prolactin, 17-hydroxyprogesterone, FSH.",
+      "hi": "दूसरे कारण हटाने वाली जाँचें लिखिए: TSH, प्रोलैक्टिन, 17-हाइड्रॉक्सीप्रोजेस्टेरोन, FSH।"
+    },
+    {
+      "en": "Apply the three steps to a case of your own and say what test comes next.",
+      "hi": "तीनों चरण अपने बनाए एक केस पर लगाइए और बताइए कि अगली जाँच कौन सी होगी।"
+    }
+  ],
+  "remember": {
+    "en": "Two of three: irregular cycles, androgen excess, polycystic ovaries or high AMH. Irregular cycles plus hirsutism need no scan. Exclude thyroid disease, prolactin, 17-OHP and FSH. No scans in teenagers.",
+    "hi": "तीन में से दो: अनियमित चक्र, एंड्रोजन की अधिकता, पॉलीसिस्टिक अंडाशय या ऊँचा AMH। अनियमित चक्र और हर्सुटिज़्म में स्कैन नहीं चाहिए। थायरॉइड, प्रोलैक्टिन, 17-OHP और FSH हटाइए। किशोरियों में स्कैन नहीं।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which pair is enough for PCOS in an adult, with no scan needed?",
+        "hi": "किस जोड़ी से वयस्क में PCOS का निदान हो जाता है, बिना स्कैन के?"
+      },
+      "o": [
+        {
+          "en": "Irregular cycles and hirsutism",
+          "hi": "अनियमित चक्र और हर्सुटिज़्म"
+        },
+        {
+          "en": "Hirsutism and weight gain",
+          "hi": "हर्सुटिज़्म और वज़न बढ़ना"
+        },
+        {
+          "en": "Weight gain and acne",
+          "hi": "वज़न बढ़ना और मुँहासे"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Irregular cycles plus androgen excess are two of the three features.",
+        "hi": "अनियमित चक्र और एंड्रोजन की अधिकता तीन में से दो लक्षण हैं।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which test is NOT part of excluding other causes?",
+        "hi": "दूसरे कारण हटाने की कौन सी जाँच इसमें शामिल नहीं है?"
+      },
+      "o": [
+        {
+          "en": "TSH",
+          "hi": "TSH"
+        },
+        {
+          "en": "Prolactin",
+          "hi": "प्रोलैक्टिन"
+        },
+        {
+          "en": "CA-125",
+          "hi": "CA-125"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "CA-125 is an ovarian cancer marker and has no role here.",
+        "hi": "CA-125 अंडाशय के कैंसर का मार्कर है, यहाँ इसकी कोई भूमिका नहीं।"
+      }
+    },
+    {
+      "q": {
+        "en": "What follicle count per ovary defines polycystic morphology in adults (in at least one ovary)?",
+        "hi": "वयस्कों में पॉलीसिस्टिक मॉर्फ़ोलॉजी के लिए प्रति अंडाशय फॉलिकल की संख्या कितनी है (कम से कम एक अंडाशय में)?"
+      },
+      "o": [
+        {
+          "en": "8 or more",
+          "hi": "8 या ज़्यादा"
+        },
+        {
+          "en": "12 or more",
+          "hi": "12 या ज़्यादा"
+        },
+        {
+          "en": "20 or more",
+          "hi": "20 या ज़्यादा"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "The 2023 guideline threshold is 20 or more.",
+        "hi": "2023 के दिशानिर्देश में सीमा 20 या ज़्यादा है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "gy-menstrual"
+  },
+  "glossary": [],
+  "sources": [
+    "Teede HJ, et al. Recommendations from the 2023 international evidence-based guideline for the assessment and management of polycystic ovary syndrome. Fertil Steril 2023;120:767-793 (Algorithm 1 and recommendations 1.1 to 1.5).",
+    "Shah D, Patil M. Consensus statement on the use of oral contraceptive pills in polycystic ovarian syndrome women in India. J Hum Reprod Sci 2018;11(2)."
+  ]
+}
