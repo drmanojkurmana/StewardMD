@@ -90,6 +90,17 @@
   // Complete review: the obstetrician confirmed every graded field of this case and set review.complete = true.
   // Only then does the reveal drop the "Rule-based, pending obstetrician review" banner.
   function reviewComplete(c) { return !!(c && c.review && c.review.complete === true); }
+  /* The labels a reviewer confirms by approving a case in the Review Desk (review-desk.js shows them,
+     scripts/apply-reviews.mjs writes them into case.review). decelType only when every deceleration has
+     the same suggested subtype; a mixed case keeps the Resident deceleration type question off. */
+  function suggestedReview(c) {
+    var t = truthFor(c), r = { uc: t.uc, baselineClass: t.baseline, variability: t.variability, decels: t.decels, figo: t.figo };
+    var types = ((c.features && c.features.decels) || []).map(function (d) { return d.subtypeSuggested; });
+    if (t.decelType) r.decelType = t.decelType;
+    else if (types.length && types.every(function (x) { return x === types[0]; }) && QUESTIONS.decelType.indexOf(types[0]) >= 0) r.decelType = types[0];
+    if (c.acidosis) r.acidosis = c.acidosis;
+    return r;
+  }
   function gradeChecklist(ids, answers, truth) {
     var perQ = {}, m = 0;
     ids.forEach(function (q) { perQ[q] = answers[q] === truth[q]; if (perQ[q]) m++; });
@@ -118,7 +129,7 @@
     levelLocked: levelLocked, trialState: trialState, useTrial: useTrial,
     loadStore: loadStore, saveStore: saveStore, loadPrefs: loadPrefs, savePrefs: savePrefs,
     today: today,
-    QUESTIONS: QUESTIONS, checklistFor: checklistFor, truthFor: truthFor, reviewComplete: reviewComplete, gradeChecklist: gradeChecklist, rationaleKeys: rationaleKeys
+    QUESTIONS: QUESTIONS, checklistFor: checklistFor, truthFor: truthFor, suggestedReview: suggestedReview, reviewComplete: reviewComplete, gradeChecklist: gradeChecklist, rationaleKeys: rationaleKeys
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   else G.TOKOS_DATA = API;

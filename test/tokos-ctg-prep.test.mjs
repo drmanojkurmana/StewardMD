@@ -225,5 +225,5 @@ test("review queue: documents every review field the app reads, lists the conten
   assert.ok(md.endsWith(hand), "hand-maintained section kept verbatim at the end");
   assert.ok(reviewQueueMd(deck.cases, deck.cases.map(() => "q"), [], null).endsWith(HAND_MARK + "\n"), "a fresh queue gets an empty hand-maintained section");
   const committed = readFileSync("docs/tokos/review-queue.md", "utf8");
-  assert.ok(committed.includes(HAND_MARK) && committed.includes("## How to record a review"), "committed queue carries the generated header and the marker");
+  assert.ok(committed.includes(HAND_MARK) && committed.includes("## How a review is recorded") && committed.includes("Review Desk"), "committed queue carries the generated header and the marker");
 });
