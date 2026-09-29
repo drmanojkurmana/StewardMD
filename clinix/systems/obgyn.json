@@ -1,0 +1,955 @@
+{
+  "_comment": "The Tokos OSCE and viva stations, as a system module: disease-independent, shaped like a pathway so every runner (lesson, OSCE, viva, competency, case) works with no new code. Owns no skills; every reference is to skills/obgyn.json or skills/core.json. Ten stations, a viva pool over all obgyn skills, and two AI-patient cases (obstetric history, gynaecological history). Deep link id: tokos-osce.",
+  "id": "obgyn-osce",
+  "name": "OSCE and viva stations",
+  "fullName": "Obstetrics and gynaecology: OSCE and viva stations",
+  "system": "obgyn",
+  "kind": "system-module",
+  "oneLine": "10 timed stations: history, examination, counselling, consent and the two obstetric emergencies",
+  "estMinutes": 150,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "deepLink": "tokos-osce",
+  "chapters": [
+    {
+      "id": "approach",
+      "title": "Approaching the woman",
+      "blurb": "Consent, chaperone and privacy come before any intimate step",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.obg.intimate_consent",
+        "skill.approach.obg.pelvic_close"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "blurb": "Obstetric, gynaecological and contraception histories",
+      "skills": [
+        "skill.hx.obg.booking_lmp",
+        "skill.hx.obg.previous_pregnancies",
+        "skill.hx.obg.medical_family_drug",
+        "skill.hx.obg.menstrual_history",
+        "skill.hx.obg.gynae_symptoms",
+        "skill.hx.obg.gynae_background",
+        "skill.hx.obg.contra_eligibility"
+      ]
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Examination",
+      "blurb": "The abdomen in pregnancy, then speculum and bimanual examination",
+      "skills": [
+        "skill.exam.obg.preg_prep_inspect",
+        "skill.exam.obg.fundal_height",
+        "skill.exam.obg.leopold",
+        "skill.exam.obg.fetal_heart",
+        "skill.exam.obg.vulval_inspect",
+        "skill.exam.obg.speculum_insert",
+        "skill.exam.obg.speculum_inspect",
+        "skill.exam.obg.bimanual"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Counselling, consent and emergencies",
+      "blurb": "Bad news, contraception, consent for caesarean, and the two team stations",
+      "skills": [
+        "skill.approach.obg.bbn_setup",
+        "skill.approach.obg.bbn_disclose",
+        "skill.approach.obg.bbn_respond",
+        "skill.approach.obg.bbn_plan",
+        "skill.approach.obg.contra_counsel",
+        "skill.approach.obg.cs_setup",
+        "skill.approach.obg.cs_info",
+        "skill.approach.obg.cs_decision",
+        "skill.approach.obg.team_leader",
+        "skill.tx.obg.pph_recognise",
+        "skill.tx.obg.pph_first_response",
+        "skill.tx.obg.pph_atony_escalate",
+        "skill.tx.obg.eclampsia_abcd",
+        "skill.tx.obg.mgso4",
+        "skill.tx.obg.eclampsia_bp_delivery"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.obg.history_obstetric",
+        "title": "Obstetric history",
+        "task": "A 28-year-old woman has come to the antenatal clinic in her third pregnancy. Take her obstetric history, work out her dates, and finish with a one-sentence summary.",
+        "seconds": 420,
+        "competencies": [
+          "OG8.2",
+          "OG35.8"
+        ],
+        "skills": [
+          "skill.approach.introduce",
+          "skill.hx.obg.booking_lmp",
+          "skill.hx.obg.previous_pregnancies",
+          "skill.hx.obg.medical_family_drug"
+        ],
+        "examinerQuestions": [
+          "Give her gravidity, parity and expected date of delivery.",
+          "Which items in a previous obstetric history make you refer her to a higher facility?",
+          "Which danger symptoms did you ask about, and why?"
+        ]
+      },
+      {
+        "id": "osce.obg.exam_pregnancy",
+        "title": "Examination in pregnancy: fundal height and Leopold's manoeuvres",
+        "task": "This woman is 32 weeks pregnant by her dates. Examine her abdomen, then present the fundal height, lie, presentation, engagement and fetal heart.",
+        "seconds": 480,
+        "competencies": [
+          "OG8.3"
+        ],
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.obg.preg_prep_inspect",
+          "skill.exam.obg.fundal_height",
+          "skill.exam.obg.leopold",
+          "skill.exam.obg.fetal_heart"
+        ],
+        "examinerQuestions": [
+          "Her fundal height is 3 cm below her dates. What do you do?",
+          "You find a transverse lie at 38 weeks. What is the danger and what is your plan?",
+          "From what gestation is palpation for breech offered at every visit?"
+        ]
+      },
+      {
+        "id": "osce.obg.history_gynae",
+        "title": "Gynaecological history",
+        "task": "A 38-year-old woman complains of heavy periods. Take a gynaecological history, including her menstrual pattern, contraception and cervical screening, and finish by summarising it back to her.",
+        "seconds": 420,
+        "competencies": [
+          "OG35.1"
+        ],
+        "skills": [
+          "skill.approach.introduce",
+          "skill.hx.obg.menstrual_history",
+          "skill.hx.obg.gynae_symptoms",
+          "skill.hx.obg.gynae_background"
+        ],
+        "examinerQuestions": [
+          "Which bleeding patterns need a speculum examination rather than reassurance?",
+          "How did you quantify her blood loss?",
+          "Why do you need to know her contraception and her last cervical screening?"
+        ]
+      },
+      {
+        "id": "osce.obg.speculum",
+        "title": "Speculum examination",
+        "task": "Perform a speculum examination on this model, with consent, and describe what you see. There is no need to take a sample.",
+        "seconds": 420,
+        "competencies": [
+          "OG35.15",
+          "OG35.10"
+        ],
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.obg.intimate_consent",
+          "skill.exam.obg.vulval_inspect",
+          "skill.exam.obg.speculum_insert",
+          "skill.exam.obg.speculum_inspect",
+          "skill.approach.obg.pelvic_close"
+        ],
+        "examinerQuestions": [
+          "What did you check before you began, and why?",
+          "The cervix looks abnormal and suspicious. What is the correct action?",
+          "When is a per vaginal examination not to be done?"
+        ]
+      },
+      {
+        "id": "osce.obg.bimanual",
+        "title": "Bimanual pelvic examination",
+        "task": "Perform a bimanual examination on this model, with consent, and describe your findings for the cervix, uterus and adnexa.",
+        "seconds": 420,
+        "competencies": [
+          "OG35.10"
+        ],
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.obg.intimate_consent",
+          "skill.exam.obg.vulval_inspect",
+          "skill.exam.obg.bimanual",
+          "skill.approach.obg.pelvic_close"
+        ],
+        "examinerQuestions": [
+          "What is cervical motion tenderness, and what does it suggest?",
+          "Describe the uterus you felt: size, position, mobility and tenderness.",
+          "A woman with a missed period, pain and cervical motion tenderness: what must you exclude first?"
+        ]
+      },
+      {
+        "id": "osce.obg.bad_news_stillbirth",
+        "title": "Breaking bad news: stillbirth",
+        "task": "A woman at 36 weeks has come alone because the baby has moved less. The scan shows no fetal heartbeat. Tell her, respond to her, and explain the next steps.",
+        "seconds": 480,
+        "competencies": [
+          "OG35.7"
+        ],
+        "skills": [
+          "skill.approach.obg.bbn_setup",
+          "skill.approach.obg.bbn_disclose",
+          "skill.approach.obg.bbn_respond",
+          "skill.approach.obg.bbn_plan"
+        ],
+        "examinerQuestions": [
+          "Which words did you avoid, and why?",
+          "What did you tell her about the options for the birth?",
+          "What did you offer her about investigations and a postmortem?"
+        ]
+      },
+      {
+        "id": "osce.obg.contraception",
+        "title": "Contraception counselling",
+        "task": "A 27-year-old woman, 4 weeks after a normal delivery and fully breastfeeding, asks about contraception. Screen her eligibility and counsel her.",
+        "seconds": 480,
+        "competencies": [
+          "OG19.2"
+        ],
+        "skills": [
+          "skill.approach.introduce",
+          "skill.hx.obg.contra_eligibility",
+          "skill.approach.obg.contra_counsel"
+        ],
+        "examinerQuestions": [
+          "Which method class are you avoiding at 4 weeks postpartum while she is breastfeeding, and why?",
+          "How did you describe how well each method works?",
+          "What did you tell her about bleeding changes?"
+        ]
+      },
+      {
+        "id": "osce.obg.consent_caesarean",
+        "title": "Consent for caesarean section",
+        "task": "A 30-year-old woman in her first labour has been advised a caesarean section because labour is not progressing. Take her consent.",
+        "seconds": 480,
+        "competencies": [
+          "OG35.10",
+          "OG35.9"
+        ],
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.obg.cs_setup",
+          "skill.approach.obg.cs_info",
+          "skill.approach.obg.cs_decision"
+        ],
+        "examinerQuestions": [
+          "She declines the operation. What do you do?",
+          "The surgeon wants to add a hysterectomy during the operation. Her form covers only the caesarean. What is the rule?",
+          "Which serious risks did you name?"
+        ]
+      },
+      {
+        "id": "osce.obg.pph_team",
+        "title": "Postpartum haemorrhage: team station",
+        "task": "You are the registrar in the labour room. A woman delivered vaginally 10 minutes ago and is bleeding heavily. Her pulse is 122 per minute, her blood pressure is 90/60 and her uterus is soft. Lead the team.",
+        "seconds": 420,
+        "passMark": 60,
+        "competencies": [
+          "OG16.2",
+          "OG35.19"
+        ],
+        "skills": [
+          "skill.approach.obg.team_leader",
+          "skill.tx.obg.pph_recognise",
+          "skill.tx.obg.pph_first_response",
+          "skill.tx.obg.pph_atony_escalate"
+        ],
+        "examinerQuestions": [
+          "Which uterotonic would you avoid if she also had pre-eclampsia, and why?",
+          "What is the window for tranexamic acid?",
+          "Bleeding continues after two uterotonics. What is your escalation order?"
+        ]
+      },
+      {
+        "id": "osce.obg.eclampsia_team",
+        "title": "Eclampsia: team station",
+        "task": "A woman at 36 weeks has had a generalised seizure on the antenatal ward. Her blood pressure is 180/120. Lead the team through the first ten minutes.",
+        "seconds": 420,
+        "passMark": 60,
+        "competencies": [
+          "OG12.1"
+        ],
+        "skills": [
+          "skill.approach.obg.team_leader",
+          "skill.tx.obg.eclampsia_abcd",
+          "skill.tx.obg.mgso4",
+          "skill.tx.obg.eclampsia_bp_delivery"
+        ],
+        "examinerQuestions": [
+          "State the loading dose of magnesium sulphate you would give.",
+          "What do you check before each maintenance dose?",
+          "She becomes drowsy and her reflexes are absent. What do you do?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.hx.obg.booking_lmp",
+      "skill.hx.obg.previous_pregnancies",
+      "skill.hx.obg.medical_family_drug",
+      "skill.hx.obg.menstrual_history",
+      "skill.hx.obg.gynae_symptoms",
+      "skill.hx.obg.gynae_background",
+      "skill.hx.obg.contra_eligibility",
+      "skill.exam.obg.preg_prep_inspect",
+      "skill.exam.obg.fundal_height",
+      "skill.exam.obg.leopold",
+      "skill.exam.obg.fetal_heart",
+      "skill.approach.obg.intimate_consent",
+      "skill.exam.obg.vulval_inspect",
+      "skill.exam.obg.speculum_insert",
+      "skill.exam.obg.speculum_inspect",
+      "skill.exam.obg.bimanual",
+      "skill.approach.obg.pelvic_close",
+      "skill.approach.obg.bbn_setup",
+      "skill.approach.obg.bbn_disclose",
+      "skill.approach.obg.bbn_respond",
+      "skill.approach.obg.bbn_plan",
+      "skill.approach.obg.contra_counsel",
+      "skill.approach.obg.cs_setup",
+      "skill.approach.obg.cs_info",
+      "skill.approach.obg.cs_decision",
+      "skill.approach.obg.team_leader",
+      "skill.tx.obg.pph_recognise",
+      "skill.tx.obg.pph_first_response",
+      "skill.tx.obg.pph_atony_escalate",
+      "skill.tx.obg.eclampsia_abcd",
+      "skill.tx.obg.mgso4",
+      "skill.tx.obg.eclampsia_bp_delivery"
+    ]
+  },
+  "cases": [
+    {
+      "id": "case.obg.booking_history",
+      "system": "obgyn",
+      "title": "A woman in her third pregnancy with a swollen face and a history from her last one",
+      "initialVitals": {
+        "hr": 88,
+        "bpSystolic": 152,
+        "bpDiastolic": 100,
+        "rr": 18,
+        "spo2": 98,
+        "temp": 36.9,
+        "gcs": 15
+      },
+      "opening": "Meena Devi, 28, has come to the antenatal clinic with her mother-in-law. She says she is about seven months pregnant and has been seen only once. Introduce yourself and take a history. This is a teaching scenario, not a real patient.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Meena Devi",
+        "age": 28,
+        "sex": "female",
+        "occupation": "Homemaker",
+        "residence": "Rural, 12 km from the nearest primary health centre"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "why have you come",
+            "what is the problem",
+            "complaint",
+            "how can i help",
+            "tell me about"
+          ],
+          "reply": "I am seven months pregnant, doctor. I came for a check-up. My head has been aching for two days and my face and feet are swollen.",
+          "key": true,
+          "skillId": "skill.hx.obg.booking_lmp"
+        },
+        "lmp": {
+          "cues": [
+            "last period",
+            "lmp",
+            "last menstrual period",
+            "first day",
+            "when did your periods",
+            "date of your last"
+          ],
+          "reply": "I cannot remember the exact date, but it was the week of Holi. My periods were regular, every 28 days.",
+          "key": true,
+          "skillId": "skill.hx.obg.booking_lmp"
+        },
+        "previous": {
+          "cues": [
+            "how many pregnancies",
+            "previous pregnancies",
+            "been pregnant before",
+            "how many children",
+            "obstetric history",
+            "first pregnancy"
+          ],
+          "reply": "This is my third pregnancy. I have one daughter, who is four years old. Before this pregnancy I had a miscarriage at about ten weeks.",
+          "key": true,
+          "skillId": "skill.hx.obg.previous_pregnancies"
+        },
+        "last_pregnancy": {
+          "cues": [
+            "last pregnancy",
+            "last delivery",
+            "your daughter",
+            "how was the birth",
+            "how did you deliver",
+            "where did you deliver",
+            "birth weight",
+            "weight of the baby"
+          ],
+          "reply": "In my daughter's pregnancy my face and legs swelled in the last month and they said my blood pressure was high. I was in the district hospital for a week, and the doctors delivered the baby by an operation at eight months. She was small, about two kilos.",
+          "key": true,
+          "skillId": "skill.hx.obg.previous_pregnancies"
+        },
+        "complications": {
+          "cues": [
+            "fits",
+            "convulsions",
+            "bleeding after delivery",
+            "heavy bleeding",
+            "infection after",
+            "any complication",
+            "complications"
+          ],
+          "reply": "I had no fits. I did not bleed much after the operation and I had no infection afterwards.",
+          "key": true,
+          "skillId": "skill.hx.obg.previous_pregnancies"
+        },
+        "miscarriage": {
+          "cues": [
+            "miscarriage",
+            "abortion",
+            "curettage",
+            "cleaning of the womb",
+            "bleeding at ten weeks"
+          ],
+          "reply": "It was at about ten weeks. I bled for two days and it settled by itself. I did not need any operation or cleaning.",
+          "skillId": "skill.hx.obg.previous_pregnancies"
+        },
+        "operations": {
+          "cues": [
+            "operation",
+            "caesarean",
+            "scar",
+            "blood transfusion",
+            "were you given blood"
+          ],
+          "reply": "Yes, the operation for my daughter. The cut is low on my belly. I was not given any blood.",
+          "key": true,
+          "skillId": "skill.hx.obg.previous_pregnancies"
+        },
+        "symptoms_now": {
+          "cues": [
+            "headache",
+            "blurred vision",
+            "vision",
+            "swelling",
+            "any symptoms",
+            "symptoms now",
+            "vomiting",
+            "pain in the stomach",
+            "danger signs"
+          ],
+          "reply": "My head has been aching for two days, and my face and hands are puffy. My eyes go a little blurred in the evenings. No vomiting, and no pain in my stomach.",
+          "key": true,
+          "skillId": "skill.hx.obg.booking_lmp"
+        },
+        "bleeding_fluid": {
+          "cues": [
+            "vaginal bleeding",
+            "leaking of fluid",
+            "leaking water",
+            "watery discharge",
+            "bleeding from below",
+            "per vaginum"
+          ],
+          "reply": "No bleeding, and no water leaking.",
+          "key": true,
+          "skillId": "skill.hx.obg.booking_lmp"
+        },
+        "movements": {
+          "cues": [
+            "baby move",
+            "fetal movements",
+            "movements",
+            "kicks",
+            "baby kicking",
+            "does the baby move"
+          ],
+          "reply": "The baby moves well. I feel it many times a day.",
+          "key": true,
+          "skillId": "skill.hx.obg.booking_lmp"
+        },
+        "illness": {
+          "cues": [
+            "diabetes",
+            "sugar",
+            "blood pressure",
+            "hypertension",
+            "heart",
+            "tuberculosis",
+            "kidney",
+            "asthma",
+            "jaundice",
+            "medical history",
+            "any illness"
+          ],
+          "reply": "I have no sugar, no heart trouble and no TB. My blood pressure was high only in my daughter's pregnancy, and no one has checked it since.",
+          "key": true,
+          "skillId": "skill.hx.obg.medical_family_drug"
+        },
+        "family": {
+          "cues": [
+            "family history",
+            "runs in the family",
+            "twins in the family",
+            "thalassaemia",
+            "thalassemia",
+            "your mother",
+            "your father"
+          ],
+          "reply": "My mother has high blood pressure. Nobody in the family has sugar or TB. There are no twins in the family.",
+          "key": true,
+          "skillId": "skill.hx.obg.medical_family_drug"
+        },
+        "drugs": {
+          "cues": [
+            "medicine",
+            "tablets",
+            "any drugs",
+            "allergy",
+            "allergic",
+            "iron tablets",
+            "supplements"
+          ],
+          "reply": "I take the iron tablets the ANM gave me, when I remember. No other medicine and no allergy.",
+          "key": true,
+          "skillId": "skill.hx.obg.medical_family_drug"
+        },
+        "substances": {
+          "cues": [
+            "tobacco",
+            "smoke",
+            "alcohol",
+            "gutka",
+            "drink"
+          ],
+          "reply": "I do not smoke or drink. My husband smokes beedi at home.",
+          "key": true,
+          "skillId": "skill.hx.obg.medical_family_drug"
+        },
+        "support": {
+          "cues": [
+            "who lives with you",
+            "who is at home",
+            "safe at home",
+            "support at home",
+            "your husband",
+            "domestic violence"
+          ],
+          "reply": "I live with my husband and his parents. My mother-in-law came with me today. I feel safe at home.",
+          "skillId": "skill.hx.obg.medical_family_drug"
+        },
+        "antenatal": {
+          "cues": [
+            "antenatal",
+            "check up",
+            "checkup",
+            "scan",
+            "ultrasound",
+            "registered",
+            "tetanus",
+            "been seen before"
+          ],
+          "reply": "I went once, at about three months, and had a scan. They said all was well. I have not been back because the health centre is far.",
+          "skillId": "skill.hx.obg.booking_lmp"
+        }
+      },
+      "exam": {
+        "skill.gen.vitals": {
+          "finding": "Pulse 88 regular. Blood pressure 152/100 mmHg, and 150/98 mmHg on repeat after resting. Respiratory rate 18. SpO2 98 percent on room air. Temperature 36.9 C.",
+          "abnormal": true
+        },
+        "skill.gen.edema": {
+          "finding": "Pitting oedema of both feet and mild puffiness of the face.",
+          "abnormal": true
+        },
+        "skill.exam.obg.preg_prep_inspect": {
+          "finding": "An ovoid, longitudinal uterus that fits late pregnancy. A healed transverse scar low on the abdomen. Linea nigra present.",
+          "abnormal": true
+        },
+        "skill.exam.obg.fundal_height": {
+          "finding": "Fundal height 28 cm, between the umbilicus and the xiphisternum. Her dates suggest 30 weeks, so it is 2 cm less than expected, within the 3 cm allowance.",
+          "abnormal": false
+        },
+        "skill.exam.obg.leopold": {
+          "finding": "Longitudinal lie with a cephalic presentation. The back is on the left. The head is not engaged.",
+          "abnormal": false
+        },
+        "skill.exam.obg.fetal_heart": {
+          "finding": "Fetal heart 144 per minute, regular, heard on the left. She reports good movements.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "urine_albumin",
+        "repeat_bp"
+      ],
+      "investigations": {
+        "urine_albumin": {
+          "label": "Urine albumin (dipstick)",
+          "indicated": true,
+          "result": "Protein 2+.",
+          "note": "Albumin of 2+ together with a raised blood pressure is enough to categorise her as having pre-eclampsia (MoHFW)."
+        },
+        "repeat_bp": {
+          "label": "Repeat blood pressure after rest",
+          "indicated": true,
+          "result": "150/98 mmHg.",
+          "note": "Hypertension needs to be confirmed on a second reading, and a diastolic pressure above 110 would be a sign of imminent eclampsia."
+        },
+        "hemoglobin_estimate": {
+          "label": "Haemoglobin (haemoglobinometer)",
+          "indicated": true,
+          "result": "Done; the result is recorded for follow-up.",
+          "note": "Estimated at every antenatal contact, but it does not change the immediate plan here."
+        }
+      },
+      "differentialModel": {
+        "answer": "Pre-eclampsia is the leading diagnosis. Impending eclampsia and HELLP syndrome have to be considered because of the headache and blurred vision.",
+        "accept": [
+          "pre eclampsia",
+          "hellp syndrome"
+        ],
+        "minMatch": 1
+      },
+      "diagnosis": {
+        "answer": "Pre-eclampsia at about 30 weeks with headache and blurred vision, in a woman with hypertension and a caesarean in her last pregnancy: a high-risk pregnancy needing immediate referral.",
+        "accept": [
+          "pre eclampsia",
+          "preeclampsia"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Refer her immediately to a facility that can manage severe pre-eclampsia (blood transfusion, a neonatal unit, caesarean section). Give the Pritchard loading dose of magnesium sulphate first and tell the receiving centre, send her with an escort, and make sure she has an oral antihypertensive for the journey.",
+        "accept": [
+          "refer",
+          "admit",
+          "escort",
+          "magnesium"
+        ],
+        "minMatch": 2
+      },
+      "teachingPoints": [
+        "A bad obstetric history, such as an admission for hypertension, a baby under 2500 g or a preterm birth, is an indication for care at a higher facility (MoHFW Box 5).",
+        "She described the raised blood pressure in her last pregnancy only when asked about that pregnancy. A question that names hypertension, fits and bleeding finds it every time.",
+        "Albumin of 2+ with a raised blood pressure is enough to categorise pre-eclampsia, and a diastolic pressure above 110 points to imminent eclampsia: refer immediately (MoHFW).",
+        "A fundal height 2 cm below the dates is within the 3 cm allowance. A difference of 3 cm or more would be significant."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    {
+      "id": "case.obg.postcoital_bleeding",
+      "system": "obgyn",
+      "title": "A woman of 44 who bleeds after intercourse",
+      "initialVitals": {
+        "hr": 84,
+        "bpSystolic": 118,
+        "bpDiastolic": 74,
+        "rr": 16,
+        "spo2": 98,
+        "temp": 36.8,
+        "gcs": 15
+      },
+      "opening": "Shanti Devi, 44, has come to the gynaecology outpatient department. She says she has been bleeding after intercourse. Introduce yourself and take a gynaecological history. This is a teaching scenario, not a real patient.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Shanti Devi",
+        "age": 44,
+        "sex": "female",
+        "occupation": "Agricultural labourer",
+        "residence": "Rural, 30 km from the district hospital"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "why have you come",
+            "what is the problem",
+            "complaint",
+            "how can i help",
+            "tell me about"
+          ],
+          "reply": "I have been bleeding after I have relations with my husband, three or four times in the last three months. I also have a watery discharge that smells bad.",
+          "key": true,
+          "skillId": "skill.hx.obg.menstrual_history"
+        },
+        "bleeding_pattern": {
+          "cues": [
+            "how much bleeding",
+            "after sex",
+            "after intercourse",
+            "postcoital",
+            "spotting",
+            "between periods",
+            "intermenstrual"
+          ],
+          "reply": "It is a small amount of fresh blood straight after, and a few spots the next day. I have not bled between my periods.",
+          "key": true,
+          "skillId": "skill.hx.obg.menstrual_history"
+        },
+        "menstrual": {
+          "cues": [
+            "your periods",
+            "menstrual history",
+            "last period",
+            "lmp",
+            "regular",
+            "cycle",
+            "menopause"
+          ],
+          "reply": "My periods are regular, every 28 to 30 days, and last four days with a normal flow. The last one started three weeks ago.",
+          "key": true,
+          "skillId": "skill.hx.obg.menstrual_history"
+        },
+        "discharge": {
+          "cues": [
+            "discharge",
+            "smell",
+            "itching",
+            "watery"
+          ],
+          "reply": "Yes, a watery discharge, sometimes tinged with blood, with a bad smell, for about two months. No itching.",
+          "key": true,
+          "skillId": "skill.hx.obg.gynae_symptoms"
+        },
+        "pain": {
+          "cues": [
+            "pain",
+            "abdominal pain",
+            "pelvic pain",
+            "painful intercourse",
+            "dyspareunia"
+          ],
+          "reply": "A dull ache low in my belly on some days. It hurts a little deep inside during relations.",
+          "key": true,
+          "skillId": "skill.hx.obg.gynae_symptoms"
+        },
+        "urinary_bowel": {
+          "cues": [
+            "urine",
+            "urinary",
+            "burning",
+            "bowel",
+            "stool",
+            "constipation"
+          ],
+          "reply": "No burning when I pass urine and no blood in the urine or stool.",
+          "skillId": "skill.hx.obg.gynae_symptoms"
+        },
+        "general": {
+          "cues": [
+            "weight",
+            "fever",
+            "tired",
+            "appetite",
+            "weakness"
+          ],
+          "reply": "I have lost a little weight and I feel tired. No fever.",
+          "key": true,
+          "skillId": "skill.hx.obg.gynae_symptoms"
+        },
+        "contraception": {
+          "cues": [
+            "contraception",
+            "family planning",
+            "tubectomy",
+            "sterilisation",
+            "sterilization",
+            "pills",
+            "copper t",
+            "condoms"
+          ],
+          "reply": "I have not used anything. My husband does not like condoms.",
+          "key": true,
+          "skillId": "skill.hx.obg.gynae_background"
+        },
+        "screening": {
+          "cues": [
+            "screening",
+            "pap smear",
+            "pap test",
+            "smear",
+            "smear test",
+            "cervical smear",
+            "last smear",
+            "have you been screened",
+            "test on the cervix",
+            "cervical screening",
+            "test for the cervix"
+          ],
+          "reply": "No, I have never had any test on the cervix. Nobody has ever told me about it.",
+          "key": true,
+          "skillId": "skill.hx.obg.gynae_background"
+        },
+        "obstetric": {
+          "cues": [
+            "how many children",
+            "pregnancies",
+            "deliveries",
+            "obstetric history",
+            "age at marriage",
+            "married"
+          ],
+          "reply": "I have five children, all born at home. I was married at 16. The last baby was born six years ago.",
+          "key": true,
+          "skillId": "skill.hx.obg.gynae_background"
+        },
+        "sexual": {
+          "cues": [
+            "sexual history",
+            "partner",
+            "partners",
+            "husband",
+            "sexually transmitted",
+            "hiv"
+          ],
+          "reply": "Only my husband. I have never had an infection in that area that I know of.",
+          "key": true,
+          "skillId": "skill.hx.obg.gynae_background"
+        },
+        "medical": {
+          "cues": [
+            "medical history",
+            "diabetes",
+            "tuberculosis",
+            "allergy",
+            "medicine",
+            "tablets",
+            "past surgery",
+            "past operations"
+          ],
+          "reply": "I have no sugar, no pressure and no TB. I take no medicine, I am not allergic to anything, and I have never had an operation.",
+          "key": true,
+          "skillId": "skill.hx.obg.gynae_background"
+        },
+        "family": {
+          "cues": [
+            "family history",
+            "cancer in the family",
+            "your mother",
+            "your sister"
+          ],
+          "reply": "Nobody in my family has had cancer that I know of.",
+          "skillId": "skill.hx.obg.gynae_background"
+        },
+        "habits": {
+          "cues": [
+            "tobacco",
+            "smoke",
+            "alcohol",
+            "drink"
+          ],
+          "reply": "I do not smoke and I do not drink.",
+          "skillId": "skill.hx.obg.gynae_background"
+        }
+      },
+      "exam": {
+        "skill.gen.vitals": {
+          "finding": "Pulse 84 regular. Blood pressure 118/74 mmHg. Respiratory rate 16. SpO2 98 percent on room air. Temperature 36.8 C.",
+          "abnormal": false
+        },
+        "skill.gen.appearance": {
+          "finding": "Thin, alert and comfortable. Mild pallor of the conjunctivae.",
+          "abnormal": true
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "finding": "Vulva and perineum normal, with no warts or ulcers. A blood-stained watery discharge is visible at the introitus.",
+          "abnormal": true
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "finding": "The whole cervix is seen. It is replaced by a friable, irregular growth that bleeds on touch, with a foul-smelling blood-stained discharge. The vaginal walls look normal.",
+          "abnormal": true
+        },
+        "skill.exam.obg.bimanual": {
+          "finding": "The cervix feels bulky and firm. The uterus is of normal size, mobile and not tender. No adnexal mass. No cervical motion tenderness.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "urine_pregnancy_test",
+        "referral_colposcopy"
+      ],
+      "investigations": {
+        "urine_pregnancy_test": {
+          "label": "Urine pregnancy test",
+          "indicated": true,
+          "result": "Negative.",
+          "note": "Pregnancy is excluded first in any woman of reproductive age who is bleeding."
+        },
+        "referral_colposcopy": {
+          "label": "Urgent referral for colposcopy",
+          "indicated": true,
+          "result": "Referral made; an early appointment is arranged.",
+          "note": "A cervix that looks abnormal and suspicious needs urgent referral to colposcopy. A benign lesion such as a polyp needs only a routine gynaecological referral."
+        },
+        "vaginal_swabs": {
+          "label": "Vaginal and endocervical swabs",
+          "indicated": true,
+          "result": "Taken; results pending.",
+          "note": "Take swabs for unusual discharge; a cervical sample is taken before swabs when both are needed."
+        },
+        "cervical_cytology": {
+          "label": "Cervical screening sample (cytology)",
+          "indicated": false,
+          "result": "A sample can be taken, but it does not replace the referral.",
+          "note": "A screening test is not a diagnostic test. In a woman with symptoms it could falsely reassure, so she is referred for further investigation instead."
+        }
+      },
+      "differentialModel": {
+        "answer": "Carcinoma of the cervix has to be excluded first. Cervical infection and pelvic inflammatory disease, and benign lesions such as a polyp or ectropion, also cause postcoital bleeding.",
+        "accept": [
+          "carcinoma of the cervix",
+          "pelvic inflammatory disease"
+        ],
+        "minMatch": 1
+      },
+      "diagnosis": {
+        "answer": "Suspected carcinoma of the cervix: postcoital bleeding and a foul discharge in a woman who has never been screened, with a friable growth on the cervix, needing urgent referral for colposcopy.",
+        "accept": [
+          "carcinoma of the cervix",
+          "cervical cancer"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Refer her urgently for colposcopy without waiting for a screening sample. Take swabs for the discharge. Explain honestly and in plain words what has been seen and what will happen next, and record the examination, the offer of a chaperone and her consent.",
+        "accept": [
+          "colposcopy",
+          "urgent referral",
+          "swabs"
+        ],
+        "minMatch": 1
+      },
+      "teachingPoints": [
+        "Postcoital bleeding is a cardinal symptom of cervical cancer, and the critical step in the diagnosis is a speculum examination that lets you see the cervix.",
+        "A screening sample is not a diagnostic test. In a woman with symptoms it can falsely reassure, so she is examined and referred instead.",
+        "Ask every woman when she was last screened and what the result was. 'Never' is itself a finding.",
+        "A cervix that looks abnormal and suspicious needs urgent referral to colposcopy. Contact bleeding at sampling is common and is not on its own an indication for referral."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}
