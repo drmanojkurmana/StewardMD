@@ -1,0 +1,25 @@
+name: Tokós UI
+on:
+  pull_request:
+    branches: [main]
+    paths: ['tokos*', 'tokos/**', 'home.js', 'swipe-back.js', 'index.html', 'test/run-tokos-ui.mjs', 'test/run-tokos-app-ui.mjs', '.github/workflows/tokos-ui.yml']
+  push:
+    branches: [main]
+    paths: ['tokos*', 'tokos/**', 'home.js', 'swipe-back.js', 'index.html', 'test/run-tokos-ui.mjs', 'test/run-tokos-app-ui.mjs', '.github/workflows/tokos-ui.yml']
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CHROME: /usr/bin/google-chrome
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Tokós module (hub, clinic, calipers, grading, reveal, Escape, offline; 390 px)
+        run: node test/run-tokos-ui.mjs
+      - name: Tokós in the real app (flag off and on, deep link, back, focus)
+        run: node test/run-tokos-app-ui.mjs
