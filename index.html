@@ -67,7 +67,7 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
 try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]splashv2=1\b/.test(_sq)||localStorage.getItem("smd_splash_v2")!=="0");if(_sv)document.documentElement.classList.add("smd-splash-v2");}catch(e){}</script>
 <!-- Antibiotic-engine UI restyle (presentation-only CSS layer, scoped to #dxOverlay/#dxMgmt/classic
      engine). Flag html.abx-ui: default ON; ?abxui=0 (or localStorage smd_abx_ui="0") disables. -->
-<link rel="stylesheet" href="/abx-redesign.css?v=gold432">
+<link rel="stylesheet" href="/abx-redesign.css?v=gold432-sd1">
 <link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7">
 <link rel="stylesheet" href="/queue.css?v=q13-profilescroll-prio1-fr1">
 <link rel="stylesheet" href="/ward.css?v=ward36-rcm-fr1">
@@ -2168,7 +2168,7 @@ window.openExternal = function (u) {
 <!-- The ONE brand->generic map (app.js search, medlist.js, rx-validity.js all read it). Must load
      before all three; every tag here is defer, so document order is execution order. -->
 <script src="/brand-generics.js?v=bg1" defer></script>
-<script src="/app.js?v=gold1035-quoteref1" defer></script>
+<script src="/app.js?v=gold1035-quoteref1-sd1" defer></script>
 <!-- Firebase App Check bridge: native App Attest/Play Integrity token -> compat JS SDK. Fail-open,
      native-only, no-op unless the plugin + app-check-compat are present. Loads after app.js (which
      calls firebase.initializeApp); it polls until firebase is booted, then activates. -->

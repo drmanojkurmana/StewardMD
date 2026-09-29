@@ -208,13 +208,13 @@ html.abx-ui #inputCard .run-btn:disabled { opacity: .45; box-shadow: none; }
 
 /* ---- Decision output card → premium, severity-tinted (ramp unchanged) ----- */
 html.abx-ui :is(#outputArea, #abxWizard) .decision-banner {
-  border-radius: var(--abx-r-card); border: 1px solid var(--line); border-left-width: 5px;
+  border-radius: var(--abx-r-card); border: 1px solid var(--line);
   padding: 16px 18px; box-shadow: var(--abx-sh-card); margin-bottom: 14px;
 }
-html.abx-ui :is(#outputArea, #abxWizard) .decision-banner.green  { background: var(--green-bg);  border-color: var(--green-line);  border-left-color: var(--green); }
-html.abx-ui :is(#outputArea, #abxWizard) .decision-banner.yellow { background: var(--yellow-bg); border-color: var(--yellow-line); border-left-color: var(--yellow); }
-html.abx-ui :is(#outputArea, #abxWizard) .decision-banner.orange { background: var(--orange-bg); border-color: var(--orange-line); border-left-color: var(--orange); }
-html.abx-ui :is(#outputArea, #abxWizard) .decision-banner.red    { background: var(--red-bg);    border-color: var(--red-line);    border-left-color: var(--red); }
+html.abx-ui :is(#outputArea, #abxWizard) .decision-banner.green  { background: var(--green-bg);  border-color: var(--green-line);  }
+html.abx-ui :is(#outputArea, #abxWizard) .decision-banner.yellow { background: var(--yellow-bg); border-color: var(--yellow-line); }
+html.abx-ui :is(#outputArea, #abxWizard) .decision-banner.orange { background: var(--orange-bg); border-color: var(--orange-line); }
+html.abx-ui :is(#outputArea, #abxWizard) .decision-banner.red    { background: var(--red-bg);    border-color: var(--red-line);    }
 html.abx-ui :is(#outputArea, #abxWizard) .decision-status-label { font: 800 13px var(--sans); letter-spacing: .05em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
 html.abx-ui :is(#outputArea, #abxWizard) .decision-why { margin-top: 8px; line-height: 1.6; text-wrap: pretty; }
 html.abx-ui :is(#outputArea, #abxWizard) .decision-why .lbl { font: 800 11px var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--slate-soft); display: block; margin-bottom: 3px; }
@@ -224,13 +224,13 @@ html.abx-ui :is(#outputArea, #abxWizard) .decision-why .lbl { font: 800 11px var
    gradient that clashed with the light design). Severity ramp preserved. ---- */
 html.abx-ui .quick-answer-card {
   border-radius: var(--abx-r-card) !important; padding: 16px 18px !important;
-  border: 1px solid var(--line) !important; border-left: 5px solid var(--slate) !important;
+  border: 1px solid var(--line) !important;
   background: var(--panel) !important; color: var(--ink) !important; box-shadow: var(--abx-sh-card);
 }
-html.abx-ui .quick-answer-card.green  { background: var(--green-bg) !important;  border-color: var(--green-line) !important;  border-left-color: var(--green) !important; }
-html.abx-ui .quick-answer-card.yellow { background: var(--yellow-bg) !important; border-color: var(--yellow-line) !important; border-left-color: var(--yellow) !important; }
-html.abx-ui .quick-answer-card.orange { background: var(--orange-bg) !important; border-color: var(--orange-line) !important; border-left-color: var(--orange) !important; }
-html.abx-ui .quick-answer-card.red    { background: var(--red-bg) !important;    border-color: var(--red-line) !important;    border-left-color: var(--red) !important; }
+html.abx-ui .quick-answer-card.green  { background: var(--green-bg) !important;  border-color: var(--green-line) !important;  }
+html.abx-ui .quick-answer-card.yellow { background: var(--yellow-bg) !important; border-color: var(--yellow-line) !important; }
+html.abx-ui .quick-answer-card.orange { background: var(--orange-bg) !important; border-color: var(--orange-line) !important; }
+html.abx-ui .quick-answer-card.red    { background: var(--red-bg) !important;    border-color: var(--red-line) !important;    }
 html.abx-ui .qa-header { color: var(--slate) !important; }
 html.abx-ui .qa-label  { color: var(--slate-soft) !important; }
 html.abx-ui .qa-value  { color: var(--ink) !important; }
@@ -247,7 +247,7 @@ html.abx-ui .qa-pregnancy-note, html.abx-ui .qa-renal-flag { color: var(--slate)
 
 /* ---- Empiric regimen drug cards ------------------------------------------ */
 html.abx-ui :is(#outputArea, #abxWizard) .drug-card {
-  background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--teal);
+  background: var(--panel); border: 1px solid var(--line);
   border-radius: 14px; padding: 14px 16px; box-shadow: var(--abx-sh-card); margin: 10px 0;
 }
 html.abx-ui :is(#outputArea, #abxWizard) .drug-name { font: 800 16px var(--sans); color: var(--ink); }
@@ -447,3 +447,76 @@ html.abx-ui .app-footer-copy, html.abx-ui .app-footer-tagline { color: var(--sla
 
 /* ---- Dark mode: the app's dark tokens recolor --panel/--paper/etc.; severity
    ramp is theme-invariant by design. Nothing extra needed. --------------------*/
+
+/* ============================================================================
+ * Stewardship result page (#outputArea), de-slopped 2026-09-30 in the language the owner
+ * approved for the disease reader: serif headings, hairlines instead of cards, handbook
+ * label/value rows, no tinted boxes, stripes, pills, blinking CTA or monospace costume.
+ * Severity keeps its colour in TEXT only. "html.abx-ui body #outputArea" (1 id) + !important
+ * outranks the older !important rules here and in home.js (body.ui-v2 ...).
+ * ========================================================================== */
+html.abx-ui body #outputArea { --sd-serif: ui-serif, "New York", "Source Serif 4", Georgia, "Noto Serif", serif; --sd-cond: "Avenir Next Condensed", "Roboto Condensed", "Arial Narrow", var(--sans); }
+/* small-caps labels, one treatment everywhere */
+html.abx-ui body #outputArea :is(.qa-label, .decision-why .lbl, .sqa-q) { font: 600 14px/1.4 var(--sd-cond) !important; font-variant: all-small-caps; text-transform: none !important; letter-spacing: .04em !important; color: var(--slate-soft) !important; }
+/* share / pdf: quiet secondary actions */
+html.abx-ui body.ui-v2 #outputArea .smd-caseshare { gap: 8px; margin: 0 0 20px; }
+html.abx-ui body.ui-v2 #outputArea .smd-caseshare button { min-height: 44px; border: 1px solid var(--line) !important; background: transparent; color: var(--ink); font: 500 15px var(--sans); border-radius: 10px; transition: transform 140ms ease-out, background-color 140ms ease-out; }
+html.abx-ui body.ui-v2 #outputArea .smd-caseshare button:active { transform: scale(.97); }
+/* quick decision: a handbook table under a 2px rule */
+html.abx-ui body #outputArea .quick-answer-card,
+html.abx-ui body #outputArea .quick-answer-card:is(.green, .yellow, .orange, .red) { background: none !important; border: 0 !important; border-top: 2px solid var(--ink) !important; border-radius: 0 !important; box-shadow: none !important; padding: 12px 0 0 !important; margin: 0 0 26px !important; color: var(--ink) !important; }
+html.abx-ui body #outputArea .qa-header { font: 600 21px/1.25 var(--sd-serif) !important; letter-spacing: -.01em !important; text-transform: none !important; color: var(--ink) !important; margin: 0 0 10px !important; }
+html.abx-ui body #outputArea .qa-grid { gap: 12px 16px; }
+html.abx-ui body #outputArea .qa-value { font: 600 17px/1.3 var(--sans) !important; color: var(--ink) !important; text-transform: none !important; font-variant-numeric: tabular-nums; }
+html.abx-ui body #outputArea .qa-value.qa-abx-yes { color: var(--orange) !important; }
+html.abx-ui body #outputArea .qa-value.qa-abx-no { color: var(--green) !important; }
+html.abx-ui body #outputArea .qa-value.qa-abx-conditional { color: var(--yellow) !important; }
+html.abx-ui body #outputArea .qa-regimen { border-top: 1px solid var(--line) !important; margin-top: 14px !important; padding-top: 12px !important; }
+html.abx-ui body #outputArea .qa-regimen-row b { font: 600 20px/1.25 var(--sd-serif); }
+html.abx-ui body #outputArea .qa-regimen-meta { font: 400 15px/1.5 var(--sans) !important; font-variant-numeric: tabular-nums; color: var(--slate) !important; letter-spacing: 0 !important; }
+/* stewardship console: a quiet row link, not a banner */
+html.abx-ui body #outputArea .asp-launch-btn { position: relative; display: block; min-height: 0 !important; margin: 0 0 22px; padding: 14px 34px 14px 0; background: none; color: var(--ink); border: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); border-radius: 0 !important; box-shadow: none; text-align: left; font-weight: 400 !important; transition: background-color 140ms ease-out; }
+html.abx-ui body #outputArea .asp-launch-btn::after { content: ""; position: absolute; right: 8px; top: 50%; width: 9px; height: 9px; border-right: 2px solid var(--slate-soft); border-bottom: 2px solid var(--slate-soft); transform: translateY(-50%) rotate(-45deg); }
+html.abx-ui body #outputArea .asp-launch-btn .t { font: 600 17px/1.3 var(--sans); color: var(--ink); }
+html.abx-ui body #outputArea .asp-launch-btn .asp-launch-sub { margin-top: 4px; font: 400 14px/1.45 var(--sans); color: var(--slate); opacity: 1; }
+html.abx-ui body #outputArea .asp-launch-btn .asp-launch-cta { display: none; }
+@media (hover: hover) and (pointer: fine) { html.abx-ui body #outputArea .asp-launch-btn:hover { filter: none; background: color-mix(in srgb, var(--teal) 5%, transparent); } }
+html.abx-ui body #outputArea .asp-launch-btn:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+/* the decision: status in colour text, the reason as plain prose */
+html.abx-ui body #outputArea .decision-banner,
+html.abx-ui body #outputArea .decision-banner:is(.green, .yellow, .orange, .red) { background: none; border: 0; border-radius: 0; box-shadow: none; padding: 0; margin: 0 0 26px; overflow: visible; }
+html.abx-ui body #outputArea .decision-banner .dot, html.abx-ui body #outputArea .decision-banner::before { display: none; }
+html.abx-ui body #outputArea .decision-status-label { font: 600 19px/1.3 var(--sd-serif); letter-spacing: -.01em; text-transform: none; }
+html.abx-ui body #outputArea .decision-banner.green .decision-status-label { color: var(--green); }
+html.abx-ui body #outputArea .decision-banner.yellow .decision-status-label { color: var(--yellow); }
+html.abx-ui body #outputArea .decision-banner.orange .decision-status-label { color: var(--orange); }
+html.abx-ui body #outputArea .decision-banner.red .decision-status-label { color: var(--red); }
+html.abx-ui body #outputArea .decision-why { margin-top: 6px; font: 400 16px/1.6 var(--sans); color: var(--ink); max-width: 68ch; }
+/* numbered sections: hairline + serif heading, no card, the number as a quiet numeral */
+html.abx-ui body.ui-v2 #outputArea .card,
+html.abx-ui body #outputArea .card { background: none !important; border: 0 !important; border-top: 1px solid var(--line) !important; border-radius: 0 !important; box-shadow: none !important; padding: 16px 0 !important; margin: 0 !important; }
+html.abx-ui body #outputArea .card h2 { font: 600 20px/1.3 var(--sd-serif) !important; letter-spacing: -.01em; color: var(--ink); gap: 10px; }
+html.abx-ui body.ui-v2 #outputArea .num,
+html.abx-ui body #outputArea .num { background: none !important; color: var(--slate-soft) !important; min-width: 0 !important; height: auto !important; padding: 0 !important; border-radius: 0 !important; font: 500 15px var(--sans) !important; font-variant-numeric: tabular-nums; }
+/* inside the sections */
+html.abx-ui body.ui-v2 #outputArea .drug-card,
+html.abx-ui body #outputArea .drug-card { background: none !important; border: 0 !important; border-top: 1px solid var(--line) !important; border-radius: 0 !important; box-shadow: none !important; padding: 12px 0 !important; margin: 0 !important; }
+html.abx-ui body #outputArea .drug-name { font: 600 18px/1.3 var(--sd-serif); }
+html.abx-ui body #outputArea .drug-meta { font: 500 15px/1.5 var(--sans); font-variant-numeric: tabular-nums; color: var(--slate); }
+html.abx-ui body #outputArea .drug-why { font: 400 15px/1.55 var(--sans); color: var(--ink); }
+html.abx-ui body #outputArea :is(.stewardship-list, .stewardship-qa) { background: none; border: 0; border-radius: 0; box-shadow: none; }
+html.abx-ui body #outputArea .sqa-row { padding: 10px 0; }
+html.abx-ui body #outputArea .sqa-a { font: 400 15px/1.55 var(--sans); }
+html.abx-ui body #outputArea .no-abx-note { background: none; border: 0; border-radius: 0; padding: 0; color: var(--green); font-weight: 600; }
+html.abx-ui body #outputArea :is(.evidence-pill, .ref-chip) { font: 500 13px var(--sans); border-radius: 6px; }
+html.abx-ui body #outputArea .card h2 { text-transform: none !important; display: flex; align-items: baseline; flex-wrap: wrap; margin: 0 0 12px !important; }
+html.abx-ui body #outputArea :is(.tier-label, .tox-pill) { background: none !important; border: 0 !important; border-radius: 0 !important; padding: 0 !important; box-shadow: none !important; }
+html.abx-ui body #outputArea .tier-label { font: 600 14px/1.4 var(--sd-cond); font-variant: all-small-caps; text-transform: none; letter-spacing: .04em; }
+html.abx-ui body #outputArea .tox-pill { font: 600 16px var(--sans); }
+html.abx-ui body #outputArea .score-card { background: none !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; padding: 0 !important; }
+/* save box and patient-safety block join the page as hairline sections; their headings name them */
+html.abx-ui body #saveCasePrompt, html.abx-ui body #outputArea #smdSafetyCard { background: none !important; border: 0 !important; border-top: 1px solid var(--line) !important; border-radius: 0 !important; box-shadow: none !important; padding: 16px 0 !important; margin: 0 !important; }
+html.abx-ui body #saveCasePrompt :is(.scp-eyebrow, .scp-icon), html.abx-ui body #outputArea .smd-safety-eyebrow { display: none; }
+html.abx-ui body #saveCasePrompt .scp-title, html.abx-ui body #outputArea .smd-safety-h { font: 600 20px/1.3 var(--sd-serif) !important; letter-spacing: -.01em; color: var(--ink); }
+html.abx-ui body #outputArea .smd-safety-inputs { background: none; border: 1px solid var(--line); border-radius: 10px; }
+@media (prefers-reduced-motion: reduce) { html.abx-ui body #outputArea :is(.smd-caseshare button, .asp-launch-btn) { transition: none; } }
