@@ -13,10 +13,19 @@ tags: [infra]
 ## Apple Hide My Email (private relay) delivery
 Mail to `@privaterelay.appleid.com` is rejected by Apple unless the sender is registered: Apple
 Developer > Certificates, Identifiers & Profiles > Services > Sign in with Apple for Email
-Communication. Register the domain `stewardmd.in` (DKIM from Resend signs as the From domain) and/or
-the From addresses (`noreply@`, `verify@`). Until then every Apple-relay user misses the verified /
-failed / welcome / promo emails, and `anchor-email.js` asks them for a real address instead.
-Status as of 2026-09-28: not confirmed registered (anchor-email.js says relay mail "BOUNCES").
+Communication.
+- **Registered (owner screenshot 2026-09-29, all SPF green):** `noreply@`, `verify@`, `support@stewardmd.in`,
+  domain `maiknowledge.com`, `support@` and `hello@maiknowledge.com`. Every server sender in
+  `functions/` is covered (`admin@`/`contact@` there are a VAPID subject and an NCBI contact, not senders).
+- **Server mail passes:** Resend signs DKIM as `stewardmd.in` (`resend._domainkey`), matching the From
+  domain, which is Apple's DKIM rule. Envelope sender is `send.stewardmd.in` (SPF `amazonses.com`).
+- **Hand-written mail from Gmail does NOT pass:** root SPF is only `include:_spf.mx.cloudflare.net`
+  (Cloudflare Email Routing, receive-only MX), so Gmail "send as support@" fails SPF and signs DKIM as
+  gmail.com. To write to a relay address by hand, set Gmail's "Send mail as" SMTP to Resend
+  (`smtp.resend.com`, port 465, user `resend`, password = a Resend API key).
+- A new From address (e.g. `FROM_EMAIL` override) must be added there first, or relay users silently
+  miss it. `anchor-email.js` comment and its "Add a real email" card still say relay mail cannot arrive;
+  that predates the registration.
 
 ## Coming-soon gate
 `functions/_middleware.js` 503s public browser page-views to a coming-soon page; `/api/*`, the native app (`X-SMD-App`, currently inert), cron (`X-Admin-Token`), and the `/realapp` cookie pass through. This is why "AI/etc not working in app" until a native rebuild+reinstall.

@@ -1,7 +1,7 @@
 ---
 tags: [module, identity, cross-cutting]
 status: live (mint) / flag-gated (anchor email)
-flag: smd_steward_id_mint (def ON) · smd_steward_id (def OFF)
+flag: smd_steward_id_mint (def ON) · smd_steward_id (def ON since 2026-08-26, see steward-id-flags.js)
 ---
 # StewardMD ID
 
@@ -15,7 +15,7 @@ using a feature.
   using; all Firebase access is injected via `deps` so it unit-tests in node. `my([uid])` returns the
   resolved ID.
 - `steward-id-flags.js` — `smd_steward_id_mint` (default **ON**, kill switch for the mint) and
-  `smd_steward_id` (default **OFF**, the verified-email / Apple-proxy capture UI only).
+  `smd_steward_id` (default **ON** since 2026-08-26, the verified-email / Apple-proxy capture UI only).
 - `steward-id-onboard.js` (`SMD_STEWARD_ONBOARD`) — the sign-in bootstrap. Waits for the lazily
   loaded Firebase SDK (`SMD_loadFirebase`), then on `onAuthStateChanged` ensures the ID for every
   signed-in user. The anchor-email prompt on top of it stays behind `smd_steward_id`.
