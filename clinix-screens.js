@@ -310,7 +310,7 @@
     var sys = C() && C().systemById(cat, state.systemId);
     if (!sys) { host.innerHTML = header("Systems") + emptyState("error", "System not found", "Go back and pick another system."); return; }
 
-    var html = header(sys.title, "Start with the examination, then the diseases");
+    var html = header(sys.title, (sys.diseases || []).length ? "Start with the examination, then the diseases" : ((sys.module && sys.module.subtitle) || ""));
 
     /* The system MODULE comes first and is visually the primary action. A student who has never
      * examined a chest should not have to pick a disease before they can learn how. The diseases
@@ -328,6 +328,8 @@
     }
 
     var ds = sys.diseases || [];
+    // A system that is only a module (obgyn-osce) has no disease list to wait for.
+    if (!ds.length && sys.module) { host.innerHTML = html; return; }
     if (!ds.length) {
       html += '<section class="cx-sec"><div class="cx-sec-h">Diseases</div></section>';
       html += emptyState("hourglass_top", "Disease modules are coming",
@@ -4338,6 +4340,7 @@
 
   var API = {
     mount: mount, go: go, back: back, wipe: wipe,
+    openDisease: openDisease,   // deep links (clinix.js openDeep): the Pro lock is enforced inside it
     SCREENS: SCREENS,
     _state: function () { return state; },
     _finishStation: finishStation,

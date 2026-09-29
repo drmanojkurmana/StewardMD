@@ -19,7 +19,7 @@
   var SCRIPTS = [
     "/clinix-lexicon.js?v=cxa927-lex1-lazy1",
     "/clinix-model.js?v=cx21a927-lex1-prolock-lazy1-open1",
-    "/clinix-dx.js?v=cxa927-dx1-lazy1",
+    "/clinix-dx.js?v=cxa927-dx1-lazy1-obg1",
     "/clinix-content.js?v=cx16a927-dxvocab-prolock-lazy1-own4",
     "/clinix-diagrams.js?v=cx13-lazy1-own4",
     "/clinix-audio.js?v=cx-stridor3-api1-snd1-lazy1",
@@ -29,7 +29,7 @@
     "/clinix-physiology.js?v=cx11a927-sandbox1-lazy1",
     "/clinix-profile.js?v=cx10a927-lazy1",
     "/clinix-examiner.js?v=cx10a927-lazy1",
-    "/clinix-screens.js?v=cx26a927-sandbox1-prolock-snd1-lazy1-own4"
+    "/clinix-screens.js?v=cx26a927-sandbox1-prolock-snd1-lazy1-own4-obg1"
   ];
 
   function flags() { try { return (typeof window !== "undefined" && window.SMD_CLINIX_FLAGS) || null; } catch (e) { return null; } }
@@ -149,7 +149,21 @@
     return !!(el && el.classList.contains("cx-open"));
   }
 
-  var API = { open: open, close: close, isOn: on, isOpen: isOpen, load: load, SCRIPTS: SCRIPTS };
+  /* Deep links other modules can open. "tokos-osce" is the Tokos OSCE and viva stations (the obgyn-osce
+   * pathway). The Pro lock is enforced inside the screens' openDisease(), exactly as for a tap on the
+   * card. Returns false for an unknown id or when the flag is off (a complete no-op, like open()). */
+  var DEEP_LINKS = { "tokos-osce": "obgyn-osce" };
+  function openDeep(id) {
+    if (!on() || !Object.prototype.hasOwnProperty.call(DEEP_LINKS, id)) return false;
+    open();
+    load().then(function (ok) {
+      var S = window.SMD_CLINIX_SCREENS;
+      if (ok && isOpen() && S && S.openDisease) S.openDisease(DEEP_LINKS[id]);
+    });
+    return true;
+  }
+
+  var API = { open: open, close: close, isOn: on, isOpen: isOpen, load: load, openDeep: openDeep, DEEP_LINKS: DEEP_LINKS, SCRIPTS: SCRIPTS };
   if (typeof window !== "undefined") { window.CLINIX = API; window.SMD_CLINIX = API; }
   if (typeof module !== "undefined" && module.exports) module.exports = API;
 })();

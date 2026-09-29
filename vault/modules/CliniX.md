@@ -307,3 +307,29 @@ photos; whether non-respiratory presentations should be Pro. The Pro lock is
 client-only (content ships in the bundle); any caller can send `mode:"clinix-tutor"` to use the 60/day
 `clinix` bucket (`functions/api/ai/[[path]].js:1567`), which has no role check.
 
+
+## Obstetrics and gynaecology OSCE and viva pack (2026-09-29, Tokos 2.0 Task 7.17)
+10 timed stations as a normal skill pack, no engine change: obstetric history, examination in pregnancy
+(fundal height, Leopold), gynaecological history, speculum, bimanual, breaking bad news (stillbirth),
+contraception counselling, consent for caesarean, PPH team, eclampsia team. Dropped from the plan's list:
+cervical screening counselling (the Tokos cervical-screening explorer covers it; add it as one skill plus one
+station in `skills/obgyn.json` / `systems/obgyn.json` if wanted).
+- **Files:** `clinix/skills/obgyn.json` (32 skills, each with a rubric, viva probes, sources with URL, `ai_drafted`),
+  `clinix/systems/obgyn.json` (module `obgyn-osce`: 4 chapters, 10 `osce.stations`, a viva pool over all 32 skills,
+  2 AI-patient `cases`), two `clinix/manifest.json` entries (`skillPacks` + system `obgyn`, `contentVersion` 0.9.3-obgyn).
+- **Pro:** the system is not `free`, so the Pro lock applies exactly as for cardiovascular. Locked = shown, not hidden.
+- **Deep link:** `CLINIX.openDeep("tokos-osce")` (clinix.js `DEEP_LINKS`) opens the module through
+  `SMD_CLINIX_SCREENS.openDisease`, so the lock is enforced. Unknown id or flag off returns false and does nothing.
+  Tokos runs on the free MBBS tier, so a free Tokos user who follows the link meets the CliniX Pro notice: owner decision.
+- **AI patient:** CliniX has it only in Case mode, so the two personas (booking history, postcoital bleeding) are `cases`.
+  They deliberately keep the plan stage free text: `clinix-dx.js planOptions` draws generic medicine distractors, and
+  `accept` lists of one or two terms keep the legacy text marking passable (it needs half of the accept terms).
+- **Sources opened while authoring:** MoHFW ANC and SBA guideline 2010, NICE NG201 and NG192 (+ Appendix A), ICMR PPH STW
+  (Dec 2025), WHO PPH consolidated guideline 2025, FOGSI-Gestosis-ICOG HDP GCPR 2019, RCOG GTG 55 (2024), SPIKES, WHO/JHU
+  Family Planning Handbook 2022, UKMEC 2025, NHS cervical sample taker training, Samira Kohli v Prabha Manchanda (2008),
+  TeachMeObGyn and Stanford Medicine 25 for the OSCE steps. Numbers are pinned in `test/clinix-obgyn-osce.test.mjs`.
+- **English only.** No CliniX pack carries Hindi (grep for Devanagari in `clinix/` is empty), so no Hindi was added.
+- **Tokens:** editing `clinix-screens.js`, `clinix-dx.js` (SYSTEM_MAP `obgyn`) and `clinix.js` means the `?v=` of `clinix.js`
+  in `index.html` must be bumped by the integrator, or a cached `clinix.js` keeps loading the old screens file.
+- **NMC:** stations carry an optional `competencies` array (OG8.2, OG8.3, OG35.x, OG16.2, OG19.2, OG12.1, ...), checked against
+  the official CBME 2024 list in `origin/feat/tokos2-nmc`. CliniX ignores the field; the Tokos mapping file can read it.
