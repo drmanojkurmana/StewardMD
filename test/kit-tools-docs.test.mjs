@@ -321,6 +321,58 @@ test("apply-reviews: validates, rewrites only the review object, and never downg
   assert.match(md, /Specialty kit `k-one`\*\*: Approve after minor edits/); assert.match(md, /> tweak X/); assert.match(md, /already approved by Dr Z/);
 });
 
+test("apply-reviews: Tokós case approve writes the approved labels into that case only; rationale approve marks it reviewed", () => {
+  const dir = mkdtempSync(join(tmpdir(), "rev-tok-"));
+  mkdirSync(join(dir, "tokos/decks"), { recursive: true });
+  const deckText = readFileSync(join(ROOT, "tokos/decks/ctg.json"), "utf8"), ratText = readFileSync(join(ROOT, "tokos/rationale.json"), "utf8");
+  writeFileSync(join(dir, "tokos/decks/ctg.json"), deckText); writeFileSync(join(dir, "tokos/rationale.json"), ratText);
+  const x = { schema: 1, reviewer: { name: "Dr Obs", regNo: "55", verified: true }, decisions: [
+    { kind: "tokos", id: "case-1031", decision: "approve", comment: "", at: "2026-09-30T08:00:00Z" },
+    { kind: "tokos", id: "case-1028", decision: "approve", comment: "", at: "2026-09-30T08:00:00Z" },
+    { kind: "tokos", id: "case-1495", decision: "changes", comment: "Bradycardia in the last third", at: "2026-09-30T08:00:00Z" },
+    { kind: "tokos", id: "rationale", decision: "approve", comment: "", at: "2026-09-30T08:00:00Z" },
+    { kind: "tokos", id: "calipers", decision: "approve-minor", comment: "Hindi wording", at: "2026-09-30T08:00:00Z" },
+    { kind: "tokos", id: "case-9999", decision: "approve", comment: "", at: "2026-09-30T08:00:00Z" } ] };
+  assert.deepEqual(AR.validateExport(x), []);
+  const p = AR.plan(x, { root: dir });
+  assert.deepEqual(p.updates.map((u) => u.id), ["case-1031", "case-1028", "rationale"]);
+  assert.deepEqual(p.feedback.map((d) => d.id), ["case-1495", "calipers"]);
+  assert.deepEqual(p.skipped.map((d) => d.id), ["case-9999"]);
+  // both case approvals land in one deck text (the second builds on the first)
+  const deckOut = p.updates[1].text, before = JSON.parse(deckText), after = JSON.parse(deckOut);
+  const c1 = after.cases.find((c) => c.id === "1031");
+  assert.deepEqual(c1.review, { by: "Dr Obs, Reg. No. 55", date: "2026-09-30", uc: "normal", baselineClass: "normal", variability: "normal", decels: "present", figo: "normal", decelType: "variable", acidosis: "normal", complete: true });
+  assert.equal(after.cases.find((c) => c.id === "1028").review.complete, true);
+  assert.ok(!("decelType" in after.cases.find((c) => c.id === "1028").review), "mixed suggested subtypes: no decelType");
+  assert.equal(JSON.stringify(after, null, 1), deckOut, "deck keeps its generated form");
+  after.cases.forEach((c, i) => { if (c.id !== "1031" && c.id !== "1028") assert.deepEqual(c, before.cases[i]); else { c.review = null; assert.deepEqual(c, before.cases[i]); } });
+  const TD = require("../tokos-data.js"), rc = JSON.parse(deckOut).cases.find((c) => c.id === "1031");
+  assert.equal(TD.reviewComplete(rc), true); assert.equal(TD.truthFor(rc).figo, "normal"); assert.ok(TD.checklistFor(rc, "resident").includes("decelType"));
+  // rationale: only its review object changes, in place
+  const r = p.updates[2];
+  assert.equal(r.text, ratText.replace('"review": { "status": "ai_drafted" }', '"review": { "status": "reviewed", "reviewer": "Dr Obs, Reg. No. 55, 2026-09-30" }'));
+  // already reviewed is never changed
+  writeFileSync(join(dir, "tokos/decks/ctg.json"), deckOut);
+  const again = AR.plan({ ...x, decisions: [x.decisions[0]] }, { root: dir });
+  assert.equal(again.updates.length, 0); assert.match(again.skipped[0].why, /already reviewed by Dr Obs/);
+  // the real deck and rationale were not touched
+  assert.equal(readFileSync(join(ROOT, "tokos/decks/ctg.json"), "utf8"), deckText); assert.equal(readFileSync(join(ROOT, "tokos/rationale.json"), "utf8"), ratText);
+  assert.match(AR.feedbackMarkdown(x, p, "2026-09-30"), /Tokós `case-1495`\*\*: Needs changes/);
+});
+
+test("review desk: Tokós items, one per case and per text block, state from the content", () => {
+  const deck = JSON.parse(readFileSync(join(ROOT, "tokos/decks/ctg.json"), "utf8")), rat = JSON.parse(readFileSync(join(ROOT, "tokos/rationale.json"), "utf8"));
+  const items = REV._tokosItems(deck, rat);
+  assert.equal(items.length, deck.cases.length + 3);
+  assert.deepEqual(items.slice(-3).map((i) => i.id), ["rationale", "checklist", "calipers"]);
+  assert.equal(items[0].id, "case-" + deck.cases[0].id); assert.match(items[0].title, /^Tokós CTG case \d+$/);
+  assert.ok(items.every((i) => i.status === "ai_drafted"));
+  deck.cases[0].review = { by: "Dr X", complete: true }; rat.reviewCalipers = { status: "reviewed" };
+  const again = REV._tokosItems(deck, rat);
+  assert.equal(again[0].status, "reviewed"); assert.equal(again[again.length - 1].status, "reviewed");
+  assert.ok(items.every((i) => AR.validateExport({ schema: 1, reviewer: { name: "a" }, decisions: [{ kind: "tokos", id: i.id, decision: "approve", at: "2026-09-30T00:00:00Z" }] }).length === 0), "every Tokós id passes the export check");
+});
+
 /* ================================ source watch ================================ */
 test("source watch: collects cited URLs, fingerprints visible text only, and classifies changes", () => {
   const s = SW.collectSources();

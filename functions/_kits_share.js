@@ -426,7 +426,7 @@ export async function histForget(ctx, body) {
 /* ------------------------------------------------------------------ F1: review decisions */
 export async function reviewsPut(ctx, body) {
   const list = (Array.isArray(body && body.decisions) ? body.decisions : []).slice(0, LIMITS.reviews).map((x) => ({
-    kind: ["protocol", "kit", "consent"].indexOf(x && x.kind) >= 0 ? x.kind : "", id: ID_RE.test((x && x.id) || "") ? String(x.id).slice(0, 80) : "",
+    kind: ["protocol", "kit", "consent", "tokos"].indexOf(x && x.kind) >= 0 ? x.kind : "", id: ID_RE.test((x && x.id) || "") ? String(x.id).slice(0, 80) : "",
     decision: ["approve", "approve-minor", "changes"].indexOf(x && x.decision) >= 0 ? x.decision : "", comment: cleanText(x && x.comment, 2000),
     at: /^\d{4}-\d{2}-\d{2}T/.test((x && x.at) || "") ? String(x.at).slice(0, 30) : ""
   })).filter((x) => x.kind && x.id && x.decision && x.at && (x.decision === "approve" || x.comment));

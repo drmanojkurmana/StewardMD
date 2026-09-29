@@ -10935,3 +10935,10 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   signs off the extraction review (owner: "Me, yes and start"). [[Dose Calculator]]
 - **Owner, 2026-09-28 ("The doses in our database drug monograph are already verified, use the same"):**
   `smd_dose_calc` defaults ON; the calculator's "UNDER REVIEW" pill is removed. Kill switch `smd_dose_calc = "0"`.
+
+## 2026-09-29 - Tokós lives natively in StewardMD and duplicates the Ophthalmós engine
+- Tokós lives natively in StewardMD (not a synced repo) and duplicates the FSRS/zoom engine from Ophthalmós until a third specialty module (rule of three). Flag `smd_tokos` default OFF. [[Tokós]]
+
+## 2026-09-29 - Tokós ON for all during testing; reviews go through the Review Desk
+- **Owner, 2026-09-29:** `smd_tokos` defaults ON for every user while the app is in testing, like Ophthalmós (home tile shown by default; kill switch `smd_tokos = "0"` or `?tokos=0`, which also blocks the route, the MaiK chip and `TOKOS.openCase`). This replaces the earlier "OFF until every case is reviewed" launch gate. Labels stay marked "Rule-based, pending obstetrician review" and the draft footer stays until each case's `review.complete` is true.
+- Obstetrician approvals are collected in the in-app Review Desk (Tokós tab: one item per CTG case plus the teaching text blocks); `scripts/apply-reviews.mjs` writes an approved case's labels into `tokos/decks/ctg.json`. `docs/tokos/review-queue.md` stays as the pipeline notes. [[Tokós]] [[Review Desk]]

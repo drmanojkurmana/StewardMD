@@ -1095,6 +1095,13 @@
     // existing MEDCALC/KB/drugs — not the patient treatment-plan engine). Flag-gated inside SMD_ONCOHOME.open().
     atlas: function () { if (window.ATLAS && ATLAS.open) ATLAS.open(); else toast("RadioAnatome loading…"); },
     ophthalmos: function () { if (window.OPHTHALMOS && OPHTHALMOS.open) OPHTHALMOS.open(); else toast("Ophthalmós loading…"); },
+    // Tokós stays shut when its kill switch is set, whatever the entry (tile, stewardmd://tokos, MaiK tool chip):
+    // a quiet no-op, like SURGX/CliniX/PGLOG, decided by the same eligible() that hides the tile.
+    tokos: function () {
+      var t = HOME_TOOLS.filter(function (x) { return x.act === "tokos"; })[0];
+      if (!t || !homeToolEligible(t)) return;
+      if (window.TOKOS && TOKOS.open) TOKOS.open(); else toast("Tokós loading…");
+    },
     oncohome: function () { if (window.SMD_ONCOHOME && SMD_ONCOHOME.open) SMD_ONCOHOME.open(); else toast("ONCQIS loading…"); },
     oncotree: function () { if (window.SMD_ONCOTREE && SMD_ONCOTREE.open) SMD_ONCOTREE.open(); else toast("OncoTree loading…"); },
     staging: function () { if (window.SMD_ONCOSTAGING && SMD_ONCOSTAGING.openList) SMD_ONCOSTAGING.openList(); else toast("Cancer Staging loading…"); },
@@ -2114,6 +2121,11 @@
     // content is ai_drafted, so every screen carries a "To be verified · draft" mark until sign-off.
     { act: "ophthalmos", ic: "eye", anim: "ophthalmos", tt: "Ophthalmós", sub: "Eye imaging clinic",
       eligible: function () { try { var q = (location.search.match(/[?&]ophthalmos=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_ophthalmos") !== "0"; } catch (e) { return true; } } },
+    // Tokós (tokos.js): OBGYN CTG clinic trainer. ON for all while the app is in testing (owner decision
+    // 2026-09-29); kill switch smd_tokos="0" or ?tokos=0. Labels stay "rule-based, pending review" until an
+    // obstetrician approves each case in the Review Desk.
+    { act: "tokos", ic: "monitor_heart", tt: "Tokós", sub: "CTG clinic",
+      eligible: function () { try { var q = (location.search.match(/[?&]tokos=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_tokos") !== "0"; } catch (e) { return true; } } },
     { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
     // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).
     { act: "hospital", ic: "local_hospital", tt: "Hospital", sub: "OPD · ICU · Ward", defOn: false },

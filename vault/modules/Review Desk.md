@@ -9,8 +9,9 @@ Two tools for keeping AI-drafted clinical content honest (owner's list F1, F2).
 
 ## Review desk (F1)
 Home > Add Tool > "Review content" (`home.js` `act:"review"`, defOn false). Lists every protocol
-([[Clinical Protocols]]), specialty kit ([[Specialty Kits]]) and consent template
-([[Clinical Documents]]) with its review state. A reviewer reads an item ("Read it" opens it on top),
+([[Clinical Protocols]]), specialty kit ([[Specialty Kits]]), consent template
+([[Clinical Documents]]) and, in the Tokós tab, every [[Tokós]] CTG case and teaching text block with its review
+state (kind `tokos`, ids `case-<id>`, `rationale`, `checklist`, `calipers`; see the Tokós note for what approve writes). A reviewer reads an item ("Read it" opens it on top),
 chooses **Approve**, **Approve after the minor edits I describe** or **Needs changes**, comments, and
 exports all decisions as one JSON file through the share sheet (clipboard on the web).
 - Decisions are stored on the phone (`smd_review_decisions`: content ids, decisions, comments; never
@@ -23,7 +24,9 @@ exports all decisions as one JSON file through the share sheet (clipboard on the
 byte-identical; the script checks the parse is otherwise equal). Approve-minor and needs-changes go to
 `vault/handoff/review-feedback.md` as a checklist; approve-minor changes status only with
 `--include-minor` once the edits are made. Already reviewed or approved items are never changed.
-An unverified reviewer needs `--accept-unverified` (the owner vouches). Then the touched bundles are
+An unverified reviewer needs `--accept-unverified` (the owner vouches). Tokós approvals write
+`tokos/decks/ctg.json` (the case's `review`, stable `JSON.stringify(deck, null, 1)`) or `tokos/rationale.json`, with no
+rebuild step. Then the touched bundles are
 rebuilt; run the tests and commit.
 
 ## Source watch (F2)
@@ -43,7 +46,7 @@ Reg. No. and verified state come from the ID token, not the phone. The owner dow
 `GET /api/kits/reviews/all` (owner only) and runs `node scripts/apply-reviews.mjs <file>` on it as is.
 
 ## Clinical updates tab (2026-09-28)
-A fourth tab, shown only to registered bulletin signers and owners, drawn by `bulletins-desk.js`. It is the
+A fifth tab, shown only to registered bulletin signers and owners, drawn by `bulletins-desk.js`. It is the
 signing desk for [[Clinical Bulletins]] and, unlike the tabs above, reads and writes the server directly.
 
 Key files: `review-desk.js`, `clinical-docs.css` (styles), `scripts/apply-reviews.mjs`,
