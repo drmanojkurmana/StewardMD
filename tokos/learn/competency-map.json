@@ -1,0 +1,988 @@
+{
+ "review": "ai_drafted",
+ "about": "Maps each NMC CBME 2024 OG competency (competencies.json) to Tokos unit ids from master plan Section 5, contract items (clinic:, drill:, explorer:, tool:) and OSCE station slugs from plan Task 7.17. A competency is in map (at least one unit, item or station) or in unmapped, never both. suggestedUnit names the MBBS unit that should gain a lesson when no MBBS unit covers the competency. Lesson-level mapping is done by the integrator once lessons exist.",
+ "coverage": {
+  "total": 142,
+  "withUnit": 117,
+  "withUnitOrItem": 120,
+  "withUnitItemOrOsce": 122,
+  "withMbbsUnit": 110,
+  "unmapped": 20,
+  "pctUnitOrItem": 84.5,
+  "pctUnitItemOrOsce": 85.9,
+  "pctMbbsUnit": 77.5
+ },
+ "map": {
+  "OG1.1": {
+   "units": [
+    "obr8"
+   ],
+   "note": "MDSR lesson (obr8) covers maternal deaths at Resident level; MBBS lesson on birth rate, MMR, morbidity and near miss to be added",
+   "suggestedUnit": "ob2"
+  },
+  "OG1.3": {
+   "units": [
+    "ob11"
+   ],
+   "note": "abortion is covered by ob11; stillbirth definition to be added (see OG8.9)"
+  },
+  "OG1.5": {
+   "units": [
+    "ob2"
+   ],
+   "note": "PMSMA, IFA and Td are in ob2; JSY, JSSK, SUMAN and birth and death registration to be added"
+  },
+  "OG2.1": {
+   "units": [
+    "gy1"
+   ]
+  },
+  "OG3.1": {
+   "units": [
+    "ob1",
+    "gy2"
+   ],
+   "items": [
+    "explorer:cycle"
+   ]
+  },
+  "OG4.1": {
+   "units": [
+    "ob1"
+   ]
+  },
+  "OG5.1": {
+   "units": [
+    "ob7",
+    "obr6"
+   ]
+  },
+  "OG5.2": {
+   "units": [
+    "ob2"
+   ]
+  },
+  "OG6.1": {
+   "units": [
+    "ob1"
+   ]
+  },
+  "OG7.1": {
+   "units": [
+    "ob1"
+   ]
+  },
+  "OG8.1": {
+   "units": [
+    "ob2"
+   ],
+   "items": [
+    "tool:edd"
+   ]
+  },
+  "OG8.2": {
+   "units": [
+    "ob2"
+   ],
+   "osce": [
+    "obstetric-history"
+   ]
+  },
+  "OG8.3": {
+   "units": [
+    "ob2"
+   ],
+   "osce": [
+    "exam-in-pregnancy"
+   ]
+  },
+  "OG8.4": {
+   "units": [
+    "ob2",
+    "ob12"
+   ],
+   "items": [
+    "clinic:ctg",
+    "tool:weightgain"
+   ]
+  },
+  "OG8.5": {
+   "units": [
+    "ob3"
+   ],
+   "note": "pelvic assessment and CPD are not in the ob3 title; add with OG13.1"
+  },
+  "OG8.6": {
+   "units": [
+    "ob2"
+   ],
+   "items": [
+    "tool:weightgain"
+   ]
+  },
+  "OG8.7": {
+   "units": [
+    "ob2"
+   ]
+  },
+  "OG8.8": {
+   "units": [
+    "ob2",
+    "ob12"
+   ],
+   "items": [
+    "clinic:fetal-planes",
+    "clinic:hc-biometry"
+   ]
+  },
+  "OG8.10": {
+   "units": [
+    "ob10",
+    "obr5"
+   ],
+   "items": [
+    "tool:vbac"
+   ]
+  },
+  "OG9.1": {
+   "units": [
+    "ob11"
+   ]
+  },
+  "OG9.2": {
+   "units": [
+    "ob11"
+   ],
+   "note": "recurrent pregnancy loss to be included in the miscarriage lessons"
+  },
+  "OG9.3": {
+   "units": [
+    "ob10",
+    "ob11"
+   ]
+  },
+  "OG9.4": {
+   "units": [
+    "ob11",
+    "gyr7"
+   ]
+  },
+  "OG9.5": {
+   "units": [
+    "ob11"
+   ]
+  },
+  "OG10.1": {
+   "units": [
+    "ob6"
+   ]
+  },
+  "OG10.2": {
+   "units": [
+    "ob6",
+    "obr3"
+   ]
+  },
+  "OG11.1": {
+   "units": [
+    "ob9",
+    "obr2"
+   ],
+   "items": [
+    "drill:twins"
+   ]
+  },
+  "OG12.1": {
+   "units": [
+    "ob5"
+   ],
+   "items": [
+    "tool:mgso4",
+    "drill:eclampsia"
+   ],
+   "osce": [
+    "eclampsia-team"
+   ]
+  },
+  "OG12.2": {
+   "units": [
+    "ob7"
+   ],
+   "items": [
+    "tool:ganzoni"
+   ]
+  },
+  "OG12.3": {
+   "units": [
+    "ob7"
+   ],
+   "items": [
+    "tool:dipsi"
+   ]
+  },
+  "OG12.4": {
+   "units": [
+    "ob7",
+    "obr6"
+   ]
+  },
+  "OG12.5": {
+   "units": [
+    "ob7"
+   ],
+   "note": "UTI in pregnancy is not in the ob7 sub-list: lesson to be added"
+  },
+  "OG12.6": {
+   "units": [
+    "ob7"
+   ],
+   "note": "only hepatitis B is in the ob7 sub-list: liver disease of pregnancy (ICP, AFLP) to be added"
+  },
+  "OG12.7": {
+   "units": [
+    "ob7"
+   ]
+  },
+  "OG12.8": {
+   "units": [
+    "ob9"
+   ],
+   "items": [
+    "tool:antid"
+   ]
+  },
+  "OG12.9": {
+   "units": [
+    "ob7"
+   ]
+  },
+  "OG12.10": {
+   "units": [
+    "ob7"
+   ],
+   "note": "gynaecological and surgical disorders in pregnancy: lesson to be added"
+  },
+  "OG12.11": {
+   "units": [
+    "ob12",
+    "obr1"
+   ],
+   "items": [
+    "tool:efw"
+   ]
+  },
+  "OG13.1": {
+   "units": [
+    "ob3"
+   ],
+   "note": "pelvis and its diameters: lesson to be added"
+  },
+  "OG13.2": {
+   "units": [
+    "ob3"
+   ],
+   "items": [
+    "explorer:mechanism",
+    "drill:labour"
+   ]
+  },
+  "OG13.3": {
+   "units": [
+    "ob3"
+   ],
+   "items": [
+    "tool:bishop",
+    "drill:labour",
+    "explorer:mechanism",
+    "clinic:ctg"
+   ]
+  },
+  "OG13.4": {
+   "units": [
+    "ob8",
+    "obr8"
+   ]
+  },
+  "OG13.5": {
+   "units": [
+    "ob3"
+   ],
+   "items": [
+    "drill:labour"
+   ]
+  },
+  "OG13.6": {
+   "units": [
+    "ob3"
+   ],
+   "items": [
+    "drill:labour"
+   ]
+  },
+  "OG13.7": {
+   "units": [
+    "ob3"
+   ],
+   "items": [
+    "drill:labour"
+   ],
+   "note": "logbook of 10 deliveries needs a clinical setting; the simulator supports preparation only"
+  },
+  "OG14.2": {
+   "units": [
+    "obr5"
+   ],
+   "note": "uterine rupture is a Resident topic in Section 5; MBBS lesson to be added",
+   "suggestedUnit": "ob10"
+  },
+  "OG14.3": {
+   "units": [
+    "ob9"
+   ],
+   "items": [
+    "drill:breech"
+   ]
+  },
+  "OG15.1": {
+   "units": [
+    "ob10",
+    "obr8"
+   ],
+   "items": [
+    "drill:breech"
+   ],
+   "note": "cerclage is in obr8"
+  },
+  "OG15.2": {
+   "units": [
+    "ob10"
+   ]
+  },
+  "OG16.1": {
+   "units": [
+    "ob6",
+    "obr3"
+   ],
+   "items": [
+    "drill:pph"
+   ]
+  },
+  "OG16.2": {
+   "units": [
+    "ob6"
+   ],
+   "items": [
+    "drill:pph"
+   ],
+   "osce": [
+    "pph-team"
+   ]
+  },
+  "OG16.3": {
+   "units": [
+    "ob6"
+   ],
+   "note": "uterine inversion is not named in the ob6 sub-list: lesson to be added"
+  },
+  "OG16.4": {
+   "units": [
+    "ob12",
+    "obr1"
+   ],
+   "items": [
+    "tool:efw"
+   ],
+   "note": "NMC text repeats OG12.11 (IUGR) under third-stage complications"
+  },
+  "OG17.1": {
+   "units": [
+    "ob4"
+   ]
+  },
+  "OG17.2": {
+   "units": [
+    "ob4"
+   ]
+  },
+  "OG17.3": {
+   "units": [
+    "ob4"
+   ],
+   "note": "mastitis and breast abscess to be added to the breastfeeding lessons"
+  },
+  "OG18.1": {
+   "units": [],
+   "items": [
+    "tool:apgar"
+   ],
+   "note": "no unit covers newborn assessment and resuscitation; the Apgar tool covers the asphyxia score only",
+   "suggestedUnit": "ob3"
+  },
+  "OG18.3": {
+   "units": [],
+   "items": [
+    "tool:apgar"
+   ],
+   "note": "no unit covers birth asphyxia; the Apgar tool covers the score only",
+   "suggestedUnit": "ob3"
+  },
+  "OG19.1": {
+   "units": [
+    "ob4",
+    "gy8"
+   ],
+   "items": [
+    "tool:mec"
+   ]
+  },
+  "OG19.2": {
+   "units": [
+    "ob4",
+    "gy8"
+   ],
+   "items": [
+    "tool:mec"
+   ],
+   "osce": [
+    "contraception-counselling"
+   ]
+  },
+  "OG19.3": {
+   "units": [
+    "gy8",
+    "ob4"
+   ]
+  },
+  "OG19.4": {
+   "units": [
+    "ob4",
+    "gy8"
+   ],
+   "items": [
+    "tool:mec"
+   ]
+  },
+  "OG20.1": {
+   "units": [
+    "ob10",
+    "gyr8"
+   ]
+  },
+  "OG20.2": {
+   "units": [
+    "ob10",
+    "gyr8"
+   ]
+  },
+  "OG20.3": {
+   "units": [
+    "obr7"
+   ],
+   "note": "PC and PNDT Act is Resident only in Section 5; MBBS lesson to be added with the MTP Act lesson",
+   "suggestedUnit": "ob10"
+  },
+  "OG21.1": {
+   "units": [
+    "gy8"
+   ],
+   "items": [
+    "tool:mec"
+   ]
+  },
+  "OG21.2": {
+   "units": [
+    "gy8"
+   ]
+  },
+  "OG22.1": {
+   "units": [
+    "gy4"
+   ]
+  },
+  "OG22.2": {
+   "units": [
+    "gy4"
+   ]
+  },
+  "OG23.1": {
+   "units": [
+    "gyr2"
+   ],
+   "note": "puberty is in Resident adolescent gynaecology (gyr2) only; MBBS lesson to be added",
+   "suggestedUnit": "gy2"
+  },
+  "OG23.2": {
+   "units": [
+    "gy2",
+    "gyr2"
+   ]
+  },
+  "OG23.3": {
+   "units": [
+    "gyr2"
+   ],
+   "note": "precocious puberty is in gyr2 only; MBBS lesson to be added",
+   "suggestedUnit": "gy2"
+  },
+  "OG24.1": {
+   "units": [
+    "gy2"
+   ],
+   "items": [
+    "explorer:palm-coein",
+    "explorer:cycle"
+   ]
+  },
+  "OG25.1": {
+   "units": [
+    "gy2",
+    "gyr2"
+   ],
+   "items": [
+    "explorer:cycle"
+   ]
+  },
+  "OG26.1": {
+   "units": [
+    "gy6",
+    "gyr4"
+   ],
+   "note": "fistulae fit gy6 and gyr4; genital injuries are not named in Section 5"
+  },
+  "OG26.2": {
+   "units": [
+    "gy6",
+    "gyr4"
+   ],
+   "note": "NMC text repeats OG26.1; fistulae fit gy6 and gyr4, genital injuries are not named in Section 5"
+  },
+  "OG27.1": {
+   "units": [
+    "gy4"
+   ]
+  },
+  "OG27.2": {
+   "units": [
+    "gy4"
+   ]
+  },
+  "OG27.3": {
+   "units": [
+    "gy4"
+   ]
+  },
+  "OG28.1": {
+   "units": [
+    "gy7",
+    "gyr1"
+   ]
+  },
+  "OG28.2": {
+   "units": [
+    "gy7"
+   ]
+  },
+  "OG28.3": {
+   "units": [
+    "gy7",
+    "gyr1"
+   ]
+  },
+  "OG28.4": {
+   "units": [
+    "gy7",
+    "gyr1"
+   ]
+  },
+  "OG29.1": {
+   "units": [
+    "gy5"
+   ]
+  },
+  "OG30.1": {
+   "units": [
+    "gy3"
+   ]
+  },
+  "OG30.2": {
+   "units": [
+    "gy3"
+   ]
+  },
+  "OG31.1": {
+   "units": [
+    "gy6",
+    "gyr4"
+   ],
+   "items": [
+    "explorer:popq"
+   ]
+  },
+  "OG32.1": {
+   "units": [
+    "gy9"
+   ]
+  },
+  "OG32.2": {
+   "units": [
+    "gy9",
+    "gy12"
+   ]
+  },
+  "OG33.1": {
+   "units": [
+    "gy12",
+    "gy10"
+   ]
+  },
+  "OG33.2": {
+   "units": [
+    "gy12",
+    "gyr5"
+   ]
+  },
+  "OG33.3": {
+   "units": [
+    "gy10"
+   ],
+   "items": [
+    "explorer:cervical-screening"
+   ],
+   "osce": [
+    "cervical-screening-counselling"
+   ]
+  },
+  "OG33.4": {
+   "units": [
+    "gy10"
+   ],
+   "items": [
+    "explorer:cervical-screening"
+   ]
+  },
+  "OG33.5": {
+   "units": [
+    "gy10"
+   ],
+   "items": [
+    "explorer:cervical-screening"
+   ],
+   "note": "treatment of CIN (cryotherapy, thermal ablation, LEEP) is not in the gy10 title: lesson to be added"
+  },
+  "OG34.1": {
+   "units": [
+    "gy12"
+   ]
+  },
+  "OG34.2": {
+   "units": [
+    "gy12",
+    "gy11"
+   ],
+   "items": [
+    "tool:rmi",
+    "explorer:ovarian-triage"
+   ]
+  },
+  "OG34.3": {
+   "units": [
+    "ob11"
+   ]
+  },
+  "OG34.5": {
+   "units": [
+    "gy5",
+    "gy6",
+    "gyr6"
+   ],
+   "note": "hysterectomy, myomectomy and prolapse surgery are in gy5 and gy6; laparoscopy and hysteroscopy are in gyr6"
+  },
+  "OG34.6": {
+   "units": [
+    "gy5",
+    "gyr3"
+   ]
+  },
+  "OG35.1": {
+   "units": [],
+   "osce": [
+    "obstetric-history",
+    "gynae-history"
+   ],
+   "note": "history and general examination are OSCE skills with no lesson home",
+   "suggestedUnit": "ob2"
+  },
+  "OG35.3": {
+   "units": [],
+   "items": [
+    "tool:meows",
+    "drill:collapse"
+   ],
+   "note": "recognition and referral are covered by the MEOWS tool and the collapse drill only",
+   "suggestedUnit": "ob6"
+  },
+  "OG35.4": {
+   "units": [
+    "gy5",
+    "gy11"
+   ],
+   "items": [
+    "explorer:ovarian-triage"
+   ]
+  },
+  "OG35.5": {
+   "units": [
+    "gy4"
+   ],
+   "osce": [
+    "gynae-history"
+   ]
+  },
+  "OG35.6": {
+   "units": [
+    "gy4"
+   ],
+   "osce": [
+    "gynae-history"
+   ]
+  },
+  "OG35.7": {
+   "units": [],
+   "osce": [
+    "breaking-bad-news"
+   ],
+   "note": "communication skill (AETCOM) with no lesson home",
+   "suggestedUnit": "ob2"
+  },
+  "OG35.8": {
+   "units": [
+    "ob2"
+   ],
+   "items": [
+    "tool:edd"
+   ],
+   "osce": [
+    "obstetric-history"
+   ]
+  },
+  "OG35.10": {
+   "units": [
+    "ob10",
+    "gyr8"
+   ],
+   "osce": [
+    "consent-caesarean"
+   ]
+  },
+  "OG35.14": {
+   "units": [
+    "ob7"
+   ],
+   "note": "universal precautions: add to the HIV and hepatitis B lessons"
+  },
+  "OG35.15": {
+   "units": [
+    "gy10"
+   ],
+   "items": [
+    "explorer:cervical-screening"
+   ],
+   "osce": [
+    "cervical-screening-counselling",
+    "speculum-bimanual"
+   ]
+  },
+  "OG35.16": {
+   "units": [
+    "ob3"
+   ],
+   "items": [
+    "drill:labour"
+   ]
+  },
+  "OG35.17": {
+   "units": [
+    "ob10"
+   ]
+  },
+  "OG35.18": {
+   "units": [
+    "gy8"
+   ]
+  },
+  "OG35.19": {
+   "units": [
+    "ob6"
+   ],
+   "items": [
+    "drill:pph"
+   ],
+   "osce": [
+    "pph-team"
+   ]
+  },
+  "OG36.2": {
+   "units": [
+    "ob2",
+    "ob4",
+    "gy8"
+   ]
+  },
+  "OG36.3": {
+   "units": [
+    "gy10"
+   ],
+   "items": [
+    "explorer:cervical-screening"
+   ]
+  },
+  "OG37.1": {
+   "units": [
+    "ob10"
+   ]
+  },
+  "OG37.3": {
+   "units": [
+    "gy5",
+    "gy6"
+   ]
+  },
+  "OG37.6": {
+   "units": [
+    "ob10",
+    "ob9"
+   ],
+   "items": [
+    "drill:breech"
+   ]
+  },
+  "OG37.7": {
+   "units": [
+    "ob10",
+    "ob11"
+   ]
+  },
+  "OG38.1": {
+   "units": [
+    "gyr6"
+   ],
+   "note": "laparoscopy is Resident only in Section 5; MBBS lesson to be added",
+   "suggestedUnit": "gy11"
+  },
+  "OG38.2": {
+   "units": [
+    "gyr6"
+   ],
+   "note": "hysteroscopy is Resident only in Section 5; MBBS lesson to be added",
+   "suggestedUnit": "gy2"
+  },
+  "OG38.3": {
+   "units": [
+    "gy8",
+    "gyr6"
+   ]
+  }
+ },
+ "unmapped": [
+  {
+   "code": "OG1.2",
+   "suggestedUnit": "ob2",
+   "note": "perinatal and neonatal mortality and audit: lesson to be added"
+  },
+  {
+   "code": "OG1.4",
+   "suggestedUnit": "ob10",
+   "note": "Robson classification and caesarean audit: lesson to be added"
+  },
+  {
+   "code": "OG8.9",
+   "suggestedUnit": "ob12",
+   "note": "causes and management of stillbirth (intrauterine fetal death): lesson to be added"
+  },
+  {
+   "code": "OG9.6",
+   "suggestedUnit": "ob11",
+   "note": "hyperemesis gravidarum is not in the ob11 sub-list: lesson to be added"
+  },
+  {
+   "code": "OG13.8",
+   "suggestedUnit": "ob3",
+   "note": "respectful maternity care: lesson to be added"
+  },
+  {
+   "code": "OG14.1",
+   "suggestedUnit": "ob3",
+   "note": "obstructed labour: no abnormal-labour unit in Section 5, lesson to be added"
+  },
+  {
+   "code": "OG18.2",
+   "suggestedUnit": "ob3",
+   "note": "neonatal resuscitation steps: lesson to be added"
+  },
+  {
+   "code": "OG18.4",
+   "suggestedUnit": "ob3",
+   "note": "principles of newborn resuscitation and common problems: lesson to be added"
+  },
+  {
+   "code": "OG34.4",
+   "suggestedUnit": "gy2",
+   "note": "D and C, EA-ECC and cervical biopsy: lesson to be added (endometrial sampling in the AUB work-up)"
+  },
+  {
+   "code": "OG35.2",
+   "suggestedUnit": "ob2",
+   "note": "cross-cutting clinical reasoning: carried by case vignettes in each unit"
+  },
+  {
+   "code": "OG35.9",
+   "suggestedUnit": "ob10",
+   "note": "ethics (AETCOM) is cross-cutting: the consent and MTP lesson can carry it"
+  },
+  {
+   "code": "OG35.11",
+   "suggestedUnit": "ob2",
+   "note": "writing a case record: lesson to be added"
+  },
+  {
+   "code": "OG35.12",
+   "suggestedUnit": "ob4",
+   "note": "writing a discharge summary: lesson to be added"
+  },
+  {
+   "code": "OG35.13",
+   "suggestedUnit": "ob6",
+   "note": "writing a referral note: lesson to be added"
+  },
+  {
+   "code": "OG35.20",
+   "suggestedUnit": "ob10",
+   "note": "urinary catheterisation: lesson to be added"
+  },
+  {
+   "code": "OG36.1",
+   "suggestedUnit": "ob2",
+   "note": "cross-cutting need-based and cost-effective treatment planning: carried by case vignettes"
+  },
+  {
+   "code": "OG37.2",
+   "suggestedUnit": "gy11",
+   "note": "laparotomy: lesson to be added to the surgery lessons"
+  },
+  {
+   "code": "OG37.4",
+   "suggestedUnit": "gy2",
+   "note": "D and C: lesson to be added (see OG34.4)"
+  },
+  {
+   "code": "OG37.5",
+   "suggestedUnit": "gy2",
+   "note": "EA-ECC: lesson to be added (see OG34.4)"
+  },
+  {
+   "code": "OG38.4",
+   "suggestedUnit": "ob10",
+   "note": "medical certificates: lesson to be added"
+  }
+ ]
+}
