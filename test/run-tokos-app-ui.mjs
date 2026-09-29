@@ -56,12 +56,12 @@ try {
   await load(BASE);
   // lazy loading: app boot requests the loader and no engine or Tokós file
   const ENG = /\/(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?\.(js|css)|tokos(-core|-data|-stage|-ctg|-calipers)?\.(js|css)|tokos-models\/)/;
-  ok(reqs.some((u) => /tokos-loader\.js\?v=tok5/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads tokos-loader.js and no engine or Tokós file" + (reqs.filter((u) => ENG.test(u)).length ? ": " + reqs.filter((u) => ENG.test(u)).join(", ") : ""));
+  ok(reqs.some((u) => /tokos-loader\.js\?v=tok6/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads tokos-loader.js and no engine or Tokós file" + (reqs.filter((u) => ENG.test(u)).length ? ": " + reqs.filter((u) => ENG.test(u)).join(", ") : ""));
   ok(await until(tile, 10000), "default (no flag): the Tokós home tile renders without being added from Add Tool");
   await ev(`var t=document.querySelector('.rnav-tile[data-act=tokos]'); t.focus(); t.click(); return 1;`);
   ok(await until(`return TOKOS.isOpen() && !!document.getElementById("smdTokos");`, 10000), "tile opens the Tokós overlay");
   ok(await until(`return !!document.querySelector('#smdTokos [data-act=pick][data-t=test]');`, 20000), "first open loads Tokós and asks Learn or Test");
-  ok(await ev(`return !!window.SPECIALTY_CORE;`) === true && reqs.some((u) => /specialty-shell\.js\?v=tok5/.test(u)) && reqs.some((u) => /tokos-ctg\.js\?v=tok5/.test(u)), "the engine and Tokós loaded on open, at the loader's token");
+  ok(await ev(`return !!window.SPECIALTY_CORE;`) === true && reqs.some((u) => /specialty-shell\.js\?v=tok6/.test(u)) && reqs.some((u) => /tokos-ctg\.js\?v=tok6/.test(u)), "the engine and Tokós loaded on open, at the loader's token");
   await ev(`document.querySelector('#smdTokos [data-act=pick][data-t=test]').click(); return 1;`);
   ok(await until(`return !!document.querySelector('#smdTokos [data-act=clinic][data-t=ctg]');`, 20000), "hub shows the CTG clinic");
   // Tokós 2.0 wiring: every model in tokos/models.json is listed with its own screen (13 tools, 6 drills + the labour room
@@ -129,6 +129,19 @@ try {
   await ev(`document.getElementById('rv_dec').value='approve'; document.getElementById('rv_name').value='Dr Test'; document.querySelector('#smdReview [data-rv-act="save"]').click(); return 1;`);
   ok(await until(`return (JSON.parse(localStorage.getItem('smd_review_decisions')||'{}')['tokos:rationale']||{}).decision === 'approve';`), "a Tokós decision is saved like other content (kind tokos)");
   await ev(`localStorage.removeItem('smd_review_decisions'); SMD_REVIEW.close(); return 1;`);
+
+  // OSCE: CliniX opens above Tokós; back (swipe-back.js) acts on CliniX, and Tokós keeps its screen underneath
+  await ev(`SMD_openRoute("tokos"); return 1;`);
+  await until(`return !!document.querySelector('#smdTokos [data-act=sim][data-s=osce]');`, 20000);
+  const tokView = await ev(`return TOKOS._st.view;`);
+  await ev(`document.querySelector('#smdTokos [data-act=sim][data-s=osce]').click(); return 1;`);
+  ok(await until(`return !!(window.CLINIX && CLINIX.isOpen() && document.getElementById("clinixRoot") && document.getElementById("clinixRoot").textContent.length > 50);`, 20000), "the OSCE entry opens CliniX");
+  await sleep(1500);
+  const cxBefore = await ev(`return document.getElementById("clinixRoot").innerHTML.length + ":" + document.getElementById("clinixRoot").textContent.slice(0, 200);`);
+  await ev(`SMD_SWIPE_BACK.goBack(); return 1;`);
+  await sleep(800);
+  ok(await ev(`var r=document.getElementById("clinixRoot"); return !CLINIX.isOpen() || (r.innerHTML.length + ":" + r.textContent.slice(0, 200)) !== ${JSON.stringify(cxBefore)};`) === true && await ev(`return TOKOS.isOpen() && TOKOS._st.view;`) === tokView, "back over the OSCE acts on CliniX; Tokós keeps its view");
+  await ev(`for (var i = 0; i < 6 && CLINIX.isOpen(); i++) { if (CLINIX.close) CLINIX.close(); } return 1;`);
 
   // kill switch smd_tokos="0": no tile, and no other entry opens it (ACT.tokos is the one door; openCase checks the same flag)
   await ev(`localStorage.setItem("smd_tokos","0"); return 1;`);

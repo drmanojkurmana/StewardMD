@@ -163,7 +163,8 @@
   function loadTokos() {
     var base = G.SMD_TOKOS_BASE || "/tokos/", L = G.TOKOS_LOADER;
     function j(p) { return G.fetch(base + p).then(function (r) { if (!r.ok) throw new Error(p + " " + r.status); return r.json(); }); }
-    var code = L && L.load ? L.load().then(null, function () {}) : Promise.resolve();
+    // Tokós switched off (smd_tokos "0" / ?tokos=0): list its content from the data files only, never load its code.
+    var code = L && L.load && (!L.enabled || L.enabled()) ? L.load().then(null, function () {}) : Promise.resolve();
     function soft(p) { return j(p).then(null, function () { return null; }); } // Tokós 2.0 files: a missing one lists nothing
     return Promise.all([j("decks/ctg.json"), j("rationale.json"), code, soft("learn/index.json"), soft("decks/mcq/index.json"), soft("reviews.json")]).then(function (res) {
       S.tokosRat = res[1]; S.tokosLearn = res[3];

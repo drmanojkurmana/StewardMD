@@ -246,6 +246,14 @@ export function feedbackMarkdown(x, p, today) {
   return lines.join("\n") + "\n";
 }
 
+/** The cache-token bump a Tokós approval needs (models and data load at the loader's ?v= token), or "". */
+export function tokosBump(kinds, root = ROOT) {
+  if (!kinds.some((k) => k === "tokos" || /tokos/.test(k))) return "";
+  const v = (/var V = "(tok)(\d+)";/.exec(readFileSync(join(root, "tokos-loader.js"), "utf8")) || []);
+  const cur = v[1] ? v[1] + v[2] : "tokN", next = v[1] ? v[1] + (+v[2] + 1) : "tokN+1";
+  return `Tokós content changed: bump the cache token ${cur} -> ${next} in tokos-loader.js (var V = "${next}") and in index.html (<script src="/tokos-loader.js?v=${next}">), and in test/tokos-wiring.test.mjs and test/run-tokos-app-ui.mjs.`;
+}
+
 function main() {
   const args = process.argv.slice(2), file = args.find((a) => !a.startsWith("--"));
   const dry = args.includes("--dry"), includeMinor = args.includes("--include-minor"), acceptUnverified = args.includes("--accept-unverified");
@@ -265,6 +273,8 @@ function main() {
   if (dry) return;
   [...new Set([...kinds].map((k) => (KINDS[k] ? KINDS[k].build : k)))].filter(Boolean).forEach((b) => { console.log("Rebuilding: " + b); execFileSync(process.execPath, [join(ROOT, b)], { stdio: "inherit" }); });
   if (kinds.size) console.log("Done. Run the unit tests, then commit the changed files.");
+  const tb = tokosBump([...kinds]);
+  if (tb) console.log(tb);
 }
 function applyOne(x, { dry, includeMinor }, kinds) {
   const p = plan(x, { includeMinor });

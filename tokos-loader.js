@@ -6,7 +6,7 @@
    Kill switch (same rule as the home tile in home.js): localStorage smd_tokos = "0" or ?tokos=0 for this load. */
 (function (G) {
   "use strict";
-  var V = "tok5";
+  var V = "tok6";
   var CSS = ["specialty.css", "tokos.css", "tokos-sim-labour.css", "tokos-explore-ui.css", "tokos-clinic-us.css"];
   var JS = ["specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "specialty-learn.js", "specialty-bank.js",
     "specialty-explore.js", "specialty-tools.js", "specialty-notes.js", "tokos.js", "tokos-calipers.js", "tokos-ctg.js", "tokos-sim-labour.js", "tokos-explore-ui.js", "tokos-clinic-us.js"];
@@ -22,12 +22,15 @@
     l.rel = "stylesheet"; l.href = "/" + href + "?v=" + V; l.setAttribute("data-tokos", href);
     G.document.head.appendChild(l);
   }
-  // Scripts added with async = false run in the order they were added, each after the one before.
+  // Scripts added with async = false run in the order they were added, each after the one before. A retry after a
+  // failed load re-adds only the scripts that did not load, so no file (tokos.js: createHost) runs twice.
+  var done = {};
   function js(src) {
+    if (done[src]) return Promise.resolve();
     return new Promise(function (res, rej) {
       var s = G.document.createElement("script");
       s.src = "/" + src + "?v=" + V; s.async = false;
-      s.onload = res; s.onerror = function () { rej(new Error(src)); };
+      s.onload = function () { done[src] = 1; res(); }; s.onerror = function () { rej(new Error(src)); };
       G.document.head.appendChild(s);
     });
   }
@@ -52,9 +55,10 @@
   function real() { return G.TOKOS && G.TOKOS !== stub ? G.TOKOS : null; }
 
   var stub = {
-    open: function () { if (!enabled()) return false; load().then(function () { var t = real(); if (t) t.open(); }, fail); return true; },
+    // Loaded but no host (a script failed to run): the same retry message as a failed download.
+    open: function () { if (!enabled()) return false; load().then(function () { var t = real(); if (t) t.open(); else fail(); }, fail); return true; },
     // Review Desk "Read it": false when switched off, as the real openCase answers.
-    openCase: function (id) { if (!enabled()) return false; return load().then(function () { var t = real(); return t ? t.openCase(id) : false; }, function () { fail(); return false; }); },
+    openCase: function (id) { if (!enabled()) return false; return load().then(function () { var t = real(); if (!t) fail(); return t ? t.openCase(id) : false; }, function () { fail(); return false; }); },
     isOpen: function () { return false; },
     back: function () { return false; },
     close: function () {}
