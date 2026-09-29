@@ -3,7 +3,12 @@
   "unit": "obr2",
   "level": "resident",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Twin birth: the first baby decides the route",
     "hi": "जुड़वाँ का प्रसव: पहला बच्चा तरीका तय करता है"
@@ -13,21 +18,20 @@
     "hi": "गर्भावस्था 32 सप्ताह के बाद uncomplicated हो, पहला जुड़वाँ cephalic हो और आकार में बड़ा अंतर न हो तो योनि से नियोजित प्रसव और नियोजित सिज़ेरियन दोनों सुरक्षित हैं। पहला जुड़वाँ non-cephalic हो या MCMA हो तो सिज़ेरियन।"
   },
   "see": {
-    "diagram": "diagrams/obr2-twin-birth.svg",
-    "w": 480,
-    "h": 240,
+    "w": 768,
+    "h": 768,
     "alt": {
-      "en": "Two boxes. Left: both twins head-down. Right: the first twin head-down and the second lying across. A green arrow marks the first baby in each.",
-      "hi": "दो डिब्बे। बाएँ: दोनों जुड़वाँ सिर नीचे। दाएँ: पहला सिर नीचे और दूसरा आड़ा। हर डिब्बे में पहले बच्चे पर हरा तीर।"
+      "en": "Realistic medical illustration showing presentations in twin gestation. Left panel: twin pregnancy with both fetuses in longitudinal lie, the presenting first twin in cephalic presentation at the internal cervical os and the second twin in breech presentation in the upper uterus. Right panel: presenting first twin in cephalic presentation engaged in the maternal pelvis and the second twin in transverse lie across the uterine fundus.",
+      "hi": "जुड़वां गर्भावस्था में प्रस्तुति को दर्शाने वाला यथार्थवादी चिकित्सीय चित्र। बायां पैनल: अनुदैर्ध्य स्थिति में दोनों भ्रूण, आंतरिक ग्रीवा मुख पर पहला भ्रूण सेफेलिक प्रस्तुति में और दूसरा भ्रूण ऊपरी गर्भाशय में ब्रीच प्रस्तुति में। दायां पैनल: मातृ श्रोणि में पहला प्रस्तुत भ्रूण सेफेलिक स्थिति में और दूसरा भ्रूण गर्भाशय के ऊपरी हिस्से में आड़ी (ट्रांसवर्स) स्थिति में।"
     },
     "caption": {
-      "en": "Cephalic-cephalic and cephalic-transverse twins. The first baby leads.",
-      "hi": "Cephalic-cephalic और cephalic-transverse जुड़वाँ। पहला बच्चा निर्णायक है।"
+      "en": "Twin delivery presentations: cephalic first twin with breech second twin (left), and cephalic first twin with transverse second twin (right).",
+      "hi": "जुड़वां प्रसव की स्थितियां: सेफेलिक पहला जुड़वां और ब्रीच दूसरा जुड़वां (बाएं), तथा सेफेलिक पहला जुड़वां और आड़ा दूसरा जुड़वां (दाएं)।"
     },
-    "credit": "Original, MAIKNOWLEDGE LLP",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.15,
+        "x": 0.25,
         "y": 0.62,
         "label": {
           "en": "First twin cephalic",
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.83,
-        "y": 0.46,
+        "x": 0.75,
+        "y": 0.24,
         "label": {
           "en": "Second twin non-cephalic",
           "hi": "दूसरा जुड़वाँ non-cephalic"
@@ -52,7 +56,7 @@
       },
       {
         "x": 0.5,
-        "y": 0.93,
+        "y": 0.92,
         "label": {
           "en": "The 20-minute rule",
           "hi": "20 मिनट का नियम"
@@ -62,6 +66,10 @@
           "hi": "दूसरे जुड़वाँ का CTG suspicious या pathological हो और 20 मिनट में योनि प्रसव न हो सके तो सिज़ेरियन पर चर्चा करें।"
         }
       }
+    ],
+    "img": "learn/media/real/obr2-twin-birth.webp",
+    "more": [
+      "obr2-twin-birth"
     ]
   },
   "why": {

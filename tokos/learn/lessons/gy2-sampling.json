@@ -3,7 +3,12 @@
   "unit": "gy2",
   "level": "mbbs",
   "minutes": 7,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "competencies": [
     "OG34.4",
     "OG37.4",
@@ -19,22 +24,21 @@
     "hi": "कारण खोजने या कैंसर खारिज करने के लिए हम ऊतक लेते हैं। तीन आम तरीके हैं: क्लिनिक में एंडोमेट्रियल एस्पिरेशन, बेहोशी में [[dnc]], और ग्रीवा की पंच बायोप्सी। क़दम, जोखिम और सहायता का तरीका जानिए।"
   },
   "see": {
-    "diagram": "diagrams/gy2-sampling.svg",
-    "w": 480,
-    "h": 380,
+    "w": 768,
+    "h": 768,
     "alt": {
-      "en": "Three panels. First, a uterus with a thin grey suction tube reaching the top of the cavity, a piston at the bottom and two curved arrows for rolling. Second, a uterus with a curette inside and four grey rods of growing thickness laid below as dilators. Third, a front view of a round pink cervix with a white patch near the top and grey biopsy forceps closing on it, and a small curette below for the canal.",
-      "hi": "तीन खाने। पहले में गर्भाशय है, जिसकी गुहा के ऊपर तक पतली धूसर सक्शन नली पहुँची है, नीचे पिस्टन है और घुमाने के लिए दो मुड़े तीर हैं। दूसरे में गर्भाशय के अंदर क्यूरेट है और नीचे बढ़ती मोटाई की चार धूसर छड़ें डायलेटर के रूप में रखी हैं। तीसरे में गोल गुलाबी ग्रीवा का सामने का चित्र है, जिसके ऊपर सफ़ेद धब्बे पर धूसर बायोप्सी फ़ोर्सेप्स बंद हो रही है, और नली के लिए नीचे एक छोटा क्यूरेट है।"
+      "en": "Realistic medical illustration in three panels showing gynaecological tissue sampling. Left: coronal section of the uterus with an aspiration cannula inserted to the fundus and plunger retracted for suction. Middle: uterus with a sharp metal curette inside the endometrial cavity and four graduated dilator rods below. Right: en face view of the cervix with biopsy forceps taking a specimen from an abnormal lesion and an endocervical curette below.",
+      "hi": "स्त्री रोग संबंधी ऊतक के नमूने लेने की प्रक्रियाओं को तीन भागों में दिखाने वाला यथार्थवादी चिकित्सीय चित्र। बाएँ: गर्भाशय का अनुप्रस्थ काट जिसमें फंडस तक एस्पिरेशन कैन्युला पहुँचा है और सक्शन के लिए प्लंजर पीछे खींचा गया है। मध्य: गर्भाशय गुहा के भीतर धातु के क्यूरेट और नीचे चार क्रमिक डायलेटर छड़ें। दाएँ: ग्रीवा का सामने से दृश्य जिसमें बायोप्सी फ़ोर्सेप्स एक असामान्य घाव से नमूना ले रही है और नीचे एक एंडोसर्वाइकल क्यूरेट है।"
     },
     "caption": {
-      "en": "Left to right: aspiration cannula, D&C curette with dilators, and cervical punch biopsy with ECC.",
-      "hi": "बाएँ से दाएँ: एस्पिरेशन कैन्युला, डायलेटर के साथ D&C का क्यूरेट, और ECC के साथ ग्रीवा की पंच बायोप्सी।"
+      "en": "Gynaecological tissue sampling: endometrial aspiration (left), dilation and curettage (centre), and cervical punch biopsy with ECC (right).",
+      "hi": "स्त्री रोग में ऊतक का नमूना: एंडोमेट्रियल एस्पिरेशन (बाएँ), डायलेशन और क्यूरेटेज (मध्य), और ईसीसी के साथ ग्रीवा की पंच बायोप्सी (दाएँ)।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.175,
-        "y": 0.263,
+        "x": 0.17,
+        "y": 0.3,
         "label": {
           "en": "Suction cannula",
           "hi": "सक्शन कैन्युला"
@@ -45,8 +49,8 @@
         }
       },
       {
-        "x": 0.175,
-        "y": 0.716,
+        "x": 0.17,
+        "y": 0.68,
         "label": {
           "en": "Piston",
           "hi": "पिस्टन"
@@ -58,7 +62,7 @@
       },
       {
         "x": 0.5,
-        "y": 0.342,
+        "y": 0.3,
         "label": {
           "en": "Curette",
           "hi": "क्यूरेट"
@@ -69,8 +73,8 @@
         }
       },
       {
-        "x": 0.475,
-        "y": 0.863,
+        "x": 0.5,
+        "y": 0.68,
         "label": {
           "en": "Dilators",
           "hi": "डायलेटर"
@@ -81,8 +85,8 @@
         }
       },
       {
-        "x": 0.821,
-        "y": 0.279,
+        "x": 0.83,
+        "y": 0.22,
         "label": {
           "en": "Acetowhite area",
           "hi": "एसिटोवाइट क्षेत्र"
@@ -93,8 +97,8 @@
         }
       },
       {
-        "x": 0.883,
-        "y": 0.216,
+        "x": 0.85,
+        "y": 0.15,
         "label": {
           "en": "Punch forceps",
           "hi": "पंच फ़ोर्सेप्स"
@@ -105,8 +109,8 @@
         }
       },
       {
-        "x": 0.825,
-        "y": 0.368,
+        "x": 0.82,
+        "y": 0.29,
         "label": {
           "en": "Cervical os",
           "hi": "ग्रीवा का मुख"
@@ -117,8 +121,8 @@
         }
       },
       {
-        "x": 0.825,
-        "y": 0.705,
+        "x": 0.82,
+        "y": 0.6,
         "label": {
           "en": "Endocervical curettage",
           "hi": "एंडोसर्वाइकल क्यूरेटेज"
@@ -128,6 +132,10 @@
           "hi": "छोटा क्यूरेट नली को खुरचता है ([[ecc]])। गर्भावस्था में यह नहीं किया जाता।"
         }
       }
+    ],
+    "img": "learn/media/real/gy2-sampling.webp",
+    "more": [
+      "gy2-sampling"
     ]
   },
   "why": {

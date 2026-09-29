@@ -3,7 +3,12 @@
   "unit": "ob3",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "competencies": [
     "OG14.1"
   ],
@@ -16,22 +21,21 @@
     "hi": "रुके हुए प्रसव में संकुचन ज़ोरदार होते हैं पर बच्चा नीचे नहीं उतरता क्योंकि रास्ता रुका है। यह बड़ी आपात स्थिति है। इसे चार्ट पर पकड़िए और [[fru]] भेजिए।"
   },
   "see": {
-    "diagram": "diagrams/ob3-obstructed-labour.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 768,
     "alt": {
-      "en": "A womb in front view with a strong red horizontal ridge across the lower part. Red tick marks at the top stand for strong contractions. A baby's head sits at the top of a narrow bony ring at the bottom, with a black arrow pointing down that does not get through. At the right a fast, jagged red line stands for a rapid pulse.",
-      "hi": "गर्भाशय का सामने का चित्र, जिसके निचले हिस्से पर आड़ी लाल उभरी रेखा है। ऊपर लाल छोटे निशान ज़ोरदार संकुचन दिखाते हैं। नीचे संकरी हड्डी के छल्ले के मुँह पर बच्चे का सिर है, और नीचे की ओर काला तीर है जो पार नहीं हो पाता। दाईं ओर तेज़, दाँतेदार लाल रेखा तेज़ नब्ज़ को दिखाती है।"
+      "en": "Realistic medical illustration of obstructed labour. The uterus shows a thick, muscular retracted upper segment separated by Bandl's pathological retraction ring from a thin, stretched lower uterine segment. The fetal head is deeply impacted at the maternal pelvic brim above the pubic symphysis, unable to descend despite active contractions.",
+      "hi": "रुके हुए प्रसव का यथार्थवादी चिकित्सीय चित्र। गर्भाशय में एक मोटा, संकुचित ऊपरी भाग दिखाई देता है जो बैंडल के पैथोलॉजिकल रिट्रैक्शन रिंग द्वारा पतले, खिंचे हुए निचले गर्भाशय खंड से अलग होता है। भ्रूण का सिर जघन सिम्फिसिस के ऊपर मातृ श्रोणि में फंसा हुआ है और संकुचन के बावजूद नीचे उतरने में असमर्थ है।"
     },
     "caption": {
-      "en": "A head stuck at a narrow pelvis while the womb pushes harder and a ridge forms above it.",
-      "hi": "संकरी श्रोणि पर अटका सिर, जबकि गर्भाशय और ज़ोर लगाता है और उसके ऊपर उभार बनता है।"
+      "en": "Obstructed labour: Bandl's ring separates a thick active segment from the thinned lower segment with the head impacted in the pelvis.",
+      "hi": "रुका हुआ प्रसव: बैंडल का रिंग मोटे सक्रिय खंड को पतले निचले खंड से अलग करता है और सिर श्रोणि में फंसा है।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
         "x": 0.5,
-        "y": 0.073,
+        "y": 0.2,
         "label": {
           "en": "Strong contractions",
           "hi": "तेज़ संकुचन"
@@ -43,7 +47,7 @@
       },
       {
         "x": 0.5,
-        "y": 0.34,
+        "y": 0.37,
         "label": {
           "en": "Ridge across the belly",
           "hi": "पेट पर आड़ा उभार"
@@ -54,8 +58,8 @@
         }
       },
       {
-        "x": 0.5,
-        "y": 0.667,
+        "x": 0.48,
+        "y": 0.6,
         "label": {
           "en": "Head not descending",
           "hi": "सिर नीचे नहीं उतरता"
@@ -66,8 +70,8 @@
         }
       },
       {
-        "x": 0.563,
-        "y": 0.873,
+        "x": 0.74,
+        "y": 0.54,
         "label": {
           "en": "Narrow pelvis",
           "hi": "संकरी श्रोणि"
@@ -76,19 +80,11 @@
           "en": "Cephalopelvic disproportion or a big or wrongly placed baby.",
           "hi": "cephalopelvic disproportion या बड़ा अथवा ग़लत स्थिति वाला बच्चा।"
         }
-      },
-      {
-        "x": 0.958,
-        "y": 0.3,
-        "label": {
-          "en": "Fast pulse and distress",
-          "hi": "तेज़ नब्ज़ और तकलीफ़"
-        },
-        "note": {
-          "en": "A rapid maternal pulse and fetal distress are signs of exhaustion and danger.",
-          "hi": "तेज़ मातृ नब्ज़ और भ्रूण की तकलीफ़ थकावट और ख़तरे के संकेत हैं।"
-        }
       }
+    ],
+    "img": "learn/media/real/ob3-obstructed-labour.webp",
+    "more": [
+      "ob3-obstructed-labour"
     ]
   },
   "why": {

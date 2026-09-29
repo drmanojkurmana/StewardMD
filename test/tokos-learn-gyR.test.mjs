@@ -166,6 +166,12 @@ test("diagrams: own SVG, no text or embedded content, viewBox matches the lesson
   const used = new Set();
   for (const { id, L } of lessons) {
     const s = L.see;
+    if (s.img) {
+      assert.ok(fs.existsSync(url(`${LEARN}${s.img.replace(/^learn\//, "")}`)), `${id}: img exists`);
+      for (const m of s.more || []) used.add(`diagrams/${m.replace(/-diagram$/, "")}.svg`);
+      for (const h of s.hotspots) assert.ok(h.x >= 0 && h.x <= 1 && h.y >= 0 && h.y <= 1, `${id} hotspot`);
+      continue;
+    }
     assert.ok(s.diagram && !s.img, `${id}: original diagram expected`);
     used.add(s.diagram);
     const svg = read(LEARN + s.diagram);
@@ -199,5 +205,11 @@ test("credits: every diagram and media file has an original or permitted-licence
     const dir = url(`${LEARN}media/${u}/`);
     if (fs.existsSync(dir)) for (const f of fs.readdirSync(dir)) assert.ok(C.items.some((it) => it.file === `${u}/${f}`), `media/${u}/${f} has no credits entry`);
   }
-  for (const { id, L } of lessons) assert.ok(Object.values(credits).some((it) => it.file === `../${L.see.diagram}`), `${id}: diagram has no credits entry`);
+  for (const { id, L } of lessons) {
+    if (L.see.img) {
+      assert.ok(Object.values(credits).some((it) => it.file === L.see.img.replace(/^learn\/media\//, "")), `${id}: img credit entry`);
+    } else {
+      assert.ok(Object.values(credits).some((it) => it.file === `../${L.see.diagram}`), `${id}: diagram has no credits entry`);
+    }
+  }
 });

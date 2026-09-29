@@ -3,7 +3,12 @@
   "unit": "ob3",
   "level": "mbbs",
   "minutes": 6,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "competencies": [
     "OG13.3"
   ],
@@ -16,34 +21,21 @@
     "hi": "हर महिला को [[amtsl]] के तीनों क़दम दीजिए: बच्चे के जन्म के बाद oxytocin 10 यूनिट IM, संकुचन में [[cct]], और गर्भाशय की मालिश। यह प्रसव-पश्चात रक्तस्राव घटाता है।"
   },
   "see": {
-    "diagram": "diagrams/ob3-third-stage.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 768,
     "alt": {
-      "en": "A womb in side view, well contracted and round. The dark red placenta is peeling from the upper right wall, and a cord runs from it down and out at the bottom, with a dark clamp and a blue downward arrow near the exit. At the upper right a hand rests on the belly. At the upper left is a syringe with an amber fluid.",
-      "hi": "गर्भाशय का बग़ल से चित्र, जो सिकुड़ा हुआ और गोल है। गहरे लाल रंग की प्लेसेंटा ऊपर दाईं दीवार से अलग हो रही है, और उससे नाल नीचे बाहर निकलती है, जिसके निकास के पास गहरी क्लैंप और नीचे की ओर नीला तीर है। ऊपर दाईं ओर एक हाथ पेट पर टिका है। ऊपर बाईं ओर पीले द्रव वाली सिरिंज है।"
+      "en": "Realistic medical illustration in sagittal section showing active management of the third stage of labour. A gloved hand on the maternal lower abdomen provides suprapubic counter-traction on the contracted fundus to prevent inversion, while gentle controlled traction is applied to the clamped umbilical cord as the placenta detaches from the uterine wall.",
+      "hi": "प्रसव के तीसरे चरण के सक्रिय प्रबंधन को दिखाने वाला अनुदैर्ध्य काट में यथार्थवादी चिकित्सीय चित्र। मातृ पेट के निचले हिस्से पर दस्ताने वाला हाथ गर्भाशय के पलटने को रोकने के लिए संकुचित फंडस पर सुप्रॉप्यूबिक काउंटर-ट्रैक्शन प्रदान करता है, जबकि प्लेसेंटा के गर्भाशय की दीवार से अलग होने पर क्लैंप की गई गर्भनाल पर नियंत्रित हल्का खिंचाव लगाया जाता है।"
     },
     "caption": {
-      "en": "The three steps of AMTSL: the injection, the hand on the womb, and gentle traction on the cord.",
-      "hi": "AMTSL के तीन क़दम: इंजेक्शन, गर्भाशय पर हाथ और नाल पर हल्का खिंचाव।"
+      "en": "Active management of third stage (AMTSL): suprapubic counter-traction and controlled cord traction during placental separation.",
+      "hi": "तीसरे चरण का सक्रिय प्रबंधन (AMTSL): प्लेसेंटा अलग होने के दौरान सुप्रॉप्यूबिक काउंटर-ट्रैक्शन और नियंत्रित नाल खिंचाव।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.167,
-        "y": 0.247,
-        "label": {
-          "en": "Oxytocin",
-          "hi": "Oxytocin"
-        },
-        "note": {
-          "en": "10 units IM within a minute of birth, after checking that there is no second baby. Misoprostol 600 micrograms by mouth if oxytocin is not available.",
-          "hi": "जन्म के एक मिनट के भीतर 10 यूनिट IM, यह जाँचकर कि दूसरा बच्चा नहीं है। oxytocin उपलब्ध न हो तो 600 माइक्रोग्राम misoprostol मुँह से।"
-        }
-      },
-      {
-        "x": 0.833,
-        "y": 0.173,
+        "x": 0.45,
+        "y": 0.22,
         "label": {
           "en": "Hand on the womb",
           "hi": "गर्भाशय पर हाथ"
@@ -54,8 +46,8 @@
         }
       },
       {
-        "x": 0.608,
-        "y": 0.353,
+        "x": 0.56,
+        "y": 0.38,
         "label": {
           "en": "Placenta separating",
           "hi": "प्लेसेंटा अलग होती हुई"
@@ -66,8 +58,8 @@
         }
       },
       {
-        "x": 0.515,
-        "y": 0.907,
+        "x": 0.48,
+        "y": 0.76,
         "label": {
           "en": "Cord and clamp",
           "hi": "नाल और क्लैंप"
@@ -78,8 +70,8 @@
         }
       },
       {
-        "x": 0.604,
-        "y": 0.96,
+        "x": 0.42,
+        "y": 0.86,
         "label": {
           "en": "Gentle pull",
           "hi": "हल्का खिंचाव"
@@ -89,6 +81,10 @@
           "hi": "केवल गर्भाशय के सिकुड़ने पर ही हल्का नीचे खींचिए। गर्भाशय पर counter-traction के बिना कभी न खींचिए।"
         }
       }
+    ],
+    "img": "learn/media/real/ob3-third-stage.webp",
+    "more": [
+      "ob3-third-stage"
     ]
   },
   "why": {

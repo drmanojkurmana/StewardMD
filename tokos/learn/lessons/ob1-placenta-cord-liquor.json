@@ -3,7 +3,12 @@
   "unit": "ob1",
   "level": "mbbs",
   "minutes": 6,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "competencies": [
     "OG4.1"
   ],
@@ -16,22 +21,21 @@
     "hi": "[[placenta]] बच्चे के फेफड़े, आँत, किडनी और हार्मोन की फ़ैक्टरी, सब एक साथ है। [[umbilical-cord]] उसके बीच खून लाती-ले जाती है, और [[amniotic-fluid]] बच्चे को झटकों से बचाता है।"
   },
   "see": {
-    "diagram": "diagrams/ob1-placenta-cord-liquor.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 768,
     "alt": {
-      "en": "Side view of a womb in section. A blue sac of fluid fills the cavity. A curled baby sits in the left-centre. On the right wall a thick dark red disc, the placenta, is joined to the baby's belly by a twisted cord. Red vessels enter the placenta from the wall. A round inset at bottom right shows the cord cut across: one large red vein and two small blue arteries in pale jelly.",
-      "hi": "गर्भाशय का बग़ल से कटा हुआ चित्र। गुहा में नीले द्रव की थैली है। बाईं-मध्य ओर मुड़ा हुआ बच्चा है। दाईं दीवार पर मोटी गहरी लाल गोल चकती, यानी प्लेसेंटा, है जो मुड़ी हुई नाल से बच्चे के पेट से जुड़ी है। दीवार से लाल नलियाँ प्लेसेंटा में आती हैं। नीचे दाईं ओर गोल इनसेट में नाल का कटा हुआ भाग है: हल्की जेली में एक बड़ी लाल शिरा और दो छोटी नीली धमनियाँ।"
+      "en": "Realistic medical illustration of a term pregnant uterus in sagittal section. A curled fetus rests head downward within the fluid-filled amniotic sac. The placenta is attached to the upper uterine wall with maternal blood vessels entering its base. A spiralling umbilical cord connects the fetal abdomen to the placenta. A circular inset at lower right shows the umbilical cord in cross section with one large vein and two smaller arteries embedded in Wharton's jelly.",
+      "hi": "पूर्ण अवधि के गर्भवती गर्भाशय का यथार्थवादी अनुदैर्ध्य काट वाला चिकित्सीय चित्र। मुड़ा हुआ भ्रूण सिर नीचे की ओर तरल से भरी एम्नियोटिक थैली में स्थित है। प्लेसेंटा गर्भाशय की ऊपरी दीवार से जुड़ा है और मातृ रक्त वाहिकाएं इसके आधार में प्रवेश करती हैं। ऐंठी हुई गर्भनाल भ्रूण के पेट को प्लेसेंटा से जोड़ती है। निचले दाएं कोने में एक गोल इनसेट गर्भनाल का अनुप्रस्थ काट दिखाता है जिसमें व्हार्टन जेली में एक बड़ी शिरा और दो छोटी धमनियां हैं।"
     },
     "caption": {
       "en": "A term womb: baby, fluid, placenta and cord. The inset shows the cord cut across.",
       "hi": "पूर्ण अवधि का गर्भाशय: बच्चा, द्रव, प्लेसेंटा और नाल। इनसेट में नाल का कटा हुआ भाग।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.733,
-        "y": 0.5,
+        "x": 0.6,
+        "y": 0.18,
         "label": {
           "en": "Placenta",
           "hi": "प्लेसेंटा"
@@ -42,8 +46,8 @@
         }
       },
       {
-        "x": 0.808,
-        "y": 0.36,
+        "x": 0.62,
+        "y": 0.11,
         "label": {
           "en": "Mother's blood in",
           "hi": "माँ का खून अंदर"
@@ -54,8 +58,8 @@
         }
       },
       {
-        "x": 0.625,
-        "y": 0.56,
+        "x": 0.55,
+        "y": 0.45,
         "label": {
           "en": "Cord",
           "hi": "गर्भनाल"
@@ -66,8 +70,8 @@
         }
       },
       {
-        "x": 0.9,
-        "y": 0.84,
+        "x": 0.79,
+        "y": 0.8,
         "label": {
           "en": "Cord in section",
           "hi": "नाल का कटा भाग"
@@ -78,8 +82,8 @@
         }
       },
       {
-        "x": 0.292,
-        "y": 0.713,
+        "x": 0.52,
+        "y": 0.58,
         "label": {
           "en": "Amniotic fluid",
           "hi": "एम्नियोटिक द्रव"
@@ -90,8 +94,8 @@
         }
       },
       {
-        "x": 0.238,
-        "y": 0.373,
+        "x": 0.28,
+        "y": 0.18,
         "label": {
           "en": "Membranes",
           "hi": "झिल्लियाँ"
@@ -102,8 +106,8 @@
         }
       },
       {
-        "x": 0.442,
-        "y": 0.44,
+        "x": 0.38,
+        "y": 0.64,
         "label": {
           "en": "Baby",
           "hi": "बच्चा"
@@ -113,6 +117,10 @@
           "hi": "जन्म तक बच्चा ऑक्सीजन और भोजन के लिए पूरी तरह प्लेसेंटा पर निर्भर रहता है।"
         }
       }
+    ],
+    "img": "learn/media/real/ob1-placenta-cord-liquor.webp",
+    "more": [
+      "ob1-placenta-cord-liquor"
     ]
   },
   "why": {

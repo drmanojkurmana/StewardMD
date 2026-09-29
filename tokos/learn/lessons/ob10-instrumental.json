@@ -3,7 +3,12 @@
   "unit": "ob10",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Forceps and vacuum: the checklist before you pull",
     "hi": "फ़ोर्सेप्स और वैक्यूम: खींचने से पहले की जाँच-सूची"
@@ -13,22 +18,21 @@
     "hi": "[[forceps]] या [[vacuum]] दूसरे चरण में बच्चे को निकालने में मदद करते हैं। ये तभी सुरक्षित हैं जब शर्तें पूरी हों, और सिर न उतरे तो रुक जाएँ।"
   },
   "see": {
-    "diagram": "diagrams/ob10-instrumental.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 768,
     "alt": {
-      "en": "Two rounded heads. On the left a pair of blue curved blades holds the head from both sides. On the right a green suction cup sits at the bottom of the head with a handle going down, and a red arrow points down beside it.",
-      "hi": "दो गोल सिर। बाईं ओर नीले मुड़े ब्लेडों की जोड़ी सिर को दोनों ओर से पकड़ती है। दाईं ओर हरा चूषण कप सिर के नीचे है, हैंडल नीचे जा रहा है, और बगल में लाल तीर नीचे की ओर है।"
+      "en": "Realistic medical illustration showing two modes of assisted vaginal delivery. Left: obstetric forceps blades correctly applied biparietally along the occipitomental diameter of the fetal head in the pelvis. Right: ventouse vacuum cup applied directly over the flexion point on the fetal scalp with traction apparatus and handle.",
+      "hi": "सहायक योनि प्रसव के दो तरीकों को दिखाने वाला यथार्थवादी चिकित्सीय चित्र। बाएँ: श्रोणि में भ्रूण के सिर के दोनों ओर सही ढंग से लगाए गए प्रसूति फ़ोर्सेप्स ब्लेड। दाएँ: खिंचाव उपकरण और हैंडल के साथ भ्रूण की खोपड़ी के फ़्लेक्शन बिंदु पर ठीक से लगाया गया वैक्यूम कप।"
     },
     "caption": {
-      "en": "Forceps grip the head. The vacuum cup sits over the flexion point.",
-      "hi": "फ़ोर्सेप्स सिर को पकड़ते हैं। वैक्यूम कप फ़्लेक्शन बिंदु के ऊपर बैठता है।"
+      "en": "Instrumental delivery: forceps applied biparietally (left) and vacuum cup applied over the flexion point (right).",
+      "hi": "इंस्ट्रुमेंटल डिलीवरी: सिर के दोनों ओर लगे फ़ोर्सेप्स (बाएँ) और फ़्लेक्शन बिंदु पर लगा वैक्यूम कप (दाएँ)।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.271,
-        "y": 0.5,
+        "x": 0.25,
+        "y": 0.45,
         "label": {
           "en": "Forceps",
           "hi": "फ़ोर्सेप्स"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.729,
-        "y": 0.653,
+        "x": 0.74,
+        "y": 0.45,
         "label": {
           "en": "Vacuum cup",
           "hi": "वैक्यूम कप"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.875,
-        "y": 0.5,
+        "x": 0.75,
+        "y": 0.82,
         "label": {
           "en": "Traction with a contraction",
           "hi": "संकुचन के साथ खिंचाव"
@@ -62,6 +66,10 @@
           "hi": "केवल संकुचन और माँ के ज़ोर के साथ खींचें। हर खिंचाव पर सिर न उतरे तो रुकें और योजना बदलें।"
         }
       }
+    ],
+    "img": "learn/media/real/ob10-instrumental.webp",
+    "more": [
+      "ob10-instrumental"
     ]
   },
   "why": {

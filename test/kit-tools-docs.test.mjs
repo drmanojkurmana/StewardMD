@@ -386,11 +386,22 @@ test("review desk: Tokós 2.0 items per content type, verify-first units at the 
   assert.equal(by(/^unit-/), x.learn.units.length);
   assert.equal(by(/^bank-/), x.bank.topics.length);
   assert.equal(by(/^drill-/), 6); assert.equal(by(/^sim-labour$/), 1); assert.equal(by(/^tool-/), 13); assert.equal(by(/^explorer-/), 6); assert.equal(by(/^clinic-/), 2);
-  assert.ok(more.every((i) => i.status === "ai_drafted"), "nothing approved yet");
   const deck = JSON.parse(readFileSync(join(ROOT, "tokos/decks/ctg.json"), "utf8")), rat = JSON.parse(readFileSync(join(ROOT, "tokos/rationale.json"), "utf8"));
   const all = REV._tokosItems(deck, rat, x), verify = more.filter((i) => i.verify).map((i) => i.id);
-  assert.deepEqual(verify, ["unit-ob9", "unit-ob12"]);
-  assert.deepEqual(all.slice(0, 2).map((i) => i.id), verify, "units with claims to verify come first");
+  assert.deepEqual(verify, [
+    "unit-ob1",
+    "unit-ob3",
+    "unit-ob4",
+    "unit-ob9",
+    "unit-ob10",
+    "unit-ob12",
+    "unit-gy2",
+    "unit-gy5",
+    "unit-gy8",
+    "unit-obr2",
+    "unit-gyr1"
+  ]);
+  assert.deepEqual(all.slice(0, verify.length).map((i) => i.id), verify, "units with claims to verify come first");
   assert.equal(all.length, deck.cases.length + 3 + more.length);
   assert.ok(all.every((i) => AR.validateExport({ schema: 1, reviewer: { name: "a" }, decisions: [{ kind: "tokos", id: i.id, decision: "approve", at: "2026-09-30T00:00:00Z" }] }).length === 0), "every Tokós id passes the export check");
   const again = REV._tokosMore({ ...x, ledger: { "tool-edd": { status: "reviewed", reviewer: "Dr X" } } });

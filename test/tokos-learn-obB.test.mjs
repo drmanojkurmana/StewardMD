@@ -81,6 +81,7 @@ test("no em-dash in any content file", () => {
 
 test("diagrams: root has width, height and viewBox matching the lesson, and no text", () => {
   lessons.forEach((l) => {
+    if (l.see.img) return;
     const f = path.join(L, l.see.diagram);
     const svg = fs.readFileSync(f, "utf8");
     const root = svg.match(/<svg\b[^>]*>/)[0];
