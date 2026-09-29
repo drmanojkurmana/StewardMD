@@ -1,0 +1,227 @@
+{
+  "id": "ob2-visit-monitoring",
+  "unit": "ob2",
+  "level": "mbbs",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "competencies": [
+    "OG8.4"
+  ],
+  "title": {
+    "en": "What to check at every visit: weight, BP, movements",
+    "hi": "हर जाँच पर क्या देखें: वज़न, बीपी, हलचल"
+  },
+  "idea": {
+    "en": "At each visit check weight, blood pressure, pallor, oedema, the fetal heart and the [[dfmc]]. Each one finds a specific problem early.",
+    "hi": "हर जाँच पर वज़न, ब्लड प्रेशर, पीलापन, सूजन, भ्रूण की धड़कन और [[dfmc]] देखिए। हर एक किसी ख़ास समस्या को जल्दी पकड़ता है।"
+  },
+  "see": {
+    "diagram": "diagrams/ob2-visit-monitoring.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "Left: a graph of weight against pregnancy. A blue line rises steadily. A dashed red line branches off it and climbs much more steeply. Below the axis is a heartbeat trace. Right: three rounded rectangles stacked, each with a row of red tick marks, standing for three one-hour counting periods with several movements in each.",
+      "hi": "बाएँ: गर्भावस्था के साथ वज़न का ग्राफ़। नीली रेखा लगातार बढ़ती है। एक लाल बिंदीदार रेखा उससे अलग होकर कहीं ज़्यादा तेज़ी से चढ़ती है। अक्ष के नीचे धड़कन की रेखा है। दाएँ: एक के ऊपर एक तीन गोल कोनों वाले आयत हैं, हर एक में लाल निशानों की पंक्ति है, जो तीन एक-घंटे की गिनती अवधियों को दिखाती है जिनमें कई हलचलें हैं।"
+    },
+    "caption": {
+      "en": "Weight gain (blue steady, red too fast), a fetal heart trace, and a three-hour movement count.",
+      "hi": "वज़न बढ़ना (नीला सामान्य, लाल बहुत तेज़), भ्रूण की धड़कन की रेखा और तीन घंटे की हलचल गिनती।"
+    },
+    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.313,
+        "y": 0.56,
+        "label": {
+          "en": "Steady gain",
+          "hi": "सामान्य वृद्धि"
+        },
+        "note": {
+          "en": "A total of 9 to 11 kg in pregnancy, roughly 2 kg a month after the first trimester. Poor gain goes with growth restriction.",
+          "hi": "पूरी गर्भावस्था में कुल 9 से 11 kg, पहली तिमाही के बाद लगभग 2 kg प्रति माह। कम वृद्धि वृद्धि-रुकावट से जुड़ी होती है।"
+        }
+      },
+      {
+        "x": 0.396,
+        "y": 0.367,
+        "label": {
+          "en": "Too fast",
+          "hi": "बहुत तेज़"
+        },
+        "note": {
+          "en": "More than 3 kg in a month should raise the suspicion of pre-eclampsia. Check BP and urine protein.",
+          "hi": "एक महीने में 3 kg से ज़्यादा वज़न बढ़ना pre-eclampsia का शक जगाए। बीपी और पेशाब का प्रोटीन जाँचिए।"
+        }
+      },
+      {
+        "x": 0.208,
+        "y": 0.893,
+        "label": {
+          "en": "Fetal heart",
+          "hi": "भ्रूण की धड़कन"
+        },
+        "note": {
+          "en": "120 to 160 a minute is normal. Outside this range, refer.",
+          "hi": "120 से 160 प्रति मिनट सामान्य है। इसके बाहर हो तो रेफ़र कीजिए।"
+        }
+      },
+      {
+        "x": 0.74,
+        "y": 0.277,
+        "label": {
+          "en": "Hour 1",
+          "hi": "पहला घंटा"
+        },
+        "note": {
+          "en": "Lie on the left side after a meal and count the movements in one hour.",
+          "hi": "भोजन के बाद बाईं करवट लेटकर एक घंटे में हलचल गिनिए।"
+        }
+      },
+      {
+        "x": 0.74,
+        "y": 0.497,
+        "label": {
+          "en": "Hour 2",
+          "hi": "दूसरा घंटा"
+        },
+        "note": {
+          "en": "Repeat after the next meal.",
+          "hi": "अगले भोजन के बाद दोहराइए।"
+        }
+      },
+      {
+        "x": 0.74,
+        "y": 0.717,
+        "label": {
+          "en": "Hour 3 and total",
+          "hi": "तीसरा घंटा और कुल"
+        },
+        "note": {
+          "en": "Add all three hours. Fewer than 10 movements in total means refer to the FRU.",
+          "hi": "तीनों घंटों को जोड़िए। कुल 10 से कम हलचल हो तो FRU में रेफ़र कीजिए।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Weight: a baseline at the first visit, then at each visit. Good gain is about 2 kg a month after the first trimester. Poor gain points to growth restriction, and gain over 3 kg in a month points to pre-eclampsia.",
+        "hi": "वज़न: पहली जाँच पर आधार-रेखा, फिर हर जाँच पर। पहली तिमाही के बाद लगभग 2 kg प्रति माह की वृद्धि अच्छी है। कम वृद्धि वृद्धि-रुकावट की ओर और एक माह में 3 kg से ज़्यादा pre-eclampsia की ओर इशारा करती है।"
+      },
+      {
+        "en": "Blood pressure at every visit. Hypertension is 140/90 mmHg or more on two readings at least four hours apart. If BP is high, check urine albumin: 2+ with high BP is pre-eclampsia and needs immediate referral.",
+        "hi": "हर जाँच पर ब्लड प्रेशर। हाई बीपी का मतलब है दो रीडिंग, कम से कम चार घंटे के अंतर पर, 140/90 mmHg या ज़्यादा। बीपी ज़्यादा हो तो पेशाब का albumin जाँचिए: उच्च बीपी के साथ 2+ pre-eclampsia है और तुरंत रेफ़र करना है।"
+      },
+      {
+        "en": "Look for pallor at every visit, and for oedema of the face, hands or abdominal wall. Evening foot swelling that goes after a night's sleep can be normal. Puffy face or hands is not.",
+        "hi": "हर जाँच पर पीलापन देखिए, और चेहरे, हाथों या पेट की दीवार की सूजन भी। शाम को पैर की सूजन जो रात की नींद के बाद उतर जाए, सामान्य हो सकती है। चेहरे या हाथों की सूजन सामान्य नहीं है।"
+      },
+      {
+        "en": "Ask about baby's movements at every visit. The [[dfmc]] taught by the national guidelines: lie on the left side for one hour, three times a day after meals, and count. Fewer than 10 in the three hours together means refer.",
+        "hi": "हर जाँच पर बच्चे की हलचल पूछिए। राष्ट्रीय दिशानिर्देशों में सिखाई गई [[dfmc]]: भोजन के बाद दिन में तीन बार, एक-एक घंटा बाईं करवट लेटकर, गिनिए। तीनों घंटों में मिलाकर 10 से कम हलचल हो तो रेफ़र कीजिए।"
+      },
+      {
+        "en": "Formal fetal tests such as the NST (non-stress test) and biophysical profile are for those with risk factors. They are taught later, in the unit on fetal surveillance.",
+        "hi": "NST (non-stress test) और biophysical profile जैसे औपचारिक भ्रूण-परीक्षण जोखिम कारक वाली महिलाओं के लिए हैं। इन्हें बाद में, भ्रूण-निगरानी वाली यूनिट में पढ़ाया गया है।"
+      }
+    ],
+    "analogy": {
+      "en": "Think of a small farm with a daily walk-round: check the water level (weight), the pipes (BP) and the animal's activity (movements). Each check catches a different fault early.",
+      "hi": "एक छोटे खेत के रोज़ के चक्कर की सोचिए: पानी का स्तर (वज़न), पाइप (बीपी) और पशु की हलचल (movements) देखना। हर जाँच अलग गड़बड़ी को जल्दी पकड़ती है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Diastolic BP above 110 mmHg is a danger sign that points to imminent eclampsia.",
+      "hi": "डायस्टोलिक बीपी 110 mmHg से ऊपर ख़तरे का संकेत है जो निकट एक्लैम्प्सिया की ओर इशारा करता है।"
+    },
+    {
+      "en": "A woman says the baby has moved much less today: do not wait, refer to the FRU.",
+      "hi": "महिला कहती है कि आज बच्चा बहुत कम हिला: इंतज़ार न कीजिए, FRU में रेफ़र कीजिए।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Teach the movement count to every woman at 28 weeks and ask her to repeat it back to you.",
+      "hi": "28 हफ़्ते पर हर महिला को हलचल गिनना सिखाइए और उससे दोहरवाइए।"
+    },
+    {
+      "en": "Plot the weight on the MCP card at every visit.",
+      "hi": "हर जाँच पर वज़न MCP कार्ड पर दर्ज कीजिए।"
+    }
+  ],
+  "remember": {
+    "en": "2 kg a month, BP below 140/90, fetal heart 120 to 160, and at least 10 movements in the three counted hours.",
+    "hi": "प्रति माह 2 kg, बीपी 140/90 से कम, भ्रूण की धड़कन 120 से 160, और गिने हुए तीन घंटों में कम से कम 10 हलचल।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "A woman gains 4 kg in one month at 30 weeks. What must you check?",
+        "hi": "30 हफ़्ते पर एक महिला का एक महीने में 4 kg वज़न बढ़ा। आपको क्या जाँचना चाहिए?"
+      },
+      "o": [
+        {
+          "en": "Blood pressure and urine protein",
+          "hi": "बीपी और पेशाब का प्रोटीन"
+        },
+        {
+          "en": "Only the haemoglobin",
+          "hi": "केवल हीमोग्लोबिन"
+        },
+        {
+          "en": "Nothing, it is normal",
+          "hi": "कुछ नहीं, यह सामान्य है"
+        },
+        {
+          "en": "Only the fundal height",
+          "hi": "केवल fundal height"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "More than 3 kg in a month should raise suspicion of pre-eclampsia, so check BP and urine protein.",
+        "hi": "एक महीने में 3 kg से ज़्यादा वज़न बढ़ना pre-eclampsia का शक जगाता है, इसलिए बीपी और पेशाब का प्रोटीन जाँचिए।"
+      }
+    },
+    {
+      "q": {
+        "en": "According to the national guideline, when should a woman be referred after counting movements?",
+        "hi": "राष्ट्रीय दिशानिर्देश के अनुसार हलचल गिनने के बाद महिला को कब रेफ़र करना चाहिए?"
+      },
+      "o": [
+        {
+          "en": "More than 30 movements in 3 hours",
+          "hi": "3 घंटे में 30 से ज़्यादा हलचल"
+        },
+        {
+          "en": "Fewer than 10 movements in the 3 hours counted",
+          "hi": "गिने हुए 3 घंटों में 10 से कम हलचल"
+        },
+        {
+          "en": "Any movement at night",
+          "hi": "रात में कोई भी हलचल"
+        },
+        {
+          "en": "Only if there is bleeding",
+          "hi": "केवल रक्तस्राव हो तब"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "The woman counts for one hour after each of three meals. A total of fewer than 10 means refer to the FRU.",
+        "hi": "महिला तीन भोजनों के बाद एक-एक घंटा गिनती है। कुल 10 से कम हो तो FRU में रेफ़र कीजिए।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "ob-antenatal"
+  },
+  "glossary": [
+    "dfmc"
+  ],
+  "sources": [
+    "Ministry of Health and Family Welfare, India. Guidelines for Antenatal Care and Skilled Attendance at Birth by ANMs/LHVs/SNs (2010): pallor, oedema, blood pressure, weight, fetal heart sound, fetal movements."
+  ]
+}
