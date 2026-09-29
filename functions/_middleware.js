@@ -107,7 +107,7 @@ export async function onRequest(context) {
   // only ever loads web assets (js/css/html/json/kb/assets/vendor/sw.js), never any of these.
   {
     const p = url.pathname;
-    const INTERNAL_DIR = /^\/(docs|design|vault|tests?|scripts|ios|android|worker|local-plugins|Packages|backend|node_modules|\.git|\.github|\.claude)\//i;
+    const INTERNAL_DIR = /^\/(docs|design|vault|tests?|scripts|tools|ios|android|worker|local-plugins|Packages|backend|node_modules|\.git|\.github|\.claude)\//i;
     const INTERNAL_FILE = /^\/(CLAUDE\.md|AGENTS\.md|README(\.md)?|wrangler\.toml|package(-lock)?\.json|capacitor\.config\.json|tsconfig[^/]*\.json|\.gitignore|\.assetsignore)$/i;
     if (INTERNAL_DIR.test(p) || INTERNAL_FILE.test(p) || /\.md$/i.test(p)) {
       return new Response("Not found", { status: 404, headers: { "content-type": "text/plain", "cache-control": "no-store" } });

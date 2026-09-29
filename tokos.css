@@ -1,0 +1,241 @@
+/* Tokós: CTG reading trainer (StewardMD module), sibling of Ophthalmós.
+   Two themes, both from the use scene. Monitor (dark, default): the trace reads the way a labour-ward
+   fetal monitor shows it, green FHR on black. Paper (light): the trace reads the way the printout does,
+   dark ink on a red grid. The host resolves the system preference and the in-app choice into body.dark
+   (body.v3-dark on v3 screens; vault/modules/Appearance.md, graphite-dark.css), so the paper theme
+   keys off that marker. A prefers-color-scheme query would contradict an in-app choice, so none is used.
+   Overlay contract mirrors .oph-overlay: display:none when closed is load-bearing for swipe-back.js. */
+.tok-root {
+  --tk-bg: #000; --tk-s1: #121214; --tk-s2: #1c1c1f; --tk-s3: #2c2c30; --tk-line: #34343a;
+  --tk-text: #f2f2f4; --tk-mut: #a8a8b0; --tk-ok: #34c759; --tk-bad: #ff6961; --tk-warn: #ffc05a;
+  /* accent = the caliper colour, one accent for the whole module; text on the fill is 9.6:1 */
+  --tk-acc: #38bdf8; --tk-on-acc: #031520; --tk-acc-soft: rgba(56, 189, 248, .14);
+  /* trace */
+  --tk-trace-bg: #05070a; --tk-grid: #16202c; --tk-grid-major: #2a3a4d; --tk-band: rgba(16, 185, 129, .07);
+  --tk-normal: #10b981; --tk-amber: #f59e0b; --tk-fhr: #3ee07a; --tk-uc: #fb7185; --tk-axis: #8b98a9; --tk-cal: #38bdf8;
+  --tk-ease: cubic-bezier(0.23, 1, 0.32, 1);
+  position: fixed; inset: 0; z-index: 880;
+  background: var(--tk-bg); color: var(--tk-text);
+  display: none; flex-direction: column; overflow: hidden;
+  font-family: inherit; font-size: 16px; line-height: 1.45;
+  padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px);
+  -webkit-font-smoothing: antialiased; color-scheme: dark;
+}
+body:not(.dark):not(.v3-dark) .tok-root {
+  --tk-bg: #fbf9f4; --tk-s1: #f2eee4; --tk-s2: #e8e2d4; --tk-s3: #d6ceba; --tk-line: #d9d1bf;
+  --tk-text: #1c1b18; --tk-mut: #5a574f; --tk-ok: #15803d; --tk-bad: #b42318; --tk-warn: #9a5b00;
+  --tk-acc: #0e6f86; --tk-on-acc: #fff; --tk-acc-soft: rgba(14, 111, 134, .1);
+  --tk-trace-bg: #fffdf8; --tk-grid: #f4d3d0; --tk-grid-major: #e3a19b; --tk-band: rgba(15, 118, 110, .07);
+  --tk-normal: #0f766e; --tk-amber: #b45309; --tk-fhr: #16181d; --tk-uc: #1e3a8a; --tk-axis: #6b6259; --tk-cal: #0e6f86;
+  color-scheme: light;
+}
+.tok-root.on { display: flex; }
+body.tok-noscroll { overflow: hidden; }
+.tok-root * { box-sizing: border-box; }
+.tok-root ::selection { background: var(--tk-acc-soft); color: var(--tk-text); }
+.tok-root button { font: inherit; color: inherit; -webkit-tap-highlight-color: transparent; cursor: pointer; touch-action: manipulation; }
+.tok-root button:focus-visible, .tok-root [tabindex]:focus-visible { outline: 2px solid var(--tk-acc); outline-offset: 2px; }
+.tok-root .smd-ico { width: 20px; height: 20px; flex: 0 0 auto; }
+.tok-root output, .tok-count, .tok-score, .tok-kv dd, .tok-vc b, .tok-quality, .tok-due b { font-variant-numeric: tabular-nums; }
+.tok-sr { position: absolute !important; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* Draft mark: last line of every screen's scroll, readable and announced (AA muted text). */
+.tok-draft { margin: 20px 16px 0; font-size: 12px; line-height: 1.4; text-align: center; color: var(--tk-mut); }
+.tok-i { display: inline-flex; }
+.tok-pad { padding-left: 16px; padding-right: 16px; }
+.tok-scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+  scrollbar-width: thin; scrollbar-color: var(--tk-s3) transparent; padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+
+/* ---- top bar (same geometry as .oph-top) ---- */
+.tok-top { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; padding: calc(8px + env(safe-area-inset-top, 0px)) 12px 8px; }
+.tok-back, .tok-icon { width: 44px; height: 44px; flex: 0 0 auto; border-radius: 50%; border: 0; background: var(--tk-s2); color: var(--tk-text);
+  display: inline-flex; align-items: center; justify-content: center; font-size: 24px; line-height: 1;
+  transition: transform 140ms var(--tk-ease), background-color 140ms ease; }
+.tok-back:active, .tok-icon:active { transform: scale(0.94); }
+.tok-flip { display: inline-flex; transform: rotate(180deg); }
+.tok-title { flex: 1 1 auto; min-width: 0; }
+.tok-title b { display: block; font-size: 17px; font-weight: 650; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tok-title span { display: block; font-size: 13px; color: var(--tk-mut); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tok-lang { min-height: 44px; padding: 0 14px; border-radius: 22px; border: 1px solid var(--tk-line); background: transparent; font-size: 15px; font-weight: 600; }
+
+/* ---- buttons ---- */
+.tok-btn { width: 100%; min-height: 52px; border-radius: 14px; border: 0; padding: 0 20px; font-weight: 650; font-size: 16px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  transition: transform 140ms var(--tk-ease), background-color 160ms ease, opacity 160ms ease; }
+.tok-btn:active { transform: scale(0.97); }
+.tok-btn.pri { background: var(--tk-acc); color: var(--tk-on-acc); }
+.tok-btn.sec { background: var(--tk-s2); color: var(--tk-text); }
+.tok-btn[disabled] { background: var(--tk-s2); color: var(--tk-mut); cursor: default; }
+.tok-btn[disabled]:active { transform: none; }
+
+/* ---- segmented control (level, caliper mode) ---- */
+.tok-seg { display: inline-flex; background: var(--tk-s1); border-radius: 12px; padding: 3px; gap: 2px; }
+.tok-seg button { border: 0; background: transparent; color: var(--tk-mut); min-height: 44px; padding: 0 16px; border-radius: 9px;
+  font-size: 15px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: background-color 160ms ease, color 160ms ease; }
+.tok-seg button[aria-pressed="true"] { background: var(--tk-s3); color: var(--tk-text); }
+.tok-seg.sm button { min-height: 44px; padding: 0 10px; font-size: 14px; white-space: nowrap; }
+.tok-cal-bar .tok-seg { display: flex; }
+.tok-cal-bar .tok-seg button { flex: 1 1 0; justify-content: center; }
+.tok-pro { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; color: var(--tk-warn); }
+.tok-pro .smd-ico { width: 14px; height: 14px; }
+.tok-pro.used { color: var(--tk-mut); }
+
+/* ---- hub ---- */
+.tok-root .tok-seg[role="group"]:first-child { margin: 8px 0 20px; }
+.tok-clinic { width: 100%; display: flex; align-items: center; gap: 14px; text-align: left; border: 1px solid var(--tk-line); background: var(--tk-s1);
+  padding: 14px 12px 14px 14px; border-radius: 16px; transition: transform 140ms var(--tk-ease), background-color 160ms ease; }
+.tok-clinic:active { transform: scale(0.985); background: var(--tk-s2); }
+.tok-tile { width: 48px; height: 48px; flex: 0 0 auto; border-radius: 12px; background: var(--tk-trace-bg); color: var(--tk-fhr);
+  display: inline-flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 1px var(--tk-line); }
+.tok-tile .smd-ico { width: 26px; height: 26px; }
+.tok-clinic-b { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.tok-clinic-b > b { font-size: 17px; font-weight: 650; }
+.tok-clinic-b > span { font-size: 13px; color: var(--tk-mut); }
+.tok-clinic-b .tok-due { margin-top: 4px; font-size: 14px; color: var(--tk-text); }
+.tok-due b { color: var(--tk-acc); font-weight: 700; }
+.tok-chev { color: var(--tk-mut); display: inline-flex; }
+.tok-note { font-size: 14px; color: var(--tk-mut); margin: 20px 2px 0; line-height: 1.5; max-width: 60ch; }
+.tok-src { font-size: 12px; margin-top: 10px; }
+
+/* ---- loading / error / done ---- */
+.tok-loading { display: grid; gap: 12px; padding-top: 8px; }
+.tok-sk { display: block; border-radius: 12px; background: var(--tk-s1); }
+.tok-sk-a { width: 200px; height: 50px; }
+.tok-sk-b { height: 80px; border-radius: 16px; }
+.tok-sk-c { width: 80%; height: 40px; }
+@media (prefers-reduced-motion: no-preference) { .tok-sk { animation: tok-pulse 1.2s ease-in-out infinite alternate; } }
+@keyframes tok-pulse { from { opacity: 1; } to { opacity: .55; } }
+.tok-err { padding: 32px 4px; text-align: left; }
+.tok-err p { margin: 0 0 16px; font-size: 16px; }
+.tok-err-trace { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 8px 16px; text-align: center; }
+.tok-err-trace p { margin: 0; font-size: 14px; }
+.tok-err-trace .tok-btn { width: auto; min-height: 44px; }
+.tok-done { padding-top: 24px; }
+.tok-done-h { font-size: 24px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 6px; }
+.tok-done p { color: var(--tk-mut); margin: 0 0 24px; }
+.tok-done .tok-done-h { color: var(--tk-text); margin-bottom: 6px; }
+
+/* ---- clinic: patient strip ---- */
+/* keyboard focus never lands under the pinned trace or the pinned submit bar */
+.tok-clinic-view { scroll-padding-top: 190px; scroll-padding-bottom: 120px; }
+.tok-block h3, .tok-why h3, .tok-done-h { text-wrap: balance; }
+.tok-why li, .tok-note { text-wrap: pretty; }
+.tok-vignette { margin: 2px 0 10px; }
+.tok-vrow { display: flex; flex-wrap: wrap; row-gap: 8px; background: var(--tk-s1); border-radius: 14px; padding: 10px 4px; }
+.tok-vc { flex: 1 1 auto; display: flex; flex-direction: column; align-items: flex-start; padding: 0 10px; min-width: 0; }
+.tok-vc + .tok-vc { border-left: 1px solid var(--tk-line); }
+.tok-vc b { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; white-space: nowrap; }
+.tok-vc b small { font-size: 12px; font-weight: 600; color: var(--tk-mut); }
+.tok-vc span { font-size: 12px; color: var(--tk-mut); white-space: nowrap; }
+.tok-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.tok-chip { font-size: 13px; padding: 4px 10px; border-radius: 999px; background: var(--tk-s2); }
+.tok-strip-head { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--tk-mut); margin: 0 0 6px; }
+.tok-quality { color: var(--tk-mut); }
+.tok-quality.low { color: var(--tk-warn); font-weight: 600; }
+
+/* ---- clinic: the trace (hero). It stays pinned while the checklist scrolls under it. ---- */
+.tok-hold { position: sticky; top: 0; z-index: 2; background: var(--tk-bg); padding-bottom: 8px; box-shadow: 0 1px 0 var(--tk-line); }
+.tok-stage { position: relative; width: 100%; background: var(--tk-trace-bg); overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none;
+  border-top: 1px solid var(--tk-line); border-bottom: 1px solid var(--tk-line); }
+.tok-stage svg { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; display: block; }
+.tok-stage.zoomed { cursor: grab; }
+.tok-loading-trace { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--tk-mut); font-size: 14px; }
+.tok-cal-bar { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 8px 10px; padding-top: 10px; }
+.tok-zoom { display: inline-flex; gap: 6px; justify-self: end; }
+.tok-icon .smd-ico { width: 20px; height: 20px; }
+.tok-fit { width: auto; padding: 0 14px; border-radius: 22px; font-size: 14px; font-weight: 600; }
+.tok-read { display: block; min-height: 20px; padding-top: 8px; font-size: 14px; font-weight: 600; color: var(--tk-cal); }
+.tok-read.idle { color: var(--tk-mut); font-weight: 500; }
+.tok-step { width: auto; min-width: 64px; padding: 0 12px; border-radius: 22px; font-size: 15px; font-weight: 650; gap: 3px; font-variant-numeric: tabular-nums; }
+.tok-step small { font-size: 11px; font-weight: 600; color: var(--tk-mut); }
+
+/* Trace SVG (our renderer emits class names only). Strokes are non-scaling so a 30-minute strip shown
+   at phone width keeps crisp 1 px grid and a readable FHR line at every zoom. */
+.tk-bg { fill: var(--tk-trace-bg); } .tk-band { fill: var(--tk-band); }
+.tk-grid-minor, .tk-grid-minor-t, .tk-grid-major, .tk-grid-major-t, .tk-line-normal, .tk-line-100, .tk-fhr, .tk-uc, .tk-cal-line, .tk-cal-hit { vector-effect: non-scaling-stroke; }
+.tok-stage { --k: 1; }
+.tk-grid-minor, .tk-grid-minor-t { stroke: var(--tk-grid); stroke-width: calc(.5px / var(--k)); } .tk-grid-minor-t { stroke-dasharray: 2 3; }
+.tk-grid-major, .tk-grid-major-t { stroke: var(--tk-grid-major); stroke-width: calc(.75px / var(--k)); }
+.tk-line-normal { stroke: var(--tk-normal); stroke-width: calc(1px / var(--k)); stroke-dasharray: 4 3; } .tk-line-100 { stroke: var(--tk-amber); stroke-width: calc(1px / var(--k)); stroke-dasharray: 4 3; }
+.tk-axis { fill: var(--tk-axis); font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; font-size: calc(40px / var(--k)); paint-order: stroke; stroke: var(--tk-trace-bg); stroke-width: calc(8px / var(--k)); }
+.tok-stage:not(.zoomed) .tk-axis-odd { display: none; }
+.tk-fhr { fill: none; stroke: var(--tk-fhr); stroke-width: calc(1.4px / var(--k)); stroke-linejoin: round; } .tk-uc { fill: none; stroke: var(--tk-uc); stroke-width: calc(1.2px / var(--k)); }
+.tk-cal-line { stroke: var(--tk-cal); stroke-width: calc(1.25px / var(--k)); stroke-dasharray: 5 4; }
+.tk-cal-line.tk-cal-sel { stroke-width: calc(2px / var(--k)); stroke-dasharray: none; }
+.tk-cal-hit { stroke: transparent; stroke-width: calc(36px / var(--k)); cursor: grab; touch-action: none; }
+
+/* ---- clinic: FIGO checklist ---- */
+#tokChecklist { padding-top: 6px; }
+.tok-q { border: 0; margin: 0; padding: 18px 0 2px; min-width: 0; }
+.tok-q legend { float: left; width: 100%; padding: 0; font-size: 15px; font-weight: 650; margin-bottom: 8px; }
+.tok-opts { clear: both; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.tok-q[data-q="variability"] .tok-opts, .tok-q[data-q="figo"] .tok-opts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.tok-q[data-q="uc"] .tok-opts, .tok-q[data-q="action"] .tok-opts { grid-template-columns: minmax(0, 1fr); }
+.tok-opt { min-height: 48px; padding: 8px 10px; border-radius: 12px; border: 1px solid var(--tk-line); background: var(--tk-s1);
+  font-size: 15px; font-weight: 550; line-height: 1.25; text-align: center;
+  transition: transform 140ms var(--tk-ease), background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease; }
+.tok-q[data-q="uc"] .tok-opt, .tok-q[data-q="action"] .tok-opt { text-align: left; padding: 10px 14px; }
+.tok-opt:active { transform: scale(0.97); }
+.tok-opt[aria-pressed="true"] { background: var(--tk-acc-soft); border-color: var(--tk-acc); box-shadow: inset 0 0 0 1px var(--tk-acc); }
+/* sticky insets are measured inside the scroller's padding, so the bar reaches down over it */
+.tok-foot { position: sticky; bottom: calc(-16px - env(safe-area-inset-bottom, 0px)); z-index: 2; display: flex; flex-direction: column; gap: 6px; padding-top: 10px;
+  padding-bottom: calc(22px + env(safe-area-inset-bottom, 0px)); margin-top: 16px;
+  background: var(--tk-bg); box-shadow: 0 -1px 0 var(--tk-line); }
+.tok-count { font-size: 13px; color: var(--tk-mut); text-align: center; }
+
+/* ---- reveal ---- */
+.tok-reveal { padding-top: 4px; }
+.tok-score { margin: 4px 0 8px; font-size: 16px; color: var(--tk-mut); display: flex; align-items: baseline; gap: 8px; }
+.tok-score b { font-size: 40px; font-weight: 750; letter-spacing: -0.02em; color: var(--tk-text); }
+.tok-score small { font-size: 22px; font-weight: 650; color: var(--tk-mut); }
+.tok-rule { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: var(--tk-mut); margin: 0 0 14px; }
+.tok-rule .smd-ico { width: 16px; height: 16px; margin-top: 1px; }
+.tok-concord { list-style: none; margin: 0 0 8px; padding: 0; }
+.tok-row { padding: 12px 0; }
+.tok-row + .tok-row { border-top: 1px solid var(--tk-line); }
+.tok-row-h { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.tok-row-h b { font-size: 14px; font-weight: 600; color: var(--tk-mut); }
+.tok-mark { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 700; white-space: nowrap; }
+.tok-mark .smd-ico { width: 16px; height: 16px; }
+.tok-row.ok .tok-mark { color: var(--tk-ok); }
+.tok-row.no .tok-mark { color: var(--tk-bad); }
+.tok-ans { margin: 4px 0 0; font-size: 16px; font-weight: 600; }
+.tok-ans span { display: inline-block; min-width: 64px; margin-right: 8px; font-size: 13px; font-weight: 600; color: var(--tk-mut); }
+.tok-ans.mine { color: var(--tk-mut); text-decoration: line-through; text-decoration-color: var(--tk-bad); text-decoration-thickness: 1.5px; }
+.tok-ans.mine span { text-decoration: none; }
+.tok-block { background: var(--tk-s1); border-radius: 16px; padding: 14px 16px 6px; margin: 14px 0; }
+.tok-block h3, .tok-why h3 { margin: 0 0 8px; font-size: 15px; font-weight: 650; }
+.tok-block dl { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; }
+.tok-kv { padding: 8px 0 10px; min-width: 0; }
+.tok-kv dt { font-size: 12px; color: var(--tk-mut); }
+.tok-kv dd { margin: 2px 0 0; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+.tok-kv dd small { display: block; font-size: 12px; font-weight: 500; letter-spacing: 0; color: var(--tk-mut); margin-top: 1px; }
+.tok-why { margin: 20px 0 0; }
+.tok-why ul { margin: 0; padding: 0 0 0 18px; display: grid; gap: 10px; font-size: 15px; line-height: 1.55; max-width: 65ch; }
+.tok-why li::marker { color: var(--tk-acc); }
+.tok-next { font-size: 14px; color: var(--tk-mut); margin: 20px 0 0; }
+.tok-next b { color: var(--tk-text); }
+.tok-reveal + .tok-foot { margin-top: 8px; }
+
+/* The reveal is the one authored moment: rows settle in quickly, in reading order. */
+@media (prefers-reduced-motion: no-preference) {
+  .tok-row, .tok-block, .tok-why { animation: tok-rise 240ms var(--tk-ease) backwards; }
+  .tok-row { animation-delay: calc(var(--i, 0) * 35ms); }
+  .tok-block, .tok-why { animation-delay: 220ms; }
+}
+@keyframes tok-rise { from { opacity: 0; transform: translateY(6px); } }
+@media (hover: hover) and (pointer: fine) {
+  .tok-opt:not([aria-pressed="true"]):hover { background: var(--tk-s2); }
+  .tok-back:hover, .tok-icon:hover, .tok-lang:hover { background: var(--tk-s3); }
+  .tok-seg button[aria-pressed="false"]:hover { color: var(--tk-text); }
+  .tok-clinic:hover { background: var(--tk-s2); }
+  .tok-btn.sec:hover { background: var(--tk-s3); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tok-root * { transition-property: opacity, background-color, border-color, color, box-shadow !important; }
+  .tok-root .tok-stage svg { transition: none !important; }
+}
+
+/* tablet / landscape: the strip takes the width, the checklist sits under it in two columns */
+@media (min-width: 720px) {
+  .tok-scroll > .tok-pad, .tok-strip-head, .tok-cal-bar, #tokChecklist, .tok-reveal, .tok-foot.tok-pad { padding-left: max(16px, calc((100% - 720px) / 2)); padding-right: max(16px, calc((100% - 720px) / 2)); }
+}

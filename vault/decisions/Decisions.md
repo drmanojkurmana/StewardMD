@@ -10935,3 +10935,6 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   signs off the extraction review (owner: "Me, yes and start"). [[Dose Calculator]]
 - **Owner, 2026-09-28 ("The doses in our database drug monograph are already verified, use the same"):**
   `smd_dose_calc` defaults ON; the calculator's "UNDER REVIEW" pill is removed. Kill switch `smd_dose_calc = "0"`.
+
+## 2026-09-29 - Tokós lives natively in StewardMD and duplicates the Ophthalmós engine
+- Tokós lives natively in StewardMD (not a synced repo) and duplicates the FSRS/zoom engine from Ophthalmós until a third specialty module (rule of three). Flag `smd_tokos` default OFF. [[Tokós]]
