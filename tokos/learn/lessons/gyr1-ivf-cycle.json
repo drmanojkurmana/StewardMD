@@ -1,0 +1,246 @@
+{
+  "id": "gyr1-ivf-cycle",
+  "unit": "gyr1",
+  "level": "resident",
+  "minutes": 6,
+  "review": "ai_drafted",
+  "title": {
+    "en": "The IVF cycle: protocol, trigger, freeze-all",
+    "hi": "IVF चक्र: प्रोटोकॉल, ट्रिगर, फ़्रीज़-ऑल"
+  },
+  "idea": {
+    "en": "Fit the stimulation to the ovarian reserve and the trigger to the OHSS risk. Freeze all embryos when the risk is high.",
+    "hi": "उत्तेजना को ओवेरियन रिज़र्व के हिसाब से और ट्रिगर को OHSS के ख़तरे के हिसाब से चुनें। ख़तरा ज़्यादा हो तो सारे भ्रूण फ़्रीज़ करें।"
+  },
+  "see": {
+    "diagram": "diagrams/gyr1-ivf-cycle.svg",
+    "w": 480,
+    "h": 240,
+    "alt": {
+      "en": "Four steps from left to right. An ovary with many follicles and a needle. A dish with an egg and sperm dots. A uterus with a transfer catheter and an embryo. A small snowflake for frozen embryos.",
+      "hi": "बाएँ से दाएँ चार चरण। कई फ़ॉलिकल वाला अंडाशय और एक सुई। अंडे और शुक्राणु के बिंदुओं वाली डिश। ट्रांसफ़र कैथेटर और भ्रूण वाला गर्भाशय। जमे हुए भ्रूण के लिए एक छोटा स्नोफ़्लेक।"
+    },
+    "caption": {
+      "en": "Stimulate, retrieve, fertilise, then transfer fresh or freeze for a later transfer.",
+      "hi": "उत्तेजित करें, अंडे निकालें, निषेचन कराएँ, फिर ताज़ा ट्रांसफ़र करें या बाद के लिए फ़्रीज़ करें।"
+    },
+    "credit": "Original diagram, Tokos (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.15,
+        "y": 0.5,
+        "label": {
+          "en": "Stimulated ovary",
+          "hi": "उत्तेजित अंडाशय"
+        },
+        "note": {
+          "en": "Predict the response with [[afc]] or AMH, then set the dose.",
+          "hi": "[[afc]] या AMH से प्रतिक्रिया का अनुमान लगाकर मात्रा तय करें।"
+        }
+      },
+      {
+        "x": 0.27,
+        "y": 0.3,
+        "label": {
+          "en": "Retrieval needle",
+          "hi": "अंडा निकालने की सुई"
+        },
+        "note": {
+          "en": "Given after the [[trigger]] when several leading follicles are about 16 to 22 mm.",
+          "hi": "[[trigger]] के बाद, जब कई प्रमुख फ़ॉलिकल लगभग 16 से 22 mm के हों।"
+        }
+      },
+      {
+        "x": 0.46,
+        "y": 0.5,
+        "label": {
+          "en": "Dish with egg and sperm",
+          "hi": "अंडे और शुक्राणु वाली डिश"
+        },
+        "note": {
+          "en": "Fertilisation and embryo culture happen here.",
+          "hi": "निषेचन और भ्रूण का संवर्धन यहीं होता है।"
+        }
+      },
+      {
+        "x": 0.73,
+        "y": 0.5,
+        "label": {
+          "en": "Transfer catheter",
+          "hi": "ट्रांसफ़र कैथेटर"
+        },
+        "note": {
+          "en": "Use ultrasound guidance. Prefer single embryo transfer.",
+          "hi": "अल्ट्रासाउंड गाइडेंस लें। एकल भ्रूण ट्रांसफ़र को प्राथमिकता दें।"
+        }
+      },
+      {
+        "x": 0.87,
+        "y": 0.8,
+        "label": {
+          "en": "Frozen embryos",
+          "hi": "जमे हुए भ्रूण"
+        },
+        "note": {
+          "en": "The [[freeze-all]] route protects against late OHSS.",
+          "hi": "[[freeze-all]] का रास्ता देर से होने वाले OHSS से बचाता है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Predict the response with AFC or AMH. Then choose the drug and dose (ESHRE 2025, strong).",
+        "hi": "AFC या AMH से प्रतिक्रिया का अनुमान लगाएँ। फिर दवा और मात्रा चुनें (ESHRE 2025, मज़बूत)।"
+      },
+      {
+        "en": "A conventional starting dose is 150 to 225 IU. For predicted high responders, 100 to under 150 IU is probably better. Above 300 IU is not recommended in low responders.",
+        "hi": "सामान्य शुरुआती मात्रा 150 से 225 IU है। अनुमानित हाई रिस्पॉन्डर में 100 से 150 IU से कम शायद बेहतर है। लो रिस्पॉन्डर में 300 IU से ऊपर की सिफ़ारिश नहीं है।"
+      },
+      {
+        "en": "Prefer the GnRH antagonist protocol over agonist protocols: equal efficacy and higher safety. It is strongly advised for predicted high responders.",
+        "hi": "GnRH एगोनिस्ट प्रोटोकॉल के बजाय एंटागोनिस्ट प्रोटोकॉल को प्राथमिकता दें: बराबर असर और ज़्यादा सुरक्षा। अनुमानित हाई रिस्पॉन्डर में इसकी ज़ोरदार सलाह है।"
+      },
+      {
+        "en": "Trigger when several leading follicles reach about 16 to 22 mm. In women at risk of OHSS, use a GnRH agonist trigger with [[freeze-all]] (strong).",
+        "hi": "जब कई प्रमुख फ़ॉलिकल लगभग 16 से 22 mm के हों तब ट्रिगर दें। OHSS के ख़तरे वाली महिलाओं में GnRH एगोनिस्ट ट्रिगर के साथ [[freeze-all]] करें (मज़बूत)।"
+      },
+      {
+        "en": "Do not use an agonist trigger routinely in the general population with fresh transfer. A dopamine agonist cuts early OHSS after an hCG trigger.",
+        "hi": "सामान्य मरीज़ों में ताज़ा ट्रांसफ़र के साथ एगोनिस्ट ट्रिगर रूटीन में न दें। hCG ट्रिगर के बाद डोपामाइन एगोनिस्ट शुरुआती OHSS घटाता है।"
+      },
+      {
+        "en": "Embryo number: the ART Act allows up to 3 per cycle. NICE (2026) says never more than 2 and single transfer for a top-quality blastocyst.",
+        "hi": "भ्रूण की संख्या: ART एक्ट प्रति चक्र 3 तक की अनुमति देता है। NICE (2026) कहता है कभी 2 से ज़्यादा नहीं और उच्च गुणवत्ता के ब्लास्टोसिस्ट पर एक ही ट्रांसफ़र।"
+      }
+    ],
+    "analogy": {
+      "en": "Stimulation is the accelerator. The agonist trigger with freezing is the handbrake, so a fast cycle cannot roll into OHSS.",
+      "hi": "उत्तेजना एक्सेलरेटर है। फ़्रीज़ के साथ एगोनिस्ट ट्रिगर हैंडब्रेक है, ताकि तेज़ चक्र OHSS में न लुढ़के।"
+    }
+  },
+  "spot": [
+    {
+      "en": "A very high AFC or AMH, or many follicles at monitoring, marks a high responder.",
+      "hi": "बहुत ज़्यादा AFC या AMH, या निगरानी में कई फ़ॉलिकल, हाई रिस्पॉन्डर की निशानी हैं।"
+    },
+    {
+      "en": "In an agonist cycle, 19 or more follicles of 11 mm or more means high OHSS risk. ESHRE says cancel the trigger first.",
+      "hi": "एगोनिस्ट चक्र में 11 mm या ज़्यादा के 19 या अधिक फ़ॉलिकल का मतलब OHSS का ऊँचा ख़तरा है। ESHRE पहले ट्रिगर रद्द करने को कहता है।"
+    },
+    {
+      "en": "A low response alone is not a reason to cancel the cycle.",
+      "hi": "सिर्फ़ कम प्रतिक्रिया चक्र रद्द करने की वजह नहीं है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Decide the protocol before you start: antagonist for most, dose by predicted response.",
+      "hi": "शुरू करने से पहले प्रोटोकॉल तय करें: ज़्यादातर में एंटागोनिस्ट, मात्रा अनुमानित प्रतिक्रिया से।"
+    },
+    {
+      "en": "If risk is high: agonist trigger, freeze all embryos, and give a dopamine agonist when hCG was used.",
+      "hi": "ख़तरा ज़्यादा हो तो: एगोनिस्ट ट्रिगर, सारे भ्रूण फ़्रीज़, और hCG दिया गया हो तो डोपामाइन एगोनिस्ट दें।"
+    },
+    {
+      "en": "Counsel on embryo number and record written consent, as the ART Act requires.",
+      "hi": "भ्रूण की संख्या पर परामर्श दें और ART एक्ट के अनुसार लिखित सहमति दर्ज करें।"
+    }
+  ],
+  "remember": {
+    "en": "Antagonist protocol, dose by reserve, agonist trigger plus freeze-all for high risk.",
+    "hi": "एंटागोनिस्ट प्रोटोकॉल, मात्रा रिज़र्व के हिसाब से, ऊँचे ख़तरे में एगोनिस्ट ट्रिगर और फ़्रीज़-ऑल।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which stimulation protocol does ESHRE 2025 recommend over agonist protocols in the general IVF population?",
+        "hi": "सामान्य IVF मरीज़ों में ESHRE 2025 एगोनिस्ट प्रोटोकॉल के बजाय कौन-सा प्रोटोकॉल सुझाता है?"
+      },
+      "o": [
+        {
+          "en": "Long agonist protocol",
+          "hi": "लॉन्ग एगोनिस्ट प्रोटोकॉल"
+        },
+        {
+          "en": "GnRH antagonist protocol",
+          "hi": "GnRH एंटागोनिस्ट प्रोटोकॉल"
+        },
+        {
+          "en": "Ultrashort agonist protocol",
+          "hi": "अल्ट्राशॉर्ट एगोनिस्ट प्रोटोकॉल"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Comparable efficacy and higher safety, especially for OHSS.",
+        "hi": "बराबर असर और ज़्यादा सुरक्षा, ख़ासकर OHSS के मामले में।"
+      }
+    },
+    {
+      "q": {
+        "en": "A woman on an antagonist protocol has 25 follicles and is at high OHSS risk. What is the best plan?",
+        "hi": "एंटागोनिस्ट प्रोटोकॉल पर एक महिला में 25 फ़ॉलिकल हैं और OHSS का ख़तरा ऊँचा है। सबसे अच्छी योजना क्या है?"
+      },
+      "o": [
+        {
+          "en": "hCG trigger and fresh transfer",
+          "hi": "hCG ट्रिगर और ताज़ा ट्रांसफ़र"
+        },
+        {
+          "en": "GnRH agonist trigger and freeze-all",
+          "hi": "GnRH एगोनिस्ट ट्रिगर और फ़्रीज़-ऑल"
+        },
+        {
+          "en": "Double the FSH dose",
+          "hi": "FSH की मात्रा दोगुनी करें"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "ESHRE 2025 recommends this combination to reduce severe OHSS.",
+        "hi": "गंभीर OHSS घटाने के लिए ESHRE 2025 यही संयोजन सुझाता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "How many oocytes or embryos may be placed in the uterus in one cycle under the ART Act 2021?",
+        "hi": "ART एक्ट 2021 में एक चक्र में गर्भाशय में कितने अंडाणु या भ्रूण रखे जा सकते हैं?"
+      },
+      "o": [
+        {
+          "en": "One",
+          "hi": "एक"
+        },
+        {
+          "en": "Not more than three",
+          "hi": "तीन से ज़्यादा नहीं"
+        },
+        {
+          "en": "Not more than five",
+          "hi": "पाँच से ज़्यादा नहीं"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Section 24(b) sets the limit at three. Guidelines such as NICE favour fewer.",
+        "hi": "धारा 24(b) सीमा तीन रखती है। NICE जैसी गाइडलाइन कम भ्रूण को पसंद करती हैं।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "gy-fertility",
+    "explorer": "cycle"
+  },
+  "glossary": [
+    "afc",
+    "freeze-all",
+    "trigger"
+  ],
+  "sources": [
+    "ESHRE Reproductive Endocrinology Guideline Group. ESHRE guideline: ovarian stimulation for IVF/ICSI, an update in 2025. Hum Reprod 2026;41(4):498-514. PMID 41732035",
+    "National Institute for Health and Care Excellence. Fertility problems: assessment and treatment (NG257). Published 31 March 2026, replaces CG156",
+    "The Assisted Reproductive Technology (Regulation) Act, 2021 (No. 42 of 2021), Gazette of India, 20 December 2021"
+  ]
+}

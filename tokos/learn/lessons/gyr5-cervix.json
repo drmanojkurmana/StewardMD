@@ -1,0 +1,264 @@
+{
+  "id": "gyr5-cervix",
+  "unit": "gyr5",
+  "level": "resident",
+  "minutes": 7,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Cervical cancer: treat by stage",
+    "hi": "सर्वाइकल कैंसर: स्टेज के हिसाब से इलाज"
+  },
+  "idea": {
+    "en": "Use the smallest safe operation for tiny tumours, open radical surgery for early ones, and chemoradiation with brachytherapy for advanced ones.",
+    "hi": "छोटे ट्यूमर में सबसे छोटा सुरक्षित ऑपरेशन, शुरुआती में खुली रेडिकल सर्जरी, और उन्नत में ब्रैकीथेरेपी के साथ कीमोरेडिएशन।"
+  },
+  "see": {
+    "diagram": "diagrams/gyr5-cervix.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A front view of the uterus and cervix with a red tumour in the cervix. A small teal dashed cone shows a conisation. A larger amber oval shows a radical hysterectomy field. A purple dashed pelvic field has arrows from both sides. Two green dots mark pelvic sentinel nodes.",
+      "hi": "गर्भाशय और गर्भाशय-ग्रीवा का सामने का दृश्य, ग्रीवा में लाल ट्यूमर। एक छोटा हरा टूटा शंकु कोनाइज़ेशन दिखाता है। बड़ा नारंगी अंडाकार रेडिकल हिस्टेरेक्टॉमी का क्षेत्र दिखाता है। बैंगनी टूटा श्रोणि क्षेत्र दोनों ओर से तीरों से घिरा है। दो हरे बिंदु श्रोणि की सेंटिनल नोड दिखाते हैं।"
+    },
+    "caption": {
+      "en": "The treatment field grows with stage: cone, radical hysterectomy, then pelvic chemoradiation with brachytherapy.",
+      "hi": "स्टेज बढ़ने पर इलाज का क्षेत्र बढ़ता है: कोन, रेडिकल हिस्टेरेक्टॉमी, फिर ब्रैकीथेरेपी के साथ श्रोणि कीमोरेडिएशन।"
+    },
+    "credit": "Original diagram, Tokos (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.5,
+        "y": 0.6,
+        "label": {
+          "en": "Cone",
+          "hi": "कोन"
+        },
+        "note": {
+          "en": "T1a is diagnosed by conisation. T1a1 without LVSI may need nothing more.",
+          "hi": "T1a का निदान कोनाइज़ेशन से होता है। LVSI के बिना T1a1 को इसके आगे कुछ नहीं चाहिए हो सकता।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.63,
+        "label": {
+          "en": "Tumour",
+          "hi": "ट्यूमर"
+        },
+        "note": {
+          "en": "Do MRI for local extent. Use PET-CT or CT for T1b3 and higher.",
+          "hi": "स्थानीय फैलाव के लिए MRI कराएँ। T1b3 और उससे ऊपर के लिए PET-CT या CT करें।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.78,
+        "label": {
+          "en": "Radical field",
+          "hi": "रेडिकल क्षेत्र"
+        },
+        "note": {
+          "en": "T1b1, T1b2 and T2a1: radical surgery by a gynaecological oncologist, open route.",
+          "hi": "T1b1, T1b2 और T2a1: गायनी ऑन्कोलॉजिस्ट द्वारा रेडिकल सर्जरी, खुले रास्ते से।"
+        }
+      },
+      {
+        "x": 0.9,
+        "y": 0.43,
+        "label": {
+          "en": "Chemoradiation field",
+          "hi": "कीमोरेडिएशन क्षेत्र"
+        },
+        "note": {
+          "en": "T1b3 to T4a: weekly cisplatin, EBRT and image-guided brachytherapy in under 7 weeks.",
+          "hi": "T1b3 से T4a: साप्ताहिक सिस्प्लैटिन, EBRT और इमेज-गाइडेड ब्रैकीथेरेपी, 7 हफ़्ते से कम में।"
+        }
+      },
+      {
+        "x": 0.33,
+        "y": 0.5,
+        "label": {
+          "en": "Sentinel node",
+          "hi": "सेंटिनल नोड"
+        },
+        "note": {
+          "en": "[[sentinel-node|Sentinel node]] assessment is the first surgical step. Node positive disease changes the plan.",
+          "hi": "[[sentinel-node|सेंटिनल नोड]] का आकलन पहला सर्जिकल क़दम है। नोड पॉज़िटिव होने पर योजना बदलती है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "MRI is mandatory for pelvic extent. For T1b3 and higher, add PET-CT or CT for nodes and distant disease (ESGO 2023).",
+        "hi": "श्रोणि के फैलाव के लिए MRI ज़रूरी है। T1b3 और उससे ऊपर में नोड और दूर के फैलाव के लिए PET-CT या CT जोड़ें (ESGO 2023)।"
+      },
+      {
+        "en": "Diagnose T1a by conisation. Conisation can be definitive in T1a1 without [[lvsi|LVSI]]. In T1a2, conisation or simple hysterectomy is adequate.",
+        "hi": "T1a का निदान कोनाइज़ेशन से करें। [[lvsi|LVSI]] के बिना T1a1 में कोनाइज़ेशन अंतिम इलाज हो सकता है। T1a2 में कोनाइज़ेशन या सिंपल हिस्टेरेक्टॉमी पर्याप्त है।"
+      },
+      {
+        "en": "For fertility, conisation or simple trachelectomy suits T1a and LVSI-negative T1b1 tumours under 2 cm. Radical trachelectomy is for T1b1 with LVSI.",
+        "hi": "प्रजनन के लिए कोनाइज़ेशन या सिंपल ट्रैकेलेक्टॉमी T1a और LVSI-नेगेटिव 2 cm से छोटे T1b1 ट्यूमर में उपयुक्त है। LVSI वाले T1b1 के लिए रेडिकल ट्रैकेलेक्टॉमी है।"
+      },
+      {
+        "en": "SHAPE (2024): 700 women with tumours up to 2 cm and limited stromal invasion. Simple hysterectomy with node assessment was not inferior. Pelvic recurrence at 3 years was 2.52% versus 2.17%.",
+        "hi": "SHAPE (2024): 2 cm तक के ट्यूमर और सीमित स्ट्रोमल इन्वेज़न वाली 700 महिलाएँ। नोड आकलन के साथ सिंपल हिस्टेरेक्टॉमी कमतर नहीं रही। 3 साल पर श्रोणि में दोबारा होना 2.52% बनाम 2.17% था।"
+      },
+      {
+        "en": "Simple hysterectomy also caused less urinary retention (0.6% versus 11.0% within 4 weeks). Use it only for that low-risk group.",
+        "hi": "सिंपल हिस्टेरेक्टॉमी में मूत्र रुकावट भी कम रही (4 हफ़्ते के भीतर 0.6% बनाम 11.0%)। इसे सिर्फ़ उसी कम जोखिम वाले समूह में इस्तेमाल करें।"
+      },
+      {
+        "en": "For T1b1, T1b2 and T2a1, radical surgery by a gynaecological oncologist is preferred. Laparotomy is the standard route.",
+        "hi": "T1b1, T1b2 और T2a1 में गायनी ऑन्कोलॉजिस्ट की रेडिकल सर्जरी पसंदीदा है। लैपरोटोमी मानक रास्ता है।"
+      },
+      {
+        "en": "LACC (2018): 631 women. At 4.5 years disease-free survival was 86.0% with minimally invasive surgery and 96.5% with open surgery. Overall survival at 3 years was 93.8% versus 99.0%.",
+        "hi": "LACC (2018): 631 महिलाएँ। 4.5 साल पर रोगमुक्त जीवन न्यूनतम आक्रामक सर्जरी में 86.0% और खुली सर्जरी में 96.5% रहा। 3 साल पर कुल जीवन 93.8% बनाम 99.0% रहा।"
+      },
+      {
+        "en": "ESGO allows a minimally invasive approach only for tumours under 2 cm with free margins after conisation, in expert high-volume centres.",
+        "hi": "ESGO न्यूनतम आक्रामक तरीक़े की अनुमति सिर्फ़ 2 cm से छोटे ट्यूमर में देता है, जिनमें कोनाइज़ेशन के बाद मार्जिन साफ़ हों, और वह भी विशेषज्ञ अधिक-मरीज़ वाले केंद्रों में।"
+      },
+      {
+        "en": "Avoid combining radical surgery with radiotherapy. Give adjuvant chemoradiation for positive nodes, margins or parametria. If risk factors are known at diagnosis, choose definitive chemoradiation.",
+        "hi": "रेडिकल सर्जरी और रेडियोथेरेपी को जोड़ने से बचें। पॉज़िटिव नोड, मार्जिन या पैरामीट्रियम में सहायक कीमोरेडिएशन दें। निदान पर ही जोखिम कारक पता हों तो निर्णायक कीमोरेडिएशन चुनें।"
+      },
+      {
+        "en": "Locally advanced disease (T1b3 to T4a) gets definitive chemoradiation with weekly cisplatin. Give EBRT of 45 Gy in 25 fractions or 46 Gy in 23, plus image-guided brachytherapy, within 7 weeks.",
+        "hi": "स्थानीय रूप से उन्नत रोग (T1b3 से T4a) में साप्ताहिक सिस्प्लैटिन के साथ निर्णायक कीमोरेडिएशन दें। 45 Gy की 25 फ़्रैक्शन या 46 Gy की 23 फ़्रैक्शन EBRT, और इमेज-गाइडेड ब्रैकीथेरेपी, 7 हफ़्ते के भीतर दें।"
+      },
+      {
+        "en": "Do not add adjuvant chemotherapy or a completion hysterectomy after chemoradiation outside trials. In recurrent disease with PD-L1 CPS of 1 or more, add pembrolizumab to platinum chemotherapy.",
+        "hi": "कीमोरेडिएशन के बाद ट्रायल के बाहर सहायक कीमोथेरेपी या पूरक हिस्टेरेक्टॉमी न जोड़ें। PD-L1 CPS 1 या ज़्यादा वाले दोबारा हुए रोग में प्लैटिनम कीमोथेरेपी में पेम्ब्रोलिज़ुमैब जोड़ें।"
+      }
+    ],
+    "analogy": {
+      "en": "Match the tool to the problem: a scoop for a crumb, a knife for a lump, radiation for a spreading stain.",
+      "hi": "औज़ार को समस्या से मिलाएँ: कण के लिए चम्मच, गाँठ के लिए चाकू, फैलते दाग़ के लिए विकिरण।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Tumour size under or over 2 cm, and LVSI, decide fertility sparing and simple versus radical surgery.",
+      "hi": "ट्यूमर का आकार 2 cm से कम या ज़्यादा, और LVSI, प्रजनन-रक्षक इलाज और सिंपल बनाम रेडिकल सर्जरी तय करते हैं।"
+    },
+    {
+      "en": "Positive pelvic nodes on imaging point to chemoradiation, not surgery.",
+      "hi": "इमेजिंग में पॉज़िटिव श्रोणि नोड कीमोरेडिएशन की ओर इशारा करते हैं, सर्जरी की ओर नहीं।"
+    },
+    {
+      "en": "A T1b3 or T2a2 tumour needs a specialist centre to choose between surgery and chemoradiation.",
+      "hi": "T1b3 या T2a2 ट्यूमर हो तो सर्जरी और कीमोरेडिएशन में चुनने के लिए विशेषज्ञ केंद्र चाहिए।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Do MRI, then PET-CT or CT for T1b3 and higher. Present every case at the MDT.",
+      "hi": "MRI कराएँ, फिर T1b3 और उससे ऊपर में PET-CT या CT। हर मामला MDT में रखें।"
+    },
+    {
+      "en": "Choose surgery or chemoradiation so that both are not needed. Keep the radiotherapy course under 7 weeks.",
+      "hi": "सर्जरी या कीमोरेडिएशन ऐसे चुनें कि दोनों की ज़रूरत न पड़े। रेडियोथेरेपी का कोर्स 7 हफ़्ते से कम रखें।"
+    },
+    {
+      "en": "See the Oncology module: Weekly Cisplatin Concurrent with Radiation, Paclitaxel plus Cisplatin plus Bevacizumab (GOG-240), and Pembrolizumab plus Platinum and Paclitaxel (KEYNOTE-826).",
+      "hi": "ऑन्कोलॉजी मॉड्यूल देखें: रेडिएशन के साथ साप्ताहिक सिस्प्लैटिन, पैक्लिटैक्सेल प्लस सिस्प्लैटिन प्लस बेवासिज़ुमैब (GOG-240), और पेम्ब्रोलिज़ुमैब प्लस प्लैटिनम व पैक्लिटैक्सेल (KEYNOTE-826)।"
+    }
+  ],
+  "remember": {
+    "en": "Cone for tiny, open radical for early, chemoradiation with brachytherapy for advanced. Never both radical surgery and radiotherapy.",
+    "hi": "छोटे के लिए कोन, शुरुआती के लिए खुली रेडिकल, उन्नत के लिए ब्रैकीथेरेपी के साथ कीमोरेडिएशन। रेडिकल सर्जरी और रेडियोथेरेपी दोनों कभी नहीं।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "What did LACC find for minimally invasive versus open radical hysterectomy?",
+        "hi": "LACC में न्यूनतम आक्रामक बनाम खुली रेडिकल हिस्टेरेक्टॉमी के बारे में क्या मिला?"
+      },
+      "o": [
+        {
+          "en": "Equal survival",
+          "hi": "जीवन-अवधि बराबर"
+        },
+        {
+          "en": "Lower disease-free survival with minimally invasive surgery",
+          "hi": "न्यूनतम आक्रामक सर्जरी में रोगमुक्त जीवन कम"
+        },
+        {
+          "en": "Better survival with minimally invasive surgery",
+          "hi": "न्यूनतम आक्रामक सर्जरी में जीवन बेहतर"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "4.5-year disease-free survival was 86.0% versus 96.5%.",
+        "hi": "4.5 साल का रोगमुक्त जीवन 86.0% बनाम 96.5% रहा।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which women can be considered for simple instead of radical hysterectomy?",
+        "hi": "किन महिलाओं में रेडिकल के बजाय सिंपल हिस्टेरेक्टॉमी पर विचार हो सकता है?"
+      },
+      "o": [
+        {
+          "en": "Tumour up to 2 cm with limited stromal invasion and node assessment",
+          "hi": "2 cm तक का ट्यूमर, सीमित स्ट्रोमल इन्वेज़न और नोड आकलन"
+        },
+        {
+          "en": "Any T1b tumour",
+          "hi": "कोई भी T1b ट्यूमर"
+        },
+        {
+          "en": "Positive pelvic nodes",
+          "hi": "पॉज़िटिव श्रोणि नोड"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "That was the low-risk group in SHAPE.",
+        "hi": "SHAPE में यही कम जोखिम वाला समूह था।"
+      }
+    },
+    {
+      "q": {
+        "en": "What is standard for locally advanced cervical cancer (T1b3 to T4a)?",
+        "hi": "स्थानीय रूप से उन्नत सर्वाइकल कैंसर (T1b3 से T4a) में मानक क्या है?"
+      },
+      "o": [
+        {
+          "en": "Radical hysterectomy plus adjuvant radiotherapy",
+          "hi": "रेडिकल हिस्टेरेक्टॉमी और सहायक रेडियोथेरेपी"
+        },
+        {
+          "en": "Definitive chemoradiation with image-guided brachytherapy",
+          "hi": "इमेज-गाइडेड ब्रैकीथेरेपी के साथ निर्णायक कीमोरेडिएशन"
+        },
+        {
+          "en": "Neoadjuvant chemotherapy then surgery",
+          "hi": "नियोएडजुवेंट कीमोथेरेपी फिर सर्जरी"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "ESGO advises against neoadjuvant chemotherapy followed by surgery.",
+        "hi": "ESGO नियोएडजुवेंट कीमोथेरेपी के बाद सर्जरी के ख़िलाफ़ सलाह देता है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "gy-oncology"
+  },
+  "glossary": [
+    "lvsi",
+    "sentinel-node"
+  ],
+  "sources": [
+    "Cibula D, et al. ESGO/ESTRO/ESP guidelines for the management of patients with cervical cancer, update 2023. Int J Gynecol Cancer 2023. PMID 37127326",
+    "Ramirez PT, Frumovitz M, Pareja R, et al. Minimally invasive versus abdominal radical hysterectomy for cervical cancer (LACC). N Engl J Med 2018. PMID 30380365",
+    "Plante M, Kwon JS, Ferguson S, et al. Simple versus radical hysterectomy in women with low-risk cervical cancer (SHAPE). N Engl J Med 2024. PMID 38416430"
+  ]
+}

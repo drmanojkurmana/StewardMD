@@ -1,0 +1,244 @@
+{
+  "id": "gyr2-primary-amenorrhoea",
+  "unit": "gyr2",
+  "level": "resident",
+  "minutes": 6,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Primary amenorrhoea: find the level",
+    "hi": "प्राइमरी अमेनोरिया: स्तर खोजें"
+  },
+  "idea": {
+    "en": "Use breast development, the uterus and FSH to find the level: outflow tract, ovary or brain. Then choose karyotype and imaging.",
+    "hi": "स्तन विकास, गर्भाशय और FSH से स्तर खोजें: निकास मार्ग, अंडाशय या दिमाग़। फिर कैरियोटाइप और इमेजिंग चुनें।"
+  },
+  "see": {
+    "diagram": "diagrams/gyr2-primary-amenorrhoea.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A branching tree. From a top circle, one branch leads to absent breasts and one to present breasts. Absent breasts split into a red up arrow and a blue flat line. Present breasts split into an empty dashed uterus and a uterus with a red bar.",
+      "hi": "शाखाओं वाला पेड़। ऊपर के गोले से एक शाखा अनुपस्थित स्तनों की ओर और एक मौजूद स्तनों की ओर जाती है। अनुपस्थित स्तन लाल ऊपर तीर और नीली सपाट रेखा में बँटते हैं। मौजूद स्तन खाली टूटी रेखा वाले गर्भाशय और लाल पट्टी वाले गर्भाशय में बँटते हैं।"
+    },
+    "caption": {
+      "en": "Breasts show oestrogen. FSH separates ovary from brain. A scan shows whether a uterus is there and open.",
+      "hi": "स्तन एस्ट्रोजन दिखाते हैं। FSH अंडाशय और दिमाग़ को अलग करता है। स्कैन दिखाता है कि गर्भाशय है या नहीं और खुला है या नहीं।"
+    },
+    "credit": "Original diagram, Tokos (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.27,
+        "y": 0.39,
+        "label": {
+          "en": "No breast development",
+          "hi": "स्तन विकास नहीं"
+        },
+        "note": {
+          "en": "Low oestrogen. Split by FSH: high means ovary, low or normal means brain or delay.",
+          "hi": "एस्ट्रोजन कम है। FSH से बाँटें: ऊँचा हो तो अंडाशय, कम या सामान्य हो तो दिमाग़ या देरी।"
+        }
+      },
+      {
+        "x": 0.15,
+        "y": 0.78,
+        "label": {
+          "en": "High FSH",
+          "hi": "ऊँचा FSH"
+        },
+        "note": {
+          "en": "Ovarian failure or gonadal dysgenesis. Send a karyotype and think of Turner syndrome.",
+          "hi": "अंडाशय की विफलता या गोनैडल डिसजेनेसिस। कैरियोटाइप भेजें और टर्नर सिंड्रोम सोचें।"
+        }
+      },
+      {
+        "x": 0.4,
+        "y": 0.77,
+        "label": {
+          "en": "Low or normal FSH",
+          "hi": "कम या सामान्य FSH"
+        },
+        "note": {
+          "en": "Hypothalamic or pituitary cause, delay or high prolactin. Check prolactin and TSH.",
+          "hi": "हाइपोथैलेमस या पिट्यूटरी का कारण, देरी या ऊँचा प्रोलैक्टिन। प्रोलैक्टिन और TSH जाँचें।"
+        }
+      },
+      {
+        "x": 0.63,
+        "y": 0.83,
+        "label": {
+          "en": "Uterus absent",
+          "hi": "गर्भाशय नहीं"
+        },
+        "note": {
+          "en": "Normal breasts and no uterus: [[mrkh]] if 46,XX or [[ais]] if 46,XY.",
+          "hi": "स्तन सामान्य और गर्भाशय नहीं: 46,XX हो तो [[mrkh]], 46,XY हो तो [[ais]]।"
+        }
+      },
+      {
+        "x": 0.85,
+        "y": 0.85,
+        "label": {
+          "en": "Blocked outflow",
+          "hi": "रुका हुआ निकास"
+        },
+        "note": {
+          "en": "Cyclic pain with a normal uterus suggests imperforate hymen or transverse septum.",
+          "hi": "सामान्य गर्भाशय के साथ चक्रीय दर्द अवछिद्रित हाइमन या आड़ी झिल्ली सुझाता है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Evaluate if there is no menarche by 15 years, or 3 years after breast budding. Exclude pregnancy in every case (AFP 2019).",
+        "hi": "15 साल तक माहवारी शुरू न हो, या स्तन विकास के 3 साल बाद तक न हो, तो जाँच करें। हर मामले में गर्भ हटाएँ (AFP 2019)।"
+      },
+      {
+        "en": "FSH, LH, prolactin and TSH find most endocrine causes. Add testosterone and DHEA-S for hyperandrogenism.",
+        "hi": "FSH, LH, प्रोलैक्टिन और TSH ज़्यादातर एंडोक्राइन कारण पकड़ते हैं। हाइपरएंड्रोजेनिज़्म में टेस्टोस्टेरोन और DHEA-S जोड़ें।"
+      },
+      {
+        "en": "Pelvic ultrasound or MRI shows the anatomy. [[mrkh]] affects about 1 in 5,000 girls and 15% of primary amenorrhoea. Puberty is normal and the karyotype is 46,XX.",
+        "hi": "पेल्विक अल्ट्रासाउंड या MRI शारीरिक रचना दिखाता है। [[mrkh]] लगभग 5,000 में 1 लड़की को और प्राइमरी अमेनोरिया के 15% में होता है। यौवन सामान्य और कैरियोटाइप 46,XX होता है।"
+      },
+      {
+        "en": "[[ais]] is 46,XY with normal breasts and no uterus. Genetic testing confirms it. Time gonad removal by malignancy risk and the patient's wishes.",
+        "hi": "[[ais]] में कैरियोटाइप 46,XY, स्तन सामान्य और गर्भाशय नहीं होता। जेनेटिक जाँच पक्का करती है। गोनैड निकालने का समय कैंसर के ख़तरे और मरीज़ की इच्छा से तय करें।"
+      },
+      {
+        "en": "High FSH means ovarian failure. A karyotype is abnormal in about a third of primary amenorrhoea. In Turner syndrome, screen for cardiac and renal defects.",
+        "hi": "ऊँचा FSH अंडाशय की विफलता है। प्राइमरी अमेनोरिया के लगभग एक तिहाई में कैरियोटाइप असामान्य होता है। टर्नर सिंड्रोम में हृदय और गुर्दे के दोष खोजें।"
+      },
+      {
+        "en": "Low or normal FSH points to the hypothalamus or pituitary. Consider delay, low energy availability, high prolactin, and MRI of the brain when indicated.",
+        "hi": "कम या सामान्य FSH हाइपोथैलेमस या पिट्यूटरी की ओर इशारा करता है। देरी, कम ऊर्जा उपलब्धता, ऊँचा प्रोलैक्टिन सोचें और ज़रूरत हो तो दिमाग़ का MRI कराएँ।"
+      }
+    ],
+    "analogy": {
+      "en": "Follow the pipe from top to bottom: the brain signals, the ovary answers, the uterus bleeds and the vagina drains. Find where the message stops.",
+      "hi": "पाइप को ऊपर से नीचे देखें: दिमाग़ संकेत देता है, अंडाशय जवाब देता है, गर्भाशय से ख़ून आता है और योनि से निकलता है। देखें संदेश कहाँ रुकता है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Height, BMI and dysmorphism such as a webbed neck or a low hairline.",
+      "hi": "क़द, BMI और असामान्य बनावट जैसे गर्दन पर पर्दा या नीची हेयरलाइन।"
+    },
+    {
+      "en": "Normal breast growth means oestrogen is being made.",
+      "hi": "सामान्य स्तन विकास का मतलब है कि एस्ट्रोजन बन रहा है।"
+    },
+    {
+      "en": "A short or absent vagina points to Mullerian agenesis or androgen insensitivity.",
+      "hi": "छोटी या अनुपस्थित योनि म्यूलेरियन एजेनेसिस या एंड्रोजन इनसेंसिटिविटी की ओर इशारा करती है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Do a pregnancy test, FSH, LH, prolactin and TSH.",
+      "hi": "गर्भ जाँच, FSH, LH, प्रोलैक्टिन और TSH कराएँ।"
+    },
+    {
+      "en": "Do a pelvic ultrasound, or MRI when unclear. Send a karyotype for high FSH or short stature.",
+      "hi": "पेल्विक अल्ट्रासाउंड कराएँ, स्पष्ट न हो तो MRI। FSH ऊँचा हो या क़द छोटा हो तो कैरियोटाइप भेजें।"
+    },
+    {
+      "en": "Counsel sensitively and refer: cardiology for Turner, and a gonad plan for 46,XY.",
+      "hi": "संवेदनशीलता से परामर्श दें और रेफ़र करें: टर्नर में हृदय रोग विशेषज्ञ, और 46,XY में गोनैड की योजना।"
+    }
+  ],
+  "remember": {
+    "en": "Breasts, uterus, FSH: three findings place the block in the brain, ovary or outflow tract.",
+    "hi": "स्तन, गर्भाशय, FSH: तीन निष्कर्ष रुकावट को दिमाग़, अंडाशय या निकास मार्ग में स्थापित करते हैं।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "When should primary amenorrhoea be evaluated?",
+        "hi": "प्राइमरी अमेनोरिया की जाँच कब करनी चाहिए?"
+      },
+      "o": [
+        {
+          "en": "No menarche by 13 years",
+          "hi": "13 साल तक माहवारी नहीं"
+        },
+        {
+          "en": "No menarche by 15 years, or 3 years after breast budding",
+          "hi": "15 साल तक माहवारी नहीं, या स्तन विकास के 3 साल बाद तक नहीं"
+        },
+        {
+          "en": "No menarche by 18 years only",
+          "hi": "सिर्फ़ 18 साल तक माहवारी नहीं"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "This is the threshold given in AFP 2019.",
+        "hi": "AFP 2019 यही सीमा देता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "A 17-year-old has normal breasts, no uterus on scan and a 46,XX karyotype. What is the likely diagnosis?",
+        "hi": "17 साल की लड़की के स्तन सामान्य हैं, स्कैन में गर्भाशय नहीं है और कैरियोटाइप 46,XX है। संभावित निदान क्या है?"
+      },
+      "o": [
+        {
+          "en": "Mullerian agenesis",
+          "hi": "म्यूलेरियन एजेनेसिस"
+        },
+        {
+          "en": "Turner syndrome",
+          "hi": "टर्नर सिंड्रोम"
+        },
+        {
+          "en": "Androgen insensitivity",
+          "hi": "एंड्रोजन इनसेंसिटिविटी"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Androgen insensitivity is 46,XY. Turner syndrome has streak gonads and high FSH.",
+        "hi": "एंड्रोजन इनसेंसिटिविटी 46,XY होती है। टर्नर में स्ट्रीक गोनैड और ऊँचा FSH होता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "A 16-year-old has no breasts and a raised FSH. What is the next test?",
+        "hi": "16 साल की लड़की के स्तन नहीं हैं और FSH ऊँचा है। अगली जाँच क्या है?"
+      },
+      "o": [
+        {
+          "en": "Karyotype",
+          "hi": "कैरियोटाइप"
+        },
+        {
+          "en": "Cranial MRI only",
+          "hi": "सिर्फ़ मस्तिष्क MRI"
+        },
+        {
+          "en": "Laparoscopy",
+          "hi": "लैप्रोस्कोपी"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "High FSH points to the ovary. A karyotype looks for Turner syndrome or a variant.",
+        "hi": "ऊँचा FSH अंडाशय की ओर इशारा करता है। कैरियोटाइप टर्नर सिंड्रोम या उसका प्रकार खोजता है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "gy-menstrual",
+    "explorer": "cycle"
+  },
+  "glossary": [
+    "ais",
+    "mrkh"
+  ],
+  "sources": [
+    "Amenorrhea: a systematic approach to diagnosis and management. Am Fam Physician 2019;100(1):39-48. PMID 31259490",
+    "ESHRE, ASRM, CREWHIRL and IMS guideline group. Evidence-based guideline: premature ovarian insufficiency. Hum Reprod Open 2024. PMID 39660328"
+  ]
+}

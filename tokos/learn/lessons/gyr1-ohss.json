@@ -1,0 +1,231 @@
+{
+  "id": "gyr1-ohss",
+  "unit": "gyr1",
+  "level": "resident",
+  "minutes": 6,
+  "review": "ai_drafted",
+  "title": {
+    "en": "OHSS: grade it, prevent it, manage it",
+    "hi": "OHSS: ग्रेड तय करें, रोकें, संभालें"
+  },
+  "idea": {
+    "en": "OHSS is a fluid shift after stimulation. Prevent it in the cycle plan, treat by grade, and watch for clots.",
+    "hi": "OHSS उत्तेजना के बाद तरल का खिसकना है। चक्र की योजना में इसे रोकें, ग्रेड के हिसाब से इलाज करें और थक्कों पर नज़र रखें।"
+  },
+  "see": {
+    "diagram": "diagrams/gyr1-ohss.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A body outline. Two large cystic ovaries sit in the pelvis. Blue fluid pools at the bottom of the abdomen. Two blue patches sit at the bottom of the lung outlines. A red vessel in the middle leaks blue drops.",
+      "hi": "शरीर की रूपरेखा। पेल्विस में दो बड़े सिस्टिक अंडाशय हैं। पेट के निचले हिस्से में नीला तरल जमा है। फेफड़ों की रूपरेखा के नीचे दो नीले धब्बे हैं। बीच की एक लाल नली से नीली बूँदें रिस रही हैं।"
+    },
+    "caption": {
+      "en": "Leaky vessels move fluid to the abdomen and chest. The blood then thickens and clots more easily.",
+      "hi": "रिसती नलियाँ तरल को पेट और छाती में भेजती हैं। तब खून गाढ़ा होता है और थक्के ज़्यादा आसानी से बनते हैं।"
+    },
+    "credit": "Original diagram, Tokos (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.33,
+        "y": 0.57,
+        "label": {
+          "en": "Enlarged ovary",
+          "hi": "बढ़ा हुआ अंडाशय"
+        },
+        "note": {
+          "en": "Mild: under 8 cm. Moderate: 8 to 12 cm. Severe: over 12 cm. Size can mislead after egg retrieval.",
+          "hi": "हल्का: 8 cm से कम। मध्यम: 8 से 12 cm। गंभीर: 12 cm से ज़्यादा। अंडा निकालने के बाद आकार भ्रम दे सकता है।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.88,
+        "label": {
+          "en": "Ascites",
+          "hi": "पेट में पानी"
+        },
+        "note": {
+          "en": "Seen on scan in moderate OHSS and clinical in severe OHSS. Drain under ultrasound if tense or causing breathlessness.",
+          "hi": "मध्यम OHSS में स्कैन पर दिखता है और गंभीर में जाँच से भी। तनाव या साँस फूलने पर अल्ट्रासाउंड की निगरानी में निकालें।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.2,
+        "label": {
+          "en": "Pleural fluid",
+          "hi": "फुफ्फुस में तरल"
+        },
+        "note": {
+          "en": "Hydrothorax is a severe feature. Large effusion with ARDS is critical.",
+          "hi": "हाइड्रोथोरैक्स गंभीर लक्षण है। बड़ा बहाव और ARDS क्रिटिकल है।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.55,
+        "label": {
+          "en": "Leaking vessel",
+          "hi": "रिसती नली"
+        },
+        "note": {
+          "en": "The fluid shift thickens the blood. Haematocrit above 0.45 is severe and above 0.55 is critical.",
+          "hi": "तरल खिसकने से खून गाढ़ा होता है। हेमैटोक्रिट 0.45 से ऊपर गंभीर और 0.55 से ऊपर क्रिटिकल है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "hCG, given as the trigger or made by a pregnancy, drives leaky vessels. Early OHSS follows the trigger. Late OHSS follows pregnancy.",
+        "hi": "hCG, चाहे ट्रिगर के रूप में दिया हो या गर्भ में बना हो, नलियों को रिसाऊ बनाता है। शुरुआती OHSS ट्रिगर के बाद और देर से होने वाला OHSS गर्भ के बाद आता है।"
+      },
+      {
+        "en": "Grade it. Mild: bloating, ovary under 8 cm. Moderate: ascites on scan, ovary 8 to 12 cm. Severe: clinical ascites, haematocrit above 0.45, oliguria, albumin below 35 g/L.",
+        "hi": "ग्रेड तय करें। हल्का: फूलना, अंडाशय 8 cm से कम। मध्यम: स्कैन पर ascites, अंडाशय 8 से 12 cm। गंभीर: जाँच में ascites, हेमैटोक्रिट 0.45 से ऊपर, कम पेशाब, एल्ब्यूमिन 35 g/L से कम।"
+      },
+      {
+        "en": "Critical: tense ascites, haematocrit above 0.55, white cells above 25,000, thromboembolism or ARDS. Any severe feature puts her in that grade.",
+        "hi": "क्रिटिकल: तनावपूर्ण ascites, हेमैटोक्रिट 0.55 से ऊपर, श्वेत कोशिकाएँ 25,000 से ऊपर, थ्रोम्बोएम्बोलिज़्म या ARDS। कोई भी गंभीर लक्षण होने पर उसी ग्रेड में रखें।"
+      },
+      {
+        "en": "Mild and moderate: manage as an outpatient. Give paracetamol or codeine, never NSAIDs, advise drinking to thirst (at least 1 litre a day) and continue luteal progesterone.",
+        "hi": "हल्का और मध्यम: बाह्य रोगी के रूप में संभालें। पैरासिटामोल या कोडीन दें, NSAID कभी नहीं, प्यास के हिसाब से पीने (रोज़ कम से कम 1 लीटर) की सलाह दें और ल्यूटियल प्रोजेस्टेरोन जारी रखें।"
+      },
+      {
+        "en": "Admit if pain is uncontrolled, she cannot drink, she worsens or she cannot return. Review daily, give LMWH and stockings, and drain ascites only under ultrasound for tense pain, breathlessness or oliguria.",
+        "hi": "दर्द क़ाबू में न हो, पी न सके, हालत बिगड़े या लौट न सके तो भर्ती करें। रोज़ जाँचें, LMWH और स्टॉकिंग दें, और तनाव वाले दर्द, साँस फूलने या कम पेशाब में ही अल्ट्रासाउंड की निगरानी में ascites निकालें।"
+      },
+      {
+        "en": "Surgery is only for torsion, rupture or ectopic pregnancy. Prevent [[ohss]] with an antagonist protocol, an agonist trigger with [[freeze-all]], and a dopamine agonist after hCG.",
+        "hi": "सर्जरी सिर्फ़ टॉर्शन, फटने या एक्टोपिक गर्भ में होती है। एंटागोनिस्ट प्रोटोकॉल, [[freeze-all]] के साथ एगोनिस्ट ट्रिगर और hCG के बाद डोपामाइन एगोनिस्ट से [[ohss]] रोकें।"
+      }
+    ],
+    "analogy": {
+      "en": "Picture a sponge under a leaking tap. The fluid leaves the vessels, the blood turns to syrup, and clots follow.",
+      "hi": "सोचिए रिसते नल के नीचे स्पंज है। तरल नलियों से निकलता है, खून शरबत जैसा गाढ़ा हो जाता है और थक्के बनते हैं।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Rising haematocrit, falling urine output or breathlessness marks a severe case.",
+      "hi": "बढ़ता हेमैटोक्रिट, घटता पेशाब या साँस फूलना गंभीर मामले की निशानी है।"
+    },
+    {
+      "en": "Calf pain, or odd neurological symptoms, should make you think of thrombosis.",
+      "hi": "पिंडली में दर्द या अजीब न्यूरोलॉजिकल लक्षण हों तो थ्रोम्बोसिस के बारे में सोचें।"
+    },
+    {
+      "en": "Late OHSS appears after a positive pregnancy test, when embryos were transferred fresh.",
+      "hi": "ताज़ा भ्रूण ट्रांसफ़र के बाद पॉज़िटिव प्रेग्नेंसी टेस्ट पर देर से होने वाला OHSS दिखता है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Chart urine output, weight, girth, haematocrit, electrolytes, albumin and liver enzymes.",
+      "hi": "पेशाब, वज़न, पेट का घेरा, हेमैटोक्रिट, इलेक्ट्रोलाइट, एल्ब्यूमिन और लिवर एंज़ाइम दर्ज करें।"
+    },
+    {
+      "en": "Give LMWH prophylaxis to inpatients and avoid NSAIDs.",
+      "hi": "भर्ती मरीज़ों को LMWH प्रोफ़ाइलैक्सिस दें और NSAID से बचें।"
+    },
+    {
+      "en": "Involve a consultant and an anaesthetist in severe or critical cases, and inform the IVF unit.",
+      "hi": "गंभीर या क्रिटिकल मामलों में कंसल्टेंट और एनेस्थेटिस्ट को शामिल करें और IVF यूनिट को बताएँ।"
+    }
+  ],
+  "remember": {
+    "en": "Grade by the worst feature, no NSAIDs, LMWH for inpatients, and prevent with agonist trigger plus freeze-all.",
+    "hi": "सबसे गंभीर लक्षण से ग्रेड तय करें, NSAID नहीं, भर्ती मरीज़ों को LMWH, और एगोनिस्ट ट्रिगर तथा फ़्रीज़-ऑल से रोकें।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which analgesic should be avoided in OHSS?",
+        "hi": "OHSS में कौन-सी दर्द निवारक से बचना चाहिए?"
+      },
+      "o": [
+        {
+          "en": "Paracetamol",
+          "hi": "पैरासिटामोल"
+        },
+        {
+          "en": "NSAIDs",
+          "hi": "NSAID दवाएँ"
+        },
+        {
+          "en": "Codeine",
+          "hi": "कोडीन"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "NSAIDs may harm renal function in a woman with low intravascular volume.",
+        "hi": "कम इंट्रावैस्कुलर वॉल्यूम वाली महिला में NSAID गुर्दे के काम को नुक़सान पहुँचा सकते हैं।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which finding makes OHSS severe rather than moderate?",
+        "hi": "कौन-सा निष्कर्ष OHSS को मध्यम के बजाय गंभीर बनाता है?"
+      },
+      "o": [
+        {
+          "en": "Nausea only",
+          "hi": "सिर्फ़ मतली"
+        },
+        {
+          "en": "Haematocrit above 0.45",
+          "hi": "हेमैटोक्रिट 0.45 से ऊपर"
+        },
+        {
+          "en": "Ovary of 6 cm",
+          "hi": "6 cm का अंडाशय"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Haematocrit above 0.45, oliguria, clinical ascites and albumin below 35 g/L are severe features.",
+        "hi": "हेमैटोक्रिट 0.45 से ऊपर, कम पेशाब, जाँच में ascites और एल्ब्यूमिन 35 g/L से कम गंभीर लक्षण हैं।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which plan best prevents severe OHSS in a high responder?",
+        "hi": "हाई रिस्पॉन्डर में गंभीर OHSS सबसे अच्छी तरह कौन-सी योजना रोकती है?"
+      },
+      "o": [
+        {
+          "en": "hCG trigger and fresh transfer",
+          "hi": "hCG ट्रिगर और ताज़ा ट्रांसफ़र"
+        },
+        {
+          "en": "GnRH agonist trigger with freeze-all",
+          "hi": "फ़्रीज़-ऑल के साथ GnRH एगोनिस्ट ट्रिगर"
+        },
+        {
+          "en": "More FSH",
+          "hi": "ज़्यादा FSH"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "ESHRE 2025 recommends it and prefers it over coasting.",
+        "hi": "ESHRE 2025 यही सुझाता है और इसे कोस्टिंग से बेहतर मानता है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "gy-fertility"
+  },
+  "glossary": [
+    "freeze-all",
+    "ohss"
+  ],
+  "sources": [
+    "Royal College of Obstetricians and Gynaecologists. The Management of Ovarian Hyperstimulation Syndrome, Green-top Guideline No. 5, 2016, as reproduced in Norfolk and Norwich University Hospitals guideline G26 (approved December 2023). A 2026 RCOG update exists (BJOG 2026, PMID 41975565) and was not opened by the drafter",
+    "ESHRE Reproductive Endocrinology Guideline Group. ESHRE guideline: ovarian stimulation for IVF/ICSI, an update in 2025. Hum Reprod 2026;41(4):498-514. PMID 41732035"
+  ]
+}
