@@ -8,7 +8,7 @@ test("app boot loads only tokos-loader.js; the loader lists the engine and Tokó
   assert.deepEqual(html.match(eng), ["tokos-loader.js?v=tok5"], "boot requests no engine or Tokós file but the loader");
   const L = readFileSync("tokos-loader.js", "utf8"), v = /var V = "(\w+)"/.exec(L)[1];
   assert.equal(v, "tok5", "the loader injects at the same token as its own tag");
-  for (const f of ["specialty.css", "tokos.css", "specialty-core.js", "specialty-shell.js", "tokos.js", "tokos-calipers.js", "tokos-ctg.js"]) assert.ok(L.includes('"' + f + '"'), f);
+  for (const f of ["specialty.css", "tokos.css", "specialty-core.js", "specialty-shell.js", "tokos.js", "tokos-calipers.js", "tokos-ctg.js", "tokos-clinic-us.js", "tokos-clinic-us.css", "tokos-sim-labour.js", "tokos-sim-labour.css", "tokos-explore-ui.js", "tokos-explore-ui.css"]) assert.ok(L.includes('"' + f + '"'), f);
   assert.ok(L.indexOf('"tokos.js"') < L.indexOf('"tokos-ctg.js"') && L.indexOf('"specialty-notes.js"') < L.indexOf('"tokos.js"'), "engine, then the host, then its clinic");
 });
 
