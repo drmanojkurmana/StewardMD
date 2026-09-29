@@ -151,6 +151,41 @@ try {
   await ev(`var c=TOKOS._st.session.list[0].c; TOKOS._st.svg[c.svg]=window.__good; document.querySelector('[data-act=retrace]').click(); return 1;`);
   ok(await until(`return !!document.getElementById('tokTrace');`), "Try again mounts the trace");
 
+  // question bank: search reads only the index file (search.json) and shows previews; a topic loads when a result opens; the exam holds two topic files at a time.
+  const bankBytes = `var r=performance.getEntriesByType('resource').filter(function(e){return /decks\\/mcq\\//.test(e.name)}); return JSON.stringify({n:r.length,bytes:r.reduce(function(a,e){return a+(e.encodedBodySize||e.decodedBodySize||0)},0),files:r.map(function(e){return e.name.split('/').pop().split('?')[0]})});`;
+  await ev(`try{localStorage.setItem("smd_tokos_v1",JSON.stringify({}));}catch(e){} document.body.innerHTML='<div id="smdTokos"></div>'; performance.clearResourceTimings(); TOKOS.open(); return 1;`);
+  await until(`return !!document.querySelector('[data-act=pick][data-t=test]') || !!document.querySelector('[data-act=bank]');`);
+  await ev(`var p=document.querySelector('[data-act=pick][data-t=test]'); if(p)p.click(); return 1;`);
+  ok(await until(`return !!document.querySelector('[data-act=bank]');`), "hub lists the question bank");
+  await ev(`document.querySelector('[data-act=bank]').click(); return 1;`);
+  ok(await until(`return !!document.getElementById('mcqSearch');`, 10000), "bank opens with a search box");
+  const heap0 = await ev(`return performance.memory ? performance.memory.usedJSHeapSize : 0;`);
+  await ev(`performance.clearResourceTimings(); var i=document.getElementById('mcqSearch'); i.value='eclampsia'; i.dispatchEvent(new Event('input')); return 1;`);
+  ok(await until(`return document.querySelectorAll('#mcqResults .mcq-hit').length > 0 && !/topics loaded/.test(document.getElementById('mcqSearchS').textContent);`, 30000), "search lists hits");
+  const sm = JSON.parse(await ev(bankBytes)), heap1 = await ev(`return performance.memory ? performance.memory.usedJSHeapSize : 0;`);
+  console.log(`METRIC search "eclampsia": ${sm.n} bank files, ${sm.bytes} bytes fetched (${sm.files.join(", ")}), heap ${heap0} -> ${heap1} (${heap1 - heap0})`);
+  ok(sm.files.length === 1 && sm.files[0] === "search.json", "search fetched only search.json");
+  ok(await ev(`return document.querySelectorAll('#mcqResults .mcq-hit .sp-small').length === document.querySelectorAll('#mcqResults .mcq-hit').length;`) === true, "each hit shows its topic");
+  await ev(`performance.clearResourceTimings(); document.querySelector('#mcqResults .mcq-hit').click(); return 1;`);
+  ok(await until(`return !!document.getElementById('mcqStem');`, 15000), "opening a result loads its topic and shows the question");
+  const om = JSON.parse(await ev(bankBytes));
+  console.log(`METRIC open result: ${om.n} file(s), ${om.bytes} bytes (${om.files.join(", ")})`);
+  ok(om.n === 1 && om.files[0] !== "search.json", "opening a result fetched one topic file");
+  // exam: Pro gate first, then at most two topic files held at a time
+  await ev(`TOKOS.back(); return 1;`);
+  ok(await until(`return !!document.querySelector('[data-act=mcqmode][data-m=exam]');`, 10000), "back to the bank");
+  await ev(`performance.clearResourceTimings(); return 1;`);
+  await ev(`document.querySelector('[data-act=mcqmode][data-m=exam]').click(); return 1;`);
+  await ev(`document.querySelector('[data-act=mcqstart]').click(); return 1;`);
+  ok(await until(`return !!document.getElementById('mcqStem') || !!document.querySelector('.sp-pro, [data-act=paywall], .sp-sheet');`, 30000), "the exam starts or meets its Pro gate");
+  const gated = await ev(`return !document.getElementById('mcqStem');`), xm = JSON.parse(await ev(bankBytes));
+  if (gated) ok(xm.n === 0, "Pro gate: nothing fetched before the gate opens");
+  else {
+    console.log(`METRIC exam: ${xm.n} topic files, ${xm.bytes} bytes; cached topics after: ${await ev(`return Object.keys(TOKOS._mcq.items).length;`)}`);
+    ok(await ev(`return TOKOS._mcq.run.exam && TOKOS._mcq.run.items.length === 30;`) === true, "exam drew 30 questions");
+    ok(await ev(`return Object.keys(TOKOS._mcq.items).length <= 1;`) === true, "exam topics are not kept in memory");
+  }
+
   ok(errors.length === 0, "no uncaught Tokós errors" + (errors.length ? ": " + errors.slice(0, 3).join(" | ") : ""));
   console.log(fails === 0 ? "\nALL GREEN" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }

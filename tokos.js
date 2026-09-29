@@ -24,7 +24,7 @@
     }
   });
   SP.features.learn(host);
-  SP.features.bank(host, { id: "mcq", index: "decks/mcq/index.json" });
+  SP.features.bank(host, { id: "mcq", index: "decks/mcq/index.json", search: "decks/mcq/search.json" });
   SP.features.explore(host);
   SP.features.tools(host);
   SP.features.drills(host);
