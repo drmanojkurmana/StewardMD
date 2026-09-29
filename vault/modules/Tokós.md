@@ -5,6 +5,18 @@ flag: smd_tokos (client, def:true, "0" or ?tokos=0 hides it)
 ---
 # Tokós
 
+**Tokós 2.0 (2026-09-29, branch `feat/tokos2-engine`):** Tokós now runs on the [[Specialty Engine]] as its first host:
+Obstetrics and Gynaecology (EN/HI), Learn and Test tabs (first-run choice, then the last tab), Today's plan, progress,
+question bank, calculators, drills, Explore and notes as their content lands. `tokos.js` is the host config;
+`tokos-ctg.js` is the CTG clinic plugin (the pure checklist and key logic, `window.TOKOS_CTG`, used by the Review Desk and
+`scripts/apply-reviews.mjs`); `tokos-core.js`, `tokos-data.js` and `tokos-stage.js` are gone. Lazy loading: the app loads
+only `tokos-loader.js` at boot (`window.TOKOS` is a stand-in with the same surface; `TOKOS_LOADER.load()`); the first open
+injects `specialty*.{js,css}`, `tokos.css`, `tokos.js`, `tokos-calipers.js`, `tokos-ctg.js` at `?v=tok4`, then the ordered
+model list in `tokos/models.json` (`tokos-models/<id>.js`; `build-www.sh` copies `tokos-models/`). Learn content goes in
+`tokos/learn/units/*.json`, `lessons/`, `media/credits-<unit>.json`; `node tools/tokos-learn-index.mjs` builds
+`index.json`, `glossary.json` and `media/credits.json` (checked by `test/tokos-learn-content.test.mjs`). The sections below
+describe the CTG clinic, unchanged in behaviour.
+
 OBGYN CTG reading trainer. A learner reads a real intrapartum CTG strip (last 30 minutes, calipers and zoom on
 the inline trace), works a FIGO checklist, then sees the reveal: the rule-based FIGO category, the real outcome
 (pH, base deficit, Apgar) as a separate block, and a rationale per answer. FSRS-6 spaced repetition and the zoom
@@ -124,5 +136,5 @@ IAP charts, Kermany, MURA blocked) are in memory note `specialty-module-dataset-
 ## Gotchas
 
 - Tokós lives natively in StewardMD (not a synced repo). Edit the files here.
-- The FSRS and zoom engine are duplicated from [[Ophthalmós]] until a third specialty module needs them.
+- The FSRS and zoom engine are the [[Specialty Engine]]'s (the 1.0 duplicate is gone; decision 2026-09-29).
 - Inline trace SVGs emit classes only, no `<style>`; an inline style element would restyle the app.
