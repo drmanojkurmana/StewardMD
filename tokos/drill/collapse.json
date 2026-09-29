@@ -1,0 +1,94 @@
+{
+  "id": "collapse", "kind": "drill", "level": "resident", "review": "ai_drafted", "timeLimitSec": 360,
+  "title": { "en": "Maternal collapse drill", "hi": "मातृ पतन (कोलैप्स) ड्रिल" },
+  "scenario": {
+    "en": "A woman at 34 weeks on magnesium sulphate for severe pre-eclampsia collapses on the antenatal ward. She is unresponsive and not breathing normally. The fundus is above the umbilicus. Teaching scenario, not a real patient.",
+    "hi": "गंभीर प्री-एक्लेम्पसिया के लिए मैग्नीशियम सल्फेट पर 34 सप्ताह की महिला प्रसव-पूर्व वार्ड में गिर पड़ती है। वह प्रतिक्रिया नहीं दे रही और सामान्य साँस नहीं ले रही। फ़ंडस नाभि से ऊपर है। यह शिक्षण परिदृश्य है, असली मरीज़ नहीं।"
+  },
+  "sources": [
+    { "label": "RCOG Green-top Guideline No. 56: Maternal Collapse in Pregnancy and the Puerperium (December 2019). Copy opened at this URL", "url": "https://www.guptalegal.co.uk/wp-content/uploads/gtg_56_2019.pdf" },
+    { "label": "Resuscitation Council UK. 2025 Special circumstances guidelines: cardiac arrest in pregnancy", "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines" },
+    { "label": "StewardMD Clinical Protocols: Adult cardiac arrest (special situations: pregnancy)", "path": "kb/clinical-protocols/adult-cardiac-arrest.json" }
+  ],
+  "stages": [
+    { "id": "arrest", "src": 0, "timeSec": 20,
+      "prompt": { "en": "She is unresponsive with no normal breathing. First?", "hi": "वह प्रतिक्रिया नहीं दे रही और सामान्य साँस नहीं है। पहले?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true,
+          "text": { "en": "Call the maternal cardiac arrest team (obstetric, anaesthetic, neonatal), note the time, and start chest compressions straight away.", "hi": "मातृ कार्डियक अरेस्ट टीम (प्रसूति, एनेस्थीसिया, नवजात) बुलाएँ, समय लिखें, और तुरंत छाती दबाना शुरू करें।" },
+          "feedback": { "en": "RCOG: if the airway is clear and there is no breathing, start compressions immediately; senior staff early.", "hi": "RCOG: वायुमार्ग साफ़ हो और साँस न हो तो तुरंत छाती दबाना शुरू करें; वरिष्ठ स्टाफ़ जल्दी बुलाएँ।" } },
+        { "id": "b", "correct": false,
+          "text": { "en": "Check her blood glucose and BP first.", "hi": "पहले ब्लड शुगर और BP जाँचें।" },
+          "feedback": { "en": "No normal breathing in an unresponsive woman means cardiac arrest: compressions first.", "hi": "प्रतिक्रिया न देने वाली महिला में सामान्य साँस न होना कार्डियक अरेस्ट है: पहले छाती दबाना।" } },
+        { "id": "c", "correct": false,
+          "text": { "en": "Move her to theatre before starting CPR.", "hi": "CPR शुरू करने से पहले उसे थिएटर ले जाएँ।" },
+          "feedback": { "en": "Resuscitate where she lies; moving delays CPR and delivery.", "hi": "जहाँ है वहीं पुनर्जीवन करें; ले जाने से CPR और प्रसव में देरी होती है।" } }
+      ] },
+    { "id": "displace", "src": 1, "timeSec": 20,
+      "prompt": { "en": "The fundus is above the umbilicus. How do you manage the uterus during CPR?", "hi": "फ़ंडस नाभि से ऊपर है। CPR के दौरान गर्भाशय का क्या करें?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true,
+          "text": { "en": "Manual left uterine displacement throughout CPR, so compressions can be given with her supine.", "hi": "पूरे CPR के दौरान हाथ से गर्भाशय को बाईं ओर खिसकाएँ, ताकि वह पीठ के बल रहते हुए छाती दबाई जा सके।" },
+          "feedback": { "en": "RCUK 2025: above 20 weeks relieve aortocaval compression early and keep it relieved; manual displacement is preferred over tilt. RCOG accepts a 15 to 30 degree left tilt on a firm surface.", "hi": "RCUK 2025: 20 सप्ताह से ऊपर महाधमनी-महाशिरा दबाव जल्दी हटाएँ और हटाए रखें; झुकाने से बेहतर हाथ से खिसकाना है। RCOG सख्त सतह पर 15 से 30 डिग्री बाईं ओर झुकाव भी मानता है।" } },
+        { "id": "b", "correct": false,
+          "text": { "en": "Flat and supine with nothing else.", "hi": "केवल सीधा पीठ के बल, और कुछ नहीं।" },
+          "feedback": { "en": "The uterus compresses the vena cava and aorta and cuts cardiac output. Displace it.", "hi": "गर्भाशय महाशिरा और महाधमनी को दबाकर हृदय से रक्त-प्रवाह घटाता है। उसे खिसकाएँ।" } },
+        { "id": "c", "correct": false,
+          "text": { "en": "Full left lateral position, pausing compressions.", "hi": "पूरी बाईं करवट, छाती दबाना रोककर।" },
+          "feedback": { "en": "Compressions cannot be given well on the side. Keep her supine with manual displacement.", "hi": "करवट पर छाती ठीक से नहीं दबाई जा सकती। पीठ के बल रखें और हाथ से खिसकाएँ।" } }
+      ] },
+    { "id": "airway", "src": 0, "timeSec": 45,
+      "prompt": { "en": "Airway and breathing?", "hi": "वायुमार्ग और साँस?" },
+      "options": [
+        { "id": "a", "correct": true,
+          "text": { "en": "High-flow oxygen with bag-mask or a supraglottic airway until an experienced anaesthetist intubates with a cuffed tube.", "hi": "बैग-मास्क या सुप्राग्लॉटिक एयरवे से हाई-फ़्लो ऑक्सीजन, जब तक अनुभवी एनेस्थेटिस्ट कफ़ वाली ट्यूब से इंट्यूबेट न करे।" },
+          "feedback": { "en": "RCOG: pregnant women deoxygenate fast and intubation is more difficult; early expert intubation.", "hi": "RCOG: गर्भवती महिलाओं में ऑक्सीजन तेज़ी से घटती है और इंट्यूबेशन कठिन होता है; जल्दी विशेषज्ञ इंट्यूबेशन।" } },
+        { "id": "b", "correct": false,
+          "text": { "en": "Delay ventilation until the tube is in.", "hi": "ट्यूब लगने तक वेंटिलेशन रोकें।" },
+          "feedback": { "en": "Ventilate with bag-mask or a supraglottic airway until intubation.", "hi": "इंट्यूबेशन तक बैग-मास्क या सुप्राग्लॉटिक एयरवे से वेंटिलेट करें।" } }
+      ] },
+    { "id": "als", "src": 0, "timeSec": 45,
+      "prompt": { "en": "The rhythm is shockable. Drugs and shocks?", "hi": "रिदम शॉक देने योग्य है। दवाएँ और शॉक?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true,
+          "text": { "en": "Standard ALS: same shock energies and the same drugs and doses as for a woman who is not pregnant; two wide-bore cannulas.", "hi": "सामान्य ALS: गैर-गर्भवती महिला जैसी ही शॉक ऊर्जा और वही दवाएँ व खुराक; दो चौड़ी कैनुला।" },
+          "feedback": { "en": "RCOG: no change to defibrillation energy or algorithm drugs and doses in pregnancy.", "hi": "RCOG: गर्भावस्था में डीफ़िब्रिलेशन ऊर्जा या दवा व खुराक में कोई बदलाव नहीं।" } },
+        { "id": "b", "correct": false,
+          "text": { "en": "Halve the shock energy to protect the fetus.", "hi": "भ्रूण की रक्षा के लिए शॉक ऊर्जा आधी करें।" },
+          "feedback": { "en": "Use the same energy as in any adult; the mother's survival saves the fetus.", "hi": "किसी भी वयस्क जैसी ही ऊर्जा दें; माँ का बचना ही भ्रूण को बचाता है।" } }
+      ] },
+    { "id": "hysterotomy", "src": 0, "timeSec": 30,
+      "prompt": { "en": "Four minutes of good CPR and no output. What now?", "hi": "4 मिनट के अच्छे CPR के बाद भी कोई धड़कन नहीं। अब क्या?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true,
+          "text": { "en": "Resuscitative hysterotomy (perimortem caesarean) where she lies, while CPR continues, aiming to deliver within 5 minutes of the collapse.", "hi": "जहाँ वह है वहीं, CPR चलते हुए, रिससिटेटिव हिस्टेरोटॉमी (पेरिमॉर्टम सिज़ेरियन), गिरने के 5 मिनट के भीतर प्रसव का लक्ष्य।" },
+          "feedback": { "en": "RCOG 2019: over 20 weeks with no response to CPR within 4 minutes, deliver to help maternal resuscitation, ideally within 5 minutes. RCUK 2025 stresses preparing early and doing it as soon as possible.", "hi": "RCOG 2019: 20 सप्ताह से ऊपर 4 मिनट में CPR से प्रतिक्रिया न हो तो माँ के पुनर्जीवन के लिए प्रसव कराएँ, आदर्श रूप से 5 मिनट में। RCUK 2025 जल्दी तैयारी और जितनी जल्दी हो सके करने पर ज़ोर देता है।" } },
+        { "id": "b", "correct": false,
+          "text": { "en": "Move her to theatre for the caesarean.", "hi": "सिज़ेरियन के लिए थिएटर ले जाएँ।" },
+          "feedback": { "en": "Do not delay by moving her. Operate where resuscitation is taking place.", "hi": "ले जाकर देरी न करें। जहाँ पुनर्जीवन हो रहा है वहीं ऑपरेट करें।" } },
+        { "id": "c", "correct": false,
+          "text": { "en": "Continue CPR for 20 more minutes before considering delivery.", "hi": "प्रसव सोचने से पहले 20 मिनट और CPR जारी रखें।" },
+          "feedback": { "en": "Emptying the uterus improves maternal resuscitation; waiting loses mother and baby.", "hi": "गर्भाशय खाली करने से माँ का पुनर्जीवन बेहतर होता है; इंतज़ार से माँ और शिशु दोनों खोते हैं।" } }
+      ] },
+    { "id": "causes", "src": 0, "timeSec": 60,
+      "prompt": { "en": "She has been on magnesium sulphate. Reversible causes?", "hi": "वह मैग्नीशियम सल्फेट पर थी। सुधारे जा सकने वाले कारण?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true,
+          "text": { "en": "Stop the magnesium and give 10 mL of 10% calcium gluconate (or 10% calcium chloride) slowly IV, while working through the 4Hs, 4Ts and the pregnancy 4Ps.", "hi": "मैग्नीशियम बंद करें और 10% कैल्शियम ग्लूकोनेट (या 10% कैल्शियम क्लोराइड) 10 mL धीमे IV दें, साथ ही 4H, 4T और गर्भावस्था के 4P देखें।" },
+          "feedback": { "en": "RCOG gives calcium as the antidote to magnesium toxicity. RCUK 4Ps: pre-eclampsia and eclampsia, puerperal sepsis, placental and uterine complications, peripartum cardiomyopathy.", "hi": "RCOG मैग्नीशियम विषाक्तता का प्रतिरोधी कैल्शियम बताता है। RCUK के 4P: प्री-एक्लेम्पसिया व एक्लेम्पसिया, प्रसूति सेप्सिस, प्लेसेंटा व गर्भाशय जटिलताएँ, पेरिपार्टम कार्डियोमायोपैथी।" } },
+        { "id": "b", "correct": false,
+          "text": { "en": "Give another 4 g of magnesium in case this was a fit.", "hi": "शायद दौरा हो, इसलिए 4 g मैग्नीशियम और दें।" },
+          "feedback": { "en": "Magnesium toxicity is a cause of arrest here. Stop it and give calcium.", "hi": "यहाँ अरेस्ट का एक कारण मैग्नीशियम विषाक्तता है। इसे बंद करें और कैल्शियम दें।" } }
+      ] },
+    { "id": "after", "src": 0, "timeSec": 60,
+      "prompt": { "en": "Circulation returns after delivery. Next?", "hi": "प्रसव के बाद धड़कन लौट आती है। अगला?" },
+      "options": [
+        { "id": "a", "correct": true, "next": "end",
+          "text": { "en": "Multidisciplinary post-resuscitation care with senior obstetric, anaesthetic and critical care input, supervised transfer, and a team debrief.", "hi": "वरिष्ठ प्रसूति, एनेस्थीसिया और क्रिटिकल केयर के साथ बहु-विषयी पुनर्जीवन-पश्चात देखभाल, निगरानी में स्थानांतरण, और टीम डीब्रीफ़।" },
+          "feedback": { "en": "RCOG and RCUK: senior staff early, skilled transfer, multidisciplinary care after resuscitation.", "hi": "RCOG और RCUK: जल्दी वरिष्ठ स्टाफ़, कुशल स्थानांतरण, पुनर्जीवन के बाद बहु-विषयी देखभाल।" } },
+        { "id": "b", "correct": false, "next": "end",
+          "text": { "en": "Return her to the antenatal ward for routine observations.", "hi": "सामान्य निगरानी के लिए उसे प्रसव-पूर्व वार्ड में लौटा दें।" },
+          "feedback": { "en": "She needs critical care after an arrest.", "hi": "अरेस्ट के बाद उसे क्रिटिकल केयर चाहिए।" } }
+      ] }
+  ]
+}
