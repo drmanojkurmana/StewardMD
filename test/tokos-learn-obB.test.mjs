@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const L = path.join(root, "tokos/learn");
 const D = createRequire(import.meta.url)(path.join(root, "ophthalmos-data.js"));
-const UNITS = ["ob7", "ob8", "ob9", "ob10", "ob11", "ob12"].filter((u) => fs.existsSync(path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "tokos/learn/units", u + ".json")));
+const UNITS = ["ob7", "ob8", "ob9", "ob10", "ob11", "ob12"];
 const TOPICS = ["ob-antenatal", "ob-labour", "ob-medical", "ob-haemorrhage", "ob-hypertension", "ob-fetal", "ob-puerperium", "ob-early", "ob-operative"];
 const EMDASH = String.fromCharCode(0x2014);
 const readJson = (f) => JSON.parse(fs.readFileSync(f, "utf8"));
