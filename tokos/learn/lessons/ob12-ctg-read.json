@@ -3,7 +3,14 @@
   "unit": "ob12",
   "level": "mbbs",
   "minutes": 6,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "FIGO 2015 baseline bands: normal 110 to 160, suspicious 100 to 109 or above 160, pathological below 100",
+      "FIGO 2015 variability: normal 5 to 25; reduced over 50 min or increased over 30 min is pathological",
+      "FIGO 2015 pathological timings: sinusoidal over 30 min, repetitive late or prolonged decelerations over 30 min (20 min if variability reduced), single prolonged deceleration over 5 min"
+    ]
+  },
   "title": {
     "en": "Reading a CTG: baseline, variability, accelerations, decelerations",
     "hi": "CTG पढ़ना: बेसलाइन, परिवर्तनशीलता, त्वरण, मंदन"

@@ -90,6 +90,8 @@
 
   // Schema check for <base>/learn/lessons/<id>.json (the content engineer's files). [] = valid.
   // media: the image library by id (learn/media/credits.json); when given, see.more ids must be in it.
+  // A content item's review: the string "ai_drafted" | "reviewed", or {status, verify: [claims the reviewer checks first]}.
+  function reviewStatus(r) { return r && typeof r === "object" ? r.status : r; }
   function validateLesson(l, glossary, media) {
     var e = [];
     function bi(v, where) {
@@ -264,7 +266,7 @@
   }
 
   var API = {
-    firstRun: firstRun, t: t, glossParts: glossParts, validateLesson: validateLesson, validateIndex: validateIndex,
+    firstRun: firstRun, t: t, glossParts: glossParts, validateLesson: validateLesson, reviewStatus: reviewStatus, validateIndex: validateIndex,
     mediaCredit: mediaCredit, scopeSvg: scopeSvg, learnUnits: learnUnits, lessonDone: lessonDone, nextLesson: nextLesson,
     finishLesson: finishLesson, learnDue: learnDue, levelKey: levelKey, levelLocked: levelLocked, trialState: trialState,
     useTrial: useTrial, mcqPool: mcqPool, loadStore: loadStore, saveStore: saveStore, loadPrefs: loadPrefs, savePrefs: savePrefs,
