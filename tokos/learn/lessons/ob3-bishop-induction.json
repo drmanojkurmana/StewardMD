@@ -1,0 +1,228 @@
+{
+  "id": "ob3-bishop-induction",
+  "unit": "ob3",
+  "level": "mbbs",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "competencies": [
+    "OG13.3"
+  ],
+  "title": {
+    "en": "Is the cervix ripe? The Bishop score",
+    "hi": "क्या सर्विक्स पका है? Bishop स्कोर"
+  },
+  "idea": {
+    "en": "Before starting labour artificially, judge how ripe the cervix is with the [[bishop-score]]. A ripe cervix is more likely to respond to induction. An unripe one needs ripening first.",
+    "hi": "प्रसव को कृत्रिम रूप से शुरू करने से पहले [[bishop-score]] से देखिए कि सर्विक्स कितना पका है। पका सर्विक्स induction पर ज़्यादा संभावना से प्रतिक्रिया देता है। कच्चे सर्विक्स को पहले पकाना पड़ता है।"
+  },
+  "see": {
+    "diagram": "diagrams/ob3-bishop-induction.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "Five rows of coloured cells, each row with cells growing darker from left to right: the top three rows have four cells and the bottom two rows have three cells. Small drawings on the left mark each row: an opening ring, a thinning line, a head against a level, a soft lip, and a cervix pointing forward. A rising purple line at the far right shows the total score climbing.",
+      "hi": "रंगीन खानों की पाँच पंक्तियाँ, हर पंक्ति में खाने बाएँ से दाएँ गहरे होते हैं: ऊपर की तीन पंक्तियों में चार-चार खाने और नीचे की दो में तीन-तीन। बाईं ओर छोटे चित्र हर पंक्ति को पहचानते हैं: खुलता छल्ला, पतली होती रेखा, स्तर से टिका सिर, मुलायम होंठ, और आगे की ओर इशारा करता सर्विक्स। सबसे दाईं ओर ऊपर चढ़ती बैंगनी रेखा कुल स्कोर के बढ़ने को दिखाती है।"
+    },
+    "caption": {
+      "en": "The five parts of the Bishop score. Darker cells score more.",
+      "hi": "Bishop स्कोर के पाँच हिस्से। गहरे खाने ज़्यादा अंक देते हैं।"
+    },
+    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.146,
+        "y": 0.15,
+        "label": {
+          "en": "Dilatation",
+          "hi": "Dilatation"
+        },
+        "note": {
+          "en": "Closed scores 0, 1 to 2 cm scores 1, 3 to 4 cm scores 2, and 5 cm or more scores 3.",
+          "hi": "बंद 0, 1 से 2 सेमी 1, 3 से 4 सेमी 2 और 5 सेमी या ज़्यादा 3 अंक देता है।"
+        }
+      },
+      {
+        "x": 0.146,
+        "y": 0.333,
+        "label": {
+          "en": "Effacement",
+          "hi": "Effacement"
+        },
+        "note": {
+          "en": "From a long cervix (0) to a paper-thin one (3). Bands vary slightly between versions of the score.",
+          "hi": "लंबे सर्विक्स (0) से कागज़ जैसे पतले (3) तक। स्कोर के संस्करणों में bands थोड़े भिन्न होते हैं।"
+        }
+      },
+      {
+        "x": 0.146,
+        "y": 0.483,
+        "label": {
+          "en": "Station",
+          "hi": "Station"
+        },
+        "note": {
+          "en": "High at -3 scores 0, up to +1 or +2 scores 3.",
+          "hi": "-3 पर ऊँचा 0, और +1 या +2 तक नीचे 3 अंक।"
+        }
+      },
+      {
+        "x": 0.146,
+        "y": 0.653,
+        "label": {
+          "en": "Consistency",
+          "hi": "Consistency"
+        },
+        "note": {
+          "en": "Firm 0, medium 1, soft 2.",
+          "hi": "कड़ा 0, मध्यम 1, मुलायम 2।"
+        }
+      },
+      {
+        "x": 0.146,
+        "y": 0.82,
+        "label": {
+          "en": "Position",
+          "hi": "Position"
+        },
+        "note": {
+          "en": "Cervix pointing backward 0, middle 1, forward 2. A forward cervix is riper.",
+          "hi": "सर्विक्स पीछे की ओर 0, बीच में 1, आगे की ओर 2। आगे की ओर वाला सर्विक्स ज़्यादा पका होता है।"
+        }
+      },
+      {
+        "x": 0.927,
+        "y": 0.5,
+        "label": {
+          "en": "Total 0 to 13",
+          "hi": "कुल 0 से 13"
+        },
+        "note": {
+          "en": "A higher total means a riper cervix and a higher chance of successful induction. The cut-off for favourable varies between protocols, so use your unit's.",
+          "hi": "ऊँचा कुल यानी ज़्यादा पका सर्विक्स और सफल induction की ज़्यादा संभावना। favourable का कट-ऑफ़ प्रोटोकॉल के हिसाब से बदलता है, इसलिए अपनी यूनिट का प्रयोग करें।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Late in pregnancy the cervix softens, shortens, moves forward and starts to open. This ripening is what the [[bishop-score]] measures, from a digital examination.",
+        "hi": "गर्भावस्था के आख़िर में सर्विक्स मुलायम होता है, छोटा होता है, आगे की ओर आता है और खुलने लगता है। [[bishop-score]] इसी पकने को उँगली की जाँच से नापता है।"
+      },
+      {
+        "en": "It has five parts: dilatation, [[effacement]], [[station]], consistency and position. Dilatation, effacement and station score 0 to 3 each. Consistency and position score 0 to 2 each. The maximum is 13.",
+        "hi": "इसके पाँच हिस्से हैं: dilatation, [[effacement]], [[station]], consistency और position। Dilatation, effacement और station हर एक 0 से 3 अंक देते हैं। Consistency और position हर एक 0 से 2। अधिकतम 13 है।"
+      },
+      {
+        "en": "A woman with a higher score is more likely to have a successful induction and a vaginal birth. An unfavourable score goes with a higher chance of failed induction, so the cervix may need ripening first, for example with prostaglandins or a balloon catheter.",
+        "hi": "ऊँचे स्कोर वाली महिला में सफल induction और योनि-जन्म की संभावना ज़्यादा होती है। कम स्कोर में induction के विफल होने की संभावना ज़्यादा होती है, इसलिए पहले सर्विक्स पकाना पड़ सकता है, जैसे prostaglandins या बैलून कैथेटर से।"
+      },
+      {
+        "en": "The score is only one input. Parity, gestational age, the woman's build and the indication for induction also count. It should never be used alone.",
+        "hi": "स्कोर केवल एक इनपुट है। parity, गर्भ की उम्र, महिला की कद-काठी और induction का कारण भी मायने रखते हैं। इसे अकेले कभी इस्तेमाल न करें।"
+      }
+    ],
+    "analogy": {
+      "en": "Think of a ripening mango. You feel whether it is soft, whether the stalk end has given, and how it sits in your hand. A green mango needs time, or a little help, before you cut it.",
+      "hi": "एक पकते आम की सोचिए। आप देखते हैं कि वह मुलायम है या नहीं, डंठल के पास ढीला हुआ या नहीं, और हाथ में कैसा बैठता है। कच्चे आम को काटने से पहले समय या थोड़ी मदद चाहिए।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Score changes between two examiners are common. Note who examined and when.",
+      "hi": "दो जाँचकर्ताओं के स्कोर में अंतर आम है। लिखिए कि किसने और कब जाँचा।"
+    },
+    {
+      "en": "A woman with a high score and regular contractions does not need cervical ripening.",
+      "hi": "ऊँचे स्कोर और नियमित संकुचन वाली महिला को सर्विक्स पकाने की ज़रूरत नहीं।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Use the Bishop tool with three example cervices and see how the total changes.",
+      "hi": "Bishop टूल पर तीन उदाहरण सर्विक्स आज़माइए और देखिए कि कुल कैसे बदलता है।"
+    },
+    {
+      "en": "Before every induction write down the indication, the score and the plan.",
+      "hi": "हर induction से पहले कारण, स्कोर और योजना लिखिए।"
+    }
+  ],
+  "remember": {
+    "en": "Bishop score: five parts, 0 to 13, higher means riper. An unripe cervix needs ripening before oxytocin.",
+    "hi": "Bishop स्कोर: पाँच हिस्से, 0 से 13, ऊँचा यानी ज़्यादा पका। कच्चे सर्विक्स को oxytocin से पहले पकाना पड़ता है।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "What is the maximum Bishop score?",
+        "hi": "Bishop स्कोर का अधिकतम मान क्या है?"
+      },
+      "o": [
+        {
+          "en": "10",
+          "hi": "10"
+        },
+        {
+          "en": "13",
+          "hi": "13"
+        },
+        {
+          "en": "15",
+          "hi": "15"
+        },
+        {
+          "en": "20",
+          "hi": "20"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Three parts score up to 3 each and two parts up to 2 each, so the maximum is 13.",
+        "hi": "तीन हिस्से अधिकतम 3-3 और दो हिस्से 2-2 अंक देते हैं, इसलिए अधिकतम 13 है।"
+      }
+    },
+    {
+      "q": {
+        "en": "A low Bishop score before induction suggests:",
+        "hi": "induction से पहले कम Bishop स्कोर का मतलब है:"
+      },
+      "o": [
+        {
+          "en": "High chance of quick success",
+          "hi": "जल्दी सफलता की ज़्यादा संभावना"
+        },
+        {
+          "en": "Higher chance of failed induction, so ripen the cervix first",
+          "hi": "induction के विफल होने की ज़्यादा संभावना, इसलिए पहले सर्विक्स पकाएँ"
+        },
+        {
+          "en": "Labour has already started",
+          "hi": "प्रसव शुरू हो चुका है"
+        },
+        {
+          "en": "Caesarean is needed at once",
+          "hi": "तुरंत सीज़ेरियन चाहिए"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "An unfavourable cervix goes with more failed inductions. Ripening first improves the chance of success.",
+        "hi": "कच्चे सर्विक्स में induction ज़्यादा विफल होते हैं। पहले पकाने से सफलता की संभावना बढ़ती है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "ob-labour",
+    "tool": "bishop"
+  },
+  "glossary": [
+    "bishop-score",
+    "effacement",
+    "station"
+  ],
+  "sources": [
+    "Transvaginal ultrasound versus Bishop score in predicting labour dystocia at full-term nullipara undergoing induction. PMC11162887, 2024: table of the five Bishop parameters and their scores.",
+    "Failed induction of labor and associated factors among women receiving induction at public hospitals. PMC12512734, 2025: five parameters, maximum 13 points, unfavourable Bishop score and failed induction.",
+    "The Bishop index and birth outcomes in nulliparous women undergoing labor induction: a scoping review. PMC13465716, 2026 (origin of the score: Bishop, Obstetrics and Gynecology, 1964)."
+  ]
+}
