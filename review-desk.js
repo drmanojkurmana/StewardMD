@@ -10,7 +10,10 @@
  * changes" feedback to vault/handoff/review-feedback.md. Nothing is uploaded from here (wave 2 syncs it).
  * Decisions are kept on this phone (content ids and comments only, never patient data).
  * Flag: smd_review_desk (default ON, reachable from Home > Add Tool > Review content). Buildless ES5.
- * A fourth tab, "Clinical updates", appears only for registered bulletin signers and owners; it is drawn by
+ * The Tokós tab lists the CTG trainer's pending approvals: one item per case in tokos/decks/ctg.json (the
+ * suggested labels a doctor confirms) and one per teaching text block (rationale, checklist wording, caliper
+ * verdicts). "Read it" opens a case straight in Tokós (TOKOS.openCase) and shows a text block here.
+ * A fifth tab, "Clinical updates", appears only for registered bulletin signers and owners; it is drawn by
  * bulletins-desk.js (SMD_BULLETINS_DESK) and, unlike the tabs above, talks to the server.
  */
 (function (root) {
@@ -21,7 +24,7 @@
   function ms(n) { return '<span class="material-symbols-outlined kit-ic" aria-hidden="true">' + n + "</span>"; }
   function toast(m) { try { (G.toast || G.SMD_toast) && (G.toast || G.SMD_toast)(m); } catch (e) {} }
   var DECISIONS = [["approve", "Approve as it is"], ["approve-minor", "Approve after the minor edits I describe"], ["changes", "Needs changes before use"]];
-  var KINDS = [["protocol", "Protocols"], ["kit", "Specialty kits"], ["consent", "Consent templates"]];
+  var KINDS = [["protocol", "Protocols"], ["kit", "Specialty kits"], ["consent", "Consent templates"], ["tokos", "Tokós"]];
 
   function loadDecisions() { try { var o = JSON.parse((G.localStorage && G.localStorage.getItem(LS_KEY)) || "{}"); return o && typeof o === "object" ? o : {}; } catch (e) { return {}; } }
   function saveDecisions(o) { try { G.localStorage.setItem(LS_KEY, JSON.stringify(o)); } catch (e) {} }
@@ -31,10 +34,59 @@
     return { schema: 1, app: "StewardMD review desk", exportedAt: now || new Date().toISOString(), reviewer: { name: reviewer.name || "", regNo: reviewer.regNo || "", speciality: reviewer.speciality || "", verified: !!reviewer.verified }, decisions: list };
   }
 
-  var S = { deskOn: false, kind: "protocol", sel: "", items: { protocol: null, kit: null, consent: null }, reviewer: { name: "", regNo: "", speciality: "", verified: false }, q: "" };
+  var S = { deskOn: false, kind: "protocol", sel: "", showText: false, items: { protocol: null, kit: null, consent: null, tokos: null }, reviewer: { name: "", regNo: "", speciality: "", verified: false }, q: "" };
+
+  /* ---------- Tokós (CTG trainer) ---------- */
+  var TOK_TEXT = [["rationale", "review", "Tokós teaching points", "The Why notes on the answer screen, English and Hindi"],
+    ["checklist", "reviewChecklist", "Tokós checklist wording", "Answer options and the three FIGO next steps, English and Hindi"],
+    ["calipers", "reviewCalipers", "Tokós caliper verdicts", "What the calipers say about a range or a span, English and Hindi"]];
+  /** Pure: one item per CTG case (reviewed when review.complete === true) and per text block (rationale.json review state). */
+  function tokosItems(deck, rat) {
+    var cases = ((deck && deck.cases) || []).map(function (c) {
+      return { id: "case-" + c.id, title: "Tokós CTG case " + c.id, sub: "Suggested FIGO category: " + c.figo + ((c.features && c.features.decels || []).length ? ", " + c.features.decels.length + " decelerations" : ""), status: c.review && c.review.complete === true ? "reviewed" : "ai_drafted", c: c };
+    });
+    return cases.concat(TOK_TEXT.map(function (t) { return { id: t[0], title: t[2], sub: t[3], status: ((rat && rat[t[1]]) || {}).status || "ai_drafted" }; }));
+  }
+  function words(s) { var w = String(s || "").replace(/_/g, " ").replace(/\./g, ": "); return w.charAt(0).toUpperCase() + w.slice(1); }
+  function tokosCaseHtml(c) {
+    var TD = G.TOKOS_DATA, sug = TD && TD.suggestedReview ? TD.suggestedReview(c) : { figo: c.figo, acidosis: c.acidosis };
+    var opts = (G.TOKOS && G.TOKOS.L10N && G.TOKOS.L10N.en.opts) || {}, f = c.features || {}, o = c.outcome || {};
+    // "Present, under 3 min" when the checklist label already names the class, else "Normal (110 to 160)"
+    function opt(q, v) { var o = opts[q] && opts[q][v], w = words(v); return !o ? w : o.toLowerCase().indexOf(w.toLowerCase()) === 0 ? o : w + " (" + o + ")"; }
+    var types = {}, maxD = 0;
+    (f.decels || []).forEach(function (d) { types[d.subtypeSuggested] = (types[d.subtypeSuggested] || 0) + 1; if (d.durationSec > maxD) maxD = d.durationSec; });
+    var typeLine = Object.keys(types).map(function (k) { return types[k] + " " + k; }).join(", ");
+    var rows = [
+      ["FIGO category", words(sug.figo)],
+      ["Baseline", sug.baselineClass ? opt("baseline", sug.baselineClass) + (f.baseline != null ? ", " + f.baseline + " bpm" : "") : ""],
+      ["Variability", sug.variability ? opt("variability", sug.variability) : ""],
+      ["Decelerations", sug.decels ? opt("decels", sug.decels) + (maxD ? ", longest " + Math.round(maxD) + " s" : "") : ""],
+      ["Deceleration types (suggested)", typeLine ? typeLine + (sug.decelType ? "; Resident graded as " + sug.decelType : "; mixed, so not graded") : "none"],
+      ["Contractions", sug.uc ? opt("uc", sug.uc) + (f.contractions && f.contractions.per10 != null ? ", " + f.contractions.per10 + " per 10 min" : "") : ""],
+      ["Acidosis class", words(sug.acidosis) + (o.pH != null ? ", pH " + o.pH : "") + (o.BDecf != null ? ", BDecf " + o.BDecf : "")]
+    ].filter(function (r) { return r[1]; });
+    return '<section class="kit-card rv-tok" aria-label="Labels to confirm"><h3>' + ms("monitor_heart") + "Labels to confirm</h3>" +
+      '<dl class="rv-kv">' + rows.map(function (r) { return "<div><dt>" + esc(r[0]) + "</dt><dd>" + esc(r[1]) + "</dd></div>"; }).join("") + "</dl>" +
+      (c.qualityNote ? '<p class="kit-muted"><b>Signal quality:</b> ' + esc(c.qualityNote) + "</p>" : "") +
+      '<p class="kit-muted">Rule-based suggestions. Approve confirms them as this case’s answer key. If any is wrong, choose Needs changes and give the right label.</p></section>';
+  }
+  function tokosTextHtml(id) {
+    var R = S.tokosRat || {}, rows = [];
+    if (id === "rationale") Object.keys(R).filter(function (k) { return k !== "v" && !/^review/.test(k); }).forEach(function (k) { rows.push([words(k), R[k].en, R[k].hi]); });
+    else if (id === "checklist") { var L = G.TOKOS && G.TOKOS.L10N; if (L) Object.keys(L.en.opts).forEach(function (q) { Object.keys(L.en.opts[q]).forEach(function (v) { rows.push([words(q) + ": " + words(v), L.en.opts[q][v], (L.hi.opts[q] || {})[v]]); }); }); }
+    else if (id === "calipers") { var W = G.TOKOS_CALIPERS && G.TOKOS_CALIPERS.WORDS; if (W) ["reduced", "normal", "increased", "short", "decel", "prolonged", "over5"].forEach(function (k) { rows.push([words(k), W.en[k], W.hi[k]]); }); }
+    if (!rows.length) return '<p class="kit-muted">This text could not be loaded here. Open Tokós once, then try again.</p>';
+    return '<ol class="rv-text">' + rows.map(function (r) { return '<li><span class="rv-s">' + esc(r[0]) + "</span><p>" + esc(r[1]) + '</p><p lang="hi">' + esc(r[2] || "") + "</p></li>"; }).join("") + "</ol>";
+  }
+  function loadTokos() {
+    var base = G.SMD_TOKOS_BASE || "/tokos/";
+    function j(p) { return G.fetch(base + p).then(function (r) { if (!r.ok) throw new Error(p + " " + r.status); return r.json(); }); }
+    return Promise.all([j("decks/ctg.json"), j("rationale.json")]).then(function (res) { S.tokosRat = res[1]; return tokosItems(res[0], res[1]); });
+  }
   function loadItems(kind) {
     if (S.items[kind]) return Promise.resolve(S.items[kind]);
     var p = kind === "protocol" ? (G.SMD_KBPROTO && G.SMD_KBPROTO.loadIndex ? G.SMD_KBPROTO.loadIndex().then(function (idx) { return (idx.protocols || []).map(function (x) { return { id: x.id, title: x.title, sub: (G.SMD_KBPROTO.subjectLabel ? G.SMD_KBPROTO.subjectLabel(x.subject) : x.subject), status: x.status }; }); }) : Promise.resolve([]))
+      : kind === "tokos" ? (G.fetch ? loadTokos() : Promise.resolve([]))
       : kind === "kit" ? (G.SMD_KITS && G.SMD_KITS.loadKits ? G.SMD_KITS.loadKits().then(function (b) { return (b.kits || []).map(function (k) { return { id: k.id, title: k.label, sub: (k.sections || []).length + " sections, " + (k.tools || []).length + " tools", status: (k.review || {}).status }; }); }) : Promise.resolve([]))
       : (G.SMD_DOCS && G.SMD_DOCS.load ? G.SMD_DOCS.load().then(function (b) { return (b.consent || []).map(function (c) { return { id: c.id, title: c.title.en, sub: "English, Telugu, Hindi", status: (c.review || {}).status }; }); }) : Promise.resolve([]));
     return p.then(function (list) { S.items[kind] = list; return list; }, function () { return []; });
@@ -61,8 +113,11 @@
     if (!list) { loadItems(S.kind).then(render); html = tabs + '<p class="kit-muted">Loading…</p>'; }
     else if (S.sel) {
       var it = list.filter(function (x) { return x.id === S.sel; })[0] || { id: S.sel, title: S.sel }, d = dec[S.kind + ":" + S.sel] || {}, r = reviewer();
+      var tokText = S.kind === "tokos" && !it.c;
       html = '<button type="button" class="kit-link" data-rv-act="back">' + ms("arrow_back") + "Back to the list</button><h2 class=\"dl-h\">" + esc(it.title) + "</h2>" + statusPill(it.status) +
-        '<div class="kit-row"><button type="button" class="kit-pill" data-rv-act="read">' + ms("menu_book") + "Read it</button></div>" +
+        (it.c ? tokosCaseHtml(it.c) : "") +
+        '<div class="kit-row"><button type="button" class="kit-pill" data-rv-act="read"' + (tokText ? ' aria-expanded="' + S.showText + '"' : "") + ">" + ms("menu_book") + (tokText && S.showText ? "Hide the text" : "Read it") + "</button></div>" +
+        (tokText && S.showText ? tokosTextHtml(it.id) : "") +
         '<div class="kit-grid"><label class="kit-field wide" for="rv_dec"><span class="kit-fl">Your decision</span><select id="rv_dec" class="kit-inp"><option value=""></option>' +
         DECISIONS.map(function (x) { return '<option value="' + x[0] + '"' + (d.decision === x[0] ? " selected" : "") + ">" + x[1] + "</option>"; }).join("") + "</select></label>" +
         '<label class="kit-field wide" for="rv_comment"><span class="kit-fl">Comments (which section, what to change, with your source)</span><textarea id="rv_comment" rows="5" class="kit-inp">' + esc(d.comment || "") + "</textarea></label>" +
@@ -118,13 +173,17 @@
     var act = b.getAttribute("data-rv-act"), i = act.indexOf(":"), cmd = i < 0 ? act : act.slice(0, i), arg = i < 0 ? "" : act.slice(i + 1);
     if (cmd === "close") { close(); return; }
     if (cmd === "kind") { S.kind = arg; S.sel = ""; if (arg === "bulletin" && G.SMD_BULLETINS_DESK) G.SMD_BULLETINS_DESK.reset(); render(); return; }
-    if (cmd === "sel") { S.sel = arg; render(); D.querySelector("#smdReview .kit-sheet-body").scrollTop = 0; return; }
+    if (cmd === "sel") { S.sel = arg; S.showText = false; render(); D.querySelector("#smdReview .kit-sheet-body").scrollTop = 0; return; }
     if (cmd === "back") { S.sel = ""; render(); return; }
     if (cmd === "read") {
       D.documentElement.classList.add("kit-lock");   // closing a kit drops it; the Library needs it to sit on top
       if (S.kind === "protocol" && G.SMD_KBPROTO) G.SMD_KBPROTO.open({ id: S.sel });
       else if (S.kind === "kit" && G.SMD_KITS) G.SMD_KITS.open({ kit: S.sel });
       else if (S.kind === "consent" && G.SMD_DOCS) G.SMD_DOCS.open({ type: "consent", consentId: S.sel });
+      else if (S.kind === "tokos") {
+        if (/^case-/.test(S.sel)) { if (G.TOKOS && G.TOKOS.openCase) { if (G.TOKOS.openCase(S.sel.slice(5)) === false) toast("Tokós is switched off on this phone."); } else toast("Tokós is loading. Try again in a moment."); }
+        else { S.showText = !S.showText; render(); }
+      }
       return;
     }
     if (cmd === "save") {
@@ -153,7 +212,7 @@
 
   // Weekly review push (/?rvtab=bulletins) lands here: open the desk on the Clinical updates tab.
   function openBulletins() { S.wantBulletin = true; open(); }
-  var API = { open: open, openBulletins: openBulletins, close: close, _render: render, _buildExport: buildExport, DECISIONS: DECISIONS };
+  var API = { open: open, openBulletins: openBulletins, close: close, _render: render, _buildExport: buildExport, _tokosItems: tokosItems, DECISIONS: DECISIONS };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_REVIEW = API;
 })(typeof window !== "undefined" ? window : globalThis);

@@ -1,10 +1,12 @@
 # Tokós CTG review queue
 
-For an obstetrician: confirm or correct each suggested label below, and the teaching text listed under Content to review. Until a case has a complete review the app shows its labels as "Rule-based, pending obstetrician review", and the `smd_tokos` flag stays off until every case has one.
+Reviews are done in the app: Review Desk (Home > Add Tool > Review content), Tokós tab. Each case and each block of teaching text is one item there; Read it opens the case in Tokós. The reviewer approves, approves after minor edits, or asks for changes, then exports, and the owner applies the export with `node scripts/apply-reviews.mjs <file.json>`. This file remains the pipeline notes: the suggested labels, outcome and quality note per case, and the field reference below.
 
-## How to record a review
+Tokós is on for all users while the app is in testing (owner decision 2026-09-29). Until a case has a complete review the app shows its labels as "Rule-based, pending obstetrician review".
 
-Set `review` on the case in `tokos/decks/ctg.json`. Every field the app reads:
+## How a review is recorded
+
+Approving a case in the Review Desk sets `review` on the case in `tokos/decks/ctg.json` to the suggested labels as approved (a correction goes through Needs changes, then an edit here by hand). Every field the app reads:
 
 - `by`, `date` (`YYYY-MM-DD`): who reviewed and when.
 - `uc`: `normal`, `tachysystole`. Contractions answer.

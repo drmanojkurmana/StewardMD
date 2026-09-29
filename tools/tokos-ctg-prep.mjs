@@ -514,11 +514,9 @@ export async function mainV2() {
       id: k.id, svg: "ctg/" + k.id + ".svg", layout, archetypeSuggested: k.archetypeSuggested,
       vignette: vignetteFrom(c), features: Object.assign({ variabilityBand: k.features.variability.band, decelCount: k.features.decels.length }, k.features), figo: k.features.figoSuggested,
       outcome: { pH: c["pH"], BE: c["BE"], BDecf: c["BDecf"], pCO2: c["pCO2"], apgar1: c["Apgar1"], apgar5: c["Apgar5"], weightG: c["Weight(g)"] },
-      acidosis: k.acidosis, stripQuality: k.stripQuality, review: null,
+      acidosis: k.acidosis, stripQuality: k.stripQuality, qualityNote: "", review: null,
     };
   });
-  writeFileSync(OUT_DECK, JSON.stringify({ v: 2, id: "ctg", cases }, null, 1));
-  mkdirSync("docs/tokos", { recursive: true });
   const qNote = (k, c) => {
     const sb = twoPassBaseline(k.fhr), hi = Array.from(k.fhr).filter((v) => v > 180).length;
     const last5 = Array.from(k.fhr).slice(-5 * 60 * k.h.fs).filter((v) => v > 180).length;
@@ -527,7 +525,11 @@ export async function mainV2() {
     if (hi) notes.push(hi + " samples above 180 bpm in the strip" + (last5 ? " (" + last5 + " in the last 5 min)" : ""));
     return "strip FHR loss " + c.stripQuality.fhrLossPct + "%, UC present " + c.stripQuality.ucPresentPct + "%; " + (notes.length ? notes.join("; ") : "no artefact concern found by the checks") + ". Features are computed on the " + c.features.window.minutes + " min window.";
   };
-  writeReviewQueue(cases, cases.map((c, i) => qNote(chosen[i], c)));
+  // The quality note needs the raw signal, so it is written into the deck too: the Review Desk shows it per case.
+  cases.forEach((c, i) => { c.qualityNote = qNote(chosen[i], c); });
+  writeFileSync(OUT_DECK, JSON.stringify({ v: 2, id: "ctg", cases }, null, 1));
+  mkdirSync("docs/tokos", { recursive: true });
+  writeReviewQueue(cases, cases.map((c) => c.qualityNote));
   console.log("wrote " + cases.length + " cases; archetypes: " + cases.map((c) => c.archetypeSuggested).join(", "));
 }
 
@@ -542,9 +544,10 @@ export function reviewQueueMd(cases, qNotes, rationaleKeys, hand) {
   const decelText = (c) => (c.features.decels.length ? c.features.decels.map((d) => d.durationSec + " s " + d.subtypeSuggested + " (suggested)").join(", ") : "none");
   const head = [
     "# Tokós CTG review queue", "",
-    "For an obstetrician: confirm or correct each suggested label below, and the teaching text listed under Content to review. Until a case has a complete review the app shows its labels as \"Rule-based, pending obstetrician review\", and the `smd_tokos` flag stays off until every case has one.", "",
-    "## How to record a review", "",
-    "Set `review` on the case in `tokos/decks/ctg.json`. Every field the app reads:", "",
+    "Reviews are done in the app: Review Desk (Home > Add Tool > Review content), Tokós tab. Each case and each block of teaching text is one item there; Read it opens the case in Tokós. The reviewer approves, approves after minor edits, or asks for changes, then exports, and the owner applies the export with `node scripts/apply-reviews.mjs <file.json>`. This file remains the pipeline notes: the suggested labels, outcome and quality note per case, and the field reference below.", "",
+    "Tokós is on for all users while the app is in testing (owner decision 2026-09-29). Until a case has a complete review the app shows its labels as \"Rule-based, pending obstetrician review\".", "",
+    "## How a review is recorded", "",
+    "Approving a case in the Review Desk sets `review` on the case in `tokos/decks/ctg.json` to the suggested labels as approved (a correction goes through Needs changes, then an edit here by hand). Every field the app reads:", "",
     "- `by`, `date` (`YYYY-MM-DD`): who reviewed and when.",
     "- `uc`: " + vals("uc") + ". Contractions answer.",
     "- `baselineClass`: " + vals("baseline") + ". Baseline answer.",
@@ -568,16 +571,15 @@ function writeReviewQueue(cases, qNotes) {
   const old = existsSync(QUEUE) ? readFileSync(QUEUE, "utf8") : "";
   const at = old.indexOf(HAND_MARK);
   const R = JSON.parse(readFileSync("tokos/rationale.json", "utf8"));
-  writeFileSync(QUEUE, reviewQueueMd(cases, qNotes, Object.keys(R).filter((k) => k !== "v" && k !== "review"), at >= 0 ? old.slice(at) : null));
+  writeFileSync(QUEUE, reviewQueueMd(cases, qNotes, Object.keys(R).filter((k) => k !== "v" && !/^review/.test(k)), at >= 0 ? old.slice(at) : null));
 }
 // --queue-only: rewrite the queue from the committed deck without touching the network, the deck or the SVGs.
-// Quality notes need the raw signal, so they are carried over from the current queue file.
+// Quality notes need the raw signal, so they come from the deck (case.qualityNote, written by the full run).
 function queueOnly() {
-  const cases = JSON.parse(readFileSync(OUT_DECK, "utf8")).cases, old = readFileSync(QUEUE, "utf8");
+  const cases = JSON.parse(readFileSync(OUT_DECK, "utf8")).cases;
   const notes = cases.map((c) => {
-    const m = new RegExp("^## " + c.id + " \\(.*\\n(?:- .*\\n)*?- Quality note: (.*)", "m").exec(old);
-    if (!m) throw new Error("no quality note for " + c.id + " in " + QUEUE + "; run the full pipeline");
-    return m[1];
+    if (!c.qualityNote) throw new Error("no qualityNote for case " + c.id + " in " + OUT_DECK + "; run the full pipeline");
+    return c.qualityNote;
   });
   writeReviewQueue(cases, notes);
   console.log("rewrote " + QUEUE + " for " + cases.length + " cases");

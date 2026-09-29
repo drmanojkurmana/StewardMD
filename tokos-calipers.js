@@ -73,7 +73,7 @@
       destroy: function () { if (g.parentNode) g.parentNode.removeChild(g); }
     };
   }
-  var API = { yForBpm: yForBpm, bpmAt: bpmAt, secAt: secAt, deltaBpm: deltaBpm, deltaSec: deltaSec, readout: readout, toViewBox: toViewBox, attach: attach };
+  var API = { WORDS: WORDS, yForBpm: yForBpm, bpmAt: bpmAt, secAt: secAt, deltaBpm: deltaBpm, deltaSec: deltaSec, readout: readout, toViewBox: toViewBox, attach: attach };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   else G.TOKOS_CALIPERS = API;
 })(typeof window !== "undefined" ? window : this);

@@ -151,8 +151,9 @@ test("review sync: keeps valid decisions only; the owner export applies with app
   const r = await K.reviewsPut(w.ctx("uA"), { decisions: [
     { kind: "protocol", id: "acne-vulgaris", decision: "approve", comment: "", at: "2026-09-26T08:00:00Z" },
     { kind: "kit", id: "obgyn", decision: "changes", comment: "", at: "2026-09-26T08:00:00Z" },
+    { kind: "tokos", id: "case-1031", decision: "approve", comment: "", at: "2026-09-26T08:00:00Z" },
     { kind: "kit", id: "../etc", decision: "approve", at: "2026-09-26T08:00:00Z" } ] });
-  assert.equal(r.body.count, 1);
+  assert.equal(r.body.count, 2, "protocol and Tokós approvals kept; changes without a comment and a bad id dropped");
   const all = (await K.reviewsAll(w.ctx("uA"))).body.reviews;
   assert.equal(all.length, 1); assert.equal(all[0].reviewer.verified, true); assert.equal(all[0].reviewer.name, "Dr Asha");
   assert.deepEqual(AR.validateExport(all[0]), []);
