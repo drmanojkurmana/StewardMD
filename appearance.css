@@ -1056,8 +1056,7 @@ html[data-appearance] #homeV2.rnav .rnav-qa-btn::after { display: none !importan
  * ============================================================================ */
 html[data-appearance] #sbrefOverlay:not(#_):has(.kblib-discover) .sbref-shell,
 html[data-appearance] #sbrefOverlay:not(#_):has(.kblib-tool-page) .sbref-shell,
-html[data-appearance] #dxOverlay:not(#_).dx-reference-mode,
-html[data-appearance] #dxMgmt:not(#_).dx-reader {
+html[data-appearance] #dxOverlay:not(#_).dx-reference-mode {
   background: linear-gradient(180deg, color-mix(in srgb, var(--teal,#0f766e) 9%, var(--paper,#f5f5f7)) 0, var(--paper,#f5f5f7) 420px) !important;
 }
 /* the section wrapper is a layout box in the library, not a card: no glass on it */
@@ -1077,14 +1076,13 @@ html[data-appearance] #dxMgmt:not(#_).dx-reader .dx-mgmt-top {
 html[data-appearance] #sbrefOverlay:not(#_) .kblib-discover :is(.kblib-personal,.kblib-compare,.kblib-feature,.kblib-grid,.kblib-more,.kblib-search,.kblib-tiles .kblib-f),
 html[data-appearance] #sbrefOverlay:not(#_) #sbrefBody.kblib-tool-page .sbref-sec,
 html[data-appearance] #sbrefOverlay:not(#_) #sbrefBody.kblib-tool-page .kblib-tool-search,
-html[data-appearance] #dxMgmt:not(#_).dx-reader :is(.dx-reader-hero,.dx-reader-glance,.dx-reader-favourite,.ev-wrap,.dx-mgmt-disc) {
+html[data-appearance] #dxMgmt:not(#_).dx-reader .dx-mgmt-disc {
   background: color-mix(in srgb, var(--panel,#fff) 82%, transparent) !important;
   border: 1px solid color-mix(in srgb, var(--ink,#000) 9%, transparent) !important;
   box-shadow: 0 1px 2px rgba(15,23,42,.04) !important;
   -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
 }
-html[data-appearance] #sbrefOverlay:not(#_) .kblib-discover .kblib-feature::after,
-html[data-appearance] #dxMgmt:not(#_).dx-reader .dx-reader-hero::after { display: none !important; }
+html[data-appearance] #sbrefOverlay:not(#_) .kblib-discover .kblib-feature::after { display: none !important; }
 html[data-appearance] #sbrefOverlay:not(#_) .kblib-discover .kblib-tiles .kblib-f.on,
 html[data-appearance] #sbrefOverlay:not(#_) .kblib-discover .kblib-f.on {
   background: var(--kl-accent,#5956a5) !important; border-color: var(--kl-accent,#5956a5) !important; color: #fff !important;
