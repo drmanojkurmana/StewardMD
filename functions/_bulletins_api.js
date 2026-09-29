@@ -7,6 +7,7 @@
  *   POST /api/updates/bulletins                        signer: create or edit a draft
  *   POST /api/updates/bulletins/:id/sign               signer: sign the previewed text
  *   POST /api/updates/bulletins/:id/retract            signer or owner
+ *   POST /api/updates/bulletins/skip                   signer: { update_id, undo? } take a source item off the queue
  *   GET  /api/updates/bulletins/signers                owner
  *   GET  /api/updates/bulletins/signers/lookup?email=  owner: uid + pre-fill from the verified-doctor record
  *   POST /api/updates/bulletins/signers                owner: add or update a signer
@@ -27,7 +28,7 @@ import { lookup as cdscoLookup, refreshCdscoLists } from "./_cdsco.js";
 import { pendingCounts } from "./_bulletins_review_digest.js";
 
 const PUB_CACHE = "public, max-age=300";
-const RESERVED = ["me", "queue", "signers", "kill", "cdsco"];
+const RESERVED = ["me", "queue", "signers", "kill", "cdsco", "skip"];
 const CHECKLIST = ["source_read", "numbers_match", "india_checked", "own_words"];
 
 function json(obj, status, cache, extra) {
@@ -234,6 +235,15 @@ export async function handleBulletins(context, parts) {
     const r = await repo.sign(env, { id: sub, previewedHash: previewed, signer: s, now });
     if (!r.ok) return json({ error: r.code }, r.code === "not-found" ? 404 : 409);
     return json({ ok: true, item: queueItem(r.row, now, knownDiseaseIds()) });
+  }
+
+  if (method === "POST" && sub === "skip") {
+    const b = await body(request);
+    const updateId = cleanText(b.update_id).slice(0, 80);
+    if (!updateId) return json({ error: "update-id-required" }, 400);
+    if (!(await repo.getUpdateRow(env, updateId))) return json({ error: "unknown-update" }, 404);
+    await repo.setSkip(env, { updateId, uid: s.uid, now, undo: b.undo === true });
+    return json({ ok: true, update_id: updateId, skipped: b.undo !== true });
   }
 
   if (method === "GET" && sub && RESERVED.indexOf(sub) < 0 && parts[2] === "audit") {

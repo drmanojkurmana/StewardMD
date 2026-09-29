@@ -80,6 +80,7 @@ export async function listCandidates(env, sinceTs, limit) {
     "SELECT u.id, u.type, u.title, u.organization, u.official_url, u.published_ts, u.summary, u.content_hash, u.doi, u.pmid FROM updates u " +
     "WHERE u.published_ts > ? AND u.type IN (" + marks + ") " +
     "AND NOT EXISTS (SELECT 1 FROM bulletins b WHERE b.update_id = u.id AND b.status != 'retracted') " +
+    "AND NOT EXISTS (SELECT 1 FROM bulletin_skips s WHERE s.update_id = u.id) " +
     "ORDER BY u.published_ts DESC LIMIT ?"
   ).bind(sinceTs, ...CANDIDATE_TYPES, limit || 50).all();
   return rs.results || [];
@@ -190,6 +191,17 @@ export async function listAudit(env, bulletinId, limit) {
   const rs = await db(env).prepare("SELECT ts, actor_uid, action, body_hash, detail FROM bulletin_audit WHERE bulletin_id = ? ORDER BY ts DESC LIMIT ?")
     .bind(bulletinId, limit || 50).all();
   return rs.results || [];
+}
+
+/* ---------------- skip (not for the disease page) ---------------- */
+export async function setSkip(env, { updateId, uid, now, undo }) {
+  const D = db(env);
+  await D.batch([
+    undo ? D.prepare("DELETE FROM bulletin_skips WHERE update_id = ?").bind(updateId)
+      : D.prepare("INSERT OR IGNORE INTO bulletin_skips (update_id, uid, ts) VALUES (?,?,?)").bind(updateId, uid, now),
+    D.prepare("INSERT INTO bulletin_audit (id, bulletin_id, ts, actor_uid, action, body_hash, detail) VALUES (" + AUDIT_ID + ", '', ?, ?, ?, '', ?)")
+      .bind(now, uid, undo ? "unskip" : "skip", String(updateId).slice(0, 80)),
+  ]);
 }
 
 /* ---------------- signers ---------------- */

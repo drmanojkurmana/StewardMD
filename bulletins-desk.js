@@ -93,7 +93,8 @@
     c._suggest = suggestDiseases(text, c.disease_ids);
   }
 
-  var DS = { me: null, probing: null, view: "list", queue: null, loading: false, cur: null, saved: null, msg: "", busy: false, dq: "", signers: null, look: null };
+  var DS = { me: null, probing: null, view: "list", queue: null, loading: false, cur: null, saved: null, msg: "", msgKind: "", busy: false, dq: "", signers: null, look: null,
+    filter: "todo", undo: null, open: {}, ck: {} };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
   function ms(n) { return '<span class="material-symbols-outlined kit-ic" aria-hidden="true">' + n + "</span>"; }
@@ -128,7 +129,7 @@
     DS.loading = true;
     return api("GET", "/queue").then(function (r) {
       DS.loading = false;
-      if (r.status === 200) DS.queue = r.data; else DS.msg = "Could not load the queue (" + (r.data.reason || r.data.error || r.status) + ").";
+      if (r.status === 200) DS.queue = r.data; else say("Could not load the queue (" + (r.data.reason || r.data.error || r.status) + ").");
       rerender();
     });
   }
@@ -188,7 +189,7 @@
       '<button type="button" class="bl-fmt-b" data-bl-act="fmt:b" aria-label="Bold"><b>B</b></button>' +
       '<button type="button" class="bl-fmt-b" data-bl-act="fmt:i" aria-label="Italic"><i>I</i></button>' +
       '<button type="button" class="bl-fmt-b" data-bl-act="fmt:u" aria-label="Underline"><u>U</u></button>' +
-      '<span class="kit-muted bl-fmt-hint">Select words in the headline, What changed or Applies to, then tap.</span></div>';
+      '<span class="kit-muted bl-fmt-hint">Select words, then tap B, I or U.</span></div>';
   }
 
   function fromCandidate(c) {
@@ -232,10 +233,11 @@
     if (d.error === "offline") return "No connection. Try again when online.";
     return "Could not save (" + (d.error || r.status) + ").";
   }
-  function sel(id, opts, cur, blank) {
-    return '<select id="' + id + '" class="kit-inp">' + (blank ? '<option value="">Choose</option>' : "") + opts.map(function (o) {
-      return '<option value="' + esc(o[0]) + '"' + (String(cur) === String(o[0]) ? " selected" : "") + ">" + esc(o[1]) + "</option>";
-    }).join("") + "</select>";
+  function say(text, kind) { DS.msg = text || ""; DS.msgKind = kind || "err"; }
+  function msgHtml() {
+    if (!DS.msg) return "";
+    var k = DS.msgKind || "err";
+    return '<p class="bl-banner ' + k + '" role="' + (k === "err" ? "alert" : "status") + '">' + ms(k === "ok" ? "check_circle" : k === "warn" ? "info" : "error") + "<span>" + esc(DS.msg) + "</span></p>";
   }
   function field(id, label, input, wide) { return '<label class="kit-field' + (wide ? " wide" : "") + '" for="' + id + '"><span class="kit-fl">' + label + "</span>" + input + "</label>"; }
   function txt(id, v, max, rows) {
@@ -243,66 +245,199 @@
       : '<input id="' + id + '" class="kit-inp" maxlength="' + max + '" value="' + esc(v || "") + '">';
   }
   function val(id) { var el = D.getElementById(id); return el ? el.value : ""; }
+  function fmtDate(v) { return (B() && B()._fmtDate(v)) || ""; }
 
-  // Copy form inputs into DS.cur so a re-render (disease chip, search) never loses typing.
+  // Copy the text inputs into DS.cur so a re-render (chip, disease, search) never loses typing.
+  // Choices made with chips (type, India status, evidence, regulator, review interval) live in DS.cur already.
   function collect() {
     var c = DS.cur; if (!c || !D.getElementById("bl_headline")) return;
-    ["headline", "what_changed", "applies_to", "evidence_note", "source_label", "source_url", "source_date", "doi", "pmid",
-      "kind", "evidence_type", "regulator", "india_status", "review_months"].forEach(function (k) { c[k] = val("bl_" + k); });
-    c.review_months = Number(c.review_months) || 12;
+    ["headline", "what_changed", "applies_to", "evidence_note", "source_label", "source_url", "source_date", "doi", "pmid"].forEach(function (k) {
+      if (D.getElementById("bl_" + k)) c[k] = val("bl_" + k);
+    });
     if (D.getElementById("bl_cq")) c._cq = val("bl_cq");
   }
 
-  /* ---------------- views ---------------- */
-  function rowBtn(act, title, sub, pill) {
-    return '<button type="button" class="rv-row" data-bl-act="' + esc(act) + '"><span class="rv-t">' + esc(title) + '</span><span class="rv-s">' + esc(sub || "") + "</span>" + (pill ? "<span>" + pill + "</span>" : "") + "</button>";
+  /* ---------------- what is still missing (mirrors validateDraft in functions/_bulletin_rules.js) ---------------- */
+  var LIM = { headline: [10, 120], what_changed: [20, 400], applies_to: [0, 200], evidence_note: [0, 120] };
+  function visLen(s) { return B().plain(String(s || "").replace(/\s+/g, " ").trim()).length; }
+  function realDate(s) {
+    s = String(s || "");
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(s)) return false;
+    var t = Date.parse(s + "T00:00:00Z");
+    return isFinite(t) && new Date(t).toISOString().slice(0, 10) === s && t <= Date.now() + 86400000;
   }
-  function section(title, rows) { return rows.length ? '<h3 class="dl-h">' + esc(title) + " (" + rows.length + ')</h3><div class="rv-list">' + rows.join("") + "</div>" : ""; }
+  // In page order, so the first entry is the one nearest the top.
+  function missing(c) {
+    var out = [];
+    function add(k, label, target, src) { out.push({ k: k, label: label, target: target, src: !!src }); }
+    function textBad(k) { var n = visLen(c[k]), L = LIM[k]; return (L[0] && n < L[0]) || n > L[1] || String(c[k] || "").indexOf("\u2014") >= 0; }
+    var sl = visLen(c.source_label), su = String(c.source_url || "").trim();
+    if (sl < 3 || sl > 160 || String(c.source_label || "").indexOf("\u2014") >= 0) add("source_label", "Source name", "bl_source_label", true);
+    if (su.length < 12 || !B()._httpsUrl(su)) add("source_url", "Source link", "bl_source_url", true);
+    if (!realDate(c.source_date)) add("source_date", "Source date", "bl_source_date", true);
+    if (c.doi && !/^10\.\d{4,9}\/\S+$/.test(String(c.doi).trim())) add("doi", "DOI", "bl_doi", true);
+    if (c.pmid && !/^\d{1,10}$/.test(String(c.pmid).trim())) add("pmid", "PMID", "bl_pmid", true);
+    if (textBad("headline")) add("headline", "Headline", "bl_headline");
+    if (textBad("what_changed")) add("what_changed", "What changed", "bl_what_changed");
+    if (textBad("applies_to")) add("applies_to", "Applies to", "bl_applies_to");
+    if (!(c.disease_ids || []).length) add("disease_ids", "Diseases", "bl_dq");
+    if (!c.kind) add("kind", "Type", "bl_sec_kind");
+    if (!c.india_status) add("india_status", "India status", "bl_sec_india_status");
+    if (!c.evidence_type) add("evidence_type", "Evidence", "bl_sec_evidence_type");
+    if (textBad("evidence_note")) add("evidence_note", "Evidence note", "bl_evidence_note");
+    return out;
+  }
+
+  /* ---------------- shared pieces ---------------- */
+  function typeChip(kind) {
+    var lab = (B().KIND || {})[kind];
+    return '<span class="bl-type bl-k-' + (lab ? kind : "other") + '">' + esc(lab || "Source item") + "</span>";
+  }
+  function metaLine(org, date) { var t = [org, fmtDate(date)].filter(Boolean).join(" · "); return t ? '<span class="bl-meta">' + esc(t) + "</span>" : ""; }
+  function chev() { return '<span class="material-symbols-outlined kit-ic bl-chev" aria-hidden="true">expand_more</span>'; }
+  function fold(key, open, summary, body, cls) {
+    return '<details class="bl-fold' + (cls ? " " + cls : "") + '" data-bl-open="' + key + '"' + (open ? " open" : "") + "><summary>" + summary + chev() + "</summary>" + body + "</details>";
+  }
+  function stepHead(n, id, title) { return '<h3 class="bl-step-h" id="' + id + '"><span class="bl-n" aria-hidden="true">' + n + "</span>" + title + "</h3>"; }
+
+  /* ---------------- queue ---------------- */
+  var NOTE = {
+    source_changed: ["The source changed since it was signed. Read it again.", "warn", "sync_problem", "Check again"],
+    review_due: ["Review due. Check it still holds, then sign again.", "warn", "event_repeat", "Review"],
+    source_missing: ["The source item was removed.", "warn", "link_off", "Open"],
+    edited: ["Edited, not signed yet.", "", "edit_note", "Continue"],
+    draft: ["Draft, not signed yet.", "", "edit_note", "Continue"],
+  };
+  function bucket(it, soon) {
+    if (it.state === "draft" || it.state === "edited") return "draft";
+    if (it.state === "live" && !(it.review_due_ts < soon) && !(it.orphaned || []).length) return "live";
+    return "check";
+  }
+  function qCard(kind, attn, top, title, sub, note, acts) {
+    var kc = (B().KIND || {})[kind] ? kind : "other";
+    return '<article class="bl-q bl-k-' + kc + (attn ? " attn" : "") + '">' + '<div class="bl-q-top">' + top + "</div>" +
+      '<h4 class="bl-q-t">' + esc(title) + "</h4>" + (sub ? '<p class="bl-q-s">' + esc(sub) + "</p>" : "") +
+      (note ? '<p class="bl-q-n ' + note[1] + '">' + ms(note[2]) + "<span>" + esc(note[0]) + "</span></p>" : "") +
+      '<div class="bl-q-act">' + acts + "</div></article>";
+  }
+  function itemCard(it, soon) {
+    var note = NOTE[it.state], label = note ? note[3] : "Open", live = it.state === "live";
+    if (live) note = it.review_due_ts < soon ? ["Review due " + fmtDate(it.review_due_ts) + ".", "warn", "event_repeat"] : ["On the disease page until " + fmtDate(it.review_due_ts) + ".", "ok", "verified"];
+    if (live && it.review_due_ts < soon) label = "Review";
+    if ((it.orphaned || []).length) { note = ["A disease was removed from the library. Choose another.", "warn", "link_off"]; label = "Fix"; }
+    var todo = bucket(it, soon) !== "live";
+    return qCard(it.kind, todo && note && note[1] === "warn", typeChip(it.kind) + metaLine(it.source_label, it.source_date), B().plain(it.headline),
+      (it.disease_ids || []).map(diseaseName).join(", "), note,
+      '<button type="button" class="' + (todo ? "kit-add" : "kit-clear") + '" data-bl-act="edit:' + esc(it.id) + '">' + (todo ? ms(label === "Continue" ? "edit" : "fact_check") : "") + esc(label) + "</button>");
+  }
+  function candCard(c) {
+    var kind = TYPE_KIND[c.type] || "";
+    return qCard(kind, false, typeChip(kind) + metaLine(c.organization, c.published_ts), c.title, firstSentences(c.summary, 160), null,
+      '<button type="button" class="kit-add" data-bl-act="new:' + esc(c.id) + '">' + ms("edit_note") + "Write update</button>" +
+      '<button type="button" class="kit-clear" data-bl-act="skip:' + esc(c.id) + '" aria-label="Skip: ' + esc(c.title) + '">Skip</button>');
+  }
+  function group(title, cards) { return cards.length ? '<h3 class="bl-gh">' + esc(title) + '<span class="bl-gn">' + cards.length + '</span></h3><div class="bl-ql">' + cards.join("") + "</div>" : ""; }
+  function empty(icon, text) { return '<div class="bl-empty">' + ms(icon) + "<p>" + esc(text) + "</p></div>"; }
 
   function listView(tabs) {
-    var me = DS.me || {}, q = DS.queue;
-    var head = tabs + (DS.msg ? '<p class="kit-muted" role="status">' + esc(DS.msg) + "</p>" : "");
-    if (me.killed) head += '<p class="rv-pill" role="status">Practice updates are switched off for everyone.</p>';
-    var tools = "";
-    if (me.isOwner) {
-      tools = '<div class="kit-row"><button type="button" class="kit-pill" data-bl-act="signers">' + ms("badge") + "Signers</button>" +
-        '<button type="button" class="kit-pill" data-bl-act="kill">' + ms(me.killed ? "toggle_on" : "block") + (me.killed ? "Switch back on" : "Switch off for everyone") + "</button></div>";
-    }
-    var pd = me.pending;
-    if (pd && pd.total) head += '<p class="kit-muted" role="status">Waiting for you: ' + [
+    var me = DS.me || {}, q = DS.queue, pd = me.pending;
+    var head = tabs + msgHtml();
+    if (me.killed) head += '<p class="bl-banner warn" role="status">' + ms("block") + "<span>Practice updates are switched off for everyone.</span></p>";
+    var tools = me.isOwner ? '<div class="bl-tools"><p class="bl-gh">Owner tools</p><div class="kit-row"><button type="button" class="kit-pill" data-bl-act="signers">' + ms("badge") + "Signers</button>" +
+      '<button type="button" class="kit-pill" data-bl-act="kill">' + ms(me.killed ? "toggle_on" : "block") + (me.killed ? "Switch back on" : "Switch off for everyone") + "</button></div></div>" : "";
+    var waiting = pd && pd.total ? "Waiting for you: " + [
       pd.candidates ? pd.candidates + " new source item" + (pd.candidates === 1 ? "" : "s") : "",
       pd.source_changed ? pd.source_changed + " source change" + (pd.source_changed === 1 ? "" : "s") : "",
       pd.drafts ? pd.drafts + " draft" + (pd.drafts === 1 ? "" : "s") : "",
-      pd.review_due ? pd.review_due + " due for review" : ""].filter(Boolean).join(", ") + ".</p>";
+      pd.review_due ? pd.review_due + " due for review" : ""].filter(Boolean).join(", ") + "." : "Nothing waiting for you.";
+    head += '<div class="bl-sum"><p class="bl-sum-h">' + esc(waiting) + '</p><p class="kit-muted">Nothing reaches a disease page until a doctor signs it.</p></div>';
     if (!me.canSign) {
-      return head + '<p class="kit-muted">Practice updates appear on the disease page only after a registered doctor signs them. ' +
-        (me.isOwner ? "You can manage signers. Add yourself to sign." : "You are not registered to sign.") + "</p>" + tools;
+      return head + '<p class="kit-muted">' + (me.isOwner ? "You can manage signers. Add yourself to sign." : "You are not registered to sign.") + "</p>" + tools;
     }
-    if (!q) { if (!DS.loading) loadQueue(); return head + tools + '<p class="kit-muted">Loading…</p>'; }
-    var items = q.items || [], soon = Date.now() + 30 * 86400000;
-    var by = function (f) { return items.filter(f).map(function (it) { return rowBtn("edit:" + it.id, B().plain(it.headline), (it.disease_ids || []).map(diseaseName).join(", "), '<span class="rv-pill">' + esc(stateLabel(it)) + "</span>"); }); };
-    return head + tools +
-      '<p class="kit-muted">Write each update in your own words from the primary source. Nothing reaches the disease page until it is signed, and any later change takes it off until it is signed again.</p>' +
-      section("Source changed, review again", by(function (i) { return i.state === "source_changed"; })) +
-      section("Review due", by(function (i) { return i.state === "review_due" || (i.state === "live" && i.review_due_ts < soon); })) +
-      section("Drafts", by(function (i) { return i.state === "draft" || i.state === "edited"; })) +
-      section("New sources without a bulletin", (q.candidates || []).map(function (c) { return rowBtn("new:" + c.id, c.title, (c.organization || "") + " " + isoDate(c.published_ts), '<span class="rv-pill">Write one</span>'); })) +
-      section("Live on the disease page", by(function (i) { return i.state === "live" && !(i.review_due_ts < soon); })) +
-      section("Disease no longer in the library", by(function (i) { return (i.orphaned || []).length > 0; })) +
-      (items.length || (q.candidates || []).length ? "" : '<p class="kit-muted">Nothing to review.</p>');
-  }
-  function stateLabel(it) {
-    return { live: "Live", draft: "Draft", edited: "Edited, needs signing", source_changed: "Source changed", review_due: "Review due", source_missing: "Source removed" }[it.state] || it.state;
+    if (!q) { if (!DS.loading) loadQueue(); return head + '<p class="kit-muted" role="status">Loading…</p>' + tools; }
+    var items = q.items || [], cands = q.candidates || [], soon = Date.now() + 30 * 86400000;
+    var check = items.filter(function (i) { return bucket(i, soon) === "check"; }), drafts = items.filter(function (i) { return bucket(i, soon) === "draft"; }),
+      live = items.filter(function (i) { return bucket(i, soon) === "live"; });
+    var todoN = check.length + drafts.length + cands.length, f = DS.filter === "live" ? "live" : "todo";
+    var seg = function (k, label, n) { return '<button type="button" data-bl-act="filter:' + k + '" aria-pressed="' + (f === k) + '">' + label + '<span class="bl-badge">' + n + "</span></button>"; };
+    var undo = DS.undo ? '<div class="bl-undo" role="status"><span>Skipped. It leaves the queue for every signer.</span><button type="button" class="kit-link" data-bl-act="unskip:' + esc(DS.undo) + '">Undo</button></div>' : "";
+    var card = function (it) { return itemCard(it, soon); };
+    var body = f === "live"
+      ? (live.length ? group("On the disease page", live.map(card)) : empty("verified", "Nothing is live yet. Updates you sign appear here."))
+      : (todoN ? group("Check again", check.map(card)) + group("Your drafts", drafts.map(card)) + group("New from journals and regulators", cands.map(candCard))
+        : empty("task_alt", "All caught up. New journal and regulator items arrive every day, and you get a reminder on Saturday morning."));
+    return head + '<div class="bl-seg" role="group" aria-label="Show">' + seg("todo", "To do", todoN) + seg("live", "Live", live.length) + "</div>" + undo + body + tools;
   }
 
-  function sourcePanel(c) {
-    var s = c._src || {};
+  /* ---------------- editor: 1 read the source, 2 write, 3 classify ---------------- */
+  function sourceStep(c, miss) {
+    var s = c._src || {}, isNew = !c.id;
     var ch = s.change && s.change.whats_changed_json ? (function () { try { return JSON.parse(s.change.whats_changed_json) || []; } catch (e) { return []; } })() : [];
-    return '<div class="kit-card"><p class="kit-fl">Source item</p><p><b>' + esc(s.title || "") + "</b></p>" +
-      '<p class="kit-muted">' + esc(s.org || "") + (s.date ? ", " + esc(isoDate(s.date)) : "") + "</p>" +
-      (B() && B()._httpsUrl(s.url) ? '<p><a href="' + esc(s.url) + '" target="_blank" rel="noopener noreferrer">Open the primary source</a></p>' : "") +
-      (ch.length ? '<p class="kit-fl">What changed in the source</p><ul>' + ch.map(function (x) { return "<li>" + esc(x.topic || "") + ": " + esc(x.previous || "") + " to " + esc(x.current || "") + "</li>"; }).join("") + "</ul>" : "") +
-      (s.summary ? '<details><summary>AI summary, not reviewed</summary><p class="kit-muted">' + esc(String(s.summary).slice(0, 1500)) + "</p></details>" : "") + "</div>";
+    var srcMiss = miss.some(function (m) { return m.src; });
+    var srcSum = [c.source_label, fmtDate(c.source_date), c.doi ? "DOI" : "", c.pmid ? "PMID" : ""].filter(Boolean).join(", ");
+    return '<section class="kit-card bl-step" aria-labelledby="bl_s1">' + stepHead(1, "bl_s1", "Read the source") +
+      '<div class="bl-q-top">' + typeChip(c.kind || TYPE_KIND[s.type] || "") + metaLine(s.org, s.date) + "</div>" +
+      '<p class="bl-src-t">' + esc(s.title || c.source_label || "") + "</p>" +
+      (ch.length ? '<div class="bl-banner warn">' + ms("sync_problem") + "<div><b>What changed in the source</b><ul>" + ch.map(function (x) { return "<li>" + esc(x.topic || "") + ": " + esc(x.previous || "") + " to " + esc(x.current || "") + "</li>"; }).join("") + "</ul></div></div>" : "") +
+      verifyLinks(c) +
+      (s.summary ? fold("ai", DS.open.ai, '<span class="bl-fold-l">AI summary, not reviewed</span>', '<p class="kit-muted bl-ai">' + esc(String(s.summary).slice(0, 1500)) + "</p>") : "") +
+      (s.summary && isNew && !c._drafted ? '<div class="bl-draftbox"><button type="button" class="kit-add" data-bl-act="draft">' + ms("edit_note") + "Draft from source</button>" +
+        '<span class="kit-muted">Fills a first draft from the AI summary. You rewrite it and check every number.</span></div>' : "") +
+      fold("src", DS.open.src || srcMiss, '<span class="bl-fold-l">Source details</span><span class="bl-fold-s">' + esc(srcMiss ? "needs a look" : "filled in: " + srcSum) + "</span>",
+        '<div class="kit-grid bl-srcgrid">' +
+        field("bl_source_label", "Source name (journal, regulator notice)", txt("bl_source_label", c.source_label, 160), true) +
+        field("bl_source_url", "Source link (https)", txt("bl_source_url", c.source_url, 500), true) +
+        field("bl_source_date", "Source date", '<input id="bl_source_date" type="date" class="kit-inp" value="' + esc(c.source_date || "") + '">') +
+        field("bl_doi", "DOI (optional)", txt("bl_doi", c.doi, 100)) +
+        field("bl_pmid", "PMID (optional)", txt("bl_pmid", c.pmid, 10)) + "</div>") +
+      "</section>";
+  }
+  function counter(k, v) { var n = visLen(v), L = LIM[k], bad = n > L[1] || (n > 0 && n < L[0]); return '<span class="bl-cnt' + (bad ? " bad" : "") + '" id="bl_cnt_' + k + '">' + n + " / " + L[1] + "</span>"; }
+  function tfield(k, label, v, max, rows, ph) {
+    var id = "bl_" + k, a = ' id="' + id + '" class="kit-inp" maxlength="' + max + '" placeholder="' + esc(ph) + '"';
+    return '<label class="kit-field wide" for="' + id + '"><span class="bl-lab"><span class="kit-fl">' + label + "</span>" + counter(k, v) + "</span>" +
+      (rows ? "<textarea" + a + ' rows="' + rows + '">' + esc(v || "") + "</textarea>" : "<input" + a + ' value="' + esc(v || "") + '">') + "</label>";
+  }
+  function numbersHtml(c) {
+    var nums = numbersIn(c.what_changed + " " + c.applies_to + " " + c.headline);
+    return nums.length ? '<span class="kit-fl">Numbers to check against the source</span><div class="kit-row">' + nums.map(function (n) { return '<span class="bl-num">' + esc(n) + "</span>"; }).join("") + "</div>" : "";
+  }
+  function writeStep(c) {
+    return '<section class="kit-card bl-step" aria-labelledby="bl_s2">' + stepHead(2, "bl_s2", "Write it in your own words") +
+      (c._drafted ? '<p class="bl-banner warn bl-drafted" role="status">' + ms("edit_note") + "<span>Drafted from the AI summary. Rewrite it in your own words and check every number against the primary source before signing. India status is yours to set.</span></p>" : "") +
+      fmtBar() +
+      tfield("headline", "Headline", c.headline, 170, 0, "One line a colleague can act on") +
+      tfield("what_changed", "What changed", c.what_changed, 520, 4, "What to do differently, for whom, with the key number") +
+      tfield("applies_to", "Applies to (optional)", c.applies_to, 260, 0, "For example: adults with eGFR under 30") +
+      '<div class="bl-nums" id="bl_nums">' + numbersHtml(c) + "</div>" +
+      diseasePicker(c) + "</section>";
+  }
+  function chips(k, label, opts, cur, hint) {
+    return '<div class="bl-grp" id="bl_sec_' + k + '" role="group" aria-labelledby="bl_lbl_' + k + '"><span class="kit-fl" id="bl_lbl_' + k + '">' + esc(label) + "</span>" +
+      (hint ? '<span class="bl-hint">' + esc(hint) + "</span>" : "") + '<div class="bl-chips">' + opts.map(function (o) {
+        var on = String(cur) === String(o[0]);
+        return '<button type="button" class="bl-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-bl-act="set:' + k + ":" + esc(o[0]) + '">' + (on ? ms("check") : "") + esc(o[1]) + "</button>";
+      }).join("") + "</div></div>";
+  }
+  var KIND_OPTS = [["safety", "Safety alert"], ["approval", "New approval"], ["guideline", "Guideline change"], ["trial", "Trial result"]];
+  var REG_OPTS = [["", "None"], ["FDA", "FDA"], ["EMA", "EMA"], ["MHRA", "MHRA"], ["CDSCO", "CDSCO"], ["WHO", "WHO"], ["ICMR", "ICMR"], ["SOCIETY", "Professional society"]];
+  var REVIEW_OPTS = [["6", "6 months"], ["12", "12 months"], ["24", "24 months"]];
+  function classifyStep(c) {
+    var Bk = B();
+    return '<section class="kit-card bl-step" aria-labelledby="bl_s3">' + stepHead(3, "bl_s3", "Classify") +
+      chips("kind", "Type", KIND_OPTS, c.kind) +
+      chips("india_status", "India status", Object.keys(Bk.INDIA).map(function (k) { return [k, Bk.INDIA[k][0]]; }), c.india_status, "Your choice. The CDSCO check below is evidence, not the answer.") +
+      cdscoPanel(c) +
+      chips("evidence_type", "Evidence", Object.keys(Bk.EVID).map(function (k) { return [k, Bk.EVID[k]]; }), c.evidence_type) +
+      chips("regulator", "Regulator", REG_OPTS, c.regulator || "") +
+      chips("review_months", "Review again in", REVIEW_OPTS, String(c.review_months || 12)) +
+      tfield("evidence_note", "Evidence note (optional, only a grade the source states)", c.evidence_note, 160, 0, "For example: Class I, level A") +
+      "</section>";
+  }
+  function barStatus(miss) {
+    if (!miss.length) return '<span class="bl-ready">' + ms("check_circle") + "Ready to sign</span>";
+    var names = miss.map(function (m) { return m.label; }), shown = names.slice(0, 3).join(", ") + (names.length > 3 ? " and " + (names.length - 3) + " more" : "");
+    return '<button type="button" class="bl-left" data-bl-act="jump">' + ms("error") + "<span><b>" + miss.length + " left:</b> " + esc(shown) + "</span></button>";
   }
 
   function diseasePicker(c) {
@@ -314,73 +449,78 @@
         if (nm.toLowerCase().indexOf(q) >= 0 && c.disease_ids.indexOf(keys[i]) < 0) hits.push([keys[i], nm]);
       }
     }
-    return '<div class="kit-field wide"><span class="kit-fl">Diseases this applies to (1 to 5)</span><div class="kit-row">' +
-      c.disease_ids.map(function (d) { return '<button type="button" class="kit-pill" data-bl-act="undz:' + esc(d) + '" aria-label="Remove ' + esc(diseaseName(d)) + '">' + esc(diseaseName(d)) + " " + ms("close") + "</button>"; }).join("") + "</div>" +
-      ((c._suggest || []).filter(function (x) { return c.disease_ids.indexOf(x[0]) < 0; }).length ? '<div class="kit-row"><span class="kit-fl">Named in the source:</span>' +
-        c._suggest.filter(function (x) { return c.disease_ids.indexOf(x[0]) < 0; }).map(function (x) { return '<button type="button" class="kit-pill" data-bl-act="dz:' + esc(x[0]) + '">' + ms("add") + esc(x[1]) + "</button>"; }).join("") + "</div>" : "") +
-      '<input id="bl_dq" type="search" class="kit-inp" placeholder="Search the library" autocomplete="off" value="' + esc(DS.dq) + '">' +
-      (hits.length ? '<div class="rv-list">' + hits.map(function (h) { return rowBtn("dz:" + h[0], h[1], h[0]); }).join("") + "</div>" : "") + "</div>";
+    var sug = (c._suggest || []).filter(function (x) { return c.disease_ids.indexOf(x[0]) < 0; });
+    return '<div class="bl-grp"><span class="bl-lab"><span class="kit-fl">Diseases this applies to</span><span class="bl-cnt' + (c.disease_ids.length ? "" : " bad") + '">' + c.disease_ids.length + " / 5</span></span>" +
+      (c.disease_ids.length ? '<div class="bl-chips">' + c.disease_ids.map(function (d) {
+        return '<button type="button" class="bl-chip on" data-bl-act="undz:' + esc(d) + '" aria-label="Remove ' + esc(diseaseName(d)) + '">' + esc(diseaseName(d)) + ms("close") + "</button>";
+      }).join("") + "</div>" : "") +
+      (sug.length ? '<span class="bl-hint">Named in the source, tap to add:</span><div class="bl-chips">' + sug.map(function (x) {
+        return '<button type="button" class="bl-chip" data-bl-act="dz:' + esc(x[0]) + '">' + ms("add") + esc(x[1]) + "</button>";
+      }).join("") + "</div>" : "") +
+      '<input id="bl_dq" type="search" class="kit-inp" placeholder="Search the library to add a disease" autocomplete="off" value="' + esc(DS.dq) + '"' + (c.disease_ids.length >= 5 ? " disabled" : "") + ">" +
+      (hits.length ? '<div class="bl-hits">' + hits.map(function (h) { return '<button type="button" class="bl-hit" data-bl-act="dz:' + esc(h[0]) + '">' + ms("add") + "<span>" + esc(h[1]) + "</span></button>"; }).join("") + "</div>" : "") + "</div>";
   }
 
   function editView() {
-    var c = DS.cur, Bk = B();
-    var kinds = [["safety", "Safety alert"], ["approval", "New approval"], ["guideline", "Guideline change"], ["trial", "Trial result"]];
-    var evid = Object.keys(Bk.EVID).map(function (k) { return [k, Bk.EVID[k]]; });
-    var india = Object.keys(Bk.INDIA).map(function (k) { return [k, Bk.INDIA[k][0]]; });
-    var regs = [["", "None"], ["FDA", "FDA"], ["EMA", "EMA"], ["MHRA", "MHRA"], ["CDSCO", "CDSCO"], ["WHO", "WHO"], ["ICMR", "ICMR"], ["SOCIETY", "Professional society"]];
-    return '<button type="button" class="kit-link" data-bl-act="back">' + ms("arrow_back") + "Back to the queue</button>" +
-      '<h2 class="dl-h">' + (c.id ? "Edit bulletin" : "New bulletin") + "</h2>" +
-      (DS.msg ? '<p class="kit-muted" role="alert">' + esc(DS.msg) + "</p>" : "") + sourcePanel(c) +
-      ((c._src || {}).summary && !c.id ? '<div class="kit-row"><button type="button" class="kit-pill" data-bl-act="draft">' + ms("edit_note") + "Draft from source</button></div>" : "") +
-      (c._drafted ? '<p class="bl-drafted" role="status">Drafted from the AI summary. Rewrite it in your own words and check every number against the primary source before signing. India status is yours to set.</p>' : "") +
-      '<div class="kit-grid">' +
-      field("bl_kind", "Type", sel("bl_kind", kinds, c.kind, true)) +
-      field("bl_india_status", "India status", sel("bl_india_status", india, c.india_status, true), true) +
-      cdscoPanel(c) +
-      fmtBar() +
-      field("bl_headline", "Headline (up to 120 characters)", txt("bl_headline", c.headline, 170), true) +
-      field("bl_what_changed", "What changed (up to 400)", txt("bl_what_changed", c.what_changed, 520, 4), true) +
-      field("bl_applies_to", "Applies to (population)", txt("bl_applies_to", c.applies_to, 260), true) +
-      field("bl_evidence_type", "Evidence type", sel("bl_evidence_type", evid, c.evidence_type, true)) +
-      field("bl_regulator", "Regulator", sel("bl_regulator", regs, c.regulator, false)) +
-      field("bl_evidence_note", "Evidence note (only a grade the source itself states)", txt("bl_evidence_note", c.evidence_note, 120), true) +
-      field("bl_source_label", "Source name (journal, regulator notice)", txt("bl_source_label", c.source_label, 160), true) +
-      field("bl_source_url", "Source link (https)", txt("bl_source_url", c.source_url, 500), true) +
-      field("bl_source_date", "Source date", '<input id="bl_source_date" type="date" class="kit-inp" value="' + esc(c.source_date || "") + '">') +
-      field("bl_review_months", "Review again in", sel("bl_review_months", [["6", "6 months"], ["12", "12 months"], ["24", "24 months"]], c.review_months, false)) +
-      field("bl_doi", "DOI (optional)", txt("bl_doi", c.doi, 100)) +
-      field("bl_pmid", "PMID (optional)", txt("bl_pmid", c.pmid, 10)) +
-      '<div class="kit-field wide"><span class="kit-fl">Check the source before signing</span>' + verifyLinks(c) + "</div>" +
-      diseasePicker(c) + "</div>" +
-      (function () {
-        var nums = numbersIn(c.what_changed + " " + c.applies_to + " " + c.headline);
-        return nums.length ? '<div class="bl-nums"><span class="kit-fl">Numbers to check against the source</span><div class="kit-row">' +
-          nums.map(function (n) { return '<span class="bl-num">' + esc(n) + "</span>"; }).join("") + "</div></div>" : "";
-      })() +
-      '<p class="kit-fl">Preview, exactly as the disease page will show it</p><div class="bl-preview">' + Bk.card(previewOf(c)) + "</div>" +
-      '<div class="kit-row"><button type="button" class="kit-add" data-bl-act="save"' + (DS.busy ? " disabled" : "") + ">" + ms("save") + "Save draft</button>" +
-      '<button type="button" class="kit-pill" data-bl-act="savesign"' + (DS.busy ? " disabled" : "") + ">" + ms("verified") + "Save and sign</button>" +
-      (c.id ? '<button type="button" class="kit-clear" data-bl-act="retract">Retract</button>' : "") + "</div>" +
-      (c.id && DS.cur._retracting ? '<label class="kit-field wide" for="bl_rreason"><span class="kit-fl">Why is it being retracted? (10 to 300 characters)</span>' + txt("bl_rreason", "", 300, 2) + '</label><div class="kit-row"><button type="button" class="kit-clear" data-bl-act="retractgo">Retract now</button></div>' : "");
+    var c = DS.cur, miss = missing(c), live = c.state === "live" || c.state === "review_due";
+    return '<div class="bl-editor"><button type="button" class="kit-link" data-bl-act="back">' + ms("arrow_back") + "Back to the queue</button>" +
+      '<h2 class="dl-h">' + (c.id ? "Edit update" : "New update") + "</h2>" + msgHtml() +
+      (live ? '<p class="bl-banner warn">' + ms("info") + "<span>This update is on the disease page. Saving a change takes it off until you sign it again.</span></p>" : "") +
+      sourceStep(c, miss) + writeStep(c) + classifyStep(c) +
+      fold("prev", DS.open.prev, '<span class="bl-fold-l">Preview on the disease page</span>', '<div class="bl-preview">' + B().card(previewOf(c)) + "</div>", "bl-prevd") +
+      (c.id ? '<div class="bl-retract">' + (c._retracting
+        ? field("bl_rreason", "Why is it being retracted? (10 to 300 characters)", txt("bl_rreason", "", 300, 2), true) + '<div class="kit-row"><button type="button" class="kit-clear bl-danger" data-bl-act="retractgo">Retract now</button></div>'
+        : '<button type="button" class="kit-clear bl-danger" data-bl-act="retract">' + ms("remove_circle") + "Retract this update</button>") + "</div>" : "") +
+      '<div class="bl-bar"><div class="bl-bar-s" id="bl_bar_s" aria-live="polite">' + (DS._bar = barStatus(miss)) + "</div>" +
+      '<div class="bl-bar-b"><button type="button" class="kit-clear" data-bl-act="save"' + (DS.busy ? " disabled" : "") + ">Save draft</button>" +
+      '<button type="button" class="kit-add" data-bl-act="savesign"' + (DS.busy ? " disabled" : "") + ">" + ms("verified") + "Preview and sign</button></div></div></div>";
+  }
+  // Counters, the missing list, the numbers and the preview follow typing without a re-render (keeps focus and keyboard).
+  function refreshLive() {
+    var c = DS.cur; if (!c) return;
+    Object.keys(LIM).forEach(function (k) {
+      var el = D.getElementById("bl_cnt_" + k); if (!el) return;
+      var n = visLen(c[k]), L = LIM[k]; el.textContent = n + " / " + L[1]; el.className = "bl-cnt" + (n > L[1] || (n > 0 && n < L[0]) ? " bad" : "");
+    });
+    var bar = barStatus(missing(c)), s = D.getElementById("bl_bar_s");
+    if (s && bar !== DS._bar) { s.innerHTML = bar; DS._bar = bar; }
+    var nums = D.getElementById("bl_nums"); if (nums) nums.innerHTML = numbersHtml(c);
+    var p = D.querySelector("#smdReview .bl-editor .bl-preview"); if (p) p.innerHTML = B().card(previewOf(c));
+  }
+  function jump() {
+    collect();
+    var m = missing(DS.cur)[0]; if (!m) return;
+    if (m.src && !D.querySelector('#smdReview details[data-bl-open="src"][open]')) { DS.open.src = true; rerender(); }
+    var el = D.getElementById(m.target); if (!el) return;
+    try { el.scrollIntoView({ block: "center", behavior: "smooth" }); } catch (e) { try { el.scrollIntoView(); } catch (x) {} }
+    el.classList.remove("bl-flash"); void el.offsetWidth; el.classList.add("bl-flash");
+    setTimeout(function () { el.classList.remove("bl-flash"); }, 2400);
+    var f = /^(INPUT|TEXTAREA)$/.test(el.tagName) ? el : el.querySelector("button");
+    if (f) { try { f.focus({ preventScroll: true }); } catch (e) {} }
   }
 
+  /* ---------------- sign sheet ---------------- */
+  function ticked() { var ck = DS.ck || {}; return CHECKS.filter(function (c) { return ck[c[0]]; }).length; }
+  function ckStatus(n) { return n === CHECKS.length ? "All four confirmed. You can sign." : "Tick every item before signing. " + n + " of " + CHECKS.length + " done."; }
   function signView() {
-    var it = DS.saved, s = (DS.me && DS.me.signer) || {};
+    var it = DS.saved, s = (DS.me && DS.me.signer) || {}, ck = DS.ck || {}, n = ticked(), all = n === CHECKS.length;
     return '<button type="button" class="kit-link" data-bl-act="toedit">' + ms("arrow_back") + "Back to editing</button>" +
-      '<h2 class="dl-h">Sign this bulletin</h2>' + (DS.msg ? '<p class="kit-muted" role="alert">' + esc(DS.msg) + "</p>" : "") +
+      '<h2 class="dl-h">Sign this update</h2>' + msgHtml() +
+      '<p class="kit-muted">Doctors will see exactly this on ' + esc((it.disease_ids || []).map(diseaseName).join(", ")) + ".</p>" +
       '<div class="bl-preview">' + B().card(previewOf(it)) + "</div>" +
-      '<fieldset class="kit-field wide"><legend class="kit-fl">Before you sign</legend>' + CHECKS.map(function (c) {
-        return '<label class="kit-check"><input type="checkbox" id="bl_ck_' + c[0] + '"> ' + esc(c[1]) + "</label>";
-      }).join("<br>") + "</fieldset>" +
-      '<div class="kit-row"><button type="button" class="kit-add" data-bl-act="signgo"' + (DS.busy ? " disabled" : "") + ">" + ms("verified") +
+      '<fieldset class="bl-cks"><legend class="kit-fl">Before you sign, confirm each point</legend>' + CHECKS.map(function (c) {
+        return '<label class="bl-ck" for="bl_ck_' + c[0] + '"><input type="checkbox" id="bl_ck_' + c[0] + '"' + (ck[c[0]] ? " checked" : "") + "><span>" + esc(c[1]) + "</span></label>";
+      }).join("") + "</fieldset>" +
+      '<p class="kit-muted">Your name, registration number and today\'s date appear with the update. Any later edit takes it off the disease page until it is signed again.</p>' +
+      '<div class="bl-bar bl-signbar"><p id="bl_ck_s" class="bl-ck-s' + (all ? " ok" : "") + '" role="status">' + esc(ckStatus(n)) + "</p>" +
+      '<button type="button" class="kit-add bl-signbtn" data-bl-act="signgo"' + (DS.busy || !all ? " disabled" : "") + ">" + ms("verified") +
       "Sign as " + esc(/^dr\.?\s/i.test(s.name || "") ? s.name : "Dr " + (s.name || "")) + ", Reg. No. " + esc(s.regNo || "") + "</button></div>";
   }
 
   function signersView() {
     var me = DS.me || {}, L = DS.look;
     if (!DS.signers) loadSigners();
-    return '<button type="button" class="kit-link" data-bl-act="back">' + ms("arrow_back") + "Back to the queue</button><h2 class=\"dl-h\">Signers</h2>" +
-      (DS.msg ? '<p class="kit-muted" role="status">' + esc(DS.msg) + "</p>" : "") +
+    return '<button type="button" class="kit-link" data-bl-act="back">' + ms("arrow_back") + "Back to the queue</button><h2 class=\"dl-h\">Signers</h2>" + msgHtml() +
       '<p class="kit-muted">Only doctors listed here can sign. Check each name and registration number against the NMC register before saving.</p>' +
       '<div class="rv-list">' + (DS.signers || []).map(function (s) {
         return '<div class="rv-row"><span class="rv-t">' + esc(s.name) + '</span><span class="rv-s">Reg. No. ' + esc(s.reg_no) + ", " + esc(s.council) + "</span><span>" +
@@ -397,24 +537,100 @@
   function killView() {
     var on = !(DS.me && DS.me.killed);
     return '<button type="button" class="kit-link" data-bl-act="back">' + ms("arrow_back") + "Back to the queue</button>" +
-      '<h2 class="dl-h">' + (on ? "Switch off practice updates for everyone" : "Switch practice updates back on") + "</h2>" +
+      '<h2 class="dl-h">' + (on ? "Switch off practice updates for everyone" : "Switch practice updates back on") + "</h2>" + msgHtml() +
       '<p class="kit-muted">' + (on ? "Every phone stops showing them on its next sync. Nothing is deleted." : "Signed, current updates show again on each phone's next sync.") + "</p>" +
       field("bl_kreason", "Reason (10 to 300 characters)", txt("bl_kreason", "", 300, 3), true) +
       '<div class="kit-row"><button type="button" class="' + (on ? "kit-clear" : "kit-add") + '" data-bl-act="killgo">' + (on ? "Switch off now" : "Switch on") + "</button></div>";
   }
 
+  // Styles ride on the Review Desk tokens (specialty-kits.css: --primary, --sc-*, --outline-variant, --error, body.dark).
+  // Type colours match the disease-page card: safety red, approval teal, guideline indigo, trial blue.
+  var DESK_CSS = [
+    "#smdReview{--bl-safety:#b42318;--bl-approval:var(--primary);--bl-guideline:#4338ca;--bl-trial:#1d4ed8;--bl-other:#565e74;--bl-amber:#8a5300;--bl-amber-bg:#fff4e0}",
+    "body.dark #smdReview{--bl-safety:#ffb4ab;--bl-guideline:#b4bcff;--bl-trial:#9cc2ff;--bl-other:#bec6e0;--bl-amber:#f5c26b;--bl-amber-bg:#33270f}",
+    "#smdReview .bl-k-safety{--bl-c:var(--bl-safety)}#smdReview .bl-k-approval{--bl-c:var(--bl-approval)}#smdReview .bl-k-guideline{--bl-c:var(--bl-guideline)}#smdReview .bl-k-trial{--bl-c:var(--bl-trial)}#smdReview .bl-k-other{--bl-c:var(--bl-other)}",
+    // banners and messages
+    "#smdReview .bl-banner{display:flex;align-items:flex-start;gap:8px;margin:0;padding:10px 12px;border-radius:12px;background:var(--sc-low);color:var(--on-surface);font:600 13px/1.45 var(--q-sans)}",
+    "#smdReview .bl-banner .kit-ic{font-size:19px;flex:0 0 auto}#smdReview .bl-banner ul{margin:4px 0 0;padding-left:18px;font-weight:500}",
+    "#smdReview .bl-banner.warn{background:var(--bl-amber-bg);color:var(--bl-amber)}#smdReview .bl-banner.ok{background:color-mix(in srgb,var(--primary) 10%,var(--sc-lowest));color:var(--primary)}",
+    "#smdReview .bl-banner.err{background:var(--error-container);color:var(--on-error-container)}",
+    // queue
+    "#smdReview .bl-sum{display:flex;flex-direction:column;gap:2px}#smdReview .bl-sum-h{margin:0;font:700 16px/1.35 var(--q-sans);color:var(--on-surface);text-wrap:balance}",
+    "#smdReview .bl-seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:14px;background:var(--sc-low)}",
+    "#smdReview .bl-seg button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border:0;border-radius:10px;background:transparent;color:var(--on-surface-variant);font:650 14px var(--q-sans);cursor:pointer}",
+    "#smdReview .bl-seg button[aria-pressed=true]{background:var(--sc-lowest);color:var(--on-surface);box-shadow:0 1px 3px rgba(20,32,43,.14)}",
+    "#smdReview .bl-badge{min-width:24px;padding:1px 7px;border-radius:999px;background:var(--sc-high);color:var(--on-surface-variant);font:700 12px/1.5 var(--q-sans);font-variant-numeric:tabular-nums}",
+    "#smdReview .bl-seg button[aria-pressed=true] .bl-badge{background:var(--primary);color:var(--on-primary)}",
+    "#smdReview .bl-gh{display:flex;align-items:center;gap:8px;margin:6px 0 0;color:var(--on-surface-variant);font:700 12px/1.3 var(--q-sans);letter-spacing:.06em;text-transform:uppercase}",
+    "#smdReview .bl-gn{padding:0 7px;border-radius:999px;background:var(--sc-high);font-variant-numeric:tabular-nums;letter-spacing:0}",
+    "#smdReview .bl-ql{display:flex;flex-direction:column;gap:10px}",
+    "#smdReview .bl-q{position:relative;display:flex;flex-direction:column;gap:6px;min-width:0;padding:12px 14px 12px 18px;border:1px solid var(--outline-variant);border-radius:14px;background:var(--sc-lowest);overflow:hidden}",
+    "#smdReview .bl-q::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--bl-c)}",
+    "#smdReview .bl-q.attn{border-color:color-mix(in srgb,var(--bl-amber) 45%,var(--outline-variant))}",
+    "#smdReview .bl-q-top{display:flex;flex-wrap:wrap;align-items:center;gap:2px 10px;min-width:0}",
+    "#smdReview .bl-type{display:inline-flex;align-items:center;gap:6px;color:var(--bl-c);font:750 11.5px/1.4 var(--q-sans);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}",
+    "#smdReview .bl-type::before{content:'';width:8px;height:8px;border-radius:50%;background:currentColor}",
+    "#smdReview .bl-meta{min-width:0;color:var(--on-surface-variant);font:500 12.5px/1.4 var(--q-sans);overflow-wrap:anywhere}",
+    "#smdReview .bl-q-t{margin:0;color:var(--on-surface);font:650 15px/1.4 var(--q-sans);overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}",
+    "#smdReview .bl-q-s{margin:0;color:var(--on-surface-variant);font:400 13.5px/1.45 var(--q-sans);overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}",
+    "#smdReview .bl-q-n{display:flex;align-items:flex-start;gap:6px;margin:0;color:var(--on-surface-variant);font:600 13px/1.4 var(--q-sans)}#smdReview .bl-q-n .kit-ic{font-size:18px}",
+    "#smdReview .bl-q-n.warn{color:var(--bl-amber)}#smdReview .bl-q-n.ok{color:var(--primary)}",
+    "#smdReview .bl-q-act{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}#smdReview .bl-q-act button{min-height:44px}",
+    "#smdReview .bl-undo{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 4px 4px 14px;border-radius:12px;background:var(--on-surface);color:var(--bg);font:500 13.5px/1.4 var(--q-sans)}",
+    "#smdReview .bl-undo .kit-link{min-height:44px;padding:6px 12px;color:var(--bg);font-weight:750;text-decoration:underline}",
+    "#smdReview .bl-empty{display:flex;flex-direction:column;align-items:center;gap:6px;padding:28px 16px;text-align:center;color:var(--on-surface-variant);font:500 14px/1.5 var(--q-sans)}",
+    "#smdReview .bl-empty p{margin:0;max-width:34ch}#smdReview .bl-empty .kit-ic{font-size:36px;color:var(--primary)}",
+    "#smdReview .bl-tools{display:flex;flex-direction:column;gap:8px;margin-top:10px;padding-top:12px;border-top:1px solid var(--sc-high)}",
+    // editor
+    "#smdReview .bl-editor{display:flex;flex-direction:column;gap:12px}#smdReview .bl-editor>.kit-link{align-self:flex-start}",
+    "#smdReview .bl-step{gap:12px}#smdReview .bl-step-h{display:flex;align-items:center;gap:10px;margin:0;color:var(--on-surface);font:700 16px/1.3 var(--q-sans)}",
+    "#smdReview .bl-n{display:inline-flex;flex:0 0 auto;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--primary);color:var(--on-primary);font:750 13px var(--q-sans)}",
+    "#smdReview .bl-src-t{margin:0;color:var(--on-surface);font:650 15px/1.45 var(--q-sans);overflow-wrap:anywhere}",
+    "#smdReview .bl-fold{border-top:1px solid var(--sc-high)}#smdReview .bl-fold>summary{display:flex;align-items:center;gap:8px;min-height:44px;list-style:none;cursor:pointer;color:var(--on-surface);font:650 14px var(--q-sans)}",
+    "#smdReview .bl-fold>summary::-webkit-details-marker{display:none}#smdReview .bl-fold-l{flex:0 0 auto}",
+    "#smdReview .bl-fold-s{flex:1 1 auto;min-width:0;color:var(--on-surface-variant);font:500 12.5px var(--q-sans);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+    "#smdReview .bl-chev{margin-left:auto;color:var(--on-surface-variant);transition:transform .15s}#smdReview .bl-fold[open]>summary .bl-chev{transform:rotate(180deg)}",
+    "#smdReview .bl-fold[open]>summary{margin-bottom:6px}#smdReview .bl-ai{white-space:pre-line}",
+    "#smdReview .bl-prevd,#smdReview .bl-retract{padding:0 14px;border:1px solid var(--outline-variant);border-radius:16px;background:var(--sc-lowest)}#smdReview .bl-prevd[open]{padding-bottom:14px}",
+    "#smdReview .bl-retract{padding:10px 14px;display:flex;flex-direction:column;gap:8px}#smdReview .bl-danger{color:var(--error);border-color:color-mix(in srgb,var(--error) 40%,var(--outline-variant))}",
+    "#smdReview .bl-draftbox{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:12px;border-radius:12px;background:color-mix(in srgb,var(--primary) 7%,var(--sc-lowest))}#smdReview .bl-draftbox .kit-muted{flex:1 1 180px}",
+    "#smdReview .bl-lab{display:flex;align-items:baseline;justify-content:space-between;gap:8px}",
+    "#smdReview .bl-cnt{flex:0 0 auto;color:var(--on-surface-variant);font:600 12px var(--q-sans);font-variant-numeric:tabular-nums}#smdReview .bl-cnt.bad{color:var(--error)}",
+    "#smdReview .bl-grp{display:flex;flex-direction:column;gap:6px;min-width:0;border-radius:12px}#smdReview .bl-hint{color:var(--on-surface-variant);font:500 12.5px/1.4 var(--q-sans)}",
+    "#smdReview .bl-chips{display:flex;flex-wrap:wrap;gap:8px}",
+    "#smdReview .bl-chip{display:inline-flex;align-items:center;gap:4px;max-width:100%;min-height:44px;padding:8px 14px;border:1px solid var(--outline-variant);border-radius:999px;background:var(--surface);color:var(--on-surface);font:600 14px/1.25 var(--q-sans);text-align:left;overflow-wrap:anywhere;cursor:pointer}",
+    "#smdReview .bl-chip .kit-ic{font-size:18px}#smdReview .bl-chip.on{border-color:var(--primary);background:color-mix(in srgb,var(--primary) 14%,var(--sc-lowest));color:var(--primary)}",
+    "#smdReview .bl-hits{display:flex;flex-direction:column;border:1px solid var(--outline-variant);border-radius:12px;overflow:hidden}",
+    "#smdReview .bl-hit{display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 12px;border:0;border-top:1px solid var(--sc-high);background:var(--sc-lowest);color:var(--on-surface);font:500 14px/1.3 var(--q-sans);text-align:left;cursor:pointer}#smdReview .bl-hit:first-child{border-top:0}#smdReview .bl-hit .kit-ic{color:var(--primary)}",
+    "#smdReview .bl-cdsco{margin:6px 0;padding:8px 10px;border-radius:10px;background:var(--sc-low);font:500 13px/1.45 var(--q-sans)}#smdReview .bl-cdsco.found{background:color-mix(in srgb,var(--primary) 10%,var(--sc-lowest))}#smdReview .bl-cdsco ul{margin:6px 0 0;padding-left:18px}",
+    "#smdReview .bl-fmt{display:flex;align-items:center;gap:6px;flex-wrap:wrap}",
+    "#smdReview .bl-fmt-b{min-width:44px;min-height:44px;border:1px solid var(--outline-variant);border-radius:10px;background:var(--sc-lowest);color:var(--on-surface);font:15px var(--q-sans);cursor:pointer}#smdReview .bl-fmt-hint{flex:1 1 160px;font-size:12px}",
+    "#smdReview .bl-vlinks{display:flex;flex-wrap:wrap;gap:8px}",
+    "#smdReview .bl-vlink{display:inline-flex;align-items:center;min-height:44px;padding:4px 14px;border-radius:999px;border:1px solid var(--primary);color:var(--primary);font:650 13.5px var(--q-sans);text-decoration:none}",
+    "#smdReview .bl-vlink[aria-disabled=true]{border-color:var(--outline-variant);color:var(--on-surface-variant);pointer-events:none}",
+    "#smdReview .bl-nums:empty{display:none}#smdReview .bl-nums{display:flex;flex-direction:column;gap:6px}",
+    "#smdReview .bl-num{display:inline-block;padding:3px 9px;border-radius:999px;background:var(--bl-amber-bg);color:var(--bl-amber);font:650 12.5px var(--q-sans);font-variant-numeric:tabular-nums}",
+    // bottom bar
+    "#smdReview .bl-bar{position:sticky;bottom:calc(-28px - env(safe-area-inset-bottom,0px));z-index:3;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:4px -16px 0;padding:8px 16px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--outline-variant);background:var(--bg);box-shadow:0 -6px 18px rgba(20,32,43,.08)}",
+    "#smdReview .bl-bar-s{flex:1 1 200px;min-width:0}#smdReview .bl-bar-b{display:flex;flex:1 1 250px;gap:8px}#smdReview .bl-bar-b button{flex:1 1 auto;justify-content:center;min-height:46px}",
+    "#smdReview .bl-left{display:flex;align-items:center;gap:6px;width:100%;min-height:40px;padding:2px 0;border:0;background:transparent;color:var(--error);font:500 13.5px/1.35 var(--q-sans);text-align:left;cursor:pointer}#smdReview .bl-left span{min-width:0}",
+    "#smdReview .bl-ready{display:flex;align-items:center;gap:6px;min-height:40px;color:var(--primary);font:650 14px var(--q-sans)}",
+    // sign sheet
+    "#smdReview .bl-cks{display:flex;flex-direction:column;gap:8px;min-width:0;margin:0;padding:0;border:0}#smdReview .bl-cks legend{margin-bottom:8px;padding:0}",
+    "#smdReview .bl-ck{display:flex;align-items:flex-start;gap:12px;min-height:52px;padding:12px 14px;border:1px solid var(--outline-variant);border-radius:14px;background:var(--sc-lowest);color:var(--on-surface);font:500 14.5px/1.45 var(--q-sans);cursor:pointer}",
+    "#smdReview .bl-ck input{flex:0 0 auto;width:22px;height:22px;margin:1px 0 0;accent-color:var(--primary)}",
+    "#smdReview .bl-ck:has(input:checked){border-color:var(--primary);background:color-mix(in srgb,var(--primary) 9%,var(--sc-lowest))}",
+    "#smdReview .bl-ck-s{margin:0;color:var(--on-surface-variant);font:600 13px/1.4 var(--q-sans)}#smdReview .bl-ck-s.ok{color:var(--primary)}",
+    "#smdReview .bl-signbtn{width:100%;justify-content:center;min-height:52px;font-size:15px;text-align:center}#smdReview .bl-signbar .bl-ck-s{flex:1 1 100%}",
+    // focus and the jump highlight
+    "#smdReview :is(.bl-chip,.bl-seg button,.bl-q button,.bl-bar button,.bl-fold>summary,.bl-vlink,.bl-hit,.bl-fmt-b,.bl-undo button):focus-visible,#smdReview .bl-ck:has(input:focus-visible){outline:3px solid color-mix(in srgb,var(--primary) 55%,transparent);outline-offset:2px}",
+    "@keyframes blFlash{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--error) 55%,transparent)}100%{box-shadow:0 0 0 12px transparent}}",
+    "#smdReview .bl-flash{outline:2px solid var(--error);outline-offset:3px;animation:blFlash .9s ease-out 2}",
+    "@media (prefers-reduced-motion:reduce){#smdReview .bl-flash{animation:none}#smdReview .bl-chev{transition:none}}",
+  ].join("");
   function deskCSS() {
     if (!D || D.getElementById("smdBulletinDeskCss")) return;
-    var s = D.createElement("style"); s.id = "smdBulletinDeskCss";
-    s.textContent = ".bl-drafted{margin:8px 0;padding:8px 10px;border-radius:10px;background:rgba(180,83,9,.1);color:#92400e;font-size:13px;font-weight:600}" +
-      ".bl-cdsco{margin:6px 0;padding:8px 10px;border-radius:10px;background:rgba(100,116,139,.1);font-size:13px}.bl-cdsco.found{background:rgba(15,118,110,.1)}.bl-cdsco ul{margin:6px 0 0;padding-left:18px}" +
-      ".bl-fmt{grid-column:1/-1;display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:4px 0}" +
-      ".bl-fmt-b{min-width:40px;min-height:40px;border:1px solid var(--outline-variant,#cbd5e1);border-radius:10px;background:var(--sc-lowest,#fff);font:15px var(--q-sans,system-ui);cursor:pointer}" +
-      ".bl-fmt-hint{font-size:12px}" +
-      ".bl-vlinks{display:flex;flex-wrap:wrap;gap:8px}.bl-vlink{display:inline-flex;align-items:center;min-height:36px;padding:4px 12px;border-radius:999px;border:1px solid var(--primary,#00685f);color:var(--primary,#00685f);font:600 13px var(--q-sans,system-ui);text-decoration:none}" +
-      ".bl-vlink[aria-disabled=true]{border-color:var(--outline-variant,#cbd5e1);color:var(--on-surface-variant,#94a3b8);pointer-events:none}" +
-      ".bl-nums{margin:8px 0}.bl-num{display:inline-block;margin:2px 4px 2px 0;padding:2px 8px;border-radius:999px;background:rgba(180,83,9,.12);color:#92400e;font:600 12px var(--sans,system-ui)}" +
-      "body.dark .bl-drafted,body.dark .bl-num{color:#fbbf24}";
+    var s = D.createElement("style"); s.id = "smdBulletinDeskCss"; s.textContent = DESK_CSS;
     (D.head || D.documentElement).appendChild(s);
   }
   function html(tabs) {
@@ -430,36 +646,52 @@
   /* ---------------- actions ---------------- */
   function save(thenSign) {
     collect();
-    var c = DS.cur, body = {};
+    var c = DS.cur, miss = missing(c), body = {};
+    if (miss.length) { jump(); return; }   // the bottom bar already names every gap
     Object.keys(c).forEach(function (k) { if (k.charAt(0) !== "_" && k !== "state" && k !== "body_hash") body[k] = c[k]; });
-    DS.busy = true; DS.msg = ""; rerender();
+    DS.busy = true; say(""); rerender();
     return api("POST", "", body).then(function (r) {
       DS.busy = false;
-      if (r.status !== 200) { DS.msg = errText(r); rerender(); return; }
+      if (r.status !== 200) { say(errText(r)); rerender(); return; }
       var it = r.data.item, src = c._src;
       DS.cur = fromItem(it); DS.cur._src = src;
       DS.queue = null;
-      if (thenSign) { DS.saved = Object.assign({}, DS.cur); DS.view = "sign"; }
-      else DS.msg = "Draft saved. It is not on the disease page until you sign it.";
+      if (thenSign) { DS.saved = Object.assign({}, DS.cur); DS.ck = {}; DS.view = "sign"; }
+      else say("Draft saved. It is not on the disease page until you sign it.", "ok");
       rerender();
     });
   }
   function signGo() {
-    var cl = {}, missing = false;
-    CHECKS.forEach(function (c) { var el = D.getElementById("bl_ck_" + c[0]); cl[c[0]] = !!(el && el.checked); if (!cl[c[0]]) missing = true; });
-    if (missing) { DS.msg = "Tick every item before signing."; rerender(); return; }
-    DS.busy = true; DS.msg = ""; rerender();
+    var cl = {}, missingTick = false;
+    CHECKS.forEach(function (c) { var el = D.getElementById("bl_ck_" + c[0]); cl[c[0]] = !!(el && el.checked); if (!cl[c[0]]) missingTick = true; });
+    if (missingTick) { say("Tick every item before signing."); rerender(); return; }
+    DS.busy = true; say(""); rerender();
     api("POST", "/" + encodeURIComponent(DS.saved.id) + "/sign", { body_hash: DS.saved.body_hash, checklist: cl }).then(function (r) {
       DS.busy = false;
       if (r.status !== 200) {
-        DS.msg = errText(r);
+        say(errText(r));
         if (r.status === 409) { DS.view = "edit"; DS.queue = null; }
         rerender(); return;
       }
       toast("Signed. It shows on the disease page after the next sync.");
-      DS.view = "list"; DS.cur = null; DS.saved = null; DS.queue = null; DS.msg = "Signed.";
+      DS.view = "list"; DS.cur = null; DS.saved = null; DS.queue = null; say("Signed. It shows on the disease page after the next sync.", "ok");
       try { B().sync(true); } catch (e) {}
       probe().then(rerender);   // refresh the waiting count on the tab
+    });
+  }
+  function skip(id, undo) {
+    var q = DS.queue || {}, cands = q.candidates || [], cand = cands.filter(function (x) { return x.id === id; })[0], p = DS.me && DS.me.pending;
+    if (!undo) {
+      if (!cand) return;
+      q.candidates = cands.filter(function (x) { return x.id !== id; });   // at once; put back if the server refuses
+      DS.undo = id; say("");
+      if (p && p.candidates) { p.candidates--; p.total = Math.max(0, (p.total || 1) - 1); }
+      rerender();
+    } else { DS.undo = null; rerender(); }
+    api("POST", "/skip", { update_id: id, undo: !!undo }).then(function (r) {
+      if (r.status !== 200) { say(errText(r)); DS.undo = null; DS.queue = null; probe().then(rerender); return; }
+      if (undo) { DS.queue = null; say("Back in the queue.", "ok"); }
+      probe().then(rerender);
     });
   }
 
@@ -467,18 +699,31 @@
     var b = e.target && e.target.closest && e.target.closest("[data-bl-act]"); if (!b || !b.closest("#smdReview")) return;
     var act = b.getAttribute("data-bl-act"), i = act.indexOf(":"), cmd = i < 0 ? act : act.slice(0, i), arg = i < 0 ? "" : act.slice(i + 1);
     if (cmd !== "back" && cmd !== "toedit") collect();
-    if (cmd === "back") { DS.view = "list"; DS.cur = null; DS.msg = ""; DS.look = null; DS.queue = null; rerender(); return; }
-    if (cmd === "toedit") { DS.view = "edit"; DS.msg = ""; rerender(); return; }
+    if (cmd === "back") { DS.view = "list"; DS.cur = null; say(""); DS.look = null; DS.queue = null; DS.undo = null; rerender(); return; }
+    if (cmd === "toedit") { DS.view = "edit"; say(""); rerender(); return; }
+    if (cmd === "filter") { DS.filter = arg === "live" ? "live" : "todo"; DS.undo = null; say(""); rerender(); return; }
+    if (cmd === "skip") { skip(arg, false); return; }
+    if (cmd === "unskip") { skip(arg, true); return; }
     if (cmd === "new") {
       var cand = ((DS.queue && DS.queue.candidates) || []).filter(function (x) { return x.id === arg; })[0];
-      if (cand) { DS.cur = fromCandidate(cand); DS.view = "edit"; DS.msg = ""; DS.dq = ""; rerender(); }
+      if (cand) { DS.cur = fromCandidate(cand); DS.view = "edit"; say(""); DS.dq = ""; DS.undo = null; DS.open = { prev: DS.open.prev }; rerender(); scrollTop(); }
       return;
     }
     if (cmd === "edit") {
       var it = ((DS.queue && DS.queue.items) || []).filter(function (x) { return x.id === arg; })[0];
-      if (it) { DS.cur = fromItem(it); DS.view = "edit"; DS.msg = it.state === "source_changed" ? "The source changed. Read it again, update the text if needed, then save and sign." : ""; DS.dq = ""; rerender(); }
+      if (it) {
+        DS.cur = fromItem(it); DS.view = "edit"; DS.dq = ""; DS.undo = null; DS.open = { prev: DS.open.prev };
+        if (it.state === "source_changed") say("The source changed. Read it again, update the text if needed, then save and sign.", "warn"); else say("");
+        rerender(); scrollTop();
+      }
       return;
     }
+    if (cmd === "set" && DS.cur) {
+      var j = arg.indexOf(":"), k = arg.slice(0, j), v = arg.slice(j + 1);
+      if (["kind", "india_status", "evidence_type", "regulator", "review_months"].indexOf(k) >= 0) { DS.cur[k] = k === "review_months" ? (Number(v) || 12) : v; rerender(); }
+      return;
+    }
+    if (cmd === "jump") { jump(); return; }
     if (cmd === "dz") { if (DS.cur && DS.cur.disease_ids.length < 5 && DS.cur.disease_ids.indexOf(arg) < 0) DS.cur.disease_ids.push(arg); DS.dq = ""; rerender(); return; }
     if (cmd === "undz") { if (DS.cur) DS.cur.disease_ids = DS.cur.disease_ids.filter(function (x) { return x !== arg; }); rerender(); return; }
     if (cmd === "fmt") { applyFmt(arg); return; }
@@ -496,71 +741,87 @@
     if (cmd === "save") { save(false); return; }
     if (cmd === "savesign") { save(true); return; }
     if (cmd === "signgo") { signGo(); return; }
-    if (cmd === "retract") { DS.cur._retracting = true; rerender(); return; }
+    if (cmd === "retract") { DS.cur._retracting = true; rerender(); var rr = D.getElementById("bl_rreason"); if (rr) try { rr.focus(); } catch (x) {} return; }
     if (cmd === "retractgo") {
       var reason = val("bl_rreason").trim();
-      if (reason.length < 10) { DS.msg = "Give a reason of at least 10 characters."; rerender(); return; }
+      if (reason.length < 10) { say("Give a reason of at least 10 characters."); rerender(); return; }
       api("POST", "/" + encodeURIComponent(DS.cur.id) + "/retract", { reason: reason }).then(function (r) {
-        if (r.status !== 200) { DS.msg = errText(r); rerender(); return; }
-        DS.view = "list"; DS.cur = null; DS.queue = null; DS.msg = "Retracted. Phones drop it on their next sync.";
+        if (r.status !== 200) { say(errText(r)); rerender(); return; }
+        DS.view = "list"; DS.cur = null; DS.queue = null; say("Retracted. Phones drop it on their next sync.", "ok");
         try { B().sync(true); } catch (e) {}
         rerender();
       });
       return;
     }
-    if (cmd === "signers") { DS.view = "signers"; DS.msg = ""; DS.signers = null; DS.look = null; rerender(); return; }
+    if (cmd === "signers") { DS.view = "signers"; say(""); DS.signers = null; DS.look = null; rerender(); scrollTop(); return; }
     if (cmd === "addme") { var sf = DS.me.self || {}; DS.look = { uid: sf.uid, name: sf.name || "", reg_no: sf.reg_no || "", council: sf.council || "", verified: true }; rerender(); return; }
     if (cmd === "lookup") {
       var em = val("bl_lemail").trim();
       if (!em) return;
       api("GET", "/signers/lookup?email=" + encodeURIComponent(em)).then(function (r) {
-        if (r.status !== 200) { DS.msg = r.data.error === "no-account" ? "No StewardMD account has that email." : errText(r); DS.look = null; rerender(); return; }
+        if (r.status !== 200) { say(r.data.error === "no-account" ? "No StewardMD account has that email." : errText(r)); DS.look = null; rerender(); return; }
         var p = r.data.prefill || {};
         DS.look = { uid: r.data.uid, name: p.name || "", reg_no: p.reg_no || "", council: p.council || "", verified: r.data.verified };
-        DS.msg = ""; rerender();
+        say(""); rerender();
       });
       return;
     }
     if (cmd === "saveSigner" && DS.look) {
       api("POST", "/signers", { uid: DS.look.uid, name: val("bl_sname"), reg_no: val("bl_sreg"), council: val("bl_scouncil") }).then(function (r) {
-        if (r.status !== 200) { DS.msg = r.data.error === "not-verified-doctor" ? "This account is not a verified doctor." : "Check the name, registration number and council."; rerender(); return; }
-        DS.look = null; DS.signers = null; DS.msg = "Signer saved.";
+        if (r.status !== 200) { say(r.data.error === "not-verified-doctor" ? "This account is not a verified doctor." : "Check the name, registration number and council."); rerender(); return; }
+        DS.look = null; DS.signers = null; say("Signer saved.", "ok");
         probe().then(rerender);
       });
       return;
     }
     if (cmd === "deact") { api("POST", "/signers/" + encodeURIComponent(arg) + "/deactivate").then(function () { DS.signers = null; probe().then(rerender); }); return; }
-    if (cmd === "kill") { DS.view = "kill"; DS.msg = ""; rerender(); return; }
+    if (cmd === "kill") { DS.view = "kill"; say(""); rerender(); scrollTop(); return; }
     if (cmd === "killgo") {
       var kr = val("bl_kreason").trim(), killed = !(DS.me && DS.me.killed);
-      if (kr.length < 10) { toast("Give a reason of at least 10 characters."); return; }
+      if (kr.length < 10) { say("Give a reason of at least 10 characters."); rerender(); return; }
       api("POST", "/kill", { killed: killed, reason: kr }).then(function (r) {
-        if (r.status !== 200) { DS.msg = errText(r); rerender(); return; }
-        DS.view = "list"; DS.msg = killed ? "Switched off for everyone." : "Switched back on.";
+        if (r.status !== 200) { say(errText(r)); rerender(); return; }
+        DS.view = "list"; say(killed ? "Switched off for everyone." : "Switched back on.", "ok");
         try { B().sync(true); } catch (e) {}
         probe().then(rerender);
       });
     }
   }
+  function scrollTop() { var b = D.querySelector("#smdReview .kit-sheet-body"); if (b) b.scrollTop = 0; }
   function onInput(e) {
-    var el = e.target;
-    if (el && (el.id === "bl_source_url" || el.id === "bl_doi" || el.id === "bl_pmid")) { refreshVerifyLinks(); return; }
-    if (!el || el.id !== "bl_dq") return;
-    collect(); DS.dq = el.value; var pos = el.selectionStart; rerender();
-    var q = D.getElementById("bl_dq"); if (q) { q.focus(); try { q.setSelectionRange(pos, pos); } catch (x) {} }
+    var el = e.target; if (!el || !el.id || el.id.indexOf("bl_") !== 0) return;
+    if (el.id === "bl_dq") {
+      collect(); DS.dq = el.value; var pos = el.selectionStart; rerender();
+      var q = D.getElementById("bl_dq"); if (q) { q.focus(); try { q.setSelectionRange(pos, pos); } catch (x) {} }
+      return;
+    }
+    if (DS.view !== "edit" || !DS.cur) return;
+    collect();
+    if (el.id === "bl_source_url" || el.id === "bl_doi" || el.id === "bl_pmid") refreshVerifyLinks();
+    refreshLive();
   }
+  function onChange(e) {
+    var el = e.target; if (!el || !/^bl_ck_/.test(el.id || "")) return;
+    DS.ck = DS.ck || {}; DS.ck[el.id.slice(6)] = !!el.checked;
+    var n = ticked(), all = n === CHECKS.length, btn = D.querySelector('#smdReview [data-bl-act="signgo"]'), st = D.getElementById("bl_ck_s");
+    if (btn) btn.disabled = DS.busy || !all;
+    if (st) { st.textContent = ckStatus(n); st.className = "bl-ck-s" + (all ? " ok" : ""); }
+  }
+  // Remember which folds (AI summary, source details, preview) are open across re-renders. toggle does not bubble.
+  function onToggle(e) { var el = e.target, k = el && el.getAttribute && el.getAttribute("data-bl-open"); if (k) DS.open[k] = !!el.open; }
   function onFocusIn(e) { var el = e.target; if (el && FMT_FIELDS.indexOf(el.id) >= 0) DS.fmtField = el.id; }
   // Keep the text field's selection when a format button is pressed (desktop; iOS keeps it on its own).
   function onMouseDown(e) { var b = e.target && e.target.closest && e.target.closest(".bl-fmt-b"); if (b) e.preventDefault(); }
   if (D && D.addEventListener && !G.__smdBulletinDeskWired) {
     G.__smdBulletinDeskWired = true;
-    D.addEventListener("click", onClick, false); D.addEventListener("input", onInput, false);
+    D.addEventListener("click", onClick, false); D.addEventListener("input", onInput, false); D.addEventListener("change", onChange, false);
+    D.addEventListener("toggle", onToggle, true);
     D.addEventListener("focusin", onFocusIn, false); D.addEventListener("mousedown", onMouseDown, false);
   }
 
   function pendingTotal() { var p = DS.me && DS.me.pending; return (p && p.total) || 0; }
-  var API = { probe: probe, html: html, pendingTotal: pendingTotal, reset: function () { DS.view = "list"; DS.queue = null; DS.cur = null; DS.msg = ""; }, _state: DS, _previewOf: previewOf,
-    _numbersIn: numbersIn, _suggestDiseases: suggestDiseases, _firstSentences: firstSentences, _linkFields: linkFields, _toHttps: toHttps };
+  var API = { probe: probe, html: html, pendingTotal: pendingTotal, reset: function () { DS.view = "list"; DS.queue = null; DS.cur = null; DS.msg = ""; DS.filter = "todo"; DS.undo = null; }, _state: DS, _previewOf: previewOf,
+    _numbersIn: numbersIn, _suggestDiseases: suggestDiseases, _firstSentences: firstSentences, _linkFields: linkFields, _toHttps: toHttps, _missing: missing };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_BULLETINS_DESK = API;
 })(typeof window !== "undefined" ? window : globalThis);

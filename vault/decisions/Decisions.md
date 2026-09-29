@@ -5,6 +5,19 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-29 · Clinical Bulletins signing desk rebuilt for speed; "Skip" is shared by all signers
+
+**Decision (owner: "Make it more easy for doctors").** The Review Desk "Clinical updates" tab is an inbox (To do /
+Live; cards show type, source and date, with Write update or Skip) and the editor follows the order of the work:
+1 Read the source, 2 Write, 3 Classify. Dropdowns became one-tap chips; a sticky bottom bar names what is still
+missing and jumps to it; Save sends nothing while a field is missing; the Sign button stays locked until all four
+checklist items are ticked. "Skip" writes `bulletin_skips` (one row per source item, audited 'skip'/'unskip'),
+so a skipped item leaves the queue and the Saturday count for every signer; Undo removes the row.
+**Why.** Doctors review on a phone between patients: fewer taps, no hidden requirements, nothing to scroll back for.
+**Trade-off.** One signer's Skip hides the item from the others (Undo, or the audit log, recovers it). The client
+check mirrors `validateDraft`; the server still validates every save.
+**Status.** Built and tested (unit + headless UI); ships with the next push to main, reaches phones via OTA.
+
 ## 2026-09-28 · Clinical Bulletins ON for everyone; Saturday review run notifies signers
 
 **Decision (owner: "turn it on by default"; "every Saturday 9am run ... notify reviewer doctors").**
