@@ -57,21 +57,32 @@
   function fmtMonth(ts) { var d = new Date(ts); return isNaN(d.getTime()) ? "" : MON[d.getUTCMonth()] + " " + d.getUTCFullYear(); }
   function drName(n) { n = String(n || "").replace(/^\s*dr\.?\s+/i, ""); return n ? "Dr " + n : ""; }
 
+  // [b]..[/b], [i]..[/i], [u]..[/u] from the Review Desk toolbar. Applied AFTER escaping, with fixed tags only,
+  // so formatting can never inject markup. Unpaired markers stay as typed.
+  function fmt(escaped) {
+    return String(escaped).replace(/\[b\]([\s\S]+?)\[\/b\]/g, "<b>$1</b>").replace(/\[i\]([\s\S]+?)\[\/i\]/g, "<i>$1</i>").replace(/\[u\]([\s\S]+?)\[\/u\]/g, "<u>$1</u>");
+  }
+  function plain(s) { return String(s == null ? "" : s).replace(/\[\/?[biu]\]/g, ""); }
+
   /* One bulletin as the bedside shows it. Pure: same input, same markup (the signer's preview relies on it). */
   function card(b) {
     var ind = INDIA[b.india_status] || INDIA.unknown;
     var url = httpsUrl(b.source_url);
     var ev = (EVID[b.evidence_type] || "") + (b.evidence_note ? ", " + b.evidence_note : "");
     var src = url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' + esc(b.source_label) + "</a>" : esc(b.source_label);
+    // DOI and PubMed links beside the source, so any reader can check the paper (validated shapes only).
+    var doi = /^10\.\d{4,9}\/\S+$/.test(String(b.doi || "")) ? b.doi : "", pmid = /^\d{1,10}$/.test(String(b.pmid || "")) ? b.pmid : "";
+    if (doi && url.indexOf("doi.org/") < 0) src += ' · <a href="https://doi.org/' + esc(doi) + '" target="_blank" rel="noopener noreferrer">DOI</a>';
+    if (pmid) src += ' · <a href="https://pubmed.ncbi.nlm.nih.gov/' + esc(pmid) + '/" target="_blank" rel="noopener noreferrer">PubMed</a>';
     var sig = drName(b.signed_name)
       ? "Reviewed by " + esc(drName(b.signed_name)) + ', <span class="smd-bl-nw">Reg. No. ' + esc(b.signed_reg) + "</span>" + (b.signed_council ? ", " + esc(b.signed_council) : "") +
         ", on " + esc(fmtDate(b.signed_ts)) + ". Review due " + esc(fmtMonth(b.review_due_ts)) + "."
       : "Not yet reviewed.";
     return '<section class="smd-bl smd-bl-' + esc(KIND[b.kind] ? b.kind : "guideline") + '" aria-label="Practice update">' +
       '<div class="smd-bl-top"><span class="smd-bl-kind">' + esc(KIND[b.kind] || "Practice update") + '</span><span class="smd-bl-date">' + esc(fmtDate(b.source_date)) + "</span></div>" +
-      '<h4 class="smd-bl-h">' + esc(b.headline) + "</h4>" +
-      '<p class="smd-bl-p">' + esc(b.what_changed) + "</p>" +
-      (b.applies_to ? '<p class="smd-bl-row"><b>Applies to:</b> ' + esc(b.applies_to) + "</p>" : "") +
+      '<h4 class="smd-bl-h">' + fmt(esc(b.headline)) + "</h4>" +
+      '<p class="smd-bl-p">' + fmt(esc(b.what_changed)) + "</p>" +
+      (b.applies_to ? '<p class="smd-bl-row"><b>Applies to:</b> ' + fmt(esc(b.applies_to)) + "</p>" : "") +
       '<p class="smd-bl-row smd-bl-in' + (ind[1] ? " " + ind[1] : "") + '"><b>In India:</b> ' + esc(ind[0]) + "</p>" +
       (ev ? '<p class="smd-bl-row"><b>Evidence:</b> ' + esc(ev) + "</p>" : "") +
       '<p class="smd-bl-row"><b>Source:</b> ' + src + "</p>" +
@@ -168,7 +179,7 @@
   var API = {
     html: html, card: card, sync: sync, flagOn: flagOn, injectCSS: injectCSS,
     KIND: KIND, INDIA: INDIA, EVID: EVID, MAX_AGE: MAX_AGE,
-    _select: select, _readCache: readCache, _fmtDate: fmtDate, _httpsUrl: httpsUrl,
+    _select: select, _readCache: readCache, _fmtDate: fmtDate, _httpsUrl: httpsUrl, _fmt: fmt, plain: plain,
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_BULLETINS = API;

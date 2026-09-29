@@ -67,7 +67,7 @@ export function stateOf(r, now) {
 export async function listForQueue(env) {
   const rs = await db(env).prepare(
     "SELECT b.*, " + DZ + ", u.content_hash AS u_hash, u.id AS u_id, u.title AS u_title, u.organization AS u_org, " +
-    "u.official_url AS u_url, u.published_ts AS u_published_ts, u.summary AS u_summary " +
+    "u.official_url AS u_url, u.published_ts AS u_published_ts, u.summary AS u_summary, u.doi AS u_doi, u.pmid AS u_pmid " +
     "FROM bulletins b LEFT JOIN updates u ON u.id = b.update_id WHERE b.status != 'retracted' ORDER BY b.updated_ts DESC LIMIT 300"
   ).all();
   return (rs.results || []).map((r) => Object.assign(r, { disease_ids: splitIds(r.dz) }));

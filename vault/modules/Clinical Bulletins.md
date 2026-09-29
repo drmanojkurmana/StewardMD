@@ -54,6 +54,13 @@ Journals and regulators feed the Review Desk automatically; a doctor still signs
 - **TinyFish** (`functions/_search.js`): search (already used to enrich drug and safety summaries) and
   `tinyfishFetch` (POST api.fetch.tinyfish.ai, max 10 URLs, markdown; free, 150 URLs/min) for regulator PDFs.
   Same `TINYFISH_API_KEY` secret. No key: CDSCO falls back to Workers AI and openFDA keeps the "see the letter" note.
+- **Source links** (`bulletins-desk.js` `linkFields`): source link, DOI and PMID fill in from the source item
+  (http:// feed links such as FDA press releases upgraded to https; DOI/PMID recovered from doi.org / PubMed
+  links; a missing link rebuilt from DOI or PMID). "Open source / Open DOI / Open in PubMed" links follow edits.
+  The disease-page card also links DOI and PubMed beside the source.
+- **Formatting**: B / I / U toolbar wraps the selection in `[b]..[/b]`, `[i]..[/i]`, `[u]..[/u]` (headline, What
+  changed, Applies to). `bulletins.js` `fmt()` applies them AFTER escaping, fixed tags only. Length limits ignore
+  the markers (`_bulletin_rules.js` `stripFormat`); the markers are part of the signed text.
 - **Drafting aids** (`bulletins-desk.js`): "Draft from source" (headline, What changed cut at a full stop,
   evidence type, regulator; never India status), a banner asking for the signer's own words, "Numbers to check",
   and library diseases named in the source as tap-to-add suggestions.

@@ -68,7 +68,7 @@ const server = http.createServer(async (req, res) => {
     return sendJson(res, 200, { enabled: true, v: 1, items: ITEMS }, { ETag: etag, "Cache-Control": "public, max-age=300" });
   }
   if (p === "/api/updates/bulletins/me") return sendJson(res, 200, st.me);
-  if (p === "/api/updates/bulletins/queue") return sendJson(res, 200, { ok: true, killed: false, items: [QUEUE_ITEM], candidates: [{ id: "u2", type: "safety_alert", title: "Candidate source", organization: "U.S. Food and Drug Administration", official_url: "https://example.org/u2", published_ts: NOW - DAY,
+  if (p === "/api/updates/bulletins/queue") return sendJson(res, 200, { ok: true, killed: false, items: [QUEUE_ITEM], candidates: [{ id: "u2", type: "safety_alert", title: "Candidate source", organization: "U.S. Food and Drug Administration", official_url: "http://example.org/u2", doi: "10.1056/NEJMoa2605659", pmid: "42748429", published_ts: NOW - DAY,
     summary: "In adults with Acute Bronchitis the drug cut symptom days (HR 0.72; 95% CI 0.61-0.85), 12.5% vs 17.3%, at 10 mg daily for 12 weeks. A second sentence that is long enough to push the draft beyond the four hundred character limit so that the cut lands on a full stop rather than the middle of a word, which keeps the draft readable for the doctor who must rewrite it anyway before signing it for the disease page." }] });
   if (p === "/api/updates/bulletins" && req.method === "POST") { const b = await readBody(req); return sendJson(res, 200, { ok: true, item: Object.assign({}, QUEUE_ITEM, b, { body_hash: "b".repeat(64), state: "draft" }) }); }
   if (p === "/api/updates/bulletins/signers" && req.method === "GET") return sendJson(res, 200, { ok: true, signers: [{ uid: "u-owner", name: "Manoj Kurmana", reg_no: "APMC-1", council: "Andhra Pradesh Medical Council", active: 1 }] });
@@ -155,6 +155,7 @@ try {
   ok(await ev(`${cardsIn}.every(function(c){return /Reviewed by Dr Manoj Kurmana, Reg\\. No\\. APMC-1, Andhra Pradesh Medical Council, on \\d+ \\w{3} \\d{4}\\. Review due \\w{3} \\d{4}\\./.test(c.querySelector('.smd-bl-sig').textContent)})`), "signature line names the doctor, registration, council and dates");
   ok(await ev(`document.querySelector('#dxMgmt .smd-bls').textContent.indexOf('\\u2014')<0`), "no em-dash in the card text");
   ok(await ev(`${cardsIn}.every(function(c){return c.getAttribute('role')!=='alert'&&c.getAttribute('aria-label')==='Practice update'})`), "cards are labelled sections, not alerts");
+  ok(await ev(`(function(){var c=SMD_BULLETINS.card({kind:'trial',headline:'H',what_changed:'W',india_status:'unknown',source_label:'NEJM',source_url:'https://www.nejm.org/x',source_date:'2026-09-01',doi:'10.1056/NEJMoa1',pmid:'123',signed_name:'A',signed_reg:'1',signed_ts:1,review_due_ts:2});var d=document.createElement('div');d.innerHTML=c;var hs=Array.from(d.querySelectorAll('a')).map(function(a){return a.getAttribute('href')});return hs.join('|')==='https://www.nejm.org/x|https://doi.org/10.1056/NEJMoa1|https://pubmed.ncbi.nlm.nih.gov/123/'})()`), "the card links the source, its DOI and PubMed");
   for (const width of [320, 390, 768]) {
     await call("Emulation.setDeviceMetricsOverride", { width, height: 844, deviceScaleFactor: 1, mobile: width < 700 });
     await sleep(150);
@@ -258,6 +259,14 @@ try {
   /* 11. Draft from source: suggestions only, India status left to the signer, numbers flagged */
   await until(`!!document.querySelector('#smdReview [data-bl-act="new:u2"]')`);
   await ev(`document.querySelector('#smdReview [data-bl-act="new:u2"]').click();true`);
+  // links fill themselves in (http feed link upgraded to https) and can be opened to check the source
+  ok(await until(`(document.getElementById('bl_source_url')||{}).value==='https://example.org/u2'`), "an http:// source link is filled in as https://");
+  ok(await ev(`document.getElementById('bl_doi').value==='10.1056/NEJMoa2605659'&&document.getElementById('bl_pmid').value==='42748429'`), "DOI and PMID are filled in from the source");
+  ok(await ev(`document.getElementById('bl_open_url').getAttribute('href')==='https://example.org/u2'&&document.getElementById('bl_open_doi').getAttribute('href')==='https://doi.org/10.1056/NEJMoa2605659'&&document.getElementById('bl_open_pmid').getAttribute('href')==='https://pubmed.ncbi.nlm.nih.gov/42748429/'`), "Open source / Open DOI / Open in PubMed are tappable links");
+  await ev(`document.getElementById('bl_open_url').scrollIntoView({block:'center'});true`); await shot("desk-verify-links");
+  ok(await ev(`['bl_open_url','bl_open_doi','bl_open_pmid'].every(function(id){var a=document.getElementById(id);return a.getAttribute('target')==='_blank'&&/noopener/.test(a.getAttribute('rel'))})`), "links open outside the app safely");
+  await ev(`(function(){var d=document.getElementById('bl_doi');d.value='10.1001/jama.2026.12627';d.dispatchEvent(new Event('input',{bubbles:true}));var p=document.getElementById('bl_pmid');p.value='';p.dispatchEvent(new Event('input',{bubbles:true}));return true})()`);
+  ok(await ev(`document.getElementById('bl_open_doi').getAttribute('href')==='https://doi.org/10.1001/jama.2026.12627'&&!document.getElementById('bl_open_pmid').hasAttribute('href')&&document.getElementById('bl_open_pmid').getAttribute('aria-disabled')==='true'`), "links follow edits; an empty PMID disables its link");
   ok(await until(`!!document.querySelector('#smdReview [data-bl-act="draft"]')`), "a new bulletin offers Draft from source");
   ok(await ev(`document.getElementById('bl_what_changed').value===''`), "nothing is pre-written before the signer asks");
   await ev(`document.querySelector('#smdReview [data-bl-act="draft"]').click();true`);
@@ -272,6 +281,16 @@ try {
   ok(await ev(`SMD_BULLETINS_DESK._state.cur.disease_ids.length===0`), "suggestions are not added until the signer taps them");
   await ev(`document.querySelector('#smdReview [data-bl-act="dz:ACUTE_BRONCHITIS"]').click();true`);
   ok(await until(`SMD_BULLETINS_DESK._state.cur.disease_ids.indexOf('ACUTE_BRONCHITIS')>=0&&document.getElementById('bl_what_changed').value.indexOf('Acute Bronchitis')>=0`), "tapping a suggestion adds it and keeps the typed text");
+  // B / I / U: wraps the selected words, the preview shows the formatting, nothing else becomes markup
+  await ev(`(function(){var t=document.getElementById('bl_what_changed');t.focus();var i=t.value.indexOf('Acute Bronchitis');t.setSelectionRange(i,i+'Acute Bronchitis'.length);t.dispatchEvent(new FocusEvent('focusin',{bubbles:true}));return true})()`);
+  await ev(`document.querySelector('#smdReview [data-bl-act="fmt:b"]').click();true`);
+  ok(await until(`document.getElementById('bl_what_changed').value.indexOf('[b]Acute Bronchitis[/b]')>=0`), "Bold wraps the selected words");
+  ok(await ev(`(function(){var b=document.querySelector('#smdReview .bl-preview .smd-bl-p b');return !!b&&b.textContent==='Acute Bronchitis'})()`), "the preview shows them in bold");
+  await ev(`(function(){var h=document.getElementById('bl_headline');h.focus();h.value='Safe <img src=x onerror=alert(1)> title';h.setSelectionRange(0,4);h.dispatchEvent(new FocusEvent('focusin',{bubbles:true}));return true})()`);
+  await ev(`document.querySelector('#smdReview [data-bl-act="fmt:i"]').click();true`);
+  ok(await until(`document.getElementById('bl_headline').value.indexOf('[i]Safe[/i]')===0`), "Italic works on the headline too");
+  ok(await ev(`(function(){var h=document.querySelector('#smdReview .bl-preview .smd-bl-h');return !!h.querySelector('i')&&!h.querySelector('img')&&h.textContent.indexOf('<img')>=0})()`), "typed HTML stays text; only B/I/U become formatting");
+  await ev(`(function(){var h=document.getElementById('bl_headline');h.value='Headline for the draft';h.dispatchEvent(new Event('input',{bubbles:true}));return true})()`);
   await shot("desk-draft-from-source");
   await ev(`document.getElementById('bl_cq').value='rimegepant';document.querySelector('#smdReview [data-bl-act="cdsco"]').click();true`);
   ok(await until(`/Found in the CDSCO lists\./.test((document.querySelector('#smdReview .bl-cdsco.found')||{}).textContent||'')&&document.querySelector('#smdReview .bl-cdsco').textContent.indexOf('approved 2025-03-27')>=0`), "CDSCO check shows the matching entry and its approval date");

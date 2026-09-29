@@ -28,6 +28,9 @@ export function cleanText(v) {
   return String(v == null ? "" : v).replace(/[\u0000-\u001f\u007f]/g, " ").replace(/\s+/g, " ").trim();
 }
 
+// Review Desk formatting markers ([b], [i], [u] and their closers); rendered by bulletins.js after escaping.
+export function stripFormat(s) { return String(s || "").replace(/\[\/?[biu]\]/g, ""); }
+
 export function isHttpsUrl(v) {
   try { const u = new URL(String(v || "")); return u.protocol === "https:" && !!u.hostname; } catch (e) { return false; }
 }
@@ -53,9 +56,10 @@ export function validateDraft(input, opts) {
   for (const f of Object.keys(LIMITS)) {
     const s = cleanText(b[f]);
     const [min, max] = LIMITS[f];
-    if (min && !s) err(f, "required");
-    else if (s && s.length < min) err(f, "too-short");
-    else if (s.length > max) err(f, "too-long");
+    const n = stripFormat(s).length;                                  // [b]/[i]/[u] markers do not count
+    if (min && !n) err(f, "required");
+    else if (n && n < min) err(f, "too-short");
+    else if (n > max) err(f, "too-long");
     if (s.indexOf("\u2014") >= 0) err(f, "em-dash");                // house rule for app-facing text
     v[f] = s;
   }

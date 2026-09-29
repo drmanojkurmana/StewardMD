@@ -526,3 +526,15 @@ test("bell feed: signed_bulletin marks only items with a LIVE bulletin, and the 
   assert.deepEqual(r.data.items.map((i) => [i.id, i.signed_bulletin]), [["x1", false]]);
   void a;
 });
+
+test("formatting: [b]/[i]/[u] markers do not count toward length limits, but are part of the signed text", async () => {
+  const visible = "x".repeat(118);
+  const withTags = "[b]" + visible.slice(0, 10) + "[/b]" + visible.slice(10);
+  const r = rules.validateDraft(draft({ headline: withTags }));
+  assert.equal(r.ok, true, JSON.stringify(r.errors));
+  assert.equal(r.value.headline, withTags, "stored as written");
+  assert.ok(rules.validateDraft(draft({ headline: "[b]" + "x".repeat(121) + "[/b]" })).errors.some((e) => e.field === "headline" && e.code === "too-long"));
+  assert.ok(rules.validateDraft(draft({ headline: "[b][/b]" })).errors.some((e) => e.field === "headline" && e.code === "required"));
+  const plain = rules.validateDraft(draft()).value, bold = rules.validateDraft(draft({ headline: "[b]" + draft().headline + "[/b]" })).value;
+  assert.notEqual(await rules.bodyHash(plain), await rules.bodyHash(bold), "adding emphasis is a change that needs a new signature");
+});
