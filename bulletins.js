@@ -20,7 +20,7 @@
   var KIND_ORDER = { safety: 0, approval: 1, guideline: 2, trial: 3 };
   var INDIA = {
     cdsco_approved: ["Approved by CDSCO", ""], not_approved_india: ["Not yet approved in India", "warn"],
-    not_applicable: ["Not applicable", ""], unknown: ["India status not confirmed", "warn"],
+    not_applicable: ["Not applicable", ""], unknown: ["Status not confirmed", "warn"],
   };
   var EVID = { regulatory_approval: "Regulatory approval", regulatory_safety: "Regulatory safety communication", guideline: "Guideline", rct: "Randomised controlled trial", meta_analysis: "Meta-analysis" };
   var MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -143,24 +143,24 @@
 
   var CSS =
     ".smd-bls{margin:0 0 18px}" +
-    ".smd-bls-h{font:700 12px/1.3 var(--sans,-apple-system,system-ui,sans-serif);letter-spacing:.06em;text-transform:uppercase;color:var(--mut,#64748b);margin:0 0 8px}" +
-    ".smd-bl{border:1px solid var(--line,#e2e8f0);border-left:4px solid #0f766e;border-radius:12px;background:var(--panel,#fff);color:var(--ink,#0f172a);padding:12px 14px;margin:0 0 10px;font:14px/1.5 var(--sans,-apple-system,system-ui,sans-serif);overflow-wrap:anywhere}" +
-    ".smd-bl-safety{border-left-color:#b91c1c}" +
-    ".smd-bl-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}" +
-    ".smd-bl-kind{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:rgba(15,118,110,.1);color:#0f766e}" +
-    ".smd-bl-safety .smd-bl-kind{background:rgba(185,28,28,.1);color:#b91c1c}" +
-    ".smd-bl-date{font-size:12px;color:var(--mut,#64748b);white-space:nowrap}" +
-    ".smd-bl-h{margin:0 0 4px;font-size:15px;font-weight:700;line-height:1.35}" +
-    ".smd-bl-p{margin:0 0 8px}" +
-    ".smd-bl-row{margin:0 0 4px;font-size:13px}" +
-    ".smd-bl-in.warn{color:#b45309;font-weight:600}" +
-    ".smd-bl-row a{color:var(--reader-accent,#0f766e);font-weight:600}" +
-    ".smd-bl-sig{margin:8px 0 2px;padding-top:8px;border-top:1px solid var(--line,#e2e8f0);font-size:12px;color:var(--mut,#64748b)}" +
+    ".smd-bls-h{font:600 12px/1.3 var(--sans,-apple-system,system-ui,sans-serif);color:var(--mut,#64748b);margin:0 0 8px}" +
+    /* a dated note under a hairline, not a card: no stripe, no pill (reader de-slop 2026-09-29) */
+    ".smd-bl{border-top:1px solid var(--ink,#0f172a);color:var(--ink,#0f172a);padding:12px 0 0;margin:0 0 18px;font:15px/1.5 var(--sans,-apple-system,system-ui,sans-serif);overflow-wrap:anywhere}" +
+    ".smd-bl-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px;font-size:13px}" +
+    ".smd-bl-kind{font-weight:600;color:var(--ink,#0f172a)}" +
+    ".smd-bl-safety .smd-bl-kind{color:#b91c1c}" +
+    ".smd-bl-date{color:var(--mut,#64748b);white-space:nowrap;font-variant-numeric:tabular-nums}" +
+    ".smd-bl-h{margin:0 0 6px;font-size:17px;font-weight:600;line-height:1.3;text-wrap:balance}" +
+    ".smd-bl-p{margin:0 0 10px}" +
+    ".smd-bl-row{display:grid;grid-template-columns:78px minmax(0,1fr);gap:10px;margin:0 0 3px;font-size:14px}" +
+    ".smd-bl-row>b{font-weight:400;color:var(--mut,#64748b)}" +
+    ".smd-bl-in.warn{color:#b45309}" +
+    ".smd-bl-row a{color:var(--reader-accent,#0f766e);font-weight:500;text-underline-offset:3px}" +
+    ".smd-bl-sig{margin:10px 0 0;font-size:14px;font-style:italic;color:var(--mut,#64748b)}" +
     ".smd-bl-nw{white-space:nowrap}" +
-    ".smd-bl-foot{margin:0;font-size:12px;font-weight:600;color:var(--ink,#0f172a)}" +
+    ".smd-bl-foot{margin:0;font-size:14px;font-style:italic;color:var(--ink,#0f172a)}" +
     ".smd-bl-stale{margin:0 0 14px;font-size:12px;color:var(--mut,#64748b)}" +
-    "body.dark .smd-bl{background:var(--panel,#111827);color:var(--ink,#e5e7eb)}" +
-    "body.dark .smd-bl-in.warn{color:#fbbf24}body.dark .smd-bl-kind{color:#5eead4}body.dark .smd-bl-safety .smd-bl-kind{color:#fca5a5}";
+    "body.dark .smd-bl-in.warn{color:#fbbf24}body.dark .smd-bl-safety .smd-bl-kind{color:#fca5a5}";
   function injectCSS() {
     if (!D || D.getElementById("smdBulletinCss")) return;
     var s = D.createElement("style"); s.id = "smdBulletinCss"; s.textContent = CSS; (D.head || D.documentElement).appendChild(s);

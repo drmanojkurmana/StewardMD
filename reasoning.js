@@ -3264,20 +3264,23 @@
     ]
   };
   var EV_BRIEF_META = {
-    dontmiss: { ic: "siren", label: "Don't miss", a: "warn" },
-    exam: { ic: "target", label: "Exam pearl", a: "pearl" },
-    pitfall: { ic: "warn", label: "Pitfall", a: "pitfall" },
-    tip: { ic: "note", label: "Practice tip", a: "tip" },
-    action: { ic: "bolt", label: "Key action", a: "tx" },
-    dx: { ic: "steth", label: "Diagnostic pearl", a: "ix" }
+    dontmiss: { label: "Don't miss", a: "now" },
+    exam: { label: "Exam", a: "" },
+    pitfall: { label: "Pitfall", a: "" },
+    tip: { label: "Tip", a: "" },
+    action: { label: "Act now", a: "now" },
+    dx: { label: "Tests", a: "" }
   };
+  // one drawn chevron for every disclosure in the reader (no glyph icons)
+  var DX_CHEV = '<svg class="dx-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
   function evBriefing(id) {
     var b = EXAM_PEARLS[id]; if (!b || !b.length) return "";
-    return '<div class="ev-brief"><div class="ev-brief-h"><span class="ev-tick"></span>StewardMD clinical briefing<span class="ev-brief-by">clinician-curated</span></div>' +
+    // handbook table: a narrow label column, the point beside it; red only for what must happen now
+    return '<div class="ev-brief"><div class="ev-brief-h">Clinical briefing<span class="ev-brief-by">Clinician-curated</span></div><dl class="ev-bt">' +
       b.map(function (p) {
         var m = EV_BRIEF_META[p.t] || EV_BRIEF_META.exam;
-        return '<div class="ev-bc ev-bc--' + m.a + '"><span class="ev-bc-ic">' + rIco(m.ic) + '</span><div class="ev-bc-bd"><span class="ev-bc-tag ev-tag--' + m.a + '">' + m.label + '</span>' + medFormat(stripCite(p.x)) + '</div></div>';
-      }).join("") + '</div>';
+        return '<dt class="ev-bt-l' + (m.a ? " ev-bt-l--" + m.a : "") + '">' + m.label + '</dt><dd class="ev-bt-x">' + medFormat(stripCite(p.x)) + '</dd>';
+      }).join("") + '</dl></div>';
   }
   // the collapsible body (pearls hero + sections + full reference) — lazy-built
   function evBodyHTML(src) {
@@ -3293,12 +3296,12 @@
     }
     (src.sections || []).forEach(function (s) {
       h += '<div class="ev-sec' + (s.danger ? " danger" : "") + '"><button type="button" class="ev-sec-h">' +
-        '<span class="ev-sec-ic">' + s.ic + '</span><span class="ev-sec-t">' + esc(s.title) + '</span><span class="ev-chev">⌄</span></button>' +
+        '<span class="ev-sec-ic">' + s.ic + '</span><span class="ev-sec-t">' + esc(s.title) + '</span><span class="ev-chev">' + DX_CHEV + '</span></button>' +
         '<div class="ev-sec-p"><div class="ev-sec-in">' + s.html + '</div></div></div>';
     });
     if (src.fullHTML) {
       h += '<div class="ev-sec ev-full"><button type="button" class="ev-sec-h">' +
-        '<span class="ev-sec-ic">' + rIco("note") + '</span><span class="ev-sec-t">Clinical details</span><span class="ev-chev">⌄</span></button>' +
+        '<span class="ev-sec-ic">' + rIco("note") + '</span><span class="ev-sec-t">Clinical details</span><span class="ev-chev">' + DX_CHEV + '</span></button>' +
         '<div class="ev-sec-p"><div class="ev-sec-in">' + src.fullHTML + '</div></div></div>';
     }
     h += '<div class="ev-cite">' + src.cite + '</div></div>';
@@ -3313,7 +3316,7 @@
       '<button type="button" class="ev-top" aria-expanded="' + open + '"><span class="ev-top-ic">' + src.icon + '</span>' +
         '<span class="ev-top-main"><span class="ev-top-title">' + (src.srcKey === "harrison" ? "Know more" : esc(src.sourceName)) + '</span>' +
         (sub ? '<span class="ev-top-sub">' + esc(sub) + '</span>' : '') + '</span>' +
-        '<span class="ev-chev ev-chev-top">⌄</span></button>' +
+        '<span class="ev-chev ev-chev-top">' + DX_CHEV + '</span></button>' +
       '<div class="ev-panel"><div class="ev-panel-in">' + (open ? evBodyHTML(src) : '') + '</div></div></div>';
   }
   // delegated toggle + lazy build — wired once, works wherever the HTML is injected
@@ -3351,8 +3354,10 @@
       ".ev-top-main{display:flex;flex-direction:column;flex:1;min-width:0}",
       ".ev-top-title{font-weight:700;color:#0f172a;font-size:13.5px;line-height:1.25}",
       ".ev-top-sub{font-size:11.5px;color:#0b5a54;margin-top:2px}",
-      ".ev-chev{font-size:16px;color:#94a3b8;transition:transform .28s ease;flex:none}",
-      ".ev-wrap.ev-open>.ev-top .ev-chev-top{transform:rotate(180deg)}",
+      ".ev-chev{display:inline-flex;color:#94a3b8;transition:transform .2s cubic-bezier(.23,1,.32,1);flex:none}",
+      ".dx-chev{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}",
+      ".ev-wrap.ev-open>.ev-top .ev-chev-top,.ev-sec.ev-open>.ev-sec-h .ev-chev{transform:rotate(90deg)}",
+      "@media (prefers-reduced-motion:reduce){.ev-chev{transition:none}}",
       ".ev-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}",
       ".ev-wrap.ev-open>.ev-panel{grid-template-rows:1fr}",
       ".ev-panel-in{overflow:hidden;min-height:0}",
@@ -3376,13 +3381,12 @@
       ".ev-callout-ic{flex:none;font-size:14px;line-height:1.4}",
       ".ev-callout--danger{background:#fef2f2;border-color:#fecaca;color:#7f1d1d}",
       ".ev-callout--warn{background:#fff7ed;border-color:#fed7aa;color:#7c2d12}",
-      ".ev-brief{background:linear-gradient(180deg,#f8fafc,#f1f5f9);border:1px solid #e2e8f0;border-radius:13px;padding:12px 12px 9px;margin-bottom:13px}",
-      ".ev-brief-h{display:flex;align-items:center;gap:6px;font-weight:800;font-size:12.5px;letter-spacing:.02em;color:#0f172a;margin-bottom:10px}",
-      ".ev-brief-by{margin-left:auto;font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#0b5a54;background:#d9f0eb;padding:2px 8px;border-radius:20px}",
-      ".ev-bc{display:flex;gap:9px;align-items:flex-start;background:#fff;border:1px solid #eef2f7;border-left:4px solid #c4b5fd;border-radius:10px;padding:10px 11px;margin-bottom:7px;line-height:1.55;color:#0f172a}",
-      ".ev-bc:last-child{margin-bottom:0}.ev-bc-ic{flex:none;font-size:15px;line-height:1.4;color:#64748b}.ev-bc-ic svg{width:15px;height:15px;stroke:currentColor;stroke-width:1.9;fill:none;vertical-align:-.15em}.ev-bc-bd{flex:1;min-width:0}",
-      ".ev-bc--warn{border-left-color:#ef4444}.ev-bc--pitfall{border-left-color:#f97316}.ev-bc--pearl{border-left-color:#8b5cf6}.ev-bc--tip{border-left-color:#0ea5e9}.ev-bc--tx{border-left-color:#10b981}.ev-bc--ix{border-left-color:#3b82f6}",
-      ".ev-bc-tag{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:1px 7px;border-radius:20px;margin-right:7px}",
+      ".ev-brief{margin:0 0 16px}",
+      ".ev-brief-h{display:flex;align-items:baseline;justify-content:space-between;gap:8px;font-weight:650;font-size:15px;color:#0f172a;margin-bottom:6px}",
+      ".ev-brief-by,.ev-bt-l{font-variant:all-small-caps;letter-spacing:.04em;font-weight:600;font-size:13px;color:#5b6472}",
+      ".ev-bt{display:grid;grid-template-columns:78px minmax(0,1fr);margin:0;border-top:2px solid currentColor}",
+      ".ev-bt>*{margin:0;padding:10px 0;border-bottom:1px solid #e3e5eb;line-height:1.55}",
+      ".ev-bt-l{padding-top:11px;padding-right:10px}.ev-bt-l--now{color:#b3261e}",
       ".ev-tag--pitfall{background:#ffedd5;color:#9a3412}.ev-tag--tip{background:#e0f2fe;color:#075985}",
       ".ev-ul--danger li:before{background:#dc2626}.ev-ul--warn li:before{background:#ea580c}",
       ".md-bug{color:#b91c1c;font-weight:700}",
@@ -3407,7 +3411,7 @@
       ".ev-sec-h{display:flex;align-items:center;gap:10px;width:100%;border:none;background:#fbfdfd;padding:12px 13px;cursor:pointer;text-align:left;min-height:48px;font:inherit}",
       ".ev-sec.danger .ev-sec-h{background:#fef4f4}",
       ".ev-sec-ic{font-size:15px;flex:none}.ev-sec-t{flex:1;font-weight:650;font-weight:600;color:#0f172a;font-size:13.5px}",
-      ".ev-wrap .ev-sec.ev-open>.ev-sec-h .ev-chev{transform:rotate(180deg)}",
+      ".ev-wrap .ev-sec.ev-open>.ev-sec-h .ev-chev{transform:rotate(90deg)}",
       ".ev-sec-p{display:grid;grid-template-rows:0fr;transition:grid-template-rows .26s ease}",
       ".ev-sec.ev-open>.ev-sec-p{grid-template-rows:1fr}",
       ".ev-sec-in{overflow:hidden;min-height:0}.ev-sec.ev-open>.ev-sec-p>.ev-sec-in{padding:4px 14px 13px}",
@@ -4323,18 +4327,17 @@
     if (opts && opts.from === "onco-home") backLabel = "‹ ONCQIS";
     else if (opts && (opts.standalone || opts.from === "syndromes" || opts.from === "knowledge-library" || _libReturnScroll !== null)) backLabel = "‹ Library";
     el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">' + backLabel + '</button>' +
-        '<div class="dx-reader-brand"><strong>Knowledge Library</strong><span>Clinical disease reference</span></div><span class="dx-reader-spacer" aria-hidden="true"></span></div>' +
+        '<div class="dx-reader-brand"><strong>Knowledge Library</strong><span>StewardMD Knowledge Base</span></div><span class="dx-reader-spacer" aria-hidden="true"></span></div>' +
       '<div class="dx-mgmt-body">' +
-        '<section class="dx-reader-hero"><img class="smd-kb-watermark" src="/android-chrome-192x192.png" alt="" aria-hidden="true"><div class="smd-kb-brand"><strong>StewardMD</strong><span>Knowledge Base</span></div>' +
-        '<div class="dx-mgmt-badge">Disease reference · ' + (inf ? "infective" : "non-infective") + '</div>' +
+        '<section class="dx-reader-hero">' +
         '<h2 class="dx-mgmt-name">' + esc(name) + '</h2>' +
-        (system ? '<div class="dx-mgmt-sys">' + esc(system) + '</div>' : '') + '</section>' +
+        '<div class="dx-mgmt-sys">' + (system ? esc(system) + ' · ' : '') + (inf ? "Infective" : "Non-infective") + '</div></section>' +
         (window.SMD_BULLETINS ? SMD_BULLETINS.html(id) : '') +   // signed practice updates (bulletins.js; flag smd_kb_bulletins, default off)
         '<div class="dx-reader-glance"><h3>At a glance</h3>' +
           (reason ? '<p>' + medFormat(reason) + '</p>' : '') +
           (H && H.redFlags && H.redFlags.length ? '<section class="dx-reader-alert"><h4>Red flags</h4>' + evList(H.redFlags, "danger") + '</section>' : '') +
-          (H && H.additionalInvestigations && H.additionalInvestigations.length ? '<details><summary>Investigations</summary>' + evList(H.additionalInvestigations) + '</details>' : '') +
-          (briefTx && briefTx.length ? '<details><summary>Management</summary><ul>' + briefTx.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join('') + '</ul></details>' : '') +
+          (H && H.additionalInvestigations && H.additionalInvestigations.length ? '<details><summary>Investigations' + DX_CHEV + '</summary>' + evList(H.additionalInvestigations) + '</details>' : '') +
+          (briefTx && briefTx.length ? '<details><summary>Management' + DX_CHEV + '</summary><ul>' + briefTx.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join('') + '</ul></details>' : '') +
         '</div><div class="dx-reader-content">' +
         (reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(reason) + '</p>' : '') +
         mgmtHtml +
@@ -4343,7 +4346,7 @@
         '</div>' +
       '</div>';
     var favourite = document.createElement("button"); favourite.type = "button"; favourite.className = "dx-reader-favourite";
-    function favouritePaint() { var saved = kbReadList("favourites").indexOf(id) >= 0; favourite.textContent = saved ? "★ Saved to favourites" : "☆ Add to favourites"; favourite.setAttribute("aria-pressed", String(saved)); }
+    function favouritePaint() { var saved = kbReadList("favourites").indexOf(id) >= 0; favourite.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg><span>' + (saved ? "Saved" : "Save") + '</span>'; favourite.setAttribute("aria-pressed", String(saved)); favourite.setAttribute("aria-label", saved ? "Saved to favourites" : "Save to favourites"); }
     favouritePaint();
     favourite.addEventListener("click", function () { var list = kbReadList("favourites"), saved = list.indexOf(id) >= 0; if (kbSaveList("favourites", saved ? list.filter(function (x) { return x !== id; }) : list.concat(id))) favouritePaint(); else favourite.textContent = "Could not save. Try again."; });
     el.querySelector(".dx-reader-hero").appendChild(favourite);

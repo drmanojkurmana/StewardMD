@@ -43,3 +43,17 @@ A fifth tab, Protocols, joins Syndromes / Antibiogram / AWaRe / Guidelines: beds
 across every specialty, on the same tool-page hierarchy. It lives in its own module, see
 [[Clinical Protocols]] (`kb-protocols.js`, flag `smd_kb_protocols`). The four original tabs are
 unchanged; app.js still renders them and `kb-protocols.js` appends the fifth button.
+
+## Disease reader de-slop (2026-09-29)
+
+Owner picked from three variants: the top of the reader follows "Textbook", the Know more panel
+follows "Handbook". The disease name is set in the system serif (New York on Apple), and sections are
+separated by hairlines instead of cards. The watermark, kicker pill and brand block are gone from the hero;
+"StewardMD Knowledge Base" now sits under the header title. Red is used only for red flags and "Act now".
+The practice update (bulletins.js) is a dated note under a rule, with no stripe or pill.
+Know more is a handbook table: a narrow small-caps label column (Act now, Exam, Pitfall, Tests, Tip,
+Don't miss), a 2px opening rule, and no per-row icons or tags. Inside the reader the `md-*` term colours
+are neutralised. Drug names keep the owner's drug-link glow (drug-link.js, 2026-09-24), which rests as
+plain bold after about 5 s. Styles: the reader block at the end of `knowledge-library.css`
+(two-id scope, no `!important`). The reader was removed from the appearance.css glass-card rules.
+The India "unknown" label now reads "Status not confirmed" (the row already says "In India").
