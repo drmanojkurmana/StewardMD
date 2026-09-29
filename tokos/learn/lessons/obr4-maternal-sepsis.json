@@ -1,0 +1,222 @@
+{
+  "id": "obr4-maternal-sepsis",
+  "unit": "obr4",
+  "level": "resident",
+  "minutes": 6,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Maternal sepsis: recognise it and finish the first hour",
+    "hi": "Maternal sepsis: पहचानें और पहला घंटा पूरा करें"
+  },
+  "idea": {
+    "en": "Sepsis is life-threatening organ dysfunction from infection. Use an obstetric early warning score, send lactate and cultures, and give IV broad-spectrum antibiotics within one hour of a high-risk sign. Control the source.",
+    "hi": "Sepsis संक्रमण से जानलेवा अंग-क्रियाशीलता विफलता है। प्रसूति early warning score इस्तेमाल करें, lactate और cultures भेजें, और उच्च-जोखिम संकेत मिलने के एक घंटे के भीतर IV broad-spectrum antibiotics दें। संक्रमण का स्रोत नियंत्रित करें।"
+  },
+  "see": {
+    "diagram": "diagrams/obr4-sepsis-hour.svg",
+    "w": 480,
+    "h": 280,
+    "alt": {
+      "en": "A clock face with a red hand at 12 and an amber hand near 5, and a stack of five coloured bars with dots representing the steps of the first hour.",
+      "hi": "घड़ी का चेहरा जिसमें 12 पर लाल सुई और लगभग 5 के पास पीली सुई, और पहले घंटे के चरण दिखाती पाँच रंगीन पट्टियों की कतार।"
+    },
+    "caption": {
+      "en": "A one-hour bundle: five actions that should not wait for the diagnosis to be certain.",
+      "hi": "एक घंटे का bundle: पाँच कार्य जो निदान पक्का होने का इंतज़ार नहीं करते।"
+    },
+    "credit": "Original, MAIKNOWLEDGE LLP",
+    "hotspots": [
+      {
+        "x": 0.23,
+        "y": 0.32,
+        "label": {
+          "en": "One hour",
+          "hi": "एक घंटा"
+        },
+        "note": {
+          "en": "Antibiotics within one hour in women at high risk of sepsis, with or without shock (Grade C).",
+          "hi": "उच्च जोखिम वाली महिलाओं में, shock के साथ या बिना, एक घंटे के भीतर antibiotics (Grade C)।"
+        }
+      },
+      {
+        "x": 0.68,
+        "y": 0.18,
+        "label": {
+          "en": "Red flags",
+          "hi": "Red flags"
+        },
+        "note": {
+          "en": "Not alert on AVPU or GCS under 15, RR 25 or more, SpO2 under 94%, HR over 130, SBP under 90, no urine for 12 hours.",
+          "hi": "AVPU पर सतर्क नहीं या GCS 15 से कम, RR 25 या ज़्यादा, SpO2 94% से कम, HR 130 से ज़्यादा, SBP 90 से कम, 12 घंटे पेशाब नहीं।"
+        }
+      },
+      {
+        "x": 0.68,
+        "y": 0.71,
+        "label": {
+          "en": "Source control",
+          "hi": "स्रोत नियंत्रण"
+        },
+        "note": {
+          "en": "Drain pus, evacuate infected retained products, expedite birth if needed.",
+          "hi": "मवाद निकालें, संक्रमित बचे उत्पादों को निकालें, ज़रूरी हो तो प्रसव जल्दी कराएँ।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "WHO 2017: maternal sepsis is a life-threatening condition of organ dysfunction due to infection in pregnancy, childbirth, post-abortion or postpartum. Septic shock needs vasopressors for MAP 65 or more and lactate over 2 mmol/L despite fluids, with mortality above 40%.",
+        "hi": "WHO 2017: maternal sepsis गर्भावस्था, प्रसव, गर्भपात के बाद या प्रसवोत्तर संक्रमण से अंग-क्रियाशीलता विफलता की जानलेवा स्थिति है। Septic shock में द्रव के बावजूद MAP 65 या ज़्यादा रखने के लिए vasopressors और lactate 2 mmol/L से ज़्यादा चाहिए, मृत्यु दर 40% से ऊपर।"
+      },
+      {
+        "en": "High-risk (red) flags need immediate bundle care: not alert, RR 25 or more, SpO2 under 94% on air, HR over 130, SBP under 90, no urine for over 12 hours or under 0.5 ml/kg/h. Amber flags (RR 21 to 24, HR 100 to 130, SBP 91 to 100, temperature under 36 or over 38 and others) need senior review within 1 hour.",
+        "hi": "उच्च जोखिम (लाल) संकेतों में तुरंत bundle देखभाल: सतर्क नहीं, RR 25 या ज़्यादा, हवा में SpO2 94% से कम, HR 130 से ज़्यादा, SBP 90 से कम, 12 घंटे से ज़्यादा पेशाब नहीं या 0.5 ml/kg/h से कम। पीले संकेत (RR 21 से 24, HR 100 से 130, SBP 91 से 100, तापमान 36 से कम या 38 से ज़्यादा आदि) में 1 घंटे के भीतर वरिष्ठ समीक्षा।"
+      },
+      {
+        "en": "Measure lactate urgently: 2 mmol/L or more calls for senior review, IV fluid and a repeat; 4 mmol/L or more needs immediate escalation and critical care. Take blood cultures before antibiotics.",
+        "hi": "Lactate तुरंत नापें: 2 mmol/L या ज़्यादा पर वरिष्ठ समीक्षा, IV द्रव और दोबारा जाँच; 4 mmol/L या ज़्यादा पर तुरंत escalation और critical care। Antibiotics से पहले blood cultures लें।"
+      },
+      {
+        "en": "Give a 500 ml crystalloid bolus for hypotension or lactate above 4 mmol/L and repeat if needed. Genital tract sepsis: E. coli and group A streptococcus are likely, so use high-dose broad-spectrum cover that also blocks exotoxin production, and tailor to local resistance.",
+        "hi": "Hypotension या lactate 4 mmol/L से ज़्यादा में 500 ml crystalloid bolus दें और ज़रूरत हो तो दोहराएँ। जननांग संक्रमण में E. coli और group A streptococcus संभावित हैं, इसलिए ऐसा उच्च खुराक broad-spectrum कवर दें जो exotoxin बनना भी रोके, और स्थानीय resistance के अनुसार ढालें।"
+      },
+      {
+        "en": "Pregnant women have a 20-fold risk of invasive group A streptococcus (iGAS), and 80-fold up to 28 days postpartum. Treat mother and baby if either has iGAS and use barrier nursing. Think of herpes simplex and consider aciclovir. Sepsis was 11% of maternal deaths worldwide.",
+        "hi": "गर्भवती महिलाओं में invasive group A streptococcus (iGAS) का जोखिम 20 गुना है, और प्रसव के बाद 28 दिन तक 80 गुना। माँ या शिशु में iGAS हो तो दोनों का इलाज करें और barrier nursing करें। Herpes simplex सोचें और aciclovir पर विचार करें। दुनिया भर में सभी मातृ मृत्यु में sepsis 11% थी।"
+      }
+    ],
+    "analogy": {
+      "en": "Sepsis is a fire alarm you answer by driving to the fire, not by waiting to see the flames: act on the flags.",
+      "hi": "Sepsis वह अलार्म है जिस पर आग की ओर दौड़ते हैं, लपटें दिखने का इंतज़ार नहीं करते: संकेतों पर कार्य करें।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Day 2 after caesarean: HR 128, RR 24, temperature 38.4, severe pain out of proportion: think necrotising fasciitis.",
+      "hi": "सिज़ेरियन के दूसरे दिन: HR 128, RR 24, तापमान 38.4, हालत से ज़्यादा तीव्र दर्द: necrotising fasciitis सोचें।"
+    },
+    {
+      "en": "Watery vaginal discharge with blisters: streptococcal infection.",
+      "hi": "पानी जैसा योनि-स्राव और फफोले: streptococcal संक्रमण।"
+    },
+    {
+      "en": "Hypothermia with rising lactate and no fever: still sepsis, and consider occult bleeding.",
+      "hi": "बुख़ार के बिना hypothermia और बढ़ता lactate: फिर भी sepsis सोचें, और छिपे रक्तस्राव पर भी विचार करें।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Chart MEOWS on every unwell woman and escalate on a red flag.",
+      "hi": "हर अस्वस्थ महिला पर MEOWS दर्ज करें और लाल संकेत पर escalate करें।"
+    },
+    {
+      "en": "Start the hour-1 bundle: cultures, lactate, antibiotics, fluid, source control.",
+      "hi": "Hour-1 bundle शुरू करें: cultures, lactate, antibiotics, द्रव, स्रोत नियंत्रण।"
+    },
+    {
+      "en": "Ask the neonatal team to assess the baby if the mother is treated for sepsis in labour or within 24 hours.",
+      "hi": "माँ का प्रसव में या 24 घंटे के भीतर sepsis का इलाज हो तो नवजात टीम से शिशु का आकलन कराएँ।"
+    }
+  ],
+  "remember": {
+    "en": "Red flag means bundle now: lactate, cultures, antibiotics within 1 hour, 500 ml bolus, source control.",
+    "hi": "लाल संकेत यानी bundle अभी: lactate, cultures, 1 घंटे में antibiotics, 500 ml bolus, स्रोत नियंत्रण।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which set of values is a high-risk (red) flag for sepsis in the RCOG table?",
+        "hi": "RCOG तालिका में sepsis के उच्च जोखिम (लाल) संकेत का कौन-सा समूह है?"
+      },
+      "o": [
+        {
+          "en": "RR 25 or more, HR over 130, SBP under 90",
+          "hi": "RR 25 या ज़्यादा, HR 130 से ज़्यादा, SBP 90 से कम"
+        },
+        {
+          "en": "RR 22, HR 105, SBP 96",
+          "hi": "RR 22, HR 105, SBP 96"
+        },
+        {
+          "en": "Temperature 38.2 alone",
+          "hi": "सिर्फ़ तापमान 38.2"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Those are red flags; the second set is amber and needs review within 1 hour.",
+        "hi": "ये लाल संकेत हैं; दूसरा समूह पीला है और 1 घंटे में समीक्षा चाहिए।"
+      }
+    },
+    {
+      "q": {
+        "en": "Lactate 4.5 mmol/L in a woman with suspected sepsis. Next step?",
+        "hi": "संदिग्ध sepsis वाली महिला में lactate 4.5 mmol/L। अगला कदम?"
+      },
+      "o": [
+        {
+          "en": "Immediate escalation and consider critical care review",
+          "hi": "तुरंत escalation और critical care समीक्षा पर विचार"
+        },
+        {
+          "en": "Repeat in 12 hours",
+          "hi": "12 घंटे में दोबारा"
+        },
+        {
+          "en": "Reassure",
+          "hi": "आश्वस्त करें"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "A lactate of 4 mmol/L or more prompts immediate escalation.",
+        "hi": "4 mmol/L या ज़्यादा lactate पर तुरंत escalation।"
+      }
+    },
+    {
+      "q": {
+        "en": "In the RCOG sepsis guideline, IV broad-spectrum antibiotics should be given within what time for a woman at high risk?",
+        "hi": "RCOG sepsis गाइडलाइन में उच्च जोखिम वाली महिला को IV broad-spectrum antibiotics कितने समय के भीतर देने हैं?"
+      },
+      "o": [
+        {
+          "en": "1 hour",
+          "hi": "1 घंटा"
+        },
+        {
+          "en": "3 hours",
+          "hi": "3 घंटे"
+        },
+        {
+          "en": "After culture results",
+          "hi": "Culture परिणाम के बाद"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Grade C: within one hour, with or without septic shock.",
+        "hi": "Grade C: एक घंटे के भीतर, septic shock के साथ या बिना।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "ob-medical",
+    "tool": "meows"
+  },
+  "deeper": {
+    "note": "obr4-maternal-sepsis",
+    "text": {
+      "en": "Half of the women who died of sepsis in a UK case-control study did not have a lactate measured, and only about a third received antibiotics within an hour, which is why the guideline makes the bundle a standard and not an option.",
+      "hi": "UK के एक case-control अध्ययन में sepsis से मरने वाली आधी महिलाओं में lactate नापा ही नहीं गया, और सिर्फ़ लगभग एक तिहाई को एक घंटे में antibiotics मिले; इसीलिए गाइडलाइन bundle को मानक बनाती है, विकल्प नहीं।"
+    }
+  },
+  "glossary": [
+    "lactate"
+  ],
+  "sources": [
+    "Lissauer D, Morgan M, Banerjee A, et al. Identification and management of maternal sepsis during and following pregnancy. Green-top Guideline No. 64. BJOG 2025;132:e61-e85. doi:10.1111/1471-0528.18009",
+    "Chu J, Johnston TA, Geoghegan J; Royal College of Obstetricians and Gynaecologists. Maternal collapse in pregnancy and the puerperium. Green-top Guideline No. 56. BJOG 2020;127:e14-e52. doi:10.1111/1471-0528.15995"
+  ]
+}

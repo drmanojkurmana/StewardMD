@@ -1,0 +1,234 @@
+{
+  "id": "obr1-fgr-delivery",
+  "unit": "obr1",
+  "level": "resident",
+  "minutes": 6,
+  "review": "ai_drafted",
+  "title": {
+    "en": "When to deliver: timing by Doppler pattern",
+    "hi": "प्रसव कब कराएँ: Doppler पैटर्न के अनुसार समय"
+  },
+  "idea": {
+    "en": "Delivery timing follows the worst Doppler and CTG finding and the gestation. Use the FIGO ladder: earlier for abnormal ductus, then REDV, then AEDV, then mild signs, then size alone.",
+    "hi": "प्रसव का समय सबसे बिगड़े Doppler और CTG निष्कर्ष तथा गर्भकाल से तय होता है। FIGO सीढ़ी अपनाएँ: असामान्य ductus पर सबसे पहले, फिर REDV, फिर AEDV, फिर हल्के संकेत, फिर सिर्फ़ आकार।"
+  },
+  "see": {
+    "diagram": "diagrams/obr1-delivery-timeline.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "Horizontal bars over a timeline from 26 to 40 weeks. Red bars at 26 to 30 and 30 to 32 weeks, amber bars at 32 to 34 and 34 to 37 weeks, a blue bar at 36 to 38 weeks and a green bar at 37 to 39 weeks.",
+      "hi": "26 से 40 सप्ताह की समय-रेखा पर क्षैतिज पट्टियाँ। 26 से 30 और 30 से 32 सप्ताह पर लाल, 32 से 34 और 34 से 37 सप्ताह पर पीली, 36 से 38 सप्ताह पर नीली और 37 से 39 सप्ताह पर हरी पट्टी।"
+    },
+    "caption": {
+      "en": "FIGO delivery windows, from the sickest fetus at the top to the least sick at the bottom.",
+      "hi": "FIGO के delivery समय-खंड, सबसे बीमार भ्रूण ऊपर से सबसे कम बीमार नीचे तक।"
+    },
+    "credit": "Original, MAIKNOWLEDGE LLP",
+    "hotspots": [
+      {
+        "x": 0.205,
+        "y": 0.133,
+        "label": {
+          "en": "Abnormal DV: 26 to 30 weeks",
+          "hi": "असामान्य DV: 26 से 30 सप्ताह"
+        },
+        "note": {
+          "en": "Caesarean, inpatient, BPP or NST twice a day, daily Doppler, steroids.",
+          "hi": "सिज़ेरियन, भर्ती, दिन में दो बार BPP या NST, रोज़ Doppler, steroids।"
+        }
+      },
+      {
+        "x": 0.388,
+        "y": 0.273,
+        "label": {
+          "en": "REDV: 30 to 32 weeks",
+          "hi": "REDV: 30 से 32 सप्ताह"
+        },
+        "note": {
+          "en": "Caesarean. Stillbirth risk 19% overall, 1 to 2% with strict monitoring.",
+          "hi": "सिज़ेरियन। कुल stillbirth जोखिम 19%, सख़्त निगरानी में 1 से 2%।"
+        }
+      },
+      {
+        "x": 0.51,
+        "y": 0.413,
+        "label": {
+          "en": "AEDV: 32 to 34 weeks",
+          "hi": "AEDV: 32 से 34 सप्ताह"
+        },
+        "note": {
+          "en": "Caesarean. Stillbirth risk 6.8% overall, 0 to 1% with strict monitoring.",
+          "hi": "सिज़ेरियन। कुल stillbirth जोखिम 6.8%, सख़्त निगरानी में 0 से 1%।"
+        }
+      },
+      {
+        "x": 0.785,
+        "y": 0.833,
+        "label": {
+          "en": "SGA, normal Doppler: 37 to 39 weeks",
+          "hi": "SGA, सामान्य Doppler: 37 से 39 सप्ताह"
+        },
+        "note": {
+          "en": "Induction of labour is the usual route.",
+          "hi": "सामान्यतः induction of labour।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "SGA (EFW 3rd to 9th centile) with normal fluid and Doppler: deliver at 37 to 39 weeks by induction. Uncomplicated FGR under the 3rd centile with normal Doppler: 36 to 38 weeks.",
+        "hi": "SGA (EFW 3rd से 9th सेंटाइल) और सामान्य द्रव व Doppler: 37 से 39 सप्ताह पर induction। 3rd सेंटाइल से नीचे uncomplicated FGR और सामान्य Doppler: 36 से 38 सप्ताह।"
+      },
+      {
+        "en": "Mild abnormalities (UA PI above the 95th, MCA PI or CPR below the 5th, UtA PI above the 95th, oligohydramnios, poor interval growth, suspected pre-eclampsia): 34 to 37 weeks, caesarean or induction.",
+        "hi": "हल्की असामान्यताएँ (UA PI 95th से ऊपर, MCA PI या CPR 5th से नीचे, UtA PI 95th से ऊपर, oligohydramnios, कमज़ोर वृद्धि, pre-eclampsia का संदेह): 34 से 37 सप्ताह, सिज़ेरियन या induction।"
+      },
+      {
+        "en": "TRUFFLE showed why several tests are used: waiting for a late ductus change gave a better 2-year outcome, but stillbirth rose four-fold compared with CTG plus UA only. Safety-net triggers were STV under 2.6 ms at any gestation or under 3.0 ms from 29 weeks, REDV from 30 weeks and AEDV from 32 weeks.",
+        "hi": "TRUFFLE ने दिखाया कि कई जाँचें क्यों ली जाती हैं: ductus में देर से बदलाव का इंतज़ार करने पर 2 साल का परिणाम बेहतर रहा, पर सिर्फ़ CTG और UA वाली रणनीति की तुलना में stillbirth चार गुना बढ़ा। सुरक्षा-जाल मापदंड थे: STV किसी भी गर्भकाल में 2.6 ms से कम या 29 सप्ताह से 3.0 ms से कम, 30 सप्ताह से REDV और 32 सप्ताह से AEDV।"
+      },
+      {
+        "en": "Absolute indications at any viable gestation: abnormal BPP or NST, or severe pre-eclampsia with uncontrolled hypertension or end-organ damage.",
+        "hi": "किसी भी जीवित रह सकने वाले गर्भकाल में निश्चित संकेत: असामान्य BPP या NST, या अनियंत्रित उच्च रक्तचाप अथवा अंग-क्षति के साथ गंभीर pre-eclampsia।"
+      },
+      {
+        "en": "Give steroids when delivery is anticipated, ideally 1 to 7 days before birth, as an inpatient in severe FGR. The Doppler improvement after steroids is transient; no change in EDV predicts deterioration. It is reasonable to extend magnesium sulphate neuroprotection to FGR.",
+        "hi": "प्रसव की आशंका हो तो steroids दें, आदर्शतः जन्म से 1 से 7 दिन पहले, गंभीर FGR में भर्ती रखकर। Steroids के बाद Doppler का सुधार अस्थायी है; EDV में कोई बदलाव न आना बिगड़ने का संकेत है। Magnesium sulphate neuroprotection को FGR में भी लागू करना उचित है।"
+      }
+    ],
+    "analogy": {
+      "en": "Like leaving a burning building: the more smoke, the earlier you go, and you never wait for one alarm alone.",
+      "hi": "जलती इमारत से निकलने जैसा: धुआँ जितना ज़्यादा, उतनी जल्दी निकलें, और सिर्फ़ एक अलार्म का इंतज़ार कभी न करें।"
+    }
+  },
+  "spot": [
+    {
+      "en": "REDV at 31 weeks: inside the 30 to 32 week window, so plan caesarean after steroids.",
+      "hi": "31 सप्ताह पर REDV: 30 से 32 सप्ताह के खंड के भीतर, इसलिए steroids के बाद सिज़ेरियन की योजना।"
+    },
+    {
+      "en": "STV under 3.0 ms after 29 weeks, or repeated decelerations: deliver even if Doppler is stable.",
+      "hi": "29 सप्ताह के बाद STV 3.0 ms से कम, या बार-बार decelerations: Doppler स्थिर हो तब भी प्रसव।"
+    },
+    {
+      "en": "Steroids given and UA EDV reappears: do not relax.",
+      "hi": "Steroids के बाद UA EDV लौट आए: ढील न दें।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Use the ladder: identify the worst finding, read its window, add steroids and MgSO4 if preterm.",
+      "hi": "सीढ़ी अपनाएँ: सबसे बिगड़ा निष्कर्ष पहचानें, उसका समय-खंड देखें, समय से पहले हो तो steroids और MgSO4 जोड़ें।"
+    },
+    {
+      "en": "Deliver in a unit with a neonatal ICU; refer before the window opens.",
+      "hi": "नवजात ICU वाली इकाई में प्रसव कराएँ; समय-खंड शुरू होने से पहले refer करें।"
+    },
+    {
+      "en": "Individualise with the parents when the fetus is at the edge of viability.",
+      "hi": "भ्रूण जीवन-क्षमता की सीमा पर हो तो माता-पिता के साथ निर्णय व्यक्तिगत करें।"
+    }
+  ],
+  "remember": {
+    "en": "Abnormal DV 26 to 30, REDV 30 to 32, AEDV 32 to 34, mild signs 34 to 37, size alone 36 to 39; steroids first.",
+    "hi": "असामान्य DV 26 से 30, REDV 30 से 32, AEDV 32 से 34, हल्के संकेत 34 से 37, सिर्फ़ आकार 36 से 39; पहले steroids।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Growth restriction at 37 weeks, EFW under the 3rd centile, normal UA, MCA and fluid. Timing and route?",
+        "hi": "37 सप्ताह पर FGR, EFW 3rd सेंटाइल से नीचे, UA, MCA और द्रव सामान्य। समय और तरीका?"
+      },
+      "o": [
+        {
+          "en": "36 to 38 weeks by induction",
+          "hi": "36 से 38 सप्ताह पर induction"
+        },
+        {
+          "en": "Immediate caesarean",
+          "hi": "तुरंत सिज़ेरियन"
+        },
+        {
+          "en": "Wait until 41 weeks",
+          "hi": "41 सप्ताह तक इंतज़ार"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Uncomplicated FGR under the 3rd centile with normal Doppler is delivered at 36 to 38 weeks, usually by induction.",
+        "hi": "3rd सेंटाइल से नीचे uncomplicated FGR, सामान्य Doppler के साथ, 36 से 38 सप्ताह पर, आम तौर पर induction से।"
+      }
+    },
+    {
+      "q": {
+        "en": "Steroids are given at 30 weeks and UA EDV reappears the next morning. What does this mean?",
+        "hi": "30 सप्ताह पर steroids दिए गए और अगली सुबह UA EDV लौट आया। इसका क्या अर्थ है?"
+      },
+      "o": [
+        {
+          "en": "The placenta has recovered; stop monitoring",
+          "hi": "प्लेसेंटा ठीक हो गई; निगरानी बंद करें"
+        },
+        {
+          "en": "A transient effect; the plan does not change",
+          "hi": "अस्थायी असर; योजना नहीं बदलती"
+        },
+        {
+          "en": "The steroid course failed",
+          "hi": "Steroid कोर्स विफल रहा"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "The change reflects fetoplacental vasodilation and higher cardiac output, not lower placental resistance.",
+        "hi": "यह बदलाव भ्रूण-प्लेसेंटा वाहिकाओं के फैलने और ज़्यादा cardiac output के कारण है, प्लेसेंटा का प्रतिरोध घटने के कारण नहीं।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which trigger from TRUFFLE is used from 29 weeks onward?",
+        "hi": "TRUFFLE का कौन-सा मापदंड 29 सप्ताह से आगे इस्तेमाल हुआ?"
+      },
+      "o": [
+        {
+          "en": "STV under 3.0 ms",
+          "hi": "STV 3.0 ms से कम"
+        },
+        {
+          "en": "STV under 2.6 ms only",
+          "hi": "सिर्फ़ STV 2.6 ms से कम"
+        },
+        {
+          "en": "Any UA PI above the 95th",
+          "hi": "कोई भी UA PI 95th से ऊपर"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "STV under 2.6 ms applied at any gestation and under 3.0 ms from 29 weeks.",
+        "hi": "STV 2.6 ms से कम किसी भी गर्भकाल में और 3.0 ms से कम 29 सप्ताह से लागू था।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "ob-fetal"
+  },
+  "deeper": {
+    "note": "obr1-fgr-delivery",
+    "text": {
+      "en": "FIGO acknowledges that the windows are advice, not law: parental values, resources and neonatal capacity change the decision, and the evidence base for uncomplicated SGA at term is thin.",
+      "hi": "FIGO मानता है कि ये समय-खंड सलाह हैं, नियम नहीं: माता-पिता की राय, संसाधन और नवजात इकाई की क्षमता निर्णय बदलते हैं, और term पर uncomplicated SGA के लिए प्रमाण सीमित हैं।"
+    }
+  },
+  "glossary": [
+    "ductus-venosus",
+    "stv",
+    "aredv"
+  ],
+  "sources": [
+    "Melamed N, Baschat A, Yinon Y, et al. FIGO (International Federation of Gynecology and Obstetrics) initiative on fetal growth: best practice advice for screening, diagnosis, and management of fetal growth restriction. Int J Gynaecol Obstet 2021;152 Suppl 1:3-57. doi:10.1002/ijgo.13522"
+  ]
+}

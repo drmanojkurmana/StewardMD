@@ -1,0 +1,466 @@
+{
+ "v": 1,
+ "id": "palm-coein",
+ "review": "ai_drafted",
+ "origin": "Original teaching scenarios written for Tokos. They are not real patients and are not copied from any case series or textbook.",
+ "sources": [
+  "FIGO AUB classification as tabulated in the sources listed in tokos-models/explorer-palm-coein.js"
+ ],
+ "vignettes": [
+  {
+   "id": "polyp-spotting",
+   "level": "mbbs",
+   "difficulty": 1,
+   "title": {
+    "en": "Spotting before each period",
+    "hi": "हर माहवारी से पहले spotting"
+   },
+   "stem": {
+    "en": "A 38-year-old woman has regular monthly periods but has had spotting for several days before each period for 8 months. Ultrasound shows a well-defined echogenic focus in the uterine cavity, and hysteroscopy shows a single endometrial polyp. Thyroid tests and blood count are normal.",
+    "hi": "38 साल की एक स्त्री की माहवारी हर महीने नियमित है, पर 8 महीने से हर माहवारी से कुछ दिन पहले spotting होती है। Ultrasound में गर्भाशय गुहा में एक साफ़ echogenic जगह दिखती है और hysteroscopy में एक endometrial polyp दिखता है। Thyroid जाँच और blood count सामान्य हैं।"
+   },
+   "findings": {
+    "polyp": true
+   },
+   "expect": {
+    "codes": [
+     "P"
+    ]
+   },
+   "teach": {
+    "en": "A polyp seen on imaging or hysteroscopy is AUB-P. The cycles are regular, so there is no reason to add ovulatory dysfunction.",
+    "hi": "Imaging या hysteroscopy में दिखा polyp AUB-P है। चक्र नियमित हैं, इसलिए ovulatory dysfunction जोड़ने का कोई कारण नहीं।"
+   },
+   "review": "ai_drafted"
+  },
+  {
+   "id": "adenomyosis-painful",
+   "level": "mbbs",
+   "difficulty": 1,
+   "title": {
+    "en": "Heavy, painful periods and a globular uterus",
+    "hi": "भारी, दर्दनाक माहवारी और गोल गर्भाशय"
+   },
+   "stem": {
+    "en": "A 41-year-old mother of three has heavy, painful periods that have worsened over 2 years. The uterus is uniformly enlarged, globular and tender. Ultrasound reports a diffusely heterogeneous myometrium with small myometrial cysts and no discrete fibroid. Cycles are regular and clotting tests are normal.",
+    "hi": "तीन बच्चों की 41 साल की माँ को 2 साल से भारी और दर्दनाक माहवारी है जो बढ़ती गई है। गर्भाशय एक-सा बढ़ा हुआ, गोल और छूने पर दर्द वाला है। Ultrasound में myometrium diffusely heterogeneous है, छोटे myometrial cysts हैं और कोई अलग फाइब्रॉइड नहीं है। चक्र नियमित हैं और रक्त जमने की जाँचें सामान्य हैं।"
+   },
+   "findings": {
+    "adenomyosis": true
+   },
+   "expect": {
+    "codes": [
+     "A"
+    ]
+   },
+   "teach": {
+    "en": "Imaging features of adenomyosis with no discrete fibroid make this AUB-A.",
+    "hi": "Adenomyosis की imaging विशेषताएँ और कोई अलग फाइब्रॉइड न होना इसे AUB-A बनाता है।"
+   },
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fibroid-submucosal",
+   "level": "mbbs",
+   "difficulty": 1,
+   "title": {
+    "en": "Heavy periods with clots and anaemia",
+    "hi": "थक्कों वाली भारी माहवारी और खून की कमी"
+   },
+   "stem": {
+    "en": "A 34-year-old has heavy periods with clots and iron-deficiency anaemia. Hysteroscopy shows a fibroid that is mostly in the cavity, with less than half of it inside the muscle wall.",
+    "hi": "34 साल की एक स्त्री को थक्कों के साथ भारी माहवारी और iron-deficiency anaemia है। Hysteroscopy में एक फाइब्रॉइड दिखता है जो ज़्यादातर गुहा में है और उसका आधे से कम हिस्सा पेशी की दीवार के अंदर है।"
+   },
+   "findings": {
+    "leiomyoma": 1
+   },
+   "expect": {
+    "codes": [
+     "L"
+    ],
+    "leiomyoma": {
+     "group": "SM",
+     "types": [
+      1
+     ]
+    }
+   },
+   "teach": {
+    "en": "Less than 50% intramural is FIGO type 1, a submucosal fibroid: AUB-L(SM).",
+    "hi": "50% से कम intramural होना FIGO type 1 है, यानी submucosal फाइब्रॉइड: AUB-L(SM)।"
+   },
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fibroid-intramural",
+   "level": "mbbs",
+   "difficulty": 1,
+   "title": {
+    "en": "Bulky uterus and heavy periods",
+    "hi": "बड़ा गर्भाशय और भारी माहवारी"
+   },
+   "stem": {
+    "en": "A 44-year-old has heavy periods and a bulky uterus. Ultrasound shows a 6 cm fibroid entirely within the uterine wall. It does not touch the endometrium or the outer surface, and the cavity is normal.",
+    "hi": "44 साल की एक स्त्री को भारी माहवारी और बड़ा गर्भाशय है। Ultrasound में गर्भाशय की दीवार के पूरी तरह अंदर 6 cm का फाइब्रॉइड दिखता है। यह न endometrium को छूता है न बाहरी सतह को, और गुहा सामान्य है।"
+   },
+   "findings": {
+    "leiomyoma": 4
+   },
+   "expect": {
+    "codes": [
+     "L"
+    ],
+    "leiomyoma": {
+     "group": "O",
+     "types": [
+      4
+     ]
+    }
+   },
+   "teach": {
+    "en": "A fibroid entirely within the wall, away from the endometrium and the serosa, is type 4: AUB-L(O). Whether it explains the bleeding is a separate clinical judgement.",
+    "hi": "दीवार के अंदर पूरी तरह स्थित, endometrium और serosa से दूर फाइब्रॉइड type 4 है: AUB-L(O)। यह रक्तस्राव का कारण है या नहीं, यह अलग नैदानिक निर्णय है।"
+   },
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fibroid-hybrid",
+   "level": "mbbs",
+   "difficulty": 2,
+   "title": {
+    "en": "A fibroid that reaches both surfaces",
+    "hi": "फाइब्रॉइड जो दोनों सतहों तक पहुँचता है"
+   },
+   "stem": {
+    "en": "A 39-year-old has heavy periods. MRI shows a single 6 cm fibroid mostly inside the wall. A smaller part pushes into the cavity and another smaller part reaches the outer surface of the uterus.",
+    "hi": "39 साल की एक स्त्री को भारी माहवारी है। MRI में 6 cm का एक फाइब्रॉइड दिखता है जो ज़्यादातर दीवार के अंदर है। उसका एक छोटा हिस्सा गुहा में धँसा है और दूसरा छोटा हिस्सा गर्भाशय की बाहरी सतह तक पहुँचता है।"
+   },
+   "findings": {
+    "leiomyoma": "2-5"
+   },
+   "expect": {
+    "codes": [
+     "L"
+    ],
+    "leiomyoma": {
+     "group": "SM",
+     "types": [
+      2,
+      5
+     ]
+    }
+   },
+   "teach": {
+    "en": "A hybrid fibroid is written with two numbers: the first for the endometrial side (type 2 here), the second for the serosal side (type 5 here). It has a submucosal component, so the group is SM.",
+    "hi": "Hybrid फाइब्रॉइड दो संख्याओं से लिखा जाता है: पहली endometrium की ओर के लिए (यहाँ type 2), दूसरी serosa की ओर के लिए (यहाँ type 5)। इसमें submucosal हिस्सा है, इसलिए समूह SM है।"
+   },
+   "review": "ai_drafted"
+  },
+  {
+   "id": "endometrial-carcinoma",
+   "level": "mbbs",
+   "difficulty": 1,
+   "title": {
+    "en": "Heavy bleeding at 47",
+    "hi": "47 साल में भारी रक्तस्राव"
+   },
+   "stem": {
+    "en": "A 47-year-old has heavy bleeding. Her cycles have stayed regular and monthly. Ultrasound shows a thickened endometrium and endometrial biopsy reports endometrioid adenocarcinoma.",
+    "hi": "47 साल की एक स्त्री को भारी रक्तस्राव है। उसके चक्र नियमित और मासिक रहे हैं। Ultrasound में endometrium मोटा दिखता है और endometrial biopsy में endometrioid adenocarcinoma आता है।"
+   },
+   "findings": {
+    "malignancy": true
+   },
+   "expect": {
+    "codes": [
+     "M"
+    ]
+   },
+   "teach": {
+    "en": "Malignancy or hyperplasia on histology is AUB-M. Cycles were regular, so ovulatory dysfunction is not added.",
+    "hi": "Histology में malignancy या hyperplasia होना AUB-M है। चक्र नियमित थे, इसलिए ovulatory dysfunction नहीं जोड़ा गया।"
+   },
+   "review": "ai_drafted"
+  },
+  {
+   "id": "coagulopathy-adolescent",
+   "level": "mbbs",
+   "difficulty": 1,
+   "title": {
+    "en": "Heavy periods since menarche with nosebleeds",
+    "hi": "पहली माहवारी से भारी रक्तस्राव और नाक से खून"
+   },
+   "stem": {
+    "en": "A 15-year-old has had heavy periods since menarche, soaking through pads within 2 hours. She also has frequent nosebleeds and easy bruising, and her mother has heavy periods too. Her cycles are regular and pelvic ultrasound is normal. Tests show a low von Willebrand factor activity.",
+    "hi": "15 साल की एक लड़की को पहली माहवारी से ही भारी रक्तस्राव है, pad 2 घंटे में भीग जाता है। उसे बार-बार नाक से खून आता है, आसानी से नील पड़ जाती है और उसकी माँ को भी भारी माहवारी होती है। चक्र नियमित हैं और pelvic ultrasound सामान्य है। जाँच में von Willebrand factor की activity कम आती है।"
+   },
+   "findings": {
+    "coagulopathy": true
+   },
+   "expect": {
+    "codes": [
+     "C"
+    ]
+   },
+   "teach": {
+    "en": "A systemic bleeding disorder, most often von Willebrand disease, is AUB-C. Ask about heavy bleeding since menarche, family history, nosebleeds and bruising.",
+    "hi": "Systemic रक्तस्राव विकार, सबसे अधिक von Willebrand disease, AUB-C है। पहली माहवारी से भारी रक्तस्राव, पारिवारिक इतिहास, नाक से खून और नील पड़ने के बारे में पूछें।"
+   },
+   "review": "ai_drafted"
+  },
+  {
+   "id": "ovulatory-pcos",
+   "level": "mbbs",
+   "difficulty": 1,
+   "title": {
+    "en": "Cycles every 45 to 90 days",
+    "hi": "हर 45 से 90 दिन पर चक्र"
+   },
+   "stem": {
+    "en": "A 24-year-old has cycles every 45 to 90 days with occasional very heavy bleeding. She has acne and has gained weight. Pregnancy test is negative and pelvic ultrasound is normal apart from polycystic-appearing ovaries.",
+    "hi": "24 साल की एक स्त्री का चक्र हर 45 से 90 दिन पर आता है और कभी-कभी बहुत भारी रक्तस्राव होता है। उसे मुहाँसे हैं और वज़न बढ़ा है। Pregnancy test negative है और pelvic ultrasound में polycystic-जैसे ovaries के अलावा सब सामान्य है।"
+   },
+   "findings": {
+    "ovulatoryDysfunction": true
+   },
+   "expect": {
+    "codes": [
+     "O"
+    ]
+   },
+   "teach": {
+    "en": "Bleeding that is irregular in timing and flow, with long gaps, points to AUB-O. PCOS is a common cause.",
+    "hi": "जिस रक्तस्राव का समय और मात्रा अनियमित हो और बीच में लंबे अंतराल हों, वह AUB-O की ओर इशारा करता है। PCOS एक आम कारण है।"
+   },
+   "review": "ai_drafted"
+  },
+  {
+   "id": "endometrial-primary",
+   "level": "mbbs",
+   "difficulty": 2,
+   "title": {
+    "en": "Heavy, regular and unexplained",
+    "hi": "भारी, नियमित और अस्पष्ट"
+   },
+   "stem": {
+    "en": "A 33-year-old has heavy periods every 28 days for 2 years. They are predictable and she has breast tenderness before each period, which suggests ovulation. Ultrasound and hysteroscopy are normal and clotting tests are normal.",
+    "hi": "33 साल की एक स्त्री को 2 साल से हर 28 दिन पर भारी माहवारी होती है। यह अनुमानित समय पर आती है और हर माहवारी से पहले स्तनों में दर्द होता है, जो ovulation का संकेत है। Ultrasound और hysteroscopy सामान्य हैं और रक्त जमने की जाँचें सामान्य हैं।"
+   },
+   "findings": {
+    "endometrial": true
+   },
+   "expect": {
+    "codes": [
+     "E"
+    ]
+   },
+   "teach": {
+    "en": "AUB-E is a diagnosis of exclusion: regular cycles, no structural lesion and no bleeding disorder.",
+    "hi": "AUB-E exclusion का निदान है: नियमित चक्र, कोई structural घाव नहीं और कोई रक्तस्राव विकार नहीं।"
+   },
+   "review": "ai_drafted"
+  },
+  {
+   "id": "iatrogenic-injectable",
+   "level": "mbbs",
+   "difficulty": 1,
+   "title": {
+    "en": "Unscheduled bleeding after starting contraception",
+    "hi": "गर्भनिरोधक शुरू करने के बाद अनियमित रक्तस्राव"
+   },
+   "stem": {
+    "en": "A 29-year-old started a progestin-only injectable contraceptive 3 months ago and now has unpredictable, light bleeding. Pregnancy test is negative and pelvic ultrasound is normal.",
+    "hi": "29 साल की एक स्त्री ने 3 महीने पहले progestin-only injectable गर्भनिरोधक शुरू किया और अब अनियमित, हल्का रक्तस्राव हो रहा है। Pregnancy test negative है और pelvic ultrasound सामान्य है।"
+   },
+   "findings": {
+    "iatrogenic": true
+   },
+   "expect": {
+    "codes": [
+     "I"
+    ]
+   },
+   "teach": {
+    "en": "Bleeding linked to a hormonal contraceptive is AUB-I.",
+    "hi": "Hormonal गर्भनिरोधक से जुड़ा रक्तस्राव AUB-I है।"
+   },
+   "review": "ai_drafted"
+  },
+  {
+   "id": "iatrogenic-anticoagulant",
+   "level": "mbbs",
+   "difficulty": 1,
+   "title": {
+    "en": "Heavy periods on warfarin",
+    "hi": "Warfarin पर भारी माहवारी"
+   },
+   "stem": {
+    "en": "A 36-year-old with a mechanical heart valve has had heavy periods since she started warfarin. Her cycles are regular, pelvic ultrasound is normal and she had no heavy bleeding before starting the drug.",
+    "hi": "36 साल की एक स्त्री, जिसके दिल में mechanical valve है, को warfarin शुरू करने के बाद से भारी माहवारी हो रही है। चक्र नियमित हैं, pelvic ultrasound सामान्य है और दवा शुरू करने से पहले भारी रक्तस्राव नहीं था।"
+   },
+   "findings": {
+    "iatrogenic": true
+   },
+   "expect": {
+    "codes": [
+     "I"
+    ]
+   },
+   "teach": {
+    "en": "Bleeding caused by treatment is AUB-I. The anticoagulant is a systemic agent.",
+    "hi": "उपचार से हुआ रक्तस्राव AUB-I है। Anticoagulant एक systemic दवा है।"
+   },
+   "review": "ai_drafted"
+  },
+  {
+   "id": "not-classified-avm",
+   "level": "mbbs",
+   "difficulty": 2,
+   "title": {
+    "en": "Sudden heavy bleeding after a curettage",
+    "hi": "curettage के बाद अचानक भारी रक्तस्राव"
+   },
+   "stem": {
+    "en": "A 27-year-old had a dilatation and curettage 6 weeks ago after a miscarriage and now has sudden heavy bleeding. Pregnancy test is negative. Doppler ultrasound shows a vascular lesion in the myometrium with turbulent high-velocity flow.",
+    "hi": "27 साल की एक स्त्री का 6 हफ़्ते पहले गर्भपात के बाद dilatation and curettage हुआ था और अब अचानक भारी रक्तस्राव हो रहा है। Pregnancy test negative है। Doppler ultrasound में myometrium में तेज़ और अशांत बहाव वाला वाहिकीय घाव दिखता है।"
+   },
+   "findings": {
+    "notClassified": true
+   },
+   "expect": {
+    "codes": [
+     "N"
+    ]
+   },
+   "teach": {
+    "en": "Rare or poorly defined causes such as an arteriovenous malformation are grouped under AUB-N.",
+    "hi": "Arteriovenous malformation जैसे दुर्लभ या अस्पष्ट कारण AUB-N में आते हैं।"
+   },
+   "review": "ai_drafted"
+  },
+  {
+   "id": "ovulatory-plus-hyperplasia",
+   "level": "mbbs",
+   "difficulty": 2,
+   "title": {
+    "en": "Long anovulation and a thick lining",
+    "hi": "लंबी anovulation और मोटा endometrium"
+   },
+   "stem": {
+    "en": "A 48-year-old with obesity has had irregular cycles for years and now has heavy, prolonged bleeding. Ultrasound shows a thickened endometrium and endometrial biopsy reports atypical hyperplasia.",
+    "hi": "48 साल की एक मोटापे वाली स्त्री को सालों से अनियमित चक्र हैं और अब भारी, लंबा रक्तस्राव हो रहा है। Ultrasound में endometrium मोटा दिखता है और endometrial biopsy में atypical hyperplasia आता है।"
+   },
+   "findings": {
+    "ovulatoryDysfunction": true,
+    "malignancy": true
+   },
+   "expect": {
+    "codes": [
+     "M",
+     "O"
+    ]
+   },
+   "teach": {
+    "en": "More than one category can apply. Long-standing anovulation (AUB-O) means oestradiol acts without progesterone, and here the biopsy shows atypical hyperplasia (AUB-M).",
+    "hi": "एक से अधिक श्रेणियाँ लागू हो सकती हैं। लंबे समय की anovulation (AUB-O) में oestradiol बिना progesterone के असर करता है, और यहाँ biopsy में atypical hyperplasia (AUB-M) है।"
+   },
+   "review": "ai_drafted"
+  },
+  {
+   "id": "polyp-plus-fibroid",
+   "level": "mbbs",
+   "difficulty": 2,
+   "title": {
+    "en": "A polyp and a fibroid in the cavity",
+    "hi": "गुहा में polyp और फाइब्रॉइड"
+   },
+   "stem": {
+    "en": "A 36-year-old has heavy periods. Hysteroscopy shows an endometrial polyp and a separate pedunculated fibroid lying free in the uterine cavity.",
+    "hi": "36 साल की एक स्त्री को भारी माहवारी है। Hysteroscopy में एक endometrial polyp और गर्भाशय गुहा में स्वतंत्र पड़ा एक अलग pedunculated फाइब्रॉइड दिखता है।"
+   },
+   "findings": {
+    "polyp": true,
+    "leiomyoma": 0
+   },
+   "expect": {
+    "codes": [
+     "P",
+     "L"
+    ],
+    "leiomyoma": {
+     "group": "SM",
+     "types": [
+      0
+     ]
+    }
+   },
+   "teach": {
+    "en": "Both are listed: AUB-P and AUB-L(SM). A pedunculated intracavitary fibroid is type 0.",
+    "hi": "दोनों लिखे जाते हैं: AUB-P और AUB-L(SM)। Pedunculated intracavitary फाइब्रॉइड type 0 है।"
+   },
+   "review": "ai_drafted"
+  },
+  {
+   "id": "adenomyosis-plus-subserosal",
+   "level": "mbbs",
+   "difficulty": 2,
+   "title": {
+    "en": "Adenomyosis and a fibroid on the outer surface",
+    "hi": "Adenomyosis और बाहरी सतह पर फाइब्रॉइड"
+   },
+   "stem": {
+    "en": "A 43-year-old has heavy, painful periods and regular cycles. MRI shows features of adenomyosis and, separately, a 4 cm fibroid on the outer surface of the uterus with less than half of it inside the wall.",
+    "hi": "43 साल की एक स्त्री को भारी, दर्दनाक माहवारी और नियमित चक्र हैं। MRI में adenomyosis की विशेषताएँ दिखती हैं और अलग से गर्भाशय की बाहरी सतह पर 4 cm का फाइब्रॉइड है जिसका आधे से कम हिस्सा दीवार के अंदर है।"
+   },
+   "findings": {
+    "adenomyosis": true,
+    "leiomyoma": 6
+   },
+   "expect": {
+    "codes": [
+     "A",
+     "L"
+    ],
+    "leiomyoma": {
+     "group": "O",
+     "types": [
+      6
+     ]
+    }
+   },
+   "teach": {
+    "en": "Both findings are listed: AUB-A and AUB-L(O). A subserosal fibroid with less than 50% intramural is type 6.",
+    "hi": "दोनों निष्कर्ष लिखे जाते हैं: AUB-A और AUB-L(O)। जिस subserosal फाइब्रॉइड का 50% से कम हिस्सा दीवार के अंदर हो, वह type 6 है।"
+   },
+   "review": "ai_drafted"
+  },
+  {
+   "id": "ovulatory-plus-coagulopathy",
+   "level": "mbbs",
+   "difficulty": 2,
+   "title": {
+    "en": "Irregular heavy periods two years after menarche",
+    "hi": "पहली माहवारी के 2 साल बाद अनियमित भारी माहवारी"
+   },
+   "stem": {
+    "en": "A 14-year-old, 2 years after menarche, has irregular cycles and episodes of heavy bleeding that needed a hospital visit. She has a low haemoglobin and a confirmed bleeding disorder. Pelvic ultrasound is normal.",
+    "hi": "14 साल की एक लड़की को पहली माहवारी के 2 साल बाद अनियमित चक्र हैं और भारी रक्तस्राव के दौरे आए जिनके लिए अस्पताल जाना पड़ा। उसका haemoglobin कम है और रक्तस्राव विकार की पुष्टि हुई है। Pelvic ultrasound सामान्य है।"
+   },
+   "findings": {
+    "ovulatoryDysfunction": true,
+    "coagulopathy": true
+   },
+   "expect": {
+    "codes": [
+     "C",
+     "O"
+    ]
+   },
+   "teach": {
+    "en": "In adolescents the immature hypothalamic-pituitary-ovarian axis often gives ovulatory dysfunction (AUB-O), and bleeding disorders (AUB-C) are common. Look for both.",
+    "hi": "किशोरियों में अपरिपक्व hypothalamic-pituitary-ovarian axis अक्सर ovulatory dysfunction (AUB-O) देती है, और रक्तस्राव विकार (AUB-C) आम हैं। दोनों खोजें।"
+   },
+   "review": "ai_drafted"
+  }
+ ]
+}

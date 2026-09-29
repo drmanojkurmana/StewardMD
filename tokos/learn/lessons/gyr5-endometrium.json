@@ -1,0 +1,252 @@
+{
+  "id": "gyr5-endometrium",
+  "unit": "gyr5",
+  "level": "resident",
+  "minutes": 6,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Endometrial cancer: FIGO 2023 and the molecular class",
+    "hi": "एंडोमेट्रियल कैंसर: FIGO 2023 और आणविक वर्ग"
+  },
+  "idea": {
+    "en": "Stage by FIGO 2023, add the molecular class, and let the class set adjuvant treatment: de-escalate POLEmut, intensify p53abn.",
+    "hi": "FIGO 2023 से स्टेज तय करें, आणविक वर्ग जोड़ें, और वर्ग को सहायक इलाज तय करने दें: POLEmut में कम, p53abn में ज़्यादा।"
+  },
+  "see": {
+    "diagram": "diagrams/gyr5-endometrium.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A wheel of four coloured segments around a small uterus. Green has waving lines, blue has short bars, grey is plain and red has a jagged line.",
+      "hi": "एक छोटे गर्भाशय के चारों ओर चार रंगीन खंडों का पहिया। हरे में लहरदार रेखाएँ, नीले में छोटी पट्टियाँ, भूरा सादा और लाल में दाँतेदार रेखा है।"
+    },
+    "caption": {
+      "en": "Four molecular classes: POLE-mutated, mismatch repair deficient, no specific profile, and p53 abnormal.",
+      "hi": "चार आणविक वर्ग: POLE म्यूटेटेड, मिसमैच रिपेयर डेफ़िशिएंट, कोई विशिष्ट प्रोफ़ाइल नहीं, और p53 असामान्य।"
+    },
+    "credit": "Original diagram, Tokos (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.66,
+        "y": 0.26,
+        "label": {
+          "en": "POLEmut",
+          "hi": "POLEmut वर्ग"
+        },
+        "note": {
+          "en": "Excellent outlook. In early stage, adjuvant treatment can usually be omitted.",
+          "hi": "बहुत अच्छा पूर्वानुमान। शुरुआती स्टेज में सहायक इलाज आम तौर पर छोड़ा जा सकता है।"
+        }
+      },
+      {
+        "x": 0.7,
+        "y": 0.75,
+        "label": {
+          "en": "MMRd",
+          "hi": "MMRd वर्ग"
+        },
+        "note": {
+          "en": "Mismatch repair deficient. It responds to immune checkpoint inhibitors in advanced disease.",
+          "hi": "मिसमैच रिपेयर डेफ़िशिएंट। उन्नत रोग में इम्यून चेकपॉइंट इनहिबिटर पर असर करता है।"
+        }
+      },
+      {
+        "x": 0.33,
+        "y": 0.75,
+        "label": {
+          "en": "NSMP",
+          "hi": "NSMP वर्ग"
+        },
+        "note": {
+          "en": "No specific molecular profile. Grade and oestrogen receptor status guide risk.",
+          "hi": "कोई विशिष्ट आणविक प्रोफ़ाइल नहीं। ग्रेड और एस्ट्रोजन रिसेप्टर स्थिति जोखिम तय करती है।"
+        }
+      },
+      {
+        "x": 0.33,
+        "y": 0.25,
+        "label": {
+          "en": "p53abn",
+          "hi": "p53abn वर्ग"
+        },
+        "note": {
+          "en": "Aggressive. Stage I to II with invasion is high risk, so give chemotherapy with radiotherapy.",
+          "hi": "आक्रामक। स्टेज I से II में इन्वेज़न हो तो ऊँचा जोखिम है, इसलिए रेडियोथेरेपी के साथ कीमोथेरेपी दें।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.5,
+        "label": {
+          "en": "Uterus",
+          "hi": "गर्भाशय"
+        },
+        "note": {
+          "en": "Total hysterectomy with salpingo-oophorectomy and sentinel node biopsy is the standard.",
+          "hi": "टोटल हिस्टेरेक्टॉमी, सैल्पिंगो-ऊफ़ोरेक्टॉमी और सेंटिनल नोड बायोप्सी मानक है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "FIGO 2023 stage I is confined to the uterine corpus. Stage II is cervical stroma invasion, substantial [[lvsi|LVSI]], or an aggressive type with myometrial invasion.",
+        "hi": "FIGO 2023 में स्टेज I गर्भाशय के कॉर्पस तक सीमित है। स्टेज II में ग्रीवा स्ट्रोमा का इन्वेज़न, ज़्यादा [[lvsi|LVSI]], या आक्रामक प्रकार के साथ मायोमेट्रियल इन्वेज़न आता है।"
+      },
+      {
+        "en": "Aggressive types are grade 3 endometrioid, serous, clear cell, undifferentiated, mixed, mesonephric-like, gastrointestinal mucinous and carcinosarcoma.",
+        "hi": "आक्रामक प्रकार हैं: ग्रेड 3 एंडोमेट्रिऑइड, सीरस, क्लियर सेल, अविभेदित, मिश्रित, मेसोनेफ़्रिक-जैसा, गैस्ट्रोइंटेस्टाइनल म्यूसिनस और कार्सिनोसार्कोमा।"
+      },
+      {
+        "en": "Do [[molecular-class|molecular classification]] in all types (ESGO 2025). It can change the stage, for example IAmPOLEmut or IICmp53abn.",
+        "hi": "सभी प्रकारों में [[molecular-class|आणविक वर्गीकरण]] कराएँ (ESGO 2025)। यह स्टेज बदल सकता है, जैसे IAmPOLEmut या IICmp53abn।"
+      },
+      {
+        "en": "Surgery is total hysterectomy with bilateral salpingo-oophorectomy. Do a [[sentinel-node|sentinel node]] biopsy in presumed uterus-confined disease. Minimally invasive surgery is preferred, and morcellation or spillage must be avoided.",
+        "hi": "सर्जरी है द्विपक्षीय सैल्पिंगो-ऊफ़ोरेक्टॉमी के साथ टोटल हिस्टेरेक्टॉमी। गर्भाशय तक सीमित माने गए रोग में [[sentinel-node|सेंटिनल नोड]] बायोप्सी करें। न्यूनतम आक्रामक सर्जरी पसंदीदा है, और मॉर्सेलेशन या ट्यूमर का फैलना टालें।"
+      },
+      {
+        "en": "Do an infracolic omentectomy only for serous carcinoma, carcinosarcoma and undifferentiated carcinoma.",
+        "hi": "इन्फ्राकोलिक ओमेंटेक्टॉमी सिर्फ़ सीरस कार्सिनोमा, कार्सिनोसार्कोमा और अविभेदित कार्सिनोमा में करें।"
+      },
+      {
+        "en": "Adjuvant care follows the risk group. Low risk: none. Intermediate: vaginal brachytherapy, or none if under 60 or low grade. High-intermediate: EBRT, or brachytherapy if node negative.",
+        "hi": "सहायक इलाज जोखिम समूह से तय होता है। कम: कुछ नहीं। मध्यम: योनि ब्रैकीथेरेपी, या 60 से कम उम्र या कम ग्रेड में कुछ नहीं। उच्च-मध्यम: EBRT, या नोड नेगेटिव हो तो ब्रैकीथेरेपी।"
+      },
+      {
+        "en": "High risk, such as p53abn or high-grade NSMP with invasion, gets EBRT with concurrent and adjuvant chemotherapy, or chemotherapy with or without brachytherapy.",
+        "hi": "उच्च जोखिम, जैसे p53abn या इन्वेज़न वाला उच्च-ग्रेड NSMP, में समवर्ती और सहायक कीमोथेरेपी के साथ EBRT, या कीमोथेरेपी ब्रैकीथेरेपी के साथ या बिना दी जाती है।"
+      },
+      {
+        "en": "In advanced disease with MMRd, give an immune checkpoint inhibitor with carboplatin and paclitaxel, then maintenance. In non-MMRd disease give carboplatin and paclitaxel, and pembrolizumab with lenvatinib after chemotherapy.",
+        "hi": "MMRd के उन्नत रोग में कार्बोप्लैटिन और पैक्लिटैक्सेल के साथ इम्यून चेकपॉइंट इनहिबिटर दें, फिर रखरखाव। नॉन-MMRd में कार्बोप्लैटिन और पैक्लिटैक्सेल दें, और कीमोथेरेपी के बाद पेम्ब्रोलिज़ुमैब के साथ लेनवाटिनिब।"
+      }
+    ],
+    "analogy": {
+      "en": "Grade and stage are the map. The molecular class is the weather report: it tells you how hard to prepare.",
+      "hi": "ग्रेड और स्टेज नक़्शा हैं। आणविक वर्ग मौसम की रिपोर्ट है: यह बताती है कि कितनी तैयारी चाहिए।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Serous, clear cell or carcinosarcoma histology means an aggressive type at any depth.",
+      "hi": "सीरस, क्लियर सेल या कार्सिनोसार्कोमा हिस्टोलॉजी किसी भी गहराई पर आक्रामक प्रकार है।"
+    },
+    {
+      "en": "Substantial LVSI moves stage I to stage II in non-aggressive types.",
+      "hi": "गैर-आक्रामक प्रकारों में ज़्यादा LVSI स्टेज I को स्टेज II में ले जाता है।"
+    },
+    {
+      "en": "Loss of mismatch repair proteins on the biopsy marks an MMRd tumour.",
+      "hi": "बायोप्सी में मिसमैच रिपेयर प्रोटीन का न होना MMRd ट्यूमर दिखाता है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Send the biopsy or specimen for the molecular class and record it with the stage.",
+      "hi": "बायोप्सी या नमूना आणविक वर्ग के लिए भेजें और उसे स्टेज के साथ दर्ज करें।"
+    },
+    {
+      "en": "Plan sentinel node staging and avoid morcellation.",
+      "hi": "सेंटिनल नोड स्टेजिंग की योजना बनाएँ और मॉर्सेलेशन टालें।"
+    },
+    {
+      "en": "See the Oncology module: Carboplatin plus Paclitaxel for Endometrial Carcinoma, dostarlimab or pembrolizumab for dMMR, and Lenvatinib plus Pembrolizumab (KEYNOTE-775).",
+      "hi": "ऑन्कोलॉजी मॉड्यूल देखें: एंडोमेट्रियल कार्सिनोमा में कार्बोप्लैटिन प्लस पैक्लिटैक्सेल, dMMR में डोस्टारलिमैब या पेम्ब्रोलिज़ुमैब, और लेनवाटिनिब प्लस पेम्ब्रोलिज़ुमैब (KEYNOTE-775)।"
+    }
+  ],
+  "remember": {
+    "en": "Stage, grade, LVSI and molecular class together set the risk group and the adjuvant plan.",
+    "hi": "स्टेज, ग्रेड, LVSI और आणविक वर्ग मिलकर जोखिम समूह और सहायक योजना तय करते हैं।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which are the four molecular classes of endometrial cancer?",
+        "hi": "एंडोमेट्रियल कैंसर के चार आणविक वर्ग कौन-से हैं?"
+      },
+      "o": [
+        {
+          "en": "POLEmut, MMRd, NSMP, p53abn",
+          "hi": "POLEmut, MMRd, NSMP, p53abn (चार आणविक वर्ग)"
+        },
+        {
+          "en": "ER, PR, HER2, Ki67",
+          "hi": "ER, PR, HER2, Ki67 मार्कर"
+        },
+        {
+          "en": "Type I to type IV",
+          "hi": "टाइप I से टाइप IV"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "ESGO 2025 says to classify all endometrial carcinomas this way.",
+        "hi": "ESGO 2025 सभी एंडोमेट्रियल कार्सिनोमा को ऐसे वर्गीकृत करने को कहता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which histologies get an infracolic omentectomy in clinical stage I or II?",
+        "hi": "क्लिनिकल स्टेज I या II में किन हिस्टोलॉजी में इन्फ्राकोलिक ओमेंटेक्टॉमी की जाती है?"
+      },
+      "o": [
+        {
+          "en": "All endometrioid cancers",
+          "hi": "सभी एंडोमेट्रिऑइड कैंसर"
+        },
+        {
+          "en": "Serous, carcinosarcoma and undifferentiated",
+          "hi": "सीरस, कार्सिनोसार्कोमा और अविभेदित"
+        },
+        {
+          "en": "None",
+          "hi": "कोई नहीं"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "It is not necessary in other histological types.",
+        "hi": "यह दूसरे हिस्टोलॉजिकल प्रकारों में ज़रूरी नहीं है।"
+      }
+    },
+    {
+      "q": {
+        "en": "What is first-line for advanced MMRd endometrial cancer in ESGO 2025?",
+        "hi": "ESGO 2025 में उन्नत MMRd एंडोमेट्रियल कैंसर की पहली पंक्ति क्या है?"
+      },
+      "o": [
+        {
+          "en": "Immune checkpoint inhibitor with carboplatin and paclitaxel, then maintenance",
+          "hi": "कार्बोप्लैटिन और पैक्लिटैक्सेल के साथ इम्यून चेकपॉइंट इनहिबिटर, फिर रखरखाव"
+        },
+        {
+          "en": "Hormone therapy alone",
+          "hi": "सिर्फ़ हार्मोन थेरेपी"
+        },
+        {
+          "en": "Observation",
+          "hi": "निगरानी"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "The recommendation is graded I, A.",
+        "hi": "यह सिफ़ारिश I, A दर्जे की है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "gy-oncology"
+  },
+  "glossary": [
+    "lvsi",
+    "molecular-class",
+    "sentinel-node"
+  ],
+  "sources": [
+    "Berek JS, Matias-Guiu X, Creutzberg C, et al. FIGO staging of endometrial cancer: 2023. Int J Gynaecol Obstet 2023. PMID 37337978",
+    "ESGO-ESTRO-ESP guidelines for the management of patients with endometrial carcinoma: update 2025. Lancet Oncol 2025. PMID 40744042"
+  ]
+}

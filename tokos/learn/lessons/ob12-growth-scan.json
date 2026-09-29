@@ -1,0 +1,194 @@
+{
+  "id": "ob12-growth-scan",
+  "unit": "ob12",
+  "level": "mbbs",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "The growth scan: the right plane gives the right number",
+    "hi": "ग्रोथ स्कैन: सही प्लेन से सही नाप"
+  },
+  "idea": {
+    "en": "[[biometry]] measures the head, belly and thigh bone, and each needs a standard plane. A wrong plane gives a wrong number and a wrong weight estimate.",
+    "hi": "[[biometry]] सिर, पेट और जाँघ की हड्डी नापती है, और हर एक को मानक प्लेन चाहिए। ग़लत प्लेन से ग़लत नाप और ग़लत वज़न का अनुमान मिलता है।"
+  },
+  "see": {
+    "diagram": "diagrams/ob12-growth-scan.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A large oval fetal head cross-section with a dashed midline, two blue thalami in the middle, a small cavity of the septum, and a red measuring line across. On the right a purple long bone and a gold circle for the belly.",
+      "hi": "बड़े अंडाकार भ्रूण-सिर के अनुप्रस्थ काट में बिंदीदार मध्य रेखा, बीच में दो नीले थैलेमस, सेप्टम की छोटी गुहा और आड़ी लाल नापने वाली रेखा। दाईं ओर बैंगनी लंबी हड्डी और पेट के लिए सुनहरा गोला।"
+    },
+    "caption": {
+      "en": "Head, femur and abdomen: three numbers for the weight estimate.",
+      "hi": "सिर, जाँघ की हड्डी और पेट: वज़न के अनुमान के लिए तीन नाप।"
+    },
+    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.417,
+        "y": 0.5,
+        "label": {
+          "en": "Trans-thalamic plane",
+          "hi": "ट्रांस-थैलेमिक प्लेन"
+        },
+        "note": {
+          "en": "The head plane for HC and BPD: symmetrical head, midline, the thalami and the cavum septum pellucidum.",
+          "hi": "HC और BPD का सिर वाला प्लेन: सममित सिर, मध्य रेखा, थैलेमस और कैवम सेप्टम पेल्युसिडम।"
+        }
+      },
+      {
+        "x": 0.313,
+        "y": 0.387,
+        "label": {
+          "en": "Biparietal diameter",
+          "hi": "बाइपैराइटल व्यास"
+        },
+        "note": {
+          "en": "Measured across the head at this plane.",
+          "hi": "इसी प्लेन पर सिर के आर-पार नापा जाता है।"
+        }
+      },
+      {
+        "x": 0.75,
+        "y": 0.5,
+        "label": {
+          "en": "Femur length",
+          "hi": "फ़ीमर की लंबाई"
+        },
+        "note": {
+          "en": "The long bone measured with the shaft horizontal to the beam.",
+          "hi": "लंबी हड्डी को शाफ़्ट बीम के लंबवत रखकर नापा जाता है।"
+        }
+      },
+      {
+        "x": 0.896,
+        "y": 0.5,
+        "label": {
+          "en": "Abdominal circumference",
+          "hi": "पेट की परिधि"
+        },
+        "note": {
+          "en": "Round section at the stomach and the portal vein. It is the most sensitive for growth restriction.",
+          "hi": "पेट और पोर्टल शिरा के स्तर पर गोल काट। वृद्धि अवरोध के लिए सबसे संवेदनशील।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "A tilted plane makes the head look too small or too round. Real training images teach you what a correct plane looks like.",
+        "hi": "झुका प्लेन सिर को बहुत छोटा या बहुत गोल दिखाता है। असली प्रशिक्षण चित्र सही प्लेन कैसा दिखता है सिखाते हैं।"
+      },
+      {
+        "en": "The estimated fetal weight is worked out from the head, belly and femur, so errors add up.",
+        "hi": "अनुमानित भ्रूण वज़न सिर, पेट और फ़ीमर से निकलता है, इसलिए त्रुटियाँ जुड़ जाती हैं।"
+      },
+      {
+        "en": "In diabetes the Indian guideline asks for growth scans at 28 to 30 and 34 to 36 weeks, at least 3 weeks apart.",
+        "hi": "डायबिटीज़ में भारतीय गाइडलाइन 28 से 30 और 34 से 36 सप्ताह पर, कम से कम 3 सप्ताह के अंतर पर, ग्रोथ स्कैन माँगती है।"
+      }
+    ],
+    "analogy": {
+      "en": "It is like measuring a wall from the right corner. If you start at the wrong point, every number after it is off.",
+      "hi": "यह सही कोने से दीवार नापने जैसा है। ग़लत बिंदु से शुरू करें तो बाद की हर नाप ग़लत होगी।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Correct head plane: symmetrical, thalami visible, cavum septum pellucidum seen, cerebellum not seen.",
+      "hi": "सही सिर प्लेन: सममित, थैलेमस दिखते हैं, कैवम सेप्टम पेल्युसिडम दिखता है, सेरिबेलम नहीं दिखता।"
+    },
+    {
+      "en": "Fetal weight below the 10th centile, or a falling growth curve, or a large baby in diabetes, needs review.",
+      "hi": "भ्रूण वज़न 10वें सेंटाइल से कम, गिरता ग्रोथ कर्व, या डायबिटीज़ में बड़ा बच्चा, समीक्षा माँगता है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Use the fetal planes and head biometry clinics to practise choosing correct planes.",
+      "hi": "सही प्लेन चुनने के अभ्यास के लिए भ्रूण प्लेन और सिर बायोमेट्री क्लिनिक इस्तेमाल करें।"
+    },
+    {
+      "en": "Plot every measurement on a growth chart and plot it against gestation, not the last period alone.",
+      "hi": "हर नाप को ग्रोथ चार्ट पर, अवधि के विरुद्ध, अंकित करें, केवल आख़िरी माहवारी के विरुद्ध नहीं।"
+    },
+    {
+      "en": "Scans must never be used to determine the sex of the fetus.",
+      "hi": "स्कैन का इस्तेमाल भ्रूण का लिंग पता करने के लिए कभी नहीं होना चाहिए।"
+    }
+  ],
+  "remember": {
+    "en": "Right plane, right number. Head at the thalami, belly at the stomach and portal vein, femur horizontal. Never state the sex.",
+    "hi": "सही प्लेन, सही नाप। सिर थैलेमस पर, पेट अमाशय और पोर्टल शिरा पर, फ़ीमर क्षैतिज। लिंग कभी न बताएँ।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which structures show the correct head plane for HC and BPD?",
+        "hi": "HC और BPD के लिए सही सिर प्लेन कौन सी संरचनाएँ दिखाती हैं?"
+      },
+      "o": [
+        {
+          "en": "Thalami and cavum septum pellucidum",
+          "hi": "थैलेमस और कैवम सेप्टम पेल्युसिडम"
+        },
+        {
+          "en": "Kidneys and bladder",
+          "hi": "गुर्दे और मूत्राशय"
+        },
+        {
+          "en": "Four-chamber heart",
+          "hi": "हृदय के चार कक्ष"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "This is the trans-thalamic plane.",
+        "hi": "यह ट्रांस-थैलेमिक प्लेन है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which measurement is most sensitive for growth restriction?",
+        "hi": "वृद्धि अवरोध के लिए कौन सी नाप सबसे संवेदनशील है?"
+      },
+      "o": [
+        {
+          "en": "Biparietal diameter",
+          "hi": "बाइपैराइटल व्यास"
+        },
+        {
+          "en": "Abdominal circumference",
+          "hi": "पेट की परिधि"
+        },
+        {
+          "en": "Nuchal fold",
+          "hi": "न्यूकल फ़ोल्ड"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "The liver and abdomen shrink first when the placenta fails.",
+        "hi": "प्लेसेंटा विफल होने पर लीवर और पेट पहले सिकुड़ते हैं।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "ob-fetal",
+    "clinic": "fetal-planes",
+    "tool": "efw"
+  },
+  "glossary": [
+    "biometry"
+  ],
+  "sources": [
+    "Ministry of Health and Family Welfare. National Guidelines for Diagnosis and Management of Gestational Diabetes Mellitus, 2018 (growth scans at 28 to 30 and 34 to 36 weeks).",
+    "Reviewer to confirm plane criteria against the ISUOG Practice Guidelines on the routine mid-trimester scan, which could not be opened."
+  ],
+  "competencies": [
+    "OG8.8"
+  ]
+}

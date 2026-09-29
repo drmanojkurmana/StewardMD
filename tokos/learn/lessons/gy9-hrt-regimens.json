@@ -1,0 +1,236 @@
+{
+  "id": "gy9-hrt-regimens",
+  "unit": "gy9",
+  "level": "mbbs",
+  "minutes": 6,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Choosing the regimen",
+    "hi": "उपयुक्त रेजीमेन चुनना"
+  },
+  "idea": {
+    "en": "With a uterus, give estrogen with a progestogen. Without a uterus, estrogen alone. For vaginal symptoms only, use local estrogen. If hormones are unsuitable, there are non-hormonal options.",
+    "hi": "गर्भाशय हो तो एस्ट्रोजन के साथ प्रोजेस्टोजन दें। गर्भाशय न हो तो केवल एस्ट्रोजन। केवल योनि के लक्षण हों तो स्थानीय एस्ट्रोजन। हार्मोन उपयुक्त न हों तो बिना हार्मोन के विकल्प हैं।"
+  },
+  "see": {
+    "diagram": "diagrams/gy9-regimen.svg",
+    "w": 480,
+    "h": 236,
+    "alt": {
+      "en": "A decision tree. A small circle at the top splits into three branches. Left: a uterus, then a blue and an amber circle. Middle: a crossed-out dashed uterus, then a single blue circle. Right: a blue drop, then a small blue circle.",
+      "hi": "एक निर्णय वृक्ष। ऊपर छोटे गोले से तीन शाखाएँ। बाएँ: गर्भाशय, फिर एक नीला और एक पीला गोला। बीच: कटा हुआ बिंदुदार गर्भाशय, फिर एक नीला गोला। दाएँ: नीली बूँद, फिर छोटा नीला गोला।"
+    },
+    "caption": {
+      "en": "Blue is estrogen, amber is a progestogen. The uterus decides whether to add the amber one.",
+      "hi": "नीला एस्ट्रोजन है, पीला प्रोजेस्टोजन। गर्भाशय तय करता है कि पीला जोड़ना है या नहीं।"
+    },
+    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.188,
+        "y": 0.864,
+        "label": {
+          "en": "Uterus present",
+          "hi": "गर्भाशय मौजूद"
+        },
+        "note": {
+          "en": "Estrogen plus a progestogen. Unopposed estrogen raises endometrial cancer risk 2 to 10 times. Continuous combined regimens protect best.",
+          "hi": "एस्ट्रोजन के साथ प्रोजेस्टोजन। अकेला एस्ट्रोजन एंडोमेट्रियल कैंसर का जोखिम 2 से 10 गुना बढ़ाता है। निरंतर संयुक्त रेजीमेन सबसे अच्छी सुरक्षा देते हैं।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.864,
+        "label": {
+          "en": "No uterus",
+          "hi": "गर्भाशय नहीं"
+        },
+        "note": {
+          "en": "After hysterectomy, estrogen alone is enough. No progestogen is needed.",
+          "hi": "हिस्टेरेक्टॉमी के बाद केवल एस्ट्रोजन काफ़ी है। प्रोजेस्टोजन की ज़रूरत नहीं।"
+        }
+      },
+      {
+        "x": 0.813,
+        "y": 0.864,
+        "label": {
+          "en": "Vaginal symptoms only",
+          "hi": "केवल योनि के लक्षण"
+        },
+        "note": {
+          "en": "Low-dose local estrogen daily for 2 to 4 weeks, then 2 to 3 times a week. No progestogen needed. Investigate any unscheduled bleeding.",
+          "hi": "कम खुराक का स्थानीय एस्ट्रोजन 2 से 4 हफ़्ते रोज़, फिर हफ़्ते में 2 से 3 बार। प्रोजेस्टोजन की ज़रूरत नहीं। अनियोजित रक्तस्राव की जाँच करें।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.127,
+        "label": {
+          "en": "Start here",
+          "hi": "यहाँ से शुरू"
+        },
+        "note": {
+          "en": "Ask: uterus or no uterus? Systemic symptoms or only vaginal ones? Any contraindication?",
+          "hi": "पूछें: गर्भाशय है या नहीं? सिस्टमिक लक्षण हैं या केवल योनि के? कोई प्रतिरोध?"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Uterus present: give estrogen with a progestogen (cyclic or continuous). The progestogen removes the endometrial cancer risk that unopposed estrogen carries.",
+        "hi": "गर्भाशय मौजूद: एस्ट्रोजन के साथ प्रोजेस्टोजन दें (चक्रीय या निरंतर)। प्रोजेस्टोजन अकेले एस्ट्रोजन से होने वाले एंडोमेट्रियल कैंसर के जोखिम को हटा देता है।"
+      },
+      {
+        "en": "Uterus absent: estrogen alone.",
+        "hi": "गर्भाशय नहीं: केवल एस्ट्रोजन।"
+      },
+      {
+        "en": "Route: transdermal estrogen gives stable blood levels and is preferred in women with obesity, metabolic syndrome or diabetes, who have a higher thrombosis risk.",
+        "hi": "मार्ग: ट्रांसडर्मल एस्ट्रोजन रक्त में स्थिर स्तर देता है और मोटापे, मेटाबोलिक सिंड्रोम या डायबिटीज़ वाली महिलाओं में बेहतर है, जिनमें थ्रोम्बोसिस का जोखिम ज़्यादा होता है।"
+      },
+      {
+        "en": "Only GSM: local vaginal estrogen. It needs no progestogen. Non-hormonal moisturisers and lubricants suit mild cases.",
+        "hi": "केवल GSM: स्थानीय योनि एस्ट्रोजन। इसमें प्रोजेस्टोजन नहीं चाहिए। हल्के मामलों में बिना हार्मोन के मॉइश्चराइज़र और लुब्रिकेंट काफ़ी हैं।"
+      },
+      {
+        "en": "Hormones not suitable: for hot flushes use SSRIs or SNRIs (paroxetine, venlafaxine), gabapentinoids, or an NK3 antagonist such as fezolinetant. Tibolone 2.5 mg daily is another option.",
+        "hi": "हार्मोन उपयुक्त न हों: गर्म लहरों के लिए SSRI या SNRI (पैरोक्सेटीन, वेनलाफ़ैक्सिन), गैबापेंटिनॉइड, या फ़ेज़ोलिनेटैंट जैसा NK3 एंटागोनिस्ट लें। टिबोलोन 2.5 mg रोज़ एक और विकल्प है।"
+      }
+    ],
+    "analogy": {
+      "en": "Estrogen is the accelerator for the uterine lining, and the progestogen is the brake. Without a lining there is nothing to accelerate, so the brake is not needed.",
+      "hi": "एस्ट्रोजन गर्भाशय की परत के लिए एक्सीलेरेटर है और प्रोजेस्टोजन ब्रेक। परत ही न हो तो तेज़ करने को कुछ नहीं, इसलिए ब्रेक की ज़रूरत नहीं।"
+    }
+  },
+  "spot": [
+    {
+      "en": "After a hysterectomy, ask whether it was total. If any uterus remains, treat her as a woman with a uterus.",
+      "hi": "हिस्टेरेक्टॉमी के बाद पूछें कि वह पूरी थी या नहीं। गर्भाशय का कोई हिस्सा बचा हो तो उसे गर्भाशय वाली महिला की तरह मानें।"
+    },
+    {
+      "en": "Unscheduled bleeding on therapy needs transvaginal ultrasound and, if indicated, endometrial biopsy.",
+      "hi": "थेरेपी पर अनियोजित रक्तस्राव में ट्रांसवजाइनल अल्ट्रासाउंड और ज़रूरत हो तो एंडोमेट्रियल बायोप्सी चाहिए।"
+    },
+    {
+      "en": "Hormone therapy is not a contraceptive in the perimenopause.",
+      "hi": "पेरीमेनोपॉज़ में हार्मोन थेरेपी गर्भनिरोधक नहीं है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Prescribe by three questions: uterus or not, what symptoms, what contraindications.",
+      "hi": "तीन सवालों से लिखें: गर्भाशय है या नहीं, कौन से लक्षण, कौन से प्रतिरोध।"
+    },
+    {
+      "en": "Book a review at 3 months and then yearly.",
+      "hi": "3 महीने पर और फिर हर साल समीक्षा तय करें।"
+    }
+  ],
+  "remember": {
+    "en": "Uterus: add progestogen. No uterus: estrogen alone. Vaginal symptoms only: local estrogen, no progestogen.",
+    "hi": "गर्भाशय है: प्रोजेस्टोजन जोड़ें। गर्भाशय नहीं: केवल एस्ट्रोजन। केवल योनि के लक्षण: स्थानीय एस्ट्रोजन, प्रोजेस्टोजन नहीं।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "A woman with an intact uterus needs systemic hormone therapy. What is right?",
+        "hi": "अक्षत गर्भाशय वाली महिला को सिस्टमिक हार्मोन थेरेपी चाहिए। क्या सही है?"
+      },
+      "o": [
+        {
+          "en": "Estrogen alone",
+          "hi": "केवल एस्ट्रोजन"
+        },
+        {
+          "en": "Estrogen plus a progestogen",
+          "hi": "एस्ट्रोजन के साथ प्रोजेस्टोजन"
+        },
+        {
+          "en": "Progestogen alone",
+          "hi": "केवल प्रोजेस्टोजन"
+        },
+        {
+          "en": "No hormones ever",
+          "hi": "कभी हार्मोन नहीं"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Unopposed estrogen raises endometrial cancer risk 2 to 10 times, so a progestogen is added.",
+        "hi": "अकेला एस्ट्रोजन एंडोमेट्रियल कैंसर का जोखिम 2 से 10 गुना बढ़ाता है, इसलिए प्रोजेस्टोजन जोड़ा जाता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "A woman has only vaginal dryness and painful sex. Which treatment does not need a progestogen?",
+        "hi": "एक महिला को केवल योनि सूखापन और दर्दनाक संभोग है। किस इलाज में प्रोजेस्टोजन नहीं चाहिए?"
+      },
+      "o": [
+        {
+          "en": "Low-dose local vaginal estrogen",
+          "hi": "कम खुराक का स्थानीय योनि एस्ट्रोजन"
+        },
+        {
+          "en": "High-dose oral estrogen",
+          "hi": "अधिक खुराक का मौखिक एस्ट्रोजन"
+        },
+        {
+          "en": "Oral estrogen alone in a woman with a uterus",
+          "hi": "गर्भाशय वाली महिला में केवल मौखिक एस्ट्रोजन"
+        },
+        {
+          "en": "Testosterone",
+          "hi": "टेस्टोस्टेरोन"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Low-dose local estrogen does not need progestogen protection.",
+        "hi": "कम खुराक का स्थानीय एस्ट्रोजन प्रोजेस्टोजन सुरक्षा नहीं माँगता।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which route is preferred for a woman with obesity and diabetes?",
+        "hi": "मोटापे और डायबिटीज़ वाली महिला के लिए कौन सा मार्ग बेहतर है?"
+      },
+      "o": [
+        {
+          "en": "Transdermal estrogen",
+          "hi": "ट्रांसडर्मल एस्ट्रोजन"
+        },
+        {
+          "en": "Oral estrogen only",
+          "hi": "केवल मौखिक एस्ट्रोजन"
+        },
+        {
+          "en": "Injection every week",
+          "hi": "हर हफ़्ते इंजेक्शन"
+        },
+        {
+          "en": "No route is preferred",
+          "hi": "कोई मार्ग बेहतर नहीं"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Transdermal estrogen is preferred where thrombosis and metabolic risk are higher.",
+        "hi": "जहाँ थ्रोम्बोसिस और मेटाबोलिक जोखिम ज़्यादा हो वहाँ ट्रांसडर्मल एस्ट्रोजन बेहतर है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "gy-menstrual"
+  },
+  "glossary": [
+    "unopposed-estrogen"
+  ],
+  "sources": [
+    "Meeta M, Anuradha M, Ashraf AB, Aggarwal K, Digumarti L, Singh T. Clinical practice guidelines for menopause: an executive summary and recommendations. Indian Menopause Society 2026. J Midlife Health 2026:S12-S116. doi:10.4103/jmh.jmh_302_25."
+  ],
+  "competencies": [
+    "OG32.1"
+  ]
+}

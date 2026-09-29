@@ -1,0 +1,3956 @@
+{
+  "_comment": "CliniX Obstetrics and Gynaecology skill pack. History, examination in pregnancy, speculum and bimanual examination, counselling, consent, and the PPH and eclampsia team stations. Shared across the obgyn-osce module; a station is a selection of these skills plus a clock. Content is ai_drafted, English only (CliniX has no Hindi layer), and every skill cites the guideline or reference that was opened while authoring it.",
+  "version": 1,
+  "system": "obgyn",
+  "skills": {
+    "skill.hx.obg.booking_lmp": {
+      "id": "skill.hx.obg.booking_lmp",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Dates and the current pregnancy",
+      "oneLine": "The first day of the last period, the EDD, and the symptoms that need action",
+      "why": "Every antenatal decision hangs on gestational age: growth is judged against it, induction and steroids are timed by it, and preterm or post-term labour is defined by it. A wrong LMP is the commonest source of a wrong date, and the commonest mistake is taking the day a period was missed.",
+      "asks": [
+        {
+          "text": "What was the first day of your last menstrual period? Make sure she gives the first day of that bleed, not the date the next period failed to come (that error moves the dates by about four weeks)."
+        },
+        {
+          "text": "Were your cycles regular before this pregnancy? The EDD formula assumes a regular 28 to 30 day cycle."
+        },
+        {
+          "text": "If she cannot recall the date: link it to a festival or major event, ask when she first felt the baby move (quickening, about 20 weeks), ask the date of her pregnancy test and how late her period was then, or ask what month she believes she is in."
+        },
+        {
+          "text": "Work out the EDD as LMP plus 9 months plus 7 days, and state the gestation in weeks. Note in the record when dates are uncertain, and correlate with fundal height."
+        },
+        {
+          "text": "Ask about the symptoms of ordinary pregnancy (nausea, heartburn, constipation, frequent urination) and then, separately, the danger symptoms: fever, persistent vomiting, abnormal discharge, palpitations or breathlessness, generalised swelling or a puffy face, severe headache with blurred vision, reduced or painful urination, vaginal bleeding, reduced or absent fetal movements, and leaking of fluid."
+        }
+      ],
+      "practice": "Take the dates from a partner playing a woman who does not remember her LMP, using only the alternative clues, and state an EDD and gestation you can defend.",
+      "pitfalls": [
+        "Accepting the date of the first missed period as the LMP, which shifts gestation and EDD by about four weeks.",
+        "Applying the EDD formula without checking that her cycles were regular.",
+        "Recording an EDD as certain when it was reconstructed from quickening or a festival.",
+        "Asking the routine symptoms but never the danger symptoms."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How is the expected date of delivery worked out from the LMP?",
+          "a": "LMP plus 9 months plus 7 days, assuming a regular cycle of 28 to 30 days.",
+          "accept": [
+            "9 months",
+            "nine months",
+            "7 days",
+            "seven days"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A woman gives you the date her period should have come but did not. What is the effect on her dates?",
+          "a": "The gestation and the EDD are wrong by about four weeks, because the LMP is the first day of the last period that did occur.",
+          "accept": [
+            "four weeks",
+            "4 weeks",
+            "month",
+            "first day"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "She cannot remember her LMP and is late in pregnancy. What other information helps you estimate dates?",
+          "a": "When fetal movements were first felt (quickening, about 20 weeks), the date of her pregnancy test and how many days she had missed, or the month she thinks she is in, all correlated with fundal height. Record that dates are uncertain, and use an early ultrasound if one exists.",
+          "accept": [
+            "quickening",
+            "fetal movement",
+            "movements",
+            "pregnancy test",
+            "fundal height",
+            "ultrasound",
+            "month"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Name the danger symptoms you must ask about at every antenatal contact.",
+          "a": "Vaginal bleeding, leaking of fluid, severe headache with blurred vision, generalised swelling or puffy face, fever, persistent vomiting, breathlessness or palpitations, painful or reduced urination, and reduced or absent fetal movements.",
+          "accept": [
+            "bleeding",
+            "headache",
+            "blurred",
+            "swelling",
+            "fluid",
+            "movement",
+            "movements",
+            "fever"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "lmp",
+          "text": "Asks for the first day of the last menstrual period, not the day a period was missed"
+        },
+        {
+          "id": "regular",
+          "text": "Checks that her cycles were regular before conception"
+        },
+        {
+          "id": "alt",
+          "text": "Uses another clue (quickening, pregnancy test date, month of pregnancy) when the LMP is not remembered"
+        },
+        {
+          "id": "edd",
+          "text": "States the EDD (LMP plus 9 months plus 7 days) and the gestation in weeks"
+        },
+        {
+          "id": "danger",
+          "text": "Screens for danger symptoms: bleeding, leaking fluid, severe headache or blurred vision, swelling, reduced fetal movements",
+          "critical": true
+        }
+      ],
+      "sources": [
+        {
+          "source": "MoHFW (Maternal Health Division), Guidelines for Antenatal Care and Skilled Attendance at Birth by ANMs/LHVs/SNs, April 2010",
+          "locator": "Module I, Components of antenatal check-up: I. History-taking, menstrual history to calculate the EDD; Boxes 3 and 4 (symptoms)",
+          "url": "https://nhmodisha.gov.in/wp-content/uploads/2024/03/Guidelines-for-ANC-and-SAB-by-ANMsLHVsSNs.pdf"
+        },
+        {
+          "source": "TeachMeObGyn OSCE guides: Obstetric History",
+          "locator": "Obstetric history: current pregnancy (gestational age, LMP and EDD)",
+          "url": "https://teachmeobgyn.com/history-taking-examinations/history-taking/obstetric/"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.obg.previous_pregnancies": {
+      "id": "skill.hx.obg.previous_pregnancies",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Previous pregnancies and their complications",
+      "oneLine": "One line per pregnancy, and the complications that repeat",
+      "why": "The best predictor of what can go wrong is what has gone wrong before. Hypertension, stillbirth, obstructed labour and postpartum haemorrhage all recur, and a history that says only 'two children' has thrown away the information that decides where this woman should deliver.",
+      "asks": [
+        {
+          "text": "How many times have you been pregnant, including miscarriages and terminations? Were all of them live births, and was there any stillbirth, abortion or a child who later died?"
+        },
+        {
+          "text": "For each pregnancy: the date and outcome, where and how she delivered, and the birth weight if known. Give most attention to the last pregnancy, and to any bad outcome around the time of birth."
+        },
+        {
+          "text": "Ask about each complication by name: repeated early abortion or complications after an abortion, high blood pressure or fits, bleeding before birth, breech or transverse lie, obstructed labour, tears, heavy bleeding after delivery, and infection after delivery."
+        },
+        {
+          "text": "Ask about operations and procedures: caesarean section, forceps or vacuum, breech delivery, manual removal of the placenta, and blood transfusion."
+        },
+        {
+          "text": "Ask to see records or discharge papers to check what she tells you."
+        },
+        {
+          "text": "Say the obstetric formula aloud: gravidity (all pregnancies) and parity (pregnancies carried beyond viability), and the number of living children."
+        }
+      ],
+      "practice": "Take the previous obstetric history from a partner with three pregnancies and end with a one-sentence summary that names every item that would make her high risk.",
+      "pitfalls": [
+        "Asking 'any problems?' instead of naming the complications, so a woman who did not know that fits meant eclampsia says no.",
+        "Stopping at the number of children and missing a miscarriage or a stillbirth.",
+        "Not asking for records.",
+        "Failing to link the history to a plan: a bad obstetric history is a reason to deliver at a higher facility."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Define gravidity and parity.",
+          "a": "Gravidity is the total number of pregnancies, whatever the outcome. Parity is the number of pregnancies carried beyond the age of viability (the threshold is defined locally; 24+0 weeks in the UK).",
+          "accept": [
+            "total",
+            "pregnancies",
+            "viability",
+            "beyond",
+            "outcome"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Name four features of the previous obstetric history that mean a woman should have ANC and delivery at a higher facility.",
+          "a": "Stillbirth or neonatal loss; three or more consecutive spontaneous abortions; obstructed labour; premature birth, twins or multiple pregnancy; previous baby under 2500 g or over 4500 g; admission for hypertension, pre-eclampsia or eclampsia; surgery on the reproductive tract; congenital anomaly; treatment for infertility; spinal deformity; Rh negative in the previous pregnancy.",
+          "accept": [
+            "stillbirth",
+            "neonatal",
+            "abortion",
+            "abortions",
+            "obstructed",
+            "premature",
+            "preterm",
+            "twins",
+            "2500",
+            "4500",
+            "hypertension",
+            "eclampsia",
+            "infertility",
+            "anomaly",
+            "rh negative"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Which two birth weights of a previous baby make you refer?",
+          "a": "Under 2500 g or over 4500 g.",
+          "accept": [
+            "2500",
+            "4500"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "She says her last baby 'died a few days after birth'. What do you ask?",
+          "a": "When exactly, at what gestation and birth weight, where and how she delivered, what she was told the cause was, and whether there were problems in that pregnancy or labour. Ask for the records. It counts as a neonatal loss, which is an indication for care at a higher facility.",
+          "accept": [
+            "gestation",
+            "weight",
+            "cause",
+            "records",
+            "how she delivered",
+            "mode",
+            "problems",
+            "when"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "count",
+          "text": "Establishes the number of pregnancies and the outcome of each (live birth, stillbirth, abortion, child death)"
+        },
+        {
+          "id": "detail",
+          "text": "Gets the date, place, mode of birth and birth weight of each, especially the last pregnancy"
+        },
+        {
+          "id": "complications",
+          "text": "Asks by name about complications in earlier pregnancies: hypertension or fits, bleeding before or after birth, obstructed labour, infection",
+          "critical": true
+        },
+        {
+          "id": "ops",
+          "text": "Asks about caesarean, instrumental delivery, manual removal of placenta and blood transfusion"
+        },
+        {
+          "id": "records",
+          "text": "Asks to see records or discharge papers"
+        },
+        {
+          "id": "highrisk",
+          "text": "Says which items make this a high-risk pregnancy needing a higher facility"
+        }
+      ],
+      "sources": [
+        {
+          "source": "MoHFW (Maternal Health Division), Guidelines for Antenatal Care and Skilled Attendance at Birth by ANMs/LHVs/SNs, April 2010",
+          "locator": "Module I, Components of antenatal check-up: Obstetric history; Box 5 (indications for referral from the previous obstetric history)",
+          "url": "https://nhmodisha.gov.in/wp-content/uploads/2024/03/Guidelines-for-ANC-and-SAB-by-ANMsLHVsSNs.pdf"
+        },
+        {
+          "source": "TeachMeObGyn OSCE guides: Obstetric History",
+          "locator": "Obstetric history: previous obstetric history; gravidity and parity notation",
+          "url": "https://teachmeobgyn.com/history-taking-examinations/history-taking/obstetric/"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.obg.medical_family_drug": {
+      "id": "skill.hx.obg.medical_family_drug",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Medical, family, drug and social history in pregnancy",
+      "oneLine": "The illnesses and habits that pregnancy will unmask or worsen",
+      "why": "Pregnancy is a physiological stress test. It unmasks a tendency to hypertension or diabetes, makes heart and kidney disease dangerous, and exposes the baby to whatever the mother takes or breathes. This part of the history is short, and it changes the plan more often than any other.",
+      "asks": [
+        {
+          "text": "Have you now, or have you ever had: high blood pressure, diabetes, breathlessness on exertion or palpitations, a chronic cough with blood or prolonged fever, kidney disease, fits, asthma, jaundice, malaria, or a genital or sexually transmitted infection including HIV?"
+        },
+        {
+          "text": "Has anyone in the family had high blood pressure, diabetes or tuberculosis? Any thalassaemia, or anyone who needed repeated blood transfusions? Any twins in the family, or a baby born with a malformation?"
+        },
+        {
+          "text": "Are you allergic to any drug, and are you taking anything that could harm the baby? Did you take any treatment for infertility (which raises the chance of twins)?"
+        },
+        {
+          "text": "Do you chew or smoke tobacco, or take alcohol? Is anyone at home smoking near you?"
+        },
+        {
+          "text": "Who is with you at home, and who supports you? In private, ask whether she feels safe at home."
+        }
+      ],
+      "practice": "Take this history from a partner who has a family history of diabetes and takes an over-the-counter painkiller daily. See whether you find both.",
+      "pitfalls": [
+        "Asking the systemic illnesses as one closed list and accepting 'no' without checking what she understands by the word.",
+        "Never asking about drugs bought without a prescription or traditional remedies.",
+        "Asking about domestic abuse with the husband or mother-in-law in the room."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why ask about treatment for infertility in an antenatal history?",
+          "a": "Ovulation-inducing treatment increases the chance of twins or a multiple pregnancy.",
+          "accept": [
+            "twins",
+            "multiple"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why ask about a family history of hypertension, diabetes and tuberculosis?",
+          "a": "Pregnancy is a physiological stress that can unmask an underlying tendency, for example hypertensive disorders of pregnancy or gestational diabetes.",
+          "accept": [
+            "unmask",
+            "stress",
+            "tendency",
+            "predispose",
+            "gestational diabetes",
+            "hypertensive"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Which family history points to a haemoglobin disorder?",
+          "a": "Thalassaemia in the family, or anyone who has needed repeated blood transfusions.",
+          "accept": [
+            "thalassaemia",
+            "thalassemia",
+            "transfusion",
+            "transfusions"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "systemic",
+          "text": "Asks about hypertension, diabetes, heart disease, tuberculosis, kidney disease, epilepsy, asthma, jaundice, malaria and HIV or STI"
+        },
+        {
+          "id": "family",
+          "text": "Asks about family history of hypertension, diabetes, tuberculosis, thalassaemia, twins and malformation"
+        },
+        {
+          "id": "drugs",
+          "text": "Asks about drug allergy, current drugs and any treatment for infertility"
+        },
+        {
+          "id": "substances",
+          "text": "Asks about tobacco (chewed and smoked) and alcohol"
+        },
+        {
+          "id": "safe",
+          "text": "Asks about support at home and screens for domestic abuse in private"
+        }
+      ],
+      "sources": [
+        {
+          "source": "MoHFW (Maternal Health Division), Guidelines for Antenatal Care and Skilled Attendance at Birth by ANMs/LHVs/SNs, April 2010",
+          "locator": "Module I, Components of antenatal check-up: history of systemic illness; family history; drug intake or allergies; habit-forming substances",
+          "url": "https://nhmodisha.gov.in/wp-content/uploads/2024/03/Guidelines-for-ANC-and-SAB-by-ANMsLHVsSNs.pdf"
+        },
+        {
+          "source": "TeachMeObGyn OSCE guides: Obstetric History",
+          "locator": "Obstetric history: past medical, drug, family and social history (including domestic abuse screening)",
+          "url": "https://teachmeobgyn.com/history-taking-examinations/history-taking/obstetric/"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.obg.menstrual_history": {
+      "id": "skill.hx.obg.menstrual_history",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Menstrual history and abnormal bleeding",
+      "oneLine": "Frequency, duration, volume, and the three patterns that are red flags",
+      "why": "Abnormal bleeding is the commonest reason a woman sees a gynaecologist. A menstrual history that ends at 'regular, 5 days' misses the questions that separate a heavy but benign pattern from bleeding that needs a speculum examination the same week.",
+      "asks": [
+        {
+          "text": "When was your last period, and when did you have the one before it? How old were you when they started?"
+        },
+        {
+          "text": "How often do they come? About every 28 days is usual; under 24 days is frequent and over 38 is infrequent. Are they regular?"
+        },
+        {
+          "text": "How many days do they last? About 5 is usual; more than 8 is prolonged."
+        },
+        {
+          "text": "How heavy are they? Ask in practical terms: pads or cloths per day, clots, flooding through clothes, waking at night to change, and whether it stops her working. About 40 mL is average and over 80 mL is heavy, but no one can measure that from a description."
+        },
+        {
+          "text": "Any bleeding between periods, after sex, or after the menopause?"
+        },
+        {
+          "text": "Are the periods painful, and does the pain stop her doing normal activities?"
+        }
+      ],
+      "practice": "Take a menstrual history from a partner and end by stating whether the pattern is normal in frequency, duration and volume, using the numbers above.",
+      "pitfalls": [
+        "Accepting 'heavy' or 'normal' without pads, clots, flooding or effect on life.",
+        "Forgetting to ask about postcoital and intermenstrual bleeding because the complaint was 'heavy periods'.",
+        "Using the term 'irregular' for a regular but frequent or infrequent cycle."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What cycle length, period length and blood loss are usually taken as average?",
+          "a": "About every 28 days (frequent if under 24, infrequent if over 38), lasting about 5 days (prolonged if over 8), with about 40 mL loss (heavy if over 80 mL).",
+          "accept": [
+            "28",
+            "24",
+            "38",
+            "5 days",
+            "8 days",
+            "40",
+            "80"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Name three bleeding patterns that need a speculum examination rather than reassurance.",
+          "a": "Postcoital bleeding, intermenstrual bleeding and postmenopausal bleeding.",
+          "accept": [
+            "postcoital",
+            "post coital",
+            "intermenstrual",
+            "inter menstrual",
+            "postmenopausal",
+            "post menopausal",
+            "after sex",
+            "between periods"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A 44-year-old reports bleeding after intercourse for three months. What is the critical step in the diagnosis, and does a normal screening test replace it?",
+          "a": "A speculum examination to see the cervix, because postcoital bleeding is a cardinal symptom of cervical cancer. A screening test is not a diagnostic test and a normal result can falsely reassure.",
+          "accept": [
+            "speculum",
+            "look at the cervix",
+            "see the cervix",
+            "cervix",
+            "not a diagnostic",
+            "false"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "lmp",
+          "text": "Establishes the last period, the age at first period and whether cycles are regular"
+        },
+        {
+          "id": "cycle",
+          "text": "Characterises frequency and duration of the cycle in days"
+        },
+        {
+          "id": "volume",
+          "text": "Assesses volume in practical terms (pads, clots, flooding, effect on daily life)"
+        },
+        {
+          "id": "redflags",
+          "text": "Asks about intermenstrual, postcoital and postmenopausal bleeding",
+          "critical": true
+        },
+        {
+          "id": "pain",
+          "text": "Asks about painful periods and their effect on normal activity"
+        }
+      ],
+      "sources": [
+        {
+          "source": "TeachMeObGyn OSCE guides: Gynaecological History",
+          "locator": "Gynaecological history: menstrual history and vaginal bleeding",
+          "url": "https://teachmeobgyn.com/history-taking-examinations/history-taking/gynaecological/"
+        },
+        {
+          "source": "NHS Cervical Screening Training, Guidance for Good Practice in Cervical Screening, 5th edition",
+          "locator": "Women with symptoms (postcoital bleeding, intermenstrual bleeding; speculum examination is the critical intervention)",
+          "url": "https://www.newcastle-hospitals.nhs.uk/wp-content/uploads/2020/11/Guidance_for_Good_Practice_-_5th_Edition.pdf"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.obg.gynae_symptoms": {
+      "id": "skill.hx.obg.gynae_symptoms",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Pelvic pain, discharge and associated symptoms",
+      "oneLine": "Pain by SOCRATES, discharge by its four features, and what sits nearby",
+      "why": "Pelvic pain and discharge have long differentials, and the history is the only tool that narrows them before the examination. A structured tool keeps the questions from drifting and keeps the note useful to the next reader.",
+      "asks": [
+        {
+          "text": "Pain: site, onset, character, radiation, associated symptoms, time course (cyclical or constant), what makes it better or worse, and severity out of ten."
+        },
+        {
+          "text": "Discharge: colour, consistency, amount and smell. Any itching, soreness or skin change on the vulva?"
+        },
+        {
+          "text": "Pain during intercourse: at the entrance (superficial) or deep inside?"
+        },
+        {
+          "text": "Urinary and bowel symptoms: frequency, urgency, leaking, pain passing urine, constipation, bleeding from the bowel."
+        },
+        {
+          "text": "General symptoms: fever, weight loss, tiredness, a swollen or distended abdomen."
+        },
+        {
+          "text": "If she wants a pregnancy: how long has she been trying, and what has been done so far?"
+        }
+      ],
+      "practice": "Take a history from a partner with lower abdominal pain and discharge, using SOCRATES for the pain and all four features for the discharge.",
+      "pitfalls": [
+        "Asking about pain without saying whether it is cyclical.",
+        "Not asking whether dyspareunia is superficial or deep, which points to different places.",
+        "Skipping urinary and bowel symptoms, then missing a bladder or bowel cause."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What does SOCRATES stand for?",
+          "a": "Site, Onset, Character, Radiation, Associations, Time course, Exacerbating or relieving factors, Severity.",
+          "accept": [
+            "site",
+            "onset",
+            "character",
+            "radiation",
+            "associations",
+            "severity"
+          ],
+          "minMatch": 4
+        },
+        {
+          "level": 2,
+          "q": "What four features of a vaginal discharge do you ask about?",
+          "a": "Colour, consistency, amount and smell.",
+          "accept": [
+            "colour",
+            "color",
+            "consistency",
+            "amount",
+            "smell"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Why separate superficial from deep dyspareunia?",
+          "a": "They point to different places: pain at the entrance suggests a vulval, vaginal or introital cause, while deep pain suggests pelvic pathology, so it tells you where to look at examination.",
+          "accept": [
+            "entrance",
+            "introital",
+            "vulval",
+            "vaginal",
+            "deep",
+            "pelvic",
+            "where"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "pain",
+          "text": "Characterises pelvic pain with a structured tool (site, onset, character, radiation, timing, severity)"
+        },
+        {
+          "id": "discharge",
+          "text": "Asks about discharge: colour, consistency, amount, smell, and itching"
+        },
+        {
+          "id": "dyspareunia",
+          "text": "Asks about pain during intercourse and whether it is superficial or deep"
+        },
+        {
+          "id": "systems",
+          "text": "Screens urinary, bowel and general symptoms (fever, weight loss, distension)"
+        }
+      ],
+      "sources": [
+        {
+          "source": "TeachMeObGyn OSCE guides: Gynaecological History",
+          "locator": "Gynaecological history: abdominal and pelvic pain (SOCRATES), vaginal discharge, other symptoms, systems review",
+          "url": "https://teachmeobgyn.com/history-taking-examinations/history-taking/gynaecological/"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.obg.gynae_background": {
+      "id": "skill.hx.obg.gynae_background",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Contraception, screening, sexual history and the rest of the background",
+      "oneLine": "Ask MOSC, then close by finding out what she is worried about",
+      "why": "The symptom history tells you what is wrong. The background tells you what you may safely do about it: whether she could be pregnant, whether she has been screened, what she is already taking, and what runs in her family. A gynaecological history without these is incomplete, however good the symptom history.",
+      "asks": [
+        {
+          "text": "Contraception: what do you use now, what have you used before, and how do you use it?"
+        },
+        {
+          "text": "Cervical screening: when were you last screened, and what was the result?"
+        },
+        {
+          "text": "Sexual history: explain why you need to ask, ask permission, and reassure her about confidentiality. Ask about partners, protection, and any past infections."
+        },
+        {
+          "text": "Past pregnancies, in one line, and any past gynaecological problems or pelvic or abdominal surgery."
+        },
+        {
+          "text": "Past medical history, drugs (including hormone treatment and recent antibiotics) and allergies."
+        },
+        {
+          "text": "Family history: breast, ovarian or endometrial cancer, diabetes and bleeding disorders."
+        },
+        {
+          "text": "Social history: weight change (rapid loss can stop periods), work, who is at home, smoking and alcohol."
+        },
+        {
+          "text": "Close by asking what she thinks is wrong, what worries her most, and what she hopes for today. Then summarise it back."
+        }
+      ],
+      "practice": "Take the background history from a partner in under two minutes, including one sensitive question asked with permission, and finish with a two-sentence summary.",
+      "pitfalls": [
+        "Asking sexual history questions in the same tone as the medication list, or without permission.",
+        "Not asking when she was last screened and what the result was.",
+        "Ending without asking her own ideas and concerns."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which contraception and screening questions belong in every gynaecological history?",
+          "a": "Her current and past contraception and how she uses it, and the date and result of her last cervical screening.",
+          "accept": [
+            "contraception",
+            "screening",
+            "smear",
+            "last",
+            "result"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why ask about family history of breast, ovarian and endometrial cancer?",
+          "a": "Because it can point to an inherited cancer risk, which changes how she is assessed and referred.",
+          "accept": [
+            "inherited",
+            "genetic",
+            "risk",
+            "cancer",
+            "referred",
+            "assess"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "How do you open the sexual history sensitively?",
+          "a": "Explain why you are asking, ask permission, assure her of confidentiality, use plain non-judgemental questions, and let her decline any question.",
+          "accept": [
+            "permission",
+            "confidential",
+            "confidentiality",
+            "explain",
+            "judgemental",
+            "judgmental",
+            "private",
+            "decline"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "contra",
+          "text": "Asks about current and past contraception and how it is used"
+        },
+        {
+          "id": "screening",
+          "text": "Asks when she was last screened for cervical cancer and the result"
+        },
+        {
+          "id": "sexual",
+          "text": "Takes the sexual history after explaining why and asking permission"
+        },
+        {
+          "id": "background",
+          "text": "Covers past gynaecological or pelvic surgery, medical history, drugs and allergies"
+        },
+        {
+          "id": "family",
+          "text": "Asks about family history of breast, ovarian and endometrial cancer and bleeding disorders"
+        },
+        {
+          "id": "ice",
+          "text": "Asks about her ideas, concerns and expectations and summarises back"
+        }
+      ],
+      "sources": [
+        {
+          "source": "TeachMeObGyn OSCE guides: Gynaecological History",
+          "locator": "Gynaecological history: past medical, drug, family and social history; systems review; summary (ideas, concerns, expectations)",
+          "url": "https://teachmeobgyn.com/history-taking-examinations/history-taking/gynaecological/"
+        },
+        {
+          "source": "WHO and JHU CCP, Family planning: a global handbook for providers, 2022 edition",
+          "locator": "Successful Counseling, pp. 398-399 (private place, confidentiality, respect, let the client's needs guide the discussion)",
+          "url": "https://cdn.who.int/media/docs/default-source/reproductive-health/contraception-family-planning/family-planning-a-global-handbook-for-providers-2022.pdf"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.obg.contra_eligibility": {
+      "id": "skill.hx.obg.contra_eligibility",
+      "kind": "history",
+      "system": "obgyn",
+      "title": "Is she medically eligible? The contraception screening history",
+      "oneLine": "Five questions that keep the wrong method away from the wrong woman",
+      "why": "A contraceptive counsellor's first job is to find out which methods are unsafe for this woman, before she falls in love with one. A handful of answers, blood pressure, smoking, migraine with aura, clots and the time since delivery, remove the methods that carry a real risk.",
+      "asks": [
+        {
+          "text": "Are you reasonably certain you are not pregnant? When was your last period, and have you had sex since without protection?"
+        },
+        {
+          "text": "Have you had a baby recently? How long ago, and are you breastfeeding?"
+        },
+        {
+          "text": "Do you smoke, and how many a day? How old are you?"
+        },
+        {
+          "text": "Do you get migraines? Do you see zigzag lights or lose part of your vision before the headache (an aura)?"
+        },
+        {
+          "text": "Have you ever had a blood clot in the leg or lung, a stroke, or heart disease? Does anyone in the family? Is your blood pressure known to be high, or was it high in a pregnancy?"
+        },
+        {
+          "text": "What matters most to you in a method, and are there methods you have tried, dislike or cannot use?"
+        }
+      ],
+      "practice": "Take the screening history from a partner who is 4 weeks postpartum and breastfeeding and who has migraine with aura, and say which method class you have already ruled out and why.",
+      "pitfalls": [
+        "Prescribing a combined pill without checking blood pressure, smoking, age, migraine type and breastfeeding.",
+        "Not asking about aura, so a woman with migraine with aura is offered an oestrogen method.",
+        "Asking eligibility questions after the woman has already chosen a method."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three conditions for which a combined hormonal method is category 4, an unacceptable health risk.",
+          "a": "Migraine with aura at any age; age 35 or more smoking 15 or more cigarettes a day; breastfeeding in the first 6 weeks after birth; current or past venous thromboembolism; blood pressure of 160/100 mmHg or more; multiple risk factors for VTE.",
+          "accept": [
+            "aura",
+            "smoking",
+            "smoker",
+            "breastfeeding",
+            "vte",
+            "clot",
+            "thrombosis",
+            "160",
+            "hypertension",
+            "blood pressure"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What does 'reasonably certain she is not pregnant' allow you to do?",
+          "a": "It lets you start a method at any time, without waiting for the next period; the Pregnancy Checklist is used to establish it.",
+          "accept": [
+            "start",
+            "any time",
+            "checklist",
+            "not pregnant"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A breastfeeding woman 4 weeks after delivery asks for the combined pill. What do you say?",
+          "a": "It is category 4 in the first 6 weeks postpartum while breastfeeding (category 2 from 6 weeks to 6 months), so she should not have it now. Offer a progestogen-only method, an implant or a copper IUD, and check the timing rules for each.",
+          "accept": [
+            "not",
+            "category 4",
+            "progestogen",
+            "implant",
+            "copper",
+            "iud",
+            "6 weeks",
+            "six weeks"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "pregnant",
+          "text": "Establishes that she is reasonably certain not to be pregnant"
+        },
+        {
+          "id": "postpartum",
+          "text": "Asks about recent delivery and breastfeeding"
+        },
+        {
+          "id": "smoking",
+          "text": "Asks about age and smoking"
+        },
+        {
+          "id": "aura",
+          "text": "Asks specifically about migraine and aura",
+          "critical": true
+        },
+        {
+          "id": "vte_bp",
+          "text": "Asks about clots, stroke, heart disease and high blood pressure"
+        },
+        {
+          "id": "prefs",
+          "text": "Asks what matters to her and which methods she has tried"
+        }
+      ],
+      "sources": [
+        {
+          "source": "UK Medical Eligibility Criteria for Contraceptive Use (UKMEC 2025), summary tables",
+          "locator": "Combined hormonal contraception column: Postpartum, Breastfeeding, Smoking, Hypertension, Venous thromboembolism, Headaches (migraine with aura)",
+          "url": "https://www.cosrh.org/Common/Uploaded%20files/documents/UKMEC_2025_Summary_Tables.pdf"
+        },
+        {
+          "source": "WHO and JHU CCP, Family planning: a global handbook for providers, 2022 edition",
+          "locator": "Combined Oral Contraceptives, When to Start (reasonably certain she is not pregnant; Pregnancy Checklist)",
+          "url": "https://cdn.who.int/media/docs/default-source/reproductive-health/contraception-family-planning/family-planning-a-global-handbook-for-providers-2022.pdf"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.obg.preg_prep_inspect": {
+      "id": "skill.exam.obg.preg_prep_inspect",
+      "kind": "exam",
+      "system": "obgyn",
+      "title": "Preparing the woman and inspecting the abdomen in pregnancy",
+      "oneLine": "Empty bladder, propped up, warm hands, then look before you touch",
+      "why": "Nearly every error in the abdominal examination in pregnancy is made before the first grip: a full bladder that lifts the fundus, a woman laid flat who faints, or cold fingers that make the uterus contract and hide the fetus. Getting the set-up right is half the examination.",
+      "steps": [
+        {
+          "text": "Ask her to empty her bladder first (and keep the sample for urine testing). A half-full bladder can raise the fundal height."
+        },
+        {
+          "text": "Ask her to lie on her back with the upper body supported by cushions and the hips and knees partly flexed. Never lay her flat: the heavy uterus can compress the great vessels returning to the heart and make her faint."
+        },
+        {
+          "text": "Stand on her right side. Warm your hands and rest one on the abdomen until the uterus relaxes. Never poke with the fingertips. Keep privacy throughout."
+        },
+        {
+          "text": "Inspect before palpating: the shape and size of the uterus for the dates, scars (especially a caesarean scar), striae, the linea nigra, distension, and any visible fetal movement."
+        }
+      ],
+      "normal": "A smooth ovoid uterus lying longitudinally, of a size that fits the dates. Linea nigra and striae gravidarum are normal in pregnancy.",
+      "abnormal": "A uterus that looks broad and wide (possible transverse lie), or much larger or smaller than the dates; a caesarean or other scar; marked distension.",
+      "significance": "Size that does not fit dates and a scar both change the plan before a single grip is done. A scar is a previous obstetric operation that must be reconciled with the history.",
+      "practice": "Set up a partner for the abdominal examination, saying each step and its reason aloud, and stop yourself the moment you reach for the abdomen before checking the bladder.",
+      "pitfalls": [
+        "Examining without asking her to empty her bladder, so the fundal height reads too high.",
+        "Laying a woman in late pregnancy completely flat on her back.",
+        "Palpating with cold hands or fingertips, so the uterus tightens and the fetal parts cannot be felt.",
+        "Going straight to palpation without looking for scars."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why must a pregnant woman not lie flat on her back for the examination?",
+          "a": "The heavy uterus can compress the main vessels returning blood to the heart, causing supine hypotension and fainting.",
+          "accept": [
+            "compress",
+            "vessels",
+            "vena cava",
+            "faint",
+            "fainting",
+            "hypotension"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why ask her to empty her bladder first?",
+          "a": "Even a half-full bladder can raise the fundal height and give a false reading.",
+          "accept": [
+            "fundal height",
+            "raise",
+            "increase",
+            "false",
+            "wrong",
+            "inaccurate"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Name three reasons the uterus can be larger than the dates suggest.",
+          "a": "Wrong LMP, a full bladder, a multiple pregnancy or a large baby, polyhydramnios, hydrocephalus, or a hydatidiform mole.",
+          "accept": [
+            "lmp",
+            "dates",
+            "bladder",
+            "multiple",
+            "twins",
+            "large baby",
+            "polyhydramnios",
+            "hydrocephalus",
+            "mole"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Name three reasons the uterus can be smaller than the dates suggest.",
+          "a": "Wrong LMP, growth restriction (IUGR), a missed abortion, intrauterine death, or a transverse lie.",
+          "accept": [
+            "lmp",
+            "dates",
+            "iugr",
+            "growth restriction",
+            "missed abortion",
+            "intrauterine death",
+            "iud",
+            "transverse"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "bladder",
+          "text": "Asks her to empty her bladder before starting"
+        },
+        {
+          "id": "position",
+          "text": "Positions her semi-recumbent with hips and knees flexed, not flat on her back"
+        },
+        {
+          "id": "gentle",
+          "text": "Stands on her right with warm hands, rests the hand on the abdomen first, and does not poke with fingertips"
+        },
+        {
+          "id": "inspect",
+          "text": "Inspects the abdomen for size, contour, scars, striae, linea nigra and fetal movements"
+        }
+      ],
+      "sources": [
+        {
+          "source": "MoHFW (Maternal Health Division), Guidelines for Antenatal Care and Skilled Attendance at Birth by ANMs/LHVs/SNs, April 2010",
+          "locator": "Module I, Components of antenatal check-up: B. Abdominal examination, preparation; height of the uterus more or less than the period of amenorrhoea",
+          "url": "https://nhmodisha.gov.in/wp-content/uploads/2024/03/Guidelines-for-ANC-and-SAB-by-ANMsLHVsSNs.pdf"
+        },
+        {
+          "source": "TeachMeObGyn OSCE guides: Obstetric Examination",
+          "locator": "Obstetric abdominal examination: general inspection and abdominal inspection",
+          "url": "https://teachmeobgyn.com/history-taking-examinations/examinations/obstetric/"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.obg.fundal_height": {
+      "id": "skill.exam.obg.fundal_height",
+      "kind": "exam",
+      "system": "obgyn",
+      "title": "Fundal height and symphysis-fundal height",
+      "oneLine": "After 24 weeks the centimetres roughly equal the weeks; 3 cm out is a finding",
+      "why": "Fundal height is the cheapest screen for fetal growth and for wrong dates. It costs a tape and thirty seconds, and it is the reason a small baby, twins or polyhydramnios are caught in the clinic and not at delivery.",
+      "steps": [
+        {
+          "text": "Before 24 weeks, place the fundus against a landmark. The uterus becomes an abdominal organ after 12 weeks: 12 weeks just above the symphysis, 16 weeks at the lower third between symphysis and umbilicus, 20 weeks at two-thirds, 24 weeks at the umbilicus, 28 weeks at the lower third between umbilicus and xiphisternum, 32 weeks at two-thirds, 36 weeks at the xiphisternum."
+        },
+        {
+          "text": "At 40 weeks the fundus sinks back to about the 32-week level, but the flanks are full, unlike at 32 weeks."
+        },
+        {
+          "text": "After 24 weeks, measure from the top of the fundus to the pubic symphysis in centimetres, with her legs straight. The number of centimetres corresponds to the weeks of gestation."
+        },
+        {
+          "text": "Compare with the gestation from the dates. Plot the value on a growth chart at each visit (from 24 weeks, no more often than every 2 weeks) and compare it with the last visit."
+        },
+        {
+          "text": "A difference of 3 cm or more from the expected height, or no growth since the last visit, is significant and needs investigation or referral."
+        }
+      ],
+      "normal": "After 24 weeks the fundal height in centimetres is close to the weeks of gestation and rises steadily along the plotted line.",
+      "abnormal": "A height 3 cm or more away from the gestation, a plot that flattens or falls away from the line, or no growth between visits.",
+      "significance": "A large-for-dates measurement prompts a scan for growth and wellbeing (twins, polyhydramnios, a large baby, wrong dates). A small measurement should be scanned (growth restriction, wrong dates, and in later pregnancy a transverse lie), and how urgent depends on the other findings.",
+      "practice": "Measure the fundal height on a partner (or a pregnant model) using both the landmark and the tape, and say the gestation each suggests.",
+      "pitfalls": [
+        "Measuring with the legs flexed, which distorts the tape.",
+        "Using the landmark method after 24 weeks when a tape is available, or the tape without plotting it.",
+        "Reporting a single measurement without comparing it with the previous one."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "At what gestation is the fundus at the level of the umbilicus?",
+          "a": "24 weeks.",
+          "accept": [
+            "24"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "After 24 weeks, how does fundal height in centimetres relate to gestation, and when do you act?",
+          "a": "The centimetres correspond to the weeks. A difference of 3 cm or more, or no growth since the previous visit, is significant and needs investigation or referral.",
+          "accept": [
+            "weeks",
+            "3 cm",
+            "three",
+            "no growth",
+            "refer",
+            "referral",
+            "investigation"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What does the fundus do at 40 weeks?",
+          "a": "It sinks back to about the level of 32 weeks, but the flanks are full.",
+          "accept": [
+            "sinks",
+            "32",
+            "flanks",
+            "full"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "At 34 weeks the symphysis-fundal height is small for dates. What is your next step?",
+          "a": "Offer an ultrasound scan for fetal growth and wellbeing; the urgency depends on the other findings, for example reduced fetal movements. Also check the dates and the lie.",
+          "accept": [
+            "ultrasound",
+            "scan",
+            "growth",
+            "dates",
+            "movements",
+            "lie"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "landmark",
+          "text": "States where the fundus lies against a landmark (symphysis, umbilicus, xiphisternum) and the gestation that suggests"
+        },
+        {
+          "id": "tape",
+          "text": "Measures from the top of the fundus to the pubic symphysis in centimetres"
+        },
+        {
+          "id": "compare",
+          "text": "Compares the measurement with the gestation from the dates and states the difference"
+        },
+        {
+          "id": "plot",
+          "text": "Plots it on the growth chart and compares it with the previous visit"
+        },
+        {
+          "id": "act",
+          "text": "Says that a difference of 3 cm or more, or no growth, needs investigation or referral"
+        }
+      ],
+      "sources": [
+        {
+          "source": "MoHFW (Maternal Health Division), Guidelines for Antenatal Care and Skilled Attendance at Birth by ANMs/LHVs/SNs, April 2010",
+          "locator": "Module I, Components of antenatal check-up: Fundal height (landmark table; a difference of 3 cm or more is significant)",
+          "url": "https://nhmodisha.gov.in/wp-content/uploads/2024/03/Guidelines-for-ANC-and-SAB-by-ANMsLHVsSNs.pdf"
+        },
+        {
+          "source": "NICE NG201 Antenatal care",
+          "locator": "Recommendations 1.2.30 to 1.2.32: symphysis fundal height after 24+0 weeks, plotting, and scanning for large or small measurements",
+          "url": "https://www.nice.org.uk/guidance/ng201"
+        },
+        {
+          "source": "TeachMeObGyn OSCE guides: Obstetric Examination",
+          "locator": "Obstetric abdominal examination: fundal height",
+          "url": "https://teachmeobgyn.com/history-taking-examinations/examinations/obstetric/"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.obg.leopold": {
+      "id": "skill.exam.obg.leopold",
+      "kind": "exam",
+      "system": "obgyn",
+      "title": "Leopold's manoeuvres: lie, presentation and engagement",
+      "oneLine": "Four grips, one question each: what is at the top, where is the back, what is at the brim, is it engaged",
+      "why": "Palpation tells you whether the baby is lying so that it can be born vaginally. A longitudinal lie with the head down is the normal finding at term. A transverse or oblique lie is dangerous because a woman in labour with one cannot deliver vaginally, and missing it can end in obstructed labour, rupture of the uterus and death.",
+      "steps": [
+        {
+          "text": "Fundal grip: face her head, place both hands over the fundus and feel which fetal pole is there. Breech is softer and broader; the head is harder and rounder."
+        },
+        {
+          "text": "Lateral grip: still facing her head, hold the uterus between your hands and move from side to side. The fuller, firmer side is the fetal back; the knobbly side is the limbs."
+        },
+        {
+          "text": "First pelvic grip (Pawlik): one hand above the symphysis feels whether a head or breech is at the pelvic brim, and whether it moves. If the head cannot be moved it is engaged. In a transverse lie this grip is empty. Do it gently."
+        },
+        {
+          "text": "Second pelvic grip (deep): face her feet, put both hands either side of the lower uterus and press down towards the pelvis. In experienced hands this shows the degree of flexion of the head and how much is engaged, which can be recorded in fifths."
+        },
+        {
+          "text": "Say the result: lie (longitudinal, transverse or oblique), presentation (cephalic or breech), position of the back, and engagement."
+        },
+        {
+          "text": "Lie and presentation matter from about 32 weeks. Before that, palpate fetal parts only, and do not intervene for a malpresentation before 36 weeks."
+        }
+      ],
+      "normal": "Longitudinal lie with a cephalic presentation at term; the back palpable on one side; head engaged or engaging in late pregnancy.",
+      "abnormal": "Transverse or oblique lie, breech presentation, or a head that is high and mobile in late pregnancy.",
+      "significance": "Any lie other than longitudinal at term needs delivery at a facility that can do a caesarean section; a transverse lie must not be allowed to labour. Palpation for breech is offered at every visit after 36+0 weeks, and a suspected breech is confirmed by ultrasound.",
+      "practice": "Perform the four grips on a partner or a model while saying, for each, what it is meant to find. Record lie, presentation, position of the back and engagement.",
+      "pitfalls": [
+        "Doing the pelvic grips hard, which is painful and makes the head impossible to assess.",
+        "Never stating the lie aloud, so a transverse lie is never named.",
+        "Calling the head engaged because it feels fixed after a pressing grip, without checking whether it can be moved.",
+        "Trying to diagnose malpresentation before 32 weeks, where only fetal parts can be reliably felt."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the four Leopold grips in order.",
+          "a": "Fundal grip, lateral grip, first pelvic (superficial or Pawlik) grip, second pelvic (deep) grip.",
+          "accept": [
+            "fundal",
+            "lateral",
+            "pelvic",
+            "pawlik",
+            "deep"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What does the lateral grip find?",
+          "a": "The fetal back, which is the fuller and firmer side; the limbs are on the other side.",
+          "accept": [
+            "back",
+            "firm",
+            "firmer",
+            "fuller"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "On the first pelvic grip, how do you know the head is engaged?",
+          "a": "The head cannot be moved.",
+          "accept": [
+            "cannot",
+            "not move",
+            "fixed",
+            "immobile"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "The first pelvic grip feels empty and the uterus feels broad. What is this, and what do you do?",
+          "a": "A transverse lie. It cannot deliver vaginally, so she must not go into labour and needs an elective caesarean; refer her to a facility that can do one. Missing it can lead to obstructed labour, rupture of the uterus and death.",
+          "accept": [
+            "transverse",
+            "refer",
+            "caesarean",
+            "elective",
+            "obstructed",
+            "rupture"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "From when is the lie relevant, and when does NICE recommend palpating for breech?",
+          "a": "Lie and presentation are relevant from about 32 weeks. NICE recommends abdominal palpation at all appointments after 36+0 weeks to identify possible breech, and an ultrasound scan if breech is suspected.",
+          "accept": [
+            "32",
+            "36",
+            "breech",
+            "ultrasound",
+            "scan"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "fundal",
+          "text": "Fundal grip: identifies which fetal pole is in the fundus"
+        },
+        {
+          "id": "lateral",
+          "text": "Lateral grip: locates the fetal back"
+        },
+        {
+          "id": "pelvic1",
+          "text": "First pelvic grip: identifies what is at the brim and whether it moves"
+        },
+        {
+          "id": "pelvic2",
+          "text": "Second pelvic grip, facing her feet: assesses flexion and how much of the head is engaged"
+        },
+        {
+          "id": "state",
+          "text": "States the lie, presentation, position of the back and engagement aloud"
+        },
+        {
+          "id": "gentle",
+          "text": "Palpates gently and watches her face for discomfort"
+        }
+      ],
+      "sources": [
+        {
+          "source": "MoHFW (Maternal Health Division), Guidelines for Antenatal Care and Skilled Attendance at Birth by ANMs/LHVs/SNs, April 2010",
+          "locator": "Module I, Components of antenatal check-up: Foetal lie and presentation; Figure 3 (fundal, lateral and pelvic grips)",
+          "url": "https://nhmodisha.gov.in/wp-content/uploads/2024/03/Guidelines-for-ANC-and-SAB-by-ANMsLHVsSNs.pdf"
+        },
+        {
+          "source": "NICE NG201 Antenatal care",
+          "locator": "Recommendations 1.2.36 and 1.2.37: abdominal palpation after 36+0 weeks and ultrasound for suspected breech",
+          "url": "https://www.nice.org.uk/guidance/ng201"
+        },
+        {
+          "source": "TeachMeObGyn OSCE guides: Obstetric Examination",
+          "locator": "Obstetric abdominal examination: lie, presentation and engagement",
+          "url": "https://teachmeobgyn.com/history-taking-examinations/examinations/obstetric/"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.obg.fetal_heart": {
+      "id": "skill.exam.obg.fetal_heart",
+      "kind": "exam",
+      "system": "obgyn",
+      "title": "Fetal heart sounds and fetal movements",
+      "oneLine": "Find the back, count for a full minute, and know the two numbers that trigger referral",
+      "why": "The fetal heart rate and the mother's report of movements are the two bedside signs of fetal wellbeing. Both are cheap, and both fail in the same way: listened for in the wrong place, counted for too short a time, or a low count not acted on.",
+      "steps": [
+        {
+          "text": "Use the position of the back from the lateral grip and listen over the anterior shoulder. The fetal heart cannot be heard through the abdomen with a stethoscope or fetoscope before 24 weeks, so listening for it should begin only after that. A Doppler device can find it earlier."
+        },
+        {
+          "text": "Count the rate for a full minute and state it in beats per minute. The normal rate is 120 to 160 per minute. A rate under 120 or over 160 is referred to the medical officer."
+        },
+        {
+          "text": "Ask about movements. Movements are first felt at about 18 to 22 weeks, earlier in a woman who has had children."
+        },
+        {
+          "text": "Teach the kick count: lie in the left lateral position for an hour, three times a day after meals, and count the movements in each hour. A total of fewer than 10 in the three periods needs referral to a higher facility."
+        }
+      ],
+      "normal": "A regular fetal heart rate of 120 to 160 per minute heard over the fetal back, and movements that continue throughout pregnancy.",
+      "abnormal": "A rate under 120 or over 160 per minute, or fewer than 10 movements in the three counting hours, or a fall in movements the woman reports.",
+      "significance": "Decreased or absent movements may signal fetal distress, and are an indication for referral. A normal rate does not exclude a problem, so it is always read with movements, fundal height and the woman's own concern.",
+      "practice": "Locate the back on a partner or model, find the heart with a Pinard or fetoscope, count for a full minute, and then explain the kick count in plain words.",
+      "pitfalls": [
+        "Listening before finding the back, so the search is random.",
+        "Counting for 15 seconds and multiplying.",
+        "Trying to hear the fetal heart with a fetoscope before 24 weeks and reporting it as absent.",
+        "Not asking about movements at all."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the normal fetal heart rate range in the MoHFW guideline?",
+          "a": "120 to 160 beats per minute.",
+          "accept": [
+            "120",
+            "160"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "From what gestation can the fetal heart be heard with a fetoscope, and how long do you count?",
+          "a": "After 24 weeks (a Doppler device finds it earlier). Count for a full minute.",
+          "accept": [
+            "24",
+            "minute",
+            "full minute",
+            "one minute"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How does a woman count fetal movements, and when should she seek help?",
+          "a": "Lie on her left side for an hour, three times a day after meals, counting movements in each hour. If the total across the three periods is under 10 she should be referred to a higher facility.",
+          "accept": [
+            "left",
+            "hour",
+            "three",
+            "10",
+            "ten",
+            "refer"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "locate",
+          "text": "Locates the fetal back before listening"
+        },
+        {
+          "id": "count",
+          "text": "Counts the heart rate for a full minute and states it in beats per minute"
+        },
+        {
+          "id": "range",
+          "text": "States the normal range and knows that a rate under 120 or over 160 needs referral"
+        },
+        {
+          "id": "movements",
+          "text": "Asks about fetal movements and explains kick counting"
+        }
+      ],
+      "sources": [
+        {
+          "source": "MoHFW (Maternal Health Division), Guidelines for Antenatal Care and Skilled Attendance at Birth by ANMs/LHVs/SNs, April 2010",
+          "locator": "Module I, Components of antenatal check-up: Foetal heart sound and foetal heart rate; Foetal movements",
+          "url": "https://nhmodisha.gov.in/wp-content/uploads/2024/03/Guidelines-for-ANC-and-SAB-by-ANMsLHVsSNs.pdf"
+        },
+        {
+          "source": "TeachMeObGyn OSCE guides: Obstetric Examination",
+          "locator": "Obstetric abdominal examination: auscultation of the fetal heart (Doppler, Pinard, one minute)",
+          "url": "https://teachmeobgyn.com/history-taking-examinations/examinations/obstetric/"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.approach.obg.intimate_consent": {
+      "id": "skill.approach.obg.intimate_consent",
+      "kind": "approach",
+      "system": "obgyn",
+      "title": "Consent, chaperone and privacy for an intimate examination",
+      "oneLine": "Explain, ask, wait, offer a chaperone, protect dignity, and check it is safe",
+      "why": "An intimate examination done without real consent is a violation, however gentle. Consent is real only if it is voluntary, informed and given by someone with capacity. In practice that means saying what you will do, asking, and actually waiting for the answer. A woman who feels safe relaxes, and a relaxed pelvic floor is the difference between a good and an impossible examination.",
+      "steps": [
+        {
+          "text": "Say what the examination is for and what it involves: undressing from the waist down, lying back, an instrument or fingers in the vagina. Say roughly how long it takes and that it should not hurt."
+        },
+        {
+          "text": "Ask for permission and wait for the answer. Tell her she can ask you to stop at any time."
+        },
+        {
+          "text": "Offer a chaperone to every woman, whatever the gender of the examiner, and record whether it was accepted or declined."
+        },
+        {
+          "text": "Ensure privacy: a screened area, a closed door, and time to undress in private. Give her a sheet to cover herself. Ask her to empty her bladder first."
+        },
+        {
+          "text": "Offer a choice of position, on her back with knees bent and apart, or on her left side."
+        },
+        {
+          "text": "Check it is safe to proceed. A per vaginal examination must not be performed in a woman with bleeding in pregnancy beyond 20 weeks."
+        }
+      ],
+      "practice": "Take consent for a speculum examination from a partner who says nothing about being anxious but goes quiet when undressing is mentioned. Notice what you do next.",
+      "pitfalls": [
+        "Asking 'is it alright if I examine you?' while already reaching for the gloves. Wait for the answer.",
+        "Offering a chaperone only when the examiner is male.",
+        "Not recording the offer of a chaperone and the consent.",
+        "Missing the safety check in a bleeding pregnant woman."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Who should be offered a chaperone for an intimate examination?",
+          "a": "Every woman, irrespective of the gender of the examiner, and the offer and the answer are recorded.",
+          "accept": [
+            "every",
+            "all",
+            "irrespective",
+            "whatever",
+            "regardless",
+            "record"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "In what circumstance must a per vaginal examination not be done?",
+          "a": "When a woman is bleeding in pregnancy beyond 20 weeks (antepartum haemorrhage), where placenta praevia has not been excluded.",
+          "accept": [
+            "bleeding",
+            "20 weeks",
+            "antepartum",
+            "aph",
+            "praevia",
+            "previa"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What makes consent real under Indian law?",
+          "a": "It must be voluntary, given by a person with capacity and competence, and based on adequate information about the nature, purpose, benefits, risks and alternatives.",
+          "accept": [
+            "voluntary",
+            "capacity",
+            "competence",
+            "information",
+            "informed"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "She agrees to the speculum but goes quiet when you mention undressing. What do you do?",
+          "a": "Stop and explore what is worrying her. Offer a chaperone or a female examiner, more time, a different position, or to defer the examination. Agreement given reluctantly is not real consent.",
+          "accept": [
+            "stop",
+            "explore",
+            "chaperone",
+            "female",
+            "defer",
+            "reluctant",
+            "time"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "explain",
+          "text": "Explains what the examination is for and involves, in plain language"
+        },
+        {
+          "id": "consent",
+          "text": "Asks for explicit consent and waits for the answer",
+          "critical": true
+        },
+        {
+          "id": "chaperone",
+          "text": "Offers a chaperone whatever the examiner's gender and records the answer",
+          "critical": true
+        },
+        {
+          "id": "privacy",
+          "text": "Ensures privacy, lets her undress alone, and covers her with a sheet"
+        },
+        {
+          "id": "stop",
+          "text": "Tells her she can ask to stop at any time"
+        },
+        {
+          "id": "safe",
+          "text": "Checks it is safe to proceed (no vaginal examination in bleeding beyond 20 weeks of pregnancy)"
+        }
+      ],
+      "sources": [
+        {
+          "source": "NHS Cervical Screening Programme, cervical sample taker training (GOV.UK)",
+          "locator": "Consent, chaperone, positioning",
+          "url": "https://www.gov.uk/government/publications/nhs-cervical-screening-cervical-sample-taker-training/topics-7-and-8-anatomy-physiology-and-taking-cervical-samples"
+        },
+        {
+          "source": "NHS Cervical Screening Training, Guidance for Good Practice in Cervical Screening, 5th edition",
+          "locator": "Taking the sample: the clinical environment; explaining the process; documentation (chaperone offered or declined)",
+          "url": "https://www.newcastle-hospitals.nhs.uk/wp-content/uploads/2020/11/Guidance_for_Good_Practice_-_5th_Edition.pdf"
+        },
+        {
+          "source": "MoHFW (Maternal Health Division), Guidelines for Antenatal Care and Skilled Attendance at Birth by ANMs/LHVs/SNs, April 2010",
+          "locator": "Module II, Vaginal bleeding in late pregnancy (APH): P/V should not be performed",
+          "url": "https://nhmodisha.gov.in/wp-content/uploads/2024/03/Guidelines-for-ANC-and-SAB-by-ANMsLHVsSNs.pdf"
+        },
+        {
+          "source": "Supreme Court of India, Samira Kohli v Dr Prabha Manchanda (16 January 2008)",
+          "locator": "Principles of real consent (capacity, voluntary, adequate information)",
+          "url": "https://indiankanoon.org/doc/438423/"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.obg.vulval_inspect": {
+      "id": "skill.exam.obg.vulval_inspect",
+      "kind": "exam",
+      "system": "obgyn",
+      "title": "Inspecting the vulva and perineum",
+      "oneLine": "Look first, in good light, and ask her to cough",
+      "why": "Inspection costs nothing and is where you find a wart, an ulcer, a prolapse or a discharge that changes what you do next. It also gives her a moment to relax before anything is inserted.",
+      "steps": [
+        {
+          "text": "Position her on her back with knees bent and apart, or on her left side, with a good light and a sheet over the parts you are not examining."
+        },
+        {
+          "text": "Look at the vulva, the labia and the perineum for skin changes: lesions, warts, erythema, ulcers, and any discharge or bleeding."
+        },
+        {
+          "text": "Ask her to cough or bear down and watch for leaking of urine or a bulge in the vagina."
+        },
+        {
+          "text": "Tell her before you touch and before you separate the labia."
+        }
+      ],
+      "normal": "Skin of normal colour and texture with no lesion, discharge, bleeding, leaking or bulge.",
+      "abnormal": "Skin lesions, warts, erythema, ulcers, discharge or bleeding; leaking of urine or a bulge on coughing or bearing down.",
+      "significance": "Vulval skin changes and discharge lead to swabs or biopsy, and a bulge or leak on straining leads to a prolapse or incontinence assessment. Findings here should be recorded before any internal examination.",
+      "practice": "Inspect a model while saying aloud what you see, including a cough, and describe a normal finding in a sentence.",
+      "pitfalls": [
+        "Moving straight to the speculum without looking.",
+        "Uncovering more than is needed.",
+        "Not asking for a cough or a strain, so a prolapse or stress leak is never seen."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What do you look for on external inspection of the vulva and perineum?",
+          "a": "Skin lesions, warts, erythema, ulcers, and any discharge or bleeding.",
+          "accept": [
+            "lesion",
+            "lesions",
+            "warts",
+            "erythema",
+            "ulcer",
+            "ulcers",
+            "discharge",
+            "bleeding"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why ask her to cough or bear down?",
+          "a": "To see leaking of urine (stress incontinence) or a bulge from prolapse.",
+          "accept": [
+            "incontinence",
+            "leak",
+            "leaking",
+            "prolapse",
+            "bulge"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Which positions can she choose for the examination?",
+          "a": "On her back with knees bent and apart (dorsal), or on her left side (left lateral).",
+          "accept": [
+            "dorsal",
+            "back",
+            "left lateral",
+            "left side",
+            "lateral"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "cover",
+          "text": "Positions and drapes her so that only what is being examined is exposed"
+        },
+        {
+          "id": "look",
+          "text": "Inspects the vulva and perineum for lesions, warts, erythema, ulcers and discharge"
+        },
+        {
+          "id": "cough",
+          "text": "Asks her to cough or bear down and watches for leaking or a bulge"
+        },
+        {
+          "id": "warn",
+          "text": "Tells her before touching or separating the labia"
+        }
+      ],
+      "sources": [
+        {
+          "source": "TeachMeObGyn OSCE guides: Bimanual Examination",
+          "locator": "External inspection: vulva, perineum, cough test",
+          "url": "https://teachmeobgyn.com/history-taking-examinations/examinations/bimanual/"
+        },
+        {
+          "source": "NHS Cervical Screening Programme, cervical sample taker training (GOV.UK)",
+          "locator": "Positioning: both the dorsal and the left lateral positions",
+          "url": "https://www.gov.uk/government/publications/nhs-cervical-screening-cervical-sample-taker-training/topics-7-and-8-anatomy-physiology-and-taking-cervical-samples"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.obg.speculum_insert": {
+      "id": "skill.exam.obg.speculum_insert",
+      "kind": "exam",
+      "system": "obgyn",
+      "title": "Choosing, inserting and opening the speculum",
+      "oneLine": "Sideways in, all the way, turn, then open until the whole cervix is in view",
+      "why": "The speculum examination succeeds or fails on technique. Opened too early it pinches; inserted at the wrong angle it never finds the cervix; done too fast the woman tightens and the examination is a struggle. Done well, it is over in a minute and she barely notices.",
+      "steps": [
+        {
+          "text": "Check the light and equipment. Choose a speculum size that fits (a range is available), and warm it. If you are taking a cervical sample, put lubricant on the sides of the speculum only, never on the tip, so the sample is not contaminated."
+        },
+        {
+          "text": "Tell her what is about to happen, ask her to say if it hurts, and insert gently with the blades closed. Insert side-on, with the screw sideways and the blades vertical, directing it downwards with slow, unhurried movements."
+        },
+        {
+          "text": "Insert it fully before opening, then rotate it a quarter turn so the screw faces upwards and the blades lie horizontal. Allow a moment for her to relax."
+        },
+        {
+          "text": "Open the blades slowly while looking, until the whole cervix is in view. If you cannot see it, open and close slightly or change the angle. A longer narrow speculum can help when the vagina is long or the cervix lies posteriorly."
+        },
+        {
+          "text": "Tighten the screw to lock the blades open so both hands are free."
+        }
+      ],
+      "normal": "The speculum passes with only mild discomfort and the whole cervix comes into view, usually at the top of the vagina.",
+      "abnormal": "Marked pain or spasm on insertion; a cervix that will not come into view; bleeding on insertion.",
+      "significance": "A cervix that cannot be seen is not a normal result. Change the angle, the size or the position, and do not report a cervix you have not seen. If she asks you to stop, or if the pain is severe, withdraw.",
+      "practice": "Insert and open a speculum on a model, saying each step and turning it correctly. Then repeat, explaining aloud what you will do next in words a patient would understand.",
+      "pitfalls": [
+        "Inserting it with the handle up, or opening it before it is fully in, which pinches the vaginal wall.",
+        "Putting lubricant on the tip when a cervical sample is planned.",
+        "Forcing the speculum when the cervix cannot be found, instead of changing the angle or the size.",
+        "Not checking in with her while inserting."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How is the speculum inserted and turned?",
+          "a": "Closed and side-on, with the screw sideways and the blades vertical, directed downwards. Insert it fully before opening, then rotate a quarter turn so the screw faces up and the blades are horizontal.",
+          "accept": [
+            "side",
+            "sideways",
+            "vertical",
+            "rotate",
+            "quarter",
+            "90",
+            "fully",
+            "before opening",
+            "up"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Where do you put lubricant if you plan to take a cervical sample?",
+          "a": "On the sides of the speculum only, not on the tip, so the sample is not contaminated.",
+          "accept": [
+            "sides",
+            "tip",
+            "not the tip",
+            "contaminate",
+            "contaminated"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "You cannot see the cervix. What can you do?",
+          "a": "Open and close the speculum slightly or change the angle of insertion. Try a longer narrow speculum if the vagina is long or the cervix lies posteriorly, and allow her time to relax. Do not force it.",
+          "accept": [
+            "angle",
+            "open and close",
+            "longer",
+            "narrow",
+            "posterior",
+            "posteriorly",
+            "relax"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "select",
+          "text": "Checks the light, chooses a suitable speculum size, and lubricates the sides but not the tip if a sample is planned"
+        },
+        {
+          "id": "warn",
+          "text": "Warns her before insertion and asks her to say if it hurts"
+        },
+        {
+          "id": "insert",
+          "text": "Inserts it closed and side-on, gently and downwards, and fully before opening"
+        },
+        {
+          "id": "rotate",
+          "text": "Rotates so the screw faces up, opens slowly and adjusts until the whole cervix is seen"
+        },
+        {
+          "id": "lock",
+          "text": "Locks the speculum open so that both hands are free"
+        }
+      ],
+      "sources": [
+        {
+          "source": "NHS Cervical Screening Programme, cervical sample taker training (GOV.UK)",
+          "locator": "Speculum selection and insertion; visualising the cervix (side-on, downwards, open and close slightly, lubricant not on the tip)",
+          "url": "https://www.gov.uk/government/publications/nhs-cervical-screening-cervical-sample-taker-training/topics-7-and-8-anatomy-physiology-and-taking-cervical-samples"
+        },
+        {
+          "source": "TeachMeObGyn OSCE guides: Speculum Examination",
+          "locator": "Insertion technique, opening and locking",
+          "url": "https://teachmeobgyn.com/history-taking-examinations/examinations/speculum/"
+        },
+        {
+          "source": "Stanford Medicine 25: Pelvic Exam",
+          "locator": "Speculum insertion and inspection (insert fully before opening)",
+          "url": "https://med.stanford.edu/stanfordmedicine25/the25/PelvicExam.html"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.obg.speculum_inspect": {
+      "id": "skill.exam.obg.speculum_inspect",
+      "kind": "exam",
+      "system": "obgyn",
+      "title": "Looking at the cervix and withdrawing the speculum",
+      "oneLine": "See the whole cervix, describe what you see, fix the sample first, and withdraw gently",
+      "why": "The point of the speculum is to look. A screening test is not a diagnostic test, and the most important step in the diagnosis of a cervical problem is to see the cervix. The removal is the step students forget, and the one that most often pinches.",
+      "steps": [
+        {
+          "text": "Confirm the whole cervix is in view before you report or sample it."
+        },
+        {
+          "text": "Look at the cervix for abnormal discharge, erosions or ectropion, ulceration, growths, polyps, inflammation and bleeding. Look at the vaginal walls as the blades open."
+        },
+        {
+          "text": "If swabs or a cervical sample are needed, take them while the speculum is locked open. Take a cervical sample before swabs, and place a cervical sample into the fixative immediately, before you remove the speculum."
+        },
+        {
+          "text": "To withdraw, loosen the screw and withdraw gently, keeping the blades slightly apart until the cervix has cleared, so the vaginal wall is not pinched. Rotate back and remove."
+        },
+        {
+          "text": "Say what you saw in words a colleague could act on."
+        }
+      ],
+      "normal": "A smooth cervix with no lesion, growth, ulcer or polyp, and no abnormal discharge. Some contact bleeding at the time of a sample is common.",
+      "abnormal": "A growth, ulcer, polyp, ectropion, an inflamed cervix or abnormal discharge; bleeding that is not simple contact bleeding.",
+      "significance": "A cervix that looks abnormal and suspicious needs urgent referral to colposcopy. Contact bleeding at sampling is not on its own an indication for referral. A normal screening result does not explain symptoms such as postcoital bleeding.",
+      "practice": "Describe a model cervix in three sentences, and then name what you would do for each of: a polyp, a suspicious growth, and simple contact bleeding.",
+      "pitfalls": [
+        "Reporting a cervix you did not fully see.",
+        "Removing the speculum before fixing the sample.",
+        "Closing the blades fully and withdrawing, which pinches the vaginal wall.",
+        "Using a screening sample as a substitute for looking in a woman with symptoms."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What do you look for on the cervix at speculum examination?",
+          "a": "Abnormal discharge, erosions or ectropion, ulceration, growths, inflammation, polyps and bleeding.",
+          "accept": [
+            "discharge",
+            "erosion",
+            "ectropion",
+            "ulcer",
+            "ulceration",
+            "growth",
+            "growths",
+            "inflammation",
+            "polyp",
+            "polyps",
+            "bleeding"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Is contact bleeding during a cervical sample on its own an indication for colposcopy?",
+          "a": "No, not on its own, in the absence of other symptoms or an abnormal cytology result. It is common at sampling.",
+          "accept": [
+            "not on its own",
+            "not an indication",
+            "other symptoms",
+            "abnormal cytology",
+            "common"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A 44-year-old with postcoital bleeding has a cervix that looks abnormal and suspicious. What is the correct action?",
+          "a": "Urgent referral for colposcopy. A benign lesion such as a polyp needs only routine gynaecological referral.",
+          "accept": [
+            "urgent",
+            "referral",
+            "colposcopy",
+            "refer"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "whole",
+          "text": "Confirms the whole cervix is visible before sampling or reporting"
+        },
+        {
+          "id": "look",
+          "text": "Inspects the cervix and vaginal walls for discharge, growths, polyps, ulceration, inflammation and bleeding"
+        },
+        {
+          "id": "fix",
+          "text": "If a sample is taken, places it in the fixative before removing the speculum"
+        },
+        {
+          "id": "remove",
+          "text": "Withdraws gently with the blades slightly apart until the cervix is clear, without pinching"
+        },
+        {
+          "id": "report",
+          "text": "Describes what was seen clearly enough for a colleague to act on"
+        }
+      ],
+      "sources": [
+        {
+          "source": "TeachMeObGyn OSCE guides: Speculum Examination",
+          "locator": "Cervical visualisation (discharge, erosions, ulceration, growths, inflammation, bleeding, polyps, ectropion); removal",
+          "url": "https://teachmeobgyn.com/history-taking-examinations/examinations/speculum/"
+        },
+        {
+          "source": "NHS Cervical Screening Programme, cervical sample taker training (GOV.UK)",
+          "locator": "Taking the sample, fixing the sample, removing the speculum",
+          "url": "https://www.gov.uk/government/publications/nhs-cervical-screening-cervical-sample-taker-training/topics-7-and-8-anatomy-physiology-and-taking-cervical-samples"
+        },
+        {
+          "source": "NHS Cervical Screening Training, Guidance for Good Practice in Cervical Screening, 5th edition",
+          "locator": "Women with symptoms (a speculum examination is the critical intervention; contact bleeding is not an indication for referral); Ending the consultation and documentation",
+          "url": "https://www.newcastle-hospitals.nhs.uk/wp-content/uploads/2020/11/Guidance_for_Good_Practice_-_5th_Edition.pdf"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.obg.bimanual": {
+      "id": "skill.exam.obg.bimanual",
+      "kind": "exam",
+      "system": "obgyn",
+      "title": "Bimanual examination: cervix, uterus and adnexa",
+      "oneLine": "Two fingers inside, one hand outside, and feel between them",
+      "why": "The bimanual examination is the only bedside way to feel the uterus and ovaries. Read with the history, it identifies fibroids, adnexal masses, pelvic infection and an ectopic pregnancy. Its value depends on a relaxed woman, a full description, and knowing what cervical motion tenderness means.",
+      "steps": [
+        {
+          "text": "Make sure her bladder is empty, she is on her back with knees bent and apart, consent and a chaperone have been dealt with, and the abdomen and vulva have been examined."
+        },
+        {
+          "text": "Put lubricant on the index and middle fingers of the gloved hand. Part the labia, insert the index finger (and the middle finger if it is comfortable), rotate the hand so the palm faces up, and advance slowly to find the cervix."
+        },
+        {
+          "text": "Assess the cervix: smoothness, mobility and firmness. Move it gently from side to side to test for cervical motion tenderness, watching her face."
+        },
+        {
+          "text": "Put your other hand on the lower abdomen. Use the fingers in the vagina to lift the uterus while the abdominal hand presses the fundus down, so the uterus lies between your two hands. Note size, position (anteverted or retroverted), shape, consistency, mobility and tenderness."
+        },
+        {
+          "text": "Move to each side in turn. Feel the adnexa between the vaginal fingers in the lateral fornix and the abdominal hand, for masses and tenderness."
+        },
+        {
+          "text": "Withdraw gently, tell her you have finished, and let her dress in private."
+        }
+      ],
+      "normal": "A firm smooth cervix that moves without pain; a uterus of normal size, mobile and not tender; no adnexal mass or tenderness.",
+      "abnormal": "Pain on moving the cervix, an enlarged, irregular or fixed uterus, or a mass or tenderness in one or both adnexa.",
+      "significance": "Cervical motion tenderness is an important finding in ectopic pregnancy and pelvic inflammatory disease. An adnexal mass or an enlarged uterus needs imaging. Findings must be read with the history and the pregnancy status, never alone.",
+      "practice": "Perform a bimanual examination on a model and describe cervix, uterus and each adnexa in that order, in one sentence each.",
+      "pitfalls": [
+        "Palpating the abdomen with a tense hand, so the uterus cannot be brought down to the fingers.",
+        "Forgetting to ask her about pain when moving the cervix and watching her face instead of listening.",
+        "Reporting 'nothing abnormal detected' without describing size and position.",
+        "Doing a bimanual examination before excluding pregnancy in a woman with pain."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which structures do you assess on bimanual examination?",
+          "a": "The cervix, the uterus and the adnexa, including testing for cervical motion tenderness.",
+          "accept": [
+            "cervix",
+            "uterus",
+            "adnexa",
+            "cervical motion"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What is cervical motion tenderness and what does it suggest?",
+          "a": "Pain when the cervix is moved from side to side. It is an important finding in ectopic pregnancy and pelvic inflammatory disease.",
+          "accept": [
+            "ectopic",
+            "pelvic inflammatory",
+            "pid",
+            "pain"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How do you feel the uterus bimanually?",
+          "a": "Lift the uterus with the fingers in the vagina while the other hand presses the fundus down through the abdominal wall, so the uterus lies between the two hands. Assess its size, position, shape, consistency, mobility and tenderness.",
+          "accept": [
+            "between",
+            "two hands",
+            "fundus",
+            "size",
+            "position",
+            "lift",
+            "tenderness"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 4,
+          "q": "A woman with a missed period, lower abdominal pain and cervical motion tenderness. What must you exclude first?",
+          "a": "An ectopic pregnancy, with pelvic inflammatory disease in the differential.",
+          "accept": [
+            "ectopic"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "insert",
+          "text": "Uses lubricated gloved fingers, inserts gently with the palm up, and checks she is comfortable"
+        },
+        {
+          "id": "cervix",
+          "text": "Assesses the cervix: smoothness, mobility and firmness"
+        },
+        {
+          "id": "cmt",
+          "text": "Tests for cervical motion tenderness while watching her face",
+          "critical": true
+        },
+        {
+          "id": "uterus",
+          "text": "Palpates the uterus between the two hands: size, position, shape, mobility and tenderness"
+        },
+        {
+          "id": "adnexa",
+          "text": "Palpates each adnexa for masses and tenderness"
+        }
+      ],
+      "sources": [
+        {
+          "source": "TeachMeObGyn OSCE guides: Bimanual Examination",
+          "locator": "Internal examination; key assessments (cervix, uterus, adnexa, cervical motion tenderness)",
+          "url": "https://teachmeobgyn.com/history-taking-examinations/examinations/bimanual/"
+        },
+        {
+          "source": "Stanford Medicine 25: Pelvic Exam",
+          "locator": "Bimanual examination",
+          "url": "https://med.stanford.edu/stanfordmedicine25/the25/PelvicExam.html"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.approach.obg.pelvic_close": {
+      "id": "skill.approach.obg.pelvic_close",
+      "kind": "approach",
+      "system": "obgyn",
+      "title": "Finishing an intimate examination",
+      "oneLine": "Dignity, hygiene, an explanation, and a note that someone else could act on",
+      "why": "What you do after the last touch decides whether she trusts the next clinician. A woman who is hurried out, who is not told what you found, or whose examination is barely recorded has had a worse encounter than the one you thought you gave her.",
+      "steps": [
+        {
+          "text": "Tell her you have finished. Let her dress in private and offer tissues or a panty liner."
+        },
+        {
+          "text": "Dispose of gloves and sharps safely and wash your hands. Label and send any samples with a complete request form."
+        },
+        {
+          "text": "Explain what you found and what happens next, including when and how she will get a result."
+        },
+        {
+          "text": "Record consent, whether a chaperone was offered and accepted or declined, the findings (including that the cervix was fully seen and how a sample was taken), the date and who did it."
+        }
+      ],
+      "practice": "Finish a mock speculum examination, explain a normal finding in two plain sentences, and write the record in four lines.",
+      "pitfalls": [
+        "Leaving without telling her what was found.",
+        "Recording 'examination normal' with no mention of consent, the chaperone or what was seen.",
+        "Not telling her how and when she will hear a result."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What should be documented after a speculum examination for a cervical sample?",
+          "a": "That the cervix was fully seen and how the sample was taken, that consent was obtained, whether a chaperone was offered and accepted or declined, the date, who took it, and any unusual appearances.",
+          "accept": [
+            "cervix",
+            "consent",
+            "chaperone",
+            "date",
+            "visualised",
+            "visualized",
+            "sample"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What must you do with a cervical sample before removing the speculum?",
+          "a": "Place it in the fixative at once, before the speculum is removed.",
+          "accept": [
+            "fixative",
+            "vial",
+            "immediately",
+            "before",
+            "at once"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "dress",
+          "text": "Lets her dress in private and tells her the examination is over"
+        },
+        {
+          "id": "hygiene",
+          "text": "Disposes of gloves and sharps safely and washes hands"
+        },
+        {
+          "id": "explain",
+          "text": "Explains what was found and what happens next"
+        },
+        {
+          "id": "record",
+          "text": "Records consent, chaperone offered or declined, findings and any samples"
+        }
+      ],
+      "sources": [
+        {
+          "source": "NHS Cervical Screening Training, Guidance for Good Practice in Cervical Screening, 5th edition",
+          "locator": "Taking the sample: ending the consultation; documentation",
+          "url": "https://www.newcastle-hospitals.nhs.uk/wp-content/uploads/2020/11/Guidance_for_Good_Practice_-_5th_Edition.pdf"
+        },
+        {
+          "source": "NHS Cervical Screening Programme, cervical sample taker training (GOV.UK)",
+          "locator": "Ending the appointment and explaining results",
+          "url": "https://www.gov.uk/government/publications/nhs-cervical-screening-cervical-sample-taker-training/topics-7-and-8-anatomy-physiology-and-taking-cervical-samples"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.approach.obg.bbn_setup": {
+      "id": "skill.approach.obg.bbn_setup",
+      "kind": "approach",
+      "system": "obgyn",
+      "title": "Breaking bad news, stillbirth (1): set up and find out what she knows",
+      "oneLine": "Private room, sit down, her people beside her, then ask before you tell",
+      "why": "The first minutes decide whether a woman remembers the news as care or as cruelty. Getting the setting right and finding out what she already understands lets you tell her at her own level, and it costs less than two minutes.",
+      "steps": [
+        {
+          "text": "Find a private place, switch off or hand over your phone and pager, and make sure you will not be interrupted. Have tissues ready. Sit down."
+        },
+        {
+          "text": "If she is alone, make an immediate offer to call her partner, family or friends before you say anything."
+        },
+        {
+          "text": "Introduce yourself. Ask what she already understands about why she is here and what she has noticed (for example that the baby has moved less)."
+        },
+        {
+          "text": "Ask how much she would like to know and how she would like to be told."
+        },
+        {
+          "text": "Give a warning that the news is not good before you say it."
+        }
+      ],
+      "practice": "Role-play the first two minutes with a partner playing a mother who has come alone because she felt less movement. Stop before you give the news.",
+      "pitfalls": [
+        "Telling her in a corridor, a scan room with the screen still turned to her, or while standing.",
+        "Giving the news before finding out what she knows.",
+        "Not offering to call someone when she is alone."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the six steps of the SPIKES protocol?",
+          "a": "Setting up, Perception, Invitation, Knowledge, Emotions, and Strategy and summary.",
+          "accept": [
+            "setting",
+            "perception",
+            "invitation",
+            "knowledge",
+            "emotions",
+            "strategy"
+          ],
+          "minMatch": 4
+        },
+        {
+          "level": 2,
+          "q": "A woman attends alone with reduced movements and the scan shows no heartbeat. What do you do before telling her?",
+          "a": "Make an immediate offer to call her partner, family or friends, and find a private, appropriate place with time.",
+          "accept": [
+            "partner",
+            "family",
+            "friends",
+            "private",
+            "call"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why ask what she understands before giving the news?",
+          "a": "It shows what she already knows and fears, lets you tailor the news to her level, and shows whether she is in denial.",
+          "accept": [
+            "knows",
+            "understands",
+            "tailor",
+            "fears",
+            "denial",
+            "level"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "place",
+          "text": "Finds a private place, removes interruptions and sits down"
+        },
+        {
+          "id": "company",
+          "text": "Offers to call her partner or family, especially if she is alone"
+        },
+        {
+          "id": "perception",
+          "text": "Asks what she already understands before giving the news"
+        },
+        {
+          "id": "warning",
+          "text": "Warns her that the news is not good before saying it"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Baile WF et al., SPIKES: a six-step protocol for delivering bad news, The Oncologist 2000;5(4):302-311",
+          "locator": "Steps 1 to 3: setting up the interview, perception and invitation",
+          "url": "https://academic.oup.com/oncolo/article/5/4/302/6386019"
+        },
+        {
+          "source": "RCOG Green-top Guideline No. 55: Care of late intrauterine fetal death and stillbirth (Burden et al., BJOG 2025;132:e1-e41)",
+          "locator": "Section 4.2.1 Diagnosis: offer to call partner or family; an appropriate place; time to absorb news",
+          "url": "https://obgyn.onlinelibrary.wiley.com/doi/10.1111/1471-0528.17844"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.approach.obg.bbn_disclose": {
+      "id": "skill.approach.obg.bbn_disclose",
+      "kind": "approach",
+      "system": "obgyn",
+      "title": "Breaking bad news, stillbirth (2): telling her",
+      "oneLine": "Be sure first, then say it plainly, in small pieces, without euphemism",
+      "why": "A parent who has been told that the baby 'has no viability' or that you 'lost' the baby may leave the room unsure whether the baby is alive. Clear words are kinder than gentle ones that hide the truth, and the guideline says plainly that no euphemisms or jargon should be used.",
+      "steps": [
+        {
+          "text": "Be certain of the diagnosis before you speak. Real-time ultrasound shows the fetal heart directly, but views can be hard with a high BMI, an abdominal scar or oligohydramnios; use colour Doppler or a second opinion if there is any doubt."
+        },
+        {
+          "text": "Give the warning: 'I am so sorry, I am afraid I have some very sad news.'"
+        },
+        {
+          "text": "Say it in clear words at her level: 'The scan shows that your baby's heart has stopped. Your baby has died.' Avoid jargon and euphemisms such as 'lost' or 'no viability'."
+        },
+        {
+          "text": "Stop and give her time to take it in. Answer the questions you can, within your scope, and do not guess at a cause."
+        },
+        {
+          "text": "Use a professional interpreter if one is needed, not a family member."
+        }
+      ],
+      "practice": "Say the sentence that gives the news aloud, in your own words, three times. Notice which of them contains a euphemism.",
+      "pitfalls": [
+        "Saying 'we lost the baby' or 'the baby is not viable'.",
+        "Giving a long medical explanation in the first breath.",
+        "Speculating about a cause before any tests, which can look like blame.",
+        "Asking a relative to interpret."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which kinds of words should you avoid when telling parents that their baby has died?",
+          "a": "Jargon and euphemisms; the guideline asks for clear language.",
+          "accept": [
+            "jargon",
+            "euphemism",
+            "euphemisms",
+            "clear",
+            "plain"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "How is a late intrauterine death confirmed, and what makes it hard?",
+          "a": "Real-time ultrasound showing absent fetal cardiac activity. It can be difficult with maternal BMI over 30, abdominal scars and oligohydramnios; colour Doppler helps.",
+          "accept": [
+            "ultrasound",
+            "cardiac",
+            "heart",
+            "doppler",
+            "bmi",
+            "scar"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is a professional interpreter preferred to a relative?",
+          "a": "Family and friends may soften, omit or add to what is said, and the news should be given exactly and in her own language; the guideline prefers a professional interpreter.",
+          "accept": [
+            "professional",
+            "interpreter",
+            "accurate",
+            "accurately",
+            "omit",
+            "soften"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "sure",
+          "text": "Is certain of the diagnosis (real-time scan, second opinion if in doubt) before speaking"
+        },
+        {
+          "id": "warn",
+          "text": "Gives a warning that very sad news is coming"
+        },
+        {
+          "id": "plain",
+          "text": "Says clearly that the baby has died, in plain words without euphemism or jargon",
+          "critical": true
+        },
+        {
+          "id": "chunks",
+          "text": "Gives information in small pieces and pauses for her to take it in"
+        },
+        {
+          "id": "interp",
+          "text": "Arranges a professional interpreter if she needs one"
+        }
+      ],
+      "sources": [
+        {
+          "source": "RCOG Green-top Guideline No. 55: Care of late intrauterine fetal death and stillbirth (Burden et al., BJOG 2025;132:e1-e41)",
+          "locator": "Section 4.1 (real-time ultrasound and its limitations); 4.2.1 (clear language, no euphemisms or jargon, professional interpreter)",
+          "url": "https://obgyn.onlinelibrary.wiley.com/doi/10.1111/1471-0528.17844"
+        },
+        {
+          "source": "Baile WF et al., SPIKES: a six-step protocol for delivering bad news, The Oncologist 2000;5(4):302-311",
+          "locator": "Step 4: giving knowledge and information (warning shot, non-technical words, avoiding excessive bluntness)",
+          "url": "https://academic.oup.com/oncolo/article/5/4/302/6386019"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.approach.obg.bbn_respond": {
+      "id": "skill.approach.obg.bbn_respond",
+      "kind": "approach",
+      "system": "obgyn",
+      "title": "Breaking bad news, stillbirth (3): responding to her grief",
+      "oneLine": "Notice, name, connect, and do not hurry to fix",
+      "why": "After the news the reaction may be silence, disbelief, crying or anger, and all are normal. Until the emotion has settled she cannot take in the plan. The skill is not saying the right sentence; it is noticing what she is feeling and letting her know you have seen it.",
+      "steps": [
+        {
+          "text": "Observe her emotion: tearfulness, silence, shock, anger."
+        },
+        {
+          "text": "Name it to yourself. If she is silent, ask an open question about what she is thinking or feeling."
+        },
+        {
+          "text": "Identify the reason for it, which is usually the news. If you are not sure, ask."
+        },
+        {
+          "text": "After a short pause, make a connecting statement: 'I can see how much you wanted this baby, and how terrible this is.' Do not hurry to reassure or to move on."
+        },
+        {
+          "text": "Ask about her thoughts and wishes without trying to shape them. Give her as much privacy and time alone as she wants, but make sure she does not feel abandoned."
+        },
+        {
+          "text": "Include her partner and check that his or her needs are not assumed to be the same."
+        }
+      ],
+      "practice": "With a partner playing a silent, stunned mother, practise the four steps and stay silent for ten seconds before you speak.",
+      "pitfalls": [
+        "Starting to explain options while she is still crying.",
+        "Filling every silence.",
+        "Assuming what she wants to do and steering her to it.",
+        "Leaving her alone for so long that she feels abandoned."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the four steps of an empathic response?",
+          "a": "Observe the emotion, identify the emotion, identify the reason for it, then make a connecting statement that shows you have linked the two.",
+          "accept": [
+            "observe",
+            "identify",
+            "emotion",
+            "reason",
+            "connect",
+            "connecting"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "How should you respond to a woman who is silent after the news?",
+          "a": "Use an open question to ask what she is thinking or feeling, stay with her, and do not fill the silence; give time.",
+          "accept": [
+            "open",
+            "question",
+            "silence",
+            "time",
+            "feeling"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Her partner is asking practical questions while she is silent. What should you remember?",
+          "a": "Partners may have different needs and want to be involved in decisions; both need information and support, and the parents' priorities remain with the baby even when staff focus on the woman.",
+          "accept": [
+            "different",
+            "needs",
+            "involved",
+            "decisions",
+            "partner"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "notice",
+          "text": "Notices and names the emotion she is showing"
+        },
+        {
+          "id": "empathy",
+          "text": "Makes an empathic connecting statement and allows silence"
+        },
+        {
+          "id": "explore",
+          "text": "Asks about her thoughts and wishes without steering them"
+        },
+        {
+          "id": "time",
+          "text": "Offers privacy and time alone without leaving her feeling abandoned"
+        },
+        {
+          "id": "partner",
+          "text": "Includes her partner and asks about his or her needs"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Baile WF et al., SPIKES: a six-step protocol for delivering bad news, The Oncologist 2000;5(4):302-311",
+          "locator": "Step 5: addressing the patient's emotions with empathic responses (four steps)",
+          "url": "https://academic.oup.com/oncolo/article/5/4/302/6386019"
+        },
+        {
+          "source": "RCOG Green-top Guideline No. 55: Care of late intrauterine fetal death and stillbirth (Burden et al., BJOG 2025;132:e1-e41)",
+          "locator": "Section 4.2.1: privacy and time alone; supporting parents' choices; partners may have different needs",
+          "url": "https://obgyn.onlinelibrary.wiley.com/doi/10.1111/1471-0528.17844"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.approach.obg.bbn_plan": {
+      "id": "skill.approach.obg.bbn_plan",
+      "kind": "approach",
+      "system": "obgyn",
+      "title": "Breaking bad news, stillbirth (4): the plan and what she takes away",
+      "oneLine": "Options, not orders: birth, tests, memories, milk, and a named person to ring",
+      "why": "After the shock the parents still face decisions in hours: how the baby will be born, whether to agree to tests, whether to see and hold the baby, and what will happen to her milk. Offering these as real choices, with written information and a contact, is what they will remember of the care.",
+      "steps": [
+        {
+          "text": "Explain the options for birth. Vaginal birth is recommended for most women, but caesarean birth will need to be considered for some. Give a detailed, honest account of the physical and psychological sides of each, and the timings and pain relief."
+        },
+        {
+          "text": "A combination of mifepristone and a prostaglandin is usually the recommended first-line way to induce labour after a late intrauterine death. The doses depend on gestation and are set by the unit protocol."
+        },
+        {
+          "text": "Offer memory-making opportunities: seeing and holding the baby, photographs, hand and footprints, naming. Let her decide."
+        },
+        {
+          "text": "Explain that with full investigation, including postmortem and placental histology, a possible or probable cause can be found in up to three-quarters of late intrauterine deaths, and that it can help in a future pregnancy. Offer tests and a postmortem without persuading. Offer chromosome testing with written consent."
+        },
+        {
+          "text": "Raise lactation and how it can be managed."
+        },
+        {
+          "text": "Give written information, the name and contact of a key person, and a follow-up plan. Make sure all staff who will care for her know that the baby has died, and, where possible, care for her away from the sounds of the labour ward."
+        }
+      ],
+      "practice": "Write, in one page, the information sheet you would hand her: three choices about the birth, three about tests and the baby, one about milk, and a name and phone number.",
+      "pitfalls": [
+        "Presenting a caesarean as the safer choice without discussing what it means for her body and her next pregnancy.",
+        "Pushing for or against a postmortem.",
+        "Forgetting to tell the labour ward staff, so a midwife congratulates her.",
+        "Never mentioning lactation."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the recommended mode of birth after a late intrauterine death?",
+          "a": "Vaginal birth for most women, though caesarean birth has to be considered for some. It is an informed decision made with the parents.",
+          "accept": [
+            "vaginal",
+            "caesarean",
+            "most",
+            "informed"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "With full investigation, in what proportion of late intrauterine deaths can a possible or probable cause be found?",
+          "a": "Up to three-quarters, when postmortem and placental histology are included.",
+          "accept": [
+            "three quarters",
+            "three-quarters",
+            "75",
+            "up to"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "The parents do not want a postmortem. What do you do?",
+          "a": "Respect the choice and do not persuade. Explain what it can add for future pregnancies, offer placental histology and any limited or imaging alternatives the unit provides, and continue with the other tests.",
+          "accept": [
+            "respect",
+            "persuade",
+            "placental",
+            "histology",
+            "limited",
+            "imaging",
+            "choice"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What should the parents leave with?",
+          "a": "Written information, the contact details of a named healthcare professional, and a follow-up plan.",
+          "accept": [
+            "written",
+            "named",
+            "contact",
+            "follow",
+            "plan"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "birth",
+          "text": "Explains the options for birth, timing and pain relief, and that vaginal birth is recommended for most, without pressing a choice"
+        },
+        {
+          "id": "memory",
+          "text": "Offers memory-making opportunities and time with the baby"
+        },
+        {
+          "id": "tests",
+          "text": "Explains that tests and postmortem can often find a cause, and offers them without pressure"
+        },
+        {
+          "id": "milk",
+          "text": "Raises lactation and how it can be managed"
+        },
+        {
+          "id": "written",
+          "text": "Gives written information, a named contact and a follow-up plan"
+        }
+      ],
+      "sources": [
+        {
+          "source": "RCOG Green-top Guideline No. 55: Care of late intrauterine fetal death and stillbirth (Burden et al., BJOG 2025;132:e1-e41)",
+          "locator": "Key recommendations; sections 4.2.2 (care following diagnosis), 5 (labour and birth), lactation and postmortem sections",
+          "url": "https://obgyn.onlinelibrary.wiley.com/doi/10.1111/1471-0528.17844"
+        },
+        {
+          "source": "Baile WF et al., SPIKES: a six-step protocol for delivering bad news, The Oncologist 2000;5(4):302-311",
+          "locator": "Step 6: strategy and summary",
+          "url": "https://academic.oup.com/oncolo/article/5/4/302/6386019"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.approach.obg.contra_counsel": {
+      "id": "skill.approach.obg.contra_counsel",
+      "kind": "approach",
+      "system": "obgyn",
+      "title": "Contraception counselling: greet, ask, tell, help, explain, return",
+      "oneLine": "Her situation first, the methods second, her choice last and final",
+      "why": "Counselling has succeeded when the woman feels she got the help she wanted, knows what to do, feels respected, comes back when she needs to, and uses her method well. A list of methods read aloud achieves none of these.",
+      "steps": [
+        {
+          "text": "Greet her respectfully in a private place and assure her of confidentiality. Ask about her situation, what matters to her, what she already knows, and whether she has a method in mind."
+        },
+        {
+          "text": "Screen for medical eligibility with a short history before you describe methods."
+        },
+        {
+          "text": "Tell her about the methods that suit her. Compare effectiveness rather than quoting rates: implants, IUDs, female sterilisation and vasectomy are the most effective, with less than one pregnancy per 100 women in a year; injectables, pills and similar methods are less effective on average, at 2 to 7 per 100; methods that depend on being used every time can reach 20 or more per 100."
+        },
+        {
+          "text": "Bring up side effects, especially bleeding changes, before she chooses, and take her concerns seriously. Be alert to protection from STIs, including HIV, and support condom use."
+        },
+        {
+          "text": "Help her decide and support her informed choice. Do not push a method."
+        },
+        {
+          "text": "Explain how to use it, how to cope with problems, and check her understanding. Invite her to come back at any time for any reason."
+        }
+      ],
+      "practice": "Counsel a partner who has not decided a method and is 4 months postpartum and breastfeeding, and finish by asking her to tell you back the three things she will do.",
+      "pitfalls": [
+        "Reading out the list of methods before asking what she wants.",
+        "Quoting pregnancy rates that a patient cannot interpret instead of comparing methods.",
+        "Not mentioning bleeding changes until after an implant or injection.",
+        "Steering her to the method you prefer."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which four methods are the most effective, and how effective are they?",
+          "a": "Implants, IUDs, female sterilisation and vasectomy: less than 1 pregnancy per 100 women in the first year.",
+          "accept": [
+            "implant",
+            "implants",
+            "iud",
+            "iuds",
+            "sterilisation",
+            "sterilization",
+            "vasectomy",
+            "less than 1",
+            "one"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why compare methods rather than quote pregnancy rates?",
+          "a": "Pregnancy rates are hard to understand; comparing methods and asking whether she can use the method effectively is more useful.",
+          "accept": [
+            "hard",
+            "understand",
+            "compare",
+            "comparison",
+            "effectively"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What are the counselling tasks for a new client with no method in mind?",
+          "a": "Discuss her situation, plans and what matters to her; help her consider methods that might suit her and reach a decision if needed; support her choice, give instructions on use and discuss coping with side effects.",
+          "accept": [
+            "situation",
+            "plans",
+            "matters",
+            "consider",
+            "decision",
+            "support",
+            "instructions",
+            "side effects"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "She chooses a method that is medically eligible but not the one you would choose. What do you do?",
+          "a": "Respect and support her informed decision, check she understands how to use it and its side effects, and invite her back.",
+          "accept": [
+            "respect",
+            "support",
+            "informed",
+            "decision",
+            "understands",
+            "back"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "open",
+          "text": "Greets her, ensures privacy and confidentiality, and asks what she wants and knows"
+        },
+        {
+          "id": "tell",
+          "text": "Describes suitable methods and compares their effectiveness in plain words"
+        },
+        {
+          "id": "side",
+          "text": "Discusses side effects, including bleeding changes, before she chooses"
+        },
+        {
+          "id": "stis",
+          "text": "Raises protection against STIs, including HIV, and condoms"
+        },
+        {
+          "id": "choice",
+          "text": "Helps her decide and supports her informed choice without pushing a method",
+          "critical": true
+        },
+        {
+          "id": "explain",
+          "text": "Explains how to use the method and what to do if there is a problem"
+        },
+        {
+          "id": "return",
+          "text": "Checks understanding and invites her to return at any time"
+        }
+      ],
+      "sources": [
+        {
+          "source": "WHO and JHU CCP, Family planning: a global handbook for providers, 2022 edition",
+          "locator": "Successful Counseling, pp. 398-400 (counselling tasks by client type; tips; counselling about effectiveness)",
+          "url": "https://cdn.who.int/media/docs/default-source/reproductive-health/contraception-family-planning/family-planning-a-global-handbook-for-providers-2022.pdf"
+        },
+        {
+          "source": "UK Medical Eligibility Criteria for Contraceptive Use (UKMEC 2025), summary tables",
+          "locator": "Category definitions and the combined hormonal contraception column",
+          "url": "https://www.cosrh.org/Common/Uploaded%20files/documents/UKMEC_2025_Summary_Tables.pdf"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.approach.obg.cs_setup": {
+      "id": "skill.approach.obg.cs_setup",
+      "kind": "approach",
+      "system": "obgyn",
+      "title": "Consent for caesarean (1): set up, capacity and what she understands",
+      "oneLine": "Consent starts by making sure she can take part in the conversation",
+      "why": "Consent for an operation is valid only if the patient has capacity, is free to decide and has enough information. A woman in advanced labour, in pain or frightened, needs the conversation to be shorter and slower, not skipped.",
+      "steps": [
+        {
+          "text": "Introduce yourself, confirm her identity and the planned procedure, and find as private a place as the situation allows."
+        },
+        {
+          "text": "Check that she can understand what you say, hold on to it, weigh it up and tell you her decision, and that pain or sedation are not preventing this. Consent is voluntary: check nobody is pressing her."
+        },
+        {
+          "text": "Ask what she already understands about why a caesarean is being suggested and what she is most worried about."
+        },
+        {
+          "text": "Offer an interpreter and ask who she would like present. Involve a consultant obstetrician in the decision."
+        },
+        {
+          "text": "Tell her that she will be asked for consent only after she has had the information she needs."
+        }
+      ],
+      "practice": "Open a consent conversation with a partner who is in pain and anxious, and get to the end of your first two minutes without giving any information yet.",
+      "pitfalls": [
+        "Handing over the consent form as the first step.",
+        "Asking for consent when she is too distressed to take in what you say.",
+        "Not offering a professional interpreter.",
+        "Not checking who has come with her and whether she wants them present."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What three things make consent real?",
+          "a": "The patient has capacity and competence, the consent is voluntary, and it is based on adequate information.",
+          "accept": [
+            "capacity",
+            "competence",
+            "voluntary",
+            "information",
+            "adequate"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "When in the conversation is consent for a caesarean asked?",
+          "a": "Only after providing her with evidence-based information.",
+          "accept": [
+            "after",
+            "information",
+            "evidence"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Who should be involved in deciding on a caesarean during labour?",
+          "a": "A consultant obstetrician.",
+          "accept": [
+            "consultant",
+            "obstetrician",
+            "senior"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "identify",
+          "text": "Confirms her identity and the planned procedure, and finds a private place"
+        },
+        {
+          "id": "capacity",
+          "text": "Checks that she can understand, weigh up and communicate a decision, and that nobody is pressing her"
+        },
+        {
+          "id": "prior",
+          "text": "Finds out what she already understands and what worries her"
+        },
+        {
+          "id": "support",
+          "text": "Offers an interpreter and a companion, and says a consultant is involved"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Supreme Court of India, Samira Kohli v Dr Prabha Manchanda (16 January 2008)",
+          "locator": "Real consent: capacity and competence, voluntary, adequate information",
+          "url": "https://indiankanoon.org/doc/438423/"
+        },
+        {
+          "source": "NICE NG192 Caesarean birth",
+          "locator": "Recommendations 1.2.23 (ask for consent only after information) and 1.3.3 (consultant obstetrician involvement)",
+          "url": "https://www.nice.org.uk/guidance/ng192"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.approach.obg.cs_info": {
+      "id": "skill.approach.obg.cs_info",
+      "kind": "approach",
+      "system": "obgyn",
+      "title": "Consent for caesarean (2): what to explain, benefits, risks and alternatives",
+      "oneLine": "Why, what happens, what could go wrong, what else she could choose, and what happens if she declines",
+      "why": "For consent to be informed she needs to know the nature and purpose of the operation, its benefits, the alternatives, an outline of the substantial risks, and what could follow if she refuses. She does not need every statistic, but she does need to hear the serious risks in words she understands.",
+      "steps": [
+        {
+          "text": "Explain why a caesarean is recommended for her, in one or two sentences, and what the alternative would be, for example continuing labour or waiting."
+        },
+        {
+          "text": "Explain what will happen: the anaesthetic (spinal or general), the incision, the birth of the baby, early skin-to-skin contact, the recovery and pain relief afterwards."
+        },
+        {
+          "text": "Explain the benefits, and the risks of not having it, in her situation."
+        },
+        {
+          "text": "Explain the serious risks in plain words: bleeding and possible transfusion, infection (about 8 in 100 women have an infection of the womb, bladder or wound), blood clots, injury to nearby organs such as the bladder, an emergency hysterectomy, and a very small risk to her life. Say what is done to reduce them: antibiotics before the incision and clot prevention."
+        },
+        {
+          "text": "Explain the effects on future pregnancies: a higher chance of another caesarean and of placenta or scar problems."
+        },
+        {
+          "text": "Tell her what could follow if she declines."
+        }
+      ],
+      "practice": "Explain a caesarean to a partner in three minutes with no jargon, and count how many of the six steps you have covered.",
+      "pitfalls": [
+        "Listing risks in medical terms she cannot follow.",
+        "Giving only the risks of the operation and not the risks of not operating.",
+        "Not mentioning the effect on future pregnancies.",
+        "Leaving out what happens if she says no."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What should a doctor disclose to obtain real consent for a procedure?",
+          "a": "The nature and procedure of the treatment and its purpose, benefits and effect; alternatives; an outline of the substantial risks; and the adverse consequences of refusing treatment.",
+          "accept": [
+            "nature",
+            "procedure",
+            "purpose",
+            "benefits",
+            "alternatives",
+            "risks",
+            "refusing"
+          ],
+          "minMatch": 4
+        },
+        {
+          "level": 2,
+          "q": "About how many women have an infection after a caesarean, and how is it reduced?",
+          "a": "About 8 in 100 have an infection of the womb, bladder or wound. Antibiotics given before the skin incision reduce it more than antibiotics given after.",
+          "accept": [
+            "8",
+            "antibiotics",
+            "before",
+            "incision"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Which effects on a future pregnancy do you mention?",
+          "a": "A higher chance of another caesarean, and of placenta accreta and uterine rupture in a future pregnancy.",
+          "accept": [
+            "caesarean",
+            "accreta",
+            "rupture",
+            "placenta",
+            "scar"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "why",
+          "text": "Explains why a caesarean is recommended and what the alternatives are"
+        },
+        {
+          "id": "what",
+          "text": "Describes what will happen: anaesthetic, incision, birth, skin-to-skin, recovery"
+        },
+        {
+          "id": "risks",
+          "text": "Explains the serious risks in plain words: bleeding or transfusion, infection, clots, injury to organs, hysterectomy, and a very small risk to life",
+          "critical": true
+        },
+        {
+          "id": "reduce",
+          "text": "Says what is done to reduce risk: antibiotics before the incision and clot prevention"
+        },
+        {
+          "id": "future",
+          "text": "Explains the effects on future pregnancies"
+        },
+        {
+          "id": "refuse",
+          "text": "Explains what could follow if she declines"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Supreme Court of India, Samira Kohli v Dr Prabha Manchanda (16 January 2008)",
+          "locator": "Information to be disclosed: nature, purpose, benefits, alternatives, substantial risks, consequences of refusing",
+          "url": "https://indiankanoon.org/doc/438423/"
+        },
+        {
+          "source": "NICE NG192 Caesarean birth",
+          "locator": "Recommendations 1.1.2 (mode of birth information), 1.4.43 to 1.4.46 (antibiotics before skin incision; infection in about 8%; thromboprophylaxis); Appendix A (risks in future pregnancy)",
+          "url": "https://www.nice.org.uk/guidance/ng192"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.approach.obg.cs_decision": {
+      "id": "skill.approach.obg.cs_decision",
+      "kind": "approach",
+      "system": "obgyn",
+      "title": "Consent for caesarean (3): the decision, refusal and the record",
+      "oneLine": "Check she understood, honour her answer, and write down what mattered to her",
+      "why": "She is entitled to decline a caesarean even when it would benefit her or her baby. The signature on a form is evidence that a conversation took place, not a substitute for it; a form signed before the explanation, or one that is blank, proves nothing and is exactly what the Supreme Court criticised.",
+      "steps": [
+        {
+          "text": "Check her understanding by asking her to say back what will happen and the main risks. Invite questions and answer them honestly."
+        },
+        {
+          "text": "Tell her she is entitled to decline, even when the operation would benefit her or her baby, and that her decision will be respected."
+        },
+        {
+          "text": "Explain that her consent covers this operation. Anything extra will be discussed with her first, unless it is needed to save her life or preserve her health and cannot wait."
+        },
+        {
+          "text": "Record the discussion and the factors that were important to her in making her decision. Take her signature on the consent form only after the discussion, never on a blank form."
+        },
+        {
+          "text": "Give her a chance to change her mind at any time before the operation."
+        }
+      ],
+      "practice": "Finish a mock consent by asking your partner to say back the plan. If she cannot, repeat the part she missed before asking her to sign.",
+      "pitfalls": [
+        "Taking a signature on a blank or pre-filled form and explaining afterwards.",
+        "Treating consent for one procedure as covering another.",
+        "Documenting 'consent taken' with no note of what was discussed.",
+        "Reacting to a refusal by explaining again more forcefully."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Can a woman decline a caesarean that would benefit her or her baby?",
+          "a": "Yes. She is entitled to decline treatment even when it would benefit her or her baby's health.",
+          "accept": [
+            "yes",
+            "entitled",
+            "decline",
+            "right"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What should be recorded when a woman decides on or declines a caesarean?",
+          "a": "The factors that are important to her in making the decision.",
+          "accept": [
+            "factors",
+            "important",
+            "decision",
+            "reasons"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "She has consented to a diagnostic laparoscopy. Can that consent cover a hysterectomy?",
+          "a": "No. Consent for a diagnostic procedure cannot be taken as consent for therapeutic surgery, except where the additional procedure is necessary to save life or preserve health and it would be unreasonable to wait.",
+          "accept": [
+            "separate",
+            "except",
+            "save",
+            "life",
+            "health",
+            "emergency",
+            "diagnostic"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "teachback",
+          "text": "Checks her understanding by asking her to say it back"
+        },
+        {
+          "id": "questions",
+          "text": "Invites and answers her questions"
+        },
+        {
+          "id": "decline",
+          "text": "Tells her she may decline and that her decision will be respected",
+          "critical": true
+        },
+        {
+          "id": "scope",
+          "text": "Explains that consent covers this operation and that extra procedures will be discussed first unless needed to save life"
+        },
+        {
+          "id": "record",
+          "text": "Records the discussion and what mattered to her, and takes the signature after the discussion"
+        }
+      ],
+      "sources": [
+        {
+          "source": "NICE NG192 Caesarean birth",
+          "locator": "Recommendations 1.2.23 to 1.2.25 (consent after information; right to decline; document the factors that matter to the woman)",
+          "url": "https://www.nice.org.uk/guidance/ng192"
+        },
+        {
+          "source": "Supreme Court of India, Samira Kohli v Dr Prabha Manchanda (16 January 2008)",
+          "locator": "Diagnostic versus therapeutic consent; the emergency exception",
+          "url": "https://indiankanoon.org/doc/438423/"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.approach.obg.team_leader": {
+      "id": "skill.approach.obg.team_leader",
+      "kind": "approach",
+      "system": "obgyn",
+      "title": "Leading an obstetric emergency team",
+      "oneLine": "Call for help first, give every task a name, and say the time",
+      "why": "In a haemorrhage or an eclamptic fit the drugs are known. What goes wrong is that nobody calls for help, three people do the same task, and nobody watches the clock. Teamwork and personnel are what turn a protocol into treatment.",
+      "steps": [
+        {
+          "text": "Call for help at once: senior obstetrician, anaesthetist, blood bank, theatre, and a second pair of hands."
+        },
+        {
+          "text": "Give every task a name: airway and oxygen, IV access and bloods, drugs and fluids, someone to record times, someone to talk to the family. State the plan aloud."
+        },
+        {
+          "text": "Use closed-loop communication: say the order, hear it repeated, and hear that it has been done."
+        },
+        {
+          "text": "Note the time of the diagnosis and of each intervention. Reassess the patient at fixed intervals (vital signs and blood loss at least every 15 minutes in the PPH workflow)."
+        },
+        {
+          "text": "Keep the woman informed, and explain to the family what is happening."
+        }
+      ],
+      "practice": "Run a five-minute mock emergency where you are not allowed to touch the patient. If you cannot give every task to someone by name, you have not led.",
+      "pitfalls": [
+        "Doing the procedure yourself and losing the overview.",
+        "Calling for help by shouting and not saying who is needed.",
+        "Not recording times, so the sequence cannot be reconstructed.",
+        "Forgetting the woman and her family."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the first step in eclampsia and in postpartum haemorrhage?",
+          "a": "Call for help.",
+          "accept": [
+            "call",
+            "help"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How soon should the PPH treatment bundle be started after diagnosis?",
+          "a": "Ideally all bundle interventions are initiated within the first 15 minutes after a diagnosis of PPH.",
+          "accept": [
+            "15",
+            "fifteen"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What does a team leader do that a team member does not?",
+          "a": "Keeps the overview, allocates and checks tasks, watches the time, and decides on escalation, rather than doing a single procedure.",
+          "accept": [
+            "overview",
+            "allocate",
+            "allocates",
+            "delegate",
+            "delegates",
+            "time",
+            "escalation",
+            "escalate"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "help",
+          "text": "Calls for help at once and says who is needed",
+          "critical": true
+        },
+        {
+          "id": "roles",
+          "text": "Allocates named tasks: airway and oxygen, IV access and bloods, drugs and fluids, recording times"
+        },
+        {
+          "id": "loop",
+          "text": "Uses closed-loop communication"
+        },
+        {
+          "id": "time",
+          "text": "Notes times of diagnosis and interventions and reassesses at fixed intervals"
+        },
+        {
+          "id": "family",
+          "text": "Keeps the woman informed and explains to the family"
+        }
+      ],
+      "sources": [
+        {
+          "source": "FOGSI, Gestosis (India) and ICOG: Hypertensive Disorders in Pregnancy, Good Clinical Practice Recommendations 2019",
+          "locator": "Management of eclampsia: call for help; team work and personnel are needed",
+          "url": "https://icogonline.org/wp-content/uploads/pdf/gcpr/hdp_fogsi_gestosis_icog_gcpr_2019.pdf"
+        },
+        {
+          "source": "ICMR and DHR, MoHFW: Standard Treatment Workflow, Postpartum haemorrhage (December 2025)",
+          "locator": "First response: call for help; check vitals and blood loss at least every 15 minutes",
+          "url": "https://www.icmr.gov.in/icmrobject/uploads/STWs/1768382528_updatedpostpartumhaemorrhage.pdf"
+        },
+        {
+          "source": "WHO, Consolidated guidelines for the prevention, diagnosis and treatment of postpartum haemorrhage (2025)",
+          "locator": "Recommendation 29 remarks: bundle interventions ideally started within 15 minutes of diagnosis",
+          "url": "https://iris.who.int/server/api/core/bitstreams/88bf11a5-93b6-4d6b-bdaa-856b46c8ed3c/content"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.obg.pph_recognise": {
+      "id": "skill.tx.obg.pph_recognise",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "PPH (1): recognise it early",
+      "oneLine": "Bleeding over 500 mL, or less with a racing pulse; shock index over 1 is a red flag",
+      "why": "Women die of postpartum haemorrhage because it was recognised late, not because the drugs were unknown. Blood loss is usually underestimated, and a healthy young woman keeps her blood pressure until she is very short of blood. The pulse and the shock index warn before the pressure does.",
+      "steps": [
+        {
+          "text": "PPH is blood loss of more than 500 mL, or any bleeding that deranges the vital signs."
+        },
+        {
+          "text": "WHO (2025) advises acting on an objectively measured loss of 300 mL or more with any abnormal sign (pulse over 100, shock index over 1, systolic BP under 100 or diastolic BP under 60), or 500 mL or more, whichever comes first within 24 hours of birth, with particular vigilance in the first 2 hours. Measure loss with a calibrated drape where available."
+        },
+        {
+          "text": "Red flags in the Indian workflow: pulse over 120 per minute, systolic BP under 100 mmHg, SpO2 under 95%, shock index over 1 (pulse divided by systolic BP), or a deteriorating level of consciousness."
+        },
+        {
+          "text": "Assess uterine tone by palpating the abdomen in every woman."
+        },
+        {
+          "text": "Find the cause by what you feel: a flabby uterus (atony); a well-contracted uterus that is still bleeding (tears, retained tissue or rupture); a placenta that has not delivered; or bleeding with no apparent cause (coagulopathy)."
+        }
+      ],
+      "practice": "Given a pulse of 118 and a systolic pressure of 96, calculate the shock index aloud, name the red flags present, and say what the next 30 seconds are.",
+      "pitfalls": [
+        "Estimating blood loss by eye and waiting for a fall in blood pressure.",
+        "Not checking the uterus, so atony is never named.",
+        "Treating all bleeding as atony when the uterus is well contracted."
+      ],
+      "dosingNote": "CliniX does not prescribe. Doses here are quoted from the cited national or guideline document so a student can check them; the treating team's own protocol and the current formulary decide what is given.",
+      "probes": [
+        {
+          "level": 1,
+          "q": "How is PPH defined in the ICMR workflow?",
+          "a": "Blood loss of more than 500 mL, or any amount of bleeding that causes derangement of vital signs.",
+          "accept": [
+            "500",
+            "vital",
+            "derangement"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How is the shock index calculated, and what value is a red flag?",
+          "a": "Pulse rate divided by systolic blood pressure. A value over 1 is a red flag.",
+          "accept": [
+            "pulse",
+            "systolic",
+            "1",
+            "divided"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Name the red flag signs of PPH in the Indian workflow.",
+          "a": "Pulse over 120 per minute, systolic BP under 100 mmHg, SpO2 under 95%, shock index over 1, and deterioration of sensorium.",
+          "accept": [
+            "120",
+            "100",
+            "95",
+            "shock index",
+            "sensorium",
+            "consciousness"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "What is the WHO 2025 trigger for starting first-response treatment?",
+          "a": "Objectively measured blood loss of 300 mL or more with any abnormal haemodynamic sign, or 500 mL or more, whichever occurs first within 24 hours of birth.",
+          "accept": [
+            "300",
+            "500",
+            "abnormal",
+            "haemodynamic",
+            "whichever"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "The uterus is well contracted but she is still bleeding. What are the causes?",
+          "a": "Genital tract trauma (cervical, vaginal or perineal tears), retained tissue, uterine rupture or scar dehiscence; and coagulopathy if there is no apparent cause.",
+          "accept": [
+            "tear",
+            "tears",
+            "trauma",
+            "retained",
+            "rupture",
+            "coagulopathy"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "define",
+          "text": "States the definition: more than 500 mL, or any bleeding that deranges the vital signs"
+        },
+        {
+          "id": "measure",
+          "text": "Measures blood loss objectively and knows the WHO trigger of 300 mL with an abnormal sign"
+        },
+        {
+          "id": "si",
+          "text": "Calculates the shock index (pulse divided by systolic BP) and knows that over 1 is a red flag"
+        },
+        {
+          "id": "tone",
+          "text": "Checks the uterus: flabby (atony) or well contracted"
+        },
+        {
+          "id": "cause",
+          "text": "Names the causes by what is found: atony, tears, retained placenta or tissue, rupture, coagulopathy"
+        }
+      ],
+      "sources": [
+        {
+          "source": "ICMR and DHR, MoHFW: Standard Treatment Workflow, Postpartum haemorrhage (December 2025)",
+          "locator": "Definition; red flag signs; algorithm branches (placenta delivered or not, uterus contracted or flabby)",
+          "url": "https://www.icmr.gov.in/icmrobject/uploads/STWs/1768382528_updatedpostpartumhaemorrhage.pdf"
+        },
+        {
+          "source": "WHO, Consolidated guidelines for the prevention, diagnosis and treatment of postpartum haemorrhage (2025)",
+          "locator": "Recommendations 21 to 23 (objective measurement; diagnostic criteria 300 mL with abnormal signs or 500 mL; uterine tonus assessment)",
+          "url": "https://iris.who.int/server/api/core/bitstreams/88bf11a5-93b6-4d6b-bdaa-856b46c8ed3c/content"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.obg.pph_first_response": {
+      "id": "skill.tx.obg.pph_first_response",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "PPH (2): the first-response bundle",
+      "oneLine": "Help, two lines, fluids, oxygen, oxytocin, massage, tranexamic acid, all together",
+      "why": "In PPH the first minutes are a set of things done together, not a list done in turn. The WHO bundle of uterine massage, an oxytocic, tranexamic acid, IV fluids, examination of the genital tract and escalation should ideally all be started within 15 minutes of the diagnosis.",
+      "steps": [
+        {
+          "text": "Call for help. Rapidly assess pulse, BP, respiratory rate and temperature, and check vitals and blood loss at least every 15 minutes."
+        },
+        {
+          "text": "Establish two IV lines with wide-bore (16 to 18 G) cannulas. Draw blood for grouping and cross-matching, and arrange blood and blood products at the earliest."
+        },
+        {
+          "text": "Start Ringer lactate or normal saline, 1 litre in 15 to 20 minutes. Initially replace each mL of blood lost with 3 mL of crystalloid, switching to blood as soon as it is available."
+        },
+        {
+          "text": "Give oxygen at 6 to 8 L per minute by mask. Insert an indwelling urinary catheter with a urobag and record input and output."
+        },
+        {
+          "text": "Give oxytocin 10 IU IM if it was not given after delivery, and start an oxytocin infusion of 20 IU in 500 mL Ringer lactate or saline at 40 to 60 drops per minute. Oxytocin is never given as an IV bolus."
+        },
+        {
+          "text": "Massage the uterus. Check whether the placenta has been delivered, and inspect it for completeness."
+        },
+        {
+          "text": "Give tranexamic acid 1 g by slow IV injection over 10 minutes for every PPH, whatever the cause, as early as possible and within 3 hours of birth. Repeat once after 30 minutes if bleeding continues. Carry on with all the other treatment meanwhile."
+        }
+      ],
+      "practice": "Run the first five minutes of PPH in a mock scenario, naming who does each of the seven steps.",
+      "pitfalls": [
+        "Giving oxytocin as an IV bolus, which can cause hypotension.",
+        "Doing the steps one after another instead of in parallel.",
+        "Delaying tranexamic acid past 3 hours, when it no longer helps.",
+        "Waiting for blood to arrive before starting crystalloid."
+      ],
+      "dosingNote": "CliniX does not prescribe. Doses here are quoted from the cited national or guideline document so a student can check them; the treating team's own protocol and the current formulary decide what is given.",
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the oxytocin regimen in the ICMR PPH workflow?",
+          "a": "10 IU IM if not given after delivery, then an infusion of 20 IU in 500 mL Ringer lactate or saline at 40 to 60 drops per minute. Never an IV bolus.",
+          "accept": [
+            "10",
+            "20",
+            "500",
+            "bolus",
+            "40",
+            "60"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What is the tranexamic acid dose and time window?",
+          "a": "1 g by slow IV over 10 minutes, as early as possible and within 3 hours of birth; it can be repeated once after 30 minutes if bleeding persists.",
+          "accept": [
+            "1 g",
+            "10 minutes",
+            "3 hours",
+            "30 minutes"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "How much crystalloid, and how fast, in the initial phase?",
+          "a": "1 litre in 15 to 20 minutes, replacing each mL of blood lost with 3 mL of crystalloid at first, then switching to blood.",
+          "accept": [
+            "1 litre",
+            "1 l",
+            "15",
+            "20",
+            "3 ml",
+            "blood"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Name the components of the WHO first-response treatment bundle.",
+          "a": "Uterine massage, an oxytocic, tranexamic acid, intravenous fluids, examination of the genital tract, and escalation of care.",
+          "accept": [
+            "massage",
+            "oxytocic",
+            "oxytocin",
+            "tranexamic",
+            "fluids",
+            "genital tract",
+            "escalation"
+          ],
+          "minMatch": 4
+        }
+      ],
+      "rubric": [
+        {
+          "id": "lines",
+          "text": "Establishes two wide-bore IV lines (16 to 18 G), sends blood for grouping and cross-matching, and asks for blood products",
+          "critical": true
+        },
+        {
+          "id": "fluids",
+          "text": "Starts Ringer lactate or saline, 1 litre in 15 to 20 minutes"
+        },
+        {
+          "id": "oxygen",
+          "text": "Gives oxygen 6 to 8 L per minute and inserts an indwelling catheter"
+        },
+        {
+          "id": "oxytocin",
+          "text": "Gives oxytocin 10 IU IM if not already given and starts 20 IU in 500 mL at 40 to 60 drops per minute, not as a bolus",
+          "critical": true
+        },
+        {
+          "id": "massage",
+          "text": "Massages the uterus and checks whether the placenta has been delivered"
+        },
+        {
+          "id": "txa",
+          "text": "Gives tranexamic acid 1 g slow IV over 10 minutes, within 3 hours of birth, whatever the cause"
+        },
+        {
+          "id": "monitor",
+          "text": "Checks vital signs and blood loss at least every 15 minutes"
+        }
+      ],
+      "sources": [
+        {
+          "source": "ICMR and DHR, MoHFW: Standard Treatment Workflow, Postpartum haemorrhage (December 2025)",
+          "locator": "First-response box (call for help, two IV lines, fluids, oxygen, catheter, oxytocin IM and infusion, tranexamic acid)",
+          "url": "https://www.icmr.gov.in/icmrobject/uploads/STWs/1768382528_updatedpostpartumhaemorrhage.pdf"
+        },
+        {
+          "source": "WHO, Consolidated guidelines for the prevention, diagnosis and treatment of postpartum haemorrhage (2025)",
+          "locator": "Recommendations 24 to 29 (oxytocin, massage, tranexamic acid, isotonic crystalloids, first-response bundle within 15 minutes)",
+          "url": "https://iris.who.int/server/api/core/bitstreams/88bf11a5-93b6-4d6b-bdaa-856b46c8ed3c/content"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.obg.pph_atony_escalate": {
+      "id": "skill.tx.obg.pph_atony_escalate",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "PPH (3): atony, tears, tamponade, surgery and referral",
+      "oneLine": "Compress, add a drug that is safe for her, tamponade, then surgery, and never delay referral",
+      "why": "When the first response is not enough, what matters is doing the next step promptly and choosing a drug that will not harm her. Methylergometrine in a woman with pre-eclampsia, or carboprost in an asthmatic, turns a bleeding problem into a second emergency.",
+      "steps": [
+        {
+          "text": "Placenta not delivered: continue the oxytocin drip and, if the uterus is contracted, try controlled cord traction. If it still does not deliver, take her to theatre for manual removal."
+        },
+        {
+          "text": "Uterus well contracted and still bleeding: examine for cervical, vaginal and perineal tears and repair them. If bleeding persists after repair, suspect inadequate repair, rupture or scar dehiscence: examination under anaesthesia or laparotomy."
+        },
+        {
+          "text": "Flabby uterus: bimanual compression and drugs. Raise the oxytocin infusion to 10 to 20 units per hour. Add any of: methylergometrine 0.2 mg IM or slow IV, repeated after 15 minutes up to 5 doses (1 mg); carboprost 250 micrograms IM, repeated every 20 minutes up to 8 doses (2 mg); misoprostol 800 micrograms rectally or sublingually."
+        },
+        {
+          "text": "Check contraindications first: methylergometrine in hypertension (including pre-eclampsia and eclampsia), severe anaemia and heart disease; carboprost in asthma."
+        },
+        {
+          "text": "If bleeding continues, explore the uterus for retained bits, check coagulation and give blood and components, and use an intrauterine balloon (condom catheter tamponade). Aortic compression can reduce loss for a short time."
+        },
+        {
+          "text": "Surgery, in escalating order: uterine compression sutures; systematic devascularisation (uterine, then ovarian, then internal iliac artery ligation); hysterectomy. Uterine artery embolisation in selected women where it is available."
+        },
+        {
+          "text": "Refer early to a higher centre if blood, exploration or surgery are not available. Transport with the oxytocin infusion running, preferably with tamponade in place, in a non-pneumatic anti-shock garment if available, with an escort."
+        },
+        {
+          "text": "When bleeding is controlled: massage every 15 minutes for the first 2 hours, vital signs every 10 minutes for 30 minutes then every 15 minutes for 30 minutes then every 30 minutes for 3 to 6 hours, oxytocin 5 to 10 units per hour, and total oxytocin not over 100 IU in 24 hours."
+        }
+      ],
+      "practice": "Talk through what you would do for a woman with pre-eclampsia and a flabby uterus who is still bleeding after the first response, naming each drug you will not give and why.",
+      "pitfalls": [
+        "Giving methylergometrine in pre-eclampsia or hypertension, or carboprost in asthma.",
+        "Continuing uterotonics for bleeding from a tear when the uterus is well contracted.",
+        "Referring without IV access, oxytocin running, tamponade or an escort.",
+        "Waiting for a falling haemoglobin or blood pressure before escalating."
+      ],
+      "dosingNote": "CliniX does not prescribe. Doses here are quoted from the cited national or guideline document so a student can check them; the treating team's own protocol and the current formulary decide what is given.",
+      "probes": [
+        {
+          "level": 1,
+          "q": "Give the dose and a contraindication for methylergometrine in PPH.",
+          "a": "0.2 mg IM or slow IV, repeated after 15 minutes up to 5 doses (1 mg). Contraindicated in hypertension including pre-eclampsia, severe anaemia and heart disease.",
+          "accept": [
+            "0.2",
+            "15 minutes",
+            "hypertension",
+            "eclampsia",
+            "anaemia",
+            "heart"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Give the dose and a contraindication for carboprost.",
+          "a": "250 micrograms IM, repeated every 20 minutes up to 8 doses (2 mg). Contraindicated in asthma.",
+          "accept": [
+            "250",
+            "20 minutes",
+            "asthma",
+            "8 doses",
+            "2 mg"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What is the misoprostol dose in PPH?",
+          "a": "800 micrograms rectally or sublingually.",
+          "accept": [
+            "800",
+            "rectal",
+            "rectally",
+            "sublingual",
+            "sublingually"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Bleeding continues after all the drugs. What is the escalation order?",
+          "a": "Check for retained tissue and coagulopathy, intrauterine balloon tamponade, then uterine compression sutures, systematic devascularisation, and hysterectomy. Refer early if these are not available.",
+          "accept": [
+            "tamponade",
+            "balloon",
+            "compression",
+            "sutures",
+            "devascularisation",
+            "hysterectomy",
+            "refer"
+          ],
+          "minMatch": 4
+        },
+        {
+          "level": 3,
+          "q": "What limits the total oxytocin in the first 24 hours?",
+          "a": "The total oxytocin must not exceed 100 IU in 24 hours.",
+          "accept": [
+            "100"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "compress",
+          "text": "Starts bimanual uterine compression for a flabby uterus and raises the oxytocin infusion to 10 to 20 units per hour"
+        },
+        {
+          "id": "drug",
+          "text": "Chooses a second uterotonic and checks contraindications: no methylergometrine in hypertension or pre-eclampsia, severe anaemia or heart disease; no carboprost in asthma",
+          "critical": true
+        },
+        {
+          "id": "tissue",
+          "text": "Explores for retained tissue and, if the uterus is contracted, for tears, and repairs them"
+        },
+        {
+          "id": "tamponade",
+          "text": "Uses intrauterine balloon tamponade if bleeding continues, then names the surgical steps in order"
+        },
+        {
+          "id": "coag",
+          "text": "Checks for coagulopathy and gives blood and components"
+        },
+        {
+          "id": "refer",
+          "text": "Refers early if transfusion or surgery is not available, with oxytocin running, tamponade in place and an escort"
+        },
+        {
+          "id": "after",
+          "text": "Plans monitoring once bleeding is controlled: massage every 15 minutes for 2 hours and regular vital signs"
+        }
+      ],
+      "sources": [
+        {
+          "source": "ICMR and DHR, MoHFW: Standard Treatment Workflow, Postpartum haemorrhage (December 2025)",
+          "locator": "Atonic PPH pharmacotherapy; surgical steps; referral and transport; monitoring after control",
+          "url": "https://www.icmr.gov.in/icmrobject/uploads/STWs/1768382528_updatedpostpartumhaemorrhage.pdf"
+        },
+        {
+          "source": "WHO, Consolidated guidelines for the prevention, diagnosis and treatment of postpartum haemorrhage (2025)",
+          "locator": "Recommendation 25 (second-line uterotonics) and recommendation 29 remarks (escalation of care in refractory bleeding)",
+          "url": "https://iris.who.int/server/api/core/bitstreams/88bf11a5-93b6-4d6b-bdaa-856b46c8ed3c/content"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.obg.eclampsia_abcd": {
+      "id": "skill.tx.obg.eclampsia_abcd",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Eclampsia (1): the first minutes",
+      "oneLine": "Call for help, turn her on her side, oxygen, a line, a catheter, then magnesium",
+      "why": "Eclampsia is a seizure in a woman with pre-eclampsia, and the seizure ends by itself. What kills is what happens around it: aspiration, hypoxia, injury, and a second and third fit that magnesium sulphate could have prevented. The first minutes are airway, breathing, circulation, and then the drug.",
+      "steps": [
+        {
+          "text": "Call for help. Follow the principles of ABCD critical management, with team work."
+        },
+        {
+          "text": "Airway: turn her to the lateral position, protect the mouth and airway and suction as needed (the FOGSI text lists a mouth gag and neck extension), and avoid injury."
+        },
+        {
+          "text": "Breathing: give oxygen by nasal prongs, use suction, and keep the oxygen saturation above 96%."
+        },
+        {
+          "text": "Circulation: secure IV access, send the hypertensive-disorder laboratory tests, give Ringer lactate or normal saline at 80 mL per hour, and insert a Foley catheter."
+        },
+        {
+          "text": "Control convulsions with magnesium sulphate (loading and maintenance), control blood pressure with antihypertensives, and give corticosteroids if under 34 weeks."
+        },
+        {
+          "text": "Delivery: deliver once the mother is stabilised. Neuroimaging is not recommended for every case of eclampsia."
+        }
+      ],
+      "practice": "Say the first ninety seconds of an eclamptic fit aloud in ABCD order, and then name the drug you give and the position she is in.",
+      "pitfalls": [
+        "Trying to restrain her or put something between her teeth in a way that injures her.",
+        "Delaying magnesium to arrange investigations or imaging.",
+        "Giving large volumes of IV fluid.",
+        "Forgetting that eclampsia can occur after delivery."
+      ],
+      "dosingNote": "CliniX does not prescribe. Doses here are quoted from the cited national or guideline document so a student can check them; the treating team's own protocol and the current formulary decide what is given.",
+      "probes": [
+        {
+          "level": 1,
+          "q": "What does ABCD stand for in the management of eclampsia?",
+          "a": "Airway, Breathing, Circulation, Delivery (with the drug therapy for convulsions and blood pressure within circulation).",
+          "accept": [
+            "airway",
+            "breathing",
+            "circulation",
+            "delivery"
+          ],
+          "minMatch": 4
+        },
+        {
+          "level": 2,
+          "q": "At what rate is IV crystalloid given in eclampsia, and what oxygen saturation is the target?",
+          "a": "Ringer lactate or normal saline at 80 mL per hour, and an oxygen saturation above 96%.",
+          "accept": [
+            "80",
+            "96"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Is a brain scan needed in every case of eclampsia?",
+          "a": "No. Neuroimaging is not recommended universally; MRI may be needed for a diagnostic dilemma.",
+          "accept": [
+            "no",
+            "not",
+            "mri",
+            "dilemma",
+            "universally"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "airway",
+          "text": "Turns her to the lateral position, protects the airway with suction and prevents injury",
+          "critical": true
+        },
+        {
+          "id": "oxygen",
+          "text": "Gives oxygen and aims for a saturation above 96%"
+        },
+        {
+          "id": "circulation",
+          "text": "Secures IV access, sends blood tests, gives crystalloid at 80 mL per hour and inserts a Foley catheter"
+        },
+        {
+          "id": "drugs",
+          "text": "Names magnesium sulphate first and blood pressure control next"
+        },
+        {
+          "id": "deliver",
+          "text": "States that delivery follows once she is stabilised"
+        }
+      ],
+      "sources": [
+        {
+          "source": "FOGSI, Gestosis (India) and ICOG: Hypertensive Disorders in Pregnancy, Good Clinical Practice Recommendations 2019",
+          "locator": "Management of eclampsia: principles (ABCD), airway, breathing, circulation, delivery; neuroimaging not universal",
+          "url": "https://icogonline.org/wp-content/uploads/pdf/gcpr/hdp_fogsi_gestosis_icog_gcpr_2019.pdf"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.obg.mgso4": {
+      "id": "skill.tx.obg.mgso4",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Eclampsia (2): magnesium sulphate, the Pritchard and Zuspan regimens",
+      "oneLine": "Load at once, check three things before every maintenance dose, keep calcium gluconate at the bedside",
+      "why": "Magnesium sulphate is the first-choice drug for eclampsia and to prevent it in severe pre-eclampsia. It works only if the loading dose is given at once, and it is safe only if the reflexes, the breathing and the urine are watched, because an overdose stops the breathing.",
+      "steps": [
+        {
+          "text": "Use 50% w/v ampoules if possible: each ampoule is 1 g, which makes the arithmetic easy."
+        },
+        {
+          "text": "Pritchard regimen (preferred). Loading, 14 g in all: 4 g IV slowly as 20 mL of a 20% solution (4 ampoules of 50% plus 12 mL distilled water in a 20 mL syringe) at 1 g per minute, and 5 g of 50% deep IM into each buttock (5 ampoules with 0.5 mL of 2% lignocaine, in a 10 mL syringe with a long 20 G needle)."
+        },
+        {
+          "text": "Pritchard maintenance: 5 g deep IM in alternate buttocks every 4 hours, only if the respiratory rate is above 16 per minute, the patellar reflexes are present, and the urine output is more than 100 mL in the last 4 hours."
+        },
+        {
+          "text": "Zuspan (IV) regimen: 4 g IV loading as above, then 5 g (5 ampoules) in 500 mL Ringer lactate at 100 mL per hour, which is 1 g per hour, preferably by infusion pump."
+        },
+        {
+          "text": "Continue for 24 hours after delivery or after the last convulsion, whichever is later. Routine serum magnesium monitoring is not needed."
+        },
+        {
+          "text": "Overdose: stop further doses, give oxygen, intubate if required, and give 10 mL of 10% calcium gluconate slowly IV over 10 minutes with ECG monitoring. Keep it at the bedside."
+        }
+      ],
+      "practice": "Draw up the Pritchard loading dose on paper: how many ampoules, what diluent, how fast, and where each part goes. Then state the three checks before the first maintenance dose.",
+      "pitfalls": [
+        "Giving a maintenance dose without checking reflexes, respiratory rate and urine output.",
+        "Delaying the loading dose while waiting for laboratory results.",
+        "Injecting the 50% solution IV undiluted.",
+        "Stopping at delivery when the drug should continue for 24 hours."
+      ],
+      "dosingNote": "CliniX does not prescribe. Doses here are quoted from the cited national or guideline document so a student can check them; the treating team's own protocol and the current formulary decide what is given.",
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the Pritchard loading dose of magnesium sulphate?",
+          "a": "14 g in all: 4 g IV slowly (1 g per minute, as 20 mL of a 20% solution) plus 5 g of a 50% solution deep IM into each buttock.",
+          "accept": [
+            "4 g",
+            "5 g",
+            "14",
+            "each buttock",
+            "1 g per minute"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What three things must be present before each maintenance dose?",
+          "a": "Respiratory rate above 16 per minute, patellar reflexes present, and urine output over 100 mL in the last 4 hours.",
+          "accept": [
+            "respiratory",
+            "reflex",
+            "reflexes",
+            "urine",
+            "100"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What is the Zuspan maintenance regimen?",
+          "a": "After a 4 g IV loading dose, 5 g in 500 mL Ringer lactate at 100 mL per hour, which is 1 g per hour, preferably by infusion pump.",
+          "accept": [
+            "5 g",
+            "500",
+            "100",
+            "1 g",
+            "pump"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "She becomes drowsy with no reflexes and slow breathing on magnesium. What do you do?",
+          "a": "Stop magnesium, give oxygen, intubate if needed, and give 10 mL of 10% calcium gluconate slowly IV over 10 minutes with ECG monitoring.",
+          "accept": [
+            "stop",
+            "oxygen",
+            "calcium gluconate",
+            "intubate",
+            "10 ml",
+            "ecg"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "How long is magnesium continued, and is a serum level needed?",
+          "a": "For 24 hours after delivery or the last convulsion, whichever is later. Routine serum magnesium monitoring is not needed.",
+          "accept": [
+            "24",
+            "delivery",
+            "convulsion",
+            "not",
+            "routine"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "load",
+          "text": "Gives the loading dose at once: Pritchard 4 g IV over about 4 minutes plus 5 g deep IM in each buttock, or the Zuspan 4 g IV load",
+          "critical": true
+        },
+        {
+          "id": "maintain",
+          "text": "Gives maintenance: 5 g deep IM 4-hourly (Pritchard) or 1 g per hour by infusion (Zuspan)"
+        },
+        {
+          "id": "checks",
+          "text": "Checks respiratory rate, patellar reflexes and urine output before each maintenance dose",
+          "critical": true
+        },
+        {
+          "id": "antidote",
+          "text": "Keeps 10% calcium gluconate at the bedside and states the response to toxicity"
+        },
+        {
+          "id": "duration",
+          "text": "Continues for 24 hours after delivery or the last convulsion, whichever is later"
+        }
+      ],
+      "sources": [
+        {
+          "source": "FOGSI, Gestosis (India) and ICOG: Hypertensive Disorders in Pregnancy, Good Clinical Practice Recommendations 2019",
+          "locator": "Magnesium sulphate: Pritchard (intramuscular) and Zuspan (intravenous) regimens; management of magnesium over action",
+          "url": "https://icogonline.org/wp-content/uploads/pdf/gcpr/hdp_fogsi_gestosis_icog_gcpr_2019.pdf"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.obg.eclampsia_bp_delivery": {
+      "id": "skill.tx.obg.eclampsia_bp_delivery",
+      "kind": "treatment",
+      "system": "obgyn",
+      "title": "Eclampsia (3): blood pressure, steroids, delivery and transfer",
+      "oneLine": "Treat 160/110 promptly but gently, steroids under 34 weeks, deliver when stable",
+      "why": "Seizures are prevented by magnesium; strokes are prevented by treating severe hypertension. The blood pressure should come down promptly but slowly, because a woman who drops from 190/120 to 100/60 has a hypoperfused placenta and brain. Delivery follows stabilisation, and the plan must survive the transfer to another facility.",
+      "steps": [
+        {
+          "text": "Treat a systolic pressure of 140 or more and a diastolic of 90 or more, with a target below 140/90 and no hypotension. In severe hypertension lower the pressure promptly but gradually."
+        },
+        {
+          "text": "Nifedipine 10 to 30 mg orally, never sublingually. Repeat in 30 to 45 minutes if not controlled, to a maximum total of 120 mg, then move to a slow-release form. Contraindicated in heart failure and AV or SA nodal abnormalities."
+        },
+        {
+          "text": "Labetalol 10 to 20 mg slow IV, then 20 to 80 mg every 20 to 30 minutes to a maximum total of 300 mg, or an infusion of 1 to 2 mg per minute after the first dose; 200 mg orally in a conscious woman. Contraindicated in heart failure, diabetes (per FOGSI), asthma and bradycardia."
+        },
+        {
+          "text": "Delivery: eclampsia and HELLP are delivered once the mother is stabilised after magnesium sulphate. Non-severe pre-eclampsia is delivered at 37 completed weeks, and severe pre-eclampsia after 34 completed weeks. Induction is safe, and caesarean section is for obstetric indications."
+        },
+        {
+          "text": "Corticosteroids for delivery before 34 completed weeks: dexamethasone 6 mg IM 12-hourly for 4 doses, or betamethasone 12 mg IM 24-hourly for 2 doses."
+        },
+        {
+          "text": "After delivery monitor the blood pressure closely for the first 48 hours, avoid NSAIDs, treat a persistent pressure of 160 systolic or 110 diastolic within one hour and consider magnesium sulphate."
+        },
+        {
+          "text": "Before transfer: the Pritchard loading dose must have been given and the receiving centre told; give nifedipine 20 mg slow-release or labetalol 200 mg orally (never sublingual nifedipine); give a corticosteroid dose if indicated; send an escort with an eclampsia kit."
+        }
+      ],
+      "practice": "For a woman at 32 weeks with a pressure of 180/115 after her fit, state which drug you give, its dose, the target, the checks, and what you decide about steroids and delivery.",
+      "pitfalls": [
+        "Giving nifedipine sublingually.",
+        "Lowering the pressure too fast or below 140/90 into hypotension.",
+        "Using labetalol in a woman with asthma or bradycardia.",
+        "Sending her to another facility without a loading dose or a call ahead."
+      ],
+      "dosingNote": "CliniX does not prescribe. Doses here are quoted from the cited national or guideline document so a student can check them; the treating team's own protocol and the current formulary decide what is given.",
+      "probes": [
+        {
+          "level": 1,
+          "q": "By which route must nifedipine never be given in this setting?",
+          "a": "Sublingually.",
+          "accept": [
+            "sublingual",
+            "sublingually",
+            "never"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What is the blood pressure target in severe pre-eclampsia, and how fast should you get there?",
+          "a": "Below 140/90 without hypotension, lowering the pressure promptly but gradually.",
+          "accept": [
+            "140",
+            "90",
+            "hypotension",
+            "gradually",
+            "slowly"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "When is delivery advised in non-severe pre-eclampsia, in severe pre-eclampsia, and in eclampsia?",
+          "a": "37 completed weeks for non-severe; after 34 completed weeks for severe; and in eclampsia once the mother is stabilised after magnesium.",
+          "accept": [
+            "37",
+            "34",
+            "stabilised",
+            "stabilized"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Give the IV labetalol regimen and its maximum.",
+          "a": "10 to 20 mg slow IV, then 20 to 80 mg every 20 to 30 minutes, to a maximum total of 300 mg; or an infusion of 1 to 2 mg per minute after the first dose.",
+          "accept": [
+            "10",
+            "20",
+            "80",
+            "300"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Which antihypertensive would you avoid in a woman with asthma?",
+          "a": "Labetalol, which is contraindicated in asthma, heart failure and bradycardia.",
+          "accept": [
+            "labetalol"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What must be done before transferring an eclamptic woman to another facility?",
+          "a": "Give the Pritchard loading dose and inform the receiving centre; give an oral antihypertensive (nifedipine 20 mg slow-release or labetalol 200 mg, no sublingual nifedipine); a steroid dose if indicated; and send an escort with an eclampsia kit.",
+          "accept": [
+            "loading",
+            "nifedipine",
+            "labetalol",
+            "escort",
+            "kit",
+            "inform"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "drug",
+          "text": "Treats severe hypertension promptly: nifedipine 10 to 30 mg orally (never sublingual) or labetalol 10 to 20 mg slow IV, with a target below 140/90 and no hypotension"
+        },
+        {
+          "id": "contra",
+          "text": "Checks contraindications: labetalol in asthma, heart failure and bradycardia; nifedipine in heart failure and nodal disease",
+          "critical": true
+        },
+        {
+          "id": "deliver",
+          "text": "States that delivery follows stabilisation after magnesium sulphate, with caesarean section for obstetric indications"
+        },
+        {
+          "id": "steroid",
+          "text": "Considers antenatal corticosteroids if the pregnancy is under 34 weeks"
+        },
+        {
+          "id": "post",
+          "text": "Plans postpartum monitoring of blood pressure for at least 48 hours and avoids NSAIDs"
+        },
+        {
+          "id": "transfer",
+          "text": "Before any transfer: loading dose given, an oral antihypertensive, steroids if indicated, an escort with an eclampsia kit, and the receiving centre informed"
+        }
+      ],
+      "sources": [
+        {
+          "source": "FOGSI, Gestosis (India) and ICOG: Hypertensive Disorders in Pregnancy, Good Clinical Practice Recommendations 2019",
+          "locator": "Anti-hypertensives for rapid control (severe pre-eclampsia); delivery decision; corticosteroids; postpartum care; shifting to an equipped facility",
+          "url": "https://icogonline.org/wp-content/uploads/pdf/gcpr/hdp_fogsi_gestosis_icog_gcpr_2019.pdf"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

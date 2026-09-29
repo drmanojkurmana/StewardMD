@@ -25,7 +25,7 @@ for f in clinix.js clinix-flags.js clinix-model.js clinix-content.js clinix-stor
   [ -f "$WWW/$f" ] && say "$f" "ok" || bad "$f" "root glob in build-www.sh"
 done
 
-for f in manifest.json skills/core.json skills/respiratory.json \
+for f in manifest.json skills/core.json skills/respiratory.json skills/obgyn.json systems/obgyn.json \
          diseases/copd.json diseases/pleural-effusion.json media/manifest.json \
          dx-vocabulary.json presentations/breathlessness.json; do
   [ -f "$WWW/clinix/$f" ] && say "clinix/$f" "ok" || bad "clinix/$f" "cp -R clinix in build-www.sh"
