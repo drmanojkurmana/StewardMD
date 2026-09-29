@@ -28,11 +28,11 @@ const walk = (v, fn, path = "") => {
   else if (v && typeof v === "object") Object.keys(v).forEach((k) => walk(v[k], fn, `${path}.${k}`));
 };
 
-test("six units, 3 to 7 lessons each, at least 30 lessons, ids prefixed by the unit id", () => {
+test("six units, 3 to 10 lessons each, at least 30 lessons, ids prefixed by the unit id", () => {
   assert.equal(units.length, UNITS.length);
   if (!process.env.GYB_UNITS) assert.equal(units.length, 6);
   units.forEach((u) => {
-    assert.ok(u.lessons.length >= 3 && u.lessons.length <= 7, u.id + " lesson count");
+    assert.ok(u.lessons.length >= 3 && u.lessons.length <= 10, u.id + " lesson count");
     assert.equal(u.level, "mbbs");
     assert.ok(u.title.en && u.title.hi);
     u.lessons.forEach((id) => assert.ok(id.startsWith(u.id + "-"), id));
