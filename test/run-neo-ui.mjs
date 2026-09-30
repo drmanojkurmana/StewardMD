@@ -50,6 +50,12 @@ try {
   ok(await ev(`SMD_NEO_FLAGS.on()===false && !window.SMD_NEO_HUB && !window.SMD_NEO_DOSE`), 'flag OFF by default: the layer does not load');
   ok(await ev(`!(window.SMD_HOME_TOOLS&&SMD_HOME_TOOLS().some(t=>t.act==='neo'))`), 'flag OFF: no Neonatal home tool');
   ok(await ev(`!(MEDCALC._calcs||[]).some(c=>c.cat==='Neonatology')`), 'flag OFF: no neonatal calculators');
+  // The switch lives in Settings > Experimental Features and writes smd_neo.
+  await ev(`window.SMD_openExperimental&&SMD_openExperimental();1`);
+  ok(await until(`!!document.querySelector('#sbrExperimental [data-sbr-tg=neo]')`, 5000), 'Experimental Features lists the Neonatal layer switch');
+  await click('#sbrExperimental [data-sbr-tg=neo]');
+  ok(await ev(`localStorage.getItem('smd_neo')==='1' && SMD_NEO_FLAGS.on()`), 'the switch turns smd_neo on (reload to apply)');
+  await ev(`localStorage.removeItem('smd_neo');document.getElementById('sbrExperimental')&&document.getElementById('sbrExperimental').remove();1`);
 
   // 1) Flag ON
   await call('Page.navigate', { url: `http://localhost:${PORT}/?neo=1` });

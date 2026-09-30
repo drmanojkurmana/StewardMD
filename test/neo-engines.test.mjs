@@ -188,3 +188,37 @@ test("TDM: vancomycin two-level AUC is self-consistent; gentamicin trough rule f
   assert.equal(TDM.gentTrough(1.5, 2, rule).ok, true);
   assert.equal(TDM.gentTrough(1.5, rule.long_course.doses_gt + 1, rule).ok, false, "past 3 doses the stricter target applies");
 });
+
+test("bilirubin: AAP hourly table, escalation = exchange minus the source's 2 mg/dL; NICE term and preterm", () => {
+  const BILI = load("neo-bili.js"), D = J("bili");
+  const pc = BILI.aapCurve(D, "phototherapy", false, 39);
+  assert.ok(pc && P.matches(pc.when, { ga_wk: 39 }).ok, "39 weeks, no risk factor curve");
+  const row1 = pc.data.table.find((r) => r[0] === 1);
+  assert.equal(BILI.aapAt(pc, 30).v, row1[1 + 6], "hour 30 = day 1, column h6");
+  const t = BILI.thresholds(D, "aap", 39, 30, false), esc = D.aap.rules.find((r) => r.id === "escalation");
+  assert.ok(close(t.escalation, t.exchange - esc.below_exchange, 1e-9));
+  assert.ok(BILI.thresholds(D, "aap", 34, 30, false).na, "AAP does not cover 34 weeks");
+  const rf = BILI.thresholds(D, "aap", 39, 30, true);
+  assert.ok(rf.photo < t.photo, "risk-factor curve is lower");
+  const T = D.nice.term.data.table, ip = D.nice.term.data.columns.indexOf("phototherapy_gt");
+  assert.equal(BILI.niceTermAt(D, "phototherapy_gt", T[1][0]), T[1][ip]);
+  assert.ok(close(BILI.niceTermAt(D, "phototherapy_gt", (T[1][0] + T[2][0]) / 2), (T[1][ip] + T[2][ip]) / 2));
+  const pt = D.nice.preterm.phototherapy;
+  assert.equal(BILI.nicePretermAt(D, "phototherapy", 30, 0), pt.before.at_birth);
+  assert.equal(BILI.nicePretermAt(D, "phototherapy", 30, pt.from_h), 30 * pt.ga_multiplier - pt.minus);
+  assert.equal(BILI.nicePretermAt(D, "exchange", 30, 200), 30 * D.nice.preterm.exchange.ga_multiplier);
+});
+
+test("scores engine: sum, formula, single level, criteria groups (fixture shapes)", () => {
+  const SC = load("neo-scores.js");
+  const sum = { type: "sum", items: [{ id: "a", options: [{ points: 0 }, { points: 2 }] }, { id: "b", options: [{ points: 1 }, { points: 3 }] }], interpretation: [{ hi: 3, text: "low" }, { lo: 4, text: "high" }] };
+  assert.equal(SC.compute(sum, { a: "1", b: "1" }).value, 5);
+  assert.equal(SC.compute(sum, { a: "1", b: "1" }).band.text, "high");
+  assert.deepEqual(SC.compute(sum, { a: "1" }).missing, [undefined]);
+  const f = { type: "formula", items: sum.items, formula: { constant: 200, divisor: 7, unit: "weeks" } };
+  assert.equal(SC.compute(f, { a: "1", b: "0" }).value, Math.round((200 + 3) / 7 * 10) / 10);
+  assert.equal(SC.compute({ type: "single", levels: [{ level: 1, label: "x" }, { level: 2, label: "y" }] }, { level: "1" }).value, 2);
+  const cr = { type: "criteria", groups: [{ id: "A", rule: "any", items: [{ id: "a1" }, { id: "a2" }] }, { id: "B", rule: "min", min: 2, items: [{ id: "b1" }, { id: "b2" }, { id: "b3" }] }], eligible_if: ["A", "B"] };
+  assert.equal(SC.compute(cr, { a2: true, b1: true }).eligible, false);
+  assert.equal(SC.compute(cr, { a2: true, b1: true, b3: true }).eligible, true);
+});
