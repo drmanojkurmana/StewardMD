@@ -72,7 +72,8 @@
     var P = G.SMD_PRINT;
     if (btn.getAttribute("data-act") === "copy") {
       var txt = sheetText(sh);
-      (P && P.copy ? P.copy(txt) : Promise.resolve(false)).then(function (ok) { var o = btn.textContent; btn.textContent = ok ? "Copied" : "Copy failed"; setTimeout(function () { btn.textContent = o; }, 1500); });
+      // A clipboard permission prompt can leave the promise pending (headless, some WebViews): give up after 2 s.
+      Promise.race([P && P.copy ? P.copy(txt) : Promise.resolve(false), new Promise(function (r) { setTimeout(function () { r(false); }, 2000); })]).then(function (ok) { var o = btn.textContent; btn.textContent = ok ? "Copied" : "Copy failed"; setTimeout(function () { btn.textContent = o; }, 1500); });
     } else if (P && P.print) {
       P.print({ title: sh.title, tag: sh.tag || "Neonatal", lines: sh.lines, strong: /^(dose|give|draw up|set pump|rate|result|gir|bag):/i, footer: "Draft neonatal decision support, not yet approved by a neonatologist. Verify every dose, concentration and rate before use." });
     }
