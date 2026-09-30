@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "kind": "neo-age",
+  "title": "Neonatal age terminology used by the baby record (SMD_NEO)",
+  "compiled": "2026-09-30",
+  "review": { "status": "ai_drafted", "by": null, "date": null },
+  "sources": {
+    "age-ecrin": {
+      "title": "PedCRIN Tool: Neonatal trials and standard age groups: Points to consider, V 1.0 (Aurich B, Elie V, Mahmoudi N, Jacqz-Aigrain E), 22 March 2021",
+      "publisher": "ECRIN (European Clinical Research Infrastructure Network), PedCRIN project",
+      "url": "https://ecrin.org/sites/default/files/2022-10/Tool_3.5.10.pdf",
+      "licence": "Free access; no licence stated on the document (cites AAP Engle 2004 policy statement). Owner to confirm reuse.",
+      "accessed": "2026-09-30"
+    }
+  },
+  "rules": [
+    { "id": "no_round_up", "text": "Gestational age is never rounded up.", "src": "age-ecrin",
+      "quote": "Age is never rounded up in neonates (i.e. a neonate born at 24 weeks and 5 days gestation is a 24 week neonate)." },
+    { "id": "neonatal_period", "text": "The neonatal period is below 28 days of life.", "days_lt": 28, "src": "age-ecrin",
+      "quote": "The neonatal period includes the first 27 days after birth (i.e. below 28 days of life)" },
+    { "id": "pma", "text": "Postmenstrual age is gestational age plus chronological (postnatal) age.", "src": "age-ecrin",
+      "quote": "PMA expresses age as a function of LMP, adding up GA and chronological (postnatal) age." },
+    { "id": "corrected", "text": "Corrected age uses the expected date of delivery at 40 weeks; before it, corrected age equals GA plus postnatal age; after it, the weeks of prematurity are subtracted from postnatal age. Used under 3 years.", "term_wk": 40, "src": "age-ecrin",
+      "quote": "It is measured in weeks and months and takes the expected date of delivery (=40 weeks) into account" },
+    { "id": "corrected_under3", "text": "Corrected age is used for premature babies under 3 years.", "until_years": 3, "src": "age-ecrin",
+      "quote": "Corrected age is used for premature neonates under the age of 3 years." }
+  ],
+  "examples": [
+    { "id": "pma_example", "ga_w": 27, "ga_d": 3, "pna_w": 12, "pna_d": 6, "pma_w": 40, "pma_d": 2, "src": "age-ecrin",
+      "quote": "For example a neonate born after 27 weeks and 3 days gestation and a chronological age of 12 weeks and 6 days has a postmenstrual age of 40 weeks and 2 days." },
+    { "id": "ca_before_edd", "ga_w": 31, "ga_d": 3, "pna_w": 4, "pna_d": 6, "ca_w": 36, "ca_d": 2, "src": "age-ecrin",
+      "quote": "For example a neonate born after 31 weeks and 3 days gestation with a chronological age of 4 weeks and 6 days has a corrected age of 36 weeks and 2 days." },
+    { "id": "ca_after_edd", "ga_w": 25, "pna_w": 50, "premature_w": 15, "ca_w": 35, "src": "age-ecrin",
+      "quote": "For example an infant with a chronological (postnatal) age of 50 weeks who was born at 25 weeks (40 - 25 weeks = 15 weeks premature) has a corrected age of 35 weeks (50 - 15 weeks)." }
+  ]
+}

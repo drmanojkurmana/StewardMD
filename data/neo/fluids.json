@@ -1,0 +1,380 @@
+{
+ "schema": 1,
+ "kind": "neo-fluids",
+ "title": "Neonatal IV fluids, glucose infusion rate and parenteral electrolytes",
+ "compiled": "2026-09-30",
+ "review": {
+  "status": "ai_drafted",
+  "by": null,
+  "date": null
+ },
+ "_comment": "Payload: gir { formula, targets[] }, daily_volumes[], resuscitation[], maintenance_fluid[], electrolytes[], ratios[], dextrose[], pn_stop[], notes[]. Units are stored as the source writes them (NICE glucose is g/kg/day, not mg/kg/min; the engine converts). Preterm day-by-day fluid volumes, Na, K and Mg are NOT on file (source could not be fetched).",
+ "sources": {
+  "fl-nice-ng154": {
+   "title": "Neonatal parenteral nutrition (NICE guideline NG154, 2020), Recommendations",
+   "publisher": "National Institute for Health and Care Excellence",
+   "url": "https://www.nice.org.uk/guidance/ng154/chapter/Recommendations",
+   "licence": "NICE copyright. Per NICE 'Reusing our content' (snapshot fl-nice-reuse): UK-only use is covered by the NICE UK Open Content Licence; use internationally, except personal research and study, is subject to a fee and licensing agreement. Permission needed before shipping outside the UK.",
+   "accessed": "2026-09-30"
+  },
+  "fl-nice-ng29": {
+   "title": "Intravenous fluid therapy in children and young people in hospital (NICE guideline NG29), Recommendations",
+   "publisher": "National Institute for Health and Care Excellence",
+   "url": "https://www.nice.org.uk/guidance/ng29/chapter/Recommendations",
+   "licence": "NICE copyright. Per NICE 'Reusing our content' (snapshot fl-nice-reuse): UK-only use is covered by the NICE UK Open Content Licence; use internationally, except personal research and study, is subject to a fee and licensing agreement. Permission needed before shipping outside the UK.",
+   "accessed": "2026-09-30"
+  },
+  "fl-nice-reuse": {
+   "title": "Reusing our content",
+   "publisher": "National Institute for Health and Care Excellence",
+   "url": "https://www.nice.org.uk/re-using-our-content",
+   "licence": "NICE web page (licensing statement, quoted for provenance only)",
+   "accessed": "2026-09-30"
+  },
+  "fl-gir-casereport": {
+   "title": "Early-Remitting Neonatal Diabetes in a Growth-Restricted Preterm Infant Requiring Insulin: A Case Report (Cureus 2026), Table 1 footnote",
+   "publisher": "Cureus (via Europe PMC, PMC13118134)",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13118134/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "fl-gir-itjped": {
+   "title": "The glucose infusion rate of parenteral nutrition in the first week of life in preterm infants: an observational study (Ital J Pediatr 2021)",
+   "publisher": "BMC (via Europe PMC, PMC8567670)",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8567670/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "fl-pn-errors": {
+   "title": "Impact of BCNSP-led parenteral nutrition management on prescribing errors in the neonatal intensive care unit (J Health Popul Nutr 2026)",
+   "publisher": "BMC (via Europe PMC, PMC13020413)",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13020413/fullTextXML",
+   "licence": "CC BY-NC-ND 4.0 (no derivatives; a fact is cited, not adapted text)",
+   "accessed": "2026-09-30"
+  }
+ },
+ "licence_note": {
+  "text": "NICE content (NG154, NG29) needs a NICE licence for use outside the UK.",
+  "src": "fl-nice-reuse",
+  "quote": "All requests to use our content in a UK setting only are covered by the NICE UK Open Content Licence. This allows you to reuse our content, free of charge, subject to the terms and conditions of the licence.\nRequests to use our content internationally, except for personal research and study purposes, are subject to a fee and licensing agreement."
+ },
+ "gir": {
+  "formula": {
+   "text": "GIR (mg/kg/min) = (mL/kg/day x dextrose mg/mL) / 1440; D10W = 100 mg/mL",
+   "coef": {
+    "k": 1440,
+    "d10w_mg_per_ml": 100,
+    "form": "gir_mg_kg_min = vol_ml_kg_day * dextrose_mg_per_ml / k",
+    "check": {
+     "vol_ml_kg_day": 120,
+     "gir_mg_kg_min": 8.3
+    }
+   },
+   "caveat": "The source states the formula for D10W only (100 mg/mL). For other strengths the engine needs dextrose mg/mL = percent x 10, a unit conversion that is not in the source. No guideline-grade open source for the formula was retrievable (NCBI Bookshelf blocked by a captcha).",
+   "src": "fl-gir-casereport",
+   "quote": "Estimated GIR for D10W was calculated as (mL/kg/day × 100 mg/mL)/1440; for example, 120 mL/kg/day corresponds to 8.3 mg/kg/min."
+  },
+  "targets": [
+   {
+    "label": "NICE NG154 glucose, parenteral nutrition started in the first 4 days: starting range",
+    "lo": 6,
+    "hi": 9,
+    "unit": "g/kg/day",
+    "when": {
+     "pna_d": {
+      "max": 4
+     }
+    },
+    "src": "fl-nice-ng154",
+    "quote": "If starting parenteral nutrition in the first 4 days after birth:\n\ngive a starting range of 6 to 9 g/kg/day"
+   },
+   {
+    "label": "NICE NG154 glucose maintenance range (reach gradually, for example over 4 days; or from the start if PN begins after day 4)",
+    "lo": 9,
+    "hi": 16,
+    "unit": "g/kg/day",
+    "src": "fl-nice-ng154",
+    "quote": "gradually increase (for example, over 4 days) to a maintenance range of 9 to 16 g/kg/day.\n\nIf starting parenteral nutrition more than 4 days after birth:\n\ngive a range of 9 to 16 g/kg/day."
+   },
+   {
+    "label": "Preterm infants on PN: GIR maintained at 6 to 8 mg/kg/min (cited statement, observational study)",
+    "lo": 6,
+    "hi": 8,
+    "unit": "mg/kg/min",
+    "population": "preterm",
+    "src": "fl-gir-itjped",
+    "quote": "The glucose infusion rate (GIR) at parenteral nutrition in preterm infants should be maintained at 6–8 mg/kg/min to ascertain adequate glucose requirements ["
+   },
+   {
+    "label": "GIR above 10 mg/kg/min: commonest cause of postnatal hyperglycaemia (cited statement)",
+    "gt": 10,
+    "unit": "mg/kg/min",
+    "kind": "caution",
+    "src": "fl-gir-itjped",
+    "quote": "The most common cause of hyperglycemia in the postnatal period is the high intake of glucose, in this case, the use of GIR > 10 mg/kg/min"
+   }
+  ]
+ },
+ "daily_volumes": [
+  {
+   "when": {
+    "dol": {
+     "max": 1
+    }
+   },
+   "population": "term neonates",
+   "lo": 50,
+   "hi": 60,
+   "unit": "mL/kg/day",
+   "label": "Term neonate maintenance IV fluid, birth to day 1",
+   "src": "fl-nice-ng29",
+   "quote": "From birth to day 1: 50 to 60 ml/kg/day."
+  },
+  {
+   "when": {
+    "dol": {
+     "min": 2,
+     "max": 2
+    }
+   },
+   "population": "term neonates",
+   "lo": 70,
+   "hi": 80,
+   "unit": "mL/kg/day",
+   "label": "Term neonate maintenance IV fluid, day 2",
+   "src": "fl-nice-ng29",
+   "quote": "Day 2: 70 to 80 ml/kg/day."
+  },
+  {
+   "when": {
+    "dol": {
+     "min": 3,
+     "max": 3
+    }
+   },
+   "population": "term neonates",
+   "lo": 80,
+   "hi": 100,
+   "unit": "mL/kg/day",
+   "label": "Term neonate maintenance IV fluid, day 3",
+   "src": "fl-nice-ng29",
+   "quote": "Day 3: 80 to 100 ml/kg/day."
+  },
+  {
+   "when": {
+    "dol": {
+     "min": 4,
+     "max": 4
+    }
+   },
+   "population": "term neonates",
+   "lo": 100,
+   "hi": 120,
+   "unit": "mL/kg/day",
+   "label": "Term neonate maintenance IV fluid, day 4",
+   "src": "fl-nice-ng29",
+   "quote": "Day 4: 100 to 120 ml/kg/day."
+  },
+  {
+   "when": {
+    "dol": {
+     "min": 5,
+     "max": 28
+    }
+   },
+   "population": "term neonates",
+   "lo": 120,
+   "hi": 150,
+   "unit": "mL/kg/day",
+   "label": "Term neonate maintenance IV fluid, days 5 to 28",
+   "src": "fl-nice-ng29",
+   "quote": "Days 5 to 28: 120 to 150 ml/kg/day."
+  }
+ ],
+ "daily_volumes_context": {
+  "text": "NICE NG29 term neonate routine maintenance rates are 'a guide'. Preterm volumes by gestation or birth weight are not on file.",
+  "src": "fl-nice-ng29",
+  "quote": "Calculate routine maintenance IV fluid rates for term neonates according to their age, using the following as a guide:"
+ },
+ "resuscitation": [
+  {
+   "label": "Term neonate fluid bolus: glucose-free crystalloid, sodium 131 to 154 mmol/litre",
+   "bolus": {
+    "lo": 10,
+    "hi": 20,
+    "unit": "ml/kg",
+    "over_min_lt": 10
+   },
+   "sodium": {
+    "lo": 131,
+    "hi": 154,
+    "unit": "mmol/litre"
+   },
+   "src": "fl-nice-ng29",
+   "quote": "If term neonates need IV fluid resuscitation, use glucose‑free crystalloids that contain sodium in the range 131–154 mmol/litre, with a bolus of 10–20 ml/kg over less than 10 minutes."
+  }
+ ],
+ "maintenance_fluid": [
+  {
+   "label": "Term neonates aged 8 days or over: isotonic crystalloid, sodium 131 to 154 mmol/litre with 5 to 10% glucose",
+   "when": {
+    "pna_d": {
+     "min": 8
+    }
+   },
+   "sodium": {
+    "lo": 131,
+    "hi": 154,
+    "unit": "mmol/litre"
+   },
+   "glucose_pct": {
+    "lo": 5,
+    "hi": 10
+   },
+   "src": "fl-nice-ng29",
+   "quote": "If term neonates aged 8 days or over need IV fluids for routine maintenance, initially use isotonic crystalloids that contain sodium in the range 131–154 mmol/litre with 5–10% glucose. For term neonates aged up to 7 days, use professional judgement, taking into account:"
+  },
+  {
+   "label": "Term neonates up to 7 days: that sodium may be too high and that glucose too low; use judgement",
+   "when": {
+    "pna_d": {
+     "max": 7
+    }
+   },
+   "sodium": {
+    "lo": 131,
+    "hi": 154,
+    "unit": "mmol/litre"
+   },
+   "glucose_pct": {
+    "lo": 5,
+    "hi": 10
+   },
+   "src": "fl-nice-ng29",
+   "quote": "For term neonates aged up to 7 days, use professional judgement, taking into account:\n\nthe individual circumstances, and\n\nfor term neonates in the first days of life, a sodium content of 131 to 154 mmol/litre may be too high (or sodium may not be needed) and a glucose content of 5% to 10% may be too low."
+  },
+  {
+   "label": "Critical postnatal adaptation (RDS, meconium aspiration, HIE): no or minimal sodium until postnatal diuresis",
+   "src": "fl-nice-ng29",
+   "quote": "For term neonates in critical postnatal adaptation phase (for example, term neonates with respiratory distress syndrome, meconium aspiration, hypoxic ischaemic encephalopathy), give no or minimal sodium until postnatal diuresis with weight loss occurs."
+  }
+ ],
+ "electrolytes": [
+  {
+   "ion": "Ca",
+   "label": "PN started in the first 48 hours: starting range",
+   "when": {
+    "hours": {
+     "max": 48
+    }
+   },
+   "lo": 0.8,
+   "hi": 1,
+   "unit": "mmol/kg/day",
+   "src": "fl-nice-ng154",
+   "quote": "If starting parenteral nutrition in the first 48 hours after birth:\n\ngive a starting range of 0.8 to 1 mmol/kg/day\n\nincrease to a maintenance range of 1.5 to 2 mmol/kg/day after 48 hours."
+  },
+  {
+   "ion": "Ca",
+   "label": "Maintenance after 48 hours (or PN started after 48 hours)",
+   "when": {
+    "hours": {
+     "gt": 48
+    }
+   },
+   "lo": 1.5,
+   "hi": 2,
+   "unit": "mmol/kg/day",
+   "src": "fl-nice-ng154",
+   "quote": "increase to a maintenance range of 1.5 to 2 mmol/kg/day after 48 hours.\n\nIf starting parenteral nutrition more than 48 hours after birth, give a range of 1.5 to 2 mmol/kg/day."
+  },
+  {
+   "ion": "P",
+   "label": "PN started in the first 48 hours",
+   "when": {
+    "hours": {
+     "max": 48
+    }
+   },
+   "lo": 1,
+   "hi": 1,
+   "unit": "mmol/kg/day",
+   "src": "fl-nice-ng154",
+   "quote": "If starting parenteral nutrition in the first 48 hours after birth:\n\ngive 1 mmol/kg/day\n\nincrease to a maintenance dosage of 2 mmol/kg/day after 48 hours."
+  },
+  {
+   "ion": "P",
+   "label": "Maintenance after 48 hours (or PN started after 48 hours); higher if serum phosphate indicates",
+   "when": {
+    "hours": {
+     "gt": 48
+    }
+   },
+   "lo": 2,
+   "hi": 2,
+   "unit": "mmol/kg/day",
+   "src": "fl-nice-ng154",
+   "quote": "If starting parenteral nutrition more than 48 hours after birth, give 2 mmol/kg/day.\n\nGive a higher dosage of phosphate if indicated by serum phosphate monitoring."
+  }
+ ],
+ "ratios": [
+  {
+   "label": "Calcium to phosphate ratio in neonatal PN",
+   "ca_to_p": {
+    "lo": 0.75,
+    "hi": 1
+   },
+   "src": "fl-nice-ng154",
+   "quote": "Use a calcium to phosphate ratio of between 0.75:1 and 1:1 for preterm and term babies on neonatal parenteral nutrition."
+  }
+ ],
+ "dextrose": [
+  {
+   "label": "Peripheral line: dextrose above 12.5% was classed as an unsafe concentration prescribing error (NICU audit, not a guideline)",
+   "v": 12.5,
+   "unit": "%",
+   "route": "peripheral",
+   "kind": "max",
+   "src": "fl-pn-errors",
+   "quote": "➢The wrong concentration range was prescribed in PN, especially dextrose above 12.5% given via peripheral line and a concentration range of calcium gluconate above 0.4% in PN that is applied via a peripherally inserted venous catheter"
+  },
+  {
+   "label": "NICE NG29 maintenance fluid glucose content for term neonates aged 8 days or over",
+   "lo": 5,
+   "hi": 10,
+   "unit": "%",
+   "src": "fl-nice-ng29",
+   "quote": "If term neonates aged 8 days or over need IV fluids for routine maintenance, initially use isotonic crystalloids that contain sodium in the range 131–154 mmol/litre with 5–10% glucose. For term neonates aged up to 7 days, use professional judgement, taking into account:"
+  }
+ ],
+ "pn_stop": [
+  {
+   "label": "Born before 28+0 weeks: consider stopping PN within 24 hours once enteral feeds reach",
+   "when": {
+    "ga_wk": {
+     "lt": 28
+    }
+   },
+   "lo": 140,
+   "hi": 150,
+   "unit": "mL/kg/day",
+   "within_h": 24,
+   "src": "fl-nice-ng154",
+   "quote": "For preterm babies born before 28+0 weeks, consider stopping parenteral nutrition within 24 hours once the enteral feed volume is 140 to 150 ml/kg/day, taking into account the factors in recommendation 1.8.1."
+  },
+  {
+   "label": "Born at or after 28+0 weeks and term: consider stopping PN within 24 hours if tolerated enteral feeds reach",
+   "when": {
+    "ga_wk": {
+     "min": 28
+    }
+   },
+   "lo": 120,
+   "hi": 140,
+   "unit": "mL/kg/day",
+   "within_h": 24,
+   "src": "fl-nice-ng154",
+   "quote": "For preterm babies born at or after 28+0 weeks and term babies, consider stopping parenteral nutrition within 24 hours if the enteral feed volume tolerated is 120 to 140 ml/kg/day, taking into account the factors in recommendation 1.8.1."
+  }
+ ]
+}

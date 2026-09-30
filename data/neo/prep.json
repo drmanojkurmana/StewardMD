@@ -1,0 +1,2486 @@
+{
+ "schema": 1,
+ "kind": "neo-prep",
+ "title": "Neonatal drug preparation: presentations, reconstitution, dilution, infusion, stability, compatibility",
+ "compiled": "2026-09-30",
+ "review": {
+  "status": "ai_drafted",
+  "by": null,
+  "date": null
+ },
+ "_conventions": "Concentrations: when a source writes 'X unit/mL' the per-mL field (per_ml, final_per_ml, final_max_per_ml) is left out and means 1 mL; it is present only when the source states another volume (e.g. 0.1 mg/0.1 mL). Solution presentations give v in vol_ml total. Powder presentations have no vol_ml (vial size is not drug volume). market US = FDA label; no Indian (IN) presentations were found in the StewardMD catalogue.",
+ "sources": {
+  "prep-acetaminophen": {
+   "title": "Acetaminophen FDA label (set id 9744d804-2857-47ef-a27a-bca27db9394c, version 5, effective 20231101)",
+   "publisher": "US FDA / DailyMed (B. Braun Medical Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=9744d804-2857-47ef-a27a-bca27db9394c",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-acyclovir": {
+   "title": "Acyclovir Sodium FDA label (set id ae921e4e-b8ae-4a45-acc1-32e5e719812b, version 7, effective 20230705)",
+   "publisher": "US FDA / DailyMed (Eugia US LLC)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ae921e4e-b8ae-4a45-acc1-32e5e719812b",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-alprostadil": {
+   "title": "PROSTIN VR PEDIATRIC FDA label (set id dea460fa-d05e-4191-8461-f185a711ad89, version 12, effective 20260817)",
+   "publisher": "US FDA / DailyMed (Pharmacia & Upjohn Company LLC)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=dea460fa-d05e-4191-8461-f185a711ad89",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-amikacin": {
+   "title": "amikacin sulfate FDA label (set id f260ff2a-76a0-4672-9516-91c344b67890, version 10, effective 20260727)",
+   "publisher": "US FDA / DailyMed (Sagent Pharmaceuticals)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f260ff2a-76a0-4672-9516-91c344b67890",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-amphotericin-b-liposomal": {
+   "title": "Amphotericin B liposome FDA label (set id a96a734f-d1c4-4d42-93c2-7c336da7f7b9, version 1, effective 20250606)",
+   "publisher": "US FDA / DailyMed (Mylan Institutional LLC)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a96a734f-d1c4-4d42-93c2-7c336da7f7b9",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-ampicillin": {
+   "title": "Ampicillin FDA label (set id b7bf2897-8272-4c7d-84e9-6fbba0ea63fa, version 15, effective 20250814)",
+   "publisher": "US FDA / DailyMed (Eugia US LLC)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=b7bf2897-8272-4c7d-84e9-6fbba0ea63fa",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-caffeine-citrate": {
+   "title": "caffeine citrate FDA label (set id 5f38c395-0093-4afd-89ec-f96e5dc0934a, version 10, effective 20260729)",
+   "publisher": "US FDA / DailyMed (Sagent Pharmaceuticals)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5f38c395-0093-4afd-89ec-f96e5dc0934a",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-calcium-gluconate": {
+   "title": "Calcium Gluconate FDA label (set id 8b77c3d2-992d-4261-8421-9cfd07328fbf, version 7, effective 20260518)",
+   "publisher": "US FDA / DailyMed (Fresenius Kabi USA, LLC)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8b77c3d2-992d-4261-8421-9cfd07328fbf",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-cefepime": {
+   "title": "Cefepime Hydrochloride FDA label (set id f64c181e-28c5-48ab-aa67-5ca0e3fd079c, version 1, effective 20250630)",
+   "publisher": "US FDA / DailyMed (Hikma Pharmaceuticals USA Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f64c181e-28c5-48ab-aa67-5ca0e3fd079c",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-cefotaxime": {
+   "title": "Cefotaxime FDA label (set id ed23b6bc-32c7-4c50-a53d-313ae78e5623, version 14, effective 20240411)",
+   "publisher": "US FDA / DailyMed (Hikma Pharmaceuticals USA Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ed23b6bc-32c7-4c50-a53d-313ae78e5623",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-ceftazidime": {
+   "title": "Ceftazidime FDA label (set id bcc81df2-20e3-4738-bfcf-301da883c1d9, version 10, effective 20230911)",
+   "publisher": "US FDA / DailyMed (WG Critical Care, LLC)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=bcc81df2-20e3-4738-bfcf-301da883c1d9",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-dobutamine": {
+   "title": "Dobutamine FDA label (set id 74ba9408-17d3-48ac-be0b-a4fee9e7a1a5, version 6, effective 20240702)",
+   "publisher": "US FDA / DailyMed (Hikma Pharmaceuticals USA Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=74ba9408-17d3-48ac-be0b-a4fee9e7a1a5",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-dopamine": {
+   "title": "DOPamine Hydrochloride FDA label (set id 1f306ad2-3606-4525-5a8a-ce78f426c1a2, version 22, effective 20260513)",
+   "publisher": "US FDA / DailyMed (Hospira, Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1f306ad2-3606-4525-5a8a-ce78f426c1a2",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-epinephrine": {
+   "title": "EPINEPHRINE FDA label (set id 4f83895f-638c-4515-af03-7c41ae60a42e, version 2, effective 20260715)",
+   "publisher": "US FDA / DailyMed (Fresenius Kabi USA, LLC)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4f83895f-638c-4515-af03-7c41ae60a42e",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-fentanyl": {
+   "title": "Fentanyl Citrate FDA label (set id ce5db1c2-feb1-4ad2-847a-d02e865bd47e, version 18, effective 20260306)",
+   "publisher": "US FDA / DailyMed (Hikma Pharmaceuticals USA Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ce5db1c2-feb1-4ad2-847a-d02e865bd47e",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-fluconazole": {
+   "title": "Fluconazole FDA label (set id cd24a261-9c15-42b4-8040-89d2dbda174e, version 27, effective 20240624)",
+   "publisher": "US FDA / DailyMed (Baxter Healthcare Company)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=cd24a261-9c15-42b4-8040-89d2dbda174e",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-fosphenytoin": {
+   "title": "CEREBYX FDA label (set id de5a6711-4abb-4c3d-a18b-266b094ace11, version 29, effective 20250518)",
+   "publisher": "US FDA / DailyMed (Pfizer Laboratories Div Pfizer Inc)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=de5a6711-4abb-4c3d-a18b-266b094ace11",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-furosemide": {
+   "title": "Furosemide FDA label (set id d76bd85a-8e57-477e-9607-c9435f1e26fb, version 1, effective 20250626)",
+   "publisher": "US FDA / DailyMed (Sagent Pharmaceuticals)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=d76bd85a-8e57-477e-9607-c9435f1e26fb",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-gentamicin": {
+   "title": "Gentamicin FDA label (set id 63413469-c676-48a3-a945-7d2489b535ef, version 3, effective 20241014)",
+   "publisher": "US FDA / DailyMed (Fresenius Kabi USA, LLC)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=63413469-c676-48a3-a945-7d2489b535ef",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-gentamicin-40": {
+   "title": "Gentamicin FDA label (set id 84f5c763-1cd3-4d85-9afb-934db8666fbf, version 3, effective 20241011)",
+   "publisher": "US FDA / DailyMed (Fresenius Kabi USA, LLC)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=84f5c763-1cd3-4d85-9afb-934db8666fbf",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-heparin": {
+   "title": "Heparin Sodium FDA label (set id 7014808d-cec9-4b2c-8eb5-940493e356ab, version 17, effective 20250813)",
+   "publisher": "US FDA / DailyMed (Hikma Pharmaceuticals USA Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7014808d-cec9-4b2c-8eb5-940493e356ab",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-hydrocortisone": {
+   "title": "Solu-Cortef FDA label (set id 65eefd58-b166-4d71-ade6-45c8fdf86922, version 30, effective 20260827)",
+   "publisher": "US FDA / DailyMed (Pharmacia & Upjohn Company LLC)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=65eefd58-b166-4d71-ade6-45c8fdf86922",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-ibuprofen-lysine": {
+   "title": "NEOPROFEN FDA label (set id 6f5ede6f-b0b7-4fc8-969e-652f60ead047, version 17, effective 20241015)",
+   "publisher": "US FDA / DailyMed (Recordati Rare Diseases Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=6f5ede6f-b0b7-4fc8-969e-652f60ead047",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-indomethacin": {
+   "title": "Indomethacin FDA label (set id ec482425-358c-4500-8f5d-79c1379c1fa8, version 8, effective 20260119)",
+   "publisher": "US FDA / DailyMed (Fresenius Kabi USA, LLC)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ec482425-358c-4500-8f5d-79c1379c1fa8",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-insulin-regular": {
+   "title": "Humulin R FDA label (set id b519bd83-038c-4ec5-a231-a51ec5cc291f, version 35, effective 20260616)",
+   "publisher": "US FDA / DailyMed (Eli Lilly and Company)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=b519bd83-038c-4ec5-a231-a51ec5cc291f",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-levetiracetam": {
+   "title": "Levetiracetam FDA label (set id 8d767545-1eb9-45a5-bd16-e8a66e628fea, version 15, effective 20250401)",
+   "publisher": "US FDA / DailyMed (Hikma Pharmaceuticals USA Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8d767545-1eb9-45a5-bd16-e8a66e628fea",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-meropenem": {
+   "title": "Meropenem FDA label (set id 8a2a545e-b336-416a-be73-9e0a7ccf6177, version 3, effective 20260826)",
+   "publisher": "US FDA / DailyMed (Hikma Pharmaceuticals USA Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8a2a545e-b336-416a-be73-9e0a7ccf6177",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-metronidazole": {
+   "title": "Metronidazole FDA label (set id d46870f5-e2b1-46bd-8413-4a0a8bcf3175, version 10, effective 20250814)",
+   "publisher": "US FDA / DailyMed (Sagent Pharmaceuticals)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=d46870f5-e2b1-46bd-8413-4a0a8bcf3175",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-micafungin": {
+   "title": "Micafungin FDA label (set id 8ba6f80c-05f0-4d75-930c-c8458db2e1c1, version 6, effective 20250822)",
+   "publisher": "US FDA / DailyMed (Hikma Pharmaceuticals USA Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8ba6f80c-05f0-4d75-930c-c8458db2e1c1",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-midazolam": {
+   "title": "Midazolam FDA label (set id a91ce254-14a3-4cbf-8ab8-5da252aa3fdc, version 7, effective 20240715)",
+   "publisher": "US FDA / DailyMed (Fresenius Kabi USA, LLC)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a91ce254-14a3-4cbf-8ab8-5da252aa3fdc",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-milrinone": {
+   "title": "Milrinone Lactate FDA label (set id bb7500f8-dbfd-4c8a-ac2e-5533609c3970, version 3, effective 20180601)",
+   "publisher": "US FDA / DailyMed (Hikma Pharmaceuticals USA Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=bb7500f8-dbfd-4c8a-ac2e-5533609c3970",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-morphine": {
+   "title": "Morphine Sulfate FDA label (set id be420e8b-bcb0-49b5-bb4d-1df8b9959809, version 26, effective 20251231)",
+   "publisher": "US FDA / DailyMed (Hospira, Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=be420e8b-bcb0-49b5-bb4d-1df8b9959809",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-naloxone": {
+   "title": "Naloxone Hydrochloride FDA label (set id 201fdedf-1736-4e52-9d7d-de14292547fd, version 5, effective 20250731)",
+   "publisher": "US FDA / DailyMed (Fresenius Kabi USA, LLC)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=201fdedf-1736-4e52-9d7d-de14292547fd",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-norepinephrine": {
+   "title": "Norepinephrine Bitartrate FDA label (set id dfed53ef-2060-44b8-a62e-9f8ee10a05a5, version 1, effective 20230605)",
+   "publisher": "US FDA / DailyMed (Fresenius Kabi USA, LLC)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=dfed53ef-2060-44b8-a62e-9f8ee10a05a5",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-phenobarbital": {
+   "title": "SEZABY FDA label (set id 8c7d0402-4977-4c25-bc4b-11db91339e9a, version 7, effective 20251223)",
+   "publisher": "US FDA / DailyMed (Sun Pharmaceutical Industries, Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8c7d0402-4977-4c25-bc4b-11db91339e9a",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-phenobarbital-hikma": {
+   "title": "Phenobarbital Sodium FDA label (set id ffcaa218-ed6a-4557-9645-b9a91128a214, version 5, effective 20240410)",
+   "publisher": "US FDA / DailyMed (Hikma Pharmaceuticals USA Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ffcaa218-ed6a-4557-9645-b9a91128a214",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-phytonadione": {
+   "title": "Vitamin K1 FDA label (set id e8808230-2c44-44c6-8cab-8f29b6b34051, version 23, effective 20260809)",
+   "publisher": "US FDA / DailyMed (Hospira, Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e8808230-2c44-44c6-8cab-8f29b6b34051",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-piperacillin-tazobactam": {
+   "title": "Piperacillin and Tazobactam FDA label (set id 1eb40c84-0cb3-4648-a39f-f4ebc4dbcb16, version 4, effective 20210402)",
+   "publisher": "US FDA / DailyMed (Fresenius Kabi USA, LLC)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1eb40c84-0cb3-4648-a39f-f4ebc4dbcb16",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-vancomycin": {
+   "title": "Vancomycin Hydrochloride FDA label (set id f623889c-a47a-4b3a-b3a9-e04051f5c2df, version 1, effective 20250528)",
+   "publisher": "US FDA / DailyMed (Sagent Pharmaceuticals)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f623889c-a47a-4b3a-b3a9-e04051f5c2df",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-vancomycin-fk": {
+   "title": "VANCOMYCIN HYDROCHLORIDE FDA label (set id 0576803d-95de-4a48-806a-69ae3fcaf6b0, version 8, effective 20230817)",
+   "publisher": "US FDA / DailyMed (Fresenius Kabi USA, LLC)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=0576803d-95de-4a48-806a-69ae3fcaf6b0",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  }
+ },
+ "drugs": [
+  {
+   "id": "ampicillin",
+   "name": "Ampicillin",
+   "presentations": [
+    {
+     "form": "powder",
+     "v": 250,
+     "unit": "mg",
+     "market": "US",
+     "src": "prep-ampicillin",
+     "quote": "Ampicillin for injection USP, 250 mg in 10 mL vial"
+    },
+    {
+     "form": "powder",
+     "v": 500,
+     "unit": "mg",
+     "market": "US",
+     "src": "prep-ampicillin",
+     "quote": "Ampicillin for injection USP, 500 mg in 10 mL vial"
+    },
+    {
+     "form": "powder",
+     "v": 1,
+     "unit": "g",
+     "market": "US",
+     "src": "prep-ampicillin",
+     "quote": "Ampicillin for injection USP, 1 g in 15 mL vial"
+    },
+    {
+     "form": "powder",
+     "v": 2,
+     "unit": "g",
+     "market": "US",
+     "src": "prep-ampicillin",
+     "quote": "Ampicillin for injection USP, 2 g in 24 mL vial"
+    }
+   ],
+   "reconstitution": [
+    {
+     "vial_v": 250,
+     "vial_unit": "mg",
+     "diluent": "Sterile Water for Injection (IM table)",
+     "add_ml": 1,
+     "final_v": 250,
+     "final_unit": "mg",
+     "note": "IM reconstitution table: 250 mg per mL",
+     "src": "prep-ampicillin",
+     "quote": "55150-111-10 250 mg 1 mL 1 mL 250 mg"
+    },
+    {
+     "vial_v": 500,
+     "vial_unit": "mg",
+     "diluent": "Sterile Water for Injection (IM table)",
+     "add_ml": 1.8,
+     "final_v": 250,
+     "final_unit": "mg",
+     "note": "IM reconstitution table: 250 mg per mL",
+     "src": "prep-ampicillin",
+     "quote": "55150-112-10 500 mg 1.8 mL 2 mL 250 mg"
+    },
+    {
+     "vial_v": 1,
+     "vial_unit": "g",
+     "diluent": "Sterile Water for Injection (IM table)",
+     "add_ml": 3.5,
+     "final_v": 250,
+     "final_unit": "mg",
+     "note": "IM reconstitution table: 250 mg per mL",
+     "src": "prep-ampicillin",
+     "quote": "55150-113-10 1 gram 3.5 mL 4 mL 250 mg"
+    },
+    {
+     "vial_v": 2,
+     "vial_unit": "g",
+     "diluent": "Sterile Water for Injection (IM table)",
+     "add_ml": 6.8,
+     "final_v": 250,
+     "final_unit": "mg",
+     "note": "IM reconstitution table: 250 mg per mL",
+     "src": "prep-ampicillin",
+     "quote": "55150-114-20 2 grams 6.8 mL 8 mL 250 mg"
+    },
+    {
+     "vial_v": 250,
+     "vial_unit": "mg",
+     "diluent": "Sterile Water for Injection (direct IV)",
+     "add_ml": 5,
+     "note": "Label gives no final concentration for direct IV",
+     "src": "prep-ampicillin",
+     "quote": "For Direct Intravenous Use – Add 5 mL Sterile Water for Injection, USP, or Bacteriostatic Water for Injection, USP to the 250 mg, and 500 mg vials"
+    },
+    {
+     "vial_v": 500,
+     "vial_unit": "mg",
+     "diluent": "Sterile Water for Injection (direct IV)",
+     "add_ml": 5,
+     "note": "Label gives no final concentration for direct IV",
+     "src": "prep-ampicillin",
+     "quote": "For Direct Intravenous Use – Add 5 mL Sterile Water for Injection, USP, or Bacteriostatic Water for Injection, USP to the 250 mg, and 500 mg vials"
+    }
+   ],
+   "dilution": [
+    {
+     "text": "Room temperature: up to 30 mg/mL in Sterile Water or 0.9% Sodium Chloride, stable 8 hours",
+     "final_max_v": 30,
+     "final_max_unit": "mg",
+     "src": "prep-ampicillin",
+     "quote": "Room Temperature (25°C) Diluent Concentrations Stability Periods Sterile Water for Injection up to 30 mg/mL 8 hours 0.9% Sodium Chloride Injection, USP up to 30 mg/mL 8 hours"
+    },
+    {
+     "text": "Only the listed solutions should be used, within the listed concentration range",
+     "src": "prep-ampicillin",
+     "quote": "Only those solutions listed above should be used for the intravenous infusion of ampicillin for injection, USP. The concentrations should fall within the range specified."
+    }
+   ],
+   "infusion": [
+    {
+     "text": "Direct IV (250 mg or 500 mg vial): give slowly over 3 to 5 minutes",
+     "src": "prep-ampicillin",
+     "quote": "Add 5 mL Sterile Water for Injection, USP, or Bacteriostatic Water for Injection, USP to the 250 mg, and 500 mg vials and administer slowly over a 3- to 5-minute period."
+    },
+    {
+     "text": "Direct IV (1 g or 2 g vial): give slowly over at least 10 to 15 minutes; faster administration may cause seizures",
+     "src": "prep-ampicillin",
+     "quote": "Dissolve in 7.4 or 14.8 mL Sterile Water for Injection, USP, or Bacteriostatic Water for Injection, USP, respectively, and administer slowly over at least 10 to 15 minutes. CAUTION: More rapid administration may result in convulsive seizures."
+    }
+   ],
+   "stability": [
+    {
+     "text": "Give IM and IV injections within one hour of preparation",
+     "src": "prep-ampicillin",
+     "quote": "Intramuscular and intravenous injections should be administered within one hour after preparation since the potency may decrease significantly after this period."
+    },
+    {
+     "text": "In 5% dextrose, stability is short (1 to 2 hours at room temperature)",
+     "src": "prep-ampicillin",
+     "quote": "5% Dextrose Injection, USP 10 to 20 mg/mL 1 hour 5% Dextrose Injection, USP up to 2 mg/mL 2 hours"
+    },
+    {
+     "text": "Refrigerated (4 C) stability in Sterile Water or 0.9% Sodium Chloride: 24 to 72 hours depending on concentration",
+     "src": "prep-ampicillin",
+     "quote": "Refrigerated (4°C) Diluent Concentrations Stability Periods Sterile Water for Injection 30 mg/mL 48 hours Sterile Water for Injection up to 20 mg/mL 72 hours 0.9% Sodium Chloride Injection, USP 30 mg/mL 24 hours 0.9% Sodium Chloride Injection, USP up to 20 mg/mL 48 hours"
+    }
+   ],
+   "compatibility": [
+    {
+     "text": "Do not use Bacteriostatic Water for Injection as diluent in newborns",
+     "src": "prep-ampicillin",
+     "quote": "Bacteriostatic Water for Injection, USP is not to be used as a diluent when the product will be used in newborns."
+    }
+   ]
+  },
+  {
+   "id": "gentamicin",
+   "name": "Gentamicin",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 20,
+     "unit": "mg",
+     "vol_ml": 2,
+     "market": "US",
+     "label": "Pediatric vial, preservative free",
+     "src": "prep-gentamicin",
+     "quote": "Strength NP17302 63323-173-95 20 mg/2 mL (10 mg/mL) 2 mL fill in a 2 mL single dose vial"
+    },
+    {
+     "form": "solution",
+     "v": 800,
+     "unit": "mg",
+     "vol_ml": 20,
+     "market": "US",
+     "label": "Multiple dose vial",
+     "src": "prep-gentamicin-40",
+     "quote": "NP1020 63323-010-96 800 mg/20 mL (40 mg/mL) 20 mL fill in a 20 mL flip-top vial"
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [
+    {
+     "text": "For intermittent IV use, dilute a single dose in 0.9% Sodium Chloride or 5% Dextrose",
+     "src": "prep-gentamicin",
+     "quote": "For intermittent intravenous administration, a single dose of Gentamicin Injection may be diluted in 0.9% Sodium Chloride Injection or in 5% Dextrose Injection."
+    }
+   ],
+   "infusion": [
+    {
+     "text": "Infuse over one-half to two hours",
+     "src": "prep-gentamicin",
+     "quote": "The solution may be infused over a period of one-half to two hours."
+    }
+   ],
+   "stability": [],
+   "compatibility": [
+    {
+     "text": "Do not premix with other drugs; give separately",
+     "src": "prep-gentamicin",
+     "quote": "Gentamicin Injection should not be physically premixed with other drugs, but should be administered separately in accordance with the recommended route of administration and dosage schedule."
+    }
+   ]
+  },
+  {
+   "id": "amikacin",
+   "name": "Amikacin",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 500,
+     "unit": "mg",
+     "vol_ml": 2,
+     "market": "US",
+     "src": "prep-amikacin",
+     "quote": "500 mg per 2 mL Single-Dose* Vial"
+    },
+    {
+     "form": "solution",
+     "v": 1,
+     "unit": "g",
+     "vol_ml": 4,
+     "market": "US",
+     "src": "prep-amikacin",
+     "quote": "1 gram per 4 mL Vial"
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [
+    {
+     "text": "Paediatric: fluid volume depends on the dose ordered; enough to infuse over the stated time",
+     "src": "prep-amikacin",
+     "quote": "In pediatric patients the amount of fluid used will depend on the amount of amikacin ordered for the patient."
+    }
+   ],
+   "infusion": [
+    {
+     "text": "Infants: 1 to 2 hour infusion",
+     "src": "prep-amikacin",
+     "quote": "Infants should receive a 1 to 2 hour infusion."
+    },
+    {
+     "text": "Paediatric: infuse over 30 to 60 minutes",
+     "src": "prep-amikacin",
+     "quote": "It should be a sufficient amount to infuse the Amikacin Sulfate Injection, USP over a 30 to 60 minute period."
+    }
+   ],
+   "stability": [
+    {
+     "text": "Stable 24 hours at room temperature at 0.25 and 5 mg/mL in 5% Dextrose, 0.9% Sodium Chloride, Lactated Ringer's and listed mixtures",
+     "src": "prep-amikacin",
+     "quote": "Amikacin sulfate is stable for 24 hours at room temperature at concentrations of 0.25 and 5 mg per mL in the following solutions: 5% Dextrose Injection, USP 5% Dextrose and 0.2% Sodium Chloride Injection, USP 5% Dextrose and 0.45% Sodium Chloride Injection, USP 0.9% Sodium Chloride Injection, USP Lactated Ringer's Injection, USP"
+    }
+   ],
+   "compatibility": [
+    {
+     "text": "Do not premix with other drugs; give separately",
+     "src": "prep-amikacin",
+     "quote": "Amikacin should not be physically premixed with other drugs but should be administered separately according to the recommended dose and route."
+    }
+   ]
+  },
+  {
+   "id": "vancomycin",
+   "name": "Vancomycin",
+   "presentations": [
+    {
+     "form": "powder",
+     "v": 500,
+     "unit": "mg",
+     "market": "US",
+     "src": "prep-vancomycin-fk",
+     "quote": "Vancomycin hydrochloride equivalent to 500 milligrams vancomycin per vial"
+    },
+    {
+     "form": "powder",
+     "v": 1,
+     "unit": "g",
+     "market": "US",
+     "src": "prep-vancomycin-fk",
+     "quote": "Vancomycin hydrochloride equivalent to 1 gram vancomycin per vial"
+    },
+    {
+     "form": "powder",
+     "v": 750,
+     "unit": "mg",
+     "market": "US",
+     "src": "prep-vancomycin",
+     "quote": "750 mg per Single-Dose vial (equivalent to 750 mg vancomycin"
+    },
+    {
+     "form": "powder",
+     "v": 1.25,
+     "unit": "g",
+     "market": "US",
+     "src": "prep-vancomycin",
+     "quote": "1.25 grams per Single-Dose vial (equivalent to 1.25 grams vancomycin"
+    },
+    {
+     "form": "powder",
+     "v": 1.5,
+     "unit": "g",
+     "market": "US",
+     "src": "prep-vancomycin",
+     "quote": "1.5 grams per Single-Dose vial (equivalent to 1.5 grams vancomycin"
+    }
+   ],
+   "reconstitution": [
+    {
+     "vial_v": 500,
+     "vial_unit": "mg",
+     "diluent": "Sterile Water for Injection",
+     "add_ml": 10,
+     "final_v": 50,
+     "final_unit": "mg",
+     "note": "Then further dilute before infusion",
+     "src": "prep-vancomycin-fk",
+     "quote": "reconstitute the vials of Vancomycin Hydrochloride for Injection, USP with Sterile Water for Injection to a concentration of 50 mg of vancomycin/mL (see following table for volume of diluent). Concentration/Vial Volume of Diluent 500 mg 10 mL 1 g 20 mL"
+    },
+    {
+     "vial_v": 1,
+     "vial_unit": "g",
+     "diluent": "Sterile Water for Injection",
+     "add_ml": 20,
+     "final_v": 50,
+     "final_unit": "mg",
+     "note": "Then further dilute before infusion",
+     "src": "prep-vancomycin-fk",
+     "quote": "reconstitute the vials of Vancomycin Hydrochloride for Injection, USP with Sterile Water for Injection to a concentration of 50 mg of vancomycin/mL (see following table for volume of diluent). Concentration/Vial Volume of Diluent 500 mg 10 mL 1 g 20 mL"
+    },
+    {
+     "vial_v": 750,
+     "vial_unit": "mg",
+     "diluent": "Sterile Water for Injection",
+     "add_ml": 15,
+     "final_v": 50,
+     "final_unit": "mg",
+     "note": "Then dilute to 5 mg/mL (150 mL of infusion solution per 750 mg vial)",
+     "src": "prep-vancomycin",
+     "quote": "reconstitute the vials of Vancomycin Hydrochloride for Injection (lyophilized powder) with Sterile Water for Injection to a concentration of 50 mg of vancomycin/mL then further dilute with an infusion solution to a final concentration of 5 mg/mL (see Table 1 for the appropriate volumes). Discard any reconstituted solution remaining in the vial. Table 1 Volume of Sterile Water for Injection to be Added for Reconstitution and Volume of Infusion Solution to be Used for Further Dilution a After reconstitution, the vials may be stored in a refrigerator for 14 days without significant loss of potency. b Use an infusion solution from the list of the compatible infusion solutions below [see Dosage and Administration ( 2.6 )] . Vancomycin Strength per Vial Volume of Sterile Water for Injection for reconstitution a Volume of infusion solution b to further dilute to a final concentration of 5 mg/mL 750 mg 15 mL 150 mL"
+    }
+   ],
+   "dilution": [
+    {
+     "text": "Adults: no more than 5 mg/mL recommended",
+     "final_max_v": 5,
+     "final_max_unit": "mg",
+     "src": "prep-vancomycin",
+     "quote": "Vancomycin Hydrochloride for Injection concentrations of no more than 5 mg/mL are recommended in adults"
+    },
+    {
+     "text": "Fluid restriction: up to 10 mg/mL may be used",
+     "final_max_v": 10,
+     "final_max_unit": "mg",
+     "src": "prep-vancomycin",
+     "quote": "In selected patients in need of fluid restriction, a concentration up to 10 mg/mL may be used"
+    }
+   ],
+   "infusion": [
+    {
+     "text": "Neonates: give each dose over 60 minutes",
+     "src": "prep-vancomycin",
+     "quote": "Each dose should be administered over 60 minutes. In premature infants, vancomycin clearance decreases as postconceptional age decreases."
+    }
+   ],
+   "stability": [
+    {
+     "text": "Reconstituted vials: refrigerate up to 14 days",
+     "src": "prep-vancomycin-fk",
+     "quote": "After reconstitution, the vials may be stored in a refrigerator for 14 days without significant loss of potency."
+    },
+    {
+     "text": "Diluted in 5% Dextrose or 0.9% Sodium Chloride: refrigerate up to 14 days",
+     "src": "prep-vancomycin-fk",
+     "quote": "Solutions that are diluted with 5% Dextrose Injection or 0.9% Sodium Chloride Injection may be stored in a refrigerator for 14 days without significant loss of potency."
+    }
+   ],
+   "compatibility": [
+    {
+     "text": "Compatible diluents at 5 g/L: 5% Dextrose, 0.9% Sodium Chloride, Lactated Ringer's and listed mixtures",
+     "src": "prep-vancomycin",
+     "quote": "The following diluents are physically and chemically compatible with 5 g/L vancomycin hydrochloride: 5% Dextrose Injection, USP 5% Dextrose Injection and 0.9% Sodium Chloride Injection, USP Lactated Ringer's Injection, USP Lactated Ringer's and 5% Dextrose Injection, USP 0.9% Sodium Chloride Injection, USP"
+    },
+    {
+     "text": "Physically incompatible with beta-lactam solutions; flush lines between them",
+     "src": "prep-vancomycin",
+     "quote": "Mixtures of solutions of vancomycin and beta-lactam antibacterial drugs have been shown to be physically incompatible. The likelihood of precipitation increases with higher concentrations of vancomycin. It is recommended to adequately flush the intravenous lines between the administration of these antibacterial drugs."
+    }
+   ]
+  },
+  {
+   "id": "cefotaxime",
+   "name": "Cefotaxime",
+   "presentations": [
+    {
+     "form": "powder",
+     "v": 500,
+     "unit": "mg",
+     "market": "US",
+     "src": "prep-cefotaxime",
+     "quote": "500 mg cefotaxime (free acid equivalent) vials in packages of 10"
+    },
+    {
+     "form": "powder",
+     "v": 1,
+     "unit": "g",
+     "market": "US",
+     "src": "prep-cefotaxime",
+     "quote": "1 g cefotaxime (free acid equivalent) vials in packages of 25"
+    },
+    {
+     "form": "powder",
+     "v": 2,
+     "unit": "g",
+     "market": "US",
+     "src": "prep-cefotaxime",
+     "quote": "2 g cefotaxime (free acid equivalent) vials in packages of 25"
+    }
+   ],
+   "reconstitution": [
+    {
+     "vial_v": 500,
+     "vial_unit": "mg",
+     "diluent": "Sterile Water for Injection (IV)",
+     "add_ml": 10,
+     "final_v": 50,
+     "final_unit": "mg",
+     "note": "Approximate concentration; withdrawable volume 10.2 mL",
+     "src": "prep-cefotaxime",
+     "quote": "500 mg vial* (IV) 10 10.2 50"
+    },
+    {
+     "vial_v": 1,
+     "vial_unit": "g",
+     "diluent": "Sterile Water for Injection (IV)",
+     "add_ml": 10,
+     "final_v": 95,
+     "final_unit": "mg",
+     "note": "Approximate concentration; withdrawable volume 10.4 mL",
+     "src": "prep-cefotaxime",
+     "quote": "1 g vial* (IV) 10 10.4 95"
+    },
+    {
+     "vial_v": 2,
+     "vial_unit": "g",
+     "diluent": "Sterile Water for Injection (IV)",
+     "add_ml": 10,
+     "final_v": 180,
+     "final_unit": "mg",
+     "note": "Approximate concentration; withdrawable volume 11.0 mL",
+     "src": "prep-cefotaxime",
+     "quote": "2 g vial* (IV) 10 11.0 180"
+    },
+    {
+     "vial_v": 500,
+     "vial_unit": "mg",
+     "diluent": "Sterile Water or Bacteriostatic Water for Injection (IM)",
+     "add_ml": 2,
+     "final_v": 230,
+     "final_unit": "mg",
+     "note": "IM only; approximate concentration",
+     "src": "prep-cefotaxime",
+     "quote": "500 mg vial* (IM) 2 2.2 230"
+    },
+    {
+     "vial_v": 1,
+     "vial_unit": "g",
+     "diluent": "Sterile Water or Bacteriostatic Water for Injection (IM)",
+     "add_ml": 3,
+     "final_v": 300,
+     "final_unit": "mg",
+     "note": "IM only; approximate concentration",
+     "src": "prep-cefotaxime",
+     "quote": "1 g vial* (IM) 3 3.4 300"
+    }
+   ],
+   "dilution": [
+    {
+     "text": "Reconstituted solution may be further diluted up to 1000 mL in 0.9% Sodium Chloride, 5% or 10% Dextrose and other listed fluids",
+     "src": "prep-cefotaxime",
+     "quote": "Reconstituted solutions may be further diluted up to 1000 mL with the following solutions and maintain satisfactory potency for 24 hours at or below 22°C, and at least 5 days under refrigeration (at or below 5°C): 0.9% Sodium Chloride Injection; 5 or 10% Dextrose Injection"
+    }
+   ],
+   "infusion": [
+    {
+     "text": "IV push: 1 g or 2 g in 10 mL over three to five minutes; never faster than three minutes",
+     "src": "prep-cefotaxime",
+     "quote": "For intermittent IV administration, a solution containing 1 gram or 2 grams in 10 mL of Sterile Water for Injection can be injected over a period of three to five minutes. Cefotaxime should not be administered over a period of less than three minutes."
+    }
+   ],
+   "stability": [
+    {
+     "text": "Reconstituted 500 mg IV vial (50 mg/mL): 24 hours at or below 22 C; 7 days refrigerated in vial, 5 days in plastic syringe",
+     "src": "prep-cefotaxime",
+     "quote": "500 mg vial IV 50 24 hours 7 days 5 days"
+    }
+   ],
+   "compatibility": [
+    {
+     "text": "Do not admix with aminoglycoside solutions",
+     "src": "prep-cefotaxime",
+     "quote": "NOTE: Solutions of cefotaxime must not be admixed with aminoglycoside solutions."
+    },
+    {
+     "text": "Do not prepare with diluents of pH above 7.5 such as Sodium Bicarbonate",
+     "src": "prep-cefotaxime",
+     "quote": "Solutions of cefotaxime should not be prepared with diluents having a pH above 7.5, such as Sodium Bicarbonate Injection."
+    }
+   ]
+  },
+  {
+   "id": "ceftazidime",
+   "name": "Ceftazidime",
+   "presentations": [
+    {
+     "form": "powder",
+     "v": 1,
+     "unit": "g",
+     "market": "US",
+     "src": "prep-ceftazidime",
+     "quote": "NDC 44567-235-25 1 gram* single-dose Vial"
+    },
+    {
+     "form": "powder",
+     "v": 2,
+     "unit": "g",
+     "market": "US",
+     "src": "prep-ceftazidime",
+     "quote": "NDC 44567-236-10 2 grams* single-dose Vial"
+    }
+   ],
+   "reconstitution": [
+    {
+     "vial_v": 1,
+     "vial_unit": "g",
+     "diluent": "Sterile Water for Injection (IV)",
+     "add_ml": 10,
+     "final_v": 100,
+     "final_unit": "mg",
+     "note": "Approximate; table columns interleaved in source text, pairing 1 g with 100 mg/mL inferred from column order",
+     "src": "prep-ceftazidime",
+     "quote": "Intravenous 1 gram vial 2 gram vial 10 10 10.8 To obtain a dose of 1 g, withdraw 10 mL from the vial following reconstitution. 11.5 To obtain a dose of 2 g, withdraw 11.5 mL from the vial following reconstitution. 100 170"
+    },
+    {
+     "vial_v": 2,
+     "vial_unit": "g",
+     "diluent": "Sterile Water for Injection (IV)",
+     "add_ml": 10,
+     "final_v": 170,
+     "final_unit": "mg",
+     "note": "Approximate; table columns interleaved in source text, pairing 2 g with 170 mg/mL inferred from column order",
+     "src": "prep-ceftazidime",
+     "quote": "Intravenous 1 gram vial 2 gram vial 10 10 10.8 To obtain a dose of 1 g, withdraw 10 mL from the vial following reconstitution. 11.5 To obtain a dose of 2 g, withdraw 11.5 mL from the vial following reconstitution. 100 170"
+    },
+    {
+     "vial_v": 1,
+     "vial_unit": "g",
+     "diluent": "Sterile Water for Injection (IM)",
+     "add_ml": 3,
+     "final_v": 280,
+     "final_unit": "mg",
+     "note": "IM only; approximate",
+     "src": "prep-ceftazidime",
+     "quote": "Intramuscular 1 gram vial 3 3.6 280"
+    }
+   ],
+   "dilution": [],
+   "infusion": [
+    {
+     "text": "Direct IV: inject slowly over 3 to 5 minutes",
+     "src": "prep-ceftazidime",
+     "quote": "Slowly inject directly into the vein over a period of 3 to 5 minutes"
+    }
+   ],
+   "stability": [],
+   "compatibility": [
+    {
+     "text": "Do not add to aminoglycoside solutions; give separately",
+     "src": "prep-ceftazidime",
+     "quote": "Solutions of ceftazidime for injection, like those of most beta-lactam antibacterial drugs, should not be added to solutions of aminoglycoside antibacterial drugs because of potential interaction."
+    }
+   ]
+  },
+  {
+   "id": "cefepime",
+   "name": "Cefepime",
+   "presentations": [
+    {
+     "form": "powder",
+     "v": 1,
+     "unit": "g",
+     "market": "US",
+     "src": "prep-cefepime",
+     "quote": "1 gram per vial"
+    },
+    {
+     "form": "powder",
+     "v": 2,
+     "unit": "g",
+     "market": "US",
+     "src": "prep-cefepime",
+     "quote": "2 grams per vial"
+    }
+   ],
+   "reconstitution": [
+    {
+     "vial_v": 1,
+     "vial_unit": "g",
+     "diluent": "Sterile Water, 0.9% Sodium Chloride or 5% Dextrose (IV)",
+     "add_ml": 10,
+     "final_v": 100,
+     "final_unit": "mg",
+     "note": "Approximate; withdraw 10.5 mL",
+     "src": "prep-cefepime",
+     "quote": "Cefepime vial content 1 g (IV) 10 100 10.5 1 g (IM) 2.4 280 3.6 2 g (IV) 10 160 12.5"
+    },
+    {
+     "vial_v": 2,
+     "vial_unit": "g",
+     "diluent": "Sterile Water, 0.9% Sodium Chloride or 5% Dextrose (IV)",
+     "add_ml": 10,
+     "final_v": 160,
+     "final_unit": "mg",
+     "note": "Approximate; withdraw 12.5 mL",
+     "src": "prep-cefepime",
+     "quote": "Cefepime vial content 1 g (IV) 10 100 10.5 1 g (IM) 2.4 280 3.6 2 g (IV) 10 160 12.5"
+    },
+    {
+     "vial_v": 1,
+     "vial_unit": "g",
+     "diluent": "Diluent per label (IM)",
+     "add_ml": 2.4,
+     "final_v": 280,
+     "final_unit": "mg",
+     "note": "IM only; approximate",
+     "src": "prep-cefepime",
+     "quote": "Cefepime vial content 1 g (IV) 10 100 10.5 1 g (IM) 2.4 280 3.6 2 g (IV) 10 160 12.5"
+    }
+   ],
+   "dilution": [
+    {
+     "text": "Compatible at 1 to 40 mg/mL in 0.9% Sodium Chloride, 5% and 10% Dextrose and other listed fluids",
+     "final_max_v": 40,
+     "final_max_unit": "mg",
+     "src": "prep-cefepime",
+     "quote": "Cefepime for injection vials are compatible at concentrations between 1 mg per mL and 40 mg per mL with the following intravenous infusion fluids"
+    }
+   ],
+   "infusion": [
+    {
+     "text": "Infuse over approximately 30 minutes",
+     "src": "prep-cefepime",
+     "quote": "Administer the resulting intravenous infusion over approximately 30 minutes"
+    }
+   ],
+   "stability": [
+    {
+     "text": "Diluted solutions: up to 24 hours at 20 to 25 C or 7 days at 2 to 8 C",
+     "src": "prep-cefepime",
+     "quote": "These solutions may be stored up to 24 hours at controlled room temperature 20°C to 25°C (68°F to 77°F) or 7 days in a refrigerator 2°C to 8°C (36°F to 46°F)."
+    }
+   ],
+   "compatibility": [
+    {
+     "text": "Do not add to ampicillin above 40 mg/mL, metronidazole, vancomycin, gentamicin, tobramycin, netilmicin or aminophylline",
+     "src": "prep-cefepime",
+     "quote": "Do not add solutions of cefepime for injection, to solutions of ampicillin at a concentration greater than 40 mg per mL, or to metronidazole, vancomycin, gentamicin, tobramycin, netilmicin sulfate, or aminophylline because of potential interaction."
+    }
+   ]
+  },
+  {
+   "id": "meropenem",
+   "name": "Meropenem",
+   "presentations": [
+    {
+     "form": "powder",
+     "v": 500,
+     "unit": "mg",
+     "market": "US",
+     "src": "prep-meropenem",
+     "quote": "500 mg meropenem for Injection Vial"
+    },
+    {
+     "form": "powder",
+     "v": 1,
+     "unit": "g",
+     "market": "US",
+     "src": "prep-meropenem",
+     "quote": "1 gram meropenem for Injection Vial"
+    }
+   ],
+   "reconstitution": [
+    {
+     "vial_v": 500,
+     "vial_unit": "mg",
+     "diluent": "Sterile Water for Injection (bolus)",
+     "add_ml": 10,
+     "final_v": 50,
+     "final_unit": "mg",
+     "note": "Approximate average concentration",
+     "src": "prep-meropenem",
+     "quote": "Vial Size Amount of Diluent Added (mL) Approximate Withdrawable Volume (mL) Approximate Average Concentration (mg/mL) 500 mg 10 10 50 1 gram 20 20 50"
+    },
+    {
+     "vial_v": 1,
+     "vial_unit": "g",
+     "diluent": "Sterile Water for Injection (bolus)",
+     "add_ml": 20,
+     "final_v": 50,
+     "final_unit": "mg",
+     "note": "Approximate average concentration",
+     "src": "prep-meropenem",
+     "quote": "Vial Size Amount of Diluent Added (mL) Approximate Withdrawable Volume (mL) Approximate Average Concentration (mg/mL) 500 mg 10 10 50 1 gram 20 20 50"
+    }
+   ],
+   "dilution": [
+    {
+     "text": "Infusion solutions 1 to 20 mg/mL: in 0.9% Sodium Chloride store 1 hour up to 25 C or 15 hours up to 5 C; in 5% Dextrose use immediately",
+     "final_max_v": 20,
+     "final_max_unit": "mg",
+     "src": "prep-meropenem",
+     "quote": "Solutions prepared for infusion (Meropenem concentrations ranging from 1 mg/mL to 20 mg/mL) re-constituted with Sodium Chloride Injection 0.9% may be stored for 1 hour at up to 25°C (77°F) or 15 hours at up to 5°C (41°F). Solutions prepared for infusion (Meropenem concentrations ranging from 1 mg/mL to 20 mg/mL) re-constituted with Dextrose Injection 5% should be used immediately."
+    }
+   ],
+   "infusion": [
+    {
+     "text": "Under 3 months (GA/PNA-based dosing): infuse over 30 minutes",
+     "src": "prep-meropenem",
+     "quote": "Meropenem for injection should be given as intravenous infusion over 30 minutes."
+    }
+   ],
+   "stability": [
+    {
+     "text": "Bolus solution (up to 50 mg/mL in Sterile Water): up to 3 hours up to 25 C or 13 hours up to 5 C",
+     "src": "prep-meropenem",
+     "quote": "Meropenem injection vials re-constituted with sterile Water for Injection for bolus administration (up to 50 mg/mL of Meropenem) may be stored for up to 3 hours at up to 25°C (77°F) or for 13 hours at up to 5°C (41°F)."
+    }
+   ],
+   "compatibility": [
+    {
+     "text": "Do not mix with or add to solutions containing other drugs",
+     "src": "prep-meropenem",
+     "quote": "Meropenem should not be mixed with or physically added to solutions containing other drugs."
+    }
+   ]
+  },
+  {
+   "id": "piperacillin-tazobactam",
+   "name": "Piperacillin-tazobactam",
+   "presentations": [
+    {
+     "form": "powder",
+     "v": 2.25,
+     "unit": "g",
+     "market": "US",
+     "src": "prep-piperacillin-tazobactam",
+     "quote": "Each piperacillin and tazobactam for injection, USP 2.25 g single dose vial provides piperacillin sodium equivalent to 2 grams of piperacillin and tazobactam sodium equivalent to 0.25 g of tazobactam."
+    },
+    {
+     "form": "powder",
+     "v": 3.375,
+     "unit": "g",
+     "market": "US",
+     "src": "prep-piperacillin-tazobactam",
+     "quote": "Each piperacillin and tazobactam for injection, USP 3.375 g single dose vial provides piperacillin sodium equivalent to 3 grams of piperacillin and tazobactam sodium equivalent to 0.375 g of tazobactam."
+    },
+    {
+     "form": "powder",
+     "v": 4.5,
+     "unit": "g",
+     "market": "US",
+     "src": "prep-piperacillin-tazobactam",
+     "quote": "Each piperacillin and tazobactam for injection, USP 4.5 g single dose vial provides piperacillin sodium equivalent to 4 grams of piperacillin and tazobactam sodium equivalent to 0.5 g of tazobactam."
+    }
+   ],
+   "reconstitution": [
+    {
+     "vial_v": 2.25,
+     "vial_unit": "g",
+     "diluent": "0.9% Sodium Chloride, Sterile Water or 5% Dextrose (label list)",
+     "add_ml": 10,
+     "note": "Label gives no final concentration",
+     "src": "prep-piperacillin-tazobactam",
+     "quote": "2.25 g, 3.375 g, and 4.5 g piperacillin and tazobactam for injection should be reconstituted with 10 mL, 15 mL, and 20 mL, respectively."
+    },
+    {
+     "vial_v": 3.375,
+     "vial_unit": "g",
+     "diluent": "0.9% Sodium Chloride, Sterile Water or 5% Dextrose (label list)",
+     "add_ml": 15,
+     "note": "Label gives no final concentration",
+     "src": "prep-piperacillin-tazobactam",
+     "quote": "2.25 g, 3.375 g, and 4.5 g piperacillin and tazobactam for injection should be reconstituted with 10 mL, 15 mL, and 20 mL, respectively."
+    },
+    {
+     "vial_v": 4.5,
+     "vial_unit": "g",
+     "diluent": "0.9% Sodium Chloride, Sterile Water or 5% Dextrose (label list)",
+     "add_ml": 20,
+     "note": "Label gives no final concentration",
+     "src": "prep-piperacillin-tazobactam",
+     "quote": "2.25 g, 3.375 g, and 4.5 g piperacillin and tazobactam for injection should be reconstituted with 10 mL, 15 mL, and 20 mL, respectively."
+    }
+   ],
+   "dilution": [
+    {
+     "text": "Further dilute (recommended 50 to 150 mL per dose, adult presentation) in a compatible IV solution",
+     "src": "prep-piperacillin-tazobactam",
+     "quote": "Reconstituted piperacillin and tazobactam for injection solution for single dose vials should be further diluted (recommended volume per dose of 50 mL to 150 mL) in a compatible intravenous solution listed below."
+    }
+   ],
+   "infusion": [
+    {
+     "text": "Infuse over at least 30 minutes",
+     "src": "prep-piperacillin-tazobactam",
+     "quote": "Administer by infusion over a period of at least 30 minutes."
+    }
+   ],
+   "stability": [
+    {
+     "text": "Use single dose vials immediately after reconstitution; discard after 24 hours at room temperature or 48 hours refrigerated",
+     "src": "prep-piperacillin-tazobactam",
+     "quote": "Single dose vials should be used immediately after reconstitution. Discard any unused portion after 24 hours if stored at room temperature (20°C to 25°C [68°F to 77°F]), or after 48 hours if stored at refrigerated temperature (2°C to 8°C [36°F to 46°F])."
+    }
+   ],
+   "compatibility": [
+    {
+     "text": "Lactated Ringer's is not compatible",
+     "src": "prep-piperacillin-tazobactam",
+     "quote": "LACTATED RINGER'S SOLUTION IS NOT COMPATIBLE WITH PIPERACILLIN AND TAZOBACTAM FOR INJECTION."
+    },
+    {
+     "text": "Reconstitute, dilute and give separately from aminoglycosides (Y-site only under listed conditions)",
+     "src": "prep-piperacillin-tazobactam",
+     "quote": "Piperacillin and tazobactam for injection and aminoglycosides should be reconstituted, diluted, and administered separately."
+    }
+   ]
+  },
+  {
+   "id": "metronidazole",
+   "name": "Metronidazole",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 500,
+     "unit": "mg",
+     "vol_ml": 100,
+     "market": "US",
+     "label": "Premixed ready-to-use bag",
+     "src": "prep-metronidazole",
+     "quote": "500 mg per 100 mL single-dose flexible container bag"
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [
+    {
+     "text": "Ready to use; no dilution or buffering required",
+     "src": "prep-metronidazole",
+     "quote": "Metronidazole Injection is a ready-to-use isotonic solution. NO DILUTION OR BUFFERING IS REQUIRED."
+    }
+   ],
+   "infusion": [
+    {
+     "text": "Adult table: loading and maintenance doses infused over one hour",
+     "src": "prep-metronidazole",
+     "quote": "Loading Dose 15 mg/kg infused over one hour"
+    }
+   ],
+   "stability": [],
+   "compatibility": [
+    {
+     "text": "Do not introduce additives; stop the primary infusion during metronidazole infusion",
+     "src": "prep-metronidazole",
+     "quote": "Additives should not be introduced into this solution. If used with a primary intravenous fluid system, the primary solution should be discontinued during metronidazole infusion."
+    },
+    {
+     "text": "Do not use equipment containing aluminum that contacts the solution",
+     "src": "prep-metronidazole",
+     "quote": "DO NOT USE EQUIPMENT CONTAINING ALUMINUM (E.G., NEEDLES, CANNULAE) THAT WOULD COME IN CONTACT WITH THE DRUG SOLUTION."
+    }
+   ]
+  },
+  {
+   "id": "acyclovir",
+   "name": "Acyclovir",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 50,
+     "unit": "mg",
+     "market": "US",
+     "label": "50 mg/mL in 10 mL vial",
+     "src": "prep-acyclovir",
+     "quote": "Acyclovir Sodium Injection equivalent to acyclovir, 50 mg/mL in 10 mL glass vials"
+    },
+    {
+     "form": "solution",
+     "v": 50,
+     "unit": "mg",
+     "market": "US",
+     "label": "50 mg/mL in 20 mL vial",
+     "src": "prep-acyclovir",
+     "quote": "Acyclovir Sodium Injection equivalent to acyclovir, 50 mg/mL in 20 mL glass vials"
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [
+    {
+     "text": "Infusion concentrations of approximately 7 mg/mL or lower recommended; 10 mg/mL may cause phlebitis",
+     "final_max_v": 7,
+     "final_max_unit": "mg",
+     "src": "prep-acyclovir",
+     "quote": "Infusion concentrations of approximately 7 mg/mL or lower are recommended."
+    }
+   ],
+   "infusion": [
+    {
+     "text": "Neonatal HSV: infuse at a constant rate over 1 hour; avoid rapid or bolus injection",
+     "src": "prep-acyclovir",
+     "quote": "Neonatal Herpes Simplex Virus Infections (Birth to 3 months) 10 mg/kg infused at a constant rate over 1 hour, every 8 hours for 10 days."
+    }
+   ],
+   "stability": [
+    {
+     "text": "Once diluted, use each dose within 24 hours",
+     "src": "prep-acyclovir",
+     "quote": "Once diluted for administration, each dose should be used within 24 hours."
+    }
+   ],
+   "compatibility": [
+    {
+     "text": "Standard electrolyte and glucose solutions suitable; biologic or colloidal fluids not recommended",
+     "src": "prep-acyclovir",
+     "quote": "Standard, commercially available electrolyte and glucose solutions are suitable for intravenous administration; biologic or colloidal fluids (e.g., blood products, protein solutions, etc.) are not recommended."
+    }
+   ]
+  },
+  {
+   "id": "fluconazole",
+   "name": "Fluconazole",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 200,
+     "unit": "mg",
+     "vol_ml": 100,
+     "market": "US",
+     "label": "Premixed 2 mg/mL",
+     "src": "prep-fluconazole",
+     "quote": "Fluconazole in Sodium Chloride Diluent 200 mg/100 mL"
+    },
+    {
+     "form": "solution",
+     "v": 400,
+     "unit": "mg",
+     "vol_ml": 200,
+     "market": "US",
+     "label": "Premixed 2 mg/mL",
+     "src": "prep-fluconazole",
+     "quote": "Fluconazole in Sodium Chloride Diluent 400 mg/200 mL"
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [],
+   "infusion": [
+    {
+     "text": "Maximum rate approximately 200 mg/hour as continuous infusion",
+     "src": "prep-fluconazole",
+     "quote": "The intravenous infusion of Fluconazole in Sodium Chloride Injection should be administered at a maximum rate of approximately 200 mg/hour"
+    }
+   ],
+   "stability": [],
+   "compatibility": [
+    {
+     "text": "Do not add supplementary medication",
+     "src": "prep-fluconazole",
+     "quote": "DO NOT ADD SUPPLEMENTARY MEDICATION"
+    }
+   ]
+  },
+  {
+   "id": "micafungin",
+   "name": "Micafungin",
+   "presentations": [
+    {
+     "form": "powder",
+     "v": 50,
+     "unit": "mg",
+     "market": "US",
+     "src": "prep-micafungin",
+     "quote": "50 mg single-dose vial"
+    },
+    {
+     "form": "powder",
+     "v": 100,
+     "unit": "mg",
+     "market": "US",
+     "src": "prep-micafungin",
+     "quote": "100 mg single-dose vial"
+    }
+   ],
+   "reconstitution": [
+    {
+     "vial_v": 50,
+     "vial_unit": "mg",
+     "diluent": "0.9% Sodium Chloride (no bacteriostatic agent) or 5% Dextrose",
+     "add_ml": 5,
+     "final_v": 10,
+     "final_unit": "mg",
+     "src": "prep-micafungin",
+     "quote": "Reconstitute micafungin for injection vials by aseptically adding 5 mL of one of the following compatible solutions: 0.9% Sodium Chloride Injection, USP (without a bacteriostatic agent) 5% Dextrose Injection, USP To minimize excessive foaming, gently dissolve the micafungin for injection powder by swirling the vial. Do not vigorously shake the vial . Visually inspect the vial for particulate matter. Micafungin for injection 50 mg vial : after reconstitution each mL contains 10 mg of micafungin. Micafungin for injection 100 mg vial : after reconstitution each mL contains 20 mg of micafungin."
+    },
+    {
+     "vial_v": 100,
+     "vial_unit": "mg",
+     "diluent": "0.9% Sodium Chloride (no bacteriostatic agent) or 5% Dextrose",
+     "add_ml": 5,
+     "final_v": 20,
+     "final_unit": "mg",
+     "src": "prep-micafungin",
+     "quote": "Reconstitute micafungin for injection vials by aseptically adding 5 mL of one of the following compatible solutions: 0.9% Sodium Chloride Injection, USP (without a bacteriostatic agent) 5% Dextrose Injection, USP To minimize excessive foaming, gently dissolve the micafungin for injection powder by swirling the vial. Do not vigorously shake the vial . Visually inspect the vial for particulate matter. Micafungin for injection 50 mg vial : after reconstitution each mL contains 10 mg of micafungin. Micafungin for injection 100 mg vial : after reconstitution each mL contains 20 mg of micafungin."
+    }
+   ],
+   "dilution": [
+    {
+     "text": "Paediatric: final concentration 0.5 to 4 mg/mL in 0.9% Sodium Chloride or 5% Dextrose; above 1.5 mg/mL via central catheter",
+     "final_max_v": 4,
+     "final_max_unit": "mg",
+     "src": "prep-micafungin",
+     "quote": "Ensure that the final concentration of the solution is between 0.5 mg/mL to 4 mg/mL. To decrease the risk of infusion reactions, concentrations above 1.5 mg/mL should be administered via central catheter"
+    }
+   ],
+   "infusion": [
+    {
+     "text": "Paediatric: infuse over one hour; flush existing line with 0.9% Sodium Chloride first",
+     "src": "prep-micafungin",
+     "quote": "Flush an existing intravenous line with 0.9% Sodium Chloride Injection, USP, prior to infusion of micafungin for injection. Pediatric Patients Micafungin for injection should be infused over one hour."
+    }
+   ],
+   "stability": [
+    {
+     "text": "Reconstituted vial: protect from light, up to 24 hours at 25 C",
+     "src": "prep-micafungin",
+     "quote": "The reconstituted product should be protected from light and may be stored in the original vial for up to 24 hours at room temperature, 25°C (77°F)."
+    }
+   ],
+   "compatibility": [
+    {
+     "text": "Do not mix or co-infuse with other medications",
+     "src": "prep-micafungin",
+     "quote": "Do not mix or co-infuse micafungin for injection with other medications."
+    }
+   ]
+  },
+  {
+   "id": "amphotericin-b-liposomal",
+   "name": "Amphotericin B liposomal",
+   "presentations": [
+    {
+     "form": "powder",
+     "v": 50,
+     "unit": "mg",
+     "market": "US",
+     "src": "prep-amphotericin-b-liposomal",
+     "quote": "Each vial contains amphotericin B, USP, 50 milligrams (mg), intercalated into a liposomal membrane"
+    }
+   ],
+   "reconstitution": [
+    {
+     "vial_v": 50,
+     "vial_unit": "mg",
+     "diluent": "Sterile Water for Injection only (no saline)",
+     "add_ml": 12,
+     "final_v": 4,
+     "final_unit": "mg",
+     "src": "prep-amphotericin-b-liposomal",
+     "quote": "Vials of amphotericin B liposome for injection containing 50 mg of amphotericin B are prepared as follows: Reconstitution 1. Aseptically add 12 mL of Sterile Water for Injection, USP to each amphotericin B liposome for injection vial to yield a preparation containing 4 mg amphotericin B/mL."
+    }
+   ],
+   "dilution": [
+    {
+     "text": "Dilute with 5% Dextrose through the supplied 5 micron filter to 1 to 2 mg/mL; 0.2 to 0.5 mg/mL may suit infants and small children",
+     "final_max_v": 2,
+     "final_max_unit": "mg",
+     "src": "prep-amphotericin-b-liposomal",
+     "quote": "must be diluted with 5% Dextrose Injection to a final concentration of 1 to 2 mg/mL prior to administration. Lower concentrations (0.2 to 0.5 mg/mL) may be appropriate for infants and small children to provide sufficient volume for infusion."
+    }
+   ],
+   "infusion": [
+    {
+     "text": "Infuse over approximately 120 minutes with a controlled infusion device",
+     "src": "prep-amphotericin-b-liposomal",
+     "quote": "Amphotericin B liposome for injection should be administered by intravenous infusion, using a controlled infusion device, over a period of approximately 120 minutes."
+    }
+   ],
+   "stability": [
+    {
+     "text": "Reconstituted concentrate: up to 24 hours at 2 to 8 C; start infusion within 6 hours of dilution",
+     "src": "prep-amphotericin-b-liposomal",
+     "quote": "The reconstituted product concentrate may be stored for up to 24 hours at 2° to 8°C (36° to 46°F) following reconstitution with Sterile Water for Injection, USP. Do not freeze. Storage of Diluted Product Injection of amphotericin B liposome for injection should commence within 6 hours of dilution with 5% Dextrose Injection."
+    }
+   ],
+   "compatibility": [
+    {
+     "text": "Do not reconstitute with saline, add saline, or mix with other drugs; flush line with 5% Dextrose",
+     "src": "prep-amphotericin-b-liposomal",
+     "quote": "CAUTION: DO NOT RECONSTITUTE WITH SALINE OR ADD SALINE TO THE RECONSTITUTED CONCENTRATION, OR MIX WITH OTHER DRUGS."
+    },
+    {
+     "text": "Flush existing line with 5% Dextrose before infusion or use a separate line",
+     "src": "prep-amphotericin-b-liposomal",
+     "quote": "An existing intravenous line must be flushed with 5% Dextrose Injection prior to infusion of amphotericin B liposome for injection. If this is not feasible, amphotericin B liposome for injection must be administered through a separate line."
+    }
+   ]
+  },
+  {
+   "id": "caffeine-citrate",
+   "name": "Caffeine citrate",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 60,
+     "unit": "mg",
+     "vol_ml": 3,
+     "market": "US",
+     "label": "Injection, 20 mg/mL caffeine citrate (10 mg/mL caffeine base)",
+     "src": "prep-caffeine-citrate",
+     "quote": "25021-601-03 60 mg per 3 mL Single-Dose Vial"
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [],
+   "infusion": [
+    {
+     "text": "Loading dose IV over 30 minutes; maintenance IV over 10 minutes, by syringe infusion pump",
+     "src": "prep-caffeine-citrate",
+     "quote": "Loading Dose 1 mL/kg 20 mg/kg Intravenous* (over 30 minutes) One Time Maintenance Dose 0.25 mL/kg 5 mg/kg Intravenous* (over 10 minutes) or Orally Every 24 hours**"
+    }
+   ],
+   "stability": [
+    {
+     "text": "Admixture 1:1 with listed products (including 5% Dextrose) chemically stable 24 hours at room temperature",
+     "src": "prep-caffeine-citrate",
+     "quote": "caffeine citrate injection, 60 mg per 3 mL is chemically stable for 24 hours at room temperature when combined with the following test products. Dextrose Injection, USP 5%"
+    }
+   ],
+   "compatibility": [],
+   "notes": [
+    {
+     "text": "Caffeine base dose is one half of the caffeine citrate dose",
+     "src": "prep-caffeine-citrate",
+     "quote": "NOTE THAT THE DOSE OF CAFFEINE BASE IS ONE-HALF THE DOSE WHEN EXPRESSED AS CAFFEINE CITRATE (e.g., 20 mg of caffeine citrate is equivalent to 10 mg of caffeine base)."
+    }
+   ]
+  },
+  {
+   "id": "phenobarbital",
+   "name": "Phenobarbital",
+   "presentations": [
+    {
+     "form": "powder",
+     "v": 100,
+     "unit": "mg",
+     "market": "US",
+     "label": "SEZABY (neonatal seizures)",
+     "src": "prep-phenobarbital",
+     "quote": "For injection: 100 mg of phenobarbital sodium as a white to off-white lyophilized powder in a single-dose vial for reconstitution"
+    },
+    {
+     "form": "solution",
+     "v": 65,
+     "unit": "mg",
+     "vol_ml": 1,
+     "market": "US",
+     "src": "prep-phenobarbital-hikma",
+     "quote": "65 mg/mL, 1 mL vials packaged in 25s"
+    },
+    {
+     "form": "solution",
+     "v": 130,
+     "unit": "mg",
+     "vol_ml": 1,
+     "market": "US",
+     "src": "prep-phenobarbital-hikma",
+     "quote": "130 mg/mL, 1 mL vials packaged in 25s"
+    }
+   ],
+   "reconstitution": [
+    {
+     "vial_v": 100,
+     "vial_unit": "mg",
+     "diluent": "0.9% Sodium Chloride Injection",
+     "add_ml": 10,
+     "final_v": 100,
+     "final_unit": "mg",
+     "final_per_ml": 10,
+     "src": "prep-phenobarbital",
+     "quote": "Aseptically reconstitute the lyophilized powder in the vial using 10 mL of 0.9% Sodium Chloride Injection, USP. Swirl the vial gently until contents are completely dissolved. The reconstituted solution contains 100 mg per 10 mL (10 mg/mL) of phenobarbital sodium."
+    }
+   ],
+   "dilution": [],
+   "infusion": [
+    {
+     "text": "SEZABY: IV infusion over 15 minutes into a large peripheral vein",
+     "src": "prep-phenobarbital",
+     "quote": "Administer SEZABY by intravenous infusion (over 15 minutes) into a large peripheral vein to avoid local tissue toxicity"
+    }
+   ],
+   "stability": [
+    {
+     "text": "SEZABY reconstituted: in carton, up to 8 hours at 20 to 25 C or 24 hours at 2 to 8 C",
+     "src": "prep-phenobarbital",
+     "quote": "store at either room temperature at 20°C to 25°C (68°F to 77°F) for a maximum of 8 hours or in the refrigerator at 2°C to 8°C (36°F to 46°F) for a maximum of 24 hours."
+    }
+   ],
+   "compatibility": []
+  },
+  {
+   "id": "levetiracetam",
+   "name": "Levetiracetam",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 500,
+     "unit": "mg",
+     "vol_ml": 5,
+     "market": "US",
+     "src": "prep-levetiracetam",
+     "quote": "Injection: 500 mg/5 mL single dose vial"
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [
+    {
+     "text": "Dilute before use; for small volumes (paediatric) do not exceed 15 mg/mL",
+     "final_max_v": 15,
+     "final_max_unit": "mg",
+     "src": "prep-levetiracetam",
+     "quote": "If a smaller volume is required (e.g., pediatric patients), the amount of diluent should be calculated to not exceed a maximum levetiracetam concentration of 15 mg per mL of diluted solution."
+    }
+   ],
+   "infusion": [
+    {
+     "text": "Give as a 15-minute IV infusion",
+     "src": "prep-levetiracetam",
+     "quote": "Levetiracetam injection should be administered as a 15-minute IV infusion."
+    }
+   ],
+   "stability": [],
+   "compatibility": []
+  },
+  {
+   "id": "fosphenytoin",
+   "name": "Fosphenytoin",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 100,
+     "unit": "mg PE",
+     "vol_ml": 2,
+     "market": "US",
+     "src": "prep-fosphenytoin",
+     "quote": "2 mL single-dose injection vials, each containing 100 mg PE/2 mL (50 mg PE/mL)"
+    },
+    {
+     "form": "solution",
+     "v": 500,
+     "unit": "mg PE",
+     "vol_ml": 10,
+     "market": "US",
+     "src": "prep-fosphenytoin",
+     "quote": "10 mL single-dose injection vials, each containing 500 mg PE/10 mL (50 mg PE/mL)"
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [
+    {
+     "text": "Dilute in 5% Dextrose or 0.9% Sodium Chloride to 1.5 to 25 mg PE/mL; maximum 25 mg PE/mL",
+     "final_max_v": 25,
+     "final_max_unit": "mg PE",
+     "src": "prep-fosphenytoin",
+     "quote": "dilute CEREBYX in 5% Dextrose Injection or 0.9% Sodium Chloride Injection to a concentration ranging from 1.5 to 25 mg PE/mL. The maximum concentration of CEREBYX in any solution should be 25 mg PE/mL."
+    }
+   ],
+   "infusion": [
+    {
+     "text": "Paediatric: do not exceed 2 mg PE/kg/min (or 150 mg PE/min, whichever is slower)",
+     "src": "prep-fosphenytoin",
+     "quote": "The rate of intravenous CEREBYX administration should not exceed 150 mg phenytoin sodium equivalents (PE) per minute in adults and 2 mg PE/kg/min (or 150 mg PE/min, whichever is slower) in pediatric patients"
+    }
+   ],
+   "stability": [
+    {
+     "text": "Store refrigerated at 2 to 8 C; not more than 48 hours at room temperature",
+     "src": "prep-fosphenytoin",
+     "quote": "Store under refrigeration at 2°C to 8°C (36°F to 46°F). The product should not be stored at room temperature for more than 48 hours."
+    }
+   ],
+   "compatibility": []
+  },
+  {
+   "id": "midazolam",
+   "name": "Midazolam",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 2,
+     "unit": "mg",
+     "vol_ml": 2,
+     "market": "US",
+     "src": "prep-midazolam",
+     "quote": "2 mg per 2 mL (1 mg per mL), 2 mL fill, in a 2 mL vial."
+    },
+    {
+     "form": "solution",
+     "v": 5,
+     "unit": "mg",
+     "vol_ml": 5,
+     "market": "US",
+     "src": "prep-midazolam",
+     "quote": "5 mg per 5 mL (1 mg per mL), 5 mL fill, in a 5 mL vial."
+    },
+    {
+     "form": "solution",
+     "v": 10,
+     "unit": "mg",
+     "vol_ml": 10,
+     "market": "US",
+     "src": "prep-midazolam",
+     "quote": "10 mg per 10 mL (1 mg per mL), 10 mL fill, in a 10 mL vial."
+    },
+    {
+     "form": "solution",
+     "v": 5,
+     "unit": "mg",
+     "vol_ml": 1,
+     "market": "US",
+     "src": "prep-midazolam",
+     "quote": "5 mg per 1 mL (5 mg per mL), 1 mL fill, in a 2 mL vial."
+    },
+    {
+     "form": "solution",
+     "v": 10,
+     "unit": "mg",
+     "vol_ml": 2,
+     "market": "US",
+     "src": "prep-midazolam",
+     "quote": "10 mg per 2 mL (5 mg per mL), 2 mL fill, in a 2 mL vial."
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [
+    {
+     "text": "1 mg/mL and 5 mg/mL may be diluted with 0.9% Sodium Chloride or 5% Dextrose",
+     "src": "prep-midazolam",
+     "quote": "Both the 1 mg/mL and 5 mg/mL formulations of midazolam may be diluted with 0.9% sodium chloride or 5% dextrose in water."
+    }
+   ],
+   "infusion": [
+    {
+     "text": "Neonates: do not give by rapid injection (severe hypotension and seizures reported)",
+     "src": "prep-midazolam",
+     "quote": "Neonates: Midazolam should not be administered by rapid injection in the neonatal population. Severe hypotension and seizures have been reported following rapid IV administration, particularly with concomitant use of fentanyl"
+    },
+    {
+     "text": "Neonates: no IV loading doses",
+     "src": "prep-midazolam",
+     "quote": "Intravenous loading doses should not be used in neonates"
+    }
+   ],
+   "stability": [
+    {
+     "text": "At 0.5 mg/mL: compatible with 5% Dextrose and 0.9% Sodium Chloride up to 24 hours, Lactated Ringer's up to 4 hours",
+     "src": "prep-midazolam",
+     "quote": "Midazolam, at a concentration of 0.5 mg/mL, is compatible with 5% dextrose in water and 0.9% sodium chloride for up to 24 hours and with Lactated Ringer's solution for up to 4 hours."
+    }
+   ],
+   "compatibility": [
+    {
+     "text": "Vials contain benzyl alcohol",
+     "src": "prep-midazolam",
+     "quote": "Benzyl Alcohol 2 mL Vial Rx only vial"
+    }
+   ]
+  },
+  {
+   "id": "morphine",
+   "name": "Morphine",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 2,
+     "unit": "mg",
+     "market": "US",
+     "label": "Carpuject cartridge, 2 mg/mL (lowest strength on this label)",
+     "src": "prep-morphine",
+     "quote": "Carpuject™ Holders 2 mg/mL, 4 mg/mL, 8 mg/mL, 10 mg/mL, and 15 mg/mL"
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [],
+   "infusion": [],
+   "stability": [],
+   "compatibility": [],
+   "notes": [
+    {
+     "text": "Label: safety and effectiveness below 18 years not established",
+     "src": "prep-morphine",
+     "quote": "The safety and effectiveness of Morphine Sulfate Injection in pediatric patients below the age of 18 have not been established."
+    }
+   ]
+  },
+  {
+   "id": "fentanyl",
+   "name": "Fentanyl",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 50,
+     "unit": "mcg",
+     "market": "US",
+     "label": "50 mcg/mL; vial sizes 1, 2, 5, 20, 50 mL",
+     "src": "prep-fentanyl",
+     "quote": "Fentanyl Citrate Injection, USP, equivalent to 50 mcg fentanyl base per mL, is a preservative-free solution, available in 1 mL, 2 mL, 5 mL, 20 mL, 50 mL single-dose glass vials"
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [],
+   "infusion": [],
+   "stability": [
+    {
+     "text": "Protect from light; keep in carton",
+     "src": "prep-fentanyl",
+     "quote": "PROTECT FROM LIGHT. Keep covered in carton until time of use."
+    }
+   ],
+   "compatibility": [],
+   "notes": [
+    {
+     "text": "Label: safety and efficacy under two years not established; methemoglobinemia reported in premature neonates",
+     "src": "prep-fentanyl",
+     "quote": "The safety and efficacy of Fentanyl Citrate Injection in pediatric patients under two years of age has not been established. Rare cases of unexplained clinically significant methemoglobinemia have been reported in premature neonates"
+    }
+   ]
+  },
+  {
+   "id": "acetaminophen",
+   "name": "Acetaminophen (IV)",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 500,
+     "unit": "mg",
+     "vol_ml": 50,
+     "market": "US",
+     "src": "prep-acetaminophen",
+     "quote": "500 mg acetaminophen in 50 mL (10 mg/mL) injection for intravenous infusion"
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [
+    {
+     "text": "Doses below 500 mg: aseptic transfer to a separate container; do not add supplementary medication",
+     "src": "prep-acetaminophen",
+     "quote": "DO NOT ADD SUPPLEMENTARY MEDICATION. Single Dose Container. Doses less than 500 mg require aseptic transfer to a separate container prior to dispensing."
+    }
+   ],
+   "infusion": [
+    {
+     "text": "Small paediatric doses up to 60 mL: by syringe over 15 minutes with a syringe pump",
+     "src": "prep-acetaminophen",
+     "quote": "Place small volume pediatric doses up to 60 mL in volume in a syringe and administer over 15 minutes using a syringe pump."
+    }
+   ],
+   "stability": [],
+   "compatibility": []
+  },
+  {
+   "id": "ibuprofen-lysine",
+   "name": "Ibuprofen lysine",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 20,
+     "unit": "mg",
+     "vol_ml": 2,
+     "market": "US",
+     "src": "prep-ibuprofen-lysine",
+     "quote": "20 mg/2 mL (10 mg/mL) as a clear sterile preservative-free solution of the L-lysine salt of ibuprofen in a 2 mL single-use vial"
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [
+    {
+     "text": "Dilute to an appropriate volume with dextrose or saline",
+     "src": "prep-ibuprofen-lysine",
+     "quote": "For administration, NeoProfen should be diluted to an appropriate volume with dextrose or saline."
+    }
+   ],
+   "infusion": [
+    {
+     "text": "Prepare and give within 30 minutes; infuse continuously over 15 minutes via the port nearest the insertion site",
+     "src": "prep-ibuprofen-lysine",
+     "quote": "NeoProfen should be prepared for infusion and administered within 30 minutes of preparation and infused continuously over a period of 15 minutes. The drug should be administered via the IV port that is nearest the insertion site."
+    }
+   ],
+   "stability": [
+    {
+     "text": "No preservative: discard remaining solution after first withdrawal",
+     "src": "prep-ibuprofen-lysine",
+     "quote": "After the first withdrawal from the vial, any solution remaining must be discarded because NeoProfen contains no preservative."
+    }
+   ],
+   "compatibility": [
+    {
+     "text": "Not simultaneously in the same line as TPN; interrupt TPN 15 minutes before and after",
+     "src": "prep-ibuprofen-lysine",
+     "quote": "NeoProfen should not be simultaneously administered in the same intravenous line with Total Parenteral Nutrition (TPN). If necessary, TPN should be interrupted for a 15-minute period prior to and after drug administration."
+    }
+   ]
+  },
+  {
+   "id": "indomethacin",
+   "name": "Indomethacin",
+   "presentations": [
+    {
+     "form": "powder",
+     "v": 1,
+     "unit": "mg",
+     "market": "US",
+     "src": "prep-indomethacin",
+     "quote": "Single dose vials of 1 mg indomethacin as a sterile, lyophilized powder or plug for reconstitution."
+    }
+   ],
+   "reconstitution": [
+    {
+     "vial_v": 1,
+     "vial_unit": "mg",
+     "diluent": "Preservative-free 0.9% Sodium Chloride or Sterile Water",
+     "add_ml": 1,
+     "final_v": 0.1,
+     "final_unit": "mg",
+     "final_per_ml": 0.1,
+     "note": "Approximate",
+     "src": "prep-indomethacin",
+     "quote": "Prepare the solution with 1 to 2 mL of preservative-free Sterile Sodium Chloride Injection, 0.9 percent or preservative-free Sterile Water for Injection. Benzyl alcohol as a preservative has been associated with toxicity in neonates. Therefore, do not use diluents that contain preservatives. If 1 mL of diluent is used, the concentration of indomethacin in the solution will equal approximately 0.1 mg/0.1 mL; if 2 mL of diluent are used, the concentration of the solution will equal approximately 0.05 mg/0.1 mL."
+    },
+    {
+     "vial_v": 1,
+     "vial_unit": "mg",
+     "diluent": "Preservative-free 0.9% Sodium Chloride or Sterile Water",
+     "add_ml": 2,
+     "final_v": 0.05,
+     "final_unit": "mg",
+     "final_per_ml": 0.1,
+     "note": "Approximate",
+     "src": "prep-indomethacin",
+     "quote": "Prepare the solution with 1 to 2 mL of preservative-free Sterile Sodium Chloride Injection, 0.9 percent or preservative-free Sterile Water for Injection. Benzyl alcohol as a preservative has been associated with toxicity in neonates. Therefore, do not use diluents that contain preservatives. If 1 mL of diluent is used, the concentration of indomethacin in the solution will equal approximately 0.1 mg/0.1 mL; if 2 mL of diluent are used, the concentration of the solution will equal approximately 0.05 mg/0.1 mL."
+    }
+   ],
+   "dilution": [
+    {
+     "text": "Further dilution with IV infusion solutions not recommended",
+     "src": "prep-indomethacin",
+     "quote": "Further dilution with intravenous infusion solutions is not recommended."
+    }
+   ],
+   "infusion": [
+    {
+     "text": "Optimal rate not established; published literature suggests over 20 to 30 minutes",
+     "src": "prep-indomethacin",
+     "quote": "While the optimal rate of injection has not been established, published literature suggests an infusion rate over 20 to 30 minutes."
+    }
+   ],
+   "stability": [
+    {
+     "text": "Prepare fresh before each dose; discard unused solution",
+     "src": "prep-indomethacin",
+     "quote": "Discard any unused portion of the solution as it does not contain a preservative. Prepare a fresh solution just prior to each administration."
+    }
+   ],
+   "compatibility": []
+  },
+  {
+   "id": "alprostadil",
+   "name": "Alprostadil",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 500,
+     "unit": "mcg",
+     "vol_ml": 1,
+     "market": "US",
+     "src": "prep-alprostadil",
+     "quote": "PROSTIN VR PEDIATRIC Sterile Solution is available in a package of 5 ×1 mL ampoules (NDC 0009-3169-06). Each mL contains 500 micrograms alprostadil in dehydrated alcohol."
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [
+    {
+     "text": "Sample dilutions of one 500 microgram ampoule: 250 mL gives about 2, 100 mL about 5, 50 mL about 10, 25 mL about 20 micrograms/mL",
+     "src": "prep-alprostadil",
+     "quote": "Add 1 ampoule (500 micrograms) alprostadil to: Approximate Concentration of resulting solution (micrograms/mL) Infusion rate (mL/min per kg of body weight) Example: To provide 0.1 micrograms/kilogram of body weight per minute to an infant weighing 2.8 kilograms using a solution of 1 ampoule PROSTIN VR PEDIATRIC in 100 mL of saline or dextrose: INFUSION RATE = 0.02 mL/min per kg × 2.8 kg = 0.056 mL/min or 3.36 mL/hr. 250 mL 2 0.05 100 mL 5 0.02 50 mL 10 0.01 25 mL 20 0.005"
+    },
+    {
+     "text": "Dilute with Sodium Chloride or Dextrose; add infusion fluid to a volumetric chamber first to avoid undiluted drug touching the chamber wall",
+     "src": "prep-alprostadil",
+     "quote": "When using a volumetric infusion chamber, the appropriate amount of intravenous infusion solution should be added to the chamber first. The undiluted PROSTIN VR PEDIATRIC Sterile Solution should then be added to the intravenous infusion solution, avoiding direct contact of the undiluted solution with the walls of the volumetric infusion chamber."
+    }
+   ],
+   "infusion": [
+    {
+     "text": "Continuous IV infusion into a large vein, or via umbilical artery catheter at the ductal opening",
+     "src": "prep-alprostadil",
+     "quote": "The preferred route of administration for PROSTIN VR PEDIATRIC Sterile Solution is continuous intravenous infusion into a large vein. Alternatively, PROSTIN VR PEDIATRIC may be administered through an umbilical artery catheter placed at the ductal opening."
+    }
+   ],
+   "stability": [
+    {
+     "text": "Prepare fresh infusion every 24 hours; store ampoules refrigerated 2 to 8 C",
+     "src": "prep-alprostadil",
+     "quote": "Prepare fresh infusion solutions every 24 hours. Discard any solution more than 24 hours old."
+    }
+   ],
+   "compatibility": []
+  },
+  {
+   "id": "dopamine",
+   "name": "Dopamine",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 200,
+     "unit": "mg",
+     "vol_ml": 5,
+     "market": "US",
+     "src": "prep-dopamine",
+     "quote": "200 mg/5 mL (40 mg/mL)"
+    },
+    {
+     "form": "solution",
+     "v": 400,
+     "unit": "mg",
+     "vol_ml": 10,
+     "market": "US",
+     "src": "prep-dopamine",
+     "quote": "400 mg/10 mL (40 mg/mL)"
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [
+    {
+     "text": "Label chart: 5 mL (200 mg) in 250 mL gives 800 mcg/mL; 10 mL (400 mg) in 250 mL gives 1600 mcg/mL; higher concentrations for fluid restriction",
+     "src": "prep-dopamine",
+     "quote": "Volume of IV solution Volume of Dopamine Hydrochloride Injection 5 mL 10 mL 250 mL 800 mcg/mL 1600 mcg/mL 500 mL 400 mcg/mL 800 mcg/mL 1000 mL 200 mcg/mL 400 mcg/mL"
+    },
+    {
+     "text": "Use higher concentrations (3200 or 1600 mcg/mL) in fluid restriction",
+     "src": "prep-dopamine",
+     "quote": "Use higher concentration solutions (e.g., 3200 mcg/mL or 1600 mcg/mL strengths) in patients requiring fluid restriction."
+    }
+   ],
+   "infusion": [
+    {
+     "text": "Only after dilution, into a large vein, with an infusion pump",
+     "src": "prep-dopamine",
+     "quote": "Dopamine HCl Injection is administered (only after dilution) by intravenous infusion. Administer Dopamine HCl Injection into a large vein"
+    }
+   ],
+   "stability": [
+    {
+     "text": "Stable 24 hours after dilution in the listed solutions",
+     "src": "prep-dopamine",
+     "quote": "Dopamine HCl Injection has been found to be stable for 24 hours after dilution in the foregoing intravenous solutions."
+    }
+   ],
+   "compatibility": [
+    {
+     "text": "Incompatible with sodium bicarbonate or other alkalinizing substances, blood, iron salts; do not add other drugs to the infusion",
+     "src": "prep-dopamine",
+     "quote": "Dopamine HCl Injection is incompatible with the following products; therefore, avoid simultaneous administration (through the same infusion set): • Sodium bicarbonate or other alkalinizing substances, because dopamine is inactivated in alkaline solution • Blood, because of the risk of pseudoagglutination of red cells • Iron salts Do not add additional medications in the diluted infusion solution."
+    }
+   ]
+  },
+  {
+   "id": "dobutamine",
+   "name": "Dobutamine",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 250,
+     "unit": "mg",
+     "vol_ml": 20,
+     "market": "US",
+     "src": "prep-dobutamine",
+     "quote": "Dobutamine Injection USP, 20 mL single dose vial contains dobutamine hydrochloride, equivalent to 250 mg dobutamine per 20 mL"
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [
+    {
+     "text": "Dilute to at least 50 mL in a listed IV solution; concentrations up to 5,000 mcg/mL have been given",
+     "final_max_v": 5000,
+     "final_max_unit": "mcg",
+     "src": "prep-dobutamine",
+     "quote": "Concentrations of up to 5,000 mcg/mL have been administered to humans (250 mg/50 mL)."
+    },
+    {
+     "text": "Must be further diluted to at least a 50 mL solution",
+     "src": "prep-dobutamine",
+     "quote": "At the time of administration, dobutamine must be further diluted in an IV container to at least a 50 mL solution"
+    }
+   ],
+   "infusion": [],
+   "stability": [
+    {
+     "text": "Use IV solutions within 24 hours",
+     "src": "prep-dobutamine",
+     "quote": "Intravenous solutions should be used within 24 hours."
+    }
+   ],
+   "compatibility": [
+    {
+     "text": "Do not add to sodium bicarbonate or strongly alkaline solutions; do not mix with other drugs",
+     "src": "prep-dobutamine",
+     "quote": "Do not add dobutamine to 5% Sodium Bicarbonate Injection or to any other strongly alkaline solution. Because of potential physical incompatibilities, it is recommended that dobutamine not be mixed with other drugs in the same solution."
+    }
+   ]
+  },
+  {
+   "id": "epinephrine",
+   "name": "Epinephrine",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 30,
+     "unit": "mg",
+     "vol_ml": 30,
+     "market": "US",
+     "label": "Multiple dose vial",
+     "src": "prep-epinephrine",
+     "quote": "Injection solution: 30 mg/30 mL (1 mg/mL) Multiple Dose Vial"
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [
+    {
+     "text": "Label (adult septic shock): 1 mg in 1,000 mL of a dextrose-containing solution gives 1 mcg/mL; saline alone not recommended",
+     "src": "prep-epinephrine",
+     "quote": "Dilute 1 mL (1 mg) of epinephrine from its vial into 1,000 mL of one of the following solutions: 5% Dextrose Injection; 5% Dextrose and 0.9% Sodium Chloride Injection; 5% Dextrose and 0.45% Sodium Chloride Injection; or 5% Dextrose and 0.2% Sodium Chloride Injection. Each mL of this dilution contains 1 mcg of epinephrine."
+    }
+   ],
+   "infusion": [],
+   "stability": [
+    {
+     "text": "Diluted: up to 4 hours at 20 to 25 C or 24 hours at 2 to 8 C",
+     "src": "prep-epinephrine",
+     "quote": "The diluted solutions can be stored for up to 4 hours at room temperature (20°C to 25°C) or 24 hours under refrigerated conditions (2°C to 8°C)."
+    }
+   ],
+   "compatibility": [
+    {
+     "text": "Administration in Sodium Chloride alone not recommended; give blood or plasma separately",
+     "src": "prep-epinephrine",
+     "quote": "Administration in Sodium Chloride Injection alone is not recommended. If indicated, administer whole blood or plasma separately."
+    }
+   ]
+  },
+  {
+   "id": "norepinephrine",
+   "name": "Norepinephrine",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 4,
+     "unit": "mg",
+     "vol_ml": 4,
+     "market": "US",
+     "src": "prep-norepinephrine",
+     "quote": "Injection: 4 mg/4 mL (1 mg/mL norepinephrine base) sterile, colorless solution in a single-dose amber glass vial."
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [
+    {
+     "text": "Label (adult): 4 mg in 1,000 mL of 5% Dextrose-containing solution gives 4 mcg/mL; saline alone not recommended; higher concentrations for fluid restriction",
+     "src": "prep-norepinephrine",
+     "quote": "Add the content of one Norepinephrine Bitartrate Injection vial (4 mg in 4 mL) to 1,000 mL of 5% Dextrose Injection, USP or Sodium Chloride Injection solutions that contain 5% dextrose to produce a 4 mcg per mL dilution. Dextrose reduces loss of potency due to oxidation. Administration in saline solution alone is not recommended. Use higher concentration solutions in patients requiring fluid restriction."
+    }
+   ],
+   "infusion": [],
+   "stability": [
+    {
+     "text": "Diluted: up to 24 hours at room temperature, protected from light",
+     "src": "prep-norepinephrine",
+     "quote": "Prior to use, store the diluted Norepinephrine Bitartrate Injection solution for up to 24 hours at room temperature [20°C to 25°C (68°F to 77°F)] and protect from light."
+    }
+   ],
+   "compatibility": [
+    {
+     "text": "Avoid iron salts, alkalis, oxidizing agents; give blood or plasma separately",
+     "src": "prep-norepinephrine",
+     "quote": "Avoid contact with iron salts, alkalis, or oxidizing agents. Whole blood or plasma, if indicated to increase blood volume, should be administered separately."
+    }
+   ]
+  },
+  {
+   "id": "milrinone",
+   "name": "Milrinone",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 1,
+     "unit": "mg",
+     "per_ml": 1,
+     "market": "US",
+     "label": "1 mg/mL in 20 mL vial",
+     "src": "prep-milrinone",
+     "quote": "Milrinone Lactate Injection is supplied as 20 mL single dose vials in a box of 10, NDC 0143-9326-10, containing a sterile, clear, colorless to pale yellow solution. Each mL contains milrinone lactate equivalent to 1 mg milrinone."
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [
+    {
+     "text": "Dilute vial drug before maintenance infusion in 0.45% or 0.9% Sodium Chloride or 5% Dextrose; label table targets 200 mcg/mL (10 mL in 40 mL diluent, 20 mL in 80 mL)",
+     "src": "prep-milrinone",
+     "quote": "The diluents that may be used are 0.45% Sodium Chloride Injection, USP, 0.9% Sodium Chloride Injection, USP, or 5% Dextrose Injection, USP. The table below shows the volume of diluent in milliliters (mL) that must be used to achieve 200 mcg/mL concentration for infusion, and the resultant total volumes. Desired Infusion Concentration mcg/mL Milrinone 1 mg/mL (mL) Diluent (mL) Total Volume (mL) 200 10 40 50 200 20 80 100"
+    }
+   ],
+   "infusion": [],
+   "stability": [],
+   "compatibility": [],
+   "notes": [
+    {
+     "text": "Label: safety and effectiveness in pediatric patients not established",
+     "src": "prep-milrinone",
+     "quote": "Pediatric Use Safety and effectiveness in pediatric patients have not been established."
+    }
+   ]
+  },
+  {
+   "id": "hydrocortisone",
+   "name": "Hydrocortisone sodium succinate",
+   "presentations": [
+    {
+     "form": "powder",
+     "v": 100,
+     "unit": "mg",
+     "market": "US",
+     "label": "ACT-O-VIAL with supplied diluent",
+     "src": "prep-hydrocortisone",
+     "quote": "100 mg ACT-O-VIAL (Single-Dose Vial)"
+    }
+   ],
+   "reconstitution": [
+    {
+     "vial_v": 100,
+     "vial_unit": "mg",
+     "diluent": "Supplied ACT-O-VIAL diluent (Water for Injection, no preservative)",
+     "final_v": 100,
+     "final_unit": "mg",
+     "final_per_ml": 2,
+     "note": "100 mg in 2 mL when mixed; pairing read from interleaved table columns",
+     "src": "prep-hydrocortisone",
+     "quote": "100 mg ACT-O-VIAL 250 mg ACT-O-VIAL 500 mg ACT-O-VIAL 1,000 mg ACT-O-VIAL Each 2 mL contains (when mixed): Each 2 mL contains (when mixed): Each 4 mL contains (when mixed): Each 8 mL contains (when mixed): Hydrocortisone sodium succinate equiv. to 100 mg Hydrocortisone"
+    }
+   ],
+   "dilution": [
+    {
+     "text": "IV infusion: 100 mg solution may be added to 100 to 1,000 mL of 5% Dextrose (or saline if not sodium restricted); small volume: 100 to 3,000 mg in 50 mL",
+     "src": "prep-hydrocortisone",
+     "quote": "For intravenous infusion, first prepare solution as just described. The 100 mg solution may then be added to 100 mL to 1,000 mL of 5% dextrose in water (or isotonic saline solution or 5% dextrose in isotonic saline solution if patient is not on sodium restriction)."
+    }
+   ],
+   "infusion": [],
+   "stability": [
+    {
+     "text": "Reconstituted or diluted: use within 12 hours at 20 to 25 C, or within 24 hours if refrigerated; protect from light",
+     "src": "prep-hydrocortisone",
+     "quote": "Use the reconstituted and/or further diluted solution within 12 hours of preparation. Use reconstituted/diluted solution only if it is clear. If kept at controlled room temperature unused reconstituted and/or further diluted solution should be discarded after 12 hours post preparation. If kept under refrigerated conditions, unused reconstituted and/or further diluted solution should be used in no more than 24 hours and any unused portion should be discarded after that time."
+    }
+   ],
+   "compatibility": [
+    {
+     "text": "Supplied ACT-O-VIAL diluent is Water for Injection only, no preservative",
+     "src": "prep-hydrocortisone",
+     "quote": "The diluent, as part of the packaging presentation for the ACT-O-VIAL ® system, is comprised of Water for Injection only, and does not contain any preservative."
+    }
+   ]
+  },
+  {
+   "id": "furosemide",
+   "name": "Furosemide",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 20,
+     "unit": "mg",
+     "vol_ml": 2,
+     "market": "US",
+     "src": "prep-furosemide",
+     "quote": "20 mg per 2 mL Single-Dose Vial"
+    },
+    {
+     "form": "solution",
+     "v": 40,
+     "unit": "mg",
+     "vol_ml": 4,
+     "market": "US",
+     "src": "prep-furosemide",
+     "quote": "40 mg per 4 mL Single-Dose Vial"
+    },
+    {
+     "form": "solution",
+     "v": 100,
+     "unit": "mg",
+     "vol_ml": 10,
+     "market": "US",
+     "src": "prep-furosemide",
+     "quote": "100 mg per 10 mL Single-Dose Vial"
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [],
+   "infusion": [],
+   "stability": [
+    {
+     "text": "Protect from light; do not use if discolored",
+     "src": "prep-furosemide",
+     "quote": "Do not use if solution is discolored."
+    }
+   ],
+   "compatibility": [
+    {
+     "text": "Alkaline solution (pH about 9), precipitates below pH 7; do not co-administer acidic drugs (labetalol, ciprofloxacin, amrinone, milrinone) in the same infusion or line",
+     "src": "prep-furosemide",
+     "quote": "Furosemide injection is a buffered alkaline solution with a pH of about 9 and drug may precipitate at pH values below 7. Care must be taken to ensure that the pH of the prepared infusion solution is in the weakly alkaline to neutral range. Acid solutions, including other parenteral medications (e.g., labetalol, ciprofloxacin, amrinone, milrinone) must not be administered concurrently in the same infusion because they may cause precipitation of the furosemide."
+    }
+   ]
+  },
+  {
+   "id": "phytonadione",
+   "name": "Phytonadione (vitamin K1)",
+   "presentations": [
+    {
+     "form": "emulsion",
+     "v": 1,
+     "unit": "mg",
+     "vol_ml": 0.5,
+     "market": "US",
+     "label": "Ampul; contains benzyl alcohol",
+     "src": "prep-phytonadione",
+     "quote": "1 mg/0.5 mL"
+    },
+    {
+     "form": "emulsion",
+     "v": 10,
+     "unit": "mg",
+     "market": "US",
+     "label": "10 mg/mL ampul; contains benzyl alcohol",
+     "src": "prep-phytonadione",
+     "quote": "10 mg/mL single-dose ampuls"
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [
+    {
+     "text": "For IV use dilute with 0.9% Sodium Chloride, 5% Dextrose or 5% Dextrose and Sodium Chloride; avoid benzyl alcohol-containing diluents",
+     "src": "prep-phytonadione",
+     "quote": "Dilute Vitamin K 1 Injection with 0.9% Sodium Chloride Injection, 5% Dextrose Injection, or 5% Dextrose and Sodium Chloride Injection. Avoid use of other diluents that may contain benzyl alcohol, which can cause serious toxicity in newborns or low birth weight infants"
+    }
+   ],
+   "infusion": [
+    {
+     "text": "When IV unavoidable: inject very slowly, not exceeding 1 mg per minute",
+     "src": "prep-phytonadione",
+     "quote": "When intravenous administration is unavoidable, inject the drug very slowly, not exceeding 1 mg per minute."
+    }
+   ],
+   "stability": [
+    {
+     "text": "Start immediately after dilution; protect from light at all times",
+     "src": "prep-phytonadione",
+     "quote": "When diluted, start administration of Vitamin K 1 Injection immediately after dilution. Discard unused portions of diluted solution as well as unused contents of the ampul. Protect Vitamin K 1 Injection from light at all times."
+    }
+   ],
+   "compatibility": [
+    {
+     "text": "Use benzyl alcohol-free formulations in neonates and infants if available",
+     "src": "prep-phytonadione",
+     "quote": "Use benzyl alcohol-free phytonadione formulations in neonates and infants, if available."
+    }
+   ]
+  },
+  {
+   "id": "calcium-gluconate",
+   "name": "Calcium gluconate",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 1000,
+     "unit": "mg",
+     "vol_ml": 10,
+     "market": "US",
+     "src": "prep-calcium-gluconate",
+     "quote": "Single dose vial: 1,000 mg per 10 mL (100 mg per mL)"
+    },
+    {
+     "form": "solution",
+     "v": 5000,
+     "unit": "mg",
+     "vol_ml": 50,
+     "market": "US",
+     "src": "prep-calcium-gluconate",
+     "quote": "Single dose vial: 5,000 mg per 50 mL (100 mg per mL)"
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [
+    {
+     "text": "Bolus: dilute in 5% Dextrose or normal saline to 10 to 50 mg/mL",
+     "final_max_v": 50,
+     "final_max_unit": "mg",
+     "src": "prep-calcium-gluconate",
+     "quote": "Dilute the dose [see Dosage and Administration ( 2.2 )] of Calcium Gluconate Injection in 5% dextrose or normal saline to a concentration of 10-50 mg/mL prior to administration."
+    },
+    {
+     "text": "Continuous infusion: dilute to 5.8 to 10 mg/mL",
+     "final_max_v": 10,
+     "final_max_unit": "mg",
+     "src": "prep-calcium-gluconate",
+     "quote": "For continuous intravenous infusion: Dilute Calcium Gluconate Injection in 5% dextrose or normal saline to a concentration of 5.8-10 mg/mL prior to administration."
+    }
+   ],
+   "infusion": [
+    {
+     "text": "Bolus: do not exceed 100 mg/minute in pediatric patients including neonates",
+     "src": "prep-calcium-gluconate",
+     "quote": "Administer the dose slowly and DO NOT exceed an infusion rate of 200 mg/minute in adults or 100 mg/minute in pediatric patients, including neonates."
+    },
+    {
+     "text": "Neonate continuous infusion: initiate at 17 to 33 mg/kg/hour",
+     "src": "prep-calcium-gluconate",
+     "quote": "Neonate (≤ 1 month) 100 – 200 mg/kg 100 - 200 mg/kg every 6 hours Initiate at 17-33 mg/kg/hour"
+    }
+   ],
+   "stability": [
+    {
+     "text": "Use the diluted solution immediately",
+     "src": "prep-calcium-gluconate",
+     "quote": "Use the diluted solution immediately after preparation."
+    }
+   ],
+   "compatibility": [
+    {
+     "text": "Ceftriaxone with IV calcium contraindicated in neonates 28 days or younger",
+     "src": "prep-calcium-gluconate",
+     "quote": "Concomitant use of ceftriaxone and intravenous calcium-containing products is contraindicated in neonates (28 days of age or younger)"
+    },
+    {
+     "text": "Not compatible with fluids containing phosphate or bicarbonate; do not mix with minocycline",
+     "src": "prep-calcium-gluconate",
+     "quote": "Calcium Gluconate Injection is not physically compatible with fluids containing phosphate or bicarbonate. Precipitation may result if mixed. Do not mix Calcium Gluconate Injection with minocycline injection."
+    }
+   ]
+  },
+  {
+   "id": "insulin-regular",
+   "name": "Insulin regular (human)",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 100,
+     "unit": "units",
+     "market": "US",
+     "label": "U-100; 10 mL and 3 mL multiple-dose vials",
+     "src": "prep-insulin-regular",
+     "quote": "Injection: 100 units/mL (U-100), clear and colorless solution available as: 10 mL multiple-dose vial 3 mL multiple-dose vial"
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [
+    {
+     "text": "IV: use 0.1 unit/mL to 1 unit/mL in 0.9% Sodium Chloride infusion systems",
+     "final_max_v": 1,
+     "final_max_unit": "units",
+     "src": "prep-insulin-regular",
+     "quote": "For intravenous use, HUMULIN R should be used at concentrations from 0.1 unit/mL to 1 unit/mL in infusion systems containing 0.9% Sodium Chloride Injection."
+    }
+   ],
+   "infusion": [
+    {
+     "text": "IV only under medical supervision with close glucose and potassium monitoring",
+     "src": "prep-insulin-regular",
+     "quote": "Administer HUMULIN R intravenously ONLY under medical supervision with close monitoring of blood glucose and potassium levels"
+    }
+   ],
+   "stability": [
+    {
+     "text": "IV bags: 48 hours refrigerated, then up to 48 more hours at room temperature",
+     "src": "prep-insulin-regular",
+     "quote": "Intravenous infusion bags prepared with HUMULIN R are stable when stored in a refrigerator (36° to 46°F [2° to 8°C]) for 48 hours and then may be used at room temperature for up to an additional 48 hours."
+    }
+   ],
+   "compatibility": []
+  },
+  {
+   "id": "heparin",
+   "name": "Heparin sodium",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 1000,
+     "unit": "units",
+     "market": "US",
+     "label": "Preserved with benzyl alcohol",
+     "src": "prep-heparin",
+     "quote": "Single-dose Vials 1,000 USP units per mL"
+    },
+    {
+     "form": "solution",
+     "v": 5000,
+     "unit": "units",
+     "market": "US",
+     "label": "Preservative-free prefilled syringe",
+     "src": "prep-heparin",
+     "quote": "Single-dose Prefilled Syringes 5,000 USP units per mL"
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [],
+   "infusion": [],
+   "stability": [],
+   "compatibility": [
+    {
+     "text": "Use preservative-free heparin in neonates and infants",
+     "src": "prep-heparin",
+     "quote": "Use preservative-free Heparin Sodium Injection in neonates and infants."
+    },
+    {
+     "text": "Confirm strength: neonatal deaths from confusion with catheter lock flush vials",
+     "src": "prep-heparin",
+     "quote": "Pediatric patients, including neonates, have died as a result of medication errors in which Heparin Sodium Injection vials have been confused with “catheter lock flush” vials"
+    }
+   ]
+  },
+  {
+   "id": "naloxone",
+   "name": "Naloxone",
+   "presentations": [
+    {
+     "form": "solution",
+     "v": 0.4,
+     "unit": "mg",
+     "vol_ml": 1,
+     "market": "US",
+     "src": "prep-naloxone",
+     "quote": "0.4 mg/mL NDC 76045-114-01 1 mL Single-Dose prefilled syringe"
+    },
+    {
+     "form": "solution",
+     "v": 2,
+     "unit": "mg",
+     "vol_ml": 2,
+     "market": "US",
+     "src": "prep-naloxone",
+     "quote": "2 mg/2 mL (1 mg/mL) NDC 76045-112-01 2 mL Single-Dose prefilled syringe"
+    }
+   ],
+   "reconstitution": [],
+   "dilution": [
+    {
+     "text": "IV infusion: dilute in normal saline or 5% dextrose; 2 mg in 500 mL gives 0.004 mg/mL",
+     "src": "prep-naloxone",
+     "quote": "Naloxone may be diluted for intravenous infusion in normal saline or 5% dextrose solutions. The addition of 2 mg of Naloxone in 500 mL of either solution provides a concentration of 0.004 mg/mL."
+    }
+   ],
+   "infusion": [],
+   "stability": [
+    {
+     "text": "Use mixtures within 24 hours",
+     "src": "prep-naloxone",
+     "quote": "Mixtures should be used within 24 hours. After 24 hours, the remaining unused mixture must be discarded."
+    }
+   ],
+   "compatibility": [
+    {
+     "text": "Do not mix with bisulfite, metabisulfite, long-chain or high molecular weight anions, or alkaline solutions",
+     "src": "prep-naloxone",
+     "quote": "Naloxone should not be mixed with preparations containing bisulfite, metabisulfite, long-chain or high molecular weight anions, or any solution having an alkaline pH."
+    }
+   ]
+  }
+ ]
+}

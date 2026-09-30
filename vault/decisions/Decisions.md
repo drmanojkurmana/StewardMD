@@ -5,6 +5,24 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-30 · Neonatal layer: behind `smd_neo` (default OFF), every number quoted from a fetched source
+
+**Decision (owner plan "StewardMD Neonatal Layer").** Ten neonatal tools (dosing by GA/PNA/PMA, preparation,
+infusions, fluids/GIR, growth, bilirubin, scores, reference values, procedures, TDM) around one memory-only
+baby record, all behind `smd_neo` (default OFF) plus a per-tool flag. Data lives in `data/neo/*.json`; each
+clinical object carries `src` + a verbatim `quote` from a snapshot in `data/neo/sources/`, and
+`scripts/neo/validate.mjs` fails the build if a number is not in its quote. Unsourced = "No data on file".
+With the flag on, dose-calc.js never shows child or adult rows to a neonate ("No neonatal dose on file.
+Do not extrapolate.").
+**Why.** Neonatal errors are tenfold errors; a dose typed from memory is unreviewable. Quoting makes every
+number checkable by the reviewing neonatologist in one click.
+**Trade-off.** Coverage is what open sources publish: FDA labels (public domain) carry most doses, preterm
+fluid volumes and several ranges are absent, and many sources are non-commercial (INTERGROWTH-21st, WHO 2024
+SBI, NICE outside the UK, StatPearls, ASHP S4S, VON, BAPM, some CC BY-NC papers). The owner must clear or
+replace those before the flag goes on for anyone. The no-extrapolation rule is flag-gated; making it
+permanent for all users is an owner call.
+**Status.** Built on `feat/neo-layer` (tag `pre-neo`), unit + headless tests; PR open, not merged.
+
 ## 2026-09-29 · Clinical Bulletins signing desk rebuilt for speed; "Skip" is shared by all signers
 
 **Decision (owner: "Make it more easy for doctors").** The Review Desk "Clinical updates" tab is an inbox (To do /

@@ -1,0 +1,2261 @@
+{
+ "schema": 1,
+ "kind": "neo-procedures",
+ "title": "Neonatal procedure calculators and procedure-guide provenance",
+ "compiled": "2026-09-30",
+ "review": {
+  "status": "ai_drafted",
+  "by": null,
+  "date": null
+ },
+ "_comment": "calcs[]: { id, name, inputs[{var,label,unit}], formula{ text, machine }, src, quote, also?{src,quote}, applies?, notes[{text,src,quote}] }. machine types: 'linear' = const + sum(coef*var) with coef default 1 and 'neg': true meaning subtract that term, then 'then'[] ops applied in order (add|sub|mul|div by v); 'table' = rows[] each with its own when/src/quote; 'measure' = the measured value is the answer; 'nomogram' with values null = not computable; 'exchange' = multiplier x wt_kg x blood_volume_ml_per_kg[when]. No coefficient is pre-simplified (e.g. Shukla UVC is stored as (3 x BW + 9) / 2 + 1, not re-derived). guides{}: the quote behind every numbered sentence in kb/clinical-protocols/neonatal-*.json procedure guides.",
+ "sources": {
+  "pr-umb-ijp2010": {
+   "title": "Poor accuracy of methods currently used to determine umbilical catheter insertion length (Verheij GH et al.)",
+   "publisher": "Int J Pediatr (Hindawi)",
+   "year": 2010,
+   "url": "https://doi.org/10.1155/2010/873167",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2866966/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC2866966/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-uvc-cureus2025": {
+   "title": "Estimating Umbilical Venous Catheter Insertion Depth in Newborns Using Weight or Body Measurements: A Multicenter Randomized Clinical Trial (Abdelhamid FK et al.)",
+   "publisher": "Cureus",
+   "year": 2025,
+   "url": "https://doi.org/10.7759/cureus.90276",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12441985/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12441985/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-uvc-frontped2021": {
+   "title": "Umbilical Venous Catheter Update: A Narrative Review Including Ultrasound and Training (D'Andrea V et al.)",
+   "publisher": "Front Pediatr",
+   "year": 2021,
+   "url": "https://doi.org/10.3389/fped.2021.774705",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8841780/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8841780/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-ten-procs-ijp2023": {
+   "title": "Indications, Measurements, and Complications of Ten Essential Neonatal Procedures (Zubi ZBH et al.)",
+   "publisher": "Int J Pediatr (Hindawi)",
+   "year": 2023,
+   "url": "https://doi.org/10.1155/2023/3241607",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10497369/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10497369/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-ett-bmjopen2022": {
+   "title": "Randomised trial estimating length of endotracheal tube insertion using gestational age or nasal-tragus length in newborns: a study protocol (Razak A et al.)",
+   "publisher": "BMJ Open",
+   "year": 2022,
+   "url": "https://doi.org/10.1136/bmjopen-2021-055628",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8772421/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8772421/fullTextXML",
+   "licence": "CC BY-NC 4.0 (non-commercial; permission may be needed for commercial reuse)",
+   "accessed": "2026-09-30"
+  },
+  "pr-ett-frontped2026": {
+   "title": "Comparative accuracy of oro-helix length, naso-tragus length, and gestational age-based methods for endotracheal tube depth prediction in neonates of 1,500 g or less (Agorastos S et al.)",
+   "publisher": "Front Pediatr",
+   "year": 2026,
+   "url": "https://doi.org/10.3389/fped.2026.1861978",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13454031/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13454031/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-et-jmb2023": {
+   "title": "Efficacy of single- and double-volume exchange transfusion for neonatal hyperbilirubinemia (Xiong Z et al.)",
+   "publisher": "J Med Biochem",
+   "year": 2023,
+   "url": "https://doi.org/10.5937/jomb0-42668",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10543125/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10543125/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-et-turk2018": {
+   "title": "Turkish Neonatal Society guideline to the approach, follow-up, and treatment of neonatal jaundice (Coban A et al.)",
+   "publisher": "Turk Pediatri Ars",
+   "year": 2018,
+   "url": "https://doi.org/10.5152/turkpediatriars.2018.01816",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6568284/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC6568284/fullTextXML",
+   "licence": "CC BY-NC 4.0 per the article text (Europe PMC lists CC BY-NC-SA); non-commercial, permission may be needed for commercial reuse",
+   "accessed": "2026-09-30"
+  },
+  "pr-io-frontped2022": {
+   "title": "Intraosseous access in neonates is feasible and safe: an analysis of a prospective nationwide surveillance study in Germany (Schwindt E et al.)",
+   "publisher": "Front Pediatr",
+   "year": 2022,
+   "url": "https://doi.org/10.3389/fped.2022.952632",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9361041/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9361041/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-io-ejp2023": {
+   "title": "Finding the most suitable puncture site for intraosseous access in term and preterm neonates: an ultrasound-based anatomical pilot study (Schwindt EM et al.)",
+   "publisher": "Eur J Pediatr",
+   "year": 2023,
+   "url": "https://doi.org/10.1007/s00431-023-04972-8",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10354146/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10354146/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-io-jperi2025": {
+   "title": "A prospective evaluation of tibial insertion sites for intraosseous needles to gain vascular access in Asian neonates (Sengasai C et al.)",
+   "publisher": "J Perinatol",
+   "year": 2025,
+   "url": "https://doi.org/10.1038/s41372-024-02018-x",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11825351/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11825351/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-lp-jetem2025": {
+   "title": "Procedural Case: Neonatal Lumbar Puncture (Lei C et al.)",
+   "publisher": "J Educ Teach Emerg Med",
+   "year": 2025,
+   "url": "https://doi.org/10.21980/j8.52364",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12782593/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12782593/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-lp-ejp2023": {
+   "title": "Lumbar puncture position in infants: a systematic review and meta-analysis (Kuitunen I, Renko M)",
+   "publisher": "Eur J Pediatr",
+   "year": 2023,
+   "url": "https://doi.org/10.1007/s00431-023-05137-3",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10587251/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10587251/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-cd-cureus2024": {
+   "title": "Neonatal Subcutaneous Emphysema Secondary to Chest Tube Placement Using the Trocar Technique: A Case Report (Jilani TS et al.)",
+   "publisher": "Cureus",
+   "year": 2024,
+   "url": "https://doi.org/10.7759/cureus.51879",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10849260/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10849260/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-cd-tjms2021": {
+   "title": "Neonatal pneumothorax from the perspective of a pediatric surgeon: classification and management protocol (Huseynov M, Hakalmaz AE)",
+   "publisher": "Turk J Med Sci",
+   "year": 2021,
+   "url": "https://doi.org/10.3906/sag-2010-286",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8283476/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8283476/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-cd-frontped2021": {
+   "title": "Case Report: Neonatal Massive Pneumothorax Resulting in Compression Atelectasis Treated by Ultrasound-Guided Pleural Puncture Therapy (Liu J et al.)",
+   "publisher": "Front Pediatr",
+   "year": 2021,
+   "url": "https://doi.org/10.3389/fped.2021.779615",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8669828/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8669828/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-pc-tamponade-cr2025": {
+   "title": "First Reported Case of Iatrogenic Cardiac Tamponade Following Chest Drain Insertion for Tension Pneumothorax in a Premature Newborn (Grandmougin D et al.)",
+   "publisher": "Case Rep Pediatr (Wiley/Hindawi)",
+   "year": 2025,
+   "url": "https://doi.org/10.1155/crpe/7960753",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12103966/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12103966/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-pc-cureus2025": {
+   "title": "Pericardial Effusion and Cardiac Tamponade in Preterm Neonates After Umbilical Venous Catheter Insertion: a POCUS-guided case series (Gialamprinou D et al.)",
+   "publisher": "Cureus",
+   "year": 2025,
+   "url": "https://doi.org/10.7759/cureus.99821",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12821074/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12821074/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-pc-medicine2023": {
+   "title": "Peripherally inserted central catheter related pericardial effusion/cardiac tamponade in neonates: analysis of two cases and literature review (Liu Y et al.)",
+   "publisher": "Medicine (Baltimore)",
+   "year": 2023,
+   "url": "https://doi.org/10.1097/md.0000000000035779",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10615513/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10615513/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-pc-pocus2025": {
+   "title": "Utilizing POCUS for the Identification and Management of PICC Line-Associated Cardiac Tamponade (Guzman PJC et al.)",
+   "publisher": "POCUS J",
+   "year": 2025,
+   "url": "https://doi.org/10.24908/pocusj.v10i02.18439",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12658562/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12658562/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-pc-pneumoperi2026": {
+   "title": "Successful Treatment of Pneumopericardium with Pericardiocentesis in a Premature Infant: A Case Report and Review of the Literature (Akboga E et al.)",
+   "publisher": "Sisli Etfal Hastan Tip Bul",
+   "year": 2026,
+   "url": "https://doi.org/10.14744/semb.2025.53900",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13347727/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13347727/fullTextXML",
+   "licence": "CC BY-NC 4.0 (non-commercial; permission may be needed for commercial reuse)",
+   "accessed": "2026-09-30"
+  },
+  "pr-picc-plos2025": {
+   "title": "Construction and application of a predictive model for optimal PICC insertion depth in preterm infants under high-frequency ultrasound guidance (Li W et al.)",
+   "publisher": "PLoS One",
+   "year": 2025,
+   "url": "https://doi.org/10.1371/journal.pone.0332447",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12440187/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12440187/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-picc-cureus2024": {
+   "title": "A Comparison of In Vitro Measurement and Ultrasound for PICC Placement in Premature Infants (He S et al.)",
+   "publisher": "Cureus",
+   "year": 2024,
+   "url": "https://doi.org/10.7759/cureus.56335",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11021847/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11021847/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-picc-cureus2025": {
+   "title": "Utilization of Peripherally Inserted Central Catheters in Neonates Within the NICU: A Decadal Single-Center Study (Fu X et al.)",
+   "publisher": "Cureus",
+   "year": 2025,
+   "url": "https://doi.org/10.7759/cureus.77904",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11848227/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11848227/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-picc-frontped2022": {
+   "title": "A review of neonatal PICCs in extremely or very low birthweight infants based on a 3-year clinical practice (Wu Y et al.)",
+   "publisher": "Front Pediatr",
+   "year": 2022,
+   "url": "https://doi.org/10.3389/fped.2022.987512",
+   "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9659812/",
+   "snapshot_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9659812/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "pr-erc2021-nls": {
+   "title": "European Resuscitation Council Guidelines 2021: Newborn resuscitation and support of transition of infants at birth (Madar J et al.)",
+   "publisher": "Resuscitation 161 (2021) 291-326 (ERC); author copy in Leiden University Scholarly Publications",
+   "year": 2021,
+   "url": "https://doi.org/10.1016/j.resuscitation.2021.02.014",
+   "snapshot_url": "https://scholarlypublications.universiteitleiden.nl/access/item%3A3642301/view",
+   "licence": "CC BY 4.0 (stated on the repository cover page)",
+   "accessed": "2026-09-30"
+  }
+ },
+ "calcs": [
+  {
+   "id": "uac-shukla",
+   "name": "UAC insertion length (Shukla and Ferrara, birth weight)",
+   "catheter": "UAC",
+   "inputs": [
+    {
+     "var": "bw_kg",
+     "label": "Birth weight",
+     "unit": "kg"
+    }
+   ],
+   "formula": {
+    "text": "UAC length (cm) = 3 x birth weight (kg) + 9",
+    "machine": {
+     "type": "linear",
+     "terms": [
+      {
+       "var": "bw_kg",
+       "coef": 3
+      }
+     ],
+     "const": 9,
+     "unit": "cm"
+    }
+   },
+   "src": "pr-umb-ijp2010",
+   "quote": "To calculate the depth for inserting a UAC, we multiplied the neonate's weight in kilograms by 3 and added 9 cm.",
+   "notes": [
+    {
+     "text": "Add the umbilical stump length to the calculated length.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "The umbilical stump length should be added to the calculation."
+    },
+    {
+     "text": "Confirm the tip position on X-ray (or ultrasound) whatever method was used to estimate the length.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "Umbilical catheter tip position should be confirmed radiologically after insertion, regardless of the method used to estimate placement length."
+    },
+    {
+     "text": "UAC high position (recommended): descending thoracic aorta at T7 to T9. Low position: L3 to L5.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "In high-position UAC, the tip is located in the descending thoracic aorta above the diaphragm at the level of the seventh to ninth thoracic vertebrae (T7 to T9), avoiding the origins of the mesenteric, celiac, and renal arteries. The tip of low-position UAC is located in the abdominal aorta at the level of the third to fifth lumber vertebrae (L3 to L5)"
+    },
+    {
+     "text": "In a Leiden before and after study the Shukla method placed UACs correctly first time more often than the Dunn method (87% vs 63%).",
+     "src": "pr-umb-ijp2010",
+     "quote": "UACs in the Dunn-group were placed directly in the correct position in 63% (24/38) compared to the 87% (39/45) of cases in Shukla-group."
+    }
+   ]
+  },
+  {
+   "id": "uac-wright",
+   "name": "UAC insertion length (Wright, very low birth weight)",
+   "catheter": "UAC",
+   "inputs": [
+    {
+     "var": "bw_kg",
+     "label": "Birth weight",
+     "unit": "kg"
+    }
+   ],
+   "formula": {
+    "text": "UAC length (cm) = 4 x birth weight (kg) + 7",
+    "machine": {
+     "type": "linear",
+     "terms": [
+      {
+       "var": "bw_kg",
+       "coef": 4
+      }
+     ],
+     "const": 7,
+     "unit": "cm"
+    }
+   },
+   "applies": {
+    "when": {
+     "bw": {
+      "lt": 1500,
+      "unit": "g"
+     }
+    },
+    "src": "pr-umb-ijp2010",
+    "quote": "Moreover, only very low-birth weight infants were included (<1500 gram), limiting the applicability of this new formula to this subgroup"
+   },
+   "src": "pr-umb-ijp2010",
+   "quote": "The aim of this trial was to establish the validity of a newly derived formula [(4 × birth weight) + 7 cm] compared to the Dunn-method.",
+   "notes": [
+    {
+     "text": "Add the umbilical stump length to the calculated length.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "The umbilical stump length should be added to the calculation."
+    },
+    {
+     "text": "Confirm the tip position on X-ray (or ultrasound) whatever method was used to estimate the length.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "Umbilical catheter tip position should be confirmed radiologically after insertion, regardless of the method used to estimate placement length."
+    },
+    {
+     "text": "Wright's formula has a high rate (11%) of low UAC positions.",
+     "src": "pr-umb-ijp2010",
+     "quote": "A major disadvantage of Wright's formula is the high rate (11%) of catheters positioned too low"
+    },
+    {
+     "text": "Wright's formula gave more accurate placement and less over-insertion than Dunn, particularly below 1000 g.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "Wright's formula is associated with more accurate placement and less overinsertion of UAC than Dunn's formula, particularly in infants weighing less than 1000 g"
+    }
+   ]
+  },
+  {
+   "id": "uac-gupta",
+   "name": "UAC insertion length (Gupta, surface measurement)",
+   "catheter": "UAC",
+   "inputs": [
+    {
+     "var": "un_cm",
+     "label": "Umbilicus to nipple length",
+     "unit": "cm"
+    },
+    {
+     "var": "usp_cm",
+     "label": "Umbilicus to symphysis pubis distance",
+     "unit": "cm"
+    }
+   ],
+   "formula": {
+    "text": "UAC length (cm) = (umbilicus-nipple length minus 1) + 2 x umbilicus-symphysis pubis distance",
+    "machine": {
+     "type": "linear",
+     "terms": [
+      {
+       "var": "un_cm"
+      },
+      {
+       "var": "usp_cm",
+       "coef": 2
+      }
+     ],
+     "then": [
+      {
+       "op": "sub",
+       "v": 1
+      }
+     ],
+     "unit": "cm"
+    }
+   },
+   "src": "pr-ten-procs-ijp2023",
+   "quote": "UAC length (cm) = (UN − 1) + 2USp",
+   "notes": [
+    {
+     "text": "Add the umbilical stump length to the calculated length.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "The umbilical stump length should be added to the calculation."
+    },
+    {
+     "text": "Confirm the tip position on X-ray (or ultrasound) whatever method was used to estimate the length.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "Umbilical catheter tip position should be confirmed radiologically after insertion, regardless of the method used to estimate placement length."
+    },
+    {
+     "text": "UAC high position (recommended): descending thoracic aorta at T7 to T9. Low position: L3 to L5.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "In high-position UAC, the tip is located in the descending thoracic aorta above the diaphragm at the level of the seventh to ninth thoracic vertebrae (T7 to T9), avoiding the origins of the mesenteric, celiac, and renal arteries. The tip of low-position UAC is located in the abdominal aorta at the level of the third to fifth lumber vertebrae (L3 to L5)"
+    }
+   ]
+  },
+  {
+   "id": "uac-vali",
+   "name": "UAC insertion length (Vali, surface measurement)",
+   "catheter": "UAC",
+   "inputs": [
+    {
+     "var": "xiphoid_asis_cm",
+     "label": "Xiphoid to anterior superior iliac spine",
+     "unit": "cm"
+    },
+    {
+     "var": "umb_asis_cm",
+     "label": "Umbilicus to anterior superior iliac spine",
+     "unit": "cm"
+    }
+   ],
+   "formula": {
+    "text": "UAC length (cm) = 1.1 x (xiphoid-ASIS + umbilicus-ASIS) + 1.6",
+    "machine": {
+     "type": "linear",
+     "terms": [
+      {
+       "var": "xiphoid_asis_cm"
+      },
+      {
+       "var": "umb_asis_cm"
+      }
+     ],
+     "then": [
+      {
+       "op": "mul",
+       "v": 1.1
+      },
+      {
+       "op": "add",
+       "v": 1.6
+      }
+     ],
+     "unit": "cm"
+    }
+   },
+   "src": "pr-ten-procs-ijp2023",
+   "quote": "UAC length (cm) = 1.1 × (xiphoid–ASIS + umbilicus–ASIS) + 1.6",
+   "notes": [
+    {
+     "text": "Add the umbilical stump length to the calculated length.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "The umbilical stump length should be added to the calculation."
+    },
+    {
+     "text": "Confirm the tip position on X-ray (or ultrasound) whatever method was used to estimate the length.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "Umbilical catheter tip position should be confirmed radiologically after insertion, regardless of the method used to estimate placement length."
+    },
+    {
+     "text": "UAC high position (recommended): descending thoracic aorta at T7 to T9. Low position: L3 to L5.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "In high-position UAC, the tip is located in the descending thoracic aorta above the diaphragm at the level of the seventh to ninth thoracic vertebrae (T7 to T9), avoiding the origins of the mesenteric, celiac, and renal arteries. The tip of low-position UAC is located in the abdominal aorta at the level of the third to fifth lumber vertebrae (L3 to L5)"
+    }
+   ]
+  },
+  {
+   "id": "uvc-shukla",
+   "name": "UVC insertion length (Shukla and Ferrara, birth weight)",
+   "catheter": "UVC",
+   "inputs": [
+    {
+     "var": "bw_kg",
+     "label": "Birth weight",
+     "unit": "kg"
+    }
+   ],
+   "formula": {
+    "text": "UVC length (cm) = (3 x birth weight (kg) + 9) / 2 + 1, that is, the Shukla UAC length halved plus 1 cm",
+    "machine": {
+     "type": "linear",
+     "terms": [
+      {
+       "var": "bw_kg",
+       "coef": 3
+      }
+     ],
+     "const": 9,
+     "then": [
+      {
+       "op": "div",
+       "v": 2
+      },
+      {
+       "op": "add",
+       "v": 1
+      }
+     ],
+     "unit": "cm"
+    }
+   },
+   "src": "pr-umb-ijp2010",
+   "quote": "To calculate the depth for inserting a UAC, we multiplied the neonate's weight in kilograms by 3 and added 9 cm. To calculate the depth for inserting a UVC we used the insertion length of the UAC, divided this number by 2, and added 1 cm",
+   "also": {
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "UVC length (cm) = [3 × BW (kg) + 9]/2 + 1"
+   },
+   "notes": [
+    {
+     "text": "Add the umbilical stump length to the calculated length.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "The umbilical stump length should be added to the calculation."
+    },
+    {
+     "text": "Confirm the tip position on X-ray (or ultrasound) whatever method was used to estimate the length.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "Umbilical catheter tip position should be confirmed radiologically after insertion, regardless of the method used to estimate placement length."
+    },
+    {
+     "text": "UVC tip target: T8 to T9 (acceptable T7 to T10); high if above the body of T8, low if below the body of T9. Aim for the IVC and right atrium junction.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "The optimal position of the UVC tip is at the junction between the inferior vena cava and right atrium, or at least well into the ductus venosus [ 19 ]. The ideal UVC tip position is at the level of T8-T9, but it could be anywhere between T7 and T10, high if above the body of T8 and low if below the body of T9"
+    },
+    {
+     "text": "The Shukla formula is frequently associated with over-insertion of the UVC.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "As the Shukla formula is frequently associated with over-insertion of UVC, a revised formula has been proposed by Verheij et al."
+    },
+    {
+     "text": "In the Leiden study 75% of Shukla-placed UVCs were too high, against 57% with Dunn.",
+     "src": "pr-umb-ijp2010",
+     "quote": "The position of the catheter-tip of UVCs in the Dunn-group and the Shukla-group was too high in 57% (39/69) and 75% (63/84) of neonates, respectively."
+    }
+   ]
+  },
+  {
+   "id": "uvc-revised",
+   "name": "UVC insertion length (revised formula, Verheij 2013; also called modified Shukla)",
+   "catheter": "UVC",
+   "inputs": [
+    {
+     "var": "bw_kg",
+     "label": "Birth weight",
+     "unit": "kg"
+    }
+   ],
+   "formula": {
+    "text": "UVC length (cm) = (3 x birth weight (kg) + 9) / 2",
+    "machine": {
+     "type": "linear",
+     "terms": [
+      {
+       "var": "bw_kg",
+       "coef": 3
+      }
+     ],
+     "const": 9,
+     "then": [
+      {
+       "op": "div",
+       "v": 2
+      }
+     ],
+     "unit": "cm"
+    }
+   },
+   "src": "pr-uvc-frontped2021",
+   "quote": "Verheij et al. ( 28 ) | 143 UV using the Shukla formula 125 UV using the revised formula | Lenght (cm) = [(3 * BW in Kg + 9) / 2]",
+   "also": {
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "Verheij et al.'s formula (2013) | UVC length (cm) = [3 × BW (kg) + 9]/2"
+   },
+   "notes": [
+    {
+     "text": "Add the umbilical stump length to the calculated length.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "The umbilical stump length should be added to the calculation."
+    },
+    {
+     "text": "Confirm the tip position on X-ray (or ultrasound) whatever method was used to estimate the length.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "Umbilical catheter tip position should be confirmed radiologically after insertion, regardless of the method used to estimate placement length."
+    },
+    {
+     "text": "UVC tip target: T8 to T9 (acceptable T7 to T10); high if above the body of T8, low if below the body of T9. Aim for the IVC and right atrium junction.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "The optimal position of the UVC tip is at the junction between the inferior vena cava and right atrium, or at least well into the ductus venosus [ 19 ]. The ideal UVC tip position is at the level of T8-T9, but it could be anywhere between T7 and T10, high if above the body of T8 and low if below the body of T9"
+    },
+    {
+     "text": "The revised formula gives less over-insertion than Shukla without more low UVCs.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "The revised formula is associated with less over-insertion of UVC without being complicated with a low-position UVC"
+    },
+    {
+     "text": "Low tips were more frequent with this weight formula than with the Gupta umbilicus-nipple method (32.9% vs 14.8%).",
+     "src": "pr-uvc-cureus2025",
+     "quote": "The modified Shukla group had a significantly abnormal catheter low tip position (n=23, 32.9%) compared to the Gupta group (n=13, 14.8%; p=0.02)."
+    },
+    {
+     "text": "In a multicentre RCT this weight formula placed 45.7% of UVCs correctly against 62.5% with the Gupta umbilicus-nipple method.",
+     "src": "pr-uvc-cureus2025",
+     "quote": "The Gupta method demonstrated a significantly higher rate of correct catheter placements (n=55, 62.5%) compared to the modified Shukla method (n=32, 45.7%; p=0.02)."
+    }
+   ]
+  },
+  {
+   "id": "uvc-gupta",
+   "name": "UVC insertion length (Gupta, umbilicus to nipple minus 1)",
+   "catheter": "UVC",
+   "inputs": [
+    {
+     "var": "un_cm",
+     "label": "Umbilicus to nipple length",
+     "unit": "cm"
+    }
+   ],
+   "formula": {
+    "text": "UVC length (cm) = umbilicus to nipple distance (cm) minus 1",
+    "machine": {
+     "type": "linear",
+     "terms": [
+      {
+       "var": "un_cm"
+      }
+     ],
+     "then": [
+      {
+       "op": "sub",
+       "v": 1
+      }
+     ],
+     "unit": "cm"
+    }
+   },
+   "src": "pr-uvc-cureus2025",
+   "quote": "(1) the umbilicus to nipple distance in centimeters minus 1 (UN - 1)",
+   "notes": [
+    {
+     "text": "Add the umbilical stump length to the calculated length.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "The umbilical stump length should be added to the calculation."
+    },
+    {
+     "text": "Confirm the tip position on X-ray (or ultrasound) whatever method was used to estimate the length.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "Umbilical catheter tip position should be confirmed radiologically after insertion, regardless of the method used to estimate placement length."
+    },
+    {
+     "text": "UVC tip target: T8 to T9 (acceptable T7 to T10); high if above the body of T8, low if below the body of T9. Aim for the IVC and right atrium junction.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "The optimal position of the UVC tip is at the junction between the inferior vena cava and right atrium, or at least well into the ductus venosus [ 19 ]. The ideal UVC tip position is at the level of T8-T9, but it could be anywhere between T7 and T10, high if above the body of T8 and low if below the body of T9"
+    },
+    {
+     "text": "In a multicentre RCT the benefit over the weight formula was largest in SGA babies (70.0% vs 42.9% correct).",
+     "src": "pr-uvc-cureus2025",
+     "quote": "The Gupta method was particularly effective in the SGA group, with 70.0% (n=21) correct placements, compared to 42.9% (n=9) in the modified Shukla group (p=0.04)."
+    }
+   ]
+  },
+  {
+   "id": "uvc-vali",
+   "name": "UVC insertion length (Vali, surface measurement)",
+   "catheter": "UVC",
+   "inputs": [
+    {
+     "var": "umb_midxiphoid_bed_cm",
+     "label": "Umbilicus to mid-xiphoid-to-bed distance, measured lateral to the baby",
+     "unit": "cm"
+    }
+   ],
+   "formula": {
+    "text": "UVC length = the measured umbilicus to mid-xiphoid-to-bed distance",
+    "machine": {
+     "type": "measure",
+     "var": "umb_midxiphoid_bed_cm",
+     "unit": "cm"
+    }
+   },
+   "src": "pr-ten-procs-ijp2023",
+   "quote": "UVC insertion length equal to the measurement from the umbilicus to the midxiphoid-to-bed distance, measured lateral to the baby",
+   "notes": [
+    {
+     "text": "Add the umbilical stump length to the calculated length.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "The umbilical stump length should be added to the calculation."
+    },
+    {
+     "text": "Confirm the tip position on X-ray (or ultrasound) whatever method was used to estimate the length.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "Umbilical catheter tip position should be confirmed radiologically after insertion, regardless of the method used to estimate placement length."
+    },
+    {
+     "text": "UVC tip target: T8 to T9 (acceptable T7 to T10); high if above the body of T8, low if below the body of T9. Aim for the IVC and right atrium junction.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "The optimal position of the UVC tip is at the junction between the inferior vena cava and right atrium, or at least well into the ductus venosus [ 19 ]. The ideal UVC tip position is at the level of T8-T9, but it could be anywhere between T7 and T10, high if above the body of T8 and low if below the body of T9"
+    }
+   ]
+  },
+  {
+   "id": "umbilical-dunn",
+   "name": "UVC and UAC insertion length (Dunn, shoulder-umbilicus nomogram)",
+   "catheter": "UVC/UAC",
+   "inputs": [
+    {
+     "var": "shoulder_umb_cm",
+     "label": "Shoulder to umbilicus length",
+     "unit": "cm"
+    }
+   ],
+   "formula": {
+    "text": "Read the insertion length from the Dunn nomogram for the measured shoulder-umbilicus length. Measure from the top of the shoulder over the lateral end of the clavicle to a point vertically beneath it level with the centre of the umbilicus.",
+    "machine": {
+     "type": "nomogram",
+     "var": "shoulder_umb_cm",
+     "values": null,
+     "missing": "The Dunn nomogram values were not found in an open-licence source; the app cannot compute this method."
+    }
+   },
+   "src": "pr-ten-procs-ijp2023",
+   "quote": "In Dunn's method, the shoulder-umbilical length is the distance between the top of the shoulder over the lateral end of the clavicle and a point vertically beneath it that is level with the centre of the umbilicus",
+   "notes": [
+    {
+     "text": "Add the umbilical stump length to the calculated length.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "The umbilical stump length should be added to the calculation."
+    },
+    {
+     "text": "Confirm the tip position on X-ray (or ultrasound) whatever method was used to estimate the length.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "Umbilical catheter tip position should be confirmed radiologically after insertion, regardless of the method used to estimate placement length."
+    },
+    {
+     "text": "Dunn was derived at necropsy in 50 neonates; it is limited by interobserver variation.",
+     "src": "pr-umb-ijp2010",
+     "quote": "Dunn examined 50 neonates at necropsy."
+    }
+   ]
+  },
+  {
+   "id": "umbilical-catheter-size",
+   "name": "Umbilical catheter size",
+   "inputs": [
+    {
+     "var": "wt",
+     "label": "Weight",
+     "unit": "kg"
+    }
+   ],
+   "formula": {
+    "text": "Lookup by weight",
+    "machine": {
+     "type": "table",
+     "rows": [
+      {
+       "catheter": "UVC",
+       "when": {
+        "wt": {
+         "lt": 3.5,
+         "unit": "kg"
+        }
+       },
+       "size": 3.5,
+       "unit": "Fr",
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "For infants weighing <3.5 kg, UVC size of 3.5 Fr is used"
+      },
+      {
+       "catheter": "UVC",
+       "when": {
+        "wt": {
+         "gt": 3.5,
+         "unit": "kg"
+        }
+       },
+       "size": 5,
+       "unit": "Fr",
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "whereas 5 Fr catheters are used for infants weighing >3.5 kg"
+      },
+      {
+       "catheter": "UVC for exchange transfusion",
+       "size": 8,
+       "unit": "Fr",
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "Eight Fr catheter is recommended for exchange transfusion"
+      },
+      {
+       "catheter": "UAC",
+       "when": {
+        "wt": {
+         "lt": 1.5,
+         "unit": "kg"
+        }
+       },
+       "size": 3.5,
+       "unit": "Fr",
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "For infants <1.5 kg, UAC size 3.5 Fr is used"
+      },
+      {
+       "catheter": "UAC",
+       "when": {
+        "wt": {
+         "gt": 1.5,
+         "unit": "kg"
+        }
+       },
+       "size": 5,
+       "unit": "Fr",
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "whereas a 5 Fr catheter is used for infant >1.5 kg"
+      }
+     ]
+    }
+   },
+   "src": "pr-ten-procs-ijp2023",
+   "quote": "For infants weighing <3.5 kg, UVC size of 3.5 Fr is used, whereas 5 Fr catheters are used for infants weighing >3.5 kg",
+   "notes": [
+    {
+     "text": "Source does not state which size to use at exactly 3.5 kg (UVC) or exactly 1.5 kg (UAC).",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "For infants <1.5 kg, UAC size 3.5 Fr is used, whereas a 5 Fr catheter is used for infant >1.5 kg"
+    }
+   ]
+  },
+  {
+   "id": "ett-depth-weight",
+   "name": "ETT depth at lip by weight (weight + 6 cm; AAP/AHA, Tochen)",
+   "airway": "oral",
+   "inputs": [
+    {
+     "var": "wt_kg",
+     "label": "Weight",
+     "unit": "kg"
+    }
+   ],
+   "formula": {
+    "text": "Insertion depth at lip (cm) = weight (kg) + 6",
+    "machine": {
+     "type": "linear",
+     "terms": [
+      {
+       "var": "wt_kg"
+      }
+     ],
+     "const": 6,
+     "unit": "cm"
+    }
+   },
+   "src": "pr-ten-procs-ijp2023",
+   "quote": "The American Academy of Paediatrics/American Heart Association formula | Insertion depth (cm) = weight in kilograms + 6",
+   "notes": [
+    {
+     "text": "Tochen's weight method adds 6 cm to birth weight for oral intubation.",
+     "src": "pr-ett-bmjopen2022",
+     "quote": "In the weight-based method, so-called Tochen’s formula, the ETT insertion depth in oral intubation is obtained by adding 6 cm to the infant’s birth weight."
+    },
+    {
+     "text": "Overestimation in extremely preterm infants.",
+     "src": "pr-ett-bmjopen2022",
+     "quote": "This method often overestimates the insertion depth in extremely preterm infants less than 28 weeks of gestational age."
+    },
+    {
+     "text": "ERC 2021: formulae may be unreliable for tracheal tube length; gestation-based lengths from observational data are shown in its Table 1.",
+     "src": "pr-erc2021-nls",
+     "quote": "Formulae may be unreliable in determining tracheal tube lengths."
+    },
+    {
+     "text": "Confirm placement with exhaled CO2 detection and, if the tube is retained, by radiography.",
+     "src": "pr-erc2021-nls",
+     "quote": "Exhaled CO 2 detection should be used when undertaking intubation to confirm tube placement in the airway."
+    },
+    {
+     "text": "Acceptable ETT tip position on X-ray: upper border of T1 to lower border of T2.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "However, the acceptable ETT tip position is range from the upper border of the first thoracic vertebra and the lower border of the second thoracic vertebra"
+    }
+   ]
+  },
+  {
+   "id": "ett-depth-789",
+   "name": "ETT depth at lip by weight (7-8-9 rule)",
+   "airway": "oral",
+   "inputs": [
+    {
+     "var": "wt",
+     "label": "Weight",
+     "unit": "kg"
+    }
+   ],
+   "formula": {
+    "text": "7 cm at 1 kg, 8 cm at 2 kg, 9 cm at 3 kg; beyond 7 cm add 1 cm per additional kg",
+    "machine": {
+     "type": "table",
+     "rows": [
+      {
+       "when": {
+        "wt": {
+         "min": 1,
+         "max": 1,
+         "unit": "kg"
+        }
+       },
+       "depth": 7,
+       "unit": "cm",
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "7 cm for infants weighing 1 kg"
+      },
+      {
+       "when": {
+        "wt": {
+         "min": 2,
+         "max": 2,
+         "unit": "kg"
+        }
+       },
+       "depth": 8,
+       "unit": "cm",
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "8 cm for infants weighing 2 kg"
+      },
+      {
+       "when": {
+        "wt": {
+         "min": 3,
+         "max": 3,
+         "unit": "kg"
+        }
+       },
+       "depth": 9,
+       "unit": "cm",
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "9 cm for infants weighing 3 kg."
+      }
+     ]
+    }
+   },
+   "src": "pr-ten-procs-ijp2023",
+   "quote": "In the rule of 7-8-9, beyond 7 cm, for each additional one kilogram of body weight, one centimetre is added to determine the tip-to-lip distance",
+   "notes": [
+    {
+     "text": "Overestimates tube length below 1500 g or above 2500 g.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "The 7-8-9 rule has been found to be associated with an overestimation of tubal length if the infant weight is less than 1500 grams or more than 2500 grams"
+    },
+    {
+     "text": "ERC 2021: formulae may be unreliable for tracheal tube length; gestation-based lengths from observational data are shown in its Table 1.",
+     "src": "pr-erc2021-nls",
+     "quote": "Formulae may be unreliable in determining tracheal tube lengths."
+    },
+    {
+     "text": "Confirm placement with exhaled CO2 detection and, if the tube is retained, by radiography.",
+     "src": "pr-erc2021-nls",
+     "quote": "Exhaled CO 2 detection should be used when undertaking intubation to confirm tube placement in the airway."
+    },
+    {
+     "text": "Acceptable ETT tip position on X-ray: upper border of T1 to lower border of T2.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "However, the acceptable ETT tip position is range from the upper border of the first thoracic vertebra and the lower border of the second thoracic vertebra"
+    }
+   ]
+  },
+  {
+   "id": "ett-depth-ga-erc",
+   "name": "ETT depth at lip and tube size by gestation (ERC 2021, Table 1)",
+   "airway": "oral",
+   "inputs": [
+    {
+     "var": "ga_wk",
+     "label": "Gestational age",
+     "unit": "weeks"
+    }
+   ],
+   "formula": {
+    "text": "Lookup by gestation; for approximate nasotracheal length add 1 cm",
+    "machine": {
+     "type": "table",
+     "nasal_add_cm": 1,
+     "rows": [
+      {
+       "when": {
+        "ga_wk": {
+         "min": 23,
+         "max": 24
+        }
+       },
+       "depth": 5.5,
+       "unit": "cm",
+       "id_mm": 2.5,
+       "src": "pr-erc2021-nls",
+       "quote": "23/C024 5.5 2.5"
+      },
+      {
+       "when": {
+        "ga_wk": {
+         "min": 25,
+         "max": 26
+        }
+       },
+       "depth": 6.0,
+       "unit": "cm",
+       "id_mm": 2.5,
+       "src": "pr-erc2021-nls",
+       "quote": "25/C026 6.0 2.5"
+      },
+      {
+       "when": {
+        "ga_wk": {
+         "min": 27,
+         "max": 29
+        }
+       },
+       "depth": 6.5,
+       "unit": "cm",
+       "id_mm": 2.5,
+       "src": "pr-erc2021-nls",
+       "quote": "27/C029 6.5 2.5"
+      },
+      {
+       "when": {
+        "ga_wk": {
+         "min": 30,
+         "max": 32
+        }
+       },
+       "depth": 7.0,
+       "unit": "cm",
+       "id_mm": 3.0,
+       "src": "pr-erc2021-nls",
+       "quote": "30/C032 7.0 3.0"
+      },
+      {
+       "when": {
+        "ga_wk": {
+         "min": 33,
+         "max": 34
+        }
+       },
+       "depth": 7.5,
+       "unit": "cm",
+       "id_mm": 3.0,
+       "src": "pr-erc2021-nls",
+       "quote": "33/C034 7.5 3.0"
+      },
+      {
+       "when": {
+        "ga_wk": {
+         "min": 35,
+         "max": 37
+        }
+       },
+       "depth": 8.0,
+       "unit": "cm",
+       "id_mm": 3.5,
+       "src": "pr-erc2021-nls",
+       "quote": "35/C037 8.0 3.5"
+      },
+      {
+       "when": {
+        "ga_wk": {
+         "min": 38,
+         "max": 40
+        }
+       },
+       "depth": 8.5,
+       "unit": "cm",
+       "id_mm": 3.5,
+       "src": "pr-erc2021-nls",
+       "quote": "38/C040 8.5 3.5"
+      },
+      {
+       "when": {
+        "ga_wk": {
+         "min": 41,
+         "max": 43
+        }
+       },
+       "depth": 9.0,
+       "unit": "cm",
+       "id_mm": 4.0,
+       "src": "pr-erc2021-nls",
+       "quote": "41/C043 9.0 4.0"
+      }
+     ]
+    }
+   },
+   "src": "pr-erc2021-nls",
+   "quote": "Table 1 – Approximate oral tracheal tube size by gestation (for approximate nasotracheal tube length add 1 cm).",
+   "notes": [
+    {
+     "text": "Rows in the snapshot read like \"23/C024\": /C0 is the PDF extraction of the dash in the range 23 to 24 weeks.",
+     "src": "pr-erc2021-nls",
+     "quote": "Gestational age (weeks) Length at lips (cm) Internal diameter (mm)"
+    },
+    {
+     "text": "Nasotracheal tube length was about 1 cm more than oral length.",
+     "src": "pr-erc2021-nls",
+     "quote": "Nasotracheal tube length was found to be approximately 1 cm more than the oral length."
+    },
+    {
+     "text": "A range of tube sizes should be available; uncuffed tubes are typically used.",
+     "src": "pr-erc2021-nls",
+     "quote": "Uncuffed tubes are typically used."
+    },
+    {
+     "text": "In one small preterm study the GA table depth averaged 0.20 cm deeper than the ideal X-ray depth, a smaller error than NTL.",
+     "src": "pr-ett-frontped2026",
+     "quote": "GA Table ETT depth | 5.50 | 7.00 | 6.42 | 0.46 | −0.20 | −0.37 to 0.03 | 0.02"
+    },
+    {
+     "text": "Confirm placement with exhaled CO2 detection and, if the tube is retained, by radiography.",
+     "src": "pr-erc2021-nls",
+     "quote": "Exhaled CO 2 detection should be used when undertaking intubation to confirm tube placement in the airway."
+    },
+    {
+     "text": "Acceptable ETT tip position on X-ray: upper border of T1 to lower border of T2.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "However, the acceptable ETT tip position is range from the upper border of the first thoracic vertebra and the lower border of the second thoracic vertebra"
+    }
+   ]
+  },
+  {
+   "id": "ett-depth-kempley",
+   "name": "ETT depth at lip by corrected gestation or actual weight (Kempley table)",
+   "airway": "oral",
+   "inputs": [
+    {
+     "var": "ga_wk",
+     "label": "Corrected gestation",
+     "unit": "weeks"
+    },
+    {
+     "var": "wt",
+     "label": "Actual weight",
+     "unit": "kg"
+    }
+   ],
+   "formula": {
+    "text": "Lookup by corrected gestation or actual weight",
+    "machine": {
+     "type": "table",
+     "rows": [
+      {
+       "when": {
+        "ga_wk": {
+         "min": 23,
+         "max": 24
+        },
+        "wt": {
+         "min": 0.5,
+         "max": 0.6,
+         "unit": "kg"
+        }
+       },
+       "depth": 5.5,
+       "unit": "cm",
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "5.5 | 23-24 | 0.5-0.6"
+      },
+      {
+       "when": {
+        "ga_wk": {
+         "min": 25,
+         "max": 26
+        },
+        "wt": {
+         "min": 0.7,
+         "max": 0.8,
+         "unit": "kg"
+        }
+       },
+       "depth": 6.0,
+       "unit": "cm",
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "6.0 | 25-26 | 0.7-0.8"
+      },
+      {
+       "when": {
+        "ga_wk": {
+         "min": 27,
+         "max": 29
+        },
+        "wt": {
+         "min": 0.9,
+         "max": 1.0,
+         "unit": "kg"
+        }
+       },
+       "depth": 6.5,
+       "unit": "cm",
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "6.5 | 27-29 | 0.9-1.0"
+      },
+      {
+       "when": {
+        "ga_wk": {
+         "min": 30,
+         "max": 32
+        },
+        "wt": {
+         "min": 1.1,
+         "max": 1.4,
+         "unit": "kg"
+        }
+       },
+       "depth": 7.0,
+       "unit": "cm",
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "7.0 | 30-32 | 1.1-1.4"
+      },
+      {
+       "when": {
+        "ga_wk": {
+         "min": 33,
+         "max": 34
+        },
+        "wt": {
+         "min": 1.5,
+         "max": 1.8,
+         "unit": "kg"
+        }
+       },
+       "depth": 7.5,
+       "unit": "cm",
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "7.5 | 33-34 | 1.5-1.8"
+      },
+      {
+       "when": {
+        "ga_wk": {
+         "min": 35,
+         "max": 37
+        },
+        "wt": {
+         "min": 1.9,
+         "max": 2.4,
+         "unit": "kg"
+        }
+       },
+       "depth": 8.0,
+       "unit": "cm",
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "8.0 | 35-37 | 1.9-2.4"
+      },
+      {
+       "when": {
+        "ga_wk": {
+         "min": 38,
+         "max": 40
+        },
+        "wt": {
+         "min": 2.5,
+         "max": 3.1,
+         "unit": "kg"
+        }
+       },
+       "depth": 8.5,
+       "unit": "cm",
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "8.5 | 38-40 | 2.5-3.1"
+      },
+      {
+       "when": {
+        "ga_wk": {
+         "min": 41,
+         "max": 43
+        },
+        "wt": {
+         "min": 3.2,
+         "max": 4.2,
+         "unit": "kg"
+        }
+       },
+       "depth": 9.0,
+       "unit": "cm",
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "9.0 | 41-43 | 3.2-4.2"
+      }
+     ]
+    }
+   },
+   "src": "pr-ten-procs-ijp2023",
+   "quote": "The table included the relationship between gestational age, weight, and endotracheal tube length, which is the initial length that should be confirmed radiologically",
+   "notes": [
+    {
+     "text": "Kempley et al. 2008 is the original source; this table is reproduced from an open-access review, not the paywalled original.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "A gestation-based guideline table for ETT length in neonates has been provided by Kempley et al."
+    },
+    {
+     "text": "Confirm placement with exhaled CO2 detection and, if the tube is retained, by radiography.",
+     "src": "pr-erc2021-nls",
+     "quote": "Exhaled CO 2 detection should be used when undertaking intubation to confirm tube placement in the airway."
+    },
+    {
+     "text": "Acceptable ETT tip position on X-ray: upper border of T1 to lower border of T2.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "However, the acceptable ETT tip position is range from the upper border of the first thoracic vertebra and the lower border of the second thoracic vertebra"
+    }
+   ]
+  },
+  {
+   "id": "ett-depth-ntl",
+   "name": "ETT depth by nasal-tragus length (NTL + 1 cm)",
+   "airway": "oral",
+   "inputs": [
+    {
+     "var": "ntl_cm",
+     "label": "Nasal septum tip to ear tragus",
+     "unit": "cm"
+    }
+   ],
+   "formula": {
+    "text": "Insertion depth (cm) = nasal septum to tragus distance (cm) + 1",
+    "machine": {
+     "type": "linear",
+     "terms": [
+      {
+       "var": "ntl_cm"
+      }
+     ],
+     "const": 1,
+     "unit": "cm"
+    }
+   },
+   "src": "pr-ett-bmjopen2022",
+   "quote": "In the NTL method, the ETT insertion depth is calculated based on the formula—the distance from nasal septum tip to ear tragus+1 cm.",
+   "also": {
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "Nasal-tragus length (NTL) | The distance from the tip of the nasal septum to the tragus of the ear + 1 cm"
+   },
+   "notes": [
+    {
+     "text": "NRP recommends the gestational age and NTL methods during resuscitation, but supporting evidence is limited.",
+     "src": "pr-ett-bmjopen2022",
+     "quote": "NRP recommends gestational age and nasal-tragus length (NTL) methods for estimating ETT insertion depth during cardiopulmonary resuscitation of the neonate."
+    },
+    {
+     "text": "In one small preterm study NTL showed the greatest bias (0.61 cm too deep on average).",
+     "src": "pr-ett-frontped2026",
+     "quote": "NTL measurements demonstrated the greatest bias (−0.61 cm)"
+    },
+    {
+     "text": "Confirm placement with exhaled CO2 detection and, if the tube is retained, by radiography.",
+     "src": "pr-erc2021-nls",
+     "quote": "Exhaled CO 2 detection should be used when undertaking intubation to confirm tube placement in the airway."
+    },
+    {
+     "text": "Acceptable ETT tip position on X-ray: upper border of T1 to lower border of T2.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "However, the acceptable ETT tip position is range from the upper border of the first thoracic vertebra and the lower border of the second thoracic vertebra"
+    }
+   ]
+  },
+  {
+   "id": "ett-size",
+   "name": "ETT internal diameter by weight and gestation",
+   "airway": "oral",
+   "inputs": [
+    {
+     "var": "wt",
+     "label": "Weight",
+     "unit": "g"
+    },
+    {
+     "var": "ga_wk",
+     "label": "Gestational age",
+     "unit": "weeks"
+    }
+   ],
+   "formula": {
+    "text": "Lookup by weight or gestation",
+    "machine": {
+     "type": "table",
+     "rows": [
+      {
+       "when": {
+        "wt": {
+         "lt": 1000,
+         "unit": "g"
+        },
+        "ga_wk": {
+         "lt": 28
+        }
+       },
+       "id_mm": 2.5,
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "<1000 | <28 | 2.5"
+      },
+      {
+       "when": {
+        "wt": {
+         "min": 1000,
+         "max": 2000,
+         "unit": "g"
+        },
+        "ga_wk": {
+         "min": 28,
+         "max": 34
+        }
+       },
+       "id_mm": 3.0,
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "1000-2000 | 28-34 | 3.0"
+      },
+      {
+       "when": {
+        "wt": {
+         "gt": 2000,
+         "unit": "g"
+        },
+        "ga_wk": {
+         "gt": 34
+        }
+       },
+       "id_mm": 3.5,
+       "src": "pr-ten-procs-ijp2023",
+       "quote": ">2000 | >34 | 3.5"
+      }
+     ]
+    }
+   },
+   "src": "pr-ten-procs-ijp2023",
+   "quote": "Approximate endotracheal tube size is determined based on the birth weight and gestational age",
+   "notes": [
+    {
+     "text": "ERC 2021 gives internal diameter by gestation in its Table 1 (see ett-depth-ga-erc) and says diameter may be estimated as about one tenth of gestational age.",
+     "src": "pr-erc2021-nls",
+     "quote": "The tube diameter may be estimated as /C201/10 of the gestational age."
+    },
+    {
+     "text": "Keep a range of sizes available: choose the tube that ventilates with minimal leak and airway trauma.",
+     "src": "pr-erc2021-nls",
+     "quote": "A range of differing sized tracheal tubes should be available to permit placement of the most appropriate size to ensure adequate ventilation with minimal leak and trauma to the airway"
+    }
+   ]
+  },
+  {
+   "id": "picc-length-upper",
+   "name": "PICC insertion length, upper limb (surface measurement)",
+   "inputs": [
+    {
+     "var": "measured_cm",
+     "label": "Measured length",
+     "unit": "cm"
+    }
+   ],
+   "formula": {
+    "text": "Measure from the insertion site along the course of the vein to the head of the right clavicle, then down to the right third intercostal space just right of the sternum.",
+    "machine": {
+     "type": "measure",
+     "var": "measured_cm",
+     "unit": "cm"
+    }
+   },
+   "src": "pr-ten-procs-ijp2023",
+   "quote": "The length of PICC to be placed through the upper body insertion is determined by measuring the distance from the insertion site through the course of the used vein to the head of the clavicle on the right side and down to the right third intercostal space just to the right of the sternum.",
+   "notes": [
+    {
+     "text": "Upper limb tip target: SVC at T3 to T5.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "The optimal tip position of a PICC inserted through the upper limb veins is in the superior vena cava (SVC) at T3-T5 level."
+    },
+    {
+     "text": "Variant (Wu 2022): arm abducted 90 degrees, measure from the puncture point through the right sternoclavicular joint down to the second intercostal space. Head or neck insertion: measure along the vein to the right nipple with the head turned to one side.",
+     "src": "pr-picc-frontped2022",
+     "quote": "infants with a catheter inserted in the upper extremity had the length measured from the punctured point through the right sternoclavicular joint down to the second intercostal space with a 90° abduction of the upper extremity"
+    },
+    {
+     "text": "Variant (He 2024): for the upper limb measure from the elbow crease to the right sternoclavicular joint; for the cephalic vein measure to the third rib.",
+     "src": "pr-picc-cureus2024",
+     "quote": "For the upper limb, the transverse line of the elbow to the right sternoclavicular joint was measured. The cephalic vein was measured from the pre-puncture point to the third rib."
+    },
+    {
+     "text": "Surface measurement is imprecise: its tip-to-atrium distance fluctuated far more than ultrasound (range 1.5 cm vs 0.2 cm).",
+     "src": "pr-picc-cureus2024",
+     "quote": "We noted that US measurements were considerably more stable than those of IVM, with a lesser fluctuation range (0.2 cm vs. 1.5 cm, p < 0.001)"
+    },
+    {
+     "text": "Keep the tip out of the heart: about 1 cm outside the cardiac silhouette in preterm and 2 cm in term infants.",
+     "src": "pr-pc-medicine2023",
+     "quote": "Most studies have shown that the catheter tip should be positioned within the vena cava and outside the cardiac silhouette, that is, at approximately 1 cm beyond the cardiac silhouette for premature infants and 2 cm beyond for full-term infants."
+    }
+   ]
+  },
+  {
+   "id": "picc-length-lower",
+   "name": "PICC insertion length, lower limb (surface measurement)",
+   "inputs": [
+    {
+     "var": "measured_cm",
+     "label": "Measured length",
+     "unit": "cm"
+    }
+   ],
+   "formula": {
+    "text": "Measure from the insertion site along the course of the vein to the level of the xiphoid process (via groin and umbilicus).",
+    "machine": {
+     "type": "measure",
+     "var": "measured_cm",
+     "unit": "cm"
+    }
+   },
+   "src": "pr-ten-procs-ijp2023",
+   "quote": "For PICC placed through lower limb insertion, the required insertion length is equal to the distance measured from the insertion site through the course of the used vein till the level of the xiphoid process",
+   "notes": [
+    {
+     "text": "Lower limb tip target: IVC between the diaphragm and right atrium at T8 to T10.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "For lower limb-inserted PICC, the ideal tip position is in the inferior vena cava (IVC) between the diaphragm and the right atrium at T8-T10 level"
+    },
+    {
+     "text": "Variant (Fu 2025): abduct the leg 45 degrees and measure along the vein to the groin, umbilicus and xiphoid.",
+     "src": "pr-picc-cureus2025",
+     "quote": "Prior to catheter placement, the infant's lower extremity was abducted at an angle of 45 degrees. The length of the catheter was then measured from the site of placement along the vein to the groin, umbilicus, and xiphoid process."
+    },
+    {
+     "text": "Variant (Wu 2022): natural abduction, measure from the puncture point along the groin to the midpoint between umbilicus and xiphoid.",
+     "src": "pr-picc-frontped2022",
+     "quote": "infants with a catheter inserted in the lower extremity had the length measured from the punctured point along the groin to the midpoint of umbilicus and xiphoid with a natural abduction of the lower extremity"
+    },
+    {
+     "text": "A lateral view in addition to AP is more reliable for detecting lower limb PICC malposition.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "however, adding on lateral view is more reliable in the detection of catheter tip malposition, particularly in the lower extremity-inserted PICC"
+    }
+   ]
+  },
+  {
+   "id": "picc-depth-basilic-us",
+   "name": "PICC depth, basilic vein, preterm (ultrasound-derived regression, Li 2025)",
+   "inputs": [
+    {
+     "var": "bw_g",
+     "label": "Birth weight",
+     "unit": "g"
+    },
+    {
+     "var": "wt_g",
+     "label": "Weight at catheterisation",
+     "unit": "g"
+    }
+   ],
+   "formula": {
+    "text": "Insertion depth (cm) = 8.205 + 0.005 x birth weight (g) minus 0.003 x weight at catheterisation (g)",
+    "machine": {
+     "type": "linear",
+     "const": 8.205,
+     "terms": [
+      {
+       "var": "bw_g",
+       "coef": 0.005
+      },
+      {
+       "var": "wt_g",
+       "coef": 0.003,
+       "neg": true
+      }
+     ],
+     "unit": "cm"
+    }
+   },
+   "src": "pr-picc-plos2025",
+   "quote": "Insertion depth (cm) = 8.205 + 0.005 × birth weight (g) – 0.003 × weight at catheterization (g).",
+   "notes": [
+    {
+     "text": "Single-centre derivation in 105 preterm infants with ultrasound-guided tip placement; not externally validated. Use only as a starting estimate and confirm the tip.",
+     "src": "pr-picc-plos2025",
+     "quote": "This prospective study enrolled 105 preterm infants"
+    }
+   ]
+  },
+  {
+   "id": "picc-depth-axillary-us",
+   "name": "PICC depth, axillary vein, preterm (ultrasound-derived regression, Li 2025)",
+   "inputs": [
+    {
+     "var": "length_cm",
+     "label": "Body length at catheterisation",
+     "unit": "cm"
+    }
+   ],
+   "formula": {
+    "text": "Insertion depth (cm) = 1.024 + 0.177 x body length at catheterisation (cm)",
+    "machine": {
+     "type": "linear",
+     "const": 1.024,
+     "terms": [
+      {
+       "var": "length_cm",
+       "coef": 0.177
+      }
+     ],
+     "unit": "cm"
+    }
+   },
+   "src": "pr-picc-plos2025",
+   "quote": "Insertion depth (cm) = 1.024 + 0.177 × body length at catheterization (cm).",
+   "notes": [
+    {
+     "text": "Single-centre derivation in 105 preterm infants; confirm the tip by imaging.",
+     "src": "pr-picc-plos2025",
+     "quote": "This prospective study enrolled 105 preterm infants"
+    }
+   ]
+  },
+  {
+   "id": "picc-size",
+   "name": "PICC size by weight",
+   "inputs": [
+    {
+     "var": "wt",
+     "label": "Weight",
+     "unit": "kg"
+    }
+   ],
+   "formula": {
+    "text": "Lookup by weight",
+    "machine": {
+     "type": "table",
+     "rows": [
+      {
+       "when": {
+        "wt": {
+         "lt": 1,
+         "unit": "kg"
+        }
+       },
+       "size": 1,
+       "unit": "F",
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "A peripherally inserted central catheter of size 1 F is used for neonates weighing less than 1 kg"
+      },
+      {
+       "when": {
+        "wt": {
+         "gt": 1,
+         "unit": "kg"
+        }
+       },
+       "size": 2,
+       "unit": "F",
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "a 2 F catheter is used for neonates with a body weight more than 1 kg"
+      }
+     ]
+    }
+   },
+   "src": "pr-ten-procs-ijp2023",
+   "quote": "A peripherally inserted central catheter of size 1 F is used for neonates weighing less than 1 kg, and a 2 F catheter is used for neonates with a body weight more than 1 kg",
+   "notes": [
+    {
+     "text": "Other units used a 1.9F catheter for all neonates.",
+     "src": "pr-picc-cureus2025",
+     "quote": "utilized a 1.9F single-lumen PICC (Utah, United States), and the same size of PICC was used for both term and preterm infants."
+    }
+   ]
+  },
+  {
+   "id": "exchange-volume",
+   "name": "Double-volume exchange transfusion volume",
+   "inputs": [
+    {
+     "var": "wt_kg",
+     "label": "Weight",
+     "unit": "kg"
+    },
+    {
+     "var": "maturity",
+     "label": "Preterm or term",
+     "unit": null
+    }
+   ],
+   "formula": {
+    "text": "Exchange volume (mL) = 2 x total blood volume; blood volume 100 mL/kg (preterm) or 85 mL/kg (term)",
+    "machine": {
+     "type": "exchange",
+     "multiplier": 2,
+     "var": "wt_kg",
+     "unit": "mL",
+     "blood_volume_ml_per_kg": [
+      {
+       "when": "preterm",
+       "v": 100
+      },
+      {
+       "when": "term",
+       "v": 85
+      }
+     ]
+    }
+   },
+   "src": "pr-et-turk2018",
+   "quote": "Exchange trasnfusion volume (mL)= 2 x total blood volume [(100 mL/kg (preterm baby), 85 mL/kg (term baby)]",
+   "notes": [
+    {
+     "text": "The source does not define the gestation cut-off for preterm versus term blood volume.",
+     "src": "pr-et-turk2018",
+     "quote": "Double-volume exchange transfusion is performed"
+    },
+    {
+     "text": "Another source takes neonatal blood volume as about 80 mL/kg; a double-volume exchange then removes about 80 to 90% of sensitised red cells and about 60% of circulating bilirubin.",
+     "src": "pr-et-jmb2023",
+     "quote": "The blood volume of newborns is usually about 80 mL·kg- 1, and double circulating blood volume exchange transfusion can exchange about 80–90% of sensitized RBCs and reduce 60% of circulating bilirubin and antibodies"
+    },
+    {
+     "text": "About 86% of the baby's blood is exchanged by a double-volume exchange.",
+     "src": "pr-et-turk2018",
+     "quote": "In this way, 86% of the baby’s blood is exchanged."
+    },
+    {
+     "text": "Aliquot at most 5 mL/kg at a time; rate not above 2 mL/kg/minute; total 1 to 2 hours.",
+     "src": "pr-et-turk2018",
+     "quote": "The exchange transfusion period is 1-2 hours. The amount of blood to be exchanged at one time is 5 mL/kg at most. The rate of exhange transfusion should not exceed 2 mL/kg/minute"
+    },
+    {
+     "text": "Fresh frozen plasma volume = exchange volume minus red cell suspension volume.",
+     "src": "pr-et-turk2018",
+     "quote": "Fresh frozen plasma volume= exchange transfusion volume-erythrocyte suspension volume"
+    }
+   ]
+  },
+  {
+   "id": "lp-depth-2wt7",
+   "name": "LP needle insertion depth (2 x weight + 7 mm)",
+   "inputs": [
+    {
+     "var": "wt_kg",
+     "label": "Weight",
+     "unit": "kg"
+    }
+   ],
+   "formula": {
+    "text": "Depth (mm) = 2 x weight (kg) + 7",
+    "machine": {
+     "type": "linear",
+     "terms": [
+      {
+       "var": "wt_kg",
+       "coef": 2
+      }
+     ],
+     "const": 7,
+     "unit": "mm"
+    }
+   },
+   "src": "pr-ten-procs-ijp2023",
+   "quote": "[2 × weight (kg) + 7] (mm) | [ 175 ]",
+   "notes": [
+    {
+     "text": "These depth estimates come from a review table and aim to avoid deep insertion, which causes traumatic taps. Advance in small steps and check for CSF flow.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "To avoid deep insertion of the needle which causes traumatic LP, the insertion length has been determined in different ways"
+    }
+   ]
+  },
+  {
+   "id": "lp-depth-2p5wt6",
+   "name": "LP needle insertion depth (2.5 x weight + 6 mm)",
+   "inputs": [
+    {
+     "var": "wt_kg",
+     "label": "Weight",
+     "unit": "kg"
+    }
+   ],
+   "formula": {
+    "text": "Depth (mm) = 2.5 x weight (kg) + 6",
+    "machine": {
+     "type": "linear",
+     "terms": [
+      {
+       "var": "wt_kg",
+       "coef": 2.5
+      }
+     ],
+     "const": 6,
+     "unit": "mm"
+    }
+   },
+   "src": "pr-ten-procs-ijp2023",
+   "quote": "[2.5 × weight (kg) + 6] (mm) | [ 176 ]",
+   "notes": [
+    {
+     "text": "These depth estimates come from a review table and aim to avoid deep insertion, which causes traumatic taps. Advance in small steps and check for CSF flow.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "To avoid deep insertion of the needle which causes traumatic LP, the insertion length has been determined in different ways"
+    }
+   ]
+  },
+  {
+   "id": "lp-depth-wt-pca",
+   "name": "LP needle insertion depth (weight and postconceptional age)",
+   "inputs": [
+    {
+     "var": "wt_g",
+     "label": "Weight",
+     "unit": "g"
+    },
+    {
+     "var": "pca_wk",
+     "label": "Postconceptional age",
+     "unit": "weeks"
+    }
+   ],
+   "formula": {
+    "text": "Depth (mm) = 13.19 + 0.0026 x weight (g) minus 0.12 x postconceptional age (weeks)",
+    "machine": {
+     "type": "linear",
+     "const": 13.19,
+     "terms": [
+      {
+       "var": "wt_g",
+       "coef": 0.0026
+      },
+      {
+       "var": "pca_wk",
+       "coef": 0.12,
+       "neg": true
+      }
+     ],
+     "unit": "mm"
+    }
+   },
+   "src": "pr-ten-procs-ijp2023",
+   "quote": "[13.19 + 0.0026 × weight (g) − 0.12 × postconceptual age in weeks] (mm)",
+   "notes": [
+    {
+     "text": "These depth estimates come from a review table and aim to avoid deep insertion, which causes traumatic taps. Advance in small steps and check for CSF flow.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "To avoid deep insertion of the needle which causes traumatic LP, the insertion length has been determined in different ways"
+    }
+   ]
+  },
+  {
+   "id": "lp-needle",
+   "name": "LP needle for neonates",
+   "inputs": [],
+   "formula": {
+    "text": "Standard 22 G, 3.5 cm needle; 25 G is an alternative",
+    "machine": {
+     "type": "table",
+     "rows": [
+      {
+       "gauge": 22,
+       "length": 3.5,
+       "unit": "cm",
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "The standard gauge needle for LP in neonates is 22 G and 3.5 cm long needle"
+      },
+      {
+       "gauge": 25,
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "the use of a 25-gauge needle associated with a comparable success rate and less traumatic LP as compared to a 22-gauge needle"
+      }
+     ]
+    }
+   },
+   "src": "pr-ten-procs-ijp2023",
+   "quote": "The standard gauge needle for LP in neonates is 22 G and 3.5 cm long needle",
+   "notes": [
+    {
+     "text": "A fixed estimate of 1.0 to 1.5 cm is also listed.",
+     "src": "pr-ten-procs-ijp2023",
+     "quote": "1.0-1.5 cm | [ 172 ]"
+    }
+   ]
+  },
+  {
+   "id": "chest-drain-length",
+   "name": "Chest drain insertion length",
+   "inputs": [],
+   "formula": {
+    "text": "2 to 3 cm in small preterm infants; 3 to 4 cm in term infants",
+    "machine": {
+     "type": "table",
+     "rows": [
+      {
+       "label": "small preterm",
+       "lo": 2,
+       "hi": 3,
+       "unit": "cm",
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "The insertion length for the chest tube is 2 to 3 cm in small preterm infants"
+      },
+      {
+       "label": "term",
+       "lo": 3,
+       "hi": 4,
+       "unit": "cm",
+       "src": "pr-ten-procs-ijp2023",
+       "quote": "and 3 to 4 cm in full-term infants"
+      }
+     ]
+    }
+   },
+   "src": "pr-ten-procs-ijp2023",
+   "quote": "The insertion length for the chest tube is 2 to 3 cm in small preterm infants and 3 to 4 cm in full-term infants",
+   "notes": [
+    {
+     "text": "Drain size 10 or 12 Fr, usually 4th or 5th intercostal space in the midaxillary line.",
+     "src": "pr-pc-tamponade-cr2025",
+     "quote": "Tube thoracostomy is performed by insertion of a chest drain (10 or 12 Fr.), usually in the 4th or 5th intercostal space in the midaxillary line."
+    }
+   ]
+  }
+ ],
+ "guides": {
+  "neonatal-intraosseous-access": [
+   {
+    "text": "Emergency route for drugs and fluids when umbilical venous or peripheral access fails. Use the flat anteromedial proximal tibia 1 to 2 cm below and 1 cm medial to the tibial tuberosity, stop at the loss of resistance, watch the limb for extravasation and remove the needle as soon as other access is secured.",
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "The targeted penetration point of the proximal tibia is at its flat anteromedial surface, 1 to 2 cm below and 1 cm medial to the tibial tuberosity."
+   },
+   {
+    "text": "Place an IO if venous access cannot be secured within three attempts and within 90 seconds.",
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "It is recommended to be placed if venous access cannot be secured within three attempts and within 90 seconds"
+   },
+   {
+    "text": "Preferred site: proximal tibia, flat anteromedial surface 1 to 2 cm below and 1 cm medial to the tibial tuberosity. NRP 8th edition describes about 2 cm distal and 1 to 2 cm medial.",
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "The targeted penetration point of the proximal tibia is at its flat anteromedial surface, 1 to 2 cm below and 1 cm medial to the tibial tuberosity."
+   },
+   {
+    "text": "Preferred site: proximal tibia, flat anteromedial surface 1 to 2 cm below and 1 cm medial to the tibial tuberosity. NRP 8th edition describes about 2 cm distal and 1 to 2 cm medial.",
+    "src": "pr-io-jperi2025",
+    "quote": "In term neonates, the Neonatal Resuscitation Program (NRP) 8th edition recommends IO insertion into the flat, lower leg bones, approximately 2 cm distal and 1–2 cm medial to the tibial tuberosity"
+   },
+   {
+    "text": "If the tuberosity cannot be felt, use the flat medial tibia 1.5 to 2 cm distal to the patella.",
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "If there is difficulty in palpation of tibial tuberosity, the flat medial surface of the tibia 1.5 to 2 cm distal to the patella serves as the estimated penetration site"
+   },
+   {
+    "text": "Second site: distal femur, anterior midline, 1 to 3 cm above the external condyles.",
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "The distal femur penetration site is 1 to 3 cm above the external condyles in the anterior midline"
+   },
+   {
+    "text": "Keep clear of the growth plate: an ultrasound study aimed for at least 10 mm from it, and a puncture 10 mm below the tuberosity breached that margin in 53% of proximal sites. At 3000 to 4000 g the most suitable site was a median 13.0 mm below the tuberosity.",
+    "src": "pr-io-ejp2023",
+    "quote": "The aim was to identify the most suitable puncture site with the largest transverse (coronal) and anterior–posterior (sagittal) tibial diameters and at least 10-mm safety distance from the tibial growth plate"
+   },
+   {
+    "text": "Keep clear of the growth plate: an ultrasound study aimed for at least 10 mm from it, and a puncture 10 mm below the tuberosity breached that margin in 53% of proximal sites. At 3000 to 4000 g the most suitable site was a median 13.0 mm below the tuberosity.",
+    "src": "pr-io-ejp2023",
+    "quote": "Puncture site A (10 mm distal to the tibial tuberosity, 10 mm proximal to the malleolus medialis) violated the safety distance to the growth plate in 53% and 85% of cases, at the proximal and distal tibia, respectively."
+   },
+   {
+    "text": "Keep clear of the growth plate: an ultrasound study aimed for at least 10 mm from it, and a puncture 10 mm below the tuberosity breached that margin in 53% of proximal sites. At 3000 to 4000 g the most suitable site was a median 13.0 mm below the tuberosity.",
+    "src": "pr-io-ejp2023",
+    "quote": "In the weight group with infants of 3000–4000 g body weight, at a median (interquartile range, IQR), the most suitable puncture site was located 13.0 mm (12.0–15.8) distally from the tibial tuberosity"
+   },
+   {
+    "text": "In neonatal cadavers, manually inserted needles leaked less than drill-assisted ones and depth needed adjusting for birth weight; contrast leaked in 15.8% overall and 41.7% of VLBW infants.",
+    "src": "pr-io-jperi2025",
+    "quote": "IO needles should be placed 2 cm below and 1–2 cm medial to the tibial tuberosity. MIN needles are preferred to minimize leakage. IO depth should be modified by birth weight."
+   },
+   {
+    "text": "In neonatal cadavers, manually inserted needles leaked less than drill-assisted ones and depth needed adjusting for birth weight; contrast leaked in 15.8% overall and 41.7% of VLBW infants.",
+    "src": "pr-io-jperi2025",
+    "quote": "Contrast leakage occurred overall in 15.8% and 41.7% in VLBW infants"
+   },
+   {
+    "text": "German surveillance of 161 neonates: IO access succeeded in 91%, at the first attempt in 75%; severe complications occurred in 6%.",
+    "src": "pr-io-frontped2022",
+    "quote": "A total of 161 neonates (145 term and 16 preterm born infants) with 206 IO access attempts were reported. In 146 neonates (91%), IO access was successfully established, and success was achieved with the first attempt in 109 neonates (75%)."
+   },
+   {
+    "text": "German surveillance of 161 neonates: IO access succeeded in 91%, at the first attempt in 75%; severe complications occurred in 6%.",
+    "src": "pr-io-frontped2022",
+    "quote": "Our study results confirm this assumption given that severe complications were observed in 6% of neonates."
+   },
+   {
+    "text": "Severe complications (about 6%): necrosis, fracture, broken needle, osteomyelitis, soft tissue infection and perfusion problems. Minor (about 30%): soft tissue misplacement, mild paravasation, poor healing and local swelling.",
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "The severe complications occur in 6% of the patients and include necrosis, fracture, broken IO needle, osteomyelitis, soft tissue infection, and perfusion problems, whereas minor complications occurred in approximately 30% including misplacement in soft tissue, mild paravasation, healing deficiency, and local swelling"
+   }
+  ],
+  "neonatal-lumbar-puncture": [
+   {
+    "text": "Sample CSF for suspected neonatal meningitis once the baby is stable. Sit the baby or lie it on its side with the spine flexed, enter below L2 to L3 (L3 to L4 or L4 to L5), use a 22 G or 25 G needle, advance in small steps checking for CSF, and fill 4 tubes with about 1 to 2 mL each.",
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "Since the lower end of the spinal cord in neonates is at the level of the body of the third lumber vertebra (L3), the LP must be performed below the L2-L3 interspace."
+   },
+   {
+    "text": "Sample CSF for suspected neonatal meningitis once the baby is stable. Sit the baby or lie it on its side with the spine flexed, enter below L2 to L3 (L3 to L4 or L4 to L5), use a 22 G or 25 G needle, advance in small steps checking for CSF, and fill 4 tubes with about 1 to 2 mL each.",
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "The interspaces between the third and fourth lumber vertebra (L3-L4) or between the fourth and fifth lumber vertebra (L4-L5) are the suitable places for LP in neonates"
+   },
+   {
+    "text": "Sample CSF for suspected neonatal meningitis once the baby is stable. Sit the baby or lie it on its side with the spine flexed, enter below L2 to L3 (L3 to L4 or L4 to L5), use a 22 G or 25 G needle, advance in small steps checking for CSF, and fill 4 tubes with about 1 to 2 mL each.",
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "The standard gauge needle for LP in neonates is 22 G and 3.5 cm long needle [ 167 ]. However, a recent observational study showed that the use of a 25-gauge needle associated with a comparable success rate and less traumatic LP as compared to a 22-gauge needle"
+   },
+   {
+    "text": "Sample CSF for suspected neonatal meningitis once the baby is stable. Sit the baby or lie it on its side with the spine flexed, enter below L2 to L3 (L3 to L4 or L4 to L5), use a 22 G or 25 G needle, advance in small steps checking for CSF, and fill 4 tubes with about 1 to 2 mL each.",
+    "src": "pr-lp-jetem2025",
+    "quote": "Sequentially fill 4 tubes (approximately 1–2 mL per tube)"
+   },
+   {
+    "text": "Needle: 22 G, 3.5 cm is standard; a 25 G needle gives comparable success with fewer traumatic taps.",
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "The standard gauge needle for LP in neonates is 22 G and 3.5 cm long needle [ 167 ]. However, a recent observational study showed that the use of a 25-gauge needle associated with a comparable success rate and less traumatic LP as compared to a 22-gauge needle"
+   },
+   {
+    "text": "NeoCLEAR (21 UK units, 27 to 44 weeks corrected, 1 kg or more) found the sitting position more successful and better tolerated than lying. A meta-analysis found sitting at least equal to lateral; prone looked better for preterm and low birth weight babies in one study.",
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "NeoCLEAR open-label, 2 × 2 factorial, randomised controlled trial, the largest trial investigating paediatric lumbar puncture, has been conducted in 21 UK neonatal and maternity units on infants with ages ranging from 27 to 44 weeks corrected gestational age and weighing 1 kg or more."
+   },
+   {
+    "text": "The cord ends at L3 in neonates: puncture below L2 to L3, at L3 to L4 or L4 to L5. The line joining the iliac crests crosses the midline just above L4. Some protocols use L4 to L5 or L5 to S1.",
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "Since the lower end of the spinal cord in neonates is at the level of the body of the third lumber vertebra (L3), the LP must be performed below the L2-L3 interspace."
+   },
+   {
+    "text": "The cord ends at L3 in neonates: puncture below L2 to L3, at L3 to L4 or L4 to L5. The line joining the iliac crests crosses the midline just above L4. Some protocols use L4 to L5 or L5 to S1.",
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "An imaginary line joining the two uppermost points of bilateral posterior superior iliac crests will intersect in the midline just superior to L4. The interspaces between the third and fourth lumber vertebra (L3-L4) or between the fourth and fifth lumber vertebra (L4-L5) are the suitable places for LP in neonates"
+   },
+   {
+    "text": "The cord ends at L3 in neonates: puncture below L2 to L3, at L3 to L4 or L4 to L5. The line joining the iliac crests crosses the midline just above L4. Some protocols use L4 to L5 or L5 to S1.",
+    "src": "pr-lp-jetem2025",
+    "quote": "Identify L4–L5 and L5–S1 interspaces"
+   },
+   {
+    "text": "Estimated depth to avoid going too deep: 2 x weight (kg) + 7 mm, or 2.5 x weight (kg) + 6 mm (see the procedure calculator).",
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "[2 × weight (kg) + 7] (mm) | [ 175 ] [2.5 × weight (kg) + 6] (mm) | [ 176 ]"
+   },
+   {
+    "text": "Fill 4 tubes with about 1 to 2 mL each, then replace the stylet, withdraw, press on the site and apply a dressing.",
+    "src": "pr-lp-jetem2025",
+    "quote": "Sequentially fill 4 tubes (approximately 1–2 mL per tube)"
+   },
+   {
+    "text": "Traumatic or failed taps occur in 30 to 50%; overall success is about 60%, and first attempt success varies from 50 to 80%.",
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "Traumatic or failed LP accounts for 30-50% of cases [ 178 ]. The lumber puncture success rate is approximately 60%"
+   },
+   {
+    "text": "Traumatic or failed taps occur in 30 to 50%; overall success is about 60%, and first attempt success varies from 50 to 80%.",
+    "src": "pr-lp-ejp2023",
+    "quote": "first attempt success rate has varied between 50 to 80% in literature"
+   }
+  ],
+  "neonatal-chest-drain": [
+   {
+    "text": "Drain a neonatal pneumothorax or effusion causing distress, low oxygen saturation or instability. Aspirate air through the 2nd or 3rd intercostal space in the midclavicular line, or place a 10 or 12 Fr drain in the 4th or 5th space between the anterior and midaxillary lines, inserted 2 to 3 cm in small preterm and 3 to 4 cm in term babies. Confirm on AP and lateral X-ray.",
+    "src": "pr-pc-tamponade-cr2025",
+    "quote": "The needle is inserted into the second or third intercostal space in the midclavicular line."
+   },
+   {
+    "text": "Drain a neonatal pneumothorax or effusion causing distress, low oxygen saturation or instability. Aspirate air through the 2nd or 3rd intercostal space in the midclavicular line, or place a 10 or 12 Fr drain in the 4th or 5th space between the anterior and midaxillary lines, inserted 2 to 3 cm in small preterm and 3 to 4 cm in term babies. Confirm on AP and lateral X-ray.",
+    "src": "pr-pc-tamponade-cr2025",
+    "quote": "Tube thoracostomy is performed by insertion of a chest drain (10 or 12 Fr.), usually in the 4th or 5th intercostal space in the midaxillary line."
+   },
+   {
+    "text": "Drain a neonatal pneumothorax or effusion causing distress, low oxygen saturation or instability. Aspirate air through the 2nd or 3rd intercostal space in the midclavicular line, or place a 10 or 12 Fr drain in the 4th or 5th space between the anterior and midaxillary lines, inserted 2 to 3 cm in small preterm and 3 to 4 cm in term babies. Confirm on AP and lateral X-ray.",
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "The insertion length for the chest tube is 2 to 3 cm in small preterm infants and 3 to 4 cm in full-term infants"
+   },
+   {
+    "text": "Attach a needle or angiocatheter to a 10 to 20 mL syringe and enter the 2nd or 3rd intercostal space in the midclavicular line. Stop advancing as soon as air flows into the syringe, to avoid lung injury.",
+    "src": "pr-pc-tamponade-cr2025",
+    "quote": "Thoracentesis consists of aspiration of air with a 10 mL–20 mL syringe through a needle or an angiocatheter. The needle is inserted into the second or third intercostal space in the midclavicular line. Flow of air into the syringe confirms that the pneumothorax has been reached by the needle, which should not be inserted further to avoid lung damage."
+   },
+   {
+    "text": "Alternative site: 4th to 5th intercostal space in the midaxillary line, needle pointed toward the opposite shoulder. Ultrasound guidance can be used instead of fixed landmarks.",
+    "src": "pr-cd-frontped2021",
+    "quote": "Traditionally, thoracentesis of PTX is performed in the second intercostal space at the midclavicular line or fourth to fifth intercostal space at the midaxillary line with the needle pointed toward the opposite shoulder"
+   },
+   {
+    "text": "Site (Buelau position): between the anterior and midaxillary lines in the 4th or 5th intercostal space, just above the rib margin; safe on both sides in preterm and term babies.",
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "Buelau position takes place in the anterior to midaxillary line between the 4th or 5th intercostal space above the margin of the ribs"
+   },
+   {
+    "text": "Drain size 10 or 12 Fr. Insertion length 2 to 3 cm in small preterm and 3 to 4 cm in term infants.",
+    "src": "pr-pc-tamponade-cr2025",
+    "quote": "Tube thoracostomy is performed by insertion of a chest drain (10 or 12 Fr.), usually in the 4th or 5th intercostal space in the midaxillary line."
+   },
+   {
+    "text": "Drain size 10 or 12 Fr. Insertion length 2 to 3 cm in small preterm and 3 to 4 cm in term infants.",
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "The insertion length for the chest tube is 2 to 3 cm in small preterm infants and 3 to 4 cm in full-term infants"
+   },
+   {
+    "text": "For a persistent air leak after drainage, one unit used continuous suction at 5 to 10 cmH2O and advised against a second or third drain.",
+    "src": "pr-cd-tjms2021",
+    "quote": "Five of these patients were taken to continuous aspiration with negative pressures of 5–10 cm H2O"
+   },
+   {
+    "text": "For a persistent air leak after drainage, one unit used continuous suction at 5 to 10 cmH2O and advised against a second or third drain.",
+    "src": "pr-cd-tjms2021",
+    "quote": "We do not recommend the insertion of a second or third chest drain in these patients"
+   }
+  ],
+  "neonatal-pericardiocentesis": [
+   {
+    "text": "Suspect tamponade in any neonate with a UVC or PICC who suddenly deteriorates. Confirm with bedside echo, remove or reposition the line, and if the heart is compressed drain by ultrasound-guided subxiphoid puncture with a 22G cannula aimed at the left shoulder, aspirating as you advance.",
+    "src": "pr-pc-pneumoperi2026",
+    "quote": "In this technique, a 22G peripheral vascular cannula is inserted below the xiphoid process of the neonate and guided toward the left shoulder, with aspiration occurring during catheter advancement."
+   },
+   {
+    "text": "PICC tips move: up to 24% migrate within 24 hours, and perforation has occurred with tips outside the cardiac silhouette.",
+    "src": "pr-pc-pocus2025",
+    "quote": "it is thought that up to 24% of PICC lines migrate within the first 24 hours following insertion in neonates and small infants. Moreover, while full consensus may not exist regarding optimal catheter tip position, vascular perforation has still been described for catheters with tips outside of the cardiac silhouette."
+   },
+   {
+    "text": "Technique: insert a 22G peripheral cannula below the xiphoid, aim toward the left shoulder and aspirate as you advance, under ultrasound guidance. One preterm case used a 21-gauge needle on a 10 mL syringe and improved after 4 mL of air was aspirated.",
+    "src": "pr-pc-pneumoperi2026",
+    "quote": "In this technique, a 22G peripheral vascular cannula is inserted below the xiphoid process of the neonate and guided toward the left shoulder, with aspiration occurring during catheter advancement. With the increasing use of point-of-care ultrasound, ultrasound guidance is now recommended for the procedure."
+   },
+   {
+    "text": "Technique: insert a 22G peripheral cannula below the xiphoid, aim toward the left shoulder and aspirate as you advance, under ultrasound guidance. One preterm case used a 21-gauge needle on a 10 mL syringe and improved after 4 mL of air was aspirated.",
+    "src": "pr-pc-pneumoperi2026",
+    "quote": "a 21-gauge needle attached to a 10-mL syringe was carefully inserted into the pericardial space. Air bubbles were observed, and when 4 mL of air was aspirated"
+   },
+   {
+    "text": "Send the fluid for biochemistry: effusions from central lines are often parenteral nutrition (35 mL of TPN-like fluid in one UVC case; 17 mL of chylous fluid in one PICC case).",
+    "src": "pr-pc-cureus2025",
+    "quote": "ECHO-guided pericardiocentesis was performed, resulting in drainage of 35 ml of yellow-colored fluid, which was biochemically compatible with TPN content"
+   },
+   {
+    "text": "Send the fluid for biochemistry: effusions from central lines are often parenteral nutrition (35 mL of TPN-like fluid in one UVC case; 17 mL of chylous fluid in one PICC case).",
+    "src": "pr-pc-medicine2023",
+    "quote": "which resulted in the drainage of 17 mL of chylopericardial effusion"
+   },
+   {
+    "text": "Keep PICC tips in the vena cava outside the heart: about 1 cm beyond the cardiac silhouette in preterm and 2 cm in term infants. Check the tip by X-ray or ultrasound at least twice a week.",
+    "src": "pr-pc-medicine2023",
+    "quote": "at approximately 1 cm beyond the cardiac silhouette for premature infants and 2 cm beyond for full-term infants."
+   },
+   {
+    "text": "Keep PICC tips in the vena cava outside the heart: about 1 cm beyond the cardiac silhouette in preterm and 2 cm in term infants. Check the tip by X-ray or ultrasound at least twice a week.",
+    "src": "pr-pc-medicine2023",
+    "quote": "To ensure accurate positioning of the catheter tip, X-ray or cardiovascular ultrasonography should be performed at least twice a week."
+   }
+  ],
+  "neonatal-exchange-transfusion": [
+   {
+    "text": "A double-volume exchange replaces 2 x the blood volume (100 mL/kg preterm, 85 mL/kg term), about 86% of the baby's blood. Use irradiated, cross-matched reconstituted blood with haematocrit 50 to 60% through an 8 Fr umbilical venous catheter, in aliquots of at most 5 mL/kg at no more than 2 mL/kg/minute over 1 to 2 hours, with phototherapy before, during and after.",
+    "src": "pr-et-turk2018",
+    "quote": "Exchange trasnfusion volume (mL)= 2 x total blood volume [(100 mL/kg (preterm baby), 85 mL/kg (term baby)]"
+   },
+   {
+    "text": "A double-volume exchange replaces 2 x the blood volume (100 mL/kg preterm, 85 mL/kg term), about 86% of the baby's blood. Use irradiated, cross-matched reconstituted blood with haematocrit 50 to 60% through an 8 Fr umbilical venous catheter, in aliquots of at most 5 mL/kg at no more than 2 mL/kg/minute over 1 to 2 hours, with phototherapy before, during and after.",
+    "src": "pr-et-turk2018",
+    "quote": "In this way, 86% of the baby’s blood is exchanged."
+   },
+   {
+    "text": "A double-volume exchange replaces 2 x the blood volume (100 mL/kg preterm, 85 mL/kg term), about 86% of the baby's blood. Use irradiated, cross-matched reconstituted blood with haematocrit 50 to 60% through an 8 Fr umbilical venous catheter, in aliquots of at most 5 mL/kg at no more than 2 mL/kg/minute over 1 to 2 hours, with phototherapy before, during and after.",
+    "src": "pr-et-turk2018",
+    "quote": "Generally, erythrocytes and plasma are mixed by blood banks such that the hematocrit level is reduced to 50-60%."
+   },
+   {
+    "text": "A double-volume exchange replaces 2 x the blood volume (100 mL/kg preterm, 85 mL/kg term), about 86% of the baby's blood. Use irradiated, cross-matched reconstituted blood with haematocrit 50 to 60% through an 8 Fr umbilical venous catheter, in aliquots of at most 5 mL/kg at no more than 2 mL/kg/minute over 1 to 2 hours, with phototherapy before, during and after.",
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "Eight Fr catheter is recommended for exchange transfusion"
+   },
+   {
+    "text": "A double-volume exchange replaces 2 x the blood volume (100 mL/kg preterm, 85 mL/kg term), about 86% of the baby's blood. Use irradiated, cross-matched reconstituted blood with haematocrit 50 to 60% through an 8 Fr umbilical venous catheter, in aliquots of at most 5 mL/kg at no more than 2 mL/kg/minute over 1 to 2 hours, with phototherapy before, during and after.",
+    "src": "pr-et-turk2018",
+    "quote": "The exchange transfusion period is 1-2 hours. The amount of blood to be exchanged at one time is 5 mL/kg at most. The rate of exhange transfusion should not exceed 2 mL/kg/minute"
+   },
+   {
+    "text": "Blood: the blood bank reconstitutes red cells and plasma to a haematocrit of 50 to 60%. With ABO incompatibility use group O red cells and AB plasma. Whole blood must be fresh (under 24 hours).",
+    "src": "pr-et-turk2018",
+    "quote": "Generally, erythrocytes and plasma are mixed by blood banks such that the hematocrit level is reduced to 50-60%. If ABO incompatibility is present, O erythrocytes and AB plasma are used"
+   },
+   {
+    "text": "Blood: the blood bank reconstitutes red cells and plasma to a haematocrit of 50 to 60%. With ABO incompatibility use group O red cells and AB plasma. Whole blood must be fresh (under 24 hours).",
+    "src": "pr-et-turk2018",
+    "quote": "If whole blood is to be used for exchange transfusion, it should be fresh whole blood (<24 hours)."
+   },
+   {
+    "text": "Access: umbilical venous catheter, 8 Fr recommended for exchange.",
+    "src": "pr-ten-procs-ijp2023",
+    "quote": "Eight Fr catheter is recommended for exchange transfusion"
+   },
+   {
+    "text": "Volume: 2 x total blood volume, taking 100 mL/kg for preterm and 85 mL/kg for term babies (see the procedure calculator). This exchanges about 86% of the baby's blood. Plasma volume = exchange volume minus red cell volume.",
+    "src": "pr-et-turk2018",
+    "quote": "Exchange trasnfusion volume (mL)= 2 x total blood volume [(100 mL/kg (preterm baby), 85 mL/kg (term baby)]"
+   },
+   {
+    "text": "Volume: 2 x total blood volume, taking 100 mL/kg for preterm and 85 mL/kg for term babies (see the procedure calculator). This exchanges about 86% of the baby's blood. Plasma volume = exchange volume minus red cell volume.",
+    "src": "pr-et-turk2018",
+    "quote": "In this way, 86% of the baby’s blood is exchanged."
+   },
+   {
+    "text": "Exchange at most 5 mL/kg at a time, no faster than 2 mL/kg/minute to avoid swings in blood pressure and intracranial pressure; the whole exchange takes 1 to 2 hours.",
+    "src": "pr-et-turk2018",
+    "quote": "The exchange transfusion period is 1-2 hours. The amount of blood to be exchanged at one time is 5 mL/kg at most. The rate of exhange transfusion should not exceed 2 mL/kg/minute to prevent fluctuations in blood pressure and thus in intracranial pressure."
+   },
+   {
+    "text": "Alternative: synchronous peripheral arterial out, venous in, at 3 to 5 mL/min (one Chinese series, which also took neonatal blood volume as about 80 mL/kg).",
+    "src": "pr-et-jmb2023",
+    "quote": "The manual peripheral arteriovenous double-tube synchronous exchange transfusion was adopted for all newborns at a rate of 3–5 mL/min."
+   },
+   {
+    "text": "Alternative: synchronous peripheral arterial out, venous in, at 3 to 5 mL/min (one Chinese series, which also took neonatal blood volume as about 80 mL/kg).",
+    "src": "pr-et-jmb2023",
+    "quote": "The blood volume of newborns is usually about 80 mL·kg- 1"
+   },
+   {
+    "text": "Measure serum bilirubin within 2 hours of the procedure.",
+    "src": "pr-et-turk2018",
+    "quote": "The STB level is measured within 2 hours of the procedure."
+   },
+   {
+    "text": "Check blood gas, glucose, electrolytes and calcium before and after; one series drew about 10 mL before and after for bilirubin, liver and renal function, gas, glucose and electrolytes.",
+    "src": "pr-et-jmb2023",
+    "quote": "About 10 mL of blood was drawn from the arterial end before and after ex - change transfusion to detect indexes including bilirubin hepatic and renal functions, blood gas, blood glucose and electrolytes."
+   },
+   {
+    "text": "Mortality risk is about 1% in otherwise healthy and 12% in ill babies.",
+    "src": "pr-et-turk2018",
+    "quote": "mortality risk (1% in healthy babies, 12% in ill babies)"
+   }
+  ]
+ }
+}

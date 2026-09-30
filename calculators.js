@@ -8397,7 +8397,9 @@
       '<div class="mc-inputs">'+inputHTML(c)+'</div>'+
       '<button class="mc-calc-btn" id="mcCalc_'+id+'">Calculate</button>'+
       '<div class="mc-result" id="mcRes_'+id+'"></div>'+
-      (c.ref?'<div class="mc-ref">'+mcIco("book")+' <b>Reference:</b> '+esc(c.ref)+'</div>':"");
+      (c.draft?'<div class="mc-draft">Draft: AI-drafted from the cited source, not yet clinician-approved.</div>':"")+
+      (c.ref?'<div class="mc-ref">'+mcIco("book")+' <b>Reference:</b> '+esc(c.ref)+'</div>':"")+
+      (c.srcHtml||"");
     function run(fromBtn){
       var out; try { out=c.compute(readValues(c)); } catch(e){ out={err:"Could not compute — check the inputs."}; }
       var res=document.getElementById("mcRes_"+id);
@@ -8539,6 +8541,8 @@
       ".mc-res-err{font:600 12.5px var(--sans,system-ui);color:var(--slate-soft,#888);padding:11px;border:1px dashed var(--line,#e5e5e0);border-radius:10px;text-align:center}",
       ".mc-empty{font:500 13px var(--sans,system-ui);color:var(--slate-soft,#888);padding:30px;text-align:center}",
       ".mc-disc{font:500 11px var(--sans,system-ui);color:var(--slate-soft,#888);background:var(--panel,#fff);border:1px dashed var(--line,#e5e5e0);border-radius:10px;padding:10px 12px;margin-top:18px;line-height:1.5}",
+      ".mc-draft{font:700 11.5px var(--sans,system-ui);color:#9a5b00;background:#fff3dd;border-radius:8px;padding:6px 9px;margin-top:10px}body.dark .mc-draft,body.v3-dark .mc-draft{color:#f0b454;background:#352812}",
+      ".mc-src{font:500 11px/1.5 var(--sans,system-ui);color:var(--slate-soft,#888);margin-top:8px}.mc-src blockquote{margin:4px 0;font-family:ui-monospace,Menlo,monospace}",
       ".mc-ref{font:500 11px var(--sans,system-ui);color:var(--slate-soft,#888);margin-top:12px;line-height:1.5;border-top:1px solid var(--line,#e5e5e0);padding-top:10px}",
       ".mc-ref b{color:var(--slate,#555);font-weight:700}",
       /* Ward Sync / imported-report auto-fill */
@@ -8645,5 +8649,14 @@
              inputs: (c.inputs || []).map(function (x) { return { id: x.id, label: x.label, type: x.type, unit: x.unit }; }) };
   }
 
-  window.MEDCALC = { openList: openList, open: open, close: close, openInteractions: openInteractions, _calcs: CALCS, get: calcById, run: calcRun, list: calcList, find: calcFind };
+  // Runtime registration for data-driven calculators (neonatal layer, neo-scores.js / neo-fluids.js,
+  // flag smd_neo): the same shape as a CALCS entry; an id already present is ignored.
+  function register(c) {
+    if (!c || !c.id || byId(c.id) || !c.compute) return false;
+    c.ref = c.ref || ""; CALCS.push(c);
+    if (c.cat && CAT_ORDER.indexOf(c.cat) < 0) CAT_ORDER.push(c.cat);
+    if (c.cat && !CAT_ICON[c.cat]) CAT_ICON[c.cat] = "baby";
+    return true;
+  }
+  window.MEDCALC = { openList: openList, open: open, close: close, openInteractions: openInteractions, _calcs: CALCS, get: calcById, run: calcRun, list: calcList, find: calcFind, register: register };
 })();

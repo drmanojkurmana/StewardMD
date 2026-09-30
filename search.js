@@ -93,7 +93,8 @@
     askai: "maik ai ask assistant chat", drugmenu: "drugs medicines brands database prices",
     calculators: "calculator score crcl meld gcs sofa", dosing: "dose dosing bedside",
     insulin: "insulin glucose sliding scale diabetes", syndromes: "antibiotic empirical syndromes infection",
-    antibiogram: "antibiogram resistance culture sensitivity"
+    antibiogram: "antibiogram resistance culture sensitivity",
+    neo: "neonatal nicu newborn neonate preterm baby"
   };
   // Actions reachable from ACT (home.js:771-1004) that are not home tiles.
   var EXTRA_TOOLS = [
@@ -111,6 +112,8 @@
     try { list = G.SMD_HOME_TOOLS ? G.SMD_HOME_TOOLS() : []; } catch (e) { list = []; }
     list.forEach(function (t) { out.push({ cat: "tools", id: t.act, title: t.tt, sub: t.sub, kw: TOOL_KW[t.act] || "", open: route(t.act) }); });
     EXTRA_TOOLS.forEach(function (t) { out.push({ cat: "tools", id: t.act, title: t.tt, sub: t.sub, kw: t.kw, open: route(t.act) }); });
+    // Each neonatal tool on its own (neo-hub.js; empty while smd_neo is off).
+    try { if (G.SMD_NEO_HUB && G.SMD_NEO_HUB.searchItems) G.SMD_NEO_HUB.searchItems().forEach(function (t) { if (t.id !== "neo") out.push({ cat: "tools", id: t.id, title: t.title, sub: t.sub, kw: t.kw, open: t.open }); }); } catch (e) {}
     return out;
   }
   function calcsProvider() {
