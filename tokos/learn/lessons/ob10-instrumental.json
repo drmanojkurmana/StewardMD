@@ -3,7 +3,12 @@
   "unit": "ob10",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Forceps and vacuum: the checklist before you pull",
     "hi": "फ़ोर्सेप्स और वैक्यूम: खींचने से पहले की जाँच-सूची"
@@ -13,21 +18,20 @@
     "hi": "[[forceps]] या [[vacuum]] दूसरे चरण में बच्चे को निकालने में मदद करते हैं। ये तभी सुरक्षित हैं जब शर्तें पूरी हों, और सिर न उतरे तो रुक जाएँ।"
   },
   "see": {
-    "diagram": "diagrams/ob10-instrumental.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 768,
     "alt": {
-      "en": "Two rounded heads. On the left a pair of blue curved blades holds the head from both sides. On the right a green suction cup sits at the bottom of the head with a handle going down, and a red arrow points down beside it.",
-      "hi": "दो गोल सिर। बाईं ओर नीले मुड़े ब्लेडों की जोड़ी सिर को दोनों ओर से पकड़ती है। दाईं ओर हरा चूषण कप सिर के नीचे है, हैंडल नीचे जा रहा है, और बगल में लाल तीर नीचे की ओर है।"
+      "en": "Two-panel medical illustration showing operative vaginal delivery in maternal sagittal pelvic cross-section. Left: obstetric forceps blades with cephalic curve and fenestrations correctly applied biparietally over the fetal head, with locked shanks and straight handles with finger guards emerging from the vulva. Right: ventouse vacuum extractor cup applied to the flexion point on the fetal scalp with traction tubing and handle extending from the introitus.",
+      "hi": "मातृ श्रोणि के अनुदैर्ध्य काट में वाद्य प्रसव को दो भागों में दर्शाने वाला चिकित्सीय चित्र। बाएँ: प्रसूति फ़ोर्सेप्स के घुमावदार फ़ेनेस्ट्रेटेड ब्लेड भ्रूण के सिर पर दोनों ओर सही ढंग से लगे हैं, जिनके लॉक्ड शैंक्स और फ़िंगर गार्ड्स वाले सीधे हैंडल योनि द्वार से बाहर निकल रहे हैं। दाएँ: पश्च फ़ॉन्टानेल के आगे सिर के फ़्लेक्शन बिंदु पर लगा वैक्यूम कप, जिसकी खिंचाव नली और हैंडल योनि से बाहर आ रहे हैं।"
     },
     "caption": {
-      "en": "Forceps grip the head. The vacuum cup sits over the flexion point.",
-      "hi": "फ़ोर्सेप्स सिर को पकड़ते हैं। वैक्यूम कप फ़्लेक्शन बिंदु के ऊपर बैठता है।"
+      "en": "Instrumental delivery: cephalic biparietal forceps application (left) and vacuum cup positioned over the flexion point (right).",
+      "hi": "वाद्य प्रसव: सिर पर दोनों ओर फ़ोर्सेप्स लगाना (बाएँ) और फ़्लेक्शन बिंदु पर वैक्यूम कप लगाना (दाएँ)।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.271,
+        "x": 0.26,
         "y": 0.5,
         "label": {
           "en": "Forceps",
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.729,
-        "y": 0.653,
+        "x": 0.76,
+        "y": 0.55,
         "label": {
           "en": "Vacuum cup",
           "hi": "वैक्यूम कप"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.875,
-        "y": 0.5,
+        "x": 0.65,
+        "y": 0.75,
         "label": {
           "en": "Traction with a contraction",
           "hi": "संकुचन के साथ खिंचाव"
@@ -62,6 +66,10 @@
           "hi": "केवल संकुचन और माँ के ज़ोर के साथ खींचें। हर खिंचाव पर सिर न उतरे तो रुकें और योजना बदलें।"
         }
       }
+    ],
+    "img": "learn/media/real/ob10-instrumental.webp",
+    "more": [
+      "ob10-instrumental"
     ]
   },
   "why": {
