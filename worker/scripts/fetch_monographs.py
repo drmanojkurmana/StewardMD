@@ -107,7 +107,7 @@ def main():
     m = sqlite3.connect(OUT_DB)
     cols = ["composition","generic_query","indication","dosage","pregnancy","specific_pop",
             "adverse","interactions","warnings","forms","source","source_id","fetched_at"]
-    m.execute("CREATE TABLE monographs (" + ",".join(c + (" TEXT PRIMARY KEY" if c == "composition" else " TEXT") for c in cols) + ")")
+    m.execute("CREATE TABLE monographs (composition TEXT PRIMARY KEY, generic_query TEXT, indication TEXT, dosage TEXT, pregnancy TEXT, specific_pop TEXT, adverse TEXT, interactions TEXT, warnings TEXT, forms TEXT, source TEXT, source_id TEXT, fetched_at TEXT)")
     hit = miss = 0; missed = []
     stamp = time.strftime("%Y-%m-%d")
     def work(comp):
@@ -123,7 +123,7 @@ def main():
                 miss += 1; missed.append(comp)
             else:
                 hit += 1
-                m.execute("INSERT OR REPLACE INTO monographs VALUES (" + ",".join("?"*len(cols)) + ")",
+                m.execute("INSERT OR REPLACE INTO monographs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                           [comp, qn, d["indication"], d["dosage"], d["pregnancy"], d["specific_pop"],
                            d["adverse"], d["interactions"], d["warnings"], d["forms"],
                            "U.S. FDA label via openFDA", d["source_id"], stamp])
@@ -134,9 +134,9 @@ def main():
     # emit D1 SQL (schema + INSERT OR REPLACE, ≤40KB statements)
     def lit(v): return "NULL" if v is None else "'" + str(v).replace("'", "''") + "'"
     with open(OUT_SQL, "w", encoding="utf-8") as f:
-        f.write("CREATE TABLE IF NOT EXISTS monographs (" + ",".join(c + (" TEXT PRIMARY KEY" if c=="composition" else " TEXT") for c in cols) + ");\n")
-        for row in m.execute(f"SELECT {','.join(cols)} FROM monographs"):
-            f.write(f"INSERT OR REPLACE INTO monographs ({','.join(cols)}) VALUES (" + ",".join(lit(v) for v in row) + ");\n")
+        f.write("CREATE TABLE IF NOT EXISTS monographs (composition TEXT PRIMARY KEY, generic_query TEXT, indication TEXT, dosage TEXT, pregnancy TEXT, specific_pop TEXT, adverse TEXT, interactions TEXT, warnings TEXT, forms TEXT, source TEXT, source_id TEXT, fetched_at TEXT);\n")
+        for row in m.execute("SELECT composition, generic_query, indication, dosage, pregnancy, specific_pop, adverse, interactions, warnings, forms, source, source_id, fetched_at FROM monographs"):
+            f.write(f"INSERT OR REPLACE INTO monographs (composition, generic_query, indication, dosage, pregnancy, specific_pop, adverse, interactions, warnings, forms, source, source_id, fetched_at) VALUES (" + ",".join(lit(v) for v in row) + ");\n")
     n = m.execute("SELECT count(*) FROM monographs").fetchone()[0]
     m.close()
     print(f"\nmonographs fetched: {hit}  | missed (no US label): {miss}")
