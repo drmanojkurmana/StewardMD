@@ -78,8 +78,11 @@ export async function getFeed(env, opts) {
   const tail = (where.length ? " WHERE " + where.join(" AND ") : "") + " ORDER BY published_ts DESC, id DESC LIMIT ?";
   // Flag items that have a LIVE signed bulletin (same rule as functions/_bulletins_repo.js listVisible).
   // Falls back to the plain query when the bulletin tables do not exist yet.
+  // Same test as the disease page (functions/_bulletins_repo.js VISIBLE_WHERE), second reader included.
   const SIGNED = "EXISTS (SELECT 1 FROM bulletins b WHERE b.update_id = updates.id AND b.status = 'signed' AND b.signed_hash = b.body_hash " +
-    "AND b.source_hash = updates.content_hash AND b.review_due_ts > ?) AS signed_bulletin";
+    "AND b.source_hash = updates.content_hash AND b.review_due_ts > ? " +
+    "AND (b.second_required = 0 OR (b.cosigned_hash = b.body_hash AND b.cosigned_uid != '' AND b.cosigned_uid != b.signed_uid) " +
+    "OR COALESCE((SELECT value FROM bulletin_settings WHERE key = 'second_reader'), '1') = '0')) AS signed_bulletin";
   let rs;
   try { rs = await db(env).prepare("SELECT *, " + SIGNED + " FROM updates" + tail).bind(Date.now(), ...binds, limit + 1).all(); }
   catch (e) { rs = await db(env).prepare("SELECT * FROM updates" + tail).bind(...binds, limit + 1).all(); }

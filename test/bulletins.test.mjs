@@ -602,6 +602,8 @@ test("second reader: an approval needs a different doctor to confirm the same te
   await addSigner(env, "u-doc2", "Second Doctor", "TSMC-2", "Telangana State Medical Council");
   const a = await signedBulletin(env);                                   // approval, signed by the owner
   assert.deepEqual(await publicIds(env), [], "one signature is not enough for an approval");
+  const bell = async () => (await updatesRepo.getFeed(env, { limit: 10 })).items.find((i) => i.id === "u1").signed_bulletin;
+  assert.equal(await bell(), false, "the bell does not call it a signed bulletin while it waits");
   const q = await call(env, "GET", "bulletins/queue", { tok: "tok-doc2" });
   const it = q.data.items.find((i) => i.id === a.id);
   assert.equal(it.state, "awaiting_second");
@@ -616,6 +618,7 @@ test("second reader: an approval needs a different doctor to confirm the same te
   const ok = await call(env, "POST", "bulletins/" + a.id + "/cosign", { tok: "tok-doc2", body: { body_hash: a.body_hash, checklist: CHECK } });
   assert.equal(ok.status, 200, JSON.stringify(ok.data));
   assert.deepEqual(await publicIds(env), [a.id]);
+  assert.equal(await bell(), true, "confirmed: the bell marks it");
   const pub = (await call(env, "GET", "bulletins")).data.items[0];
   assert.deepEqual([pub.signed_name, pub.second_name, pub.second_reg], ["Manoj Kurmana", "Second Doctor", "TSMC-2"]);
   assert.ok(!("cosigned_uid" in pub) && !("second_uid" in pub), "no uid on the public card");
