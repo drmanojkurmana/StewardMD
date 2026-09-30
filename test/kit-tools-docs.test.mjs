@@ -396,7 +396,6 @@ test("review desk: Tokós 2.0 items per content type, verify-first units at the 
     "unit-ob5",
     "unit-ob6",
     "unit-ob7",
-    "unit-ob8",
     "unit-ob9",
     "unit-ob10",
     "unit-ob11",
