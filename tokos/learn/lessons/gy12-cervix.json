@@ -3,7 +3,12 @@
   "unit": "gy12",
   "level": "mbbs",
   "minutes": 6,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Cervical cancer: FIGO 2018 stages and treatment",
     "hi": "सर्वाइकल कैंसर: FIGO 2018 चरण और इलाज"
@@ -13,22 +18,21 @@
     "hi": "सर्वाइकल कैंसर का चरण चार पायदानों में इससे तय होता है कि वह गर्भाशय-ग्रीवा से कितनी दूर फैला है। शुरुआती चरणों का इलाज सर्जरी से होता है। लगभग 4 cm और उससे आगे कीमोरेडिएशन मानक है।"
   },
   "see": {
-    "diagram": "diagrams/gy12-cervix.svg",
-    "w": 480,
-    "h": 244,
+    "w": 768,
+    "h": 768,
     "alt": {
-      "en": "Rings around a red cervix at the centre. A dashed amber ring is next, then a larger dashed red ring. Grey arcs on the left and right mark the pelvic walls. A bladder sits at the top, a rectum at the right, and two green lymph nodes at the left. A red lower part of the vagina runs downward.",
-      "hi": "बीच में लाल गर्भाशय-ग्रीवा के चारों ओर छल्ले। पहले पीला बिंदुदार छल्ला, फिर बड़ा लाल बिंदुदार छल्ला। बाएँ-दाएँ धूसर चाप पेल्विक दीवारें दिखाते हैं। ऊपर मूत्राशय, दाएँ मलाशय, और बाएँ दो हरी लसीका ग्रंथियाँ। योनि का निचला लाल हिस्सा नीचे जाता है।"
+      "en": "Realistic medical illustration in sagittal section showing female pelvic anatomy and pathways of cervical cancer extension according to FIGO staging. The central cervix is shown with adjacent bladder anteriorly, rectum posteriorly, vagina below (upper and lower segments), pelvic retroperitoneal tissues, and pelvic lymph node chains.",
+      "hi": "FIGO स्टेजिंग के अनुसार महिला श्रोणि शरीर रचना और गर्भाशय ग्रीवा के कैंसर के प्रसार मार्गों को अनुप्रस्थ काट में दिखाने वाला यथार्थवादी चिकित्सीय चित्र। केंद्रीय ग्रीवा को आगे मूत्राशय, पीछे मलाशय, नीचे योनि (ऊपरी और निचले खंड), श्रोणि रेट्रोपेरिटोनियल ऊतक और श्रोणि लसीका ग्रंथि श्रृंखलाओं के साथ दिखाया गया है।"
     },
     "caption": {
-      "en": "How far the cancer has travelled from the cervix at each FIGO stage.",
-      "hi": "हर FIGO चरण में कैंसर गर्भाशय-ग्रीवा से कितनी दूर पहुँचा है।"
+      "en": "Anatomical pathways of cervical cancer spread in the female pelvis corresponding to FIGO stages: cervix, parametrium, vagina, pelvic wall, lymph nodes, and adjacent viscera.",
+      "hi": "FIGO चरणों के अनुरूप महिला श्रोणि में सर्वाइकल कैंसर के प्रसार के शारीरिक मार्ग: ग्रीवा, पैरामेट्रियम, योनि, श्रोणि दीवार, लसीका ग्रंथियाँ और आसन्न अंग।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.5,
-        "y": 0.512,
+        "x": 0.58,
+        "y": 0.45,
         "label": {
           "en": "Stage I: confined to the cervix",
           "hi": "चरण I: केवल गर्भाशय-ग्रीवा में"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.5,
-        "y": 0.299,
+        "x": 0.57,
+        "y": 0.52,
         "label": {
           "en": "Stage II: beyond the uterus",
           "hi": "चरण II: गर्भाशय के बाहर"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.5,
-        "y": 0.869,
+        "x": 0.51,
+        "y": 0.72,
         "label": {
           "en": "IIIA: lower third of the vagina",
           "hi": "IIIA: योनि का निचला तिहाई"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.325,
-        "y": 0.512,
+        "x": 0.72,
+        "y": 0.32,
         "label": {
           "en": "IIIB: pelvic wall or hydronephrosis",
           "hi": "IIIB: पेल्विक दीवार या हाइड्रोनेफ्रोसिस"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.229,
-        "y": 0.254,
+        "x": 0.62,
+        "y": 0.22,
         "label": {
           "en": "IIIC: lymph nodes",
           "hi": "IIIC: लसीका ग्रंथियाँ"
@@ -87,8 +91,8 @@
         }
       },
       {
-        "x": 0.5,
-        "y": 0.09,
+        "x": 0.42,
+        "y": 0.48,
         "label": {
           "en": "Stage IVA and IVB",
           "hi": "चरण IVA और IVB"
@@ -98,6 +102,10 @@
           "hi": "IVA मूत्राशय या मलाशय जैसे पास के पेल्विक अंगों में फैलाव है। IVB दूर के अंगों में।"
         }
       }
+    ],
+    "img": "learn/media/real/gy12-cervix.webp",
+    "more": [
+      "gy12-cervix"
     ]
   },
   "why": {

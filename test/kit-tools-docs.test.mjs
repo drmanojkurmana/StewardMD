@@ -394,10 +394,14 @@ test("review desk: Tokós 2.0 items per content type, verify-first units at the 
     "unit-ob3",
     "unit-ob4",
     "unit-ob9",
+    "unit-ob10",
     "unit-ob12",
+    "unit-gy1",
     "unit-gy2",
     "unit-gy5",
+    "unit-gy6",
     "unit-gy8",
+    "unit-gy12",
     "unit-obr2",
     "unit-gyr1"
   ]);

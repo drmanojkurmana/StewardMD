@@ -3,7 +3,12 @@
   "unit": "gy1",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "The uterus: parts and layers",
     "hi": "गर्भाशय: भाग और परतें"
@@ -13,22 +18,21 @@
     "hi": "[[uterus]] एक खोखला, माँसपेशियों वाला अंग है, जो लगभग नाशपाती जितना बड़ा होता है। इसके चार भाग और तीन परतें हैं, और हर एक का अपना काम है।"
   },
   "see": {
-    "diagram": "diagrams/gy1-uterus.svg",
-    "w": 540,
-    "h": 380,
+    "w": 768,
+    "h": 574,
     "alt": {
-      "en": "Front view of the uterus cut open. A rounded top sits above two tubes, each ending near a small oval ovary. Inside is a triangle-shaped pink cavity with a thick rose-coloured muscle wall around it. Below, a narrow neck with a thin canal opens into the vagina.",
-      "hi": "गर्भाशय का सामने से कटा हुआ चित्र। ऊपर गोल शीर्ष है, जिसके दोनों ओर नलियाँ हैं और हर नली एक छोटे अंडाकार अंडाशय के पास खत्म होती है। अंदर त्रिकोण जैसी गुलाबी गुहा है, जिसके चारों ओर मोटी गुलाबी माँसपेशी की दीवार है। नीचे एक पतली गर्दन है, जिसकी संकरी नली योनि में खुलती है।"
+      "en": "Realistic medical illustration showing anterior coronal section of the human uterus. The rounded fundus sits at the top with bilateral fallopian tubes and ovaries. Cut surface shows the triangular endometrial cavity lined with pink endometrium, thick muscular myometrium, outer perimetrium, isthmus, and endocervical canal opening through the external os into the upper vagina.",
+      "hi": "मानव गर्भाशय के अग्र अनुप्रस्थ काट को दिखाने वाला यथार्थवादी चिकित्सीय चित्र। गोल फंडस शीर्ष पर स्थित है, दोनों तरफ फैलोपियन ट्यूब और अंडाशय हैं। कटी हुई सतह गुलाबी एंडोमेट्रियम से ढकी त्रिकोणीय गर्भाशय गुहा, मोटी पेशीय मायोमेट्रियम, बाहरी पेरीमेट्रियम, इस्थमस और बाहरी मुख से ऊपरी योनि में खुलने वाली एंडोसर्वाइकल नहर दिखाती है।"
     },
     "caption": {
-      "en": "The uterus from the front: four parts from top to bottom, and three layers from inside to outside.",
-      "hi": "गर्भाशय सामने से: ऊपर से नीचे चार भाग, और अंदर से बाहर तीन परतें।"
+      "en": "Anterior coronal section of the uterus displaying the fundus, body, endometrial cavity, myometrium, isthmus, cervix, and adnexa.",
+      "hi": "गर्भाशय का अग्र अनुप्रस्थ काट जिसमें फंडस, शरीर, एंडोमेट्रियल गुहा, मायोमेट्रियम, इस्थमस, गर्भाशय ग्रीवा और उपांग प्रदर्शित हैं।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
         "x": 0.5,
-        "y": 0.126,
+        "y": 0.18,
         "label": {
           "en": "Fundus",
           "hi": "फंडस"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.324,
-        "y": 0.2,
+        "x": 0.33,
+        "y": 0.28,
         "label": {
           "en": "Where the tube joins",
           "hi": "जहाँ नली जुड़ती है"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.5,
-        "y": 0.358,
+        "x": 0.46,
+        "y": 0.42,
         "label": {
           "en": "Endometrium (lining)",
           "hi": "एंडोमेट्रियम (अंदरूनी परत)"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.367,
-        "y": 0.345,
+        "x": 0.39,
+        "y": 0.45,
         "label": {
           "en": "Myometrium (muscle)",
           "hi": "मायोमेट्रियम (माँसपेशी)"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.378,
-        "y": 0.471,
+        "x": 0.33,
+        "y": 0.48,
         "label": {
           "en": "Perimetrium (outer covering)",
           "hi": "पेरिमेट्रियम (बाहरी आवरण)"
@@ -88,7 +92,7 @@
       },
       {
         "x": 0.5,
-        "y": 0.595,
+        "y": 0.64,
         "label": {
           "en": "Isthmus",
           "hi": "इस्थमस"
@@ -99,8 +103,8 @@
         }
       },
       {
-        "x": 0.459,
-        "y": 0.747,
+        "x": 0.5,
+        "y": 0.72,
         "label": {
           "en": "Cervix",
           "hi": "गर्भाशय ग्रीवा"
@@ -112,7 +116,7 @@
       },
       {
         "x": 0.5,
-        "y": 0.874,
+        "y": 0.78,
         "label": {
           "en": "External os",
           "hi": "बाहरी मुख (एक्सटर्नल ओएस)"
@@ -122,6 +126,10 @@
           "hi": "ग्रीवा की नली का योनि में खुलने वाला मुख। ग्रीवा की जाँच (स्क्रीनिंग) में इसी मुख के आसपास की कोशिकाएँ देखी जाती हैं।"
         }
       }
+    ],
+    "img": "learn/media/real/gy1-uterus.webp",
+    "more": [
+      "gy1-uterus"
     ]
   },
   "why": {
