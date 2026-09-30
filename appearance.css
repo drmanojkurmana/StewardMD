@@ -1057,7 +1057,7 @@ html[data-appearance] #homeV2.rnav .rnav-qa-btn::after { display: none !importan
 html[data-appearance] #sbrefOverlay:not(#_):has(.kblib-discover) .sbref-shell,
 html[data-appearance] #sbrefOverlay:not(#_):has(.kblib-tool-page) .sbref-shell,
 html[data-appearance] #dxOverlay:not(#_).dx-reference-mode {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--teal,#0f766e) 9%, var(--paper,#f5f5f7)) 0, var(--paper,#f5f5f7) 420px) !important;
+  background: var(--panel,#fff) !important;   /* de-slop 2026-09-30: flat reading surface, no teal wash */
 }
 /* the section wrapper is a layout box in the library, not a card: no glass on it */
 html[data-appearance] #sbrefOverlay:not(#_) .sbref-sec.kblib-discover {
@@ -1072,9 +1072,14 @@ html[data-appearance] #dxMgmt:not(#_).dx-reader .dx-mgmt-top {
   border-bottom: 1px solid color-mix(in srgb, var(--ink,#000) 8%, transparent) !important;
   -webkit-backdrop-filter: blur(16px) saturate(1.2) !important; backdrop-filter: blur(16px) saturate(1.2) !important;
 }
-/* cards: translucent paper with a hairline, one consistent radius, no blobs */
-html[data-appearance] #sbrefOverlay:not(#_) .kblib-discover :is(.kblib-personal,.kblib-compare,.kblib-feature,.kblib-grid,.kblib-more,.kblib-search,.kblib-tiles .kblib-f),
-html[data-appearance] #sbrefOverlay:not(#_) #sbrefBody.kblib-tool-page .sbref-sec,
+/* library sections are hairline sections, not cards (de-slop 2026-09-30); this beats the per-theme glass above */
+html[data-appearance] #sbrefOverlay:not(#_) .kblib-discover :is(.kblib-personal,.kblib-compare,.kblib-grid),
+html[data-appearance] #sbrefOverlay:not(#_) #sbrefBody.kblib-tool-page :is(.sbref-sec,.sbref-gl,.kblib-compare) {
+  background: none !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important;
+  -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+}
+/* controls keep a plain hairline field */
+html[data-appearance] #sbrefOverlay:not(#_) .kblib-discover :is(.kblib-more,.kblib-search,.kblib-tiles .kblib-f),
 html[data-appearance] #sbrefOverlay:not(#_) #sbrefBody.kblib-tool-page .kblib-tool-search,
 html[data-appearance] #dxMgmt:not(#_).dx-reader .dx-mgmt-disc {
   background: color-mix(in srgb, var(--panel,#fff) 82%, transparent) !important;

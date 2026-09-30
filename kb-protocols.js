@@ -117,14 +117,38 @@
       return '<button type="button" class="sbref-tab' + (on ? " active" : "") + '"' + (on ? ' aria-current="page" data-kbp-tab' : ' data-kbp-go="' + t[0] + '"') + ">" + esc(t[1]) + "</button>";
     }).join("") + "</div>";
   }
+  // the Knowledge Library banner (logo + name) from reasoning.js, with the same markup as a fallback
   function brandHTML() {
-    return '<img class="smd-kb-watermark" src="/android-chrome-192x192.png" alt="" aria-hidden="true"><div class="smd-kb-brand"><strong>StewardMD</strong><span>Knowledge Base</span></div>';
+    if (typeof G.SMD_KB_BANNER === "function") return G.SMD_KB_BANNER();
+    return '<div class="smd-kb-banner"><img class="smd-kb-logo" src="/logo.png" alt="" width="34" height="34"><div class="smd-kb-brand"><strong>StewardMD</strong><span>Knowledge Base</span></div></div>';
   }
   function shell(inner) {
     var body = bodyEl(); if (!body) return;
     body.className = "sbref-body kblib-tool-page kblib-tool-protocols";
     body.innerHTML = tabsHTML() + inner;
     var title = D.getElementById("sbrefTitle"); if (title) title.textContent = "Knowledge Library";
+    fitTabs(body.querySelector(".sbref-tabs"));
+  }
+  // The five tabs scroll sideways on phones: keep the active one in view and flip the edge fade at the end.
+  function fitTabs(tabs) {
+    if (!tabs || tabs.__kbpFit) { if (tabs) centreActive(tabs); return; }
+    tabs.__kbpFit = true;
+    tabs.addEventListener("scroll", function () { edgeState(tabs); }, { passive: true });
+    centreActive(tabs);
+  }
+  // the edge fade only exists while the row actually scrolls (all five fit from 375px up)
+  function edgeState(tabs) {
+    var sc = tabs.scrollWidth > tabs.clientWidth + 1;
+    tabs.classList.toggle("can-scroll", sc);
+    tabs.classList.toggle("at-end", sc && tabs.scrollLeft + tabs.clientWidth >= tabs.scrollWidth - 2);
+  }
+  function centreActive(tabs) {
+    var act = tabs.querySelector(".sbref-tab.active");
+    if (act && tabs.scrollWidth > tabs.clientWidth + 1) {
+      var x = act.getBoundingClientRect().left - tabs.getBoundingClientRect().left + tabs.scrollLeft;
+      tabs.scrollLeft = Math.max(0, x - (tabs.clientWidth - act.offsetWidth) / 2);
+    }
+    edgeState(tabs);
   }
 
   function renderList() {
@@ -132,10 +156,11 @@
     var idx = st.index;
     var total = idx ? idx.count : 0, nSubj = idx ? idx.subjects.length : 0;
     var intro = '<header class="kblib-tool-intro">' + brandHTML() +
-      '<span class="kblib-tool-kicker">Bedside clinical protocols</span><h1>Protocols</h1>' +
+      '<h1>Protocols</h1>' +
       "<p>" + (idx ? "<strong>" + plural(total, "protocol") + "</strong> across " + plural(nSubj, "subject") + ", " : "Stepwise protocols ") +
       "compiled from current national and international guidelines. Each protocol cites its sources.</p>" +
-      '<label for="kbpQ">Search protocols</label><input id="kbpQ" class="kblib-tool-search" type="search" autocomplete="off" placeholder="Condition, drug or abbreviation" value="' + esc(st.q) + '">' +
+      '<label for="kbpQ">Search protocols</label><div class="kblib-searchbox"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>' +
+      '<input id="kbpQ" class="kblib-tool-search" type="search" enterkeyhint="search" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Condition, drug or abbreviation" value="' + esc(st.q) + '"></div>' +
       '<div id="kbpCount" class="kblib-tool-count" role="status"></div></header>';
     if (!idx) {
       shell(intro + (st.error
@@ -224,7 +249,7 @@
     var secs = (p.sections || []).map(function (s, i) {
       var tag = s.kind === "immediate" ? "ol" : "ul";
       return '<section class="kbp-sec kbp-k-' + esc(s.kind) + '" id="' + pre + "Sec" + i + '"><h2><span class="kbp-kind">' + esc(KINDS[s.kind] || s.kind) + "</span>" + esc(s.title) + "</h2><" + tag + ">" +
-        (s.items || []).map(function (it) { return "<li>" + esc(it) + "</li>"; }).join("") + "</" + tag + "></section>";
+        (s.items || []).map(function (it) { return "<li>" + (typeof G.SMD_MEDFORMAT === "function" ? G.SMD_MEDFORMAT(it) : esc(it)) + "</li>"; }).join("") + "</" + tag + "></section>";
     }).join("");
     var toc = (p.sections || []).map(function (s, i) { return '<button type="button" class="kbp-jump" data-kbp-jump="' + pre + "Sec" + i + '">' + esc(s.title) + "</button>"; });
     var drugs = (p.drugs && p.drugs.length)
@@ -417,6 +442,7 @@
     b.type = "button"; b.className = "sbref-tab"; b.setAttribute("data-kbp-tab", "");
     b.innerHTML = ico("list") + " Protocols";
     tabs.appendChild(b); tabs.classList.add("kbp-5");
+    fitTabs(tabs);
   }
   function wrapOpenRef() {
     var SB = G.SB;
