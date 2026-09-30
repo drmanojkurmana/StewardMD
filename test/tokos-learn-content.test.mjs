@@ -29,7 +29,7 @@ test("builder on the fixture: units, lesson summaries, a unioned glossary (a col
 });
 
 test("licences: only open or original", () => {
-  for (const ok of ["CC0", "CC BY 4.0", "CC BY-SA 3.0", "ODC-BY 1.0", "Public domain", "Original, MAIKNOWLEDGE LLP"]) assert.match(ok, LICENCES);
+  for (const ok of ["CC0", "CC BY 4.0", "CC BY-SA 3.0", "ODC-BY 1.0", "Public domain", "Original, MAIKNOWLEDGE LLP", "Original, StewardMD"]) assert.match(ok, LICENCES);
   for (const bad of ["CC BY-NC 4.0", "All rights reserved", "CC BY-ND 4.0", ""]) assert.doesNotMatch(bad, LICENCES);
 });
 
