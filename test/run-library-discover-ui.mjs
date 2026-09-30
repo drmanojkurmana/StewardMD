@@ -68,7 +68,7 @@ try{
  await sleep(250);
  ok(await ev(`document.querySelector('#dxOverlay').textContent`).then(t=>t.includes(diseaseName)),'disease entry opens existing reference');
  ok(await ev(`document.querySelector('#dxMgmt').classList.contains('dx-reader') && document.querySelector('.dx-reader-brand strong').textContent==='Knowledge Library'`),'disease entry uses the shared Knowledge Library reader');
- ok(await ev(`document.querySelector('.dx-reader-brand span').textContent==='StewardMD Knowledge Base' && !document.querySelector('#dxMgmt .smd-kb-watermark,#dxMgmt .dx-mgmt-badge')`),'reader header carries StewardMD Knowledge Base branding; no watermark or kicker in the hero');
+ ok(await ev(`(()=>{const b=document.querySelector('#dxMgmt .dx-reader-hero .smd-kb-banner');return !!b&&b.innerText.replace(/\\s+/g,' ').trim()==='StewardMD Knowledge Base'&&!!b.querySelector('img.smd-kb-logo')&&!document.querySelector('#dxMgmt .smd-kb-watermark,#dxMgmt .dx-mgmt-badge')})()`),'reader hero carries the StewardMD Knowledge Base banner with the logo; no faded watermark or kicker');
  ok(await ev(`(()=>{const panel=document.querySelector('#dxMgmt'),body=panel.querySelector('.dx-mgmt-body'),r=panel.getBoundingClientRect();return getComputedStyle(panel).position==='fixed'&&getComputedStyle(panel).overflow==='hidden'&&getComputedStyle(body).overflowY==='auto'&&Math.abs(r.height-innerHeight)<=1})()`),'disease reader remains a pinned full-screen app surface');
  ok(await ev(`document.querySelector('.dx-mgmt-name').textContent.trim()===${JSON.stringify(diseaseName)}`),'disease reader retains its title');
  for(const width of [320,375,390,393,430]){
