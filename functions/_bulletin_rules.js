@@ -74,6 +74,8 @@ export function validateDraft(input, opts) {
   if (REGULATORS.indexOf(v.regulator) < 0) err("regulator", "invalid");
   v.india_status = cleanText(b.india_status);
   if (INDIA_STATUSES.indexOf(v.india_status) < 0) err("india_status", "invalid");
+  // A drug or device approval always has an India status: approved by CDSCO, not yet, or not confirmed.
+  else if (v.kind === "approval" && v.india_status === "not_applicable") err("india_status", "not-applicable-approval");
   v.review_months = parseInt(b.review_months, 10);
   if (REVIEW_MONTHS.indexOf(v.review_months) < 0) err("review_months", "invalid");
 

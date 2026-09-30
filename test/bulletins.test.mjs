@@ -198,6 +198,8 @@ test("validation: each clinical rule rejects", () => {
   assert.ok(codes({ doi: "not-a-doi" }).includes("doi:invalid"));
   assert.ok(codes({ pmid: "12ab" }).includes("pmid:invalid"));
   assert.ok(codes({ update_id: "" }).includes("update_id:required"));
+  assert.ok(codes({ kind: "approval", india_status: "not_applicable" }).includes("india_status:not-applicable-approval"), "an approval always has an India status");
+  assert.ok(!codes({ kind: "guideline", india_status: "not_applicable" }).some((c) => c.startsWith("india_status")), "a guideline change may be Not applicable");
 });
 
 test("hash: covers the disease mapping and review interval, ignores key order", async () => {
@@ -498,6 +500,19 @@ test("queue: lists candidates without a bulletin and flags orphaned disease ids"
   assert.deepEqual(q.data.items.find((i) => i.id === a.id).orphaned, ["REMOVED_FROM_KB"]);
   const pub = await call(env, "GET", "bulletins");
   assert.ok(pub.data.items[0].disease_ids.includes("REMOVED_FROM_KB"), "server passes it through; the client drops unknown ids");
+});
+
+test("queue: a whole-page digest (head-crawled source page) is never offered as a bulletin source", { skip: SKIP }, async () => {
+  const env = await fresh();
+  await ownerSigner(env);
+  const D = env.UPDATES_DB._db;
+  D.prepare("INSERT INTO sources (id, name, type, homepage, guideline_page, parser_type, created_ts) VALUES ('ema', 'European Medicines Agency', 'drug_approval', 'https://www.ema.europa.eu', 'https://www.ema.europa.eu/en/news', 'rss', 1)").run();
+  await updatesRepo.insertUpdate(env, { id: "u-digest", doc_key: "https://www.ema.europa.eu/en/news", source_id: "ema", type: "drug_approval", title: "EMA News and Updates", content_hash: "hd", published_ts: Date.now() });
+  await updatesRepo.insertUpdate(env, { id: "u-epar", doc_key: "https://www.ema.europa.eu/en/medicines/human/EPAR/inijaq", source_id: "ema", type: "drug_approval", title: "Inijaq (tofacitinib): EMA CHMP opinion", content_hash: "he", published_ts: Date.now() });
+  const q = await call(env, "GET", "bulletins/queue", { tok: "tok-owner-doc" });
+  const ids = q.data.candidates.map((c) => c.id);
+  assert.ok(ids.includes("u-epar"), "a per-medicine item is offered");
+  assert.ok(!ids.includes("u-digest"), "the page digest is not");
 });
 
 test("fail closed: signer routes answer a clean 500 when D1 refuses, never an unhandled throw", { skip: SKIP }, async () => {

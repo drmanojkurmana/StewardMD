@@ -30,7 +30,8 @@ mock.module("../functions/_search.js", { namedExports: { ...realSearch, tinyfish
 
 const { parsePubmedXml, fetchPubMed } = await import("../functions/_pubmed.js");
 const { selectNewApprovals, fetchOpenFdaApprovals, pickIndication } = await import("../functions/_openfda.js");
-const { seedJournalSourcesOnce, JOURNAL_SOURCES, SEED_KEY, seedKey } = await import("../functions/_journal_sources.js");
+const { seedJournalSourcesOnce, JOURNAL_SOURCES, SEED_KEY, seedKey, applySourceFixesOnce } = await import("../functions/_journal_sources.js");
+const { tidyFeedTitle, keepItem } = await import("../functions/_updates_util.js");
 const { runPipeline } = await import("../functions/_updates_pipeline.js");
 
 const LONG = "x".repeat(320);
@@ -290,4 +291,34 @@ test("openFDA: no label yet -> the approval letter is read with TinyFish Fetch; 
     assert.equal(tiny, 1, "no TinyFish call without the key");
     assert.match(noKey[0].abstract, /Indication not yet in openFDA; see the approval letter\./);
   } finally { restore(); }
+});
+
+test("EMA: the seeded whole-page source moves to the per-medicine feed once; an owner's edit is kept", { skip: SKIP }, async () => {
+  const seedRow = "INSERT INTO sources (id, name, type, homepage, guideline_page, rss_url, parser_type, created_ts) VALUES ('ema', 'European Medicines Agency', 'drug_approval', 'https://www.ema.europa.eu', 'https://www.ema.europa.eu/en/news', '', 'head', 1)";
+  const D = d1(); D._db.exec(SCHEMA); D._db.prepare(seedRow).run();
+  const env = { UPDATES_DB: D };
+  assert.deepEqual(await applySourceFixesOnce(env), ["source_fix_ema_epar_v1"]);
+  const row = D._db.prepare("SELECT parser_type, rss_url, guideline_page FROM sources WHERE id = 'ema'").get();
+  assert.equal(row.parser_type, "rss");
+  assert.equal(row.rss_url, "https://www.ema.europa.eu/en/new-human-medicine-new.xml");
+  assert.equal(row.guideline_page, "https://www.ema.europa.eu/en/news", "kept, so the old digest row is still recognised");
+  D._db.prepare("UPDATE sources SET parser_type = 'head' WHERE id = 'ema'").run();    // owner switches it back
+  assert.deepEqual(await applySourceFixesOnce(env), [], "runs once");
+  assert.equal(D._db.prepare("SELECT parser_type FROM sources WHERE id = 'ema'").get().parser_type, "head");
+
+  const E = d1(); E._db.exec(SCHEMA); E._db.prepare(seedRow.replace("'https://www.ema.europa.eu/en/news', '', 'head'", "'https://www.ema.europa.eu/en/news-custom', '', 'head'")).run();
+  await applySourceFixesOnce({ UPDATES_DB: E });
+  assert.equal(E._db.prepare("SELECT parser_type FROM sources WHERE id = 'ema'").get().parser_type, "head", "an owner-edited row is left alone");
+});
+
+test("EMA feed titles read as medicine (INN): status, and pass the approval filter", () => {
+  // Real titles from https://www.ema.europa.eu/en/new-human-medicine-new.xml (2026-09-30)
+  const a = "Human medicines European public assessment report (EPAR): Inijaq, tofacitinib, Status: Opinion";
+  const b = "Human medicines European public assessment report (EPAR): Xervyteg, Allogeneic faecal microbiota, pooled, Status: Opinion";
+  assert.equal(tidyFeedTitle(a), "Inijaq (tofacitinib): EMA CHMP opinion");
+  assert.equal(tidyFeedTitle(b), "Xervyteg (Allogeneic faecal microbiota, pooled): EMA CHMP opinion");
+  assert.equal(tidyFeedTitle("Human medicines European public assessment report (EPAR): Foo, barmab, Status: Authorised"), "Foo (barmab): EU authorisation");
+  assert.equal(tidyFeedTitle("FDA approves drug"), "FDA approves drug", "other titles pass through");
+  assert.equal(keepItem("drug_approval", tidyFeedTitle(a), a), true);
+  assert.equal(keepItem("drug_approval", "Women are missing from medicines development", ""), false);
 });

@@ -81,6 +81,10 @@ export async function listCandidates(env, sinceTs, limit) {
     "WHERE u.published_ts > ? AND u.type IN (" + marks + ") " +
     "AND NOT EXISTS (SELECT 1 FROM bulletins b WHERE b.update_id = u.id AND b.status != 'retracted') " +
     "AND NOT EXISTS (SELECT 1 FROM bulletin_skips s WHERE s.update_id = u.id) " +
+    // A head-crawled source stores its whole page as one item keyed by the page URL. Its title is the page's
+    // ("EMA News and Updates"), its link the index, and its hash moves with every unrelated change on the page:
+    // not something a doctor can sign against.
+    "AND NOT EXISTS (SELECT 1 FROM sources src WHERE src.id = u.source_id AND u.doc_key IN (src.guideline_page, src.homepage)) " +
     "ORDER BY u.published_ts DESC LIMIT ?"
   ).bind(sinceTs, ...CANDIDATE_TYPES, limit || 50).all();
   return rs.results || [];

@@ -102,6 +102,20 @@ Web push is payloadless broadcast only, so signers are reached through the nativ
   (it used to re-request on every render). The harness audits WCAG AA contrast (text and placeholders) and 44 px
   targets on every desk screen, light and dark.
 
+## Source hygiene (2026-09-30, after the first live bulletins)
+- The queue never offers a whole-page digest: a `head`-crawled source stores its whole page as one item keyed by the
+  page URL (title "EMA News and Updates", link to the index, hash moves with any change on the page). `listCandidates`
+  drops items whose `doc_key` is their source's `guideline_page` or `homepage`.
+- EMA moved from the news page (head) to its "New medicines: human" feed
+  (`https://www.ema.europa.eu/en/new-human-medicine-new.xml`, one item per medicine with its EPAR page). Existing sites
+  switch once via `applySourceFixesOnce` (`bulletin_settings.source_fix_ema_epar_v1`, only while the row still has the
+  seeded values). Titles read "Inijaq (tofacitinib): EMA CHMP opinion" (`tidyFeedTitle`); a CHMP opinion is a
+  recommendation, not yet an EU authorisation.
+- An approval can no longer be saved with India status "Not applicable" (`validateDraft`
+  `not-applicable-approval`; the desk shows "Fix: India status").
+- `NON_MEDICAL_RE` (`_updates_util.js`) matches "CAT"/"CATs" (EMA's Committee for Advanced Therapies) as "cats": any
+  EMA news text naming that committee is dropped. Not changed; the per-medicine feed avoids it.
+
 ## Key files
 `functions/_bulletins_api.js` (routes, mounted from `functions/api/updates/[[path]].js` above the owner gate),
 `functions/_bulletins_repo.js`, `functions/_bulletins_auth.js`, `functions/_bulletin_rules.js`,

@@ -314,6 +314,10 @@ try {
   const sent = st.signBodies[0] || {};
   ok(sent.body_hash === "b".repeat(64) && ["source_read", "numbers_match", "india_checked", "own_words"].every((k) => sent.checklist && sent.checklist[k] === true), "sign request carries the previewed hash and the full checklist", sent);
   ok(await ev(`!!document.querySelector('#smdReview [data-bl-act="savesign"]')`), "after a 409 the editor is back");
+  await ev(`document.querySelector('#smdReview [data-bl-act="set:india_status:not_applicable"]').click();true`);
+  ok(await until(`!!document.querySelector('#bl_bar_s .bl-left.fix')&&/Fix: India status/.test(document.getElementById('bl_bar_s').textContent)&&/An approval always has an India status/.test(document.getElementById('bl_sec_india_status').textContent)`), "an approval marked India Not applicable must be fixed before signing");
+  await ev(`document.querySelector('#smdReview [data-bl-act="set:india_status:cdsco_approved"]').click();true`);
+  await until(`/Ready to sign/.test(document.getElementById('bl_bar_s').textContent)`);
   await shot("desk-after-409");
 
   /* 10. owner tools: signers list, Add me pre-fill, switch-off needs a reason */

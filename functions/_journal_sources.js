@@ -79,6 +79,29 @@ export const JOURNAL_SOURCES = [
   },
 ];
 export const SEED_KEY = "seed_journal_sources_v1";
+
+// One-time fixes to rows seeded by functions/db/seed_sources.sql. Each runs once (recorded in bulletin_settings)
+// and only while the row still has the seeded values, so an owner's edit in Admin > Medical Sources wins.
+// ema: the news page was crawled whole (one item titled "EMA News and Updates", linked to the index). EMA's
+// "New medicines: human" feed has one item per medicine with its own EPAR page (checked live 2026-09-30).
+export const SOURCE_FIXES = [
+  { key: "source_fix_ema_epar_v1", sql: "UPDATE sources SET parser_type = 'rss', rss_url = ?, etag = '', last_modified = '', content_length = '' " +
+    "WHERE id = 'ema' AND parser_type = 'head' AND guideline_page = 'https://www.ema.europa.eu/en/news'",
+    args: ["https://www.ema.europa.eu/en/new-human-medicine-new.xml"] },
+];
+export async function applySourceFixesOnce(env) {
+  const db = env && env.UPDATES_DB;
+  if (!db) return [];
+  await ensureBulletinSchema(db);
+  const now = Date.now(), done = [];
+  for (const f of SOURCE_FIXES) {
+    if (await db.prepare("SELECT value FROM bulletin_settings WHERE key = ?").bind(f.key).first()) continue;
+    await db.batch([db.prepare(f.sql).bind(...f.args),
+      db.prepare("INSERT OR IGNORE INTO bulletin_settings (key, value, updated_by, updated_ts) VALUES (?, '1', 'system', ?)").bind(f.key, now)]);
+    done.push(f.key);
+  }
+  return done;
+}
 export function seedKey(n) { return "seed_journal_sources_v" + n; }
 
 // Inserts every batch not yet recorded; returns the batch numbers seeded this call ([] when nothing new).

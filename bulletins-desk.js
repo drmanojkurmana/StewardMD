@@ -27,6 +27,7 @@
     required: "is required", "too-short": "is too short", "too-long": "is too long", invalid: "is not valid",
     "not-https": "must be an https link", future: "cannot be in the future", unknown: "has a disease the app does not know",
     "too-many": "has more than 5 diseases", "em-dash": "contains an em-dash; use a comma or full stop",
+    "not-applicable-approval": "cannot be Not applicable for an approval; choose approved by CDSCO, not yet approved, or not confirmed",
   };
 
   // "Draft from source": suggestions only. The signer rewrites in their own words and checks every number;
@@ -290,6 +291,7 @@
     if (!(c.disease_ids || []).length) add("disease_ids", "Diseases", "bl_dq");
     if (!c.kind) add("kind", "Type", "bl_sec_kind");
     if (!c.india_status) add("india_status", "India status", "bl_sec_india_status");
+    else if (c.kind === "approval" && c.india_status === "not_applicable") add("india_status", "India status", "bl_sec_india_status", false, true);
     if (!c.evidence_type) add("evidence_type", "Evidence", "bl_sec_evidence_type");
     text("evidence_note", "Evidence note", "bl_evidence_note");
     return out;
@@ -441,7 +443,9 @@
     var Bk = B();
     return '<section class="kit-card bl-step" aria-labelledby="bl_s3">' + stepHead(3, "bl_s3", "Classify") +
       chips("kind", "Type", KIND_OPTS, c.kind) +
-      chips("india_status", "India status", Object.keys(Bk.INDIA).map(function (k) { return [k, Bk.INDIA[k][0]]; }), c.india_status, "Your choice. The CDSCO check below is evidence, not the answer.") +
+      chips("india_status", "India status", Object.keys(Bk.INDIA).map(function (k) { return [k, Bk.INDIA[k][0]]; }), c.india_status,
+        c.kind === "approval" && c.india_status === "not_applicable" ? "An approval always has an India status: approved by CDSCO, not yet approved, or not confirmed."
+          : "Your choice. The CDSCO check below is evidence, not the answer.") +
       cdscoPanel(c) +
       chips("evidence_type", "Evidence", Object.keys(Bk.EVID).map(function (k) { return [k, Bk.EVID[k]]; }), c.evidence_type) +
       chips("regulator", "Regulator", REG_OPTS, c.regulator || "") +
