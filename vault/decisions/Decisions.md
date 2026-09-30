@@ -5,6 +5,24 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-30 · Capture guard for realistic lesson images (iOS watermark while recording, Android FLAG_SECURE)
+
+**Decision (owner approved 2026-09-30).** `<img>` whose src contains `/learn/media/real/` (Tokós now, Ophthalmós
+later) are guarded by `capture-guard.js` + local plugin `@stewardmd/capacitor-capture-guard`
+(`Capacitor.Plugins.CaptureGuard`). iOS: while the scene is recorded or mirrored
+(`UITraitCollection.sceneCaptureState == .active`, iOS 17+; `UIScreen.isCaptured` is deprecated) `html.smd-cg-on`
+draws a low-opacity tiled diagonal StewardMD mark on each image's container (`[data-smd-cg]::after`,
+`pointer-events:none`); after a screenshot (`userDidTakeScreenshotNotification`) the shared `window.toast` says
+"Images are © StewardMD. Please do not share." (en/hi), only if such an image is on screen. Android: FLAG_SECURE on
+the activity window while such an image is on screen (MutationObserver + scroll/resize, 80 ms debounce), cleared as
+soon as none is. Web/PWA: inert.
+**Why.** iOS cannot block or alter captures; Android can. The owner rejected a permanent heavy watermark as
+unprofessional, so the mark appears only during capture.
+**Trade-off.** Android 14 `ScreenCaptureCallback` was not added: it does not fire while FLAG_SECURE is set, which is
+exactly when a notice would be wanted. Thumbnails count as images (the Learn hub with a real thumbnail is also
+FLAG_SECURE on Android). FLAG_SECURE also blanks the Recents preview while set.
+**Status.** Draft PR; needs `npm install` + `npx cap sync` + new App Store / Play builds. Not device-verified.
+
 ## 2026-09-29 · Clinical Bulletins signing desk rebuilt for speed; "Skip" is shared by all signers
 
 **Decision (owner: "Make it more easy for doctors").** The Review Desk "Clinical updates" tab is an inbox (To do /

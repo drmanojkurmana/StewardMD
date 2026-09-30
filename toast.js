@@ -20,6 +20,11 @@
   }
 
   var el = null, timer = null;
+  // Reduced motion: fade only, no slide (checked per show, the setting can change at runtime).
+  function still() {
+    try { return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (e) { return false; }
+  }
+  function off() { return still() ? "translateX(-50%)" : "translateX(-50%) translateY(12px)"; }
   function ensureEl() {
     if (el && el.isConnected) return el;
     el = document.createElement("div");
@@ -30,7 +35,7 @@
       "position:fixed",
       "left:50%",
       "bottom:calc(24px + env(safe-area-inset-bottom,0px))",
-      "transform:translateX(-50%) translateY(12px)",
+      "transform:" + off(),
       "z-index:2147483000",                        // above every sheet/modal in the app
       "max-width:min(92vw,440px)",
       "box-sizing:border-box",
@@ -55,6 +60,7 @@
     try {
       var t = ensureEl();
       t.textContent = String(msg);
+      if (t.style.opacity !== "1") t.style.transform = off();
       void t.offsetWidth;                            // reflow so the transition runs
       t.style.opacity = "1";
       t.style.transform = "translateX(-50%) translateY(0)";
@@ -63,7 +69,7 @@
       timer = setTimeout(function () {
         if (!el) return;
         el.style.opacity = "0";
-        el.style.transform = "translateX(-50%) translateY(12px)";
+        el.style.transform = off();
       }, ms);
     } catch (e) {
       try { console.log("[toast]", msg); } catch (x) {}
