@@ -79,3 +79,15 @@ kept, and high-yield points bolded in every disease's text.
   AWaRe groups and protocol sections are hairline sections; `appearance.css` no longer puts glass or
   a teal wash on the library. Gotcha: `:has()` nested inside `:is()` is dropped by the browser; write
   those selectors out.
+
+## Live search above the keyboard + iPad fit (2026-09-30)
+
+Owner: on phone/iPad, typing in search left the results below the keyboard. Now:
+- Discover has a search mode (`.kblib-searching`, toggled in `kbPaintLibrary`): hero, Try, Your
+  library, Refine and the label hide, results sit under the search box.
+- Every `.kblib-searchbox` in `#sbrefBody` is sticky; typing on a tool tab calls `kbLiftSearch`
+  (scrolls the box to the top); a focused search adds 60vh of scroll room (`::after`).
+- Protocols hides its verify-sources note while a query is active (`.kbp-searching`).
+- iPad: the shell is full width (was the 900px `.sbref-shell` column), body 840px centred, header
+  titled "Knowledge Library". Test: `test/run-kb-live-search-ui.mjs` (short viewport = keyboard up).
+  Gotcha: the app applies a zoom on wide screens, so compare computed widths, not rect widths.

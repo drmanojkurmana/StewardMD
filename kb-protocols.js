@@ -203,6 +203,8 @@
   function paintList() {
     var list = D.getElementById("kbpList"); if (!list || !st.index) return;
     var res = searchIndex(st.index, st.q, st.subject, st.basis);
+    // while searching, the verify-sources note steps aside so matches sit above the on-screen keyboard
+    list.parentNode.classList.toggle("kbp-searching", !!st.q);
     var cnt = D.getElementById("kbpCount");
     if (cnt) cnt.textContent = res.length ? (st.q || st.subject !== "all" || st.basis !== "all" ? "Showing " + res.length + " of " + plural(st.index.count, "protocol") : plural(st.index.count, "protocol")) : "";
     if (!res.length) { list.innerHTML = '<div class="kbp-empty">No protocol matches. Try a broader term or another subject.</div>'; return; }
