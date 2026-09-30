@@ -5363,7 +5363,7 @@
     /* Discover renders its own <h1>Knowledge Library</h1> hero directly below the bar, so setting the
      * bar title here printed the same words twice on one screen. The tool tabs (Syndromes /
      * Antibiogram / AWaRe / Guidelines) have no hero, so they keep their bar title. */
-    try { var t = document.getElementById("sbrefTitle"); if (t) t.textContent = ""; } catch (e) {}
+    try { var t = document.getElementById("sbrefTitle"); if (t) t.textContent = "Knowledge Library"; } catch (e) {}
     var branches = [], seen = {}, entries = kbBuildIndex();
     entries.forEach(function (d) { if (!seen[d.branch]) { seen[d.branch] = 0; branches.push(d.branch); } seen[d.branch]++; });
     branches.sort();
@@ -5458,6 +5458,13 @@
     var res = scored.map(function (x) { return x.d; });
     var shown = Math.min(_libState.limit, res.length);
     var cnt = document.getElementById("kblibCount"); if (cnt) cnt.textContent = 'Showing ' + shown + ' of ' + res.length.toLocaleString() + ' entries';
+    // search mode: hero, suggestions, saved list and filters step aside so results sit right under
+    // the (sticky) search box, above the on-screen keyboard (phone and iPad)
+    var disc = grid.closest(".kblib-discover");
+    if (disc && disc.classList.contains("kblib-searching") !== searching) {
+      disc.classList.toggle("kblib-searching", searching);
+      var sb = document.getElementById("sbrefBody"); if (sb) sb.scrollTop = 0;
+    }
     var discovery = document.getElementById("kblibDiscovery"); if (discovery) discovery.hidden = searching || _libState.branch !== "all" || _libState.cls !== "all" || _libState.src !== "all";
     var title = document.getElementById("kblibResultsTitle"); if (title) title.textContent = searching ? "Search results" : _libState.branch !== "all" ? _libState.branch : "Disease index";
     var clear = document.getElementById("kblibClear"); if (clear) clear.hidden = !(_libState.q || _libState.branch !== "all" || _libState.cls !== "all" || _libState.src !== "all");
@@ -5471,11 +5478,22 @@
         '</button>';
     }).join("") || '<div style="padding:30px;text-align:center;color:var(--slate-soft)">No matches.</div>';
   }
+  // Tool tabs (Antibiogram, AWaRe, Guidelines, Protocols): typing scrolls the search box to the top of
+  // the panel, where it sticks, so the filtered list shows above the on-screen keyboard.
+  function kbLiftSearch(inp) {
+    requestAnimationFrame(function () {
+      var body = document.getElementById("sbrefBody"), box = inp.closest(".kblib-searchbox");
+      if (!body || !box) return;
+      var y = box.getBoundingClientRect().top - body.getBoundingClientRect().top + body.scrollTop - 8;
+      if (body.scrollTop < y) body.scrollTop = y;
+    });
+  }
   // ONE delegated listener for the Knowledge Library — survives modal re-renders.
   function kbWireLibrary() {
     if (window.__smdKbLibWired) return; window.__smdKbLibWired = true;
     document.addEventListener("input", function (e) {
       if (e.target && e.target.id === "kblibQ") { _libState.q = String(e.target.value || "").trim(); _libState.limit = 40; kbPaintLibrary(); var tr = document.getElementById("kblibTry"); if (tr) tr.hidden = !!_libState.q; }
+      else if (e.target && e.target.closest && e.target.closest("#sbrefBody .kblib-searchbox")) kbLiftSearch(e.target);
     }, false);
     document.addEventListener("click", function (e) {
       var t = e.target; if (!t || !t.closest) return;

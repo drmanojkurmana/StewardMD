@@ -22,8 +22,8 @@ try{
  ok(await ev(`document.querySelectorAll('.kblib-tiles [data-br]').length===new Set(Object.values(KB_ENRICHMENT.byId).map(x=>x.system)).size`) || await ev(`document.querySelectorAll('.kblib-tiles [data-br]').length>=10`),'medical branches are available');
  ok(await ev(`getComputedStyle(document.querySelector('#sbrefOverlay')).overflow==='hidden' && getComputedStyle(document.querySelector('#sbrefBody')).overflowY==='auto'`),'library uses a pinned app shell with internal scrolling');
  // Discover has its own <h1> hero; the bar title used to repeat it, printing the same words twice.
- ok(await ev(`(document.querySelector('#sbrefTitle').textContent||'').trim()===''`),'bar title does not repeat the Discover hero heading');
- ok(await ev(`document.querySelector('.kblib-intro h1').textContent.trim()==='Knowledge Library'`),'the hero heading still names the library');
+ ok(await ev(`(document.querySelector('#sbrefTitle').textContent||'').trim()==='Knowledge Library'&&document.querySelector('.kblib-intro h1').textContent.trim()!=='Knowledge Library'`),'bar names the library; the hero does not repeat it');
+ ok(await ev(`document.querySelector('.kblib-intro h1').textContent.trim()==='Find any disease'`),'the hero heading says what the page does');
  ok(await ev(`Math.abs(document.querySelector('#sbrefOverlay').getBoundingClientRect().bottom-innerHeight)<=1`),'library fills the visible viewport');
  ok(await ev(`!document.querySelector('#smdTopBack') || getComputedStyle(document.querySelector('#smdTopBack')).visibility==='hidden'`),'library suppresses the underlying global back control');
  for(const width of [320,390,768,1280]){await call('Emulation.setDeviceMetricsOverride',{width,height:844,deviceScaleFactor:1,mobile:width<700});ok(await ev(`document.querySelector('#sbrefOverlay').scrollWidth<=innerWidth`),`no overflow at ${width}px`);if(width===390)await shot('discover-mobile');if(width===1280)await shot('discover-desktop');}
