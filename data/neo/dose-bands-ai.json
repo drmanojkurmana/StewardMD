@@ -1,0 +1,2357 @@
+{
+ "schema": 1,
+ "kind": "neo-dose-bands",
+ "title": "Neonatal anti-infective dose bands (AI-drafted from FDA labels, CDC, HHS and WHO)",
+ "compiled": "2026-09-30",
+ "review": {
+  "status": "ai_drafted",
+  "by": null,
+  "date": null
+ },
+ "when_keys_note": "Besides the README keys this file uses pna_wk (postnatal age in weeks), pna_mo (postnatal age in months), age_mo and age_yr (chronological age), and life_week ('first' = first week of life, 'after_first' = after the first week) because the sources word age that way and units are never converted.",
+ "sources": {
+  "fda-ampicillin": {
+   "title": "Ampicillin Sodium for injection (Sagent), label effective 2026-07-27",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5b3796dd-6f81-4999-ae2b-a13a72795729",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-gentamicin": {
+   "title": "Gentamicin Sulfate Injection, pediatric (Eugia US), label effective 2026-01-27",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f8c608b3-50b8-4d5d-9e8a-e92c0d2e3cdc",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-amikacin": {
+   "title": "Amikacin Sulfate Injection (Sagent), label effective 2026-07-27",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f260ff2a-76a0-4672-9516-91c344b67890",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-tobramycin": {
+   "title": "Tobramycin Injection (Hospira), label effective 2026-04-13",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=c5a005b0-7b6f-4e30-df92-9a20b1ca66a1",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-vancomycin": {
+   "title": "Vancomycin Hydrochloride for injection (Meitheal), label effective 2026-07-08",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=033efc76-11d5-4a93-91de-56ed41bab9c3",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-cefotaxime": {
+   "title": "Cefotaxime for injection (Hikma), label effective 2024-04-11",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ed23b6bc-32c7-4c50-a53d-313ae78e5623",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-ceftazidime": {
+   "title": "Ceftazidime for injection (Sagent), label effective 2026-08-03",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=112c5457-8d71-49f5-b531-9761d7d38c93",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-ceftriaxone": {
+   "title": "Ceftriaxone Sodium for injection (Sportpharm), label effective 2026-07-23",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ddbc3bf6-5bab-4851-ae5a-ef263cd8f255",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-meropenem": {
+   "title": "Meropenem for injection (Hikma), label effective 2026-08-26",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8a2a545e-b336-416a-be73-9e0a7ccf6177",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-metronidazole": {
+   "title": "Metronidazole Injection (Sun Pharmaceutical), label effective 2026-06-09",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7187779a-1f4c-4607-af53-4119e324aad5",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-clindamycin": {
+   "title": "Clindamycin Phosphate in Sodium Chloride Injection (Baxter), label effective 2026-04-28",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=44fa506b-90ac-42de-831b-5f3f1a500fc0",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-penicillin-g-k": {
+   "title": "Pfizerpen (penicillin G potassium) for injection (Roerig/Pfizer), label effective 2025-12-16",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=efef4846-9497-41af-8dd6-518f86eca7f2",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-penicillin-g-benzathine": {
+   "title": "Bicillin L-A (penicillin G benzathine) injectable suspension (Pfizer), label effective 2026-07-21",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=012d46f1-d0a0-4676-a879-cd320297ab16",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-nafcillin": {
+   "title": "Nafcillin for injection (WG Critical Care), label effective 2026-08-25",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4d3b0076-3780-413f-9052-b23be5f18f01",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-oxacillin": {
+   "title": "Oxacillin for injection (Onesource Specialty Pharma), label effective 2025-12-31",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4972ec74-1d9a-de9b-e063-6394a90af786",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-linezolid": {
+   "title": "Zyvox (linezolid) injection, tablets, oral suspension (Pfizer), label effective 2026-07-09",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3e5e9975-6f36-42e4-ab46-0e75dda83592",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-acyclovir": {
+   "title": "Acyclovir Sodium Injection (Hikma), label effective 2024-04-11",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=babdbce2-5cbd-4943-bc38-9ebdd696a77a",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-zidovudine": {
+   "title": "Retrovir (zidovudine) (ViiV Healthcare), label effective 2024-11-13",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=6df09f15-b102-431c-adde-d7aeef6f5d84",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-fluconazole": {
+   "title": "Fluconazole tablets (Hawaii Repack), label effective 2026-07-03",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8aa296e2-ad8d-42f6-8b41-468e2b9cdfb8",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-micafungin": {
+   "title": "Micafungin for injection (Hisun), label effective 2026-04-14",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=230fcff4-ad4b-ea25-e063-6394a90a1fab",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-ampho-liposomal": {
+   "title": "Amphotericin B liposome for injection (Sun Pharmaceutical), label effective 2026-04-20",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=02aadef1-390b-4270-b56d-33452eb89dde",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-ampho-deoxycholate": {
+   "title": "Amphotericin B for Injection USP, conventional (X-Gen), label effective 2022-01-03",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a0a54943-9ce4-4f3e-b681-a1a9144c16ce",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-oseltamivir": {
+   "title": "Oseltamivir Phosphate capsules (Strides Pharma), label effective 2026-09-08",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f26154bd-374c-44a8-983a-b2724a591653",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "fda-erythromycin-ophth": {
+   "title": "Erythromycin Ophthalmic Ointment (Bausch & Lomb), label effective 2026-08-28",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=061ddd20-94a6-4e3c-ba84-1ebd8529eea6",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "dm-cdc-congenital-syphilis": {
+   "title": "Sexually Transmitted Infections Treatment Guidelines, 2021: Congenital Syphilis",
+   "publisher": "US Centers for Disease Control and Prevention (CDC)",
+   "url": "https://www.cdc.gov/std/treatment-guidelines/congenital-syphilis.htm",
+   "licence": "Public domain (US Government work, CDC); CDC asks for attribution",
+   "accessed": "2026-09-30"
+  },
+  "dm-cdc-pertussis-2005": {
+   "title": "Recommended Antimicrobial Agents for the Treatment and Postexposure Prophylaxis of Pertussis: 2005 CDC Guidelines (MMWR Recomm Rep 2005;54(RR-14))",
+   "publisher": "US Centers for Disease Control and Prevention (CDC)",
+   "url": "https://www.cdc.gov/mmwr/preview/mmwrhtml/rr5414a1.htm",
+   "licence": "Public domain (US Government work, CDC MMWR)",
+   "accessed": "2026-09-30"
+  },
+  "dm-cdc-pertussis": {
+   "title": "Clinical Care of Pertussis (treatment options vary by age)",
+   "publisher": "US Centers for Disease Control and Prevention (CDC)",
+   "url": "https://www.cdc.gov/pertussis/hcp/clinical-care/index.html",
+   "licence": "Public domain (US Government work, CDC)",
+   "accessed": "2026-09-30"
+  },
+  "dm-hhs-perinatal-infant": {
+   "title": "Recommendations for the Use of Antiretroviral Drugs During Pregnancy and Interventions to Reduce Perinatal HIV Transmission in the United States: Management of Infants With In Utero, Intrapartum, or Breastfeeding HIV Exposure (Table 11.1, Table 12.1)",
+   "publisher": "US DHHS Panel on Treatment of HIV During Pregnancy and Prevention of Perinatal Transmission (clinicalinfo.hiv.gov, NIH)",
+   "url": "https://clinicalinfo.hiv.gov/en/guidelines/perinatal/management-infants-utero-intrapartum-breastfeeding-hiv-exposure",
+   "licence": "US Government work (HHS/NIH), believed public domain; site terms not checked, owner to confirm",
+   "accessed": "2026-09-30"
+  },
+  "dm-who-sbi-2024": {
+   "title": "WHO recommendations for management of serious bacterial infections in infants aged 0-59 days (2024), Table 3.1 Antibiotic dosing",
+   "publisher": "World Health Organization",
+   "url": "https://iris.who.int/server/api/core/bitstreams/3ae5bd43-7196-43d2-8c77-be8725e21823/content",
+   "licence": "WHO: CC BY-NC-SA 3.0 IGO (non-commercial only; owner to confirm use in the app)",
+   "accessed": "2026-09-30"
+  }
+ },
+ "drugs": [
+  {
+   "id": "ampicillin",
+   "name": "Ampicillin",
+   "aliases": [
+    "ampicillin sodium"
+   ],
+   "class": "aminopenicillin",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Bacterial meningitis and septicemia (FDA label, neonates 28 days postnatal age or less)",
+     "route": "IV/IM",
+     "bands": [
+      {
+       "label": "GA 34 wk or less, PNA 7 d or less",
+       "when": {
+        "ga_wk": {
+         "max": 34
+        },
+        "pna_d": {
+         "max": 7
+        }
+       },
+       "dose": {
+        "lo": 100,
+        "hi": 100,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "day",
+        "divided": true
+       },
+       "every_h": 12,
+       "src": "fda-ampicillin",
+       "quote": "TABLE 1: Dosage in Neonates (less than or equal to 28 days of postnatal age) for Bacterial Meningitis and Septicemia Gestational age (weeks) Postnatal age (days) Dosage less than or equal to 34 less than or equal to 7 100 mg/kg/day in equally divided doses every 12 hours"
+      },
+      {
+       "label": "GA 34 wk or less, PNA 8 to under 28 d",
+       "when": {
+        "ga_wk": {
+         "max": 34
+        },
+        "pna_d": {
+         "min": 8,
+         "lt": 28
+        }
+       },
+       "dose": {
+        "lo": 150,
+        "hi": 150,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "day",
+        "divided": true
+       },
+       "every_h": 12,
+       "src": "fda-ampicillin",
+       "quote": "TABLE 1: Dosage in Neonates (less than or equal to 28 days of postnatal age) for Bacterial Meningitis and Septicemia Gestational age (weeks) Postnatal age (days) Dosage less than or equal to 34 less than or equal to 7 100 mg/kg/day in equally divided doses every 12 hours less than or equal to 34 greater than or equal to 8 and less than 28 150 mg/kg/day in equally divided doses every 12 hours"
+      },
+      {
+       "label": "GA over 34 wk, PNA 28 d or less",
+       "when": {
+        "ga_wk": {
+         "gt": 34
+        },
+        "pna_d": {
+         "max": 28
+        }
+       },
+       "dose": {
+        "lo": 150,
+        "hi": 150,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "day",
+        "divided": true
+       },
+       "every_h": 8,
+       "src": "fda-ampicillin",
+       "quote": "greater than 34 less than or equal to 28 150 mg/kg/day in equally divided doses every 8 hours"
+      }
+     ]
+    },
+    {
+     "indication": "Suspected sepsis, meningitis or pneumonia in young infants 0 to 59 days (WHO 2024 Table 3.1)",
+     "route": "IV/IM",
+     "bands": [
+      {
+       "label": "First week of life",
+       "when": {
+        "life_week": "first"
+       },
+       "dose": {
+        "lo": 50,
+        "hi": 50,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 12,
+       "src": "dm-who-sbi-2024",
+       "quote": "Ampicillin IM/IV for a total of at least 10 days ■ 50 mg/kg/dose every 12 hours (first week of life)"
+      },
+      {
+       "label": "After the first week of life",
+       "when": {
+        "life_week": "after_first"
+       },
+       "dose": {
+        "lo": 50,
+        "hi": 50,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 8,
+       "src": "dm-who-sbi-2024",
+       "quote": "■ 50 mg/kg/dose every 8 hours (> first week of life)"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "WHO duration by indication: at least 10 days for suspected sepsis, at least 3 weeks for suspected meningitis, at least 7 days for suspected pneumonia.",
+     "src": "dm-who-sbi-2024",
+     "quote": "B.4 Suspected meningitis in young infants aged 0–59 days in hospital settings Ampicillin IM/IV for a total of at least 3 weeks"
+    },
+    {
+     "text": "WHO: give ampicillin plus a third-generation cephalosporin plus gentamicin if Listeria is suspected.",
+     "src": "dm-who-sbi-2024",
+     "quote": "Note: Give ampicillin plus third-generation cephalosporin plus gentamicin (i.e. triple therapy) if Listeria monocytogenes is suspected."
+    }
+   ]
+  },
+  {
+   "id": "gentamicin",
+   "name": "Gentamicin",
+   "aliases": [
+    "gentamicin sulfate"
+   ],
+   "class": "aminoglycoside",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Serious bacterial infection (FDA pediatric label, normal renal function)",
+     "route": "IV/IM",
+     "bands": [
+      {
+       "label": "Premature or full-term neonate, 1 week of age or less",
+       "when": {
+        "pna_wk": {
+         "max": 1
+        }
+       },
+       "dose": {
+        "lo": 2.5,
+        "hi": 2.5,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 12,
+       "src": "fda-gentamicin",
+       "quote": "Premature or Full-term Neonates One Week of Age or Less: 5 mg/kg/day. (2.5 mg/kg administered every 12 hours.)"
+      },
+      {
+       "label": "Infants and neonates (older than 1 week)",
+       "when": {
+        "pna_wk": {
+         "gt": 1
+        }
+       },
+       "dose": {
+        "lo": 2.5,
+        "hi": 2.5,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 8,
+       "src": "fda-gentamicin",
+       "quote": "Infants and Neonates: 7.5 mg/kg/day. (2.5 mg/kg administered every 8 hours.) Premature or Full-term Neonates One Week of Age or Less: 5 mg/kg/day."
+      }
+     ]
+    },
+    {
+     "indication": "Suspected sepsis, meningitis or pneumonia in young infants 0 to 59 days (WHO 2024 Table 3.1)",
+     "route": "IV/IM",
+     "bands": [
+      {
+       "label": "First week of life",
+       "when": {
+        "life_week": "first"
+       },
+       "dose": {
+        "lo": 5,
+        "hi": 5,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "once a day",
+       "src": "dm-who-sbi-2024",
+       "quote": "Gentamicin IM/IV for a total of at least 10 days ■ 5 mg/kg once a day (first week of life)"
+      },
+      {
+       "label": "After the first week of life",
+       "when": {
+        "life_week": "after_first"
+       },
+       "dose": {
+        "lo": 7.5,
+        "hi": 7.5,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "once a day",
+       "src": "dm-who-sbi-2024",
+       "quote": "■ 7.5 mg/kg once a day (> first week of life)"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Aminoglycosides need caution in premature and neonatal infants because of renal immaturity and a prolonged serum half-life.",
+     "src": "fda-amikacin",
+     "quote": "Aminoglycosides should be used with caution in premature and neonatal infants because of the renal immaturity of these patients and the resulting prolongation of serum half-life of these drugs."
+    },
+    {
+     "text": "FDA label: in the neonate with suspected sepsis a penicillin-type drug is usually also given.",
+     "src": "fda-gentamicin",
+     "quote": "In the neonate with suspected bacterial sepsis or staphylococcal pneumonia, a penicillin-type drug is also usually indicated as concomitant therapy with gentamicin."
+    }
+   ]
+  },
+  {
+   "id": "amikacin",
+   "name": "Amikacin",
+   "aliases": [
+    "amikacin sulfate"
+   ],
+   "class": "aminoglycoside",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Newborns, normal renal function (FDA label)",
+     "route": "IV/IM",
+     "bands": [
+      {
+       "label": "Loading dose",
+       "when": {},
+       "dose": {
+        "lo": 10,
+        "hi": 10,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "once, initially",
+       "src": "fda-amikacin",
+       "quote": "When amikacin is indicated in newborns (see WARNINGS box), it is recommended that a loading dose of 10 mg/kg be administered initially to be followed with 7.5 mg/kg every 12 hours."
+      },
+      {
+       "label": "Maintenance",
+       "when": {},
+       "dose": {
+        "lo": 7.5,
+        "hi": 7.5,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 12,
+       "max": {
+        "v": 15,
+        "unit": "mg/kg/day",
+        "basis": "day",
+        "src": "fda-amikacin",
+        "quote": "The total daily dose by all routes of administration should not exceed 15 mg/kg/day."
+       },
+       "src": "fda-amikacin",
+       "quote": "When amikacin is indicated in newborns (see WARNINGS box), it is recommended that a loading dose of 10 mg/kg be administered initially to be followed with 7.5 mg/kg every 12 hours."
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "FDA label: avoid peak concentrations above 35 micrograms per mL and troughs above 10 micrograms per mL.",
+     "src": "fda-amikacin",
+     "quote": "Peak concentrations (30 to 90 minutes after injection) above 35 micrograms per mL and trough concentrations (just prior to the next dose) above 10 micrograms per mL should be avoided."
+    },
+    {
+     "text": "Aminoglycosides need caution in premature and neonatal infants because of renal immaturity.",
+     "src": "fda-amikacin",
+     "quote": "Aminoglycosides should be used with caution in premature and neonatal infants because of the renal immaturity of these patients and the resulting prolongation of serum half-life of these drugs."
+    }
+   ]
+  },
+  {
+   "id": "tobramycin",
+   "name": "Tobramycin",
+   "aliases": [
+    "tobramycin sulfate"
+   ],
+   "class": "aminoglycoside",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Normal renal function (FDA label)",
+     "route": "IV/IM",
+     "bands": [
+      {
+       "label": "Premature or full-term neonate, 1 week of age or less",
+       "when": {
+        "pna_wk": {
+         "max": 1
+        }
+       },
+       "dose": {
+        "lo": 4,
+        "hi": 4,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "day",
+        "divided": 2
+       },
+       "every_h": 12,
+       "dose_note": "up to (the source gives only an upper limit)",
+       "src": "fda-tobramycin",
+       "quote": "Premature or Full-Term Neonates 1 Week of Age or Less: Up to 4 mg/kg/day may be administered in 2 equal doses every 12 hours."
+      },
+      {
+       "label": "Pediatric patients older than 1 week",
+       "when": {
+        "pna_wk": {
+         "gt": 1
+        }
+       },
+       "dose": {
+        "lo": 2,
+        "hi": 2.5,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 8,
+       "src": "fda-tobramycin",
+       "quote": "Pediatric Patients (Greater Than 1 Week of Age): 6 to 7.5 mg/kg/day in 3 or 4 equally divided doses (2 to 2.5 mg/kg every 8 hours or 1.5 to 1.89 mg/kg every 6 hours)."
+      },
+      {
+       "label": "Pediatric patients older than 1 week, 6-hourly option",
+       "when": {
+        "pna_wk": {
+         "gt": 1
+        }
+       },
+       "dose": {
+        "lo": 1.5,
+        "hi": 1.89,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 6,
+       "src": "fda-tobramycin",
+       "quote": "Pediatric Patients (Greater Than 1 Week of Age): 6 to 7.5 mg/kg/day in 3 or 4 equally divided doses (2 to 2.5 mg/kg every 8 hours or 1.5 to 1.89 mg/kg every 6 hours)."
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Infusion shorter than 20 minutes is not recommended.",
+     "src": "fda-tobramycin",
+     "quote": "The diluted solution usually should be infused over a period of 20 to 60 minutes. Infusion periods of less than 20 minutes are not recommended because peak serum levels may exceed 12 mcg/mL"
+    }
+   ]
+  },
+  {
+   "id": "vancomycin",
+   "name": "Vancomycin",
+   "aliases": [
+    "vancomycin hydrochloride"
+   ],
+   "class": "glycopeptide",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Neonates up to 1 month (FDA label)",
+     "route": "IV",
+     "bands": [
+      {
+       "label": "Initial dose",
+       "when": {
+        "pna_mo": {
+         "max": 1
+        }
+       },
+       "dose": {
+        "lo": 15,
+        "hi": 15,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "once, initially",
+       "infuse": "over 60 minutes",
+       "src": "fda-vancomycin",
+       "quote": "In neonates, an initial dose of 15 mg/kg is suggested, followed by 10 mg/kg every 12 hours for neonates in the 1st week of life and every 8 hours thereafter up to the age of 1 month. Each dose should be administered over 60 minutes."
+      },
+      {
+       "label": "Maintenance, 1st week of life",
+       "when": {
+        "life_week": "first"
+       },
+       "dose": {
+        "lo": 10,
+        "hi": 10,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 12,
+       "infuse": "over 60 minutes",
+       "src": "fda-vancomycin",
+       "quote": "In neonates, an initial dose of 15 mg/kg is suggested, followed by 10 mg/kg every 12 hours for neonates in the 1st week of life and every 8 hours thereafter up to the age of 1 month. Each dose should be administered over 60 minutes."
+      },
+      {
+       "label": "Maintenance, after 1st week up to 1 month",
+       "when": {
+        "life_week": "after_first",
+        "pna_mo": {
+         "max": 1
+        }
+       },
+       "dose": {
+        "lo": 10,
+        "hi": 10,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 8,
+       "infuse": "over 60 minutes",
+       "src": "fda-vancomycin",
+       "quote": "In neonates, an initial dose of 15 mg/kg is suggested, followed by 10 mg/kg every 12 hours for neonates in the 1st week of life and every 8 hours thereafter up to the age of 1 month. Each dose should be administered over 60 minutes."
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Premature infants: clearance falls as postconceptional age falls; longer dosing intervals may be needed and serum concentration monitoring is recommended.",
+     "src": "fda-vancomycin",
+     "quote": "In premature infants, vancomycin clearance decreases as postconceptional age decreases. Therefore, longer dosing intervals may be necessary in premature infants. Close monitoring of serum concentrations of vancomycin is recommended in these patients."
+    }
+   ]
+  },
+  {
+   "id": "cefotaxime",
+   "name": "Cefotaxime",
+   "aliases": [
+    "cefotaxime sodium"
+   ],
+   "class": "3rd-generation cephalosporin",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Neonates birth to 1 month (FDA label)",
+     "route": "IV",
+     "bands": [
+      {
+       "label": "0 to 1 week of age",
+       "when": {
+        "pna_wk": {
+         "min": 0,
+         "max": 1
+        }
+       },
+       "dose": {
+        "lo": 50,
+        "hi": 50,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 12,
+       "src": "fda-cefotaxime",
+       "quote": "Neonates (birth to 1 month): 0-1 week of age 50 mg/kg per dose every 12 hours IV"
+      },
+      {
+       "label": "1 to 4 weeks of age",
+       "when": {
+        "pna_wk": {
+         "min": 1,
+         "max": 4
+        }
+       },
+       "dose": {
+        "lo": 50,
+        "hi": 50,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 8,
+       "src": "fda-cefotaxime",
+       "quote": "1-4 weeks of age 50 mg/kg per dose every 8 hours IV It is not necessary to differentiate between premature and normal-gestational age infants."
+      }
+     ]
+    },
+    {
+     "indication": "Suspected meningitis in young infants 0 to 59 days (WHO 2024 Table 3.1)",
+     "route": "IV/IM",
+     "bands": [
+      {
+       "label": "First week of life",
+       "when": {
+        "life_week": "first"
+       },
+       "dose": {
+        "lo": 50,
+        "hi": 50,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 12,
+       "src": "dm-who-sbi-2024",
+       "quote": "Cefotaxime IM/IV for a total of at least 3 weeks ■ 50 mg/kg/dose every 12 hours (first week of life)"
+      },
+      {
+       "label": "After the first week of life",
+       "when": {
+        "life_week": "after_first"
+       },
+       "dose": {
+        "lo": 50,
+        "hi": 50,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 6,
+       "src": "dm-who-sbi-2024",
+       "quote": "■ 50 mg/kg/dose every 6 hours (> first week of life)"
+      }
+     ]
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "ceftazidime",
+   "name": "Ceftazidime",
+   "aliases": [],
+   "class": "3rd-generation cephalosporin",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Neonates 0 to 4 weeks (FDA label)",
+     "route": "IV",
+     "bands": [
+      {
+       "label": "Neonates 0 to 4 weeks",
+       "when": {
+        "pna_wk": {
+         "min": 0,
+         "max": 4
+        }
+       },
+       "dose": {
+        "lo": 30,
+        "hi": 30,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 12,
+       "src": "fda-ceftazidime",
+       "quote": "Neonates (0 to 4 weeks) 30 mg/kg intravenous every 12 hours"
+      }
+     ]
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "ceftriaxone",
+   "name": "Ceftriaxone",
+   "aliases": [
+    "ceftriaxone sodium"
+   ],
+   "class": "3rd-generation cephalosporin",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Suspected meningitis in young infants 0 to 59 days (WHO 2024 Table 3.1)",
+     "route": "IV/IM",
+     "bands": [
+      {
+       "label": "Any postnatal age (first week or later)",
+       "when": {},
+       "dose": {
+        "lo": 100,
+        "hi": 100,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "once a day",
+       "src": "dm-who-sbi-2024",
+       "quote": "Ceftriaxone IM/IV for a total of at least 3 weeks ■ 100 mg/kg once a day (whether starting in the first week of life or later)"
+      }
+     ]
+    },
+    {
+     "indication": "Congenital syphilis, only if aqueous and procaine penicillin G are unavailable (CDC 2021, expert consultation)",
+     "route": "IV",
+     "bands": [
+      {
+       "label": "Neonate (penicillin unavailable)",
+       "when": {},
+       "dose": {
+        "lo": 50,
+        "hi": 75,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "day"
+       },
+       "every_h": 24,
+       "src": "dm-cdc-congenital-syphilis",
+       "quote": "If aqueous or procaine penicillin G is unavailable, ceftriaxone (50–75 mg/kg body weight/day IV every 24 hours) can be considered with thorough clinical and serologic follow-up and in consultation with an expert"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Contraindicated in premature neonates up to a postmenstrual age of 41 weeks.",
+     "src": "fda-ceftriaxone",
+     "quote": "Premature neonates: Ceftriaxone for injection is contraindicated in premature neonates up to a post-menstrual age of 41 weeks (gestational age + chronological age)."
+    },
+    {
+     "text": "Hyperbilirubinemic neonates should not be treated with ceftriaxone.",
+     "src": "fda-ceftriaxone",
+     "quote": "Hyperbilirubinemic neonates: Hyperbilirubinemic neonates should not be treated with ceftriaxone for injection."
+    },
+    {
+     "text": "Contraindicated in neonates 28 days or younger who need (or are expected to need) IV calcium, including parenteral nutrition, because of ceftriaxone-calcium precipitation.",
+     "src": "fda-ceftriaxone",
+     "quote": "Ceftriaxone for injection is contraindicated in neonates (≤ 28 days) if they require (or are expected to require) treatment with calcium-containing IV solutions, including continuous calcium-containing infusions such as parenteral nutrition because of the risk of precipitation of ceftriaxone-calcium"
+    },
+    {
+     "text": "In neonates give IV doses over 60 minutes to reduce the risk of bilirubin encephalopathy.",
+     "src": "fda-ceftriaxone",
+     "quote": "Intravenous doses should be given over 60 minutes in neonates to reduce the risk of bilirubin encephalopathy."
+    },
+    {
+     "text": "CDC: use ceftriaxone with caution in neonates with jaundice.",
+     "src": "dm-cdc-congenital-syphilis",
+     "quote": "Ceftriaxone should be used with caution in neonates with jaundice."
+    }
+   ]
+  },
+  {
+   "id": "meropenem",
+   "name": "Meropenem",
+   "aliases": [],
+   "class": "carbapenem",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Complicated intra-abdominal infection, under 3 months, normal renal function (FDA label)",
+     "route": "IV",
+     "bands": [
+      {
+       "label": "GA under 32 wk, PNA under 2 wk",
+       "when": {
+        "ga_wk": {
+         "lt": 32
+        },
+        "pna_wk": {
+         "lt": 2
+        }
+       },
+       "dose": {
+        "lo": 20,
+        "hi": 20,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 12,
+       "infuse": "over 30 minutes",
+       "src": "fda-meropenem",
+       "quote": "Table 3: Recommended Meropenem for injection Dosage Schedule for Pediatric Patients Less than 3 Months of Age with Complicated Intra-abdominal Infections and Normal Renal Function Age Group Dose (mg/kg) Dose Interval Infants less than 32 weeks GA and PNA less than 2 weeks 20 Every 12 hours"
+      },
+      {
+       "label": "GA under 32 wk, PNA 2 wk and older",
+       "when": {
+        "ga_wk": {
+         "lt": 32
+        },
+        "pna_wk": {
+         "min": 2
+        }
+       },
+       "dose": {
+        "lo": 20,
+        "hi": 20,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 8,
+       "infuse": "over 30 minutes",
+       "src": "fda-meropenem",
+       "quote": "Table 3: Recommended Meropenem for injection Dosage Schedule for Pediatric Patients Less than 3 Months of Age with Complicated Intra-abdominal Infections and Normal Renal Function Age Group Dose (mg/kg) Dose Interval Infants less than 32 weeks GA and PNA less than 2 weeks 20 Every 12 hours Infants less than 32 weeks GA and PNA 2 weeks and older 20 Every 8 hours"
+      },
+      {
+       "label": "GA 32 wk and older, PNA under 2 wk",
+       "when": {
+        "ga_wk": {
+         "min": 32
+        },
+        "pna_wk": {
+         "lt": 2
+        }
+       },
+       "dose": {
+        "lo": 20,
+        "hi": 20,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 8,
+       "infuse": "over 30 minutes",
+       "src": "fda-meropenem",
+       "quote": "Infants 32 weeks and older GA and PNA less than 2 weeks 20 Every 8 hours"
+      },
+      {
+       "label": "GA 32 wk and older, PNA 2 wk and older",
+       "when": {
+        "ga_wk": {
+         "min": 32
+        },
+        "pna_wk": {
+         "min": 2
+        }
+       },
+       "dose": {
+        "lo": 30,
+        "hi": 30,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 8,
+       "infuse": "over 30 minutes",
+       "src": "fda-meropenem",
+       "quote": "Infants 32 weeks and older GA and PNA 2 weeks and older 30 Every 8 hours"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Give as an IV infusion over 30 minutes in patients under 3 months; no experience in pediatric renal impairment.",
+     "src": "fda-meropenem",
+     "quote": "Meropenem for injection should be given as intravenous infusion over 30 minutes."
+    }
+   ]
+  },
+  {
+   "id": "metronidazole",
+   "name": "Metronidazole",
+   "aliases": [],
+   "class": "nitroimidazole",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Intra-abdominal infection, under 4 months (FDA label)",
+     "route": "IV",
+     "bands": [
+      {
+       "label": "Loading dose, PMA 23 to 48 wk",
+       "when": {
+        "pma_wk": {
+         "min": 23,
+         "max": 48
+        }
+       },
+       "dose": {
+        "lo": 15,
+        "hi": 15,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "once",
+       "src": "fda-metronidazole",
+       "quote": "Table 2: Recommended Dosage Schedule for the Treatment of Intra-Abdominal Infections in Pediatric Patients Less than 4 months of Age Post-menstrual age (Completed weeks) Loading Dose (mg/kg) Maintenance Dose* (mg/kg) Dosing interval (hours) 23 to <34 15 7.5 12 34 to 40 15 7.5 8 >40 to 48 15 7.5 6"
+      },
+      {
+       "label": "Maintenance, PMA 23 to under 34 wk",
+       "when": {
+        "pma_wk": {
+         "min": 23,
+         "lt": 34
+        }
+       },
+       "dose": {
+        "lo": 7.5,
+        "hi": 7.5,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 12,
+       "src": "fda-metronidazole",
+       "quote": "Table 2: Recommended Dosage Schedule for the Treatment of Intra-Abdominal Infections in Pediatric Patients Less than 4 months of Age Post-menstrual age (Completed weeks) Loading Dose (mg/kg) Maintenance Dose* (mg/kg) Dosing interval (hours) 23 to <34 15 7.5 12 34 to 40 15 7.5 8 >40 to 48 15 7.5 6"
+      },
+      {
+       "label": "Maintenance, PMA 34 to 40 wk",
+       "when": {
+        "pma_wk": {
+         "min": 34,
+         "max": 40
+        }
+       },
+       "dose": {
+        "lo": 7.5,
+        "hi": 7.5,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 8,
+       "src": "fda-metronidazole",
+       "quote": "Table 2: Recommended Dosage Schedule for the Treatment of Intra-Abdominal Infections in Pediatric Patients Less than 4 months of Age Post-menstrual age (Completed weeks) Loading Dose (mg/kg) Maintenance Dose* (mg/kg) Dosing interval (hours) 23 to <34 15 7.5 12 34 to 40 15 7.5 8 >40 to 48 15 7.5 6"
+      },
+      {
+       "label": "Maintenance, PMA over 40 to 48 wk",
+       "when": {
+        "pma_wk": {
+         "gt": 40,
+         "max": 48
+        }
+       },
+       "dose": {
+        "lo": 7.5,
+        "hi": 7.5,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 6,
+       "src": "fda-metronidazole",
+       "quote": "Table 2: Recommended Dosage Schedule for the Treatment of Intra-Abdominal Infections in Pediatric Patients Less than 4 months of Age Post-menstrual age (Completed weeks) Loading Dose (mg/kg) Maintenance Dose* (mg/kg) Dosing interval (hours) 23 to <34 15 7.5 12 34 to 40 15 7.5 8 >40 to 48 15 7.5 6"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "The first maintenance dose is given 24 hours after the start of the loading dose.",
+     "src": "fda-metronidazole",
+     "quote": "*The first maintenance dose is given 24 hours after the start of the loading dose."
+    }
+   ]
+  },
+  {
+   "id": "clindamycin",
+   "name": "Clindamycin",
+   "aliases": [
+    "clindamycin phosphate"
+   ],
+   "class": "lincosamide",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Neonates under 1 month (FDA label)",
+     "route": "IV",
+     "bands": [
+      {
+       "label": "Under 1 month, general",
+       "when": {
+        "pna_mo": {
+         "lt": 1
+        }
+       },
+       "dose": {
+        "lo": 15,
+        "hi": 20,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "day",
+        "divided": "3 to 4"
+       },
+       "freq": "3 to 4 equal doses a day",
+       "src": "fda-clindamycin",
+       "quote": "Pediatric Patients (less than 1 month): The recommended dosage is 15 to 20 mg/kg/day in 3 to 4 equal doses."
+      },
+      {
+       "label": "PMA 32 wk or less",
+       "when": {
+        "pma_wk": {
+         "max": 32
+        }
+       },
+       "dose": {
+        "lo": 5,
+        "hi": 5,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 8,
+       "src": "fda-clindamycin",
+       "quote": "Table 3: Dosing Regimens for Pediatric Patients with PMA less than or equal to 32 weeks, or greater than 32 weeks to less than or equal to 40 weeks PMA (weeks) Dose (mg/kg) Dosing Interval (hours) Less than or equal to 32 5 8 Greater than or equal to 32 weeks to less than or equal to 40 7 8"
+      },
+      {
+       "label": "PMA over 32 to 40 wk",
+       "when": {
+        "pma_wk": {
+         "gt": 32,
+         "max": 40
+        }
+       },
+       "dose": {
+        "lo": 7,
+        "hi": 7,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 8,
+       "src": "fda-clindamycin",
+       "quote": "Table 3: Dosing Regimens for Pediatric Patients with PMA less than or equal to 32 weeks, or greater than 32 weeks to less than or equal to 40 weeks PMA (weeks) Dose (mg/kg) Dosing Interval (hours) Less than or equal to 32 5 8 Greater than or equal to 32 weeks to less than or equal to 40 7 8"
+      }
+     ]
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "penicillin-g-aqueous",
+   "name": "Penicillin G (aqueous crystalline, potassium or sodium)",
+   "aliases": [
+    "benzylpenicillin",
+    "crystalline penicillin",
+    "Pfizerpen"
+   ],
+   "class": "natural penicillin",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Confirmed, highly probable or possible congenital syphilis (CDC 2021)",
+     "route": "IV",
+     "bands": [
+      {
+       "label": "First 7 days of life",
+       "when": {
+        "dol": {
+         "max": 7
+        }
+       },
+       "dose": {
+        "lo": 50000,
+        "hi": 50000,
+        "unit": "units",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 12,
+       "duration": "total of 10 days",
+       "src": "dm-cdc-congenital-syphilis",
+       "quote": "Aqueous crystalline penicillin G 100,000–150,000 units/kg body weight/day, administered as 50,000 units/kg body weight/dose by IV every 12 hours during the first 7 days of life and every 8 hours thereafter for a total of 10 days"
+      },
+      {
+       "label": "After day 7 of life",
+       "when": {
+        "dol": {
+         "gt": 7
+        }
+       },
+       "dose": {
+        "lo": 50000,
+        "hi": 50000,
+        "unit": "units",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 8,
+       "duration": "total of 10 days",
+       "src": "dm-cdc-congenital-syphilis",
+       "quote": "Aqueous crystalline penicillin G 100,000–150,000 units/kg body weight/day, administered as 50,000 units/kg body weight/dose by IV every 12 hours during the first 7 days of life and every 8 hours thereafter for a total of 10 days"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "CDC: if more than 1 day of therapy is missed, restart the entire course.",
+     "src": "dm-cdc-congenital-syphilis",
+     "quote": "If >1 day of therapy is missed, the entire course should be restarted."
+    },
+    {
+     "text": "FDA label: incompletely developed renal function in newborns may delay penicillin elimination; reduce dose and frequency.",
+     "src": "fda-penicillin-g-k",
+     "quote": "Incompletely developed renal function in newborns may delay elimination of penicillin; therefore, appropriate reductions in the dosage and frequency of administration should be made in these patients."
+    }
+   ]
+  },
+  {
+   "id": "penicillin-g-procaine",
+   "name": "Penicillin G procaine",
+   "aliases": [
+    "procaine penicillin"
+   ],
+   "class": "natural penicillin",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Confirmed, highly probable or possible congenital syphilis (CDC 2021)",
+     "route": "IM",
+     "bands": [
+      {
+       "label": "Neonate",
+       "when": {},
+       "dose": {
+        "lo": 50000,
+        "hi": 50000,
+        "unit": "units",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "single daily dose",
+       "duration": "10 days",
+       "src": "dm-cdc-congenital-syphilis",
+       "quote": "Procaine penicillin G 50,000 units/kg body weight/dose IM in a single daily dose for 10 days"
+      }
+     ]
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "penicillin-g-benzathine",
+   "name": "Penicillin G benzathine",
+   "aliases": [
+    "benzathine penicillin",
+    "Bicillin L-A"
+   ],
+   "class": "natural penicillin",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Possible congenital syphilis (normal evaluation, certain follow-up) or congenital syphilis less likely (CDC 2021)",
+     "route": "IM",
+     "bands": [
+      {
+       "label": "Neonate, single dose",
+       "when": {},
+       "dose": {
+        "lo": 50000,
+        "hi": 50000,
+        "unit": "units",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "single dose",
+       "src": "dm-cdc-congenital-syphilis",
+       "quote": "Benzathine penicillin G 50,000 units/kg body weight/dose IM in a single dose"
+      }
+     ]
+    },
+    {
+     "indication": "Congenital syphilis under 2 years (FDA label)",
+     "route": "IM",
+     "bands": [
+      {
+       "label": "Under 2 years",
+       "when": {
+        "age_yr": {
+         "lt": 2
+        }
+       },
+       "dose": {
+        "lo": 50000,
+        "hi": 50000,
+        "unit": "units",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "not stated in the label",
+       "src": "fda-penicillin-g-benzathine",
+       "quote": "Congenital—under 2 years of age: 50,000 units/kg/body weight"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "CDC: the single-dose benzathine regimen needs a normal evaluation and certain follow-up; otherwise give a 10-day course of penicillin G.",
+     "src": "dm-cdc-congenital-syphilis",
+     "quote": "If any part of the neonate’s evaluation is abnormal or not performed, if the CSF analysis is uninterpretable because of contamination with blood, or if follow-up is uncertain, a 10-day course of penicillin G is required."
+    },
+    {
+     "text": "Deep IM only; never IV or near an artery or nerve. In neonates the midlateral thigh may be preferable.",
+     "src": "fda-penicillin-g-benzathine",
+     "quote": "DO NOT INJECT INTO OR NEAR AN ARTERY OR NERVE, OR INTRAVENOUSLY OR ADMIX WITH OTHER INTRAVENOUS SOLUTIONS. (SEE WARNINGS SECTION.) Administer by DEEP INTRAMUSCULAR INJECTION in the upper, outer quadrant of the buttock (dorsogluteal) or the ventrogluteal site. In neonates, infants and small children, the midlateral aspect of the thigh may be preferable."
+    }
+   ]
+  },
+  {
+   "id": "nafcillin",
+   "name": "Nafcillin",
+   "aliases": [
+    "nafcillin sodium"
+   ],
+   "class": "antistaphylococcal penicillin",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Susceptible staphylococcal infection (FDA label table)",
+     "route": "IM",
+     "bands": [
+      {
+       "label": "Neonates",
+       "when": {},
+       "dose": {
+        "lo": 10,
+        "hi": 10,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "twice daily",
+       "src": "fda-nafcillin",
+       "quote": "25 mg/kg IM twice daily Neonates 10 mg/kg IM twice daily"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "No clinical experience with the continuous IV infusion route in neonates or infants.",
+     "src": "fda-nafcillin",
+     "quote": "There is no clinical experience available on the use of this agent in neonates or infants for this route of administration."
+    }
+   ]
+  },
+  {
+   "id": "oxacillin",
+   "name": "Oxacillin",
+   "aliases": [
+    "oxacillin sodium"
+   ],
+   "class": "antistaphylococcal penicillin",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Susceptible staphylococcal infection (FDA label table)",
+     "route": "IV/IM",
+     "bands": [
+      {
+       "label": "Premature and neonates",
+       "when": {},
+       "dose": {
+        "lo": 25,
+        "hi": 25,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "day"
+       },
+       "freq": "not stated in the label",
+       "src": "fda-oxacillin",
+       "quote": "Premature and Neonates 25 mg/kg/day IM or IV"
+      }
+     ]
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "cloxacillin",
+   "name": "Cloxacillin",
+   "aliases": [],
+   "class": "antistaphylococcal penicillin",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Suspected staphylococcal sepsis or pneumonia in young infants 0 to 59 days (WHO 2024 Table 3.1)",
+     "route": "IV/IM",
+     "bands": [
+      {
+       "label": "First week of life",
+       "when": {
+        "life_week": "first"
+       },
+       "dose": {
+        "lo": 50,
+        "hi": 50,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 12,
+       "src": "dm-who-sbi-2024",
+       "quote": "Cloxacillin IM/IV for a total of at least 10 days ■ 50 mg/kg/dose every 12 hours (first week of life)"
+      },
+      {
+       "label": "After the first week of life",
+       "when": {
+        "life_week": "after_first"
+       },
+       "dose": {
+        "lo": 50,
+        "hi": 50,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 8,
+       "src": "dm-who-sbi-2024",
+       "quote": "■ 50 mg/kg/dose every 8 hours (> first week of life)"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "WHO duration: at least 10 days for suspected staphylococcal sepsis, at least 7 days for suspected staphylococcal pneumonia, always with gentamicin.",
+     "src": "dm-who-sbi-2024",
+     "quote": "B.6 Suspected staphylococcal pneumonia in young infants aged 0–59 days in hospital settings Cloxacillin IM/IV for a total of at least 7 days"
+    }
+   ]
+  },
+  {
+   "id": "linezolid",
+   "name": "Linezolid",
+   "aliases": [
+    "Zyvox"
+   ],
+   "class": "oxazolidinone",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Susceptible Gram-positive infection (FDA label)",
+     "route": "IV/oral",
+     "bands": [
+      {
+       "label": "Preterm (GA under 34 wk) and under 7 days: starting regimen",
+       "when": {
+        "ga_wk": {
+         "lt": 34
+        },
+        "pna_d": {
+         "lt": 7
+        }
+       },
+       "dose": {
+        "lo": 10,
+        "hi": 10,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 12,
+       "src": "fda-linezolid",
+       "quote": "Most pre-term neonates less than 7 days of age (gestational age less than 34 weeks) have lower systemic linezolid clearance values and larger AUC values than many full-term neonates and older infants. These neonates should be initiated with a dosing regimen of 10 mg/kg every 12 hours."
+      },
+      {
+       "label": "All neonates by 7 days of life",
+       "when": {
+        "pna_d": {
+         "min": 7
+        }
+       },
+       "dose": {
+        "lo": 10,
+        "hi": 10,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 8,
+       "src": "fda-linezolid",
+       "quote": "All neonatal patients should receive 10 mg/kg every 8 hours by 7 days of life"
+      },
+      {
+       "label": "Birth through 11 years (standard pediatric)",
+       "when": {},
+       "dose": {
+        "lo": 10,
+        "hi": 10,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 8,
+       "src": "fda-linezolid",
+       "quote": "Pediatric Patients (Birth through 11 years of Age) Adults and Adolescents (12 years and Older) Duration (days) Nosocomial pneumonia 10 mg/kg intravenous or oral every 8 hours"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Preterm neonates under 7 days with a sub-optimal response: 8-hourly dosing may be considered.",
+     "src": "fda-linezolid",
+     "quote": "Consideration may be given to the use of 10 mg/kg every 8 hours regimen in neonates with a sub-optimal clinical response."
+    }
+   ]
+  },
+  {
+   "id": "acyclovir",
+   "name": "Acyclovir",
+   "aliases": [
+    "aciclovir",
+    "acyclovir sodium"
+   ],
+   "class": "antiviral (nucleoside analogue)",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Neonatal herpes simplex virus infection, birth to 3 months (FDA label)",
+     "route": "IV",
+     "bands": [
+      {
+       "label": "Birth to 3 months",
+       "when": {
+        "pna_mo": {
+         "max": 3
+        }
+       },
+       "dose": {
+        "lo": 10,
+        "hi": 10,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 8,
+       "infuse": "constant rate over 1 hour",
+       "duration": "10 days",
+       "src": "fda-acyclovir",
+       "quote": "Neonatal Herpes Simplex Virus Infections (Birth to 3 months) 10 mg/kg infused at a constant rate over 1 hour, every 8 hours for 10 days."
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "FDA label: 15 or 20 mg/kg every 8 hours have been used in neonatal HSV, but safety and efficacy of these doses are not known.",
+     "src": "fda-acyclovir",
+     "quote": "In neonatal herpes simplex infections, doses of 15 mg/kg or 20 mg/kg (infused at a constant rate over 1 hour every 8 hours) have been used; the safety and efficacy of these doses are not known."
+    }
+   ]
+  },
+  {
+   "id": "zidovudine",
+   "name": "Zidovudine",
+   "aliases": [
+    "ZDV",
+    "AZT",
+    "Retrovir"
+   ],
+   "class": "antiretroviral (NRTI)",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Prevention of maternal-fetal HIV-1 transmission, neonatal dosing (FDA label)",
+     "route": "oral",
+     "bands": [
+      {
+       "label": "Neonate, oral (start within 12 h of birth, through 6 weeks)",
+       "when": {},
+       "dose": {
+        "lo": 2,
+        "hi": 2,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 6,
+       "src": "fda-zidovudine",
+       "quote": "Recommended Neonatal Dosages of RETROVIR Route Total Daily Dose Dose and Dosage Regimen Oral 8 mg/kg/day 2 mg/kg every 6 hours"
+      }
+     ]
+    },
+    {
+     "indication": "Prevention of maternal-fetal HIV-1 transmission, neonate unable to take oral (FDA label)",
+     "route": "IV",
+     "bands": [
+      {
+       "label": "Neonate, IV",
+       "when": {},
+       "dose": {
+        "lo": 1.5,
+        "hi": 1.5,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 6,
+       "infuse": "over 30 minutes",
+       "src": "fda-zidovudine",
+       "quote": "Intravenous 6 mg/kg/day 1.5 mg/kg infused over 30 minutes, every 6 hours"
+      }
+     ]
+    },
+    {
+     "indication": "ARV prophylaxis or presumptive HIV therapy, by GA at birth (HHS perinatal guideline Table 11.1)",
+     "route": "oral",
+     "bands": [
+      {
+       "label": "GA 35 wk or more, birth to 6 weeks",
+       "when": {
+        "ga_wk": {
+         "min": 35
+        },
+        "pna_wk": {
+         "max": 6
+        }
+       },
+       "dose": {
+        "lo": 4,
+        "hi": 4,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "twice daily",
+       "src": "dm-hhs-perinatal-infant",
+       "quote": "≥35 Weeks Gestation at Birth Birth to Age ≤6 Weeks ZDV 4 mg/kg per dose orally twice daily"
+      },
+      {
+       "label": "GA 35 wk or more, birth to 4 weeks, weight 2 to under 3 kg (simplified weight band, 10 mg/mL syrup)",
+       "when": {
+        "ga_wk": {
+         "min": 35
+        },
+        "pna_wk": {
+         "max": 4
+        },
+        "wt": {
+         "min": 2,
+         "lt": 3,
+         "unit": "kg"
+        }
+       },
+       "dose": {
+        "lo": 1,
+        "hi": 1,
+        "unit": "mL of 10 mg/mL syrup",
+        "per": "dose",
+        "basis": "dose"
+       },
+       "freq": "twice daily",
+       "src": "dm-hhs-perinatal-infant",
+       "quote": "Simplified Weight-Band Dosing for Newborns Aged ≥35 Weeks of Gestation From Birth to 4 Weeks Weight Band Volume of ZDV 10 mg/mL Oral Syrup Twice Daily 2 to <3 kg 1 mL"
+      },
+      {
+       "label": "GA 35 wk or more, birth to 4 weeks, weight 3 to under 4 kg (simplified weight band, 10 mg/mL syrup)",
+       "when": {
+        "ga_wk": {
+         "min": 35
+        },
+        "pna_wk": {
+         "max": 4
+        },
+        "wt": {
+         "min": 3,
+         "lt": 4,
+         "unit": "kg"
+        }
+       },
+       "dose": {
+        "lo": 1.5,
+        "hi": 1.5,
+        "unit": "mL of 10 mg/mL syrup",
+        "per": "dose",
+        "basis": "dose"
+       },
+       "freq": "twice daily",
+       "src": "dm-hhs-perinatal-infant",
+       "quote": "Simplified Weight-Band Dosing for Newborns Aged ≥35 Weeks of Gestation From Birth to 4 Weeks Weight Band Volume of ZDV 10 mg/mL Oral Syrup Twice Daily 2 to <3 kg 1 mL 3 to <4 kg 1.5 mL"
+      },
+      {
+       "label": "GA 35 wk or more, birth to 4 weeks, weight 4 to under 5 kg (simplified weight band, 10 mg/mL syrup)",
+       "when": {
+        "ga_wk": {
+         "min": 35
+        },
+        "pna_wk": {
+         "max": 4
+        },
+        "wt": {
+         "min": 4,
+         "lt": 5,
+         "unit": "kg"
+        }
+       },
+       "dose": {
+        "lo": 2,
+        "hi": 2,
+        "unit": "mL of 10 mg/mL syrup",
+        "per": "dose",
+        "basis": "dose"
+       },
+       "freq": "twice daily",
+       "src": "dm-hhs-perinatal-infant",
+       "quote": "Simplified Weight-Band Dosing for Newborns Aged ≥35 Weeks of Gestation From Birth to 4 Weeks Weight Band Volume of ZDV 10 mg/mL Oral Syrup Twice Daily 2 to <3 kg 1 mL 3 to <4 kg 1.5 mL 4 to <5 kg 2 mL"
+      },
+      {
+       "label": "GA 30 to under 35 wk, birth to under 2 weeks",
+       "when": {
+        "ga_wk": {
+         "min": 30,
+         "lt": 35
+        },
+        "pna_wk": {
+         "lt": 2
+        }
+       },
+       "dose": {
+        "lo": 2,
+        "hi": 2,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "twice daily",
+       "src": "dm-hhs-perinatal-infant",
+       "quote": "≥30 Weeks to <35 Weeks of Gestation at Birth Birth to Age <2 Weeks ZDV 2 mg/kg per dose orally twice daily"
+      },
+      {
+       "label": "GA 30 to under 35 wk, 2 to 6 weeks",
+       "when": {
+        "ga_wk": {
+         "min": 30,
+         "lt": 35
+        },
+        "pna_wk": {
+         "min": 2,
+         "max": 6
+        }
+       },
+       "dose": {
+        "lo": 3,
+        "hi": 3,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "twice daily",
+       "src": "dm-hhs-perinatal-infant",
+       "quote": "≥30 Weeks to <35 Weeks of Gestation at Birth Birth to Age <2 Weeks ZDV 2 mg/kg per dose orally twice daily Age 2 Weeks to ≤6 Weeks ZDV 3 mg/kg per dose orally twice daily"
+      },
+      {
+       "label": "GA under 30 wk, birth to under 4 weeks",
+       "when": {
+        "ga_wk": {
+         "lt": 30
+        },
+        "pna_wk": {
+         "lt": 4
+        }
+       },
+       "dose": {
+        "lo": 2,
+        "hi": 2,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "twice daily",
+       "src": "dm-hhs-perinatal-infant",
+       "quote": "<30 Weeks Gestation at Birth Birth to Age <4 Weeks ZDV 2 mg/kg per dose orally twice daily"
+      },
+      {
+       "label": "GA under 30 wk, 4 to 6 weeks",
+       "when": {
+        "ga_wk": {
+         "lt": 30
+        },
+        "pna_wk": {
+         "min": 4,
+         "max": 6
+        }
+       },
+       "dose": {
+        "lo": 3,
+        "hi": 3,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "twice daily",
+       "src": "dm-hhs-perinatal-infant",
+       "quote": "<30 Weeks Gestation at Birth Birth to Age <4 Weeks ZDV 2 mg/kg per dose orally twice daily Age 4 Weeks to ≤6 Weeks ZDV 3 mg/kg per dose orally twice daily"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "HHS: newborns unable to tolerate oral agents get an IV dose of 75% of the oral dose at the same interval.",
+     "src": "dm-hhs-perinatal-infant",
+     "quote": "For newborns who are unable to tolerate oral agents, the IV dose is 75% of the oral dose while maintaining the same dosing interval."
+    },
+    {
+     "text": "FDA label: start within 12 hours after birth and continue through 6 weeks of age.",
+     "src": "fda-zidovudine",
+     "quote": "Start neonatal dosing within 12 hours after birth and continue through 6 weeks of age."
+    }
+   ]
+  },
+  {
+   "id": "nevirapine",
+   "name": "Nevirapine",
+   "aliases": [
+    "NVP"
+   ],
+   "class": "antiretroviral (NNRTI)",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Presumptive HIV therapy (treatment doses), by GA at birth (HHS perinatal guideline Table 11.1)",
+     "route": "oral",
+     "bands": [
+      {
+       "label": "GA 37 wk or more, birth to 6 weeks",
+       "when": {
+        "ga_wk": {
+         "min": 37
+        },
+        "pna_wk": {
+         "max": 6
+        }
+       },
+       "dose": {
+        "lo": 6,
+        "hi": 6,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "twice daily",
+       "src": "dm-hhs-perinatal-infant",
+       "quote": "≥37 Weeks Gestation at Birth Birth to Age ≤6 Weeks NVP 6 mg/kg per dose orally twice daily"
+      },
+      {
+       "label": "GA 34 to under 37 wk, birth to under 1 week",
+       "when": {
+        "ga_wk": {
+         "min": 34,
+         "lt": 37
+        },
+        "pna_wk": {
+         "lt": 1
+        }
+       },
+       "dose": {
+        "lo": 4,
+        "hi": 4,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "twice daily",
+       "src": "dm-hhs-perinatal-infant",
+       "quote": "≥34 to <37 Weeks’ Gestation at Birth Birth to Age <1 Week NVP 4 mg/kg per dose orally twice daily"
+      },
+      {
+       "label": "GA 34 to under 37 wk, 1 to 6 weeks",
+       "when": {
+        "ga_wk": {
+         "min": 34,
+         "lt": 37
+        },
+        "pna_wk": {
+         "min": 1,
+         "max": 6
+        }
+       },
+       "dose": {
+        "lo": 6,
+        "hi": 6,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "twice daily",
+       "src": "dm-hhs-perinatal-infant",
+       "quote": "≥34 to <37 Weeks’ Gestation at Birth Birth to Age <1 Week NVP 4 mg/kg per dose orally twice daily Age ≥1 Week to ≤6 Weeks NVP 6 mg/kg per dose orally twice daily"
+      },
+      {
+       "label": "GA 32 to under 34 wk, birth to under 2 weeks",
+       "when": {
+        "ga_wk": {
+         "min": 32,
+         "lt": 34
+        },
+        "pna_wk": {
+         "lt": 2
+        }
+       },
+       "dose": {
+        "lo": 2,
+        "hi": 2,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "twice daily",
+       "src": "dm-hhs-perinatal-infant",
+       "quote": "≥32 Weeks to <34 Weeks of Gestation at Birth Birth to Age <2 Weeks NVP 2 mg/kg per dose orally twice daily"
+      },
+      {
+       "label": "GA 32 to under 34 wk, 2 to under 4 weeks",
+       "when": {
+        "ga_wk": {
+         "min": 32,
+         "lt": 34
+        },
+        "pna_wk": {
+         "min": 2,
+         "lt": 4
+        }
+       },
+       "dose": {
+        "lo": 4,
+        "hi": 4,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "twice daily",
+       "src": "dm-hhs-perinatal-infant",
+       "quote": "≥32 Weeks to <34 Weeks of Gestation at Birth Birth to Age <2 Weeks NVP 2 mg/kg per dose orally twice daily Age ≥2 Weeks to <4 Weeks NVP 4 mg/kg per dose orally twice daily"
+      },
+      {
+       "label": "GA 32 to under 34 wk, 4 to 6 weeks",
+       "when": {
+        "ga_wk": {
+         "min": 32,
+         "lt": 34
+        },
+        "pna_wk": {
+         "min": 4,
+         "max": 6
+        }
+       },
+       "dose": {
+        "lo": 6,
+        "hi": 6,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "twice daily",
+       "src": "dm-hhs-perinatal-infant",
+       "quote": "≥32 Weeks to <34 Weeks of Gestation at Birth Birth to Age <2 Weeks NVP 2 mg/kg per dose orally twice daily Age ≥2 Weeks to <4 Weeks NVP 4 mg/kg per dose orally twice daily Age ≥4 Weeks to ≤6 Weeks NVP 6 mg/kg per dose orally twice daily"
+      }
+     ]
+    },
+    {
+     "indication": "Extended prophylaxis during breastfeeding, newborns GA 36 wk or more (HHS Table 12.1, 10 mg/mL syrup once daily)",
+     "route": "oral",
+     "bands": [
+      {
+       "label": "Birth to 6 weeks, 2 to under 3 kg",
+       "when": {
+        "ga_wk": {
+         "min": 36
+        },
+        "pna_wk": {
+         "max": 6
+        },
+        "wt": {
+         "min": 2,
+         "lt": 3,
+         "unit": "kg"
+        }
+       },
+       "dose": {
+        "lo": 10,
+        "hi": 10,
+        "unit": "mg",
+        "per": "dose",
+        "basis": "dose"
+       },
+       "freq": "once daily",
+       "src": "dm-hhs-perinatal-infant",
+       "quote": "Simplified Age-Based NVP Dosing for Newborns ≥36 Weeks’ Gestation Receiving Extended NVP Prophylaxis During Breastfeeding b,c Age Dose and Volume of NVP 10 mg/mL Oral Syrup Administered Once Daily Birth to 6 weeks 2 kg to <3 kg: 10 mg (1 mL)"
+      },
+      {
+       "label": "Birth to 6 weeks, 3 kg or more",
+       "when": {
+        "ga_wk": {
+         "min": 36
+        },
+        "pna_wk": {
+         "max": 6
+        },
+        "wt": {
+         "min": 3,
+         "unit": "kg"
+        }
+       },
+       "dose": {
+        "lo": 15,
+        "hi": 15,
+        "unit": "mg",
+        "per": "dose",
+        "basis": "dose"
+       },
+       "freq": "once daily",
+       "src": "dm-hhs-perinatal-infant",
+       "quote": "Simplified Age-Based NVP Dosing for Newborns ≥36 Weeks’ Gestation Receiving Extended NVP Prophylaxis During Breastfeeding b,c Age Dose and Volume of NVP 10 mg/mL Oral Syrup Administered Once Daily Birth to 6 weeks 2 kg to <3 kg: 10 mg (1 mL) ≥3 kg: 15 mg (1.5 mL)"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "HHS: NVP dosing for GA 32 to under 37 weeks is not FDA approved; doses for GA 32 to under 34 weeks are model-based and might underestimate toxicity.",
+     "src": "dm-hhs-perinatal-infant",
+     "quote": "This NVP dosing for infants ≥32 to <37 weeks’ gestation at birth is not approved by the FDA. The recommended doses for infants ≥32 to <34 weeks’ gestation at birth are based on modeling and might underestimate potential toxicity"
+    },
+    {
+     "text": "HHS: do not use NVP if HIV-2 infection is present or suspected.",
+     "src": "dm-hhs-perinatal-infant",
+     "quote": "Do not use NVP if HIV­2 infection (or HIV-2 co-‍infection with HIV-1) is present or suspected"
+    }
+   ]
+  },
+  {
+   "id": "fluconazole",
+   "name": "Fluconazole",
+   "aliases": [],
+   "class": "azole antifungal",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Premature newborns (FDA label; dose in mg/kg as for older children)",
+     "route": "oral/IV",
+     "bands": [
+      {
+       "label": "Premature GA 26 to 29 wk, first two weeks of life (interval only)",
+       "when": {
+        "ga_wk": {
+         "min": 26,
+         "max": 29
+        },
+        "pna_wk": {
+         "lt": 2
+        }
+       },
+       "every_h": 72,
+       "dose_note": "same mg/kg as older children; the label gives no separate neonatal mg/kg figure",
+       "src": "fda-fluconazole",
+       "quote": "Based on the prolonged half-life seen in premature newborns (gestational age 26 to 29 weeks), these children, in the first two weeks of life, should receive the same dosage (mg/kg) as in older children, but administered every 72 hours. After the first two weeks, these children should be dosed once daily."
+      },
+      {
+       "label": "Premature GA 26 to 29 wk, after the first two weeks (interval only)",
+       "when": {
+        "ga_wk": {
+         "min": 26,
+         "max": 29
+        },
+        "pna_wk": {
+         "min": 2
+        }
+       },
+       "freq": "once daily",
+       "dose_note": "same mg/kg as older children",
+       "src": "fda-fluconazole",
+       "quote": "Based on the prolonged half-life seen in premature newborns (gestational age 26 to 29 weeks), these children, in the first two weeks of life, should receive the same dosage (mg/kg) as in older children, but administered every 72 hours. After the first two weeks, these children should be dosed once daily."
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "No pharmacokinetic information in full-term newborns.",
+     "src": "fda-fluconazole",
+     "quote": "No information regarding fluconazole pharmacokinetics in full-term newborns is available."
+    }
+   ]
+  },
+  {
+   "id": "micafungin",
+   "name": "Micafungin",
+   "aliases": [
+    "micafungin sodium"
+   ],
+   "class": "echinocandin",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Candidemia, acute disseminated candidiasis, Candida peritonitis and abscesses WITHOUT meningoencephalitis or ocular dissemination, under 4 months (FDA label)",
+     "route": "IV",
+     "bands": [
+      {
+       "label": "Younger than 4 months",
+       "when": {
+        "pna_mo": {
+         "lt": 4
+        }
+       },
+       "dose": {
+        "lo": 4,
+        "hi": 4,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "once daily",
+       "infuse": "over 1 hour",
+       "src": "fda-micafungin",
+       "quote": "2.3 Dosage for Pediatric Patients Younger than 4 Months of Age Treatment of Candidemia, Acute Disseminated Candidiasis, Candida Peritonitis and Abscesses without meningoencephalitis and/or ocular dissemination The recommended dosage is 4 mg/kg once daily."
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Not established for candidemia with meningoencephalitis or ocular dissemination under 4 months; a higher dose may be needed.",
+     "src": "fda-micafungin",
+     "quote": "The safety and effectiveness of micafungin for injection have not been established for the treatment of candidemia with meningoencephalitis and/or ocular dissemination in pediatric patients younger than 4 months of age as a higher dose may be needed"
+    }
+   ]
+  },
+  {
+   "id": "oseltamivir",
+   "name": "Oseltamivir",
+   "aliases": [
+    "oseltamivir phosphate",
+    "Tamiflu"
+   ],
+   "class": "neuraminidase inhibitor",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Treatment of influenza, 2 weeks to under 1 year (FDA label)",
+     "route": "oral",
+     "bands": [
+      {
+       "label": "2 weeks to under 1 year",
+       "when": {
+        "pna_wk": {
+         "min": 2
+        },
+        "age_yr": {
+         "lt": 1
+        }
+       },
+       "dose": {
+        "lo": 3,
+        "hi": 3,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "twice daily",
+       "duration": "5 days",
+       "src": "fda-oseltamivir",
+       "quote": "Pediatric patients 2 weeks to less than 1 year of age: 3mg/kg twice daily for 5 days"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Treatment is labelled from 2 weeks of age; prophylaxis only from 1 year.",
+     "src": "fda-oseltamivir",
+     "quote": "Administer Oseltamivir Phosphate for the treatment of influenza in patients 2 weeks of age or older [see Dosage and Administration ( 2.2 )] or for prophylaxis of influenza in patients 1 year and older"
+    }
+   ]
+  },
+  {
+   "id": "azithromycin",
+   "name": "Azithromycin",
+   "aliases": [],
+   "class": "macrolide",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Pertussis treatment or postexposure prophylaxis, infants under 6 months incl. neonates (CDC 2005)",
+     "route": "oral",
+     "bands": [
+      {
+       "label": "Infants under 6 months",
+       "when": {
+        "age_mo": {
+         "lt": 6
+        }
+       },
+       "dose": {
+        "lo": 10,
+        "hi": 10,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "day"
+       },
+       "freq": "single daily dose",
+       "duration": "5 days",
+       "src": "dm-cdc-pertussis-2005",
+       "quote": "It is administered as a single daily dose. Recommended regimen: Infants aged <6 months: 10 mg/kg per day for 5 days."
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "CDC: azithromycin is the preferred macrolide under 1 month; monitor for infantile hypertrophic pyloric stenosis.",
+     "src": "dm-cdc-pertussis",
+     "quote": "Monitor infants <1 month of age who receive a macrolide for the development of IHPS and for other serious adverse events."
+    }
+   ]
+  },
+  {
+   "id": "erythromycin",
+   "name": "Erythromycin",
+   "aliases": [
+    "erythromycin ethylsuccinate",
+    "erythromycin ophthalmic ointment"
+   ],
+   "class": "macrolide",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Pertussis, infants under 1 month ONLY if azithromycin is unavailable (CDC 2005)",
+     "route": "oral",
+     "bands": [
+      {
+       "label": "Under 1 month (azithromycin unavailable)",
+       "when": {
+        "age_mo": {
+         "lt": 1
+        }
+       },
+       "dose": {
+        "lo": 40,
+        "hi": 50,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "day",
+        "divided": 4
+       },
+       "freq": "4 divided doses a day",
+       "src": "dm-cdc-pertussis-2005",
+       "quote": "Recommended regimen: Infants aged <1 month: not preferred because of risk for IHPS. Azithromycin is the recommended antimicrobial agent. If azithromycin is unavailable and erythromycin is used, the dose is 40--50 mg/kg per day in 4 divided doses."
+      }
+     ]
+    },
+    {
+     "indication": "Prophylaxis of neonatal gonococcal or chlamydial ophthalmia (FDA label)",
+     "route": "ophthalmic",
+     "bands": [
+      {
+       "label": "Newborn, each eye",
+       "when": {},
+       "dose": {
+        "lo": 1,
+        "hi": 1,
+        "unit": "cm ribbon",
+        "per": "dose",
+        "basis": "dose"
+       },
+       "freq": "once, into each lower conjunctival sac",
+       "src": "fda-erythromycin-ophth",
+       "quote": "For prophylaxis of neonatal gonococcal or chlamydial ophthalmia, a ribbon of ointment approximately 1 cm in length should be instilled into each lower conjunctival sac."
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "CDC: increased risk of infantile hypertrophic pyloric stenosis in neonates after erythromycin; monitor.",
+     "src": "dm-cdc-pertussis-2005",
+     "quote": "An increased risk for IHPS has been reported in neonates during the month after erythromycin administration."
+    },
+    {
+     "text": "Ophthalmic ointment should not be flushed from the eye; use a new tube for each infant.",
+     "src": "fda-erythromycin-ophth",
+     "quote": "The ointment should not be flushed from the eye following instillation. A new tube should be used for each infant."
+    }
+   ]
+  },
+  {
+   "id": "amphotericin-b-liposomal",
+   "name": "Amphotericin B liposomal",
+   "aliases": [
+    "liposomal amphotericin"
+   ],
+   "class": "polyene antifungal",
+   "highAlert": false,
+   "regimens": [],
+   "notes": [
+    {
+     "text": "No neonatal dose in the label: safety and effectiveness below 1 month of age not established.",
+     "src": "fda-ampho-liposomal",
+     "quote": "Safety and effectiveness in pediatric patients below the age of one month have not been established"
+    },
+    {
+     "text": "Lower concentrations may suit infants and small children to give enough infusion volume.",
+     "src": "fda-ampho-liposomal",
+     "quote": "Lower concentrations (0.2 mg/mL to 0.5 mg/mL) may be appropriate for infants and small children to provide sufficient volume for infusion."
+    }
+   ]
+  },
+  {
+   "id": "amphotericin-b-deoxycholate",
+   "name": "Amphotericin B deoxycholate (conventional)",
+   "aliases": [
+    "conventional amphotericin"
+   ],
+   "class": "polyene antifungal",
+   "highAlert": false,
+   "regimens": [],
+   "notes": [
+    {
+     "text": "No neonatal dose in the label; pediatric use should be limited to the smallest effective dose.",
+     "src": "fda-ampho-deoxycholate",
+     "quote": "Amphotericin B for Injection when administered to pediatric patients should be limited to the smallest dose compatible with an effective therapeutic regimen."
+    }
+   ]
+  }
+ ]
+}

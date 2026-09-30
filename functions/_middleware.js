@@ -109,7 +109,10 @@ export async function onRequest(context) {
     const p = url.pathname;
     const INTERNAL_DIR = /^\/(docs|design|vault|tests?|scripts|tools|ios|android|worker|local-plugins|Packages|backend|node_modules|\.git|\.github|\.claude)\//i;
     const INTERNAL_FILE = /^\/(CLAUDE\.md|AGENTS\.md|README(\.md)?|wrangler\.toml|package(-lock)?\.json|capacitor\.config\.json|tsconfig[^/]*\.json|\.gitignore|\.assetsignore)$/i;
-    if (INTERNAL_DIR.test(p) || INTERNAL_FILE.test(p) || /\.md$/i.test(p)) {
+    // data/neo/sources/*.txt are provenance snapshots of third-party documents (neonatal layer): kept in
+    // the repo for the validator, never served.
+    const INTERNAL_SUB = /^\/data\/neo\/sources\//i;
+    if (INTERNAL_DIR.test(p) || INTERNAL_SUB.test(p) || INTERNAL_FILE.test(p) || /\.md$/i.test(p)) {
       return new Response("Not found", { status: 404, headers: { "content-type": "text/plain", "cache-control": "no-store" } });
     }
   }
