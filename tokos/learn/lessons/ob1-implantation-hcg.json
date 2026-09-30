@@ -3,7 +3,12 @@
   "unit": "ob1",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "competencies": [
     "OG3.1"
   ],
@@ -16,22 +21,21 @@
     "hi": "निषेचन नली में होता है। लगभग एक हफ़्ते बाद [[blastocyst]] गर्भाशय की परत में धँस जाता है ([[implantation]]) और [[hcg]] बनाना शुरू करता है, वही हार्मोन जो गर्भावस्था को टिकाए रखता है।"
   },
   "see": {
-    "diagram": "diagrams/ob1-implantation-hcg.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 768,
     "alt": {
-      "en": "Front view of the womb, with one tube running left to the ovary. Along the tube, from left to right: an egg with sperm around it, a two-cell embryo, and a small ball of cells. Inside the womb cavity a hollow ball floats. On the upper right wall a similar ball sits sunk into the lining with short roots. A dotted purple line runs from it over the top back to the ovary, ending at a yellow patch.",
-      "hi": "गर्भाशय का सामने से चित्र, जिसकी एक नली बाईं ओर अंडाशय तक जाती है। नली में बाएँ से दाएँ: शुक्राणुओं से घिरा अंडा, दो कोशिकाओं वाला भ्रूण और कोशिकाओं की छोटी गेंद। गर्भाशय की गुहा में एक खोखली गेंद तैर रही है। ऊपरी दाईं दीवार पर वैसी ही गेंद छोटी जड़ों के साथ परत में धँसी है। उससे एक बैंगनी बिंदीदार रेखा ऊपर से घूमकर अंडाशय के पीले हिस्से तक जाती है।"
+      "en": "Realistic medical illustration showing human fertilization, tubal transport, and implantation. On the left, an ovary with a prominent corpus luteum and follicles sits beside the fimbriae of the fallopian tube. Along the fallopian tube, stages of early development progress from a fertilised oocyte in the ampulla through multi-cell cleavage and morula stages. On the right, the coronal section of the uterus reveals a floating blastocyst in the cavity and an implanting blastocyst burrowing into the secretory endometrium.",
+      "hi": "मानव निषेचन, नली के माध्यम से परिवहन और इम्प्लांटेशन को दर्शाने वाला यथार्थवादी चिकित्सीय चित्र। बायीं ओर, एक प्रमुख कॉर्पस ल्यूटियम और रोमों वाला अंडाशय फैलोपियन ट्यूब के फिम्ब्रिया के पास स्थित है। फैलोपियन ट्यूब के साथ, शुरुआती विकास के चरण एम्पुला में निषेचित डिंब से लेकर बहु-कोशिकीय क्लीवेज और मरुला चरणों तक आगे बढ़ते हैं। दायीं ओर, गर्भाशय का कोरोनल सेक्शन गुहा में तैरते हुए ब्लास्टोसिस्ट और स्रावी एंडोमेट्रियम में धँसते हुए इम्प्लांटिंग ब्लास्टोसिस्ट को दिखाता है।"
     },
     "caption": {
-      "en": "The journey from fertilisation in the tube to implantation in the womb, and the hCG signal back to the ovary.",
-      "hi": "नली में निषेचन से गर्भाशय में इम्प्लांटेशन तक का सफ़र, और अंडाशय तक लौटता hCG का संकेत।"
+      "en": "The journey from fertilisation in the tube to implantation in the womb.",
+      "hi": "नली में निषेचन से गर्भाशय में इम्प्लांटेशन तक का सफ़र।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.35,
-        "y": 0.333,
+        "x": 0.28,
+        "y": 0.2,
         "label": {
           "en": "Fertilisation",
           "hi": "निषेचन"
@@ -42,8 +46,8 @@
         }
       },
       {
-        "x": 0.463,
-        "y": 0.32,
+        "x": 0.46,
+        "y": 0.24,
         "label": {
           "en": "Dividing",
           "hi": "विभाजन"
@@ -54,8 +58,8 @@
         }
       },
       {
-        "x": 0.704,
-        "y": 0.5,
+        "x": 0.92,
+        "y": 0.48,
         "label": {
           "en": "Blastocyst",
           "hi": "ब्लास्टोसिस्ट"
@@ -66,8 +70,8 @@
         }
       },
       {
-        "x": 0.817,
-        "y": 0.407,
+        "x": 0.89,
+        "y": 0.34,
         "label": {
           "en": "Implantation",
           "hi": "इम्प्लांटेशन"
@@ -78,20 +82,8 @@
         }
       },
       {
-        "x": 0.521,
-        "y": 0.087,
-        "label": {
-          "en": "hCG signal",
-          "hi": "hCG का संकेत"
-        },
-        "note": {
-          "en": "The outer cells release hCG into the mother's blood. It travels to the ovary.",
-          "hi": "बाहरी कोशिकाएँ hCG को माँ के खून में छोड़ती हैं। यह अंडाशय तक पहुँचता है।"
-        }
-      },
-      {
-        "x": 0.208,
-        "y": 0.587,
+        "x": 0.28,
+        "y": 0.62,
         "label": {
           "en": "Corpus luteum",
           "hi": "कॉर्पस ल्यूटियम"
@@ -101,6 +93,10 @@
           "hi": "hCG इस पीले हिस्से को प्रोजेस्टेरोन बनाते रहने का संदेश देता है, ताकि परत झड़े नहीं।"
         }
       }
+    ],
+    "img": "learn/media/real/ob1-implantation-hcg.webp",
+    "more": [
+      "ob1-implantation-hcg"
     ]
   },
   "why": {

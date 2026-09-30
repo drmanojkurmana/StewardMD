@@ -96,6 +96,14 @@ test("no em-dash in any obR file", () => {
 
 test("every diagram has an original credit entry, matching size and no text or script in the SVG", () => {
   lessons.forEach((l) => {
+    if (l.see.img) {
+      assert.ok(existsSync(`${R}/media/${l.see.img.replace(/^learn\/media\//, "")}`), l.id + " img exists");
+      const realItem = media[l.id + "-real"];
+      assert.ok(realItem, l.id + "-real credited");
+      assert.equal(realItem.route, "original");
+      l.see.hotspots.forEach((h) => assert.ok(h.x >= 0 && h.x <= 1 && h.y >= 0 && h.y <= 1));
+      return;
+    }
     const item = media[l.see.diagram.replace(/^diagrams\//, "").replace(/\.svg$/, "")];
     assert.ok(item, l.id + " diagram not credited");
     assert.equal(item.route, "original");
@@ -114,6 +122,10 @@ test("every diagram has an original credit entry, matching size and no text or s
 });
 
 test("every credited diagram is used by a lesson", () => {
-  const used = new Set(lessons.map((l) => l.see.diagram));
+  const used = new Set(lessons.flatMap((l) => [
+    l.see.diagram,
+    ...(l.see.more || []).map((m) => `diagrams/${m}.svg`),
+    l.see.img ? l.see.img.replace(/^learn\/media\//, "") : null
+  ]).filter(Boolean));
   Object.values(media).forEach((m) => assert.ok(used.has(m.file), m.id + " unused"));
 });

@@ -3,7 +3,12 @@
   "unit": "ob4",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "competencies": [
     "OG17.3"
   ],
@@ -16,22 +21,21 @@
     "hi": "ज़्यादातर स्तन की समस्याओं में बच्चे को दूध पिलाते रहना ही मदद करता है। लाल, दर्द भरे स्तन के साथ बुख़ार जो ठीक न हो तो रेफ़र करें, और abscess में सर्जरी चाहिए।"
   },
   "see": {
-    "diagram": "diagrams/ob4-breast-problems.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 768,
     "alt": {
-      "en": "A breast in section. On the right the nipple has small red cracks. Four full pale-blue rounded sacs sit near the nipple. In the upper part a red wedge of inflamed tissue. In the lower part a yellow rounded pocket of pus. A wavy red line on the far right suggests heat.",
-      "hi": "स्तन का कटा हुआ चित्र। दाईं ओर निप्पल पर छोटी लाल दरारें हैं। निप्पल के पास चार भरे हुए हल्के नीले गोल थैले हैं। ऊपरी हिस्से में सूजे हुए ऊतक का लाल फाँक है। निचले हिस्से में पीप की पीली गोल जेब है। सबसे दाईं ओर लहरदार लाल रेखा गर्मी का संकेत देती है।"
+      "en": "Realistic medical illustration of a lactating breast in sagittal section illustrating four puerperal breast problems. At the right, the nipple displays painful superficial cracks. Deep in the mid-breast, lactiferous ducts and glandular lobules are distended with milk from engorgement. The upper segment shows a wedge of erythema and acute mastitis. The lower breast contains a walled-off, fluctuant yellow abscess cavity with surrounding inflammation.",
+      "hi": "प्रसवोत्तर स्तन की चार समस्याओं को दर्शाने वाला अनुदैर्ध्य काट में यथार्थवादी चिकित्सीय चित्र। दाईं ओर निप्पल पर दर्दनाक सतही दरारें दिखती हैं। मध्य स्तन में दुग्ध नलिकाएं और ग्रंथियां दूध भरने से फूली हुई हैं। ऊपरी हिस्से में तीव्र मैस्टाइटिस का लाल सूजन वाला हिस्सा है। निचले स्तन में आसपास की सूजन के साथ एक बंद पीली मवाद भरी फोड़े (एब्सेस) की थैली है।"
     },
     "caption": {
-      "en": "Four breast problems: cracked nipple, engorgement, mastitis and abscess.",
-      "hi": "स्तन की चार समस्याएँ: फटा निप्पल, स्तन भरना, mastitis और abscess।"
+      "en": "Four puerperal breast conditions: cracked nipple, ductal engorgement, focal mastitis and breast abscess.",
+      "hi": "प्रसवोत्तर स्तन की चार स्थितियां: फटा निप्पल, नलिकाओं का भराव, मैस्टाइटिस और स्तन का फोड़ा।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.704,
-        "y": 0.507,
+        "x": 0.79,
+        "y": 0.55,
         "label": {
           "en": "Cracked nipple",
           "hi": "फटा निप्पल"
@@ -42,8 +46,8 @@
         }
       },
       {
-        "x": 0.458,
-        "y": 0.5,
+        "x": 0.56,
+        "y": 0.48,
         "label": {
           "en": "Engorgement",
           "hi": "स्तन भरना"
@@ -54,8 +58,8 @@
         }
       },
       {
-        "x": 0.323,
-        "y": 0.333,
+        "x": 0.4,
+        "y": 0.34,
         "label": {
           "en": "Mastitis",
           "hi": "Mastitis"
@@ -66,7 +70,7 @@
         }
       },
       {
-        "x": 0.271,
+        "x": 0.47,
         "y": 0.68,
         "label": {
           "en": "Abscess",
@@ -77,6 +81,10 @@
           "hi": "पीप का जमाव। दूसरे स्तन से पिलाइए और FRU रेफ़र कीजिए।"
         }
       }
+    ],
+    "img": "learn/media/real/ob4-breast-problems.webp",
+    "more": [
+      "ob4-breast-problems"
     ]
   },
   "why": {

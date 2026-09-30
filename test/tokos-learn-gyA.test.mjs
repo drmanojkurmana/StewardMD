@@ -97,12 +97,17 @@ test("every SVG has width, height, viewBox (matching the lesson) and no <text>",
     assert.ok(!/<text\b/i.test(s), f + " must not contain <text>");
     assert.ok(!/<script|<foreignObject|\son[a-z]+=/i.test(s), f + " must be inert");
     const l = readJson(ROOT + "lessons/" + f.replace(/\.svg$/, ".json"));
-    assert.equal(l.see.diagram, "diagrams/" + f);
-    assert.equal(l.see.w, +w[1]); assert.equal(l.see.h, +h[1]);
+    if (l.see.img) {
+      assert.ok(l.see.more && l.see.more.includes(f.replace(/\.svg$/, "")));
+    } else {
+      assert.equal(l.see.diagram, "diagrams/" + f);
+      assert.equal(l.see.w, +w[1]); assert.equal(l.see.h, +h[1]);
+    }
   }
   for (const f of lessonFiles) {
     const l = readJson(ROOT + "lessons/" + f);
-    assert.ok(existsSync(ROOT + l.see.diagram), f + " diagram file exists");
+    if (l.see.diagram) assert.ok(existsSync(ROOT + l.see.diagram), f + " diagram file exists");
+    if (l.see.img) assert.ok(existsSync(ROOT + l.see.img.replace(/^learn\//, "")), f + " img file exists");
   }
 });
 
@@ -118,7 +123,7 @@ test("every media file has a credit with a permitted licence, and every credit h
       assert.ok(it.alt && it.alt.en && it.alt.hi && it.caption && it.caption.en && it.caption.hi, it.id + " alt and caption en+hi");
       assert.ok(it.w > 0 && it.h > 0, it.id + " size");
       if (it.route !== "original") assert.ok(/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/.test(it.source) && it.author, it.id + " needs source and author");
-      assert.ok(it.file.indexOf(u + "/") === 0 || /^\.\.\/diagrams\/[a-z0-9-]+\.svg$/.test(it.file), it.id + " lives under its unit folder (or is a lesson diagram)");
+      assert.ok(it.file.indexOf(u + "/") === 0 || /^real\/[a-z0-9-]+\.webp$/.test(it.file) || /^\.\.\/diagrams\/[a-z0-9-]+\.svg$/.test(it.file), it.id + " lives under its unit folder (or is a lesson diagram or realistic image)");
     }
   }
 });

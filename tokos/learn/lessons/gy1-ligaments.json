@@ -3,7 +3,12 @@
   "unit": "gy1",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "What holds the uterus in place",
     "hi": "गर्भाशय को थामे रखने वाले लिगामेंट"
@@ -13,22 +18,21 @@
     "hi": "गर्भाशय को लिगामेंट और [[pelvic-floor]] थामे रखते हैं। सबसे ज़्यादा काम [[cardinal-ligament]] करते हैं।"
   },
   "see": {
-    "diagram": "diagrams/gy1-ligaments.svg",
-    "w": 480,
-    "h": 400,
+    "w": 768,
+    "h": 768,
     "alt": {
-      "en": "View from above at the level of the cervix. A ring of pelvic bone surrounds the pelvis, with the pubic bone at the top and the sacrum at the bottom. The bladder sits in front of a pink round cervix, and the rectum sits behind it. Blue bands run sideways from the cervix to the pelvic wall. Green bands curve back around the rectum to the sacrum. Amber bands curve forward around the bladder to the pubic bone. Small yellow circles beside the blue bands are the ureters.",
-      "hi": "गर्भाशय ग्रीवा के स्तर पर ऊपर से देखा गया चित्र। श्रोणि की हड्डी का घेरा है, ऊपर जघन हड्डी और नीचे सेक्रम। गुलाबी गोल ग्रीवा के आगे मूत्राशय और पीछे मलाशय है। नीले बंध ग्रीवा से बगल में श्रोणि की दीवार तक जाते हैं। हरे बंध मलाशय के चारों ओर घूमकर पीछे सेक्रम तक जाते हैं। सुनहरे बंध मूत्राशय के चारों ओर घूमकर आगे जघन हड्डी तक जाते हैं। नीले बंधों के पास छोटे पीले गोले मूत्रवाहिनियाँ हैं।"
+      "en": "Realistic medical illustration showing superior axial view of the female pelvic floor ligaments at the level of the cervix. The pelvic ring is bordered by the pubic symphysis anteriorly and sacrum posteriorly. In the center is the cervix, flanked laterally by the fan-like cardinal (Mackenrodt) ligaments, anteriorly by the bladder and pubocervical ligaments, and posteriorly by the rectum and uterosacral ligaments curving to the sacrum. The yellow tubular ureters course near the cardinal ligaments toward the bladder base.",
+      "hi": "गर्भाशय ग्रीवा के स्तर पर महिला श्रोणि तल के बंधों (लिगामेंट्स) को ऊपर से दिखाने वाला यथार्थवादी चिकित्सीय चित्र। श्रोणि वलय आगे जघन सिम्फिसिस और पीछे सेक्रम से घिरा है। केंद्र में ग्रीवा है, जिसके दोनों तरफ पंखे जैसे कार्डिनल (मैकेनरोड) लिगामेंट हैं, आगे मूत्राशय और प्यूबोसर्वाइकल लिगामेंट हैं, और पीछे मलाशय तथा सेक्रम की ओर मुड़ते यूटेरोसैक्रल लिगामेंट हैं। पीली नलिकाकार मूत्रवाहिनियाँ कार्डिनल लिगामेंट के पास से मूत्राशय की ओर जाती हैं।"
     },
     "caption": {
-      "en": "Three ligaments hold the cervix from three sides. The ureters pass close by.",
-      "hi": "तीन लिगामेंट ग्रीवा को तीन ओर से थामते हैं। मूत्रवाहिनियाँ पास से गुज़रती हैं।"
+      "en": "Superior pelvic view of the endopelvic fascial supports: cardinal, uterosacral, and pubocervical ligaments supporting the cervix.",
+      "hi": "श्रोणि का ऊपर से दृश्य: एंडोपेल्विक फेशियल सहारे - गर्भाशय ग्रीवा को थामने वाले कार्डिनल, यूटेरोसैक्रल और प्यूबोसर्वाइकल लिगामेंट।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
         "x": 0.5,
-        "y": 0.475,
+        "y": 0.5,
         "label": {
           "en": "Cervix",
           "hi": "गर्भाशय ग्रीवा"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.392,
-        "y": 0.535,
+        "x": 0.33,
+        "y": 0.51,
         "label": {
           "en": "Cardinal ligament",
           "hi": "कार्डिनल लिगामेंट"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.635,
-        "y": 0.75,
+        "x": 0.41,
+        "y": 0.66,
         "label": {
           "en": "Uterosacral ligament",
           "hi": "यूटेरोसैक्रल लिगामेंट"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.65,
-        "y": 0.295,
+        "x": 0.38,
+        "y": 0.29,
         "label": {
           "en": "Pubocervical ligament",
           "hi": "प्यूबोसर्वाइकल लिगामेंट"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.688,
-        "y": 0.52,
+        "x": 0.29,
+        "y": 0.42,
         "label": {
           "en": "Ureter",
           "hi": "मूत्रवाहिनी"
@@ -88,7 +92,7 @@
       },
       {
         "x": 0.5,
-        "y": 0.28,
+        "y": 0.32,
         "label": {
           "en": "Bladder",
           "hi": "मूत्राशय"
@@ -100,7 +104,7 @@
       },
       {
         "x": 0.5,
-        "y": 0.765,
+        "y": 0.67,
         "label": {
           "en": "Rectum",
           "hi": "मलाशय"
@@ -110,6 +114,10 @@
           "hi": "ग्रीवा के पीछे होता है। यूटेरोसैक्रल लिगामेंट इसके चारों ओर मुड़ते हैं।"
         }
       }
+    ],
+    "img": "learn/media/real/gy1-ligaments.webp",
+    "more": [
+      "gy1-ligaments"
     ]
   },
   "why": {

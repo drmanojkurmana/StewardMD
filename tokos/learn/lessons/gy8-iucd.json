@@ -3,7 +3,12 @@
   "unit": "gy8",
   "level": "mbbs",
   "minutes": 6,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "The copper IUCD and the post-partum IUCD",
     "hi": "कॉपर IUCD और प्रसवोत्तर IUCD"
@@ -13,22 +18,21 @@
     "hi": "कॉपर IUCD तुरंत असर करता है, 5 या 10 साल चलता है और उलटा जा सकता है। भारत में इसे प्रसव के बाद प्लेसेंटा के 10 मिनट के भीतर या 48 घंटे के भीतर लगाया जा सकता है।"
   },
   "see": {
-    "diagram": "diagrams/gy8-iucd.svg",
-    "w": 480,
-    "h": 260,
+    "w": 768,
+    "h": 768,
     "alt": {
-      "en": "Line drawing of a uterus with a T-shaped device. The two arms lie under the top of the uterus, the stem runs down the cavity, and two thin threads hang through the cervix. A green arrow points into the uterus.",
-      "hi": "गर्भाशय का रेखाचित्र जिसमें T आकार का उपकरण है। दोनों भुजाएँ गर्भाशय के ऊपरी हिस्से के नीचे हैं, तना गुहा में नीचे जाता है, और दो पतले धागे गर्भाशय-ग्रीवा से नीचे लटकते हैं। हरा तीर गर्भाशय की ओर इशारा करता है।"
+      "en": "Realistic medical illustration of a coronal section of the uterus with a correctly positioned copper intrauterine contraceptive device (IUCD). The flexible horizontal arms lie snugly across the fundus beneath the tubal ostia, the copper-wrapped vertical stem sits along the endometrial cavity, and two monofilament strings extend through the cervical canal into the upper vagina.",
+      "hi": "गर्भाशय के अनुप्रस्थ काट का यथार्थवादी चिकित्सीय चित्र जिसमें कॉपर अंतर्गर्भाशयी गर्भनिरोधक उपकरण (IUCD) सही स्थिति में स्थित है। लचीली क्षैतिज भुजाएं फंडस में ट्यूबल ओस्टिया के नीचे स्थित हैं, तांबे से लिपटा ऊर्ध्वाधर तना एंडोमेट्रियल गुहा में स्थित है, और दो धागे ग्रीवा नलिका से होकर ऊपरी योनि में फैले हैं।"
     },
     "caption": {
-      "en": "A correctly placed copper IUCD: arms at the fundus, threads visible at the cervix.",
-      "hi": "सही जगह लगा कॉपर IUCD: भुजाएँ फंडस पर, धागे गर्भाशय-ग्रीवा पर दिखते हुए।"
+      "en": "Correct intrauterine placement of a copper T IUCD: transverse arms at the fundus and threads extending into the vagina.",
+      "hi": "कॉपर T IUCD का सही गर्भाशयी स्थान: फंडस पर क्षैतिज भुजाएं और योनि में लटकते धागे।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
         "x": 0.5,
-        "y": 0.346,
+        "y": 0.24,
         "label": {
           "en": "Arms at the fundus",
           "hi": "फंडस पर भुजाएँ"
@@ -40,7 +44,7 @@
       },
       {
         "x": 0.5,
-        "y": 0.5,
+        "y": 0.38,
         "label": {
           "en": "Copper stem",
           "hi": "कॉपर का तना"
@@ -51,20 +55,8 @@
         }
       },
       {
-        "x": 0.496,
-        "y": 0.865,
-        "label": {
-          "en": "Threads",
-          "hi": "धागे"
-        },
-        "note": {
-          "en": "Cut at 3 to 4 cm outside the os for an interval IUCD. Missing threads: think of expulsion or perforation.",
-          "hi": "इंटरवल IUCD में os से 3 से 4 cm बाहर काटें। धागे न दिखें तो निष्कासन या छिद्र के बारे में सोचें।"
-        }
-      },
-      {
         "x": 0.5,
-        "y": 0.754,
+        "y": 0.62,
         "label": {
           "en": "Cervix",
           "hi": "गर्भाशय-ग्रीवा"
@@ -73,11 +65,25 @@
           "en": "Insert only when it is reasonably certain that she is not pregnant.",
           "hi": "तभी लगाएँ जब यह काफ़ी हद तक तय हो कि वह गर्भवती नहीं है।"
         }
+      },
+      {
+        "x": 0.5,
+        "y": 0.78,
+        "label": {
+          "en": "Threads",
+          "hi": "धागे"
+        },
+        "note": {
+          "en": "Cut at 3 to 4 cm outside the os for an interval IUCD. Missing threads: think of expulsion or perforation.",
+          "hi": "इंटरवल IUCD में os से 3 से 4 cm बाहर काटें। धागे न दिखें तो निष्कासन या छिद्र के बारे में सोचें।"
+        }
       }
     ],
     "more": [
-      "iucd-usg-copper"
-    ]
+      "iucd-usg-copper",
+      "gy8-iucd"
+    ],
+    "img": "learn/media/real/gy8-iucd.webp"
   },
   "why": {
     "steps": [

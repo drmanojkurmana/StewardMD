@@ -109,6 +109,10 @@ test("every glossary link and every listed glossary id is defined in gy7 to gy12
 
 test("diagrams: file exists, width height viewBox present and equal to see.w and see.h, no <text>", () => {
   lessons.forEach(({ id, l }) => {
+    if (l.see.img) {
+      assert.ok(existsSync(`${ROOT}/${l.see.img.replace(/^learn\//, "")}`), l.see.img);
+      return;
+    }
     const f = `${ROOT}/${l.see.diagram}`;
     assert.ok(existsSync(f), f);
     const s = readFileSync(f, "utf8");

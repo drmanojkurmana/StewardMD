@@ -3,7 +3,12 @@
   "unit": "gy5",
   "level": "mbbs",
   "minutes": 6,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "competencies": [
     "OG34.6"
   ],
@@ -16,22 +21,21 @@
     "hi": "[[endometriosis]] यानी गर्भाशय की परत जैसा ऊतक, जो गर्भाशय के बाहर उगता है। यह हर चक्र में रक्तस्राव करता है और दर्द, निशान और बाँझपन का कारण बनता है।"
   },
   "see": {
-    "diagram": "diagrams/gy5-endometriosis.svg",
-    "w": 480,
-    "h": 400,
+    "w": 768,
+    "h": 574,
     "alt": {
-      "en": "A front view of the pelvis. A pink uterus with a tube on each side. On the left a lavender ovary holds a dark brown round cyst. On the right the ovary has small follicles. Dashed lines join the ovaries to the back of the uterus. A curved tan floor of peritoneum below holds several dark red spots and two brown bands that run down from the cervix. A round brown circle at the bottom centre is the rectum.",
-      "hi": "श्रोणि का सामने का चित्र। गुलाबी गर्भाशय, दोनों ओर एक-एक नली। बाईं ओर बैंगनी अंडाशय में गहरा भूरा गोल सिस्ट है। दाईं ओर अंडाशय में छोटे फॉलिकल हैं। टूटी रेखाएँ अंडाशयों को गर्भाशय के पिछले हिस्से से जोड़ती हैं। नीचे पेरिटोनियम का मुड़ा हुआ भूरा तल है, जिस पर कई गहरे लाल धब्बे हैं और ग्रीवा से नीचे जाते दो भूरे बंध हैं। नीचे बीच में गोल भूरा घेरा मलाशय है।"
+      "en": "Realistic medical illustration showing pelvic endometriosis. Front view displays the central uterus, left ovarian endometrioma (chocolate cyst) with dark brown contents, unaffected right ovary, dense fibrous adhesions, peritoneal implants in the pouch of Douglas, uterosacral ligament nodules, and adjacent bowel.",
+      "hi": "श्रोणि एंडोमेट्रियोसिस को प्रदर्शित करने वाला यथार्थवादी चिकित्सीय चित्र। अग्र दृश्य में केंद्रीय गर्भाशय, गहरे भूरे रंग की सामग्री वाली बाईं डिम्बग्रंथि एंडोमेट्रियोमा (चॉकलेट सिस्ट), अप्रभावित दाहिनी डिम्बग्रंथि, घने रेशेदार आसंजन, पाउच ऑफ डगलस में पेरिटोनियल जमाव, यूटेरोसैक्रल लिगामेंट नोड्यूल और समीपवर्ती आंत दिखाई गई है।"
     },
     "caption": {
-      "en": "Common sites: the ovary, the peritoneum, the uterosacral ligaments, the pouch of Douglas and the rectovaginal septum.",
-      "hi": "आम जगहें: अंडाशय, पेरिटोनियम, यूटेरोसैक्रल लिगामेंट, पाउच ऑफ़ डगलस और रेक्टोवजाइनल सेप्टम।"
+      "en": "Anatomical distribution of pelvic endometriosis: ovarian endometrioma, unaffected ovary, pelvic adhesions, uterosacral nodules, pouch of Douglas implants, and rectovaginal septum.",
+      "hi": "श्रोणि एंडोमेट्रियोसिस का संरचनात्मक वितरण: ओवेरियन एंडोमेट्रियोमा, अप्रभावित अंडाशय, श्रोणि आसंजन, यूटेरोसैक्रल नोड्यूल, पाउच ऑफ डगलस इम्प्लांट और रेक्टोवजाइनल सेप्टम।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.238,
-        "y": 0.575,
+        "x": 0.22,
+        "y": 0.42,
         "label": {
           "en": "Endometrioma",
           "hi": "एंडोमेट्रियोमा"
@@ -42,8 +46,8 @@
         }
       },
       {
-        "x": 0.75,
-        "y": 0.565,
+        "x": 0.78,
+        "y": 0.38,
         "label": {
           "en": "Unaffected ovary",
           "hi": "अप्रभावित अंडाशय"
@@ -54,8 +58,8 @@
         }
       },
       {
-        "x": 0.479,
-        "y": 0.56,
+        "x": 0.35,
+        "y": 0.48,
         "label": {
           "en": "Adhesions",
           "hi": "चिपकाव"
@@ -66,8 +70,8 @@
         }
       },
       {
-        "x": 0.417,
-        "y": 0.75,
+        "x": 0.68,
+        "y": 0.65,
         "label": {
           "en": "Uterosacral ligaments",
           "hi": "यूटेरोसैक्रल लिगामेंट"
@@ -78,8 +82,8 @@
         }
       },
       {
-        "x": 0.5,
-        "y": 0.915,
+        "x": 0.36,
+        "y": 0.76,
         "label": {
           "en": "Pouch of Douglas",
           "hi": "पाउच ऑफ़ डगलस"
@@ -90,8 +94,8 @@
         }
       },
       {
-        "x": 0.229,
-        "y": 0.75,
+        "x": 0.28,
+        "y": 0.73,
         "label": {
           "en": "Peritoneal implants",
           "hi": "पेरिटोनियम के जमाव"
@@ -103,7 +107,7 @@
       },
       {
         "x": 0.5,
-        "y": 0.635,
+        "y": 0.68,
         "label": {
           "en": "Rectovaginal septum",
           "hi": "रेक्टोवजाइनल सेप्टम"
@@ -114,8 +118,8 @@
         }
       },
       {
-        "x": 0.5,
-        "y": 0.83,
+        "x": 0.63,
+        "y": 0.8,
         "label": {
           "en": "Bowel",
           "hi": "आँत"
@@ -125,6 +129,10 @@
           "hi": "गहरा रोग दर्दनाक मल त्याग (डिस्केज़िया) और कभी-कभी माहवारी के समय दर्द के साथ मलाशय से रक्तस्राव करता है।"
         }
       }
+    ],
+    "img": "learn/media/real/gy5-endometriosis.webp",
+    "more": [
+      "gy5-endometriosis"
     ]
   },
   "why": {

@@ -132,7 +132,10 @@ test("every diagram is a sized, text-free SVG whose viewBox matches the lesson",
 
 test("diagram files all belong to a lesson (no strays)", () => {
   if (!existsSync(`${LEARN}/diagrams`)) return;
-  const used = new Set(lessons.filter((l) => l.see.diagram).map((l) => l.see.diagram.replace("diagrams/", "")));
+  const used = new Set(lessons.flatMap((l) => [
+    l.see.diagram && l.see.diagram.replace("diagrams/", ""),
+    ...(l.see.more || []).map((m) => m + ".svg")
+  ]).filter(Boolean));
   readdirSync(`${LEARN}/diagrams`).filter((f) => /^ob[1-6]-.+\.svg$/.test(f)).forEach((f) => assert.ok(used.has(f), f + " is unused"));
 });
 

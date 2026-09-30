@@ -3,7 +3,12 @@
   "unit": "gy5",
   "level": "mbbs",
   "minutes": 6,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "competencies": [
     "OG29.1"
   ],
@@ -16,22 +21,21 @@
     "hi": "फाइब्रॉइड ([[leiomyoma]]) गर्भाशय की चिकनी माँसपेशी का सौम्य ट्यूमर है। वह कहाँ बैठा है, इसी से तय होता है कि वह क्या करेगा: रक्तस्राव, दबाव, दर्द या बाँझपन।"
   },
   "see": {
-    "diagram": "diagrams/gy5-fibroid.svg",
-    "w": 480,
-    "h": 400,
+    "w": 768,
+    "h": 768,
     "alt": {
-      "en": "A front view of the uterus with nine round cream-coloured fibroids at different depths. One hangs on a stalk inside the cavity. Two bulge into the cavity from the walls. Two sit inside the wall, one touching the lining and one deeper. Two bulge out of the outer surface. One hangs on a stalk outside above the top. One sits low in the cervix.",
-      "hi": "गर्भाशय का सामने का चित्र, जिसमें अलग-अलग गहराई पर नौ गोल क्रीम रंग के फाइब्रॉइड हैं। एक गुहा के अंदर डंडी पर लटका है। दो दीवारों से गुहा में उभरे हैं। दो दीवार के अंदर हैं, एक परत को छूता और एक और गहरा। दो बाहरी सतह से बाहर उभरे हैं। एक ऊपर बाहर की ओर डंडी पर लटका है। एक ग्रीवा में नीचे बैठा है।"
+      "en": "Realistic medical illustration of a coronal section of the uterus displaying the FIGO classification of uterine fibroids (leiomyomas). Whorled, pale muscular tumours are shown at varying anatomical locations: pedunculated intracavitary (Type 0), submucosal (Types 1 and 2), intramural (Types 3 and 4), subserosal (Types 5 and 6), pedunculated subserosal (Type 7), and cervical (Type 8).",
+      "hi": "गर्भाशय फाइब्रॉइड (लियोमायोमा) के FIGO वर्गीकरण को प्रदर्शित करने वाला गर्भाशय के अनुप्रस्थ काट का यथार्थवादी चिकित्सीय चित्र। विभिन्न संरचनात्मक स्थानों पर हल्के रंग के रेशेदार ट्यूमर दिखाए गए हैं: डंडीदार अंतःगुहा (प्रकार 0), सबम्यूकोसल (प्रकार 1 और 2), इंट्राम्यूरल (प्रकार 3 और 4), सबसेरोसल (प्रकार 5 और 6), डंडीदार सबसेरोसल (प्रकार 7), और ग्रीवा फाइब्रॉइड (प्रकार 8)।"
     },
     "caption": {
-      "en": "The FIGO types of fibroid, 0 to 8, by where they sit.",
-      "hi": "फाइब्रॉइड के FIGO प्रकार, 0 से 8, उनकी जगह के अनुसार।"
+      "en": "The FIGO anatomical classification of uterine fibroids (Types 0 to 8) by depth within the myometrium.",
+      "hi": "मायोमेट्रियम के भीतर गहराई के अनुसार गर्भाशय फाइब्रॉइड का FIGO संरचनात्मक वर्गीकरण (प्रकार 0 से 8)।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.483,
-        "y": 0.39,
+        "x": 0.51,
+        "y": 0.42,
         "label": {
           "en": "Type 0",
           "hi": "प्रकार 0"
@@ -42,8 +46,8 @@
         }
       },
       {
-        "x": 0.375,
-        "y": 0.425,
+        "x": 0.42,
+        "y": 0.48,
         "label": {
           "en": "Type 1",
           "hi": "प्रकार 1"
@@ -54,8 +58,8 @@
         }
       },
       {
-        "x": 0.621,
-        "y": 0.37,
+        "x": 0.56,
+        "y": 0.25,
         "label": {
           "en": "Type 2",
           "hi": "प्रकार 2"
@@ -66,8 +70,8 @@
         }
       },
       {
-        "x": 0.35,
-        "y": 0.505,
+        "x": 0.38,
+        "y": 0.57,
         "label": {
           "en": "Type 3",
           "hi": "प्रकार 3"
@@ -78,7 +82,7 @@
         }
       },
       {
-        "x": 0.667,
+        "x": 0.61,
         "y": 0.51,
         "label": {
           "en": "Type 4",
@@ -90,8 +94,8 @@
         }
       },
       {
-        "x": 0.308,
-        "y": 0.27,
+        "x": 0.33,
+        "y": 0.18,
         "label": {
           "en": "Type 5",
           "hi": "प्रकार 5"
@@ -102,8 +106,8 @@
         }
       },
       {
-        "x": 0.7,
-        "y": 0.32,
+        "x": 0.68,
+        "y": 0.56,
         "label": {
           "en": "Type 6",
           "hi": "प्रकार 6"
@@ -114,8 +118,8 @@
         }
       },
       {
-        "x": 0.646,
-        "y": 0.045,
+        "x": 0.64,
+        "y": 0.11,
         "label": {
           "en": "Type 7",
           "hi": "प्रकार 7"
@@ -126,8 +130,8 @@
         }
       },
       {
-        "x": 0.5,
-        "y": 0.785,
+        "x": 0.56,
+        "y": 0.74,
         "label": {
           "en": "Type 8",
           "hi": "प्रकार 8"
@@ -137,6 +141,10 @@
           "hi": "कहीं और: जैसे ग्रीवा में, या पैरासिटिक फाइब्रॉइड।"
         }
       }
+    ],
+    "img": "learn/media/real/gy5-fibroid.webp",
+    "more": [
+      "gy5-fibroid"
     ]
   },
   "why": {

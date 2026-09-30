@@ -3,7 +3,12 @@
   "unit": "gyr1",
   "level": "resident",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Unexplained infertility and IUI",
     "hi": "अस्पष्ट बाँझपन और IUI"
@@ -13,22 +18,21 @@
     "hi": "जाँच सामान्य हो तो पूर्वानुमान के हिसाब से इलाज करें। पहले कदम पर गाइडलाइन अब अलग हैं, इसलिए दोनों रुख जानें।"
   },
   "see": {
-    "diagram": "diagrams/gyr1-iui-unexplained.svg",
-    "w": 480,
-    "h": 320,
+    "w": 768,
+    "h": 768,
     "alt": {
-      "en": "Front view of the uterus. A slim catheter passes through the cervix and its tip lies in the cavity, with sperm dots at the tip. Both tubes lead to ovaries. The left ovary holds two mature follicles.",
-      "hi": "गर्भाशय का सामने का चित्र। एक पतली कैथेटर गर्भाशय-ग्रीवा से गुज़रकर गुहा तक पहुँचती है। उसकी नोक पर शुक्राणु के बिंदु हैं। दोनों नलियाँ अंडाशय तक जाती हैं। बाएँ अंडाशय में दो परिपक्व फ़ॉलिकल हैं।"
+      "en": "Realistic medical illustration of female internal reproductive organs in coronal section showing intrauterine insemination (IUI). A fine flexible insemination catheter ascends through the cervix, with its tip releasing washed sperm at the uterine fundus. The ovaries and patent fallopian tubes are displayed bilaterally, with the left ovary demonstrating mature antral follicles.",
+      "hi": "अंतर्गर्भाशयी गर्भाधान (IUI) को दर्शाने वाला महिला आंतरिक प्रजनन अंगों के अनुप्रस्थ काट का यथार्थवादी चिकित्सीय चित्र। एक पतली लचीली इनसेमिनेशन कैथेटर ग्रीवा से ऊपर चढ़ती है और उसकी नोक गर्भाशय फंडस पर धुले हुए शुक्राणु छोड़ती है। दोनों तरफ अंडाशय और खुली फैलोपियन नलिकाएं दिखाई देती हैं, जिसमें बायां अंडाशय परिपक्व रोम (फॉलिकल्स) प्रदर्शित करता है।"
     },
     "caption": {
-      "en": "IUI puts washed sperm in the cavity near ovulation. The stimulated ovary should grow only a few follicles.",
-      "hi": "IUI में ओव्यूलेशन के पास धुले शुक्राणु गुहा में रखे जाते हैं। उत्तेजित अंडाशय में बस कुछ ही फ़ॉलिकल बढ़ने चाहिए।"
+      "en": "Intrauterine insemination (IUI): washed sperm delivered to the uterine fundus through a fine catheter.",
+      "hi": "अंतर्गर्भाशयी गर्भाधान (IUI): पतली कैथेटर द्वारा गर्भाशय के ऊपरी हिस्से में धुले हुए शुक्राणु पहुँचाना।"
     },
-    "credit": "Original diagram, Tokos (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.15,
-        "y": 0.39,
+        "x": 0.18,
+        "y": 0.38,
         "label": {
           "en": "Mature follicles",
           "hi": "परिपक्व फ़ॉलिकल"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.29,
-        "y": 0.25,
+        "x": 0.25,
+        "y": 0.26,
         "label": {
           "en": "Fallopian tube",
           "hi": "फ़ैलोपियन ट्यूब"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.5,
-        "y": 0.47,
+        "x": 0.51,
+        "y": 0.34,
         "label": {
           "en": "Catheter tip",
           "hi": "कैथेटर की नोक"
@@ -64,7 +68,7 @@
       },
       {
         "x": 0.5,
-        "y": 0.62,
+        "y": 0.48,
         "label": {
           "en": "Uterine cavity",
           "hi": "गर्भाशय की गुहा"
@@ -76,7 +80,7 @@
       },
       {
         "x": 0.5,
-        "y": 0.78,
+        "y": 0.68,
         "label": {
           "en": "Cervix",
           "hi": "गर्भाशय-ग्रीवा"
@@ -86,6 +90,10 @@
           "hi": "कैथेटर इसी से गुज़रती है। म्यूकस की जाँच ज़रूरी नहीं।"
         }
       }
+    ],
+    "img": "learn/media/real/gyr1-iui-unexplained.webp",
+    "more": [
+      "gyr1-iui-unexplained-diagram"
     ]
   },
   "why": {
