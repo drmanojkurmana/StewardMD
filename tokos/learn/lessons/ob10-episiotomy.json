@@ -3,7 +3,12 @@
   "unit": "ob10",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Episiotomy: not routine, and cut the right way",
     "hi": "एपिसियोटॉमी: नियमित नहीं, और सही तरीक़े से काटें"
@@ -13,22 +18,21 @@
     "hi": "[[episiotomy]] केवल नैदानिक ज़रूरत पर की जाती है, जैसे वाद्य प्रसव या भ्रूण संकट। कट मध्यपार्श्व होता है, 45 से 60 डिग्री पर।"
   },
   "see": {
-    "diagram": "diagrams/ob10-episiotomy.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 516,
     "alt": {
-      "en": "An oval vaginal opening. From its lower edge a red cut runs down and to the right. A dashed vertical line and a green arc show the angle. A small circle below marks the anus.",
-      "hi": "अंडाकार योनि द्वार। उसके निचले किनारे से एक लाल कट नीचे और दाईं ओर जाता है। बिंदीदार खड़ी रेखा और हरा चाप कोण दिखाते हैं। नीचे छोटा गोला गुदा का निशान है।"
+      "en": "Realistic medical illustration of perineal anatomy during crowning in labour, showing a right mediolateral episiotomy incision commencing at the posterior fourchette and angled 60 degrees away from the midline anal sphincter.",
+      "hi": "प्रसव में क्राउनिंग के दौरान पेरिनियल शरीर रचना का यथार्थवादी चिकित्सीय चित्र, जिसमें पोस्टीरियर फोरशेट से शुरू होकर मध्य रेखा के गुदा स्फिंक्टर से 60 डिग्री के कोण पर दूर जाता हुआ दायां मेडियोलेटरल एपिसियोटॉमी चीरा दिखाया गया है।"
     },
     "caption": {
-      "en": "Start at the fourchette and cut away from the anus.",
-      "hi": "फ़ोरशेट से शुरू करें और गुदा से दूर काटें।"
+      "en": "Right mediolateral episiotomy angled at 60 degrees from the vertical midline away from the anal sphincter.",
+      "hi": "खड़ी मध्य रेखा से गुदा स्फिंक्टर से दूर 60 डिग्री के कोण पर दायां मेडियोलेटरल एपिसियोटॉमी।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
         "x": 0.5,
-        "y": 0.633,
+        "y": 0.52,
         "label": {
           "en": "Fourchette",
           "hi": "फ़ोरशेट"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.604,
-        "y": 0.773,
+        "x": 0.54,
+        "y": 0.59,
         "label": {
           "en": "Mediolateral cut",
           "hi": "मध्यपार्श्व कट"
@@ -52,7 +56,7 @@
       },
       {
         "x": 0.5,
-        "y": 0.907,
+        "y": 0.7,
         "label": {
           "en": "Anal sphincter",
           "hi": "गुदा स्फिंक्टर"
@@ -62,6 +66,10 @@
           "hi": "मध्य रेखा के बहुत पास कट तीसरी या चौथी डिग्री की फटन में बढ़ सकता है।"
         }
       }
+    ],
+    "img": "learn/media/real/ob10-episiotomy.webp",
+    "more": [
+      "ob10-episiotomy"
     ]
   },
   "why": {

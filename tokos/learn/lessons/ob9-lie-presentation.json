@@ -3,7 +3,12 @@
   "unit": "ob9",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Lie and presentation: spot a malpresentation early",
     "hi": "लाइ और प्रस्तुति: असामान्य प्रस्तुति जल्दी पहचानें"
@@ -13,22 +18,21 @@
     "hi": "पूर्ण अवधि के पास बच्चे को लंबवत, सिर नीचे लेटा होना चाहिए। कोई और [[lie]] या [[presentation]] असामान्य प्रस्तुति है और प्रसव से पहले योजना चाहिए।"
   },
   "see": {
-    "diagram": "diagrams/ob9-lie-presentation.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 516,
     "alt": {
-      "en": "Three womb outlines. In the first the baby lies upright with the head at the bottom. In the second the head is at the top. In the third the baby lies sideways across the womb.",
-      "hi": "गर्भाशय की तीन रूपरेखाएँ। पहली में बच्चा सीधा है और सिर नीचे। दूसरी में सिर ऊपर है। तीसरी में बच्चा गर्भाशय के आर-पार आड़ा लेटा है।"
+      "en": "Realistic medical illustration showing a three-panel comparative view of fetal lie and presentation: normal longitudinal lie with cephalic presentation (head flexed in lower pole), longitudinal lie with breech presentation (buttocks at lower pole, head at fundus), and transverse lie (fetus lying horizontally across the wide uterine cavity).",
+      "hi": "गर्भस्थ शिशु की स्थिति और प्रस्तुति के तीन-पैनल तुलनात्मक दृश्य को प्रदर्शित करने वाला यथार्थवादी चिकित्सीय चित्र: सेफेलिक प्रस्तुति के साथ सामान्य अनुदैर्ध्य स्थिति (निचले ध्रुव में मुड़ा हुआ सिर), ब्रीच प्रस्तुति के साथ अनुदैर्ध्य स्थिति (निचले ध्रुव में नितंब, फंडस में सिर), और अनुप्रस्थ स्थिति (चौड़े गर्भाशय गुहा में आड़ा लेटा भ्रूण)।"
     },
     "caption": {
-      "en": "Head down (normal), breech, and transverse lie.",
-      "hi": "सिर नीचे (सामान्य), ब्रीच और आड़ी स्थिति।"
+      "en": "Fetal lie and presentation: cephalic presentation, breech presentation, and transverse lie.",
+      "hi": "भ्रूण की स्थिति और प्रस्तुति: सेफेलिक प्रस्तुति, ब्रीच प्रस्तुति, और अनुप्रस्थ स्थिति।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.188,
-        "y": 0.727,
+        "x": 0.17,
+        "y": 0.62,
         "label": {
           "en": "Cephalic",
           "hi": "सेफेलिक"
@@ -40,7 +44,7 @@
       },
       {
         "x": 0.5,
-        "y": 0.333,
+        "y": 0.6,
         "label": {
           "en": "Breech",
           "hi": "ब्रीच"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.813,
-        "y": 0.5,
+        "x": 0.83,
+        "y": 0.48,
         "label": {
           "en": "Transverse lie",
           "hi": "आड़ी स्थिति"
@@ -62,6 +66,10 @@
           "hi": "श्रोणि में कोई प्रस्तुत हिस्सा नहीं। प्रसव आगे नहीं बढ़ सकता और गर्भनाल या हाथ बाहर आ सकता है।"
         }
       }
+    ],
+    "img": "learn/media/real/ob9-lie-presentation.webp",
+    "more": [
+      "ob9-lie-presentation"
     ]
   },
   "why": {

@@ -3,7 +3,12 @@
   "unit": "ob6",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "competencies": [
     "OG10.1"
   ],
@@ -16,79 +21,70 @@
     "hi": "[[placenta-previa]] में प्लेसेंटा सर्विक्स के मुँह को ढकती है। आम संकेत है अचानक, दर्दरहित, चटक लाल रक्तस्राव। योजना है भर्ती, अल्ट्रासाउंड और स्थिर हो तो 36 से 37+6 हफ़्ते पर नियोजित सीज़ेरियन।"
   },
   "see": {
-    "diagram": "diagrams/ob6-placenta-previa.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 516,
     "alt": {
-      "en": "Four small womb outlines in a row, each with a dark red placenta at the bottom, sitting lower and lower: over the whole opening, partly over it, at its edge, and just beside it. Below left a red drop and arrow for painless bleeding. In the middle an ultrasound screen. At the right a green tick in a circle.",
-      "hi": "एक पंक्ति में गर्भाशय की चार छोटी रूपरेखाएँ, हर एक में नीचे गहरी लाल प्लेसेंटा, जो क्रमशः पूरे मुँह पर, आंशिक रूप से उस पर, उसके किनारे पर और उसके ठीक बग़ल में है। नीचे बाईं ओर दर्दरहित रक्तस्राव के लिए लाल बूँद और तीर। बीच में अल्ट्रासाउंड स्क्रीन। दाईं ओर गोले में हरा सही का निशान।"
+      "en": "Realistic medical illustration showing a four-panel comparative view of the anatomical classification of placenta praevia: complete placenta praevia covering the entire internal os, partial placenta praevia covering part of the os, marginal placenta praevia reaching the edge of the os, and low-lying placenta implanted in the lower segment within 2 cm of the internal os.",
+      "hi": "प्लेसेंटा प्रीविया के संरचनात्मक वर्गीकरण के चार-पैनल तुलनात्मक दृश्य को प्रदर्शित करने वाला यथार्थवादी चिकित्सीय चित्र: आंतरिक os को पूरी तरह ढकने वाला कम्पलीट प्लेसेंटा प्रीविया, os को आंशिक रूप से ढकने वाला पार्शियल प्लेसेंटा प्रीविया, os के किनारे तक पहुँचने वाला मार्जिनल प्लेसेंटा प्रीविया, और आंतरिक os से 2 सेमी के भीतर निचले हिस्से में प्रत्यारोपित लो-लाइंग प्लेसेंटा।"
     },
     "caption": {
-      "en": "From complete praevia (left) to a low-lying placenta (right), and how it is found and managed.",
-      "hi": "पूर्ण praevia (बाएँ) से low-lying प्लेसेंटा (दाएँ) तक, और यह कैसे मिलता व सँभाला जाता है।"
+      "en": "Anatomical classification of placenta praevia: complete, partial, marginal, and low-lying placenta.",
+      "hi": "प्लेसेंटा प्रीविया का संरचनात्मक वर्गीकरण: कम्पलीट, पार्शियल, मार्जिनल, और लो-लाइंग प्लेसेंटा।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
         "x": 0.125,
-        "y": 0.45,
+        "y": 0.58,
         "label": {
-          "en": "Covers the os",
-          "hi": "os को ढकती है"
+          "en": "Complete praevia",
+          "hi": "पूर्ण प्रीविया"
         },
         "note": {
-          "en": "Placenta praevia: placental tissue covers any part of the internal os.",
-          "hi": "Placenta praevia: प्लेसेंटा का ऊतक आंतरिक os के किसी भी हिस्से को ढकता है।"
+          "en": "The placenta completely covers the internal cervical os. Caesarean delivery is required.",
+          "hi": "प्लेसेंटा आंतरिक सर्विकल os को पूरी तरह ढकती है। सीज़ेरियन प्रसव आवश्यक है।"
         }
       },
       {
-        "x": 0.563,
-        "y": 0.393,
+        "x": 0.375,
+        "y": 0.58,
         "label": {
-          "en": "Near the os",
-          "hi": "os के पास"
+          "en": "Partial praevia",
+          "hi": "आंशिक प्रीविया"
         },
         "note": {
-          "en": "A low-lying placenta: the edge does not cover the os but is within 2 cm of it.",
-          "hi": "Low-lying प्लेसेंटा: किनारा os को नहीं ढकता पर उससे 2 सेमी के भीतर है।"
+          "en": "The placenta partially covers the internal cervical os.",
+          "hi": "प्लेसेंटा आंतरिक सर्विकल os को आंशिक रूप से ढकती है।"
         }
       },
       {
-        "x": 0.125,
-        "y": 0.833,
+        "x": 0.625,
+        "y": 0.58,
         "label": {
-          "en": "Painless bleeding",
-          "hi": "दर्दरहित रक्तस्राव"
+          "en": "Marginal praevia",
+          "hi": "मार्जिनल प्रीविया"
         },
         "note": {
-          "en": "Sudden, painless, bright red bleeding after 20 weeks, sometimes heavy enough to cause shock. Many are found by chance on the mid-pregnancy scan.",
-          "hi": "20 हफ़्ते के बाद अचानक, दर्दरहित, चटक लाल रक्तस्राव, कभी शॉक करने लायक़ भारी। कई बीच की गर्भावस्था के स्कैन में संयोग से मिलते हैं।"
+          "en": "The lower placental edge reaches the margin of the internal os without covering it.",
+          "hi": "प्लेसेंटा का निचला किनारा आंतरिक os के किनारे तक पहुँचता है पर उसे ढकता नहीं है।"
         }
       },
       {
-        "x": 0.5,
-        "y": 0.833,
+        "x": 0.875,
+        "y": 0.58,
         "label": {
-          "en": "Ultrasound",
-          "hi": "अल्ट्रासाउंड"
+          "en": "Low-lying placenta",
+          "hi": "लो-लाइंग प्लेसेंटा"
         },
         "note": {
-          "en": "Transvaginal ultrasound is safe and accurate. Risks: previous caesarean or uterine surgery, multiple pregnancy, smoking, multiparity, older age.",
-          "hi": "ट्रांसवेजाइनल अल्ट्रासाउंड सुरक्षित और सटीक है। जोखिम: पिछली सीज़ेरियन या गर्भाशय की सर्जरी, जुड़वाँ गर्भ, धूम्रपान, कई प्रसव, अधिक उम्र।"
-        }
-      },
-      {
-        "x": 0.833,
-        "y": 0.833,
-        "label": {
-          "en": "Plan",
-          "hi": "योजना"
-        },
-        "note": {
-          "en": "Bleeding before 36 weeks: hospital, modified activity, steroids if 34 to 36 weeks, anti-D if Rh-negative. Caesarean at 36 to 37+6 weeks if stable, or at once if bleeding is heavy, the fetal heart is abnormal or she is unstable.",
-          "hi": "36 हफ़्ते से पहले रक्तस्राव: अस्पताल, कम गतिविधि, 34 से 36 हफ़्ते हों तो steroids, Rh-नेगेटिव हो तो anti-D। स्थिर हो तो 36 से 37+6 हफ़्ते पर सीज़ेरियन, या भारी रक्तस्राव, असामान्य भ्रूण-धड़कन या अस्थिरता हो तो तुरंत।"
+          "en": "The placental edge does not cover the os but lies within 2 cm of the internal os.",
+          "hi": "प्लेसेंटा का किनारा os को नहीं ढकता पर आंतरिक os से 2 सेमी के भीतर स्थित है।"
         }
       }
+    ],
+    "img": "learn/media/real/ob6-placenta-previa.webp",
+    "more": [
+      "ob6-placenta-previa"
     ]
   },
   "why": {
