@@ -386,6 +386,7 @@ test("review desk: Tokós 2.0 items per content type, verify-first units at the 
   assert.equal(by(/^unit-/), x.learn.units.length);
   assert.equal(by(/^bank-/), x.bank.topics.length);
   assert.equal(by(/^drill-/), 6); assert.equal(by(/^sim-labour$/), 1); assert.equal(by(/^tool-/), 13); assert.equal(by(/^explorer-/), 6); assert.equal(by(/^clinic-/), 2);
+  assert.ok(more.every((i) => i.status === "ai_drafted"), "nothing approved yet");
   const deck = JSON.parse(readFileSync(join(ROOT, "tokos/decks/ctg.json"), "utf8")), rat = JSON.parse(readFileSync(join(ROOT, "tokos/rationale.json"), "utf8"));
   const all = REV._tokosItems(deck, rat, x), verify = more.filter((i) => i.verify).map((i) => i.id);
   assert.deepEqual(verify, [
@@ -393,7 +394,6 @@ test("review desk: Tokós 2.0 items per content type, verify-first units at the 
     "unit-ob3",
     "unit-ob4",
     "unit-ob9",
-    "unit-ob10",
     "unit-ob12",
     "unit-gy2",
     "unit-gy5",
