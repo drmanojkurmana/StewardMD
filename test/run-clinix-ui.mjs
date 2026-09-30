@@ -724,8 +724,9 @@ try {
   // Door 1: the system card.
   await lockPage(false, null);
   const cards = await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].map(b => ({ t: b.querySelector('.cx-sys-t').textContent, pro: !!b.querySelector('.cx-sys-pro') }))");
-  ok(cards && cards.length === 5, "all five systems are still listed without Pro (locked ones are shown, not hidden)");
+  ok(cards && cards.length === 6, "all six systems are still listed without Pro (locked ones are shown, not hidden)");
   ok(cards && cards.filter(c => !c.pro).map(c => c.t).join() === "Respiratory", "only Respiratory is unbadged for a non-Pro reader");
+  ok(cards && cards.some(c => c.t === "Obstetrics and gynaecology" && c.pro), "the O&G OSCE system is listed, badged Pro");
   await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Cardiovascular')).click()");
   ok(await noticeUp(), "tapping a locked system explains itself instead of opening");
   ok(/CliniX library/.test((await ev("(document.querySelector('#smdProNotice h3') || {}).textContent || ''")) || ""), "the notice names the CliniX library");
@@ -734,6 +735,14 @@ try {
   await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Respiratory')).click()");
   await sleep(300);
   ok((await ev("!!document.querySelector('#clinixRoot .cx-modcard') && !document.getElementById('smdProNotice')")) === true, "the free system still opens without Pro");
+
+  // Door 1b: the Tokos deep link goes through the same lock as a tap on the card.
+  await lockPage(false, null);
+  await ev("(window.CLINIX.openDeep('tokos-osce'), 1)");
+  ok(await noticeUp(), "the tokos-osce deep link is refused with the notice for a non-Pro reader");
+  await sleep(500);
+  ok((await ev("!document.querySelector('#clinixRoot [data-act=\"cx-station\"]')")) === true, "the locked O&G stations did not render through the deep link");
+  ok((await ev("window.CLINIX.openDeep('not-a-link')")) === false, "an unknown deep link id is a no-op");
 
   // Door 2: resume. A saved position inside a locked system must not reopen it.
   await lockPage(false, { diseaseId: "rheumatic-heart-disease", chapterId: null, skillId: null, turnIndex: 0 });
@@ -764,6 +773,54 @@ try {
   await sleep(400);
   ok((await ev("!!document.querySelector('#clinixRoot .cx-modcard') && !document.getElementById('smdProNotice')")) === true,
     "with Pro a formerly locked system opens normally");
+
+  // The O&G OSCE and viva stations (Tokos deep link id tokos-osce).
+  console.log("\n--- O&G OSCE stations ---");
+  await lockPage(true, null);
+  await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Obstetrics')).click()");
+  await sleep(400);
+  ok((await ev("document.querySelectorAll('#clinixRoot .cx-modcard').length")) === 1 && (await ev("!document.querySelector('#clinixRoot .cx-state, #clinixRoot .cx-empty')")) !== false,
+    "the O&G system opens with its module card and no 'coming soon' placeholder");
+  ok(!/Disease modules are coming/.test((await ev("document.getElementById('clinixScroll').textContent")) || ""), "a module-only system does not claim diseases are coming");
+  await lockPage(true, null);
+  await ev("(window.CLINIX.openDeep('tokos-osce'), 1)");
+  for (let i = 0; i < 40; i++) { if (await ev("document.querySelectorAll('#clinixRoot [data-act=\"cx-station\"]').length >= 10")) break; await sleep(250); }
+  ok((await ev("document.querySelectorAll('#clinixRoot [data-act=\"cx-station\"]').length")) === 10, "the deep link opens the O&G module with its ten OSCE stations");
+  ok((await ev("document.querySelectorAll('#clinixRoot [data-act=\"cx-case\"]').length")) === 2, "two simulated patients (AI patient cases) are offered");
+  ok((await ev("!document.getElementById('smdProNotice')")) === true, "a Pro reader gets no paywall from the deep link");
+  const stTitles = await ev("[...document.querySelectorAll('#clinixRoot [data-act=\"cx-station\"] .cx-row-t')].map(x => x.textContent)");
+  ok(Array.isArray(stTitles) && stTitles.some(t => /Speculum/.test(t)) && stTitles.some(t => /Postpartum haemorrhage/.test(t)) && stTitles.some(t => /Eclampsia/.test(t)), "the station list names the speculum, PPH and eclampsia stations");
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-station\"][data-id=\"osce.obg.speculum\"]').click()");
+  await sleep(500);
+  ok((await ev("document.querySelectorAll('#clinixRoot .cx-check').length")) >= 12 && (await ev("!!document.querySelector('#clinixRoot .cx-timer')")) === true,
+    "opening the speculum station shows a timed checklist");
+  ok((await ev("[...document.querySelectorAll('#clinixRoot .cx-check .cx-crit')].length")) >= 2, "consent and chaperone are marked critical on the speculum station");
+  // Tick everything except the critical steps: it must fail on safety, not pass on the total.
+  await ev("(() => { document.querySelectorAll('#clinixRoot .cx-check').forEach(b => { if (!b.querySelector('.cx-crit')) b.click(); }); return 1; })()");
+  await sleep(300);
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-station-finish\"]').click()");
+  await sleep(400);
+  ok(/Fail on a critical step/.test((await ev("document.getElementById('clinixScroll').textContent")) || ""), "missing the consent and chaperone steps fails the speculum station whatever the total");
+  // The viva for this module draws from the O&G pool.
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-back\"]').click()");
+  await sleep(300);
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-viva\"]').click()");
+  for (let i = 0; i < 20; i++) { if (await ev("!!document.querySelector('#clinixRoot .cx-q')")) break; await sleep(250); }
+  ok(((await ev("(document.querySelector('#clinixRoot .cx-q') || {}).textContent || ''")) || "").length > 15, "the O&G viva opens on a first question drawn from the O&G pool");
+
+  // The AI-patient personas run in Case mode: scripted answers first, in the woman's own words.
+  await lockPage(true, null);
+  await ev("(window.CLINIX.openDeep('tokos-osce'), 1)");
+  for (let i = 0; i < 40; i++) { if (await ev("document.querySelectorAll('#clinixRoot [data-act=\"cx-case\"]').length >= 2")) break; await sleep(250); }
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-case\"][data-id=\"case.obg.booking_history\"]').click()");
+  await sleep(400);
+  ok(/Meena Devi/.test((await ev("(document.querySelector('#clinixRoot .cx-case-open') || {}).textContent || ''")) || ""), "the obstetric-history case opens with its persona");
+  await ev("(function(){ document.getElementById('cxCaseQ').value = 'when was your last period?'; document.querySelector('#clinixRoot [data-act=\"cx-case-ask\"]').click(); return true; })()");
+  await sleep(300);
+  ok((await ev("document.querySelector('#clinixRoot .cx-pt').textContent.indexOf('Holi') >= 0")) === true, "she answers the LMP question from the script");
+  await ev("(function(){ document.getElementById('cxCaseQ').value = 'did you have any fits or high blood pressure in your last pregnancy?'; document.querySelector('#clinixRoot [data-act=\"cx-case-ask\"]').click(); return true; })()");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#clinixRoot .cx-pt').length")) >= 2 && (await ev("!document.querySelector('#clinixRoot .cx-pt--unmatched')")) === true, "a natural question about the last pregnancy is understood");
 
   /* ── 9. No prescribing surface anywhere in CliniX ──────────────────────── */
   console.log("\n--- safety ---");

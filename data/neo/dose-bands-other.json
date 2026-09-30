@@ -1,0 +1,2174 @@
+{
+ "schema": 1,
+ "kind": "neo-dose-bands",
+ "title": "Neonatal dose bands: non-antimicrobial drugs (FDA labels)",
+ "compiled": "2026-09-30",
+ "review": {
+  "status": "ai_drafted",
+  "by": null,
+  "date": null
+ },
+ "sources": {
+  "fdab-acetaminophen": {
+   "title": "Acetaminophen (Sagent Pharmaceuticals) prescribing information, openFDA version 2, effective 20260624",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=621282f6-75b3-401b-8e1a-c5153a0c9ecd",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-adenosine": {
+   "title": "Adenosine (Sagent Pharmaceuticals) prescribing information, openFDA version 2, effective 20260727",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=546642f2-662f-46cf-9d82-5bb3bdcc7677",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-alprostadil": {
+   "title": "PROSTIN VR PEDIATRIC (Pharmacia & Upjohn Company LLC) prescribing information, openFDA version 4, effective 20260817",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=930f8c02-46a8-4cff-a484-660468ab23c3",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-bicarb": {
+   "title": "sodium bicarbonate (Baxter Healthcare Corporation) prescribing information, openFDA version 1, effective 20260814",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=b50c858a-00c8-4cb2-ad73-8797f19e656d",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-bicarb-infant": {
+   "title": "INFANT 4.2% SODIUM BICARBONATE (HF Acquisition Co LLC, DBA HealthFirst) prescribing information, openFDA version 8, effective 20250616",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=78c25911-0042-664e-e053-2a91aa0a57a1",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-caffeine-iv": {
+   "title": "caffeine citrate (Sagent Pharmaceuticals) prescribing information, openFDA version 10, effective 20260729",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5f38c395-0093-4afd-89ec-f96e5dc0934a",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-calcium-gluconate": {
+   "title": "Calcium Gluconate (Fresenius Kabi USA, LLC) prescribing information, openFDA version 7, effective 20260518",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8b77c3d2-992d-4261-8421-9cfd07328fbf",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-curosurf": {
+   "title": "Curosurf (Chiesi USA, Inc.) prescribing information, openFDA version 45, effective 20251210",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=99bef307-00bd-4379-9f45-ede1380e74d4",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-cysteine": {
+   "title": "CYSTEINE HYDROCHLORIDE (Baxter Healthcare Corporation) prescribing information, openFDA version 5, effective 20220429",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=cbf70fc3-14b3-4c17-8de8-acba1e12ac95",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-dexamethasone": {
+   "title": "Dexamethasone Sodium Phosphate (Fresenius Kabi USA, LLC) prescribing information, openFDA version 7, effective 20260608",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2b626a48-c7aa-4443-9164-a08ff069ccd1",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-digoxin-inj": {
+   "title": "LANOXIN (Covis Pharma US, Inc) prescribing information, openFDA version 10, effective 20251017",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=9ec84cac-6ecc-43dc-8006-6ccc029e2707",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-digoxin-oral": {
+   "title": "Digoxin (Amici Pharma, Inc) prescribing information, openFDA version 6, effective 20251031",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=eda7193a-e139-41d5-a11b-dc6241645995",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-dobutamine": {
+   "title": "Dobutamine in Dextrose (Hospira, Inc.) prescribing information, openFDA version 28, effective 20260603",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=9943a961-3b50-4847-8a84-d8414ce38daa",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-dopamine": {
+   "title": "Dopamine Hydrochloride and Dextrose (ProPharma Distribution) prescribing information, openFDA version 2, effective 20251218",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3ef116db-fb26-1e66-e063-6294a90a0610",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-fentanyl": {
+   "title": "Fentanyl Citrate (Hospira, Inc.) prescribing information, openFDA version 35, effective 20260824",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=bfa8018a-4cbc-434b-e09e-782872b0340a",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-fosphenytoin": {
+   "title": "CEREBYX (Pfizer Laboratories Div Pfizer Inc) prescribing information, openFDA version 38, effective 20250828",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=d4c36fad-0ba2-4cd4-9c5e-dcf843f38a5a",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-furosemide": {
+   "title": "Furosemide (Medical Purchasing Solutions, LLC) prescribing information, openFDA version 1, effective 20260811",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=58cc1e38-6000-1489-e063-6394a90a5978",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-heparin": {
+   "title": "Heparin Sodium (Cardinal Health 107, LLC) prescribing information, openFDA version 8, effective 20260611",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=62cfd1bb-894f-4429-b362-1e40981dccc6",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-hydrocortisone": {
+   "title": "Solu-Cortef (Pharmacia & Upjohn Company LLC) prescribing information, openFDA version 30, effective 20260827",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=65eefd58-b166-4d71-ade6-45c8fdf86922",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-ibuprofen-lysine": {
+   "title": "Ibuprofen Lysine (Prasco Laboratories) prescribing information, openFDA version 12, effective 20260406",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=307431c7-12de-21e5-e054-00144ff88e88",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-indomethacin": {
+   "title": "Indomethacin (Fresenius Kabi USA, LLC) prescribing information, openFDA version 8, effective 20260119",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ec482425-358c-4500-8f5d-79c1379c1fa8",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-infasurf": {
+   "title": "INFASURF (ONY Biotech Inc.) prescribing information, openFDA version 14, effective 20260331",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=315c128a-272d-4c57-bfbe-1a8b3402af08",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-k-phos": {
+   "title": "POTASSIUM PHOSPHATES (Amneal Pharmaceuticals Private Limited) prescribing information, openFDA version 2, effective 20260901",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=125121b8-bc4c-44ee-906e-e72f652a5aa6",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-lorazepam": {
+   "title": "Lorazepam (Hospira, Inc.) prescribing information, openFDA version 28, effective 20260710",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=20140b19-846b-425f-b191-670e17809945",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-midazolam": {
+   "title": "Midazolam (Hospira, Inc.) prescribing information, openFDA version 31, effective 20260415",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=affecd4d-1f78-4bbe-5a8d-86849bbdc520",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-morphine": {
+   "title": "Morphine Sulfate; Morphine sulfate (Hospira, Inc.) prescribing information, openFDA version 7, effective 20251231",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ee8057d1-ed12-4e18-9efa-d83504abf612",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-na-phos": {
+   "title": "Sodium Phosphates (Hospira, Inc.) prescribing information, openFDA version 18, effective 20260511",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=6f044d16-295e-43ff-72a3-b045c387bc5c",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-naloxone": {
+   "title": "Naloxone Hydrochloride (Hospira, Inc.) prescribing information, openFDA version 35, effective 20260527",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8535cc84-ad4a-4d67-8480-fb5a2e3406f8",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-phytonadione": {
+   "title": "Phytonadione (GLENMARK PHARMACEUTICALS INC) prescribing information, openFDA version 2, effective 20251218",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=60e5abd1-e2fa-4a5e-b25b-3ec6cfdeed14",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-rocuronium": {
+   "title": "Rocuronium (Fresenius Kabi USA, LLC) prescribing information, openFDA version 1, effective 20260802",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=04c9812d-5aa3-4949-ad02-c618028f1bb0",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-sezaby": {
+   "title": "SEZABY (Sun Pharmaceutical Industries, Inc.) prescribing information, openFDA version 7, effective 20251223",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8c7d0402-4977-4c25-bc4b-11db91339e9a",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-survanta": {
+   "title": "Survanta (AbbVie Inc.) prescribing information, openFDA version 46, effective 20201015",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7ef9e3a5-fc39-4ae1-0dad-6b47a1684635",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-vecuronium": {
+   "title": "Vecuronium Bromide (Phlow Corp.) prescribing information, openFDA version 6, effective 20260319",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=b012b1b1-9e59-4525-8f4d-dae98344d15f",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-zinc-chloride": {
+   "title": "Zinc Chloride (Exela Pharma Sciences,LLC) prescribing information, openFDA version 2, effective 20260803",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2bd646d2-2a2a-4376-8da0-c7f08b0511ac",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  },
+  "fdab-zinc-sulfate": {
+   "title": "zinc sulfate (Zydus Pharmaceuticals USA Inc.) prescribing information, openFDA version 2, effective 20241206",
+   "publisher": "US FDA / DailyMed (openFDA drug label API)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=95aa8437-10bc-4205-939f-d21d8fa52a00",
+   "licence": "Public domain (US Government work)",
+   "accessed": "2026-09-30"
+  }
+ },
+ "comment": "ageScope: 'neonatal' = label gives neonatal or preterm dosing; 'pediatric-incl-neonates' = label pediatric dosing that the label states includes neonates or starts at birth, not neonatal-specific. Terms like preterm or term are kept as labels where the source gives no numeric cut-off.",
+ "drugs": [
+  {
+   "id": "caffeine-citrate",
+   "name": "Caffeine citrate",
+   "aliases": [
+    "caffeine",
+    "Cafcit"
+   ],
+   "class": "methylxanthine",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Apnea of prematurity",
+     "route": "IV (maintenance IV or oral)",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Loading dose",
+       "dose": {
+        "lo": 20,
+        "hi": 20,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "once",
+       "infuse": "IV over 30 minutes by syringe pump",
+       "src": "fdab-caffeine-iv",
+       "quote": "Loading Dose | 1 mL/kg | 20 mg/kg | Intravenous* (over 30 minutes) | One Time"
+      },
+      {
+       "label": "Maintenance dose, beginning 24 hours after the loading dose",
+       "dose": {
+        "lo": 5,
+        "hi": 5,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 24,
+       "infuse": "IV over 10 minutes by syringe pump, or orally",
+       "src": "fdab-caffeine-iv",
+       "quote": "Maintenance Dose | 0.25 mL/kg | 5 mg/kg | Intravenous* (over 10 minutes) or Orally | Every 24 hours"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Doses are expressed as caffeine citrate; caffeine base is one-half the citrate dose.",
+     "src": "fdab-caffeine-iv",
+     "quote": "NOTE THAT THE DOSE OF CAFFEINE BASE IS ONE-HALF THE DOSE WHEN EXPRESSED AS CAFFEINE CITRATE (e.g., 20 mg of caffeine citrate is equivalent to 10 mg of caffeine base)"
+    },
+    {
+     "text": "Serious toxicity associated with serum caffeine above 50 mg/L; monitor levels periodically.",
+     "src": "fdab-caffeine-iv",
+     "quote": "Serious toxicity has been associated with serum levels greater than 50 mg/L."
+    },
+    {
+     "text": "Monitor for necrotizing enterocolitis.",
+     "src": "fdab-caffeine-iv",
+     "quote": "As with all preterm infants, patients being treated with caffeine citrate should be carefully monitored for the development of necrotizing enterocolitis."
+    },
+    {
+     "text": "Measure baseline caffeine level if previously on theophylline or maternal caffeine intake before delivery.",
+     "src": "fdab-caffeine-iv",
+     "quote": "Prior to initiation of caffeine citrate, baseline serum levels of caffeine should be measured in infants previously treated with theophylline, since preterm infants metabolize theophylline to caffeine."
+    }
+   ]
+  },
+  {
+   "id": "phenobarbital",
+   "name": "Phenobarbital sodium (SEZABY)",
+   "aliases": [
+    "phenobarbitone",
+    "Sezaby"
+   ],
+   "class": "anticonvulsant (barbiturate)",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Neonatal seizures",
+     "route": "IV",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "First loading dose",
+       "dose": {
+        "lo": 20,
+        "hi": 20,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "once",
+       "infuse": "IV infusion over 15 minutes into a large peripheral vein",
+       "src": "fdab-sezaby",
+       "quote": "Loading Dose: 20 mg/kg is administered by intravenous infusion over 15 minutes"
+      },
+      {
+       "label": "Second loading dose if clinically indicated, term infants",
+       "dose": {
+        "lo": 20,
+        "hi": 20,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "once, at least 15 minutes after completion of the first loading dose",
+       "src": "fdab-sezaby",
+       "quote": "a second loading dose may be administered over the subsequent 15 minutes as 20 mg/kg for term infants"
+      },
+      {
+       "label": "Second loading dose if clinically indicated, preterm infants",
+       "dose": {
+        "lo": 10,
+        "hi": 20,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "once, at least 15 minutes after completion of the first loading dose",
+       "src": "fdab-sezaby",
+       "quote": "a second loading dose may be administered over the subsequent 15 minutes as 20 mg/kg for term infants or 10 mg/kg or 20 mg/kg for preterm infants"
+      },
+      {
+       "label": "Maximum total loading dose",
+       "max": {
+        "v": 40,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "total loading"
+       },
+       "src": "fdab-sezaby",
+       "quote": "The maximum total loading dose is 40 mg/kg."
+      },
+      {
+       "label": "Maintenance option 1, starting 8 to 12 hours after first loading dose",
+       "dose": {
+        "lo": 1.5,
+        "hi": 1.5,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 8,
+       "duration": "up to 5 days",
+       "src": "fdab-sezaby",
+       "quote": "Maintenance Dosage: starting 8 to 12 hours after first loading dose: 4.5 mg/kg/day given in 2 or 3 divided doses (i.e., 1.5 mg/kg every 8 hours or 2.25 mg/kg every 12 hours) up to 5 days."
+      },
+      {
+       "label": "Maintenance option 2, starting 8 to 12 hours after first loading dose",
+       "dose": {
+        "lo": 2.25,
+        "hi": 2.25,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 12,
+       "duration": "up to 5 days",
+       "src": "fdab-sezaby",
+       "quote": "Maintenance Dosage: starting 8 to 12 hours after first loading dose: 4.5 mg/kg/day given in 2 or 3 divided doses (i.e., 1.5 mg/kg every 8 hours or 2.25 mg/kg every 12 hours) up to 5 days."
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "SEZABY contains no benzyl alcohol or propylene glycol.",
+     "src": "fdab-sezaby",
+     "quote": "SEZABY does not contain benzyl alcohol or propylene glycol."
+    }
+   ]
+  },
+  {
+   "id": "fosphenytoin",
+   "name": "Fosphenytoin sodium (CEREBYX)",
+   "aliases": [
+    "Cerebyx"
+   ],
+   "class": "anticonvulsant (hydantoin prodrug)",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Generalized tonic-clonic status epilepticus",
+     "route": "IV",
+     "ageScope": "pediatric-incl-neonates",
+     "bands": [
+      {
+       "label": "Status epilepticus loading dose, pediatric (birth to less than 17 years)",
+       "dose": {
+        "lo": 15,
+        "hi": 20,
+        "unit": "mg PE",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "once",
+       "infuse": "2 mg PE/kg/min or 150 mg PE/min, whichever is slower",
+       "src": "fdab-fosphenytoin",
+       "quote": "Pediatric (Birth to less than 17 years of age) 15 mg PE/kg to 20 mg PE/kg 2 mg PE/kg/min, or 150 mg PE/min, whichever is slower"
+      }
+     ]
+    },
+    {
+     "indication": "Non-emergent loading and maintenance",
+     "route": "IV",
+     "ageScope": "pediatric-incl-neonates",
+     "bands": [
+      {
+       "label": "Non-emergent loading dose, pediatric (birth to less than 17 years)",
+       "dose": {
+        "lo": 10,
+        "hi": 15,
+        "unit": "mg PE",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "once",
+       "infuse": "1 to 2 mg PE/kg/min or 150 mg PE/min, whichever is slower",
+       "src": "fdab-fosphenytoin",
+       "quote": "Pediatric (Birth to less than 17 years of age) 10 mg PE/kg to 15 mg PE/kg 1 mg PE/kg/min to 2 mg PE/kg/min, or 150 mg PE/min, whichever is slower"
+      },
+      {
+       "label": "Initial maintenance dose, 12 hours after the loading dose",
+       "dose": {
+        "lo": 2,
+        "hi": 4,
+        "unit": "mg PE",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "once, 12 hours after the loading dose",
+       "src": "fdab-fosphenytoin",
+       "quote": "Initial Maintenance Dosage: 2 mg PE/kg to 4 mg PE/kg (dose given 12 hours after the loading dose)"
+      },
+      {
+       "label": "Maintenance after initial maintenance dose",
+       "dose": {
+        "lo": 4,
+        "hi": 8,
+        "unit": "mg PE",
+        "per": "kg",
+        "basis": "day",
+        "divided": true
+       },
+       "every_h": 12,
+       "src": "fdab-fosphenytoin",
+       "quote": "Maintenance Dosage after Initial Maintenance Dosage: 4 mg PE/kg/day to 8 mg PE/kg/day in divided doses (continued every 12 hours after initial maintenance dose)"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Maximum IV rate in pediatric patients: 2 mg PE/kg/min or 150 mg PE/min, whichever is slower (cardiovascular risk).",
+     "src": "fdab-fosphenytoin",
+     "quote": "The rate of intravenous CEREBYX administration should not exceed 150 mg phenytoin sodium equivalents (PE) per minute in adults and 2 mg PE/kg/min (or 150 mg PE/min, whichever is slower) in pediatric patients"
+    },
+    {
+     "text": "Intramuscular fosphenytoin should ordinarily not be used in pediatric patients.",
+     "src": "fdab-fosphenytoin",
+     "quote": "Intramuscular administration of CEREBYX should ordinarily not be used in pediatric patients."
+    }
+   ]
+  },
+  {
+   "id": "midazolam",
+   "name": "Midazolam",
+   "aliases": [
+    "Versed"
+   ],
+   "class": "benzodiazepine",
+   "highAlert": true,
+   "regimens": [
+    {
+     "indication": "Sedation of intubated neonates in critical care",
+     "route": "IV continuous infusion",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "when": {
+        "ga_wk": {
+         "lt": 32
+        }
+       },
+       "label": "Starting infusion rate, neonates less than 32 weeks",
+       "dose": {
+        "lo": 0.03,
+        "hi": 0.03,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose",
+        "rate": "h"
+       },
+       "src": "fdab-midazolam",
+       "quote": "continuous intravenous infusions of midazolam injection should be initiated at a rate of 0.03 mg/kg/hr (0.5 mcg/kg/min) in neonates <32 weeks"
+      },
+      {
+       "when": {
+        "ga_wk": {
+         "gt": 32
+        }
+       },
+       "label": "Starting infusion rate, neonates more than 32 weeks",
+       "dose": {
+        "lo": 0.06,
+        "hi": 0.06,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose",
+        "rate": "h"
+       },
+       "src": "fdab-midazolam",
+       "quote": "0.06 mg/kg/hr (1 mcg/kg/min) in neonates >32 weeks"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "No IV loading doses in neonates; the infusion may be run more rapidly for the first several hours instead.",
+     "src": "fdab-midazolam",
+     "quote": "Intravenous loading doses should not be used in neonates, rather the infusion may be run more rapidly for the first several hours to establish therapeutic plasma levels."
+    },
+    {
+     "text": "Do not give by rapid injection in neonates: severe hypotension and seizures reported, especially with fentanyl.",
+     "src": "fdab-midazolam",
+     "quote": "Midazolam should not be administered by rapid injection in the neonatal population. Severe hypotension and seizures have been reported following rapid intravenous administration"
+    },
+    {
+     "text": "Contains benzyl alcohol; gasping syndrome linked to benzyl alcohol dosages above 99 mg/kg/day in neonates.",
+     "src": "fdab-midazolam",
+     "quote": "has been associated with benzyl alcohol dosages greater than 99 mg/kg/day in neonates and low-birth-weight neonates."
+    },
+    {
+     "text": "Extreme caution sedating non-intubated preterm and former preterm infants (apnea).",
+     "src": "fdab-midazolam",
+     "quote": "Due to an increased risk of apnea, extreme caution is advised when sedating preterm and former preterm patients whose trachea is not intubated."
+    }
+   ]
+  },
+  {
+   "id": "morphine",
+   "name": "Morphine sulfate",
+   "aliases": [
+    "morphine"
+   ],
+   "class": "opioid analgesic",
+   "highAlert": true,
+   "regimens": [
+    {
+     "indication": "Pain (continuous IV infusion after dilution)",
+     "route": "IV continuous infusion",
+     "ageScope": "pediatric-incl-neonates",
+     "bands": [
+      {
+       "label": "Starting infusion, patients less than 1 year old including neonates",
+       "dose": {
+        "lo": 0.005,
+        "hi": 0.01,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose",
+        "rate": "h"
+       },
+       "src": "fdab-morphine",
+       "quote": "Patients less than 1 year old, including neonates: • Initiate treatment in a dosing range of 0.005 mg/kg/hour to 0.01 mg/kg/hour."
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Monitor cardiorespiratory function in patients under 3 months; titrate to pain relief and somnolence.",
+     "src": "fdab-morphine",
+     "quote": "Cardiorespiratory function should be monitored in patients less than 3 months of age."
+    },
+    {
+     "text": "Premature and former premature infants with chronic lung disease up to 5 to 6 months: monitor for depressed hypoxic drive.",
+     "src": "fdab-morphine",
+     "quote": "For premature infants and former premature infants with chronic lung disease and up to 5 to 6 months of age, careful monitoring for depressed hypoxic drive is required following opioid administration"
+    }
+   ]
+  },
+  {
+   "id": "acetaminophen-iv",
+   "name": "Acetaminophen (paracetamol) IV",
+   "aliases": [
+    "paracetamol",
+    "Ofirmev"
+   ],
+   "class": "analgesic/antipyretic",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Fever",
+     "route": "IV (15-minute infusion)",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "when": {
+        "ga_wk": {
+         "min": 32
+        },
+        "pna_d": {
+         "max": 28
+        }
+       },
+       "label": "Neonates born at 32 weeks GA or more, up to 28 days chronological age",
+       "dose": {
+        "lo": 12.5,
+        "hi": 12.5,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "every_h": 6,
+       "max": {
+        "v": 50,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "day"
+       },
+       "infuse": "15-minute IV infusion",
+       "src": "fdab-acetaminophen",
+       "quote": "Neonates, including premature neonates born at greater than or equal to 32 weeks gestational age, up to 28 days chronological age: the recommended dosage of Acetaminophen Injection is 12.5 mg /kg every 6 hours, to a maximum daily dose of acetaminophen of 50 mg/kg per day, with a minimum dosing interval of 6 hours."
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Maximum daily dose counts acetaminophen from all routes and all products.",
+     "src": "fdab-acetaminophen",
+     "quote": "Calculated maximum daily dose of acetaminophen is based on all routes of administration (i.e. intravenous, oral, and rectal) and all products containing acetaminophen."
+    }
+   ]
+  },
+  {
+   "id": "ibuprofen-lysine",
+   "name": "Ibuprofen lysine IV (NeoProfen)",
+   "aliases": [
+    "NeoProfen",
+    "ibuprofen"
+   ],
+   "class": "NSAID (PDA closure)",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Closure of clinically significant PDA in premature infants",
+     "route": "IV (15-minute infusion)",
+     "ageScope": "neonatal",
+     "when": {
+      "bw": {
+       "min": 500,
+       "max": 1500,
+       "unit": "g"
+      },
+      "ga_wk": {
+       "max": 32
+      }
+     },
+     "src": "fdab-ibuprofen-lysine",
+     "quote": "premature infants weighing between 500 and 1500 g, who are no more than 32 weeks gestational age",
+     "bands": [
+      {
+       "label": "Dose 1",
+       "dose": {
+        "lo": 10,
+        "hi": 10,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose",
+        "weight": "birth weight"
+       },
+       "freq": "once",
+       "infuse": "continuous infusion over 15 minutes",
+       "src": "fdab-ibuprofen-lysine",
+       "quote": "An initial dose of 10 mg per kilogram is followed by two doses of 5 mg per kilogram each, after 24 and 48 hours. All doses should be based on birth weight."
+      },
+      {
+       "label": "Doses 2 and 3, at 24 and 48 hours after dose 1",
+       "dose": {
+        "lo": 5,
+        "hi": 5,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose",
+        "weight": "birth weight"
+       },
+       "every_h": 24,
+       "freq": "two doses, at 24 and 48 hours",
+       "src": "fdab-ibuprofen-lysine",
+       "quote": "An initial dose of 10 mg per kilogram is followed by two doses of 5 mg per kilogram each, after 24 and 48 hours. All doses should be based on birth weight."
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Withhold further doses if anuria or marked oliguria (below 0.6 mL/kg/hr) at the time of dose 2 or 3.",
+     "src": "fdab-ibuprofen-lysine",
+     "quote": "If anuria or marked oliguria (urinary output <0.6 mL/kg/hr) is evident at the scheduled time of the second or third dose of Ibuprofen Lysine"
+    },
+    {
+     "text": "Do not give in the same IV line as TPN; interrupt TPN for 15 minutes before and after.",
+     "src": "fdab-ibuprofen-lysine",
+     "quote": "If necessary, TPN should be interrupted for a 15-minute period prior to and after drug administration."
+    }
+   ]
+  },
+  {
+   "id": "indomethacin-iv",
+   "name": "Indomethacin IV",
+   "aliases": [
+    "Indocin IV"
+   ],
+   "class": "NSAID (PDA closure)",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Closure of hemodynamically significant PDA in premature infants",
+     "route": "IV",
+     "ageScope": "neonatal",
+     "when": {
+      "wt": {
+       "min": 500,
+       "max": 1750,
+       "unit": "g"
+      }
+     },
+     "src": "fdab-indomethacin",
+     "quote": "premature infants weighing between 500 and 1,750 g",
+     "bands": [
+      {
+       "when": {
+        "hours": {
+         "lt": 48
+        }
+       },
+       "label": "Age at 1st dose less than 48 hours: dose 1",
+       "dose": {
+        "lo": 0.2,
+        "hi": 0.2,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "3 doses at 12 to 24 hour intervals",
+       "src": "fdab-indomethacin",
+       "quote": "Less than 48 hours | 1st 0.2 | 2nd 0.1 | 3rd 0.1"
+      },
+      {
+       "when": {
+        "hours": {
+         "lt": 48
+        }
+       },
+       "label": "Age at 1st dose less than 48 hours: doses 2 and 3",
+       "dose": {
+        "lo": 0.1,
+        "hi": 0.1,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "3 doses at 12 to 24 hour intervals",
+       "src": "fdab-indomethacin",
+       "quote": "Less than 48 hours | 1st 0.2 | 2nd 0.1 | 3rd 0.1"
+      },
+      {
+       "when": {
+        "pna_d": {
+         "min": 2,
+         "max": 7
+        }
+       },
+       "label": "Age at 1st dose 2 to 7 days: doses 1 to 3",
+       "dose": {
+        "lo": 0.2,
+        "hi": 0.2,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "3 doses at 12 to 24 hour intervals",
+       "src": "fdab-indomethacin",
+       "quote": "2 to 7 days | 0.2 | 0.2 | 0.2"
+      },
+      {
+       "when": {
+        "pna_d": {
+         "gt": 7
+        }
+       },
+       "label": "Age at 1st dose over 7 days: dose 1",
+       "dose": {
+        "lo": 0.2,
+        "hi": 0.2,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "3 doses at 12 to 24 hour intervals",
+       "src": "fdab-indomethacin",
+       "quote": "Over 7 days | 0.2 | 0.25 | 0.25"
+      },
+      {
+       "when": {
+        "pna_d": {
+         "gt": 7
+        }
+       },
+       "label": "Age at 1st dose over 7 days: doses 2 and 3",
+       "dose": {
+        "lo": 0.25,
+        "hi": 0.25,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "3 doses at 12 to 24 hour intervals",
+       "src": "fdab-indomethacin",
+       "quote": "Over 7 days | 0.2 | 0.25 | 0.25"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Withhold further doses if anuria or marked oliguria (below 0.6 mL/kg/hr).",
+     "src": "fdab-indomethacin",
+     "quote": "If anuria or marked oliguria (urinary output <0.6 mL/kg/hr) is evident at the scheduled time of the second or third dose of Indomethacin for Injection, do not give additional doses"
+    },
+    {
+     "text": "Reconstitute with preservative-free diluent; benzyl alcohol is toxic in neonates.",
+     "src": "fdab-indomethacin",
+     "quote": "Benzyl alcohol as a preservative has been associated with toxicity in neonates. Therefore, do not use diluents that contain preservatives."
+    }
+   ]
+  },
+  {
+   "id": "alprostadil",
+   "name": "Alprostadil (PGE1)",
+   "aliases": [
+    "Prostin VR Pediatric",
+    "prostaglandin E1"
+   ],
+   "class": "prostaglandin (ductal patency)",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Maintain ductus arteriosus patency in duct-dependent congenital heart disease",
+     "route": "IV continuous infusion (or umbilical artery catheter at ductal opening)",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Starting infusion",
+       "dose": {
+        "lo": 0.05,
+        "hi": 0.1,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "dose",
+        "rate": "min"
+       },
+       "src": "fdab-alprostadil",
+       "quote": "Begin infusion with 0.05 to 0.1 micrograms alprostadil per kilogram of body weight per minute."
+      },
+      {
+       "label": "After response, reduce to the lowest effective rate",
+       "dose": {
+        "lo": 0.01,
+        "hi": 0.1,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "dose",
+        "rate": "min"
+       },
+       "src": "fdab-alprostadil",
+       "quote": "This may be accomplished by reducing the dosage from 0.1 to 0.05 to 0.025 to 0.01 micrograms per kilogram of body weight per minute."
+      },
+      {
+       "label": "If response to 0.05 is inadequate, may increase",
+       "dose": {
+        "lo": 0.05,
+        "hi": 0.4,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "dose",
+        "rate": "min"
+       },
+       "max": {
+        "v": 0.4,
+        "unit": "mcg",
+        "per": "kg",
+        "rate": "min"
+       },
+       "src": "fdab-alprostadil",
+       "quote": "If response to 0.05 micrograms per kilogram of body weight per minute is inadequate, dosage can be increased up to 0.4 micrograms per kilogram of body weight per minute"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Boxed warning: apnea in about 10 to 12% of neonates, most often under 2 kg birth weight, usually in the first hour; ventilatory support must be immediately available.",
+     "src": "fdab-alprostadil",
+     "quote": "Apnea is experienced by about 10 to 12% of neonates with congenital heart defects treated with PROSTIN VR PEDIATRIC Sterile Solution. Apnea is most often seen in neonates weighing less than 2 kg at birth and usually appears during the first hour of drug infusion."
+    },
+    {
+     "text": "Prepare fresh infusion every 24 hours.",
+     "src": "fdab-alprostadil",
+     "quote": "Prepare fresh infusion solutions every 24 hours."
+    }
+   ]
+  },
+  {
+   "id": "dopamine",
+   "name": "Dopamine hydrochloride",
+   "aliases": [
+    "Intropin"
+   ],
+   "class": "inotrope/vasopressor",
+   "highAlert": true,
+   "regimens": [
+    {
+     "indication": "Hemodynamic support (pediatric dosing reported in publications)",
+     "route": "IV continuous infusion",
+     "ageScope": "pediatric-incl-neonates",
+     "bands": [
+      {
+       "label": "Starting dose (publications)",
+       "dose": {
+        "lo": 1,
+        "hi": 5,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "dose",
+        "rate": "min"
+       },
+       "src": "fdab-dopamine",
+       "quote": "In publications, the most common starting doses were 1-5 micrograms/kilograms/minute."
+      },
+      {
+       "label": "Titration increments (publications)",
+       "dose": {
+        "lo": 2.5,
+        "hi": 5.0,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "dose",
+        "rate": "min"
+       },
+       "freq": "increment",
+       "src": "fdab-dopamine",
+       "quote": "Dosing increments that were reported ranged from 2.5 to 5.0 micrograms/kilogram/minute."
+      },
+      {
+       "label": "Usual maximum (publications)",
+       "dose": {
+        "lo": 15,
+        "hi": 20,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "dose",
+        "rate": "min"
+       },
+       "max": {
+        "v": 50,
+        "unit": "mcg",
+        "per": "kg",
+        "rate": "min",
+        "note": "occasional use"
+       },
+       "src": "fdab-dopamine",
+       "quote": "Usual maximum doses were 15-20 micrograms/kilogram/minute, with occasional use as great as 50 micrograms/kilogram/minute."
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Label states pediatric safety and effectiveness not established; doses above are from publications.",
+     "src": "fdab-dopamine",
+     "quote": "Pediatric Use Safety and effectiveness in children have not been established."
+    },
+    {
+     "text": "Neonatal clearance is highly variable; use low doses and slow titration. Newborns may be more sensitive to vasoconstriction.",
+     "src": "fdab-dopamine",
+     "quote": "Because of the variability of clearance, especially in the neonate and newborn, low doses of dopamine and slow deliberate titration should be employed"
+    },
+    {
+     "text": "Low neonatal doses require considerable dilution of this premixed product.",
+     "src": "fdab-dopamine",
+     "quote": "Particularly in neonates, such low doses require considerable dilution of this product"
+    }
+   ]
+  },
+  {
+   "id": "dobutamine",
+   "name": "Dobutamine",
+   "aliases": [
+    "Dobutrex"
+   ],
+   "class": "inotrope",
+   "highAlert": true,
+   "regimens": [],
+   "notes": [
+    {
+     "text": "No neonatal dose in label. In premature neonates dobutamine is less effective than dopamine at raising blood pressure without undue tachycardia.",
+     "src": "fdab-dobutamine",
+     "quote": "In premature neonates, however, dobutamine is less effective than dopamine in raising systemic blood pressure without causing undue tachycardia"
+    }
+   ]
+  },
+  {
+   "id": "digoxin",
+   "name": "Digoxin",
+   "aliases": [
+    "Lanoxin"
+   ],
+   "class": "cardiac glycoside",
+   "highAlert": true,
+   "regimens": [
+    {
+     "indication": "Heart failure (IV)",
+     "route": "IV (over 5 minutes or longer)",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Total IV loading dose, premature",
+       "dose": {
+        "lo": 15,
+        "hi": 25,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "total loading"
+       },
+       "freq": "half initially, then one quarter every 6 to 8 hours twice",
+       "src": "fdab-digoxin-inj",
+       "quote": "Administer half the total loading dose initially, then ¼ the loading dose every 6-8 hours twice Premature 15-25"
+      },
+      {
+       "label": "Total IV loading dose, full-term",
+       "dose": {
+        "lo": 20,
+        "hi": 30,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "total loading"
+       },
+       "freq": "half initially, then one quarter every 6 to 8 hours twice",
+       "src": "fdab-digoxin-inj",
+       "quote": "Administer half the total loading dose initially, then ¼ the loading dose every 6-8 hours twice Premature 15-25 Full-Term 20-30"
+      },
+      {
+       "label": "Starting IV maintenance, premature",
+       "dose": {
+        "lo": 1.9,
+        "hi": 3.1,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "twice daily",
+       "src": "fdab-digoxin-inj",
+       "quote": "Dose Regimen, mcg/kg/dose (given TWICE daily) Premature 1.9-3.1"
+      },
+      {
+       "label": "Starting IV maintenance, full-term",
+       "dose": {
+        "lo": 3,
+        "hi": 4.5,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "twice daily",
+       "src": "fdab-digoxin-inj",
+       "quote": "Dose Regimen, mcg/kg/dose (given TWICE daily) Premature 1.9-3.1 Full-Term 3-4.5"
+      }
+     ]
+    },
+    {
+     "indication": "Heart failure (oral solution)",
+     "route": "Oral",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Oral loading dose, premature",
+       "dose": {
+        "lo": 20,
+        "hi": 30,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "total loading"
+       },
+       "src": "fdab-digoxin-oral",
+       "quote": "Premature | 20 to 30"
+      },
+      {
+       "label": "Oral loading dose, full-term",
+       "dose": {
+        "lo": 25,
+        "hi": 35,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "total loading"
+       },
+       "src": "fdab-digoxin-oral",
+       "quote": "Full-Term | 25 to 35"
+      },
+      {
+       "label": "Oral maintenance, premature",
+       "dose": {
+        "lo": 2.3,
+        "hi": 3.9,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "twice daily",
+       "daily": {
+        "lo": 4.7,
+        "hi": 7.8,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "day"
+       },
+       "src": "fdab-digoxin-oral",
+       "quote": "Premature | 4.7 to 7.8 | 2.3 to 3.9 Twice Daily"
+      },
+      {
+       "label": "Oral maintenance, full-term",
+       "dose": {
+        "lo": 3.8,
+        "hi": 5.6,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "twice daily",
+       "daily": {
+        "lo": 7.5,
+        "hi": 11.3,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "day"
+       },
+       "src": "fdab-digoxin-oral",
+       "quote": "Full-Term | 7.5 to 11.3 | 3.8 to 5.6 Twice Daily"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Toxic levels are only slightly higher than therapeutic levels; monitor for toxicity.",
+     "src": "fdab-digoxin-inj",
+     "quote": "toxic levels of digoxin are only slightly higher than therapeutic levels"
+    },
+    {
+     "text": "Pediatric IM: no more than 200 mcg of LANOXIN Injection Pediatric per site; IV preferred, avoid bolus.",
+     "src": "fdab-digoxin-inj",
+     "quote": "For pediatric patients, no more than 200 mcg of LANOXIN Injection Pediatric should be injected into a single site. Administer the dose over a period of 5 minutes or longer and avoid bolus administration"
+    }
+   ]
+  },
+  {
+   "id": "adenosine",
+   "name": "Adenosine",
+   "aliases": [
+    "Adenocard"
+   ],
+   "class": "antiarrhythmic",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Conversion of PSVT",
+     "route": "IV rapid bolus with saline flush",
+     "ageScope": "pediatric-incl-neonates",
+     "bands": [
+      {
+       "when": {
+        "wt": {
+         "lt": 50,
+         "unit": "kg"
+        }
+       },
+       "label": "Initial dose, body weight below 50 kg",
+       "dose": {
+        "lo": 0.05,
+        "hi": 0.1,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "once; repeat after 1-2 minutes if no conversion",
+       "src": "fdab-adenosine",
+       "quote": "Pediatric Patients with a Body Weight < 50 kg: Initial dose: Give 0.05 to 0.1 mg/kg as a rapid IV bolus"
+      },
+      {
+       "when": {
+        "wt": {
+         "lt": 50,
+         "unit": "kg"
+        }
+       },
+       "label": "Repeat doses: increase by 0.05 to 0.1 mg/kg each bolus",
+       "dose": {
+        "lo": 0.05,
+        "hi": 0.1,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose",
+        "note": "increment over previous dose"
+       },
+       "max": {
+        "v": 0.3,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "src": "fdab-adenosine",
+       "quote": "Pediatric Patients with a Body Weight < 50 kg: Initial dose: Give 0.05 to 0.1 mg/kg as a rapid IV bolus given either centrally or peripherally. A saline flush should follow. Repeat administration: If conversion of PSVT does not occur within 1-2 minutes, additional bolus injections of adenosine can be administered at incrementally higher doses, increasing the amount given by 0.05 to 0.1 mg/kg. Follow each bolus with a saline flush. This process should continue until sinus rhythm is established or a maximum single dose of 0.3 mg/kg is used."
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Label: pediatric doses in neonates were equivalent to adult doses on a weight basis; no controlled pediatric studies.",
+     "src": "fdab-adenosine",
+     "quote": "The dosages used in neonates, infants, children and adolescents were equivalent to those administered to adults on a weight basis."
+    }
+   ]
+  },
+  {
+   "id": "naloxone",
+   "name": "Naloxone hydrochloride",
+   "aliases": [
+    "Narcan"
+   ],
+   "class": "opioid antagonist",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Opioid-induced depression in neonates",
+     "route": "IV, IM or SC",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Usual initial dose",
+       "dose": {
+        "lo": 0.01,
+        "hi": 0.01,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "may be repeated per adult postoperative guidelines",
+       "src": "fdab-naloxone",
+       "quote": "Usage in Neonates: Opioid-Induced Depression: The usual initial dose is 0.01 mg/kg body weight administered I.V., I.M., or S.C."
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Use cautiously in newborns of opioid-dependent mothers; abrupt reversal may precipitate withdrawal, including convulsions.",
+     "src": "fdab-naloxone",
+     "quote": "Naloxone hydrochloride injection should be administered cautiously to persons, including newborns of mothers, who are known or suspected to be physically dependent on opioids."
+    },
+    {
+     "text": "No benefit as an additional resuscitation method in intrauterine asphyxia not related to opioids.",
+     "src": "fdab-naloxone",
+     "quote": "Naloxone has no apparent benefit as an additional method of resuscitation in the newly born infant with intrauterine asphyxia, which is not related to opioid use."
+    }
+   ]
+  },
+  {
+   "id": "rocuronium",
+   "name": "Rocuronium bromide",
+   "aliases": [
+    "Zemuron"
+   ],
+   "class": "neuromuscular blocker (non-depolarizing)",
+   "highAlert": true,
+   "regimens": [
+    {
+     "indication": "Tracheal intubation and neuromuscular blockade during anesthesia",
+     "route": "IV",
+     "ageScope": "pediatric-incl-neonates",
+     "bands": [
+      {
+       "label": "Initial intubation dose, pediatric",
+       "dose": {
+        "lo": 0.45,
+        "hi": 0.6,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "once",
+       "src": "fdab-rocuronium",
+       "quote": "The recommended initial intubation dose of Rocuronium Bromide Injection is 0.6 mg/kg; however, a lower dose of 0.45 mg/kg may be used depending on anesthetic technique and the age of the patient."
+      },
+      {
+       "label": "Maintenance bolus at reappearance of T3, all pediatric age groups",
+       "dose": {
+        "lo": 0.15,
+        "hi": 0.15,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "src": "fdab-rocuronium",
+       "quote": "ce dosing of Rocuronium Bromide Injection can be administered as bolus doses of 0.15 mg/kg at reappearance of T 3 in all pediatric age groups."
+      },
+      {
+       "label": "Maintenance infusion at reappearance of T2 (lowest requirement in neonates)",
+       "dose": {
+        "lo": 7,
+        "hi": 10,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "dose",
+        "rate": "min"
+       },
+       "src": "fdab-rocuronium",
+       "quote": "Maintenance dosing can also be administered at the reappearance of T 2 at a rate of 7 mcg/kg/min to 10 mcg/kg/min, with the lowest dose requirement for neonates (birth to less than 28 days)"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Not recommended for rapid sequence intubation in pediatric patients.",
+     "src": "fdab-rocuronium",
+     "quote": "Not recommended for rapid sequence intubation in pediatric patients."
+    },
+    {
+     "text": "Time to maximum block after an intubating dose is longest in neonates (birth to less than 28 days).",
+     "src": "fdab-rocuronium",
+     "quote": "longest in neonates (birth to less than 28 days)."
+    }
+   ]
+  },
+  {
+   "id": "vecuronium",
+   "name": "Vecuronium bromide",
+   "aliases": [
+    "Norcuron"
+   ],
+   "class": "neuromuscular blocker (non-depolarizing)",
+   "highAlert": true,
+   "regimens": [],
+   "notes": [
+    {
+     "text": "No dosing recommendation under 7 weeks of age; no pediatric continuous infusion recommendation.",
+     "src": "fdab-vecuronium",
+     "quote": "Information presently available does not permit recommendation on usage in pediatric patients less than 7 weeks of age"
+    },
+    {
+     "text": "Bacteriostatic water (benzyl alcohol) reconstitution is not for use in newborns.",
+     "src": "fdab-vecuronium",
+     "quote": "bacteriostatic water for injection ( NOT FOR USE IN NEWBORNS )"
+    }
+   ]
+  },
+  {
+   "id": "heparin",
+   "name": "Heparin sodium",
+   "aliases": [
+    "unfractionated heparin",
+    "UFH"
+   ],
+   "class": "anticoagulant",
+   "highAlert": true,
+   "regimens": [
+    {
+     "indication": "Anticoagulation (pediatric guideline based on clinical experience)",
+     "route": "IV",
+     "ageScope": "pediatric-incl-neonates",
+     "bands": [
+      {
+       "label": "Initial bolus",
+       "dose": {
+        "lo": 75,
+        "hi": 100,
+        "unit": "units",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "once",
+       "infuse": "IV bolus over 10 minutes",
+       "src": "fdab-heparin",
+       "quote": "Initial Dose 75 to 100 units/kg (Intravenous bolus over 10 minutes)"
+      },
+      {
+       "label": "Maintenance infusion, infants",
+       "dose": {
+        "lo": 25,
+        "hi": 30,
+        "unit": "units",
+        "per": "kg",
+        "basis": "dose",
+        "rate": "h"
+       },
+       "src": "fdab-heparin",
+       "quote": "Infants: 25 to 30 units/kg/hour; Infants < 2 months have the highest requirements (average 28 units/kg/hour)"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Use preservative-free heparin in neonates and infants (benzyl alcohol toxicity).",
+     "src": "fdab-heparin",
+     "quote": "Do not use benzyl alcohol-preserved drugs in neonates and infants. Use preservative-free Heparin Sodium Injection in neonates and infants"
+    },
+    {
+     "text": "Deaths in neonates from confusing heparin vials with catheter lock flush vials; confirm strength.",
+     "src": "fdab-heparin",
+     "quote": "Pediatric patients, including neonates, have died as a result of medication errors in which Heparin Sodium Injection vials have been confused with \"catheter lock flush\" vials"
+    },
+    {
+     "text": "Adjust to APTT 60 to 85 seconds (anti-Xa 0.35 to 0.70).",
+     "src": "fdab-heparin",
+     "quote": "Adjust heparin to maintain APTT of 60 to 85 seconds, assuming this reflects an anti-Factor Xa level of 0.35 to 0.70"
+    }
+   ]
+  },
+  {
+   "id": "phytonadione",
+   "name": "Phytonadione (vitamin K1)",
+   "aliases": [
+    "vitamin K",
+    "vitamin K1"
+   ],
+   "class": "vitamin",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Prophylaxis of hemorrhagic disease of the newborn",
+     "route": "IM",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Single dose within 1 hour of birth",
+       "dose": {
+        "lo": 0.5,
+        "hi": 1,
+        "unit": "mg",
+        "per": "dose",
+        "basis": "dose"
+       },
+       "freq": "once, within 1 hour of birth",
+       "src": "fdab-phytonadione",
+       "quote": "A single intramuscular dose of phytonadione injectable emulsion, USP 0.5 to 1 mg within one hour of birth is recommended."
+      }
+     ]
+    },
+    {
+     "indication": "Treatment of hemorrhagic disease of the newborn",
+     "route": "SC or IM",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Treatment dose",
+       "dose": {
+        "lo": 1,
+        "hi": 1,
+        "unit": "mg",
+        "per": "dose",
+        "basis": "dose"
+       },
+       "src": "fdab-phytonadione",
+       "quote": "Phytonadione injectable emulsion, USP 1 mg should be given either subcutaneously or intramuscularly. Higher doses may be necessary if the mother has been receiving oral anticoagulants."
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Do not exceed the recommended dose: hemolysis, jaundice and hyperbilirubinemia in neonates, especially premature.",
+     "src": "fdab-phytonadione",
+     "quote": "Hemolysis, jaundice, and hyperbilirubinemia in neonates, particularly those that are premature, may be related to the dose of phytonadione injectable emulsion. Therefore, the recommended dose should not be exceeded"
+    },
+    {
+     "text": "Boxed warning: severe reactions including fatalities with IV and IM use.",
+     "src": "fdab-phytonadione",
+     "quote": "Severe reactions, including fatalities, have occurred during and immediately after INTRAVENOUS injection of phytonadione"
+    },
+    {
+     "text": "Use only preservative-free diluents (benzyl alcohol toxicity in newborns).",
+     "src": "fdab-phytonadione",
+     "quote": "Benzyl alcohol as a preservative has been associated with toxicity in newborns. Therefore, all of the above diluents should be preservative-free"
+    }
+   ]
+  },
+  {
+   "id": "calcium-gluconate",
+   "name": "Calcium gluconate 10%",
+   "aliases": [
+    "calcium"
+   ],
+   "class": "electrolyte",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Acute symptomatic hypocalcemia",
+     "route": "IV (diluted)",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Bolus, neonate (1 month or younger)",
+       "dose": {
+        "lo": 100,
+        "hi": 200,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "freq": "initial; subsequent doses if needed every 6 hours",
+       "every_h": 6,
+       "infuse": "dilute to 10-50 mg/mL; not faster than 100 mg/minute",
+       "src": "fdab-calcium-gluconate",
+       "quote": "Neonate (≤ 1 month) 100 - 200 mg/kg 100 - 200 mg/kg every 6 hours Initiate at 17-33 mg/kg/hour"
+      },
+      {
+       "label": "Continuous infusion start, neonate (1 month or younger)",
+       "dose": {
+        "lo": 17,
+        "hi": 33,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose",
+        "rate": "h"
+       },
+       "infuse": "dilute to 5.8-10 mg/mL; adjust to serum calcium",
+       "src": "fdab-calcium-gluconate",
+       "quote": "Neonate (≤ 1 month) 100 - 200 mg/kg 100 - 200 mg/kg every 6 hours Initiate at 17-33 mg/kg/hour"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Bolus rate must not exceed 100 mg/minute in pediatric patients including neonates.",
+     "src": "fdab-calcium-gluconate",
+     "quote": "DO NOT exceed an infusion rate of 200 mg/minute in adults or 100 mg/minute in pediatric patients, including neonates."
+    },
+    {
+     "text": "Contraindicated with IV ceftriaxone in neonates 28 days or younger.",
+     "src": "fdab-calcium-gluconate",
+     "quote": "Concomitant use of ceftriaxone and intravenous calcium-containing products is contraindicated in neonates (28 days of age or younger)"
+    },
+    {
+     "text": "Measure serum calcium every 4 to 6 hours with intermittent and every 1 to 4 hours with continuous infusion.",
+     "src": "fdab-calcium-gluconate",
+     "quote": "Measure serum calcium every 4 to 6 hours during intermittent infusions with Calcium Gluconate Injection and measure serum calcium every 1 to 4 hours during continuous infusion."
+    },
+    {
+     "text": "Each mL contains 100 mg calcium gluconate = 9.3 mg (0.465 mEq) elemental calcium.",
+     "src": "fdab-calcium-gluconate",
+     "quote": "Calcium Gluconate Injection contains 100 mg of calcium gluconate per mL which contains 9.3 mg (i.e., 0.465 mEq) of elemental calcium."
+    }
+   ]
+  },
+  {
+   "id": "sodium-bicarbonate",
+   "name": "Sodium bicarbonate",
+   "aliases": [
+    "NaHCO3",
+    "bicarbonate"
+   ],
+   "class": "alkalinizing agent",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Metabolic acidosis",
+     "route": "IV (slow infusion)",
+     "ageScope": "pediatric-incl-neonates",
+     "bands": [
+      {
+       "label": "Pediatric patients under 2 years including neonates",
+       "dose": {
+        "lo": 1,
+        "hi": 2,
+        "unit": "mEq",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "infuse": "over 4 to 8 hours; avoid rapid or bolus",
+       "src": "fdab-bicarb",
+       "quote": "Recommended Dosage in Pediatric Patients Less Than 2 Years of Age, including Neonates Administer 1 mEq/kg to 2 mEq/kg of sodium bicarbonate injection over a four- to eight-hour period. Avoid rapid or bolus administration"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Limit rate to no more than 8 mEq/kg/day in neonates and children under 2 years (hypernatremia, intracranial hemorrhage).",
+     "src": "fdab-bicarb",
+     "quote": "Rapid injection of sodium bicarbonate injection solutions into neonates and children under two years of age may produce hypernatremia, a decrease in cerebrospinal fluid pressure and possible intracranial hemorrhage. The rate of administration in such patients should therefore be limited to no more than 8 mEq/kg/day."
+    },
+    {
+     "text": "The 4.2% solution and slow rates are recommended in neonates.",
+     "src": "fdab-bicarb-infant",
+     "quote": "Slow administration rates and the 4.2% solution are recommended in neonates"
+    }
+   ]
+  },
+  {
+   "id": "poractant-alfa",
+   "name": "Poractant alfa (Curosurf)",
+   "aliases": [
+    "Curosurf",
+    "surfactant"
+   ],
+   "class": "pulmonary surfactant",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Rescue treatment of RDS in premature infants",
+     "route": "Intratracheal",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Initial dose",
+       "dose": {
+        "lo": 2.5,
+        "hi": 2.5,
+        "unit": "mL",
+        "per": "kg",
+        "basis": "dose",
+        "weight": "birth weight"
+       },
+       "freq": "once",
+       "src": "fdab-curosurf",
+       "quote": "The initial recommended dose is 2.5 mL/kg birth weight"
+      },
+      {
+       "label": "Repeat doses (up to two)",
+       "dose": {
+        "lo": 1.25,
+        "hi": 1.25,
+        "unit": "mL",
+        "per": "kg",
+        "basis": "dose",
+        "weight": "birth weight"
+       },
+       "every_h": 12,
+       "src": "fdab-curosurf",
+       "quote": "Up to two repeat doses of 1.25 mL/kg birth weight each may be administered at approximately 12-hour intervals"
+      },
+      {
+       "label": "Maximum total dose",
+       "max": {
+        "v": 5,
+        "unit": "mL",
+        "per": "kg",
+        "basis": "total"
+       },
+       "src": "fdab-curosurf",
+       "quote": "The maximum recommended total dosage (sum of the initial and up to two repeat doses) is 5 mL/kg."
+      }
+     ]
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "beractant",
+   "name": "Beractant (Survanta)",
+   "aliases": [
+    "Survanta",
+    "surfactant"
+   ],
+   "class": "pulmonary surfactant",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Prevention and treatment of RDS in premature infants",
+     "route": "Intratracheal",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Each dose",
+       "dose": {
+        "lo": 4,
+        "hi": 4,
+        "unit": "mL",
+        "per": "kg",
+        "basis": "dose",
+        "weight": "birth weight",
+        "alt": {
+         "lo": 100,
+         "hi": 100,
+         "unit": "mg phospholipids",
+         "per": "kg"
+        }
+       },
+       "freq": "prevention: within 15 minutes of birth; treatment: by 8 hours of age",
+       "src": "fdab-survanta",
+       "quote": "Each dose of SURVANTA is 100 mg of phospholipids/kg birth weight (4 mL/kg)."
+      },
+      {
+       "label": "Repeat doses: up to four doses in the first 48 hours, not more often than every 6 hours",
+       "every_h": 6,
+       "maxDoses": 4,
+       "src": "fdab-survanta",
+       "quote": "Four doses of SURVANTA can be administered in the first 48 hours of life. Doses should be given no more frequently than every 6 hours."
+      }
+     ]
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "calfactant",
+   "name": "Calfactant (Infasurf)",
+   "aliases": [
+    "Infasurf",
+    "surfactant"
+   ],
+   "class": "pulmonary surfactant",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Prevention and treatment of RDS",
+     "route": "Intratracheal",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Each dose",
+       "dose": {
+        "lo": 3,
+        "hi": 3,
+        "unit": "mL",
+        "per": "kg",
+        "basis": "dose",
+        "weight": "birth weight"
+       },
+       "every_h": 12,
+       "maxDoses": 3,
+       "src": "fdab-infasurf",
+       "quote": "The recommended dose of INFASURF is 3 mL/kg body weight at birth administered intratracheally through an endotracheal tube. INFASURF can be administered every 12 hours for a total of up to three doses."
+      },
+      {
+       "when": {
+        "ga_wk": {
+         "lt": 29
+        }
+       },
+       "label": "Prophylaxis: preterm under 29 weeks GA, give within 30 minutes after birth",
+       "src": "fdab-infasurf",
+       "quote": "To reduce the risk of RDS in preterm neonates <29 weeks of gestational age at risk for RDS, administer INFASURF within 30 minutes after birth."
+      }
+     ]
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "cysteine",
+   "name": "Cysteine hydrochloride (PN additive)",
+   "aliases": [
+    "cysteine"
+   ],
+   "class": "amino acid (parenteral nutrition)",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Parenteral nutrition additive to meet sulfur amino acid needs",
+     "route": "IV, admixed in PN",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Neonates (preterm and term, under 1 month)",
+       "dose": {
+        "lo": 22,
+        "hi": 22,
+        "unit": "mg",
+        "per": "g amino acids",
+        "basis": "dose"
+       },
+       "note": "per gram of amino acids in the PN; protein requirement 3 to 4 g AA/kg/day",
+       "src": "fdab-cysteine",
+       "quote": "Neonates 3 to 4 22 0.44"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "22 mg cysteine hydrochloride per g amino acids provides 15 mg cysteine per g amino acids.",
+     "src": "fdab-cysteine",
+     "quote": "the recommended dosage of cysteine hydrochloride injection, USP provides 15 mg cysteine/gram of amino acids for neonates."
+    }
+   ]
+  },
+  {
+   "id": "zinc",
+   "name": "Zinc (PN trace element)",
+   "aliases": [
+    "zinc sulfate",
+    "zinc chloride"
+   ],
+   "class": "trace element (parenteral nutrition)",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "PN zinc (zinc sulfate product)",
+     "route": "IV, admixed in PN",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "when": {
+        "wt": {
+         "min": 3,
+         "lt": 5,
+         "unit": "kg"
+        }
+       },
+       "label": "Term neonates, 3 kg to less than 5 kg",
+       "dose": {
+        "lo": 250,
+        "hi": 250,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "day"
+       },
+       "src": "fdab-zinc-sulfate",
+       "quote": "Term Neonates | 3 kg to less than 5 kg | 250 mcg/kg*"
+      },
+      {
+       "when": {
+        "wt": {
+         "lt": 3,
+         "unit": "kg"
+        }
+       },
+       "label": "Preterm neonates, less than 3 kg",
+       "dose": {
+        "lo": 400,
+        "hi": 400,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "day"
+       },
+       "src": "fdab-zinc-sulfate",
+       "quote": "Preterm Neonates | Less than 3 kg | 400 mcg/kg"
+      }
+     ]
+    },
+    {
+     "indication": "PN zinc (zinc chloride product)",
+     "route": "IV, admixed in PN",
+     "ageScope": "neonatal",
+     "bands": [
+      {
+       "label": "Full term infants and children up to 5 years",
+       "dose": {
+        "lo": 100,
+        "hi": 100,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "day"
+       },
+       "src": "fdab-zinc-chloride",
+       "quote": "For full term infants and children up to 5 years of age, 100 mcg zinc/kg/day (0.1 mL/kg/day) is recommended."
+      },
+      {
+       "when": {
+        "bw": {
+         "lt": 1500,
+         "unit": "g"
+        },
+        "wt": {
+         "max": 3,
+         "unit": "kg"
+        }
+       },
+       "label": "Premature infants, birth weight less than 1500 g, up to 3 kg",
+       "dose": {
+        "lo": 300,
+        "hi": 300,
+        "unit": "mcg",
+        "per": "kg",
+        "basis": "day"
+       },
+       "src": "fdab-zinc-chloride",
+       "quote": "For premature infants (birth weight less than 1500 g) up to 3 kg in body weight, 300 mcg zinc/kg/day (0.3 mL/kg/day) is suggested."
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "The two FDA zinc labels give different neonatal doses; zinc sulfate 1 mg/mL is recommended for patients under 12 kg.",
+     "src": "fdab-zinc-sulfate",
+     "quote": "Zinc Sulfate Injection in a concentration of 1 mg/mL is recommended for use in pediatric patients, particularly those weighing less than 12 kg."
+    }
+   ]
+  },
+  {
+   "id": "sodium-phosphate",
+   "name": "Sodium phosphates (PN)",
+   "aliases": [
+    "sodium phosphate"
+   ],
+   "class": "electrolyte (parenteral nutrition)",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Phosphorus in PN for infants",
+     "route": "IV, admixed in PN",
+     "ageScope": "pediatric-incl-neonates",
+     "bands": [
+      {
+       "label": "Infants receiving TPN",
+       "dose": {
+        "lo": 1.5,
+        "hi": 2,
+        "unit": "mmol P",
+        "per": "kg",
+        "basis": "day"
+       },
+       "src": "fdab-na-phos",
+       "quote": "The suggested dose of phosphorus for infants receiving TPN is 1.5 to 2 mM P/kg/day."
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Contains aluminum; premature neonates are at particular risk of accumulation.",
+     "src": "fdab-na-phos",
+     "quote": "Premature neonates are particularly at risk because their kidneys are immature, and they require large amounts of calcium and phosphate solutions, which contain aluminum."
+    }
+   ]
+  },
+  {
+   "id": "potassium-phosphate",
+   "name": "Potassium phosphates (PN)",
+   "aliases": [
+    "potassium phosphate"
+   ],
+   "class": "electrolyte (parenteral nutrition)",
+   "highAlert": true,
+   "regimens": [
+    {
+     "indication": "Phosphorus in PN",
+     "route": "IV, admixed in PN",
+     "ageScope": "pediatric-incl-neonates",
+     "bands": [
+      {
+       "label": "Preterm and term infants less than 12 months",
+       "dose": {
+        "lo": 2,
+        "hi": 2,
+        "unit": "mmol P",
+        "per": "kg",
+        "basis": "day"
+       },
+       "potassium": {
+        "lo": 2.9,
+        "hi": 2.9,
+        "unit": "mEq",
+        "per": "kg",
+        "basis": "day"
+       },
+       "src": "fdab-k-phos",
+       "quote": "Preterm and Term Infants Less than 12 Months | 2 mmol/kg/day (potassium 2.9 mEq/kg/day)"
+      }
+     ]
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "furosemide",
+   "name": "Furosemide",
+   "aliases": [
+    "Lasix",
+    "frusemide"
+   ],
+   "class": "loop diuretic",
+   "highAlert": false,
+   "regimens": [
+    {
+     "indication": "Edema",
+     "route": "IV or IM",
+     "ageScope": "pediatric-incl-neonates",
+     "bands": [
+      {
+       "label": "Pediatric initial dose; may increase by 1 mg/kg not sooner than 2 hours after previous dose",
+       "dose": {
+        "lo": 1,
+        "hi": 1,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "infuse": "slowly over 1 to 2 minutes",
+       "max": {
+        "v": 6,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "dose"
+       },
+       "src": "fdab-furosemide",
+       "quote": "pediatric patients is 1 mg/kg body weight administered slowly (over 1 minute to 2 minutes). If the diuretic response to the initial dose is not satisfactory, dosage may be increased by 1 mg/kg not sooner than 2 hours after the previous dose, until the desired diuretic effect has been obtained. Doses greater than 6 mg/kg body weight are not recommended. The maximum dose for premature infants should not exceed 1 mg/kg/day"
+      },
+      {
+       "label": "Premature infants: daily maximum",
+       "max": {
+        "v": 1,
+        "unit": "mg",
+        "per": "kg",
+        "basis": "day"
+       },
+       "src": "fdab-furosemide",
+       "quote": "pediatric patients is 1 mg/kg body weight administered slowly (over 1 minute to 2 minutes). If the diuretic response to the initial dose is not satisfactory, dosage may be increased by 1 mg/kg not sooner than 2 hours after the previous dose, until the desired diuretic effect has been obtained. Doses greater than 6 mg/kg body weight are not recommended. The maximum dose for premature infants should not exceed 1 mg/kg/day"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Premature infants under 31 weeks post conceptual age on more than 1 mg/kg/24 hours: risk of toxic levels and ototoxicity.",
+     "src": "fdab-furosemide",
+     "quote": "premature infants with post conceptual age (gestational plus postnatal) less than 31 weeks receiving doses exceeding 1 mg/kg/24 hours may develop plasma levels which could be associated with potential toxic effects including ototoxicity"
+    },
+    {
+     "text": "Nephrocalcinosis/nephrolithiasis risk in the first year of life, especially if born preterm.",
+     "src": "fdab-furosemide",
+     "quote": "Furosemide in the first year of life, especially in patients born pre-term, may precipitate nephrocalcinosis/nephrolithiasis"
+    }
+   ]
+  },
+  {
+   "id": "fentanyl",
+   "name": "Fentanyl citrate",
+   "aliases": [
+    "fentanyl"
+   ],
+   "class": "opioid analgesic",
+   "highAlert": true,
+   "regimens": [],
+   "notes": [
+    {
+     "text": "No neonatal dose in label: safety and efficacy under 2 years not established; methemoglobinemia reported in premature neonates.",
+     "src": "fdab-fentanyl",
+     "quote": "The safety and efficacy of Fentanyl Citrate Injection in children under two years of age has not been established. Rare cases of unexplained clinically significant methemoglobinemia have been reported in premature neonates"
+    }
+   ]
+  },
+  {
+   "id": "lorazepam",
+   "name": "Lorazepam",
+   "aliases": [
+    "Ativan"
+   ],
+   "class": "benzodiazepine",
+   "highAlert": false,
+   "regimens": [],
+   "notes": [
+    {
+     "text": "No neonatal dose in label. Contains benzyl alcohol (gasping syndrome above 99 mg/kg/day in neonates).",
+     "src": "fdab-lorazepam",
+     "quote": "has been associated with benzyl alcohol dosages greater than 99 mg/kg/day in neonates and low-birth-weight neonates."
+    }
+   ]
+  },
+  {
+   "id": "dexamethasone",
+   "name": "Dexamethasone sodium phosphate",
+   "aliases": [
+    "Decadron"
+   ],
+   "class": "corticosteroid",
+   "highAlert": false,
+   "regimens": [],
+   "notes": [
+    {
+     "text": "No neonatal dose in label. Use preservative-free solutions in neonates, especially premature infants.",
+     "src": "fdab-dexamethasone",
+     "quote": "Solutions used for intravenous administration or further dilution of this product should be preservative free when used in the neonate, especially the premature infant."
+    }
+   ]
+  },
+  {
+   "id": "hydrocortisone",
+   "name": "Hydrocortisone sodium succinate",
+   "aliases": [
+    "Solu-Cortef"
+   ],
+   "class": "corticosteroid",
+   "highAlert": false,
+   "regimens": [],
+   "notes": [
+    {
+     "text": "No neonatal dose in label. Hypertrophic cardiomyopathy reported in prematurely born infants; monitor cardiac function.",
+     "src": "fdab-hydrocortisone",
+     "quote": "Hypertrophic cardiomyopathy was reported after administration of hydrocortisone to prematurely born infants"
+    }
+   ]
+  }
+ ]
+}

@@ -17,12 +17,21 @@
  *   changes         written to the feedback note; status unchanged
  * Tokós (kind "tokos", no build step: build-www.sh copies tokos/ as is):
  *   case-<id>       approve sets that case's review in tokos/decks/ctg.json to { by, date, the suggested labels as
- *                   approved (TOKOS_DATA.suggestedReview), complete: true }. ctg.json is machine-generated with
+ *                   approved (TOKOS_CTG.suggestedReview, tokos-ctg.js), complete: true }. ctg.json is machine-generated with
  *                   JSON.stringify(deck, null, 1), so it is rewritten the same way; the script first checks the file
  *                   is exactly that form, so every byte outside the case's review stays the same.
  *   rationale, checklist, calipers
  *                   approve sets review / reviewChecklist / reviewCalipers in tokos/rationale.json to "reviewed"
  *                   (rewritten in place like the other content).
+ *   Tokós 2.0 content (tokosTarget below). Every approve is also recorded in tokos/reviews.json {v, items: {id:
+ *   {status, reviewer}}}, which the Review Desk reads for these items and which "already reviewed" checks:
+ *   unit-<unitId>   every lesson of the unit: its review becomes {status: "reviewed", reviewer, verify kept}
+ *   drill-<id>      tokos/drill/<id>.json review "reviewed", then tools/tokos-build-drills.mjs regenerates the model
+ *   sim-labour, tool-<id>, explorer-<id>
+ *                   the model file tokos-models/<file>.js: review: "ai_drafted" becomes review: "reviewed", reviewedBy
+ *   clinic-fetal-planes, clinic-hc-biometry
+ *                   the deck's top-level review "reviewed" (the teaching points in tokos-clinic-us.js go with it)
+ *   bank-<topicId>  the ledger only (the bank files are generated from MedMCQA; its key flags were checked)
  * Items already reviewed or approved are never changed (the note says so). Only the "review" object of each
  * file is rewritten, in place, so the rest of the hand-formatted JSON stays byte-identical.
  * Feedback is appended to vault/handoff/review-feedback.md. The export holds content ids and comments only.
@@ -43,7 +52,49 @@ export const KINDS = {
 };
 // Tokós text blocks: review-desk id -> the top-level key of tokos/rationale.json that holds its review.
 export const TOKOS_TEXT = { rationale: "review", checklist: "reviewChecklist", calipers: "reviewCalipers" };
-const TOKOS_DATA = createRequire(import.meta.url)("../tokos-data.js");
+const TOKOS_CTG = createRequire(import.meta.url)("../tokos-ctg.js");
+export const TOKOS_LEDGER = "tokos/reviews.json";
+
+/** Tokós 2.0 desk id -> the files an approve rewrites and how, or null for an id this repo does not have. */
+export function tokosTarget(id, root, read, exists) {
+  let m;
+  const J = (f) => JSON.parse(read(join(root, f)));
+  if ((m = /^unit-([a-z]+\d+)$/.exec(id))) {
+    const f = "tokos/learn/units/" + m[1] + ".json";
+    return exists(join(root, f)) ? { files: J(f).lessons.map((l) => ({ file: join(root, "tokos/learn/lessons", l + ".json"), how: "lesson" })) } : null;
+  }
+  if ((m = /^drill-([a-z-]+)$/.exec(id))) return { files: [{ file: join(root, "tokos/drill", m[1] + ".json"), how: "string" }], build: "tools/tokos-build-drills.mjs" };
+  if (id === "sim-labour") return { files: [{ file: join(root, "tokos-models/drill-labour.js"), how: "js" }] };
+  if (/^(tool|explorer)-[a-z0-9-]+$/.test(id)) return { files: [{ file: join(root, "tokos-models", id + ".js"), how: "js" }] };
+  if ((m = /^clinic-(fetal-planes|hc-biometry)$/.exec(id))) return { files: [{ file: join(root, "tokos/decks", m[1] + ".json"), how: "string" }] };
+  if ((m = /^bank-([a-z-]+)$/.exec(id))) {
+    const f = "tokos/decks/mcq/index.json";
+    return exists(join(root, f)) && J(f).topics.some((t) => t.id === m[1]) ? { files: [] } : null;
+  }
+  return null;
+}
+/** One file's approve rewrite. Only the review changes; anything else throws. */
+export function tokosRewrite(text, how, line) {
+  if (how === "lesson") {
+    const cur = JSON.parse(text).review;
+    if (cur && typeof cur === "object") return replaceReview(text, { ...cur, status: "reviewed", reviewer: line });
+    return swapDrafted(text, { status: "reviewed", reviewer: line });
+  }
+  if (how === "string") return swapDrafted(text, "reviewed");
+  const hits = text.split('review: "ai_drafted"').length - 1;
+  if (hits !== 1) throw new Error('expected one review: "ai_drafted" in the model, found ' + hits);
+  return text.replace('review: "ai_drafted"', 'review: "reviewed", reviewedBy: ' + JSON.stringify(line));
+}
+// A top-level "review": "ai_drafted" among the leading scalar keys (lessons, drill JSON and clinic decks put it there)
+// becomes `value`, written inline; nothing else in the text changes.
+function swapDrafted(text, value) {
+  const m = /^(\{\s*(?:"[^"]*"\s*:\s*(?:"(?:[^"\\]|\\.)*"|[-\w.]+)\s*,\s*)*?"review"\s*:\s*)"ai_drafted"/.exec(text);
+  if (!m) throw new Error('no top-level "review": "ai_drafted" among the leading keys');
+  const out = text.slice(0, m[1].length) + (typeof value === "string" ? JSON.stringify(value) : "{ " + Object.keys(value).map((k) => JSON.stringify(k) + ": " + JSON.stringify(value[k])).join(", ") + " }") + text.slice(m[0].length), before = JSON.parse(text), after = JSON.parse(out);
+  before.review = value;
+  if (!isDeepStrictEqual(before, after)) throw new Error("rewrite changed more than the review");
+  return out;
+}
 const DECISIONS = ["approve", "approve-minor", "changes"];
 const FEEDBACK = "vault/handoff/review-feedback.md";
 const ID_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
@@ -127,7 +178,7 @@ export function tokosCaseReview(text, caseId, reviewer, at) {
   const deck = JSON.parse(text);
   if (JSON.stringify(deck, null, 1) !== text) throw new Error("tokos/decks/ctg.json is not in its generated form (JSON.stringify(deck, null, 1)); regenerate or fix it first");
   const c = deck.cases.find((k) => k.id === caseId);
-  const review = { by: reviewerName(reviewer), date: String(at).slice(0, 10), ...TOKOS_DATA.suggestedReview(c), complete: true };
+  const review = { by: reviewerName(reviewer), date: String(at).slice(0, 10), ...TOKOS_CTG.suggestedReview(c), complete: true };
   c.review = review;
   return { review, text: JSON.stringify(deck, null, 1) };
 }
@@ -138,6 +189,7 @@ export function plan(x, { root = ROOT, includeMinor = false, read = (f) => readF
   const get = (f) => (texts[f] != null ? texts[f] : (texts[f] = read(f)));   // several decisions can touch one file
   x.decisions.forEach((d) => {
     const tc = d.kind === "tokos" && /^case-(\d+)$/.exec(d.id), tk = d.kind === "tokos" && TOKOS_TEXT[d.id];
+    if (d.kind === "tokos" && !tc && !tk) return planTokos(d);
     const file = d.kind !== "tokos" ? join(root, KINDS[d.kind].dir, d.id + ".json")
       : tc ? join(root, "tokos/decks/ctg.json") : tk ? join(root, "tokos/rationale.json") : null;
     if (!file || !exists(file)) { skipped.push({ ...d, why: "no such " + d.kind + " item in this repo" }); return; }
@@ -158,6 +210,26 @@ export function plan(x, { root = ROOT, includeMinor = false, read = (f) => readF
     updates.push({ ...d, file, text: u.text, review: u.review });
   });
   return { updates, feedback, skipped };
+
+  function planTokos(d) {
+    const t = tokosTarget(d.id, root, read, exists);
+    if (!t || t.files.some((f) => !exists(f.file))) { skipped.push({ ...d, why: "no such Tokós item in this repo" }); return; }
+    const lf = join(root, TOKOS_LEDGER), ledger = texts[lf] != null || exists(lf) ? JSON.parse(get(lf)) : { v: 1, items: {} };
+    const wantsStatus = d.decision === "approve" || (d.decision === "approve-minor" && includeMinor);
+    if (d.decision !== "approve") feedback.push(d);
+    if (!wantsStatus) return;
+    const cur = ledger.items[d.id];
+    if (cur) { skipped.push({ ...d, why: "already " + cur.status + " by " + cur.reviewer }); return; }
+    const line = reviewerLine(x.reviewer, d.at);
+    t.files.forEach((f) => {
+      const text = tokosRewrite(get(f.file), f.how, line);
+      texts[f.file] = text;
+      updates.push({ ...d, file: f.file, text, review: { status: "reviewed", reviewer: line }, build: t.build });
+    });
+    ledger.items[d.id] = { status: "reviewed", reviewer: line };
+    texts[lf] = JSON.stringify(ledger, null, 1) + "\n";
+    updates.push({ ...d, file: lf, text: texts[lf], review: ledger.items[d.id], ledger: true });
+  }
 }
 
 /** Markdown appended to the feedback note. */
@@ -172,6 +244,14 @@ export function feedbackMarkdown(x, p, today) {
   });
   p.skipped.forEach((d) => lines.push(`- Skipped ${KINDS[d.kind].label} \`${d.id}\`: ${d.why}`));
   return lines.join("\n") + "\n";
+}
+
+/** The cache-token bump a Tokós approval needs (models and data load at the loader's ?v= token), or "". */
+export function tokosBump(kinds, root = ROOT) {
+  if (!kinds.some((k) => k === "tokos" || /tokos/.test(k))) return "";
+  const v = (/var V = "(tok)(\d+)";/.exec(readFileSync(join(root, "tokos-loader.js"), "utf8")) || []);
+  const cur = v[1] ? v[1] + v[2] : "tokN", next = v[1] ? v[1] + (+v[2] + 1) : "tokN+1";
+  return `Tokós content changed: bump the cache token ${cur} -> ${next} in tokos-loader.js (var V = "${next}") and in index.html (<script src="/tokos-loader.js?v=${next}">), and in test/tokos-wiring.test.mjs and test/run-tokos-app-ui.mjs.`;
 }
 
 function main() {
@@ -191,12 +271,14 @@ function main() {
   const kinds = new Set();
   for (const x of exports) applyOne(x, { dry, includeMinor }, kinds);
   if (dry) return;
-  [...kinds].filter((k) => KINDS[k].build).forEach((k) => { console.log("Rebuilding: " + KINDS[k].build); execFileSync(process.execPath, [join(ROOT, KINDS[k].build)], { stdio: "inherit" }); });
+  [...new Set([...kinds].map((k) => (KINDS[k] ? KINDS[k].build : k)))].filter(Boolean).forEach((b) => { console.log("Rebuilding: " + b); execFileSync(process.execPath, [join(ROOT, b)], { stdio: "inherit" }); });
   if (kinds.size) console.log("Done. Run the unit tests, then commit the changed files.");
+  const tb = tokosBump([...kinds]);
+  if (tb) console.log(tb);
 }
 function applyOne(x, { dry, includeMinor }, kinds) {
   const p = plan(x, { includeMinor });
-  p.updates.forEach((u) => console.log(`${dry ? "Would mark" : "Marking"} ${u.kind} ${u.id} reviewed (${u.review.reviewer || u.review.by})`));
+  p.updates.filter((u) => !u.ledger).forEach((u) => console.log(`${dry ? "Would mark" : "Marking"} ${u.kind} ${u.id} reviewed (${u.review.reviewer || u.review.by})`));
   p.feedback.forEach((d) => console.log(`Feedback: ${d.kind} ${d.id} (${d.decision})`));
   p.skipped.forEach((d) => console.log(`Skipped: ${d.kind} ${d.id}: ${d.why}`));
   if (dry) return;
@@ -208,6 +290,6 @@ function applyOne(x, { dry, includeMinor }, kinds) {
     appendFileSync(f, feedbackMarkdown(x, p, new Date().toISOString().slice(0, 10)));
     console.log("Feedback written to " + FEEDBACK);
   }
-  p.updates.forEach((u) => kinds.add(u.kind));
+  p.updates.forEach((u) => kinds.add(u.build || u.kind)); // a Tokós item can name its own rebuild (drills)
 }
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) main();

@@ -32,6 +32,24 @@ owner switches the rule off). Keyword specialty routing is approximate; "Show al
 a medicine only on an exact whole-word match (US names mapped), so it may miss some; it never claims absence.
 **Status.** Built and tested (unit, headless UI with design audit); Jan Aushadhi data waits for the owner's run.
 
+## 2026-09-30 · Neonatal layer: behind `smd_neo` (default OFF), every number quoted from a fetched source
+
+**Decision (owner plan "StewardMD Neonatal Layer").** Ten neonatal tools (dosing by GA/PNA/PMA, preparation,
+infusions, fluids/GIR, growth, bilirubin, scores, reference values, procedures, TDM) around one memory-only
+baby record, all behind `smd_neo` (default OFF) plus a per-tool flag. Data lives in `data/neo/*.json`; each
+clinical object carries `src` + a verbatim `quote` from a snapshot in `data/neo/sources/`, and
+`scripts/neo/validate.mjs` fails the build if a number is not in its quote. Unsourced = "No data on file".
+With the flag on, dose-calc.js never shows child or adult rows to a neonate ("No neonatal dose on file.
+Do not extrapolate.").
+**Why.** Neonatal errors are tenfold errors; a dose typed from memory is unreviewable. Quoting makes every
+number checkable by the reviewing neonatologist in one click.
+**Trade-off.** Coverage is what open sources publish: FDA labels (public domain) carry most doses, preterm
+fluid volumes and several ranges are absent, and many sources are non-commercial (INTERGROWTH-21st, WHO 2024
+SBI, NICE outside the UK, StatPearls, ASHP S4S, VON, BAPM, some CC BY-NC papers). The owner must clear or
+replace those before the flag goes on for anyone. The no-extrapolation rule is flag-gated; making it
+permanent for all users is an owner call.
+**Status.** Built on `feat/neo-layer` (tag `pre-neo`), unit + headless tests; PR open, not merged.
+
 ## 2026-09-29 · Clinical Bulletins signing desk rebuilt for speed; "Skip" is shared by all signers
 
 **Decision (owner: "Make it more easy for doctors").** The Review Desk "Clinical updates" tab is an inbox (To do /
@@ -10969,3 +10987,7 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
 ## 2026-09-29 - Tokós ON for all during testing; reviews go through the Review Desk
 - **Owner, 2026-09-29:** `smd_tokos` defaults ON for every user while the app is in testing, like Ophthalmós (home tile shown by default; kill switch `smd_tokos = "0"` or `?tokos=0`, which also blocks the route, the MaiK chip and `TOKOS.openCase`). This replaces the earlier "OFF until every case is reviewed" launch gate. Labels stay marked "Rule-based, pending obstetrician review" and the draft footer stays until each case's `review.complete` is true.
 - Obstetrician approvals are collected in the in-app Review Desk (Tokós tab: one item per CTG case plus the teaching text blocks); `scripts/apply-reviews.mjs` writes an approved case's labels into `tokos/decks/ctg.json`. `docs/tokos/review-queue.md` stays as the pipeline notes. [[Tokós]] [[Review Desk]]
+
+## 2026-09-29 - Extract the specialty engine now (reverses "duplicate until a third specialty")
+- Tokós 2.0 needs the whole Ophthalmós engine (shell, Learn, bank, explorers, tools, about 3,000 lines), not the 250 lines duplicated in 1.0, and the roadmap names four more specialty modules; copying per specialty would multiply every fix. The engine is extracted once as `specialty-*.js` + `specialty.css` with the host injected (`SPECIALTY.createHost(cfg)`); Ophthalmós files stay byte-identical and may migrate later in their own repo. Tokós is the first host and loads lazily. Reverses the 2026-09-29 "Tokós duplicates the Ophthalmós engine" entry above. [[Specialty Engine]] [[Tokós]]
+

@@ -4,8 +4,9 @@ import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 const HERE = dirname(fileURLToPath(import.meta.url));
-const BASE = (process.env.BASE || "http://localhost:8997/").replace(/\/?$/, "/");
-const PORT = 9398, userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/tokos-ui-chrome";
+// BASE (a running server) or PORT (the server this harness starts) and CHROME_PORT override the defaults, so parallel sessions do not collide.
+const BASE = (process.env.BASE || "http://localhost:" + (process.env.PORT || 8997) + "/").replace(/\/?$/, "/");
+const PORT = +(process.env.CHROME_PORT || 9398), userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/tokos-ui-chrome-" + PORT;
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
 let serveProc = null;
@@ -38,11 +39,15 @@ try {
   await call("Runtime.enable", {});
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   await call("Page.navigate", { url: BASE });
-  ok(await until(`return !!(window.TOKOS_CORE && window.TOKOS_DATA && window.TOKOS_STAGE);`, 15000), "core/data/stage libraries load");
+  // Tokós loads lazily (tokos-loader.js): load the engine and Tokós files first, then drive the module.
+  await until(`return !!window.TOKOS_LOADER;`, 15000); await ev(`TOKOS_LOADER.load(); return 1;`);
+  ok(await until(`return !!(window.SPECIALTY_CORE && window.SPECIALTY_DATA && window.SPECIALTY_STAGE && window.TOKOS_CTG && window.TOKOS && !!TOKOS._internal);`, 15000), "engine core/data/stage and the CTG clinic load on demand");
 
   await ev(`try{localStorage.removeItem("smd_tokos_v1");localStorage.removeItem("smd_tokos_prefs");}catch(e){} document.body.innerHTML='<div id="smdTokos"></div>'; return 1;`);
   await ev(`TOKOS.open(); return 1;`);
-  ok(await until(`return !!document.querySelector('.tok-clinic');`, 10000), "hub renders the CTG clinic entry");
+  ok(await until(`return !!document.querySelector('[data-act=pick][data-t=test]');`, 10000), "first open asks Learn or Test");
+  await ev(`document.querySelector('[data-act=pick][data-t=test]').click(); return 1;`);
+  ok(await until(`return !!document.querySelector('[data-act=clinic][data-t=ctg]');`, 10000), "hub renders the CTG clinic entry");
 
   await ev(`document.querySelector('[data-act=clinic]').click(); return 1;`);
   ok(await until(`return !!document.getElementById('tokTrace');`), "clinic opens with a trace image");
@@ -54,8 +59,8 @@ try {
   ok(await ev(`var b=document.querySelectorAll('.tok-block'); return b.length===2;`) === true, "trace features and real outcome are two separate blocks (Review Focus)");
 
   // Spent-trial gate: must not fetch when the trial is already used.
-  await ev(`localStorage.setItem("smd_tokos_v1", JSON.stringify({v:1,cards:{},conf:{},days:{},trials:{"clinic.ctg":1}})); localStorage.setItem("smd_tokos_prefs", JSON.stringify({level:"resident",lang:"en"})); TOKOS.close(); TOKOS.open(); return 1;`);
-  await until(`return !!document.querySelector('.tok-clinic');`);
+  await ev(`localStorage.setItem("smd_tokos_v1", JSON.stringify({v:1,cards:{},conf:{},days:{},trials:{"clinic.ctg":1}})); localStorage.setItem("smd_tokos_prefs", JSON.stringify({level:"resident",lang:"en",tab:"test"})); TOKOS.close(); TOKOS.open(); return 1;`);
+  await until(`return !!document.querySelector('[data-act=clinic][data-t=ctg]');`);
   let paywallShown = false;
   await ev(`window.__fc = 0; var of = window.fetch; window.fetch = function(){ window.__fc++; return of.apply(this, arguments); }; return 1;`);
   await ev(`window.SMD_PRO_NOTICE = { show: function(){ window.__paywall = true; } }; return 1;`);
@@ -124,7 +129,7 @@ try {
   // app.js closes its modals on every Escape; this harness wiped <body>, so give it the stubs it expects.
   await ev(`(typeof MODAL_IDS !== 'undefined' ? MODAL_IDS : []).concat('modalBackdrop').forEach(function(id){ if(!document.getElementById(id)){ var d=document.createElement('div'); d.id=id; d.hidden=true; document.body.appendChild(d); } }); document.activeElement && document.activeElement.blur && document.activeElement.blur(); return 1;`);
   await key("Escape", "Escape", 27);
-  ok(await until(`return TOKOS.isOpen() && TOKOS._st.view === 'hub' && !!document.querySelector('.tok-clinic');`, 3000), "Escape from the reveal returns to the hub");
+  ok(await until(`return TOKOS.isOpen() && TOKOS._st.view === 'hub' && !!document.querySelector('[data-act=clinic][data-t=ctg]');`, 3000), "Escape from the reveal returns to the hub");
   await key("Escape", "Escape", 27);
   ok(await until(`return !TOKOS.isOpen();`, 3000), "Escape from the hub closes Tokós");
   await ev(`TOKOS.open(); return 1;`);
@@ -132,7 +137,7 @@ try {
 
   // Offline: failed load shows an error with Try again, and recovers
   await ev(`window.__f=window.fetch; window.fetch=function(){return Promise.reject(new Error('offline'));}; TOKOS._st.cfg=null; TOKOS._st.loading=null; TOKOS.close(); TOKOS.open(); return 1;`);
-  ok(await until(`return !!document.querySelector('.tok-err [data-act=retry]');`), "offline load shows Try again");
+  ok(await until(`return !!document.querySelector('.sp-err [data-act=retry]');`), "offline load shows Try again");
   await ev(`window.fetch=window.__f; document.querySelector('[data-act=retry]').click(); return 1;`);
   ok(await until(`return !!document.querySelector('[data-act=clinic]');`), "Try again recovers");
 
@@ -145,6 +150,41 @@ try {
   ok(await until(`return !!document.querySelector('.tok-err-trace [data-act=retrace]');`), "an SVG with an on* attribute is refused (trace error + Try again)");
   await ev(`var c=TOKOS._st.session.list[0].c; TOKOS._st.svg[c.svg]=window.__good; document.querySelector('[data-act=retrace]').click(); return 1;`);
   ok(await until(`return !!document.getElementById('tokTrace');`), "Try again mounts the trace");
+
+  // question bank: search reads only the index file (search.json) and shows previews; a topic loads when a result opens; the exam holds two topic files at a time.
+  const bankBytes = `var r=performance.getEntriesByType('resource').filter(function(e){return /decks\\/mcq\\//.test(e.name)}); return JSON.stringify({n:r.length,bytes:r.reduce(function(a,e){return a+(e.encodedBodySize||e.decodedBodySize||0)},0),files:r.map(function(e){return e.name.split('/').pop().split('?')[0]})});`;
+  await ev(`try{localStorage.setItem("smd_tokos_v1",JSON.stringify({}));}catch(e){} document.body.innerHTML='<div id="smdTokos"></div>'; performance.clearResourceTimings(); TOKOS.open(); return 1;`);
+  await until(`return !!document.querySelector('[data-act=pick][data-t=test]') || !!document.querySelector('[data-act=bank]');`);
+  await ev(`var p=document.querySelector('[data-act=pick][data-t=test]'); if(p)p.click(); return 1;`);
+  ok(await until(`return !!document.querySelector('[data-act=bank]');`), "hub lists the question bank");
+  await ev(`document.querySelector('[data-act=bank]').click(); return 1;`);
+  ok(await until(`return !!document.getElementById('mcqSearch');`, 10000), "bank opens with a search box");
+  const heap0 = await ev(`return performance.memory ? performance.memory.usedJSHeapSize : 0;`);
+  await ev(`performance.clearResourceTimings(); var i=document.getElementById('mcqSearch'); i.value='eclampsia'; i.dispatchEvent(new Event('input')); return 1;`);
+  ok(await until(`return document.querySelectorAll('#mcqResults .mcq-hit').length > 0 && !/topics loaded/.test(document.getElementById('mcqSearchS').textContent);`, 30000), "search lists hits");
+  const sm = JSON.parse(await ev(bankBytes)), heap1 = await ev(`return performance.memory ? performance.memory.usedJSHeapSize : 0;`);
+  console.log(`METRIC search "eclampsia": ${sm.n} bank files, ${sm.bytes} bytes fetched (${sm.files.join(", ")}), heap ${heap0} -> ${heap1} (${heap1 - heap0})`);
+  ok(sm.files.length === 1 && sm.files[0] === "search.json", "search fetched only search.json");
+  ok(await ev(`return document.querySelectorAll('#mcqResults .mcq-hit .sp-small').length === document.querySelectorAll('#mcqResults .mcq-hit').length;`) === true, "each hit shows its topic");
+  await ev(`performance.clearResourceTimings(); document.querySelector('#mcqResults .mcq-hit').click(); return 1;`);
+  ok(await until(`return !!document.getElementById('mcqStem');`, 15000), "opening a result loads its topic and shows the question");
+  const om = JSON.parse(await ev(bankBytes));
+  console.log(`METRIC open result: ${om.n} file(s), ${om.bytes} bytes (${om.files.join(", ")})`);
+  ok(om.n === 1 && om.files[0] !== "search.json", "opening a result fetched one topic file");
+  // exam: Pro gate first, then at most two topic files held at a time
+  await ev(`TOKOS.back(); return 1;`);
+  ok(await until(`return !!document.querySelector('[data-act=mcqmode][data-m=exam]');`, 10000), "back to the bank");
+  await ev(`performance.clearResourceTimings(); return 1;`);
+  await ev(`document.querySelector('[data-act=mcqmode][data-m=exam]').click(); return 1;`);
+  await ev(`document.querySelector('[data-act=mcqstart]').click(); return 1;`);
+  ok(await until(`return !!document.getElementById('mcqStem') || !!document.querySelector('.sp-pro, [data-act=paywall], .sp-sheet');`, 30000), "the exam starts or meets its Pro gate");
+  const gated = await ev(`return !document.getElementById('mcqStem');`), xm = JSON.parse(await ev(bankBytes));
+  if (gated) ok(xm.n === 0, "Pro gate: nothing fetched before the gate opens");
+  else {
+    console.log(`METRIC exam: ${xm.n} topic files, ${xm.bytes} bytes; cached topics after: ${await ev(`return Object.keys(TOKOS._mcq.items).length;`)}`);
+    ok(await ev(`return TOKOS._mcq.run.exam && TOKOS._mcq.run.items.length === 30;`) === true, "exam drew 30 questions");
+    ok(await ev(`return Object.keys(TOKOS._mcq.items).length <= 1;`) === true, "exam topics are not kept in memory");
+  }
 
   ok(errors.length === 0, "no uncaught Tokós errors" + (errors.length ? ": " + errors.slice(0, 3).join(" | ") : ""));
   console.log(fails === 0 ? "\nALL GREEN" : `\n${fails} FAILED`);

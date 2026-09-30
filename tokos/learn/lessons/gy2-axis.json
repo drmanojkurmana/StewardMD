@@ -1,0 +1,276 @@
+{
+  "id": "gy2-axis",
+  "unit": "gy2",
+  "level": "mbbs",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "competencies": [
+    "OG3.1",
+    "OG23.1"
+  ],
+  "title": {
+    "en": "The hormone chain behind periods",
+    "hi": "माहवारी के पीछे हार्मोन की कड़ी"
+  },
+  "idea": {
+    "en": "Periods run on a chain of command. The [[hypothalamus]] calls the [[pituitary]], the pituitary calls the ovary, and the ovary talks to the uterus and back to the brain.",
+    "hi": "माहवारी एक आदेश की कड़ी से चलती है। [[hypothalamus]] [[pituitary]] को बुलाता है, पिट्यूटरी अंडाशय को, और अंडाशय गर्भाशय से और वापस मस्तिष्क से बात करता है।"
+  },
+  "see": {
+    "diagram": "diagrams/gy2-axis.svg",
+    "w": 480,
+    "h": 420,
+    "alt": {
+      "en": "A vertical chain. At the top a lavender brain with a short stalk leads to a small teal pituitary. Blue and green dots run down to a lavender ovary with a yellow corpus luteum. Red and amber dots run down to a small pink uterus. A red curved arrow with a flat end loops from the ovary back up to the brain on the left. A green curved arrow with an open arrowhead loops from the ovary to the pituitary on the right.",
+      "hi": "एक खड़ी कड़ी। ऊपर बैंगनी मस्तिष्क है, एक छोटी डंडी से छोटी हरी-नीली पिट्यूटरी से जुड़ा। नीले और हरे बिंदु नीचे बैंगनी अंडाशय तक जाते हैं, जिसमें पीला कॉर्पस ल्यूटियम है। लाल और सुनहरे बिंदु नीचे छोटे गुलाबी गर्भाशय तक जाते हैं। बाईं ओर चपटे सिरे वाला लाल मुड़ा तीर अंडाशय से वापस मस्तिष्क तक जाता है। दाईं ओर खुले सिरे वाला हरा मुड़ा तीर अंडाशय से पिट्यूटरी तक जाता है।"
+    },
+    "caption": {
+      "en": "Brain to pituitary to ovary to uterus, with two feedback loops back up: red brakes, green pushes.",
+      "hi": "मस्तिष्क से पिट्यूटरी, अंडाशय और गर्भाशय तक, और ऊपर लौटते दो फ़ीडबैक: लाल रोकता है, हरा बढ़ाता है।"
+    },
+    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.5,
+        "y": 0.131,
+        "label": {
+          "en": "Hypothalamus",
+          "hi": "हाइपोथैलेमस"
+        },
+        "note": {
+          "en": "Sends [[gnrh]] to the pituitary in pulses.",
+          "hi": "पिट्यूटरी को [[gnrh]] झटकों में भेजता है।"
+        }
+      },
+      {
+        "x": 0.575,
+        "y": 0.271,
+        "label": {
+          "en": "GnRH",
+          "hi": "GnRH"
+        },
+        "note": {
+          "en": "Travels to the anterior pituitary and tells it to release FSH and LH.",
+          "hi": "अग्र (एंटीरियर) पिट्यूटरी तक पहुँचकर उसे FSH और LH छोड़ने को कहता है।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.357,
+        "label": {
+          "en": "Anterior pituitary",
+          "hi": "अग्र पिट्यूटरी"
+        },
+        "note": {
+          "en": "Answers GnRH by releasing [[fsh]] and [[lh]].",
+          "hi": "GnRH के जवाब में [[fsh]] और [[lh]] छोड़ती है।"
+        }
+      },
+      {
+        "x": 0.579,
+        "y": 0.486,
+        "label": {
+          "en": "FSH and LH",
+          "hi": "FSH और LH"
+        },
+        "note": {
+          "en": "FSH grows the [[follicle]]s. A surge of LH triggers ovulation.",
+          "hi": "FSH [[follicle]] को बढ़ाता है। LH का उछाल ओव्यूलेशन शुरू करता है।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.629,
+        "label": {
+          "en": "Ovary",
+          "hi": "अंडाशय"
+        },
+        "note": {
+          "en": "Follicles make oestrogen. After ovulation the corpus luteum makes progesterone.",
+          "hi": "फॉलिकल एस्ट्रोजन बनाते हैं। ओव्यूलेशन के बाद कॉर्पस ल्यूटियम प्रोजेस्टेरोन बनाता है।"
+        }
+      },
+      {
+        "x": 0.579,
+        "y": 0.743,
+        "label": {
+          "en": "Oestrogen and progesterone",
+          "hi": "एस्ट्रोजन और प्रोजेस्टेरोन"
+        },
+        "note": {
+          "en": "They build and ripen the lining of the uterus.",
+          "hi": "ये गर्भाशय की अंदरूनी परत को बनाते और परिपक्व करते हैं।"
+        }
+      },
+      {
+        "x": 0.2,
+        "y": 0.405,
+        "label": {
+          "en": "Negative feedback",
+          "hi": "नेगेटिव फ़ीडबैक"
+        },
+        "note": {
+          "en": "Early in the cycle, oestradiol holds FSH down. This lets one dominant follicle win.",
+          "hi": "चक्र की शुरुआत में एस्ट्राडियोल FSH को दबाकर रखता है। इससे एक प्रमुख फॉलिकल जीत जाता है।"
+        }
+      },
+      {
+        "x": 0.804,
+        "y": 0.5,
+        "label": {
+          "en": "Positive feedback",
+          "hi": "पॉज़िटिव फ़ीडबैक"
+        },
+        "note": {
+          "en": "When oestradiol rises high enough, feedback flips and the LH surge starts.",
+          "hi": "जब एस्ट्राडियोल काफ़ी ऊँचा हो जाता है, तो फ़ीडबैक पलट जाता है और LH का उछाल शुरू होता है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "The hypothalamus sends GnRH to the anterior pituitary. The pituitary answers by releasing FSH and LH.",
+        "hi": "हाइपोथैलेमस अग्र पिट्यूटरी को GnRH भेजता है। पिट्यूटरी जवाब में FSH और LH छोड़ती है।"
+      },
+      {
+        "en": "FSH grows the follicles, and they make oestradiol. The dominant follicle reaches about 18 to 29 mm.",
+        "hi": "FSH फॉलिकल को बढ़ाता है और वे एस्ट्राडियोल बनाते हैं। प्रमुख फॉलिकल लगभग 18 से 29 मिमी तक पहुँचता है।"
+      },
+      {
+        "en": "Early on, oestradiol brakes FSH (negative feedback). The dominant follicle keeps growing while the others fade.",
+        "hi": "शुरू में एस्ट्राडियोल FSH को रोकता है (नेगेटिव फ़ीडबैक)। प्रमुख फॉलिकल बढ़ता रहता है, बाकी मुरझा जाते हैं।"
+      },
+      {
+        "en": "When oestradiol becomes high enough, feedback turns positive and the LH surge begins. Ovulation follows about 36 to 44 hours later.",
+        "hi": "जब एस्ट्राडियोल काफ़ी ऊँचा हो जाता है, तो फ़ीडबैक पॉज़िटिव हो जाता है और LH का उछाल शुरू होता है। इसके लगभग 36 से 44 घंटे बाद ओव्यूलेशन होता है।"
+      },
+      {
+        "en": "After ovulation the [[corpus-luteum]] makes progesterone, which ripens the lining. If there is no pregnancy, progesterone falls and the period starts.",
+        "hi": "ओव्यूलेशन के बाद [[corpus-luteum]] प्रोजेस्टेरोन बनाता है, जो परत को परिपक्व करता है। गर्भ न ठहरे, तो प्रोजेस्टेरोन गिरता है और माहवारी शुरू होती है।"
+      }
+    ],
+    "analogy": {
+      "en": "Think of a manager, a supervisor and a worker. The manager (hypothalamus) gives orders, the supervisor (pituitary) passes them on, and the worker (ovary) does the job and sends a report back up.",
+      "hi": "एक मैनेजर, एक सुपरवाइज़र और एक कामगार की कल्पना कीजिए। मैनेजर (हाइपोथैलेमस) आदेश देता है, सुपरवाइज़र (पिट्यूटरी) उसे आगे बढ़ाता है, और कामगार (अंडाशय) काम करके रिपोर्ट वापस भेजता है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Low body weight, hard exercise or stress can quiet the hypothalamus and stop periods. This is the second commonest cause of secondary amenorrhoea.",
+      "hi": "कम वज़न, कठिन व्यायाम या तनाव हाइपोथैलेमस को शांत करके माहवारी रोक सकते हैं। सेकेंडरी एमेनोरिया का यह दूसरा सबसे आम कारण है।"
+    },
+    {
+      "en": "Too much prolactin from the pituitary also stops periods.",
+      "hi": "पिट्यूटरी से प्रोलैक्टिन ज़्यादा निकले, तो भी माहवारी रुक जाती है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Draw the chain with arrows and write one hormone on each arrow.",
+      "hi": "तीरों के साथ कड़ी बनाइए और हर तीर पर एक हार्मोन लिखिए।"
+    },
+    {
+      "en": "Explain to a friend why a very thin, hard-training athlete may stop having periods.",
+      "hi": "किसी दोस्त को समझाइए कि बहुत दुबली, कड़ी ट्रेनिंग करने वाली खिलाड़ी की माहवारी क्यों रुक सकती है।"
+    }
+  ],
+  "remember": {
+    "en": "Hypothalamus (GnRH), pituitary (FSH, LH), ovary (oestrogen, progesterone), uterus. Low oestrogen brakes FSH. High oestrogen triggers the LH surge.",
+    "hi": "हाइपोथैलेमस (GnRH), पिट्यूटरी (FSH, LH), अंडाशय (एस्ट्रोजन, प्रोजेस्टेरोन), गर्भाशय। कम एस्ट्रोजन FSH को रोकता है। ऊँचा एस्ट्रोजन LH का उछाल शुरू करता है।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which hormone from the hypothalamus starts the chain?",
+        "hi": "हाइपोथैलेमस का कौन सा हार्मोन कड़ी शुरू करता है?"
+      },
+      "o": [
+        {
+          "en": "GnRH",
+          "hi": "GnRH"
+        },
+        {
+          "en": "FSH",
+          "hi": "FSH"
+        },
+        {
+          "en": "LH",
+          "hi": "LH"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "GnRH reaches the pituitary and makes it release FSH and LH.",
+        "hi": "GnRH पिट्यूटरी तक पहुँचकर उससे FSH और LH छुड़वाता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "What triggers the LH surge?",
+        "hi": "LH का उछाल किससे शुरू होता है?"
+      },
+      "o": [
+        {
+          "en": "Rising progesterone",
+          "hi": "बढ़ता प्रोजेस्टेरोन"
+        },
+        {
+          "en": "A high oestradiol level (positive feedback)",
+          "hi": "ऊँचा एस्ट्राडियोल स्तर (पॉज़िटिव फ़ीडबैक)"
+        },
+        {
+          "en": "Falling FSH",
+          "hi": "गिरता FSH"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "When oestradiol is high enough, its feedback turns positive and LH surges.",
+        "hi": "जब एस्ट्राडियोल काफ़ी ऊँचा होता है, तो उसका फ़ीडबैक पॉज़िटिव हो जाता है और LH उछलता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Ovulation follows the start of the LH surge by about:",
+        "hi": "LH का उछाल शुरू होने के लगभग कितनी देर बाद ओव्यूलेशन होता है?"
+      },
+      "o": [
+        {
+          "en": "4 hours",
+          "hi": "4 घंटे"
+        },
+        {
+          "en": "36 to 44 hours",
+          "hi": "36 से 44 घंटे"
+        },
+        {
+          "en": "4 days",
+          "hi": "4 दिन"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Ovulation comes roughly a day and a half after the surge starts.",
+        "hi": "ओव्यूलेशन उछाल शुरू होने के लगभग डेढ़ दिन बाद होता है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "gy-menstrual"
+  },
+  "glossary": [
+    "corpus-luteum",
+    "follicle",
+    "fsh",
+    "gnrh",
+    "hypothalamus",
+    "lh",
+    "pituitary"
+  ],
+  "sources": [
+    "Physiology, Menstrual Cycle. StatPearls, NCBI Bookshelf NBK500020 (updated 2024).",
+    "Practice Committee of the ASRM. Current evaluation of amenorrhea. Fertil Steril 2024;122:52-61."
+  ]
+}

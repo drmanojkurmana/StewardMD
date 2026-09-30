@@ -99,7 +99,7 @@
     git: "gi", hepatobiliary: "hepbil", liver: "hepbil", renal: "renal", genitourinary: "renal",
     neurology: "neuro", neuro: "neuro", endocrine: "endo", haematology: "heme", hematology: "heme",
     blood: "heme", infectious: "id", infection: "id", rheumatology: "rheum", oncology: "onc",
-    dermatology: "derm", skin: "derm", psychiatry: "psych", obstetrics: "obgy", gynaecology: "obgy",
+    dermatology: "derm", skin: "derm", psychiatry: "psych", obstetrics: "obgy", gynaecology: "obgy", obgyn: "obgy",
     paediatrics: "paeds", pediatrics: "paeds", emergency: "emerg", critical: "emerg", general: "misc"
   };
   function vocabSystemFor(systemId) {

@@ -1,0 +1,925 @@
+{
+ "schema": 1,
+ "kind": "neo-infusions",
+ "title": "Neonatal continuous infusions: standard concentrations and label dose ranges",
+ "compiled": "2026-09-30",
+ "review": {
+  "status": "ai_drafted",
+  "by": null,
+  "date": null
+ },
+ "_conventions": "concentrations[].v is per 1 mL unless per_ml is given (sources write X unit/mL). ASHP S4S pediatric standards are for children under 50 kg; VON standards are NICU (table 1: 500 g or more, table 2: less than 500 g current weight). range is present only when an FDA label states a neonatal or pediatric rate; adult-only ranges are left out. initial[] holds label starting rates. highAlert follows the ISMP 2018 acute care list (highAlertBasis).",
+ "sources": {
+  "inf-ashp-s4s-peds": {
+   "title": "ASHP Standardize 4 Safety: Pediatric Continuous Infusion Standards (updated June 2026)",
+   "publisher": "American Society of Health-System Pharmacists (ASHP)",
+   "url": "https://www.ashp.org/-/media/assets/pharmacy-practice/s4s/docs/Pediatric-Infusion-Standards.pdf",
+   "licence": "Copyright ASHP. No open licence stated in the PDF; the document says the concentrations are voluntary guidelines for adoption. ASHP terms-of-use page returned HTTP 403 to automated fetch, so reuse terms are unverified; treat redistribution as needing ASHP permission.",
+   "accessed": "2026-09-30"
+  },
+  "inf-ismp-high-alert": {
+   "title": "ISMP List of High-Alert Medications in Acute Care Settings (2018)",
+   "publisher": "Institute for Safe Medication Practices (ISMP)",
+   "url": "https://www.ismp.org/sites/default/files/attachments/2018-08/highAlert2018-Acute-Final.pdf",
+   "licence": "(c) ISMP 2018: permission granted to reproduce with proper attribution for internal use within healthcare organizations; other reproduction prohibited without written permission from ISMP.",
+   "accessed": "2026-09-30"
+  },
+  "inf-von-neonatal": {
+   "title": "Neonatal Drug Concentrations, Updated November 2022",
+   "publisher": "Vermont Oxford Network (VON), with ISMP 2011 origin",
+   "url": "https://public.vtoxford.org/wp-content/uploads/2022/11/Neonatal-Drug-Concentrations-Updated-November-2022.pdf",
+   "licence": "Copyright Vermont Oxford Network. Publicly posted PDF with no licence statement; reuse terms not found; treat redistribution as needing VON permission. Snapshot fetched over http because the https server omits its intermediate certificate.",
+   "accessed": "2026-09-30"
+  },
+  "prep-alprostadil": {
+   "title": "PROSTIN VR PEDIATRIC FDA label (set id dea460fa-d05e-4191-8461-f185a711ad89, version 12, effective 20260817)",
+   "publisher": "US FDA / DailyMed (Pharmacia & Upjohn Company LLC)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=dea460fa-d05e-4191-8461-f185a711ad89",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-calcium-gluconate": {
+   "title": "Calcium Gluconate FDA label (set id 8b77c3d2-992d-4261-8421-9cfd07328fbf, version 7, effective 20260518)",
+   "publisher": "US FDA / DailyMed (Fresenius Kabi USA, LLC)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8b77c3d2-992d-4261-8421-9cfd07328fbf",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-dobutamine": {
+   "title": "Dobutamine FDA label (set id 74ba9408-17d3-48ac-be0b-a4fee9e7a1a5, version 6, effective 20240702)",
+   "publisher": "US FDA / DailyMed (Hikma Pharmaceuticals USA Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=74ba9408-17d3-48ac-be0b-a4fee9e7a1a5",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-dopamine": {
+   "title": "DOPamine Hydrochloride FDA label (set id 1f306ad2-3606-4525-5a8a-ce78f426c1a2, version 22, effective 20260513)",
+   "publisher": "US FDA / DailyMed (Hospira, Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1f306ad2-3606-4525-5a8a-ce78f426c1a2",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-epinephrine": {
+   "title": "EPINEPHRINE FDA label (set id 4f83895f-638c-4515-af03-7c41ae60a42e, version 2, effective 20260715)",
+   "publisher": "US FDA / DailyMed (Fresenius Kabi USA, LLC)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4f83895f-638c-4515-af03-7c41ae60a42e",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-fentanyl": {
+   "title": "Fentanyl Citrate FDA label (set id ce5db1c2-feb1-4ad2-847a-d02e865bd47e, version 18, effective 20260306)",
+   "publisher": "US FDA / DailyMed (Hikma Pharmaceuticals USA Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ce5db1c2-feb1-4ad2-847a-d02e865bd47e",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-heparin": {
+   "title": "Heparin Sodium FDA label (set id 7014808d-cec9-4b2c-8eb5-940493e356ab, version 17, effective 20250813)",
+   "publisher": "US FDA / DailyMed (Hikma Pharmaceuticals USA Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7014808d-cec9-4b2c-8eb5-940493e356ab",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-insulin-regular": {
+   "title": "Humulin R FDA label (set id b519bd83-038c-4ec5-a231-a51ec5cc291f, version 35, effective 20260616)",
+   "publisher": "US FDA / DailyMed (Eli Lilly and Company)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=b519bd83-038c-4ec5-a231-a51ec5cc291f",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-midazolam": {
+   "title": "Midazolam FDA label (set id a91ce254-14a3-4cbf-8ab8-5da252aa3fdc, version 7, effective 20240715)",
+   "publisher": "US FDA / DailyMed (Fresenius Kabi USA, LLC)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a91ce254-14a3-4cbf-8ab8-5da252aa3fdc",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-milrinone": {
+   "title": "Milrinone Lactate FDA label (set id bb7500f8-dbfd-4c8a-ac2e-5533609c3970, version 3, effective 20180601)",
+   "publisher": "US FDA / DailyMed (Hikma Pharmaceuticals USA Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=bb7500f8-dbfd-4c8a-ac2e-5533609c3970",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-norepinephrine": {
+   "title": "Norepinephrine Bitartrate FDA label (set id dfed53ef-2060-44b8-a62e-9f8ee10a05a5, version 1, effective 20230605)",
+   "publisher": "US FDA / DailyMed (Fresenius Kabi USA, LLC)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=dfed53ef-2060-44b8-a62e-9f8ee10a05a5",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  },
+  "prep-vasopressin": {
+   "title": "Vasopressin FDA label (set id cce1a220-3178-49ec-b046-f0cb134cf051, version 2, effective 20250301)",
+   "publisher": "US FDA / DailyMed (Civica, Inc.)",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=cce1a220-3178-49ec-b046-f0cb134cf051",
+   "licence": "Public domain (US Government work, FDA-approved labeling via openFDA/DailyMed)",
+   "accessed": "2026-09-30"
+  }
+ },
+ "drugs": [
+  {
+   "id": "dopamine",
+   "name": "Dopamine",
+   "highAlert": true,
+   "doseUnit": "mcg/kg/min",
+   "concentrations": [
+    {
+     "v": 800,
+     "unit": "mcg",
+     "label": "ASHP S4S pediatric standard 1",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "DOPamine 1. 800 mcg/mL 2. 1600 mcg/mL 3. 3200 mcg/mL mcg/kg/min"
+    },
+    {
+     "v": 1600,
+     "unit": "mcg",
+     "label": "ASHP S4S pediatric standard 2",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "DOPamine 1. 800 mcg/mL 2. 1600 mcg/mL 3. 3200 mcg/mL mcg/kg/min"
+    },
+    {
+     "v": 3200,
+     "unit": "mcg",
+     "label": "ASHP S4S pediatric standard 3",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "DOPamine 1. 800 mcg/mL 2. 1600 mcg/mL 3. 3200 mcg/mL mcg/kg/min"
+    },
+    {
+     "v": 1600,
+     "unit": "mcg",
+     "label": "VON NICU standard (500 g or more)",
+     "when": {
+      "wt": {
+       "min": 500,
+       "unit": "g"
+      }
+     },
+     "src": "inf-von-neonatal",
+     "quote": "dopamine C 1600 mcg/mL 3,4,5 Dopamine 1600 mcg/mL does not result in measurable rates for patients under 500 g."
+    },
+    {
+     "v": 800,
+     "unit": "mcg",
+     "label": "VON NICU standard (less than 500 g current weight)",
+     "when": {
+      "wt": {
+       "lt": 500,
+       "unit": "g"
+      }
+     },
+     "src": "inf-von-neonatal",
+     "quote": "dopamine (less than 500 g current weight) C 800 mcg/mL 3,4,5"
+    }
+   ],
+   "range": {
+    "lo": 2,
+    "hi": 50,
+    "unit": "mcg/kg/min",
+    "basis": "FDA label statement for adults and pediatric patients (start 2 to 5, maximum 50); not neonatal-specific",
+    "src": "prep-dopamine",
+    "quote": "The recommended starting dosage in adults and pediatric patients is 2 to 5 mcg/kg/minute as a continuous intravenous infusion [see Dosage and Administration (2.3) ] . Titrate the infusion rate in increments of 5 to 10 mcg/kg/minute based on hemodynamic response and tolerability, but do not exceed 50 mcg/kg/minute."
+   },
+   "highAlertBasis": {
+    "text": "ISMP high-alert class: adrenergic agonists, IV",
+    "src": "inf-ismp-high-alert",
+    "quote": "adrenergic agonists, IV (e.g., EPIN EPH rine, phenylephrine, norepinephrine)"
+   },
+   "notes": [
+    {
+     "text": "FDA label pediatric use: dopamine infusions have been used from birth through adolescence with dosing similar on a mcg/kg/minute basis to adults",
+     "src": "prep-dopamine",
+     "quote": "Dopamine HCl infusions have been used in pediatric patients from birth through adolescence. Most reports in pediatric patients describe dosing that is similar (on a mcg/kg/minute basis) to that used in adults"
+    },
+    {
+     "text": "Range is from a label statement covering adults and pediatric patients, not a neonatal study; neonatologist review required"
+    }
+   ]
+  },
+  {
+   "id": "dobutamine",
+   "name": "Dobutamine",
+   "highAlert": true,
+   "doseUnit": "mcg/kg/min",
+   "concentrations": [
+    {
+     "v": 1000,
+     "unit": "mcg",
+     "label": "ASHP S4S pediatric standard 1",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "DOBUTamine 1. 1000 mcg/mL 2. 2000 mcg/mL 3. 4000 mcg/mL mcg/kg/min"
+    },
+    {
+     "v": 2000,
+     "unit": "mcg",
+     "label": "ASHP S4S pediatric standard 2",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "DOBUTamine 1. 1000 mcg/mL 2. 2000 mcg/mL 3. 4000 mcg/mL mcg/kg/min"
+    },
+    {
+     "v": 4000,
+     "unit": "mcg",
+     "label": "ASHP S4S pediatric standard 3",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "DOBUTamine 1. 1000 mcg/mL 2. 2000 mcg/mL 3. 4000 mcg/mL mcg/kg/min"
+    },
+    {
+     "v": 2000,
+     "unit": "mcg",
+     "label": "VON NICU standard (500 g or more)",
+     "when": {
+      "wt": {
+       "min": 500,
+       "unit": "g"
+      }
+     },
+     "src": "inf-von-neonatal",
+     "quote": "dobutamine C 2000 mcg/mL 3 Dobutamine 2000 mcg/mL does not result in measurable rates for patients under 500 g."
+    },
+    {
+     "v": 1000,
+     "unit": "mcg",
+     "label": "VON NICU standard (less than 500 g current weight)",
+     "when": {
+      "wt": {
+       "lt": 500,
+       "unit": "g"
+      }
+     },
+     "src": "inf-von-neonatal",
+     "quote": "dobutamine (less than 500 g current weight) C 1000 mcg/mL 3"
+    }
+   ],
+   "highAlertBasis": {
+    "text": "ISMP high-alert class: adrenergic agonists, IV (dobutamine assigned by class)",
+    "src": "inf-ismp-high-alert",
+    "quote": "adrenergic agonists, IV (e.g., EPIN EPH rine, phenylephrine, norepinephrine)"
+   },
+   "notes": [
+    {
+     "text": "No neonatal or pediatric dose range in the FDA label (general range is not age-specific); range left out"
+    },
+    {
+     "text": "FDA label: in premature neonates dobutamine is less effective than dopamine in raising blood pressure without undue tachycardia",
+     "src": "prep-dobutamine",
+     "quote": "In premature neonates, however, dobutamine is less effective than dopamine in raising systemic blood pressure without causing undue tachycardia"
+    }
+   ]
+  },
+  {
+   "id": "epinephrine",
+   "name": "Epinephrine",
+   "highAlert": true,
+   "doseUnit": "mcg/kg/min",
+   "concentrations": [
+    {
+     "v": 10,
+     "unit": "mcg",
+     "label": "ASHP S4S pediatric standard 1",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "EPINEPHrine1 1. 10 mcg/mL2 2. 20 mcg/mL 3. 40 mcg/mL mcg/kg/min"
+    },
+    {
+     "v": 20,
+     "unit": "mcg",
+     "label": "ASHP S4S pediatric standard 2",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "EPINEPHrine1 1. 10 mcg/mL2 2. 20 mcg/mL 3. 40 mcg/mL mcg/kg/min"
+    },
+    {
+     "v": 40,
+     "unit": "mcg",
+     "label": "ASHP S4S pediatric standard 3",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "EPINEPHrine1 1. 10 mcg/mL2 2. 20 mcg/mL 3. 40 mcg/mL mcg/kg/min"
+    },
+    {
+     "v": 10,
+     "unit": "mcg",
+     "label": "VON NICU standard (500 g or more)",
+     "when": {
+      "wt": {
+       "min": 500,
+       "unit": "g"
+      }
+     },
+     "src": "inf-von-neonatal",
+     "quote": "epinephrine C 10 mcg/mL 1,5 Epinephrine 10 mcg/mL does not result in measurable rates for patients under 500 g."
+    },
+    {
+     "v": 5,
+     "unit": "mcg",
+     "label": "VON NICU standard (less than 500 g current weight)",
+     "when": {
+      "wt": {
+       "lt": 500,
+       "unit": "g"
+      }
+     },
+     "src": "inf-von-neonatal",
+     "quote": "epinephrine (less than 500 g current weight) C 5 mcg/mL 1,5"
+    }
+   ],
+   "highAlertBasis": {
+    "text": "ISMP high-alert class: adrenergic agonists, IV",
+    "src": "inf-ismp-high-alert",
+    "quote": "adrenergic agonists, IV (e.g., EPIN EPH rine, phenylephrine, norepinephrine)"
+   },
+   "notes": [
+    {
+     "text": "FDA label infusion range is for adults with septic shock; pediatric septic shock safety not established; range left out",
+     "src": "prep-epinephrine",
+     "quote": "Safety and effectiveness of epinephrine in pediatric patients with septic shock have not been established."
+    },
+    {
+     "text": "ASHP footnote: babies under 500 g may require a lower concentration",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "2 Babies under 500 gms may require a lower concentration."
+    }
+   ]
+  },
+  {
+   "id": "norepinephrine",
+   "name": "Norepinephrine",
+   "highAlert": true,
+   "doseUnit": "mcg/kg/min",
+   "concentrations": [
+    {
+     "v": 16,
+     "unit": "mcg",
+     "label": "ASHP S4S pediatric standard 1",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Norepinephrine1 1. 16 mcg/mL2 2. 32 mcg/mL 3. 64 mcg/mL mcg/kg/min"
+    },
+    {
+     "v": 32,
+     "unit": "mcg",
+     "label": "ASHP S4S pediatric standard 2",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Norepinephrine1 1. 16 mcg/mL2 2. 32 mcg/mL 3. 64 mcg/mL mcg/kg/min"
+    },
+    {
+     "v": 64,
+     "unit": "mcg",
+     "label": "ASHP S4S pediatric standard 3",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Norepinephrine1 1. 16 mcg/mL2 2. 32 mcg/mL 3. 64 mcg/mL mcg/kg/min"
+    },
+    {
+     "v": 16,
+     "unit": "mcg",
+     "label": "VON NICU standard (500 g or more)",
+     "when": {
+      "wt": {
+       "min": 500,
+       "unit": "g"
+      }
+     },
+     "src": "inf-von-neonatal",
+     "quote": "norepinephrine C 16 mcg/mL 1 Norepinephrine 16 mcg/mL does not result in measurable rates in patients under 500 g."
+    },
+    {
+     "v": 4,
+     "unit": "mcg",
+     "label": "VON NICU standard (less than 500 g current weight)",
+     "when": {
+      "wt": {
+       "lt": 500,
+       "unit": "g"
+      }
+     },
+     "src": "inf-von-neonatal",
+     "quote": "norepinephrine (less than 500 g current weight) C 4 mcg/mL 1, 17"
+    }
+   ],
+   "highAlertBasis": {
+    "text": "ISMP high-alert class: adrenergic agonists, IV",
+    "src": "inf-ismp-high-alert",
+    "quote": "adrenergic agonists, IV (e.g., EPIN EPH rine, phenylephrine, norepinephrine)"
+   },
+   "notes": [
+    {
+     "text": "FDA label: pediatric safety and effectiveness not established; label doses are adult mcg/minute; range left out",
+     "src": "prep-norepinephrine",
+     "quote": "8.4 Pediatric Use Safety and effectiveness in pediatric patients have not been established."
+    },
+    {
+     "text": "ASHP footnote: the expert panel and ISMP recommend different concentrations of epinephrine and norepinephrine",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "1 The expert panel and ISMP recommend different concentrations of epinephrine and norepinephrine."
+    }
+   ]
+  },
+  {
+   "id": "milrinone",
+   "name": "Milrinone",
+   "highAlert": true,
+   "doseUnit": "mcg/kg/min",
+   "concentrations": [
+    {
+     "v": 100,
+     "unit": "mcg",
+     "label": "ASHP S4S pediatric standard 1",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Milrinone 1. 100 mcg/mL 2. 200 mcg/mL mcg/kg/min"
+    },
+    {
+     "v": 200,
+     "unit": "mcg",
+     "label": "ASHP S4S pediatric standard 2 (commercially available)",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Milrinone 1. 100 mcg/mL 2. 200 mcg/mL mcg/kg/min"
+    }
+   ],
+   "highAlertBasis": {
+    "text": "ISMP high-alert class: inotropic medications, IV",
+    "src": "inf-ismp-high-alert",
+    "quote": "inotropic m edications, IV (e.g., digoxin, m ilrinone)"
+   },
+   "notes": [
+    {
+     "text": "FDA label: pediatric safety and effectiveness not established; adult range only; range left out",
+     "src": "prep-milrinone",
+     "quote": "Pediatric Use Safety and effectiveness in pediatric patients have not been established."
+    },
+    {
+     "text": "Not in the VON neonatal concentration list"
+    }
+   ]
+  },
+  {
+   "id": "midazolam",
+   "name": "Midazolam",
+   "highAlert": true,
+   "doseUnit": "mg/kg/h",
+   "concentrations": [
+    {
+     "v": 0.3,
+     "unit": "mg",
+     "label": "ASHP S4S pediatric standard 1",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Midazolam 1. 0.3 mg/mL (easier pump programming than 0.35 mg/mL less decimal) 2. 1 mg/mL 3. 5 mg/mL mg/kg/hour"
+    },
+    {
+     "v": 1,
+     "unit": "mg",
+     "label": "ASHP S4S pediatric standard 2",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Midazolam 1. 0.3 mg/mL (easier pump programming than 0.35 mg/mL less decimal) 2. 1 mg/mL 3. 5 mg/mL mg/kg/hour"
+    },
+    {
+     "v": 5,
+     "unit": "mg",
+     "label": "ASHP S4S pediatric standard 3",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Midazolam 1. 0.3 mg/mL (easier pump programming than 0.35 mg/mL less decimal) 2. 1 mg/mL 3. 5 mg/mL mg/kg/hour"
+    },
+    {
+     "v": 1,
+     "unit": "mg",
+     "label": "VON NICU standard (500 g or more)",
+     "src": "inf-von-neonatal",
+     "quote": "midazolam C 1 mg/mL 3, 14 Midazolam 1 mg/mL does not result in measurable rates."
+    },
+    {
+     "v": 0.2,
+     "unit": "mg",
+     "label": "VON NICU standard (less than 500 g current weight)",
+     "when": {
+      "wt": {
+       "lt": 500,
+       "unit": "g"
+      }
+     },
+     "src": "inf-von-neonatal",
+     "quote": "midazolam (less than 500 g current weight) C 0.2 mg/ml 14"
+    }
+   ],
+   "initial": [
+    {
+     "v": 0.03,
+     "unit": "mg/kg/h",
+     "when": {
+      "ga_wk": {
+       "lt": 32
+      }
+     },
+     "label": "FDA label initial rate, intubated neonates under 32 weeks",
+     "src": "prep-midazolam",
+     "quote": "continuous intravenous infusions of midazolam should be initiated at a rate of 0.03 mg/kg/hr (0.5 mcg/kg/min) in neonates <32 weeks and 0.06 mg/kg/hr (1 mcg/kg/min) in neonates >32 weeks."
+    },
+    {
+     "v": 0.06,
+     "unit": "mg/kg/h",
+     "when": {
+      "ga_wk": {
+       "gt": 32
+      }
+     },
+     "label": "FDA label initial rate, intubated neonates over 32 weeks",
+     "src": "prep-midazolam",
+     "quote": "continuous intravenous infusions of midazolam should be initiated at a rate of 0.03 mg/kg/hr (0.5 mcg/kg/min) in neonates <32 weeks and 0.06 mg/kg/hr (1 mcg/kg/min) in neonates >32 weeks."
+    }
+   ],
+   "highAlertBasis": {
+    "text": "ISMP high-alert class: moderate sedation agents, IV",
+    "src": "inf-ismp-high-alert",
+    "quote": "m oderate sedation agents, IV (e.g., dexm edetom idine, m idazolam , LO R azepam )"
+   },
+   "notes": [
+    {
+     "text": "FDA label gives neonatal starting rates only (see initial), not a lo to hi range; range left out. Label wording is by weeks without saying gestational or postmenstrual age; mapped to ga_wk, needs review"
+    },
+    {
+     "text": "FDA label: no IV loading doses in neonates; no rapid injection",
+     "src": "prep-midazolam",
+     "quote": "Intravenous loading doses should not be used in neonates"
+    },
+    {
+     "text": "VON: 0.2 mg/mL recommended to avoid a 10 x dilution and confusion with morphine 0.1 mg/mL",
+     "src": "inf-von-neonatal",
+     "quote": "Midazolam 0.2 mg/mL is recommended to avoid a 10 x dilution and confusion with morphine 0.1 mg/mL."
+    }
+   ]
+  },
+  {
+   "id": "morphine",
+   "name": "Morphine",
+   "highAlert": true,
+   "doseUnit": "mg/kg/h",
+   "concentrations": [
+    {
+     "v": 0.2,
+     "unit": "mg",
+     "label": "ASHP S4S pediatric standard 1",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Morphine 1. 0.2 mg/mL 2. 0.5 mg/mL 3. 1 mg/mL mg/kg/hour"
+    },
+    {
+     "v": 0.5,
+     "unit": "mg",
+     "label": "ASHP S4S pediatric standard 2",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Morphine 1. 0.2 mg/mL 2. 0.5 mg/mL 3. 1 mg/mL mg/kg/hour"
+    },
+    {
+     "v": 1,
+     "unit": "mg",
+     "label": "ASHP S4S pediatric standard 3",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Morphine 1. 0.2 mg/mL 2. 0.5 mg/mL 3. 1 mg/mL mg/kg/hour"
+    },
+    {
+     "v": 0.5,
+     "unit": "mg",
+     "label": "VON NICU standard (500 g or more)",
+     "when": {
+      "wt": {
+       "min": 500,
+       "unit": "g"
+      }
+     },
+     "src": "inf-von-neonatal",
+     "quote": "morphine C 0.5 mg/mL 15,16 Morphine 0.5 mg/mL does not result in measurable rates in patients under 500 g."
+    },
+    {
+     "v": 0.1,
+     "unit": "mg",
+     "label": "VON NICU standard (less than 500 g current weight)",
+     "when": {
+      "wt": {
+       "lt": 500,
+       "unit": "g"
+      }
+     },
+     "src": "inf-von-neonatal",
+     "quote": "morphine (less than 500 g current weight) C 0.1 mg/mL 14,16"
+    }
+   ],
+   "highAlertBasis": {
+    "text": "ISMP high-alert class: opioids, IV",
+    "src": "inf-ismp-high-alert",
+    "quote": "opioids, including: IV"
+   },
+   "notes": [
+    {
+     "text": "FDA labels fetched give no neonatal infusion range (pediatric infusion statement covers 1 to less than 17 years only; the 2 to 15 mg/mL label says safety below 18 years not established); range left out"
+    }
+   ]
+  },
+  {
+   "id": "fentanyl",
+   "name": "Fentanyl",
+   "highAlert": true,
+   "doseUnit": "mcg/kg/h",
+   "concentrations": [
+    {
+     "v": 10,
+     "unit": "mcg",
+     "label": "ASHP S4S pediatric standard 1",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "FentaNYL 1. 10 mcg/mL2 2. 50 mcg/mL mcg/kg/hour"
+    },
+    {
+     "v": 50,
+     "unit": "mcg",
+     "label": "ASHP S4S pediatric standard 2 (undiluted vial)",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "FentaNYL 1. 10 mcg/mL2 2. 50 mcg/mL mcg/kg/hour"
+    },
+    {
+     "v": 10,
+     "unit": "mcg",
+     "label": "VON NICU standard (500 g or more)",
+     "when": {
+      "wt": {
+       "min": 500,
+       "unit": "g"
+      }
+     },
+     "src": "inf-von-neonatal",
+     "quote": "fentanyl C 10 mcg/mL 8 Fentanyl 10 mcg/mL does not result in measurable rates for patients under 500 g."
+    },
+    {
+     "v": 2,
+     "unit": "mcg",
+     "label": "VON NICU standard (less than 500 g current weight)",
+     "when": {
+      "wt": {
+       "lt": 500,
+       "unit": "g"
+      }
+     },
+     "src": "inf-von-neonatal",
+     "quote": "fentanyl (less than 500 g current weight C 2 mcg/mL 6,7,8"
+    }
+   ],
+   "highAlertBasis": {
+    "text": "ISMP high-alert class: opioids, IV",
+    "src": "inf-ismp-high-alert",
+    "quote": "opioids, including: IV"
+   },
+   "notes": [
+    {
+     "text": "FDA label: safety and efficacy under two years not established; no neonatal infusion range; range left out",
+     "src": "prep-fentanyl",
+     "quote": "The safety and efficacy of Fentanyl Citrate Injection in pediatric patients under two years of age has not been established."
+    }
+   ]
+  },
+  {
+   "id": "insulin-regular",
+   "name": "Insulin regular",
+   "highAlert": true,
+   "doseUnit": "units/kg/h",
+   "concentrations": [
+    {
+     "v": 0.2,
+     "unit": "units",
+     "label": "ASHP S4S pediatric standard 1",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Insulin (regular) 1. 0.2 units/mL 2. 1 unit/mL units/kg/hour"
+    },
+    {
+     "v": 1,
+     "unit": "units",
+     "label": "ASHP S4S pediatric standard 2",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Insulin (regular) 1. 0.2 units/mL 2. 1 unit/mL units/kg/hour"
+    },
+    {
+     "v": 0.5,
+     "unit": "units",
+     "label": "VON NICU standard (500 g or more)",
+     "when": {
+      "wt": {
+       "min": 500,
+       "unit": "g"
+      }
+     },
+     "src": "inf-von-neonatal",
+     "quote": "insulin C 0.5 unit/mL 12,13 Insulin 0.5 units/mL does not result in measurable rates in patients under 500 g."
+    },
+    {
+     "v": 0.1,
+     "unit": "units",
+     "label": "VON NICU standard (less than 500 g current weight)",
+     "when": {
+      "wt": {
+       "lt": 500,
+       "unit": "g"
+      }
+     },
+     "src": "inf-von-neonatal",
+     "quote": "insulin (less than 500 g current weight) C 0.1 unit/mL 12,13"
+    }
+   ],
+   "highAlertBasis": {
+    "text": "ISMP high-alert class: insulin, subcutaneous and IV",
+    "src": "inf-ismp-high-alert",
+    "quote": "insulin, subcutaneous and IV"
+   },
+   "notes": [
+    {
+     "text": "FDA label IV concentration limits: 0.1 to 1 unit/mL in 0.9% Sodium Chloride",
+     "src": "prep-insulin-regular",
+     "quote": "For intravenous use, HUMULIN R should be used at concentrations from 0.1 unit/mL to 1 unit/mL in infusion systems containing 0.9% Sodium Chloride Injection."
+    },
+    {
+     "text": "FDA label gives no neonatal infusion dose range (dose individualized); range left out"
+    }
+   ]
+  },
+  {
+   "id": "alprostadil",
+   "name": "Alprostadil",
+   "highAlert": false,
+   "doseUnit": "mcg/kg/min",
+   "concentrations": [
+    {
+     "v": 5,
+     "unit": "mcg",
+     "label": "ASHP S4S pediatric standard 1",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Alprostadil 1. 5 mcg/mL 2. 10 mcg/mL mcg/kg/min"
+    },
+    {
+     "v": 10,
+     "unit": "mcg",
+     "label": "ASHP S4S pediatric standard 2",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Alprostadil 1. 5 mcg/mL 2. 10 mcg/mL mcg/kg/min"
+    },
+    {
+     "v": 10,
+     "unit": "mcg",
+     "label": "VON NICU standard",
+     "src": "inf-von-neonatal",
+     "quote": "alprostadil C 10 mcg/mL 1"
+    }
+   ],
+   "range": {
+    "lo": 0.01,
+    "hi": 0.4,
+    "unit": "mcg/kg/min",
+    "basis": "FDA label (PROSTIN VR PEDIATRIC, neonatal product): maintenance can be reduced to 0.01; can be increased up to 0.4",
+    "src": "prep-alprostadil",
+    "quote": "This may be accomplished by reducing the dosage from 0.1 to 0.05 to 0.025 to 0.01 micrograms per kilogram of body weight per minute. If response to 0.05 micrograms per kilogram of body weight per minute is inadequate, dosage can be increased up to 0.4 micrograms per kilogram of body weight per minute"
+   },
+   "initial": [
+    {
+     "lo": 0.05,
+     "hi": 0.1,
+     "unit": "mcg/kg/min",
+     "label": "FDA label starting dose; 0.1 is the recommended start",
+     "src": "prep-alprostadil",
+     "quote": "Begin infusion with 0.05 to 0.1 micrograms alprostadil per kilogram of body weight per minute. A starting dose of 0.1 micrograms per kilogram of body weight per minute is the recommended starting dose based on clinical studies"
+    }
+   ],
+   "notes": [
+    {
+     "text": "Not on the ISMP 2018 acute care high-alert list; highAlert false reflects that list only"
+    }
+   ]
+  },
+  {
+   "id": "vasopressin",
+   "name": "Vasopressin",
+   "highAlert": true,
+   "doseUnit": "milliunits/kg/min",
+   "concentrations": [
+    {
+     "v": 0.05,
+     "unit": "units",
+     "label": "ASHP S4S pediatric standard 1",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Vasopressin 1. 0.05 units/mL 2. 0.2 units/mL 3. 1 units/mL VASOCONSTRICTION/ GI BLEED: milliunits/kg/ min*"
+    },
+    {
+     "v": 0.2,
+     "unit": "units",
+     "label": "ASHP S4S pediatric standard 2",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Vasopressin 1. 0.05 units/mL 2. 0.2 units/mL 3. 1 units/mL VASOCONSTRICTION/ GI BLEED: milliunits/kg/ min*"
+    },
+    {
+     "v": 1,
+     "unit": "units",
+     "label": "ASHP S4S pediatric standard 3",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Vasopressin 1. 0.05 units/mL 2. 0.2 units/mL 3. 1 units/mL VASOCONSTRICTION/ GI BLEED: milliunits/kg/ min*"
+    }
+   ],
+   "highAlertBasis": {
+    "text": "ISMP high-alert specific medication: vasopressin, IV",
+    "src": "inf-ismp-high-alert",
+    "quote": "vasopressin, IV and intraosseous"
+   },
+   "notes": [
+    {
+     "text": "ASHP dosing unit: milliunits/kg/min for vasoconstriction, milliunits/kg/hr for diabetes insipidus"
+    },
+    {
+     "text": "FDA label: pediatric safety and effectiveness in vasodilatory shock not established; adult units/minute only; range left out",
+     "src": "prep-vasopressin",
+     "quote": "Safety and effectiveness of vasopressin injection in pediatric patients with vasodilatory shock have not been established."
+    },
+    {
+     "text": "Not in the VON neonatal concentration list"
+    }
+   ]
+  },
+  {
+   "id": "heparin",
+   "name": "Heparin",
+   "highAlert": true,
+   "doseUnit": "units/kg/h",
+   "concentrations": [
+    {
+     "v": 50,
+     "unit": "units",
+     "label": "ASHP S4S pediatric standard, anticoagulation 1",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Heparin (anticoagulation therapy) 1. 50 units/mL 2. 100 units/mL units/kg/hour"
+    },
+    {
+     "v": 100,
+     "unit": "units",
+     "label": "ASHP S4S pediatric standard, anticoagulation 2",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Heparin (anticoagulation therapy) 1. 50 units/mL 2. 100 units/mL units/kg/hour"
+    },
+    {
+     "v": 0.5,
+     "unit": "units",
+     "label": "ASHP S4S arterial line maintenance (neonatal)",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Heparin (arterial line maintenance) 1. 0.5 units/mL (neonatal) 2. 2 Units/mL"
+    },
+    {
+     "v": 2,
+     "unit": "units",
+     "label": "ASHP S4S arterial line maintenance",
+     "src": "inf-ashp-s4s-peds",
+     "quote": "Heparin (arterial line maintenance) 1. 0.5 units/mL (neonatal) 2. 2 Units/mL"
+    },
+    {
+     "v": 0.5,
+     "unit": "units",
+     "label": "VON NICU standard, heparin in 0.45% NaCl",
+     "src": "inf-von-neonatal",
+     "quote": "heparin in 0.45% NaCl C 0.5 unit/mL 1, 11"
+    }
+   ],
+   "range": {
+    "lo": 25,
+    "hi": 30,
+    "unit": "units/kg/h",
+    "basis": "FDA label pediatric guideline (based on clinical experience), infants maintenance",
+    "src": "prep-heparin",
+    "quote": "Maintenance Dose Infants: 25 to 30 units/kg/hour; Infants < 2 months have the highest requirements (average 28 units/kg/hour)"
+   },
+   "highAlertBasis": {
+    "text": "ISMP high-alert class: anticoagulants including unfractionated heparin",
+    "src": "inf-ismp-high-alert",
+    "quote": "anticoagulants (e.g., w arfarin, low m olecular w eight heparin, unfractionated heparin)"
+   },
+   "notes": [
+    {
+     "text": "FDA label: pediatric dosing based on clinical experience, no adequate controlled studies; infants under 2 months have the highest requirements (average 28 units/kg/hour)",
+     "src": "prep-heparin",
+     "quote": "Infants < 2 months have the highest requirements (average 28 units/kg/hour)"
+    },
+    {
+     "text": "Use preservative-free heparin in neonates",
+     "src": "prep-heparin",
+     "quote": "Use preservative-free Heparin Sodium Injection in neonates and infants."
+    }
+   ]
+  },
+  {
+   "id": "calcium-gluconate",
+   "name": "Calcium gluconate",
+   "highAlert": false,
+   "doseUnit": "mg/kg/h",
+   "concentrations": [],
+   "range": {
+    "lo": 17,
+    "hi": 33,
+    "unit": "mg/kg/h",
+    "basis": "FDA label: neonate (1 month or younger) continuous infusion initiation rate; adjust by serum calcium",
+    "src": "prep-calcium-gluconate",
+    "quote": "Neonate (≤ 1 month) 100 – 200 mg/kg 100 - 200 mg/kg every 6 hours Initiate at 17-33 mg/kg/hour"
+   },
+   "notes": [
+    {
+     "text": "FDA label continuous infusion concentration: 5.8 to 10 mg/mL in 5% dextrose or normal saline",
+     "src": "prep-calcium-gluconate",
+     "quote": "For continuous intravenous infusion: Dilute Calcium Gluconate Injection in 5% dextrose or normal saline to a concentration of 5.8-10 mg/mL prior to administration."
+    },
+    {
+     "text": "No ASHP or VON standard concentration fetched for calcium gluconate; not on ISMP 2018 acute care list"
+    }
+   ]
+  }
+ ]
+}

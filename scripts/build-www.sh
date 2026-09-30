@@ -99,6 +99,9 @@ if [ -d assets/vendor ]; then mkdir -p "$WWW/assets/vendor"; cp -R assets/vendor
 [ -f data/clinical-supplement.json.gz ] && cp data/clinical-supplement.json.gz "$WWW/"
 # Dose calculator rules (scripts/build-dose-rules.mjs), loaded lazily by the calculator.
 [ -f data/dose-rules.json.gz ] && cp data/dose-rules.json.gz "$WWW/"
+# Neonatal layer (smd_neo): the quoted clinical data files, fetched lazily by neo-*.js from /data/neo/.
+# data/neo/sources.json.gz (provenance snapshots for scripts/neo/validate.mjs) is NOT shipped.
+if [ -d data/neo ]; then mkdir -p "$WWW/data/neo"; cp data/neo/*.json "$WWW/data/neo/"; fi
 [ -f data/clinical-index.js ] && cp data/clinical-index.js "$WWW/"
 # India access on Clinical Bulletins cards (bulletins.js): NLEM 2022 (scripts/india/build_nlem.py) and, when the
 # owner has run scripts/india/fetch-janaushadhi.mjs, the Jan Aushadhi price list. Read offline from the bundle.
@@ -217,9 +220,15 @@ fi
 # already copies, so there is nothing extra to do for it.
 [ -d surgx ] && mkdir -p "$WWW/surgx" && cp -R surgx/. "$WWW/surgx/"
 
-# Tokós (tokos.js): tracks, decks, rationale and CTG trace SVGs. Root tokos-*.js / tokos.css are globbed;
+# Tokós (tokos.js on the specialty engine): tracks, decks, rationale and CTG trace SVGs. Root tokos-*.js / tokos.css are globbed;
 # the tokos/ DATA directory is not. tools/tokos-ctg-prep.mjs and docs/tokos are authoring only and do not ship.
 [ -d tokos ] && mkdir -p "$WWW/tokos" && cp -R tokos/. "$WWW/tokos/"
+# Learn authoring inputs (unit files, per-unit credits, the NMC competency list and map) are folded into learn/index.json,
+# glossary.json and media/credits.json by tools/tokos-learn-index.mjs; the app never reads them.
+rm -rf "$WWW/tokos/learn/units" "$WWW/tokos/learn/media"/credits-*.json "$WWW/tokos/learn/competencies.json" "$WWW/tokos/learn/competency-map.json"
+# Tokós models (tokos-models/*.js, listed in tokos/models.json and loaded on first open by tokos-loader.js): a
+# subdirectory, so the root *.js glob misses it. The engine files (specialty-*.js, specialty.css) are root globs.
+[ -d tokos-models ] && mkdir -p "$WWW/tokos-models" && cp -R tokos-models/. "$WWW/tokos-models/"
 
 # NMC Logbook curriculum packs + assessment templates. Same rule and the same failure mode as clinix
 # and surgx above: the root *.js glob copies the module code, DATA DIRECTORIES ARE NOT COPIED. Without

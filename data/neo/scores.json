@@ -1,0 +1,1476 @@
+{
+ "schema": 1,
+ "kind": "neo-scores",
+ "title": "Neonatal scores and criteria",
+ "compiled": "2026-09-30",
+ "review": {
+  "status": "ai_drafted",
+  "by": null,
+  "date": null
+ },
+ "sources": {
+  "sc-finnegan-jamanet": {
+   "title": "Devlin LA et al. Association of a Simplified Finnegan Neonatal Abstinence Scoring Tool With the Need for Pharmacologic Treatment for Neonatal Abstinence Syndrome. JAMA Netw Open 2020;3(4):e202275 (PMC7142377), Table 1",
+   "publisher": "JAMA Network Open (via Europe PMC)",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7142377/fullTextXML",
+   "doi": "10.1001/jamanetworkopen.2020.2275",
+   "licence": "CC BY 4.0 (article licence; the Finnegan tool itself originates from Finnegan et al 1975)",
+   "accessed": "2026-09-30"
+  },
+  "sc-capurro-msbr": {
+   "title": "Atenção à Saúde do Recém-Nascido: Guia para os Profissionais de Saúde, volume 1, 2a edição atualizada 2014, Quadro 11 (Capurro)",
+   "publisher": "Ministério da Saúde, Brasil",
+   "url": "https://bvsms.saude.gov.br/bvs/publicacoes/atencao_saude_recem_nascido_v1.pdf",
+   "licence": "CC BY-NC-SA 4.0 (stated in the document); non-commercial only, so commercial use needs permission",
+   "accessed": "2026-09-30"
+  },
+  "sc-npass-criteria": {
+   "title": "N-PASS Scoring Criteria (n-pass.com, Hummel and Puchalski), Internet Archive capture 2003-11-25",
+   "publisher": "Loyola University Health System / n-pass.com",
+   "url": "https://web.archive.org/web/20031125083731/http://www.n-pass.com:80/scoring_criteria.html",
+   "licence": "All rights reserved (Loyola University Health System 2002): no reproduction without written permission of the authors. Permission needed.",
+   "accessed": "2026-09-30"
+  },
+  "sc-npass-site": {
+   "title": "N-PASS Assessment Table (n-pass.com), Internet Archive capture 2003-11-25",
+   "publisher": "Loyola University Health System / n-pass.com",
+   "url": "https://web.archive.org/web/20031125084149/http://www.n-pass.com:80/assesment_table.html",
+   "licence": "All rights reserved (Loyola University Health System 2002): 'No part of this document may be reproduced ... without written permission of the authors.' Permission needed.",
+   "accessed": "2026-09-30"
+  },
+  "sc-npass-guidelines": {
+   "title": "N-PASS Assessment Guidelines (n-pass.com), Internet Archive capture 2003-11-25",
+   "publisher": "Loyola University Health System / n-pass.com",
+   "url": "https://web.archive.org/web/20031125084846/http://www.n-pass.com:80/assessment_guidlines.html",
+   "licence": "All rights reserved (n-pass.com). Permission needed.",
+   "accessed": "2026-09-30"
+  },
+  "sc-npass-hummel2008": {
+   "title": "Hummel P, Puchalski M, Creech SD, Weiss MG. Clinical reliability and validity of the N-PASS: neonatal pain, agitation and sedation scale with prolonged pain. J Perinatol 2008;28:55-60",
+   "publisher": "Nature Publishing Group (copy hosted by Fiocruz Portal de Boas Práticas)",
+   "url": "https://portaldeboaspraticas.iff.fiocruz.br/wp-content/uploads/2017/09/Humell-2008-NPASS.pdf",
+   "licence": "Copyright Nature Publishing Group; not openly licensed (third-party hosted copy). Quoted for one sentence only.",
+   "accessed": "2026-09-30"
+  },
+  "sc-rodwell-makkar2013": {
+   "title": "Makkar M et al. Performance evaluation of hematologic scoring system in early diagnosis of neonatal sepsis. J Clin Neonatol 2013;2(1):25-29 (PMC3761960)",
+   "publisher": "Medknow / Wolters Kluwer (via Europe PMC)",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3761960/fullTextXML",
+   "doi": "10.4103/2249-4847.109243",
+   "licence": "CC BY-NC-SA 3.0 Unported (article licence)",
+   "accessed": "2026-09-30"
+  },
+  "sc-raimondi-jml2008": {
+   "title": "Ciurea AV et al. Neurotrauma pediatric scales. J Med Life 2008;1(4):403-",
+   "publisher": "Journal of Medicine and Life (Carol Davila University Press)",
+   "url": "https://medandlife.org/wp-content/uploads/JMedLife-1-403.pdf",
+   "licence": "Unknown: no licence statement in the PDF. Journal is open access; confirm terms before shipping.",
+   "accessed": "2026-09-30"
+  },
+  "sc-ramsay1974": {
+   "title": "Ramsay MA, Savege TM, Simpson BR, Goodwin R. Controlled sedation with alphaxalone-alphadolone. Br Med J 1974;2(5920):656-659 (PMC1613102)",
+   "publisher": "BMJ (scanned PDF via Europe PMC)",
+   "url": "https://europepmc.org/api/getPdf?pmcid=PMC1613102",
+   "licence": "Copyright BMJ; free to read in PMC, not openly licensed. Short factual quotation only.",
+   "accessed": "2026-09-30"
+  },
+  "sc-aap2014-hypothermia": {
+   "title": "Committee on Fetus and Newborn (Papile LA et al). Hypothermia and Neonatal Encephalopathy. Pediatrics 2014;133(6):1146-1150",
+   "publisher": "American Academy of Pediatrics (Internet Archive capture 2017-01-05 of pediatrics.aappublications.org)",
+   "url": "https://web.archive.org/web/20170105154346/http://pediatrics.aappublications.org:80/content/133/6/1146",
+   "doi": "10.1542/peds.2014-0899",
+   "licence": "Copyright 2014 American Academy of Pediatrics; not openly licensed. Permission needed for reproduction.",
+   "accessed": "2026-09-30"
+  },
+  "sc-nichd-cooling-nct01192776": {
+   "title": "ClinicalTrials.gov NCT01192776: Optimizing (Longer, Deeper) Cooling for Neonatal Hypoxic-Ischemic Encephalopathy (NICHD Neonatal Research Network), eligibility criteria",
+   "publisher": "US National Library of Medicine / ClinicalTrials.gov",
+   "url": "https://clinicaltrials.gov/api/v2/studies/NCT01192776",
+   "licence": "Public domain (US Government work, ClinicalTrials.gov record)",
+   "accessed": "2026-09-30"
+  }
+ },
+ "not_included": [
+  {
+   "id": "osst",
+   "reason": "NeoFast Calc (Ponto Direto Tech, Brazil) lists an 'OSST scale' among its scores but does not expand the acronym; no source defining a neonatal OSST with items was found."
+  },
+  {
+   "id": "bsri",
+   "reason": "NeoFast Calc lists a 'BSRI scale' without expansion; no source defining a neonatal BSRI with items was found."
+  }
+ ],
+ "scores": [
+  {
+   "id": "finnegan",
+   "name": "Finnegan Neonatal Abstinence Scoring Tool (FNAST, 21-item modified Finnegan)",
+   "purpose": "Severity of neonatal abstinence syndrome (neonatal opioid withdrawal); guides start of pharmacologic therapy.",
+   "type": "sum",
+   "src": "sc-finnegan-jamanet",
+   "quote": "The FNAST, a comprehensive 21-item assessment tool, was developed for research and subsequently integrated into clinical practice",
+   "items": [
+    {
+     "id": "cry",
+     "label": "High-pitched crying",
+     "options": [
+      {
+       "label": "Excessive",
+       "points": 2,
+       "src": "sc-finnegan-jamanet",
+       "quote": "High-pitched crying | | Excessive | 2 | 187 (44.1)"
+      },
+      {
+       "label": "Continuous",
+       "points": 3,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Continuous | 3 | 28 (6.6)"
+      }
+     ]
+    },
+    {
+     "id": "sleep",
+     "label": "Sleeps after feeding, h",
+     "options": [
+      {
+       "label": "Less than 3 h",
+       "points": 1,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Sleeps after feeding, h | | <3 | 1 | 83 (19.6)"
+      },
+      {
+       "label": "Less than 2 h",
+       "points": 2,
+       "src": "sc-finnegan-jamanet",
+       "quote": "<2 | 2 | 96 (22.6)"
+      },
+      {
+       "label": "Less than 1 h",
+       "points": 3,
+       "src": "sc-finnegan-jamanet",
+       "quote": "<1 | 3 | 79 (18.6)"
+      }
+     ]
+    },
+    {
+     "id": "moro",
+     "label": "Moro reflex",
+     "options": [
+      {
+       "label": "Hyperactive",
+       "points": 2,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Moro reflex | | Hyperactive | 2 | 127 (30.0)"
+      },
+      {
+       "label": "Markedly hyperactive",
+       "points": 3,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Markedly hyperactive | 3 | 8 (1.9)"
+      }
+     ]
+    },
+    {
+     "id": "tremor-dist",
+     "label": "Tremors when disturbed",
+     "options": [
+      {
+       "label": "Mild",
+       "points": 1,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Tremors when disturbed | | Mild | 1 | 201 (47.4)"
+      },
+      {
+       "label": "Moderate to severe",
+       "points": 2,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Moderate to severe | 2 | 145 (34.2)"
+      }
+     ]
+    },
+    {
+     "id": "tremor-undist",
+     "label": "Tremors when undisturbed",
+     "options": [
+      {
+       "label": "Mild",
+       "points": 3,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Tremors when undisturbed | | Mild | 3 | 88 (20.8)"
+      },
+      {
+       "label": "Moderate to severe",
+       "points": 4,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Moderate to severe | 4 | 58 (13.7)"
+      }
+     ]
+    },
+    {
+     "id": "tone",
+     "label": "Increased muscle tone",
+     "options": [
+      {
+       "label": "Present",
+       "points": 2,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Increased muscle tone | 2 | 389 (91.8)"
+      }
+     ]
+    },
+    {
+     "id": "excoriation",
+     "label": "Excoriation",
+     "options": [
+      {
+       "label": "Present",
+       "points": 1,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Excoriation | 1 | 104 (24.5)"
+      }
+     ]
+    },
+    {
+     "id": "myoclonic",
+     "label": "Myoclonic jerks",
+     "options": [
+      {
+       "label": "Present",
+       "points": 3,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Myoclonic jerks | 3 | 13 (3.1)"
+      }
+     ]
+    },
+    {
+     "id": "convulsions",
+     "label": "Generalized convulsions",
+     "options": [
+      {
+       "label": "Present",
+       "points": 5,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Generalized convulsions | 5 | 0"
+      }
+     ]
+    },
+    {
+     "id": "sweating",
+     "label": "Sweating",
+     "options": [
+      {
+       "label": "Present",
+       "points": 1,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Sweating | 1 | 26 (6.1)"
+      }
+     ]
+    },
+    {
+     "id": "temp",
+     "label": "Body temperature, °C",
+     "options": [
+      {
+       "label": "37.2-38.3",
+       "points": 1,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Body temperature, °C | | 37.2-38.3 | 1 | 129 (30.4)"
+      },
+      {
+       "label": "38.4 or more",
+       "points": 2,
+       "src": "sc-finnegan-jamanet",
+       "quote": "≥38.4 | 2 | 0"
+      }
+     ]
+    },
+    {
+     "id": "yawning",
+     "label": "Yawning >3 times/scoring interval",
+     "options": [
+      {
+       "label": "Present",
+       "points": 1,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Yawning >3 times/scoring interval | 1 | 21 (5.0)"
+      }
+     ]
+    },
+    {
+     "id": "mottling",
+     "label": "Mottling",
+     "options": [
+      {
+       "label": "Present",
+       "points": 1,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Mottling | 1 | 124 (29.2)"
+      }
+     ]
+    },
+    {
+     "id": "nasal-stuffiness",
+     "label": "Nasal stuffiness",
+     "options": [
+      {
+       "label": "Present",
+       "points": 1,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Nasal stuffiness | 1 | 59 (13.9)"
+      }
+     ]
+    },
+    {
+     "id": "sneezing",
+     "label": "Sneezing >3 times/scoring interval",
+     "options": [
+      {
+       "label": "Present",
+       "points": 1,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Sneezing >3 times/scoring interval | 1 | 148 (34.9)"
+      }
+     ]
+    },
+    {
+     "id": "nasal-flaring",
+     "label": "Nasal flaring",
+     "options": [
+      {
+       "label": "Present",
+       "points": 2,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Nasal flaring | 2 | 17 (4.0)"
+      }
+     ]
+    },
+    {
+     "id": "resp-rate",
+     "label": "Respiratory rate",
+     "options": [
+      {
+       "label": ">60/min",
+       "points": 1,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Respiratory rate | | >60/min | 1 | 138 (32.6)"
+      },
+      {
+       "label": ">60/min with retractions",
+       "points": 2,
+       "src": "sc-finnegan-jamanet",
+       "quote": ">60/min with retractions | 2 | 20 (4.7)"
+      }
+     ]
+    },
+    {
+     "id": "sucking",
+     "label": "Excessive sucking",
+     "options": [
+      {
+       "label": "Present",
+       "points": 1,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Excessive sucking | 1 | 196 (46.2)"
+      }
+     ]
+    },
+    {
+     "id": "poor-feeding",
+     "label": "Poor feeding",
+     "options": [
+      {
+       "label": "Present",
+       "points": 2,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Poor feeding | 2 | 100 (23.6)"
+      }
+     ]
+    },
+    {
+     "id": "regurgitation",
+     "label": "Regurgitation",
+     "options": [
+      {
+       "label": "Present",
+       "points": 2,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Regurgitation | 2 | 76 (17.9)"
+      }
+     ]
+    },
+    {
+     "id": "projectile",
+     "label": "Projectile vomiting",
+     "options": [
+      {
+       "label": "Present",
+       "points": 3,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Projectile vomiting | 3 | 0"
+      }
+     ]
+    },
+    {
+     "id": "stools",
+     "label": "Stools",
+     "options": [
+      {
+       "label": "Loose",
+       "points": 2,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Stools | | Loose | 2 | 88 (20.8)"
+      },
+      {
+       "label": "Watery",
+       "points": 3,
+       "src": "sc-finnegan-jamanet",
+       "quote": "Watery | 3 | 16 (3.8)"
+      }
+     ]
+    }
+   ],
+   "interpretation": [
+    {
+     "lt": 8,
+     "text": "Low (study category: below 8)",
+     "src": "sc-finnegan-jamanet",
+     "quote": "low (<8 on FNAST)"
+    },
+    {
+     "lo": 8,
+     "lt": 12,
+     "text": "Medium (study category: 8 to below 12)",
+     "src": "sc-finnegan-jamanet",
+     "quote": "medium (≥8 to <12)"
+    },
+    {
+     "lo": 12,
+     "text": "High (study category: 12 or more)",
+     "src": "sc-finnegan-jamanet",
+     "quote": "and high (≥12)."
+    }
+   ],
+   "notes": [
+    {
+     "text": "Treatment start rules in the source varied by site (not one standard): 3 consecutive scores of at least 8 or 2 consecutive of at least 12 at one site; 2 consecutive of at least 8 or 1 of at least 12 in the multisite trial.",
+     "src": "sc-finnegan-jamanet",
+     "quote": "3 consecutive scores of at least 8 or 2 consecutive scores of at least 12 on the FNAST at the Kentucky sites; 2 consecutive scores of at least 8 or 1 score of at least 12 on the FNAST for the multisite study"
+    },
+    {
+     "text": "Score each sign present in the scoring interval; for graded items pick the single highest option. Item definitions (mild vs moderate tremor, excessive cry) are not in this source."
+    },
+    {
+     "text": "Interpretation bands use lt (strictly below) where the source says '<'."
+    }
+   ]
+  },
+  {
+   "id": "capurro",
+   "name": "Capurro somatic method (gestational age estimate)",
+   "purpose": "Estimate gestational age at birth from 5 physical characteristics when dates are unknown; suitable from 29 weeks.",
+   "type": "formula",
+   "src": "sc-capurro-msbr",
+   "quote": "É bastante adequado para bebês com 29 semanas de gestação ou mais.",
+   "items": [
+    {
+     "id": "ear",
+     "label": "Ear form (Forma da orelha)",
+     "options": [
+      {
+       "label": "Flat, shapeless, pinna not curved",
+       "points": 0,
+       "src": "sc-capurro-msbr",
+       "quote": "Chata, disforme. Pavilhão não encurvado 0",
+       "label_pt": "Chata, disforme. Pavilhão não encurvado"
+      },
+      {
+       "label": "Pinna partly curved at upper rim",
+       "points": 8,
+       "src": "sc-capurro-msbr",
+       "quote": "Pavilhão parcialmente encurvado na borda superior 8",
+       "label_pt": "Pavilhão parcialmente encurvado na borda superior"
+      },
+      {
+       "label": "Pinna curved along whole upper rim",
+       "points": 16,
+       "src": "sc-capurro-msbr",
+       "quote": "Pavilhão encurvado em toda a borda superior 16",
+       "label_pt": "Pavilhão encurvado em toda a borda superior"
+      },
+      {
+       "label": "Pinna fully curved",
+       "points": 24,
+       "src": "sc-capurro-msbr",
+       "quote": "Pavilhão totalmente encurvado 24",
+       "label_pt": "Pavilhão totalmente encurvado"
+      }
+     ]
+    },
+    {
+     "id": "breast",
+     "label": "Breast gland size (Tamanho da glândula mamária)",
+     "options": [
+      {
+       "label": "Not palpable",
+       "points": 0,
+       "src": "sc-capurro-msbr",
+       "quote": "Não palpável 0",
+       "label_pt": "Não palpável"
+      },
+      {
+       "label": "Palpable, under 5 mm",
+       "points": 5,
+       "src": "sc-capurro-msbr",
+       "quote": "Palpável: menor que 5mm 5",
+       "label_pt": "Palpável: menor que 5mm"
+      },
+      {
+       "label": "Palpable, 5 to 10 mm",
+       "points": 10,
+       "src": "sc-capurro-msbr",
+       "quote": "Palpável: entre 5 e 10mm 10",
+       "label_pt": "Palpável: entre 5 e 10mm"
+      },
+      {
+       "label": "Palpable, over 10 mm",
+       "points": 15,
+       "src": "sc-capurro-msbr",
+       "quote": "Palpável: maior que 10mm 15",
+       "label_pt": "Palpável: maior que 10mm"
+      }
+     ]
+    },
+    {
+     "id": "areola",
+     "label": "Areola formation (Formação da aréola mamária)",
+     "options": [
+      {
+       "label": "Barely visible",
+       "points": 0,
+       "src": "sc-capurro-msbr",
+       "quote": "Apenas visível 0",
+       "label_pt": "Apenas visível"
+      },
+      {
+       "label": "Diameter under 7.5 mm, areola smooth and flat",
+       "points": 5,
+       "src": "sc-capurro-msbr",
+       "quote": "Diâmetro menor que 7,5mm. Aréola lisa e chata 5",
+       "label_pt": "Diâmetro menor que 7,5mm. Aréola lisa e chata"
+      },
+      {
+       "label": "Diameter over 7.5 mm, areola stippled, edge not raised",
+       "points": 10,
+       "src": "sc-capurro-msbr",
+       "quote": "Diâmetro maior que 7,5mm. Aréola ponteaguda e borda não elevada 10",
+       "label_pt": "Diâmetro maior que 7,5mm. Aréola ponteaguda e borda não elevada"
+      },
+      {
+       "label": "Diameter over 7.5 mm, areola stippled, edge raised",
+       "points": 15,
+       "src": "sc-capurro-msbr",
+       "quote": "Diâmetro maior que 7,5mm. Aréola ponteaguda e borda elevada 15",
+       "label_pt": "Diâmetro maior que 7,5mm. Aréola ponteaguda e borda elevada"
+      }
+     ]
+    },
+    {
+     "id": "skin",
+     "label": "Skin texture (Textura da pele)",
+     "options": [
+      {
+       "label": "Very thin, gelatinous",
+       "points": 0,
+       "src": "sc-capurro-msbr",
+       "quote": "Muito fina e gelatinosa 0",
+       "label_pt": "Muito fina e gelatinosa"
+      },
+      {
+       "label": "Thin and smooth",
+       "points": 5,
+       "src": "sc-capurro-msbr",
+       "quote": "Fina e lisa 5",
+       "label_pt": "Fina e lisa"
+      },
+      {
+       "label": "Somewhat thicker, slight superficial peeling",
+       "points": 10,
+       "src": "sc-capurro-msbr",
+       "quote": "Algo mais grossa. Discreta descamação superficial 10",
+       "label_pt": "Algo mais grossa. Discreta descamação superficial"
+      },
+      {
+       "label": "Thick, superficial cracks, peeling of hands and feet",
+       "points": 15,
+       "src": "sc-capurro-msbr",
+       "quote": "Grossa, marcas superficiais, descamação nas mãos e pés 15",
+       "label_pt": "Grossa, marcas superficiais, descamação nas mãos e pés"
+      },
+      {
+       "label": "Thick, wrinkled, deep cracks",
+       "points": 20,
+       "src": "sc-capurro-msbr",
+       "quote": "Grossa, enrugada, com marcas profundas 20",
+       "label_pt": "Grossa, enrugada, com marcas profundas"
+      }
+     ]
+    },
+    {
+     "id": "plantar",
+     "label": "Plantar creases (Pregas plantares)",
+     "options": [
+      {
+       "label": "No creases",
+       "points": 0,
+       "src": "sc-capurro-msbr",
+       "quote": "Sem pregas 0",
+       "label_pt": "Sem pregas"
+      },
+      {
+       "label": "Faint marks on anterior half",
+       "points": 5,
+       "src": "sc-capurro-msbr",
+       "quote": "Marcas maldefinidas na metade anterior 5",
+       "label_pt": "Marcas maldefinidas na metade anterior"
+      },
+      {
+       "label": "Well-defined marks on anterior half, creases on anterior third",
+       "points": 10,
+       "src": "sc-capurro-msbr",
+       "quote": "Marcas bem definidas na metade anterior. Sulcos no 1/3 anterior 10",
+       "label_pt": "Marcas bem definidas na metade anterior. Sulcos no 1/3 anterior"
+      },
+      {
+       "label": "Creases on anterior half",
+       "points": 15,
+       "src": "sc-capurro-msbr",
+       "quote": "Sulcos na metade anterior 15",
+       "label_pt": "Sulcos na metade anterior"
+      },
+      {
+       "label": "Creases over more than anterior half",
+       "points": 20,
+       "src": "sc-capurro-msbr",
+       "quote": "Sulcos em mais da 1/2 anterior 20",
+       "label_pt": "Sulcos em mais da 1/2 anterior"
+      }
+     ]
+    }
+   ],
+   "formula": {
+    "constant": 204,
+    "divisor": 7,
+    "unit": "weeks",
+    "text": "GA (weeks) = (sum of the 5 item points + 204) / 7",
+    "src": "sc-capurro-msbr",
+    "quote": "Somar os pontos das 5 características e acrescentar a constante 204. Dividir o resultado por 7 = Idade gestacional em semanas"
+   },
+   "notes": [
+    {
+     "text": "English option labels are StewardMD translations; label_pt is the source wording (Brazil Ministry of Health reproduction of Capurro 1978). The original Capurro et al. J Pediatr 1978 was not fetched (paywalled)."
+    },
+    {
+     "text": "Somatic Capurro uses the 5 physical characteristics only.",
+     "src": "sc-capurro-msbr",
+     "quote": "utiliza-se o método de Capurro somático, avaliando-se somente as cinco características físicas do método (Quadro 11)."
+    }
+   ]
+  },
+  {
+   "id": "npass-pain",
+   "name": "N-PASS pain/agitation score",
+   "purpose": "Pain and agitation in term and preterm infants, including ventilated and post-operative infants.",
+   "type": "sum",
+   "src": "sc-npass-guidelines",
+   "quote": "Pain is scored from 0 ® +2 for each behavioral and physiological criteria, then summed",
+   "items": [
+    {
+     "id": "crying",
+     "label": "Crying / irritability",
+     "options": [
+      {
+       "label": "Not irritable - appropriate crying; Cries briefly with normal stimuli; Easily consoled; Normal for gestational age",
+       "points": 0,
+       "src": "sc-npass-criteria",
+       "quote": "0 Û Not irritable  appropriate crying ˜ Cries briefly with normal stimuli ˜ Easily consoled ˜ Normal for gestational age"
+      },
+      {
+       "label": "Infant is irritable/crying at intervals - but can be consoled; If intubated - intermittent silent cry",
+       "points": 1,
+       "src": "sc-npass-criteria",
+       "quote": "+1 Û Infant is irritable/crying at intervals  but can be consoled ˜ If intubated  intermittent silent cry"
+      },
+      {
+       "label": "Any of the following: Cry is high-pitched; Infant cries inconsolably; If intubated - silent continuous cry",
+       "points": 2,
+       "src": "sc-npass-criteria",
+       "quote": "+2 Û Any of the following: ˜ Cry is high-pitched ˜ Infant cries inconsolably ˜ If intubated  silent continuous cry"
+      }
+     ]
+    },
+    {
+     "id": "behavior",
+     "label": "Behavior / state",
+     "options": [
+      {
+       "label": "Behavior and state are gestational age appropriate",
+       "points": 0,
+       "src": "sc-npass-criteria",
+       "quote": "0 Û Behavior and state are gestational age appropriate"
+      },
+      {
+       "label": "Any of the following: Restless, squirming; Awakens frequently/easily with minimal or no stimuli",
+       "points": 1,
+       "src": "sc-npass-criteria",
+       "quote": "+1 Û Any of the following: ˜ Restless, squirming ˜ Awakens frequently/easily with minimal or no stimuli"
+      },
+      {
+       "label": "Any of the following: Kicking; Arching; Constantly awake; No movement or minimal arousal with stimulation (inappropriate for gestational age or clinical situation, i.e. post-operative)",
+       "points": 2,
+       "src": "sc-npass-criteria",
+       "quote": "+2 Û Any of the following: ˜ Kicking ˜ Arching ˜ Constantly awake ˜ No movement or minimal arousal with stimulation (inappropriate for gestational age or clinical situation, i.e. post-operative)"
+      }
+     ]
+    },
+    {
+     "id": "face",
+     "label": "Facial expression",
+     "options": [
+      {
+       "label": "Face is relaxed at rest but not lax - normal expression with stimuli",
+       "points": 0,
+       "src": "sc-npass-criteria",
+       "quote": "0 Û Face is relaxed at rest but not lax  normal expression with stimuli"
+      },
+      {
+       "label": "Any pain face expression observed intermittently",
+       "points": 1,
+       "src": "sc-npass-criteria",
+       "quote": "+1 Û Any pain face expression observed intermittently"
+      },
+      {
+       "label": "Any pain face expression is continual",
+       "points": 2,
+       "src": "sc-npass-criteria",
+       "quote": "+2 Û Any pain face expression is continual"
+      }
+     ]
+    },
+    {
+     "id": "extremities",
+     "label": "Extremities / tone",
+     "options": [
+      {
+       "label": "Relaxed hands and feet - normal palmar or sole grasp elicited - appropriate tone for gestational age",
+       "points": 0,
+       "src": "sc-npass-criteria",
+       "quote": "0 Û Relaxed hands and feet  normal palmar or sole grasp elicited  appropriate tone for gestational age"
+      },
+      {
+       "label": "Intermittent (<30 seconds duration) observation of toes and/or hands as clenched or fingers splayed; Body is not tense",
+       "points": 1,
+       "src": "sc-npass-criteria",
+       "quote": "+1 Û Intermittent (<30 seconds duration) observation of toes and/or hands as clenched or fingers splayed ˜ Body is not tense"
+      },
+      {
+       "label": "Any of the following: Frequent (≥30 seconds duration) observation of toes and/or hands as clenched, or fingers splayed; Body is tense/stiff",
+       "points": 2,
+       "src": "sc-npass-criteria",
+       "quote": "+2 Û Any of the following: ˜ Frequent (≥30 seconds duration) observation of toes and/or hands as clenched, or fingers splayed ˜ Body is tense/stiff"
+      }
+     ]
+    },
+    {
+     "id": "vitals",
+     "label": "Vital signs (HR, BP, RR, SpO2)",
+     "options": [
+      {
+       "label": "Vital signs and/or oxygen saturations are within normal limits with normal variability - or normal for gestational age",
+       "points": 0,
+       "src": "sc-npass-criteria",
+       "quote": "0 Û Vital signs and/or oxygen saturations are within normal limits with normal variability  or normal for gestational age"
+      },
+      {
+       "label": "Any of the following: HR, RR, and/or BP are 10-20% above baseline; With care/stimuli infant desaturates minimally to moderately (SaO 2 76-85%) and recovers quickly (within 2 minutes)",
+       "points": 1,
+       "src": "sc-npass-criteria",
+       "quote": "+1 Û Any of the following: ˜ HR, RR, and/or BP are 10-20% above baseline ˜ With care/stimuli infant desaturates minimally to moderately (SaO 2 76-85%) and recovers quickly (within 2 minutes)"
+      },
+      {
+       "label": "Any of the following: HR, RR, and/or BP are > 20% above baseline; With care/stimuli infant desaturates severely (SaO 2 < 75%) and recovers slowly (> 2 minutes); Infant is out of syynchrony with the ventilator - fighting the ventalator",
+       "points": 2,
+       "src": "sc-npass-criteria",
+       "quote": "+2 Û Any of the following: ˜ HR, RR, and/or BP are > 20% above baseline ˜ With care/stimuli infant desaturates severely (SaO 2 < 75%) and recovers slowly (> 2 minutes) ˜ Infant is out of syynchrony with the ventilator - fighting the ventalator"
+      }
+     ]
+    },
+    {
+     "id": "preterm-correction",
+     "label": "Preterm correction (gestational / corrected age)",
+     "options": [
+      {
+       "label": "Less than 28 weeks",
+       "points": 3,
+       "src": "sc-npass-site",
+       "quote": "+3 if < 28 weeks Gestation / corrected age."
+      },
+      {
+       "label": "28 to 31 weeks",
+       "points": 2,
+       "src": "sc-npass-site",
+       "quote": "+2 if 28 - 31 weeks gestation / corrected age."
+      },
+      {
+       "label": "32 to 35 weeks",
+       "points": 1,
+       "src": "sc-npass-site",
+       "quote": "+1 if 32 - 35 weeks gestation / corrected age."
+      }
+     ]
+    }
+   ],
+   "interpretation": [
+    {
+     "gt": 3,
+     "text": "Treatment or intervention indicated (score above 3).",
+     "src": "sc-npass-guidelines",
+     "quote": "Treatment/interventions are indicated for scores > 3"
+    }
+   ],
+   "notes": [
+    {
+     "text": "Goal of treatment is a score of 3 or less; intervene for known painful stimuli before the score reaches 3.",
+     "src": "sc-npass-guidelines",
+     "quote": "Interventions for known pain/painful stimuli are indicated before the score reaches 3"
+    },
+    {
+     "text": "Preterm points are added to the pain score only, never to sedation.",
+     "src": "sc-npass-hummel2008",
+     "quote": "The sedation score does not require this adjustment as gestational age is not known to affect the premature infant’s ability to exhibit signs of sedation."
+    },
+    {
+     "text": "Source is the 2002/2003 tool on n-pass.com (Internet Archive capture 2003-11-25); later printed versions may word criteria differently. Glyphs Û, ˜ and ® in quotes are encoding artefacts of the archived page, kept verbatim."
+    },
+    {
+     "text": "Interpretation uses gt (strictly above) because the source says '> 3'."
+    }
+   ]
+  },
+  {
+   "id": "npass-sedation",
+   "name": "N-PASS sedation score",
+   "purpose": "Depth of sedation; scored separately from pain.",
+   "type": "sum",
+   "negate": true,
+   "src": "sc-npass-guidelines",
+   "quote": "Sedation is scored from 0 ® -2 for each behavioral and physiological criteria, then summed and noted as a negative score (0 ® -10)",
+   "items": [
+    {
+     "id": "crying",
+     "label": "Crying / irritability",
+     "options": [
+      {
+       "label": "No response to painful stimuli, e.g.: No cry with needle sticks; No reaction to ETT or nares suctioning; No response to care giving",
+       "points": 2,
+       "src": "sc-npass-criteria",
+       "quote": "-2 Û No response to painful stimuli, e.g.: ˜ No cry with needle sticks ˜ No reaction to ETT or nares suctioning ˜ No response to care giving"
+      },
+      {
+       "label": "Moans, sighs, or cries (audible or silent) minimally to painful stimuli, e.g. needle sticks, ETT or nares suctioning, care giving",
+       "points": 1,
+       "src": "sc-npass-criteria",
+       "quote": "-1 Û Moans, sighs, or cries (audible or silent) minimally to painful stimuli, e.g. needle sticks, ETT or nares suctioning, care giving"
+      },
+      {
+       "label": "Not irritable - appropriate crying; Cries briefly with normal stimuli; Easily consoled; Normal for gestational age",
+       "points": 0,
+       "src": "sc-npass-criteria",
+       "quote": "0 Û Not irritable  appropriate crying ˜ Cries briefly with normal stimuli ˜ Easily consoled ˜ Normal for gestational age"
+      }
+     ]
+    },
+    {
+     "id": "behavior",
+     "label": "Behavior / state",
+     "options": [
+      {
+       "label": "Does not arouse or react to any stimuli: Eyes continually shut or open; No spontaneous movement",
+       "points": 2,
+       "src": "sc-npass-criteria",
+       "quote": "-2 Û Does not arouse or react to any stimuli: ˜ Eyes continually shut or open ˜ No spontaneous movement"
+      },
+      {
+       "label": "Little spontaneous movement, arouses briefly and/or minimally to any stimuli: Opens eyes briefly; Reacts to suctioning; Withdraws to pain",
+       "points": 1,
+       "src": "sc-npass-criteria",
+       "quote": "-1 Û Little spontaneous movement, arouses briefly and/or minimally to any stimuli: ˜ Opens eyes briefly ˜ Reacts to suctioning ˜ Withdraws to pain"
+      },
+      {
+       "label": "Behavior and state are gestational age appropriate",
+       "points": 0,
+       "src": "sc-npass-criteria",
+       "quote": "0 Û Behavior and state are gestational age appropriate"
+      }
+     ]
+    },
+    {
+     "id": "face",
+     "label": "Facial expression",
+     "options": [
+      {
+       "label": "Any of the following: Mouth is lax; Drooling; No facial expression at rest or with stimuli",
+       "points": 2,
+       "src": "sc-npass-criteria",
+       "quote": "-2 Û Any of the following: ˜ Mouth is lax ˜ Drooling ˜ No facial expression at rest or with stimuli"
+      },
+      {
+       "label": "Minimal facial expression with stimuli",
+       "points": 1,
+       "src": "sc-npass-criteria",
+       "quote": "-1 Û Minimal facial expression with stimuli"
+      },
+      {
+       "label": "Face is relaxed at rest but not lax - normal expression with stimuli",
+       "points": 0,
+       "src": "sc-npass-criteria",
+       "quote": "0 Û Face is relaxed at rest but not lax  normal expression with stimuli"
+      }
+     ]
+    },
+    {
+     "id": "extremities",
+     "label": "Extremities / tone",
+     "options": [
+      {
+       "label": "Any of the following: No palmar or planter grasp can be elicited; Flaccid tone",
+       "points": 2,
+       "src": "sc-npass-criteria",
+       "quote": "-2 Û Any of the following: ˜ No palmar or planter grasp can be elicited ˜ Flaccid tone"
+      },
+      {
+       "label": "Any of the following: Weak palmar or planter grasp can be elicited; Decreased tone",
+       "points": 1,
+       "src": "sc-npass-criteria",
+       "quote": "-1 Û Any of the following: ˜ Weak palmar or planter grasp can be elicited ˜ Decreased tone"
+      },
+      {
+       "label": "Relaxed hands and feet - normal palmar or sole grasp elicited - appropriate tone for gestational age",
+       "points": 0,
+       "src": "sc-npass-criteria",
+       "quote": "0 Û Relaxed hands and feet  normal palmar or sole grasp elicited  appropriate tone for gestational age"
+      }
+     ]
+    },
+    {
+     "id": "vitals",
+     "label": "Vital signs (HR, BP, RR, SpO2)",
+     "options": [
+      {
+       "label": "Any of the following: No variability in vital signs with stimuli; Hypoventilation; Apnea; Ventilated infant - no spontaneous respiratory effort",
+       "points": 2,
+       "src": "sc-npass-criteria",
+       "quote": "-2 Û Any of the following: ˜ No variability in vital signs with stimuli ˜ Hypoventilation ˜ Apnea ˜ Ventilated infant  no spontaneous respiratory effort"
+      },
+      {
+       "label": "Vital signs show little variability with stimuli - less than 10% from baseline",
+       "points": 1,
+       "src": "sc-npass-criteria",
+       "quote": "-1 Û Vital signs show little variability with stimuli  less than 10% from baseline"
+      },
+      {
+       "label": "Vital signs and/or oxygen saturations are within normal limits with normal variability - or normal for gestational age",
+       "points": 0,
+       "src": "sc-npass-criteria",
+       "quote": "0 Û Vital signs and/or oxygen saturations are within normal limits with normal variability  or normal for gestational age"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Option points are stored as magnitudes (source prints -1 and -2; the validator cannot check negative numbers). negate: true means display the sum as a negative score (0 to -10)."
+    },
+    {
+     "text": "Deep sedation goal -10 to -5, only with ventilatory support.",
+     "src": "sc-npass-guidelines",
+     "quote": "“Deep sedation” ® score of -10 to -5 as goal"
+    },
+    {
+     "text": "Light sedation goal -5 to -2.",
+     "src": "sc-npass-guidelines",
+     "quote": "“Light sedation” ® score of -5 to –2 as goal"
+    },
+    {
+     "text": "Deep sedation is not recommended without ventilatory support.",
+     "src": "sc-npass-guidelines",
+     "quote": "Deep sedation is not recommended unless an infant is receiving ventilatory support, related to the high potential for apnea and hypoventilation"
+    }
+   ]
+  },
+  {
+   "id": "rodwell-hss",
+   "name": "Rodwell haematological scoring system (HSS) for neonatal sepsis",
+   "purpose": "Early diagnosis of neonatal sepsis from the blood count and peripheral smear.",
+   "type": "sum",
+   "src": "sc-rodwell-makkar2013",
+   "quote": "Minimum score that can be obtained is 0 and maximum score, 8.",
+   "items": [
+    {
+     "id": "tlc",
+     "label": "Abnormal total leukocyte count",
+     "options": [
+      {
+       "label": "Abnormal",
+       "points": 1,
+       "src": "sc-rodwell-makkar2013",
+       "quote": "HSS assigns a score of 1 for each of seven findings significantly associated with sepsis: Abnormal total leukocyte count, abnormal total PMN count, elevated immature PMN count, elevated immature to total (I:T) PMN ratio, immature to mature (I:M) PMN ratio ≥0.3, platelet count ≤150,000/mm 3 , and pronounced degenerative or toxic changes in PMNs."
+      }
+     ]
+    },
+    {
+     "id": "pmn",
+     "label": "Abnormal total PMN (neutrophil) count",
+     "options": [
+      {
+       "label": "Abnormal",
+       "points": 1,
+       "src": "sc-rodwell-makkar2013",
+       "quote": "HSS assigns a score of 1 for each of seven findings significantly associated with sepsis: Abnormal total leukocyte count, abnormal total PMN count, elevated immature PMN count, elevated immature to total (I:T) PMN ratio, immature to mature (I:M) PMN ratio ≥0.3, platelet count ≤150,000/mm 3 , and pronounced degenerative or toxic changes in PMNs."
+      },
+      {
+       "label": "Abnormal, with no mature PMNs seen on smear",
+       "points": 2,
+       "src": "sc-rodwell-makkar2013",
+       "quote": "An abnormal total PMN count is assigned score of two instead of 1, if no mature polymorphs are seen on the peripheral smear to compensate for the low I:M ratio"
+      }
+     ]
+    },
+    {
+     "id": "immature-pmn",
+     "label": "Elevated immature PMN count",
+     "options": [
+      {
+       "label": "Elevated",
+       "points": 1,
+       "src": "sc-rodwell-makkar2013",
+       "quote": "HSS assigns a score of 1 for each of seven findings significantly associated with sepsis: Abnormal total leukocyte count, abnormal total PMN count, elevated immature PMN count, elevated immature to total (I:T) PMN ratio, immature to mature (I:M) PMN ratio ≥0.3, platelet count ≤150,000/mm 3 , and pronounced degenerative or toxic changes in PMNs."
+      }
+     ]
+    },
+    {
+     "id": "it-ratio",
+     "label": "Elevated immature to total (I:T) PMN ratio",
+     "options": [
+      {
+       "label": "Elevated",
+       "points": 1,
+       "src": "sc-rodwell-makkar2013",
+       "quote": "HSS assigns a score of 1 for each of seven findings significantly associated with sepsis: Abnormal total leukocyte count, abnormal total PMN count, elevated immature PMN count, elevated immature to total (I:T) PMN ratio, immature to mature (I:M) PMN ratio ≥0.3, platelet count ≤150,000/mm 3 , and pronounced degenerative or toxic changes in PMNs."
+      }
+     ]
+    },
+    {
+     "id": "im-ratio",
+     "label": "Immature to mature (I:M) PMN ratio 0.3 or more",
+     "options": [
+      {
+       "label": "0.3 or more",
+       "points": 1,
+       "src": "sc-rodwell-makkar2013",
+       "quote": "HSS assigns a score of 1 for each of seven findings significantly associated with sepsis: Abnormal total leukocyte count, abnormal total PMN count, elevated immature PMN count, elevated immature to total (I:T) PMN ratio, immature to mature (I:M) PMN ratio ≥0.3, platelet count ≤150,000/mm 3 , and pronounced degenerative or toxic changes in PMNs."
+      }
+     ]
+    },
+    {
+     "id": "platelets",
+     "label": "Platelet count 150,000/mm3 or less",
+     "options": [
+      {
+       "label": "150,000/mm3 or less",
+       "points": 1,
+       "src": "sc-rodwell-makkar2013",
+       "quote": "HSS assigns a score of 1 for each of seven findings significantly associated with sepsis: Abnormal total leukocyte count, abnormal total PMN count, elevated immature PMN count, elevated immature to total (I:T) PMN ratio, immature to mature (I:M) PMN ratio ≥0.3, platelet count ≤150,000/mm 3 , and pronounced degenerative or toxic changes in PMNs."
+      }
+     ]
+    },
+    {
+     "id": "degenerative",
+     "label": "Pronounced degenerative or toxic changes in PMNs",
+     "options": [
+      {
+       "label": "Present",
+       "points": 1,
+       "src": "sc-rodwell-makkar2013",
+       "quote": "HSS assigns a score of 1 for each of seven findings significantly associated with sepsis: Abnormal total leukocyte count, abnormal total PMN count, elevated immature PMN count, elevated immature to total (I:T) PMN ratio, immature to mature (I:M) PMN ratio ≥0.3, platelet count ≤150,000/mm 3 , and pronounced degenerative or toxic changes in PMNs."
+      }
+     ]
+    }
+   ],
+   "interpretation": [
+    {
+     "hi": 2,
+     "text": "Sepsis unlikely",
+     "src": "sc-rodwell-makkar2013",
+     "quote": "Score of ≤2 was interpreted as sepsis unlikely"
+    },
+    {
+     "lo": 3,
+     "hi": 4,
+     "text": "Sepsis possible",
+     "src": "sc-rodwell-makkar2013",
+     "quote": "score 3-4: Sepsis is possible"
+    },
+    {
+     "lo": 5,
+     "text": "Sepsis or infection very likely",
+     "src": "sc-rodwell-makkar2013",
+     "quote": "≥5 sepsis or infection is very likely."
+    }
+   ],
+   "notes": [
+    {
+     "text": "Source describes the original Rodwell 1988 system in prose; its Table 1 (age-specific normal ranges for total leukocyte, total PMN and immature PMN counts, and the I:T cut-off) is an image and was not captured, so the clinician decides abnormal/elevated."
+    },
+    {
+     "text": "Original: Rodwell RL, Leslie AL, Tudehope DI. J Pediatr 1988;112:761-7 (not fetched, paywalled)."
+    }
+   ]
+  },
+  {
+   "id": "raimondi",
+   "name": "Children's Coma Score (Raimondi and Hirschauer, 1984)",
+   "purpose": "Coma scoring for infants and toddlers (GCS variant with ocular response).",
+   "type": "sum",
+   "src": "sc-raimondi-jml2008",
+   "quote": "Maximum CCS assignable is 11, and minimal 3.",
+   "items": [
+    {
+     "id": "ocular",
+     "label": "Ocular response",
+     "options": [
+      {
+       "label": "Pursuit",
+       "points": 4,
+       "src": "sc-raimondi-jml2008",
+       "quote": "Pursuit 4"
+      },
+      {
+       "label": "Extra ocular muscles (EOM) intact, reactive pupils",
+       "points": 3,
+       "src": "sc-raimondi-jml2008",
+       "quote": "Extra ocular muscles (EOM) intact, reactive pupils 3"
+      },
+      {
+       "label": "Fixed pupils or EOM impaired",
+       "points": 2,
+       "src": "sc-raimondi-jml2008",
+       "quote": "Fixed pupils or EOM impaired 2"
+      },
+      {
+       "label": "Fixed pupils or EOM paralyzed",
+       "points": 1,
+       "src": "sc-raimondi-jml2008",
+       "quote": "Fixed pupils or EOM paralyzed 1"
+      }
+     ]
+    },
+    {
+     "id": "verbal",
+     "label": "Verbal response",
+     "options": [
+      {
+       "label": "Cries",
+       "points": 3,
+       "src": "sc-raimondi-jml2008",
+       "quote": "Cries 3"
+      },
+      {
+       "label": "Spontaneous respiration",
+       "points": 2,
+       "src": "sc-raimondi-jml2008",
+       "quote": "Spontaneous respiration 2"
+      },
+      {
+       "label": "Apnea",
+       "points": 1,
+       "src": "sc-raimondi-jml2008",
+       "quote": "Apnea 1"
+      }
+     ]
+    },
+    {
+     "id": "motor",
+     "label": "Motor response",
+     "options": [
+      {
+       "label": "Flexes and extends",
+       "points": 4,
+       "src": "sc-raimondi-jml2008",
+       "quote": "Flexes and extends 4"
+      },
+      {
+       "label": "Withdraws from painful stimuli",
+       "points": 3,
+       "src": "sc-raimondi-jml2008",
+       "quote": "Withdraws from painful stimuli 3"
+      },
+      {
+       "label": "Hypertonic",
+       "points": 2,
+       "src": "sc-raimondi-jml2008",
+       "quote": "Hypertonic 2"
+      },
+      {
+       "label": "Flaccid",
+       "points": 1,
+       "src": "sc-raimondi-jml2008",
+       "quote": "Flaccid 1"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "text": "Limited to infants and toddlers.",
+     "src": "sc-raimondi-jml2008",
+     "quote": "This scale evaluates, also, eyes opening response, verbal response and motor response to stimuli, but it is limited only for infants and toddlers."
+    },
+    {
+     "text": "Secondary source (Ciurea et al, J Med Life 2008). Original Raimondi and Hirschauer, Childs Brain 1984;11:12-35 not fetched. Lowest ocular option reads 'Fixed pupils or EOM paralyzed' here; other secondary sources say 'and'. No interpretation bands in the source."
+    }
+   ]
+  },
+  {
+   "id": "ramsay",
+   "name": "Ramsay sedation scale",
+   "purpose": "Level of sedation (3 awake and 3 asleep levels). Derived in adult ICU patients; not validated in neonates.",
+   "type": "single",
+   "src": "sc-ramsay1974",
+   "quote": "Sixlevelsofsedationwere formulated; threewiththepatientawakeandthreewiththepatientasleep.",
+   "levels": [
+    {
+     "level": 1,
+     "label": "Awake: anxious and agitated or restless or both",
+     "src": "sc-ramsay1974",
+     "quote": "Awakelevelswere: 1,patientanxiousandagitatedorrestless or both;"
+    },
+    {
+     "level": 2,
+     "label": "Awake: co-operative, orientated and tranquil",
+     "src": "sc-ramsay1974",
+     "quote": "2,patientco-operative,orientated,andtranquil;"
+    },
+    {
+     "level": 3,
+     "label": "Awake: responds to commands only",
+     "src": "sc-ramsay1974",
+     "quote": "3, patientrespondstocommandsonly."
+    },
+    {
+     "level": 4,
+     "label": "Asleep: brisk response to light glabellar tap or loud auditory stimulus",
+     "src": "sc-ramsay1974",
+     "quote": "auditorystimulus:Level4,a briskresponse;"
+    },
+    {
+     "level": 5,
+     "label": "Asleep: sluggish response to light glabellar tap or loud auditory stimulus",
+     "src": "sc-ramsay1974",
+     "quote": "5,a sluggish response;"
+    },
+    {
+     "level": 6,
+     "label": "Asleep: no response to light glabellar tap or loud auditory stimulus",
+     "src": "sc-ramsay1974",
+     "quote": "and6,no response."
+    }
+   ],
+   "notes": [
+    {
+     "text": "Asleep levels are graded by the response to a light glabellar tap or loud auditory stimulus.",
+     "src": "sc-ramsay1974",
+     "quote": "Asleeplevelswere depend- enton thepatient'sresponsetoa lightglabellartap or loud auditorystimulus"
+    },
+    {
+     "text": "Original study counted levels 2 to 5 as acceptable sedation.",
+     "src": "sc-ramsay1974",
+     "quote": "overallperiodofacceptablesedation-betweenlevels2and5-"
+    },
+    {
+     "text": "Snapshot is OCR of the scanned 1974 BMJ article (spaces lost); quotes are verbatim to that text."
+    }
+   ]
+  },
+  {
+   "id": "hypothermia-nichd",
+   "name": "Therapeutic hypothermia eligibility (NICHD NRN criteria, as endorsed by AAP 2014)",
+   "purpose": "Screen infants with suspected hypoxic-ischaemic encephalopathy for whole-body cooling.",
+   "type": "criteria",
+   "src": "sc-aap2014-hypothermia",
+   "quote": "Infants offered hypothermia should meet inclusion criteria outlined in published clinical trials (see Table 1).",
+   "groups": [
+    {
+     "id": "a",
+     "label": "A. Gestation and timing",
+     "rule": "all",
+     "items": [
+      {
+       "id": "ga",
+       "label": "Gestational age 36 weeks or more",
+       "src": "sc-nichd-cooling-nct01192776",
+       "quote": "All infants with a gestational age ≥ 36 weeks will be screened for study entry"
+      },
+      {
+       "id": "time",
+       "label": "Can start cooling (randomise) by 6 hours of age",
+       "src": "sc-nichd-cooling-nct01192776",
+       "quote": "Inability to randomize by 6 hours of age"
+      }
+     ]
+    },
+    {
+     "id": "b",
+     "label": "B. Acidosis or perinatal event (either pathway)",
+     "rule": "any",
+     "items": [
+      {
+       "id": "b1",
+       "label": "pH 7.0 or less, or base deficit 16 mEq/L or more, on cord or any postnatal sample within 1 hour of age",
+       "src": "sc-nichd-cooling-nct01192776",
+       "quote": "They have a pH ≤ 7.0 or a base deficit ≥ 16m mEq/ L on umbilical cord or any postnatal sample within 1 hour of age."
+      },
+      {
+       "id": "b2",
+       "label": "pH 7.01 to 7.15, base deficit 10 to 15.9 mEq/L, or no blood gas, AND an acute perinatal event AND either 10-minute Apgar 5 or less or assisted ventilation from birth for at least 10 minutes",
+       "src": "sc-nichd-cooling-nct01192776",
+       "quote": "If, during this interval, they have a pH between 7.01 and 7.15, a base deficit is between 10 and 15.9 mEq/L, or a blood gas is not available, AND they have an acute perinatal event AND either a 10-minute Apgar score ≤ 5 or assisted ventilation initiated at birth and continued for at least 10 minutes."
+      }
+     ]
+    },
+    {
+     "id": "c",
+     "label": "C. Moderate or severe encephalopathy: 1 or more signs in at least 3 of these 6 categories",
+     "rule": "min",
+     "min": 3,
+     "src": "sc-nichd-cooling-nct01192776",
+     "quote": "For this study, encephalopathy is defined as the presence of 1 or more signs in 3 of the following 6 categories:",
+     "items": [
+      {
+       "id": "consciousness",
+       "label": "Level of consciousness: lethargy, stupor or coma",
+       "src": "sc-nichd-cooling-nct01192776",
+       "quote": "Level of consciousness: lethargy, stupor or coma;"
+      },
+      {
+       "id": "activity",
+       "label": "Spontaneous activity: decreased, absent",
+       "src": "sc-nichd-cooling-nct01192776",
+       "quote": "Spontaneous activity: decreased, absent;"
+      },
+      {
+       "id": "posture",
+       "label": "Posture: distal flexion, decerebrate",
+       "src": "sc-nichd-cooling-nct01192776",
+       "quote": "Posture: distal flexion, decerebrate;"
+      },
+      {
+       "id": "tone",
+       "label": "Tone: hypotonia, flaccid or hypertonia, rigid",
+       "src": "sc-nichd-cooling-nct01192776",
+       "quote": "tone: hypotonia, flaccid or hypertonia, rigid;"
+      },
+      {
+       "id": "reflexes",
+       "label": "Primitive reflexes: suck weak or absent; Moro incomplete or flaccid",
+       "src": "sc-nichd-cooling-nct01192776",
+       "quote": "Primitive reflexes: a) suck, weak, absent; b) Moro, incomplete, flaccid;"
+      },
+      {
+       "id": "autonomic",
+       "label": "Autonomic: pupils constricted, unequal, skew deviation or non reactive; bradycardia or variable heart rate; periodic breathing or apnea",
+       "src": "sc-nichd-cooling-nct01192776",
+       "quote": "Autonomic nervous system: a) pupils: constricted, unequal, skew deviation or non reactive to light; b) heart rate: bradycardia, variable heart rate or c) respiration: periodic breathing, apnea."
+      }
+     ]
+    },
+    {
+     "id": "x",
+     "label": "No exclusion present",
+     "rule": "all",
+     "items": [
+      {
+       "id": "no-anomaly",
+       "label": "No major congenital abnormality",
+       "src": "sc-nichd-cooling-nct01192776",
+       "quote": "Major congenital abnormality"
+      },
+      {
+       "id": "no-chromosomal",
+       "label": "No major chromosomal abnormality (including trisomy 21)",
+       "src": "sc-nichd-cooling-nct01192776",
+       "quote": "Major chromosomal abnormality (including Trisomy 21)"
+      },
+      {
+       "id": "no-iugr",
+       "label": "Not severely growth restricted (birth weight above 1800 g)",
+       "src": "sc-nichd-cooling-nct01192776",
+       "quote": "Severe growth restriction (≤ 1800gm birth weight)"
+      },
+      {
+       "id": "not-moribund",
+       "label": "Not moribund (further intensive treatment planned)",
+       "src": "sc-nichd-cooling-nct01192776",
+       "quote": "Infant is moribund and will not receive any further aggressive treatment"
+      }
+     ]
+    }
+   ],
+   "eligible_if": [
+    "a",
+    "b",
+    "c",
+    "x"
+   ],
+   "notes": [
+    {
+     "text": "Seizures also qualify in place of group C in the NICHD trial.",
+     "src": "sc-nichd-cooling-nct01192776",
+     "quote": "Infants will be candidates for the study when encephalopathy or seizures are present."
+    },
+    {
+     "text": "AAP 2014: cooling within 6 hours of birth for 72 hours for infants above 35 weeks with moderate or severe encephalopathy.",
+     "src": "sc-aap2014-hypothermia",
+     "quote": "moderate hypothermia initiated within 6 hours of birth and continued for 72 hours is a safe and modestly effective neural rescue strategy for infants born at greater than 35 weeks of gestational age who have clinical evidence of moderate or severe neonatal encephalopathy."
+    },
+    {
+     "text": "AAP 2014 summary of eligibility (worded as a list, logic less explicit than the NICHD record).",
+     "src": "sc-aap2014-hypothermia",
+     "quote": "Eligibility criteria include a pH of ≤7.0 or a base deficit of ≥16 mmol/L in a sample of umbilical cord blood or blood obtained during the first hour after birth, history of an acute perinatal event, a 10-minute Apgar score of <5, or assisted ventilation initiated at birth and continued for at least 10 minutes."
+    },
+    {
+     "text": "AAP 2014: moderate to severe encephalopathy on neurologic examination is essential; EEG or aEEG abnormality also needed if head cooling is used.",
+     "src": "sc-aap2014-hypothermia",
+     "quote": "In addition, a neurologic examination demonstrating moderate to severe encephalopathy is essential. If preferential head cooling is used, an abnormal background activity on either EEG or aEEG also is required."
+    },
+    {
+     "text": "AAP 2014: trial parameters.",
+     "src": "sc-aap2014-hypothermia",
+     "quote": "in all trials infants were at least 35 weeks’ gestation at birth; randomization was completed within 6 hours of birth; the target temperature was 33.5°C to 34.5°C; the intervention period was 72 hours, followed by slow rewarming (0.5°C/hour)"
+    },
+    {
+     "text": "AAP 2014: below 35 weeks, mild encephalopathy, longer or deeper cooling only in research.",
+     "src": "sc-aap2014-hypothermia",
+     "quote": "Cooling infants who are born at less than 35 weeks’ gestation or those who have mild encephalopathy, cooling for longer than 72 hours, cooling at a temperature lower than that used in published clinical trials, and the use of adjuvant therapies should only be performed in a research setting and with informed parental consent."
+    },
+    {
+     "text": "Discrepancies: AAP 2014 says 10-minute Apgar '<5' and base deficit in mmol/L; the NICHD record says '≤ 5' and mEq/L. Gestation: AAP 'greater than 35 weeks', NICHD '≥ 36 weeks'. Groups follow the NICHD record."
+    },
+    {
+     "text": "Exclusion text in the NICHD record also includes core temperature below 33.5 C for over 1 hour at screening and refusal of consent; not modelled as items."
+    },
+    {
+     "text": "A newer AAP clinical report (Pediatrics 2026;157(2):e2025073627) exists and was not fetched (publisher blocks automated access). Check whether it supersedes 2014."
+    }
+   ]
+  }
+ ]
+}

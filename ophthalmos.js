@@ -119,10 +119,12 @@
       '<div class="oph-title"><b>' + title + "</b>" + (sub ? "<span>" + sub + "</span>" : "") + "</div>" + (right || "") + "</div>";
   }
 
-  // The overlay is white: dark status-bar icons while it is open (Capacitor "LIGHT" = dark text), the host's
-  // own theme back on close. Web and older hosts have no StatusBar plugin: nothing to do.
+  // The overlay follows the host's light / dark mode (body.dark; StewardMD styles the dark palette). White overlay:
+  // dark status-bar icons while it is open (Capacitor "LIGHT" = dark text). Dark overlay, and on close: the host's
+  // own theme. Web and older hosts have no StatusBar plugin: nothing to do.
   function statusBar(onWhite) {
     try {
+      if (onWhite && G.document.body.classList.contains("dark")) onWhite = false;
       if (!onWhite && G.SMD_THEME_REVEAL && G.SMD_THEME_REVEAL.syncSystemUI) return G.SMD_THEME_REVEAL.syncSystemUI();
       var SB = G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.StatusBar;
       if (SB && SB.setStyle) SB.setStyle({ style: "LIGHT" });

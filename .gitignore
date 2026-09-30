@@ -160,3 +160,7 @@ voice-service/bench/
 # Dose calculator working copies (scripts/build-dose-rules.mjs); the app ships data/dose-rules.json.gz
 data/dose-rules.json
 data/dose-rules-report.json
+
+# Neonatal layer: loose source snapshots (scripts/neo/snap.py). Committed packed as data/neo/sources.json.gz
+# (node scripts/neo/validate.mjs --pack) because Cloudflare Pages caps a deploy at 20,000 files.
+/data/neo/sources/

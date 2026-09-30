@@ -485,7 +485,7 @@ test("PRIVACY: no personal author name appears anywhere in shipped content", () 
   const FORBIDDEN = ["An Insider's Guide", "Insider's Guide to Clinical Medicine"];
   const files = [
     "manifest.json", "media/manifest.json",
-    "skills/core.json", "skills/respiratory.json",
+    "skills/core.json", "skills/respiratory.json", "skills/obgyn.json",
     ...ALL_PATHWAYS
   ];
   for (const f of files) {
@@ -500,7 +500,7 @@ test("PRIVACY: no personal author name appears anywhere in shipped content", () 
 
 test("no em-dash in student-facing content", () => {
   // CLAUDE.md: no em-dash in app-facing text. Content JSON is app-facing text.
-  for (const f of ["skills/core.json", "skills/respiratory.json", "diseases/copd.json", "manifest.json", "media/manifest.json"]) {
+  for (const f of ["skills/core.json", "skills/respiratory.json", "skills/obgyn.json", "systems/obgyn.json", "diseases/copd.json", "manifest.json", "media/manifest.json"]) {
     const raw = readFileSync(join(ROOT, "clinix", f), "utf8");
     const idx = raw.indexOf("—");
     assert.equal(idx, -1, `${f} contains an em-dash at offset ${idx}: ` +

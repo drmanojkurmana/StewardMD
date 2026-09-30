@@ -3,52 +3,55 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
 
-const D = createRequire(import.meta.url)("../tokos-data.js");
+// Tokós on the engine: levels, trials and storage come from specialty-data.js with the Tokós keys; the CTG checklist,
+// key, grading and review labels from the CTG clinic plugin (tokos-ctg.js).
+const S = createRequire(import.meta.url)("../specialty-data.js");
+const D = createRequire(import.meta.url)("../tokos-ctg.js");
 
 test("trialState: open when Pro, trial when unused, used when spent", () => {
   const store = { trials: {} };
-  assert.equal(D.trialState(store, "clinic.ctg", true), "open");
-  assert.equal(D.trialState(store, "clinic.ctg", false), "trial");
-  D.useTrial(store, "clinic.ctg", 100);
-  assert.equal(D.trialState(store, "clinic.ctg", false), "used");
+  assert.equal(S.trialState(store, "clinic.ctg", true), "open");
+  assert.equal(S.trialState(store, "clinic.ctg", false), "trial");
+  S.useTrial(store, "clinic.ctg", 100);
+  assert.equal(S.trialState(store, "clinic.ctg", false), "used");
 });
 
 test("useTrial only records the first use", () => {
   const store = { trials: {} };
-  assert.equal(D.useTrial(store, "x", 1), true);
-  assert.equal(D.useTrial(store, "x", 2), false);
+  assert.equal(S.useTrial(store, "x", 1), true);
+  assert.equal(S.useTrial(store, "x", 2), false);
   assert.equal(store.trials.x, 1);
 });
 
 test("levelLocked: resident locked unless free-listed or Pro", () => {
   const cfg = { access: { freeLevels: ["mbbs"] } };
-  assert.equal(D.levelLocked(cfg, "resident", false), true);
-  assert.equal(D.levelLocked(cfg, "resident", true), false);
-  assert.equal(D.levelLocked(cfg, "mbbs", false), false);
+  assert.equal(S.levelLocked(cfg, "resident", false), true);
+  assert.equal(S.levelLocked(cfg, "resident", true), false);
+  assert.equal(S.levelLocked(cfg, "mbbs", false), false);
 });
 
 test("loadStore returns a fresh store shape when localStorage is empty or corrupt", () => {
   const fakeLs = { getItem: () => null, setItem: () => {} };
-  const s = D.loadStore(fakeLs);
+  const s = S.loadStore(fakeLs, "smd_tokos_v1");
   assert.deepEqual(s.cards, {});
   assert.deepEqual(s.trials, {});
 });
 
 test("loadPrefs defaults to mbbs level, English, and no tab until first-run choice", () => {
   const fakeLs = { getItem: () => null };
-  const p = D.loadPrefs(fakeLs);
+  const p = S.loadPrefs(fakeLs, "smd_tokos_prefs");
   assert.equal(p.level, "mbbs");
   assert.equal(p.lang, "en");
   assert.equal(p.tab, undefined);
 });
 
 test("today() computes a stable local day number", () => {
-  const d1 = D.today(Date.UTC(2026, 8, 29, 6, 0));
-  const d2 = D.today(Date.UTC(2026, 8, 29, 6, 0) + 3600000);
+  const d1 = S.today(Date.UTC(2026, 8, 29, 6, 0));
+  const d2 = S.today(Date.UTC(2026, 8, 29, 6, 0) + 3600000);
   assert.equal(d1, d2);
 });
 
-const C = createRequire(import.meta.url)("../tokos-core.js");
+const C = createRequire(import.meta.url)("../specialty-core.js");
 const baseCase = {
   figo: "suspicious", acidosis: "metabolic", review: null, vignette: { risks: ["pyrexia"] },
   features: { baselineClass: "tachycardia", variability: { band: "normal" }, contractions: { tachysystole: false }, decels: [{ durationSec: 200, subtypeSuggested: "late" }] },

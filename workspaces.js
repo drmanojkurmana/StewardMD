@@ -411,6 +411,14 @@
     out.querySelectorAll(".sw-tog").forEach(function (b) { b.addEventListener("click", function () { var f = b.getAttribute("data-f"); _es.sel[f] = !_es.sel[f]; b.classList.toggle("on"); renderOut(); }); });
     renderOut();
   }
+  // Neonatal layer (smd_neo + smd_neo_dose, neo-dose.js): "per paediatric formulary" in a paediatric
+  // regimen opens the neonatal dosing tool on the named drug. Off, nothing is added.
+  function neoFormularyLinks(x) {
+    try { if (!(window.SMD_NEO_FLAGS && SMD_NEO_FLAGS.feature("dose")) || !/paediatric formulary/i.test(x.dose || "")) return ""; } catch (e) { return ""; }
+    return String(x.drug || "").replace(/^\+\s*/, "").split(/\s*\+\s*/).filter(Boolean).map(function (d) {
+      return ' <button type="button" class="sw-pocbtn" data-neo-dose-open="' + escapeHtml(d) + '">Neonatal dose: ' + escapeHtml(d) + '</button>';
+    }).join("");
+  }
   function renderOut() {
     var box = document.getElementById("swOut"); if (!box || !_es) return;
     var res = {}; try { res = _es.syn.assess(selSet()) || {}; } catch (e) { res = {}; }
@@ -422,7 +430,7 @@
     h += '<div class="sw-ladder">' + ABX_LADDER.map(function (x, i) { return '<div class="r ' + (i === lad ? "on" : (lad >= 0 ? "dim" : "")) + '"><span class="d" style="background:' + LADCOL[i] + '"></span>' + escapeHtml(x) + '</div>'; }).join("") + '</div>';
     if (res.abx && res.abx.firstLine && res.abx.firstLine.length) {
       var ab = res.abx;
-      var fmtAbx = function (x) { return '<b>' + escapeHtml(x.drug || "") + '</b>' + (x.dose ? " " + escapeHtml(x.dose) : "") + (x.route ? " " + escapeHtml(x.route) : "") + (x.note ? ' <span class="nt">(' + escapeHtml(x.note) + ')</span>' : ""); };
+      var fmtAbx = function (x) { return '<b>' + escapeHtml(x.drug || "") + '</b>' + (x.dose ? " " + escapeHtml(x.dose) : "") + (x.route ? " " + escapeHtml(x.route) : "") + (x.note ? ' <span class="nt">(' + escapeHtml(x.note) + ')</span>' : "") + neoFormularyLinks(x); };
       h += '<div class="sw-abx"><div class="lab">Empiric antibiotics — verify locally</div>';
       h += '<div class="k">First-line</div><ul>' + ab.firstLine.map(function (x) { return "<li>" + fmtAbx(x) + "</li>"; }).join("") + "</ul>";
       if (ab.alt && ab.alt.length) h += '<div class="k">Alternatives</div><ul>' + ab.alt.map(function (x) { return "<li>" + fmtAbx(x) + "</li>"; }).join("") + "</ul>";

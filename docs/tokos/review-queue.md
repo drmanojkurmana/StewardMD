@@ -22,7 +22,7 @@ A field left out keeps the suggested label. A value not in its list is ignored a
 ## Content to review
 
 - `tokos/rationale.json`: all 14 teaching points shown under Why on the reveal, English and Hindi: `baseline.tachycardia`, `baseline.bradycardia`, `baseline.severe_bradycardia`, `variability.reduced`, `variability.increased`, `decels.present`, `decels.prolonged`, `decels.over5`, `uc.tachysystole`, `acidosis.metabolic`, `acidosis.acidaemia_not_metabolic`, `risk.pyrexia`, `risk.preeclampsia`, `trace_vs_outcome`.
-- `tokos.js`, `L10N.en.opts` and `L10N.hi.opts`: the checklist option labels, and under `action` the three FIGO next-step strings graded at Resident level.
+- `tokos-ctg.js`, `L10N.en.opts` and `L10N.hi.opts`: the checklist option labels, and under `action` the three FIGO next-step strings graded at Resident level.
 - `tokos-calipers.js`, `WORDS`: the caliper verdict text (variability bands for a bpm range, deceleration length bands for a time span), English and Hindi.
 
 ## Units and fields
@@ -100,6 +100,30 @@ Please also confirm units: the sources do not state them for pCO2 and BDecf. The
 - Suggested FIGO: suspicious; baseline 150 (normal); variability increased (median range 29.5 bpm, reduced 0 min); decelerations 23.5 s variable (suggested), 24.25 s variable (suggested), 24.5 s variable (suggested), 41.25 s variable (suggested), 35.25 s variable (suggested), 25.75 s variable (suggested), 32 s variable (suggested), 48.5 s variable (suggested), 16 s variable (suggested), 82.75 s variable (suggested), 21 s variable (suggested), 78 s variable (suggested), 19 s variable (suggested); contractions 1 per 10 min
 - Outcome: pH 7.32, BDecf 0.89, acidosis normal
 - Quality note: strip FHR loss 3.6%, UC present 60.7%; no artefact concern found by the checks. Features are computed on the 60 min window.
+
+## 1078 (tachysystole)
+- Trace: `tokos/media/ctg/1078.svg`
+- Suggested FIGO: suspicious; baseline 165 (tachycardia); variability normal (median range 9 bpm, reduced 7 min); decelerations 54.5 s variable (suggested), 36 s variable (suggested), 21.75 s variable (suggested); contractions 5.3 per 10 min
+- Outcome: pH 7.3, BDecf 3.52, acidosis normal
+- Quality note: strip FHR loss 14.5%, UC present 89.6%; 10 samples above 180 bpm in the strip (10 in the last 5 min). Features are computed on the 60 min window.
+
+## 1457 (tachysystole)
+- Trace: `tokos/media/ctg/1457.svg`
+- Suggested FIGO: normal; baseline 140 (normal); variability normal (median range 18.5 bpm, reduced 0 min); decelerations 18.75 s variable (suggested), 25 s variable (suggested), 15.5 s variable (suggested), 17.75 s variable (suggested), 18 s variable (suggested), 19 s variable (suggested), 24.75 s variable (suggested), 28.75 s variable (suggested), 28 s variable (suggested), 17.75 s variable (suggested), 24.75 s variable (suggested); contractions 5.3 per 10 min
+- Outcome: pH 7.18, BDecf 2.54, acidosis acidaemia_not_metabolic
+- Quality note: strip FHR loss 9.1%, UC present 93.9%; no artefact concern found by the checks. Features are computed on the 60 min window.
+
+## 1350 (reduced_variability)
+- Trace: `tokos/media/ctg/1350.svg`
+- Suggested FIGO: suspicious; baseline 155 (normal); variability reduced (median range 4 bpm, reduced 33 min); decelerations 19.5 s variable (suggested), 39.75 s variable (suggested), 23.75 s variable (suggested), 56 s variable (suggested), 205.25 s prolonged (suggested), 45.25 s variable (suggested), 18.75 s variable (suggested), 180.5 s prolonged (suggested), 129.5 s variable (suggested); contractions 2.7 per 10 min
+- Outcome: pH 7.18, BDecf 6.08, acidosis acidaemia_not_metabolic
+- Quality note: strip FHR loss 2.8%, UC present 77.7%; strip baseline 145 differs from the 60 min baseline 155. Features are computed on the 60 min window.
+
+## 1155 (reduced_variability)
+- Trace: `tokos/media/ctg/1155.svg`
+- Suggested FIGO: suspicious; baseline 135 (normal); variability reduced (median range 4.8 bpm, reduced 31 min); decelerations 17.5 s variable (suggested), 17.25 s variable (suggested), 41.5 s variable (suggested), 23.5 s variable (suggested); contractions 0 per 10 min
+- Outcome: pH 7.34, BDecf 2.1, acidosis normal
+- Quality note: strip FHR loss 1.3%, UC present 100%; no artefact concern found by the checks. Features are computed on the 60 min window.
 
 <!-- hand-maintained below: tools/tokos-ctg-prep.mjs keeps this section on regeneration -->
 ## Pipeline check of the rendered traces (not clinical sign-off)

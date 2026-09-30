@@ -8,15 +8,16 @@
 #sbrefOverlay #sbrefBody .sbref-tabs.kbp-5 { display:flex; flex-wrap:nowrap; gap:4px; overflow-x:auto; overflow-y:hidden; scrollbar-width:none; overscroll-behavior-x:contain; }
 #sbrefOverlay #sbrefBody .sbref-tabs.kbp-5::-webkit-scrollbar { display:none; }
 /* !important only to beat the global body.ui-v2 .sbref-tab { padding:8px 15px !important }. */
-#sbrefOverlay #sbrefBody .sbref-tabs.kbp-5 .sbref-tab { flex:1 0 auto; min-width:0; padding:7px 6px!important; white-space:nowrap; }
-@media(max-width:429px) { #sbrefOverlay #sbrefBody .sbref-tabs.kbp-5 .sbref-tab { font-size:10.5px; padding:7px 4px!important; } }
+/* readable labels (14px) that scroll sideways on phones instead of shrinking to 10.5px (de-slop 2026-09-30) */
+#sbrefOverlay #sbrefBody .sbref-tabs.kbp-5 .sbref-tab { flex:1 0 auto; min-width:auto; min-height:44px; padding:0 4px!important; font-size:13px; font-weight:500; white-space:nowrap; }
+@media(max-width:374px) { #sbrefOverlay #sbrefBody .sbref-tabs.kbp-5 .sbref-tab { padding:0 10px!important; } }
 
 .kblib-tool-protocols { --kbp-red:#b42318; --kbp-amber:#a15c07; --kbp-teal:#0f766e; --kbp-blue:#2556a8; --kbp-slate:#5b6472; }
 body.dark .kblib-tool-protocols { --kbp-red:#ff8a80; --kbp-amber:#f5c26b; --kbp-teal:#5eead4; --kbp-blue:#93b8ff; --kbp-slate:#a9b1bd; }
 
-.kblib-tool-protocols .kbp-status { margin:0 0 14px; padding:13px 15px; border-radius:14px; font-size:13px; line-height:1.55; color:var(--ink); border:1px solid color-mix(in srgb,var(--kbp-amber) 38%,var(--kl-line)); background:color-mix(in srgb,var(--kbp-amber) 9%,var(--kl-paper)); }
+.kblib-tool-protocols .kbp-status { margin:0 0 14px; padding:10px 0; border:0; border-top:1px solid var(--kl-line); border-bottom:1px solid var(--kl-line); border-radius:0; background:none; font-size:14px; line-height:1.55; color:var(--kl-muted); }
 .kblib-tool-protocols .kbp-status strong { color:var(--kbp-amber); }
-.kblib-tool-protocols .kbp-status-reviewed, .kblib-tool-protocols .kbp-status-approved { border-color:color-mix(in srgb,var(--kbp-teal) 38%,var(--kl-line)); background:color-mix(in srgb,var(--kbp-teal) 9%,var(--kl-paper)); }
+.kblib-tool-protocols .kbp-status-reviewed, .kblib-tool-protocols .kbp-status-approved { background:none; }
 .kblib-tool-protocols .kbp-status-reviewed strong, .kblib-tool-protocols .kbp-status-approved strong { color:var(--kbp-teal); }
 
 /* Subject filter: one swipeable rail, like the Discover filter groups. */
@@ -26,16 +27,16 @@ body.dark .kblib-tool-protocols { --kbp-red:#ff8a80; --kbp-amber:#f5c26b; --kbp-
 .kblib-tool-protocols .kbp-chip small { color:var(--kl-muted); font-size:11px; margin-left:3px; }
 .kblib-tool-protocols .kbp-chip.on { border-color:var(--kl-accent); background:color-mix(in srgb,var(--kl-accent) 12%,var(--kl-paper)); color:var(--kl-accent); font-weight:600; }
 
-.kblib-tool-protocols .kbp-group { margin:0 0 18px; border:1px solid var(--kl-line); border-radius:18px; background:var(--kl-paper); overflow:hidden; }
-.kblib-tool-protocols .kbp-group-h { margin:0; padding:14px 16px 10px; font-size:13px; font-weight:650; letter-spacing:.02em; color:var(--kl-muted); }
+.kblib-tool-protocols .kbp-group { margin:0 0 18px; border:0; border-radius:0; background:none; }
+.kblib-tool-protocols .kbp-group-h { margin:0; padding:14px 0 8px; font:600 21px/1.25 ui-serif, "New York", "Source Serif 4", Georgia, serif; letter-spacing:-.01em; color:var(--ink); }
 .kblib-tool-protocols .kbp-group-h small { font-weight:500; margin-left:4px; }
-.kblib-tool-protocols .kbp-row { display:block; width:100%; margin:0; padding:13px 16px; border:0; border-top:1px solid var(--kl-line); background:transparent; color:var(--ink); text-align:left; font:inherit; cursor:pointer; }
+.kblib-tool-protocols .kbp-row { display:block; width:100%; margin:0; padding:13px 0; border:0; border-top:1px solid var(--kl-line); background:transparent; color:var(--ink); text-align:left; font:inherit; cursor:pointer; }
 .kblib-tool-protocols .kbp-group > .kbp-row:first-child { border-top:0; }
 .kblib-tool-protocols .kbp-row:hover { background:color-mix(in srgb,var(--kl-accent) 6%,var(--kl-paper)); }
 .kblib-tool-protocols .kbp-row > span { display:block; }
-.kblib-tool-protocols .kbp-row-eye { color:var(--kl-muted); font-size:11px; letter-spacing:.03em; margin-bottom:3px; }
-.kblib-tool-protocols .kbp-row-title { font-size:15.5px; font-weight:600; line-height:1.35; letter-spacing:-.01em; }
-.kblib-tool-protocols .kbp-row-sum { margin-top:4px; color:var(--kl-muted); font-size:13px; line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.kblib-tool-protocols .kbp-row-eye { color:var(--kl-muted); font-size:13px; margin-bottom:3px; }
+.kblib-tool-protocols .kbp-row-title { font-size:16.5px; font-weight:600; line-height:1.35; letter-spacing:-.01em; }
+.kblib-tool-protocols .kbp-row-sum { margin-top:4px; color:var(--kl-muted); font-size:14px; line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
 .kblib-tool-protocols .kbp-row-src { margin-top:6px; color:var(--kl-accent); font-size:11.5px; }
 .kblib-tool-protocols .kbp-empty { padding:32px 12px; text-align:center; color:var(--kl-muted); font-size:14px; }
 .kblib-tool-protocols .kbp-btn { min-height:44px; padding:10px 18px; border:1px solid var(--kl-accent); border-radius:12px; background:transparent; color:var(--kl-accent); font:inherit; font-weight:600; cursor:pointer; }
@@ -50,27 +51,26 @@ body.dark .kblib-tool-protocols { --kbp-red:#ff8a80; --kbp-amber:#f5c26b; --kbp-
 .kblib-tool-protocols .kbp-toc::-webkit-scrollbar { display:none; }
 .kblib-tool-protocols .kbp-jump { flex:0 0 auto; min-height:36px; padding:6px 12px; border:1px solid var(--kl-line); border-radius:999px; background:var(--kl-paper); color:var(--ink); font:inherit; font-size:12.5px; white-space:nowrap; cursor:pointer; }
 
-.kblib-tool-protocols .kbp-sec { --kbp-c:var(--kl-accent); position:relative; margin:0 0 12px; padding:16px 16px 14px 18px; border:1px solid var(--kl-line); border-radius:16px; background:var(--kl-paper); overflow:hidden; scroll-margin-top:12px; }
-.kblib-tool-protocols .kbp-sec::before { content:""; position:absolute; inset:0 auto 0 0; width:4px; background:var(--kbp-c); }
+.kblib-tool-protocols .kbp-sec { --kbp-c:var(--kl-accent); position:relative; margin:0; padding:16px 0 14px; border:0; border-top:1px solid var(--kl-line); border-radius:0; background:none; scroll-margin-top:12px; }
 .kblib-tool-protocols .kbp-k-recognise { --kbp-c:var(--kbp-teal); }
 .kblib-tool-protocols .kbp-k-immediate { --kbp-c:var(--kbp-red); }
 .kblib-tool-protocols .kbp-k-investigations, .kblib-tool-protocols .kbp-k-monitoring { --kbp-c:var(--kbp-blue); }
 .kblib-tool-protocols .kbp-k-escalate { --kbp-c:var(--kbp-amber); }
 .kblib-tool-protocols .kbp-k-pitfalls, .kblib-tool-protocols .kbp-k-disposition, .kblib-tool-protocols .kbp-sources { --kbp-c:var(--kbp-slate); }
-.kblib-tool-protocols .kbp-k-immediate { background:color-mix(in srgb,var(--kbp-red) 5%,var(--kl-paper)); }
-.kblib-tool-protocols .kbp-sec h2 { margin:0 0 10px; font-size:16.5px; line-height:1.3; letter-spacing:-.01em; color:var(--ink); }
-.kblib-tool-protocols .kbp-kind { display:block; margin-bottom:3px; color:var(--kbp-c); font-size:10.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+
+.kblib-tool-protocols .kbp-sec h2 { margin:0 0 10px; font:600 20px/1.3 ui-serif, "New York", "Source Serif 4", Georgia, serif; letter-spacing:-.01em; color:var(--ink); }
+.kblib-tool-protocols .kbp-kind { display:block; margin-bottom:2px; color:var(--kbp-c); font:600 14px/1.4 "Avenir Next Condensed", "Roboto Condensed", "Arial Narrow", var(--sans); font-variant:all-small-caps; letter-spacing:.04em; text-transform:none; }
 .kblib-tool-protocols .kbp-sec :is(ul,ol) { margin:0; padding-left:20px; }
-.kblib-tool-protocols .kbp-sec li { margin:0 0 8px; font-size:14px; line-height:1.55; color:var(--ink); }
+.kblib-tool-protocols .kbp-sec li { margin:0 0 8px; font-size:16px; line-height:1.55; color:var(--ink); }
 .kblib-tool-protocols .kbp-sec li:last-child { margin-bottom:0; }
 .kblib-tool-protocols .kbp-sec ol > li::marker { color:var(--kbp-c); font-weight:700; }
 
 .kblib-tool-protocols .kbp-drugs dl { margin:0; }
 .kblib-tool-protocols .kbp-drug { padding:10px 0; border-top:1px solid var(--kl-line); }
 .kblib-tool-protocols .kbp-drug:first-child { border-top:0; padding-top:2px; }
-.kblib-tool-protocols .kbp-drug dt { font-size:14px; font-weight:650; color:var(--ink); }
-.kblib-tool-protocols .kbp-drug dd { margin:3px 0 0; font-size:13.5px; line-height:1.5; }
-.kblib-tool-protocols .kbp-dose { color:var(--ink); font-variant-numeric:tabular-nums; }
+.kblib-tool-protocols .kbp-drug dt { font-size:16px; font-weight:650; color:var(--ink); }
+.kblib-tool-protocols .kbp-drug dd { margin:3px 0 0; font-size:15px; line-height:1.5; }
+.kblib-tool-protocols .kbp-dose { color:var(--ink); font-weight:650; font-variant-numeric:tabular-nums; }
 .kblib-tool-protocols .kbp-note { color:var(--kl-muted); }
 
 .kblib-tool-protocols .kbp-sources li { font-size:13.5px; }
@@ -81,7 +81,6 @@ body.dark .kblib-tool-protocols { --kbp-red:#ff8a80; --kbp-amber:#f5c26b; --kbp-
 
 @media(max-width:360px) {
   .kblib-tool-protocols .kbp-subjects, .kblib-tool-protocols .kbp-toc { margin-inline:-14px; padding-inline:14px; }
-  .kblib-tool-protocols .kbp-sec { padding:14px 13px 12px 16px; }
 }
 
 /* Embedded reader (OPD EMR Protocol tab, opd-emr.js). The Knowledge Library tokens are defined on
@@ -109,3 +108,11 @@ body.dark .kblib-tool-protocols { --kbp-intl:#93b8ff; --kbp-india:#f5c26b; }
 .kblib-tool-protocols .kbp-twin span { color:var(--kl-muted); font-size:12px; }
 .kblib-tool-protocols .kbp-twin strong { color:var(--kl-accent); font-size:14.5px; font-weight:650; }
 @media(max-width:360px) { .kblib-tool-protocols .kbp-seg { font-size:12px; padding-inline:5px; } }
+
+/* high-yield bolding inside protocol items (medFormat spans from reasoning.js), weight not colour */
+.kblib-tool-protocols [class^="md-"]:not(.md-cite) { font-weight: 700; color: inherit; }
+.kblib-tool-protocols .md-ix { font-weight: 600; }
+.kblib-tool-protocols .md-bug { font-style: italic; font-weight: 600; }
+/* the scrolling tab row fades at the edge so a clipped label reads as "more", not as a bug */
+#sbrefOverlay #sbrefBody .sbref-tabs.kbp-5.can-scroll { -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); }
+#sbrefOverlay #sbrefBody .sbref-tabs.kbp-5.can-scroll.at-end { -webkit-mask-image: linear-gradient(270deg, #000 88%, transparent); mask-image: linear-gradient(270deg, #000 88%, transparent); }

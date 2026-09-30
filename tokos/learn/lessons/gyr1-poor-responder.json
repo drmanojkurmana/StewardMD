@@ -1,0 +1,245 @@
+{
+  "id": "gyr1-poor-responder",
+  "unit": "gyr1",
+  "level": "resident",
+  "minutes": 5,
+  "review": "ai_drafted",
+  "title": {
+    "en": "Poor responders and the POSEIDON groups",
+    "hi": "पुअर रिस्पॉन्डर और POSEIDON समूह"
+  },
+  "idea": {
+    "en": "Sort low-prognosis patients by age, reserve and past response. Do not chase oocytes with high doses or add-ons.",
+    "hi": "कम संभावना वाली मरीज़ों को उम्र, रिज़र्व और पिछली प्रतिक्रिया से बाँटें। ऊँची मात्रा या ऐड-ऑन से अंडे पाने के पीछे न भागें।"
+  },
+  "see": {
+    "diagram": "diagrams/gyr1-poor-responder.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A grid of four tiles. Columns go from under 35 years to 35 or over. Rows go from adequate to low ovarian reserve. The tiles carry one, two, three and four dots. Arrows show age rising and reserve falling.",
+      "hi": "चार खानों की ग्रिड। कॉलम 35 से कम से 35 या ज़्यादा उम्र तक जाते हैं। पंक्तियाँ पर्याप्त से कम ओवेरियन रिज़र्व तक जाती हैं। खानों में एक, दो, तीन और चार बिंदु हैं। तीर उम्र बढ़ने और रिज़र्व घटने को दिखाते हैं।"
+    },
+    "caption": {
+      "en": "Group number equals the dots: 1 and 2 have good reserve, 3 and 4 have low reserve; 1 and 3 are under 35.",
+      "hi": "समूह की संख्या बिंदुओं के बराबर है: 1 और 2 में रिज़र्व अच्छा है, 3 और 4 में कम; 1 और 3 की उम्र 35 से कम है।"
+    },
+    "credit": "Original diagram, Tokos (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.39,
+        "y": 0.29,
+        "label": {
+          "en": "Group 1",
+          "hi": "समूह 1"
+        },
+        "note": {
+          "en": "Under 35, AFC 5 or more, AMH 1.2 ng/mL or more, with a poor or suboptimal past response.",
+          "hi": "35 से कम उम्र, AFC 5 या ज़्यादा, AMH 1.2 ng/mL या ज़्यादा, पिछली प्रतिक्रिया कमज़ोर या औसत से कम।"
+        }
+      },
+      {
+        "x": 0.79,
+        "y": 0.29,
+        "label": {
+          "en": "Group 2",
+          "hi": "समूह 2"
+        },
+        "note": {
+          "en": "Age 35 or over, same reserve markers, same past response.",
+          "hi": "उम्र 35 या ज़्यादा, रिज़र्व के वही मार्कर, वही पिछली प्रतिक्रिया।"
+        }
+      },
+      {
+        "x": 0.39,
+        "y": 0.69,
+        "label": {
+          "en": "Group 3",
+          "hi": "समूह 3"
+        },
+        "note": {
+          "en": "Under 35 with AFC below 5 and AMH below 1.2 ng/mL.",
+          "hi": "35 से कम उम्र, AFC 5 से कम और AMH 1.2 ng/mL से कम।"
+        }
+      },
+      {
+        "x": 0.79,
+        "y": 0.69,
+        "label": {
+          "en": "Group 4",
+          "hi": "समूह 4"
+        },
+        "note": {
+          "en": "Age 35 or over with AFC below 5 and AMH below 1.2 ng/mL.",
+          "hi": "उम्र 35 या ज़्यादा, AFC 5 से कम और AMH 1.2 ng/mL से कम।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.91,
+        "label": {
+          "en": "Age axis",
+          "hi": "उम्र की धुरी"
+        },
+        "note": {
+          "en": "Older age lowers egg quality; one paper cites about 60% euploid blastocysts under 35 and 30% or less at 40 to 42.",
+          "hi": "उम्र बढ़ने से अंडे की गुणवत्ता घटती है; एक शोध में 35 से कम पर लगभग 60% यूप्लॉइड ब्लास्टोसिस्ट और 40 से 42 पर 30% या कम बताए गए हैं।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "The older ESHRE Bologna criteria define a poor responder by at least two of three features. These are advanced age or another risk factor, a previous poor response, and an abnormal ovarian reserve test.",
+        "hi": "पुराने ESHRE बोलोग्ना मानदंड में तीन में से कम से कम दो लक्षण होने पर महिला पुअर रिस्पॉन्डर है। ये हैं: बढ़ी उम्र या दूसरा जोखिम, पिछली कमज़ोर प्रतिक्रिया, और असामान्य ओवेरियन रिज़र्व टेस्ट।"
+      },
+      {
+        "en": "[[poseidon]] adds age (cut at 35), [[afc|AFC]] (below 5), [[amh|AMH]] (below 1.2 ng/mL) and oocytes in a previous cycle.",
+        "hi": "[[poseidon]] में उम्र (35 पर विभाजन), [[afc|AFC]] (5 से कम), [[amh|AMH]] (1.2 ng/mL से कम) और पिछले चक्र के अंडे जुड़ते हैं।"
+      },
+      {
+        "en": "Groups 1 and 2 have good markers but a past yield of under 4 (poor) or 4 to 9 (suboptimal) oocytes. Groups 3 and 4 have low markers.",
+        "hi": "समूह 1 और 2 के मार्कर अच्छे हैं पर पिछली उपज 4 से कम (कमज़ोर) या 4 से 9 (औसत से कम) अंडे रही। समूह 3 और 4 के मार्कर कम हैं।"
+      },
+      {
+        "en": "ESHRE 2025: do not exceed 300 IU in low responders. A low response alone is not a reason to cancel. Delayed start and modified natural cycles are not routinely advised.",
+        "hi": "ESHRE 2025: लो रिस्पॉन्डर में 300 IU से ऊपर न जाएँ। सिर्फ़ कम प्रतिक्रिया चक्र रद्द करने की वजह नहीं है। डिलेड स्टार्ट और मॉडिफ़ाइड नैचुरल चक्र रूटीन में नहीं सुझाए गए।"
+      },
+      {
+        "en": "Growth hormone, testosterone, DHEA, sildenafil and myo-inositol are not, or probably not, recommended for low responders.",
+        "hi": "लो रिस्पॉन्डर के लिए ग्रोथ हार्मोन, टेस्टोस्टेरोन, DHEA, सिल्डेनाफ़िल और माइओ-इनोसिटोल की सिफ़ारिश नहीं है, या शायद नहीं है।"
+      },
+      {
+        "en": "Double stimulation can be used to collect oocytes or embryos when a fresh transfer is not planned.",
+        "hi": "जब ताज़ा ट्रांसफ़र की योजना न हो, तो अंडे या भ्रूण जमा करने के लिए डबल स्टिमुलेशन इस्तेमाल हो सकता है।"
+      }
+    ],
+    "analogy": {
+      "en": "POSEIDON is a map with two roads: how many eggs there are, and how good they are.",
+      "hi": "POSEIDON दो रास्तों वाला नक़्शा है: कितने अंडे हैं, और वे कितने अच्छे हैं।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Check AFC and AMH first. AFC below 5 or AMH below 1.2 ng/mL means low reserve.",
+      "hi": "पहले AFC और AMH देखें। AFC 5 से कम या AMH 1.2 ng/mL से कम का मतलब कम रिज़र्व है।"
+    },
+    {
+      "en": "Look at the last cycle: under 4 oocytes is a poor response, 4 to 9 is suboptimal.",
+      "hi": "पिछला चक्र देखें: 4 से कम अंडे कमज़ोर प्रतिक्रिया, 4 से 9 औसत से कम।"
+    },
+    {
+      "en": "Age 35 or over changes the odds of a euploid embryo, whatever the reserve.",
+      "hi": "रिज़र्व जो भी हो, 35 या ज़्यादा उम्र यूप्लॉइड भ्रूण की संभावना बदल देती है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Classify her, then counsel with age-specific chances and a realistic plan.",
+      "hi": "उसे वर्गीकृत करें, फिर उम्र के हिसाब से संभावनाओं और यथार्थवादी योजना पर परामर्श दें।"
+    },
+    {
+      "en": "Run a standard antagonist cycle and keep the dose at or below 300 IU.",
+      "hi": "मानक एंटागोनिस्ट चक्र चलाएँ और मात्रा 300 IU या उससे कम रखें।"
+    },
+    {
+      "en": "Avoid add-ons outside a trial. Consider accumulating embryos by double stimulation.",
+      "hi": "ट्रायल के बाहर ऐड-ऑन से बचें। डबल स्टिमुलेशन से भ्रूण जमा करने पर विचार करें।"
+    }
+  ],
+  "remember": {
+    "en": "Classify by age, AFC, AMH and last yield. Do not push the dose past 300 IU.",
+    "hi": "उम्र, AFC, AMH और पिछली उपज से वर्गीकृत करें। मात्रा 300 IU से आगे न बढ़ाएँ।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which POSEIDON group is under 35 with AFC below 5 and AMH below 1.2 ng/mL?",
+        "hi": "कौन-सा POSEIDON समूह 35 से कम उम्र, AFC 5 से कम और AMH 1.2 ng/mL से कम वाला है?"
+      },
+      "o": [
+        {
+          "en": "Group 1",
+          "hi": "समूह 1"
+        },
+        {
+          "en": "Group 3",
+          "hi": "समूह 3"
+        },
+        {
+          "en": "Group 4",
+          "hi": "समूह 4"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Groups 3 and 4 have low markers. Group 3 is under 35 and group 4 is 35 or over.",
+        "hi": "समूह 3 और 4 के मार्कर कम हैं। समूह 3 में उम्र 35 से कम और समूह 4 में 35 या ज़्यादा है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which is NOT recommended for predicted low responders by ESHRE 2025?",
+        "hi": "अनुमानित लो रिस्पॉन्डर के लिए ESHRE 2025 किसकी सिफ़ारिश नहीं करता?"
+      },
+      "o": [
+        {
+          "en": "A gonadotropin dose above 300 IU",
+          "hi": "300 IU से ऊपर गोनाडोट्रोफ़िन मात्रा"
+        },
+        {
+          "en": "An antagonist protocol",
+          "hi": "एंटागोनिस्ट प्रोटोकॉल"
+        },
+        {
+          "en": "Continuing the cycle despite a low response",
+          "hi": "कम प्रतिक्रिया के बावजूद चक्र जारी रखना"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "A dose above 300 IU is not recommended (strong). Low response alone is not a reason to cancel.",
+        "hi": "300 IU से ऊपर की मात्रा की सिफ़ारिश नहीं है (मज़बूत)। सिर्फ़ कम प्रतिक्रिया रद्द करने की वजह नहीं।"
+      }
+    },
+    {
+      "q": {
+        "en": "A woman aged 38 has AMH 2.0 ng/mL, AFC 8 and only 3 oocytes in a past cycle. Which group?",
+        "hi": "38 साल की महिला का AMH 2.0 ng/mL, AFC 8 है और पिछले चक्र में सिर्फ़ 3 अंडे मिले। कौन-सा समूह?"
+      },
+      "o": [
+        {
+          "en": "Group 1",
+          "hi": "समूह 1"
+        },
+        {
+          "en": "Group 2",
+          "hi": "समूह 2"
+        },
+        {
+          "en": "Group 4",
+          "hi": "समूह 4"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Age 35 or over with good markers and a poor past response is group 2.",
+        "hi": "35 या ज़्यादा उम्र, अच्छे मार्कर और कमज़ोर पिछली प्रतिक्रिया समूह 2 है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "gy-fertility"
+  },
+  "glossary": [
+    "afc",
+    "amh",
+    "poseidon"
+  ],
+  "sources": [
+    "ESHRE Reproductive Endocrinology Guideline Group. ESHRE guideline: ovarian stimulation for IVF/ICSI, an update in 2025. Hum Reprod 2026;41(4):498-514. PMID 41732035",
+    "Humaidan P, Alviggi C, Fischer R, Esteves SC. The novel POSEIDON stratification of low prognosis patients in assisted reproductive technology and its proposed marker of successful outcome. F1000Res 2016. PMID 28232864",
+    "Patients with low prognosis in ART: a Delphi consensus (POSEIDON criteria, Table 1). Reprod Biol Endocrinol 2024. PMID 39385174"
+  ]
+}

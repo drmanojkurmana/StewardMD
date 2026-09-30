@@ -38,6 +38,9 @@ adjusted weight in obesity, kidney (CrCl bands, dialysis) and liver (Child-Pugh)
   advice still names a clearance are "unclear": the whole note is shown instead.
 - A neonate with no neonatal row gets child rows with a warning; a child with no child row gets adult
   rows marked reference only. Missing age = adult, with a note.
+- With the neonatal layer on (`smd_neo` + `smd_neo_dose`, [[Neonatal]]): a neonate sees neonatal rows only;
+  the band table (`data/neo/dose-bands-*.json`) replaces the monograph rows when the drug has one, and with no
+  neonatal row anywhere the answer is "No neonatal dose on file. Do not extrapolate." (`pickRows(.., strictNeo)`).
 - Patient values are never stored, sent or logged; `close()` wipes them.
 
 ## Gotchas

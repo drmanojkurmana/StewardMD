@@ -43,3 +43,51 @@ A fifth tab, Protocols, joins Syndromes / Antibiogram / AWaRe / Guidelines: beds
 across every specialty, on the same tool-page hierarchy. It lives in its own module, see
 [[Clinical Protocols]] (`kb-protocols.js`, flag `smd_kb_protocols`). The four original tabs are
 unchanged; app.js still renders them and `kb-protocols.js` appends the fifth button.
+
+## Disease reader de-slop (2026-09-29)
+
+Owner picked from three variants: the top of the reader follows "Textbook", the Know more panel
+follows "Handbook". The disease name is set in the system serif (New York on Apple), and sections are
+separated by hairlines instead of cards. The watermark, kicker pill and brand block are gone from the hero;
+"StewardMD Knowledge Base" now sits under the header title. Red is used only for red flags and "Act now".
+The practice update (bulletins.js) is a dated note under a rule, with no stripe or pill.
+Know more is a handbook table: a narrow small-caps label column (Act now, Exam, Pitfall, Tests, Tip,
+Don't miss), a 2px opening rule, and no per-row icons or tags. Inside the reader the `md-*` term colours
+are neutralised. Drug names keep the owner's drug-link glow (drug-link.js, 2026-09-24), which rests as
+plain bold after about 5 s. Styles: the reader block at the end of `knowledge-library.css`
+(two-id scope, no `!important`). The reader was removed from the appearance.css glass-card rules.
+The India "unknown" label now reads "Status not confirmed" (the row already says "In India").
+
+## Whole-module de-slop and high-yield bolding (2026-09-30)
+
+Owner asked for the same treatment across the module, a friendlier search, the banner with the logo
+kept, and high-yield points bolded in every disease's text.
+- **Banner:** one `kbBannerHTML()` (reasoning.js, also `window.SMD_KB_BANNER` for kb-protocols.js):
+  `/logo.png` (transparent) beside "StewardMD / Knowledge Base", on Discover, every tab, the disease
+  reader hero and the management page. The faded watermark and all uppercase kickers are gone.
+- **Search:** `kbSearchHTML()` wraps each input in `.kblib-searchbox` with a drawn magnifier (input ids
+  unchanged). Discover shows "Try" suggestions (`[data-kbtry]`, wired in `kbWireLibrary`).
+- **Bolding:** `medFormat` highlight classes are bold ink, never colour (global in `evInjectCSS`).
+  New MED_RULES: `md-dose` (dose, duration, threshold with units or a comparator: "2 g", "10-14 days",
+  "&lt;0.4", "80%", ">50y") and pitfall phrases (do not, avoid, should not, not recommended, beware)
+  as `md-abs`. Tests are 600, organisms italic. `window.SMD_MEDFORMAT` also formats protocol steps.
+- **Management page** (`openMgmt`): reader layout (`dx-reader dx-mgmt-page`), banner, serif sections,
+  medFormat text; from the reader, Back returns to the disease page (`r.back`).
+- **Tabs:** 13px, all five fit from 375px (run-kb-protocols-ui rule); below that the row scrolls with an
+  edge fade (`can-scroll`/`at-end`) and the active tab centred.
+- **Surfaces:** library sections, rows (beats home.js `body.ui-v2 .sbref-row/.sbref-gl !important`),
+  AWaRe groups and protocol sections are hairline sections; `appearance.css` no longer puts glass or
+  a teal wash on the library. Gotcha: `:has()` nested inside `:is()` is dropped by the browser; write
+  those selectors out.
+
+## Live search above the keyboard + iPad fit (2026-09-30)
+
+Owner: on phone/iPad, typing in search left the results below the keyboard. Now:
+- Discover has a search mode (`.kblib-searching`, toggled in `kbPaintLibrary`): hero, Try, Your
+  library, Refine and the label hide, results sit under the search box.
+- Every `.kblib-searchbox` in `#sbrefBody` is sticky; typing on a tool tab calls `kbLiftSearch`
+  (scrolls the box to the top); a focused search adds 60vh of scroll room (`::after`).
+- Protocols hides its verify-sources note while a query is active (`.kbp-searching`).
+- iPad: the shell is full width (was the 900px `.sbref-shell` column), body 840px centred, header
+  titled "Knowledge Library". Test: `test/run-kb-live-search-ui.mjs` (short viewport = keyboard up).
+  Gotcha: the app applies a zoom on wide screens, so compare computed widths, not rect widths.

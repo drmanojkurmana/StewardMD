@@ -2850,6 +2850,9 @@
    * re-matching inside inserted markup, so HTML stays balanced and the medical
    * meaning/wording is never changed — only visually emphasised. Citations kept. */
   var MED_RULES = [
+    // high-yield numbers: doses, durations and thresholds ("2 g", "10-14 days", "&lt;0.4", "80%"), bolded so they can be eyeballed
+    { cls: "md-dose", re: "(?:(?:&lt;|&gt;|\\u2264|\\u2265|[\u2264\u2265])\\s*)?\\b\\d+(?:[.,]\\d+)?(?:\\s*[\\u2013\\-]\\s*\\d+(?:[.,]\\d+)?)?\\s*(?:mg\\/kg(?:\\/(?:day|dose|h))?|mcg\\/kg(?:\\/min)?|\\u00b5g\\/kg|mg\\/m2|mg\\/dL|mmol\\/L|mEq\\/L|g\\/dL|mL\\/kg(?:\\/h)?|units?\\/kg|IU\\/kg|mg|mcg|\\u00b5g|g|mL|L\\/min|mmHg|IU|units?|%|\\u00b0C|min|minutes?|hours?|days?|weeks?|months?|y|yrs?|years?)(?![A-Za-z])" },
+    { cls: "md-dose", re: "(?:&lt;|&gt;|[\u2264\u2265])\\s*\\d+(?:[.,]\\d+)?" },
     { cls: "md-cite", re: "Harrison(?:[’']s)?\\s*22e(?:\\s*pp?\\.?\\s*[\\dIVXLC]+(?:[\\u2013\\-,]\\s*\\d+)*)?" },
     // high-yield ENUMERATION phrase — "classic triad of fever, headache and nuchal
     // rigidity" etc. captured as one purple span (lazy, verb/punctuation-bounded;
@@ -2890,10 +2893,13 @@
     { cls: "md-sig", re: "\\b(?:classic(?:al)?\\s+(?:triad|tetrad|pentad|presentation|features?)|pathognomonic|hallmark|gold standard|drug of choice|treatment of choice|first[\\u2013\\- ]line|second[\\u2013\\- ]line|mainstay|diagnostic of|diagnostic criteria|definitive diagnosis|Kernig(?:[’']s)?|Brudzinski(?:[’']s)?|Murphy(?:[’']s)? sign|Charcot(?:[’']s)?(?: triad)?|Reynolds pentad|Beck(?:[’']s)? triad|Whipple(?:[’']s)? triad|Cushing(?:[’']s)?(?: reflex| triad)?|Janeway lesions|Osler(?:[’']s)? nodes|Roth spots|Duke criteria|CURB[\\u2013\\-]?65|qSOFA|Wells score|Centor(?: criteria| score)?|Light(?:[’']s)? criteria|Ranson(?:[’']s)?(?: criteria)?|MELD(?:[\\u2013\\-]Na)?|Child[\\u2013\\- ]Pugh|Glasgow Coma Scale|GCS)\\b" },
     // high-yield clinical CONCEPTS — bold the important medical points in context
     { cls: "md-key", re: "\\b(?:purulent|suppurative|pyogenic|abscess|empyema|vegetations?|biofilm|bacterae?mia|fungae?mia|virae?mia|septic emboli|immunocompromised|immunosuppressed|neutropeni[ac]|nuchal rigidity|meningismus|neck stiffness|subarachnoid space|blood[\\u2013\\- ]brain barrier|inflammatory reaction|foreign body|indwelling|prosthetic|necrosis|necrotic|ischae?mi[ac]|infarction|thrombosis|perforation|hydrocephalus|vasculitis|demyelination|granulomatous|granuloma|malignancy|metasta(?:sis|tic)|raised intracranial pressure|intracranial pressure|herniation|pleocytosis|coloni[sz](?:e|ed|ation)|opsoni[sz]ation|phagocytosis)\\b" },
-    { cls: "md-abs", re: "\\b(?:never|always|must|contraindicated|mandatory|strongly recommended|strongly suggested|life[\\u2013\\- ]threatening)\\b" }
+    { cls: "md-abs", re: "\\b(?:never|always|must|contraindicated|mandatory|strongly recommended|strongly suggested|life[\\u2013\\- ]threatening)\\b" },
+    // pitfalls and warnings read as one bold phrase
+    { cls: "md-abs", re: "\\b(?:do not|don[\u2019']t|avoid(?:ed|s)?|should not|must not|not recommended|beware|red flags?|pitfalls?)\\b" }
   ];
   var _medRe = null;
   function medRe() { if (!_medRe) _medRe = new RegExp(MED_RULES.map(function (r) { return "(" + r.re + ")"; }).join("|"), "gi"); return _medRe; }
+  window.SMD_MEDFORMAT = function (t) { return medFormat(t); };   // shared with kb-protocols.js (same high-yield bolding)
   function medFormat(text) {
     if (text == null) return "";
     var s = esc(stripCite(String(text)));
@@ -3264,20 +3270,23 @@
     ]
   };
   var EV_BRIEF_META = {
-    dontmiss: { ic: "siren", label: "Don't miss", a: "warn" },
-    exam: { ic: "target", label: "Exam pearl", a: "pearl" },
-    pitfall: { ic: "warn", label: "Pitfall", a: "pitfall" },
-    tip: { ic: "note", label: "Practice tip", a: "tip" },
-    action: { ic: "bolt", label: "Key action", a: "tx" },
-    dx: { ic: "steth", label: "Diagnostic pearl", a: "ix" }
+    dontmiss: { label: "Don't miss", a: "now" },
+    exam: { label: "Exam", a: "" },
+    pitfall: { label: "Pitfall", a: "" },
+    tip: { label: "Tip", a: "" },
+    action: { label: "Act now", a: "now" },
+    dx: { label: "Tests", a: "" }
   };
+  // one drawn chevron for every disclosure in the reader (no glyph icons)
+  var DX_CHEV = '<svg class="dx-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
   function evBriefing(id) {
     var b = EXAM_PEARLS[id]; if (!b || !b.length) return "";
-    return '<div class="ev-brief"><div class="ev-brief-h"><span class="ev-tick"></span>StewardMD clinical briefing<span class="ev-brief-by">clinician-curated</span></div>' +
+    // handbook table: a narrow label column, the point beside it; red only for what must happen now
+    return '<div class="ev-brief"><div class="ev-brief-h">Clinical briefing<span class="ev-brief-by">Clinician-curated</span></div><dl class="ev-bt">' +
       b.map(function (p) {
         var m = EV_BRIEF_META[p.t] || EV_BRIEF_META.exam;
-        return '<div class="ev-bc ev-bc--' + m.a + '"><span class="ev-bc-ic">' + rIco(m.ic) + '</span><div class="ev-bc-bd"><span class="ev-bc-tag ev-tag--' + m.a + '">' + m.label + '</span>' + medFormat(stripCite(p.x)) + '</div></div>';
-      }).join("") + '</div>';
+        return '<dt class="ev-bt-l' + (m.a ? " ev-bt-l--" + m.a : "") + '">' + m.label + '</dt><dd class="ev-bt-x">' + medFormat(stripCite(p.x)) + '</dd>';
+      }).join("") + '</dl></div>';
   }
   // the collapsible body (pearls hero + sections + full reference) — lazy-built
   function evBodyHTML(src) {
@@ -3293,12 +3302,12 @@
     }
     (src.sections || []).forEach(function (s) {
       h += '<div class="ev-sec' + (s.danger ? " danger" : "") + '"><button type="button" class="ev-sec-h">' +
-        '<span class="ev-sec-ic">' + s.ic + '</span><span class="ev-sec-t">' + esc(s.title) + '</span><span class="ev-chev">⌄</span></button>' +
+        '<span class="ev-sec-ic">' + s.ic + '</span><span class="ev-sec-t">' + esc(s.title) + '</span><span class="ev-chev">' + DX_CHEV + '</span></button>' +
         '<div class="ev-sec-p"><div class="ev-sec-in">' + s.html + '</div></div></div>';
     });
     if (src.fullHTML) {
       h += '<div class="ev-sec ev-full"><button type="button" class="ev-sec-h">' +
-        '<span class="ev-sec-ic">' + rIco("note") + '</span><span class="ev-sec-t">Clinical details</span><span class="ev-chev">⌄</span></button>' +
+        '<span class="ev-sec-ic">' + rIco("note") + '</span><span class="ev-sec-t">Clinical details</span><span class="ev-chev">' + DX_CHEV + '</span></button>' +
         '<div class="ev-sec-p"><div class="ev-sec-in">' + src.fullHTML + '</div></div></div>';
     }
     h += '<div class="ev-cite">' + src.cite + '</div></div>';
@@ -3313,7 +3322,7 @@
       '<button type="button" class="ev-top" aria-expanded="' + open + '"><span class="ev-top-ic">' + src.icon + '</span>' +
         '<span class="ev-top-main"><span class="ev-top-title">' + (src.srcKey === "harrison" ? "Know more" : esc(src.sourceName)) + '</span>' +
         (sub ? '<span class="ev-top-sub">' + esc(sub) + '</span>' : '') + '</span>' +
-        '<span class="ev-chev ev-chev-top">⌄</span></button>' +
+        '<span class="ev-chev ev-chev-top">' + DX_CHEV + '</span></button>' +
       '<div class="ev-panel"><div class="ev-panel-in">' + (open ? evBodyHTML(src) : '') + '</div></div></div>';
   }
   // delegated toggle + lazy build — wired once, works wherever the HTML is injected
@@ -3351,8 +3360,10 @@
       ".ev-top-main{display:flex;flex-direction:column;flex:1;min-width:0}",
       ".ev-top-title{font-weight:700;color:#0f172a;font-size:13.5px;line-height:1.25}",
       ".ev-top-sub{font-size:11.5px;color:#0b5a54;margin-top:2px}",
-      ".ev-chev{font-size:16px;color:#94a3b8;transition:transform .28s ease;flex:none}",
-      ".ev-wrap.ev-open>.ev-top .ev-chev-top{transform:rotate(180deg)}",
+      ".ev-chev{display:inline-flex;color:#94a3b8;transition:transform .2s cubic-bezier(.23,1,.32,1);flex:none}",
+      ".dx-chev{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}",
+      ".ev-wrap.ev-open>.ev-top .ev-chev-top,.ev-sec.ev-open>.ev-sec-h .ev-chev{transform:rotate(90deg)}",
+      "@media (prefers-reduced-motion:reduce){.ev-chev{transition:none}}",
       ".ev-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}",
       ".ev-wrap.ev-open>.ev-panel{grid-template-rows:1fr}",
       ".ev-panel-in{overflow:hidden;min-height:0}",
@@ -3376,24 +3387,18 @@
       ".ev-callout-ic{flex:none;font-size:14px;line-height:1.4}",
       ".ev-callout--danger{background:#fef2f2;border-color:#fecaca;color:#7f1d1d}",
       ".ev-callout--warn{background:#fff7ed;border-color:#fed7aa;color:#7c2d12}",
-      ".ev-brief{background:linear-gradient(180deg,#f8fafc,#f1f5f9);border:1px solid #e2e8f0;border-radius:13px;padding:12px 12px 9px;margin-bottom:13px}",
-      ".ev-brief-h{display:flex;align-items:center;gap:6px;font-weight:800;font-size:12.5px;letter-spacing:.02em;color:#0f172a;margin-bottom:10px}",
-      ".ev-brief-by{margin-left:auto;font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#0b5a54;background:#d9f0eb;padding:2px 8px;border-radius:20px}",
-      ".ev-bc{display:flex;gap:9px;align-items:flex-start;background:#fff;border:1px solid #eef2f7;border-left:4px solid #c4b5fd;border-radius:10px;padding:10px 11px;margin-bottom:7px;line-height:1.55;color:#0f172a}",
-      ".ev-bc:last-child{margin-bottom:0}.ev-bc-ic{flex:none;font-size:15px;line-height:1.4;color:#64748b}.ev-bc-ic svg{width:15px;height:15px;stroke:currentColor;stroke-width:1.9;fill:none;vertical-align:-.15em}.ev-bc-bd{flex:1;min-width:0}",
-      ".ev-bc--warn{border-left-color:#ef4444}.ev-bc--pitfall{border-left-color:#f97316}.ev-bc--pearl{border-left-color:#8b5cf6}.ev-bc--tip{border-left-color:#0ea5e9}.ev-bc--tx{border-left-color:#10b981}.ev-bc--ix{border-left-color:#3b82f6}",
-      ".ev-bc-tag{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:1px 7px;border-radius:20px;margin-right:7px}",
+      ".ev-brief{margin:0 0 16px}",
+      ".ev-brief-h{display:flex;align-items:baseline;justify-content:space-between;gap:8px;font-weight:650;font-size:15px;color:#0f172a;margin-bottom:6px}",
+      ".ev-brief-by,.ev-bt-l{font-variant:all-small-caps;letter-spacing:.04em;font-weight:600;font-size:13px;color:#5b6472}",
+      ".ev-bt{display:grid;grid-template-columns:78px minmax(0,1fr);margin:0;border-top:2px solid currentColor}",
+      ".ev-bt>*{margin:0;padding:10px 0;border-bottom:1px solid #e3e5eb;line-height:1.55}",
+      ".ev-bt-l{padding-top:11px;padding-right:10px}.ev-bt-l--now{color:#b3261e}",
       ".ev-tag--pitfall{background:#ffedd5;color:#9a3412}.ev-tag--tip{background:#e0f2fe;color:#075985}",
       ".ev-ul--danger li:before{background:#dc2626}.ev-ul--warn li:before{background:#ea580c}",
-      ".md-bug{color:#b91c1c;font-weight:700}",
-      ".md-resist{color:#b91c1c;font-weight:700}",
-      ".md-emerg{color:#c2410c;font-weight:700}",
-      ".md-ix{color:#1d4ed8;font-weight:700}",
-      ".md-drug{color:#047857;font-weight:700}",
-      ".md-action{color:#0b5a54;font-weight:700}",
-      ".md-abs{font-weight:700;color:#0f172a}",
-      ".md-key{font-weight:700;color:#1e293b}",
-      ".md-hi,.md-sig{font-weight:700;color:#7c3aed}",
+      // high-yield emphasis is weight, not colour (owner 2026-09-30: bold what should be eyeballed)
+      ".md-dose,.md-drug,.md-abs,.md-key,.md-sig,.md-hi,.md-action,.md-emerg,.md-resist{font-weight:700;color:inherit}",
+      ".md-ix{font-weight:600;color:inherit}",
+      ".md-bug{font-style:italic;font-weight:600;color:inherit}",
       ".ev-wrap[data-ev-src=idsa]>.ev-top{background:linear-gradient(180deg,#f6f5ff,#eef2ff)}.ev-wrap[data-ev-src=idsa] .ev-top-sub{color:#5b21b6}.ev-wrap[data-ev-src=idsa] .ev-top-ic{color:#5b21b6}",
       ".ev-wrap[data-ev-src=sanford]>.ev-top{background:linear-gradient(180deg,#f0fdf4,#ecfdf5)}.ev-wrap[data-ev-src=sanford] .ev-top-sub{color:#047857}",
       ".ev-rx-note{color:#94a3b8;font-size:.92em}",
@@ -3407,7 +3412,7 @@
       ".ev-sec-h{display:flex;align-items:center;gap:10px;width:100%;border:none;background:#fbfdfd;padding:12px 13px;cursor:pointer;text-align:left;min-height:48px;font:inherit}",
       ".ev-sec.danger .ev-sec-h{background:#fef4f4}",
       ".ev-sec-ic{font-size:15px;flex:none}.ev-sec-t{flex:1;font-weight:650;font-weight:600;color:#0f172a;font-size:13.5px}",
-      ".ev-wrap .ev-sec.ev-open>.ev-sec-h .ev-chev{transform:rotate(180deg)}",
+      ".ev-wrap .ev-sec.ev-open>.ev-sec-h .ev-chev{transform:rotate(90deg)}",
       ".ev-sec-p{display:grid;grid-template-rows:0fr;transition:grid-template-rows .26s ease}",
       ".ev-sec.ev-open>.ev-sec-p{grid-template-rows:1fr}",
       ".ev-sec-in{overflow:hidden;min-height:0}.ev-sec.ev-open>.ev-sec-p>.ev-sec-in{padding:4px 14px 13px}",
@@ -4232,26 +4237,30 @@
     var tx = (m && m.tx && m.tx.length) ? m.tx : ((r.mgmt && r.mgmt.length) ? r.mgmt : ((H && H.management && H.management.length) ? H.management : null));
     var ix = (m && m.ix && m.ix.length) ? m.ix : (r.inv && r.inv.length ? r.inv : ((H && H.additionalInvestigations) || []));
     var red = (r.red && r.red.length) ? r.red : ((H && H.redFlags) || []);
-    var html = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">‹ Back to differential</button></div>' +
+    // Same page language as the disease reader (owner, 2026-09-30): header bar, banner, serif sections,
+    // high-yield text through medFormat. Back returns to the disease page when that is where we came from.
+    el.className = "dx-mgmt dx-reader dx-mgmt-page";
+    var sec = function (title, body, cls) { return '<section class="dx-mp-sec' + (cls ? " " + cls : "") + '"><h3>' + title + '</h3>' + body + '</section>'; };
+    var li = function (x) { return '<li>' + medFormat(x) + '</li>'; };
+    var html = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">' + (r.back ? "‹ " + esc(r.backLabel || "Back") : "‹ Back to differential") + '</button>' +
+        '<div class="dx-reader-brand"><strong>Management</strong><span>' + esc(r.name) + '</span></div><span class="dx-reader-spacer" aria-hidden="true"></span></div>' +
       '<div class="dx-mgmt-body">' +
-        '<div class="dx-mgmt-badge">Working diagnosis · non-infective</div>' +
-        '<h2 class="dx-mgmt-name">' + esc(r.name) + '</h2>' +
-        (r.system ? '<div class="dx-mgmt-sys">' + esc(r.system) + '</div>' : '') +
-        (m && m.dx ? '<div class="dx-mgmt-sec">How to confirm</div><p>' + esc(m.dx) + '</p>'
-                   : (r.reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(r.reason) + '</p>' : '')) +
-        (tx ? '<div class="dx-mgmt-sec tx">' + rIco("pills") + ' Management / Treatment</div><ol class="dx-mgmt-tx">' + tx.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ol>'
-            : '<div class="dx-mgmt-sec">Management</div><p>Specialist-guided management — see the investigations and red flags below and consult full guidelines.</p>') +
+        '<section class="dx-reader-hero">' + kbBannerHTML() + '<h2 class="dx-mgmt-name">' + esc(r.name) + '</h2>' +
+          '<div class="dx-mgmt-sys">' + (r.system ? esc(r.system) + ' · ' : '') + 'Non-infective</div></section>' +
+        (m && m.dx ? sec("How to confirm", '<p>' + medFormat(m.dx) + '</p>') : (r.reason ? sec("Why this", '<p>' + medFormat(r.reason) + '</p>') : '')) +
+        sec("Management", tx ? '<ol class="dx-mgmt-tx">' + tx.map(li).join("") + '</ol>'
+            : '<p>Specialist-guided management. See the investigations and red flags below and consult full guidelines.</p>') +
         scoreChipsBlock(r) +
-        (ix && ix.length ? '<div class="dx-mgmt-sec">Key investigations</div><ul class="dx-mgmt-ul">' + ix.slice(0, 8).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '') +
-        (m && m.dispo ? '<div class="dx-mgmt-sec">Disposition</div><p>' + esc(m.dispo) + '</p>' : '') +
-        (red && red.length ? '<div class="dx-mgmt-sec red">Red flags</div><ul class="dx-mgmt-ul">' + red.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '') +
-        (m && m.src ? '<div class="dx-mgmt-src">Source: ' + esc(m.src) + '</div>' : '') +
+        (ix && ix.length ? sec("Key investigations", '<ul class="dx-mgmt-ul">' + ix.slice(0, 8).map(li).join("") + '</ul>') : '') +
+        (m && m.dispo ? sec("Disposition", '<p>' + medFormat(m.dispo) + '</p>') : '') +
+        (red && red.length ? sec("Red flags", '<ul class="dx-mgmt-ul">' + red.map(li).join("") + '</ul>', "danger") : '') +
+        (m && m.src ? '<p class="dx-mgmt-src">Source: ' + esc(m.src) + '</p>' : '') +
       '</div>';
     el.innerHTML = html;
     el.classList.add("on");
-    el.scrollTop = 0;
+    el.scrollTop = 0; var mb = el.querySelector(".dx-mgmt-body"); if (mb) mb.scrollTop = 0;
     var bk = el.querySelector("#dxMgmtBack");
-    if (bk) bk.addEventListener("click", function () { el.classList.remove("on"); });
+    if (bk) bk.addEventListener("click", function () { if (r.back) r.back(); else el.classList.remove("on"); });
   }
   function closeMgmt() { var el = root && root.querySelector("#dxMgmt"); if (el) el.classList.remove("on"); closeAsk(); }
 
@@ -4311,9 +4320,9 @@
     var hasBrief = !!(dm && dm.tx && dm.tx.length);
     var briefTx = hasBrief ? dm.tx : ((H && H.management && H.management.length) ? H.management : null);
     var mgmtHtml = (refInf && briefTx)
-      ? ('<div class="dx-mgmt-sec tx">' + rIco("pills") + ' Management / Treatment</div><ol class="dx-mgmt-tx">' + briefTx.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ol>'
-         + (dm && dm.ix && dm.ix.length ? '<div class="dx-mgmt-sec">Key investigations</div><ul class="dx-mgmt-ul">' + dm.ix.slice(0, 8).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '')
-         + (dm && dm.dispo ? '<div class="dx-mgmt-sec">Disposition</div><p>' + esc(dm.dispo) + '</p>' : '')
+      ? ('<div class="dx-mgmt-sec tx">Management</div><ol class="dx-mgmt-tx">' + briefTx.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ol>'
+         + (dm && dm.ix && dm.ix.length ? '<div class="dx-mgmt-sec">Key investigations</div><ul class="dx-mgmt-ul">' + dm.ix.slice(0, 8).map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ul>' : '')
+         + (dm && dm.dispo ? '<div class="dx-mgmt-sec">Disposition</div><p>' + medFormat(dm.dispo) + '</p>' : '')
          + (dm && dm.src ? '<div class="dx-mgmt-src">Source: ' + esc(dm.src) + '</div>' : ''))
       : "";
     var el = root.querySelector("#dxMgmt");
@@ -4325,16 +4334,15 @@
     el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">' + backLabel + '</button>' +
         '<div class="dx-reader-brand"><strong>Knowledge Library</strong><span>Clinical disease reference</span></div><span class="dx-reader-spacer" aria-hidden="true"></span></div>' +
       '<div class="dx-mgmt-body">' +
-        '<section class="dx-reader-hero"><img class="smd-kb-watermark" src="/android-chrome-192x192.png" alt="" aria-hidden="true"><div class="smd-kb-brand"><strong>StewardMD</strong><span>Knowledge Base</span></div>' +
-        '<div class="dx-mgmt-badge">Disease reference · ' + (inf ? "infective" : "non-infective") + '</div>' +
+        '<section class="dx-reader-hero">' + kbBannerHTML() +
         '<h2 class="dx-mgmt-name">' + esc(name) + '</h2>' +
-        (system ? '<div class="dx-mgmt-sys">' + esc(system) + '</div>' : '') + '</section>' +
+        '<div class="dx-mgmt-sys">' + (system ? esc(system) + ' · ' : '') + (inf ? "Infective" : "Non-infective") + '</div></section>' +
         (window.SMD_BULLETINS ? SMD_BULLETINS.html(id) : '') +   // signed practice updates (bulletins.js; flag smd_kb_bulletins, default off)
         '<div class="dx-reader-glance"><h3>At a glance</h3>' +
           (reason ? '<p>' + medFormat(reason) + '</p>' : '') +
           (H && H.redFlags && H.redFlags.length ? '<section class="dx-reader-alert"><h4>Red flags</h4>' + evList(H.redFlags, "danger") + '</section>' : '') +
-          (H && H.additionalInvestigations && H.additionalInvestigations.length ? '<details><summary>Investigations</summary>' + evList(H.additionalInvestigations) + '</details>' : '') +
-          (briefTx && briefTx.length ? '<details><summary>Management</summary><ul>' + briefTx.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join('') + '</ul></details>' : '') +
+          (H && H.additionalInvestigations && H.additionalInvestigations.length ? '<details><summary>Investigations' + DX_CHEV + '</summary>' + evList(H.additionalInvestigations) + '</details>' : '') +
+          (briefTx && briefTx.length ? '<details><summary>Management' + DX_CHEV + '</summary><ul>' + briefTx.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join('') + '</ul></details>' : '') +
         '</div><div class="dx-reader-content">' +
         (reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(reason) + '</p>' : '') +
         mgmtHtml +
@@ -4343,7 +4351,7 @@
         '</div>' +
       '</div>';
     var favourite = document.createElement("button"); favourite.type = "button"; favourite.className = "dx-reader-favourite";
-    function favouritePaint() { var saved = kbReadList("favourites").indexOf(id) >= 0; favourite.textContent = saved ? "★ Saved to favourites" : "☆ Add to favourites"; favourite.setAttribute("aria-pressed", String(saved)); }
+    function favouritePaint() { var saved = kbReadList("favourites").indexOf(id) >= 0; favourite.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg><span>' + (saved ? "Saved" : "Save") + '</span>'; favourite.setAttribute("aria-pressed", String(saved)); favourite.setAttribute("aria-label", saved ? "Saved to favourites" : "Save to favourites"); }
     favouritePaint();
     favourite.addEventListener("click", function () { var list = kbReadList("favourites"), saved = list.indexOf(id) >= 0; if (kbSaveList("favourites", saved ? list.filter(function (x) { return x !== id; }) : list.concat(id))) favouritePaint(); else favourite.textContent = "Could not save. Try again."; });
     el.querySelector(".dx-reader-hero").appendChild(favourite);
@@ -4406,7 +4414,7 @@
     if (sel) sel.addEventListener("click", function () {
       el.classList.remove("on");
       if (inf) selectDx(id);
-      else openMgmt({ id: id, name: name, system: system, inf: false, reason: reason, red: (H && H.redFlags) || [], inv: (H && H.additionalInvestigations) || [] });
+      else openMgmt({ id: id, name: name, system: system, inf: false, reason: reason, red: (H && H.redFlags) || [], inv: (H && H.additionalInvestigations) || [], back: function () { openDiseaseRef(id, opts); }, backLabel: "Disease" });
     });
   }
 
@@ -5290,10 +5298,20 @@
       window.SB.abgOrg = function () { var r = abgOrig.apply(this, arguments); try { kbPolishReference("antibiogram"); } catch (e) {} return r; };
     }
   }
+  // One banner for every Knowledge Library page: the logo mark beside the name (owner: keep the banner with logo).
+  function kbBannerHTML() {
+    return '<div class="smd-kb-banner"><img class="smd-kb-logo" src="/logo.png" alt="" width="34" height="34" decoding="async"><div class="smd-kb-brand"><strong>StewardMD</strong><span>Knowledge Base</span></div></div>';
+  }
+  window.SMD_KB_BANNER = kbBannerHTML;
+  // A search field with a drawn magnifier; the input keeps its own id/class so existing handlers still bind.
+  function kbSearchHTML(id, cls, label, placeholder, value) {
+    return '<label class="kblib-search-label" for="' + id + '">' + label + '</label><div class="kblib-searchbox"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>' +
+      '<input id="' + id + '" class="' + cls + '" type="search" enterkeyhint="search" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="' + placeholder + '"' + (value != null ? ' value="' + esc(value) + '"' : '') + '></div>';
+  }
   function kbPolishReference(tab) {
     var spec = {
       antibiogram: { kicker: "National resistance intelligence", title: "Antibiogram", copy: "Compare ICMR AMRSN susceptibility data by organism. Your local hospital antibiogram should take priority when available.", search: "Search antibiotics" },
-      aware: { kicker: "WHO stewardship framework", title: "AWaRe classification", copy: "Understand Access, Watch and Reserve groups at a glance, then review the antibiotics available in StewardMD.", search: "Search classes or antibiotics" },
+      aware: { kicker: "WHO stewardship framework", title: "AWaRe classification", copy: "The WHO stewardship framework. Understand Access, Watch and Reserve groups at a glance, then review the antibiotics available in StewardMD.", search: "Search classes or antibiotics" },
       guidelines: { kicker: "Trusted clinical sources", title: "Guidelines & references", copy: "Browse official national and international guidance in one focused clinical index. Confirm the current published version before use.", search: "Search guidelines or organisations" }
     }[tab];
     var body = document.getElementById("sbrefBody"); if (!body || !spec) return;
@@ -5307,8 +5325,8 @@
       else button.removeAttribute("aria-current");
     });
     var intro = document.createElement("div"); intro.className = "kblib-tool-intro";
-    intro.innerHTML = '<img class="smd-kb-watermark" src="/android-chrome-192x192.png" alt="" aria-hidden="true"><div class="smd-kb-brand"><strong>StewardMD</strong><span>Knowledge Base</span></div><span class="kblib-tool-kicker">' + spec.kicker + '</span><h1>' + spec.title + '</h1><p>' + spec.copy + '</p>' +
-      '<label for="kblibToolSearch">Search this collection</label><input id="kblibToolSearch" class="kblib-tool-search" type="search" autocomplete="off" placeholder="' + spec.search + '"><div id="kblibToolCount" class="kblib-tool-count" role="status"></div>';
+    intro.innerHTML = kbBannerHTML() + '<h1>' + spec.title + '</h1><p>' + spec.copy + '</p>' +
+      kbSearchHTML("kblibToolSearch", "kblib-tool-search", "Search this collection", spec.search, null) + '<div id="kblibToolCount" class="kblib-tool-count" role="status"></div>';
     tabs.insertAdjacentElement("afterend", intro);
     function paint() {
       var q = String(intro.querySelector("input").value || "").trim().toLowerCase();
@@ -5345,7 +5363,7 @@
     /* Discover renders its own <h1>Knowledge Library</h1> hero directly below the bar, so setting the
      * bar title here printed the same words twice on one screen. The tool tabs (Syndromes /
      * Antibiogram / AWaRe / Guidelines) have no hero, so they keep their bar title. */
-    try { var t = document.getElementById("sbrefTitle"); if (t) t.textContent = ""; } catch (e) {}
+    try { var t = document.getElementById("sbrefTitle"); if (t) t.textContent = "Knowledge Library"; } catch (e) {}
     var branches = [], seen = {}, entries = kbBuildIndex();
     entries.forEach(function (d) { if (!seen[d.branch]) { seen[d.branch] = 0; branches.push(d.branch); } seen[d.branch]++; });
     branches.sort();
@@ -5353,16 +5371,17 @@
     var featured = ["Cardiology", "Neurology", "Respiratory", "GI / Hepatology"].filter(function (b) { return !!seen[b]; });
     var tile = function (b) { return f(_libState.branch === b, "br", b, '<span class="kblib-tile-icon" aria-hidden="true">' + rIco("book") + '</span><span>' + esc(b) + '</span><small>' + seen[b].toLocaleString() + ' entries</small>'); };
     sec.innerHTML =
-      '<header class="kblib-intro"><img class="smd-kb-watermark" src="/android-chrome-192x192.png" alt="" aria-hidden="true"><div class="smd-kb-brand"><strong>StewardMD</strong><span>Knowledge Base</span></div><span class="kblib-kicker">DISCOVER</span><h1>Find any disease</h1><p><strong>' + (entries.length >= 4800 ? '4,800+ diseases' : entries.length.toLocaleString() + ' disease entries') + '</strong> across ' + branches.length + ' medical branches.</p></header>' +
-      '<label class="kblib-search-label" for="kblibQ">Search the full library</label><input id="kblibQ" class="kblib-search" type="search" placeholder="Disease, syndrome or clinical detail" autocomplete="off" value="' + esc(_libState.q) + '">' +
+      '<header class="kblib-intro">' + kbBannerHTML() + '<h1>Find any disease</h1><p><strong>' + (entries.length >= 4800 ? '4,800+ diseases' : entries.length.toLocaleString() + ' disease entries') + '</strong> across ' + branches.length + ' medical branches.</p></header>' +
+      kbSearchHTML("kblibQ", "kblib-search", "Search the library", "Disease, symptom or clinical detail", _libState.q) +
+      '<div class="kblib-try" id="kblibTry"' + (_libState.q ? ' hidden' : '') + '><span>Try</span>' + ["Meningitis", "Sepsis", "Dengue", "DKA", "Heart failure"].map(function (q) { return '<button type="button" data-kbtry="' + q + '">' + q + '</button>'; }).join("") + '</div>' +
       kbPersonalHTML(entries) +
-      '<div class="kblib-discovery" id="kblibDiscovery"><div class="kblib-feature"><img class="smd-kb-watermark" src="/android-chrome-192x192.png" alt="" aria-hidden="true"><div class="smd-kb-brand"><strong>StewardMD</strong><span>Knowledge Base</span></div><span class="kblib-kicker">CLINICAL COLLECTIONS</span><h2>A world of medicine.<br>One library.</h2><p>Diseases · Syndromes · References</p></div>' +
+      '<div class="kblib-discovery" id="kblibDiscovery">' +
       '<div class="kblib-section-heading"><h2>Explore a branch</h2><span>' + branches.length + ' branches</span></div><div class="kblib-tiles">' + featured.map(tile).join("") + '</div>' +
       '<details class="kblib-all-branches"><summary>See all medical branches</summary><div class="kblib-tiles">' + branches.filter(function (b) { return featured.indexOf(b) < 0; }).map(tile).join("") + '</div></details></div>' +
       '<div class="kblib-section-heading"><h2 id="kblibResultsTitle">Disease index</h2><button type="button" id="kblibClear" class="kblib-clear">Clear filters</button></div>' +
       '<details class="kblib-refine"><summary>Refine by type, source or branch</summary><div class="kblib-filters">' +
         '<div class="kblib-grp"><span class="kblib-lbl">Type</span>' +
-          f(_libState.cls === "all", "cls", "all", "All") + f(_libState.cls === "inf", "cls", "inf", '<span class="kbdot" style="color:#dc2626">●</span> Infective') + f(_libState.cls === "ni", "cls", "ni", '<span class="kbdot" style="color:#16a34a">●</span> Non-infective') + '</div>' +
+          f(_libState.cls === "all", "cls", "all", "All") + f(_libState.cls === "inf", "cls", "inf", 'Infective') + f(_libState.cls === "ni", "cls", "ni", 'Non-infective') + '</div>' +
         '<div class="kblib-grp"><span class="kblib-lbl">Source</span>' +
           f(_libState.src === "all", "src", "all", "All") + f(_libState.src === "dx", "src", "dx", "Diagnostic") + f(_libState.src === "ref", "src", "ref", "Reference") + '</div></div>' +
       '<div class="kblib-grp" style="margin:8px 0 4px"><span class="kblib-lbl">System</span>' +
@@ -5439,6 +5458,13 @@
     var res = scored.map(function (x) { return x.d; });
     var shown = Math.min(_libState.limit, res.length);
     var cnt = document.getElementById("kblibCount"); if (cnt) cnt.textContent = 'Showing ' + shown + ' of ' + res.length.toLocaleString() + ' entries';
+    // search mode: hero, suggestions, saved list and filters step aside so results sit right under
+    // the (sticky) search box, above the on-screen keyboard (phone and iPad)
+    var disc = grid.closest(".kblib-discover");
+    if (disc && disc.classList.contains("kblib-searching") !== searching) {
+      disc.classList.toggle("kblib-searching", searching);
+      var sb = document.getElementById("sbrefBody"); if (sb) sb.scrollTop = 0;
+    }
     var discovery = document.getElementById("kblibDiscovery"); if (discovery) discovery.hidden = searching || _libState.branch !== "all" || _libState.cls !== "all" || _libState.src !== "all";
     var title = document.getElementById("kblibResultsTitle"); if (title) title.textContent = searching ? "Search results" : _libState.branch !== "all" ? _libState.branch : "Disease index";
     var clear = document.getElementById("kblibClear"); if (clear) clear.hidden = !(_libState.q || _libState.branch !== "all" || _libState.cls !== "all" || _libState.src !== "all");
@@ -5452,15 +5478,28 @@
         '</button>';
     }).join("") || '<div style="padding:30px;text-align:center;color:var(--slate-soft)">No matches.</div>';
   }
+  // Tool tabs (Antibiogram, AWaRe, Guidelines, Protocols): typing scrolls the search box to the top of
+  // the panel, where it sticks, so the filtered list shows above the on-screen keyboard.
+  function kbLiftSearch(inp) {
+    requestAnimationFrame(function () {
+      var body = document.getElementById("sbrefBody"), box = inp.closest(".kblib-searchbox");
+      if (!body || !box) return;
+      var y = box.getBoundingClientRect().top - body.getBoundingClientRect().top + body.scrollTop - 8;
+      if (body.scrollTop < y) body.scrollTop = y;
+    });
+  }
   // ONE delegated listener for the Knowledge Library — survives modal re-renders.
   function kbWireLibrary() {
     if (window.__smdKbLibWired) return; window.__smdKbLibWired = true;
     document.addEventListener("input", function (e) {
-      if (e.target && e.target.id === "kblibQ") { _libState.q = String(e.target.value || "").trim(); _libState.limit = 40; kbPaintLibrary(); }
+      if (e.target && e.target.id === "kblibQ") { _libState.q = String(e.target.value || "").trim(); _libState.limit = 40; kbPaintLibrary(); var tr = document.getElementById("kblibTry"); if (tr) tr.hidden = !!_libState.q; }
+      else if (e.target && e.target.closest && e.target.closest("#sbrefBody .kblib-searchbox")) kbLiftSearch(e.target);
     }, false);
     document.addEventListener("click", function (e) {
       var t = e.target; if (!t || !t.closest) return;
       if (t.closest("#kblibMore")) { _libState.limit += 40; kbPaintLibrary(); return; }
+      var tryB = t.closest("[data-kbtry]");
+      if (tryB) { var qi = document.getElementById("kblibQ"); if (qi) { qi.value = tryB.getAttribute("data-kbtry"); qi.dispatchEvent(new Event("input", { bubbles: true })); qi.focus(); } return; }
       if (t.closest("#kblibClear")) { _libState = { q: "", cls: "all", src: "all", branch: "all", limit: 40 }; kbRenderLibrary(); return; }
       var fb = t.closest(".kblib-f");
       if (fb) {

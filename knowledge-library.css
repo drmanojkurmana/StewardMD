@@ -98,14 +98,169 @@ body.dark #sbrefBody.kblib-tool-page { --kl-accent:#bebaff; }
 #sbrefBody.kblib-tool-guidelines .sbref-gl .gl-go { color:var(--kl-accent); }
 #sbrefBody.kblib-tool-page :is(button,input,select,a):focus-visible { outline:3px solid var(--kl-accent); outline-offset:3px; }
 @media(max-width:600px) { .kblib-tool-intro { padding-top:22px; } #sbrefBody.kblib-tool-page .sbref-sec { padding:15px; border-radius:16px; } #sbrefBody.kblib-tool-guidelines .sbref-sec { padding:7px 0 0; } }
-@media(max-width:360px) { #sbrefBody.kblib-tool-page { padding-inline:14px; } #sbrefBody.kblib-tool-page .sbref-tab { font-size:10.5px; } }
+@media(max-width:360px) { #sbrefBody.kblib-tool-page { padding-inline:14px; } }
 
-/* Option A: shared Knowledge Base banner identity. */
-#dxOverlay .dx-reader-hero, #sbrefOverlay :is(.kblib-intro,.kblib-feature,.kblib-tool-intro) { position:relative; isolation:isolate; overflow:hidden; }
-#sbrefOverlay :is(.kblib-intro,.kblib-tool-intro) { padding:22px 18px; margin:18px 0; border:1px solid var(--line,#e1e2ec); border-radius:18px; background:linear-gradient(135deg,var(--panel,#fff),color-mix(in srgb,var(--panel,#fff) 90%,#5954b2)); }
-#dxOverlay .smd-kb-brand, #sbrefOverlay .smd-kb-brand { position:relative; z-index:1; margin-bottom:22px; text-align:left; }
-.smd-kb-brand strong { display:block; color:var(--ink,#202737); font:650 13px/1.4 var(--sans,system-ui); margin-bottom:5px; }
-.smd-kb-brand span { display:block; color:var(--reader-accent,var(--kl-accent,#5954b2)); font:650 11px/1.4 var(--sans,system-ui); letter-spacing:.09em; text-transform:uppercase; }
-#dxOverlay .smd-kb-watermark, #sbrefOverlay .smd-kb-watermark { position:absolute; z-index:-1; width:180px; height:180px; max-width:none; right:-18px; bottom:-23px; object-fit:contain; opacity:.11; mix-blend-mode:multiply; pointer-events:none; user-select:none; }
-body.dark #dxOverlay .smd-kb-watermark, body.dark #sbrefOverlay .smd-kb-watermark { filter:invert(1) grayscale(1); mix-blend-mode:screen; }
-@media(max-width:360px) { #dxOverlay .smd-kb-watermark, #sbrefOverlay .smd-kb-watermark { width:150px; height:150px; } }
+/* Page intro: a flat hero on the page itself (de-slop 2026-09-30: no card, gradient or watermark). */
+#sbrefOverlay :is(.kblib-intro,.kblib-tool-intro) { padding:20px 0 8px; margin:0 0 8px; border:0; border-radius:0; background:none; }
+.smd-kb-brand { text-align:left; }
+
+/* ============================================================================
+ * Disease reader, de-slopped (owner pick 2026-09-29: page 1 = "Textbook", Know more = "Handbook").
+ * Page 1: serif disease name, hairlines, no cards, no watermark or kickers; red only for danger.
+ * Know more: handbook table, narrow small-caps label column, one 2px rule; no inline term colours.
+ * Two ids beat reasoning-workspace.css (#dxOverlay .dx-reader ...) without !important.
+ * ========================================================================== */
+#dxOverlay #dxMgmt.dx-reader { --rd-serif: ui-serif, "New York", "Source Serif 4", Georgia, "Noto Serif", serif; --rd-cond: "Avenir Next Condensed", "Roboto Condensed", "Arial Narrow", var(--sans, system-ui); --rd-mut: var(--slate-soft, #5b6472); --rd-line: var(--line, #e3e5eb); --rd-ink: var(--ink, #1d1d22); --rd-red: #b3261e; background: var(--panel, #fff); }
+body.dark #dxOverlay #dxMgmt.dx-reader { --rd-red: #ff8a80; }
+#dxOverlay #dxMgmt.dx-reader .dx-mgmt-body { display: grid; gap: 28px; align-content: start; }
+#dxOverlay #dxMgmt.dx-reader .dx-mgmt-body > * { margin: 0; }
+/* hero */
+#dxOverlay #dxMgmt.dx-reader .dx-reader-hero { padding: 0; border: 0; border-radius: 0; background: none; overflow: visible; }
+#dxOverlay #dxMgmt.dx-reader .dx-mgmt-name { margin: 0; max-width: 22ch; font: 600 34px/1.1 var(--rd-serif); letter-spacing: -0.02em; color: var(--rd-ink); text-wrap: balance; }
+#dxOverlay #dxMgmt.dx-reader .dx-mgmt-sys { margin: 8px 0 0; font-size: 15px; color: var(--rd-mut); }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-favourite { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; min-height: 44px; padding: 0 14px; border: 1px solid var(--rd-line); border-radius: 10px; background: transparent; color: var(--reader-accent); font: 500 15px var(--sans, system-ui); transition: transform 140ms ease-out, background-color 140ms ease-out; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-favourite svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-favourite[aria-pressed="true"] { background: color-mix(in srgb, var(--reader-accent) 10%, transparent); }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-favourite[aria-pressed="true"] svg { fill: currentColor; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-favourite:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { #dxOverlay #dxMgmt.dx-reader .dx-reader-favourite:hover { background: color-mix(in srgb, var(--reader-accent) 7%, transparent); } }
+#dxOverlay #dxMgmt.dx-reader :is(.smd-bls-h, .dx-reader-glance h3, .smd-bl-h) { text-wrap: balance; }
+#dxOverlay #dxMgmt.dx-reader :is(.dx-reader-favourite, .dx-back, summary, .ev-top, .ev-sec-h):focus-visible { outline: 2px solid var(--reader-accent); outline-offset: 2px; }
+/* practice updates (bulletins.js) take the page-1 section heading */
+#dxOverlay #dxMgmt.dx-reader .smd-bls-h { margin: 0 0 10px; font: 600 21px/1.25 var(--rd-serif); letter-spacing: -0.01em; text-transform: none; color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader .smd-bl-h { font-family: var(--rd-serif); font-size: 18px; }
+#dxOverlay #dxMgmt.dx-reader :is(.smd-bl-sig, .smd-bl-foot) { font-family: var(--rd-serif); font-style: italic; font-size: 14px; }
+#dxOverlay #dxMgmt.dx-reader .smd-bl-sig { color: var(--rd-mut); }
+#dxOverlay #dxMgmt.dx-reader .smd-bl-row > b { font-weight: 400; color: var(--rd-mut); }
+/* at a glance */
+#dxOverlay #dxMgmt.dx-reader .dx-reader-glance { padding: 0; border: 0; border-radius: 0; background: none; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-glance h3 { margin: 0 0 10px; font: 600 21px/1.25 var(--rd-serif); letter-spacing: -0.01em; color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-glance > p { margin: 0 0 12px; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-alert { margin: 0 0 12px; padding: 0; border: 0; border-radius: 0; background: none; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-alert h4 { margin: 0 0 2px; font: 600 15px var(--sans, system-ui); color: var(--rd-red); }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-alert ul { margin: 0; padding: 0; list-style: none; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-alert li { margin: 0; padding: 10px 0; border-bottom: 1px solid var(--rd-line); font-size: 15px; font-weight: 500; line-height: 1.5; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-alert li:last-child { border-bottom: 0; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-alert li::before { display: none; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-glance details { border-top: 1px solid var(--rd-line); }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-glance details:last-child { border-bottom: 1px solid var(--rd-line); }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-glance summary { display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: 0; list-style: none; font: 600 16px var(--sans, system-ui); }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-glance summary::-webkit-details-marker { display: none; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-glance summary .dx-chev { color: var(--rd-mut); transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1); }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-glance details[open] > summary .dx-chev { transform: rotate(90deg); }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-glance details ul { margin: 0 0 12px; padding-left: 18px; }
+/* Know more: handbook */
+#dxOverlay #dxMgmt.dx-reader .ev-wrap { margin: 0; border: 0; border-radius: 0; background: none; box-shadow: none; overflow: visible; }
+#dxOverlay #dxMgmt.dx-reader .ev-top { min-height: 48px; padding: 0; background: none; border-top: 2px solid var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader :is(.ev-top-ic, .ev-top-sub, .ev-sec-ic, .ev-tick, .ev-pearl-ic) { display: none; }
+#dxOverlay #dxMgmt.dx-reader .ev-top-title { font: 650 19px/1.3 var(--sans, system-ui); letter-spacing: -0.01em; color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader :is(.ev-top, .ev-sec-h) .ev-chev { color: var(--rd-mut); }
+#dxOverlay #dxMgmt.dx-reader .ev-body { padding: 4px 0 0; }
+#dxOverlay #dxMgmt.dx-reader .ev-brief { margin: 0 0 20px; padding: 0; border: 0; background: none; }
+#dxOverlay #dxMgmt.dx-reader .ev-brief-h { font-size: 15px; font-weight: 600; color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader :is(.ev-brief-by, .ev-bt-l, .ev-subh, .ev-pearls-h, .ev-pearl .ev-pearl-tag) { font-family: var(--rd-cond); font-variant: all-small-caps; text-transform: none; letter-spacing: 0.04em; font-weight: 600; font-size: 14px; color: var(--rd-mut); background: none; padding-inline: 0; border-radius: 0; }
+#dxOverlay #dxMgmt.dx-reader .ev-bt { border-top-color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader .ev-bt > :nth-last-child(-n+2) { border-bottom: 0; }
+#dxOverlay #dxMgmt.dx-reader .ev-ul li::before { background: var(--rd-mut); }
+#dxOverlay #dxMgmt.dx-reader .ev-bt > * { border-bottom-color: var(--rd-line); color: var(--rd-ink); font-size: 15px; }
+#dxOverlay #dxMgmt.dx-reader .ev-bt > .ev-bt-l { color: var(--rd-mut); font-size: 14px; }
+#dxOverlay #dxMgmt.dx-reader .ev-bt > .ev-bt-l--now, #dxOverlay #dxMgmt.dx-reader .ev-pearl--warn .ev-pearl-tag { color: var(--rd-red); }
+#dxOverlay #dxMgmt.dx-reader .ev-subh { margin: 16px 0 4px; padding-top: 10px; border-top: 1px solid var(--rd-line); }
+#dxOverlay #dxMgmt.dx-reader .ev-pearls-h { border-bottom-color: var(--rd-line); }
+#dxOverlay #dxMgmt.dx-reader .ev-pearl { padding: 10px 0; border-bottom-color: var(--rd-line); }
+#dxOverlay #dxMgmt.dx-reader .ev-sec { margin: 0; border: 0; border-top: 1px solid var(--rd-line); border-radius: 0; background: none; }
+#dxOverlay #dxMgmt.dx-reader .ev-sec-h, #dxOverlay #dxMgmt.dx-reader .ev-sec.danger .ev-sec-h { min-height: 48px; padding: 0; background: none; }
+#dxOverlay #dxMgmt.dx-reader .ev-sec.danger .ev-sec-t { color: var(--rd-red); }
+#dxOverlay #dxMgmt.dx-reader .ev-sec-t { font-size: 15px; font-weight: 600; }
+#dxOverlay #dxMgmt.dx-reader .ev-sec.ev-open > .ev-sec-p > .ev-sec-in { padding: 0 0 12px; }
+#dxOverlay #dxMgmt.dx-reader .ev-sec-in p.ev-lead { background: none; border: 0; border-radius: 0; padding: 0; font-weight: 600; color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader :is(.ev-ul li, .ev-sec-in p, .ev-pearl-bd) { color: var(--rd-ink); font-size: 15px; }
+/* high-yield points are bold ink, never colour (owner 2026-09-30): doses, drugs, thresholds, pitfalls,
+ * key clinical signs. Tests are medium weight; organisms are italic, as in print. */
+#dxOverlay #dxMgmt.dx-reader [class^="md-"]:not(.md-cite) { color: inherit; font-weight: 700; }
+#dxOverlay #dxMgmt.dx-reader .md-ix { font-weight: 600; }
+#dxOverlay #dxMgmt.dx-reader .md-bug { font-style: italic; font-weight: 600; }
+@media (max-width: 420px) {
+  #dxOverlay #dxMgmt.dx-reader .dx-mgmt-name { font-size: 30px; }
+  #dxOverlay #dxMgmt.dx-reader .dx-mgmt-body { gap: 24px; }
+}
+@media (prefers-reduced-motion: reduce) { #dxOverlay #dxMgmt.dx-reader :is(.dx-chev, .dx-reader-favourite) { transition: none; } }
+
+/* ============================================================================
+ * Whole Knowledge Library module, de-slopped (owner 2026-09-30): one banner with the logo,
+ * a friendly search field, serif page titles, hairline sections instead of cards, no kickers,
+ * no stripes. Reader and management page share the reader rules above.
+ * ========================================================================== */
+/* banner: the logo mark beside the name, on every library page and the disease reader */
+.smd-kb-banner { display: flex; align-items: center; gap: 10px; margin: 0 0 18px; }
+.smd-kb-logo { width: 34px; height: 34px; flex: none; object-fit: contain; }
+body.dark .smd-kb-logo { filter: brightness(1.9) saturate(.85); }
+.smd-kb-banner .smd-kb-brand, #dxOverlay .smd-kb-banner .smd-kb-brand, #sbrefOverlay .smd-kb-banner .smd-kb-brand { margin: 0; }
+.smd-kb-banner .smd-kb-brand strong { display: block; margin: 0; font: 650 16px/1.2 var(--sans, system-ui); letter-spacing: -.01em; color: var(--ink); }
+.smd-kb-banner .smd-kb-brand span { display: block; margin: 1px 0 0; font: 500 13px/1.3 var(--sans, system-ui); letter-spacing: 0; text-transform: none; color: var(--slate-soft, #646b77); }
+:is(.kblib-intro, .kblib-tool-intro) .smd-kb-watermark, .kblib-kicker { display: none; }
+.kbp-hero .kblib-tool-kicker { font: 500 14px var(--sans); letter-spacing: 0; text-transform: none; color: var(--slate-soft); }
+/* page titles */
+.kblib-discover .kblib-intro h1, .kblib-tool-intro h1 { margin: 4px 0 8px; font: 600 clamp(30px, 6vw, 38px)/1.1 ui-serif, "New York", "Source Serif 4", Georgia, "Noto Serif", serif; letter-spacing: -.02em; color: var(--ink); text-wrap: balance; }
+.kblib-discover .kblib-intro p, .kblib-tool-intro p { font-size: 15px; line-height: 1.55; }
+/* search: a big, friendly field with a drawn magnifier */
+.kblib-discover .kblib-search-label, .kblib-tool-intro label, .kblib-tool-intro .kblib-search-label { display: block; margin: 0 0 8px; font: 600 15px var(--sans); color: var(--ink); }
+.kblib-searchbox { position: relative; }
+.kblib-searchbox svg { position: absolute; left: 15px; top: 50%; width: 20px; height: 20px; transform: translateY(-50%); fill: none; stroke: var(--slate-soft, #646b77); stroke-width: 2.2; stroke-linecap: round; pointer-events: none; }
+.kblib-searchbox :is(.kblib-search, .kblib-tool-search) { width: 100%; min-height: 54px; padding: 12px 14px 12px 46px; border-radius: 14px; font-size: 17px; transition: border-color 150ms ease-out, box-shadow 150ms ease-out; }
+.kblib-searchbox :is(.kblib-search, .kblib-tool-search)::placeholder { color: var(--slate-soft, #646b77); opacity: 1; }
+#sbrefOverlay .kblib-searchbox :is(.kblib-search, .kblib-tool-search):focus { outline: none; border-color: var(--kl-accent, #5956a5) !important; box-shadow: 0 0 0 4px color-mix(in srgb, var(--kl-accent, #5956a5) 16%, transparent) !important; }
+.kblib-try { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 12px 0 4px; }
+.kblib-try > span { font-size: 14px; color: var(--slate-soft, #646b77); margin-right: 2px; }
+.kblib-try button { min-height: 40px; padding: 0 14px; border: 1px solid var(--kl-line, var(--line)); border-radius: 999px; background: transparent; color: var(--ink); font: 500 14px var(--sans); cursor: pointer; transition: background-color 140ms ease-out, transform 140ms ease-out; }
+.kblib-try button:active { transform: scale(.97); }
+@media (hover: hover) and (pointer: fine) { .kblib-try button:hover { background: color-mix(in srgb, var(--kl-accent, #5956a5) 8%, transparent); } }
+/* tabs: readable labels that scroll sideways instead of shrinking (:has() written out; it may not nest in :is()) */
+#sbrefOverlay #sbrefBody:has(.kblib-discover) .sbref-tabs, #sbrefOverlay #sbrefBody.kblib-tool-page .sbref-tabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+#sbrefOverlay #sbrefBody:has(.kblib-discover) .sbref-tabs::-webkit-scrollbar, #sbrefOverlay #sbrefBody.kblib-tool-page .sbref-tabs::-webkit-scrollbar { display: none; }
+#sbrefOverlay #sbrefBody:has(.kblib-discover) .sbref-tab, #sbrefOverlay #sbrefBody.kblib-tool-page .sbref-tab { flex: 1 0 auto; min-width: auto; min-height: 44px; padding: 0 14px !important; font: 500 14px var(--sans); white-space: nowrap; }
+#sbrefOverlay #sbrefBody:has(.kblib-discover) .sbref-tab.active, #sbrefOverlay #sbrefBody.kblib-tool-page .sbref-tab.active { color: var(--ink); }
+/* sections: hairlines, serif headings, no cards */
+.kblib-discover :is(.kblib-personal, .kblib-compare), #sbrefBody.kblib-tool-page :is(.kblib-compare, .sbref-sec) { margin: 0; padding: 16px 0; border: 0; border-top: 1px solid var(--kl-line, var(--line)); border-radius: 0; background: none; }
+.kblib-discover :is(.kblib-personal, .kblib-compare) h2, .kblib-discover .kblib-section-heading h2, #sbrefBody.kblib-tool-page .kblib-compare h2 { font: 600 21px/1.25 ui-serif, "New York", "Source Serif 4", Georgia, serif; letter-spacing: -.01em; }
+.kblib-discover .kblib-personal small, .kblib-discover .kblib-personal p, #sbrefBody.kblib-tool-page .kblib-compare :is(p, small) { font-size: 14px; }
+.kblib-discover .kblib-tile-icon { display: none; }
+.kblib-discover .kblib-tiles .kblib-f { min-height: 84px; justify-content: space-between; border-radius: 14px; font-size: 16px; }
+.kblib-discover .kblib-tiles small { font-size: 13px; }
+.kblib-discover .kblib-grid { border: 0; border-radius: 0; border-top: 1px solid var(--kl-line, var(--line)); }
+.kblib-discover .kblib-row { padding: 14px 0; background: none; }
+.kblib-discover .kblib-eye, .kblib-discover .kblib-row.inf .kblib-eye { font: 600 13px var(--sans); letter-spacing: .02em; text-transform: none; color: var(--slate-soft); }
+.kblib-discover summary, .kblib-discover .kblib-clear { font-size: 15px; }
+/* collection pages */
+#sbrefBody.kblib-tool-guidelines .sbref-sec > div:first-child, #sbrefBody.kblib-tool-antibiogram .sbref-sec > div:first-child { padding: 0 0 8px !important; font: 600 15px/1.4 "Avenir Next Condensed", "Roboto Condensed", "Arial Narrow", var(--sans) !important; font-variant: all-small-caps; letter-spacing: .04em !important; text-transform: none !important; }
+/* list rows, not cards (beats home.js body.ui-v2 .sbref-row/.sbref-gl !important) */
+#sbrefOverlay #sbrefBody.kblib-tool-page :is(.sbref-gl, .sbref-row) { margin: 0 !important; padding: 12px 0 !important; border: 0 !important; border-top: 1px solid var(--kl-line) !important; border-radius: 0 !important; background: none !important; box-shadow: none !important; }
+#sbrefBody.kblib-tool-guidelines .sbref-gl .gl-n { font-size: 15px; font-weight: 600; }
+#sbrefBody.kblib-tool-aware .aware-card { padding: 16px 0 !important; border: 0 !important; border-top: 1px solid var(--kl-line) !important; border-radius: 0 !important; background: none !important; }
+#sbrefBody.kblib-tool-aware .aware-card::before { display: none; }
+#sbrefBody.kblib-tool-aware .aware-card h4 { font: 600 22px/1.2 ui-serif, "New York", "Source Serif 4", Georgia, serif !important; }
+#sbrefBody.kblib-tool-aware .aware-card > div:not(.ex) { font-size: 15px !important; }
+#sbrefBody.kblib-tool-aware .aware-card .ex { font-size: 14px; }
+.kblib-tool-count { font-size: 14px; }
+/* management page: the reader's sections */
+#dxOverlay #dxMgmt.dx-mgmt-page .dx-mp-sec { border-top: 1px solid var(--rd-line); padding-top: 14px; }
+#dxOverlay #dxMgmt.dx-mgmt-page .dx-mp-sec h3 { margin: 0 0 8px; font: 600 21px/1.25 var(--rd-serif); letter-spacing: -.01em; color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-mgmt-page .dx-mp-sec.danger h3 { color: var(--rd-red); }
+#dxOverlay #dxMgmt.dx-reader :is(.dx-mgmt-tx, .dx-mgmt-ul) { margin: 0; padding-left: 22px; }
+#dxOverlay #dxMgmt.dx-reader :is(.dx-mgmt-tx, .dx-mgmt-ul) li { margin: 0; padding: 6px 0; font: 400 16px/1.55 var(--sans); color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader .dx-mgmt-tx li::marker { color: var(--rd-mut); font-weight: 500; font-variant-numeric: tabular-nums; }
+#dxOverlay #dxMgmt.dx-reader .dx-mgmt-sec { margin: 22px 0 8px; font: 600 21px/1.25 var(--rd-serif); letter-spacing: -.01em; text-transform: none; color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader .dx-mgmt-src { font-size: 13px; color: var(--rd-mut); }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-hero .smd-kb-banner { margin-bottom: 16px; }
+@media (prefers-reduced-motion: reduce) { .kblib-try button, .kblib-searchbox :is(.kblib-search, .kblib-tool-search) { transition: none; } }
+/* live search (2026-09-30): the search box sticks to the top of the panel and results scroll under it;
+   while it has focus the list gets room to scroll up above the on-screen keyboard (phone and iPad) */
+#sbrefOverlay #sbrefBody .kblib-searchbox { position: sticky; top: 0; z-index: 2; margin: 0 -6px; padding: 6px; background: var(--kl-sticky, var(--paper, #f5f5f7)); }
+html[data-appearance] #sbrefOverlay #sbrefBody .kblib-searchbox { --kl-sticky: var(--panel, #fff); }
+#sbrefOverlay #sbrefBody:has(.kblib-searchbox input:focus)::after { content: ""; display: block; height: 60vh; }
+.kblib-discover.kblib-searching :is(.kblib-intro, .kblib-try, .kblib-personal, .kblib-refine, .kblib-search-label) { display: none; }
+/* iPad and wider: the panel fills the screen (no floating 900px column); content keeps a reading width */
+#sbrefOverlay:has(.kblib-discover) .sbref-shell, #sbrefOverlay:has(.kblib-tool-page) .sbref-shell { max-width: none; }
+#sbrefOverlay:has(.kblib-discover) .sbref-top, #sbrefOverlay:has(.kblib-tool-page) .sbref-top { padding-inline: max(18px, calc((100% - 800px) / 2)); }
+#sbrefOverlay #sbrefBody:has(.kblib-discover), #sbrefOverlay #sbrefBody.kblib-tool-page { max-width: 840px; min-width: 0; }
+.kbp-searching .kbp-status-note { display: none; }

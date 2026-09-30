@@ -129,7 +129,8 @@
     { id: "surgxdraft", title: "SURGX draft content", sub: "Show surgical content that is not yet clinician-approved. Turn OFF before any non-tester release", def: true, key: "smd_surgx_draft" },
     { id: "whisper", title: "Clinical Dictation (Beta)", sub: "On-device Whisper voice→text · native app only", def: false, key: "smd_whisper_clinical_dictation" },
     { id: "oncoprotolib", title: "Oncology Protocol Library (Beta)", sub: "Draft standard protocol library in oncology workbench", def: true, key: "smd_onco_protolib" },
-    { id: "maikperf", title: "Show AI response time", sub: "Diagnostics under each MaiK answer", def: false, key: "smd_maik_perf" }
+    { id: "maikperf", title: "Show AI response time", sub: "Diagnostics under each MaiK answer", def: false, key: "smd_maik_perf" },
+    { id: "neo", title: "Neonatal layer (Draft)", sub: "NICU tools, AI-drafted, awaiting neonatologist review · reload to apply", def: false, key: "smd_neo" }
   ];
 
   var TOGGLES = ADV_TOGGLES.concat(EXP_TOGGLES);
@@ -611,6 +612,11 @@
         toggle({ id: "clinixtutor", title: "MaiK Examiner", sub: "AI review inside CliniX Viva, only when free keyword grade cannot judge", def: true, key: "smd_clinix_tutor" }) +
         toggle({ id: "surgx", title: "SURGX · Surgical Intelligence", sub: "Notes, protocols, procedures, evidence, cases · reload to apply", def: true, key: "smd_surgx" }) +
         toggle({ id: "surgxdraft", title: "SURGX draft content", sub: "Show surgical content that is not yet clinician-approved", def: true, key: "smd_surgx_draft" }) +
+      '</div>' +
+
+      '<div class="sbr-sec">Neonatal (Draft)</div>' +
+      '<div class="sbr-card">' +
+        toggle({ id: "neo", title: "Neonatal layer (Draft)", sub: "NICU dosing, infusions, fluids, growth, bilirubin, scores. AI-drafted from cited sources, awaiting neonatologist review · reload to apply", def: false, key: "smd_neo" }) +
       '</div>' +
 
       '<div class="sbr-sec">Voice &amp; Protocols</div>' +

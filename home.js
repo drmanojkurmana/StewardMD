@@ -1054,6 +1054,8 @@
     speckit: function () { if (window.SMD_KITS && SMD_KITS.open) SMD_KITS.open(); else toast("Specialty kits loading…"); },
     icdsearch: function () { if (window.SMD_ICD) SMD_ICD.open(); },
     dosecalc: function () { if (window.SMD_DOSECALC) SMD_DOSECALC.open({ source: "Drugs" }); else toast("Dose calculator loading…"); },
+    // Neonatal hub (neo-hub.js), flag smd_neo DEFAULT OFF.
+    neo: function () { if (window.SMD_NEO_HUB) SMD_NEO_HUB.open(); else toast("Neonatal tools loading…"); },
     drugmenu: function () {
       openSheet('<div class="hv-sh-t">Drugs &amp; Interactions</div>' +
         mi("pills", "Drug Database", "Brands · doses · spectrum · cautions", "db") +
@@ -2058,6 +2060,11 @@
     if (window.SMD_DOSECALC && SMD_DOSECALC.on) return SMD_DOSECALC.on();
     try { var q = (location.search.match(/[?&]dosecalc=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_dose_calc") !== "0"; } catch (e) { return true; }
   }
+  // Neonatal layer (neo-flags.js), master flag smd_neo DEFAULT OFF. Read directly: home.js loads first.
+  function neoOn() {
+    if (window.SMD_NEO_FLAGS && SMD_NEO_FLAGS.on) return SMD_NEO_FLAGS.on();
+    try { var q = (location.search.match(/[?&]neo=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_neo") === "1"; } catch (e) { return false; }
+  }
   var HOME_TOOLS = [
     { act: "retinalscan", ic: "visibility", tt: "FundX AI", sub: "Retinal scan", feat: true, beta: true, anim: "eye",
       eligible: function () { return expTileOn("smd_fundx", "fundx", null); } },
@@ -2121,10 +2128,11 @@
     // content is ai_drafted, so every screen carries a "To be verified · draft" mark until sign-off.
     { act: "ophthalmos", ic: "eye", anim: "ophthalmos", tt: "Ophthalmós", sub: "Eye imaging clinic",
       eligible: function () { try { var q = (location.search.match(/[?&]ophthalmos=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_ophthalmos") !== "0"; } catch (e) { return true; } } },
-    // Tokós (tokos.js): OBGYN CTG clinic trainer. ON for all while the app is in testing (owner decision
+    // Tokós (tokos.js on the specialty engine, loaded on first open by tokos-loader.js): Obstetrics and Gynaecology
+    // learning (Learn, CTG clinic, questions, drills, calculators). ON for all while the app is in testing (owner decision
     // 2026-09-29); kill switch smd_tokos="0" or ?tokos=0. Labels stay "rule-based, pending review" until an
     // obstetrician approves each case in the Review Desk.
-    { act: "tokos", ic: "monitor_heart", tt: "Tokós", sub: "CTG clinic",
+    { act: "tokos", ic: "monitor_heart", tt: "Tokós", sub: "Obstetrics and gynae",
       eligible: function () { try { var q = (location.search.match(/[?&]tokos=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_tokos") !== "0"; } catch (e) { return true; } } },
     { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
     // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).
@@ -2144,6 +2152,10 @@
     // Read directly: home.js loads before dose-calc.js.
     { act: "dosecalc", ic: "medication", tt: "Dose calculator", sub: "Dose for a patient", defOn: false,
       eligible: function () { return doseCalcOn(); } },
+    // Neonatal hub: dosing, preparation, infusions, fluids, growth, bilirubin, scores, reference values,
+    // procedures, drug levels. Shown on Home by default once the flag is on.
+    { act: "neo", ic: "child_care", tt: "Neonatal", sub: "NICU tools", defOn: true,
+      eligible: function () { return neoOn(); } },
     { act: "dosing", ic: "vaccines", tt: "Bedside dosing", sub: "Insulin · electrolytes", defOn: false },
     { act: "insulin", ic: "water_drop", tt: "Insulin", sub: "Dose · convert", defOn: false },
     { act: "syndromes", ic: "coronavirus", tt: "Syndromes", sub: "Reference", defOn: false },

@@ -22,8 +22,8 @@ try{
  ok(await ev(`document.querySelectorAll('.kblib-tiles [data-br]').length===new Set(Object.values(KB_ENRICHMENT.byId).map(x=>x.system)).size`) || await ev(`document.querySelectorAll('.kblib-tiles [data-br]').length>=10`),'medical branches are available');
  ok(await ev(`getComputedStyle(document.querySelector('#sbrefOverlay')).overflow==='hidden' && getComputedStyle(document.querySelector('#sbrefBody')).overflowY==='auto'`),'library uses a pinned app shell with internal scrolling');
  // Discover has its own <h1> hero; the bar title used to repeat it, printing the same words twice.
- ok(await ev(`(document.querySelector('#sbrefTitle').textContent||'').trim()===''`),'bar title does not repeat the Discover hero heading');
- ok(await ev(`document.querySelector('.kblib-intro h1').textContent.trim()==='Knowledge Library'`),'the hero heading still names the library');
+ ok(await ev(`(document.querySelector('#sbrefTitle').textContent||'').trim()==='Knowledge Library'&&document.querySelector('.kblib-intro h1').textContent.trim()!=='Knowledge Library'`),'bar names the library; the hero does not repeat it');
+ ok(await ev(`document.querySelector('.kblib-intro h1').textContent.trim()==='Find any disease'`),'the hero heading says what the page does');
  ok(await ev(`Math.abs(document.querySelector('#sbrefOverlay').getBoundingClientRect().bottom-innerHeight)<=1`),'library fills the visible viewport');
  ok(await ev(`!document.querySelector('#smdTopBack') || getComputedStyle(document.querySelector('#smdTopBack')).visibility==='hidden'`),'library suppresses the underlying global back control');
  for(const width of [320,390,768,1280]){await call('Emulation.setDeviceMetricsOverride',{width,height:844,deviceScaleFactor:1,mobile:width<700});ok(await ev(`document.querySelector('#sbrefOverlay').scrollWidth<=innerWidth`),`no overflow at ${width}px`);if(width===390)await shot('discover-mobile');if(width===1280)await shot('discover-desktop');}
@@ -68,7 +68,7 @@ try{
  await sleep(250);
  ok(await ev(`document.querySelector('#dxOverlay').textContent`).then(t=>t.includes(diseaseName)),'disease entry opens existing reference');
  ok(await ev(`document.querySelector('#dxMgmt').classList.contains('dx-reader') && document.querySelector('.dx-reader-brand strong').textContent==='Knowledge Library'`),'disease entry uses the shared Knowledge Library reader');
- ok(await ev(`document.querySelector('.smd-kb-brand').innerText.replace(/\\s+/g,' ').trim()==='StewardMD Knowledge Base'`),'disease hero carries StewardMD Knowledge Base branding');
+ ok(await ev(`(()=>{const b=document.querySelector('#dxMgmt .dx-reader-hero .smd-kb-banner');return !!b&&b.innerText.replace(/\\s+/g,' ').trim()==='StewardMD Knowledge Base'&&!!b.querySelector('img.smd-kb-logo')&&!document.querySelector('#dxMgmt .smd-kb-watermark,#dxMgmt .dx-mgmt-badge')})()`),'reader hero carries the StewardMD Knowledge Base banner with the logo; no faded watermark or kicker');
  ok(await ev(`(()=>{const panel=document.querySelector('#dxMgmt'),body=panel.querySelector('.dx-mgmt-body'),r=panel.getBoundingClientRect();return getComputedStyle(panel).position==='fixed'&&getComputedStyle(panel).overflow==='hidden'&&getComputedStyle(body).overflowY==='auto'&&Math.abs(r.height-innerHeight)<=1})()`),'disease reader remains a pinned full-screen app surface');
  ok(await ev(`document.querySelector('.dx-mgmt-name').textContent.trim()===${JSON.stringify(diseaseName)}`),'disease reader retains its title');
  for(const width of [320,375,390,393,430]){

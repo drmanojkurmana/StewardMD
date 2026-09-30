@@ -169,8 +169,15 @@
     return out;
   }
 
-  function pickRows(drug, d) {
+  var NEO_NONE = "No neonatal dose on file. Do not extrapolate.";
+  function pickRows(drug, d, strictNeo) {
     var g = d.group, rows = drug.rows || [], notes = [];
+    // Neonatal layer (smd_neo + smd_neo_dose): a neonate sees neonatal rows only. No child or adult
+    // row is ever shown as a neonatal dose; with none on file the answer is NEO_NONE.
+    if (g === "neonate" && strictNeo) {
+      var neo = rows.filter(function (r) { return r.pop === "neonate"; });
+      return { rows: neo, notes: neo.length ? [] : [NEO_NONE], strictNeo: true };
+    }
     var mine = rows.filter(function (r) { return r.pop === g || r.pop === "any"; });
     if (g === "neonate" && !mine.some(function (r) { return r.pop === "neonate"; })) {
       var ch = rows.filter(function (r) { return r.pop === "child"; });
@@ -212,8 +219,8 @@
   function compute(drug, p) {
     var errs = check(p);
     if (errs.length) return { errors: errs };
-    var d = derive(p), picked = pickRows(drug, d);
-    var res = { drug: drug.n, cls: drug.c, kind: drug.k, derived: d, notes: picked.notes.slice(), rows: [], other: [] };
+    var d = derive(p), picked = pickRows(drug, d, !!p.neoStrict);
+    var res = { drug: drug.n, cls: drug.c, kind: drug.k, derived: d, notes: picked.notes.slice(), rows: [], other: [], strictNeo: !!picked.strictNeo };
     if (d.ageY == null) res.notes.push("Age not entered: showing adult doses.");
     picked.rows.forEach(function (r) {
       if (r.k === "perkg" || r.k === "perm2") res.rows.push(computeRow(r, drug, d));
@@ -232,7 +239,7 @@
     return res;
   }
 
-  var ENGINE = { compute: compute, derive: derive, ibw: ibw, adjbw: adjbw, bsa: bsa, bmi: bmi, practical: practical, check: check, group: group };
+  var ENGINE = { compute: compute, derive: derive, ibw: ibw, adjbw: adjbw, bsa: bsa, bmi: bmi, practical: practical, check: check, group: group, NEO_NONE: NEO_NONE };
   if (typeof module !== "undefined" && module.exports) { module.exports = ENGINE; return; }
 
   /* ================================ DATA ================================ */
@@ -400,9 +407,29 @@
       "</section>";
   }
 
+  /* Neonatal layer on for this device (neo-flags.js): a neonate is dosed from the neonatal band table. */
+  function neoOn() { try { return !!(G.SMD_NEO_FLAGS && G.SMD_NEO_FLAGS.feature("dose") && G.SMD_NEO_DOSE); } catch (e) { return false; } }
+  function neoBlock(x, res) {
+    var ND = G.SMD_NEO_DOSE, N = G.SMD_NEO;
+    if (!ND.loaded()) { ND.load().then(function () { render(); }, function () {}); return { html: '<div class="dc-der">Loading neonatal doses…</div>', has: false }; }
+    var band = ND.find(x.n);
+    if (!band) return { html: "", has: false };
+    // The band table needs the baby record (GA, date of birth); weight comes from here if the record has none.
+    var rec = N.get(); if (!rec.weightG && num(S.p.weight)) N.fromPatient({ weight: S.p.weight, sex: S.p.sex });
+    var d = N.derived();
+    if (G.SMD_NEO_HUB && G.SMD_NEO_HUB.api.css) G.SMD_NEO_HUB.api.css();
+    return { has: true, html: '<div class="neo-blk" data-neo-blk="1">' + ND.blockHtml(band, d, { prepare: true }) +
+      '<div class="dc-der">Neonatal band table from the baby record: ' + esc(N.summary() || "no baby entered") + '. <button class="dc-chg" data-neo-babyrec="' + esc(band.id) + '">Baby record</button></div></div>' };
+  }
+  function withNeo(p) { var o = {}; Object.keys(p).forEach(function (k) { o[k] = p[k]; }); o.neoStrict = true; return o; }
   function resultHtml() {
-    var x = S.drug, res = compute(x, S.p), h = '<section class="dc-card" aria-live="polite"><div class="dc-drug"><b>' + esc(x.n) + '</b><button class="dc-chg" data-dc="change">Change drug</button></div><div class="dc-cls">' + esc(x.c) + "</div>";
+    var x = S.drug, strict = neoOn(), res = compute(x, strict ? withNeo(S.p) : S.p), h = '<section class="dc-card" aria-live="polite"><div class="dc-drug"><b>' + esc(x.n) + '</b><button class="dc-chg" data-dc="change">Change drug</button></div><div class="dc-cls">' + esc(x.c) + "</div>";
     if (res.errors) return h + res.errors.map(function (e) { return '<div class="dc-err">' + esc(e) + "</div>"; }).join("") + "</section>";
+    if (res.strictNeo) {
+      var nb = neoBlock(x, res);
+      if (nb.has) return h + nb.html + '<div class="dc-foot">Neonate: the neonatal band table replaces the monograph rows. Decision support: verify before prescribing.</div></section>';
+      if (nb.html) h += nb.html;
+    }
     if (res.avoid) h += '<div class="dc-avoid">Avoid or do not use at this ' + (res.renal.band && res.renal.band.avoid ? "kidney function" : "liver class") + ": read the note below.</div>";
     res.notes.forEach(function (n) { h += '<div class="dc-note">' + esc(n) + "</div>"; });
     if (!res.weightBased) h += '<span class="dc-pill">Not weight-based</span>';
@@ -455,6 +482,8 @@
     var fid = keepFocus && D.activeElement && D.activeElement.id, pos = fid && D.activeElement.selectionStart;
     var body = root.querySelector(".dc-body");
     body.innerHTML = patientHtml() + (S.drug ? resultHtml() : drugPickerHtml());
+    var blk = body.querySelector("[data-neo-blk]");
+    if (blk && G.SMD_NEO_DOSE) { var bd = G.SMD_NEO_DOSE.find(S.drug.n); if (bd) G.SMD_NEO_DOSE.wireGuards(blk, bd, G.SMD_NEO.derived()); }
     if (fid) { var el = D.getElementById(fid); if (el) { el.focus(); try { if (pos != null) el.setSelectionRange(pos, pos); } catch (e) {} } }
   }
 
@@ -485,6 +514,7 @@
     var pi = t.closest("[data-pi]");
     if (pi) { var x = root.querySelector(".dc-body")._list[+pi.dataset.pi]; if (x) { Object.keys(x.patient).forEach(function (k) { S.p[k] = x.patient[k] == null ? "" : String(x.patient[k]); }); S.source = x.label; } haptic(); render(); return; }
     var dr = t.closest("[data-drug]"); if (dr) { S.drug = findDrug(dr.dataset.drug); haptic(); render(); var b = root.querySelector(".dc-body"); if (b) b.scrollTop = 0; return; }
+    var br = t.closest("[data-neo-babyrec]"); if (br && G.SMD_NEO_HUB) { var id = br.getAttribute("data-neo-babyrec"); close(); G.SMD_NEO_HUB.open("dose", { drug: id }); return; }
     if (t.closest("[data-dc=change]")) { S.drug = null; render(); setTimeout(function () { var q = D.getElementById("dc_q"); if (q) q.focus(); }, 50); return; }
   }
   function onInput(e) {

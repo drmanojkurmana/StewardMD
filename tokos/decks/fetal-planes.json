@@ -1,0 +1,1674 @@
+{
+ "v": 1,
+ "id": "fetal-planes",
+ "review": "ai_drafted",
+ "title": {
+  "en": "Fetal ultrasound planes",
+  "hi": "भ्रूण अल्ट्रासाउंड प्लेन"
+ },
+ "source": {
+  "dataset": "FETAL_PLANES_DB",
+  "url": "https://zenodo.org/records/3904280",
+  "doi": "10.5281/zenodo.3904280",
+  "licence": "CC BY 4.0",
+  "credit": "fetal-planes-db",
+  "paper": "Burgos-Artizzu XP, Coronado-Gutierrez D, Valenzuela-Alcaraz B, et al. Evaluation of deep convolutional neural networks for automatic classification of common maternal fetal ultrasound planes. Sci Rep. 2020;10:10200. doi:10.1038/s41598-020-67076-5",
+  "labelledBy": "Ground truth is the dataset's own expert label (one maternal-fetal medicine clinician, per the dataset README)."
+ },
+ "classes": [
+  {
+   "id": "fetal-abdomen",
+   "group": "abdomen",
+   "label": {
+    "en": "Fetal abdomen",
+    "hi": "भ्रूण का पेट (उदर)"
+   },
+   "count": 18
+  },
+  {
+   "id": "brain-transthalamic",
+   "group": "brain",
+   "label": {
+    "en": "Brain, trans-thalamic",
+    "hi": "मस्तिष्क, ट्रांस-थैलेमिक"
+   },
+   "count": 18
+  },
+  {
+   "id": "brain-transcerebellar",
+   "group": "brain",
+   "label": {
+    "en": "Brain, trans-cerebellar",
+    "hi": "मस्तिष्क, ट्रांस-सेरिबेलर"
+   },
+   "count": 18
+  },
+  {
+   "id": "brain-transventricular",
+   "group": "brain",
+   "label": {
+    "en": "Brain, trans-ventricular",
+    "hi": "मस्तिष्क, ट्रांस-वेंट्रिकुलर"
+   },
+   "count": 18
+  },
+  {
+   "id": "brain-other",
+   "group": "brain",
+   "label": {
+    "en": "Brain, other plane",
+    "hi": "मस्तिष्क, अन्य प्लेन"
+   },
+   "count": 6
+  },
+  {
+   "id": "fetal-femur",
+   "group": "femur",
+   "label": {
+    "en": "Fetal femur",
+    "hi": "भ्रूण की जाँघ की हड्डी (फीमर)"
+   },
+   "count": 18
+  },
+  {
+   "id": "fetal-thorax",
+   "group": "thorax",
+   "label": {
+    "en": "Fetal thorax",
+    "hi": "भ्रूण का वक्ष (छाती)"
+   },
+   "count": 18
+  },
+  {
+   "id": "maternal-cervix",
+   "group": "cervix",
+   "label": {
+    "en": "Maternal cervix",
+    "hi": "माँ की ग्रीवा (सर्विक्स)"
+   },
+   "count": 18
+  },
+  {
+   "id": "other",
+   "group": "other",
+   "label": {
+    "en": "Other plane",
+    "hi": "अन्य प्लेन"
+   },
+   "count": 18
+  }
+ ],
+ "groups": [
+  {
+   "id": "abdomen",
+   "label": {
+    "en": "Fetal abdomen",
+    "hi": "भ्रूण का पेट (उदर)"
+   }
+  },
+  {
+   "id": "brain",
+   "label": {
+    "en": "Fetal brain",
+    "hi": "भ्रूण का मस्तिष्क"
+   }
+  },
+  {
+   "id": "femur",
+   "label": {
+    "en": "Fetal femur",
+    "hi": "भ्रूण की जाँघ की हड्डी (फीमर)"
+   }
+  },
+  {
+   "id": "thorax",
+   "label": {
+    "en": "Fetal thorax",
+    "hi": "भ्रूण का वक्ष (छाती)"
+   }
+  },
+  {
+   "id": "cervix",
+   "label": {
+    "en": "Maternal cervix",
+    "hi": "माँ की ग्रीवा (सर्विक्स)"
+   }
+  },
+  {
+   "id": "other",
+   "label": {
+    "en": "Other plane",
+    "hi": "अन्य प्लेन"
+   }
+  }
+ ],
+ "levels": {
+  "mbbs": {
+   "options": [
+    "abdomen",
+    "brain",
+    "femur",
+    "thorax",
+    "cervix",
+    "other"
+   ],
+   "answer": "group"
+  },
+  "resident": {
+   "options": [
+    "fetal-abdomen",
+    "brain-transthalamic",
+    "brain-transcerebellar",
+    "brain-transventricular",
+    "brain-other",
+    "fetal-femur",
+    "fetal-thorax",
+    "maternal-cervix",
+    "other"
+   ],
+   "answer": "label"
+  }
+ },
+ "cases": [
+  {
+   "id": "fp-001",
+   "img": "fetal-planes/fp-001.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-abdomen",
+   "group": "abdomen",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-002",
+   "img": "fetal-planes/fp-002.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transthalamic",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-003",
+   "img": "fetal-planes/fp-003.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transcerebellar",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-004",
+   "img": "fetal-planes/fp-004.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transventricular",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-005",
+   "img": "fetal-planes/fp-005.webp",
+   "w": 640,
+   "h": 332,
+   "label": "brain-other",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-006",
+   "img": "fetal-planes/fp-006.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-femur",
+   "group": "femur",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-007",
+   "img": "fetal-planes/fp-007.webp",
+   "w": 640,
+   "h": 387,
+   "label": "fetal-thorax",
+   "group": "thorax",
+   "machine": "Aloka",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-008",
+   "img": "fetal-planes/fp-008.webp",
+   "w": 640,
+   "h": 442,
+   "label": "maternal-cervix",
+   "group": "cervix",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-009",
+   "img": "fetal-planes/fp-009.webp",
+   "w": 640,
+   "h": 444,
+   "label": "other",
+   "group": "other",
+   "machine": "Aloka",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-010",
+   "img": "fetal-planes/fp-010.webp",
+   "w": 640,
+   "h": 442,
+   "label": "fetal-abdomen",
+   "group": "abdomen",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-011",
+   "img": "fetal-planes/fp-011.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transthalamic",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-012",
+   "img": "fetal-planes/fp-012.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transcerebellar",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-013",
+   "img": "fetal-planes/fp-013.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transventricular",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-014",
+   "img": "fetal-planes/fp-014.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-other",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-015",
+   "img": "fetal-planes/fp-015.webp",
+   "w": 640,
+   "h": 387,
+   "label": "fetal-femur",
+   "group": "femur",
+   "machine": "Aloka",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-016",
+   "img": "fetal-planes/fp-016.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-thorax",
+   "group": "thorax",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-017",
+   "img": "fetal-planes/fp-017.webp",
+   "w": 640,
+   "h": 480,
+   "label": "maternal-cervix",
+   "group": "cervix",
+   "machine": "Aloka",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-018",
+   "img": "fetal-planes/fp-018.webp",
+   "w": 640,
+   "h": 441,
+   "label": "other",
+   "group": "other",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-019",
+   "img": "fetal-planes/fp-019.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-abdomen",
+   "group": "abdomen",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-020",
+   "img": "fetal-planes/fp-020.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transthalamic",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-021",
+   "img": "fetal-planes/fp-021.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transcerebellar",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-022",
+   "img": "fetal-planes/fp-022.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transventricular",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-023",
+   "img": "fetal-planes/fp-023.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-other",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-024",
+   "img": "fetal-planes/fp-024.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-femur",
+   "group": "femur",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-025",
+   "img": "fetal-planes/fp-025.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-thorax",
+   "group": "thorax",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-026",
+   "img": "fetal-planes/fp-026.webp",
+   "w": 640,
+   "h": 480,
+   "label": "maternal-cervix",
+   "group": "cervix",
+   "machine": "Aloka",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-027",
+   "img": "fetal-planes/fp-027.webp",
+   "w": 640,
+   "h": 441,
+   "label": "other",
+   "group": "other",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-028",
+   "img": "fetal-planes/fp-028.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-abdomen",
+   "group": "abdomen",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-029",
+   "img": "fetal-planes/fp-029.webp",
+   "w": 640,
+   "h": 442,
+   "label": "brain-transthalamic",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-030",
+   "img": "fetal-planes/fp-030.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transcerebellar",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-031",
+   "img": "fetal-planes/fp-031.webp",
+   "w": 640,
+   "h": 442,
+   "label": "brain-transventricular",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-032",
+   "img": "fetal-planes/fp-032.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-other",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-033",
+   "img": "fetal-planes/fp-033.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-femur",
+   "group": "femur",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-034",
+   "img": "fetal-planes/fp-034.webp",
+   "w": 640,
+   "h": 387,
+   "label": "fetal-thorax",
+   "group": "thorax",
+   "machine": "Aloka",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-035",
+   "img": "fetal-planes/fp-035.webp",
+   "w": 640,
+   "h": 480,
+   "label": "maternal-cervix",
+   "group": "cervix",
+   "machine": "Aloka",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-036",
+   "img": "fetal-planes/fp-036.webp",
+   "w": 640,
+   "h": 441,
+   "label": "other",
+   "group": "other",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-037",
+   "img": "fetal-planes/fp-037.webp",
+   "w": 640,
+   "h": 442,
+   "label": "fetal-abdomen",
+   "group": "abdomen",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-038",
+   "img": "fetal-planes/fp-038.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transthalamic",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-039",
+   "img": "fetal-planes/fp-039.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transcerebellar",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-040",
+   "img": "fetal-planes/fp-040.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transventricular",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-041",
+   "img": "fetal-planes/fp-041.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-other",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-042",
+   "img": "fetal-planes/fp-042.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-femur",
+   "group": "femur",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-043",
+   "img": "fetal-planes/fp-043.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-thorax",
+   "group": "thorax",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-044",
+   "img": "fetal-planes/fp-044.webp",
+   "w": 640,
+   "h": 442,
+   "label": "maternal-cervix",
+   "group": "cervix",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-045",
+   "img": "fetal-planes/fp-045.webp",
+   "w": 640,
+   "h": 387,
+   "label": "other",
+   "group": "other",
+   "machine": "Aloka",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-046",
+   "img": "fetal-planes/fp-046.webp",
+   "w": 640,
+   "h": 442,
+   "label": "fetal-abdomen",
+   "group": "abdomen",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-047",
+   "img": "fetal-planes/fp-047.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transthalamic",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-048",
+   "img": "fetal-planes/fp-048.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transcerebellar",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-049",
+   "img": "fetal-planes/fp-049.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transventricular",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-050",
+   "img": "fetal-planes/fp-050.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-other",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-051",
+   "img": "fetal-planes/fp-051.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-femur",
+   "group": "femur",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-052",
+   "img": "fetal-planes/fp-052.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-thorax",
+   "group": "thorax",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-053",
+   "img": "fetal-planes/fp-053.webp",
+   "w": 640,
+   "h": 480,
+   "label": "maternal-cervix",
+   "group": "cervix",
+   "machine": "Aloka",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-054",
+   "img": "fetal-planes/fp-054.webp",
+   "w": 640,
+   "h": 387,
+   "label": "other",
+   "group": "other",
+   "machine": "Aloka",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-055",
+   "img": "fetal-planes/fp-055.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-abdomen",
+   "group": "abdomen",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-056",
+   "img": "fetal-planes/fp-056.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transthalamic",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-057",
+   "img": "fetal-planes/fp-057.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transcerebellar",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-058",
+   "img": "fetal-planes/fp-058.webp",
+   "w": 640,
+   "h": 442,
+   "label": "brain-transventricular",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-059",
+   "img": "fetal-planes/fp-059.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-femur",
+   "group": "femur",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-060",
+   "img": "fetal-planes/fp-060.webp",
+   "w": 640,
+   "h": 331,
+   "label": "fetal-thorax",
+   "group": "thorax",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-061",
+   "img": "fetal-planes/fp-061.webp",
+   "w": 640,
+   "h": 443,
+   "label": "maternal-cervix",
+   "group": "cervix",
+   "machine": "Aloka",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-062",
+   "img": "fetal-planes/fp-062.webp",
+   "w": 640,
+   "h": 441,
+   "label": "other",
+   "group": "other",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-063",
+   "img": "fetal-planes/fp-063.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-abdomen",
+   "group": "abdomen",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-064",
+   "img": "fetal-planes/fp-064.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transthalamic",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-065",
+   "img": "fetal-planes/fp-065.webp",
+   "w": 640,
+   "h": 443,
+   "label": "brain-transcerebellar",
+   "group": "brain",
+   "machine": "Voluson S10",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-066",
+   "img": "fetal-planes/fp-066.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transventricular",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-067",
+   "img": "fetal-planes/fp-067.webp",
+   "w": 640,
+   "h": 442,
+   "label": "fetal-femur",
+   "group": "femur",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-068",
+   "img": "fetal-planes/fp-068.webp",
+   "w": 640,
+   "h": 387,
+   "label": "fetal-thorax",
+   "group": "thorax",
+   "machine": "Aloka",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-069",
+   "img": "fetal-planes/fp-069.webp",
+   "w": 640,
+   "h": 443,
+   "label": "maternal-cervix",
+   "group": "cervix",
+   "machine": "Aloka",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-070",
+   "img": "fetal-planes/fp-070.webp",
+   "w": 640,
+   "h": 442,
+   "label": "other",
+   "group": "other",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-071",
+   "img": "fetal-planes/fp-071.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-abdomen",
+   "group": "abdomen",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-072",
+   "img": "fetal-planes/fp-072.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transthalamic",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-073",
+   "img": "fetal-planes/fp-073.webp",
+   "w": 640,
+   "h": 442,
+   "label": "brain-transcerebellar",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-074",
+   "img": "fetal-planes/fp-074.webp",
+   "w": 640,
+   "h": 442,
+   "label": "brain-transventricular",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-075",
+   "img": "fetal-planes/fp-075.webp",
+   "w": 640,
+   "h": 442,
+   "label": "fetal-femur",
+   "group": "femur",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-076",
+   "img": "fetal-planes/fp-076.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-thorax",
+   "group": "thorax",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-077",
+   "img": "fetal-planes/fp-077.webp",
+   "w": 640,
+   "h": 443,
+   "label": "maternal-cervix",
+   "group": "cervix",
+   "machine": "Aloka",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-078",
+   "img": "fetal-planes/fp-078.webp",
+   "w": 640,
+   "h": 443,
+   "label": "other",
+   "group": "other",
+   "machine": "Voluson S10",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-079",
+   "img": "fetal-planes/fp-079.webp",
+   "w": 640,
+   "h": 443,
+   "label": "fetal-abdomen",
+   "group": "abdomen",
+   "machine": "Voluson S10",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-080",
+   "img": "fetal-planes/fp-080.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transthalamic",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-081",
+   "img": "fetal-planes/fp-081.webp",
+   "w": 640,
+   "h": 442,
+   "label": "brain-transcerebellar",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-082",
+   "img": "fetal-planes/fp-082.webp",
+   "w": 640,
+   "h": 442,
+   "label": "brain-transventricular",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-083",
+   "img": "fetal-planes/fp-083.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-femur",
+   "group": "femur",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-084",
+   "img": "fetal-planes/fp-084.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-thorax",
+   "group": "thorax",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-085",
+   "img": "fetal-planes/fp-085.webp",
+   "w": 640,
+   "h": 443,
+   "label": "maternal-cervix",
+   "group": "cervix",
+   "machine": "Aloka",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-086",
+   "img": "fetal-planes/fp-086.webp",
+   "w": 640,
+   "h": 441,
+   "label": "other",
+   "group": "other",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-087",
+   "img": "fetal-planes/fp-087.webp",
+   "w": 640,
+   "h": 442,
+   "label": "fetal-abdomen",
+   "group": "abdomen",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-088",
+   "img": "fetal-planes/fp-088.webp",
+   "w": 640,
+   "h": 442,
+   "label": "brain-transthalamic",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-089",
+   "img": "fetal-planes/fp-089.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transcerebellar",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-090",
+   "img": "fetal-planes/fp-090.webp",
+   "w": 640,
+   "h": 442,
+   "label": "brain-transventricular",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-091",
+   "img": "fetal-planes/fp-091.webp",
+   "w": 640,
+   "h": 442,
+   "label": "fetal-femur",
+   "group": "femur",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-092",
+   "img": "fetal-planes/fp-092.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-thorax",
+   "group": "thorax",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-093",
+   "img": "fetal-planes/fp-093.webp",
+   "w": 640,
+   "h": 482,
+   "label": "maternal-cervix",
+   "group": "cervix",
+   "machine": "Aloka",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-094",
+   "img": "fetal-planes/fp-094.webp",
+   "w": 640,
+   "h": 443,
+   "label": "other",
+   "group": "other",
+   "machine": "Voluson S10",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-095",
+   "img": "fetal-planes/fp-095.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-abdomen",
+   "group": "abdomen",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-096",
+   "img": "fetal-planes/fp-096.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transthalamic",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-097",
+   "img": "fetal-planes/fp-097.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transcerebellar",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-098",
+   "img": "fetal-planes/fp-098.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transventricular",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-099",
+   "img": "fetal-planes/fp-099.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-femur",
+   "group": "femur",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-100",
+   "img": "fetal-planes/fp-100.webp",
+   "w": 640,
+   "h": 442,
+   "label": "fetal-thorax",
+   "group": "thorax",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-101",
+   "img": "fetal-planes/fp-101.webp",
+   "w": 640,
+   "h": 442,
+   "label": "maternal-cervix",
+   "group": "cervix",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-102",
+   "img": "fetal-planes/fp-102.webp",
+   "w": 640,
+   "h": 441,
+   "label": "other",
+   "group": "other",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-103",
+   "img": "fetal-planes/fp-103.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-abdomen",
+   "group": "abdomen",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-104",
+   "img": "fetal-planes/fp-104.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transthalamic",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-105",
+   "img": "fetal-planes/fp-105.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transcerebellar",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-106",
+   "img": "fetal-planes/fp-106.webp",
+   "w": 640,
+   "h": 442,
+   "label": "brain-transventricular",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-107",
+   "img": "fetal-planes/fp-107.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-femur",
+   "group": "femur",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-108",
+   "img": "fetal-planes/fp-108.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-thorax",
+   "group": "thorax",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-109",
+   "img": "fetal-planes/fp-109.webp",
+   "w": 640,
+   "h": 441,
+   "label": "maternal-cervix",
+   "group": "cervix",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-110",
+   "img": "fetal-planes/fp-110.webp",
+   "w": 640,
+   "h": 441,
+   "label": "other",
+   "group": "other",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-111",
+   "img": "fetal-planes/fp-111.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-abdomen",
+   "group": "abdomen",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-112",
+   "img": "fetal-planes/fp-112.webp",
+   "w": 640,
+   "h": 442,
+   "label": "brain-transthalamic",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-113",
+   "img": "fetal-planes/fp-113.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transcerebellar",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-114",
+   "img": "fetal-planes/fp-114.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transventricular",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-115",
+   "img": "fetal-planes/fp-115.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-femur",
+   "group": "femur",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-116",
+   "img": "fetal-planes/fp-116.webp",
+   "w": 640,
+   "h": 443,
+   "label": "fetal-thorax",
+   "group": "thorax",
+   "machine": "Voluson S10",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-117",
+   "img": "fetal-planes/fp-117.webp",
+   "w": 640,
+   "h": 441,
+   "label": "maternal-cervix",
+   "group": "cervix",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-118",
+   "img": "fetal-planes/fp-118.webp",
+   "w": 640,
+   "h": 441,
+   "label": "other",
+   "group": "other",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-119",
+   "img": "fetal-planes/fp-119.webp",
+   "w": 640,
+   "h": 443,
+   "label": "fetal-abdomen",
+   "group": "abdomen",
+   "machine": "Voluson S10",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-120",
+   "img": "fetal-planes/fp-120.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transthalamic",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-121",
+   "img": "fetal-planes/fp-121.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transcerebellar",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-122",
+   "img": "fetal-planes/fp-122.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transventricular",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-123",
+   "img": "fetal-planes/fp-123.webp",
+   "w": 640,
+   "h": 442,
+   "label": "fetal-femur",
+   "group": "femur",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-124",
+   "img": "fetal-planes/fp-124.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-thorax",
+   "group": "thorax",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-125",
+   "img": "fetal-planes/fp-125.webp",
+   "w": 640,
+   "h": 441,
+   "label": "maternal-cervix",
+   "group": "cervix",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-126",
+   "img": "fetal-planes/fp-126.webp",
+   "w": 640,
+   "h": 441,
+   "label": "other",
+   "group": "other",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-127",
+   "img": "fetal-planes/fp-127.webp",
+   "w": 640,
+   "h": 442,
+   "label": "fetal-abdomen",
+   "group": "abdomen",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-128",
+   "img": "fetal-planes/fp-128.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transthalamic",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-129",
+   "img": "fetal-planes/fp-129.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transcerebellar",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-130",
+   "img": "fetal-planes/fp-130.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transventricular",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-131",
+   "img": "fetal-planes/fp-131.webp",
+   "w": 640,
+   "h": 443,
+   "label": "fetal-femur",
+   "group": "femur",
+   "machine": "Voluson S10",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-132",
+   "img": "fetal-planes/fp-132.webp",
+   "w": 640,
+   "h": 331,
+   "label": "fetal-thorax",
+   "group": "thorax",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-133",
+   "img": "fetal-planes/fp-133.webp",
+   "w": 640,
+   "h": 441,
+   "label": "maternal-cervix",
+   "group": "cervix",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-134",
+   "img": "fetal-planes/fp-134.webp",
+   "w": 640,
+   "h": 441,
+   "label": "other",
+   "group": "other",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-135",
+   "img": "fetal-planes/fp-135.webp",
+   "w": 640,
+   "h": 443,
+   "label": "fetal-abdomen",
+   "group": "abdomen",
+   "machine": "Voluson S10",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-136",
+   "img": "fetal-planes/fp-136.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transthalamic",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-137",
+   "img": "fetal-planes/fp-137.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transcerebellar",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-138",
+   "img": "fetal-planes/fp-138.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transventricular",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-139",
+   "img": "fetal-planes/fp-139.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-femur",
+   "group": "femur",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-140",
+   "img": "fetal-planes/fp-140.webp",
+   "w": 640,
+   "h": 295,
+   "label": "fetal-thorax",
+   "group": "thorax",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-141",
+   "img": "fetal-planes/fp-141.webp",
+   "w": 640,
+   "h": 441,
+   "label": "maternal-cervix",
+   "group": "cervix",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-142",
+   "img": "fetal-planes/fp-142.webp",
+   "w": 640,
+   "h": 441,
+   "label": "other",
+   "group": "other",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-143",
+   "img": "fetal-planes/fp-143.webp",
+   "w": 640,
+   "h": 442,
+   "label": "fetal-abdomen",
+   "group": "abdomen",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-144",
+   "img": "fetal-planes/fp-144.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transthalamic",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-145",
+   "img": "fetal-planes/fp-145.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transcerebellar",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-146",
+   "img": "fetal-planes/fp-146.webp",
+   "w": 640,
+   "h": 441,
+   "label": "brain-transventricular",
+   "group": "brain",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-147",
+   "img": "fetal-planes/fp-147.webp",
+   "w": 640,
+   "h": 442,
+   "label": "fetal-femur",
+   "group": "femur",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-148",
+   "img": "fetal-planes/fp-148.webp",
+   "w": 640,
+   "h": 441,
+   "label": "fetal-thorax",
+   "group": "thorax",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-149",
+   "img": "fetal-planes/fp-149.webp",
+   "w": 640,
+   "h": 441,
+   "label": "maternal-cervix",
+   "group": "cervix",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  },
+  {
+   "id": "fp-150",
+   "img": "fetal-planes/fp-150.webp",
+   "w": 640,
+   "h": 441,
+   "label": "other",
+   "group": "other",
+   "machine": "Voluson E6",
+   "review": "ai_drafted"
+  }
+ ]
+}

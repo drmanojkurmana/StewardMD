@@ -1,0 +1,234 @@
+{
+  "id": "ob12-ctg-read",
+  "unit": "ob12",
+  "level": "mbbs",
+  "minutes": 6,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "FIGO 2015 baseline bands: normal 110 to 160, suspicious 100 to 109 or above 160, pathological below 100",
+      "FIGO 2015 variability: normal 5 to 25; reduced over 50 min or increased over 30 min is pathological",
+      "FIGO 2015 pathological timings: sinusoidal over 30 min, repetitive late or prolonged decelerations over 30 min (20 min if variability reduced), single prolonged deceleration over 5 min"
+    ]
+  },
+  "title": {
+    "en": "Reading a CTG: baseline, variability, accelerations, decelerations",
+    "hi": "CTG पढ़ना: बेसलाइन, परिवर्तनशीलता, त्वरण, मंदन"
+  },
+  "idea": {
+    "en": "Read a [[ctg]] in a fixed order: contractions, [[baseline]], [[variability]], [[acceleration]] and [[deceleration]]. Then give one class: normal, suspicious or pathological.",
+    "hi": "[[ctg]] को तय क्रम में पढ़ें: संकुचन, [[baseline]], [[variability]], [[acceleration]] और [[deceleration]]। फिर एक वर्ग दें: सामान्य, संदिग्ध या पैथोलॉजिकल।"
+  },
+  "see": {
+    "diagram": "diagrams/ob12-ctg-read.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A trace with a green band across the middle. A red wavy line runs inside the band and has one sharp upward spike. Below, a blue line has three humps for contractions.",
+      "hi": "बीच में हरी पट्टी वाला ट्रेस। पट्टी के भीतर लाल लहरदार रेखा है जिसमें एक तीखा ऊपर की ओर उछाल है। नीचे नीली रेखा में संकुचन के तीन कूबड़ हैं।"
+    },
+    "caption": {
+      "en": "Heart rate in the green band, contractions below.",
+      "hi": "हृदय गति हरी पट्टी में, संकुचन नीचे।"
+    },
+    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.521,
+        "y": 0.36,
+        "label": {
+          "en": "Baseline 110 to 160",
+          "hi": "बेसलाइन 110 से 160"
+        },
+        "note": {
+          "en": "Normal band. Below 100 is pathological. Above 160 or 100 to 109 is suspicious.",
+          "hi": "सामान्य पट्टी। 100 से कम पैथोलॉजिकल। 160 से ऊपर या 100 से 109 संदिग्ध।"
+        }
+      },
+      {
+        "x": 0.25,
+        "y": 0.347,
+        "label": {
+          "en": "Variability 5 to 25",
+          "hi": "परिवर्तनशीलता 5 से 25"
+        },
+        "note": {
+          "en": "The small swings. Reduced for more than 50 minutes, increased for more than 30 minutes, or a sinusoidal pattern is pathological.",
+          "hi": "छोटे उतार-चढ़ाव। 50 मिनट से ज़्यादा कम, 30 मिनट से ज़्यादा ज़्यादा, या साइन-वेव पैटर्न पैथोलॉजिकल है।"
+        }
+      },
+      {
+        "x": 0.65,
+        "y": 0.2,
+        "label": {
+          "en": "Acceleration",
+          "hi": "त्वरण"
+        },
+        "note": {
+          "en": "A short rise with movement. Reassuring.",
+          "hi": "गति के साथ छोटा उछाल। आश्वस्त करने वाला।"
+        }
+      },
+      {
+        "x": 0.604,
+        "y": 0.72,
+        "label": {
+          "en": "Contractions",
+          "hi": "संकुचन"
+        },
+        "note": {
+          "en": "Always read the heart rate against the contractions.",
+          "hi": "हृदय गति हमेशा संकुचनों के सापेक्ष पढ़ें।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "A healthy, well-oxygenated fetus has a normal baseline, normal variability and accelerations. Loss of variability shows the brain is being depressed.",
+        "hi": "स्वस्थ, अच्छी ऑक्सीजन वाले भ्रूण में सामान्य बेसलाइन, सामान्य परिवर्तनशीलता और त्वरण होते हैं। परिवर्तनशीलता का घटना दिखाता है कि मस्तिष्क दब रहा है।"
+      },
+      {
+        "en": "FIGO calls a trace normal when the baseline is 110 to 160, the variability is 5 to 25 and there are no repetitive decelerations.",
+        "hi": "FIGO ट्रेस को सामान्य कहता है जब बेसलाइन 110 से 160 हो, परिवर्तनशीलता 5 से 25 हो और बार-बार मंदन न हों।"
+      },
+      {
+        "en": "Pathological means action, not panic: it means look for a cause and prepare to deliver.",
+        "hi": "पैथोलॉजिकल का मतलब कार्रवाई है, घबराहट नहीं: कारण खोजें और प्रसव की तैयारी करें।"
+      }
+    ],
+    "analogy": {
+      "en": "It is like reading a patient's chart in a fixed order: pulse, rhythm, then episodes. A fixed order keeps you from missing anything.",
+      "hi": "यह मरीज़ का चार्ट तय क्रम में पढ़ने जैसा है: नाड़ी, लय, फिर घटनाएँ। तय क्रम से कुछ छूटता नहीं।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Suspicious: lacks at least one normal feature but nothing pathological.",
+      "hi": "संदिग्ध: कम से कम एक सामान्य विशेषता नहीं है पर कुछ पैथोलॉजिकल नहीं।"
+    },
+    {
+      "en": "Pathological: baseline below 100, reduced variability over 50 minutes, increased variability over 30 minutes, sinusoidal over 30 minutes, repetitive late or prolonged decelerations over 30 minutes (20 if variability is reduced), or one prolonged deceleration over 5 minutes.",
+      "hi": "पैथोलॉजिकल: बेसलाइन 100 से कम, परिवर्तनशीलता 50 मिनट से ज़्यादा कम, 30 मिनट से ज़्यादा बढ़ी, साइन-वेव 30 मिनट से ज़्यादा, बार-बार देर से या लंबे मंदन 30 मिनट से ज़्यादा (परिवर्तनशीलता कम हो तो 20), या एक लंबा मंदन 5 मिनट से ज़्यादा।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Check the woman and the trace are matched, and the recording is good. Note the time of any change.",
+      "hi": "जाँचें कि महिला और ट्रेस मेल खाते हैं और रिकॉर्डिंग अच्छी है। हर बदलाव का समय लिखें।"
+    },
+    {
+      "en": "Read in order, then class. Suspicious: correct any cause and watch. Pathological: correct causes and call a senior.",
+      "hi": "क्रम से पढ़ें, फिर वर्ग तय करें। संदिग्ध: कारण ठीक करें और नज़र रखें। पैथोलॉजिकल: कारण ठीक करें और वरिष्ठ को बुलाएँ।"
+    },
+    {
+      "en": "Practise on the CTG clinic with real traces and see your answer against the outcome.",
+      "hi": "असली ट्रेस के साथ CTG क्लिनिक पर अभ्यास करें और अपना उत्तर परिणाम से मिलाएँ।"
+    }
+  ],
+  "remember": {
+    "en": "Normal is 110 to 160 with variability 5 to 25 and no repetitive decelerations. Read in order, then class, and treat pathological as action.",
+    "hi": "सामान्य 110 से 160, परिवर्तनशीलता 5 से 25, और बार-बार मंदन नहीं। क्रम से पढ़ें, फिर वर्ग, और पैथोलॉजिकल को कार्रवाई मानें।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "What baseline range is normal?",
+        "hi": "कौन सी बेसलाइन सीमा सामान्य है?"
+      },
+      "o": [
+        {
+          "en": "100 to 130",
+          "hi": "100 से 130"
+        },
+        {
+          "en": "110 to 160",
+          "hi": "110 से 160"
+        },
+        {
+          "en": "120 to 180",
+          "hi": "120 से 180"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "FIGO normal baseline is 110 to 160 beats per minute.",
+        "hi": "FIGO की सामान्य बेसलाइन 110 से 160 धड़कन प्रति मिनट है।"
+      }
+    },
+    {
+      "q": {
+        "en": "A baseline of 90 is present. What class?",
+        "hi": "बेसलाइन 90 है। कौन सा वर्ग?"
+      },
+      "o": [
+        {
+          "en": "Normal",
+          "hi": "सामान्य"
+        },
+        {
+          "en": "Suspicious",
+          "hi": "संदिग्ध"
+        },
+        {
+          "en": "Pathological",
+          "hi": "पैथोलॉजिकल"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "A baseline below 100 is pathological.",
+        "hi": "100 से कम बेसलाइन पैथोलॉजिकल है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Variability of 3 beats per minute for 60 minutes is:",
+        "hi": "60 मिनट तक 3 धड़कन प्रति मिनट की परिवर्तनशीलता है:"
+      },
+      "o": [
+        {
+          "en": "Normal",
+          "hi": "सामान्य"
+        },
+        {
+          "en": "Pathological",
+          "hi": "पैथोलॉजिकल"
+        },
+        {
+          "en": "A good sign",
+          "hi": "अच्छा संकेत"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Reduced variability for over 50 minutes is pathological.",
+        "hi": "50 मिनट से ज़्यादा घटी परिवर्तनशीलता पैथोलॉजिकल है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "ob-fetal",
+    "clinic": "ctg",
+    "classes": [
+      "normal",
+      "suspicious",
+      "pathological"
+    ]
+  },
+  "glossary": [
+    "ctg",
+    "baseline",
+    "variability",
+    "acceleration",
+    "deceleration"
+  ],
+  "sources": [
+    "Ayres-de-Campos D, Spong CY, Chandraharan E; FIGO Intrapartum Fetal Monitoring Expert Consensus Panel. FIGO consensus guidelines on intrapartum fetal monitoring: cardiotocography. Int J Gynaecol Obstet 2015;131(1):13-24.",
+    "Reviewer to confirm each threshold against the FIGO paper, which could not be opened here; the thresholds match those used by the Tokós CTG clinic."
+  ],
+  "competencies": [
+    "OG8.4"
+  ]
+}

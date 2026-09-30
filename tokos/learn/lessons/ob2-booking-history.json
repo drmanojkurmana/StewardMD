@@ -1,0 +1,242 @@
+{
+  "id": "ob2-booking-history",
+  "unit": "ob2",
+  "level": "mbbs",
+  "minutes": 6,
+  "review": "ai_drafted",
+  "competencies": [
+    "OG8.2",
+    "OG35.8",
+    "OG5.2"
+  ],
+  "title": {
+    "en": "Taking the obstetric history",
+    "hi": "प्रसूति इतिहास लेना"
+  },
+  "idea": {
+    "en": "The history at booking finds the first day of the LMP, the outcome of every past pregnancy and any illness that could make this pregnancy [[high-risk-pregnancy]]. It is summed up in the [[gpla]] formula.",
+    "hi": "बुकिंग पर इतिहास से LMP का पहला दिन, हर पिछली गर्भावस्था का नतीजा और कोई भी बीमारी पता चलती है जो इस गर्भावस्था को [[high-risk-pregnancy]] बना सकती है। इसका सार [[gpla]] सूत्र में लिखा जाता है।"
+  },
+  "see": {
+    "diagram": "diagrams/ob2-booking-history.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "Top row of five circles for pregnancies. First: a green filled circle for a full-term birth. Second: an amber circle for an early birth. Third: a dashed empty circle for an abortion. Fourth: a grey circle with a cross for a stillbirth. Fifth: a large blue ring for the present pregnancy. Below left is a calendar page with one red square at the start of a row of pink squares and a yellow ring further on. Below right are three dashed lines each starting with a red dot.",
+      "hi": "ऊपर की पंक्ति में गर्भावस्थाओं के लिए पाँच गोले हैं। पहला: पूर्ण अवधि के जन्म के लिए हरा भरा गोला। दूसरा: समय से पहले जन्म के लिए पीला गोला। तीसरा: गर्भपात के लिए बिंदीदार ख़ाली गोला। चौथा: मृत जन्म के लिए क्रॉस वाला भूरा गोला। पाँचवाँ: वर्तमान गर्भावस्था के लिए बड़ा नीला छल्ला। नीचे बाईं ओर कैलेंडर का पन्ना है जिसमें एक लाल वर्ग के बाद गुलाबी वर्गों की क़तार है और आगे पीला छल्ला है। नीचे दाईं ओर तीन बिंदीदार रेखाएँ हैं, हर एक की शुरुआत लाल बिंदु से है।"
+    },
+    "caption": {
+      "en": "Past pregnancies and the LMP calendar: what the booking history has to capture.",
+      "hi": "पिछली गर्भावस्थाएँ और LMP का कैलेंडर: बुकिंग इतिहास को जो पकड़ना है।"
+    },
+    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.146,
+        "y": 0.267,
+        "label": {
+          "en": "Term live birth",
+          "hi": "पूर्ण अवधि का जीवित जन्म"
+        },
+        "note": {
+          "en": "Counts in G, P and L.",
+          "hi": "G, P और L में गिना जाता है।"
+        }
+      },
+      {
+        "x": 0.313,
+        "y": 0.267,
+        "label": {
+          "en": "Preterm birth",
+          "hi": "समय से पहले जन्म"
+        },
+        "note": {
+          "en": "A past preterm birth is a risk factor for this pregnancy.",
+          "hi": "पिछला समय से पहले जन्म इस गर्भावस्था के लिए जोखिम है।"
+        }
+      },
+      {
+        "x": 0.479,
+        "y": 0.267,
+        "label": {
+          "en": "Abortion",
+          "hi": "गर्भपात"
+        },
+        "note": {
+          "en": "Counts in G and A. Three or more spontaneous abortions in a row is a reason to refer.",
+          "hi": "G और A में गिना जाता है। लगातार तीन या ज़्यादा स्वतः गर्भपात रेफ़र करने का कारण हैं।"
+        }
+      },
+      {
+        "x": 0.646,
+        "y": 0.267,
+        "label": {
+          "en": "Stillbirth",
+          "hi": "मृत जन्म"
+        },
+        "note": {
+          "en": "A stillbirth or neonatal loss is a reason to refer for care and delivery at a higher facility.",
+          "hi": "मृत जन्म या नवजात की मृत्यु ऊँची सुविधा पर देखभाल और प्रसव के लिए रेफ़र करने का कारण है।"
+        }
+      },
+      {
+        "x": 0.833,
+        "y": 0.267,
+        "label": {
+          "en": "This pregnancy",
+          "hi": "यह गर्भावस्था"
+        },
+        "note": {
+          "en": "Counted in G. Each woman is G plus the numbers above.",
+          "hi": "G में गिनी जाती है। हर महिला का G इन सबका जोड़ है।"
+        }
+      },
+      {
+        "x": 0.146,
+        "y": 0.663,
+        "label": {
+          "en": "First day of LMP",
+          "hi": "LMP का पहला दिन"
+        },
+        "note": {
+          "en": "The first day of bleeding, not the date of the missed period. Ask for a festival or event if she cannot recall.",
+          "hi": "ख़ून शुरू होने का पहला दिन, छूटे पीरियड की तारीख़ नहीं। याद न हो तो कोई त्योहार या घटना पूछिए।"
+        }
+      },
+      {
+        "x": 0.719,
+        "y": 0.713,
+        "label": {
+          "en": "Illness and family history",
+          "hi": "बीमारी और पारिवारिक इतिहास"
+        },
+        "note": {
+          "en": "Ask about high BP, diabetes, heart, TB, kidney, epilepsy, asthma, jaundice, malaria, HIV. Ask about twins or birth defects in the family, and drugs, tobacco or alcohol.",
+          "hi": "हाई बीपी, डायबिटीज़, हृदय रोग, TB, किडनी, मिर्गी, दमा, पीलिया, मलेरिया, HIV के बारे में पूछिए। परिवार में जुड़वाँ या जन्मजात दोष, और दवाओं, तंबाकू या शराब के बारे में भी।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Start with the [[lmp]]: the first day of the last period. It gives the weeks of pregnancy and the [[edd]] by Naegele's rule.",
+        "hi": "[[lmp]] से शुरू कीजिए: आख़िरी पीरियड का पहला दिन। इससे गर्भावस्था के हफ़्ते और Naegele के नियम से [[edd]] मिलती है।"
+      },
+      {
+        "en": "For every past pregnancy ask: was it live, still born or an abortion, how it ended and the baby's weight. Then write the [[gpla]] formula, for example G3 P1 L1 A1.",
+        "hi": "हर पिछली गर्भावस्था के बारे में पूछिए: जीवित थी, मृत जन्म या गर्भपात, कैसे ख़त्म हुई और बच्चे का वज़न। फिर [[gpla]] सूत्र लिखिए, जैसे G3 P1 L1 A1।"
+      },
+      {
+        "en": "Past events that call for referral to a higher facility include stillbirth or neonatal loss, three or more spontaneous abortions in a row, obstructed labour, preterm birth, twins, a baby below 2500 g or above 4500 g, hypertension or eclampsia, reproductive tract surgery, a congenital anomaly, infertility treatment and a previous Rh-negative pregnancy.",
+        "hi": "पहले की जिन बातों पर ऊँची सुविधा पर रेफ़र करना चाहिए उनमें शामिल हैं: मृत जन्म या नवजात की मृत्यु, लगातार तीन या ज़्यादा स्वतः गर्भपात, रुका हुआ प्रसव, समय से पहले जन्म, जुड़वाँ, 2500 g से कम या 4500 g से ज़्यादा वज़न का बच्चा, हाई बीपी या एक्लैम्प्सिया, प्रजनन-तंत्र की सर्जरी, जन्मजात दोष, बाँझपन का इलाज और पिछली Rh-नेगेटिव गर्भावस्था।"
+      },
+      {
+        "en": "Ask about illnesses that pregnancy can unmask or worsen (high BP, diabetes, heart disease, TB, kidney disease, epilepsy). Check drugs and habits, and ask if immunisation is complete.",
+        "hi": "उन बीमारियों के बारे में पूछिए जिन्हें गर्भावस्था उभार या बढ़ा सकती है (हाई बीपी, डायबिटीज़, हृदय रोग, TB, किडनी रोग, मिर्गी)। दवाएँ और आदतें जाँचिए, और पूछिए कि टीकाकरण पूरा है या नहीं।"
+      }
+    ],
+    "analogy": {
+      "en": "Think of the history as reading the last chapters before starting a new book in a series. The past pregnancies tell you which plot twists to expect.",
+      "hi": "इतिहास को किसी शृंखला की नई किताब शुरू करने से पहले पिछले अध्याय पढ़ने जैसा समझिए। पिछली गर्भावस्थाएँ बताती हैं कि कौन-से मोड़ आ सकते हैं।"
+    }
+  },
+  "spot": [
+    {
+      "en": "A woman gives the date her period was missed. Ask when the last bleeding started.",
+      "hi": "महिला पीरियड छूटने की तारीख़ बताती है। पूछिए कि आख़िरी बार ख़ून कब शुरू हुआ था।"
+    },
+    {
+      "en": "Primigravidas and grand multiparas (four or more births) need extra attention, as do very young women and those with a short gap from the last delivery.",
+      "hi": "पहली बार गर्भवती और grand multipara (चार या ज़्यादा प्रसव) पर, साथ ही बहुत कम उम्र की महिलाओं और पिछले प्रसव के कम अंतर वाली महिलाओं पर विशेष ध्यान चाहिए।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Write the LMP, the EDD, the obstetric formula and the risk factors on the first page of the case record.",
+      "hi": "केस रिकॉर्ड के पहले पन्ने पर LMP, EDD, प्रसूति सूत्र और जोखिम कारक लिखिए।"
+    },
+    {
+      "en": "Practise the formula on three imaginary patients until it is automatic.",
+      "hi": "सूत्र को तीन काल्पनिक मरीज़ों पर तब तक आज़माइए जब तक वह स्वाभाविक न हो जाए।"
+    }
+  ],
+  "remember": {
+    "en": "LMP first day, a line for every past pregnancy, then illness and drugs. Sum it up as G P L A.",
+    "hi": "LMP का पहला दिन, हर पिछली गर्भावस्था की एक पंक्ति, फिर बीमारी और दवाएँ। इसका सार G P L A में लिखिए।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which of these in the past obstetric history should trigger referral to a higher facility?",
+        "hi": "पिछले प्रसूति इतिहास की कौन-सी बात ऊँची सुविधा पर रेफ़र करने की वजह होनी चाहिए?"
+      },
+      "o": [
+        {
+          "en": "One normal vaginal delivery at term",
+          "hi": "पूर्ण अवधि पर एक सामान्य प्रसव"
+        },
+        {
+          "en": "Stillbirth or neonatal loss",
+          "hi": "मृत जन्म या नवजात की मृत्यु"
+        },
+        {
+          "en": "A baby weighing 3000 g",
+          "hi": "3000 g वज़न का बच्चा"
+        },
+        {
+          "en": "Breastfeeding for a year",
+          "hi": "एक साल तक स्तनपान"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "A stillbirth or neonatal loss, three or more spontaneous abortions, or obstructed labour are past events that call for care at a higher facility.",
+        "hi": "मृत जन्म या नवजात की मृत्यु, तीन या ज़्यादा स्वतः गर्भपात, या रुका हुआ प्रसव ऐसी पिछली घटनाएँ हैं जिनमें ऊँची सुविधा पर देखभाल चाहिए।"
+      }
+    },
+    {
+      "q": {
+        "en": "What is the LMP?",
+        "hi": "LMP क्या है?"
+      },
+      "o": [
+        {
+          "en": "The date the period was expected but did not come",
+          "hi": "वह तारीख़ जब पीरियड आना था पर नहीं आया"
+        },
+        {
+          "en": "The first day of the last menstrual period",
+          "hi": "आख़िरी माहवारी का पहला दिन"
+        },
+        {
+          "en": "The day of ovulation",
+          "hi": "ओव्यूलेशन का दिन"
+        },
+        {
+          "en": "The day the pregnancy test turned positive",
+          "hi": "जिस दिन प्रेगनेंसी टेस्ट पॉज़िटिव आया"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Using the missed-period date puts the EDD out by about four weeks.",
+        "hi": "छूटे पीरियड की तारीख़ लेने से EDD लगभग चार हफ़्ते खिसक जाती है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "ob-antenatal",
+    "tool": "edd"
+  },
+  "glossary": [
+    "edd",
+    "gpla",
+    "high-risk-pregnancy",
+    "lmp"
+  ],
+  "sources": [
+    "Ministry of Health and Family Welfare, India. Guidelines for Antenatal Care and Skilled Attendance at Birth by ANMs/LHVs/SNs (2010): history-taking, Box 5 (past obstetric history and referral), systemic illness, family history, drugs and habits.",
+    "Ministry of Health and Family Welfare, India. Pradhan Mantri Surakshit Matritva Abhiyan guidelines: history and examination at the clinic."
+  ]
+}
