@@ -72,6 +72,19 @@ export const JOURNAL_SOURCES = [
       '"Indian Pediatr"[ta]) AND (' + TRIALS + ' OR "Meta-Analysis"[pt] OR "Practice Guideline"[pt] OR "Guideline"[pt])' + NOT_OPINION,
   },
   {
+    // Checked live 2026-09-30: 34 in 365 days (3 in 30), mostly ISCCM, IAP, ESI, CSI and CCF India guidelines and
+    // position statements. "Indian J Nephrol" and "Int J Diabetes Dev Ctries" match nothing as [ta] and are left out.
+    seed: 3, id: "pubmed-india-guidelines", name: "Indian society and ICMR guidelines, position and consensus statements", type: "guideline",
+    workspace: "internal_medicine", branch: "", parser_type: "pubmed", priority: 58, homepage: PUBMED,
+    query: '("Indian J Crit Care Med"[ta] OR "Indian Heart J"[ta] OR "J Assoc Physicians India"[ta] OR "Indian J Med Res"[ta] OR ' +
+      '"Indian Pediatr"[ta] OR "Lung India"[ta] OR "Indian J Gastroenterol"[ta] OR "Indian J Dermatol Venereol Leprol"[ta] OR ' +
+      '"Indian J Psychiatry"[ta] OR "J Obstet Gynaecol India"[ta] OR "Neurol India"[ta] OR "Indian J Endocrinol Metab"[ta] OR "Natl Med J India"[ta]) AND ' +
+      '("Practice Guideline"[pt] OR "Guideline"[pt] OR "position statement"[ti] OR "consensus statement"[ti] OR ' +
+      '"evidence-based guideline"[ti] OR "clinical practice guideline"[ti] OR "clinical practice guidelines"[ti] OR "guidelines for"[ti] OR ' +
+      '"guideline for"[ti] OR "guideline on"[ti] OR "guidelines on"[ti] OR "recommendations for"[ti] OR "recommendations on"[ti] OR ' +
+      '"expert consensus"[ti]) NOT ("authors\' response"[ti] OR "reply to"[ti])' + NOT_OPINION,
+  },
+  {
     seed: 2, id: "pubmed-meta", name: "NEJM, Lancet, JAMA, BMJ, Annals, JAMA IM: meta-analyses and systematic reviews", type: "trial",
     workspace: "internal_medicine", branch: "", parser_type: "pubmed", priority: 80, homepage: PUBMED,
     query: '("N Engl J Med"[ta] OR "Lancet"[ta] OR "JAMA"[ta] OR "BMJ"[ta] OR "Ann Intern Med"[ta] OR "JAMA Intern Med"[ta]) AND ' +

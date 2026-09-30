@@ -5,6 +5,33 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-30 · Clinical Bulletins: second reader, specialty signers, pre-sign checks, numbers, India access
+
+**Decision (owner: "Do all", after "are we 2x or 10x better than UpToDate?").** Five changes, each aimed at the
+honest gap (trust at scale, one signer) or the real edge (India context):
+1. **Second reader** for approvals and safety alerts (supersedes D5 "one signature" for those kinds): a different
+   active signer confirms the exact signed text (`cosigned_hash = body_hash`) or sends it back with a note. Stored
+   `second_required` at signing; owner switch `bulletin_settings.second_reader` (default on; off releases waiting
+   ones; on applies from the next signing). The 5 bulletins live before this are unaffected (signed without it).
+2. **Specialty signers**: `bulletin_signers.specialties`; item specialties from source branch/workspace, else
+   whole-word terms (`_bulletin_rules.js SPECIALTIES`); queue shows "Mine" first with Show all; the Saturday push
+   is per signer.
+3. **Pre-sign checks** (never blocking): list-page link, CDSCO lists contradict the India status, What changed still
+   the AI wording, numbers not in the source summary. Codes shown are kept in the sign audit.
+4. **Numbers** (`GET /bulletins/metrics`): days from publication to the disease page, correction rate, coverage by
+   source, backlog, per-signer counts. The correction rate is the gauge for switching the second reader off.
+5. **India access** on the card: NLEM 2022 from the official PDF (`data/india/nlem2022.json`, built by
+   `scripts/india/build_nlem.py`, 385 medicines from the PDF's own index); Jan Aushadhi prices once the owner runs
+   `scripts/india/fetch-janaushadhi.mjs` (its API is on port 8443, unreachable from the build sandbox). Shown apart
+   from the signed text, labelled "Not part of the signed update". Indian society and ICMR guidelines join intake
+   (PubMed seed batch 3, 33 a year checked live).
+**Why.** The first 5 live bulletins had 2 needing correction; one signer is a bottleneck; the India layer is what a
+global reference does not give an Indian clinician.
+**Trade-off.** With one signer, new approvals and safety alerts cannot go live until a second doctor joins (or the
+owner switches the rule off). Keyword specialty routing is approximate; "Show all" is one tap. NLEM matching names
+a medicine only on an exact whole-word match (US names mapped), so it may miss some; it never claims absence.
+**Status.** Built and tested (unit, headless UI with design audit); Jan Aushadhi data waits for the owner's run.
+
 ## 2026-09-29 · Clinical Bulletins signing desk rebuilt for speed; "Skip" is shared by all signers
 
 **Decision (owner: "Make it more easy for doctors").** The Review Desk "Clinical updates" tab is an inbox (To do /

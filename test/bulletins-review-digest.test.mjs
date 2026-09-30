@@ -54,7 +54,7 @@ async function seeded() {
 
 test("counts: candidates (new items without a bulletin), drafts, source changes, reviews due", { skip: SKIP }, async () => {
   const env = await seeded();
-  assert.deepEqual(await pendingCounts(env, NOW), { candidates: 2, drafts: 1, source_changed: 1, review_due: 1, total: 5 });
+  assert.deepEqual(await pendingCounts(env, NOW), { candidates: 2, drafts: 1, source_changed: 1, review_due: 1, second_reads: 0, total: 5 });
 });
 
 test("message: says what waits, opens the Review Desk tab, no em-dash", () => {
@@ -117,4 +117,26 @@ test("worker: Saturday 03:30 UTC (09:00 IST) trigger posts the review run; Follo
   assert.match(branch.slice(0, 300), /post\("\/api\/updates\/review-digest"\)[\s\S]*?return;/);
   const fc = src.slice(src.indexOf('if (event.cron === "30 3 * * *")'));
   assert.ok(fc.slice(0, 400).indexOf("review-digest") < 0, "FollowCare branch does not post the review run");
+});
+
+test("run: each signer hears about their own specialties, and second reads only of bulletins someone else signed", { skip: SKIP }, async () => {
+  const env = await seeded();
+  const db = env.UPDATES_DB._db;
+  await updatesRepo.insertUpdate(env, { id: "u6", doc_key: "ku6", type: "trial", title: "Adjuvant therapy in early breast cancer", published_ts: NOW - DAY, content_hash: "h6" });
+  await updatesRepo.insertUpdate(env, { id: "u7", doc_key: "ku7", type: "trial", title: "SGLT2 inhibitors in heart failure", published_ts: NOW - DAY, content_hash: "h7" });
+  await updatesRepo.insertUpdate(env, { id: "u8", doc_key: "ku8", type: "drug_approval", title: "New approval", published_ts: NOW - DAY, content_hash: "h8" });
+  db.prepare("UPDATE bulletin_signers SET specialties = 'oncology' WHERE uid = 'u-doc2'").run();
+  db.prepare("INSERT INTO bulletins (id, update_id, source_hash, status, kind, headline, what_changed, evidence_type, india_status, source_label, source_url, source_date, review_months, review_due_ts, body_hash, signed_hash, signed_uid, second_required, created_ts, updated_ts) " +
+    "VALUES ('b-appr', 'u8', 'h8', 'signed', 'approval', 'h', 'w', 'regulatory_approval', 'unknown', 's', 'https://x.org', '2026-09-01', 12, ?, 'q', 'q', 'u-owner', 1, 1, 1)").run(NOW + 300 * DAY);
+  const owner = await pendingCounts(env, NOW, { uid: "u-owner", specialties: [] });
+  const doc2 = await pendingCounts(env, NOW, { uid: "u-doc2", specialties: ["oncology"] });
+  assert.equal(owner.second_reads, 0, "not your own");
+  assert.equal(doc2.second_reads, 1);
+  assert.equal(owner.candidates, 4, "no specialties: every new item (u1, u2, u6, u7)");
+  assert.equal(doc2.candidates, 3, "oncology plus items no specialty claims (u1, u2, u6), not the heart failure trial");
+  const sent = {};
+  await runWeeklyReview(env, { now: NOW, send: async (uid, msg) => { sent[uid] = msg.body; return { sent: 1 }; } });
+  assert.match(sent["fb:u-doc2"], /3 new journal and FDA items.*1 to read as second doctor/);
+  assert.match(sent["fb:u-owner"], /^4 new journal and FDA items/);
+  assert.ok(sent["fb:u-owner"].indexOf("second doctor") < 0);
 });

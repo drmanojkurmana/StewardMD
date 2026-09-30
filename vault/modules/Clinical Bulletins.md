@@ -116,6 +116,32 @@ Web push is payloadless broadcast only, so signers are reached through the nativ
 - `NON_MEDICAL_RE` (`_updates_util.js`) matches "CAT"/"CATs" (EMA's Committee for Advanced Therapies) as "cats": any
   EMA news text naming that committee is dropped. Not changed; the per-medicine feed avoids it.
 
+## v2 (2026-09-30): second reader, specialties, checks, numbers, India access
+- **Second reader** (`_bulletins_repo.js cosign / sendBack`, routes `/:id/cosign`, `/:id/return`, owner
+  `/second-reader`): approvals and safety alerts signed while the rule is on (`second_required = 1`) show only after a
+  DIFFERENT signer confirms the same `body_hash` (`VISIBLE_WHERE` + `COSIGNED`). Send back returns it to draft with
+  `returned_note` (the first signer sees it; it counts as a correction). The card names both doctors
+  (`publicProjection` `second_*`, never a uid). Queue: "Read as second doctor" (To do) and "Waiting for a second
+  doctor" (your own). Desk view `second`.
+- **Specialties**: owner picks them per signer (Signers > Edit); `specialtiesOf()` routes items (source branch or
+  workspace first, then whole-word terms); queue filters to Mine with "Show all"; `pendingCounts(env, now, signer)`
+  and the Saturday push are per signer.
+- **Pre-sign checks** (`bulletins-desk.js checksFor`): `index_link`, `cdsco_contradiction`, `cdsco_unconfirmed`
+  (approvals look the drug up in the CDSCO lists automatically), `ai_verbatim` (5-word overlap >= 60% with the AI
+  summary), `numbers_unsourced`. Shown in the editor, the bottom bar, the sign sheet and the second read; sent as
+  `warnings` with the signature and kept in the audit detail (`| warnings: ...`).
+- **Numbers** (`repo.metrics`, `GET /bulletins/metrics?days=`): from the audit: days to page (first sign, or the
+  second reader's), correction rate (edited, sent back or retracted after first signing; a source deletion does not
+  count), coverage by source, backlog, per signer. Desk view `numbers` (Desk tools > Numbers).
+- **India access** (`bulletins.js indiaAccess`): medicines named in headline / What changed / Applies to that are on
+  NLEM 2022 (whole word; US names mapped: epinephrine, acetaminophen, albuterol...), with levels of care; Jan
+  Aushadhi cheapest matching MRP when `data/india/janaushadhi.json` exists. Separate box, "Not part of the signed
+  update". Data ships in the bundle (`build-www.sh` copies `data/india/*.json`); loaded at boot.
+- **Schema v2 columns** self-apply (`_bulletins_schema.js BULLETIN_COLUMNS`, PRAGMA table_info + ALTER); hand copy
+  `functions/db/migrate_bulletins_v2.sql`.
+- **Indian guidelines**: PubMed seed batch 3 `pubmed-india-guidelines` (13 Indian journals, guideline types and title
+  phrases; "Consensus"[pt] does not exist in PubMed, two journal names match nothing and were dropped).
+
 ## Key files
 `functions/_bulletins_api.js` (routes, mounted from `functions/api/updates/[[path]].js` above the owner gate),
 `functions/_bulletins_repo.js`, `functions/_bulletins_auth.js`, `functions/_bulletin_rules.js`,
@@ -133,6 +159,8 @@ Web push is payloadless broadcast only, so signers are reached through the nativ
   jump, Sign locked until four ticks, desk at 320px, dark mode. Screenshots in `$TMPDIR/stewardmd-bulletins/`.
 
 ## To go live
+0. v2: add a second signer (Signers > Find by email) so approvals and safety alerts can go live; set each signer's
+   specialties; run `node scripts/india/fetch-janaushadhi.mjs` on a Mac in India, commit `data/india/janaushadhi.json`.
 1. Nothing to migrate: `functions/_bulletins_schema.js` runs the same DDL (CREATE ... IF NOT EXISTS, once per
    isolate) on the first bulletins request, like `functions/_counters.js`. The `.sql` file stays for manual use
    (run it from the repo root: `wrangler d1 execute stewardmd-updates --remote --file functions/db/migrate_bulletins.sql`).

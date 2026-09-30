@@ -13,6 +13,10 @@
  *   POST /api/updates/bulletins/signers                owner: add or update a signer
  *   POST /api/updates/bulletins/signers/:uid/deactivate owner
  *   POST /api/updates/bulletins/kill                   owner: { killed, reason } kill switch, no redeploy
+ *   POST /api/updates/bulletins/:id/cosign             signer (not the first signer): second reader confirms the text
+ *   POST /api/updates/bulletins/:id/return             signer (not the first signer): { note } send it back to draft
+ *   POST /api/updates/bulletins/second-reader          owner: { on, reason } second reader for approvals and safety alerts
+ *   GET  /api/updates/bulletins/metrics                signer or owner: days to page, coverage, correction rate, backlog
  *   GET  /api/updates/bulletins/cdsco?q=               signer: look a drug up in the stored CDSCO new-drug lists
  *   POST /api/updates/bulletins/cdsco/refresh          owner: refresh those lists now (also runs with the daily sync)
  *
@@ -20,7 +24,8 @@
  * Plan: docs/CLINICAL_AUTO_UPDATE_ENGINEERING_SPEC.md.
  */
 import * as repo from "./_bulletins_repo.js";
-import { validateDraft, bodyHash, publicProjection, sha256Hex, cleanText, knownDiseaseIds } from "./_bulletin_rules.js";
+import { validateDraft, bodyHash, publicProjection, sha256Hex, cleanText, knownDiseaseIds, SPECIALTIES, cleanSpecialties, specialtiesOf,
+  isMine, cleanWarnings } from "./_bulletin_rules.js";
 import { signerIdentity, ownerIdentity } from "./_bulletins_auth.js";
 import { ensureBulletinSchema } from "./_bulletins_schema.js";
 import { getUserClaims, lookupUidByEmail } from "./_fbadmin.js";
@@ -28,7 +33,7 @@ import { lookup as cdscoLookup, refreshCdscoLists } from "./_cdsco.js";
 import { pendingCounts } from "./_bulletins_review_digest.js";
 
 const PUB_CACHE = "public, max-age=300";
-const RESERVED = ["me", "queue", "signers", "kill", "cdsco", "skip"];
+const RESERVED = ["me", "queue", "signers", "kill", "cdsco", "skip", "metrics", "second-reader"];
 const CHECKLIST = ["source_read", "numbers_match", "india_checked", "own_words"];
 
 function json(obj, status, cache, extra) {
@@ -54,7 +59,8 @@ export async function doctorPrefill(env, uid) {
 }
 
 function checkSignerFields(b) {
-  const out = { uid: cleanText(b.uid).slice(0, 128), name: cleanText(b.name), reg_no: cleanText(b.reg_no), council: cleanText(b.council) };
+  const out = { uid: cleanText(b.uid).slice(0, 128), name: cleanText(b.name), reg_no: cleanText(b.reg_no), council: cleanText(b.council),
+    specialties: cleanSpecialties(b.specialties) };
   const bad = [];
   if (!out.uid) bad.push("uid");
   if (out.name.length < 3 || out.name.length > 120) bad.push("name");
@@ -64,12 +70,19 @@ function checkSignerFields(b) {
   return { out, bad };
 }
 
-function queueItem(r, now, known) {
-  const state = repo.stateOf(r, now);
+// signer: { uid, specialties } of the viewer, for "Mine" and whether they may co-sign.
+function queueItem(r, now, known, secondOn, signer) {
+  const state = repo.stateOf(r, now, secondOn);
   const orphaned = (r.disease_ids || []).filter((d) => !known.has(d));
-  const item = Object.assign({}, r, { state, orphaned });
+  const specialties = specialtiesOf([r.u_title, r.u_summary, r.headline, r.what_changed].join(" "), r.u_branch, r.u_workspace);
+  const item = Object.assign({}, r, { state, orphaned, specialties, mine: isMine(specialties, signer && signer.specialties),
+    can_cosign: state === "awaiting_second" && !!signer && signer.uid !== r.signed_uid });
   delete item.dz;
   return item;
+}
+function candidateItem(c, signer) {
+  const specialties = specialtiesOf([c.title, c.summary].join(" "), c.branch, c.workspace);
+  return Object.assign({}, c, { specialties, mine: isMine(specialties, signer && signer.specialties) });
 }
 
 export async function handleBulletins(context, parts) {
@@ -107,17 +120,28 @@ export async function handleBulletins(context, parts) {
     try { killed = !(await repo.isEnabled(env)); } catch (e) {}
     const uid = s.ok ? s.uid : (o.ok ? o.uid : null);
     const prefill = o.ok ? await doctorPrefill(env, o.uid) : null;
-    let pending = null;
-    if (s.ok) { try { pending = await pendingCounts(env, now); } catch (e) {} }
+    let pending = null, secondOn = true;
+    if (s.ok) { try { pending = await pendingCounts(env, now, s); } catch (e) {} }
+    try { secondOn = await repo.secondReaderOn(env); } catch (e) {}
     return json({
-      canSign: s.ok, reason: s.ok ? "" : s.reason, isOwner: o.ok, killed, pending,
-      signer: s.ok ? { name: s.name, regNo: s.regNo, council: s.council } : null,
+      canSign: s.ok, reason: s.ok ? "" : s.reason, isOwner: o.ok, killed, pending, secondReader: secondOn,
+      signer: s.ok ? { uid: s.uid, name: s.name, regNo: s.regNo, council: s.council, specialties: s.specialties || [] } : null,
       self: o.ok ? Object.assign({ uid }, prefill || {}) : null,
+      specialtyOptions: SPECIALTIES.map((x) => [x[0], x[1]]),
     });
   }
 
-  /* ---------- owner: signers + kill switch ---------- */
-  if (sub === "signers" || sub === "kill") {
+  /* ---------- numbers: signer or owner ---------- */
+  if (method === "GET" && sub === "metrics") {
+    const s0 = await signerIdentity(request, env);
+    const o0 = s0.ok ? null : await ownerIdentity(request, env);
+    if (!s0.ok && !(o0 && o0.ok)) return json({ error: "forbidden", reason: s0.reason }, s0.reason === "not-signed-in" ? 401 : 403);
+    const days = Math.min(365, Math.max(7, parseInt(new URL(request.url).searchParams.get("days"), 10) || 90));
+    return json(Object.assign({ ok: true, second_reader: await repo.secondReaderOn(env) }, await repo.metrics(env, now, days)));
+  }
+
+  /* ---------- owner: signers + kill switch + second reader ---------- */
+  if (sub === "signers" || sub === "kill" || sub === "second-reader") {
     const o = await ownerIdentity(request, env);
     if (!o.ok) return json({ error: "forbidden", reason: o.reason }, o.reason === "not-signed-in" ? 401 : 403);
 
@@ -128,6 +152,14 @@ export async function handleBulletins(context, parts) {
       if (reason.length < 10 || reason.length > 300) return json({ error: "reason-required" }, 400);
       await repo.setEnabled(env, !b.killed, o.uid, reason, now);
       return json({ ok: true, killed: b.killed });
+    }
+    if (sub === "second-reader" && method === "POST") {
+      const b = await body(request);
+      const reason = cleanText(b.reason);
+      if (typeof b.on !== "boolean") return json({ error: "on-boolean-required" }, 400);
+      if (reason.length < 10 || reason.length > 300) return json({ error: "reason-required" }, 400);
+      await repo.setSecondReader(env, b.on, o.uid, reason, now);
+      return json({ ok: true, on: b.on });
     }
     if (sub === "signers" && method === "GET" && !parts[2]) return json({ ok: true, signers: await repo.listSigners(env) });
     if (sub === "signers" && method === "GET" && parts[2] === "lookup") {
@@ -185,10 +217,12 @@ export async function handleBulletins(context, parts) {
   const s = await signerIdentity(request, env);
   if (!s.ok) return json({ error: "forbidden", reason: s.reason }, s.reason === "not-signed-in" ? 401 : 403);
 
+  const secondOn = await repo.secondReaderOn(env);
+
   if (method === "GET" && sub === "queue") {
     const known = knownDiseaseIds();
     const rows = await repo.listForQueue(env);
-    const items = rows.map((r) => queueItem(r, now, known));
+    const items = rows.map((r) => queueItem(r, now, known, secondOn, s));
     for (const it of items) {
       if (it.state === "source_changed" && it.update_id) {
         try { it.source_change = await repo.latestSourceChange(env, it.update_id); } catch (e) {}
@@ -196,8 +230,8 @@ export async function handleBulletins(context, parts) {
     }
     let killed = false;
     try { killed = !(await repo.isEnabled(env)); } catch (e) {}
-    const candidates = await repo.listCandidates(env, now - 90 * 86400000, 50);
-    return json({ ok: true, killed, items, candidates });
+    const candidates = (await repo.listCandidates(env, now - 90 * 86400000, 50)).map((c) => candidateItem(c, s));
+    return json({ ok: true, killed, secondReader: secondOn, items, candidates });
   }
 
   if (method === "POST" && !sub) {
@@ -209,7 +243,7 @@ export async function handleBulletins(context, parts) {
       if (!existing) return json({ error: "not-found" }, 404);
       if (existing.status === "retracted") return json({ error: "retracted" }, 409);
       if (cleanText(b.update_id) !== existing.update_id) return json({ error: "update-id-immutable" }, 400);
-      if (Number(b.updated_ts) !== existing.updated_ts) return json({ error: "stale", item: queueItem(existing, now, knownDiseaseIds()) }, 409);
+      if (Number(b.updated_ts) !== existing.updated_ts) return json({ error: "stale", item: queueItem(existing, now, knownDiseaseIds(), secondOn, s) }, 409);
     }
     const res = validateDraft(b, { now });
     if (!res.ok) return json({ error: "invalid", errors: res.errors }, 400);
@@ -222,7 +256,7 @@ export async function handleBulletins(context, parts) {
       expectUpdatedTs: existing ? existing.updated_ts : undefined,
     });
     if (!saved) return json({ error: "stale" }, 409);
-    return json({ ok: true, item: queueItem(await repo.getBulletin(env, saved), now, knownDiseaseIds()) });
+    return json({ ok: true, item: queueItem(await repo.getBulletin(env, saved), now, knownDiseaseIds(), secondOn, s) });
   }
 
   if (method === "POST" && sub && RESERVED.indexOf(sub) < 0 && parts[2] === "sign") {
@@ -232,9 +266,29 @@ export async function handleBulletins(context, parts) {
     if (missing.length) return json({ error: "checklist-incomplete", missing }, 400);
     const previewed = cleanText(b.body_hash);
     if (!/^[0-9a-f]{64}$/.test(previewed)) return json({ error: "body-hash-required" }, 400);
-    const r = await repo.sign(env, { id: sub, previewedHash: previewed, signer: s, now });
+    const r = await repo.sign(env, { id: sub, previewedHash: previewed, signer: s, now, secondOn, warnings: cleanWarnings(b.warnings) });
     if (!r.ok) return json({ error: r.code }, r.code === "not-found" ? 404 : 409);
-    return json({ ok: true, item: queueItem(r.row, now, knownDiseaseIds()) });
+    return json({ ok: true, item: queueItem(r.row, now, knownDiseaseIds(), secondOn, s) });
+  }
+
+  if (method === "POST" && sub && RESERVED.indexOf(sub) < 0 && parts[2] === "cosign") {
+    const b = await body(request);
+    const cl = b.checklist || {};
+    const missing = CHECKLIST.filter((k) => cl[k] !== true);
+    if (missing.length) return json({ error: "checklist-incomplete", missing }, 400);
+    const previewed = cleanText(b.body_hash);
+    if (!/^[0-9a-f]{64}$/.test(previewed)) return json({ error: "body-hash-required" }, 400);
+    const r = await repo.cosign(env, { id: sub, previewedHash: previewed, signer: s, now });
+    if (!r.ok) return json({ error: r.code }, r.code === "not-found" ? 404 : 409);
+    return json({ ok: true, item: queueItem(r.row, now, knownDiseaseIds(), secondOn, s) });
+  }
+
+  if (method === "POST" && sub && RESERVED.indexOf(sub) < 0 && parts[2] === "return") {
+    const note = cleanText((await body(request)).note);
+    if (note.length < 10 || note.length > 500) return json({ error: "note-required" }, 400);
+    const r = await repo.sendBack(env, { id: sub, note, uid: s.uid, now });
+    if (!r.ok) return json({ error: r.code }, r.code === "not-found" ? 404 : 409);
+    return json({ ok: true, item: queueItem(r.row, now, knownDiseaseIds(), secondOn, s) });
   }
 
   if (method === "POST" && sub === "skip") {

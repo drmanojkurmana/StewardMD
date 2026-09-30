@@ -179,7 +179,7 @@ function d1() {
 test("seeding: journal sources are added once; an owner's deletion or disable sticks", { skip: SKIP }, async () => {
   const D = d1(); D._db.exec(SCHEMA.replace(/-- BEGIN bulletins[\s\S]*?-- END bulletins/, ""));   // pre-bulletins database
   const env = { UPDATES_DB: D };
-  assert.deepEqual(await seedJournalSourcesOnce(env), [1, 2]);
+  assert.deepEqual(await seedJournalSourcesOnce(env), [1, 2, 3]);
   const ids = () => D._db.prepare("SELECT id FROM sources ORDER BY id").all().map((r) => r.id);
   assert.deepEqual(ids(), JOURNAL_SOURCES.map((s) => s.id).sort());
   D._db.prepare("DELETE FROM sources WHERE id = 'pubmed-cardio'").run();
@@ -197,9 +197,9 @@ test("seeding: a later batch reaches a site that already has batch 1, without re
   const b1 = JOURNAL_SOURCES.filter((s) => s.seed === 1);
   for (const s of b1) if (s.id !== "pubmed-cardio") D._db.prepare("INSERT INTO sources (id, name, query, parser_type, type, enabled, created_ts) VALUES (?,?,?,?,?,1,1)").run(s.id, s.name, s.query, s.parser_type, s.type);
   D._db.prepare("INSERT INTO bulletin_settings (key, value) VALUES (?, '1')").run(seedKey(1));    // production state after batch 1, cardio deleted
-  assert.deepEqual(await seedJournalSourcesOnce(env), [2]);
+  assert.deepEqual(await seedJournalSourcesOnce(env), [2, 3]);
   const ids = D._db.prepare("SELECT id FROM sources").all().map((r) => r.id);
-  for (const s of JOURNAL_SOURCES.filter((x) => x.seed === 2)) assert.ok(ids.indexOf(s.id) >= 0, s.id + " added");
+  for (const s of JOURNAL_SOURCES.filter((x) => x.seed >= 2)) assert.ok(ids.indexOf(s.id) >= 0, s.id + " added");
   assert.ok(ids.indexOf("pubmed-cardio") < 0, "batch 1 deletion still respected");
   assert.equal(new Set(JOURNAL_SOURCES.map((s) => s.id)).size, JOURNAL_SOURCES.length, "ids are unique");
   for (const s of JOURNAL_SOURCES) assert.ok(Number.isInteger(s.seed) && s.seed >= 1, s.id + " has a batch");
