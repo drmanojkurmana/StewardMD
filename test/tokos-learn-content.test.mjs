@@ -52,3 +52,15 @@ test("the real tokos/learn, when present, is valid and its built files are in st
     .concat(readdirSync(LEARN + "media", { withFileTypes: true }).filter((d) => d.isDirectory()).flatMap((d) => readdirSync(LEARN + "media/" + d.name).map((f) => LEARN + "media/" + d.name + "/" + f)));
   assert.deepEqual(files.map(normalize).filter((f) => !credited.has(f)), [], "uncredited Learn media");
 });
+
+test("every lesson picture points at a file that exists (see.img and see.diagram)", () => {
+  if (!existsSync(LEARN + "lessons")) return;
+  const TOKOS = fileURLToPath(new URL("../tokos/", import.meta.url));
+  const missing = [];
+  for (const f of readdirSync(LEARN + "lessons").filter((n) => n.endsWith(".json"))) {
+    const s = JSON.parse(readFileSync(LEARN + "lessons/" + f, "utf8")).see || {};
+    if (s.img && !existsSync(TOKOS + s.img)) missing.push(f + " -> " + s.img);
+    if (s.diagram && !existsSync(LEARN + s.diagram)) missing.push(f + " -> " + s.diagram);
+  }
+  assert.deepEqual(missing, []);
+});
