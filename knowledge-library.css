@@ -253,3 +253,14 @@ body.dark .smd-kb-logo { filter: brightness(1.9) saturate(.85); }
 #dxOverlay #dxMgmt.dx-reader .dx-mgmt-src { font-size: 13px; color: var(--rd-mut); }
 #dxOverlay #dxMgmt.dx-reader .dx-reader-hero .smd-kb-banner { margin-bottom: 16px; }
 @media (prefers-reduced-motion: reduce) { .kblib-try button, .kblib-searchbox :is(.kblib-search, .kblib-tool-search) { transition: none; } }
+/* live search (2026-09-30): the search box sticks to the top of the panel and results scroll under it;
+   while it has focus the list gets room to scroll up above the on-screen keyboard (phone and iPad) */
+#sbrefOverlay #sbrefBody .kblib-searchbox { position: sticky; top: 0; z-index: 2; margin: 0 -6px; padding: 6px; background: var(--kl-sticky, var(--paper, #f5f5f7)); }
+html[data-appearance] #sbrefOverlay #sbrefBody .kblib-searchbox { --kl-sticky: var(--panel, #fff); }
+#sbrefOverlay #sbrefBody:has(.kblib-searchbox input:focus)::after { content: ""; display: block; height: 60vh; }
+.kblib-discover.kblib-searching :is(.kblib-intro, .kblib-try, .kblib-personal, .kblib-refine, .kblib-search-label) { display: none; }
+/* iPad and wider: the panel fills the screen (no floating 900px column); content keeps a reading width */
+#sbrefOverlay:has(.kblib-discover) .sbref-shell, #sbrefOverlay:has(.kblib-tool-page) .sbref-shell { max-width: none; }
+#sbrefOverlay:has(.kblib-discover) .sbref-top, #sbrefOverlay:has(.kblib-tool-page) .sbref-top { padding-inline: max(18px, calc((100% - 800px) / 2)); }
+#sbrefOverlay #sbrefBody:has(.kblib-discover), #sbrefOverlay #sbrefBody.kblib-tool-page { max-width: 840px; min-width: 0; }
+.kbp-searching .kbp-status-note { display: none; }
