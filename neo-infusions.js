@@ -54,13 +54,19 @@
   if (typeof module !== "undefined" && module.exports) { module.exports = ENGINE; return; }
 
   /* ================================ UI ================================ */
+  /* Concentrations the source conditions on weight (for example 500 g or more) show only when they fit;
+   * an unknown weight keeps them. */
+  function usableConcs(drug, d) {
+    var E = G.SMD_NEO_ENGINE || (G.SMD_NEO && G.SMD_NEO.engine);
+    return (drug.concentrations || []).filter(function (c) { return !c.when || !E || E.matches(c.when, E.context(d)).ok !== false; });
+  }
   var S = { id: null, ci: "0", custom: "", mode: "dose", dose: "", rate: "" };
   function r3(v) { return v == null ? "" : (Math.round(v * 1000) / 1000).toLocaleString("en-IN", { maximumFractionDigits: 3 }); }
   function r2(v) { return v == null ? "" : (Math.round(v * 100) / 100).toLocaleString("en-IN", { maximumFractionDigits: 2 }); }
 
   function out(A, doc, drug) {
     var esc = A.esc, d = A.neo(), wKg = d.weightG ? d.weightG / 1000 : null, U = parseUnit(drug.doseUnit), h = "", lines = [];
-    var concs = drug.concentrations || [], conc = null;
+    var concs = usableConcs(drug, d), conc = null;
     if (S.ci === "custom") { var cv = num(S.custom); if (cv > 0 && U) conc = { v: cv, unit: U.amt, per_ml: 1, label: "As prepared" }; }
     else conc = concs[+S.ci] || null;
     if (!wKg) return A.note("Enter the current weight in grams in the baby record.");
@@ -96,15 +102,19 @@
     A.dataOrNull("infusions").then(function (doc) {
       if (!doc || !(doc.drugs || []).length) { el.innerHTML = '<section class="nh-card"><h3>Infusions</h3>' + A.noData("neonatal infusions") + "</section>"; return; }
       var drug = null; doc.drugs.forEach(function (x) { if (x.id === S.id) drug = x; });
-      var esc = A.esc, concs = drug ? drug.concentrations || [] : [];
+      var esc = A.esc, concs = drug ? usableConcs(drug, A.neo()) : [];
+      var E = G.SMD_NEO_ENGINE;
       el.innerHTML = '<section class="nh-card"><h3>Infusion ' + A.badge(doc) + "</h3>" +
         '<label>Drug<select data-inf="id"><option value="">Choose a drug</option>' + doc.drugs.map(function (x) { return '<option value="' + esc(x.id) + '"' + (x.id === S.id ? " selected" : "") + ">" + esc(x.name) + "</option>"; }).join("") + "</select></label>" +
         (drug ? (drug.highAlert ? A.secondCheckHtml(drug.name) : "") +
-          '<label>Concentration<select data-inf="ci">' + concs.map(function (c, i) { return '<option value="' + i + '"' + (String(i) === S.ci ? " selected" : "") + ">" + esc((c.label ? c.label + ": " : "") + c.v + " " + c.unit + " in " + (c.per_ml || 1) + " mL") + "</option>"; }).join("") + '<option value="custom"' + (S.ci === "custom" ? " selected" : "") + ">As prepared (type it)</option></select></label>" +
+          '<label>Concentration<select data-inf="ci">' + concs.map(function (c, i) { return '<option value="' + i + '"' + (String(i) === S.ci ? " selected" : "") + ">" + esc((c.label ? c.label + ": " : "") + c.v + " " + c.unit + " per " + (c.per_ml && c.per_ml !== 1 ? c.per_ml + " " : "") + "mL" + (c.when && E ? " (" + E.condText(c.when) + ")" : "")) + "</option>"; }).join("") + '<option value="custom"' + (S.ci === "custom" ? " selected" : "") + ">As prepared (type it)</option></select></label>" +
           (S.ci === "custom" ? '<label>Concentration you prepared<span class="nh-u"><input inputmode="decimal" data-inf="custom" value="' + esc(S.custom) + '"><span>' + esc((parseUnit(drug.doseUnit) || {}).amt || "") + '/mL</span></span></label>' : "") +
           '<span class="nh-seg" role="group" aria-label="Direction"><button type="button" data-inf-mode="dose" aria-pressed="' + (S.mode === "dose") + '">Dose to mL/h</button><button type="button" data-inf-mode="rate" aria-pressed="' + (S.mode === "rate") + '">mL/h to dose</button></span>' +
           (S.mode === "dose" ? '<label>Dose<span class="nh-u"><input inputmode="decimal" data-inf="dose" value="' + esc(S.dose) + '"><span>' + esc(drug.doseUnit) + "</span></span></label>" : '<label>Pump rate<span class="nh-u"><input inputmode="decimal" data-inf="rate" value="' + esc(S.rate) + '"><span>mL/h</span></span></label>') +
-          '<div data-inf-out="1">' + out(A, doc, drug) + "</div>" + A.actionsHtml("inf") + (drug.notes || []).map(function (n) { return A.note(n.text) + A.srcLine(doc, n); }).join("") : "") +
+          '<div data-inf-out="1">' + out(A, doc, drug) + "</div>" + A.actionsHtml("inf") +
+          (drug.initial || []).map(function (x) { return '<div class="nh-work">' + esc("Starting rate in the source: " + (x.lo != null ? x.lo : x.v != null ? x.v : "") + (x.hi != null && x.hi !== x.lo ? " to " + x.hi : "") + " " + (x.unit || drug.doseUnit) + (x.when && E ? " (" + E.condText(x.when) + ")" : "")) + "</div>" + A.srcLine(doc, x); }).join("") +
+          (drug.highAlertBasis ? A.srcLine(doc, drug.highAlertBasis) : "") +
+          (drug.notes || []).map(function (n) { return A.note(n.text) + A.srcLine(doc, n); }).join("") : "") +
         '<div class="nh-foot">Separate from the adult infusion pump. Verify every rate before starting.</div></section>';
       el.oninput = el.onchange = function (e) {
         var k = e.target.getAttribute && e.target.getAttribute("data-inf"); if (!k) return;

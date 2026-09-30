@@ -1,0 +1,641 @@
+{
+ "schema": 1,
+ "kind": "neo-reflexes",
+ "title": "Primitive reflexes and postural reactions",
+ "compiled": "2026-09-30",
+ "review": {
+  "status": "ai_drafted",
+  "by": null,
+  "date": null
+ },
+ "_comment": "Each reflex: elicit, response, appears, disappears, abnormal, each with its own src+quote. Primary values come from StatPearls Primitive Reflexes (2026); alt[] keeps conflicting statements from other sources verbatim. Ages are as worded: lo/hi range, by = on or before, within = in the first N, v = point, approx when the source says about/approximately/around. Units as the source words them.",
+ "sources": {
+  "rx-statpearls-primitive": {
+   "title": "StatPearls: Primitive Reflexes: Comprehensive Neurological Assessment Across the Lifespan",
+   "publisher": "StatPearls Publishing (NCBI Bookshelf)",
+   "url": "https://www.ncbi.nlm.nih.gov/books/NBK554606/",
+   "licence": "CC BY-NC-ND 4.0. StatPearls: \"This book is distributed under the terms of the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) ... which permits others to distribute the work, provided that the article is not altered or used commercially.\" Non-commercial, no derivatives: quotes kept verbatim; commercial use needs permission.",
+   "accessed": "2026-09-30",
+   "via": "Bookshelf page returned reCAPTCHA; text from NCBI Literature Archive OA package https://ftp.ncbi.nlm.nih.gov/pub/litarch/3d/12/statpearls_NBK430685.tar.gz member article-27744.nxml (2026 edition)"
+  },
+  "rx-statpearls-moro": {
+   "title": "StatPearls: Moro Reflex",
+   "publisher": "StatPearls Publishing (NCBI Bookshelf)",
+   "url": "https://www.ncbi.nlm.nih.gov/books/NBK542173/",
+   "licence": "CC BY-NC-ND 4.0. StatPearls: \"This book is distributed under the terms of the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) ... which permits others to distribute the work, provided that the article is not altered or used commercially.\" Non-commercial, no derivatives: quotes kept verbatim; commercial use needs permission.",
+   "accessed": "2026-09-30",
+   "via": "Bookshelf page returned reCAPTCHA; text from NCBI Literature Archive OA package https://ftp.ncbi.nlm.nih.gov/pub/litarch/3d/12/statpearls_NBK430685.tar.gz member article-25269.nxml (2025 edition)"
+  },
+  "rx-statpearls-rooting": {
+   "title": "StatPearls: Rooting Reflex",
+   "publisher": "StatPearls Publishing (NCBI Bookshelf)",
+   "url": "https://www.ncbi.nlm.nih.gov/books/NBK557636/",
+   "licence": "CC BY-NC-ND 4.0. StatPearls: \"This book is distributed under the terms of the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) ... which permits others to distribute the work, provided that the article is not altered or used commercially.\" Non-commercial, no derivatives: quotes kept verbatim; commercial use needs permission.",
+   "accessed": "2026-09-30",
+   "via": "Bookshelf page returned reCAPTCHA; text from NCBI Literature Archive OA package https://ftp.ncbi.nlm.nih.gov/pub/litarch/3d/12/statpearls_NBK430685.tar.gz member article-28640.nxml (2026 edition)"
+  },
+  "rx-statpearls-tonic-neck": {
+   "title": "StatPearls: Tonic Neck Reflex",
+   "publisher": "StatPearls Publishing (NCBI Bookshelf)",
+   "url": "https://www.ncbi.nlm.nih.gov/books/NBK559210/",
+   "licence": "CC BY-NC-ND 4.0. StatPearls: \"This book is distributed under the terms of the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) ... which permits others to distribute the work, provided that the article is not altered or used commercially.\" Non-commercial, no derivatives: quotes kept verbatim; commercial use needs permission.",
+   "accessed": "2026-09-30",
+   "via": "Bookshelf page returned reCAPTCHA; text from NCBI Literature Archive OA package https://ftp.ncbi.nlm.nih.gov/pub/litarch/3d/12/statpearls_NBK430685.tar.gz member article-81548.nxml (2023 edition)"
+  },
+  "rx-statpearls-babinski": {
+   "title": "StatPearls: Babinski Reflex",
+   "publisher": "StatPearls Publishing (NCBI Bookshelf)",
+   "url": "https://www.ncbi.nlm.nih.gov/books/NBK519009/",
+   "licence": "CC BY-NC-ND 4.0. StatPearls: \"This book is distributed under the terms of the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) ... which permits others to distribute the work, provided that the article is not altered or used commercially.\" Non-commercial, no derivatives: quotes kept verbatim; commercial use needs permission.",
+   "accessed": "2026-09-30",
+   "via": "Bookshelf page returned reCAPTCHA; text from NCBI Literature Archive OA package https://ftp.ncbi.nlm.nih.gov/pub/litarch/3d/12/statpearls_NBK430685.tar.gz member article-18083.nxml (2023 edition)"
+  },
+  "rx-statpearls-child-dev": {
+   "title": "StatPearls: Child Development",
+   "publisher": "StatPearls Publishing (NCBI Bookshelf)",
+   "url": "https://www.ncbi.nlm.nih.gov/books/NBK564386/",
+   "licence": "CC BY-NC-ND 4.0. StatPearls: \"This book is distributed under the terms of the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) ... which permits others to distribute the work, provided that the article is not altered or used commercially.\" Non-commercial, no derivatives: quotes kept verbatim; commercial use needs permission.",
+   "accessed": "2026-09-30",
+   "via": "Bookshelf page returned reCAPTCHA; text from NCBI Literature Archive OA package https://ftp.ncbi.nlm.nih.gov/pub/litarch/3d/12/statpearls_NBK430685.tar.gz member article-19410.nxml (2023 edition)"
+  },
+  "rx-futagi-2012": {
+   "title": "Futagi Y, Toribe Y, Suzuki Y. The grasp reflex and Moro reflex in infants: hierarchy of primitive reflex responses. Int J Pediatr 2012 (PMC3384944)",
+   "publisher": "Hindawi / Europe PMC",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3384944/fullTextXML",
+   "licence": "CC BY (\"open access article distributed under the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly cited\")",
+   "accessed": "2026-09-30"
+  },
+  "rx-mjms-2023": {
+   "title": "Zakaria Z, et al. The Key Aspects of Neonatal and Infant Neurological Examination. Malays J Med Sci 2023 (PMC10467588)",
+   "publisher": "Malaysian Journal of Medical Sciences / Europe PMC",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10467588/fullTextXML",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  }
+ },
+ "notes": [
+  {
+   "lo": 4,
+   "hi": 6,
+   "unit": "months",
+   "src": "rx-statpearls-primitive",
+   "quote": "Persistence of primitive reflexes beyond 4 to 6 months strongly correlates with neurodevelopmental conditions, particularly cerebral palsy and autism spectrum disorders."
+  },
+  {
+   "lo": 4,
+   "hi": 6,
+   "unit": "months",
+   "abnormal_count_min": 5,
+   "src": "rx-statpearls-primitive",
+   "quote": "Persistence of multiple primitive reflexes beyond 4 to 6 months is strongly associated with cerebral palsy and developmental delay, and the presence of 5 or more abnormal reflexes correlates closely with these diagnoses."
+  }
+ ],
+ "missing": [
+  "placing reflex: no fetched open source gives elicitation plus ages; left out"
+ ],
+ "reflexes": [
+  {
+   "id": "moro",
+   "name": "Moro reflex",
+   "aka": [
+    "startle reflex"
+   ],
+   "elicit": {
+    "src": "rx-statpearls-primitive",
+    "quote": "The Moro reflex is elicited by suddenly extending the infant's head backward (approximately 30 degrees) while supporting the body, creating a sensation of falling. The examiner can also produce the response by making a loud noise near the infant or sharply striking the examination table surface near the infant's head."
+   },
+   "response": {
+    "src": "rx-statpearls-primitive",
+    "quote": "Phase 1 (extension/abduction): The infant suddenly extends and abducts both arms symmetrically at the shoulders, opens the hands with finger extension, and often extends the legs. The mouth typically opens, and the infant may cry or appear startled. Phase 2 (flexion/adduction): Within 1 to 2 seconds, the arms flex and adduct across the chest in an embracing motion, hands close into fists, and legs flex."
+   },
+   "appears": {
+    "by": 28,
+    "unit": "weeks gestation",
+    "src": "rx-statpearls-primitive",
+    "quote": "The Moro reflex appears by 28 weeks of gestation and persists until approximately 4 to 6 months of age."
+   },
+   "disappears": {
+    "lo": 4,
+    "hi": 6,
+    "unit": "months",
+    "approx": true,
+    "src": "rx-statpearls-primitive",
+    "quote": "The Moro reflex appears by 28 weeks of gestation and persists until approximately 4 to 6 months of age."
+   },
+   "abnormal": {
+    "gt": 6,
+    "unit": "months",
+    "src": "rx-statpearls-primitive",
+    "quote": "Persistence of the Moro reflex beyond 6 months is abnormal and associated with neurodevelopmental disorders."
+   },
+   "alt": [
+    {
+     "begins_by": 12,
+     "begins_unit": "weeks",
+     "complete_by": 6,
+     "unit": "months",
+     "src": "rx-statpearls-moro",
+     "quote": "The reflex is present in full-term infants and begins to disappear by 12 weeks, with complete disappearance by 6 months of age."
+    },
+    {
+     "earliest": 25,
+     "typical_by": 30,
+     "unit": "weeks post-conceptional age",
+     "src": "rx-statpearls-moro",
+     "quote": "The reflex can be observed as early as 25 weeks post-conceptional age and is typically present by 30 weeks post-conceptional age."
+    },
+    {
+     "all_until": 12,
+     "unit": "weeks",
+     "src": "rx-futagi-2012",
+     "quote": "The reflex can be elicited in all infants during the first 12 weeks of age."
+    },
+    {
+     "by": 6,
+     "unit": "months",
+     "src": "rx-futagi-2012",
+     "quote": "The reflex usually disappears by 6 months of age"
+    },
+    {
+     "absent_lo": 2,
+     "absent_hi": 3,
+     "persist_gt": 6,
+     "unit": "months",
+     "src": "rx-futagi-2012",
+     "quote": "the absence or diminution of the Moro reflex within 2 to 3 months of age and the persistence of the response beyond 6 months of age can be regarded as abnormal."
+    },
+    {
+     "lo": 6,
+     "hi": 8,
+     "unit": "months",
+     "src": "rx-mjms-2023",
+     "quote": "The Moro reflex disappears around 6 months to 8 months."
+    }
+   ]
+  },
+  {
+   "id": "rooting",
+   "name": "Rooting reflex",
+   "elicit": {
+    "src": "rx-statpearls-primitive",
+    "quote": "This reflex is elicited when the corner of an infant's mouth is stroked or touched"
+   },
+   "response": {
+    "src": "rx-statpearls-primitive",
+    "quote": "the newborn turns the head toward the side of stimulation, opens the mouth, and extends the tongue in a thrusting motion"
+   },
+   "appears": {
+    "v": 28,
+    "unit": "weeks gestation",
+    "approx": true,
+    "src": "rx-statpearls-primitive",
+    "quote": "Present from approximately 28 weeks of gestation, the rooting reflex begins in utero and reaches full maturity by term delivery"
+   },
+   "disappears": {
+    "lo": 4,
+    "hi": 6,
+    "unit": "months",
+    "src": "rx-statpearls-primitive",
+    "quote": "The rooting reflex typically disappears by 4 to 6 months of age as the frontal lobe matures"
+   },
+   "abnormal": {
+    "lo": 4,
+    "hi": 6,
+    "unit": "months",
+    "src": "rx-statpearls-primitive",
+    "quote": "Persistence of rooting beyond 4 to 6 months, particularly when accompanied by other retained reflexes, strongly suggests congenital cerebral palsy or a significant neurodevelopmental disorder."
+   },
+   "alt": [
+    {
+     "by": 4,
+     "unit": "months",
+     "note": "rooting and sucking",
+     "src": "rx-statpearls-child-dev",
+     "quote": "Both reflexes are present at birth and disappear by 4 months."
+    },
+    {
+     "lo": 2,
+     "hi": 3,
+     "unit": "months",
+     "src": "rx-mjms-2023",
+     "quote": "Palmar reflex and rooting reflexes are to disappear early, around 2 months old to 3 months old of age."
+    }
+   ]
+  },
+  {
+   "id": "sucking",
+   "name": "Sucking reflex",
+   "elicit": {
+    "src": "rx-statpearls-primitive",
+    "quote": "Assessment involves placing a gloved finger or pacifier in the infant's mouth and observing the quality, rhythm, and strength of sucking movements."
+   },
+   "response": {
+    "src": "rx-statpearls-primitive",
+    "quote": "The sucking reflex is activated when the hard palate or the posterior tongue is stimulated, generating rhythmic sucking movements essential for nutritive feeding"
+   },
+   "appears": {
+    "lo": 32,
+    "hi": 35,
+    "matures": 37,
+    "unit": "weeks gestation",
+    "src": "rx-statpearls-primitive",
+    "quote": "This reflex appears at 32 to 35 weeks of gestation and matures through 37 weeks, when coordination of sucking, swallowing, and breathing becomes established."
+   },
+   "abnormal": {
+    "gt": 6,
+    "unit": "months",
+    "src": "rx-statpearls-primitive",
+    "quote": "Persistence of primitive, uncoordinated sucking patterns beyond 6 months interferes with the development of mature oral-motor skills required to manage solid foods."
+   },
+   "alt": [
+    {
+     "lo": 30,
+     "hi": 35,
+     "matures": 37,
+     "unit": "weeks gestation",
+     "src": "rx-statpearls-rooting",
+     "quote": "The sucking reflex typically emerges between 30 and 35 weeks of gestational age and becomes fully coordinated with breathing and swallowing by approximately 37 weeks of gestation."
+    },
+    {
+     "by": 4,
+     "unit": "months",
+     "note": "rooting and sucking",
+     "src": "rx-statpearls-child-dev",
+     "quote": "Both reflexes are present at birth and disappear by 4 months."
+    },
+    {
+     "lo": 10,
+     "hi": 12,
+     "unit": "months",
+     "src": "rx-mjms-2023",
+     "quote": "the sucking reflex should integrate by 10 months to 12 months"
+    }
+   ],
+   "note": "The 2026 Primitive Reflexes chapter gives no disappearance age for sucking; the other sources disagree (see alt)."
+  },
+  {
+   "id": "palmar_grasp",
+   "name": "Palmar grasp reflex",
+   "elicit": {
+    "src": "rx-statpearls-primitive",
+    "quote": "This reflex is elicited by applying gentle pressure to the infant's palm with the examiner's finger, moving from the ulnar side of the hand toward the radial side"
+   },
+   "response": {
+    "src": "rx-statpearls-primitive",
+    "quote": "The response consists of flexion of all fingers around the stimulus"
+   },
+   "appears": {
+    "by": 28,
+    "unit": "weeks gestation",
+    "src": "rx-statpearls-primitive",
+    "quote": "The palmar grasp reflex appears by 28 weeks of gestation and typically disappears by 4 to 6 months, coinciding with the development of voluntary reaching and grasping."
+   },
+   "disappears": {
+    "lo": 4,
+    "hi": 6,
+    "unit": "months",
+    "src": "rx-statpearls-primitive",
+    "quote": "The palmar grasp reflex appears by 28 weeks of gestation and typically disappears by 4 to 6 months, coinciding with the development of voluntary reaching and grasping."
+   },
+   "abnormal": {
+    "gt": 6,
+    "unit": "months",
+    "src": "rx-statpearls-primitive",
+    "quote": "Persistence of the palmar grasp beyond 6 months prevents the development of voluntary hand release"
+   },
+   "alt": [
+    {
+     "palmar_all_until": 3,
+     "palmar_by": 6,
+     "plantar_all_until": 6,
+     "plantar_by": 12,
+     "unit": "months",
+     "src": "rx-futagi-2012",
+     "quote": "The palmar grasp reflex and the plantar grasp reflex can be elicited in all infants during the first 3 and 6 months of age, respectively. Thereafter they decrease along with the intensity of the responses, usually disappearing by 6 and 12 months of age, respectively"
+    },
+    {
+     "v": 25,
+     "unit": "weeks postconceptional age",
+     "note": "palmar and plantar grasp",
+     "src": "rx-futagi-2012",
+     "quote": "they can be elicited in all normal preterm infants at as early as 25 weeks of postconceptional age (PCA)"
+    },
+    {
+     "v": 28,
+     "unit": "weeks gestation",
+     "src": "rx-statpearls-child-dev",
+     "quote": "The palmar grasp reflex is found at 28 weeks gestation."
+    },
+    {
+     "by": 6,
+     "unit": "months",
+     "src": "rx-statpearls-child-dev",
+     "quote": "It disappears by 6 months of age."
+    },
+    {
+     "lo": 2,
+     "hi": 3,
+     "unit": "months",
+     "src": "rx-mjms-2023",
+     "quote": "Palmar reflex and rooting reflexes are to disappear early, around 2 months old to 3 months old of age."
+    }
+   ]
+  },
+  {
+   "id": "plantar_grasp",
+   "name": "Plantar grasp reflex",
+   "elicit": {
+    "src": "rx-statpearls-primitive",
+    "quote": "The plantar grasp reflex is elicited by applying pressure to the sole of the foot just proximal to the toes"
+   },
+   "response": {
+    "src": "rx-statpearls-primitive",
+    "quote": "causing the toes to flex around the stimulus"
+   },
+   "appears": {
+    "by": 28,
+    "unit": "weeks gestation",
+    "src": "rx-statpearls-primitive",
+    "quote": "This reflex appears by 28 weeks of gestation and typically disappears between 9 and 12 months, later than the palmar grasp reflex."
+   },
+   "disappears": {
+    "lo": 9,
+    "hi": 12,
+    "unit": "months",
+    "src": "rx-statpearls-primitive",
+    "quote": "This reflex appears by 28 weeks of gestation and typically disappears between 9 and 12 months, later than the palmar grasp reflex."
+   },
+   "abnormal": {
+    "gt": 12,
+    "unit": "months",
+    "src": "rx-statpearls-primitive",
+    "quote": "Persistence beyond 12 months may interfere with the development of standing and walking"
+   },
+   "alt": [
+    {
+     "palmar_all_until": 3,
+     "palmar_by": 6,
+     "plantar_all_until": 6,
+     "plantar_by": 12,
+     "unit": "months",
+     "src": "rx-futagi-2012",
+     "quote": "The palmar grasp reflex and the plantar grasp reflex can be elicited in all infants during the first 3 and 6 months of age, respectively. Thereafter they decrease along with the intensity of the responses, usually disappearing by 6 and 12 months of age, respectively"
+    },
+    {
+     "src": "rx-futagi-2012",
+     "quote": "A reduced or negative plantar grasp reflex during early infancy can be a sensitive indicator of later development of spasticity."
+    },
+    {
+     "by": 15,
+     "unit": "months",
+     "src": "rx-statpearls-child-dev",
+     "quote": "It disappears by 15 months"
+    },
+    {
+     "lo": 7,
+     "hi": 9,
+     "unit": "months",
+     "src": "rx-mjms-2023",
+     "quote": "Plantar grasp disappears by 7 months to 9 months to allow the infant to start standing."
+    }
+   ]
+  },
+  {
+   "id": "atnr",
+   "name": "Asymmetric tonic neck reflex (ATNR)",
+   "aka": [
+    "fencing position",
+    "fencing reflex"
+   ],
+   "elicit": {
+    "hold_lo": 10,
+    "hold_hi": 15,
+    "hold_unit": "seconds",
+    "src": "rx-statpearls-primitive",
+    "quote": "This reflex is elicited by gently rotating the infant's head to 1 side while the infant is supine and calm, and holding the position for 10 to 15 seconds. The reflex should be tested with head rotation to both sides."
+   },
+   "response": {
+    "src": "rx-statpearls-primitive",
+    "quote": "A positive ATNR demonstrates extension of the arm and leg on the side toward which the face turns (the \"face\" side) and flexion of the contralateral arm and leg, mimicking a fencer's stance."
+   },
+   "appears": {
+    "v": 35,
+    "unit": "weeks gestation",
+    "approx": true,
+    "src": "rx-statpearls-primitive",
+    "quote": "The ATNR, also termed the \"fencing position,\" appears around 35 weeks of gestation and typically integrates by 3 to 4 months of age."
+   },
+   "disappears": {
+    "lo": 3,
+    "hi": 4,
+    "unit": "months",
+    "src": "rx-statpearls-primitive",
+    "quote": "The ATNR, also termed the \"fencing position,\" appears around 35 weeks of gestation and typically integrates by 3 to 4 months of age."
+   },
+   "abnormal": {
+    "lo": 4,
+    "hi": 6,
+    "unit": "months",
+    "src": "rx-statpearls-primitive",
+    "quote": "An obligatory ATNR persisting beyond 4 to 6 months prevents the infant from bringing both hands to the midline"
+   },
+   "alt": [
+    {
+     "appears": 18,
+     "appears_unit": "weeks in utero",
+     "peak_lo": 1,
+     "peak_hi": 4,
+     "lo": 3,
+     "hi": 9,
+     "unit": "months",
+     "src": "rx-statpearls-tonic-neck",
+     "quote": "ATNR is a primitive reflex that appears 18 weeks in utero, most prominent between 1 and 4 months of age, and disappears by 3 to 9 months after birth."
+    },
+    {
+     "by": 6,
+     "unit": "months",
+     "src": "rx-mjms-2023",
+     "quote": "an asymmetric tonic neck reflex that disappears by 6 months old of age."
+    }
+   ]
+  },
+  {
+   "id": "stepping",
+   "name": "Stepping reflex",
+   "aka": [
+    "walking reflex",
+    "dance reflex"
+   ],
+   "elicit": {
+    "src": "rx-statpearls-primitive",
+    "quote": "This reflex is elicited by holding the infant upright under the arms while the feet touch a flat surface. When the examiner tilts the infant forward slightly"
+   },
+   "response": {
+    "src": "rx-statpearls-primitive",
+    "quote": "the infant makes alternating stepping movements as if walking."
+   },
+   "appears": {
+    "at_birth": true,
+    "src": "rx-statpearls-primitive",
+    "quote": "The stepping reflex, also known as the walking or dance reflex, appears at birth and typically disappears by 2 to 3 months of age."
+   },
+   "disappears": {
+    "lo": 2,
+    "hi": 3,
+    "unit": "months",
+    "src": "rx-statpearls-primitive",
+    "quote": "The stepping reflex, also known as the walking or dance reflex, appears at birth and typically disappears by 2 to 3 months of age."
+   },
+   "alt": [
+    {
+     "within": 6,
+     "unit": "weeks",
+     "src": "rx-statpearls-child-dev",
+     "quote": "The stepping reflex is found in the first 6 weeks."
+    },
+    {
+     "by": 2,
+     "unit": "months",
+     "src": "rx-statpearls-child-dev",
+     "quote": "It disappears by 2 months of age."
+    },
+    {
+     "note": "stepping, MJMS",
+     "src": "rx-mjms-2023",
+     "quote": "The response diminishes by the end of the first year"
+    }
+   ]
+  },
+  {
+   "id": "galant",
+   "name": "Galant reflex",
+   "aka": [
+    "truncal incurvation",
+    "spinal Galant"
+   ],
+   "elicit": {
+    "offset": 1,
+    "offset_unit": "cm",
+    "src": "rx-statpearls-primitive",
+    "quote": "This reflex is elicited by stroking the infant's back approximately 1 cm lateral to the spine from the shoulder to the buttocks while the infant is held in ventral suspension."
+   },
+   "response": {
+    "src": "rx-statpearls-primitive",
+    "quote": "The normal response consists of lateral flexion of the trunk toward the stimulated side, with the pelvis swinging upward on that side."
+   },
+   "appears": {
+    "by": 32,
+    "unit": "weeks gestation",
+    "src": "rx-statpearls-primitive",
+    "quote": "The Galant reflex appears by 32 weeks of gestation and typically disappears by 4 to 6 months."
+   },
+   "disappears": {
+    "lo": 4,
+    "hi": 6,
+    "unit": "months",
+    "src": "rx-statpearls-primitive",
+    "quote": "The Galant reflex appears by 32 weeks of gestation and typically disappears by 4 to 6 months."
+   },
+   "alt": [
+    {
+     "by": 6,
+     "unit": "months",
+     "src": "rx-mjms-2023",
+     "quote": "The spinal Galant reflex usually integrates by 6 months."
+    }
+   ]
+  },
+  {
+   "id": "babinski",
+   "name": "Babinski reflex (plantar reflex)",
+   "elicit": {
+    "src": "rx-statpearls-primitive",
+    "quote": "This reflex is elicited by firmly stroking the plantar surface along the lateral aspect, starting at the heel and moving toward the toes in a smooth, continuous motion."
+   },
+   "response": {
+    "src": "rx-statpearls-primitive",
+    "quote": "In infants, the normal response is dorsiflexion of the great toe with fanning (abduction) of the other toes"
+   },
+   "appears": {
+    "at_birth": true,
+    "src": "rx-statpearls-primitive",
+    "quote": "The reflex is present at birth and typically disappears between 12 and 24 months of age"
+   },
+   "disappears": {
+    "lo": 12,
+    "hi": 24,
+    "unit": "months",
+    "src": "rx-statpearls-primitive",
+    "quote": "The reflex is present at birth and typically disappears between 12 and 24 months of age"
+   },
+   "abnormal": {
+    "normal_until": 24,
+    "unit": "months",
+    "src": "rx-statpearls-primitive",
+    "quote": "In infants and young children up to 24 months of age, the Babinski reflex is normal, reflecting ongoing CNS maturation."
+   },
+   "alt": [
+    {
+     "normal_until": 2,
+     "unit": "years",
+     "src": "rx-statpearls-child-dev",
+     "quote": "This response is normal in the infant up to 2 years of age."
+    }
+   ]
+  },
+  {
+   "id": "landau",
+   "name": "Landau reflex",
+   "elicit": {
+    "src": "rx-statpearls-child-dev",
+    "quote": "It is elicited by holding the baby in a supine position in mid-air."
+   },
+   "response": {
+    "src": "rx-statpearls-child-dev",
+    "quote": "The response is an extension of the legs and head as if looking up."
+   },
+   "appears": {
+    "within": 3,
+    "unit": "months",
+    "src": "rx-statpearls-child-dev",
+    "quote": "The Landau Reflex appears in the first 3 months."
+   },
+   "disappears": {
+    "by": 24,
+    "unit": "months",
+    "src": "rx-statpearls-child-dev",
+    "quote": "It disappears by 24 months."
+   },
+   "note": "Single source. The StatPearls text says supine; many texts describe ventral (prone) suspension. Needs reviewer check."
+  },
+  {
+   "id": "parachute",
+   "name": "Parachute reflex",
+   "elicit": {
+    "src": "rx-statpearls-child-dev",
+    "quote": "It is elicited by positioning the infant prone in mid-air, head first."
+   },
+   "response": {
+    "src": "rx-statpearls-child-dev",
+    "quote": "The infant's response is to extend the arms and spread the fingers to protect the head."
+   },
+   "appears": {
+    "v": 8,
+    "unit": "months",
+    "approx": true,
+    "src": "rx-statpearls-child-dev",
+    "quote": "The parachute reflex appears around 8 months of life and never disappears."
+   },
+   "disappears": {
+    "never": true,
+    "src": "rx-statpearls-child-dev",
+    "quote": "The parachute reflex appears around 8 months of life and never disappears."
+   },
+   "abnormal": {
+    "src": "rx-statpearls-child-dev",
+    "quote": "Asymmetry may suggest extremity weakness, spasticity, or even complex neurological deficits."
+   },
+   "note": "Single source (StatPearls Child Development, 2023)."
+  }
+ ]
+}

@@ -42,5 +42,17 @@
   function set(name, val) {
     try { G.localStorage.setItem(name === "master" || name === MASTER ? MASTER : MASTER + "_" + name, val ? "1" : "0"); } catch (e) {}
   }
-  G.SMD_NEO_FLAGS = { on: on, feature: feature, set: set, FEATURES: FEATURES, MASTER: MASTER };
+  /* The layer's scripts load only when the master flag is on, so a device with it off pays nothing
+   * beyond this file. Order matters (the record and hub first); async=false keeps insertion order. */
+  var VER = "neo1";
+  var FILES = ["neo-patient", "neo-hub", "neo-dose", "neo-prep", "neo-infusions", "neo-fluids", "neo-growth", "neo-bili", "neo-scores", "neo-ref", "neo-proc", "neo-tdm"];
+  var loaded = false;
+  function load() {
+    if (loaded || !on() || !G.document) return loaded;
+    loaded = true;
+    FILES.forEach(function (f) { var s = G.document.createElement("script"); s.src = "/" + f + ".js?v=" + VER; s.async = false; G.document.head.appendChild(s); });
+    return true;
+  }
+  G.SMD_NEO_FLAGS = { on: on, feature: feature, set: set, load: load, FEATURES: FEATURES, MASTER: MASTER, FILES: FILES, VER: VER };
+  load();
 })(typeof window !== "undefined" ? window : globalThis);

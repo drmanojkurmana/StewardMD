@@ -28,9 +28,16 @@
   }
 
   /* Concentration a presentation gives, per mL, in the presentation's unit, and how it gets there. */
+  /* data/neo/prep.json conventions: a solution gives v either in vol_ml (whole vial) or per per_ml mL;
+   * with neither, the source wrote "v unit/mL" and per_ml is 1. A powder has a concentration only
+   * through a reconstitution row for the same vial strength. */
+  function isPowder(p) { return /powder|lyophil/i.test(p.form || ""); }
   function concOf(p, recons) {
-    if (p.per_ml && p.v != null) return { c: p.v / p.per_ml, unit: p.unit, how: "solution", recon: null };
-    if (p.vol_ml && p.v != null && !/powder|lyophil/i.test(p.form || "")) return { c: p.v / p.vol_ml, unit: p.unit, how: "solution", recon: null };
+    if (!isPowder(p) && p.v != null) {
+      if (p.per_ml) return { c: p.v / p.per_ml, unit: p.unit, how: "solution", recon: null };
+      if (p.vol_ml) return { c: p.v / p.vol_ml, unit: p.unit, how: "solution", recon: null };
+      return { c: p.v, unit: p.unit, how: "solution", recon: null };
+    }
     var r = (recons || []).filter(function (x) { return x.vial_v === p.v && (x.vial_unit || p.unit) === p.unit && x.final_v != null; })[0];
     if (r) return { c: r.final_v / (r.final_per_ml || 1), unit: r.final_unit || p.unit, how: "reconstituted", recon: r };
     return null;
@@ -41,11 +48,12 @@
     var out = { options: [], pick: null, notes: [] };
     var dv = num(dose && dose.v); if (!(dv > 0)) { out.notes.push("Enter the dose."); return out; }
     (drug.presentations || []).forEach(function (p) {
-      var vialAmt = conv(p.v, p.unit, dose.unit);
+      // Drug in one vial: a powder's strength, or a solution's v when v is the whole vial (vol_ml).
+      var vialAmt = isPowder(p) || p.vol_ml ? conv(p.v, p.unit, dose.unit) : null, sameUnit = conv(1, p.unit, dose.unit) != null;
       var co = concOf(p, drug.reconstitution);
-      var o = { p: p, vialAmt: vialAmt, conc: null, draw: null, vials: null, recon: co && co.recon, how: co ? co.how : null, sameUnit: vialAmt != null };
-      if (vialAmt == null) { o.why = "Unit " + p.unit + " does not match the dose unit " + dose.unit + "."; out.options.push(o); return; }
-      o.vials = Math.ceil(dv / vialAmt - 1e-9);
+      var o = { p: p, vialAmt: vialAmt, conc: null, draw: null, vials: null, recon: co && co.recon, how: co ? co.how : null, sameUnit: sameUnit };
+      if (!sameUnit) { o.why = "Unit " + p.unit + " does not match the dose unit " + dose.unit + "."; out.options.push(o); return; }
+      if (vialAmt != null) o.vials = Math.ceil(dv / vialAmt - 1e-9);
       if (co) {
         var c = conv(co.c, co.unit, dose.unit);
         if (c != null && c > 0) { o.conc = c; o.draw = dv / c; o.drawR = roundVol(o.draw); o.err = o.drawR.v ? Math.abs(o.drawR.v * c - dv) / dv : null; }
@@ -58,8 +66,9 @@
     var pool = calc.length ? calc : out.options.filter(function (o) { return o.sameUnit; });
     pool.sort(function (a, b) {
       var ma = a.p.market === "IN" ? 0 : 1, mb = b.p.market === "IN" ? 0 : 1; if (ma !== mb) return ma - mb;
-      var ca = a.vialAmt >= dv ? 0 : 1, cb = b.vialAmt >= dv ? 0 : 1; if (ca !== cb) return ca - cb;
-      return ca === 0 ? a.vialAmt - b.vialAmt : b.vialAmt - a.vialAmt;
+      var va = a.vialAmt == null ? Infinity : a.vialAmt, vb = b.vialAmt == null ? Infinity : b.vialAmt;
+      var ca = va >= dv ? 0 : 1, cb = vb >= dv ? 0 : 1; if (ca !== cb) return ca - cb;
+      return ca === 0 ? va - vb : vb - va;
     });
     out.pick = pool[0] || null;
     if (!drug.presentations || !drug.presentations.length) out.notes.push("No presentation on file.");
@@ -84,7 +93,7 @@
   function hub() { return G.SMD_NEO_HUB; }
   var S = { id: null, dose: "", unit: "", pickIdx: null };
   function fmtN(v) { return v == null ? "" : (Math.round(v * 1000) / 1000).toLocaleString("en-IN", { maximumFractionDigits: 3 }); }
-  function presTxt(p) { return fmtN(p.v) + " " + p.unit + (p.per_ml ? " per " + (p.per_ml === 1 ? "" : p.per_ml + " ") + "mL" : p.vol_ml ? " in " + fmtN(p.vol_ml) + " mL" : "") + (p.form ? " " + p.form : "") + (p.market ? " (" + p.market + ")" : ""); }
+  function presTxt(p) { var pw = /powder|lyophil/i.test(p.form || ""); return fmtN(p.v) + " " + p.unit + (p.per_ml ? " per " + fmtN(p.per_ml) + " mL" : p.vol_ml ? " in " + fmtN(p.vol_ml) + " mL" : pw ? "" : " per mL") + (p.form ? " " + p.form : "") + (p.market ? " (" + p.market + ")" : ""); }
 
   function resultHtml(A, doc, drug) {
     var esc = A.esc, dose = { v: S.dose, unit: S.unit }, r = prepare(drug, dose), h = "", lines = [];
@@ -106,8 +115,8 @@
       h += '<div class="nh-row"><div class="nh-lbl">3. Draw up</div><div class="nh-val">' + esc(fmtN(o.drawR.v)) + ' mL</div><div class="nh-work">' + esc(fmtN(num(S.dose)) + " " + S.unit + " / " + fmtN(o.conc) + " " + S.unit + "/mL = " + fmtN(o.draw) + " mL, " + o.drawR.rule + (o.err ? "; rounding changes the dose by " + (Math.round(o.err * 1000) / 10) + "%" : "")) + "</div></div>";
       lines.push("Draw up: " + fmtN(o.drawR.v) + " mL (" + fmtN(o.conc) + " " + S.unit + "/mL; " + o.drawR.rule + ")");
     }
-    h += '<div class="nh-row"><div class="nh-lbl">Vials needed</div><div class="nh-val" style="font-size:19px">' + o.vials + "</div></div>";
-    lines.push("Vials: " + o.vials);
+    if (o.vials != null) { h += '<div class="nh-row"><div class="nh-lbl">Vials needed</div><div class="nh-val" style="font-size:19px">' + o.vials + "</div></div>"; lines.push("Vials: " + o.vials); }
+    else h += '<div class="nh-row"><div class="nh-lbl">Vials needed</div>' + A.noData("the volume in one vial") + "</div>";
     if (r.dilute && !r.dilute.ok) {
       h += '<div class="nh-row"><div class="nh-lbl">4. Dilute before giving</div><div class="nh-val" style="font-size:19px">Make up to ' + esc(fmtN(r.dilute.total.v)) + " mL</div><div class=\"nh-work\">" + esc("Add " + fmtN(r.dilute.add.v) + " mL so the concentration is at most " + fmtN(r.dilute.maxC) + " " + S.unit + "/mL") + "</div>" + A.srcLine(doc, r.dilute.src) + "</div>";
       lines.push("Dilute: make up to " + fmtN(r.dilute.total.v) + " mL (max " + fmtN(r.dilute.maxC) + " " + S.unit + "/mL)");
@@ -116,7 +125,7 @@
       var xs = drug[k] || []; if (!xs.length) return;
       h += '<div class="nh-row"><div class="nh-lbl">' + (k === "infusion" ? "Giving" : k === "stability" ? "Stability" : "Compatibility") + "</div>" + xs.map(function (x) { return '<div class="nh-work" style="font-family:inherit">' + esc(x.text || "") + "</div>" + A.srcLine(doc, x); }).join("") + "</div>";
     });
-    if (r.options.length > 1) h += "<details><summary>Other presentations (" + r.options.length + ")</summary>" + r.options.map(function (x, i) { return '<button type="button" class="nh-li" data-prep-pick="' + i + '"' + (x.sameUnit ? "" : " disabled") + "><span>" + esc(presTxt(x.p)) + "<br><small>" + esc(x.conc ? fmtN(x.conc) + " " + S.unit + "/mL, draw " + fmtN(x.drawR.v) + " mL, " + x.vials + " vial(s)" : x.why || "") + "</small></span></button>"; }).join("") + "</details>";
+    if (r.options.length > 1) h += "<details><summary>Other presentations (" + r.options.length + ")</summary>" + r.options.map(function (x, i) { return '<button type="button" class="nh-li" data-prep-pick="' + i + '"' + (x.sameUnit ? "" : " disabled") + "><span>" + esc(presTxt(x.p)) + "<br><small>" + esc(x.conc ? fmtN(x.conc) + " " + S.unit + "/mL, draw " + fmtN(x.drawR.v) + " mL" + (x.vials != null ? ", " + x.vials + " vial(s)" : "") : x.why || "") + "</small></span></button>"; }).join("") + "</details>";
     A.setSheet("prep", { title: drug.name + " preparation", tag: "Neonatal preparation", lines: ["Baby: " + (G.SMD_NEO ? G.SMD_NEO.summary() : "")].concat(lines) });
     return h;
   }

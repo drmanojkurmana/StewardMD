@@ -67,7 +67,7 @@
   function girOut(A, doc, wKg) {
     if (!wKg) return A.note("Enter the current weight in grams in the baby record.");
     var g = gir(S.rate, S.pct, wKg); if (g == null) return A.note("Enter the rate and the dextrose %.", "info");
-    var h = '<div class="nh-row"><div class="nh-lbl">GIR</div><div class="nh-val">' + r2(g) + ' mg/kg/min</div><div class="nh-work">' + A.esc(num(S.rate) + " mL/h x " + num(S.pct) + "% x 10 / (60 x " + wKg + " kg)") + "</div></div>";
+    var h = '<div class="nh-row"><div class="nh-lbl">GIR</div><div class="nh-val">' + r2(g) + ' mg/kg/min</div><div class="nh-work">= ' + r2(g * 1440 / 1000) + " g/kg/day (x 1440 min/day / 1000 mg/g)</div>" + '<div class="nh-work">' + A.esc(num(S.rate) + " mL/h x " + num(S.pct) + "% x 10 / (60 x " + wKg + " kg)") + "</div></div>";
     var G0 = doc && doc.gir; if (G0 && G0.quote) h += '<div class="nh-work">Formula in the source: ' + A.esc(G0.formula || "") + "</div>" + A.srcLine(doc, G0);
     ((G0 && G0.targets) || []).forEach(function (t) { var m = inBand(t.when, A.neo()); if (m.ok === false) return; h += '<div class="nh-work">' + A.esc((t.label || "Target") + ": " + (t.lo != null ? t.lo : "") + (t.hi != null ? " to " + t.hi : "") + " " + (t.unit || "mg/kg/min")) + "</div>" + A.srcLine(doc, t); });
     if (!G0 || !(G0.targets || []).length) h += A.note("No neonatal GIR target on file.", "info");
@@ -83,6 +83,11 @@
     }).join("") + "</table></div>";
     hit.forEach(function (x) { h += A.srcLine(doc, x.row); });
     if (!hit.length && d.dol != null) h += A.note("No row fits this baby. Choose from the table with the source.");
+    ["resuscitation", "maintenance_fluid", "pn_stop", "ratios"].forEach(function (k) {
+      (doc[k] || []).forEach(function (x) { if (x.when && inBand(x.when, d).ok === false) return; h += '<div class="nh-work" style="font-family:inherit">' + A.esc(x.label || "") + "</div>" + A.srcLine(doc, x); });
+    });
+    if (doc.daily_volumes_context) h += A.note(doc.daily_volumes_context.text, "info");
+    if (doc.licence_note) h += A.note(doc.licence_note.text, "info");
     (doc.electrolytes || []).forEach(function (e) { var m = inBand(e.when, d); if (m.ok === false) return; h += '<div class="nh-work">' + A.esc(e.ion + ": " + (e.lo != null ? e.lo : "") + (e.hi != null ? " to " + e.hi : "") + " " + (e.unit || "") + (e.when ? " (" + condTxt(e.when) + ")" : "")) + "</div>" + A.srcLine(doc, e); });
     return h;
   }
@@ -94,7 +99,7 @@
     h += '<div class="nh-row"><div class="nh-lbl">Dextrose needed</div><div class="nh-val">' + r2(pct) + ' %</div><div class="nh-work">' + A.esc(tg + " mg/kg/min x 60 x " + wKg + " kg / (" + r2(rate) + " mL/h x 10)") + "</div></div>";
     lines.push("Rate: " + r2(rate) + " mL/h (" + vol + " mL/kg/day)", "GIR: " + tg + " mg/kg/min needs " + r2(pct) + "% dextrose");
     var dx = (doc && doc.dextrose) || [];
-    dx.forEach(function (x) { if (x.v != null && pct > x.v) h += '<div class="nh-note bad">' + A.esc("Above " + x.v + (x.unit || "%") + ": " + (x.label || "")) + "</div>" + A.srcLine(doc, x); });
+    dx.forEach(function (x) { if (x.kind === "max" && x.v != null && pct > x.v) h += '<div class="nh-note bad">' + A.esc("Above " + x.v + (x.unit || "%") + ": " + (x.label || "")) + "</div>" + A.srcLine(doc, x); });
     // additives
     var adds = [["Na", S.na, S.naS], ["K", S.k, S.kS], ["Ca", S.ca, S.caS]], addMl = 0, addTxt = [];
     adds.forEach(function (a) {
