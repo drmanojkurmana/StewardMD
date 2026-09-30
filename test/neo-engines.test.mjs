@@ -222,3 +222,21 @@ test("scores engine: sum, formula, single level, criteria groups (fixture shapes
   assert.equal(SC.compute(cr, { a2: true, b1: true }).eligible, false);
   assert.equal(SC.compute(cr, { a2: true, b1: true, b3: true }).eligible, true);
 });
+
+test("scores data: every score computes; Finnegan bands and N-PASS sign follow the source", () => {
+  const SC = load("neo-scores.js"), D = J("scores");
+  for (const s of D.scores) {
+    const ch = {};
+    (s.items || []).forEach((it) => { ch[it.id] = "0"; });
+    if (s.type === "single") ch.level = "0";
+    const r = SC.compute(s, ch);
+    assert.ok(!r.missing, s.id);
+  }
+  const fin = D.scores.find((s) => s.id === "finnegan"), lo = fin.interpretation.find((b) => b.lt === 8 && b.lo == null);
+  assert.equal(SC.interpret(fin, 7.9), lo); assert.notEqual(SC.interpret(fin, 8), lo);
+  const sed = D.scores.find((s) => s.id === "npass-sedation"), ch = {};
+  sed.items.forEach((it) => { const i = it.options.findIndex((o) => o.points > 0); ch[it.id] = String(i < 0 ? 0 : i); });
+  assert.ok(SC.compute(sed, ch).value < 0, "sedation totals are negative");
+  const cap = D.scores.find((s) => s.id === "capurro");
+  assert.equal(SC.compute(cap, Object.fromEntries(cap.items.map((it) => [it.id, "0"]))).unit, cap.formula.unit);
+});

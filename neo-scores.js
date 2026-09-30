@@ -20,7 +20,8 @@
   }
   function interpret(score, v) {
     var hit = null;
-    (score.interpretation || []).forEach(function (b) { if ((b.lo == null || v >= b.lo) && (b.hi == null || v <= b.hi)) hit = hit || b; });
+    // Bounds as the source words them: lo (>=), hi (<=), gt (>), lt (<).
+    (score.interpretation || []).forEach(function (b) { if ((b.lo == null || v >= b.lo) && (b.hi == null || v <= b.hi) && (b.gt == null || v > b.gt) && (b.lt == null || v < b.lt)) hit = hit || b; });
     return hit;
   }
   /* chosen: { itemId: optionIndex } | { level: index } | { itemId: true } for criteria. */
@@ -45,7 +46,10 @@
       var f = score.formula || {}, v = (f.constant + s.total) / (f.divisor || 1);
       return { value: Math.round(v * 10) / 10, unit: f.unit, sum: s.total, band: interpret(score, v) };
     }
-    return { value: s.total, band: interpret(score, s.total) };
+    // negate: the source scores these items as negative points (N-PASS sedation); stored as positive
+    // magnitudes because quotes cannot carry the sign reliably.
+    var tot = score.negate ? -s.total : s.total;
+    return { value: tot, band: interpret(score, tot) };
   }
   var ENGINE = { compute: compute, interpret: interpret };
   if (typeof module !== "undefined" && module.exports) { module.exports = ENGINE; return; }
@@ -62,7 +66,7 @@
     var inputs = [];
     if (score.type === "single") inputs.push({ id: "level", label: "Level", type: "select", opts: (score.levels || []).map(function (l, i) { return { v: String(i), t: l.level + ": " + l.label }; }) });
     else if (score.type === "criteria") (score.groups || []).forEach(function (g) { (g.items || []).forEach(function (it) { inputs.push({ id: it.id, label: g.label + ": " + it.label, type: "check" }); }); });
-    else (score.items || []).forEach(function (it) { inputs.push({ id: it.id, label: it.label, type: "select", opts: [{ v: "", t: "Choose" }].concat((it.options || []).map(function (o, i) { return { v: String(i), t: o.label + " (" + o.points + ")" }; })) }); });
+    else (score.items || []).forEach(function (it) { inputs.push({ id: it.id, label: it.label, type: "select", opts: [{ v: "", t: "Choose" }].concat((it.options || []).map(function (o, i) { return { v: String(i), t: o.label + " (" + (score.negate && o.points ? "-" : "") + o.points + ")" }; })) }); });
     return {
       id: "neo_" + score.id.replace(/-/g, "_"), cat: "Neonatology", icon: "", title: score.name, desc: score.purpose || "", draft: true, kw: ["neonatal", score.id.replace(/-/g, " ")],
       inputs: inputs, srcHtml: srcHtml(doc, score),
@@ -87,7 +91,8 @@
       if (!doc || !(doc.scores || []).length) { el.innerHTML = '<section class="nh-card"><h3>Scores</h3>' + A.noData("neonatal scores") + "</section>"; return; }
       registerAll();
       el.innerHTML = '<section class="nh-card"><h3>Scores ' + A.badge(doc) + '</h3><div class="nh-list">' + doc.scores.map(function (s) { return '<button type="button" class="nh-li" data-score="' + A.esc("neo_" + s.id.replace(/-/g, "_")) + '"><span>' + A.esc(s.name) + "<br><small>" + A.esc(s.purpose || "") + "</small></span></button>"; }).join("") + "</div>" +
-        ((doc.notes || []).map(function (n) { return A.note(n.text, "info") + A.srcLine(doc, n); }).join("")) + '<div class="nh-foot">Opens in Calculators (category Neonatology).</div></section>';
+        ((doc.notes || []).map(function (n) { return A.note(n.text, "info") + A.srcLine(doc, n); }).join("")) +
+        ((doc.not_included || []).length ? A.note("Not on file: " + doc.not_included.map(function (x) { return x.id.toUpperCase(); }).join(", ") + " (no source defining them was found).", "info") : "") + '<div class="nh-foot">Opens in Calculators (category Neonatology).</div></section>';
       el.onclick = function (e) { var b = e.target.closest && e.target.closest("[data-score]"); if (!b || !G.MEDCALC) return; var id = b.getAttribute("data-score"); G.SMD_NEO_HUB.close(); setTimeout(function () { G.MEDCALC.open(id); }, 30); };
     });
   }

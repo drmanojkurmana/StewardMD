@@ -19,6 +19,8 @@
   /* AAP: value at a whole hour of life from a day x h0..h23 table; past the table, the last value. */
   function aapAt(curve, hours) {
     var t = curve.data.table, h = Math.floor(hours), day = Math.floor(h / 24), col = h % 24;
+    // A source footnote: the threshold stays flat from this hour on.
+    if (curve.plateau && h >= curve.plateau.from_h) return { v: curve.plateau.tsb, plateau: true };
     var row = null; t.forEach(function (r) { if (r[0] === day) row = r; });
     if (!row) { var last = t[t.length - 1]; for (var i = last.length - 1; i > 0; i--) if (last[i] != null) return { v: last[i], beyond: true }; return null; }
     var v = row[col + 1];

@@ -139,7 +139,12 @@ try {
   await shot('fluids-bag');
 
   // 7) Calculators registry: GIR under Neonatology with the Draft line.
-  ok(await ev(`!!MEDCALC.get('neo_gir') && MEDCALC.run ? true : !!MEDCALC.get('neo_gir')`), 'GIR registered in calculators.js');
+  ok(await ev(`!!MEDCALC.get('neo_gir')`), 'GIR registered in calculators.js');
+  ok(await until(`!!MEDCALC.get('neo_finnegan') && !!MEDCALC.get('neo_hypothermia_nichd') && MEDCALC.get('neo_finnegan').cat==='Neonatology'`, 5000), 'scores registered under Neonatology');
+  ok(await ev(`(()=>{const c=MEDCALC.get('neo_rodwell_hss');const v={};c.inputs.forEach(i=>v[i.id]='0');const r=c.compute(v);return r&&r.v!=null})()`), 'a registered score computes');
+  await ev(`SMD_NEO_HUB.close();MEDCALC.open('neo_finnegan');1`);
+  ok(await until(`/Draft: AI-drafted/.test((document.getElementById('mcPanel_neo_finnegan')||{}).innerText||'')`, 5000), 'score panel shows the Draft line');
+  await ev(`MEDCALC.close&&MEDCALC.close();1`);
 
   // 8) Search finds individual neonatal tools.
   ok(await ev(`SMD_NEO_HUB.searchItems().some(x=>/Infusions/.test(x.title))`), 'universal search items for neonatal tools');
