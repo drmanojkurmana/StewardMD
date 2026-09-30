@@ -69,8 +69,8 @@ def main():
         f.write(SCHEMA)
 
     db = sqlite3.connect(SRC)
-    cur = db.execute(f"SELECT {','.join(COLS)} FROM drugs ORDER BY id")
-    collist = ",".join(COLS)
+    collist = ",".join('"' + c.replace('"', '""') + '"' for c in COLS)
+    cur = db.execute(f"SELECT {collist} FROM drugs ORDER BY id")
     n = 0; stmts = 0
     out = os.path.join(OUTDIR, "10_drugs.sql")
 

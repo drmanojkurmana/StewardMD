@@ -88,8 +88,9 @@ def main():
         # D1 schema without raw_label
         ddl=open(os.path.join(WORKER,"structured_schema.sql")).read().replace("  raw_label          TEXT,   -- FULL official text/JSON preserved for verification\n","")
         f.write(ddl+"\n")
-        for r in db.execute(f"SELECT {','.join(d1cols)} FROM drug_structured"):
-            f.write("INSERT OR REPLACE INTO drug_structured ("+",".join(d1cols)+") VALUES ("+",".join(lit(v) for v in r)+");\n")
+        collist = ",".join('"' + c.replace('"', '""') + '"' for c in d1cols)
+        for r in db.execute(f"SELECT {collist} FROM drug_structured"):
+            f.write(f"INSERT OR REPLACE INTO drug_structured ({collist}) VALUES ("+",".join(lit(v) for v in r)+");\n")
     sz=os.path.getsize(OUTSQL)//1024
     # check max statement size
     mx=max(len(l) for l in open(OUTSQL,encoding="utf-8"))
