@@ -100,7 +100,7 @@ if [ -d assets/vendor ]; then mkdir -p "$WWW/assets/vendor"; cp -R assets/vendor
 # Dose calculator rules (scripts/build-dose-rules.mjs), loaded lazily by the calculator.
 [ -f data/dose-rules.json.gz ] && cp data/dose-rules.json.gz "$WWW/"
 # Neonatal layer (smd_neo): the quoted clinical data files, fetched lazily by neo-*.js from /data/neo/.
-# data/neo/sources/*.txt are provenance snapshots for scripts/neo/validate.mjs and are NOT shipped.
+# data/neo/sources.json.gz (provenance snapshots for scripts/neo/validate.mjs) is NOT shipped.
 if [ -d data/neo ]; then mkdir -p "$WWW/data/neo"; cp data/neo/*.json "$WWW/data/neo/"; fi
 [ -f data/clinical-index.js ] && cp data/clinical-index.js "$WWW/"
 

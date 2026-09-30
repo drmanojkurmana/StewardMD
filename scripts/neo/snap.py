@@ -7,6 +7,8 @@
   python3 scripts/neo/snap.py <srcId> <url> --raw           store the body as-is (CSV / TXT tables)
 
 Writes data/neo/sources/<srcId>.txt with a 3-line header (URL, accessed date, extra) then the text.
+That folder is gitignored: run `node scripts/neo/validate.mjs --pack` to fold new snapshots into the
+committed data/neo/sources.json.gz (one file, because Cloudflare Pages caps a deploy at 20,000 files).
 Every quote in data/neo/*.json must be a verbatim substring of its snapshot (whitespace-normalised);
 scripts/neo/validate.mjs enforces this. Snapshots are provenance only: build-www never ships them.
 """

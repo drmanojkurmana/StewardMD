@@ -7,7 +7,9 @@ approves them (`review.by`, `review.date`). Architecture: `vault/modules/Neonata
 ## Provenance rules (enforced by `scripts/neo/validate.mjs`, run by `test/neo-data.test.mjs`)
 
 1. Fetch the source with `python3 scripts/neo/snap.py <srcId> <url|fda:<set_id>>`. That writes
-   `data/neo/sources/<srcId>.txt` (plain text, header with URL + accessed date). Snapshots are
+   `data/neo/sources/<srcId>.txt` (plain text, header with URL + accessed date; the folder is gitignored).
+   Then `node scripts/neo/validate.mjs --pack` folds it into the committed `data/neo/sources.json.gz`
+   (one file: Cloudflare Pages caps a deploy at 20,000 files). Snapshots are
    provenance only; `build-www.sh` does not ship them.
 2. Register the source in the file's `sources` map:
    `"<srcId>": { "title", "publisher", "url", "licence", "accessed": "YYYY-MM-DD" }`.

@@ -2,6 +2,7 @@
 /* StewardMD neonatal layer - provenance validator for data/neo/*.json.
  *
  *   node scripts/neo/validate.mjs [file ...]      (default: every data/neo/*.json)
+ *   node scripts/neo/validate.mjs --pack          fold data/neo/sources/*.txt into sources.json.gz, then validate
  *
  * The rule the owner set (2026-09-30): no dose, threshold, score item or reference value from
  * memory. Mechanically:
@@ -18,7 +19,8 @@
  *      a snapshot ("table_src") whose text contains every row's values; see checkTable().
  * Exit 1 on any failure. test/neo-data.test.mjs runs this over the shipped files.
  */
-import { readFileSync, readdirSync, existsSync } from "node:fs";
+import { readFileSync, readdirSync, existsSync, writeFileSync } from "node:fs";
+import { gzipSync, gunzipSync } from "node:zlib";
 import { join, dirname, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -47,10 +49,34 @@ function hasNum(set, v) {
   return false;
 }
 
+/* Snapshots are committed as ONE file, data/neo/sources.json.gz ({ "<name>.txt": text }), because
+ * Cloudflare Pages caps a deploy at 20,000 files and 225 loose snapshots pushed the repo over it.
+ * scripts/neo/snap.py writes loose files into data/neo/sources/ (gitignored); `--pack` folds them in.
+ * A loose file wins over the bundle, so a fresh snapshot validates before it is packed. */
+const BUNDLE = join(DIR, "sources.json.gz");
+let bundle = null;
+function bundled() {
+  if (bundle) return bundle;
+  bundle = existsSync(BUNDLE) ? JSON.parse(gunzipSync(readFileSync(BUNDLE)).toString("utf8")) : {};
+  return bundle;
+}
 const snapCache = new Map();
 function snapshot(file) {
-  if (!snapCache.has(file)) snapCache.set(file, existsSync(file) ? norm(readFileSync(file, "utf8")) : null);
+  if (!snapCache.has(file)) {
+    const name = basename(file);
+    const txt = existsSync(file) ? readFileSync(file, "utf8") : bundled()[name];
+    snapCache.set(file, txt == null ? null : norm(txt));
+  }
   return snapCache.get(file);
+}
+function snapExists(file) { return existsSync(file) || basename(file) in bundled(); }
+export function pack() {
+  const dir = join(DIR, "sources"), out = Object.assign({}, bundled());
+  if (existsSync(dir)) readdirSync(dir).filter((f) => f.endsWith(".txt")).forEach((f) => { out[f] = readFileSync(join(dir, f), "utf8"); });
+  const sorted = {}; Object.keys(out).sort().forEach((k) => { sorted[k] = out[k]; });
+  writeFileSync(BUNDLE, gzipSync(Buffer.from(JSON.stringify(sorted)), { level: 9 }));
+  bundle = sorted;
+  return Object.keys(sorted).length;
 }
 
 export function validateDoc(doc, name, errs) {
@@ -64,7 +90,7 @@ export function validateDoc(doc, name, errs) {
   for (const [id, s] of Object.entries(S)) {
     for (const k of ["title", "url", "licence", "accessed"]) if (!s[k]) E(`source ${id} missing ${k}`);
     const f = join(DIR, "sources", (s.snapshot || id + ".txt").replace(/^sources\//, ""));
-    if (!existsSync(f)) E(`source ${id} snapshot missing (${basename(f)})`);
+    if (!snapExists(f)) E(`source ${id} snapshot missing (${basename(f)})`);
   }
   const snapFor = (id) => { const s = S[id]; if (!s) return null; return snapshot(join(DIR, "sources", (s.snapshot || id + ".txt").replace(/^sources\//, ""))); };
 
@@ -121,6 +147,7 @@ export function validateAll(files) {
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  if (process.argv[2] === "--pack") { console.log("packed " + pack() + " snapshots into data/neo/sources.json.gz"); process.argv.splice(2, 1); }
   const { files, errs } = validateAll(process.argv.slice(2));
   errs.forEach((e) => console.log("FAIL " + e));
   console.log(`${files} file(s), ${errs.length} problem(s)`);

@@ -34,7 +34,7 @@ from the owner's plan ("StewardMD Neonatal Layer: Build and Polish Plan", Claude
 | `neo-proc.js` | `SMD_NEO_PROC` | Phase 9 UVC/UAC, ETT, PICC, LP, exchange; step guides in `kb/clinical-protocols/neonatal-*.json` |
 | `neo-tdm.js` | `SMD_NEO_TDM` | Phase 10 vancomycin two-level AUC, neonatal gentamicin levels, Hartford (reference only) |
 | `data/neo/*.json` | | the clinical data; `data/neo/README.md` is the schema |
-| `data/neo/sources/*.txt` | | provenance snapshots (not shipped by build-www, 404 on the web via `functions/_middleware.js`) |
+| `data/neo/sources.json.gz` | | provenance snapshots, ONE packed file (`{name.txt: text}`); loose `data/neo/sources/*.txt` from snap.py are gitignored and folded in with `validate.mjs --pack`. Not shipped by build-www, 404 on the web |
 | `scripts/neo/snap.py`, `scripts/neo/validate.mjs` | | fetch a source snapshot; enforce "every number is in its quote" |
 
 Touch points outside the neo files: `dose-calc.js` (neonate path), `workspaces.js` ("per paediatric formulary"
@@ -44,7 +44,7 @@ opens neonatal dosing), `calculators.js` (`MEDCALC.register`, `draft`, `srcHtml`
 
 ## The provenance rule (owner, 2026-09-30)
 No dose, threshold, score item or reference value from model memory. Each clinical object carries `src` +
-`quote`; the quote is a verbatim substring of `data/neo/sources/<src>.txt`, and every number in the object
+`quote`; the quote is a verbatim substring of the `<src>.txt` snapshot in `data/neo/sources.json.gz`, and every number in the object
 appears in the quote. `node scripts/neo/validate.mjs` (and `test/neo-data.test.mjs`) fail otherwise.
 Unsourced means absent and the screen says "No data on file". Units are stored as the source writes them;
 the engines convert (g/kg, mcg/mg, mg/kg/min <-> g/kg/day).
@@ -72,6 +72,9 @@ the engines convert (g/kg, mcg/mg, mg/kg/min <-> g/kg/day).
   second check, dose -> prepare carry-over, dose-calc neonate path, dark mode, `[hidden]` trap.
 
 ## Gotchas
+- **Cloudflare Pages caps a deploy at 20,000 files** and the repo sits just under it. The 225 snapshots were
+  loose files at first and broke the Pages deploy on PR #1327; they are now one packed file. Add no loose
+  per-source files under a served path.
 - `neo-patient.js` must load before the others (it defines `SMD_NEO_ENGINE`); `neo-flags.js` inserts the
   files with `async=false` in `FILES` order. Node tests load `neo-patient.js` first for the same reason.
 - `#neoHub` sets `display:flex`: the stylesheet carries `#neoHub[hidden]{display:none!important}` (same
