@@ -3,12 +3,7 @@
   "unit": "neuro-pg",
   "level": "resident",
   "minutes": 5,
-  "review": {
-    "status": "ai_drafted",
-    "verify": [
-      "AI-generated realistic image: verify anatomy and label positions"
-    ]
-  },
+  "review": "ai_drafted",
   "title": {
     "en": "Third nerve palsy: the pupil first",
     "hi": "तीसरी नर्व का पक्षाघात: पहले पुतली"
@@ -18,21 +13,22 @@
     "hi": "बड़ी पुतली के साथ [[third-nerve]] का पक्षाघात, जब तक उलटा साबित न हो, पोस्टीरियर कम्युनिकेटिंग आर्टरी का [[aneurysm]] है। उसी दिन CT या MR एंजियोग्राफ़ी करवाएँ। पुतली बचाने वाले पक्षाघात अक्सर छोटी नलियों से होते हैं, पर उनकी भी आम तौर पर इमेजिंग होती है।"
   },
   "see": {
-    "w": 768,
-    "h": 574,
+    "diagram": "diagrams/neuro-third-nerve.svg",
+    "w": 480,
+    "h": 300,
     "alt": {
-      "en": "Left: the underside of the brain, with the ring of arteries at its base. A yellow nerve leaves the front of the brainstem and runs forward. A round red bulge on an artery sits right beside the nerve. Right: two cut ends of the nerve. Top: the red bulge presses on the outer layer, where the pupil fibres run. Bottom: a dark patch of damage sits in the core, and the outer layer is spared.",
-      "hi": "बाएँ: दिमाग़ का निचला हिस्सा, जिसके तल पर धमनियों का घेरा है। एक पीली नस ब्रेनस्टेम के आगे से निकलकर आगे जाती है। एक धमनी पर एक गोल लाल उभार नस के ठीक पास है। दाएँ: नस के दो कटे सिरे। ऊपर: लाल उभार बाहरी परत पर दबाता है, जहाँ पुतली के रेशे चलते हैं। नीचे: बीच में नुकसान का एक गहरा धब्बा है, और बाहरी परत बची है।"
+      "en": "Left: arteries at the base of the brain. A thick carotid artery joins a thin communicating artery, and a red bulge sits at the joint. A grey nerve with an amber edge runs just under it. Right: two round cross-sections of the nerve with an amber band along the top edge. In the top one, a red ball presses on the band. In the bottom one, a dark red patch fills the centre and the band is intact.",
+      "hi": "बाईं ओर: दिमाग के नीचे की धमनियाँ। एक मोटी कैरोटिड धमनी एक पतली कम्युनिकेटिंग धमनी से जुड़ती है, और जोड़ पर एक लाल उभार है। पीले किनारे वाली एक भूरी नर्व उसके ठीक नीचे से गुज़रती है। दाईं ओर: नर्व के दो गोल क्रॉस-सेक्शन, ऊपरी किनारे पर पीली पट्टी के साथ। ऊपर वाले में एक लाल गोला पट्टी को दबा रहा है। नीचे वाले में बीच में गहरा लाल धब्बा है और पट्टी सही-सलामत है।"
     },
     "caption": {
       "en": "The pupil fibres run on the outside of the nerve. An aneurysm presses on them early (top). A small-vessel infarct hits the core and spares them (bottom).",
       "hi": "पुतली के तंतु नर्व की बाहरी सतह पर चलते हैं। एन्यूरिज़्म उन्हें जल्दी दबाता है (ऊपर)। छोटी नली का इन्फ़ार्क्ट बीच के हिस्से को मारता है और उन्हें बचा लेता है (नीचे)।"
     },
-    "credit": "Created with MaiK (StewardMD AI)",
+    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
     "hotspots": [
       {
-        "x": 0.35,
-        "y": 0.355,
+        "x": 0.208,
+        "y": 0.553,
         "label": {
           "en": "Aneurysm",
           "hi": "एन्यूरिज़्म"
@@ -43,8 +39,8 @@
         }
       },
       {
-        "x": 0.29,
-        "y": 0.402,
+        "x": 0.083,
+        "y": 0.573,
         "label": {
           "en": "Third nerve",
           "hi": "तीसरी नर्व"
@@ -55,8 +51,8 @@
         }
       },
       {
-        "x": 0.81,
-        "y": 0.221,
+        "x": 0.683,
+        "y": 0.147,
         "label": {
           "en": "Pressure from outside",
           "hi": "बाहर से दबाव"
@@ -67,20 +63,20 @@
         }
       },
       {
-        "x": 0.76,
-        "y": 0.643,
+        "x": 0.767,
+        "y": 0.604,
         "label": {
           "en": "Pupil fibres",
           "hi": "पुतली के तंतु"
         },
         "note": {
-          "en": "They lie on the outer surface of the nerve, near the top and middle.",
-          "hi": "ये नर्व की बाहरी सतह पर, ऊपर और बीच की ओर होते हैं।"
+          "en": "They lie on the outer surface of the nerve, on the upper inner (superomedial) part.",
+          "hi": "ये नर्व की बाहरी सतह पर, ऊपर और अंदर (superomedial) की ओर होते हैं।"
         }
       },
       {
-        "x": 0.815,
-        "y": 0.743,
+        "x": 0.775,
+        "y": 0.74,
         "label": {
           "en": "Core infarct",
           "hi": "बीच का इन्फ़ार्क्ट"
@@ -90,10 +86,6 @@
           "hi": "डायबिटीज़ या हाई ब्लड प्रेशर बारीक नलियाँ बंद करता है। बीच का हिस्सा मरता है, और बाहरी पुतली के तंतु बच जाते हैं।"
         }
       }
-    ],
-    "img": "learn/media/real/neuro-third-nerve.webp",
-    "more": [
-      "neuro-third-nerve"
     ]
   },
   "why": {
@@ -111,8 +103,8 @@
         "hi": "पुतली वाले पक्षाघात में तुरंत CT या MR एंजियोग्राफ़ी करवाएँ। वह नेगेटिव हो पर शक बना रहे, तो कैथेटर एंजियोग्राफ़ी करें।"
       },
       {
-        "en": "A microvascular palsy fits age over 50, diabetes or high blood pressure, a spared pupil and complete muscle weakness. It recovers in about 3 months.",
-        "hi": "छोटी नलियों वाला पक्षाघात 50 से ज़्यादा उम्र, डायबिटीज़ या हाई ब्लड प्रेशर, बची पुतली और पूरी मांसपेशी कमज़ोरी से मेल खाता है। यह लगभग 3 महीने में ठीक होता है।"
+        "en": "A microvascular palsy fits age over 50, diabetes or high blood pressure, a spared pupil and complete muscle weakness. It usually recovers within 3 months.",
+        "hi": "छोटी नलियों वाला पक्षाघात 50 से ज़्यादा उम्र, डायबिटीज़ या हाई ब्लड प्रेशर, बची पुतली और पूरी मांसपेशी कमज़ोरी से मेल खाता है। यह आम तौर पर 3 महीने के अंदर ठीक हो जाता है।"
       },
       {
         "en": "In a prospective study, 16.5% of presumed microvascular eye nerve palsies had another cause. So most centres now image them too.",
