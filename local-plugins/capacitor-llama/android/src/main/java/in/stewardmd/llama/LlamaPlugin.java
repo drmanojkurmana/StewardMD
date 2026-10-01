@@ -372,6 +372,7 @@ public class LlamaPlugin extends Plugin {
         final int seed = call.getInt("seed", 0);
         final boolean stream = call.getBoolean("stream", true);
         final boolean prefillEmptyThink = call.getBoolean("prefillEmptyThink", false);
+        final String grammar = call.getString("grammar", null);   // GBNF, root rule "root" (Edge router)
 
         worker.execute(() -> {
             long t0 = System.currentTimeMillis();
@@ -379,7 +380,7 @@ public class LlamaPlugin extends Plugin {
             try {
                 TokenBatcher sink = stream ? new TokenBatcher() : null;
                 String text;
-                try { text = engine.generate(system, user, nPredict, temp, seed, prefillEmptyThink, sink); }
+                try { text = engine.generate(system, user, nPredict, temp, seed, prefillEmptyThink, grammar, sink); }
                 finally { if (sink != null) sink.flush(); }   // the last pieces land before the promise settles
                 long ms = System.currentTimeMillis() - t0;
                 JSObject out = new JSObject().put("text", text).put("ms", ms)

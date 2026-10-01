@@ -1,6 +1,6 @@
 ---
 tags: [module, ai, edge]
-status: built, engine pending
+status: built (JS + dataset), native source written, device gates pending
 flag: smd_edge (default OFF)
 ---
 # StewardMD Edge
@@ -41,6 +41,13 @@ Extraction gold set (45 rows): 45 exact, 0 unsafe.
 "framingham"); "search icd" built an ICD lookup; "open fracture" lost "open"; the parser took
 "mother has diabetes, her sugar 300", "cr 1.4 or 1.8" and Hinglish/Tenglish past values as current.
 
+## Native (source only, not yet built on a device): [[Edge-Runbook]]
+| Piece | Where | State |
+|---|---|---|
+| Needle engine plugin | `local-plugins/capacitor-needle` | Android: engine in `:edge` process (Messenger IPC, `kill()` ends it), JNI mmap's weights, 16 KB link flags. iOS: serial queue + token cap, no kill. Java type-checked, C++ syntax-checked; NOT in `package.json` until gate A0.1. Binaries + weights via `scripts/fetch-needle.sh` (pinned sha256). |
+| llama grammar | `local-plugins/capacitor-llama` | Opt-in `grammar` (GBNF) on `generate`, both platforms; draft decoding off when constrained. No grammar = unchanged. |
+| JS adapters | `edge-router.js` | `needleAdapter(plugin, {weightsPath, calibrated, killable})`, `llamaAdapter(plugin, {modelPath})` (bake-off only: evicts MaiK's pack), `grammarFor(n)`, `bakeoff(rows, engine)`. |
+
 ## Gotchas
 - The delegated chip handler in `home.js` only fires for attributes listed in its `closest(...)`
   selector. A new chip attribute must be added there or the chip is dead.
@@ -51,6 +58,8 @@ Extraction gold set (45 rows): 45 exact, 0 unsafe.
   that way or rules open the wrong score. Regression check: diff `find()` over every title + kw.
 - `negated()` guard (don't / do not / stop / hold / cancel) runs before rules and the model.
 - Drug and KB options get their slots before the ranked list, or weak word overlaps fill all five.
+- Capacitor's plugin proxy answers ANY method name, so "plugin.kill exists" proves nothing; the
+  adapter takes `killable` (default: Android only).
 - No engine is bundled. `SMD_EDGE.autoEngine()` uses `Capacitor.Plugins.Needle` on native when the
   plugin exists (Day 4 work). Until then only the rules layer answers.
 

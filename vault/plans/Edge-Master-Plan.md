@@ -462,6 +462,13 @@ Quality bar is unchanged: tests before claims, flags default OFF, git tag before
 | **4** | Edge runtime, router and grounding behind `smd_edge` with a mock engine; `capacitor-needle` plugin source; runbook | Build the plugin on the Mac; first on-device calls; name the 2 reviewing doctors |
 | **5** | Bake-off scorer over device outputs; fix everything found; sprint report | Run the bake-off on the phone; 3-doctor review of the danger set; decide go or no-go for the Wave 1 pilot |
 
+**Claude-side status (2026-10-01):** days 1 to 4 done, and the day 5 scorer and device harness
+are built. Commits are on branch `ccr-fbfae7e0-rjkxxk`; the owner's steps, in order, are in
+[[Edge-Runbook]]. Baselines on the frozen test set: rules 56.4% coverage at 0 wrong (passes the
+marks), top1 6.0% wrong (fails), oracle ceiling 88.3% coverage at 0 wrong. The scorer also found and
+fixed 26 rules-layer wrong opens (`MEDCALC.find`) and 5 unsafe parser extractions. Every native
+piece is source only until gates A0.1 to A0.3 run on a phone.
+
 What 5 days can and cannot prove: it can deliver Wave 0 code, the full Wave 1 software, the data
 pipeline and a first bake-off. It cannot replace a 2-week real-use pilot or multi-phone testing;
 those still gate any release to doctors outside the three reviewers.

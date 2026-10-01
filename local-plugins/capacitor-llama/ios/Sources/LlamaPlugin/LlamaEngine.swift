@@ -334,13 +334,15 @@ final class LlamaEngine {
                   temperature: Float,
                   seed: UInt32,
                   prefillEmptyThink: Bool = false,
+                  grammar: String? = nil,
                   onToken: ((String) -> Void)?,
                   completion: @escaping (Result<GenStats, Error>) -> Void) {
         work.async { [weak self] in
             guard let self else { return }
             do { completion(.success(try self.generateSync(system: system, user: user, nPredict: nPredict,
                                                            temperature: temperature, seed: seed,
-                                                           prefillEmptyThink: prefillEmptyThink, onToken: onToken))) }
+                                                           prefillEmptyThink: prefillEmptyThink, grammar: grammar,
+                                                           onToken: onToken))) }
             catch { completion(.failure(error)) }
         }
     }
@@ -407,6 +409,7 @@ final class LlamaEngine {
     private func generateSync(system: String, user: String, nPredict: Int32,
                               temperature: Float, seed: UInt32,
                               prefillEmptyThink: Bool = false,
+                              grammar: String? = nil,
                               onToken: ((String) -> Void)?,
                               imagePaths: [String] = [], mmprojPath: String = "") throws -> GenStats {
         // Runs on `work`. The pointers read here stay valid for the whole call: load and release are
@@ -491,6 +494,17 @@ final class LlamaEngine {
         // reproducible. Strength: see repeatPenalty (T55).
         llama_sampler_chain_add(smpl, llama_sampler_init_penalties(
             llama_vocab_n_tokens(vocab), 128, Self.repeatPenalty, 0.0, 0.0))
+        // GBNF grammar (StewardMD Edge, gate A0.3): the Edge router asks a small model for exactly
+        // {"option": n}, so only grammar-legal tokens can be sampled. It sits before greedy/dist so it
+        // masks the logits they choose from. Opt-in: no grammar, no change. A grammar llama.cpp cannot
+        // parse fails the call (the router then passes to the safe path) rather than running free.
+        let constrained = !(grammar ?? "").isEmpty
+        if constrained {
+            guard let g = llama_sampler_init_grammar(vocab, grammar!, "root") else {
+                throw LlamaError(.generationFailure, "grammar did not parse")
+            }
+            llama_sampler_chain_add(smpl, g)
+        }
         if temperature > 0 {
             llama_sampler_chain_add(smpl, llama_sampler_init_top_k(40))
             llama_sampler_chain_add(smpl, llama_sampler_init_top_p(0.95, 1))
@@ -561,7 +575,8 @@ final class LlamaEngine {
          * target's choice at every position is deterministic, so an accepted proposal is exactly the
          * token the plain loop would have produced: the answer is byte-identical, only faster. With
          * temperature > 0 (a regenerate) or an image prompt the plain loop below runs instead. */
-        let useDraft = draftCtx != nil && temperature <= 0 && vision == nil
+        // The draft proposes tokens without the grammar, so constrained calls decode plainly.
+        let useDraft = draftCtx != nil && temperature <= 0 && vision == nil && !constrained
         if useDraft, let dc = draftCtx {
             // The draft's cache must hold the same prompt; it reuses its own prefix too.
             var draftOK = true

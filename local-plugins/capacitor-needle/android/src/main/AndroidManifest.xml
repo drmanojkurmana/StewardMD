@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Gate A0.2: the engine runs in its own process. A stuck needle_complete (no cancel in needle.h)
+     is stopped by killing ":edge"; a crash there never takes the WebView down. No permissions:
+     inference is local and the weights are read from the app's own files dir. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <service
+            android:name="in.stewardmd.needle.NeedleService"
+            android:process=":edge"
+            android:exported="false" />
+    </application>
+</manifest>

@@ -15,6 +15,7 @@
 #include <algorithm>
 #include <chrono>
 #include <atomic>
+#include <mutex>
 #include <thread>
 #include <string>
 #include <vector>
@@ -320,6 +321,22 @@ Java_in_stewardmd_llama_LlamaNative_applyChatTemplate(
  * Greedy vs sampling: temp <= 0 installs a greedy sampler (reproducible, and what you want when a
  * clinician is going to read the answer twice). temp > 0 adds temp + dist.
  */
+/* GBNF grammar for the next generate() (StewardMD Edge, gate A0.3). Set and cleared by LlamaEngine
+ * inside its generating guard; generate() takes a copy under the mutex. */
+static std::mutex g_grammar_mu;
+static std::string g_grammar;
+
+JNIEXPORT void JNICALL
+Java_in_stewardmd_llama_LlamaNative_setGrammar(JNIEnv* env, jobject, jstring gbnf) {
+    std::string g;
+    if (gbnf != nullptr) {
+        const char* s = env->GetStringUTFChars(gbnf, nullptr);
+        if (s != nullptr) { g = s; env->ReleaseStringUTFChars(gbnf, s); }
+    }
+    std::lock_guard<std::mutex> lk(g_grammar_mu);
+    g_grammar = g;
+}
+
 JNIEXPORT jstring JNICALL
 Java_in_stewardmd_llama_LlamaNative_generate(
         JNIEnv* env, jobject, jlong ctxHandle, jlong modelHandle, jstring promptStr,
@@ -363,6 +380,16 @@ Java_in_stewardmd_llama_LlamaNative_generate(
     llama_sampler_chain_add(smpl, llama_sampler_init_penalties(
         n_vocab, /*penalty_last_n=*/128, /*penalty_repeat=*/kRepeatPenalty,
         /*penalty_freq=*/0.0f, /*penalty_present=*/0.0f));
+    // Grammar BEFORE greedy/dist, so it masks the logits they pick from. Opt-in; a grammar llama.cpp
+    // cannot parse fails the call (the Edge router then passes to the safe path).
+    std::string grammar;
+    { std::lock_guard<std::mutex> lk(g_grammar_mu); grammar = g_grammar; }
+    const bool constrained = !grammar.empty();
+    if (constrained) {
+        llama_sampler* gs = llama_sampler_init_grammar(vocab, grammar.c_str(), "root");
+        if (gs == nullptr) { LOGE("grammar did not parse"); llama_sampler_free(smpl); return nullptr; }
+        llama_sampler_chain_add(smpl, gs);
+    }
     if (temp > 0.0f) {
         llama_sampler_chain_add(smpl, llama_sampler_init_top_k(40));
         llama_sampler_chain_add(smpl, llama_sampler_init_top_p(0.95f, 1));
@@ -428,7 +455,8 @@ Java_in_stewardmd_llama_LlamaNative_generate(
      * every position is deterministic, so an accepted proposal is exactly the token the plain loop
      * would have produced: the answer is byte-identical, only faster. With temperature > 0 (a
      * regenerate) the plain loop below runs. */
-    const bool useDraft = dctx != nullptr && dmdl != nullptr && temp <= 0.0f;
+    // The draft proposes tokens without the grammar, so constrained calls decode plainly.
+    const bool useDraft = dctx != nullptr && dmdl != nullptr && temp <= 0.0f && !constrained;
     if (useDraft) {
         constexpr int K = 6;
         /* Adaptive draft-off (energy, 2026-09-25): after 8 verify steps, a generation whose acceptance

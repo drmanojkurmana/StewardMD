@@ -445,6 +445,7 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
         let seed = UInt32(truncatingIfNeeded: call.getInt("seed") ?? 0)
         let stream = call.getBool("stream") ?? true
         let prefillEmptyThink = call.getBool("prefillEmptyThink") ?? false
+        let grammar = call.getString("grammar")   // GBNF, root rule "root" (Edge router); nil = unconstrained
 
         let t0 = Date()
         let batcher: TokenBatcher? = stream
@@ -453,7 +454,7 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
         let onToken: ((String) -> Void)? = batcher.map { b in { piece in b.add(piece) } }
 
         engine.generate(system: system, user: prompt, nPredict: nPredict, temperature: temperature,
-                        seed: seed, prefillEmptyThink: prefillEmptyThink, onToken: onToken) { [weak self] result in
+                        seed: seed, prefillEmptyThink: prefillEmptyThink, grammar: grammar, onToken: onToken) { [weak self] result in
             batcher?.flush()   // the last pieces land before the promise settles
             // If backgrounding let this generation run past its deadline (T59), the answer landed:
             // release the background task we borrowed to finish it.

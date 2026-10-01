@@ -107,6 +107,13 @@ public final class LlamaNative {
     public static native String applyChatTemplate(long model, String system, String user);
 
     /**
+     * GBNF grammar (root rule "root") for the NEXT generate() only; null or "" clears it. A separate
+     * call rather than a new generate() argument so the existing JNI signature is untouched. The
+     * engine sets it and clears it inside its generating guard, so two calls cannot interleave.
+     */
+    public static native void setGrammar(String gbnf);
+
+    /**
      * Generate up to {@code nPredict} tokens, streaming each detokenised piece to
      * {@code sink.onToken} and returning the full text (null on failure).
      *
