@@ -49,6 +49,19 @@ Fail: report to Cactus, drop Needle from v1, FunctionGemma alone goes forward.
 iOS: `scripts/make-xcframework.sh`, build, same step 3 through `ios_webkit_debug_proxy` (`--ios --ws`).
 iOS has no kill: confirm a long call shows `busy` and then recovers, and the app never freezes.
 
+**iOS compile half PASSED on the Mac (2026-10-02, Xcode 27.2 beta 27B5019j, arm64 device, App scheme):**
+`fetch-needle.sh` matched all four pinned sha256s; `make-xcframework.sh` built `CNeedle.xcframework`.
+With the plugin added to `package.json` on a local branch only, `cap sync` registered `NeedlePlugin`.
+`NeedlePlugin.swift`, `LlamaPlugin.swift` and `LlamaEngine.swift` compiled with 0 errors and 0
+warnings; no Swift change was needed. `NeedlePlugin.o` imports exactly `needle_init/complete/load/
+reset/last_error`, all five defined in `libneedle.a`; `LlamaPlugin.o` imports `llama_sampler_init_grammar`.
+**Not yet linked or run:** the App build stops in a dependency outside Edge. mlx-swift
+(`capacitor-mlx`, pinned 0f4fe40) `Cmlx/.../backend/cpu/jit_compiler.cpp:212` calls `std::system`,
+which the iOS 27.2 SDK marks unavailable. This blocks ANY iOS build of the app with this Xcode, not
+only Edge. Also needed: the Metal Toolchain component (`xcodebuild -downloadComponent MetalToolchain`,
+now installed), `-skipPackagePluginValidation` (mlx-swift's CudaBuild plugin), about 4 GB free disk
+for a worktree build, and an iPhone on USB (`idevice_id -l`) for the proxy.
+
 ## 3. Gate A0.3: FunctionGemma + grammar (llama.cpp)
 **Mechanism PASSED on a host CPU (2026-10-01, `test/native-host/run.sh llama`):** the real
 `llama_jni.cpp` + `LlamaEngine` with ggml-org FunctionGemma 270M Q8_0 (rev 2566ce14, sha256 83940d4d):
@@ -58,7 +71,8 @@ routing: 7.7% wrong overall, 20.8% on model-routed rows, so fine-tuning is requi
 
 The llama plugin now takes an opt-in `grammar` (GBNF, root `root`) on both platforms
 (`local-plugins/capacitor-llama`, C++ syntax-checked against the pinned prism-b10685 headers,
-Java engine compiled; not built for a device). With no grammar nothing changes.
+Java engine compiled; iOS Swift compiled for arm64 device on 2026-10-02, see gate A0.2; not yet
+linked or run on a phone). With no grammar nothing changes.
 1. Build the app with this branch; confirm a normal MaiK local answer still works (regression).
 2. Base FunctionGemma GGUF on the phone; `node test/edge-bakeoff-device.mjs --engine llama --model <gguf path> --limit 20`.
    Every line must be `ok` with an integer `option`; the grammar admits nothing else.
