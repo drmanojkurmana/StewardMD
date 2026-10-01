@@ -1,6 +1,6 @@
 ---
 tags: [plan, ai, needle, edge]
-status: draft (decisions pending, see section 14)
+status: approved plan v1 (owner decisions in section 14)
 owner: Dr Manoj Kurmana
 ---
 # StewardMD Edge: the master plan
@@ -164,7 +164,7 @@ with these numbers", never "what is the treatment of pneumonia".
 | 6.1 | Tool catalog | Export tool schemas from `MEDCALC._calcs` (use `opts` for choices, not `list()` which drops them), dose engine, ICD search, module list, KB topics, ICU fields. Merge duplicates (`meld3`, `meld`, `meld_na`). |
 | 6.2 | Synthetic data | A generator writes thousands of examples per tool: Indian clinical shorthand ("creat", "65M", "E2V3M5", "1-0-1", "bd", "after food"), units, typos, voice-style numbers ("one ten by seventy"), negation, tense, family history, off-topic, and "not enough info". |
 | 6.3 | Hard negatives | Pairs that look alike but differ: "start" vs "stop", "patient" vs "mother", "mg" vs "mcg", BP vs age numbers, Losec vs Lasix. |
-| 6.4 | Real phrasing | A small set of how real doctors actually type, collected with consent, de-identified (see decision Q5). |
+| 6.4 | Real phrasing | Public datasets (section 16) plus, ideally, 150 lines typed by the owner and the 2 reviewing doctors. Hinglish/Tenglish in English letters (Q3). |
 | 6.5 | Train | Hosted platform (keeps the confidence score) or a rented GPU (see decision Q4). Never a laptop CPU. |
 | 6.6 | Sizes | Needle can be cut to 4, 8, 12 or 20 layers. Train once, test each size on each phone tier. |
 
@@ -222,7 +222,7 @@ Effort assumes the owner plus Claude sessions. Estimates, not promises.
 
 | Tier | Plan |
 |---|---|
-| 2 to 3 GB Android | Needle cut to 4 to 8 layers, router only. Feasibility target, not promised. |
+| 2 to 3 GB Android | Out of v1 (Q7). Later: Needle cut to 4 to 8 layers, router only. |
 | 4 GB Android | Needle full, router + prefill + ICU dictation. **Main new market.** |
 | 6 GB+ Android, iPhone | Bake-off winner; MaiK packs also available. |
 | Apple Watch | Needle only, Code Blue voice log (later). |
@@ -270,20 +270,54 @@ Center.
 | Wear OS bridge plugin not registered | `android/.../MainActivity.java` (WearBridgePlugin) |
 | Dictated prescriptions never become structured rows; `parseVoiceRx` takes the first number as dose | `opd-emr.js stageScribeRx`, `prescription.js:2434` |
 
-## 14. Decisions needed from the owner
+## 14. Owner decisions (2026-10-01)
 
-Asked as simple multiple-choice questions in chat. Answers will be written here.
+| # | Question | Decision | What it changes |
+|---|---|---|---|
+| Q1 | First goal | **A working product now** | Phase 0 (no AI) ships to doctors in week 2; AI router follows in week 4 to 6 |
+| Q2 | Model | **Bake-off: Needle vs FunctionGemma** | Both trained on the same data, scored on the same gold sets and phones |
+| Q3 | Languages v1 | **English + Hinglish/Tenglish typed in English letters** | Both models can read Latin letters. Native Telugu/Hindi script stays out of v1 |
+| Q4 | Training | **Both**: Cactus platform for Needle (synthetic data only, keeps the confidence score); rented GPU for FunctionGemma | Two training pipelines, one shared dataset |
+| Q5 | Real phrasing | **Public internet datasets** (section 16) | No consent collection needed; licences must be checked; gap noted below |
+| Q6 | Safety review | **Owner + 2 other doctors** | Every danger-set error reviewed by three clinicians before release |
+| Q7 | Phones | **Android 4 GB and up** (+ Pixel 9 and iPhone for testing) | 2 to 3 GB phones are out of v1 |
+| Q8 | Timeline | **4 to 6 weeks** to a small group of doctors | Week plan in section 15 |
 
-- Q1 First goal: safe product, or investor demo?
-- Q2 Model: Needle only, FunctionGemma only, or bake-off?
-- Q3 Languages for version 1
-- Q4 Where training runs
-- Q5 Source of real phrasing for tests
-- Q6 Who checks clinical safety
-- Q7 First phones to support
-- Q8 Budget
+**Gap to know about (Q5):** public datasets contain notes and doctor-patient conversations, not
+"doctor talking to an app". They are good for extraction tests and realistic shorthand, but the
+router gold set will still be mostly synthetic. Recommendation: the owner and the 2 reviewing doctors
+each type 50 requests the way they really would (no patient data). That is 150 real lines and costs
+about 30 minutes each.
 
-## 15. Words, simply
+## 15. Week-by-week (4 to 6 weeks)
+
+| Week | Ship / build | Done when |
+|---|---|---|
+| **1** | Phase 0 code: shared patient-number parser, calculators open prefilled from MaiK and search, `maik-brain.js:316` inputs fixed. Fix the two privacy/safety bugs first (speaker gate `opd-emr.js:4292`, on-device speech recognition). Feasibility: link `libneedle.a` in a test Android build; load FunctionGemma through `capacitor-llama`. Start the data pipeline. | Headless UI tests pass; both models answer one request inside the app on the 4 GB phone |
+| **2** | **Release Phase 0 to doctors** (flag on, git tag). Data generator + public datasets turned into gold sets. First training runs of both models. Expose grammar decoding in `capacitor-llama`. | Phase 0 live; gold sets frozen; both models trained once |
+| **3** | Bake-off: score both models on the gold sets and on the 4 GB phone, Pixel 9, iPhone. Pick the winner per tier. Build `edge-runtime.js`, `edge-router.js`, `edge-grounding.js`. | One model passes section 7.2, or we stop and keep Phase 0 |
+| **4** | Router pilot (5 read-only tools) behind `smd_edge`, owner + 2 doctors only. Danger-set review by the three doctors. | Zero wrong-field values, zero false refusals, 100% danger set |
+| **5** | Fix pilot findings. Add calculator prefill via Edge and ICU dictation to `reviewVoice()`. Hinglish/Tenglish test set run. | Same pass marks hold, including Hinglish/Tenglish |
+| **6** | Release to a small invited group of doctors. Decide the next step: Scribe fact log or show-off features. | Counts in AI Control Center look healthy for 1 week |
+
+If week 3 fails the gate, weeks 4 to 6 become more Phase 0 work (search, prefill, parser coverage),
+which still helps every user.
+
+## 16. Datasets (checked, licences noted)
+
+| Dataset | What it is | Licence | Use |
+|---|---|---|---|
+| ACI-Bench | 207 role-played doctor-patient visits with notes | CC BY 4.0 | Extraction gold set, Scribe fact tests |
+| PriMock57 | 57 mock primary-care consults: audio, transcripts, notes | CC BY 4.0 | Scribe tests, Whisper-to-facts tests |
+| MTSamples | About 5,000 sample transcription reports | Listed CC0 on Kaggle; scraped from mtsamples.com, so check the site's own terms before training | Clinical shorthand and phrasing |
+| MMCQS (IIT Patna, MedSumm) | 3,015 Hinglish code-mixed medical queries | CC BY 4.0 | Hinglish test set |
+| L3Cube-HingCorpus | 52M Hinglish sentences (Twitter) | check before use | Hinglish word patterns only, not medical |
+| Telugu medical words | No good public set found | n/a | Owner writes a romanised list ("jvaram", "daggu", "noppi", "vanthulu") |
+| **MIMIC / n2c2 / PhysioNet** | Real hospital notes | Credentialed licence | **Do not use for this.** The licence forbids sending data to third parties, so it can never go to the Cactus platform |
+
+Attribution for CC BY data goes in `licenses/`.
+
+## 17. Words, simply
 
 | Word | Means |
 |---|---|
