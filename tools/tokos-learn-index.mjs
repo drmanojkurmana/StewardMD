@@ -14,7 +14,7 @@ import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 
 const D = createRequire(import.meta.url)("../specialty-data.js");
-export const LICENCES = /^(CC0|CC BY \d\.\d|CC BY-SA \d\.\d|ODC-BY 1\.0|Public domain|Original, MAIKNOWLEDGE LLP)$/;
+export const LICENCES = /^(CC0|CC BY \d\.\d|CC BY-SA \d\.\d|ODC-BY 1\.0|Public domain|Original, MAIKNOWLEDGE LLP|Original, StewardMD)$/;
 const ORDER = ["ob", "gy", "obr", "gyr"];
 
 export function unitKey(id) {

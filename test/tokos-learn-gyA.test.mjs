@@ -16,7 +16,7 @@ const UNITS = ["gy1", "gy2", "gy3", "gy4", "gy5", "gy6"];
 const MCQ = ["ob-antenatal", "ob-labour", "ob-medical", "ob-haemorrhage", "ob-hypertension", "ob-fetal", "ob-puerperium", "ob-early", "ob-operative",
   "gy-menstrual", "gy-infection", "gy-benign", "gy-oncology", "gy-fertility", "gy-contraception", "gy-urogyn", "gy-anatomy"];
 const EXPLORERS = ["mechanism", "cycle", "palm-coein", "popq", "ovarian-triage", "cervical-screening"];
-const LICENCES = /^(CC0|CC BY(-SA)? \d\.\d|ODC-BY 1\.0|Public domain|Original, MAIKNOWLEDGE LLP)$/;
+const LICENCES = /^(CC0|CC BY(-SA)? \d\.\d|ODC-BY 1\.0|Public domain|Original, MAIKNOWLEDGE LLP|Original, StewardMD)$/;
 const readJson = (p) => JSON.parse(readFileSync(p, "utf8"));
 
 const units = {}, glossary = {}, media = {}, credits = {};
