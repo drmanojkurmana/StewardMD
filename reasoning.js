@@ -2991,7 +2991,9 @@
     var dxh = "";
     dxh += evSub("Investigations", evList(e.additionalInvestigations));
     dxh += evSub("Other differentials", evList(e.additionalDifferentials));
-    var mim = (e.infectionMimics || []).concat(e.nonInfectiousMimics || []);
+    // A condition listed under both "Other differentials" and mimics is shown once (under differentials).
+    var _dd = {}; (e.additionalDifferentials || []).forEach(function (x) { _dd[String(x).replace(/\s+/g, " ").trim().toLowerCase()] = 1; });
+    var mim = (e.infectionMimics || []).concat(e.nonInfectiousMimics || []).filter(function (x) { return !_dd[String(x).replace(/\s+/g, " ").trim().toLowerCase()]; });
     dxh += evSub("Mimics", evList(mim));
     if (dxh) sections.push({ ic: rIco("steth"), title: "Diagnosis & workup", html: dxh });
     var rf = "";
@@ -3007,10 +3009,10 @@
     var full = "";
     full += evSub("Clinical pearls", rawUl(pearls));
     if (e.pathophysiology) full += evSub("Pathophysiology", '<p>' + medFormat(e.pathophysiology) + '</p>');
-    full += evSub("Investigations", rawUl(e.additionalInvestigations));
+    if (!(_evOmit && _evOmit.investigations)) full += evSub("Investigations", rawUl(e.additionalInvestigations));
     full += evSub("Other differentials", rawUl(e.additionalDifferentials));
     full += evSub("Mimics", rawUl(mim));
-    full += evSub("Red flags", rawUl(e.redFlags));
+    if (!(_evOmit && _evOmit.redFlags)) full += evSub("Red flags", rawUl(e.redFlags));
     full += evSub("Pitfalls", rawUl(e.pitfalls));
     if (e.severityClassification) full += '<div class="ev-subh">Severity</div><p>' + medFormat(e.severityClassification) + '</p>';
     if (e.prognosis) full += '<div class="ev-subh">Prognosis</div><p>' + medFormat(e.prognosis) + '</p>';
@@ -3570,11 +3572,16 @@
   }
   var EV_BUILDERS = { harrison: evHarrisonSrc, idsa: evIdsaSrc, sanford: evSanfordSrc };
   // render ALL available sources for a disease, stacked (Harrison first/primary).
+  /* Sections the disease reader already prints in "At a glance" (Red flags, Investigations): the full
+   * reference below leaves them out instead of repeating every item a second time. */
+  var _evOmit = null;
   function evAllSourcesHTML(id, opts) {
     opts = opts || {};
     var html = "", any = false;
     ["harrison", "idsa", "sanford"].forEach(function (k) {
-      var src; try { src = EV_BUILDERS[k](id); } catch (e) { src = null; }
+      var src; _evOmit = opts.omit || null;
+      try { src = EV_BUILDERS[k](id); } catch (e) { src = null; }
+      _evOmit = null;
       if (!src) return;
       src.srcKey = k;
       html += evViewerHTML(src, { expanded: !!opts.expanded && k === "harrison" });
@@ -4348,7 +4355,7 @@
         '</div><div class="dx-reader-content">' +
         (reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(reason) + '</p>' : '') +
         mgmtHtml +
-        (harrisonRef(id, { expanded: true }) || '<p class="dx-sel-empty">No reference loaded for this disease.</p>') +
+        (harrisonRef(id, { expanded: true, omit: { redFlags: !!(H && H.redFlags && H.redFlags.length), investigations: !!(H && H.additionalInvestigations && H.additionalInvestigations.length) } }) || '<p class="dx-sel-empty">No reference loaded for this disease.</p>') +
         (refInf ? '' : '<button class="dx-select ' + (inf ? "inf" : "ni") + '" data-sel="' + id + '">Open full ' + (inf ? "stewardship" : "management") + ' page →</button>') +
         '</div>' +
       '</div>';
