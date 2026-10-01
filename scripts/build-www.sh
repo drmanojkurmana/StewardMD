@@ -99,7 +99,13 @@ if [ -d assets/vendor ]; then mkdir -p "$WWW/assets/vendor"; cp -R assets/vendor
 [ -f data/clinical-supplement.json.gz ] && cp data/clinical-supplement.json.gz "$WWW/"
 # Dose calculator rules (scripts/build-dose-rules.mjs), loaded lazily by the calculator.
 [ -f data/dose-rules.json.gz ] && cp data/dose-rules.json.gz "$WWW/"
+# Neonatal layer (smd_neo): the quoted clinical data files, fetched lazily by neo-*.js from /data/neo/.
+# data/neo/sources.json.gz (provenance snapshots for scripts/neo/validate.mjs) is NOT shipped.
+if [ -d data/neo ]; then mkdir -p "$WWW/data/neo"; cp data/neo/*.json "$WWW/data/neo/"; fi
 [ -f data/clinical-index.js ] && cp data/clinical-index.js "$WWW/"
+# India access on Clinical Bulletins cards (bulletins.js): NLEM 2022 (scripts/india/build_nlem.py) and, when the
+# owner has run scripts/india/fetch-janaushadhi.mjs, the Jan Aushadhi price list. Read offline from the bundle.
+if ls data/india/*.json >/dev/null 2>&1; then mkdir -p "$WWW/data/india"; cp data/india/*.json "$WWW/data/india/"; fi
 
 # ── 4c. WardSynQ clinical surface ─────────────────────────────────────────────
 # The EMR surface and the modules it imports. Copied WHOLE rather than cherry-picked:

@@ -27,6 +27,7 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 ### Clinical modules
 - [[Scan-Meds and Drug Index]] — prescription/med scan, drug DB, interactions
 - [[Dose Calculator]] — dose for a patient (weight, kidney, liver) from our monographs; flag `smd_dose_calc` default ON
+- [[Neonatal]] - NICU layer: baby record + dosing bands, prep, infusions, fluids/GIR, growth, bilirubin, scores, reference values, procedures, TDM; flag `smd_neo` default OFF; every number quoted, ai_drafted
 - [[RxChoice]] — same prescribed therapy, four price choices over the same drug DB
 - [[ICU]] — the ICU flagship workstation
 - [[FollowCare]] — post-discharge recovery intelligence

@@ -149,7 +149,17 @@ CREATE TABLE IF NOT EXISTS bulletins (
   retract_reason   TEXT NOT NULL DEFAULT '',
   created_uid      TEXT NOT NULL DEFAULT '',
   created_ts       INTEGER NOT NULL DEFAULT 0,
-  updated_ts       INTEGER NOT NULL DEFAULT 0
+  updated_ts       INTEGER NOT NULL DEFAULT 0,
+  second_required  INTEGER NOT NULL DEFAULT 0,    -- set at signing: 1 when a second reader must co-sign (approval, safety)
+  cosigned_hash    TEXT NOT NULL DEFAULT '',      -- body_hash the second reader confirmed
+  cosigned_uid     TEXT NOT NULL DEFAULT '',
+  cosigned_name    TEXT NOT NULL DEFAULT '',
+  cosigned_reg     TEXT NOT NULL DEFAULT '',
+  cosigned_council TEXT NOT NULL DEFAULT '',
+  cosigned_ts      INTEGER NOT NULL DEFAULT 0,
+  returned_note    TEXT NOT NULL DEFAULT '',      -- a second reader sent it back: what to fix (cleared at the next signing)
+  returned_uid     TEXT NOT NULL DEFAULT '',
+  returned_ts      INTEGER NOT NULL DEFAULT 0
 );
 CREATE INDEX IF NOT EXISTS idx_bulletins_update ON bulletins(update_id);
 CREATE INDEX IF NOT EXISTS idx_bulletins_status ON bulletins(status, updated_ts DESC);
@@ -166,7 +176,7 @@ CREATE TABLE IF NOT EXISTS bulletin_audit (       -- append-only: nothing in the
   bulletin_id TEXT NOT NULL,                      -- '' for signer and kill-switch events
   ts          INTEGER NOT NULL,
   actor_uid   TEXT NOT NULL DEFAULT '',
-  action      TEXT NOT NULL,                      -- draft | edit | sign | retract | source_deleted | signer_add | signer_remove | kill_on | kill_off
+  action      TEXT NOT NULL,                      -- draft | edit | sign | cosign | return | retract | source_deleted | signer_add | signer_remove | kill_on | kill_off | skip | unskip | second_reader_on | second_reader_off
   body_hash   TEXT NOT NULL DEFAULT '',
   detail      TEXT NOT NULL DEFAULT ''
 );
@@ -179,7 +189,8 @@ CREATE TABLE IF NOT EXISTS bulletin_signers (     -- who may sign; identity conf
   council     TEXT NOT NULL,
   active      INTEGER NOT NULL DEFAULT 1,
   added_by    TEXT NOT NULL,
-  added_ts    INTEGER NOT NULL
+  added_ts    INTEGER NOT NULL,
+  specialties TEXT NOT NULL DEFAULT ''            -- comma-separated keys from SPECIALTIES (functions/_bulletin_rules.js)
 );
 
 CREATE TABLE IF NOT EXISTS bulletin_settings (    -- runtime switches that must act without a redeploy

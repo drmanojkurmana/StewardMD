@@ -11,22 +11,29 @@
 import * as brepo from "./_bulletins_repo.js";
 import { ensureBulletinSchema } from "./_bulletins_schema.js";
 import { sendNativeToAll, nativePushEnabled } from "./_nativepush.js";
+import { specialtiesOf, isMine } from "./_bulletin_rules.js";
 
 const DAY = 86400000;
 export const REVIEW_URL = "/?rvtab=bulletins";
 
-/** What is waiting for a signer right now. */
-export async function pendingCounts(env, now) {
+/** What is waiting for a signer right now. With `signer` ({ uid, specialties }): only their specialties (plus items
+ * no specialty claims), and second reads of bulletins someone else signed. */
+export async function pendingCounts(env, now, signer) {
   const rows = await brepo.listForQueue(env);
-  const c = { candidates: 0, drafts: 0, source_changed: 0, review_due: 0 };
+  const secondOn = await brepo.secondReaderOn(env);
+  const mySpec = (signer && signer.specialties) || [];
+  const c = { candidates: 0, drafts: 0, source_changed: 0, review_due: 0, second_reads: 0 };
   for (const r of rows) {
-    const st = brepo.stateOf(r, now);
+    if (!isMine(specialtiesOf([r.u_title, r.u_summary, r.headline, r.what_changed].join(" "), r.u_branch, r.u_workspace), mySpec)) continue;
+    const st = brepo.stateOf(r, now, secondOn);
     if (st === "draft" || st === "edited") c.drafts++;
     else if (st === "source_changed") c.source_changed++;
+    else if (st === "awaiting_second") { if (!signer || r.signed_uid !== signer.uid) c.second_reads++; }
     else if (st === "review_due" || (st === "live" && r.review_due_ts < now + 30 * DAY)) c.review_due++;
   }
-  c.candidates = (await brepo.listCandidates(env, now - 90 * DAY, 200)).length;
-  c.total = c.candidates + c.drafts + c.source_changed + c.review_due;
+  c.candidates = (await brepo.listCandidates(env, now - 90 * DAY, 200))
+    .filter((x) => isMine(specialtiesOf([x.title, x.summary].join(" "), x.branch, x.workspace), mySpec)).length;
+  c.total = c.candidates + c.drafts + c.source_changed + c.review_due + c.second_reads;
   return c;
 }
 
@@ -37,6 +44,7 @@ export function digestMessage(c) {
   if (c.source_changed) parts.push(c.source_changed + " source change" + (c.source_changed === 1 ? "" : "s") + " to re-check");
   if (c.drafts) parts.push(c.drafts + " draft" + (c.drafts === 1 ? "" : "s"));
   if (c.review_due) parts.push(c.review_due + " due for review");
+  if (c.second_reads) parts.push(c.second_reads + " to read as second doctor");
   return {
     title: "Clinical updates to review",
     body: parts.join(", ") + ". Read each against its source and sign what should reach the disease page.",
@@ -62,11 +70,13 @@ export async function runWeeklyReview(env, deps) {
   else if (!signers.length) out.skipped = "no-signers";
   else if (!deps.send && !nativePushEnabled(env)) out.skipped = "native-push-not-configured";
   else {
-    const msg = digestMessage(counts);
     const send = deps.send || ((uid, m) => sendNativeToAll(env, m, { uid }));
     for (const s of signers) {
+      // Each signer hears about their own specialties and the second reads that are theirs to do.
+      const mine = await pendingCounts(env, now, { uid: s.uid, specialties: String(s.specialties || "").split(",").filter(Boolean) });
+      if (!mine.total) continue;
       try {
-        const r = await send("fb:" + s.uid, msg);
+        const r = await send("fb:" + s.uid, digestMessage(mine));
         if (r && r.sent) { out.notified++; out.devices += r.sent; }
       } catch (e) {}
     }

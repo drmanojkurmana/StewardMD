@@ -2,7 +2,7 @@
  * Kept dependency-free so the crawl/dedup logic is unit-testable in plain Node.
  */
 
-export const APPROVAL_RE = /\b(approv|clearance|cleared|clears|authoriz|granted|green[-\s]?light|new indication|expanded indication|launch|now available|market(ing)? (authoris|authoriz)|introduc|roll(ing)?[-\s]?out|rolled out|debut|unveil|first[-\s]?in[-\s]?class|receives? marketing)/i;
+export const APPROVAL_RE = /\b(european public assessment report|positive opinion|status:\s*(opinion|authori[sz]ed)|approv|clearance|cleared|clears|authoriz|granted|green[-\s]?light|new indication|expanded indication|launch|now available|market(ing)? (authoris|authoriz)|introduc|roll(ing)?[-\s]?out|rolled out|debut|unveil|first[-\s]?in[-\s]?class|receives? marketing)/i;
 export const NON_MEDICAL_RE = /\b(pet food|dog food|cat food|pet treats?|dogs?|cats?|puppy|kitten|veterinary|animal (health|feed)|shampoo|conditioner|lotion|cosmetic|makeup|mascara|eyeliner|fragrance|perfume|undeclared|allergy alert|ice cream|cheese|yogurt|frozen (food|meal)|snack|beverage|seafood|salad|sausage|poultry)\b/i;
 
 export function decodeEntities(s) {
@@ -47,6 +47,15 @@ export function parseRss(xml) {
 
 // Item-level relevance: approval feeds keep only approval headlines; always drop
 // pet-food / cosmetic / food-allergen noise; other feed types pass through.
+// EMA "New medicines: human" feed titles read "Human medicines European public assessment report (EPAR): Inijaq,
+// tofacitinib, Status: Opinion". Shown as "Inijaq (tofacitinib): EMA CHMP opinion". Other titles pass through.
+export function tidyFeedTitle(title) {
+  const t = String(title || ""), m = /^Human medicines European public assessment report \(EPAR\):\s*(.+?),\s*(.+?),\s*Status:\s*([A-Za-z ]+)\s*$/.exec(t);
+  if (!m) return t;
+  const st = m[3].trim().toLowerCase();
+  return m[1].trim() + " (" + m[2].trim() + "): " + (st === "opinion" ? "EMA CHMP opinion" : st === "authorised" || st === "authorized" ? "EU authorisation" : "EMA, " + st);
+}
+
 export function keepItem(sourceType, title, desc) {
   const hay = String(title || "") + " " + String(desc || "");
   if (NON_MEDICAL_RE.test(hay)) return false;

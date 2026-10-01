@@ -34,9 +34,9 @@ function bl(id, over) {
 }
 const ITEMS = [
   bl("b-old", { source_date: "2026-01-10" }),
-  bl("b-new", { source_date: "2026-09-10", india_status: "not_approved_india" }),
+  bl("b-new", { source_date: "2026-09-10", india_status: "not_approved_india", second_name: "Second Doctor", second_reg: "TSMC-2", second_council: "Telangana State Medical Council", second_ts: NOW - DAY }),
   bl("b-safety", { kind: "safety", evidence_type: "regulatory_safety", source_date: "2025-05-01", headline: "Boxed warning for liver injury" }),
-  bl("b-mid", { source_date: "2026-05-05" }),
+  bl("b-mid", { source_date: "2026-05-05", what_changed: "Start metformin with lifestyle advice, in the reviewer's own words." }),
   bl("b-due", { source_date: "2026-09-20", review_due_ts: NOW - DAY }),
   bl("b-other", { disease_ids: [DIS2] }),
   bl("b-js", { disease_ids: [DIS3], source_url: "javascript:alert(1)" }),
@@ -44,7 +44,7 @@ const ITEMS = [
 ];
 
 // ---- mock state the test flips between steps ----
-const st = { queueHits: 0, queueFail: false, saves: 0, skipBodies: [], killBodies: [], signerBodies: [], mode: "items", hits: 0, lastInm: "", lastHost: "", me: { canSign: false, isOwner: false }, signBodies: [], signResp: { status: 409, body: { error: "changed" } } };
+const st = { extraItems: [], extraCands: [], cosignBodies: [], returnBodies: [], srBodies: [], metricsDays: [], queueHits: 0, queueFail: false, saves: 0, skipBodies: [], killBodies: [], signerBodies: [], mode: "items", hits: 0, lastInm: "", lastHost: "", me: { canSign: false, isOwner: false }, signBodies: [], signResp: { status: 409, body: { error: "changed" } } };
 const QUEUE_ITEM = Object.assign(bl("b-draft", { source_date: "2026-09-02" }), {
   update_id: "u1", review_months: 12, state: "draft", body_hash: "a".repeat(64), status: "draft", orphaned: [],
   signed_name: "", signed_reg: "", signed_council: "", signed_ts: 0, review_due_ts: 0, u_title: "Source item title", u_org: "FDA", u_url: "https://example.org/u1", u_published_ts: NOW - 5 * DAY, u_summary: "AI summary text",
@@ -69,8 +69,18 @@ const server = http.createServer(async (req, res) => {
   }
   if (p === "/api/updates/bulletins/me") return sendJson(res, 200, st.me);
   if (p === "/api/updates/bulletins/queue" && (st.queueHits++, st.queueFail)) return sendJson(res, 500, { error: "boom" });
-  if (p === "/api/updates/bulletins/queue") return sendJson(res, 200, { ok: true, killed: false, items: [QUEUE_ITEM], candidates: [{ id: "u2", type: "safety_alert", title: "Candidate source", organization: "U.S. Food and Drug Administration", official_url: "http://example.org/u2", doi: "10.1056/NEJMoa2605659", pmid: "42748429", published_ts: NOW - DAY,
-    summary: "In adults with Acute Bronchitis the drug cut symptom days (HR 0.72; 95% CI 0.61-0.85), 12.5% vs 17.3%, at 10 mg daily for 12 weeks. A second sentence that is long enough to push the draft beyond the four hundred character limit so that the cut lands on a full stop rather than the middle of a word, which keeps the draft readable for the doctor who must rewrite it anyway before signing it for the disease page." }] });
+  if (/^\/api\/updates\/bulletins\/[^/]+\/cosign$/.test(p)) { st.cosignBodies.push(await readBody(req)); return sendJson(res, 200, { ok: true, item: {} }); }
+  if (/^\/api\/updates\/bulletins\/[^/]+\/return$/.test(p)) { st.returnBodies.push(await readBody(req)); return sendJson(res, 200, { ok: true, item: {} }); }
+  if (p === "/api/updates/bulletins/second-reader") { st.srBodies.push(await readBody(req)); return sendJson(res, 200, { ok: true }); }
+  if (p === "/api/updates/bulletins/metrics") {
+    st.metricsDays.push(new URL(req.url, "http://x").searchParams.get("days"));
+    return sendJson(res, 200, { ok: true, second_reader: true, window_days: 90, signed: 5, days_to_page: { median: 4.2, p90: 9.8, n: 5 },
+      correction: { corrected: 2, of: 5, rate: 40 }, signed_with_warnings: 1,
+      coverage: { total: 120, signed: 5, skipped: 3, waiting: 112, by_source: [{ source: "FDA new drug and biologic approvals (openFDA)", total: 14, signed: 4, skipped: 1, waiting: 9 }, { source: "NEJM, Lancet, JAMA, BMJ", total: 40, signed: 1, skipped: 2, waiting: 37 }] },
+      backlog: { waiting: 112, oldest_days: 88, drafts: 2, second_reads: 1 }, signers: [{ uid: "u-owner", name: "Manoj Kurmana", signs: 5, cosigns: 0, returns: 0 }] });
+  }
+  if (p === "/api/updates/bulletins/queue") return sendJson(res, 200, { ok: true, killed: false, items: [QUEUE_ITEM].concat(st.extraItems), candidates: st.extraCands.concat([{ id: "u2", type: "safety_alert", title: "Candidate source", organization: "U.S. Food and Drug Administration", official_url: "http://example.org/u2", doi: "10.1056/NEJMoa2605659", pmid: "42748429", published_ts: NOW - DAY,
+    summary: "In adults with Acute Bronchitis the drug cut symptom days (HR 0.72; 95% CI 0.61-0.85), 12.5% vs 17.3%, at 10 mg daily for 12 weeks. A second sentence that is long enough to push the draft beyond the four hundred character limit so that the cut lands on a full stop rather than the middle of a word, which keeps the draft readable for the doctor who must rewrite it anyway before signing it for the disease page." }]) });
   if (p === "/api/updates/bulletins/skip" && req.method === "POST") { const b = await readBody(req); st.skipBodies.push(b); return sendJson(res, 200, { ok: true, update_id: b.update_id, skipped: !b.undo }); }
   if (p === "/api/updates/bulletins" && req.method === "POST") { st.saves++; const b = await readBody(req); return sendJson(res, 200, { ok: true, item: Object.assign({}, QUEUE_ITEM, b, { body_hash: "b".repeat(64), state: "draft" }) }); }
   if (p === "/api/updates/bulletins/signers" && req.method === "GET") return sendJson(res, 200, { ok: true, signers: [{ uid: "u-owner", name: "Manoj Kurmana", reg_no: "APMC-1", council: "Andhra Pradesh Medical Council", active: 1 }] });
@@ -193,7 +203,13 @@ try {
   ok(await ev(`(function(){var g=document.querySelector('#dxMgmt .smd-bls'),a=document.querySelector('#dxMgmt .dx-reader-glance');return !!(g&&a&&(g.compareDocumentPosition(a)&Node.DOCUMENT_POSITION_FOLLOWING))})()`), "cards sit above At a glance (and its Management)");
   ok(await ev(`(function(){var w=document.querySelector('#dxMgmt .smd-bl-in.warn');return !!w&&w.textContent.indexOf('Not yet approved in India')>=0&&getComputedStyle(w).color==='rgb(180, 83, 9)'})()`), "India caution line is amber");
   ok(await ev(`${cardsIn}.every(function(c){return c.querySelector('.smd-bl-foot').textContent==='Check your local protocol before acting.'})`), "every card ends with the local-protocol line");
-  ok(await ev(`${cardsIn}.every(function(c){return /Reviewed by Dr Manoj Kurmana, Reg\\. No\\. APMC-1, Andhra Pradesh Medical Council, on \\d+ \\w{3} \\d{4}\\. Review due \\w{3} \\d{4}\\./.test(c.querySelector('.smd-bl-sig').textContent)})`), "signature line names the doctor, registration, council and dates");
+  ok(await ev(`${cardsIn}.every(function(c){return /Reviewed by Dr Manoj Kurmana, Reg\\. No\\. APMC-1, Andhra Pradesh Medical Council, on \\d+ \\w{3} \\d{4}\\.( Second reader Dr [^,]+, Reg\\. No\\. [^,]+(, [^.]+)?\\.)? Review due \\w{3} \\d{4}\\./.test(c.querySelector('.smd-bl-sig').textContent)})`), "signature line names the doctor, registration, council and dates");
+  ok(await ev(`${cardsIn}.some(function(c){return c.querySelector('.smd-bl-sig').textContent.indexOf('Second reader Dr Second Doctor, Reg. No. TSMC-2, Telangana State Medical Council.')>=0})`), "a card confirmed by a second doctor names them too");
+  ok(await until("!!SMD_BULLETINS._india.nlem"), "NLEM 2022 loads from the app bundle");
+  await openDisease(DIS); await sleep(300);
+  ok(await ev(`(function(){var c=${cardsIn}.filter(function(x){return x.querySelector('.smd-bl-h').textContent==='Headline b-mid'})[0];var i=c&&c.querySelector('.smd-bl-ind');return !!i&&/Metformin is on NLEM 2022 \\(primary to tertiary care\\)\\./.test(i.textContent)&&/Not part of the signed update\\./.test(i.textContent)})()`), "a medicine the update names shows its NLEM 2022 listing, apart from the signed text");
+  ok(await ev(`${cardsIn}.filter(function(x){return x.querySelector('.smd-bl-h').textContent!=='Headline b-mid'}).every(function(c){return !c.querySelector('.smd-bl-ind')})`), "no India access line when no listed medicine is named");
+  await ev(`${cardsIn}.filter(function(x){return x.querySelector('.smd-bl-h').textContent==='Headline b-mid'})[0].scrollIntoView({block:'center'});true`); await sleep(200); await shot("reader-india-access");
   ok(await ev(`document.querySelector('#dxMgmt .smd-bls').textContent.indexOf('\\u2014')<0`), "no em-dash in the card text");
   ok(await ev(`${cardsIn}.every(function(c){return c.getAttribute('role')!=='alert'&&c.getAttribute('aria-label')==='Practice update'})`), "cards are labelled sections, not alerts");
   ok(await ev(`(function(){var c=SMD_BULLETINS.card({kind:'trial',headline:'H',what_changed:'W',india_status:'unknown',source_label:'NEJM',source_url:'https://www.nejm.org/x',source_date:'2026-09-01',doi:'10.1056/NEJMoa1',pmid:'123',signed_name:'A',signed_reg:'1',signed_ts:1,review_due_ts:2});var d=document.createElement('div');d.innerHTML=c;var hs=Array.from(d.querySelectorAll('a')).map(function(a){return a.getAttribute('href')});return hs.join('|')==='https://www.nejm.org/x|https://doi.org/10.1056/NEJMoa1|https://pubmed.ncbi.nlm.nih.gov/123/'})()`), "the card links the source, its DOI and PubMed");
@@ -314,6 +330,10 @@ try {
   const sent = st.signBodies[0] || {};
   ok(sent.body_hash === "b".repeat(64) && ["source_read", "numbers_match", "india_checked", "own_words"].every((k) => sent.checklist && sent.checklist[k] === true), "sign request carries the previewed hash and the full checklist", sent);
   ok(await ev(`!!document.querySelector('#smdReview [data-bl-act="savesign"]')`), "after a 409 the editor is back");
+  await ev(`document.querySelector('#smdReview [data-bl-act="set:india_status:not_applicable"]').click();true`);
+  ok(await until(`!!document.querySelector('#bl_bar_s .bl-left.fix')&&/Fix: India status/.test(document.getElementById('bl_bar_s').textContent)&&/An approval always has an India status/.test(document.getElementById('bl_sec_india_status').textContent)`), "an approval marked India Not applicable must be fixed before signing");
+  await ev(`document.querySelector('#smdReview [data-bl-act="set:india_status:cdsco_approved"]').click();true`);
+  await until(`/Ready to sign/.test(document.getElementById('bl_bar_s').textContent)`);
   await shot("desk-after-409");
 
   /* 10. owner tools: signers list, Add me pre-fill, switch-off needs a reason */
@@ -413,6 +433,81 @@ try {
   const top = await ev(`(function(){var e=document.elementFromPoint(innerWidth/2,innerHeight/2);var r=e&&e.closest('#smdReview');var o=[];for(var n=e;n&&n!==document.body&&o.length<6;n=n.parentElement)o.push((n.id?'#'+n.id:n.tagName)+'.'+String(n.className).split(' ')[0]+':z'+getComputedStyle(n).zIndex+':o'+getComputedStyle(n).opacity);return r?'ok':o.join(' < ')})()`);
   ok(top === "ok", "the Review Desk sheet is on top once the app has started", top);
   await shot("desk-from-review-push");
+
+  /* 14. second reader, pre-sign checks, specialties, numbers, owner switches */
+  st.me = Object.assign({}, st.me, { secondReader: true, pending: { candidates: 1, drafts: 1, source_changed: 0, review_due: 0, second_reads: 1, total: 3 },
+    signer: { uid: "u-owner", name: "Manoj Kurmana", regNo: "APMC-1", council: "Andhra Pradesh Medical Council", specialties: ["cardiology"] },
+    specialtyOptions: [["cardiology", "Cardiology"], ["oncology", "Oncology"], ["dermatology", "Dermatology"]] });
+  st.extraItems = [Object.assign(bl("b-second", { kind: "approval", source_url: "https://www.ema.europa.eu/en/news", india_status: "not_approved_india", source_date: "2026-09-12" }), {
+    update_id: "u7", review_months: 12, state: "awaiting_second", can_cosign: true, mine: true, body_hash: "d".repeat(64), status: "signed", orphaned: [],
+    signed_name: "Other Doctor", signed_reg: "TS-9", signed_council: "Telangana State Medical Council", signed_ts: NOW - DAY, review_due_ts: NOW + 360 * DAY,
+    u_title: "FDA approves Nurtec (rimegepant)", u_org: "FDA", u_url: "https://www.ema.europa.eu/en/news", u_published_ts: NOW - 9 * DAY, u_summary: "Rimegepant approved for migraine." })];
+  st.extraCands = [{ id: "u-onc", type: "trial", title: "Adjuvant therapy in early breast cancer", organization: "NEJM", official_url: "https://www.nejm.org/doi/x", published_ts: NOW - DAY, summary: "Trial.", specialties: ["oncology"], mine: false }];
+  await ev("window.__probed=0;SMD_BULLETINS_DESK.reset();SMD_BULLETINS_DESK.probe().then(function(){window.__probed=1});true");
+  await until("window.__probed===1&&SMD_BULLETINS_DESK._state.me&&SMD_BULLETINS_DESK._state.me.secondReader===true");
+  await ev("SMD_REVIEW.close();SMD_REVIEW.open();true");
+  await until(`!!document.querySelector('#smdReview [data-rv-act="kind:bulletin"]')`);
+  await ev(`document.querySelector('#smdReview [data-rv-act="kind:bulletin"]').click();true`);
+  ok(await until(`!!document.querySelector('#smdReview [data-bl-act="second:b-second"]')`), "a bulletin another doctor signed waits under Read as second doctor");
+  ok(await ev(`/Read as second doctor/.test(document.querySelector('#smdReview').textContent)&&/1 to read as second doctor/.test(document.querySelector('#smdReview .bl-sum-h').textContent)`), "the summary counts the second read");
+  ok(await ev(`!document.querySelector('#smdReview [data-bl-act="new:u-onc"]')&&/Your specialties: Cardiology\. 1 other item is hidden\./.test(document.querySelector('#smdReview .bl-spec').textContent)`), "an item outside the signer's specialties is hidden, and the queue says so");
+  await ev(`document.querySelector('#smdReview [data-bl-act="allspec:1"]').click();true`);
+  ok(await until(`!!document.querySelector('#smdReview [data-bl-act="new:u-onc"]')&&/Showing every specialty/.test(document.querySelector('#smdReview .bl-spec').textContent)`), "Show all brings it back");
+  await ev(`document.querySelector('#smdReview [data-bl-act="allspec:0"]').click();true`);
+  await ev(`document.querySelector('#smdReview [data-bl-act="second:b-second"]').click();true`);
+  ok(await until(`/Read as second doctor/.test((document.querySelector('#smdReview .dl-h')||{}).textContent||'')`), "Read and confirm opens the second-read screen");
+  ok(await until(`(function(){var c=document.getElementById('bl_checks');return !!c&&/list page, not the item itself/.test(c.textContent)&&/CDSCO new-drug lists show a match for rimegepant/.test(c.textContent)})()`), "checks flag the list-page link and the CDSCO match against 'not approved in India'");
+  ok(await ev(`/Second reader Dr Manoj Kurmana, Reg\\. No\\. APMC-1/.test(document.querySelector('#smdReview .bl-preview .smd-bl-sig').textContent)&&/Reviewed by Dr Other Doctor/.test(document.querySelector('#smdReview .bl-preview .smd-bl-sig').textContent)`), "the preview shows both doctors");
+  ok(await ev(`document.querySelector('#smdReview [data-bl-act="cosigngo"]').disabled===true`), "Confirm stays locked until the checklist is complete");
+  await audit("second read");
+  await shot("desk-second-read");
+  await ev(`document.querySelector('#smdReview [data-bl-act="sendback"]').click();true`);
+  await until(`!!document.getElementById('bl_rnote')`);
+  await ev(`document.getElementById('bl_rnote').value='short';document.querySelector('#smdReview [data-bl-act="sendbackgo"]').click();true`); await sleep(300);
+  ok(st.returnBodies.length === 0, "send back needs a real note");
+  await ev(`document.getElementById('bl_rnote').value='India status says not approved but CDSCO lists it. Please check.';document.querySelector('#smdReview [data-bl-act="sendbackgo"]').click();true`);
+  ok(await waitFor(() => st.returnBodies.length === 1) && /CDSCO lists it/.test(st.returnBodies[0].note), "send back posts the note", st.returnBodies);
+  ok(await until(`/Sent back to Dr Other Doctor with your note\./.test(document.querySelector('#smdReview').textContent)`), "and says who gets it");
+  await until(`!!document.querySelector('#smdReview [data-bl-act="second:b-second"]')`);
+  await ev(`document.querySelector('#smdReview [data-bl-act="second:b-second"]').click();true`);
+  await until(`!!document.querySelector('#smdReview [data-bl-act="cosigngo"]')`);
+  await ev(`Array.from(document.querySelectorAll('#smdReview .bl-ck input')).forEach(function(c){c.click()});true`); await sleep(250);
+  ok(await ev(`document.querySelector('#smdReview [data-bl-act="cosigngo"]').disabled===false`), "all four ticked: Confirm unlocks");
+  await ev(`document.querySelector('#smdReview [data-bl-act="cosigngo"]').click();true`);
+  ok(await waitFor(() => st.cosignBodies.length === 1) && st.cosignBodies[0].body_hash === "d".repeat(64) && ["source_read", "numbers_match", "india_checked", "own_words"].every((k) => st.cosignBodies[0].checklist[k] === true), "confirm posts the exact text hash and the checklist", st.cosignBodies);
+  ok(await until(`/Confirmed\. It shows on the disease page after the next sync\./.test(document.querySelector('#smdReview').textContent)`), "confirmation message");
+  // numbers
+  await until(`!!document.querySelector('#smdReview [data-bl-act="numbers"]')`);
+  await ev(`document.querySelector('#smdReview [data-bl-act="numbers"]').click();true`);
+  ok(await until(`(function(){var t=document.querySelector('#smdReview').textContent;return t.indexOf('Median 4.2, 90% within 9.8 (5 updates)')>=0&&t.indexOf('40% (2 of 5 later edited, sent back or retracted)')>=0})()`), "Numbers shows days to the page and the correction rate");
+  ok(await ev(`document.querySelectorAll('#smdReview .bl-tbl tbody tr').length===3&&/FDA new drug and biologic approvals/.test(document.querySelector('#smdReview .bl-tbl').textContent)`), "by source and by signer tables");
+  await audit("numbers"); await shot("desk-numbers");
+  await call("Emulation.setDeviceMetricsOverride", { width: 320, height: 700, deviceScaleFactor: 1, mobile: true }); await sleep(200);
+  ok(await ev(noSideScroll), "Numbers fits 320px (tables scroll inside their box)");
+  await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 1, mobile: true }); await sleep(150);
+  await ev(`document.querySelector('#smdReview [data-bl-act="mwin:30"]').click();true`);
+  ok(await waitFor(() => st.metricsDays.indexOf("30") >= 0), "the period switch asks for 30 days", st.metricsDays);
+  // owner: second reader switch
+  await ev(`document.querySelector('#smdReview [data-bl-act="back"]').click();true`);
+  await until(`!!document.querySelector('#smdReview [data-bl-act="second-reader"]')`);
+  ok(await ev(`/Second reader: on/.test(document.querySelector('#smdReview [data-bl-act="second-reader"]').textContent)`), "owner tools show the second-reader state");
+  await ev(`document.querySelector('#smdReview [data-bl-act="second-reader"]').click();true`);
+  await until(`!!document.getElementById('bl_sreason')`);
+  await ev(`document.getElementById('bl_sreason').value='short';document.querySelector('#smdReview [data-bl-act="srgo"]').click();true`); await sleep(300);
+  ok(st.srBodies.length === 0, "the switch needs a reason");
+  await ev(`document.getElementById('bl_sreason').value='Only one signer this week';document.querySelector('#smdReview [data-bl-act="srgo"]').click();true`);
+  ok(await waitFor(() => st.srBodies.length === 1) && st.srBodies[0].on === false, "switching off posts on:false with the reason", st.srBodies);
+  // signers: specialties
+  await until(`!!document.querySelector('#smdReview [data-bl-act="signers"]')`);
+  await ev(`document.querySelector('#smdReview [data-bl-act="signers"]').click();true`);
+  await until(`!!document.querySelector('#smdReview [data-bl-act="editsigner:u-owner"]')`);
+  await ev(`document.querySelector('#smdReview [data-bl-act="editsigner:u-owner"]').click();true`);
+  await until(`!!document.querySelector('#smdReview [data-bl-act="spec:dermatology"]')`);
+  await ev(`document.querySelector('#smdReview [data-bl-act="spec:dermatology"]').click();true`);
+  ok(await until(`document.querySelector('#smdReview [data-bl-act="spec:dermatology"]').getAttribute('aria-pressed')==='true'&&document.getElementById('bl_sname').value==='Manoj Kurmana'`), "specialty chips toggle and keep the typed fields");
+  const nSigner = st.signerBodies.length;
+  await ev(`document.querySelector('#smdReview [data-bl-act="saveSigner"]').click();true`);
+  ok(await waitFor(() => st.signerBodies.length === nSigner + 1) && JSON.stringify(st.signerBodies[nSigner].specialties) === '["dermatology"]', "Save signer posts the specialties", st.signerBodies[nSigner]);
 } catch (e) {
   console.error(e); failures++;
 } finally {

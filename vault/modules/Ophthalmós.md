@@ -182,3 +182,14 @@ both modes. Switching mode while Ophthalmos is open follows at once (pure CSS).
 - All 22 Ophthalmos tags moved to `?v=oph11` (test expects one shared token).
 - Test: `test/run-ophthalmos-theme-ui.mjs` (both modes, live switch, contrast audit of every visible text on welcome,
   test hub, simulator, stats, learn home, lesson; diagram card white; photo stage black; status bar).
+
+## Realistic lesson images (oph12, 2026-10-01)
+- 45 lessons now open on a realistic AI-generated image (`ophthalmos/learn/media/real/<name>.webp`) instead of our
+  own SVG diagram; the SVG stays as a second picture under More pictures (`see.more`). Photos and open-licence media
+  were not touched. Module repo PR #25 (merge 1c8a12b).
+- Credit "Created with MaiK (StewardMD AI)", licence "Original, StewardMD"; single StewardMD badge bottom-right;
+  every lesson carries `review.verify` for clinical sign-off of anatomy and label positions.
+- Renderer: `picUrl()` in `ophthalmos-learn.js` loads `learn/media/...` from the bundle; deck images still use the
+  image host. Synced with a 3-way merge so the StewardMD-only edits (oph10 white background, oph11 light/dark mode)
+  were kept: those edits still need **porting back to the module repo**.
+- All 22 Ophthalmós tags moved to `?v=oph12`.

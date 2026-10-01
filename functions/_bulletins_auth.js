@@ -22,7 +22,8 @@ export async function signerIdentity(request, env) {
   if (!repo.hasDb(env)) return { ok: false, reason: "no-db" };
   const s = await repo.getSigner(env, claims.sub);
   if (!s || s.active !== 1) return { ok: false, reason: "not-a-signer" };
-  return { ok: true, uid: claims.sub, name: s.name, regNo: s.reg_no, council: s.council };
+  return { ok: true, uid: claims.sub, name: s.name, regNo: s.reg_no, council: s.council,
+    specialties: String(s.specialties || "").split(",").filter(Boolean) };
 }
 
 // -> { ok:true, uid, email } | { ok:false, reason }

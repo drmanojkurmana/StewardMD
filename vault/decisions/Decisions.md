@@ -13,15 +13,60 @@ later) are guarded by `capture-guard.js` + local plugin `@stewardmd/capacitor-ca
 (`UITraitCollection.sceneCaptureState == .active`, iOS 17+; `UIScreen.isCaptured` is deprecated) `html.smd-cg-on`
 draws a low-opacity tiled diagonal StewardMD mark on each image's container (`[data-smd-cg]::after`,
 `pointer-events:none`); after a screenshot (`userDidTakeScreenshotNotification`) the shared `window.toast` says
-"Images are © StewardMD. Please do not share." (en/hi), only if such an image is on screen. Android: FLAG_SECURE on
+"Images are © StewardMD. Please do not share." (en/hi) on any screenshot taken in the app (owner 2026-10-01). Android: FLAG_SECURE on
 the activity window while such an image is on screen (MutationObserver + scroll/resize, 80 ms debounce), cleared as
 soon as none is. Web/PWA: inert.
 **Why.** iOS cannot block or alter captures; Android can. The owner rejected a permanent heavy watermark as
 unprofessional, so the mark appears only during capture.
 **Trade-off.** Android 14 `ScreenCaptureCallback` was not added: it does not fire while FLAG_SECURE is set, which is
 exactly when a notice would be wanted. Thumbnails count as images (the Learn hub with a real thumbnail is also
-FLAG_SECURE on Android). FLAG_SECURE also blanks the Recents preview while set.
+FLAG_SECURE on Android) and FLAG_SECURE blanks the Recents preview while set: both confirmed by the owner 2026-10-01.
 **Status.** Draft PR; needs `npm install` + `npx cap sync` + new App Store / Play builds. Not device-verified.
+
+## 2026-09-30 · Clinical Bulletins: second reader, specialty signers, pre-sign checks, numbers, India access
+
+**Decision (owner: "Do all", after "are we 2x or 10x better than UpToDate?").** Five changes, each aimed at the
+honest gap (trust at scale, one signer) or the real edge (India context):
+1. **Second reader** for approvals and safety alerts (supersedes D5 "one signature" for those kinds): a different
+   active signer confirms the exact signed text (`cosigned_hash = body_hash`) or sends it back with a note. Stored
+   `second_required` at signing; owner switch `bulletin_settings.second_reader` (default on; off releases waiting
+   ones; on applies from the next signing). The 5 bulletins live before this are unaffected (signed without it).
+2. **Specialty signers**: `bulletin_signers.specialties`; item specialties from source branch/workspace, else
+   whole-word terms (`_bulletin_rules.js SPECIALTIES`); queue shows "Mine" first with Show all; the Saturday push
+   is per signer.
+3. **Pre-sign checks** (never blocking): list-page link, CDSCO lists contradict the India status, What changed still
+   the AI wording, numbers not in the source summary. Codes shown are kept in the sign audit.
+4. **Numbers** (`GET /bulletins/metrics`): days from publication to the disease page, correction rate, coverage by
+   source, backlog, per-signer counts. The correction rate is the gauge for switching the second reader off.
+5. **India access** on the card: NLEM 2022 from the official PDF (`data/india/nlem2022.json`, built by
+   `scripts/india/build_nlem.py`, 385 medicines from the PDF's own index); Jan Aushadhi prices once the owner runs
+   `scripts/india/fetch-janaushadhi.mjs` (its API is on port 8443, unreachable from the build sandbox). Shown apart
+   from the signed text, labelled "Not part of the signed update". Indian society and ICMR guidelines join intake
+   (PubMed seed batch 3, 33 a year checked live).
+**Why.** The first 5 live bulletins had 2 needing correction; one signer is a bottleneck; the India layer is what a
+global reference does not give an Indian clinician.
+**Trade-off.** With one signer, new approvals and safety alerts cannot go live until a second doctor joins (or the
+owner switches the rule off). Keyword specialty routing is approximate; "Show all" is one tap. NLEM matching names
+a medicine only on an exact whole-word match (US names mapped), so it may miss some; it never claims absence.
+**Status.** Built and tested (unit, headless UI with design audit); Jan Aushadhi data waits for the owner's run.
+
+## 2026-09-30 · Neonatal layer: behind `smd_neo` (default OFF), every number quoted from a fetched source
+
+**Decision (owner plan "StewardMD Neonatal Layer").** Ten neonatal tools (dosing by GA/PNA/PMA, preparation,
+infusions, fluids/GIR, growth, bilirubin, scores, reference values, procedures, TDM) around one memory-only
+baby record, all behind `smd_neo` (default OFF) plus a per-tool flag. Data lives in `data/neo/*.json`; each
+clinical object carries `src` + a verbatim `quote` from a snapshot in `data/neo/sources/`, and
+`scripts/neo/validate.mjs` fails the build if a number is not in its quote. Unsourced = "No data on file".
+With the flag on, dose-calc.js never shows child or adult rows to a neonate ("No neonatal dose on file.
+Do not extrapolate.").
+**Why.** Neonatal errors are tenfold errors; a dose typed from memory is unreviewable. Quoting makes every
+number checkable by the reviewing neonatologist in one click.
+**Trade-off.** Coverage is what open sources publish: FDA labels (public domain) carry most doses, preterm
+fluid volumes and several ranges are absent, and many sources are non-commercial (INTERGROWTH-21st, WHO 2024
+SBI, NICE outside the UK, StatPearls, ASHP S4S, VON, BAPM, some CC BY-NC papers). The owner must clear or
+replace those before the flag goes on for anyone. The no-extrapolation rule is flag-gated; making it
+permanent for all users is an owner call.
+**Status.** Built on `feat/neo-layer` (tag `pre-neo`), unit + headless tests; PR open, not merged.
 
 ## 2026-09-29 · Clinical Bulletins signing desk rebuilt for speed; "Skip" is shared by all signers
 

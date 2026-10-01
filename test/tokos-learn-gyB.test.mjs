@@ -11,7 +11,7 @@ const UNITS = process.env.GYB_UNITS ? process.env.GYB_UNITS.split(",") : ["gy7",
 const TOPICS = ["gy-menstrual", "gy-infection", "gy-benign", "gy-oncology", "gy-fertility", "gy-contraception", "gy-urogyn", "gy-anatomy"];
 const EXPLORERS = ["mechanism", "cycle", "palm-coein", "popq", "ovarian-triage", "cervical-screening"];
 const TOOLS = ["edd", "bishop", "mgso4", "antid", "dipsi", "apgar", "efw", "weightgain", "vbac", "ganzoni", "rmi", "meows", "mec"];
-const OK_LICENCE = /^(CC0|CC BY 4\.0|CC BY 3\.0|CC BY 2\.0|CC BY-SA 4\.0|CC BY-SA 3\.0|CC BY-SA 2\.0|ODC-BY 1\.0|Public domain|Original, MAIKNOWLEDGE LLP)$/;
+const OK_LICENCE = /^(CC0|CC BY 4\.0|CC BY 3\.0|CC BY 2\.0|CC BY-SA 4\.0|CC BY-SA 3\.0|CC BY-SA 2\.0|ODC-BY 1\.0|Public domain|Original, MAIKNOWLEDGE LLP|Original, StewardMD)$/;
 const readJSON = (p) => JSON.parse(readFileSync(p, "utf8"));
 
 const units = UNITS.map((u) => readJSON(`${ROOT}/units/${u}.json`));

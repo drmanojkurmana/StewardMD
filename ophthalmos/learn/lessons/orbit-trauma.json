@@ -3,7 +3,12 @@
   "unit": "orbit",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Eye injury: the first steps",
     "hi": "आँख की चोट: पहले कदम"
@@ -13,22 +18,21 @@
     "hi": "आँख की चोट में पहले कुछ मिनट सबसे ज़रूरी हैं। केमिकल तुरंत धोकर निकालें। जिस आँख के फटने का शक हो, उस पर शील्ड लगाएँ। नज़र हमेशा जाँचें।"
   },
   "see": {
-    "diagram": "diagrams/orbit-trauma.svg",
-    "w": 480,
-    "h": 260,
+    "w": 768,
+    "h": 576,
     "alt": {
-      "en": "Diagram in two parts. Left: an injured eye. The pupil is pulled into a teardrop that points to a small cut at the edge of the cornea. A bit of iris is pushed into the cut. Blood lies low in the front chamber, and a red patch sits on the white. Right: a side view of the face with a hard, curved blue shield. It rests on the brow bone and the cheek bone and does not touch the closed lids.",
-      "hi": "दो हिस्सों वाला चित्र। बाएँ: चोट लगी आँख। पुतली खिंचकर आँसू की बूँद जैसी हो गई है और कॉर्निया के किनारे के एक छोटे कट की ओर इशारा करती है, कट में आइरिस का थोड़ा हिस्सा दबा है। आगे के कक्ष में नीचे खून है, और सफ़ेद हिस्से पर लाल धब्बा है। दाएँ: चेहरे का बगल वाला दृश्य, जिसमें एक सख़्त, मुड़ी नीली शील्ड है। यह भौंह और गाल की हड्डी पर टिकी है और बंद पलकों को नहीं छूती।"
+      "en": "Left: an injured eye from the front. The pupil is pulled into a teardrop that points at a small wound at the edge of the cornea. A dark speck of iris sits in the wound. A layer of blood lies at the bottom of the front chamber, and a red patch marks the white. Right: a side view of a face. A hard shield with holes covers the closed eye and rests on the bones around it.",
+      "hi": "बाएँ: सामने से एक घायल आँख। पुतली खिंचकर आँसू की बूँद जैसी हो गई है, जिसकी नोक कॉर्निया के किनारे के एक छोटे घाव की ओर है। घाव में आइरिस का एक गहरा कण है। आगे के कक्ष के तल पर खून की एक परत है, और सफ़ेद हिस्से पर एक लाल धब्बा है। दाएँ: बगल से एक चेहरा, बंद आँख पर छेदों वाली एक सख़्त ढाल, जो आसपास की हड्डियों पर टिकी है।"
     },
     "caption": {
       "en": "Left: signs of an open globe, a peaked pupil pointing to a wound, and blood in the front chamber. Right: a hard shield rests on bone, never on the eye.",
       "hi": "बाएँ: ओपन ग्लोब के संकेत, घाव की ओर नुकीली पुतली, और आगे के कक्ष में खून। दाएँ: सख़्त शील्ड हड्डी पर टिकती है, आँख पर कभी नहीं।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.246,
-        "y": 0.523,
+        "x": 0.38,
+        "y": 0.427,
         "label": {
           "en": "Peaked pupil",
           "hi": "नुकीली पुतली"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.346,
-        "y": 0.454,
+        "x": 0.478,
+        "y": 0.433,
         "label": {
           "en": "Wound with iris",
           "hi": "आइरिस वाला घाव"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.25,
-        "y": 0.646,
+        "x": 0.34,
+        "y": 0.567,
         "label": {
           "en": "Blood in the front chamber",
           "hi": "आगे के कक्ष में खून"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.408,
-        "y": 0.53,
+        "x": 0.12,
+        "y": 0.44,
         "label": {
           "en": "Blood on the white",
           "hi": "सफ़ेद हिस्से पर खून"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.554,
-        "y": 0.5,
+        "x": 0.79,
+        "y": 0.507,
         "label": {
           "en": "Hard shield",
           "hi": "सख़्त शील्ड"
@@ -87,8 +91,8 @@
         }
       },
       {
-        "x": 0.6125,
-        "y": 0.192,
+        "x": 0.9,
+        "y": 0.287,
         "label": {
           "en": "Rests on bone",
           "hi": "हड्डी पर टिकी"
@@ -98,6 +102,10 @@
           "hi": "शील्ड भौंह और गाल की हड्डी पर टिकती है। इसे त्वचा पर टेप से चिपकाएँ।"
         }
       }
+    ],
+    "img": "learn/media/real/orbit-trauma.webp",
+    "more": [
+      "orbit-trauma"
     ]
   },
   "why": {

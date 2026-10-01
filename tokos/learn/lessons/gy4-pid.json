@@ -3,7 +3,12 @@
   "unit": "gy4",
   "level": "mbbs",
   "minutes": 6,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "competencies": [
     "OG27.3"
   ],
@@ -16,9 +21,8 @@
     "hi": "[[pid]] गर्भाशय, नलियों और अंडाशय का संक्रमण है। इसे पहचानना आसान नहीं और यह बाँझपन कर सकता है, इसलिए हम शक होने पर ही जल्दी इलाज करते हैं।"
   },
   "see": {
-    "diagram": "diagrams/gy4-pid.svg",
-    "w": 480,
-    "h": 400,
+    "w": 1080,
+    "h": 806,
     "alt": {
       "en": "A pink uterus with a red inflamed lining. On the left, a tube swollen and filled with yellow pus curls down beside a lavender ovary. On the right, a large yellow round abscess encloses an ovary. At the top right is the edge of a liver with thin red strands stretching to the belly wall. Below the cervix, two red arrows push the cervix from each side.",
       "hi": "लाल सूजी परत वाला गुलाबी गर्भाशय। बाईं ओर पीले मवाद से भरी सूजी नली एक बैंगनी अंडाशय के बगल में नीचे मुड़ती है। दाईं ओर एक बड़ा पीला गोल फोड़ा अंडाशय को घेरे है। ऊपर दाईं ओर यकृत का किनारा है, जिससे पेट की दीवार तक पतली लाल तंतुएँ फैली हैं। ग्रीवा के नीचे दो लाल तीर ग्रीवा को दोनों ओर से धकेलते हैं।"
@@ -27,11 +31,11 @@
       "en": "PID: inflamed lining, a pus-filled tube, a tubo-ovarian abscess, and the liver strands of Fitz-Hugh-Curtis.",
       "hi": "PID: सूजी परत, मवाद से भरी नली, ट्यूबो-ओवेरियन फोड़ा, और फ़िट्ज़-ह्यू-कर्टिस की यकृत की तंतुएँ।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.417,
-        "y": 0.825,
+        "x": 0.49,
+        "y": 0.82,
         "label": {
           "en": "Cervical motion tenderness",
           "hi": "ग्रीवा हिलाने पर दर्द"
@@ -42,8 +46,8 @@
         }
       },
       {
-        "x": 0.417,
-        "y": 0.52,
+        "x": 0.49,
+        "y": 0.34,
         "label": {
           "en": "Uterine tenderness",
           "hi": "गर्भाशय में दर्द"
@@ -54,8 +58,8 @@
         }
       },
       {
-        "x": 0.2,
-        "y": 0.67,
+        "x": 0.28,
+        "y": 0.54,
         "label": {
           "en": "Adnexal tenderness",
           "hi": "एडनेक्सा में दर्द"
@@ -66,8 +70,8 @@
         }
       },
       {
-        "x": 0.417,
-        "y": 0.37,
+        "x": 0.49,
+        "y": 0.45,
         "label": {
           "en": "Endometritis",
           "hi": "एंडोमेट्राइटिस"
@@ -78,11 +82,11 @@
         }
       },
       {
-        "x": 0.179,
-        "y": 0.445,
+        "x": 0.19,
+        "y": 0.55,
         "label": {
           "en": "Salpingitis and pyosalpinx",
-          "hi": "सैल्पिंजाइटिस और पायोसैल्पिंक्स"
+          "hi": "सैल्पिंज़ाइटिस और पायोसैल्पिंक्स"
         },
         "note": {
           "en": "The tube is swollen and may fill with pus.",
@@ -90,11 +94,11 @@
         }
       },
       {
-        "x": 0.729,
-        "y": 0.575,
+        "x": 0.75,
+        "y": 0.6,
         "label": {
           "en": "Tubo-ovarian abscess",
-          "hi": "ट्यूबो-ओवेरियन फोड़ा"
+          "hi": "ट्यूबों-ओवेरियन फोड़ा"
         },
         "note": {
           "en": "A pus-filled mass of tube and ovary. It needs admission and at least 24 hours of observation.",
@@ -102,8 +106,8 @@
         }
       },
       {
-        "x": 0.833,
-        "y": 0.275,
+        "x": 0.76,
+        "y": 0.18,
         "label": {
           "en": "Fitz-Hugh-Curtis",
           "hi": "फ़िट्ज़-ह्यू-कर्टिस"
@@ -113,6 +117,10 @@
           "hi": "संक्रमण यकृत के आवरण तक फैलकर वायलिन के तार जैसे चिपकाव बनाता है। इससे पेट के ऊपरी दाएँ हिस्से में दर्द होता है।"
         }
       }
+    ],
+    "img": "learn/media/real/gy4-pid.webp",
+    "more": [
+      "gy4-pid"
     ]
   },
   "why": {

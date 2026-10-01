@@ -469,4 +469,4 @@ Rough effort: PR A 1.5 days, PR B 2 days, device verification and review 1 day.
 | D2 | Bell feed in phase 1? | **Decided:** unchanged (news with source links) | |
 | D3 | Default review interval | **Decided:** 12 months; signer may pick 6 or 24 | |
 | D4 | Offline cache max age | **Decided:** 7 days | |
-| D5 | Signatures per bulletin | **Decided:** one | |
+| D5 | Signatures per bulletin | **Decided:** one. **Changed 2026-09-30 (owner: "Do all"):** approvals and safety alerts need a second doctor, until the correction rate stays under 5% (owner switch). | |

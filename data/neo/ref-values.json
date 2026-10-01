@@ -1,0 +1,3880 @@
+{
+ "schema": 1,
+ "kind": "neo-ref-values",
+ "title": "Neonatal and paediatric reference values (vitals, CSF, haematology, chemistry)",
+ "compiled": "2026-09-30",
+ "review": {
+  "status": "ai_drafted",
+  "by": null,
+  "date": null
+ },
+ "_comment": "Row: { analyte, when, lo?, hi?, median?, centiles?, mean?, sd?, range_min?, range_max?, unit, note, src, quote }. 'when' keys: ga_wk, pna_d, dol, hours, age_months, age_years ({min,gt,max,lt}); at_birth:true marks the immediate neonatal period. A range condition may carry its own src+quote when its number comes from a different sentence of the same source (e.g. the preterm definition). lo/hi meaning differs by source; read 'note'. Values are copied as published, never converted.",
+ "sources": {
+  "ref-fleming2011": {
+   "title": "Fleming S, Thompson M, Stevens R, et al. Normal ranges of heart rate and respiratory rate in children from birth to 18 years of age: a systematic review of observational studies. Lancet 2011;377(9770):1011-1018 (PMC author manuscript)",
+   "publisher": "The Lancet (Elsevier); author manuscript in PMC (Europe PMC Funders Group, EMS54714)",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3789232/",
+   "licence": "PMC author manuscript (Europe PMC funders' manuscript); publisher copyright; no open licence stated (Europe PMC API reports it as not open access). Free to read; owner to confirm reuse.",
+   "accessed": "2026-09-30"
+  },
+  "ref-fleming2011-webappendix": {
+   "title": "Fleming S et al. 2011 Lancet, Web Appendix (Web Table 4: respiratory rate centiles; Web Table 5: heart rate centiles)",
+   "publisher": "The Lancet web appendix, copy hosted on the first author's personal site (susz.me.uk)",
+   "url": "https://www.susz.me.uk/pubs/Fleming2011_Lancet_Webappendix.pdf",
+   "licence": "Free access; no licence stated on the document; publisher (Lancet) copyright assumed. The PMC copy of this supplement sits behind a download challenge, so the author-hosted copy was used. Owner to confirm reuse.",
+   "accessed": "2026-09-30"
+  },
+  "ref-kestenbaum2010": {
+   "title": "Kestenbaum LA, Ebberson J, Zorc JJ, Hodinka RL, Shah SS. Defining cerebrospinal fluid white blood cell count reference values in neonates and young infants. Pediatrics 2010;125(2):257-264 (PMC author manuscript)",
+   "publisher": "Pediatrics (AAP); author manuscript in PMC",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3033868/",
+   "licence": "PMC author manuscript; publisher copyright (AAP); no open licence stated. Free to read; owner to confirm reuse.",
+   "accessed": "2026-09-30"
+  },
+  "ref-byington2011": {
+   "title": "Byington CL, Kendrick J, Sheng X. Normative cerebrospinal fluid profiles in febrile infants. J Pediatr 2011;158(1):130-134 (PMC author manuscript)",
+   "publisher": "Journal of Pediatrics (Elsevier); author manuscript in PMC",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2994954/",
+   "licence": "PMC author manuscript; publisher copyright (Elsevier); no open licence stated. Free to read; owner to confirm reuse.",
+   "accessed": "2026-09-30"
+  },
+  "ref-srinivasan2012": {
+   "title": "Srinivasan L, Shah SS, Padula MA, Abbasi S, McGowan KL, Harris MC. Cerebrospinal fluid reference ranges in term and preterm infants in the neonatal intensive care unit. J Pediatr 2012;161(4):729-734 (PMC author manuscript)",
+   "publisher": "Journal of Pediatrics (Elsevier); author manuscript in PMC",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4593309/",
+   "licence": "PMC author manuscript; publisher copyright (Elsevier); no open licence stated. Free to read; owner to confirm reuse.",
+   "accessed": "2026-09-30"
+  },
+  "ref-thomson2018-abstract": {
+   "title": "Thomson J, Sucharew H, Cruz AT, et al. Cerebrospinal Fluid Reference Values for Young Infants Undergoing Lumbar Puncture. Pediatrics 2018;141(3):e20173405 (PubMed abstract only)",
+   "publisher": "Pediatrics (AAP); abstract via NCBI E-utilities (PubMed)",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/29437883/",
+   "snapshot": "ref-thomson2018-abstract.txt",
+   "licence": "Abstract only. 'Copyright (c) 2018 by the American Academy of Pediatrics.' Full text not open access and not in PMC. Owner to confirm reuse.",
+   "accessed": "2026-09-30"
+  },
+  "ref-cbc-extremepreterm2025": {
+   "title": "Complete blood count reference intervals for extremely preterm neonates. Eur J Pediatr 2025 (NICU Graz cohort, 2008-2023), Table 2",
+   "publisher": "European Journal of Pediatrics (Springer Nature); PMC",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12535521/",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  },
+  "ref-neut-india2019": {
+   "title": "Gestation-wise Reference Ranges of Neutrophil Counts in Indian Newborns. Oman Med J 2019, Table 2",
+   "publisher": "Oman Medical Journal (Oman Medical Specialty Board); PMC",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6425059/",
+   "licence": "CC BY-NC 4.0 (non-commercial only; commercial use needs permission)",
+   "accessed": "2026-09-30"
+  },
+  "ref-bp-africa2009": {
+   "title": "Oscillometric blood pressure reference values of African full-term neonates in their first days postpartum. Cardiovasc J Afr 2009",
+   "publisher": "Cardiovascular Journal of Africa (Clinics Cardive Publishing); PMC",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3721809/",
+   "licence": "Open access under a Creative Commons Attribution License (version not stated on the PMC page)",
+   "accessed": "2026-09-30"
+  },
+  "ref-bapm-hypogly2024": {
+   "title": "Identification and Management of Neonatal Hypoglycaemia in the Full-Term Infant (Birth to 72 hours): A BAPM Framework for Practice, January 2024",
+   "publisher": "British Association of Perinatal Medicine (BAPM)",
+   "url": "https://hubble-live-assets.s3.eu-west-1.amazonaws.com/bapm/file_asset/file/2864/Identification_and_Management_of_Neonatal_Hypoglycaemia_Sept_24.pdf",
+   "licence": "(c) BAPM, 2024. Free download; no open licence stated. Owner to confirm reuse.",
+   "accessed": "2026-09-30"
+  },
+  "ref-biochem-jilin2021": {
+   "title": "Reference intervals for 26 common biochemical analytes in term neonates in Jilin Province, China. BMC Pediatr 2021;21:153 (Table 3)",
+   "publisher": "BMC Pediatrics (BioMed Central / Springer Nature); PMC",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8011145/",
+   "licence": "CC BY 4.0",
+   "accessed": "2026-09-30"
+  }
+ },
+ "groups": [
+  {
+   "id": "vitals",
+   "title": "Vital signs: heart rate and respiratory rate centiles (birth to 18 years); term neonatal blood pressure days 1 to 4",
+   "rows": [
+    {
+     "analyte": "Respiratory rate",
+     "when": {
+      "age_months": {
+       "min": 0,
+       "lt": 3
+      }
+     },
+     "lo": 25,
+     "hi": 66,
+     "median": 43,
+     "centiles": {
+      "p1": 25,
+      "p10": 34,
+      "p25": 40,
+      "p50": 43,
+      "p75": 52,
+      "p90": 57,
+      "p99": 66
+     },
+     "unit": "breaths/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '0 to 3m'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "0 – 3m 25 34 40 43 52 57 66"
+    },
+    {
+     "analyte": "Respiratory rate",
+     "when": {
+      "age_months": {
+       "min": 3,
+       "lt": 6
+      }
+     },
+     "lo": 24,
+     "hi": 64,
+     "median": 41,
+     "centiles": {
+      "p1": 24,
+      "p10": 33,
+      "p25": 38,
+      "p50": 41,
+      "p75": 49,
+      "p90": 55,
+      "p99": 64
+     },
+     "unit": "breaths/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '3 to 6m'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "3 – 6m 24 33 38 41 49 55 64"
+    },
+    {
+     "analyte": "Respiratory rate",
+     "when": {
+      "age_months": {
+       "min": 6,
+       "lt": 9
+      }
+     },
+     "lo": 23,
+     "hi": 61,
+     "median": 39,
+     "centiles": {
+      "p1": 23,
+      "p10": 31,
+      "p25": 36,
+      "p50": 39,
+      "p75": 47,
+      "p90": 52,
+      "p99": 61
+     },
+     "unit": "breaths/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '6 to 9m'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "6 – 9m 23 31 36 39 47 52 61"
+    },
+    {
+     "analyte": "Respiratory rate",
+     "when": {
+      "age_months": {
+       "min": 9,
+       "lt": 12
+      }
+     },
+     "lo": 22,
+     "hi": 58,
+     "median": 37,
+     "centiles": {
+      "p1": 22,
+      "p10": 30,
+      "p25": 35,
+      "p50": 37,
+      "p75": 45,
+      "p90": 50,
+      "p99": 58
+     },
+     "unit": "breaths/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '9 to 12m'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "9 – 12m 22 30 35 37 45 50 58"
+    },
+    {
+     "analyte": "Respiratory rate",
+     "when": {
+      "age_months": {
+       "min": 12,
+       "lt": 18
+      }
+     },
+     "lo": 21,
+     "hi": 53,
+     "median": 35,
+     "centiles": {
+      "p1": 21,
+      "p10": 28,
+      "p25": 32,
+      "p50": 35,
+      "p75": 42,
+      "p90": 46,
+      "p99": 53
+     },
+     "unit": "breaths/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '12 to 18m'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "12 – 18m 21 28 32 35 42 46 53"
+    },
+    {
+     "analyte": "Respiratory rate",
+     "when": {
+      "age_months": {
+       "min": 18,
+       "lt": 24
+      }
+     },
+     "lo": 19,
+     "hi": 46,
+     "median": 31,
+     "centiles": {
+      "p1": 19,
+      "p10": 25,
+      "p25": 29,
+      "p50": 31,
+      "p75": 36,
+      "p90": 40,
+      "p99": 46
+     },
+     "unit": "breaths/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '18 to 24m'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "18 – 24m 19 25 29 31 36 40 46"
+    },
+    {
+     "analyte": "Respiratory rate",
+     "when": {
+      "age_years": {
+       "min": 2,
+       "lt": 3
+      }
+     },
+     "lo": 18,
+     "hi": 38,
+     "median": 28,
+     "centiles": {
+      "p1": 18,
+      "p10": 22,
+      "p25": 25,
+      "p50": 28,
+      "p75": 31,
+      "p90": 34,
+      "p99": 38
+     },
+     "unit": "breaths/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '2 to 3y'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "2 – 3y 18 22 25 28 31 34 38"
+    },
+    {
+     "analyte": "Respiratory rate",
+     "when": {
+      "age_years": {
+       "min": 3,
+       "lt": 4
+      }
+     },
+     "lo": 17,
+     "hi": 33,
+     "median": 25,
+     "centiles": {
+      "p1": 17,
+      "p10": 21,
+      "p25": 23,
+      "p50": 25,
+      "p75": 27,
+      "p90": 29,
+      "p99": 33
+     },
+     "unit": "breaths/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '3 to 4y'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "3 – 4y 17 21 23 25 27 29 33"
+    },
+    {
+     "analyte": "Respiratory rate",
+     "when": {
+      "age_years": {
+       "min": 4,
+       "lt": 6
+      }
+     },
+     "lo": 17,
+     "hi": 29,
+     "median": 23,
+     "centiles": {
+      "p1": 17,
+      "p10": 20,
+      "p25": 21,
+      "p50": 23,
+      "p75": 25,
+      "p90": 27,
+      "p99": 29
+     },
+     "unit": "breaths/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '4 to 6y'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "4 – 6y 17 20 21 23 25 27 29"
+    },
+    {
+     "analyte": "Respiratory rate",
+     "when": {
+      "age_years": {
+       "min": 6,
+       "lt": 8
+      }
+     },
+     "lo": 16,
+     "hi": 27,
+     "median": 21,
+     "centiles": {
+      "p1": 16,
+      "p10": 18,
+      "p25": 20,
+      "p50": 21,
+      "p75": 23,
+      "p90": 24,
+      "p99": 27
+     },
+     "unit": "breaths/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '6 to 8y'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "6 – 8y 16 18 20 21 23 24 27"
+    },
+    {
+     "analyte": "Respiratory rate",
+     "when": {
+      "age_years": {
+       "min": 8,
+       "lt": 12
+      }
+     },
+     "lo": 14,
+     "hi": 25,
+     "median": 19,
+     "centiles": {
+      "p1": 14,
+      "p10": 16,
+      "p25": 18,
+      "p50": 19,
+      "p75": 21,
+      "p90": 22,
+      "p99": 25
+     },
+     "unit": "breaths/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '8 to 12y'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "8 – 12y 14 16 18 19 21 22 25"
+    },
+    {
+     "analyte": "Respiratory rate",
+     "when": {
+      "age_years": {
+       "min": 12,
+       "lt": 15
+      }
+     },
+     "lo": 12,
+     "hi": 23,
+     "median": 18,
+     "centiles": {
+      "p1": 12,
+      "p10": 15,
+      "p25": 16,
+      "p50": 18,
+      "p75": 19,
+      "p90": 21,
+      "p99": 23
+     },
+     "unit": "breaths/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '12 to 15y'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "12 – 15y 12 15 16 18 19 21 23"
+    },
+    {
+     "analyte": "Respiratory rate",
+     "when": {
+      "age_years": {
+       "min": 15,
+       "lt": 18
+      }
+     },
+     "lo": 11,
+     "hi": 22,
+     "median": 16,
+     "centiles": {
+      "p1": 11,
+      "p10": 13,
+      "p25": 15,
+      "p50": 16,
+      "p75": 18,
+      "p90": 19,
+      "p99": 22
+     },
+     "unit": "breaths/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '15 to 18y'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "15 – 18y 11 13 15 16 18 19 22"
+    },
+    {
+     "analyte": "Heart rate",
+     "when": {
+      "at_birth": true
+     },
+     "lo": 90,
+     "hi": 164,
+     "median": 127,
+     "centiles": {
+      "p1": 90,
+      "p10": 107,
+      "p25": 116,
+      "p50": 127,
+      "p75": 138,
+      "p90": 148,
+      "p99": 164
+     },
+     "unit": "beats/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band 'Birth'. 'Birth' refers to the immediate neonatal period (Web Table 5 footnote).",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "Birth 90 107 116 127 138 148 164"
+    },
+    {
+     "analyte": "Heart rate",
+     "when": {
+      "age_months": {
+       "min": 0,
+       "lt": 3
+      }
+     },
+     "lo": 107,
+     "hi": 181,
+     "median": 143,
+     "centiles": {
+      "p1": 107,
+      "p10": 123,
+      "p25": 133,
+      "p50": 143,
+      "p75": 154,
+      "p90": 164,
+      "p99": 181
+     },
+     "unit": "beats/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '0 to 3m'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "0 – 3m 107 123 133 143 154 164 181"
+    },
+    {
+     "analyte": "Heart rate",
+     "when": {
+      "age_months": {
+       "min": 3,
+       "lt": 6
+      }
+     },
+     "lo": 104,
+     "hi": 175,
+     "median": 140,
+     "centiles": {
+      "p1": 104,
+      "p10": 120,
+      "p25": 129,
+      "p50": 140,
+      "p75": 150,
+      "p90": 159,
+      "p99": 175
+     },
+     "unit": "beats/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '3 to 6m'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "3 – 6m 104 120 129 140 150 159 175"
+    },
+    {
+     "analyte": "Heart rate",
+     "when": {
+      "age_months": {
+       "min": 6,
+       "lt": 9
+      }
+     },
+     "lo": 98,
+     "hi": 168,
+     "median": 134,
+     "centiles": {
+      "p1": 98,
+      "p10": 114,
+      "p25": 123,
+      "p50": 134,
+      "p75": 143,
+      "p90": 152,
+      "p99": 168
+     },
+     "unit": "beats/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '6 to 9m'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "6 – 9m 98 114 123 134 143 152 168"
+    },
+    {
+     "analyte": "Heart rate",
+     "when": {
+      "age_months": {
+       "min": 9,
+       "lt": 12
+      }
+     },
+     "lo": 93,
+     "hi": 161,
+     "median": 128,
+     "centiles": {
+      "p1": 93,
+      "p10": 109,
+      "p25": 118,
+      "p50": 128,
+      "p75": 137,
+      "p90": 145,
+      "p99": 161
+     },
+     "unit": "beats/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '9 to 12m'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "9 – 12m 93 109 118 128 137 145 161"
+    },
+    {
+     "analyte": "Heart rate",
+     "when": {
+      "age_months": {
+       "min": 12,
+       "lt": 18
+      }
+     },
+     "lo": 88,
+     "hi": 156,
+     "median": 123,
+     "centiles": {
+      "p1": 88,
+      "p10": 103,
+      "p25": 112,
+      "p50": 123,
+      "p75": 132,
+      "p90": 140,
+      "p99": 156
+     },
+     "unit": "beats/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '12 to 18m'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "12 – 18m 88 103 112 123 132 140 156"
+    },
+    {
+     "analyte": "Heart rate",
+     "when": {
+      "age_months": {
+       "min": 18,
+       "lt": 24
+      }
+     },
+     "lo": 82,
+     "hi": 149,
+     "median": 116,
+     "centiles": {
+      "p1": 82,
+      "p10": 98,
+      "p25": 106,
+      "p50": 116,
+      "p75": 126,
+      "p90": 135,
+      "p99": 149
+     },
+     "unit": "beats/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '18 to 24m'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "18 – 24m 82 98 106 116 126 135 149"
+    },
+    {
+     "analyte": "Heart rate",
+     "when": {
+      "age_years": {
+       "min": 2,
+       "lt": 3
+      }
+     },
+     "lo": 76,
+     "hi": 142,
+     "median": 110,
+     "centiles": {
+      "p1": 76,
+      "p10": 92,
+      "p25": 100,
+      "p50": 110,
+      "p75": 119,
+      "p90": 128,
+      "p99": 142
+     },
+     "unit": "beats/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '2 to 3y'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "2 – 3y 76 92 100 110 119 128 142"
+    },
+    {
+     "analyte": "Heart rate",
+     "when": {
+      "age_years": {
+       "min": 3,
+       "lt": 4
+      }
+     },
+     "lo": 70,
+     "hi": 136,
+     "median": 104,
+     "centiles": {
+      "p1": 70,
+      "p10": 86,
+      "p25": 94,
+      "p50": 104,
+      "p75": 113,
+      "p90": 123,
+      "p99": 136
+     },
+     "unit": "beats/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '3 to 4y'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "3 – 4y 70 86 94 104 113 123 136"
+    },
+    {
+     "analyte": "Heart rate",
+     "when": {
+      "age_years": {
+       "min": 4,
+       "lt": 6
+      }
+     },
+     "lo": 65,
+     "hi": 131,
+     "median": 98,
+     "centiles": {
+      "p1": 65,
+      "p10": 81,
+      "p25": 89,
+      "p50": 98,
+      "p75": 108,
+      "p90": 117,
+      "p99": 131
+     },
+     "unit": "beats/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '4 to 6y'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "4 – 6y 65 81 89 98 108 117 131"
+    },
+    {
+     "analyte": "Heart rate",
+     "when": {
+      "age_years": {
+       "min": 6,
+       "lt": 8
+      }
+     },
+     "lo": 59,
+     "hi": 123,
+     "median": 91,
+     "centiles": {
+      "p1": 59,
+      "p10": 74,
+      "p25": 82,
+      "p50": 91,
+      "p75": 101,
+      "p90": 111,
+      "p99": 123
+     },
+     "unit": "beats/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '6 to 8y'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "6 – 8y 59 74 82 91 101 111 123"
+    },
+    {
+     "analyte": "Heart rate",
+     "when": {
+      "age_years": {
+       "min": 8,
+       "lt": 12
+      }
+     },
+     "lo": 52,
+     "hi": 115,
+     "median": 84,
+     "centiles": {
+      "p1": 52,
+      "p10": 67,
+      "p25": 75,
+      "p50": 84,
+      "p75": 93,
+      "p90": 103,
+      "p99": 115
+     },
+     "unit": "beats/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '8 to 12y'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "8 – 12y 52 67 75 84 93 103 115"
+    },
+    {
+     "analyte": "Heart rate",
+     "when": {
+      "age_years": {
+       "min": 12,
+       "lt": 15
+      }
+     },
+     "lo": 47,
+     "hi": 108,
+     "median": 78,
+     "centiles": {
+      "p1": 47,
+      "p10": 62,
+      "p25": 69,
+      "p50": 78,
+      "p75": 87,
+      "p90": 96,
+      "p99": 108
+     },
+     "unit": "beats/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '12 to 15y'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "12 – 15y 47 62 69 78 87 96 108"
+    },
+    {
+     "analyte": "Heart rate",
+     "when": {
+      "age_years": {
+       "min": 15,
+       "lt": 18
+      }
+     },
+     "lo": 43,
+     "hi": 104,
+     "median": 73,
+     "centiles": {
+      "p1": 43,
+      "p10": 58,
+      "p25": 65,
+      "p50": 73,
+      "p75": 83,
+      "p90": 92,
+      "p99": 104
+     },
+     "unit": "beats/min",
+     "note": "lo = 1st centile, hi = 99th centile (kernel-regression centile charts from a systematic review of normal children). Source age band '15 to 18y'.",
+     "src": "ref-fleming2011-webappendix",
+     "quote": "15 – 18y 43 58 65 73 83 92 104"
+    },
+    {
+     "analyte": "Systolic BP",
+     "when": {
+      "dol": {
+       "min": 1,
+       "max": 1
+      }
+     },
+     "mean": 66.8,
+     "sd": 7.7,
+     "unit": "mmHg",
+     "note": "Full-term Nigerian neonates, oscillometric (Dinamap 8100), first day after birth. Mean and SD only; the 5th/50th/95th percentiles are in figures and were not extracted. No lo/hi stored.",
+     "src": "ref-bp-africa2009",
+     "quote": "The mean SBP, DBP and MAP readings on day 1 were 66.8 ± 7.7, 38.5 ± 6.3 and 47.9 ± 6.3 mmHg, respectively."
+    },
+    {
+     "analyte": "Diastolic BP",
+     "when": {
+      "dol": {
+       "min": 1,
+       "max": 1
+      }
+     },
+     "mean": 38.5,
+     "sd": 6.3,
+     "unit": "mmHg",
+     "note": "Full-term Nigerian neonates, oscillometric (Dinamap 8100), first day after birth. Mean and SD only; the 5th/50th/95th percentiles are in figures and were not extracted. No lo/hi stored.",
+     "src": "ref-bp-africa2009",
+     "quote": "The mean SBP, DBP and MAP readings on day 1 were 66.8 ± 7.7, 38.5 ± 6.3 and 47.9 ± 6.3 mmHg, respectively."
+    },
+    {
+     "analyte": "Mean arterial pressure",
+     "when": {
+      "dol": {
+       "min": 1,
+       "max": 1
+      }
+     },
+     "mean": 47.9,
+     "sd": 6.3,
+     "unit": "mmHg",
+     "note": "Full-term Nigerian neonates, oscillometric (Dinamap 8100), first day after birth. Mean and SD only; the 5th/50th/95th percentiles are in figures and were not extracted. No lo/hi stored.",
+     "src": "ref-bp-africa2009",
+     "quote": "The mean SBP, DBP and MAP readings on day 1 were 66.8 ± 7.7, 38.5 ± 6.3 and 47.9 ± 6.3 mmHg, respectively."
+    },
+    {
+     "analyte": "Systolic BP",
+     "when": {
+      "dol": {
+       "min": 2,
+       "max": 4
+      }
+     },
+     "mean": 69.2,
+     "sd": 8.3,
+     "range_min": 48,
+     "range_max": 108,
+     "unit": "mmHg",
+     "note": "Full-term Nigerian neonates, oscillometric (Dinamap 8100), days 2 to 4 grouped. range_min/range_max are the observed range, not a reference interval.",
+     "src": "ref-bp-africa2009",
+     "quote": "Since there was no statistically significant difference in SBP, DBP and MAP from day 2 to 4, these values were further analysed together as a group in comparison with day 1. The mean SBP of the group was 69.2 ± 8.3 (range: 48–108) mmHg, the mean DBP was 40.4 ± 6.8 (25–68) mmHg and the mean MAP was 50.0 ± 6.9 (33–78) mmHg."
+    },
+    {
+     "analyte": "Diastolic BP",
+     "when": {
+      "dol": {
+       "min": 2,
+       "max": 4
+      }
+     },
+     "mean": 40.4,
+     "sd": 6.8,
+     "range_min": 25,
+     "range_max": 68,
+     "unit": "mmHg",
+     "note": "Full-term Nigerian neonates, oscillometric (Dinamap 8100), days 2 to 4 grouped. range_min/range_max are the observed range, not a reference interval.",
+     "src": "ref-bp-africa2009",
+     "quote": "Since there was no statistically significant difference in SBP, DBP and MAP from day 2 to 4, these values were further analysed together as a group in comparison with day 1. The mean SBP of the group was 69.2 ± 8.3 (range: 48–108) mmHg, the mean DBP was 40.4 ± 6.8 (25–68) mmHg and the mean MAP was 50.0 ± 6.9 (33–78) mmHg."
+    },
+    {
+     "analyte": "Mean arterial pressure",
+     "when": {
+      "dol": {
+       "min": 2,
+       "max": 4
+      }
+     },
+     "mean": 50.0,
+     "sd": 6.9,
+     "range_min": 33,
+     "range_max": 78,
+     "unit": "mmHg",
+     "note": "Full-term Nigerian neonates, oscillometric (Dinamap 8100), days 2 to 4 grouped. range_min/range_max are the observed range, not a reference interval.",
+     "src": "ref-bp-africa2009",
+     "quote": "Since there was no statistically significant difference in SBP, DBP and MAP from day 2 to 4, these values were further analysed together as a group in comparison with day 1. The mean SBP of the group was 69.2 ± 8.3 (range: 48–108) mmHg, the mean DBP was 40.4 ± 6.8 (25–68) mmHg and the mean MAP was 50.0 ± 6.9 (33–78) mmHg."
+    }
+   ]
+  },
+  {
+   "id": "csf",
+   "title": "Neonatal and young infant CSF: cell count, protein, glucose",
+   "rows": [
+    {
+     "analyte": "CSF WBC",
+     "when": {
+      "pna_d": {
+       "max": 28
+      }
+     },
+     "hi": 15,
+     "unit": "cells/mm3",
+     "note": "Thomson 2018, 7766 infants aged 60 days or less without meningitis, multicentre ED cohort. Bound = third quartile + 1.5 IQR (WBC, protein) or first quartile - 1.5 IQR (glucose).",
+     "src": "ref-thomson2018-abstract",
+     "quote": "CSF WBC counts were higher in infants ≤28 days of age (upper bound: 15 cells/mm3) than in infants 29 to 60 days of age (upper bound: 9 cells/mm3; P < .001)."
+    },
+    {
+     "analyte": "CSF WBC",
+     "when": {
+      "pna_d": {
+       "min": 29,
+       "max": 60
+      }
+     },
+     "hi": 9,
+     "unit": "cells/mm3",
+     "note": "Thomson 2018, 7766 infants aged 60 days or less without meningitis, multicentre ED cohort. Bound = third quartile + 1.5 IQR (WBC, protein) or first quartile - 1.5 IQR (glucose).",
+     "src": "ref-thomson2018-abstract",
+     "quote": "CSF WBC counts were higher in infants ≤28 days of age (upper bound: 15 cells/mm3) than in infants 29 to 60 days of age (upper bound: 9 cells/mm3; P < .001)."
+    },
+    {
+     "analyte": "CSF protein",
+     "when": {
+      "pna_d": {
+       "max": 28
+      }
+     },
+     "hi": 127,
+     "unit": "mg/dL",
+     "note": "Thomson 2018, 7766 infants aged 60 days or less without meningitis, multicentre ED cohort. Bound = third quartile + 1.5 IQR (WBC, protein) or first quartile - 1.5 IQR (glucose).",
+     "src": "ref-thomson2018-abstract",
+     "quote": "CSF protein concentrations were higher in infants ≤28 days of age (upper bound: 127 mg/dL) than in infants 29 to 60 days of age (upper bound: 99 mg/dL; P < .001)."
+    },
+    {
+     "analyte": "CSF protein",
+     "when": {
+      "pna_d": {
+       "min": 29,
+       "max": 60
+      }
+     },
+     "hi": 99,
+     "unit": "mg/dL",
+     "note": "Thomson 2018, 7766 infants aged 60 days or less without meningitis, multicentre ED cohort. Bound = third quartile + 1.5 IQR (WBC, protein) or first quartile - 1.5 IQR (glucose).",
+     "src": "ref-thomson2018-abstract",
+     "quote": "CSF protein concentrations were higher in infants ≤28 days of age (upper bound: 127 mg/dL) than in infants 29 to 60 days of age (upper bound: 99 mg/dL; P < .001)."
+    },
+    {
+     "analyte": "CSF glucose",
+     "when": {
+      "pna_d": {
+       "max": 28
+      }
+     },
+     "lo": 25,
+     "unit": "mg/dL",
+     "note": "Thomson 2018, 7766 infants aged 60 days or less without meningitis, multicentre ED cohort. Bound = third quartile + 1.5 IQR (WBC, protein) or first quartile - 1.5 IQR (glucose).",
+     "src": "ref-thomson2018-abstract",
+     "quote": "CSF glucose concentrations were lower in infants ≤28 days of age (lower bound: 25 mg/dL) than in infants 29 to 60 days of age (lower bound: 27 mg/dL; P < .001)."
+    },
+    {
+     "analyte": "CSF glucose",
+     "when": {
+      "pna_d": {
+       "min": 29,
+       "max": 60
+      }
+     },
+     "lo": 27,
+     "unit": "mg/dL",
+     "note": "Thomson 2018, 7766 infants aged 60 days or less without meningitis, multicentre ED cohort. Bound = third quartile + 1.5 IQR (WBC, protein) or first quartile - 1.5 IQR (glucose).",
+     "src": "ref-thomson2018-abstract",
+     "quote": "CSF glucose concentrations were lower in infants ≤28 days of age (lower bound: 25 mg/dL) than in infants 29 to 60 days of age (lower bound: 27 mg/dL; P < .001)."
+    },
+    {
+     "analyte": "CSF WBC",
+     "when": {
+      "pna_d": {
+       "min": 0,
+       "max": 28
+      }
+     },
+     "median": 3,
+     "hi": 19,
+     "unit": "cells/mm3",
+     "note": "Kestenbaum 2010, 380 ED infants aged 56 days or less (15% preterm), traumatic LP, bacterial infection, seizure and enterovirus-positive excluded. hi = 95th percentile.",
+     "src": "ref-kestenbaum2010",
+     "quote": "| 0–28 Days (n=142) | 29–56 Days (n=238) Mean value (standard deviation) | 9.2 (32.1) | 3.1 (5.0) Upper bound of 95% confidence interval of the mean value | 14.5 | 3.8 Median value * | 3 | 2 90 th percentile value | 12 | 6 95 th percentile value | 19 | 9"
+    },
+    {
+     "analyte": "CSF WBC",
+     "when": {
+      "pna_d": {
+       "min": 29,
+       "max": 56
+      }
+     },
+     "median": 2,
+     "hi": 9,
+     "unit": "cells/mm3",
+     "note": "Kestenbaum 2010, 380 ED infants aged 56 days or less (15% preterm), traumatic LP, bacterial infection, seizure and enterovirus-positive excluded. hi = 95th percentile.",
+     "src": "ref-kestenbaum2010",
+     "quote": "| 0–28 Days (n=142) | 29–56 Days (n=238) Mean value (standard deviation) | 9.2 (32.1) | 3.1 (5.0) Upper bound of 95% confidence interval of the mean value | 14.5 | 3.8 Median value * | 3 | 2 90 th percentile value | 12 | 6 95 th percentile value | 19 | 9"
+    },
+    {
+     "analyte": "CSF WBC",
+     "when": {
+      "pna_d": {
+       "min": 1,
+       "max": 28
+      }
+     },
+     "lo": 0.0,
+     "hi": 18.0,
+     "median": 5.0,
+     "unit": "cells/mm3",
+     "note": "Byington 2011, febrile term infants without identified bacterial, enterovirus or HSV infection, atraumatic LP (CSF RBC < 1000/mm3), statistical outliers removed. lo/hi = normal range defined as Q1 - 1.5 IQR (truncated at 0) to Q3 + 1.5 IQR; median as reported.",
+     "src": "ref-byington2011",
+     "quote": "Month One 1–28 days (n=278) | 6.1, 5.0 (0–18.0) | 95.5, 5.5 (0–236.0) | 45.3, 46.0 (30.0–61.0) | 75.4, 73.0 (15.8–131.0)"
+    },
+    {
+     "analyte": "CSF glucose",
+     "when": {
+      "pna_d": {
+       "min": 1,
+       "max": 28
+      }
+     },
+     "lo": 30.0,
+     "hi": 61.0,
+     "median": 46.0,
+     "unit": "mg/dL",
+     "note": "Byington 2011, febrile term infants without identified bacterial, enterovirus or HSV infection, atraumatic LP (CSF RBC < 1000/mm3), statistical outliers removed. lo/hi = normal range defined as Q1 - 1.5 IQR (truncated at 0) to Q3 + 1.5 IQR; median as reported.",
+     "src": "ref-byington2011",
+     "quote": "Month One 1–28 days (n=278) | 6.1, 5.0 (0–18.0) | 95.5, 5.5 (0–236.0) | 45.3, 46.0 (30.0–61.0) | 75.4, 73.0 (15.8–131.0)"
+    },
+    {
+     "analyte": "CSF protein",
+     "when": {
+      "pna_d": {
+       "min": 1,
+       "max": 28
+      }
+     },
+     "lo": 15.8,
+     "hi": 131.0,
+     "median": 73.0,
+     "unit": "mg/dL",
+     "note": "Byington 2011, febrile term infants without identified bacterial, enterovirus or HSV infection, atraumatic LP (CSF RBC < 1000/mm3), statistical outliers removed. lo/hi = normal range defined as Q1 - 1.5 IQR (truncated at 0) to Q3 + 1.5 IQR; median as reported.",
+     "src": "ref-byington2011",
+     "quote": "Month One 1–28 days (n=278) | 6.1, 5.0 (0–18.0) | 95.5, 5.5 (0–236.0) | 45.3, 46.0 (30.0–61.0) | 75.4, 73.0 (15.8–131.0)"
+    },
+    {
+     "analyte": "CSF WBC",
+     "when": {
+      "pna_d": {
+       "min": 29,
+       "max": 60
+      }
+     },
+     "lo": 0.0,
+     "hi": 8.5,
+     "median": 3.0,
+     "unit": "cells/mm3",
+     "note": "Byington 2011, febrile term infants without identified bacterial, enterovirus or HSV infection, atraumatic LP (CSF RBC < 1000/mm3), statistical outliers removed. lo/hi = normal range defined as Q1 - 1.5 IQR (truncated at 0) to Q3 + 1.5 IQR; median as reported.",
+     "src": "ref-byington2011",
+     "quote": "Month Two 29–60 days (n=318) | 3.1, 3.0 (0–8.5) | 75.5, 2.0 (0–64.5) | 48.0, 48.0 (30.5–65.5) | 58.9, 54.0 (5.5–105.5)"
+    },
+    {
+     "analyte": "CSF glucose",
+     "when": {
+      "pna_d": {
+       "min": 29,
+       "max": 60
+      }
+     },
+     "lo": 30.5,
+     "hi": 65.5,
+     "median": 48.0,
+     "unit": "mg/dL",
+     "note": "Byington 2011, febrile term infants without identified bacterial, enterovirus or HSV infection, atraumatic LP (CSF RBC < 1000/mm3), statistical outliers removed. lo/hi = normal range defined as Q1 - 1.5 IQR (truncated at 0) to Q3 + 1.5 IQR; median as reported.",
+     "src": "ref-byington2011",
+     "quote": "Month Two 29–60 days (n=318) | 3.1, 3.0 (0–8.5) | 75.5, 2.0 (0–64.5) | 48.0, 48.0 (30.5–65.5) | 58.9, 54.0 (5.5–105.5)"
+    },
+    {
+     "analyte": "CSF protein",
+     "when": {
+      "pna_d": {
+       "min": 29,
+       "max": 60
+      }
+     },
+     "lo": 5.5,
+     "hi": 105.5,
+     "median": 54.0,
+     "unit": "mg/dL",
+     "note": "Byington 2011, febrile term infants without identified bacterial, enterovirus or HSV infection, atraumatic LP (CSF RBC < 1000/mm3), statistical outliers removed. lo/hi = normal range defined as Q1 - 1.5 IQR (truncated at 0) to Q3 + 1.5 IQR; median as reported.",
+     "src": "ref-byington2011",
+     "quote": "Month Two 29–60 days (n=318) | 3.1, 3.0 (0–8.5) | 75.5, 2.0 (0–64.5) | 48.0, 48.0 (30.5–65.5) | 58.9, 54.0 (5.5–105.5)"
+    },
+    {
+     "analyte": "CSF WBC",
+     "when": {
+      "pna_d": {
+       "min": 61,
+       "max": 90
+      }
+     },
+     "lo": 0.0,
+     "hi": 8.5,
+     "median": 3.0,
+     "unit": "cells/mm3",
+     "note": "Byington 2011, febrile term infants without identified bacterial, enterovirus or HSV infection, atraumatic LP (CSF RBC < 1000/mm3), statistical outliers removed. lo/hi = normal range defined as Q1 - 1.5 IQR (truncated at 0) to Q3 + 1.5 IQR; median as reported.",
+     "src": "ref-byington2011",
+     "quote": "Month Three 61–90 days (n=81) | 3.0, 3.0 (0–8.5) | 31.2, 2.0 (0–30.0) | 57.7, 51.0 (33.5–69.5) | 39.2, 38.0 (7.0–71.0)"
+    },
+    {
+     "analyte": "CSF glucose",
+     "when": {
+      "pna_d": {
+       "min": 61,
+       "max": 90
+      }
+     },
+     "lo": 33.5,
+     "hi": 69.5,
+     "median": 51.0,
+     "unit": "mg/dL",
+     "note": "Byington 2011, febrile term infants without identified bacterial, enterovirus or HSV infection, atraumatic LP (CSF RBC < 1000/mm3), statistical outliers removed. lo/hi = normal range defined as Q1 - 1.5 IQR (truncated at 0) to Q3 + 1.5 IQR; median as reported.",
+     "src": "ref-byington2011",
+     "quote": "Month Three 61–90 days (n=81) | 3.0, 3.0 (0–8.5) | 31.2, 2.0 (0–30.0) | 57.7, 51.0 (33.5–69.5) | 39.2, 38.0 (7.0–71.0)"
+    },
+    {
+     "analyte": "CSF protein",
+     "when": {
+      "pna_d": {
+       "min": 61,
+       "max": 90
+      }
+     },
+     "lo": 7.0,
+     "hi": 71.0,
+     "median": 38.0,
+     "unit": "mg/dL",
+     "note": "Byington 2011, febrile term infants without identified bacterial, enterovirus or HSV infection, atraumatic LP (CSF RBC < 1000/mm3), statistical outliers removed. lo/hi = normal range defined as Q1 - 1.5 IQR (truncated at 0) to Q3 + 1.5 IQR; median as reported.",
+     "src": "ref-byington2011",
+     "quote": "Month Three 61–90 days (n=81) | 3.0, 3.0 (0–8.5) | 31.2, 2.0 (0–30.0) | 57.7, 51.0 (33.5–69.5) | 39.2, 38.0 (7.0–71.0)"
+    },
+    {
+     "analyte": "CSF WBC",
+     "when": {
+      "ga_wk": {
+       "lt": 37,
+       "src": "ref-srinivasan2012",
+       "quote": "Preterm infants were defined as those born at gestational age <37 weeks."
+      },
+      "pna_d": {
+       "max": 7
+      }
+     },
+     "median": 3,
+     "hi": 18,
+     "unit": "cells/uL",
+     "note": "Srinivasan 2012, NICU infants evaluated for sepsis (CSF RBC > 500 cells/uL and known causes of pleocytosis excluded), all infants incl. antibiotic-exposed. Term = not preterm (preterm defined as GA < 37 weeks). hi = 95th percentile.",
+     "src": "ref-srinivasan2012",
+     "quote": "Value | All (n =148) | ≤7 days (n = 66) | >7 days (n = 82) | All (n = 170) | ≤7 days (n = 130) | >7 days (n = 40) CSF WBC, cells/ μ L All infants Median (IQR) | 3 (1–6) | 3 (1–7) | 3 (1–4) | 3 (1–6) | 3 (1–6) | 2 (1–4) 95th percentile | 16 | 18 | 12 | 26 | 23 | 32"
+    },
+    {
+     "analyte": "CSF protein",
+     "when": {
+      "ga_wk": {
+       "lt": 37,
+       "src": "ref-srinivasan2012",
+       "quote": "Preterm infants were defined as those born at gestational age <37 weeks."
+      },
+      "pna_d": {
+       "max": 7
+      }
+     },
+     "median": 116,
+     "hi": 213,
+     "unit": "mg/dL",
+     "note": "Srinivasan 2012, NICU infants evaluated for sepsis (CSF RBC > 500 cells/uL and known causes of pleocytosis excluded), all infants incl. antibiotic-exposed. Term = not preterm (preterm defined as GA < 37 weeks). hi = 95th percentile.",
+     "src": "ref-srinivasan2012",
+     "quote": "Value | All (n =148) | ≤7 days (n = 66) | >7 days (n = 82) | All (n = 170) | ≤7 days (n = 130) | >7 days (n = 40) CSF WBC, cells/ μ L All infants Median (IQR) | 3 (1–6) | 3 (1–7) | 3 (1–4) | 3 (1–6) | 3 (1–6) | 2 (1–4) 95th percentile | 16 | 18 | 12 | 26 | 23 | 32 Upper IQR bound + 1.5 × IQR | 14 | 16 | 9 | 14 | 14 | 9 Antibiotic-unexposed 95th percentile | 11 | 17 | 10 | 32 | 31 | 53 Upper IQR bound + 1.5 × IQR | 9 | 17 | 9 | 20 | 20 | 21 CSF protein, mg/dL * All infants Median (IQR) | 104 (79–131) | 116 (93–138) | 93 (69–122) | 74 (54–96) | 78 (60–100) | 57 (42–77) 95th percentile | 203 | 213 | 203 | 137 | 137 | 158"
+    },
+    {
+     "analyte": "CSF glucose",
+     "when": {
+      "ga_wk": {
+       "lt": 37,
+       "src": "ref-srinivasan2012",
+       "quote": "Preterm infants were defined as those born at gestational age <37 weeks."
+      },
+      "pna_d": {
+       "max": 7
+      }
+     },
+     "median": 53,
+     "lo": 33,
+     "unit": "mg/dL",
+     "note": "Srinivasan 2012, NICU infants evaluated for sepsis (CSF RBC > 500 cells/uL and known causes of pleocytosis excluded), all infants incl. antibiotic-exposed. Term = not preterm (preterm defined as GA < 37 weeks). lo = 5th percentile.",
+     "src": "ref-srinivasan2012",
+     "quote": "Value | All (n =148) | ≤7 days (n = 66) | >7 days (n = 82) | All (n = 170) | ≤7 days (n = 130) | >7 days (n = 40) CSF WBC, cells/ μ L All infants Median (IQR) | 3 (1–6) | 3 (1–7) | 3 (1–4) | 3 (1–6) | 3 (1–6) | 2 (1–4) 95th percentile | 16 | 18 | 12 | 26 | 23 | 32 Upper IQR bound + 1.5 × IQR | 14 | 16 | 9 | 14 | 14 | 9 Antibiotic-unexposed 95th percentile | 11 | 17 | 10 | 32 | 31 | 53 Upper IQR bound + 1.5 × IQR | 9 | 17 | 9 | 20 | 20 | 21 CSF protein, mg/dL * All infants Median (IQR) | 104 (79–131) | 116 (93–138) | 93 (69–122) | 74 (54–96) | 78 (60–100) | 57 (42–77) 95th percentile | 203 | 213 | 203 | 137 | 137 | 158 Upper IQR bound + 1.5 × IQR | 209 | 206 | 202 | 159 | 160 | 130 Antibiotic-unexposed 95th percentile | 195 | 195 | 136 | 136 | 136 | 284 Upper IQR bound + 1.5 × IQR | 175 | 245 | 143 | 172 | 188 | 105 CSF glucose, mg/dL All infants Median (IQR) | 49 (42–62) | 53 (43–65) | 47 (40–58) | 51 (44–57) | 50 (44–56) | 52 (45–64) 5th percentile | 33 | 33 | 33 | 36 | 35 | 38"
+    },
+    {
+     "analyte": "CSF WBC",
+     "when": {
+      "ga_wk": {
+       "lt": 37,
+       "src": "ref-srinivasan2012",
+       "quote": "Preterm infants were defined as those born at gestational age <37 weeks."
+      },
+      "pna_d": {
+       "gt": 7
+      }
+     },
+     "median": 3,
+     "hi": 12,
+     "unit": "cells/uL",
+     "note": "Srinivasan 2012, NICU infants evaluated for sepsis (CSF RBC > 500 cells/uL and known causes of pleocytosis excluded), all infants incl. antibiotic-exposed. Term = not preterm (preterm defined as GA < 37 weeks). hi = 95th percentile.",
+     "src": "ref-srinivasan2012",
+     "quote": "Value | All (n =148) | ≤7 days (n = 66) | >7 days (n = 82) | All (n = 170) | ≤7 days (n = 130) | >7 days (n = 40) CSF WBC, cells/ μ L All infants Median (IQR) | 3 (1–6) | 3 (1–7) | 3 (1–4) | 3 (1–6) | 3 (1–6) | 2 (1–4) 95th percentile | 16 | 18 | 12 | 26 | 23 | 32"
+    },
+    {
+     "analyte": "CSF protein",
+     "when": {
+      "ga_wk": {
+       "lt": 37,
+       "src": "ref-srinivasan2012",
+       "quote": "Preterm infants were defined as those born at gestational age <37 weeks."
+      },
+      "pna_d": {
+       "gt": 7
+      }
+     },
+     "median": 93,
+     "hi": 203,
+     "unit": "mg/dL",
+     "note": "Srinivasan 2012, NICU infants evaluated for sepsis (CSF RBC > 500 cells/uL and known causes of pleocytosis excluded), all infants incl. antibiotic-exposed. Term = not preterm (preterm defined as GA < 37 weeks). hi = 95th percentile.",
+     "src": "ref-srinivasan2012",
+     "quote": "Value | All (n =148) | ≤7 days (n = 66) | >7 days (n = 82) | All (n = 170) | ≤7 days (n = 130) | >7 days (n = 40) CSF WBC, cells/ μ L All infants Median (IQR) | 3 (1–6) | 3 (1–7) | 3 (1–4) | 3 (1–6) | 3 (1–6) | 2 (1–4) 95th percentile | 16 | 18 | 12 | 26 | 23 | 32 Upper IQR bound + 1.5 × IQR | 14 | 16 | 9 | 14 | 14 | 9 Antibiotic-unexposed 95th percentile | 11 | 17 | 10 | 32 | 31 | 53 Upper IQR bound + 1.5 × IQR | 9 | 17 | 9 | 20 | 20 | 21 CSF protein, mg/dL * All infants Median (IQR) | 104 (79–131) | 116 (93–138) | 93 (69–122) | 74 (54–96) | 78 (60–100) | 57 (42–77) 95th percentile | 203 | 213 | 203 | 137 | 137 | 158"
+    },
+    {
+     "analyte": "CSF glucose",
+     "when": {
+      "ga_wk": {
+       "lt": 37,
+       "src": "ref-srinivasan2012",
+       "quote": "Preterm infants were defined as those born at gestational age <37 weeks."
+      },
+      "pna_d": {
+       "gt": 7
+      }
+     },
+     "median": 47,
+     "lo": 33,
+     "unit": "mg/dL",
+     "note": "Srinivasan 2012, NICU infants evaluated for sepsis (CSF RBC > 500 cells/uL and known causes of pleocytosis excluded), all infants incl. antibiotic-exposed. Term = not preterm (preterm defined as GA < 37 weeks). lo = 5th percentile.",
+     "src": "ref-srinivasan2012",
+     "quote": "Value | All (n =148) | ≤7 days (n = 66) | >7 days (n = 82) | All (n = 170) | ≤7 days (n = 130) | >7 days (n = 40) CSF WBC, cells/ μ L All infants Median (IQR) | 3 (1–6) | 3 (1–7) | 3 (1–4) | 3 (1–6) | 3 (1–6) | 2 (1–4) 95th percentile | 16 | 18 | 12 | 26 | 23 | 32 Upper IQR bound + 1.5 × IQR | 14 | 16 | 9 | 14 | 14 | 9 Antibiotic-unexposed 95th percentile | 11 | 17 | 10 | 32 | 31 | 53 Upper IQR bound + 1.5 × IQR | 9 | 17 | 9 | 20 | 20 | 21 CSF protein, mg/dL * All infants Median (IQR) | 104 (79–131) | 116 (93–138) | 93 (69–122) | 74 (54–96) | 78 (60–100) | 57 (42–77) 95th percentile | 203 | 213 | 203 | 137 | 137 | 158 Upper IQR bound + 1.5 × IQR | 209 | 206 | 202 | 159 | 160 | 130 Antibiotic-unexposed 95th percentile | 195 | 195 | 136 | 136 | 136 | 284 Upper IQR bound + 1.5 × IQR | 175 | 245 | 143 | 172 | 188 | 105 CSF glucose, mg/dL All infants Median (IQR) | 49 (42–62) | 53 (43–65) | 47 (40–58) | 51 (44–57) | 50 (44–56) | 52 (45–64) 5th percentile | 33 | 33 | 33 | 36 | 35 | 38"
+    },
+    {
+     "analyte": "CSF WBC",
+     "when": {
+      "ga_wk": {
+       "min": 37,
+       "src": "ref-srinivasan2012",
+       "quote": "Preterm infants were defined as those born at gestational age <37 weeks."
+      },
+      "pna_d": {
+       "max": 7
+      }
+     },
+     "median": 3,
+     "hi": 23,
+     "unit": "cells/uL",
+     "note": "Srinivasan 2012, NICU infants evaluated for sepsis (CSF RBC > 500 cells/uL and known causes of pleocytosis excluded), all infants incl. antibiotic-exposed. Term = not preterm (preterm defined as GA < 37 weeks). hi = 95th percentile.",
+     "src": "ref-srinivasan2012",
+     "quote": "Value | All (n =148) | ≤7 days (n = 66) | >7 days (n = 82) | All (n = 170) | ≤7 days (n = 130) | >7 days (n = 40) CSF WBC, cells/ μ L All infants Median (IQR) | 3 (1–6) | 3 (1–7) | 3 (1–4) | 3 (1–6) | 3 (1–6) | 2 (1–4) 95th percentile | 16 | 18 | 12 | 26 | 23 | 32"
+    },
+    {
+     "analyte": "CSF protein",
+     "when": {
+      "ga_wk": {
+       "min": 37,
+       "src": "ref-srinivasan2012",
+       "quote": "Preterm infants were defined as those born at gestational age <37 weeks."
+      },
+      "pna_d": {
+       "max": 7
+      }
+     },
+     "median": 78,
+     "hi": 137,
+     "unit": "mg/dL",
+     "note": "Srinivasan 2012, NICU infants evaluated for sepsis (CSF RBC > 500 cells/uL and known causes of pleocytosis excluded), all infants incl. antibiotic-exposed. Term = not preterm (preterm defined as GA < 37 weeks). hi = 95th percentile.",
+     "src": "ref-srinivasan2012",
+     "quote": "Value | All (n =148) | ≤7 days (n = 66) | >7 days (n = 82) | All (n = 170) | ≤7 days (n = 130) | >7 days (n = 40) CSF WBC, cells/ μ L All infants Median (IQR) | 3 (1–6) | 3 (1–7) | 3 (1–4) | 3 (1–6) | 3 (1–6) | 2 (1–4) 95th percentile | 16 | 18 | 12 | 26 | 23 | 32 Upper IQR bound + 1.5 × IQR | 14 | 16 | 9 | 14 | 14 | 9 Antibiotic-unexposed 95th percentile | 11 | 17 | 10 | 32 | 31 | 53 Upper IQR bound + 1.5 × IQR | 9 | 17 | 9 | 20 | 20 | 21 CSF protein, mg/dL * All infants Median (IQR) | 104 (79–131) | 116 (93–138) | 93 (69–122) | 74 (54–96) | 78 (60–100) | 57 (42–77) 95th percentile | 203 | 213 | 203 | 137 | 137 | 158"
+    },
+    {
+     "analyte": "CSF glucose",
+     "when": {
+      "ga_wk": {
+       "min": 37,
+       "src": "ref-srinivasan2012",
+       "quote": "Preterm infants were defined as those born at gestational age <37 weeks."
+      },
+      "pna_d": {
+       "max": 7
+      }
+     },
+     "median": 50,
+     "lo": 35,
+     "unit": "mg/dL",
+     "note": "Srinivasan 2012, NICU infants evaluated for sepsis (CSF RBC > 500 cells/uL and known causes of pleocytosis excluded), all infants incl. antibiotic-exposed. Term = not preterm (preterm defined as GA < 37 weeks). lo = 5th percentile.",
+     "src": "ref-srinivasan2012",
+     "quote": "Value | All (n =148) | ≤7 days (n = 66) | >7 days (n = 82) | All (n = 170) | ≤7 days (n = 130) | >7 days (n = 40) CSF WBC, cells/ μ L All infants Median (IQR) | 3 (1–6) | 3 (1–7) | 3 (1–4) | 3 (1–6) | 3 (1–6) | 2 (1–4) 95th percentile | 16 | 18 | 12 | 26 | 23 | 32 Upper IQR bound + 1.5 × IQR | 14 | 16 | 9 | 14 | 14 | 9 Antibiotic-unexposed 95th percentile | 11 | 17 | 10 | 32 | 31 | 53 Upper IQR bound + 1.5 × IQR | 9 | 17 | 9 | 20 | 20 | 21 CSF protein, mg/dL * All infants Median (IQR) | 104 (79–131) | 116 (93–138) | 93 (69–122) | 74 (54–96) | 78 (60–100) | 57 (42–77) 95th percentile | 203 | 213 | 203 | 137 | 137 | 158 Upper IQR bound + 1.5 × IQR | 209 | 206 | 202 | 159 | 160 | 130 Antibiotic-unexposed 95th percentile | 195 | 195 | 136 | 136 | 136 | 284 Upper IQR bound + 1.5 × IQR | 175 | 245 | 143 | 172 | 188 | 105 CSF glucose, mg/dL All infants Median (IQR) | 49 (42–62) | 53 (43–65) | 47 (40–58) | 51 (44–57) | 50 (44–56) | 52 (45–64) 5th percentile | 33 | 33 | 33 | 36 | 35 | 38"
+    },
+    {
+     "analyte": "CSF WBC",
+     "when": {
+      "ga_wk": {
+       "min": 37,
+       "src": "ref-srinivasan2012",
+       "quote": "Preterm infants were defined as those born at gestational age <37 weeks."
+      },
+      "pna_d": {
+       "gt": 7
+      }
+     },
+     "median": 2,
+     "hi": 32,
+     "unit": "cells/uL",
+     "note": "Srinivasan 2012, NICU infants evaluated for sepsis (CSF RBC > 500 cells/uL and known causes of pleocytosis excluded), all infants incl. antibiotic-exposed. Term = not preterm (preterm defined as GA < 37 weeks). hi = 95th percentile.",
+     "src": "ref-srinivasan2012",
+     "quote": "Value | All (n =148) | ≤7 days (n = 66) | >7 days (n = 82) | All (n = 170) | ≤7 days (n = 130) | >7 days (n = 40) CSF WBC, cells/ μ L All infants Median (IQR) | 3 (1–6) | 3 (1–7) | 3 (1–4) | 3 (1–6) | 3 (1–6) | 2 (1–4) 95th percentile | 16 | 18 | 12 | 26 | 23 | 32"
+    },
+    {
+     "analyte": "CSF protein",
+     "when": {
+      "ga_wk": {
+       "min": 37,
+       "src": "ref-srinivasan2012",
+       "quote": "Preterm infants were defined as those born at gestational age <37 weeks."
+      },
+      "pna_d": {
+       "gt": 7
+      }
+     },
+     "median": 57,
+     "hi": 158,
+     "unit": "mg/dL",
+     "note": "Srinivasan 2012, NICU infants evaluated for sepsis (CSF RBC > 500 cells/uL and known causes of pleocytosis excluded), all infants incl. antibiotic-exposed. Term = not preterm (preterm defined as GA < 37 weeks). hi = 95th percentile.",
+     "src": "ref-srinivasan2012",
+     "quote": "Value | All (n =148) | ≤7 days (n = 66) | >7 days (n = 82) | All (n = 170) | ≤7 days (n = 130) | >7 days (n = 40) CSF WBC, cells/ μ L All infants Median (IQR) | 3 (1–6) | 3 (1–7) | 3 (1–4) | 3 (1–6) | 3 (1–6) | 2 (1–4) 95th percentile | 16 | 18 | 12 | 26 | 23 | 32 Upper IQR bound + 1.5 × IQR | 14 | 16 | 9 | 14 | 14 | 9 Antibiotic-unexposed 95th percentile | 11 | 17 | 10 | 32 | 31 | 53 Upper IQR bound + 1.5 × IQR | 9 | 17 | 9 | 20 | 20 | 21 CSF protein, mg/dL * All infants Median (IQR) | 104 (79–131) | 116 (93–138) | 93 (69–122) | 74 (54–96) | 78 (60–100) | 57 (42–77) 95th percentile | 203 | 213 | 203 | 137 | 137 | 158"
+    },
+    {
+     "analyte": "CSF glucose",
+     "when": {
+      "ga_wk": {
+       "min": 37,
+       "src": "ref-srinivasan2012",
+       "quote": "Preterm infants were defined as those born at gestational age <37 weeks."
+      },
+      "pna_d": {
+       "gt": 7
+      }
+     },
+     "median": 52,
+     "lo": 38,
+     "unit": "mg/dL",
+     "note": "Srinivasan 2012, NICU infants evaluated for sepsis (CSF RBC > 500 cells/uL and known causes of pleocytosis excluded), all infants incl. antibiotic-exposed. Term = not preterm (preterm defined as GA < 37 weeks). lo = 5th percentile.",
+     "src": "ref-srinivasan2012",
+     "quote": "Value | All (n =148) | ≤7 days (n = 66) | >7 days (n = 82) | All (n = 170) | ≤7 days (n = 130) | >7 days (n = 40) CSF WBC, cells/ μ L All infants Median (IQR) | 3 (1–6) | 3 (1–7) | 3 (1–4) | 3 (1–6) | 3 (1–6) | 2 (1–4) 95th percentile | 16 | 18 | 12 | 26 | 23 | 32 Upper IQR bound + 1.5 × IQR | 14 | 16 | 9 | 14 | 14 | 9 Antibiotic-unexposed 95th percentile | 11 | 17 | 10 | 32 | 31 | 53 Upper IQR bound + 1.5 × IQR | 9 | 17 | 9 | 20 | 20 | 21 CSF protein, mg/dL * All infants Median (IQR) | 104 (79–131) | 116 (93–138) | 93 (69–122) | 74 (54–96) | 78 (60–100) | 57 (42–77) 95th percentile | 203 | 213 | 203 | 137 | 137 | 158 Upper IQR bound + 1.5 × IQR | 209 | 206 | 202 | 159 | 160 | 130 Antibiotic-unexposed 95th percentile | 195 | 195 | 136 | 136 | 136 | 284 Upper IQR bound + 1.5 × IQR | 175 | 245 | 143 | 172 | 188 | 105 CSF glucose, mg/dL All infants Median (IQR) | 49 (42–62) | 53 (43–65) | 47 (40–58) | 51 (44–57) | 50 (44–56) | 52 (45–64) 5th percentile | 33 | 33 | 33 | 36 | 35 | 38"
+    }
+   ]
+  },
+  {
+   "id": "haematology",
+   "title": "Neonatal haematology: Hb, Hct, platelets, WBC (preterm day 1) and absolute neutrophil count (30 to 41 weeks, days 3 and 5)",
+   "rows": [
+    {
+     "analyte": "WBC (leukocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 23,
+       "max": 23
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 5023,
+     "median": 10760,
+     "hi": 23023,
+     "centiles": {
+      "p10": 5023,
+      "p25": 8943,
+      "p50": 10760,
+      "p75": 19433,
+      "p90": 23023
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "23 | 30 | 5023 | 8943 | 10,760 | 19,433 | 23,023 | 36 | 128,000 | 139,750 | 177,000 | 203,000 | 302,000"
+    },
+    {
+     "analyte": "Platelets (thrombocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 23,
+       "max": 23
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 128000,
+     "median": 177000,
+     "hi": 302000,
+     "centiles": {
+      "p10": 128000,
+      "p25": 139750,
+      "p50": 177000,
+      "p75": 203000,
+      "p90": 302000
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "23 | 30 | 5023 | 8943 | 10,760 | 19,433 | 23,023 | 36 | 128,000 | 139,750 | 177,000 | 203,000 | 302,000"
+    },
+    {
+     "analyte": "WBC (leukocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 24,
+       "max": 24
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 6028,
+     "median": 12940,
+     "hi": 25961,
+     "centiles": {
+      "p10": 6028,
+      "p25": 8480,
+      "p50": 12940,
+      "p75": 21710,
+      "p90": 25961
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "24 | 74 | 6028 | 8480 | 12,940 | 21,710 | 25,961 | 85 | 124,000 | 155,000 | 212,000 | 264,000 | 315,800"
+    },
+    {
+     "analyte": "Platelets (thrombocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 24,
+       "max": 24
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 124000,
+     "median": 212000,
+     "hi": 315800,
+     "centiles": {
+      "p10": 124000,
+      "p25": 155000,
+      "p50": 212000,
+      "p75": 264000,
+      "p90": 315800
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "24 | 74 | 6028 | 8480 | 12,940 | 21,710 | 25,961 | 85 | 124,000 | 155,000 | 212,000 | 264,000 | 315,800"
+    },
+    {
+     "analyte": "WBC (leukocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 25,
+       "max": 25
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 5299,
+     "median": 9685,
+     "hi": 22623,
+     "centiles": {
+      "p10": 5299,
+      "p25": 7405,
+      "p50": 9685,
+      "p75": 14938,
+      "p90": 22623
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "25 | 60 | 5299 | 7405 | 9685 | 14,938 | 22,623 | 67 | 121,400 | 154,000 | 190,000 | 253,000 | 286,600"
+    },
+    {
+     "analyte": "Platelets (thrombocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 25,
+       "max": 25
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 121400,
+     "median": 190000,
+     "hi": 286600,
+     "centiles": {
+      "p10": 121400,
+      "p25": 154000,
+      "p50": 190000,
+      "p75": 253000,
+      "p90": 286600
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "25 | 60 | 5299 | 7405 | 9685 | 14,938 | 22,623 | 67 | 121,400 | 154,000 | 190,000 | 253,000 | 286,600"
+    },
+    {
+     "analyte": "WBC (leukocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 26,
+       "max": 26
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 4860,
+     "median": 10485,
+     "hi": 20155,
+     "centiles": {
+      "p10": 4860,
+      "p25": 6675,
+      "p50": 10485,
+      "p75": 14260,
+      "p90": 20155
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "26 | 96 | 4860 | 6675 | 10,485 | 14,260 | 20,155 | 105 | 105,500 | 141,000 | 187,000 | 246,000 | 280,800"
+    },
+    {
+     "analyte": "Platelets (thrombocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 26,
+       "max": 26
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 105500,
+     "median": 187000,
+     "hi": 280800,
+     "centiles": {
+      "p10": 105500,
+      "p25": 141000,
+      "p50": 187000,
+      "p75": 246000,
+      "p90": 280800
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "26 | 96 | 4860 | 6675 | 10,485 | 14,260 | 20,155 | 105 | 105,500 | 141,000 | 187,000 | 246,000 | 280,800"
+    },
+    {
+     "analyte": "WBC (leukocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 27,
+       "max": 27
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 4670,
+     "median": 10100,
+     "hi": 18450,
+     "centiles": {
+      "p10": 4670,
+      "p25": 7410,
+      "p50": 10100,
+      "p75": 13205,
+      "p90": 18450
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "27 | 101 | 4670 | 7410 | 10,100 | 13,205 | 18,450 | 107 | 95,600 | 124,250 | 183,000 | 227,500 | 285,200"
+    },
+    {
+     "analyte": "Platelets (thrombocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 27,
+       "max": 27
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 95600,
+     "median": 183000,
+     "hi": 285200,
+     "centiles": {
+      "p10": 95600,
+      "p25": 124250,
+      "p50": 183000,
+      "p75": 227500,
+      "p90": 285200
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "27 | 101 | 4670 | 7410 | 10,100 | 13,205 | 18,450 | 107 | 95,600 | 124,250 | 183,000 | 227,500 | 285,200"
+    },
+    {
+     "analyte": "WBC (leukocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 28,
+       "max": 28
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 5540,
+     "median": 10040,
+     "hi": 18110,
+     "centiles": {
+      "p10": 5540,
+      "p25": 7260,
+      "p50": 10040,
+      "p75": 14140,
+      "p90": 18110
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "28 | 151 | 5540 | 7260 | 10,040 | 14,140 | 18,110 | 160 | 104,900 | 136,000 | 191,000 | 230,000 | 308,300"
+    },
+    {
+     "analyte": "Platelets (thrombocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 28,
+       "max": 28
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 104900,
+     "median": 191000,
+     "hi": 308300,
+     "centiles": {
+      "p10": 104900,
+      "p25": 136000,
+      "p50": 191000,
+      "p75": 230000,
+      "p90": 308300
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "28 | 151 | 5540 | 7260 | 10,040 | 14,140 | 18,110 | 160 | 104,900 | 136,000 | 191,000 | 230,000 | 308,300"
+    },
+    {
+     "analyte": "WBC (leukocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 29,
+       "max": 29
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 5610,
+     "median": 9435,
+     "hi": 15677,
+     "centiles": {
+      "p10": 5610,
+      "p25": 6989,
+      "p50": 9435,
+      "p75": 12150,
+      "p90": 15677
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "29 | 162 | 5610 | 6989 | 9435 | 12,150 | 15,677 | 168 | 110,700 | 138,750 | 186,500 | 227,250 | 282,300"
+    },
+    {
+     "analyte": "Platelets (thrombocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 29,
+       "max": 29
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 110700,
+     "median": 186500,
+     "hi": 282300,
+     "centiles": {
+      "p10": 110700,
+      "p25": 138750,
+      "p50": 186500,
+      "p75": 227250,
+      "p90": 282300
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "29 | 162 | 5610 | 6989 | 9435 | 12,150 | 15,677 | 168 | 110,700 | 138,750 | 186,500 | 227,250 | 282,300"
+    },
+    {
+     "analyte": "WBC (leukocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 30,
+       "max": 30
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 5836,
+     "median": 10560,
+     "hi": 17410,
+     "centiles": {
+      "p10": 5836,
+      "p25": 8020,
+      "p50": 10560,
+      "p75": 14680,
+      "p90": 17410
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "30 | 205 | 5836 | 8020 | 10,560 | 14,680 | 17,410 | 212 | 133,100 | 153,750 | 193,500 | 242,250 | 287,800"
+    },
+    {
+     "analyte": "Platelets (thrombocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 30,
+       "max": 30
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 133100,
+     "median": 193500,
+     "hi": 287800,
+     "centiles": {
+      "p10": 133100,
+      "p25": 153750,
+      "p50": 193500,
+      "p75": 242250,
+      "p90": 287800
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "30 | 205 | 5836 | 8020 | 10,560 | 14,680 | 17,410 | 212 | 133,100 | 153,750 | 193,500 | 242,250 | 287,800"
+    },
+    {
+     "analyte": "WBC (leukocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 31,
+       "max": 31
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 6666,
+     "median": 11520,
+     "hi": 17474,
+     "centiles": {
+      "p10": 6666,
+      "p25": 9005,
+      "p50": 11520,
+      "p75": 14360,
+      "p90": 17474
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "31 | 307 | 6666 | 9005 | 11,520 | 14,360 | 17,474 | 310 | 111,800 | 153,250 | 191,000 | 238,750 | 284,100"
+    },
+    {
+     "analyte": "Platelets (thrombocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 31,
+       "max": 31
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 111800,
+     "median": 191000,
+     "hi": 284100,
+     "centiles": {
+      "p10": 111800,
+      "p25": 153250,
+      "p50": 191000,
+      "p75": 238750,
+      "p90": 284100
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "31 | 307 | 6666 | 9005 | 11,520 | 14,360 | 17,474 | 310 | 111,800 | 153,250 | 191,000 | 238,750 | 284,100"
+    },
+    {
+     "analyte": "WBC (leukocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 32,
+       "max": 32
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 7876,
+     "median": 12840,
+     "hi": 18760,
+     "centiles": {
+      "p10": 7876,
+      "p25": 9935,
+      "p50": 12840,
+      "p75": 15775,
+      "p90": 18760
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "32 | 507 | 7876 | 9935 | 12,840 | 15,775 | 18,760 | 518 | 132,400 | 166,000 | 210,000 | 252,000 | 292,300"
+    },
+    {
+     "analyte": "Platelets (thrombocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 32,
+       "max": 32
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 132400,
+     "median": 210000,
+     "hi": 292300,
+     "centiles": {
+      "p10": 132400,
+      "p25": 166000,
+      "p50": 210000,
+      "p75": 252000,
+      "p90": 292300
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "32 | 507 | 7876 | 9935 | 12,840 | 15,775 | 18,760 | 518 | 132,400 | 166,000 | 210,000 | 252,000 | 292,300"
+    },
+    {
+     "analyte": "WBC (leukocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 33,
+       "max": 33
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 8700,
+     "median": 13510,
+     "hi": 20270,
+     "centiles": {
+      "p10": 8700,
+      "p25": 10790,
+      "p50": 13510,
+      "p75": 16805,
+      "p90": 20270
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "33 | 691 | 8700 | 10790 | 13,510 | 16,805 | 20,270 | 702 | 127,000 | 165,250 | 211,500 | 256,000 | 297,000"
+    },
+    {
+     "analyte": "Platelets (thrombocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 33,
+       "max": 33
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 127000,
+     "median": 211500,
+     "hi": 297000,
+     "centiles": {
+      "p10": 127000,
+      "p25": 165250,
+      "p50": 211500,
+      "p75": 256000,
+      "p90": 297000
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "33 | 691 | 8700 | 10790 | 13,510 | 16,805 | 20,270 | 702 | 127,000 | 165,250 | 211,500 | 256,000 | 297,000"
+    },
+    {
+     "analyte": "WBC (leukocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 34,
+       "max": 34
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 9184,
+     "median": 14420,
+     "hi": 20494,
+     "centiles": {
+      "p10": 9184,
+      "p25": 11190,
+      "p50": 14420,
+      "p75": 17390,
+      "p90": 20494
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "34 | 175 | 9184 | 11,190 | 14,420 | 17,390 | 20,494 | 178 | 122,000 | 168,500 | 212,500 | 255,000 | 304,300"
+    },
+    {
+     "analyte": "Platelets (thrombocytes)",
+     "when": {
+      "ga_wk": {
+       "min": 34,
+       "max": 34
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 122000,
+     "median": 212500,
+     "hi": 304300,
+     "centiles": {
+      "p10": 122000,
+      "p25": 168500,
+      "p50": 212500,
+      "p75": 255000,
+      "p90": 304300
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "34 | 175 | 9184 | 11,190 | 14,420 | 17,390 | 20,494 | 178 | 122,000 | 168,500 | 212,500 | 255,000 | 304,300"
+    },
+    {
+     "analyte": "Haemoglobin",
+     "when": {
+      "ga_wk": {
+       "min": 23,
+       "max": 23
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 12.8,
+     "median": 15.0,
+     "hi": 18.3,
+     "centiles": {
+      "p10": 12.8,
+      "p25": 13.9,
+      "p50": 15.0,
+      "p75": 16.8,
+      "p90": 18.3
+     },
+     "unit": "g/dL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "23 | 36 | 12.8 | 13.9 | 15.0 | 16.8 | 18.3 | 36 | 37.1 | 40.5 | 43.1 | 48.9 | 50.4"
+    },
+    {
+     "analyte": "Haematocrit",
+     "when": {
+      "ga_wk": {
+       "min": 23,
+       "max": 23
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 37.1,
+     "median": 43.1,
+     "hi": 50.4,
+     "centiles": {
+      "p10": 37.1,
+      "p25": 40.5,
+      "p50": 43.1,
+      "p75": 48.9,
+      "p90": 50.4
+     },
+     "unit": "%",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "23 | 36 | 12.8 | 13.9 | 15.0 | 16.8 | 18.3 | 36 | 37.1 | 40.5 | 43.1 | 48.9 | 50.4"
+    },
+    {
+     "analyte": "Haemoglobin",
+     "when": {
+      "ga_wk": {
+       "min": 24,
+       "max": 24
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 12.8,
+     "median": 15.2,
+     "hi": 18.4,
+     "centiles": {
+      "p10": 12.8,
+      "p25": 13.8,
+      "p50": 15.2,
+      "p75": 17.3,
+      "p90": 18.4
+     },
+     "unit": "g/dL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "24 | 85 | 12.8 | 13.8 | 15.2 | 17.3 | 18.4 | 85 | 37.4 | 39.4 | 43.0 | 48.4 | 52.2"
+    },
+    {
+     "analyte": "Haematocrit",
+     "when": {
+      "ga_wk": {
+       "min": 24,
+       "max": 24
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 37.4,
+     "median": 43.0,
+     "hi": 52.2,
+     "centiles": {
+      "p10": 37.4,
+      "p25": 39.4,
+      "p50": 43.0,
+      "p75": 48.4,
+      "p90": 52.2
+     },
+     "unit": "%",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "24 | 85 | 12.8 | 13.8 | 15.2 | 17.3 | 18.4 | 85 | 37.4 | 39.4 | 43.0 | 48.4 | 52.2"
+    },
+    {
+     "analyte": "Haemoglobin",
+     "when": {
+      "ga_wk": {
+       "min": 25,
+       "max": 25
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 12.5,
+     "median": 15.0,
+     "hi": 18.4,
+     "centiles": {
+      "p10": 12.5,
+      "p25": 13.7,
+      "p50": 15.0,
+      "p75": 16.3,
+      "p90": 18.4
+     },
+     "unit": "g/dL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "25 | 67 | 12.5 | 13.7 | 15.0 | 16.3 | 18.4 | 67 | 35.0 | 39.7 | 42.3 | 46.5 | 50.6"
+    },
+    {
+     "analyte": "Haematocrit",
+     "when": {
+      "ga_wk": {
+       "min": 25,
+       "max": 25
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 35.0,
+     "median": 42.3,
+     "hi": 50.6,
+     "centiles": {
+      "p10": 35.0,
+      "p25": 39.7,
+      "p50": 42.3,
+      "p75": 46.5,
+      "p90": 50.6
+     },
+     "unit": "%",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "25 | 67 | 12.5 | 13.7 | 15.0 | 16.3 | 18.4 | 67 | 35.0 | 39.7 | 42.3 | 46.5 | 50.6"
+    },
+    {
+     "analyte": "Haemoglobin",
+     "when": {
+      "ga_wk": {
+       "min": 26,
+       "max": 26
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 12.9,
+     "median": 16.0,
+     "hi": 19.3,
+     "centiles": {
+      "p10": 12.9,
+      "p25": 14.5,
+      "p50": 16.0,
+      "p75": 17.3,
+      "p90": 19.3
+     },
+     "unit": "g/dL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "26 | 105 | 12.9 | 14.5 | 16.0 | 17.3 | 19.3 | 105 | 37.6 | 40.9 | 44.6 | 49.2 | 54.3"
+    },
+    {
+     "analyte": "Haematocrit",
+     "when": {
+      "ga_wk": {
+       "min": 26,
+       "max": 26
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 37.6,
+     "median": 44.6,
+     "hi": 54.3,
+     "centiles": {
+      "p10": 37.6,
+      "p25": 40.9,
+      "p50": 44.6,
+      "p75": 49.2,
+      "p90": 54.3
+     },
+     "unit": "%",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "26 | 105 | 12.9 | 14.5 | 16.0 | 17.3 | 19.3 | 105 | 37.6 | 40.9 | 44.6 | 49.2 | 54.3"
+    },
+    {
+     "analyte": "Haemoglobin",
+     "when": {
+      "ga_wk": {
+       "min": 27,
+       "max": 27
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 14.4,
+     "median": 17.3,
+     "hi": 20.4,
+     "centiles": {
+      "p10": 14.4,
+      "p25": 15.8,
+      "p50": 17.3,
+      "p75": 18.8,
+      "p90": 20.4
+     },
+     "unit": "g/dL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "27 | 107 | 14.4 | 15.8 | 17.3 | 18.8 | 20.4 | 107 | 40.9 | 44.2 | 49.4 | 52.0 | 56.8"
+    },
+    {
+     "analyte": "Haematocrit",
+     "when": {
+      "ga_wk": {
+       "min": 27,
+       "max": 27
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 40.9,
+     "median": 49.4,
+     "hi": 56.8,
+     "centiles": {
+      "p10": 40.9,
+      "p25": 44.2,
+      "p50": 49.4,
+      "p75": 52.0,
+      "p90": 56.8
+     },
+     "unit": "%",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "27 | 107 | 14.4 | 15.8 | 17.3 | 18.8 | 20.4 | 107 | 40.9 | 44.2 | 49.4 | 52.0 | 56.8"
+    },
+    {
+     "analyte": "Haemoglobin",
+     "when": {
+      "ga_wk": {
+       "min": 28,
+       "max": 28
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 13.9,
+     "median": 17.5,
+     "hi": 20.5,
+     "centiles": {
+      "p10": 13.9,
+      "p25": 15.8,
+      "p50": 17.5,
+      "p75": 19.4,
+      "p90": 20.5
+     },
+     "unit": "g/dL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "28 | 160 | 13.9 | 15.8 | 17.5 | 19.4 | 20.5 | 160 | 39.5 | 44.3 | 48.9 | 53.4 | 57.3"
+    },
+    {
+     "analyte": "Haematocrit",
+     "when": {
+      "ga_wk": {
+       "min": 28,
+       "max": 28
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 39.5,
+     "median": 48.9,
+     "hi": 57.3,
+     "centiles": {
+      "p10": 39.5,
+      "p25": 44.3,
+      "p50": 48.9,
+      "p75": 53.4,
+      "p90": 57.3
+     },
+     "unit": "%",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "28 | 160 | 13.9 | 15.8 | 17.5 | 19.4 | 20.5 | 160 | 39.5 | 44.3 | 48.9 | 53.4 | 57.3"
+    },
+    {
+     "analyte": "Haemoglobin",
+     "when": {
+      "ga_wk": {
+       "min": 29,
+       "max": 29
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 14.7,
+     "median": 17.6,
+     "hi": 21.2,
+     "centiles": {
+      "p10": 14.7,
+      "p25": 16.1,
+      "p50": 17.6,
+      "p75": 19.2,
+      "p90": 21.2
+     },
+     "unit": "g/dL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "29 | 168 | 14.7 | 16.1 | 17.6 | 19.2 | 21.2 | 168 | 40.6 | 44.9 | 49.1 | 54.4 | 58.8"
+    },
+    {
+     "analyte": "Haematocrit",
+     "when": {
+      "ga_wk": {
+       "min": 29,
+       "max": 29
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 40.6,
+     "median": 49.1,
+     "hi": 58.8,
+     "centiles": {
+      "p10": 40.6,
+      "p25": 44.9,
+      "p50": 49.1,
+      "p75": 54.4,
+      "p90": 58.8
+     },
+     "unit": "%",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "29 | 168 | 14.7 | 16.1 | 17.6 | 19.2 | 21.2 | 168 | 40.6 | 44.9 | 49.1 | 54.4 | 58.8"
+    },
+    {
+     "analyte": "Haemoglobin",
+     "when": {
+      "ga_wk": {
+       "min": 30,
+       "max": 30
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 14.8,
+     "median": 17.9,
+     "hi": 20.7,
+     "centiles": {
+      "p10": 14.8,
+      "p25": 16.4,
+      "p50": 17.9,
+      "p75": 19.5,
+      "p90": 20.7
+     },
+     "unit": "g/dL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "30 | 212 | 14.8 | 16.4 | 17.9 | 19.5 | 20.7 | 212 | 41.4 | 45.6 | 49.9 | 54.0 | 57.5"
+    },
+    {
+     "analyte": "Haematocrit",
+     "when": {
+      "ga_wk": {
+       "min": 30,
+       "max": 30
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 41.4,
+     "median": 49.9,
+     "hi": 57.5,
+     "centiles": {
+      "p10": 41.4,
+      "p25": 45.6,
+      "p50": 49.9,
+      "p75": 54.0,
+      "p90": 57.5
+     },
+     "unit": "%",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "30 | 212 | 14.8 | 16.4 | 17.9 | 19.5 | 20.7 | 212 | 41.4 | 45.6 | 49.9 | 54.0 | 57.5"
+    },
+    {
+     "analyte": "Haemoglobin",
+     "when": {
+      "ga_wk": {
+       "min": 31,
+       "max": 31
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 15.4,
+     "median": 18.6,
+     "hi": 21.2,
+     "centiles": {
+      "p10": 15.4,
+      "p25": 16.8,
+      "p50": 18.6,
+      "p75": 20.1,
+      "p90": 21.2
+     },
+     "unit": "g/dL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "31 | 310 | 15.4 | 16.8 | 18.6 | 20.1 | 21.2 | 310 | 42.9 | 46.6 | 51.6 | 55.1 | 59.5"
+    },
+    {
+     "analyte": "Haematocrit",
+     "when": {
+      "ga_wk": {
+       "min": 31,
+       "max": 31
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 42.9,
+     "median": 51.6,
+     "hi": 59.5,
+     "centiles": {
+      "p10": 42.9,
+      "p25": 46.6,
+      "p50": 51.6,
+      "p75": 55.1,
+      "p90": 59.5
+     },
+     "unit": "%",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "31 | 310 | 15.4 | 16.8 | 18.6 | 20.1 | 21.2 | 310 | 42.9 | 46.6 | 51.6 | 55.1 | 59.5"
+    },
+    {
+     "analyte": "Haemoglobin",
+     "when": {
+      "ga_wk": {
+       "min": 32,
+       "max": 32
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 14.7,
+     "median": 18.2,
+     "hi": 21.3,
+     "centiles": {
+      "p10": 14.7,
+      "p25": 16.7,
+      "p50": 18.2,
+      "p75": 19.8,
+      "p90": 21.3
+     },
+     "unit": "g/dL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "32 | 518 | 14.7 | 16.7 | 18.2 | 19.8 | 21.3 | 518 | 40.8 | 45.7 | 50.0 | 54.7 | 58.2"
+    },
+    {
+     "analyte": "Haematocrit",
+     "when": {
+      "ga_wk": {
+       "min": 32,
+       "max": 32
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 40.8,
+     "median": 50.0,
+     "hi": 58.2,
+     "centiles": {
+      "p10": 40.8,
+      "p25": 45.7,
+      "p50": 50.0,
+      "p75": 54.7,
+      "p90": 58.2
+     },
+     "unit": "%",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "32 | 518 | 14.7 | 16.7 | 18.2 | 19.8 | 21.3 | 518 | 40.8 | 45.7 | 50.0 | 54.7 | 58.2"
+    },
+    {
+     "analyte": "Haemoglobin",
+     "when": {
+      "ga_wk": {
+       "min": 33,
+       "max": 33
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 15.1,
+     "median": 18.3,
+     "hi": 21.4,
+     "centiles": {
+      "p10": 15.1,
+      "p25": 16.6,
+      "p50": 18.3,
+      "p75": 19.9,
+      "p90": 21.4
+     },
+     "unit": "g/dL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "33 | 702 | 15.1 | 16.6 | 18.3 | 19.9 | 21.4 | 702 | 41.5 | 45.8 | 50.1 | 54.5 | 58.9"
+    },
+    {
+     "analyte": "Haematocrit",
+     "when": {
+      "ga_wk": {
+       "min": 33,
+       "max": 33
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 41.5,
+     "median": 50.1,
+     "hi": 58.9,
+     "centiles": {
+      "p10": 41.5,
+      "p25": 45.8,
+      "p50": 50.1,
+      "p75": 54.5,
+      "p90": 58.9
+     },
+     "unit": "%",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "33 | 702 | 15.1 | 16.6 | 18.3 | 19.9 | 21.4 | 702 | 41.5 | 45.8 | 50.1 | 54.5 | 58.9"
+    },
+    {
+     "analyte": "Haemoglobin",
+     "when": {
+      "ga_wk": {
+       "min": 34,
+       "max": 34
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 14.8,
+     "median": 18.0,
+     "hi": 21.0,
+     "centiles": {
+      "p10": 14.8,
+      "p25": 16.3,
+      "p50": 18.0,
+      "p75": 19.7,
+      "p90": 21.0
+     },
+     "unit": "g/dL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "34 | 178 | 14.8 | 16.3 | 18.0 | 19.7 | 21.0 | 178 | 40.8 | 44.7 | 49.0 | 53.9 | 57.5"
+    },
+    {
+     "analyte": "Haematocrit",
+     "when": {
+      "ga_wk": {
+       "min": 34,
+       "max": 34
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 40.8,
+     "median": 49.0,
+     "hi": 57.5,
+     "centiles": {
+      "p10": 40.8,
+      "p25": 44.7,
+      "p50": 49.0,
+      "p75": 53.9,
+      "p90": 57.5
+     },
+     "unit": "%",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "34 | 178 | 14.8 | 16.3 | 18.0 | 19.7 | 21.0 | 178 | 40.8 | 44.7 | 49.0 | 53.9 | 57.5"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 23,
+       "max": 23
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 2900,
+     "median": 7500,
+     "hi": 16700,
+     "centiles": {
+      "p10": 2900,
+      "p25": 4950,
+      "p50": 7500,
+      "p75": 14700,
+      "p90": 16700
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "23 | 11 | 2900 | 4950 | 7500 | 14,700 | 16,700 | 11 | 1000 | 2100 | 2200 | 3000 | 3500"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 24,
+       "max": 24
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 1920,
+     "median": 7500,
+     "hi": 20310,
+     "centiles": {
+      "p10": 1920,
+      "p25": 4175,
+      "p50": 7500,
+      "p75": 15950,
+      "p90": 20310
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "24 | 24 | 1920 | 4175 | 7500 | 15,950 | 20,310 | 24 | 1330 | 2125 | 2800 | 4000 | 6290"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 25,
+       "max": 25
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 1740,
+     "median": 5400,
+     "hi": 18500,
+     "centiles": {
+      "p10": 1740,
+      "p25": 2700,
+      "p50": 5400,
+      "p75": 11850,
+      "p90": 18500
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "25 | 15 | 1740 | 2700 | 5400 | 11,850 | 18,500 | 15 | 1520 | 2225 | 2700 | 3250 | 3760"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 26,
+       "max": 26
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 1220,
+     "median": 4050,
+     "hi": 15180,
+     "centiles": {
+      "p10": 1220,
+      "p25": 2550,
+      "p50": 4050,
+      "p75": 6600,
+      "p90": 15180
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "26 | 24 | 1220 | 2550 | 4050 | 6600 | 15,180 | 24 | 845 | 1538 | 2200 | 3300 | 5170"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 27,
+       "max": 27
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 3370,
+     "median": 5500,
+     "hi": 17700,
+     "centiles": {
+      "p10": 3370,
+      "p25": 4500,
+      "p50": 5500,
+      "p75": 10500,
+      "p90": 17700
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "27 | 27 | 3370 | 4500 | 5500 | 10,500 | 17,700 | 27 | 1520 | 1950 | 2700 | 4500 | 5360"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 28,
+       "max": 28
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 2095,
+     "median": 5000,
+     "hi": 11290,
+     "centiles": {
+      "p10": 2095,
+      "p25": 3900,
+      "p50": 5000,
+      "p75": 6675,
+      "p90": 11290
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "28 | 38 | 2095 | 3900 | 5000 | 6675 | 11,290 | 38 | 1440 | 2200 | 2700 | 3700 | 5160"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 29,
+       "max": 29
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 2600,
+     "median": 4375,
+     "hi": 15610,
+     "centiles": {
+      "p10": 2600,
+      "p25": 3175,
+      "p50": 4375,
+      "p75": 6725,
+      "p90": 15610
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "29 | 48 | 2600 | 3175 | 4375 | 6725 | 15,610 | 48 | 1440 | 1775 | 2500 | 3425 | 5330"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 30,
+       "max": 30
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 2500,
+     "median": 4300,
+     "hi": 12420,
+     "centiles": {
+      "p10": 2500,
+      "p25": 3200,
+      "p50": 4300,
+      "p75": 9200,
+      "p90": 12420
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "30 | 53 | 2500 | 3200 | 4300 | 9200 | 12,420 | 53 | 1720 | 2100 | 2700 | 3600 | 4260"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 31,
+       "max": 31
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 2670,
+     "median": 6050,
+     "hi": 9430,
+     "centiles": {
+      "p10": 2670,
+      "p25": 4125,
+      "p50": 6050,
+      "p75": 7550,
+      "p90": 9430
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "31 | 98 | 2670 | 4125 | 6050 | 7550 | 9430 | 97 | 1600 | 2200 | 3000 | 3800 | 4540"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 32,
+       "max": 32
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 3100,
+     "median": 6200,
+     "hi": 10880,
+     "centiles": {
+      "p10": 3100,
+      "p25": 4575,
+      "p50": 6200,
+      "p75": 8575,
+      "p90": 10880
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "32 | 114 | 3100 | 4575 | 6200 | 8575 | 10,880 | 114 | 1930 | 2600 | 3100 | 3900 | 4770"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 33,
+       "max": 33
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 4030,
+     "median": 7600,
+     "hi": 12300,
+     "centiles": {
+      "p10": 4030,
+      "p25": 5250,
+      "p50": 7600,
+      "p75": 10150,
+      "p90": 12300
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "33 | 174 | 4030 | 5250 | 7600 | 10,150 | 12,300 | 170 | 2200 | 2825 | 3500 | 4475 | 5310"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 34,
+       "max": 34
+      },
+      "dol": {
+       "min": 1,
+       "max": 1,
+       "src": "ref-cbc-extremepreterm2025",
+       "quote": "on the first day after birth (comparable to day 1 in Fig."
+      }
+     },
+     "lo": 4200,
+     "median": 7800,
+     "hi": 14800,
+     "centiles": {
+      "p10": 4200,
+      "p25": 6200,
+      "p50": 7800,
+      "p75": 11400,
+      "p90": 14800
+     },
+     "unit": "cells/uL",
+     "note": "Graz NICU cohort (preterm 23 + 0 to 34 + 0 weeks, strict exclusions), capillary and arterial samples pooled, first day after birth. ga_wk is completed weeks (source strata 23 + 0 to 23 + 6 etc.). lo = 10th, hi = 90th percentile.",
+     "src": "ref-cbc-extremepreterm2025",
+     "quote": "34 | 41 | 4200 | 6200 | 7800 | 11,400 | 14,800 | 39 | 2560 | 2950 | 3600 | 4150 | 4940"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 30,
+       "max": 30
+      },
+      "dol": {
+       "min": 3,
+       "max": 3
+      }
+     },
+     "lo": 2600,
+     "median": 5100,
+     "hi": 13400,
+     "centiles": {
+      "p10": 2600,
+      "p25": 3600,
+      "p50": 5100,
+      "p75": 8100,
+      "p90": 13400
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "30 | 37 | D3 | 6241.0 ± 4018.0 | 2600 | 3600 | 5100 | 8100 | 13400 D5 | 3342.0 ± 1545.0 | 1600 | 2100 | 2800 | 4300 | 5700"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 30,
+       "max": 30
+      },
+      "dol": {
+       "min": 5,
+       "max": 5
+      }
+     },
+     "lo": 1600,
+     "median": 2800,
+     "hi": 5700,
+     "centiles": {
+      "p10": 1600,
+      "p25": 2100,
+      "p50": 2800,
+      "p75": 4300,
+      "p90": 5700
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "30 | 37 | D3 | 6241.0 ± 4018.0 | 2600 | 3600 | 5100 | 8100 | 13400 D5 | 3342.0 ± 1545.0 | 1600 | 2100 | 2800 | 4300 | 5700"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 31,
+       "max": 31
+      },
+      "dol": {
+       "min": 3,
+       "max": 3
+      }
+     },
+     "lo": 2400,
+     "median": 3600,
+     "hi": 6100,
+     "centiles": {
+      "p10": 2400,
+      "p25": 3100,
+      "p50": 3600,
+      "p75": 4700,
+      "p90": 6100
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "31 | 31 | D3 | 4161.0 ± 2345.0 | 2400 | 3100 | 3600 | 4700 | 6100 D5 | 2649.0 ± 939.0 | 1890 | 2100 | 2400 | 3100 | 3200"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 31,
+       "max": 31
+      },
+      "dol": {
+       "min": 5,
+       "max": 5
+      }
+     },
+     "lo": 1890,
+     "median": 2400,
+     "hi": 3200,
+     "centiles": {
+      "p10": 1890,
+      "p25": 2100,
+      "p50": 2400,
+      "p75": 3100,
+      "p90": 3200
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "31 | 31 | D3 | 4161.0 ± 2345.0 | 2400 | 3100 | 3600 | 4700 | 6100 D5 | 2649.0 ± 939.0 | 1890 | 2100 | 2400 | 3100 | 3200"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 32,
+       "max": 32
+      },
+      "dol": {
+       "min": 3,
+       "max": 3
+      }
+     },
+     "lo": 3800,
+     "median": 5400,
+     "hi": 8800,
+     "centiles": {
+      "p10": 3800,
+      "p25": 4300,
+      "p50": 5400,
+      "p75": 6950,
+      "p90": 8800
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "32 | 32 | D3 | 6372.0 ± 3995.0 | 3800 | 4300 | 5400 | 6950 | 8800 D5 | 3371.0 ± 1676.0 | 1400 | 2400 | 3200 | 3600 | 5400"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 32,
+       "max": 32
+      },
+      "dol": {
+       "min": 5,
+       "max": 5
+      }
+     },
+     "lo": 1400,
+     "median": 3200,
+     "hi": 5400,
+     "centiles": {
+      "p10": 1400,
+      "p25": 2400,
+      "p50": 3200,
+      "p75": 3600,
+      "p90": 5400
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "32 | 32 | D3 | 6372.0 ± 3995.0 | 3800 | 4300 | 5400 | 6950 | 8800 D5 | 3371.0 ± 1676.0 | 1400 | 2400 | 3200 | 3600 | 5400"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 33,
+       "max": 33
+      },
+      "dol": {
+       "min": 3,
+       "max": 3
+      }
+     },
+     "lo": 2000,
+     "median": 4300,
+     "hi": 6700,
+     "centiles": {
+      "p10": 2000,
+      "p25": 3200,
+      "p50": 4300,
+      "p75": 5600,
+      "p90": 6700
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "33 | 31 | D3 | 4550.0 ± 2256.0 | 2000 | 3200 | 4300 | 5600 | 6700 D5 | 2829.0 ± 1393.0 | 1300 | 1800 | 2760 | 3200 | 4100"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 33,
+       "max": 33
+      },
+      "dol": {
+       "min": 5,
+       "max": 5
+      }
+     },
+     "lo": 1300,
+     "median": 2760,
+     "hi": 4100,
+     "centiles": {
+      "p10": 1300,
+      "p25": 1800,
+      "p50": 2760,
+      "p75": 3200,
+      "p90": 4100
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "33 | 31 | D3 | 4550.0 ± 2256.0 | 2000 | 3200 | 4300 | 5600 | 6700 D5 | 2829.0 ± 1393.0 | 1300 | 1800 | 2760 | 3200 | 4100"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 34,
+       "max": 34
+      },
+      "dol": {
+       "min": 3,
+       "max": 3
+      }
+     },
+     "lo": 3400,
+     "median": 6250,
+     "hi": 8850,
+     "centiles": {
+      "p10": 3400,
+      "p25": 4600,
+      "p50": 6250,
+      "p75": 8400,
+      "p90": 8850
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "34 | 30 | D3 | 6857.0 ± 4650.0 | 3400 | 4600 | 6250 | 8400 | 8850 D5 | 3807.0 ± 1613.0 | 2100 | 2700 | 3300 | 5300 | 5850"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 34,
+       "max": 34
+      },
+      "dol": {
+       "min": 5,
+       "max": 5
+      }
+     },
+     "lo": 2100,
+     "median": 3300,
+     "hi": 5850,
+     "centiles": {
+      "p10": 2100,
+      "p25": 2700,
+      "p50": 3300,
+      "p75": 5300,
+      "p90": 5850
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "34 | 30 | D3 | 6857.0 ± 4650.0 | 3400 | 4600 | 6250 | 8400 | 8850 D5 | 3807.0 ± 1613.0 | 2100 | 2700 | 3300 | 5300 | 5850"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 35,
+       "max": 35
+      },
+      "dol": {
+       "min": 3,
+       "max": 3
+      }
+     },
+     "lo": 1900,
+     "median": 5600,
+     "hi": 10100,
+     "centiles": {
+      "p10": 1900,
+      "p25": 3500,
+      "p50": 5600,
+      "p75": 7200,
+      "p90": 10100
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "35 | 39 | D3 | 5911.0 ± 3639.0 | 1900 | 3500 | 5600 | 7200 | 10100 D5 | 3777.0 ± 2046.0 | 1780 | 2300 | 3200 | 4500 | 7200"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 35,
+       "max": 35
+      },
+      "dol": {
+       "min": 5,
+       "max": 5
+      }
+     },
+     "lo": 1780,
+     "median": 3200,
+     "hi": 7200,
+     "centiles": {
+      "p10": 1780,
+      "p25": 2300,
+      "p50": 3200,
+      "p75": 4500,
+      "p90": 7200
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "35 | 39 | D3 | 5911.0 ± 3639.0 | 1900 | 3500 | 5600 | 7200 | 10100 D5 | 3777.0 ± 2046.0 | 1780 | 2300 | 3200 | 4500 | 7200"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 36,
+       "max": 36
+      },
+      "dol": {
+       "min": 3,
+       "max": 3
+      }
+     },
+     "lo": 3200,
+     "median": 6400,
+     "hi": 9450,
+     "centiles": {
+      "p10": 3200,
+      "p25": 4600,
+      "p50": 6400,
+      "p75": 7600,
+      "p90": 9450
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "36 | 50 | D3 | 6390.0 ± 2641.0 | 3200 | 4600 | 6400 | 7600 | 9450 D5 | 4054.0 ± 1879.0 | 2350 | 2700 | 3475 | 5000 | 6750"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 36,
+       "max": 36
+      },
+      "dol": {
+       "min": 5,
+       "max": 5
+      }
+     },
+     "lo": 2350,
+     "median": 3475,
+     "hi": 6750,
+     "centiles": {
+      "p10": 2350,
+      "p25": 2700,
+      "p50": 3475,
+      "p75": 5000,
+      "p90": 6750
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "36 | 50 | D3 | 6390.0 ± 2641.0 | 3200 | 4600 | 6400 | 7600 | 9450 D5 | 4054.0 ± 1879.0 | 2350 | 2700 | 3475 | 5000 | 6750"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 37,
+       "max": 37
+      },
+      "dol": {
+       "min": 3,
+       "max": 3
+      }
+     },
+     "lo": 3600,
+     "median": 6700,
+     "hi": 11100,
+     "centiles": {
+      "p10": 3600,
+      "p25": 4550,
+      "p50": 6700,
+      "p75": 9150,
+      "p90": 11100
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "37 | 44 | D3 | 7116.0 ± 3200.0 | 3600 | 4550 | 6700 | 9150 | 11100 D5 | 4620.0 ± 2317.0 | 2300 | 2950 | 3950 | 6000 | 8200"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 37,
+       "max": 37
+      },
+      "dol": {
+       "min": 5,
+       "max": 5
+      }
+     },
+     "lo": 2300,
+     "median": 3950,
+     "hi": 8200,
+     "centiles": {
+      "p10": 2300,
+      "p25": 2950,
+      "p50": 3950,
+      "p75": 6000,
+      "p90": 8200
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "37 | 44 | D3 | 7116.0 ± 3200.0 | 3600 | 4550 | 6700 | 9150 | 11100 D5 | 4620.0 ± 2317.0 | 2300 | 2950 | 3950 | 6000 | 8200"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 38,
+       "max": 38
+      },
+      "dol": {
+       "min": 3,
+       "max": 3
+      }
+     },
+     "lo": 3900,
+     "median": 7600,
+     "hi": 11500,
+     "centiles": {
+      "p10": 3900,
+      "p25": 5600,
+      "p50": 7600,
+      "p75": 9100,
+      "p90": 11500
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "38 | 37 | D3 | 7863.0 ± 3257.0 | 3900 | 5600 | 7600 | 9100 | 11500 D5 | 4853.0 ± 2140.0 | 2300 | 3400 | 4312 | 6300 | 7800"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 38,
+       "max": 38
+      },
+      "dol": {
+       "min": 5,
+       "max": 5
+      }
+     },
+     "lo": 2300,
+     "median": 4312,
+     "hi": 7800,
+     "centiles": {
+      "p10": 2300,
+      "p25": 3400,
+      "p50": 4312,
+      "p75": 6300,
+      "p90": 7800
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "38 | 37 | D3 | 7863.0 ± 3257.0 | 3900 | 5600 | 7600 | 9100 | 11500 D5 | 4853.0 ± 2140.0 | 2300 | 3400 | 4312 | 6300 | 7800"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 39,
+       "max": 39
+      },
+      "dol": {
+       "min": 3,
+       "max": 3
+      }
+     },
+     "lo": 3950,
+     "median": 6400,
+     "hi": 10350,
+     "centiles": {
+      "p10": 3950,
+      "p25": 5600,
+      "p50": 6400,
+      "p75": 7000,
+      "p90": 10350
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "39 | 30 | D3 | 6802.0 ± 3122.0 | 3950 | 5600 | 6400 | 7000 | 10350 D5 | 4357.0 ± 2026.0 | 2600 | 3200 | 3800 | 4560 | 8450"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 39,
+       "max": 39
+      },
+      "dol": {
+       "min": 5,
+       "max": 5
+      }
+     },
+     "lo": 2600,
+     "median": 3800,
+     "hi": 8450,
+     "centiles": {
+      "p10": 2600,
+      "p25": 3200,
+      "p50": 3800,
+      "p75": 4560,
+      "p90": 8450
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "39 | 30 | D3 | 6802.0 ± 3122.0 | 3950 | 5600 | 6400 | 7000 | 10350 D5 | 4357.0 ± 2026.0 | 2600 | 3200 | 3800 | 4560 | 8450"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 40,
+       "max": 40
+      },
+      "dol": {
+       "min": 3,
+       "max": 3
+      }
+     },
+     "lo": 3900,
+     "median": 6000,
+     "hi": 13900,
+     "centiles": {
+      "p10": 3900,
+      "p25": 5600,
+      "p50": 6000,
+      "p75": 7700,
+      "p90": 13900
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "40 | 29 | D3 | 7182.0 ± 3574.0 | 3900 | 5600 | 6000 | 7700 | 13900 D5 | 4312.0 ± 2222.0 | 2360 | 2700 | 3600 | 5500 | 8400"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 40,
+       "max": 40
+      },
+      "dol": {
+       "min": 5,
+       "max": 5
+      }
+     },
+     "lo": 2360,
+     "median": 3600,
+     "hi": 8400,
+     "centiles": {
+      "p10": 2360,
+      "p25": 2700,
+      "p50": 3600,
+      "p75": 5500,
+      "p90": 8400
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "40 | 29 | D3 | 7182.0 ± 3574.0 | 3900 | 5600 | 6000 | 7700 | 13900 D5 | 4312.0 ± 2222.0 | 2360 | 2700 | 3600 | 5500 | 8400"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 41,
+       "max": 41
+      },
+      "dol": {
+       "min": 3,
+       "max": 3
+      }
+     },
+     "lo": 3685,
+     "median": 5030,
+     "hi": 8500,
+     "centiles": {
+      "p10": 3685,
+      "p25": 4390,
+      "p50": 5030,
+      "p75": 6300,
+      "p90": 8500
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "41 | 30 | D3 | 5562.0 ± 2368.0 | 3685 | 4390 | 5030 | 6300 | 8500 D5 | 3567.0 ± 1205.0 | 2530 | 2750 | 3200 | 3700 | 5800"
+    },
+    {
+     "analyte": "Neutrophils (absolute)",
+     "when": {
+      "ga_wk": {
+       "min": 41,
+       "max": 41
+      },
+      "dol": {
+       "min": 5,
+       "max": 5
+      }
+     },
+     "lo": 2530,
+     "median": 3200,
+     "hi": 5800,
+     "centiles": {
+      "p10": 2530,
+      "p25": 2750,
+      "p50": 3200,
+      "p75": 3700,
+      "p90": 5800
+     },
+     "unit": "cells/uL",
+     "note": "Healthy Indian newborns 30 to 41 weeks, venous sample on the third or fifth postnatal day (Sysmex XN-1000). ga_wk is gestation week at birth as tabulated. lo = 10th, hi = 90th percentile. CC BY-NC source.",
+     "src": "ref-neut-india2019",
+     "quote": "41 | 30 | D3 | 5562.0 ± 2368.0 | 3685 | 4390 | 5030 | 6300 | 8500 D5 | 3567.0 ± 1205.0 | 2530 | 2750 | 3200 | 3700 | 5800"
+    }
+   ]
+  },
+  {
+   "id": "chemistry",
+   "title": "Neonatal chemistry: glucose operational thresholds (BAPM 2024) and term day 1 to 3 serum calcium, magnesium, sodium, potassium",
+   "rows": [
+    {
+     "analyte": "Blood glucose operational threshold (any baby)",
+     "when": {},
+     "lo": 1.0,
+     "unit": "mmol/L",
+     "note": "BAPM 2024 framework scope: full-term infant, birth to 72 hours. Operational threshold for intervention, not a normal range: act if BG is below lo. Any baby, a single value below 1.0.",
+     "src": "ref-bapm-hypogly2024",
+     "quote": "6. An operational threshold approach should be used to guide interventions intended to raise BG: • A value <1.0mmol/L at any time • A single value <2.5mmol/L in a neonate with abnormal clinical signs • More than two measurements <2.0mmol/L in a baby with a risk factor for impaired metabolic adaptation and hypoglycaemia but without abnormal clinical signs"
+    },
+    {
+     "analyte": "Blood glucose operational threshold (abnormal clinical signs)",
+     "when": {},
+     "lo": 2.5,
+     "unit": "mmol/L",
+     "note": "BAPM 2024 framework scope: full-term infant, birth to 72 hours. Operational threshold for intervention, not a normal range: act if BG is below lo. Single value below 2.5 with abnormal clinical signs.",
+     "src": "ref-bapm-hypogly2024",
+     "quote": "6. An operational threshold approach should be used to guide interventions intended to raise BG: • A value <1.0mmol/L at any time • A single value <2.5mmol/L in a neonate with abnormal clinical signs • More than two measurements <2.0mmol/L in a baby with a risk factor for impaired metabolic adaptation and hypoglycaemia but without abnormal clinical signs"
+    },
+    {
+     "analyte": "Blood glucose operational threshold (risk factor, no abnormal signs)",
+     "when": {},
+     "lo": 2.0,
+     "count_gt": 2,
+     "unit": "mmol/L",
+     "note": "BAPM 2024 framework scope: full-term infant, birth to 72 hours. Operational threshold for intervention, not a normal range: act if BG is below lo. Practice Point 6 wording: more than two measurements below 2.0. The framework's evidence section words the same threshold as '<2.0mmol/L and remaining <2.0mmol/L at next measurement'; see ambiguity.",
+     "src": "ref-bapm-hypogly2024",
+     "quote": "6. An operational threshold approach should be used to guide interventions intended to raise BG: • A value <1.0mmol/L at any time • A single value <2.5mmol/L in a neonate with abnormal clinical signs • More than two measurements <2.0mmol/L in a baby with a risk factor for impaired metabolic adaptation and hypoglycaemia but without abnormal clinical signs"
+    },
+    {
+     "analyte": "Blood glucose target (suspected or confirmed hyperinsulinism)",
+     "when": {
+      "hours": {
+       "max": 48
+      }
+     },
+     "lo": 3.0,
+     "unit": "mmol/L",
+     "note": "BAPM 2024 Practice Point 25: maintain BG above lo. The evidence section states '3.5mmol/L after 72 hours of age' for the later threshold; see ambiguity.",
+     "src": "ref-bapm-hypogly2024",
+     "quote": "aim to maintain BG concentration >3.0mmol/L in the first 48 hours and >3.5mmol/L after 48 hours from birth."
+    },
+    {
+     "analyte": "Blood glucose target (suspected or confirmed hyperinsulinism)",
+     "when": {
+      "hours": {
+       "gt": 48
+      }
+     },
+     "lo": 3.5,
+     "unit": "mmol/L",
+     "note": "BAPM 2024 Practice Point 25: maintain BG above lo.",
+     "src": "ref-bapm-hypogly2024",
+     "quote": "aim to maintain BG concentration >3.0mmol/L in the first 48 hours and >3.5mmol/L after 48 hours from birth."
+    },
+    {
+     "analyte": "Blood glucose operational threshold (moderate-severe HIE)",
+     "when": {},
+     "lo": 2.5,
+     "unit": "mmol/L",
+     "note": "BAPM 2024: at least this value in moderate-severe HIE.",
+     "src": "ref-bapm-hypogly2024",
+     "quote": "The operational threshold should be increased to at least 2.5mmol/L in infants with moderate-severe hypoxic-ischaemic encephalopathy"
+    },
+    {
+     "analyte": "Calcium (total, serum)",
+     "when": {
+      "dol": {
+       "min": 1,
+       "max": 3
+      }
+     },
+     "lo": 1.53,
+     "hi": 2.15,
+     "unit": "mmol/L",
+     "note": "Healthy term neonates, birth to day 3, northeast China, VITROS 5600 serum. lo/hi = reference limits (90% CI in quote). Local population and analyser; verify against own laboratory.",
+     "src": "ref-biochem-jilin2021",
+     "quote": "Ca, mmol/L | 1–3 d | 1.53 (1.42–1.61) | 2.15 (2.12–2.16)"
+    },
+    {
+     "analyte": "Magnesium (serum)",
+     "when": {
+      "dol": {
+       "min": 1,
+       "max": 3
+      }
+     },
+     "lo": 0.68,
+     "hi": 0.94,
+     "unit": "mmol/L",
+     "note": "Healthy term neonates, birth to day 3, northeast China, VITROS 5600 serum. lo/hi = reference limits (90% CI in quote). Local population and analyser; verify against own laboratory.",
+     "src": "ref-biochem-jilin2021",
+     "quote": "Mg, mmol/L | 1–3 d | 0.68 (0.65–0.70) | 0.94 (0.91–0.96)"
+    },
+    {
+     "analyte": "Sodium (serum)",
+     "when": {
+      "dol": {
+       "min": 1,
+       "max": 3
+      }
+     },
+     "lo": 131,
+     "hi": 140,
+     "unit": "mmol/L",
+     "note": "Healthy term neonates, birth to day 3, northeast China, VITROS 5600 serum. lo/hi = reference limits (90% CI in quote). Local population and analyser; verify against own laboratory.",
+     "src": "ref-biochem-jilin2021",
+     "quote": "Na, mmol/L | 1–3 d | 131 (130–131) | 140 (140–141)"
+    },
+    {
+     "analyte": "Potassium (serum)",
+     "when": {
+      "dol": {
+       "min": 1,
+       "max": 3
+      }
+     },
+     "lo": 3.3,
+     "hi": 5.4,
+     "unit": "mmol/L",
+     "note": "Healthy term neonates, birth to day 3, northeast China, VITROS 5600 serum. lo/hi = reference limits (90% CI in quote). Local population and analyser; verify against own laboratory.",
+     "src": "ref-biochem-jilin2021",
+     "quote": "K, mmol/L | 1–3 d | 3.3 (3.2–3.4) | 5.4 (5.1–5.6)"
+    }
+   ]
+  }
+ ]
+}

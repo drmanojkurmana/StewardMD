@@ -3,7 +3,12 @@
   "unit": "peds",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Red reflex and the white pupil",
     "hi": "रेड रिफ़्लेक्स और सफ़ेद पुतली"
@@ -13,22 +18,21 @@
     "hi": "कम रोशनी वाले कमरे में ऑफ़्थैल्मोस्कोप से दोनों पुतलियाँ लाल चमकती हैं। सफ़ेद पुतली, यानी [[leukocoria]], इमरजेंसी है। सबसे पहले [[retinoblastoma]] के बारे में सोचें और तुरंत रेफ़र करें।"
   },
   "see": {
-    "diagram": "diagrams/red-reflex.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 574,
     "alt": {
-      "en": "Diagram: a hand-held ophthalmoscope on the left shines a wide beam at two pairs of eyes. In the top pair, both pupils glow the same bright red. In the bottom pair, the left-hand pupil glows white and the right-hand one glows red.",
-      "hi": "चित्र: बाईं ओर हाथ में पकड़ा ऑफ़्थैल्मोस्कोप आँखों के दो जोड़ों पर चौड़ी रोशनी डालता है। ऊपर के जोड़े में दोनों पुतलियाँ एक जैसी चमकीली लाल हैं। नीचे के जोड़े में बाईं पुतली सफ़ेद और दाईं लाल चमकती है।"
+      "en": "An ophthalmoscope on the left shines light on two pairs of eyes. The top pupils glow bright red. Below, the left pupil is cloudy white while the right is red.",
+      "hi": "बाईं ओर का ऑफ़्थैल्मोस्कोप आँखों के दो जोड़ों पर रोशनी डालता है। ऊपर दोनों पुतलियाँ चमकीली लाल हैं। नीचे बाईं पुतली धुंधली सफ़ेद है जबकि दाहिनी लाल है।"
     },
     "caption": {
       "en": "Top: normal, equal red reflexes. Bottom: one white pupil, which needs urgent referral.",
       "hi": "ऊपर: सामान्य, बराबर रेड रिफ़्लेक्स। नीचे: एक सफ़ेद पुतली, जिसे तुरंत रेफ़र करना है।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.127,
-        "y": 0.46,
+        "x": 0.15,
+        "y": 0.42,
         "label": {
           "en": "Ophthalmoscope",
           "hi": "ऑफ़्थैल्मोस्कोप"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.583,
-        "y": 0.287,
+        "x": 0.67,
+        "y": 0.28,
         "label": {
           "en": "Normal red reflexes",
           "hi": "सामान्य रेड रिफ़्लेक्स"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.583,
-        "y": 0.713,
+        "x": 0.505,
+        "y": 0.75,
         "label": {
           "en": "White pupil",
           "hi": "सफ़ेद पुतली"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.792,
-        "y": 0.713,
+        "x": 0.838,
+        "y": 0.75,
         "label": {
           "en": "Compare the other eye",
           "hi": "दूसरी आँख से मिलाएँ"
@@ -75,7 +79,9 @@
         }
       }
     ],
+    "img": "learn/media/real/red-reflex.webp",
     "more": [
+      "red-reflex",
       "cataract-mature"
     ]
   },

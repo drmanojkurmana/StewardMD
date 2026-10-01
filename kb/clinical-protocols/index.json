@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "version": "01580d845968",
- "count": 248,
+ "version": "35b08e7cee34",
+ "count": 253,
  "subjects": [
   {
    "key": "emergency",
@@ -76,7 +76,7 @@
   {
    "key": "paediatrics",
    "label": "Paediatrics and Neonatology",
-   "count": 21
+   "count": 26
   },
   {
    "key": "surgery-trauma",
@@ -103,7 +103,7 @@
   {
    "key": "international",
    "label": "International",
-   "count": 215
+   "count": 220
   },
   {
    "key": "india",
@@ -1962,6 +1962,36 @@
    "status": "ai_drafted"
   },
   {
+   "id": "neonatal-chest-drain",
+   "title": "Chest drain and needle aspiration in neonates",
+   "subject": "paediatrics",
+   "population": "Neonates",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "chest tube",
+    "intercostal drain",
+    "ICD",
+    "tube thoracostomy",
+    "needle thoracocentesis",
+    "needle aspiration pneumothorax",
+    "pigtail catheter",
+    "neonatal pneumothorax",
+    "tension pneumothorax newborn",
+    "pleural effusion drainage",
+    "chylothorax drain"
+   ],
+   "summary": "Drain a neonatal pneumothorax or effusion causing distress, low oxygen saturation or instability. Aspirate air through the 2nd or 3rd intercostal space in the midclavicular line, or place a 10 or 12 Fr drain in the 4th or 5th space between the anterior and midaxillary lines, inserted 2 to 3 cm in small preterm and 3 to 4 cm in term babies. Confirm on AP and lateral X-ray.",
+   "sources": [
+    "Int J Pediatr (Zubi ZBH et al.) 2023",
+    "Case Rep Pediatr (Grandmougin D et al.) 2025",
+    "Front Pediatr (Liu J et al.) 2021",
+    "Turk J Med Sci (Huseynov M, Hakalmaz AE) 2021",
+    "Cureus (Jilani TS et al.) 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "chikungunya",
    "title": "Chikungunya: acute, subacute and chronic (India, NCVBDC)",
    "subject": "infectious-disease",
@@ -2952,6 +2982,31 @@
     "European Association of Urology (EAU) 2025",
     "European Association of Urology (EAU) 2025",
     "European Association of Urology (EAU) 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "neonatal-exchange-transfusion",
+   "title": "Exchange transfusion in neonates (double-volume)",
+   "subject": "paediatrics",
+   "population": "Neonates",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "DVET",
+    "double volume exchange transfusion",
+    "double-volume exchange",
+    "exchange transfusion",
+    "blood exchange newborn",
+    "hyperbilirubinaemia exchange",
+    "isoimmune haemolysis exchange",
+    "Rh disease exchange"
+   ],
+   "summary": "A double-volume exchange replaces 2 x the blood volume (100 mL/kg preterm, 85 mL/kg term), about 86% of the baby's blood. Use irradiated, cross-matched reconstituted blood with haematocrit 50 to 60% through an 8 Fr umbilical venous catheter, in aliquots of at most 5 mL/kg at no more than 2 mL/kg/minute over 1 to 2 hours, with phototherapy before, during and after.",
+   "sources": [
+    "Turkish Neonatal Society (Coban A et al.) 2018",
+    "J Med Biochem (Xiong Z et al.) 2023",
+    "Int J Pediatr (Zubi ZBH et al.) 2023"
    ],
    "status": "ai_drafted"
   },
@@ -4129,6 +4184,33 @@
    "status": "ai_drafted"
   },
   {
+   "id": "neonatal-intraosseous-access",
+   "title": "Intraosseous access in neonates",
+   "subject": "paediatrics",
+   "population": "Neonates",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "IO access",
+    "intraosseous needle",
+    "intraosseous infusion",
+    "IO line",
+    "neonatal IO",
+    "tibial IO",
+    "emergency vascular access newborn",
+    "EZ-IO neonate"
+   ],
+   "summary": "Emergency route for drugs and fluids when umbilical venous or peripheral access fails. Use the flat anteromedial proximal tibia 1 to 2 cm below and 1 cm medial to the tibial tuberosity, stop at the loss of resistance, watch the limb for extravasation and remove the needle as soon as other access is secured.",
+   "sources": [
+    "European Resuscitation Council 2021",
+    "Int J Pediatr (Zubi ZBH et al.) 2023",
+    "Front Pediatr (Schwindt E et al.) 2022",
+    "Eur J Pediatr (Schwindt EM et al.) 2023",
+    "J Perinatol (Sengasai C et al.) 2025"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "iron-deficiency-anaemia",
    "title": "Iron deficiency anaemia (adult)",
    "subject": "haematology-oncology",
@@ -4289,6 +4371,31 @@
    "sources": [
     "ESC 2024",
     "ACC / AHA and partner societies 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "neonatal-lumbar-puncture",
+   "title": "Lumbar puncture in neonates",
+   "subject": "paediatrics",
+   "population": "Neonates",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "LP",
+    "neonatal LP",
+    "spinal tap",
+    "CSF sampling",
+    "lumbar tap",
+    "meningitis workup newborn",
+    "CSF analysis neonate",
+    "NeoCLEAR"
+   ],
+   "summary": "Sample CSF for suspected neonatal meningitis once the baby is stable. Sit the baby or lie it on its side with the spine flexed, enter below L2 to L3 (L3 to L4 or L4 to L5), use a 22 G or 25 G needle, advance in small steps checking for CSF, and fill 4 tubes with about 1 to 2 mL each.",
+   "sources": [
+    "Int J Pediatr (Zubi ZBH et al.) 2023",
+    "J Educ Teach Emerg Med (Lei C et al.) 2025",
+    "Eur J Pediatr (Kuitunen I, Renko M) 2023"
    ],
    "status": "ai_drafted"
   },
@@ -5163,6 +5270,33 @@
     "NICE 2017",
     "International Parkinson and Movement Disorder Society 2018",
     "International Parkinson and Movement Disorder Society 2015"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "neonatal-pericardiocentesis",
+   "title": "Pericardiocentesis in neonates (tamponade, pneumopericardium)",
+   "subject": "paediatrics",
+   "population": "Neonates",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [
+    "pericardial tap",
+    "cardiac tamponade newborn",
+    "pericardial effusion neonate",
+    "pneumopericardium",
+    "PICC tamponade",
+    "UVC tamponade",
+    "subxiphoid pericardiocentesis",
+    "central line pericardial effusion"
+   ],
+   "summary": "Suspect tamponade in any neonate with a UVC or PICC who suddenly deteriorates. Confirm with bedside echo, remove or reposition the line, and if the heart is compressed drain by ultrasound-guided subxiphoid puncture with a 22G cannula aimed at the left shoulder, aspirating as you advance.",
+   "sources": [
+    "Medicine (Baltimore) (Liu Y et al.) 2023",
+    "Cureus (Gialamprinou D et al.) 2025",
+    "POCUS J (Guzman PJC et al.) 2025",
+    "Sisli Etfal Hastan Tip Bul (Akboga E et al.) 2026",
+    "Case Rep Pediatr (Grandmougin D et al.) 2025"
    ],
    "status": "ai_drafted"
   },

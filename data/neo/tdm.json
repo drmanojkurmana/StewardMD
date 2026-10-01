@@ -1,0 +1,263 @@
+{
+  "schema": 1,
+  "kind": "neo-tdm",
+  "title": "Neonatal therapeutic drug monitoring: vancomycin AUC and aminoglycoside levels",
+  "compiled": "2026-09-30",
+  "review": { "status": "ai_drafted", "by": null, "date": null },
+  "_comment": "Payload: vancomycin { auc_target, neonatal[], equations[], sampling[], notes[] }; aminoglycoside_ei { hartford { dose_interval, level_window, nomogram_lines_missing }, neonatal_gentamicin { nice[], fda[] } }. Every number is in its quote. Equation 'form' strings are the engine reading of the quoted text and must be confirmed by the reviewer (see each equation's 'caveat').",
+  "sources": {
+    "tdm-vanco-2020": {
+      "title": "Therapeutic monitoring of vancomycin for serious methicillin-resistant Staphylococcus aureus infections: A revised consensus guideline and review by the American Society of Health-System Pharmacists, the Infectious Diseases Society of America, the Pediatric Infectious Diseases Society, and the Society of Infectious Diseases Pharmacists (Rybak et al., Am J Health-Syst Pharm 2020; doi 10.1093/ajhp/zxaa036)",
+      "publisher": "ASHP / IDSA / PIDS / SIDP (copy hosted by ASHP)",
+      "url": "https://www.ashp.org/-/media/assets/policy-guidelines/docs/therapeutic-guidelines/therapeutic-guidelines-monitoring-vancomycin-ASHP-IDSA-PIDS.pdf",
+      "licence": "Copyright American Society of Health-System Pharmacists 2020, all rights reserved (free public PDF on ashp.org; reuse of text needs permission via journals.permissions@oup.com). Facts and thresholds cited with attribution.",
+      "accessed": "2026-09-30"
+    },
+    "tdm-vanco-pk-eq": {
+      "title": "Evaluation of Real-World Vancomycin Dosing and Attainment of Therapeutic Drug Monitoring Targets (Bradley and Ng, Pharmacy (Basel) 2023; 11(3):95), Table 1 First-Order Pharmacokinetic Equations Used",
+      "publisher": "MDPI (via Europe PMC, PMC10302851)",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10302851/fullTextXML",
+      "licence": "CC BY 4.0",
+      "accessed": "2026-09-30"
+    },
+    "tdm-vanco-worksheet": {
+      "title": "Vancomycin area under the curve/minimum inhibitory concentration and trough level concordance: evaluation on an urban health unit (Ther Adv Infect Dis 2022), Appendix 1 Vancomycin AUC24h/MIC calculation",
+      "publisher": "SAGE (via Europe PMC, PMC9716452)",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9716452/fullTextXML",
+      "licence": "CC BY-NC 4.0",
+      "accessed": "2026-09-30"
+    },
+    "tdm-nicolau1995": {
+      "title": "Experience with a once-daily aminoglycoside program administered to 2,184 adult patients (Nicolau et al., Antimicrob Agents Chemother 1995; 39(3):650-655), abstract",
+      "publisher": "American Society for Microbiology (PMC162599)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC162599/",
+      "licence": "Copyright American Society for Microbiology; free full text in PMC (scanned), not openly licensed. Only the abstract text was retrievable; facts cited with attribution.",
+      "accessed": "2026-09-30"
+    },
+    "tdm-gent-tdm-audit": {
+      "title": "Appropriateness of gentamicin therapeutic drug monitoring at a Middle Eastern tertiary hospital setting: a retrospective study (J Pharm Policy Pract 2024)",
+      "publisher": "Taylor and Francis (via Europe PMC, PMC11249166)",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11249166/fullTextXML",
+      "licence": "CC BY-NC 4.0",
+      "accessed": "2026-09-30"
+    },
+    "tdm-nice-ng195": {
+      "title": "Neonatal infection: antibiotics for prevention and treatment (NICE guideline NG195), section 1.35 to 1.36 Therapeutic drug monitoring for babies receiving gentamicin",
+      "publisher": "National Institute for Health and Care Excellence",
+      "url": "https://www.nice.org.uk/guidance/ng195/chapter/Therapeutic-drug-monitoring-for-babies-receiving-gentamicin",
+      "licence": "NICE copyright. Reuse in a UK setting only is covered by the NICE UK Open Content Licence; use internationally (except personal research and study) is subject to a fee and licensing agreement (see fl-nice-reuse snapshot in fluids.json). Permission needed for this app outside the UK.",
+      "accessed": "2026-09-30"
+    },
+    "tdm-fda-gent-peds": {
+      "title": "Gentamicin Injection, USP (Pediatric) 10 mg/mL, Fresenius Kabi USA, prescribing information (openFDA set_id 63413469-c676-48a3-a945-7d2489b535ef, version 3, effective 20241014)",
+      "publisher": "US FDA / DailyMed",
+      "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=63413469-c676-48a3-a945-7d2489b535ef",
+      "licence": "Public domain (US Government work, FDA-approved labeling)",
+      "accessed": "2026-09-30"
+    }
+  },
+  "vancomycin": {
+    "auc_target": {
+      "lo": 400, "hi": 600, "unit": "mg·h/L", "assumes_mic_mg_l": 1,
+      "label": "Daily AUC target for serious MRSA infection (adults and paediatrics)",
+      "src": "tdm-vanco-2020",
+      "quote": "Daily AUC values (assuming a MICBMD of 1 mg/L) should be main- tained between 400 and 600 mg·h/L to maximize efficacy and minimize the likelihood of AKI."
+    },
+    "neonatal": [
+      {
+        "id": "neo-auc-target",
+        "label": "Neonates and infants up to 3 months: dose range to reach AUC 400 mg·h/L",
+        "auc_target": 400, "unit": "mg·h/L", "assumes_mic_mg_l": 1, "age_max_months": 3,
+        "dose": { "lo": 10, "hi": 20, "unit": "mg/kg" }, "every_h": { "lo": 8, "hi": 48 },
+        "src": "tdm-vanco-2020",
+        "quote": "Doses recommended to achieve an AUC of 400 mg·h/L (assuming a MIC of 1 mg/L) in neonates and infants up to 3 months old range from 10 to 20 mg/kg every 8 to 48 hours, depending on postmenstrual age, weight, and SCr (A-II)."
+      },
+      {
+        "id": "neo-trough-surrogate-frymoyer",
+        "label": "Trough 7 to 11 mg/L predicted AUC24 above 400 in at least 90% of neonates (Frymoyer model)",
+        "trough": { "lo": 7, "hi": 11, "unit": "mg/L" }, "auc_gt": 400, "pct_neonates_min": 90,
+        "src": "tdm-vanco-2020",
+        "quote": "trough concentra- tions ranging from 7 to 11 mg/L were highly predictive of an AUC 24 of >400 mg·h/L in at least 90% of neonates."
+      },
+      {
+        "id": "neo-trough-surrogate-stockmann",
+        "label": "Trough 11 mg/L predicted AUC of 400 or more in 93% of neonates, but trough alone is imprecise",
+        "trough": { "v": 11, "unit": "mg/L" }, "auc_min": 400, "pct_neonates": 93,
+        "src": "tdm-vanco-2020",
+        "quote": "While a trough concentration of 11 mg/L predicted the attainment of an AUC of ≥400 mg·h/L in 93% of neonates, Stockmann and colleagues noted that a trough concen- tration alone did not precisely predict AUC and concluded that Bayesian ap- proaches to support vancomycin dosing decisions for neonates in the clinical setting are needed."
+      },
+      {
+        "id": "neo-no-consensus",
+        "label": "No consensus neonatal dosing model",
+        "src": "tdm-vanco-2020",
+        "quote": "However, when evaluating published neonatal PK models, no consensus on an optimal dosing regimen was achieved by experts on neonatal vancomycin, Zhao et al reported."
+      }
+    ],
+    "trough_only": {
+      "trough": { "lo": 15, "hi": 20, "unit": "mg/L" },
+      "label": "Trough-only monitoring at 15 to 20 mg/L is no longer recommended (serious MRSA)",
+      "src": "tdm-vanco-2020",
+      "quote": "Trough-only monitoring, with a target of 15 to 20 mg/L, is no longer recommended based on efficacy and nephrotoxicity data in patients with serious infections due to MRSA (A-II)."
+    },
+    "sampling": [
+      {
+        "label": "Two-level sampling for equation-based AUC: post-distributional peak and trough in the same interval",
+        "peak_after_end_of_infusion_h": { "lo": 1, "hi": 2 },
+        "src": "tdm-vanco-2020",
+        "quote": "It is preferred that a near steady-state, postdistributional peak (1 to 2 hours after end of infusion) and trough con- centrations within the same dosing interval (if possible) are used when estimating the AUC with the equation- based methods."
+      },
+      {
+        "label": "Scale the one-interval AUC to 24 h by the number of doses per day",
+        "example": { "multiplier": 2, "interval_h": 12 },
+        "src": "tdm-vanco-2020",
+        "quote": "AUC must be multiplied by 2 for a 12-hour dosing interval to calculate the true AUC 24"
+      }
+    ],
+    "equations": [
+      {
+        "id": "ke",
+        "name": "Elimination rate constant from two levels",
+        "text": "Ke = ln(C1/C2)/(t1 - t2), as printed in the source",
+        "form": "ke = ln(c1/c2) / (t2 - t1)",
+        "caveat": "Source prints the denominator as 't 1 - t 2' without brackets; the engine uses the elapsed time between the two draws (later minus earlier) so ke is positive. The worksheet source writes the same quantity as [Ln(C2) - Ln(C1)]/(T2 - T1), which is negative ke.",
+        "src": "tdm-vanco-pk-eq",
+        "quote": "Calculate observed K e from 2 levels | K e = ln (C 1 /C 2 )/t 1 − t 2"
+      },
+      {
+        "id": "ke-worksheet",
+        "name": "Elimination rate constant (worksheet form)",
+        "text": "Ke = [Ln(C2) - Ln(C1)]/(T2 - T1)",
+        "src": "tdm-vanco-worksheet",
+        "quote": "Ke = [Ln _____(C 2 ) – Ln _____ (C 1 )]/ _____h (T 2 – T 1 )"
+      },
+      {
+        "id": "half-life",
+        "name": "Half-life",
+        "text": "T1/2 = 0.693/Ke",
+        "coef": { "k": 0.693, "form": "t_half_h = k / ke" },
+        "src": "tdm-vanco-worksheet",
+        "quote": "T1/2 = 0.693/Ke = _____h"
+      },
+      {
+        "id": "cmax",
+        "name": "True peak (Cmax), back-extrapolated from the first level",
+        "text": "Cmax = C1/(e^(-Ke x tin))",
+        "form": "cmax = c1 / exp(-ke * t_back)",
+        "caveat": "Source writes the exponent time as 'tin' (infusion time). The worksheet source uses Tp; the engine should use the time from end of infusion to the first draw. Reviewer to confirm.",
+        "src": "tdm-vanco-pk-eq",
+        "quote": "Calculate true peak (Cmax) | Cmax = C 1 /(e −Ke(tin) )"
+      },
+      {
+        "id": "cmin",
+        "name": "True trough (Cmin), extrapolated to the end of the dosing interval",
+        "text": "Cmin = Cmax x e^(-ke x (tau - tin))",
+        "form": "cmin = cmax * exp(-ke * (tau - tin))",
+        "src": "tdm-vanco-pk-eq",
+        "quote": "Calculate true trough (Cmin) | Cmin = Cmax (e −ke(tau−tin) )"
+      },
+      {
+        "id": "auc-inf",
+        "name": "AUC during infusion (linear trapezoid)",
+        "text": "AUCinf = tin x (Cmax + Cmin)/2",
+        "form": "auc_inf = tin * (cmax + cmin) / 2",
+        "caveat": "Source prints 'AUC inf = t in (Cmax + Cmin/2)'; the trapezoid is tin times the mean of Cmin and Cmax. The worksheet source writes '[Ce + Ct(zero if loading dose))/2) x infusion duration', which supports the bracketed reading. For a first (loading) dose the starting concentration is zero.",
+        "src": "tdm-vanco-pk-eq",
+        "quote": "Calculate AUC during infusion using linear trapezoidal rule | AUC inf = t in (Cmax + Cmin/2)"
+      },
+      {
+        "id": "auc-inf-worksheet",
+        "name": "AUC during infusion (worksheet form, zero start concentration after a loading dose)",
+        "text": "Area during infusion = [Ce + Ct (zero if loading dose)]/2 x infusion duration",
+        "src": "tdm-vanco-worksheet",
+        "quote": "Area during infusion = [Ce + Ct(zero if loading dose))/2) x infusion duration"
+      },
+      {
+        "id": "auc-elim",
+        "name": "AUC during elimination (log-down, mono-exponential integral)",
+        "text": "AUCelim = (Cmax - Cmin)/Ke",
+        "form": "auc_elim = (cmax - cmin) / ke",
+        "caveat": "Source labels this row 'linear trapezoidal rule', but (Cmax - Cmin)/Ke is the exact integral of the mono-exponential decline (the log-down part of a linear-up log-down calculation). The worksheet source instead uses a linear trapezoid, (Ce + Ct)/2 x time, for the post-infusion area; that overestimates AUC. Reviewer to choose.",
+        "src": "tdm-vanco-pk-eq",
+        "quote": "Calculate AUC during elimination using linear trapezoidal rule | AUC elim = (Cmax − Cmin)/K e"
+      },
+      {
+        "id": "auc24",
+        "name": "Daily AUC from one dosing interval",
+        "text": "AUC24 = (AUCinf + AUCelim) x (24/tau)",
+        "coef": { "hours_per_day": 24, "form": "auc24 = (auc_inf + auc_elim) * hours_per_day / tau" },
+        "caveat": "Source prints 'AUC inf + AUC elim (24/tau)' without brackets; the guideline (sampling note) scales the whole interval AUC by doses per day.",
+        "src": "tdm-vanco-pk-eq",
+        "quote": "Calculate AUC 24 | AUC 24 = AUC inf + AUC elim (24/tau)"
+      }
+    ],
+    "notes": [
+      { "text": "Neonatal SCr is unreliable in the first week of life because of transplacental maternal creatinine.", "src": "tdm-vanco-2020",
+        "quote": "SCr- based dosing (except for the first week of life, when transplacental maternal cre- atinine in the neonatal circulation ren- ders neonatal SCr values inaccurate in estimating renal function)" },
+      { "text": "The equation method gives only a snapshot and is not adaptive; it is wrong if renal function changes during sampling. Bayesian estimation is preferred.", "src": "tdm-vanco-2020",
+        "quote": "The major limitation of this approach is that it is not adaptive like the Bayesian approach, as it can only provide a snapshot of the AUC for the sampling period." }
+    ]
+  },
+  "aminoglycoside_ei": {
+    "hartford": {
+      "label": "Hartford once-daily aminoglycoside program (adults, 2,184 patients). Not validated in neonates.",
+      "dose_interval": {
+        "dose": { "v": 7, "unit": "mg/kg" },
+        "bands": [
+          { "crcl_ml_min": { "min": 60 }, "every_h": 24 },
+          { "crcl_ml_min": { "min": 40, "max": 59 }, "every_h": 36 },
+          { "crcl_ml_min": { "min": 20, "max": 39 }, "every_h": 48 }
+        ],
+        "src": "tdm-nicolau1995",
+        "quote": "We initiated an ODA program at our institution that utilizes a fixed 7-mg/kg intravenous dose with a drug administration interval based on estimated creatinine clearance: > or = 60 ml/min every 24 h (q24h), 59 to 40 ml/min q36h, and 39 to 20 ml/min q48h. Subsequent interval adjustments are made by using a single concentration in serum and a nomogram designed for monitoring of ODA therapy."
+      },
+      "level_window": {
+        "hours_post_dose": { "lo": 6, "hi": 14 },
+        "src": "tdm-gent-tdm-audit",
+        "quote": "If once daily dosing was used, obtaining a mid-interval gentamicin concentration 6–14 hours post initial dose administration, followed by Hartford nomogram assessment was considered appropriate."
+      },
+      "nomogram_lines_missing": "The nomogram graph (concentration versus hours boundary lines for q24h, q36h, q48h) is a figure in the scanned 1995 article and could not be retrieved as text. Not stored."
+    },
+    "neonatal_gentamicin": {
+      "nice": [
+        { "id": "trough-timing", "label": "Measure trough immediately before the second dose",
+          "src": "tdm-nice-ng195",
+          "quote": "If giving a second dose of gentamicin, measure the trough blood gentamicin concentration immediately before giving the second dose. Take the trough concentrations into account before giving the third dose of gentamicin." },
+        { "id": "trough-target", "label": "Trough target", "trough_lt": { "v": 2, "unit": "mg/litre" },
+          "long_course": { "doses_gt": 3, "trough_lt": { "v": 1, "unit": "mg/litre" } },
+          "src": "tdm-nice-ng195",
+          "quote": "Adjust the gentamicin dose interval, aiming to achieve trough concentrations of less than 2 mg/litre. If the course of gentamicin lasts for more than 3 doses, aim for a trough concentration of less than 1 mg/litre." },
+        { "id": "peak-selected", "label": "Consider peak levels in selected babies (for example macrosomia, birthweight more than 4.5 kg)",
+          "bw_gt": { "v": 4.5, "unit": "kg" },
+          "src": "tdm-nice-ng195",
+          "quote": "macrosomia (birthweight more than 4.5 kg)" },
+        { "id": "peak-timing", "label": "Peak drawn 1 hour after starting gentamicin", "hours_after_start": 1,
+          "src": "tdm-nice-ng195",
+          "quote": "When measuring peak blood gentamicin concentrations, take the measurement 1 hour after starting gentamicin." },
+        { "id": "peak-low", "label": "Gram-negative or staphylococcal infection: consider a higher dose if peak is below 8 mg/litre",
+          "peak_lt": { "v": 8, "unit": "mg/litre" },
+          "src": "tdm-nice-ng195",
+          "quote": "If a baby has a Gram-negative or staphylococcal infection, consider increasing the dose of gentamicin if the peak concentration is less than 8 mg/litre." },
+        { "id": "no-withhold", "label": "Do not withhold a dose while waiting for a trough unless renal impairment",
+          "src": "tdm-nice-ng195",
+          "quote": "Do not withhold a dose of gentamicin because of delays in getting a trough concentration measurement, unless there is evidence of impaired renal function" }
+      ],
+      "fda": [
+        { "id": "levels", "label": "Pediatric label: avoid prolonged peaks above 12 mcg/mL and troughs above 2 mcg/mL",
+          "peak_avoid_gt": { "v": 12, "unit": "mcg/mL" }, "trough_avoid_gt": { "v": 2, "unit": "mcg/mL" },
+          "src": "tdm-fda-gent-peds",
+          "quote": "When monitoring peak concentrations after intramuscular or intravenous administration, dosage should be adjusted so that prolonged levels above 12 mcg/mL are avoided. When monitoring trough concentrations (just prior to the next dose), dosage should be adjusted so that levels above 2 mcg/mL are avoided." },
+        { "id": "expected-peak", "label": "Expected peak after IM injection", "peak": { "lo": 3, "hi": 5, "unit": "mcg/mL" }, "minutes_after_im": { "lo": 30, "hi": 60 },
+          "src": "tdm-fda-gent-peds",
+          "quote": "For example, the peak concentration (at 30 to 60 minutes after intramuscular injection) is expected to be in the range of 3 to 5 mcg/mL." },
+        { "id": "half-life-bw", "label": "Serum half-life in premature infants by weight",
+          "bands": [
+            { "wt": { "lt": 1500, "unit": "g" }, "t_half_text": "11 ½ hours" },
+            { "wt": { "min": 1500, "max": 2000, "unit": "g" }, "t_half_h": 8 },
+            { "wt": { "gt": 2000, "unit": "g" }, "t_half_h": 5, "approx": true }
+          ],
+          "src": "tdm-fda-gent-peds",
+          "quote": "In premature infants weighing less than 1500 grams, the half-life is 11 ½ hours; in those weighing 1500 to 2000 grams, the half-life is eight hours; in those weighing over 2000 grams, the half-life is approximately five hours." }
+      ]
+    }
+  }
+}

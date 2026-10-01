@@ -3,7 +3,12 @@
   "unit": "neuro",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Optic neuritis",
     "hi": "ऑप्टिक न्यूराइटिस"
@@ -13,22 +18,21 @@
     "hi": "[[optic-neuritis]] ऑप्टिक नर्व की सूजन है। किसी जवान व्यक्ति की एक आँख की नज़र कुछ दिनों में घटती है, और आँख घुमाने पर दर्द होता है। ज़्यादातर लोगों की अच्छी नज़र लौट आती है।"
   },
   "see": {
-    "diagram": "diagrams/neuro-optic-nerve.svg",
-    "w": 480,
-    "h": 240,
+    "w": 768,
+    "h": 576,
     "alt": {
-      "en": "Side view of an eye, with its front on the left. The optic nerve runs to the right from the back of the eye. A segment just behind the eye glows red. Two eye muscles run from the eye to a ring around the nerve at the far end. On the right, a brain slice shows a few pale oval patches.",
-      "hi": "आँख का बगल से दृश्य, सामने का हिस्सा बाईं ओर। ऑप्टिक नर्व आँख के पीछे से दाईं ओर जाती है। आँख के ठीक पीछे नर्व का एक हिस्सा लाल चमक रहा है। आँख की दो मांसपेशियाँ आँख से नर्व के सिरे पर बने एक छल्ले तक जाती हैं। दाईं ओर दिमाग के एक हिस्से में कुछ हल्के अंडाकार धब्बे हैं।"
+      "en": "Left: a side cut through the eye socket. The optic nerve runs from the back of the eye to the back of the socket. The disc inside the eye looks normal. Behind the eye, one part of the nerve is swollen and red. The eye muscles start from a ring around the nerve at the back. Right: a brain scan from above, with several small white oval patches beside the fluid spaces.",
+      "hi": "बाएँ: आँख के गड्ढे का बगल से काट। ऑप्टिक नस आँख के पीछे से गड्ढे के पिछले हिस्से तक जाती है। आँख के अंदर डिस्क सामान्य दिखती है। आँख के पीछे नस का एक हिस्सा सूजा और लाल है। आँख की माँसपेशियाँ पीछे नस के चारों ओर एक छल्ले से शुरू होती हैं। दाएँ: ऊपर से दिमाग़ का स्कैन, जिसमें द्रव वाली जगहों के पास कई छोटे सफ़ेद अंडाकार धब्बे हैं।"
     },
     "caption": {
       "en": "The inflamed part is behind the eye, so the disc often looks normal. The eye muscles start from a ring around the nerve, so moving the eye hurts.",
       "hi": "सूजा हुआ हिस्सा आँख के पीछे है, इसलिए डिस्क अक्सर सामान्य दिखती है। आँख की मांसपेशियाँ नर्व के चारों ओर के छल्ले से शुरू होती हैं, इसलिए आँख घुमाने पर दर्द होता है।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.304,
-        "y": 0.5,
+        "x": 0.29,
+        "y": 0.44,
         "label": {
           "en": "Disc looks normal",
           "hi": "डिस्क सामान्य दिखती है"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.429,
-        "y": 0.496,
+        "x": 0.43,
+        "y": 0.433,
         "label": {
           "en": "Inflamed nerve",
           "hi": "सूजी हुई नर्व"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.637,
-        "y": 0.575,
+        "x": 0.585,
+        "y": 0.433,
         "label": {
           "en": "Muscle ring",
           "hi": "मांसपेशियों का छल्ला"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.871,
-        "y": 0.317,
+        "x": 0.745,
+        "y": 0.367,
         "label": {
           "en": "Brain patches",
           "hi": "दिमाग के धब्बे"
@@ -74,6 +78,10 @@
           "hi": "MRI में दिमाग में MS के हल्के धब्बे दिख सकते हैं। इनसे आगे MS का ख़तरा बढ़ता है।"
         }
       }
+    ],
+    "img": "learn/media/real/neuro-optic-nerve.webp",
+    "more": [
+      "neuro-optic-nerve"
     ]
   },
   "why": {
