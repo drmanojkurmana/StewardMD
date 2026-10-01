@@ -96,7 +96,16 @@ Run 1 (first load after install): 18 `ok`, 2 `unavailable`: the first load took 
 runtime's 8 s cold budget, so rows 1-2 went to the safe path. Run 2: 20/20 `ok`, p50 146 ms, p95 409 ms
 (cold load inside the first call). Read: the one-off first load (likely Metal shader compile) must be
 warmed before a user's first request, or the cold budget raised for the first load only. App relaunched
-after. NOT checked: step 1 (MaiK local answer regression): the reinstall wiped MaiK's model pack.
+after.
+
+**A0.3 step 1 PASSED (2026-10-02, same iPhone, build of 8ebb70c60 web code):** MaiK's pack re-downloaded
+through the app's own installer (`SMD_MAIK_MODELS.ensure("maik-lite")`, the first-run pick for this
+8 GB phone: MAiK Lite, 1.11 GB, 1,130 s on home Wi-Fi, about 1 MB/s; the "Stalled on a slow connection"
+note stayed up after the speed recovered). Then `SMD_MAIK_LOCAL.answer()` (what the picker calls for
+On-device) with no grammar: `engine:"local"`, plugin `llama`. Cold call (load + retrieval): first text
+43.8 s, done 47.0 s. Warm call: first text 1.6 s, done 6.3 s. Both answers cited the KB ([1]).
+For clinical review (not a regression): the CAP answer gave azithromycin alone as first line and printed
+"500 mg PO? [1] 1, then 250 mg"; the INR answer (mechanical mitral valve 2.5-3.5) was right.
 1. Build the app with this branch; confirm a normal MaiK local answer still works (regression).
 2. Base FunctionGemma GGUF on the phone; `node test/edge-bakeoff-device.mjs --engine llama --model <gguf path> --limit 20`.
    Every line must be `ok` with an integer `option`; the grammar admits nothing else.
