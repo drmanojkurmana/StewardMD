@@ -17,6 +17,7 @@
  * the summary only.
  */
 import { readFileSync, writeFileSync } from "node:fs";
+import { gunzipSync } from "node:zlib";
 import { createRequire } from "node:module";
 import vm from "node:vm";
 
@@ -45,6 +46,30 @@ export async function bootRouter() {
   return (q) => globalThis.window.StewardRAG.buildPackage(empty, { question: q, hospitalId: "GIMSR", caseData: {} });
 }
 
+
+// The app's own drug data, handed to a window the way the app's scripts do: the drug lexicon + linker,
+// the formulary, the interaction rules + engine, and stand-ins for the two lazy gz bundles
+// (dose-calc.js and offline-clinical.js fetch them; here they are read from disk, same files, same lookups).
+export function injectDrugData(win) {
+  const el = () => ({ style: {}, classList: { add() {}, remove() {} }, setAttribute() {}, appendChild() {}, addEventListener() {}, querySelector: () => null });
+  const doc = { addEventListener() {}, getElementById: () => null, createElement: el, body: el(), head: el(), querySelector: () => null, querySelectorAll: () => [] };   // drugs.js wires DOM at load
+  const load = (f) => new Function("window", "document", readFileSync(new URL(f, ROOT), "utf8")).call(win, win, doc);
+  ["drug-lexicon.js", "drug-link.js", "drugs.js", "interaction-rules.js", "interactions.js"].forEach(load);
+  const gz = (f) => JSON.parse(gunzipSync(readFileSync(new URL(f, ROOT))).toString("utf8"));
+  let rules = null, clin = null;
+  win.SMD_DOSECALC = {   // dose-calc.js findDrug(): exact name, else the name without its salt or brackets
+    load: async () => { if (!rules) { rules = gz("data/dose-rules.json.gz"); rules.drugs.forEach((d) => { d._q = d.n.toLowerCase(); }); } return rules; },
+    find: (n) => { const q = String(n || "").toLowerCase().trim(); return rules && (rules.drugs.find((d) => d._q === q) || rules.drugs.find((d) => d._q.startsWith(q + " ") || d._q.startsWith(q + " (")) || null); },
+  };
+  win.SMD_OFFLINE_CLINICAL = {   // offline-clinical.js structured(): { found, data: { gold } }
+    structured: async (n) => {
+      if (!clin) { clin = new Map(); const j = gz("data/offline-clinical.json.gz"); for (const k of Object.keys(j.struct)) clin.set(k.toLowerCase(), j.struct[k]); }
+      const d = clin.get(String(n).toLowerCase()); return d ? { composition: n, found: true, data: d } : { composition: n, found: false };
+    },
+  };
+  return win;
+}
+
 export async function bench({ bookPath, router = "", cases, src = "maik-local.js" }) {
   const RAG = require("../kb/ai/maik-lite-rag.js");
   const rows = readFileSync(bookPath, "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l));
@@ -63,6 +88,7 @@ export async function bench({ bookPath, router = "", cases, src = "maik-local.js
     SMD_MAIK_MODELS: { PACKS: { "maik-lite": { label: "MAiK Lite", nCtx: 4096, nPredict: 512, noThink: true } },
       pathFor: async () => "/x.gguf", totalBytes: () => 1 },
   };
+  injectDrugData(win);
   new Function("window", readFileSync(new URL(src, ROOT), "utf8"))(win);   // --src: A/B a changed copy
   const L = win.SMD_MAIK_LOCAL, out = [];
   const route = router === "real" ? await bootRouter() : null;
