@@ -289,6 +289,17 @@ router gold set will still be mostly synthetic. Recommendation: the owner and th
 each type 50 requests the way they really would (no patient data). That is 150 real lines and costs
 about 30 minutes each.
 
+### Owner's homework (agreed 2026-10-01)
+| Task | Format | Needed by |
+|---|---|---|
+| Type 50 requests the way you really would (owner), and ask the 2 reviewing doctors for 50 each | One request per line, no patient names or IDs. Mix: calculators, drug lookups, ICD, opening screens, KB topics, ICU dictation, a few Hinglish/Tenglish lines | End of week 1 |
+| Tenglish and Hinglish medical word list | `word = meaning`, e.g. `jvaram = fever`, `daggu = cough`, `noppi = pain`, `vanthulu = vomiting`, `bukhar = fever`. Aim for 100 to 200 words | End of week 1 |
+| Name the 2 reviewing doctors | Name + specialty | Before week 4 |
+| Spare 4 GB Android phone for testing | Any common model (Redmi/Samsung/Realme) | Week 1 |
+
+Save the files as `vault/plans/edge-data/owner-requests.txt` and `vault/plans/edge-data/indic-words.txt`.
+Never put patient data in them.
+
 ## 15. Week-by-week (4 to 6 weeks)
 
 | Week | Ship / build | Done when |
@@ -329,3 +340,48 @@ Attribution for CC BY data goes in `licenses/`.
 | Flag | An on/off switch in the app |
 | Bake-off | Two options tested side by side, best one wins |
 | Hallucination | The AI making up a value that was never said |
+
+---
+
+## Appendix A. Week 1 checklist (engineering)
+
+Every item: unit test (`npm test`) plus a headless-browser test for UI changes, per CLAUDE.md.
+Git tag before merge. Flags default OFF until owner approves.
+
+1. **Speaker gate fix:** `opd-emr.js:4292` and `:4257` stop hard-coding `speaker:"doctor"`; patient
+   speech must not fill objective fields (`voice-emr-map.js merge` already supports this).
+2. **On-device speech only:** set `requiresOnDeviceRecognition` (iOS) and the prefer-offline extra
+   (Android) in `local-plugins/capacitor-community-speech-recognition`, or block the fallback when the
+   phone cannot do it on-device. Native change: needs a store build.
+3. **Shared patient-number parser:** new pure module (ES5 IIFE + `module.exports`) extending
+   `INSULIN_ASK.parse` cues: age (`72yo`, `72 y`, `65M`, `72F`), sex, weight, height, creatinine
+   (`cr`, `scr`, `s.cr`, `creat`), urea, Na, K, glucose, BP, HR, RR, SpO2, temperature. Bounds from
+   `INSULIN_ASK.BOUNDS`. Each value returns the source span it came from (rule S2).
+4. **Prefilled calculators:** `home.js maikCalcFor` card and `search.js calcsProvider` pass parsed
+   values into `MEDCALC.open(id, prefill)`; threshold mapping for checkbox calculators (CURB-65,
+   qSOFA) following `icu-autoscores.js`. Card shows "Using MEDCALC.run(id)" and the source words.
+5. **MaiKBrain inputs:** `kb/ai/maik-brain.js:316` gets `args.inputs` from the parser.
+6. **One Cockcroft-Gault:** pick the reference implementation, point the others at it, add a test
+   that all callers agree for the same patient.
+7. **Feasibility spike (branch only, not merged):** link `android-arm64/libneedle.a` into a tiny JNI
+   test library with 16 KB page alignment; load `needle3.cact` from Filesystem; one call. Load
+   FunctionGemma GGUF through `capacitor-llama` on the same 4 GB phone. Record load time, memory, latency.
+8. **Data pipeline start:** script that exports tool schemas from `MEDCALC._calcs` (with `opts`), and
+   downloads ACI-Bench, PriMock57, MMCQS into a gitignored folder with licence notes in `licenses/`.
+
+## Appendix B. Later features (after the router passes its gate)
+
+| Feature | One line |
+|---|---|
+| Answer-as-you-type | Search shows "CrCl 38 mL/min" before Enter |
+| Live Score Radar | Scores light up during the consult, each criterion with its quote |
+| Silent Safety Net | Spoken allergy, creatinine or anticoagulant cross-checked against the Rx pad before print |
+| Code Blue voice log | "Adrenaline given", "shock 200", "ROSC" logged hands-free, watch and phone |
+| Sepsis Hour-1 voice log | "Cultures sent", "lactate sent", "fluids started" with timers |
+| Say-it Logbook | "Two central lines today, supervised" becomes NMC logbook entries |
+| Offline OSCE examiner | Narrated exam steps tick the station checklist |
+| Round Mode | One sentence per bed becomes ordered DRAFT orders in WardSynQ |
+| PHI Shield | On-device removal of names, phones, addresses before any cloud call |
+| Native Telugu/Hindi | FunctionGemma, or IndicXlit romanisation, with its own gold set |
+
+Detail for each: [[Needle-Features]]. Evidence and measurements: [[Needle-Audit]].
