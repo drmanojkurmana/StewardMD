@@ -55,12 +55,29 @@ With the plugin added to `package.json` on a local branch only, `cap sync` regis
 `NeedlePlugin.swift`, `LlamaPlugin.swift` and `LlamaEngine.swift` compiled with 0 errors and 0
 warnings; no Swift change was needed. `NeedlePlugin.o` imports exactly `needle_init/complete/load/
 reset/last_error`, all five defined in `libneedle.a`; `LlamaPlugin.o` imports `llama_sampler_init_grammar`.
-**Not yet linked or run:** the App build stops in a dependency outside Edge. mlx-swift
-(`capacitor-mlx`, pinned 0f4fe40) `Cmlx/.../backend/cpu/jit_compiler.cpp:212` calls `std::system`,
-which the iOS 27.2 SDK marks unavailable. This blocks ANY iOS build of the app with this Xcode, not
-only Edge. Also needed: the Metal Toolchain component (`xcodebuild -downloadComponent MetalToolchain`,
-now installed), `-skipPackagePluginValidation` (mlx-swift's CudaBuild plugin), about 4 GB free disk
-for a worktree build, and an iPhone on USB (`idevice_id -l`) for the proxy.
+**Build:** the App build needs a LOCAL, uncommitted patch to mlx-swift (`capacitor-mlx`, pinned 0f4fe40):
+`Cmlx/.../backend/cpu/jit_compiler.cpp:212` calls `std::system`, which the iOS 27.2 SDK marks unavailable,
+so ANY iOS build of the app fails with this Xcode, not only Edge. The test build guarded the g++ probe
+with `TARGET_OS_IPHONE` (result 1 = "no compiler", what it returns on a phone anyway). Fix it properly
+(newer mlx-swift pin or a vendored patch) before a store build. Also needed: the Metal Toolchain
+component (`xcodebuild -downloadComponent MetalToolchain`), `-skipPackagePluginValidation` (mlx-swift's
+CudaBuild plugin), about 6 GB free disk for a worktree build, an iPhone on USB (`idevice_id -l`).
+Verified in the built app: `App.debug.dylib` defines the five `needle_*` symbols and NeedlePlugin,
+references `llama_sampler_init_grammar` (exported by the embedded `llama.framework`); the live
+WebView ran this bundle (`?v=clog2/gold476/gold1057`, `edge-router.js?v=edge3`), `Capacitor.Plugins.Needle` present.
+
+**A0.2 iOS PASSED (2026-10-02, iPhone 15 Pro, iOS 27.0 24A437, base `needle3.cact`, app build from 6da7a4763):**
+- `--limit 20`: 20/20 `ok`, p50 161 ms, p95 329 ms. Base Needle gave option 0 at confidence 0.01-0.08
+  on every row, so all pass to MaiK (same as the host run).
+- `--limit 50` three times: 150/150 `ok`; p50 157 ms, p95 259 ms, max 386 ms.
+- Stuck call: `--deadline 60` gave 20/20 `timeout` at 61-65 ms each, WebView responsive throughout; the
+  next normal run was 20/20 `ok`. Driving the runtime directly with a 30 ms deadline, calls made while
+  the engine was stuck resolved `busy` at once (137 ms, 178 ms) and the runtime took work again once the
+  call returned. `bakeoff()` itself waits out a stuck call, so it never prints `busy`.
+- Thermal: iOS 27 exposes no battery temperature over USB; `ChargerData.TimeChargingThermallyLimited`
+  stayed 0 after ~210 Needle + 40 llama calls (phone charging on USB, 46% to 52%). Peak memory NOT
+  measured: `xctrace` (Activity Monitor) on this beta lost the device or could not find the app pid.
+- Not done: Android (no phone attached), the 30-minute mixed session (A0.6).
 
 ## 3. Gate A0.3: FunctionGemma + grammar (llama.cpp)
 **Mechanism PASSED on a host CPU (2026-10-01, `test/native-host/run.sh llama`):** the real
@@ -71,8 +88,15 @@ routing: 7.7% wrong overall, 20.8% on model-routed rows, so fine-tuning is requi
 
 The llama plugin now takes an opt-in `grammar` (GBNF, root `root`) on both platforms
 (`local-plugins/capacitor-llama`, C++ syntax-checked against the pinned prism-b10685 headers,
-Java engine compiled; iOS Swift compiled for arm64 device on 2026-10-02, see gate A0.2; not yet
-linked or run on a phone). With no grammar nothing changes.
+Java engine compiled; iOS built and run on a phone 2026-10-02, below). With no grammar nothing changes.
+
+**A0.3 iOS grammar PASSED (2026-10-02, iPhone 15 Pro, iOS 27.0, ggml-org FunctionGemma 270M Q8_0 rev 2566ce14,
+sha256 83940d4d, Metal):** every reply that came back was a valid integer option (38/38).
+Run 1 (first load after install): 18 `ok`, 2 `unavailable`: the first load took about 19 s, past the
+runtime's 8 s cold budget, so rows 1-2 went to the safe path. Run 2: 20/20 `ok`, p50 146 ms, p95 409 ms
+(cold load inside the first call). Read: the one-off first load (likely Metal shader compile) must be
+warmed before a user's first request, or the cold budget raised for the first load only. App relaunched
+after. NOT checked: step 1 (MaiK local answer regression): the reinstall wiped MaiK's model pack.
 1. Build the app with this branch; confirm a normal MaiK local answer still works (regression).
 2. Base FunctionGemma GGUF on the phone; `node test/edge-bakeoff-device.mjs --engine llama --model <gguf path> --limit 20`.
    Every line must be `ok` with an integer `option`; the grammar admits nothing else.
