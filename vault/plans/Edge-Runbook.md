@@ -23,6 +23,12 @@ If `generate.mjs` changes `test.jsonl`, stop: the frozen test set moved (`npm te
 `edge-dataset.test.mjs`). That needs a new `schema_version`, not a silent overwrite.
 
 ## 1. Gate A0.1: 16 KB pages (Android)
+**Build half PASSED in the cloud container (2026-10-01):** NDK r27.2 + AGP 8.13 built both plugin
+modules against Capacitor core. `libneedle_jni.so` and `libllama_jni.so`: every LOAD segment `0x4000`;
+the five Needle JNI exports and `LlamaNative_setGrammar` present; no socket/HTTP/TLS symbols in the
+Needle `.so`; the AAR manifest declares `NeedleService` in `:edge`. Still open: steps 3 and 4 below
+on the full APK, and the run on an Android 15 16 KB emulator and the phone (no KVM in the container).
+
 1. `cd local-plugins/capacitor-needle && scripts/fetch-needle.sh` (fails loudly on a hash change).
 2. Add `"@stewardmd/capacitor-needle": "file:local-plugins/capacitor-needle"` to `package.json`,
    `npm install && npm run sync`, build a debug APK.

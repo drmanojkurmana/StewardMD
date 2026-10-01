@@ -7120,6 +7120,23 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // Edge result cards. Read-only: each one opens something the doctor taps; nothing is written.
     // Every card carries "Ask MaiK anyway" so the request can always continue on the normal path.
     function maikEdgeAskChip(question) { return '<button class="maik-fu" data-maik-edgeask="' + maikEscH(String(question || "")) + '">Ask MaiK anyway</button>'; }
+    /* Score versions a request can confuse (edge-schemas.js, generated from calculators.js): a MaiK
+     * or Edge calculator card for MELD offers MELD-Na and MELD 3.0 one tap away, each with the same words
+     * re-read for its own inputs. Nothing renders when the map is absent or has no siblings. */
+    function maikEdgeSiblingsHTML(id, question) {
+      if (!maikPrefillOn()) return "";        // same flags as prefill (smd_calc_prefill / smd_edge); off by default
+      try {
+        var S = window.SMD_EDGE_SCHEMAS, f = S && S.familyOf ? S.familyOf(id) : null;
+        if (!f) return "";
+        var sib = S.siblings(id).filter(function (m) { return window.MEDCALC && MEDCALC.get && MEDCALC.get(m.id); });
+        if (!sib.length) return "";
+        var lbl = f.kind === "versions" ? "Other versions" : f.kind === "same-name" ? "Same name, different score" : "Related forms";
+        return '<div class="maik-tools maik-edge-sib"><span class="maik-tools-lbl">' + maikEscH(lbl) + '</span>' +
+          sib.map(function (m) {
+            return '<button class="maik-fu" data-maik-calc="' + maikEscH(m.id) + '" data-maik-calcq="' + maikEscH(String(question || "")) + '">' + maikEscH(m.title) + '</button>';
+          }).join("") + '</div>';
+      } catch (e) { return ""; }
+    }
     function maikEdgeRender(er, question) {
       if (!er) return false;
       if (er.kind === "calculator") {
@@ -7167,13 +7184,15 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           '<div class="maik-tools"><span class="maik-tools-lbl">Open in app</span>' +
           '<button class="maik-fu maik-tool" data-maik-calc="' + maikEscH(c.id) + '" data-maik-calcq="' + maikEscH(String(question || "")) + '">' + maikEscH("Open " + c.title + " with these values") + '</button>' +
           '<button class="maik-fu" data-maik-calc="' + maikEscH(c.id) + '">Open empty</button>' +
-          '<button class="maik-fu" data-maik-calcask="' + maikEscH(String(question || "")) + '">Ask MaiK anyway</button></div>';
+          '<button class="maik-fu" data-maik-calcask="' + maikEscH(String(question || "")) + '">Ask MaiK anyway</button></div>' +
+          maikEdgeSiblingsHTML(c.id, question);
       }
       var need = inputs.length ? '<div class="maik-calc-in">Needs: ' + maikEscH(inputs.slice(0, 6).join(" · ")) + (inputs.length > 6 ? " · …" : "") + '</div>' : "";
       return '<div class="maik-welcome maik-calc"><b>' + maikEscH(c.title) + '</b> is in your calculators.' + (c.desc ? " " + maikEscH(c.desc) : "") + need + '</div>' +
         '<div class="maik-tools"><span class="maik-tools-lbl">Open in app</span>' +
         '<button class="maik-fu maik-tool" data-maik-calc="' + maikEscH(c.id) + '">' + maikEscH("Open " + c.title) + '</button>' +
-        '<button class="maik-fu" data-maik-calcask="' + maikEscH(String(question || "")) + '">Ask MaiK anyway</button></div>';
+        '<button class="maik-fu" data-maik-calcask="' + maikEscH(String(question || "")) + '">Ask MaiK anyway</button></div>' +
+        maikEdgeSiblingsHTML(c.id, question);
     }
     // Phase 4 — tool-calling: detect when a question is best answered by a structured in-app tool and
     // offer a one-tap "open in app" chip (drug interactions, calculators/scores, Drug Index dosing).

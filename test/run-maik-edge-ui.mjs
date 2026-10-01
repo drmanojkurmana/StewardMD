@@ -87,6 +87,20 @@ try {
   const calcCard = String(await lastAi());
   ok(/maik-calc-pf/.test(calcCard) && /33 mL\/min/.test(calcCard), "a calculator request is answered by the rules layer with prefill (CrCl 33)");
   ok(await ev(`return window.__engineCalls;`) === callsBefore, "and the model was not called for it");
+  ok(!/maik-edge-sib/.test(calcCard), "CrCl has no confusable sibling: no version row");
+
+  // ── score versions (edge-schemas.js): MELD 3.0 offers MELD and MELD-Na, each prefilled from the same words ──
+  await send("meld 3.0 bili 3.2 inr 1.8 creat 2.1 na 128 alb 2.8");
+  const meldCard = String(await lastAi());
+  ok(/maik-edge-sib/.test(meldCard) && /Other versions/.test(meldCard) && /data-maik-calc="meld_na"/.test(meldCard) && /data-maik-calc="meld"/.test(meldCard),
+    "a MELD 3.0 card offers the other MELD versions");
+  // The chip closes MaiK and opens the calculator 180 ms later: keep the stub in place until it fires.
+  await ev(`window.__opened = null; window.__realOpen = MEDCALC.open; MEDCALC.open = function (id, pf) { window.__opened = { id: id, pf: pf || null }; };
+    var b = document.querySelectorAll('.maik-edge-sib [data-maik-calc="meld_na"]'); b = b[b.length - 1]; b.click(); return 1;`);
+  await sleep(600);
+  const op = JSON.parse((await ev(`MEDCALC.open = window.__realOpen; return JSON.stringify(window.__opened);`)) || "null");
+  await openMaik();
+  ok(op && op.id === "meld_na" && op.pf && Object.keys(op.pf).length >= 3, "tapping MELD-Na opens MELD-Na with the values re-read for its inputs (" + (op && op.pf ? Object.keys(op.pf).join(",") : "none") + ")");
 
   // ── ICD workflow ──
   await send("icd code for type 2 diabetes mellitus", 2500);
