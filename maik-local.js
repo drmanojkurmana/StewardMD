@@ -1289,11 +1289,21 @@
     if (_protoP) return _protoP;
     var w = (typeof window !== "undefined") ? window : {};
     var pick = function (j) { return (j && (Array.isArray(j) ? j : j.protocols)) || []; };
-    if (w.SMD_MAIK_PROTOCOLS) return (_protoP = Promise.resolve(pick(w.SMD_MAIK_PROTOCOLS)));
+    if (w.SMD_MAIK_PROTOCOLS) { _protoList = pick(w.SMD_MAIK_PROTOCOLS); return (_protoP = Promise.resolve(_protoList)); }
     if (typeof fetch !== "function") return Promise.resolve([]);
     _protoP = fetch("/kb/clinical-protocols/index.json").then(function (r) { return r.ok ? r.json() : null; })
-      .then(pick).catch(function () { _protoP = null; return []; });
+      .then(pick).then(function (l) { _protoList = l; return l; }).catch(function () { _protoP = null; return []; });
     return _protoP;
+  }
+  var _protoList = null;
+  /* MaiK Cloud asks the same question synchronously while it builds its package (2026-10-02): the
+   * protocol for a TREATMENT question, from the list warmed when the MaiK sheet opens. null when the
+   * list is not loaded yet or nothing matches; the cloud answer then simply goes without it. */
+  function protocolForQuestion(pkg) {
+    if (!_protoList) { loadProtocols(); return null; }
+    if (!TREAT_Q.test(String((pkg && pkg.question) || ""))) return null;
+    var p = protocolFor(pkg, _protoList);
+    return p ? { id: p.id, title: p.title, summary: String(p.summary || "").slice(0, 700) } : null;
   }
   var CHILD_W = /\b(child|children|kid|infant|baby|toddler|neonat|newborn|paediatric|pediatric|month[- ]old)/i;
   // "a 50 year old man" is not a child: an age counts only under 18 years, a weight under 40 kg.
@@ -3004,7 +3014,7 @@
     // only way to assert WHICH passages were chosen (and that their citation metadata survived) is
     // to call the retriever itself. test/maik-rag-hybrid.test.mjs is the consumer.
     retrieveGrounding: retrieveGrounding, expansionTerms: expansionTerms, rerankPassages: rerankPassages,
-    isFollowUp: isFollowUp, isGreeting: isGreeting, SYSTEM_GREET: SYSTEM_GREET, stripReasoning: stripReasoning, scrubMetaTalk: METATALK.scrub, curatedPassages: curatedPassages, protocolFor: protocolFor, isIndexPage: isIndexPage, isChildQ: isChildQ, withCurated: withCurated,
+    isFollowUp: isFollowUp, isGreeting: isGreeting, SYSTEM_GREET: SYSTEM_GREET, stripReasoning: stripReasoning, scrubMetaTalk: METATALK.scrub, curatedPassages: curatedPassages, protocolFor: protocolFor, protocolForQuestion: protocolForQuestion, loadProtocols: loadProtocols, isIndexPage: isIndexPage, isChildQ: isChildQ, withCurated: withCurated,
     visionReady: visionReady, visionPathFor: visionPathFor, MAX_IMAGES: MAX_IMAGES, SYSTEM_IMAGE: SYSTEM_IMAGE,
     SYSTEM_IMAGE_FOLLOWUP: SYSTEM_IMAGE_FOLLOWUP,
     warm: tracked(warm), isDebugBuild: isDebugBuild, debugProbed: debugProbed, cancel: cancel, release: release,

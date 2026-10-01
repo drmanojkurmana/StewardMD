@@ -894,7 +894,7 @@ function trimHistoryHead(t, over) {
 }
 const PROMPT_ORDER = ["q", "engine", "kb", "treat", "refs", "sources", "doctor", "history", "earlier", "close"];
 const PROMPT_TRIM = ["earlier", "history", "doctor", "refs", "kb", "engine", "treat", "sources"];
-function renderGroundedPrompt(pkg, maxChars) {
+export function renderGroundedPrompt(pkg, maxChars) {
   const S = { q: [], doctor: [], history: [], earlier: [], engine: [], kb: [], treat: [], refs: [], close: [], sources: [] };
   let L = S.q;
   const r = pkg.reasoning || {}, pc = pkg.patientCase || {};
@@ -988,6 +988,12 @@ function renderGroundedPrompt(pkg, maxChars) {
         [d.dose, d.route, d.freq, d.duration && ("for " + d.duration)].filter(Boolean).map((x) => clip(x, 120)).join(" · ")));
     });
     if (t.overlayApplied && t.overlay) L.push("Hospital overlay (" + t.overlay.hospitalId + ", SEPARATE — does not replace the default): " + clip(JSON.stringify(t.overlay.recommendation), 700));
+  }
+  // The matching StewardMD clinical protocol (2026-10-02): a curated management summary for a treatment
+  // question (sepsis bundle, MgSO4 regimen, ORS plan B), which the disease notes often lack.
+  if (pkg.protocol && pkg.protocol.summary) {
+    L.push("\n=== STEWARDMD CLINICAL PROTOCOL: " + clip(pkg.protocol.title || "", 100) + " ===");
+    L.push(clip(pkg.protocol.summary, 700));
   }
   L = S.refs;
   const rf = pkg.refs || {};
