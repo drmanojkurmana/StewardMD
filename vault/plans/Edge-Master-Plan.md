@@ -348,6 +348,50 @@ Attribution for CC BY data goes in `licenses/`.
 Every item: unit test (`npm test`) plus a headless-browser test for UI changes, per CLAUDE.md.
 Git tag before merge. Flags default OFF until owner approves.
 
+### A0. Day 1 hard gates (from the Gemini review, corrected)
+Do these first. Any failure changes the plan before weeks of work are spent.
+
+1. **16 KB pages.** Google Play requires 16 KB page support for apps targeting Android 15+, and SMD
+   targets SDK 36.
+   - `libneedle.a` is a static archive. It has no LOAD segments, so `readelf -l` on it shows nothing
+     useful, and the archive is not what gets aligned. What gets aligned is **our** wrapper `.so`. Link
+     it with `-Wl,-z,max-page-size=16384` (the llama/whisper plugins already use
+     `ANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON`). Check that `.so` with `readelf -lW libsmd_needle.so | grep LOAD`
+     (Align must be 0x4000).
+   - The real risk is **runtime**: the engine calls `mmap` and may assume 4 KB offsets when it maps
+     the `.cact`. Run one load and one call on an **Android 15 emulator with the 16 KB system image**
+     and on a real phone. If it fails, report to Cactus and fall back to FunctionGemma.
+2. **Hard abort for a stuck Needle call.**
+   - **Android:** run Needle in a separate process (`android:process=":edge"` Service, Messenger IPC).
+     If a **warm** call passes 1,200 ms, kill the process; the next call reloads (cold load measured
+     0.7 to 3 s for 1 to 5 tools on a laptop, so the deadline must not apply to cold init). Also cap
+     `max_new_tokens` small (about 96).
+   - **iOS:** apps cannot spawn processes, so rely on the token cap plus a serial queue that drops
+     stale jobs.
+   - **FunctionGemma** runs through `capacitor-llama`, which already has `cancel()`. No extra process
+     needed.
+3. **Base FunctionGemma GGUF + grammar.** Before any training: load the base FunctionGemma GGUF in
+   `capacitor-llama`, expose the llama.cpp grammar sampler in `LlamaEngine.swift` and `llama_jni.cpp`,
+   and confirm one forced-JSON call on the 4 GB phone. Then run a **tiny dummy fine-tune** on the
+   rented GPU and convert it to GGUF (Q8_0 and Q4_K_M) to prove the training-to-phone pipeline end to end.
+4. **One canonical dataset format.** A single JSONL row shape, with two deterministic exporters so the
+   bake-off compares models, not datasets:
+   `{ id, input_text, lang, target_tool, slots: {name: value}, spans: {name: [start, end]}, negatives: [...], split }`
+   - `export_cactus` writes Cactus chat-format JSONL (OpenAI-style `tools` + `tool_calls`).
+   - `export_llama` writes the FunctionGemma chat template for HF/Unsloth training.
+   - `split` (train/test) is assigned once, by hashing `id`, so no test line can ever leak into training.
+5. **Memory and heat back-off contract** in `edge-runtime.js` (calibrate the numbers on the 4 GB phone):
+   - Skip Edge and use the Phase 0 rules (shared parser, `INSULIN_ASK.parse`) when
+     `ActivityManager.MemoryInfo.lowMemory` is true or `availMem` is under 250 MB, or thermal status is
+     SEVERE or above. On Android 14+, `onTrimMemory` no longer delivers the `TRIM_MEMORY_RUNNING_*`
+     levels, so do not rely on `TRIM_MEMORY_RUNNING_CRITICAL`.
+   - Never run an Edge call **while Whisper is decoding a chunk** (`whisper_full()`). Between chunks is
+     allowed; banning Edge for the whole recording would rule out Live Score Radar.
+   - Never run Edge while a MaiK pack is generating.
+   - If MainActivity's `onRenderProcessGone` fired this session, keep Edge off until the next launch.
+
+### A1. Then the week 1 items
+
 1. **Speaker gate fix:** `opd-emr.js:4292` and `:4257` stop hard-coding `speaker:"doctor"`; patient
    speech must not fill objective fields (`voice-emr-map.js merge` already supports this).
 2. **On-device speech only:** set `requiresOnDeviceRecognition` (iOS) and the prefer-offline extra
@@ -385,3 +429,77 @@ Git tag before merge. Flags default OFF until owner approves.
 | Native Telugu/Hindi | FunctionGemma, or IndicXlit romanisation, with its own gold set |
 
 Detail for each: [[Needle-Features]]. Evidence and measurements: [[Needle-Audit]].
+
+## Appendix C. Rule S2 validator: "every number sits next to its own label"
+
+Gemini proposed a 15-character window check. The idea is right, but that version would let real
+errors through:
+
+| Problem in the simple window check | Example | Result |
+|---|---|---|
+| The window catches the **neighbour's** label | "age 72 wt 58": the window around 58 contains "age" | weight 58 accepted as age |
+| `indexOf` finds the **first** match only | "wt 70 age 70" | can attribute the wrong occurrence |
+| Substring match | "1.4" found inside "11.4"; "5" inside "15" | wrong value accepted |
+| Format mismatch | model returns `72.0`, text says "72 yo" | correct value rejected |
+| Alias substring | "cr" inside "crcl" or "increase" | wrong label matched |
+| Spoken numbers | "pulse one ten" | no digits to find |
+| Repo rule | `const`, arrow functions | SMD client code is ES5 |
+
+**Reference rule (ES5):** a number is accepted for a slot only if the **nearest** label before it,
+or the nearest unit right after it, belongs to that slot, with **no other number in between**.
+Composite patterns (BP "150/90", GCS "E2V3M5") are taken from the existing deterministic parsers
+(`voice-vitals.js`), not from this check.
+
+```js
+// edge-grounding.js (sketch). SLOTS: { age: { labels: ["age","aged"], units: ["yo","y","yrs","years","m","f"] },
+//   weight_kg: { labels: ["wt","weight"], units: ["kg","kilo","kilos"] },
+//   serum_creatinine_mg_dl: { labels: ["cr","scr","s.cr","creat","creatinine"], units: ["mg/dl"] }, ... }
+function norm(t) {
+  t = String(t || "").toLowerCase();
+  if (window.SMD_VVITALS && SMD_VVITALS.wordsToNumbers) t = SMD_VVITALS.wordsToNumbers(t); // "one ten" -> "110"
+  return t.replace(/(\d)([a-z])/g, "$1 $2").replace(/([a-z])(\d)/g, "$1 $2");               // "72F" -> "72 f"
+}
+function tokens(t) {
+  var out = [], re = /\d+(?:\.\d+)?|[a-z][a-z.\/]*/g, m;
+  while ((m = re.exec(t))) out.push({ s: m[0], num: /^\d/.test(m[0]) ? parseFloat(m[0]) : null });
+  return out;
+}
+function slotOf(tok, i, SLOTS) {                      // attribution of the number at token i
+  var MAX = 2, k, j, name;
+  for (k = 1; k <= MAX; k++) {                        // unit directly after: "58 kg", "72 f"
+    j = i + k; if (j >= tok.length || tok[j].num !== null) break;
+    for (name in SLOTS) if (SLOTS[name].units.indexOf(tok[j].s) >= 0) return name;
+  }
+  for (k = 1; k <= MAX; k++) {                        // label directly before: "wt 58", "cr 1.4"
+    j = i - k; if (j < 0 || tok[j].num !== null) break;   // another number in between: stop
+    for (name in SLOTS) if (SLOTS[name].labels.indexOf(tok[j].s) >= 0) return name;
+  }
+  return null;
+}
+function validateSlot(rawText, slotName, value, SLOTS) {
+  var tok = tokens(norm(rawText)), v = parseFloat(value), i;
+  if (isNaN(v)) return false;
+  for (i = 0; i < tok.length; i++) {
+    if (tok[i].num !== null && Math.abs(tok[i].num - v) < 1e-9 && slotOf(tok, i, SLOTS) === slotName) return true;
+  }
+  return false;                                       // no occurrence is attributed to this slot
+}
+```
+
+Token matching is whole-token, so "1.4" never matches inside "11.4", and "cr" never matches inside
+"crcl". Numbers compare numerically, so `72.0` equals "72".
+
+**Required unit tests (part of the danger set):**
+
+| Input | Slot = value | Must be |
+|---|---|---|
+| "age 72 wt 58" | age = 58 | rejected |
+| "age 72 wt 58" | weight = 58 | accepted |
+| "bp 150/90 age 50" | age = 150 | rejected |
+| "wt 70 age 70" | age = 70 and weight = 70 | both accepted |
+| "crcl 11.4" | creatinine = 1.4 | rejected |
+| "72F 58kg cr 1.4" | age 72, weight 58, creatinine 1.4 | all accepted |
+| "72 yo" | age = 72.0 | accepted |
+| "pulse one ten" | heart rate = 110 | accepted |
+| "sugar 342 weight 80" | weight = 342 | rejected |
+| "65M, cr 2.1" | weight = 2.1 | rejected |
