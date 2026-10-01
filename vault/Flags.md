@@ -240,7 +240,7 @@ default (ON) is what you get.
 | Flag | Def | Why |
 |---|---|---|
 | `smd_dose_calc` | **ON** | [[Dose Calculator]]. Owner 2026-09-28: monograph doses are verified, so the calculator ships on. Off per device with `smd_dose_calc = "0"` or `?dosecalc=0`. |
-| `smd_neo` | **OFF** | [[Neonatal]]. Master switch for the NICU layer (all content ai_drafted, licences not cleared). `?neo=1` / Experimental toggle. Per-tool `smd_neo_<dose\|prep\|inf\|fluids\|growth\|bili\|scores\|ref\|proc\|tdm>` default ON under the master; `"0"` pulls one tool. |
+| `smd_neo` | **ON** (Beta) | [[Neonatal]]. Owner 2026-10-01: "Make it default on for everyone under beta label" (was OFF 2026-09-30). Content ai_drafted with Draft badges; licences not cleared (see the Decisions entry). Off per device: Experimental toggle, `?neo=0` or `smd_neo = "0"`. Per-tool `smd_neo_<dose\|prep\|inf\|fluids\|growth\|bili\|scores\|ref\|proc\|tdm>` default ON under the master; `"0"` pulls one tool. |
 
 ### Insulin  <sub>3 ON · 0 OFF</sub>
 

@@ -32,6 +32,19 @@ owner switches the rule off). Keyword specialty routing is approximate; "Show al
 a medicine only on an exact whole-word match (US names mapped), so it may miss some; it never claims absence.
 **Status.** Built and tested (unit, headless UI with design audit); Jan Aushadhi data waits for the owner's run.
 
+## 2026-10-01 · Neonatal layer ON for everyone, labelled Beta
+
+**Decision (owner: "Make it default on for everyone under beta label").** `smd_neo` defaults ON; the Home tile
+carries the BETA label, the hub header a Beta chip, and every data screen keeps its Draft badge. A device opts
+out with the Experimental switch, `?neo=0` or `smd_neo = "0"`. With it on, the dose calculator's
+no-extrapolation rule (neonate: neonatal rows only) now applies to every user.
+**Why.** Owner call, same posture as Ophthalmós (on before sign-off, visibly marked).
+**Trade-off.** Ships before a neonatologist has reviewed any file and before the licence questions in the
+2026-09-30 entry are answered: INTERGROWTH-21st, AAP 2022, NICE outside the UK, WHO 2024 SBI (CC BY-NC-SA IGO),
+ASHP S4S, VON, N-PASS, StatPearls and several CC BY-NC sources are non-commercial or need permission.
+Set `smd_neo` back to OFF in `neo-flags.js` (and `home.js` `neoOn`, `sidebar-redesign.js` `def`) to reverse.
+**Status.** Done 2026-10-01; reaches phones with the next native build / OTA.
+
 ## 2026-09-30 · Neonatal layer: behind `smd_neo` (default OFF), every number quoted from a fetched source
 
 **Decision (owner plan "StewardMD Neonatal Layer").** Ten neonatal tools (dosing by GA/PNA/PMA, preparation,

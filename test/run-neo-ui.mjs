@@ -1,5 +1,5 @@
-// Real-browser test: the neonatal layer (neo-*.js) end to end at phone width. Flag off first, then
-// ?neo=1: baby record, every tool screen, the tenfold guard, the high-alert second check, the dose
+// Real-browser test: the neonatal layer (neo-*.js) end to end at phone width. Default ON (Beta), the
+// switch off, then on again: baby record, every tool screen, the tenfold guard, the high-alert second check, the dose
 // calculator's neonatal path, 360 px overflow, dark mode, and the [hidden] display trap.
 // Expected numbers are read from data/neo/*.json, not typed here.
 //   node test/run-neo-ui.mjs      (CHROME=/path/to/chrome to override the browser)
@@ -43,23 +43,29 @@ try {
   await call('Runtime.enable');
   await call('Emulation.setDeviceMetricsOverride', { width: 360, height: 780, deviceScaleFactor: 1, mobile: true });
 
-  // 0) Flag OFF (default): nothing neonatal loads or shows.
+  // 0) Default ON (owner 2026-10-01, Beta): a fresh device loads the layer with no flag set.
   await call('Page.navigate', { url: `http://localhost:${PORT}/` });
   ok(await until('!!window.SMD_NEO_FLAGS && !!window.SMD_openRoute', 30000), 'app loaded, neo-flags.js present');
-  await sleep(800);
-  ok(await ev(`SMD_NEO_FLAGS.on()===false && !window.SMD_NEO_HUB && !window.SMD_NEO_DOSE`), 'flag OFF by default: the layer does not load');
-  ok(await ev(`!(window.SMD_HOME_TOOLS&&SMD_HOME_TOOLS().some(t=>t.act==='neo'))`), 'flag OFF: no Neonatal home tool');
-  ok(await ev(`!(MEDCALC._calcs||[]).some(c=>c.cat==='Neonatology')`), 'flag OFF: no neonatal calculators');
-  // The switch lives in Settings > Experimental Features and writes smd_neo.
+  ok(await until('!!window.SMD_NEO_HUB && !!window.SMD_NEO_TDM', 15000) && await ev(`SMD_NEO_FLAGS.on()===true && localStorage.getItem('smd_neo')===null`), 'DEFAULT ON: the layer loads with no flag set');
+  ok(await ev(`(()=>{const t=SMD_HOME_TOOLS().find(t=>t.act==='neo');return !!t})()`), 'Neonatal tile in the home tools registry');
+  // The Experimental switch shows ON and turns it OFF ("0"); OFF, nothing neonatal loads.
   await ev(`window.SMD_openExperimental&&SMD_openExperimental();1`);
-  ok(await until(`!!document.querySelector('#sbrExperimental [data-sbr-tg=neo]')`, 5000), 'Experimental Features lists the Neonatal layer switch');
+  ok(await until(`!!document.querySelector('#sbrExperimental [data-sbr-tg=neo].on')`, 5000), 'Experimental Features shows the Neonatal layer (Beta) switch ON');
+  ok(/Neonatal layer \(Beta\)/.test(await text('#sbrExperimental')), 'switch is labelled Beta');
   await click('#sbrExperimental [data-sbr-tg=neo]');
-  ok(await ev(`localStorage.getItem('smd_neo')==='1' && SMD_NEO_FLAGS.on()`), 'the switch turns smd_neo on (reload to apply)');
-  await ev(`localStorage.removeItem('smd_neo');document.getElementById('sbrExperimental')&&document.getElementById('sbrExperimental').remove();1`);
+  ok(await ev(`localStorage.getItem('smd_neo')==='0' && SMD_NEO_FLAGS.on()===false`), 'the switch turns smd_neo off');
+  await call('Page.navigate', { url: `http://localhost:${PORT}/` });
+  ok(await until('!!window.SMD_NEO_FLAGS && !!window.SMD_openRoute', 30000), 'reloaded with smd_neo = "0"');
+  await sleep(800);
+  ok(await ev(`SMD_NEO_FLAGS.on()===false && !window.SMD_NEO_HUB && !window.SMD_NEO_DOSE`), 'OFF: the layer does not load');
+  ok(await ev(`!(window.SMD_HOME_TOOLS&&SMD_HOME_TOOLS().some(t=>t.act==='neo'))`), 'OFF: no Neonatal home tool');
+  ok(await ev(`!(MEDCALC._calcs||[]).some(c=>c.cat==='Neonatology')`), 'OFF: no neonatal calculators');
+  await ev(`localStorage.removeItem('smd_neo');1`);
 
-  // 1) Flag ON
-  await call('Page.navigate', { url: `http://localhost:${PORT}/?neo=1` });
-  ok(await until('!!window.SMD_NEO_HUB && !!window.SMD_NEO && !!window.SMD_NEO_DOSE && !!window.SMD_NEO_TDM && !!window.SMD_openRoute', 30000), 'flag ON (?neo=1): the layer loads');
+  // 1) Back to the default (ON)
+  await call('Page.navigate', { url: `http://localhost:${PORT}/` });
+  ok(await until('!!window.SMD_NEO_HUB && !!window.SMD_NEO && !!window.SMD_NEO_DOSE && !!window.SMD_NEO_TDM && !!window.SMD_openRoute', 30000), 'default ON: the layer loads');
+  ok(await until(`!!document.querySelector('.rnav-tile[data-act=neo] .rnav-tile-beta')`, 10000), 'Neonatal home tile shows the BETA label');
   ok(await ev(`SMD_HOME_TOOLS().some(t=>t.act==='neo')`), 'Neonatal tile in the home tools registry');
   ok(await ev(`SMD_NEO_HUB.tools().length`) >= 10, 'hub lists every tool');
   await ev(`SMD_openRoute('neo');1`);
