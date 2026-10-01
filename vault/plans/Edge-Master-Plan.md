@@ -1,468 +1,509 @@
 ---
 tags: [plan, ai, needle, edge]
-status: approved plan v1 (owner decisions in section 14)
+status: approved plan v2 (owner decisions in section 15)
 owner: Dr Manoj Kurmana
 ---
-# StewardMD Edge: the master plan
+# StewardMD Edge: the master plan (v2)
 
 Written as one person who is a doctor, a software engineer and an ML engineer. Built from the whole
 investigation: [[Needle-Audit]], [[Needle-Features]], the ChatGPT review, the senior engineer review,
-and my own tests of the real Needle model.
+the Gemini review, and the second developer review (v2 changes are listed in section 19).
 
 ---
 
 ## 0. The plan in one paragraph
 
-We add a **tiny AI on the phone** (about 35 to 290 MB) that does one job: it turns what a doctor
-types or says into a **request that StewardMD's existing tools already know how to answer**. The
-tiny AI never decides anything medical. StewardMD's calculators, drug database, ICD index and rules
-do the medicine. MaiK (the big AI) only explains. The doctor always confirms before anything is saved.
-The result: useful AI offline, on cheap Android phones that cannot run MaiK today, and faster answers
-for everyone.
+We add a **small AI on the phone** that does one job: it turns what a doctor types into a **request
+that StewardMD's existing tools already know how to answer**, with every proposed value carrying its
+evidence. The small AI never decides anything medical. StewardMD's calculators, drug database, ICD
+index and rules do the medicine. MaiK only explains. The doctor always confirms before anything is
+saved. Version 1 is **typed only, read-only, five workflows, Android 4 GB and up**. Every riskier
+workflow (voice, ICU dictation, Scribe, prescriptions, Code Blue) is a **separate project** that must
+earn its own release.
 
 ---
 
-## 1. What we are building, and what we are not
+## 1. Scope
 
-**Building (in this order):**
-1. A **local request router**: "open CURB-65", "meropenem renal dose", "ICD for CAP" go straight to
-   the right StewardMD screen or lookup, offline, in under a second.
-2. **Prefilled calculators**: "crcl 72F 58 kg creat 1.4" opens CrCl already filled in.
-3. **ICU dictation offline**: "BP 110 by 70, pulse 96, PEEP 8, FiO2 40" becomes a review card.
-4. **Scribe fact log (English first)**: each spoken fact is captured with the exact words it came from.
-5. **Show-off features** once the above are safe: answer-as-you-type, Live Score Radar, Code Blue
-   voice log, say-it logbook.
+### Version 1 (this plan, 4 to 6 weeks)
+Five **typed, read-only** workflows:
 
-**Not building:**
-- An AI that diagnoses, chooses antibiotics, or calculates doses. Engines do that.
-- A replacement for MaiK, Whisper, the ICU monitor photo reader, or the knowledge-base search.
-- Anything that saves to a patient record without a doctor's tap.
+| # | Workflow | Example | Engine that answers |
+|---|---|---|---|
+| W1 | Open a named calculator | "open CURB-65" | `MEDCALC.open` |
+| W2 | Calculator with tightly constrained prefill | "crcl 72F 58 kg creat 1.4" | `MEDCALC.open(id, prefill)`, doctor reviews every field |
+| W3 | Drug or monograph section | "meropenem renal dose" | `MEDAPI` / `offline-clinical.js` |
+| W4 | ICD candidates | "ICD for CAP with T2DM and CKD" | `SMD_ICD.localSearch` |
+| W5 | Open a module or KB topic | "open antibiogram", "loose motions in a child protocol" | `home.js` ACT map, KB |
+
+### Separate projects, each with its own gate, dataset and release
+ICU dictation, English Scribe fact log, Live Score Radar, prescription drafts, Code Blue voice log,
+Sepsis Hour-1 log, say-it logbook, OSCE examiner, Round Mode, PHI Shield, native Telugu/Hindi.
+A routing success does **not** validate any of these.
+
+### Never
+An AI that diagnoses, chooses antibiotics, or calculates doses. A replacement for MaiK, Whisper, the
+ICU monitor photo reader, or KB search. Anything that saves to a record without a doctor's tap.
 
 ---
 
-## 2. Doctor's safety rules (never broken)
+## 2. Safety rules (never broken)
 
 | # | Rule | Why, in clinical terms |
 |---|---|---|
-| S1 | The AI **proposes**, the doctor **confirms**. No silent writes. | Same as a resident's draft order: a senior signs it. |
-| S2 | Every number the AI fills must sit **next to its own label** in the source text ("cr 1.4", "wt 58"). | Measured: base Needle turned "BP 150" into age 150. Its own check could not see it. |
-| S3 | Engines compute, AI never computes. Doses, scores, codes come from existing code only. | Arithmetic must be auditable and identical every time. |
-| S4 | If the AI is unsure, it **passes the request on** (to MaiK or the normal screen). It never refuses. | MaiKScope's rule: zero false refusals of real clinical questions. |
-| S5 | Negation, tense and person are checked by rules, not trusted to the AI: "no fever", "stopped metformin", "mother has diabetes". | These are the classic documentation errors. |
-| S6 | Sound-alike drugs are never auto-resolved (Losec vs Lasix, Zantac vs Xanax style). Ambiguous names need a tap. | LASA errors are a top medication-safety hazard. |
-| S7 | Reset the AI between patients and between tasks. | No carry-over of one patient's facts into the next. |
-| S8 | No patient data ever goes into training. Training data is synthetic or consented, de-identified phrasing. | PHI rule in CLAUDE.md. |
-| S9 | Every feature ships behind a flag, with a git tag to roll back to. | CLAUDE.md "reversible changes". |
-| S10 | Offline failure must be visible. If the model is missing, the old screen works exactly as today. | No silent loss of function on a ward round. |
+| S1 | The AI **proposes**, the doctor **confirms**. No silent writes. A tap is one barrier, not the only one. | A resident's draft order still needs a senior's signature, and a checker before that. |
+| S2 | **Every proposed field carries an evidence record** (section 2.1). A field without a complete record is not shown as filled. | Real numbers in the wrong context are as dangerous as invented ones. |
+| S3 | Engines compute, the AI never computes. Doses, scores, codes come from existing code only. | Arithmetic must be auditable and identical every time. |
+| S4 | **Never a dead end.** If Edge rejects an unsafe extraction or is unsure, the doctor can always continue through a safe path (the normal screen, or MaiK when policy allows). This is not the same as sending every uncertain request to a bigger model. | Rejecting an unsafe value is correct; leaving the doctor stuck is not. |
+| S5 | **Assertion status is mandatory:** present, absent, historical, family, planned, stopped, hypothetical, unknown. Only "present, current, this patient" can fill a calculation input. | "Mother has diabetes", "stop metformin", "BP was 80/50 before fluids" are classic errors. |
+| S6 | **Missing is not negative.** An unmentioned checkbox stays unknown, never "no". | "No confusion" must be stated to count as absent; silence is not evidence. |
+| S7 | **No stale fields.** Each request starts from an empty proposal; nothing carries over from an earlier extraction. | A checkbox checked by a previous request must not survive into this one. |
+| S8 | **Patient and session binding.** Every request and every result carries the patient/session ID; a result for a different ID is discarded. Edge resets on patient switch. | A value from bed 12 must never land in bed 14. |
+| S9 | Sound-alike drugs are never auto-resolved (Losec vs Lasix style). Ambiguous names need a tap. | LASA errors are a top medication-safety hazard. |
+| S10 | Distinct clinical score versions stay distinct (MELD, MELD-Na, MELD 3.0). Only true aliases of the same calculation are merged. | Different formulas give different numbers and different populations. |
+| S11 | No patient data in training. Synthetic data and public datasets only. | PHI rule in CLAUDE.md. |
+| S12 | Every feature behind a flag, with a git tag to roll back to. | CLAUDE.md "reversible changes". |
+| S13 | Offline failure is visible. If the model is missing or backed off, the old screen works exactly as today. | No silent loss of function on a ward round. |
+
+### 2.1 The evidence record (required for every proposed field)
+
+```
+{ field, value, unit, span: [start, end], source_text, patient_session_id,
+  time_context: "current" | "past" | "unknown",
+  assertion: "present" | "absent" | "historical" | "family" | "planned" | "stopped" | "hypothetical" | "unknown",
+  extractor: "rules" | "edge:<model-hash>", schema_version, request_id }
+```
+
+Acceptance for a calculation input requires all of:
+1. `span` exists and the text at `span` is the value (Appendix C label check).
+2. `assertion = present` and `time_context = current`. Anything else is shown as context, never filled.
+3. `unit` is known and converted by deterministic code, or the field is left empty.
+4. `patient_session_id` matches the open patient.
+5. `schema_version` matches the calculator version in use.
+
+Example: "Creatinine was 1.4 last month, now 2.1" gives two well-labelled numbers. Only 2.1
+(`time_context = current`) may fill CrCl; 1.4 is shown as "previous value" context.
 
 ---
 
-## 3. What we already know (facts, with evidence)
+## 3. What we know, worded precisely
 
-### About Needle (read from code, and tested on a 4-core laptop CPU)
-| Fact | Evidence |
-|---|---|
-| Model file is **35.3 MB**, not 8 to 29 MB | Hugging Face `needle3.cact` = 35,335,380 bytes |
-| Engine is about 1 MB per platform; Android, iOS, watchOS, WebAssembly builds exist | HF repo listing |
-| Engine **cannot be cancelled or unloaded**, holds **one tool list at a time**, not thread-safe | `needle.h` |
-| Reads about **256 tokens** of memory; fails on long text | config `kv_window: 256`; test: made up vitals past about 150 words |
-| **No Hindi or Telugu letters** in its 8,192-word vocabulary | tokenizer scan |
-| Embeddings are **3,072** numbers long and weak for medical synonyms (3 of 25 right) | test |
-| Out of the box on clinical requests: **8 of 34** routed right; fact extraction **invented 29 fields** | test |
-| Android library has **no network functions**, so it cannot send telemetry | symbol check |
-| Local fine-tuning **loses the confidence score**; Cactus's hosted fine-tuning keeps it | `needle/__init__.py` |
-| Fine-tuning on a laptop CPU is far too slow (about 60 s per step); needs a GPU or the hosted platform | test |
+### 3.1 About Needle
+Bench details, hashes and scripts: `vault/plans/edge-data/bench/README.md`. Results come from a
+4 vCPU cloud container, not a phone, with base (untuned) weights; raw logs were not retained.
 
-### About StewardMD (read from code)
+| Statement | Evidence | What it does **not** prove |
+|---|---|---|
+| Shipped base weights are 35,335,380 bytes, not "8 to 29 MB" | HF file size, sha256 in bench README | Smaller ladder depths may be smaller; unmeasured |
+| C API has no cancel and no unload; one process-global, non-thread-safe model; one tool list bound at a time | `needle.h` comment and signatures | Whether a future engine adds them |
+| Config sets `kv_window: 256`; extraction quality collapsed from about 169 words in our test | `config.json`; `longctx.py` | It does **not** by itself set a hard 256-token input limit. The supported input length must be measured and written as a contract |
+| Tokenizer has 8,192 pieces and no Devanagari or Telugu pieces | tokenizer scan | Latin-letter coverage does **not** prove Hinglish/Tenglish understanding; that must be tested |
+| Embeddings have 3,072 dimensions; 3 of 25 medical synonym queries top-1 | `emb2.py` | Fine-tuned embeddings are untested |
+| Base model: 8/34 routing over 26 tools; fact extraction filled 29 fields with real numbers from the wrong place | `route.py`, `facts.py` | Fine-tuned performance is unknown |
+| `android-arm64/libneedle.a` imports no socket, connect or DNS functions | `nm -u` symbol scan | A symbol scan is evidence, **not proof**, that the whole app sends nothing; see section 10 |
+| Local LoRA export drops the confidence head; hosted fine-tuning keeps a head | `needle/__init__.py` | A kept head is **not** automatically calibrated for SMD; it must be validated on held-out SMD requests |
+| CPU fine-tuning ran at about 60 s per step | `gen.py` run, stopped | Nothing about GPU or hosted training time |
+
+### 3.2 About StewardMD
 | Fact | Where |
 |---|---|
-| 446 calculators with a headless `MEDCALC.run(id, inputs)` and `MEDCALC.open(id, prefill)` | `calculators.js:8576`, `:8661` |
-| MaiK names a calculator but **opens it empty** | `home.js:7078`, `home.js:9043` |
-| MaiKBrain's calculator step **never gets inputs** | `kb/ai/maik-brain.js:316` |
-| One place to plug in: `route()`, `route0()`, `localCall()` | `maik-engine.js:538` onward |
-| Local mode has **no router** (`refine` returns null) | `maik-engine.js` `route0` |
-| Local AI needs a 1.1 GB+ pack and **6 GB RAM**; `localReady()` requires that pack | `maik-models.js`, `maik-engine.js:120` |
-| The big model is warmed every time the MaiK sheet opens | `home.js:6270` |
-| ICU dictation (kind `monitor`) has **no offline path** | `voice.js:389`, no `REQ` entry |
-| ICU review screen already exists | `icu.js:2259 reviewVoice()` |
+| 446 calculators; headless `MEDCALC.run(id, inputs)`, `MEDCALC.open(id, prefill)` | `calculators.js:8576`, `:8661` |
+| MaiK names a calculator but opens it empty | `home.js:7078`, `home.js:9043` |
+| MaiKBrain's calculator step never gets inputs | `kb/ai/maik-brain.js:316` |
+| Integration seam: `route()`, `route0()`, `localCall()` | `maik-engine.js:538` onward |
+| Local mode has no router (`refine` returns null) | `maik-engine.js` `route0` |
+| `localReady()` requires an installed MaiK pack (1.1 GB+, 6 GB RAM floor) | `maik-engine.js:120`, `maik-models.js` |
+| The big model warms every time the MaiK sheet opens | `home.js:6270` |
+| Three different MELD calculators: `meld3` (MELD 3.0), `meld` (MELD and MELD-Na), `meld_na` (MELD-Na) | `calculators.js:36`, `:690`, `:4050` |
+| ICU dictation (kind `monitor`) has no offline path | `voice.js:389` |
 | Drug lookups already work offline on native | `offline-clinical.js:218 installRouting()` |
-| Insulin Ask is the template: rules parse first, bounds on every value, AI only fills blanks | `insulin-ask.js` |
-| `capacitor-llama` does not expose grammar (forced-JSON) decoding | plugin source |
-| Gemma 3 270M (FunctionGemma's base) already downloads as the MedGemma draft model | `maik-models.js:139` |
-| Cache API is wiped on every native launch, so model files must live in Filesystem | `index.html:146-155` |
-| New native code needs a store release; JS can ship over OTA, gated by `minNativeBuild` | `native-ota.js` |
+| Insulin Ask is the template: rules parse first, bounds on every value | `insulin-ask.js` |
+| `capacitor-llama` does not expose grammar decoding; it does expose `cancel()` | plugin source |
+| Gemma 3 270M (FunctionGemma's base) already downloads as the MedGemma draft | `maik-models.js:139` |
+| Cache API is wiped on every native launch | `index.html:146-155` |
+| New native code needs a store release; JS ships over OTA, gated by `minNativeBuild` | `native-ota.js` |
+
+### 3.3 About every extractor (no component is "safe by design")
+| Component | Known failure |
+|---|---|
+| Regex parsers | Can attach a real number to the wrong field ("age 72 wt 58"), and miss phrasings. They do not invent digits, but they can misattribute them |
+| Needle / FunctionGemma | Wrong tool, wrong field, wrong assertion, invented values |
+| GLiNER (later) | Picks only spans from the text, but can pick the wrong span or the wrong label |
+| MaiK packs | Medical reasoning quality is **under evaluation**, not assumed |
+| Confidence scores | Must be calibrated on held-out SMD data before any threshold is used |
 
 ---
 
 ## 4. The design
 
 ```
- Doctor types or speaks
+ Doctor types (v1: typed only)
         |
         v
- [Layer 0: Rules]  exact names, regex parsers (voice-vitals, insulin-ask), MaiKScope
-        |  resolved? ------------------------------+
-        v  not resolved                            |
- [Layer 1: Edge AI]  picks ONE of 3-5 candidate     |
-   tools and fills its fields (Needle or            |
-   FunctionGemma, chosen by bake-off)               |
-        |                                          |
-        v                                          v
- [Validators]  label-next-to-number, units, ranges (INSULIN_ASK.BOUNDS),
-               negation, tense, person, sound-alike drugs, catalog membership
+ [Layer 0: Rules]  exact names, shared parser, MaiKScope, ambiguity checks ("MS")
+        |  resolved ------------------------------------------+
+        v  not resolved                                       |
+ [Candidates]  existing word matching picks 3 to 5 tools       |
+        |  (measured: did the right tool make the list?)       |
+        v                                                     |
+ [Layer 1: Edge model]  picks one tool, proposes fields        |
+        |                                                     |
+        v                                                     v
+ [Validators]  evidence record (2.1), label check (App. C), units, ranges,
+               assertion, time, patient/session ID, LASA, catalog membership
         |
-        +--> unsure / empty --> normal path (MaiK or the existing screen). Never a refusal.
-        |
-        v
- [Layer 2: StewardMD engines]  MEDCALC.run, SMD_DOSECALC, ICD index, INTERACTIONS,
-                               ABG_STORE, ICU review, Rx pad (draft)
+        +--> rejected / unsure --> safe path: normal screen, or MaiK if policy allows (S4)
         |
         v
- [Confirm card]  "Using MEDCALC.run(crcl): CrCl 38 mL/min. Open / Edit / Dismiss"
+ [Engines]  MEDCALC.run, MEDAPI / offline-clinical, SMD_ICD.localSearch, module/KB open
+        |
+        v
+ [Confirm card]  each value shows its source words and status; nothing pre-accepted
         |
         v  (only if the doctor asks "why?")
- [Layer 3: MaiK]  explanation with retrieved evidence and claim grounding
+ [MaiK]  explanation with retrieved evidence and claim grounding
 ```
 
-### New pieces (all behind flag `smd_edge`, default OFF)
+### 4.1 New pieces (behind flag `smd_edge`, default OFF)
 | File | Job |
 |---|---|
-| `local-plugins/capacitor-needle/` | Native bridge. Android: JNI, Needle linked statically into a uniquely named `.so`. iOS: xcframework. Weights downloaded to Filesystem with a pinned sha256, reusing the Llama plugin's downloader. |
-| `edge-runtime.js` | One queue for all calls (the engine is single-threaded); reset between patients; output limits; drops stale jobs; status. Readiness does **not** depend on `localReady()`. |
-| `edge-schemas.js` | Small versioned tool lists, generated from `MEDCALC._calcs` and the other engine catalogs. |
-| `edge-candidates.js` | Picks the 3 to 5 likely tools per request using existing word matching. Uses a fixed bank of tool groups (renal, sepsis, cardiac, liver, OPD, ICU) so the engine rarely reloads. |
-| `edge-router.js` | Plugs into `maik-engine.js route()` before the engine choice, like `doseAnswer()` does today. |
-| `edge-grounding.js` | All validators in section 2 (S2, S5, S6) plus units and ranges. |
-| `window.SMD_EDGE` | `route(text)`, `extract(text, schema)`, `available()`, `load()`, `release()` |
+| `local-plugins/capacitor-needle/` | Native bridge. Android: JNI wrapper `.so`, Needle linked statically, uniquely named, 16 KB aligned, runs in process `:edge`. iOS: xcframework, serial queue. Weights in Filesystem, sha256 pinned. |
+| `edge-runtime.js` | The runtime contract in section 4.2 |
+| `edge-schemas.js` | Versioned tool lists from `MEDCALC._calcs` (with `opts`), drug sections, ICD, modules, KB topics |
+| `edge-candidates.js` | 3 to 5 candidates per request from a fixed bank of tool groups, so the engine rarely rebinds |
+| `edge-router.js` | Plugs into `maik-engine.js route()` before the engine choice, like `doseAnswer()` |
+| `edge-grounding.js` | Builds and checks the evidence record (2.1) and the label check (Appendix C) |
+| `window.SMD_EDGE` | `route(text, ctx)`, `extract(text, schema, ctx)`, `available()`, `load()`, `release()`; `ctx` must contain `patient_session_id` |
+
+### 4.2 Runtime contract (the engine cannot be cancelled)
+| Situation | Behaviour |
+|---|---|
+| Queue | At most **1 running + 1 waiting**. A new request replaces the waiting one; it never queues behind it. |
+| Deadline | Warm call: 1,200 ms (calibrate on the 4 GB phone). Cold init has its own budget and is never killed mid-load. |
+| Deadline passed, Android | Kill process `:edge`. The running computation stops with the process. Next request starts a cold load; Edge shows "unavailable" until ready. |
+| Deadline passed, iOS | The computation **keeps running** (no process isolation, no cancel). Its result is discarded; the doctor gets the rules result or the normal screen at once. Edge accepts no new work until the stuck call returns. `max_new_tokens` is capped (about 96) so a call cannot run long. |
+| FunctionGemma | Runs through `capacitor-llama`, whose `cancel()` really stops generation. |
+| Patient switch | Increment the session token. Any in-flight result with the old token is discarded on arrival. Engine `reset` before the next request. |
+| Memory pressure / heat | Back-off contract in A0.5: skip Edge, use rules. |
+| `release()` | **Honest semantics.** Needle in-process: unbinds the tool list only; weights stay in memory until the app exits. Android `:edge`: release = stop the process, which frees the memory. Documented in code and in AI settings. |
+| App backgrounded / resumed | No call starts in the background; in-flight results are re-checked against the session token on resume. |
 
 ---
 
 ## 5. Which model does what
 
-| Model | Size | Strength | Weakness | Use for |
+| Model | Size on disk | Strength | Weakness | v1 role |
 |---|---|---|---|---|
-| **Needle 3** | 35 MB | Tiny, fast, watch build, calibrated confidence | English only, 256-token memory, new native engine | Low-RAM phones, watch, instant commands |
-| **FunctionGemma 270M** | about 290 MB | Hindi/Telugu letters, 32K memory, runs on our **existing** llama plugin | 8x bigger, no calibrated confidence, Telugu quality unknown | Main phone router if it wins the bake-off |
-| Existing regex parsers | 0 MB | Never invent values | Miss phrasings | Always run first |
-| GLiNER-biomed (later) | small | Can only point at words in the text, so it cannot invent | New ONNX model, licence check | Long Scribe transcripts |
-| IndicXlit (later) | about 11M params | Turns Telugu/Hindi letters into English letters | Words only, not meaning | Mixed-language input for Needle |
-| SNOMED CT India (later) | data | Official synonyms, free licence via NRCeS | Licence paperwork | Synonyms, ICD mapping |
-| MaiK packs (existing) | 1.1 to 6 GB | Real medical reasoning | Slow, 6 GB RAM | Explanations only |
+| **Needle 3** | 35 MB | Tiny, watch build, confidence head (hosted tune) | No Indic letters, short reliable input, new native engine, no cancel | Bake-off candidate |
+| **FunctionGemma 270M** | about 290 MB (Q8) | Existing llama plugin with `cancel()`; multilingual tokenizer | 8x bigger; its own memory and heat budget; Indic and Hinglish quality unknown | Bake-off candidate |
+| Shared rules parser | 0 | Predictable, auditable | Misses phrasings; can misattribute | Always first; the baseline |
+| MaiK packs | 1.1 to 6 GB | Explanations | Slow, 6 GB RAM; reasoning under evaluation | Explanation only, outside v1 |
 
-**Decision method: a bake-off.** Fine-tune both Needle and FunctionGemma on the same data, test on
-the same gold set, on the same phones. Pick per device tier. Do not guess.
+Each model has **its own budget** (section 9). FunctionGemma does not inherit Needle's numbers.
 
 ---
 
 ## 6. Training plan
 
-**Principle:** teach the model **StewardMD's buttons**, not medicine. "Doctor wants the CrCl tool
-with these numbers", never "what is the treatment of pneumonia".
+**Principle:** teach the model StewardMD's buttons and the evidence record, not medicine.
 
 | Step | What | Detail |
 |---|---|---|
-| 6.1 | Tool catalog | Export tool schemas from `MEDCALC._calcs` (use `opts` for choices, not `list()` which drops them), dose engine, ICD search, module list, KB topics, ICU fields. Merge duplicates (`meld3`, `meld`, `meld_na`). |
-| 6.2 | Synthetic data | A generator writes thousands of examples per tool: Indian clinical shorthand ("creat", "65M", "E2V3M5", "1-0-1", "bd", "after food"), units, typos, voice-style numbers ("one ten by seventy"), negation, tense, family history, off-topic, and "not enough info". |
-| 6.3 | Hard negatives | Pairs that look alike but differ: "start" vs "stop", "patient" vs "mother", "mg" vs "mcg", BP vs age numbers, Losec vs Lasix. |
-| 6.4 | Real phrasing | Public datasets (section 16) plus, ideally, 150 lines typed by the owner and the 2 reviewing doctors. Hinglish/Tenglish in English letters (Q3). |
-| 6.5 | Train | Hosted platform (keeps the confidence score) or a rented GPU (see decision Q4). Never a laptop CPU. |
-| 6.6 | Sizes | Needle can be cut to 4, 8, 12 or 20 layers. Train once, test each size on each phone tier. |
+| 6.1 | Tool catalog | Export from `MEDCALC._calcs` with `opts`, required inputs, units and intended population. **Keep score versions distinct** (`meld3`, `meld`, `meld_na`); merge only true aliases of the same calculation, documented in `edge-schemas.js`. Drug sections, ICD search, modules, KB topics. |
+| 6.2 | Synthetic data | Indian shorthand ("creat", "65M", "1-0-1"), units, typos, Hinglish/Tenglish in Latin letters, off-topic, not-enough-info. Every row labels assertion and time context. |
+| 6.3 | Hard negatives | start vs stop, patient vs mother, before vs now, mg vs mcg, BP vs age numbers, LASA pairs, score versions (MELD vs MELD 3.0). |
+| 6.4 | Public data | Section 17. Owner + 2 doctors' 150 lines go to **test only**, never training. |
+| 6.5 | Separation | Test lines come from authors and paraphrase families that the generator never saw. `split` is fixed by hashing a **family ID**, not a row ID, so paraphrases of one test line cannot leak into training. |
+| 6.6 | Train | Needle on the Cactus platform (synthetic only); FunctionGemma on a rented GPU. One canonical JSONL, two exporters (A0.4). |
+| 6.7 | Calibration | Hold out an SMD calibration set; any confidence threshold is chosen on it and reported with a reliability curve. |
 
 ---
 
-## 7. Testing plan (the gate everything must pass)
+## 7. Evaluation
 
-### 7.1 Test sets (kept separate from training data, never trained on)
+### 7.1 Test sets (frozen before training, never trained on)
 | Set | Size | Content |
 |---|---|---|
-| Router gold set | 1,000 | Real-style requests across the 5 starter tools, plus off-topic and ambiguous ("MS") |
-| Extraction gold set | 600 | Short sentences with numbers, negation, tense, family history, units |
-| Danger set | 200 | Only the traps from 6.3. **Must score 100%.** |
-| Senior engineer's 10 acceptance cases | 10 | Kept as a smoke test on every build |
-| Baseline | same sets | Today's regex router, to prove Edge actually adds something |
+| Routing set | 1,000 | The five workflows, off-topic, ambiguous ("MS"), and multi-tool requests |
+| Extraction set | 600 | W2 prefill sentences across all assertion and time types, units, Hinglish/Tenglish |
+| Danger set | 200 | Hard negatives (6.3), split by failure type |
+| Human set | 150 | Owner + 2 doctors, typed naturally |
+| Acceptance cases | 11 | The senior engineer's 10 plus bare "MS" must ask to clarify |
 
-### 7.2 Pass marks
+### 7.2 Pipeline metrics (reported separately, never merged into one number)
+| Metric | Meaning |
+|---|---|
+| Candidate recall@5 | The right tool was among the 3 to 5 candidates |
+| Coverage | Share of requests Edge acted on (did not pass on) |
+| Accepted-route accuracy | Of the requests Edge acted on, share sent to the right tool |
+| Fallback rate | Share passed on to the safe path |
+| Field precision / recall | Per field type, after validators |
+| Unsafe acceptance | Fields accepted with the wrong value, wrong assertion, wrong time or wrong patient |
+
+Every metric is reported **by failure type** (wrong field, wrong assertion, wrong time, wrong unit,
+wrong version, LASA, stale, patient carry-over) and **by language** (English, Hinglish, Tenglish).
+
+### 7.3 Outcome metrics (the real benefit)
+| Outcome | Why |
+|---|---|
+| Time to a correct, confirmed result | Fast inference can still mean a slower workflow |
+| Taps and corrections per completed task | Prefill must save work, not create review burden |
+| Tasks completed with **no MaiK pack installed** | Tests the main promise for 4 GB phones |
+| Cloud calls and tokens avoided per completed task | Real cost reduction |
+| Battery used in a representative 30-minute session | Includes reloads and retries |
+| Safe completion after interruption or patient switch | Workflow safety, not just model accuracy |
+
+### 7.4 Pass marks (fixed safety threshold first, then benefit)
 | Measure | Pass mark |
 |---|---|
-| Wrong-field numbers that get past the validators | **0** |
-| Danger set | **100%** |
-| Router: right tool, or correctly passed on | at least 95%, and better than baseline by at least 10 points |
-| Router: wrong tool shown to the doctor | under 1% |
-| Extracted fields correct (precision) | at least 99% after validators |
-| Fields found (recall) | at least 85% |
-| False refusals of clinical questions | **0** (S4) |
-| Warm latency, 4 GB Android, p95 | under 800 ms |
-| Extra memory | under 200 MB |
-| Doctor review | 3 clinicians review every error on the danger and extraction sets |
+| Unsafe acceptances on all sets | **0** |
+| Danger set | **100%**, by failure type. Meaning: these cases passed. It does not mean production risk is zero |
+| Accepted-route accuracy | at least 99% |
+| Wrong tool shown | under 0.5% |
+| Dead ends (S4) | **0** |
+| Stale field or patient carry-over in workflow tests | **0** |
+| Clinician review | 3 doctors review every error before release |
 
-### 7.3 Kill switch
-If Edge does not beat the regex baseline by at least 10 points, **stop**. Ship the Phase 0
-improvements alone. That is a fine outcome.
+### 7.5 Decision rule (replaces "baseline + 10 points")
+Compare against the **improved Phase 0 rules baseline**, at the same safety threshold (7.4). Edge
+ships only if it shows a clear benefit on at least one outcome without losing on any:
+more correctly completed requests, fewer taps or corrections, less time to a confirmed result, or
+fewer cloud calls. A baseline already near the ceiling cannot gain ten points, and a router that
+defers everything can look accurate; both cases are handled by reporting coverage and outcomes.
+If Edge adds no measurable benefit, **do not ship it**; Phase 0 stands alone.
 
 ---
 
 ## 8. Phases
 
-| Phase | What | Key files | Exit test | Rough effort |
-|---|---|---|---|---|
-| **0. No AI yet** | One shared patient-number parser (extend `INSULIN_ASK.parse`: cr/scr/s.cr, yo, 65M, Na, K, urea); `maikCalcFor` opens calculators **prefilled**; fix `maik-brain.js:316` inputs; pick one Cockcroft-Gault; expose grammar decoding in `capacitor-llama`; build the test sets and baseline. Fix the bugs in section 13. | `insulin-ask.js`, `home.js`, `maik-brain.js`, `calculators.js`, `local-plugins/capacitor-llama` | Baseline numbers recorded; prefill works in headless UI test | 2 weeks |
-| **1. Feasibility** | Pin model files and sha256. Link Needle on Android (16 KB pages, arm64). Load FunctionGemma through the existing plugin. Measure load time, memory, latency on 2-3 GB, 4 GB, 6 GB and flagship phones inside the real app. | `capacitor-needle/` | Both load and answer inside the app on all tiers, or we know which tiers fail | 1 to 2 weeks |
-| **2. Train and bake-off** | Generate data, fine-tune both models, score both on the gold sets. | data generator, eval scripts | One model passes section 7.2, or we stop (7.3) | 2 weeks |
-| **3. Router pilot** | `edge-runtime.js`, `edge-router.js`, `edge-grounding.js`; 5 read-only tools; flag `smd_edge` OFF by default; owner and 3 to 5 doctors test it. | as above | Pass marks hold on real phones; no wrong-tool reports in 2 weeks of use | 2 weeks |
-| **4. Prefill + ICU dictation** | Calculator prefill from Edge; ICU dictation to `reviewVoice()`; dose request to `SMD_DOSECALC` prefill. | `icu.js`, `dose-calc.js` | Danger set 100%; doctors confirm values match | 2 weeks |
-| **5. Scribe fact log (English)** | Per-chunk facts with source quote, chunk id, speaker, time; correction events; rules map facts to EMR fields; MaiK stays for prose. | `voice-ambient.js`, `opd-emr.js` | Fewer cloud refines, zero unsupported fields accepted | 3 weeks |
-| **6. Show-off features** | Answer-as-you-type, Live Score Radar, Silent Safety Net, Code Blue voice (watch), say-it logbook. | per feature | Each passes its own danger set | ongoing |
-| **7. Languages** | Hindi/Telugu via FunctionGemma or IndicXlit + romanised training. | `voice.js` | Separate gold set per language | later |
-
-Effort assumes the owner plus Claude sessions. Estimates, not promises.
+| Phase | What | Exit test |
+|---|---|---|
+| **0. Rules only** | Shared parser with evidence records; prefill W2 from rules; `maik-brain.js:316` inputs; one Cockcroft-Gault; privacy fixes (section 14). Measure the baseline on all sets. | Baseline report; headless UI tests pass |
+| **1. Feasibility** | Day 1 gates (A0); both models load and answer inside the real app; sustained-load test | Budgets in section 9 met, or the failing model is dropped |
+| **2. Train and bake-off** | Train, calibrate, score both on frozen sets | Section 7.4 met and 7.5 shows benefit, or stop |
+| **3. Pilot** | Five typed workflows, owner + 2 doctors, `smd_edge` on for them only | Pass marks and outcomes hold in 2 weeks of real use |
+| **Separate projects** | Each in Appendix B, with its own dataset, gate and release | Its own criteria |
 
 ---
 
-## 9. Phone budget
+## 9. Device budgets (measured in the real app, per model)
 
-| Tier | Plan |
-|---|---|
-| 2 to 3 GB Android | Out of v1 (Q7). Later: Needle cut to 4 to 8 layers, router only. |
-| 4 GB Android | Needle full, router + prefill + ICU dictation. **Main new market.** |
-| 6 GB+ Android, iPhone | Bake-off winner; MaiK packs also available. |
-| Apple Watch | Needle only, Code Blue voice log (later). |
+Test on: 4 GB Android (MediaTek Helio and low-tier Snapdragon if available), 6 GB Android, Pixel 9,
+iPhone. 2 to 3 GB phones are out of v1.
 
-Rules: run rules first; one Edge job at a time; never run Whisper, Edge and a MaiK pack heavily at
-the same time on weak phones; back off on heat and low memory (reuse the llama thermal governor
-pattern).
+| Measure | Needle budget | FunctionGemma budget |
+|---|---|---|
+| Cold start to first answer | under 3 s | under 5 s |
+| Warm p95 latency | under 800 ms | under 1,500 ms |
+| Peak **total app** memory (PSS), not just the model | baseline app + 150 MB | baseline app + 400 MB |
+| Process deaths / `onRenderProcessGone` in a 30-minute session | 0 | 0 |
+| Battery, 30-minute session | within 3% of baseline app | within 5% of baseline app |
+| Thermal | no SEVERE status in the sustained test | same |
+| Coexistence | normal app use with a MaiK pack installed but idle | same |
+
+Numbers are starting budgets; calibrate them in week 1 and record the final values here before the
+bake-off. A model that misses its budget on the 4 GB tier is not used on that tier.
 
 ---
 
-## 10. Release and rollback
+## 10. Privacy and offline policy
 
-1. Every phase: git tag before merge, flag default OFF, owner approval to flip.
-2. Native plugin needs a store release; JS ships over OTA and is held back with `minNativeBuild`
-   from builds that lack the plugin.
-3. Model files: downloaded on demand (never bundled), sha256 pinned, stored in Filesystem, with a
-   "delete model" button in AI settings next to the MaiK packs.
-4. Kill switch per feature via remote config.
+1. **Offline execution policy:** Edge code paths make no network calls. Enforced in code
+   (`edge-runtime.js` refuses any fetch), and verified by a test that runs the five workflows with the
+   network blocked and asserts zero requests.
+2. **Network behaviour test:** run the app through an intercepting proxy during the pilot workflows
+   and confirm no Edge-related traffic. The symbol scan of `libneedle.a` is supporting evidence only.
+3. **Cloud fallback is visible and permission-aware:** if a request goes to MaiK Cloud, the doctor
+   sees that before it is sent, and existing MaiK policy (Local, KB-only, hard-local) is obeyed.
+4. **Wording:** "no patient text leaves the phone" is said only for paths that guarantee it (Edge,
+   rules, local engines). It is never said about MaiK Cloud, cloud Scribe or speech fallbacks.
+5. **Speech (for later voice projects):** Android `RecognizerIntent.EXTRA_PREFER_OFFLINE` may have no
+   effect. Use `SpeechRecognizer.isOnDeviceRecognitionAvailable()` and
+   `SpeechRecognizer.createOnDeviceSpeechRecognizer()` where supported (Android 12+), iOS
+   `requiresOnDeviceRecognition`, and show a visible fallback when on-device is unavailable.
+6. **PHI Shield** (later) is a redaction aid, never a guarantee that text is safe to send.
 
-## 11. What we watch after release (no patient text ever leaves the phone)
+---
 
-Counts only: requests handled by Edge, passed on, confirmed, edited, dismissed; latency; memory;
-crashes. A rising "edited" rate on any field is an alarm. Feed counts into the existing AI Control
-Center.
+## 11. Release and rollback
 
-## 12. Risks
+1. Git tag before every merge; flag default OFF; owner approval to flip.
+2. Native plugin needs a store release; JS ships over OTA, held back by `minNativeBuild`.
+3. Models downloaded on demand, sha256 pinned, stored in Filesystem, with a delete button.
+4. Remote kill switch per workflow.
+
+## 12. What we watch after release (counts only, no text)
+
+Per workflow: handled, passed on, confirmed, edited, dismissed; time to confirm; memory; process
+deaths; back-off events. A rising "edited" rate on any field is an alarm. Feeds the AI Control Center.
+
+## 13. Risks
 
 | Risk | Plan |
 |---|---|
-| Fine-tuned model still not good enough | Kill switch (7.3); Phase 0 still delivers value |
-| Needle engine is closed-source from a small company | Pin versions; keep FunctionGemma path (open weights, our llama plugin) |
-| No cancel in Needle's engine | Small output limits; drop stale jobs; separate Android process if needed |
-| Doctors trust the card too much (automation bias) | Show the source words under every value; values never pre-accepted |
-| Regulators (CDSCO SaMD) | Edge only fills inputs for existing, documented engines; keep the hazard log (section 2) and test reports |
-| Licences | Same rule as OpenMed: unverified licence, model does not load |
+| Tuned models still not good enough | Decision rule 7.5; Phase 0 still ships |
+| Needle engine is closed-source from a small company | Pin hashes; FunctionGemma path stays alive |
+| No cancel in Needle | Runtime contract 4.2 |
+| Automation bias | Source words and status under every value; nothing pre-accepted |
+| Clinical meaning lost (assertion, time, person) | Evidence record 2.1; danger set by failure type |
+| Regulators (CDSCO SaMD) | Edge fills inputs for documented engines; hazard log (section 2) and reproducible test reports |
+| Licences | Unverified licence, model does not load |
 
-## 13. Fix now (found during the review, no AI needed)
+## 14. Fix now (no AI needed)
 
 | Bug | Where |
 |---|---|
-| Scribe always marks speech as the doctor's, so a patient saying "my BP was 150/90" can fill vitals | `opd-emr.js:4292` |
-| "Fast" speech fallback does not force on-device recognition, so audio may leave the phone | `local-plugins/capacitor-community-speech-recognition` iOS + Android |
-| Telugu/Hindi source quotes are stripped, so Scribe grounding never runs for those consults | `functions/api/ai/_opd-scribe.js` `stripIndic` on `sources` |
-| Cache API wiped on every native launch; ThoreX/SknX model cache may re-download | `index.html:146-155`, `thorex-model-cache.js` |
-| Wear OS bridge plugin not registered | `android/.../MainActivity.java` (WearBridgePlugin) |
+| Scribe always marks speech as the doctor's, so a patient's "my BP was 150/90" can fill vitals | `opd-emr.js:4292`, `:4257` |
+| Speech fallback may leave the phone (see 10.5) | `local-plugins/capacitor-community-speech-recognition` |
+| Telugu/Hindi source quotes stripped, so Scribe grounding never runs for those consults | `functions/api/ai/_opd-scribe.js` `stripIndic` |
+| Cache API wiped on every native launch | `index.html:146-155`, `thorex-model-cache.js` |
+| Wear OS bridge plugin not registered | `android/.../MainActivity.java` |
 | Dictated prescriptions never become structured rows; `parseVoiceRx` takes the first number as dose | `opd-emr.js stageScribeRx`, `prescription.js:2434` |
 
-## 14. Owner decisions (2026-10-01)
+## 15. Owner decisions (2026-10-01)
 
-| # | Question | Decision | What it changes |
-|---|---|---|---|
-| Q1 | First goal | **A working product now** | Phase 0 (no AI) ships to doctors in week 2; AI router follows in week 4 to 6 |
-| Q2 | Model | **Bake-off: Needle vs FunctionGemma** | Both trained on the same data, scored on the same gold sets and phones |
-| Q3 | Languages v1 | **English + Hinglish/Tenglish typed in English letters** | Both models can read Latin letters. Native Telugu/Hindi script stays out of v1 |
-| Q4 | Training | **Both**: Cactus platform for Needle (synthetic data only, keeps the confidence score); rented GPU for FunctionGemma | Two training pipelines, one shared dataset |
-| Q5 | Real phrasing | **Public internet datasets** (section 16) | No consent collection needed; licences must be checked; gap noted below |
-| Q6 | Safety review | **Owner + 2 other doctors** | Every danger-set error reviewed by three clinicians before release |
-| Q7 | Phones | **Android 4 GB and up** (+ Pixel 9 and iPhone for testing) | 2 to 3 GB phones are out of v1 |
-| Q8 | Timeline | **4 to 6 weeks** to a small group of doctors | Week plan in section 15 |
+| # | Decision | Effect in v2 |
+|---|---|---|
+| Q1 | A working product now | Phase 0 ships in week 2 |
+| Q2 | Bake-off: Needle vs FunctionGemma | Both scored on frozen sets and per-model budgets |
+| Q3 | English + Hinglish/Tenglish in Latin letters | Tested as its own language slice; letters alone prove nothing |
+| Q4 | Cactus for Needle, rented GPU for FunctionGemma | One canonical dataset, two exporters |
+| Q5 | Public datasets | Plus the 150 human lines for testing only |
+| Q6 | Owner + 2 doctors review safety | Every error reviewed before release |
+| Q7 | Android 4 GB and up | 2 to 3 GB out of v1 |
+| Q8 | 4 to 6 weeks to a small group | Typed five-workflow pilot only |
 
-**Gap to know about (Q5):** public datasets contain notes and doctor-patient conversations, not
-"doctor talking to an app". They are good for extraction tests and realistic shorthand, but the
-router gold set will still be mostly synthetic. Recommendation: the owner and the 2 reviewing doctors
-each type 50 requests the way they really would (no patient data). That is 150 real lines and costs
-about 30 minutes each.
-
-### Owner's homework (agreed 2026-10-01)
+### Owner's homework
 | Task | Format | Needed by |
 |---|---|---|
-| Type 50 requests the way you really would (owner), and ask the 2 reviewing doctors for 50 each | One request per line, no patient names or IDs. Mix: calculators, drug lookups, ICD, opening screens, KB topics, ICU dictation, a few Hinglish/Tenglish lines | End of week 1 |
-| Tenglish and Hinglish medical word list | `word = meaning`, e.g. `jvaram = fever`, `daggu = cough`, `noppi = pain`, `vanthulu = vomiting`, `bukhar = fever`. Aim for 100 to 200 words | End of week 1 |
-| Name the 2 reviewing doctors | Name + specialty | Before week 4 |
-| Spare 4 GB Android phone for testing | Any common model (Redmi/Samsung/Realme) | Week 1 |
+| 50 typed requests each from owner and 2 doctors (test only) | One per line, no patient data | End of week 1 |
+| Tenglish/Hinglish word list | `word = meaning`, 100 to 200 words | End of week 1 |
+| Names of the 2 reviewing doctors | Name + specialty | Before week 4 |
+| Spare 4 GB Android phone | Common model | Week 1 |
 
-Save the files as `vault/plans/edge-data/owner-requests.txt` and `vault/plans/edge-data/indic-words.txt`.
-Never put patient data in them.
+Files: `vault/plans/edge-data/owner-requests.txt`, `vault/plans/edge-data/indic-words.txt`.
 
-## 15. Week-by-week (4 to 6 weeks)
+## 16. Week-by-week
 
-| Week | Ship / build | Done when |
+| Week | Work | Done when |
 |---|---|---|
-| **1** | Phase 0 code: shared patient-number parser, calculators open prefilled from MaiK and search, `maik-brain.js:316` inputs fixed. Fix the two privacy/safety bugs first (speaker gate `opd-emr.js:4292`, on-device speech recognition). Feasibility: link `libneedle.a` in a test Android build; load FunctionGemma through `capacitor-llama`. Start the data pipeline. | Headless UI tests pass; both models answer one request inside the app on the 4 GB phone |
-| **2** | **Release Phase 0 to doctors** (flag on, git tag). Data generator + public datasets turned into gold sets. First training runs of both models. Expose grammar decoding in `capacitor-llama`. | Phase 0 live; gold sets frozen; both models trained once |
-| **3** | Bake-off: score both models on the gold sets and on the 4 GB phone, Pixel 9, iPhone. Pick the winner per tier. Build `edge-runtime.js`, `edge-router.js`, `edge-grounding.js`. | One model passes section 7.2, or we stop and keep Phase 0 |
-| **4** | Router pilot (5 read-only tools) behind `smd_edge`, owner + 2 doctors only. Danger-set review by the three doctors. | Zero wrong-field values, zero false refusals, 100% danger set |
-| **5** | Fix pilot findings. Add calculator prefill via Edge and ICU dictation to `reviewVoice()`. Hinglish/Tenglish test set run. | Same pass marks hold, including Hinglish/Tenglish |
-| **6** | Release to a small invited group of doctors. Decide the next step: Scribe fact log or show-off features. | Counts in AI Control Center look healthy for 1 week |
+| **1** | Day 1 gates (A0). Privacy fixes. Shared parser with evidence records. Baseline measured. Sustained-load test. | Gates pass or the failing model is dropped; baseline report written |
+| **2** | **Release Phase 0** (rules prefill, privacy fixes). Freeze test sets. First training runs. | Phase 0 live; sets frozen |
+| **3** | Bake-off on frozen sets and devices; calibration; build runtime, router, grounding | 7.4 met and 7.5 shows benefit, or stop |
+| **4** | Pilot: five typed workflows, owner + 2 doctors | No unsafe acceptance, no dead end |
+| **5** | Fix pilot findings; measure outcomes (7.3) | Outcomes show benefit |
+| **6** | Buffer, then release to a small invited group | Counts healthy for 1 week |
 
-**Timeline slack for the bake-off (review 2026-10-01).** Two model families in two weeks is tight, so:
-- The bake-off does not wait for both. Whichever model clears the Day 1 gates and trains first is
-  scored first; the other joins when ready. A model still not trained by the end of week 3 drops out
-  of v1 and is retried after release.
-- Week 6 is buffer, not scope. If weeks 2 to 3 slip, the pilot moves to week 5 and release to week 6;
-  ICU dictation moves to after release.
-- Grammar decoding in `capacitor-llama` is a Day 1 gate (A0.3), so it cannot surprise week 3.
+Slack: whichever model trains first is scored first; a model not ready by end of week 3 drops out of
+v1. If weeks 2 to 3 slip, the pilot moves to week 5. If the decision rule fails, weeks 4 to 6 become
+more Phase 0 work.
 
-**Sustained-load test on the 4 GB phone (part of week 1 feasibility, not later):** 50 Edge calls in a
-row, then 10 minutes of ambient Scribe with Edge calls between Whisper chunks. Record thermal status,
-CPU throttling, app memory, and any low-memory kills or `onRenderProcessGone`. Repeat on one MediaTek
-Helio and one low-tier Snapdragon phone if available. The back-off numbers in A0.5 are set from this
-test.
+## 17. Datasets (licences checked)
 
-If week 3 fails the gate, weeks 4 to 6 become more Phase 0 work (search, prefill, parser coverage),
-which still helps every user.
-
-## 16. Datasets (checked, licences noted)
-
-| Dataset | What it is | Licence | Use |
+| Dataset | What | Licence | Use |
 |---|---|---|---|
-| ACI-Bench | 207 role-played doctor-patient visits with notes | CC BY 4.0 | Extraction gold set, Scribe fact tests |
-| PriMock57 | 57 mock primary-care consults: audio, transcripts, notes | CC BY 4.0 | Scribe tests, Whisper-to-facts tests |
-| MTSamples | About 5,000 sample transcription reports | Listed CC0 on Kaggle; scraped from mtsamples.com, so check the site's own terms before training | Clinical shorthand and phrasing |
-| MMCQS (IIT Patna, MedSumm) | 3,015 Hinglish code-mixed medical queries | CC BY 4.0 | Hinglish test set |
-| L3Cube-HingCorpus | 52M Hinglish sentences (Twitter) | check before use | Hinglish word patterns only, not medical |
-| Telugu medical words | No good public set found | n/a | Owner writes a romanised list ("jvaram", "daggu", "noppi", "vanthulu") |
-| **MIMIC / n2c2 / PhysioNet** | Real hospital notes | Credentialed licence | **Do not use for this.** The licence forbids sending data to third parties, so it can never go to the Cactus platform |
+| ACI-Bench | 207 role-played visits with notes | CC BY 4.0 | Extraction phrasing; later Scribe project |
+| PriMock57 | 57 mock consults: audio, transcripts, notes | CC BY 4.0 | Later voice and Scribe projects |
+| MTSamples | About 5,000 transcription samples | Listed CC0 on Kaggle; check mtsamples.com terms first | Shorthand and phrasing |
+| MMCQS (IIT Patna) | 3,015 Hinglish medical queries | CC BY 4.0 | Hinglish slice |
+| L3Cube-HingCorpus | 52M Hinglish sentences | check first | Word patterns only |
+| MIMIC / n2c2 / PhysioNet | Real notes | Credentialed | **Not used**: cannot be sent to third parties |
 
-Attribution for CC BY data goes in `licenses/`.
+Attribution in `licenses/`.
 
-## 17. Words, simply
+## 18. Words, simply
 
 | Word | Means |
 |---|---|
-| Edge AI | AI that runs on the phone, no internet |
-| Router | Decides which StewardMD tool should handle a request |
-| Fine-tune | Extra training on our own examples |
-| Gold set | Test questions with known right answers, never used for training |
-| Validator | A plain rule that checks the AI's answer |
-| Flag | An on/off switch in the app |
-| Bake-off | Two options tested side by side, best one wins |
-| Hallucination | The AI making up a value that was never said |
+| Edge AI | AI that runs on the phone |
+| Router | Decides which StewardMD tool handles a request |
+| Evidence record | The value plus where it came from, whose it is, when, and whether it is present or denied |
+| Assertion | Present, absent, family, stopped, and so on |
+| Coverage | How often Edge acts instead of passing on |
+| Fallback | The safe path when Edge does not act |
+| Gold / test set | Questions with known answers, never used in training |
+| Calibration | Checking that "90% sure" really means right 90% of the time |
+| Bake-off | Two options tested side by side |
+
+## 19. What changed in v2 (second developer review, 2026-10-01)
+
+1. Score versions kept distinct; the old "merge `meld3`, `meld`, `meld_na`" was wrong.
+2. Label-next-to-number became a full evidence record with assertion, time and patient binding.
+3. Router metrics split into candidate recall, coverage, accepted-route accuracy and fallback.
+4. "Baseline + 10 points" replaced by a fixed safety threshold plus measured benefit.
+5. Privacy claims narrowed; offline policy enforced and tested; Android speech API corrected.
+6. Per-model device budgets with total app memory, cold start, battery, heat and process deaths.
+7. Runtime contract for the uncancellable engine, including honest `release()`.
+8. v1 cut to five typed workflows; voice and ICU moved to separate projects.
+9. Facts reworded (kv_window, tokenizer vs competence, regex misattribution, calibration, symbol scan).
+10. Bench scripts and model hashes saved for reproducibility (`edge-data/bench/`).
 
 ---
 
-## Appendix A. Week 1 checklist (engineering)
+## Appendix A. Week 1 engineering checklist
 
-Every item: unit test (`npm test`) plus a headless-browser test for UI changes, per CLAUDE.md.
-Git tag before merge. Flags default OFF until owner approves.
+Every item: `npm test` plus a headless-browser test for UI changes (CLAUDE.md). Git tag before merge.
 
-### A0. Day 1 hard gates (from the Gemini review, corrected)
-Do these first. Any failure changes the plan before weeks of work are spent.
+### A0. Day 1 gates
+1. **16 KB pages.** `libneedle.a` has no LOAD segments; align **our** wrapper `.so`
+   (`-Wl,-z,max-page-size=16384`) and check it with `readelf -lW libsmd_needle.so | grep LOAD`
+   (Align 0x4000). The real risk is runtime `mmap` assumptions: run a load and a call on an Android 15
+   emulator with the 16 KB image and on a real phone. Failure: report to Cactus, drop Needle from v1.
+2. **Process isolation.** Needle in `android:process=":edge"` with Messenger IPC; implement the
+   runtime contract (4.2). iOS: serial queue and token cap.
+3. **FunctionGemma + grammar.** Expose the llama.cpp grammar sampler in `LlamaEngine.swift` and
+   `llama_jni.cpp`; one forced-JSON call with base FunctionGemma on the 4 GB phone; tiny dummy
+   fine-tune converted to GGUF (Q8_0, Q4_K_M) to prove the pipeline.
+4. **Canonical dataset format.**
+   `{ id, family_id, input_text, lang, target_tool, schema_version, slots: { name: { value, unit, span, assertion, time_context } }, negatives, split }`
+   with `export_cactus` and `export_llama`; `split` by hashing `family_id`.
+5. **Back-off contract** in `edge-runtime.js`: skip Edge when `ActivityManager.MemoryInfo.lowMemory`
+   or `availMem` under 250 MB, or thermal SEVERE or above (do not rely on `TRIM_MEMORY_RUNNING_*`,
+   not delivered on Android 14+); never during a Whisper chunk decode or a MaiK generation; off for
+   the session after `onRenderProcessGone`.
+6. **Sustained-load test** on the 4 GB phone for each model: 50 calls in a row, then a 30-minute
+   mixed session; record the section 9 measures.
 
-1. **16 KB pages.** Google Play requires 16 KB page support for apps targeting Android 15+, and SMD
-   targets SDK 36.
-   - `libneedle.a` is a static archive. It has no LOAD segments, so `readelf -l` on it shows nothing
-     useful, and the archive is not what gets aligned. What gets aligned is **our** wrapper `.so`. Link
-     it with `-Wl,-z,max-page-size=16384` (the llama/whisper plugins already use
-     `ANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON`). Check that `.so` with `readelf -lW libsmd_needle.so | grep LOAD`
-     (Align must be 0x4000).
-   - The real risk is **runtime**: the engine calls `mmap` and may assume 4 KB offsets when it maps
-     the `.cact`. Run one load and one call on an **Android 15 emulator with the 16 KB system image**
-     and on a real phone. If it fails, report to Cactus and fall back to FunctionGemma.
-2. **Hard abort for a stuck Needle call.**
-   - **Android:** run Needle in a separate process (`android:process=":edge"` Service, Messenger IPC).
-     If a **warm** call passes 1,200 ms, kill the process; the next call reloads (cold load measured
-     0.7 to 3 s for 1 to 5 tools on a laptop, so the deadline must not apply to cold init). Also cap
-     `max_new_tokens` small (about 96).
-   - **iOS:** apps cannot spawn processes, so rely on the token cap plus a serial queue that drops
-     stale jobs.
-   - **FunctionGemma** runs through `capacitor-llama`, which already has `cancel()`. No extra process
-     needed.
-3. **Base FunctionGemma GGUF + grammar.** Before any training: load the base FunctionGemma GGUF in
-   `capacitor-llama`, expose the llama.cpp grammar sampler in `LlamaEngine.swift` and `llama_jni.cpp`,
-   and confirm one forced-JSON call on the 4 GB phone. Then run a **tiny dummy fine-tune** on the
-   rented GPU and convert it to GGUF (Q8_0 and Q4_K_M) to prove the training-to-phone pipeline end to end.
-4. **One canonical dataset format.** A single JSONL row shape, with two deterministic exporters so the
-   bake-off compares models, not datasets:
-   `{ id, input_text, lang, target_tool, slots: {name: value}, spans: {name: [start, end]}, negatives: [...], split }`
-   - `export_cactus` writes Cactus chat-format JSONL (OpenAI-style `tools` + `tool_calls`).
-   - `export_llama` writes the FunctionGemma chat template for HF/Unsloth training.
-   - `split` (train/test) is assigned once, by hashing `id`, so no test line can ever leak into training.
-5. **Memory and heat back-off contract** in `edge-runtime.js` (calibrate the numbers on the 4 GB phone):
-   - Skip Edge and use the Phase 0 rules (shared parser, `INSULIN_ASK.parse`) when
-     `ActivityManager.MemoryInfo.lowMemory` is true or `availMem` is under 250 MB, or thermal status is
-     SEVERE or above. On Android 14+, `onTrimMemory` no longer delivers the `TRIM_MEMORY_RUNNING_*`
-     levels, so do not rely on `TRIM_MEMORY_RUNNING_CRITICAL`.
-   - Never run an Edge call **while Whisper is decoding a chunk** (`whisper_full()`). Between chunks is
-     allowed; banning Edge for the whole recording would rule out Live Score Radar.
-   - Never run Edge while a MaiK pack is generating.
-   - If MainActivity's `onRenderProcessGone` fired this session, keep Edge off until the next launch.
-
-### A1. Then the week 1 items
-
-1. **Speaker gate fix:** `opd-emr.js:4292` and `:4257` stop hard-coding `speaker:"doctor"`; patient
-   speech must not fill objective fields (`voice-emr-map.js merge` already supports this).
-2. **On-device speech only:** set `requiresOnDeviceRecognition` (iOS) and the prefer-offline extra
-   (Android) in `local-plugins/capacitor-community-speech-recognition`, or block the fallback when the
-   phone cannot do it on-device. Native change: needs a store build.
-3. **Shared patient-number parser:** new pure module (ES5 IIFE + `module.exports`) extending
-   `INSULIN_ASK.parse` cues: age (`72yo`, `72 y`, `65M`, `72F`), sex, weight, height, creatinine
-   (`cr`, `scr`, `s.cr`, `creat`), urea, Na, K, glucose, BP, HR, RR, SpO2, temperature. Bounds from
-   `INSULIN_ASK.BOUNDS`. Each value returns the source span it came from (rule S2).
-4. **Prefilled calculators:** `home.js maikCalcFor` card and `search.js calcsProvider` pass parsed
-   values into `MEDCALC.open(id, prefill)`; threshold mapping for checkbox calculators (CURB-65,
-   qSOFA) following `icu-autoscores.js`. Card shows "Using MEDCALC.run(id)" and the source words.
+### A1. Week 1 items
+1. **Speaker gate fix:** `opd-emr.js:4292`, `:4257` stop hard-coding `speaker:"doctor"`.
+2. **On-device speech:** Android `isOnDeviceRecognitionAvailable()` + `createOnDeviceSpeechRecognizer()`
+   where available, iOS `requiresOnDeviceRecognition`, visible fallback otherwise
+   (`local-plugins/capacitor-community-speech-recognition`; needs a store build).
+3. **Shared parser with evidence records:** pure ES5 module extending `INSULIN_ASK.parse`; every value
+   returns the evidence record (2.1); assertion and time cues by rule ("was", "before", "now",
+   "stopped", "no", "denies", "mother", "family history").
+4. **Constrained prefill (W2):** `home.js maikCalcFor` and `search.js calcsProvider` pass only fields
+   that pass 2.1 into `MEDCALC.open(id, prefill)`; checkbox calculators by threshold mapping as in
+   `icu-autoscores.js`; unknown stays unknown (S6); fresh proposal per request (S7).
 5. **MaiKBrain inputs:** `kb/ai/maik-brain.js:316` gets `args.inputs` from the parser.
-6. **One Cockcroft-Gault:** pick the reference implementation, point the others at it, add a test
-   that all callers agree for the same patient.
-7. **Feasibility spike (branch only, not merged):** link `android-arm64/libneedle.a` into a tiny JNI
-   test library with 16 KB page alignment; load `needle3.cact` from Filesystem; one call. Load
-   FunctionGemma GGUF through `capacitor-llama` on the same 4 GB phone. Record load time, memory, latency.
-8. **Data pipeline start:** script that exports tool schemas from `MEDCALC._calcs` (with `opts`), and
-   downloads ACI-Bench, PriMock57, MMCQS into a gitignored folder with licence notes in `licenses/`.
+6. **One Cockcroft-Gault,** with a test that all callers agree.
+7. **Score version map:** document `meld3`, `meld`, `meld_na` (and any other families) in
+   `edge-schemas.js`, each with its version, inputs, units and population.
+8. **Data pipeline start:** schema export from `MEDCALC._calcs` with `opts`; datasets into a
+   gitignored folder; licence notes in `licenses/`.
 
-## Appendix B. Later features (after the router passes its gate)
+## Appendix B. Separate projects (each earns its own release)
 
-| Feature | One line |
+| Project | Must separately validate |
 |---|---|
-| Answer-as-you-type | Search shows "CrCl 38 mL/min" before Enter |
-| Live Score Radar | Scores light up during the consult, each criterion with its quote |
-| Silent Safety Net | Spoken allergy, creatinine or anticoagulant cross-checked against the Rx pad before print |
-| Code Blue voice log | "Adrenaline given", "shock 200", "ROSC" logged hands-free, watch and phone |
-| Sepsis Hour-1 voice log | "Cultures sent", "lactate sent", "fluids started" with timers |
-| Say-it Logbook | "Two central lines today, supervised" becomes NMC logbook entries |
-| Offline OSCE examiner | Narrated exam steps tick the station checklist |
-| Round Mode | One sentence per bed becomes ordered DRAFT orders in WardSynQ |
-| PHI Shield | On-device removal of names, phones, addresses before any cloud call |
-| Native Telugu/Hindi | FunctionGemma, or IndicXlit romanisation, with its own gold set |
+| ICU dictation | Speech accuracy, attribution, units, correction handling, `reviewVoice()` flow |
+| English Scribe fact log | Speaker attribution, assertion/time over long consults, correction events |
+| Live Score Radar | Per-sentence extraction, stale-field rules, alert fatigue |
+| Prescription drafts | Drug, dose, unit, frequency, LASA, read-back and signing gates |
+| Code Blue / Sepsis voice log | Noisy-room speech, tense ("prepare" vs "given"), undo |
+| Say-it logbook, OSCE examiner | Catalog mapping accuracy |
+| Round Mode | Multi-call ordering, DRAFT-only writes |
+| PHI Shield | Recall of identifiers; described as a redaction aid only |
+| Native Telugu/Hindi | Per-language gold sets; transliteration or FunctionGemma |
 
-Detail for each: [[Needle-Features]]. Evidence and measurements: [[Needle-Audit]].
+Detail: [[Needle-Features]]. Evidence: [[Needle-Audit]].
 
-## Appendix C. Rule S2 validator: "every number sits next to its own label"
+## Appendix C. Label check (part of the evidence record)
 
-Gemini proposed a 15-character window check. The idea is right, but that version would let real
-errors through:
-
-| Problem in the simple window check | Example | Result |
-|---|---|---|
-| The window catches the **neighbour's** label | "age 72 wt 58": the window around 58 contains "age" | weight 58 accepted as age |
-| `indexOf` finds the **first** match only | "wt 70 age 70" | can attribute the wrong occurrence |
-| Substring match | "1.4" found inside "11.4"; "5" inside "15" | wrong value accepted |
-| Format mismatch | model returns `72.0`, text says "72 yo" | correct value rejected |
-| Alias substring | "cr" inside "crcl" or "increase" | wrong label matched |
-| Spoken numbers | "pulse one ten" | no digits to find |
-| Repo rule | `const`, arrow functions | SMD client code is ES5 |
-
-**Reference rule (ES5):** a number is accepted for a slot only if the **nearest** label before it,
-or the nearest unit right after it, belongs to that slot, with **no other number in between**.
-Composite patterns (BP "150/90", GCS "E2V3M5") are taken from the existing deterministic parsers
-(`voice-vitals.js`), not from this check.
+A number is accepted for a field only if the **nearest** label before it, or the unit right after
+it, belongs to that field, with **no other number in between**. Composite patterns (BP "150/90",
+GCS "E2V3M5") come from the deterministic parsers (`voice-vitals.js`). This check is necessary, not
+sufficient: assertion, time and patient checks (2.1) still apply.
 
 ```js
 // edge-grounding.js (sketch). SLOTS: { age: { labels: ["age","aged"], units: ["yo","y","yrs","years","m","f"] },
@@ -478,14 +519,14 @@ function tokens(t) {
   while ((m = re.exec(t))) out.push({ s: m[0], num: /^\d/.test(m[0]) ? parseFloat(m[0]) : null });
   return out;
 }
-function slotOf(tok, i, SLOTS) {                      // attribution of the number at token i
+function slotOf(tok, i, SLOTS) {
   var MAX = 2, k, j, name;
   for (k = 1; k <= MAX; k++) {                        // unit directly after: "58 kg", "72 f"
     j = i + k; if (j >= tok.length || tok[j].num !== null) break;
     for (name in SLOTS) if (SLOTS[name].units.indexOf(tok[j].s) >= 0) return name;
   }
   for (k = 1; k <= MAX; k++) {                        // label directly before: "wt 58", "cr 1.4"
-    j = i - k; if (j < 0 || tok[j].num !== null) break;   // another number in between: stop
+    j = i - k; if (j < 0 || tok[j].num !== null) break;
     for (name in SLOTS) if (SLOTS[name].labels.indexOf(tok[j].s) >= 0) return name;
   }
   return null;
@@ -496,24 +537,13 @@ function validateSlot(rawText, slotName, value, SLOTS) {
   for (i = 0; i < tok.length; i++) {
     if (tok[i].num !== null && Math.abs(tok[i].num - v) < 1e-9 && slotOf(tok, i, SLOTS) === slotName) return true;
   }
-  return false;                                       // no occurrence is attributed to this slot
+  return false;
 }
 ```
 
-Token matching is whole-token, so "1.4" never matches inside "11.4", and "cr" never matches inside
-"crcl". Numbers compare numerically, so `72.0` equals "72".
-
-**Required unit tests (part of the danger set):**
-
-| Input | Slot = value | Must be |
-|---|---|---|
-| "age 72 wt 58" | age = 58 | rejected |
-| "age 72 wt 58" | weight = 58 | accepted |
-| "bp 150/90 age 50" | age = 150 | rejected |
-| "wt 70 age 70" | age = 70 and weight = 70 | both accepted |
-| "crcl 11.4" | creatinine = 1.4 | rejected |
-| "72F 58kg cr 1.4" | age 72, weight 58, creatinine 1.4 | all accepted |
-| "72 yo" | age = 72.0 | accepted |
-| "pulse one ten" | heart rate = 110 | accepted |
-| "sugar 342 weight 80" | weight = 342 | rejected |
-| "65M, cr 2.1" | weight = 2.1 | rejected |
+**Required tests** (danger set): "age 72 wt 58" age = 58 rejected, weight = 58 accepted;
+"bp 150/90 age 50" age = 150 rejected; "wt 70 age 70" both accepted; "crcl 11.4" creatinine = 1.4
+rejected; "72F 58kg cr 1.4" all accepted; "72 yo" age = 72.0 accepted; "pulse one ten" HR = 110
+accepted; "sugar 342 weight 80" weight = 342 rejected; "65M, cr 2.1" weight = 2.1 rejected;
+**"creatinine was 1.4 last month, now 2.1": 2.1 accepted as current, 1.4 shown as previous only**;
+"no confusion" sets confusion = absent, while silence leaves it unknown.
