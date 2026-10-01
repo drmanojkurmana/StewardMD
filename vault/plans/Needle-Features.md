@@ -124,3 +124,25 @@ Needle ships linux-armv7/mipsel/riscv engines. A Rs 4,000 board behind the OPD d
 ## Honest limits
 English only (tokenizer has no Devanagari/Telugu). Base model fails clinical input; every feature
 waits on the fine-tune gate. Needle never refuses on MaiK's behalf and never writes without a tap.
+
+## Adopted from the ChatGPT review (2026-10-01)
+- **Name and API:** ship as "StewardMD Edge", `window.SMD_EDGE` = `{ route, extract, embed, available,
+  load, release }`, native plugin `capacitor-needle`. Never expose "Needle" in the product.
+- **Layers:** L0 deterministic (regex, ontology, engines), L1 Edge (intent, slots, ranking, commands),
+  L2 MaiK (explanation, synthesis, long-form). Metric to track: share of interactions completed without
+  waking a MaiK pack.
+- **Deterministic candidate finder before Needle:** lexical routing narrows to 3 to 5 tools, then Needle
+  fills arguments. Engine constraint: `needle_init` is process-global and binds one toolset, so a fresh
+  toolset per query costs a re-init (0.7 to 3 s measured on x86 for 1 to 5 tools). Use a bank of fixed,
+  pre-indexed category toolsets (renal, sepsis, cardio, hepatology...) and switch only on category change.
+- **Medication list extraction** feeding `medlist.js parseEntry` / `resolveGeneric` and interactions.
+- Watch the duplicates: `meld3`, `meld`, `meld_na` all exist in `calculators.js`; the catalog needs one
+  canonical tool per score.
+
+## Rejected from the same review, with evidence
+- Needle on Telugu/Hindi patient answers (MaiK Ask): tokenizer has no Devanagari or Telugu.
+- Needle on Scribe transcripts: fabricates past about 150 words; per-sentence only.
+- Needle embeddings for feature routing: near-chance on medical synonyms (3/25 top-1).
+- Needle ranking ICD codes: needs code semantics it does not have; candidate IDs change per query
+  (re-init each time); `scribe-icdsug` + `SMD_ICD.localSearch` already cover it.
+- Needle for ICU "run everything": `ICU_AUTOSCORES.compute` already does it deterministically.
