@@ -15,8 +15,10 @@
 //                The platform takes 100 to 10,000 examples per run, hence --cap.
 //   needle-local {query, tools, answers, system} for `needle finetune` (LoRA; confidence head untouched).
 //   llama-json   chat JSONL whose assistant content is {"option": n}, for the FunctionGemma SFT on a GPU.
-//                TODO(A0.3): confirm FunctionGemma's own function-calling chat template before training;
-//                the grammar on the phone forces {"option": n}, so the target text must match it.
+//                Checked 2026-10-02 (A0.3 step 4): FunctionGemma has its own function-call format
+//                (<start_function_call>call:name{...}), but the phone sends no tool declarations and the
+//                grammar forces {"option": n}, so plain turns are what serving uses. The system line is
+//                pre-merged into the user turn to match llama.cpp's Gemma formatter (see FORMAT below).
 //   bakeoff      {id, system, prompt, tools, n_options} for the device harness (test split only); the
 //                harness writes {id, option, confidence, ms} lines that score.mjs --pred reads.
 // Training rows are also emitted with the options shuffled (--permute N extra copies), so the
@@ -79,10 +81,12 @@ export const FORMAT = {
     query: E.promptFor(r.input_text, r.candidates), tools: TOOLS, system: SYSTEM,
     answers: r.target_option ? [{ name: "choose_option", arguments: { option: r.target_option } }] : []
   }),
+  // No system turn: the phone renders through llama.cpp's built-in Gemma formatter, which folds the
+  // system text into the user turn (trim(system) + "\n\n" + trim(user)); FunctionGemma's Jinja would put
+  // a system message in a separate "developer" turn instead. Pre-merged, both render the same text.
   "llama-json": (r) => ({
     messages: [
-      { role: "system", content: SYSTEM },
-      { role: "user", content: E.promptFor(r.input_text, r.candidates) },
+      { role: "user", content: SYSTEM.trim() + "\n\n" + E.promptFor(r.input_text, r.candidates).trim() },
       { role: "assistant", content: JSON.stringify({ option: r.target_option }) }
     ]
   }),

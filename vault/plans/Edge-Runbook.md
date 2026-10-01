@@ -113,6 +113,17 @@ For clinical review (not a regression): the CAP answer gave azithromycin alone a
 4. Confirm FunctionGemma's chat template before training: `scripts/edge/export.mjs` writes
    `llama-json` as plain system/user/assistant turns with `{"option":n}`; if FunctionGemma expects
    its own function-calling format, change the exporter first (one function, the tests cover it).
+   **DONE 2026-10-02 (Mac):** FunctionGemma's GGUF template (rev 2566ce14) has its own format: system
+   becomes a `developer` turn, tools are `<start_function_declaration>declaration:...`, calls are
+   `<start_function_call>call:name{...}<end_function_call>`. The phone uses none of it: the plugin sends
+   system + user with no tools, the grammar forces `{"option":n}`, and llama.cpp's `llama_chat_apply_template`
+   does not run the Jinja; it detects Gemma and uses its built-in formatter, which folds the system text
+   into the user turn (`<start_of_turn>user\n{system}\n\n{user}<end_of_turn>\n<start_of_turn>model\n`,
+   pinned prism-b10685 `src/llama-chat.cpp`). A GPU trainer running the Jinja would have put the system
+   line in a `developer` turn: train != serve. Fixed in the exporter: `llama-json` rows are
+   `[user: SYSTEM + "\n\n" + prompt, assistant: {"option":n}]`; rendered by the Jinja they equal the
+   phone's prompt byte for byte (checked on an exported row). Trainer note: the Jinja emits `<bos>`
+   itself, so do not let the trainer add a second one.
 5. Pipeline proof: a tiny fine-tune (any 50 rows), convert with llama.cpp `convert_hf_to_gguf.py`,
    quantise with `llama-quantize` to Q8_0 and Q4_K_M, load both on the phone.
 

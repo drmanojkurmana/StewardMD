@@ -102,7 +102,11 @@ test("exports: platform chat format with string arguments, Needle refusal for no
   assert.equal(none.messages[2].tool_calls, undefined, "none is Needle's own refusal (answers [])");
   assert.deepEqual(FORMAT["needle-local"]({ ...r, target_option: 0 }).answers, []);
   assert.deepEqual(FORMAT["needle-local"](r).answers, [{ name: "choose_option", arguments: { option: 1 } }]);
-  assert.equal(FORMAT["llama-json"](r).messages[2].content, '{"option":1}');
+  // llama-json = what the phone serves: llama.cpp's Gemma formatter folds system into the user turn.
+  const lj = FORMAT["llama-json"](r).messages;
+  assert.deepEqual(lj.map((m) => m.role), ["user", "assistant"], "no system turn (FunctionGemma's Jinja would make it a developer turn)");
+  assert.equal(lj[0].content, c.messages[0].content.trim() + "\n\n" + c.messages[1].content.trim());
+  assert.equal(lj[1].content, '{"option":1}');
   assert.throws(() => checkRow({ ...r, target_option: 2 }), /does not point at the target/);
 });
 
