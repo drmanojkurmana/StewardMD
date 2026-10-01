@@ -6110,6 +6110,7 @@ body.dark .maik-kbmore,body.v3-dark .maik-kbmore{background:rgba(14,110,99,.16)}
 .maik-chip:active{transform:scale(.96)}
 /* status / helper note bubbles */
 .maik-welcome{font:500 12.5px/1.55 'Inter';color:var(--mk-ink)}
+.maik-calc-pf{margin-top:9px}.maik-calc-pf ul{margin:4px 0 0;padding-left:18px}.maik-calc-pf li{margin:2px 0}.maik-calc-src{color:var(--mk-mut);font-size:11.5px}.maik-calc-res{margin-top:6px}.maik-calc-in{margin-top:6px;color:var(--mk-mut)}
 .maik-edu{font:600 11px 'Inter';color:var(--mk-mut);background:var(--mk-soft);border-radius:10px;padding:6px 9px;margin-bottom:6px}
 .maik-assume{font:600 12px 'Inter';color:var(--mk-ink);background:rgba(37,99,235,.08);border-left:3px solid var(--mk-acc);border-radius:10px;padding:7px 10px;margin-bottom:8px}
 .maik-assume b{color:var(--mk-acc)}
@@ -7075,11 +7076,20 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
      * is actually asking about a score/calculator - a bare disease name that happens to share a word
      * with a calculator title is not. `exact` (the question is essentially just the name) is enough
      * on its own; otherwise a calculator cue word is required. */
+    // Flag smd_calc_prefill: "1" on. Default OFF until the owner approves (CLAUDE.md reversible changes).
+    function maikPrefillOn() { try { return localStorage.getItem("smd_calc_prefill") === "1"; } catch (e) { return false; } }
     function maikCalcFor(question) {
       try {
         if (!(window.MEDCALC && MEDCALC.find)) return null;
         var n = maikNorm(question || "");
         var hit = MEDCALC.find(n);
+        // Prefill (flag smd_calc_prefill): "crcl 72F 58kg cr 1.4" names the calculator AND gives its
+        // values. Find by the words left after the attributed values are removed ("crcl"); a version
+        // number nobody attributed ("MELD 3.0") stays in, so the version is not lost.
+        if (!hit && maikPrefillOn() && window.SMD_CPARAMS && SMD_CPARAMS.stripValues) {
+          var n2 = maikNorm(SMD_CPARAMS.stripValues(question || ""));
+          if (n2 && n2 !== n) { hit = MEDCALC.find(n2); if (hit) n = n2; }
+        }
         if (!hit) return null;
         var cue = /\b(score|scores|scoring|scale|criteria|calculat(e|or|ion|ing)|formula|index|grade|grading|staging|classification|how (do|to) (i |we |you )?(calculate|compute|score))\b/.test(n);
         return (hit.exact || cue) ? hit : null;
@@ -7088,8 +7098,34 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // The zero-token answer card for a named calculator: what it is, what it needs, one tap to open,
     // and a way to ask the model anyway. Chips are delegated (data-maik-*), so they survive a thread
     // restore from saved innerHTML exactly like the refine chips.
+    function maikCalcPrefill(c, question) {
+      if (!maikPrefillOn() || !window.SMD_CALC_PREFILL || !c) return null;
+      try { return SMD_CALC_PREFILL.forText(c.id, question || "", { calc: (window.MEDCALC && MEDCALC.get) ? MEDCALC.get(c.id) : null }); } catch (e) { return null; }
+    }
+    // The values the calculator would be opened with, each with the words it came from, plus what
+    // was not stated. The number shown is the calculator's own (MEDCALC.run), never the model's.
+    function maikCalcPrefillHTML(c, pf) {
+      if (!pf || !pf.used.length) return "";
+      var rows = pf.used.map(function (u) {
+        var v = typeof u.value === "boolean" ? (u.value ? "yes" : "no") : String(u.value) + (u.unit ? " " + u.unit : "");
+        return '<li><b>' + maikEscH(u.label) + ':</b> ' + maikEscH(v) + (u.source_text ? ' <span class="maik-calc-src">"' + maikEscH(u.source_text) + '"</span>' : "") + '</li>';
+      }).join("");
+      var res = null; try { res = MEDCALC.run(c.id, pf.prefill); } catch (e) { res = null; }
+      var partial = pf.notStated.length > 0;
+      var resLine = (res && res.value != null && res.value !== "—") ? '<div class="maik-calc-res">' + (partial ? "With the stated values: " : "Result: ") + '<b>' + maikEscH(String(res.value) + (res.unit ? " " + res.unit : "")) + '</b>' + (partial ? " (items not stated are not counted)" : "") + '</div>' : "";
+      var miss = partial ? '<div class="maik-calc-in">Not stated: ' + maikEscH(pf.notStated.slice(0, 6).join(" · ")) + (pf.notStated.length > 6 ? " · …" : "") + '</div>' : "";
+      return '<div class="maik-calc-pf"><div class="maik-calc-in">From your words (check before use):</div><ul>' + rows + '</ul>' + resLine + miss + '</div>';
+    }
     function maikCalcHTML(c, question) {
       var inputs = (c.inputs || []).map(function (x) { return x && x.label ? String(x.label).replace(/\s*\(.*$/, "") : ""; }).filter(Boolean);
+      var pf = maikCalcPrefill(c, question);
+      if (pf) {
+        return '<div class="maik-welcome maik-calc"><b>' + maikEscH(c.title) + '</b> is in your calculators.' + (c.desc ? " " + maikEscH(c.desc) : "") + maikCalcPrefillHTML(c, pf) + '</div>' +
+          '<div class="maik-tools"><span class="maik-tools-lbl">Open in app</span>' +
+          '<button class="maik-fu maik-tool" data-maik-calc="' + maikEscH(c.id) + '" data-maik-calcq="' + maikEscH(String(question || "")) + '">' + maikEscH("Open " + c.title + " with these values") + '</button>' +
+          '<button class="maik-fu" data-maik-calc="' + maikEscH(c.id) + '">Open empty</button>' +
+          '<button class="maik-fu" data-maik-calcask="' + maikEscH(String(question || "")) + '">Ask MaiK anyway</button></div>';
+      }
       var need = inputs.length ? '<div class="maik-calc-in">Needs: ' + maikEscH(inputs.slice(0, 6).join(" · ")) + (inputs.length > 6 ? " · …" : "") + '</div>' : "";
       return '<div class="maik-welcome maik-calc"><b>' + maikEscH(c.title) + '</b> is in your calculators.' + (c.desc ? " " + maikEscH(c.desc) : "") + need + '</div>' +
         '<div class="maik-tools"><span class="maik-tools-lbl">Open in app</span>' +
@@ -9040,7 +9076,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
        * data-maik-tool branch was never reached). Close MaiK FIRST: the sheet is z-index 999 and the
        * calculator overlay 870, so opening it underneath is exactly what "the chip does nothing" looks like. */
       var calcId = el.getAttribute("data-maik-calc");
-      if (calcId) { close(); setTimeout(function () { try { if (window.MEDCALC && MEDCALC.open) MEDCALC.open(calcId); else if (window.MEDCALC) MEDCALC.openList(); } catch (e) {} }, 180); return; }
+      if (calcId) {
+        // With values: re-parse the question at tap time (pure, deterministic) rather than trusting
+        // values stored in restored HTML.
+        var calcQ = el.getAttribute("data-maik-calcq"), calcPf = null;
+        if (calcQ && window.MEDCALC && MEDCALC.get) { var pfr = maikCalcPrefill(MEDCALC.get(calcId), calcQ); calcPf = pfr ? pfr.prefill : null; }
+        close(); setTimeout(function () { try { if (window.MEDCALC && MEDCALC.open) MEDCALC.open(calcId, calcPf || undefined); else if (window.MEDCALC) MEDCALC.openList(); } catch (e) {} }, 180); return;
+      }
       // "Ask MaiK anyway" on a calculator card: re-send the SAME question with the local calculator
       // route bypassed for exactly one send, so the clinician can still get the narrative answer.
       var calcAsk = el.getAttribute("data-maik-calcask");

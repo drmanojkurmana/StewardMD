@@ -86,7 +86,7 @@
   var NOT_NOW = /\b(at home|home (?:reading|readings|monitor|machine|check)|outside|other (?:hospital|clinic|doctor)|previous(?:ly)?|last (?:week|month|year|visit|time|night)|yesterday|days? ago|weeks? ago|months? ago|years? ago|usually|normally|used to|before (?:admission|fluids|treatment)|was\s+\d|were\s+\d|had been)\b/;
   function splitReported(transcript) {
     var text = String(transcript == null ? "" : transcript);
-    var clauses = text.split(/(?:[.?!;\n]+|,(?=\s)|\s+but\s+)/), keep = [], reported = [];
+    var clauses = text.split(/(?:[.?!](?=\s|$)|[;\n]+|,(?=\s)|\s+but\s+)/), keep = [], reported = [];
     for (var i = 0; i < clauses.length; i++) {
       var c = clauses[i].trim(); if (!c) continue;
       var low = c.toLowerCase();

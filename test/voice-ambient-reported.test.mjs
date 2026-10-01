@@ -82,3 +82,9 @@ test("speaker:'patient' callers are unchanged", () => {
   assert.equal(applied(res).bpSys, undefined);
   assert.ok(res.dropped.some((d) => d.field === "bpSys"));
 });
+
+test("decimals are not clause breaks (temp 38.5 survives a reported clause)", () => {
+  const sp = AMB.splitReported("Temp 38.5 F, my BP was 150/90 at home");
+  assert.equal(sp.current, "Temp 38.5 F");
+  assert.deepEqual(sp.reported, ["my BP was 150/90 at home"]);
+});

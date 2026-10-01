@@ -147,6 +147,13 @@ default (ON) is what you get.
 | `smd_pglog_easy` | ON (`"0"` = old UI) | eLogbook easy mode (2026-09-26): sign-in for signed-out users, join request by college code, log before linking, guide name chip, Today/Yesterday, Log again, batch "Verify selected" then Authenticate, jargon behind "Why is this required?". Server twins: `PGLOG_SUPERVISOR_FALLBACK`, `PGLOG_INVITES`, `PGLOG_JOIN_REQUESTS` (env, default ON). |
 | `smd_role_gates` (localStorage) | ON (`"0"` = off) | Role box: Home tools locked by the user's role (`role-features.js`). Presentation only; real gates stay server-side. |
 
+## StewardMD Edge sprint (added 2026-10-01, localStorage only)
+
+| Flag | Default | What |
+|---|---|---|
+| `smd_scribe_reported_gate` | **ON** ("0" = off) | `voice-ambient.js`: a patient-reported or past reading ("my BP was 150/90 at home") never fills objective vitals. Safety fix. |
+| `smd_calc_prefill` | **OFF** ("1" = on) | MaiK calculator card, Universal Search and MaiKBrain open calculators prefilled from the typed words (`clinical-params.js`, `calc-prefill.js`), with sources, the calculator's own result and "not stated" items. Owner approval needed to default it on. Tests: `test/clinical-params.test.mjs`, `test/calc-prefill.test.mjs`, `test/maik-brain-prefill.test.mjs`, `test/run-maik-calc-prefill-ui.mjs`. |
+
 ## Everything, by module
 
 ### CliniX  <sub>5 ON · 2 OFF</sub>
