@@ -384,3 +384,22 @@ iOS-only second engine; Android keeps llama.cpp. Decision: Decisions.md 2026-09-
   MLX row carries hidden status hooks for every small MLX file. `rerender()` now ignores a detached section
   (a delete emits before its promise settles, and the patcher has already redrawn).
 
+## MaiK Lite reads the clinical protocols (2026-10-02, branch maik-lite-quality-1002)
+Bench (`scripts/bench-maik-lite-retrieval.mjs --router real`, real book): key points in Lite's evidence
+**63.4% -> 76.7%**, fully covered **19 -> 29** of 54, zero-key-point questions 5 -> 3.
+- **Protocols as evidence:** a treatment question's first curated passage is the matching
+  `kb/clinical-protocols/index.json` summary (253 protocols, shipped in the app bundle, loaded once by
+  `loadProtocols()`). `protocolFor()` matches the router's disease (or, with no router match, a 6+
+  letter protocol name in the question) against title and aliases; a child question prefers the
+  paediatric protocol, India counterparts win ties. Septic shock 1 -> 4/4, acute diarrhoea 0 -> 3/3,
+  pre-eclampsia 0 -> 3/4, CAP 1 -> 3/3, malaria 1 -> 3/3.
+- **Infective regimens** (no `steps`, only dosing lines; 140 files) now make a regimen passage too.
+- **Management first:** on a treatment question the curated notes are re-ordered sentence by sentence.
+  No regex lookbehind (an older iOS WebView rejects the file; test/maik-lite-metatalk guards it).
+- **Index rows dropped:** the book's back-of-book index ("990, 991t, 2322-2323") won evidence slots.
+- `TREAT_Q` adds slow / prevent / progression / approach / control / Rx; `isChildQ` reads an age only
+  under 18 years or a weight under 40 kg ("a 50 year old man" had been a child).
+- With a protocol or regimen leading, the evidence is book #1 + two curated passages (same 3 x 700 cap).
+- Still zero: child paracetamol dose, tramadol with sertraline, the unnamed heart-failure vignette (drug
+  questions belong to the Drug Index path). `LITE_DEBUG=<case id>` prints a case's package + evidence.
+
