@@ -162,3 +162,42 @@ waits on the fine-tune gate. Needle never refuses on MaiK's behalf and never wri
   as deterministic tables; SapBERT for English entity linking to SNOMED; SNOMED to ICD-10 map for
   deterministic coding; EmbeddingGemma 300M only if multilingual semantic search is needed.
 - **Runtimes:** stay at three. llama.cpp (generative), ORT (encoders), Needle (watch/low-end/always-on).
+
+## Senior engineer review (2026-10-01): adopted
+- **First build = Android-first, read-only local task router** (open calculator, drug/monograph
+  section, real ICD candidates, open module, KB topic). Benchmark against the current deterministic
+  router; if Needle does not materially improve phrasing coverage, drop it. Show-off features follow.
+- **Integrate at the `maik-engine.js` seam** (`route()` / `route0()` / `localCall()`), not per screen.
+- **Needle readiness must not depend on `localReady()`** (which requires an installed MaiK pack),
+  or the low-RAM opportunity is lost.
+- **Components:** `local-plugins/capacitor-needle/` (JNI, statically linked, uniquely named .so),
+  `needle-runtime.js` (serialise init/complete/embed/reset; reset between patients and tasks),
+  `needle-schemas.js`, `needle-router.js`, `needle-grounding.js` (source, catalog, unit, polarity).
+- **No cancel/unload in the C API.** A JS timeout does not stop native work: bound `max_new_tokens`,
+  coalesce superseded jobs, consider a dedicated Android process for hard kill.
+- **ICU dictation is a real gap:** `voice.js:389` sends ICU dictation as kind `monitor`, which has no
+  `REQ`/`LOCAL_IMPL` entry in `maik-engine.js`, so Local mode cannot do it. Needle -> typed fields ->
+  `icu.js reviewVoice()` (`:2259`). Never replace `parseMonitor()` (needs pixel geometry).
+- **Scribe as a source-linked event ledger:** events carry quote, chunk id, speaker, timestamp;
+  deterministic reducer maps to EMR fields; explicit correction events ("doctor corrected X"), which
+  `scribeMerge()` cannot represent today. Infer once per bounded chunk, never per partial.
+- **Field-specific evidence:** "40" somewhere in the transcript is not proof the strength is 40 mg.
+- **Correction to the audit:** `offline-clinical.js installRouting()` (`:218`) wraps `MEDAPI.structured`
+  and `monograph` with bundled data, so `SMD_DOSE` works offline on native. And `route()` fails open to
+  the model when the dose lookup misses, so the short-circuit is not a universal ban on model doses.
+- **Device tiers for testing:** 2-3 GB, 4 GB, 6 GB, flagship. Measure in the real WebView app.
+- **Acceptance cases:** the ten in the review (CURB-65 open, meropenem renal, levothyroxine prefill,
+  "fever 3 days, no vomiting", family vs patient history, ICU vitals, PEEP/FiO2, CAP+T2DM+CKD split,
+  "stopped metformin", child loose-motion protocol) plus bare "MS" must stay a clarification.
+
+## Senior engineer review: corrections from measurement
+- **Embeddings:** `needle_embed` returns **3,072** dims (measured), not 128. Book index = 42,176 x 3,072
+  x 4 B = about 518 MB float32 (about 259 MB fp16), not 21.6 MB. Measured medical synonym top-1 was 3/25,
+  below a character-trigram baseline. Treat the RAG arm as unlikely; prefer SNOMED synonyms / SapBERT.
+- **Telemetry:** verified at symbol level: `android-arm64/libneedle.a` imports no socket/connect/
+  getaddrinfo; embeddable libs contain no URLs. Telemetry lives in the Python package and CLI runner.
+- **Telugu/Hindi:** not a validation question for Needle; the tokenizer has no Devanagari/Telugu.
+  Needs romanisation/translation upstream or FunctionGemma.
+- **Base model:** measured 8/34 routing, and fact extraction put numbers in the wrong fields (29
+  invented fields) that its own grounding check cannot see. The review's acceptance cases are the
+  right gate; expect the base model to fail them until fine-tuned.
