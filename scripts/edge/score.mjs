@@ -28,7 +28,7 @@ export function relive(rows, E) {
     const cands = E.candidates(r.input_text).map((c) => ({ kind: c.kind, id: c.id, title: c.title, exact: !!c.exact }));
     const ok = r.target ? (r.accept && r.accept.length ? r.accept : [r.target]).map(String) : [];
     const idx = r.target ? cands.findIndex((c) => c.kind === r.kind && ok.includes(String(c.id))) : -1;
-    const rules = !!(cands[0] && ((cands[0].kind === "calculator" && cands[0].exact) || cands[0].kind === "icd"));
+    const rules = E.layer0(cands);   // the router's own Layer 0
     return { ...r, candidates: cands, target_option: idx + 1, target_in_candidates: r.target ? idx >= 0 : true,
       route_by: E.negated(r.input_text) ? "negated" : !cands.length ? "empty" : rules ? "rules" : "model", rules };
   });
@@ -50,7 +50,8 @@ export function parseHuman(tsv) {
 function table(rep) {
   const o = rep.overall, pct = (x) => (x == null ? "  -  " : (x * 100).toFixed(1).padStart(5) + "%");
   const line = (name, m) => `${name.padEnd(28)} n=${String(m.n).padStart(5)}  recall@5 ${pct(m.recall_at_5)}  cover ${pct(m.coverage)}  acc ${pct(m.accepted_route_accuracy)}  wrong ${pct(m.wrong_tool_shown)}  fallback ${pct(m.fallback_rate)}  missed ${pct(m.missed_rate)}  e2e ${pct(m.end_to_end)}`;
-  const out = [`== ${rep.policy}  ${rep.pass.all ? "PASS" : "FAIL"} (acc>=${PASS_MARKS.accepted_route_accuracy * 100}%, wrong<${PASS_MARKS.wrong_tool_shown * 100}%, danger ${pct(rep.danger_pass)} of ${rep.danger_n})`, line("overall", o)];
+  const verdict = rep.pass.all ? "PASS" : !rep.pass.complete ? `INCOMPLETE (${rep.missing_predictions} rows without a prediction)` : "FAIL";
+  const out = [`== ${rep.policy}  ${verdict} (acc>=${PASS_MARKS.accepted_route_accuracy * 100}%, wrong<${PASS_MARKS.wrong_tool_shown * 100}%, danger ${pct(rep.danger_pass)} of ${rep.danger_n})`, line("overall", o)];
   ["lang", "kind", "route_by", "tag"].forEach((k) => Object.entries(rep.by[k]).forEach(([v, m]) => out.push(line("  " + k + ":" + v, m))));
   if (rep.errors.length) {
     out.push(`  errors (${rep.errors.length}, first 25):`);

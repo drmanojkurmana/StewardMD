@@ -1,5 +1,5 @@
 {
-  "schema_version": "edge-router-1",
+  "schema_version": "edge-router-2",
   "generated": "2026-10-01",
   "counts": {
     "train": 4597,
@@ -8,22 +8,22 @@
   },
   "dropped_as_leaks": 25,
   "route_by": {
-    "rules": 5419,
-    "model": 3488,
+    "rules": 6384,
+    "model": 2523,
     "negated": 258,
     "empty": 55
   },
   "model_rows": {
-    "train": 1790,
-    "val": 186,
-    "test": 1512
+    "train": 1247,
+    "val": 135,
+    "test": 1141
   },
   "recall_at_5": 0.9965,
   "sha256": {
-    "canonical": "0c156a5bf6ed7cc67e55a8e9a3aeafe83880528311a76a16c33fcf850b6107e3",
-    "train": "da806d31b4a24c1e94d1f4d59f99b79d04b40cb482a96771438a87d6a743aab9",
-    "val": "9993fcfcb8d40e55cf60e7eb9b60b637531f00973a57a44177b9f3d7650c8604",
-    "test": "5a565ecb8823b9039ae32e94128d0924a6415362d639b17e6fd0821e9f0d97ab"
+    "canonical": "35d594b0b86bc53fd614020a8f63e3be8c57f6fe2da2148df7566d1fc3c57f70",
+    "train": "93982ce7503a52511cb9108f48bcd975397d8acc3c808f03dec7e7ec1c60df50",
+    "val": "1d9d46d6ccc445058dd4f5f06fc89fe0745fc43de9df9273d9dd09472a72402f",
+    "test": "77fd7636da405cea127b655f9f0cd5bbeb2233924d7fcac80ee65823669e2f2e"
   },
   "note": "Synthetic only. test.jsonl is frozen: changing it requires a new schema_version and a note in the plan."
 }

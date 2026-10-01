@@ -165,3 +165,16 @@ test("needleAdapter: configure (not init), tuned weights path, uncalibrated conf
   assert.equal(typeof E.needleAdapter(plugin, { killable: true }).kill, "function");
   assert.equal(E.needleAdapter(plugin, {}).kill, undefined, "no Capacitor platform in Node: not android, not killable");
 });
+
+test("Layer 0 widened: an exactly named tool or generic drug, in any of the three languages, is a rules answer", async () => {
+  store.smd_edge = "1";
+  const m = mock(() => needleReply(1)); E.setEngine(m);
+  for (const q of ["antibiogram kholo", "open antibiogram", "antibiogram chupinchu", "show me the antibiogram"]) {
+    const r = await E.route(q);
+    assert.equal(r && r.kind, "tool", q); assert.equal(r.id, "antibiogram", q); assert.equal(r.source, "rules", q);
+  }
+  assert.equal(m.prompts.length, 0, "no model call for an exact name");
+  assert.equal(E.layer0(E.candidates("resistance patterns antibiogram")), false, "extra words: the model decides");
+  assert.equal(E.layer0(E.candidates("do not open antibiogram")), false);
+  assert.equal(await E.route("do not open antibiogram"), null, "negation still wins");
+});

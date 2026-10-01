@@ -60,6 +60,9 @@ test("scoreRouter keeps metrics separate, gates on the pass marks, and tracks th
   assert.equal(rules.pass.all, true);
   assert.ok(rules.by.route_by.rules && rules.by.tag.negation, "broken down by route and tag");
   assert.equal(PASS_MARKS.accepted_route_accuracy, 0.99);
+  const partial = scoreRouter(rows, "pred", { "2": { option: 1, confidence: 0.9 } });
+  assert.equal(partial.missing_predictions, 1, "row 3 has no prediction");
+  assert.equal(partial.pass.complete, false); assert.equal(partial.pass.all, false, "a partial model run is never a pass");
 });
 
 test("permute: deterministic, the label follows the option, option 0 never moves", () => {

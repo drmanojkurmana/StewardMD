@@ -9,7 +9,9 @@ import { fileURLToPath } from "node:url";
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 export const OUT_DIR = path.join(ROOT, "vault", "plans", "edge-data", "dataset");
-export const SCHEMA_VERSION = "edge-router-1";
+// edge-router-2 (2026-10-01): same labels as -1; route_by/candidates recomputed after Layer 0 learned exact
+// tool titles and generic drug names (Hinglish/Tenglish rules coverage 0% -> 77%).
+export const SCHEMA_VERSION = "edge-router-2";
 
 // Home tool tiles, read from home.js (the HOME_TOOLS literal) so the list cannot drift.
 export function homeTools() {

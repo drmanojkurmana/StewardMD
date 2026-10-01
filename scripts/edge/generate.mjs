@@ -43,7 +43,7 @@ function add(text, lang, kind, target, family, tags, accept) {
   const cands = E.candidates(text);
   const ok = target ? (accept && accept.length ? accept : [target]).map(String) : [];
   const idx = target ? cands.findIndex((c) => c.kind === kind && ok.includes(String(c.id))) : -1;
-  const rules = !!(cands[0] && ((cands[0].kind === "calculator" && cands[0].exact) || cands[0].kind === "icd"));
+  const rules = E.layer0(cands);   // the router's own Layer 0
   const route_by = E.negated(text) ? "negated" : !cands.length ? "empty" : rules ? "rules" : "model";
   rows.push({
     id: "e" + String(++n).padStart(6, "0") + "-" + sha(text + "|" + target).slice(0, 6),

@@ -29,6 +29,22 @@ std::vector<std::pair<void*, size_t>> g_maps;     // every weights mapping, neve
 std::string g_err;                                // last error, readable from Java
 constexpr int kOutCap = 65536;                    // the Python binding's default buffer_size
 
+// Text crosses JNI as raw UTF-8 BYTES, never through GetStringUTFChars/NewStringUTF: those use JNI's
+// "modified UTF-8", and the engine can emit a reply cut mid-character ("CHA\xe2\x82" when the token
+// budget ends inside the subscript 2 of CHA2DS2). NewStringUTF on such bytes mangles the JSON, and
+// under CheckJNI (debuggable builds) aborts the process. Java decodes with UTF-8 replacement instead.
+std::string bytes(JNIEnv* env, jbyteArray b) {
+  if (b == nullptr) return std::string();
+  const jsize n = env->GetArrayLength(b);
+  std::string out((size_t) n, '\0');
+  if (n > 0) env->GetByteArrayRegion(b, 0, n, reinterpret_cast<jbyte*>(&out[0]));
+  return out;
+}
+jbyteArray toBytes(JNIEnv* env, const std::string& s) {
+  jbyteArray b = env->NewByteArray((jsize) s.size());
+  if (b != nullptr && !s.empty()) env->SetByteArrayRegion(b, 0, (jsize) s.size(), reinterpret_cast<const jbyte*>(s.data()));
+  return b;
+}
 std::string str(JNIEnv* env, jstring s) {
   if (s == nullptr) return std::string();
   const char* c = env->GetStringUTFChars(s, nullptr);
@@ -64,9 +80,9 @@ Java_in_stewardmd_needle_NeedleNative_load(JNIEnv* env, jclass, jstring jpath) {
 }
 
 JNIEXPORT jint JNICALL
-Java_in_stewardmd_needle_NeedleNative_configure(JNIEnv* env, jclass, jstring jsystem, jstring jtools) {
+Java_in_stewardmd_needle_NeedleNative_configureBytes(JNIEnv* env, jclass, jbyteArray jsystem, jbyteArray jtools) {
   std::lock_guard<std::mutex> lk(g_mu);
-  const std::string system = str(env, jsystem), tools = str(env, jtools);
+  const std::string system = bytes(env, jsystem), tools = bytes(env, jtools);
   // tool_index_path NULL: the router's single tool is declared statically (needle.h; the Python
   // binding passes None the same way).
   const int rc = needle_init(system.c_str(), tools.c_str(), nullptr);
@@ -74,10 +90,10 @@ Java_in_stewardmd_needle_NeedleNative_configure(JNIEnv* env, jclass, jstring jsy
   return rc;
 }
 
-JNIEXPORT jstring JNICALL
-Java_in_stewardmd_needle_NeedleNative_complete(JNIEnv* env, jclass, jstring jtext, jint maxTokens) {
+JNIEXPORT jbyteArray JNICALL
+Java_in_stewardmd_needle_NeedleNative_completeBytes(JNIEnv* env, jclass, jbyteArray jtext, jint maxTokens) {
   std::lock_guard<std::mutex> lk(g_mu);
-  const std::string text = str(env, jtext);
+  const std::string text = bytes(env, jtext);
   std::vector<char> out(kOutCap, 0);
   const int rc = needle_complete(text.c_str(), (int) maxTokens, out.data(), (int) out.size());
   if (rc < 0) {
@@ -88,7 +104,7 @@ Java_in_stewardmd_needle_NeedleNative_complete(JNIEnv* env, jclass, jstring jtex
     return nullptr;
   }
   out.back() = 0;
-  return env->NewStringUTF(out.data());
+  return toBytes(env, std::string(out.data()));
 }
 
 JNIEXPORT void JNICALL
@@ -97,10 +113,10 @@ Java_in_stewardmd_needle_NeedleNative_reset(JNIEnv*, jclass) {
   needle_reset();
 }
 
-JNIEXPORT jstring JNICALL
-Java_in_stewardmd_needle_NeedleNative_lastError(JNIEnv* env, jclass) {
+JNIEXPORT jbyteArray JNICALL
+Java_in_stewardmd_needle_NeedleNative_lastErrorBytes(JNIEnv* env, jclass) {
   std::lock_guard<std::mutex> lk(g_mu);
-  return env->NewStringUTF(g_err.c_str());
+  return toBytes(env, g_err);
 }
 
 }  // extern "C"

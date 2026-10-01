@@ -50,6 +50,12 @@ iOS: `scripts/make-xcframework.sh`, build, same step 3 through `ios_webkit_debug
 iOS has no kill: confirm a long call shows `busy` and then recovers, and the app never freezes.
 
 ## 3. Gate A0.3: FunctionGemma + grammar (llama.cpp)
+**Mechanism PASSED on a host CPU (2026-10-01, `test/native-host/run.sh llama`):** the real
+`llama_jni.cpp` + `LlamaEngine` with ggml-org FunctionGemma 270M Q8_0 (rev 2566ce14, sha256 83940d4d):
+grammar on, 1,512/1,512 replies valid `{"option":n}`; grammar off, 0/60 (prose refusals). Base model
+routing: 7.7% wrong overall, 20.8% on model-routed rows, so fine-tuning is required. Still open: steps
+1 to 3 on the phone (real latency and memory), the template check (step 4) and the GGUF pipeline (step 5).
+
 The llama plugin now takes an opt-in `grammar` (GBNF, root `root`) on both platforms
 (`local-plugins/capacitor-llama`, C++ syntax-checked against the pinned prism-b10685 headers,
 Java engine compiled; not built for a device). With no grammar nothing changes.

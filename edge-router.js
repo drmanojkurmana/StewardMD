@@ -63,12 +63,12 @@
       if (!content(term).length) term = "";
       if (term) add({ kind: "icd", id: term, title: "ICD-10 codes for " + term, exact: true });
     }
-    var hit = null, ranked = null;
+    var hit = null, ranked = null, exactTool = null, calcItems = [], toolItems = [];
     try { hit = M && M.find ? (M.find(bare) || (pw.length ? M.find(pw.join(" ")) : null)) : null; } catch (e) {}
     // An exact title goes first; a near title competes in the ranked list below an own name.
     if (hit && hit.exact) add({ kind: "calculator", id: hit.id, title: hit.title, exact: true });
     if (S && S.rank && S.providers) {
-      var provs = S.providers(), calcItems = [], toolItems = [];
+      var provs = S.providers();
       provs.forEach(function (p) {
         try {
           if (p.cat === "calcs" && p.items) calcItems = p.items();
@@ -112,9 +112,36 @@
     }
     // A drug the request names, and a reference topic, get their slots before the ranked list,
     // which would otherwise fill all five with weak word overlaps.
+    // The request minus navigation words ("antibiogram kholo", "icu open cheyyi", "show me the icu"):
+    // when what is left IS one tool's title or one drug's name, that option is exact (rules, no model).
+    var named = pw.filter(function (w) { return !NAV[w] && !GENERIC[w]; }).join(" ");
+    // Title and request are reduced the SAME way, so "dose calculator teruvu" matches "Dose calculator"
+    // and "search icd teruvu" matches "Search ICD" (navigation and generic words dropped from both).
+    function keys(str) {
+      var w = norm(str).split(" ").filter(function (x) { return x && !STOP[x] && !NAV[x]; });
+      return [w.join(" "), w.filter(function (x) { return !GENERIC[x]; }).join(" ")];
+    }
+    var reqKeys = keys(bare);
+    if (reqKeys[0] && ranked) {
+      var toolHits = toolItems.filter(function (it) {
+        var tk = keys(it.title);
+        return (tk[0] && tk[0] === reqKeys[0]) || (tk[1] && tk[1] === reqKeys[1]);
+      });
+      if (toolHits.length === 1) {
+        ranked.forEach(function (r) { if (r.kind === "tool" && r.it.id === toolHits[0].id) r.s += 3; });
+        if (!ranked.some(function (r) { return r.kind === "tool" && r.it.id === toolHits[0].id; })) ranked.push({ kind: "tool", it: toolHits[0], s: 3 });
+        exactTool = toolHits[0].id;
+      }
+    }
     try {
       var DL = G.SMD_DRUGLINK;
-      if (DL && DL.drugsIn) DL.drugsIn(q, { fuzzy: true }).slice(0, 2).forEach(function (d) { add({ kind: "drug", id: d.generic, title: d.name || d.generic, drug: d }); });
+      if (DL && DL.drugsIn) DL.drugsIn(q, { fuzzy: true }).slice(0, 2).forEach(function (d) {
+        // Only the generic name is exact. A brand goes to the model or the doctor: drug-lexicon.js maps
+        // some combination brands to one ingredient (Entresto -> valsartan, Combiflam -> ibuprofen),
+        // so a brand must not open a drug card by rule until that lexicon is reviewed.
+        var ex = !d.fuzzy && !!named && norm(d.generic) === named && norm(d.typed) === named;
+        add({ kind: "drug", id: d.generic, title: d.name || d.generic, drug: d, exact: ex });
+      });
     } catch (e) {}
     try {
       var KB = G.MaiKKB, R = G.SMD_REASON;
@@ -122,7 +149,15 @@
       // Fails closed: no reference module to confirm the page, no KB option.
       if (t && t.id && R && R.hasDiseaseRef && R.hasDiseaseRef(t.id)) add({ kind: "kb", id: t.id, title: t.name || t.id });
     } catch (e) {}
-    (ranked || []).forEach(function (x) { add({ kind: x.kind, id: x.it.id, title: x.it.title }); });
+    (ranked || []).forEach(function (x) { add({ kind: x.kind, id: x.it.id, title: x.it.title, exact: x.kind === "tool" && x.it.id === exactTool }); });
+    // One name, two things ("insulin" is a drug AND a tool): nothing is exact, the model or doctor picks.
+    var exacts = out.filter(function (c) { return c.exact && c.kind !== "icd"; });
+    if (exacts.length > 1) out.forEach(function (c) { if (c.kind !== "icd") c.exact = false; });
+    // Otherwise the one exactly named option goes first, unless an ICD request holds that place.
+    for (var k = 1; k < out.length; k++) if (out[k].exact) {
+      if (out[0].kind !== "icd") { var x0 = out.splice(k, 1)[0]; out.unshift(x0); } else out[k].exact = false;
+      break;
+    }
     return out;
   }
 
@@ -177,6 +212,7 @@
   }
 
   /* route(text, { patient_session_id }) -> Promise<result | null>. Never rejects. */
+  function layer0(cands) { var c = cands && cands[0]; return !!(c && (c.kind === "icd" || c.exact)); }
   function route(text, ctx) {
     stats.requests++;
     if (!flagOn()) return Promise.resolve(null);
@@ -184,10 +220,9 @@
     var cands;
     try { cands = candidates(text); } catch (e) { cands = []; }
     if (!cands.length) { stats.passed++; return Promise.resolve(null); }
-    // Layer 0: an exact calculator name and no competing option -> rules answer, no model.
-    // An exact calculator title from MEDCALC.find, or an explicit ICD request, needs no model.
-    if (cands[0].kind === "calculator" && cands[0].exact) { stats.rules++; return Promise.resolve(resultFor(cands[0], text, "rules", null)); }
-    if (cands[0].kind === "icd") { stats.rules++; return Promise.resolve(resultFor(cands[0], text, "rules", null)); }
+    // Layer 0: the first option is exact (a calculator's or tool's own name, a named drug, an explicit
+    // ICD request) -> rules answer, no model.
+    if (layer0(cands)) { stats.rules++; return Promise.resolve(resultFor(cands[0], text, "rules", null)); }
     if (!available() || !runtime) { stats.passed++; return Promise.resolve(null); }
     if (ctx && ctx.patient_session_id != null) runtime.setSession(ctx.patient_session_id);
     stats.model++;
@@ -309,7 +344,7 @@
   }
 
   var API = {
-    route: route, candidates: candidates, negated: function (t) { return NEGATION.test(String(t || "")); }, enabled: flagOn, available: available, setEngine: setEngine,
+    route: route, candidates: candidates, layer0: layer0, negated: function (t) { return NEGATION.test(String(t || "")); }, enabled: flagOn, available: available, setEngine: setEngine,
     needleAdapter: needleAdapter, llamaAdapter: llamaAdapter, grammarFor: grammarFor, bakeoff: bakeoff, autoEngine: autoEngine, promptFor: promptFor, SYSTEM: SYSTEM, optionFrom: optionFrom,
     TOOL_SCHEMA: TOOL_SCHEMA, stats: function () { return JSON.parse(JSON.stringify(stats)); },
     session: function (id) { if (runtime) runtime.setSession(id); }, _version: "1.0"

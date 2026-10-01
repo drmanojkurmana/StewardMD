@@ -76,9 +76,10 @@ export function scoreRouter(rows, policy, preds, opts = {}) {
     if (d.source === "rules" && d.act) b.rules++;
     if (d.source === "model" && d.act) b.model++;
   };
-  let dangerN = 0, dangerOk = 0;
+  let dangerN = 0, dangerOk = 0, missing = 0;
   rows.forEach((row) => {
     const d = decide(row, policy, preds, opts.minConfidence);
+    if (d.source === "no-prediction") missing++;
     const o = outcome(row, d.act);
     bump(all, row, o, d);
     [["lang", row.lang], ["kind", row.kind], ["route_by", row.route_by]].forEach(([k, v]) => bump((by[k][v] = by[k][v] || blank()), row, o, d));
@@ -96,8 +97,11 @@ export function scoreRouter(rows, policy, preds, opts = {}) {
   out.pass = {
     accepted_route_accuracy: o.accepted_route_accuracy == null || o.accepted_route_accuracy >= PASS_MARKS.accepted_route_accuracy,
     wrong_tool_shown: (o.wrong_tool_shown || 0) < PASS_MARKS.wrong_tool_shown,
-    danger_pass: out.danger_pass == null || out.danger_pass >= PASS_MARKS.danger_pass
+    danger_pass: out.danger_pass == null || out.danger_pass >= PASS_MARKS.danger_pass,
+    // A model run that skipped rows proves nothing about them: never a pass (they would score as safe passes).
+    complete: missing === 0
   };
+  out.missing_predictions = missing;
   out.pass.all = Object.values(out.pass).every(Boolean);
   return out;
 }
