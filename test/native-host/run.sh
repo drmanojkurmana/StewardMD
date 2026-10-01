@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # test/native-host/run.sh — check the Edge native code WITHOUT a phone (Linux host; not part of npm test).
 #
-#   test/native-host/run.sh android   build both plugin modules with the NDK; 16 KB alignment, JNI exports,
+#   test/native-host/run.sh android   build the Needle, llama and speech plugins; 16 KB alignment, JNI exports,
 #                                     every import resolvable at API 26, no network symbols in Needle
 #   test/native-host/run.sh llama     the REAL llama_jni.cpp + LlamaEngine on this CPU with FunctionGemma,
 #                                     with and without the router grammar
@@ -50,6 +50,8 @@ include ':stewardmd-capacitor-llama'
 project(':stewardmd-capacitor-llama').projectDir = new File('$ROOT/local-plugins/capacitor-llama/android')
 include ':stewardmd-capacitor-needle'
 project(':stewardmd-capacitor-needle').projectDir = new File('$ROOT/local-plugins/capacitor-needle/android')
+include ':capacitor-community-speech-recognition'
+project(':capacitor-community-speech-recognition').projectDir = new File('$ROOT/local-plugins/capacitor-community-speech-recognition/android')
 EOF
   # Google's mirror of Maven Central first: Maven Central rate-limits cloud IPs (HTTP 429).
   cat > "$G/build.gradle" <<EOF
@@ -62,7 +64,8 @@ EOF
   echo "sdk.dir=$ANDROID_HOME" > "$G/local.properties"; cp -r "$ROOT/android/gradle" "$ROOT/android/gradlew" "$G/"
   (cd "$ROOT" && git submodule update --init --depth 1 local-plugins/capacitor-llama/android/src/main/cpp/llama-cpp)
   bash "$ROOT/local-plugins/capacitor-needle/scripts/fetch-needle.sh" >/dev/null
-  (cd "$G" && ./gradlew --no-daemon -q :stewardmd-capacitor-needle:assembleDebug :stewardmd-capacitor-llama:assembleDebug)
+  (cd "$G" && ./gradlew --no-daemon -q :stewardmd-capacitor-needle:assembleDebug :stewardmd-capacitor-llama:assembleDebug :capacitor-community-speech-recognition:assembleDebug)
+  echo "speech plugin (on-device option, A1.2): compiled"
   local fail=0
   for so in "$ROOT"/local-plugins/capacitor-{needle,llama}/android/build/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib/arm64-v8a/lib*_jni.so; do
     local d; d="$(dirname "$so")"
