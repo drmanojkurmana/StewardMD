@@ -68,6 +68,12 @@ node test/edge-bakeoff-device.mjs --ios --ws <url> --engine needle --limit 20
 - Record for each run: p50/p95 latency (`node scripts/edge/score.mjs --pred <file>` prints it), peak memory,
   phone temperature after 50 calls. Real phone latency is the number that decides the 1,200 ms deadline.
 
+## 2b. On-device speech (A1.2)
+The vendored speech plugin (`local-plugins/capacitor-community-speech-recognition/ios/Plugin/Plugin.swift`)
+gained an `onDevice` start option; Android already compiles. Fix any Swift errors, rebuild, then run
+runbook section 4b on the iPhone (and the Android phone): record `SMD_NATIVE.speechOnDevice()` per
+language, check the labels, and check Airplane-mode dictation with the flag on.
+
 ## 3. Report and commit
 - Write the results into `vault/plans/Edge-Runbook.md` under each gate (pass/fail, device, iOS/Android
   version, numbers). Commit ONLY Swift fixes and the runbook to `ccr-fbfae7e0-rjkxxk` (stage files

@@ -74,6 +74,18 @@ Java engine compiled; not built for a device). With no grammar nothing changes.
 temperature, battery drop and the latency line `score.mjs --pred` prints (p50, p95, max).
 Pass: no crash, no thermal shutdown, p95 within the 1,200 ms deadline after the cold load.
 
+## 4b. On-device speech (A1.2, flag `smd_speech_ondevice`)
+Build with this branch (the speech plugin changed on both platforms; Android compiles, Swift untested).
+On each phone, with the flag ON (`localStorage.setItem("smd_speech_ondevice","1")` over CDP):
+1. `await SMD_NATIVE.speechOnDevice("en-IN")` and `("en-US")`: record `onDevice` per language and phone
+   (Android needs 12+ and an installed on-device model; iOS depends on the language).
+2. OPD field dictation (a noCloud caller): with on-device available the strip label reads "On-device";
+   in Airplane mode it must still transcribe. On a phone without it, the doctor sees "This phone can't
+   recognise speech without sending the audio off the device..." and nothing is sent.
+3. MaiK Scribe Fast mode (prefer): the label reads "On-device" or "Device speech (cloud)", matching
+   `SMD_NATIVE.lastSpeechMode`.
+Pass: no noCloud session ever runs a cloud recognizer; labels match reality on both phones.
+
 ## 5. Training
 **Needle on the Cactus platform** (synthetic data only; commands from `cactus-needle` 3.0.6 `llms.txt`):
 ```sh

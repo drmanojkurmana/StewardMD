@@ -57,6 +57,16 @@ public class SpeechRecognition extends Plugin implements Constants {
     private String lastEmitted = ""; // dedupe repeated partial emissions
     private SpeechRecognitionListener currentListener = null; // stale-callback guard
 
+    // ---- On-device recognition (StewardMD Edge A1.2, opt-in per start() call) ----------------
+    // Android's default SpeechRecognizer may send audio to Google's servers. start({onDevice}) asks
+    // for the on-device recognizer instead: "off" (default, unchanged behaviour), "prefer" (on-device
+    // when the phone has it, else the default recognizer), "require" (on-device or a clear
+    // ON_DEVICE_UNAVAILABLE rejection, never the cloud). The mode that actually runs is reported in a
+    // "recognitionMode" event {onDevice, how, reason} so the app can label it truthfully.
+    private String onDeviceMode = "off";
+    private boolean onDeviceActive = false;
+    private String modeReason = "";
+
     @Override
     public void load() {
         super.load();
@@ -73,18 +83,55 @@ public class SpeechRecognition extends Plugin implements Constants {
     @PluginMethod
     public void available(PluginCall call) {
         Logger.info(getLogTag(), "Called for available(): " + isSpeechRecognitionAvailable());
-        boolean val = isSpeechRecognitionAvailable();
+        boolean onDev = onDeviceSupported();
         JSObject result = new JSObject();
-        result.put("available", val);
+        result.put("available", isSpeechRecognitionAvailable() || onDev);
+        result.put("onDevice", onDev);
+        result.put("onDeviceHow", onDev ? "createOnDeviceSpeechRecognizer" : (Build.VERSION.SDK_INT < 31 ? "needs Android 12" : "not installed on this phone"));
         call.resolve(result);
+    }
+
+    /** True when this phone can recognise speech without sending audio off the device (API 31+). */
+    private boolean onDeviceSupported() {
+        if (Build.VERSION.SDK_INT < 31) return false;
+        try {
+            return SpeechRecognizer.isOnDeviceRecognitionAvailable(bridge.getContext());
+        } catch (Throwable t) {
+            return false;
+        }
+    }
+
+    private SpeechRecognizer newRecognizer() {
+        if (onDeviceActive && Build.VERSION.SDK_INT >= 31) {
+            return SpeechRecognizer.createOnDeviceSpeechRecognizer(bridge.getActivity());
+        }
+        return SpeechRecognizer.createSpeechRecognizer(bridge.getActivity());
+    }
+
+    private void emitMode() {
+        JSObject m = new JSObject();
+        m.put("onDevice", onDeviceActive);
+        m.put("how", onDeviceActive ? "createOnDeviceSpeechRecognizer" : "device speech service (may use Google servers)");
+        m.put("reason", modeReason);
+        notifyListeners("recognitionMode", m);
     }
 
     @PluginMethod
     public void start(PluginCall call) {
-        if (!isSpeechRecognitionAvailable()) {
+        String mode = call.getString("onDevice", "off");
+        if (!"prefer".equals(mode) && !"require".equals(mode)) mode = "off";
+        boolean onDev = !"off".equals(mode) && onDeviceSupported();
+        if ("require".equals(mode) && (!onDev || call.getBoolean("popup", false))) {
+            call.reject("On-device speech recognition is not available on this phone.", "ON_DEVICE_UNAVAILABLE");
+            return;
+        }
+        if (!onDev && !isSpeechRecognitionAvailable()) {
             call.unavailable(NOT_AVAILABLE);
             return;
         }
+        this.onDeviceMode = mode;
+        this.onDeviceActive = onDev && !call.getBoolean("popup", false);
+        this.modeReason = this.onDeviceActive ? "" : ("off".equals(mode) ? "not requested" : "not available on this phone");
 
         if (getPermissionState(SPEECH_RECOGNITION) != PermissionState.GRANTED) {
             call.reject(MISSING_PERMISSION);
@@ -191,6 +238,11 @@ public class SpeechRecognition extends Plugin implements Constants {
         if (prompt != null) {
             intent.putExtra(RecognizerIntent.EXTRA_PROMPT, prompt);
         }
+        // A hint only (the service may ignore it), so it never counts as on-device in emitMode().
+        if (!"off".equals(this.onDeviceMode)) {
+            intent.putExtra(RecognizerIntent.EXTRA_PREFER_OFFLINE, true);
+        }
+        emitMode();
 
         if (showPopup) {
             startActivityForResult(call, intent, "listeningResult");
@@ -227,7 +279,7 @@ public class SpeechRecognition extends Plugin implements Constants {
                         speechRecognizer = null;
                     }
 
-                    speechRecognizer = SpeechRecognizer.createSpeechRecognizer(bridge.getActivity());
+                    speechRecognizer = newRecognizer();
                     SpeechRecognitionListener listener = new SpeechRecognitionListener();
                     listener.setCall(call);
                     listener.setPartialResults(partialResults);
@@ -384,6 +436,24 @@ public class SpeechRecognition extends Plugin implements Constants {
                 // genuinely fatal condition ends it; everything else (silence,
                 // busy, server-disconnected, network, client, audio glitches) is
                 // transient — re-arm and carry on.
+                // The on-device model may lack the language (Android 12+ codes 12/13). "prefer" falls
+                // back to the default recognizer and SAYS so; "require" ends with a reason, never cloud.
+                boolean langGone = error == SpeechRecognizer.ERROR_LANGUAGE_NOT_SUPPORTED || error == SpeechRecognizer.ERROR_LANGUAGE_UNAVAILABLE;
+                if (langGone && SpeechRecognition.this.onDeviceActive) {
+                    if ("prefer".equals(SpeechRecognition.this.onDeviceMode) && isSpeechRecognitionAvailable()) {
+                        SpeechRecognition.this.onDeviceActive = false;
+                        SpeechRecognition.this.modeReason = "language not available on-device";
+                        SpeechRecognition.this.emitMode();
+                        SpeechRecognition.this.scheduleRestart(300);
+                        return;
+                    }
+                    SpeechRecognition.this.listening(false);
+                    JSObject st = new JSObject();
+                    st.put("status", "stopped");
+                    st.put("error", "ON_DEVICE_LANGUAGE_UNAVAILABLE");
+                    SpeechRecognition.this.notifyListeners(LISTENING_EVENT, st);
+                    return;
+                }
                 boolean fatal =
                     error == SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS ||
                     error == SpeechRecognizer.ERROR_LANGUAGE_NOT_SUPPORTED ||

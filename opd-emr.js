@@ -4987,6 +4987,7 @@
     "mic-denied": "Microphone is blocked - allow mic access for StewardMD, then try again.",
     "no-voice-engine": "This device has no dictation engine available.",
     "stt-unavailable": "On-device dictation is not available on this build.",
+    "stt-unavailable-ondevice": "This phone can't recognise speech without sending the audio off the device. Use Clinical dictation (on the phone), or type.",
     "clinical-unavailable": "Clinical dictation is not ready on this device.",
     "transcription-failed": "Could not transcribe that - try again.",
     "stt-fallback-exhausted": "Your dictation credits are used up. Top up, or use Clinical dictation on the phone.",

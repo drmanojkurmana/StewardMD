@@ -445,8 +445,12 @@
       });
     },
     // MaiK Scribe — native device speech-to-text (@capacitor-community/speech-recognition:
-    // iOS SFSpeechRecognizer / Android SpeechRecognizer). Audio stays on the device — only
-    // text returns. Streams interim results via opts.onPartial; opts.onFinal on stop.
+    // iOS SFSpeechRecognizer / Android SpeechRecognizer). Streams interim results via opts.onPartial;
+    // opts.onFinal on stop. CAUTION: by default both OS recognizers MAY send audio to Apple/Google.
+    // opts.onDevice ("prefer" | "require", Edge A1.2, flag smd_speech_ondevice in voice.js) asks the
+    // plugin for the on-device recognizer; the mode that really ran arrives in opts.onMode
+    // ({onDevice, how, reason}) and in SMD_NATIVE.lastSpeechMode. "require" never uses the cloud: an
+    // unavailable on-device model ends in opts.onError("on-device-unavailable").
     // Throws SYNCHRONOUSLY if the plugin is absent so SMD_VOICE falls back to Web Speech / AI STT.
     transcribe: function (opts) {
       opts = opts || {};
@@ -487,9 +491,21 @@
             var m = data && data.matches && data.matches[0];
             if (m != null) { last = String(m); if (opts.onPartial) opts.onPartial(last); }
           });
+          self._modeSub = SP.addListener("recognitionMode", function (data) {
+            if (!current()) return;
+            self.lastSpeechMode = { onDevice: !!(data && data.onDevice), how: (data && data.how) || "", reason: (data && data.reason) || "" };
+            if (opts.onMode) { try { opts.onMode(self.lastSpeechMode); } catch (e) {} }
+          });
           self._stateSub = SP.addListener("listeningState", function (data) {
             if (!current()) return;
             var s = data && data.status;
+            // "require" and the on-device model lacks this language: never fall back to the cloud.
+            if (s === "stopped" && data && data.error === "ON_DEVICE_LANGUAGE_UNAVAILABLE" && !last) {
+              clearTimeout(self._finTimer); self._finish = null; self._removeSpeechSub(); done = true;
+              try { if (SP.stop) SP.stop(); } catch (e) {}
+              if (opts.onError) opts.onError("on-device-unavailable");
+              return;
+            }
             if (s === "stopped") {
               // Give the trailing final `partialResults` (emitted just after "stopped") a
               // moment to update `last`, then finalize.
@@ -498,7 +514,10 @@
             }
           });
         }
-        return SP.start({ language: navigator.language || "en-US", partialResults: true, popup: false, maxResults: 5 });
+        var startOpts = { language: opts.language || navigator.language || "en-US", partialResults: true, popup: false, maxResults: 5 };
+        if (opts.onDevice === "prefer" || opts.onDevice === "require") startOpts.onDevice = opts.onDevice;
+        self.lastSpeechMode = null;
+        return SP.start(startOpts);
       }).then(function (res) {
         if (!current()) return;
         var m = res && res.matches && res.matches[0];
@@ -507,6 +526,7 @@
       }).catch(function (e) {
         if (!current()) return;
         var msg = String((e && e.message) || e || "");
+        if (e && e.code === "ON_DEVICE_UNAVAILABLE") msg = "on-device-unavailable";
         if (last) { finish(last); return; }   // "no match" after real speech isn't a hard error
         clearTimeout(self._finTimer); self._finish = null;
         self._removeSpeechSub();
@@ -531,12 +551,23 @@
     _token: 0,
     _speechSub: null,
     _stateSub: null,
+    _modeSub: null,
+    lastSpeechMode: null,
+    // Edge A1.2: can THIS phone recognise speech without sending audio off the device?
+    // Resolves { available, onDevice, onDeviceHow }; { onDevice:false } when the plugin is absent.
+    speechOnDevice: function (language) {
+      var P = plugins(); var SP = P && P.SpeechRecognition;
+      if (!(SP && SP.available)) return Promise.resolve({ available: false, onDevice: false });
+      return Promise.resolve(SP.available({ language: language || navigator.language || "en-US" })).then(function (r) {
+        return { available: !!(r && r.available), onDevice: !!(r && r.onDevice), onDeviceHow: (r && r.onDeviceHow) || "" };
+      }, function () { return { available: false, onDevice: false }; });
+    },
     _finTimer: null,
     _finish: null,
     _removeSpeechSub: function () {
       var rm = function (s) { try { if (!s) return; if (typeof s.remove === "function") s.remove(); else if (typeof s.then === "function") s.then(function (h) { try { if (h && h.remove) h.remove(); } catch (e) {} }); } catch (e) {} };
-      rm(this._speechSub); rm(this._stateSub);
-      this._speechSub = null; this._stateSub = null;
+      rm(this._speechSub); rm(this._stateSub); rm(this._modeSub);
+      this._speechSub = null; this._stateSub = null; this._modeSub = null;
     },
 
     // MaiK Scribe — CLINICAL DICTATION via the on-device Whisper plugin (@stewardmd/capacitor-whisper).
