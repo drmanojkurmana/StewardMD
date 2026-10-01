@@ -66,3 +66,41 @@ export function mergeCounters(base, flat, prefix, groups) {
 }
 export const AIU_GROUPS = { mod: "byModule", model: "byModel", doc: "docs" };
 export const MAIK_GROUPS = { type: "byType", status: "byStatus" };
+
+/* ---- day keys: the doctor-facing "today" is the IST calendar day -----------------------------------
+ * The AI Usage page says the allowance "resets at midnight", which for an Indian clinician is IST, not
+ * UTC (UTC midnight is 05:30). Every per-user / per-day AI key (aiu:*, maik:u:*, the wallet's day tally,
+ * the D1 rollups below) is written AND read through istDay, so the writer and reader can never disagree.
+ * The project-wide admin rollup and cost breaker use the same key, so they roll over at IST midnight too.
+ * Months (maik:m:*) stay UTC: a 5h30 shift of a monthly cap is not user-visible. */
+const IST_OFFSET_MS = 19800000;
+// `now` is epoch ms, or anything Date accepts (callers and tests pass ISO strings); junk falls back to the clock.
+function ms(now) { const v = now == null ? Date.now() : (typeof now === "number" ? now : new Date(now).getTime()); return Number.isFinite(v) ? v : Date.now(); }
+export function istDay(now) { return new Date(ms(now) + IST_OFFSET_MS).toISOString().slice(0, 10); }
+export function istNextMidnightMs(now) { const t = ms(now) + IST_OFFSET_MS; return (Math.floor(t / 86400000) + 1) * 86400000 - IST_OFFSET_MS; }
+
+/* { counterKey: n } for exactly these keys on `day` (no LIKE: ids hold "_" and "%"), or null w/o D1. */
+export async function readKeys(env, day, keys) {
+  const db = counterDb(env);
+  if (!db || !keys || !keys.length) return null;
+  try {
+    await ensure(db);
+    const ks = keys.map((k) => String(k).slice(0, 200));
+    const r = await db.prepare("SELECT k, n FROM ai_counters WHERE day = ? AND k IN (" + ks.map(() => "?").join(",") + ")").bind(day, ...ks).all();
+    const out = {};
+    ((r && r.results) || []).forEach((row) => { out[row.k] = Number(row.n) || 0; });
+    return out;
+  } catch (e) { return null; }
+}
+
+/* Per-user day SPEND (rupees + tokens), written by _ai_usage.addAiSpend. It lives apart from the
+ * aiu:doc request counts because both used to read-modify-write ONE KV key and overwrote each other
+ * (lost updates). Spend goes to atomic D1 counters when bound, else to its own KV key; readers sum both. */
+export function spendKey(key, day) { return "aiu:spend:" + key + ":" + day; }
+export async function readSpend(env, store, key, day) {
+  let cost = 0, tok = 0;
+  try { const s = store && await store.get(spendKey(key, day), "json"); if (s) { cost += +s.cost || 0; tok += +s.tok || 0; } } catch (e) {}
+  const d1 = await readKeys(env, day, ["aiud.cost." + key, "aiud.tok." + key]);
+  if (d1) { cost += d1["aiud.cost." + key] || 0; tok += d1["aiud.tok." + key] || 0; }
+  return { cost: Math.round(cost * 10000) / 10000, tok };
+}

@@ -23,7 +23,7 @@ test("an answer is remembered as a gist: opening line and the drug lines, no cit
 
 test("a reopened conversation rebuilds memory and re-wires its controls", () => {
   assert.equal((H.match(/body\.innerHTML = _maikBodyHTML; maikRestoreThread\(\);/g) || []).length, 2, "both restore paths");
-  const fn = H.slice(H.indexOf("function maikRestoreThread()"), H.indexOf("function maikRestoreThread()") + 600);
+  const fn = H.slice(H.indexOf("function maikRestoreThread()"), H.indexOf("function maikRestoreThread()") + 900);
   assert.match(fn, /_maikTurns = \[\];/); assert.match(fn, /maikRewire\(n, q\)/); assert.match(fn, /maikRememberTurn\(q, maikAnswerText\(n\)\)/);
   const rw = H.slice(H.indexOf("function maikRewire("), H.indexOf("function maikRestoreThread()"));
   for (const k of ["Copy", "Regenerate", "Edit", "Yes", "No", ".maik-rx"]) assert.ok(rw.includes(k), k);

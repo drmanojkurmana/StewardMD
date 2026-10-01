@@ -6960,10 +6960,23 @@
         .replace(/\\(?:times)\b\s*/g, "×").replace(/\\(?:approx)\b\s*/g, "≈")
         .replace(/\\(?:pm)\b\s*/g, "±").replace(/\\(?:mu)\b\s*/g, "µ")
         .replace(/\\(?:gt|greater)\b\s*/g, ">").replace(/\\(?:lt|less)\b\s*/g, "<")
-        .replace(/\\(?:text|mathrm|mathit|mbox)\{([^}]*)\}/g, "$1")
-        .replace(/\\,|\\;|\\!|\\quad|\\qquad/g, " ");
+        .replace(/\\(?:text|mathrm|mathit|mbox|textbf|mathbf)\{([^}]*)\}/g, "$1")
+        // Owner screenshot 2026-10-01: "Upstage (IIB \rightarrow IIIA)" in a table cell.
+        .replace(/\\(?:rightarrow|to|longrightarrow)\b\s*/g, "→ ").replace(/\\(?:Rightarrow|implies)\b\s*/g, "⇒ ")
+        .replace(/\\(?:leftarrow|gets)\b\s*/g, "← ").replace(/\\leftrightarrow\b\s*/g, "↔ ")
+        .replace(/\\uparrow\b\s*/g, "↑").replace(/\\downarrow\b\s*/g, "↓")
+        .replace(/\^\s*\{?\\circ\}?/g, "°").replace(/\\circ\b/g, "°").replace(/\\degree\b/g, "°")
+        .replace(/\\alpha\b/g, "α").replace(/\\beta\b/g, "β").replace(/\\gamma\b/g, "γ").replace(/\\delta\b/g, "δ")
+        .replace(/\\(?:neq|ne)\b\s*/g, "≠").replace(/\\cdot\b\s*/g, "·").replace(/\\%/g, "%")
+        .replace(/\\frac\{([^}]*)\}\{([^}]*)\}/g, "$1/$2")
+        .replace(/\\,|\\;|\\!|\\quad|\\qquad/g, " ")
+        // Any macro still left is unknown: drop it rather than print "\something" to a clinician.
+        .replace(/\\[a-zA-Z]{2,}\b\s*/g, "");
       t = esc(t);
       t = t.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>").replace(/__([^_]+)__/g, "<b>$1</b>");
+      // An unpaired ** (bold split across a line, a table cell or a cut-off answer) would print as
+      // literal asterisks: drop the leftover markers.
+      t = t.replace(/\*\*|__/g, "");
       t = t.replace(/(^|[^*])\*(?!\s)([^*]+?)\*/g, "$1<i>$2</i>");
       t = t.replace(/`([^`]+)`/g, "<code>$1</code>");
       // Phase 2 — per-claim citation markers: [1] or [1, 2] → clickable superscripts mapped to the

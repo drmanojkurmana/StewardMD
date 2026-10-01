@@ -34,7 +34,7 @@ test("the engine still preserves the real reason (the contract this depends on)"
 });
 
 test("REGRESSION: home.js no longer discards the reason", () => {
-  assert.match(HOME, /if \(r && r\.error\) \{ think\.innerHTML = '<div class="maik-welcome">' \+ maikErrorNotice\(r\)/,
+  assert.match(HOME, /if \(r && r\.error\) \{\s*think\.innerHTML = '<div class="maik-welcome">' \+ maikErrorNotice\(r\)/,
     "the catch-all must route through the explainer");
 });
 

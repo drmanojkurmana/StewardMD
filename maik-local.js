@@ -219,7 +219,42 @@
       var repeatAt = out.indexOf(head, half - 40);
       if (repeatAt > 0) out = out.slice(0, repeatAt).replace(/\s+$/, "");
     }
-    return out;
+    return collapseRepeats(out, 2);
+  }
+
+  /* LOOPING LIST (owner transcript, 2026-10-02: "Mandatory in whom?" came back as "Mandatory for all
+   * patients with a history of X use disorder" twelve times, X changing). The whole-answer check above
+   * cannot see it because no two lines are identical. A list line is keyed by its first five normalised
+   * words; the third and later lines with an already-seen key are dropped. repeatKey() is "" for a line
+   * under five words or one that is not a list item, so prose and short bullets are never touched.
+   * ponytail: first-five-words only; add a similarity score if a model loops with a rotating opener. */
+  var LIST_LINE = /^\s*(?:[-*\u2022]|\d+[.)])\s+/;
+  function repeatKey(line) {
+    if (!LIST_LINE.test(line)) return "";
+    var w = line.replace(LIST_LINE, "").toLowerCase().replace(/[^a-z0-9\s]/g, " ").split(/\s+/).filter(Boolean);
+    return w.length >= 5 ? w.slice(0, 5).join(" ") : "";
+  }
+  function collapseRepeats(text, max) {
+    var lines = String(text).split("\n"), seen = {}, out = [], dropped = false;
+    for (var i = 0; i < lines.length; i++) {
+      var k = repeatKey(lines[i]);
+      if (k) { seen[k] = (seen[k] || 0) + 1; if (seen[k] > max) { dropped = true; continue; } }
+      out.push(lines[i]);
+    }
+    return dropped ? out.join("\n").replace(/\s+$/, "") : text;
+  }
+  /** True once a COMPLETE line of the stream is the fourth with the same key: the model is stuck, so
+   *  generation is cancelled instead of burning the rest of the token budget. A legitimate third
+   *  similar bullet is only dropped by collapseRepeats, never cut off here. */
+  function isLooping(streamed) {
+    var s = String(streamed), cut = s.lastIndexOf("\n");
+    if (cut < 0) return false;
+    var lines = s.slice(0, cut).split("\n"), seen = {};
+    for (var i = 0; i < lines.length; i++) {
+      var k = repeatKey(lines[i]);
+      if (k && (seen[k] = (seen[k] || 0) + 1) > 3) return true;
+    }
+    return false;
   }
 
   /* NO TALK ABOUT THE REFERENCE MATERIAL (owner, 2026-09-26: "why is agent tell the passage yu sent is
@@ -575,7 +610,7 @@
    * (the topic-bleed bug that made history opt-in stays fixed); "Side effects of linagliptin" after a
    * linagliptin answer, "tell me the exact definition", and a correction that names a different drug
    * ("wrong, it's nitrofurantoin") all carry the previous turns. */
-  var REFER = /^(it|its|it's|that|this|those|these|them|they|same|above|earlier|previous|previously|said|told|mentioned|answer|wrong|incorrect|correct|right|actually|instead|rather|no|not|isnt|isn't|wasnt|wasn't|exact|exactly|definition|define|defined|explain|elaborate|detail|details|detailed|meaning|mean|means|clarify|example|examples|summary|summarise|summarize|brief|briefly|again|repeat|simpler|simple|short|shorter|longer|list|name|names|criteria|classification|classify|types|type|stages|stage|staging|grading|grade|causes|cause|etiology|aetiology|workup|investigations|investigation|tests|test|diagnosis|diagnose|differential|management|treatment|treat|therapy|regimen|drugs|drug|medication|medications|medicine|medicines|first|second|line|options|option|next|step|steps|approach|guideline|guidelines|evidence|source|sources|reference|patient|patients|should|would|could|can|be|do|does|did|was|were|yes|which|one|ones|each|every|all|only|just|now|still|too|much|many|long|when|where|who)$/;
+  var REFER = /^(it|its|it's|that|this|those|these|them|they|same|above|earlier|previous|previously|said|told|mentioned|answer|wrong|incorrect|correct|right|actually|instead|rather|no|not|isnt|isn't|wasnt|wasn't|exact|exactly|definition|define|defined|explain|elaborate|detail|details|detailed|meaning|mean|means|clarify|example|examples|summary|summarise|summarize|brief|briefly|again|repeat|simpler|simple|short|shorter|longer|list|name|names|criteria|classification|classify|types|type|stages|stage|staging|grading|grade|causes|cause|etiology|aetiology|workup|investigations|investigation|tests|test|diagnosis|diagnose|differential|management|treatment|treat|therapy|regimen|drugs|drug|medication|medications|medicine|medicines|first|second|line|options|option|next|step|steps|approach|guideline|guidelines|evidence|source|sources|reference|patient|patients|should|would|could|can|be|do|does|did|was|were|yes|which|one|ones|each|every|all|only|just|now|still|too|much|many|long|when|where|who|whom|whose|mandatory|indicated|indication|indications|recommended|required|needed|necessary|eligible|candidates|candidate|contraindicated)$/;
   var CORRECTION = /\b(?:wrong|incorrect|not right|actually|instead|should be|isn'?t it|you said|i think it'?s|drug of choice|first[- ]line is)\b|^\s*no\b/i;
   function subjectTokens(q) {
     var toks = String(q == null ? "" : q).toLowerCase().replace(/[^a-z0-9'\s-]/g, " ").split(/\s+/).filter(Boolean), out = [];
@@ -624,6 +659,14 @@
    * Kept apart so answer() can slot the evidence BETWEEN them: the chat template, the system prompt
    * and the history are then an identical token prefix across the turns of one thread, which the
    * native engine reuses instead of re-prefilling (perf plan #2). */
+  /* An abbreviation the doctor typed keeps its place, and its meaning is appended so the model never
+   * has to guess it (owner transcript, 2026-10-02: PMRT -> "prostate radiation therapy", TCHP -> three
+   * invented antibiotics). Every turn is rendered the same way every time (T24 prefix reuse). */
+  function glossed(text) {
+    var g = "";
+    try { var R = typeof window !== "undefined" && window.SMD_MAIK_RAG; if (R && R.gloss) g = R.gloss(text); } catch (e) {}
+    return g ? " (" + g + ")" : "";
+  }
   function buildPromptParts(pkg, packId) {
     if (!pkg) return null;
     var question = pkg.question || (pkg.topicMatch && pkg.topicMatch.topic) || "";
@@ -643,12 +686,12 @@
       var turns = hist.slice(subjectTokens(question).length ? -HISTORY_TURNS * 2 : -2);
       turns.forEach(function (h) {
         var isA = h.role === "assistant";
-        L.push((isA ? "MaiK: " : "Doctor: ") + (isA ? carry(h.text || h.content, CARRY_CAP) : clip(h.text || h.content, HISTORY_CLIP)));
+        L.push((isA ? "MaiK: " : "Doctor: ") + (isA ? carry(h.text || h.content, CARRY_CAP) : clip(h.text || h.content, HISTORY_CLIP) + glossed(h.text || h.content)));
       });
       L.push("");
     }
     var H = L; L = [];
-    L.push(question || "Give a brief clinical overview.");
+    L.push(question ? question + glossed(question) : "Give a brief clinical overview.");
     /* Suppress the base model's thinking mode when the pack asks for it.
      *
      * A Qwen3-family pack emits <think> blocks by default. At nPredict 768 a long reasoning trace can
@@ -1342,6 +1385,7 @@
       /* Before a retry recurses into answer(), this attempt stops listening and painting (T57): its
        * listener used to stay attached for the whole retry, so the screen alternated between the
        * two attempts' text. The retry attaches its own listener. */
+      var _loopStop = false;
       function detach() {
         _detached = true;
         if (_paintT) { clearTimeout(_paintT); _paintT = null; }
@@ -1356,8 +1400,10 @@
       }
       var attach = (typeof onDelta === "function" && L.addListener)
         ? Promise.resolve(L.addListener("llamaToken", function (ev) {
-            if (_detached) return;
+            if (_detached || _loopStop) return;
             acc += (ev && ev.text) || "";
+            // A model stuck repeating one list line is stopped now, not after the whole token budget.
+            if (isLooping(acc)) { _loopStop = true; try { cancel(); } catch (e) {} }
             if (_touchJob) _touchJob();   // a live stream is not a wedged call
             // Strip on the way out too, not just at the end: onDelta feeds the live typewriter, so a
             // leaked reasoning preamble would be read on screen even though the final text is clean.
@@ -1443,7 +1489,10 @@
           // The per-question line goes LAST, so a thread's prompts share everything before it (T24).
           if (!pk.system) common.system += treatAskLine(pkg && pkg.question);
         }
-        if (!images.length) return L.generate(common);
+        // A loop stop cancels the native call; whatever it then resolves or rejects with, the answer is
+        // the text streamed so far (collapseRepeats trims the loop in stripReasoning).
+        if (!images.length) return Promise.resolve(L.generate(common)).then(function (r) { return (_loopStop && r && r.error) ? { text: acc } : r; },
+          function (e) { if (_loopStop) return { text: acc }; throw e; });
         // IMAGE PATH. mtmd reads the file itself, so paths cross the bridge, never base64 - a phone
         // photo is several MB and marshalling that as a string is what made the old downloader
         // unusable. mmproj must come from the SAME pack as the loaded model; nothing native can
