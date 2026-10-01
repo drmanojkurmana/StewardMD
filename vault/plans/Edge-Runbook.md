@@ -132,6 +132,28 @@ For clinical review (not a regression): the CAP answer gave azithromycin alone a
 temperature, battery drop and the latency line `score.mjs --pred` prints (p50, p95, max).
 Pass: no crash, no thermal shutdown, p95 within the 1,200 ms deadline after the cold load.
 
+**iPhone 15 Pro (8 GB, iOS 27.0) PASSED, 2026-10-02 (the 4 GB Android phone is still to do):**
+- `--limit 50` back to back: Needle 3 x 50, all `ok`, p50 157 ms, p95 259 ms, max 386 ms (gate A0.2).
+  FunctionGemma Q8_0 + grammar: 50/50 `ok` with an integer option, p50 147 ms, p95 221 ms, max 1,280 ms
+  (the first call, cold load included; after a reinstall the first load took 1.3 s this time, 19 s once).
+- 30-minute mixed session (`test/device/edge-mixed-session-ios.mjs` over the WebKit proxy, MAiK Lite installed): 72 cycles of
+  noCloud dictation (speech from the Mac speaker), one `SMD_MAIK_LOCAL.answer`, and 10 Needle routings
+  under the 1,200 ms deadline. Same app process all 30 minutes (no crash). Dictation 72/72 on-device.
+  MaiK 72/72 local answers, first text p50 1.6 s / p95 2.3 s, full answer p50 12.8 s / p95 21.5 s /
+  max 25.5 s. Needle 719 `ok` + 1 `timeout` of 720: p50 162 ms, p95 356 ms, max 1,201 ms.
+- Memory: app physical footprint 630-665 MiB in 79 samples over the session, flat (resident ~1.7 GiB
+  including the mmapped weights). `xctrace` drops the device a second after it starts on this beta, so
+  memory was sampled with a 6 s Activity Monitor trace every 2 minutes.
+- Thermal: iOS thermal state went Fair -> **Serious** within 2 minutes and stayed there; never Critical.
+  `ChargerData.TimeChargingThermallyLimited` 0 -> 1,640. The llama engine throttles itself at Serious
+  (yield per token, budget cap 1,024) and stops at Critical (`LlamaEngine.swift`). Battery drop not
+  measurable: on USB the phone held 80% (charge limit) throughout.
+- **Gap found:** `edge-router.js` builds the runtime with `env: G.SMD_EDGE_ENV || {}` and nothing defines
+  `SMD_EDGE_ENV`, so the runtime's memory / thermal / others-busy back-off (`memoryOk`, `thermalOk`,
+  `othersBusy`) never runs in the app. Edge kept answering at Serious while MaiK generated (the one
+  timeout came then). Needs an owner decision on the signals: iOS thermal state is only visible to native
+  code today (`LlamaEngine` reads `ProcessInfo.thermalState`); `othersBusy` could be MaiK's own queue state.
+
 ## 4b. On-device speech (A1.2, flag `smd_speech_ondevice`)
 Build with this branch (the speech plugin changed on both platforms; Android compiles, Swift untested).
 On each phone (the flag is ON by default; `localStorage.setItem("smd_speech_ondevice","0")` is the kill switch):
