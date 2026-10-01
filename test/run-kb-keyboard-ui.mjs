@@ -54,5 +54,10 @@ try {
   // Keyboard down.
   await ev(`SMD_kbFitViewport({height:844,offsetTop:0});1`);
   ok(await st() === '||', 'keyboard down: overlay back to inset:0');
+  // Duplicate "Management": a reference disease printed its treatment list twice (glance accordion + numbered section).
+  const id = await ev(`Object.keys(KB_ENRICHMENT.byId).find(k=>{const h=KB_ENRICHMENT.byId[k];return h.class==='infective'&&!(window.SYNDROMES||{})[k]&&h.management&&h.management.length&&!(window.DX_MGMT||{})[k]})||Object.keys(KB_ENRICHMENT.byId).find(k=>{const h=KB_ENRICHMENT.byId[k];return h.class==='infective'&&!(window.SYNDROMES||{})[k]&&h.management&&h.management.length})`);
+  await ev(`SMD_REASON.openRef(${JSON.stringify(id)},{standalone:true});1`);
+  ok(await until(`!!document.querySelector('.dx-reader .dx-reader-content')`, 8000), 'reference disease page open: ' + id);
+  ok(await ev(`(()=>{const t=document.querySelector('.dx-reader').innerText;const n=(t.match(/OBSERVE|FLUCONAZOLE|first-line/gi)||[]).length;return document.querySelectorAll('.dx-reader details > summary').length>=0 && ![...document.querySelectorAll('.dx-reader summary')].some(s=>/^Management$/.test(s.textContent.trim()))&&document.querySelectorAll('.dx-reader .dx-mgmt-tx').length===1})()`), 'management list appears once (no duplicate accordion)');
 } catch (e) { console.log('FAIL', e.message); failures++; } finally { try { ws.close(); } catch {} chrome.kill(); server.close(); }
 console.log(failures ? failures + ' failed' : 'all passed'); process.exit(failures ? 1 : 0);

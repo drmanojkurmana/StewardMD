@@ -4310,6 +4310,8 @@
     var refInf = inf && !syn;
     var hasBrief = !!(dm && dm.tx && dm.tx.length);
     var briefTx = hasBrief ? dm.tx : ((H && H.management && H.management.length) ? H.management : null);
+    // The same list is rendered once: in the body below for reference diseases, in the glance only otherwise
+    // (the page used to print it twice, an accordion and then a numbered Management section).
     var mgmtHtml = (refInf && briefTx)
       ? ('<div class="dx-mgmt-sec tx">' + rIco("pills") + ' Management / Treatment</div><ol class="dx-mgmt-tx">' + briefTx.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ol>'
          + (dm && dm.ix && dm.ix.length ? '<div class="dx-mgmt-sec">Key investigations</div><ul class="dx-mgmt-ul">' + dm.ix.slice(0, 8).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '')
@@ -4334,7 +4336,7 @@
           (reason ? '<p>' + medFormat(reason) + '</p>' : '') +
           (H && H.redFlags && H.redFlags.length ? '<section class="dx-reader-alert"><h4>Red flags</h4>' + evList(H.redFlags, "danger") + '</section>' : '') +
           (H && H.additionalInvestigations && H.additionalInvestigations.length ? '<details><summary>Investigations</summary>' + evList(H.additionalInvestigations) + '</details>' : '') +
-          (briefTx && briefTx.length ? '<details><summary>Management</summary><ul>' + briefTx.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join('') + '</ul></details>' : '') +
+          (briefTx && briefTx.length && !(refInf && briefTx) ? '<details><summary>Management</summary><ul>' + briefTx.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join('') + '</ul></details>' : '') +
         '</div><div class="dx-reader-content">' +
         (reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(reason) + '</p>' : '') +
         mgmtHtml +
