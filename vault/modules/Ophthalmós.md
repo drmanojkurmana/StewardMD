@@ -193,3 +193,12 @@ both modes. Switching mode while Ophthalmos is open follows at once (pure CSS).
   image host. Synced with a 3-way merge so the StewardMD-only edits (oph10 white background, oph11 light/dark mode)
   were kept: those edits still need **porting back to the module repo**.
 - All 22 Ophthalmós tags moved to `?v=oph12`.
+
+## Clinical + code review: retinoscopy and neuro-ophthalmology (oph13, 2026-10-02)
+- Three consultant-plus-engineer reviews and an independent verification before the real clinical review.
+  Module PR #26 (merge 25fcda9). Highlights: neuro gaze solver side asymmetry (one-and-a-half 143 PD on
+  one side), pupil-sparing third nerve now "image anyway", three wrong realistic images removed (lessons back
+  on diagrams), retinoscopy working-distance error labels and residual cylinder, GCA and ONTT guidance.
+- Explorer colours now match the neuro-pathway lesson: blue = left half of vision. StewardMD's own colours
+  (light `ophthalmos-explore.css`, dark `oph-theme-dark.css`) were swapped too (`?v=ophdark2`).
+- Synced by a 3-way merge again; the StewardMD-only oph10/oph11 edits still need porting to the module.

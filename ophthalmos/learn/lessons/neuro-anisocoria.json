@@ -3,12 +3,7 @@
   "unit": "neuro",
   "level": "mbbs",
   "minutes": 5,
-  "review": {
-    "status": "ai_drafted",
-    "verify": [
-      "AI-generated realistic image: verify anatomy and label positions"
-    ]
-  },
+  "review": "ai_drafted",
   "title": {
     "en": "Unequal pupils",
     "hi": "असमान पुतलियाँ"
@@ -18,21 +13,22 @@
     "hi": "[[anisocoria]] में पहले पता करें कि कौन सी पुतली ख़राब है। अगर अँधेरे में फ़र्क़ ज़्यादा हो, तो छोटी पुतली ख़राब है। अगर तेज़ रोशनी में फ़र्क़ ज़्यादा हो, तो बड़ी पुतली ख़राब है।"
   },
   "see": {
-    "w": 768,
-    "h": 576,
+    "diagram": "diagrams/neuro-anisocoria.svg",
+    "w": 480,
+    "h": 330,
     "alt": {
-      "en": "Four views of the same face. The left column is in bright light and the right column is in dim light. Top row: the right upper lid droops a little. The right pupil is smaller, most clearly in dim light. Bottom row: the right lid droops more and the right eye points down and out. Its pupil stays large in bright light.",
-      "hi": "एक ही चेहरे के चार दृश्य। बायाँ कॉलम तेज़ रोशनी में है और दायाँ कॉलम मंद रोशनी में। ऊपर की पंक्ति: दाईं ऊपरी पलक थोड़ी झुकी है, और दाईं पुतली छोटी है, मंद रोशनी में सबसे साफ़। नीचे की पंक्ति: दाईं पलक ज़्यादा झुकी है और दाईं आँख नीचे और बाहर की ओर देखती है। तेज़ रोशनी में भी उसकी पुतली बड़ी रहती है।"
+      "en": "Two panels: bright light on the left, under a sun, and dim light on the right, under a moon. The patient's right eye is on your left. Top row: that eye has a slightly droopy lid and a small pupil. Bottom row: that eye has a heavy droop, sits down and out, and has a big pupil.",
+      "hi": "दो हिस्से: बाईं ओर सूरज के नीचे तेज़ रोशनी, दाईं ओर चाँद के नीचे कम रोशनी। मरीज़ की दाईं आँख आपकी बाईं ओर है। ऊपर की पंक्ति: उस आँख की पलक थोड़ी झुकी है और पुतली छोटी है। नीचे की पंक्ति: उस आँख की पलक बहुत झुकी है, आँख नीचे और बाहर है, और पुतली बड़ी है।"
     },
     "caption": {
       "en": "Top: right Horner syndrome, gap biggest in the dark. Bottom: right third nerve palsy, gap biggest in bright light.",
       "hi": "ऊपर: दाईं ओर हॉर्नर सिंड्रोम, फ़र्क़ अँधेरे में सबसे ज़्यादा। नीचे: दाईं तीसरी नर्व का पक्षाघात, फ़र्क़ तेज़ रोशनी में सबसे ज़्यादा।"
     },
-    "credit": "Created with MaiK (StewardMD AI)",
+    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
     "hotspots": [
       {
-        "x": 0.11,
-        "y": 0.22,
+        "x": 0.156,
+        "y": 0.321,
         "label": {
           "en": "Mild droop",
           "hi": "हल्की झुकी पलक"
@@ -43,8 +39,8 @@
         }
       },
       {
-        "x": 0.62,
-        "y": 0.264,
+        "x": 0.627,
+        "y": 0.358,
         "label": {
           "en": "Small pupil lags in the dark",
           "hi": "अँधेरे में छोटी पुतली पीछे रह जाती है"
@@ -55,8 +51,8 @@
         }
       },
       {
-        "x": 0.145,
-        "y": 0.787,
+        "x": 0.135,
+        "y": 0.776,
         "label": {
           "en": "Big pupil in the light",
           "hi": "रोशनी में बड़ी पुतली"
@@ -67,8 +63,8 @@
         }
       },
       {
-        "x": 0.895,
-        "y": 0.76,
+        "x": 0.606,
+        "y": 0.773,
         "label": {
           "en": "Nearly equal in the dark",
           "hi": "अँधेरे में लगभग बराबर"
@@ -79,8 +75,8 @@
         }
       },
       {
-        "x": 0.75,
-        "y": 0.08,
+        "x": 0.265,
+        "y": 0.079,
         "label": {
           "en": "Bright, then dim",
           "hi": "पहले तेज़, फिर कम रोशनी"
@@ -90,10 +86,6 @@
           "hi": "पुतलियों को पहले तेज़ रोशनी में, फिर कम रोशनी में मिलाएँ। किसमें फ़र्क़ ज़्यादा है?"
         }
       }
-    ],
-    "img": "learn/media/real/neuro-anisocoria.webp",
-    "more": [
-      "neuro-anisocoria"
     ]
   },
   "why": {
@@ -107,8 +99,8 @@
         "hi": "अँधेरे में सामान्य पुतली फैलती है। अगर सिम्पैथेटिक सप्लाई कट जाए, तो वह पुतली छोटी रहती है। फ़र्क़ अँधेरे में सबसे ज़्यादा होता है।"
       },
       {
-        "en": "[[horner-syndrome]] gives a small pupil, mild [[ptosis]] and less sweating on that side. The fault lies on the path from the brain, down the neck and back up to the eye.",
-        "hi": "[[horner-syndrome]] में छोटी पुतली, हल्का [[ptosis]] और उस ओर कम पसीना होता है। ख़राबी दिमाग से गर्दन तक और फिर वापस आँख तक के रास्ते में होती है।"
+        "en": "[[horner-syndrome]] gives a small pupil, mild [[ptosis]] and less sweating on that side. The fault lies on a long path. It runs from the brain down the spinal cord to the top of the chest. It then climbs the neck to the eye.",
+        "hi": "[[horner-syndrome]] में छोटी पुतली, हल्का [[ptosis]] और उस ओर कम पसीना होता है। ख़राबी एक लंबे रास्ते में होती है। यह दिमाग से रीढ़ की हड्डी में नीचे छाती के ऊपरी हिस्से तक जाता है। फिर गर्दन से ऊपर आँख तक चढ़ता है।"
       },
       {
         "en": "In bright light, a normal pupil shrinks. If the third nerve or the sphincter fails, that pupil stays big. The gap is biggest in bright light.",

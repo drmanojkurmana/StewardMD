@@ -17,7 +17,8 @@ async function ensureServer() {
   for (let i = 0; i < 30; i++) { try { await fetch(BASE); return; } catch { await sleep(200); } }
 }
 await ensureServer();
-const chrome = spawn(CHROME, ["--headless=new", "--no-sandbox", `--remote-debugging-port=${PORT}`, `--user-data-dir=${userDir}`, "--no-first-run", "--no-default-browser-check"], { stdio: "ignore" });
+const chrome = spawn(CHROME, [...(process.env.CHROME_FLAGS || "").split(" ").filter(Boolean), "--headless=new", "--no-sandbox", `--remote-debugging-port=${PORT}`, `--user-data-dir=${userDir}`, "--no-first-run", "--no-default-browser-check", "--disable-dev-shm-usage", "--disable-gpu"], { stdio: ["ignore", "ignore", "pipe"] });
+let chromeErr = ""; chrome.stderr.on("data", (d) => { chromeErr += d; });
 
 let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = [];
 const call = (m, p) => { const i = msgId++; return new Promise(r => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
@@ -27,7 +28,8 @@ const key = async (k, code, vk, text) => { await call("Input.dispatchKeyEvent", 
 let fails = 0; const ok = (c, m) => { console.log((c ? "✅ " : "❌ ") + m); if (!c) fails++; };
 
 try {
-  let ver, t = 0; while (t++ < 60) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
+  let ver, t = 0; while (t++ < 300) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }   // up to 60 s: a cold CI Chrome can take over 12
+  if (!ver) throw new Error("Chrome did not start within 60 s: " + chromeErr.slice(-800));
   ws = new WebSocket(ver.webSocketDebuggerUrl); await new Promise((res, rej) => { ws.onopen = res; ws.onerror = rej; });
   ws.onmessage = (e) => {
     const m = JSON.parse(e.data);
