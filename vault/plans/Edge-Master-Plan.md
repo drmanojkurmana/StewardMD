@@ -311,6 +311,20 @@ Never put patient data in them.
 | **5** | Fix pilot findings. Add calculator prefill via Edge and ICU dictation to `reviewVoice()`. Hinglish/Tenglish test set run. | Same pass marks hold, including Hinglish/Tenglish |
 | **6** | Release to a small invited group of doctors. Decide the next step: Scribe fact log or show-off features. | Counts in AI Control Center look healthy for 1 week |
 
+**Timeline slack for the bake-off (review 2026-10-01).** Two model families in two weeks is tight, so:
+- The bake-off does not wait for both. Whichever model clears the Day 1 gates and trains first is
+  scored first; the other joins when ready. A model still not trained by the end of week 3 drops out
+  of v1 and is retried after release.
+- Week 6 is buffer, not scope. If weeks 2 to 3 slip, the pilot moves to week 5 and release to week 6;
+  ICU dictation moves to after release.
+- Grammar decoding in `capacitor-llama` is a Day 1 gate (A0.3), so it cannot surprise week 3.
+
+**Sustained-load test on the 4 GB phone (part of week 1 feasibility, not later):** 50 Edge calls in a
+row, then 10 minutes of ambient Scribe with Edge calls between Whisper chunks. Record thermal status,
+CPU throttling, app memory, and any low-memory kills or `onRenderProcessGone`. Repeat on one MediaTek
+Helio and one low-tier Snapdragon phone if available. The back-off numbers in A0.5 are set from this
+test.
+
 If week 3 fails the gate, weeks 4 to 6 become more Phase 0 work (search, prefill, parser coverage),
 which still helps every user.
 
