@@ -123,3 +123,10 @@ test("learner text: English and Hindi, no em dash, ASCII numerals in Hindi", () 
     assert.ok(!/[०-९]/.test(t.hi));
   }
 });
+
+test("warnings: Ba cannot be above Aa, Bp cannot be above Ap (Bump 1996)", () => {
+  assert.equal(st({ Aa: -1, Ba: -2 }).warnings.length, 1);
+  assert.match(st({ Aa: -1, Ba: -2 }).warnings[0].en, /Ba .*Aa/);
+  assert.match(st({ Ap: 0, Bp: -1 }).warnings[0].en, /Bp .*Ap/);
+  assert.equal(st({ Aa: -1, Ba: -1 }).warnings.length, 0);
+});

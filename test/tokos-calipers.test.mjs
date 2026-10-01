@@ -32,3 +32,13 @@ test("Hindi time readout keeps number and unit together (सेकंड, non-br
   assert.ok(/1 मिनट 23 सेकंड \(83 सेकंड\)/.test(hi), hi);
   assert.ok(!/\d s\b/.test(hi), hi);
 });
+
+test("time labels follow FIGO 2015: a deceleration is more than 15 s, prolonged more than 3 min", () => {
+  const span = (sec) => K.readout(L, { mode: "time", x1: L.padL, x2: L.padL + (sec / L.durationSec) * L.plotW, y1: 0, y2: 0 }, "en");
+  assert.match(span(15), /too short/);
+  assert.match(span(16), /deceleration length/);
+  assert.match(span(180), /deceleration length/);
+  assert.match(span(181), /prolonged/);
+  assert.match(span(300), /prolonged/);
+  assert.match(span(301), /over 5/);
+});

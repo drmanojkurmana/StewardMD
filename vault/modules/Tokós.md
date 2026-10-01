@@ -11,7 +11,7 @@ question bank, calculators, drills, Explore and notes as their content lands. `t
 `tokos-ctg.js` is the CTG clinic plugin (the pure checklist and key logic, `window.TOKOS_CTG`, used by the Review Desk and
 `scripts/apply-reviews.mjs`); `tokos-core.js`, `tokos-data.js` and `tokos-stage.js` are gone. Lazy loading: the app loads
 only `tokos-loader.js` at boot (`window.TOKOS` is a stand-in with the same surface; `TOKOS_LOADER.load()`); the first open
-injects `specialty*.{js,css}`, `tokos.css`, `tokos.js`, `tokos-calipers.js`, `tokos-ctg.js` at `?v=tok7`, then the ordered
+injects `specialty*.{js,css}`, `tokos.css`, `tokos.js`, `tokos-calipers.js`, `tokos-ctg.js` at `?v=tok8`, then the ordered
 model list in `tokos/models.json` (`tokos-models/<id>.js`; `build-www.sh` copies `tokos-models/`). Learn content goes in
 `tokos/learn/units/*.json`, `lessons/`, `media/credits-<unit>.json`; `node tools/tokos-learn-index.mjs` builds
 `index.json`, `glossary.json` and `media/credits.json` (checked by `test/tokos-learn-content.test.mjs`) and
@@ -116,6 +116,30 @@ verified, draft" footer. Known content issues a reviewer should settle:
 - Features and keys are computed on the last 60 min while the learner sees the last 30 min, so a key can rest
   on events that are not on screen.
 
+## Clinical review pass (2026-10-02)
+
+Eight read-only reviewers (calculators, drills/labour/CTG, explorers, four lesson groups, realistic images) checked
+the whole module against Williams 26e, DC Dutta, RCOG, NICE, FIGO, WHO, ACOG, MoHFW and FOGSI. Every critical and
+major finding was fixed and checked by an independent verifier. Key changes:
+
+- Lessons: FIGO 2018 cervix stage boundaries; NRP (compressions only below 60 after 30 s of good ventilation);
+  transverse lie signs; anti-D 50 mcg to 12 weeks, 300 mcg after; HRT quiz with one right answer; PPROM expectant
+  care 34 to 37 weeks (NICE/RCOG) beside FOGSI/ACOG; AUB-C for anticoagulants; reduced movements means come in now.
+  MoHFW 2010 teaching is kept where it is the Indian standard, with the current standard named beside it.
+- Calculators: EDD keeps the LMP date when ACOG says keep it; MgSO4 gives calcium only for respiratory depression
+  (RR below 12), otherwise withhold and recheck; reflex is a required select; Bishop bands follow NICE NG207;
+  Bishop and BSH anti-D no longer fail on the app's empty fields; parseNum reads "1,500" as 1500.
+- Drills: scoring times each step on its own clock (`spentSec`); labour sim does not penalise caesarean at
+  obstruction, flags caesarean or vacuum for a suspicious CTG, flags vacuum without indication, grades neglected
+  obstruction as harm; PPH drill teaches uterine massage. CTG prep: repetitive late decelerations rule, classify
+  on the exact baseline, prolonged is over 180 s. No deck key changed (verified against PhysioNet records).
+- Engine: quiz options show in a stable shuffled order per lesson and question (`optOrder` in specialty-learn.js);
+  `data-k` keeps the file index and digit keys follow the screen. Keys were 85% in positions A/B before.
+- Doses in drills are pinned to `kb/clinical-protocols` (ICMR PPH, FOGSI HDP); lessons name ICMR/FOGSI figures and
+  the WHO alternative beside them.
+
+Owner items from this pass (unverified sources, Tokós thresholds, wording choices) are in the PR description.
+
 ## Known limits
 
 - No tachysystole or reduced-variability case exists in the dataset pool; archetypes filled by 1097, 1022, 1033.
@@ -148,3 +172,5 @@ IAP charts, Kermany, MURA blocked) are in memory note `specialty-module-dataset-
 - Tokós lives natively in StewardMD (not a synced repo). Edit the files here.
 - The FSRS and zoom engine are the [[Specialty Engine]]'s (the 1.0 duplicate is gone; decision 2026-09-29).
 - Inline trace SVGs emit classes only, no `<style>`; an inline style element would restyle the app.
+- Browser harnesses reuse any server already on their default port (8993, 8996, 8997), which may serve another
+  worktree. Run them with a free `PORT=` so they test this checkout.

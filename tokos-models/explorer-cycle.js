@@ -57,7 +57,10 @@
   function bad(en, hi) { return { ok: false, error: { en: en, hi: hi } }; }
 
   function subphaseOf(day, L) {
-    var lm = landmarksOf(L), k = Math.round(day - lm.lhPeakDay);
+    // the LH peak (half a day before ovulation) and the ovulation day itself both read as the LH peak, so the
+    // whole day that the ovary shows "ovulation" never says the corpus luteum has already formed
+    var lm = landmarksOf(L), x = day - lm.lhPeakDay, k = Math.round(x);
+    if (x >= -0.5 && x <= 0.5) return "lh-peak";
     if (day <= MENSES && k < 0) return "early-follicular";
     if (k <= -6) return "early-follicular";
     if (k <= -1) return "late-follicular";

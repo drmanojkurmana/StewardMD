@@ -134,3 +134,9 @@ test("learner text: English and Hindi, no em dash, ASCII numerals in Hindi", () 
     assert.ok(!/[०-९]/.test(t.hi));
   }
 });
+
+test("papillary structures need a solid component: refused on a unilocular or multilocular cyst", () => {
+  assert.equal(O.classify({ type: "unilocular", colourScore: 2, papillaryStructures: 4 }).ok, false);
+  assert.equal(O.classify({ type: "multilocular", outline: "smooth", largestDiameterMm: 50, colourScore: 2, papillaryStructures: 1 }).ok, false);
+  assert.equal(O.classify({ type: "unilocular", colourScore: 2, papillaryStructures: 0 }).ok, true);
+});

@@ -50,6 +50,12 @@
     if (id === "tvl") return [1, 15];
     return [0, 15];
   }
+  // After tvl changes, pull the points whose range depends on tvl back inside it (in place), so one press never
+  // leaves the learner with an out-of-range error.
+  function popqFit(pts) {
+    ["Ba", "Bp", "C", "D"].forEach(function (id) { var bd = popqBounds(id, pts.tvl); if (typeof pts[id] === "number") pts[id] = clamp(pts[id], bd[0], bd[1]); });
+    return pts;
+  }
   function popqInput(pts, noD) {
     var p = {}, k;
     for (k in pts) if (Object.prototype.hasOwnProperty.call(pts, k)) p[k] = pts[k];
@@ -63,11 +69,48 @@
     var k = clamp(i, 0, seq.steps.length - 1);
     return { ok: true, i: k, n: seq.steps.length, step: seq.steps[k], movement: model.movements[k], seq: seq };
   }
+  // Mechanism view from below. The frames on disk are drawn for a head that engages LOT; this turns the head, the earlier
+  // (dashed) head, the shoulders and the turn arrow to the learner's start. theta: occiput direction in degrees from the
+  // mother's front toward her left (the model's position angle); on screen the occiput of a head at rotate(0) points
+  // to the mother's left, so the SVG angle is theta - 90.
+  function r1(x) { return Math.round(x * 10) / 10; }
+  function svgDeg(theta) { var x = ((theta - 90) % 360 + 360) % 360; return r1(x > 180 ? x - 360 : x); } // in (-180, 180]
+  function belowPose(model, step) {
+    var P = model.positions, a0 = P[step.before].angle, a1 = P[step.after].angle, d = 0;
+    // "either" is a 180 degree turn; the model passes the mother's left (anticlockwise), so draw it that way
+    if (step.degrees) d = step.direction === "clockwise" ? step.degrees : -step.degrees;
+    return { ghost: a0, head: a1, shoulders: a1 + 90, turn: d ? [a0, a0 + d] : null };
+  }
+  function belowArc(cx, cy, r, from, to, short) {
+    var end = short && Math.abs(to - from) > 16 ? to - (to > from ? 8 : -8) : to;
+    var t0 = from * Math.PI / 180, t1 = end * Math.PI / 180;
+    return "M" + r1(cx + Math.sin(t0) * r) + " " + r1(cy - Math.cos(t0) * r) + "A" + r + " " + r + " 0 " + (Math.abs(end - from) > 180 ? 1 : 0) + " " +
+      (end > from ? 1 : 0) + " " + r1(cx + Math.sin(t1) * r) + " " + r1(cy - Math.cos(t1) * r);
+  }
+  function orientBelow(svg, model, step, movementId) {
+    var k = svg.indexOf('data-view="below"');
+    if (k < 0) return svg;
+    var head = svg.slice(0, k), below = svg.slice(k), pose = belowPose(model, step), solid = null;
+    below = below.replace(/<g data-part="head" transform="translate\(([-\d.]+) ([-\d.]+)\) rotate\([-\d.]+\)">(<ellipse[^>]*>)/g, function (m, x, y, el) {
+      var ghost = /fill="none"/.test(el);
+      if (!ghost) solid = { x: +x, y: +y };
+      return '<g data-part="head" transform="translate(' + x + " " + y + ") rotate(" + svgDeg(ghost ? pose.ghost : pose.head) + ')">' + el;
+    });
+    below = below.replace(/<g data-part="shoulders" transform="translate\(([-\d.]+) ([-\d.]+)\) rotate\([-\d.]+\)">/g, function (m, x, y) {
+      // the shoulders are born in the front-to-back diameter of the outlet whatever the head did
+      return '<g data-part="shoulders" transform="translate(' + x + " " + y + ") rotate(" + svgDeg(movementId === "expulsion" ? 180 : pose.shoulders) + ')">';
+    });
+    below = below.replace(/<path d="M[-\d.]+ [-\d.]+A(\d+) \d+ 0 [01] [01] [-\d.]+ [-\d.]+"([^>]*)\/>/g, function (m, r, rest) {
+      if (!pose.turn || !solid) return "";
+      return '<path d="' + belowArc(solid.x, solid.y, +r, pose.turn[0], pose.turn[1], movementId === "internal-rotation") + '"' + rest + "/>";
+    });
+    return head + below;
+  }
   // Cervical pathway: path = [{step, result}] where the last entry has no result yet.
   function cxAdvance(path, result) { var p = path.slice(0, -1), cur = path[path.length - 1]; p.push({ step: cur.step, result: result }); return p; }
   function cxBack(path) { if (path.length < 2) return path.slice(); var p = path.slice(0, -2); p.push({ step: path[path.length - 2].step }); return p; }
   var PURE = { signed: signed, clamp: clamp, lessonsFor: lessonsFor, cycleX: cycleX, cyclePaths: cyclePaths, POPQ_GRID: POPQ_GRID,
-    popqBounds: popqBounds, popqInput: popqInput, mechStep: mechStep, cxAdvance: cxAdvance, cxBack: cxBack };
+    popqBounds: popqBounds, popqFit: popqFit, popqInput: popqInput, mechStep: mechStep, belowPose: belowPose, belowArc: belowArc, orientBelow: orientBelow, cxAdvance: cxAdvance, cxBack: cxBack };
   if (typeof module !== "undefined" && module.exports) { module.exports = PURE; return; }
   G.TOKOS_EXPLORE_UI = PURE;
 
@@ -200,7 +243,7 @@
     body: function (m) {
       var r = mechStep(m, MS.start, MS.op, MS.i), st = r.step, mv = r.movement, file = mv.file, pos = m.positions;
       var fam = pos[MS.start].family, fig = MS.svg[file]
-        ? '<div class="tkx-fig" role="img" aria-label="' + esc(raw("figAlt", { m: t(mv.title) })) + '">' + MS.svg[file] + "</div>"
+        ? '<div class="tkx-fig" role="img" aria-label="' + esc(raw("figAlt", { m: t(mv.title) })) + '">' + orientBelow(MS.svg[file], m, st, mv.id) + "</div>"
         : MS.err[file] ? errHtml("tkxmsvg") : '<div class="tkx-fig tkx-fig-sk" aria-busy="true"><span class="sp-sr" role="status">' + s("loading") + "</span></div>";
       if (!MS.svg[file] && !MS.err[file]) loadSvg(file);
       var segs = r.seq.steps.map(function (x, k) {
@@ -407,6 +450,7 @@
   A.tkxpqstep = function (b) {
     var bd = popqBounds(PQ.sel, PQ.pts.tvl);
     PQ.pts[PQ.sel] = clamp(Math.round((PQ.pts[PQ.sel] + +b.getAttribute("data-v")) * 2) / 2, bd[0], bd[1]);
+    if (PQ.sel === "tvl") popqFit(PQ.pts);
     touched("popq"); again();
   };
   A.tkxpqnod = function () { PQ.noD = !PQ.noD; if (PQ.noD && PQ.sel === "D") PQ.sel = "C"; touched("popq"); again(); };

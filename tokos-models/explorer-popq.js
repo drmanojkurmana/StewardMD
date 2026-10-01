@@ -58,6 +58,16 @@
     return { ok: true };
   }
 
+  /* Measurements that cannot both be right (Bump 1996): Ba is the most dependent point of the upper anterior wall, so it
+     is never above Aa; Bp likewise against Ap; D normally lies above C. */
+  function warningsOf(p, hasD) {
+    var w = [];
+    if (hasD && p.D > p.C) w.push(T("D is the posterior fornix and normally lies above (more negative than) C. Check the two measurements.", "D posterior fornix है और आमतौर पर C से ऊपर (C से अधिक negative) होता है। दोनों माप दोबारा जाँचें।"));
+    if (p.Ba < p.Aa) w.push(T("Ba is the most dependent part of the anterior wall and cannot be higher than Aa. Check the two measurements.", "Ba anterior दीवार का सबसे नीचे वाला हिस्सा है और Aa से ऊपर नहीं हो सकता। दोनों माप दोबारा जाँचें।"));
+    if (p.Bp < p.Ap) w.push(T("Bp is the most dependent part of the posterior wall and cannot be higher than Ap. Check the two measurements.", "Bp posterior दीवार का सबसे नीचे वाला हिस्सा है और Ap से ऊपर नहीं हो सकता। दोनों माप दोबारा जाँचें।"));
+    return w;
+  }
+
   function stage(p) {
     var v = validate(p);
     if (!v.ok) return v;
@@ -78,7 +88,7 @@
         anterior: Math.max(p.Aa, p.Ba), apical: hasD ? Math.max(p.C, p.D) : p.C, posterior: Math.max(p.Ap, p.Bp)
       },
       rule: STAGES[s].rule,
-      warnings: hasD && p.D > p.C ? [T("D is the posterior fornix and normally lies above (more negative than) C. Check the two measurements.", "D posterior fornix है और आमतौर पर C से ऊपर (C से अधिक negative) होता है। दोनों माप दोबारा जाँचें।")] : []
+      warnings: warningsOf(p, hasD)
     };
   }
 

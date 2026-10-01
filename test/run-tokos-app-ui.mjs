@@ -59,12 +59,12 @@ try {
   await load(BASE);
   // lazy loading: app boot requests the loader and no engine or Tokós file
   const ENG = /\/(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?\.(js|css)|tokos(-core|-data|-stage|-ctg|-calipers)?\.(js|css)|tokos-models\/)/;
-  ok(reqs.some((u) => /tokos-loader\.js\?v=tok7/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads tokos-loader.js and no engine or Tokós file" + (reqs.filter((u) => ENG.test(u)).length ? ": " + reqs.filter((u) => ENG.test(u)).join(", ") : ""));
+  ok(reqs.some((u) => /tokos-loader\.js\?v=tok8/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads tokos-loader.js and no engine or Tokós file" + (reqs.filter((u) => ENG.test(u)).length ? ": " + reqs.filter((u) => ENG.test(u)).join(", ") : ""));
   ok(await until(tile, 10000), "default (no flag): the Tokós home tile renders without being added from Add Tool");
   await ev(`var t=document.querySelector('.rnav-tile[data-act=tokos]'); t.focus(); t.click(); return 1;`);
   ok(await until(`return TOKOS.isOpen() && !!document.getElementById("smdTokos");`, 10000), "tile opens the Tokós overlay");
   ok(await until(`return !!document.querySelector('#smdTokos [data-act=pick][data-t=test]');`, 20000), "first open loads Tokós and asks Learn or Test");
-  ok(await ev(`return !!window.SPECIALTY_CORE;`) === true && reqs.some((u) => /specialty-shell\.js\?v=tok7/.test(u)) && reqs.some((u) => /tokos-ctg\.js\?v=tok7/.test(u)), "the engine and Tokós loaded on open, at the loader's token");
+  ok(await ev(`return !!window.SPECIALTY_CORE;`) === true && reqs.some((u) => /specialty-shell\.js\?v=tok8/.test(u)) && reqs.some((u) => /tokos-ctg\.js\?v=tok8/.test(u)), "the engine and Tokós loaded on open, at the loader's token");
   await ev(`document.querySelector('#smdTokos [data-act=pick][data-t=test]').click(); return 1;`);
   ok(await until(`return !!document.querySelector('#smdTokos [data-act=clinic][data-t=ctg]');`, 20000), "hub shows the CTG clinic");
   // Tokós 2.0 wiring: every model in tokos/models.json is listed with its own screen (13 tools, 6 drills + the labour room

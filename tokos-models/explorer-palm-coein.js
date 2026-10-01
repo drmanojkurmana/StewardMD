@@ -24,13 +24,13 @@
     { code: "M", key: "malignancy", group: "structural", name: T("Malignancy and hyperplasia", "Malignancy और hyperplasia (कैंसर और अतिवृद्धि)"),
       def: T("Endometrial hyperplasia, with or without atypia, or a malignancy.", "Endometrial hyperplasia (atypia के साथ या बिना) या कोई malignancy।") },
     { code: "C", key: "coagulopathy", group: "non-structural", name: T("Coagulopathy", "Coagulopathy (रक्त जमने का विकार)"),
-      def: T("A systemic disorder of haemostasis; von Willebrand disease is the commonest.", "Haemostasis का एक systemic विकार; इनमें von Willebrand disease सबसे आम है।") },
+      def: T("A systemic disorder of haemostasis; von Willebrand disease is the commonest. Bleeding on anticoagulants is also classified here (FIGO 2018).", "Haemostasis का एक systemic विकार; इनमें von Willebrand disease सबसे आम है। Anticoagulants लेने पर होने वाला रक्तस्राव भी यहीं आता है (FIGO 2018)।") },
     { code: "O", key: "ovulatoryDysfunction", group: "non-structural", name: T("Ovulatory dysfunction", "Ovulatory dysfunction (अंडोत्सर्ग की गड़बड़ी)"),
       def: T("Bleeding that is irregular in timing and flow, often with gaps of amenorrhoea; common at menarche, in the perimenopause and in PCOS.", "ऐसा रक्तस्राव जिसका समय और मात्रा अनियमित होती है, अक्सर बीच में amenorrhoea के अंतराल के साथ; menarche, perimenopause और PCOS में आम।") },
     { code: "E", key: "endometrial", group: "non-structural", name: T("Endometrial", "Endometrial (endometrium का प्राथमिक विकार)"),
       def: T("A primary disorder of the local mechanisms that stop menstrual bleeding. It is a diagnosis of exclusion, made when the other causes have been ruled out.", "माहवारी का रक्तस्राव रोकने वाली स्थानीय प्रक्रियाओं का प्राथमिक विकार। यह exclusion का निदान है, जो दूसरे कारण हटाने के बाद किया जाता है।") },
     { code: "I", key: "iatrogenic", group: "non-structural", name: T("Iatrogenic", "Iatrogenic (उपचार से जुड़ा)"),
-      def: T("Bleeding linked to exogenous sex steroids, an intrauterine device or system, or another systemic or local agent.", "बाहर से दिए गए sex steroids, intrauterine device या system, या किसी और systemic या local दवा से जुड़ा रक्तस्राव।") },
+      def: T("Bleeding linked to exogenous gonadal steroids, an intrauterine device or system, or another local or systemic agent. Since FIGO 2018, anticoagulants go under C and drugs that disturb ovulation go under O.", "बाहर से दिए गए gonadal steroids, intrauterine device या system, या किसी अन्य local या systemic दवा से जुड़ा रक्तस्राव। FIGO 2018 से anticoagulants C में और ovulation बिगाड़ने वाली दवाएँ O में आती हैं।") },
     { code: "N", key: "notClassified", group: "non-structural", name: T("Not otherwise classified", "Not otherwise classified (अन्य वर्गीकृत नहीं)"),
       def: T("Rare or poorly defined causes, for example an arteriovenous malformation.", "दुर्लभ या अस्पष्ट कारण, जैसे arteriovenous malformation।") }
   ];
@@ -62,6 +62,7 @@
     if (!m) return bad("Leiomyoma is true, a type 0 to 8, or a hybrid such as \"2-5\".", "Leiomyoma true, type 0 से 8, या hybrid (जैसे \"2-5\") होना चाहिए।");
     var a = +m[1], b = +m[2];
     if (a === b) return bad("A hybrid leiomyoma has two different types.", "Hybrid leiomyoma में दो अलग type होते हैं।");
+    if (a > 3 || b < 5 || b > 7) return bad("A hybrid is an endometrial-side type 0 to 3, then a serosal-side type 5 to 7, such as \"2-5\".", "Hybrid में पहले endometrium की ओर का type 0 से 3, फिर serosa की ओर का type 5 से 7 होता है, जैसे \"2-5\"।");
     var g = LEIOMYOMA_TYPES[a].group;
     return { ok: true, types: [a, b], group: g, hybrid: true, label: "L(" + g + ")" };
   }
@@ -91,13 +92,16 @@
     };
   }
 
-  /* FIGO AUB System 1: normal limits (Watters 2021 Table 1, from the FIGO 2018 revisions). */
-  var SYSTEM1 = { frequencyMin: 24, frequencyMax: 38, durationMax: 8, regularityMax: 9 };
+  /* FIGO AUB System 1: normal limits (Watters 2021 Table 1, from the FIGO 2018 revisions). Regularity depends on age:
+     shortest to longest cycle up to 9 days at 18 to 25 and 42 to 45 years, up to 7 days at 26 to 41 years. With no age
+     given, the wider 9 day limit is used. */
+  var SYSTEM1 = { frequencyMin: 24, frequencyMax: 38, durationMax: 8, regularityMax: 9, regularityMaxAge26to41: 7 };
+  function regularityLimit(age) { return typeof age === "number" && age >= 26 && age <= 41 ? SYSTEM1.regularityMaxAge26to41 : SYSTEM1.regularityMax; }
   var TERMS = {
     frequent: T("Frequent menstrual bleeding (cycle shorter than 24 days)", "बार-बार माहवारी (चक्र 24 दिन से छोटा)"),
     infrequent: T("Infrequent menstrual bleeding (cycle longer than 38 days)", "कम बार माहवारी (चक्र 38 दिन से लंबा)"),
     prolonged: T("Prolonged menstrual bleeding (more than 8 days)", "लंबी चलने वाली माहवारी (8 दिन से अधिक)"),
-    irregular: T("Irregular cycles (shortest to longest more than 9 days apart)", "अनियमित चक्र (सबसे छोटे और सबसे लंबे चक्र में 9 दिन से अधिक का अंतर)"),
+    irregular: T("Irregular cycles (shortest to longest more than 7 to 9 days apart, by age)", "अनियमित चक्र (सबसे छोटे और सबसे लंबे चक्र में उम्र के अनुसार 7 से 9 दिन से अधिक का अंतर)"),
     heavy: T("Heavy menstrual bleeding", "Heavy menstrual bleeding (अधिक रक्तस्राव)"),
     light: T("Light menstrual bleeding", "Light menstrual bleeding (कम रक्तस्राव)"),
     intermenstrual: T("Intermenstrual bleeding", "Intermenstrual bleeding (दो माहवारी के बीच रक्तस्राव)")
@@ -113,7 +117,8 @@
     if (p.frequencyDays < SYSTEM1.frequencyMin) flags.push("frequent");
     if (p.frequencyDays > SYSTEM1.frequencyMax) flags.push("infrequent");
     if (p.durationDays > SYSTEM1.durationMax) flags.push("prolonged");
-    if (p.regularityRangeDays > SYSTEM1.regularityMax) flags.push("irregular");
+    if (p.ageYears !== undefined && (typeof p.ageYears !== "number" || p.ageYears !== p.ageYears || p.ageYears <= 0)) return bad("Age is a number of years.", "आयु वर्षों की संख्या होती है।");
+    if (p.regularityRangeDays > regularityLimit(p.ageYears)) flags.push("irregular");
     if (p.volume === "heavy") flags.push("heavy");
     if (p.volume === "light") flags.push("light");
     if (p.intermenstrual === true) flags.push("intermenstrual");
@@ -180,7 +185,7 @@
       vignettes: { en: "The cases are original teaching scenarios written for this app. They are not real patients.", hi: "ये केस इस app के लिए लिखे गए मौलिक शिक्षण परिदृश्य हैं। ये असली मरीज़ नहीं हैं।" }
     },
     categories: CATEGORIES, codes: CODES, leiomyomaTypes: LEIOMYOMA_TYPES, system1: SYSTEM1, terms: TERMS,
-    classify: classify, bleedingPattern: bleedingPattern,
+    classify: classify, bleedingPattern: bleedingPattern, regularityLimit: regularityLimit,
     vignettes: loaded, setVignettes: setVignettes, validateVignette: validateVignette, grade: grade,
     dataFile: "tokos/explorer/palm-coein.json"
   };

@@ -151,3 +151,18 @@ test("credits: every frame is an original illustration owned by MAIKNOWLEDGE LLP
     assert.deepEqual([c.w, c.h], [640, 320]);
   }
 });
+
+test("persistent OP from an oblique start: a 45 degree turn back to direct OP, born face to pubes", () => {
+  for (const s of ["LOP", "ROP"]) {
+    const r = M.sequence(s, { persistentOP: true }), ir = r.steps.find((x) => x.id === "internal-rotation");
+    assert.deepEqual([ir.before, ir.after, ir.degrees], [s, "OP", 45]);
+    assert.equal(r.bornAs, "OP");
+    assert.ok(r.notes.some((n) => /face to pubes/.test(n.en)));
+  }
+});
+
+test("a direct OP start turns forward past the left, the side it then restitutes to", () => {
+  const r = M.sequence("OP"), ir = r.steps.find((x) => x.id === "internal-rotation");
+  assert.deepEqual(ir.via, ["LOP", "LOT", "LOA"]);
+  assert.equal(r.steps.find((x) => x.id === "restitution").after, "LOA");
+});

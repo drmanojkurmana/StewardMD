@@ -83,9 +83,10 @@ test("phases on each day of a 28 day cycle", () => {
   assert.deepEqual(days((r) => r[1] === "follicular"), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]);
   assert.deepEqual(days((r) => r[1] === "luteal").length, 14);
   // sub-phases counted from the LH peak day (Stricker): early follicular to -6, late follicular -5 to -1, peak 0, early luteal +1 to +4, mid-luteal +5 to +9, late luteal +10 on
-  assert.deepEqual(days((r) => r[3] === "lh-peak"), [13]);
+  // the ovulation day (14) also reads as the LH peak, so it never says the corpus luteum has formed while the ovary shows ovulation
+  assert.deepEqual(days((r) => r[3] === "lh-peak"), [13, 14]);
   assert.deepEqual(days((r) => r[3] === "late-follicular"), [8, 9, 10, 11, 12]);
-  assert.deepEqual(days((r) => r[3] === "early-luteal"), [14, 15, 16, 17]);
+  assert.deepEqual(days((r) => r[3] === "early-luteal"), [15, 16, 17]);
   assert.deepEqual(days((r) => r[3] === "mid-luteal"), [18, 19, 20, 21, 22]);
   assert.deepEqual(days((r) => r[3] === "late-luteal"), [23, 24, 25, 26, 27, 28]);
   assert.deepEqual(days((r) => r[3] === "early-follicular"), [1, 2, 3, 4, 5, 6, 7]);
@@ -145,5 +146,14 @@ test("learner text: English and Hindi, no em dash, ASCII numerals in Hindi", () 
     assert.ok(t.en.trim() && /[ऀ-ॿ]/.test(t.hi));
     assert.ok(!DASH.test(t.en + t.hi));
     assert.ok(!/[०-९]/.test(t.hi));
+  }
+});
+
+test("ovulation day: phase text agrees with the ovary on every cycle length", () => {
+  for (let L = 21; L <= 35; L++) {
+    const r = C.at(L - 14, L);
+    assert.equal(r.ovarian, "ovulation");
+    assert.equal(r.subphase, "lh-peak", "L " + L);
+    assert.doesNotMatch(r.phaseText.en, /corpus luteum/);
   }
 });

@@ -79,3 +79,31 @@ test("the UI file is ES5, has no em-dash, and every Hindi string keeps ASCII dig
   const rules = css.replace(/\/\*[\s\S]*?\*\//g, "").replace(/@media[^{]+\{|@keyframes[^{]+\{[^}]*\{[^}]*\}[^}]*\{[^}]*\}\s*\}/g, "").match(/[^{}]+\{/g) || [];
   for (const r of rules) { const sel = r.slice(0, -1).trim(); if (sel && !sel.startsWith("from") && !sel.startsWith("to")) assert.ok(/\.tok-root/.test(sel), "scoped: " + sel); }
 });
+
+test("mechanism view from below: the frames turn to the learner's start position", () => {
+  const svgOf = (i) => readFileSync(new URL("../" + mech.movements[i].file, import.meta.url), "utf8");
+  const below = (svg) => svg.slice(svg.indexOf('data-view="below"'));
+  const rots = (svg) => [...below(svg).matchAll(/data-part="head" transform="translate\([^)]*\) rotate\(([-\d.]+)\)"/g)].map((m) => +m[1]);
+  const at = (start, i, op) => { const r = U.mechStep(mech, start, op, i); return U.orientBelow(svgOf(i), mech, r.step, r.movement.id); };
+  // LOT is what the files are drawn for: unchanged rotations
+  for (let i = 0; i < 8; i++) assert.equal(at("LOT", i), svgOf(i), "LOT frame " + i + " is byte for byte the file");
+  // ROP: engages with the occiput back and to the right (SVG angle 225 - 90 = 135)
+  assert.deepEqual(rots(at("ROP", 0)), [135]);
+  // internal rotation ROP to OA: dashed ROP, solid OA, and a clockwise arc (sweep flag 1)
+  assert.deepEqual(rots(at("ROP", 3)), [135, -90]);
+  assert.match(below(at("ROP", 3)), /A62 62 0 0 1 /);
+  assert.match(below(at("LOT", 3)), /A62 62 0 0 0 /);
+  // restitution and external rotation on the right: ROA then ROT, shoulders perpendicular to the head
+  assert.deepEqual(rots(at("ROP", 5)), [-90, -135]);
+  assert.deepEqual(rots(at("ROP", 6)), [-135, 180]);
+  assert.match(below(at("ROP", 6)), /data-part="shoulders" transform="translate\([^)]*\) rotate\(-90\)"/);
+  // no turn, no arrow: an OA start at internal rotation, and a persistent OP after the turn back
+  assert.match(below(at("LOP", 7, true)), /data-part="shoulders" transform="translate\([^)]*\) rotate\(90\)"/); // shoulders born front to back
+  assert.doesNotMatch(below(at("OA", 3)), /A62 62/);
+  assert.doesNotMatch(below(at("ROP", 5, true)), /A56 56/);
+});
+
+test("popqFit: lowering tvl pulls Ba, Bp, C and D back into range", () => {
+  assert.deepEqual(U.popqFit({ Aa: -3, Ba: 8, C: -8, D: -10, Ap: -3, Bp: -3, gh: 3, pb: 3, tvl: 6 }),
+    { Aa: -3, Ba: 6, C: -6, D: -6, Ap: -3, Bp: -3, gh: 3, pb: 3, tvl: 6 });
+});

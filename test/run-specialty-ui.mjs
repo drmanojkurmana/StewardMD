@@ -53,8 +53,17 @@ try {
   ok(await until(`return !!document.getElementById('lnArt') && document.getElementById('lnArt').getAttribute('data-step') === 'idea';`), "lesson opens on its idea");
   for (let i = 0; i < 6; i++) { await ev(`document.getElementById('lnNext').click(); return 1;`); await sleep(60); }
   ok(await ev(`return document.getElementById('lnArt').getAttribute('data-step') === 'check0' && document.getElementById('lnNext').disabled;`) === true, "the check waits for an answer");
-  await ev(`document.querySelector('[data-act=lnans][data-k="1"]').click(); return 1;`);
-  ok(await ev(`return /Right/.test(document.getElementById('lnFb').textContent);`) === true, "right answer marked");
+  // options show in the stable shuffled order (data-k keeps the file index); a digit key answers by screen position
+  const ORD = `function optOrder(id, qi, n) { var h = 0, k = String(id) + ":" + qi, i, r, t, ord = [];
+    for (i = 0; i < k.length; i++) h = (h * 31 + k.charCodeAt(i)) | 0;
+    for (i = 0; i < n; i++) ord.push(i);
+    for (i = n - 1; i > 0; i--) { h = (h * 1103515245 + 12345) | 0; r = (h >>> 16) % (i + 1); t = ord[i]; ord[i] = ord[r]; ord[r] = t; }
+    return ord; }`;
+  ok(await ev(`${ORD} var bs = [].slice.call(document.querySelectorAll('#lnArt .sp-ans')), o = optOrder('fx-one', 0, bs.length);
+    return bs.every(function (b, p) { return +b.getAttribute('data-k') === o[p] && b.querySelector('.k').textContent === String(p + 1); });`) === true, "options render in the stable shuffled order, numbered by screen position");
+  await ev(`${ORD} var n = document.querySelectorAll('#lnArt .sp-ans').length, pos = optOrder('fx-one', 0, n).indexOf(1);
+    document.getElementById('lnArt').dispatchEvent(new KeyboardEvent('keydown', { key: String(pos + 1), bubbles: true })); return 1;`);
+  ok(await ev(`return /Right/.test(document.getElementById('lnFb').textContent) && document.querySelector('#lnArt .sp-ans[data-k="1"]').getAttribute('data-state') === 'right';`) === true, "the digit at the right answer's screen position marks it right");
   await ev(`document.getElementById('lnNext').click(); return 1;`);
   ok(await until(`return !!document.querySelector('.ln-done') && JSON.parse(localStorage.smd_fixture_v1).learn['fx-one'].done === true;`), "lesson done and saved under the host's own key");
   // Escape unwinds: lesson done step -> previous step
