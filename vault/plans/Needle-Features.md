@@ -146,3 +146,19 @@ waits on the fine-tune gate. Needle never refuses on MaiK's behalf and never wri
 - Needle ranking ICD codes: needs code semantics it does not have; candidate IDs change per query
   (re-init each time); `scribe-icdsug` + `SMD_ICD.localSearch` already cover it.
 - Needle for ICU "run everything": `ICU_AUTOSCORES.compute` already does it deterministically.
+
+## Alternatives for what Needle cannot do (2026-10-01, research only, nothing run)
+- **Pivot to test first: FunctionGemma 270M** (Google, Dec 2025): Gemma 3 270M tuned for function
+  calling, 256K multilingual vocab (covers Devanagari/Telugu), 32K context. The same 270M base already
+  ships as the MedGemma draft (`maik-models.js:139`, `gemma-3-270m-it-Q8_0.gguf`, 291,546,144 B), so it
+  runs on the existing `capacitor-llama` with no new native code. Needs the llama.cpp grammar sampler
+  exposed in the plugin. Gemma terms (already accepted for MedGemma). Telugu quality at 270M unverified.
+- **Indic input:** IndicXlit (~11M, romanise native script) + Needle trained on romanised code-mix;
+  IndicTrans2 indic-en distilled 200M for free text; whisper.cpp translate mode (not on the Telugu
+  specialist; large-v3-turbo is weak at translate); deterministic Telugu/Hindi yes/no/number lexicon.
+- **Long transcripts:** GLiNER-biomed (extractive span NER, zero-shot labels, ONNX) in the
+  `openmed-ner.js` ORT slot; extractive means every output is a substring of the transcript.
+- **Semantic matching:** SNOMED CT (free affiliate licence in India via NRCeS) synonyms + India refsets
+  as deterministic tables; SapBERT for English entity linking to SNOMED; SNOMED to ICD-10 map for
+  deterministic coding; EmbeddingGemma 300M only if multilingual semantic search is needed.
+- **Runtimes:** stay at three. llama.cpp (generative), ORT (encoders), Needle (watch/low-end/always-on).
