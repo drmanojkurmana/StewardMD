@@ -108,3 +108,26 @@ test("HACOR: the letters mean what the acronym says (the fabricated answer did n
   assert.ok(labels.some((l) => /respiratory rate/.test(l)), "R = respiratory rate");
   assert.equal(c.inputs.length, 5);
 });
+test("a lone letter is part of the name: R-ISS is not ISS, R-IPI is not IPI (Edge Layer 0 found it)", () => {
+  // findTokens drops single letters, so "R-ISS" used to read as "iss" and win "iss score" as an
+  // EXACT match: MaiK and the Edge rules layer opened the revised score for the original one.
+  assert.equal(id("iss score"), "iss_myeloma"); assert.equal(M.find("iss").exact, true);
+  assert.equal(id("r-iss"), "r_iss"); assert.equal(M.find("R-ISS").exact, true);
+  assert.equal(id("ipi"), "ipi"); assert.equal(id("r-ipi"), "r_ipi");
+  assert.equal(id("p-possum"), "p_possum");
+  assert.equal(id("braden scale"), "braden"); assert.equal(id("braden q"), "braden_q");
+  assert.equal(id("ranson criteria"), "ranson", "a possessive 's is not a letter");
+  assert.notEqual((M.find("homa") || {}).exact, true, "HOMA-IR vs HOMA-B is not an exact name");
+});
+test("a lone digit is part of the name too, and a name two calculators share is never exact", () => {
+  assert.equal(id("phq-2"), "phq2"); assert.equal(id("gad-2"), "gad2"); assert.equal(id("phq 9"), "phq9");
+  assert.equal(M.find("meld").id, "meld3"); assert.equal(M.find("meld").exact, true, "the meld -> MELD 3.0 alias stands");
+  assert.equal(M.find("meld 3.0").exact, true, "a version's .0 is not a stray digit");
+  assert.equal(M.find("meld 3 0").exact, true, "nor after MaiK strips the dot");
+  assert.equal(M.find("abcd2").exact, true, "superscript ² in the title");
+  assert.equal(M.find("chadsvasc").exact, true, "aliases expand before the character check");
+  assert.equal(id("apache 2"), "apache2", "roman numerals: APACHE II"); assert.equal(id("rome 4"), "rome4_ibs");
+  assert.equal(id("nicotine dependence"), "fagerstrom", "diacritics: Fagerström");
+  assert.equal(id("cbac"), "cbac");
+  for (const q of ["timi", "framingham risk", "meld na", "corrected qt"]) assert.notEqual(M.find(q).exact, true, q + " fits more than one calculator");
+});

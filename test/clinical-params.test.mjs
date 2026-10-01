@@ -139,3 +139,22 @@ test("GCS components", () => {
   assert.equal(r.usable.gcs.value, 10);
   assert.deepEqual(r.usable.gcs.components, { eye: 2, verbal: 3, motor: 5 });
 });
+// Found by the extraction gold set (vault/plans/edge-data/gold/cparams-gold.jsonl, scripts/edge/score.mjs --extraction).
+test("a pronoun carries the relative into the next clause: her sugar is the mother's", () => {
+  const r = P.parse("mother has diabetes, her sugar 300");
+  assert.equal(r.usable.glucose_mg_dl, undefined);
+  assert.equal(r.records.find((x) => x.field === "glucose_mg_dl").assertion, "family");
+  assert.equal(P.parse("72M, his creatinine 2.1").usable.scr_mg_dl.value, 2.1, "the patient's own pronoun is not family");
+});
+test("alternatives are ambiguous, never the first value", () => {
+  const r = P.parse("cr 1.4 or 1.8, not sure");
+  assert.equal(r.usable.scr_mg_dl, undefined); assert.ok(r.ambiguous.includes("scr_mg_dl"));
+  assert.equal(P.parse("cr maybe 1.4").usable.scr_mg_dl, undefined, "doubt is not a usable value");
+  assert.equal(P.parse("weight approx 60 kg").usable.weight_kg.value, 60, "an approximate weight still is");
+});
+test("Hinglish and Tenglish time words: the old value is past, the current one is used", () => {
+  assert.equal(P.parse("sugar 300 tha kal, aaj 180").usable.glucose_mg_dl.value, 180);
+  const t = P.parse("bp 140/90 ki mundu, ippudu 100/70");
+  assert.equal(t.usable.sbp.value, 100); assert.equal(t.usable.dbp.value, 70);
+  assert.equal(P.parse("creatinine 1.6 undi").usable.scr_mg_dl.value, 1.6);
+});

@@ -68,26 +68,35 @@
   var STOPPED = /\b(stopped|discontinued|stop|held|withheld)\b/;
   var PLANNED = /\b(plan|planned|will give|to give|start|starting|target|aim|goal)\b/;
   var NEGATED = /(^|[^a-z])(no|not|without|denies|denied|absent|negative for)([^a-z]|$)/;
-  var PAST = /\b(was|were|had been|previous(?:ly)?|prior|last (?:week|month|year|visit|time|night)|yesterday|days? ago|weeks? ago|months? ago|years? ago|before|earlier|on admission|at home|home reading|usually|normally|used to)\b/;
-  var NOW = /\b(now|currently|current|today|at present|presently|this morning|on examination|o\/e)\b/;
+  var PAST = /\b(tha|thi|kal|pehle|pehele|pichle|ninna|monna|mundu|was|were|had been|previous(?:ly)?|prior|last (?:week|month|year|visit|time|night)|yesterday|days? ago|weeks? ago|months? ago|years? ago|before|earlier|on admission|at home|home reading|usually|normally|used to)\b/;
+  var NOW = /\b(aaj|abhi|ippudu|ipudu|eeroju|ivala|ivvala|now|currently|current|today|at present|presently|this morning|on examination|o\/e)\b/;
   var FIRST_PERSON_READING = /\b(my|our)\s+(?:\w+\s+){0,2}?(bp|pressure|sugar|sugars|glucose|pulse|temperature|temp|weight|sats?|saturation|reading|readings)\b/;
 
+  var NOW_WORDS = "(?:now|currently|today|aaj|abhi|ippudu|ipudu)";
+  // Doubt makes a value unusable ("cr maybe 1.4"); "not sure" in its own clause is handled by the
+  // alternative rule below ("1.4 or 1.8").
+  var UNCERTAIN = /\b(not sure|unsure|uncertain|maybe|possibly|probably)\b/;
+  var PRONOUN = /\b(her|his|their|she|he|they)\b/;
   function clausesOf(text) {
     // returns [{start,end,text}] on the ORIGINAL text; "now" starts a new clause ("was 1.4, now 2.1")
-    var out = [], re = /[.?!](?=\s|$)|[;\n]+|,(?=\s)|\s+but\s+|\s+(?=(?:now|currently|today)\b)/gi, last = 0, m;
+    var out = [], re = /[.?!](?=\s|$)|[;\n]+|,(?=\s)|\s+but\s+|\s+(?=(?:now|currently|today|aaj|abhi|ippudu|ipudu)\b)/gi, last = 0, m;
     while ((m = re.exec(text))) {
       if (m.index > last) out.push({ start: last, end: m.index });
       last = m.index + m[0].length;
       if (m[0].length === 0) re.lastIndex++;
     }
     if (last < text.length) out.push({ start: last, end: text.length });
-    return out.map(function (c) { return { start: c.start, end: c.end, text: text.slice(c.start, c.end).toLowerCase() }; });
+    return out.map(function (c, i) {
+      return { start: c.start, end: c.end, text: text.slice(c.start, c.end).toLowerCase(), prev: i ? text.slice(out[i - 1].start, out[i - 1].end).toLowerCase() : "" };
+    });
   }
   function contextOf(clause) {
     var t = clause.text, assertion = "present", time = "current";
-    if (FAMILY.test(t)) assertion = "family";
+    // "mother has diabetes, her sugar 300": the pronoun carries the relative into the next clause.
+    if (FAMILY.test(t) || (clause.prev && PRONOUN.test(t) && FAMILY.test(clause.prev))) assertion = "family";
     else if (STOPPED.test(t)) assertion = "stopped";
     else if (PLANNED.test(t)) assertion = "planned";
+    else if (UNCERTAIN.test(t)) assertion = "uncertain";
     if (FIRST_PERSON_READING.test(t)) { time = "past"; assertion = assertion === "present" ? "historical" : assertion; }
     else if (PAST.test(t) && !NOW.test(t)) { time = "past"; if (assertion === "present") assertion = "historical"; }
     return { assertion: assertion, time_context: time };
@@ -206,6 +215,22 @@
       } else rejected.push({ field: "bp", raw: m[0], reason: "out of range or systolic not above diastolic" });
       mark(m.index, m.index + m[0].length);
     }
+    // "bp 140/90 before, now 100/70": an unlabelled pair opening a "now" clause right after a BP.
+    re = new RegExp("(?:^|[,;]\\s*|\\s)" + NOW_WORDS + "\\s*(?:is|=|:)?\\s*(\\d{2,3})\\s*(?:\\/|by|over)\\s*(\\d{2,3})", "g");
+    while ((m = re.exec(low))) {
+      var bpPrev = records.filter(function (r) { return r.field === "sbp" && r.span[1] <= m.index; }).pop();
+      var at0 = m.index + m[0].search(/\d/);
+      if (!bpPrev || isTaken(at0)) continue;
+      var cNow = clauseAt(clauses, at0), cPrev = clauseAt(clauses, bpPrev.span[0]);
+      if (clauses.indexOf(cPrev) !== clauses.indexOf(cNow) - 1) continue;
+      var s2 = parseFloat(m[1]), d2 = parseFloat(m[2]);
+      if (within("sbp", s2) && within("dbp", d2) && s2 > d2) {
+        var ctxNow = contextOf(cNow);
+        rec("sbp", s2, "mmHg", at0, m.index + m[0].length, ctxNow, { carried: true });
+        rec("dbp", d2, "mmHg", at0, m.index + m[0].length, ctxNow, { carried: true });
+      }
+      mark(at0, m.index + m[0].length);
+    }
     // GCS components "E2V3M5" / "e2 v3 m5".
     re = /\be\s*([1-4])\s*v\s*([1-5])\s*m\s*([1-6])\b/g;
     while ((m = re.exec(low))) {
@@ -243,8 +268,8 @@
     // takes the field of the labelled value in the clause right before it (same field, new time).
     function carryFromPrevious(t) {
       var cl = clauseAt(clauses, t.start);
-      if (!/^\s*(now|currently|today)\b/.test(cl.text)) return null;
-      if (!/^\s*(now|currently|today)\s*(?:is|it is|it's|=|:)?\s*$/.test(low.slice(cl.start, t.start))) return null;
+      if (!new RegExp("^\\s*" + NOW_WORDS + "\\b").test(cl.text)) return null;
+      if (!new RegExp("^\\s*" + NOW_WORDS + "\\s*(?:is|it is|it's|=|:)?\\s*$").test(low.slice(cl.start, t.start))) return null;
       var prev = null;
       for (var q = records.length - 1; q >= 0; q--) if (records[q].span[1] <= cl.start) { prev = records[q]; break; }
       if (!prev || prev.field === "sbp" || prev.field === "dbp" || prev.field === "sex" || typeof prev.value !== "number") return null;
@@ -252,11 +277,20 @@
       if (clauses.indexOf(pcl) !== clauses.indexOf(cl) - 1) return null;
       return { field: prev.field, carried: true };
     }
+    function alternativeOf(i) {
+      if (i < 2 || !/^(or|to)$/.test(tok[i - 1].s) || tok[i - 2].num === null) return null;
+      for (var q = records.length - 1; q >= 0; q--) {
+        var r = records[q];
+        if (tok[i - 2].start >= r.span[0] && tok[i - 2].start < r.span[1] && typeof r.value === "number" && r.field !== "sbp" && r.field !== "dbp") return { field: r.field, alternative: true };
+      }
+      return null;
+    }
     for (var i = 0; i < tok.length; i++) {
       var t = tok[i];
       if (t.num === null || isTaken(t.start)) continue;
       var at = attribute(tok, i);
       if (!at) at = carryFromPrevious(t);
+      if (!at) at = alternativeOf(i);
       if (!at) continue;
       var field = at.field, ctxN = contextOf(clauseAt(clauses, t.start));
       if (field === "sbp" || field === "dbp") continue;

@@ -102,3 +102,66 @@ test("prompt stays short and carries no extracted numbers from the model side", 
   const p = E.promptFor("crcl 72F 58kg cr 1.4 ".repeat(40), [{ kind: "calculator", title: "CrCl" }]);
   assert.ok(p.length < 420);
 });
+
+// Found by the bake-off scorer on the frozen test set (scripts/edge/score.mjs): rules-layer wrong opens.
+test("negation guard: a negated or stop request never reaches rules or the model", async () => {
+  store.smd_edge = "1";
+  const m = mock(() => needleReply(1)); E.setEngine(m);
+  for (const q of ["don't open antibiogram", "do not calculate crcl", "stop metformin", "no need to open the icu"]) assert.equal(await E.route(q), null, q);
+  assert.equal(m.prompts.length, 0);
+  assert.equal(E.negated("threshold for insulin"), false, "word boundaries: 'hold' inside a word is not a stop");
+});
+test("single letters and digits survive: r-ipi, phq-2 and s/f are their own calculators", () => {
+  store.smd_edge = "1";
+  assert.equal(E.candidates("go to r ipi")[0].id, "r_ipi");
+  assert.equal(E.candidates("phq-2 please")[0].id, "phq2");
+  assert.equal(E.candidates("s/f ratio")[0].id, "sf_ratio", "an own keyword beats word overlap");
+  assert.notEqual(E.candidates("go to timi")[0].exact, true, "two TIMI scores: the model or the doctor picks, not rules");
+});
+test("ICD: the screen request is not a code lookup, and a diagnosis keeps its words", () => {
+  store.smd_edge = "1";
+  assert.ok(!E.candidates("take me to search icd").some((c) => c.kind === "icd"));
+  assert.equal(E.candidates("icd for open fracture of tibia")[0].id, "open fracture tibia", "'open' is part of the diagnosis");
+  assert.equal(E.candidates("icd code for type 2 diabetes")[0].id, "type 2 diabetes");
+});
+
+test("llamaAdapter: per-call grammar limited to the options offered, greedy, parses {option}", async () => {
+  const calls = { load: [], gen: [], release: 0 };
+  const plugin = { load: (a) => { calls.load.push(a); return Promise.resolve({ loaded: true }); },
+    generate: (a) => { calls.gen.push(a); return Promise.resolve({ text: '{"option":2}' }); }, release: () => { calls.release++; return Promise.resolve(); } };
+  const eng = E.llamaAdapter(plugin, { modelPath: "/m/functiongemma.gguf" });
+  assert.equal(eng.available(), true);
+  assert.equal(E.llamaAdapter(plugin, {}).available(), false, "no model path, not available");
+  const r = await eng.complete({ prompt: "x\nOptions:\n1. a\n2. b\n3. c\n0. none of these", nOptions: 3 });
+  assert.deepEqual(r, { option: 2 });
+  assert.equal(calls.load[0].path, "/m/functiongemma.gguf");
+  assert.equal(calls.gen[0].temperature, 0); assert.equal(calls.gen[0].stream, false);
+  assert.equal(calls.gen[0].grammar, 'root ::= "{\\"option\\":" [0-3] "}"', "only 0..3 can be produced");
+  assert.equal(E.optionFrom(r).option, 2);
+  await eng.release(); assert.equal(calls.release, 1);
+});
+
+test("bakeoff: production runtime contract, one line per row, timeouts and garbage recorded as no option", async () => {
+  const rows = [{ id: "a", prompt: "p1", n_options: 2 }, { id: "b", prompt: "slow", n_options: 2 }, { id: "c", prompt: "junk", n_options: 2 }];
+  const eng = { available: () => true, load: () => Promise.resolve(), reset: () => Promise.resolve(), release: () => Promise.resolve(),
+    complete: (t) => t.prompt === "slow" ? new Promise((r) => setTimeout(() => r(needleReply(1)), 300)) : Promise.resolve(t.prompt === "junk" ? { nonsense: 1 } : needleReply(2, 0.8)) };
+  const out = await E.bakeoff(rows, eng, { deadlineMs: 60 });
+  assert.equal(out.length, 3);
+  assert.deepEqual([out[0].id, out[0].option, out[0].confidence, out[0].status], ["a", 2, 0.8, "ok"]);
+  assert.equal(out[1].option, null); assert.equal(out[1].status, "timeout");
+  assert.equal(out[2].option, null); assert.equal(out[2].status, "invalid:unparseable", "the slow row did not make the next one busy");
+});
+
+test("needleAdapter: configure (not init), tuned weights path, uncalibrated confidence dropped, kill only when killable", async () => {
+  const calls = [];
+  const plugin = { load: (a) => { calls.push(["load", a]); return Promise.resolve(); }, configure: (a) => { calls.push(["configure", JSON.parse(a.tools)[0].name]); return Promise.resolve(); },
+    complete: () => Promise.resolve({ json: JSON.stringify(needleReply(3, 0.42)) }), reset: () => Promise.resolve(), kill: () => Promise.resolve() };
+  const a = E.needleAdapter(plugin, { weightsPath: "/w/tuned.cact", calibrated: false, killable: false });
+  await a.load();
+  assert.deepEqual(calls, [["load", { path: "/w/tuned.cact" }], ["configure", "choose_option"]]);
+  const r = await a.complete({ prompt: "p" });
+  assert.equal(r.function_calls[0].arguments.option, 3); assert.equal(r.confidence, null, "uncalibrated: no confidence");
+  assert.equal(a.kill, undefined, "not killable: the runtime waits a stuck call out");
+  assert.equal(typeof E.needleAdapter(plugin, { killable: true }).kill, "function");
+  assert.equal(E.needleAdapter(plugin, {}).kill, undefined, "no Capacitor platform in Node: not android, not killable");
+});

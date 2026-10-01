@@ -16,16 +16,46 @@ On-device request router and value extractor. Plan: [[Edge-Master-Plan]]. Eviden
 | `edge-router.js` | `SMD_EDGE` | Deterministic candidates (max 5) -> rules answer for exact names / ICD -> fixed `choose_option` tool -> validation. Pass = null, caller continues. `needleAdapter()` for the native plugin. |
 | `home.js` | | Hook in `maikSendRest` after continuity; `maikEdgeRender` cards with "Ask MaiK anyway" (`data-maik-edgeask`), ICD rows (`data-maik-icd`). |
 
+## Dataset and bake-off scorer (`scripts/edge/`)
+| Script | Job |
+|---|---|
+| `generate.mjs` | Canonical rows from the app's own data (446 calculators, home tools, 109 drugs, ICD index, clinical questions, negations). Candidates come from the REAL `edge-router.js`. Splits by phrasing family; 10% of targets held out; test text never repeats in train. Writes `vault/plans/edge-data/dataset/` (~3 min). |
+| `export.mjs` | `cactus` (platform chat JSONL), `needle-local` (`{query,tools,answers}`), `llama-json` (`{"option":n}`), `bakeoff` (device harness input). Only `route_by:"model"` rows; train options shuffled 2x. Checked with Needle 3.0.6's own `read_examples`: 0 skipped. |
+| `score.mjs` | Router metrics kept separate (recall@5, coverage, accepted-route accuracy, wrong tool shown, fallback, missed, end-to-end) by language/kind/route/tag; policies `rules`, `top1`, `oracle`, `--pred <device output>`; `--human <tsv>`, `--draft <txt>`, `--extraction` (gold set). |
+| `metrics.mjs` | Pure scoring + pass marks (7.4), unit-tested in `test/edge-dataset.test.mjs`. |
+
+Committed: the FROZEN `test.jsonl` + `manifest.json` and `vault/plans/edge-data/gold/cparams-gold.jsonl`.
+train/val/canonical/export are gitignored and regenerated.
+
+**Baselines on the frozen test set (4,077 rows, 2026-10-01):**
+| Policy | Coverage | Accepted-route acc. | Wrong shown | Danger | Verdict |
+|---|---|---|---|---|---|
+| rules (Phase 0) | 56.4% | 100% | 0.0% | 100% | PASS |
+| top1 (always option 1) | 93.5% | 93.6% | 6.0% | 99.6% | FAIL |
+| oracle (labels) | 88.3% | 100% | 0.0% | 100% | ceiling |
+A model has to win coverage back from rules (Hinglish/Tenglish: 0% today) at under 0.5% wrong.
+Extraction gold set (45 rows): 45 exact, 0 unsafe.
+
+**Bugs the scorer found and fixed:** `MEDCALC.find` read "R-ISS" as "iss", "PHQ-9" for "phq-2",
+"GAD-7" for "gad-2" (single letters/digits dropped) and called shared names exact ("timi", "meld na",
+"framingham"); "search icd" built an ICD lookup; "open fracture" lost "open"; the parser took
+"mother has diabetes, her sugar 300", "cr 1.4 or 1.8" and Hinglish/Tenglish past values as current.
+
 ## Gotchas
 - The delegated chip handler in `home.js` only fires for attributes listed in its `closest(...)`
   selector. A new chip attribute must be added there or the chip is dead.
 - MaiK continuity runs before Edge: a repeated short question with no new subject is a follow-up and
   never reaches Edge. Tests reset the topic with `__MAIK_TEST.setTopic(null)`.
 - `SMD_SEARCH.rank` needs every term to match; the router ranks content words and falls back per word.
+- Layer 0 trusts `MEDCALC.find(...).exact`. Exact now means ONE calculator carries the name; keep it
+  that way or rules open the wrong score. Regression check: diff `find()` over every title + kw.
+- `negated()` guard (don't / do not / stop / hold / cancel) runs before rules and the model.
+- Drug and KB options get their slots before the ranked list, or weak word overlaps fill all five.
 - No engine is bundled. `SMD_EDGE.autoEngine()` uses `Capacitor.Plugins.Needle` on native when the
   plugin exists (Day 4 work). Until then only the rules layer answers.
 
 ## Tests
 `test/clinical-params.test.mjs`, `test/calc-prefill.test.mjs`, `test/maik-brain-prefill.test.mjs`,
 `test/edge-runtime.test.mjs`, `test/edge-router.test.mjs`, `test/voice-ambient-reported.test.mjs`;
-headless `test/run-maik-calc-prefill-ui.mjs`, `test/run-maik-edge-ui.mjs` (mock engine).
+`test/edge-dataset.test.mjs`, `test/calc-find.test.mjs`;
+headless `test/run-maik-calc-prefill-ui.mjs`, `test/run-maik-edge-ui.mjs` (mock engine), `test/run-maik-calc-route-ui.mjs`.

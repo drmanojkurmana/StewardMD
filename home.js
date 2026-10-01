@@ -7134,9 +7134,15 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         try { scroll(); } catch (e) {} return true;
       }
       if (er.kind === "kb") {
-        bubble("ai", '<div class="maik-welcome maik-edge"><b>' + maikEscH(er.title) + '</b> is in the StewardMD Knowledge Base.</div>' +
-          '<div class="maik-tools"><button type="button" class="maik-kbmore" data-kb-more="' + maikEscH(er.id) + '"><span>Read in StewardMD KB<span class="maik-kbmore-sub">' + maikEscH(er.title) + '</span></span><span class="maik-kbmore-go" aria-hidden="true">→</span></button>' + maikEdgeAskChip(question) + '</div>');
-        try { scroll(); } catch (e) {} return true;
+        // Same rule as the answer chip: offer the page only when one exists. Cannot verify -> do not
+        // promise, and the normal path answers instead (return false).
+        var _kbOk = !(window.SMD_REASON && SMD_REASON.hasDiseaseRef) ? false : !!SMD_REASON.hasDiseaseRef(er.id);
+        if (_kbOk) {
+          bubble("ai", '<div class="maik-welcome maik-edge"><b>' + maikEscH(er.title) + '</b> is in the StewardMD Knowledge Base.</div>' +
+            '<div class="maik-tools"><button type="button" class="maik-kbmore" data-kb-more="' + maikEscH(er.id) + '"><span>Read more in StewardMD KB<span class="maik-kbmore-sub">' + maikEscH(er.title) + '</span></span><span class="maik-kbmore-go" aria-hidden="true">→</span></button>' + maikEdgeAskChip(question) + '</div>');
+          try { scroll(); } catch (e) {} return true;
+        }
+        return false;
       }
       if (er.kind === "drug" && er.drug) { maikDrugAskCard([er.drug], question); return true; }
       if (er.kind === "icd") {
