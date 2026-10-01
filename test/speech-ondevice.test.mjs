@@ -149,3 +149,12 @@ test("every new error code has a sentence a doctor can act on", () => {
   assert.match(SRC_V, /"stt-unavailable-ondevice" \? "This phone can't recognise speech without sending the audio off the device/);
   assert.match(fs.readFileSync(new URL("../opd-emr.js", import.meta.url), "utf8"), /"stt-unavailable-ondevice": "This phone can't recognise speech/);
 });
+
+test("flag ON: the doctor's language reaches the recognizer (not navigator.language)", async () => {
+  const cases = [["hi", "hi-IN"], ["te", "te-IN"], ["en", "en-IN"], ["te-IN", "te-IN"], ["auto", "en-IN"], [undefined, "en-IN"]];
+  for (const [pick, want] of cases) {
+    const p = mockPlugin({ onDevice: true }); const w = boot({ flag: true, plugin: p });
+    listen(w, { noCloud: true, language: pick }); await tick(5);
+    assert.equal(p.starts[0].language, want, "pick " + pick);
+  }
+});

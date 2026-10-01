@@ -202,6 +202,14 @@
    * never the cloud) and skip Web Speech; other callers PREFER it, and the engine label says which ran
    * ("On-device" only when it really is). Flag "0": the old behaviour (and the old, unproven label). */
   function speechOnDeviceOn() { try { var v = localStorage.getItem("smd_speech_ondevice"); return v !== "0" && v !== "false"; } catch (e) { return true; } }
+  // App language codes ("en" | "hi" | "te" | "auto", or a full tag) -> an OS recognizer locale. "auto" and
+  // unset mean the device language; "en" keeps the device's English variant (en-IN, en-US...).
+  function nativeLang(l) {
+    if (!l || l === "auto") return undefined;
+    if (l.indexOf("-") > 0) return l;
+    var dev = navigator.language || "";
+    return l === "en" && dev.indexOf("en") === 0 ? dev : l + "-IN";
+  }
   function stop() { if (_active && _active.stop) { try { _active.stop(); } catch (e) {} } _active = null; }
 
   function listen(opts) {
@@ -249,6 +257,7 @@
         var strict = speechOnDeviceOn();
         var nopts = { onPartial: opts.onPartial, onFinal: opts.onFinal, onError: opts.onError };
         if (strict) {
+          nopts.language = nativeLang(opts.language);   // the doctor's pick, not navigator.language (undefined = device language)
           nopts.onDevice = opts.noCloud ? "require" : "prefer";
           nopts.onError = function (e) { if (opts.onError) opts.onError(e === "on-device-unavailable" ? "stt-unavailable-ondevice" : e); };
           nopts.onMode = function (m) {

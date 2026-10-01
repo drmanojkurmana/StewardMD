@@ -4981,7 +4981,7 @@
    * landing the app looked frozen with nothing to confirm it had heard a word. This is a persistent
    * strip: what is happening, for how long, and how to stop. Fixed, so it stays visible wherever the
    * form is scrolled. */
-  var _fmicTmr = null, _fmicT0 = 0;
+  var _fmicTmr = null, _fmicT0 = 0, _fmicEngine = "";
   // Same plain sentences the Rx pad uses — a doctor cannot act on "mic-denied".
   var RX_VOICE_ERR_OE = {
     "mic-denied": "Microphone is blocked - allow mic access for StewardMD, then try again.",
@@ -5026,9 +5026,11 @@
     return " " + Math.floor(s / 60) + ":" + (s % 60 < 10 ? "0" : "") + (s % 60);
   }
   function fmicListening(label) {
-    _fmicT0 = now();
+    _fmicT0 = now(); _fmicEngine = "";
     if (_fmicTmr) clearInterval(_fmicTmr);
-    var tick = function () { fmicSay("Listening" + fmicElapsed() + " - " + label + ". Tap the mic again to stop.", "live"); };
+    // The engine that really runs ("On-device" / "Device speech (cloud)"), as voice.js reports it, so the
+    // doctor sees where the audio goes (Edge A1.2).
+    var tick = function () { fmicSay("Listening" + fmicElapsed() + " - " + label + (_fmicEngine ? ", " + _fmicEngine : "") + ". Tap the mic again to stop.", "live"); };
     tick(); _fmicTmr = setInterval(tick, 1000);
   }
   function fmicDone(txt, kind) {
@@ -5085,7 +5087,10 @@
         } else { put(s, true); }
       },
       onError: function (code) { fmicDone(RX_VOICE_ERR_OE[code] || "Dictation stopped - try again.", "warn"); setVoiceStatus(""); stopFieldMic(); },
-      onState: function (s) { if (s === "transcribing") fmicSay("Transcribing what you said…", "busy"); }
+      onState: function (s, engine) {
+        if (s === "transcribing") fmicSay("Transcribing what you said…", "busy");
+        else if (s === "listening" && engine && _fmicT0) _fmicEngine = engine;   // shown on the next 1 s tick
+      }
     });
     if (!_fieldSession) { st.fieldMic = null; setFmicUI(name, false); fmicDone("On-device voice could not start. Type the value instead.", "warn"); }   // listen returned null (engine present but couldn't start) - tell the doctor instead of silently flicking the mic off
   }

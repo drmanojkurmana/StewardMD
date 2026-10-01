@@ -13,7 +13,9 @@ Whisper only; consultation audio never leaves the phone.
   Cost-guarded independently via `smd_scribe_live_mingap_ms` (default 45000) — see `gatedRefine`.
 - `smd_speech_ondevice` (DEFAULT ON since 2026-10-01, owner; "0" = off, Edge A1.2): Fast dictation requests the OS on-device recognizer
   (Android `createOnDeviceSpeechRecognizer` on 12+, iOS `requiresOnDeviceRecognition`); noCloud callers
-  require it. **With the kill switch "0":** "Fast · on-device STT" / engine "On-device" is a claim the
+  require it. With the flag ON the caller's language reaches the recognizer ("hi" -> hi-IN, "te" -> te-IN,
+  "en"/"auto" -> the device's; before 2026-10-02 it was always `navigator.language`), and the OPD field
+  strip names the engine. **With the kill switch "0":** "Fast · on-device STT" / engine "On-device" is a claim the
   OS recognizers do not guarantee (they may send audio to Apple/Google). See [[Flags]], [[StewardMD Edge]].
 - `smd_scribe_reported_gate` — DEFAULT ON, localStorage only ("0" = off). `voice-ambient.js reduce()`
   pulls out clauses that report a reading ("my BP was 150/90", "sugar at home was 300", "BP was 80/50

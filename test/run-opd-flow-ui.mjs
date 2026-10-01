@@ -48,6 +48,10 @@ try {
   ok(await val("Temp") === "", "Temp starts empty");
   await ev(`var b=[].slice.call(document.querySelectorAll('#smdOpdEmr .oe-fmic')).filter(function(x){return x.getAttribute('data-oe-act')==='fieldmic:BP_SYS';})[0]; b.click(); return 1;`);
   ok(await ev(`var b=[].slice.call(document.querySelectorAll('#smdOpdEmr .oe-fmic')).filter(function(x){return x.getAttribute('data-oe-act')==='fieldmic:BP_SYS';})[0]; return b.classList.contains('on');`) === true, "tapping the BP_SYS mic activates it (listening state)");
+  // Edge A1.2: the strip names the engine voice.js reports, so the doctor sees where the audio goes.
+  await ev(`window.__vopts.onState("listening", "On-device"); return 1;`);
+  await sleep(1150);
+  ok(/BP.*, On-device\. Tap the mic again/i.test(await ev(`var e=document.getElementById('oeFmicBar'); return e ? e.textContent : '';`)), "the listening strip names the engine (On-device)");
   await ev(`window.__emitFinal("blood pressure is 120"); return 1;`);
   await sleep(60);
   ok(await val("BP_SYS") === "120", "dictation 'blood pressure is 120' -> BP_SYS = 120 (number parsed)");

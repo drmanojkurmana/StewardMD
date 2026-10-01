@@ -137,16 +137,21 @@ over the WebKit proxy with the same options as the OPD field mic.
 3. Scribe Fast (`prefer`, en-IN): label "On-device", matches `lastSpeechMode`. hi-IN `prefer` reports
    `onDevice:false` ("Apple speech service (may use Apple servers)"), which voice.js labels
    "Device speech (cloud)".
-Findings (not fixed here):
-- The OPD field strip never shows an engine label ("Listening Ns - <field>..."); the label above lives
-  in `SMD_VOICE.listen`'s `onState(state, engine)`, which `opd-emr.js` ignores. Step 2's wording is wrong
-  or the strip needs the label.
-- `voice.js` does not pass `opts.language` to the native recognizer, so Fast dictation always uses
-  `navigator.language` (en-IN here); a Hindi pick in OPD/Scribe is not what the recognizer runs.
-- `voice.js` changed in A1.2 but its token is still `?v=hardlocal3`: an OTA/service-worker client can keep
-  the old file. Bump it before OTA.
-- A start straight after a stopped session was once rejected "Ongoing speech recognition" (the audio
-  engine had not stopped yet); the next try worked.
+Findings, and what became of them (2026-10-02, same phone):
+- FIXED: the OPD field strip now names the engine voice.js reports ("Listening 0:03 - BP systolic,
+  On-device. Tap the mic again to stop."; `opd-emr.js` reads `onState(state, engine)`; headless check in
+  `test/run-opd-flow-ui.mjs`).
+- FIXED: with the flag ON, `voice.js` passes the doctor's language to the native recognizer
+  (`nativeLang`: "hi" -> hi-IN, "te" -> te-IN, "en" -> the device's English, "auto"/unset -> device
+  language); the kill switch keeps the old start() call byte for byte. On the phone, Hindi picked gave
+  Devanagari ("ब्लड प्रेशर 149"), before it was always en-IN. Test: `test/speech-ondevice.test.mjs`.
+- WITHDRAWN: the cache tokens were bumped in A1.2 (`-ondev2`); my check had cut the token at the first
+  "-". This fix bumps them again (voice.js `-ondev3`, opd-emr.js `-ondev2`).
+- WITHDRAWN: "Ongoing speech recognition" came from my harness (a leftover timer ended a run early while
+  its session was still listening, so the next start met a live session and was rightly refused).
+  Sequenced back to back, start/stop are clean every time.
+- Note: after the earlier online `prefer` session, iOS downloaded its on-device Hindi model: `hi-IN` now
+  reports `onDevice:true` on this phone, and noCloud Hindi dictation runs on the phone.
 Not done: Android (no phone attached).
 
 ## 5. Training
