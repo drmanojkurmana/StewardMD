@@ -42,14 +42,15 @@ test("REGRESSION: real spend now reaches the record the cap reads", async () => 
   assert.equal(inrToMt(after.estCostInr), 2000, "which the dashboard shows as 2,000 MT spent");
 });
 
-test("addAiSpend never corrupts the counts recordAiUsage keeps alongside it", async () => {
-  const kv = fakeKv({ ["aiu:doc:" + KEY + ":" + DAY]: JSON.stringify({ req: 4, tok: 0, cost: 0, latSum: 900, fail: 1, byModule: { maik: 4 } }) });
+test("addAiSpend never touches the counts recordAiUsage keeps (its own key: no lost updates), yet the summary sums both", async () => {
+  const doc = JSON.stringify({ req: 4, tok: 0, cost: 0, latSum: 900, fail: 1, byModule: { maik: 4 } });
+  const kv = fakeKv({ ["aiu:doc:" + KEY + ":" + DAY]: doc });
   await addAiSpend(kv, KEY, DAY, 0.25, 500);
-  const d = await kv.get("aiu:doc:" + KEY + ":" + DAY, "json");
-  assert.equal(d.req, 4, "request count preserved");
-  assert.deepEqual(d.byModule, { maik: 4 }, "per-module counts preserved");
-  assert.equal(d.fail, 1); assert.equal(d.latSum, 900);
-  assert.equal(d.cost, 0.25); assert.equal(d.tok, 500);
+  assert.equal(kv.m.get("aiu:doc:" + KEY + ":" + DAY), doc, "the request-count record is byte-for-byte untouched");
+  assert.deepEqual(await kv.get("aiu:spend:" + KEY + ":" + DAY, "json"), { cost: 0.25, tok: 500 });
+  const s = await doctorUsageSummary({}, kv, KEY, NOW);
+  assert.equal(s.req, 4); assert.deepEqual(s.byModule, { maik: 4 });
+  assert.equal(s.estCostInr, 0.25); assert.equal(s.tokens, 500);
 });
 
 test("a zero-cost call (cache hit / failure) writes nothing", async () => {

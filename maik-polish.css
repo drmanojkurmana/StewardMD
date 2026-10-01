@@ -70,8 +70,10 @@ html body #maikSheet.maik-polished .maik-tool::after{flex-shrink:0}
 html body #maikSheet.maik-polished .maik-fb{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:center;margin-top:16px;padding-top:12px;border-top:1px solid var(--mk-bd)}
 html body #maikSheet.maik-polished .maik-fb-q{grid-column:1;line-height:1.4;color:var(--mk-mut)}
 html body #maikSheet.maik-polished .maik-fb-b{min-width:44px;min-height:44px;padding:10px 12px;line-height:1.3}
-html body #maikSheet.maik-polished .maik-acts{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0}
-html body #maikSheet.maik-polished .maik-acts .maik-act{width:100%;padding:10px 4px;border-radius:12px;background:var(--mk-soft);color:var(--mk-mut)}
+html body #maikSheet.maik-polished .maik-acts{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:0}
+html body #maikSheet.maik-polished .maik-acts .maik-act{width:100%;padding:10px 4px;border-radius:12px;background:var(--mk-soft);color:var(--mk-mut);white-space:nowrap}
+/* Four actions since Save (2026-10-02): on a narrow phone "Regenerate" would not fit a quarter row, so 2 x 2. */
+@media (max-width:374px){html body #maikSheet.maik-polished .maik-acts{grid-template-columns:repeat(2,minmax(0,1fr))}}
 html body #maikSheet.maik-polished :is(.maik-fb-reason,.maik-fb-reasonrow){grid-column:1/-1;font-size:16px}
 /* Acting before rating (audit T30): Copy / Regenerate / Edit are what a doctor uses 50 times a day, so
    they take the first row; "Was this helpful?" with Yes / No sits under them, quieter. */

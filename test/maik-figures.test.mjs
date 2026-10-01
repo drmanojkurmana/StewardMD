@@ -24,7 +24,7 @@ test("picks the figure the page is built around, not the logo, the banner or the
 
 test("an empty src never resolves to the page itself; a srcset-only image uses its first candidate (aafp.org, production 2026-09-18)", () => {
   const page = "https://www.aafp.org/afp/2022/0700/acute-pancreatitis.html";
-  const tag = '<div class="aafp-article__figure"><img class="aafp-image__image" src="" srcset="https://dgnvxbcc3-res.cloudinary.com/image/upload/w_384/Journals/AFP/2022/0700/p1-f1-jpg.jpg 384w, https://dgnvxbcc3-res.cloudinary.com/image/upload/w_768/Journals/AFP/2022/0700/p1-f1-jpg.jpg 768w" alt="" width="1500"></div>';
+  const tag = '<title>Acute Pancreatitis: Diagnosis and Management</title><div class="aafp-article__figure"><img class="aafp-image__image" src="" srcset="https://dgnvxbcc3-res.cloudinary.com/image/upload/w_384/Journals/AFP/2022/0700/p1-f1-jpg.jpg 384w, https://dgnvxbcc3-res.cloudinary.com/image/upload/w_768/Journals/AFP/2022/0700/p1-f1-jpg.jpg 768w" alt="" width="1500"></div>';
   assert.equal(pickFigure(tag, page, "acute pancreatitis management").img, "https://dgnvxbcc3-res.cloudinary.com/image/upload/w_384/Journals/AFP/2022/0700/p1-f1-jpg.jpg");
   assert.equal(pickFigure('<figure><img src="" alt="Figure 1" width="900"></figure>', page, "acute pancreatitis management"), null, "no usable source -> nothing, never the page url");
 });
@@ -87,7 +87,7 @@ test("findFigures skips homepages, paywalled/blocking hosts and PDFs WITHOUT fet
       { title: "PMC", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC1/", snippet: "s" }
     ] }) };
     fetched.push(u);
-    return { ok: true, status: 200, headers: { get: () => "text/html" }, text: async () => '<figure><img src="/blobs/varices-g0001.jpg" alt="Figure 1" width="800"></figure>' };
+    return { ok: true, status: 200, headers: { get: () => "text/html" }, text: async () => '<title>Variceal bleeding</title><figure><img src="/blobs/varices-g0001.jpg" alt="Figure 1" width="800"></figure>' };
   };
   try {
     const r = await findFigures({ TINYFISH_API_KEY: "k" }, "variceal bleeding management", 3, { debug: true });
@@ -110,11 +110,11 @@ test("LIVE FINDINGS 2026-09-18: beacons and stock photos are never figures, even
   // Drupal stock photo next to on-topic prose, no alt naming the topic.
   assert.equal(pickFigure('<h2>DKA treatment</h2><p>diabetic ketoacidosis ...</p><img src="https://diabetes.org/sites/default/files/styles/program_card_392x560_/public/2023-09/co-worker-high-five.png.webp" alt="" width="392" height="560">', "https://diabetes.org/living-with-diabetes/dka", "diabetic ketoacidosis management"), null);
   // AAFP: alt="" and a journal file name, inside the article's figure wrapper (real markup).
-  assert.equal(pickFigure('<div class="aafp-article__figure"><div class="aafp-image" data-testid="image-wrapper"><img class="aafp-image__image" src="https://dgnvxbcc3-res.cloudinary.com/image/upload/v1/Journals/AFP/2013/1201/p747-f2-jpg.jpg" alt="" width="1551" height="634"></div></div>', "https://www.aafp.org/afp/2013/1201/p747", "hematuria workup").img, "https://dgnvxbcc3-res.cloudinary.com/image/upload/v1/Journals/AFP/2013/1201/p747-f2-jpg.jpg");
+  assert.equal(pickFigure('<title>Hematuria: Evaluation</title><div class="aafp-article__figure"><div class="aafp-image" data-testid="image-wrapper"><img class="aafp-image__image" src="https://dgnvxbcc3-res.cloudinary.com/image/upload/v1/Journals/AFP/2013/1201/p747-f2-jpg.jpg" alt="" width="1551" height="634"></div></div>', "https://www.aafp.org/afp/2013/1201/p747", "hematuria workup").img, "https://dgnvxbcc3-res.cloudinary.com/image/upload/v1/Journals/AFP/2013/1201/p747-f2-jpg.jpg");
   // Medscape: 1x1 placeholder src with the real thumbnail in data-src, inside inlineImage (real markup).
-  assert.equal(pickFigure('<!--VideoWidgets::figure--> <div class="inlineImage"> <a href="javascript:refImgShow(3)"><img src="//img.medscapestatic.com/pi/global/1x1.png" data-src="//img.medscapestatic.com/pi/meds/ckb/02/44702tn.jpg" alt="Microscopy of urinary sediment. Typical appearance" class="pborder"></a>', "https://emedicine.medscape.com/article/981898-workup", "hematuria workup").img, "https://img.medscapestatic.com/pi/meds/ckb/02/44702tn.jpg");
+  assert.equal(pickFigure('<title>Hematuria Workup</title><!--VideoWidgets::figure--> <div class="inlineImage"> <a href="javascript:refImgShow(3)"><img src="//img.medscapestatic.com/pi/global/1x1.png" data-src="//img.medscapestatic.com/pi/meds/ckb/02/44702tn.jpg" alt="Microscopy of urinary sediment. Typical appearance" class="pborder"></a>', "https://emedicine.medscape.com/article/981898-workup", "hematuria workup").img, "https://img.medscapestatic.com/pi/meds/ckb/02/44702tn.jpg");
   // A real figure whose alt is only "Figure 1" still qualifies through the figure hint.
-  assert.equal(pickFigure('<figure><img src="https://cdn.ncbi.nlm.nih.gov/pmc/blobs/x/fped-09-780356-g0001.jpg" alt="Figure 1" width="800"></figure>', "https://pmc.ncbi.nlm.nih.gov/articles/PMC8692886/", "melena workup").img, "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/x/fped-09-780356-g0001.jpg");
+  assert.equal(pickFigure('<title>Melena: workup</title><figure><img src="https://cdn.ncbi.nlm.nih.gov/pmc/blobs/x/fped-09-780356-g0001.jpg" alt="Figure 1" width="800"></figure>', "https://pmc.ncbi.nlm.nih.gov/articles/PMC8692886/", "melena workup").img, "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/x/fped-09-780356-g0001.jpg");
 });
 
 // Owner, 2026-09-27, over a strip of leg-ulcer photographs: "I wanted workup flowcharts; if they are
@@ -154,5 +154,53 @@ test("across pages: flowcharts only when there are any, photographs as the fallb
     global.fetch = w.fetchFn;
     r = await findFigures({ TINYFISH_API_KEY: "k" }, "venous leg ulcer");
     assert.deepEqual(r.map((f) => f.img), ["https://pmc.ncbi.nlm.nih.gov/blobs/ulcer-g0001.jpg"], "no flowchart anywhere: the photo shows");
+  } finally { global.fetch = realFetch; }
+});
+
+// ---- 2026-10-02: AJCC breast staging answered with a study table from a case-report paper ----
+const SLNB_TITLE = "Metastasis from breast carcinoma to endometrial polyp";
+const SLNB_PAGE = "https://pmc.ncbi.nlm.nih.gov/articles/PMC77/";
+const SLNB_HTML = '<title>' + SLNB_TITLE + '</title><figure><img src="/blobs/slnb-table-g0003.jpg" alt="Table 2" width="900" height="500"><figcaption>Table 2. Sentinel lymph node biopsy studies in breast cancer.</figcaption></figure>';
+
+test("figure hints / figure markup alone never qualify: the image must name a topic word (own text or page title)", () => {
+  const pg = "https://pmc.ncbi.nlm.nih.gov/articles/PMC5/";
+  assert.equal(pickFigure('<figure><img src="/blobs/fig-g0001.jpg" alt="Figure 1" width="800"><figcaption>An unrelated chart</figcaption></figure>', pg, "hematuria workup"), null);
+  assert.equal(pickFigure('<title>Gout</title><figure><img src="/blobs/algorithm-g0001.jpg" alt="algorithm" width="800"></figure>', pg, "hematuria workup"), null);
+  assert.ok(pickFigure('<figure><img src="/blobs/fig-g0001.jpg" alt="Hematuria algorithm" width="800"></figure>', pg, "hematuria workup"));
+  assert.equal(pickFigure('<meta property="og:image" content="/media/algorithm.png">', pg, "hematuria"), null, "og:image needs the topic too");
+});
+
+test("a bare 'table' is not a workup diagram: a data table never outranks the topical figure", () => {
+  const pg = "https://pmc.ncbi.nlm.nih.gov/articles/PMC6/";
+  const html = '<figure><img src="/b/stag-g0001.jpg" alt="Breast cancer photo" width="800"></figure>' +
+    '<figure><img src="/b/stag-g0002.jpg" alt="Table 1 breast cancer cohort" width="800"></figure>';
+  const f = pickFigure(html, pg, "breast cancer");
+  assert.equal(f.diagram, false);
+});
+
+test("AJCC breast staging: the SLNB study table on an unrelated case report is rejected; the staging figure wins", () => {
+  assert.equal(pickFigure(SLNB_HTML, SLNB_PAGE, "AJCC breast cancer staging"), null, "no ajcc/staging word anywhere on that page");
+  const ok = '<title>AJCC 8th edition breast cancer staging</title><figure><img src="/b/ajcc-g0001.jpg" alt="Anatomic stage groups" width="900"><figcaption>Breast cancer TNM staging</figcaption></figure>';
+  assert.match(pickFigure(ok, "https://www.cancer.gov/x/staging", "AJCC breast cancer staging").img, /ajcc-g0001\.jpg$/);
+});
+
+test("findFigures skips case reports and unusual-site metastasis papers before reading them", async () => {
+  const reads = []; const realFetch = global.fetch;
+  global.fetch = async (url) => {
+    const u = String(url);
+    if (u.startsWith("https://api.search.tinyfish.ai")) return { ok: true, json: async () => ({ results: [
+      { title: SLNB_TITLE, url: SLNB_PAGE, snippet: "s" },
+      { title: "Granulomatous mastitis: a case report", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC78/", snippet: "s" },
+      { title: "A case of breast cancer staging confusion", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC79/", snippet: "s" },
+      { title: "Breast cancer staging (AJCC)", url: "https://www.cancer.gov/types/breast/staging", snippet: "s" }
+    ] }) };
+    reads.push(u);
+    return { ok: true, status: 200, headers: { get: () => "text/html" }, text: async () => '<title>AJCC breast staging</title><figure><img src="/b/ajcc-g0001.jpg" alt="AJCC breast cancer staging" width="900"></figure>' };
+  };
+  try {
+    const r = await findFigures({ TINYFISH_API_KEY: "k" }, "AJCC breast staging", 3, { debug: true });
+    assert.deepEqual(reads, ["https://www.cancer.gov/types/breast/staging"]);
+    assert.equal(r.length, 1);
+    assert.deepEqual(r._debug.filter((d) => d.skip).map((d) => d.skip), ["case-report", "case-report", "case-report"].slice(0, 3));
   } finally { global.fetch = realFetch; }
 });

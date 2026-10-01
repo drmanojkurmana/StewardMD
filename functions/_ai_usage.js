@@ -36,7 +36,7 @@ export const AI_MODULES = {
 };
 import { costCapOn, dailyCostCap, checkCostCap } from "./_credits.js";
 import { cfgFlag, warmBillingCfg } from "./_billingcfg.js";
-import { bump, readDay, mergeCounters, AIU_GROUPS } from "./_counters.js";   // atomic D1 rollups (T53)
+import { bump, readDay, mergeCounters, AIU_GROUPS, istDay, istNextMidnightMs, readSpend, spendKey } from "./_counters.js";   // atomic D1 rollups (T53)
 export function isAiModule(m) { return Object.prototype.hasOwnProperty.call(AI_MODULES, m); }
 // Are the per-module daily caps actually being ENFORCED right now? (See checkModuleQuota: at launch
 // they are not.) Exported so the doctor's dashboard can stop drawing "27 / 50" bars for a limit that
@@ -162,7 +162,8 @@ export function buildUsageRecord(f) {
 // Keys: aiu:mod:<doc>:<module>:<day> (int)  aiu:doc:<doc>:<day> (json)  aiu:global:<day> (json)
 //       ai:model:override (string) — the admin-selected model.
 // ============================================================================================
-function _day(now) { return new Date(now || Date.now()).toISOString().slice(0, 10); }
+// IST calendar day (see _counters.istDay): the doctor-facing "today", used by every writer and reader here.
+function _day(now) { return istDay(now || Date.now()); }
 // ISO-8601 week ("2026-W33") so the weekly budget rolls over on Monday, matching how clinicians think of a week.
 function _isoWeek(now) {
   const d = new Date(now || Date.now());
@@ -313,18 +314,28 @@ export async function recordAiUsage(env, store, rec, now) {
 // wallet could never be debited, and the dashboard's token/spend tiles always read 0. _usage.js
 // recordUsage now calls this once per completed call, where the true token counts exist.
 //
-// ponytail: KV read-modify-write, so concurrent calls can lose an increment. It fails in the SAFE
-// direction (under-counted spend = the doctor gets more free AI than they paid for, never less), and
-// the ceiling is one day's drift. For exact per-user accounting, mirror it into D1 the way
-// _usage.js addDailyCostInr does for the project-wide figure.
-export async function addAiSpend(store, costKey, day, inr, tokens) {
+// TWO FIXES (2026-10-02):
+//  1. LOST UPDATES. This used to read-modify-write the SAME KV key as recordAiUsage (aiu:doc), so a
+//     concurrent request's write erased the other's increment (spend vanished, or the request count
+//     did). Spend now has its own home: atomic D1 counters when UPDATES_DB is bound (exact under any
+//     concurrency), else its own KV key (aiu:spend:*), and readers (readSpend) sum both. recordAiUsage
+//     never touches it, so the two writers can no longer overwrite each other.
+//  2. KEY MISMATCH. Spend was written under usageKeyFor(who) but /usage, checkCostCap and the wallet
+//     read the POOL-resolved key, so a co-resident pair's spend landed where nobody looked. The key is
+//     pool-resolved here, the same way gateAndCount resolves it for the readers.
+// ponytail: the no-D1 KV fallback can still lose an increment between two concurrent SPEND writes (it
+// under-counts: the doctor gets slightly more free AI, never less); D1 is the exact path.
+export async function addAiSpend(store, costKey, day, inr, tokens, env) {
   if (!store || !costKey || !day) return;
   if (!(inr > 0) && !(tokens > 0)) return;
   try {
-    const k = "aiu:doc:" + costKey + ":" + day;
-    const d = (await store.get(k, "json")) || { req: 0, tok: 0, cost: 0, latSum: 0, fail: 0, byModule: {} };
-    d.cost = Math.round(((d.cost || 0) + (inr || 0)) * 10000) / 10000;
-    d.tok = (d.tok || 0) + Math.max(0, tokens | 0);
+    const key = await poolKeyFor(store, costKey);
+    const cost = Math.round((inr || 0) * 10000) / 10000, tok = Math.max(0, tokens | 0);
+    if (await bump(env, day, { ["aiud.cost." + key]: cost, ["aiud.tok." + key]: tok })) return;   // atomic D1
+    const k = spendKey(key, day);
+    const d = (await store.get(k, "json")) || { cost: 0, tok: 0 };
+    d.cost = Math.round(((d.cost || 0) + cost) * 10000) / 10000;
+    d.tok = (d.tok || 0) + tok;
     await store.put(k, JSON.stringify(d), { expirationTtl: AIU_TTL });
   } catch (e) { /* fail-open — metering must never break a clinical answer */ }
 }
@@ -332,14 +343,19 @@ export async function addAiSpend(store, costKey, day, inr, tokens) {
 // Doctor's own daily summary (for the in-app AI Usage page). Never another doctor's data.
 export async function doctorUsageSummary(env, store, doctorId, now) {
   const day = _day(now);
-  const out = { day: day, req: 0, tokens: 0, estCostInr: 0, avgLatencyMs: 0, byModule: {}, limits: {} };
+  // resetsAt: the next IST midnight (when `day` rolls over); updatedAt: when these figures were read.
+  const out = { day: day, resetsAt: new Date(istNextMidnightMs(now || Date.now())).toISOString(), updatedAt: new Date(now || Date.now()).toISOString(),
+    req: 0, tokens: 0, estCostInr: 0, avgLatencyMs: 0, byModule: {}, limits: {} };
   const ov = await limitOverrides(store);
   Object.keys(AI_MODULES).forEach((m) => { out.limits[m] = resolveLimit(env, m, ov); });
   if (!store) return out;
   try {
     const d = await store.get("aiu:doc:" + doctorId + ":" + day, "json");
-    if (d) { out.req = d.req || 0; out.tokens = d.tok || 0; out.estCostInr = Math.round((d.cost || 0) * 100) / 100; out.byModule = d.byModule || {}; out.avgLatencyMs = d.req ? Math.round((d.latSum || 0) / d.req) : 0; out.fail = d.fail || 0; }
+    if (d) { out.req = d.req || 0; out.tokens = d.tok || 0; out.estCostInr = d.cost || 0; out.byModule = d.byModule || {}; out.avgLatencyMs = d.req ? Math.round((d.latSum || 0) / d.req) : 0; out.fail = d.fail || 0; }
   } catch (e) {}
+  // + real spend (its own counters; the deploy-day carry-over still sits in d.cost/d.tok above)
+  const sp = await readSpend(env, store, doctorId, day);
+  out.tokens += sp.tok; out.estCostInr = Math.round((out.estCostInr + sp.cost) * 100) / 100;
   return out;
 }
 
@@ -537,7 +553,7 @@ export async function globalUsageReport(env, store, now) {
 }
 
 // Owner dashboard: one row per SIGNED-IN user (email) for a day — usage + any per-user caps.
-export async function usersReport(store, day) {
+export async function usersReport(store, day, env) {
   if (!store) return { users: [], truncated: false };
   const prefix = "aiu:doc:em:";
   let names = [];
@@ -549,7 +565,8 @@ export async function usersReport(store, day) {
     const email = key.slice(prefix.length, key.length - (day.length + 1));   // aiu:doc:em:<email>:<day>
     let d = {}; try { d = (await store.get(key, "json")) || {}; } catch (e) {}
     const limits = (await getUserLimit(store, email)) || {};
-    users.push({ email: email, req: d.req || 0, cost: Math.round((d.cost || 0) * 100) / 100, byModule: d.byModule || {}, limits: limits });
+    const sp = await readSpend(env, store, "em:" + email, day);
+    users.push({ email: email, req: d.req || 0, cost: Math.round(((d.cost || 0) + sp.cost) * 100) / 100, byModule: d.byModule || {}, limits: limits });
   }
   users.sort((a, b) => b.req - a.req);
   return { users: users, truncated: truncated };

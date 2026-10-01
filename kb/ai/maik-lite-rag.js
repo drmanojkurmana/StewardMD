@@ -89,7 +89,20 @@
     "transfusion": ["transfuse"],
     // Added on device (2026-09-04), NOT in the Python: "DD" in a bedside question is differential
     // diagnosis; unexpanded it matched the book's "dd-cfDNA" and dragged in a transplant passage.
-    "differential diagnosis": ["dd", "ddx", "d/d"]
+    "differential diagnosis": ["dd", "ddx", "d/d"],
+    // Added 2026-10-02 (owner transcript: "PMRT" was read as prostate radiation therapy, "TCHP" as
+    // tetracycline/chloramphenicol/penicillin, "Breast Ca" never reached the breast chapters). Surfaces of
+    // four letters or fewer are substituted by expand(); longer ones are appended. Both directions, so a
+    // chapter that spells the abbreviation out and one that only says PMRT are each reachable.
+    "postmastectomy radiotherapy radiation therapy": ["pmrt"],
+    "pmrt": ["postmastectomy radiotherapy", "postmastectomy radiation therapy", "post mastectomy radiotherapy", "post mastectomy radiation therapy"],
+    "docetaxel carboplatin trastuzumab pertuzumab": ["tchp"],
+    "docetaxel carboplatin trastuzumab": ["tch"],
+    "breast cancer": ["breast ca", "ca breast", "ca of breast", "carcinoma breast", "carcinoma of breast"],
+    "folinic acid fluorouracil oxaliplatin": ["folfox"],
+    "capecitabine oxaliplatin": ["capox", "xelox"],
+    "rituximab cyclophosphamide doxorubicin vincristine prednisone": ["r-chop", "rchop"],
+    "doxorubicin cyclophosphamide paclitaxel": ["ac-t"]
   };
   var SYN = [];
   Object.keys(SYNONYMS).forEach(function (canon) {
@@ -151,6 +164,33 @@
       }
     }
     return [q, extra.join(" ")];
+  }
+
+  /* WHAT THE MODEL IS TOLD an abbreviation means (owner transcript, 2026-10-02). expand() only helps the
+   * retriever; a 1.7B model shown the bare question "PMRT in Breast Ca" decoded it as prostate radiation
+   * therapy. So the doctor's own abbreviation stays in the question and its meaning is appended in
+   * brackets. A curated list, not every SYNONYMS row: expanding "IV", "BP" or "Cr" for the model would only
+   * add noise and "CAP" is ambiguous. Each expansion here is the standard one for this repo's audience.
+   * gloss("PMRT in Breast Ca") -> "PMRT = postmastectomy radiotherapy; Breast Ca = breast cancer". */
+  var GLOSS = [
+    ["pmrt", "postmastectomy radiotherapy"],
+    ["tchp", "docetaxel + carboplatin + trastuzumab + pertuzumab"],
+    ["tch", "docetaxel + carboplatin + trastuzumab"],
+    ["ac-t", "doxorubicin + cyclophosphamide, then a taxane"],
+    ["folfox", "folinic acid + fluorouracil + oxaliplatin"],
+    ["capox", "capecitabine + oxaliplatin"],
+    ["xelox", "capecitabine + oxaliplatin"],
+    ["r-chop", "rituximab + cyclophosphamide + doxorubicin + vincristine + prednisone"],
+    ["breast ca", "breast cancer"],
+    ["ca breast", "breast cancer"]
+  ].map(function (g) { return [new RegExp("(^|[^a-z0-9-])(" + escapeRegex(g[0]) + ")(?![a-z0-9-])", "i"), g[1]]; });
+  function gloss(q) {
+    var out = [];
+    for (var i = 0; i < GLOSS.length; i++) {
+      var m = GLOSS[i][0].exec(String(q || ""));
+      if (m) out.push(m[2] + " = " + GLOSS[i][1]);
+    }
+    return out.join("; ");
   }
 
   /** Pure index build, split out of Book() so a Web Worker can run it off the WebView main
@@ -504,7 +544,7 @@
 
   var RAG_API = {
     Book: Book, MIN_SCORE: MIN_SCORE, TOPK: TOPK,
-    toks: toks, expand: expand, buildIndex: buildIndex, buildBookAsync: buildBookAsync,
+    toks: toks, expand: expand, gloss: gloss, buildIndex: buildIndex, buildBookAsync: buildBookAsync,
     evidenceGate: evidenceGate, citationsOf: citationsOf, drugsOf: drugsOf
   };
   return RAG_API;
