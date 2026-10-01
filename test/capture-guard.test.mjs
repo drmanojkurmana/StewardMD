@@ -1,6 +1,6 @@
 // capture-guard.js: the lesson-image screen-capture guard, run in a vm with a small fake DOM and
 // a mocked Capacitor CaptureGuard plugin. Covers: Android FLAG_SECURE follows image presence,
-// iOS overlay class follows captureChange, the iOS screenshot notice (gated on an image on screen,
+// iOS overlay class follows captureChange, the iOS screenshot notice (on any screenshot in the app,
 // English/Hindi, throttled), and the silent no-op on web.
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -10,7 +10,7 @@ import vm from "node:vm";
 const SRC = readFileSync(new URL("../capture-guard.js", import.meta.url), "utf8");
 const REAL = "tokos/learn/media/real/gy1-uterus.webp";
 
-function makeEnv({ native = true, platform = "android", pluginAvailable = true, withToast = true } = {}) {
+function makeEnv({ native = true, platform = "android", pluginAvailable = true, withToast = true, pageLang = null } = {}) {
   const timers = [];
   const observers = [];
   const listeners = {};
@@ -35,7 +35,7 @@ function makeEnv({ native = true, platform = "android", pluginAvailable = true, 
   const imgs = [];
   const head = { children: [], appendChild(c) { this.children.push(c); } };
   const documentElement = {
-    clientWidth: 390, clientHeight: 844,
+    clientWidth: 390, clientHeight: 844, getAttribute: (k) => (k === "lang" ? pageLang : null),
     classList: { toggle: (c, on) => { on ? classes.add(c) : classes.delete(c); }, contains: (c) => classes.has(c) },
   };
   const document = {
@@ -143,15 +143,22 @@ test("ios: captureChange toggles the overlay class on <html>, and setSecure is n
   assert.deepEqual(env.calls.setSecure, [], "iOS does not call setSecure");
 });
 
-test("screenshot shows the notice only when a real image is on screen, throttled", () => {
+test("screenshot shows the notice on any screenshot in the app (owner 2026-10-01), throttled", () => {
   const env = makeEnv({ platform: "ios" });
   env.listeners.screenshot({});
-  assert.deepEqual(env.calls.toast, [], "no image on screen: no notice");
+  assert.deepEqual(env.calls.toast, ["Images are \u00a9\u00a0StewardMD. Please do not share."], "no image on screen: notice still shown");
   env.addImg(REAL);
   env.listeners.screenshot({});
   env.listeners.screenshot({});
-  assert.deepEqual(env.calls.toast, ["Images are \u00a9\u00a0StewardMD. Please do not share."], "one notice per burst");
+  assert.equal(env.calls.toast.length, 1, "one notice per burst");
   assert.doesNotMatch(env.calls.toast[0], /—/, "no em-dash");
+});
+
+test("screenshot with no image follows the page language", () => {
+  const env = makeEnv({ platform: "ios", pageLang: "hi" });
+  env.listeners.screenshot({});
+  assert.equal(env.calls.toast.length, 1);
+  assert.match(env.calls.toast[0], /[ऀ-ॿ]/, "Devanagari");
 });
 
 test("screenshot notice is in Hindi when the lesson is in Hindi", () => {

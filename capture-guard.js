@@ -7,8 +7,8 @@
  *  - iOS: the CaptureGuard plugin reports recording / mirroring as captureChange. While captured,
  *    <html> gets .smd-cg-on and every image's container shows a tiled diagonal StewardMD mark
  *    (pointer-events:none, so hotspots and zoom still work). Normal viewing stays clean.
- *  - iOS: after a screenshot, and only if such an image is on screen, a calm notice appears through
- *    the app's shared toast (toast.js), in English or Hindi. (Android blocks the screenshot instead.)
+ *  - iOS: after any screenshot taken in the app (owner 2026-10-01), a calm notice appears through the
+ *    app's shared toast (toast.js), in English or Hindi. (Android blocks the screenshot instead.)
  *  - Android: FLAG_SECURE is set through setSecure(true) while such an image is on screen and
  *    cleared as soon as none is, so questions and notes stay screenshot-able.
  *  - Web / PWA (no plugin): nothing is installed; fails silently.
@@ -92,12 +92,13 @@
 
   function onScreenshot() {
     scan();
-    if (!visible) return;
+    // Any screenshot in the app: the language follows the visible image's lesson, else the page.
+    var lang = visible ? lastLang : (/^hi/i.test((D.documentElement.getAttribute && D.documentElement.getAttribute("lang")) || "") ? "hi" : "en");
     var now = Date.now();
     if (now - lastToast < TOAST_GAP_MS) return;
     lastToast = now;
     var t = W.toast || W.SMD_toast;
-    if (typeof t === "function") t(MSG[lastLang] || MSG.en);
+    if (typeof t === "function") t(MSG[lang] || MSG.en);
   }
 
   function start() {
