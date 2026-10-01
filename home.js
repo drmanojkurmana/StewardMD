@@ -4887,6 +4887,7 @@
   var _maikKbId = null, _maikKbName = "";
   var _maikDisambigResolved = false;  // set true for ONE send when the user just tapped a "Which did you mean?" chip → skip the never-guess re-ask (else it loops on its own answer, e.g. "Pulmonary" → pulmonary-anatomy chips)
   var _maikSkipCalc = false;          // set true for ONE send by "Ask MaiK anyway" on a calculator card → bypass the zero-token calculator route once
+  var _maikSkipEdge = false;          // set true for ONE send when Edge passed or "Ask MaiK anyway" was tapped on an Edge card (smd_edge)
   var _maikTurns = [];            // recent {q, a-gist} turns sent to the provider for conversational continuity (not persisted; not PHI)
   /* CONVERSATION MEMORY (owner, 2026-09-24: "remember the conversation without eating tokens").
    * Each turn keeps `a` (320 chars, what the follow-up detector reads) and `g`, a GIST of the answer:
@@ -7077,7 +7078,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
      * with a calculator title is not. `exact` (the question is essentially just the name) is enough
      * on its own; otherwise a calculator cue word is required. */
     // Flag smd_calc_prefill: "1" on. Default OFF until the owner approves (CLAUDE.md reversible changes).
-    function maikPrefillOn() { try { return localStorage.getItem("smd_calc_prefill") === "1"; } catch (e) { return false; } }
+    function maikPrefillOn() { try { return localStorage.getItem("smd_calc_prefill") === "1" || localStorage.getItem("smd_edge") === "1"; } catch (e) { return false; } }
     function maikCalcFor(question) {
       try {
         if (!(window.MEDCALC && MEDCALC.find)) return null;
@@ -7115,6 +7116,42 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var resLine = (res && res.value != null && res.value !== "—") ? '<div class="maik-calc-res">' + (partial ? "With the stated values: " : "Result: ") + '<b>' + maikEscH(String(res.value) + (res.unit ? " " + res.unit : "")) + '</b>' + (partial ? " (items not stated are not counted)" : "") + '</div>' : "";
       var miss = partial ? '<div class="maik-calc-in">Not stated: ' + maikEscH(pf.notStated.slice(0, 6).join(" · ")) + (pf.notStated.length > 6 ? " · …" : "") + '</div>' : "";
       return '<div class="maik-calc-pf"><div class="maik-calc-in">From your words (check before use):</div><ul>' + rows + '</ul>' + resLine + miss + '</div>';
+    }
+    // Edge result cards. Read-only: each one opens something the doctor taps; nothing is written.
+    // Every card carries "Ask MaiK anyway" so the request can always continue on the normal path.
+    function maikEdgeAskChip(question) { return '<button class="maik-fu" data-maik-edgeask="' + maikEscH(String(question || "")) + '">Ask MaiK anyway</button>'; }
+    function maikEdgeRender(er, question) {
+      if (!er) return false;
+      if (er.kind === "calculator") {
+        var def = (window.MEDCALC && MEDCALC.get) ? MEDCALC.get(er.id) : null;
+        if (!def) return false;
+        bubble("ai", maikCalcHTML(def, question)); try { scroll(); } catch (e) {} return true;
+      }
+      if (er.kind === "tool") {
+        if (!ACT[er.id]) return false;
+        bubble("ai", '<div class="maik-welcome maik-edge"><b>' + maikEscH(er.title) + '</b> is in StewardMD.</div>' +
+          '<div class="maik-tools"><span class="maik-tools-lbl">Open in app</span><button class="maik-fu maik-tool" data-maik-tool="' + maikEscH(er.id) + '">' + maikEscH("Open " + er.title) + '</button>' + maikEdgeAskChip(question) + '</div>');
+        try { scroll(); } catch (e) {} return true;
+      }
+      if (er.kind === "kb") {
+        bubble("ai", '<div class="maik-welcome maik-edge"><b>' + maikEscH(er.title) + '</b> is in the StewardMD Knowledge Base.</div>' +
+          '<div class="maik-tools"><button type="button" class="maik-kbmore" data-kb-more="' + maikEscH(er.id) + '"><span>Read in StewardMD KB<span class="maik-kbmore-sub">' + maikEscH(er.title) + '</span></span><span class="maik-kbmore-go" aria-hidden="true">→</span></button>' + maikEdgeAskChip(question) + '</div>');
+        try { scroll(); } catch (e) {} return true;
+      }
+      if (er.kind === "drug" && er.drug) { maikDrugAskCard([er.drug], question); return true; }
+      if (er.kind === "icd") {
+        if (!(window.SMD_ICD && SMD_ICD.localSearch)) return false;
+        var holder = bubble("ai", '<div class="maik-welcome maik-edge">ICD-10 codes for <b>' + maikEscH(er.id) + '</b>…</div>');
+        SMD_ICD.localSearch(er.id, 5).then(function (rows) {
+          var el = holder && holder.querySelector ? holder.querySelector(".maik-edge") : null;
+          var list = (rows || []).map(function (r) { return '<button class="maik-fu" data-maik-icd="' + maikEscH(r.id) + '">' + maikEscH(r.code + "  " + r.title) + '</button>'; }).join("");
+          var html = '<div class="maik-welcome maik-edge">ICD-10 codes for <b>' + maikEscH(er.id) + '</b> (pick the one that fits):</div><div class="maik-tools">' + (list || '<span class="maik-tools-lbl">No match in the offline ICD-10 index.</span>') + maikEdgeAskChip(question) + '</div>';
+          if (holder && holder.innerHTML != null) holder.innerHTML = html;
+          try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); scroll(); } catch (e) {}
+        }, function () {});
+        return true;
+      }
+      return false;
     }
     function maikCalcHTML(c, question) {
       var inputs = (c.inputs || []).map(function (x) { return x && x.label ? String(x.label).replace(/\s*\(.*$/, "") : ""; }).filter(Boolean);
@@ -8294,6 +8331,18 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           runClinical(_fq, _maikTopic.topic + " " + q, _fdepth, active, _maikTopic.topic); return;
         }
       }
+      // StewardMD Edge (flag smd_edge, default OFF): an unresolved request may be one of the five
+      // read-only workflows (calculator, module, KB topic, drug, ICD). The on-device router answers
+      // with a card, or passes and this send continues exactly as before (never a dead end).
+      var _skipEdge = _maikSkipEdge; _maikSkipEdge = false;
+      if (route.kind === "clinical" && !_skipEdge && !_maikFollowUp && window.SMD_EDGE && SMD_EDGE.enabled && SMD_EDGE.enabled()) {
+        var _eq = q;
+        SMD_EDGE.route(_eq, { patient_session_id: "maik-home" }).then(function (er) {
+          var shown = false; try { shown = !!(er && maikEdgeRender(er, _eq)); } catch (e) { shown = false; }
+          if (!shown) { _maikSkipEdge = true; maikSendRest(_eq, fromDrugAsk); }
+        });
+        return;
+      }
       if (route.kind === "help") {
         var h = bubble("ai", '<div class="maik-welcome"><b>Ask Maik</b> is StewardMD’s clinical knowledge assistant. I can:<br>• answer general clinical & drug questions (grounded in StewardMD’s knowledge base)<br>• point you to the calculators and drug reference<br>• add commentary once you’ve run a patient assessment.<br><br>To assess a patient, start <b>Dx My Patient</b> or <b>Clinical Reasoning</b> and enter the findings.</div>');
         [["Ask a clinical question", function () { qEl.value = "How do we treat DKA?"; try { qEl.focus(); } catch (e) {} }], ["Start Dx My Patient", function () { close(); try { openDxChooser(); } catch (e) {} }]].forEach(function (c) { var b = document.createElement("button"); b.className = "maik-chip"; b.style.margin = "8px 6px 0 0"; b.textContent = c[0]; b.addEventListener("click", c[1]); h.appendChild(b); }); scroll(); return;
@@ -9065,7 +9114,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // [data-maik-tool] MUST be in this selector: the "Open Drug Index" chip carries only that
       // attribute, so without it the tool branch below was unreachable and the chip did nothing
       // (found live on the owner's phone, 2026-09-03).
-      var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web],[data-maik-tool],[data-maik-refine],[data-maik-calc],[data-maik-calcask],[data-maik-kit]") : null;
+      var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web],[data-maik-tool],[data-maik-refine],[data-maik-calc],[data-maik-calcask],[data-maik-kit],[data-maik-edgeask],[data-maik-icd]") : null;
       if (!el) return;
       ev.preventDefault();
       // "Open <kit tool>": close MaiK first (its sheet sits above the kit sheet), then open the kit at the tool.
@@ -9085,6 +9134,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }
       // "Ask MaiK anyway" on a calculator card: re-send the SAME question with the local calculator
       // route bypassed for exactly one send, so the clinician can still get the narrative answer.
+      var edgeAsk = el.getAttribute("data-maik-edgeask");
+      if (edgeAsk) { if (_maikBusy) return; _maikSkipEdge = true; _maikSkipCalc = true; try { qEl.value = edgeAsk; } catch (e) {} send(); return; }
+      var icdId = el.getAttribute("data-maik-icd");
+      if (icdId) { close(); setTimeout(function () { try { if (window.SMD_ICD && SMD_ICD.openCode) SMD_ICD.openCode(icdId); } catch (e) {} }, 180); return; }
       var calcAsk = el.getAttribute("data-maik-calcask");
       if (calcAsk) { if (_maikBusy) return; _maikSkipCalc = true; try { qEl.value = calcAsk; } catch (e) {} send(); return; }
       // Intent-aware refinement chips: route factors that a dedicated tool answers better than the LLM.

@@ -152,6 +152,7 @@ default (ON) is what you get.
 | Flag | Default | What |
 |---|---|---|
 | `smd_scribe_reported_gate` | **ON** ("0" = off) | `voice-ambient.js`: a patient-reported or past reading ("my BP was 150/90 at home") never fills objective vitals. Safety fix. |
+| `smd_edge` | **OFF** ("1" = on) | StewardMD Edge typed router in MaiK (`edge-runtime.js`, `edge-router.js`): calculator, module, KB topic, drug, ICD. Also turns on calculator prefill. No engine ships yet; without one, exact calculator names and ICD requests are answered by rules and everything else passes to the normal path. See [[StewardMD Edge]]. |
 | `smd_calc_prefill` | **OFF** ("1" = on) | MaiK calculator card, Universal Search and MaiKBrain open calculators prefilled from the typed words (`clinical-params.js`, `calc-prefill.js`), with sources, the calculator's own result and "not stated" items. Owner approval needed to default it on. Tests: `test/clinical-params.test.mjs`, `test/calc-prefill.test.mjs`, `test/maik-brain-prefill.test.mjs`, `test/run-maik-calc-prefill-ui.mjs`. |
 
 ## Everything, by module
