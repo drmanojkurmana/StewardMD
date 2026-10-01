@@ -447,7 +447,7 @@
     // MaiK Scribe — native device speech-to-text (@capacitor-community/speech-recognition:
     // iOS SFSpeechRecognizer / Android SpeechRecognizer). Streams interim results via opts.onPartial;
     // opts.onFinal on stop. CAUTION: by default both OS recognizers MAY send audio to Apple/Google.
-    // opts.onDevice ("prefer" | "require", Edge A1.2, flag smd_speech_ondevice in voice.js) asks the
+    // opts.onDevice ("prefer" | "require", Edge A1.2, flag smd_speech_ondevice in voice.js, default ON) asks the
     // plugin for the on-device recognizer; the mode that really ran arrives in opts.onMode
     // ({onDevice, how, reason}) and in SMD_NATIVE.lastSpeechMode. "require" never uses the cloud: an
     // unavailable on-device model ends in opts.onError("on-device-unavailable").

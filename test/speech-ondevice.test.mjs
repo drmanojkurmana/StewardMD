@@ -1,4 +1,5 @@
-/* test/speech-ondevice.test.mjs — on-device speech (Edge-Master-Plan A1.2, flag smd_speech_ondevice).
+/* test/speech-ondevice.test.mjs — on-device speech (Edge-Master-Plan A1.2, flag smd_speech_ondevice,
+ * DEFAULT ON since 2026-10-01; "0" is the kill switch).
  *
  * The OS recognizers behind Fast dictation may send audio to Apple/Google unless on-device recognition
  * is requested. With the flag ON, noCloud callers (ambient Scribe, OPD field dictation, kits) REQUIRE
@@ -17,7 +18,8 @@ const SRC_V = fs.readFileSync(new URL("../voice.js", import.meta.url), "utf8");
 const tick = (ms = 0) => new Promise((r) => setTimeout(r, ms));
 
 function boot({ flag, plugin }) {
-  const store = flag ? { smd_speech_ondevice: "1" } : {};
+  // flag: true = default (key unset), false = kill switch "0"
+  const store = flag ? {} : { smd_speech_ondevice: "0" };
   const el = () => ({ style: {}, classList: { add() {}, remove() {}, toggle() {} }, setAttribute() {}, appendChild() {}, addEventListener() {}, querySelector: () => null, querySelectorAll: () => [] });
   const w = {
     console, setTimeout, clearTimeout, setInterval, clearInterval, Promise, URL, JSON, Math, Date,
@@ -71,7 +73,7 @@ function listen(w, opts) {
   return { s, seen };
 }
 
-test("flag OFF: the plugin is started exactly as before (no onDevice option), label unchanged", async () => {
+test("kill switch \"0\": the plugin is started exactly as before (no onDevice option), label unchanged", async () => {
   const p = mockPlugin(); const w = boot({ flag: false, plugin: p });
   const { s } = listen(w, { noCloud: true });
   await tick(5);
@@ -134,6 +136,13 @@ test("speechOnDevice() reports what the phone can do, and false when the plugin 
   assert.deepEqual(JSON.parse(JSON.stringify(await w.SMD_NATIVE.speechOnDevice("en-IN"))), { available: true, onDevice: true, onDeviceHow: "createOnDeviceSpeechRecognizer" });
   const w2 = boot({ flag: true, plugin: null });
   assert.equal((await w2.SMD_NATIVE.speechOnDevice()).onDevice, false);
+});
+
+test("default ON: with nothing in localStorage, noCloud dictation requires on-device", async () => {
+  const p = mockPlugin({ onDevice: true }); const w = boot({ flag: true, plugin: p });
+  assert.equal(w.localStorage.getItem("smd_speech_ondevice"), null);
+  listen(w, { noCloud: true }); await tick(5);
+  assert.equal(p.starts[0].onDevice, "require");
 });
 
 test("every new error code has a sentence a doctor can act on", () => {

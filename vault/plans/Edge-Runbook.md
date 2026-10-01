@@ -76,7 +76,7 @@ Pass: no crash, no thermal shutdown, p95 within the 1,200 ms deadline after the 
 
 ## 4b. On-device speech (A1.2, flag `smd_speech_ondevice`)
 Build with this branch (the speech plugin changed on both platforms; Android compiles, Swift untested).
-On each phone, with the flag ON (`localStorage.setItem("smd_speech_ondevice","1")` over CDP):
+On each phone (the flag is ON by default; `localStorage.setItem("smd_speech_ondevice","0")` is the kill switch):
 1. `await SMD_NATIVE.speechOnDevice("en-IN")` and `("en-US")`: record `onDevice` per language and phone
    (Android needs 12+ and an installed on-device model; iOS depends on the language).
 2. OPD field dictation (a noCloud caller): with on-device available the strip label reads "On-device";

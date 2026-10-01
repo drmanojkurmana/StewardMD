@@ -196,12 +196,12 @@
   }
 
   var _active = null;   // { engine, mode:'stream'|'record', stop, onDevice? }
-  /* Edge A1.2 (flag smd_speech_ondevice, default OFF). The OS recognizers behind "Fast" dictation
+  /* Edge A1.2 (flag smd_speech_ondevice, default ON since 2026-10-01, owner; "0" = kill switch). The OS recognizers behind "Fast" dictation
    * (SFSpeechRecognizer, Android SpeechRecognizer) and Web Speech MAY send audio to Apple/Google.
    * With the flag ON: noCloud callers REQUIRE the on-device recognizer (else "stt-unavailable-ondevice",
    * never the cloud) and skip Web Speech; other callers PREFER it, and the engine label says which ran
-   * ("On-device" only when it really is). Flag OFF: unchanged. */
-  function speechOnDeviceOn() { try { return localStorage.getItem("smd_speech_ondevice") === "1"; } catch (e) { return false; } }
+   * ("On-device" only when it really is). Flag "0": the old behaviour (and the old, unproven label). */
+  function speechOnDeviceOn() { try { var v = localStorage.getItem("smd_speech_ondevice"); return v !== "0" && v !== "false"; } catch (e) { return true; } }
   function stop() { if (_active && _active.stop) { try { _active.stop(); } catch (e) {} } _active = null; }
 
   function listen(opts) {
