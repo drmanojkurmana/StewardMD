@@ -4319,6 +4319,8 @@
     var refInf = inf && !syn;
     var hasBrief = !!(dm && dm.tx && dm.tx.length);
     var briefTx = hasBrief ? dm.tx : ((H && H.management && H.management.length) ? H.management : null);
+    // The same list is rendered once: in the body below for reference diseases, in the glance only otherwise
+    // (the page used to print it twice, an accordion and then a numbered Management section).
     var mgmtHtml = (refInf && briefTx)
       ? ('<div class="dx-mgmt-sec tx">Management</div><ol class="dx-mgmt-tx">' + briefTx.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ol>'
          + (dm && dm.ix && dm.ix.length ? '<div class="dx-mgmt-sec">Key investigations</div><ul class="dx-mgmt-ul">' + dm.ix.slice(0, 8).map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ul>' : '')
@@ -4342,7 +4344,7 @@
           (reason ? '<p>' + medFormat(reason) + '</p>' : '') +
           (H && H.redFlags && H.redFlags.length ? '<section class="dx-reader-alert"><h4>Red flags</h4>' + evList(H.redFlags, "danger") + '</section>' : '') +
           (H && H.additionalInvestigations && H.additionalInvestigations.length ? '<details><summary>Investigations' + DX_CHEV + '</summary>' + evList(H.additionalInvestigations) + '</details>' : '') +
-          (briefTx && briefTx.length ? '<details><summary>Management' + DX_CHEV + '</summary><ul>' + briefTx.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join('') + '</ul></details>' : '') +
+          (briefTx && briefTx.length && !(refInf && briefTx) ? '<details><summary>Management' + DX_CHEV + '</summary><ul>' + briefTx.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join('') + '</ul></details>' : '') +
         '</div><div class="dx-reader-content">' +
         (reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(reason) + '</p>' : '') +
         mgmtHtml +
@@ -5354,7 +5356,32 @@
     }
     paint();
   }
+  /* Knowledge Base library: when the keyboard opens, WKWebView pans the whole page to keep the focused
+   * field in view, and the overlay (position:fixed; inset:0, laid out against the LAYOUT viewport) is
+   * carried up with it: the search box and the close bar ended up under the status bar, with the text
+   * being typed cut off. The overlay now follows window.visualViewport (the part the doctor can see)
+   * while the keyboard is up, and goes back to inset:0 when it closes. No-op where the WebView resizes. */
+  var _kbVv = false, _kbVvTest = null;
+  function kbFitViewport(vv) {
+    if (vv !== undefined) _kbVvTest = vv;
+    var o = document.getElementById("sbrefOverlay"); if (!o) return;
+    vv = _kbVvTest || window.visualViewport;
+    var live = o.querySelector(".kblib-discover");
+    if (!vv || !vv.height || !live) { o.style.top = o.style.bottom = o.style.height = ""; return; }
+    var ih = window.innerHeight || vv.height, kb = ih - vv.height - (vv.offsetTop || 0);
+    if ((vv.offsetTop || 0) > 1 || kb > 80) { o.style.top = Math.round(vv.offsetTop || 0) + "px"; o.style.bottom = "auto"; o.style.height = Math.round(vv.height) + "px"; }
+    else { o.style.top = o.style.bottom = o.style.height = ""; }
+  }
+  function kbBindViewport() {
+    if (_kbVv || !window.visualViewport) return;
+    _kbVv = true;
+    var f = function () { kbFitViewport(undefined); };
+    try { window.visualViewport.addEventListener("resize", f); window.visualViewport.addEventListener("scroll", f); } catch (e) {}
+    document.addEventListener("focusout", function () { setTimeout(f, 60); }, true);
+  }
+  window.SMD_kbFitViewport = kbFitViewport;
   function kbRenderLibrary() {
+    kbBindViewport();
     var body = document.getElementById("sbrefBody"); if (!body) return;
     body.scrollTop = 0;
     body.className = "sbref-body";
