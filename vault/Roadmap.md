@@ -235,7 +235,7 @@ switch in scope. Behind flag `smd_dose_calc` (default ON since 2026-09-28).
   now defaults ON and the "UNDER REVIEW" pill is gone. The review page stays for spot checks.
 Gotcha: our levothyroxine record says 1.6 mcg/kg/day (the owner's example used 1.7).
 
-## Neonatal layer (built 2026-09-30, `feat/neo-layer`, flag `smd_neo` OFF) - see [[Neonatal]]
+## Neonatal layer (built 2026-09-30; `smd_neo` ON as Beta since 2026-10-01) - see [[Neonatal]]
 - [ ] Owner: licence decisions (INTERGROWTH-21st, WHO 2024 SBI CC BY-NC-SA IGO, NICE international use,
       ASHP S4S, VON, StatPearls CC BY-NC-ND, BAPM, CC BY-NC papers, Rush exponential velocity).
 - [ ] A named neonatologist reviews each file in the Review Desk; approved files move to `reviewed` with
@@ -244,6 +244,5 @@ Gotcha: our levothyroxine record says 1.6 mcg/kg/day (the owner's example used 1
       (none in the brand catalogue), neonatal BP by gestation, term Hb/platelets after day 1, Dunn nomogram,
       Hartford nomogram lines, placing reflex, OSST/BSRI (see the scores file).
 - [ ] Device check on iPhone + Android: running `?v=` token, 360 px, dark mode, Copy/Print in the WebView.
-- [ ] Decide whether "No neonatal dose on file. Do not extrapolate." replaces the child-row fallback for all
-      users (today only with the flag on).
+- [x] "No neonatal dose on file. Do not extrapolate." now applies to all users (flag ON by default, 2026-10-01).
 

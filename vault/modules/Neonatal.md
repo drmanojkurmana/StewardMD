@@ -5,17 +5,21 @@ tags: [module, clinical, neonatal]
 
 One NICU workspace: a baby record pinned on every screen and ten tools that read it. Built 2026-09-30
 from the owner's plan ("StewardMD Neonatal Layer: Build and Polish Plan", Claude Docs) on branch
-`feat/neo-layer`, recovery tag `pre-neo`. **Nothing here is clinically approved**: every data file is
+`feat/neo-layer`, recovery tag `pre-neo`. **Nothing here is clinically approved** (it ships ON as Beta by owner decision): every data file is
 `review.status: "ai_drafted"` and every screen shows a Draft badge.
 
 ## Flags + default
-- `smd_neo` master, **DEFAULT OFF**. On per device: Settings > Experimental Features > "Neonatal layer
-  (Draft)", `?neo=1`, or `localStorage.smd_neo = "1"`. Registry: `neo-flags.js` (`SMD_NEO_FLAGS`).
+- `smd_neo` master, **DEFAULT ON under a Beta label** (owner 2026-10-01: "Make it default on for everyone
+  under beta label"; built default OFF on 2026-09-30). BETA on the Home tile and the hub header, Draft
+  badges on every data screen. Off per device: Settings > Experimental Features > "Neonatal layer (Beta)",
+  `?neo=0`, or `localStorage.smd_neo = "0"`. Registry: `neo-flags.js` (`SMD_NEO_FLAGS`).
 - Per-feature (default ON, effective only with the master on; `?neo_<name>=0` or
   `localStorage.smd_neo_<name> = "0"`): `dose`, `prep`, `inf`, `fluids`, `growth`, `bili`, `scores`, `ref`,
   `proc`, `tdm`.
 - Off: `neo-flags.js` is the only file that loads (it injects the rest when the flag is on). No Home tile,
   no search hit, no neonatal calculators, dose-calc.js behaves exactly as before.
+- On (the default): a neonate in dose-calc.js sees neonatal rows only ("No neonatal dose on file. Do not
+  extrapolate." when none), for every user.
 
 ## Key files
 | File | Global | What |

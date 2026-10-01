@@ -107,6 +107,7 @@
       "#neoHub .nh-btn{border:1.5px solid var(--nh-acc);color:var(--nh-acc);background:transparent;border-radius:10px;font:600 14px var(--nh-f);padding:8px 12px;min-height:44px;cursor:pointer}#neoHub .nh-btn.pri{background:var(--nh-acc);color:#fff}",
       "#neoHub .nh-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}",
       "#neoHub .nh-tool{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;border:1px solid var(--nh-line);background:var(--nh-panel);color:var(--nh-ink);border-radius:14px;padding:12px;min-height:84px;cursor:pointer;font:700 15px var(--nh-f);min-width:0}#neoHub .nh-tool small{font:500 12.5px var(--nh-f);color:var(--nh-mut)}#neoHub .nh-tool .material-symbols-rounded{color:var(--nh-acc);font-size:24px}",
+      "#neoHub .nh-beta{display:inline-block;vertical-align:middle;font:700 10px var(--nh-f);letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--nh-acc);border-radius:6px;padding:3px 6px;margin-left:4px}",
       "#neoHub .nh-draft{font:700 10.5px var(--nh-f);letter-spacing:.05em;text-transform:uppercase;color:var(--nh-warn);background:var(--nh-warn-soft);border-radius:999px;padding:3px 8px}",
       "#neoHub .nh-ok{font:700 10.5px var(--nh-f);color:var(--nh-acc);background:var(--nh-acc-soft);border-radius:999px;padding:3px 8px}",
       "#neoHub .nh-val{font:700 24px/1.2 var(--nh-f);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}#neoHub .nh-lbl{font:700 11px var(--nh-f);letter-spacing:.06em;text-transform:uppercase;color:var(--nh-acc)}",
@@ -169,14 +170,14 @@
   function toolById(id) { for (var i = 0; i < TOOLS.length; i++) if (TOOLS[i].id === id) return TOOLS[i]; return null; }
   function homeHtml() {
     var ts = visibleTools();
-    return '<section class="nh-card"><h3>Neonatal tools ' + badge(null) + '</h3><div class="nh-foot" style="text-align:left">Every number comes from a cited source and shows it. All content is AI-drafted and awaits review by a neonatologist.</div>' +
+    return '<section class="nh-card"><h3>Neonatal tools ' + badge(null) + '</h3><div class="nh-foot" style="text-align:left">Beta. Every number comes from a cited source and shows it. All content is AI-drafted and awaits review by a neonatologist.</div>' +
       '<div class="nh-tools">' + ts.map(function (t) { return '<button type="button" class="nh-tool" data-tool="' + esc(t.id) + '"><span class="material-symbols-rounded" aria-hidden="true">' + esc(t.icon || "child_care") + "</span>" + esc(t.title) + "<small>" + esc(t.sub || "") + "</small></button>"; }).join("") + "</div></section>";
   }
   var API = null;
   function render() {
     if (!root) return;
     var body = root.querySelector(".nh-body"), t = cur !== "home" ? toolById(cur) : null;
-    root.querySelector(".nh-t").textContent = t ? clean(t.title) : "Neonatal";
+    root.querySelector(".nh-t").innerHTML = esc(t ? t.title : "Neonatal") + ' <span class="nh-beta" title="Beta: AI-drafted from cited sources, awaiting neonatologist review">Beta</span>';
     root.querySelector("[data-nh=back]").textContent = t ? "‹ Tools" : "‹ Close";
     body.innerHTML = babyBar() + (editing ? recordHtml() : "") + '<div data-nh="screen"></div>';
     var scr = body.querySelector("[data-nh=screen]");
