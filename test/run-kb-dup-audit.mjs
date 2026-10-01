@@ -43,22 +43,22 @@ try {
   await call('Page.navigate', { url: `http://localhost:${PORT}/` });
   ok(await until('!!window.SB && !!window.SMD_REASON && !!window.KB_ENRICHMENT', 40000), 'app loaded');
   await ev(`['introPoster','splash','accountGate','introOverlay','smdBootSplash'].forEach(k=>document.getElementById(k)&&document.getElementById(k).remove());1`);
-  const ids = await ev(`(()=>{const s=new Set(Object.keys(KB_ENRICHMENT.byId));Object.keys(window.SYNDROMES||{}).forEach(k=>s.add(k));(window.DDX_NI_IDS||[]).forEach(k=>s.add(k));return [...s]})()`);
-  console.log('diseases to audit:', ids.length);
-  // Audit in-page, in chunks: open each reader, look for a section or list shown twice.
-  await ev(`window.__dup=[];window.__done=0;window.__audit=function(ids){ids.forEach(function(id){try{SMD_REASON.openRef(id,{standalone:true});var r=document.querySelector('.dx-reader');if(!r)return;
-    var heads=[].map.call(r.querySelectorAll('.dx-mgmt-sec,summary,h3,h4,.dx-mgmt-body h2'),function(e){return e.textContent.replace(/\\s+/g,' ').trim().toLowerCase()}).filter(Boolean);
-    var seen={},dupH=[];heads.forEach(function(h){h=h.replace(/[›‹⌄v]+$/,'').trim();if(seen[h])dupH.push(h);seen[h]=1});
-    var lis=[].map.call(r.querySelectorAll('li'),function(e){return e.textContent.replace(/\\s+/g,' ').trim().toLowerCase()}).filter(function(t){return t.length>40});
-    var ls={},dupL=0;lis.forEach(function(t){if(ls[t])dupL++;ls[t]=1});
-    if(dupH.length||dupL)window.__dup.push({id:id,heads:dupH,items:dupL});}catch(e){window.__dup.push({id:id,err:String(e).slice(0,80)})}});window.__done+=ids.length};1`);
-  for (let i = 0; i < ids.length; i += 200) { await ev(`__audit(${JSON.stringify(ids.slice(i, i + 200))});1`); }
-  const dup = await ev(`__dup`);
-  console.log('with a repeated section or list item:', dup.length, 'of', await ev('__done'));
-  const byKind = {}; dup.forEach(d => { const k = (d.heads || []).concat(d.err ? ['ERR ' + d.err] : []).concat(d.items ? ['same list item x' + d.items] : []).join(' | '); byKind[k] = (byKind[k] || []).concat(d.id); });
-  Object.entries(byKind).sort((a, b) => b[1].length - a[1].length).slice(0, 15).forEach(([k, v]) => console.log(v.length, '×', k.slice(0, 100), '| e.g.', v.slice(0, 3).join(', ')));
-  // 3 pages (aldosterone_producing_adenoma, glomus_tumor_nail, hydrocephalus) list one sentence in both
-  // Investigations and Management in the source data, which is clinically fine. Anything beyond that is a regression.
-  ok(dup.length <= 3 && dup.every(d => !(d.heads || []).length), 'no disease page repeats a section (at most 3 source-data cross-list sentences)');
+  const ids = await ev(`(()=>{const s=new Set(Object.keys(KB_ENRICHMENT.byId));Object.keys(window.SYNDROMES||{}).forEach(k=>s.add(k));return [...s]})()`);
+  await ev(`window.__r={};window.__a=function(ids){ids.forEach(function(id){try{SMD_REASON.openRef(id,{standalone:true});var r=document.querySelector('.dx-reader');var n=function(e){return e.textContent.replace(/\\s+/g,' ').trim().toLowerCase()};
+   var seen={},kinds={};[].forEach.call(r.querySelectorAll('p,li,.dx-mgmt-sec,summary,h3,h4,button.dx-select'),function(e){var t=n(e);if(t.length<25)return;if(e.closest('.ev-viewer-collapsed'))return;if(seen[t]){kinds[e.tagName+':'+t.slice(0,40)]=1}seen[t]=1});
+   var mg=[].filter.call(r.querySelectorAll('summary,.dx-mgmt-sec,button.dx-select'),function(e){return /management|stewardship/i.test(e.textContent)}).map(function(e){return e.textContent.replace(/\\s+/g,' ').trim().slice(0,30)});
+   var H=(KB_ENRICHMENT.byId||{})[id],dm=(window.DX_MGMT||{})[id];var has=!!((window.SYNDROMES||{})[id]||(dm&&dm.tx&&dm.tx.length)||(H&&H.management&&H.management.length));
+   window.__r[id]={dups:Object.keys(kinds),mg:mg,has:has}}catch(e){}})};1`);
+  for (let i = 0; i < ids.length; i += 200) await ev(`__a(${JSON.stringify(ids.slice(i, i + 200))});1`);
+  const R = await ev(`__r`); const agg = {}; let multi = 0, dupPages = 0;
+  Object.entries(R).forEach(([id, v]) => { if (v.dups.length) { dupPages++; v.dups.forEach(d => { const k = d.slice(0, 22); (agg[k] = agg[k] || []).push(id); }); } if (v.mg.length > 1) { multi++; } });
+  console.log('pages', Object.keys(R).length, '| with repeated text', dupPages, '| with 2+ management entries', multi);
+  Object.entries(agg).sort((a, b) => b[1].length - a[1].length).slice(0, 8).forEach(([k, v]) => console.log(v.length, k, v.slice(0, 2)));
+  const lost = Object.entries(R).filter(([, v]) => v.has && v.mg.length !== 1).map(([k]) => k);
+  console.log('pages with management data but not exactly one management entry:', lost.length, lost.slice(0, 5));
+  ok(Object.keys(R).length >= 2400, 'audited every disease page');
+  ok(dupPages === 0, 'no disease page repeats a sentence, list item or heading');
+  ok(multi === 0, 'no disease page has two management entries (collapse + separate page)');
+  ok(lost.length === 0, 'every disease with management data still shows it, exactly once');
 } catch (e) { console.log('FAIL', e.message); failures++; } finally { try { ws.close(); } catch {} chrome.kill(); server.close(); }
 console.log(failures ? failures + ' failed' : 'all passed'); process.exit(failures ? 1 : 0);
