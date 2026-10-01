@@ -124,6 +124,31 @@ On each phone (the flag is ON by default; `localStorage.setItem("smd_speech_onde
    `SMD_NATIVE.lastSpeechMode`.
 Pass: no noCloud session ever runs a cloud recognizer; labels match reality on both phones.
 
+**iOS PASSED (2026-10-02, iPhone 15 Pro, iOS 27.0, build of 1c8d2e29e, flag at its default ON):**
+the speech plugin's new Swift compiled with 0 errors/warnings. Speech was played from the Mac speaker
+("blood pressure one forty over ninety", synthetic, no patient data); `SMD_VOICE.listen` was driven
+over the WebKit proxy with the same options as the OPD field mic.
+1. `speechOnDevice`: en-IN `onDevice:true`, en-US `true`, te-IN `true`, hi-IN `false` ("no on-device model").
+2. noCloud (OPD): label went "Device speech" -> "On-device" within 98-133 ms, `lastSpeechMode`
+   `{onDevice:true, how:"requiresOnDeviceRecognition"}`, final "Blood pressure 140/90". **Airplane mode
+   (navigator.onLine false, fetch to stewardmd.in failed): same, transcribed on-device.** hi-IN with
+   `require`: refused in 5 ms with `on-device-unavailable`, no mode event, no partials, so no recognizer
+   ran (voice.js maps it to `stt-unavailable-ondevice`, the "This phone can't recognise speech..." text).
+3. Scribe Fast (`prefer`, en-IN): label "On-device", matches `lastSpeechMode`. hi-IN `prefer` reports
+   `onDevice:false` ("Apple speech service (may use Apple servers)"), which voice.js labels
+   "Device speech (cloud)".
+Findings (not fixed here):
+- The OPD field strip never shows an engine label ("Listening Ns - <field>..."); the label above lives
+  in `SMD_VOICE.listen`'s `onState(state, engine)`, which `opd-emr.js` ignores. Step 2's wording is wrong
+  or the strip needs the label.
+- `voice.js` does not pass `opts.language` to the native recognizer, so Fast dictation always uses
+  `navigator.language` (en-IN here); a Hindi pick in OPD/Scribe is not what the recognizer runs.
+- `voice.js` changed in A1.2 but its token is still `?v=hardlocal3`: an OTA/service-worker client can keep
+  the old file. Bump it before OTA.
+- A start straight after a stopped session was once rejected "Ongoing speech recognition" (the audio
+  engine had not stopped yet); the next try worked.
+Not done: Android (no phone attached).
+
 ## 5. Training
 **Needle on the Cactus platform** (synthetic data only; commands from `cactus-needle` 3.0.6 `llms.txt`):
 ```sh
