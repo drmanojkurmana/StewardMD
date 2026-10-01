@@ -8020,7 +8020,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             // same oversized request failed the same way. Retry ONCE without the conversation before
             // showing an error; the answer stands on its own question.
             call = call.then(function (r) {
-              if (!r || !r.error || _maikStopped || _streamStarted || !/server_error|timeout|5\d\d/i.test(String(r.error)) || !(pkg.history && pkg.history.length || pkg.earlier)) return r;
+              // Only a genuine server_error is worth one retry. A timeout or a provider outage means the
+              // provider was slow or down, not that the request was too big, and the first generation is
+              // usually already billed: retrying paid twice for nothing (cost audit 2026-10-02).
+              if (!r || r.error !== "server_error" || /timeout|unavailable|rate|auth/i.test(String(r.reason || "")) || _maikStopped || _streamStarted || !(pkg.history && pkg.history.length || pkg.earlier)) return r;
               try { delete pkg.history; delete pkg.earlier; pkg.newTopic = true; } catch (e) {}
               return window.SMD_AI.explainGrounded(pkg, { depth: depth, tier: _tier, regen: _regen }).catch(function () { return r; });
             });

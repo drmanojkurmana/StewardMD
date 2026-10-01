@@ -49,7 +49,6 @@ const G = [{ diseaseId: "af", text: "Amiodarone dosing.", provenance: ["StewardM
 
 for (const [label, extra] of [
   ["conversation history", { history: [{ q: "af rate control", a: "beta blocker" }] }],
-  ["an About-me line", { doctor: "Cardiologist in Pune, prefers ESC guidance" }],
   ["earlier topics", { earlier: ["heart failure"] }],
 ]) {
   test("a request carrying " + label + " is never read from or written to the shared cache", async () => {
@@ -64,6 +63,25 @@ for (const [label, extra] of [
     } finally { h.restore(); }
   });
 }
+
+// 2026-10-02 (cost audit): the About-me line is IN the cache key, so a doctor's answer is only reused
+// for the identical About-me text; refusing it disabled the cache for every doctor who filled it in.
+test("an About-me line keys its own cache entry: never the generic answer, never another doctor's", async () => {
+  const h = harness();
+  try {
+    const A = { doctor: "Cardiologist in Pune, prefers ESC guidance" }, B = { doctor: "GP in Kerala, prefers NICE" };
+    await ask(h.env, { question: Q, grounding: G });                                  // generic answer cached
+    const a1 = await ask(h.env, Object.assign({ question: Q, grounding: G }, A));
+    assert.equal(h.calls.gen, 2, "an About-me request never gets the generic answer");
+    assert.notEqual(a1.cached, true);
+    const b1 = await ask(h.env, Object.assign({ question: Q, grounding: G }, B));
+    assert.equal(h.calls.gen, 3, "nor another doctor's personalised answer");
+    assert.notEqual(b1.cached, true);
+    const a2 = await ask(h.env, Object.assign({ question: Q, grounding: G }, A));
+    assert.equal(a2.cached, true, "the same About-me asking again is served from its own entry");
+    assert.equal(h.calls.gen, 3);
+  } finally { h.restore(); }
+});
 
 test("a different KB / retrieval does not reuse an answer", async () => {
   const h = harness();
@@ -96,7 +114,8 @@ test("regen skips the cache READ but still WRITES the fresh answer", async () =>
 test("unit: eligibility + fingerprint are order-independent and key-affecting", async () => {
   assert.equal(cacheEligibleCtx({}), true);
   assert.equal(cacheEligibleCtx({ history: [] , earlier: [], doctor: "  " }), true);
-  assert.equal(cacheEligibleCtx({ doctor: "x" }), false);
+  assert.equal(cacheEligibleCtx({ doctor: "x" }), true, "About-me is keyed, not refused");
+  assert.equal(cacheEligibleCtx({ history: [{ q: "a", a: "b" }] }), false);
   const a = kbFingerprint({ grounding: [{ diseaseId: "a", provenance: ["p1", "p2"] }], sources: [{ title: "S" }] });
   const b = kbFingerprint({ grounding: [{ diseaseId: "a", provenance: ["p2", "p1"] }], sources: [{ title: "S" }] });
   assert.equal(a, b);

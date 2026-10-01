@@ -39,7 +39,8 @@ test("tier 1 is a bottom-line-only instruction, and tier 2 still returns the ful
   assert.match(API, /body\.tier === 2/, "the depth call exists");
   assert.match(API, /OUTPUT MODE — DETAIL ONLY/);
   // the client must actually be able to fetch tier 2, or tier 1 would be a real content loss
-  assert.match(HOME, /explainGrounded\(_ctx\.pkg, \{ tier: 2/, "the 'more' control fetches the depth");
+  assert.match(HOME, /_opts = \{ tier: 2, depth: "detailed", priorLead: _ctx\.lead \}/, "the 'more' control fetches the depth");
+  assert.match(HOME, /SMD_AI\.explainGrounded(Stream)?\(_ctx\.pkg, _opts/, "streamed where possible, whole otherwise");
 });
 
 /* ---------------------------------------------------------------- 2. answer cache */
