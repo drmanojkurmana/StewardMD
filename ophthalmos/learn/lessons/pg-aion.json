@@ -3,7 +3,12 @@
   "unit": "neuro-pg",
   "level": "resident",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Ischaemic optic neuropathy: NAION or GCA?",
     "hi": "इस्कीमिक ऑप्टिक न्यूरोपैथी: NAION या GCA?"
@@ -13,22 +18,21 @@
     "hi": "50 की उम्र के बाद सूजी डिस्क के साथ अचानक बिना दर्द नज़र जाना अक्सर इस्कीमिक होता है। पहले [[gca]] को ख़ारिज करें, क्योंकि यह कुछ ही दिनों में दूसरी आँख की नज़र भी ले सकता है। शक हो तो बायोप्सी से पहले स्टेरॉयड शुरू करें।"
   },
   "see": {
-    "diagram": "diagrams/neuro-aion.svg",
-    "w": 480,
-    "h": 200,
+    "w": 768,
+    "h": 576,
     "alt": {
-      "en": "Three round views of the back of the eye. Left: a small disc with no cup. Middle: a disc whose upper half is swollen and red, with a streak of bleeding at its edge. Right: a large, chalky white swollen disc with a small white fluffy spot nearby.",
-      "hi": "आँख के पिछले हिस्से के तीन गोल दृश्य। बाईं ओर: बिना कप की छोटी डिस्क। बीच में: डिस्क का ऊपरी आधा हिस्सा सूजा और लाल, किनारे पर खून की एक धारी के साथ। दाईं ओर: बड़ी, चॉक जैसी सफ़ेद सूजी डिस्क, पास में एक छोटे सफ़ेद रुई जैसे धब्बे के साथ।"
+      "en": "Three views of the optic disc. Left: a small, crowded disc with almost no cup. Middle: the upper part of the disc is swollen and red, with a thin streak of blood at its edge. Right: the whole disc is swollen and chalky white. A small fluffy white spot lies below it.",
+      "hi": "ऑप्टिक डिस्क के तीन दृश्य। बाएँ: एक छोटी, भीड़ भरी डिस्क, जिसमें लगभग कोई कप नहीं है। बीच में: डिस्क का ऊपरी हिस्सा सूजा और लाल है, और उसके किनारे पर खून की एक पतली धारी है। दाएँ: पूरी डिस्क सूजी हुई और खड़िया जैसी सफ़ेद है। उसके नीचे एक छोटा रुई जैसा सफ़ेद धब्बा है।"
     },
     "caption": {
       "en": "Left: the small, crowded fellow disc in NAION. Middle: NAION with sector swelling. Right: arteritic ischaemia in GCA, with pale, chalky swelling.",
       "hi": "बाईं ओर: NAION में दूसरी आँख की छोटी, भीड़ वाली डिस्क। बीच में: एक हिस्से की सूजन वाला NAION। दाईं ओर: GCA में आर्टेराइटिक इस्कीमिया, पीली, चॉक जैसी सूजन के साथ।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.171,
-        "y": 0.5,
+        "x": 0.16,
+        "y": 0.44,
         "label": {
           "en": "Disc at risk",
           "hi": "ख़तरे वाली डिस्क"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.5,
-        "y": 0.43,
+        "x": 0.47,
+        "y": 0.347,
         "label": {
           "en": "Sector swelling",
           "hi": "एक हिस्से की सूजन"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.465,
-        "y": 0.319,
+        "x": 0.495,
+        "y": 0.287,
         "label": {
           "en": "Splinter haemorrhage",
           "hi": "बारीक हेमरेज"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.829,
-        "y": 0.5,
+        "x": 0.84,
+        "y": 0.427,
         "label": {
           "en": "Chalky white swelling",
           "hi": "चॉक जैसी सफ़ेद सूजन"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.746,
-        "y": 0.35,
+        "x": 0.905,
+        "y": 0.653,
         "label": {
           "en": "Cotton wool spot",
           "hi": "कॉटन वूल स्पॉट"
@@ -86,6 +90,10 @@
           "hi": "रेटिना में कहीं और इस्कीमिया भी GCA की ओर इशारा करता है।"
         }
       }
+    ],
+    "img": "learn/media/real/neuro-aion.webp",
+    "more": [
+      "neuro-aion"
     ]
   },
   "why": {

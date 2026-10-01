@@ -3,7 +3,12 @@
   "unit": "peds",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Squint: eyes that point different ways",
     "hi": "भेंगापन: जब आँखें अलग दिशा में देखें"
@@ -13,22 +18,21 @@
     "hi": "[[strabismus]] में एक आँख दूसरी दिशा में देखती है। [[hirschberg]] इसे दिखाता है। बच्चे असली भेंगेपन से बड़े होकर ठीक नहीं होते, इसलिए हर बच्चे को रेफ़र करें।"
   },
   "see": {
-    "diagram": "diagrams/squint-reflex.svg",
-    "w": 480,
-    "h": 470,
+    "w": 768,
+    "h": 1159,
     "alt": {
-      "en": "Diagram of five pairs of eyes, one pair per row, each lit by a torch from in front. Row 1: the bright dot is in the centre of both pupils. Row 2: the left-hand eye is turned in, and its dot sits toward the ear. Row 3: the left-hand eye is turned out, and its dot sits toward the nose. Row 4: the left-hand eye is turned up, and its dot sits low. Row 5: skin folds hide the inner corners, but both dots are centred.",
-      "hi": "आँखों के पाँच जोड़ों का चित्र, हर पंक्ति में एक जोड़ा, सामने से टॉर्च की रोशनी में। पंक्ति 1: चमकीला बिंदु दोनों पुतलियों के बीच में है। पंक्ति 2: बाईं ओर की आँख अंदर मुड़ी है, और उसका बिंदु कान की ओर है। पंक्ति 3: बाईं ओर की आँख बाहर मुड़ी है, और उसका बिंदु नाक की ओर है। पंक्ति 4: बाईं ओर की आँख ऊपर मुड़ी है, और उसका बिंदु नीचे है। पंक्ति 5: त्वचा की सिलवटें अंदरूनी कोनों को ढकती हैं, पर दोनों बिंदु बीच में हैं।"
+      "en": "Five rows of the same child's eyes, each with a small dot of torch light on the cornea. Top: both dots sit in the centre. Second: the right eye turns in, so its dot sits toward the outer side. Third: the right eye turns out. Fourth: the right eye turns up, and its dot sits low. Bottom: the eyes look a little turned in, but both dots are centred.",
+      "hi": "एक ही बच्चे की आँखों की पाँच पंक्तियाँ, हर कॉर्निया पर टॉर्च की रोशनी का एक छोटा बिंदु। सबसे ऊपर: दोनों बिंदु बीच में हैं। दूसरी: दाईं आँख अंदर मुड़ी है, इसलिए उसका बिंदु बाहरी ओर है। तीसरी: दाईं आँख बाहर मुड़ी है। चौथी: दाईं आँख ऊपर मुड़ी है, और उसका बिंदु नीचे है। सबसे नीचे: आँखें थोड़ी अंदर मुड़ी दिखती हैं, पर दोनों बिंदु बीच में हैं।"
     },
     "caption": {
       "en": "Look at where the light dot sits in each pupil. If the dots do not match, one eye is turned.",
       "hi": "देखें कि हर पुतली में रोशनी का बिंदु कहाँ है। अगर बिंदु मेल नहीं खाते, तो एक आँख मुड़ी है।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.396,
-        "y": 0.106,
+        "x": 0.3,
+        "y": 0.114,
         "label": {
           "en": "Straight eyes",
           "hi": "सीधी आँखें"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.396,
-        "y": 0.302,
+        "x": 0.33,
+        "y": 0.315,
         "label": {
           "en": "Turned in",
           "hi": "अंदर मुड़ी"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.396,
-        "y": 0.498,
+        "x": 0.27,
+        "y": 0.513,
         "label": {
           "en": "Turned out",
           "hi": "बाहर मुड़ी"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.396,
-        "y": 0.694,
+        "x": 0.3,
+        "y": 0.689,
         "label": {
           "en": "Turned up",
           "hi": "ऊपर मुड़ी"
@@ -76,7 +80,7 @@
       },
       {
         "x": 0.5,
-        "y": 0.889,
+        "y": 0.897,
         "label": {
           "en": "Pseudo-squint",
           "hi": "नकली भेंगापन (pseudo-squint)"
@@ -86,6 +90,10 @@
           "hi": "त्वचा की सिलवटें, जिन्हें [[epicanthus]] कहते हैं, नाक के पास की सफ़ेदी छिपा देती हैं। बिंदु बीच में हैं, इसलिए आँखें सीधी हैं।"
         }
       }
+    ],
+    "img": "learn/media/real/squint-reflex.webp",
+    "more": [
+      "squint-reflex"
     ]
   },
   "why": {

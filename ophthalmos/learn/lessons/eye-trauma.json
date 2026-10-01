@@ -3,7 +3,12 @@
   "unit": "cornea",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Eye injury: first aid",
     "hi": "आँख की चोट: प्राथमिक उपचार"
@@ -13,22 +18,21 @@
     "hi": "अगर चोट से आँख खुल गई हो सकती है, तो उसे सख़्त [[eye-shield]] से बचाएँ। आँख पर या आँख में कुछ न डालें, और तुरंत भेजें।"
   },
   "see": {
-    "diagram": "diagrams/eye-shield.svg",
-    "w": 440,
-    "h": 240,
+    "w": 768,
+    "h": 420,
     "alt": {
-      "en": "Two drawings. On the left, a side view of the eye in its bony socket. A curved hard shield bridges from the brow bone to the cheek bone, taped at both ends. There is a clear gap in front of the eye. On the right, an injured eye from the front. The pupil is pulled into a teardrop. It points to a wound at the edge of the cornea, where dark tissue bulges out. Red blood covers the white nearby.",
-      "hi": "दो चित्र। बाईं ओर, हड्डी के गड्ढे में आँख का बगल से दृश्य। एक मुड़ी हुई सख़्त शील्ड भौंह की हड्डी से गाल की हड्डी तक जाती है, दोनों सिरों पर टेप लगा है, और आँख के आगे खाली जगह है। दाईं ओर, सामने से चोट लगी आँख। पुतली आँसू की बूँद जैसी खिंची है और कॉर्निया के किनारे के एक घाव की ओर इशारा करती है, जहाँ गहरा ऊतक बाहर निकला है। पास का सफ़ेद हिस्सा लाल खून से ढका है।"
+      "en": "Left: a woman with her eye closed under a clear, hard, dome-shaped shield. Tape holds it to the forehead and cheek. The shield rests on the bone around the eye and does not touch the eye. Right: an injured eye from the front. The pupil is pulled into a point toward a cut at the edge of the cornea. A small brown knot of tissue pokes out of the cut. Dark red blood balloons the white all round.",
+      "hi": "बाएँ: एक महिला की बंद आँख पर एक पारदर्शी, सख़्त, गुंबद जैसी ढाल है। टेप उसे माथे और गाल से जोड़े रखता है। ढाल आँख के चारों ओर की हड्डी पर टिकी है और आँख को नहीं छूती। दाएँ: सामने से एक घायल आँख। पुतली खिंचकर कॉर्निया के किनारे के एक कट की ओर नुकीली हो गई है। कट से भूरे ऊतक की एक छोटी गाँठ बाहर निकल रही है। गहरा लाल खून चारों ओर सफ़ेद हिस्से को फुला देता है।"
     },
     "caption": {
       "en": "Left: a rigid shield rests on bone and never presses on the eye. Right: warning signs of an open globe.",
       "hi": "बाएँ: सख़्त शील्ड हड्डी पर टिकती है और आँख को कभी नहीं दबाती। दाएँ: खुले आँख के गोले के चेतावनी संकेत।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.06,
-        "y": 0.5,
+        "x": 0.168,
+        "y": 0.441,
         "label": {
           "en": "Rigid shield",
           "hi": "सख़्त शील्ड"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.13,
-        "y": 0.13,
+        "x": 0.245,
+        "y": 0.331,
         "label": {
           "en": "Tape to the face",
           "hi": "चेहरे पर टेप"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.2,
-        "y": 0.5,
+        "x": 0.245,
+        "y": 0.56,
         "label": {
           "en": "No pressure on the eye",
           "hi": "आँख पर कोई दबाव नहीं"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.25,
-        "y": 0.87,
+        "x": 0.136,
+        "y": 0.679,
         "label": {
           "en": "Bony rim",
           "hi": "हड्डी का किनारा"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.785,
-        "y": 0.47,
+        "x": 0.782,
+        "y": 0.475,
         "label": {
           "en": "Peaked pupil",
           "hi": "खिंची हुई पुतली"
@@ -87,8 +91,8 @@
         }
       },
       {
-        "x": 0.7,
-        "y": 0.6,
+        "x": 0.882,
+        "y": 0.518,
         "label": {
           "en": "Dark tissue in a wound",
           "hi": "घाव में गहरा ऊतक"
@@ -99,8 +103,8 @@
         }
       },
       {
-        "x": 0.64,
-        "y": 0.53,
+        "x": 0.618,
+        "y": 0.628,
         "label": {
           "en": "Blood on the white",
           "hi": "सफ़ेद हिस्से पर खून"
@@ -110,6 +114,10 @@
           "hi": "चोट के बाद कंजंक्टिवा के नीचे ज़्यादा खून, उसके नीचे फटे आँख के गोले को छिपा सकता है।"
         }
       }
+    ],
+    "img": "learn/media/real/eye-shield.webp",
+    "more": [
+      "eye-shield"
     ]
   },
   "why": {

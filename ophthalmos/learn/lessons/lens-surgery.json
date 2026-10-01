@@ -3,7 +3,12 @@
   "unit": "lens",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Cataract surgery: when and how",
     "hi": "मोतियाबिंद का ऑपरेशन: कब और कैसे"
@@ -13,22 +18,21 @@
     "hi": "ऑपरेशन तब करें जब [[cataract]] रोज़ की ज़िंदगी में रुकावट डाले, 'पकने' का इंतज़ार न करें। ऑपरेशन में धुंधला लेंस निकालकर उसके [[capsule]] में साफ़ [[iol]] रखा जाता है।"
   },
   "see": {
-    "diagram": "diagrams/lens-iol-in-bag.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 574,
     "alt": {
-      "en": "Left: the front of the eye after surgery, cut from front to back. A small gap marks the cut at the edge of the cornea. Behind the iris, a thin blue lens implant sits inside the clear capsule bag. Its thin arms reach to the edges. Right: the same implant from the front. A blue disc with two curved arms sits inside a dashed round opening and a larger ring.",
-      "hi": "बाएँ: ऑपरेशन के बाद आँख का अगला हिस्सा, आगे से पीछे तक कटा हुआ। कॉर्निया के किनारे पर छोटा सा गैप चीरे को दिखाता है। आइरिस के पीछे साफ़ कैप्सूल थैली में एक पतला नीला कृत्रिम लेंस है, जिसकी पतली भुजाएँ किनारों तक जाती हैं। दाएँ: वही लेंस आगे से, दो घुमावदार भुजाओं वाली नीली चकती, एक गोल टूटी रेखा वाले छेद और बड़े घेरे के अंदर।"
+      "en": "Two views of an eye after cataract surgery. Left: a side cut shows a thin clear lens implant in the capsule bag. Right: a front view shows the round lens optic with two curved arms inside the round opening.",
+      "hi": "मोतियाबिंद के ऑपरेशन के बाद आँख के दो दृश्य। बाएँ: बगल से काट में कैप्सूल थैली के अंदर पतला साफ़ कृत्रिम लेंस दिखता है। दाएँ: सामने से दृश्य में गोल छेद के अंदर दो घुमावदार भुजाओं वाला गोल लेंस दिखता है।"
     },
     "caption": {
       "en": "After surgery, a clear lens implant sits inside the capsule bag. Left: cut through. Right: seen from the front.",
       "hi": "ऑपरेशन के बाद साफ़ कृत्रिम लेंस कैप्सूल थैली के अंदर रहता है। बाएँ: कटा हुआ। दाएँ: आगे से।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.315,
-        "y": 0.163,
+        "x": 0.19,
+        "y": 0.84,
         "label": {
           "en": "Small cut",
           "hi": "छोटा चीरा"
@@ -39,7 +43,7 @@
         }
       },
       {
-        "x": 0.4625,
+        "x": 0.275,
         "y": 0.5,
         "label": {
           "en": "Lens implant",
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.52,
-        "y": 0.35,
+        "x": 0.36,
+        "y": 0.4,
         "label": {
           "en": "Back capsule",
           "hi": "पीछे का कैप्सूल"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.8125,
-        "y": 0.613,
+        "x": 0.65,
+        "y": 0.45,
         "label": {
           "en": "Front opening",
           "hi": "आगे का छेद"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.906,
-        "y": 0.333,
+        "x": 0.74,
+        "y": 0.26,
         "label": {
           "en": "Arm of the implant",
           "hi": "लेंस की भुजा"
@@ -87,8 +91,8 @@
         }
       },
       {
-        "x": 0.706,
-        "y": 0.33,
+        "x": 0.865,
+        "y": 0.32,
         "label": {
           "en": "Edge of the bag",
           "hi": "थैली का किनारा"
@@ -98,6 +102,10 @@
           "hi": "कैप्सूल थैली, जिसे ज़ोन्यूल्स थामते हैं।"
         }
       }
+    ],
+    "img": "learn/media/real/lens-iol-in-bag.webp",
+    "more": [
+      "lens-iol-in-bag"
     ]
   },
   "why": {

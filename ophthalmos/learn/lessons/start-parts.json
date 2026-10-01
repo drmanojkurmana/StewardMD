@@ -3,7 +3,12 @@
   "unit": "start",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "The parts of the eye",
     "hi": "आँख के हिस्से"
@@ -13,22 +18,21 @@
     "hi": "आँख एक जीता-जागता कैमरा है। रोशनी आगे के साफ़ हिस्सों से गुज़रकर पीछे की [[retina]] पर पड़ती है।"
   },
   "see": {
-    "diagram": "diagrams/eye-section.svg",
-    "w": 400,
-    "h": 300,
+    "w": 768,
+    "h": 574,
     "alt": {
-      "en": "Diagram of an eyeball cut in half from front to back, seen from above. The front is on the left and the optic nerve leaves at the back on the right.",
-      "hi": "आगे से पीछे तक बीच से कटी आँख का चित्र, ऊपर से देखा गया। आगे का हिस्सा बाईं ओर है और ऑप्टिक नर्व पीछे दाईं ओर से निकलती है।"
+      "en": "A right eye cut in half and seen from above, with the front on the left. The clear cornea covers the front. The brown iris shows as two halves, with the pupil between them. The lens sits just behind the pupil. Clear jelly fills the back of the eye. The wall has three layers: white sclera, dark red choroid and pink retina. A yellow spot at the back is the macula. The optic nerve leaves just below it.",
+      "hi": "दाहिनी आँख को बीच से काटकर ऊपर से देखा गया है, आगे का हिस्सा बाईं ओर है। आगे पारदर्शी कॉर्निया है। भूरी आइरिस दो हिस्सों में दिखती है, उनके बीच पुतली है। लेंस पुतली के ठीक पीछे है। आँख के पिछले हिस्से में पारदर्शी जेली भरी है। दीवार की तीन परतें हैं: सफ़ेद स्क्लेरा, गहरी लाल कोरॉइड और गुलाबी रेटिना। पीछे का पीला धब्बा मैक्युला है। ऑप्टिक नर्व उसके ठीक नीचे से निकलती है।"
     },
     "caption": {
       "en": "The eye cut across. Light comes in from the left. Tap each dot to name the part.",
       "hi": "बीच से कटी आँख। रोशनी बाईं ओर से आती है। हर बिंदु पर टैप करके हिस्से का नाम देखें।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.276,
-        "y": 0.417,
+        "x": 0.2,
+        "y": 0.467,
         "label": {
           "en": "Cornea",
           "hi": "कॉर्निया (cornea)"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.343,
-        "y": 0.383,
+        "x": 0.283,
+        "y": 0.39,
         "label": {
           "en": "Iris",
           "hi": "आइरिस (iris)"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.345,
-        "y": 0.5,
+        "x": 0.281,
+        "y": 0.467,
         "label": {
           "en": "Pupil",
           "hi": "पुतली (pupil)"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.4,
-        "y": 0.573,
+        "x": 0.335,
+        "y": 0.48,
         "label": {
           "en": "Lens",
           "hi": "लेंस (lens)"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.6,
-        "y": 0.5,
+        "x": 0.525,
+        "y": 0.48,
         "label": {
           "en": "Vitreous",
           "hi": "विट्रियस (vitreous)"
@@ -87,8 +91,8 @@
         }
       },
       {
-        "x": 0.669,
-        "y": 0.226,
+        "x": 0.5,
+        "y": 0.172,
         "label": {
           "en": "Retina",
           "hi": "रेटिना (retina)"
@@ -99,8 +103,8 @@
         }
       },
       {
-        "x": 0.79,
-        "y": 0.5,
+        "x": 0.72,
+        "y": 0.477,
         "label": {
           "en": "Macula and fovea",
           "hi": "मैक्युला और फ़ोविया (macula, fovea)"
@@ -111,8 +115,8 @@
         }
       },
       {
-        "x": 0.912,
-        "y": 0.629,
+        "x": 0.833,
+        "y": 0.662,
         "label": {
           "en": "Optic nerve",
           "hi": "ऑप्टिक नर्व (optic nerve)"
@@ -123,8 +127,8 @@
         }
       },
       {
-        "x": 0.674,
-        "y": 0.786,
+        "x": 0.55,
+        "y": 0.852,
         "label": {
           "en": "Choroid",
           "hi": "कोरॉइड (choroid)"
@@ -135,8 +139,8 @@
         }
       },
       {
-        "x": 0.527,
-        "y": 0.151,
+        "x": 0.45,
+        "y": 0.867,
         "label": {
           "en": "Sclera",
           "hi": "स्क्लेरा (sclera)"
@@ -148,9 +152,11 @@
       }
     ],
     "more": [
+      "eye-section",
       "external-eye-anterior",
       "eye-cross-section"
-    ]
+    ],
+    "img": "learn/media/real/eye-section.webp"
   },
   "why": {
     "steps": [
