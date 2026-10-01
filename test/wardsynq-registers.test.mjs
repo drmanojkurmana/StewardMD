@@ -115,6 +115,8 @@ async function admitted(sex) {
   return { ...adm, mrn: reg.mrn };
 }
 const TODAY = new Date().toISOString().slice(0, 10), MONTH = TODAY.slice(0, 7), YEAR = TODAY.slice(0, 4);
+// The hospital's calendar year (IST, the default clock): the NDPS annual return books stock by the hospital's day.
+const HOSPITAL_YEAR = new Date(Date.now() + 330 * 60000).toISOString().slice(0, 4);
 
 const FORMF_OK = {
   firstReportedOn: TODAY, clinicName: "Hospital A Imaging, Main Road", clinicRegistrationNo: "PNDT/123", patientName: "Register Case", patientAge: 28,
@@ -208,6 +210,8 @@ test("medico-legal cases: POST /ward/register-mlc numbers per hospital; GET /war
   seed();
   const adm = await admitted("male");
   const body = { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, fields: MLC_OK() };
+  // MLC serials number per year of arrival (an hour ago: last year in the first hour of 1 January).
+  const MLC_YEAR = body.fields.arrivalAt.slice(0, 4);
   assert.equal((await as(null, "/ward/register-mlc", "POST", body)).__status, 401);
   for (const who of [NURSE, CASHIER, PHARM, RAD]) assert.equal((await as(who, "/ward/register-mlc", "POST", body)).__status, 403, who);
   assert.equal((await as(ROGUE, "/ward/register-mlc", "POST", body)).__status, 403);
@@ -215,14 +219,16 @@ test("medico-legal cases: POST /ward/register-mlc numbers per hospital; GET /war
 
   const first = await as(DOCTOR, "/ward/register-mlc", "POST", body);
   assert.equal(first.__status, 200, JSON.stringify(first));
-  assert.equal(first.entry.serial, `MLC/${YEAR}/00001`);
+  assert.equal(first.entry.serial, `MLC/${MLC_YEAR}/00001`);
   assert.equal((await as(DOCTOR, "/ward/register-mlc", "POST", body)).error, "already_recorded", "one MLC per stay; a change is a correction");
   const adm2 = await admitted("male");
   const second = await as(DOCTOR, "/ward/register-mlc", "POST", { ...body, patientId: adm2.patientId, encounterId: adm2.encounterId });
-  assert.equal(second.entry.serial, `MLC/${YEAR}/00002`);
+  assert.equal(second.entry.serial, `MLC/${MLC_YEAR}/00002`);
 
-  assert.equal((await as(DOCTOR, "/ward/register-mlc?orgId=" + ORG + "&period=" + MONTH)).__status, 403, "the register itself is medical records'");
-  const list = await as(HIM, "/ward/register-mlc?orgId=" + ORG + "&period=" + MONTH);
+  // Cases are filed under their arrival (an hour ago), which is last month in the first hour of a month.
+  const MLC_MONTH = body.fields.arrivalAt.slice(0, 7);
+  assert.equal((await as(DOCTOR, "/ward/register-mlc?orgId=" + ORG + "&period=" + MLC_MONTH)).__status, 403, "the register itself is medical records'");
+  const list = await as(HIM, "/ward/register-mlc?orgId=" + ORG + "&period=" + MLC_MONTH);
   assert.equal(list.__status, 200, JSON.stringify(list));
   assert.equal(list.entries.length, 2);
   assert.equal(list.entries[0].fields.injuries, undefined, "injuries are not in the register list");
@@ -231,7 +237,7 @@ test("medico-legal cases: POST /ward/register-mlc numbers per hospital; GET /war
   assert.equal(mine.entries[0].fields.injuries, undefined);
   const byMrn = await as(DOCTOR, "/ward/mlc-patient", "POST", { orgId: ORG, mrn: adm.mrn });
   assert.equal(byMrn.__status, 200, JSON.stringify(byMrn));
-  assert.equal(byMrn.entries[0].serial, `MLC/${YEAR}/00001`);
+  assert.equal(byMrn.entries[0].serial, `MLC/${MLC_YEAR}/00001`);
   assert.equal((await as(NURSE, "/ward/mlc-patient", "POST", { orgId: ORG, mrn: adm.mrn })).__status, 403);
   const opened = await as(HIM, "/ward/register-mlc?orgId=" + ORG + "&id=" + encodeURIComponent(first.entry.id));
   assert.equal(opened.entry.fields.injuries.length, 1, "opening the one entry (audited) shows the injuries");
@@ -244,7 +250,7 @@ test("medico-legal cases: POST /ward/register-mlc numbers per hospital; GET /war
 
   const died = await as(DOCTOR, "/ward/deceased", "POST", { orgId: ORG, patientId: adm.patientId, confirm: true, deceased: { at: new Date().toISOString(), cause: "Head injury" } });
   assert.equal(died.__status, 200, JSON.stringify(died));
-  assert.deepEqual(died.deceased.medicoLegal, { mlc: true, numbers: [`MLC/${YEAR}/00001`] });
+  assert.deepEqual(died.deceased.medicoLegal, { mlc: true, numbers: [`MLC/${MLC_YEAR}/00001`] });
 });
 
 test("the change feed never hands out a register row, whatever the reader's scope", async () => {
@@ -589,7 +595,8 @@ test("MTP (legal review C): Rule 3B list, rule 4A eligibility, guardian consent 
   assert.ok(list.entries.some((e) => e.flags.pocsoPending));
   assert.ok(list.form2.dueBy.endsWith("-07"), "Form II: the hospital's day, the 7th by default");
   assert.equal(list.entries.filter((e) => e.fields.patientName !== undefined).length, 0);
-  assert.equal((await as(OBS, "/ward/register-mtp?orgId=" + ORG + "&period=" + MONTH + "&kind=mtpboard")).entries[0].fields.patientName, undefined, "Form D lists without her name");
+  // Form D is filed under its requestDate (YESTERDAY), which is last month on the 1st: list that month.
+  assert.equal((await as(OBS, "/ward/register-mtp?orgId=" + ORG + "&period=" + YESTERDAY.slice(0, 7) + "&kind=mtpboard")).entries[0].fields.patientName, undefined, "Form D lists without her name");
 
   await settingsAs(ADMIN, { mtp: { formIIOver20Annex: false } });
   const f2 = await as(HIM, "/ward/register-mtp?orgId=" + ORG + "&period=" + MONTH + "&format=form2");
@@ -651,7 +658,8 @@ test("medico-legal cases (legal review D): Good Samaritan identity optional; POC
   assert.match(opened.freeTreatment, /BNSS s\.397/);
   assert.ok(opened.entry.missing.includes("pocsoReportAt") && opened.entry.missing.includes("policeStation"));
 
-  const list = await as(HIM, "/ward/register-mlc?orgId=" + ORG + "&period=" + MONTH);
+  // The case is filed under its arrival (30 hours ago), which can fall in last month: list that month.
+  const list = await as(HIM, "/ward/register-mlc?orgId=" + ORG + "&period=" + arrival.slice(0, 7));
   assert.equal(list.__status, 200, JSON.stringify(list));
   const clocks = list.entries.find((e) => e.id === opened.entry.id).clocks;
   assert.equal(clocks.find((c) => c.kind === "pocso-report").state, "overdue", "POCSO Rules r.6(5): 24 hours");
@@ -750,16 +758,16 @@ test("NDPS (legal review F): Form 3E registration and the patient's signature pe
   assert.equal(signed.entry.fields.signature.by, idFor(PHARM), "who recorded the attestation, and when, is the server's stamp");
   assert.equal((await as(PHARM, "/ward/register-ndps?orgId=" + ORG + "&view=form3e&patientId=" + adm.patientId)).unsigned, 0);
 
-  const est = { year: Number(YEAR), estimateKind: "estimate", drug: "Morphine", unit: "ampoule", quantity: 1, preparedOn: TODAY, preparedBy: "Dr Pharmacist" };
+  const est = { year: Number(HOSPITAL_YEAR), estimateKind: "estimate", drug: "Morphine", unit: "ampoule", quantity: 1, preparedOn: TODAY, preparedBy: "Dr Pharmacist" };
   assert.equal((await as(NURSE, "/ward/register-ndps", "POST", { orgId: ORG, kind: "form3j", fields: est })).__status, 403);
   assert.equal((await as(PHARM, "/ward/register-ndps", "POST", { orgId: ORG, kind: "form3j", fields: est })).__status, 200);
-  assert.equal((await as(DOCTOR, "/ward/register-ndps?orgId=" + ORG + "&view=annual&year=" + YEAR)).__status, 403);
-  const annual = await as(PHARM, "/ward/register-ndps?orgId=" + ORG + "&view=annual&year=" + YEAR);
+  assert.equal((await as(DOCTOR, "/ward/register-ndps?orgId=" + ORG + "&view=annual&year=" + HOSPITAL_YEAR)).__status, 403);
+  const annual = await as(PHARM, "/ward/register-ndps?orgId=" + ORG + "&view=annual&year=" + HOSPITAL_YEAR);
   assert.equal(annual.__status, 200, JSON.stringify(annual));
   const row = annual.form3i.find((x) => x.drug === "Morphine");
   assert.deepEqual([row.procured, row.disbursed, row.estimate, row.overEstimate], [10, 2, 1, true]);
   assert.deepEqual(annual.clocks.map((c) => c.what), ["form3j", "form3i"]);
-  const ret = { year: Number(YEAR), drug: "Morphine", unit: "ampoule", preparedOn: TODAY, preparedBy: "Dr Pharmacist" };
+  const ret = { year: Number(HOSPITAL_YEAR), drug: "Morphine", unit: "ampoule", preparedOn: TODAY, preparedBy: "Dr Pharmacist" };
   assert.ok((await as(PHARM, "/ward/register-ndps", "POST", { orgId: ORG, kind: "form3i", fields: ret })).problems.some((p) => /justification/.test(p)));
   const i3 = await as(PHARM, "/ward/register-ndps", "POST", { orgId: ORG, kind: "form3i", fields: { ...ret, justification: "Two terminal-care admissions over the estimate." } });
   assert.equal(i3.__status, 200, JSON.stringify(i3));
