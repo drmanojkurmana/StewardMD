@@ -58,6 +58,8 @@ export async function bench({ bookPath, router = "", cases, src = "maik-local.js
   const win = {
     Capacitor: { isNativePlatform: () => true, Plugins: { Llama } },
     SMD_MAIK_RAG: RAG, SMD_MAIK_KB_STORE: { loadBook: () => Promise.resolve(book) },
+    // The app fetches this file from its own bundle; the bench hands it over directly.
+    SMD_MAIK_PROTOCOLS: JSON.parse(readFileSync(new URL("kb/clinical-protocols/index.json", ROOT), "utf8")),
     SMD_MAIK_MODELS: { PACKS: { "maik-lite": { label: "MAiK Lite", nCtx: 4096, nPredict: 512, noThink: true } },
       pathFor: async () => "/x.gguf", totalBytes: () => 1 },
   };
@@ -74,6 +76,12 @@ export async function bench({ bookPath, router = "", cases, src = "maik-local.js
       await L.answer(pkg, { pack: "maik-lite" }, null);
       const m = prompts.length ? EVIDENCE.exec(prompts[0]) : null;
       ev = m ? m[1] : "";
+      // LITE_DEBUG=L-11 prints what the router handed Lite for that case, and the evidence it built.
+      if (process.env.LITE_DEBUG && new RegExp("^(" + process.env.LITE_DEBUG + ")$").test(c.id)) {
+        const t = pkg.treatment, d = t && t.default;
+        console.error(`\n--- ${c.id} ${c.message}\n topic: ${JSON.stringify(pkg.topicMatch)}\n grounding: ${JSON.stringify((pkg.grounding || []).map((g) => [g.name, g.diseaseId]))}` +
+          `\n treatment: ${t ? JSON.stringify({ diseaseId: t.diseaseId, label: d && d.regimenLabel, steps: d && (d.steps || []).length, dosing: d && (d.dosing || []).length }) : "none"}\n evidence:\n${ev}\n`);
+      }
       heads = ev ? (ev.match(/^\[\d+\] \(([^)]*)\)/gm) || []).map((h) => h.replace(/^\[\d+\] \(/, "").slice(0, 80)) : [];
     } else {
       const g = await L.retrieveGrounding("maik-lite", c.message, router === "topic" ? c.topic : "", null);
